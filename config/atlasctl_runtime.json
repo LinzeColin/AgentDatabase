@@ -1,0 +1,6 @@
+{
+  "schema_version": "memory_atlas_cli_runtime_config.v1_2_1_s04_p2_t2",
+  "machine_log_destination": "stderr",
+  "emit_started_event": true,
+  "exception_detail": "type_only"
+}

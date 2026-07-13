@@ -27,6 +27,7 @@ EXPECTED_MODULES = {
     "push.py",
     "apply.py",
     "dispatch.py",
+    "runtime.py",
 }
 
 EXPECTED_EXPORTS = {
@@ -47,6 +48,8 @@ EXPECTED_EXPORTS = {
     "run_chatgpt_deep_explore",
     "run_proposals",
     "run_apply",
+    "load_runtime_config",
+    "execute_with_runtime",
     "main",
 }
 
@@ -156,7 +159,12 @@ class AtlasctlModularCliTests(unittest.TestCase):
                 )
                 self.assertEqual(result.returncode, 0, result.stderr.decode("utf-8", errors="replace"))
                 self.assertEqual(hashlib.sha256(result.stdout).hexdigest(), expected_hash)
-                self.assertEqual(result.stderr, b"")
+                events = [json.loads(line) for line in result.stderr.splitlines()]
+                self.assertEqual(len(events), 2)
+                self.assertEqual([event["event"] for event in events], ["run_started", "run_finished"])
+                self.assertEqual(events[-1]["status"], "SUCCEEDED")
+                self.assertEqual(events[-1]["error_code"], "MA_OK")
+                self.assertNotIn(result.stdout.strip(), result.stderr)
 
     def test_source_sensitive_validators_read_the_aggregate_runtime(self) -> None:
         stale_pattern = re.compile(
