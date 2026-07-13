@@ -4,6 +4,7 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const { spawnSync } = require("node:child_process");
+const { readAtlasctlRuntimeSource } = require("./atlasctl_runtime_source.cjs");
 
 process.env.GIT_TERMINAL_PROMPT = process.env.GIT_TERMINAL_PROMPT || "0";
 process.env.GIT_SSH_COMMAND =
@@ -214,7 +215,7 @@ function validatePackageScript() {
 
 function validateBuilderContract() {
   const builder = readRepoFile("scripts/build_personalization_exports.py");
-  const atlasctl = readRepoFile("scripts/atlasctl.py");
+  const atlasctl = readAtlasctlRuntimeSource(repoRoot);
   assertCondition(
     hasAll(builder, [
       `S12_P2_PROMPT_VERSION = "${promptVersion}"`,

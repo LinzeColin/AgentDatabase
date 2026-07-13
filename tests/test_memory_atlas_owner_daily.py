@@ -29,6 +29,7 @@ from memory_atlas_owner_daily import (  # noqa: E402
     owner_daily_profile_contract,
 )
 import atlasctl  # noqa: E402
+import memory_atlas_cli.sync as atlasctl_sync  # noqa: E402
 
 
 EXPECTED_STEP_IDS = (
@@ -315,7 +316,7 @@ class OwnerDailyAtlasctlTests(unittest.TestCase):
                 self.calls.append(step_id)
                 return {"status": "PASS", "action": "retry", "requested_step_id": step_id, "steps": []}
 
-        with patch.object(atlasctl, "OwnerDailyRunner", FakeOwnerDailyRunner):
+        with patch.object(atlasctl_sync, "OwnerDailyRunner", FakeOwnerDailyRunner):
             full_args = atlasctl.parse_args(["run", "--profile", "owner-daily", "--dry-run"])
             full_stdout = io.StringIO()
             with redirect_stdout(full_stdout):

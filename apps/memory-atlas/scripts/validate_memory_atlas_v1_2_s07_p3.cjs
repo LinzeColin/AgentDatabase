@@ -4,6 +4,7 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const { spawnSync } = require("node:child_process");
+const { readAtlasctlRuntimeSource } = require("./atlasctl_runtime_source.cjs");
 
 process.env.GIT_TERMINAL_PROMPT = process.env.GIT_TERMINAL_PROMPT || "0";
 process.env.GIT_SSH_COMMAND =
@@ -198,7 +199,7 @@ function validatePreviousPhaseGate() {
 
 function validateConfigAndOutput() {
   [atlasctlPath, builderPath, configPath, outputPath].forEach(validateTextFile);
-  const atlasctl = readRepoFile(atlasctlPath);
+  const atlasctl = readAtlasctlRuntimeSource(repoRoot);
   const builder = readRepoFile(builderPath);
   assertCondition(
     hasAll(atlasctl, ["formula-what-if", "run_formula_what_if_audit", "build_memory_atlas_formula_what_if.py"]),

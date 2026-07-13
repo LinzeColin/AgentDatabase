@@ -4,6 +4,7 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const { spawnSync } = require("node:child_process");
+const { readAtlasctlRuntimeSource } = require("./atlasctl_runtime_source.cjs");
 
 process.env.GIT_TERMINAL_PROMPT = process.env.GIT_TERMINAL_PROMPT || "0";
 process.env.GIT_SSH_COMMAND =
@@ -203,7 +204,7 @@ function validatePreviousPhaseGate() {
 
 function validateS08P1Artifacts() {
   [atlasctlPath, builderPath, configPath, outputPath, testPath].forEach(validateTextFile);
-  const atlasctl = readRepoFile(atlasctlPath);
+  const atlasctl = readAtlasctlRuntimeSource(repoRoot);
   const builder = readRepoFile(builderPath);
   assertCondition(
     hasAll(atlasctl, ["agent-collaboration", "build_memory_atlas_agent_collaboration.py", "run_agent_collaboration_audit", "agent-collaboration"]),

@@ -4,6 +4,7 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const { spawnSync } = require("node:child_process");
+const { readAtlasctlRuntimeSource } = require("./atlasctl_runtime_source.cjs");
 
 process.env.GIT_TERMINAL_PROMPT = process.env.GIT_TERMINAL_PROMPT || "0";
 process.env.GIT_SSH_COMMAND =
@@ -275,7 +276,7 @@ function validateChatGptPolicy() {
 function validateRuntime() {
   [syncScript, atlasctlScript].forEach(validateTextFile);
   const syncSource = readRepoFile(syncScript);
-  const atlasctlSource = readRepoFile(atlasctlScript);
+  const atlasctlSource = readAtlasctlRuntimeSource(repoRoot);
   assertCondition(
     hasAll(syncSource, [
       "official_export_fallback",
