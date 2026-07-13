@@ -1,0 +1,2104 @@
+{
+  "schema_version": "memory_atlas.script_migrations.v1_2_1_s04_p2_t3",
+  "task_id": "S04-P2-T3",
+  "canonical_entrypoint": "python3 scripts/atlasctl.py",
+  "inventory": {
+    "recursive": false,
+    "roots": [
+      "scripts",
+      "apps/memory-atlas/scripts"
+    ],
+    "filename_keywords": [
+      "build",
+      "sync",
+      "audit",
+      "validate"
+    ],
+    "suffixes": [
+      ".py",
+      ".cjs",
+      ".mjs",
+      ".js",
+      ".sh"
+    ],
+    "scanned_script_count": 208,
+    "exact_sha256_duplicate_group_count": 0,
+    "unlisted_scoped_script_policy": "retain_deletion_forbidden_until_mapped",
+    "retained_default_deletion_blocker": "equivalent_command_callers_and_behavior_parity_not_all_proven",
+    "finding": "No exact duplicate file is safe to delete; duplication is in repeated CLI child execution and overlapping command surfaces.",
+    "baseline_scoped_script_count": 208,
+    "baseline_path_manifest_sha256": "1d59897596ab7f74be2afd3478015b8533a7f6b6fb69d054e4006fb9e0ea2cd4",
+    "scoped_scripts": [
+      {
+        "path": "apps/memory-atlas/scripts/validate_cross_board_shared_state_browser.cjs",
+        "baseline": true,
+        "sha256": "8a64ab9c3e54dc7e3cd3d760544577f5a2cfa0081aa94677a900f31886ae7052",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_data_map_detail_proposal_browser.cjs",
+        "baseline": true,
+        "sha256": "cceb851642198fd7720eb099a4a7046c00dc66270b349122676adedf285e4719",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_data_map_structure_browser.cjs",
+        "baseline": true,
+        "sha256": "f46d232cf9dfc285e7a558e9cf5b125537c7d63c4be94fa8b98b5923538c2130",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_inspector_proposal.mjs",
+        "baseline": true,
+        "sha256": "1e59d3238546c0e6c195e9bfdeb161fb448e534fb0f9511ccbdd58b40dd143de",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_part10_stage9.cjs",
+        "baseline": true,
+        "sha256": "60781c3588e9059c1198f6e5fda8a4fa4e3c3104cecc85f4f821d774ff498f4f",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_part1_stage0.cjs",
+        "baseline": true,
+        "sha256": "54041193897b580c3b7e6c9ebc5c54c65a5ad1955dab65c8c533aca06358923e",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_part2_stage1.cjs",
+        "baseline": true,
+        "sha256": "813e0c672e8e86bd7916b499358ef292abfaa1ce71fd765bf20f437061a3e0b3",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_part3_stage2.cjs",
+        "baseline": true,
+        "sha256": "ea3f1a44e3e67c53db4f32ab60ef752dcf0f1e5c286d888667c18bae2c9cb952",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_part4_stage3.cjs",
+        "baseline": true,
+        "sha256": "080bb9e8929a60b7691b920445b45ff5393364dce7d2e3ec6e61cfee4e0dcd63",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_part5_stage4.cjs",
+        "baseline": true,
+        "sha256": "3bc865fe4c50ad1fe0a3ee46b4c6aa5d610ed0d8707f024393f771a0aef15ae2",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_part6_stage5.cjs",
+        "baseline": true,
+        "sha256": "917e845267cccee68613e79d1945913931215192732639e1b9926147eb429f71",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_part7_stage6.cjs",
+        "baseline": true,
+        "sha256": "18ec009cfdaf4386e8a24618b33ad73cfe298af691a06d53b0a15a46b9dd8391",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_part8_stage7.cjs",
+        "baseline": true,
+        "sha256": "1366e4de471dbf78024a88fbe6a7f40584b24f6b9dba75d6f2e68a8734f6d5dc",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_part9_stage8.cjs",
+        "baseline": true,
+        "sha256": "22d485662eac6c6b21a04789ac44deca4c923cf5f8d0d20bc909fe295d0f3c32",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_stage6.mjs",
+        "baseline": true,
+        "sha256": "0664ea1e65abdb99254da8c7e3b3fc4a5074cf31aaf521e556740923bbce84a8",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_stage7.mjs",
+        "baseline": true,
+        "sha256": "0bf1b163034f440399460df0b833490ef05629acdabbecdb82eca3f76d185f5c",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_stage8.cjs",
+        "baseline": true,
+        "sha256": "738c6a4b96314004c110aedd26cc7c21837ea65be56689079db6552c2a47ccac",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_stage9.cjs",
+        "baseline": true,
+        "sha256": "ff98634b07587b1024fd3817c0a12eac177276446c0bd577292daf4ff4de24db",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage0.cjs",
+        "baseline": true,
+        "sha256": "8aa69f5b929cc1507bbcdd9d6fe899f6878a0b36ee30de4482361ffb8298cc28",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage1.cjs",
+        "baseline": true,
+        "sha256": "86136c760ddc3050e99dbd229c3cd079a430093a528dab3680646c0f624498f1",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage10.cjs",
+        "baseline": true,
+        "sha256": "ffb0df725d20ee2104ef619d91234a3dcb2297219c0e35aa58bd2517e94a8445",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage10_phase1.cjs",
+        "baseline": true,
+        "sha256": "ddac95840b4611df3d1c5839b63f40e49dddab0029e899478f01b7604afc945a",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage1_phase1.cjs",
+        "baseline": true,
+        "sha256": "a0e506840318619b083e474a3cbcfe00c38fcec19521221e0edb76e22ac929d9",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage1_phase2.cjs",
+        "baseline": true,
+        "sha256": "3bbd8829dba1b44066a4e17cb7cc0eed2a7b84c19eedf58434e20b930f3993b3",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage1_phase3.cjs",
+        "baseline": true,
+        "sha256": "cca93461ad29a9c9453cd839e5459788a43a76a1a2c2f50a65bcd577d597db90",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage1_phase4.cjs",
+        "baseline": true,
+        "sha256": "298bb7d2a5d0b2829a65050b95801ad39c1d8680092090a925124b8753943e5e",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage1_phase5.cjs",
+        "baseline": true,
+        "sha256": "8e3612b1750b1fe3c6e678804001d0bb380c4cfa29102af265d14902358bf722",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage2.cjs",
+        "baseline": true,
+        "sha256": "bc7d8e0e8a0a89d3cc936ab598c2166fb341983d86fff338215933103300305c",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage2_phase1.cjs",
+        "baseline": true,
+        "sha256": "8fe80ee25344b79c53a027b7d21ed1247145ce79e6865a85828162bf845d200c",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage2_phase2.cjs",
+        "baseline": true,
+        "sha256": "511449a7c5f3ccc3482842c5caa0db28aa72c3785b5a27736bf1288d022986a9",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage2_phase3.cjs",
+        "baseline": true,
+        "sha256": "bb21c5904ba6955bc4b94af9c17019d3974f0c553cdcd76d754d01f0e9169fd9",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage2_phase4.cjs",
+        "baseline": true,
+        "sha256": "5c7d1d5a42f7fb13d59b5b6ecc94a047b0431ce8adb21003726f7e94d0a0fd67",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage3.cjs",
+        "baseline": true,
+        "sha256": "f6c23badd65c0885f42862000f87ad08e443e9abdb67a3e0e049dbd1632d0993",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage3_phase1.cjs",
+        "baseline": true,
+        "sha256": "62be5ea6797858dd38e17bc36d533a99e9d0996ea746db079148c5efba40ade5",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage3_phase2.cjs",
+        "baseline": true,
+        "sha256": "bc9fb8b864692ed6425d137cddf19906811611fbc0b33e06ed203b4ed538a664",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage4.cjs",
+        "baseline": true,
+        "sha256": "8049ad3ac3ad639e3229a62a7e1f1efec86e4b7cc8df720b886eb4910484fa9c",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage4_phase1.cjs",
+        "baseline": true,
+        "sha256": "89bc99a23c4712712f38487935866b5a94aafd6e05311f98e60c4e5abbb659bd",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage4_phase2.cjs",
+        "baseline": true,
+        "sha256": "ddcd64f3b9cb89c170ab4dded91ab47d10a0590b9d86a949b0fe30954c57dd5c",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage5.cjs",
+        "baseline": true,
+        "sha256": "02768006270173e67b8c03d9709ea66ae75fb6821a536c334c57c07610ef32fc",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage5_phase1.cjs",
+        "baseline": true,
+        "sha256": "305fb1a79956c960a9132ec9f9f715bccfd1e3fd91faa05ed7625454d5bc9379",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage6.cjs",
+        "baseline": true,
+        "sha256": "60413935b3c8c163d6584a92f5518dbe9d9a633c351f3d022216a86b477278b5",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage6_phase1.cjs",
+        "baseline": true,
+        "sha256": "ccd45a909db3b02e4929a9daf1adc3158e2fa64d78e5b52d5508876c95ff8f0e",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage7.cjs",
+        "baseline": true,
+        "sha256": "ae518011ea333fa75173db3a5bc1ddb5382c10b496906fc1d12e3f7ea3116c80",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage7_phase1.cjs",
+        "baseline": true,
+        "sha256": "90122c7c7a3efb92be1cc496b62f66db12ac8d43258b077c0fe90f42e12066fe",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage8.cjs",
+        "baseline": true,
+        "sha256": "ba73792652fe72be6a19e1322456ee40b795c80d7ab386e8bc58adbe8c2f336b",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage8_phase1.cjs",
+        "baseline": true,
+        "sha256": "c3991d9fb7a03a73801731df6d453a59d645882d125dcfc260cb0776fc84faa8",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage9.cjs",
+        "baseline": true,
+        "sha256": "3935065d3c0c886f3000ed574efd0389200020e7ddde4d337c72fbb9b85603ad",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage9_phase1.cjs",
+        "baseline": true,
+        "sha256": "d5c2640cd586c371c3a3bee80a819ce20f4f19679b47e4d6225201596d9ec8f9",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage9_phase2.cjs",
+        "baseline": true,
+        "sha256": "4c6df2fe33b9d817d244559c52bdbb2b34e375d7c55ca75246316e0e7deac733",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage9_phase3.cjs",
+        "baseline": true,
+        "sha256": "6aea66753b19867a34f161d5109170cc8de44084f2907711157ddcdc7e4053d0",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage9_phase4.cjs",
+        "baseline": true,
+        "sha256": "d0c0bb4cecfe50a4a180d36aee71870ba758b40f6f18d23049a51fceca39c718",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_final_upload.cjs",
+        "baseline": true,
+        "sha256": "f6c5d681ce210466e771b787416da472185ead6e2adfab613544a3dc1c150d1a",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_pre_stage0.cjs",
+        "baseline": true,
+        "sha256": "99cfffe16efe67acc45f3836a2d53c462b8d9f26ec1a27645667cdda4f62f2c5",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage0.cjs",
+        "baseline": true,
+        "sha256": "131f9bc6b99feec387d56e2d30ad6106b05876610064fea59413584fb55f3ce6",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage0_phase1.cjs",
+        "baseline": true,
+        "sha256": "b2f5d570ec4f612b3c1481e9276efbcb85957575df7093065eea745faf4a3854",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage0_phase2.cjs",
+        "baseline": true,
+        "sha256": "a33edabcf15b0f160635d1057c503da59e365c88f79cf801223c995cbc9326a5",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage0_phase3.cjs",
+        "baseline": true,
+        "sha256": "fc0a2a68c01a7342933fac6f93f1ce3298c8c7bd0540516b82e50a22dbbd857d",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage1.cjs",
+        "baseline": true,
+        "sha256": "8914ad7ef620d7960ac15685a1c7590b488e316797edf9d34ef3b6dcc2aed5c4",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage10.cjs",
+        "baseline": true,
+        "sha256": "4556ca48851e3a6fe2a2844607cafabca6b2d738b50840f08139e92e77997c7b",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage10_phase1.cjs",
+        "baseline": true,
+        "sha256": "c3069af13f4c1a7333c512f315eb5356d562af321943e2f330bf8dbd515b7eba",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage1_phase1.cjs",
+        "baseline": true,
+        "sha256": "0b2bd15e0e82a1380c5e7ec8a3f07e58d9127a4b004c45dfcb1012e9f2048f13",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage1_phase2.cjs",
+        "baseline": true,
+        "sha256": "252232db8097a27913837119f19b24c480bbe686096b02cb75c6eaf4158b79dd",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage1_phase3.cjs",
+        "baseline": true,
+        "sha256": "b1c1d930583f418520643127db8a95e743fc8f102d1209a570092279c08048eb",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage1_phase4.cjs",
+        "baseline": true,
+        "sha256": "623b3b5b6fcb0956e8ddf6ed6858546c3014e5ecdb540ebcae17191feababf3e",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage2.cjs",
+        "baseline": true,
+        "sha256": "2c7c3571e22991a7bec29e71917b2941c159bab49abddf25074a6870b0377044",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage2_phase1.cjs",
+        "baseline": true,
+        "sha256": "ad98326eb8ce0cae7b215f76dff4b6fece6bde7bd7f25487be785a1e41ed2d21",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage2_phase2.cjs",
+        "baseline": true,
+        "sha256": "d6382e1c6bbef0e5f6c2decda2d0cbcf8acde797c097f1bcdd45a1e2f3ee4e05",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage3.cjs",
+        "baseline": true,
+        "sha256": "c3de08f33abbf163357095bebbc853660039e3145e66a8de4e47ace4a1572152",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage3_phase1.cjs",
+        "baseline": true,
+        "sha256": "88088f789376dc76887b24a140fecb1c1b3ca0d4086b8d183d7f1d83ada19347",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage3_phase2.cjs",
+        "baseline": true,
+        "sha256": "4c9af22ca8abac16043bb041cc10222e71ae6200f9a7790dbed6af492d54feea",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage4.cjs",
+        "baseline": true,
+        "sha256": "f9ca194cefe21433b3998b6d393da7edafc77231ace082750a6ff2a2d3c469d3",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage4_phase1.cjs",
+        "baseline": true,
+        "sha256": "96d829de7551cb3a4d4babbeb3f7bb9ca85f4bd5b3597cde7902fb6ebab01cb1",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage4_phase2.cjs",
+        "baseline": true,
+        "sha256": "6fe252e89caa6c34dec2acad65273a4125025ae398b17e515adda7869f75787e",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage4_phase3.cjs",
+        "baseline": true,
+        "sha256": "3e5fe6112910e228bd6258c1303aa20c2b5fe6c31035438d42992ef0a14ae55c",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage5.cjs",
+        "baseline": true,
+        "sha256": "4458b868561ee2114def1093a19c81b67d4b96dc97ec898382b6afdb142e165c",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage5_phase1.cjs",
+        "baseline": true,
+        "sha256": "51c86dc5d94df2695e27b9918aa799bdfe60e51945b83077da5de3af0849f6f6",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage5_phase2.cjs",
+        "baseline": true,
+        "sha256": "44b9aecd08644947eeb727df34434228042a17a347ee4e72418d4895e21a0112",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage5_phase3.cjs",
+        "baseline": true,
+        "sha256": "f0c712b8325e8b8099b1ceecaa21f8601f3d588f5e4d9d9753308f3d9166e2c8",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage6.cjs",
+        "baseline": true,
+        "sha256": "6a11bd8b5797e27c2c822a41877c06f19ea74bf07f5329e438f5b3a262e56256",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage6_phase1.cjs",
+        "baseline": true,
+        "sha256": "5e4ff2bea94b1639a1b518fb379e4929b60551b0e2e86fe342624f3a84277260",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage6_phase2.cjs",
+        "baseline": true,
+        "sha256": "4924392529cf44c21c8921e2ca31e68ef0b3673c4fc2e0345de2bb70a48f71bb",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage7.cjs",
+        "baseline": true,
+        "sha256": "435689dcf5116cea56bf439acf677b7601633516bde1f9c8d1803d4feb4a25df",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage7_phase1.cjs",
+        "baseline": true,
+        "sha256": "8916fd64bdd09426b29eaff4f1e37550f0c4f8ce8952662dd3864da059ee89c3",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage7_phase2.cjs",
+        "baseline": true,
+        "sha256": "754d490823389cc27ffce792269a8583788e946e8a243a2f9be948bdc2e7c5b5",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage8.cjs",
+        "baseline": true,
+        "sha256": "a6608ef77b54666b343afdcb3de9b8c078e46a17f218ec214c1fc5f4ab53e5c8",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage8_phase1.cjs",
+        "baseline": true,
+        "sha256": "12ebeef561dcd28f41335d42839999978d428312e3b02a9fd3a8c47e9b3c8a4c",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage9.cjs",
+        "baseline": true,
+        "sha256": "c50367e389e5914c516a7cc943dfebf80dfab6130439b96475e88b8de81cd44c",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage9_phase1.cjs",
+        "baseline": true,
+        "sha256": "9c4571877537ecc6255351b25dd28fa54d3092e0c1e1487de2f531d01aea0fd4",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_1_s04_p1_t1_structure.mjs",
+        "baseline": true,
+        "sha256": "0e1576236bfa12741835a48c707d123eac851d568df1e961dc219b509bc293f0",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_1_s04_p1_t2_mounts.mjs",
+        "baseline": true,
+        "sha256": "294b5cf0c552a6ebaa796b5033dd69a682d06fef4a3236eb1212a2c625889065",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_command_workflows.cjs",
+        "baseline": true,
+        "sha256": "c872e201ab9e7f40aa92dce033acf47e954d8acc705c2ee090c825520bdaf93d",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_final_review.cjs",
+        "baseline": true,
+        "sha256": "55fe94b192c971299d3e90b2d4cbb313020f645628b46f89710889e1964af2ba",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_home_multiviewport.cjs",
+        "baseline": true,
+        "sha256": "55cfcf346f24189d5daa829590033e00b8eb2fc2c95eb04d49a146c4ed38a8e0",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_owner_daily_e2e.cjs",
+        "baseline": true,
+        "sha256": "2e0b4333d86ca41ec92627a4a04e575b8dc6187f7b23174e925f096ed6e75a41",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_proposal_e2e.cjs",
+        "baseline": true,
+        "sha256": "c55918dda9839fff6c46af3c551f85ceda13bd1c67631afd328277d98f2a9161",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s01_p1.cjs",
+        "baseline": true,
+        "sha256": "5d710f30b5060752c00d790b0821ea09601aa8aa87d6cc0a56ad5e1b7d0d50ee",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s01_p2.cjs",
+        "baseline": true,
+        "sha256": "8f63a18efd44253c0a10baca9ac42abd52b552da0d04c422401086fd69f586ab",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s01_p3.cjs",
+        "baseline": true,
+        "sha256": "b9cdc1c91804fc35b11f450c4ba2e9a3b11644a706eacfb2eed31dfbe2d0a4f7",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s01_review.cjs",
+        "baseline": true,
+        "sha256": "19e3c226db980e136f09b8435738b259afec0e327ae0f5ccba57a0337f273df4",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s02_p1.cjs",
+        "baseline": true,
+        "sha256": "d78db55e10bf0e0047d820fa1e7fa68fa4a352cbc0851389e4ec1059c8d60ea0",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s02_p2.cjs",
+        "baseline": true,
+        "sha256": "cae93219d224311108f08bbc3e91c0dfa7bc46cb90b7ca5f8eac0f86866e4084",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s02_p3.cjs",
+        "baseline": true,
+        "sha256": "0013737889dd3cfd0fd1e4b0343c17fbfbdc2f7b39fef71b495546769360bf7f",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s02_review.cjs",
+        "baseline": true,
+        "sha256": "d3629de48b115e3de21c70cedd331a2554891544d0da322ed901e714a38a35c7",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s03_p1.cjs",
+        "baseline": true,
+        "sha256": "351bc7f6b0d336e61903375bb24f5cf84d770998e8618fef91e50c846051ba23",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s03_p2.cjs",
+        "baseline": true,
+        "sha256": "29693e80129d125ba110fc3d148670215ac378f0e2b835444151272cb5454843",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s03_p3.cjs",
+        "baseline": true,
+        "sha256": "dc719cf4bc24d8e12935b3506b804459414df3f96056a318ed810847c0172a49",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s03_review.cjs",
+        "baseline": true,
+        "sha256": "097f10b3ae3dda564349d9e684ef7eba07d157850108c0b17d058161a03b8376",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s04_p1.cjs",
+        "baseline": true,
+        "sha256": "15baf23f1a8deaaf76c2291140f53657bf779d53ac9d89d1ca2bfbd86ab70d4c",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s04_p2.cjs",
+        "baseline": true,
+        "sha256": "f02ecb1e3969a597ad94cc291223d8ef4e900d5f990b8b5d30215189ca8019f3",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s04_p3.cjs",
+        "baseline": true,
+        "sha256": "d30b6e71ffb74b4b229caf7da2c50ee6383e842a5c0600597aaa33c4efce1e0b",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s04_review.cjs",
+        "baseline": true,
+        "sha256": "124e3c961dd1053e81038cd96aa2230fd55f302a2d09e50430f958d13254dbe5",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s05_p1.cjs",
+        "baseline": true,
+        "sha256": "4e2a88382ea2ece62247ac5219d3c942b06c13edc98b863781ac2125854e05cb",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s05_p2.cjs",
+        "baseline": true,
+        "sha256": "4eec68f93ac303d7b7ffa63c9f90510632ad41e239a6eb44f14f3c3c0450a8aa",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s05_p3.cjs",
+        "baseline": true,
+        "sha256": "042c5f65d3adfba2e9f1f9ac2ab4eb57ec56c2c516da02dbd6aeb01c0d8b8145",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s05_review.cjs",
+        "baseline": true,
+        "sha256": "168c5199127798a4f2fd9bd4787351ce77b9ee2768e96bf80883a377db6d46a9",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s06_p1.cjs",
+        "baseline": true,
+        "sha256": "2c7edd45200909b324867d46e1f39a2b41fa7cd2bbbc03a04f7ce08c8ff907da",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s06_p2.cjs",
+        "baseline": true,
+        "sha256": "45cb4a0a1447dc77d9eca5b970bbc0d8db879e0ef66c50b5a0f05b410c8c4612",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s06_p3.cjs",
+        "baseline": true,
+        "sha256": "721f2ba7d9164bb111ecc73c9ce55837145bd37014a2f4044f83b56461c60cc1",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s06_review.cjs",
+        "baseline": true,
+        "sha256": "a227f12f91d14059137f48c8a175369507cbabb075d28ce4bbaee09d30bd20b4",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s07_p1.cjs",
+        "baseline": true,
+        "sha256": "536b4032dc917215a315e6dda8040d14f7c5022c631e3ae5d7cc3460fd679749",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s07_p2.cjs",
+        "baseline": true,
+        "sha256": "f8c64f9677bddd0716047bb9988541a0da2e9d1314bd6f97f88f8bc899364aed",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s07_p3.cjs",
+        "baseline": true,
+        "sha256": "ca469acce686958b01eb55076db6001c4afac245ec64e772242d70406ed07a2e",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s07_review.cjs",
+        "baseline": true,
+        "sha256": "199c39cd3dd82c8c5f57b1e7efe1cb111bcda19cdd3e12514982dc82d344dc33",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s08_p1.cjs",
+        "baseline": true,
+        "sha256": "5ca8f0d7f171a9822dff8925e8b7a080d62e0464898d2cd113ae525c69c0d801",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s08_p2.cjs",
+        "baseline": true,
+        "sha256": "4e8c040c14e2febdcda716bfb54038a0ea2353cfac25caa4db8d5afe22758a51",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s08_p3.cjs",
+        "baseline": true,
+        "sha256": "0add5fd11fdffd22c0f78506bd9efbdc792a1c3b1982ae4a6ec79ac8c40eba0c",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s08_review.cjs",
+        "baseline": true,
+        "sha256": "fbefdfc60078dd834b74e0c8bd98aa63d91f45d9cb174889685e1a0335950cdb",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s09_p1.cjs",
+        "baseline": true,
+        "sha256": "a3e2bfbe8ced480ba3a682f8e0742d23e0b6d6f730bd278ffece08cfa5a9ec80",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s09_p2.cjs",
+        "baseline": true,
+        "sha256": "b09f26507a8ff34985cb8a4fd0910f659cf49932be9e8869bc1a6fe3cb3afaed",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s09_p3.cjs",
+        "baseline": true,
+        "sha256": "050bbce56d1d3227791d52413749a00eccb42ac2c07462bc3ed4c46a58badb61",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s09_review.cjs",
+        "baseline": true,
+        "sha256": "d6344c61da6f367a5183e67e1d7a6ab91f6fc1f07e61e6ddb90852ae4e896183",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s10_p1.cjs",
+        "baseline": true,
+        "sha256": "8815cb0fd73a630b06eeadbcaf54249172e7485ac640cb520c0183205b406e2e",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s10_p2.cjs",
+        "baseline": true,
+        "sha256": "3e7aa5d31c66fbf735548f30df6cd6a82659e75ec43f32fbc6806143cd0f1ea8",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s10_p3.cjs",
+        "baseline": true,
+        "sha256": "336d848e2658049f821b34550dd9939544b95a8937ad5c2e6704845beacb8b7c",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s10_review.cjs",
+        "baseline": true,
+        "sha256": "676178949cd5999e012ab4f98b579aa06960a04a5e51b8f0169fe95beaaf5350",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s11_p1.cjs",
+        "baseline": true,
+        "sha256": "10d76ae13f15ba8b0dc3e31cbf22cd2cdb912e5acba3d29de9ed165b4066b797",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s11_p2.cjs",
+        "baseline": true,
+        "sha256": "f1d3b9e400b3aeb1f676b820c1e45483f85cbf50224d7b376b1602ebac1a5614",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s11_p3.cjs",
+        "baseline": true,
+        "sha256": "a82a6e4a15ab66b2b99584df1d39baa7500f9c23adfc3974462ea56128590374",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s11_p4.cjs",
+        "baseline": true,
+        "sha256": "7c761ada15c36d3967706e923ca09174e16d07927bd459411e04294bded99e59",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s11_review.cjs",
+        "baseline": true,
+        "sha256": "6299e6fa1914693fa9b5665148d872efa40cf5b894b61a1f2d0aa8540d8590ea",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s12_p1.cjs",
+        "baseline": true,
+        "sha256": "e8783d122e16bba4f2831e62905f670b7b2b3a6cea64814545d33ee7a091b2b0",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s12_p2.cjs",
+        "baseline": true,
+        "sha256": "641b72c8c1184a6531d24e1d2ebb18f3f42efa6195d2ae8f547c945aa457860b",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s12_p3.cjs",
+        "baseline": true,
+        "sha256": "7581446ede6aa2092fe714bad88aafb79a4fa918a0551d19dbf8844725631c40",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s12_review.cjs",
+        "baseline": true,
+        "sha256": "5ad2e6505fd6ba528aa78372b5ea9656cd480c7033b88b8ae68e73e9de23d28a",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s13_p1.cjs",
+        "baseline": true,
+        "sha256": "ec2cb4bee8a4754107138972a60ba47e97d3351a5d86726f42ebe865d3410f40",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s13_p2.cjs",
+        "baseline": true,
+        "sha256": "0cf3455133cdaae237e21fee01c416598aecd988ef2c3c17e2c8c5fec7801632",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s13_p3.cjs",
+        "baseline": true,
+        "sha256": "043bfbdb6c4787be85d2323e245b826140863e52f30bac8e3b187ac4a8b6d875",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s13_review.cjs",
+        "baseline": true,
+        "sha256": "5a726731f37046be041fa24d03dd8590a7a2c10eb571df871084dcdddcd8bcc4",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s14_p1.cjs",
+        "baseline": true,
+        "sha256": "dd24bf02dcfba910af6234d8550b7310773589d25504ab785f29cbce64fbdb22",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s14_p2.cjs",
+        "baseline": true,
+        "sha256": "2b7ccb93ead2a9559c340e91135872b32e1bee359ba9a58d0354346f26f61474",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s14_p3.cjs",
+        "baseline": true,
+        "sha256": "17be878b2ceb33e6b7bf84dbe38c0b5954320aee84fd24eb42269608ed1c360f",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s14_review.cjs",
+        "baseline": true,
+        "sha256": "fbfc278077396b33449084ebb68a91adbab116a272f1d1eb4fef398ef66a74d0",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_visual_models.mjs",
+        "baseline": true,
+        "sha256": "aa80891eb00c24760a50d35c0e6d804b0d4aac1000e35d1ef5b73ec32633d827",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_visual_workflows.cjs",
+        "baseline": true,
+        "sha256": "0fc1187f19aa02664780d2ddf518401de0f77360f41414a1482a53aed95ee346",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_whole_project.cjs",
+        "baseline": true,
+        "sha256": "a8399f42c1f1fa615c4ff614723c3627f58072ac25df529506030056ac045a8f",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_river_evidence_layers.mjs",
+        "baseline": true,
+        "sha256": "568f91822e36b4ddf25d2c9f4cfcea9f3a6e7a3a3d4426584fb58b074546d42a",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_river_integration_browser.cjs",
+        "baseline": true,
+        "sha256": "4aae4cf15d2b7351bc7a729d9dba015cac2d6e790910da017052655ab330f1d7",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_river_interaction.mjs",
+        "baseline": true,
+        "sha256": "6b745544bcc6374822b6b703f864a573599b6550e1394553c72d72f5148015dd",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_river_rendering.mjs",
+        "baseline": true,
+        "sha256": "24c2d76a2374be35fbf86cd4a9abfb244a0d9eff2bc965801d25b0182262a1df",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_river_spike_browser.cjs",
+        "baseline": true,
+        "sha256": "b0bf7854609bd4130c69981f3117006cbabea6d6a4c9fade482890f93eec4749",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_river_stage5.mjs",
+        "baseline": true,
+        "sha256": "83c34879ae43095a004ff698ac1d9d44fa2433808dbb5b9359e26df1a60bf353",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_starfield_integration_browser.cjs",
+        "baseline": true,
+        "sha256": "9803f6a9f442107313f83b098b036cd1a1f9fdbecd59d6b1c496549fbe77aeb6",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_starfield_interaction.mjs",
+        "baseline": true,
+        "sha256": "17448e54a4a4439af54fbcb911829bdf75b1036e5eb191335e6ddcd00a322987",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_starfield_mapping.mjs",
+        "baseline": true,
+        "sha256": "5b6a3a1113f43d2a196933433a71c359c9bd34c611d66528331b06c9b0619977",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_memory_starfield_spike_browser.cjs",
+        "baseline": true,
+        "sha256": "92de7e543e798a724206e9cda50b1c8e41b4d2f8940fb6218fdd71f6ce66b989",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_review_summary_iteration_browser.cjs",
+        "baseline": true,
+        "sha256": "9a5290b3853286713393e7b50e4874e0cd35c4b03cba1eae44917567d05d39fc",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_search_2_0_browser.cjs",
+        "baseline": true,
+        "sha256": "fe5bccbd7919e7043723df5639e4cad5de2555453ee579c34771dd2e6f1eff03",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_shared_state_store.mjs",
+        "baseline": true,
+        "sha256": "68b7e6e8783aecb5516051b2689551d53b17d295d01647f4a2af6739d4dc1de7",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_stage7_performance_acceptance.cjs",
+        "baseline": true,
+        "sha256": "d4f832f21f2dc83381e42251b43f7e204d2b256299f8ebc45af04e7b2f15629b",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_stage7_privacy_accessibility.cjs",
+        "baseline": true,
+        "sha256": "b7b8f2d486cd82e238a92ca0dd12df2cf8009266bf339ad086f8da56433b22a1",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_stage7_visual_acceptance.cjs",
+        "baseline": true,
+        "sha256": "92ea2d31cb3f69c766a487ef5cb72f675a16ae9a468d5d93a9abc72fe4590ee6",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_stage8_local_app_packaging.cjs",
+        "baseline": true,
+        "sha256": "40702d47a1dff2df487a6ec3c5e927dbd10948d83333d062634bdbd3ba5e9613",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_stage8_release_safety.cjs",
+        "baseline": true,
+        "sha256": "33811c0fe50ab408f4c689f7dc500ff9969da579c7c40b3edba7936beaf42b85",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_stage9_obsidian_iteration.cjs",
+        "baseline": true,
+        "sha256": "842b3d322e230a1eac5ef1e370425678194ac472678afea8a55e0c46b9c58ee4",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_stage9_visual_semantics.cjs",
+        "baseline": true,
+        "sha256": "8100a4277eb7c0dc297b02cc03315b797174d68d4bc41860dda26e2e39016d59",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_summary_iteration_closure_browser.cjs",
+        "baseline": true,
+        "sha256": "8cec0c5962677214171d60fd4652abecda98060ffcb8a6500296a005e3a0dfbb",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "apps/memory-atlas/scripts/validate_universe_state_spike.mjs",
+        "baseline": true,
+        "sha256": "74037830c6eb45d1dcdc9810991dcd05803bf303685d6ed26d80b1c6e871d56a",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "scripts/audit_memory_atlas_acceptance.py",
+        "baseline": true,
+        "sha256": "a3f86c37e1a139fdd23288cd8accb5abbea0e4e5bfbd30868fa25f05a714c2a6",
+        "matched_families": [
+          "audit"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "scripts/audit_memory_atlas_github_recovery.py",
+        "baseline": true,
+        "sha256": "f9d2ce465a56723dcc1b22332fd9aee36e739761f5474b04aa2451ce30405c00",
+        "matched_families": [
+          "audit"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "scripts/audit_memory_atlas_goal_completion.py",
+        "baseline": true,
+        "sha256": "53c8620832a7b5e7ad41c1a401c35ea14f6966c738e366dc81ac151b680a3a8d",
+        "matched_families": [
+          "audit"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "scripts/audit_memory_atlas_public_raw.py",
+        "baseline": true,
+        "sha256": "ff46727ca6545ec3d0a902840614f3c64c3a85315a15bd1a3e1270638c9354cc",
+        "matched_families": [
+          "audit"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "scripts/audit_memory_atlas_release.py",
+        "baseline": true,
+        "sha256": "c9422528c0179715961332dc9fa68b6f2b174f7f0dcdf8583339ad443dd22f2b",
+        "matched_families": [
+          "audit"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "scripts/audit_memory_atlas_snapshot_parity.py",
+        "baseline": true,
+        "sha256": "4cbb5a9239f811841e6aaf7cdd43102ec8aefa658d3724237ec3d5be959f921c",
+        "matched_families": [
+          "audit"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "scripts/audit_memory_atlas_visual_acceptance.py",
+        "baseline": true,
+        "sha256": "08246b9b9dd763f804ffd3ce97d0253f4ff2ad9c62f96eb661c44dac6b802f47",
+        "matched_families": [
+          "audit"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "scripts/build_agent_context_pack.py",
+        "baseline": true,
+        "sha256": "439451e79e354b6a961986f275af5a11d60894ac6382b49518280391dc4d435c",
+        "matched_families": [
+          "build"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "scripts/build_chatgpt_deep_explore_prompt.py",
+        "baseline": true,
+        "sha256": "aa29f546889f0fc0c7a8aa06b3d9b1bb2159b7c9ff776bad09173bcae08e22c5",
+        "matched_families": [
+          "build"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "scripts/build_memory_atlas_agent_authorization.py",
+        "baseline": true,
+        "sha256": "27b37ef5b35df2a12f6fa69459749bc75107688eb3701855bde71401ec45b773",
+        "matched_families": [
+          "build"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "scripts/build_memory_atlas_agent_collaboration.py",
+        "baseline": true,
+        "sha256": "03f6daad384770d3d056d72493e8b47d69e939c448b4ba0b92088ad88847694d",
+        "matched_families": [
+          "build"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "scripts/build_memory_atlas_clusters.py",
+        "baseline": true,
+        "sha256": "927055877fd9fa556091d3e1ba6943937472fcc737f423b5f5c299b63eae6a93",
+        "matched_families": [
+          "build"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "scripts/build_memory_atlas_data.py",
+        "baseline": true,
+        "sha256": "579e893aa8473a0c9f6ed0ffbe91c0c5b1b8e9fcc7dfc6792c25a0eea2f22cc5",
+        "matched_families": [
+          "build"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "scripts/build_memory_atlas_decision_debt.py",
+        "baseline": true,
+        "sha256": "ba5053719a2c627d8bf443b63eef75e055c66ccaee7607a770b8d7096e94f53e",
+        "matched_families": [
+          "build"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "scripts/build_memory_atlas_diff_narrator.py",
+        "baseline": true,
+        "sha256": "1cd2e4b2d16071ec0d619226a6941206cb29ad7dec22caf621dffb404f9bdc38",
+        "matched_families": [
+          "build"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "scripts/build_memory_atlas_economic_proxy.py",
+        "baseline": true,
+        "sha256": "0fc52e92506eb6d9f98542042ac30ae6a6e3fec595e376ec8ec239c7859a3dff",
+        "matched_families": [
+          "build"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "scripts/build_memory_atlas_formula_what_if.py",
+        "baseline": true,
+        "sha256": "ad5a3a91d2275aedcf7f1c13ab2a88df76b3d1e9f3c4bcd0687a4a49b606db24",
+        "matched_families": [
+          "build"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "scripts/build_memory_atlas_information_roi.py",
+        "baseline": true,
+        "sha256": "bb776ffd4eb0f9b3a3dc6aa0e9a9a762736f39e938ea916a4148753548adb759",
+        "matched_families": [
+          "build"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "scripts/build_memory_atlas_latent_signals.py",
+        "baseline": true,
+        "sha256": "043aaaaf57fbc57769bf6a51f0113422cb144edf219cc196e404296d6c1a0b2b",
+        "matched_families": [
+          "build"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "scripts/build_memory_atlas_low_value_loops.py",
+        "baseline": true,
+        "sha256": "ff59b93ce332593b52e9ae6c559b6d717b0817f2c3fd2685ae98610253dfe0f4",
+        "matched_families": [
+          "build"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "scripts/build_memory_atlas_opportunities.py",
+        "baseline": true,
+        "sha256": "98cd0ab170430699471ce06429671c840924eca00ae2de87dcb555d09971ef63",
+        "matched_families": [
+          "build"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "scripts/build_memory_atlas_proposal_apply.py",
+        "baseline": true,
+        "sha256": "c3a42fd1fb2aad4442db8ff0da44a0da2bd33dc5ed6db8b34a61b53f668cc06a",
+        "matched_families": [
+          "build"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "scripts/build_memory_atlas_proposal_state_machine.py",
+        "baseline": true,
+        "sha256": "458b680688271f2c47807a246b3dc285890aa6140fc191923cb04f520c268ae5",
+        "matched_families": [
+          "build"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "scripts/build_memory_atlas_self_iteration.py",
+        "baseline": true,
+        "sha256": "bf4b5f53c5ea52b46707658ebf0db3aa51258c3a834f82400bb8359f8c84adac",
+        "matched_families": [
+          "build"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "scripts/build_memory_atlas_stage_flight.py",
+        "baseline": true,
+        "sha256": "78ce248fe30fa977ac6761bb3404b12acc047c25eb559c53bfb35e4e32054da3",
+        "matched_families": [
+          "build"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "scripts/build_memory_atlas_weekly_report.py",
+        "baseline": true,
+        "sha256": "f1f61c437caca8f7cbdc07d711e69f99f2d073f7702b3fa14581001b8e19e9f6",
+        "matched_families": [
+          "build"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "scripts/build_personalization_exports.py",
+        "baseline": true,
+        "sha256": "32965f3b32645d3d27dd613e1c340a7185c18b5d3c5c74a576f6622911296ce3",
+        "matched_families": [
+          "build"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "scripts/install_codex_weekly_sync.py",
+        "baseline": true,
+        "sha256": "e7f3309eb1994ab38766a01b54c0cfaa5453cf5a21aab50130f186223864706b",
+        "matched_families": [
+          "sync"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "scripts/sync_chatgpt_memory_data.py",
+        "baseline": true,
+        "sha256": "2afd0db45ac6e6daf67fe3dc91d532d49f69e6a9c9f11889241bfd5ac7087ab8",
+        "matched_families": [
+          "sync"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "scripts/sync_codex_memory_data.py",
+        "baseline": true,
+        "sha256": "39c9aab8a2e633b63fcbc36f960e1788b4453b5b62f794a2a98bdc4774818b35",
+        "matched_families": [
+          "sync"
+        ],
+        "disposition": "retained"
+      },
+      {
+        "path": "scripts/sync_future_agent_data.py",
+        "baseline": true,
+        "sha256": "9088eb0c49a791ad5b5fa8c0d105b00bf227c3528d466428d5fc407a5c2e0e47",
+        "matched_families": [
+          "sync"
+        ],
+        "disposition": "retained"
+      }
+    ]
+  },
+  "deletion_policy": {
+    "task_only_files_may_be_deleted_now": true,
+    "shared_or_active_files_deferred_until_full_project_cleanup": true,
+    "equivalent_command_required": true,
+    "equivalence_test_required": true,
+    "all_callers_migrated_required": true,
+    "behavior_parity_required": true
+  },
+  "summary": {
+    "deleted_script_count": 0,
+    "retained_representative_script_count": 15,
+    "consolidated_execution_module_count": 5,
+    "consolidated_execution_block_count": 8,
+    "validator_profile_count_created": 0,
+    "mapped_scoped_script_count": 208
+  },
+  "families": [
+    {
+      "family": "build",
+      "scope": "build_*.py plus analyze builders invoked by atlasctl",
+      "disposition": "Retain implementations until direct imports, custom arguments and fixture parity are migrated.",
+      "scripts": [
+        {
+          "path": "scripts/build_memory_atlas_data.py",
+          "status": "retained_partial_cli_coverage",
+          "canonical_command": "python3 scripts/atlasctl.py build-atlas",
+          "deletion_blockers": [
+            "CI calls the script directly",
+            "tests import and exercise its implementation",
+            "direct CLI exposes custom input and output arguments not present on atlasctl"
+          ]
+        },
+        {
+          "path": "scripts/build_personalization_exports.py",
+          "status": "retained_unique_implementation",
+          "canonical_command": "python3 scripts/atlasctl.py generate-personalization-prompt",
+          "deletion_blockers": [
+            "sync_codex_memory_data.py invokes the builder directly",
+            "tests import its functions",
+            "origin/main contains newer provider-neutral behavior that must be reconciled before migration"
+          ]
+        },
+        {
+          "path": "scripts/build_memory_atlas_clusters.py",
+          "status": "retained_partial_cli_coverage",
+          "canonical_command": "python3 scripts/atlasctl.py analyze --stage clusters",
+          "deletion_blockers": [
+            "stage tests import the builder directly",
+            "filter and apply parity has not been proven across all callers"
+          ]
+        },
+        {
+          "path": "scripts/build_memory_atlas_proposal_apply.py",
+          "status": "retained_unique_implementation",
+          "canonical_command": "python3 scripts/atlasctl.py apply --proposal <id>",
+          "deletion_blockers": [
+            "atlasctl apply still delegates to this implementation",
+            "proposal contract tests import it directly"
+          ]
+        }
+      ]
+    },
+    {
+      "family": "sync",
+      "scope": "sync_*.py source connectors",
+      "disposition": "Retain source implementations until fixture parity and every direct caller are migrated.",
+      "scripts": [
+        {
+          "path": "scripts/sync_chatgpt_memory_data.py",
+          "status": "retained_unique_implementation",
+          "canonical_command": "python3 scripts/atlasctl.py sync --source chatgpt",
+          "deletion_blockers": [
+            "atlasctl sync delegates to this implementation",
+            "source-specific tests import it directly"
+          ]
+        },
+        {
+          "path": "scripts/sync_codex_memory_data.py",
+          "status": "retained_partial_cli_coverage",
+          "canonical_command": "python3 scripts/atlasctl.py sync --source codex",
+          "deletion_blockers": [
+            "installer and scheduled updater call the script directly",
+            "tests import it directly",
+            "direct CLI exposes build and backup options not present on atlasctl"
+          ]
+        },
+        {
+          "path": "scripts/sync_future_agent_data.py",
+          "status": "retained_unique_implementation",
+          "canonical_command": "python3 scripts/atlasctl.py sync --source future-agent --agent-id <id> --input <path>",
+          "deletion_blockers": [
+            "atlasctl sync delegates to this implementation",
+            "source-specific tests import it directly"
+          ]
+        }
+      ]
+    },
+    {
+      "family": "audit",
+      "scope": "audit_memory_atlas_*.py release and acceptance gates",
+      "disposition": "Retain independent audit contracts; atlasctl final audit is an orchestrator, not an equivalent replacement.",
+      "scripts": [
+        {
+          "path": "scripts/audit_memory_atlas_release.py",
+          "status": "retained_no_equivalent_command",
+          "canonical_command": null,
+          "deletion_blockers": [
+            "CI, installer and deploy call it directly",
+            "atlasctl has no behavior-equivalent release subcheck"
+          ]
+        },
+        {
+          "path": "scripts/audit_memory_atlas_visual_acceptance.py",
+          "status": "retained_no_equivalent_command",
+          "canonical_command": null,
+          "deletion_blockers": [
+            "acceptance audit imports its API",
+            "atlasctl has no behavior-equivalent visual acceptance subcheck"
+          ]
+        },
+        {
+          "path": "scripts/audit_memory_atlas_acceptance.py",
+          "status": "retained_no_equivalent_command",
+          "canonical_command": null,
+          "deletion_blockers": [
+            "goal-completion audit imports its API",
+            "CI, installer and deploy call it directly"
+          ]
+        },
+        {
+          "path": "scripts/audit_memory_atlas_goal_completion.py",
+          "status": "retained_no_equivalent_command",
+          "canonical_command": null,
+          "deletion_blockers": [
+            "CI and owner acceptance call it directly",
+            "live evidence semantics are not equivalent to atlasctl final audit"
+          ]
+        }
+      ]
+    },
+    {
+      "family": "validator",
+      "scope": "apps/memory-atlas/scripts/validate_*.cjs and validate_*.mjs",
+      "disposition": "Defer public validator profile consolidation to S04-P3-T1.",
+      "scripts": [
+        {
+          "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_1_s04_p1_t1_structure.mjs",
+          "status": "deferred_to_s04_p3_t1",
+          "canonical_command": "npm run validate:v1.2.1-s04-p1-t1-structure",
+          "deletion_blockers": [
+            "package exposes the validator directly",
+            "fast/sync/ui/release profiles do not exist yet"
+          ]
+        },
+        {
+          "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_1_s04_p1_t2_mounts.mjs",
+          "status": "deferred_to_s04_p3_t1",
+          "canonical_command": "npm run validate:v1.2.1-s04-p1-t2-mounts",
+          "deletion_blockers": [
+            "package exposes the validator directly",
+            "fast/sync/ui/release profiles do not exist yet"
+          ]
+        },
+        {
+          "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s04_p2.cjs",
+          "status": "deferred_to_s04_p3_t1",
+          "canonical_command": "npm run validate:v1.2-s04-p2",
+          "deletion_blockers": [
+            "package exposes the validator directly",
+            "it remains the historical modular CLI compatibility gate"
+          ]
+        },
+        {
+          "path": "apps/memory-atlas/scripts/validate_stage7_visual_acceptance.cjs",
+          "status": "deferred_to_s04_p3_t1",
+          "canonical_command": "npm run validate:stage7-visual",
+          "deletion_blockers": [
+            "final audit invokes the browser gate",
+            "ui profile replacement is not implemented"
+          ]
+        }
+      ]
+    }
+  ],
+  "equivalence_tests": [],
+  "deleted_scripts": [],
+  "deferred": {
+    "task_id": "S04-P3-T1",
+    "work": "Consolidate version and Stage validators into fast, sync, ui and release profiles.",
+    "started_in_this_task": false
+  },
+  "safety": {
+    "raw_mutation": false,
+    "remote_push": false,
+    "deployment": false,
+    "branch_or_pr": false,
+    "cache_cleanup": false
+  }
+}

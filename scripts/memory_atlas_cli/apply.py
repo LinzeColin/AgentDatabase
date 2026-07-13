@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import subprocess
 import sys
 
 from .constants import (
@@ -11,6 +10,23 @@ from .constants import (
     PROPOSAL_STATE_BUILDER,
     ROOT,
 )
+from .child_process import StdoutTransform, run_child_command
+
+
+def _proposal_stdout_transform(dry_run: bool) -> StdoutTransform:
+    def transform(stdout: str, returncode: int) -> str:
+        if not dry_run or returncode != 0 or not stdout:
+            return stdout
+        payload = json.loads(stdout)
+        payload["command"] = "proposals"
+        payload["dry_run"] = True
+        payload.setdefault("writes_files", False)
+        payload.setdefault("raw_mutation", False)
+        payload["phase_status"] = payload.get("status")
+        payload["status"] = "PASS"
+        return json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
+
+    return transform
 
 
 def run_proposals(args: argparse.Namespace) -> int:
@@ -25,21 +41,11 @@ def run_proposals(args: argparse.Namespace) -> int:
     ]
     if args.dry_run:
         command.append("--dry-run")
-    result = subprocess.run(command, cwd=ROOT, text=True, capture_output=True, check=False)
-    if args.dry_run and result.returncode == 0 and result.stdout:
-        payload = json.loads(result.stdout)
-        payload["command"] = "proposals"
-        payload["dry_run"] = True
-        payload.setdefault("writes_files", False)
-        payload.setdefault("raw_mutation", False)
-        payload["phase_status"] = payload.get("status")
-        payload["status"] = "PASS"
-        print(json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True))
-    elif result.stdout:
-        print(result.stdout, end="")
-    if result.stderr:
-        print(result.stderr, file=sys.stderr, end="")
-    return result.returncode
+    return run_child_command(
+        command,
+        cwd=ROOT,
+        stdout_transform=_proposal_stdout_transform(args.dry_run),
+    )
 
 
 def run_apply(args: argparse.Namespace) -> int:
@@ -55,12 +61,7 @@ def run_apply(args: argparse.Namespace) -> int:
         command.append("--dry-run")
     if args.simulate_validation_failure:
         command.append("--simulate-validation-failure")
-    result = subprocess.run(command, cwd=ROOT, text=True, capture_output=True, check=False)
-    if result.stdout:
-        print(result.stdout, end="")
-    if result.stderr:
-        print(result.stderr, file=sys.stderr, end="")
-    return result.returncode
+    return run_child_command(command, cwd=ROOT)
 
 __all__ = (
     "run_proposals",

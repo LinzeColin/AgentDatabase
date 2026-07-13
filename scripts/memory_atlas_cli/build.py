@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import subprocess
 import sys
 
 from .constants import (
@@ -11,6 +10,7 @@ from .constants import (
     PERSONALIZATION_BUILDER,
     ROOT,
 )
+from .child_process import run_child_command
 
 
 def run_build_atlas(args: argparse.Namespace) -> int:
@@ -25,12 +25,7 @@ def run_build_atlas(args: argparse.Namespace) -> int:
         }, ensure_ascii=False, indent=2, sort_keys=True))
         return 0
     command = [sys.executable, str(BUILD_ATLAS), "--database-dir", str(ROOT), "--output", output]
-    result = subprocess.run(command, cwd=ROOT, text=True, capture_output=True, check=False)
-    if result.stdout:
-        print(result.stdout, end="")
-    if result.stderr:
-        print(result.stderr, file=sys.stderr, end="")
-    return result.returncode
+    return run_child_command(command, cwd=ROOT)
 
 
 def personalization_targets(target: str) -> list[str]:
@@ -85,12 +80,7 @@ def run_generate_personalization_prompt(args: argparse.Namespace) -> int:
         print(json.dumps(personalization_prompt_contract(args), ensure_ascii=False, indent=2, sort_keys=True))
         return 0
     command = [sys.executable, str(PERSONALIZATION_BUILDER), "--database-dir", str(args.database_dir)]
-    result = subprocess.run(command, cwd=ROOT, text=True, capture_output=True, check=False)
-    if result.stdout:
-        print(result.stdout, end="")
-    if result.stderr:
-        print(result.stderr, file=sys.stderr, end="")
-    return result.returncode
+    return run_child_command(command, cwd=ROOT)
 
 
 def chatgpt_deep_explore_contract(args: argparse.Namespace) -> dict[str, object]:
@@ -148,12 +138,7 @@ def run_chatgpt_deep_explore(args: argparse.Namespace) -> int:
         command.append("--open")
     if args.confirm_auto_submit:
         command.append("--confirm-auto-submit")
-    result = subprocess.run(command, cwd=ROOT, text=True, capture_output=True, check=False)
-    if result.stdout:
-        print(result.stdout, end="")
-    if result.stderr:
-        print(result.stderr, file=sys.stderr, end="")
-    return result.returncode
+    return run_child_command(command, cwd=ROOT)
 
 __all__ = (
     "run_build_atlas",

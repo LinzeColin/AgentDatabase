@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import subprocess
 import sys
 
 from .constants import (
@@ -21,6 +20,7 @@ from .constants import (
     SELF_ITERATION_BUILDER,
     STAGE_FLIGHT_BUILDER,
 )
+from .child_process import run_child_command
 
 
 def facet_analyze_contract() -> dict[str, object]:
@@ -459,12 +459,7 @@ def run_analyze(args: argparse.Namespace) -> int:
         command = [sys.executable, str(DECISION_DEBT_BUILDER), "--database-dir", str(args.database_dir)]
         if args.dry_run:
             command.append("--dry-run")
-    result = subprocess.run(command, cwd=ROOT, text=True, capture_output=True, check=False)
-    if result.stdout:
-        print(result.stdout, end="")
-    if result.stderr:
-        print(result.stderr, file=sys.stderr, end="")
-    return result.returncode
+    return run_child_command(command, cwd=ROOT)
 
 __all__ = (
     "facet_analyze_contract",

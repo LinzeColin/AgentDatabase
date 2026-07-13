@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import subprocess
 import sys
 
 from memory_atlas_owner_daily import (
@@ -18,6 +17,7 @@ from .constants import (
     FUTURE_AGENT_SYNC,
     ROOT,
 )
+from .child_process import run_child_command
 
 
 def owner_daily_profile_contract() -> dict[str, object]:
@@ -149,12 +149,7 @@ def run_sync(args: argparse.Namespace) -> int:
         }, ensure_ascii=False, indent=2, sort_keys=True))
         return 2
 
-    result = subprocess.run(command, cwd=ROOT, text=True, capture_output=True, check=False)
-    if result.stdout:
-        print(result.stdout, end="")
-    if result.stderr:
-        print(result.stderr, file=sys.stderr, end="")
-    return result.returncode
+    return run_child_command(command, cwd=ROOT)
 
 __all__ = (
     "OWNER_DAILY_STEP_IDS",
