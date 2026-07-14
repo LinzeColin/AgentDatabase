@@ -1,15 +1,23 @@
 # Memory Atlas v1.2 Remediation Handoff
 
 > **Current v1.2.1 note (2026-07-14):** This file preserves the earlier v1.2 R7
-> handoff below. Memory Atlas is now executing the v1.2.1 Task Pack with one Task per
-> run. `S04-P3-T3` replaces all historical validator aliases with the four public
-> profiles `validate:fast`, `validate:sync`, `validate:ui`, and `validate:release`.
-> Commands in the older "Verified Commands" section are historical evidence, not
-> current package aliases. Use
-> `docs/remediation/memory_atlas_v1_2_1/S04_P3_T3_COMMAND_MIGRATION.md` and
-> `config/memory_atlas_legacy_command_migrations.json` for current routing. No v1.2.1
-> work has been pushed or deployed; the next Task is governed by
-> `docs/governance/roadmap.yaml` only.
+> handoff below. Memory Atlas is executing the v1.2.1 Task Pack with one Task per run.
+> S04 is complete locally. `S05-P1-T1` has now replaced 36 Stage-era human documents
+> with the seven shallow Chinese files under `人类可读/`; the fail-closed document
+> audit is `scripts/audit_memory_atlas_human_plane.py`, with permanent regression tests
+> in `tests/test_memory_atlas_human_plane.py`. The final T1 gates passed 301 Python tests,
+> fast 4/4, frontend build, and deterministic governance render checks under Python 3.13
+> and 3.12. Historical reviews and source
+> packages remain unchanged and Git history retains every removed document. The next
+> Task is only `S05-P1-T2`, which owns the concise rewrite of `功能清单.md`,
+> `开发记录.md`, and `模型参数文件.md`.
+>
+> The only public validator profiles are `validate:fast`, `validate:sync`,
+> `validate:ui`, and `validate:release`. Commands in the older "Verified Commands"
+> section are historical evidence, not current package aliases. Use
+> `docs/remediation/memory_atlas_v1_2_1/S04_P3_T3_COMMAND_MIGRATION.md` for old-command
+> lookup. No v1.2.1 work has been pushed or deployed; do not create a branch or PR,
+> and do not clean TaskPack, recovery evidence, raw/derived data, or machine caches.
 
 ## Current Goal
 

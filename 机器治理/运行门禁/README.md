@@ -45,7 +45,7 @@ S14 Review 产物：
 
 - `docs/reviews/memory_atlas_v1_2_s14_review.md`
 - `apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s14_review.cjs`
-- `人类可读/09_验收标准与运行手册.md`
+- `人类可读/维护故障.md`
 - `机器治理/证据与日志/stage_pass_gates/stage_pass_gate_status.v1_2_s14_p3.json`
 
 S14 Review gate：
@@ -97,7 +97,7 @@ No GitHub main upload。No remote push。No raw mutation。
 S13 P3 产物：
 
 - `docs/reviews/memory_atlas_v1_2_s13_p3_apply_rollback.md`
-- `人类可读/36_Apply回滚说明.md`
+- `人类可读/维护故障.md`
 - `机器治理/运行门禁/proposal_apply.v1_2_s13_p3.json`
 - `data/derived/proposals/proposal_apply_report.json`
 - `机器治理/证据与日志/proposal_apply/proposal_apply_evidence.v1_2_s13_p3.json`
@@ -126,7 +126,7 @@ No GitHub main upload。No remote push。No raw mutation。
 S13 P2 产物：
 
 - `docs/reviews/memory_atlas_v1_2_s13_p2_diff_narrator.md`
-- `人类可读/35_DiffNarrator说明.md`
+- `人类可读/功能工作流.md`
 - `机器治理/运行门禁/diff_narrator.v1_2_s13_p2.json`
 - `data/derived/proposals/diff_narrator_report.json`
 - `机器治理/证据与日志/proposal_diffs/diff_narrator_machine_diff.v1_2_s13_p2.json`
@@ -157,7 +157,7 @@ No GitHub main upload。No remote push。No raw mutation。No proposal apply exe
 S13 P1 产物：
 
 - `docs/reviews/memory_atlas_v1_2_s13_p1_proposal_state_machine.md`
-- `人类可读/34_Proposal状态机说明.md`
+- `人类可读/功能工作流.md`
 - `机器治理/运行门禁/proposal_state_machine.v1_2_s13_p1.json`
 - `data/derived/proposals/proposal_state_machine_report.json`
 - `apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s13_p1.cjs`
@@ -219,7 +219,7 @@ S12 Review gate：
 S12 P3 产物：
 
 - `docs/reviews/memory_atlas_v1_2_s12_p3_chatgpt_deep_explore.md`
-- `人类可读/33_ChatGPT深度探索说明.md`
+- `人类可读/功能工作流.md`
 - `机器治理/运行门禁/chatgpt_deep_explore.v1_2_s12_p3.json`
 - `apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s12_p3.cjs`
 - `apps/memory-atlas/src/App.tsx`
@@ -251,7 +251,7 @@ S12 P3 gate：
 S12 P2 产物：
 
 - `docs/reviews/memory_atlas_v1_2_s12_p2_personalization_prompt.md`
-- `人类可读/32_PersonalizationPrompt说明.md`
+- `人类可读/功能工作流.md`
 - `机器治理/运行门禁/personalization_prompt.v1_2_s12_p2.json`
 - `apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s12_p2.cjs`
 - `scripts/build_personalization_exports.py`
@@ -285,7 +285,7 @@ No GitHub main upload。No remote push。No raw mutation。No proposal apply exe
 S12 P1 产物：
 
 - `docs/reviews/memory_atlas_v1_2_s12_p1_command_palette.md`
-- `人类可读/31_CommandPalette命令面板说明.md`
+- `人类可读/功能工作流.md`
 - `机器治理/运行门禁/command_palette.v1_2_s12_p1.json`
 - `apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s12_p1.cjs`
 - `apps/memory-atlas/src/App.tsx`
@@ -348,7 +348,7 @@ No GitHub main upload。No remote push。No raw mutation。No proposal apply exe
 S11 P4 产物：
 
 - `docs/reviews/memory_atlas_v1_2_s11_p4_human_question_map.md`
-- `人类可读/30_HumanQuestionMap说明.md`
+- `人类可读/系统使用.md`
 - `机器治理/可视化配置/human_question_map.v1_2_s11_p4.json`
 - `apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s11_p4.cjs`
 - `apps/memory-atlas/src/App.tsx`
@@ -377,7 +377,7 @@ No GitHub main upload in this phase。
 S11 P3 产物：
 
 - `docs/reviews/memory_atlas_v1_2_s11_p3_workflow_latent_governance_visuals.md`
-- `人类可读/29_WorkflowLatentGovernance可视化说明.md`
+- `人类可读/系统使用.md`
 - `机器治理/可视化配置/workflow_latent_governance_visuals.v1_2_s11_p3.json`
 - `apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s11_p3.cjs`
 - `apps/memory-atlas/src/App.tsx`
@@ -406,7 +406,7 @@ No GitHub main upload in this phase。
 S11 P2 产物：
 
 - `docs/reviews/memory_atlas_v1_2_s11_p2_economic_like_visuals.md`
-- `人类可读/28_EconomicLike经济可视化说明.md`
+- `人类可读/系统使用.md`
 - `机器治理/可视化配置/economic_like_visuals.v1_2_s11_p2.json`
 - `apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s11_p2.cjs`
 - `apps/memory-atlas/src/App.tsx`
@@ -435,7 +435,7 @@ No GitHub main upload in this phase。
 S11 P1 产物：
 
 - `docs/reviews/memory_atlas_v1_2_s11_p1_clio_like_visuals.md`
-- `人类可读/27_ClioLike多维可视化说明.md`
+- `人类可读/系统使用.md`
 - `机器治理/可视化配置/clio_like_visuals.v1_2_s11_p1.json`
 - `apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s11_p1.cjs`
 - `apps/memory-atlas/src/App.tsx`
@@ -462,7 +462,7 @@ S11 P1 gate：
 S10 P3 产物：
 
 - `docs/reviews/memory_atlas_v1_2_s10_p3_machine_detail_folding.md`
-- `人类可读/26_机器字段高级详情说明.md`
+- `人类可读/系统使用.md`
 - `apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s10_p3.cjs`
 - `apps/memory-atlas/src/App.tsx`
 - `apps/memory-atlas/src/i18n/zh-CN.ts`
@@ -490,7 +490,7 @@ No GitHub main upload in this phase。
 S10 P2 产物：
 
 - `docs/reviews/memory_atlas_v1_2_s10_p2_global_chinese_ux.md`
-- `人类可读/25_全局中文说明.md`
+- `人类可读/系统使用.md`
 - `apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s10_p2.cjs`
 - `apps/memory-atlas/src/App.tsx`
 - `apps/memory-atlas/src/i18n/zh-CN.ts`
@@ -514,7 +514,7 @@ S10 P2 gate：
 S10 P1 产物：
 
 - `docs/reviews/memory_atlas_v1_2_s10_p1_home_arrival_briefing.md`
-- `人类可读/24_首页上次来以后发生了什么说明.md`
+- `人类可读/系统使用.md`
 - `apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s10_p1.cjs`
 - `apps/memory-atlas/src/App.tsx`
 - `apps/memory-atlas/src/styles.css`
@@ -576,7 +576,7 @@ S09 P3 产物：
 - `scripts/atlasctl.py`
 - `机器治理/行为智能模型/decision_debt.v1_2_s09_p3.json`
 - `data/derived/behavior_intelligence/decision_debt_ledger.json`
-- `人类可读/23_决策债说明.md`
+- `人类可读/功能工作流.md`
 
 S09 P3 gate：
 
@@ -601,7 +601,7 @@ S09 P2 产物：
 - `scripts/atlasctl.py`
 - `机器治理/行为智能模型/self_iteration.v1_2_s09_p2.json`
 - `data/derived/behavior_intelligence/self_iteration_suggestions.json`
-- `人类可读/22_自我迭代建议说明.md`
+- `人类可读/功能工作流.md`
 
 S09 P2 gate：
 
@@ -626,7 +626,7 @@ S09 P1 产物：
 - `scripts/atlasctl.py`
 - `机器治理/行为智能模型/latent_signals.v1_2_s09_p1.json`
 - `data/derived/behavior_intelligence/latent_signals.json`
-- `人类可读/21_潜性信号说明.md`
+- `人类可读/功能工作流.md`
 
 S09 P1 gate：
 
@@ -701,7 +701,7 @@ S08 P2 产物：
 - `scripts/atlasctl.py`
 - `机器治理/行为智能模型/agent_authorization_boundary.v1_2_s08_p2.json`
 - `data/derived/agent_collaboration/agent_authorization_boundary_report.json`
-- `人类可读/20_Agent授权边界说明.md`
+- `人类可读/功能工作流.md`
 
 S08 P2 gate：
 
@@ -728,7 +728,7 @@ S08 P1 产物：
 - `scripts/atlasctl.py`
 - `机器治理/行为智能模型/agent_collaboration_metrics.v1_2_s08_p1.json`
 - `data/derived/agent_collaboration/agent_collaboration_quality_report.json`
-- `人类可读/19_Agent协作质量指标说明.md`
+- `人类可读/功能工作流.md`
 
 S08 P1 gate：
 
@@ -786,7 +786,7 @@ S07 P3 产物：
 - `scripts/atlasctl.py`
 - `机器治理/参数与公式/formula_what_if_defaults.v1_2_s07_p3.json`
 - `data/derived/economic_proxy/formula_what_if_preview.json`
-- `人类可读/18_FormulaWhatIf配置预览说明.md`
+- `人类可读/模型参数.md`
 
 S07 P3 gate：
 
@@ -813,7 +813,7 @@ S07 P2 产物：
 - `机器治理/参数与公式/information_roi.v1_2_s07_p2.json`
 - `机器治理/可视化配置/visual_roi_gate.v1_2_s07_p2.json`
 - `data/derived/information_roi/information_roi_gate.json`
-- `人类可读/17_InformationROI与VisualROIGate说明.md`
+- `人类可读/模型参数.md`
 
 S07 P2 gate：
 
@@ -840,7 +840,7 @@ S07 P1 产物：
 - `scripts/atlasctl.py`
 - `机器治理/参数与公式/personal_economic_proxy.v1_2_s07_p1.json`
 - `data/derived/economic_proxy/personal_economic_proxy.json`
-- `人类可读/16_PersonalEconomicProxy公式说明.md`
+- `人类可读/模型参数.md`
 
 S07 P1 gate：
 
@@ -897,7 +897,7 @@ S02 P3 产物：
 
 - `机器治理/同步与备份/sync_source_registry.json`
 - `docs/reviews/memory_atlas_v1_2_s02_p2_source_registry.md`
-- `人类可读/05_ChatGPT与Codex及其他Agent自动同步说明.md`
+- `人类可读/同步备份.md`
 - `docs/reviews/memory_atlas_v1_2_s02_p3_human_sync_explanation.md`
 
 前置 S02 P3 已通过：`MA-V12-S02P3` / `ACC-MA-V12-S02P3` /
@@ -930,7 +930,7 @@ S03 P1 产物：
 
 - `机器治理/同步与备份/raw_public_archive_policy.v1_2_s03_p1.json`
 - `data/public_raw/README.md`
-- `人类可读/06_Raw明文公开与只读归档说明.md`
+- `人类可读/同步备份.md`
 - `docs/reviews/memory_atlas_v1_2_s03_p1_public_raw_path.md`
 
 S03 P1 gate：
@@ -951,7 +951,7 @@ S03 P2 产物：
 - `机器治理/同步与备份/credential_exclusion_policy.v1_2_s03_p2.json`
 - `scripts/privacy_guard.py`
 - `scripts/sync_codex_memory_data.py`
-- `人类可读/07_凭证排除说明.md`
+- `人类可读/同步备份.md`
 - `docs/reviews/memory_atlas_v1_2_s03_p2_credential_exclusion.md`
 
 S03 P2 gate：
@@ -970,7 +970,7 @@ S03 P3 产物：
 - `scripts/raw_archive_manifest.py`
 - `机器治理/证据与日志/raw_archive_manifests/raw_manifest.s03_p3_baseline.jsonl`
 - `机器治理/证据与日志/raw_archive_manifests/raw_hash_ledger.jsonl`
-- `人类可读/08_Raw机器账本说明.md`
+- `人类可读/同步备份.md`
 - `docs/reviews/memory_atlas_v1_2_s03_p3_machine_ledger.md`
 
 S03 P3 gate：
@@ -1007,7 +1007,7 @@ S04 P1 产物：
 - `机器治理/同步与备份/chatgpt_readonly_sync_policy.v1_2_s04_p1.json`
 - `scripts/sync_chatgpt_memory_data.py`
 - `scripts/atlasctl.py`
-- `人类可读/09_ChatGPT只读同步与官方导出Fallback.md`
+- `人类可读/同步备份.md`
 - `docs/reviews/memory_atlas_v1_2_s04_p1_chatgpt_sync.md`
 - `apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s04_p1.cjs`
 
@@ -1032,7 +1032,7 @@ S04 P2 产物：
 - `scripts/sync_codex_memory_data.py`
 - `scripts/sync_future_agent_data.py`
 - `scripts/atlasctl.py`
-- `人类可读/10_Codex与FutureAgent同步.md`
+- `人类可读/同步备份.md`
 - `docs/reviews/memory_atlas_v1_2_s04_p2_codex_agent_sync.md`
 - `apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s04_p2.cjs`
 
@@ -1055,7 +1055,7 @@ S04 P3 产物：
 - `机器治理/同步与备份/github_backup_policy.v1_2_s04_p3.json`
 - `scripts/github_backup.py`
 - `scripts/atlasctl.py`
-- `人类可读/11_GitHub备份DryRun与Apply.md`
+- `人类可读/同步备份.md`
 - `docs/reviews/memory_atlas_v1_2_s04_p3_github_backup.md`
 - `apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s04_p3.cjs`
 
@@ -1091,7 +1091,7 @@ No remote push in this review。
 S05 P1 产物：
 
 - `机器治理/数据契约/facet_event_schema.v1_2_s05_p1.json`
-- `人类可读/12_Facet字段与事件语义说明.md`
+- `人类可读/功能工作流.md`
 - `docs/reviews/memory_atlas_v1_2_s05_p1_facet_schema.md`
 - `apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s05_p1.cjs`
 
@@ -1178,7 +1178,7 @@ S06 P1 产物：
 - `scripts/atlasctl.py analyze --stage clusters`
 - `scripts/atlasctl.py audit --check insight-evidence`
 - `data/derived/behavior_intelligence/clusters.json`
-- `人类可读/13_行为簇与层级簇说明.md`
+- `人类可读/功能工作流.md`
 - `docs/reviews/memory_atlas_v1_2_s06_p1_cluster_builder.md`
 
 S06 P1 gate：

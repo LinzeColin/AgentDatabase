@@ -14,7 +14,7 @@
 
 facet/canonical events 的数据契约已定义在
 `机器治理/数据契约/facet_event_schema.v1_2_s05_p1.json`，中文解释位于
-`人类可读/12_Facet字段与事件语义说明.md`，facet extractor 已实现为
+`人类可读/功能工作流.md`，facet extractor 已实现为
 `scripts/extract_memory_atlas_facets.py`，并为 events 输出补齐
 `lightweight_evidence_refs`。
 

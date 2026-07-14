@@ -41,7 +41,7 @@ app reinstall 和 local cleanup。No GitHub main upload。No remote push。No ra
 `validate:v1.2-s14-review`。S14 Review 使用以下证据确认 S14 P1/P2/P3 阶段链：
 
 - `机器治理/证据与日志/stage_pass_gates/stage_pass_gate_status.v1_2_s14_p3.json`
-- `人类可读/09_验收标准与运行手册.md`
+- `人类可读/维护故障.md`
 - `docs/reviews/memory_atlas_v1_2_s14_review.md`
 
 S14 Review 不上传 GitHub main，不远端 push，不修改 raw。下一步为 pending v1.2 Final Review。
@@ -51,7 +51,7 @@ No GitHub main upload。No remote push。No raw mutation。
 `ACC-MA-V12-S14P3`，状态为
 `phase_s14_p3_development_record_completed_pending_s14_review`。Validator 为
 `validate:v1.2-s14-p3`。S14 P3 证明开发记录中文可读、维护命令少而清晰、所有 stage pass gate 状态可查；
-人类运行手册为 `人类可读/09_验收标准与运行手册.md`，机器证据为
+人类运行手册为 `人类可读/维护故障.md`，机器证据为
 `机器治理/证据与日志/stage_pass_gates/stage_pass_gate_status.v1_2_s14_p3.json`。下一步为
 pending S14 Review。
 

@@ -73,12 +73,13 @@ SUMMARY = {
     "deleted_python_test_count": 2,
     "retained_validator_count": 38,
     "retained_baseline_python_test_count": 49,
-    "added_python_test_count": 2,
-    "current_python_test_count": 51,
+    "added_python_test_count": 3,
+    "current_python_test_count": 52,
 }
 ADDED_PATHS = [
     "tests/test_memory_atlas_test_value_audit.py",
     "tests/test_memory_atlas_legacy_command_migrations.py",
+    "tests/test_memory_atlas_human_plane.py",
 ]
 DELETED_TEST_REPLACEMENTS = {
     "tests/test_memory_atlas_v1_2_product_identity_contract.py": "npm run validate:ui",
