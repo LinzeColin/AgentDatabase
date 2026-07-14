@@ -16,13 +16,82 @@ if str(SCRIPTS) not in sys.path:
 if str(ROOT_SCRIPTS) not in sys.path:
     sys.path.insert(0, str(ROOT_SCRIPTS))
 
-from audit_memory_atlas_human_plane import EXPECTED_FILES, OWNER_ENTRY_CONTRACT, audit
+from audit_memory_atlas_human_plane import (
+    CHANGE_USAGE_MAP_CONTRACT,
+    EXPECTED_FILES,
+    OWNER_ENTRY_CONTRACT,
+    audit,
+)
 
 
 VALID_BODY = "这是面向所有者的中文结论和执行说明，包含明确边界、验证方法、失败停止条件与恢复步骤。" * 12
 
 
 class HumanPlaneAuditTests(unittest.TestCase):
+    @staticmethod
+    def valid_change_map_text(contract: dict[str, object]) -> str:
+        lines = [
+            "# Memory Atlas v1.2.1 变化与使用地图",
+            "",
+            "## 结论",
+            "",
+            "当前仍未推送 GitHub main、未部署，后续能力尚未完成。",
+            "",
+            "## 操作",
+            "",
+            "先看变化，再选择一个流程执行。",
+            "",
+            "## 本次交付改变了什么",
+        ]
+        categories = contract["change_categories"]
+        assert isinstance(categories, dict)
+        for category_name, raw_items in categories.items():
+            lines.extend(["", f"### {category_name}", ""])
+            assert isinstance(raw_items, list)
+            for item in raw_items:
+                assert isinstance(item, dict)
+                lines.append(f"- {item['name']}：{item['description']}")
+        lines.extend(["", "## 五个核心用户流程"])
+        workflows = contract["workflows"]
+        assert isinstance(workflows, list)
+        for index, workflow in enumerate(workflows, start=1):
+            assert isinstance(workflow, dict)
+            lines.extend(
+                [
+                    "",
+                    f"### {index}. {workflow['name']}",
+                    "",
+                    f"- 入口：{workflow['entry']}",
+                ]
+            )
+            steps = workflow["steps"]
+            assert isinstance(steps, list)
+            lines.extend(f"- 步骤：{step}" for step in steps)
+            lines.extend(
+                [
+                    f"- 结果：{workflow['result']}",
+                    f"- 当前状态：{workflow['current_state']}",
+                    f"- 边界：{workflow['boundary']}",
+                ]
+            )
+        lines.extend(
+            [
+                "",
+                "## 尚未交付",
+                "",
+                "- 后续能力尚未完成。",
+                "",
+                "## 后续路线",
+                "",
+                "- 按 TaskPack 顺序继续。",
+                "",
+                "## 交付规则",
+                "",
+                "- 一次 run 只完成一个 Task。",
+            ]
+        )
+        return "\n".join(lines) + "\n"
+
     def make_database(self, root: Path) -> Path:
         database_dir = root / "OpenAIDatabase"
         human_dir = database_dir / "人类可读"
@@ -37,6 +106,15 @@ class HumanPlaneAuditTests(unittest.TestCase):
         config_dir.mkdir()
         (database_dir / OWNER_ENTRY_CONTRACT).write_text(
             json.dumps(contract, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
+        change_map_contract = json.loads((ROOT / CHANGE_USAGE_MAP_CONTRACT).read_text(encoding="utf-8"))
+        (database_dir / CHANGE_USAGE_MAP_CONTRACT).write_text(
+            json.dumps(change_map_contract, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
+        (human_dir / "版本路线图.md").write_text(
+            self.valid_change_map_text(change_map_contract),
             encoding="utf-8",
         )
         for filename, file_contract in contract["files"].items():
@@ -174,6 +252,40 @@ class HumanPlaneAuditTests(unittest.TestCase):
         self.assertEqual(report["status"], "FAIL")
         self.assertTrue(any("不得放宽 max_bytes_per_file" in error for error in report["errors"]))
 
+    def test_change_usage_map_requires_all_three_change_categories(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            database_dir = self.make_database(Path(temp_dir))
+            target = database_dir / "人类可读" / "版本路线图.md"
+            target.write_text(target.read_text(encoding="utf-8").replace("### 删除或隐藏", "### 其他"), encoding="utf-8")
+            report = audit(database_dir)
+
+        self.assertEqual(report["status"], "FAIL")
+        self.assertTrue(any("缺少变化类别：删除或隐藏" in error for error in report["errors"]))
+
+    def test_change_usage_map_contract_requires_exactly_five_workflows(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            database_dir = self.make_database(Path(temp_dir))
+            contract_path = database_dir / CHANGE_USAGE_MAP_CONTRACT
+            contract = json.loads(contract_path.read_text(encoding="utf-8"))
+            contract["workflows"] = contract["workflows"][:-1]
+            contract_path.write_text(json.dumps(contract, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            report = audit(database_dir)
+
+        self.assertEqual(report["status"], "FAIL")
+        self.assertTrue(any("精确定义五个核心用户流程" in error for error in report["errors"]))
+
+    def test_change_usage_map_contract_cannot_weaken_size_limits(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            database_dir = self.make_database(Path(temp_dir))
+            contract_path = database_dir / CHANGE_USAGE_MAP_CONTRACT
+            contract = json.loads(contract_path.read_text(encoding="utf-8"))
+            contract["max_lines"] = 1600
+            contract_path.write_text(json.dumps(contract, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            report = audit(database_dir)
+
+        self.assertEqual(report["status"], "FAIL")
+        self.assertTrue(any("不得放宽 max_lines" in error for error in report["errors"]))
+
     def test_current_owner_entries_are_renderer_owned_and_concise(self) -> None:
         import lean_governance
         import validate_project_governance
@@ -190,6 +302,9 @@ class HumanPlaneAuditTests(unittest.TestCase):
             with self.subTest(filename=filename):
                 self.assertEqual((ROOT / filename).read_text(encoding="utf-8"), expected)
         self.assertTrue(all(int(item["next_heading_line"]) <= 18 for item in report["owner_entries"]))
+        self.assertEqual(report["change_usage_map"]["workflow_count"], 5)
+        self.assertIn("## 本次交付改变了什么", rendered["人类可读/版本路线图.md"])
+        self.assertIn("## 尚未交付", rendered["人类可读/版本路线图.md"])
 
     def test_non_memory_atlas_project_keeps_generic_renderer(self) -> None:
         import lean_governance
@@ -210,12 +325,15 @@ class HumanPlaneAuditTests(unittest.TestCase):
             "stages": [],
         }
 
-        rendered = lean_governance.render_feature_list(project_facts, roadmap)
+        rendered = lean_governance.rendered_project_texts(project_facts, roadmap, [])
+        feature_list = rendered["功能清单.md"]
 
-        self.assertIn("## 摘要", rendered)
-        self.assertIn("## 功能概览", rendered)
-        self.assertIn("## 证据", rendered)
-        self.assertNotIn("## 当前状态", rendered)
+        self.assertEqual(set(rendered), {"功能清单.md", "开发记录.md", "模型参数文件.md"})
+        self.assertNotIn("人类可读/版本路线图.md", rendered)
+        self.assertIn("## 摘要", feature_list)
+        self.assertIn("## 功能概览", feature_list)
+        self.assertIn("## 证据", feature_list)
+        self.assertNotIn("## 当前状态", feature_list)
 
 
 if __name__ == "__main__":

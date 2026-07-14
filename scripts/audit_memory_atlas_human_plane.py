@@ -41,6 +41,21 @@ OWNER_ENTRY_FORBIDDEN_SECTIONS = {
     "开发记录.md": {"## Roadmap", "## 近期事件"},
     "模型参数文件.md": {"## 公式", "## 参数"},
 }
+CHANGE_USAGE_MAP_CONTRACT = Path("config/memory_atlas_change_usage_map.json")
+CHANGE_USAGE_MAP_SCHEMA = "memory_atlas.change_usage_map.v1_2_1_s05_p1_t3"
+CHANGE_USAGE_MAP_FILE = "版本路线图.md"
+CHANGE_USAGE_MAP_LIMITS = {"max_lines": 160, "max_bytes": 12000}
+CHANGE_CATEGORY_NAMES = ("新增", "修改", "删除或隐藏")
+CORE_WORKFLOW_NAMES = ("建议与行动", "资产与主题", "编辑与提案", "复盘与迭代", "同步与备份")
+CHANGE_USAGE_MAP_REQUIRED_SECTIONS = {
+    "## 结论",
+    "## 操作",
+    "## 本次交付改变了什么",
+    "## 五个核心用户流程",
+    "## 尚未交付",
+    "## 后续路线",
+    "## 交付规则",
+}
 MOJIBAKE_MARKERS = ("\ufffd", "锟斤拷", "烫烫烫", "屯屯屯")
 INLINE_LINK_RE = re.compile(
     r"!?\[[^\]\n]*\]\(\s*(<[^>\n]+>|[^\s)]+)(?:\s+(?:\"[^\"]*\"|'[^']*'|\([^)]*\)))?\s*\)"
@@ -168,6 +183,112 @@ def audit_owner_entries(database_dir: Path) -> tuple[list[dict[str, object]], li
             }
         )
     return reports, errors
+
+
+def audit_change_usage_map(database_dir: Path) -> tuple[dict[str, object], list[str]]:
+    contract_path = database_dir / CHANGE_USAGE_MAP_CONTRACT
+    if not contract_path.is_file():
+        return {}, [f"缺少变化与使用地图合同：{CHANGE_USAGE_MAP_CONTRACT.as_posix()}"]
+    try:
+        contract = json.loads(contract_path.read_text(encoding="utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        return {}, [f"变化与使用地图合同无法解析：{exc}"]
+
+    errors: list[str] = []
+    if contract.get("schema_version") != CHANGE_USAGE_MAP_SCHEMA:
+        errors.append(f"变化与使用地图 schema 不匹配：{contract.get('schema_version')}")
+    if contract.get("task_id") != "S05-P1-T3":
+        errors.append("变化与使用地图必须绑定 S05-P1-T3")
+    if contract.get("acceptance") != "用户能看到本次交付到底改变了什么。":
+        errors.append("变化与使用地图 acceptance 不得弱化")
+    for field, expected in CHANGE_USAGE_MAP_LIMITS.items():
+        if contract.get(field) != expected:
+            errors.append(f"变化与使用地图合同不得放宽 {field}：必须为 {expected}")
+
+    categories = contract.get("change_categories")
+    if not isinstance(categories, dict) or tuple(categories) != CHANGE_CATEGORY_NAMES:
+        errors.append("变化与使用地图必须依次包含新增、修改、删除或隐藏")
+        categories = {}
+    category_counts: dict[str, int] = {}
+    required_content: list[str] = []
+    for category_name in CHANGE_CATEGORY_NAMES:
+        items = categories.get(category_name)
+        valid_items = [item for item in items if isinstance(item, dict)] if isinstance(items, list) else []
+        category_counts[category_name] = len(valid_items)
+        if not valid_items or len(valid_items) != len(items or []):
+            errors.append(f"变化类别缺少有效项目：{category_name}")
+        for item in valid_items:
+            name = str(item.get("name") or "").strip()
+            description = str(item.get("description") or "").strip()
+            task_refs = item.get("task_refs")
+            if not name or not description or not isinstance(task_refs, list) or not task_refs:
+                errors.append(f"变化项目缺少名称、说明或 Task 引用：{category_name}/{name or 'unnamed'}")
+            required_content.extend([name, description])
+
+    workflows = contract.get("workflows")
+    valid_workflows = [item for item in workflows if isinstance(item, dict)] if isinstance(workflows, list) else []
+    workflow_names = tuple(str(item.get("name") or "") for item in valid_workflows)
+    if workflow_names != CORE_WORKFLOW_NAMES:
+        errors.append("变化与使用地图必须精确定义五个核心用户流程")
+    for index, workflow in enumerate(valid_workflows, start=1):
+        if workflow.get("id") != f"FLOW-{index}":
+            errors.append(f"核心流程 ID 顺序错误：FLOW-{index}")
+        steps = workflow.get("steps")
+        if not isinstance(steps, list) or len(steps) < 3 or not all(str(step).strip() for step in steps):
+            errors.append(f"核心流程必须有至少三个步骤：{workflow.get('name')}")
+        for field in ("name", "entry", "result", "current_state", "boundary"):
+            value = str(workflow.get(field) or "").strip()
+            if not value:
+                errors.append(f"核心流程缺少 {field}：{workflow.get('name')}")
+            else:
+                required_content.append(value)
+
+    path = database_dir / "人类可读" / CHANGE_USAGE_MAP_FILE
+    text = ""
+    if not path.is_file():
+        errors.append(f"缺少变化与使用地图：{CHANGE_USAGE_MAP_FILE}")
+    else:
+        try:
+            text = path.read_text(encoding="utf-8")
+        except UnicodeDecodeError as exc:
+            errors.append(f"{CHANGE_USAGE_MAP_FILE} 不是有效 UTF-8：{exc}")
+    lines = text.splitlines()
+    max_lines = int(contract.get("max_lines") or 0)
+    max_bytes = int(contract.get("max_bytes") or 0)
+    if len(lines) > max_lines:
+        errors.append(f"变化与使用地图超过 {max_lines} 行：{len(lines)}")
+    if len(text.encode("utf-8")) > max_bytes:
+        errors.append(f"变化与使用地图超过 {max_bytes} bytes：{len(text.encode('utf-8'))}")
+    if text and not text.startswith("# Memory Atlas v1.2.1 变化与使用地图\n"):
+        errors.append("变化与使用地图缺少精确标题")
+    for section in CHANGE_USAGE_MAP_REQUIRED_SECTIONS:
+        if section not in lines:
+            errors.append(f"变化与使用地图缺少段落：{section}")
+    for category_name in CHANGE_CATEGORY_NAMES:
+        if f"### {category_name}" not in lines:
+            errors.append(f"变化与使用地图缺少变化类别：{category_name}")
+    rendered_workflows = tuple(
+        match.group(2)
+        for line in lines
+        if (match := re.fullmatch(r"### ([1-5])\. (.+)", line))
+    )
+    if rendered_workflows != CORE_WORKFLOW_NAMES:
+        errors.append("变化与使用地图必须按固定顺序直接展示五个核心流程")
+    for value in required_content:
+        if value and value not in text:
+            errors.append(f"变化与使用地图未呈现合同内容：{value[:60]}")
+    for token in ("未推送 GitHub main", "未部署", "尚未完成"):
+        if token not in text:
+            errors.append(f"变化与使用地图缺少未交付边界：{token}")
+
+    return {
+        "file": CHANGE_USAGE_MAP_FILE,
+        "bytes": len(text.encode("utf-8")),
+        "lines": len(lines),
+        "category_counts": category_counts,
+        "workflow_count": len(valid_workflows),
+        "workflow_names": list(workflow_names),
+    }, errors
 
 
 def normalize_reference_label(value: str) -> str:
@@ -302,6 +423,8 @@ def audit(database_dir: Path) -> dict[str, object]:
 
     owner_entry_reports, owner_entry_errors = audit_owner_entries(database_dir)
     errors.extend(owner_entry_errors)
+    change_usage_map_report, change_usage_map_errors = audit_change_usage_map(database_dir)
+    errors.extend(change_usage_map_errors)
 
     return {
         "status": "PASS" if not errors else "FAIL",
@@ -310,6 +433,7 @@ def audit(database_dir: Path) -> dict[str, object]:
         "nested_file_count": len(nested_files),
         "files": file_reports,
         "owner_entries": owner_entry_reports,
+        "change_usage_map": change_usage_map_report,
         "errors": errors,
     }
 

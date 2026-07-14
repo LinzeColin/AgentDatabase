@@ -8,7 +8,7 @@ next_gate_id: "ACC.OpenAIDatabase.PAM1.0019"
 total_estimated_hours: 255
 completed_estimated_hours: 241
 taskpack_progress:
-  completed_tasks: 30
+  completed_tasks: 31
   total_tasks: 149
   delivery_state: "local_only_not_released"
 stages:
@@ -1292,10 +1292,10 @@ stages:
             current_result: "complete_local_only_28_of_149_pending_s05_p1_t1"
   - stage_id: "MA-V121-S05"
     name: "Memory Atlas v1.2.1 简单双平面与全中文使用说明收敛"
-    person_goal: "让 owner 通过不超过七个中文核心入口理解系统、流程、变化、同步和维护；S05-P1-T1/T2 已完成本地收敛，下一 Task 为 S05-P1-T3。"
+    person_goal: "让 owner 通过不超过七个中文核心入口理解系统、流程、变化、同步和维护；S05-P1 已完成本地收敛，下一 Task 为 S05-P2-T1。"
     status: "in_progress"
     estimated_hours: 8
-    estimated_pct: 25
+    estimated_pct: 37.5
     stop_conditions:
       - "一次 run 完成超过一个 Task"
       - "为了全中文而翻译代码标识、API 或数据字段"
@@ -1312,18 +1312,20 @@ stages:
         - "EVID-MA-V121-S05-P1-T1-TEST"
         - "EVID-MA-V121-S05-P1-T2-CONTRACT"
         - "EVID-MA-V121-S05-P1-T2-TEST"
+        - "EVID-MA-V121-S05-P1-T3-MAP"
+        - "EVID-MA-V121-S05-P1-T3-TEST"
     phases:
       - phase_id: "MA-V121-S05-P1"
         name: "人类平面压缩"
         objective: "收敛中文 owner 入口，并提供可在两分钟内理解当前状态与下一步的门面。"
-        status: "in_progress"
+        status: "completed"
         estimated_hours: 3
-        estimated_pct: 66.67
+        estimated_pct: 100
         stop_conditions:
           - "单个 Task 同时重写多个独立 owner 门面"
         stop_gate:
           gate_id: "ACC-MA-V121-S05-P1"
-          status: "in_progress"
+          status: "passed"
           pass_conditions:
             - "快速开始、系统使用、功能工作流、同步备份、模型参数、版本 Roadmap、维护故障七类以内"
           evidence_refs:
@@ -1331,6 +1333,8 @@ stages:
             - "EVID-MA-V121-S05-P1-T1-TEST"
             - "EVID-MA-V121-S05-P1-T2-CONTRACT"
             - "EVID-MA-V121-S05-P1-T2-TEST"
+            - "EVID-MA-V121-S05-P1-T3-MAP"
+            - "EVID-MA-V121-S05-P1-T3-TEST"
         tasks:
           - task_id: "S05-P1-T1"
             name: "收敛七个以内中文核心文件"
@@ -1404,18 +1408,39 @@ stages:
           - task_id: "S05-P1-T3"
             name: "建立 v1.2.1 变化与使用地图"
             objective: "解释新增、修改、删除/隐藏与五个核心用户流程。"
-            status: "planned"
+            status: "completed"
             estimated_hours: 1
-            estimated_pct: 0
+            estimated_pct: 100
             dependencies:
               - "S05-P1-T2"
             acceptance_ids:
               - "ACC-MA-V121-S05-P1-T3"
-            test_commands: []
-            evidence_refs: []
+            acceptance:
+              - acceptance_id: "ACC-MA-V121-S05-P1-T3"
+                description: "版本变化地图直接区分新增、修改、删除或隐藏，提供五条有入口、步骤、结果、当前状态和安全边界的核心用户流程，并明确未发布能力。"
+                evidence_refs:
+                  - "EVID-MA-V121-S05-P1-T3-MAP"
+                  - "EVID-MA-V121-S05-P1-T3-TEST"
+            test_commands:
+              - "python3 -B scripts/audit_memory_atlas_human_plane.py"
+              - "python3 -B -m unittest tests.test_memory_atlas_human_plane tests.test_atlasctl_script_consolidation tests.test_memory_atlas_validator_profiles tests.test_memory_atlas_test_value_audit -q"
+              - "python3 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+              - "python3.12 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+              - "npm run validate:fast --prefix apps/memory-atlas"
+              - "PYTHONPATH=.. python3 -B -m unittest discover -s tests -q"
+              - "npm run build --prefix apps/memory-atlas"
+            test_results:
+              - "变化地图 121 行/7461 bytes，新增/修改/删除或隐藏分别为 4/3/3 项，五个核心流程精确为 5，七文件浅层人类平面和乱码/断链/越界检查 0 error"
+              - "15 项地图与 owner 回归、50 项 focused tests、fast 4/4、完整 Python 310/310、frontend build、Python 3.13/3.12 check-render 0 drift/0 reference issue PASS"
+              - "地图明确 v1.2.1 未推送、未重装、未部署，并把 S11-S16 后续能力标记为尚未完成；本 Task 未修改产品 runtime、模型、公式、业务参数、raw 或 derived 数据"
+              - "两份独立只读复审完成：产品复审修复 P2 planned/in-progress 语义冲突，工程复审补齐 dispatcher 级非 Memory Atlas 回归并验证精确暂存；最终均为 0 Critical / 0 Important"
+            evidence_refs:
+              - "EVID-MA-V121-S05-P1-T3-MAP"
+              - "EVID-MA-V121-S05-P1-T3-TEST"
             risks:
               - "只写发布口号而没有可执行入口"
             rollback: "git revert 本 Task 本地 commit。"
+            current_result: "complete_local_only_31_of_149_pending_s05_p2_t1"
       - phase_id: "MA-V121-S05-P2"
         name: "机器平面唯一真相"
         objective: "以浅层索引引用当前 requirements、source、model、acceptance 与 evidence，不复制执行真相。"

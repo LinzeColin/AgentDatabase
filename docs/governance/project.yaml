@@ -542,6 +542,26 @@ features:
     evidence_refs:
       - "EVID-MA-V121-S05-P1-T2-CONTRACT"
       - "EVID-MA-V121-S05-P1-T2-TEST"
+  - feature_id: "FEAT-MA-V121-S05-P1-T3"
+    name: "Memory Atlas v1.2.1 变化与五流程使用地图"
+    description: "v1.2.1 Task Pack 当前完成 31/149；版本路线图由结构化合同确定性生成，直接区分 4 项新增、3 项修改、3 项删除或隐藏，并提供建议与行动、资产与主题、编辑与提案、复盘与迭代、同步与备份五条可执行流程。"
+    status: "active"
+    fact_level: "EXTRACTED"
+    code_refs:
+      - "scripts/lean_governance.py"
+      - "OpenAIDatabase/scripts/audit_memory_atlas_human_plane.py"
+    config_refs:
+      - "OpenAIDatabase/config/memory_atlas_change_usage_map.json"
+    source_refs:
+      - "OpenAIDatabase/人类可读/版本路线图.md"
+    owner_actions:
+      - "先确认本地已完成变化，再选择五个核心流程之一；标记为尚未完成的能力不得作为当前 v1.2.1 交付结果。"
+    test_refs:
+      - "python3 -B -m unittest tests.test_memory_atlas_human_plane -q"
+      - "python3.12 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+    evidence_refs:
+      - "EVID-MA-V121-S05-P1-T3-MAP"
+      - "EVID-MA-V121-S05-P1-T3-TEST"
 models:
   -
     model_id: "MOD-001"
@@ -4615,6 +4635,16 @@ evidence_refs:
     fact_level: "EXTRACTED"
   -
     evidence_id: "EVID-MA-V121-S05-P1-T2-TEST"
+    kind: "test"
+    ref: "python3 -B -m unittest tests.test_memory_atlas_human_plane -q"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S05-P1-T3-MAP"
+    kind: "config"
+    ref: "OpenAIDatabase/config/memory_atlas_change_usage_map.json"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S05-P1-T3-TEST"
     kind: "test"
     ref: "python3 -B -m unittest tests.test_memory_atlas_human_plane -q"
     fact_level: "EXTRACTED"
