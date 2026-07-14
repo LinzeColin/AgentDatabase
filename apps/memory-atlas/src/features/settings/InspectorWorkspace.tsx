@@ -2,6 +2,7 @@ import { Search } from "lucide-react";
 import type { ReactNode } from "react";
 import { useEffect, useMemo, useState } from "react";
 import { getMemoryNodes, normalizeMemoryTier } from "../../data/atlas";
+import { zhCNEnumLabel } from "../../i18n/zh-CN";
 import type { AtlasNode, MemoryAtlas } from "../../types";
 import { type SharedAtlasState } from "../../state/sharedAtlasState";
 import { INSPECTOR_EXPLANATION_LAYER_VERSION, uiCopy } from "../../shared/atlas/constants";
@@ -146,10 +147,10 @@ export function NodeInspector({
             <div><dt>类型</dt><dd>{translateKind(node.kind)}</dd></div>
             <div><dt>连接数</dt><dd>{edgeCount.toLocaleString()}</dd></div>
             <div><dt>日期</dt><dd>{node.date || "未知"}</dd></div>
-            <div><dt>分类</dt><dd>{node.category || "未知"}</dd></div>
-            <div><dt>重要性</dt><dd>{node.importance || "未知"}</dd></div>
+            <div><dt>分类</dt><dd>{humanCategoryLabel(node.category)}</dd></div>
+            <div><dt>重要性</dt><dd>{zhCNEnumLabel("importance", node.importance)}</dd></div>
             <div><dt>有效期</dt><dd>{node.validity || "未知"}</dd></div>
-            <div><dt>置信度</dt><dd>{node.confidence || "未知"}</dd></div>
+            <div><dt>置信度</dt><dd>{zhCNEnumLabel("confidence", node.confidence)}</dd></div>
             <div><dt>ROI</dt><dd>{formatScore(node.metrics?.roi?.leverage_score)}</dd></div>
           </dl>
         </section>

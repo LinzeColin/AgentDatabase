@@ -1688,7 +1688,7 @@
       {
         "path": "scripts/audit_memory_atlas_test_value.py",
         "baseline": false,
-        "sha256": "b0f579fb9f1e1390bcd8056322a5d37616078566696458d00389ef522347b57f",
+        "sha256": "18c6cebbabfebc1f5f258c0254d86e0289462a76c7c139cd32bc027ec904c1e5",
         "matched_families": [
           "audit"
         ],
@@ -1697,7 +1697,7 @@
       {
         "path": "scripts/audit_memory_atlas_visual_acceptance.py",
         "baseline": true,
-        "sha256": "0057a9fab8fd55f3d4e06000ea3b5a9eedeb3d70ca49e971a51d9136c5b2a9e0",
+        "sha256": "1420798e91a72eada45ad78f38a341c5eb21de14f5651145fe4f6aa41b55c5b1",
         "matched_families": [
           "audit"
         ],

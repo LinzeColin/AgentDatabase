@@ -6,6 +6,7 @@ import { MemoryAtlasHelpPanel } from "../components/help/MemoryAtlasHelpPanel";
 import { ProposalWorkspace, WritebackProposalPanel } from "../features/actions";
 import { ContributionPeriodInspector, InteractionLens, NodeInspector } from "../features/settings";
 import { CommandPalettePanel, OwnerDailyEntry, OwnerDailyWorkspace } from "../features/sync";
+import { ZH_CN_COPY_SOURCE_VERSION, zhCNEnumLabel } from "../i18n/zh-CN";
 import { useAtlasData } from "../providers/AtlasDataProvider";
 import { useAtlasRuntime } from "../providers/AtlasRuntimeProvider";
 import { useAtlasWorkspace } from "../providers/AtlasWorkspaceProvider";
@@ -82,7 +83,7 @@ export function MemoryAtlasShell({ children }: PropsWithChildren) {
     ? new Date(atlas.overview.generated_at).toLocaleString("zh-CN")
     : uiCopy.states.notLoaded;
   const loadedAt = runtimeState.snapshotLoadedAt ? runtimeState.snapshotLoadedAt.toLocaleString("zh-CN") : uiCopy.states.loading;
-  const runtimeStatus = `${runtimeState.lifecycle} / ${runtimeState.serverMode}`;
+  const runtimeStatus = `${zhCNEnumLabel("runtimeLifecycle", runtimeState.lifecycle)} / ${zhCNEnumLabel("serverMode", runtimeState.serverMode)}`;
   const selectedTitle = views.find((view) => view.key === activeView)?.label ?? uiCopy.app.fallbackTitle;
   const wideView = visualFocusViews.includes(activeView);
   const workspaceClassName = wideView ? `workspace visual-focus-workspace ${activeView}-workspace` : "workspace";
@@ -146,6 +147,7 @@ export function MemoryAtlasShell({ children }: PropsWithChildren) {
       className="app-shell"
       data-default-route-view={DEFAULT_MEMORY_ATLAS_VIEW}
       data-memory-overview-default-route="true"
+      data-s05-p3-t1-zh-cn-copy={ZH_CN_COPY_SOURCE_VERSION}
       data-r2-release-identity={PRODUCT_IDENTITY_VERSION}
       data-s10-p2-global-chinese-ux={GLOBAL_CHINESE_UX_VERSION}
       data-s10-p3-machine-detail-folding={MACHINE_DETAIL_FOLDING_VERSION}

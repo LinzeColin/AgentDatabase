@@ -1,4 +1,6 @@
-import type { ChineseUiCopy } from "./types";
+import type { ChineseUiCopy, UiEnumGroup, UiFieldKey } from "./types";
+
+export const ZH_CN_COPY_SOURCE_VERSION = "memory_atlas.zh_cn_copy.v1_2_1_s05_p3_t1" as const;
 
 export const zhCNCopy: ChineseUiCopy = {
   app: {
@@ -54,17 +56,19 @@ export const zhCNCopy: ChineseUiCopy = {
     noFilteredResultsDescription: "筛选条件把当前数据切片清空了。可以重置筛选，或减少主题、层级、分类、搜索词限制后再查看。",
     noFilteredResultsAction: "重置筛选",
     webglUnavailableTitle: "WebGL 不可用",
-    webglUnavailableDescription: "浏览器或显卡环境无法启动 Three.js 渲染器。系统已降级到静态星云说明层，仍可通过 Legacy 图谱、搜索和 Inspector 继续查看证据。",
-    webglUnavailableAction: "切换 Legacy 或继续用搜索复盘",
-    proposalUnavailableTitle: "当前不能写入 proposal",
-    proposalUnavailableDescription: "写回策略没有同时允许 proposal-only、禁止前端直写和受控代理应用，所以表单保持只读，避免误改长期记忆。",
-    proposalUnavailableAction: "先检查 source_contract.writeback_policy",
+    webglUnavailableDescription: "浏览器或显卡环境无法启动图形渲染器。系统已降级到静态星云说明层，仍可通过旧版关系图、搜索和证据检查器继续查看证据。",
+    webglUnavailableAction: "切换旧版关系图或继续用搜索复盘",
+    proposalUnavailableTitle: "当前不能生成提案",
+    proposalUnavailableDescription: "写回策略没有同时允许“只生成提案”、禁止前端直写和受控代理应用，所以表单保持只读，避免误改长期记忆。",
+    proposalUnavailableAction: "检查写回策略是否允许只生成提案、禁止前端直写并要求受控应用",
   },
   help: {
+    eyebrow: "Memory Atlas 使用说明",
     buttonLabel: "使用说明",
     panelTitle: "3 分钟使用路径",
-    panelSubtitle: "按状态、建议、证据、proposal 和复盘顺序使用 Memory Atlas。",
+    panelSubtitle: "按状态、建议、证据、提案和复盘顺序使用 Memory Atlas。",
     closeLabel: "关闭使用说明",
+    durationLabel: "约 3 分钟",
     threeMinuteTitle: "从打开系统到下一步行动",
     threeMinutePath: [
       {
@@ -77,14 +81,14 @@ export const zhCNCopy: ChineseUiCopy = {
       {
         minute: "1-2 分钟",
         title: "看建议和证据",
-        description: "点开建议动作或星体，同步 Inspector，确认原因、层级、主题、时间和关联证据。",
+        description: "点开建议动作或星体，同步证据检查器，确认原因、层级、主题、时间和关联证据。",
         actionLabel: "进入银河星云",
         view: "galaxy",
       },
       {
         minute: "2-3 分钟",
-        title: "调整 proposal 并复盘",
-        description: "如果重要性、优先级或结论不准，只生成 proposal JSON，再到搜索与复盘确认下一步。",
+        title: "调整提案并复盘",
+        description: "如果重要性、优先级或结论不准，只生成提案 JSON，再到搜索与复盘确认下一步。",
         actionLabel: "进入搜索与复盘",
         view: "search",
       },
@@ -92,19 +96,19 @@ export const zhCNCopy: ChineseUiCopy = {
     modeTitle: "两种读法",
     modes: {
       presentation: {
-        label: "Presentation",
+        label: "概览模式",
         description: "用于快速看全局趋势、主要机会和风险，减少调试信息，适合先判断方向。",
       },
       analysis: {
-        label: "Analysis",
-        description: "用于展开公式、证据、邻域、性能和 Inspector 上下文，适合核对为什么会这样。",
+        label: "分析模式",
+        description: "用于展开公式、证据、邻域、性能和检查器上下文，适合核对为什么会这样。",
       },
     },
     workflowTitle: "关键工作流",
     workflowNotes: [
       {
-        title: "Inspector",
-        description: "所有星体、时间事件、搜索结果都应同步到 Inspector，看含义、影响、未来用途和证据。",
+        title: "证据检查器",
+        description: "所有星体、时间事件、搜索结果都应同步到检查器，看含义、影响、未来用途和证据。",
       },
       {
         title: "仅生成提案",
@@ -115,7 +119,40 @@ export const zhCNCopy: ChineseUiCopy = {
         description: "当星系或时间河看不清时，用搜索缩小主题，再回到复盘总结下一步动作。",
       },
     ],
-    footerNote: "如果页面为空、筛选无结果、WebGL 不可用或 proposal 不可写，系统会直接说明原因和下一步。",
+    glossaryTitle: "界面术语说明",
+    glossary: [
+      {
+        term: "Agent",
+        label: "受控代理",
+        description: "按明确权限执行读取、分析或应用提案的自动化助手；界面不会默认授权其写入。",
+      },
+      {
+        term: "API",
+        label: "程序接口",
+        description: "本地应用与受控服务之间的调用边界；静态托管页面不提供写入接口。",
+      },
+      {
+        term: "JSON",
+        label: "结构化数据文件",
+        description: "提案和导出使用的机器可读格式；字段名保持英文以维持兼容。",
+      },
+      {
+        term: "WebGL",
+        label: "浏览器图形能力",
+        description: "用于绘制交互星图；不可用时系统会切换到可继续阅读的降级界面。",
+      },
+      {
+        term: "ROI",
+        label: "投入回报",
+        description: "用于比较时间、精力与预期价值的辅助信号，不替代人工判断。",
+      },
+      {
+        term: "schema",
+        label: "数据结构版本",
+        description: "约束字段和格式的机器合同；仅在高级详情中用于兼容性核验。",
+      },
+    ],
+    footerNote: "如果页面为空、筛选无结果、图形能力不可用或提案不可写，系统会直接说明原因和下一步。",
   },
   overview: {
     eyebrow: "变化结论 / 证据 / 下一步",
@@ -160,7 +197,7 @@ export const zhCNCopy: ChineseUiCopy = {
     relatedTopicsTitle: "相关主题",
     debugShow: "显示高级详情",
     debugHide: "隐藏高级详情",
-    debugTitle: "高级详情 / Agent Inspector",
+    debugTitle: "高级详情 / 代理检查器",
     debugDefaultHidden: "默认折叠，仅用于核验字段",
     lowSensitivitySummary: "低敏数据库摘要",
     explanationTitle: "解释面板",
@@ -197,5 +234,120 @@ export const zhCNCopy: ChineseUiCopy = {
     },
     emptyVersion: "尚无本地提案版本",
     latestVersionPrefix: "最新版本",
+    editorAria: "本地提案编辑器",
+    editorTitle: "本地提案编辑",
+    editorScope: "仅调整本地草稿",
+    notePlaceholder: "说明为什么要调整；不要粘贴原始私密内容。",
+    savedAtPrefix: "保存时间",
+    localOnlyNote: "仅保存到本地草稿；不会直接写入长期记忆。",
+    saveDraft: "保存本地草稿",
+    exportJson: "导出提案 JSON",
+    resetDraft: "撤销本地调整",
+    diffPreviewAria: "提案差异预览",
+    diffPreviewTitle: "提案差异预览",
+    diffChangeUnit: "项变更",
+    diffEmpty: "当前没有本地调整；选择重要性或优先级后会显示原值、新值和影响说明。",
+    rollbackSummaryPrefix: "回滚信息",
+    safetyConflictCheck: "应用前需要冲突检查",
+    safetyHumanApply: "需要受控代理或人工应用",
+    safetyNoMutation: "不会直接修改长期记忆",
+  },
+  fields: {
+    importance: "重要性",
+    priority: "优先级",
+    note: "说明",
+    status: "状态",
+    theme_override: "主题调整",
+    action_state: "行动状态",
+    original_value: "原值",
+    proposed_value: "建议值",
+    impact_summary: "影响说明",
+    rollback_metadata: "回滚信息",
+    saved_at: "保存时间",
+  },
+  enums: {
+    unknownValue: "未识别值，请在高级详情中核对",
+    emptyValue: "未填写",
+    importance: {
+      high: "高",
+      medium: "中",
+      low: "低",
+      高: "高",
+      中: "中",
+      低: "低",
+    },
+    priority: {
+      p0: "立即判断",
+      p1: "优先处理",
+      p2: "随后处理",
+      p3: "持续观察",
+      watch: "观察名单",
+    },
+    status: {
+      draft_local: "本地草稿",
+      draft_pending_agent_apply: "等待受控代理应用",
+      proposal_only_pending_agent_apply: "仅提案，等待受控代理应用",
+      proposed: "待判断",
+      review: "待复核",
+      needs_review: "需要复核",
+      ready_for_agent_apply: "可交受控代理应用",
+      reverted: "已回滚",
+      blocked: "受阻",
+      done_safe: "已安全完成",
+    },
+    rollbackUnit: {
+      per_memory_version: "按单条记忆版本回滚",
+    },
+    proposalLineage: {
+      parent: "基于已有提案",
+      root: "初始提案",
+    },
+    runtimeLifecycle: {
+      loading: "载入中",
+      ready: "已同步",
+      error: "读取失败",
+      载入中: "载入中",
+      已同步: "已同步",
+      读取失败: "读取失败",
+    },
+    serverMode: {
+      detecting: "检测中",
+      local: "本地受控运行",
+      static: "静态托管",
+      检测中: "检测中",
+      本地自释放: "本地受控运行",
+      静态托管: "静态托管",
+    },
+    confidence: {
+      high: "高",
+      medium: "中",
+      low: "低",
+      高: "高",
+      中: "中",
+      低: "低",
+    },
+    boolean: {
+      true: "是",
+      false: "否",
+    },
   },
 };
+
+export function zhCNFieldLabel(field: UiFieldKey): string {
+  return zhCNCopy.fields[field];
+}
+
+export function zhCNEnumLabel(group: UiEnumGroup, value: string | null | undefined): string {
+  const normalized = value?.trim();
+  if (!normalized) return zhCNCopy.enums.emptyValue;
+  return zhCNCopy.enums[group][normalized] ?? zhCNCopy.enums.unknownValue;
+}
+
+export function zhCNProposalValue(field: UiFieldKey, value: string | null | undefined): string {
+  if (!value?.trim()) return zhCNCopy.enums.emptyValue;
+  if (field === "importance" || field === "priority" || field === "status" || field === "action_state") {
+    const group: UiEnumGroup = field === "action_state" ? "status" : field;
+    return zhCNEnumLabel(group, value);
+  }
+  return value;
+}

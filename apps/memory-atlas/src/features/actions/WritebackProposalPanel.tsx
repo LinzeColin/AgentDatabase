@@ -1,5 +1,6 @@
 import { Download, GitBranch, RotateCcw, Save } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
+import { zhCNEnumLabel } from "../../i18n/zh-CN";
 import { normalizeMemoryTier } from "../../data/atlas";
 import type { AtlasNode, MemoryAtlas } from "../../types";
 import { ErrorState } from "../../components/ErrorState";
@@ -196,7 +197,7 @@ export function WritebackProposalPanel({ atlas, node }: { atlas: MemoryAtlas; no
       <div className="writeback-diff-grid" aria-label="当前草稿差异">
         <div><span>{uiCopy.proposal.diffLength}</span><strong>{draftDiff.length_delta > 0 ? "+" : ""}{draftDiff.length_delta}</strong></div>
         <div><span>{uiCopy.proposal.diffSegments}</span><strong>{draftDiff.changed_segments}</strong></div>
-        <div><span>{uiCopy.proposal.rollbackUnit}</span><strong>{policy.rollback_unit || "per_memory_version"}</strong></div>
+        <div><span>{uiCopy.proposal.rollbackUnit}</span><strong>{zhCNEnumLabel("rollbackUnit", policy.rollback_unit || "per_memory_version")}</strong></div>
       </div>
       <label>
         {uiCopy.proposal.actionLabel}
@@ -264,7 +265,11 @@ export function WritebackProposalPanel({ atlas, node }: { atlas: MemoryAtlas; no
             }} type="button">
               <strong>v{proposal.version.revision} · {writebackActionLabels[proposal.action]}</strong>
               <span>{proposal.diff?.summary ?? "旧版本无差异摘要"} · {new Date(proposal.created_at).toLocaleString("zh-CN")}</span>
-              <small>{proposal.version.parent_proposal_id ? `parent ${proposal.version.parent_proposal_id}` : "root proposal"}</small>
+              <small>
+                {proposal.version.parent_proposal_id
+                  ? `${zhCNEnumLabel("proposalLineage", "parent")} ${proposal.version.parent_proposal_id}`
+                  : zhCNEnumLabel("proposalLineage", "root")}
+              </small>
             </button>
           ))}
         </div>

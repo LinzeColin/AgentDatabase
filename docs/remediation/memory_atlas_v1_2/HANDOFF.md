@@ -2,7 +2,7 @@
 
 > **Current v1.2.1 note (2026-07-14):** This file preserves the earlier v1.2 R7
 > handoff below. Memory Atlas is executing the v1.2.1 Task Pack with one Task per run.
-> S04, S05-P1 and S05-P2 are complete locally. S05-P1 compressed the human
+> S04, S05-P1, S05-P2 and S05-P3-T1 are complete locally. S05-P1 compressed the human
 > plane to seven shallow Chinese files, compressed the three root owner entries, and
 > added the deterministic v1.2.1 change/five-workflow map. `S05-P2-T1` added
 > `config/memory_atlas_machine_truth_index.json` and deterministically renders
@@ -17,13 +17,20 @@
 > migrated the same three stale references in the tracked derived collaboration report
 > without changing scores or business values, and permanently verifies all eight Git
 > restore paths from commit `187577cc9`.
-> The shared fail-closed audit/tests remain
+> `S05-P3-T1` keeps `apps/memory-atlas/src/i18n/zh-CN.ts` as the only typed
+> human-interface copy source. Version
+> `memory_atlas.zh_cn_copy.v1_2_1_s05_p3_t1` provides six visible glossary
+> explanations, 11 field labels, nine enum groups and a Chinese unknown-value
+> fallback. Help, runtime status, Inspector and proposal surfaces consume the same
+> source; code/API/schema/data attributes, persistence fields and exported payload
+> keys remain English and unchanged. The shared fail-closed audit/tests remain
 > `scripts/audit_memory_atlas_human_plane.py` and
-> `tests/test_memory_atlas_human_plane.py`; 24 permanent regressions, 61 focused tests,
-> 319 full Python tests, fast 4/4, frontend build and dual-runtime deterministic render
+> `tests/test_memory_atlas_human_plane.py`; the new copy-source suite has 6 tests,
+> while 65 focused tests, 325 full Python tests, fast 4/4, ui 12/12, frontend
+> lint/build, dual-runtime deterministic render and desktop/mobile Help browser checks
 > passed. Historical reviews, source packages, active
 > machine configs, release evidence and recovery evidence remain unchanged. The next
-> Task is only `S05-P3-T1`; no P3 work has started.
+> Task is only `S05-P3-T2`; no T2 or T3 work has started.
 >
 > The only public validator profiles are `validate:fast`, `validate:sync`,
 > `validate:ui`, and `validate:release`. Commands in the older "Verified Commands"

@@ -17,7 +17,7 @@ export function MemoryAtlasHelpPanel({ copy, open, onClose, onSelectView }: Memo
       <aside className="help-panel" aria-label={copy.panelTitle} data-three-minute-path="true">
         <div className="help-panel-heading">
           <div>
-            <p className="eyebrow">Memory Atlas Help</p>
+            <p className="eyebrow">{copy.eyebrow}</p>
             <h2>{copy.panelTitle}</h2>
             <span>{copy.panelSubtitle}</span>
           </div>
@@ -29,7 +29,7 @@ export function MemoryAtlasHelpPanel({ copy, open, onClose, onSelectView }: Memo
         <section className="help-path-section" aria-label={copy.threeMinuteTitle}>
           <div className="panel-title-row">
             <h3>{copy.threeMinuteTitle}</h3>
-            <span>3 min</span>
+            <span>{copy.durationLabel}</span>
           </div>
           <ol className="help-path-list">
             {copy.threeMinutePath.map((step) => (
@@ -76,6 +76,20 @@ export function MemoryAtlasHelpPanel({ copy, open, onClose, onSelectView }: Memo
               </article>
             ))}
           </div>
+        </section>
+
+        <section className="help-glossary-section" aria-label={copy.glossaryTitle}>
+          <div className="panel-title-row">
+            <h3>{copy.glossaryTitle}</h3>
+          </div>
+          <dl className="help-glossary-list">
+            {copy.glossary.map((entry) => (
+              <div key={entry.term}>
+                <dt>{entry.label}<span>{entry.term}</span></dt>
+                <dd>{entry.description}</dd>
+              </div>
+            ))}
+          </dl>
         </section>
 
         <p className="help-footer-note">{copy.footerNote}</p>

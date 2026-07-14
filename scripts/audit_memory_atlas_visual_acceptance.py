@@ -735,17 +735,11 @@ def audit_visual_acceptance(repo_root: Path) -> dict[str, Any]:
         and "这条记忆说明了什么" in ui_source
         and "为什么重要" in app_source
         and "未来应该怎么用" in ui_source
-        and (
-            "Agent 结构化字段 / 原始摘要" in ui_source
-            or "Debug / Agent Inspector" in ui_source
-            or (
-                "高级详情 / Agent Inspector" in ui_source
-                and "显示高级详情" in ui_source
-                and "默认折叠，仅用于核验字段" in ui_source
-                and 'data-s10-p3-machine-fields="collapsed-by-default"' in app_source
-                and 'data-s10-p3-advanced-details-entry="inspector"' in app_source
-            )
-        )
+        and "高级详情 / 代理检查器" in ui_source
+        and "显示高级详情" in ui_source
+        and "默认折叠，仅用于核验字段" in ui_source
+        and 'data-s10-p3-machine-fields="collapsed-by-default"' in app_source
+        and 'data-s10-p3-advanced-details-entry="inspector"' in app_source
         and "Memory / Personalization" in app_source
         and "Agents.md / 执行规则" in app_source
         and "降权/不再默认使用" in app_source

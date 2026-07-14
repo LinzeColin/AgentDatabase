@@ -1,5 +1,6 @@
 import { Download, RotateCcw, Save } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
+import { zhCNCopy as uiCopy, zhCNFieldLabel, zhCNProposalValue } from "../i18n/zh-CN";
 import type { AtlasNode } from "../types";
 import {
   PROPOSAL_DRAFT_SCHEMA_VERSION,
@@ -156,23 +157,24 @@ export function ProposalEditor({ node, parentSnapshotId, sourceSurface }: Propos
 
   return (
     <section
-      aria-label="Proposal UI"
+      aria-label={uiCopy.proposal.editorAria}
       className="proposal-editor"
       data-active-memory-mutation="false"
       data-proposal-editor={draftId}
       data-proposal-only="true"
+      data-proposal-schema={PROPOSAL_DRAFT_SCHEMA_VERSION}
       data-proposal-store-key={PROPOSAL_DRAFT_STORE_KEY}
     >
       <div className="panel-title-row">
-        <h4>Proposal UI</h4>
-        <span>{PROPOSAL_DRAFT_SCHEMA_VERSION}</span>
+        <h4>{uiCopy.proposal.editorTitle}</h4>
+        <span>{uiCopy.proposal.editorScope}</span>
       </div>
 
       {warning ? <p className="proposal-editor-warning">{warning}</p> : null}
 
       <div className="proposal-editor-grid">
         <FieldRange
-          ariaLabel="调整 importance"
+          ariaLabel={`调整${zhCNFieldLabel("importance")}`}
           field="importance"
           originalValue={baseImportance}
           proposedValue={proposedImportance}
@@ -181,7 +183,7 @@ export function ProposalEditor({ node, parentSnapshotId, sourceSurface }: Propos
           onChange={setImportanceIndex}
         />
         <FieldRange
-          ariaLabel="调整 priority"
+          ariaLabel={`调整${zhCNFieldLabel("priority")}`}
           field="priority"
           originalValue={basePriority}
           proposedValue={proposedPriority}
@@ -192,11 +194,11 @@ export function ProposalEditor({ node, parentSnapshotId, sourceSurface }: Propos
       </div>
 
       <label className="proposal-field-control">
-        <span>note</span>
+        <span>{zhCNFieldLabel("note")}</span>
         <textarea
-          aria-label="proposal note"
+          aria-label={zhCNFieldLabel("note")}
           onChange={(event) => setNote(event.target.value)}
-          placeholder="说明为什么要调整；不要粘贴 raw/private 内容。"
+          placeholder={uiCopy.proposal.notePlaceholder}
           rows={3}
           value={note}
         />
@@ -207,20 +209,22 @@ export function ProposalEditor({ node, parentSnapshotId, sourceSurface }: Propos
       <div className="proposal-editor-actions">
         <button disabled={!unsavedChanges.length} onClick={persistDraft} type="button">
           <Save size={15} />
-          保存本地 draft
+          {uiCopy.proposal.saveDraft}
         </button>
         <button disabled={!unsavedChanges.length} onClick={downloadProposalJson} type="button">
           <Download size={15} />
-          导出 proposal JSON
+          {uiCopy.proposal.exportJson}
         </button>
         <button disabled={!unsavedChanges.length && !drafts.some((item) => item.draft_id === draftId)} onClick={resetLocalChanges} type="button">
           <RotateCcw size={15} />
-          撤销本地调整
+          {uiCopy.proposal.resetDraft}
         </button>
       </div>
 
       <small>
-        {savedAt ? `saved_at ${new Date(savedAt).toLocaleString("zh-CN")}` : "仅保存到本地 draft store；不会直接写长期记忆。"}
+        {savedAt
+          ? `${uiCopy.proposal.savedAtPrefix} ${new Date(savedAt).toLocaleString("zh-CN")}`
+          : uiCopy.proposal.localOnlyNote}
       </small>
     </section>
   );
@@ -245,10 +249,10 @@ function FieldRange({
 }) {
   return (
     <label className="proposal-field-control">
-      <span>{field}</span>
+      <span>{zhCNFieldLabel(field)}</span>
       <div className="proposal-range-row">
-        <strong>original_value: {originalValue}</strong>
-        <strong>proposed_value: {proposedValue}</strong>
+        <strong>{zhCNFieldLabel("original_value")}：{zhCNProposalValue(field, originalValue)}</strong>
+        <strong>{zhCNFieldLabel("proposed_value")}：{zhCNProposalValue(field, proposedValue)}</strong>
       </div>
       <input
         aria-label={ariaLabel}
@@ -278,7 +282,7 @@ function buildDraftChanges(input: {
     changes.push(buildChange("priority", input.basePriority, input.proposedPriority, "调整优先级会影响建议动作排队和本轮复盘顺序。", now));
   }
   if (input.note.trim()) {
-    changes.push(buildChange("note", "", input.note.trim(), "note 只保存人类解释，不改变 active memory。", now));
+    changes.push(buildChange("note", "", input.note.trim(), "说明只保存人类解释，不改变长期记忆。", now));
   }
   return changes;
 }

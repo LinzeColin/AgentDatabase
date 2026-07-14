@@ -604,6 +604,27 @@ features:
     evidence_refs:
       - "EVID-MA-V121-S05-P2-T2-CLEANUP"
       - "EVID-MA-V121-S05-P2-T2-TEST"
+  - feature_id: "FEAT-MA-V121-S05-P3-T1"
+    name: "Memory Atlas 类型化 zh-CN 术语与文案源"
+    description: "v1.2.1 Task Pack 当前完成 34/149；以现有 zh-CN.ts 为唯一人类界面文案源，提供 6 个可见技术术语解释、11 个字段标签、9 组枚举映射和未知值中文回退，并由 Help、Shell、Inspector 与提案工作流复用。"
+    status: "active"
+    fact_level: "EXTRACTED"
+    code_refs:
+      - "OpenAIDatabase/apps/memory-atlas/src/i18n/zh-CN.ts"
+      - "OpenAIDatabase/apps/memory-atlas/src/i18n/types.ts"
+      - "OpenAIDatabase/apps/memory-atlas/src/components/help/MemoryAtlasHelpPanel.tsx"
+      - "OpenAIDatabase/apps/memory-atlas/src/components/ProposalEditor.tsx"
+      - "OpenAIDatabase/apps/memory-atlas/src/components/ProposalDiffPreview.tsx"
+      - "OpenAIDatabase/apps/memory-atlas/src/app/MemoryAtlasShell.tsx"
+    owner_actions:
+      - "从使用说明查看术语中文名称和解释；人类界面使用中文标签，英文代码/API/schema/export 字段继续作为机器兼容合同。"
+    test_refs:
+      - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_zh_cn_copy_source -q"
+      - "npm run validate:fast --prefix OpenAIDatabase/apps/memory-atlas"
+      - "npm run validate:ui --prefix OpenAIDatabase/apps/memory-atlas"
+    evidence_refs:
+      - "EVID-MA-V121-S05-P3-T1-COPY"
+      - "EVID-MA-V121-S05-P3-T1-TEST"
 models:
   -
     model_id: "MOD-001"
@@ -4709,4 +4730,14 @@ evidence_refs:
     evidence_id: "EVID-MA-V121-S05-P2-T2-TEST"
     kind: "test"
     ref: "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_human_plane -q"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S05-P3-T1-COPY"
+    kind: "config"
+    ref: "OpenAIDatabase/apps/memory-atlas/src/i18n/zh-CN.ts"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S05-P3-T1-TEST"
+    kind: "test"
+    ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s05_p3_t1_zh_cn_copy_source_review.md"
     fact_level: "EXTRACTED"

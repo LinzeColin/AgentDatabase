@@ -8,7 +8,7 @@ next_gate_id: "ACC.OpenAIDatabase.PAM1.0019"
 total_estimated_hours: 255
 completed_estimated_hours: 241
 taskpack_progress:
-  completed_tasks: 33
+  completed_tasks: 34
   total_tasks: 149
   delivery_state: "local_only_not_released"
 stages:
@@ -1292,10 +1292,10 @@ stages:
             current_result: "complete_local_only_28_of_149_pending_s05_p1_t1"
   - stage_id: "MA-V121-S05"
     name: "Memory Atlas v1.2.1 简单双平面与全中文使用说明收敛"
-    person_goal: "让 owner 通过不超过七个中文核心入口理解系统、流程、变化、同步和维护；S05-P1 与 S05-P2 已完成本地收敛，下一 Task 为 S05-P3-T1。"
+    person_goal: "让 owner 通过不超过七个中文核心入口理解系统、流程、变化、同步和维护；S05-P1、S05-P2 与 S05-P3-T1 已完成本地收敛，下一 Task 为 S05-P3-T2。"
     status: "in_progress"
     estimated_hours: 8
-    estimated_pct: 62.5
+    estimated_pct: 75
     stop_conditions:
       - "一次 run 完成超过一个 Task"
       - "为了全中文而翻译代码标识、API 或数据字段"
@@ -1318,6 +1318,8 @@ stages:
         - "EVID-MA-V121-S05-P2-T1-TEST"
         - "EVID-MA-V121-S05-P2-T2-CLEANUP"
         - "EVID-MA-V121-S05-P2-T2-TEST"
+        - "EVID-MA-V121-S05-P3-T1-COPY"
+        - "EVID-MA-V121-S05-P3-T1-TEST"
     phases:
       - phase_id: "MA-V121-S05-P1"
         name: "人类平面压缩"
@@ -1539,33 +1541,58 @@ stages:
       - phase_id: "MA-V121-S05-P3"
         name: "全局中文与语义乱码门禁"
         objective: "建立低成本中文文案源与可读性测试，并修复真实编码或机器语义泄漏。"
-        status: "planned"
+        status: "in_progress"
         estimated_hours: 3
-        estimated_pct: 0
+        estimated_pct: 33.3
         stop_conditions:
           - "可读性测试显著增加 build 或 token 成本"
         stop_gate:
           gate_id: "ACC-MA-V121-S05-P3"
-          status: "planned"
+          status: "in_progress"
           pass_conditions:
             - "默认主路径不出现乱码、schema、ID 或 hash 堆叠"
-          evidence_refs: []
+          evidence_refs:
+            - "EVID-MA-V121-S05-P3-T1-COPY"
+            - "EVID-MA-V121-S05-P3-T1-TEST"
         tasks:
           - task_id: "S05-P3-T1"
             name: "建立 UI 中文术语表与文案字典"
             objective: "统一人类界面术语，代码/API/字段名保持英文。"
-            status: "planned"
+            status: "completed"
             estimated_hours: 1
-            estimated_pct: 0
+            estimated_pct: 100
             dependencies:
               - "S05-P2-T2"
             acceptance_ids:
               - "ACC-MA-V121-S05-P3-T1"
-            test_commands: []
-            evidence_refs: []
+            acceptance:
+              - acceptance_id: "ACC-MA-V121-S05-P3-T1"
+                description: "人类界面的字段与枚举通过唯一 zh-CN 文案源显示中文名称或解释；代码、API、schema、data attribute 与导出 payload 的英文标识保持不变。"
+                evidence_refs:
+                  - "EVID-MA-V121-S05-P3-T1-COPY"
+                  - "EVID-MA-V121-S05-P3-T1-TEST"
+            test_commands:
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_zh_cn_copy_source -q"
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_human_plane OpenAIDatabase.tests.test_memory_atlas_zh_cn_copy_source OpenAIDatabase.tests.test_atlasctl_script_consolidation OpenAIDatabase.tests.test_memory_atlas_validator_profiles OpenAIDatabase.tests.test_memory_atlas_test_value_audit -q"
+              - "npm run lint --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run build --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run validate:fast --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run validate:ui --prefix OpenAIDatabase/apps/memory-atlas"
+              - "PYTHONPATH=.. python3 -B -m unittest discover -s tests -q"
+              - "python3 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+              - "python3.12 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+            test_results:
+              - "唯一文案源 memory_atlas.zh_cn_copy.v1_2_1_s05_p3_t1 提供 6 个可见术语解释、11 个字段标签、9 组枚举映射和未知值中文 fail-closed 回退；Help、Shell、Inspector、Proposal Editor/Diff/Writeback 均消费同一来源"
+              - "Proposal Editor 与差异预览的人类层不再直接显示 Proposal UI、saved_at、importance、priority、original_value、proposed_value、per_memory_version、parent/root 等机器语义；持久化、API、schema、data attribute 与导出 payload 的英文键未改名"
+              - "6 项文案源合同测试、65 项 focused tests、完整 Python 325/325、fast 4/4、ui 12/12、frontend lint/build 与双 runtime check-render PASS"
+              - "真实浏览器额外检查 1470x661 与 390x844 Help 面板：6 个术语均有中文名称和解释，0 横向溢出、0 console/page error；临时截图不进入 Git"
+            evidence_refs:
+              - "EVID-MA-V121-S05-P3-T1-COPY"
+              - "EVID-MA-V121-S05-P3-T1-TEST"
             risks:
               - "翻译实现标识造成歧义"
             rollback: "git revert 本 Task 本地 commit。"
+            current_result: "complete_local_only_34_of_149_pending_s05_p3_t2"
           - task_id: "S05-P3-T2"
             name: "增加轻量语义可读性检查"
             objective: "检查乱码、主视图机器字段、无行动错误提示和英文空状态。"

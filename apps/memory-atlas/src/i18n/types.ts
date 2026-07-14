@@ -7,6 +7,36 @@ export type ProposalActionCopyKey =
   | "flag_conflict"
   | "rollback_to_version";
 
+export type UiFieldKey =
+  | "importance"
+  | "priority"
+  | "note"
+  | "status"
+  | "theme_override"
+  | "action_state"
+  | "original_value"
+  | "proposed_value"
+  | "impact_summary"
+  | "rollback_metadata"
+  | "saved_at";
+
+export type UiEnumGroup =
+  | "importance"
+  | "priority"
+  | "status"
+  | "rollbackUnit"
+  | "proposalLineage"
+  | "runtimeLifecycle"
+  | "serverMode"
+  | "confidence"
+  | "boolean";
+
+export interface UiGlossaryEntry {
+  term: string;
+  label: string;
+  description: string;
+}
+
 export interface ChineseUiCopy {
   app: {
     brandTitle: string;
@@ -57,10 +87,12 @@ export interface ChineseUiCopy {
     proposalUnavailableAction: string;
   };
   help: {
+    eyebrow: string;
     buttonLabel: string;
     panelTitle: string;
     panelSubtitle: string;
     closeLabel: string;
+    durationLabel: string;
     threeMinuteTitle: string;
     threeMinutePath: Array<{
       minute: string;
@@ -85,6 +117,8 @@ export interface ChineseUiCopy {
       title: string;
       description: string;
     }>;
+    glossaryTitle: string;
+    glossary: UiGlossaryEntry[];
     footerNote: string;
   };
   overview: {
@@ -161,5 +195,36 @@ export interface ChineseUiCopy {
     actions: Record<ProposalActionCopyKey, string>;
     emptyVersion: string;
     latestVersionPrefix: string;
+    editorAria: string;
+    editorTitle: string;
+    editorScope: string;
+    notePlaceholder: string;
+    savedAtPrefix: string;
+    localOnlyNote: string;
+    saveDraft: string;
+    exportJson: string;
+    resetDraft: string;
+    diffPreviewAria: string;
+    diffPreviewTitle: string;
+    diffChangeUnit: string;
+    diffEmpty: string;
+    rollbackSummaryPrefix: string;
+    safetyConflictCheck: string;
+    safetyHumanApply: string;
+    safetyNoMutation: string;
+  };
+  fields: Record<UiFieldKey, string>;
+  enums: {
+    unknownValue: string;
+    emptyValue: string;
+    importance: Record<string, string>;
+    priority: Record<string, string>;
+    status: Record<string, string>;
+    rollbackUnit: Record<string, string>;
+    proposalLineage: Record<string, string>;
+    runtimeLifecycle: Record<string, string>;
+    serverMode: Record<string, string>;
+    confidence: Record<string, string>;
+    boolean: Record<string, string>;
   };
 }

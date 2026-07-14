@@ -1,12 +1,14 @@
 import { GitBranch } from "lucide-react";
+import { zhCNCopy as uiCopy, zhCNFieldLabel, zhCNProposalValue } from "../i18n/zh-CN";
+import type { UiFieldKey } from "../i18n/types";
 
 export interface ProposalDiffPreviewChange {
-  field: "importance" | "priority" | "status" | "theme_override" | "action_state" | "note";
+  field: UiFieldKey;
   original_value: string;
   proposed_value: string;
   impact_summary: string;
   rollback_metadata: {
-    rollback_field: string;
+    rollback_field: UiFieldKey;
     rollback_value: string;
     rollback_hint: string;
   };
@@ -21,14 +23,14 @@ export function ProposalDiffPreview({ changes, exportSchemaVersion }: ProposalDi
   const visibleChanges = changes.slice(0, 6);
   return (
     <section
-      aria-label="proposal diff preview"
+      aria-label={uiCopy.proposal.diffPreviewAria}
       className="proposal-diff-preview"
       data-proposal-diff-preview={exportSchemaVersion}
       data-proposal-only="true"
     >
       <div className="panel-title-row">
-        <h4>Proposal Diff Preview</h4>
-        <span>{visibleChanges.length} changes</span>
+        <h4>{uiCopy.proposal.diffPreviewTitle}</h4>
+        <span>{visibleChanges.length} {uiCopy.proposal.diffChangeUnit}</span>
       </div>
 
       {visibleChanges.length ? (
@@ -36,31 +38,33 @@ export function ProposalDiffPreview({ changes, exportSchemaVersion }: ProposalDi
           {visibleChanges.map((change) => (
             <article key={change.field}>
               <div className="proposal-diff-field">
-                <strong>{change.field}</strong>
-                <span>impact_summary</span>
+                <strong>{zhCNFieldLabel(change.field)}</strong>
+                <span>{zhCNFieldLabel("impact_summary")}</span>
               </div>
               <dl>
-                <div><dt>original_value</dt><dd>{change.original_value || "empty"}</dd></div>
-                <div><dt>proposed_value</dt><dd>{change.proposed_value || "empty"}</dd></div>
+                <div><dt>{zhCNFieldLabel("original_value")}</dt><dd>{zhCNProposalValue(change.field, change.original_value)}</dd></div>
+                <div><dt>{zhCNFieldLabel("proposed_value")}</dt><dd>{zhCNProposalValue(change.field, change.proposed_value)}</dd></div>
               </dl>
               <p>{change.impact_summary}</p>
-              <div className="proposal-rollback-metadata" aria-label="rollback metadata">
+              <div className="proposal-rollback-metadata" aria-label={zhCNFieldLabel("rollback_metadata")}>
                 <GitBranch size={14} />
                 <span>
-                  rollback_metadata: {change.rollback_metadata.rollback_field} -&gt; {change.rollback_metadata.rollback_value || "empty"}
+                  {uiCopy.proposal.rollbackSummaryPrefix}：{zhCNFieldLabel(change.rollback_metadata.rollback_field)}
+                  {" -> "}
+                  {zhCNProposalValue(change.rollback_metadata.rollback_field, change.rollback_metadata.rollback_value)}
                 </span>
               </div>
             </article>
           ))}
         </div>
       ) : (
-        <p className="proposal-diff-empty">当前没有本地调整；选择 importance 或 priority 后会显示原值、新值和影响说明。</p>
+        <p className="proposal-diff-empty">{uiCopy.proposal.diffEmpty}</p>
       )}
 
-      <div className="proposal-diff-safety" aria-label="proposal apply safety">
-        <span>requires_conflict_check: true</span>
-        <span>requires_agent_or_human_apply: true</span>
-        <span>active memory mutation: false</span>
+      <div className="proposal-diff-safety" aria-label="提案应用安全边界">
+        <span>{uiCopy.proposal.safetyConflictCheck}</span>
+        <span>{uiCopy.proposal.safetyHumanApply}</span>
+        <span>{uiCopy.proposal.safetyNoMutation}</span>
       </div>
     </section>
   );
