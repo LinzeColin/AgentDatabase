@@ -3,6 +3,9 @@
 import { readFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import commandMigrationContract from "./command_migration_contract.cjs";
+
+const { legacyCommandMappingsCover } = commandMigrationContract;
 
 const scriptDir = dirname(fileURLToPath(import.meta.url));
 const appRoot = resolve(scriptDir, "..");
@@ -10,7 +13,6 @@ const repoRoot = resolve(appRoot, "../..");
 
 const appSource = readFileSync(resolve(appRoot, "src/App.tsx"), "utf8");
 const cssSource = readFileSync(resolve(appRoot, "src/styles.css"), "utf8");
-const packageSource = readFileSync(resolve(appRoot, "package.json"), "utf8");
 const visualAudit = readFileSync(resolve(repoRoot, "scripts/audit_memory_atlas_visual_acceptance.py"), "utf8");
 const modelParams = readFileSync(resolve(repoRoot, "config/visualization/model_parameters.memory_river.yaml"), "utf8");
 
@@ -98,7 +100,7 @@ requireCheck(
 
 requireCheck(
   "evidence_parameters_and_audit_wired",
-  packageSource.includes('"validate:memory-river-evidence": "node scripts/validate_memory_river_evidence_layers.mjs"')
+  legacyCommandMappingsCover({ "validate:memory-river-evidence": "validate:release" })
     && visualAudit.includes("timeline_stage5_3_evidence_layers_ready")
     && hasAll(modelParams, [
       'stage: "5.3"',
@@ -109,8 +111,8 @@ requireCheck(
       "home_consistency_source: isBlackHoleCandidate / isProtoStarCandidate",
       "evidence_payload: redacted_derived_signal_only",
     ]),
-  "Package script, visual audit, and Memory River parameters cover Stage 5.3 evidence-layer contracts",
-  "Stage 5.3 package script, visual audit hook, or Memory River parameters are missing",
+  "Command migration, visual audit, and Memory River parameters cover Stage 5.3 evidence-layer contracts",
+  "Stage 5.3 command migration, visual audit hook, or Memory River parameters are missing",
 );
 
 const failed = checks.filter((check) => check.status !== "PASS");

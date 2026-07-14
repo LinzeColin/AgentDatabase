@@ -3,12 +3,14 @@
 import { readFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import commandMigrationContract from "./command_migration_contract.cjs";
+
+const { legacyCommandMappingsCover } = commandMigrationContract;
 
 const scriptDir = dirname(fileURLToPath(import.meta.url));
 const appRoot = resolve(scriptDir, "..");
 const repoRoot = resolve(appRoot, "../..");
 
-const packageSource = readFileSync(resolve(appRoot, "package.json"), "utf8");
 const visualAudit = readFileSync(resolve(repoRoot, "scripts/audit_memory_atlas_visual_acceptance.py"), "utf8");
 const params = readFileSync(resolve(repoRoot, "config/visualization/model_parameters.memory_river.yaml"), "utf8");
 const deliveryRecord = readFileSync(resolve(repoRoot, "docs/MEMORY_ATLAS_DELIVERY_RECORD.md"), "utf8");
@@ -47,18 +49,18 @@ requireCheck(
 
 requireCheck(
   "stage5_validators_and_visual_audit_cover_all_phases",
-  hasAll(packageSource, [
-    '"validate:memory-river-rendering": "node scripts/validate_memory_river_rendering.mjs"',
-    '"validate:memory-river-interaction": "node scripts/validate_memory_river_interaction.mjs"',
-    '"validate:memory-river-evidence": "node scripts/validate_memory_river_evidence_layers.mjs"',
-    '"validate:memory-river-stage5": "node scripts/validate_memory_river_stage5.mjs"',
-  ]) && hasAll(visualAudit, [
+  legacyCommandMappingsCover({
+    "validate:memory-river-rendering": "validate:release",
+    "validate:memory-river-interaction": "validate:release",
+    "validate:memory-river-evidence": "validate:release",
+    "validate:memory-river-stage5": "validate:release",
+  }) && hasAll(visualAudit, [
     "timeline_stage5_1_river_rendering_ready",
     "timeline_stage5_2_river_interaction_ready",
     "timeline_stage5_3_evidence_layers_ready",
   ]),
-  "Package scripts and visual acceptance audit cover Stage 5.1 rendering, Stage 5.2 interaction, and Stage 5.3 evidence layers",
-  "Stage 5 validators or visual audit hooks do not cover every phase",
+  "The bounded legacy-command map and visual acceptance audit cover Stage 5.1 rendering, Stage 5.2 interaction, and Stage 5.3 evidence layers",
+  "Stage 5 command migrations or visual audit hooks do not cover every phase",
 );
 
 requireCheck(

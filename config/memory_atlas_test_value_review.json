@@ -27,8 +27,8 @@
     "deleted_python_test_count": 2,
     "retained_validator_count": 38,
     "retained_baseline_python_test_count": 49,
-    "added_python_test_count": 1,
-    "current_python_test_count": 50
+    "added_python_test_count": 2,
+    "current_python_test_count": 51
   },
   "profile_commands": {
     "fast": "npm run validate:fast",
@@ -37,7 +37,8 @@
     "release": "npm run validate:release"
   },
   "added_paths": [
-    "tests/test_memory_atlas_test_value_audit.py"
+    "tests/test_memory_atlas_test_value_audit.py",
+    "tests/test_memory_atlas_legacy_command_migrations.py"
   ],
   "candidates": [
     {
@@ -3023,6 +3024,15 @@
       ],
       "reason": "Retained because executable behavior protects current release_risk coverage rather than historical Stage prose alone.",
       "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "tests/test_memory_atlas_legacy_command_migrations.py",
+      "risk_bindings": [
+        "runner_contract",
+        "release_risk"
+      ],
+      "reason": "Retained because the fail-closed migration audit protects the bounded legacy-command window and four-profile release contract.",
+      "current_dependency": "fast profile and S04-P3-T3 command migration acceptance"
     },
     {
       "path": "tests/test_memory_atlas_owner_daily.py",

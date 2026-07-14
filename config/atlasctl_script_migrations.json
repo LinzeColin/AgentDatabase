@@ -59,7 +59,7 @@
       {
         "path": "apps/memory-atlas/scripts/validate_inspector_proposal.mjs",
         "baseline": true,
-        "sha256": "1e59d3238546c0e6c195e9bfdeb161fb448e534fb0f9511ccbdd58b40dd143de",
+        "sha256": "eb6803054653b527db9ebc6798c433defccf084f24caf613f9cff9702d3978ef",
         "matched_families": [
           "validator"
         ],
@@ -158,7 +158,7 @@
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_stage6.mjs",
         "baseline": true,
-        "sha256": "0664ea1e65abdb99254da8c7e3b3fc4a5074cf31aaf521e556740923bbce84a8",
+        "sha256": "4055c24fccf5a8ff03167d0d2dd12cb9a926c035dfdaa2718534c709cb7f12e9",
         "matched_families": [
           "validator"
         ],
@@ -167,7 +167,7 @@
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_stage7.mjs",
         "baseline": true,
-        "sha256": "0bf1b163034f440399460df0b833490ef05629acdabbecdb82eca3f76d185f5c",
+        "sha256": "a8b1492b392413315e86003334d9ce73ec54215e16f5480cfed6a325f9f7efed",
         "matched_families": [
           "validator"
         ],
@@ -176,7 +176,7 @@
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_stage8.cjs",
         "baseline": true,
-        "sha256": "738c6a4b96314004c110aedd26cc7c21837ea65be56689079db6552c2a47ccac",
+        "sha256": "42343e00b9925038985acd886c3a793fbdce593c6553a395d7560e6e00b0286c",
         "matched_families": [
           "validator"
         ],
@@ -185,7 +185,7 @@
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_stage9.cjs",
         "baseline": true,
-        "sha256": "ff98634b07587b1024fd3817c0a12eac177276446c0bd577292daf4ff4de24db",
+        "sha256": "3a8c42def1a180517b560f0e24b68dc83c872d080c6bfa61e07ca487b221fb64",
         "matched_families": [
           "validator"
         ],
@@ -1427,7 +1427,7 @@
       {
         "path": "apps/memory-atlas/scripts/validate_memory_river_evidence_layers.mjs",
         "baseline": true,
-        "sha256": "568f91822e36b4ddf25d2c9f4cfcea9f3a6e7a3a3d4426584fb58b074546d42a",
+        "sha256": "32d895b903f4f8ba1612ba3a920278a81b8a1ba45f659a0b248f0b1037b68dba",
         "matched_families": [
           "validator"
         ],
@@ -1445,7 +1445,7 @@
       {
         "path": "apps/memory-atlas/scripts/validate_memory_river_interaction.mjs",
         "baseline": true,
-        "sha256": "6b745544bcc6374822b6b703f864a573599b6550e1394553c72d72f5148015dd",
+        "sha256": "782747287f5441e754d9a2c52cfb7a44809770aeacfeecdae947c3553d105df6",
         "matched_families": [
           "validator"
         ],
@@ -1454,7 +1454,7 @@
       {
         "path": "apps/memory-atlas/scripts/validate_memory_river_rendering.mjs",
         "baseline": true,
-        "sha256": "24c2d76a2374be35fbf86cd4a9abfb244a0d9eff2bc965801d25b0182262a1df",
+        "sha256": "bf188649b88c30af3bb6e36889ce1fa32893007473d1e34be6dde5005ace601d",
         "matched_families": [
           "validator"
         ],
@@ -1472,7 +1472,7 @@
       {
         "path": "apps/memory-atlas/scripts/validate_memory_river_stage5.mjs",
         "baseline": true,
-        "sha256": "83c34879ae43095a004ff698ac1d9d44fa2433808dbb5b9359e26df1a60bf353",
+        "sha256": "edb9cc02028384d3603d489e15a982bb0fea506ca69534d822b985c1fced60ff",
         "matched_families": [
           "validator"
         ],
@@ -1535,7 +1535,7 @@
       {
         "path": "apps/memory-atlas/scripts/validate_shared_state_store.mjs",
         "baseline": true,
-        "sha256": "68b7e6e8783aecb5516051b2689551d53b17d295d01647f4a2af6739d4dc1de7",
+        "sha256": "61a9d2498a11d97973e3b9e414b1645e2d9ee423511c3f5cf035815f7b738647",
         "matched_families": [
           "validator"
         ],
@@ -1679,7 +1679,7 @@
       {
         "path": "scripts/audit_memory_atlas_test_value.py",
         "baseline": false,
-        "sha256": "9e02bcc1d4182d26225c685cb330db39edc61643afb032fbf45900fd832b213b",
+        "sha256": "2a75aae8d4de3666165ef3852a4017cf03a7ffce0e50d340dcb8ffc4d42d4bc2",
         "matched_families": [
           "audit"
         ],
@@ -3797,10 +3797,13 @@
       "replacement_risk_coverage_verified": true
     }
   ],
-  "deferred": {
+  "command_migration": {
     "task_id": "S04-P3-T3",
-    "work": "Document the comprehensive old-command migration table and temporary compatibility policy.",
-    "started_in_this_task": false
+    "status": "completed_local_only",
+    "migration_map": "config/memory_atlas_legacy_command_migrations.json",
+    "compatibility_mode": "lookup_only",
+    "removal_version": "v1.2.2",
+    "public_aliases_restored": false
   },
   "safety": {
     "raw_mutation": false,

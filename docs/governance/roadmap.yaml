@@ -1008,10 +1008,10 @@ stages:
             current_result: "run1_accepted_locally_after_p1_correction_pending_owner_review_before_commit_or_run2"
   - stage_id: "MA-V121-S04"
     name: "Memory Atlas v1.2.1 前端、CLI 与验证体系结构减负"
-    person_goal: "在功能冻结下收敛前端、CLI、脚本与 validator；Task Pack 当前完成 27/149，本 Stage 已完成 8/9。"
-    status: "in_progress"
+    person_goal: "在功能冻结下收敛前端、CLI、脚本与 validator；Task Pack 当前完成 28/149，本 Stage 已完成 9/9。"
+    status: "completed"
     estimated_hours: 9
-    estimated_pct: 88.89
+    estimated_pct: 100
     stop_conditions:
       - "一次 run 完成超过一个 Task"
       - "删除历史 validator 或低价值测试而未完成 T2 价值证明"
@@ -1019,7 +1019,7 @@ stages:
       - "raw/derived mutation、push、deploy、merge/rebase、branch 或 PR"
     stop_gate:
       gate_id: "ACC-MA-V121-S04"
-      status: "in_progress"
+      status: "completed"
       pass_conditions:
         - "S04 P1/P2/P3 全部 9 Tasks 通过各自验收"
         - "用户功能零回归，validator 默认公共面仅保留必要集合"
@@ -1028,6 +1028,8 @@ stages:
         - "EVID-MA-V121-S04-P3-T1-TEST"
         - "EVID-MA-V121-S04-P3-T2-DESIGN"
         - "EVID-MA-V121-S04-P3-T2-TEST"
+        - "EVID-MA-V121-S04-P3-T3-DESIGN"
+        - "EVID-MA-V121-S04-P3-T3-TEST"
     phases:
       - phase_id: "MA-V121-S04-P1"
         name: "前端 feature 边界与共享状态"
@@ -1167,14 +1169,14 @@ stages:
       - phase_id: "MA-V121-S04-P3"
         name: "validator profiles 与低价值测试清理"
         objective: "先收敛公共 validator 入口，再独立完成价值评估与旧命令迁移。"
-        status: "in_progress"
+        status: "completed"
         estimated_hours: 3
-        estimated_pct: 66.67
+        estimated_pct: 100
         stop_conditions:
           - "单个 Task run 同时执行测试价值处置与 T3 全量旧命令兼容迁移"
         stop_gate:
           gate_id: "ACC-MA-V121-S04-P3"
-          status: "in_progress"
+          status: "completed"
           pass_conditions:
             - "四 profile、低价值测试处置与旧命令迁移全部通过"
           evidence_refs:
@@ -1182,6 +1184,8 @@ stages:
             - "EVID-MA-V121-S04-P3-T1-TEST"
             - "EVID-MA-V121-S04-P3-T2-DESIGN"
             - "EVID-MA-V121-S04-P3-T2-TEST"
+            - "EVID-MA-V121-S04-P3-T3-DESIGN"
+            - "EVID-MA-V121-S04-P3-T3-TEST"
         tasks:
           - task_id: "S04-P3-T1"
             name: "建立 fast、sync、ui、release 四层 validator profiles"
@@ -1250,15 +1254,219 @@ stages:
           - task_id: "S04-P3-T3"
             name: "完成旧命令迁移表与必要兼容策略"
             objective: "逐项迁移剩余 caller，并明确永久移除或短期兼容边界。"
-            status: "planned"
+            status: "completed"
             estimated_hours: 1
-            estimated_pct: 0
+            estimated_pct: 100
             dependencies:
               - "S04-P3-T2"
             acceptance_ids:
               - "ACC-MA-V121-S04-P3-T3"
+            acceptance:
+              - acceptance_id: "ACC-MA-V121-S04-P3-T3"
+                description: "178 条旧命令均有可验证 profile 替代；兼容仅只读 lookup，一版后必须移除，package 不恢复旧 alias。"
+                evidence_refs:
+                  - "EVID-MA-V121-S04-P3-T3-DESIGN"
+                  - "EVID-MA-V121-S04-P3-T3-TEST"
+            test_commands:
+              - "python3 scripts/memory_atlas_legacy_commands.py --audit"
+              - "python3 -m unittest tests.test_memory_atlas_legacy_command_migrations tests.test_memory_atlas_validator_profiles tests.test_atlasctl_script_consolidation tests.test_memory_atlas_test_value_audit -q"
+              - "npm run validate:fast"
+              - "npm run validate:sync"
+              - "npm run validate:ui"
+              - "npm run validate:release -- --plan"
+              - "python3 -m unittest discover -s OpenAIDatabase/tests -p 'test_*.py' -q"
+            test_results:
+              - "migration audit PASS；178/178 历史 alias 与 source commit/hash 精确一致；43 项 focused tests PASS"
+              - "fast 4/4、sync 6/6、ui 12/12、release plan 1/1、完整 Python 295/295 PASS"
+            evidence_refs:
+              - "EVID-MA-V121-S04-P3-T3-DESIGN"
+              - "EVID-MA-V121-S04-P3-T3-TEST"
+            risks:
+              - "保留无期限 legacy aliases 或生成不可执行命令"
+              - "历史 direct validator 的旧 source-marker 断言不是当前公共验收真源"
+            rollback: "git revert 本 Task 本地 commit；不恢复 178 个默认 public aliases。"
+            current_result: "complete_local_only_28_of_149_pending_s05_p1_t1"
+  - stage_id: "MA-V121-S05"
+    name: "Memory Atlas v1.2.1 简单双平面与全中文使用说明收敛"
+    person_goal: "让 owner 通过不超过七个中文核心入口理解系统、流程、变化、同步和维护；当前仅路由到 S05-P1-T1，尚未执行。"
+    status: "planned"
+    estimated_hours: 8
+    estimated_pct: 0
+    stop_conditions:
+      - "一次 run 完成超过一个 Task"
+      - "为了全中文而翻译代码标识、API 或数据字段"
+      - "人类目录继续按 Stage 增长或只新增链接索引"
+      - "raw/derived mutation、push、deploy、branch 或 PR"
+    stop_gate:
+      gate_id: "ACC-MA-V121-S05"
+      status: "planned"
+      pass_conditions:
+        - "人类可读核心文件不超过 7 个且中文、浅层、可直接操作"
+        - "机器治理不复制 config/tests/data 真相，核心 UI 文案通过可读性门禁"
+      evidence_refs: []
+    phases:
+      - phase_id: "MA-V121-S05-P1"
+        name: "人类平面压缩"
+        objective: "收敛中文 owner 入口，并提供可在两分钟内理解当前状态与下一步的门面。"
+        status: "planned"
+        estimated_hours: 3
+        estimated_pct: 0
+        stop_conditions:
+          - "单个 Task 同时重写多个独立 owner 门面"
+        stop_gate:
+          gate_id: "ACC-MA-V121-S05-P1"
+          status: "planned"
+          pass_conditions:
+            - "快速开始、系统使用、功能工作流、同步备份、模型参数、版本 Roadmap、维护故障七类以内"
+          evidence_refs: []
+        tasks:
+          - task_id: "S05-P1-T1"
+            name: "收敛七个以内中文核心文件"
+            objective: "将人类可读收敛为浅层、直接给结论和操作的中文核心目录。"
+            status: "planned"
+            estimated_hours: 1
+            estimated_pct: 0
+            dependencies:
+              - "S04-P3-T3"
+            acceptance_ids:
+              - "ACC-MA-V121-S05-P1-T1"
             test_commands: []
             evidence_refs: []
             risks:
-              - "保留无期限 legacy aliases 或生成不可执行命令"
-            rollback: "恢复行为等价的 direct command；不恢复 178 个默认 public aliases。"
+              - "误删仍承担当前 owner 工作流的文档"
+            rollback: "git revert 本 Task 本地 commit；不复制历史文档到 archive 目录。"
+          - task_id: "S05-P1-T2"
+            name: "重写三件套 owner 门面"
+            objective: "重写功能清单、开发记录和模型参数文件为简洁入口。"
+            status: "planned"
+            estimated_hours: 1
+            estimated_pct: 0
+            dependencies:
+              - "S05-P1-T1"
+            acceptance_ids:
+              - "ACC-MA-V121-S05-P1-T2"
+            test_commands: []
+            evidence_refs: []
+            risks:
+              - "把机器治理细节重新堆入 owner 门面"
+            rollback: "git revert 本 Task 本地 commit。"
+          - task_id: "S05-P1-T3"
+            name: "建立 v1.2.1 变化与使用地图"
+            objective: "解释新增、修改、删除/隐藏与五个核心用户流程。"
+            status: "planned"
+            estimated_hours: 1
+            estimated_pct: 0
+            dependencies:
+              - "S05-P1-T2"
+            acceptance_ids:
+              - "ACC-MA-V121-S05-P1-T3"
+            test_commands: []
+            evidence_refs: []
+            risks:
+              - "只写发布口号而没有可执行入口"
+            rollback: "git revert 本 Task 本地 commit。"
+      - phase_id: "MA-V121-S05-P2"
+        name: "机器平面唯一真相"
+        objective: "以浅层索引引用当前 requirements、source、model、acceptance 与 evidence，不复制执行真相。"
+        status: "planned"
+        estimated_hours: 2
+        estimated_pct: 0
+        stop_conditions:
+          - "同一参数、公式或状态出现第二个可编辑源"
+        stop_gate:
+          gate_id: "ACC-MA-V121-S05-P2"
+          status: "planned"
+          pass_conditions:
+            - "机器索引不复制 config/tests/data，逐 Stage 人类化机器记录完成收敛"
+          evidence_refs: []
+        tasks:
+          - task_id: "S05-P2-T1"
+            name: "建立机器真相浅层索引"
+            objective: "将机器治理改为当前事实的引用索引。"
+            status: "planned"
+            estimated_hours: 1
+            estimated_pct: 0
+            dependencies:
+              - "S05-P1-T3"
+            acceptance_ids:
+              - "ACC-MA-V121-S05-P2-T1"
+            test_commands: []
+            evidence_refs: []
+            risks:
+              - "复制 config/tests/data 内容形成漂移"
+            rollback: "git revert 本 Task 本地 commit。"
+          - task_id: "S05-P2-T2"
+            name: "删除逐 Stage 人类化机器记录"
+            objective: "仅保留 current state 与最近 release evidence。"
+            status: "planned"
+            estimated_hours: 1
+            estimated_pct: 0
+            dependencies:
+              - "S05-P2-T1"
+            acceptance_ids:
+              - "ACC-MA-V121-S05-P2-T2"
+            test_commands: []
+            evidence_refs: []
+            risks:
+              - "删除当前 release 或恢复证据"
+            rollback: "按批准清单 git revert；不新建 archive 副本。"
+      - phase_id: "MA-V121-S05-P3"
+        name: "全局中文与语义乱码门禁"
+        objective: "建立低成本中文文案源与可读性测试，并修复真实编码或机器语义泄漏。"
+        status: "planned"
+        estimated_hours: 3
+        estimated_pct: 0
+        stop_conditions:
+          - "可读性测试显著增加 build 或 token 成本"
+        stop_gate:
+          gate_id: "ACC-MA-V121-S05-P3"
+          status: "planned"
+          pass_conditions:
+            - "默认主路径不出现乱码、schema、ID 或 hash 堆叠"
+          evidence_refs: []
+        tasks:
+          - task_id: "S05-P3-T1"
+            name: "建立 UI 中文术语表与文案字典"
+            objective: "统一人类界面术语，代码/API/字段名保持英文。"
+            status: "planned"
+            estimated_hours: 1
+            estimated_pct: 0
+            dependencies:
+              - "S05-P2-T2"
+            acceptance_ids:
+              - "ACC-MA-V121-S05-P3-T1"
+            test_commands: []
+            evidence_refs: []
+            risks:
+              - "翻译实现标识造成歧义"
+            rollback: "git revert 本 Task 本地 commit。"
+          - task_id: "S05-P3-T2"
+            name: "增加轻量语义可读性检查"
+            objective: "检查乱码、主视图机器字段、无行动错误提示和英文空状态。"
+            status: "planned"
+            estimated_hours: 1
+            estimated_pct: 0
+            dependencies:
+              - "S05-P3-T1"
+            acceptance_ids:
+              - "ACC-MA-V121-S05-P3-T2"
+            test_commands: []
+            evidence_refs: []
+            risks:
+              - "新增独立治理产品或高成本 validator"
+            rollback: "git revert 本 Task 本地 commit。"
+          - task_id: "S05-P3-T3"
+            name: "修复真实编码问题与机器语义泄漏"
+            objective: "形成全中文 UI/文档基线。"
+            status: "planned"
+            estimated_hours: 1
+            estimated_pct: 0
+            dependencies:
+              - "S05-P3-T2"
+            acceptance_ids:
+              - "ACC-MA-V121-S05-P3-T3"
+            test_commands: []
+            evidence_refs: []
+            risks:
+              - "改动超出真实可见问题"
+            rollback: "git revert 本 Task 本地 commit。"

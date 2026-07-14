@@ -3,13 +3,25 @@
 import { readFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import commandMigrationContract from "./command_migration_contract.cjs";
+
+const { legacyCommandMappingsCover } = commandMigrationContract;
 
 const scriptDir = dirname(fileURLToPath(import.meta.url));
 const appRoot = resolve(scriptDir, "..");
 const repoRoot = resolve(appRoot, "../..");
 
-const packageSource = readFileSync(resolve(appRoot, "package.json"), "utf8");
-const appSource = readFileSync(resolve(appRoot, "src/App.tsx"), "utf8");
+const runtimeSourcePaths = [
+  "src/providers/AtlasWorkspaceProvider.tsx",
+  "src/features/settings/InteractionLens.tsx",
+  "src/features/settings/InspectorWorkspace.tsx",
+  "src/shared/atlas/inspectorWriteback.ts",
+  "src/features/actions/WritebackProposalPanel.tsx",
+  "src/components/ProposalEditor.tsx",
+];
+const appSource = runtimeSourcePaths
+  .map((relativePath) => readFileSync(resolve(appRoot, relativePath), "utf8"))
+  .join("\n");
 const stateSource = readFileSync(resolve(appRoot, "src/state/sharedAtlasState.ts"), "utf8");
 const visualAudit = readFileSync(resolve(repoRoot, "scripts/audit_memory_atlas_visual_acceptance.py"), "utf8");
 const modelParameters = readFileSync(resolve(repoRoot, "docs/MEMORY_ATLAS_PROJECT_MODEL_PARAMETERS.md"), "utf8");
@@ -41,16 +53,16 @@ requireCheck(
 
 requireCheck(
   "stage6_validators_and_visual_audit_cover_all_phases",
-  hasAll(packageSource, [
-    '"validate:shared-state": "node --experimental-strip-types scripts/validate_shared_state_store.mjs"',
-    '"validate:inspector-proposal": "node scripts/validate_inspector_proposal.mjs"',
-    '"validate:stage6": "node scripts/validate_memory_atlas_stage6.mjs"',
-  ]) && hasAll(visualAudit, [
+  legacyCommandMappingsCover({
+    "validate:shared-state": "validate:release",
+    "validate:inspector-proposal": "validate:release",
+    "validate:stage6": "validate:release",
+  }) && hasAll(visualAudit, [
     "stage6_1_shared_state_store_ready",
     "stage6_2_inspector_proposal_ready",
   ]),
-  "Package scripts and visual acceptance audit cover Stage 6.1 shared state and Stage 6.2 Inspector/Proposal",
-  "Stage 6 validators or visual audit hooks do not cover every phase",
+  "The bounded legacy-command map and visual acceptance audit cover Stage 6.1 shared state and Stage 6.2 Inspector/Proposal",
+  "Stage 6 command migrations or visual audit hooks do not cover every phase",
 );
 
 requireCheck(

@@ -125,7 +125,17 @@ class ScriptMigrationMapTests(unittest.TestCase):
                 "public_profiles": ["fast", "sync", "ui", "release"],
             },
         )
-        self.assertEqual(payload["deferred"]["task_id"], "S04-P3-T3")
+        self.assertEqual(
+            payload["command_migration"],
+            {
+                "task_id": "S04-P3-T3",
+                "status": "completed_local_only",
+                "migration_map": "config/memory_atlas_legacy_command_migrations.json",
+                "compatibility_mode": "lookup_only",
+                "removal_version": "v1.2.2",
+                "public_aliases_restored": False,
+            },
+        )
         self.assertIs(payload["inventory"]["recursive"], False)
 
         validator_family = next(row for row in payload["families"] if row["family"] == "validator")
@@ -290,7 +300,7 @@ class ScriptMigrationMapTests(unittest.TestCase):
         payload["summary"]["retained_representative_script_count"] = 0
         payload["profile_consolidation"]["status"] = "pending"
         payload["safety"]["raw_mutation"] = True
-        payload["deferred"]["started_in_this_task"] = True
+        payload["command_migration"]["removal_version"] = "indefinite"
         payload["families"][0]["scripts"][0]["path"] = "功能清单.md"
 
         errors = self.validate_contract(payload)
@@ -301,7 +311,7 @@ class ScriptMigrationMapTests(unittest.TestCase):
         self.assertTrue(any("retained_representative_script_count" in error for error in errors))
         self.assertTrue(any("profile consolidation" in error for error in errors))
         self.assertTrue(any("safety" in error for error in errors))
-        self.assertTrue(any("deferred" in error for error in errors))
+        self.assertTrue(any("command migration" in error for error in errors))
         self.assertTrue(any("audited script roots" in error for error in errors))
 
 

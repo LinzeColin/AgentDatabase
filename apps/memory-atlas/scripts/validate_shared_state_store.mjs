@@ -3,12 +3,15 @@
 import { readFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import commandMigrationContract from "./command_migration_contract.cjs";
 import {
   atlasFiltersFromSharedState,
   clearSharedAtlasFilter,
   createSharedAtlasState,
   sharedAtlasReducer,
 } from "../src/state/sharedAtlasState.ts";
+
+const { legacyCommandMappingsCover } = commandMigrationContract;
 
 const scriptDir = dirname(fileURLToPath(import.meta.url));
 const appRoot = resolve(scriptDir, "..");
@@ -27,7 +30,6 @@ const appSource = runtimeSourcePaths
   .join("\n");
 const stateSource = readFileSync(resolve(appRoot, "src/state/sharedAtlasState.ts"), "utf8");
 const cssSource = readFileSync(resolve(appRoot, "src/styles.css"), "utf8");
-const packageSource = readFileSync(resolve(appRoot, "package.json"), "utf8");
 const visualAudit = readFileSync(resolve(repoRoot, "scripts/audit_memory_atlas_visual_acceptance.py"), "utf8");
 
 const failures = [];
@@ -135,8 +137,8 @@ function validateSourceContracts(failures) {
   if (!hasAll(stateSource, requiredStateNeedles)) failures.push("shared-state source lacks required schema/reducer/filter contracts");
   if (!hasAll(appSource, requiredAppNeedles)) failures.push("Runtime modules do not expose all shared-state sync bindings");
   if (!hasAll(cssSource, requiredCssNeedles)) failures.push("shared-state UI status styles are missing");
-  if (!packageSource.includes('"validate:shared-state": "node --experimental-strip-types scripts/validate_shared_state_store.mjs"')) {
-    failures.push("package.json lacks validate:shared-state script");
+  if (!legacyCommandMappingsCover({ "validate:shared-state": "validate:release" })) {
+    failures.push("legacy command map lacks the validate:shared-state migration");
   }
   if (!visualAudit.includes("stage6_1_shared_state_store_ready")) {
     failures.push("visual acceptance audit lacks Stage 6.1 shared-state hook");

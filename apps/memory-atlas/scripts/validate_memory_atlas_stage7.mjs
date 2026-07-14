@@ -3,12 +3,14 @@
 import { readFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import commandMigrationContract from "./command_migration_contract.cjs";
+
+const { legacyCommandMappingsCover } = commandMigrationContract;
 
 const scriptDir = dirname(fileURLToPath(import.meta.url));
 const appRoot = resolve(scriptDir, "..");
 const repoRoot = resolve(appRoot, "../..");
 
-const packageSource = readFileSync(resolve(appRoot, "package.json"), "utf8");
 const galaxySource = readFileSync(resolve(appRoot, "src/components/GalaxyScene.tsx"), "utf8");
 const appSource = readFileSync(resolve(appRoot, "src/App.tsx"), "utf8");
 const visualAudit = readFileSync(resolve(repoRoot, "scripts/audit_memory_atlas_visual_acceptance.py"), "utf8");
@@ -44,18 +46,18 @@ requireCheck(
 
 requireCheck(
   "stage7_validators_and_visual_audit_cover_all_phases",
-  hasAll(packageSource, [
-    '"validate:stage7-visual": "node scripts/validate_stage7_visual_acceptance.cjs"',
-    '"validate:stage7-performance": "node scripts/validate_stage7_performance_acceptance.cjs"',
-    '"validate:stage7-privacy-accessibility": "node scripts/validate_stage7_privacy_accessibility.cjs"',
-    '"validate:stage7": "node scripts/validate_memory_atlas_stage7.mjs"',
-  ]) && hasAll(visualAudit, [
+  legacyCommandMappingsCover({
+    "validate:stage7-visual": "validate:ui",
+    "validate:stage7-performance": "validate:ui",
+    "validate:stage7-privacy-accessibility": "validate:ui",
+    "validate:stage7": "validate:release",
+  }) && hasAll(visualAudit, [
     "stage7_1_visual_acceptance_ready",
     "stage7_2_performance_acceptance_ready",
     "stage7_3_privacy_accessibility_ready",
   ]),
-  "Package scripts and visual acceptance audit cover Stage 7.1 visual, Stage 7.2 performance, and Stage 7.3 privacy/accessibility",
-  "Stage 7 validators or visual audit hooks do not cover every phase",
+  "The bounded legacy-command map and visual acceptance audit cover Stage 7.1 visual, Stage 7.2 performance, and Stage 7.3 privacy/accessibility",
+  "Stage 7 command migrations or visual audit hooks do not cover every phase",
 );
 
 requireCheck(

@@ -3,6 +3,9 @@
 import { existsSync, readFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import commandMigrationContract from "./command_migration_contract.cjs";
+
+const { legacyCommandMappingsCover } = commandMigrationContract;
 
 const scriptDir = dirname(fileURLToPath(import.meta.url));
 const appRoot = resolve(scriptDir, "..");
@@ -22,7 +25,6 @@ const i18nPath = resolve(appRoot, "src/i18n/zh-CN.ts");
 const i18nSource = existsSync(i18nPath) ? readFileSync(i18nPath, "utf8") : "";
 const uiSource = `${appSource}\n${i18nSource}`;
 const cssSource = readFileSync(resolve(appRoot, "src/styles.css"), "utf8");
-const packageSource = readFileSync(resolve(appRoot, "package.json"), "utf8");
 const visualAudit = readFileSync(resolve(repoRoot, "scripts/audit_memory_atlas_visual_acceptance.py"), "utf8");
 
 const failures = [];
@@ -125,8 +127,8 @@ function validateDebugSeparation(failures) {
 }
 
 function validateStageHooks(failures) {
-  if (!packageSource.includes('"validate:inspector-proposal": "node scripts/validate_inspector_proposal.mjs"')) {
-    failures.push("package.json lacks validate:inspector-proposal script");
+  if (!legacyCommandMappingsCover({ "validate:inspector-proposal": "validate:release" })) {
+    failures.push("legacy command map lacks the validate:inspector-proposal migration");
   }
   if (!visualAudit.includes("stage6_2_inspector_proposal_ready")) {
     failures.push("visual acceptance audit lacks Stage 6.2 Inspector/Proposal hook");

@@ -5,13 +5,13 @@ const fs = require("node:fs");
 const http = require("node:http");
 const path = require("node:path");
 const { spawnSync } = require("node:child_process");
+const { legacyCommandMappingsCover } = require("./command_migration_contract.cjs");
 
 const appRoot = path.resolve(__dirname, "..");
 const repoRoot = path.resolve(appRoot, "../..");
 const port = Number(process.env.MEMORY_ATLAS_STAGE9_PORT || 4177);
 const targetUrl = `http://127.0.0.1:${port}`;
 
-const packagePath = path.join(appRoot, "package.json");
 const changelogPath = path.join(repoRoot, "CHANGELOG.md");
 const deliveryRecordPath = path.join(repoRoot, "docs/MEMORY_ATLAS_DELIVERY_RECORD.md");
 const modelParametersPath = path.join(repoRoot, "docs/MEMORY_ATLAS_PROJECT_MODEL_PARAMETERS.md");
@@ -113,7 +113,6 @@ async function assertPortClosed() {
 }
 
 function validateDocsAndContracts() {
-  const packageSource = fs.readFileSync(packagePath, "utf8");
   const changelog = fs.readFileSync(changelogPath, "utf8");
   const delivery = fs.readFileSync(deliveryRecordPath, "utf8");
   const model = fs.readFileSync(modelParametersPath, "utf8");
@@ -123,14 +122,14 @@ function validateDocsAndContracts() {
   const visualAcceptance = fs.readFileSync(visualAcceptancePath, "utf8");
 
   assertCondition(
-    hasAll(packageSource, [
-      '"validate:stage9-obsidian": "node scripts/validate_stage9_obsidian_iteration.cjs"',
-      '"validate:stage9-visual-semantics": "node scripts/validate_stage9_visual_semantics.cjs"',
-      '"validate:stage9": "node scripts/validate_memory_atlas_stage9.cjs"',
-    ]),
-    "stage9_package_scripts_current",
-    "Package scripts expose Stage 9.1, Stage 9.2, and whole-stage validators",
-    "Stage 9 package scripts are incomplete",
+    legacyCommandMappingsCover({
+      "validate:stage9-obsidian": "validate:ui",
+      "validate:stage9-visual-semantics": "validate:ui",
+      "validate:stage9": "validate:release",
+    }),
+    "stage9_command_migrations_current",
+    "The bounded legacy-command map routes Stage 9.1 and Stage 9.2 to UI and whole-stage validation to release",
+    "Stage 9 command migrations are incomplete",
   );
   assertCondition(
     hasAll(stage91Review, [

@@ -1,5 +1,16 @@
 # Memory Atlas v1.2 Remediation Handoff
 
+> **Current v1.2.1 note (2026-07-14):** This file preserves the earlier v1.2 R7
+> handoff below. Memory Atlas is now executing the v1.2.1 Task Pack with one Task per
+> run. `S04-P3-T3` replaces all historical validator aliases with the four public
+> profiles `validate:fast`, `validate:sync`, `validate:ui`, and `validate:release`.
+> Commands in the older "Verified Commands" section are historical evidence, not
+> current package aliases. Use
+> `docs/remediation/memory_atlas_v1_2_1/S04_P3_T3_COMMAND_MIGRATION.md` and
+> `config/memory_atlas_legacy_command_migrations.json` for current routing. No v1.2.1
+> work has been pushed or deployed; the next Task is governed by
+> `docs/governance/roadmap.yaml` only.
+
 ## Current Goal
 
 Complete reopened v1.2 remediation R0-R8 with at most one phase per run and one final

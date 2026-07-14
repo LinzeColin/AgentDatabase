@@ -6,13 +6,13 @@ const http = require("node:http");
 const os = require("node:os");
 const path = require("node:path");
 const { spawnSync } = require("node:child_process");
+const { legacyCommandMappingsCover } = require("./command_migration_contract.cjs");
 
 const appRoot = path.resolve(__dirname, "..");
 const repoRoot = path.resolve(appRoot, "../..");
 const port = Number(process.env.MEMORY_ATLAS_STAGE8_PORT || 4177);
 const targetUrl = `http://127.0.0.1:${port}`;
 
-const packagePath = path.join(appRoot, "package.json");
 const changelogPath = path.join(repoRoot, "CHANGELOG.md");
 const deliveryRecordPath = path.join(repoRoot, "docs/MEMORY_ATLAS_DELIVERY_RECORD.md");
 const modelParametersPath = path.join(repoRoot, "docs/MEMORY_ATLAS_PROJECT_MODEL_PARAMETERS.md");
@@ -111,7 +111,6 @@ async function assertPortClosed() {
 }
 
 function validateDocsAndContracts() {
-  const packageSource = fs.readFileSync(packagePath, "utf8");
   const changelog = fs.readFileSync(changelogPath, "utf8");
   const delivery = fs.readFileSync(deliveryRecordPath, "utf8");
   const model = fs.readFileSync(modelParametersPath, "utf8");
@@ -122,14 +121,14 @@ function validateDocsAndContracts() {
   const stage82Acceptance = fs.readFileSync(stage82AcceptancePath, "utf8");
 
   assertCondition(
-    hasAll(packageSource, [
-      '"validate:stage8-local-app": "node scripts/validate_stage8_local_app_packaging.cjs"',
-      '"validate:stage8-release-safety": "node scripts/validate_stage8_release_safety.cjs"',
-      '"validate:stage8": "node scripts/validate_memory_atlas_stage8.cjs"',
-    ]),
-    "stage8_package_scripts_current",
-    "Package scripts expose Stage 8.1, Stage 8.2, and whole-stage validators",
-    "Stage 8 package scripts are incomplete",
+    legacyCommandMappingsCover({
+      "validate:stage8-local-app": "validate:release",
+      "validate:stage8-release-safety": "validate:release",
+      "validate:stage8": "validate:release",
+    }),
+    "stage8_command_migrations_current",
+    "The bounded legacy-command map routes Stage 8.1, Stage 8.2, and whole-stage validation to release",
+    "Stage 8 command migrations are incomplete",
   );
   assertCondition(
     hasAll(stage81Review, [

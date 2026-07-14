@@ -20,6 +20,7 @@ APP = ROOT / "apps/memory-atlas"
 PACKAGE = APP / "package.json"
 CONFIG = ROOT / "config/memory_atlas_validator_profiles.json"
 RUNNER = ROOT / "scripts/memory_atlas_validator_profiles.py"
+LEGACY_LOOKUP = ROOT / "scripts/memory_atlas_legacy_commands.py"
 DELIVERY_TASKS = ROOT / "docs/governance/delivery_tasks.yaml"
 PUBLIC_PROFILES = ("fast", "sync", "ui", "release")
 PUBLIC_SCRIPT_NAMES = {f"validate:{profile}" for profile in PUBLIC_PROFILES}
@@ -179,6 +180,7 @@ class PublicProfileContractTests(unittest.TestCase):
             {
                 str(path.relative_to(ROOT)): path.read_text(encoding="utf-8")
                 for path in sorted((ROOT / "scripts").glob("*.py"))
+                if path != LEGACY_LOOKUP
             }
         )
         alias_pattern = re.compile(
@@ -211,6 +213,11 @@ class PublicProfileContractTests(unittest.TestCase):
         }
 
         self.assertEqual(invalid_aliases, {})
+        legacy_lookup_source = LEGACY_LOOKUP.read_text(encoding="utf-8")
+        self.assertNotIn("subprocess", legacy_lookup_source)
+        self.assertNotIn("os.system", legacy_lookup_source)
+        self.assertIn('"execution_supported": False', legacy_lookup_source)
+        self.assertIn("REQUIRED_MIGRATED_CALLERS", legacy_lookup_source)
         self.assertIn(
             "node OpenAIDatabase/apps/memory-atlas/scripts/validate_stage7_privacy_accessibility.cjs",
             sources[str(DELIVERY_TASKS.relative_to(ROOT))],

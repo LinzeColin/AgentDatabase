@@ -461,7 +461,7 @@ features:
       - "EVID-OAIDB-RUN0A-CHECK-RENDER"
   - feature_id: "FEAT-MA-V121-S04-P3-T1"
     name: "Memory Atlas 四层 validator profiles"
-    description: "S04-P3-T1 将 package 的 178 个历史 validate aliases 收敛为 fast、sync、ui、release 四个配置驱动 profile；后续 T2 已独立完成测试价值评估与受控删除。"
+    description: "S04-P3-T1 将 package 的 178 个历史 validate aliases 收敛为 fast、sync、ui、release 四个配置驱动 profile；T2 已完成测试价值评估与受控删除，T3 已完成逐项迁移与一版到期策略。"
     status: "active"
     fact_level: "EXTRACTED"
     code_refs:
@@ -490,6 +490,22 @@ features:
     evidence_refs:
       - "EVID-MA-V121-S04-P3-T2-DESIGN"
       - "EVID-MA-V121-S04-P3-T2-TEST"
+  - feature_id: "FEAT-MA-V121-S04-P3-T3"
+    name: "Memory Atlas 有期限旧命令迁移合同"
+    description: "v1.2.1 Task Pack 当前完成 28/149；完整记录 178 条历史 validator alias，绑定源 commit、package/manifest SHA、target 状态与四 profile 替代命令。兼容仅提供不执行命令的只读 lookup，并在 v1.2.2 强制移除。"
+    status: "active"
+    fact_level: "EXTRACTED"
+    code_refs:
+      - "OpenAIDatabase/scripts/memory_atlas_legacy_commands.py:1"
+      - "OpenAIDatabase/config/memory_atlas_legacy_command_migrations.json:1"
+      - "OpenAIDatabase/apps/memory-atlas/scripts/command_migration_contract.cjs:1"
+    test_refs:
+      - "OpenAIDatabase/tests/test_memory_atlas_legacy_command_migrations.py:1"
+      - "npm run validate:fast"
+      - "npm run validate:ui"
+    evidence_refs:
+      - "EVID-MA-V121-S04-P3-T3-DESIGN"
+      - "EVID-MA-V121-S04-P3-T3-TEST"
 models:
   -
     model_id: "MOD-001"
@@ -4535,4 +4551,14 @@ evidence_refs:
     evidence_id: "EVID-MA-V121-S04-P3-T2-TEST"
     kind: "test"
     ref: "python3 -m unittest tests.test_memory_atlas_test_value_audit tests.test_atlasctl_script_consolidation tests.test_memory_atlas_validator_profiles -q"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S04-P3-T3-DESIGN"
+    kind: "design"
+    ref: "OpenAIDatabase/docs/remediation/memory_atlas_v1_2_1/S04_P3_T3_COMMAND_MIGRATION.md"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S04-P3-T3-TEST"
+    kind: "test"
+    ref: "python3 -m unittest tests.test_memory_atlas_legacy_command_migrations tests.test_memory_atlas_validator_profiles tests.test_atlasctl_script_consolidation tests.test_memory_atlas_test_value_audit -q"
     fact_level: "EXTRACTED"

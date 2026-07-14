@@ -3,6 +3,9 @@
 import { readFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import commandMigrationContract from "./command_migration_contract.cjs";
+
+const { legacyCommandMappingsCover } = commandMigrationContract;
 
 const scriptDir = dirname(fileURLToPath(import.meta.url));
 const appRoot = resolve(scriptDir, "..");
@@ -11,7 +14,6 @@ const repoRoot = resolve(appRoot, "../..");
 const appSource = readFileSync(resolve(appRoot, "src/App.tsx"), "utf8");
 const cssSource = readFileSync(resolve(appRoot, "src/styles.css"), "utf8");
 const visualFlags = readFileSync(resolve(appRoot, "src/config/visualFlags.ts"), "utf8");
-const packageSource = readFileSync(resolve(appRoot, "package.json"), "utf8");
 const visualAudit = readFileSync(resolve(repoRoot, "scripts/audit_memory_atlas_visual_acceptance.py"), "utf8");
 const modelParams = readFileSync(resolve(repoRoot, "config/visualization/model_parameters.memory_river.yaml"), "utf8");
 
@@ -96,13 +98,13 @@ requireCheck(
 
 requireCheck(
   "acceptance_audit_is_wired",
-  packageSource.includes('"validate:memory-river-rendering": "node scripts/validate_memory_river_rendering.mjs"')
+  legacyCommandMappingsCover({ "validate:memory-river-rendering": "validate:release" })
     && visualAudit.includes("timeline_stage5_1_river_rendering_ready")
     && visualAudit.includes("memory-river-canvas")
     && visualAudit.includes("data-utc-time-scale")
     && visualAudit.includes("buildMemoryRiverLayout"),
-  "package script and source-level visual acceptance audit both cover Stage 5.1 Memory River rendering",
-  "package script or visual acceptance audit hook for Stage 5.1 Memory River rendering is missing",
+  "command migration and source-level visual acceptance audit both cover Stage 5.1 Memory River rendering",
+  "command migration or visual acceptance audit hook for Stage 5.1 Memory River rendering is missing",
 );
 
 requireCheck(

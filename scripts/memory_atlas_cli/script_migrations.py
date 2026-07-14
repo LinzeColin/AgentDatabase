@@ -312,15 +312,18 @@ def validate_script_migration_map(payload: dict[str, Any], database_dir: Path) -
         errors.append("safety contract mismatch")
     if payload.get("profile_consolidation") != REQUIRED_PROFILE_CONSOLIDATION:
         errors.append("profile consolidation contract mismatch")
-    deferred = payload.get("deferred")
+    command_migration = payload.get("command_migration")
     if (
-        not isinstance(deferred, dict)
-        or deferred.get("task_id") != "S04-P3-T3"
-        or deferred.get("started_in_this_task") is not False
-        or not isinstance(deferred.get("work"), str)
-        or not deferred.get("work")
+        not isinstance(command_migration, dict)
+        or command_migration.get("task_id") != "S04-P3-T3"
+        or command_migration.get("status") != "completed_local_only"
+        or command_migration.get("migration_map")
+        != "config/memory_atlas_legacy_command_migrations.json"
+        or command_migration.get("compatibility_mode") != "lookup_only"
+        or command_migration.get("removal_version") != "v1.2.2"
+        or command_migration.get("public_aliases_restored") is not False
     ):
-        errors.append("deferred S04-P3-T3 contract mismatch")
+        errors.append("S04-P3-T3 command migration contract mismatch")
 
     families = payload.get("families")
     if not isinstance(families, list):

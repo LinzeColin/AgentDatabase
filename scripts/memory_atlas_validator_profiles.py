@@ -49,6 +49,7 @@ _AUDITED_STEP_POLICIES: dict[tuple[str, str], tuple[str, tuple[str, ...]]] = {
             "tests.test_atlasctl_runtime_core",
             "tests.test_atlasctl_script_consolidation",
             "tests.test_memory_atlas_test_value_audit",
+            "tests.test_memory_atlas_legacy_command_migrations",
             "-q",
         ),
     ),

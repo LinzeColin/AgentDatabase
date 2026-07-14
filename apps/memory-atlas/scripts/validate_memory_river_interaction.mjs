@@ -3,6 +3,9 @@
 import { readFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import commandMigrationContract from "./command_migration_contract.cjs";
+
+const { legacyCommandMappingsCover } = commandMigrationContract;
 
 const scriptDir = dirname(fileURLToPath(import.meta.url));
 const appRoot = resolve(scriptDir, "..");
@@ -10,7 +13,6 @@ const repoRoot = resolve(appRoot, "../..");
 
 const appSource = readFileSync(resolve(appRoot, "src/App.tsx"), "utf8");
 const cssSource = readFileSync(resolve(appRoot, "src/styles.css"), "utf8");
-const packageSource = readFileSync(resolve(appRoot, "package.json"), "utf8");
 const visualAudit = readFileSync(resolve(repoRoot, "scripts/audit_memory_atlas_visual_acceptance.py"), "utf8");
 const modelParams = readFileSync(resolve(repoRoot, "config/visualization/model_parameters.memory_river.yaml"), "utf8");
 
@@ -133,7 +135,7 @@ requireCheck(
 
 requireCheck(
   "interaction_parameters_and_audit_wired",
-  packageSource.includes('"validate:memory-river-interaction": "node scripts/validate_memory_river_interaction.mjs"')
+  legacyCommandMappingsCover({ "validate:memory-river-interaction": "validate:release" })
     && visualAudit.includes("timeline_stage5_2_river_interaction_ready")
     && hasAll(modelParams, [
       'stage: "5.3"',
@@ -145,8 +147,8 @@ requireCheck(
       "audio_feedback_default: false",
       "vibration_default: false",
     ]),
-  "Package script, visual audit, and Memory River parameters cover Stage 5.2 interaction contracts",
-  "Stage 5.2 package script, audit hook, or model parameters are missing",
+  "Command migration, visual audit, and Memory River parameters cover Stage 5.2 interaction contracts",
+  "Stage 5.2 command migration, audit hook, or model parameters are missing",
 );
 
 const failed = checks.filter((check) => check.status !== "PASS");
