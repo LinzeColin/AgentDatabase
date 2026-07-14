@@ -4485,3 +4485,13 @@ evidence_refs:
     kind: "run_manifest"
     ref: "governance/run_manifests/TSK-OPENAIDATABASE-PAM1-0019-PUBLISHED-HISTORY-FETCH-FIX-20260717.json"
     fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S04-P3-T1-DESIGN"
+    kind: "design"
+    ref: "OpenAIDatabase/docs/superpowers/specs/2026-07-13-memory-atlas-v1-2-1-s04-p3-t1-validator-profiles-design.md"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S04-P3-T1-TEST"
+    kind: "test"
+    ref: "python3 -m unittest tests.test_memory_atlas_validator_profiles tests.test_atlasctl_script_consolidation -q"
+    fact_level: "EXTRACTED"

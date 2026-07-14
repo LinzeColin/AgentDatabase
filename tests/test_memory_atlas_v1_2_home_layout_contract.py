@@ -6,6 +6,7 @@ ROOT = Path(__file__).resolve().parents[1]
 APP = ROOT / "apps" / "memory-atlas"
 STYLES = APP / "src" / "styles.css"
 PACKAGE = APP / "package.json"
+PROFILE_CONFIG = ROOT / "config/memory_atlas_validator_profiles.json"
 BROWSER_VALIDATOR = (
     APP / "scripts" / "validate_memory_atlas_v1_2_home_multiviewport.cjs"
 )
@@ -67,11 +68,17 @@ def test_mobile_home_content_uses_the_remaining_grid_height() -> None:
 
 
 def test_real_three_viewport_browser_gate_is_registered() -> None:
-    package = json.loads(PACKAGE.read_text(encoding="utf-8"))
+    profile_config = json.loads(PROFILE_CONFIG.read_text(encoding="utf-8"))
+    ui_steps = {
+        step["id"]: step
+        for step in profile_config["profiles"]["ui"]["steps"]
+    }
 
-    assert package["scripts"]["validate:v1.2-home-multiviewport"] == (
-        "node scripts/validate_memory_atlas_v1_2_home_multiviewport.cjs"
-    )
+    assert ui_steps["home_multiviewport"]["command"] == [
+        "node",
+        "scripts/validate_memory_atlas_v1_2_home_multiviewport.cjs",
+    ]
+    assert ui_steps["home_multiviewport"]["cwd"] == "app"
     assert BROWSER_VALIDATOR.is_file()
 
     validator = BROWSER_VALIDATOR.read_text(encoding="utf-8")

@@ -35,7 +35,13 @@ RETAINED_STATUSES = {
     "retained_unique_implementation",
     "retained_partial_cli_coverage",
     "retained_no_equivalent_command",
-    "deferred_to_s04_p3_t1",
+    "profiled_in_s04_p3_t1",
+}
+REQUIRED_PROFILE_CONSOLIDATION = {
+    "task_id": "S04-P3-T1",
+    "status": "completed_local_only",
+    "public_profile_count": 4,
+    "public_profiles": ["fast", "sync", "ui", "release"],
 }
 REQUIRED_DELETION_POLICY = {
     "task_only_files_may_be_deleted_now": True,
@@ -298,15 +304,17 @@ def validate_script_migration_map(payload: dict[str, Any], database_dir: Path) -
         errors.append("deletion_policy mismatch")
     if payload.get("safety") != REQUIRED_SAFETY:
         errors.append("safety contract mismatch")
+    if payload.get("profile_consolidation") != REQUIRED_PROFILE_CONSOLIDATION:
+        errors.append("profile consolidation contract mismatch")
     deferred = payload.get("deferred")
     if (
         not isinstance(deferred, dict)
-        or deferred.get("task_id") != "S04-P3-T1"
+        or deferred.get("task_id") != "S04-P3-T3"
         or deferred.get("started_in_this_task") is not False
         or not isinstance(deferred.get("work"), str)
         or not deferred.get("work")
     ):
-        errors.append("deferred S04-P3-T1 contract mismatch")
+        errors.append("deferred S04-P3-T3 contract mismatch")
 
     families = payload.get("families")
     if not isinstance(families, list):
@@ -413,8 +421,8 @@ def validate_script_migration_map(payload: dict[str, Any], database_dir: Path) -
             errors.append("summary consolidated_execution_module_count mismatch")
         if summary.get("consolidated_execution_block_count") != sum(call_counts):
             errors.append("summary consolidated_execution_block_count mismatch")
-        if summary.get("validator_profile_count_created") != 0:
-            errors.append("summary validator_profile_count_created must remain 0")
+        if summary.get("validator_profile_count_created") != 4:
+            errors.append("summary validator_profile_count_created must equal 4")
     return errors
 
 

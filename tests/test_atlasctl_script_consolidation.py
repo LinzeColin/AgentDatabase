@@ -114,7 +114,23 @@ class ScriptMigrationMapTests(unittest.TestCase):
         self.assertEqual(payload["deleted_scripts"], [])
         self.assertEqual(payload["summary"]["consolidated_execution_module_count"], 5)
         self.assertEqual(payload["summary"]["consolidated_execution_block_count"], 8)
+        self.assertEqual(payload["summary"]["validator_profile_count_created"], 4)
+        self.assertEqual(
+            payload["profile_consolidation"],
+            {
+                "task_id": "S04-P3-T1",
+                "status": "completed_local_only",
+                "public_profile_count": 4,
+                "public_profiles": ["fast", "sync", "ui", "release"],
+            },
+        )
+        self.assertEqual(payload["deferred"]["task_id"], "S04-P3-T3")
         self.assertIs(payload["inventory"]["recursive"], False)
+
+        validator_family = next(row for row in payload["families"] if row["family"] == "validator")
+        for item in validator_family["scripts"]:
+            self.assertEqual(item["status"], "profiled_in_s04_p3_t1")
+            self.assertIn(item["canonical_command"], {"npm run validate:fast", "npm run validate:ui"})
 
     def test_inventory_count_and_exact_hash_facts_match_tracked_sources(self) -> None:
         payload = self.load_contract()
@@ -243,6 +259,7 @@ class ScriptMigrationMapTests(unittest.TestCase):
         payload["inventory"]["recursive"] = True
         payload["deletion_policy"]["equivalent_command_required"] = False
         payload["summary"]["retained_representative_script_count"] = 0
+        payload["profile_consolidation"]["status"] = "pending"
         payload["safety"]["raw_mutation"] = True
         payload["deferred"]["started_in_this_task"] = True
         payload["families"][0]["scripts"][0]["path"] = "功能清单.md"
@@ -253,6 +270,7 @@ class ScriptMigrationMapTests(unittest.TestCase):
         self.assertTrue(any("recursive" in error for error in errors))
         self.assertTrue(any("deletion_policy" in error for error in errors))
         self.assertTrue(any("retained_representative_script_count" in error for error in errors))
+        self.assertTrue(any("profile consolidation" in error for error in errors))
         self.assertTrue(any("safety" in error for error in errors))
         self.assertTrue(any("deferred" in error for error in errors))
         self.assertTrue(any("audited script roots" in error for error in errors))

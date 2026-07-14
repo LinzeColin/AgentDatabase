@@ -62,6 +62,13 @@ def function_block(source: str, function_name: str, next_function_name: str) -> 
 def audit_visual_acceptance(repo_root: Path) -> dict[str, Any]:
     repo_root = repo_root.resolve()
     checks: list[dict[str, str]] = []
+    validator_profile_config = json.loads(
+        read_text(repo_root / "config/memory_atlas_validator_profiles.json")
+    )
+    ui_profile_steps = {
+        step["id"]: step["command"]
+        for step in validator_profile_config["profiles"]["ui"]["steps"]
+    }
 
     source_root = repo_root / "apps/memory-atlas/src"
     app_source = read_frontend_sources(source_root)
@@ -437,7 +444,8 @@ def audit_visual_acceptance(repo_root: Path) -> dict[str, Any]:
     )
     require(
         checks,
-        '"validate:stage7-visual": "node scripts/validate_stage7_visual_acceptance.cjs"' in read_text(repo_root / "apps/memory-atlas/package.json")
+        ui_profile_steps.get("canvas_visual")
+        == ["node", "scripts/validate_stage7_visual_acceptance.cjs"]
         and "function validateGalaxyVisualAcceptance" in stage7_visual_source
         and "function validateMemoryRiverVisualAcceptance" in stage7_visual_source
         and "stage7-galaxy-desktop.png" in stage7_visual_source
@@ -458,7 +466,8 @@ def audit_visual_acceptance(repo_root: Path) -> dict[str, Any]:
     )
     require(
         checks,
-        '"validate:stage7-performance": "node scripts/validate_stage7_performance_acceptance.cjs"' in read_text(repo_root / "apps/memory-atlas/package.json")
+        ui_profile_steps.get("canvas_performance")
+        == ["node", "scripts/validate_stage7_performance_acceptance.cjs"]
         and "fps: latestPerformanceSnapshot.fps" in galaxy_source
         and "averageFrameMs: latestPerformanceSnapshot.averageFrameMs" in galaxy_source
         and "adaptiveQualityEnabled: latestPerformanceSnapshot.adaptiveQualityEnabled" in galaxy_source
@@ -479,7 +488,8 @@ def audit_visual_acceptance(repo_root: Path) -> dict[str, Any]:
     )
     require(
         checks,
-        '"validate:stage7-privacy-accessibility": "node scripts/validate_stage7_privacy_accessibility.cjs"' in read_text(repo_root / "apps/memory-atlas/package.json")
+        ui_profile_steps.get("privacy_accessibility")
+        == ["node", "scripts/validate_stage7_privacy_accessibility.cjs"]
         and 'data-feedback-pseudo-haptic={feedbackSettings.pseudoHaptic ? "enabled" : "disabled"}' in app_source
         and 'data-feedback-audio={feedbackSettings.audio ? "enabled" : "disabled"}' in app_source
         and 'data-feedback-defaults={feedbackSettings.pseudoHaptic || feedbackSettings.audio ? "opted-in" : "silent-by-default"}' in app_source
@@ -1173,7 +1183,8 @@ def audit_visual_acceptance(repo_root: Path) -> dict[str, Any]:
     )
     require(
         checks,
-        '"validate:stage9-obsidian": "node scripts/validate_stage9_obsidian_iteration.cjs"' in read_text(repo_root / "apps/memory-atlas/package.json")
+        ui_profile_steps.get("obsidian_graph")
+        == ["node", "scripts/validate_stage9_obsidian_iteration.cjs"]
         and "LOCAL_GRAPH_PRIMARY_NODE_LIMIT" in obsidian_source
         and "LOCAL_GRAPH_SECONDARY_NODE_LIMIT" in obsidian_source
         and "LOCAL_GRAPH_CLUSTER_MEMBER_LIMIT" in obsidian_source
@@ -1195,7 +1206,8 @@ def audit_visual_acceptance(repo_root: Path) -> dict[str, Any]:
     )
     require(
         checks,
-        '"validate:stage9-visual-semantics": "node scripts/validate_stage9_visual_semantics.cjs"' in read_text(repo_root / "apps/memory-atlas/package.json")
+        ui_profile_steps.get("visual_semantics")
+        == ["node", "scripts/validate_stage9_visual_semantics.cjs"]
         and ("Memory Weather v2" in app_source or "记忆天气 v2" in ui_source)
         and "data-memory-weather-v2" in app_source
         and "buildMemoryWeatherV2" in app_source

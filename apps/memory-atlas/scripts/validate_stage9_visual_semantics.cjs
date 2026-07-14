@@ -87,15 +87,26 @@ function buildFrontend() {
 }
 
 function validateSourceContracts() {
-  const app = fs.readFileSync(path.join(appRoot, "src/App.tsx"), "utf8");
+  const homeSources = [
+    fs.readFileSync(path.join(appRoot, "src/features/overview/HomeOverviewView.tsx"), "utf8"),
+    fs.readFileSync(path.join(appRoot, "src/shared/atlas/previewWeatherModels.ts"), "utf8"),
+  ].join("\n");
+  const timelineSources = [
+    fs.readFileSync(path.join(appRoot, "src/features/assets/TimelineView.tsx"), "utf8"),
+    fs.readFileSync(path.join(appRoot, "src/shared/atlas/memoryRiverModels.ts"), "utf8"),
+  ].join("\n");
   const galaxy = fs.readFileSync(path.join(appRoot, "src/components/GalaxyScene.tsx"), "utf8");
   const css = fs.readFileSync(path.join(appRoot, "src/styles.css"), "utf8");
-  const packageSource = fs.readFileSync(path.join(appRoot, "package.json"), "utf8");
+  const profileConfig = JSON.parse(
+    fs.readFileSync(path.join(repoRoot, "config/memory_atlas_validator_profiles.json"), "utf8"),
+  );
+  const profileStep = profileConfig.profiles?.ui?.steps?.find((step) => step.id === "visual_semantics");
   assertCondition(
-    hasAll(app, [
-      "Memory Weather v2",
+    hasAll(homeSources, [
+      "记忆天气 v2",
       "data-memory-weather-v2",
       "buildMemoryWeatherV2",
+    ]) && hasAll(timelineSources, [
       "memory-river-roi-gradient",
       "buildMemoryRiverRoiGradient",
       "data-roi-gradient=\"capability-growth\"",
@@ -109,9 +120,9 @@ function validateSourceContracts() {
       ".home-weather-v2-scores",
       ".galaxy-roi-gradient-panel",
       ".memory-river-roi-gradient",
-    ]) && packageSource.includes('"validate:stage9-visual-semantics": "node scripts/validate_stage9_visual_semantics.cjs"'),
+    ]) && JSON.stringify(profileStep?.command) === JSON.stringify(["node", "scripts/validate_stage9_visual_semantics.cjs"]),
     "stage9_2_source_contracts",
-    "Source exposes Memory Weather v2, Terrain v2, Galaxy ROI gradient, Memory River ROI gradient, styles, and package validator",
+    "Source exposes Memory Weather v2, Terrain v2, Galaxy ROI gradient, Memory River ROI gradient, styles, and ui profile registration",
     "Stage 9.2 source contract is incomplete",
   );
 }
@@ -211,7 +222,7 @@ async function validateBrowserVisualSemantics() {
       weatherState,
     );
 
-    await page.getByRole("button", { name: /银河星云/ }).click({ timeout: 5000 });
+    await page.locator('[data-nav-view="galaxy"]').click({ timeout: 5000 });
     await page.waitForSelector(".galaxy-scene", { timeout: 20000 });
     await page.getByRole("button", { name: /analysis mode/i }).click({ timeout: 10000 });
     await page.waitForSelector('[data-memory-terrain-v2="analysis-only"]', { timeout: 12000 });

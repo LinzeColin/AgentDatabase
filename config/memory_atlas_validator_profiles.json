@@ -1,0 +1,301 @@
+{
+  "schema_version": "memory_atlas.validator_profiles.v1_2_1_s04_p3_t1",
+  "result_schema_version": "memory_atlas.validator_profile_result.v1_2_1_s04_p3_t1",
+  "public_profiles": [
+    "fast",
+    "sync",
+    "ui",
+    "release"
+  ],
+  "max_output_chars_per_stream": 8000,
+  "profiles": {
+    "fast": {
+      "description_zh": "低成本开发回归：CLI 核心、结构、挂载和类型检查。",
+      "steps": [
+        {
+          "id": "python_core",
+          "command": [
+            "@python",
+            "-B",
+            "-m",
+            "unittest",
+            "tests.test_memory_atlas_validator_profiles",
+            "tests.test_atlasctl_modular_cli",
+            "tests.test_atlasctl_runtime_core",
+            "tests.test_atlasctl_script_consolidation",
+            "-q"
+          ],
+          "cwd": "database",
+          "timeout_seconds": 300,
+          "critical": true
+        },
+        {
+          "id": "frontend_typecheck",
+          "command": [
+            "npm",
+            "run",
+            "lint"
+          ],
+          "cwd": "app",
+          "timeout_seconds": 300,
+          "critical": true
+        },
+        {
+          "id": "feature_structure",
+          "command": [
+            "node",
+            "scripts/validate_memory_atlas_v1_2_1_s04_p1_t1_structure.mjs"
+          ],
+          "cwd": "app",
+          "timeout_seconds": 180,
+          "critical": true
+        },
+        {
+          "id": "mounted_paths",
+          "command": [
+            "node",
+            "scripts/validate_memory_atlas_v1_2_1_s04_p1_t2_mounts.mjs"
+          ],
+          "cwd": "app",
+          "timeout_seconds": 180,
+          "critical": true
+        }
+      ]
+    },
+    "sync": {
+      "description_zh": "同步与数据安全回归：三类来源 dry-run、raw 完整性和凭证扫描。",
+      "steps": [
+        {
+          "id": "sync_unit_tests",
+          "command": [
+            "@python",
+            "-B",
+            "-m",
+            "unittest",
+            "tests.test_s03p3_raw_manifest",
+            "tests.test_s04p1_chatgpt_sync",
+            "tests.test_s04p2_codex_agent_sync",
+            "tests.test_s04p3_github_backup",
+            "tests.test_memory_atlas_r7_public_raw",
+            "tests.test_memory_atlas_r7_raw_integrity",
+            "-q"
+          ],
+          "cwd": "database",
+          "timeout_seconds": 600,
+          "critical": true
+        },
+        {
+          "id": "sync_chatgpt_dry_run",
+          "command": [
+            "@python",
+            "scripts/atlasctl.py",
+            "sync",
+            "--source",
+            "chatgpt",
+            "--dry-run"
+          ],
+          "cwd": "database",
+          "timeout_seconds": 180,
+          "critical": true
+        },
+        {
+          "id": "sync_codex_dry_run",
+          "command": [
+            "@python",
+            "scripts/atlasctl.py",
+            "sync",
+            "--source",
+            "codex",
+            "--dry-run"
+          ],
+          "cwd": "database",
+          "timeout_seconds": 180,
+          "critical": true
+        },
+        {
+          "id": "sync_future_agent_dry_run",
+          "command": [
+            "@python",
+            "scripts/atlasctl.py",
+            "sync",
+            "--source",
+            "future-agent",
+            "--dry-run"
+          ],
+          "cwd": "database",
+          "timeout_seconds": 180,
+          "critical": true
+        },
+        {
+          "id": "raw_append_only",
+          "command": [
+            "@python",
+            "scripts/raw_archive_manifest.py",
+            "audit",
+            "--database-dir",
+            "."
+          ],
+          "cwd": "database",
+          "timeout_seconds": 300,
+          "critical": true
+        },
+        {
+          "id": "credential_scan",
+          "command": [
+            "@python",
+            "scripts/privacy_guard.py",
+            "--database-dir",
+            ".",
+            "--scan-only"
+          ],
+          "cwd": "database",
+          "timeout_seconds": 300,
+          "critical": true
+        }
+      ]
+    },
+    "ui": {
+      "description_zh": "真实 UI 回归：生产构建、三视口、工作流、可视化、性能、隐私与可访问性。",
+      "steps": [
+        {
+          "id": "frontend_build",
+          "command": [
+            "npm",
+            "run",
+            "build"
+          ],
+          "cwd": "app",
+          "timeout_seconds": 300,
+          "critical": true
+        },
+        {
+          "id": "home_multiviewport",
+          "command": [
+            "node",
+            "scripts/validate_memory_atlas_v1_2_home_multiviewport.cjs"
+          ],
+          "cwd": "app",
+          "timeout_seconds": 420,
+          "critical": true
+        },
+        {
+          "id": "visual_models",
+          "command": [
+            "node",
+            "--experimental-strip-types",
+            "scripts/validate_memory_atlas_v1_2_visual_models.mjs"
+          ],
+          "cwd": "app",
+          "timeout_seconds": 300,
+          "critical": true
+        },
+        {
+          "id": "visual_workflows",
+          "command": [
+            "node",
+            "scripts/validate_memory_atlas_v1_2_visual_workflows.cjs"
+          ],
+          "cwd": "app",
+          "timeout_seconds": 600,
+          "critical": true
+        },
+        {
+          "id": "command_workflows",
+          "command": [
+            "node",
+            "scripts/validate_memory_atlas_v1_2_command_workflows.cjs"
+          ],
+          "cwd": "app",
+          "timeout_seconds": 600,
+          "critical": true
+        },
+        {
+          "id": "proposal_e2e",
+          "command": [
+            "node",
+            "scripts/validate_memory_atlas_v1_2_proposal_e2e.cjs"
+          ],
+          "cwd": "app",
+          "timeout_seconds": 600,
+          "critical": true
+        },
+        {
+          "id": "owner_daily_e2e",
+          "command": [
+            "node",
+            "scripts/validate_memory_atlas_v1_2_owner_daily_e2e.cjs"
+          ],
+          "cwd": "app",
+          "timeout_seconds": 600,
+          "critical": true
+        },
+        {
+          "id": "canvas_visual",
+          "command": [
+            "node",
+            "scripts/validate_stage7_visual_acceptance.cjs"
+          ],
+          "cwd": "app",
+          "timeout_seconds": 420,
+          "critical": true
+        },
+        {
+          "id": "canvas_performance",
+          "command": [
+            "node",
+            "scripts/validate_stage7_performance_acceptance.cjs"
+          ],
+          "cwd": "app",
+          "timeout_seconds": 420,
+          "critical": true
+        },
+        {
+          "id": "privacy_accessibility",
+          "command": [
+            "node",
+            "scripts/validate_stage7_privacy_accessibility.cjs"
+          ],
+          "cwd": "app",
+          "timeout_seconds": 900,
+          "critical": true
+        },
+        {
+          "id": "obsidian_graph",
+          "command": [
+            "node",
+            "scripts/validate_stage9_obsidian_iteration.cjs"
+          ],
+          "cwd": "app",
+          "timeout_seconds": 420,
+          "critical": true
+        },
+        {
+          "id": "visual_semantics",
+          "command": [
+            "node",
+            "scripts/validate_stage9_visual_semantics.cjs"
+          ],
+          "cwd": "app",
+          "timeout_seconds": 420,
+          "critical": true
+        }
+      ]
+    },
+    "release": {
+      "description_zh": "发布级全量验收：执行现有 fail-closed final audit、恢复与报告合同。",
+      "steps": [
+        {
+          "id": "final_audit",
+          "command": [
+            "@python",
+            "scripts/atlasctl.py",
+            "audit"
+          ],
+          "cwd": "database",
+          "timeout_seconds": 3600,
+          "critical": true
+        }
+      ]
+    }
+  }
+}

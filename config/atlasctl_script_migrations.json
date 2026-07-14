@@ -1589,7 +1589,7 @@
       {
         "path": "apps/memory-atlas/scripts/validate_stage9_obsidian_iteration.cjs",
         "baseline": true,
-        "sha256": "842b3d322e230a1eac5ef1e370425678194ac472678afea8a55e0c46b9c58ee4",
+        "sha256": "2dcb12a80d2142855fb6f607eeec3acc5d2ae953ca61e03ea7312f979d0899b0",
         "matched_families": [
           "validator"
         ],
@@ -1598,7 +1598,7 @@
       {
         "path": "apps/memory-atlas/scripts/validate_stage9_visual_semantics.cjs",
         "baseline": true,
-        "sha256": "8100a4277eb7c0dc297b02cc03315b797174d68d4bc41860dda26e2e39016d59",
+        "sha256": "e66cb4ac1ebeaef5ce558c96b40aaade2098c6bde668e930191be754b0f817dc",
         "matched_families": [
           "validator"
         ],
@@ -1679,7 +1679,7 @@
       {
         "path": "scripts/audit_memory_atlas_visual_acceptance.py",
         "baseline": true,
-        "sha256": "08246b9b9dd763f804ffd3ce97d0253f4ff2ad9c62f96eb661c44dac6b802f47",
+        "sha256": "0057a9fab8fd55f3d4e06000ea3b5a9eedeb3d70ca49e971a51d9136c5b2a9e0",
         "matched_families": [
           "audit"
         ],
@@ -1832,7 +1832,7 @@
       {
         "path": "scripts/build_memory_atlas_self_iteration.py",
         "baseline": true,
-        "sha256": "bf4b5f53c5ea52b46707658ebf0db3aa51258c3a834f82400bb8359f8c84adac",
+        "sha256": "40ac430d85680906d2527471ee08acb002f74b5f5fd9b81325c846e5614c8baf",
         "matched_families": [
           "build"
         ],
@@ -1841,7 +1841,7 @@
       {
         "path": "scripts/build_memory_atlas_stage_flight.py",
         "baseline": true,
-        "sha256": "78ce248fe30fa977ac6761bb3404b12acc047c25eb559c53bfb35e4e32054da3",
+        "sha256": "98f3fad13b75e574b4ae4e389481af8170412016846fbd5992f95b29d525a6cb",
         "matched_families": [
           "build"
         ],
@@ -1859,7 +1859,7 @@
       {
         "path": "scripts/build_personalization_exports.py",
         "baseline": true,
-        "sha256": "32965f3b32645d3d27dd613e1c340a7185c18b5d3c5c74a576f6622911296ce3",
+        "sha256": "874a312cb9919ee3a7e710fcf6af48be09b8999a62fec37705337a8cb75bf724",
         "matched_families": [
           "build"
         ],
@@ -1916,8 +1916,19 @@
     "retained_representative_script_count": 15,
     "consolidated_execution_module_count": 5,
     "consolidated_execution_block_count": 8,
-    "validator_profile_count_created": 0,
+    "validator_profile_count_created": 4,
     "mapped_scoped_script_count": 208
+  },
+  "profile_consolidation": {
+    "task_id": "S04-P3-T1",
+    "status": "completed_local_only",
+    "public_profile_count": 4,
+    "public_profiles": [
+      "fast",
+      "sync",
+      "ui",
+      "release"
+    ]
   },
   "families": [
     {
@@ -2046,42 +2057,42 @@
     {
       "family": "validator",
       "scope": "apps/memory-atlas/scripts/validate_*.cjs and validate_*.mjs",
-      "disposition": "Defer public validator profile consolidation to S04-P3-T1.",
+      "disposition": "Public validation is consolidated into four profiles; historical implementations remain internal pending T2 value review and T3 migration documentation.",
       "scripts": [
         {
           "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_1_s04_p1_t1_structure.mjs",
-          "status": "deferred_to_s04_p3_t1",
-          "canonical_command": "npm run validate:v1.2.1-s04-p1-t1-structure",
+          "status": "profiled_in_s04_p3_t1",
+          "canonical_command": "npm run validate:fast",
           "deletion_blockers": [
-            "package exposes the validator directly",
-            "fast/sync/ui/release profiles do not exist yet"
+            "fast profile invokes the validator as an internal implementation",
+            "S04-P3-T2 has not completed the value and deletion review"
           ]
         },
         {
           "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_1_s04_p1_t2_mounts.mjs",
-          "status": "deferred_to_s04_p3_t1",
-          "canonical_command": "npm run validate:v1.2.1-s04-p1-t2-mounts",
+          "status": "profiled_in_s04_p3_t1",
+          "canonical_command": "npm run validate:fast",
           "deletion_blockers": [
-            "package exposes the validator directly",
-            "fast/sync/ui/release profiles do not exist yet"
+            "fast profile invokes the validator as an internal implementation",
+            "S04-P3-T2 has not completed the value and deletion review"
           ]
         },
         {
           "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s04_p2.cjs",
-          "status": "deferred_to_s04_p3_t1",
-          "canonical_command": "npm run validate:v1.2-s04-p2",
+          "status": "profiled_in_s04_p3_t1",
+          "canonical_command": "npm run validate:fast",
           "deletion_blockers": [
-            "package exposes the validator directly",
-            "it remains the historical modular CLI compatibility gate"
+            "fast profile covers the modular CLI regressions through current Python contracts",
+            "S04-P3-T2 and S04-P3-T3 have not proven deletion parity for the historical aggregate"
           ]
         },
         {
           "path": "apps/memory-atlas/scripts/validate_stage7_visual_acceptance.cjs",
-          "status": "deferred_to_s04_p3_t1",
-          "canonical_command": "npm run validate:stage7-visual",
+          "status": "profiled_in_s04_p3_t1",
+          "canonical_command": "npm run validate:ui",
           "deletion_blockers": [
-            "final audit invokes the browser gate",
-            "ui profile replacement is not implemented"
+            "ui profile and final audit invoke the browser gate as an internal implementation",
+            "S04-P3-T2 has not completed the value and deletion review"
           ]
         }
       ]
@@ -2090,8 +2101,8 @@
   "equivalence_tests": [],
   "deleted_scripts": [],
   "deferred": {
-    "task_id": "S04-P3-T1",
-    "work": "Consolidate version and Stage validators into fast, sync, ui and release profiles.",
+    "task_id": "S04-P3-T3",
+    "work": "Document the comprehensive old-command migration table and temporary compatibility policy.",
     "started_in_this_task": false
   },
   "safety": {

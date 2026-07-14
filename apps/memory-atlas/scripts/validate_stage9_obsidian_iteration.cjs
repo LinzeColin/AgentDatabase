@@ -84,9 +84,13 @@ function buildFrontend() {
 
 function validateSourceContracts() {
   const obsidian = fs.readFileSync(path.join(appRoot, "src/components/ObsidianGraphScene.tsx"), "utf8");
-  const app = fs.readFileSync(path.join(appRoot, "src/App.tsx"), "utf8");
+  const obsidianView = fs.readFileSync(path.join(appRoot, "src/features/assets/ObsidianGraph.tsx"), "utf8");
+  const galaxy = fs.readFileSync(path.join(appRoot, "src/components/GalaxyScene.tsx"), "utf8");
   const css = fs.readFileSync(path.join(appRoot, "src/styles.css"), "utf8");
-  const packageSource = fs.readFileSync(path.join(appRoot, "package.json"), "utf8");
+  const profileConfig = JSON.parse(
+    fs.readFileSync(path.join(repoRoot, "config/memory_atlas_validator_profiles.json"), "utf8"),
+  );
+  const profileStep = profileConfig.profiles?.ui?.steps?.find((step) => step.id === "obsidian_graph");
   assertCondition(
     hasAll(obsidian, [
       "LOCAL_GRAPH_PRIMARY_NODE_LIMIT",
@@ -101,15 +105,17 @@ function validateSourceContracts() {
       "labelVisibilityRule",
       "data-label-rule",
       "Local Graph Budget",
-    ]) && hasAll(app, [
+    ]) && hasAll(obsidianView, [
       "sharedFocus={sharedState.focus}",
       "sharedState: SharedAtlasState",
+    ]) && hasAll(galaxy, [
+      "__memoryAtlasGalaxyDebugTargets",
     ]) && hasAll(css, [
       ".obsidian-local-budget",
       ".obsidian-node-label[data-label-rule=\"local-neighbor\"]",
-    ]) && packageSource.includes('"validate:stage9-obsidian": "node scripts/validate_stage9_obsidian_iteration.cjs"'),
+    ]) && JSON.stringify(profileStep?.command) === JSON.stringify(["node", "scripts/validate_stage9_obsidian_iteration.cjs"]),
     "stage9_1_source_contracts",
-    "Source exposes local graph budget, Galaxy cluster focus sync, label rules, styles, and package validator",
+    "Source exposes local graph budget, Galaxy cluster focus sync, label rules, styles, and ui profile registration",
     "Stage 9.1 source contract is incomplete",
   );
 }
@@ -190,7 +196,7 @@ async function validateBrowserObsidian() {
 
     await page.goto(targetUrl, { waitUntil: "domcontentloaded", timeout: 20000 });
     await page.waitForSelector('.content-grid[data-view="home"]', { timeout: 20000 });
-    await page.getByRole("button", { name: /Obsidian 图谱/ }).click({ timeout: 5000 });
+    await page.locator('[data-nav-view="obsidian"]').click({ timeout: 5000 });
     await page.waitForSelector(".obsidian-graph-canvas", { timeout: 20000 });
     await page.waitForFunction(() => document.querySelectorAll(".obsidian-node").length > 12 && document.querySelectorAll(".obsidian-link").length > 8, null, { timeout: 10000 });
     await page.waitForTimeout(500);
@@ -225,13 +231,24 @@ async function validateBrowserObsidian() {
     );
 
     await page.getByRole("button", { name: /^全局图$/ }).click({ timeout: 5000 });
-    await page.getByRole("button", { name: /银河星云/ }).click({ timeout: 5000 });
+    await page.locator('[data-nav-view="galaxy"]').click({ timeout: 5000 });
     await page.waitForSelector(".galaxy-webgl-canvas", { timeout: 20000 });
-    const canvasBox = await page.locator(".galaxy-webgl-canvas").boundingBox();
-    assertCondition(Boolean(canvasBox), "stage9_1_galaxy_canvas_ready", "Galaxy canvas is visible for shared focus probe", "Galaxy canvas has no bounding box");
-    await page.mouse.click(canvasBox.x + canvasBox.width / 2, canvasBox.y + canvasBox.height / 2);
-    await page.waitForTimeout(500);
-    await page.getByRole("button", { name: /Obsidian 图谱/ }).click({ timeout: 5000 });
+    await page.waitForFunction(() => typeof window.__memoryAtlasGalaxyDebugTargets === "function", null, { timeout: 10000 });
+    const galaxyTarget = await page.evaluate(() => window.__memoryAtlasGalaxyDebugTargets?.()[0] ?? null);
+    assertCondition(
+      Boolean(galaxyTarget) && Number.isFinite(galaxyTarget.x) && Number.isFinite(galaxyTarget.y),
+      "stage9_1_galaxy_target_ready",
+      "Galaxy exposes a deterministic connected-node target for shared focus probe",
+      "Galaxy has no deterministic connected-node target",
+      galaxyTarget || {},
+    );
+    await page.mouse.click(galaxyTarget.x, galaxyTarget.y);
+    await page.waitForFunction(
+      () => Boolean(document.querySelector(".galaxy-view")?.getAttribute("data-shared-cluster")),
+      null,
+      { timeout: 12000 },
+    );
+    await page.locator('[data-nav-view="obsidian"]').click({ timeout: 5000 });
     await page.waitForSelector(".obsidian-graph-canvas", { timeout: 20000 });
     await page.waitForFunction(() => {
       const view = document.querySelector(".obsidian-graph-view");

@@ -181,7 +181,7 @@ def build_stage_flight_recorder(
             "phase_s08_p1_collaboration_metrics_completed_pending_s08_p2",
             "S08 P1 生成 Codex/Agent 协作质量报告，保持证据化中文摘要。",
             [evidence("s08p1_collaboration_report", S08P1_REPORT_PATH, "derived")],
-            ["validate:v1.2-s08-p1", "python scripts/atlasctl.py audit --check agent-collaboration"],
+            ["python scripts/atlasctl.py audit --check agent-collaboration"],
             "S08 P2",
         ),
         phase_record(
@@ -191,7 +191,7 @@ def build_stage_flight_recorder(
             "phase_s08_p2_authorization_boundary_completed_pending_s08_p3",
             "S08 P2 定义授权边界，确认 raw 不可修改且 proposal 需人类授权。",
             [evidence("s08p2_authorization_report", S08P2_REPORT_PATH, "derived")],
-            ["validate:v1.2-s08-p2", "python scripts/atlasctl.py audit --check agent-authorization"],
+            ["python scripts/atlasctl.py audit --check agent-authorization"],
             "S08 P3",
         ),
         phase_record(
@@ -201,7 +201,7 @@ def build_stage_flight_recorder(
             STATUS,
             "S08 P3 只记录 lightweight stage flight recorder 字段，不生成臃肿人类文档。",
             [evidence("s08p3_flight_recorder_config", CONFIG_PATH)],
-            ["validate:v1.2-s08-p3", "python scripts/atlasctl.py audit --check stage-flight"],
+            ["python scripts/atlasctl.py audit --check stage-flight"],
             "S08 Review",
         ),
     ]

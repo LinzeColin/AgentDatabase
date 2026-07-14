@@ -68,7 +68,7 @@ def final_audit_gate_plan(database_dir: Path) -> list[dict[str, object]]:
         {
             "gate_id": "rendered_chinese_ux",
             "name_zh": "Rendered Chinese UX and three-viewport Home audit",
-            "command": ["npm", "run", "validate:v1.2-home-multiviewport"],
+            "command": ["node", "scripts/validate_memory_atlas_v1_2_home_multiviewport.cjs"],
             "cwd": str(app_dir),
             "timeout_seconds": 300,
             "pass_explanation_zh": "三视口真实浏览器中文 UX、布局、可达性和默认人类界面审计通过。",
@@ -86,7 +86,7 @@ def final_audit_gate_plan(database_dir: Path) -> list[dict[str, object]]:
         {
             "gate_id": "visual_workflows",
             "name_zh": "Twelve visual decision workflows",
-            "command": ["npm", "run", "validate:v1.2-visual-workflows"],
+            "command": ["node", "scripts/validate_memory_atlas_v1_2_visual_workflows.cjs"],
             "cwd": str(app_dir),
             "timeout_seconds": 420,
             "pass_explanation_zh": "十二项真实视觉工作流、筛选、证据交互和公式变化审计通过。",
@@ -95,7 +95,7 @@ def final_audit_gate_plan(database_dir: Path) -> list[dict[str, object]]:
         {
             "gate_id": "command_workflows",
             "name_zh": "Command workflow browser audit",
-            "command": ["npm", "run", "validate:v1.2-command-workflows"],
+            "command": ["node", "scripts/validate_memory_atlas_v1_2_command_workflows.cjs"],
             "cwd": str(app_dir),
             "timeout_seconds": 420,
             "pass_explanation_zh": "六个命令工作流通过真实浏览器与受控本地 runtime 审计。",
@@ -104,7 +104,7 @@ def final_audit_gate_plan(database_dir: Path) -> list[dict[str, object]]:
         {
             "gate_id": "proposal_e2e",
             "name_zh": "Authorized proposal apply and rollback E2E",
-            "command": ["npm", "run", "validate:v1.2-proposal-e2e"],
+            "command": ["node", "scripts/validate_memory_atlas_v1_2_proposal_e2e.cjs"],
             "cwd": str(app_dir),
             "timeout_seconds": 420,
             "pass_explanation_zh": "提案审批、授权 apply、验证失败自动回滚和人工回滚端到端审计通过。",
@@ -113,7 +113,7 @@ def final_audit_gate_plan(database_dir: Path) -> list[dict[str, object]]:
         {
             "gate_id": "owner_daily_e2e",
             "name_zh": "Owner Daily product entry E2E",
-            "command": ["npm", "run", "validate:v1.2-owner-daily-e2e"],
+            "command": ["node", "scripts/validate_memory_atlas_v1_2_owner_daily_e2e.cjs"],
             "cwd": str(app_dir),
             "timeout_seconds": 420,
             "pass_explanation_zh": "Owner Daily 八步运行、中文结论和仅重试失败步骤的产品入口审计通过。",
@@ -122,7 +122,7 @@ def final_audit_gate_plan(database_dir: Path) -> list[dict[str, object]]:
         {
             "gate_id": "stage7_visual",
             "name_zh": "Canvas visual acceptance",
-            "command": ["npm", "run", "validate:stage7-visual"],
+            "command": ["node", "scripts/validate_stage7_visual_acceptance.cjs"],
             "cwd": str(app_dir),
             "timeout_seconds": 300,
             "pass_explanation_zh": "Galaxy 与 Memory River 真实 canvas 非空、映射和交互审计通过。",
@@ -131,7 +131,7 @@ def final_audit_gate_plan(database_dir: Path) -> list[dict[str, object]]:
         {
             "gate_id": "stage7_performance",
             "name_zh": "Canvas performance acceptance",
-            "command": ["npm", "run", "validate:stage7-performance"],
+            "command": ["node", "scripts/validate_stage7_performance_acceptance.cjs"],
             "cwd": str(app_dir),
             "timeout_seconds": 300,
             "pass_explanation_zh": "桌面与移动性能预算审计通过。",
@@ -140,7 +140,7 @@ def final_audit_gate_plan(database_dir: Path) -> list[dict[str, object]]:
         {
             "gate_id": "stage7_privacy_accessibility",
             "name_zh": "Release privacy and accessibility acceptance",
-            "command": ["npm", "run", "validate:stage7-privacy-accessibility"],
+            "command": ["node", "scripts/validate_stage7_privacy_accessibility.cjs"],
             "cwd": str(app_dir),
             "timeout_seconds": 600,
             "pass_explanation_zh": "发布隐私、512 文件全内容安全、reduced-motion 和静默默认审计通过。",
