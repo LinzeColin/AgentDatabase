@@ -132,10 +132,10 @@ export function createTierAssetDetail(
     proposal_hint: recommended_asset_action === "keep" && confidence >= 0.7 ? "proposal_not_needed" : "proposal_recommended",
     proposal_only: true,
     recommended_asset_action,
-    rollback_hint: "若资产判断不成立，只关闭面板或撤销后续 proposal 草稿；Phase 1.3 不写长期记忆。",
+    rollback_hint: "若资产判断不成立，只关闭面板或撤销后续提案草稿；当前阶段不写长期记忆。",
     source_scope: "redacted_atlas_snapshot",
     staleness_status,
-    summary: `${title} 属于 ${asset_tier} 层级资产；主题 ${theme}，当前仅使用 redacted label、层级、分类、日期、ROI 与连接数生成说明。`,
+    summary: `${title} 属于${humanAssetTier(asset_tier)}；主题 ${theme}，当前仅使用脱敏标签、层级、分类、日期、投入回报与连接数生成说明。`,
     targetView: "search",
     theme,
     title,
@@ -338,7 +338,7 @@ export function createTopicClassificationDetail(
     id: topic_id,
     linked_action_ids,
     linked_asset_ids,
-    matched_reason: `${topic_label} has ${nodes.length.toLocaleString()} redacted records, ${recent_count.toLocaleString()} recent records, ROI ${formatScore(roi_score)} and state ${topic_state}.`,
+    matched_reason: `${topic_label} 有 ${nodes.length.toLocaleString()} 条脱敏记录，其中 ${recent_count.toLocaleString()} 条为近期记录；投入回报 ${formatScore(roi_score)}，状态为${humanTopicState(topic_state)}。`,
     node: representative,
     nodes,
     parent_topic: parentTopicForTopic(topic_label),
@@ -348,7 +348,7 @@ export function createTopicClassificationDetail(
     record_count: nodes.length,
     representative_record_ids: nodes.slice(0, 5).map((node) => node.id),
     river_handoff: `memory_river:theme_lane:${topic_label}:recent_count:${recent_count}`,
-    rollback_hint: "若主题判断不成立，只关闭面板或撤销后续 proposal 草稿；Phase 1.4 不写长期记忆。",
+    rollback_hint: "若主题判断不成立，只关闭面板或撤销后续提案草稿；当前阶段不写长期记忆。",
     roi_score,
     starfield_handoff: `memory_starfield:focus_topic:${topic_label}`,
     targetView: topic_state === "declining" || topic_state === "stale" || topic_state === "black_hole" ? "timeline" : "galaxy",
@@ -358,4 +358,16 @@ export function createTopicClassificationDetail(
     topic_strength,
     trend,
   };
+}
+
+
+
+function humanAssetTier(tier: string): string {
+  return ({ core: "核心层级资产", general: "一般层级资产", temporary: "临时层级资产", stale: "待复核层级资产" } as Record<string, string>)[tier] ?? "未分类层级资产";
+}
+
+
+
+function humanTopicState(state: string): string {
+  return ({ dominant: "主导", emerging: "新兴", stable: "稳定", declining: "下降", stale: "过期", conflict: "冲突", black_hole: "低价值" } as Record<string, string>)[state] ?? "待判断";
 }

@@ -111,7 +111,7 @@ function validateSourceContracts() {
       "buildMemoryRiverRoiGradient",
       "data-roi-gradient=\"capability-growth\"",
     ]) && hasAll(galaxy, [
-      "Memory Terrain v2",
+      "记忆地形",
       "data-memory-terrain-v2",
       "buildGalaxyRoiGradientSummary",
       "galaxy-roi-gradient-panel",
@@ -224,7 +224,7 @@ async function validateBrowserVisualSemantics() {
 
     await page.locator('[data-nav-view="galaxy"]').click({ timeout: 5000 });
     await page.waitForSelector(".galaxy-scene", { timeout: 20000 });
-    await page.getByRole("button", { name: /analysis mode/i }).click({ timeout: 10000 });
+    await page.getByRole("button", { name: "分析模式" }).click({ timeout: 10000 });
     await page.waitForSelector('[data-memory-terrain-v2="analysis-only"]', { timeout: 12000 });
     await page.waitForSelector('[data-roi-gradient="galaxy-analysis"]', { timeout: 12000 });
     const galaxyState = await page.evaluate(() => ({
@@ -235,7 +235,7 @@ async function validateBrowserVisualSemantics() {
       roiText: document.querySelector('[data-roi-gradient="galaxy-analysis"]')?.textContent || "",
     }));
     assertCondition(
-      galaxyState.terrainRows >= 5 && galaxyState.roiRows >= 4 && galaxyState.terrainText.includes("analysis-only") && galaxyState.roiText.includes("ROI"),
+      galaxyState.terrainRows >= 5 && galaxyState.roiRows >= 4 && galaxyState.terrainText.includes("记忆地形") && galaxyState.roiText.includes("投入回报"),
       "stage9_2_galaxy_terrain_roi",
       "Galaxy analysis mode exposes explainable Terrain v2 and ROI capability gradient overlays",
       "Galaxy Terrain v2 or ROI gradient browser contract is missing",
@@ -251,7 +251,7 @@ async function validateBrowserVisualSemantics() {
       evidenceLayers: document.querySelector(".memory-river-canvas")?.getAttribute("data-evidence-layers"),
     }));
     assertCondition(
-      riverState.bandCount >= 8 && riverState.text.includes("ROI gradient") && riverState.evidenceLayers?.includes("roi-gradient"),
+      riverState.bandCount >= 8 && riverState.text.includes("投入回报梯度") && riverState.evidenceLayers?.includes("roi-gradient"),
       "stage9_2_memory_river_roi_gradient",
       "Memory River renders ROI/capability gradient as a visible analysis overlay",
       "Memory River ROI gradient browser contract is missing",

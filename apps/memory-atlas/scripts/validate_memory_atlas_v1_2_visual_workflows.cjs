@@ -422,7 +422,7 @@ async function assertFormulaInteraction(page, writeRequests) {
     throw new Error(`R6 Formula reset did not restore ${baseline}; current score is ${current}`);
   }
   const safety = await page.locator("[data-r6-formula-safety]").innerText();
-  assertCondition(/proxy/i.test(safety) && /不是.*(收入|财务建议)/.test(safety), "R6 Formula safety copy is incomplete", { safety });
+  assertCondition(/内部估算分/.test(safety) && /不是.*(收入|财务建议)/.test(safety), "R6 Formula safety copy is incomplete", { safety });
   assertCondition(writeRequests.length === 0, "R6 Formula interaction issued a write request", { writeRequests });
   return { baseline, changed, reset: await score.getAttribute("data-r6-score"), safety };
 }

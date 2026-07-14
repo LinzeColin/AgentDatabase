@@ -236,32 +236,32 @@ const STAGE7_PERFORMANCE_THRESHOLDS = {
 const MEMORY_TERRAIN_ORDER: MemoryTerrainType[] = ["ridge", "shoreline", "valley", "basin", "fault-line"];
 const MEMORY_TERRAIN_VISUALS: Record<MemoryTerrainType, { label: string; explanation: string; color: string; opacity: number }> = {
   ridge: {
-    label: "山脉 / Ridge",
-    explanation: "persistent high-ROI theme",
+    label: "高价值山脉",
+    explanation: "长期稳定的高投入回报主题",
     color: "#7ee8d4",
     opacity: 0.2,
   },
   shoreline: {
-    label: "城市/图书馆岸线 / Shoreline",
-    explanation: "boundary between mature and emerging topics",
+    label: "成熟与新生岸线",
+    explanation: "成熟主题与新兴主题之间的边界",
     color: "#bcdfff",
     opacity: 0.16,
   },
   valley: {
-    label: "河谷 / Valley",
-    explanation: "underdeveloped or inactive area",
+    label: "低活跃河谷",
+    explanation: "尚未发展或近期不活跃的区域",
     color: "#8fd3ff",
     opacity: 0.12,
   },
   basin: {
-    label: "遗迹盆地 / Basin",
-    explanation: "repeated low-value loop",
+    label: "低价值循环盆地",
+    explanation: "反复出现的低价值循环",
     color: "#94a3b8",
     opacity: 0.14,
   },
   "fault-line": {
-    label: "工业断层 / Fault line",
-    explanation: "contradiction or conflict zone",
+    label: "矛盾冲突断层",
+    explanation: "需要复核的矛盾或冲突区域",
     color: "#f48fb1",
     opacity: 0.18,
   },
@@ -1380,40 +1380,40 @@ export function GalaxyScene({ nodes, edges, rendererMode, selectedNode, starfiel
       ) : null}
       {!renderError ? (
         <div className="galaxy-controls" aria-label="银河视角控制">
-          <span className="galaxy-renderer-chip">{rendererMode === "memory-starfield" ? "Flow Field" : "Legacy"}</span>
+          <span className="galaxy-renderer-chip">{rendererMode === "memory-starfield" ? "动态星流" : "经典银河"}</span>
           {rendererMode === "memory-starfield" ? (
-            <div className="galaxy-quality-tabs" aria-label="Flow Field quality selector">
+            <div className="galaxy-quality-tabs" aria-label="动态星流画质选择">
               {(["high", "mid", "low"] as StarfieldQuality[]).map((quality) => (
                 <button
-                  aria-label={`${quality} quality`}
+                  aria-label={humanQualityLabel(quality)}
                   aria-pressed={starfieldQuality === quality}
                   key={quality}
-                  title={quality === "low" ? "低质量 fallback 模式" : `${quality} quality`}
+                  title={humanQualityLabel(quality)}
                   type="button"
                   onClick={() => updateStarfieldQuality(quality)}
                 >
-                  {quality}
+                  {humanQualityLabel(quality)}
                 </button>
               ))}
             </div>
           ) : null}
           {rendererMode === "memory-starfield" ? (
             <button
-              aria-label={adaptiveQualityEnabled ? "Disable Adaptive Quality" : "Enable Adaptive Quality"}
+              aria-label={adaptiveQualityEnabled ? "关闭自动画质" : "启用自动画质"}
               aria-pressed={adaptiveQualityEnabled}
               className="galaxy-adaptive-quality-toggle"
-              title={adaptiveQualityEnabled ? "Disable Adaptive Quality" : "Enable Adaptive Quality"}
+              title={adaptiveQualityEnabled ? "关闭自动画质" : "启用自动画质"}
               type="button"
               onClick={() => setAdaptiveQualityEnabled((enabled) => !enabled)}
             >
-              Auto
+              自动
             </button>
           ) : null}
           {rendererMode === "memory-starfield" ? (
-            <label className="galaxy-flow-control" title="Flow Field strength">
+            <label className="galaxy-flow-control" title="动态星流强度">
               <Gauge size={15} />
               <input
-                aria-label="Flow Field strength"
+                aria-label="动态星流强度"
                 max="1.4"
                 min="0"
                 onChange={(event) => setFlowFieldStrength(Number(event.target.value))}
@@ -1425,9 +1425,9 @@ export function GalaxyScene({ nodes, edges, rendererMode, selectedNode, starfiel
           ) : null}
           {rendererMode === "memory-starfield" ? (
             <button
-              aria-label={flowPaused ? "Resume Flow Field" : "Freeze Flow Field"}
+              aria-label={flowPaused ? "继续动态星流" : "暂停动态星流"}
               aria-pressed={flowPaused}
-              title={flowPaused ? "Resume Flow Field" : "Freeze Flow Field"}
+              title={flowPaused ? "继续动态星流" : "暂停动态星流"}
               type="button"
               onClick={() => setFlowPaused((paused) => !paused)}
             >
@@ -1435,17 +1435,17 @@ export function GalaxyScene({ nodes, edges, rendererMode, selectedNode, starfiel
             </button>
           ) : null}
           {rendererMode === "memory-starfield" ? (
-            <div className="galaxy-mode-tabs" aria-label="Starfield mode selector">
+            <div className="galaxy-mode-tabs" aria-label="星图模式选择">
               {(["presentation", "analysis"] as StarfieldViewMode[]).map((mode) => (
                 <button
-                  aria-label={`${mode} mode`}
+                  aria-label={mode === "presentation" ? "演示模式" : "分析模式"}
                   aria-pressed={starfieldMode === mode}
                   key={mode}
-                  title={mode === "presentation" ? "Presentation Mode" : "Analysis Mode"}
+                  title={mode === "presentation" ? "演示模式" : "分析模式"}
                   type="button"
                   onClick={() => updateStarfieldMode(mode)}
                 >
-                  {mode === "presentation" ? "Present" : "Analysis"}
+                  {mode === "presentation" ? "演示" : "分析"}
                 </button>
               ))}
             </div>
@@ -1462,22 +1462,22 @@ export function GalaxyScene({ nodes, edges, rendererMode, selectedNode, starfiel
         </div>
       ) : null}
       {rendererMode === "memory-starfield" && starfieldMode === "analysis" ? (
-        <div className="galaxy-performance-overlay" data-performance-overlay="true" aria-label="Galaxy performance metrics">
+        <div className="galaxy-performance-overlay" data-performance-overlay="true" aria-label="银河渲染性能指标">
           <div>
             <strong>{Math.round(performanceSnapshot.fps)}</strong>
-            <span>FPS</span>
+            <span>帧率</span>
           </div>
           <div>
-            <strong>{performanceSnapshot.quality.toUpperCase()}</strong>
-            <span>{performanceSnapshot.adaptiveQualityEnabled ? "AUTO" : "MANUAL"}</span>
+            <strong>{humanQualityLabel(performanceSnapshot.quality)}</strong>
+            <span>{performanceSnapshot.adaptiveQualityEnabled ? "自动" : "手动"}</span>
           </div>
           <div>
             <strong>{performanceSnapshot.averageFrameMs.toFixed(1)}ms</strong>
-            <span>FRAME</span>
+            <span>帧耗时</span>
           </div>
           <div>
             <strong>{performanceSnapshot.minFps}</strong>
-            <span>MIN</span>
+            <span>最低帧率</span>
           </div>
         </div>
       ) : null}
@@ -1486,31 +1486,31 @@ export function GalaxyScene({ nodes, edges, rendererMode, selectedNode, starfiel
           className="galaxy-terrain-panel"
           data-memory-terrain-v2="analysis-only"
           data-terrain-semantic-coverage={terrainSummary.semanticCoverage.toFixed(2)}
-          aria-label="Memory Terrain v2 analysis panel"
+          aria-label="记忆地形分析面板"
         >
           <div className="terrain-panel-heading">
-            <strong><Layers size={14} /> Memory Terrain v2</strong>
-            <span>{terrainSummary.total.toLocaleString()} mapped features · {terrainSummary.dominantLabel}</span>
+            <strong><Layers size={14} /> 记忆地形</strong>
+            <span>{terrainSummary.total.toLocaleString()} 个映射特征 · {terrainSummary.dominantLabel}</span>
           </div>
-          <div className="terrain-formula-grid" data-starfield-formula-panel="stage4-phase3" aria-label="Starfield formula summary">
+          <div className="terrain-formula-grid" data-starfield-formula-panel="stage4-phase3" aria-label="星图公式摘要">
             <div>
-              <b>mass</b>
-              <span>universe_state mass_score + ROI + log evidence</span>
+              <b>质量</b>
+              <span>宇宙状态质量分 + 投入回报 + 对数证据量</span>
             </div>
             <div>
-              <b>brightness / color</b>
-              <span>brightness = mass + roi + confidence; color = terrain</span>
+              <b>亮度与颜色</b>
+              <span>亮度由质量、投入回报和置信度决定；颜色表示地形</span>
             </div>
             <div>
-              <b>trail</b>
-              <span>trail = interaction density + growth + orbit stability</span>
+              <b>轨迹</b>
+              <span>轨迹由互动密度、增长和轨道稳定性决定</span>
             </div>
             <div>
-              <b>flow</b>
-              <span>{flowPaused ? "frozen for reading" : "animated by interaction density"}</span>
+              <b>流动</b>
+              <span>{flowPaused ? "已暂停，便于阅读" : "按互动密度动态展示"}</span>
             </div>
             <div>
-              <b>terrain</b>
+              <b>地形</b>
               <span>{terrainSummary.analysisNote}</span>
             </div>
           </div>
@@ -1525,18 +1525,18 @@ export function GalaxyScene({ nodes, edges, rendererMode, selectedNode, starfiel
                 style={{ "--terrain-intensity": `${Math.round(row.intensity * 100)}%` } as CSSProperties}
               >
                 <b>{row.label}</b>
-                <span>{row.count.toLocaleString()} nodes · ROI {formatScore(row.averageRoi)}</span>
+                <span>{row.count.toLocaleString()} 个节点 · 投入回报 {formatScore(row.averageRoi)}</span>
                 <em>{row.explanation}</em>
-                <small>{row.capabilitySignal} · {row.sampleLabels.length ? row.sampleLabels.join(" / ") : "No current sample"}</small>
+                <small>{row.capabilitySignal} · {row.sampleLabels.length ? row.sampleLabels.join(" / ") : "当前没有样本"}</small>
               </div>
             ))}
           </div>
-          <div className="terrain-inspector-strip" aria-label="Analysis inspector summary">
-            <b>Inspector</b>
+          <div className="terrain-inspector-strip" aria-label="分析检查器摘要">
+            <b>详情检查器</b>
             <span>
               {selectedNode
-                ? `${galaxyPreviewTitle(selectedNode)} / ${normalizeMemoryTier(selectedNode.memory_tier)} / ${selectedEdgeCount.toLocaleString()} links`
-                : "Select a cluster to inspect focus, neighbors and formula context"}
+                ? `${galaxyPreviewTitle(selectedNode)} / ${normalizeMemoryTier(selectedNode.memory_tier)} / ${selectedEdgeCount.toLocaleString()} 条关联`
+                : "选择一个星簇，查看焦点、邻居和公式上下文"}
             </span>
           </div>
         </div>
@@ -1545,19 +1545,19 @@ export function GalaxyScene({ nodes, edges, rendererMode, selectedNode, starfiel
         <div
           className="galaxy-roi-gradient-panel"
           data-roi-gradient="galaxy-analysis"
-          aria-label="ROI capability gradient overlay"
+          aria-label="投入回报能力梯度"
         >
           <div className="terrain-panel-heading">
-            <strong>ROI Capability Gradient</strong>
-            <span>{roiGradientSummary.highValueCount.toLocaleString()} high-value · avg {formatScore(roiGradientSummary.averageRoi)}</span>
+            <strong>投入回报能力梯度</strong>
+            <span>{roiGradientSummary.highValueCount.toLocaleString()} 个高价值信号 · 平均 {formatScore(roiGradientSummary.averageRoi)}</span>
           </div>
-          <div className="galaxy-roi-gradient-strip" aria-label="Galaxy ROI gradient by semantic bucket">
+          <div className="galaxy-roi-gradient-strip" aria-label="按语义分组的银河投入回报梯度">
             {roiGradientSummary.rows.map((row) => (
               <span
                 data-roi-gradient-row={row.id}
                 key={row.id}
                 style={{ "--roi-intensity": `${Math.round(row.intensity * 100)}%` } as CSSProperties}
-                title={`${row.label} · ${row.count} nodes · ROI ${formatScore(row.averageRoi)}`}
+                title={`${row.label} · ${row.count} 个节点 · 投入回报 ${formatScore(row.averageRoi)}`}
               >
                 <b>{row.label}</b>
                 <em>{formatScore(row.averageRoi)}</em>
@@ -1629,7 +1629,7 @@ export function GalaxyScene({ nodes, edges, rendererMode, selectedNode, starfiel
         </div>
         <div>
           <strong>{terrainSummary.total.toLocaleString()}</strong>
-          <span>Terrain 映射</span>
+          <span>地形映射</span>
         </div>
       </div>
       {renderError ? (
@@ -1871,8 +1871,8 @@ function buildTerrainSummary(nodes: AtlasNode[], degreeById: Map<string, number>
     total: mappedCount,
     rows,
     semanticCoverage: nodes.length ? mappedCount / nodes.length : 0,
-    dominantLabel: dominantRow?.count ? dominantRow.label : "no dominant terrain",
-    analysisNote: `${formatScore(nodes.length ? mappedCount / nodes.length : 0)} mapped · analysis-only rollback`,
+    dominantLabel: dominantRow?.count ? dominantRow.label : "暂无主导地形",
+    analysisNote: `${formatScore(nodes.length ? mappedCount / nodes.length : 0)} 已映射 · 仅分析展示，可随时退出`,
   };
 }
 
@@ -1889,34 +1889,34 @@ function terrainSemanticRole(terrainType: MemoryTerrainType): string {
 }
 
 function terrainCapabilitySignal(terrainType: MemoryTerrainType, count: number, averageRoi: number): string {
-  if (!count) return "no active semantic signal";
-  if (terrainType === "ridge") return averageRoi >= 0.6 ? "strong capability anchor" : "capability anchor needs reinforcement";
-  if (terrainType === "shoreline") return "emerging work boundary";
-  if (terrainType === "valley") return "inactive area for pruning or evidence";
-  if (terrainType === "basin") return "candidate for compression";
-  return "requires contradiction review";
+  if (!count) return "暂无活跃语义信号";
+  if (terrainType === "ridge") return averageRoi >= 0.6 ? "强能力锚点" : "能力锚点需要加强";
+  if (terrainType === "shoreline") return "新兴工作边界";
+  if (terrainType === "valley") return "需要补证据或清理的不活跃区域";
+  if (terrainType === "basin") return "适合压缩整理";
+  return "需要复核矛盾";
 }
 
 function buildGalaxyRoiGradientSummary(nodes: AtlasNode[]): GalaxyRoiGradientSummary {
   const rows = [
     {
       id: "core-capability",
-      label: "Core",
+      label: "核心能力",
       nodes: nodes.filter((node) => normalizeMemoryTier(node.memory_tier) === "核心画像"),
     },
     {
       id: "project-decision",
-      label: "Project",
+      label: "项目与决策",
       nodes: nodes.filter((node) => node.category === "project_context" || node.category === "decision" || node.kind === "project" || node.kind === "decision"),
     },
     {
       id: "workflow-action",
-      label: "Workflow",
+      label: "工作流与行动",
       nodes: nodes.filter((node) => node.category === "workflow" || node.metrics?.roi?.recommended_action === "use"),
     },
     {
       id: "review-compress",
-      label: "Review",
+      label: "复核与压缩",
       nodes: nodes.filter((node) => /review|stale|needs/i.test(`${node.metrics?.roi?.recommended_action ?? ""} ${node.metrics?.roi?.staleness_status ?? ""}`)),
     },
   ].map((row) => {
@@ -1940,7 +1940,7 @@ function buildGalaxyRoiGradientSummary(nodes: AtlasNode[]): GalaxyRoiGradientSum
     highValueCount,
     capabilityGrowthCount,
     rows,
-    note: `${capabilityGrowthCount.toLocaleString()} growth-capable signals are shown as an analysis overlay; Presentation mode stays uncluttered.`,
+    note: `${capabilityGrowthCount.toLocaleString()} 个具备增长潜力的信号仅在分析模式叠加显示；概览模式保持简洁。`,
   };
 }
 
@@ -1952,6 +1952,12 @@ function averageRoiScore(nodes: AtlasNode[]): number {
 function formatScore(value: number | undefined): string {
   if (typeof value !== "number" || !Number.isFinite(value)) return "0.00";
   return value.toFixed(2);
+}
+
+function humanQualityLabel(quality: StarfieldQuality): string {
+  if (quality === "high") return "高画质";
+  if (quality === "mid") return "平衡画质";
+  return "节能画质";
 }
 
 function latestNodeTimestamp(nodes: AtlasNode[]): number {

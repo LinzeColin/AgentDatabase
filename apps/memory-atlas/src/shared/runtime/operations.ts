@@ -59,9 +59,9 @@ export function buildCommandPaletteModel(atlas: MemoryAtlas, slice: FilteredAtla
     {
       id: "generate_personalization_prompt",
       label: "生成个性化提示",
-      description: "准备供 ChatGPT、Codex 和其他 agent 使用的最新个性化提示入口。",
-      humanAction: "在本地安装副本生成 ChatGPT、Codex 和其他 agent 的中文说明及机器可复制文本。",
-      dryRunCommand: "python3 scripts/atlasctl.py generate-personalization-prompt --target all --dry-run",
+      description: "准备供 ChatGPT、Codex 和其他代理使用的最新个性化提示入口。",
+      humanAction: "在本地安装副本生成 ChatGPT、Codex 和其他代理的中文说明及机器可复制文本。",
+      dryRunCommand: "python3 scripts/atlasctl.py generate-personalization-prompt --target all",
       status: `覆盖 ChatGPT / Codex / 其他代理 · 运行状态 ${runtimeState.lifecycle}`,
       viewTarget: "summary",
       personalizationTargets: S12_P1_PERSONALIZATION_TARGETS,
@@ -243,8 +243,8 @@ export function mergeOwnerDailyRetry(current: OwnerDailyResult, retry: OwnerDail
     ...current,
     status: failedIds.length === 0 ? "PASS" : "PARTIAL_FAILURE",
     conclusion_zh: failedIds.length === 0
-      ? `Owner Daily 已完成 ${completedCount} 项 no-write 检查，没有发现步骤失败。`
-      : `Owner Daily 已完成 ${completedCount} 项，${failedIds.length} 项未通过；可只重试失败步骤。`,
+      ? `日常维护已完成 ${completedCount} 项只读检查，没有发现步骤失败。`
+      : `日常维护已完成 ${completedCount} 项，${failedIds.length} 项未通过；可只重试失败步骤。`,
     completed_count: completedCount,
     failed_count: failedIds.length,
     retryable_step_ids: failedIds,

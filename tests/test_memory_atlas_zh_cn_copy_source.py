@@ -25,7 +25,7 @@ class ZhCnCopySourceTest(unittest.TestCase):
         type_source = read(TYPES)
 
         self.assertIn(
-            'ZH_CN_COPY_SOURCE_VERSION = "memory_atlas.zh_cn_copy.v1_2_1_s05_p3_t1"',
+            'ZH_CN_COPY_SOURCE_VERSION = "memory_atlas.zh_cn_copy.v1_2_1_s05_p3_t3"',
             source,
         )
         for term in ("Agent", "API", "JSON", "WebGL", "ROI", "schema"):

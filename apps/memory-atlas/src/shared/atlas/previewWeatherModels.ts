@@ -210,7 +210,7 @@ export function homeWeatherFor(
   }
   return {
     label: "晴朗",
-    note: "当前主题和增量相对稳定，可以从主导主题进入 ROI、时间线或 Summary 复核。",
+    note: "当前主题和增量相对稳定，可以从主导主题进入投入回报、时间线或总结复核。",
     tone: "weather",
   };
 }
@@ -283,16 +283,16 @@ export function buildOpportunityItems(
   const items: string[] = [];
   const topicText = topicRows.map((row) => row.label).join(" / ");
   if (topicText.includes("记忆") || topicText.includes("RAG")) {
-    items.push("把长期记忆库包装成所有 agent 的 RAG / personalization 入口，减少重复解释和上下文损耗。");
+    items.push("把长期记忆库包装成所有代理的检索增强与个性化入口，减少重复解释和上下文损耗。");
   }
   if (topicText.includes("Codex") || topicText.includes("agent") || topicText.includes("workflow")) {
-    items.push("把高频 Codex 工作流产品化成可复用 Skill、Task Pack、验收脚本，提升每次开发 ROI。");
+    items.push("把高频 Codex 工作流产品化成可复用技能、任务包和验收脚本，提升每次开发的投入回报。");
   }
   if (topicText.includes("金融") || topicText.includes("交易") || topicText.includes("概率")) {
-    items.push("把金融、FIFA、概率决策沉淀为研究和风控仪表盘，优先服务 paper trading / 人审决策。");
+    items.push("把金融、FIFA、概率决策沉淀为研究和风控仪表盘，优先服务模拟交易与人工决策。");
   }
   if (topicText.includes("学习") || topicText.includes("Notion")) {
-    items.push("把学习记录、Notion dashboard、周/月复盘打通，形成能力成长的可观察闭环。");
+    items.push("把学习记录、Notion 仪表盘、周/月复盘打通，形成能力成长的可观察闭环。");
   }
   if (topicText.includes("工业") || topicText.includes("回转窑")) {
     items.push("工业服务方向可继续沉淀为测量、诊断、动态调整方案，适合形成行业化交付资产。");

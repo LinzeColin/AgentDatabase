@@ -39,7 +39,7 @@ export function EvidenceRefsDetails({ refs }: { refs: string[] }) {
   return (
     <MachineFieldDetails title={`高级详情：证据字段（${refs.length.toLocaleString()} 条）`} className="inline-machine-field-details">
       <p className="machine-field-help">默认折叠。这里仅给 ChatGPT / Codex 核验证据引用，不作为首屏阅读内容。</p>
-      <small>evidence_refs：{refs.join(" / ") || "none"}</small>
+      <small>证据引用：{refs.join(" / ") || "无"}</small>
     </MachineFieldDetails>
   );
 }

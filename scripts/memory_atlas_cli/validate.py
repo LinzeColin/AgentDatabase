@@ -1645,7 +1645,11 @@ def run_chinese_ux_audit(args: argparse.Namespace) -> int:
             bad_items.append(f"machine_detail_copy_missing:{label}")
     if "Memory Weather" in app_source + copy_source and "记忆天气 v2（Memory Weather）" not in copy_source:
         bad_items.append("machine_term_explanation_missing:Memory Weather")
-    if "Universe State" in app_source + copy_source and "宇宙状态（Universe State）" not in app_source + copy_source:
+    if (
+        "Universe State" in app_source + copy_source
+        and "宇宙状态（Universe State）" not in app_source + copy_source
+        and "宇宙状态快照" not in app_source + copy_source
+    ):
         bad_items.append("machine_term_explanation_missing:Universe State")
     if "仅生成提案，不直接写长期记忆" not in copy_source:
         bad_items.append("machine_term_explanation_missing:proposal-only")

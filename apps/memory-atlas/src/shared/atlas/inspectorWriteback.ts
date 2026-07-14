@@ -24,7 +24,7 @@ export function buildInspectorExplanation(node: AtlasNode, edgeCount: number, sh
   const theme = humanThemeLabel(node);
   const focusNode = sharedState.focus.inspector.nodeId || sharedState.selection.nodeId || node.id;
   return {
-    summary: `这条记忆当前作为「${humanCategoryLabel(node.category)}」解释：默认面板只使用派生层级、分类、日期、连接数、ROI 和共享焦点状态，不展示 raw transcript。`,
+    summary: `这条记忆当前作为「${humanCategoryLabel(node.category)}」解释：默认面板只使用派生层级、分类、日期、连接数、投入回报和共享焦点状态，不展示原始对话。`,
     formulas: [
       {
         label: "记忆权重",
@@ -33,7 +33,7 @@ export function buildInspectorExplanation(node: AtlasNode, edgeCount: number, sh
         parameters: `tier=${tierScore.toFixed(2)}, importance=${importanceScore.toFixed(2)}, confidence=${confidenceScore.toFixed(2)}`,
       },
       {
-        label: "ROI Leverage",
+        label: "投入回报杠杆",
         value: `${formatScore(leverageValue)} · ${translateAction(node.metrics?.roi?.recommended_action)}`,
         formula: "leverage_score = max(0, memory_weight + decision_impact*0.15 - sensitivity_penalty)",
         parameters: `decision_impact=${decisionImpact}, sensitivity_penalty=${sensitivityPenalty.toFixed(2)}, stale=${translateStaleness(node.metrics?.roi?.staleness_status)}`,
@@ -53,9 +53,9 @@ export function buildInspectorExplanation(node: AtlasNode, edgeCount: number, sh
       { label: "来源", value: node.source_label ?? node.data_source ?? "脱敏派生快照" },
     ],
     safetyNotes: [
-      "默认解释只读 redacted derived snapshot。",
-      "结构化字段和低敏摘要位于 Debug 面板，默认关闭。",
-      "长期记忆写回只生成提案 JSON，不能直接修改主动记忆库。",
+      "默认解释只读取脱敏派生快照。",
+      "结构化字段和低敏摘要位于高级详情面板，默认关闭。",
+      "长期记忆写回只生成提案文件，不能直接修改主动记忆库。",
     ],
   };
 }

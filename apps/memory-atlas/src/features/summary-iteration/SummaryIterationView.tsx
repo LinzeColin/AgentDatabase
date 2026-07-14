@@ -7,6 +7,7 @@ import { dedupeRecommendationItems, humanizeRecommendationTitle, humanizeStateme
 import { buildIterationHighlights, formatSigned, formatUpdatedAt } from "../../shared/atlas/utils";
 import { EvidenceRefsDetails, MachineFieldDetails } from "../../shared/ui/display";
 import { DeltaStrip, HumanOverviewPanel } from "../../shared/ui/primitives";
+import { zhCNEnumLabel, zhCNMachineValue } from "../../i18n/zh-CN";
 
 
 
@@ -83,7 +84,7 @@ export function SummaryIterationView({
       <div className="surface-heading compact">
         <div>
           <p className="eyebrow">总结与迭代</p>
-          <h2>把当前记忆切片转成可更新的 Personalization、Agents.md 和 Memory 建议</h2>
+          <h2>把当前记忆切片转成可更新的个性化、代理说明和长期记忆建议</h2>
         </div>
         <span>更新时间：{updatedAt}</span>
       </div>
@@ -98,7 +99,7 @@ export function SummaryIterationView({
             ))}
           </select>
         </label>
-        <p>{reviewSummary.time_window.label} · {reviewSummary.time_window.node_count.toLocaleString()} 条 redacted 节点</p>
+        <p>{reviewSummary.time_window.label} · {reviewSummary.time_window.node_count.toLocaleString()} 条脱敏节点</p>
       </section>
       <section
         className="review-session-output"
@@ -108,10 +109,10 @@ export function SummaryIterationView({
       >
         <div className="panel-title-row">
           <h3>复盘会话输出</h3>
-          <span>置信度：{reviewSummary.confidence}</span>
+          <span>置信度：{zhCNEnumLabel("confidence", reviewSummary.confidence)}</span>
         </div>
-        <p>默认层只回答八个复盘问题；schema、panel id 和 evidence refs 已收进高级详情。</p>
-        <MachineFieldDetails title="高级详情：复盘 schema 与字段" className="review-machine-details">
+        <p>默认层只回答八个复盘问题；数据结构版本、面板标识和证据引用已收进高级详情。</p>
+        <MachineFieldDetails title="高级详情：复盘数据结构与字段" className="review-machine-details">
           <p className="machine-field-help">
             review_schema_version={reviewSummary.review_schema_version}; dominant_topics; strengthening_topics;
             declining_topics; new_opportunities; low_value_loops; decision_changes; next_actions; proposal_candidate;
@@ -131,7 +132,7 @@ export function SummaryIterationView({
           <SummarySignalCard key={item.label} label={item.label} value={item.value} note={item.note} />
         ))}
       </div>
-      <section className="review-question-grid" aria-label="Review / Summary / Iteration 八个问题">
+      <section className="review-question-grid" aria-label="总结与迭代的八个复盘问题">
         <article className="review-question-card" data-review-question="dominant_topics" data-review-panel="theme_change_panel">
           <strong>{dominantAnswer.question}</strong>
           <p>{dominantAnswer.answer}</p>
@@ -173,11 +174,11 @@ export function SummaryIterationView({
           <EvidenceRefsDetails refs={proposalAnswer.evidence_refs} />
         </article>
       </section>
-      <section className="review-runtime-panels" aria-label="Review / Summary / Iteration 运行面板">
+      <section className="review-runtime-panels" aria-label="总结与迭代运行面板">
         <article className="proposal-decision-panel" data-review-panel="proposal_decision_panel">
           <div className="panel-title-row">
             <h3>提案判断</h3>
-            <span>{reviewSummary.proposal_candidate.target_type}</span>
+            <span>{zhCNMachineValue("targetType", reviewSummary.proposal_candidate.target_type)}</span>
           </div>
           <strong>{reviewSummary.proposal_candidate.should_generate ? "建议生成提案" : "暂不生成提案"}</strong>
           <p>{reviewSummary.proposal_candidate.reason}</p>
@@ -209,8 +210,8 @@ export function SummaryIterationView({
           <h3>总结与迭代闭环</h3>
           <span>仅生成提案</span>
         </div>
-        <p className="summary-closure-schema-line">默认显示变化、冲突和提案候选的中文解释；schema 与机器字段在高级详情中核验。</p>
-        <MachineFieldDetails title="高级详情：闭环 schema 与机器字段" className="summary-closure-machine-details">
+        <p className="summary-closure-schema-line">默认显示变化、冲突和提案候选的中文解释；数据结构版本与机器字段在高级详情中核验。</p>
+        <MachineFieldDetails title="高级详情：闭环数据结构与机器字段" className="summary-closure-machine-details">
           <p className="machine-field-help">
             closure_schema_version={summaryClosure.closure_schema_version}; source_review_schema_version={summaryClosure.source_review_schema_version};
             change_comparison; stale_conflict_signals; proposal_candidates; requires_conflict_check; requires_agent_or_human_apply.
@@ -242,7 +243,7 @@ export function SummaryIterationView({
             <ol>
               {summaryClosure.stale_conflict_signals.map((item) => (
                 <li key={item.signal_id} data-summary-signal-type={item.signal_type}>
-                  <strong>{item.signal_type}:{item.severity} · {item.title}</strong>
+                  <strong>{zhCNMachineValue("signalType", item.signal_type)} · {zhCNMachineValue("severity", item.severity)} · {item.title}</strong>
                   <p>{item.summary}</p>
                   <small>{item.proposal_hint} · {item.rollback_hint}</small>
                 </li>
@@ -274,8 +275,8 @@ export function SummaryIterationView({
         <div className="summary-closure-safety">
           <span>仅生成提案：是</span>
           <span>直接写长期记忆：否</span>
-          <span>包含 raw 私有数据：否</span>
-          <span>前端写入 proposal：否</span>
+          <span>包含原始私密数据：否</span>
+          <span>前端写入提案：否</span>
         </div>
       </section>
       <HumanOverviewPanel nodes={nodes} deltaStats={deltaStats} />
@@ -309,12 +310,12 @@ export function AgentRecommendationsPanel({ atlas }: { atlas: MemoryAtlas }) {
   return (
     <section className="agent-recommendations" aria-label="建议写入 ChatGPT 与 Codex 的内容">
       <div className="panel-title-row">
-        <h3>Personalization / Agents.md 建议</h3>
+        <h3>个性化与代理执行规则建议</h3>
         <span>{formatUpdatedAt(recommendations.generated_at)}</span>
       </div>
       <div className="recommendation-columns">
-        <RecommendationBucket title="Memory / Personalization" section={recommendations.memory} />
-        <RecommendationBucket title="Agents.md / 执行规则" section={recommendations.meta_data} />
+        <RecommendationBucket title="长期记忆与个性化" section={recommendations.memory} />
+        <RecommendationBucket title="代理执行规则" section={recommendations.meta_data} />
       </div>
     </section>
   );
@@ -328,25 +329,25 @@ export function ConfigMemoryPanel({ atlas, updatedAt }: { atlas: MemoryAtlas; up
   const metaCurrent = recommendations?.meta_data.current ?? [];
   const configItems = [
     {
-      title: "config.toml",
+      title: "运行配置（config.toml）",
       statement: "保留中文优先、真实验证、低上下文成本、每轮输出进度/风险/下一步；写库必须走提案与版本回滚。",
       count: metaCurrent.length,
     },
     {
-      title: "Memory",
+      title: "长期记忆",
       statement: "优先装载核心画像、长期偏好、项目历史、决策日志和回答规则；短期信息保留但低权重召回。",
       count: memoryCurrent.length,
     },
     {
       title: "新增/删除/修改",
-      statement: `新增 ${recommendations?.memory.added.length ?? 0} / 修改 ${recommendations?.memory.modified.length ?? 0} / 降权 ${recommendations?.memory.deleted.length ?? 0}；Meta 同步显示在上方。`,
+      statement: `新增 ${recommendations?.memory.added.length ?? 0} / 修改 ${recommendations?.memory.modified.length ?? 0} / 降权 ${recommendations?.memory.deleted.length ?? 0}；代理规则同步显示在上方。`,
       count: (recommendations?.memory.added.length ?? 0) + (recommendations?.memory.modified.length ?? 0) + (recommendations?.memory.deleted.length ?? 0),
     },
   ];
   return (
-    <section className="config-memory-panel" aria-label="config.toml 和 Memory 建议">
+    <section className="config-memory-panel" aria-label="运行配置和长期记忆建议">
       <div className="panel-title-row">
-        <h3>config.toml / Memory</h3>
+        <h3>运行配置与长期记忆</h3>
         <span>更新时间：{updatedAt}</span>
       </div>
       <div className="config-memory-grid">

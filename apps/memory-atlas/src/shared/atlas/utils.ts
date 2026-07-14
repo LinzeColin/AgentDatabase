@@ -139,12 +139,12 @@ export function buildIterationHighlights(nodes: AtlasNode[], deltaStats: DeltaSt
     {
       label: "核心画像",
       value: coreCount,
-      note: "优先进入 ChatGPT / Codex Personalization，影响默认理解。",
+      note: "优先进入 ChatGPT / Codex 个性化信息，影响默认理解。",
     },
     {
       label: "决策",
       value: decisionCount,
-      note: "后续 agent 执行时应继承，除非新证据明确推翻。",
+      note: "后续代理执行时应继承，除非新证据明确推翻。",
     },
     {
       label: "近期增量",

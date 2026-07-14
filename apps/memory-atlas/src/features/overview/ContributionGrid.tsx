@@ -177,10 +177,10 @@ export function ContributionGrid({
                   ))}
                 </div>
                 <div className="year-month-axis" aria-hidden="true">
-                  <span>Q1</span>
-                  <span>Q2</span>
-                  <span>Q3</span>
-                  <span>Q4</span>
+                  <span>第一季度</span>
+                  <span>第二季度</span>
+                  <span>第三季度</span>
+                  <span>第四季度</span>
                 </div>
                 <div className="year-card-footer">
                   <span>消息 {cell.messageCount.toLocaleString()}</span>

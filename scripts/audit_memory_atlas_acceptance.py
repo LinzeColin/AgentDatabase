@@ -432,12 +432,16 @@ def audit_acceptance(repo_root: Path, publish_dir: Path | None = None, require_l
     )
     require(
         checks,
-        "分析对象" in frontend_source
-        and "AgentRecommendationsPanel" in frontend_source
-        and "Memory（给 ChatGPT / Codex Personalization）" in frontend_source
-        and "Meta Data（给 ChatGPT / Codex Agents.md）" in frontend_source
-        and "calendarWeekKey(year, weekColumn)" in frontend_source
-        and "contributionYears(atlas, nodes)" in frontend_source,
+        "分析对象" in source_recommendation_source
+        and "AgentRecommendationsPanel" in source_recommendation_source
+        and "记忆内容（用于 ChatGPT / Codex 个性化）" in source_recommendation_source
+        and "元数据（用于 ChatGPT / Codex 的 Agents.md）" in source_recommendation_source
+        and "calendarWeekKey(year, weekColumn)" in source_recommendation_source
+        and "contributionYears(atlas, nodes)" in source_recommendation_source
+        and 'className="select-filter source-filter"' in source_recommendation_source
+        and "value={filters.source}" in source_recommendation_source
+        and "sourceOptions.map((source)" in source_recommendation_source
+        and "<SummaryIterationView" in route_registry_source,
         "codex_source_recommendations_and_grid_controls",
         "UI includes source selection, Memory/Meta Data recommendations, natural week keys, and year picker",
         "Source selection, recommendation panels, natural week keys, or year picker are missing",

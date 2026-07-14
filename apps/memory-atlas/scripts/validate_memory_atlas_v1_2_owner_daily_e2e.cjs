@@ -399,7 +399,7 @@ async function main() {
     assertCondition(ownerRequests.length === 0, "Opening Owner Daily triggered execution before explicit start", { ownerRequests });
     assertCondition(await page.locator("[data-r5-owner-daily-start]").evaluate((button) => button === document.activeElement), "Owner Daily did not move initial focus to the start action");
     await page.keyboard.press("Tab");
-    assertCondition(await page.getByRole("button", { name: "关闭 Owner Daily" }).evaluate((button) => button === document.activeElement), "Owner Daily Tab focus escaped instead of cycling to close");
+    assertCondition(await page.getByRole("button", { name: "关闭日常维护" }).evaluate((button) => button === document.activeElement), "Owner Daily Tab focus escaped instead of cycling to close");
     await page.keyboard.press("Shift+Tab");
     assertCondition(await page.locator("[data-r5-owner-daily-start]").evaluate((button) => button === document.activeElement), "Owner Daily Shift+Tab focus escaped the dialog");
     await page.locator("[data-r5-owner-daily-start]").click();

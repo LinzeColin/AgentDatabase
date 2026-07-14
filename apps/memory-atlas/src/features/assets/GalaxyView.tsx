@@ -73,26 +73,26 @@ export function GalaxyView({
         <div className="galaxy-heading-actions">
           <span>{memoryCount} 条记忆 / {graphNodes.length} 个节点 / {graphEdges.length} 条连接</span>
           {timelineTimeRange ? <span className="timeline-sync-pill">时间河选择 · {timelineTimeRange.label}</span> : null}
-          <div className="galaxy-renderer-toggle" aria-label="Galaxy renderer feature flag">
+          <div className="galaxy-renderer-toggle" aria-label="银河渲染模式">
             <button
               aria-pressed={galaxyRendererMode === "memory-starfield"}
               onClick={() => updateGalaxyRendererMode("memory-starfield")}
               type="button"
             >
-              Flow Field
+              动态星流
             </button>
             <button
               aria-pressed={galaxyRendererMode === "legacy"}
               onClick={() => updateGalaxyRendererMode("legacy")}
               type="button"
             >
-              Legacy
+              经典银河
             </button>
           </div>
         </div>
       </div>
       <DeltaStrip stats={deltaStats} />
-      <Suspense fallback={<div className="galaxy-loading">正在载入 Three.js 银河...</div>}>
+      <Suspense fallback={<div className="galaxy-loading">正在载入交互银河...</div>}>
         <GalaxyScene nodes={graphNodes} edges={graphEdges} rendererMode={galaxyRendererMode} selectedNode={selectedNode} starfieldMapping={starfieldMapping} onSelectNode={onSelectNode} />
       </Suspense>
     </div>

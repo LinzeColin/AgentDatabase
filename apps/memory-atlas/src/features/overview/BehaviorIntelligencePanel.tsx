@@ -9,7 +9,7 @@ export function BehaviorIntelligencePanel({ summary }: { summary: MemoryAtlas["b
   return (
     <section
       className="home-behavior-intelligence-panel"
-      aria-label="S06 行为智能"
+      aria-label="行为智能"
       data-home-section="behavior_intelligence"
       data-s06-review-display="behavior-clusters-low-value-loops-opportunities"
       data-s06-review-schema={summary.schema_version}
@@ -21,7 +21,7 @@ export function BehaviorIntelligencePanel({ summary }: { summary: MemoryAtlas["b
         <h3>哪些行为模式值得调整</h3>
         <span>已完成行为归纳</span>
       </div>
-      <div className="home-behavior-count-row" aria-label="S06 行为智能计数">
+      <div className="home-behavior-count-row" aria-label="行为智能计数">
         <span><strong>{summary.counts.clusters.toLocaleString()}</strong>主题/层级簇</span>
         <span><strong>{summary.counts.low_value_loops.toLocaleString()}</strong>低价值循环</span>
         <span><strong>{summary.counts.opportunities.toLocaleString()}</strong>机会线索</span>
@@ -31,9 +31,9 @@ export function BehaviorIntelligencePanel({ summary }: { summary: MemoryAtlas["b
           <span>主题簇</span>
           {clusters.map((cluster) => (
             <div className="home-behavior-item" key={cluster.cluster_id}>
-              <strong>{cluster.label_zh || cluster.cluster_id}</strong>
+              <strong>{cluster.label_zh || "未命名主题簇"}</strong>
               <p>{cluster.summary_zh}</p>
-              <small>{cluster.evidence_refs.length} 条证据引用 · {cluster.event_count.toLocaleString()} 条事件</small>
+              <small>{formatEvidenceCount(cluster.evidence_refs)} · {cluster.event_count.toLocaleString()} 条事件</small>
             </div>
           ))}
         </article>
@@ -41,7 +41,7 @@ export function BehaviorIntelligencePanel({ summary }: { summary: MemoryAtlas["b
           <span>低价值循环</span>
           {loops.map((loop) => (
             <div className="home-behavior-item" key={loop.loop_id}>
-              <strong>{loop.label_zh || loop.loop_type}</strong>
+              <strong>{loop.label_zh || "未命名低价值循环"}</strong>
               <p>{loop.summary_zh}</p>
               <small>{loop.decision_debt?.suggested_closure_question || `${loop.action_half_life_days ?? 0} 天行动半衰期`}</small>
             </div>
@@ -51,7 +51,7 @@ export function BehaviorIntelligencePanel({ summary }: { summary: MemoryAtlas["b
           <span>机会线索</span>
           {opportunities.map((opportunity) => (
             <div className="home-behavior-item" key={opportunity.opportunity_id}>
-              <strong>{opportunity.label_zh || opportunity.opportunity_type}</strong>
+              <strong>{opportunity.label_zh || "未命名机会线索"}</strong>
               <p>{opportunity.summary_zh}</p>
               <small>{opportunity.next_step_zh || opportunity.why_not_now_card?.reason_zh}</small>
             </div>
@@ -60,4 +60,8 @@ export function BehaviorIntelligencePanel({ summary }: { summary: MemoryAtlas["b
       </div>
     </section>
   );
+}
+
+function formatEvidenceCount(refs: unknown[]): string {
+  return `${refs.length.toLocaleString()} 条证据引用`;
 }

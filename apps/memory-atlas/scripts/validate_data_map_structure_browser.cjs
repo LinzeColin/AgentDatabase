@@ -57,7 +57,7 @@ function requirePlaywright() {
 
 async function openDataMap(page) {
   await page.goto(targetUrl, { waitUntil: "networkidle", timeout: 30_000 });
-  await page.getByRole("button", { name: /数据导图/ }).click({ timeout: 10_000 });
+  await page.locator('[data-nav-view="notion"]').click({ timeout: 10_000 });
   await page.waitForSelector(`[data-data-map-structure-model="${structureModelVersion}"]`, { timeout: 30_000 });
 }
 
@@ -162,8 +162,9 @@ async function main() {
       Boolean(relationPanel.selectedRelationId) &&
         Boolean(relationPanel.source) &&
         Boolean(relationPanel.strength) &&
-        Boolean(relationPanel.evidence) &&
+        relationPanel.evidence.includes("edge:") &&
         Boolean(relationPanel.time) &&
+        !/(edge:|kind:|weight:|nodes:)/.test(relationPanel.text) &&
         ["为什么连接", "来源", "强度", "证据", "时间"].every((text) => relationPanel.text.includes(text)),
       "stage6_phase1_browser_relation_click",
       "Clicking a Data Guide relation shows source, strength, evidence and time explanation",

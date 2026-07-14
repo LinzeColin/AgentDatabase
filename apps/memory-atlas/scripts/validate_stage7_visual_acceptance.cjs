@@ -198,7 +198,7 @@ async function validateMemoryRiverVisualAcceptance(page) {
   assertCondition(river.renderer === "memory-river", "Timeline did not use Memory River renderer", river);
   assertCondition(river.canvasBox && river.canvasBox.width > 700 && river.canvasBox.height > 300, "Memory River canvas is too small or missing", river);
   assertCondition(river.utcScale === "true", "Memory River did not expose UTC scale contract", river);
-  assertCondition(["Macro", "Meso", "Micro"].every((label) => river.levelLabels.includes(label)), "Memory River Macro/Meso/Micro labels are missing", river);
+  assertCondition(["宏观", "中观", "微观"].every((label) => river.levelLabels.includes(label)), "Memory River 宏观/中观/微观 labels are missing", river);
   assertCondition(river.laneFlows >= 3 && river.laneLabels >= 3, "Memory River lane visual structure is too sparse", river);
   assertCondition(["black-hole-lifecycle", "proto-star-lifecycle", "stale-deprecated"].every((kind) => river.evidenceLayers.includes(kind)), "Memory River evidence layers are missing", river);
   assertCondition(river.evidenceSegments > 0, "Memory River evidence layer segments are missing", river);

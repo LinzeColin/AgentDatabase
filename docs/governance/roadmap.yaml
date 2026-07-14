@@ -8,7 +8,7 @@ next_gate_id: "ACC.OpenAIDatabase.PAM1.0019"
 total_estimated_hours: 255
 completed_estimated_hours: 241
 taskpack_progress:
-  completed_tasks: 35
+  completed_tasks: 36
   total_tasks: 149
   delivery_state: "local_only_not_released"
 stages:
@@ -1292,10 +1292,10 @@ stages:
             current_result: "complete_local_only_28_of_149_pending_s05_p1_t1"
   - stage_id: "MA-V121-S05"
     name: "Memory Atlas v1.2.1 简单双平面与全中文使用说明收敛"
-    person_goal: "让 owner 通过不超过七个中文核心入口理解系统、流程、变化、同步和维护；S05-P1、S05-P2 与 S05-P3-T1/T2 已完成本地收敛，下一 Task 为 S05-P3-T3。"
-    status: "in_progress"
+    person_goal: "让 owner 通过不超过七个中文核心入口理解系统、流程、变化、同步和维护；S05 已完成本地收敛，下一 Task 为 S06-P1-T1。"
+    status: "completed"
     estimated_hours: 8
-    estimated_pct: 87.5
+    estimated_pct: 100
     stop_conditions:
       - "一次 run 完成超过一个 Task"
       - "为了全中文而翻译代码标识、API 或数据字段"
@@ -1303,7 +1303,7 @@ stages:
       - "raw/derived mutation、push、deploy、branch 或 PR"
     stop_gate:
       gate_id: "ACC-MA-V121-S05"
-      status: "in_progress"
+      status: "passed"
       pass_conditions:
         - "人类可读核心文件不超过 7 个且中文、浅层、可直接操作"
         - "机器治理不复制 config/tests/data 真相，核心 UI 文案通过可读性门禁"
@@ -1322,6 +1322,8 @@ stages:
         - "EVID-MA-V121-S05-P3-T1-TEST"
         - "EVID-MA-V121-S05-P3-T2-RULE"
         - "EVID-MA-V121-S05-P3-T2-TEST"
+        - "EVID-MA-V121-S05-P3-T3-BASELINE"
+        - "EVID-MA-V121-S05-P3-T3-TEST"
     phases:
       - phase_id: "MA-V121-S05-P1"
         name: "人类平面压缩"
@@ -1543,14 +1545,14 @@ stages:
       - phase_id: "MA-V121-S05-P3"
         name: "全局中文与语义乱码门禁"
         objective: "建立低成本中文文案源与可读性测试，并修复真实编码或机器语义泄漏。"
-        status: "in_progress"
+        status: "completed"
         estimated_hours: 3
-        estimated_pct: 66.7
+        estimated_pct: 100
         stop_conditions:
           - "可读性测试显著增加 build 或 token 成本"
         stop_gate:
           gate_id: "ACC-MA-V121-S05-P3"
-          status: "in_progress"
+          status: "passed"
           pass_conditions:
             - "默认主路径不出现乱码、schema、ID 或 hash 堆叠"
           evidence_refs:
@@ -1558,6 +1560,8 @@ stages:
             - "EVID-MA-V121-S05-P3-T1-TEST"
             - "EVID-MA-V121-S05-P3-T2-RULE"
             - "EVID-MA-V121-S05-P3-T2-TEST"
+            - "EVID-MA-V121-S05-P3-T3-BASELINE"
+            - "EVID-MA-V121-S05-P3-T3-TEST"
         tasks:
           - task_id: "S05-P3-T1"
             name: "建立 UI 中文术语表与文案字典"
@@ -1641,15 +1645,245 @@ stages:
           - task_id: "S05-P3-T3"
             name: "修复真实编码问题与机器语义泄漏"
             objective: "形成全中文 UI/文档基线。"
-            status: "planned"
+            status: "completed"
             estimated_hours: 1
-            estimated_pct: 0
+            estimated_pct: 100
             dependencies:
               - "S05-P3-T2"
             acceptance_ids:
               - "ACC-MA-V121-S05-P3-T3"
+            acceptance:
+              - acceptance_id: "ACC-MA-V121-S05-P3-T3"
+                description: "默认主路径不出现 mojibake、schema、ID 或 hash 堆叠；人类可见字段与枚举显示中文，机器合同继续保留英文。"
+                evidence_refs:
+                  - "EVID-MA-V121-S05-P3-T3-BASELINE"
+                  - "EVID-MA-V121-S05-P3-T3-TEST"
+            test_commands:
+              - "node OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_semantic_readability.mjs --src-root OpenAIDatabase/apps/memory-atlas/src --config OpenAIDatabase/config/memory_atlas_semantic_readability.json"
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_semantic_readability -q"
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_atlasctl_script_consolidation OpenAIDatabase.tests.test_memory_atlas_test_value_audit OpenAIDatabase.tests.test_memory_atlas_validator_profiles -q"
+              - "python3 -B OpenAIDatabase/scripts/atlasctl.py audit --check chinese-ux"
+              - "npm run lint --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run build --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run validate:fast --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run validate:ui --prefix OpenAIDatabase/apps/memory-atlas"
+              - "python3 -B OpenAIDatabase/scripts/memory_atlas_validator_profiles.py --profile release --plan"
+              - "python3 -B -m unittest discover -s OpenAIDatabase/tests -p 'test_*.py' -q"
+              - "python3 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+              - "python3.12 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+            test_results:
+              - "S05-P3-T2 的 79 条精确债务已清零：finding_count、known_finding_count 与 known_t3_debt_count 均为 0，semantic_readability_clean=true；乱码、英文空状态和无行动错误提示保持为 0。"
+              - "核心默认可见字段、状态、风险、层级、同步、提案、行为摘要、公式和画布标签已通过 zh-CN humanizer 呈现；API、schema、data attribute、内部 enum、持久化与导出 payload 英文合同未改名。"
+              - "真实浏览器 1470x661、1440x900、390x844 首页无区块重叠、横向溢出、控制台错误或失败请求；Data Guide 结构与详情/提案浏览器门禁证明版本号和 raw edge/ID 不进入默认可见区；最终 ui profile 13/13 PASS，关键跳过 0。"
+              - "语义与中文 copy-source 回归 13/13、脚本治理/profile/test-value 35/35、完整 Python 332/332、fast 4/4、frontend lint/build 与 release plan PASS；两份独立复审最终均为 0 Critical / 0 Important / 0 Minor。"
+            evidence_refs:
+              - "EVID-MA-V121-S05-P3-T3-BASELINE"
+              - "EVID-MA-V121-S05-P3-T3-TEST"
+            risks:
+              - "改动超出真实可见问题"
+            rollback: "git revert 本 Task 本地 commit。"
+            current_result: "complete_local_only_36_of_149_pending_s06_p1_t1"
+  - stage_id: "MA-V121-S06"
+    name: "Memory Atlas v1.2.1 多来源 raw 明文公开归档与不可变合同"
+    person_goal: "为 ChatGPT、Codex 和后续 Agent 建立统一公开 raw 数据平面，同时保证源文件只读、归档只追加、可去重、可恢复且不提交凭证。"
+    status: "in_progress"
+    estimated_hours: 9
+    estimated_pct: 0
+    stop_conditions:
+      - "同步器需要修改、移动或删除源 raw"
+      - "credential-like 文件准备进入 staged diff"
+      - "普通 Git blob 超过 100 MiB 或单次 push 预计超过上限"
+      - "恢复验证失败或 manifest 不完整"
+      - "本地完成整个 v1.2.1 Task Pack 前发生 push、deploy、branch 或 PR"
+    stop_gate:
+      gate_id: "ACC-MA-V121-S06"
+      status: "in_progress"
+      pass_conditions:
+        - "公开 raw 路径、append-only/hash/分片/恢复和 credential 边界在 fixtures 上完整闭环"
+        - "raw 不进入 Memory Atlas 前端包，也不增加默认 Codex 上下文和构建成本"
+      evidence_refs: []
+    phases:
+      - phase_id: "MA-V121-S06-P1"
+        name: "统一来源注册和公开路径"
+        objective: "定义统一 source registry、公开 raw 路径与凭证排除边界。"
+        status: "in_progress"
+        estimated_hours: 3
+        estimated_pct: 0
+        stop_conditions:
+          - "为新增来源硬编码核心分支"
+          - "raw 进入前端 publicDir 或默认构建产物"
+        stop_gate:
+          gate_id: "ACC-MA-V121-S06-P1"
+          status: "in_progress"
+          pass_conditions:
+            - "新增标准本地来源尽量只需配置，不改核心代码"
+            - "公开 raw 路径与 credential exclusion 合同清晰且可验证"
+          evidence_refs: []
+        tasks:
+          - task_id: "S06-P1-T1"
+            name: "定义统一 source registry"
+            objective: "定义 ChatGPT、Codex、generic agent 的来源字段、发现方式、raw 路径、parser、频率和 push 策略。"
+            status: "planned"
+            estimated_hours: 1
+            estimated_pct: 0
+            dependencies:
+              - "S05-P3-T3"
+            acceptance_ids:
+              - "ACC-MA-V121-S06-P1-T1"
             test_commands: []
             evidence_refs: []
             risks:
-              - "改动超出真实可见问题"
+              - "source-specific 逻辑污染核心同步器"
+            rollback: "git revert 本 Task 本地 commit。"
+          - task_id: "S06-P1-T2"
+            name: "建立浅层公开 raw 数据平面"
+            objective: "建立 data/public_raw/{chatgpt,codex,agents/<source>} 的可恢复布局。"
+            status: "planned"
+            estimated_hours: 1
+            estimated_pct: 0
+            dependencies:
+              - "S06-P1-T1"
+            acceptance_ids:
+              - "ACC-MA-V121-S06-P1-T2"
+            test_commands: []
+            evidence_refs: []
+            risks:
+              - "raw 进入前端构建或默认 Codex 扫描"
+            rollback: "git revert 本 Task 本地 commit。"
+          - task_id: "S06-P1-T3"
+            name: "建立 credential exclusion 合同"
+            objective: "允许 transcript/raw 公开，同时阻断 credentials、cookies、tokens、passwords 和 private keys。"
+            status: "planned"
+            estimated_hours: 1
+            estimated_pct: 0
+            dependencies:
+              - "S06-P1-T2"
+            acceptance_ids:
+              - "ACC-MA-V121-S06-P1-T3"
+            test_commands: []
+            evidence_refs: []
+            risks:
+              - "把账户控制资料误当 raw 备份"
+            rollback: "git revert 本 Task 本地 commit。"
+      - phase_id: "MA-V121-S06-P2"
+        name: "append-only、hash、分片与恢复"
+        objective: "建立不可变 raw ledger、确定性分片和 restore/verify 闭环。"
+        status: "planned"
+        estimated_hours: 3
+        estimated_pct: 0
+        stop_conditions:
+          - "同步改变源文件字节、mtime 或 size"
+          - "分片或恢复结果无法由 manifest 校验"
+        stop_gate:
+          gate_id: "ACC-MA-V121-S06-P2"
+          status: "planned"
+          pass_conditions:
+            - "append-only/hash/去重与 45 MiB 分片恢复通过 fixtures 验证"
+          evidence_refs: []
+        tasks:
+          - task_id: "S06-P2-T1"
+            name: "实现不可变 raw ledger"
+            objective: "实现 source stat 前后校验、内容 hash、append-only ledger 和幂等去重。"
+            status: "planned"
+            estimated_hours: 1
+            estimated_pct: 0
+            dependencies:
+              - "S06-P1-T3"
+            acceptance_ids:
+              - "ACC-MA-V121-S06-P2-T1"
+            test_commands: []
+            evidence_refs: []
+            risks:
+              - "同步过程修改源文件"
+            rollback: "git revert 本 Task 本地 commit。"
+          - task_id: "S06-P2-T2"
+            name: "实现确定性 45 MiB 分片"
+            objective: "对超过阈值的包分片并生成顺序、bytes 和 SHA-256 manifest。"
+            status: "planned"
+            estimated_hours: 1
+            estimated_pct: 0
+            dependencies:
+              - "S06-P2-T1"
+            acceptance_ids:
+              - "ACC-MA-V121-S06-P2-T2"
+            test_commands: []
+            evidence_refs: []
+            risks:
+              - "产生超过 GitHub 限制的普通 blob"
+            rollback: "git revert 本 Task 本地 commit。"
+          - task_id: "S06-P2-T3"
+            name: "实现 restore/verify"
+            objective: "从分片恢复并逐文件与整包校验。"
+            status: "planned"
+            estimated_hours: 1
+            estimated_pct: 0
+            dependencies:
+              - "S06-P2-T2"
+            acceptance_ids:
+              - "ACC-MA-V121-S06-P2-T3"
+            test_commands: []
+            evidence_refs: []
+            risks:
+              - "恢复结果与归档 manifest 不一致"
+            rollback: "git revert 本 Task 本地 commit。"
+      - phase_id: "MA-V121-S06-P3"
+        name: "仓库与构建隔离"
+        objective: "隔离 raw 正文、限制 staged push 体积并用 fixtures 验证完整合同。"
+        status: "planned"
+        estimated_hours: 3
+        estimated_pct: 0
+        stop_conditions:
+          - "raw 正文进入默认搜索、CI 或前端包"
+          - "超过 push 上限后使用 force 规避"
+        stop_gate:
+          gate_id: "ACC-MA-V121-S06-P3"
+          status: "planned"
+          pass_conditions:
+            - "默认上下文与构建隔离、push size guard 和 raw contract tests 全部通过"
+          evidence_refs: []
+        tasks:
+          - task_id: "S06-P3-T1"
+            name: "配置 raw 默认隔离"
+            objective: "配置搜索、Codex 路由、CI 和前端构建默认排除 raw 正文。"
+            status: "planned"
+            estimated_hours: 1
+            estimated_pct: 0
+            dependencies:
+              - "S06-P2-T3"
+            acceptance_ids:
+              - "ACC-MA-V121-S06-P3-T1"
+            test_commands: []
+            evidence_refs: []
+            risks:
+              - "公开 raw 导致每次开发扫描正文"
+            rollback: "git revert 本 Task 本地 commit。"
+          - task_id: "S06-P3-T2"
+            name: "建立 push size guard"
+            objective: "限制单次 staged push 体积并支持批次续传。"
+            status: "planned"
+            estimated_hours: 1
+            estimated_pct: 0
+            dependencies:
+              - "S06-P3-T1"
+            acceptance_ids:
+              - "ACC-MA-V121-S06-P3-T2"
+            test_commands: []
+            evidence_refs: []
+            risks:
+              - "单次 push 超过平台上限"
+            rollback: "git revert 本 Task 本地 commit。"
+          - task_id: "S06-P3-T3"
+            name: "建立 raw contract fixtures"
+            objective: "覆盖追加、重复、篡改、分片、恢复和凭证阻断。"
+            status: "planned"
+            estimated_hours: 1
+            estimated_pct: 0
+            dependencies:
+              - "S06-P3-T2"
+            acceptance_ids:
+              - "ACC-MA-V121-S06-P3-T3"
+            test_commands: []
+            evidence_refs: []
+            risks:
+              - "测试依赖真实私人凭证"
             rollback: "git revert 本 Task 本地 commit。"

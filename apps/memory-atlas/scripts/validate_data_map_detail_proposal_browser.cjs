@@ -113,6 +113,8 @@ async function main() {
         priority: panel?.getAttribute("data-priority") || null,
         evidenceCount: panel?.getAttribute("data-evidence-count") || null,
         text: panel?.textContent || "",
+        visibleText: panel?.innerText || "",
+        machineDetailsClosed: Array.from(panel?.querySelectorAll(".machine-field-details") || []).every((details) => !details.open),
       };
     });
     assertCondition(
@@ -123,7 +125,10 @@ async function main() {
         Boolean(detailPanel.theme) &&
         Boolean(detailPanel.action) &&
         Boolean(detailPanel.importance) &&
-        Boolean(detailPanel.priority),
+        Boolean(detailPanel.priority) &&
+        detailPanel.machineDetailsClosed &&
+        !detailPanel.visibleText.includes(detailPanelVersion) &&
+        !/(edge:|kind:|weight:|nodes:|derived_snapshot)/.test(detailPanel.visibleText),
       "stage6_phase2_browser_detail_panel",
       "Clicking a Data Guide node shows the Stage 6.2 node detail panel",
       "Data Guide node detail panel did not expose required fields",
@@ -149,6 +154,7 @@ async function main() {
         sourceSurface: entry?.getAttribute("data-source-surface") || null,
         editorProposalOnly: editor?.getAttribute("data-proposal-only") || null,
         text: entry?.textContent || "",
+        visibleText: entry?.innerText || "",
       };
     });
     assertCondition(
@@ -158,23 +164,24 @@ async function main() {
         proposalEntry.directWriteback === "false" &&
         proposalEntry.sourceSurface === "data_guide_detail_panel" &&
         proposalEntry.editorProposalOnly === "true" &&
-        ["importance", "priority", "导出 proposal JSON"].every((text) => proposalEntry.text.includes(text)),
+        !proposalEntry.visibleText.includes(proposalEntryVersion) &&
+        ["重要性", "优先级", "导出提案 JSON"].every((text) => proposalEntry.text.includes(text)),
       "stage6_phase2_browser_proposal_entry",
       "Data Guide detail panel embeds proposal-only importance and priority controls",
       "Data Guide proposal entry is incomplete or unsafe",
       proposalEntry,
     );
 
-    const importanceSlider = page.getByLabel("调整 importance");
+    const importanceSlider = page.getByLabel("调整重要性");
     const currentImportanceValue = await importanceSlider.inputValue();
     await importanceSlider.fill(currentImportanceValue === "0" ? "2" : "0");
-    await page.getByLabel("proposal note").fill("Stage 6.2 browser proposal-only export check.");
+    await page.getByLabel("说明").fill("数据导图浏览器仅提案导出验证。");
     await page.waitForFunction(() => {
       const preview = document.querySelector(".proposal-diff-preview");
-      return Boolean(preview?.textContent?.includes("importance"));
+      return Boolean(preview?.textContent?.includes("重要性"));
     }, null, { timeout: 5_000 });
     const downloadPromise = page.waitForEvent("download", { timeout: 10_000 });
-    await page.getByRole("button", { name: /导出 proposal JSON/ }).click({ timeout: 10_000 });
+    await page.getByRole("button", { name: /导出提案 JSON/ }).click({ timeout: 10_000 });
     const download = await downloadPromise;
     const downloadedPath = await download.path();
     const exportPayload = JSON.parse(fs.readFileSync(downloadedPath, "utf8"));
@@ -257,10 +264,10 @@ async function main() {
       inspectorMount,
     );
 
-    const inspectorImportance = inspectorEditor.getByLabel("调整 importance");
+    const inspectorImportance = inspectorEditor.getByLabel("调整重要性");
     const inspectorImportanceValue = await inspectorImportance.inputValue();
     await inspectorImportance.fill(inspectorImportanceValue === "0" ? "2" : "0");
-    await inspectorEditor.getByRole("button", { name: /保存本地 draft/ }).click({ timeout: 10_000 });
+    await inspectorEditor.getByRole("button", { name: /保存本地草稿/ }).click({ timeout: 10_000 });
     await page.waitForFunction((key) => {
       const raw = window.localStorage.getItem(key);
       if (!raw) return false;

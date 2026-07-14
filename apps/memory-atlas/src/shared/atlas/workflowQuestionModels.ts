@@ -116,10 +116,10 @@ export function buildWorkflowLatentGovernanceVisualModel(
   });
 
   const frictionRows = [
-    { id: "scope", label: "范围漂移", patterns: ["scope", "范围", "越界", "drift"], action: "先收口 run contract" },
+    { id: "scope", label: "范围漂移", patterns: ["scope", "范围", "越界", "drift"], action: "先收口运行合约" },
     { id: "evidence", label: "证据缺口", patterns: ["evidence", "missing", "gap", "证据", "核验"], action: "补证据或降权" },
     { id: "rework", label: "返工循环", patterns: ["rework", "loop", "debt", "返工", "循环", "债"], action: "建立停止条件" },
-    { id: "auth", label: "授权边界", patterns: ["auth", "apply", "raw", "credential", "授权", "凭证"], action: "保持 proposal-only" },
+    { id: "auth", label: "授权边界", patterns: ["auth", "apply", "raw", "credential", "授权", "凭证"], action: "保持仅生成提案" },
     { id: "formula", label: "公式维护", patterns: ["formula", "parameter", "weight", "公式", "参数", "权重"], action: "检查参数解释" },
   ];
   const frictionColumns = [
@@ -200,33 +200,33 @@ export function buildWorkflowLatentGovernanceVisualModel(
   const formulaRows: FormulaInspectorDatum[] = [
     {
       id: "time_saved_weight",
-      label: "time_saved_weight",
-      value: `${Math.round(average(memoryNodes.map((node) => normalizedNodeRoi(node))) * 100)}% proxy`,
-      description: "时间节省权重来自内部信息 ROI proxy，不是精确收入预测。",
+      label: "时间节省权重",
+      value: `${Math.round(average(memoryNodes.map((node) => normalizedNodeRoi(node))) * 100)}% 估算值`,
+      description: "时间节省权重来自内部投入回报估算，不是精确收入预测。",
       sourcePath: "机器治理/参数与公式/formula_what_if_defaults.v1_2_s07_p3.json",
       node: formulaNode,
     },
     {
       id: "reuse_value_weight",
-      label: "reuse_value_weight",
-      value: `${latentAxes.find((axis) => axis.id === "asset_compounding")?.evidenceBadge ?? "B"} badge`,
-      description: "复用价值要能被 GitHub 可恢复资产或 handoff 证据支撑。",
+      label: "复用价值权重",
+      value: `${latentAxes.find((axis) => axis.id === "asset_compounding")?.evidenceBadge ?? "B"} 级证据`,
+      description: "复用价值要能被 GitHub 可恢复资产或交接证据支撑。",
       sourcePath: "data/derived/economic_proxy/formula_what_if_preview.json",
       node: formulaNode,
     },
     {
       id: "rework_cost_weight",
-      label: "rework_cost_weight",
-      value: `${frictionCells.filter((cell) => cell.rowLabel === "返工循环").reduce((sum, cell) => sum + cell.count, 0)} hits`,
-      description: "返工成本用于扣减 proxy 分，帮助识别需要降噪的工作流。",
+      label: "返工成本权重",
+      value: `${frictionCells.filter((cell) => cell.rowLabel === "返工循环").reduce((sum, cell) => sum + cell.count, 0)} 次命中`,
+      description: "返工成本用于扣减估算分，帮助识别需要降噪的工作流。",
       sourcePath: "data/derived/behavior_intelligence/decision_debt_ledger.json",
       node: formulaNode,
     },
     {
       id: "proposal_required_before_apply",
-      label: "proposal_required_before_apply",
-      value: "true",
-      description: "参数变化只进入 proposal，不直接写 active config 或 raw。",
+      label: "应用前必须生成提案",
+      value: "是",
+      description: "参数变化只进入提案，不直接写入生效配置或原始数据。",
       sourcePath: "data/derived/agent_collaboration/agent_authorization_boundary_report.json",
       node: formulaNode,
     },
@@ -283,18 +283,18 @@ export function buildHumanQuestionMapModel(
     formula_explorer: "roi",
   };
   const gateReasons: Record<HumanQuestionMapVisualId, string> = {
-    cluster_tree: "问题能定位主题层级，行动能进入 galaxy/search 复核。",
-    bubble_map: "问题能比较高频、机会和风险，行动能优先打开高 ROI 簇。",
+    cluster_tree: "问题能定位主题层级，行动能进入银河或搜索视图复核。",
+    bubble_map: "问题能比较高频、机会和风险，行动能优先打开高投入回报簇。",
     topic_cluster_explorer: "问题能决定继续追问哪个簇，行动能进入搜索复核证据。",
-    task_treemap: "问题能识别 AI 使用集中任务，行动能与 ROI 对齐。",
+    task_treemap: "问题能识别 AI 使用集中任务，行动能与投入回报对齐。",
     automation_vs_augmentation: "问题能区分自动化和增强，行动能选择固化流程或保留人工判断。",
-    roi_scatter: "问题能识别值得继续加码的任务，行动能处理低 ROI 高频任务。",
+    roi_scatter: "问题能识别值得继续加码的任务，行动能处理低投入回报高频任务。",
     opportunity_radar: "问题能识别机会缺口，行动能选择下一步验证问题。",
-    agent_decision_sankey: "问题能发现 Agent 执行路径失真，行动能转成 run contract 或授权判断。",
+    agent_decision_sankey: "问题能发现代理执行路径失真，行动能转成运行合约或授权判断。",
     friction_heatmap: "问题能定位反复浪费时间的位置，行动能转成停止条件或降噪规则。",
     latent_radar: "问题能追踪增强的潜在信号，行动能验证或降权。",
     evidence_timeline: "问题能追溯结论来源，行动能复核证据新鲜度。",
-    formula_explorer: "问题能解释 proxy 分数，行动能检查参数和 proposal-only 边界。",
+    formula_explorer: "问题能解释估算分数，行动能检查参数和仅生成提案边界。",
   };
 
   const entries: HumanQuestionMapEntry[] = [
@@ -302,7 +302,7 @@ export function buildHumanQuestionMapModel(
       buildHumanQuestionMapEntry(copy, "clio_like", "主题/簇图谱", clioTargets[copy.id], gateReasons[copy.id]),
     ),
     ...economicModel.visualCopy.map((copy) =>
-      buildHumanQuestionMapEntry(copy, "economic_like", "ROI/任务图谱", economicTargets[copy.id], gateReasons[copy.id]),
+      buildHumanQuestionMapEntry(copy, "economic_like", "投入回报/任务图谱", economicTargets[copy.id], gateReasons[copy.id]),
     ),
     ...workflowModel.visualCopy.map((copy) =>
       buildHumanQuestionMapEntry(copy, "workflow_governance", "工作流/治理图谱", workflowTargets[copy.id], gateReasons[copy.id]),

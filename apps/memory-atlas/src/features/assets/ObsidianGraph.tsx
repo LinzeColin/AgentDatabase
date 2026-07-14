@@ -22,7 +22,7 @@ export function ObsidianGraph({
   onSelectNode: (node: AtlasNode) => void;
 }) {
   return (
-    <Suspense fallback={<div className="galaxy-loading">正在载入 Obsidian 动态图谱...</div>}>
+    <Suspense fallback={<div className="galaxy-loading">正在载入关系动态图谱...</div>}>
       <ObsidianGraphScene nodes={nodes} edges={edges} selectedNode={selectedNode} sharedFocus={sharedState.focus} deltaStats={deltaStats} onSelectNode={onSelectNode} />
     </Suspense>
   );

@@ -316,13 +316,13 @@ export function ObsidianGraphScene({ nodes, edges, selectedNode, sharedFocus, de
     >
       <div className="surface-heading compact">
         <div>
-          <p className="eyebrow">Obsidian 图谱</p>
+          <p className="eyebrow">关系图谱</p>
           <h2>拖拽、缩放、搜索和聚焦记忆关系</h2>
         </div>
         <span>{dataset.nodes.length} 个节点 / {dataset.edges.length} 条连接</span>
       </div>
 
-      <div className="obsidian-topbar" aria-label="Obsidian 图谱工具栏">
+      <div className="obsidian-topbar" aria-label="关系图谱工具栏">
         <div className="obsidian-mode-tabs">
           <button className={dataset.localMode === "global" ? "segmented active" : "segmented"} onClick={showGlobalGraph} type="button">全局图</button>
           <button className={dataset.localMode !== "global" ? "segmented active" : "segmented"} onClick={showLocalGraph} type="button">局部图</button>
@@ -354,15 +354,15 @@ export function ObsidianGraphScene({ nodes, edges, selectedNode, sharedFocus, de
         <span><b>增量</b><em>{formatDelta(deltaStats.deltaCount, deltaStats.deltaRate)}</em></span>
         <span><b>隐藏</b><em>{dataset.hiddenByLimit} 个超限节点 / {dataset.orphanCount} 个孤立节点</em></span>
       </div>
-      <div className="obsidian-local-budget" aria-label="Local Graph Budget">
-        <span><b>Primary</b><em>{dataset.primaryNeighborCount}</em></span>
-        <span><b>Secondary</b><em>{dataset.secondaryNeighborCount}</em></span>
-        <span><b>Local Hidden</b><em>{dataset.hiddenByLocalBudget}</em></span>
-        <span><b>Label Budget</b><em>{dataset.labelBudget}/{dataset.zoomLabelBudget}</em></span>
+      <div className="obsidian-local-budget" aria-label="局部图谱容量">
+        <span><b>一级邻居</b><em>{dataset.primaryNeighborCount}</em></span>
+        <span><b>二级邻居</b><em>{dataset.secondaryNeighborCount}</em></span>
+        <span><b>局部折叠</b><em>{dataset.hiddenByLocalBudget}</em></span>
+        <span><b>标签容量</b><em>{dataset.labelBudget}/{dataset.zoomLabelBudget}</em></span>
       </div>
-      <div className="obsidian-focus-connectivity" aria-label="Focus - Connectivity">
+      <div className="obsidian-focus-connectivity" aria-label="焦点与连接度">
         <div>
-          <span>Focus - Connectivity</span>
+          <span>焦点与连接度</span>
           <strong>{focusStats.title}</strong>
         </div>
         <dl>
@@ -378,7 +378,7 @@ export function ObsidianGraphScene({ nodes, edges, selectedNode, sharedFocus, de
           className="obsidian-graph-canvas"
           viewBox={`0 0 ${VIEWBOX_WIDTH} ${VIEWBOX_HEIGHT}`}
           role="application"
-          aria-label="Obsidian 风格动态记忆图谱"
+          aria-label="动态记忆关系图谱"
           tabIndex={0}
           ref={svgRef}
           onWheel={handleWheel}
@@ -559,7 +559,7 @@ function ObsidianSettingsPanel({
   onReset: () => void;
 }) {
   return (
-    <aside className="obsidian-settings-panel" aria-label="Obsidian 图谱设置">
+    <aside className="obsidian-settings-panel" aria-label="关系图谱设置">
       <div className="obsidian-settings-head">
         <strong>图谱设置</strong>
         <div>

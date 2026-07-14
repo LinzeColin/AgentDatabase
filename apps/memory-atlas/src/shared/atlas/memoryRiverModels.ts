@@ -70,7 +70,7 @@ export function buildMemoryRiverLayout(events: TimelineDisplayEvent[], cursorX: 
       id: `river-marker-${event.id}`,
       kind,
       event,
-      title: `${event.utcDate} UTC · ${kind === "black-hole" ? "Black Hole" : kind === "proto-star" ? "Proto-Star" : "Memory Event"} · ROI ${formatScore(event.node?.metrics?.roi?.leverage_score)} · ${event.source.label}`,
+      title: `${event.utcDate} 协调世界时 · ${kind === "black-hole" ? "低价值风险" : kind === "proto-star" ? "新生机会" : "记忆事件"} · 投入回报 ${formatScore(event.node?.metrics?.roi?.leverage_score)} · ${event.source.label}`,
       x: Math.max(86, Math.min(954, event.x)),
       y: (lane?.y ?? 300) + (stableUnit(`${event.id}:${level}`, "memory-river-marker-y") - 0.5) * 26,
       radius: kind === "black-hole" ? Math.max(6, event.radius + 2) : kind === "proto-star" ? Math.max(5, event.radius + 1) : event.radius,
@@ -116,15 +116,15 @@ export function buildMemoryRiverRoiGradient(events: TimelineDisplayEvent[]): Mem
       height: 402,
       score,
       color: roiGradientColor(score),
-      label: `${index + 1}/${bandCount} · ROI ${formatScore(averageRoi)} · capability ${capabilityCount.toLocaleString()}`,
+      label: `${index + 1}/${bandCount} · 投入回报 ${formatScore(averageRoi)} · 能力信号 ${capabilityCount.toLocaleString()}`,
     });
   }
   const averageRoiScore = scoredEvents.length ? scoredEvents.reduce((sum, item) => sum + item.roi, 0) / scoredEvents.length : 0;
   const highLeverageCount = scoredEvents.filter((item) => item.roi >= 0.54).length;
   const capabilityGrowthCount = scoredEvents.filter((item) => item.capability).length;
   return {
-    label: `ROI gradient · avg ${formatScore(averageRoiScore)}`,
-    signal: `${highLeverageCount.toLocaleString()} high leverage / ${capabilityGrowthCount.toLocaleString()} capability-growth events`,
+    label: `投入回报梯度 · 平均 ${formatScore(averageRoiScore)}`,
+    signal: `${highLeverageCount.toLocaleString()} 个高价值信号 / ${capabilityGrowthCount.toLocaleString()} 个能力增长事件`,
     averageRoiScore,
     highLeverageCount,
     capabilityGrowthCount,
@@ -200,7 +200,7 @@ export function buildBlackHoleLifecycleLayer(
       x: Math.max(MEMORY_RIVER_MIN_X, Math.min(MEMORY_RIVER_MAX_X, event.x)),
       y: (microLane?.y ?? y) + (index % 2 ? 18 : -10),
       radius: Math.max(4.5, Math.min(9, event.radius + 1.5)),
-      label: `${event.utcDate} UTC · 黑洞增强 · ${event.source.label}`,
+      label: `${event.utcDate} 协调世界时 · 低价值风险增强 · ${event.source.label}`,
     })),
     segments: [
       {
@@ -232,7 +232,7 @@ export function buildProtoStarLifecycleLayer(
       x: Math.max(MEMORY_RIVER_MIN_X, Math.min(MEMORY_RIVER_MAX_X, event.x)),
       y: (lane?.y ?? 294) + (index % 2 ? -22 : 20),
       radius: Math.max(4.5, Math.min(8.5, event.radius + 1)),
-      label: `${event.utcDate} UTC · 机会成长 · ${event.source.label}`,
+      label: `${event.utcDate} 协调世界时 · 机会成长 · ${event.source.label}`,
     };
   });
   const range = memoryRiverEvidenceRange(sorted, 34);
@@ -264,7 +264,7 @@ export function buildStaleDeprecatedLayer(events: TimelineDisplayEvent[]): Memor
     y: 405 + (index % 3) * 16,
     width: 24 + Math.min(34, event.radius * 3),
     height: 86 - (index % 3) * 10,
-    label: `${event.utcDate} UTC · 冷却/废弃 · ${event.source.label}`,
+    label: `${event.utcDate} 协调世界时 · 冷却/废弃 · ${event.source.label}`,
     strength: Math.min(1, 0.35 + index / Math.max(1, sorted.length)),
   }));
   return {

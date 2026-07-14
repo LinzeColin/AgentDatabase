@@ -11,7 +11,7 @@ import { addDays, formatSigned, isNodeBetween, maxNodeDate, parseDay, toDayKey }
 export const REVIEW_PERIOD_OPTIONS: Array<{ id: ReviewPeriodId; label: string; days: number | null }> = [
   { id: "last_30_days", label: "最近 30 天", days: 30 },
   { id: "last_90_days", label: "最近 90 天", days: 90 },
-  { id: "all", label: "全部 redacted snapshot", days: null },
+  { id: "all", label: "全部脱敏快照", days: null },
 ];
 
 
@@ -56,10 +56,10 @@ export function buildReviewSummaryIteration(
   ]);
   const next_actions = reviewNextActions(atlas, reviewNodes, evidence_refs);
   const proposalReason = low_value_loops.length
-    ? `发现 ${low_value_loops[0].title}，建议生成 proposal-only update candidate，先处理低价值循环。`
+      ? `发现 ${low_value_loops[0].title}，建议生成“仅提案、不直接写入”的更新候选，先处理低价值循环。`
     : new_opportunities.length
-      ? `发现 ${new_opportunities[0].title}，可以生成 proposal-only update candidate 汇总机会。`
-      : "本期没有强制写回条件，保留 review-only note 等待下一轮复盘。";
+      ? `发现 ${new_opportunities[0].title}，可以生成“仅提案、不直接写入”的更新候选以汇总机会。`
+      : "本期没有强制写回条件，保留仅复核说明，等待下一轮复盘。";
   const shouldGenerateProposal = low_value_loops.some((item) => item.count > 0) || new_opportunities.some((item) => item.count > 0);
   const iteration_backlog = reviewIterationBacklog(next_actions, low_value_loops, new_opportunities, dominant_topics);
   const review_again_at = toDayKey(addDays(latest, 7));
@@ -86,7 +86,7 @@ export function buildReviewSummaryIteration(
       proposal_decision: shouldGenerateProposal ? "generate_proposal" : "review_only",
       target_type: shouldGenerateProposal ? "memory_update_candidate" : "review_only_note",
       reason: proposalReason,
-      rollback_hint: "proposal-only 交接；若人工复核不成立，丢弃 proposal 草稿即可，不会修改长期记忆。",
+      rollback_hint: "仅生成提案并受控交接；若人工复核不成立，丢弃提案草稿即可，不会修改长期记忆。",
       requires_conflict_check: true,
       requires_agent_or_human_apply: true,
     },
@@ -130,8 +130,8 @@ export function buildSummaryIterationClosure(review: ReviewSummaryIterationOutpu
     title: row.title,
     summary: row.summary,
     evidence_refs: row.evidence_refs.length ? row.evidence_refs : review.evidence_refs.slice(0, 2),
-    proposal_hint: row.count > 0 ? "生成 proposal-only cleanup candidate，人工确认后再降权、合并或删除。" : "保留观察，不生成直接写回。",
-    rollback_hint: "如果复核发现 stale 判断不成立，丢弃 candidate；长期记忆不会被前端修改。",
+    proposal_hint: row.count > 0 ? "生成仅供审查的清理提案，人工确认后再降权、合并或删除。" : "保留观察，不生成直接写回。",
+    rollback_hint: "如果复核发现过期判断不成立，丢弃候选；长期记忆不会被前端修改。",
   }));
   const conflictSignals = review.decision_changes.slice(0, 2).map<SummaryClosureSignal>((row, index) => ({
     signal_id: `conflict:${index}`,
@@ -140,8 +140,8 @@ export function buildSummaryIterationClosure(review: ReviewSummaryIterationOutpu
     title: row.title,
     summary: row.summary,
     evidence_refs: row.evidence_refs.length ? row.evidence_refs : review.evidence_refs.slice(0, 2),
-    proposal_hint: "进入人工 conflict check；只有确认新决策覆盖旧背景后才生成长期记忆修改。",
-    rollback_hint: "若冲突未确认，保留 review-only note，不写 proposal queue 或长期记忆。",
+    proposal_hint: "进入人工冲突核验；只有确认新决策覆盖旧背景后才生成长期记忆修改。",
+    rollback_hint: "若冲突未确认，只保留复审记录，不写入提案队列或长期记忆。",
   }));
   const stale_conflict_signals = [...staleSignals, ...conflictSignals].slice(0, 4);
 
@@ -151,7 +151,7 @@ export function buildSummaryIterationClosure(review: ReviewSummaryIterationOutpu
     target_type: review.proposal_candidate.target_type,
     reason: action.reason,
     evidence_refs: action.evidence_refs.length ? action.evidence_refs : review.evidence_refs.slice(0, 2),
-    rollback_hint: "proposal-only candidate；人工或 agent 复核前不写长期记忆，回滚方式是丢弃候选。",
+    rollback_hint: "仅供审查的候选；人工或代理复核前不写长期记忆，回滚方式是丢弃候选。",
     requires_conflict_check: true,
     requires_agent_or_human_apply: true,
     proposal_only: true,
@@ -165,7 +165,7 @@ export function buildSummaryIterationClosure(review: ReviewSummaryIterationOutpu
     change_comparison,
     stale_conflict_signals,
     proposal_candidates,
-    closure_summary: `change_comparison=${change_comparison.length}; stale_conflict_signals=${stale_conflict_signals.length}; proposal_candidates=${proposal_candidates.length}; all outputs remain proposal-only.`,
+    closure_summary: `变化对比=${change_comparison.length}；过期与冲突信号=${stale_conflict_signals.length}；提案候选=${proposal_candidates.length}；所有输出均仅供审查。`,
     safety: {
       proposal_only: true,
       directActiveMemoryWriteback: false,
@@ -202,7 +202,7 @@ export function reviewQuestionAnswerById(output: ReviewSummaryIterationOutput, q
     question_id: questionId,
     panel_id: "theme_change_panel",
     question: "本期主导主题是什么",
-    answer: "当前 review 输出尚未生成足够证据，保持观察。",
+    answer: "当前复盘输出尚未生成足够证据，保持观察。",
     evidence_refs: output.evidence_refs.slice(0, 2),
   };
 }
@@ -263,8 +263,8 @@ export function buildReviewQuestions(output: ReviewSummaryIterationOutput): Revi
     {
       question_id: "proposal_decision",
       panel_id: "proposal_decision_panel",
-      question: "是否需要生成 proposal",
-      answer: `${output.proposal_candidate.proposal_decision}；${output.proposal_candidate.reason}`,
+      question: "是否需要生成提案",
+      answer: `${output.proposal_candidate.should_generate ? "建议生成提案" : "暂不生成提案"}；${output.proposal_candidate.reason}`,
       evidence_refs: output.evidence_refs.slice(0, 3),
     },
   ];
@@ -326,7 +326,7 @@ export function reviewDecliningRows(atlas: MemoryAtlas, nodes: AtlasNode[], late
       }));
   return fallback.map((row) => {
     const topicNodes = previousNodes.concat(staleNodes).filter((node) => (compactThemeLabel(humanThemeLabel(node)) || humanCategoryLabel(node.category)) === row.title);
-    return reviewSignalRow(atlas, row.title, `${row.title} 当前动能下降或带有 stale 信号，需要降权、合并或标注时效。`, row.count, topicNodes);
+    return reviewSignalRow(atlas, row.title, `${row.title} 当前动能下降或带有过期信号，需要降权、合并或标注时效。`, row.count, topicNodes);
   });
 }
 
@@ -382,7 +382,7 @@ export function reviewDecisionRows(atlas: MemoryAtlas, nodes: AtlasNode[]): Revi
   );
   return rows.length
     ? rows
-    : [reviewSignalRow(atlas, "决策变化未显著出现", "当前窗口没有新的 decision 类节点；后续若出现新证据再生成修改 proposal。", 0, nodes.slice(0, 1))];
+    : [reviewSignalRow(atlas, "决策变化未显著出现", "当前窗口没有新的决策类节点；后续若出现新证据再生成修改提案。", 0, nodes.slice(0, 1))];
 }
 
 
@@ -403,7 +403,7 @@ export function reviewNextActions(atlas: MemoryAtlas, nodes: AtlasNode[], eviden
     priority: item.importance === "high" ? "high" : "medium",
     source_scope: "agent_recommendations_redacted",
     evidence_refs: item.source ? [`recommendation:${item.source}`] : evidenceRefs.slice(0, 2),
-    acceptance_hint: "人工确认后进入 proposal-only handoff，不由前端直接写长期记忆。",
+    acceptance_hint: "人工确认后进入“仅生成提案”的受控交接，不由前端直接写长期记忆。",
   }));
   if (recommendationActions.length) return recommendationActions;
 
@@ -417,7 +417,7 @@ export function reviewNextActions(atlas: MemoryAtlas, nodes: AtlasNode[], eviden
       priority: search2ImportanceForNode(node) === "critical" ? "high" : "medium",
       source_scope: "redacted_atlas_snapshot",
       evidence_refs: buildSearch2EvidenceRefs(atlas, node),
-      acceptance_hint: "进入下一阶段前需要可审查记录、回滚提示和 validator 证明。",
+      acceptance_hint: "进入下一阶段前需要可审查记录、回滚提示和验收门禁证明。",
     }));
 }
 
@@ -432,26 +432,26 @@ export function reviewIterationBacklog(
   const items: ReviewIterationItem[] = [
     {
       item_id: "iteration_backlog:proposal_triage",
-      title: "Proposal triage",
+      title: "提案分流复核",
       why_it_matters: nextActions[0]?.reason || "需要把本期结论转成可审查、可回滚的候选更新。",
-      next_step: nextActions[0]?.title || "选择最高价值 review action",
-      acceptance_hint: "生成 proposal-only 候选，不直接写长期记忆。",
+      next_step: nextActions[0]?.title || "选择最高价值复核动作",
+      acceptance_hint: "生成“仅提案、不直接写入”的候选，不直接写长期记忆。",
       priority: nextActions[0]?.priority || "medium",
     },
     {
       item_id: "iteration_backlog:low_value_loop",
-      title: "Low-value loop cleanup",
+      title: "低价值循环清理",
       why_it_matters: lowValueLoops[0]?.summary || "低价值循环会污染长期召回，需要周期性压缩或降权。",
       next_step: lowValueLoops[0]?.title || "复核低价值循环",
-      acceptance_hint: "保留证据 refs，人工确认后再修改记忆权重。",
+      acceptance_hint: "保留证据引用，人工确认后再修改记忆权重。",
       priority: lowValueLoops[0]?.count ? "high" : "low",
     },
     {
       item_id: "iteration_backlog:opportunity_capture",
-      title: "Opportunity capture",
+      title: "机会线索收集",
       why_it_matters: opportunities[0]?.summary || dominantTopics[0]?.summary || "主导主题需要被转成下一步动作，否则只停留在可视化层。",
       next_step: opportunities[0]?.title || dominantTopics[0]?.title || "复核主导主题",
-      acceptance_hint: "下一轮 validator 应能看到 evidence_refs 和 decision/proposal 边界。",
+      acceptance_hint: "下一轮验收门禁应能核对证据引用和决策/提案边界。",
       priority: opportunities[0]?.count ? "high" : "medium",
     },
   ];

@@ -112,8 +112,8 @@ def audit_visual_acceptance(repo_root: Path) -> dict[str, Any]:
         and "function buildHomeOverviewModel" in app_source
         and ("Memory Weather" in ui_source or "记忆天气" in ui_source)
         and ("Next Best Actions" in ui_source or "下一步行动" in ui_source)
-        and "Black Hole 风险" in app_source
-        and "Proto-Star 机会" in app_source
+        and "低价值循环风险" in app_source
+        and "新生机会" in app_source
         and ("proposal-only，不直接写长期记忆" in ui_source or "仅生成提案，不直接写长期记忆" in ui_source)
         and ".home-overview-view" in css_source
         and ".home-status-grid" in css_source
@@ -138,7 +138,7 @@ def audit_visual_acceptance(repo_root: Path) -> dict[str, Any]:
         and 'jumpToPreview(model.miniStarfieldFocus, "galaxy")' in app_source
         and 'jumpToPreview(model.riverPulseFocus, "timeline")' in app_source
         and 'jumpToPreview(link.node, "search")' in app_source
-        and "不加载 WebGL" in app_source
+        and "无需加载三维渲染" in app_source
         and ".home-preview-grid" in css_source
         and ".home-preview-card" in css_source
         and ".river-pulse-row" in css_source
@@ -326,7 +326,7 @@ def audit_visual_acceptance(repo_root: Path) -> dict[str, Any]:
         and "lockMemoryRiverEvent" in timeline_view
         and "memory-river-event-card" in timeline_view
         and 'data-event-card={lockedEvent ? "locked" : "hover"}' in timeline_view
-        and "redacted derived event" in timeline_view
+        and "脱敏派生事件" in timeline_view
         and "同步 Inspector" in timeline_view
         and "interface TimelineFeedbackSettings" in app_source
         and "TIMELINE_FEEDBACK_SETTINGS_KEY" in app_source
@@ -372,7 +372,7 @@ def audit_visual_acceptance(repo_root: Path) -> dict[str, Any]:
         and "riverDisplay.evidenceLayers.map((layer)" in timeline_view
         and 'data-evidence-layer={layer.kind}' in timeline_view
         and 'data-evidence-segment={layer.kind}' in timeline_view
-        and "redacted derived signals" in timeline_view
+        and "脱敏派生信号" in timeline_view
         and "black-hole-lifecycle" in timeline_view
         and "proto-star-lifecycle" in timeline_view
         and "stale-deprecated" in timeline_view
@@ -678,9 +678,9 @@ def audit_visual_acceptance(repo_root: Path) -> dict[str, Any]:
         and "semantic-heatmap" in app_source
         and "semantic-bubbles" in app_source
         and "semantic-cloud" in app_source
-        and "Heatmap" in app_source
-        and "Bubble Chart" in app_source
-        and "Word Cloud" in app_source
+        and "主题与层级热力图" in app_source
+        and "主题气泡图" in app_source
+        and "主题词云" in app_source
         and "selectRepresentativeNode" in app_source
         and "jumpToBestNode" in app_source
         and ".semantic-dashboard" in css_source
@@ -740,8 +740,8 @@ def audit_visual_acceptance(repo_root: Path) -> dict[str, Any]:
         and "默认折叠，仅用于核验字段" in ui_source
         and 'data-s10-p3-machine-fields="collapsed-by-default"' in app_source
         and 'data-s10-p3-advanced-details-entry="inspector"' in app_source
-        and "Memory / Personalization" in app_source
-        and "Agents.md / 执行规则" in app_source
+        and "长期记忆与个性化" in app_source
+        and "代理执行规则" in app_source
         and "降权/不再默认使用" in app_source
         and ".human-overview" in css_source
         and ".human-node-card" in css_source,
@@ -756,10 +756,10 @@ def audit_visual_acceptance(repo_root: Path) -> dict[str, Any]:
              and ('summary: "总结与迭代"' in i18n_source or 'summary: "决定下一步"' in i18n_source)))
         and "function SummaryIterationView" in app_source
         and "function ConfigMemoryPanel" in app_source
-        and "Personalization / Agents.md 建议" in app_source
-        and "Memory / Personalization" in app_source
-        and "Agents.md / 执行规则" in app_source
-        and "config.toml / Memory" in app_source
+        and "个性化与代理执行规则建议" in app_source
+        and "长期记忆与个性化" in app_source
+        and "代理执行规则" in app_source
+        and "运行配置与长期记忆" in app_source
         and "更新时间" in app_source
         and "buildIterationHighlights" in app_source
         and "summary-iteration-view" in app_source
@@ -990,8 +990,8 @@ def audit_visual_acceptance(repo_root: Path) -> dict[str, Any]:
         and '"black-hole"' in galaxy_source
         and '"proto-star"' in galaxy_source
         and "fallbackMode: rendererMode === \"legacy\" ? \"legacy\" : starfieldQuality === \"low\" ? \"low-quality\" : \"webgl\"" in galaxy_source
-        and "Flow Field quality selector" in galaxy_source
-        and "低质量 fallback 模式" in galaxy_source
+        and "动态星流画质选择" in galaxy_source
+        and "humanQualityLabel(quality)" in galaxy_source
         and ".galaxy-renderer-toggle" in css_source
         and ".galaxy-quality-tabs" in css_source
         and ".galaxy-flow-control" in css_source,
@@ -1023,7 +1023,7 @@ def audit_visual_acceptance(repo_root: Path) -> dict[str, Any]:
         and "terrainFeatureCount" in galaxy_source
         and "parameterSource: MEMORY_STARFIELD_PARAMS.parameterSource" in galaxy_source
         and "starfieldMode === \"analysis\"" in galaxy_source
-        and "Starfield mode selector" in galaxy_source
+        and "星图模式选择" in galaxy_source
         and 'className="galaxy-terrain-panel"' in galaxy_source
         and ".galaxy-terrain-panel" in css_source
         and ".terrain-row[data-terrain-type=\"ridge\"]" in css_source
@@ -1047,17 +1047,17 @@ def audit_visual_acceptance(repo_root: Path) -> dict[str, Any]:
         and "const [flowPaused, setFlowPaused]" in galaxy_source
         and "flowPausedRef" in galaxy_source
         and "dataset.flowFrozen" in galaxy_source
-        and "Freeze Flow Field" in galaxy_source
-        and "Resume Flow Field" in galaxy_source
+        and "暂停动态星流" in galaxy_source
+        and "继续动态星流" in galaxy_source
         and "if (flowPausedRef.current) return;" in galaxy_source
         and "const frozen = rendererMode === \"memory-starfield\" && flowPausedRef.current" in galaxy_source
         and "type StarfieldViewMode = \"presentation\" | \"analysis\"" in galaxy_source
-        and "Starfield mode selector" in galaxy_source
-        and "Presentation Mode" in galaxy_source
-        and "Analysis Mode" in galaxy_source
+        and "星图模式选择" in galaxy_source
+        and "演示模式" in galaxy_source
+        and "分析模式" in galaxy_source
         and "starfieldMode === \"analysis\"" in galaxy_source
-        and "Starfield formula summary" in galaxy_source
-        and "Analysis inspector summary" in galaxy_source
+        and "星图公式摘要" in galaxy_source
+        and "分析检查器摘要" in galaxy_source
         and "flowPaused:" in galaxy_source
         and "starfieldMode:" in galaxy_source
         and ".galaxy-mode-tabs" in css_source
@@ -1158,7 +1158,7 @@ def audit_visual_acceptance(repo_root: Path) -> dict[str, Any]:
         and "useState(false)" in obsidian_source
         and "obsidian-settings-collapsed" in obsidian_source
         and "onClose={() => setSettingsOpen(false)}" in obsidian_source
-        and "Focus - Connectivity" in obsidian_source
+        and "焦点与连接度" in obsidian_source
         and "buildFocusConnectivity" in obsidian_source
         and "displayNodeLabel" in obsidian_source
         and "memoryKeyword" in obsidian_source
@@ -1190,7 +1190,7 @@ def audit_visual_acceptance(repo_root: Path) -> dict[str, Any]:
         and "data-label-budget" in obsidian_source
         and "labelVisibilityRule" in obsidian_source
         and "data-label-rule" in obsidian_source
-        and "Local Graph Budget" in obsidian_source
+        and "局部图谱容量" in obsidian_source
         and "sharedFocus={sharedState.focus}" in app_source
         and ".obsidian-local-budget" in css_source
         and '.obsidian-node-label[data-label-rule="local-neighbor"]' in css_source,
@@ -1208,7 +1208,7 @@ def audit_visual_acceptance(repo_root: Path) -> dict[str, Any]:
         and "memory-river-roi-gradient" in app_source
         and "buildMemoryRiverRoiGradient" in app_source
         and 'data-roi-gradient="capability-growth"' in app_source
-        and "Memory Terrain v2" in galaxy_source
+        and "记忆地形" in galaxy_source
         and "data-memory-terrain-v2" in galaxy_source
         and "buildGalaxyRoiGradientSummary" in galaxy_source
         and "galaxy-roi-gradient-panel" in galaxy_source

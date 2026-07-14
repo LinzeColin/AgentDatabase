@@ -29,7 +29,7 @@ export function CommandPalettePanel({
   return (
     <section
       className="command-palette"
-      aria-label="Memory Atlas 命令面板"
+      aria-label="记忆图谱命令面板"
       data-s12-p1-command-palette={model.version}
       data-s12-p1-command-count={model.commands.length}
       data-s12-p1-personalization-targets={model.personalizationTargets.join(",")}
@@ -63,7 +63,7 @@ export function CommandPalettePanel({
             >
               <Icon size={18} />
               <span>{command.label}</span>
-              <small>{command.status}</small>
+              <small>{displayCommandStatus(command.status)}</small>
             </button>
           );
         })}
@@ -122,19 +122,25 @@ export function CommandPalettePanel({
           <small>{selectedCommand.humanAction}</small>
           <code>{selectedCommand.dryRunCommand}</code>
           <div className="command-palette-safety">
-            <span>No automatic send</span>
-            <span>No silent send</span>
-            <span>No canonical repo mutation</span>
-            <span>Application Support source copy only</span>
-            <span>No proposal apply execution</span>
-            <span>No cookie/token/secret export</span>
-            <span>ChatGPT / Codex / other agent personalization prompt</span>
-            <span>prefill_only / auto_submit</span>
+            <span>不自动发送</span>
+            <span>不静默发送</span>
+            <span>不修改规范仓库</span>
+            <span>仅复制应用支持目录中的来源</span>
+            <span>不执行提案应用</span>
+            <span>不导出 Cookie、令牌或密钥</span>
+            <span>为 ChatGPT、Codex 或其他代理生成人类可读的个性化提示</span>
+            <span>仅预填；自动提交受控</span>
           </div>
         </div>
       </MachineFieldDetails>
     </section>
   );
+}
+
+
+
+function displayCommandStatus(status: string): string {
+  return status || "状态未知";
 }
 
 

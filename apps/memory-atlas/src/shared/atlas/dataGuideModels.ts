@@ -1,4 +1,5 @@
 import { normalizeMemoryTier } from "../../data/atlas";
+import { zhCNEnumLabel, zhCNMachineValue } from "../../i18n/zh-CN";
 import type { AtlasEdge, AtlasNode } from "../../types";
 import { degreeMap, shortNodeLabel } from "./contributionModels";
 import { DATA_MAP_STRUCTURE_LAYERS, DataGuideEdge, DataGuideFrame, DataGuideFrameId, DataGuideNode, DataGuideRelationExplanation, DataMapNodeDetail } from "./layoutContracts";
@@ -198,7 +199,7 @@ export function dataGuideRelationExplanation(edge: AtlasEdge, source: DataGuideN
   const targetNode = target.node;
   const strength = dataGuideRelationStrength(edge.weight);
   const time = dataGuideRelationTime(sourceNode, targetNode);
-  const evidence = [
+  const machineEvidence = [
     `edge:${edge.id}`,
     `kind:${edge.kind || "related"}`,
     `weight:${edge.weight.toFixed(2)}`,
@@ -206,10 +207,12 @@ export function dataGuideRelationExplanation(edge: AtlasEdge, source: DataGuideN
   ].join(" | ");
   const sourceLabel = shortNodeLabel(sourceNode, 18);
   const targetLabel = shortNodeLabel(targetNode, 18);
+  const relationLabel = zhCNMachineValue("edgeKind", edge.kind || "related");
+  const evidence = `${sourceLabel}与${targetLabel}的${relationLabel}关系，强度${strength}`;
   const sourceDetail = [
     source.frameTitle,
     sourceNode.source_label || sourceNode.data_source || translateKind(sourceNode.kind),
-    edge.kind || "related",
+    relationLabel,
   ].filter(Boolean).join(" / ");
 
   return {
@@ -218,8 +221,9 @@ export function dataGuideRelationExplanation(edge: AtlasEdge, source: DataGuideN
     targetLabel,
     strength,
     evidence,
+    machineEvidence,
     time,
-    reason: `${source.frameTitle}「${sourceLabel}」连接到${target.frameTitle}「${targetLabel}」：${edge.kind || "related"} 关系，强度 ${strength}，证据来自当前 atlas edge 和两端节点。`,
+    reason: `${source.frameTitle}「${sourceLabel}」连接到${target.frameTitle}「${targetLabel}」：${relationLabel}关系，强度${strength}，证据来自当前图谱关系和两端节点。`,
   };
 }
 
@@ -235,7 +239,7 @@ export function dataGuideRelationStrength(weight: number): string {
 
 export function dataGuideRelationTime(source: AtlasNode, target: AtlasNode): string {
   const dates = [source.date, target.date].filter((date): date is string => Boolean(date)).sort();
-  return dates.at(-1)?.slice(0, 10) || "time unavailable";
+  return dates.at(-1)?.slice(0, 10) || "暂无时间";
 }
 
 
@@ -247,11 +251,14 @@ export function buildDataMapNodeDetail(node: AtlasNode | null, edges: AtlasEdge[
       theme: "未选择",
       suggestedAction: "未选择",
       importance: "未选择",
+      importanceLabel: "未选择",
       priority: "未选择",
+      priorityLabel: "未选择",
       status: "默认折叠",
       layerLabel: "默认折叠",
       summary: "点击节点后显示资产、主题、建议动作、重要性和优先级。",
       evidenceRefs: [],
+      machineEvidenceRefs: [],
     };
   }
   const asset = dataMapAssetLabelForNode(node);
@@ -259,6 +266,8 @@ export function buildDataMapNodeDetail(node: AtlasNode | null, edges: AtlasEdge[
   const suggestedAction = translateAction(node.metrics?.roi?.recommended_action);
   const importance = node.importance || "未知";
   const priority = dataMapPriorityForNode(node);
+  const importanceLabel = zhCNEnumLabel("importance", importance);
+  const priorityLabel = zhCNEnumLabel("priority", priority);
   const status = [
     normalizeMemoryTier(node.memory_tier),
     humanCategoryLabel(node.category),
@@ -266,16 +275,20 @@ export function buildDataMapNodeDetail(node: AtlasNode | null, edges: AtlasEdge[
   ].filter(Boolean).join(" / ") || translateKind(node.kind);
   const layerLabel = DATA_MAP_STRUCTURE_LAYERS.find((layer) => layer.frameId === dataGuideFrameForNode(node))?.label ?? "未归层";
   const evidenceRefs = dataMapEvidenceRefsForNode(node, edges);
+  const machineEvidenceRefs = dataMapMachineEvidenceRefsForNode(node, edges);
   return {
     asset,
     theme,
     suggestedAction,
     importance,
+    importanceLabel,
     priority,
+    priorityLabel,
     status,
     layerLabel,
-    summary: `${asset} 位于 ${theme}，建议动作是 ${suggestedAction}；重要性 ${importance}，优先级 ${priority}。`,
+    summary: `${asset} 位于 ${theme}，建议动作是 ${suggestedAction}；重要性${importanceLabel}，优先级${priorityLabel}。`,
     evidenceRefs,
+    machineEvidenceRefs,
   };
 }
 
@@ -304,10 +317,25 @@ export function dataMapPriorityForNode(node: AtlasNode): "watch" | "p3" | "p2" |
 
 
 export function dataMapEvidenceRefsForNode(node: AtlasNode, edges: AtlasEdge[]): string[] {
+  const refs = relatedDataMapEdges(node, edges)
+    .map((edge, index) => `关系证据 ${index + 1}：${zhCNMachineValue("edgeKind", edge.kind || "related")}，权重 ${edge.weight.toFixed(2)}`);
+  return refs.length ? refs : ["当前节点来自已生成的图谱快照"];
+}
+
+
+
+export function dataMapMachineEvidenceRefsForNode(node: AtlasNode, edges: AtlasEdge[]): string[] {
+  const refs = relatedDataMapEdges(node, edges)
+    .map((edge) => `${edge.kind || "related"}:${edge.id}:weight=${edge.weight.toFixed(2)}`);
+  return refs.length ? refs : [`node:${node.id}:derived_snapshot`];
+}
+
+
+
+function relatedDataMapEdges(node: AtlasNode, edges: AtlasEdge[]): AtlasEdge[] {
   const refs = edges
     .filter((edge) => edge.source === node.id || edge.target === node.id)
     .sort((a, b) => b.weight - a.weight || a.id.localeCompare(b.id))
-    .slice(0, 6)
-    .map((edge) => `${edge.kind || "related"}:${edge.id}:weight=${edge.weight.toFixed(2)}`);
-  return refs.length ? refs : [`node:${node.id}:derived_snapshot`];
+    .slice(0, 6);
+  return refs;
 }

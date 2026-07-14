@@ -23,21 +23,21 @@ export function buildClioLikeVisualModel(
       title: "层级簇树",
       insightHeader: "主导主题先看树干，不从散点开始",
       humanQuestion: "我最近主要在关注哪些主题层级？",
-      actionValue: "先定位主题重心，再决定进入搜索、星图还是后续 ROI 图谱。",
+      actionValue: "先定位主题重心，再决定进入搜索、星图还是后续投入回报图谱。",
     },
     {
       id: "bubble_map",
       title: "气泡分布",
-      insightHeader: "大气泡显示高频和高 ROI 的交汇点",
+      insightHeader: "大气泡显示高频和高投入回报的交汇点",
       humanQuestion: "高频、机会、风险如何分布？",
-      actionValue: "优先打开高 ROI 且近期活跃的簇，低 ROI 高频簇进入降噪复盘。",
+      actionValue: "优先打开高投入回报且近期活跃的簇，低投入回报高频簇进入降噪复盘。",
     },
     {
       id: "topic_cluster_explorer",
       title: "主题簇探索",
       insightHeader: "先打开证据最多的簇再行动",
       humanQuestion: "哪个主题簇最值得继续追问？",
-      actionValue: "用代表记录进入搜索视图，复核证据后再生成下一步 proposal。",
+      actionValue: "用代表记录进入搜索视图，复核证据后再生成下一步提案。",
     },
   ];
   const memoryNodes = nodes.filter((node) => node.kind === "memory");
@@ -157,7 +157,7 @@ export function buildEconomicLikeVisualModel(
       title: "任务占比分布",
       insightHeader: "任务面积显示 AI 使用最集中的地方",
       humanQuestion: "我的 AI 使用集中在哪些任务？",
-      actionValue: "把最大面积任务先和 ROI 对齐，避免把时间继续投给低回报任务。",
+      actionValue: "把最大面积任务先和投入回报对齐，避免把时间继续投给低回报任务。",
     },
     {
       id: "automation_vs_augmentation",
@@ -171,7 +171,7 @@ export function buildEconomicLikeVisualModel(
       title: "投入回报分布",
       insightHeader: "右上角任务才值得继续加码",
       humanQuestion: "哪些任务最值得继续？",
-      actionValue: "优先打开高 ROI 且近期活跃的任务；低 ROI 高频任务进入停止或降噪判断。",
+      actionValue: "优先打开高投入回报且近期活跃的任务；低投入回报高频任务进入停止或降噪判断。",
     },
     {
       id: "opportunity_radar",
@@ -267,7 +267,7 @@ export function buildEconomicLikeVisualModel(
   const automationAverage = average(taskRows.map((row) => row.automationShare));
   const augmentationAverage = average(taskRows.map((row) => row.augmentationShare));
   const radarAxes: EconomicRadarAxis[] = [
-    { id: "roi", label: "ROI", value: average(taskRows.map((row) => row.roiScore)) },
+    { id: "roi", label: "投入回报", value: average(taskRows.map((row) => row.roiScore)) },
     { id: "automation", label: "自动化", value: automationAverage },
     { id: "augmentation", label: "增强", value: augmentationAverage },
     { id: "opportunity", label: "机会", value: average(taskRows.map((row) => row.opportunityScore)) },
@@ -283,7 +283,7 @@ export function buildEconomicLikeVisualModel(
   };
   const topTask = taskRows[0];
   const summary = topTask.count
-    ? `当前筛选下，${topTask.label} 是最大的投入任务面，平均 ROI ${formatScore(topTask.roiScore)}；图谱已按来源、时间、项目和任务过滤。`
+    ? `当前筛选下，${topTask.label} 是最大的投入任务面，平均投入回报 ${formatScore(topTask.roiScore)}；图谱已按来源、时间、项目和任务过滤。`
     : "当前筛选下没有可计算的经济任务；请放宽过滤条件后再查看。";
 
   return {

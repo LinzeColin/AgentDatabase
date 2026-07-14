@@ -1,6 +1,181 @@
 import type { ChineseUiCopy, UiEnumGroup, UiFieldKey } from "./types";
 
-export const ZH_CN_COPY_SOURCE_VERSION = "memory_atlas.zh_cn_copy.v1_2_1_s05_p3_t1" as const;
+export const ZH_CN_COPY_SOURCE_VERSION = "memory_atlas.zh_cn_copy.v1_2_1_s05_p3_t3" as const;
+
+export type MachineValueGroup =
+  | "actionHalfLife"
+  | "actionType"
+  | "assetAction"
+  | "assetTier"
+  | "effort"
+  | "edgeKind"
+  | "memoryTier"
+  | "proposalHint"
+  | "proposalState"
+  | "recency"
+  | "riskLevel"
+  | "severity"
+  | "signalType"
+  | "source"
+  | "staleness"
+  | "targetType"
+  | "timeWindow"
+  | "topicState"
+  | "trend"
+  | "urgency"
+  | "validationStatus";
+
+const ZH_CN_MACHINE_VALUE_LABELS: Record<MachineValueGroup, Record<string, string>> = {
+  actionHalfLife: {
+    today: "今天",
+    this_week: "本周",
+    this_month: "本月",
+    long_term: "长期",
+    expired: "已过期",
+  },
+  actionType: {
+    continue: "继续推进",
+    review: "复核",
+    consolidate: "整理合并",
+    explore: "探索机会",
+    defer: "暂缓",
+  },
+  assetAction: {
+    keep: "保留",
+    review: "复核",
+    consolidate: "整理合并",
+    lower_priority: "降低优先级",
+    validate: "补充验证",
+    defer: "暂缓",
+  },
+  assetTier: {
+    core_profile: "核心画像",
+    project: "项目",
+    decision: "决策",
+    workflow: "工作流",
+    knowledge: "知识",
+    opportunity: "机会",
+    stale: "待清理",
+  },
+  effort: {
+    low: "低投入",
+    medium: "中等投入",
+    high: "高投入",
+  },
+  edgeKind: {
+    belongs_to_theme: "归属主题",
+    has_tier: "属于层级",
+    has_category: "属于分类",
+    project_membership: "属于项目",
+    decision_related_to: "与决策相关",
+    mentions_topic: "提及主题",
+    related: "相关",
+  },
+  memoryTier: {
+    all: "全部",
+    core_profile: "核心画像",
+    project: "项目",
+    decision: "决策",
+    workflow: "工作流",
+    knowledge: "知识",
+    opportunity: "机会",
+    stale: "待清理",
+  },
+  proposalHint: {
+    proposal_recommended: "建议生成提案",
+    proposal_not_needed: "无需生成提案",
+  },
+  proposalState: {
+    pending_human_review: "等待人工复核",
+    approved_by_human: "人工已授权",
+    applying: "正在应用",
+    applied: "已应用",
+    failed_validation: "验证失败",
+    validation_failed_rolled_back: "验证失败并已回滚",
+    rolled_back_by_human: "已由人工回滚",
+    manual_rollback_required: "需要人工回滚",
+  },
+  recency: {
+    all: "全部",
+    recent: "近期",
+    active: "活跃",
+    stale: "过期",
+    archival: "归档",
+  },
+  riskLevel: {
+    low: "低风险",
+    medium: "中风险",
+    high: "高风险",
+    critical: "关键风险",
+  },
+  severity: {
+    low: "低",
+    medium: "中",
+    high: "高",
+    critical: "关键",
+  },
+  signalType: {
+    stale: "过期",
+    conflict: "冲突",
+  },
+  source: {
+    "home_overview.high_leverage": "首页高价值信号",
+    "home_overview.core_decision_counts": "首页核心决策统计",
+    "home_overview.black_hole_candidates": "首页低价值候选",
+    "home_overview.delta_stats": "首页变化统计",
+    "home_overview.proto_star_candidates": "首页新机会候选",
+    redacted_atlas_snapshot: "脱敏记忆快照",
+    agent_recommendations_redacted: "脱敏代理建议",
+    memory_atlas: "Memory Atlas",
+    codex: "Codex",
+  },
+  staleness: {
+    current: "当前有效",
+    needs_review: "需要复核",
+    stale: "已过期",
+    unknown: "状态未知",
+  },
+  targetType: {
+    memory: "记忆",
+    config: "配置",
+    agents: "代理说明",
+    style: "文案风格",
+    personalization: "个性化",
+    memory_update_candidate: "记忆更新候选",
+    review_only_note: "仅复核说明",
+  },
+  timeWindow: {
+    now: "立即",
+    today: "今天",
+    this_week: "本周",
+    later: "稍后",
+  },
+  topicState: {
+    dominant: "主导",
+    rising: "增强",
+    declining: "减弱",
+    emerging: "新出现",
+    conflict: "冲突",
+    black_hole: "低价值黑洞",
+    stale: "已过期",
+  },
+  trend: {
+    up: "上升",
+    stable: "稳定",
+    down: "下降",
+  },
+  urgency: {
+    low: "低紧迫",
+    medium: "中等紧迫",
+    high: "高紧迫",
+  },
+  validationStatus: {
+    pass: "通过",
+    fail: "失败",
+    passed: "通过",
+    failed: "失败",
+  },
+};
 
 export const zhCNCopy: ChineseUiCopy = {
   app: {
@@ -271,8 +446,9 @@ export const zhCNCopy: ChineseUiCopy = {
     importance: {
       high: "高",
       medium: "中",
-      low: "低",
-      高: "高",
+    low: "低",
+    critical: "关键",
+    高: "高",
       中: "中",
       低: "低",
     },
@@ -350,4 +526,11 @@ export function zhCNProposalValue(field: UiFieldKey, value: string | null | unde
     return zhCNEnumLabel(group, value);
   }
   return value;
+}
+
+export function zhCNMachineValue(group: MachineValueGroup, value: string | null | undefined): string {
+  const normalized = value?.trim().toLowerCase();
+  if (!normalized) return zhCNCopy.enums.emptyValue;
+  if (/[\u3400-\u9fff]/.test(normalized)) return value?.trim() || zhCNCopy.enums.emptyValue;
+  return ZH_CN_MACHINE_VALUE_LABELS[group][normalized] ?? zhCNCopy.enums.unknownValue;
 }

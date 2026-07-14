@@ -129,11 +129,11 @@ export function NodeInspector({
           </div>
           <div className="agent-field-grid">
             <section>
-              <strong>Memory（给 ChatGPT / Codex Personalization）</strong>
+              <strong>记忆内容（用于 ChatGPT / Codex 个性化）</strong>
               <p>{humanNode.agentMemory}</p>
             </section>
             <section>
-              <strong>Meta Data（给 ChatGPT / Codex Agents.md）</strong>
+              <strong>元数据（用于 ChatGPT / Codex 的 Agents.md）</strong>
               <p>{humanNode.agentMeta}</p>
             </section>
           </div>
@@ -151,7 +151,7 @@ export function NodeInspector({
             <div><dt>重要性</dt><dd>{zhCNEnumLabel("importance", node.importance)}</dd></div>
             <div><dt>有效期</dt><dd>{node.validity || "未知"}</dd></div>
             <div><dt>置信度</dt><dd>{zhCNEnumLabel("confidence", node.confidence)}</dd></div>
-            <div><dt>ROI</dt><dd>{formatScore(node.metrics?.roi?.leverage_score)}</dd></div>
+            <div><dt>投入回报</dt><dd>{formatScore(node.metrics?.roi?.leverage_score)}</dd></div>
           </dl>
         </section>
       ) : null}

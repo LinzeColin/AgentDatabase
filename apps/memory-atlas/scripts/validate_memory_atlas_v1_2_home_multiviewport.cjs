@@ -481,7 +481,7 @@ async function assertMachineDetailsFolded(page) {
     });
   }, selectors);
   assertCondition(initial.every((item) => item.count > 0 && item.allClosed), "Required machine details are not present and folded by default", { initial });
-  assertCondition(initial.find((item) => item.selector === ".lens-technical-details")?.text.includes("Universe State"), "Lens machine disclosure did not preserve Universe State evidence", { initial });
+  assertCondition(initial.find((item) => item.selector === ".lens-technical-details")?.text.includes("宇宙状态"), "Lens machine disclosure did not preserve Chinese universe-state evidence", { initial });
   assertCondition(initial.find((item) => item.selector === ".command-technical-details")?.text.includes("python3 scripts/atlasctl.py"), "Command machine disclosure did not preserve CLI evidence", { initial });
   assertCondition(initial.find((item) => item.selector === ".formula-technical-details")?.text.includes("data/derived/"), "Formula machine disclosure did not preserve source-path evidence", { initial });
 
@@ -492,7 +492,7 @@ async function assertMachineDetailsFolded(page) {
     open: element.open,
     text: element.textContent || "",
   }));
-  assertCondition(opened.open && opened.text.includes("No automatic send"), "Command machine disclosure is not keyboard-operable", opened);
+  assertCondition(opened.open && opened.text.includes("不自动发送"), "Command machine disclosure is not keyboard-operable", opened);
   await page.keyboard.press("Enter");
   assertCondition(!(await page.locator(".command-technical-details").first().evaluate((element) => element.open)), "Command machine disclosure did not close again");
   return initial;

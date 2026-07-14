@@ -38,7 +38,7 @@ export function WordCloudView({
       <div className="semantic-dashboard" aria-label="词云洞察">
         <section className="semantic-panel semantic-heatmap" aria-label="主题层级热力图">
           <div className="panel-title-row">
-            <h3>主题 x 层级 Heatmap</h3>
+            <h3>主题与层级热力图</h3>
             <span>{semantic.tiers.join(" / ")}</span>
           </div>
           <div
@@ -76,13 +76,13 @@ export function WordCloudView({
 
         <section className="semantic-panel semantic-bubbles" aria-label="主题气泡图">
           <div className="panel-title-row">
-            <h3>Bubble Chart</h3>
-            <span>横轴 ROI / 纵轴近期增量</span>
+            <h3>主题气泡图</h3>
+            <span>横轴投入回报 / 纵轴近期增量</span>
           </div>
-          <svg className="semantic-bubble-canvas" viewBox="0 0 520 330" role="img" aria-label="主题 ROI 与近期增量气泡图">
+          <svg className="semantic-bubble-canvas" viewBox="0 0 520 330" role="img" aria-label="主题投入回报与近期增量气泡图">
             <line x1="48" x2="494" y1="286" y2="286" />
             <line x1="48" x2="48" y1="28" y2="286" />
-            <text x="494" y="312" textAnchor="end">ROI</text>
+            <text x="494" y="312" textAnchor="end">投入回报</text>
             <text x="12" y="38" transform="rotate(-90 12 38)">近期</text>
             {semantic.topics.slice(0, 18).map((topic, index) => {
               const radius = 10 + Math.sqrt(topic.count / maxTopicCount) * 28;
@@ -100,7 +100,7 @@ export function WordCloudView({
                     if (isActivationKey(event)) jumpToBestNode(topic.nodes);
                   }}
                 >
-                  <title>{`${topic.label} · ${topic.count} 条 · ROI ${topic.roiScore.toFixed(2)} · 近期 ${topic.recentCount}`}</title>
+                  <title>{`${topic.label} · ${topic.count} 条 · 投入回报 ${topic.roiScore.toFixed(2)} · 近期 ${topic.recentCount}`}</title>
                   <circle cx={x} cy={y} r={radius} fill={color} />
                   <text x={x} y={y + 3} textAnchor="middle">{truncate(topic.label, radius > 28 ? 8 : 5)}</text>
                 </g>
@@ -111,7 +111,7 @@ export function WordCloudView({
 
         <section className="semantic-panel semantic-cloud" aria-label="词云">
           <div className="panel-title-row">
-            <h3>Word Cloud</h3>
+            <h3>主题词云</h3>
             <span>点击词条跳转代表记忆</span>
           </div>
           <div className="word-cloud-field">

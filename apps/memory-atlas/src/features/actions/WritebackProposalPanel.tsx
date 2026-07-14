@@ -174,7 +174,7 @@ export function WritebackProposalPanel({ atlas, node }: { atlas: MemoryAtlas; no
         <span>{nodeProposals.length} {uiCopy.proposal.versionSuffix}</span>
       </div>
       <p>{uiCopy.proposal.description}</p>
-      <div className="writeback-safety-strip" aria-label="proposal-only safety contract">
+      <div className="writeback-safety-strip" aria-label="仅生成提案的安全合约">
         <span>{uiCopy.proposal.safetyProposalOnly}</span>
         <span>{uiCopy.proposal.safetyNoDirectMutation}</span>
         <span>{uiCopy.proposal.safetyNeedsApply}</span>
@@ -267,7 +267,7 @@ export function WritebackProposalPanel({ atlas, node }: { atlas: MemoryAtlas; no
               <span>{proposal.diff?.summary ?? "旧版本无差异摘要"} · {new Date(proposal.created_at).toLocaleString("zh-CN")}</span>
               <small>
                 {proposal.version.parent_proposal_id
-                  ? `${zhCNEnumLabel("proposalLineage", "parent")} ${proposal.version.parent_proposal_id}`
+                  ? zhCNEnumLabel("proposalLineage", "parent")
                   : zhCNEnumLabel("proposalLineage", "root")}
               </small>
             </button>

@@ -1,8 +1,8 @@
 # Memory Atlas v1.2 Remediation Handoff
 
-> **Current v1.2.1 note (2026-07-14):** This file preserves the earlier v1.2 R7
+> **Current v1.2.1 note (2026-07-15):** This file preserves the earlier v1.2 R7
 > handoff below. Memory Atlas is executing the v1.2.1 Task Pack with one Task per run.
-> S04, S05-P1, S05-P2 and S05-P3-T1/T2 are complete locally. S05-P1 compressed the human
+> S04 and S05 are complete locally; the next Task is only S06-P1-T1. S05-P1 compressed the human
 > plane to seven shallow Chinese files, compressed the three root owner entries, and
 > added the deterministic v1.2.1 change/five-workflow map. `S05-P2-T1` added
 > `config/memory_atlas_machine_truth_index.json` and deterministically renders
@@ -19,7 +19,7 @@
 > restore paths from commit `187577cc9`.
 > `S05-P3-T1` keeps `apps/memory-atlas/src/i18n/zh-CN.ts` as the only typed
 > human-interface copy source. Version
-> `memory_atlas.zh_cn_copy.v1_2_1_s05_p3_t1` provides six visible glossary
+> `memory_atlas.zh_cn_copy.v1_2_1_s05_p3_t3` now provides the visible glossary
 > explanations, 11 field labels, nine enum groups and a Chinese unknown-value
 > fallback. Help, runtime status, Inspector and proposal surfaces consume the same
 > source; code/API/schema/data attributes, persistence fields and exported payload
@@ -34,13 +34,21 @@
 > 79 findings (78 machine-field/enum points and one actionless error); mojibake and
 > English empty states are zero. Any new, missing-unreconciled or fingerprint-drifted
 > finding fails. UI executes the rule as `semantic_readability`; release executes the
-> same rule through its existing final-audit Chinese UX gate. These 79 findings are
-> explicit S05-P3-T3 work, not evidence that the UI is already fully Chinese.
-> Six rule tests, 41 focused tests, 331 full Python tests, fast 4/4, ui 13/13,
-> frontend lint/build and the release profile plan passed.
+> same rule through its existing final-audit Chinese UX gate. `S05-P3-T3` then
+> remediated all 79 findings: finding, known-finding and known-T3-debt counts are zero,
+> and `semantic_readability_clean=true`. Core default-visible fields, statuses, risk,
+> tier, sync, proposal, formula and canvas labels use Chinese humanizers; API, schema,
+> data attributes, internal enums, persistence and export payload keys remain English.
+> Seven semantic tests, 35 governance/profile tests, 332 full Python tests, fast 4/4,
+> ui 13/13, frontend lint/build and the release profile plan passed. Real Home browser gates
+> passed at 1470x661, 1440x900 and 390x844 with no section overlap, horizontal overflow,
+> console error or failed response. Data Guide structure and detail/proposal browser
+> gates also passed with raw edge/ID evidence and version strings excluded from the
+> default-visible surface. Independent engineering/governance and product/UI reviews
+> both closed at 0 Critical / 0 Important / 0 Minor.
 > Historical reviews, source packages, active
 > machine configs, release evidence and recovery evidence remain unchanged. The next
-> Task is only `S05-P3-T3`; no T3 remediation work has started.
+> Task is only `S06-P1-T1`; no S06 implementation has started.
 >
 > The only public validator profiles are `validate:fast`, `validate:sync`,
 > `validate:ui`, and `validate:release`. Commands in the older "Verified Commands"

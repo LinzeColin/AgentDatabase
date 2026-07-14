@@ -136,12 +136,13 @@ async function waitForGalaxy(page) {
     const signal = window.__memoryAtlasGalaxySignal?.();
     return Boolean(signal && signal.rendererMode === "memory-starfield" && signal.renderTicks > 5 && signal.lit > 100);
   }, null, { timeout: 25000 });
-  await page.getByRole("button", { name: /analysis mode/i }).click({ timeout: 5000 });
+  await page.getByRole("button", { name: "分析模式" }).click({ timeout: 5000 });
   await page.waitForSelector(".galaxy-performance-overlay[data-performance-overlay='true']", { timeout: 10000 });
 }
 
 async function selectQuality(page, quality) {
-  await page.getByRole("button", { name: new RegExp(`^${quality} quality$`, "i") }).click({ timeout: 5000 });
+  const qualityLabels = { high: "高画质", mid: "平衡画质", low: "节能画质" };
+  await page.getByRole("button", { name: qualityLabels[quality] }).click({ timeout: 5000 });
   await page.waitForFunction((expectedQuality) => {
     const signal = window.__memoryAtlasGalaxySignal?.();
     return Boolean(signal && signal.quality === expectedQuality && signal.renderTicks > 8);
@@ -196,7 +197,7 @@ async function validateInitialAdaptiveOverlay(page) {
   assertCondition(overlay.signal?.quality === "mid", "Initial adaptive quality should start from mid tier", overlay);
   assertCondition(overlay.signal?.fps > 0 && overlay.signal?.sampleSeconds >= 0.8, "FPS overlay did not expose a sampled metric", overlay);
   assertCondition(overlay.signal?.minFps === ACCEPTANCE.midMinFps, "Initial mid-tier FPS threshold is missing", overlay);
-  assertCondition(overlay.overlayVisible && overlay.overlayText.includes("FPS"), "FPS overlay is missing in Analysis mode", overlay);
+  assertCondition(overlay.overlayVisible && overlay.overlayText.includes("帧率"), "FPS overlay is missing in Analysis mode", overlay);
   assertCondition(overlay.dataAdaptiveQuality === "enabled", "Adaptive quality data contract is missing", overlay);
   return overlay;
 }
@@ -214,7 +215,7 @@ async function validateLowQualityFallback(page) {
 }
 
 async function validateAutoCanResume(page) {
-  await page.getByRole("button", { name: /enable adaptive quality/i }).click({ timeout: 5000 });
+  await page.getByRole("button", { name: "启用自动画质" }).click({ timeout: 5000 });
   await page.waitForFunction(() => {
     const signal = window.__memoryAtlasGalaxySignal?.();
     return Boolean(signal && signal.adaptiveQualityEnabled === true && signal.quality === "mid");

@@ -38,7 +38,7 @@ export const DATA_MAP_STRUCTURE_LAYERS: Array<{
     frameId: "profile",
     label: "画像层",
     title: "画像层",
-    subtitle: "核心画像 / taste / 规则",
+    subtitle: "核心画像 / 偏好 / 规则",
     nodeTypes: ["memory:preference", "memory:answering_rule", "memory:security_boundary"],
     fields: ["memory_tier", "category", "importance", "confidence"],
     interaction: "select_profile_node",
@@ -128,6 +128,7 @@ export interface DataGuideRelationExplanation {
   targetLabel: string;
   strength: string;
   evidence: string;
+  machineEvidence: string;
   time: string;
   reason: string;
 }
@@ -139,9 +140,12 @@ export interface DataMapNodeDetail {
   theme: string;
   suggestedAction: string;
   importance: string;
+  importanceLabel: string;
   priority: string;
+  priorityLabel: string;
   status: string;
   layerLabel: string;
   summary: string;
   evidenceRefs: string[];
+  machineEvidenceRefs: string[];
 }

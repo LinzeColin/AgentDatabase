@@ -238,20 +238,20 @@ export function TimelineView({
       </div>
       <DeltaStrip stats={deltaStats} compact />
       <div className="timeline-control-bar" aria-label="时间轴控制">
-        <div className="timeline-renderer-toggle" aria-label="Timeline renderer feature flag">
+        <div className="timeline-renderer-toggle" aria-label="时间轴渲染模式">
           <button
             aria-pressed={timelineRendererMode === "memory-river"}
             onClick={() => updateTimelineRendererMode("memory-river")}
             type="button"
           >
-            Memory River
+            记忆时间河
           </button>
           <button
             aria-pressed={timelineRendererMode === "legacy"}
             onClick={() => updateTimelineRendererMode("legacy")}
             type="button"
           >
-            Legacy
+            经典时间轴
           </button>
         </div>
         <button aria-label={timelinePlaying ? "暂停时间轴播放" : "播放时间轴"} className="icon-control" onClick={() => setTimelinePlaying((value) => !value)} disabled={feedbackSettings.reducedMotion} type="button">
@@ -288,10 +288,10 @@ export function TimelineView({
       >
         <div className="river-mode-tabs" role="group" aria-label="记忆时间河交互模式">
           <button aria-pressed={interactionMode === "pan"} onClick={() => setInteractionMode("pan")} type="button">
-            Pan
+            平移
           </button>
           <button aria-pressed={interactionMode === "brush"} onClick={() => setInteractionMode("brush")} type="button">
-            Brush
+            框选
           </button>
         </div>
         <span className="timeline-range-readout">
@@ -307,7 +307,7 @@ export function TimelineView({
             onChange={(event) => updateFeedbackSettings({ reducedMotion: event.target.checked })}
             type="checkbox"
           />
-          <span>Reduced Motion</span>
+          <span>减少动态效果</span>
         </label>
         <label className="feedback-toggle">
           <input
@@ -331,9 +331,9 @@ export function TimelineView({
       </div>
       <div className="timeline-summary-grid" aria-label="时间轴摘要">
         <div><span>窗口事件</span><strong>{display.visibleCount.toLocaleString()}</strong></div>
-        <div><span>{timelineRendererMode === "memory-river" ? "Macro 河道" : "高重要/决策"}</span><strong>{timelineRendererMode === "memory-river" ? riverDisplay.levelCounts.Macro.toLocaleString() : display.importantCount.toLocaleString()}</strong></div>
-        <div><span>{timelineRendererMode === "memory-river" ? "Meso 河道" : "核心画像"}</span><strong>{timelineRendererMode === "memory-river" ? riverDisplay.levelCounts.Meso.toLocaleString() : display.coreCount.toLocaleString()}</strong></div>
-        <div><span>{timelineRendererMode === "memory-river" ? "Micro 河道" : "密度峰值"}</span><strong>{timelineRendererMode === "memory-river" ? riverDisplay.levelCounts.Micro.toLocaleString() : display.peakDensity.toLocaleString()}</strong></div>
+        <div><span>{timelineRendererMode === "memory-river" ? "宏观河道" : "高重要/决策"}</span><strong>{timelineRendererMode === "memory-river" ? riverDisplay.levelCounts.Macro.toLocaleString() : display.importantCount.toLocaleString()}</strong></div>
+        <div><span>{timelineRendererMode === "memory-river" ? "中观河道" : "核心画像"}</span><strong>{timelineRendererMode === "memory-river" ? riverDisplay.levelCounts.Meso.toLocaleString() : display.coreCount.toLocaleString()}</strong></div>
+        <div><span>{timelineRendererMode === "memory-river" ? "微观河道" : "密度峰值"}</span><strong>{timelineRendererMode === "memory-river" ? riverDisplay.levelCounts.Micro.toLocaleString() : display.peakDensity.toLocaleString()}</strong></div>
       </div>
       <div className="timeline-density-track" aria-label="时间密度轨">
         {display.densityBands.map((band) => (
@@ -363,7 +363,7 @@ export function TimelineView({
           data-roi-gradient="capability-growth"
           viewBox="0 0 1000 640"
           role="img"
-          aria-label="记忆时间河 Macro Meso Micro UTC 河道"
+          aria-label="记忆时间河宏观、中观、微观河道"
           onPointerCancel={handleMemoryRiverPointerCancel}
           onPointerDown={handleMemoryRiverPointerDown}
           onPointerMove={handleMemoryRiverPointerMove}
@@ -415,14 +415,14 @@ export function TimelineView({
           ))}
           {riverDisplay.levels.map((level) => (
             <g className="memory-river-level" key={level.level}>
-              <text x="30" y={level.y - 18} className="memory-river-level-label">{level.level}</text>
+              <text x="30" y={level.y - 18} className="memory-river-level-label">{displayMemoryRiverLevel(level.level)}</text>
               <text x="30" y={level.y} className="memory-river-level-note">{level.note}</text>
               <line x1="80" x2="960" y1={level.y + 12} y2={level.y + 12} />
             </g>
           ))}
           {riverDisplay.lanes.map((lane) => (
             <g className={`memory-river-lane level-${lane.level.toLowerCase()}`} key={lane.id}>
-              <title>{`${lane.level} · ${lane.label} · ${lane.count} 个事件 · UTC scale`}</title>
+              <title>{`${displayMemoryRiverLevel(lane.level)} · ${lane.label} · ${lane.count} 个事件 · 协调世界时刻度`}</title>
               <path className="memory-river-lane-shadow" d={lane.path} strokeWidth={lane.strokeWidth + 10} />
               <path className="memory-river-lane-flow" d={lane.path} stroke={`url(#${lane.gradientId})`} strokeWidth={lane.strokeWidth} />
               <text x={lane.labelX} y={lane.labelY} className="memory-river-lane-label">{lane.label}</text>
@@ -430,7 +430,7 @@ export function TimelineView({
           ))}
           {riverDisplay.evidenceLayers.map((layer) => (
             <g className={`memory-river-evidence-layer ${layer.kind}`} data-evidence-layer={layer.kind} key={layer.id}>
-              <title>{`${layer.label} · ${layer.count} 个 redacted derived signals · ${layer.detail}`}</title>
+              <title>{`${layer.label} · ${layer.count} 个脱敏派生信号 · ${layer.detail}`}</title>
               {layer.segments.map((segment) => (
                 <rect
                   data-evidence-segment={layer.kind}
@@ -497,7 +497,7 @@ export function TimelineView({
           ))}
           <g className="timeline-cursor memory-river-cursor">
             <line x1={display.cursorX} x2={display.cursorX} y1="58" y2="552" />
-            <text x={display.cursorX} y="50" textAnchor="middle">UTC {display.cursorLabel}</text>
+            <text x={display.cursorX} y="50" textAnchor="middle">协调世界时 {display.cursorLabel}</text>
           </g>
         </svg>
       ) : (
@@ -574,7 +574,7 @@ export function TimelineView({
           <div>
             <span>{activeRiverEvent.utcDate} UTC · {normalizeMemoryTier(activeRiverEvent.source.memory_tier)} · {humanCategoryLabel(activeRiverEvent.source.category)}</span>
             <strong>{humanizeStatement(activeRiverEvent.node?.statement) || activeRiverEvent.source.label}</strong>
-            <small>redacted derived event · {activeRiverEvent.source.importance || "普通"} · {activeRiverEvent.node ? humanThemeLabel(activeRiverEvent.node) : "未连接节点"}</small>
+            <small>脱敏派生事件 · {activeRiverEvent.source.importance || "普通"} · {activeRiverEvent.node ? humanThemeLabel(activeRiverEvent.node) : "未连接节点"}</small>
           </div>
           <div className="event-card-actions">
             <button disabled={!activeRiverEvent.node} onClick={() => activeRiverEvent.node && onSelectNode(activeRiverEvent.node)} type="button">
@@ -603,4 +603,13 @@ export function TimelineView({
       </div>
     </div>
   );
+}
+
+
+
+function displayMemoryRiverLevel(level: string): string {
+  if (level === "Macro") return "宏观";
+  if (level === "Meso") return "中观";
+  if (level === "Micro") return "微观";
+  return "记忆层";
 }

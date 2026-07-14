@@ -307,7 +307,7 @@ async function validateReducedMotion(browser) {
     await openTimeline(page);
     const contract = await readFeedbackContract(page);
     assertCondition(contract.prefersReducedMotion === true, "browser reduced-motion media emulation is not active", contract);
-    assertCondition(labelChecked(contract, "Reduced Motion") === true, "Reduced Motion setting did not default on from browser preference", contract);
+    assertCondition(labelChecked(contract, "减少动态效果") === true, "Reduced Motion setting did not default on from browser preference", contract);
     assertCondition(labelChecked(contract, "伪触感") === false, "pseudo-haptic should default off under reduced motion", contract);
     assertCondition(labelChecked(contract, "音频") === false, "audio feedback should default off under reduced motion", contract);
     assertCondition(contract.bar.reducedMotion === "true" && contract.canvas.reducedMotion === "true", "reduced motion DOM contract is missing", contract);
@@ -330,7 +330,7 @@ async function validateSilentFeedbackDefaults(browser) {
     await openTimeline(page);
     const before = await readFeedbackContract(page);
     assertCondition(before.prefersReducedMotion === false, "no-preference media emulation is not active", before);
-    assertCondition(labelChecked(before, "Reduced Motion") === false, "Reduced Motion should not default on without browser preference", before);
+    assertCondition(labelChecked(before, "减少动态效果") === false, "Reduced Motion should not default on without browser preference", before);
     assertCondition(labelChecked(before, "伪触感") === false, "pseudo-haptic should default off", before);
     assertCondition(labelChecked(before, "音频") === false, "audio feedback should default off", before);
     assertCondition(before.bar.pseudoHaptic === "disabled" && before.canvas.pseudoHaptic === "disabled", "pseudo-haptic disabled contract is missing", before);

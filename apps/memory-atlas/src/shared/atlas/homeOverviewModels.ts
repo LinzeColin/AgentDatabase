@@ -131,19 +131,19 @@ export function buildHomeOverviewModel(
       },
       {
         id: "black-hole",
-        title: "Black Hole 风险",
+        title: "低价值循环风险",
         value: staleNodes.length.toLocaleString(),
         note: blackHoleNode
           ? `${humanNodeDisplayTitle(blackHoleNode)}：${recommendedActionForNode(blackHoleNode)}`
-          : "未发现明显低价值循环；仍需保持 proposal-only 写回边界。",
+          : "未发现明显低价值循环；仍需保持仅生成提案的写回边界。",
         tone: "black-hole",
       },
       {
         id: "proto-star",
-        title: "Proto-Star 机会",
+        title: "新生机会",
         value: protoStarNodes.length.toLocaleString(),
         note: protoStarNode
-          ? `${humanNodeDisplayTitle(protoStarNode)}：ROI ${formatScore(protoStarNode.metrics?.roi?.leverage_score)}`
+          ? `${humanNodeDisplayTitle(protoStarNode)}：投入回报 ${formatScore(protoStarNode.metrics?.roi?.leverage_score)}`
           : "近期机会信号不足；先从主导主题中寻找可执行切口。",
         tone: "proto-star",
       },
@@ -162,7 +162,7 @@ export function buildHomeOverviewModel(
     }),
     miniStarfieldPoints,
     miniStarfieldFocus: miniStarfieldPoints[0]?.node ?? highLeverageNode,
-    miniStarfieldSummary: `${miniStarfieldPoints.length.toLocaleString()} 个轻量静态星点，按 ROI、连接和层级压缩显示，不加载 WebGL。`,
+    miniStarfieldSummary: `${miniStarfieldPoints.length.toLocaleString()} 个轻量静态星点，按投入回报、连接和层级压缩显示，无需加载三维渲染。`,
     riverPulseSegments,
     riverPulseFocus,
     inspectorLinks: buildHomeInspectorLinks([protoStarNode, blackHoleNode, highLeverageNode], memoryNodes, graphEdges),

@@ -180,8 +180,8 @@ export function nodeMatchesContributionPeriod(node: AtlasNode, scale: Contributi
 export function periodMeaningLine(bucket: PeriodCounts, scale: ContributionScale): string {
   const label = scale === "day" ? "这一天" : scale === "week" ? "这一周" : scale === "month" ? "这个月" : "这一年";
   if (bucket.activityScore <= 0) return `${label}没有明显活动，适合作为低使用或空窗期参考。`;
-  if (bucket.filteredCoreCount > 0) return `${label}出现核心画像增量，说明有会影响长期 personalization 或 agent 默认行为的信息。`;
-  if (bucket.filteredDecisionCount > 0) return `${label}出现新的决策记录，后续项目和 agent 执行应默认继承这些选择。`;
+  if (bucket.filteredCoreCount > 0) return `${label}出现核心画像增量，说明有会影响长期个性化或代理默认行为的信息。`;
+  if (bucket.filteredDecisionCount > 0) return `${label}出现新的决策记录，后续项目和代理执行应默认继承这些选择。`;
   if (bucket.filteredMemoryCount > 0) return `${label}沉淀了新的记忆内容，适合检查是否已经转成可执行待办或可复用上下文。`;
   return `${label}主要体现交互强度变化，具体记忆增量较少，适合用于使用行为复盘。`;
 }
@@ -190,7 +190,7 @@ export function periodMeaningLine(bucket: PeriodCounts, scale: ContributionScale
 
 export function periodImpactLine(bucket: PeriodCounts, relatedNodeCount: number): string {
   if (bucket.filteredCoreCount > 0) {
-    return "它会影响未来 ChatGPT / Codex / 其他 agent 对你的默认理解，应该优先进入 personalization 和核心画像复盘。";
+    return "它会影响未来 ChatGPT、Codex 或其他代理对你的默认理解，应该优先进入个性化与核心画像复盘。";
   }
   if (bucket.filteredDecisionCount > 0) {
     return "它包含决策密度，价值在于避免未来重复决策，并把当时的选择接入后续执行。";

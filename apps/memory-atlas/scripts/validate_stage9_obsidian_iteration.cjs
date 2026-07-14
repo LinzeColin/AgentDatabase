@@ -104,7 +104,7 @@ function validateSourceContracts() {
       "data-label-budget",
       "labelVisibilityRule",
       "data-label-rule",
-      "Local Graph Budget",
+      "局部图谱容量",
     ]) && hasAll(obsidianView, [
       "sharedFocus={sharedState.focus}",
       "sharedState: SharedAtlasState",

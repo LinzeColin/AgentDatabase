@@ -41,7 +41,7 @@
       {
         "path": "apps/memory-atlas/scripts/validate_data_map_detail_proposal_browser.cjs",
         "baseline": true,
-        "sha256": "cceb851642198fd7720eb099a4a7046c00dc66270b349122676adedf285e4719",
+        "sha256": "f8b8c1c48d53a91657c9c75f6a03019051f74a86fd02a62a2027dcc636ed18f4",
         "matched_families": [
           "validator"
         ],
@@ -50,7 +50,7 @@
       {
         "path": "apps/memory-atlas/scripts/validate_data_map_structure_browser.cjs",
         "baseline": true,
-        "sha256": "f46d232cf9dfc285e7a558e9cf5b125537c7d63c4be94fa8b98b5923538c2130",
+        "sha256": "83ef45322071bd8705519e6b4a60d4c1d56f2a9f08a8e00c641c126d2f308e61",
         "matched_families": [
           "validator"
         ],
@@ -860,7 +860,7 @@
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_home_multiviewport.cjs",
         "baseline": true,
-        "sha256": "55cfcf346f24189d5daa829590033e00b8eb2fc2c95eb04d49a146c4ed38a8e0",
+        "sha256": "fb054cbc6d9e770b93b51126f82bb7bdde99566818603bf065be937b7b851960",
         "matched_families": [
           "validator"
         ],
@@ -869,7 +869,7 @@
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_owner_daily_e2e.cjs",
         "baseline": true,
-        "sha256": "2e0b4333d86ca41ec92627a4a04e575b8dc6187f7b23174e925f096ed6e75a41",
+        "sha256": "a68bef8139a2b772ea78d506d9761d79a45d49e230deee9b286848074a574bc4",
         "matched_families": [
           "validator"
         ],
@@ -1418,7 +1418,7 @@
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_visual_workflows.cjs",
         "baseline": true,
-        "sha256": "0fc1187f19aa02664780d2ddf518401de0f77360f41414a1482a53aed95ee346",
+        "sha256": "7190c8c6d8af1970260ce812bebe5cdedf12164cfecff8a5658ef73ca4875d72",
         "matched_families": [
           "validator"
         ],
@@ -1553,7 +1553,7 @@
       {
         "path": "apps/memory-atlas/scripts/validate_stage7_performance_acceptance.cjs",
         "baseline": true,
-        "sha256": "d4f832f21f2dc83381e42251b43f7e204d2b256299f8ebc45af04e7b2f15629b",
+        "sha256": "25b9e741ee7c3fb616bf15185d06127f23910317ef8366e36a26d79f13d8b3e3",
         "matched_families": [
           "validator"
         ],
@@ -1562,7 +1562,7 @@
       {
         "path": "apps/memory-atlas/scripts/validate_stage7_privacy_accessibility.cjs",
         "baseline": true,
-        "sha256": "b7b8f2d486cd82e238a92ca0dd12df2cf8009266bf339ad086f8da56433b22a1",
+        "sha256": "27f18526edbefde5a135921a4d3b59dcf1c614f5b80bddfa809981f693bcc8c5",
         "matched_families": [
           "validator"
         ],
@@ -1571,7 +1571,7 @@
       {
         "path": "apps/memory-atlas/scripts/validate_stage7_visual_acceptance.cjs",
         "baseline": true,
-        "sha256": "92ea2d31cb3f69c766a487ef5cb72f675a16ae9a468d5d93a9abc72fe4590ee6",
+        "sha256": "7d568bb9a707e9f82ea8059ab3e23875e500424e6ba97c6065813bbb39cd5f7c",
         "matched_families": [
           "validator"
         ],
@@ -1598,7 +1598,7 @@
       {
         "path": "apps/memory-atlas/scripts/validate_stage9_obsidian_iteration.cjs",
         "baseline": true,
-        "sha256": "2dcb12a80d2142855fb6f607eeec3acc5d2ae953ca61e03ea7312f979d0899b0",
+        "sha256": "ceb0937714cbde6020375a3bb42c62850f5b707648d9945462dc6817b30cf219",
         "matched_families": [
           "validator"
         ],
@@ -1607,7 +1607,7 @@
       {
         "path": "apps/memory-atlas/scripts/validate_stage9_visual_semantics.cjs",
         "baseline": true,
-        "sha256": "e66cb4ac1ebeaef5ce558c96b40aaade2098c6bde668e930191be754b0f817dc",
+        "sha256": "b3259a540524531e80952da48002dbd999d5ec2b36574f9b387f80bf1bf20d3d",
         "matched_families": [
           "validator"
         ],
@@ -1634,7 +1634,7 @@
       {
         "path": "scripts/audit_memory_atlas_acceptance.py",
         "baseline": true,
-        "sha256": "a3f86c37e1a139fdd23288cd8accb5abbea0e4e5bfbd30868fa25f05a714c2a6",
+        "sha256": "97f46ca0574edd1906ecde61cf6de3851220c1cbbf7e63edd1c8e15046478ec2",
         "matched_families": [
           "audit"
         ],
@@ -1706,7 +1706,7 @@
       {
         "path": "scripts/audit_memory_atlas_visual_acceptance.py",
         "baseline": true,
-        "sha256": "1420798e91a72eada45ad78f38a341c5eb21de14f5651145fe4f6aa41b55c5b1",
+        "sha256": "8749f11e9c8573c28ddcb451d60ae6ca19981a1b45572e4e670936d40eb0552f",
         "matched_families": [
           "audit"
         ],

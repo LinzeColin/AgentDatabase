@@ -3,6 +3,7 @@ import type { CSSProperties } from "react";
 import { useEffect, useMemo, useState } from "react";
 
 import type {
+  BehaviorEvidenceRef,
   FormulaWhatIfPreview,
   MemoryAtlas,
   OpportunitySummary,
@@ -278,7 +279,7 @@ export function VisualWorkflowWorkbench({ atlas, onSwitchView }: VisualWorkflowW
           <div className="r6-evidence-list" aria-label="选中数据的证据">
             {selection.events.length ? selection.events.map((event) => (
               <article data-r6-evidence-ref data-r6-event-id={event.event_id} key={event.event_id}>
-                <span>{event.source_id} · {humanDate(event.occurred_at)}</span>
+                <span>{humanFacetLabel(event.source_id)} · {humanDate(event.occurred_at)}</span>
                 <strong>{event.topic || "未命名主题"}</strong>
                 <small>{event.project} · {humanFacetLabel(event.task_type)} · {humanFacetLabel(event.evidence_refs[0]?.evidence_level || "派生证据")}</small>
                 <details>
@@ -453,7 +454,7 @@ function FormulaVisualCard({
     >
       <VisualCardHeading workflow={workflow} />
       <button className="r6-formula-score" data-r6-datum="formula-score" data-r6-formula-score data-r6-score={formulaResult?.score ?? 0} data-r6-visual-datum="formula-score" onClick={onSelect} type="button">
-        <span>当前 proxy 分</span>
+        <span>当前估算分</span>
         <strong>{formulaResult?.score ?? "--"}</strong>
         <small>{formulaResult ? `${formulaResult.delta >= 0 ? "+" : ""}${formulaResult.delta} 相对经济基线` : "公式快照不可用"}</small>
       </button>
@@ -478,7 +479,7 @@ function FormulaVisualCard({
         })}
       </div>
       <div className="r6-formula-footer">
-        <span data-r6-formula-safety><ShieldCheck size={14} /> 内部 proxy，仅用于方向比较；不是收入预测，也不是财务建议。</span>
+        <span data-r6-formula-safety><ShieldCheck size={14} /> 内部估算分，仅用于方向比较；不是收入预测，也不是财务建议。</span>
         <button data-r6-formula-reset onClick={onReset} title="重置公式参数" type="button"><RotateCcw size={15} /><span className="sr-only">重置公式参数</span></button>
       </div>
       <details className="formula-technical-details r6-formula-machine-details">
@@ -518,12 +519,12 @@ function OpportunityDetail({ opportunity }: { opportunity: OpportunitySummary | 
       <dl>
         <div><dt>下一步</dt><dd data-r6-opportunity-next-step>{productActionValue(opportunity.next_step_zh || "先补充最小证据。")}</dd></div>
         <div><dt>机会半衰期</dt><dd data-r6-opportunity-half-life>{opportunity.opportunity_half_life_days ?? 0} 天</dd></div>
-        <div><dt>Why Not Now</dt><dd data-r6-opportunity-defer-reason>{reason}</dd></div>
+        <div><dt>为什么现在不做</dt><dd data-r6-opportunity-defer-reason>{reason}</dd></div>
         <div><dt>压力边界</dt><dd data-r6-opportunity-not-pressure>{opportunity.why_not_now_card?.not_pressure_list ? "不进入压力清单；等触发信号后再评估。" : "由人工确认是否进入行动清单。"}</dd></div>
       </dl>
       <div className="r6-opportunity-evidence-list" aria-label="机会证据">
         {opportunity.evidence_refs.map((ref) => (
-          <span data-r6-opportunity-evidence key={ref.ref_id}>{ref.source_id || "derived"} · {ref.evidence_level || ref.ref_type || "evidence"}</span>
+          <span data-r6-opportunity-evidence key={ref.ref_id}>{formatEvidenceSummary(ref)}</span>
         ))}
       </div>
     </section>
@@ -622,7 +623,7 @@ function humanFamilyLabel(value: string): string {
 
 function displayWorkflowTitle(workflow: VisualWorkflow): string {
   const titles: Record<string, string> = {
-    agent_decision_sankey: "Agent 决策流",
+    agent_decision_sankey: "代理决策流",
     automation_vs_augmentation: "自动化与增强",
     bubble_map: "主题气泡分布",
     cluster_tree: "层级簇树",
@@ -660,6 +661,13 @@ function humanFacetLabel(value: string): string {
     execution: "执行",
     governance: "治理",
     implementation: "实施",
+    memory_atlas: "ChatGPT",
+    codex: "Codex",
+    derived: "派生分析",
+    derived_snapshot: "派生快照",
+    redacted_atlas_snapshot: "脱敏记忆快照",
+    reference: "引用",
+    evidence: "证据",
     processed_manifest: "已处理清单",
     product: "产品",
     research: "研究",
@@ -670,6 +678,12 @@ function humanFacetLabel(value: string): string {
     writing: "写作",
   };
   return labels[value] ?? value.replaceAll("_", " ");
+}
+
+function formatEvidenceSummary(ref: BehaviorEvidenceRef): string {
+  const source = humanFacetLabel(ref.source_id || "derived");
+  const level = humanFacetLabel(ref.evidence_level || ref.ref_type || "evidence");
+  return `${source} · ${level}`;
 }
 
 function humanDate(value: string): string {

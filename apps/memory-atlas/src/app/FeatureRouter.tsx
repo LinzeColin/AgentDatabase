@@ -164,7 +164,15 @@ export function FeatureRouter() {
 
   const Route = ROUTE_REGISTRY[activeView];
   if (!Route) {
-    return <ErrorState dataState="unknown-route" description="当前视图未登记。" title="无法打开此视图" />;
+    return (
+      <ErrorState
+        actionLabel="返回记忆总览"
+        dataState="unknown-route"
+        description="当前视图未登记。请返回记忆总览后重新选择入口。"
+        onAction={() => switchView("home")}
+        title="无法打开此视图"
+      />
+    );
   }
   return (
     <Route

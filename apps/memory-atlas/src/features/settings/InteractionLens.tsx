@@ -101,8 +101,8 @@ export function InteractionLens({
         </button>
       </div>
       <MachineFieldDetails title="焦点技术详情" className="lens-technical-details">
-        <div className="lens-state-strip" aria-label="宇宙状态（Universe State）快照">
-          <span>宇宙状态（Universe State）</span>
+        <div className="lens-state-strip" aria-label="宇宙状态快照">
+          <span>宇宙状态</span>
           <strong>信号 {sharedState.selection.signal}</strong>
           <em>来源 {sharedState.sync.updatedBy} · r{sharedState.sync.revision}</em>
         </div>

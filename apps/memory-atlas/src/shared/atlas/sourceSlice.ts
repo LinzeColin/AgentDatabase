@@ -281,7 +281,7 @@ export function buildHumanOverview(nodes: AtlasNode[], deltaStats: DeltaStats): 
     categoryRows,
     actionItems: [
       `优先复核「${topTopic}」：这是当前记忆密度最高的主题，适合先转成下一步任务清单。`,
-      `把 ${coreCount.toLocaleString()} 条核心画像沉淀成可复制的 personalization / agent 启动上下文。`,
+      `把 ${coreCount.toLocaleString()} 条核心画像沉淀成可复制的个性化与代理启动上下文。`,
       staleShortCount
         ? `清理但不删除 ${staleShortCount.toLocaleString()} 条临时信息：压缩成低权重背景，避免干扰长期判断。`
         : "当前短期噪音较低，下一步可以集中补齐项目索引和决策日志。",
@@ -290,7 +290,7 @@ export function buildHumanOverview(nodes: AtlasNode[], deltaStats: DeltaStats): 
     opportunityItems: buildOpportunityItems(topicRows, categoryRows, deltaStats),
     riskItems: [
       securityCount
-        ? `${securityCount.toLocaleString()} 条安全边界需要持续遵守；涉及交易、secret、外部部署时不能跳过确认。`
+        ? `${securityCount.toLocaleString()} 条安全边界需要持续遵守；涉及交易、密钥、外部部署时不能跳过确认。`
         : "当前筛选没有明显安全边界，但外部写入和账户操作仍需人工确认。",
       decisionCount
         ? `${decisionCount.toLocaleString()} 条决策应进入后续默认上下文，避免重复讨论。`

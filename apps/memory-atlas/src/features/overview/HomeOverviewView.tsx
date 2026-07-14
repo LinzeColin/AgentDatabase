@@ -7,12 +7,13 @@ import { ActionDetailDrawer } from "../../components/ActionDetailDrawer";
 import { AssetDetailPanel } from "../../components/AssetDetailPanel";
 import { ThemeDetailPanel } from "../../components/ThemeDetailPanel";
 import { VisualWorkflowWorkbench } from "../../components/VisualWorkflowWorkbench";
+import { zhCNEnumLabel, zhCNMachineValue } from "../../i18n/zh-CN";
 import { BehaviorIntelligencePanel } from "./BehaviorIntelligencePanel";
 import { buildHomeActionStatusChips, buildLevelAssetGroupChips, buildThemeCategoryChips, humanActionStatusLabel, humanEffortLabel, humanPriorityLabel, humanUrgencyLabel } from "./homePresentation";
 import { HOME_ACTION_SECTION_VERSION, HOME_ARRIVAL_BRIEFING_VERSION, HOME_LEVEL_ASSET_SECTION_VERSION, HOME_THEME_CATEGORY_SECTION_VERSION, MEMORY_OVERVIEW_OPERATION_VERSION, MEMORY_OVERVIEW_SECTION_ORDER, MEMORY_OVERVIEW_STRUCTURE_VERSION, uiCopy } from "../../shared/atlas/constants";
 import { DeltaStats, HomeAction, HomeActionDetail, HomeTierAsset, HomeTopicDetail, TierAssetDetail, TimelineTimeRangeSelection, TopicClassificationDetail } from "../../shared/atlas/contracts";
 import { buildHomeArrivalBriefing, buildHomeOverviewModel } from "../../shared/atlas/homeOverviewModels";
-import { humanNodeDisplayTitle } from "../../shared/atlas/semanticHuman";
+import { humanCategoryLabel, humanNodeDisplayTitle } from "../../shared/atlas/semanticHuman";
 import { timelineRangeSummary } from "../../shared/atlas/timelineInteraction";
 import { formatScore, formatSigned } from "../../shared/atlas/utils";
 import { MachineFieldDetails } from "../../shared/ui/display";
@@ -171,7 +172,7 @@ export function HomeOverviewView({
           })}
         </div>
         <MachineFieldDetails title={uiCopy.overview.arrivalMachineDetails} className="arrival-briefing-machine-details">
-          <p className="machine-field-help">默认折叠。这里仅用于核验首页 arrival briefing 合约、快照时间和 no-apply 边界。</p>
+          <p className="machine-field-help">默认折叠。这里仅用于核验首页到访简报合约、快照时间和不应用边界。</p>
           <dl>
             <div><dt>contract / 合约版本</dt><dd>{HOME_ARRIVAL_BRIEFING_VERSION}</dd></div>
             <div><dt>snapshot / 快照时间</dt><dd>{atlas.overview.generated_at || "not_loaded"}</dd></div>
@@ -294,7 +295,7 @@ export function HomeOverviewView({
           <h3>{uiCopy.overview.nextBestActionsTitle}</h3>
           <span>{uiCopy.overview.proposalOnlyLabel}</span>
         </div>
-        <div className="home-section-summary-row" aria-label="Top Actions Section fields">
+        <div className="home-section-summary-row" aria-label="下一步行动摘要字段">
           <span className="home-operation-chip" data-top-actions-field="suggestion">
             <strong>建议</strong>
             <small>{model.actions.length.toLocaleString()} 条行动建议</small>
@@ -327,7 +328,7 @@ export function HomeOverviewView({
               <span>{humanPriorityLabel(action.priority)}</span>
               <strong>{action.title}</strong>
               <div className="home-action-meta-grid" aria-label="建议动作排序信号">
-                <i>ROI {formatScore(action.roi_score)}</i>
+                <i>投入回报 {formatScore(action.roi_score)}</i>
                 <i>{humanEffortLabel(action.effort_cost)}</i>
                 <i>{humanUrgencyLabel(action.urgency)}</i>
                 <i className="home-action-status">{humanActionStatusLabel(action.status)}</i>
@@ -368,7 +369,7 @@ export function HomeOverviewView({
           <h3>层级资产明细</h3>
           <span>仅生成提案</span>
         </div>
-        <div className="home-operation-chip-grid" aria-label="Level Assets Section groups">
+        <div className="home-operation-chip-grid" aria-label="层级资产分组">
           {levelAssetGroupChips.map((group) => (
             <span
               className="home-operation-chip"
@@ -394,21 +395,21 @@ export function HomeOverviewView({
                 onClick={() => openTierAsset(asset)}
                 type="button"
               >
-                <span>{asset.asset_tier}</span>
+                <span>{zhCNMachineValue("assetTier", asset.asset_tier)}</span>
                 <strong>{asset.title}</strong>
                 <div className="tier-asset-meta-grid" aria-label="层级资产排序信号">
                   <i>{asset.theme}</i>
                   <i>价值 {formatScore(asset.value_score)}</i>
-                  <i>{asset.importance}</i>
-                  <i>{asset.staleness_status}</i>
+                  <i>{zhCNEnumLabel("importance", asset.importance)}</i>
+                  <i>{zhCNMachineValue("staleness", asset.staleness_status)}</i>
                 </div>
                 <small>{asset.summary}</small>
-                <em>{asset.evidence_count} 证据 · {asset.recommended_asset_action}</em>
+                <em>{asset.evidence_count} 条证据 · {zhCNMachineValue("assetAction", asset.recommended_asset_action)}</em>
               </button>
             ))}
           </div>
         ) : (
-          <div className="home-tier-asset-empty">当前筛选下没有足够的层级资产明细；请放宽筛选或等待新的 redacted snapshot。</div>
+          <div className="home-tier-asset-empty">当前筛选下没有足够的层级资产明细；请放宽筛选或等待新的脱敏快照。</div>
         )}
         <div data-asset-detail-host="AssetDetailPanel" data-asset-detail-panel-host="true">
           <AssetDetailPanel asset={selectedTierAsset} onClose={closeTierAsset} onOpenTarget={openTierAssetTarget} />
@@ -426,7 +427,7 @@ export function HomeOverviewView({
           <h3>主题分类明细</h3>
           <span>仅生成提案</span>
         </div>
-        <div className="home-operation-chip-grid" aria-label="Theme Categories Section states">
+        <div className="home-operation-chip-grid" aria-label="主题分类状态">
           {themeCategoryChips.map((state) => (
             <span
               className="home-operation-chip"
@@ -452,21 +453,21 @@ export function HomeOverviewView({
                 onClick={() => openTopicDetail(topic)}
                 type="button"
               >
-                <span>{topic.topic_state}</span>
+                <span>{zhCNMachineValue("topicState", topic.topic_state)}</span>
                 <strong>{topic.topic_label}</strong>
                 <div className="topic-detail-meta-grid" aria-label="主题分类排序信号">
-                  <i>{topic.category}</i>
+                  <i>{humanCategoryLabel(topic.category)}</i>
                   <i>强度 {formatScore(topic.topic_strength)}</i>
-                  <i>{topic.trend}</i>
+                  <i>{zhCNMachineValue("trend", topic.trend)}</i>
                   <i>{topic.record_count} 条记录</i>
                 </div>
                 <small>{topic.matched_reason}</small>
-                <em>{topic.evidence_refs.length} 证据 · {topic.starfield_handoff}</em>
+                <em>{formatEvidenceCount(topic.evidence_refs)} · 可打开星图聚焦</em>
               </button>
             ))}
           </div>
         ) : (
-          <div className="home-tier-asset-empty">当前筛选下没有足够的主题分类明细；请放宽筛选或等待新的 redacted snapshot。</div>
+          <div className="home-tier-asset-empty">当前筛选下没有足够的主题分类明细；请放宽筛选或等待新的脱敏快照。</div>
         )}
         <div data-theme-category-detail-host="ThemeDetailPanel" data-theme-detail-panel-host="true">
           <ThemeDetailPanel topic={selectedTopicDetail} onClose={closeTopicDetail} onOpenTarget={openTopicTarget} />
@@ -479,4 +480,8 @@ export function HomeOverviewView({
       </section>
     </div>
   );
+}
+
+function formatEvidenceCount(refs: unknown[]): string {
+  return `${refs.length.toLocaleString()} 条证据`;
 }

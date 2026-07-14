@@ -2,8 +2,10 @@ import { CheckCircle2, FileCheck2, RefreshCw, RotateCcw, ShieldCheck, X } from "
 import type { KeyboardEvent } from "react";
 import { useEffect, useMemo, useState } from "react";
 import { EmptyState } from "../../components/EmptyState";
+import { zhCNMachineValue } from "../../i18n/zh-CN";
 import { PROPOSAL_WORKFLOW_VERSION, ProposalActionResult, ProposalNarrator, ProposalReviewPayload } from "../../shared/atlas/constants";
 import { isProposalActionResult, isRecord } from "../../shared/runtime/operations";
+import { MachineFieldDetails } from "../../shared/ui/display";
 
 
 
@@ -59,11 +61,11 @@ export function ProposalWorkspace({ onClose, review }: { onClose: () => void; re
     if (!response.ok) {
       const message = isRecord(payload) && typeof payload.message_zh === "string"
         ? payload.message_zh
-        : `本地 proposal 请求失败（HTTP ${response.status}）。`;
+        : `本地提案请求失败（HTTP ${response.status}）。请检查本地服务后重试。`;
       throw new Error(message);
     }
     if (!isProposalActionResult(payload)) {
-      throw new Error("本地 proposal 返回格式未通过校验，已停止后续动作。");
+      throw new Error("本地提案返回格式未通过校验，已停止后续动作。请检查本地服务后重试。");
     }
     return payload;
   };
@@ -83,7 +85,7 @@ export function ProposalWorkspace({ onClose, review }: { onClose: () => void; re
       });
       setActionResult(result);
     } catch (error) {
-      setActionError(error instanceof Error ? error.message : "本地 proposal apply 未完成。");
+      setActionError(error instanceof Error ? error.message : "本地提案应用未完成。请检查提案状态后重试。");
     } finally {
       setPendingAction(null);
     }
@@ -106,7 +108,7 @@ export function ProposalWorkspace({ onClose, review }: { onClose: () => void; re
       });
       setActionResult(result);
     } catch (error) {
-      setActionError(error instanceof Error ? error.message : "本地 proposal rollback 未完成。");
+      setActionError(error instanceof Error ? error.message : "本地提案回滚未完成。请检查事务状态后重试。");
     } finally {
       setPendingAction(null);
     }
@@ -142,9 +144,9 @@ export function ProposalWorkspace({ onClose, review }: { onClose: () => void; re
               >
                 <span className="proposal-review-list-title">
                   {proposal.apply_ready ? <FileCheck2 aria-hidden="true" size={15} /> : <ShieldCheck aria-hidden="true" size={15} />}
-                  <strong>{proposal.proposal_id}</strong>
+                  <strong>{humanProposalLabel(proposal)}</strong>
                 </span>
-                <small>{proposal.apply_ready ? "可授权应用" : "仅复核"} · {proposal.risk_level || "未知风险"}</small>
+                <small>{proposal.apply_ready ? "可授权应用" : "仅复核"} · {humanRiskLabel(proposal.risk_level)}</small>
               </button>
             ))}
           </nav>
@@ -153,8 +155,8 @@ export function ProposalWorkspace({ onClose, review }: { onClose: () => void; re
               <>
                 <header className="proposal-review-detail-heading">
                   <div>
-                    <span>{selectedProposal.target_type || "未分类"} · {selectedProposal.current_state}</span>
-                    <h3>{selectedProposal.proposal_id}</h3>
+                    <span>{humanTargetLabel(selectedProposal.target_type)} · {humanProposalState(selectedProposal.current_state)}</span>
+                    <h3>{humanProposalLabel(selectedProposal)}</h3>
                     <p>{selectedProposal.human_reason_zh}</p>
                   </div>
                   <strong className={selectedProposal.apply_ready ? "proposal-readiness ready" : "proposal-readiness review-only"}>
@@ -170,8 +172,11 @@ export function ProposalWorkspace({ onClose, review }: { onClose: () => void; re
                   >
                     <div>
                       <strong>{selectedTransaction.state === "manual_rollback_required" ? "中断事务需要人工回滚" : "已提交事务仍可回滚"}</strong>
-                      <p>{selectedTransaction.transaction_id}</p>
-                      <p>{selectedTransaction.target_files.join(" · ")}</p>
+                      <p>{selectedTransaction.target_files.length.toLocaleString()} 个目标文件已锁定，可在高级详情中核对。</p>
+                      <MachineFieldDetails title="高级详情：事务与目标文件" className="inline-machine-field-details">
+                        <small>事务标识：{selectedTransaction.transaction_id}</small>
+                        <small>目标文件：{selectedTransaction.target_files.join(" · ") || "无"}</small>
+                      </MachineFieldDetails>
                     </div>
                     <div className="proposal-manual-rollback">
                       <label>
@@ -194,9 +199,9 @@ export function ProposalWorkspace({ onClose, review }: { onClose: () => void; re
 
                 {selectedProposal.apply_ready ? (
                   <div className="proposal-scope-strip">
-                    <span>风险：{selectedProposal.risk_level}</span>
+                    <span>风险：{humanRiskLabel(selectedProposal.risk_level)}</span>
                     <span>有效期：{formatProposalExpiry(selectedProposal.expires_at)}</span>
-                    <span>半衰期：{selectedProposal.action_half_life}</span>
+                    <span>半衰期：{humanActionHalfLife(selectedProposal.action_half_life)}</span>
                   </div>
                 ) : (
                   <p className="proposal-review-only-reason" data-r4-review-only-reason>
@@ -213,24 +218,26 @@ export function ProposalWorkspace({ onClose, review }: { onClose: () => void; re
                   ))}
                 </div>
 
-                <div className="proposal-scope-grid">
-                  <section>
-                    <h4>精确目标文件</h4>
-                    {selectedProposal.target_files.length > 0 ? (
-                      <ul>
-                        {selectedProposal.target_files.map((target) => <li data-r4-target-file={target} key={target}><code>{target}</code></li>)}
-                      </ul>
-                    ) : <p>尚未形成可应用的精确文件目标。</p>}
-                  </section>
-                  <section>
-                    <h4>固定验证</h4>
-                    {selectedProposal.validation_ids.length > 0 ? (
-                      <ul>
-                        {selectedProposal.validation_ids.map((validationId) => <li data-r4-validation-id={validationId} key={validationId}><code>{validationId}</code></li>)}
-                      </ul>
-                    ) : <p>尚未形成固定 validation ID。</p>}
-                  </section>
-                </div>
+                <MachineFieldDetails title="高级详情：精确目标与固定验证" className="proposal-scope-machine-details">
+                  <div className="proposal-scope-grid">
+                    <section>
+                      <h4>精确目标文件</h4>
+                      {selectedProposal.target_files.length > 0 ? (
+                        <ul>
+                          {selectedProposal.target_files.map((target) => <li data-r4-target-file={target} key={target}><code>{target}</code></li>)}
+                        </ul>
+                      ) : <p>尚未形成可应用的精确文件目标。</p>}
+                    </section>
+                    <section>
+                      <h4>固定验证</h4>
+                      {selectedProposal.validation_ids.length > 0 ? (
+                        <ul>
+                          {selectedProposal.validation_ids.map((validationId) => <li data-r4-validation-id={validationId} key={validationId}><code>{validationId}</code></li>)}
+                        </ul>
+                      ) : <p>尚未形成固定验证标识。</p>}
+                    </section>
+                  </div>
+                </MachineFieldDetails>
 
                 <section className="proposal-rollback-plan">
                   <h4>回滚范围</h4>
@@ -247,7 +254,7 @@ export function ProposalWorkspace({ onClose, review }: { onClose: () => void; re
                         onChange={(event) => setApplyAcknowledged(event.currentTarget.checked)}
                         type="checkbox"
                       />
-                      <span>我已核对中文 diff、精确目标、固定验证和回滚范围。</span>
+                      <span>我已核对中文差异、精确目标、固定验证和回滚范围。</span>
                     </label>
                     <button
                       data-r4-apply={selectedProposal.proposal_id}
@@ -261,7 +268,7 @@ export function ProposalWorkspace({ onClose, review }: { onClose: () => void; re
                   </div>
                 ) : null}
 
-                {actionError ? <p className="proposal-action-error" data-r4-action-error>{actionError}</p> : null}
+                {actionError ? <p className="proposal-action-error" data-r4-action-error>{actionError} 请检查本地服务与提案状态后重试。</p> : null}
                 {actionResult ? (
                   <section
                     className={`proposal-action-result proposal-action-result-${actionResult.state}`}
@@ -271,11 +278,11 @@ export function ProposalWorkspace({ onClose, review }: { onClose: () => void; re
                   >
                     <strong>{proposalActionTitle(actionResult)}</strong>
                     <p>{actionResult.message_zh}</p>
-                    {actionResult.state_history?.length ? <p>{actionResult.state_history.join(" → ")}</p> : null}
+                    {actionResult.state_history?.length ? <p>{humanStateHistory(actionResult.state_history)}</p> : null}
                     {actionResult.validation_results?.length ? (
                       <ul>
-                        {actionResult.validation_results.map((item) => (
-                          <li key={item.validation_id}>{item.validation_id}：{item.status}</li>
+                        {actionResult.validation_results.map((item, index) => (
+                          <li key={item.validation_id}>第 {index + 1} 项验证：{humanValidationStatus(item.status)}</li>
                         ))}
                       </ul>
                     ) : null}
@@ -336,4 +343,33 @@ export function formatProposalExpiry(value: string): string {
   const date = new Date(value);
   if (Number.isNaN(date.valueOf())) return "未提供";
   return date.toLocaleDateString("zh-CN", { year: "numeric", month: "2-digit", day: "2-digit" });
+}
+
+function humanProposalLabel(proposal: ProposalReviewPayload["proposals"][number]): string {
+  const summary = proposal.human_reason_zh.trim().split(/[。；\n]/, 1)[0]?.trim();
+  return summary ? (summary.length > 36 ? `${summary.slice(0, 36)}…` : summary) : "待复核提案";
+}
+
+function humanRiskLabel(value: string): string {
+  return zhCNMachineValue("riskLevel", value);
+}
+
+function humanTargetLabel(value: string): string {
+  return zhCNMachineValue("targetType", value);
+}
+
+function humanProposalState(value: string): string {
+  return zhCNMachineValue("proposalState", value);
+}
+
+function humanActionHalfLife(value: string): string {
+  return zhCNMachineValue("actionHalfLife", value);
+}
+
+function humanValidationStatus(value: string): string {
+  return zhCNMachineValue("validationStatus", value);
+}
+
+function humanStateHistory(values: string[]): string {
+  return values.map((value) => humanProposalState(value)).join(" → ");
 }

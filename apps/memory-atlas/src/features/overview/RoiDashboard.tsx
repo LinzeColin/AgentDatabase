@@ -34,9 +34,9 @@ export function RoiDashboard({
       <InsightCard title="长期资产密度" value={sumValues(tierValues, ["核心画像", "一般"])} note="当前筛选中的核心画像 + 一般" />
       <InsightCard title="临时信息池" value={tierValues["临时"] ?? 0} note={`全局临时 ${globalTierValues["临时"] ?? 0} 条；保留但低权重召回`} />
       <InsightCard title="近期增量" value={deltaStats.recentCount} note={`近 30 天较前 30 天 ${formatSigned(deltaStats.deltaCount)} 条`} />
-      <section className="wide-panel roi-visual-strip" aria-label="ROI 视觉密度分布">
+      <section className="wide-panel roi-visual-strip" aria-label="投入回报视觉密度分布">
         <div className="panel-title-row">
-          <h2>ROI 视觉分布</h2>
+          <h2>投入回报视觉分布</h2>
           <span>层级、分类和建议动作同步当前筛选</span>
         </div>
         <div className="roi-mini-bars">

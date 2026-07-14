@@ -42,12 +42,12 @@ export function buildSearch2Result(atlas: MemoryAtlas, node: AtlasNode, latest: 
     result_id: node.id,
     title: preview.title,
     summary: preview.summary,
-    source: node.source_label || node.data_source || atlas.source_contract.export_profile || "redacted snapshot",
+    source: node.source_label || node.data_source || atlas.source_contract.export_profile || "脱敏快照",
     tier,
     topic,
     recency,
     importance,
-    matched_reason: query ? "matched_reason pending query scoring" : "matched_reason default ranking by importance, recency and evidence",
+    matched_reason: query ? "正在按查询词计算匹配原因" : "默认按重要性、近期程度和证据排序",
     evidence_refs: evidenceRefs,
     jump_to_starfield: node.visual?.cluster ? `cluster:${node.visual.cluster}` : node.id,
     jump_to_river: node.date ? `date:${node.date}` : "no_river_event_ref",
@@ -94,9 +94,9 @@ export function buildSearch2MatchedReason(result: Search2Result, query: string):
     .filter((value) => query && normalizeSearch2Text(value).includes(query))
     .slice(0, 3);
   if (matchedFields.length) {
-    return `query matched ${matchedFields.map((value) => truncate(value, 36)).join(" / ")}; ranked by ${result.importance} importance, ${result.recency} recency and ${result.evidence_refs.length} evidence_refs.`;
+    return `查询词匹配：${matchedFields.map((value) => truncate(value, 36)).join(" / ")}；综合重要性、近期程度和 ${result.evidence_refs.length} 条证据排序。`;
   }
-  return `default workflow match: ${result.topic}; ranked by ${result.importance} importance, ${result.recency} recency and ${result.evidence_refs.length} evidence_refs.`;
+  return `默认工作流匹配：${result.topic}；综合重要性、近期程度和 ${result.evidence_refs.length} 条证据排序。`;
 }
 
 
@@ -168,8 +168,8 @@ export function buildSearch2SessionSummary(results: Search2Result[], query: stri
     stale_or_black_hole_hits: staleHits,
     missing_evidence: missingEvidence,
     next_step: results.length
-      ? "Open Inspector for the strongest matched_reason, then use proposal-only handoff if a change is needed."
-      : "Use zero_result_recovery before opening a later review workflow hint.",
+      ? "打开最相关结果的检查器；如需修改，先生成仅供审查的提案。"
+      : "先调整查询词或筛选条件，再进入后续复审流程。",
     proposal_candidate: results.some((result) => result.proposal_candidate),
   };
 }

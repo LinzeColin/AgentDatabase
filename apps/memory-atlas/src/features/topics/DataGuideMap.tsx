@@ -7,6 +7,7 @@ import { buildDataGuideLayout, buildDataMapNodeDetail } from "../../shared/atlas
 import { DATA_MAP_STRUCTURE_LAYERS, DataGuideEdge } from "../../shared/atlas/layoutContracts";
 import { humanNodeDisplayTitle } from "../../shared/atlas/semanticHuman";
 import { isActivationKey, translateKind } from "../../shared/atlas/utils";
+import { EvidenceRefsDetails } from "../../shared/ui/display";
 import { DataGuideSvgNode, DeltaStrip, GraphUsageStrip, LegendItem } from "../../shared/ui/primitives";
 
 
@@ -93,11 +94,11 @@ export function DataGuideMap({
           { label: "点击关系", value: "解释为什么连接" },
         ]}
       />
-      <div className="data-map-layer-strip" aria-label="Stage 6 Phase 6.1 四层结构">
+      <div className="data-map-layer-strip" aria-label="数据导图四层结构">
         {DATA_MAP_STRUCTURE_LAYERS.map((layer) => (
           <span key={layer.id} data-data-map-layer={layer.id}>
             <b>{layer.label}</b>
-            <em>{layer.nodeTypes.join(" / ")}</em>
+            <em>{layer.subtitle}</em>
           </span>
         ))}
       </div>
@@ -154,7 +155,7 @@ export function DataGuideMap({
                   data-selected={selected ? "true" : "false"}
                   data-relation-source={edge.explanation.source}
                   data-relation-strength={edge.explanation.strength}
-                  data-relation-evidence={edge.explanation.evidence}
+                  data-relation-evidence={edge.explanation.machineEvidence}
                   data-relation-time={edge.explanation.time}
                   onClick={() => setSelectedDataMapRelationId(edge.id)}
                   onKeyDown={(event) => {
@@ -199,12 +200,12 @@ export function DataMapRelationPanel({ relation }: { relation: DataGuideEdge | n
       data-selected-relation-id={relation?.id ?? ""}
       data-relation-source={explanation?.source ?? "默认折叠"}
       data-relation-strength={explanation?.strength ?? "默认折叠"}
-      data-relation-evidence={explanation?.evidence ?? "默认折叠"}
+      data-relation-evidence={explanation?.machineEvidence ?? "默认折叠"}
       data-relation-time={explanation?.time ?? "默认折叠"}
     >
       <div className="panel-title-row">
         <h2>关系解释</h2>
-        <span>为什么连接 / source / strength / evidence / time</span>
+        <span>为什么连接 / 来源 / 强度 / 证据 / 时间</span>
       </div>
       {explanation ? (
         <>
@@ -232,7 +233,7 @@ export function DataMapRelationPanel({ relation }: { relation: DataGuideEdge | n
         <p className="data-map-relation-reason">默认折叠。点击任意关系线查看为什么连接、来源、强度、证据和时间。</p>
       )}
       <p className="data-map-relation-safe-flags">
-        No Phase 6.2 editing · proposalWrite: false · directActiveMemoryWriteback: false · rawPrivateDataIncluded: false
+        当前阶段只读 · 不写提案 · 不直接写长期记忆 · 不包含原始私密数据
       </p>
     </section>
   );
@@ -266,7 +267,7 @@ export function DataMapNodeDetailPanel({
     >
       <div className="panel-title-row">
         <h2>数据导图详情面板</h2>
-        <span>{DATA_MAP_DETAIL_PANEL_VERSION}</span>
+        <span>只读详情</span>
       </div>
       {node ? (
         <>
@@ -279,9 +280,9 @@ export function DataMapNodeDetailPanel({
             <div><dt>资产</dt><dd>{detail.asset}</dd></div>
             <div><dt>主题</dt><dd>{detail.theme}</dd></div>
             <div><dt>建议动作</dt><dd>{detail.suggestedAction}</dd></div>
-            <div><dt>重要性</dt><dd>{detail.importance}</dd></div>
-            <div><dt>优先级</dt><dd>{detail.priority}</dd></div>
-            <div><dt>状态</dt><dd>{detail.status}</dd></div>
+            <div><dt>重要性</dt><dd>{detail.importanceLabel}</dd></div>
+            <div><dt>优先级</dt><dd>{detail.priorityLabel}</dd></div>
+            <div><dt>状态</dt><dd>{displayDataMapStatus(detail.status)}</dd></div>
           </dl>
           <section className="data-map-node-detail-section" aria-label="证据摘要">
             <span>证据</span>
@@ -291,10 +292,11 @@ export function DataMapNodeDetailPanel({
               ))}
             </ul>
           </section>
-          <div className="data-map-detail-safety-strip" aria-label="Data Map Phase 6.2 safety">
+          <EvidenceRefsDetails refs={detail.machineEvidenceRefs} />
+          <div className="data-map-detail-safety-strip" aria-label="数据导图当前阶段安全边界">
             <span>仅生成提案</span>
             <span>不直接写长期记忆</span>
-            <span>不执行 Stage 6 review</span>
+            <span>不执行后续阶段复审</span>
           </div>
           <div
             className="data-map-proposal-entry"
@@ -306,8 +308,8 @@ export function DataMapNodeDetailPanel({
             data-source-surface="data_guide_detail_panel"
           >
             <div className="panel-title-row">
-              <h3>数据导图 proposal 入口</h3>
-              <span>{DATA_MAP_PROPOSAL_ENTRY_VERSION}</span>
+              <h3>数据导图提案入口</h3>
+              <span>仅生成提案</span>
             </div>
             <ProposalEditor
               node={node}
@@ -317,8 +319,14 @@ export function DataMapNodeDetailPanel({
           </div>
         </>
       ) : (
-        <p className="data-map-node-detail-empty">点击数据导图节点查看资产、主题、建议动作、重要性和优先级；编辑入口只导出 proposal。</p>
+        <p className="data-map-node-detail-empty">点击数据导图节点查看资产、主题、建议动作、重要性和优先级；编辑入口只导出提案。</p>
       )}
     </section>
   );
+}
+
+
+
+function displayDataMapStatus(status: string): string {
+  return status || "状态未知";
 }

@@ -627,7 +627,7 @@ features:
       - "EVID-MA-V121-S05-P3-T1-TEST"
   - feature_id: "FEAT-MA-V121-S05-P3-T2"
     name: "Memory Atlas 轻量语义可读性门禁"
-    description: "v1.2.1 Task Pack 当前完成 35/149；TypeScript AST 规则扫描 83 个 UI 源文件并精确 ratchet 四类问题，当前 79 条已知债务必须由 S05-P3-T3 清零。"
+    description: "TypeScript AST 规则扫描 83 个 UI 源文件并精确 ratchet 四类问题；S05-P3-T2 建立的 79 条债务已由 S05-P3-T3 清零，后续任何新增、消失未清账或 fingerprint 漂移继续 fail closed。"
     status: "active"
     fact_level: "EXTRACTED"
     code_refs:
@@ -638,13 +638,38 @@ features:
       - "OpenAIDatabase/config/memory_atlas_semantic_readability.json"
       - "OpenAIDatabase/config/memory_atlas_validator_profiles.json"
     owner_actions:
-      - "运行 validate:ui 或 validate:release；任何新增、消失未清账或 fingerprint 漂移都会失败。下一 Task 只按 baseline 清单修复真实 UI 债务。"
+      - "运行 validate:ui 或 validate:release；任何新增、消失未清账或 fingerprint 漂移都会失败。"
     test_refs:
       - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_semantic_readability -q"
       - "npm run validate:ui --prefix OpenAIDatabase/apps/memory-atlas"
     evidence_refs:
       - "EVID-MA-V121-S05-P3-T2-RULE"
       - "EVID-MA-V121-S05-P3-T2-TEST"
+  - feature_id: "FEAT-MA-V121-S05-P3-T3"
+    name: "Memory Atlas 全中文默认 UI 基线"
+    description: "v1.2.1 Task Pack 当前完成 36/149；79 条默认可见机器字段、枚举和无行动错误状态债务已清零，核心 UI 通过统一 zh-CN humanizer 显示中文，同时保留 API、schema、data attribute、内部 enum、持久化和导出 payload 的英文兼容合同。"
+    status: "active"
+    fact_level: "EXTRACTED"
+    code_refs:
+      - "OpenAIDatabase/apps/memory-atlas/src/i18n/zh-CN.ts"
+      - "OpenAIDatabase/apps/memory-atlas/src/shared/ui/display.tsx"
+      - "OpenAIDatabase/apps/memory-atlas/src/shared/atlas/memoryRiverModels.ts"
+      - "OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_semantic_readability.mjs"
+      - "OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_home_multiviewport.cjs"
+    config_refs:
+      - "OpenAIDatabase/config/memory_atlas_semantic_readability.json"
+      - "OpenAIDatabase/config/atlasctl_script_migrations.json"
+    source_refs:
+      - "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s05_p3_t3_chinese_ui_baseline_review.md"
+    owner_actions:
+      - "默认先使用中文结论、证据和下一步；仅在折叠的机器详情中查看 schema、ID、命令或来源路径。"
+    test_refs:
+      - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_semantic_readability -q"
+      - "npm run validate:ui --prefix OpenAIDatabase/apps/memory-atlas"
+      - "python3 -B -m unittest discover -s OpenAIDatabase/tests -p 'test_*.py' -q"
+    evidence_refs:
+      - "EVID-MA-V121-S05-P3-T3-BASELINE"
+      - "EVID-MA-V121-S05-P3-T3-TEST"
 models:
   -
     model_id: "MOD-001"
@@ -4770,4 +4795,14 @@ evidence_refs:
     evidence_id: "EVID-MA-V121-S05-P3-T2-TEST"
     kind: "test"
     ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s05_p3_t2_semantic_readability_review.md"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S05-P3-T3-BASELINE"
+    kind: "config"
+    ref: "OpenAIDatabase/config/memory_atlas_semantic_readability.json"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S05-P3-T3-TEST"
+    kind: "test"
+    ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s05_p3_t3_chinese_ui_baseline_review.md"
     fact_level: "EXTRACTED"

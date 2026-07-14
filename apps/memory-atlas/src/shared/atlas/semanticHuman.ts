@@ -209,7 +209,7 @@ export function buildHumanNodeSummary(node: AtlasNode, edgeCount: number) {
     topics,
     statusRows: [
       { label: "记忆类型", value: memoryType },
-      { label: "适用对象", value: continuityMemory ? "ChatGPT / Codex / 任意 Agent" : humanApplicableScope(node) },
+      { label: "适用对象", value: continuityMemory ? "ChatGPT、Codex 或任意代理" : humanApplicableScope(node) },
       { label: "首次记录", value: node.date || "未知" },
       { label: "当前状态", value: status },
       { label: "关联数量", value: edgeCount.toLocaleString() },
@@ -227,11 +227,11 @@ export function recommendedActionForNode(node: AtlasNode): string {
   if (node.category === "decision") return "作为已做出的选择，后续方案默认继承并记录影响。";
   if (node.category === "project_context") return "用于恢复项目背景，继续任务前先读关联项目和下一步。";
   if (node.category === "workflow") return "沉淀成可复用流程、Skill 或自动化检查。";
-  if (node.category === "security_boundary") return "作为硬边界处理，涉及外部写入、交易、secret 时先确认。";
+  if (node.category === "security_boundary") return "作为硬边界处理，涉及外部写入、交易或密钥时先确认。";
   if (node.category === "deprecated_info") return "保留历史轨迹，但回答时标明可能过时，避免当成当前事实。";
   if (node.category === "temporary_or_sensitive") return "低权重召回，只在当前任务相关时读取，不要污染长期画像。";
   const tier = normalizeMemoryTier(node.memory_tier);
-  if (tier === "核心画像") return "优先进入 personalization，影响所有 agent 的默认行为。";
+  if (tier === "核心画像") return "优先进入个性化信息，影响所有代理的默认行为。";
   if (tier === "一般") return "保留为一般上下文，用于项目连续性和决策复盘。";
   return "作为背景资料保留，必要时再展开。";
 }
@@ -275,16 +275,16 @@ export function humanNodeTitle(node: AtlasNode, theme?: string, continuityMemory
 
 export function buildHumanNodeSubtitle(node: AtlasNode, theme: string, continuityMemory: boolean): string {
   if (continuityMemory) {
-    return "这条记忆的重点不是数据库字段，而是让未来任何 agent 先理解你的画像、偏好、项目历史、决策标准和回答规则，再开始工作。";
+    return "这条记忆的重点不是数据库字段，而是让未来任何代理先理解你的画像、偏好、项目历史、决策标准和回答规则，再开始工作。";
   }
   if (node.kind !== "memory") {
     return "这是一个导航节点，用来把相关主题、项目、决策、时间线和记忆连接起来，帮助你从全局理解历史轨迹。";
   }
   if (node.category === "answering_rule") return "这是一条会影响未来回答方式和交付验收标准的长期规则。";
-  if (node.category === "decision") return "这记录了一个已做出的选择，后续规划和 agent 执行应默认继承。";
-  if (node.category === "project_context") return "这保存项目背景，目的是降低换线程、换 agent 或隔一段时间后继续工作的成本。";
-  if (node.category === "preference") return "这记录你的偏好、taste 或判断标准，未来 personalization 应优先使用。";
-  return `这条记忆和「${theme}」有关，适合用于复盘、搜索、上下文恢复和未来 agent 个性化。`;
+  if (node.category === "decision") return "这记录了一个已做出的选择，后续规划和代理执行应默认继承。";
+  if (node.category === "project_context") return "这保存项目背景，目的是降低换线程、换代理或隔一段时间后继续工作的成本。";
+  if (node.category === "preference") return "这记录你的偏好或判断标准，未来个性化应优先使用。";
+  return `这条记忆和「${theme}」有关，适合用于复盘、搜索、上下文恢复和未来代理个性化。`;
 }
 
 
@@ -293,8 +293,8 @@ export function buildMeaningBullets(node: AtlasNode, theme: string, continuityMe
   if (continuityMemory) {
     return [
       "你不希望 AI 只记住设置页里很短的 personalization，而是要有完整、长期、可追溯的记忆数据库。",
-      "ChatGPT、Codex 和未来任意 agent 都应能读取同一套画像、偏好、历史项目、决策标准和回答规则。",
-      "前端默认展示人类能理解的结论、机会、建议和待办；完整原文和高敏内容只给授权 agent 读取。",
+      "ChatGPT、Codex 和未来任意代理都应能读取同一套画像、偏好、历史项目、决策标准和回答规则。",
+      "前端默认展示人类能理解的结论、机会、建议和待办；完整原文和高敏内容只给授权代理读取。",
     ];
   }
   if (node.kind !== "memory") {
@@ -306,7 +306,7 @@ export function buildMeaningBullets(node: AtlasNode, theme: string, continuityMe
   if (node.category === "decision") {
     return [
       "这里记录的是已经做出的选择，不应在未来任务中反复重新讨论。",
-      "后续 agent 应把它作为默认背景，并在新证据出现时再提出修改建议。",
+      "后续代理应把它作为默认背景，并在新证据出现时再提出修改建议。",
     ];
   }
   if (node.category === "answering_rule") {
@@ -318,7 +318,7 @@ export function buildMeaningBullets(node: AtlasNode, theme: string, continuityMe
   if (node.category === "project_context") {
     return [
       "这里保存的是项目背景、历史进展或上下文，不是一次性的聊天片段。",
-      "它能帮助新线程、新 agent 或未来的你快速恢复任务状态。",
+      "它能帮助新线程、新代理或未来的你快速恢复任务状态。",
     ];
   }
   const cleanStatement = humanizeStatement(node.statement);
@@ -332,13 +332,13 @@ export function buildMeaningBullets(node: AtlasNode, theme: string, continuityMe
 
 export function buildHumanImpact(node: AtlasNode, edgeCount: number, continuityMemory: boolean): string {
   if (continuityMemory) {
-    return "它直接影响所有未来 AI 协作质量：减少重复解释、降低上下文成本、提高项目接续能力，并让 agent 更接近长期了解你的工作伙伴。";
+    return "它直接影响所有未来 AI 协作质量：减少重复解释、降低上下文成本、提高项目接续能力，并让代理更接近长期了解你的工作伙伴。";
   }
-  if (node.category === "answering_rule") return "它能减少重复纠错，让不同 agent 在回答风格、验收标准和执行边界上更一致。";
+  if (node.category === "answering_rule") return "它能减少重复纠错，让不同代理在回答风格、验收标准和执行边界上更一致。";
   if (node.category === "decision") return "它能避免重复决策，让后续计划沿着既定方向推进，同时保留未来修正的证据入口。";
   if (node.category === "project_context") return "它能降低项目切换成本，让历史背景、当前状态和下一步行动更容易被恢复。";
-  if (node.category === "preference") return "它会影响未来 personalization，让回答更贴近你的 taste、偏好、风险边界和决策方式。";
-  if (node.category === "security_boundary") return "它属于硬边界信息，能防止 agent 在外部写入、隐私、交易或 secret 场景里越权。";
+  if (node.category === "preference") return "它会影响未来个性化，让回答更贴近你的偏好、风险边界和决策方式。";
+  if (node.category === "security_boundary") return "它属于硬边界信息，能防止代理在外部写入、隐私、交易或密钥场景里越权。";
   const connectionText = edgeCount ? `当前有 ${edgeCount.toLocaleString()} 个关联，` : "";
   return `${connectionText}它的价值在于帮助你看清反复出现的主题、行为习惯和潜在机会，而不是只作为后台索引。`;
 }
@@ -348,13 +348,13 @@ export function buildHumanImpact(node: AtlasNode, edgeCount: number, continuityM
 export function buildFutureUseItems(node: AtlasNode, continuityMemory: boolean): string[] {
   if (continuityMemory) {
     return [
-      "新 agent 启动前先读取 Memory Atlas / OpenAIDatabase，再生成适配你的 profile、preference 和项目上下文。",
+      "新代理启动前先读取记忆图谱数据，再生成适配你的画像、偏好和项目上下文。",
       "回答时优先遵守你的长期偏好、交付标准、历史决策和安全边界。",
-      "发现新偏好、新规则或新项目决策时，先生成可审查、可回滚的 memory update candidate。",
+      "发现新偏好、新规则或新项目决策时，先生成可审查、可回滚的记忆更新候选。",
     ];
   }
   if (node.category === "security_boundary") {
-    return ["涉及外部写入、交易、secret、隐私或权限时先停下来确认。", "把它作为 agent 执行前的硬性检查项。"];
+    return ["涉及外部写入、交易、密钥、隐私或权限时先停下来确认。", "把它作为代理执行前的硬性检查项。"];
   }
   if (node.category === "workflow") {
     return ["把它沉淀成可复用 skill、Task Pack 或自动化检查。", "未来相似任务先套用这套流程，再根据新证据调整。"];
@@ -493,18 +493,18 @@ export function humanMemoryStatus(node: AtlasNode): string {
 
 export function humanApplicableScope(node: AtlasNode): string {
   if (node.category === "answering_rule") return "所有未来回答";
-  if (node.category === "preference") return "Personalization / Profile";
+  if (node.category === "preference") return "个性化与用户画像";
   if (node.category === "project_context") return "相关项目和接续任务";
-  if (node.category === "workflow") return "Codex / Agent 工作流";
+  if (node.category === "workflow") return "Codex 与代理工作流";
   if (node.category === "security_boundary") return "所有高风险动作";
-  return "搜索 / 复盘 / 相关 Agent";
+  return "搜索、复盘与相关代理";
 }
 
 
 
 export function buildAgentMemoryLine(node: AtlasNode, title: string, continuityMemory: boolean): string {
-  const prefix = continuityMemory ? "核心 personalization" : humanCategoryLabel(node.category);
-  return `${prefix}：${title}。未来 agent 应把这条记忆用于画像、偏好、历史上下文或回答规则恢复；新增/修改/删除需走下方写回提案。`;
+  const prefix = continuityMemory ? "核心个性化信息" : humanCategoryLabel(node.category);
+  return `${prefix}：${title}。未来代理应把这条记忆用于画像、偏好、历史上下文或回答规则恢复；新增、修改或删除需走下方写回提案。`;
 }
 
 
@@ -538,8 +538,8 @@ export function humanizeStatement(value: string | undefined): string {
 
 export function compactThemeLabel(value: string): string {
   return value
-    .replace(/agent continuity/gi, "Agent 连续性")
-    .replace(/agent/gi, "Agent")
+    .replace(/agent continuity/gi, "代理连续性")
+    .replace(/agent/gi, "代理")
     .replace(/workflow/gi, "工作流")
     .replace(/token/gi, "Token")
     .replace(/dashboard/gi, "仪表盘")
@@ -574,14 +574,14 @@ export function humanThemeLabel(node: AtlasNode): string {
 
 export function themeLabelFromCluster(cluster: string): string {
   const labels: Record<string, string> = {
-    "memory-rag-continuity": "长期记忆库 / RAG / Agent 连续性",
-    "codex-agent-workflow": "Codex / Agent 工作流 / Token ROI",
+    "memory-rag-continuity": "长期记忆库 / 检索增强 / 代理连续性",
+    "codex-agent-workflow": "Codex / 代理工作流 / 令牌投入回报",
     "learning-notion-nitrosend": "学习系统 / Notion / 仪表盘",
     "rotary-kiln-industrial": "回转窑 / 工业服务 / 动态测量调整",
     "finance-trading-probability": "金融 / 交易 / FIFA / 概率决策",
     "course-reporting": "课程 / 公司报告 / 可持续报告",
     "ai-era-growth": "AI 时代 / 社会影响 / 个人能力突破",
-    "formal-engineering-delivery": "EVA OS / 系统开发 / Task Pack",
+    "formal-engineering-delivery": "EVA OS / 系统开发 / 任务包",
     uncategorized: "其他待人工归类主题",
   };
   return labels[cluster] ?? cluster;
@@ -592,7 +592,7 @@ export function themeLabelFromCluster(cluster: string): string {
 export function humanCategoryLabel(value: string | undefined): string {
   const labels: Record<string, string> = {
     answering_rule: "回答规则",
-    codex_agent_metadata: "Codex agent 元数据",
+    codex_agent_metadata: "Codex 代理元数据",
     codex_development_record: "Codex 开发记录",
     codex_personalization: "Codex 个性化上下文",
     codex_usage_record: "Codex 使用记录",

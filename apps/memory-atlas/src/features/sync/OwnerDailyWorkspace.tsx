@@ -26,7 +26,7 @@ export function OwnerDailyEntry({
         <ShieldCheck aria-hidden="true" size={16} />
         <div>
           <strong>日常维护</strong>
-          <span>8 项 no-write 检查</span>
+          <span>8 项只读检查</span>
         </div>
       </div>
       {available ? (
@@ -99,11 +99,11 @@ export function OwnerDailyWorkspace({
     if (!response.ok) {
       const message = isRecord(payload) && typeof payload.message_zh === "string"
         ? payload.message_zh
-        : `Owner Daily 请求失败（HTTP ${response.status}）。`;
+        : `日常维护请求失败（HTTP ${response.status}）。`;
       throw new Error(message);
     }
     if (!isOwnerDailyResult(payload)) {
-      throw new Error("Owner Daily 返回格式或 no-write 安全字段未通过校验，已停止显示结果。");
+      throw new Error("日常维护返回格式或只读安全字段未通过校验，已停止显示结果。");
     }
     return payload;
   };
@@ -115,10 +115,10 @@ export function OwnerDailyWorkspace({
     onResultChange(null);
     try {
       const nextResult = await postOwnerDaily({ action: "run" });
-      if (nextResult.action !== "run") throw new Error("Owner Daily 返回了错误的 action，已停止显示结果。");
+      if (nextResult.action !== "run") throw new Error("日常维护返回了错误的操作类型，已停止显示结果。");
       onResultChange(nextResult);
     } catch (error) {
-      setActionError(error instanceof Error ? error.message : "Owner Daily 未完成，请查看本机日志后重试。");
+      setActionError(error instanceof Error ? error.message : "日常维护未完成，请查看本机日志后重试。");
     } finally {
       setPendingAction(null);
     }
@@ -131,11 +131,11 @@ export function OwnerDailyWorkspace({
     try {
       const retry = await postOwnerDaily({ action: "retry", step_id: stepId });
       if (retry.action !== "retry" || retry.requested_step_id !== stepId) {
-        throw new Error("Owner Daily retry 返回了错误步骤，已停止合并结果。");
+        throw new Error("日常维护重试返回了错误步骤，已停止合并结果。");
       }
       onResultChange(mergeOwnerDailyRetry(result, retry));
     } catch (error) {
-      setActionError(error instanceof Error ? error.message : "Owner Daily 单步重试未完成。");
+      setActionError(error instanceof Error ? error.message : "日常维护单步重试未完成。");
     } finally {
       setPendingAction(null);
     }
@@ -146,14 +146,14 @@ export function OwnerDailyWorkspace({
       className="proposal-workspace-backdrop owner-daily-workspace-backdrop"
       data-r5-owner-daily-workspace={OWNER_DAILY_UI_VERSION}
     >
-      <section aria-label="Owner Daily 日常维护" aria-modal="true" className="proposal-workspace-surface owner-daily-workspace-surface" ref={dialogRef} role="dialog">
+      <section aria-label="日常维护" aria-modal="true" className="proposal-workspace-surface owner-daily-workspace-surface" ref={dialogRef} role="dialog">
         <header className="proposal-workspace-heading owner-daily-workspace-heading">
           <div>
             <p className="eyebrow">日常维护</p>
-            <h2>Owner Daily</h2>
-            <span>八个固定步骤 · 只读 dry-run · 失败步骤可单独重试</span>
+            <h2>日常维护</h2>
+            <span>八个固定步骤 · 只读预演 · 失败步骤可单独重试</span>
           </div>
-          <button aria-label="关闭 Owner Daily" className="proposal-workspace-close" disabled={pendingAction !== null} onClick={onClose} title="关闭" type="button">
+          <button aria-label="关闭日常维护" className="proposal-workspace-close" disabled={pendingAction !== null} onClick={onClose} title="关闭" type="button">
             <X aria-hidden="true" size={18} />
           </button>
         </header>
@@ -161,11 +161,11 @@ export function OwnerDailyWorkspace({
           <section className="owner-daily-start-band">
             <div>
               <strong>{result ? "重新检查当前维护状态" : "检查当前维护状态"}</strong>
-              <p>不会写入 source、runtime 或 raw 数据，不会推送 GitHub、应用提案、发送到 ChatGPT 或打开浏览器。</p>
+              <p>不会写入来源、运行时或原始数据，不会推送 GitHub、应用提案、发送到 ChatGPT 或打开浏览器。</p>
             </div>
             <button data-r5-owner-daily-start disabled={pendingAction !== null} onClick={() => void runProfile()} type="button">
               {pendingAction === "run" ? <RefreshCw aria-hidden="true" className="command-running-icon" size={16} /> : <Play aria-hidden="true" size={16} />}
-              <span>{pendingAction === "run" ? "正在检查" : "开始 no-write 检查"}</span>
+              <span>{pendingAction === "run" ? "正在检查" : "开始只读检查"}</span>
             </button>
           </section>
 
