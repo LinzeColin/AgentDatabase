@@ -2,7 +2,9 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
+from pathlib import Path
 
 from memory_atlas_owner_daily import (
     OWNER_DAILY_STEP_IDS,
@@ -11,15 +13,27 @@ from memory_atlas_owner_daily import (
     owner_daily_profile_contract as build_owner_daily_profile_contract,
 )
 
-from .constants import (
-    CHATGPT_SYNC,
-    CODEX_SYNC,
-    FUTURE_AGENT_SYNC,
-    ROOT,
-)
+from .constants import ROOT
 from .child_process import run_child_command
+from .source_registry import (
+    PUSH_DEFAULTS,
+    SourceRegistryError,
+    load_source_registry,
+    resolve_sync_source,
+    validate_portable_identifier,
+)
 
 
+_DISCOVERY_DESTINATIONS = {
+    "--official-export": "official_export",
+    "--codex-home": "codex_home",
+    "--input": "input",
+    "--markdown-report": "markdown_report",
+}
+_DISCOVERY_EXCLUSIVE_DESTINATIONS = {
+    "input": ("input", "markdown_report"),
+    "markdown_report": ("input", "markdown_report"),
+}
 def owner_daily_profile_contract() -> dict[str, object]:
     return build_owner_daily_profile_contract()
 
@@ -85,10 +99,15 @@ def codex_contract(public_transcripts: bool = False) -> dict[str, object]:
     }
 
 
-def future_agent_contract(agent_id: str, event_id: str | None = None) -> dict[str, object]:
+def future_agent_contract(
+    agent_id: str,
+    event_id: str | None = None,
+    *,
+    source_id: str = "future-agent",
+) -> dict[str, object]:
     return {
         "status": "PASS",
-        "source_id": "future-agent",
+        "source_id": source_id,
         "agent_id": agent_id,
         "dry_run": True,
         "adapter_mode": "minimal_adapter",
@@ -102,37 +121,142 @@ def future_agent_contract(agent_id: str, event_id: str | None = None) -> dict[st
     }
 
 
+def apply_environment_discovery(args: argparse.Namespace, registered_source: dict[str, object]) -> None:
+    """Fill an unset source argument from the registry's ordered environment candidates."""
+
+    for candidate in registered_source["discovery"]["candidates"]:  # type: ignore[index]
+        if candidate["kind"] != "environment_variable":
+            continue
+        destination = _DISCOVERY_DESTINATIONS[str(candidate["target_argument"])]
+        exclusive_destinations = _DISCOVERY_EXCLUSIVE_DESTINATIONS.get(destination, (destination,))
+        if any(getattr(args, field) is not None for field in exclusive_destinations):
+            continue
+        environment_value = os.environ.get(str(candidate["value"]), "").strip()
+        if environment_value:
+            setattr(args, destination, Path(environment_value).expanduser())
+            return
+
+
+def assert_sync_execution_policy(registered_source: dict[str, object]) -> None:
+    if registered_source.get("push_policy") != PUSH_DEFAULTS:
+        raise SourceRegistryError("sync execution requires the final-delivery-only push policy")
+
+
 def run_sync(args: argparse.Namespace) -> int:
-    if args.source == "chatgpt" and args.dry_run and not args.official_export:
+    try:
+        registry = load_source_registry(ROOT)
+        registered_source = resolve_sync_source(registry, args.source)
+        assert_sync_execution_policy(registered_source)
+        apply_environment_discovery(args, registered_source)
+    except SourceRegistryError as exc:
+        print(json.dumps({
+            "status": "FAIL_CLOSED",
+            "source_id": args.source,
+            "reason": str(exc),
+        }, ensure_ascii=False, indent=2, sort_keys=True))
+        return 2
+
+    source_type = str(registered_source["source_type"])
+    parser_path = ROOT / str(registered_source["parser"]["entrypoint"])
+    generic_agent_id = args.agent_id
+    registered_source_id = str(registered_source["source_id"])
+    if source_type == "generic_agent":
+        try:
+            validate_portable_identifier(generic_agent_id, "agent_id", max_length=128)
+        except SourceRegistryError as exc:
+            print(json.dumps({
+                "status": "FAIL_CLOSED",
+                "source_id": args.source,
+                "reason": str(exc),
+                "writes_files": False,
+            }, ensure_ascii=False, indent=2, sort_keys=True))
+            return 2
+    concrete_generic_source = (
+        source_type == "generic_agent"
+        and registered_source_id != "generic_agent_template"
+        and args.source != "future-agent"
+    )
+    if concrete_generic_source:
+        if args.agent_id not in {"future-agent", registered_source_id}:
+            print(json.dumps({
+                "status": "FAIL_CLOSED",
+                "source_id": registered_source_id,
+                "reason": "registered generic source identity cannot be overridden by --agent-id",
+                "writes_files": False,
+            }, ensure_ascii=False, indent=2, sort_keys=True))
+            return 2
+        generic_agent_id = registered_source_id
+
+    concrete_generic_ids = {
+        str(source["source_id"])
+        for source in registry["sync_sources"]
+        if source["source_type"] == "generic_agent"
+        and source["source_id"] != "generic_agent_template"
+    }
+    if (
+        source_type == "generic_agent"
+        and registered_source_id == "generic_agent_template"
+        and generic_agent_id in concrete_generic_ids
+    ):
+        print(json.dumps({
+            "status": "FAIL_CLOSED",
+            "source_id": args.source,
+            "reason": "generic template cannot claim a registered source namespace",
+            "writes_files": False,
+        }, ensure_ascii=False, indent=2, sort_keys=True))
+        return 2
+
+    generic_source_identity = registered_source_id
+    if source_type == "generic_agent":
+        if args.source == "future-agent":
+            generic_source_identity = "future-agent"
+        elif registered_source_id == "generic_agent_template":
+            generic_source_identity = generic_agent_id
+
+    if source_type == "chatgpt_export" and args.dry_run and not args.official_export:
         print(json.dumps(chatgpt_contract(args.redact_for_public_backup), ensure_ascii=False, indent=2, sort_keys=True))
         return 0
 
-    if args.source == "codex" and args.dry_run and not args.codex_home:
+    if source_type == "codex_local" and args.dry_run and not args.codex_home:
         print(json.dumps(codex_contract(args.public_transcripts), ensure_ascii=False, indent=2, sort_keys=True))
         return 0
 
-    if args.source == "future-agent" and args.dry_run and not args.input and not args.markdown_report:
-        print(json.dumps(future_agent_contract(args.agent_id, args.event_id), ensure_ascii=False, indent=2, sort_keys=True))
+    if source_type == "generic_agent" and args.dry_run and not args.input and not args.markdown_report:
+        print(json.dumps(
+            future_agent_contract(generic_agent_id, args.event_id, source_id=generic_source_identity),
+            ensure_ascii=False,
+            indent=2,
+            sort_keys=True,
+        ))
         return 0
 
-    if args.source == "chatgpt":
-        command = [sys.executable, str(CHATGPT_SYNC), "--database-dir", str(ROOT)]
+    if source_type == "chatgpt_export":
+        command = [sys.executable, str(parser_path), "--database-dir", str(ROOT)]
         if args.official_export:
             command.extend(["--official-export", str(args.official_export)])
         if args.redact_for_public_backup:
             command.append("--redact-for-public-backup")
         if args.dry_run:
             command.append("--dry-run")
-    elif args.source == "codex":
-        command = [sys.executable, str(CODEX_SYNC), "--database-dir", str(ROOT)]
+    elif source_type == "codex_local":
+        command = [sys.executable, str(parser_path), "--database-dir", str(ROOT)]
         if args.codex_home:
             command.extend(["--codex-home", str(args.codex_home)])
         if args.public_transcripts:
             command.append("--public-transcripts")
         if args.dry_run:
             command.append("--dry-run")
-    elif args.source == "future-agent":
-        command = [sys.executable, str(FUTURE_AGENT_SYNC), "--database-dir", str(ROOT), "--agent-id", args.agent_id]
+    elif source_type == "generic_agent":
+        command = [
+            sys.executable,
+            str(parser_path),
+            "--database-dir",
+            str(ROOT),
+            "--source-id",
+            generic_source_identity,
+            "--agent-id",
+            generic_agent_id,
+        ]
         if args.input:
             command.extend(["--input", str(args.input)])
         if args.markdown_report:
@@ -141,13 +265,8 @@ def run_sync(args: argparse.Namespace) -> int:
             command.extend(["--event-id", args.event_id])
         if args.dry_run:
             command.append("--dry-run")
-    else:
-        print(json.dumps({
-            "status": "NOT_IMPLEMENTED",
-            "source_id": args.source,
-            "reason": "Unknown sync source. Supported sources: chatgpt, codex, future-agent.",
-        }, ensure_ascii=False, indent=2, sort_keys=True))
-        return 2
+    else:  # pragma: no cover - registry validation owns the allowed source types.
+        raise AssertionError(f"unreachable source type: {source_type}")
 
     return run_child_command(command, cwd=ROOT)
 
@@ -161,5 +280,7 @@ __all__ = (
     "chatgpt_contract",
     "codex_contract",
     "future_agent_contract",
+    "apply_environment_discovery",
+    "assert_sync_execution_policy",
     "run_sync",
 )

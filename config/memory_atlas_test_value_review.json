@@ -27,8 +27,8 @@
     "deleted_python_test_count": 2,
     "retained_validator_count": 39,
     "retained_baseline_python_test_count": 49,
-    "added_python_test_count": 5,
-    "current_python_test_count": 54
+    "added_python_test_count": 6,
+    "current_python_test_count": 55
   },
   "profile_commands": {
     "fast": "npm run validate:fast",
@@ -42,7 +42,8 @@
     "tests/test_memory_atlas_human_plane.py",
     "tests/test_memory_atlas_zh_cn_copy_source.py",
     "apps/memory-atlas/scripts/validate_memory_atlas_semantic_readability.mjs",
-    "tests/test_memory_atlas_semantic_readability.py"
+    "tests/test_memory_atlas_semantic_readability.py",
+    "tests/test_memory_atlas_source_registry.py"
   ],
   "candidates": [
     {
@@ -3341,6 +3342,16 @@
       ],
       "reason": "Retained because it proves all four readability categories, exact baseline ratcheting and ui/release integration fail closed.",
       "current_dependency": "S05-P3-T2 focused and full Python suites"
+    },
+    {
+      "path": "tests/test_memory_atlas_source_registry.py",
+      "risk_bindings": [
+        "data_integrity",
+        "release_risk",
+        "runner_contract"
+      ],
+      "reason": "Retained because it proves the S06-P1-T1 source registry covers ChatGPT, Codex and generic agents with portable discovery, parser, archive, schedule and final-delivery-only push contracts.",
+      "current_dependency": "S06-P1-T1 validate:sync and full Python suites"
     }
   ]
 }

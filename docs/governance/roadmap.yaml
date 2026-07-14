@@ -8,7 +8,7 @@ next_gate_id: "ACC.OpenAIDatabase.PAM1.0019"
 total_estimated_hours: 255
 completed_estimated_hours: 241
 taskpack_progress:
-  completed_tasks: 36
+  completed_tasks: 37
   total_tasks: 149
   delivery_state: "local_only_not_released"
 stages:
@@ -1292,7 +1292,7 @@ stages:
             current_result: "complete_local_only_28_of_149_pending_s05_p1_t1"
   - stage_id: "MA-V121-S05"
     name: "Memory Atlas v1.2.1 简单双平面与全中文使用说明收敛"
-    person_goal: "让 owner 通过不超过七个中文核心入口理解系统、流程、变化、同步和维护；S05 已完成本地收敛，下一 Task 为 S06-P1-T1。"
+    person_goal: "让 owner 通过不超过七个中文核心入口理解系统、流程、变化、同步和维护；S05 已完成本地收敛，后续从 S06 开始推进。"
     status: "completed"
     estimated_hours: 8
     estimated_pct: 100
@@ -1688,7 +1688,7 @@ stages:
     person_goal: "为 ChatGPT、Codex 和后续 Agent 建立统一公开 raw 数据平面，同时保证源文件只读、归档只追加、可去重、可恢复且不提交凭证。"
     status: "in_progress"
     estimated_hours: 9
-    estimated_pct: 0
+    estimated_pct: 11
     stop_conditions:
       - "同步器需要修改、移动或删除源 raw"
       - "credential-like 文件准备进入 staged diff"
@@ -1708,7 +1708,7 @@ stages:
         objective: "定义统一 source registry、公开 raw 路径与凭证排除边界。"
         status: "in_progress"
         estimated_hours: 3
-        estimated_pct: 0
+        estimated_pct: 33
         stop_conditions:
           - "为新增来源硬编码核心分支"
           - "raw 进入前端 publicDir 或默认构建产物"
@@ -1718,23 +1718,46 @@ stages:
           pass_conditions:
             - "新增标准本地来源尽量只需配置，不改核心代码"
             - "公开 raw 路径与 credential exclusion 合同清晰且可验证"
-          evidence_refs: []
+          evidence_refs:
+            - "EVID-MA-V121-S06-P1-T1-REGISTRY"
+            - "EVID-MA-V121-S06-P1-T1-TEST"
         tasks:
           - task_id: "S06-P1-T1"
             name: "定义统一 source registry"
             objective: "定义 ChatGPT、Codex、generic agent 的来源字段、发现方式、raw 路径、parser、频率和 push 策略。"
-            status: "planned"
+            status: "completed"
             estimated_hours: 1
-            estimated_pct: 0
+            estimated_pct: 100
             dependencies:
               - "S05-P3-T3"
             acceptance_ids:
               - "ACC-MA-V121-S06-P1-T1"
-            test_commands: []
-            evidence_refs: []
+            acceptance:
+              - acceptance_id: "ACC-MA-V121-S06-P1-T1"
+                description: "新增标准本地来源只需追加 registry 配置并复用对应 source_type adapter；ChatGPT、Codex、generic agent 的发现、raw 路径、parser、频率、state/archive/derived 路径和 final-delivery-only push 策略完整且可验证。"
+                evidence_refs:
+                  - "EVID-MA-V121-S06-P1-T1-REGISTRY"
+                  - "EVID-MA-V121-S06-P1-T1-TEST"
+            test_commands:
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_source_registry -q"
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_source_registry OpenAIDatabase.tests.test_atlasctl_modular_cli OpenAIDatabase.tests.test_atlasctl_runtime_core OpenAIDatabase.tests.test_memory_atlas_validator_profiles OpenAIDatabase.tests.test_memory_atlas_test_value_audit OpenAIDatabase.tests.test_atlasctl_script_consolidation OpenAIDatabase.tests.test_s04p1_chatgpt_sync OpenAIDatabase.tests.test_s04p2_codex_agent_sync OpenAIDatabase.tests.test_memory_atlas_r7_public_raw OpenAIDatabase.tests.test_cross_agent_memory_adapter -q"
+              - "npm run validate:sync --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run validate:fast --prefix OpenAIDatabase/apps/memory-atlas"
+              - "python3 -B -m unittest discover -s OpenAIDatabase/tests -p 'test_*.py' -q"
+              - "python3 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+              - "python3.12 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+            test_results:
+              - "Canonical registry 覆盖 chatgpt_export、codex_local、generic_agent 三类来源和现有 codex-reviewer；11 个 TaskPack 字段完整，source/parser/state/archive/derived 路径均为可移植相对路径。"
+              - "atlasctl sync 按 registry source_type 和 parser.entrypoint 路由；新增标准 generic agent 记录无需修改核心 dispatch，既有 chatgpt/codex/future-agent dry-run 合同保持兼容。"
+              - "14 项 registry、103 项 focused、sync 6/6、fast 4/4、完整 Python 346/346 与脚本 hash 治理 12/12 PASS；环境变量 discovery 真实驱动 adapter dry-run，显式互斥输入保持优先，generic JSONL 多记录可解析，raw mutation=false、remote push=false。"
+              - "canonical ID/type/status、非 canonical generic-only 约束、reserved alias、lowercase portable agent ID、大小写/路径/尾分隔符/首尾空白 alias、Windows 保留设备名、template/concrete 与 source_id/agent_id 命名空间、adapter provenance、空/非法 JSONL、parser/type、state/archive/derived 约定及 push policy 均 fail closed；旧 registry 无 live 引用，owner map 历史时点已标注。"
+            evidence_refs:
+              - "EVID-MA-V121-S06-P1-T1-REGISTRY"
+              - "EVID-MA-V121-S06-P1-T1-TEST"
             risks:
               - "source-specific 逻辑污染核心同步器"
             rollback: "git revert 本 Task 本地 commit。"
+            current_result: "complete_local_only_37_of_149_pending_s06_p1_t2"
           - task_id: "S06-P1-T2"
             name: "建立浅层公开 raw 数据平面"
             objective: "建立 data/public_raw/{chatgpt,codex,agents/<source>} 的可恢复布局。"

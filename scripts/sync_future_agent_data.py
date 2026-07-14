@@ -20,6 +20,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+from memory_atlas_cli.source_registry import SourceRegistryError, validate_portable_identifier
 from privacy_guard import PrivacyViolation, assert_no_credentials
 from public_raw_sanitizer import (
     PublicRawLimitError,
@@ -41,6 +42,14 @@ class AppendOnlyViolation(ValueError):
     pass
 
 
+class SourceIdentityViolation(ValueError):
+    pass
+
+
+class SourceInputError(ValueError):
+    pass
+
+
 def now_utc() -> str:
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
@@ -54,6 +63,19 @@ def safe_name(value: str) -> str:
     text = re.sub(r"[^A-Za-z0-9._-]+", "_", value.strip())
     text = text.strip("._-")
     return text or stable_hash(value)[:16]
+
+
+def validate_source_identity(source_id: str, agent_id: str) -> str:
+    try:
+        safe_source = validate_portable_identifier(source_id, "source_id", max_length=64)
+        safe_agent = validate_portable_identifier(agent_id, "agent_id", max_length=128)
+    except SourceRegistryError as exc:
+        raise SourceIdentityViolation(str(exc)) from exc
+    if safe_source in {"chatgpt", "codex", "generic_agent_template"}:
+        raise SourceIdentityViolation("generic adapter cannot claim a reserved canonical source_id")
+    if safe_source != SOURCE_ID and safe_source != safe_agent:
+        raise SourceIdentityViolation("generic source_id must match agent_id")
+    return safe_source
 
 
 def write_if_changed(path: Path, payload: str) -> None:
@@ -101,6 +123,8 @@ def build_sync_log_row(
     safe_agent: str,
     summary: dict[str, Any],
     source_sha256: str,
+    *,
+    source_id: str = SOURCE_ID,
 ) -> dict[str, Any]:
     head = git_head(database_dir)
     residual_risk = (
@@ -113,7 +137,7 @@ def build_sync_log_row(
         "run_type": "sync_run",
         "status": "PASS",
         "task": "sync_future_agent_data",
-        "source_id": SOURCE_ID,
+        "source_id": source_id,
         "agent_id": safe_agent,
         "adapter_mode": ADAPTER_MODE,
         "dry_run": False,
@@ -156,15 +180,38 @@ def build_sync_log_row(
 
 
 def load_input(path: Path) -> list[dict[str, Any]]:
-    payload = json.loads(path.read_text(encoding="utf-8"))
+    text = path.read_text(encoding="utf-8")
+    if path.suffix.lower() == ".jsonl":
+        rows: list[dict[str, Any]] = []
+        for line_number, line in enumerate(text.splitlines(), start=1):
+            if not line.strip():
+                continue
+            try:
+                item = json.loads(line)
+            except json.JSONDecodeError as exc:
+                raise SourceInputError(f"JSONL line {line_number} is invalid JSON") from exc
+            if not isinstance(item, dict):
+                raise SourceInputError(f"JSONL line {line_number} must be an object")
+            rows.append(item)
+        if not rows:
+            raise SourceInputError("source input must contain at least one event")
+        return rows
+    try:
+        payload = json.loads(text)
+    except json.JSONDecodeError as exc:
+        raise SourceInputError("source input is invalid JSON") from exc
     if isinstance(payload, list):
-        return [item for item in payload if isinstance(item, dict)]
+        if not payload or not all(isinstance(item, dict) for item in payload):
+            raise SourceInputError("JSON event list must contain only event objects")
+        return payload
     if isinstance(payload, dict):
         events = payload.get("events")
         if isinstance(events, list):
-            return [item for item in events if isinstance(item, dict)]
+            if not events or not all(isinstance(item, dict) for item in events):
+                raise SourceInputError("events must contain only event objects")
+            return events
         return [payload]
-    return []
+    raise SourceInputError("source input must be an event object or event list")
 
 
 def message_text(message: Any) -> str:
@@ -176,7 +223,13 @@ def message_text(message: Any) -> str:
     return str(text)
 
 
-def normalize_event(agent_id: str, event: dict[str, Any]) -> dict[str, Any]:
+def normalize_event(
+    agent_id: str,
+    event: dict[str, Any],
+    *,
+    source_id: str = SOURCE_ID,
+) -> dict[str, Any]:
+    validate_source_identity(source_id, agent_id)
     event_id = str(event.get("event_id") or event.get("id") or stable_hash(event)[:16])
     title = str(event.get("title") or "Untitled future agent event")
     messages = []
@@ -187,16 +240,16 @@ def normalize_event(agent_id: str, event: dict[str, Any]) -> dict[str, Any]:
         if not text.strip():
             continue
         role = str(message.get("role") if isinstance(message, dict) else "unknown")
-        assert_no_credentials(text, f"{SOURCE_ID}:{agent_id}:{event_id}:message_{index + 1}")
+        assert_no_credentials(text, f"{source_id}:{agent_id}:{event_id}:message_{index + 1}")
         messages.append({
             "message_id": str(message.get("id") if isinstance(message, dict) else f"message_{index + 1}"),
             "role": role or "unknown",
             "text": text,
         })
-    assert_no_credentials(title, f"{SOURCE_ID}:{agent_id}:{event_id}:title")
+    assert_no_credentials(title, f"{source_id}:{agent_id}:{event_id}:title")
     row = {
         "schema_version": "memory_atlas_public_raw_future_agent.v1",
-        "source_id": SOURCE_ID,
+        "source_id": source_id,
         "agent_id": agent_id,
         "adapter_mode": ADAPTER_MODE,
         "event_id": event_id,
@@ -224,12 +277,19 @@ def markdown_title(text: str) -> str:
     return "Untitled future agent Markdown report"
 
 
-def normalize_markdown_event(agent_id: str, event_id: str, text: str) -> dict[str, Any]:
+def normalize_markdown_event(
+    agent_id: str,
+    event_id: str,
+    text: str,
+    *,
+    source_id: str = SOURCE_ID,
+) -> dict[str, Any]:
+    validate_source_identity(source_id, agent_id)
     if not text.strip():
         raise PublicRawSanitizationError("Markdown report must not be empty")
     row: dict[str, Any] = {
         "schema_version": "memory_atlas_public_raw_future_agent.v1",
-        "source_id": SOURCE_ID,
+        "source_id": source_id,
         "agent_id": agent_id,
         "adapter_mode": ADAPTER_MODE,
         "event_id": event_id,
@@ -254,13 +314,19 @@ def normalize_markdown_event(agent_id: str, event_id: str, text: str) -> dict[st
     return sanitized
 
 
-def build_summary(agent_id: str, rows: list[dict[str, Any]], generated_at: str) -> dict[str, Any]:
+def build_summary(
+    agent_id: str,
+    rows: list[dict[str, Any]],
+    generated_at: str,
+    *,
+    source_id: str = SOURCE_ID,
+) -> dict[str, Any]:
     redaction_counts: dict[str, int] = {}
     for row in rows:
         redaction_counts = merge_counts(redaction_counts, row.get("redaction_counts") or {})
     return {
         "schema_version": "memory_atlas_future_agent_sync_summary.v1",
-        "source_id": SOURCE_ID,
+        "source_id": source_id,
         "agent_id": agent_id,
         "adapter_mode": ADAPTER_MODE,
         "generated_at": generated_at,
@@ -273,11 +339,12 @@ def build_summary(agent_id: str, rows: list[dict[str, Any]], generated_at: str) 
     }
 
 
-def dry_run_contract(agent_id: str) -> dict[str, Any]:
+def dry_run_contract(agent_id: str, *, source_id: str = SOURCE_ID) -> dict[str, Any]:
     safe_agent = safe_name(agent_id)
+    validate_source_identity(source_id, safe_agent)
     return {
         "status": "PASS",
-        "source_id": SOURCE_ID,
+        "source_id": source_id,
         "agent_id": safe_agent,
         "adapter_mode": ADAPTER_MODE,
         "dry_run": True,
@@ -297,7 +364,11 @@ def sync_rows(
     dry_run: bool,
     *,
     source_sha256: str = "",
+    source_id: str = SOURCE_ID,
 ) -> dict[str, Any]:
+    validate_source_identity(source_id, safe_agent)
+    if not rows:
+        raise SourceInputError("source input must contain at least one event")
     generated_at = now_utc()
     raw_paths = [
         RAW_ROOT / safe_agent / f"{safe_name(row['event_id'])}.{row['content_sha256'][:12]}.json"
@@ -306,7 +377,7 @@ def sync_rows(
     raw_payloads = [json.dumps(row, ensure_ascii=False, indent=2, sort_keys=True) + "\n" for row in rows]
     for relative_path, payload in zip(raw_paths, raw_payloads):
         require_public_raw_file_size(payload, relative_path.as_posix())
-    summary = build_summary(safe_agent, rows, generated_at)
+    summary = build_summary(safe_agent, rows, generated_at, source_id=source_id)
 
     if not dry_run:
         for relative_path, payload in zip(raw_paths, raw_payloads):
@@ -321,12 +392,13 @@ def sync_rows(
                 safe_agent,
                 summary,
                 source_sha256,
+                source_id=source_id,
             ),
         )
 
     result = {
         "status": "PASS",
-        "source_id": SOURCE_ID,
+        "source_id": source_id,
         "agent_id": safe_agent,
         "adapter_mode": ADAPTER_MODE,
         "dry_run": dry_run,
@@ -348,10 +420,17 @@ def sync_rows(
     return result
 
 
-def sync_future_agent(database_dir: Path, agent_id: str, input_path: Path, dry_run: bool) -> dict[str, Any]:
+def sync_future_agent(
+    database_dir: Path,
+    agent_id: str,
+    input_path: Path,
+    dry_run: bool,
+    *,
+    source_id: str = SOURCE_ID,
+) -> dict[str, Any]:
     safe_agent = safe_name(agent_id)
-    rows = [normalize_event(safe_agent, event) for event in load_input(input_path)]
-    return sync_rows(database_dir, safe_agent, rows, dry_run)
+    rows = [normalize_event(safe_agent, event, source_id=source_id) for event in load_input(input_path)]
+    return sync_rows(database_dir, safe_agent, rows, dry_run, source_id=source_id)
 
 
 def sync_markdown_report(
@@ -360,24 +439,28 @@ def sync_markdown_report(
     markdown_report: Path,
     event_id: str,
     dry_run: bool,
+    *,
+    source_id: str = SOURCE_ID,
 ) -> dict[str, Any]:
     safe_agent = safe_name(agent_id)
     safe_event = safe_name(event_id)
     source_bytes = markdown_report.read_bytes()
     text = source_bytes.decode("utf-8", errors="replace")
-    row = normalize_markdown_event(safe_agent, safe_event, text)
+    row = normalize_markdown_event(safe_agent, safe_event, text, source_id=source_id)
     return sync_rows(
         database_dir,
         safe_agent,
         [row],
         dry_run,
         source_sha256=hashlib.sha256(source_bytes).hexdigest(),
+        source_id=source_id,
     )
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Memory Atlas S04 P2 future-agent minimal adapter.")
     parser.add_argument("--database-dir", type=Path, default=Path("."))
+    parser.add_argument("--source-id", default=SOURCE_ID)
     parser.add_argument("--agent-id", default="future-agent")
     source = parser.add_mutually_exclusive_group()
     source.add_argument("--input", type=Path)
@@ -390,7 +473,9 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
     database_dir = args.database_dir.resolve()
+    source_id = safe_name(args.source_id)
     try:
+        source_id = validate_source_identity(args.source_id, args.agent_id)
         if args.markdown_report:
             event_id = args.event_id or args.markdown_report.stem
             result = sync_markdown_report(
@@ -399,15 +484,22 @@ def main(argv: list[str] | None = None) -> int:
                 args.markdown_report.resolve(),
                 event_id,
                 args.dry_run,
+                source_id=source_id,
             )
         elif args.input:
-            result = sync_future_agent(database_dir, args.agent_id, args.input.resolve(), args.dry_run)
+            result = sync_future_agent(
+                database_dir,
+                args.agent_id,
+                args.input.resolve(),
+                args.dry_run,
+                source_id=source_id,
+            )
         elif args.dry_run:
-            result = dry_run_contract(args.agent_id)
+            result = dry_run_contract(args.agent_id, source_id=source_id)
         else:
             result = {
                 "status": "NEEDS_INPUT",
-                "source_id": SOURCE_ID,
+                "source_id": source_id,
                 "agent_id": safe_name(args.agent_id),
                 "reason": "future_agent_input_required_for_apply",
                 "adapter_mode": ADAPTER_MODE,
@@ -415,10 +507,20 @@ def main(argv: list[str] | None = None) -> int:
             }
             print(json.dumps(result, ensure_ascii=False, indent=2, sort_keys=True))
             return 2
+    except (SourceIdentityViolation, SourceInputError) as exc:
+        reason = "source_identity_mismatch" if isinstance(exc, SourceIdentityViolation) else "source_input_invalid"
+        print(json.dumps({
+            "status": "FAIL_CLOSED",
+            "source_id": source_id,
+            "reason": reason,
+            "error": str(exc),
+            "writes_files": False,
+        }, ensure_ascii=False, indent=2, sort_keys=True))
+        return 2
     except PrivacyViolation as exc:
         print(json.dumps({
             "status": "FAIL",
-            "source_id": SOURCE_ID,
+            "source_id": source_id,
             "reason": "credential_is_not_memory",
             "error": str(exc),
             "writes_files": False,
@@ -427,7 +529,7 @@ def main(argv: list[str] | None = None) -> int:
     except AppendOnlyViolation as exc:
         print(json.dumps({
             "status": "FAIL",
-            "source_id": SOURCE_ID,
+            "source_id": source_id,
             "reason": "append_only_violation",
             "error": str(exc),
             "writes_files": False,
@@ -436,7 +538,7 @@ def main(argv: list[str] | None = None) -> int:
     except (PublicRawLimitError, PublicRawSanitizationError) as exc:
         print(json.dumps({
             "status": "FAIL",
-            "source_id": SOURCE_ID,
+            "source_id": source_id,
             "reason": "public_raw_sanitization_failed",
             "error": str(exc),
             "writes_files": False,

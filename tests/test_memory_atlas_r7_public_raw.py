@@ -18,7 +18,7 @@ CHATGPT_SYNC = SCRIPTS_ROOT / "sync_chatgpt_memory_data.py"
 CODEX_SYNC = SCRIPTS_ROOT / "sync_codex_memory_data.py"
 FUTURE_AGENT_SYNC = SCRIPTS_ROOT / "sync_future_agent_data.py"
 ATLASCTL = SCRIPTS_ROOT / "atlasctl.py"
-REGISTRY = REPO_ROOT / "机器治理" / "同步与备份" / "sync_source_registry.json"
+REGISTRY = REPO_ROOT / "config" / "data_sources" / "source_registry.json"
 MAX_PUBLIC_RAW_FILE_BYTES = 40 * 1024 * 1024
 SECRET_VALUE = "correct-" + "horse-battery"
 
@@ -584,10 +584,13 @@ class PublicRawConnectorTest(unittest.TestCase):
             self.assertEqual(sync_log["tests_run"][0]["result"], "NOT_RUN")
 
         registry = json.loads(REGISTRY.read_text(encoding="utf-8"))
-        sources = {row["source_id"]: row for row in registry["sources"]}
-        self.assertIn("future_agent_template", sources)
-        self.assertEqual(sources["codex-reviewer"]["source_type"], "other_agent")
-        self.assertEqual(sources["codex-reviewer"]["raw_root"], "data/public_raw/agents/codex-reviewer")
+        sources = {row["source_id"]: row for row in registry["sync_sources"]}
+        self.assertIn("generic_agent_template", sources)
+        self.assertEqual(sources["codex-reviewer"]["source_type"], "generic_agent")
+        self.assertEqual(
+            sources["codex-reviewer"]["archive_path"],
+            "data/public_raw/agents/codex-reviewer",
+        )
 
     def test_atlasctl_wires_all_r7_connector_flags_in_dry_run_mode(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -634,8 +637,6 @@ class PublicRawConnectorTest(unittest.TestCase):
                     str(ATLASCTL),
                     "sync",
                     "--source",
-                    "future-agent",
-                    "--agent-id",
                     "codex-reviewer",
                     "--markdown-report",
                     str(report),

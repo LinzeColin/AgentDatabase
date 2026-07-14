@@ -5,7 +5,7 @@
   "status": "phase_s03_p1_public_raw_path_defined_pending_s03_p2",
   "purpose": "Define the public raw archive path, raw manifest/hash file contract, append-only rule and hash drift fail rule for Memory Atlas v1.2 S03 P1 without ingesting transcripts in this phase.",
   "public_raw_root": "data/public_raw",
-  "source_registry_ref": "机器治理/同步与备份/sync_source_registry.json",
+  "source_registry_ref": "config/data_sources/source_registry.json",
   "source_raw_roots": {
     "chatgpt": "data/public_raw/chatgpt",
     "codex": "data/public_raw/codex",

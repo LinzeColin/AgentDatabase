@@ -2,6 +2,271 @@
   "schema_version": "memory_atlas_data_source_registry.v1",
   "contract_version": "canonical_memory_event.v1",
   "purpose": "Register every Memory Atlas data source before ingestion so future agents can add platform data without changing the visualization core.",
+  "sync_contract": {
+    "schema_version": "memory_atlas.source_sync_contract.v1_2_1_s06_p1_t1",
+    "task_id": "S06-P1-T1",
+    "required_fields": [
+      "source_id",
+      "source_type",
+      "discovery",
+      "raw_paths",
+      "credential_exclusions",
+      "parser",
+      "schedule",
+      "state_path",
+      "archive_path",
+      "derived_outputs",
+      "push_policy"
+    ],
+    "source_types": [
+      "chatgpt_export",
+      "codex_local",
+      "generic_agent"
+    ],
+    "required_source_ids": [
+      "chatgpt",
+      "codex",
+      "generic_agent_template"
+    ],
+    "source_read_only": true,
+    "archive_append_only": true,
+    "repository_relative_paths": true,
+    "push_defaults": {
+      "mode": "final_delivery_only",
+      "branch": "main",
+      "open_pr": false,
+      "force": false,
+      "remote_race_stop": true
+    }
+  },
+  "sync_sources": [
+    {
+      "source_id": "chatgpt",
+      "source_type": "chatgpt_export",
+      "label": "ChatGPT 官方导出",
+      "status": "active_manual",
+      "discovery": {
+        "strategy": "ordered_candidates",
+        "candidates": [
+          {
+            "kind": "environment_variable",
+            "value": "MEMORY_ATLAS_CHATGPT_EXPORT",
+            "target_argument": "--official-export"
+          },
+          {
+            "kind": "operator_argument",
+            "value": "--official-export"
+          }
+        ]
+      },
+      "raw_paths": [
+        "conversations.json",
+        "conversations-*.json",
+        "*.zip"
+      ],
+      "credential_exclusions": {
+        "policy": "credentials_not_transcript",
+        "contract_ref": "S06-P1-T3",
+        "status": "pending_unified_contract"
+      },
+      "parser": {
+        "entrypoint": "scripts/sync_chatgpt_memory_data.py",
+        "input_formats": [
+          "chatgpt_official_export_zip",
+          "chatgpt_conversations_json"
+        ]
+      },
+      "schedule": {
+        "mode": "manual",
+        "frequency": "on_demand",
+        "timezone": "local"
+      },
+      "state_path": "data/sync_state/chatgpt.json",
+      "archive_path": "data/public_raw/chatgpt",
+      "derived_outputs": [
+        "data/processed/conversations/conversation_manifest.jsonl",
+        "data/derived/chatgpt/chatgpt_sync_summary.json"
+      ],
+      "push_policy": {
+        "mode": "final_delivery_only",
+        "branch": "main",
+        "open_pr": false,
+        "force": false,
+        "remote_race_stop": true
+      }
+    },
+    {
+      "source_id": "codex",
+      "source_type": "codex_local",
+      "label": "Codex 本地会话",
+      "status": "active_local",
+      "discovery": {
+        "strategy": "ordered_candidates",
+        "candidates": [
+          {
+            "kind": "environment_variable",
+            "value": "CODEX_HOME",
+            "target_argument": "--codex-home"
+          },
+          {
+            "kind": "home_relative",
+            "value": ".codex",
+            "target_argument": "--codex-home"
+          }
+        ]
+      },
+      "raw_paths": [
+        "session_index.jsonl",
+        "sessions/**/*.jsonl",
+        "history.jsonl",
+        "log/**/*.jsonl"
+      ],
+      "credential_exclusions": {
+        "policy": "credentials_not_transcript",
+        "contract_ref": "S06-P1-T3",
+        "status": "pending_unified_contract"
+      },
+      "parser": {
+        "entrypoint": "scripts/sync_codex_memory_data.py",
+        "input_formats": [
+          "codex_session_jsonl",
+          "codex_history_jsonl",
+          "codex_log_jsonl"
+        ]
+      },
+      "schedule": {
+        "mode": "scheduled",
+        "frequency": "monday_wednesday_friday_03_00",
+        "timezone": "local"
+      },
+      "state_path": "data/sync_state/codex.json",
+      "archive_path": "data/public_raw/codex",
+      "derived_outputs": [
+        "data/processed/codex/codex_session_manifest.jsonl",
+        "data/processed/codex/codex_daily_activity.jsonl",
+        "data/derived/codex/codex_activity_snapshot.json",
+        "data/derived/codex/codex_agent_recommendations.json"
+      ],
+      "push_policy": {
+        "mode": "final_delivery_only",
+        "branch": "main",
+        "open_pr": false,
+        "force": false,
+        "remote_race_stop": true
+      }
+    },
+    {
+      "source_id": "generic_agent_template",
+      "source_type": "generic_agent",
+      "label": "通用 Agent 配置模板",
+      "status": "template",
+      "template_parameters": [
+        "{source_id}"
+      ],
+      "discovery": {
+        "strategy": "ordered_candidates",
+        "candidates": [
+          {
+            "kind": "environment_variable",
+            "value": "MEMORY_ATLAS_AGENT_INPUT",
+            "target_argument": "--input"
+          },
+          {
+            "kind": "operator_argument",
+            "value": "--input"
+          }
+        ]
+      },
+      "raw_paths": [
+        "**/*.json",
+        "**/*.jsonl",
+        "**/*.md"
+      ],
+      "credential_exclusions": {
+        "policy": "credentials_not_transcript",
+        "contract_ref": "S06-P1-T3",
+        "status": "pending_unified_contract"
+      },
+      "parser": {
+        "entrypoint": "scripts/sync_future_agent_data.py",
+        "input_formats": [
+          "agent_event_json",
+          "agent_event_jsonl",
+          "agent_report_markdown"
+        ]
+      },
+      "schedule": {
+        "mode": "template",
+        "frequency": "on_demand",
+        "timezone": "local"
+      },
+      "state_path": "data/sync_state/agents/{source_id}.json",
+      "archive_path": "data/public_raw/agents/{source_id}",
+      "derived_outputs": [
+        "data/derived/agents/{source_id}/agent_sync_summary.json"
+      ],
+      "push_policy": {
+        "mode": "final_delivery_only",
+        "branch": "main",
+        "open_pr": false,
+        "force": false,
+        "remote_race_stop": true
+      }
+    },
+    {
+      "source_id": "codex-reviewer",
+      "source_type": "generic_agent",
+      "label": "Codex 独立复审报告",
+      "status": "active_manual",
+      "discovery": {
+        "strategy": "ordered_candidates",
+        "candidates": [
+          {
+            "kind": "environment_variable",
+            "value": "MEMORY_ATLAS_CODEX_REVIEWER_INPUT",
+            "target_argument": "--markdown-report"
+          },
+          {
+            "kind": "operator_argument",
+            "value": "--markdown-report"
+          }
+        ]
+      },
+      "raw_paths": [
+        "**/*.md",
+        "**/*.json"
+      ],
+      "credential_exclusions": {
+        "policy": "credentials_not_transcript",
+        "contract_ref": "S06-P1-T3",
+        "status": "pending_unified_contract"
+      },
+      "parser": {
+        "entrypoint": "scripts/sync_future_agent_data.py",
+        "input_formats": [
+          "agent_report_markdown",
+          "agent_event_json"
+        ]
+      },
+      "schedule": {
+        "mode": "manual",
+        "frequency": "on_demand",
+        "timezone": "local"
+      },
+      "state_path": "data/sync_state/agents/codex-reviewer.json",
+      "archive_path": "data/public_raw/agents/codex-reviewer",
+      "derived_outputs": [
+        "data/derived/agents/codex-reviewer/agent_sync_summary.json"
+      ],
+      "push_policy": {
+        "mode": "final_delivery_only",
+        "branch": "main",
+        "open_pr": false,
+        "force": false,
+        "remote_race_stop": true
+      }
+    }
+  ],
   "canonical_event_contract": {
     "required_fields": [
       "source_id",

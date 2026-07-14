@@ -670,6 +670,29 @@ features:
     evidence_refs:
       - "EVID-MA-V121-S05-P3-T3-BASELINE"
       - "EVID-MA-V121-S05-P3-T3-TEST"
+  - feature_id: "FEAT-MA-V121-S06-P1-T1"
+    name: "Memory Atlas 统一来源注册合同"
+    description: "v1.2.1 Task Pack 当前完成 37/149；canonical source registry 以配置覆盖 ChatGPT 官方导出、Codex 本地来源、generic agent 模板和现有 Codex reviewer，统一发现方式、raw pattern、parser、频率、state/archive/derived 路径及 final-delivery-only push policy。atlasctl 按 source_type 和 parser.entrypoint 分发，消费注册的环境变量 discovery，并锁定 canonical ID/type/status、具体 generic source identity、首尾空白 identity、Windows 保留设备名、JSONL 行为与 adapter provenance。"
+    status: "active"
+    fact_level: "EXTRACTED"
+    code_refs:
+      - "OpenAIDatabase/scripts/memory_atlas_cli/source_registry.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/sync.py"
+      - "OpenAIDatabase/scripts/sync_future_agent_data.py"
+    config_refs:
+      - "OpenAIDatabase/config/data_sources/source_registry.json"
+      - "OpenAIDatabase/config/memory_atlas_validator_profiles.json"
+    source_refs:
+      - "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s06_p1_t1_source_registry_review.md"
+    owner_actions:
+      - "新增标准本地 Agent 来源时复制 generic_agent_template 配置，填写 source_id、可移植 discovery、state/archive/derived 路径；不要新增 source-specific 核心分支。"
+    test_refs:
+      - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_source_registry -q"
+      - "npm run validate:sync --prefix OpenAIDatabase/apps/memory-atlas"
+      - "python3 -B -m unittest discover -s OpenAIDatabase/tests -p 'test_*.py' -q"
+    evidence_refs:
+      - "EVID-MA-V121-S06-P1-T1-REGISTRY"
+      - "EVID-MA-V121-S06-P1-T1-TEST"
 models:
   -
     model_id: "MOD-001"
@@ -4805,4 +4828,14 @@ evidence_refs:
     evidence_id: "EVID-MA-V121-S05-P3-T3-TEST"
     kind: "test"
     ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s05_p3_t3_chinese_ui_baseline_review.md"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S06-P1-T1-REGISTRY"
+    kind: "config"
+    ref: "OpenAIDatabase/config/data_sources/source_registry.json"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S06-P1-T1-TEST"
+    kind: "test"
+    ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s06_p1_t1_source_registry_review.md"
     fact_level: "EXTRACTED"

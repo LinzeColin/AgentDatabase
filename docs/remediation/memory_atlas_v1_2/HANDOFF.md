@@ -2,7 +2,8 @@
 
 > **Current v1.2.1 note (2026-07-15):** This file preserves the earlier v1.2 R7
 > handoff below. Memory Atlas is executing the v1.2.1 Task Pack with one Task per run.
-> S04 and S05 are complete locally; the next Task is only S06-P1-T1. S05-P1 compressed the human
+> S04 and S05 are complete locally; S06-P1-T1 is complete and the next Task is
+> only S06-P1-T2. S05-P1 compressed the human
 > plane to seven shallow Chinese files, compressed the three root owner entries, and
 > added the deterministic v1.2.1 change/five-workflow map. `S05-P2-T1` added
 > `config/memory_atlas_machine_truth_index.json` and deterministically renders
@@ -46,9 +47,32 @@
 > gates also passed with raw edge/ID evidence and version strings excluded from the
 > default-visible surface. Independent engineering/governance and product/UI reviews
 > both closed at 0 Critical / 0 Important / 0 Minor.
-> Historical reviews, source packages, active
-> machine configs, release evidence and recovery evidence remain unchanged. The next
-> Task is only `S06-P1-T1`; no S06 implementation has started.
+> `S06-P1-T1` extends the sole canonical
+> `config/data_sources/source_registry.json` with the 11 TaskPack sync fields for
+> ChatGPT official export, Codex local data, generic agents and the existing
+> codex-reviewer source. Discovery and data paths are portable and repository-relative;
+> parsers, schedules, state/archive/derived paths and final-delivery-only push policy
+> are explicit. `atlasctl sync` now dispatches through registered `source_type` and
+> `parser.entrypoint`; a standard generic source can reuse the generic adapter by
+> configuration. Environment candidates now drive the matching adapter argument;
+> concrete generic sources cannot redirect `source_id`/`agent_id`, and parser/type,
+> state/archive/derived conventions plus push policy fail closed. The active raw policy
+> points to the canonical registry; the old machine-governance registry has no live
+> script/test/app/config references and remains historical. The protected active-config
+> manifest was updated for that one reviewed reference change. Explicit generic input
+> blocks a conflicting environment candidate, and the generic adapter now parses
+> multi-record JSONL. Canonical ID/type/status, non-canonical generic-only IDs, reserved
+> aliases, non-lowercase/non-portable agent IDs, case-only and whitespace-padded
+> namespace aliases, Windows reserved device basenames,
+> template/concrete namespace collisions, direct adapter provenance and empty/invalid
+> JSONL all fail closed. The owner change map now
+> explicitly labels its unfinished-route prose as the S05-P1-T3 historical snapshot.
+> Fourteen registry tests, 103 focused tests,
+> sync 6/6, fast 4/4 and 346 full Python tests passed. No public raw, source data,
+> state, manifest, chunk or restore artifact changed.
+> Historical reviews, source packages, release evidence and recovery evidence remain
+> unchanged; the one active raw-policy reference change is described above. The next
+> Task is only `S06-P1-T2`; it has not started.
 >
 > The only public validator profiles are `validate:fast`, `validate:sync`,
 > `validate:ui`, and `validate:release`. Commands in the older "Verified Commands"

@@ -177,8 +177,8 @@ MACHINE_PLANE_PROTECTED_EXPECTED = {
     },
     "active_configs": {
         "file_count": 29,
-        "bytes": 96902,
-        "manifest_sha256": "af0523df7e6a05f8e87097fb2b1271cd254e03600f8017f99b45d24587b71140",
+        "bytes": 96888,
+        "manifest_sha256": "3decf9b1f6e8c56110e1e39df28fc7033163ad3d027ef76b15a900b2f32a02ea",
     },
     "evidence_payload": {
         "file_count": 122,
