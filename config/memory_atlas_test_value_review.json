@@ -25,10 +25,10 @@
   "summary": {
     "deleted_validator_count": 139,
     "deleted_python_test_count": 2,
-    "retained_validator_count": 38,
+    "retained_validator_count": 39,
     "retained_baseline_python_test_count": 49,
-    "added_python_test_count": 4,
-    "current_python_test_count": 53
+    "added_python_test_count": 5,
+    "current_python_test_count": 54
   },
   "profile_commands": {
     "fast": "npm run validate:fast",
@@ -40,7 +40,9 @@
     "tests/test_memory_atlas_test_value_audit.py",
     "tests/test_memory_atlas_legacy_command_migrations.py",
     "tests/test_memory_atlas_human_plane.py",
-    "tests/test_memory_atlas_zh_cn_copy_source.py"
+    "tests/test_memory_atlas_zh_cn_copy_source.py",
+    "apps/memory-atlas/scripts/validate_memory_atlas_semantic_readability.mjs",
+    "tests/test_memory_atlas_semantic_readability.py"
   ],
   "candidates": [
     {
@@ -3319,6 +3321,26 @@
       ],
       "reason": "Retained because it locks the S05-P3-T1 zh-CN copy source, visible glossary, field and enum labels while preserving English API and export keys.",
       "current_dependency": "S05-P3-T1 explicit focused and full Python suites"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_semantic_readability.mjs",
+      "risk_bindings": [
+        "user_journey",
+        "release_risk",
+        "runner_contract"
+      ],
+      "reason": "Retained because the TypeScript AST rule ratchets mojibake, visible machine fields, actionless errors and English empty states without creating another public profile.",
+      "current_dependency": "S05-P3-T2 ui semantic_readability step and release Chinese UX gate"
+    },
+    {
+      "path": "tests/test_memory_atlas_semantic_readability.py",
+      "risk_bindings": [
+        "user_journey",
+        "release_risk",
+        "runner_contract"
+      ],
+      "reason": "Retained because it proves all four readability categories, exact baseline ratcheting and ui/release integration fail closed.",
+      "current_dependency": "S05-P3-T2 focused and full Python suites"
     }
   ]
 }

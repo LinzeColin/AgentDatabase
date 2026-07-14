@@ -2,7 +2,7 @@
 
 > **Current v1.2.1 note (2026-07-14):** This file preserves the earlier v1.2 R7
 > handoff below. Memory Atlas is executing the v1.2.1 Task Pack with one Task per run.
-> S04, S05-P1, S05-P2 and S05-P3-T1 are complete locally. S05-P1 compressed the human
+> S04, S05-P1, S05-P2 and S05-P3-T1/T2 are complete locally. S05-P1 compressed the human
 > plane to seven shallow Chinese files, compressed the three root owner entries, and
 > added the deterministic v1.2.1 change/five-workflow map. `S05-P2-T1` added
 > `config/memory_atlas_machine_truth_index.json` and deterministically renders
@@ -28,9 +28,19 @@
 > `tests/test_memory_atlas_human_plane.py`; the new copy-source suite has 6 tests,
 > while 65 focused tests, 325 full Python tests, fast 4/4, ui 12/12, frontend
 > lint/build, dual-runtime deterministic render and desktop/mobile Help browser checks
-> passed. Historical reviews, source packages, active
+> passed. `S05-P3-T2` adds a TypeScript AST semantic-readability rule without a
+> new public profile. It scans 83 UI source files for mojibake, default-visible
+> machine fields, actionless errors and English empty states. The exact baseline is
+> 79 findings (78 machine-field/enum points and one actionless error); mojibake and
+> English empty states are zero. Any new, missing-unreconciled or fingerprint-drifted
+> finding fails. UI executes the rule as `semantic_readability`; release executes the
+> same rule through its existing final-audit Chinese UX gate. These 79 findings are
+> explicit S05-P3-T3 work, not evidence that the UI is already fully Chinese.
+> Six rule tests, 41 focused tests, 331 full Python tests, fast 4/4, ui 13/13,
+> frontend lint/build and the release profile plan passed.
+> Historical reviews, source packages, active
 > machine configs, release evidence and recovery evidence remain unchanged. The next
-> Task is only `S05-P3-T2`; no T2 or T3 work has started.
+> Task is only `S05-P3-T3`; no T3 remediation work has started.
 >
 > The only public validator profiles are `validate:fast`, `validate:sync`,
 > `validate:ui`, and `validate:release`. Commands in the older "Verified Commands"

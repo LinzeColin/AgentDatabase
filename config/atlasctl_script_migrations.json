@@ -21,7 +21,7 @@
       ".js",
       ".sh"
     ],
-    "scanned_script_count": 71,
+    "scanned_script_count": 72,
     "exact_sha256_duplicate_group_count": 0,
     "unlisted_scoped_script_policy": "retain_deletion_forbidden_until_mapped",
     "retained_default_deletion_blocker": "equivalent_command_callers_and_behavior_parity_not_all_proven",
@@ -876,6 +876,15 @@
         "disposition": "retained"
       },
       {
+        "path": "apps/memory-atlas/scripts/validate_memory_atlas_semantic_readability.mjs",
+        "baseline": false,
+        "sha256": "72b96359241ea22f15f3c30199f21cb6ca78f22181f94fd91696a219d90f57a0",
+        "matched_families": [
+          "validator"
+        ],
+        "disposition": "retained"
+      },
+      {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_proposal_e2e.cjs",
         "baseline": true,
         "sha256": "c55918dda9839fff6c46af3c551f85ceda13bd1c67631afd328277d98f2a9161",
@@ -1688,7 +1697,7 @@
       {
         "path": "scripts/audit_memory_atlas_test_value.py",
         "baseline": false,
-        "sha256": "18c6cebbabfebc1f5f258c0254d86e0289462a76c7c139cd32bc027ec904c1e5",
+        "sha256": "4d495379bac117f89e9452256b3ee1022c30c02c1ff1a36562fda9560881d999",
         "matched_families": [
           "audit"
         ],
@@ -1935,7 +1944,7 @@
     "consolidated_execution_module_count": 5,
     "consolidated_execution_block_count": 8,
     "validator_profile_count_created": 4,
-    "mapped_scoped_script_count": 210
+    "mapped_scoped_script_count": 211
   },
   "profile_consolidation": {
     "task_id": "S04-P3-T1",
@@ -2076,7 +2085,7 @@
           "canonical_command": null,
           "deletion_blockers": [
             "S05-P1-T1 human-plane, S05-P2-T1 truth-index and S05-P2-T2 controlled-cleanup acceptance depend on this audit",
-            "S05-P3-T2 has not yet integrated the broader readability rules into ui/release profiles"
+            "S05-P3-T2 integrates the broader readability rule through ui semantic_readability and the release Chinese UX gate"
           ]
         },
         {

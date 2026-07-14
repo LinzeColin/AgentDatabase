@@ -625,6 +625,26 @@ features:
     evidence_refs:
       - "EVID-MA-V121-S05-P3-T1-COPY"
       - "EVID-MA-V121-S05-P3-T1-TEST"
+  - feature_id: "FEAT-MA-V121-S05-P3-T2"
+    name: "Memory Atlas 轻量语义可读性门禁"
+    description: "v1.2.1 Task Pack 当前完成 35/149；TypeScript AST 规则扫描 83 个 UI 源文件并精确 ratchet 四类问题，当前 79 条已知债务必须由 S05-P3-T3 清零。"
+    status: "active"
+    fact_level: "EXTRACTED"
+    code_refs:
+      - "OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_semantic_readability.mjs"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/validate.py"
+      - "OpenAIDatabase/scripts/memory_atlas_validator_profiles.py"
+    config_refs:
+      - "OpenAIDatabase/config/memory_atlas_semantic_readability.json"
+      - "OpenAIDatabase/config/memory_atlas_validator_profiles.json"
+    owner_actions:
+      - "运行 validate:ui 或 validate:release；任何新增、消失未清账或 fingerprint 漂移都会失败。下一 Task 只按 baseline 清单修复真实 UI 债务。"
+    test_refs:
+      - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_semantic_readability -q"
+      - "npm run validate:ui --prefix OpenAIDatabase/apps/memory-atlas"
+    evidence_refs:
+      - "EVID-MA-V121-S05-P3-T2-RULE"
+      - "EVID-MA-V121-S05-P3-T2-TEST"
 models:
   -
     model_id: "MOD-001"
@@ -4740,4 +4760,14 @@ evidence_refs:
     evidence_id: "EVID-MA-V121-S05-P3-T1-TEST"
     kind: "test"
     ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s05_p3_t1_zh_cn_copy_source_review.md"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S05-P3-T2-RULE"
+    kind: "config"
+    ref: "OpenAIDatabase/config/memory_atlas_semantic_readability.json"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S05-P3-T2-TEST"
+    kind: "test"
+    ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s05_p3_t2_semantic_readability_review.md"
     fact_level: "EXTRACTED"

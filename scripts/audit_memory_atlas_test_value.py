@@ -71,16 +71,18 @@ BASELINE = {
 SUMMARY = {
     "deleted_validator_count": 139,
     "deleted_python_test_count": 2,
-    "retained_validator_count": 38,
+    "retained_validator_count": 39,
     "retained_baseline_python_test_count": 49,
-    "added_python_test_count": 4,
-    "current_python_test_count": 53,
+    "added_python_test_count": 5,
+    "current_python_test_count": 54,
 }
 ADDED_PATHS = [
     "tests/test_memory_atlas_test_value_audit.py",
     "tests/test_memory_atlas_legacy_command_migrations.py",
     "tests/test_memory_atlas_human_plane.py",
     "tests/test_memory_atlas_zh_cn_copy_source.py",
+    "apps/memory-atlas/scripts/validate_memory_atlas_semantic_readability.mjs",
+    "tests/test_memory_atlas_semantic_readability.py",
 ]
 DELETED_TEST_REPLACEMENTS = {
     "tests/test_memory_atlas_v1_2_product_identity_contract.py": "npm run validate:ui",

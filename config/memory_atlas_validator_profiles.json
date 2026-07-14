@@ -171,6 +171,19 @@
           "critical": true
         },
         {
+          "id": "semantic_readability",
+          "command": [
+            "@python",
+            "scripts/atlasctl.py",
+            "audit",
+            "--check",
+            "chinese-ux"
+          ],
+          "cwd": "database",
+          "timeout_seconds": 180,
+          "critical": true
+        },
+        {
           "id": "home_multiviewport",
           "command": [
             "node",

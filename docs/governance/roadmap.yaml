@@ -8,7 +8,7 @@ next_gate_id: "ACC.OpenAIDatabase.PAM1.0019"
 total_estimated_hours: 255
 completed_estimated_hours: 241
 taskpack_progress:
-  completed_tasks: 34
+  completed_tasks: 35
   total_tasks: 149
   delivery_state: "local_only_not_released"
 stages:
@@ -1292,10 +1292,10 @@ stages:
             current_result: "complete_local_only_28_of_149_pending_s05_p1_t1"
   - stage_id: "MA-V121-S05"
     name: "Memory Atlas v1.2.1 简单双平面与全中文使用说明收敛"
-    person_goal: "让 owner 通过不超过七个中文核心入口理解系统、流程、变化、同步和维护；S05-P1、S05-P2 与 S05-P3-T1 已完成本地收敛，下一 Task 为 S05-P3-T2。"
+    person_goal: "让 owner 通过不超过七个中文核心入口理解系统、流程、变化、同步和维护；S05-P1、S05-P2 与 S05-P3-T1/T2 已完成本地收敛，下一 Task 为 S05-P3-T3。"
     status: "in_progress"
     estimated_hours: 8
-    estimated_pct: 75
+    estimated_pct: 87.5
     stop_conditions:
       - "一次 run 完成超过一个 Task"
       - "为了全中文而翻译代码标识、API 或数据字段"
@@ -1320,6 +1320,8 @@ stages:
         - "EVID-MA-V121-S05-P2-T2-TEST"
         - "EVID-MA-V121-S05-P3-T1-COPY"
         - "EVID-MA-V121-S05-P3-T1-TEST"
+        - "EVID-MA-V121-S05-P3-T2-RULE"
+        - "EVID-MA-V121-S05-P3-T2-TEST"
     phases:
       - phase_id: "MA-V121-S05-P1"
         name: "人类平面压缩"
@@ -1543,7 +1545,7 @@ stages:
         objective: "建立低成本中文文案源与可读性测试，并修复真实编码或机器语义泄漏。"
         status: "in_progress"
         estimated_hours: 3
-        estimated_pct: 33.3
+        estimated_pct: 66.7
         stop_conditions:
           - "可读性测试显著增加 build 或 token 成本"
         stop_gate:
@@ -1554,6 +1556,8 @@ stages:
           evidence_refs:
             - "EVID-MA-V121-S05-P3-T1-COPY"
             - "EVID-MA-V121-S05-P3-T1-TEST"
+            - "EVID-MA-V121-S05-P3-T2-RULE"
+            - "EVID-MA-V121-S05-P3-T2-TEST"
         tasks:
           - task_id: "S05-P3-T1"
             name: "建立 UI 中文术语表与文案字典"
@@ -1596,18 +1600,44 @@ stages:
           - task_id: "S05-P3-T2"
             name: "增加轻量语义可读性检查"
             objective: "检查乱码、主视图机器字段、无行动错误提示和英文空状态。"
-            status: "planned"
+            status: "completed"
             estimated_hours: 1
-            estimated_pct: 0
+            estimated_pct: 100
             dependencies:
               - "S05-P3-T1"
             acceptance_ids:
               - "ACC-MA-V121-S05-P3-T2"
-            test_commands: []
-            evidence_refs: []
+            acceptance:
+              - acceptance_id: "ACC-MA-V121-S05-P3-T2"
+                description: "TypeScript AST 轻量规则检查乱码、默认可见机器字段、无行动错误提示和英文空状态；规则复用现有 Chinese UX audit，并由 ui 与 release profile 执行，不新增公共 profile。"
+                evidence_refs:
+                  - "EVID-MA-V121-S05-P3-T2-RULE"
+                  - "EVID-MA-V121-S05-P3-T2-TEST"
+            test_commands:
+              - "node OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_semantic_readability.mjs --src-root OpenAIDatabase/apps/memory-atlas/src --config OpenAIDatabase/config/memory_atlas_semantic_readability.json"
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_semantic_readability -q"
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_semantic_readability OpenAIDatabase.tests.test_memory_atlas_validator_profiles OpenAIDatabase.tests.test_memory_atlas_test_value_audit OpenAIDatabase.tests.test_atlasctl_script_consolidation -q"
+              - "python3 -B OpenAIDatabase/scripts/atlasctl.py audit --check chinese-ux"
+              - "npm run lint --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run build --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run validate:fast --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run validate:ui --prefix OpenAIDatabase/apps/memory-atlas"
+              - "python3 -B OpenAIDatabase/scripts/memory_atlas_validator_profiles.py --profile release --plan"
+              - "PYTHONPATH=.. python3 -B -m unittest discover -s tests -q"
+              - "python3 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+              - "python3.12 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+            test_results:
+              - "TypeScript 5.9 AST 在 83 个当前 UI 源文件上检查四类语义问题；运行约 0.6-0.9 秒，不读取 raw、不修改源码、不新增公共 profile"
+              - "当前精确 baseline 为 79 条：78 个默认可见机器字段/枚举点和 1 个无行动错误状态；乱码与英文空状态均为 0。新增、消失但未清账、metadata 或 fingerprint 漂移全部 fail closed"
+              - "现有 ui profile 新增 semantic_readability 步骤；release profile 保持唯一 final_audit，并通过其中既有 Chinese UX gate 执行同一规则"
+              - "6 项规则测试、41 项 focused tests、完整 Python 331/331、fast 4/4、ui 13/13、frontend lint/build、release plan 与双 runtime check-render PASS；79 条已登记债务仍须由 S05-P3-T3 清零，不代表 UI 已完成全中文"
+            evidence_refs:
+              - "EVID-MA-V121-S05-P3-T2-RULE"
+              - "EVID-MA-V121-S05-P3-T2-TEST"
             risks:
               - "新增独立治理产品或高成本 validator"
             rollback: "git revert 本 Task 本地 commit。"
+            current_result: "complete_local_only_35_of_149_with_79_exact_t3_findings_pending_s05_p3_t3"
           - task_id: "S05-P3-T3"
             name: "修复真实编码问题与机器语义泄漏"
             objective: "形成全中文 UI/文档基线。"

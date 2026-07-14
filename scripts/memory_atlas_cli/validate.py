@@ -1476,14 +1476,22 @@ def run_decision_debt_safety_audit(args: argparse.Namespace) -> int:
 
 
 def run_chinese_ux_audit(args: argparse.Namespace) -> int:
-    app_path = args.database_dir / "apps/memory-atlas/src/App.tsx"
+    src_root = args.database_dir / "apps/memory-atlas/src"
     copy_path = args.database_dir / "apps/memory-atlas/src/i18n/zh-CN.ts"
     style_path = args.database_dir / "apps/memory-atlas/src/styles.css"
+    runtime_paths = sorted(
+        path
+        for pattern in ("*.ts", "*.tsx")
+        for path in src_root.rglob(pattern)
+        if "experiments" not in path.relative_to(src_root).parts and not path.name.endswith(".d.ts")
+    ) if src_root.is_dir() else []
     missing_files = [
         str(path.relative_to(args.database_dir))
-        for path in (app_path, copy_path, style_path)
+        for path in (copy_path, style_path)
         if not path.exists()
     ]
+    if not runtime_paths:
+        missing_files.append("apps/memory-atlas/src/**/*.ts(x)")
     if missing_files:
         print(json.dumps({
             "status": "FAIL",
@@ -1496,9 +1504,43 @@ def run_chinese_ux_audit(args: argparse.Namespace) -> int:
         }, ensure_ascii=False, indent=2, sort_keys=True))
         return 2
 
-    app_source = app_path.read_text(encoding="utf-8")
+    app_source = "\n".join(path.read_text(encoding="utf-8") for path in runtime_paths)
     copy_source = copy_path.read_text(encoding="utf-8")
     style_source = style_path.read_text(encoding="utf-8")
+    readability_script = args.database_dir / "apps/memory-atlas/scripts/validate_memory_atlas_semantic_readability.mjs"
+    readability_config = args.database_dir / "config/memory_atlas_semantic_readability.json"
+    readability_payload: dict[str, object] = {
+        "status": "FAIL",
+        "reason": "semantic readability rule did not run",
+    }
+    try:
+        readability_result = subprocess.run(
+            [
+                "node",
+                str(readability_script),
+                "--src-root",
+                str(args.database_dir / "apps/memory-atlas/src"),
+                "--config",
+                str(readability_config),
+            ],
+            cwd=args.database_dir / "apps/memory-atlas",
+            text=True,
+            capture_output=True,
+            check=False,
+            timeout=60,
+        )
+        parsed_readability = json.loads(readability_result.stdout)
+        if isinstance(parsed_readability, dict):
+            readability_payload = parsed_readability
+        else:
+            readability_payload = {"status": "FAIL", "reason": "semantic readability output is not an object"}
+        if readability_result.returncode != 0 and readability_payload.get("status") == "PASS":
+            readability_payload = {
+                "status": "FAIL",
+                "reason": f"semantic readability exited {readability_result.returncode} after reporting PASS",
+            }
+    except (OSError, subprocess.TimeoutExpired, json.JSONDecodeError) as exc:
+        readability_payload = {"status": "FAIL", "reason": f"semantic readability execution failed: {exc}"}
     required_copy = [
         "上次来以后发生了什么",
         "新增重要资料",
@@ -1560,6 +1602,12 @@ def run_chinese_ux_audit(args: argparse.Namespace) -> int:
         "<span>{summaryClosure.proposal_candidates.length} candidates</span>",
     ]
     bad_items: list[str] = []
+    if readability_payload.get("status") != "PASS" or readability_payload.get("baseline_exact") is not True:
+        bad_items.append(
+            "semantic_readability_failed:"
+            f"unexpected={len(readability_payload.get('unexpected_findings') or [])}:"
+            f"missing={len(readability_payload.get('missing_known_findings') or [])}"
+        )
     if "data-home-section=\"arrival_briefing\"" not in app_source:
         bad_items.append("home_arrival_briefing_missing")
     if app_source.find("data-home-section=\"arrival_briefing\"") > app_source.find("data-home-section=\"weather\""):
@@ -1626,6 +1674,21 @@ def run_chinese_ux_audit(args: argparse.Namespace) -> int:
             "core_ui_default_chinese": not any(item.startswith("english_first_fragment:") or item.startswith("global_chinese_copy_missing:") for item in bad_items),
             "machine_terms_with_chinese_explanation": not any(item.startswith("machine_term_explanation_missing:") for item in bad_items),
             "default_visible_machine_fragments_removed": not any(item.startswith("default_visible_machine_fragment:") for item in bad_items),
+            "semantic_readability": {
+                "status": readability_payload.get("status"),
+                "schema_version": readability_payload.get("schema_version"),
+                "task_id": readability_payload.get("task_id"),
+                "remediation_task": readability_payload.get("remediation_task"),
+                "source_file_count": readability_payload.get("source_file_count"),
+                "finding_count": readability_payload.get("finding_count"),
+                "known_finding_count": readability_payload.get("known_finding_count"),
+                "known_t3_debt_count": readability_payload.get("known_t3_debt_count"),
+                "semantic_readability_clean": readability_payload.get("semantic_readability_clean"),
+                "rule_counts": readability_payload.get("rule_counts"),
+                "baseline_exact": readability_payload.get("baseline_exact"),
+                "unexpected_finding_count": len(readability_payload.get("unexpected_findings") or []),
+                "missing_known_finding_count": len(readability_payload.get("missing_known_findings") or []),
+            },
             "bad_items": bad_items,
         },
     }

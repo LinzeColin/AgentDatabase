@@ -1,0 +1,491 @@
+{
+  "schema_version": "memory_atlas.semantic_readability.v1_2_1_s05_p3_t2",
+  "task_id": "S05-P3-T2",
+  "remediation_task": "S05-P3-T3",
+  "profile_bindings": [
+    "ui",
+    "release"
+  ],
+  "rules": [
+    "mojibake",
+    "main_view_machine_field",
+    "actionless_error",
+    "english_empty_state"
+  ],
+  "known_findings": [
+    {
+      "fingerprint": "4b3b78321683068a",
+      "rule": "actionless_error",
+      "path": "app/FeatureRouter.tsx",
+      "anchor": "ErrorState:unknown-route"
+    },
+    {
+      "fingerprint": "481217067042e946",
+      "rule": "main_view_machine_field",
+      "path": "components/ActionDetailDrawer.tsx",
+      "anchor": "roi_score"
+    },
+    {
+      "fingerprint": "2ba06c2b1a11478c",
+      "rule": "main_view_machine_field",
+      "path": "components/ActionDetailDrawer.tsx",
+      "anchor": "effort_cost"
+    },
+    {
+      "fingerprint": "1bee757b21186cf0",
+      "rule": "main_view_machine_field",
+      "path": "components/ActionDetailDrawer.tsx",
+      "anchor": "urgency"
+    },
+    {
+      "fingerprint": "2f70a26cdb4fa7b8",
+      "rule": "main_view_machine_field",
+      "path": "components/ActionDetailDrawer.tsx",
+      "anchor": "confidence"
+    },
+    {
+      "fingerprint": "2a262c22420639bc",
+      "rule": "main_view_machine_field",
+      "path": "components/ActionDetailDrawer.tsx",
+      "anchor": "source"
+    },
+    {
+      "fingerprint": "326010813385c002",
+      "rule": "main_view_machine_field",
+      "path": "components/ActionDetailDrawer.tsx",
+      "anchor": "action.status"
+    },
+    {
+      "fingerprint": "be63e99c1bcc4271",
+      "rule": "main_view_machine_field",
+      "path": "components/ActionDetailDrawer.tsx",
+      "anchor": "status"
+    },
+    {
+      "fingerprint": "987c05b1669e859e",
+      "rule": "main_view_machine_field",
+      "path": "components/ActionDetailDrawer.tsx",
+      "anchor": "evidence_count"
+    },
+    {
+      "fingerprint": "ded7ecc1f02bc4b6",
+      "rule": "main_view_machine_field",
+      "path": "components/ActionDetailDrawer.tsx",
+      "anchor": "recommended_time_window"
+    },
+    {
+      "fingerprint": "9234b827ff7a9c1a",
+      "rule": "main_view_machine_field",
+      "path": "components/ActionDetailDrawer.tsx",
+      "anchor": "matched_reason"
+    },
+    {
+      "fingerprint": "28b9449d20630da4",
+      "rule": "main_view_machine_field",
+      "path": "components/ActionDetailDrawer.tsx",
+      "anchor": "next_step"
+    },
+    {
+      "fingerprint": "a477cf86df962ac1",
+      "rule": "main_view_machine_field",
+      "path": "components/ActionDetailDrawer.tsx",
+      "anchor": "linked_asset_ids"
+    },
+    {
+      "fingerprint": "95a858baa5ae5a33",
+      "rule": "main_view_machine_field",
+      "path": "components/ActionDetailDrawer.tsx",
+      "anchor": "linked_topic_ids"
+    },
+    {
+      "fingerprint": "cda95598e9fa57d9",
+      "rule": "main_view_machine_field",
+      "path": "components/ActionDetailDrawer.tsx",
+      "anchor": "action.linked_asset_ids"
+    },
+    {
+      "fingerprint": "241348ff87f5fc42",
+      "rule": "main_view_machine_field",
+      "path": "components/ActionDetailDrawer.tsx",
+      "anchor": "action.linked_topic_ids"
+    },
+    {
+      "fingerprint": "e3e36257c2a2ecc2",
+      "rule": "main_view_machine_field",
+      "path": "components/ActionDetailDrawer.tsx",
+      "anchor": "evidence_refs"
+    },
+    {
+      "fingerprint": "3031944c84d3a8e9",
+      "rule": "main_view_machine_field",
+      "path": "components/ActionDetailDrawer.tsx",
+      "anchor": "proposal_only"
+    },
+    {
+      "fingerprint": "73d44ecdd08e3218",
+      "rule": "main_view_machine_field",
+      "path": "components/AssetDetailPanel.tsx",
+      "anchor": "value_score"
+    },
+    {
+      "fingerprint": "560d0f655c607efd",
+      "rule": "main_view_machine_field",
+      "path": "components/AssetDetailPanel.tsx",
+      "anchor": "confidence"
+    },
+    {
+      "fingerprint": "d1c6d39367832516",
+      "rule": "main_view_machine_field",
+      "path": "components/AssetDetailPanel.tsx",
+      "anchor": "staleness_status"
+    },
+    {
+      "fingerprint": "13b4f9fd8d0e10b5",
+      "rule": "main_view_machine_field",
+      "path": "components/AssetDetailPanel.tsx",
+      "anchor": "updated_at"
+    },
+    {
+      "fingerprint": "1cc9024367967e18",
+      "rule": "main_view_machine_field",
+      "path": "components/AssetDetailPanel.tsx",
+      "anchor": "last_seen_range"
+    },
+    {
+      "fingerprint": "22469dffa0df7d18",
+      "rule": "main_view_machine_field",
+      "path": "components/AssetDetailPanel.tsx",
+      "anchor": "asset.source_scope"
+    },
+    {
+      "fingerprint": "087f3a4d5ffec6af",
+      "rule": "main_view_machine_field",
+      "path": "components/AssetDetailPanel.tsx",
+      "anchor": "source_scope"
+    },
+    {
+      "fingerprint": "42b1c5a1fb609794",
+      "rule": "main_view_machine_field",
+      "path": "components/AssetDetailPanel.tsx",
+      "anchor": "evidence_count"
+    },
+    {
+      "fingerprint": "a2eeea3831495cdb",
+      "rule": "main_view_machine_field",
+      "path": "components/AssetDetailPanel.tsx",
+      "anchor": "recommended_asset_action"
+    },
+    {
+      "fingerprint": "2b7f58bd79d94a86",
+      "rule": "main_view_machine_field",
+      "path": "components/AssetDetailPanel.tsx",
+      "anchor": "linked_action_ids"
+    },
+    {
+      "fingerprint": "63a9ec19d8fa1276",
+      "rule": "main_view_machine_field",
+      "path": "components/AssetDetailPanel.tsx",
+      "anchor": "linked_topic_ids"
+    },
+    {
+      "fingerprint": "fa71df06b897e2fa",
+      "rule": "main_view_machine_field",
+      "path": "components/AssetDetailPanel.tsx",
+      "anchor": "asset.linked_action_ids"
+    },
+    {
+      "fingerprint": "ffa3cd10a45d6425",
+      "rule": "main_view_machine_field",
+      "path": "components/AssetDetailPanel.tsx",
+      "anchor": "asset.linked_topic_ids"
+    },
+    {
+      "fingerprint": "3a0489de2fa4e599",
+      "rule": "main_view_machine_field",
+      "path": "components/AssetDetailPanel.tsx",
+      "anchor": "evidence_refs"
+    },
+    {
+      "fingerprint": "cc246d360b5adb73",
+      "rule": "main_view_machine_field",
+      "path": "components/AssetDetailPanel.tsx",
+      "anchor": "proposal_only"
+    },
+    {
+      "fingerprint": "2bd59768cc04ff8e",
+      "rule": "main_view_machine_field",
+      "path": "components/GalaxyScene.tsx",
+      "anchor": "mass"
+    },
+    {
+      "fingerprint": "e6fcd15943227bb6",
+      "rule": "main_view_machine_field",
+      "path": "components/GalaxyScene.tsx",
+      "anchor": "mass_score"
+    },
+    {
+      "fingerprint": "269b57815d726a87",
+      "rule": "main_view_machine_field",
+      "path": "components/GalaxyScene.tsx",
+      "anchor": "universe_state"
+    },
+    {
+      "fingerprint": "a89c039917b41e56",
+      "rule": "main_view_machine_field",
+      "path": "components/GalaxyScene.tsx",
+      "anchor": "trail"
+    },
+    {
+      "fingerprint": "ad060fb3dffab5b4",
+      "rule": "main_view_machine_field",
+      "path": "components/ThemeDetailPanel.tsx",
+      "anchor": "topic_strength"
+    },
+    {
+      "fingerprint": "3dd25570f09f3615",
+      "rule": "main_view_machine_field",
+      "path": "components/ThemeDetailPanel.tsx",
+      "anchor": "roi_score"
+    },
+    {
+      "fingerprint": "a2f19eb46a82e45b",
+      "rule": "main_view_machine_field",
+      "path": "components/ThemeDetailPanel.tsx",
+      "anchor": "conflict_score"
+    },
+    {
+      "fingerprint": "2f348c70d81ce7e2",
+      "rule": "main_view_machine_field",
+      "path": "components/ThemeDetailPanel.tsx",
+      "anchor": "confidence"
+    },
+    {
+      "fingerprint": "6ac388c13e245bea",
+      "rule": "main_view_machine_field",
+      "path": "components/ThemeDetailPanel.tsx",
+      "anchor": "record_count"
+    },
+    {
+      "fingerprint": "a53a626d6c61bfd8",
+      "rule": "main_view_machine_field",
+      "path": "components/ThemeDetailPanel.tsx",
+      "anchor": "recent_count"
+    },
+    {
+      "fingerprint": "a73e70c0979f8edf",
+      "rule": "main_view_machine_field",
+      "path": "components/ThemeDetailPanel.tsx",
+      "anchor": "linked_action_ids"
+    },
+    {
+      "fingerprint": "f92437edba26b6f8",
+      "rule": "main_view_machine_field",
+      "path": "components/ThemeDetailPanel.tsx",
+      "anchor": "linked_asset_ids"
+    },
+    {
+      "fingerprint": "ad4888809289e6a7",
+      "rule": "main_view_machine_field",
+      "path": "components/ThemeDetailPanel.tsx",
+      "anchor": "topic.linked_action_ids"
+    },
+    {
+      "fingerprint": "a231e0c63f24ec27",
+      "rule": "main_view_machine_field",
+      "path": "components/ThemeDetailPanel.tsx",
+      "anchor": "topic.linked_asset_ids"
+    },
+    {
+      "fingerprint": "b08717757d1eacbb",
+      "rule": "main_view_machine_field",
+      "path": "components/ThemeDetailPanel.tsx",
+      "anchor": "representative_record_ids"
+    },
+    {
+      "fingerprint": "4feb0dfc936aac80",
+      "rule": "main_view_machine_field",
+      "path": "components/ThemeDetailPanel.tsx",
+      "anchor": "topic.representative_record_ids"
+    },
+    {
+      "fingerprint": "64b0781270b42e24",
+      "rule": "main_view_machine_field",
+      "path": "components/ThemeDetailPanel.tsx",
+      "anchor": "evidence_refs"
+    },
+    {
+      "fingerprint": "f3b11dca8aab7e09",
+      "rule": "main_view_machine_field",
+      "path": "components/ThemeDetailPanel.tsx",
+      "anchor": "proposal_only"
+    },
+    {
+      "fingerprint": "cb05c7f4158edc61",
+      "rule": "main_view_machine_field",
+      "path": "components/VisualWorkflowWorkbench.tsx",
+      "anchor": "event.source_id"
+    },
+    {
+      "fingerprint": "26bbffd6d639e492",
+      "rule": "main_view_machine_field",
+      "path": "components/VisualWorkflowWorkbench.tsx",
+      "anchor": "ref.evidence_level"
+    },
+    {
+      "fingerprint": "ac35d5261f7f73e8",
+      "rule": "main_view_machine_field",
+      "path": "components/VisualWorkflowWorkbench.tsx",
+      "anchor": "ref.ref_type"
+    },
+    {
+      "fingerprint": "cef019b1b7b9022e",
+      "rule": "main_view_machine_field",
+      "path": "components/VisualWorkflowWorkbench.tsx",
+      "anchor": "ref.source_id"
+    },
+    {
+      "fingerprint": "3c05ac62252399b0",
+      "rule": "main_view_machine_field",
+      "path": "features/actions/ProposalWorkspace.tsx",
+      "anchor": "proposal.proposal_id"
+    },
+    {
+      "fingerprint": "2a0244ffdaad2fa3",
+      "rule": "main_view_machine_field",
+      "path": "features/actions/ProposalWorkspace.tsx",
+      "anchor": "proposal.risk_level"
+    },
+    {
+      "fingerprint": "4c1a177d5b25553a",
+      "rule": "main_view_machine_field",
+      "path": "features/actions/ProposalWorkspace.tsx",
+      "anchor": "selectedProposal.current_state"
+    },
+    {
+      "fingerprint": "5df100ab48ea6394",
+      "rule": "main_view_machine_field",
+      "path": "features/actions/ProposalWorkspace.tsx",
+      "anchor": "selectedProposal.target_type"
+    },
+    {
+      "fingerprint": "fca6622f18bcbed9",
+      "rule": "main_view_machine_field",
+      "path": "features/actions/ProposalWorkspace.tsx",
+      "anchor": "selectedProposal.proposal_id"
+    },
+    {
+      "fingerprint": "284252f9f5ae8c3a",
+      "rule": "main_view_machine_field",
+      "path": "features/actions/ProposalWorkspace.tsx",
+      "anchor": "selectedTransaction.transaction_id"
+    },
+    {
+      "fingerprint": "eb3c0a696ae29096",
+      "rule": "main_view_machine_field",
+      "path": "features/actions/ProposalWorkspace.tsx",
+      "anchor": "selectedProposal.risk_level"
+    },
+    {
+      "fingerprint": "17ed295c947bfba3",
+      "rule": "main_view_machine_field",
+      "path": "features/actions/ProposalWorkspace.tsx",
+      "anchor": "selectedProposal.action_half_life"
+    },
+    {
+      "fingerprint": "59518d8272abe7ed",
+      "rule": "main_view_machine_field",
+      "path": "features/actions/ProposalWorkspace.tsx",
+      "anchor": "item.status"
+    },
+    {
+      "fingerprint": "d57f8b5abc5241a5",
+      "rule": "main_view_machine_field",
+      "path": "features/actions/ProposalWorkspace.tsx",
+      "anchor": "item.validation_id"
+    },
+    {
+      "fingerprint": "502484e2aa4ed1c1",
+      "rule": "main_view_machine_field",
+      "path": "features/actions/WritebackProposalPanel.tsx",
+      "anchor": "proposal.version.parent_proposal_id"
+    },
+    {
+      "fingerprint": "bf3cc095cd3ffbe6",
+      "rule": "main_view_machine_field",
+      "path": "features/overview/BehaviorIntelligencePanel.tsx",
+      "anchor": "cluster.cluster_id"
+    },
+    {
+      "fingerprint": "fcdb95d5e53cf420",
+      "rule": "main_view_machine_field",
+      "path": "features/overview/BehaviorIntelligencePanel.tsx",
+      "anchor": "cluster.evidence_refs"
+    },
+    {
+      "fingerprint": "1d42114bab47fbca",
+      "rule": "main_view_machine_field",
+      "path": "features/overview/HomeOverviewView.tsx",
+      "anchor": "topic.evidence_refs"
+    },
+    {
+      "fingerprint": "4a6df05b4d26b1fd",
+      "rule": "main_view_machine_field",
+      "path": "features/search-review/SearchReview.tsx",
+      "anchor": "query_input"
+    },
+    {
+      "fingerprint": "84c512ddb57f7494",
+      "rule": "main_view_machine_field",
+      "path": "features/search-review/SearchReview.tsx",
+      "anchor": "query_input"
+    },
+    {
+      "fingerprint": "3c3e57ab97f14df2",
+      "rule": "main_view_machine_field",
+      "path": "features/search-review/SearchReview.tsx",
+      "anchor": "core_profile"
+    },
+    {
+      "fingerprint": "abbef57b98e31263",
+      "rule": "main_view_machine_field",
+      "path": "features/search-review/SearchReview.tsx",
+      "anchor": "proposal_candidate"
+    },
+    {
+      "fingerprint": "77e3bbfb2d1582be",
+      "rule": "main_view_machine_field",
+      "path": "features/search-review/SearchReview.tsx",
+      "anchor": "result_list"
+    },
+    {
+      "fingerprint": "b74e73f0b9713d35",
+      "rule": "main_view_machine_field",
+      "path": "features/summary-iteration/SummaryIterationView.tsx",
+      "anchor": "reviewSummary.confidence"
+    },
+    {
+      "fingerprint": "f0e513dcd6083e96",
+      "rule": "main_view_machine_field",
+      "path": "features/summary-iteration/SummaryIterationView.tsx",
+      "anchor": "reviewSummary.proposal_candidate.target_type"
+    },
+    {
+      "fingerprint": "caf0c413d254e7a3",
+      "rule": "main_view_machine_field",
+      "path": "features/summary-iteration/SummaryIterationView.tsx",
+      "anchor": "item.signal_type"
+    },
+    {
+      "fingerprint": "d4016a5e2f58aeaa",
+      "rule": "main_view_machine_field",
+      "path": "features/sync/CommandPalettePanel.tsx",
+      "anchor": "command.status"
+    },
+    {
+      "fingerprint": "fef79686e8e90131",
+      "rule": "main_view_machine_field",
+      "path": "features/topics/DataGuideMap.tsx",
+      "anchor": "detail.status"
+    }
+  ]
+}

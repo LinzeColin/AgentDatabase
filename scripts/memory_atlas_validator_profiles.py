@@ -99,6 +99,10 @@ _AUDITED_STEP_POLICIES: dict[tuple[str, str], tuple[str, tuple[str, ...]]] = {
         ("@python", "scripts/privacy_guard.py", "--database-dir", ".", "--scan-only"),
     ),
     ("ui", "frontend_build"): ("app", ("npm", "run", "build")),
+    ("ui", "semantic_readability"): (
+        "database",
+        ("@python", "scripts/atlasctl.py", "audit", "--check", "chinese-ux"),
+    ),
     ("ui", "home_multiviewport"): (
         "app",
         ("node", "scripts/validate_memory_atlas_v1_2_home_multiviewport.cjs"),
