@@ -2,15 +2,16 @@
 
 > **Current v1.2.1 note (2026-07-14):** This file preserves the earlier v1.2 R7
 > handoff below. Memory Atlas is executing the v1.2.1 Task Pack with one Task per run.
-> S04 is complete locally. `S05-P1-T1` has now replaced 36 Stage-era human documents
-> with the seven shallow Chinese files under `人类可读/`; the fail-closed document
-> audit is `scripts/audit_memory_atlas_human_plane.py`, with permanent regression tests
-> in `tests/test_memory_atlas_human_plane.py`. The final T1 gates passed 301 Python tests,
-> fast 4/4, frontend build, and deterministic governance render checks under Python 3.13
-> and 3.12. Historical reviews and source
-> packages remain unchanged and Git history retains every removed document. The next
-> Task is only `S05-P1-T2`, which owns the concise rewrite of `功能清单.md`,
-> `开发记录.md`, and `模型参数文件.md`.
+> S04 is complete locally. `S05-P1-T1` replaced 36 Stage-era human documents with the
+> seven shallow Chinese files under `人类可读/`. `S05-P1-T2` has now compressed the
+> deterministic `功能清单.md`, `开发记录.md`, and `模型参数文件.md` owner entries from
+> 789 lines / 70,990 bytes to 130 lines / 7,007 bytes. Each entry presents current
+> status and the next Task by lines 3 and 12; the contract is
+> `config/memory_atlas_owner_entries.json` and the fail-closed audit/tests are
+> `scripts/audit_memory_atlas_human_plane.py` and
+> `tests/test_memory_atlas_human_plane.py`. Historical reviews and source packages
+> remain unchanged. The next Task is only `S05-P1-T3`, which owns the v1.2.1 change
+> and usage map; T3 has not started.
 >
 > The only public validator profiles are `validate:fast`, `validate:sync`,
 > `validate:ui`, and `validate:release`. Commands in the older "Verified Commands"

@@ -7,6 +7,10 @@ current_task_id: "TSK.OpenAIDatabase.PAM1.0019"
 next_gate_id: "ACC.OpenAIDatabase.PAM1.0019"
 total_estimated_hours: 255
 completed_estimated_hours: 241
+taskpack_progress:
+  completed_tasks: 30
+  total_tasks: 149
+  delivery_state: "local_only_not_released"
 stages:
   -
     stage_id: "S5"
@@ -1288,10 +1292,10 @@ stages:
             current_result: "complete_local_only_28_of_149_pending_s05_p1_t1"
   - stage_id: "MA-V121-S05"
     name: "Memory Atlas v1.2.1 简单双平面与全中文使用说明收敛"
-    person_goal: "让 owner 通过不超过七个中文核心入口理解系统、流程、变化、同步和维护；S05-P1-T1 已完成本地收敛，下一 Task 为 S05-P1-T2。"
+    person_goal: "让 owner 通过不超过七个中文核心入口理解系统、流程、变化、同步和维护；S05-P1-T1/T2 已完成本地收敛，下一 Task 为 S05-P1-T3。"
     status: "in_progress"
     estimated_hours: 8
-    estimated_pct: 12.5
+    estimated_pct: 25
     stop_conditions:
       - "一次 run 完成超过一个 Task"
       - "为了全中文而翻译代码标识、API 或数据字段"
@@ -1306,13 +1310,15 @@ stages:
       evidence_refs:
         - "EVID-MA-V121-S05-P1-T1-HUMAN-PLANE"
         - "EVID-MA-V121-S05-P1-T1-TEST"
+        - "EVID-MA-V121-S05-P1-T2-CONTRACT"
+        - "EVID-MA-V121-S05-P1-T2-TEST"
     phases:
       - phase_id: "MA-V121-S05-P1"
         name: "人类平面压缩"
         objective: "收敛中文 owner 入口，并提供可在两分钟内理解当前状态与下一步的门面。"
         status: "in_progress"
         estimated_hours: 3
-        estimated_pct: 33.33
+        estimated_pct: 66.67
         stop_conditions:
           - "单个 Task 同时重写多个独立 owner 门面"
         stop_gate:
@@ -1323,6 +1329,8 @@ stages:
           evidence_refs:
             - "EVID-MA-V121-S05-P1-T1-HUMAN-PLANE"
             - "EVID-MA-V121-S05-P1-T1-TEST"
+            - "EVID-MA-V121-S05-P1-T2-CONTRACT"
+            - "EVID-MA-V121-S05-P1-T2-TEST"
         tasks:
           - task_id: "S05-P1-T1"
             name: "收敛七个以内中文核心文件"
@@ -1360,18 +1368,39 @@ stages:
           - task_id: "S05-P1-T2"
             name: "重写三件套 owner 门面"
             objective: "重写功能清单、开发记录和模型参数文件为简洁入口。"
-            status: "planned"
+            status: "completed"
             estimated_hours: 1
-            estimated_pct: 0
+            estimated_pct: 100
             dependencies:
               - "S05-P1-T1"
             acceptance_ids:
               - "ACC-MA-V121-S05-P1-T2"
-            test_commands: []
-            evidence_refs: []
+            acceptance:
+              - acceptance_id: "ACC-MA-V121-S05-P1-T2"
+                description: "功能清单、开发记录和模型参数文件均在前 18 行内直接说明当前状态与下一步，且每份不超过 80 行和 6000 bytes。"
+                evidence_refs:
+                  - "EVID-MA-V121-S05-P1-T2-CONTRACT"
+                  - "EVID-MA-V121-S05-P1-T2-TEST"
+            test_commands:
+              - "python3 -B scripts/audit_memory_atlas_human_plane.py"
+              - "python3 -B -m unittest tests.test_memory_atlas_human_plane tests.test_atlasctl_script_consolidation tests.test_memory_atlas_validator_profiles tests.test_memory_atlas_test_value_audit -q"
+              - "python3 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+              - "python3.12 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+              - "npm run validate:fast --prefix apps/memory-atlas"
+              - "PYTHONPATH=.. python3 -B -m unittest discover -s tests -q"
+              - "npm run build --prefix apps/memory-atlas"
+            test_results:
+              - "三件套由 789 行/70990 bytes 收敛为 130 行/7007 bytes；功能清单 42 行/2361 bytes，开发记录 34 行/1794 bytes，模型参数文件 54 行/2852 bytes，当前状态和下一步位于第 3/12 行"
+              - "12 项 owner-entry 回归、47 项 focused tests、fast 4/4、完整 Python 307/307、frontend build、Python 3.13/3.12 check-render 0 drift/0 reference issue PASS"
+              - "OpenAIDatabase 专用 owner-quality contract PASS；全仓 semantic validate 仍被 sparse root、KMFA 与既有 NOT_APPLICABLE 引用错误阻断，本 Task 未扩大修复范围"
+              - "两份独立只读复核完成：owner 内容复核 0 Critical / 0 Important；工程治理复核无实现问题，唯一 Important 为提交时必须排除既有 KMFA 与 session_history 临时文件"
+            evidence_refs:
+              - "EVID-MA-V121-S05-P1-T2-CONTRACT"
+              - "EVID-MA-V121-S05-P1-T2-TEST"
             risks:
               - "把机器治理细节重新堆入 owner 门面"
             rollback: "git revert 本 Task 本地 commit。"
+            current_result: "complete_local_only_30_of_149_pending_s05_p1_t3"
           - task_id: "S05-P1-T3"
             name: "建立 v1.2.1 变化与使用地图"
             objective: "解释新增、修改、删除/隐藏与五个核心用户流程。"

@@ -19,6 +19,28 @@ EXPECTED_FILES = {
     "版本路线图.md",
     "维护故障.md",
 }
+OWNER_ENTRY_CONTRACT = Path("config/memory_atlas_owner_entries.json")
+OWNER_ENTRY_SCHEMA = "memory_atlas.owner_entries.v1_2_1_s05_p1_t2"
+OWNER_ENTRY_LIMITS = {
+    "max_reading_minutes": 2,
+    "max_bytes_per_file": 6000,
+    "max_lines_per_file": 80,
+    "status_heading_max_line": 4,
+    "next_heading_max_line": 18,
+    "status_and_next_max_chars": 1500,
+}
+OWNER_ENTRY_REQUIRED_STATUS_TOKENS = {"Task Pack 进度", "当前 Task", "未发布"}
+OWNER_ENTRY_REQUIRED_NEXT_TOKENS = {"下一 Task"}
+OWNER_ENTRY_REQUIRED_SECTIONS = {
+    "功能清单.md": {"## 当前状态", "## 下一步", "## 核心功能", "## 使用与边界"},
+    "开发记录.md": {"## 当前状态", "## 下一步", "## 最近完成", "## 验证与恢复"},
+    "模型参数文件.md": {"## 当前状态", "## 下一步", "## 模型总览", "## 关键参数", "## 模型边界"},
+}
+OWNER_ENTRY_FORBIDDEN_SECTIONS = {
+    "功能清单.md": {"## 证据"},
+    "开发记录.md": {"## Roadmap", "## 近期事件"},
+    "模型参数文件.md": {"## 公式", "## 参数"},
+}
 MOJIBAKE_MARKERS = ("\ufffd", "锟斤拷", "烫烫烫", "屯屯屯")
 INLINE_LINK_RE = re.compile(
     r"!?\[[^\]\n]*\]\(\s*(<[^>\n]+>|[^\s)]+)(?:\s+(?:\"[^\"]*\"|'[^']*'|\([^)]*\)))?\s*\)"
@@ -26,6 +48,126 @@ INLINE_LINK_RE = re.compile(
 REFERENCE_DEFINITION_RE = re.compile(r"(?m)^[ \t]{0,3}\[([^\]\n]+)\]:[ \t]*(<[^>\n]+>|\S+)")
 REFERENCE_USE_RE = re.compile(r"!?\[([^\]\n]+)\](?:\[([^\]\n]*)\])?")
 CHINESE_RE = re.compile(r"[\u3400-\u9fff]")
+
+
+def section_body(lines: list[str], heading: str) -> str:
+    try:
+        start = lines.index(heading) + 1
+    except ValueError:
+        return ""
+    end = next((index for index in range(start, len(lines)) if lines[index].startswith("## ")), len(lines))
+    return "\n".join(lines[start:end]).strip()
+
+
+def audit_owner_entries(database_dir: Path) -> tuple[list[dict[str, object]], list[str]]:
+    contract_path = database_dir / OWNER_ENTRY_CONTRACT
+    if not contract_path.is_file():
+        return [], [f"缺少 owner 入口合同：{OWNER_ENTRY_CONTRACT.as_posix()}"]
+    try:
+        contract = json.loads(contract_path.read_text(encoding="utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        return [], [f"owner 入口合同无法解析：{exc}"]
+    if contract.get("schema_version") != OWNER_ENTRY_SCHEMA:
+        return [], [f"owner 入口合同 schema 不匹配：{contract.get('schema_version')}"]
+
+    file_contracts = contract.get("files")
+    if not isinstance(file_contracts, dict) or set(file_contracts) != set(OWNER_ENTRY_REQUIRED_SECTIONS):
+        return [], ["owner 入口合同必须精确定义三件套"]
+
+    contract_errors: list[str] = []
+    for field, expected in OWNER_ENTRY_LIMITS.items():
+        if contract.get(field) != expected:
+            contract_errors.append(f"owner 入口合同不得放宽 {field}：必须为 {expected}")
+    if set(contract.get("required_status_tokens", [])) != OWNER_ENTRY_REQUIRED_STATUS_TOKENS:
+        contract_errors.append("owner 入口合同 required_status_tokens 不得变更")
+    if set(contract.get("required_next_tokens", [])) != OWNER_ENTRY_REQUIRED_NEXT_TOKENS:
+        contract_errors.append("owner 入口合同 required_next_tokens 不得变更")
+    for filename, raw_file_contract in file_contracts.items():
+        file_contract = raw_file_contract if isinstance(raw_file_contract, dict) else {}
+        if set(file_contract.get("required_sections", [])) != OWNER_ENTRY_REQUIRED_SECTIONS[filename]:
+            contract_errors.append(f"owner 入口合同不得放宽 {filename} required_sections")
+        if set(file_contract.get("forbidden_exact_sections", [])) != OWNER_ENTRY_FORBIDDEN_SECTIONS[filename]:
+            contract_errors.append(f"owner 入口合同不得变更 {filename} forbidden_exact_sections")
+    key_parameter_ids = [str(item) for item in contract.get("key_parameter_ids", [])]
+    if len(key_parameter_ids) < 8 or len(key_parameter_ids) != len(set(key_parameter_ids)):
+        contract_errors.append("owner 入口合同必须保留至少 8 个不重复关键参数")
+    if contract_errors:
+        return [], contract_errors
+
+    max_bytes = int(contract.get("max_bytes_per_file") or 0)
+    max_lines = int(contract.get("max_lines_per_file") or 0)
+    status_max_line = int(contract.get("status_heading_max_line") or 0)
+    next_max_line = int(contract.get("next_heading_max_line") or 0)
+    status_next_max_chars = int(contract.get("status_and_next_max_chars") or 0)
+    required_status_tokens = [str(item) for item in contract.get("required_status_tokens", [])]
+    required_next_tokens = [str(item) for item in contract.get("required_next_tokens", [])]
+    errors: list[str] = []
+    reports: list[dict[str, object]] = []
+
+    for filename, raw_file_contract in file_contracts.items():
+        path = database_dir / filename
+        if not path.is_file():
+            errors.append(f"缺少 owner 入口：{filename}")
+            continue
+        try:
+            text = path.read_text(encoding="utf-8")
+        except UnicodeDecodeError as exc:
+            errors.append(f"{filename} 不是有效 UTF-8：{exc}")
+            continue
+        lines = text.splitlines()
+        size_bytes = len(text.encode("utf-8"))
+        line_count = len(lines)
+        file_contract = raw_file_contract if isinstance(raw_file_contract, dict) else {}
+        required_sections = [str(item) for item in file_contract.get("required_sections", [])]
+        forbidden_sections = [str(item) for item in file_contract.get("forbidden_exact_sections", [])]
+
+        for section in required_sections:
+            if section not in lines:
+                errors.append(f"{filename} 缺少必需段落：{section}")
+        for section in forbidden_sections:
+            if section in lines:
+                errors.append(f"{filename} 重新展开了机器明细：{section}")
+        if size_bytes > max_bytes:
+            errors.append(f"{filename} 超过 {max_bytes} bytes：{size_bytes}")
+        if line_count > max_lines:
+            errors.append(f"{filename} 超过 {max_lines} 行：{line_count}")
+
+        status_line = lines.index("## 当前状态") + 1 if "## 当前状态" in lines else 0
+        next_line = lines.index("## 下一步") + 1 if "## 下一步" in lines else 0
+        if status_line > status_max_line:
+            errors.append(f"{filename} 当前状态出现过晚：第 {status_line} 行")
+        if next_line > next_max_line:
+            errors.append(f"{filename} 下一步出现过晚：第 {next_line} 行")
+
+        status_text = section_body(lines, "## 当前状态")
+        next_text = section_body(lines, "## 下一步")
+        for token in required_status_tokens:
+            if token not in status_text:
+                errors.append(f"{filename} 当前状态缺少：{token}")
+        for token in required_next_tokens:
+            if token not in next_text:
+                errors.append(f"{filename} 下一步缺少：{token}")
+        if filename == "模型参数文件.md":
+            for parameter_id in key_parameter_ids:
+                if parameter_id not in text:
+                    errors.append(f"{filename} 缺少合同关键参数：{parameter_id}")
+        status_next_chars = len(re.sub(r"\s+", "", status_text + next_text))
+        if status_next_chars > status_next_max_chars:
+            errors.append(f"{filename} 状态与下一步超过两分钟摘要上限：{status_next_chars} 字符")
+        if any(marker in text for marker in MOJIBAKE_MARKERS):
+            errors.append(f"{filename} 命中乱码标记")
+
+        reports.append(
+            {
+                "file": filename,
+                "bytes": size_bytes,
+                "lines": line_count,
+                "status_heading_line": status_line,
+                "next_heading_line": next_line,
+                "status_and_next_chars": status_next_chars,
+            }
+        )
+    return reports, errors
 
 
 def normalize_reference_label(value: str) -> str:
@@ -158,12 +300,16 @@ def audit(database_dir: Path) -> dict[str, object]:
             }
         )
 
+    owner_entry_reports, owner_entry_errors = audit_owner_entries(database_dir)
+    errors.extend(owner_entry_errors)
+
     return {
         "status": "PASS" if not errors else "FAIL",
         "human_dir": str(human_dir),
         "file_count": len(direct_files),
         "nested_file_count": len(nested_files),
         "files": file_reports,
+        "owner_entries": owner_entry_reports,
         "errors": errors,
     }
 

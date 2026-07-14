@@ -1,0 +1,68 @@
+{
+  "schema_version": "memory_atlas.owner_entries.v1_2_1_s05_p1_t2",
+  "task_id": "S05-P1-T2",
+  "acceptance": "每个入口可在 2 分钟内说明当前状态与下一步。",
+  "max_reading_minutes": 2,
+  "max_bytes_per_file": 6000,
+  "max_lines_per_file": 80,
+  "status_heading_max_line": 4,
+  "next_heading_max_line": 18,
+  "status_and_next_max_chars": 1500,
+  "required_status_tokens": [
+    "Task Pack 进度",
+    "当前 Task",
+    "未发布"
+  ],
+  "required_next_tokens": [
+    "下一 Task"
+  ],
+  "files": {
+    "功能清单.md": {
+      "required_sections": [
+        "## 当前状态",
+        "## 下一步",
+        "## 核心功能",
+        "## 使用与边界"
+      ],
+      "forbidden_exact_sections": [
+        "## 证据"
+      ]
+    },
+    "开发记录.md": {
+      "required_sections": [
+        "## 当前状态",
+        "## 下一步",
+        "## 最近完成",
+        "## 验证与恢复"
+      ],
+      "forbidden_exact_sections": [
+        "## Roadmap",
+        "## 近期事件"
+      ]
+    },
+    "模型参数文件.md": {
+      "required_sections": [
+        "## 当前状态",
+        "## 下一步",
+        "## 模型总览",
+        "## 关键参数",
+        "## 模型边界"
+      ],
+      "forbidden_exact_sections": [
+        "## 公式",
+        "## 参数"
+      ]
+    }
+  },
+  "key_parameter_ids": [
+    "PARAM-034",
+    "PARAM-035",
+    "PARAM-036",
+    "PARAM-045",
+    "PARAM-049",
+    "PARAM-050",
+    "PARAM-078",
+    "PARAM-079",
+    "PARAM-080"
+  ]
+}
