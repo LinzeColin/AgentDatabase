@@ -181,7 +181,7 @@ task_count: 17
 - non_scope: live Cloudflare Pages upload without credentials, Cloudflare Access policy mutation, raw exports, plaintext secrets, production readiness promotion.
 - status: completed
 - dependencies: TASK-OAI-A-004
-- required files: `apps/memory-atlas/src/App.tsx`, `scripts/install_codex_weekly_sync.py`, `scripts/run_codex_memory_auto_update.py`, `data/derived/visualization/memory_atlas.json`, `tests/test_memory_atlas_visual_acceptance.py`
+- required files: `apps/memory-atlas/src/App.tsx`, `scripts/install_codex_weekly_sync.py`, `scripts/run_codex_memory_auto_update.py`, `data/derived/visualization/memory_atlas.json`, `tests/test_memory_atlas_visual_workflows.py`
 - acceptance_ids: ACC-OAI-D-001
 - test commands: snapshot build, `npm ci`, `npm run lint`, `npm run build`, release audit, visual acceptance, Memory Atlas acceptance, Cloudflare preflight, unittest discover, deploy dry-run, wrangler auth check.
 - evidence: local gates passed; deploy dry-run command contract valid; live deploy blocked by missing Wrangler authentication and Cloudflare live env vars.

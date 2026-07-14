@@ -110,8 +110,9 @@ class ScriptMigrationMapTests(unittest.TestCase):
             {item["family"] for item in payload["families"]},
             {"build", "sync", "audit", "validator"},
         )
-        self.assertEqual(payload["summary"]["deleted_script_count"], 0)
-        self.assertEqual(payload["deleted_scripts"], [])
+        self.assertEqual(payload["summary"]["deleted_script_count"], 139)
+        self.assertEqual(len(payload["deleted_scripts"]), 139)
+        self.assertEqual(len(payload["equivalence_tests"]), 1)
         self.assertEqual(payload["summary"]["consolidated_execution_module_count"], 5)
         self.assertEqual(payload["summary"]["consolidated_execution_block_count"], 8)
         self.assertEqual(payload["summary"]["validator_profile_count_created"], 4)
@@ -150,9 +151,11 @@ class ScriptMigrationMapTests(unittest.TestCase):
         mapped = payload["inventory"]["scoped_scripts"]
         mapped_by_path = {item["path"]: item for item in mapped}
         actual_by_path = {path.relative_to(ROOT).as_posix(): path for path in files}
+        deleted_by_path = {item["path"]: item for item in payload["deleted_scripts"]}
 
         self.assertEqual(len(mapped_by_path), len(mapped))
-        self.assertEqual(set(mapped_by_path), set(actual_by_path))
+        self.assertEqual(set(mapped_by_path), set(actual_by_path) | set(deleted_by_path))
+        self.assertTrue(set(actual_by_path).isdisjoint(deleted_by_path))
         self.assertEqual(payload["inventory"]["baseline_scoped_script_count"], 208)
         self.assertEqual(
             payload["inventory"]["retained_default_deletion_blocker"],
@@ -165,6 +168,23 @@ class ScriptMigrationMapTests(unittest.TestCase):
                 self.assertEqual(item["sha256"], hashlib.sha256(path.read_bytes()).hexdigest())
                 self.assertEqual(item["matched_families"], self.matched_families(path))
                 self.assertEqual(item["disposition"], "retained")
+        registered_test_ids = {item["test_id"] for item in payload["equivalence_tests"]}
+        for relative, deletion in deleted_by_path.items():
+            with self.subTest(deleted_path=relative):
+                item = mapped_by_path[relative]
+                self.assertEqual(item["disposition"], "deleted")
+                self.assertTrue(item["baseline"])
+                self.assertFalse((ROOT / relative).exists())
+                self.assertTrue(deletion["equivalent_command"])
+                self.assertTrue(deletion["callers_migrated"])
+                self.assertFalse(deletion["behavior_parity_verified"])
+                self.assertTrue(deletion["approved_low_value_retirement"])
+                self.assertTrue(deletion["replacement_risk_coverage_verified"])
+                self.assertEqual(
+                    deletion["retirement_review"],
+                    "config/memory_atlas_test_value_review.json",
+                )
+                self.assertTrue(set(deletion["equivalence_test_ids"]).issubset(registered_test_ids))
 
     def test_unmapped_or_forged_scoped_inventory_entry_fails_closed(self) -> None:
         payload = copy.deepcopy(self.load_contract())
@@ -195,7 +215,7 @@ class ScriptMigrationMapTests(unittest.TestCase):
                 self.assertTrue(item["deletion_blockers"])
                 self.assertNotEqual(item["status"], "removed")
 
-    def test_removed_entry_requires_command_tests_callers_and_parity(self) -> None:
+    def test_removed_entry_requires_command_tests_callers_and_retirement_evidence(self) -> None:
         payload = copy.deepcopy(self.load_contract())
         payload["deleted_scripts"].append(
             {
@@ -204,6 +224,9 @@ class ScriptMigrationMapTests(unittest.TestCase):
                 "equivalence_test_ids": [],
                 "callers_migrated": False,
                 "behavior_parity_verified": False,
+                "approved_low_value_retirement": False,
+                "retirement_review": "",
+                "replacement_risk_coverage_verified": False,
             }
         )
         payload["summary"]["deleted_script_count"] = 1
@@ -213,7 +236,7 @@ class ScriptMigrationMapTests(unittest.TestCase):
         self.assertTrue(any("equivalent_command" in error for error in errors))
         self.assertTrue(any("equivalence_test_ids" in error for error in errors))
         self.assertTrue(any("callers_migrated" in error for error in errors))
-        self.assertTrue(any("behavior_parity_verified" in error for error in errors))
+        self.assertTrue(any("behavior parity or approved low-value retirement" in error for error in errors))
 
     def test_removed_entry_test_ids_must_be_registered(self) -> None:
         payload = copy.deepcopy(self.load_contract())
@@ -224,6 +247,9 @@ class ScriptMigrationMapTests(unittest.TestCase):
                 "equivalence_test_ids": ["missing-test-id"],
                 "callers_migrated": True,
                 "behavior_parity_verified": True,
+                "approved_low_value_retirement": False,
+                "retirement_review": "",
+                "replacement_risk_coverage_verified": False,
             }
         )
         payload["summary"]["deleted_script_count"] = 1
@@ -232,7 +258,7 @@ class ScriptMigrationMapTests(unittest.TestCase):
 
         self.assertTrue(any("unregistered equivalence test" in error for error in errors))
 
-    def test_fake_registered_test_cannot_satisfy_parity_gate(self) -> None:
+    def test_fake_registered_test_cannot_satisfy_retirement_gate(self) -> None:
         payload = copy.deepcopy(self.load_contract())
         payload["equivalence_tests"] = [{"test_id": "fake-parity"}]
         payload["deleted_scripts"].append(
@@ -241,7 +267,10 @@ class ScriptMigrationMapTests(unittest.TestCase):
                 "equivalent_command": "python3 scripts/atlasctl.py audit --check example",
                 "equivalence_test_ids": ["fake-parity"],
                 "callers_migrated": True,
-                "behavior_parity_verified": True,
+                "behavior_parity_verified": False,
+                "approved_low_value_retirement": True,
+                "retirement_review": "config/memory_atlas_test_value_review.json",
+                "replacement_risk_coverage_verified": True,
             }
         )
         payload["summary"]["deleted_script_count"] = 1
@@ -251,7 +280,7 @@ class ScriptMigrationMapTests(unittest.TestCase):
         self.assertTrue(any("test_command" in error for error in errors))
         self.assertTrue(any("test_file" in error for error in errors))
         self.assertTrue(any("test_case" in error for error in errors))
-        self.assertTrue(any("stdout/stderr/exit_code" in error for error in errors))
+        self.assertTrue(any("approved retirement evidence" in error for error in errors))
 
     def test_contract_drift_and_out_of_scope_retained_path_fail_closed(self) -> None:
         payload = copy.deepcopy(self.load_contract())

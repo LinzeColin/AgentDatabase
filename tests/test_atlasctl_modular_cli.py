@@ -178,7 +178,7 @@ class AtlasctlModularCliTests(unittest.TestCase):
                 stale.append(path.name)
         self.assertEqual(stale, [], f"single-file atlasctl source reads remain: {stale}")
 
-    def test_aggregate_runtime_satisfies_existing_validator_fragments(self) -> None:
+    def test_aggregate_runtime_contains_facade_and_every_current_module(self) -> None:
         helper = VALIDATORS / "atlasctl_runtime_source.cjs"
         node_script = (
             f"const {{ readAtlasctlRuntimeSource }} = require({json.dumps(str(helper))});"
@@ -191,27 +191,12 @@ class AtlasctlModularCliTests(unittest.TestCase):
             capture_output=True,
             check=True,
         ).stdout
-        checked_validators = 0
-        for path in sorted(VALIDATORS.glob("validate_memory_atlas_v1_2_*.cjs")):
-            source = path.read_text(encoding="utf-8")
-            matches = re.findall(
-                r"hasAll\(atlasctl(?:Source)?,\s*\[(.*?)\]\s*\)",
-                source,
-                flags=re.DOTALL,
-            )
-            if not matches:
-                continue
-            checked_validators += 1
-            for body in matches:
-                fragments = [
-                    json.loads(f'"{value}"')
-                    for value in re.findall(r'"((?:\\.|[^"\\])*)"', body)
-                ]
-                self.assertGreater(len(fragments), 0, path.name)
-                for fragment in fragments:
-                    with self.subTest(validator=path.name, fragment=fragment):
-                        self.assertIn(fragment, aggregate)
-        self.assertEqual(checked_validators, 14)
+        runtime_paths = [ATLASCTL, *sorted(PACKAGE.glob("*.py"))]
+        expected = "\n".join(path.read_text(encoding="utf-8") for path in runtime_paths)
+
+        self.assertEqual(aggregate, expected)
+        for module_name in EXPECTED_MODULES:
+            self.assertIn((PACKAGE / module_name).read_text(encoding="utf-8"), aggregate)
 
 
 if __name__ == "__main__":

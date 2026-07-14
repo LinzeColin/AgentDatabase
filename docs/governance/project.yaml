@@ -459,6 +459,37 @@ features:
       - "python3.12 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
     evidence_refs:
       - "EVID-OAIDB-RUN0A-CHECK-RENDER"
+  - feature_id: "FEAT-MA-V121-S04-P3-T1"
+    name: "Memory Atlas 四层 validator profiles"
+    description: "S04-P3-T1 将 package 的 178 个历史 validate aliases 收敛为 fast、sync、ui、release 四个配置驱动 profile；后续 T2 已独立完成测试价值评估与受控删除。"
+    status: "active"
+    fact_level: "EXTRACTED"
+    code_refs:
+      - "OpenAIDatabase/scripts/memory_atlas_validator_profiles.py:1"
+      - "OpenAIDatabase/config/memory_atlas_validator_profiles.json:1"
+      - "OpenAIDatabase/apps/memory-atlas/package.json:1"
+    test_refs:
+      - "OpenAIDatabase/tests/test_memory_atlas_validator_profiles.py:1"
+      - "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+    evidence_refs:
+      - "EVID-MA-V121-S04-P3-T1-DESIGN"
+      - "EVID-MA-V121-S04-P3-T1-TEST"
+  - feature_id: "FEAT-MA-V121-S04-P3-T2"
+    name: "Memory Atlas 高价值测试集与删除门禁"
+    description: "v1.2.1 Task Pack 当前完成 27/149；基于用户旅程、数据完整性和发布风险保留 38 个 Node validators 与 50 个 Python tests，删除 139 个历史 Stage/source-marker validators 和 2 个被真实浏览器覆盖取代的低价值测试，并保留逐项 Git 恢复合同。"
+    status: "active"
+    fact_level: "EXTRACTED"
+    code_refs:
+      - "OpenAIDatabase/scripts/audit_memory_atlas_test_value.py:1"
+      - "OpenAIDatabase/config/memory_atlas_test_value_review.json:1"
+      - "OpenAIDatabase/config/atlasctl_script_migrations.json:1"
+    test_refs:
+      - "OpenAIDatabase/tests/test_memory_atlas_test_value_audit.py:1"
+      - "OpenAIDatabase/tests/test_memory_atlas_visual_workflows.py:1"
+      - "OpenAIDatabase/tests/test_memory_atlas_v1_2_home_layout_contract.py:1"
+    evidence_refs:
+      - "EVID-MA-V121-S04-P3-T2-DESIGN"
+      - "EVID-MA-V121-S04-P3-T2-TEST"
 models:
   -
     model_id: "MOD-001"
@@ -4494,4 +4525,14 @@ evidence_refs:
     evidence_id: "EVID-MA-V121-S04-P3-T1-TEST"
     kind: "test"
     ref: "python3 -m unittest tests.test_memory_atlas_validator_profiles tests.test_atlasctl_script_consolidation -q"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S04-P3-T2-DESIGN"
+    kind: "design"
+    ref: "OpenAIDatabase/docs/superpowers/specs/2026-07-14-memory-atlas-v1-2-1-s04-p3-t2-test-value-design.md"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S04-P3-T2-TEST"
+    kind: "test"
+    ref: "python3 -m unittest tests.test_memory_atlas_test_value_audit tests.test_atlasctl_script_consolidation tests.test_memory_atlas_validator_profiles -q"
     fact_level: "EXTRACTED"

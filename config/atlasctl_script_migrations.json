@@ -21,7 +21,7 @@
       ".js",
       ".sh"
     ],
-    "scanned_script_count": 208,
+    "scanned_script_count": 70,
     "exact_sha256_duplicate_group_count": 0,
     "unlisted_scoped_script_policy": "retain_deletion_forbidden_until_mapped",
     "retained_default_deletion_blocker": "equivalent_command_callers_and_behavior_parity_not_all_proven",
@@ -72,7 +72,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_part1_stage0.cjs",
@@ -81,7 +81,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_part2_stage1.cjs",
@@ -90,7 +90,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_part3_stage2.cjs",
@@ -99,7 +99,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_part4_stage3.cjs",
@@ -108,7 +108,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_part5_stage4.cjs",
@@ -117,7 +117,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_part6_stage5.cjs",
@@ -126,7 +126,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_part7_stage6.cjs",
@@ -135,7 +135,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_part8_stage7.cjs",
@@ -144,7 +144,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_part9_stage8.cjs",
@@ -153,7 +153,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_stage6.mjs",
@@ -198,7 +198,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage1.cjs",
@@ -207,7 +207,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage10.cjs",
@@ -216,7 +216,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage10_phase1.cjs",
@@ -225,7 +225,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage1_phase1.cjs",
@@ -234,7 +234,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage1_phase2.cjs",
@@ -243,7 +243,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage1_phase3.cjs",
@@ -252,7 +252,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage1_phase4.cjs",
@@ -261,7 +261,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage1_phase5.cjs",
@@ -270,7 +270,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage2.cjs",
@@ -279,7 +279,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage2_phase1.cjs",
@@ -288,7 +288,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage2_phase2.cjs",
@@ -297,7 +297,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage2_phase3.cjs",
@@ -306,7 +306,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage2_phase4.cjs",
@@ -315,7 +315,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage3.cjs",
@@ -324,7 +324,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage3_phase1.cjs",
@@ -333,7 +333,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage3_phase2.cjs",
@@ -342,7 +342,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage4.cjs",
@@ -351,7 +351,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage4_phase1.cjs",
@@ -360,7 +360,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage4_phase2.cjs",
@@ -369,7 +369,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage5.cjs",
@@ -378,7 +378,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage5_phase1.cjs",
@@ -387,7 +387,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage6.cjs",
@@ -396,7 +396,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage6_phase1.cjs",
@@ -405,7 +405,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage7.cjs",
@@ -414,7 +414,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage7_phase1.cjs",
@@ -423,7 +423,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage8.cjs",
@@ -432,7 +432,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage8_phase1.cjs",
@@ -441,7 +441,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage9.cjs",
@@ -450,7 +450,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage9_phase1.cjs",
@@ -459,7 +459,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage9_phase2.cjs",
@@ -468,7 +468,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage9_phase3.cjs",
@@ -477,7 +477,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage9_phase4.cjs",
@@ -486,7 +486,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_final_upload.cjs",
@@ -495,7 +495,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_pre_stage0.cjs",
@@ -504,7 +504,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage0.cjs",
@@ -513,7 +513,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage0_phase1.cjs",
@@ -522,7 +522,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage0_phase2.cjs",
@@ -531,7 +531,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage0_phase3.cjs",
@@ -540,7 +540,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage1.cjs",
@@ -549,7 +549,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage10.cjs",
@@ -558,7 +558,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage10_phase1.cjs",
@@ -567,7 +567,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage1_phase1.cjs",
@@ -576,7 +576,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage1_phase2.cjs",
@@ -585,7 +585,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage1_phase3.cjs",
@@ -594,7 +594,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage1_phase4.cjs",
@@ -603,7 +603,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage2.cjs",
@@ -612,7 +612,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage2_phase1.cjs",
@@ -621,7 +621,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage2_phase2.cjs",
@@ -630,7 +630,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage3.cjs",
@@ -639,7 +639,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage3_phase1.cjs",
@@ -648,7 +648,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage3_phase2.cjs",
@@ -657,7 +657,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage4.cjs",
@@ -666,7 +666,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage4_phase1.cjs",
@@ -675,7 +675,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage4_phase2.cjs",
@@ -684,7 +684,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage4_phase3.cjs",
@@ -693,7 +693,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage5.cjs",
@@ -702,7 +702,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage5_phase1.cjs",
@@ -711,7 +711,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage5_phase2.cjs",
@@ -720,7 +720,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage5_phase3.cjs",
@@ -729,7 +729,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage6.cjs",
@@ -738,7 +738,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage6_phase1.cjs",
@@ -747,7 +747,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage6_phase2.cjs",
@@ -756,7 +756,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage7.cjs",
@@ -765,7 +765,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage7_phase1.cjs",
@@ -774,7 +774,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage7_phase2.cjs",
@@ -783,7 +783,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage8.cjs",
@@ -792,7 +792,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage8_phase1.cjs",
@@ -801,7 +801,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage9.cjs",
@@ -810,7 +810,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage9_phase1.cjs",
@@ -819,7 +819,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_1_s04_p1_t1_structure.mjs",
@@ -855,7 +855,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_home_multiviewport.cjs",
@@ -891,7 +891,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s01_p2.cjs",
@@ -900,7 +900,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s01_p3.cjs",
@@ -909,7 +909,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s01_review.cjs",
@@ -918,7 +918,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s02_p1.cjs",
@@ -927,7 +927,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s02_p2.cjs",
@@ -936,7 +936,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s02_p3.cjs",
@@ -945,7 +945,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s02_review.cjs",
@@ -954,7 +954,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s03_p1.cjs",
@@ -963,7 +963,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s03_p2.cjs",
@@ -972,7 +972,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s03_p3.cjs",
@@ -981,7 +981,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s03_review.cjs",
@@ -990,7 +990,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s04_p1.cjs",
@@ -999,7 +999,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s04_p2.cjs",
@@ -1008,7 +1008,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s04_p3.cjs",
@@ -1017,7 +1017,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s04_review.cjs",
@@ -1026,7 +1026,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s05_p1.cjs",
@@ -1035,7 +1035,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s05_p2.cjs",
@@ -1044,7 +1044,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s05_p3.cjs",
@@ -1053,7 +1053,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s05_review.cjs",
@@ -1062,7 +1062,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s06_p1.cjs",
@@ -1071,7 +1071,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s06_p2.cjs",
@@ -1080,7 +1080,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s06_p3.cjs",
@@ -1089,7 +1089,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s06_review.cjs",
@@ -1098,7 +1098,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s07_p1.cjs",
@@ -1107,7 +1107,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s07_p2.cjs",
@@ -1116,7 +1116,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s07_p3.cjs",
@@ -1125,7 +1125,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s07_review.cjs",
@@ -1134,7 +1134,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s08_p1.cjs",
@@ -1143,7 +1143,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s08_p2.cjs",
@@ -1152,7 +1152,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s08_p3.cjs",
@@ -1161,7 +1161,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s08_review.cjs",
@@ -1170,7 +1170,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s09_p1.cjs",
@@ -1179,7 +1179,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s09_p2.cjs",
@@ -1188,7 +1188,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s09_p3.cjs",
@@ -1197,7 +1197,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s09_review.cjs",
@@ -1206,7 +1206,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s10_p1.cjs",
@@ -1215,7 +1215,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s10_p2.cjs",
@@ -1224,7 +1224,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s10_p3.cjs",
@@ -1233,7 +1233,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s10_review.cjs",
@@ -1242,7 +1242,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s11_p1.cjs",
@@ -1251,7 +1251,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s11_p2.cjs",
@@ -1260,7 +1260,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s11_p3.cjs",
@@ -1269,7 +1269,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s11_p4.cjs",
@@ -1278,7 +1278,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s11_review.cjs",
@@ -1287,7 +1287,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s12_p1.cjs",
@@ -1296,7 +1296,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s12_p2.cjs",
@@ -1305,7 +1305,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s12_p3.cjs",
@@ -1314,7 +1314,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s12_review.cjs",
@@ -1323,7 +1323,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s13_p1.cjs",
@@ -1332,7 +1332,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s13_p2.cjs",
@@ -1341,7 +1341,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s13_p3.cjs",
@@ -1350,7 +1350,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s13_review.cjs",
@@ -1359,7 +1359,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s14_p1.cjs",
@@ -1368,7 +1368,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s14_p2.cjs",
@@ -1377,7 +1377,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s14_p3.cjs",
@@ -1386,7 +1386,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s14_review.cjs",
@@ -1395,7 +1395,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_visual_models.mjs",
@@ -1422,7 +1422,7 @@
         "matched_families": [
           "validator"
         ],
-        "disposition": "retained"
+        "disposition": "deleted"
       },
       {
         "path": "apps/memory-atlas/scripts/validate_memory_river_evidence_layers.mjs",
@@ -1677,6 +1677,15 @@
         "disposition": "retained"
       },
       {
+        "path": "scripts/audit_memory_atlas_test_value.py",
+        "baseline": false,
+        "sha256": "9e02bcc1d4182d26225c685cb330db39edc61643afb032fbf45900fd832b213b",
+        "matched_families": [
+          "audit"
+        ],
+        "disposition": "retained"
+      },
+      {
         "path": "scripts/audit_memory_atlas_visual_acceptance.py",
         "baseline": true,
         "sha256": "0057a9fab8fd55f3d4e06000ea3b5a9eedeb3d70ca49e971a51d9136c5b2a9e0",
@@ -1832,7 +1841,7 @@
       {
         "path": "scripts/build_memory_atlas_self_iteration.py",
         "baseline": true,
-        "sha256": "40ac430d85680906d2527471ee08acb002f74b5f5fd9b81325c846e5614c8baf",
+        "sha256": "0cde371bee61ed7a8418f3b2d4c38b51269203bb00ef836267881cc69a0746a6",
         "matched_families": [
           "build"
         ],
@@ -1909,15 +1918,15 @@
     "equivalent_command_required": true,
     "equivalence_test_required": true,
     "all_callers_migrated_required": true,
-    "behavior_parity_required": true
+    "behavior_parity_or_approved_low_value_retirement_required": true
   },
   "summary": {
-    "deleted_script_count": 0,
-    "retained_representative_script_count": 15,
+    "deleted_script_count": 139,
+    "retained_representative_script_count": 16,
     "consolidated_execution_module_count": 5,
     "consolidated_execution_block_count": 8,
     "validator_profile_count_created": 4,
-    "mapped_scoped_script_count": 208
+    "mapped_scoped_script_count": 209
   },
   "profile_consolidation": {
     "task_id": "S04-P3-T1",
@@ -2051,21 +2060,29 @@
             "CI and owner acceptance call it directly",
             "live evidence semantics are not equivalent to atlasctl final audit"
           ]
+        },
+        {
+          "path": "scripts/audit_memory_atlas_test_value.py",
+          "status": "retained_no_equivalent_command",
+          "canonical_command": null,
+          "deletion_blockers": [
+            "S04-P3-T2 current-value inventory and zero-caller gate depend on this audit",
+            "deletion would remove the fail-closed proof for historical validator removal"
+          ]
         }
       ]
     },
     {
       "family": "validator",
       "scope": "apps/memory-atlas/scripts/validate_*.cjs and validate_*.mjs",
-      "disposition": "Public validation is consolidated into four profiles; historical implementations remain internal pending T2 value review and T3 migration documentation.",
+      "disposition": "Public validation uses four profiles; S04-P3-T2 deleted approved historical/source-marker aggregates and retained risk-bearing implementations.",
       "scripts": [
         {
           "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_1_s04_p1_t1_structure.mjs",
           "status": "profiled_in_s04_p3_t1",
           "canonical_command": "npm run validate:fast",
           "deletion_blockers": [
-            "fast profile invokes the validator as an internal implementation",
-            "S04-P3-T2 has not completed the value and deletion review"
+            "fast profile invokes the validator as an internal implementation"
           ]
         },
         {
@@ -2073,17 +2090,7 @@
           "status": "profiled_in_s04_p3_t1",
           "canonical_command": "npm run validate:fast",
           "deletion_blockers": [
-            "fast profile invokes the validator as an internal implementation",
-            "S04-P3-T2 has not completed the value and deletion review"
-          ]
-        },
-        {
-          "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s04_p2.cjs",
-          "status": "profiled_in_s04_p3_t1",
-          "canonical_command": "npm run validate:fast",
-          "deletion_blockers": [
-            "fast profile covers the modular CLI regressions through current Python contracts",
-            "S04-P3-T2 and S04-P3-T3 have not proven deletion parity for the historical aggregate"
+            "fast profile invokes the validator as an internal implementation"
           ]
         },
         {
@@ -2091,15 +2098,1705 @@
           "status": "profiled_in_s04_p3_t1",
           "canonical_command": "npm run validate:ui",
           "deletion_blockers": [
-            "ui profile and final audit invoke the browser gate as an internal implementation",
-            "S04-P3-T2 has not completed the value and deletion review"
+            "ui profile and final audit invoke the browser gate as an internal implementation"
+          ]
+        },
+        {
+          "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_home_multiviewport.cjs",
+          "status": "profiled_in_s04_p3_t1",
+          "canonical_command": "npm run validate:ui",
+          "deletion_blockers": [
+            "ui profile and final audit execute the real three-viewport browser gate",
+            "it uniquely protects release identity, layout, focus, disclosure, accessibility, and responsive hierarchy"
           ]
         }
       ]
     }
   ],
-  "equivalence_tests": [],
-  "deleted_scripts": [],
+  "equivalence_tests": [
+    {
+      "test_id": "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT",
+      "test_command": "python3 -m unittest tests.test_memory_atlas_test_value_audit.MemoryAtlasTestValueAuditTests.test_deleted_low_value_validators_have_approved_risk_replacements_and_no_callers -q",
+      "test_file": "tests/test_memory_atlas_test_value_audit.py",
+      "test_case": "test_deleted_low_value_validators_have_approved_risk_replacements_and_no_callers",
+      "asserts": [
+        "approved_deletion_schema",
+        "baseline_asset_identity",
+        "all_current_callers_migrated",
+        "risk_replacement"
+      ]
+    }
+  ],
+  "deleted_scripts": [
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_part10_stage9.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_part1_stage0.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_part2_stage1.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_part3_stage2.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_part4_stage3.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_part5_stage4.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_part6_stage5.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_part7_stage6.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_part8_stage7.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_part9_stage8.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage0.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage1.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage10.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage10_phase1.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage1_phase1.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage1_phase2.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage1_phase3.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage1_phase4.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage1_phase5.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage2.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage2_phase1.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage2_phase2.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage2_phase3.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage2_phase4.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage3.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage3_phase1.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage3_phase2.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage4.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage4_phase1.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage4_phase2.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage5.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage5_phase1.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage6.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage6_phase1.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage7.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage7_phase1.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage8.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage8_phase1.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage9.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage9_phase1.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage9_phase2.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage9_phase3.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage9_phase4.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_final_upload.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_pre_stage0.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage0.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage0_phase1.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage0_phase2.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage0_phase3.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage1.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage10.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage10_phase1.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage1_phase1.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage1_phase2.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage1_phase3.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage1_phase4.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage2.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage2_phase1.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage2_phase2.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage3.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage3_phase1.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage3_phase2.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage4.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage4_phase1.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage4_phase2.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage4_phase3.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage5.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage5_phase1.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage5_phase2.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage5_phase3.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage6.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage6_phase1.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage6_phase2.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage7.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage7_phase1.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage7_phase2.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage8.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage8_phase1.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage9.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage9_phase1.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_final_review.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s01_p1.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s01_p2.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s01_p3.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s01_review.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s02_p1.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s02_p2.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s02_p3.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s02_review.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s03_p1.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s03_p2.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s03_p3.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s03_review.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s04_p1.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s04_p2.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s04_p3.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s04_review.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s05_p1.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s05_p2.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s05_p3.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s05_review.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s06_p1.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s06_p2.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s06_p3.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s06_review.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s07_p1.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s07_p2.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s07_p3.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s07_review.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s08_p1.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s08_p2.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s08_p3.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s08_review.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s09_p1.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s09_p2.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s09_p3.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s09_review.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s10_p1.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s10_p2.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s10_p3.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s10_review.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s11_p1.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s11_p2.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s11_p3.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s11_p4.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s11_review.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s12_p1.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s12_p2.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s12_p3.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s12_review.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s13_p1.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s13_p2.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s13_p3.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s13_review.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s14_p1.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s14_p2.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s14_p3.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s14_review.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_whole_project.cjs",
+      "equivalent_command": "npm run validate:release",
+      "equivalence_test_ids": [
+        "S04-P3-T2-APPROVED-LOW-VALUE-RETIREMENT"
+      ],
+      "callers_migrated": true,
+      "behavior_parity_verified": false,
+      "approved_low_value_retirement": true,
+      "retirement_review": "config/memory_atlas_test_value_review.json",
+      "replacement_risk_coverage_verified": true
+    }
+  ],
   "deferred": {
     "task_id": "S04-P3-T3",
     "work": "Document the comprehensive old-command migration table and temporary compatibility policy.",

@@ -1,0 +1,3294 @@
+{
+  "schema_version": "memory_atlas.test_value_review.v1_2_1_s04_p3_t2",
+  "task_id": "S04-P3-T2",
+  "source_package": {
+    "name": "v1.2.1_四线16Stage质量收敛升级_TaskPack.zip",
+    "sha256": "db59f4db3ac02845fb3cde346a301cba64146c81c7ba19168f52c27e82ddd0f1"
+  },
+  "policy": {
+    "audit_before_delete": true,
+    "delete_only_approved_candidates": true,
+    "all_current_callers_migrated": true,
+    "behavior_risk_replacement_required": true,
+    "historical_recovery_via_git": true,
+    "raw_mutation": false,
+    "remote_push": false,
+    "deployment": false,
+    "branch_or_pr": false,
+    "cache_cleanup": false
+  },
+  "baseline": {
+    "validator_count": 177,
+    "python_test_count": 51,
+    "validator_bytes": 2902666
+  },
+  "summary": {
+    "deleted_validator_count": 139,
+    "deleted_python_test_count": 2,
+    "retained_validator_count": 38,
+    "retained_baseline_python_test_count": 49,
+    "added_python_test_count": 1,
+    "current_python_test_count": 50
+  },
+  "profile_commands": {
+    "fast": "npm run validate:fast",
+    "sync": "npm run validate:sync",
+    "ui": "npm run validate:ui",
+    "release": "npm run validate:release"
+  },
+  "added_paths": [
+    "tests/test_memory_atlas_test_value_audit.py"
+  ],
+  "candidates": [
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_part10_stage9.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_part10_stage9.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_part10_stage9.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_part1_stage0.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_part1_stage0.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_part1_stage0.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_part2_stage1.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_part2_stage1.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_part2_stage1.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_part3_stage2.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_part3_stage2.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_part3_stage2.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_part4_stage3.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_part4_stage3.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_part4_stage3.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_part5_stage4.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_part5_stage4.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_part5_stage4.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_part6_stage5.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_part6_stage5.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_part6_stage5.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_part7_stage6.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_part7_stage6.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_part7_stage6.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_part8_stage7.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_part8_stage7.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_part8_stage7.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_part9_stage8.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_part9_stage8.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_part9_stage8.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage0.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage0.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage0.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage1.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage1.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage1.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage10.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage10.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage10.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage10_phase1.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage10_phase1.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage10_phase1.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage1_phase1.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage1_phase1.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage1_phase1.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage1_phase2.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage1_phase2.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage1_phase2.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage1_phase3.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage1_phase3.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage1_phase3.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage1_phase4.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage1_phase4.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage1_phase4.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage1_phase5.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage1_phase5.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage1_phase5.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage2.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage2.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage2.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage2_phase1.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage2_phase1.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage2_phase1.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage2_phase2.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage2_phase2.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage2_phase2.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage2_phase3.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage2_phase3.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage2_phase3.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage2_phase4.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage2_phase4.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage2_phase4.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage3.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage3.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage3.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage3_phase1.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage3_phase1.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage3_phase1.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage3_phase2.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage3_phase2.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage3_phase2.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage4.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage4.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage4.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage4_phase1.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage4_phase1.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage4_phase1.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage4_phase2.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage4_phase2.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage4_phase2.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage5.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage5.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage5.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage5_phase1.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage5_phase1.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage5_phase1.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage6.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage6.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage6.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage6_phase1.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage6_phase1.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage6_phase1.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage7.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage7.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage7.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage7_phase1.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage7_phase1.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage7_phase1.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage8.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage8.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage8.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage8_phase1.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage8_phase1.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage8_phase1.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage9.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage9.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage9.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage9_phase1.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage9_phase1.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage9_phase1.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage9_phase2.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage9_phase2.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage9_phase2.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage9_phase3.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage9_phase3.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage9_phase3.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage9_phase4.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage9_phase4.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_6_stage9_phase4.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_final_upload.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_final_upload.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_final_upload.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_pre_stage0.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_pre_stage0.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_pre_stage0.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage0.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage0.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage0.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage0_phase1.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage0_phase1.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage0_phase1.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage0_phase2.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage0_phase2.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage0_phase2.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage0_phase3.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage0_phase3.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage0_phase3.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage1.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage1.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage1.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage10.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage10.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage10.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage10_phase1.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage10_phase1.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage10_phase1.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage1_phase1.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage1_phase1.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage1_phase1.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage1_phase2.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage1_phase2.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage1_phase2.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage1_phase3.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage1_phase3.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage1_phase3.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage1_phase4.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage1_phase4.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage1_phase4.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage2.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage2.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage2.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage2_phase1.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage2_phase1.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage2_phase1.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage2_phase2.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage2_phase2.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage2_phase2.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage3.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage3.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage3.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage3_phase1.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage3_phase1.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage3_phase1.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage3_phase2.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage3_phase2.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage3_phase2.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage4.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage4.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage4.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage4_phase1.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage4_phase1.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage4_phase1.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage4_phase2.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage4_phase2.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage4_phase2.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage4_phase3.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage4_phase3.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage4_phase3.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage5.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage5.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage5.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage5_phase1.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage5_phase1.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage5_phase1.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage5_phase2.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage5_phase2.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage5_phase2.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage5_phase3.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage5_phase3.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage5_phase3.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage6.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage6.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage6.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage6_phase1.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage6_phase1.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage6_phase1.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage6_phase2.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage6_phase2.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage6_phase2.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage7.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage7.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage7.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage7_phase1.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage7_phase1.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage7_phase1.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage7_phase2.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage7_phase2.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage7_phase2.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage8.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage8.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage8.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage8_phase1.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage8_phase1.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage8_phase1.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage9.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage9.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage9.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage9_phase1.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage9_phase1.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_1_7_stage9_phase1.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_final_review.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_final_review.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_final_review.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s01_p1.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s01_p1.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s01_p1.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s01_p2.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s01_p2.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s01_p2.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s01_p3.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s01_p3.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s01_p3.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s01_review.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s01_review.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s01_review.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s02_p1.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s02_p1.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s02_p1.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s02_p2.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s02_p2.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s02_p2.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s02_p3.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s02_p3.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s02_p3.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s02_review.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s02_review.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s02_review.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s03_p1.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s03_p1.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s03_p1.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s03_p2.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s03_p2.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s03_p2.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s03_p3.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s03_p3.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s03_p3.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s03_review.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s03_review.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s03_review.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s04_p1.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s04_p1.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s04_p1.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s04_p2.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s04_p2.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s04_p2.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s04_p3.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s04_p3.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s04_p3.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s04_review.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s04_review.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s04_review.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s05_p1.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s05_p1.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s05_p1.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s05_p2.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s05_p2.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s05_p2.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s05_p3.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s05_p3.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s05_p3.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s05_review.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s05_review.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s05_review.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s06_p1.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s06_p1.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s06_p1.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s06_p2.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s06_p2.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s06_p2.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s06_p3.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s06_p3.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s06_p3.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s06_review.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s06_review.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s06_review.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s07_p1.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s07_p1.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s07_p1.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s07_p2.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s07_p2.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s07_p2.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s07_p3.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s07_p3.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s07_p3.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s07_review.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s07_review.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s07_review.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s08_p1.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s08_p1.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s08_p1.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s08_p2.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s08_p2.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s08_p2.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s08_p3.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s08_p3.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s08_p3.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s08_review.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s08_review.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s08_review.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s09_p1.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s09_p1.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s09_p1.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s09_p2.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s09_p2.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s09_p2.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s09_p3.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s09_p3.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s09_p3.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s09_review.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s09_review.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s09_review.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s10_p1.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s10_p1.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s10_p1.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s10_p2.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s10_p2.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s10_p2.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s10_p3.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s10_p3.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s10_p3.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s10_review.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s10_review.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s10_review.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s11_p1.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s11_p1.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s11_p1.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s11_p2.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s11_p2.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s11_p2.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s11_p3.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s11_p3.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s11_p3.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s11_p4.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s11_p4.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s11_p4.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s11_review.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s11_review.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s11_review.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s12_p1.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s12_p1.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s12_p1.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s12_p2.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s12_p2.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s12_p2.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s12_p3.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s12_p3.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s12_p3.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s12_review.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s12_review.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s12_review.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s13_p1.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s13_p1.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s13_p1.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s13_p2.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s13_p2.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s13_p2.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s13_p3.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s13_p3.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s13_p3.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s13_review.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s13_review.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s13_review.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s14_p1.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s14_p1.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s14_p1.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s14_p2.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s14_p2.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s14_p2.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s14_p3.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s14_p3.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s14_p3.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s14_review.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s14_review.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_s14_review.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_whole_project.cjs",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:apps/memory-atlas/scripts/validate_memory_atlas_whole_project.cjs",
+        "config/atlasctl_script_migrations.json"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:release",
+      "reason": "Historical version/Stage aggregate or source-marker validator; it is not a current public entrypoint and its user, data, runner, and release risks are covered by the retained four-profile suite.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_whole_project.cjs",
+      "batch": "s04_p3_t2_historical_validators",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "tests/test_memory_atlas_v1_2_product_identity_contract.py",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:tests/test_memory_atlas_v1_2_product_identity_contract.py",
+        "tests/test_memory_atlas_test_value_audit.py"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "npm run validate:ui",
+      "reason": "Source-string identity assertions duplicate the retained real-browser Home multiviewport identity, focus, disclosure, responsive hierarchy, and navigation journey.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/tests/test_memory_atlas_v1_2_product_identity_contract.py",
+      "batch": "s04_p3_t2_source_marker_tests",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "tests/test_memory_atlas_visual_acceptance.py",
+      "category": "delete",
+      "references": [
+        "git:31e217c9c:tests/test_memory_atlas_visual_acceptance.py",
+        "tests/test_memory_atlas_test_value_audit.py"
+      ],
+      "runtime_dependency": "none after current executable callers are migrated to retained high-value tests/profiles",
+      "replacement_source": "python3 -m unittest tests.test_memory_atlas_acceptance_audit -q",
+      "reason": "The test only reruns the source-level visual audit; the retained acceptance audit invokes the same module and the UI profile supplies real-browser visual, performance, privacy, and workflow evidence.",
+      "restore_method": "git restore --source=31e217c9c -- OpenAIDatabase/tests/test_memory_atlas_visual_acceptance.py",
+      "batch": "s04_p3_t2_source_marker_tests",
+      "validation": [
+        "python3 -m unittest tests.test_memory_atlas_test_value_audit -q",
+        "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+      ],
+      "approval": "approved"
+    }
+  ],
+  "retained": [
+    {
+      "path": "apps/memory-atlas/scripts/validate_cross_board_shared_state_browser.cjs",
+      "risk_bindings": [
+        "user_journey"
+      ],
+      "reason": "Retained because executable behavior protects current user_journey coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_data_map_detail_proposal_browser.cjs",
+      "risk_bindings": [
+        "user_journey",
+        "data_integrity"
+      ],
+      "reason": "Retained because executable behavior protects current user_journey, data_integrity coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_data_map_structure_browser.cjs",
+      "risk_bindings": [
+        "user_journey",
+        "data_integrity",
+        "runner_contract"
+      ],
+      "reason": "Retained because executable behavior protects current user_journey, data_integrity, runner_contract coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_inspector_proposal.mjs",
+      "risk_bindings": [
+        "user_journey"
+      ],
+      "reason": "Retained because executable behavior protects current user_journey coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_stage6.mjs",
+      "risk_bindings": [
+        "runner_contract"
+      ],
+      "reason": "Retained because executable behavior protects current runner_contract coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_stage7.mjs",
+      "risk_bindings": [
+        "release_risk"
+      ],
+      "reason": "Retained because executable behavior protects current release_risk coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_stage8.cjs",
+      "risk_bindings": [
+        "release_risk"
+      ],
+      "reason": "Retained because executable behavior protects current release_risk coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_stage9.cjs",
+      "risk_bindings": [
+        "runner_contract"
+      ],
+      "reason": "Retained because executable behavior protects current runner_contract coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_1_s04_p1_t1_structure.mjs",
+      "risk_bindings": [
+        "runner_contract"
+      ],
+      "reason": "Retained because executable behavior protects current runner_contract coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_1_s04_p1_t2_mounts.mjs",
+      "risk_bindings": [
+        "runner_contract"
+      ],
+      "reason": "Retained because executable behavior protects current runner_contract coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_command_workflows.cjs",
+      "risk_bindings": [
+        "user_journey"
+      ],
+      "reason": "Retained because executable behavior protects current user_journey coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_home_multiviewport.cjs",
+      "risk_bindings": [
+        "user_journey"
+      ],
+      "reason": "Retained because executable behavior protects current user_journey coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_owner_daily_e2e.cjs",
+      "risk_bindings": [
+        "user_journey"
+      ],
+      "reason": "Retained because executable behavior protects current user_journey coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_proposal_e2e.cjs",
+      "risk_bindings": [
+        "user_journey"
+      ],
+      "reason": "Retained because executable behavior protects current user_journey coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_visual_models.mjs",
+      "risk_bindings": [
+        "user_journey"
+      ],
+      "reason": "Retained because executable behavior protects current user_journey coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_visual_workflows.cjs",
+      "risk_bindings": [
+        "user_journey"
+      ],
+      "reason": "Retained because executable behavior protects current user_journey coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_river_evidence_layers.mjs",
+      "risk_bindings": [
+        "user_journey"
+      ],
+      "reason": "Retained because executable behavior protects current user_journey coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_river_integration_browser.cjs",
+      "risk_bindings": [
+        "user_journey"
+      ],
+      "reason": "Retained because executable behavior protects current user_journey coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_river_interaction.mjs",
+      "risk_bindings": [
+        "user_journey"
+      ],
+      "reason": "Retained because executable behavior protects current user_journey coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_river_rendering.mjs",
+      "risk_bindings": [
+        "user_journey"
+      ],
+      "reason": "Retained because executable behavior protects current user_journey coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_river_spike_browser.cjs",
+      "risk_bindings": [
+        "user_journey"
+      ],
+      "reason": "Retained because executable behavior protects current user_journey coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_river_stage5.mjs",
+      "risk_bindings": [
+        "user_journey"
+      ],
+      "reason": "Retained because executable behavior protects current user_journey coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_starfield_integration_browser.cjs",
+      "risk_bindings": [
+        "user_journey"
+      ],
+      "reason": "Retained because executable behavior protects current user_journey coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_starfield_interaction.mjs",
+      "risk_bindings": [
+        "user_journey"
+      ],
+      "reason": "Retained because executable behavior protects current user_journey coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_starfield_mapping.mjs",
+      "risk_bindings": [
+        "user_journey"
+      ],
+      "reason": "Retained because executable behavior protects current user_journey coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_memory_starfield_spike_browser.cjs",
+      "risk_bindings": [
+        "user_journey"
+      ],
+      "reason": "Retained because executable behavior protects current user_journey coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_review_summary_iteration_browser.cjs",
+      "risk_bindings": [
+        "user_journey"
+      ],
+      "reason": "Retained because executable behavior protects current user_journey coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_search_2_0_browser.cjs",
+      "risk_bindings": [
+        "user_journey"
+      ],
+      "reason": "Retained because executable behavior protects current user_journey coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_shared_state_store.mjs",
+      "risk_bindings": [
+        "user_journey"
+      ],
+      "reason": "Retained because executable behavior protects current user_journey coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_stage7_performance_acceptance.cjs",
+      "risk_bindings": [
+        "release_risk"
+      ],
+      "reason": "Retained because executable behavior protects current release_risk coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_stage7_privacy_accessibility.cjs",
+      "risk_bindings": [
+        "release_risk"
+      ],
+      "reason": "Retained because executable behavior protects current release_risk coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_stage7_visual_acceptance.cjs",
+      "risk_bindings": [
+        "user_journey",
+        "release_risk"
+      ],
+      "reason": "Retained because executable behavior protects current user_journey, release_risk coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_stage8_local_app_packaging.cjs",
+      "risk_bindings": [
+        "release_risk"
+      ],
+      "reason": "Retained because executable behavior protects current release_risk coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_stage8_release_safety.cjs",
+      "risk_bindings": [
+        "release_risk"
+      ],
+      "reason": "Retained because executable behavior protects current release_risk coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_stage9_obsidian_iteration.cjs",
+      "risk_bindings": [
+        "runner_contract"
+      ],
+      "reason": "Retained because executable behavior protects current runner_contract coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_stage9_visual_semantics.cjs",
+      "risk_bindings": [
+        "user_journey"
+      ],
+      "reason": "Retained because executable behavior protects current user_journey coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_summary_iteration_closure_browser.cjs",
+      "risk_bindings": [
+        "user_journey"
+      ],
+      "reason": "Retained because executable behavior protects current user_journey coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "apps/memory-atlas/scripts/validate_universe_state_spike.mjs",
+      "risk_bindings": [
+        "runner_contract"
+      ],
+      "reason": "Retained because executable behavior protects current runner_contract coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "tests/test_agent_context_pack.py",
+      "risk_bindings": [
+        "data_integrity"
+      ],
+      "reason": "Retained because executable behavior protects current data_integrity coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "tests/test_atlasctl_modular_cli.py",
+      "risk_bindings": [
+        "runner_contract"
+      ],
+      "reason": "Retained because executable behavior protects current runner_contract coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "tests/test_atlasctl_runtime_core.py",
+      "risk_bindings": [
+        "runner_contract"
+      ],
+      "reason": "Retained because executable behavior protects current runner_contract coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "tests/test_atlasctl_script_consolidation.py",
+      "risk_bindings": [
+        "runner_contract"
+      ],
+      "reason": "Retained because executable behavior protects current runner_contract coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "tests/test_cloudflare_pages_access_preflight.py",
+      "risk_bindings": [
+        "release_risk"
+      ],
+      "reason": "Retained because executable behavior protects current release_risk coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "tests/test_codex_auto_update_launchagent.py",
+      "risk_bindings": [
+        "runner_contract"
+      ],
+      "reason": "Retained because executable behavior protects current runner_contract coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "tests/test_codex_history_exports.py",
+      "risk_bindings": [
+        "data_integrity"
+      ],
+      "reason": "Retained because executable behavior protects current data_integrity coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "tests/test_codex_memory_sync.py",
+      "risk_bindings": [
+        "data_integrity"
+      ],
+      "reason": "Retained because executable behavior protects current data_integrity coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "tests/test_codex_runtime_config.py",
+      "risk_bindings": [
+        "runner_contract"
+      ],
+      "reason": "Retained because executable behavior protects current runner_contract coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "tests/test_cross_agent_memory_adapter.py",
+      "risk_bindings": [
+        "data_integrity"
+      ],
+      "reason": "Retained because executable behavior protects current data_integrity coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "tests/test_memory_atlas_acceptance_audit.py",
+      "risk_bindings": [
+        "release_risk"
+      ],
+      "reason": "Retained because executable behavior protects current release_risk coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "tests/test_memory_atlas_app_runtime.py",
+      "risk_bindings": [
+        "user_journey"
+      ],
+      "reason": "Retained because executable behavior protects current user_journey coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "tests/test_memory_atlas_cloudflare_deploy.py",
+      "risk_bindings": [
+        "release_risk"
+      ],
+      "reason": "Retained because executable behavior protects current release_risk coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "tests/test_memory_atlas_data.py",
+      "risk_bindings": [
+        "data_integrity"
+      ],
+      "reason": "Retained because executable behavior protects current data_integrity coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "tests/test_memory_atlas_deployment.py",
+      "risk_bindings": [
+        "release_risk"
+      ],
+      "reason": "Retained because executable behavior protects current release_risk coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "tests/test_memory_atlas_goal_completion.py",
+      "risk_bindings": [
+        "release_risk"
+      ],
+      "reason": "Retained because executable behavior protects current release_risk coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "tests/test_memory_atlas_launcher.py",
+      "risk_bindings": [
+        "release_risk"
+      ],
+      "reason": "Retained because executable behavior protects current release_risk coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "tests/test_memory_atlas_owner_daily.py",
+      "risk_bindings": [
+        "user_journey"
+      ],
+      "reason": "Retained because executable behavior protects current user_journey coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "tests/test_memory_atlas_proposal_apply.py",
+      "risk_bindings": [
+        "user_journey"
+      ],
+      "reason": "Retained because executable behavior protects current user_journey coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "tests/test_memory_atlas_r7_public_raw.py",
+      "risk_bindings": [
+        "data_integrity",
+        "release_risk"
+      ],
+      "reason": "Retained because executable behavior protects current data_integrity, release_risk coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "tests/test_memory_atlas_r7_raw_integrity.py",
+      "risk_bindings": [
+        "data_integrity",
+        "release_risk"
+      ],
+      "reason": "Retained because executable behavior protects current data_integrity, release_risk coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "tests/test_memory_atlas_r7_recovery.py",
+      "risk_bindings": [
+        "release_risk"
+      ],
+      "reason": "Retained because executable behavior protects current release_risk coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "tests/test_memory_atlas_r7_release_parity.py",
+      "risk_bindings": [
+        "release_risk"
+      ],
+      "reason": "Retained because executable behavior protects current release_risk coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "tests/test_memory_atlas_r8_acceptance.py",
+      "risk_bindings": [
+        "release_risk"
+      ],
+      "reason": "Retained because executable behavior protects current release_risk coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "tests/test_memory_atlas_release_audit.py",
+      "risk_bindings": [
+        "release_risk"
+      ],
+      "reason": "Retained because executable behavior protects current release_risk coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "tests/test_memory_atlas_test_value_audit.py",
+      "risk_bindings": [
+        "runner_contract"
+      ],
+      "reason": "Retained because executable behavior protects current runner_contract coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "tests/test_memory_atlas_v1_2_home_layout_contract.py",
+      "risk_bindings": [
+        "user_journey"
+      ],
+      "reason": "Retained because executable behavior protects current user_journey coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "tests/test_memory_atlas_validator_profiles.py",
+      "risk_bindings": [
+        "runner_contract"
+      ],
+      "reason": "Retained because executable behavior protects current runner_contract coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "tests/test_memory_atlas_visual_workflows.py",
+      "risk_bindings": [
+        "user_journey"
+      ],
+      "reason": "Retained because executable behavior protects current user_journey coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "tests/test_openai_memory_analysis.py",
+      "risk_bindings": [
+        "data_integrity"
+      ],
+      "reason": "Retained because executable behavior protects current data_integrity coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "tests/test_personalization_architecture.py",
+      "risk_bindings": [
+        "data_integrity"
+      ],
+      "reason": "Retained because executable behavior protects current data_integrity coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "tests/test_s03p3_raw_manifest.py",
+      "risk_bindings": [
+        "data_integrity"
+      ],
+      "reason": "Retained because executable behavior protects current data_integrity coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "tests/test_s04p1_chatgpt_sync.py",
+      "risk_bindings": [
+        "data_integrity"
+      ],
+      "reason": "Retained because executable behavior protects current data_integrity coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "tests/test_s04p2_codex_agent_sync.py",
+      "risk_bindings": [
+        "data_integrity"
+      ],
+      "reason": "Retained because executable behavior protects current data_integrity coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "tests/test_s04p3_github_backup.py",
+      "risk_bindings": [
+        "release_risk"
+      ],
+      "reason": "Retained because executable behavior protects current release_risk coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "tests/test_s05p2_facet_extractor.py",
+      "risk_bindings": [
+        "data_integrity"
+      ],
+      "reason": "Retained because executable behavior protects current data_integrity coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "tests/test_s05p3_facet_evidence_refs.py",
+      "risk_bindings": [
+        "data_integrity"
+      ],
+      "reason": "Retained because executable behavior protects current data_integrity coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "tests/test_s06p1_cluster_builder.py",
+      "risk_bindings": [
+        "data_integrity"
+      ],
+      "reason": "Retained because executable behavior protects current data_integrity coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "tests/test_s06p2_low_value_loops.py",
+      "risk_bindings": [
+        "data_integrity"
+      ],
+      "reason": "Retained because executable behavior protects current data_integrity coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "tests/test_s06p3_opportunity_discovery.py",
+      "risk_bindings": [
+        "data_integrity"
+      ],
+      "reason": "Retained because executable behavior protects current data_integrity coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "tests/test_s07p1_economic_proxy.py",
+      "risk_bindings": [
+        "data_integrity"
+      ],
+      "reason": "Retained because executable behavior protects current data_integrity coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "tests/test_s07p2_information_roi.py",
+      "risk_bindings": [
+        "data_integrity"
+      ],
+      "reason": "Retained because executable behavior protects current data_integrity coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "tests/test_s07p3_formula_what_if.py",
+      "risk_bindings": [
+        "data_integrity"
+      ],
+      "reason": "Retained because executable behavior protects current data_integrity coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "tests/test_s08p1_agent_collaboration.py",
+      "risk_bindings": [
+        "data_integrity"
+      ],
+      "reason": "Retained because executable behavior protects current data_integrity coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "tests/test_s08p2_agent_authorization.py",
+      "risk_bindings": [
+        "data_integrity"
+      ],
+      "reason": "Retained because executable behavior protects current data_integrity coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "tests/test_s08p3_stage_flight.py",
+      "risk_bindings": [
+        "runner_contract"
+      ],
+      "reason": "Retained because executable behavior protects current runner_contract coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "tests/test_s09p1_latent_signals.py",
+      "risk_bindings": [
+        "data_integrity"
+      ],
+      "reason": "Retained because executable behavior protects current data_integrity coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "tests/test_s09p2_self_iteration.py",
+      "risk_bindings": [
+        "data_integrity"
+      ],
+      "reason": "Retained because executable behavior protects current data_integrity coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "tests/test_s09p3_decision_debt.py",
+      "risk_bindings": [
+        "data_integrity"
+      ],
+      "reason": "Retained because executable behavior protects current data_integrity coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    },
+    {
+      "path": "tests/test_s3pdt01_privacy.py",
+      "risk_bindings": [
+        "release_risk"
+      ],
+      "reason": "Retained because executable behavior protects current release_risk coverage rather than historical Stage prose alone.",
+      "current_dependency": "current profile, full regression, or active product/release workflow"
+    }
+  ]
+}

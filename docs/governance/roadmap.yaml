@@ -1006,3 +1006,259 @@ stages:
               - "真实 ChatGPT/Codex/Claude 独立消费证明属于后续 RUN 2–3，不在 RUN 1 内宣称。"
             rollback: "删除 RUN 1 新增 projection、manifest、route、tests 和本 phase governance；保留 RUN 0A clean baseline。"
             current_result: "run1_accepted_locally_after_p1_correction_pending_owner_review_before_commit_or_run2"
+  - stage_id: "MA-V121-S04"
+    name: "Memory Atlas v1.2.1 前端、CLI 与验证体系结构减负"
+    person_goal: "在功能冻结下收敛前端、CLI、脚本与 validator；Task Pack 当前完成 27/149，本 Stage 已完成 8/9。"
+    status: "in_progress"
+    estimated_hours: 9
+    estimated_pct: 88.89
+    stop_conditions:
+      - "一次 run 完成超过一个 Task"
+      - "删除历史 validator 或低价值测试而未完成 T2 价值证明"
+      - "建立 T3 旧命令迁移表或兼容 alias 后仍宣称只完成 T1"
+      - "raw/derived mutation、push、deploy、merge/rebase、branch 或 PR"
+    stop_gate:
+      gate_id: "ACC-MA-V121-S04"
+      status: "in_progress"
+      pass_conditions:
+        - "S04 P1/P2/P3 全部 9 Tasks 通过各自验收"
+        - "用户功能零回归，validator 默认公共面仅保留必要集合"
+      evidence_refs:
+        - "EVID-MA-V121-S04-P3-T1-DESIGN"
+        - "EVID-MA-V121-S04-P3-T1-TEST"
+        - "EVID-MA-V121-S04-P3-T2-DESIGN"
+        - "EVID-MA-V121-S04-P3-T2-TEST"
+    phases:
+      - phase_id: "MA-V121-S04-P1"
+        name: "前端 feature 边界与共享状态"
+        objective: "拆分 App 责任、保持单一挂载路径并统一跨视图状态。"
+        status: "completed"
+        estimated_hours: 3
+        estimated_pct: 100
+        stop_conditions:
+          - "出现第二套并行 UI 或状态实现"
+        stop_gate:
+          gate_id: "ACC-MA-V121-S04-P1"
+          status: "completed"
+          pass_conditions:
+            - "feature 边界、单一挂载和共享状态合同通过"
+          evidence_refs:
+            - "OpenAIDatabase/docs/superpowers/plans/2026-07-13-memory-atlas-v1-2-1-s04-p1-t3-shared-state.md"
+        tasks:
+          - task_id: "S04-P1-T1"
+            name: "按 feature 拆分 Memory Atlas 前端"
+            objective: "建立 provider-first feature 边界并保持现有行为。"
+            status: "completed"
+            estimated_hours: 1
+            estimated_pct: 100
+            dependencies: []
+            acceptance_ids:
+              - "ACC-MA-V121-S04-P1-T1"
+            test_commands:
+              - "node OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_1_s04_p1_t1_structure.mjs"
+            evidence_refs:
+              - "OpenAIDatabase/apps/memory-atlas/src/features"
+            risks:
+              - "拆分后运行路径发生行为漂移"
+            rollback: "git revert 对应本地 Task commit。"
+          - task_id: "S04-P1-T2"
+            name: "收敛单一 mounted UI 路径"
+            objective: "移除 orphan/duplicate path 并保持全部主流程可达。"
+            status: "completed"
+            estimated_hours: 1
+            estimated_pct: 100
+            dependencies:
+              - "S04-P1-T1"
+            acceptance_ids:
+              - "ACC-MA-V121-S04-P1-T2"
+            test_commands:
+              - "node OpenAIDatabase/apps/memory-atlas/scripts/validate_memory_atlas_v1_2_1_s04_p1_t2_mounts.mjs"
+            evidence_refs:
+              - "OpenAIDatabase/apps/memory-atlas/src/app/routeRegistry.tsx"
+            risks:
+              - "组件存在但用户路径不可达"
+            rollback: "git revert 对应本地 Task commit。"
+          - task_id: "S04-P1-T3"
+            name: "统一跨页面共享状态合同"
+            objective: "统一 selection、filter、time range、focus 与 inspector 状态所有权。"
+            status: "completed"
+            estimated_hours: 1
+            estimated_pct: 100
+            dependencies:
+              - "S04-P1-T2"
+            acceptance_ids:
+              - "ACC-MA-V121-S04-P1-T3"
+            test_commands:
+              - "node OpenAIDatabase/apps/memory-atlas/scripts/validate_shared_state_store.mjs"
+            evidence_refs:
+              - "OpenAIDatabase/docs/superpowers/plans/2026-07-13-memory-atlas-v1-2-1-s04-p1-t3-shared-state.md"
+            risks:
+              - "跨 board 状态语义不一致"
+            rollback: "git revert 对应本地 Task commit。"
+      - phase_id: "MA-V121-S04-P2"
+        name: "atlasctl 与脚本执行结构减负"
+        objective: "把巨型 atlasctl 拆为职责模块、统一 runtime core 与 child execution。"
+        status: "completed"
+        estimated_hours: 3
+        estimated_pct: 100
+        stop_conditions:
+          - "历史 CLI stdout、stderr 或 exit code 漂移"
+        stop_gate:
+          gate_id: "ACC-MA-V121-S04-P2"
+          status: "completed"
+          pass_conditions:
+            - "模块化 CLI、runtime core 与脚本迁移门禁均通过"
+          evidence_refs:
+            - "OpenAIDatabase/tests/test_atlasctl_modular_cli.py"
+            - "OpenAIDatabase/tests/test_atlasctl_runtime_core.py"
+            - "OpenAIDatabase/tests/test_atlasctl_script_consolidation.py"
+        tasks:
+          - task_id: "S04-P2-T1"
+            name: "模块化 atlasctl CLI"
+            objective: "将 atlasctl 拆分为 sync/analyze/build/validate/push/apply 与公共 parser/dispatch。"
+            status: "completed"
+            estimated_hours: 1
+            estimated_pct: 100
+            dependencies:
+              - "S04-P1-T3"
+            acceptance_ids:
+              - "ACC-MA-V121-S04-P2-T1"
+            test_commands:
+              - "python3 -m unittest OpenAIDatabase.tests.test_atlasctl_modular_cli -q"
+            evidence_refs:
+              - "OpenAIDatabase/scripts/memory_atlas_cli"
+            risks:
+              - "兼容入口与 direct-import API 漂移"
+            rollback: "git revert 对应本地 Task commit。"
+          - task_id: "S04-P2-T2"
+            name: "建立 atlasctl runtime core"
+            objective: "统一配置、状态、错误码与机器事件，同时保持业务 stdout 不变。"
+            status: "completed"
+            estimated_hours: 1
+            estimated_pct: 100
+            dependencies:
+              - "S04-P2-T1"
+            acceptance_ids:
+              - "ACC-MA-V121-S04-P2-T2"
+            test_commands:
+              - "python3 -m unittest OpenAIDatabase.tests.test_atlasctl_runtime_core -q"
+            evidence_refs:
+              - "OpenAIDatabase/config/atlasctl_runtime.json"
+            risks:
+              - "机器日志污染业务 stdout"
+            rollback: "git revert 对应本地 Task commit。"
+          - task_id: "S04-P2-T3"
+            name: "收敛脚本执行与建立删除门禁"
+            objective: "盘点 208 个 scoped scripts，统一 child adapter，并对未来删除 fail closed。"
+            status: "completed"
+            estimated_hours: 1
+            estimated_pct: 100
+            dependencies:
+              - "S04-P2-T2"
+            acceptance_ids:
+              - "ACC-MA-V121-S04-P2-T3"
+            test_commands:
+              - "python3 -m unittest OpenAIDatabase.tests.test_atlasctl_script_consolidation -q"
+            evidence_refs:
+              - "OpenAIDatabase/config/atlasctl_script_migrations.json"
+            risks:
+              - "无等价命令、调用方迁移和 parity 证据却删除脚本"
+            rollback: "git revert 对应本地 Task commit。"
+      - phase_id: "MA-V121-S04-P3"
+        name: "validator profiles 与低价值测试清理"
+        objective: "先收敛公共 validator 入口，再独立完成价值评估与旧命令迁移。"
+        status: "in_progress"
+        estimated_hours: 3
+        estimated_pct: 66.67
+        stop_conditions:
+          - "单个 Task run 同时执行测试价值处置与 T3 全量旧命令兼容迁移"
+        stop_gate:
+          gate_id: "ACC-MA-V121-S04-P3"
+          status: "in_progress"
+          pass_conditions:
+            - "四 profile、低价值测试处置与旧命令迁移全部通过"
+          evidence_refs:
+            - "EVID-MA-V121-S04-P3-T1-DESIGN"
+            - "EVID-MA-V121-S04-P3-T1-TEST"
+            - "EVID-MA-V121-S04-P3-T2-DESIGN"
+            - "EVID-MA-V121-S04-P3-T2-TEST"
+        tasks:
+          - task_id: "S04-P3-T1"
+            name: "建立 fast、sync、ui、release 四层 validator profiles"
+            objective: "将 178 个历史 public validate aliases 收敛为四个配置驱动 profile。"
+            status: "completed"
+            estimated_hours: 1
+            estimated_pct: 100
+            dependencies:
+              - "S04-P2-T3"
+            acceptance_ids:
+              - "ACC-MA-V121-S04-P3-T1"
+            acceptance:
+              - acceptance_id: "ACC-MA-V121-S04-P3-T1"
+                description: "package 仅公开 fast/sync/ui/release；关键 sync/UI/release 行为、fail-fast、安全和恢复合同通过。"
+                evidence_refs:
+                  - "EVID-MA-V121-S04-P3-T1-DESIGN"
+                  - "EVID-MA-V121-S04-P3-T1-TEST"
+            test_commands:
+              - "npm --prefix OpenAIDatabase/apps/memory-atlas run validate:fast"
+              - "npm --prefix OpenAIDatabase/apps/memory-atlas run validate:sync"
+              - "npm --prefix OpenAIDatabase/apps/memory-atlas run validate:ui"
+              - "npm --prefix OpenAIDatabase/apps/memory-atlas run validate:release -- --plan"
+              - "python3 -m unittest discover -s OpenAIDatabase/tests -q"
+            test_results:
+              - "fast 4/4, sync 6/6, ui 12/12 and release plan 1/1 PASS on the original Task worktree"
+              - "current-main detached recovery integration: 30 targeted tests and 283 full Python tests PASS"
+            evidence_refs:
+              - "EVID-MA-V121-S04-P3-T1-DESIGN"
+              - "EVID-MA-V121-S04-P3-T1-TEST"
+            risks:
+              - "完整 release audit 留到整体 remote/recovery 交付边界，不把 plan 当发布 PASS"
+              - "历史 validator 文件仍保留，删除和值评估属于 T2"
+            rollback: "git revert 本 Task 本地 commit；不删除 raw/derived 或历史 validator。"
+            current_result: "complete_local_only_26_of_149_pending_s04_p3_t2"
+          - task_id: "S04-P3-T2"
+            name: "评估并处置低价值 validator/tests"
+            objective: "基于真实用户路径、调用方和覆盖证据决定保留、合并或删除。"
+            status: "completed"
+            estimated_hours: 1
+            estimated_pct: 100
+            dependencies:
+              - "S04-P3-T1"
+            acceptance_ids:
+              - "ACC-MA-V121-S04-P3-T2"
+            acceptance:
+              - acceptance_id: "ACC-MA-V121-S04-P3-T2"
+                description: "保留集必须绑定用户旅程、数据完整性或发布风险；删除项必须有替代证据、零当前 caller 和逐项恢复命令。"
+                evidence_refs:
+                  - "EVID-MA-V121-S04-P3-T2-DESIGN"
+                  - "EVID-MA-V121-S04-P3-T2-TEST"
+            test_commands:
+              - "python3 scripts/audit_memory_atlas_test_value.py --database-dir ."
+              - "python3 -m unittest tests.test_memory_atlas_validator_profiles tests.test_atlasctl_script_consolidation tests.test_memory_atlas_test_value_audit -q"
+              - "npm run validate:fast && npm run validate:sync && npm run validate:ui"
+              - "python3 -m unittest discover -s OpenAIDatabase/tests -p 'test_*.py' -q"
+            test_results:
+              - "strict value audit PASS；35 项目标 profile/migration/value tests PASS；完整 Python 287/287 PASS"
+              - "fast 4/4、sync 6/6、ui 12/12 与 release plan 1/1 PASS；真实浏览器用户路径、raw integrity、credential、lint/build 均无回归"
+            evidence_refs:
+              - "EVID-MA-V121-S04-P3-T2-DESIGN"
+              - "EVID-MA-V121-S04-P3-T2-TEST"
+            risks:
+              - "误删唯一行为覆盖或历史恢复证据"
+            rollback: "git revert 本 Task 本地 commit，或按 review contract 中的逐项 git restore 命令从 31e217c9c 恢复。"
+            current_result: "complete_local_only_27_of_149_pending_s04_p3_t3"
+          - task_id: "S04-P3-T3"
+            name: "完成旧命令迁移表与必要兼容策略"
+            objective: "逐项迁移剩余 caller，并明确永久移除或短期兼容边界。"
+            status: "planned"
+            estimated_hours: 1
+            estimated_pct: 0
+            dependencies:
+              - "S04-P3-T2"
+            acceptance_ids:
+              - "ACC-MA-V121-S04-P3-T3"
+            test_commands: []
+            evidence_refs: []
+            risks:
+              - "保留无期限 legacy aliases 或生成不可执行命令"
+            rollback: "恢复行为等价的 direct command；不恢复 178 个默认 public aliases。"

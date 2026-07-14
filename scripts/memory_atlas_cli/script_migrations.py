@@ -49,7 +49,7 @@ REQUIRED_DELETION_POLICY = {
     "equivalent_command_required": True,
     "equivalence_test_required": True,
     "all_callers_migrated_required": True,
-    "behavior_parity_required": True,
+    "behavior_parity_or_approved_low_value_retirement_required": True,
 }
 REQUIRED_SAFETY = {
     "raw_mutation": False,
@@ -58,7 +58,13 @@ REQUIRED_SAFETY = {
     "branch_or_pr": False,
     "cache_cleanup": False,
 }
-REQUIRED_PARITY_ASSERTIONS = {"stdout", "stderr", "exit_code"}
+REQUIRED_RETIREMENT_ASSERTIONS = {
+    "approved_deletion_schema",
+    "baseline_asset_identity",
+    "all_current_callers_migrated",
+    "risk_replacement",
+}
+LOW_VALUE_RETIREMENT_REVIEW = "config/memory_atlas_test_value_review.json"
 RETAINED_DEFAULT_DELETION_BLOCKER = "equivalent_command_callers_and_behavior_parity_not_all_proven"
 
 
@@ -281,9 +287,9 @@ def _validate_equivalence_tests(
         if (
             not isinstance(assertions, list)
             or not all(isinstance(assertion, str) for assertion in assertions)
-            or not REQUIRED_PARITY_ASSERTIONS.issubset(set(assertions))
+            or not REQUIRED_RETIREMENT_ASSERTIONS.issubset(set(assertions))
         ):
-            errors.append(f"equivalence test {label} must assert stdout/stderr/exit_code")
+            errors.append(f"equivalence test {label} must assert approved retirement evidence")
             valid = False
         if valid:
             registered.add(test_id)
@@ -398,8 +404,16 @@ def validate_script_migration_map(payload: dict[str, Any], database_dir: Path) -
                     errors.append(f"deleted script {label} has unregistered equivalence test: {test_id}")
         if item.get("callers_migrated") is not True:
             errors.append(f"deleted script {label} requires callers_migrated=true")
-        if item.get("behavior_parity_verified") is not True:
-            errors.append(f"deleted script {label} requires behavior_parity_verified=true")
+        behavior_parity = item.get("behavior_parity_verified") is True
+        approved_retirement = (
+            item.get("approved_low_value_retirement") is True
+            and item.get("retirement_review") == LOW_VALUE_RETIREMENT_REVIEW
+            and item.get("replacement_risk_coverage_verified") is True
+        )
+        if not behavior_parity and not approved_retirement:
+            errors.append(
+                f"deleted script {label} requires behavior parity or approved low-value retirement"
+            )
 
     summary = payload.get("summary")
     if not isinstance(summary, dict):
