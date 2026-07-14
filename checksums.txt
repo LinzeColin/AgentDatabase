@@ -1,0 +1,4 @@
+c90d75abd906165bf868e16b22ab842176dac04b4ab1069f1725d2f33defd89c  codex-token-history-migration-pack-20260630.tar.gz
+0b7f5d53e8c88a5cca77bf7cfd0898868fd3aa90c748cb8b715c01b3cad4909a  codex-numeric-token-usage-export-20260630.tar.gz
+bb8489bc3705f9f23d735608b14baf4844ceb6c7d9c4a85d6774c74680ea31f9  old-mac-session-history-20260630.tar.gz
+1c5b34148fc1f9a23925f910c251bd1455550756a84451fbe2665806adf6ceab  current-mac-session-history-20260630.tar.gz
