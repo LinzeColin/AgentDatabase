@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Audit the bounded, owner-readable Memory Atlas document plane."""
+"""Audit the bounded Memory Atlas human plane and machine truth index."""
 
 from __future__ import annotations
 
@@ -55,6 +55,55 @@ CHANGE_USAGE_MAP_REQUIRED_SECTIONS = {
     "## 尚未交付",
     "## 后续路线",
     "## 交付规则",
+}
+MACHINE_TRUTH_INDEX_CONTRACT = Path("config/memory_atlas_machine_truth_index.json")
+MACHINE_TRUTH_INDEX_SCHEMA = "memory_atlas.machine_truth_index.v1_2_1_s05_p2_t1"
+MACHINE_TRUTH_INDEX_LIMITS = {"max_lines": 80, "max_bytes": 8500}
+MACHINE_TRUTH_CONTRACT_KEYS = {
+    "schema_version",
+    "task_id",
+    "acceptance",
+    "max_lines",
+    "max_bytes",
+    "ownership_rules",
+    "domains",
+}
+MACHINE_TRUTH_DOMAIN_KEYS = {"id", "label", "purpose", "entries"}
+MACHINE_TRUTH_DOMAIN_TARGETS = {
+    "requirements": (
+        "docs/governance/roadmap.yaml",
+        "config/memory_atlas_test_value_review.json",
+    ),
+    "source": ("config/data_sources/source_registry.json",),
+    "model": (
+        "docs/governance/model_registry.yaml",
+        "docs/governance/formula_registry.yaml",
+        "docs/governance/parameter_registry.csv",
+        "docs/governance/project.yaml",
+    ),
+    "acceptance": (
+        "config/memory_atlas_validator_profiles.json",
+        "tests",
+    ),
+    "evidence": (
+        "docs/governance/events.jsonl",
+        "机器治理/证据与日志",
+    ),
+}
+MACHINE_TRUTH_ENTRY_KEYS = {"path", "role", "owner", "mutability", "target_kind"}
+MACHINE_TRUTH_MUTABILITY = {
+    "canonical_editable",
+    "generated_projection",
+    "test_assertions",
+    "append_only_evidence",
+    "evidence_directory",
+}
+MACHINE_TRUTH_REQUIRED_SECTIONS = {
+    "## 结论",
+    "## 操作",
+    "## 五域索引",
+    "## 变更规则",
+    "## 边界",
 }
 MOJIBAKE_MARKERS = ("\ufffd", "锟斤拷", "烫烫烫", "屯屯屯")
 INLINE_LINK_RE = re.compile(
@@ -291,6 +340,126 @@ def audit_change_usage_map(database_dir: Path) -> tuple[dict[str, object], list[
     }, errors
 
 
+def audit_machine_truth_index(database_dir: Path) -> tuple[dict[str, object], list[str]]:
+    contract_path = database_dir / MACHINE_TRUTH_INDEX_CONTRACT
+    if not contract_path.is_file():
+        return {}, [f"缺少机器真相索引合同：{MACHINE_TRUTH_INDEX_CONTRACT.as_posix()}"]
+    try:
+        contract = json.loads(contract_path.read_text(encoding="utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        return {}, [f"机器真相索引合同无法解析：{exc}"]
+
+    errors: list[str] = []
+    if set(contract) != MACHINE_TRUTH_CONTRACT_KEYS:
+        errors.append("机器真相索引合同只能保存 schema、边界、所有权规则与五域")
+    if contract.get("schema_version") != MACHINE_TRUTH_INDEX_SCHEMA:
+        errors.append(f"机器真相索引 schema 不匹配：{contract.get('schema_version')}")
+    if contract.get("task_id") != "S05-P2-T1":
+        errors.append("机器真相索引必须绑定 S05-P2-T1")
+    if contract.get("acceptance") != "同一参数、公式、状态只能有一个可执行源。":
+        errors.append("机器真相索引 acceptance 不得弱化")
+    for field, expected in MACHINE_TRUTH_INDEX_LIMITS.items():
+        if contract.get(field) != expected:
+            errors.append(f"机器真相索引合同不得放宽 {field}：必须为 {expected}")
+
+    domains = contract.get("domains")
+    valid_domains = [item for item in domains if isinstance(item, dict)] if isinstance(domains, list) else []
+    if not isinstance(domains, list) or len(valid_domains) != len(domains):
+        errors.append("机器真相索引 domains 必须全部为对象")
+    domain_ids = tuple(str(item.get("id") or "") for item in valid_domains)
+    expected_domain_ids = tuple(MACHINE_TRUTH_DOMAIN_TARGETS)
+    if domain_ids != expected_domain_ids:
+        errors.append("机器真相索引必须精确定义 requirements/source/model/acceptance/evidence 五域")
+
+    seen_paths: set[str] = set()
+    domain_counts: dict[str, int] = {}
+    for domain in valid_domains:
+        domain_id = str(domain.get("id") or "")
+        if set(domain) != MACHINE_TRUTH_DOMAIN_KEYS:
+            errors.append(f"机器真相域只能保存 id、label、purpose 与 entries：{domain_id}")
+        entries = domain.get("entries")
+        valid_entries = [item for item in entries if isinstance(item, dict)] if isinstance(entries, list) else []
+        if not isinstance(entries, list) or len(valid_entries) != len(entries):
+            errors.append(f"机器真相域 entries 必须全部为对象：{domain_id}")
+        domain_counts[domain_id] = len(valid_entries)
+        expected_paths = MACHINE_TRUTH_DOMAIN_TARGETS.get(domain_id, ())
+        actual_paths = tuple(str(item.get("path") or "") for item in valid_entries)
+        if actual_paths != expected_paths:
+            errors.append(f"机器真相索引 {domain_id} canonical targets 不得变更：{actual_paths}")
+        if not str(domain.get("label") or "").strip() or not str(domain.get("purpose") or "").strip():
+            errors.append(f"机器真相域缺少 label 或 purpose：{domain_id}")
+        for entry in valid_entries:
+            if set(entry) != MACHINE_TRUTH_ENTRY_KEYS:
+                errors.append(f"机器真相索引条目只能保存路径与所有权字段：{domain_id}/{entry.get('path')}")
+            raw_path = str(entry.get("path") or "")
+            candidate = Path(raw_path)
+            if not raw_path or candidate.is_absolute() or ".." in candidate.parts:
+                errors.append(f"机器真相索引路径必须为项目内相对路径：{raw_path}")
+                continue
+            if raw_path in seen_paths:
+                errors.append(f"机器真相索引目标重复：{raw_path}")
+            seen_paths.add(raw_path)
+            target = database_dir / candidate
+            target_kind = str(entry.get("target_kind") or "")
+            if target_kind == "file" and not target.is_file():
+                errors.append(f"机器真相索引文件目标不存在：{raw_path}")
+            elif target_kind == "directory" and not target.is_dir():
+                errors.append(f"机器真相索引目录目标不存在：{raw_path}")
+            elif target_kind not in {"file", "directory"}:
+                errors.append(f"机器真相索引 target_kind 无效：{raw_path}/{target_kind}")
+            if not str(entry.get("role") or "").strip() or not str(entry.get("owner") or "").strip():
+                errors.append(f"机器真相索引条目缺少 role 或 owner：{raw_path}")
+            if entry.get("mutability") not in MACHINE_TRUTH_MUTABILITY:
+                errors.append(f"机器真相索引 mutability 无效：{raw_path}/{entry.get('mutability')}")
+
+    path = database_dir / "机器治理" / "README.md"
+    text = ""
+    if not path.is_file():
+        errors.append("缺少机器真相索引：机器治理/README.md")
+    else:
+        try:
+            text = path.read_text(encoding="utf-8")
+        except UnicodeDecodeError as exc:
+            errors.append(f"机器治理/README.md 不是有效 UTF-8：{exc}")
+    lines = text.splitlines()
+    if text and not text.startswith("# Memory Atlas 机器真相索引\n"):
+        errors.append("机器真相索引缺少精确标题")
+    for section in MACHINE_TRUTH_REQUIRED_SECTIONS:
+        if section not in lines:
+            errors.append(f"机器真相索引缺少段落：{section}")
+    rendered_domains = tuple(
+        match.group(1)
+        for line in lines
+        if (match := re.fullmatch(r"### (requirements|source|model|acceptance|evidence)｜.+", line))
+    )
+    if rendered_domains != expected_domain_ids:
+        errors.append("机器真相索引必须按固定顺序直接展示五个真相域")
+    for raw_path in seen_paths:
+        if f"[{raw_path}]" not in text:
+            errors.append(f"机器真相索引未呈现 canonical target：{raw_path}")
+    max_lines = int(contract.get("max_lines") or 0)
+    max_bytes = int(contract.get("max_bytes") or 0)
+    if len(lines) > max_lines:
+        errors.append(f"机器真相索引超过 {max_lines} 行：{len(lines)}")
+    if len(text.encode("utf-8")) > max_bytes:
+        errors.append(f"机器真相索引超过 {max_bytes} bytes：{len(text.encode('utf-8'))}")
+    legacy_validator_prefix = "validate:" + "v1.2-"
+    for marker in ("历史复验兼容记录", legacy_validator_prefix, "No GitHub main upload", "phase_", "stage_s"):
+        if marker in text:
+            errors.append(f"机器真相索引复制了旧状态或命令：{marker}")
+    if re.search(r"\b(?:PARAM|FORM)-[A-Z0-9-]+\b", text):
+        errors.append("机器真相索引复制了参数或公式 ID")
+
+    return {
+        "file": "机器治理/README.md",
+        "bytes": len(text.encode("utf-8")),
+        "lines": len(lines),
+        "domain_count": len(valid_domains),
+        "domain_counts": domain_counts,
+        "target_count": len(seen_paths),
+    }, errors
+
+
 def normalize_reference_label(value: str) -> str:
     return " ".join(value.split()).casefold()
 
@@ -425,6 +594,8 @@ def audit(database_dir: Path) -> dict[str, object]:
     errors.extend(owner_entry_errors)
     change_usage_map_report, change_usage_map_errors = audit_change_usage_map(database_dir)
     errors.extend(change_usage_map_errors)
+    machine_truth_index_report, machine_truth_index_errors = audit_machine_truth_index(database_dir)
+    errors.extend(machine_truth_index_errors)
 
     return {
         "status": "PASS" if not errors else "FAIL",
@@ -434,6 +605,7 @@ def audit(database_dir: Path) -> dict[str, object]:
         "files": file_reports,
         "owner_entries": owner_entry_reports,
         "change_usage_map": change_usage_map_report,
+        "machine_truth_index": machine_truth_index_report,
         "errors": errors,
     }
 

@@ -19,6 +19,7 @@ if str(ROOT_SCRIPTS) not in sys.path:
 from audit_memory_atlas_human_plane import (
     CHANGE_USAGE_MAP_CONTRACT,
     EXPECTED_FILES,
+    MACHINE_TRUTH_INDEX_CONTRACT,
     OWNER_ENTRY_CONTRACT,
     audit,
 )
@@ -28,6 +29,46 @@ VALID_BODY = "这是面向所有者的中文结论和执行说明，包含明确
 
 
 class HumanPlaneAuditTests(unittest.TestCase):
+    @staticmethod
+    def valid_machine_truth_index_text(contract: dict[str, object]) -> str:
+        lines = [
+            "# Memory Atlas 机器真相索引",
+            "",
+            "## 结论",
+            "",
+            "- 本页只保存路径与职责，不复制执行事实。",
+            "",
+            "## 操作",
+            "",
+            "- 修改事实时打开对应 canonical target。",
+            "",
+            "## 五域索引",
+        ]
+        domains = contract["domains"]
+        assert isinstance(domains, list)
+        for domain in domains:
+            assert isinstance(domain, dict)
+            lines.extend(["", f"### {domain['id']}｜{domain['label']}", ""])
+            entries = domain["entries"]
+            assert isinstance(entries, list)
+            for entry in entries:
+                assert isinstance(entry, dict)
+                path = str(entry["path"])
+                lines.append(f"- [{path}](../{path})")
+        lines.extend(
+            [
+                "",
+                "## 变更规则",
+                "",
+                "- 只编辑 canonical owner。",
+                "",
+                "## 边界",
+                "",
+                "- 本 Task 不删除历史目录或证据。",
+            ]
+        )
+        return "\n".join(lines) + "\n"
+
     @staticmethod
     def valid_change_map_text(contract: dict[str, object]) -> str:
         lines = [
@@ -111,6 +152,25 @@ class HumanPlaneAuditTests(unittest.TestCase):
         change_map_contract = json.loads((ROOT / CHANGE_USAGE_MAP_CONTRACT).read_text(encoding="utf-8"))
         (database_dir / CHANGE_USAGE_MAP_CONTRACT).write_text(
             json.dumps(change_map_contract, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
+        machine_truth_contract = json.loads((ROOT / MACHINE_TRUTH_INDEX_CONTRACT).read_text(encoding="utf-8"))
+        (database_dir / MACHINE_TRUTH_INDEX_CONTRACT).write_text(
+            json.dumps(machine_truth_contract, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
+        for domain in machine_truth_contract["domains"]:
+            for entry in domain["entries"]:
+                target = database_dir / entry["path"]
+                if entry["target_kind"] == "directory":
+                    target.mkdir(parents=True, exist_ok=True)
+                else:
+                    target.parent.mkdir(parents=True, exist_ok=True)
+                    target.write_text("test fixture\n", encoding="utf-8")
+        machine_dir = database_dir / "机器治理"
+        machine_dir.mkdir(exist_ok=True)
+        (machine_dir / "README.md").write_text(
+            self.valid_machine_truth_index_text(machine_truth_contract),
             encoding="utf-8",
         )
         (human_dir / "版本路线图.md").write_text(
@@ -286,6 +346,55 @@ class HumanPlaneAuditTests(unittest.TestCase):
         self.assertEqual(report["status"], "FAIL")
         self.assertTrue(any("不得放宽 max_lines" in error for error in report["errors"]))
 
+    def test_machine_truth_index_requires_exact_five_domains(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            database_dir = self.make_database(Path(temp_dir))
+            contract_path = database_dir / MACHINE_TRUTH_INDEX_CONTRACT
+            contract = json.loads(contract_path.read_text(encoding="utf-8"))
+            contract["domains"] = contract["domains"][:-1]
+            contract_path.write_text(json.dumps(contract, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            report = audit(database_dir)
+
+        self.assertEqual(report["status"], "FAIL")
+        self.assertTrue(any("精确定义 requirements/source/model/acceptance/evidence 五域" in error for error in report["errors"]))
+
+    def test_machine_truth_index_rejects_fact_fields(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            database_dir = self.make_database(Path(temp_dir))
+            contract_path = database_dir / MACHINE_TRUTH_INDEX_CONTRACT
+            contract = json.loads(contract_path.read_text(encoding="utf-8"))
+            contract["current_status"] = "complete"
+            contract["domains"][0]["status"] = "complete"
+            contract["domains"][0]["entries"][0]["status"] = "complete"
+            contract_path.write_text(json.dumps(contract, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            report = audit(database_dir)
+
+        self.assertEqual(report["status"], "FAIL")
+        self.assertTrue(any("合同只能保存 schema、边界、所有权规则与五域" in error for error in report["errors"]))
+        self.assertTrue(any("真相域只能保存 id、label、purpose 与 entries" in error for error in report["errors"]))
+        self.assertTrue(any("只能保存路径与所有权字段" in error for error in report["errors"]))
+
+    def test_machine_truth_index_rejects_missing_target(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            database_dir = self.make_database(Path(temp_dir))
+            (database_dir / "config" / "data_sources" / "source_registry.json").unlink()
+            report = audit(database_dir)
+
+        self.assertEqual(report["status"], "FAIL")
+        self.assertTrue(any("机器真相索引文件目标不存在" in error for error in report["errors"]))
+
+    def test_machine_truth_index_cannot_weaken_limits(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            database_dir = self.make_database(Path(temp_dir))
+            contract_path = database_dir / MACHINE_TRUTH_INDEX_CONTRACT
+            contract = json.loads(contract_path.read_text(encoding="utf-8"))
+            contract["max_lines"] = 800
+            contract_path.write_text(json.dumps(contract, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            report = audit(database_dir)
+
+        self.assertEqual(report["status"], "FAIL")
+        self.assertTrue(any("不得放宽 max_lines" in error for error in report["errors"]))
+
     def test_current_owner_entries_are_renderer_owned_and_concise(self) -> None:
         import lean_governance
         import validate_project_governance
@@ -303,6 +412,9 @@ class HumanPlaneAuditTests(unittest.TestCase):
                 self.assertEqual((ROOT / filename).read_text(encoding="utf-8"), expected)
         self.assertTrue(all(int(item["next_heading_line"]) <= 18 for item in report["owner_entries"]))
         self.assertEqual(report["change_usage_map"]["workflow_count"], 5)
+        self.assertEqual(report["machine_truth_index"]["domain_count"], 5)
+        self.assertEqual(report["machine_truth_index"]["target_count"], 11)
+        self.assertIn("机器治理/README.md", rendered)
         self.assertIn("## 本次交付改变了什么", rendered["人类可读/版本路线图.md"])
         self.assertIn("## 尚未交付", rendered["人类可读/版本路线图.md"])
 

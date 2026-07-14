@@ -562,6 +562,26 @@ features:
     evidence_refs:
       - "EVID-MA-V121-S05-P1-T3-MAP"
       - "EVID-MA-V121-S05-P1-T3-TEST"
+  - feature_id: "FEAT-MA-V121-S05-P2-T1"
+    name: "Memory Atlas 五域机器真相浅层索引"
+    description: "v1.2.1 Task Pack 当前完成 32/149；机器治理根 README 由结构化合同确定性生成，只路由 requirements、source、model、acceptance、evidence 五域和 11 个 canonical targets，不复制参数值、公式表达式、运行状态、测试断言或数据内容。"
+    status: "active"
+    fact_level: "EXTRACTED"
+    code_refs:
+      - "scripts/lean_governance.py"
+      - "OpenAIDatabase/scripts/audit_memory_atlas_human_plane.py"
+    config_refs:
+      - "OpenAIDatabase/config/memory_atlas_machine_truth_index.json"
+    source_refs:
+      - "OpenAIDatabase/机器治理/README.md"
+    owner_actions:
+      - "按问题进入对应真相域，只在 canonical_editable owner 修改事实；projection、tests 与 evidence 不建立第二个可执行源。"
+    test_refs:
+      - "python3 -B -m unittest tests.test_memory_atlas_human_plane -q"
+      - "python3.12 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+    evidence_refs:
+      - "EVID-MA-V121-S05-P2-T1-INDEX"
+      - "EVID-MA-V121-S05-P2-T1-TEST"
 models:
   -
     model_id: "MOD-001"
@@ -4645,6 +4665,16 @@ evidence_refs:
     fact_level: "EXTRACTED"
   -
     evidence_id: "EVID-MA-V121-S05-P1-T3-TEST"
+    kind: "test"
+    ref: "python3 -B -m unittest tests.test_memory_atlas_human_plane -q"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S05-P2-T1-INDEX"
+    kind: "config"
+    ref: "OpenAIDatabase/config/memory_atlas_machine_truth_index.json"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S05-P2-T1-TEST"
     kind: "test"
     ref: "python3 -B -m unittest tests.test_memory_atlas_human_plane -q"
     fact_level: "EXTRACTED"

@@ -1,0 +1,126 @@
+{
+  "schema_version": "memory_atlas.machine_truth_index.v1_2_1_s05_p2_t1",
+  "task_id": "S05-P2-T1",
+  "acceptance": "同一参数、公式、状态只能有一个可执行源。",
+  "max_lines": 80,
+  "max_bytes": 8500,
+  "ownership_rules": [
+    "索引只保存路径、职责和变更规则，不复制参数值、公式表达式、运行状态、测试断言或数据内容。",
+    "需要变更事实时编辑对应 canonical owner；generated projection、test assertions 和 evidence 不作为第二个可执行源。",
+    "机器治理子目录中的历史说明和证据本 Task 不删除，后续清理必须由 S05-P2-T2 单独验收。"
+  ],
+  "domains": [
+    {
+      "id": "requirements",
+      "label": "需求与当前执行状态",
+      "purpose": "定位当前 Task、验收条件、依赖、进度和权威 TaskPack 身份。",
+      "entries": [
+        {
+          "path": "docs/governance/roadmap.yaml",
+          "role": "当前 Stage、Phase、Task、acceptance、进度和下一门禁的唯一治理源。",
+          "owner": "requirements_governance",
+          "mutability": "canonical_editable",
+          "target_kind": "file"
+        },
+        {
+          "path": "config/memory_atlas_test_value_review.json",
+          "role": "v1.2.1 TaskPack 文件名与 SHA-256 的审计绑定；不复制 TaskPack 正文。",
+          "owner": "requirements_governance",
+          "mutability": "canonical_editable",
+          "target_kind": "file"
+        }
+      ]
+    },
+    {
+      "id": "source",
+      "label": "数据来源定义",
+      "purpose": "定位可接入来源、隐私边界、写回策略和最小字段定义。",
+      "entries": [
+        {
+          "path": "config/data_sources/source_registry.json",
+          "role": "ChatGPT、Codex 与其他已登记来源的唯一当前 source registry。",
+          "owner": "source_registry",
+          "mutability": "canonical_editable",
+          "target_kind": "file"
+        }
+      ]
+    },
+    {
+      "id": "model",
+      "label": "模型、公式与参数",
+      "purpose": "定位模型目录、公式目录、参数目录及 owner 投影，执行值继续由各目录引用的 code/config 决定。",
+      "entries": [
+        {
+          "path": "docs/governance/model_registry.yaml",
+          "role": "模型身份、用途、输入输出和实现引用的 canonical catalog。",
+          "owner": "model_governance",
+          "mutability": "canonical_editable",
+          "target_kind": "file"
+        },
+        {
+          "path": "docs/governance/formula_registry.yaml",
+          "role": "公式表达式、约束和 implementation refs 的 canonical catalog。",
+          "owner": "model_governance",
+          "mutability": "canonical_editable",
+          "target_kind": "file"
+        },
+        {
+          "path": "docs/governance/parameter_registry.csv",
+          "role": "参数身份、active value、code/config ref 和校准状态的 canonical catalog。",
+          "owner": "model_governance",
+          "mutability": "canonical_editable",
+          "target_kind": "file"
+        },
+        {
+          "path": "docs/governance/project.yaml",
+          "role": "供 owner renderer 使用的治理投影；模型、公式和参数值不得在此建立第二套编辑源。",
+          "owner": "model_governance",
+          "mutability": "generated_projection",
+          "target_kind": "file"
+        }
+      ]
+    },
+    {
+      "id": "acceptance",
+      "label": "验收执行",
+      "purpose": "定位公共 validator profile 和真实测试断言，不在索引中抄写 PASS 状态。",
+      "entries": [
+        {
+          "path": "config/memory_atlas_validator_profiles.json",
+          "role": "fast、sync、ui、release 四个公共 profile 的唯一当前组合合同。",
+          "owner": "acceptance_governance",
+          "mutability": "canonical_editable",
+          "target_kind": "file"
+        },
+        {
+          "path": "tests",
+          "role": "业务、安全、恢复和用户路径的可执行断言；索引不复制断言内容。",
+          "owner": "acceptance_tests",
+          "mutability": "test_assertions",
+          "target_kind": "directory"
+        }
+      ]
+    },
+    {
+      "id": "evidence",
+      "label": "事件与交付证据",
+      "purpose": "定位追加式事件摘要和受保护运行证据，不把历史证据改写成当前状态。",
+      "entries": [
+        {
+          "path": "docs/governance/events.jsonl",
+          "role": "已验证 Task 的 append-only 事件摘要和 evidence refs。",
+          "owner": "evidence_governance",
+          "mutability": "append_only_evidence",
+          "target_kind": "file"
+        },
+        {
+          "path": "机器治理/证据与日志",
+          "role": "运行、审计、恢复、release 与 review 的证据目录；证据不作为配置输入。",
+          "owner": "evidence_governance",
+          "mutability": "evidence_directory",
+          "target_kind": "directory"
+        }
+      ]
+    }
+  ]
+}

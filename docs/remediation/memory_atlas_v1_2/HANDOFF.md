@@ -2,17 +2,19 @@
 
 > **Current v1.2.1 note (2026-07-14):** This file preserves the earlier v1.2 R7
 > handoff below. Memory Atlas is executing the v1.2.1 Task Pack with one Task per run.
-> S04 and S05-P1 are complete locally. `S05-P1-T1` replaced 36 Stage-era human
-> documents with seven shallow Chinese files; `S05-P1-T2` compressed the deterministic
-> root owner entries from 789 lines / 70,990 bytes to 130 lines / 7,007 bytes.
-> `S05-P1-T3` now renders `人类可读/版本路线图.md` from
-> `config/memory_atlas_change_usage_map.json`: 4 added, 3 modified and 3
-> removed-or-hidden changes plus exactly five workflows, each with an entry, steps,
-> result, current availability and boundary. The map explicitly marks v1.2.1 as not
-> pushed, reinstalled or deployed and does not add an eighth human file. The shared
-> fail-closed audit/tests remain `scripts/audit_memory_atlas_human_plane.py` and
-> `tests/test_memory_atlas_human_plane.py`. Historical reviews and source packages
-> remain unchanged. The next Task is only `S05-P2-T1`; no P2 work has started.
+> S04, S05-P1 and `S05-P2-T1` are complete locally. S05-P1 compressed the human
+> plane to seven shallow Chinese files, compressed the three root owner entries, and
+> added the deterministic v1.2.1 change/five-workflow map. `S05-P2-T1` adds
+> `config/memory_atlas_machine_truth_index.json` and deterministically renders
+> `机器治理/README.md` as a 72-line/4,702-byte shallow index over exactly five domains
+> and 11 canonical targets. The index stores paths, responsibilities and mutability
+> only; it does not copy parameter values, formula expressions, runtime status, test
+> assertions or data. The shared fail-closed audit/tests remain
+> `scripts/audit_memory_atlas_human_plane.py` and
+> `tests/test_memory_atlas_human_plane.py`; 19 permanent regressions, 54 focused tests,
+> fast 4/4, 314 full Python tests and frontend build passed. Historical reviews,
+> source packages, machine-governance subdirectories and evidence remain unchanged.
+> The next Task is only `S05-P2-T2`; no T2 deletion or cleanup has started.
 >
 > The only public validator profiles are `validate:fast`, `validate:sync`,
 > `validate:ui`, and `validate:release`. Commands in the older "Verified Commands"

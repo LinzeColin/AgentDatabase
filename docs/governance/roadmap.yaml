@@ -8,7 +8,7 @@ next_gate_id: "ACC.OpenAIDatabase.PAM1.0019"
 total_estimated_hours: 255
 completed_estimated_hours: 241
 taskpack_progress:
-  completed_tasks: 31
+  completed_tasks: 32
   total_tasks: 149
   delivery_state: "local_only_not_released"
 stages:
@@ -1292,10 +1292,10 @@ stages:
             current_result: "complete_local_only_28_of_149_pending_s05_p1_t1"
   - stage_id: "MA-V121-S05"
     name: "Memory Atlas v1.2.1 简单双平面与全中文使用说明收敛"
-    person_goal: "让 owner 通过不超过七个中文核心入口理解系统、流程、变化、同步和维护；S05-P1 已完成本地收敛，下一 Task 为 S05-P2-T1。"
+    person_goal: "让 owner 通过不超过七个中文核心入口理解系统、流程、变化、同步和维护；S05-P1 与 S05-P2-T1 已完成本地收敛，下一 Task 为 S05-P2-T2。"
     status: "in_progress"
     estimated_hours: 8
-    estimated_pct: 37.5
+    estimated_pct: 50
     stop_conditions:
       - "一次 run 完成超过一个 Task"
       - "为了全中文而翻译代码标识、API 或数据字段"
@@ -1314,6 +1314,8 @@ stages:
         - "EVID-MA-V121-S05-P1-T2-TEST"
         - "EVID-MA-V121-S05-P1-T3-MAP"
         - "EVID-MA-V121-S05-P1-T3-TEST"
+        - "EVID-MA-V121-S05-P2-T1-INDEX"
+        - "EVID-MA-V121-S05-P2-T1-TEST"
     phases:
       - phase_id: "MA-V121-S05-P1"
         name: "人类平面压缩"
@@ -1444,33 +1446,55 @@ stages:
       - phase_id: "MA-V121-S05-P2"
         name: "机器平面唯一真相"
         objective: "以浅层索引引用当前 requirements、source、model、acceptance 与 evidence，不复制执行真相。"
-        status: "planned"
+        status: "in_progress"
         estimated_hours: 2
-        estimated_pct: 0
+        estimated_pct: 50
         stop_conditions:
           - "同一参数、公式或状态出现第二个可编辑源"
         stop_gate:
           gate_id: "ACC-MA-V121-S05-P2"
-          status: "planned"
+          status: "in_progress"
           pass_conditions:
             - "机器索引不复制 config/tests/data，逐 Stage 人类化机器记录完成收敛"
-          evidence_refs: []
+          evidence_refs:
+            - "EVID-MA-V121-S05-P2-T1-INDEX"
+            - "EVID-MA-V121-S05-P2-T1-TEST"
         tasks:
           - task_id: "S05-P2-T1"
             name: "建立机器真相浅层索引"
             objective: "将机器治理改为当前事实的引用索引。"
-            status: "planned"
+            status: "completed"
             estimated_hours: 1
-            estimated_pct: 0
+            estimated_pct: 100
             dependencies:
               - "S05-P1-T3"
             acceptance_ids:
               - "ACC-MA-V121-S05-P2-T1"
-            test_commands: []
-            evidence_refs: []
+            acceptance:
+              - acceptance_id: "ACC-MA-V121-S05-P2-T1"
+                description: "同一参数、公式、状态只能有一个可执行源；机器治理根 README 只路由 requirements/source/model/acceptance/evidence 五域，不复制 config/tests/data 的同一事实。"
+                evidence_refs:
+                  - "EVID-MA-V121-S05-P2-T1-INDEX"
+                  - "EVID-MA-V121-S05-P2-T1-TEST"
+            test_commands:
+              - "python3 -B scripts/audit_memory_atlas_human_plane.py"
+              - "python3 -B -m unittest tests.test_memory_atlas_human_plane tests.test_atlasctl_script_consolidation tests.test_memory_atlas_validator_profiles tests.test_memory_atlas_test_value_audit -q"
+              - "python3 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+              - "python3.12 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+              - "npm run validate:fast --prefix apps/memory-atlas"
+              - "PYTHONPATH=.. python3 -B -m unittest discover -s tests -q"
+              - "npm run build --prefix apps/memory-atlas"
+            test_results:
+              - "机器治理根 README 从 338 行/22052 bytes 收敛为 72 行/4702 bytes，只呈现 requirements/source/model/acceptance/evidence 五域与 11 个 canonical targets；旧 Stage 状态和旧 validator 命令不再复制到根索引"
+              - "19 项人类/机器平面永久回归、54 项 focused tests、fast 4/4、完整 Python 314/314 与 frontend build PASS；审计器对缺域、复制事实字段、目标缺失和放宽限制均 fail-closed"
+              - "本 Task 未删除机器治理子目录、逐 Stage 历史记录或证据；该清理范围仍由 S05-P2-T2 单独验收"
+            evidence_refs:
+              - "EVID-MA-V121-S05-P2-T1-INDEX"
+              - "EVID-MA-V121-S05-P2-T1-TEST"
             risks:
               - "复制 config/tests/data 内容形成漂移"
             rollback: "git revert 本 Task 本地 commit。"
+            current_result: "complete_local_only_32_of_149_pending_s05_p2_t2"
           - task_id: "S05-P2-T2"
             name: "删除逐 Stage 人类化机器记录"
             objective: "仅保留 current state 与最近 release evidence。"

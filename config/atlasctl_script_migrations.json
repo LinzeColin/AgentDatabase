@@ -1652,7 +1652,7 @@
       {
         "path": "scripts/audit_memory_atlas_human_plane.py",
         "baseline": false,
-        "sha256": "842509eded9740f7675ff63ebc71d3fa0306f49385aafbee8291f30e2ac766cf",
+        "sha256": "62bc0210f43b9b58f534052b851bcf13a22092b9ff7e1057c35d081976d35aad",
         "matched_families": [
           "audit"
         ],
@@ -2075,7 +2075,7 @@
           "status": "retained_no_equivalent_command",
           "canonical_command": null,
           "deletion_blockers": [
-            "S05-P1-T1 seven-file owner-readable plane acceptance depends on this audit",
+            "S05-P1-T1 seven-file owner-readable plane and S05-P2-T1 machine-truth-index acceptance depend on this audit",
             "S05-P3-T2 has not yet integrated the broader readability rules into ui/release profiles"
           ]
         },
