@@ -582,6 +582,28 @@ features:
     evidence_refs:
       - "EVID-MA-V121-S05-P2-T1-INDEX"
       - "EVID-MA-V121-S05-P2-T1-TEST"
+  - feature_id: "FEAT-MA-V121-S05-P2-T2"
+    name: "Memory Atlas 受控机器平面精简"
+    description: "v1.2.1 Task Pack 当前完成 33/149；按受控 cleanup contract 删除 8 个共 1948 行的逐 Stage 人类化机器 README，保留并校验 29 个 active configs、1 个 current release 和 122 个 evidence payload。"
+    status: "active"
+    fact_level: "EXTRACTED"
+    code_refs:
+      - "OpenAIDatabase/scripts/audit_memory_atlas_human_plane.py"
+      - "OpenAIDatabase/scripts/build_memory_atlas_agent_collaboration.py"
+    config_refs:
+      - "OpenAIDatabase/config/memory_atlas_machine_plane_cleanup.json"
+    source_refs:
+      - "OpenAIDatabase/机器治理/README.md"
+      - "OpenAIDatabase/docs/governance/roadmap.yaml"
+      - "OpenAIDatabase/data/derived/agent_collaboration/agent_collaboration_quality_report.json"
+    owner_actions:
+      - "从机器治理根索引进入 canonical owner；需要恢复旧 README 时只使用 cleanup contract 记录的基线提交和逐路径 Git 命令。"
+    test_refs:
+      - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_human_plane -q"
+      - "python3 -B OpenAIDatabase/scripts/audit_memory_atlas_human_plane.py --database-dir OpenAIDatabase"
+    evidence_refs:
+      - "EVID-MA-V121-S05-P2-T2-CLEANUP"
+      - "EVID-MA-V121-S05-P2-T2-TEST"
 models:
   -
     model_id: "MOD-001"
@@ -4677,4 +4699,14 @@ evidence_refs:
     evidence_id: "EVID-MA-V121-S05-P2-T1-TEST"
     kind: "test"
     ref: "python3 -B -m unittest tests.test_memory_atlas_human_plane -q"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S05-P2-T2-CLEANUP"
+    kind: "config"
+    ref: "OpenAIDatabase/config/memory_atlas_machine_plane_cleanup.json"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S05-P2-T2-TEST"
+    kind: "test"
+    ref: "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_human_plane -q"
     fact_level: "EXTRACTED"

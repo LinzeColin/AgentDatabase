@@ -671,8 +671,8 @@
         },
         {
           "evidence_level": "derived_governance_doc",
-          "path": "机器治理/运行门禁/README.md",
-          "ref_id": "s08p1_run_gate",
+          "path": "docs/governance/roadmap.yaml",
+          "ref_id": "s08p1_governance_roadmap",
           "ref_type": "governance_doc",
           "source_id": "governance"
         },
@@ -1324,8 +1324,8 @@
             },
             {
               "evidence_level": "derived_governance_doc",
-              "path": "机器治理/运行门禁/README.md",
-              "ref_id": "s08p1_run_gate",
+              "path": "docs/governance/roadmap.yaml",
+              "ref_id": "s08p1_governance_roadmap",
               "ref_type": "governance_doc",
               "source_id": "governance"
             },
@@ -1973,8 +1973,8 @@
             },
             {
               "evidence_level": "derived_governance_doc",
-              "path": "机器治理/运行门禁/README.md",
-              "ref_id": "s08p1_run_gate",
+              "path": "docs/governance/roadmap.yaml",
+              "ref_id": "s08p1_governance_roadmap",
               "ref_type": "governance_doc",
               "source_id": "governance"
             },

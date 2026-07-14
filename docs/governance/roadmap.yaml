@@ -8,7 +8,7 @@ next_gate_id: "ACC.OpenAIDatabase.PAM1.0019"
 total_estimated_hours: 255
 completed_estimated_hours: 241
 taskpack_progress:
-  completed_tasks: 32
+  completed_tasks: 33
   total_tasks: 149
   delivery_state: "local_only_not_released"
 stages:
@@ -1292,10 +1292,10 @@ stages:
             current_result: "complete_local_only_28_of_149_pending_s05_p1_t1"
   - stage_id: "MA-V121-S05"
     name: "Memory Atlas v1.2.1 简单双平面与全中文使用说明收敛"
-    person_goal: "让 owner 通过不超过七个中文核心入口理解系统、流程、变化、同步和维护；S05-P1 与 S05-P2-T1 已完成本地收敛，下一 Task 为 S05-P2-T2。"
+    person_goal: "让 owner 通过不超过七个中文核心入口理解系统、流程、变化、同步和维护；S05-P1 与 S05-P2 已完成本地收敛，下一 Task 为 S05-P3-T1。"
     status: "in_progress"
     estimated_hours: 8
-    estimated_pct: 50
+    estimated_pct: 62.5
     stop_conditions:
       - "一次 run 完成超过一个 Task"
       - "为了全中文而翻译代码标识、API 或数据字段"
@@ -1316,6 +1316,8 @@ stages:
         - "EVID-MA-V121-S05-P1-T3-TEST"
         - "EVID-MA-V121-S05-P2-T1-INDEX"
         - "EVID-MA-V121-S05-P2-T1-TEST"
+        - "EVID-MA-V121-S05-P2-T2-CLEANUP"
+        - "EVID-MA-V121-S05-P2-T2-TEST"
     phases:
       - phase_id: "MA-V121-S05-P1"
         name: "人类平面压缩"
@@ -1446,19 +1448,21 @@ stages:
       - phase_id: "MA-V121-S05-P2"
         name: "机器平面唯一真相"
         objective: "以浅层索引引用当前 requirements、source、model、acceptance 与 evidence，不复制执行真相。"
-        status: "in_progress"
+        status: "completed"
         estimated_hours: 2
-        estimated_pct: 50
+        estimated_pct: 100
         stop_conditions:
           - "同一参数、公式或状态出现第二个可编辑源"
         stop_gate:
           gate_id: "ACC-MA-V121-S05-P2"
-          status: "in_progress"
+          status: "passed"
           pass_conditions:
             - "机器索引不复制 config/tests/data，逐 Stage 人类化机器记录完成收敛"
           evidence_refs:
             - "EVID-MA-V121-S05-P2-T1-INDEX"
             - "EVID-MA-V121-S05-P2-T1-TEST"
+            - "EVID-MA-V121-S05-P2-T2-CLEANUP"
+            - "EVID-MA-V121-S05-P2-T2-TEST"
         tasks:
           - task_id: "S05-P2-T1"
             name: "建立机器真相浅层索引"
@@ -1498,18 +1502,40 @@ stages:
           - task_id: "S05-P2-T2"
             name: "删除逐 Stage 人类化机器记录"
             objective: "仅保留 current state 与最近 release evidence。"
-            status: "planned"
+            status: "completed"
             estimated_hours: 1
-            estimated_pct: 0
+            estimated_pct: 100
             dependencies:
               - "S05-P2-T1"
             acceptance_ids:
               - "ACC-MA-V121-S05-P2-T2"
-            test_commands: []
-            evidence_refs: []
+            acceptance:
+              - acceptance_id: "ACC-MA-V121-S05-P2-T2"
+                description: "机器门禁不得污染人类文件；仅删除八个已批准的逐 Stage 机器 README，保留 current root index、active configs、current release 和 evidence payload。"
+                evidence_refs:
+                  - "EVID-MA-V121-S05-P2-T2-CLEANUP"
+                  - "EVID-MA-V121-S05-P2-T2-TEST"
+            test_commands:
+              - "python3 -B OpenAIDatabase/scripts/audit_memory_atlas_human_plane.py --database-dir OpenAIDatabase"
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_s08p1_agent_collaboration OpenAIDatabase.tests.test_memory_atlas_human_plane OpenAIDatabase.tests.test_atlasctl_script_consolidation OpenAIDatabase.tests.test_memory_atlas_validator_profiles OpenAIDatabase.tests.test_memory_atlas_test_value_audit -q"
+              - "PYTHONPATH=.. python3 -B -m unittest discover -s tests -q"
+              - "npm run validate:fast --prefix apps/memory-atlas"
+              - "npm run build --prefix apps/memory-atlas"
+              - "python3 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+              - "python3.12 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+            test_results:
+              - "按 cleanup contract 删除 8 个逐 Stage README，共 1948 行/90721 bytes；机器平面由 161 个文件收敛为 153 个，只保留 root README，不创建 archive 副本"
+              - "受保护集合保持 byte-identical：29 个 active configs/96902 bytes、1 个 current release/549 bytes、122 个 evidence payload/25358730 bytes；四组 manifest SHA-256 均无漂移"
+              - "唯一可执行引用已从运行门禁 README 迁移到 docs/governance/roadmap.yaml；24 项 cleanup/human 回归、61 项 focused tests、完整 Python 319/319、fast 4/4、frontend build 与 Python 3.13/3.12 check-render 0 drift PASS"
+              - "8 个删除候选均由永久 git cat-file 回归证明可从基线提交 187577cc9 恢复；29 个 active machine-plane JSON 及 release/evidence/raw/session 文件均未删除或改写；tracked derived 协作报告只迁移 3 处 evidence path/ref_id，不改分数、模型值或业务数据"
+              - "全仓 semantic validate 仍被既有 sync 63 项与结构校验 36 项阻断；OpenAIDatabase 唯一 sync 报错指向 HEAD 已跟踪但被当前 sparse-checkout 排除的根测试文件，本 Task 未新增缺失引用"
+            evidence_refs:
+              - "EVID-MA-V121-S05-P2-T2-CLEANUP"
+              - "EVID-MA-V121-S05-P2-T2-TEST"
             risks:
               - "删除当前 release 或恢复证据"
             rollback: "按批准清单 git revert；不新建 archive 副本。"
+            current_result: "complete_local_only_33_of_149_pending_s05_p3_t1"
       - phase_id: "MA-V121-S05-P3"
         name: "全局中文与语义乱码门禁"
         objective: "建立低成本中文文案源与可读性测试，并修复真实编码或机器语义泄漏。"

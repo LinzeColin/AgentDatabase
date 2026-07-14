@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -19,9 +20,11 @@ if str(ROOT_SCRIPTS) not in sys.path:
 from audit_memory_atlas_human_plane import (
     CHANGE_USAGE_MAP_CONTRACT,
     EXPECTED_FILES,
+    MACHINE_PLANE_CLEANUP_CONTRACT,
     MACHINE_TRUTH_INDEX_CONTRACT,
     OWNER_ENTRY_CONTRACT,
     audit,
+    validate_machine_plane_cleanup_contract,
 )
 
 
@@ -395,6 +398,64 @@ class HumanPlaneAuditTests(unittest.TestCase):
         self.assertEqual(report["status"], "FAIL")
         self.assertTrue(any("不得放宽 max_lines" in error for error in report["errors"]))
 
+    def test_machine_gate_markers_cannot_pollute_human_plane(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            database_dir = self.make_database(Path(temp_dir))
+            target = database_dir / "人类可读" / "快速开始.md"
+            target.write_text(target.read_text(encoding="utf-8") + "\nvalidate:v1.2-s01\n", encoding="utf-8")
+            owner_target = database_dir / "功能清单.md"
+            owner_target.write_text(
+                owner_target.read_text(encoding="utf-8") + "\nACC-MA-V121-S05-P3-T1\n",
+                encoding="utf-8",
+            )
+            report = audit(database_dir)
+
+        self.assertEqual(report["status"], "FAIL")
+        self.assertTrue(any("被机器门禁、状态或 hash 污染" in error for error in report["errors"]))
+        self.assertTrue(any("功能清单.md 被机器门禁、状态或 hash 污染" in error for error in report["errors"]))
+
+    def test_machine_cleanup_contract_rejects_unapproved_candidate(self) -> None:
+        contract = json.loads((ROOT / MACHINE_PLANE_CLEANUP_CONTRACT).read_text(encoding="utf-8"))
+        contract["candidates"][0]["approval"] = "pending"
+
+        errors = validate_machine_plane_cleanup_contract(contract)
+
+        self.assertTrue(any("只允许删除已批准候选" in error for error in errors))
+
+    def test_machine_cleanup_contract_rejects_candidate_set_drift(self) -> None:
+        contract = json.loads((ROOT / MACHINE_PLANE_CLEANUP_CONTRACT).read_text(encoding="utf-8"))
+        contract["candidates"] = contract["candidates"][:-1]
+
+        errors = validate_machine_plane_cleanup_contract(contract)
+
+        self.assertTrue(any("必须精确为八个逐 Stage README" in error for error in errors))
+
+    def test_machine_cleanup_contract_rejects_weakened_inventory(self) -> None:
+        contract = json.loads((ROOT / MACHINE_PLANE_CLEANUP_CONTRACT).read_text(encoding="utf-8"))
+        contract["inventory_after"]["machine_file_count"] = 999
+        contract["protected_sets"][0]["manifest_sha256"] = "0" * 64
+
+        errors = validate_machine_plane_cleanup_contract(contract)
+
+        self.assertTrue(any("after inventory 不得变更" in error for error in errors))
+        self.assertTrue(any("受保护基线不得变更" in error for error in errors))
+
+    def test_machine_cleanup_candidates_are_git_recoverable(self) -> None:
+        contract = json.loads((ROOT / MACHINE_PLANE_CLEANUP_CONTRACT).read_text(encoding="utf-8"))
+        source_commit = contract["source_commit"]
+
+        for candidate in contract["candidates"]:
+            repo_path = f"OpenAIDatabase/{candidate['path']}"
+            with self.subTest(path=repo_path):
+                result = subprocess.run(
+                    ["git", "cat-file", "-e", f"{source_commit}:{repo_path}"],
+                    cwd=REPO_ROOT,
+                    check=False,
+                    capture_output=True,
+                    text=True,
+                )
+                self.assertEqual(result.returncode, 0, result.stderr)
+
     def test_current_owner_entries_are_renderer_owned_and_concise(self) -> None:
         import lean_governance
         import validate_project_governance
@@ -414,6 +475,12 @@ class HumanPlaneAuditTests(unittest.TestCase):
         self.assertEqual(report["change_usage_map"]["workflow_count"], 5)
         self.assertEqual(report["machine_truth_index"]["domain_count"], 5)
         self.assertEqual(report["machine_truth_index"]["target_count"], 11)
+        self.assertEqual(report["machine_plane_cleanup"]["candidate_count"], 8)
+        self.assertEqual(report["machine_plane_cleanup"]["deleted_count"], 8)
+        self.assertEqual(report["machine_plane_cleanup"]["machine_file_count"], 153)
+        self.assertEqual(report["machine_plane_cleanup"]["nested_readmes"], [])
+        self.assertEqual(report["machine_plane_cleanup"]["protected_sets"]["active_configs"]["file_count"], 29)
+        self.assertEqual(report["machine_plane_cleanup"]["protected_sets"]["evidence_payload"]["file_count"], 122)
         self.assertIn("机器治理/README.md", rendered)
         self.assertIn("## 本次交付改变了什么", rendered["人类可读/版本路线图.md"])
         self.assertIn("## 尚未交付", rendered["人类可读/版本路线图.md"])

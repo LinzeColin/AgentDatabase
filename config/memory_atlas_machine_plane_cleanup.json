@@ -1,0 +1,198 @@
+{
+  "schema_version": "memory_atlas.machine_plane_cleanup.v1_2_1_s05_p2_t2",
+  "task_id": "S05-P2-T2",
+  "acceptance": "机器门禁不得污染人类文件。",
+  "taskpack": {
+    "filename": "v1.2.1_四线16Stage质量收敛升级_TaskPack.zip",
+    "sha256": "db59f4db3ac02845fb3cde346a301cba64146c81c7ba19168f52c27e82ddd0f1"
+  },
+  "source_commit": "187577cc93f2c163ef120f2d7c3e0cbc3d71b6ad",
+  "batch": "S05-P2-T2-machine-humanized-records",
+  "inventory_before": {
+    "machine_file_count": 161,
+    "stage_humanized_readme_count": 8,
+    "stage_humanized_readme_lines": 1948,
+    "stage_humanized_readme_bytes": 90721
+  },
+  "inventory_after": {
+    "machine_file_count": 153,
+    "nested_readme_count": 0,
+    "root_index_count": 1,
+    "current_release_count": 1,
+    "active_config_count": 29,
+    "evidence_payload_count": 122
+  },
+  "protected_sets": [
+    {
+      "id": "root_index",
+      "path_scope": "机器治理/README.md",
+      "file_count": 1,
+      "bytes": 4702,
+      "manifest_sha256": "01aa229b2ba99e241ae57a8d573681a36473159869660201bcf3dc8a0232eece"
+    },
+    {
+      "id": "current_release",
+      "path_scope": "机器治理/发布快照/**",
+      "file_count": 1,
+      "bytes": 549,
+      "manifest_sha256": "a8293b7357085faae11f32beb2403b1bc960bff29bec70b135aed87f4965c8a0"
+    },
+    {
+      "id": "active_configs",
+      "path_scope": "机器治理/** excluding README.md, 发布快照/** and 证据与日志/**",
+      "file_count": 29,
+      "bytes": 96902,
+      "manifest_sha256": "af0523df7e6a05f8e87097fb2b1271cd254e03600f8017f99b45d24587b71140"
+    },
+    {
+      "id": "evidence_payload",
+      "path_scope": "机器治理/证据与日志/** excluding README.md",
+      "file_count": 122,
+      "bytes": 25358730,
+      "manifest_sha256": "4a1d28a0e556dd74e1cdf556cc3d0cacc7f57f7d7f6728656230479ce4f05f71"
+    }
+  ],
+  "candidates": [
+    {
+      "path": "机器治理/参数与公式/README.md",
+      "category": "delete",
+      "references": [
+        "docs/reviews/memory_atlas_v1_2_s01_p2_double_plane_creation.md"
+      ],
+      "runtime_dependency": "none; active formula JSON remains protected",
+      "replacement_source": "docs/governance/model_registry.yaml + docs/governance/formula_registry.yaml + docs/governance/parameter_registry.csv",
+      "reason": "Stage chronology and copied formula narrative are stale duplicates of canonical governance and active JSON configs.",
+      "restore_method": "git restore --source=187577cc93f2c163ef120f2d7c3e0cbc3d71b6ad -- OpenAIDatabase/机器治理/参数与公式/README.md",
+      "batch": "S05-P2-T2-machine-humanized-records",
+      "validation": [
+        "python3 -B scripts/audit_memory_atlas_human_plane.py",
+        "git cat-file -e 187577cc93f2c163ef120f2d7c3e0cbc3d71b6ad:OpenAIDatabase/机器治理/参数与公式/README.md"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "机器治理/可视化配置/README.md",
+      "category": "delete",
+      "references": [
+        "docs/reviews/memory_atlas_v1_2_s01_p2_double_plane_creation.md"
+      ],
+      "runtime_dependency": "none; five active visual JSON configs remain protected",
+      "replacement_source": "active visual JSON configs + tests + docs/governance/roadmap.yaml",
+      "reason": "The README is a humanized S07-S11 replay and not an executable visual source.",
+      "restore_method": "git restore --source=187577cc93f2c163ef120f2d7c3e0cbc3d71b6ad -- OpenAIDatabase/机器治理/可视化配置/README.md",
+      "batch": "S05-P2-T2-machine-humanized-records",
+      "validation": [
+        "python3 -B scripts/audit_memory_atlas_human_plane.py",
+        "git cat-file -e 187577cc93f2c163ef120f2d7c3e0cbc3d71b6ad:OpenAIDatabase/机器治理/可视化配置/README.md"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "机器治理/同步与备份/README.md",
+      "category": "delete",
+      "references": [
+        "docs/reviews/memory_atlas_v1_2_s01_p2_double_plane_creation.md",
+        "docs/MEMORY_ATLAS_DELIVERY_RECORD.md"
+      ],
+      "runtime_dependency": "none; seven active source and backup policy JSON files remain protected",
+      "replacement_source": "config/data_sources/source_registry.json + active policy JSON configs + 人类可读/同步备份.md",
+      "reason": "The README repeats S02-S04 completion history already retained in governance events and historical reviews.",
+      "restore_method": "git restore --source=187577cc93f2c163ef120f2d7c3e0cbc3d71b6ad -- OpenAIDatabase/机器治理/同步与备份/README.md",
+      "batch": "S05-P2-T2-machine-humanized-records",
+      "validation": [
+        "python3 -B scripts/audit_memory_atlas_human_plane.py",
+        "git cat-file -e 187577cc93f2c163ef120f2d7c3e0cbc3d71b6ad:OpenAIDatabase/机器治理/同步与备份/README.md"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "机器治理/数据契约/README.md",
+      "category": "delete",
+      "references": [
+        "docs/reviews/memory_atlas_v1_2_s01_p2_double_plane_creation.md"
+      ],
+      "runtime_dependency": "none; source and facet schema JSON files remain protected",
+      "replacement_source": "config/data_sources/source_registry.json + active schema JSON configs",
+      "reason": "The README copies Stage status and schema prose while executable schemas remain in their canonical files.",
+      "restore_method": "git restore --source=187577cc93f2c163ef120f2d7c3e0cbc3d71b6ad -- OpenAIDatabase/机器治理/数据契约/README.md",
+      "batch": "S05-P2-T2-machine-humanized-records",
+      "validation": [
+        "python3 -B scripts/audit_memory_atlas_human_plane.py",
+        "git cat-file -e 187577cc93f2c163ef120f2d7c3e0cbc3d71b6ad:OpenAIDatabase/机器治理/数据契约/README.md"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "机器治理/测试与验收/README.md",
+      "category": "delete",
+      "references": [
+        "docs/reviews/memory_atlas_v1_2_s01_p2_double_plane_creation.md"
+      ],
+      "runtime_dependency": "none",
+      "replacement_source": "config/memory_atlas_validator_profiles.json + tests",
+      "reason": "The directory skeleton README contains no executable assertion and is replaced by current validator profiles and tests.",
+      "restore_method": "git restore --source=187577cc93f2c163ef120f2d7c3e0cbc3d71b6ad -- OpenAIDatabase/机器治理/测试与验收/README.md",
+      "batch": "S05-P2-T2-machine-humanized-records",
+      "validation": [
+        "python3 -B scripts/audit_memory_atlas_human_plane.py",
+        "git cat-file -e 187577cc93f2c163ef120f2d7c3e0cbc3d71b6ad:OpenAIDatabase/机器治理/测试与验收/README.md"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "机器治理/行为智能模型/README.md",
+      "category": "delete",
+      "references": [
+        "docs/reviews/memory_atlas_v1_2_s01_p2_double_plane_creation.md"
+      ],
+      "runtime_dependency": "none; five active behavior model JSON configs remain protected",
+      "replacement_source": "docs/governance/model_registry.yaml + active behavior model JSON configs",
+      "reason": "The README is a humanized S08-S09 chronology rather than the current executable model catalog.",
+      "restore_method": "git restore --source=187577cc93f2c163ef120f2d7c3e0cbc3d71b6ad -- OpenAIDatabase/机器治理/行为智能模型/README.md",
+      "batch": "S05-P2-T2-machine-humanized-records",
+      "validation": [
+        "python3 -B scripts/audit_memory_atlas_human_plane.py",
+        "git cat-file -e 187577cc93f2c163ef120f2d7c3e0cbc3d71b6ad:OpenAIDatabase/机器治理/行为智能模型/README.md"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "机器治理/证据与日志/README.md",
+      "category": "delete",
+      "references": [
+        "docs/reviews/memory_atlas_v1_2_s01_p2_double_plane_creation.md",
+        "docs/MEMORY_ATLAS_DELIVERY_RECORD.md"
+      ],
+      "runtime_dependency": "none; all 122 evidence payload files remain byte-identical and protected",
+      "replacement_source": "docs/governance/events.jsonl + 机器治理/证据与日志 payload",
+      "reason": "The README mixes obsolete Final Review claims with remediation history; append-only event summaries and evidence payloads remain canonical.",
+      "restore_method": "git restore --source=187577cc93f2c163ef120f2d7c3e0cbc3d71b6ad -- OpenAIDatabase/机器治理/证据与日志/README.md",
+      "batch": "S05-P2-T2-machine-humanized-records",
+      "validation": [
+        "python3 -B scripts/audit_memory_atlas_human_plane.py",
+        "git cat-file -e 187577cc93f2c163ef120f2d7c3e0cbc3d71b6ad:OpenAIDatabase/机器治理/证据与日志/README.md"
+      ],
+      "approval": "approved"
+    },
+    {
+      "path": "机器治理/运行门禁/README.md",
+      "category": "delete",
+      "references": [
+        "scripts/build_memory_atlas_agent_collaboration.py",
+        "data/derived/agent_collaboration/agent_collaboration_quality_report.json",
+        "docs/reviews/memory_atlas_v1_2_s01_p2_double_plane_creation.md",
+        "docs/MEMORY_ATLAS_DELIVERY_RECORD.md"
+      ],
+      "runtime_dependency": "one builder fallback and three persisted derived-report evidence refs migrated to docs/governance/roadmap.yaml before deletion; seven active run-gate JSON configs remain protected",
+      "replacement_source": "docs/governance/roadmap.yaml + config/memory_atlas_validator_profiles.json + active run-gate JSON configs",
+      "reason": "The 1191-line README is a Stage-by-Stage gate replay; current task/gate state is canonical in roadmap.yaml.",
+      "restore_method": "git restore --source=187577cc93f2c163ef120f2d7c3e0cbc3d71b6ad -- OpenAIDatabase/机器治理/运行门禁/README.md",
+      "batch": "S05-P2-T2-machine-humanized-records",
+      "validation": [
+        "python3 -B scripts/audit_memory_atlas_human_plane.py",
+        "git cat-file -e 187577cc93f2c163ef120f2d7c3e0cbc3d71b6ad:OpenAIDatabase/机器治理/运行门禁/README.md"
+      ],
+      "approval": "approved"
+    }
+  ]
+}

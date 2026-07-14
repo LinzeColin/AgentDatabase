@@ -2,19 +2,28 @@
 
 > **Current v1.2.1 note (2026-07-14):** This file preserves the earlier v1.2 R7
 > handoff below. Memory Atlas is executing the v1.2.1 Task Pack with one Task per run.
-> S04, S05-P1 and `S05-P2-T1` are complete locally. S05-P1 compressed the human
+> S04, S05-P1 and S05-P2 are complete locally. S05-P1 compressed the human
 > plane to seven shallow Chinese files, compressed the three root owner entries, and
-> added the deterministic v1.2.1 change/five-workflow map. `S05-P2-T1` adds
+> added the deterministic v1.2.1 change/five-workflow map. `S05-P2-T1` added
 > `config/memory_atlas_machine_truth_index.json` and deterministically renders
 > `机器治理/README.md` as a 72-line/4,702-byte shallow index over exactly five domains
 > and 11 canonical targets. The index stores paths, responsibilities and mutability
 > only; it does not copy parameter values, formula expressions, runtime status, test
-> assertions or data. The shared fail-closed audit/tests remain
+> assertions or data. `S05-P2-T2` then used
+> `config/memory_atlas_machine_plane_cleanup.json` to delete exactly eight approved
+> Stage-era nested READMEs (1,948 lines / 90,721 bytes). It preserved byte-identical
+> sets of 29 active configs, one current release and 122 evidence payloads, migrated
+> the only executable README evidence reference to `docs/governance/roadmap.yaml`,
+> migrated the same three stale references in the tracked derived collaboration report
+> without changing scores or business values, and permanently verifies all eight Git
+> restore paths from commit `187577cc9`.
+> The shared fail-closed audit/tests remain
 > `scripts/audit_memory_atlas_human_plane.py` and
-> `tests/test_memory_atlas_human_plane.py`; 19 permanent regressions, 54 focused tests,
-> fast 4/4, 314 full Python tests and frontend build passed. Historical reviews,
-> source packages, machine-governance subdirectories and evidence remain unchanged.
-> The next Task is only `S05-P2-T2`; no T2 deletion or cleanup has started.
+> `tests/test_memory_atlas_human_plane.py`; 24 permanent regressions, 61 focused tests,
+> 319 full Python tests, fast 4/4, frontend build and dual-runtime deterministic render
+> passed. Historical reviews, source packages, active
+> machine configs, release evidence and recovery evidence remain unchanged. The next
+> Task is only `S05-P3-T1`; no P3 work has started.
 >
 > The only public validator profiles are `validate:fast`, `validate:sync`,
 > `validate:ui`, and `validate:release`. Commands in the older "Verified Commands"

@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
+from hashlib import sha256
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
@@ -105,6 +106,94 @@ MACHINE_TRUTH_REQUIRED_SECTIONS = {
     "## 变更规则",
     "## 边界",
 }
+MACHINE_PLANE_CLEANUP_CONTRACT = Path("config/memory_atlas_machine_plane_cleanup.json")
+MACHINE_PLANE_CLEANUP_SCHEMA = "memory_atlas.machine_plane_cleanup.v1_2_1_s05_p2_t2"
+MACHINE_PLANE_CLEANUP_SOURCE_COMMIT = "187577cc93f2c163ef120f2d7c3e0cbc3d71b6ad"
+MACHINE_PLANE_CLEANUP_BATCH = "S05-P2-T2-machine-humanized-records"
+MACHINE_PLANE_CLEANUP_TOP_KEYS = {
+    "schema_version",
+    "task_id",
+    "acceptance",
+    "taskpack",
+    "source_commit",
+    "batch",
+    "inventory_before",
+    "inventory_after",
+    "protected_sets",
+    "candidates",
+}
+MACHINE_PLANE_CLEANUP_CANDIDATE_KEYS = {
+    "path",
+    "category",
+    "references",
+    "runtime_dependency",
+    "replacement_source",
+    "reason",
+    "restore_method",
+    "batch",
+    "validation",
+    "approval",
+}
+MACHINE_PLANE_CLEANUP_CANDIDATES = (
+    "机器治理/参数与公式/README.md",
+    "机器治理/可视化配置/README.md",
+    "机器治理/同步与备份/README.md",
+    "机器治理/数据契约/README.md",
+    "机器治理/测试与验收/README.md",
+    "机器治理/行为智能模型/README.md",
+    "机器治理/证据与日志/README.md",
+    "机器治理/运行门禁/README.md",
+)
+MACHINE_PLANE_CLEANUP_INVENTORY_BEFORE = {
+    "machine_file_count": 161,
+    "stage_humanized_readme_count": 8,
+    "stage_humanized_readme_lines": 1948,
+    "stage_humanized_readme_bytes": 90721,
+}
+MACHINE_PLANE_CLEANUP_INVENTORY_AFTER = {
+    "machine_file_count": 153,
+    "nested_readme_count": 0,
+    "root_index_count": 1,
+    "current_release_count": 1,
+    "active_config_count": 29,
+    "evidence_payload_count": 122,
+}
+MACHINE_PLANE_PROTECTED_SCOPES = {
+    "root_index": "机器治理/README.md",
+    "current_release": "机器治理/发布快照/**",
+    "active_configs": "机器治理/** excluding README.md, 发布快照/** and 证据与日志/**",
+    "evidence_payload": "机器治理/证据与日志/** excluding README.md",
+}
+MACHINE_PLANE_PROTECTED_EXPECTED = {
+    "root_index": {
+        "file_count": 1,
+        "bytes": 4702,
+        "manifest_sha256": "01aa229b2ba99e241ae57a8d573681a36473159869660201bcf3dc8a0232eece",
+    },
+    "current_release": {
+        "file_count": 1,
+        "bytes": 549,
+        "manifest_sha256": "a8293b7357085faae11f32beb2403b1bc960bff29bec70b135aed87f4965c8a0",
+    },
+    "active_configs": {
+        "file_count": 29,
+        "bytes": 96902,
+        "manifest_sha256": "af0523df7e6a05f8e87097fb2b1271cd254e03600f8017f99b45d24587b71140",
+    },
+    "evidence_payload": {
+        "file_count": 122,
+        "bytes": 25358730,
+        "manifest_sha256": "4a1d28a0e556dd74e1cdf556cc3d0cacc7f57f7d7f6728656230479ce4f05f71",
+    },
+}
+MACHINE_PLANE_PROTECTED_KEYS = {"id", "path_scope", "file_count", "bytes", "manifest_sha256"}
+HUMAN_MACHINE_GATE_MARKERS = (
+    "validate:" + "v1.2-",
+    "phase_" + "s",
+    "stage_" + "s",
+    "ACC-" + "MA-V12",
+    "MA-" + "V12-",
+)
 MOJIBAKE_MARKERS = ("\ufffd", "锟斤拷", "烫烫烫", "屯屯屯")
 INLINE_LINK_RE = re.compile(
     r"!?\[[^\]\n]*\]\(\s*(<[^>\n]+>|[^\s)]+)(?:\s+(?:\"[^\"]*\"|'[^']*'|\([^)]*\)))?\s*\)"
@@ -220,6 +309,9 @@ def audit_owner_entries(database_dir: Path) -> tuple[list[dict[str, object]], li
             errors.append(f"{filename} 状态与下一步超过两分钟摘要上限：{status_next_chars} 字符")
         if any(marker in text for marker in MOJIBAKE_MARKERS):
             errors.append(f"{filename} 命中乱码标记")
+        matched_machine_markers = [marker for marker in HUMAN_MACHINE_GATE_MARKERS if marker in text]
+        if matched_machine_markers or re.search(r"\b[a-f0-9]{40}(?:[a-f0-9]{24})?\b", text):
+            errors.append(f"{filename} 被机器门禁、状态或 hash 污染：{matched_machine_markers}")
 
         reports.append(
             {
@@ -460,6 +552,219 @@ def audit_machine_truth_index(database_dir: Path) -> tuple[dict[str, object], li
     }, errors
 
 
+def validate_machine_plane_cleanup_contract(contract: dict[str, object]) -> list[str]:
+    errors: list[str] = []
+    if set(contract) != MACHINE_PLANE_CLEANUP_TOP_KEYS:
+        errors.append("机器平面清理合同字段集合不匹配")
+    if contract.get("schema_version") != MACHINE_PLANE_CLEANUP_SCHEMA:
+        errors.append("机器平面清理合同 schema 不匹配")
+    if contract.get("task_id") != "S05-P2-T2":
+        errors.append("机器平面清理合同必须绑定 S05-P2-T2")
+    if contract.get("acceptance") != "机器门禁不得污染人类文件。":
+        errors.append("机器平面清理 acceptance 不得弱化")
+    if contract.get("source_commit") != MACHINE_PLANE_CLEANUP_SOURCE_COMMIT:
+        errors.append("机器平面清理恢复基线不得变更")
+    if contract.get("batch") != MACHINE_PLANE_CLEANUP_BATCH:
+        errors.append("机器平面清理 batch 不得变更")
+    if contract.get("taskpack") != {
+        "filename": "v1.2.1_四线16Stage质量收敛升级_TaskPack.zip",
+        "sha256": "db59f4db3ac02845fb3cde346a301cba64146c81c7ba19168f52c27e82ddd0f1",
+    }:
+        errors.append("机器平面清理必须绑定权威 TaskPack 文件名与 SHA-256")
+    if contract.get("inventory_before") != MACHINE_PLANE_CLEANUP_INVENTORY_BEFORE:
+        errors.append("机器平面清理 before inventory 不得变更")
+    if contract.get("inventory_after") != MACHINE_PLANE_CLEANUP_INVENTORY_AFTER:
+        errors.append("机器平面清理 after inventory 不得变更")
+
+    protected_sets = contract.get("protected_sets")
+    valid_protected = [item for item in protected_sets if isinstance(item, dict)] if isinstance(protected_sets, list) else []
+    protected_ids = tuple(str(item.get("id") or "") for item in valid_protected)
+    if protected_ids != tuple(MACHINE_PLANE_PROTECTED_SCOPES):
+        errors.append("机器平面清理必须精确定义四个受保护集合")
+    if not isinstance(protected_sets, list) or len(valid_protected) != len(protected_sets):
+        errors.append("机器平面 protected_sets 必须全部为对象")
+    for item in valid_protected:
+        set_id = str(item.get("id") or "")
+        if set(item) != MACHINE_PLANE_PROTECTED_KEYS:
+            errors.append(f"机器平面受保护集合字段不匹配：{set_id}")
+        if item.get("path_scope") != MACHINE_PLANE_PROTECTED_SCOPES.get(set_id):
+            errors.append(f"机器平面受保护 scope 不得变更：{set_id}")
+        expected_item = {
+            "id": set_id,
+            "path_scope": MACHINE_PLANE_PROTECTED_SCOPES.get(set_id),
+            **MACHINE_PLANE_PROTECTED_EXPECTED.get(set_id, {}),
+        }
+        if item != expected_item:
+            errors.append(f"机器平面受保护基线不得变更：{set_id}")
+        if not isinstance(item.get("file_count"), int) or int(item.get("file_count") or 0) <= 0:
+            errors.append(f"机器平面受保护 file_count 无效：{set_id}")
+        if not isinstance(item.get("bytes"), int) or int(item.get("bytes") or 0) <= 0:
+            errors.append(f"机器平面受保护 bytes 无效：{set_id}")
+        if not re.fullmatch(r"[a-f0-9]{64}", str(item.get("manifest_sha256") or "")):
+            errors.append(f"机器平面受保护 manifest SHA-256 无效：{set_id}")
+
+    candidates = contract.get("candidates")
+    valid_candidates = [item for item in candidates if isinstance(item, dict)] if isinstance(candidates, list) else []
+    candidate_paths = tuple(str(item.get("path") or "") for item in valid_candidates)
+    if candidate_paths != MACHINE_PLANE_CLEANUP_CANDIDATES:
+        errors.append("机器平面清理候选必须精确为八个逐 Stage README")
+    if not isinstance(candidates, list) or len(valid_candidates) != len(candidates):
+        errors.append("机器平面清理 candidates 必须全部为对象")
+    for item in valid_candidates:
+        path = str(item.get("path") or "")
+        if set(item) != MACHINE_PLANE_CLEANUP_CANDIDATE_KEYS:
+            errors.append(f"机器平面清理候选字段不匹配：{path}")
+        if item.get("category") != "delete" or item.get("approval") != "approved":
+            errors.append(f"机器平面只允许删除已批准候选：{path}")
+        if item.get("batch") != MACHINE_PLANE_CLEANUP_BATCH:
+            errors.append(f"机器平面候选 batch 不匹配：{path}")
+        expected_restore = (
+            f"git restore --source={MACHINE_PLANE_CLEANUP_SOURCE_COMMIT} -- OpenAIDatabase/{path}"
+        )
+        if item.get("restore_method") != expected_restore:
+            errors.append(f"机器平面候选缺少精确 Git 恢复命令：{path}")
+        for field in ("runtime_dependency", "replacement_source", "reason"):
+            if not str(item.get(field) or "").strip():
+                errors.append(f"机器平面候选缺少 {field}：{path}")
+        for field in ("references", "validation"):
+            values = item.get(field)
+            if not isinstance(values, list) or not values or not all(isinstance(value, str) and value for value in values):
+                errors.append(f"机器平面候选 {field} 必须为非空字符串列表：{path}")
+    return errors
+
+
+def machine_plane_manifest(paths: list[Path], database_dir: Path) -> dict[str, object]:
+    files = sorted(path for path in paths if path.is_file())
+    rows = "".join(
+        f"{path.relative_to(database_dir).as_posix()}\t{sha256(path.read_bytes()).hexdigest()}\n"
+        for path in files
+    )
+    return {
+        "file_count": len(files),
+        "bytes": sum(path.stat().st_size for path in files),
+        "manifest_sha256": sha256(rows.encode("utf-8")).hexdigest(),
+    }
+
+
+def current_machine_plane_protected_sets(database_dir: Path) -> dict[str, dict[str, object]]:
+    machine_dir = database_dir / "机器治理"
+    return {
+        "root_index": machine_plane_manifest([machine_dir / "README.md"], database_dir),
+        "current_release": machine_plane_manifest(list((machine_dir / "发布快照").rglob("*")), database_dir),
+        "active_configs": machine_plane_manifest(
+            [
+                path
+                for path in machine_dir.rglob("*")
+                if path.is_file()
+                and path.name != "README.md"
+                and "发布快照" not in path.parts
+                and "证据与日志" not in path.parts
+            ],
+            database_dir,
+        ),
+        "evidence_payload": machine_plane_manifest(
+            [
+                path
+                for path in (machine_dir / "证据与日志").rglob("*")
+                if path.is_file() and path.name != "README.md"
+            ],
+            database_dir,
+        ),
+    }
+
+
+def audit_machine_plane_cleanup(
+    database_dir: Path,
+    *,
+    required: bool,
+) -> tuple[dict[str, object], list[str]]:
+    contract_path = database_dir / MACHINE_PLANE_CLEANUP_CONTRACT
+    if not contract_path.is_file():
+        if required:
+            return {}, [f"缺少机器平面清理合同：{MACHINE_PLANE_CLEANUP_CONTRACT.as_posix()}"]
+        return {}, []
+    try:
+        contract = json.loads(contract_path.read_text(encoding="utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        return {}, [f"机器平面清理合同无法解析：{exc}"]
+    if not isinstance(contract, dict):
+        return {}, ["机器平面清理合同必须为对象"]
+
+    errors = validate_machine_plane_cleanup_contract(contract)
+    for path in MACHINE_PLANE_CLEANUP_CANDIDATES:
+        if (database_dir / path).exists():
+            errors.append(f"已批准的逐 Stage 机器 README 仍存在：{path}")
+
+    machine_dir = database_dir / "机器治理"
+    machine_files = sorted(path for path in machine_dir.rglob("*") if path.is_file())
+    nested_readmes = sorted(
+        path.relative_to(database_dir).as_posix()
+        for path in machine_dir.rglob("README.md")
+        if path != machine_dir / "README.md"
+    )
+    if len(machine_files) != MACHINE_PLANE_CLEANUP_INVENTORY_AFTER["machine_file_count"]:
+        errors.append(f"精简后机器文件数不匹配：{len(machine_files)}")
+    if nested_readmes:
+        errors.append(f"机器平面仍有嵌套人类化 README：{nested_readmes}")
+
+    actual_sets = current_machine_plane_protected_sets(database_dir)
+    for set_id in MACHINE_PLANE_PROTECTED_SCOPES:
+        if actual_sets.get(set_id) != MACHINE_PLANE_PROTECTED_EXPECTED.get(set_id):
+            errors.append(f"机器平面受保护集合发生漂移：{set_id}")
+
+    builder_path = database_dir / "scripts" / "build_memory_atlas_agent_collaboration.py"
+    builder_text = builder_path.read_text(encoding="utf-8") if builder_path.is_file() else ""
+    deleted_runtime_ref = "机器治理/运行门禁/README.md"
+    if deleted_runtime_ref in builder_text:
+        errors.append("agent collaboration builder 仍引用已删除运行门禁 README")
+    if "docs/governance/roadmap.yaml" not in builder_text:
+        errors.append("agent collaboration builder 未迁移到 current governance roadmap")
+
+    derived_report_path = (
+        database_dir / "data" / "derived" / "agent_collaboration" / "agent_collaboration_quality_report.json"
+    )
+    try:
+        derived_report = json.loads(derived_report_path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
+        errors.append(f"agent collaboration derived report 无法解析：{exc}")
+        derived_report = {}
+    evidence_items: list[dict[str, object]] = []
+    pending: list[object] = [derived_report]
+    while pending:
+        item = pending.pop()
+        if isinstance(item, dict):
+            if "ref_id" in item and "path" in item:
+                evidence_items.append(item)
+            pending.extend(item.values())
+        elif isinstance(item, list):
+            pending.extend(item)
+    stale_evidence = [
+        item
+        for item in evidence_items
+        if item.get("path") == deleted_runtime_ref or item.get("ref_id") == "s08p1_run_gate"
+    ]
+    migrated_evidence = [
+        item
+        for item in evidence_items
+        if item.get("path") == "docs/governance/roadmap.yaml"
+        and item.get("ref_id") == "s08p1_governance_roadmap"
+    ]
+    if stale_evidence:
+        errors.append("agent collaboration derived report 仍引用已删除运行门禁 README")
+    if not migrated_evidence:
+        errors.append("agent collaboration derived report 未迁移到 current governance roadmap")
+
+    return {
+        "contract": MACHINE_PLANE_CLEANUP_CONTRACT.as_posix(),
+        "candidate_count": len(MACHINE_PLANE_CLEANUP_CANDIDATES),
+        "deleted_count": sum(not (database_dir / path).exists() for path in MACHINE_PLANE_CLEANUP_CANDIDATES),
+        "machine_file_count": len(machine_files),
+        "nested_readmes": nested_readmes,
+        "protected_sets": actual_sets,
+        "migrated_derived_evidence_refs": len(migrated_evidence),
+    }, errors
+
+
 def normalize_reference_label(value: str) -> str:
     return " ".join(value.split()).casefold()
 
@@ -507,7 +812,7 @@ def classify_local_link(raw_target: str, *, source_path: Path, human_root: Path)
     return None
 
 
-def audit(database_dir: Path) -> dict[str, object]:
+def audit(database_dir: Path, *, require_machine_cleanup: bool | None = None) -> dict[str, object]:
     human_dir = database_dir / "人类可读"
     errors: list[str] = []
     file_reports: list[dict[str, object]] = []
@@ -569,6 +874,9 @@ def audit(database_dir: Path) -> dict[str, object]:
             errors.append(f"{path.name} 命中乱码标记")
         if "Machine-readable boundary summary" in text:
             errors.append(f"{path.name} 包含旧机器边界摘要")
+        matched_machine_markers = [marker for marker in HUMAN_MACHINE_GATE_MARKERS if marker in text]
+        if matched_machine_markers or re.search(r"\b[a-f0-9]{40}(?:[a-f0-9]{24})?\b", text):
+            errors.append(f"{path.name} 被机器门禁、状态或 hash 污染：{matched_machine_markers}")
         if len(markdown_links) > 8:
             errors.append(f"{path.name} 链接过多，疑似链接索引：{len(markdown_links)}")
         if local_link_errors:
@@ -596,6 +904,16 @@ def audit(database_dir: Path) -> dict[str, object]:
     errors.extend(change_usage_map_errors)
     machine_truth_index_report, machine_truth_index_errors = audit_machine_truth_index(database_dir)
     errors.extend(machine_truth_index_errors)
+    cleanup_required = (
+        (database_dir / MACHINE_PLANE_CLEANUP_CONTRACT).is_file()
+        if require_machine_cleanup is None
+        else require_machine_cleanup
+    )
+    machine_plane_cleanup_report, machine_plane_cleanup_errors = audit_machine_plane_cleanup(
+        database_dir,
+        required=cleanup_required,
+    )
+    errors.extend(machine_plane_cleanup_errors)
 
     return {
         "status": "PASS" if not errors else "FAIL",
@@ -606,6 +924,7 @@ def audit(database_dir: Path) -> dict[str, object]:
         "owner_entries": owner_entry_reports,
         "change_usage_map": change_usage_map_report,
         "machine_truth_index": machine_truth_index_report,
+        "machine_plane_cleanup": machine_plane_cleanup_report,
         "errors": errors,
     }
 
@@ -623,7 +942,7 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> int:
     args = parse_args()
-    report = audit(args.database_dir.resolve())
+    report = audit(args.database_dir.resolve(), require_machine_cleanup=True)
     print(json.dumps(report, ensure_ascii=False, indent=2))
     return 0 if report["status"] == "PASS" else 1
 

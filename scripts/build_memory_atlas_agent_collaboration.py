@@ -344,7 +344,7 @@ def compute_metrics_for_scope(
     general_evidence = unique_evidence_refs(events + opportunities + clusters + loops + decision_debts, limit)
     governance_evidence = [
         doc_evidence("s08p1_metric_config", CONFIG_PATH.as_posix()),
-        doc_evidence("s08p1_run_gate", "机器治理/运行门禁/README.md"),
+        doc_evidence("s08p1_governance_roadmap", "docs/governance/roadmap.yaml"),
     ]
     if not general_evidence:
         general_evidence = governance_evidence
