@@ -32,6 +32,7 @@
     "archive_append_only": true,
     "repository_relative_paths": true,
     "public_raw_layout_ref": "config/data_sources/public_raw_layout.json",
+    "credential_exclusion_ref": "config/data_sources/credential_exclusion.json",
     "push_defaults": {
       "mode": "final_delivery_only",
       "branch": "main",
@@ -67,8 +68,8 @@
       ],
       "credential_exclusions": {
         "policy": "credentials_not_transcript",
-        "contract_ref": "S06-P1-T3",
-        "status": "pending_unified_contract"
+        "contract_ref": "config/data_sources/credential_exclusion.json",
+        "status": "active"
       },
       "parser": {
         "entrypoint": "scripts/sync_chatgpt_memory_data.py",
@@ -124,8 +125,8 @@
       ],
       "credential_exclusions": {
         "policy": "credentials_not_transcript",
-        "contract_ref": "S06-P1-T3",
-        "status": "pending_unified_contract"
+        "contract_ref": "config/data_sources/credential_exclusion.json",
+        "status": "active"
       },
       "parser": {
         "entrypoint": "scripts/sync_codex_memory_data.py",
@@ -185,8 +186,8 @@
       ],
       "credential_exclusions": {
         "policy": "credentials_not_transcript",
-        "contract_ref": "S06-P1-T3",
-        "status": "pending_unified_contract"
+        "contract_ref": "config/data_sources/credential_exclusion.json",
+        "status": "active"
       },
       "parser": {
         "entrypoint": "scripts/sync_future_agent_data.py",
@@ -239,8 +240,8 @@
       ],
       "credential_exclusions": {
         "policy": "credentials_not_transcript",
-        "contract_ref": "S06-P1-T3",
-        "status": "pending_unified_contract"
+        "contract_ref": "config/data_sources/credential_exclusion.json",
+        "status": "active"
       },
       "parser": {
         "entrypoint": "scripts/sync_future_agent_data.py",

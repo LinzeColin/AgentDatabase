@@ -52,6 +52,10 @@ class SourceRegistryContractTests(unittest.TestCase):
             contract["public_raw_layout_ref"],
             "config/data_sources/public_raw_layout.json",
         )
+        self.assertEqual(
+            contract["credential_exclusion_ref"],
+            "config/data_sources/credential_exclusion.json",
+        )
 
     def test_canonical_registry_covers_chatgpt_codex_and_generic_agent(self) -> None:
         sources = sync_source_map(load_source_registry(ROOT))
@@ -69,7 +73,14 @@ class SourceRegistryContractTests(unittest.TestCase):
         self.assertEqual(sources["codex-reviewer"]["source_type"], "generic_agent")
         for source in sources.values():
             self.assertEqual(source["push_policy"], PUSH_DEFAULTS)
-            self.assertEqual(source["credential_exclusions"]["contract_ref"], "S06-P1-T3")
+            self.assertEqual(
+                source["credential_exclusions"],
+                {
+                    "policy": "credentials_not_transcript",
+                    "contract_ref": "config/data_sources/credential_exclusion.json",
+                    "status": "active",
+                },
+            )
             self.assertTrue((ROOT / source["parser"]["entrypoint"]).is_file())
 
     def test_standard_generic_source_can_be_added_with_config_only(self) -> None:

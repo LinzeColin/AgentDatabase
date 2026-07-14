@@ -73,6 +73,7 @@ _AUDITED_STEP_POLICIES: dict[tuple[str, str], tuple[str, tuple[str, ...]]] = {
             "tests.test_s04p1_chatgpt_sync",
             "tests.test_s04p2_codex_agent_sync",
             "tests.test_s04p3_github_backup",
+            "tests.test_memory_atlas_credential_exclusion",
             "tests.test_memory_atlas_r7_public_raw",
             "tests.test_memory_atlas_r7_raw_integrity",
             "tests.test_memory_atlas_source_registry",

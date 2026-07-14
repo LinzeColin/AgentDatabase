@@ -716,6 +716,32 @@ features:
     evidence_refs:
       - "EVID-MA-V121-S06-P1-T2-LAYOUT"
       - "EVID-MA-V121-S06-P1-T2-TEST"
+  - feature_id: "FEAT-MA-V121-S06-P1-T3"
+    name: "Memory Atlas account-control credential exclusion 合同"
+    description: "v1.2.1 Task Pack 当前完成 39/149；公开 raw 明确保留获准的普通 transcript、email、phone 与安全占位符，仅阻断 API keys、cookies、session tokens、passwords、private keys、OAuth tokens 和 browser credential stores。本机绝对路径由独立仓库可移植性边界处理，不被伪装成 credential 分类；所有 tracked public raw 包括大文件均不跳过扫描。"
+    status: "active"
+    fact_level: "EXTRACTED"
+    code_refs:
+      - "OpenAIDatabase/scripts/memory_atlas_cli/credential_exclusion.py"
+      - "OpenAIDatabase/scripts/privacy_guard.py"
+      - "OpenAIDatabase/scripts/public_raw_sanitizer.py"
+      - "OpenAIDatabase/scripts/audit_memory_atlas_public_raw.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/source_registry.py"
+    config_refs:
+      - "OpenAIDatabase/config/data_sources/credential_exclusion.json"
+      - "OpenAIDatabase/config/data_sources/source_registry.json"
+      - "OpenAIDatabase/config/memory_atlas_validator_profiles.json"
+    source_refs:
+      - "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s06_p1_t3_credential_exclusion_review.md"
+    owner_actions:
+      - "新增来源时保持 credential_exclusions 指向 canonical contract；不要把普通 transcript、email 或 phone 加入 credential 类别，也不要把账户控制文件放进 data/public_raw。"
+    test_refs:
+      - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_credential_exclusion -q"
+      - "python3 -B OpenAIDatabase/scripts/audit_memory_atlas_public_raw.py --database-dir OpenAIDatabase"
+      - "npm run validate:sync --prefix OpenAIDatabase/apps/memory-atlas"
+    evidence_refs:
+      - "EVID-MA-V121-S06-P1-T3-CONTRACT"
+      - "EVID-MA-V121-S06-P1-T3-TEST"
 models:
   -
     model_id: "MOD-001"
@@ -4871,4 +4897,14 @@ evidence_refs:
     evidence_id: "EVID-MA-V121-S06-P1-T2-TEST"
     kind: "test"
     ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s06_p1_t2_public_raw_layout_review.md"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S06-P1-T3-CONTRACT"
+    kind: "config"
+    ref: "OpenAIDatabase/config/data_sources/credential_exclusion.json"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S06-P1-T3-TEST"
+    kind: "test"
+    ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s06_p1_t3_credential_exclusion_review.md"
     fact_level: "EXTRACTED"

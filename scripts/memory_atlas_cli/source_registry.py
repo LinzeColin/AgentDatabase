@@ -7,6 +7,13 @@ import re
 from pathlib import Path, PurePosixPath, PureWindowsPath
 from typing import Any
 
+from memory_atlas_cli.credential_exclusion import (
+    CREDENTIAL_CONTRACT_PATH,
+    CredentialExclusionError,
+    POLICY_ID,
+    load_credential_exclusion_contract,
+)
+
 
 REGISTRY_PATH = Path("config/data_sources/source_registry.json")
 PUBLIC_RAW_LAYOUT_PATH = Path("config/data_sources/public_raw_layout.json")
@@ -184,11 +191,11 @@ def _validate_source(source: dict[str, Any], database_dir: Path, push_defaults: 
 
     credential_exclusions = _mapping(source.get("credential_exclusions"), f"{source_id}.credential_exclusions")
     if credential_exclusions != {
-        "policy": "credentials_not_transcript",
-        "contract_ref": "S06-P1-T3",
-        "status": "pending_unified_contract",
+        "policy": POLICY_ID,
+        "contract_ref": CREDENTIAL_CONTRACT_PATH.as_posix(),
+        "status": "active",
     }:
-        raise SourceRegistryError(f"{source_id}.credential_exclusions must defer to S06-P1-T3")
+        raise SourceRegistryError(f"{source_id}.credential_exclusions must use the active canonical contract")
 
     parser = _mapping(source.get("parser"), f"{source_id}.parser")
     parser_path = _repo_relative_path(parser.get("entrypoint"), f"{source_id}.parser.entrypoint", ("scripts/",))
@@ -291,6 +298,7 @@ def validate_source_registry(payload: Any, database_dir: Path) -> dict[str, Any]
         "archive_append_only",
         "repository_relative_paths",
         "public_raw_layout_ref",
+        "credential_exclusion_ref",
         "push_defaults",
     }
     if set(contract) != expected_contract_keys:
@@ -313,6 +321,17 @@ def validate_source_registry(payload: Any, database_dir: Path) -> dict[str, Any]
     )
     if layout_ref != PUBLIC_RAW_LAYOUT_PATH.as_posix() or not (database_dir / layout_ref).is_file():
         raise SourceRegistryError("sync_contract.public_raw_layout_ref must name the canonical layout contract")
+    credential_ref = _repo_relative_path(
+        contract.get("credential_exclusion_ref"),
+        "sync_contract.credential_exclusion_ref",
+        ("config/data_sources/",),
+    )
+    if credential_ref != CREDENTIAL_CONTRACT_PATH.as_posix():
+        raise SourceRegistryError("sync_contract.credential_exclusion_ref must name the canonical contract")
+    try:
+        load_credential_exclusion_contract(database_dir, database_dir / credential_ref)
+    except CredentialExclusionError as exc:
+        raise SourceRegistryError("sync_contract credential exclusion contract is invalid") from exc
     if contract.get("push_defaults") != PUSH_DEFAULTS:
         raise SourceRegistryError("sync_contract.push_defaults drifted from the delivery boundary")
 

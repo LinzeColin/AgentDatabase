@@ -185,6 +185,14 @@ class PublicRawAuditTests(unittest.TestCase):
         module = load_module("r7_public_raw_audit", AUDIT_SCRIPT)
         with tempfile.TemporaryDirectory() as temp_dir:
             database = Path(temp_dir)
+            write_json(
+                database / "config/data_sources/credential_exclusion.json",
+                json.loads(
+                    (ROOT / "config/data_sources/credential_exclusion.json").read_text(
+                        encoding="utf-8"
+                    )
+                ),
+            )
             synthetic_secret = "sk-" + "A" * 24
             synthetic_path = "/Users/example/private/source.json"
             large_text = "ordinary transcript " * 70_000
@@ -216,7 +224,8 @@ class PublicRawAuditTests(unittest.TestCase):
             serialized = json.dumps(failed, ensure_ascii=False)
             self.assertGreater(unsafe_path.stat().st_size, 1_000_000)
             self.assertEqual(failed["status"], "FAIL")
-            self.assertGreaterEqual(failed["credential_or_private_text_file_count"], 1)
+            self.assertGreaterEqual(failed["credential_file_count"], 1)
+            self.assertGreaterEqual(failed["nonportable_path_file_count"], 1)
             self.assertEqual(failed["unmarked_binary_file_count"], 1)
             self.assertNotIn(synthetic_secret, serialized)
             self.assertNotIn(synthetic_path, serialized)
@@ -238,6 +247,42 @@ class PublicRawAuditTests(unittest.TestCase):
         self.assertEqual(passed["binary_marker_count"], 1)
         self.assertEqual(limited["status"], "FAIL")
         self.assertEqual(limited["oversize_file_count"], 3)
+
+    def test_public_raw_audit_rejects_hidden_credential_path_and_structured_field(self) -> None:
+        module = load_module("r7_public_raw_audit_hidden_credential", AUDIT_SCRIPT)
+        with tempfile.TemporaryDirectory() as temp_dir:
+            database = Path(temp_dir)
+            write_json(
+                database / "config/data_sources/credential_exclusion.json",
+                json.loads(
+                    (ROOT / "config/data_sources/credential_exclusion.json").read_text(
+                        encoding="utf-8"
+                    )
+                ),
+            )
+            hidden = database / "data/public_raw/codex/.env"
+            hidden.parent.mkdir(parents=True, exist_ok=True)
+            hidden.write_text("ordinary fixture\n", encoding="utf-8")
+            structured_value = "structured" + "credentialvalue"
+            write_json(
+                database / "data/public_raw/chatgpt/structured.json",
+                {"password": structured_value},
+            )
+
+            result = module.audit_public_raw(database)
+            serialized = json.dumps(result, ensure_ascii=False)
+
+        self.assertEqual(result["status"], "FAIL")
+        self.assertEqual(result["credential_like_path_file_count"], 1)
+        self.assertEqual(result["credential_file_count"], 1)
+        self.assertNotIn(structured_value, serialized)
+        self.assertTrue(
+            any(
+                violation["violation"] == "credential_like_public_raw_path"
+                and violation["relative_path"] == "codex/.env"
+                for violation in result["violations"]
+            )
+        )
 
 
 class VersionAwareFacetTests(unittest.TestCase):

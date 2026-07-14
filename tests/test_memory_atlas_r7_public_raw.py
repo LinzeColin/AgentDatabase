@@ -196,20 +196,18 @@ class PublicRawSanitizerTests(unittest.TestCase):
         self.assertEqual(counts, repeated_counts)
         for sensitive in (
             SECRET_VALUE,
-            "owner@example.com",
-            "second@example.com",
-            "+61 412 345 678",
             "/Users/alice/private/report.md",
             "/home/bob/private/input.txt",
         ):
             self.assertNotIn(sensitive, serialized)
+        self.assertIn("owner@example.com", serialized)
+        self.assertIn("second@example.com", serialized)
+        self.assertIn("+61 412 345 678", serialized)
         self.assertEqual(
             counts,
             {
-                "credential_passwords": 1,
-                "email": 2,
                 "local_absolute_path": 2,
-                "phone": 1,
+                "passwords": 1,
             },
         )
 
@@ -245,11 +243,11 @@ class PublicRawSanitizerTests(unittest.TestCase):
         self.assertEqual(len(sanitized), 3)
         self.assertCountEqual(
             list(sanitized.values()),
-            [{"Call [REDACTED_PHONE]": "third"}, "first", "second"],
+            [{"Call +61 412 345 678": "third"}, "first", "second"],
         )
         self.assertNotIn(sensitive_key, serialized)
-        self.assertNotIn("+61 412 345 678", serialized)
-        self.assertEqual(counts, {"local_absolute_path": 1, "phone": 2})
+        self.assertIn("+61 412 345 678", serialized)
+        self.assertEqual(counts, {"local_absolute_path": 1})
         collision_keys = [key for key in sanitized if "__redacted_key_" in key]
         self.assertEqual(len(collision_keys), 1)
         self.assertRegex(collision_keys[0], r"__redacted_key_[a-p]{12}$")
@@ -296,8 +294,8 @@ class PublicRawSanitizerTests(unittest.TestCase):
         sanitized, counts = sanitizer.sanitize_public_text(candidate)
 
         self.assertNotRegex(sanitized, r"sk-[A-Za-z0-9]{20,}")
-        self.assertEqual(sanitized, "prefixY[REDACTED_SECRET]::suffix")
-        self.assertEqual(counts, {"openai_api_key": 1})
+        self.assertEqual(sanitized, "prefixY[REDACTED_CREDENTIAL]::suffix")
+        self.assertEqual(counts, {"api_keys": 1})
 
     def test_nested_serialized_encrypted_text_cannot_reintroduce_git_hook_candidate(self) -> None:
         sanitizer = self.load_sanitizer("nested_encrypted_text")
@@ -314,8 +312,8 @@ class PublicRawSanitizerTests(unittest.TestCase):
         serialized = json.dumps(sanitized, ensure_ascii=False, sort_keys=True)
 
         self.assertNotRegex(serialized, r"sk-[A-Za-z0-9]{20,}")
-        self.assertIn("[REDACTED_SECRET]", sanitized["output"])
-        self.assertEqual(counts, {"openai_api_key": 1})
+        self.assertIn("[REDACTED_CREDENTIAL]", sanitized["output"])
+        self.assertEqual(counts, {"api_keys": 1})
 
     def test_sanitize_jsonl_event_rejects_non_dictionary_input(self) -> None:
         sanitizer = self.load_sanitizer("jsonl")
@@ -329,8 +327,8 @@ class PublicRawSanitizerTests(unittest.TestCase):
             {"message": "owner@example.com", "ok": True}
         )
         self.assertIsInstance(sanitized, dict)
-        self.assertEqual(sanitized, {"message": "[REDACTED_EMAIL]", "ok": True})
-        self.assertEqual(counts, {"email": 1})
+        self.assertEqual(sanitized, {"message": "owner@example.com", "ok": True})
+        self.assertEqual(counts, {})
 
     def test_event_limit_measures_compact_utf8_json_plus_newline_without_mutation(self) -> None:
         sanitizer = self.load_sanitizer("limit")
@@ -366,10 +364,9 @@ class PublicRawConnectorTest(unittest.TestCase):
         public = module.build_public_raw_snapshot(rows, snapshot, [])
         serialized = json.dumps(public, ensure_ascii=False, sort_keys=True)
 
-        self.assertIn("[REDACTED_PHONE]", serialized)
-        self.assertNotIn("+61 412 345 678", serialized)
-        self.assertNotIn("202607111234", serialized)
-        self.assertGreaterEqual(public["redaction_counts"].get("phone", 0), 2)
+        self.assertIn("+61 412 345 678", serialized)
+        self.assertIn("202607111234", serialized)
+        self.assertEqual(public["redaction_counts"], {})
 
     def test_chatgpt_public_backup_requires_explicit_redaction_and_writes_versioned_manifest(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -408,8 +405,8 @@ class PublicRawConnectorTest(unittest.TestCase):
             self.assertRegex(raw_files[0].name, r"^conv_r7\.[0-9a-f]{12}\.json$")
             raw_text = raw_files[0].read_text(encoding="utf-8")
             self.assertIn("[REDACTED_CREDENTIAL]", raw_text)
-            self.assertIn("[REDACTED_EMAIL]", raw_text)
-            self.assertIn("[REDACTED_PHONE]", raw_text)
+            self.assertIn("owner@example.com", raw_text)
+            self.assertIn("+61 412 345 678", raw_text)
             self.assertIn("[REDACTED_LOCAL_PATH]", raw_text)
 
             manifest_path = root / "data/processed/conversations/conversation_manifest.jsonl"
@@ -560,7 +557,7 @@ class PublicRawConnectorTest(unittest.TestCase):
             self.assertEqual(payload["source_format"], "markdown_report")
             payload_text = json.dumps(payload, ensure_ascii=False, sort_keys=True)
             self.assertIn("[REDACTED_CREDENTIAL]", payload_text)
-            self.assertIn("[REDACTED_EMAIL]", payload_text)
+            self.assertIn("reviewer@example.com", payload_text)
             self.assertIn("[REDACTED_LOCAL_PATH]", payload_text)
             self.assertNotIn(str(report.resolve()), payload_text)
             self.assertLessEqual(raw_path.stat().st_size, MAX_PUBLIC_RAW_FILE_BYTES)

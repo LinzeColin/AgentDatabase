@@ -27,8 +27,8 @@
     "deleted_python_test_count": 2,
     "retained_validator_count": 39,
     "retained_baseline_python_test_count": 49,
-    "added_python_test_count": 7,
-    "current_python_test_count": 56
+    "added_python_test_count": 8,
+    "current_python_test_count": 57
   },
   "profile_commands": {
     "fast": "npm run validate:fast",
@@ -44,7 +44,8 @@
     "apps/memory-atlas/scripts/validate_memory_atlas_semantic_readability.mjs",
     "tests/test_memory_atlas_semantic_readability.py",
     "tests/test_memory_atlas_source_registry.py",
-    "tests/test_memory_atlas_public_raw_layout.py"
+    "tests/test_memory_atlas_public_raw_layout.py",
+    "tests/test_memory_atlas_credential_exclusion.py"
   ],
   "candidates": [
     {
@@ -3363,6 +3364,16 @@
       ],
       "reason": "Retained because it proves the S06-P1-T2 public-raw tree remains shallow, source-partitioned, Git recoverable and isolated from Vite builds and the default Codex route.",
       "current_dependency": "S06-P1-T2 validate:sync, validate:ui and full Python suites"
+    },
+    {
+      "path": "tests/test_memory_atlas_credential_exclusion.py",
+      "risk_bindings": [
+        "data_integrity",
+        "release_risk",
+        "runner_contract"
+      ],
+      "reason": "Retained because it proves the S06-P1-T3 account-control boundary blocks credentials without broadly redacting authorized transcript content or skipping large public-raw files.",
+      "current_dependency": "S06-P1-T3 validate:sync and full Python suites"
     }
   ]
 }

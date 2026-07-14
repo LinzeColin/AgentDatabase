@@ -47,10 +47,19 @@ class MemoryAtlasReleaseAuditTests(unittest.TestCase):
             repo_root = Path(temp_dir) / "database"
             publish_dir = repo_root / "dist"
             raw_file = repo_root / "data/public_raw/codex/sessions/session-001.jsonl"
+            credential_contract = repo_root / "config/data_sources/credential_exclusion.json"
             ledger_dir = repo_root / "机器治理/证据与日志/raw_archive_manifests"
             publish_dir.mkdir(parents=True)
             raw_file.parent.mkdir(parents=True)
+            credential_contract.parent.mkdir(parents=True)
             ledger_dir.mkdir(parents=True)
+
+            credential_contract.write_text(
+                (ROOT / "config/data_sources/credential_exclusion.json").read_text(
+                    encoding="utf-8"
+                ),
+                encoding="utf-8",
+            )
 
             raw_payload = json.dumps({"text": "sanitized transcript"}, sort_keys=True) + "\n"
             raw_file.write_text(raw_payload, encoding="utf-8")
@@ -75,7 +84,13 @@ class MemoryAtlasReleaseAuditTests(unittest.TestCase):
             )
             subprocess.run(["git", "init", "--quiet"], cwd=repo_root, check=True)
             subprocess.run(
-                ["git", "add", "data/public_raw", "机器治理/证据与日志/raw_archive_manifests"],
+                [
+                    "git",
+                    "add",
+                    "config/data_sources/credential_exclusion.json",
+                    "data/public_raw",
+                    "机器治理/证据与日志/raw_archive_manifests",
+                ],
                 cwd=repo_root,
                 check=True,
             )

@@ -8,7 +8,7 @@ next_gate_id: "ACC.OpenAIDatabase.PAM1.0019"
 total_estimated_hours: 255
 completed_estimated_hours: 241
 taskpack_progress:
-  completed_tasks: 38
+  completed_tasks: 39
   total_tasks: 149
   delivery_state: "local_only_not_released"
 stages:
@@ -1688,7 +1688,7 @@ stages:
     person_goal: "为 ChatGPT、Codex 和后续 Agent 建立统一公开 raw 数据平面，同时保证源文件只读、归档只追加、可去重、可恢复且不提交凭证。"
     status: "in_progress"
     estimated_hours: 9
-    estimated_pct: 22
+    estimated_pct: 33
     stop_conditions:
       - "同步器需要修改、移动或删除源 raw"
       - "credential-like 文件准备进入 staged diff"
@@ -1706,15 +1706,15 @@ stages:
       - phase_id: "MA-V121-S06-P1"
         name: "统一来源注册和公开路径"
         objective: "定义统一 source registry、公开 raw 路径与凭证排除边界。"
-        status: "in_progress"
+        status: "completed"
         estimated_hours: 3
-        estimated_pct: 67
+        estimated_pct: 100
         stop_conditions:
           - "为新增来源硬编码核心分支"
           - "raw 进入前端 publicDir 或默认构建产物"
         stop_gate:
           gate_id: "ACC-MA-V121-S06-P1"
-          status: "in_progress"
+          status: "completed"
           pass_conditions:
             - "新增标准本地来源尽量只需配置，不改核心代码"
             - "公开 raw 路径与 credential exclusion 合同清晰且可验证"
@@ -1723,6 +1723,8 @@ stages:
             - "EVID-MA-V121-S06-P1-T1-TEST"
             - "EVID-MA-V121-S06-P1-T2-LAYOUT"
             - "EVID-MA-V121-S06-P1-T2-TEST"
+            - "EVID-MA-V121-S06-P1-T3-CONTRACT"
+            - "EVID-MA-V121-S06-P1-T3-TEST"
         tasks:
           - task_id: "S06-P1-T1"
             name: "定义统一 source registry"
@@ -1802,18 +1804,42 @@ stages:
           - task_id: "S06-P1-T3"
             name: "建立 credential exclusion 合同"
             objective: "允许 transcript/raw 公开，同时阻断 credentials、cookies、tokens、passwords 和 private keys。"
-            status: "planned"
+            status: "completed"
             estimated_hours: 1
-            estimated_pct: 0
+            estimated_pct: 100
             dependencies:
               - "S06-P1-T2"
             acceptance_ids:
               - "ACC-MA-V121-S06-P1-T3"
-            test_commands: []
-            evidence_refs: []
+            acceptance:
+              - acceptance_id: "ACC-MA-V121-S06-P1-T3"
+                description: "公开 raw 保留获准的普通 transcript、email 和 phone；7 类 account-control material 与 credential-like 文件名 fail closed，本机绝对路径按独立仓库可移植性边界处理，现有 452,781,632 bytes public raw 全量审计通过且不修改源字节。"
+                evidence_refs:
+                  - "EVID-MA-V121-S06-P1-T3-CONTRACT"
+                  - "EVID-MA-V121-S06-P1-T3-TEST"
+            test_commands:
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_credential_exclusion -q"
+              - "python3 -B OpenAIDatabase/scripts/audit_memory_atlas_public_raw.py --database-dir OpenAIDatabase"
+              - "python3 -B OpenAIDatabase/scripts/privacy_guard.py --database-dir OpenAIDatabase --scan-only"
+              - "npm run validate:sync --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run validate:fast --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run validate:ui --prefix OpenAIDatabase/apps/memory-atlas"
+              - "python3 -B -m unittest discover -s OpenAIDatabase/tests -p 'test_*.py' -q"
+              - "python3 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+              - "python3.12 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+            test_results:
+              - "Canonical credential exclusion contract 固定 credentials_not_transcript 边界；7 类 account-control material、合同漂移、credential-like staged path、大于 1 MiB public raw 和无值回显均由 8 项专用回归覆盖。"
+              - "public raw sanitizer 保留普通 transcript、email、phone 与安全占位符；private import 继续执行既有广义 email/phone/path/secret 脱敏，本机绝对路径仍按非 credential 的仓库可移植性边界替换。"
+              - "真实 public raw 内容审计覆盖 512 个 JSON/JSONL 文件、452,781,632 bytes 和 23,893 个合法 binary marker：credential、credential-like path、nonportable path、无效 JSON、未标记 binary 与超限文件均为 0。"
+              - "仓库级 credential scan 覆盖 513 个 tracked public-raw 文件及 35 个大于 1 MiB 文件且 skip=false；secret/path/private-root hit 均为 0，raw mutation=false。"
+              - "validate:sync 7/7、validate:fast 4/4、validate:ui 14/14、完整 Python 365/365、脚本 hash 治理和双运行时 deterministic render PASS。"
+            evidence_refs:
+              - "EVID-MA-V121-S06-P1-T3-CONTRACT"
+              - "EVID-MA-V121-S06-P1-T3-TEST"
             risks:
               - "把账户控制资料误当 raw 备份"
-            rollback: "git revert 本 Task 本地 commit。"
+            rollback: "提交前仅反向应用 S06-P1-T3 的精确 Task patch；提交后使用 git revert <S06-P1-T3 commit>。"
+            current_result: "complete_local_only_39_of_149_pending_s06_p2_t1"
       - phase_id: "MA-V121-S06-P2"
         name: "append-only、hash、分片与恢复"
         objective: "建立不可变 raw ledger、确定性分片和 restore/verify 闭环。"

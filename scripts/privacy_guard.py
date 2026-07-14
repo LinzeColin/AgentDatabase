@@ -13,6 +13,16 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+from memory_atlas_cli.credential_exclusion import (
+    BLOCKED_ACCOUNT_CONTROL_CATEGORIES,
+    CREDENTIAL_SCHEMA_VERSION,
+    CredentialExclusionError,
+    POLICY_ID,
+    TASK_ID,
+    forbidden_public_raw_path_match,
+    load_credential_exclusion_contract,
+)
+
 
 DERIVED_IMPORT_DIR = Path("data/derived/privacy_imports")
 PRIVACY_AUDIT_LOG = Path("data/run_logs/privacy/privacy_imports.jsonl")
@@ -24,7 +34,6 @@ SECRET_PATTERNS = (
     ("slack_token", re.compile(r"\bxox[baprs]-[A-Za-z0-9-]{10,}\b")),
     ("aws_access_key", re.compile(r"\bAKIA[0-9A-Z]{16}\b")),
 )
-CREDENTIAL_POLICY = "credential_is_not_memory"
 CREDENTIAL_PATTERNS = (
     ("api_keys", SECRET_PATTERNS[0][1]),
     ("api_keys", SECRET_PATTERNS[1][1]),
@@ -36,7 +45,11 @@ CREDENTIAL_PATTERNS = (
     ),
     (
         "cookies",
-        re.compile(r"\b(?:cookie|set-cookie)\b\s*[:=]\s*['\"]?[^'\"\n]{12,}", re.I),
+        re.compile(
+            r"\b(?:cookie|set-cookie)\b\s*[:=]\s*['\"]?"
+            r"[A-Za-z0-9!#$%&'*+.^_`|~-]{1,128}=[^;,'\"\s][^,'\"\n]{6,}",
+            re.I,
+        ),
     ),
     (
         "session_tokens",
@@ -44,7 +57,21 @@ CREDENTIAL_PATTERNS = (
     ),
     (
         "passwords",
-        re.compile(r"\b(?:password|passwd|pwd)\b\s*[:=]\s*['\"]?[A-Za-z0-9][A-Za-z0-9._~+/=@:-]{7,}", re.I),
+        re.compile(
+            r"\b(?:password|passwd)\b\s*[:=]\s*"
+            r"(?:\"[^\"\n]{8,}\"|'[^'\n]{8,}'|[A-Za-z0-9][A-Za-z0-9._~+/=@:-]{7,})",
+            re.I,
+        ),
+    ),
+    (
+        "passwords",
+        re.compile(
+            r"(?i:\bpwd\b)\s*[:=]\s*"
+            r"(?:\"(?=[^\"\n]{8,}\")(?=[^\"\n]*[A-Z0-9])[^\"\n]+\"|"
+            r"'(?=[^'\n]{8,}')(?=[^'\n]*[A-Z0-9])[^'\n]+'|"
+            r"(?=[A-Za-z0-9._~+/=@:-]{8,}\b)(?=[A-Za-z0-9._~+/=@:-]*[A-Z0-9])"
+            r"[A-Za-z0-9][A-Za-z0-9._~+/=@:-]{7,})"
+        ),
     ),
     (
         "passwords",
@@ -81,6 +108,57 @@ CREDENTIAL_PATTERNS = (
         ),
     ),
 )
+_CREDENTIAL_TRIGGER_RE = re.compile(
+    r"sk-|gh[pousr]_|xox[baprs]-|AKIA|"
+    r"api[_-]?key|secret[_-]?key|client[_-]?secret|"
+    r"set-cookie|\bcookie\b|session[_-]?token|sessionid|auth[_-]?token|csrf[_-]?token|"
+    r"\bpassword\b|\bpasswd\b|\bpwd\b|-----BEGIN [A-Z ]*PRIVATE KEY-----|"
+    r"access[_-]?token|refresh[_-]?token|oauth[_-]?token|id[_-]?token|\bBearer\s+|"
+    r"browser[_-]?credential[_-]?store|login[_-]?data|\bkeychain\b",
+    re.I,
+)
+_SAFE_CREDENTIAL_PLACEHOLDERS = {
+    "example",
+    "not-configured",
+    "not configured",
+    "not_configured",
+    "null",
+    "none",
+    "redacted",
+    "redacted_credential",
+    "redacted_secret",
+    "your-api-key",
+    "your-token",
+    "your_api_key",
+    "your_token",
+}
+LOCAL_ABSOLUTE_PATH_RE = re.compile(r"(?:[A-Za-z]:[\\/][^\s\"']+|/(?:Users|home)/[^\s\"']+)")
+_COOKIE_FIELD_VALUE_RE = re.compile(r"\A\s*[A-Za-z0-9!#$%&'*+.^_`|~-]{1,128}=")
+_CREDENTIAL_FIELD_CATEGORIES = {
+    "api_key": "api_keys",
+    "api_keys": "api_keys",
+    "apikey": "api_keys",
+    "secret_key": "api_keys",
+    "client_secret": "api_keys",
+    "session_token": "session_tokens",
+    "sessionid": "session_tokens",
+    "auth_token": "session_tokens",
+    "csrf_token": "session_tokens",
+    "password": "passwords",
+    "passwd": "passwords",
+    "private_key": "private_keys",
+    "privatekey": "private_keys",
+    "rsa_private_key": "private_keys",
+    "ec_private_key": "private_keys",
+    "openssh_private_key": "private_keys",
+    "access_token": "oauth_tokens",
+    "refresh_token": "oauth_tokens",
+    "oauth_token": "oauth_tokens",
+    "id_token": "oauth_tokens",
+    "browser_credential_store": "browser_credential_store",
+    "login_data": "browser_credential_store",
+    "keychain": "browser_credential_store",
+}
 REDACTION_PATTERNS = (
     ("email", re.compile(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b"), "[REDACTED_EMAIL]"),
     ("phone", re.compile(r"\+?\d[\d\s().-]{8,}\d"), "[REDACTED_PHONE]"),
@@ -90,7 +168,7 @@ REDACTION_PATTERNS = (
     ("aws_access_key", SECRET_PATTERNS[3][1], "[REDACTED_SECRET]"),
     (
         "local_absolute_path",
-        re.compile(r"(?:[A-Za-z]:[\\/][^\s\"']+|/(?:Users|home)/[^\s\"']+)"),
+        LOCAL_ABSOLUTE_PATH_RE,
         "[REDACTED_LOCAL_PATH]",
     ),
 )
@@ -137,11 +215,91 @@ def redact_text(text: str) -> tuple[str, dict[str, int]]:
     return redacted, counts
 
 
+def redact_nonportable_paths_in_text(text: str) -> tuple[str, dict[str, int]]:
+    """Apply the repository portability boundary without classifying it as credential handling."""
+
+    if "/Users/" not in text and "/home/" not in text and ":\\" not in text and ":/" not in text:
+        return text, {}
+    redacted, count = LOCAL_ABSOLUTE_PATH_RE.subn("[REDACTED_LOCAL_PATH]", text)
+    return redacted, {"local_absolute_path": count} if count else {}
+
+
+def _credential_match_is_safe_placeholder(match_text: str) -> bool:
+    separator = re.search(r"[:=]", match_text)
+    if separator is None:
+        return False
+    return is_safe_credential_placeholder(match_text[separator.end() :])
+
+
+def is_safe_credential_placeholder(value: str) -> bool:
+    candidate = value.strip().strip("'\"").rstrip(";,")
+    normalized = candidate.casefold()
+    if len(normalized) > 2 and normalized[0] in "[<" and normalized[-1] in "]>":
+        normalized = normalized[1:-1].strip()
+    return normalized in _SAFE_CREDENTIAL_PLACEHOLDERS
+
+
+def _normalized_credential_field(field_name: str) -> str:
+    return re.sub(r"[\s-]+", "_", field_name.strip().casefold())
+
+
+def _has_account_control_value(value: Any) -> bool:
+    if isinstance(value, str):
+        return bool(value.strip()) and not is_safe_credential_placeholder(value)
+    if isinstance(value, (list, dict)):
+        return bool(value)
+    return value is not None and value is not False
+
+
+def credential_field_category(field_name: str, value: Any) -> str | None:
+    """Classify structured credential fields without treating ordinary transcript keys as secrets."""
+
+    normalized = _normalized_credential_field(field_name)
+    if normalized in {"cookie", "cookies", "set_cookie"}:
+        if isinstance(value, str):
+            return "cookies" if _COOKIE_FIELD_VALUE_RE.search(value) else None
+        return "cookies" if _has_account_control_value(value) else None
+    if normalized == "pwd":
+        if not isinstance(value, str) or is_safe_credential_placeholder(value):
+            return None
+        if "/" in value or "\\" in value:
+            return None
+        return "passwords" if any(character.isupper() or character.isdigit() for character in value) else None
+    category = _CREDENTIAL_FIELD_CATEGORIES.get(normalized)
+    return category if category and _has_account_control_value(value) else None
+
+
+def credential_field_exclusion_hits(value: Any, source: str = "") -> list[dict[str, Any]]:
+    hits: list[dict[str, Any]] = []
+    if isinstance(value, list):
+        for item in value:
+            hits.extend(credential_field_exclusion_hits(item, source))
+    elif isinstance(value, dict):
+        for key, item in value.items():
+            category = credential_field_category(str(key), item)
+            if category:
+                hits.append(
+                    {
+                        "category": category,
+                        "source": source,
+                        "policy": POLICY_ID,
+                        "evidence": "[REDACTED_CREDENTIAL]",
+                    }
+                )
+            else:
+                hits.extend(credential_field_exclusion_hits(item, source))
+    return hits
+
+
 def credential_exclusion_hits(text: str, source: str = "") -> list[dict[str, Any]]:
+    if not _CREDENTIAL_TRIGGER_RE.search(text):
+        return []
     hits: list[dict[str, Any]] = []
     seen: set[tuple[str, int, int]] = set()
     for category, pattern in CREDENTIAL_PATTERNS:
         for match in pattern.finditer(text):
+            if _credential_match_is_safe_placeholder(match.group(0)):
+                continue
             key = (category, match.start(), match.end())
             if key in seen:
                 continue
@@ -152,7 +310,7 @@ def credential_exclusion_hits(text: str, source: str = "") -> list[dict[str, Any
                     "source": source,
                     "start": match.start(),
                     "end": match.end(),
-                    "policy": CREDENTIAL_POLICY,
+                    "policy": POLICY_ID,
                     "evidence": "[REDACTED_CREDENTIAL]",
                 }
             )
@@ -168,12 +326,30 @@ def assert_no_credentials(text: str, source: str = "") -> None:
 
 
 def redact_credentials_in_text(text: str) -> tuple[str, dict[str, int]]:
-    redacted = text
+    hits = credential_exclusion_hits(text)
+    if not hits:
+        return text, {}
+
     counts: dict[str, int] = {}
-    for category, pattern in CREDENTIAL_PATTERNS:
-        redacted, count = pattern.subn("[REDACTED_CREDENTIAL]", redacted)
-        if count:
-            counts[category] = counts.get(category, 0) + count
+    intervals: list[tuple[int, int]] = []
+    for hit in sorted(hits, key=lambda item: (int(item["start"]), int(item["end"]))):
+        category = str(hit["category"])
+        counts[category] = counts.get(category, 0) + 1
+        start = int(hit["start"])
+        end = int(hit["end"])
+        if intervals and start <= intervals[-1][1]:
+            previous_start, previous_end = intervals[-1]
+            intervals[-1] = (previous_start, max(previous_end, end))
+        else:
+            intervals.append((start, end))
+
+    chunks: list[str] = []
+    cursor = 0
+    for start, end in intervals:
+        chunks.extend((text[cursor:start], "[REDACTED_CREDENTIAL]"))
+        cursor = end
+    chunks.append(text[cursor:])
+    redacted = "".join(chunks)
     return redacted, counts
 
 
@@ -312,10 +488,19 @@ def high_risk_secret_hits(database_dir: Path, tracked_files: list[str]) -> list[
     hits: list[dict[str, str]] = []
     for rel in tracked_files:
         path = database_dir / rel
-        if not path.is_file() or path.stat().st_size > 1_000_000:
+        is_public_raw = rel == "data/public_raw" or rel.startswith("data/public_raw/")
+        if not path.is_file() or (not is_public_raw and path.stat().st_size > 1_000_000):
             continue
         text = path.read_text(encoding="utf-8", errors="ignore")
-        for segment in privacy_scan_segments(path, text):
+        payloads = privacy_scan_payloads(path, text)
+        if payloads is None:
+            segments = [text]
+        else:
+            segments = [segment for payload in payloads for segment in iter_json_strings(payload)]
+            for payload in payloads:
+                for hit in credential_field_exclusion_hits(payload, rel):
+                    hits.append({"path": rel, "pattern": str(hit["category"])})
+        for segment in segments:
             for hit in credential_exclusion_hits(segment, rel):
                 hits.append({"path": rel, "pattern": str(hit["category"])})
     return hits
@@ -333,29 +518,65 @@ def iter_json_strings(value: Any):
             yield from iter_json_strings(item)
 
 
-def privacy_scan_segments(path: Path, text: str) -> list[str]:
+def privacy_scan_payloads(path: Path, text: str) -> list[Any] | None:
     if path.suffix not in {".json", ".jsonl"}:
-        return [text]
+        return None
     try:
         if path.suffix == ".json":
             payloads = [json.loads(text)]
         else:
             payloads = [json.loads(line) for line in text.splitlines() if line.strip()]
     except json.JSONDecodeError:
+        return None
+    return payloads
+
+
+def privacy_scan_segments(path: Path, text: str) -> list[str]:
+    payloads = privacy_scan_payloads(path, text)
+    if payloads is None:
         return [text]
     return [segment for payload in payloads for segment in iter_json_strings(payload)]
 
 
 def scan_repo_privacy(database_dir: Path) -> dict[str, Any]:
     database_dir = database_dir.resolve()
+    contract = load_credential_exclusion_contract(database_dir)
+    configured_categories = {category for category, _ in CREDENTIAL_PATTERNS}
+    if configured_categories != set(BLOCKED_ACCOUNT_CONTROL_CATEGORIES):
+        raise CredentialExclusionError("credential detector categories drifted from the canonical contract")
     tracked_private = git_ls_files(database_dir, [root.as_posix() for root in PRIVATE_ROOTS])
     tracked_files = git_ls_files(database_dir)
+    public_raw_files = [
+        rel for rel in tracked_files if rel.startswith("data/public_raw/") and (database_dir / rel).is_file()
+    ]
+    credential_path_hits = []
+    for rel in public_raw_files:
+        public_relative = Path(rel).relative_to("data/public_raw")
+        pattern = forbidden_public_raw_path_match(public_relative, contract)
+        if pattern:
+            credential_path_hits.append({"path": rel, "pattern": pattern})
     ignore_contract = gitignore_declares_private_defaults(database_dir)
     secret_hits = high_risk_secret_hits(database_dir, tracked_files)
+    large_public_raw_file_count = sum(
+        (database_dir / rel).stat().st_size > 1_000_000 for rel in public_raw_files
+    )
     return {
-        "status": "PASS" if not tracked_private and not secret_hits and ignore_contract["ok"] else "FAIL",
-        "credential_is_not_memory": True,
+        "status": (
+            "PASS"
+            if not tracked_private and not secret_hits and not credential_path_hits and ignore_contract["ok"]
+            else "FAIL"
+        ),
+        "schema_version": CREDENTIAL_SCHEMA_VERSION,
+        "task_id": TASK_ID,
+        "credential_policy": POLICY_ID,
+        "credential_value_echo": False,
+        "broad_privacy_redaction": False,
         "ordinary_transcript_blocked": False,
+        "public_raw_file_count": len(public_raw_files),
+        "large_public_raw_file_count": large_public_raw_file_count,
+        "public_raw_large_files_skipped": False,
+        "credential_like_path_hits": credential_path_hits,
+        "credential_like_path_hit_count": len(credential_path_hits),
         "tracked_raw_private_files": tracked_private,
         "tracked_raw_private_file_count": len(tracked_private),
         "high_risk_secret_hits": secret_hits,
@@ -375,14 +596,31 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
 
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
-    if args.scan_only:
-        result = scan_repo_privacy(args.database_dir)
-        print(json.dumps(result, ensure_ascii=False, indent=2, sort_keys=True))
-        return 0 if result["status"] == "PASS" else 1
-    if args.import_private:
-        result = import_private_export(args.import_private, args.database_dir, args.output_name)
-        print(json.dumps(result, ensure_ascii=False, indent=2, sort_keys=True))
-        return 0
+    try:
+        if args.scan_only:
+            result = scan_repo_privacy(args.database_dir)
+            print(json.dumps(result, ensure_ascii=False, indent=2, sort_keys=True))
+            return 0 if result["status"] == "PASS" else 1
+        if args.import_private:
+            result = import_private_export(args.import_private, args.database_dir, args.output_name)
+            print(json.dumps(result, ensure_ascii=False, indent=2, sort_keys=True))
+            return 0
+    except CredentialExclusionError:
+        print(
+            json.dumps(
+                {
+                    "status": "FAIL_CLOSED",
+                    "task_id": TASK_ID,
+                    "credential_policy": POLICY_ID,
+                    "error": "credential_exclusion_contract_invalid",
+                    "credential_value_echo": False,
+                },
+                ensure_ascii=False,
+                indent=2,
+                sort_keys=True,
+            )
+        )
+        return 2
     raise SystemExit("Use --scan-only or --import-private")
 
 

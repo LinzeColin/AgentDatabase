@@ -10,7 +10,11 @@ import json
 import re
 from typing import Any
 
-from privacy_guard import redact_text
+from privacy_guard import (
+    credential_field_category,
+    redact_credentials_in_text,
+    redact_nonportable_paths_in_text,
+)
 
 
 MAX_PUBLIC_RAW_FILE_BYTES = 40 * 1024 * 1024
@@ -132,12 +136,17 @@ def sanitize_public_text(value: str) -> tuple[str, dict[str, int]]:
     # The repository hook intentionally has no word-boundary requirement. Mirror
     # that contract so random executable dumps or nested ciphertext cannot form a
     # commit-blocking key-shaped substring inside otherwise public transcript text.
-    hook_safe, hook_candidate_count = _GIT_HOOK_OPENAI_KEY_CANDIDATE_RE.subn(
-        "[REDACTED_SECRET]", value
-    )
-    redacted, counts = redact_text(hook_safe)
+    if "sk-" in value:
+        hook_safe, hook_candidate_count = _GIT_HOOK_OPENAI_KEY_CANDIDATE_RE.subn(
+            "[REDACTED_CREDENTIAL]", value
+        )
+    else:
+        hook_safe, hook_candidate_count = value, 0
+    redacted, counts = redact_credentials_in_text(hook_safe)
+    redacted, portability_counts = redact_nonportable_paths_in_text(redacted)
+    counts = merge_counts(counts, portability_counts)
     if hook_candidate_count:
-        counts["openai_api_key"] = counts.get("openai_api_key", 0) + hook_candidate_count
+        counts["api_keys"] = counts.get("api_keys", 0) + hook_candidate_count
     return redacted, {key: counts[key] for key in sorted(counts)}
 
 
@@ -160,6 +169,7 @@ def sanitize_public_value(value: Any) -> tuple[Any, dict[str, int]]:
         for key, item in value.items():
             sanitized_key: Any = key
             key_counts: dict[str, int] = {}
+            field_category = credential_field_category(key, item) if isinstance(key, str) else None
             if isinstance(key, str):
                 sanitized_key, key_counts = sanitize_public_text(key)
                 if sanitized_key in sanitized_dict:
@@ -174,6 +184,12 @@ def sanitize_public_value(value: Any) -> tuple[Any, dict[str, int]]:
                         )
                         counter += 1
             if (
+                isinstance(key, str)
+                and field_category is not None
+            ):
+                sanitized_item = "[REDACTED_CREDENTIAL]"
+                item_counts = {field_category: 1}
+            elif (
                 isinstance(key, str)
                 and key.strip().lower() in _NON_TEXT_STRING_FIELDS
                 and isinstance(item, str)
