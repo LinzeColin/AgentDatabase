@@ -106,6 +106,7 @@ class PublicProfileContractTests(unittest.TestCase):
             {step["id"] for step in payload["profiles"]["ui"]["steps"]},
             {
                 "frontend_build",
+                "public_raw_build_isolation",
                 "semantic_readability",
                 "home_multiviewport",
                 "visual_models",

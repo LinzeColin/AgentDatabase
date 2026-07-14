@@ -81,10 +81,24 @@
             "tests.test_memory_atlas_r7_public_raw",
             "tests.test_memory_atlas_r7_raw_integrity",
             "tests.test_memory_atlas_source_registry",
+            "tests.test_memory_atlas_public_raw_layout",
             "-q"
           ],
           "cwd": "database",
           "timeout_seconds": 600,
+          "critical": true
+        },
+        {
+          "id": "public_raw_layout",
+          "command": [
+            "@python",
+            "scripts/atlasctl.py",
+            "audit",
+            "--check",
+            "public-raw-layout"
+          ],
+          "cwd": "database",
+          "timeout_seconds": 300,
           "critical": true
         },
         {
@@ -168,6 +182,20 @@
             "build"
           ],
           "cwd": "app",
+          "timeout_seconds": 300,
+          "critical": true
+        },
+        {
+          "id": "public_raw_build_isolation",
+          "command": [
+            "@python",
+            "scripts/atlasctl.py",
+            "audit",
+            "--check",
+            "public-raw-layout",
+            "--require-built-dist"
+          ],
+          "cwd": "database",
           "timeout_seconds": 300,
           "critical": true
         },

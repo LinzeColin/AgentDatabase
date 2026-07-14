@@ -693,6 +693,29 @@ features:
     evidence_refs:
       - "EVID-MA-V121-S06-P1-T1-REGISTRY"
       - "EVID-MA-V121-S06-P1-T1-TEST"
+  - feature_id: "FEAT-MA-V121-S06-P1-T2"
+    name: "Memory Atlas 浅层公开 raw 数据平面"
+    description: "v1.2.1 Task Pack 当前完成 38/149；data/public_raw 通过单一配置和 atlasctl audit 固化为 chatgpt、codex[/sessions]、agents/<registered-source> 两层分区。当前 513 个文件全部 tracked；audit 不读取 raw 正文，并通过真实 Vite resolveConfig、生产 dist 和 startup route 证明 raw 不进入前端 publicDir/build 或默认 Codex 上下文。"
+    status: "active"
+    fact_level: "EXTRACTED"
+    code_refs:
+      - "OpenAIDatabase/scripts/memory_atlas_cli/public_raw_layout.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/validate.py"
+    config_refs:
+      - "OpenAIDatabase/config/data_sources/public_raw_layout.json"
+      - "OpenAIDatabase/config/data_sources/source_registry.json"
+      - "OpenAIDatabase/config/memory_atlas_validator_profiles.json"
+    source_refs:
+      - "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s06_p1_t2_public_raw_layout_review.md"
+    owner_actions:
+      - "新增 generic Agent 来源时先登记 source_id；首次同步后 audit 会验证其目录、Git tracking、浅层结构、前端隔离和默认 Codex 路由隔离。"
+    test_refs:
+      - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_public_raw_layout -q"
+      - "python3 -B OpenAIDatabase/scripts/atlasctl.py audit --check public-raw-layout --require-built-dist"
+      - "npm run validate:sync --prefix OpenAIDatabase/apps/memory-atlas"
+    evidence_refs:
+      - "EVID-MA-V121-S06-P1-T2-LAYOUT"
+      - "EVID-MA-V121-S06-P1-T2-TEST"
 models:
   -
     model_id: "MOD-001"
@@ -4838,4 +4861,14 @@ evidence_refs:
     evidence_id: "EVID-MA-V121-S06-P1-T1-TEST"
     kind: "test"
     ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s06_p1_t1_source_registry_review.md"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S06-P1-T2-LAYOUT"
+    kind: "config"
+    ref: "OpenAIDatabase/config/data_sources/public_raw_layout.json"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S06-P1-T2-TEST"
+    kind: "test"
+    ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s06_p1_t2_public_raw_layout_review.md"
     fact_level: "EXTRACTED"

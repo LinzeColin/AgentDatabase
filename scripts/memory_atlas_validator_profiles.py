@@ -76,8 +76,13 @@ _AUDITED_STEP_POLICIES: dict[tuple[str, str], tuple[str, tuple[str, ...]]] = {
             "tests.test_memory_atlas_r7_public_raw",
             "tests.test_memory_atlas_r7_raw_integrity",
             "tests.test_memory_atlas_source_registry",
+            "tests.test_memory_atlas_public_raw_layout",
             "-q",
         ),
+    ),
+    ("sync", "public_raw_layout"): (
+        "database",
+        ("@python", "scripts/atlasctl.py", "audit", "--check", "public-raw-layout"),
     ),
     ("sync", "sync_chatgpt_dry_run"): (
         "database",
@@ -100,6 +105,17 @@ _AUDITED_STEP_POLICIES: dict[tuple[str, str], tuple[str, tuple[str, ...]]] = {
         ("@python", "scripts/privacy_guard.py", "--database-dir", ".", "--scan-only"),
     ),
     ("ui", "frontend_build"): ("app", ("npm", "run", "build")),
+    ("ui", "public_raw_build_isolation"): (
+        "database",
+        (
+            "@python",
+            "scripts/atlasctl.py",
+            "audit",
+            "--check",
+            "public-raw-layout",
+            "--require-built-dist",
+        ),
+    ),
     ("ui", "semantic_readability"): (
         "database",
         ("@python", "scripts/atlasctl.py", "audit", "--check", "chinese-ux"),

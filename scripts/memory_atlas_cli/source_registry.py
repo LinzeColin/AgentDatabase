@@ -9,6 +9,7 @@ from typing import Any
 
 
 REGISTRY_PATH = Path("config/data_sources/source_registry.json")
+PUBLIC_RAW_LAYOUT_PATH = Path("config/data_sources/public_raw_layout.json")
 REGISTRY_SCHEMA_VERSION = "memory_atlas_data_source_registry.v1"
 SYNC_CONTRACT_VERSION = "memory_atlas.source_sync_contract.v1_2_1_s06_p1_t1"
 TASK_ID = "S06-P1-T1"
@@ -289,6 +290,7 @@ def validate_source_registry(payload: Any, database_dir: Path) -> dict[str, Any]
         "source_read_only",
         "archive_append_only",
         "repository_relative_paths",
+        "public_raw_layout_ref",
         "push_defaults",
     }
     if set(contract) != expected_contract_keys:
@@ -304,6 +306,13 @@ def validate_source_registry(payload: Any, database_dir: Path) -> dict[str, Any]
     for flag in ("source_read_only", "archive_append_only", "repository_relative_paths"):
         if contract.get(flag) is not True:
             raise SourceRegistryError(f"sync_contract.{flag} must remain true")
+    layout_ref = _repo_relative_path(
+        contract.get("public_raw_layout_ref"),
+        "sync_contract.public_raw_layout_ref",
+        ("config/data_sources/",),
+    )
+    if layout_ref != PUBLIC_RAW_LAYOUT_PATH.as_posix() or not (database_dir / layout_ref).is_file():
+        raise SourceRegistryError("sync_contract.public_raw_layout_ref must name the canonical layout contract")
     if contract.get("push_defaults") != PUSH_DEFAULTS:
         raise SourceRegistryError("sync_contract.push_defaults drifted from the delivery boundary")
 

@@ -27,8 +27,8 @@
     "deleted_python_test_count": 2,
     "retained_validator_count": 39,
     "retained_baseline_python_test_count": 49,
-    "added_python_test_count": 6,
-    "current_python_test_count": 55
+    "added_python_test_count": 7,
+    "current_python_test_count": 56
   },
   "profile_commands": {
     "fast": "npm run validate:fast",
@@ -43,7 +43,8 @@
     "tests/test_memory_atlas_zh_cn_copy_source.py",
     "apps/memory-atlas/scripts/validate_memory_atlas_semantic_readability.mjs",
     "tests/test_memory_atlas_semantic_readability.py",
-    "tests/test_memory_atlas_source_registry.py"
+    "tests/test_memory_atlas_source_registry.py",
+    "tests/test_memory_atlas_public_raw_layout.py"
   ],
   "candidates": [
     {
@@ -3352,6 +3353,16 @@
       ],
       "reason": "Retained because it proves the S06-P1-T1 source registry covers ChatGPT, Codex and generic agents with portable discovery, parser, archive, schedule and final-delivery-only push contracts.",
       "current_dependency": "S06-P1-T1 validate:sync and full Python suites"
+    },
+    {
+      "path": "tests/test_memory_atlas_public_raw_layout.py",
+      "risk_bindings": [
+        "data_integrity",
+        "release_risk",
+        "runner_contract"
+      ],
+      "reason": "Retained because it proves the S06-P1-T2 public-raw tree remains shallow, source-partitioned, Git recoverable and isolated from Vite builds and the default Codex route.",
+      "current_dependency": "S06-P1-T2 validate:sync, validate:ui and full Python suites"
     }
   ]
 }

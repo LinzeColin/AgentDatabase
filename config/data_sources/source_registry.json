@@ -31,6 +31,7 @@
     "source_read_only": true,
     "archive_append_only": true,
     "repository_relative_paths": true,
+    "public_raw_layout_ref": "config/data_sources/public_raw_layout.json",
     "push_defaults": {
       "mode": "final_delivery_only",
       "branch": "main",

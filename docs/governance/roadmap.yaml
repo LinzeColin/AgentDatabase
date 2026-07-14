@@ -8,7 +8,7 @@ next_gate_id: "ACC.OpenAIDatabase.PAM1.0019"
 total_estimated_hours: 255
 completed_estimated_hours: 241
 taskpack_progress:
-  completed_tasks: 37
+  completed_tasks: 38
   total_tasks: 149
   delivery_state: "local_only_not_released"
 stages:
@@ -1688,7 +1688,7 @@ stages:
     person_goal: "为 ChatGPT、Codex 和后续 Agent 建立统一公开 raw 数据平面，同时保证源文件只读、归档只追加、可去重、可恢复且不提交凭证。"
     status: "in_progress"
     estimated_hours: 9
-    estimated_pct: 11
+    estimated_pct: 22
     stop_conditions:
       - "同步器需要修改、移动或删除源 raw"
       - "credential-like 文件准备进入 staged diff"
@@ -1708,7 +1708,7 @@ stages:
         objective: "定义统一 source registry、公开 raw 路径与凭证排除边界。"
         status: "in_progress"
         estimated_hours: 3
-        estimated_pct: 33
+        estimated_pct: 67
         stop_conditions:
           - "为新增来源硬编码核心分支"
           - "raw 进入前端 publicDir 或默认构建产物"
@@ -1721,6 +1721,8 @@ stages:
           evidence_refs:
             - "EVID-MA-V121-S06-P1-T1-REGISTRY"
             - "EVID-MA-V121-S06-P1-T1-TEST"
+            - "EVID-MA-V121-S06-P1-T2-LAYOUT"
+            - "EVID-MA-V121-S06-P1-T2-TEST"
         tasks:
           - task_id: "S06-P1-T1"
             name: "定义统一 source registry"
@@ -1761,18 +1763,42 @@ stages:
           - task_id: "S06-P1-T2"
             name: "建立浅层公开 raw 数据平面"
             objective: "建立 data/public_raw/{chatgpt,codex,agents/<source>} 的可恢复布局。"
-            status: "planned"
+            status: "completed"
             estimated_hours: 1
-            estimated_pct: 0
+            estimated_pct: 100
             dependencies:
               - "S06-P1-T1"
             acceptance_ids:
               - "ACC-MA-V121-S06-P1-T2"
-            test_commands: []
-            evidence_refs: []
+            acceptance:
+              - acceptance_id: "ACC-MA-V121-S06-P1-T2"
+                description: "data/public_raw 仅允许 chatgpt、codex[/sessions] 与 agents/<registered-source> 的两层来源分区；当前 513 个控制/数据文件全部 tracked，raw 不进入 Vite publicDir/server allow/生产 dist，也不进入默认 Codex startup route。"
+                evidence_refs:
+                  - "EVID-MA-V121-S06-P1-T2-LAYOUT"
+                  - "EVID-MA-V121-S06-P1-T2-TEST"
+            test_commands:
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_public_raw_layout -q"
+              - "python3 -B OpenAIDatabase/scripts/atlasctl.py audit --check public-raw-layout"
+              - "npm run build --prefix OpenAIDatabase/apps/memory-atlas"
+              - "python3 -B OpenAIDatabase/scripts/atlasctl.py audit --check public-raw-layout --require-built-dist"
+              - "npm run validate:sync --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run validate:fast --prefix OpenAIDatabase/apps/memory-atlas"
+              - "python3 -B -m unittest discover -s OpenAIDatabase/tests -p 'test_*.py' -q"
+              - "python3 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+              - "python3.12 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+            test_results:
+              - "Canonical audit 以 metadata-only 方式确认 5 个浅层目录、513 个 tracked 文件与 512 个 raw 数据文件；来源分区为 chatgpt 379、codex 132、codex-reviewer 1。"
+              - "真实 Vite resolveConfig 的 publicDir=data/derived/visualization，server allow 仅包含 app 与 derived visualization；生产 dist 6 个文件且无 public_raw 路径。"
+              - "真实 startup route 只返回 AGENTS.md 与 derived profile/personalization 摘要，public_raw source count=0；未知来源、深层目录、symlink、缺失 active source、合同漂移和 dist 泄漏均 fail closed。"
+              - "10 项 layout 回归、99 项 focused tests、sync 7/7、fast 4/4、ui 14/14、完整 Python 356/356、frontend build、脚本 hash 治理 12/12 与 Python 3.13/3.12 deterministic render PASS；Vite allow 双向 raw 重叠和 dist symlink 均 fail closed，raw mutation=false、remote push=false。"
+              - "产品/范围与工程/安全两份独立只读复核最终均为 0 Critical / 0 Important / 0 Minor；工程复核发现的 dist renamed-path symlink Important 已由禁止 build symlink 的实现与回归关闭。"
+            evidence_refs:
+              - "EVID-MA-V121-S06-P1-T2-LAYOUT"
+              - "EVID-MA-V121-S06-P1-T2-TEST"
             risks:
               - "raw 进入前端构建或默认 Codex 扫描"
-            rollback: "git revert 本 Task 本地 commit。"
+            rollback: "提交前仅反向应用 S06-P1-T2 的精确 Task patch；提交后使用 git revert <S06-P1-T2 commit>。"
+            current_result: "complete_local_only_38_of_149_pending_s06_p1_t3"
           - task_id: "S06-P1-T3"
             name: "建立 credential exclusion 合同"
             objective: "允许 transcript/raw 公开，同时阻断 credentials、cookies、tokens、passwords 和 private keys。"

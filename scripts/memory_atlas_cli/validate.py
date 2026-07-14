@@ -23,6 +23,7 @@ from .constants import (
     FINAL_AUDIT_TASK_ID,
     ROOT,
 )
+from .public_raw_layout import run_public_raw_layout_audit
 
 
 def final_audit_gate_plan(database_dir: Path) -> list[dict[str, object]]:
@@ -1705,6 +1706,8 @@ def run_audit(args: argparse.Namespace) -> int:
         return run_final_audit(args)
     if args.check == "chinese-ux":
         return run_chinese_ux_audit(args)
+    if args.check == "public-raw-layout":
+        return run_public_raw_layout_audit(args)
     if args.check == "decision-debt-safety":
         return run_decision_debt_safety_audit(args)
     if args.check == "self-iteration-safety":
@@ -1728,7 +1731,7 @@ def run_audit(args: argparse.Namespace) -> int:
             "status": "NOT_IMPLEMENTED",
             "command": "audit",
             "check": args.check,
-            "reason": "Unknown audit check. Supported checks: insight-evidence, formulas, visual-roi, formula-what-if, agent-collaboration, agent-authorization, stage-flight, latent-safety, self-iteration-safety, decision-debt-safety, chinese-ux.",
+            "reason": "Unknown audit check. Supported checks: insight-evidence, formulas, visual-roi, formula-what-if, agent-collaboration, agent-authorization, stage-flight, latent-safety, self-iteration-safety, decision-debt-safety, chinese-ux, public-raw-layout.",
         }, ensure_ascii=False, indent=2, sort_keys=True))
         return 2
 

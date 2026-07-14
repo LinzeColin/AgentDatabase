@@ -48,6 +48,10 @@ class SourceRegistryContractTests(unittest.TestCase):
         self.assertIs(contract["source_read_only"], True)
         self.assertIs(contract["archive_append_only"], True)
         self.assertIs(contract["repository_relative_paths"], True)
+        self.assertEqual(
+            contract["public_raw_layout_ref"],
+            "config/data_sources/public_raw_layout.json",
+        )
 
     def test_canonical_registry_covers_chatgpt_codex_and_generic_agent(self) -> None:
         sources = sync_source_map(load_source_registry(ROOT))

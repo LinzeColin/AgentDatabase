@@ -1,0 +1,37 @@
+{
+  "schema_version": "memory_atlas.public_raw_layout.v1_2_1_s06_p1_t2",
+  "task_id": "S06-P1-T2",
+  "source_registry_ref": "config/data_sources/source_registry.json",
+  "root": "data/public_raw",
+  "control_files": [
+    "data/public_raw/README.md"
+  ],
+  "source_roots": {
+    "chatgpt": "data/public_raw/chatgpt",
+    "codex": "data/public_raw/codex",
+    "generic_agent_template": "data/public_raw/agents/{source_id}"
+  },
+  "shallow_layout": {
+    "max_directory_depth_below_root": 2,
+    "allowed_static_subdirectories": [
+      "codex/sessions"
+    ],
+    "registered_agent_directories_only": true,
+    "symlinks_allowed": false
+  },
+  "recovery_layout": {
+    "partition_key": "source_id",
+    "tracked_files_required": true,
+    "layout_only": true,
+    "restore_implementation_task": "S06-P2-T3"
+  },
+  "isolation": {
+    "frontend_app": "apps/memory-atlas",
+    "expected_vite_public_dir": "data/derived/visualization",
+    "build_output": "apps/memory-atlas/dist",
+    "default_codex_intent": "startup",
+    "forbidden_default_context_prefixes": [
+      "data/public_raw/"
+    ]
+  }
+}

@@ -46,6 +46,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     audit = subparsers.add_parser("audit", help="Run Memory Atlas derived evidence audits.")
     audit.add_argument("--check")
     audit.add_argument("--dry-run", action="store_true")
+    audit.add_argument("--require-built-dist", action="store_true")
     audit.add_argument("--database-dir", type=Path, default=ROOT)
 
     push = subparsers.add_parser("push", help="Prepare local GitHub backup scope.")

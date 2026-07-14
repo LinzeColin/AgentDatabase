@@ -70,9 +70,20 @@
 > Fourteen registry tests, 103 focused tests,
 > sync 6/6, fast 4/4 and 346 full Python tests passed. No public raw, source data,
 > state, manifest, chunk or restore artifact changed.
-> Historical reviews, source packages, release evidence and recovery evidence remain
-> unchanged; the one active raw-policy reference change is described above. The next
-> Task is only `S06-P1-T2`; it has not started.
+> `S06-P1-T2` adds `config/data_sources/public_raw_layout.json` and the
+> `atlasctl audit --check public-raw-layout` gate. The existing tree is now bounded to
+> five shallow directories and 513 tracked files: one control README plus 512 raw
+> files split across ChatGPT 379, Codex 132 and Codex reviewer 1. The audit reads no
+> raw bodies, rejects unknown/deep/symlink paths, and preserves config-only sources
+> before their first sync. Real Vite resolution keeps publicDir and server allow on
+> derived/app paths; a six-file production dist has no symlink or public_raw path, and the real
+> startup route returns zero raw sources. Only the public-raw control README changed;
+> no raw data file changed. T3 credential exclusions and P2 ledger/chunk/restore remain
+> unimplemented. Ten layout tests, 99 focused tests, sync 7/7, fast 4/4, ui 14/14,
+> 356 full Python tests, frontend build, script-hash governance and dual-runtime
+> deterministic render passed; audit safety remained raw mutation=false and remote
+> push=false. Historical source/release/recovery evidence remains unchanged. The next
+> Task is only `S06-P1-T3`; it has not started.
 >
 > The only public validator profiles are `validate:fast`, `validate:sync`,
 > `validate:ui`, and `validate:release`. Commands in the older "Verified Commands"
