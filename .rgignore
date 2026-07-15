@@ -1,0 +1,3 @@
+# Memory Atlas S06-P3-T1: raw bodies require an explicit --no-ignore search.
+data/public_raw/**
+data/raw_archives/**

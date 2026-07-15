@@ -817,6 +817,36 @@ features:
     evidence_refs:
       - "EVID-MA-V121-S06-P2-T3-CONTRACT"
       - "EVID-MA-V121-S06-P2-T3-TEST"
+  - feature_id: "FEAT-MA-V121-S06-P3-T1"
+    name: "Memory Atlas raw 默认工具链隔离"
+    description: "v1.2.1 Task Pack 当前完成 43/149；worktree/project .rgignore 默认排除 public_raw 与 raw_archives 正文，Codex 八条 resource route 由 canonical contract 运行时 fail closed，root monorepo 与 standalone CI 以 non-cone sparse checkout 不物化 raw，Vite pre-enforced guard 阻断 raw import/load/transform。显式 rg --no-ignore 仍可按需访问 tracked raw；构建审计只比较路径与 ledger SHA-256，不读取 raw 正文。push size guard S06-P3-T2 与完整 raw contract fixtures S06-P3-T3 尚未实现。"
+    status: "active"
+    fact_level: "EXTRACTED"
+    code_refs:
+      - "OpenAIDatabase/scripts/memory_atlas_cli/raw_isolation.py"
+      - "OpenAIDatabase/scripts/route_agent_resources.py"
+      - "OpenAIDatabase/apps/memory-atlas/vite.config.ts"
+      - "OpenAIDatabase/scripts/memory_atlas_validator_profiles.py"
+    config_refs:
+      - "OpenAIDatabase/config/data_sources/raw_isolation.json"
+      - "OpenAIDatabase/config/context_sources/resource_routes.json"
+      - "OpenAIDatabase/config/memory_atlas_validator_profiles.json"
+      - ".rgignore"
+      - "OpenAIDatabase/.rgignore"
+      - ".github/workflows/openai-database-ci.yml"
+      - "OpenAIDatabase/.github/workflows/ci.yml"
+    source_refs:
+      - "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s06_p3_t1_raw_isolation_review.md"
+    owner_actions:
+      - "日常搜索保持默认隔离；只有明确需要 raw 时才使用 rg --no-ignore 或专用工具。修改 resource route、CI sparse patterns 或 Vite 边界后必须运行 raw-isolation audit；不得通过删除 raw、force push 或放宽 guard 绕过失败。"
+    test_refs:
+      - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_raw_isolation -q"
+      - "python3 -B OpenAIDatabase/scripts/atlasctl.py audit --check raw-isolation --require-built-dist"
+      - "npm run validate:fast --prefix OpenAIDatabase/apps/memory-atlas"
+      - "npm run validate:ui --prefix OpenAIDatabase/apps/memory-atlas"
+    evidence_refs:
+      - "EVID-MA-V121-S06-P3-T1-CONTRACT"
+      - "EVID-MA-V121-S06-P3-T1-TEST"
 models:
   -
     model_id: "MOD-001"
@@ -5012,4 +5042,14 @@ evidence_refs:
     evidence_id: "EVID-MA-V121-S06-P2-T3-TEST"
     kind: "test"
     ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s06_p2_t3_archive_restore_review.md"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S06-P3-T1-CONTRACT"
+    kind: "config"
+    ref: "OpenAIDatabase/config/data_sources/raw_isolation.json"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S06-P3-T1-TEST"
+    kind: "test"
+    ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s06_p3_t1_raw_isolation_review.md"
     fact_level: "EXTRACTED"

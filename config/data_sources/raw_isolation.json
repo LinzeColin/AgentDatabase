@@ -1,0 +1,78 @@
+{
+  "schema_version": "memory_atlas.raw_isolation.v1_2_1_s06_p3_t1",
+  "task_id": "S06-P3-T1",
+  "repository_topologies": [
+    "codexproject_monorepo",
+    "standalone_openaidatabase"
+  ],
+  "forbidden_raw_roots": [
+    "data/public_raw",
+    "data/raw_archives"
+  ],
+  "search": {
+    "tool": "rg",
+    "worktree_ignore_file": ".rgignore",
+    "database_ignore_file": ".rgignore",
+    "required_worktree_patterns": [
+      "OpenAIDatabase/data/public_raw/**",
+      "OpenAIDatabase/data/raw_archives/**"
+    ],
+    "required_database_patterns": [
+      "data/public_raw/**",
+      "data/raw_archives/**"
+    ],
+    "explicit_override": [
+      "rg",
+      "--no-ignore"
+    ]
+  },
+  "codex_routing": {
+    "route_config": "config/context_sources/resource_routes.json",
+    "route_script": "scripts/route_agent_resources.py",
+    "contract_ref_field": "raw_isolation_contract_ref",
+    "all_routes_default_excluded": true,
+    "explicit_raw_route_ids": []
+  },
+  "ci": {
+    "environment_marker": "MEMORY_ATLAS_RAW_ISOLATED",
+    "environment_value": "1",
+    "root_workflow": ".github/workflows/openai-database-ci.yml",
+    "project_workflow": ".github/workflows/ci.yml",
+    "root_sparse_checkout_patterns": [
+      "/*",
+      "!/*/",
+      "/.github/",
+      "/governance/",
+      "/scripts/",
+      "/OpenAIDatabase/",
+      "!/OpenAIDatabase/data/public_raw/",
+      "!/OpenAIDatabase/data/raw_archives/"
+    ],
+    "project_sparse_checkout_patterns": [
+      "/*",
+      "!/data/public_raw/",
+      "!/data/raw_archives/"
+    ],
+    "audit_command": "python3 scripts/atlasctl.py audit --check raw-isolation --ci-checkout"
+  },
+  "frontend": {
+    "app": "apps/memory-atlas",
+    "vite_config": "apps/memory-atlas/vite.config.ts",
+    "expected_public_dir": "data/derived/visualization",
+    "build_output": "apps/memory-atlas/dist",
+    "guard_plugin": "memory-atlas-raw-isolation",
+    "server_fs_strict": true,
+    "forbidden_dist_path_components": [
+      "public_raw",
+      "raw_archives"
+    ]
+  },
+  "boundaries": {
+    "raw_content_read_by_audit": false,
+    "raw_mutation": false,
+    "remote_push": false,
+    "explicit_raw_tools_remain_available": true,
+    "push_size_guard_task": "S06-P3-T2",
+    "raw_fixture_contract_task": "S06-P3-T3"
+  }
+}

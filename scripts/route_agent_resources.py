@@ -8,6 +8,14 @@ import json
 from pathlib import Path
 from typing import Any
 
+from memory_atlas_cli.raw_isolation import (
+    CONFIG_PATH as RAW_ISOLATION_CONFIG,
+    FORBIDDEN_RAW_ROOTS,
+    RawIsolationError,
+    load_raw_isolation_contract,
+    validate_route_config_isolation,
+)
+
 
 ROUTE_CONFIG = Path("config/context_sources/resource_routes.json")
 DEFAULT_POLICY = {
@@ -48,7 +56,18 @@ def context_rows(paths: list[Any], reason: str, policy: dict[str, Any]) -> list[
 
 
 def route_resources(database_dir: Path, intent: str | None) -> dict[str, Any]:
+    database_dir = database_dir.resolve()
     config = read_json(database_dir / ROUTE_CONFIG)
+    try:
+        raw_isolation = load_raw_isolation_contract(database_dir)
+        validate_route_config_isolation(config, raw_isolation)
+    except RawIsolationError as exc:
+        return {
+            "status": "FAIL",
+            "reason": "raw_isolation_contract_invalid",
+            "detail": str(exc).replace(str(database_dir), "."),
+            "intent": intent or str(config.get("default_intent") or "startup"),
+        }
     selected_intent = intent or str(config.get("default_intent") or "startup")
     default_policy = config.get("default_resource_policy", {})
     if not isinstance(default_policy, dict):
@@ -89,6 +108,11 @@ def route_resources(database_dir: Path, intent: str | None) -> dict[str, Any]:
         "context_used": required_context,
         "conditional_context": conditional_context,
         "update_targets": route.get("update_targets", []),
+        "raw_isolation": {
+            "enforced": True,
+            "contract_ref": RAW_ISOLATION_CONFIG.as_posix(),
+            "forbidden_prefixes": list(FORBIDDEN_RAW_ROOTS),
+        },
     }
 
 

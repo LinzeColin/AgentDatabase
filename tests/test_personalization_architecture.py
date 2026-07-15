@@ -34,6 +34,11 @@ def write_minimal_database(root: Path) -> None:
     shutil.copytree(ROOT / "config/context_sources", root / "config/context_sources")
     shutil.copytree(ROOT / "config/codex", root / "config/codex")
     shutil.copytree(ROOT / "config/evaluation", root / "config/evaluation")
+    (root / "config/data_sources").mkdir(parents=True)
+    shutil.copy(
+        ROOT / "config/data_sources/raw_isolation.json",
+        root / "config/data_sources/raw_isolation.json",
+    )
     (root / "docs").mkdir(parents=True, exist_ok=True)
     shutil.copy(ROOT / "docs/PERSONAL_CONTEXT_ARCHITECTURE.md", root / "docs/PERSONAL_CONTEXT_ARCHITECTURE.md")
     shutil.copytree(ROOT / "data/run_logs", root / "data/run_logs")

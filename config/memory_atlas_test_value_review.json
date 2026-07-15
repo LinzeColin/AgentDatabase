@@ -27,8 +27,8 @@
     "deleted_python_test_count": 2,
     "retained_validator_count": 39,
     "retained_baseline_python_test_count": 49,
-    "added_python_test_count": 11,
-    "current_python_test_count": 60
+    "added_python_test_count": 12,
+    "current_python_test_count": 61
   },
   "profile_commands": {
     "fast": "npm run validate:fast",
@@ -48,7 +48,8 @@
     "tests/test_memory_atlas_credential_exclusion.py",
     "tests/test_memory_atlas_raw_ledger.py",
     "tests/test_memory_atlas_archive_chunking.py",
-    "tests/test_memory_atlas_archive_restore.py"
+    "tests/test_memory_atlas_archive_restore.py",
+    "tests/test_memory_atlas_raw_isolation.py"
   ],
   "candidates": [
     {
@@ -3407,6 +3408,16 @@
       ],
       "reason": "Retained because it proves the S06-P2-T3 ordered per-part and whole-package verification, real 45 MiB restore round trip, no-overwrite publication, legacy read-only compatibility and identity-gated failure handling.",
       "current_dependency": "S06-P2-T3 validate:sync and full Python suites"
+    },
+    {
+      "path": "tests/test_memory_atlas_raw_isolation.py",
+      "risk_bindings": [
+        "data_integrity",
+        "release_risk",
+        "runner_contract"
+      ],
+      "reason": "Retained because it proves S06-P3-T1 default search exclusion, fail-closed Codex routes, CI sparse-checkout semantics, Vite raw guards and built-dist leakage rejection without reading raw bodies.",
+      "current_dependency": "S06-P3-T1 validate:fast, validate:ui and full Python suites"
     }
   ]
 }

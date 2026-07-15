@@ -1,6 +1,7 @@
 {
   "schema_version": "openai_database.resource_routes.v1",
   "purpose": "On-demand resource routing so agents read the smallest sufficient context set before broad search.",
+  "raw_isolation_contract_ref": "config/data_sources/raw_isolation.json",
   "default_intent": "startup",
   "default_resource_policy": {
     "load_mode": "summary",

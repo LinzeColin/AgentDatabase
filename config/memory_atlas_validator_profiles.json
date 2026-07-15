@@ -25,10 +25,24 @@
             "tests.test_atlasctl_script_consolidation",
             "tests.test_memory_atlas_test_value_audit",
             "tests.test_memory_atlas_legacy_command_migrations",
+            "tests.test_memory_atlas_raw_isolation",
             "-q"
           ],
           "cwd": "database",
           "timeout_seconds": 300,
+          "critical": true
+        },
+        {
+          "id": "raw_isolation",
+          "command": [
+            "@python",
+            "scripts/atlasctl.py",
+            "audit",
+            "--check",
+            "raw-isolation"
+          ],
+          "cwd": "database",
+          "timeout_seconds": 180,
           "critical": true
         },
         {
@@ -196,7 +210,7 @@
             "scripts/atlasctl.py",
             "audit",
             "--check",
-            "public-raw-layout",
+            "raw-isolation",
             "--require-built-dist"
           ],
           "cwd": "database",

@@ -121,6 +121,14 @@ class PublicProfileContractTests(unittest.TestCase):
                 "visual_semantics",
             },
         )
+        self.assertIn("raw_isolation", {step["id"] for step in payload["profiles"]["fast"]["steps"]})
+        ui_isolation = next(
+            step for step in payload["profiles"]["ui"]["steps"] if step["id"] == "public_raw_build_isolation"
+        )
+        self.assertEqual(
+            ui_isolation["command"],
+            ["@python", "scripts/atlasctl.py", "audit", "--check", "raw-isolation", "--require-built-dist"],
+        )
         self.assertEqual(
             [step["id"] for step in payload["profiles"]["release"]["steps"]],
             ["final_audit"],

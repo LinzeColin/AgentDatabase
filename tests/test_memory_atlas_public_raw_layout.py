@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import copy
 import json
+import os
 import subprocess
 import sys
 import tempfile
@@ -22,6 +23,9 @@ from memory_atlas_cli.public_raw_layout import (  # noqa: E402
     classify_public_raw_path,
     validate_layout_contract,
 )
+
+
+RAW_ISOLATED_CI = os.environ.get("MEMORY_ATLAS_RAW_ISOLATED") == "1"
 
 
 def canonical_contract() -> dict:
@@ -77,6 +81,7 @@ def write_fixture_tree(database: Path) -> None:
 
 
 class PublicRawLayoutTests(unittest.TestCase):
+    @unittest.skipIf(RAW_ISOLATED_CI, "explicit raw integration is excluded from the default CI checkout")
     def test_canonical_layout_is_tracked_recoverable_and_runtime_isolated(self) -> None:
         result = audit_public_raw_layout(ROOT)
 
@@ -92,6 +97,7 @@ class PublicRawLayoutTests(unittest.TestCase):
         self.assertIs(result["raw_mutation"], False)
         self.assertIs(result["remote_push"], False)
 
+    @unittest.skipIf(RAW_ISOLATED_CI, "explicit raw integration is excluded from the default CI checkout")
     def test_atlasctl_exposes_the_canonical_layout_audit(self) -> None:
         result = subprocess.run(
             [sys.executable, "scripts/atlasctl.py", "audit", "--check", "public-raw-layout"],

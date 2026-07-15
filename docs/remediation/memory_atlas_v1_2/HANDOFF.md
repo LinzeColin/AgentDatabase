@@ -1,22 +1,20 @@
 # Memory Atlas v1.2 Remediation Handoff
 
-> **Current v1.2.1 note (2026-07-15 13:12 +10:00):** The v1.2.1 Task Pack is
-> 42/149 complete locally. This run completed only `S06-P2-T3`; `S06-P2` is now
-> 3/3 complete and the next/only eligible Task is `S06-P3-T1`. The canonical
-> `archive_restore.json` contract and `raw_archive_manifest.py verify/restore`
-> commands stream-check ordered part bytes/SHA-256 and reconstructed package
-> bytes/SHA-256. Restore requires an explicit output outside the archive, never
-> overwrites different content, treats identical output as idempotent, publishes
-> through an exclusive temporary inode plus hard-link no-replace, and reports
-> partial/post-publish states conservatively. Manifest command strings are never
-> executed. The real 45 MiB+123 byte round trip passes; the two immutable legacy
-> archives pass read-only verify across 29/29 parts and 2,635,234,713 package bytes,
-> with unchanged 35-file bytes/inode/mtime metadata digest and Git diff 0. Dedicated
-> tests are 13/13, T2/T3/registry tests 41/41, full Python 411/411, fast 4/4,
-> sync 7/7, ui 14/14 and release 1/1. No archive part, public raw, ledger, source
-> package, remote, deployment, branch/PR or cache was changed. Independent review
-> is recorded in the T3 review artifact. Do not start more than `S06-P3-T1` in the
-> next run and do not push before the entire Task Pack plus final review closes.
+> **Current v1.2.1 note (2026-07-15 15:15 +10:00):** The v1.2.1 Task Pack is
+> 43/149 complete locally. This run completed only `S06-P3-T1`; `S06-P3` is 1/3
+> and the next/only eligible Task is `S06-P3-T2`. The canonical
+> `raw_isolation.json` contract binds default rg exclusions, all eight Codex
+> resource routes, root/standalone non-cone sparse CI checkouts and a pre-enforced
+> Vite import/load/transform guard. Default worktree/project searches expose zero
+> raw paths; explicit `rg --no-ignore` and Git still identify all 549 tracked raw
+> paths. Production dist audit reports six regular files, 3,249,771 bytes, zero raw
+> path components and zero collisions against 512 raw-ledger hashes without reading
+> raw bodies. Dedicated tests are 8/8, focused tests 58/58, full Python 419/419,
+> fast 5/5, sync 7/7, ui 14/14 and release 1/1; frontend lint/build and an actual
+> sparse-CI checkout with fresh npm install pass. No raw/public archive/ledger/source
+> package, remote, deployment, branch/PR or cache was changed. Independent review is
+> recorded in the T1 review artifact. Do not start more than `S06-P3-T2` in the next
+> run and do not push before the entire Task Pack plus final review closes.
 >
 > **Prior v1.2.1 T2 note (2026-07-15):** This file preserves the earlier v1.2 R7
 > handoff below. Memory Atlas is executing the v1.2.1 Task Pack with one Task per run.
