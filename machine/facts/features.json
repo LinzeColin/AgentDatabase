@@ -1,0 +1,20 @@
+[
+  {
+    "id": "ADB-001",
+    "name": "会话历史归档与校验",
+    "status": "active",
+    "evidence": "extracted"
+  },
+  {
+    "id": "ADB-002",
+    "name": "大文件备份的分片重组与还原",
+    "status": "active",
+    "evidence": "extracted"
+  },
+  {
+    "id": "ADB-003",
+    "name": "Memory Atlas 分析数据源",
+    "status": "planned",
+    "evidence": "declared"
+  }
+]
