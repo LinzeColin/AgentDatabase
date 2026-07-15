@@ -8,7 +8,7 @@ next_gate_id: "ACC.OpenAIDatabase.PAM1.0019"
 total_estimated_hours: 255
 completed_estimated_hours: 241
 taskpack_progress:
-  completed_tasks: 40
+  completed_tasks: 41
   total_tasks: 149
   delivery_state: "local_only_not_released"
 stages:
@@ -1845,7 +1845,7 @@ stages:
         objective: "建立不可变 raw ledger、确定性分片和 restore/verify 闭环。"
         status: "in_progress"
         estimated_hours: 3
-        estimated_pct: 33
+        estimated_pct: 67
         stop_conditions:
           - "同步改变源文件字节、mtime 或 size"
           - "分片或恢复结果无法由 manifest 校验"
@@ -1898,18 +1898,43 @@ stages:
           - task_id: "S06-P2-T2"
             name: "实现确定性 45 MiB 分片"
             objective: "对超过阈值的包分片并生成顺序、bytes 和 SHA-256 manifest。"
-            status: "planned"
+            status: "completed"
             estimated_hours: 1
-            estimated_pct: 0
+            estimated_pct: 100
             dependencies:
               - "S06-P2-T1"
             acceptance_ids:
               - "ACC-MA-V121-S06-P2-T2"
-            test_commands: []
-            evidence_refs: []
+            acceptance:
+              - acceptance_id: "ACC-MA-V121-S06-P2-T2"
+                description: "超过 45 MiB 的新 package 以确定性固定字节分片，所有 part 均不超过 47,185,920 bytes 且低于 GitHub 50 MiB 警告线；manifest 固定记录顺序、bytes 和 SHA-256，发布不可覆盖、幂等且失败清理只处理仍可证明由本 run 拥有的 inode。"
+                evidence_refs:
+                  - "EVID-MA-V121-S06-P2-T2-CONTRACT"
+                  - "EVID-MA-V121-S06-P2-T2-TEST"
+            test_commands:
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_archive_chunking -q"
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_archive_chunking OpenAIDatabase.tests.test_memory_atlas_source_registry OpenAIDatabase.tests.test_memory_atlas_raw_ledger OpenAIDatabase.tests.test_memory_atlas_public_raw_layout OpenAIDatabase.tests.test_memory_atlas_credential_exclusion OpenAIDatabase.tests.test_memory_atlas_r7_public_raw OpenAIDatabase.tests.test_s03p3_raw_manifest OpenAIDatabase.tests.test_memory_atlas_r7_raw_integrity OpenAIDatabase.tests.test_memory_atlas_test_value_audit -q"
+              - "python3 -B OpenAIDatabase/scripts/raw_archive_manifest.py audit --database-dir OpenAIDatabase"
+              - "python3 -B OpenAIDatabase/scripts/audit_memory_atlas_public_raw.py --database-dir OpenAIDatabase"
+              - "python3 -B OpenAIDatabase/scripts/privacy_guard.py --database-dir OpenAIDatabase --scan-only"
+              - "npm run validate:sync --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run validate:fast --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run validate:ui --prefix OpenAIDatabase/apps/memory-atlas"
+              - "python3 -B -m unittest discover -s OpenAIDatabase/tests -p 'test_*.py' -q"
+              - "python3 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+              - "python3.12 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+            test_results:
+              - "14 项专用回归以真实 fixture bytes 验证 45 MiB 边界、两 part 顺序/bytes/SHA-256、跨目录确定性、幂等 replay、冲突不覆盖、source stat、symlink/lock fail closed、目录与 part inode 替换保护以及 CLI 的 partial/post-publish 真实状态。"
+              - "真实 inventory 中 data/public_raw 超过 45 MiB 的文件为 0；tracked tree 有 37 个旧 90 MiB parts、最大 94,371,840 bytes、普通 blob >=100 MiB 为 0。旧 parts 属于 pre-v1.2.1 不可变证据，T2 未迁移或改写。"
+              - "97 项相关回归与 51 项 validator/profile 治理回归通过；原始 TaskPack SHA-256 为 db59f4db3ac02845fb3cde346a301cba64146c81c7ba19168f52c27e82ddd0f1。"
+              - "真实 512-row ledger 保持 128,209 bytes、inode 156668907、mtime 1783818229.381278488、SHA-256 1a4fa71303903ca896c82640f7b4550cee47f3cc8ec600f81d03f7603e120c96；public raw、ledger、archive parts 与 restore artifacts 均未改变。完整 Python 398/398、sync 7/7、fast 4/4、ui 14/14、Python 3.13/3.12 deterministic render PASS；工程/安全与产品/范围最终独立复核均为 Critical 0、Important 0、Minor 0。"
+            evidence_refs:
+              - "EVID-MA-V121-S06-P2-T2-CONTRACT"
+              - "EVID-MA-V121-S06-P2-T2-TEST"
             risks:
               - "产生超过 GitHub 限制的普通 blob"
-            rollback: "git revert 本 Task 本地 commit。"
+            rollback: "提交前仅反向应用 S06-P2-T2 精确 Task patch；提交后使用 git revert <S06-P2-T2 commit>。"
+            current_result: "complete_local_only_41_of_149_pending_s06_p2_t3"
           - task_id: "S06-P2-T3"
             name: "实现 restore/verify"
             objective: "从分片恢复并逐文件与整包校验。"

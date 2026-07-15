@@ -27,8 +27,8 @@
     "deleted_python_test_count": 2,
     "retained_validator_count": 39,
     "retained_baseline_python_test_count": 49,
-    "added_python_test_count": 9,
-    "current_python_test_count": 58
+    "added_python_test_count": 10,
+    "current_python_test_count": 59
   },
   "profile_commands": {
     "fast": "npm run validate:fast",
@@ -46,7 +46,8 @@
     "tests/test_memory_atlas_source_registry.py",
     "tests/test_memory_atlas_public_raw_layout.py",
     "tests/test_memory_atlas_credential_exclusion.py",
-    "tests/test_memory_atlas_raw_ledger.py"
+    "tests/test_memory_atlas_raw_ledger.py",
+    "tests/test_memory_atlas_archive_chunking.py"
   ],
   "candidates": [
     {
@@ -3385,6 +3386,16 @@
       ],
       "reason": "Retained because it proves the S06-P2-T1 source-stat guard, SHA-256 hashing, exclusive append lock, immutable ledger prefix and idempotent deduplication contract.",
       "current_dependency": "S06-P2-T1 validate:sync and full Python suites"
+    },
+    {
+      "path": "tests/test_memory_atlas_archive_chunking.py",
+      "risk_bindings": [
+        "data_integrity",
+        "release_risk",
+        "runner_contract"
+      ],
+      "reason": "Retained because it proves the S06-P2-T2 exact 45 MiB boundary, deterministic part bytes and SHA-256 manifest, idempotent no-overwrite replay, source-stat guard and exclusive publication lock.",
+      "current_dependency": "S06-P2-T2 validate:sync and full Python suites"
     }
   ]
 }

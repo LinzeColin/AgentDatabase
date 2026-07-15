@@ -13,6 +13,11 @@ from memory_atlas_cli.credential_exclusion import (
     POLICY_ID,
     load_credential_exclusion_contract,
 )
+from memory_atlas_cli.archive_chunking import (
+    CONTRACT_PATH as ARCHIVE_CHUNKING_CONTRACT_PATH,
+    ArchiveChunkError,
+    load_archive_chunking_contract,
+)
 from memory_atlas_cli.raw_ledger import (
     RAW_LEDGER_CONTRACT_PATH,
     RawLedgerError,
@@ -305,6 +310,7 @@ def validate_source_registry(payload: Any, database_dir: Path) -> dict[str, Any]
         "public_raw_layout_ref",
         "credential_exclusion_ref",
         "raw_ledger_ref",
+        "archive_chunking_ref",
         "push_defaults",
     }
     if set(contract) != expected_contract_keys:
@@ -349,6 +355,17 @@ def validate_source_registry(payload: Any, database_dir: Path) -> dict[str, Any]
         load_raw_ledger_contract(database_dir, database_dir / raw_ledger_ref)
     except RawLedgerError as exc:
         raise SourceRegistryError("sync_contract raw-ledger contract is invalid") from exc
+    archive_chunking_ref = _repo_relative_path(
+        contract.get("archive_chunking_ref"),
+        "sync_contract.archive_chunking_ref",
+        ("config/data_sources/",),
+    )
+    if archive_chunking_ref != ARCHIVE_CHUNKING_CONTRACT_PATH.as_posix():
+        raise SourceRegistryError("sync_contract.archive_chunking_ref must name the canonical contract")
+    try:
+        load_archive_chunking_contract(database_dir, database_dir / archive_chunking_ref)
+    except ArchiveChunkError as exc:
+        raise SourceRegistryError("sync_contract archive-chunking contract is invalid") from exc
     if contract.get("push_defaults") != PUSH_DEFAULTS:
         raise SourceRegistryError("sync_contract.push_defaults drifted from the delivery boundary")
 

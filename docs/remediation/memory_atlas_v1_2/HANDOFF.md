@@ -2,12 +2,22 @@
 
 > **Current v1.2.1 note (2026-07-15):** This file preserves the earlier v1.2 R7
 > handoff below. Memory Atlas is executing the v1.2.1 Task Pack with one Task per run.
-> S04 and S05 are complete locally; S06-P1 and S06-P2-T1 are complete and the
-> next Task is only S06-P2-T2. `S06-P2-T1` adds the canonical immutable raw-ledger
+> S04 and S05 are complete locally; S06-P1, S06-P2-T1 and S06-P2-T2 are complete
+> locally and the next Task is only S06-P2-T3. `S06-P2-T2` adds the canonical
+> 45 MiB archive chunking contract, deterministic ordered bytes/SHA-256 manifests,
+> dir_fd/O_NOFOLLOW no-overwrite publication, manifest-last durability, idempotent
+> replay and identity-gated cleanup. The real inventory has no new eligible
+> over-threshold source package: data/public_raw has zero files above 45 MiB, while
+> all 37 tracked files above 45 MiB are immutable pre-v1.2.1 90 MiB parts and none
+> reaches 100 MiB. T2 did not rewrite or migrate them; restore/verify remains T3.
+> Fourteen dedicated and 97 related tests pass; full Python is 398/398, sync is
+> 7/7, fast is 4/4, UI is 14/14, and Python 3.13/3.12 deterministic render is clean.
+> Final engineering/security and product/scope reviews are both 0 Critical / 0
+> Important / 0 Minor. `S06-P2-T1` adds the canonical immutable raw-ledger
 > contract, source-stat guards, SHA-256 fingerprints, exclusive append locking,
 > append-only/idempotent registration and three-adapter integration. The real
 > 512-row ledger passed with zero drift/deletion/unledgered files and unchanged
-> bytes, inode and mtime; no public raw or source file changed. Final gates passed
+> bytes, inode and mtime; no public raw or source file changed. Its historical gates passed
 > sync 7/7, fast 4/4, UI 14/14 and the complete Python suite 384/384. The full
 > credential scan covered all 513 tracked raw/control files including 35 large files;
 > its unchanged critical command received a 600-second budget after a measured

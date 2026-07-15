@@ -1,0 +1,63 @@
+{
+  "schema_version": "memory_atlas.archive_chunking.v1_2_1_s06_p2_t2",
+  "task_id": "S06-P2-T2",
+  "acceptance_id": "ACC-MA-V121-S06-P2-T2",
+  "policy": "deterministic_fixed_size_chunks",
+  "archive_root": "data/raw_archives",
+  "threshold": {
+    "max_part_bytes": 47185920,
+    "github_warning_bytes": 52428800,
+    "github_hard_limit_bytes": 104857600,
+    "part_bytes_below_warning": true
+  },
+  "hashing": {
+    "algorithm": "sha256",
+    "read_chunk_bytes": 1048576,
+    "hex_length": 64
+  },
+  "naming": {
+    "parts_directory": "parts",
+    "manifest_filename": "manifest.json",
+    "part_index_width": 6,
+    "part_filename_template": "{archive_id}.part-{index:06d}"
+  },
+  "manifest": {
+    "schema_version": "memory_atlas.archive_chunk_manifest.v1_2_1_s06_p2_t2",
+    "deterministic_json": true,
+    "package_fields": [
+      "filename",
+      "byte_size",
+      "sha256"
+    ],
+    "part_fields": [
+      "index",
+      "filename",
+      "byte_size",
+      "sha256"
+    ],
+    "ordered_parts": true,
+    "absolute_paths_forbidden": true,
+    "timestamps_forbidden": true
+  },
+  "publication": {
+    "output_path_template": "data/raw_archives/{source_id}/{archive_id}",
+    "exclusive_lock": true,
+    "exclusive_output_reservation": true,
+    "no_overwrite": true,
+    "idempotent_replay": true,
+    "manifest_publish_last": true,
+    "incomplete_output_invalid_without_manifest": true,
+    "normal_failure_cleanup_requires_identity": true,
+    "fsync_parts_and_manifest": true,
+    "stale_lock_policy": "manual_verify_never_auto_remove"
+  },
+  "phase_boundary": {
+    "does_not_restore_archives": true,
+    "does_not_modify_source_bytes": true,
+    "does_not_modify_public_raw_or_ledger": true,
+    "does_not_rewrite_legacy_archives": true,
+    "does_not_push_remote": true,
+    "production_activation_requires": "S06-P2-T3",
+    "next_task": "S06-P2-T3"
+  }
+}

@@ -30,6 +30,12 @@ from memory_atlas_cli.raw_ledger import (
     raw_ledger_append_lock,
     validate_ledger_row,
 )
+from memory_atlas_cli.archive_chunking import (
+    ArchiveChunkError,
+    ArchiveChunkPartialWriteError,
+    ArchiveChunkPostPublishError,
+    chunk_archive_package,
+)
 
 PUBLIC_RAW_ROOT = RAW_ROOT
 MANIFEST_ROOT = Path("机器治理/证据与日志/raw_archive_manifests")
@@ -414,6 +420,12 @@ def build_parser() -> argparse.ArgumentParser:
     audit = subparsers.add_parser("audit", help="audit raw append-only/hash drift rules")
     audit.add_argument("--database-dir", default=".", help="OpenAIDatabase root")
 
+    chunk = subparsers.add_parser("chunk", help="split a package into deterministic 45 MiB parts")
+    chunk.add_argument("--database-dir", default=".", help="OpenAIDatabase root")
+    chunk.add_argument("--package", required=True, help="package file to read without mutation")
+    chunk.add_argument("--source-id", required=True, help="portable archive source id")
+    chunk.add_argument("--archive-id", required=True, help="portable archive run id")
+
     return parser
 
 
@@ -429,8 +441,45 @@ def main(argv: list[str] | None = None) -> int:
             )
         elif args.command == "audit":
             result = audit_raw_append_only(Path(args.database_dir))
+        elif args.command == "chunk":
+            result = chunk_archive_package(
+                Path(args.database_dir),
+                Path(args.package),
+                args.source_id,
+                args.archive_id,
+            )
         else:
             raise AssertionError(f"unhandled command: {args.command}")
+    except ArchiveChunkPostPublishError as exc:
+        result = {
+            "status": "FAIL",
+            "schema_version": "memory_atlas_archive_chunk_error.v1_2_1_s06_p2_t2",
+            "task_id": "S06-P2-T2",
+            "reason": str(exc),
+            "published_archive_may_exist": True,
+            "incomplete_archive_may_exist": False,
+            "remote_push": False,
+        }
+    except ArchiveChunkPartialWriteError as exc:
+        result = {
+            "status": "FAIL",
+            "schema_version": "memory_atlas_archive_chunk_error.v1_2_1_s06_p2_t2",
+            "task_id": "S06-P2-T2",
+            "reason": str(exc),
+            "published_archive_may_exist": True,
+            "incomplete_archive_may_exist": True,
+            "remote_push": False,
+        }
+    except ArchiveChunkError as exc:
+        result = {
+            "status": "FAIL",
+            "schema_version": "memory_atlas_archive_chunk_error.v1_2_1_s06_p2_t2",
+            "task_id": "S06-P2-T2",
+            "reason": str(exc),
+            "published_archive_may_exist": False,
+            "incomplete_archive_may_exist": False,
+            "remote_push": False,
+        }
     except ManifestConflict as exc:
         result = {
             "status": "FAIL",
