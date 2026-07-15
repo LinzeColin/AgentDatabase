@@ -28,6 +28,9 @@ DERIVED_IMPORT_DIR = Path("data/derived/privacy_imports")
 PRIVACY_AUDIT_LOG = Path("data/run_logs/privacy/privacy_imports.jsonl")
 PRIVATE_ROOTS = (Path("data/raw"), Path("data/raw_encrypted"), Path("data/private_imports"))
 REQUIRED_GITIGNORE_PATTERNS = ("*.zip", "data/raw/", "data/raw_encrypted/", "data/private_imports/")
+CODEX_PUBLIC_RAW_ARCHIVE_MANIFEST_SCHEMA = (
+    "memory_atlas.codex_public_raw_archive_manifest.v1_2_1_s07_p1_t2"
+)
 SECRET_PATTERNS = (
     ("openai_api_key", re.compile(r"\bsk-[A-Za-z0-9][A-Za-z0-9_-]{10,}\b")),
     ("github_token", re.compile(r"\bgh[pousr]_[A-Za-z0-9_]{20,}\b")),
@@ -528,7 +531,32 @@ def privacy_scan_payloads(path: Path, text: str) -> list[Any] | None:
             payloads = [json.loads(line) for line in text.splitlines() if line.strip()]
     except json.JSONDecodeError:
         return None
-    return payloads
+    return [_normalize_structured_scan_payload(payload) for payload in payloads]
+
+
+def _normalize_structured_scan_payload(payload: Any) -> Any:
+    """Treat validated archive redaction counters as metadata, never as credential values."""
+
+    if not isinstance(payload, dict) or payload.get("schema_version") != (
+        CODEX_PUBLIC_RAW_ARCHIVE_MANIFEST_SCHEMA
+    ):
+        return payload
+    counts = payload.get("redaction_counts")
+    if (
+        not isinstance(counts, dict)
+        or any(
+            not isinstance(key, str)
+            or not key
+            or not isinstance(value, int)
+            or isinstance(value, bool)
+            or value < 0
+            for key, value in counts.items()
+        )
+    ):
+        return payload
+    normalized = dict(payload)
+    normalized["redaction_counts"] = {key: None for key in counts}
+    return normalized
 
 
 def privacy_scan_segments(path: Path, text: str) -> list[str]:

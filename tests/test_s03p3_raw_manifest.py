@@ -84,6 +84,38 @@ class S03P3RawManifestTests(unittest.TestCase):
         self.assertEqual(deleted_audit["status"], "FAIL", deleted_audit)
         self.assertEqual(deleted_audit["deleted_manifest_entry_count"], 1, deleted_audit)
 
+    def test_incremental_manifest_matches_union_ledger_and_preserves_import_times(self) -> None:
+        module = load_module()
+        with tempfile.TemporaryDirectory() as temp_dir:
+            database = Path(temp_dir)
+            install_raw_ledger_contract(database)
+            first_raw = database / "data/public_raw/codex/session-001.jsonl"
+            first_raw.parent.mkdir(parents=True)
+            first_raw.write_text('{"text":"first"}\n', encoding="utf-8")
+            first = module.generate_raw_manifest(
+                database,
+                "first",
+                imported_at="2026-07-08T00:00:00Z",
+            )
+            second_raw = database / "data/public_raw/codex/session-002.jsonl"
+            second_raw.write_text('{"text":"second"}\n', encoding="utf-8")
+            second = module.generate_raw_manifest(
+                database,
+                "second",
+                imported_at="2026-07-09T00:00:00Z",
+            )
+            manifest = (database / second["manifest_path"]).read_bytes()
+            ledger = (database / second["hash_ledger_path"]).read_bytes()
+            rows = [json.loads(line) for line in manifest.splitlines()]
+
+        self.assertEqual(manifest, ledger)
+        self.assertEqual(first["ledger_entry_count"], 1)
+        self.assertEqual(second["ledger_entry_count"], 2)
+        self.assertEqual(
+            [row["imported_at"] for row in rows],
+            ["2026-07-08T00:00:00Z", "2026-07-09T00:00:00Z"],
+        )
+
     def test_public_raw_readme_is_not_locked_as_transcript_raw(self) -> None:
         module = load_module()
         with tempfile.TemporaryDirectory() as temp_dir:

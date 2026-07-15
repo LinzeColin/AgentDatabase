@@ -36,6 +36,39 @@ class S3PDT01PrivacyTests(unittest.TestCase):
             self.assertEqual(module.credential_exclusion_hits(code_text, "fixture"), [])
             self.assertEqual(module.high_risk_secret_hits(database, ["fixture.jsonl"]), [])
 
+    def test_archive_redaction_counts_are_metadata_but_secrets_still_block(self) -> None:
+        module = load_module()
+        with tempfile.TemporaryDirectory() as temp_dir:
+            database = Path(temp_dir)
+            manifest = database / "manifest.json"
+            payload = {
+                "schema_version": module.CODEX_PUBLIC_RAW_ARCHIVE_MANIFEST_SCHEMA,
+                "redaction_counts": {
+                    "api_keys": 436,
+                    "browser_credential_store": 26,
+                    "cookies": 86,
+                },
+                "note": "verified redaction metadata",
+            }
+            manifest.write_text(json.dumps(payload), encoding="utf-8")
+            self.assertEqual(
+                module.high_risk_secret_hits(database, ["manifest.json"]),
+                [],
+            )
+
+            payload["note"] = "api_key = sk-" + "realcredential1234567890"
+            manifest.write_text(json.dumps(payload), encoding="utf-8")
+            hits = module.high_risk_secret_hits(database, ["manifest.json"])
+            self.assertIn("api_keys", {hit["pattern"] for hit in hits})
+
+            payload["note"] = "safe"
+            payload["redaction_counts"]["api_keys"] = (
+                "sk-" + "credentialincounter1234567890"
+            )
+            manifest.write_text(json.dumps(payload), encoding="utf-8")
+            hits = module.high_risk_secret_hits(database, ["manifest.json"])
+            self.assertIn("api_keys", {hit["pattern"] for hit in hits})
+
     def test_private_import_writes_only_redacted_derived_data_and_survives_raw_deletion(self) -> None:
         module = load_module()
         with tempfile.TemporaryDirectory() as temp_dir:

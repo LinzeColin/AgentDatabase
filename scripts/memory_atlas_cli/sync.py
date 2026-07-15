@@ -15,6 +15,7 @@ from memory_atlas_owner_daily import (
 
 from .constants import ROOT
 from .child_process import run_child_command
+from .codex_public_raw_archive import run_codex_public_raw_archive
 from .source_registry import (
     PUSH_DEFAULTS,
     SourceRegistryError,
@@ -160,6 +161,25 @@ def run_sync(args: argparse.Namespace) -> int:
     parser_path = ROOT / str(registered_source["parser"]["entrypoint"])
     generic_agent_id = args.agent_id
     registered_source_id = str(registered_source["source_id"])
+    if args.raw_archive:
+        if source_type != "codex_local":
+            print(json.dumps({
+                "status": "FAIL_CLOSED",
+                "source_id": args.source,
+                "reason": "raw archive mode is reserved for the canonical Codex source",
+                "writes_files": False,
+            }, ensure_ascii=False, indent=2, sort_keys=True))
+            return 2
+        args.database_dir = ROOT
+        return run_codex_public_raw_archive(args)
+    if args.archive_id:
+        print(json.dumps({
+            "status": "FAIL_CLOSED",
+            "source_id": args.source,
+            "reason": "--archive-id requires --raw-archive",
+            "writes_files": False,
+        }, ensure_ascii=False, indent=2, sort_keys=True))
+        return 2
     if source_type == "generic_agent":
         try:
             validate_portable_identifier(generic_agent_id, "agent_id", max_length=128)

@@ -1,5 +1,34 @@
 # Memory Atlas v1.2 Remediation Handoff
 
+> **Current v1.2.1 note (2026-07-16 01:28 +10:00):** The v1.2.1 Task Pack is
+> 47/149 complete locally. This run completed only `S07-P1-T2`; S07 is 2/9,
+> S07-P1 is 2/3, and `S07-P1-T3` is the next/only eligible Task. Real archive
+> `codex-public-raw-20260715t1300z` contains 430 stable eligible files and
+> 3,884,927,678 source bytes; four recent active sessions are deferred without a
+> hash/stat claim. Stable before/after digest is
+> `c1e284843c4d3171b49ac84bc682a564279f822a502a7d4e4a9fb768d30cd061` and
+> source mutation is false. The 558,731,407-byte recoverable sanitized package
+> has 432 members, SHA-256
+> `e1406eea8b67ffdac96fb41f26f821696389b6eb5ed9ef069b1b42b186d1f174`
+> and 12 parts at or below 45 MiB. Its public index is the 513th raw-ledger row;
+> the exact 513-row immutable raw manifest is byte-identical to the ledger with
+> SHA-256 `05ecc7c521214bd513b6ae6101b1c2ecd49c58dfcbf96fe2c2a0ad9c17c90478`.
+> Restore now validates package hash, exact unique safe regular members and the
+> source manifest before atomic publication. Dedicated 14/14, focused 54/54,
+> recovery 22/22, full Python 475/475, fast 6/6, sync 8/8 and ui 14/14 passed.
+> Exact-commit tracked-only recovery reads 1,665 OpenAIDatabase Git-stream files,
+> validates current raw/ledger 513/513 while preserving the immutable 512-row
+> release manifest as a verified subset, and passes fresh build/Pages parity.
+> Final `validate:release` passed 1/1 on the exact commit: all 17 final-audit gates,
+> 58/58 requirement reconciliation, raw-mutation=false and remote-push=false passed.
+> Engineering/security review closed 0 Critical / 0 Important /
+> 0 Minor after all findings were fixed; product/scope review is also clean.
+> Cursor, content dedupe, interrupted-run resume and derived output remain T3 or
+> later. Four unrelated KMFA changes remain unstaged. No fetch, push, deploy,
+> branch/PR, merge/rebase or project cache cleanup occurred. Do not start more
+> than `S07-P1-T3` next, and do not upload before all 149 Tasks plus final
+> review/remediation are complete.
+>
 > **Current v1.2.1 note (2026-07-15 22:19 +10:00):** The v1.2.1 Task Pack is
 > 46/149 complete locally. This run completed only `S07-P1-T1`; S07 is 1/9,
 > S07-P1 is 1/3, and `S07-P1-T2` is the next/only eligible Task. The canonical

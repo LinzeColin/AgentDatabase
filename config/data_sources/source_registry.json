@@ -148,6 +148,9 @@
       },
       "parser": {
         "entrypoint": "scripts/sync_codex_memory_data.py",
+        "raw_archive_entrypoint": "scripts/memory_atlas_cli/codex_public_raw_archive.py",
+        "raw_archive_contract_ref": "config/data_sources/codex_public_raw_archive.json",
+        "complete_archive_root": "data/raw_archives/codex",
         "input_formats": [
           "codex_session_jsonl",
           "codex_history_jsonl",

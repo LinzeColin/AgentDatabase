@@ -1,3 +1,64 @@
+## 171. Memory Atlas v1.2.1 S07-P1-T2 Codex Public Raw Archive Parameters
+
+状态：`COMPLETE_LOCAL_ONLY`；Task Pack 为 `47/149`，下一且唯一 eligible Task 为
+`S07-P1-T3`。本 Task 不新增评分模型或业务公式；它扩展 `MOD-009` 的公开 raw 归档、
+source-proof 与恢复安全参数。
+
+参数：
+
+- `archive_id = codex-public-raw-20260715t1300z`
+- `content_policy = recoverable_sanitized_raw_package`
+- `package_format = tar_gzip; gzip_level=1; gzip_mtime=0`
+- `max_part_bytes = 47185920; part_count=12; member_count=432`
+- `package_bytes = 558731407`
+- `package_sha256 = e1406eea8b67ffdac96fb41f26f821696389b6eb5ed9ef069b1b42b186d1f174`
+- `manifest_sha256 = 6640cbdeed803df4c3090aaa2e51350d68210bf059bdcafe5ec65f40561cef81`
+- `public_index_sha256 = d5f946b5ec04c3babe3f24babc624fd342ad8876b6f539a357bfed4cd434825a`
+- `raw_manifest_sha256 = 05ecc7c521214bd513b6ae6101b1c2ecd49c58dfcbf96fe2c2a0ad9c17c90478; raw_manifest_rows=513; byte_identical_to_ledger=true`
+- `discovered_files = 434; stable_files=430; deferred_recent_active=4`
+- `discovered_bytes = 4278194875; stable_source_bytes=3884927678`
+- `source_before_sha256 = source_after_sha256 = c1e284843c4d3171b49ac84bc682a564279f822a502a7d4e4a9fb768d30cd061`
+- `source_stat_fields = device; inode; mode; size_bytes; mtime_ns; ctime_ns`
+- `source_mutation = false; archive_append_only=true; manifest_publish_last=true`
+- `inflight_grace_seconds = 300; inflight_hash_stat_claim=false`
+- `jsonl_transform = canonical_jsonl_sanitized`
+- `sqlite_transform = schema_and_rows_rebuilt_sanitized`
+- `credential_values_public = false; local_absolute_paths_public=false`
+- `non_text_binary = sha256_and_size_marker`
+- `redactions = api_keys 436; binary_omission 71104; browser_credential_store 26; cookies 86; local_absolute_path 717400; oauth_tokens 559; passwords 282; session_tokens 140`
+- `raw_ledger_entries = 513`
+- `restore = package_sha256 + exact_member_count + unique_safe_codex_relative_regular_members + atomic_output_publish`
+- `tracked_recovery_stream_files = 1665; current_raw=513; current_ledger=513; immutable_release_manifest=512`
+- `tracked_recovery_stream_only = session_history; data/raw_archives/chatgpt; data/raw_archives/git-remote-branches`
+- `tracked_recovery_materialized = current_codex_archive + public_raw + source_packages + release + frontend`
+- `cursor_write = false; content_dedupe=false; interrupted_resume=false; derived_build=false`
+
+source-proof 公式为：对按 source kind/relative path 固定排序的每个稳定来源记录原始
+SHA-256 与六项 stat，序列化为 canonical JSONL 后计算 aggregate SHA-256；完整转换后重新
+发现并重新 hash，只有 before tuple 与 after tuple 完全相等才允许 manifest 最后发布。
+最近 300 秒内仍写入的 active session 不进入证明集合，只在 package source manifest 中
+记录 relative path、stat、deferred reason 与 `hash_stat_claim=false`。重试期间重新发现的
+recent active 也必须重新分类，不能因初始竞态进入 archive。
+
+公开内容公式为：JSONL 值递归脱敏后 canonical serialization；SQLite 以只读 immutable
+source 重建 schema/rows，文本执行相同脱敏，非 UTF-8 blob 仅保留 hash/size marker。
+普通 transcript 内容允许保留，但任何 credential regex、本机绝对路径、unsafe member
+name 或不安全 schema 都 fail closed。restore 先拼接有序 parts 并校验 package SHA，
+再要求恰好 432 个唯一、`codex/` 根、无空段/`.`/`..`/反斜线/NUL 且仅 regular file 的
+members，确认 source manifest 存在后在 staging 解包并原子 rename。
+
+tracked-only recovery 公式为：对 exact commit 的 `OpenAIDatabase` Git tar 流逐 member
+做安全类型/路径/重复检查并完整读取；历史 bulk 路径只消费流、不制造第二份临时磁盘副本，
+当前 Codex archive、public raw、source package、release 与 frontend 必须落盘验证。release
+绑定的 512 行 immutable manifest 必须保持 hash 正确且为 current 513 行 append-only ledger
+的同 hash 子集；current public raw 则必须与 ledger 513/513 精确覆盖，随后 fresh build 与
+Pages snapshot hash 必须一致。
+
+边界：该 archive 是 S07-P1-T1 eligible source 的公开安全点时归档，不声称包含运行中
+active session 的最新尾部，也不声称 SQLite WAL sidecar 是独立 eligible source。T3 才能
+实现 cursor、内容 hash 去重与 interrupted-run resume；本 Task 不构建 derived、不 commit/
+push remote、不部署，也不删除或覆盖既有 append-only raw。
+
 ## 170. Memory Atlas v1.2.1 S07-P1-T1 Codex Source Discovery Parameters
 
 状态：`COMPLETE_LOCAL_ONLY`。本 Task 不新增评分模型或业务公式；它为现有

@@ -1,5 +1,45 @@
 # Memory Atlas Delivery Record
 
+## v1.2.1 S07-P1-T2 Codex Public Raw Archive
+
+状态：`COMPLETE_LOCAL_ONLY`；Task Pack 进度 `47/149`，S07 为 `2/9`、S07-P1 为
+`2/3`，下一且唯一 eligible Task 为 `S07-P1-T3`。本 Task 未 fetch/push、未部署、未创建
+branch/PR、未 merge/rebase，也未实现 cursor、内容去重、断点恢复或 derived。
+
+真实 archive `codex-public-raw-20260715t1300z` 将 S07-P1-T1 发现的 Codex
+sessions/logs/history 转换为可恢复的公开安全包。434 个点时 eligible files 中，430 个
+稳定文件、3,884,927,678 bytes 被归档；4 个最近仍写入的 active sessions 只在 source
+manifest 中记录为 deferred，不声称 hash/stat。稳定源完整读取前后 aggregate SHA-256
+均为 `c1e284843c4d3171b49ac84bc682a564279f822a502a7d4e4a9fb768d30cd061`，六项 stat
+完全一致，`source_mutation=false`。
+
+JSONL 以 canonical sanitized 形式保留普通 transcript；SQLite 以 schema/rows 重建为
+可查询 SQLite。credential values、本机绝对路径和 non-text binary body 分别替换为明确
+marker。最终 tar.gz 为 558,731,407 bytes、432 members，SHA-256
+`e1406eea8b67ffdac96fb41f26f821696389b6eb5ed9ef069b1b42b186d1f174`，拆成 12 个不超过
+45 MiB 的 parts；manifest SHA-256 为
+`6640cbdeed803df4c3090aaa2e51350d68210bf059bdcafe5ec65f40561cef81`。公开 index SHA-256
+`d5f946b5ec04c3babe3f24babc624fd342ad8876b6f539a357bfed4cd434825a` 已追加为第 513 个
+public raw/ledger 条目。对应 immutable raw manifest 与 513 行 ledger 字节一致，SHA-256
+为 `05ecc7c521214bd513b6ae6101b1c2ecd49c58dfcbf96fe2c2a0ad9c17c90478`。
+
+复核补强了三项真实缺口：restore helper 现先校验整包 SHA、member 数量/唯一性、
+`codex/` 根、安全相对路径、regular-file 类型和 source manifest，再在临时目录解包并
+原子发布；archive audit 同时要求唯一 public index 与 immutable raw ledger 通过；初始
+quiescence 重试会重新延后新出现的 recent active session。专用 `14/14` 已覆盖这些路径，
+完整 Python、四档 profile、隐私、恢复与 staged-size 结果记录在本 Task review。
+最终 exact-commit tracked-only recovery 已从 Git tar 流读取 1,665 个
+`OpenAIDatabase` tracked files，并实际恢复当前 Codex archive/public raw、source
+packages、release 与 frontend；513 个 current raw 与 513 行 ledger 精确一致，旧 release
+绑定的 512 行 manifest 保持为 hash 已验证子集，fresh `npm ci`、production build 与 Pages
+snapshot parity 均通过。历史 session/raw bulk 仍被完整读取但不在临时目录重复落盘，以避免
+低磁盘环境制造伪恢复失败。最终 `validate:release` 在 exact commit 上 `1/1` PASS，17 个
+final-audit gates、58/58 requirement reconciliation、raw mutation false 与 remote push false
+全部成立。
+
+回滚不得删除既有 archive、public index 或 ledger。需要撤回实现时使用纠正提交只回退
+代码/配置，并保留 append-only 证据；T3 必须在此基础上添加 cursor、dedupe 和 resume。
+
 ## v1.2.1 S07-P1-T1 Codex Source Discovery
 
 状态：`COMPLETE_LOCAL_ONLY`；Task Pack 进度 `46/149`，下一且唯一 eligible Task 为

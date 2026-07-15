@@ -33,6 +33,13 @@ from memory_atlas_cli.raw_ledger import (
 REGISTRY_PATH = Path("config/data_sources/source_registry.json")
 PUBLIC_RAW_LAYOUT_PATH = Path("config/data_sources/public_raw_layout.json")
 CODEX_DISCOVERY_CONTRACT_PATH = Path("config/data_sources/codex_source_discovery.json")
+CODEX_PUBLIC_RAW_ARCHIVE_CONTRACT_PATH = Path(
+    "config/data_sources/codex_public_raw_archive.json"
+)
+CODEX_PUBLIC_RAW_ARCHIVE_ENTRYPOINT = Path(
+    "scripts/memory_atlas_cli/codex_public_raw_archive.py"
+)
+CODEX_COMPLETE_ARCHIVE_ROOT = Path("data/raw_archives/codex")
 REGISTRY_SCHEMA_VERSION = "memory_atlas_data_source_registry.v1"
 SYNC_CONTRACT_VERSION = "memory_atlas.source_sync_contract.v1_2_1_s06_p1_t1"
 TASK_ID = "S06-P1-T1"
@@ -246,6 +253,46 @@ def _validate_source(source: dict[str, Any], database_dir: Path, push_defaults: 
     resolved_parser = (database_dir / parser_path).resolve()
     if database_dir.resolve() not in resolved_parser.parents or not resolved_parser.is_file():
         raise SourceRegistryError(f"{source_id}.parser.entrypoint does not exist: {parser_path}")
+    if source_type == "codex_local":
+        raw_archive_entrypoint = _repo_relative_path(
+            parser.get("raw_archive_entrypoint"),
+            f"{source_id}.parser.raw_archive_entrypoint",
+            ("scripts/",),
+        )
+        raw_archive_contract_ref = _repo_relative_path(
+            parser.get("raw_archive_contract_ref"),
+            f"{source_id}.parser.raw_archive_contract_ref",
+            ("config/data_sources/",),
+        )
+        complete_archive_root = _repo_relative_path(
+            parser.get("complete_archive_root"),
+            f"{source_id}.parser.complete_archive_root",
+            ("data/raw_archives/",),
+        )
+        if (
+            raw_archive_entrypoint != CODEX_PUBLIC_RAW_ARCHIVE_ENTRYPOINT.as_posix()
+            or raw_archive_contract_ref
+            != CODEX_PUBLIC_RAW_ARCHIVE_CONTRACT_PATH.as_posix()
+            or complete_archive_root != CODEX_COMPLETE_ARCHIVE_ROOT.as_posix()
+        ):
+            raise SourceRegistryError(
+                "codex.parser must name the canonical S07-P1-T2 raw archive adapter"
+            )
+        if not (database_dir / raw_archive_entrypoint).is_file():
+            raise SourceRegistryError("codex raw archive entrypoint does not exist")
+        if not (database_dir / raw_archive_contract_ref).is_file():
+            raise SourceRegistryError("codex raw archive contract does not exist")
+    elif any(
+        key in parser
+        for key in (
+            "raw_archive_entrypoint",
+            "raw_archive_contract_ref",
+            "complete_archive_root",
+        )
+    ):
+        raise SourceRegistryError(
+            f"{source_id}.parser cannot claim the canonical Codex raw archive adapter"
+        )
 
     schedule = _mapping(source.get("schedule"), f"{source_id}.schedule")
     if set(schedule) != {"mode", "frequency", "timezone"}:

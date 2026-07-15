@@ -8,7 +8,7 @@ next_gate_id: "ACC.OpenAIDatabase.PAM1.0019"
 total_estimated_hours: 255
 completed_estimated_hours: 241
 taskpack_progress:
-  completed_tasks: 46
+  completed_tasks: 47
   total_tasks: 149
   delivery_state: "local_only_not_released"
 stages:
@@ -2154,7 +2154,7 @@ stages:
     person_goal: "把本机 Codex sessions/logs/history 自动只读归档为公开 raw、增量派生到 Memory Atlas，并在验证通过后直接推送 GitHub main。"
     status: "in_progress"
     estimated_hours: 9
-    estimated_pct: 11
+    estimated_pct: 22
     stop_conditions:
       - "源 Codex 文件发生字节、mtime 或 size 改变"
       - "发现认证资料或 secret 进入 staged diff"
@@ -2172,13 +2172,16 @@ stages:
       evidence_refs:
         - "EVID-MA-V121-S07-P1-T1-TEST"
         - "EVID-MA-V121-S07-P1-T1-REVIEW"
+        - "EVID-MA-V121-S07-P1-T2-ARCHIVE"
+        - "EVID-MA-V121-S07-P1-T2-TEST"
+        - "EVID-MA-V121-S07-P1-T2-REVIEW"
     phases:
       - phase_id: "MA-V121-S07-P1"
         name: "本机来源发现与 raw 只读导出"
         objective: "发现可移植 Codex 来源并以只读、append-only 方式归档原始资料。"
         status: "in_progress"
         estimated_hours: 3
-        estimated_pct: 33
+        estimated_pct: 67
         stop_conditions:
           - "发现逻辑硬编码单一用户绝对路径"
           - "认证、secret 或浏览器 credential store 被纳入候选"
@@ -2192,6 +2195,9 @@ stages:
           evidence_refs:
             - "EVID-MA-V121-S07-P1-T1-TEST"
             - "EVID-MA-V121-S07-P1-T1-REVIEW"
+            - "EVID-MA-V121-S07-P1-T2-ARCHIVE"
+            - "EVID-MA-V121-S07-P1-T2-TEST"
+            - "EVID-MA-V121-S07-P1-T2-REVIEW"
         tasks:
           - task_id: "S07-P1-T1"
             name: "实现 Codex source discovery"
@@ -2231,18 +2237,43 @@ stages:
           - task_id: "S07-P1-T2"
             name: "实现 Codex public raw archive"
             objective: "将 sessions/logs/history 以原始格式或可恢复原始包 append-only 归档。"
-            status: "planned"
+            status: "completed"
             estimated_hours: 1
-            estimated_pct: 0
+            estimated_pct: 100
             dependencies:
               - "S07-P1-T1"
             acceptance_ids:
               - "ACC-MA-V121-S07-P1-T2"
-            test_commands: []
-            evidence_refs: []
+            acceptance:
+              - acceptance_id: "ACC-MA-V121-S07-P1-T2"
+                description: "Codex sessions/logs/history 以可恢复 sanitized tar.gz 形式写入 append-only archive，credential values、本机绝对路径和 non-text binary body 不公开；稳定源文件在完整读取前后 SHA-256 及 device/inode/mode/size/mtime/ctime 完全一致，最近仍写入的 active sessions 只记录为 deferred 且不声称 hash/stat。归档固定 45 MiB 分片、manifest 最后发布、public index 进入 immutable raw ledger；restore 在临时目录校验整包 SHA、成员数量/唯一性/安全路径后原子发布。"
+                evidence_refs:
+                  - "EVID-MA-V121-S07-P1-T2-ARCHIVE"
+                  - "EVID-MA-V121-S07-P1-T2-TEST"
+                  - "EVID-MA-V121-S07-P1-T2-REVIEW"
+            test_commands:
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_codex_public_raw_archive -q"
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_r7_recovery -q"
+              - "python3 -B -m unittest discover -s OpenAIDatabase/tests -q"
+              - "python3 -B OpenAIDatabase/scripts/atlasctl.py audit --check codex-public-raw-archive --archive-id codex-public-raw-20260715t1300z --database-dir OpenAIDatabase"
+              - "python3 -B OpenAIDatabase/scripts/raw_archive_manifest.py audit --database-dir OpenAIDatabase"
+              - "npm run validate:fast --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run validate:sync --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run validate:ui --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run validate:release --prefix OpenAIDatabase/apps/memory-atlas"
+            test_results:
+              - "专用 14/14 覆盖 recoverable sanitized JSONL/SQLite、普通 transcript 保留、credential/path/binary 处理、source hash/stat 不变、append-only 冲突、recent-active 延后、quiescence 重分类、source drift 零发布、part tamper、manifest authorization 漂移、public index/ledger 缺失、unsafe tar member、non-UTF8 与 path-free dry-run/CLI。"
+              - "真实 append-only archive codex-public-raw-20260715t1300z 收录 430 个稳定 eligible files、3,884,927,678 source bytes；另有 4 个 recent active sessions 只记录为 deferred。before/after digest 同为 c1e284843c4d3171b49ac84bc682a564279f822a502a7d4e4a9fb768d30cd061，source_mutation=false。"
+              - "可恢复 package 为 558,731,407 bytes、12 个不超过 45 MiB 的 parts，package SHA-256 e1406eea8b67ffdac96fb41f26f821696389b6eb5ed9ef069b1b42b186d1f174；manifest SHA-256 6640cbdeed803df4c3090aaa2e51350d68210bf059bdcafe5ec65f40561cef81。公开 index SHA-256 d5f946b5ec04c3babe3f24babc624fd342ad8876b6f539a357bfed4cd434825a 已登记为第 513 行 raw ledger。"
+              - "513 行 immutable raw manifest 与 append-only ledger 字节一致，SHA-256 05ecc7c521214bd513b6ae6101b1c2ecd49c58dfcbf96fe2c2a0ad9c17c90478；focused 54/54、recovery 22/22、全量 Python 475/475、fast 6/6、sync 8/8、ui 14/14、release 1/1 PASS。exact-commit tracked-only recovery 读取 1,665 个 OpenAIDatabase Git-stream files，current raw/ledger 513/513、immutable release manifest 512-row verified subset、fresh build 与 Pages parity PASS；17 个 final-audit gates、58/58 requirement reconciliation、raw mutation false 与 remote push false 全部成立。"
+            evidence_refs:
+              - "EVID-MA-V121-S07-P1-T2-ARCHIVE"
+              - "EVID-MA-V121-S07-P1-T2-TEST"
+              - "EVID-MA-V121-S07-P1-T2-REVIEW"
             risks:
               - "归档过程修改源 Codex bytes、mtime 或 size"
-            rollback: "git revert 本 Task 本地 commit；已追加 raw 保持不变并由 manifest 标记。"
+            rollback: "提交前仅反向应用 S07-P1-T2 非 raw 实现 patch；提交后用纠正提交回退代码/配置，但保留 append-only archive、public index 与 raw ledger 证据，不覆盖或删除既有 raw。"
+            current_result: "complete_local_only_47_of_149_pending_s07_p1_t3_no_remote_upload"
           - task_id: "S07-P1-T3"
             name: "实现 Codex sync state"
             objective: "建立增量 cursor、内容 hash 去重和 interrupted-run resume。"

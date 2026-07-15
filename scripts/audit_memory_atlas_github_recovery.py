@@ -43,6 +43,11 @@ EXACT_COMMIT_PATTERN = re.compile(r"(?:[0-9a-fA-F]{40}|[0-9a-fA-F]{64})\Z")
 SHA256_PATTERN = re.compile(r"[0-9a-f]{64}\Z")
 SAFE_RELEASE_ID_PATTERN = re.compile(r"[A-Za-z0-9._-]+\Z")
 IGNORED_PUBLIC_RAW_NAMES = {".DS_Store", ".gitkeep", "README.md"}
+STREAM_ONLY_RELATIVE_PREFIXES = (
+    ("session_history",),
+    ("data", "raw_archives", "chatgpt"),
+    ("data", "raw_archives", "git-remote-branches"),
+)
 
 
 class RecoveryAuditError(RuntimeError):
@@ -187,6 +192,11 @@ def _terminate_process(process: subprocess.Popen[bytes]) -> None:
             os.killpg(process.pid, signal.SIGTERM)
         except ProcessLookupError:
             return
+        except PermissionError:
+            try:
+                process.terminate()
+            except ProcessLookupError:
+                return
     else:
         process.terminate()
     try:
@@ -199,6 +209,11 @@ def _terminate_process(process: subprocess.Popen[bytes]) -> None:
             os.killpg(process.pid, signal.SIGKILL)
         except ProcessLookupError:
             return
+        except PermissionError:
+            try:
+                process.kill()
+            except ProcessLookupError:
+                return
     else:
         process.kill()
     process.wait()
@@ -308,9 +323,12 @@ def build_recovery_plan(repo_root: Path, commit: str) -> list[list[str]]:
     extractor_script = Path("scripts/audit_memory_atlas_github_recovery.py")
     if (Path(repo_root) / "OpenAIDatabase").is_dir():
         extractor_script = Path("OpenAIDatabase") / extractor_script
+    archive_command = ["git", "archive", "--format=tar", commit]
+    if (Path(repo_root) / "OpenAIDatabase").is_dir():
+        archive_command.append("OpenAIDatabase")
     return [
         ["git", "rev-parse", "--verify", f"{commit}^{{commit}}"],
-        ["git", "archive", "--format=tar", commit],
+        archive_command,
         [
             "python3",
             extractor_script.as_posix(),
@@ -346,19 +364,30 @@ def _extract_archive_safely(
             if normalized in seen:
                 raise RecoveryAuditError("GIT_ARCHIVE_UNSAFE", "git archive contains duplicate paths.")
             seen.add(normalized)
+            database_parts = pure.parts[1:] if pure.parts[:1] == ("OpenAIDatabase",) else pure.parts
+            stream_only = any(
+                database_parts[: len(prefix)] == prefix
+                for prefix in STREAM_ONLY_RELATIVE_PREFIXES
+            )
             target = _resolve_under(destination, Path(*pure.parts), "GIT_ARCHIVE_UNSAFE")
             if member.isdir():
-                target.mkdir(parents=True, exist_ok=True)
+                if not stream_only:
+                    target.mkdir(parents=True, exist_ok=True)
                 continue
             if not member.isfile():
                 raise RecoveryAuditError("GIT_ARCHIVE_UNSAFE", "git archive contains an unsupported member type.")
-            target.parent.mkdir(parents=True, exist_ok=True)
             source = archive.extractfile(member)
             if source is None:
                 raise RecoveryAuditError("GIT_ARCHIVE_INVALID", "git archive member could not be read.")
-            with source, target.open("wb") as handle:
-                shutil.copyfileobj(source, handle)
-            target.chmod(member.mode & 0o777)
+            if stream_only:
+                with source:
+                    for _chunk in iter(lambda: source.read(1024 * 1024), b""):
+                        pass
+            else:
+                target.parent.mkdir(parents=True, exist_ok=True)
+                with source, target.open("wb") as handle:
+                    shutil.copyfileobj(source, handle)
+                target.chmod(member.mode & 0o777)
             file_count += 1
     if file_count <= 0:
         raise RecoveryAuditError("GIT_ARCHIVE_EMPTY", "git archive contains no tracked files.")
@@ -489,6 +518,8 @@ def _stream_git_archive_safely(
     display_argv: list[str],
 ) -> int:
     git_argv = ["git", "archive", "--format=tar", commit]
+    if (repo_root / "OpenAIDatabase").is_dir():
+        git_argv.append("OpenAIDatabase")
     extractor_argv = _stream_extractor_command(destination)
     deadline = time.monotonic() + COMMAND_TIMEOUT_SECONDS
     git_process: subprocess.Popen[bytes] | None = None
@@ -1101,8 +1132,8 @@ def _run_public_raw_auditor(database_dir: Path) -> dict[str, Any]:
 
 def _audit_raw_integrity(database_dir: Path, contract: ReleaseContract) -> dict[str, Any]:
     raw_manifest_path = database_dir / contract.raw_manifest_path
-    rows = _load_jsonl(raw_manifest_path, "RAW_MANIFEST_MISSING", "RAW_MANIFEST_INVALID")
-    if not rows:
+    release_rows = _load_jsonl(raw_manifest_path, "RAW_MANIFEST_MISSING", "RAW_MANIFEST_INVALID")
+    if not release_rows:
         raise RecoveryAuditError("RAW_MANIFEST_EMPTY", "Raw manifest must contain imported public raw files.")
     ledger_rows = _load_jsonl(database_dir / RAW_LEDGER_PATH, "RAW_LEDGER_MISSING", "RAW_LEDGER_INVALID")
     if not ledger_rows:
@@ -1112,12 +1143,11 @@ def _audit_raw_integrity(database_dir: Path, contract: ReleaseContract) -> dict[
     if not raw_files:
         raise RecoveryAuditError("PUBLIC_RAW_EMPTY", "Public raw archive must not be empty.")
 
-    manifest_by_path: dict[str, dict[str, Any]] = {}
-    source_ids: set[str] = set()
-    for row in rows:
+    release_manifest_by_path: dict[str, dict[str, Any]] = {}
+    for row in release_rows:
         relative = _normalize_raw_relative(row.get("relative_path"), "raw_manifest.relative_path")
         key = relative.as_posix()
-        if key in manifest_by_path:
+        if key in release_manifest_by_path:
             raise RecoveryAuditError("RAW_MANIFEST_DUPLICATE", "Raw manifest contains duplicate paths.")
         path = _resolve_under(raw_root, relative, "RAW_PATH_INVALID")
         if not path.is_file():
@@ -1127,14 +1157,10 @@ def _audit_raw_integrity(database_dir: Path, contract: ReleaseContract) -> dict[
             raise RecoveryAuditError("RAW_FILE_HASH_MISMATCH", "Public raw file hash does not match its manifest.")
         if row.get("size_bytes") is not None and int(row["size_bytes"]) != path.stat().st_size:
             raise RecoveryAuditError("RAW_FILE_SIZE_MISMATCH", "Public raw file size does not match its manifest.")
-        manifest_by_path[key] = row
-        source_ids.add(str(row.get("source_id") or ""))
-
-    required_sources = {"chatgpt", "codex"}
-    if not required_sources.issubset(source_ids) or not any(source.startswith("agent:") for source in source_ids):
-        raise RecoveryAuditError("RAW_SOURCE_FAMILY_MISSING", "Raw manifest must contain ChatGPT, Codex and agent sources.")
+        release_manifest_by_path[key] = row
 
     ledger_by_path: dict[str, dict[str, Any]] = {}
+    source_ids: set[str] = set()
     for row in ledger_rows:
         relative = _normalize_raw_relative(row.get("relative_path"), "raw_ledger.relative_path")
         key = relative.as_posix()
@@ -1146,16 +1172,23 @@ def _audit_raw_integrity(database_dir: Path, contract: ReleaseContract) -> dict[
         expected_sha = _valid_sha256(row.get("sha256"), "raw hash ledger")
         if sha256_file(path) != expected_sha:
             raise RecoveryAuditError("RAW_LEDGER_HASH_MISMATCH", "Raw hash ledger contains hash drift.")
+        if row.get("size_bytes") is not None and int(row["size_bytes"]) != path.stat().st_size:
+            raise RecoveryAuditError("RAW_FILE_SIZE_MISMATCH", "Raw hash ledger contains size drift.")
         ledger_by_path[key] = row
+        source_ids.add(str(row.get("source_id") or ""))
+
+    required_sources = {"chatgpt", "codex"}
+    if not required_sources.issubset(source_ids) or not any(source.startswith("agent:") for source in source_ids):
+        raise RecoveryAuditError("RAW_SOURCE_FAMILY_MISSING", "Raw ledger must contain ChatGPT, Codex and agent sources.")
 
     actual_paths = {path.relative_to(raw_root).as_posix() for path in raw_files}
-    if actual_paths != set(manifest_by_path):
-        raise RecoveryAuditError("RAW_MANIFEST_COVERAGE_MISMATCH", "Raw manifest does not cover the current public raw archive exactly.")
-    if not set(manifest_by_path).issubset(ledger_by_path):
-        raise RecoveryAuditError("RAW_LEDGER_COVERAGE_MISMATCH", "Raw hash ledger does not cover the current raw manifest.")
-    for key, row in manifest_by_path.items():
+    if actual_paths != set(ledger_by_path):
+        raise RecoveryAuditError("RAW_LEDGER_COVERAGE_MISMATCH", "Raw hash ledger does not cover the current public raw archive exactly.")
+    if not set(release_manifest_by_path).issubset(ledger_by_path):
+        raise RecoveryAuditError("RAW_LEDGER_COVERAGE_MISMATCH", "Raw hash ledger does not retain the immutable release manifest.")
+    for key, row in release_manifest_by_path.items():
         if str(row.get("sha256")) != str(ledger_by_path[key].get("sha256")):
-            raise RecoveryAuditError("RAW_LEDGER_HASH_MISMATCH", "Raw manifest and hash ledger disagree.")
+            raise RecoveryAuditError("RAW_LEDGER_HASH_MISMATCH", "Release raw manifest and current hash ledger disagree.")
 
     privacy = _run_public_raw_auditor(database_dir)
     if privacy["raw_file_count"] != len(raw_files):
@@ -1167,7 +1200,8 @@ def _audit_raw_integrity(database_dir: Path, contract: ReleaseContract) -> dict[
         "raw_manifest_sha256": contract.raw_manifest_sha256,
         "hash_ledger_path": RAW_LEDGER_PATH.as_posix(),
         "raw_file_count": len(raw_files),
-        "manifest_entry_count": len(rows),
+        "manifest_entry_count": len(release_rows),
+        "current_entry_count": len(ledger_rows),
         "ledger_entry_count": len(ledger_rows),
         "source_ids": sorted(source_ids),
         "public_raw_audit": privacy,
@@ -1336,6 +1370,9 @@ def rehearse_recovery(repo_root: Path, commit: str, output_dir: Path) -> dict[st
                     "intermediate_archive_written": False,
                     "tracked_file_count": tracked_file_count,
                     "working_tree_files_copied": 0,
+                    "stream_only_relative_prefixes": [
+                        "/".join(parts) for parts in STREAM_ONLY_RELATIVE_PREFIXES
+                    ],
                 },
                 "source_packages": tree_audit["source_packages"],
                 "raw_integrity": tree_audit["raw_integrity"],

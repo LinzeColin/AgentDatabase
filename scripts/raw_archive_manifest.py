@@ -316,15 +316,23 @@ def generate_raw_manifest(
 
     manifest_path = manifest_path_for(database_dir, run_id)
     ledger_path = hash_ledger_path(database_dir)
-    manifest_payload = jsonl_payload(rows)
     manifest_exists = manifest_path.exists()
-    if manifest_exists and manifest_path.read_text(encoding="utf-8") != manifest_payload:
-        raise ManifestConflict(f"manifest run_id is immutable: {run_id}")
 
     # All conflict checks complete before either immutable artifact is written.
     with raw_ledger_append_lock(ledger_path):
         existing_ledger = read_jsonl(ledger_path)
         union_ledger = update_hash_ledger(existing_ledger, rows)
+        manifest_payload = jsonl_payload(union_ledger)
+        if manifest_exists:
+            existing_manifest = manifest_path.read_text(encoding="utf-8")
+            manifest_timestamps = {
+                str(row.get("imported_at")) for row in read_jsonl(manifest_path)
+            }
+            if (
+                existing_manifest != manifest_payload
+                or (rows and imported_at not in manifest_timestamps)
+            ):
+                raise ManifestConflict(f"manifest run_id is immutable: {run_id}")
         appended_rows = union_ledger[len(existing_ledger):]
         appended_bytes = append_jsonl_immutable(ledger_path, appended_rows, lock_held=True)
     if not manifest_exists:

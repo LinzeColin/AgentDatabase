@@ -23,6 +23,12 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     sync.add_argument("--redact-for-public-backup", action="store_true")
     sync.add_argument("--codex-home", type=Path)
     sync.add_argument("--public-transcripts", action="store_true")
+    sync.add_argument(
+        "--raw-archive",
+        action="store_true",
+        help="Create only the S07-P1-T2 recoverable Codex public raw archive.",
+    )
+    sync.add_argument("--archive-id", help="Explicit append-only Codex raw archive id.")
     sync.add_argument("--agent-id", default="future-agent")
     future_input = sync.add_mutually_exclusive_group()
     future_input.add_argument("--input", type=Path)
@@ -52,6 +58,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     audit.add_argument("--expected-remote-oid")
     audit.add_argument("--database-dir", type=Path, default=ROOT)
     audit.add_argument("--codex-home", type=Path)
+    audit.add_argument("--archive-id")
 
     push = subparsers.add_parser("push", help="Prepare local GitHub backup scope.")
     mode = push.add_mutually_exclusive_group(required=True)

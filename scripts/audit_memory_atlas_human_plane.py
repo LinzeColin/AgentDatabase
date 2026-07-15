@@ -151,12 +151,12 @@ MACHINE_PLANE_CLEANUP_INVENTORY_BEFORE = {
     "stage_humanized_readme_bytes": 90721,
 }
 MACHINE_PLANE_CLEANUP_INVENTORY_AFTER = {
-    "machine_file_count": 153,
+    "machine_file_count": 154,
     "nested_readme_count": 0,
     "root_index_count": 1,
     "current_release_count": 1,
     "active_config_count": 29,
-    "evidence_payload_count": 122,
+    "evidence_payload_count": 123,
 }
 MACHINE_PLANE_PROTECTED_SCOPES = {
     "root_index": "机器治理/README.md",
@@ -181,9 +181,9 @@ MACHINE_PLANE_PROTECTED_EXPECTED = {
         "manifest_sha256": "3decf9b1f6e8c56110e1e39df28fc7033163ad3d027ef76b15a900b2f32a02ea",
     },
     "evidence_payload": {
-        "file_count": 122,
-        "bytes": 25358730,
-        "manifest_sha256": "4a1d28a0e556dd74e1cdf556cc3d0cacc7f57f7d7f6728656230479ce4f05f71",
+        "file_count": 123,
+        "bytes": 25487447,
+        "manifest_sha256": "8a15ed9d7e31aefc7de23832fa76575009cf1771d274be2a884afe4a9d569e60",
     },
 }
 MACHINE_PLANE_PROTECTED_KEYS = {"id", "path_scope", "file_count", "bytes", "manifest_sha256"}

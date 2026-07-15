@@ -390,12 +390,56 @@ class MemoryAtlasR7RecoveryTests(unittest.TestCase):
             with self.assertRaises(ProcessLookupError):
                 os.kill(pid, 0)
 
+    @unittest.skipUnless(os.name == "posix", "process-group fallback is POSIX-specific")
+    def test_process_termination_falls_back_when_group_signal_is_denied(self) -> None:
+        process = mock.Mock()
+        process.pid = 12345
+        process.poll.return_value = None
+        process.wait.return_value = 0
+
+        with mock.patch.object(self.module.os, "killpg", side_effect=PermissionError(1, "denied")):
+            self.module._terminate_process(process)
+
+        process.terminate.assert_called_once_with()
+        process.kill.assert_not_called()
+        process.wait.assert_called_once_with(timeout=2)
+
+    def test_historical_bulk_paths_are_streamed_without_materialization(self) -> None:
+        payload = io.BytesIO()
+        members = {
+            "OpenAIDatabase/session_history/old.jsonl": b"old session",
+            "OpenAIDatabase/data/raw_archives/chatgpt/old.part": b"old chatgpt",
+            "OpenAIDatabase/data/raw_archives/git-remote-branches/old.part": b"old git",
+            "OpenAIDatabase/data/raw_archives/codex/current.part": b"current codex",
+            "OpenAIDatabase/README.md": b"readme",
+        }
+        with tarfile.open(fileobj=payload, mode="w") as archive:
+            for name, body in members.items():
+                member = tarfile.TarInfo(name)
+                member.size = len(body)
+                archive.addfile(member, io.BytesIO(body))
+        payload.seek(0)
+        destination = Path(self.temp.name) / "selective-recovery"
+
+        count = self.module._extract_archive_safely(payload, destination)
+
+        self.assertEqual(count, len(members))
+        self.assertFalse((destination / "OpenAIDatabase/session_history").exists())
+        self.assertFalse((destination / "OpenAIDatabase/data/raw_archives/chatgpt").exists())
+        self.assertFalse((destination / "OpenAIDatabase/data/raw_archives/git-remote-branches").exists())
+        self.assertEqual(
+            (destination / "OpenAIDatabase/data/raw_archives/codex/current.part").read_bytes(),
+            b"current codex",
+        )
+        self.assertEqual((destination / "OpenAIDatabase/README.md").read_bytes(), b"readme")
+
     def test_plan_and_rehearsal_use_exact_commit_tracked_archive_and_portable_results(self) -> None:
         plan = self.module.build_recovery_plan(self.fixture.repo, self.commit)
         flattened = [item for command in plan for item in command]
         self.assertIn("archive", flattened)
         self.assertIn(self.commit, flattened)
         self.assertFalse(any("recovery.tar" in item for item in flattened), plan)
+        self.assertEqual(plan[1][-1], "OpenAIDatabase")
         self.assertEqual(plan[-2][0:2], ["npm", "ci"])
         self.assertEqual(plan[-1], ["npm", "run", "build"])
         assert_portable(self, plan)
@@ -639,6 +683,41 @@ class MemoryAtlasR7RecoveryTests(unittest.TestCase):
         self.assertEqual(result["failure"]["code"], "RAW_LEDGER_EMPTY")
         self.assertEqual(self.fixture.frontend_commands, [])
         self.assertFalse(self.fixture.output_dir.exists())
+
+    def test_append_only_ledger_can_extend_the_immutable_release_manifest(self) -> None:
+        payload = b'{"text":"post-release codex archive index"}\n'
+        relative = Path("codex/post-release-index.json")
+        path = self.fixture.database / "data/public_raw" / relative
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(payload)
+        ledger_path = self.fixture.database / RAW_LEDGER
+        with ledger_path.open("a", encoding="utf-8") as handle:
+            handle.write(
+                json.dumps(
+                    {
+                        "source_id": "codex",
+                        "relative_path": relative.as_posix(),
+                        "sha256": sha256_bytes(payload),
+                        "size_bytes": len(payload),
+                        "imported_at": "2026-07-15T00:00:00Z",
+                    },
+                    sort_keys=True,
+                )
+                + "\n"
+            )
+        run_git(
+            self.fixture.repo,
+            "add",
+            path.relative_to(self.fixture.repo).as_posix(),
+        )
+        commit = self.fixture.commit_change("append post-release raw")
+
+        result = self.rehearse(commit=commit)
+
+        self.assertEqual(result["status"], "PASS", result)
+        self.assertEqual(result["raw_integrity"]["manifest_entry_count"], 3)
+        self.assertEqual(result["raw_integrity"]["current_entry_count"], 4)
+        self.assertEqual(result["raw_integrity"]["ledger_entry_count"], 4)
 
     def test_release_pointer_must_use_the_canonical_release_id_directory(self) -> None:
         pointer_path = self.fixture.database / CURRENT_RELEASE

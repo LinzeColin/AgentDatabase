@@ -1,0 +1,81 @@
+{
+  "schema_version": "memory_atlas.codex_public_raw_archive.v1_2_1_s07_p1_t2",
+  "task_id": "S07-P1-T2",
+  "acceptance_id": "ACC-MA-V121-S07-P1-T2",
+  "source_id": "codex",
+  "source_discovery_ref": "config/data_sources/codex_source_discovery.json",
+  "credential_exclusion_ref": "config/data_sources/credential_exclusion.json",
+  "raw_ledger_ref": "config/data_sources/raw_ledger.json",
+  "archive": {
+    "root": "data/raw_archives/codex",
+    "public_index_root": "data/public_raw/codex",
+    "package_format": "tar_gzip",
+    "package_member_root": "codex",
+    "gzip_compresslevel": 1,
+    "gzip_mtime": 0,
+    "max_part_bytes": 47185920,
+    "part_index_width": 6,
+    "manifest_filename": "manifest.json",
+    "readme_filename": "README.md",
+    "restore_filename": "restore.sh"
+  },
+  "public_content": {
+    "policy": "recoverable_sanitized_raw_package",
+    "jsonl": "canonical_jsonl_preserve_order",
+    "sqlite": "schema_and_rows_rebuilt_as_sqlite",
+    "credential_values": "replace_with_[REDACTED_CREDENTIAL]",
+    "local_absolute_paths": "replace_with_[REDACTED_LOCAL_PATH]",
+    "non_text_blob": "replace_with_hash_and_size_marker",
+    "ordinary_transcript_allowed": true,
+    "source_bytes_mutated": false
+  },
+  "source_proof": {
+    "hash_algorithm": "sha256",
+    "stat_fields": [
+      "device",
+      "inode",
+      "mode",
+      "size_bytes",
+      "mtime_ns",
+      "ctime_ns"
+    ],
+    "inventory_before_after_equal": true,
+    "hash_before_after_equal": true,
+    "initial_quiescence_attempts": 3,
+    "initial_quiescence_delay_ms": 250,
+    "publish_only_after_source_proof": true
+  },
+  "inflight_sources": {
+    "source_kinds": [
+      "active_sessions"
+    ],
+    "recent_mtime_grace_seconds": 300,
+    "policy": "defer_from_archive_and_record_in_manifest",
+    "hash_stat_claim": false,
+    "writes_cursor_or_resume_state": false
+  },
+  "append_only": {
+    "explicit_archive_id_required": true,
+    "existing_archive_policy": "fail_closed_no_overwrite",
+    "manifest_publish_last": true,
+    "public_index_append_only": true,
+    "public_index_ledger_required": true,
+    "exclusive_archive_lock": true,
+    "stale_lock_policy": "manual_verify_never_auto_remove"
+  },
+  "restore": {
+    "ordered_part_hashes_required": true,
+    "package_hash_required": true,
+    "safe_relative_members_required": true,
+    "source_manifest_in_package": "codex/_memory_atlas/source_manifest.json",
+    "restore_output_no_overwrite": true
+  },
+  "phase_boundary": {
+    "does_not_write_cursor": true,
+    "does_not_deduplicate_by_content": true,
+    "does_not_resume_interrupted_runs": true,
+    "does_not_build_derived": true,
+    "does_not_commit_or_push": true,
+    "next_task": "S07-P1-T3"
+  }
+}
