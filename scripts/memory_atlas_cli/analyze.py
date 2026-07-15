@@ -8,6 +8,7 @@ from .constants import (
     AGENT_AUTHORIZATION_BUILDER,
     AGENT_COLLABORATION_BUILDER,
     CLUSTER_BUILDER,
+    CODEX_DERIVED_BUILDER,
     DECISION_DEBT_BUILDER,
     ECONOMIC_PROXY_BUILDER,
     FACET_EXTRACTOR,
@@ -387,12 +388,13 @@ def run_analyze(args: argparse.Namespace) -> int:
         "latent",
         "self-iteration",
         "decision-debt",
+        "codex-derived",
     }:
         print(json.dumps({
             "status": "NOT_IMPLEMENTED",
             "command": "analyze",
             "stage": args.stage,
-            "reason": "Unknown analyze stage. Supported stages: facets, clusters, low-value-loops, opportunities, economic-proxy, information-roi, formula-what-if, agent-collaboration, agent-authorization, stage-flight, latent, self-iteration, decision-debt.",
+            "reason": "Unknown analyze stage. Supported stages: facets, clusters, low-value-loops, opportunities, economic-proxy, information-roi, formula-what-if, agent-collaboration, agent-authorization, stage-flight, latent, self-iteration, decision-debt, codex-derived.",
         }, ensure_ascii=False, indent=2, sort_keys=True))
         return 2
 
@@ -457,6 +459,10 @@ def run_analyze(args: argparse.Namespace) -> int:
             command.append("--dry-run")
     elif args.stage == "decision-debt":
         command = [sys.executable, str(DECISION_DEBT_BUILDER), "--database-dir", str(args.database_dir)]
+        if args.dry_run:
+            command.append("--dry-run")
+    elif args.stage == "codex-derived":
+        command = [sys.executable, str(CODEX_DERIVED_BUILDER), "--database-dir", str(args.database_dir)]
         if args.dry_run:
             command.append("--dry-run")
     return run_child_command(command, cwd=ROOT)

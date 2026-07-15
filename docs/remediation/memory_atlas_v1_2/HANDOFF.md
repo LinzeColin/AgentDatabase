@@ -1,5 +1,32 @@
 # Memory Atlas v1.2 Remediation Handoff
 
+> **Current v1.2.1 note (2026-07-16 08:45 +10:00):** The v1.2.1 Task Pack is
+> 49/149 complete locally. This run completed only `S07-P2-T1`; S07 is 4/9,
+> S07-P2 is 1/3, and `S07-P2-T2` is the next/only eligible Task. The canonical
+> archive-derived builder consumes only raw-ledger registrations that pass the
+> T2/T3 verifiers. The real build used two immutable archives and produced 432
+> events, 432 facets, a 10-day behavior summary and 9 Universe State clusters,
+> covering 2026-07-06 through 2026-07-15, 23,183 messages and 149,776 tool calls.
+> Every session binds public index, archive manifest/hash, source manifest member,
+> archive member/hash, portable source path and source SHA-256 provenance. Output
+> is explicitly `derived_summary_not_full_raw_backup`; no raw message text,
+> credential value or local absolute path is persisted. The final hardened full
+> rebuild completed in 74.431 seconds; the immediate replay completed in 10.328 seconds with
+> `NO_CHANGES`, zero parsed archives and zero file writes. Git diff for raw,
+> public raw, raw manifest, ledger, Codex sync state and six legacy consumer files
+> is empty. Dedicated 9/9, Codex focused 68/68, full Python 494/494, fast 6/6,
+> sync 10/10 and ui 14/14 passed. The first release correctly failed because its
+> 900-second unit-test child budget was below the measured 879.438-second suite
+> runtime; the budget is now 1,800 seconds with 28/28 timeout regressions. The
+> corrected full release passed 1/1 in 1,129.235 seconds with no critical skip,
+> raw mutation or remote push. Python 3.13/3.12 deterministic render, privacy,
+> built-dist raw isolation, script consolidation and diff whitespace checks passed.
+> Only the local commit and exact-commit release/recovery remain closeout work in
+> this same Task. Unrelated KMFA and automation changes remain unstaged and untouched. No
+> Atlas snapshot, weekly report, sync-state, UI, fetch, push, deploy, branch/PR,
+> merge/rebase or cache cleanup changed. Do not start more than `S07-P2-T2` next,
+> and do not upload before all 149 Tasks plus final review/remediation are complete.
+>
 > **Current v1.2.1 note (2026-07-16 05:38 +10:00):** The v1.2.1 Task Pack is
 > 48/149 complete locally. This run completed only `S07-P1-T3`; S07 is 3/9,
 > S07-P1 is 3/3 and closed, and `S07-P2-T1` is the next/only eligible Task.

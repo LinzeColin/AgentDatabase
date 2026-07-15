@@ -6,6 +6,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 CHATGPT_SYNC = ROOT / "scripts" / "sync_chatgpt_memory_data.py"
 CODEX_SYNC = ROOT / "scripts" / "sync_codex_memory_data.py"
+CODEX_DERIVED_BUILDER = ROOT / "scripts" / "build_memory_atlas_codex_derived.py"
 FUTURE_AGENT_SYNC = ROOT / "scripts" / "sync_future_agent_data.py"
 BUILD_ATLAS = ROOT / "scripts" / "build_memory_atlas_data.py"
 GITHUB_BACKUP = ROOT / "scripts" / "github_backup.py"
@@ -49,6 +50,7 @@ __all__ = (
     "ROOT",
     "CHATGPT_SYNC",
     "CODEX_SYNC",
+    "CODEX_DERIVED_BUILDER",
     "FUTURE_AGENT_SYNC",
     "BUILD_ATLAS",
     "GITHUB_BACKUP",

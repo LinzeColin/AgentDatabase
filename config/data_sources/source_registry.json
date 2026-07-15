@@ -152,6 +152,8 @@
         "raw_archive_contract_ref": "config/data_sources/codex_public_raw_archive.json",
         "sync_state_entrypoint": "scripts/memory_atlas_cli/codex_sync_state.py",
         "sync_state_contract_ref": "config/data_sources/codex_sync_state.json",
+        "derived_entrypoint": "scripts/build_memory_atlas_codex_derived.py",
+        "derived_contract_ref": "config/data_sources/codex_derived.json",
         "complete_archive_root": "data/raw_archives/codex",
         "input_formats": [
           "codex_session_jsonl",
@@ -170,7 +172,12 @@
         "data/processed/codex/codex_session_manifest.jsonl",
         "data/processed/codex/codex_daily_activity.jsonl",
         "data/derived/codex/codex_activity_snapshot.json",
-        "data/derived/codex/codex_agent_recommendations.json"
+        "data/derived/codex/codex_agent_recommendations.json",
+        "data/derived/codex/codex_events.jsonl",
+        "data/derived/codex/codex_facets.jsonl",
+        "data/derived/codex/codex_behavior_summary.json",
+        "data/derived/codex/codex_universe_state_input.json",
+        "data/derived/codex/codex_derived_state.json"
       ],
       "push_policy": {
         "mode": "final_delivery_only",

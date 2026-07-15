@@ -41,6 +41,8 @@ CODEX_PUBLIC_RAW_ARCHIVE_ENTRYPOINT = Path(
 )
 CODEX_SYNC_STATE_CONTRACT_PATH = Path("config/data_sources/codex_sync_state.json")
 CODEX_SYNC_STATE_ENTRYPOINT = Path("scripts/memory_atlas_cli/codex_sync_state.py")
+CODEX_DERIVED_CONTRACT_PATH = Path("config/data_sources/codex_derived.json")
+CODEX_DERIVED_ENTRYPOINT = Path("scripts/build_memory_atlas_codex_derived.py")
 CODEX_COMPLETE_ARCHIVE_ROOT = Path("data/raw_archives/codex")
 REGISTRY_SCHEMA_VERSION = "memory_atlas_data_source_registry.v1"
 SYNC_CONTRACT_VERSION = "memory_atlas.source_sync_contract.v1_2_1_s06_p1_t1"
@@ -281,6 +283,16 @@ def _validate_source(source: dict[str, Any], database_dir: Path, push_defaults: 
             f"{source_id}.parser.sync_state_contract_ref",
             ("config/data_sources/",),
         )
+        derived_entrypoint = _repo_relative_path(
+            parser.get("derived_entrypoint"),
+            f"{source_id}.parser.derived_entrypoint",
+            ("scripts/",),
+        )
+        derived_contract_ref = _repo_relative_path(
+            parser.get("derived_contract_ref"),
+            f"{source_id}.parser.derived_contract_ref",
+            ("config/data_sources/",),
+        )
         if (
             raw_archive_entrypoint != CODEX_PUBLIC_RAW_ARCHIVE_ENTRYPOINT.as_posix()
             or raw_archive_contract_ref
@@ -288,9 +300,11 @@ def _validate_source(source: dict[str, Any], database_dir: Path, push_defaults: 
             or complete_archive_root != CODEX_COMPLETE_ARCHIVE_ROOT.as_posix()
             or sync_state_entrypoint != CODEX_SYNC_STATE_ENTRYPOINT.as_posix()
             or sync_state_contract_ref != CODEX_SYNC_STATE_CONTRACT_PATH.as_posix()
+            or derived_entrypoint != CODEX_DERIVED_ENTRYPOINT.as_posix()
+            or derived_contract_ref != CODEX_DERIVED_CONTRACT_PATH.as_posix()
         ):
             raise SourceRegistryError(
-                "codex.parser must name the canonical S07-P1 raw archive and sync-state adapters"
+                "codex.parser must name the canonical S07 raw archive, sync-state and derived adapters"
             )
         if not (database_dir / raw_archive_entrypoint).is_file():
             raise SourceRegistryError("codex raw archive entrypoint does not exist")
@@ -300,6 +314,10 @@ def _validate_source(source: dict[str, Any], database_dir: Path, push_defaults: 
             raise SourceRegistryError("codex sync-state entrypoint does not exist")
         if not (database_dir / sync_state_contract_ref).is_file():
             raise SourceRegistryError("codex sync-state contract does not exist")
+        if not (database_dir / derived_entrypoint).is_file():
+            raise SourceRegistryError("codex derived entrypoint does not exist")
+        if not (database_dir / derived_contract_ref).is_file():
+            raise SourceRegistryError("codex derived contract does not exist")
     elif any(
         key in parser
         for key in (
@@ -307,6 +325,8 @@ def _validate_source(source: dict[str, Any], database_dir: Path, push_defaults: 
             "raw_archive_contract_ref",
             "sync_state_entrypoint",
             "sync_state_contract_ref",
+            "derived_entrypoint",
+            "derived_contract_ref",
             "complete_archive_root",
         )
     ):
@@ -358,6 +378,11 @@ def _validate_source(source: dict[str, Any], database_dir: Path, push_defaults: 
             "data/processed/codex/codex_daily_activity.jsonl",
             "data/derived/codex/codex_activity_snapshot.json",
             "data/derived/codex/codex_agent_recommendations.json",
+            "data/derived/codex/codex_events.jsonl",
+            "data/derived/codex/codex_facets.jsonl",
+            "data/derived/codex/codex_behavior_summary.json",
+            "data/derived/codex/codex_universe_state_input.json",
+            "data/derived/codex/codex_derived_state.json",
         ]
     else:
         expected_state = f"data/sync_state/agents/{path_source_id}.json"

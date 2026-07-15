@@ -8,7 +8,7 @@ next_gate_id: "ACC.OpenAIDatabase.PAM1.0019"
 total_estimated_hours: 255
 completed_estimated_hours: 241
 taskpack_progress:
-  completed_tasks: 48
+  completed_tasks: 49
   total_tasks: 149
   delivery_state: "local_only_not_released"
 stages:
@@ -2154,7 +2154,7 @@ stages:
     person_goal: "把本机 Codex sessions/logs/history 自动只读归档为公开 raw、增量派生到 Memory Atlas，并在验证通过后直接推送 GitHub main。"
     status: "in_progress"
     estimated_hours: 9
-    estimated_pct: 33
+    estimated_pct: 44
     stop_conditions:
       - "源 Codex 文件发生字节、mtime 或 size 改变"
       - "发现认证资料或 secret 进入 staged diff"
@@ -2179,6 +2179,10 @@ stages:
         - "EVID-MA-V121-S07-P1-T3-ARCHIVE"
         - "EVID-MA-V121-S07-P1-T3-TEST"
         - "EVID-MA-V121-S07-P1-T3-REVIEW"
+        - "EVID-MA-V121-S07-P2-T1-STATE"
+        - "EVID-MA-V121-S07-P2-T1-OUTPUT"
+        - "EVID-MA-V121-S07-P2-T1-TEST"
+        - "EVID-MA-V121-S07-P2-T1-REVIEW"
     phases:
       - phase_id: "MA-V121-S07-P1"
         name: "本机来源发现与 raw 只读导出"
@@ -2330,7 +2334,7 @@ stages:
         objective: "把已登记 Codex raw 增量派生为可追溯的 Atlas 数据、周报和同步状态。"
         status: "in_progress"
         estimated_hours: 3
-        estimated_pct: 0
+        estimated_pct: 33
         stop_conditions:
           - "派生结果无法追溯到 raw manifest"
           - "前端被要求直接读取 raw"
@@ -2341,23 +2345,59 @@ stages:
           pass_conditions:
             - "Codex derived outputs、snapshot、周报与同步状态可追溯且可解释"
             - "旧消费者兼容读取但真相语义明确"
-          evidence_refs: []
+          evidence_refs:
+            - "EVID-MA-V121-S07-P2-T1-STATE"
+            - "EVID-MA-V121-S07-P2-T1-OUTPUT"
+            - "EVID-MA-V121-S07-P2-T1-TEST"
+            - "EVID-MA-V121-S07-P2-T1-REVIEW"
         tasks:
           - task_id: "S07-P2-T1"
             name: "构建 Codex derived outputs"
             objective: "在 raw 归档完成后增量构建 Codex events、facets、行为摘要和 Universe State 输入。"
-            status: "planned"
+            status: "completed"
             estimated_hours: 1
-            estimated_pct: 0
+            estimated_pct: 100
             dependencies:
               - "S07-P1-T3"
             acceptance_ids:
               - "ACC-MA-V121-S07-P2-T1"
-            test_commands: []
-            evidence_refs: []
+            acceptance:
+              - acceptance_id: "ACC-MA-V121-S07-P2-T1"
+                description: "Builder 只消费 raw ledger 已登记且通过 T2/T3 verifier 的 recoverable sanitized Codex archives，按 portable source path 增量生成 events、facets、行为摘要和 Universe State 输入；每条 session 保留 public index、archive manifest、source manifest member、archive member 与 source SHA-256 provenance。真实两 archive 构建生成 432 events/facets，精确复跑解析 0 archive、返回 NO_CHANGES 且 raw/public raw/raw manifest/ledger/sync state 与 legacy consumer outputs 不变。输出不持久化 raw message text、credential values 或本机绝对路径，并明确不是 full raw backup。"
+                evidence_refs:
+                  - "EVID-MA-V121-S07-P2-T1-STATE"
+                  - "EVID-MA-V121-S07-P2-T1-OUTPUT"
+                  - "EVID-MA-V121-S07-P2-T1-TEST"
+                  - "EVID-MA-V121-S07-P2-T1-REVIEW"
+            test_commands:
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_codex_derived -q"
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_codex_source_discovery OpenAIDatabase.tests.test_memory_atlas_codex_public_raw_archive OpenAIDatabase.tests.test_memory_atlas_codex_sync_state OpenAIDatabase.tests.test_memory_atlas_codex_derived OpenAIDatabase.tests.test_atlasctl_modular_cli OpenAIDatabase.tests.test_codex_memory_sync OpenAIDatabase.tests.test_memory_atlas_source_registry -q"
+              - "python3 -B -m unittest discover -s OpenAIDatabase/tests -p 'test_*.py' -q"
+              - "python3 -B OpenAIDatabase/scripts/atlasctl.py analyze --stage codex-derived --database-dir /Users/linzezhang/CodexProject/OpenAIDatabase"
+              - "python3 -B OpenAIDatabase/scripts/privacy_guard.py --database-dir OpenAIDatabase --scan-only"
+              - "python3 -B OpenAIDatabase/scripts/atlasctl.py audit --check raw-isolation --require-built-dist"
+              - "npm run validate:fast --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run validate:sync --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run validate:ui --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run validate:release --prefix OpenAIDatabase/apps/memory-atlas"
+              - "python3 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+              - "python3.12 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+            test_results:
+              - "专用 9/9 覆盖 contract/provenance、真实 T2+T3 fixture 构建、raw bytes 不变、精确复跑零写入、第三 archive 只增量解析一个、archive/registration 篡改、模型参数 hash 重建、并发锁、canonical credential/Windows path 阻断和 symlink 输出父目录 fail closed；相关 Codex/source-registry/CLI 回归 68/68 PASS。"
+              - "最终真实构建读取 2 个已登记 immutable archives，生成 432 events、432 facets、10 天行为摘要和 9 个 Universe State clusters；覆盖 2026-07-06 至 2026-07-15、23,183 messages 和 149,776 tool calls。完整重建 74.431 秒，紧接复跑 10.328 秒返回 NO_CHANGES、parsed_archive_count=0、writes_files=false。"
+              - "独立 Git diff 证明 data/raw、data/public_raw、raw manifest、raw ledger、data/sync_state/codex.json 与 6 个 legacy consumer outputs 均未修改；derived state 绑定 contract/model parameters、T2/T3 manifest/package SHA-256 和 4 个 canonical output hashes。完整验证与复核结果记录在 T1 review。"
+              - "最终候选通过全量 Python 494/494（879.438 秒）、validate:fast 6/6（66.061 秒）、validate:sync 10/10（297.596 秒）和 validate:ui 14/14（742.800 秒）。第一次 release 在 56/58 时仅因 unit_tests 900 秒预算不足失败；预算按真实 879.438 秒运行时间修正为 1800 秒并由 28/28 R8/CLI 回归覆盖。"
+              - "修正后的完整 validate:release 1/1 PASS（1129.235 秒），final_audit 无失败、无 critical skip，raw_mutation=false、remote_push=false。提交后仍须在精确 commit tree 上重跑 release/recovery，未提前声称该 closeout 通过。"
+              - "最终 Python 3.13/3.12 deterministic render 均为零 drift/零引用问题；privacy guard 为 0 high-risk secret、0 credential-like path、0 tracked raw/private，raw-isolation 证明 built dist 无 raw path/hash collision，script consolidation 12/12 与 git diff --check 通过。"
+            evidence_refs:
+              - "EVID-MA-V121-S07-P2-T1-STATE"
+              - "EVID-MA-V121-S07-P2-T1-OUTPUT"
+              - "EVID-MA-V121-S07-P2-T1-TEST"
+              - "EVID-MA-V121-S07-P2-T1-REVIEW"
             risks:
               - "derived 输出丢失 raw manifest provenance"
-            rollback: "git revert 本 Task 本地 commit；从 immutable raw 重建 derived。"
+            rollback: "提交前仅反向应用 S07-P2-T1 derived/code/config patch；提交后使用纠正提交回退实现并从 immutable raw 重建 derived。不得修改或删除 archive、public index、raw manifest、ledger 或 sync state。"
+            current_result: "complete_local_only_49_of_149_pending_s07_p2_t2_no_remote_upload"
           - task_id: "S07-P2-T2"
             name: "更新 Codex Atlas 数据"
             objective: "更新 Memory Atlas snapshot、周报和同步状态。"

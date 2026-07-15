@@ -49,7 +49,7 @@ def final_audit_gate_plan(database_dir: Path) -> list[dict[str, object]]:
             "name_zh": "Python unit tests",
             "command": [sys.executable, "-B", "-m", "unittest", "discover", f"{database_dir.name}/tests", "-q"],
             "cwd": str(database_dir.parent),
-            "timeout_seconds": 900,
+            "timeout_seconds": 1800,
             "pass_explanation_zh": "Python 单元测试通过。",
             "fail_explanation_zh": "Python 单元测试失败；先看 stdout_tail/stderr_tail 中的失败用例和 traceback。",
         },

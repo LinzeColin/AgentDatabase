@@ -1,0 +1,57 @@
+{
+  "schema_version": "memory_atlas.codex_derived_model.v1_2_1_s07_p2_t1",
+  "task_id": "S07-P2-T1",
+  "acceptance_id": "ACC-MA-V121-S07-P2-T1",
+  "model_id": "MOD-008",
+  "formula_id": "FORM-008",
+  "purpose": "从已验证的 recoverable sanitized Codex raw archive 构建可追溯 events、facets、行为摘要和 Universe State 输入。",
+  "input_truth": {
+    "source": "verified_recoverable_sanitized_raw_archive",
+    "full_private_raw_backup": false,
+    "source_message_text_used_transiently": true,
+    "source_message_text_persisted_in_derived": false
+  },
+  "session_activity_formula": {
+    "expression": "message_count + user_message_count*2 + tool_call_count*3 + topic_label_count*4 + error_event_count*2",
+    "coefficients": {
+      "message_count": 1,
+      "user_message_count": 2,
+      "tool_call_count": 3,
+      "topic_label_count": 4,
+      "error_event_count": 2
+    },
+    "semantic_status": "HUMAN_REVIEW_REQUIRED"
+  },
+  "universe_state_input": {
+    "recent_window_days": 45,
+    "inactive_normalization_days": 180,
+    "confidence_base": 0.5,
+    "confidence_max_increment": 0.45,
+    "confidence_per_session": 0.02,
+    "mass_score": "cluster_session_count / max_cluster_session_count, clamped 0..1",
+    "growth_score": "recent_cluster_session_count / cluster_session_count, clamped 0..1",
+    "decline_score": "inactive_days / inactive_normalization_days, clamped 0..1",
+    "confidence": "confidence_base + min(confidence_max_increment, cluster_session_count*confidence_per_session), clamped 0..1",
+    "roi_potential": "sessions_with_value_signal / cluster_session_count, clamped 0..1",
+    "activity_density": "recent_session_count / recent_window_days, clamped 0..1",
+    "semantic_status": "HUMAN_REVIEW_REQUIRED"
+  },
+  "facet_fallbacks": {
+    "topic": "thread_name then unknown_topic",
+    "intent": "unknown",
+    "task_type": "unknown",
+    "project": null,
+    "output_type": "unknown",
+    "language": "unknown",
+    "tool": "codex",
+    "friction": [],
+    "value_signal": []
+  },
+  "privacy_parameters": {
+    "backup_policy": "derived_summary_not_full_raw_backup",
+    "absolute_path_prefix_forbidden": "/Users/",
+    "credential_values_forbidden": true,
+    "archive_member_body_in_output": false
+  },
+  "calibration_boundary": "这些系数和阈值延续现有 MOD-008 工程启发式，只完成机器可验证实现；未证明为业务最优值。"
+}

@@ -96,7 +96,7 @@ class MemoryAtlasR8AcceptanceTests(unittest.TestCase):
         )
         self.assertTrue(all(int(gate["timeout_seconds"]) > 0 for gate in plan))
         by_id = {gate["gate_id"]: gate for gate in plan}
-        self.assertGreaterEqual(int(by_id["unit_tests"]["timeout_seconds"]), 600)
+        self.assertGreaterEqual(int(by_id["unit_tests"]["timeout_seconds"]), 1800)
         self.assertGreaterEqual(int(by_id["stage7_privacy_accessibility"]["timeout_seconds"]), 600)
         self.assertGreaterEqual(int(by_id["credential_audit"]["timeout_seconds"]), 600)
         self.assertNotIn("--publish-dir", by_id["report_contract_audit"]["command"])

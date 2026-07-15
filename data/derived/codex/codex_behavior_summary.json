@@ -1,0 +1,188 @@
+{
+  "abort_count": 150,
+  "acceptance_id": "ACC-MA-V121-S07-P2-T1",
+  "archive_count": 2,
+  "day_count": 10,
+  "error_event_count": 0,
+  "facet_count": 432,
+  "generated_at": "2026-07-15T18:06:48Z",
+  "message_count": 23183,
+  "model_parameters_ref": "机器治理/参数与公式/codex_derived.v1_2_1_s07_p2_t1.json",
+  "model_parameters_sha256": "7e93e34b27c260ccbc1022f01d33c0045c45358ecd5d9d7583e0ac9d7d7d8101",
+  "phase_boundary": {
+    "does_not_commit_or_push": true,
+    "does_not_deploy": true,
+    "does_not_modify_raw": true,
+    "does_not_update_atlas_snapshot": true,
+    "does_not_update_sync_state": true,
+    "does_not_update_ui": true,
+    "does_not_update_weekly_report": true,
+    "next_task": "S07-P2-T2"
+  },
+  "provenance": [
+    {
+      "archive_id": "codex-public-raw-20260715t1300z",
+      "archive_manifest_ref": "data/raw_archives/codex/codex-public-raw-20260715t1300z/manifest.json",
+      "archive_manifest_sha256": "6640cbdeed803df4c3090aaa2e51350d68210bf059bdcafe5ec65f40561cef81",
+      "kind": "baseline",
+      "package_sha256": "e1406eea8b67ffdac96fb41f26f821696389b6eb5ed9ef069b1b42b186d1f174",
+      "public_index_ref": "data/public_raw/codex/codex_raw_archive.codex-public-raw-20260715t1300z.6640cbdeed80.json",
+      "public_index_sha256": "d5f946b5ec04c3babe3f24babc624fd342ad8876b6f539a357bfed4cd434825a",
+      "recorded_at_utc": "2026-07-15T14:00:40Z",
+      "sequence": 0
+    },
+    {
+      "archive_id": "codex-incremental-20260715t180600z",
+      "archive_manifest_ref": "data/raw_archives/codex/codex-incremental-20260715t180600z/manifest.json",
+      "archive_manifest_sha256": "d745adab38261d8c09195e80c86327aeb3da90fa8bf752ea3cbd1afaca57f024",
+      "kind": "incremental",
+      "package_sha256": "5b516b8ef34fab4e04a96e7f7ad70c13a5ad99f0407328bce5de0790c2831c8d",
+      "public_index_ref": "data/public_raw/codex/codex_incremental_archive.codex-incremental-20260715t180600z.d745adab3826.json",
+      "public_index_sha256": "6819da4472221c28232de58731d7c1da866d9cd2462c6c564052912b412beef6",
+      "recorded_at_utc": "2026-07-15T18:06:48Z",
+      "sequence": 1
+    }
+  ],
+  "range_end": "2026-07-15",
+  "range_start": "2026-07-06",
+  "schema_version": "memory_atlas.codex_behavior_summary.v1_2_1_s07_p2_t1",
+  "session_count": 432,
+  "source_id": "codex",
+  "source_truth": {
+    "credentials_excluded": true,
+    "full_raw_backup": false,
+    "kind": "derived_from_verified_recoverable_sanitized_raw_archives",
+    "local_absolute_paths_excluded": true,
+    "recoverable_sanitized_raw_available": true
+  },
+  "task_id": "S07-P2-T1",
+  "tool_call_count": 149776,
+  "top_intents": [
+    {
+      "count": 404,
+      "name": "review"
+    },
+    {
+      "count": 11,
+      "name": "unknown"
+    },
+    {
+      "count": 9,
+      "name": "operate"
+    },
+    {
+      "count": 6,
+      "name": "debug"
+    },
+    {
+      "count": 1,
+      "name": "build"
+    },
+    {
+      "count": 1,
+      "name": "research"
+    }
+  ],
+  "top_projects": [
+    {
+      "count": 191,
+      "name": "Memory Atlas"
+    },
+    {
+      "count": 27,
+      "name": "KMFA"
+    },
+    {
+      "count": 16,
+      "name": "CodexProject"
+    },
+    {
+      "count": 6,
+      "name": "macOS Operations"
+    }
+  ],
+  "top_tools": [
+    {
+      "count": 42000,
+      "name": "custom_tool_call_output"
+    },
+    {
+      "count": 40188,
+      "name": "exec"
+    },
+    {
+      "count": 32831,
+      "name": "function_call_output"
+    },
+    {
+      "count": 17272,
+      "name": "exec_command"
+    },
+    {
+      "count": 5333,
+      "name": "wait"
+    },
+    {
+      "count": 3794,
+      "name": "wait_agent"
+    },
+    {
+      "count": 3230,
+      "name": "send_message"
+    },
+    {
+      "count": 1850,
+      "name": "apply_patch"
+    },
+    {
+      "count": 859,
+      "name": "list_agents"
+    },
+    {
+      "count": 728,
+      "name": "update_plan"
+    },
+    {
+      "count": 506,
+      "name": "write_stdin"
+    },
+    {
+      "count": 474,
+      "name": "followup_task"
+    }
+  ],
+  "top_topics": [
+    {
+      "count": 3384,
+      "label": "Codex 本地数据 / agent 工作流"
+    },
+    {
+      "count": 3169,
+      "label": "GitHub 备份 / durable state"
+    },
+    {
+      "count": 3108,
+      "label": "高质量交付 / 验证 / CI"
+    },
+    {
+      "count": 3033,
+      "label": "安全边界 / secret / 权限"
+    },
+    {
+      "count": 398,
+      "label": "长期记忆数据库 / RAG"
+    },
+    {
+      "count": 166,
+      "label": "金融 / trading / 风险边界"
+    },
+    {
+      "count": 83,
+      "label": "Memory Atlas / 记忆可视化"
+    },
+    {
+      "count": 45,
+      "label": "前端交互 / Three.js / Dashboard"
+    }
+  ]
+}

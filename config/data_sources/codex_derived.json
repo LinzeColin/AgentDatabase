@@ -1,0 +1,80 @@
+{
+  "schema_version": "memory_atlas.codex_derived_contract.v1_2_1_s07_p2_t1",
+  "task_id": "S07-P2-T1",
+  "acceptance_id": "ACC-MA-V121-S07-P2-T1",
+  "source_id": "codex",
+  "inputs": {
+    "public_index_root": "data/public_raw/codex",
+    "archive_root": "data/raw_archives/codex",
+    "raw_ledger_contract_ref": "config/data_sources/raw_ledger.json",
+    "registration_patterns": [
+      "codex_raw_archive.*.json",
+      "codex_incremental_archive.*.json"
+    ],
+    "supported_index_schemas": [
+      "memory_atlas.codex_public_raw_archive_index.v1_2_1_s07_p1_t2",
+      "memory_atlas.codex_incremental_archive_index.v1_2_1_s07_p1_t3"
+    ],
+    "source_manifest_member": "codex/_memory_atlas/source_manifest.json",
+    "eligible_source_kinds": [
+      "active_sessions",
+      "archived_sessions"
+    ],
+    "source_read_only": true,
+    "verified_archive_required": true
+  },
+  "incremental": {
+    "archive_order": "raw_ledger_append_order",
+    "archive_identity": "archive_manifest_sha256",
+    "session_identity": "source_relative_path",
+    "latest_registered_archive_wins": true,
+    "prior_archive_history_must_remain_prefix": true,
+    "exact_repeat_no_write": true,
+    "missing_or_drifted_output_policy": "rebuild_from_all_immutable_archives"
+  },
+  "concurrency": {
+    "lock": "process_scoped_advisory_lock",
+    "scope": "resolved_database_dir",
+    "busy_policy": "fail_closed",
+    "registration_change_policy": "fail_before_output_write"
+  },
+  "provenance": {
+    "required_refs": [
+      "public_index_ref",
+      "archive_manifest_ref",
+      "archive_manifest_sha256",
+      "source_manifest_member",
+      "archive_member",
+      "archive_member_sha256",
+      "source_relative_path",
+      "source_sha256"
+    ],
+    "evidence_level": "verified_recoverable_sanitized_raw_archive"
+  },
+  "outputs": {
+    "events": "data/derived/codex/codex_events.jsonl",
+    "facets": "data/derived/codex/codex_facets.jsonl",
+    "behavior_summary": "data/derived/codex/codex_behavior_summary.json",
+    "universe_state_input": "data/derived/codex/codex_universe_state_input.json",
+    "state": "data/derived/codex/codex_derived_state.json"
+  },
+  "privacy": {
+    "input_policy": "recoverable_sanitized_raw_package",
+    "output_policy": "derived_summary_not_full_raw_backup",
+    "raw_message_text_persisted": false,
+    "plaintext_credentials_allowed": false,
+    "local_absolute_paths_allowed": false,
+    "frontend_reads_raw": false
+  },
+  "model_parameters_ref": "机器治理/参数与公式/codex_derived.v1_2_1_s07_p2_t1.json",
+  "phase_boundary": {
+    "does_not_modify_raw": true,
+    "does_not_update_atlas_snapshot": true,
+    "does_not_update_weekly_report": true,
+    "does_not_update_sync_state": true,
+    "does_not_update_ui": true,
+    "does_not_commit_or_push": true,
+    "does_not_deploy": true,
+    "next_task": "S07-P2-T2"
+  }
+}
