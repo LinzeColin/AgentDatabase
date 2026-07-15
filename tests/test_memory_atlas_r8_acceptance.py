@@ -102,6 +102,34 @@ class MemoryAtlasR8AcceptanceTests(unittest.TestCase):
         self.assertNotIn("--publish-dir", by_id["report_contract_audit"]["command"])
         self.assertEqual(atlasctl.compact_tail(b"timeout output"), "timeout output")
 
+    def test_final_audit_compact_summary_keeps_failed_gate_diagnostics_bounded(self) -> None:
+        atlasctl = load_atlasctl()
+        payload = {
+            "status": "FAIL",
+            "failed_gate_ids": ["tracked_only_recovery", "r8_58_requirement_reconciliation"],
+            "requirements": {"total": 58, "verified": 55},
+            "raw_mutation": False,
+            "remote_push": False,
+        }
+        gates = [
+            {
+                "gate_id": "tracked_only_recovery",
+                "status": "FAIL",
+                "returncode": 2,
+                "stdout_tail": "x" * 20_000,
+                "stderr_tail": "recovery failed",
+            },
+            {"gate_id": "unit_tests", "status": "PASS", "returncode": 0},
+        ]
+
+        summary = atlasctl.final_audit_compact_summary(payload, gates)
+
+        self.assertEqual(summary["failed_gate_ids"], payload["failed_gate_ids"])
+        self.assertEqual(summary["requirements_verified"], 55)
+        self.assertEqual(summary["failed_gates"][0]["gate_id"], "tracked_only_recovery")
+        self.assertEqual(len(summary["failed_gates"][0]["stdout_tail"]), 1000)
+        self.assertLess(len(json.dumps(summary)), 3000)
+
     def test_rendered_chinese_gate_checks_human_copy_and_raw_manifest_pollution(self) -> None:
         source = HOME_BROWSER_GATE.read_text(encoding="utf-8")
 

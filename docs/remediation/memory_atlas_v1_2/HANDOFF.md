@@ -1,6 +1,6 @@
 # Memory Atlas v1.2 Remediation Handoff
 
-> **Current v1.2.1 note (2026-07-16 08:45 +10:00):** The v1.2.1 Task Pack is
+> **Current v1.2.1 note (2026-07-16 09:35 +10:00):** The v1.2.1 Task Pack is
 > 49/149 complete locally. This run completed only `S07-P2-T1`; S07 is 4/9,
 > S07-P2 is 1/3, and `S07-P2-T2` is the next/only eligible Task. The canonical
 > archive-derived builder consumes only raw-ledger registrations that pass the
@@ -21,8 +21,13 @@
 > corrected full release passed 1/1 in 1,129.235 seconds with no critical skip,
 > raw mutation or remote push. Python 3.13/3.12 deterministic render, privacy,
 > built-dist raw isolation, script consolidation and diff whitespace checks passed.
-> Only the local commit and exact-commit release/recovery remain closeout work in
-> this same Task. Unrelated KMFA and automation changes remain unstaged and untouched. No
+> The first local commit is `04ecf4ab5`. Its first two exact-tree release attempts
+> failed closed at 55/58 and 56/58 with different aggregate gate coverage, while
+> standalone GitHub backup 12/12 and exact-commit recovery both passed for the same
+> commit. The old profile tail hid `failed_gate_ids`; final audit now emits a bounded
+> stderr compact summary, covered by R8/CLI 14/14. A corrective local commit and one
+> complete exact-tree release still remain closeout work in this same Task. Unrelated
+> KMFA and automation changes remain unstaged and untouched. No
 > Atlas snapshot, weekly report, sync-state, UI, fetch, push, deploy, branch/PR,
 > merge/rebase or cache cleanup changed. Do not start more than `S07-P2-T2` next,
 > and do not upload before all 149 Tasks plus final review/remediation are complete.

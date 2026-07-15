@@ -2389,6 +2389,7 @@ stages:
               - "最终候选通过全量 Python 494/494（879.438 秒）、validate:fast 6/6（66.061 秒）、validate:sync 10/10（297.596 秒）和 validate:ui 14/14（742.800 秒）。第一次 release 在 56/58 时仅因 unit_tests 900 秒预算不足失败；预算按真实 879.438 秒运行时间修正为 1800 秒并由 28/28 R8/CLI 回归覆盖。"
               - "修正后的完整 validate:release 1/1 PASS（1129.235 秒），final_audit 无失败、无 critical skip，raw_mutation=false、remote_push=false。提交后仍须在精确 commit tree 上重跑 release/recovery，未提前声称该 closeout 通过。"
               - "最终 Python 3.13/3.12 deterministic render 均为零 drift/零引用问题；privacy guard 为 0 high-risk secret、0 credential-like path、0 tracked raw/private，raw-isolation 证明 built dist 无 raw path/hash collision，script consolidation 12/12 与 git diff --check 通过。"
+              - "首次本地 commit 后的两次 exact-tree release 分别以 55/58（S04 partial）和 56/58（S04 已 VERIFIED）FAIL_CLOSED；同 commit 的 GitHub backup 12/12 与 tracked-only recovery 单独复跑均 PASS，证明失败 gate 存在运行间漂移且原 tail 隐藏 failed_gate_ids。final audit 现追加有界 stderr compact summary，并由 R8/CLI 14/14 回归覆盖；下一次完整 exact-tree release 仍是关闭条件。"
             evidence_refs:
               - "EVID-MA-V121-S07-P2-T1-STATE"
               - "EVID-MA-V121-S07-P2-T1-OUTPUT"

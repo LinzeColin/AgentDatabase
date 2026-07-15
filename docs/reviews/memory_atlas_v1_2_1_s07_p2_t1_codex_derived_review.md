@@ -79,6 +79,15 @@ repeat completed in 10.328 seconds with `NO_CHANGES`, `parsed_archive_count=0` a
 - Exact-commit release/recovery remains a required post-commit closeout and is not
   preclaimed in this review.
 
+The first two post-commit aggregate attempts failed closed without raw or remote
+writes. The first reconciled `55/58` with S04 partial; standalone GitHub backup
+`12/12` and exact-commit recovery then passed for the same commit. The second
+reconciled `56/58` with S04 verified, proving a different four-line gate failed.
+The previous profile tail omitted the sorted `failed_gate_ids` behind the long
+requirement rows. The final audit now emits a bounded stderr compact summary with
+failed gate IDs, return codes and short output tails; R8/CLI regression is `14/14`.
+Another complete exact-tree release is required after the corrective commit.
+
 ## Independent Engineering And Security Review
 
 The review covers archive authorization, streamed package parsing, source and member
@@ -95,7 +104,9 @@ hashes. Review findings covering model-parameter/state binding, process locking,
 canonical credential/path rejection, symlink output boundaries, legacy-output scope
 and the final-audit timeout budget were fixed and regression-tested. Final staged
 inspection also normalized the new validator-profile indentation without a semantic
-change. The final review finding count is `0 Critical / 0 Important / 0 Minor`.
+change. Post-commit review additionally fixed the missing compact failed-gate
+diagnostic; the final finding count after that fix is
+`0 Critical / 0 Important / 0 Minor`.
 
 ## Independent Product And Scope Review
 

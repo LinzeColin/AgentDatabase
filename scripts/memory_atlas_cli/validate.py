@@ -222,6 +222,35 @@ def compact_tail(value: str | bytes, limit: int = FINAL_AUDIT_OUTPUT_TAIL_CHARS)
     return value[-limit:]
 
 
+def final_audit_compact_summary(
+    payload: dict[str, object],
+    gates: list[dict[str, object]],
+) -> dict[str, object]:
+    failed_gates = [
+        {
+            "gate_id": str(gate.get("gate_id") or ""),
+            "returncode": gate.get("returncode"),
+            "stderr_tail": compact_tail(str(gate.get("stderr_tail") or ""), 1000),
+            "stdout_tail": compact_tail(str(gate.get("stdout_tail") or ""), 1000),
+        }
+        for gate in gates
+        if gate.get("status") != "PASS"
+    ]
+    requirements = payload.get("requirements")
+    requirement_summary = requirements if isinstance(requirements, dict) else {}
+    return {
+        "schema_version": "memory_atlas.final_audit_compact_summary.v1_2_1_s07_p2_t1",
+        "event": "final_audit_summary",
+        "status": payload.get("status"),
+        "failed_gate_ids": payload.get("failed_gate_ids") or [],
+        "failed_gates": failed_gates,
+        "requirements_total": requirement_summary.get("total"),
+        "requirements_verified": requirement_summary.get("verified"),
+        "raw_mutation": payload.get("raw_mutation"),
+        "remote_push": payload.get("remote_push"),
+    }
+
+
 def final_audit_dry_run_contract(args: argparse.Namespace) -> dict[str, object]:
     gates = [
         {
@@ -360,6 +389,10 @@ def run_final_audit(args: argparse.Namespace) -> int:
         "中文说明": "S14 P2 final audit 已运行；失败时先按 failed_gate_ids 和各 gate 的中文解释修复。",
     }
     print(json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True))
+    print(
+        json.dumps(final_audit_compact_summary(payload, gates), ensure_ascii=False, sort_keys=True),
+        file=sys.stderr,
+    )
     return 0 if not failed and r8_passed else 2
 
 
@@ -1843,6 +1876,7 @@ __all__ = (
     "build_acceptance_summary",
     "final_audit_gate_plan",
     "compact_tail",
+    "final_audit_compact_summary",
     "final_audit_dry_run_contract",
     "run_final_audit",
     "audit_evidence_collection",
