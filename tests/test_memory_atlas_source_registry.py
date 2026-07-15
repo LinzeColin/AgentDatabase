@@ -64,6 +64,10 @@ class SourceRegistryContractTests(unittest.TestCase):
             contract["archive_chunking_ref"],
             "config/data_sources/archive_chunking.json",
         )
+        self.assertEqual(
+            contract["archive_restore_ref"],
+            "config/data_sources/archive_restore.json",
+        )
 
     def test_canonical_registry_covers_chatgpt_codex_and_generic_agent(self) -> None:
         sources = sync_source_map(load_source_registry(ROOT))

@@ -18,6 +18,11 @@ from memory_atlas_cli.archive_chunking import (
     ArchiveChunkError,
     load_archive_chunking_contract,
 )
+from memory_atlas_cli.archive_restore import (
+    CONTRACT_PATH as ARCHIVE_RESTORE_CONTRACT_PATH,
+    ArchiveRestoreError,
+    load_archive_restore_contract,
+)
 from memory_atlas_cli.raw_ledger import (
     RAW_LEDGER_CONTRACT_PATH,
     RawLedgerError,
@@ -311,6 +316,7 @@ def validate_source_registry(payload: Any, database_dir: Path) -> dict[str, Any]
         "credential_exclusion_ref",
         "raw_ledger_ref",
         "archive_chunking_ref",
+        "archive_restore_ref",
         "push_defaults",
     }
     if set(contract) != expected_contract_keys:
@@ -366,6 +372,17 @@ def validate_source_registry(payload: Any, database_dir: Path) -> dict[str, Any]
         load_archive_chunking_contract(database_dir, database_dir / archive_chunking_ref)
     except ArchiveChunkError as exc:
         raise SourceRegistryError("sync_contract archive-chunking contract is invalid") from exc
+    archive_restore_ref = _repo_relative_path(
+        contract.get("archive_restore_ref"),
+        "sync_contract.archive_restore_ref",
+        ("config/data_sources/",),
+    )
+    if archive_restore_ref != ARCHIVE_RESTORE_CONTRACT_PATH.as_posix():
+        raise SourceRegistryError("sync_contract.archive_restore_ref must name the canonical contract")
+    try:
+        load_archive_restore_contract(database_dir, database_dir / archive_restore_ref)
+    except ArchiveRestoreError as exc:
+        raise SourceRegistryError("sync_contract archive-restore contract is invalid") from exc
     if contract.get("push_defaults") != PUSH_DEFAULTS:
         raise SourceRegistryError("sync_contract.push_defaults drifted from the delivery boundary")
 

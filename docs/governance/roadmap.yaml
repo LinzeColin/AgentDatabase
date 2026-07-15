@@ -8,7 +8,7 @@ next_gate_id: "ACC.OpenAIDatabase.PAM1.0019"
 total_estimated_hours: 255
 completed_estimated_hours: 241
 taskpack_progress:
-  completed_tasks: 41
+  completed_tasks: 42
   total_tasks: 149
   delivery_state: "local_only_not_released"
 stages:
@@ -1688,7 +1688,7 @@ stages:
     person_goal: "为 ChatGPT、Codex 和后续 Agent 建立统一公开 raw 数据平面，同时保证源文件只读、归档只追加、可去重、可恢复且不提交凭证。"
     status: "in_progress"
     estimated_hours: 9
-    estimated_pct: 44
+    estimated_pct: 67
     stop_conditions:
       - "同步器需要修改、移动或删除源 raw"
       - "credential-like 文件准备进入 staged diff"
@@ -1843,18 +1843,24 @@ stages:
       - phase_id: "MA-V121-S06-P2"
         name: "append-only、hash、分片与恢复"
         objective: "建立不可变 raw ledger、确定性分片和 restore/verify 闭环。"
-        status: "in_progress"
+        status: "completed"
         estimated_hours: 3
-        estimated_pct: 67
+        estimated_pct: 100
         stop_conditions:
           - "同步改变源文件字节、mtime 或 size"
           - "分片或恢复结果无法由 manifest 校验"
         stop_gate:
           gate_id: "ACC-MA-V121-S06-P2"
-          status: "in_progress"
+          status: "complete"
           pass_conditions:
             - "append-only/hash/去重与 45 MiB 分片恢复通过 fixtures 验证"
-          evidence_refs: []
+          evidence_refs:
+            - "EVID-MA-V121-S06-P2-T1-CONTRACT"
+            - "EVID-MA-V121-S06-P2-T1-TEST"
+            - "EVID-MA-V121-S06-P2-T2-CONTRACT"
+            - "EVID-MA-V121-S06-P2-T2-TEST"
+            - "EVID-MA-V121-S06-P2-T3-CONTRACT"
+            - "EVID-MA-V121-S06-P2-T3-TEST"
         tasks:
           - task_id: "S06-P2-T1"
             name: "实现不可变 raw ledger"
@@ -1938,18 +1944,43 @@ stages:
           - task_id: "S06-P2-T3"
             name: "实现 restore/verify"
             objective: "从分片恢复并逐文件与整包校验。"
-            status: "planned"
+            status: "completed"
             estimated_hours: 1
-            estimated_pct: 0
+            estimated_pct: 100
             dependencies:
               - "S06-P2-T2"
             acceptance_ids:
               - "ACC-MA-V121-S06-P2-T3"
-            test_commands: []
-            evidence_refs: []
+            acceptance:
+              - acceptance_id: "ACC-MA-V121-S06-P2-T3"
+                description: "verify 以只读流式方式按 manifest 顺序验证每个 part 的 bytes/SHA-256 与重建整包的 bytes/SHA-256；restore 仅向 archive 外的显式输出写入，使用独占临时文件、hard-link no-replace、fsync 和 identity-gated cleanup，不覆盖不同内容。真实 45 MiB+123 bytes fixture round trip 与两类历史 90 MiB manifest 只读验证均通过。"
+                evidence_refs:
+                  - "EVID-MA-V121-S06-P2-T3-CONTRACT"
+                  - "EVID-MA-V121-S06-P2-T3-TEST"
+            test_commands:
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_archive_restore -q"
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_archive_restore OpenAIDatabase.tests.test_memory_atlas_archive_chunking OpenAIDatabase.tests.test_memory_atlas_source_registry -q"
+              - "cd OpenAIDatabase && python3 scripts/raw_archive_manifest.py verify --database-dir . --source-id chatgpt --archive-id 2026-07-07"
+              - "cd OpenAIDatabase && python3 scripts/raw_archive_manifest.py verify --database-dir . --source-id git-remote-branches --archive-id 2026-07-08"
+              - "python3 -B -m unittest discover -s OpenAIDatabase/tests -p 'test_*.py' -q"
+              - "npm run validate:fast --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run validate:sync --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run validate:ui --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run validate:release --prefix OpenAIDatabase/apps/memory-atlas"
+              - "python3 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+              - "python3.12 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+            test_results:
+              - "13 项专用回归覆盖真实 45 MiB+123 bytes 两分片 restore round trip、幂等 replay、两类 legacy manifest、manifest command 不执行、篡改/缺失/额外/symlink、路径与 schema 漂移、冲突不覆盖、archive 内输出阻断、失败清理、post-publish 状态、读取后 part/manifest/output mutation，以及 parent fsync 失败同时发生 output mutation 的 truthful failure；41 项 T2/T3/source-registry 联合回归通过。"
+              - "真实 ChatGPT archive 16/16 parts、1,473,421,021 bytes、整包 SHA-256 52f204dd8d78b76a79c6fc37e3e09987d3ab682c87098da017b894dd88c3a868 PASS；真实 Git bundle 13/13 parts、1,161,813,692 bytes、整包 SHA-256 ec03e395898169ff1a625732bb1cb1582c5576e0f611c1be91d7ffad78f928e6 PASS。两者只读 verify 前后 35 个 archive 文件的 bytes/inode/mtime 元数据摘要同为 f2def36b6456f3beae8d0f54fc8bba6c1119a97c36837400face9c78fd2db955，Git diff=0。"
+              - "最终候选完整 Python 411/411（243.033 秒）、脚本治理 43/43、fast 4/4、sync 7/7、ui 14/14、release 1/1 PASS；最终 release audit 用时 915,893 ms，所有 profile 均报告 raw_mutation=false、remote_push=false、critical skip=0。工程/安全独立最终复核为 Critical 0、Important 0、Minor 0；产品/范围首轮两项提交与文档边界发现已按 staged scope 和最终 review 同步关闭。"
+              - "canonical restore 合同登记 T3 参数、支持 schema、逐 part/整包校验、显式 output、no-overwrite、fsync、identity cleanup 与下一 Task 边界；旧 90 MiB archives、public raw、ledger、source package 均未重写或迁移。"
+            evidence_refs:
+              - "EVID-MA-V121-S06-P2-T3-CONTRACT"
+              - "EVID-MA-V121-S06-P2-T3-TEST"
             risks:
               - "恢复结果与归档 manifest 不一致"
-            rollback: "git revert 本 Task 本地 commit。"
+            rollback: "提交前仅反向应用 S06-P2-T3 精确 Task patch；提交后使用 git revert <S06-P2-T3 commit>。"
+            current_result: "complete_local_only_42_of_149_pending_s06_p3_t1"
       - phase_id: "MA-V121-S06-P3"
         name: "仓库与构建隔离"
         objective: "隔离 raw 正文、限制 staged push 体积并用 fixtures 验证完整合同。"

@@ -36,6 +36,15 @@ from memory_atlas_cli.archive_chunking import (
     ArchiveChunkPostPublishError,
     chunk_archive_package,
 )
+from memory_atlas_cli.archive_restore import (
+    ERROR_SCHEMA_VERSION as ARCHIVE_RESTORE_ERROR_SCHEMA_VERSION,
+    ArchiveRestoreError,
+    ArchiveRestoreOutputConflictError,
+    ArchiveRestorePartialWriteError,
+    ArchiveRestorePostPublishError,
+    restore_archive,
+    verify_archive,
+)
 
 PUBLIC_RAW_ROOT = RAW_ROOT
 MANIFEST_ROOT = Path("机器治理/证据与日志/raw_archive_manifests")
@@ -426,6 +435,17 @@ def build_parser() -> argparse.ArgumentParser:
     chunk.add_argument("--source-id", required=True, help="portable archive source id")
     chunk.add_argument("--archive-id", required=True, help="portable archive run id")
 
+    verify = subparsers.add_parser("verify", help="verify archive parts and reconstructed package")
+    verify.add_argument("--database-dir", default=".", help="OpenAIDatabase root")
+    verify.add_argument("--source-id", required=True, help="portable archive source id")
+    verify.add_argument("--archive-id", required=True, help="portable archive run id")
+
+    restore = subparsers.add_parser("restore", help="restore and verify an archive package")
+    restore.add_argument("--database-dir", default=".", help="OpenAIDatabase root")
+    restore.add_argument("--source-id", required=True, help="portable archive source id")
+    restore.add_argument("--archive-id", required=True, help="portable archive run id")
+    restore.add_argument("--output", required=True, help="explicit no-overwrite output file")
+
     return parser
 
 
@@ -448,8 +468,73 @@ def main(argv: list[str] | None = None) -> int:
                 args.source_id,
                 args.archive_id,
             )
+        elif args.command == "verify":
+            result = verify_archive(
+                Path(args.database_dir),
+                args.source_id,
+                args.archive_id,
+            )
+        elif args.command == "restore":
+            result = restore_archive(
+                Path(args.database_dir),
+                args.source_id,
+                args.archive_id,
+                Path(args.output),
+            )
         else:
             raise AssertionError(f"unhandled command: {args.command}")
+    except ArchiveRestorePostPublishError as exc:
+        result = {
+            "status": "FAIL",
+            "schema_version": ARCHIVE_RESTORE_ERROR_SCHEMA_VERSION,
+            "task_id": "S06-P2-T3",
+            "operation": args.command,
+            "reason": str(exc),
+            "output_may_exist": True,
+            "output_complete": True,
+            "temporary_output_may_exist": False,
+            "archive_mutation": False,
+            "remote_push": False,
+        }
+    except ArchiveRestorePartialWriteError as exc:
+        result = {
+            "status": "FAIL",
+            "schema_version": ARCHIVE_RESTORE_ERROR_SCHEMA_VERSION,
+            "task_id": "S06-P2-T3",
+            "operation": args.command,
+            "reason": str(exc),
+            "output_may_exist": exc.output_may_exist,
+            "output_complete": exc.output_complete,
+            "temporary_output_may_exist": exc.temporary_output_may_exist,
+            "archive_mutation": False,
+            "remote_push": False,
+        }
+    except ArchiveRestoreOutputConflictError as exc:
+        result = {
+            "status": "FAIL",
+            "schema_version": ARCHIVE_RESTORE_ERROR_SCHEMA_VERSION,
+            "task_id": "S06-P2-T3",
+            "operation": args.command,
+            "reason": str(exc),
+            "output_may_exist": True,
+            "output_complete": False,
+            "temporary_output_may_exist": False,
+            "archive_mutation": False,
+            "remote_push": False,
+        }
+    except ArchiveRestoreError as exc:
+        result = {
+            "status": "FAIL",
+            "schema_version": ARCHIVE_RESTORE_ERROR_SCHEMA_VERSION,
+            "task_id": "S06-P2-T3",
+            "operation": args.command,
+            "reason": str(exc),
+            "output_may_exist": False,
+            "output_complete": False,
+            "temporary_output_may_exist": False,
+            "archive_mutation": False,
+            "remote_push": False,
+        }
     except ArchiveChunkPostPublishError as exc:
         result = {
             "status": "FAIL",

@@ -35,6 +35,7 @@
     "credential_exclusion_ref": "config/data_sources/credential_exclusion.json",
     "raw_ledger_ref": "config/data_sources/raw_ledger.json",
     "archive_chunking_ref": "config/data_sources/archive_chunking.json",
+    "archive_restore_ref": "config/data_sources/archive_restore.json",
     "push_defaults": {
       "mode": "final_delivery_only",
       "branch": "main",

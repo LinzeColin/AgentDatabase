@@ -73,8 +73,8 @@ SUMMARY = {
     "deleted_python_test_count": 2,
     "retained_validator_count": 39,
     "retained_baseline_python_test_count": 49,
-    "added_python_test_count": 10,
-    "current_python_test_count": 59,
+    "added_python_test_count": 11,
+    "current_python_test_count": 60,
 }
 ADDED_PATHS = [
     "tests/test_memory_atlas_test_value_audit.py",
@@ -88,6 +88,7 @@ ADDED_PATHS = [
     "tests/test_memory_atlas_credential_exclusion.py",
     "tests/test_memory_atlas_raw_ledger.py",
     "tests/test_memory_atlas_archive_chunking.py",
+    "tests/test_memory_atlas_archive_restore.py",
 ]
 DELETED_TEST_REPLACEMENTS = {
     "tests/test_memory_atlas_v1_2_product_identity_contract.py": "npm run validate:ui",

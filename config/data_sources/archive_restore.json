@@ -1,0 +1,46 @@
+{
+  "schema_version": "memory_atlas.archive_restore.v1_2_1_s06_p2_t3",
+  "task_id": "S06-P2-T3",
+  "acceptance_id": "ACC-MA-V121-S06-P2-T3",
+  "policy": "manifest_bound_restore_verify",
+  "archive_root": "data/raw_archives",
+  "supported_manifest_schemas": {
+    "canonical": "memory_atlas.archive_chunk_manifest.v1_2_1_s06_p2_t2",
+    "legacy_read_only": [
+      "memory_atlas_raw_archive_manifest.v1",
+      "codexproject_remote_branch_archive_manifest.v1"
+    ]
+  },
+  "verification": {
+    "manifest_filename": "manifest.json",
+    "parts_directory": "parts",
+    "hash_algorithm": "sha256",
+    "read_chunk_bytes": 1048576,
+    "ordered_indices_required": true,
+    "exact_part_inventory_required": true,
+    "per_part_bytes_and_hash_required": true,
+    "package_bytes_and_hash_required": true,
+    "symlinks_forbidden": true,
+    "source_identity_guard": true,
+    "manifest_commands_are_metadata_only": true
+  },
+  "restore": {
+    "explicit_output_required": true,
+    "output_must_be_outside_archive": true,
+    "output_parent_must_exist": true,
+    "exclusive_temp_reservation": true,
+    "hard_link_publish_no_replace": true,
+    "existing_output_policy": "verify_identical_never_rewrite",
+    "fsync_output_and_parent": true,
+    "failure_cleanup_requires_identity": true,
+    "partial_or_post_publish_state_reported": true
+  },
+  "phase_boundary": {
+    "does_not_modify_archive_or_parts": true,
+    "does_not_modify_public_raw_or_ledger": true,
+    "does_not_rewrite_legacy_archives": true,
+    "does_not_execute_manifest_commands": true,
+    "does_not_push_remote": true,
+    "next_task": "S06-P3-T1"
+  }
+}
