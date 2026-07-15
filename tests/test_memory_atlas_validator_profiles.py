@@ -131,6 +131,13 @@ class PublicProfileContractTests(unittest.TestCase):
             push_size_step["command"],
             ["@python", "scripts/atlasctl.py", "audit", "--check", "push-size", "--push-scope", "staged"],
         )
+        sync_unit_tests = next(
+            step for step in payload["profiles"]["sync"]["steps"] if step["id"] == "sync_unit_tests"
+        )
+        self.assertIn(
+            "tests.test_memory_atlas_raw_contract_fixtures",
+            sync_unit_tests["command"],
+        )
         ui_isolation = next(
             step for step in payload["profiles"]["ui"]["steps"] if step["id"] == "public_raw_build_isolation"
         )

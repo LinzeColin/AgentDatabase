@@ -872,6 +872,33 @@ features:
     evidence_refs:
       - "EVID-MA-V121-S06-P3-T2-CONTRACT"
       - "EVID-MA-V121-S06-P3-T2-TEST"
+  - feature_id: "FEAT-MA-V121-S06-P3-T3"
+    name: "Memory Atlas raw contract 合成 fixture 闭环"
+    description: "v1.2.1 Task Pack 当前完成 45/149；一个 temp-only 跨合同测试矩阵覆盖 raw ledger 首次追加、重复幂等、同尺寸篡改阻断、最小 45 MiB+17 bytes 确定性两分片、逐 part 与整包恢复、manifest 篡改阻断，以及安全 transcript 保留和合成 session credential 阻断。fixture 只复制四个 canonical contracts，不读取或改写真实 public raw、archive、ledger、sync state 或私人凭证，不访问网络或 Git remote。该 suite 接入 validate:sync；S07 及后续自动 connector 未在本 Task 实现。"
+    status: "active"
+    fact_level: "EXTRACTED"
+    code_refs:
+      - "OpenAIDatabase/tests/test_memory_atlas_raw_contract_fixtures.py"
+      - "OpenAIDatabase/scripts/raw_archive_manifest.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/archive_chunking.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/archive_restore.py"
+      - "OpenAIDatabase/scripts/privacy_guard.py"
+    config_refs:
+      - "OpenAIDatabase/config/data_sources/raw_ledger.json"
+      - "OpenAIDatabase/config/data_sources/archive_chunking.json"
+      - "OpenAIDatabase/config/data_sources/archive_restore.json"
+      - "OpenAIDatabase/config/data_sources/credential_exclusion.json"
+      - "OpenAIDatabase/config/memory_atlas_validator_profiles.json"
+    source_refs:
+      - "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s06_p3_t3_raw_contract_fixtures_review.md"
+    owner_actions:
+      - "修改 raw ledger、chunk、restore、credential 或 sync profile 后运行 validate:sync；fixture 只能使用临时合成内容，不得接入真实 credential、private export、生产 raw 路径或 remote。"
+    test_refs:
+      - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_raw_contract_fixtures -q"
+      - "npm run validate:sync --prefix OpenAIDatabase/apps/memory-atlas"
+    evidence_refs:
+      - "EVID-MA-V121-S06-P3-T3-TEST"
+      - "EVID-MA-V121-S06-P3-T3-REVIEW"
 models:
   -
     model_id: "MOD-001"
@@ -5087,4 +5114,14 @@ evidence_refs:
     evidence_id: "EVID-MA-V121-S06-P3-T2-TEST"
     kind: "test"
     ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s06_p3_t2_push_size_guard_review.md"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S06-P3-T3-TEST"
+    kind: "test"
+    ref: "OpenAIDatabase/tests/test_memory_atlas_raw_contract_fixtures.py"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S06-P3-T3-REVIEW"
+    kind: "review"
+    ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s06_p3_t3_raw_contract_fixtures_review.md"
     fact_level: "EXTRACTED"

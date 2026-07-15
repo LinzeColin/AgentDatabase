@@ -8,7 +8,7 @@ next_gate_id: "ACC.OpenAIDatabase.PAM1.0019"
 total_estimated_hours: 255
 completed_estimated_hours: 241
 taskpack_progress:
-  completed_tasks: 44
+  completed_tasks: 45
   total_tasks: 149
   delivery_state: "local_only_not_released"
 stages:
@@ -1685,10 +1685,10 @@ stages:
             current_result: "complete_local_only_36_of_149_pending_s06_p1_t1"
   - stage_id: "MA-V121-S06"
     name: "Memory Atlas v1.2.1 多来源 raw 明文公开归档与不可变合同"
-    person_goal: "为 ChatGPT、Codex 和后续 Agent 建立统一公开 raw 数据平面，同时保证源文件只读、归档只追加、可去重、可恢复且不提交凭证。"
-    status: "in_progress"
+    person_goal: "为 ChatGPT、Codex 和后续 Agent 建立统一公开 raw 数据平面，同时保证源文件只读、归档只追加、可去重、可恢复且不提交凭证；S06 已完成本地合同闭环，后续从 S07 开始推进真实 Codex connector。"
+    status: "completed"
     estimated_hours: 9
-    estimated_pct: 89
+    estimated_pct: 100
     stop_conditions:
       - "同步器需要修改、移动或删除源 raw"
       - "credential-like 文件准备进入 staged diff"
@@ -1697,11 +1697,29 @@ stages:
       - "本地完成整个 v1.2.1 Task Pack 前发生 push、deploy、branch 或 PR"
     stop_gate:
       gate_id: "ACC-MA-V121-S06"
-      status: "in_progress"
+      status: "passed"
       pass_conditions:
         - "公开 raw 路径、append-only/hash/分片/恢复和 credential 边界在 fixtures 上完整闭环"
         - "raw 不进入 Memory Atlas 前端包，也不增加默认 Codex 上下文和构建成本"
-      evidence_refs: []
+      evidence_refs:
+        - "EVID-MA-V121-S06-P1-T1-CONTRACT"
+        - "EVID-MA-V121-S06-P1-T1-TEST"
+        - "EVID-MA-V121-S06-P1-T2-CONTRACT"
+        - "EVID-MA-V121-S06-P1-T2-TEST"
+        - "EVID-MA-V121-S06-P1-T3-CONTRACT"
+        - "EVID-MA-V121-S06-P1-T3-TEST"
+        - "EVID-MA-V121-S06-P2-T1-CONTRACT"
+        - "EVID-MA-V121-S06-P2-T1-TEST"
+        - "EVID-MA-V121-S06-P2-T2-CONTRACT"
+        - "EVID-MA-V121-S06-P2-T2-TEST"
+        - "EVID-MA-V121-S06-P2-T3-CONTRACT"
+        - "EVID-MA-V121-S06-P2-T3-TEST"
+        - "EVID-MA-V121-S06-P3-T1-CONTRACT"
+        - "EVID-MA-V121-S06-P3-T1-TEST"
+        - "EVID-MA-V121-S06-P3-T2-CONTRACT"
+        - "EVID-MA-V121-S06-P3-T2-TEST"
+        - "EVID-MA-V121-S06-P3-T3-TEST"
+        - "EVID-MA-V121-S06-P3-T3-REVIEW"
     phases:
       - phase_id: "MA-V121-S06-P1"
         name: "统一来源注册和公开路径"
@@ -1984,20 +2002,24 @@ stages:
       - phase_id: "MA-V121-S06-P3"
         name: "仓库与构建隔离"
         objective: "隔离 raw 正文、限制 staged push 体积并用 fixtures 验证完整合同。"
-        status: "in_progress"
+        status: "completed"
         estimated_hours: 3
-        estimated_pct: 67
+        estimated_pct: 100
         stop_conditions:
           - "raw 正文进入默认搜索、CI 或前端包"
           - "超过 push 上限后使用 force 规避"
         stop_gate:
           gate_id: "ACC-MA-V121-S06-P3"
-          status: "in_progress"
+          status: "passed"
           pass_conditions:
             - "默认上下文与构建隔离、push size guard 和 raw contract tests 全部通过"
           evidence_refs:
             - "EVID-MA-V121-S06-P3-T1-CONTRACT"
             - "EVID-MA-V121-S06-P3-T1-TEST"
+            - "EVID-MA-V121-S06-P3-T2-CONTRACT"
+            - "EVID-MA-V121-S06-P3-T2-TEST"
+            - "EVID-MA-V121-S06-P3-T3-TEST"
+            - "EVID-MA-V121-S06-P3-T3-REVIEW"
         tasks:
           - task_id: "S06-P3-T1"
             name: "配置 raw 默认隔离"
@@ -2090,15 +2112,252 @@ stages:
           - task_id: "S06-P3-T3"
             name: "建立 raw contract fixtures"
             objective: "覆盖追加、重复、篡改、分片、恢复和凭证阻断。"
-            status: "planned"
+            status: "completed"
             estimated_hours: 1
-            estimated_pct: 0
+            estimated_pct: 100
             dependencies:
               - "S06-P3-T2"
             acceptance_ids:
               - "ACC-MA-V121-S06-P3-T3"
+            acceptance:
+              - acceptance_id: "ACC-MA-V121-S06-P3-T3"
+                description: "一个 temp-only 合成 fixture 矩阵使用 production raw ledger、chunk、restore 和 credential contracts，覆盖首次追加、重复幂等、同尺寸篡改 fail closed、45 MiB+17 bytes 两分片、逐 part/整包恢复与 manifest 篡改阻断，以及安全 transcript 保留和合成 credential 阻断；不读取真实 raw、private export 或凭证，不访问网络。"
+                evidence_refs:
+                  - "EVID-MA-V121-S06-P3-T3-TEST"
+                  - "EVID-MA-V121-S06-P3-T3-REVIEW"
+            test_commands:
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_raw_contract_fixtures -q"
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_raw_contract_fixtures OpenAIDatabase.tests.test_memory_atlas_raw_ledger OpenAIDatabase.tests.test_memory_atlas_archive_chunking OpenAIDatabase.tests.test_memory_atlas_archive_restore OpenAIDatabase.tests.test_memory_atlas_credential_exclusion OpenAIDatabase.tests.test_memory_atlas_validator_profiles OpenAIDatabase.tests.test_memory_atlas_test_value_audit OpenAIDatabase.tests.test_atlasctl_script_consolidation -q"
+              - "npm run validate:fast --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run validate:sync --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run validate:ui --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run validate:release --prefix OpenAIDatabase/apps/memory-atlas"
+              - "python3 -B -m unittest discover -s OpenAIDatabase/tests -p 'test_*.py' -q"
+              - "python3 -B OpenAIDatabase/scripts/privacy_guard.py --database-dir OpenAIDatabase --scan-only"
+              - "python3 -B OpenAIDatabase/scripts/atlasctl.py audit --check raw-isolation --require-built-dist"
+              - "python3 -B OpenAIDatabase/scripts/atlasctl.py audit --check push-size --push-scope staged"
+              - "python3 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+              - "python3.12 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+            test_results:
+              - "4 项专用回归使用临时合成数据完整覆盖 append、duplicate、tamper、chunk、restore 和 credential_block；45 MiB+17 bytes package 形成 45 MiB 与 17 bytes 两 part，恢复 SHA-256 精确一致，manifest 篡改后 verify/restore 均 fail closed 且既有 output 不变。"
+              - "安全 transcript 扫描 PASS 且原字节保持；运行时合成 session credential 被归类为 session_tokens，扫描报告不回显值。fixture 不读取真实 public raw、archive、ledger、private export 或 credentials，也不访问网络或 remote。"
+              - "专用测试 4/4、跨合同/profile/测试价值/脚本治理 focused 93/93、完整 Python 447/447 PASS；fast 6/6、sync 7/7、ui 14/14、release 1/1 均零 critical skip 且报告 raw_mutation=false、remote_push=false。完整 credential scan 128.261 秒，release final audit 887.430 秒；render、staged audit 与独立复核记录在最终 T3 review。"
+            evidence_refs:
+              - "EVID-MA-V121-S06-P3-T3-TEST"
+              - "EVID-MA-V121-S06-P3-T3-REVIEW"
+            risks:
+              - "测试依赖真实私人凭证"
+            rollback: "提交前仅反向应用 S06-P3-T3 精确 Task patch；提交后使用 git revert <S06-P3-T3 commit>。不得删除或修改生产 raw、archive、ledger 来回滚测试。"
+            current_result: "complete_local_only_45_of_149_pending_s07_p1_t1_no_remote_upload"
+  - stage_id: "MA-V121-S07"
+    name: "Codex 原始资料自动同步、分析与 main 直推"
+    person_goal: "把本机 Codex sessions/logs/history 自动只读归档为公开 raw、增量派生到 Memory Atlas，并在验证通过后直接推送 GitHub main。"
+    status: "planned"
+    estimated_hours: 9
+    estimated_pct: 0
+    stop_conditions:
+      - "源 Codex 文件发生字节、mtime 或 size 改变"
+      - "发现认证资料或 secret 进入 staged diff"
+      - "origin/main 在运行期间变化"
+      - "同步成功但 restore 无法复现 derived 结果"
+      - "本地完成整个 v1.2.1 Task Pack 前发生 push、deploy、branch 或 PR"
+    stop_gate:
+      gate_id: "ACC-MA-V121-S07"
+      status: "planned"
+      pass_conditions:
+        - "真实 Codex raw 资料被自动只读归档，不再只有脱敏摘要"
+        - "增量同步幂等、可中断恢复并可重建派生数据"
+        - "验证通过后自动 commit 并直接 push main，无 branch、PR 或 force"
+        - "至少完成一次真实本机同步、远端验证和恢复演练"
+      evidence_refs: []
+    phases:
+      - phase_id: "MA-V121-S07-P1"
+        name: "本机来源发现与 raw 只读导出"
+        objective: "发现可移植 Codex 来源并以只读、append-only 方式归档原始资料。"
+        status: "planned"
+        estimated_hours: 3
+        estimated_pct: 0
+        stop_conditions:
+          - "发现逻辑硬编码单一用户绝对路径"
+          - "认证、secret 或浏览器 credential store 被纳入候选"
+          - "同步修改、移动或删除源 Codex 文件"
+        stop_gate:
+          gate_id: "ACC-MA-V121-S07-P1"
+          status: "planned"
+          pass_conditions:
+            - "来源发现可移植且显式排除认证资料"
+            - "raw 归档 append-only、源 stat/hash 不变、重复运行无副本"
+          evidence_refs: []
+        tasks:
+          - task_id: "S07-P1-T1"
+            name: "实现 Codex source discovery"
+            objective: "从现有配置和实际环境发现 Codex 数据路径，不硬编码单一用户绝对路径。"
+            status: "planned"
+            estimated_hours: 1
+            estimated_pct: 0
+            dependencies:
+              - "S06-P3-T3"
+            acceptance_ids:
+              - "ACC-MA-V121-S07-P1-T1"
             test_commands: []
             evidence_refs: []
             risks:
-              - "测试依赖真实私人凭证"
-            rollback: "git revert 本 Task 本地 commit。"
+              - "认证或 secret 文件未被发现边界排除"
+            rollback: "git revert 本 Task 本地 commit；不得删除已存在 raw。"
+          - task_id: "S07-P1-T2"
+            name: "实现 Codex public raw archive"
+            objective: "将 sessions/logs/history 以原始格式或可恢复原始包 append-only 归档。"
+            status: "planned"
+            estimated_hours: 1
+            estimated_pct: 0
+            dependencies:
+              - "S07-P1-T1"
+            acceptance_ids:
+              - "ACC-MA-V121-S07-P1-T2"
+            test_commands: []
+            evidence_refs: []
+            risks:
+              - "归档过程修改源 Codex bytes、mtime 或 size"
+            rollback: "git revert 本 Task 本地 commit；已追加 raw 保持不变并由 manifest 标记。"
+          - task_id: "S07-P1-T3"
+            name: "实现 Codex sync state"
+            objective: "建立增量 cursor、内容 hash 去重和 interrupted-run resume。"
+            status: "planned"
+            estimated_hours: 1
+            estimated_pct: 0
+            dependencies:
+              - "S07-P1-T2"
+            acceptance_ids:
+              - "ACC-MA-V121-S07-P1-T3"
+            test_commands: []
+            evidence_refs: []
+            risks:
+              - "重复或中断运行产生重复副本"
+            rollback: "git revert 本 Task 本地 commit；保留 append-only raw 并重建 cursor。"
+      - phase_id: "MA-V121-S07-P2"
+        name: "派生分析与 Atlas 更新"
+        objective: "把已登记 Codex raw 增量派生为可追溯的 Atlas 数据、周报和同步状态。"
+        status: "planned"
+        estimated_hours: 3
+        estimated_pct: 0
+        stop_conditions:
+          - "派生结果无法追溯到 raw manifest"
+          - "前端被要求直接读取 raw"
+          - "脱敏摘要继续冒充 full raw backup"
+        stop_gate:
+          gate_id: "ACC-MA-V121-S07-P2"
+          status: "planned"
+          pass_conditions:
+            - "Codex derived outputs、snapshot、周报与同步状态可追溯且可解释"
+            - "旧消费者兼容读取但真相语义明确"
+          evidence_refs: []
+        tasks:
+          - task_id: "S07-P2-T1"
+            name: "构建 Codex derived outputs"
+            objective: "在 raw 归档完成后增量构建 Codex events、facets、行为摘要和 Universe State 输入。"
+            status: "planned"
+            estimated_hours: 1
+            estimated_pct: 0
+            dependencies:
+              - "S07-P1-T3"
+            acceptance_ids:
+              - "ACC-MA-V121-S07-P2-T1"
+            test_commands: []
+            evidence_refs: []
+            risks:
+              - "derived 输出丢失 raw manifest provenance"
+            rollback: "git revert 本 Task 本地 commit；从 immutable raw 重建 derived。"
+          - task_id: "S07-P2-T2"
+            name: "更新 Codex Atlas 数据"
+            objective: "更新 Memory Atlas snapshot、周报和同步状态。"
+            status: "planned"
+            estimated_hours: 1
+            estimated_pct: 0
+            dependencies:
+              - "S07-P2-T1"
+            acceptance_ids:
+              - "ACC-MA-V121-S07-P2-T2"
+            test_commands: []
+            evidence_refs: []
+            risks:
+              - "新 session 在 UI 中不可发现或无法解释"
+            rollback: "git revert 本 Task 本地 commit；恢复上一 derived snapshot 指针。"
+          - task_id: "S07-P2-T3"
+            name: "迁移旧 Codex 摘要语义"
+            objective: "保留现有脱敏摘要的兼容读取，但不再把它冒充 full raw backup。"
+            status: "planned"
+            estimated_hours: 1
+            estimated_pct: 0
+            dependencies:
+              - "S07-P2-T2"
+            acceptance_ids:
+              - "ACC-MA-V121-S07-P2-T3"
+            test_commands: []
+            evidence_refs: []
+            risks:
+              - "兼容层混淆 summary 与 raw backup"
+            rollback: "git revert 本 Task 本地 commit；保留旧只读消费者并恢复明确标记。"
+      - phase_id: "MA-V121-S07-P3"
+        name: "自动运行与 main 直推"
+        objective: "在严格 base-current、验证与恢复门禁后提供单次 owner run 的 main 直推和恢复证明。"
+        status: "planned"
+        estimated_hours: 3
+        estimated_pct: 0
+        stop_conditions:
+          - "当前分支不是 main 或工作树/base 不满足门禁"
+          - "一次 owner run 产生多次高频 push"
+          - "restore 结果无法重复验证"
+        stop_gate:
+          gate_id: "ACC-MA-V121-S07-P3"
+          status: "planned"
+          pass_conditions:
+            - "单命令 validate→commit→push main 在完整门禁下工作"
+            - "调度合并短时变化且一次 owner run 至多一次 push"
+            - "空临时目录可恢复 archive 并重建相同 derived snapshot"
+          evidence_refs: []
+        tasks:
+          - task_id: "S07-P3-T1"
+            name: "实现 sync codex --push-main"
+            objective: "为 Codex sync 实现 validate→commit→push main 的单命令流程。"
+            status: "planned"
+            estimated_hours: 1
+            estimated_pct: 0
+            dependencies:
+              - "S07-P2-T3"
+            acceptance_ids:
+              - "ACC-MA-V121-S07-P3-T1"
+            test_commands: []
+            evidence_refs: []
+            risks:
+              - "非 main、dirty 或 stale base 下发生远端写入"
+            rollback: "git revert 本 Task 本地 commit；不得 force 或重写历史。"
+          - task_id: "S07-P3-T2"
+            name: "配置 Codex scheduler profile"
+            objective: "配置可调度增量同步，默认合并短时间内变化，避免高频小 push。"
+            status: "planned"
+            estimated_hours: 1
+            estimated_pct: 0
+            dependencies:
+              - "S07-P3-T1"
+            acceptance_ids:
+              - "ACC-MA-V121-S07-P3-T2"
+            test_commands: []
+            evidence_refs: []
+            risks:
+              - "调度重入或高频 push"
+            rollback: "git revert 本 Task 本地 commit；禁用 scheduler profile，不删除 raw。"
+          - task_id: "S07-P3-T3"
+            name: "建立 Codex restore proof"
+            objective: "从空临时目录恢复一份 Codex archive 并重建 derived snapshot。"
+            status: "planned"
+            estimated_hours: 1
+            estimated_pct: 0
+            dependencies:
+              - "S07-P3-T2"
+            acceptance_ids:
+              - "ACC-MA-V121-S07-P3-T3"
+            test_commands: []
+            evidence_refs: []
+            risks:
+              - "恢复依赖本机旧缓存或原平台在线"
+            rollback: "git revert 本 Task 本地 commit；保留 immutable archive 和失败 manifest 证据。"

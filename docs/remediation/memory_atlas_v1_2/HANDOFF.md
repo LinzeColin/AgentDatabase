@@ -1,5 +1,26 @@
 # Memory Atlas v1.2 Remediation Handoff
 
+> **Current v1.2.1 note (2026-07-15 20:32 +10:00):** The v1.2.1 Task Pack is
+> 45/149 complete locally. This run completed only `S06-P3-T3`, closed
+> `S06-P3` at 3/3 and S06 at 9/9, and left `S07-P1-T1` as the next/only eligible
+> Task. A temp-only cross-contract fixture matrix calls the production raw-ledger,
+> 45 MiB chunk, restore and credential contracts for append, duplicate, same-size
+> tamper, 45 MiB+17-byte split, exact restore, manifest tamper and synthetic
+> credential blocking. It reads no real raw/private credential and performs no
+> network or remote operation. Dedicated 4/4, focused 93/93, full Python 447/447,
+> fast 6/6, sync 7/7, UI 14/14 and release 1/1 passed; privacy, built-dist raw
+> isolation and Python 3.13/3.12 deterministic render passed. The real 512-row
+> ledger remains 128,209 bytes, inode 156668907, mtime 1783818229.381278488 and
+> SHA-256 `1a4fa71303903ca896c82640f7b4550cee47f3cc8ec600f81d03f7603e120c96`.
+> Engineering/security and product/scope reviews both closed at 0 Critical / 0
+> Important / 0 Minor. Real pending audit remains fail-closed because the locally
+> known `origin/main` and local `main` diverge; no fetch, reconciliation, push,
+> deploy, branch/PR or cache cleanup occurred. The final exact staged audit passed
+> over 17 OpenAIDatabase paths as one `single_commit_ready` batch with 776,798 unique
+> object bytes and a 9,169,758-byte conservative upper bound. Do not
+> start more than `S07-P1-T1` next and do not upload before all 149 Tasks plus the
+> final overall review are complete.
+>
 > **Current v1.2.1 note (2026-07-15 18:31 +10:00):** The v1.2.1 Task Pack is
 > 44/149 complete locally. This run completed only `S06-P3-T2`; `S06-P3` is 2/3
 > and the next/only eligible Task is `S06-P3-T3`. The canonical push-size guard

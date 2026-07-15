@@ -27,8 +27,8 @@
     "deleted_python_test_count": 2,
     "retained_validator_count": 39,
     "retained_baseline_python_test_count": 49,
-    "added_python_test_count": 13,
-    "current_python_test_count": 62
+    "added_python_test_count": 14,
+    "current_python_test_count": 63
   },
   "profile_commands": {
     "fast": "npm run validate:fast",
@@ -50,7 +50,8 @@
     "tests/test_memory_atlas_archive_chunking.py",
     "tests/test_memory_atlas_archive_restore.py",
     "tests/test_memory_atlas_raw_isolation.py",
-    "tests/test_memory_atlas_push_size_guard.py"
+    "tests/test_memory_atlas_push_size_guard.py",
+    "tests/test_memory_atlas_raw_contract_fixtures.py"
   ],
   "candidates": [
     {
@@ -3429,6 +3430,16 @@
       ],
       "reason": "Retained because it proves S06-P3-T2 exact staged/pending blob and push thresholds, deterministic atomic staged batches, fast-forward merge boundaries, partial-clone no-lazy-fetch, checkpoint resume, divergence rejection, audited-tree CAS backup, no-hook commits and symlink/race fail-closed behavior.",
       "current_dependency": "S06-P3-T2 validate:fast, validate:sync and full Python suites"
+    },
+    {
+      "path": "tests/test_memory_atlas_raw_contract_fixtures.py",
+      "risk_bindings": [
+        "data_integrity",
+        "release_risk",
+        "runner_contract"
+      ],
+      "reason": "Retained because it proves the S06-P3-T3 cross-contract append, duplicate, tamper, 45 MiB chunk, exact restore and credential-block fixture matrix without real private credentials, real raw access or network writes.",
+      "current_dependency": "S06-P3-T3 validate:sync and full Python suites"
     }
   ]
 }
