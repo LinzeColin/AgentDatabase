@@ -8,7 +8,7 @@ next_gate_id: "ACC.OpenAIDatabase.PAM1.0019"
 total_estimated_hours: 255
 completed_estimated_hours: 241
 taskpack_progress:
-  completed_tasks: 43
+  completed_tasks: 44
   total_tasks: 149
   delivery_state: "local_only_not_released"
 stages:
@@ -1688,7 +1688,7 @@ stages:
     person_goal: "为 ChatGPT、Codex 和后续 Agent 建立统一公开 raw 数据平面，同时保证源文件只读、归档只追加、可去重、可恢复且不提交凭证。"
     status: "in_progress"
     estimated_hours: 9
-    estimated_pct: 78
+    estimated_pct: 89
     stop_conditions:
       - "同步器需要修改、移动或删除源 raw"
       - "credential-like 文件准备进入 staged diff"
@@ -1986,7 +1986,7 @@ stages:
         objective: "隔离 raw 正文、限制 staged push 体积并用 fixtures 验证完整合同。"
         status: "in_progress"
         estimated_hours: 3
-        estimated_pct: 33
+        estimated_pct: 67
         stop_conditions:
           - "raw 正文进入默认搜索、CI 或前端包"
           - "超过 push 上限后使用 force 规避"
@@ -2045,18 +2045,48 @@ stages:
           - task_id: "S06-P3-T2"
             name: "建立 push size guard"
             objective: "限制单次 staged push 体积并支持批次续传。"
-            status: "planned"
+            status: "completed"
             estimated_hours: 1
-            estimated_pct: 0
+            estimated_pct: 100
             dependencies:
               - "S06-P3-T1"
             acceptance_ids:
               - "ACC-MA-V121-S06-P3-T2"
-            test_commands: []
-            evidence_refs: []
+            acceptance:
+              - acceptance_id: "ACC-MA-V121-S06-P3-T2"
+                description: "staged 与 pending Git 对象以唯一未压缩 bytes 加每批/每对象协议 reserve 形成保守上界；>50 MiB blob 要求分片、>=100 MiB 硬停止、每批严格低于 1.5 GiB。staged 仅按完整 atomic unit 分批，pending 仅使用可逐次 fast-forward 的 first-parent commit boundaries，并以显式 fetch 后 origin/main OID 作为可校验续传 checkpoint；审计 no-replace/no-lazy-fetch，不读 staged 文件正文、不改 index、不 fetch/push/force。local backup 绑定 guard 前后相同的 index tree OID，以 old-HEAD CAS 提交且不执行 hooks。"
+                evidence_refs:
+                  - "EVID-MA-V121-S06-P3-T2-CONTRACT"
+                  - "EVID-MA-V121-S06-P3-T2-TEST"
+            test_commands:
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_push_size_guard OpenAIDatabase.tests.test_s04p3_github_backup -q"
+              - "python3 -B -m unittest -q OpenAIDatabase.tests.test_memory_atlas_push_size_guard OpenAIDatabase.tests.test_s04p3_github_backup OpenAIDatabase.tests.test_memory_atlas_archive_chunking OpenAIDatabase.tests.test_memory_atlas_archive_restore OpenAIDatabase.tests.test_memory_atlas_raw_ledger OpenAIDatabase.tests.test_memory_atlas_source_registry OpenAIDatabase.tests.test_memory_atlas_public_raw_layout OpenAIDatabase.tests.test_memory_atlas_credential_exclusion OpenAIDatabase.tests.test_memory_atlas_raw_isolation OpenAIDatabase.tests.test_memory_atlas_validator_profiles OpenAIDatabase.tests.test_memory_atlas_test_value_audit OpenAIDatabase.tests.test_atlasctl_script_consolidation OpenAIDatabase.tests.test_atlasctl_modular_cli"
+              - "python3 -B OpenAIDatabase/scripts/atlasctl.py audit --check push-size --push-scope staged"
+              - "python3 -B OpenAIDatabase/scripts/atlasctl.py audit --check push-size --push-scope pending"
+              - "npm run validate:fast --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run validate:sync --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run validate:ui --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run validate:release --prefix OpenAIDatabase/apps/memory-atlas"
+              - "python3 -B -m unittest discover -s OpenAIDatabase/tests -p 'test_*.py' -q"
+              - "python3 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+              - "python3.12 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+            test_results:
+              - "Canonical contract 固定 45 MiB 推荐分片、>50 MiB split-required、>=100 MiB hard stop、严格 <1,610,612,736 bytes 单批目标，以及 8 MiB/batch + 256 bytes/object 协议 reserve；阈值漂移 fail closed。"
+              - "staged planner 按 raw archive source/archive、public-raw source 与普通 path 建立确定性 atomic units；多批计划本身可通过，但旧 local backup 在 single_commit_ready=false 时停止，不制造不可拆超限 commit，也不吸收预存 staged 变更。"
+              - "pending planner 将 side-branch objects 归入包含它们的 first-parent merge boundary，每个 batch tip 都是前一 checkpoint 的 fast-forward；每批 argv 无 force，>50 MiB 或 >=100 MiB pending blob、checkpoint 变化、behind/diverged、非 main、缺失对象和单 boundary 超限均 fail closed。fixture 覆盖 linear、merge DAG、side checkpoint 与 plan resume。"
+              - "partial clone fixture 在真实 missing blob 下证明 GIT_NO_LAZY_FETCH=1 且 trace 无 fetch child；backup fixtures 证明 symlink target、index race、pre-commit/reference-transaction hooks、stage 后异常、post-commit inspection failure 与多批候选均真实 fail closed，最终 commit 精确绑定 audited tree。"
+              - "最终修复候选 dedicated/backup 28/28、完整 Python 443/443、fast 6/6、sync 7/7、ui 14/14、release 1/1、静态编译与 diff check PASS；release final audit 981217 ms 且 raw_mutation=false、remote_push=false。"
+              - "独立工程/安全复核经三轮关闭全部 findings，最终为 Critical 0 / Important 0 / Minor 0；产品/范围复核在 exact staged candidate 上执行。"
+              - "exact staged product/scope review 为 Critical 0 / Important 0 / Minor 1；唯一 Minor 是 review 文件的 future-tense freshness，已在 commit 前最终记录更新中关闭。产品复核允许 local commit，明确禁止 fetch/push/deploy。"
+              - "产品复核候选 staged audit 为 22 entries、913694 unique object bytes、9307934 bytes 保守上界、one batch、single_commit_ready=true；最终 governance-only event/update 在 commit 前重新审计。"
+              - "真实 canonical staged size audit PASS 且无 index/body/remote write；真实 pending audit 因 local HEAD 与 origin/main diverged 正确 FAIL_CLOSED。该 remote blocker 必须在最终整体上传阶段通过 fetch/reconcile 解决，T2 未 fetch、merge/rebase 或 push。"
+            evidence_refs:
+              - "EVID-MA-V121-S06-P3-T2-CONTRACT"
+              - "EVID-MA-V121-S06-P3-T2-TEST"
             risks:
               - "单次 push 超过平台上限"
-            rollback: "git revert 本 Task 本地 commit。"
+            rollback: "提交前仅反向应用 S06-P3-T2 精确 Task patch；提交后使用 git revert <S06-P3-T2 commit>。不得通过 force、LFS、history rewrite 或删除 raw 绕过 guard。"
+            current_result: "complete_local_only_44_of_149_pending_s06_p3_t3_remote_upload_not_ready_due_divergence"
           - task_id: "S06-P3-T3"
             name: "建立 raw contract fixtures"
             objective: "覆盖追加、重复、篡改、分片、恢复和凭证阻断。"

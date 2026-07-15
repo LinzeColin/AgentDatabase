@@ -26,6 +26,7 @@
             "tests.test_memory_atlas_test_value_audit",
             "tests.test_memory_atlas_legacy_command_migrations",
             "tests.test_memory_atlas_raw_isolation",
+            "tests.test_memory_atlas_push_size_guard",
             "-q"
           ],
           "cwd": "database",
@@ -40,6 +41,21 @@
             "audit",
             "--check",
             "raw-isolation"
+          ],
+          "cwd": "database",
+          "timeout_seconds": 180,
+          "critical": true
+        },
+        {
+          "id": "push_size_guard",
+          "command": [
+            "@python",
+            "scripts/atlasctl.py",
+            "audit",
+            "--check",
+            "push-size",
+            "--push-scope",
+            "staged"
           ],
           "cwd": "database",
           "timeout_seconds": 180,

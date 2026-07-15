@@ -847,6 +847,31 @@ features:
     evidence_refs:
       - "EVID-MA-V121-S06-P3-T1-CONTRACT"
       - "EVID-MA-V121-S06-P3-T1-TEST"
+  - feature_id: "FEAT-MA-V121-S06-P3-T2"
+    name: "Memory Atlas staged/pending push 体积门禁与 checkpoint 续传"
+    description: "v1.2.1 Task Pack 当前完成 44/149；canonical guard 以唯一 Git object 未压缩 bytes、8 MiB 每批 reserve 和 256 bytes 每对象 reserve 形成保守上界，staged/pending 均阻断 >50 MiB blob、>=100 MiB ordinary blob 和任何 >=1.5 GiB 单批。staged 按 recovery atomic unit 确定性分批，pending 只使用 origin/main 到 HEAD 上可逐次 fast-forward 的 first-parent commit boundaries；每次续传要求显式 fetch 后校验 checkpoint 并重算。审计使用 no-replace/no-lazy-fetch，不读取 staged 文件正文、不改 index、不 fetch/push/force。local backup 拒绝 symlink target 与预存 staged 变更，仅在 single_commit_ready 且 guard 前后 index tree OID 相等时，通过 inert hooksPath 下的 commit-tree + old-HEAD update-ref CAS 提交精确 audited tree；ref 成功后的检查异常仍真实报告 committed OID。真实 pending preflight当前因 remote divergence fail closed，不能据此宣称整体上传 ready。S06-P3-T3 full raw contract fixtures 尚未实现。"
+    status: "active"
+    fact_level: "EXTRACTED"
+    code_refs:
+      - "OpenAIDatabase/scripts/memory_atlas_cli/push_size_guard.py"
+      - "OpenAIDatabase/scripts/github_backup.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/parser.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/validate.py"
+    config_refs:
+      - "OpenAIDatabase/config/data_sources/push_size_guard.json"
+      - "OpenAIDatabase/config/memory_atlas_validator_profiles.json"
+    source_refs:
+      - "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s06_p3_t2_push_size_guard_review.md"
+    owner_actions:
+      - "提交前运行 staged scope；若 batch_required=true，按 unit_ids 顺序形成完整 commits 并逐批重跑。最终 push 前显式 fetch origin，使用 expected checkpoint 运行 pending scope；missing object、blob threshold、behind/diverged、checkpoint change 或 oversized boundary 时停止，不 force、不自动 merge/rebase、不改历史。"
+    test_refs:
+      - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_push_size_guard OpenAIDatabase.tests.test_s04p3_github_backup -q"
+      - "python3 -B OpenAIDatabase/scripts/atlasctl.py audit --check push-size --push-scope staged"
+      - "npm run validate:fast --prefix OpenAIDatabase/apps/memory-atlas"
+      - "npm run validate:sync --prefix OpenAIDatabase/apps/memory-atlas"
+    evidence_refs:
+      - "EVID-MA-V121-S06-P3-T2-CONTRACT"
+      - "EVID-MA-V121-S06-P3-T2-TEST"
 models:
   -
     model_id: "MOD-001"
@@ -5052,4 +5077,14 @@ evidence_refs:
     evidence_id: "EVID-MA-V121-S06-P3-T1-TEST"
     kind: "test"
     ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s06_p3_t1_raw_isolation_review.md"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S06-P3-T2-CONTRACT"
+    kind: "config"
+    ref: "OpenAIDatabase/config/data_sources/push_size_guard.json"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S06-P3-T2-TEST"
+    kind: "test"
+    ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s06_p3_t2_push_size_guard_review.md"
     fact_level: "EXTRACTED"

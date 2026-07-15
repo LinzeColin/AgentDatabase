@@ -51,12 +51,17 @@ _AUDITED_STEP_POLICIES: dict[tuple[str, str], tuple[str, tuple[str, ...]]] = {
             "tests.test_memory_atlas_test_value_audit",
             "tests.test_memory_atlas_legacy_command_migrations",
             "tests.test_memory_atlas_raw_isolation",
+            "tests.test_memory_atlas_push_size_guard",
             "-q",
         ),
     ),
     ("fast", "raw_isolation"): (
         "database",
         ("@python", "scripts/atlasctl.py", "audit", "--check", "raw-isolation"),
+    ),
+    ("fast", "push_size_guard"): (
+        "database",
+        ("@python", "scripts/atlasctl.py", "audit", "--check", "push-size", "--push-scope", "staged"),
     ),
     ("fast", "frontend_typecheck"): ("app", ("npm", "run", "lint")),
     ("fast", "feature_structure"): (

@@ -27,8 +27,8 @@
     "deleted_python_test_count": 2,
     "retained_validator_count": 39,
     "retained_baseline_python_test_count": 49,
-    "added_python_test_count": 12,
-    "current_python_test_count": 61
+    "added_python_test_count": 13,
+    "current_python_test_count": 62
   },
   "profile_commands": {
     "fast": "npm run validate:fast",
@@ -49,7 +49,8 @@
     "tests/test_memory_atlas_raw_ledger.py",
     "tests/test_memory_atlas_archive_chunking.py",
     "tests/test_memory_atlas_archive_restore.py",
-    "tests/test_memory_atlas_raw_isolation.py"
+    "tests/test_memory_atlas_raw_isolation.py",
+    "tests/test_memory_atlas_push_size_guard.py"
   ],
   "candidates": [
     {
@@ -3418,6 +3419,16 @@
       ],
       "reason": "Retained because it proves S06-P3-T1 default search exclusion, fail-closed Codex routes, CI sparse-checkout semantics, Vite raw guards and built-dist leakage rejection without reading raw bodies.",
       "current_dependency": "S06-P3-T1 validate:fast, validate:ui and full Python suites"
+    },
+    {
+      "path": "tests/test_memory_atlas_push_size_guard.py",
+      "risk_bindings": [
+        "data_integrity",
+        "release_risk",
+        "runner_contract"
+      ],
+      "reason": "Retained because it proves S06-P3-T2 exact staged/pending blob and push thresholds, deterministic atomic staged batches, fast-forward merge boundaries, partial-clone no-lazy-fetch, checkpoint resume, divergence rejection, audited-tree CAS backup, no-hook commits and symlink/race fail-closed behavior.",
+      "current_dependency": "S06-P3-T2 validate:fast, validate:sync and full Python suites"
     }
   ]
 }

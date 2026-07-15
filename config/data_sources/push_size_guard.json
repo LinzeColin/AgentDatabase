@@ -1,0 +1,81 @@
+{
+  "schema_version": "memory_atlas.push_size_guard.v1_2_1_s06_p3_t2",
+  "task_id": "S06-P3-T2",
+  "estimation": {
+    "model": "unique_git_object_uncompressed_bytes_plus_protocol_reserve",
+    "staged_source": "git_index",
+    "pending_source": "remote_ref_to_head_unique_objects",
+    "unique_object_deduplication": true,
+    "reads_worktree_file_bodies": false,
+    "protocol_reserve_bytes_per_batch": 8388608,
+    "protocol_reserve_bytes_per_object": 256
+  },
+  "limits": {
+    "recommended_chunk_bytes": 47185920,
+    "split_required_above_bytes": 52428800,
+    "ordinary_blob_hard_stop_at_or_above_bytes": 104857600,
+    "max_single_push_target_bytes": 1610612736,
+    "single_push_comparison": "strictly_less_than"
+  },
+  "staged_batching": {
+    "atomic_unit_rules": [
+      {
+        "prefix": "data/raw_archives",
+        "segments_after_prefix": 2
+      },
+      {
+        "prefix": "data/public_raw/agents",
+        "segments_after_prefix": 1
+      },
+      {
+        "prefix": "data/public_raw",
+        "segments_after_prefix": 1
+      }
+    ],
+    "other_path_unit": "individual_path",
+    "deterministic_order": "unit_id_then_repository_path",
+    "index_mutation_by_audit": false
+  },
+  "pending_batching": {
+    "unit": "whole_commit",
+    "split_between_commits_only": true,
+    "deterministic_order": "oldest_first_parent_fast_forward_boundary_first",
+    "oversized_commit_action": "fail_closed_recommit_required",
+    "checkpoint_ref": "origin/main",
+    "resume_strategy": "fetch_validate_checkpoint_and_recompute",
+    "expected_remote_oid_supported": true
+  },
+  "direct_main": {
+    "required_branch": "main",
+    "remote": "origin",
+    "destination_branch": "main",
+    "fetch_before_each_batch": true,
+    "require_fast_forward": true,
+    "force": false,
+    "git_lfs": false,
+    "automatic_rebase": false,
+    "automatic_merge": false,
+    "replace_refs": false,
+    "lazy_fetch": false,
+    "hooks": false
+  },
+  "integration": {
+    "atlasctl_check": "push-size",
+    "audit_scopes": [
+      "staged",
+      "pending",
+      "all"
+    ],
+    "default_audit_scope": "staged",
+    "local_backup_precommit_guard": true
+  },
+  "boundaries": {
+    "remote_push": false,
+    "staged_file_content_read": false,
+    "raw_mutation": false,
+    "history_rewrite": false,
+    "force_push": false,
+    "raw_fixture_contract_task": "S06-P3-T3",
+    "direct_main_execution_task": "S07"
+  }
+}

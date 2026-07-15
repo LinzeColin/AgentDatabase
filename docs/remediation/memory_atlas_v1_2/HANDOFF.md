@@ -1,5 +1,26 @@
 # Memory Atlas v1.2 Remediation Handoff
 
+> **Current v1.2.1 note (2026-07-15 18:31 +10:00):** The v1.2.1 Task Pack is
+> 44/149 complete locally. This run completed only `S06-P3-T2`; `S06-P3` is 2/3
+> and the next/only eligible Task is `S06-P3-T3`. The canonical push-size guard
+> fixes 45 MiB recommended chunks, staged/pending `>50 MiB` split-required,
+> `>=100 MiB` ordinary-blob hard stop and strict `<1.5 GiB` batches using unique
+> Git object bytes plus 8 MiB/batch and 256 bytes/object reserves. Pending plans
+> use first-parent fast-forward boundaries and checkpoint recomputation. Audits
+> use no-replace/no-lazy-fetch and never fetch or push. Local backup rejects
+> pre-existing staged changes and symlink targets, binds the guard to one exact
+> index tree, disables all Git hooks, and uses commit-tree plus old-HEAD update-ref
+> CAS with truthful post-commit states. Final tests are dedicated 28/28, full
+> Python 443/443, fast 6/6, sync 7/7, UI 14/14 and release 1/1; engineering/security
+> review closed at 0 Critical / 0 Important / 0 Minor. Exact staged audit passed
+> as one `single_commit_ready` batch; product/scope review allowed local commit with
+> no blocking finding, and its one documentation-freshness Minor was closed in the
+> final record update. Real pending audit
+> remains fail-closed because locally known `origin/main` and `main` diverge; no
+> fetch, reconciliation, push, deploy, branch/PR or cache cleanup occurred. Do not
+> start more than `S06-P3-T3` next, and do not upload before all 149 Tasks plus the
+> final overall review are complete.
+>
 > **Current v1.2.1 note (2026-07-15 15:15 +10:00):** The v1.2.1 Task Pack is
 > 43/149 complete locally. This run completed only `S06-P3-T1`; `S06-P3` is 1/3
 > and the next/only eligible Task is `S06-P3-T2`. The canonical

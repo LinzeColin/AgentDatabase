@@ -25,6 +25,7 @@ from .constants import (
 )
 from .public_raw_layout import run_public_raw_layout_audit
 from .raw_isolation import run_raw_isolation_audit
+from .push_size_guard import run_push_size_audit
 
 
 def final_audit_gate_plan(database_dir: Path) -> list[dict[str, object]]:
@@ -1711,6 +1712,8 @@ def run_audit(args: argparse.Namespace) -> int:
         return run_public_raw_layout_audit(args)
     if args.check == "raw-isolation":
         return run_raw_isolation_audit(args)
+    if args.check == "push-size":
+        return run_push_size_audit(args)
     if args.check == "decision-debt-safety":
         return run_decision_debt_safety_audit(args)
     if args.check == "self-iteration-safety":
@@ -1734,7 +1737,7 @@ def run_audit(args: argparse.Namespace) -> int:
             "status": "NOT_IMPLEMENTED",
             "command": "audit",
             "check": args.check,
-            "reason": "Unknown audit check. Supported checks: insight-evidence, formulas, visual-roi, formula-what-if, agent-collaboration, agent-authorization, stage-flight, latent-safety, self-iteration-safety, decision-debt-safety, chinese-ux, public-raw-layout, raw-isolation.",
+            "reason": "Unknown audit check. Supported checks: insight-evidence, formulas, visual-roi, formula-what-if, agent-collaboration, agent-authorization, stage-flight, latent-safety, self-iteration-safety, decision-debt-safety, chinese-ux, public-raw-layout, raw-isolation, push-size.",
         }, ensure_ascii=False, indent=2, sort_keys=True))
         return 2
 

@@ -48,6 +48,8 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     audit.add_argument("--dry-run", action="store_true")
     audit.add_argument("--require-built-dist", action="store_true")
     audit.add_argument("--ci-checkout", action="store_true")
+    audit.add_argument("--push-scope", choices=["staged", "pending", "all"], default="staged")
+    audit.add_argument("--expected-remote-oid")
     audit.add_argument("--database-dir", type=Path, default=ROOT)
 
     push = subparsers.add_parser("push", help="Prepare local GitHub backup scope.")

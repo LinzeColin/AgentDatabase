@@ -121,7 +121,16 @@ class PublicProfileContractTests(unittest.TestCase):
                 "visual_semantics",
             },
         )
-        self.assertIn("raw_isolation", {step["id"] for step in payload["profiles"]["fast"]["steps"]})
+        fast_step_ids = {step["id"] for step in payload["profiles"]["fast"]["steps"]}
+        self.assertIn("raw_isolation", fast_step_ids)
+        self.assertIn("push_size_guard", fast_step_ids)
+        push_size_step = next(
+            step for step in payload["profiles"]["fast"]["steps"] if step["id"] == "push_size_guard"
+        )
+        self.assertEqual(
+            push_size_step["command"],
+            ["@python", "scripts/atlasctl.py", "audit", "--check", "push-size", "--push-scope", "staged"],
+        )
         ui_isolation = next(
             step for step in payload["profiles"]["ui"]["steps"] if step["id"] == "public_raw_build_isolation"
         )
