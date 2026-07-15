@@ -1753,7 +1753,9 @@ def _verify_public_registration(
         max_bytes=MAX_MANIFEST_BYTES,
         code="archive_public_ledger_invalid",
     )
-    if raw_manifest_bytes != raw_ledger_bytes:
+    if not raw_ledger_bytes.startswith(raw_manifest_bytes) or (
+        raw_manifest_bytes and not raw_manifest_bytes.endswith(b"\n")
+    ):
         raise CodexPublicRawArchiveError("archive_raw_manifest_ledger_mismatch")
     try:
         ledger = preflight_raw_ledger(database_dir)
@@ -1766,6 +1768,7 @@ def _verify_public_registration(
         "public_index_sha256": hashlib.sha256(payload_bytes).hexdigest(),
         "raw_manifest_path": raw_manifest_relative.as_posix(),
         "raw_manifest_sha256": hashlib.sha256(raw_manifest_bytes).hexdigest(),
+        "raw_manifest_is_ledger_prefix": True,
         "raw_ledger_verified": True,
         "public_raw_file_count": int(ledger["raw_file_count"]),
     }

@@ -929,7 +929,7 @@ features:
       - "EVID-MA-V121-S07-P1-T1-REVIEW"
   - feature_id: "FEAT-MA-V121-S07-P1-T2"
     name: "Memory Atlas Codex public raw archive"
-    description: "v1.2.1 Task Pack 当前完成 47/149；Codex sessions/logs/history 以 recoverable sanitized tar.gz append-only 归档，普通 transcript 保留，credential values、本机绝对路径与 non-text binary body 被替换。真实 archive codex-public-raw-20260715t1300z 收录 430 个稳定源文件和 3,884,927,678 source bytes，4 个 recent active sessions 仅作为 deferred 记录；稳定源 before/after digest 均为 c1e284843c4d3171b49ac84bc682a564279f822a502a7d4e4a9fb768d30cd061。558,731,407-byte package 被确定性切成 12 个不超过 45 MiB 的 parts；manifest 最后发布，public index 进入第 513 行 immutable raw ledger。restore 校验 package SHA、432 个唯一 regular members、安全相对路径和 source manifest 后在临时目录解包并原子发布。T3 cursor、内容去重和 interrupted-run resume 均未实现。"
+    description: "v1.2.1 Task Pack 当前完成 47/149 时，Codex sessions/logs/history 以 recoverable sanitized tar.gz append-only 归档，普通 transcript 保留，credential values、本机绝对路径与 non-text binary body 被替换。真实 archive codex-public-raw-20260715t1300z 收录 430 个稳定源文件和 3,884,927,678 source bytes，4 个 recent active sessions 仅作为 deferred 记录；稳定源 before/after digest 均为 c1e284843c4d3171b49ac84bc682a564279f822a502a7d4e4a9fb768d30cd061。558,731,407-byte package 被确定性切成 12 个不超过 45 MiB 的 parts；manifest 最后发布，public index 进入第 513 行 immutable raw ledger。restore 校验 package SHA、432 个唯一 regular members、安全相对路径和 source manifest 后在临时目录解包并原子发布。S07-P1-T3 已从该 immutable archive bootstrap cursor/content index；T2 的 513-row manifest 继续作为后续 append-only ledger 的已验证 byte prefix。"
     status: "active"
     fact_level: "EXTRACTED"
     code_refs:
@@ -950,7 +950,7 @@ features:
       - "OpenAIDatabase/机器治理/证据与日志/raw_archive_manifests/raw_manifest.s07_p1_t2_codex-public-raw-20260715t1300z.jsonl"
       - "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s07_p1_t2_codex_public_raw_archive_review.md"
     owner_actions:
-      - "使用 atlasctl audit --check codex-public-raw-archive --archive-id codex-public-raw-20260715t1300z 验证 parts、manifest、safe restore helper、public index 与 raw ledger；恢复时只能执行 archive 目录内 restore.sh 并传入不存在的输出目录。任何 source drift、credential/path 命中、unsafe member、登记缺失或 archive ID 冲突都必须 fail closed。S07-P1-T3 才能添加 cursor、内容去重与中断恢复。"
+      - "使用 atlasctl audit --check codex-public-raw-archive --archive-id codex-public-raw-20260715t1300z 验证 parts、manifest、safe restore helper、public index 与 raw ledger；恢复时只能执行 archive 目录内 restore.sh 并传入不存在的输出目录。任何 source drift、credential/path 命中、unsafe member、登记缺失或 archive ID 冲突都必须 fail closed。该 archive 是 S07-P1-T3 首次 cursor/content index 的 immutable bootstrap，不得为后续增量重写。"
     test_refs:
       - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_codex_public_raw_archive -q"
       - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_r7_recovery -q"
@@ -961,6 +961,41 @@ features:
       - "EVID-MA-V121-S07-P1-T2-ARCHIVE"
       - "EVID-MA-V121-S07-P1-T2-TEST"
       - "EVID-MA-V121-S07-P1-T2-REVIEW"
+  - feature_id: "FEAT-MA-V121-S07-P1-T3"
+    name: "Memory Atlas Codex incremental sync state"
+    description: "v1.2.1 Task Pack 当前完成 48/149；Codex sync state 从最新已验证 T2 public raw archive bootstrap，按 portable source path+kind 保存 cursor，并按 source SHA-256 在全部已完成 archive 间去重。状态通过进程锁、atomic replace、directory fsync 和四阶段 journal 支持同 archive ID interrupted-run resume；已发布 archive/public index 只校验复用，不覆盖。真实 archive codex-incremental-20260715t180600z 对 435 个稳定来源和 3,972,466,441 bytes 证明 before/after digest 相同，新增 7 path/7 unique contents，形成 16,157,223-byte 单 part 包；state revision 6 含 435 paths、437 个历史 content hashes、2 个 deferred active sessions，active_run 为 null。静态精确重复不写 state 或生成重复 archive/index/ledger；本 Task不构建 derived、不 commit/push/deploy。"
+    status: "active"
+    fact_level: "EXTRACTED"
+    code_refs:
+      - "OpenAIDatabase/scripts/memory_atlas_cli/codex_sync_state.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/codex_public_raw_archive.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/parser.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/sync.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/validate.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/source_registry.py"
+    config_refs:
+      - "OpenAIDatabase/config/data_sources/codex_sync_state.json"
+      - "OpenAIDatabase/config/data_sources/source_registry.json"
+      - "OpenAIDatabase/config/data_sources/raw_ledger.json"
+      - "OpenAIDatabase/config/memory_atlas_validator_profiles.json"
+    source_refs:
+      - "OpenAIDatabase/data/sync_state/codex.json"
+      - "OpenAIDatabase/data/raw_archives/codex/codex-incremental-20260715t180600z/manifest.json"
+      - "OpenAIDatabase/data/public_raw/codex/codex_incremental_archive.codex-incremental-20260715t180600z.d745adab3826.json"
+      - "OpenAIDatabase/机器治理/证据与日志/raw_archive_manifests/raw_manifest.s07_p1_t3_codex-incremental-20260715t180600z.jsonl"
+      - "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s07_p1_t3_codex_sync_state_review.md"
+    owner_actions:
+      - "使用 atlasctl sync --source codex --raw-archive --incremental --archive-id <portable-id> 运行增量归档，并使用 atlasctl audit --check codex-sync-state --archive-id <same-id> 验证 state、archive、public index 和 ledger。中断后必须使用同 archive ID 恢复；active_run、source drift、已发布内容漂移、登记缺失或 lock 冲突时 fail closed，不手工覆盖 archive/index/ledger。S07-P2-T1 才能构建 derived。"
+    test_refs:
+      - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_codex_sync_state -q"
+      - "python3 -B OpenAIDatabase/scripts/atlasctl.py audit --check codex-sync-state --archive-id codex-incremental-20260715t180600z --database-dir OpenAIDatabase"
+      - "npm run validate:sync --prefix OpenAIDatabase/apps/memory-atlas"
+      - "npm run validate:release --prefix OpenAIDatabase/apps/memory-atlas"
+    evidence_refs:
+      - "EVID-MA-V121-S07-P1-T3-STATE"
+      - "EVID-MA-V121-S07-P1-T3-ARCHIVE"
+      - "EVID-MA-V121-S07-P1-T3-TEST"
+      - "EVID-MA-V121-S07-P1-T3-REVIEW"
 models:
   -
     model_id: "MOD-001"
@@ -5211,4 +5246,24 @@ evidence_refs:
     evidence_id: "EVID-MA-V121-S07-P1-T2-REVIEW"
     kind: "review"
     ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s07_p1_t2_codex_public_raw_archive_review.md"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S07-P1-T3-STATE"
+    kind: "artifact"
+    ref: "OpenAIDatabase/data/sync_state/codex.json"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S07-P1-T3-ARCHIVE"
+    kind: "artifact"
+    ref: "OpenAIDatabase/data/raw_archives/codex/codex-incremental-20260715t180600z/manifest.json"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S07-P1-T3-TEST"
+    kind: "test"
+    ref: "OpenAIDatabase/tests/test_memory_atlas_codex_sync_state.py"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S07-P1-T3-REVIEW"
+    kind: "review"
+    ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s07_p1_t3_codex_sync_state_review.md"
     fact_level: "EXTRACTED"

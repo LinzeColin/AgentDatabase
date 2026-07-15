@@ -31,6 +31,13 @@ REQUIRED_GITIGNORE_PATTERNS = ("*.zip", "data/raw/", "data/raw_encrypted/", "dat
 CODEX_PUBLIC_RAW_ARCHIVE_MANIFEST_SCHEMA = (
     "memory_atlas.codex_public_raw_archive_manifest.v1_2_1_s07_p1_t2"
 )
+CODEX_INCREMENTAL_ARCHIVE_MANIFEST_SCHEMA = (
+    "memory_atlas.codex_incremental_archive_manifest.v1_2_1_s07_p1_t3"
+)
+CODEX_ARCHIVE_MANIFEST_SCHEMAS = {
+    CODEX_PUBLIC_RAW_ARCHIVE_MANIFEST_SCHEMA,
+    CODEX_INCREMENTAL_ARCHIVE_MANIFEST_SCHEMA,
+}
 SECRET_PATTERNS = (
     ("openai_api_key", re.compile(r"\bsk-[A-Za-z0-9][A-Za-z0-9_-]{10,}\b")),
     ("github_token", re.compile(r"\bgh[pousr]_[A-Za-z0-9_]{20,}\b")),
@@ -537,8 +544,9 @@ def privacy_scan_payloads(path: Path, text: str) -> list[Any] | None:
 def _normalize_structured_scan_payload(payload: Any) -> Any:
     """Treat validated archive redaction counters as metadata, never as credential values."""
 
-    if not isinstance(payload, dict) or payload.get("schema_version") != (
-        CODEX_PUBLIC_RAW_ARCHIVE_MANIFEST_SCHEMA
+    if (
+        not isinstance(payload, dict)
+        or payload.get("schema_version") not in CODEX_ARCHIVE_MANIFEST_SCHEMAS
     ):
         return payload
     counts = payload.get("redaction_counts")

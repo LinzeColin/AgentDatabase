@@ -26,7 +26,12 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     sync.add_argument(
         "--raw-archive",
         action="store_true",
-        help="Create only the S07-P1-T2 recoverable Codex public raw archive.",
+        help="Create a recoverable Codex public raw archive.",
+    )
+    sync.add_argument(
+        "--incremental",
+        action="store_true",
+        help="Use the S07-P1-T3 cursor, content dedupe and interrupted-run resume state.",
     )
     sync.add_argument("--archive-id", help="Explicit append-only Codex raw archive id.")
     sync.add_argument("--agent-id", default="future-agent")

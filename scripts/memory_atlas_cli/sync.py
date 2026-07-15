@@ -16,6 +16,7 @@ from memory_atlas_owner_daily import (
 from .constants import ROOT
 from .child_process import run_child_command
 from .codex_public_raw_archive import run_codex_public_raw_archive
+from .codex_sync_state import run_codex_sync_state
 from .source_registry import (
     PUSH_DEFAULTS,
     SourceRegistryError,
@@ -171,7 +172,17 @@ def run_sync(args: argparse.Namespace) -> int:
             }, ensure_ascii=False, indent=2, sort_keys=True))
             return 2
         args.database_dir = ROOT
+        if bool(getattr(args, "incremental", False)):
+            return run_codex_sync_state(args)
         return run_codex_public_raw_archive(args)
+    if bool(getattr(args, "incremental", False)):
+        print(json.dumps({
+            "status": "FAIL_CLOSED",
+            "source_id": args.source,
+            "reason": "--incremental requires --raw-archive",
+            "writes_files": False,
+        }, ensure_ascii=False, indent=2, sort_keys=True))
+        return 2
     if args.archive_id:
         print(json.dumps({
             "status": "FAIL_CLOSED",

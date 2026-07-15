@@ -114,6 +114,7 @@
           "tests.test_memory_atlas_source_registry",
           "tests.test_memory_atlas_codex_source_discovery",
           "tests.test_memory_atlas_codex_public_raw_archive",
+          "tests.test_memory_atlas_codex_sync_state",
           "tests.test_memory_atlas_public_raw_layout",
             "tests.test_memory_atlas_raw_ledger",
             "tests.test_memory_atlas_archive_chunking",
@@ -190,6 +191,21 @@
           "codex-public-raw-archive",
           "--archive-id",
           "codex-public-raw-20260715t1300z"
+        ],
+        "cwd": "database",
+        "timeout_seconds": 300,
+        "critical": true
+      },
+      {
+        "id": "codex_sync_state",
+        "command": [
+          "@python",
+          "scripts/atlasctl.py",
+          "audit",
+          "--check",
+          "codex-sync-state",
+          "--archive-id",
+          "codex-incremental-20260715t180600z"
         ],
         "cwd": "database",
         "timeout_seconds": 300,

@@ -8,7 +8,7 @@ next_gate_id: "ACC.OpenAIDatabase.PAM1.0019"
 total_estimated_hours: 255
 completed_estimated_hours: 241
 taskpack_progress:
-  completed_tasks: 47
+  completed_tasks: 48
   total_tasks: 149
   delivery_state: "local_only_not_released"
 stages:
@@ -2154,7 +2154,7 @@ stages:
     person_goal: "把本机 Codex sessions/logs/history 自动只读归档为公开 raw、增量派生到 Memory Atlas，并在验证通过后直接推送 GitHub main。"
     status: "in_progress"
     estimated_hours: 9
-    estimated_pct: 22
+    estimated_pct: 33
     stop_conditions:
       - "源 Codex 文件发生字节、mtime 或 size 改变"
       - "发现认证资料或 secret 进入 staged diff"
@@ -2175,20 +2175,24 @@ stages:
         - "EVID-MA-V121-S07-P1-T2-ARCHIVE"
         - "EVID-MA-V121-S07-P1-T2-TEST"
         - "EVID-MA-V121-S07-P1-T2-REVIEW"
+        - "EVID-MA-V121-S07-P1-T3-STATE"
+        - "EVID-MA-V121-S07-P1-T3-ARCHIVE"
+        - "EVID-MA-V121-S07-P1-T3-TEST"
+        - "EVID-MA-V121-S07-P1-T3-REVIEW"
     phases:
       - phase_id: "MA-V121-S07-P1"
         name: "本机来源发现与 raw 只读导出"
         objective: "发现可移植 Codex 来源并以只读、append-only 方式归档原始资料。"
-        status: "in_progress"
+        status: "completed"
         estimated_hours: 3
-        estimated_pct: 67
+        estimated_pct: 100
         stop_conditions:
           - "发现逻辑硬编码单一用户绝对路径"
           - "认证、secret 或浏览器 credential store 被纳入候选"
           - "同步修改、移动或删除源 Codex 文件"
         stop_gate:
           gate_id: "ACC-MA-V121-S07-P1"
-          status: "in_progress"
+          status: "completed"
           pass_conditions:
             - "来源发现可移植且显式排除认证资料"
             - "raw 归档 append-only、源 stat/hash 不变、重复运行无副本"
@@ -2198,6 +2202,10 @@ stages:
             - "EVID-MA-V121-S07-P1-T2-ARCHIVE"
             - "EVID-MA-V121-S07-P1-T2-TEST"
             - "EVID-MA-V121-S07-P1-T2-REVIEW"
+            - "EVID-MA-V121-S07-P1-T3-STATE"
+            - "EVID-MA-V121-S07-P1-T3-ARCHIVE"
+            - "EVID-MA-V121-S07-P1-T3-TEST"
+            - "EVID-MA-V121-S07-P1-T3-REVIEW"
         tasks:
           - task_id: "S07-P1-T1"
             name: "实现 Codex source discovery"
@@ -2277,22 +2285,50 @@ stages:
           - task_id: "S07-P1-T3"
             name: "实现 Codex sync state"
             objective: "建立增量 cursor、内容 hash 去重和 interrupted-run resume。"
-            status: "planned"
+            status: "completed"
             estimated_hours: 1
-            estimated_pct: 0
+            estimated_pct: 100
             dependencies:
               - "S07-P1-T2"
             acceptance_ids:
               - "ACC-MA-V121-S07-P1-T3"
-            test_commands: []
-            evidence_refs: []
+            acceptance:
+              - acceptance_id: "ACC-MA-V121-S07-P1-T3"
+                description: "首次增量运行从最新已验证 T2 public raw archive 建立可移植 cursor 与跨历史 source SHA-256 content index；后续只归档新内容 hash，同内容多路径只保存一个 package member 并由 source manifest 恢复别名。状态使用原子 replace、目录 fsync 和进程锁，PLANNED、ARCHIVE_PUBLISHED、PUBLIC_INDEX_PUBLISHED、LEDGER_RECORDED 四阶段 journal 允许同 archive ID 中断恢复；已发布 archive/index 只验证复用、不覆盖，source drift 或登记缺失 fail closed。精确重复运行不写 state、不生成 archive/index/ledger 副本。"
+                evidence_refs:
+                  - "EVID-MA-V121-S07-P1-T3-STATE"
+                  - "EVID-MA-V121-S07-P1-T3-ARCHIVE"
+                  - "EVID-MA-V121-S07-P1-T3-TEST"
+                  - "EVID-MA-V121-S07-P1-T3-REVIEW"
+            test_commands:
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_codex_sync_state -q"
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_codex_public_raw_archive OpenAIDatabase.tests.test_memory_atlas_codex_sync_state -q"
+              - "python3 -B -m unittest discover -s OpenAIDatabase/tests -q"
+              - "python3 -B OpenAIDatabase/scripts/atlasctl.py audit --check codex-sync-state --archive-id codex-incremental-20260715t180600z --database-dir OpenAIDatabase"
+              - "python3 -B OpenAIDatabase/scripts/atlasctl.py audit --check codex-public-raw-archive --archive-id codex-public-raw-20260715t1300z --database-dir OpenAIDatabase"
+              - "python3 -B OpenAIDatabase/scripts/raw_archive_manifest.py audit --database-dir OpenAIDatabase"
+              - "npm run validate:fast --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run validate:sync --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run validate:ui --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run validate:release --prefix OpenAIDatabase/apps/memory-atlas"
+            test_results:
+              - "专用 10/10 覆盖合同冻结、T2 bootstrap、精确重复零写入、新内容只归档一次、同 hash 多路径单对象与别名恢复、PUBLIC_INDEX_PUBLISHED 后中断恢复、planned source drift fail closed、T2 immutable manifest 作为后续 ledger byte prefix 继续有效、path-free CLI、public index 缺失，以及发布后 restore helper 篡改与 part symlink fail closed。"
+              - "真实 archive codex-incremental-20260715t180600z 使用 435 个稳定来源、3,972,466,441 source bytes，另有 2 个 recent active sessions deferred；before/after digest 均为 9f8dd012ef39cc51d81e9cea8c36f8e183797345a8b42fde22469060949d46e5，source_mutation=false。7 个新路径对应 7 个新内容对象；16,157,223-byte package 仅一 part、9 个 members，package SHA-256 5b516b8ef34fab4e04a96e7f7ad70c13a5ad99f0407328bce5de0790c2831c8d。"
+              - "state revision 6、cursor sequence 2、435 paths、437 个历史 content hashes、active_run=null；同 archive ID 紧接运行没有新 archive/content/path，只因 deferred stat 漂移更新 cursor。静态 fixture 的精确重复返回 NO_CHANGES 且 state bytes、archive、public index、ledger 均不变。最终全量和 validator profile 结果记录在 T3 review。"
+              - "最终专用 10/10、Codex source/archive/state 33/33、治理与隐私 focused 54/54、完整 Python 485/485 PASS；fast 6/6、sync 9/9、ui 14/14、release 1/1 PASS。sync 首轮发现测试只支持 repo-root import，修复为同目录可移植 import；release 首轮发现 credential gate 的 180 秒旧预算低于 273.482 秒实测，预算对齐 600 秒；最终安全复核再补齐 restore/README 精确字节、manifest/schema、parts inventory 与 symlink 校验。"
+            evidence_refs:
+              - "EVID-MA-V121-S07-P1-T3-STATE"
+              - "EVID-MA-V121-S07-P1-T3-ARCHIVE"
+              - "EVID-MA-V121-S07-P1-T3-TEST"
+              - "EVID-MA-V121-S07-P1-T3-REVIEW"
             risks:
               - "重复或中断运行产生重复副本"
-            rollback: "git revert 本 Task 本地 commit；保留 append-only raw 并重建 cursor。"
+            rollback: "提交前仅反向应用 S07-P1-T3 非 raw 实现/state patch；提交后用纠正提交回退代码/配置并从 immutable raw 重建 cursor。append-only archive、public index、raw ledger 与证据不得覆盖或删除。"
+            current_result: "complete_local_only_48_of_149_pending_s07_p2_t1_no_remote_upload"
       - phase_id: "MA-V121-S07-P2"
         name: "派生分析与 Atlas 更新"
         objective: "把已登记 Codex raw 增量派生为可追溯的 Atlas 数据、周报和同步状态。"
-        status: "planned"
+        status: "in_progress"
         estimated_hours: 3
         estimated_pct: 0
         stop_conditions:
@@ -2301,7 +2337,7 @@ stages:
           - "脱敏摘要继续冒充 full raw backup"
         stop_gate:
           gate_id: "ACC-MA-V121-S07-P2"
-          status: "planned"
+          status: "in_progress"
           pass_conditions:
             - "Codex derived outputs、snapshot、周报与同步状态可追溯且可解释"
             - "旧消费者兼容读取但真相语义明确"

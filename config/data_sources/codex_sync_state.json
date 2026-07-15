@@ -1,0 +1,63 @@
+{
+  "schema_version": "memory_atlas.codex_sync_state_contract.v1_2_1_s07_p1_t3",
+  "task_id": "S07-P1-T3",
+  "acceptance_id": "ACC-MA-V121-S07-P1-T3",
+  "source_id": "codex",
+  "state_path": "data/sync_state/codex.json",
+  "bootstrap": {
+    "source_task_id": "S07-P1-T2",
+    "strategy": "latest_verified_public_raw_archive",
+    "requires_public_registration_before_first_incremental_write": true
+  },
+  "cursor": {
+    "identity_fields": [
+      "source_kind",
+      "relative_path"
+    ],
+    "content_hash_algorithm": "sha256",
+    "source_stat_fields": [
+      "device",
+      "inode",
+      "mode",
+      "size_bytes",
+      "mtime_ns",
+      "ctime_ns"
+    ],
+    "inventory_digest_algorithm": "sha256",
+    "portable_paths_only": true
+  },
+  "deduplication": {
+    "key": "source_sha256",
+    "scope": "all_completed_codex_archives",
+    "one_package_member_per_unique_content_hash": true,
+    "path_aliases_restored_from_source_manifest": true,
+    "no_archive_when_no_new_content_hash": true
+  },
+  "resume": {
+    "state_write": "atomic_replace_and_directory_fsync",
+    "lock": "process_scoped_advisory_lock",
+    "phases": [
+      "PLANNED",
+      "ARCHIVE_PUBLISHED",
+      "PUBLIC_INDEX_PUBLISHED",
+      "LEDGER_RECORDED"
+    ],
+    "same_archive_id_required": true,
+    "published_archive_reused_not_rewritten": true,
+    "incomplete_staging_policy": "verify_marker_then_rebuild",
+    "source_drift_policy": "fail_closed_keep_journal"
+  },
+  "append_only": {
+    "archive_root": "data/raw_archives/codex",
+    "public_index_root": "data/public_raw/codex",
+    "raw_ledger_required": true,
+    "existing_archive_policy": "verify_or_fail_never_overwrite",
+    "historical_state_content_index_retained": true
+  },
+  "phase_boundary": {
+    "does_not_build_derived": true,
+    "does_not_commit_or_push": true,
+    "does_not_deploy": true,
+    "next_task": "S07-P2-T1"
+  }
+}

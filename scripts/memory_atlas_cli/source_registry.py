@@ -39,6 +39,8 @@ CODEX_PUBLIC_RAW_ARCHIVE_CONTRACT_PATH = Path(
 CODEX_PUBLIC_RAW_ARCHIVE_ENTRYPOINT = Path(
     "scripts/memory_atlas_cli/codex_public_raw_archive.py"
 )
+CODEX_SYNC_STATE_CONTRACT_PATH = Path("config/data_sources/codex_sync_state.json")
+CODEX_SYNC_STATE_ENTRYPOINT = Path("scripts/memory_atlas_cli/codex_sync_state.py")
 CODEX_COMPLETE_ARCHIVE_ROOT = Path("data/raw_archives/codex")
 REGISTRY_SCHEMA_VERSION = "memory_atlas_data_source_registry.v1"
 SYNC_CONTRACT_VERSION = "memory_atlas.source_sync_contract.v1_2_1_s06_p1_t1"
@@ -269,24 +271,42 @@ def _validate_source(source: dict[str, Any], database_dir: Path, push_defaults: 
             f"{source_id}.parser.complete_archive_root",
             ("data/raw_archives/",),
         )
+        sync_state_entrypoint = _repo_relative_path(
+            parser.get("sync_state_entrypoint"),
+            f"{source_id}.parser.sync_state_entrypoint",
+            ("scripts/",),
+        )
+        sync_state_contract_ref = _repo_relative_path(
+            parser.get("sync_state_contract_ref"),
+            f"{source_id}.parser.sync_state_contract_ref",
+            ("config/data_sources/",),
+        )
         if (
             raw_archive_entrypoint != CODEX_PUBLIC_RAW_ARCHIVE_ENTRYPOINT.as_posix()
             or raw_archive_contract_ref
             != CODEX_PUBLIC_RAW_ARCHIVE_CONTRACT_PATH.as_posix()
             or complete_archive_root != CODEX_COMPLETE_ARCHIVE_ROOT.as_posix()
+            or sync_state_entrypoint != CODEX_SYNC_STATE_ENTRYPOINT.as_posix()
+            or sync_state_contract_ref != CODEX_SYNC_STATE_CONTRACT_PATH.as_posix()
         ):
             raise SourceRegistryError(
-                "codex.parser must name the canonical S07-P1-T2 raw archive adapter"
+                "codex.parser must name the canonical S07-P1 raw archive and sync-state adapters"
             )
         if not (database_dir / raw_archive_entrypoint).is_file():
             raise SourceRegistryError("codex raw archive entrypoint does not exist")
         if not (database_dir / raw_archive_contract_ref).is_file():
             raise SourceRegistryError("codex raw archive contract does not exist")
+        if not (database_dir / sync_state_entrypoint).is_file():
+            raise SourceRegistryError("codex sync-state entrypoint does not exist")
+        if not (database_dir / sync_state_contract_ref).is_file():
+            raise SourceRegistryError("codex sync-state contract does not exist")
     elif any(
         key in parser
         for key in (
             "raw_archive_entrypoint",
             "raw_archive_contract_ref",
+            "sync_state_entrypoint",
+            "sync_state_contract_ref",
             "complete_archive_root",
         )
     ):

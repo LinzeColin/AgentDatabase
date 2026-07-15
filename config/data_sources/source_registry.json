@@ -150,6 +150,8 @@
         "entrypoint": "scripts/sync_codex_memory_data.py",
         "raw_archive_entrypoint": "scripts/memory_atlas_cli/codex_public_raw_archive.py",
         "raw_archive_contract_ref": "config/data_sources/codex_public_raw_archive.json",
+        "sync_state_entrypoint": "scripts/memory_atlas_cli/codex_sync_state.py",
+        "sync_state_contract_ref": "config/data_sources/codex_sync_state.json",
         "complete_archive_root": "data/raw_archives/codex",
         "input_formats": [
           "codex_session_jsonl",

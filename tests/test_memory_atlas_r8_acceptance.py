@@ -98,6 +98,7 @@ class MemoryAtlasR8AcceptanceTests(unittest.TestCase):
         by_id = {gate["gate_id"]: gate for gate in plan}
         self.assertGreaterEqual(int(by_id["unit_tests"]["timeout_seconds"]), 600)
         self.assertGreaterEqual(int(by_id["stage7_privacy_accessibility"]["timeout_seconds"]), 600)
+        self.assertGreaterEqual(int(by_id["credential_audit"]["timeout_seconds"]), 600)
         self.assertNotIn("--publish-dir", by_id["report_contract_audit"]["command"])
         self.assertEqual(atlasctl.compact_tail(b"timeout output"), "timeout output")
 

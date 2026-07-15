@@ -10,6 +10,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "scripts/privacy_guard.py"
+if str(SCRIPT.parent) not in sys.path:
+    sys.path.insert(0, str(SCRIPT.parent))
 
 
 def load_module():
@@ -50,6 +52,12 @@ class S3PDT01PrivacyTests(unittest.TestCase):
                 },
                 "note": "verified redaction metadata",
             }
+            manifest.write_text(json.dumps(payload), encoding="utf-8")
+            self.assertEqual(
+                module.high_risk_secret_hits(database, ["manifest.json"]),
+                [],
+            )
+            payload["schema_version"] = module.CODEX_INCREMENTAL_ARCHIVE_MANIFEST_SCHEMA
             manifest.write_text(json.dumps(payload), encoding="utf-8")
             self.assertEqual(
                 module.high_risk_secret_hits(database, ["manifest.json"]),

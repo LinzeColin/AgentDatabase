@@ -1,5 +1,36 @@
 # Memory Atlas v1.2 Remediation Handoff
 
+> **Current v1.2.1 note (2026-07-16 05:38 +10:00):** The v1.2.1 Task Pack is
+> 48/149 complete locally. This run completed only `S07-P1-T3`; S07 is 3/9,
+> S07-P1 is 3/3 and closed, and `S07-P2-T1` is the next/only eligible Task.
+> Canonical `data/sync_state/codex.json` bootstraps the immutable T2 archive and
+> is revision 6 with cursor sequence 2, 435 portable paths, 437 historical
+> source-content hashes, two deferred active sessions and `active_run=null`.
+> Real incremental archive `codex-incremental-20260715t180600z` observed 435
+> stable files and 3,972,466,441 source bytes with identical before/after digest
+> `9f8dd012ef39cc51d81e9cea8c36f8e183797345a8b42fde22469060949d46e5`.
+> Seven new paths produced seven unique objects; the 16,157,223-byte one-part,
+> nine-member package has SHA-256
+> `5b516b8ef34fab4e04a96e7f7ad70c13a5ad99f0407328bce5de0790c2831c8d`.
+> Exact static replay is zero-write `NO_CHANGES`; identical path aliases store one
+> object, and four persisted phases resume the same archive ID without overwrite.
+> T3/T2/raw audits pass with 514/514 ledger parity and zero drift/deletion/new raw.
+> Dedicated 10/10, Codex focused 33/33, governance/privacy focused 54/54, final
+> Python 485/485, fast 6/6, sync 9/9, ui 14/14 and pre-commit release 1/1 passed.
+> The first sync run exposed and closed a profile-CWD test import defect; the first
+> release exposed and closed a stale 180-second credential budget against a
+> 273.482-second real scan, preserving the complete scan with a 600-second budget.
+> Final security review also closed an Important verifier gap by binding exact
+> README/restore bytes and rejecting unsafe manifest/part inventory or symlinks.
+> Engineering/security and product/scope review are 0 Critical / 0 Important /
+> 0 Minor after remediation. The one local Task commit must still receive its
+> post-commit exact-tree release/recovery rerun; this pre-commit note does not
+> preclaim that result. Six unrelated files (two `.codex` automation-state and
+> four KMFA files) remain unstaged. No fetch, push, deploy, branch/PR,
+> merge/rebase or cache cleanup occurred. Do not start more than `S07-P2-T1`
+> next, and do not upload before all 149 Tasks plus final review/remediation are
+> complete.
+>
 > **Current v1.2.1 note (2026-07-16 01:28 +10:00):** The v1.2.1 Task Pack is
 > 47/149 complete locally. This run completed only `S07-P1-T2`; S07 is 2/9,
 > S07-P1 is 2/3, and `S07-P1-T3` is the next/only eligible Task. Real archive

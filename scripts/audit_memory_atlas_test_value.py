@@ -73,8 +73,8 @@ SUMMARY = {
     "deleted_python_test_count": 2,
     "retained_validator_count": 39,
     "retained_baseline_python_test_count": 49,
-    "added_python_test_count": 16,
-    "current_python_test_count": 65,
+    "added_python_test_count": 17,
+    "current_python_test_count": 66,
 }
 ADDED_PATHS = [
     "tests/test_memory_atlas_test_value_audit.py",
@@ -86,6 +86,7 @@ ADDED_PATHS = [
     "tests/test_memory_atlas_source_registry.py",
     "tests/test_memory_atlas_codex_source_discovery.py",
     "tests/test_memory_atlas_codex_public_raw_archive.py",
+    "tests/test_memory_atlas_codex_sync_state.py",
     "tests/test_memory_atlas_public_raw_layout.py",
     "tests/test_memory_atlas_credential_exclusion.py",
     "tests/test_memory_atlas_raw_ledger.py",
