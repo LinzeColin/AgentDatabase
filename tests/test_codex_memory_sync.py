@@ -29,6 +29,13 @@ def write_jsonl(path: Path, rows: list[dict]):
             handle.write(json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n")
 
 
+def install_raw_ledger_contract(database: Path) -> None:
+    source = ROOT / "config/data_sources/raw_ledger.json"
+    target = database / "config/data_sources/raw_ledger.json"
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(source.read_text(encoding="utf-8"), encoding="utf-8")
+
+
 class CodexMemorySyncTests(unittest.TestCase):
     def test_syncs_real_codex_shape_with_redaction_and_recommendations(self):
         module = load_module()
@@ -36,6 +43,7 @@ class CodexMemorySyncTests(unittest.TestCase):
             root = Path(td)
             db = root / "db"
             codex_home = root / ".codex"
+            install_raw_ledger_contract(db)
             session_id = "01999999-aaaa-bbbb-cccc-111111111111"
             write_jsonl(
                 codex_home / "session_index.jsonl",
@@ -106,6 +114,7 @@ class CodexMemorySyncTests(unittest.TestCase):
             root = Path(td)
             db = root / "db"
             codex_home = root / ".codex"
+            install_raw_ledger_contract(db)
             session_id = "01999999-aaaa-bbbb-cccc-222222222222"
             session_path = codex_home / "sessions/2026/06/18/session.jsonl"
             write_jsonl(codex_home / "session_index.jsonl", [{"id": session_id, "thread_name": "cache test"}])
@@ -147,6 +156,7 @@ class CodexMemorySyncTests(unittest.TestCase):
             root = Path(td)
             db = root / "db"
             codex_home = root / ".codex"
+            install_raw_ledger_contract(db)
             session_id = "01999999-aaaa-bbbb-cccc-333333333333"
             write_jsonl(
                 codex_home / "sessions/2026/06/02/session.jsonl",

@@ -2,8 +2,18 @@
 
 > **Current v1.2.1 note (2026-07-15):** This file preserves the earlier v1.2 R7
 > handoff below. Memory Atlas is executing the v1.2.1 Task Pack with one Task per run.
-> S04 and S05 are complete locally; S06-P1-T1 is complete and the next Task is
-> only S06-P1-T2. S05-P1 compressed the human
+> S04 and S05 are complete locally; S06-P1 and S06-P2-T1 are complete and the
+> next Task is only S06-P2-T2. `S06-P2-T1` adds the canonical immutable raw-ledger
+> contract, source-stat guards, SHA-256 fingerprints, exclusive append locking,
+> append-only/idempotent registration and three-adapter integration. The real
+> 512-row ledger passed with zero drift/deletion/unledgered files and unchanged
+> bytes, inode and mtime; no public raw or source file changed. Final gates passed
+> sync 7/7, fast 4/4, UI 14/14 and the complete Python suite 384/384. The full
+> credential scan covered all 513 tracked raw/control files including 35 large files;
+> its unchanged critical command received a 600-second budget after a measured
+> 356.46-second run exceeded the old 300-second budget. Independent engineering/security
+> and product/scope reviews both closed at 0 Critical / 0 Important / 0 Minor.
+> S05-P1 compressed the human
 > plane to seven shallow Chinese files, compressed the three root owner entries, and
 > added the deterministic v1.2.1 change/five-workflow map. `S05-P2-T1` added
 > `config/memory_atlas_machine_truth_index.json` and deterministically renders

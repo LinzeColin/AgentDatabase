@@ -105,7 +105,14 @@ function prepareFixture() {
   fs.mkdirSync(sourceRoot, { recursive: true });
   fs.mkdirSync(runtimeDir, { recursive: true });
 
-  for (const relativePath of ["scripts", "config", "data", "skills", "机器治理/运行门禁"]) {
+  for (const relativePath of [
+    "scripts",
+    "config",
+    "data",
+    "skills",
+    "机器治理/运行门禁",
+    "机器治理/证据与日志/raw_archive_manifests",
+  ]) {
     copyDirectory(relativePath, sourceRoot);
   }
   fs.writeFileSync(

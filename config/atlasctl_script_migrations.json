@@ -842,7 +842,7 @@
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_command_workflows.cjs",
         "baseline": true,
-        "sha256": "c872e201ab9e7f40aa92dce033acf47e954d8acc705c2ee090c825520bdaf93d",
+        "sha256": "a658573344cf23bc02ffd2fc21f4de3023f3b732113ba5a614bcdd8a175e9216",
         "matched_families": [
           "validator"
         ],
@@ -1697,7 +1697,7 @@
       {
         "path": "scripts/audit_memory_atlas_test_value.py",
         "baseline": false,
-        "sha256": "d9fd3588d3caecb44e5d71e588236bf124895f8bef475a2dac3d21d789f905e2",
+        "sha256": "920707a2d8813cd00a118f9eefddd0c47eb36a6f3da647b3311ae42f2c008793",
         "matched_families": [
           "audit"
         ],
@@ -1904,7 +1904,7 @@
       {
         "path": "scripts/sync_chatgpt_memory_data.py",
         "baseline": true,
-        "sha256": "2afd0db45ac6e6daf67fe3dc91d532d49f69e6a9c9f11889241bfd5ac7087ab8",
+        "sha256": "204712bca3058a58f794dbb5da218cfa9ccb596cc45aa15f9bb694bafe70f2cb",
         "matched_families": [
           "sync"
         ],
@@ -1913,7 +1913,7 @@
       {
         "path": "scripts/sync_codex_memory_data.py",
         "baseline": true,
-        "sha256": "39c9aab8a2e633b63fcbc36f960e1788b4453b5b62f794a2a98bdc4774818b35",
+        "sha256": "7c61cd30b46545485a3c4863ce597244d5544afd67f90ab15c03c7639df979cc",
         "matched_families": [
           "sync"
         ],
@@ -1922,7 +1922,7 @@
       {
         "path": "scripts/sync_future_agent_data.py",
         "baseline": true,
-        "sha256": "3cb4a4de191a11567b37962a82c2a87b99b02e73a4e7822f7a170c8f901a8d4b",
+        "sha256": "bdddf9d5750e5807d86cfd4a4bcc8cd5c60114b22360d78d79240ea8ea98c332",
         "matched_families": [
           "sync"
         ],

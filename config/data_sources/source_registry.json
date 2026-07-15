@@ -33,6 +33,7 @@
     "repository_relative_paths": true,
     "public_raw_layout_ref": "config/data_sources/public_raw_layout.json",
     "credential_exclusion_ref": "config/data_sources/credential_exclusion.json",
+    "raw_ledger_ref": "config/data_sources/raw_ledger.json",
     "push_defaults": {
       "mode": "final_delivery_only",
       "branch": "main",

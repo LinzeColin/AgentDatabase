@@ -20,6 +20,12 @@ from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Any, Iterable
 
+from memory_atlas_cli.raw_ledger import (
+    RawLedgerError,
+    RawLedgerPostWriteError,
+    assert_path_within_root_without_symlinks,
+    source_stat_guard,
+)
 from privacy_guard import credential_exclusion_hits, redact_credentials_in_text
 from public_raw_sanitizer import (
     MAX_PUBLIC_RAW_FILE_BYTES,
@@ -29,6 +35,7 @@ from public_raw_sanitizer import (
     sanitize_jsonl_event,
     sanitize_public_value,
 )
+from raw_archive_manifest import preflight_raw_ledger, record_raw_ledger
 
 
 DEFAULT_CODEX_HOME = Path.home() / ".codex"
@@ -276,23 +283,22 @@ def export_codex_session_jsonl(
     codex_home: Path,
     output_root: Path,
 ) -> dict[str, Any]:
-    source = source.resolve()
-    codex_home = codex_home.expanduser().resolve()
+    source = source.expanduser().absolute()
+    codex_home = codex_home.expanduser().absolute()
     output_root = output_root.resolve()
     try:
-        source_relative = source.relative_to(codex_home).as_posix()
-    except ValueError as exc:
-        raise PublicRawSanitizationError("Codex session source must be inside codex_home") from exc
+        source_relative = assert_path_within_root_without_symlinks(source, codex_home).as_posix()
+    except RawLedgerError as exc:
+        raise PublicRawSanitizationError(
+            "Codex session source must be inside codex_home without symlink components"
+        ) from exc
 
-    scan = scan_codex_session_jsonl(source)
     sanitized_relative, provenance_counts = sanitize_public_value(source_relative)
     if not isinstance(sanitized_relative, str):
         raise PublicRawSanitizationError("Codex source provenance must remain text")
 
     sessions_root = output_root / "sessions"
     sessions_root.mkdir(parents=True, exist_ok=True)
-    session_id = str(scan["session_id"])
-    source_sha12 = str(scan["source_sha256"])[:12]
     staged: list[dict[str, Any]] = []
     current = bytearray()
     current_event_count = 0
@@ -300,58 +306,73 @@ def export_codex_session_jsonl(
     replay_digest = hashlib.sha256()
     replay_event_count = 0
 
-    def stage_current_chunk() -> None:
-        nonlocal current, current_event_count
-        if not current:
-            return
-        part_number = len(staged) + 1
-        filename = f"{session_id}.{source_sha12}.part-{part_number:04d}.jsonl"
-        final_path = sessions_root / filename
-        temp_path = sessions_root / f".{filename}.{os.getpid()}.tmp"
-        payload = bytes(current)
-        temp_path.write_bytes(payload)
-        staged.append(
-            {
-                "temp_path": temp_path,
-                "final_path": final_path,
-                "sha256": hashlib.sha256(payload).hexdigest(),
-                "size_bytes": len(payload),
-                "event_count": current_event_count,
-            }
-        )
-        current = bytearray()
-        current_event_count = 0
-
     try:
-        with source.open("rb") as handle:
-            for raw_line in handle:
-                replay_digest.update(raw_line)
-                try:
-                    event = json.loads(raw_line.decode("utf-8", errors="strict"))
-                except (UnicodeDecodeError, json.JSONDecodeError):
-                    continue
-                if not isinstance(event, dict):
-                    continue
-                replay_event_count += 1
-                sanitized_event, event_counts = sanitize_jsonl_event(event)
-                redaction_counts = merge_counts(redaction_counts, event_counts)
-                encoded = (
-                    json.dumps(sanitized_event, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
-                    + "\n"
-                ).encode("utf-8")
-                if len(encoded) > MAX_PUBLIC_RAW_FILE_BYTES:
-                    raise PublicRawLimitError(
-                        f"Codex event in {sanitized_relative} is {len(encoded)} bytes; "
-                        f"limit is {MAX_PUBLIC_RAW_FILE_BYTES} bytes"
-                    )
-                if current and len(current) + len(encoded) > MAX_PUBLIC_RAW_FILE_BYTES:
-                    stage_current_chunk()
-                current.extend(encoded)
-                current_event_count += 1
-        stage_current_chunk()
+        with source_stat_guard(source):
+            scan = scan_codex_session_jsonl(source)
+            session_id = str(scan["session_id"])
+            source_sha12 = str(scan["source_sha256"])[:12]
 
-        if replay_digest.hexdigest() != scan["source_sha256"] or replay_event_count != scan["event_count"]:
-            raise PublicRawSanitizationError("Codex session changed while public transcript export was running")
+            def stage_current_chunk() -> None:
+                nonlocal current, current_event_count
+                if not current:
+                    return
+                part_number = len(staged) + 1
+                filename = f"{session_id}.{source_sha12}.part-{part_number:04d}.jsonl"
+                final_path = sessions_root / filename
+                temp_path = sessions_root / f".{filename}.{os.getpid()}.tmp"
+                payload = bytes(current)
+                temp_path.write_bytes(payload)
+                staged.append(
+                    {
+                        "temp_path": temp_path,
+                        "final_path": final_path,
+                        "sha256": hashlib.sha256(payload).hexdigest(),
+                        "size_bytes": len(payload),
+                        "event_count": current_event_count,
+                    }
+                )
+                current = bytearray()
+                current_event_count = 0
+
+            with source.open("rb") as handle:
+                for raw_line in handle:
+                    replay_digest.update(raw_line)
+                    try:
+                        event = json.loads(raw_line.decode("utf-8", errors="strict"))
+                    except (UnicodeDecodeError, json.JSONDecodeError):
+                        continue
+                    if not isinstance(event, dict):
+                        continue
+                    replay_event_count += 1
+                    sanitized_event, event_counts = sanitize_jsonl_event(event)
+                    redaction_counts = merge_counts(redaction_counts, event_counts)
+                    encoded = (
+                        json.dumps(
+                            sanitized_event,
+                            ensure_ascii=False,
+                            sort_keys=True,
+                            separators=(",", ":"),
+                        )
+                        + "\n"
+                    ).encode("utf-8")
+                    if len(encoded) > MAX_PUBLIC_RAW_FILE_BYTES:
+                        raise PublicRawLimitError(
+                            f"Codex event in {sanitized_relative} is {len(encoded)} bytes; "
+                            f"limit is {MAX_PUBLIC_RAW_FILE_BYTES} bytes"
+                        )
+                    if current and len(current) + len(encoded) > MAX_PUBLIC_RAW_FILE_BYTES:
+                        stage_current_chunk()
+                    current.extend(encoded)
+                    current_event_count += 1
+            stage_current_chunk()
+
+            if (
+                replay_digest.hexdigest() != scan["source_sha256"]
+                or replay_event_count != scan["event_count"]
+            ):
+                raise PublicRawSanitizationError(
+                    "Codex session changed while public transcript export was running"
+                )
 
         for chunk in staged:
             final_path = chunk["final_path"]
@@ -393,6 +414,7 @@ def export_codex_session_jsonl(
         "chunk_refs": [chunk["ref"] for chunk in chunks],
         "chunks": chunks,
         "redaction_counts": redaction_counts,
+        "source_stat_verified": True,
     }
 
 
@@ -1033,24 +1055,33 @@ def sync_codex_data(
     public_transcripts: bool = False,
 ) -> dict[str, Any]:
     database_dir = database_dir.resolve()
-    codex_home = codex_home.expanduser().resolve()
-    index = load_session_index(codex_home)
+    codex_home = codex_home.expanduser().absolute()
     cache = {} if force_full_scan else cached_session_rows(database_dir)
     session_rows: list[dict[str, Any]] = []
     cache_stats = {"cached": 0, "parsed": 0, "skipped": 0}
-    session_files = iter_session_files(codex_home)
-    for path in session_files:
-        row = None if force_full_scan else cache_hit_for_session(path, cache)
-        if row is not None:
+    source_inventory_patterns = (
+        "sessions/**/*.jsonl",
+        "archived_sessions/*.jsonl",
+        SESSION_INDEX,
+    )
+    with source_stat_guard(
+        codex_home,
+        directory_globs=source_inventory_patterns,
+    ) as source_inventory:
+        index = load_session_index(codex_home)
+        session_files = iter_session_files(codex_home)
+        for path in session_files:
+            row = None if force_full_scan else cache_hit_for_session(path, cache)
+            if row is not None:
+                session_rows.append(row)
+                cache_stats["cached"] += 1
+                continue
+            row = parse_session_file(path, codex_home, index)
+            if row is None:
+                cache_stats["skipped"] += 1
+                continue
             session_rows.append(row)
-            cache_stats["cached"] += 1
-            continue
-        row = parse_session_file(path, codex_home, index)
-        if row is None:
-            cache_stats["skipped"] += 1
-            continue
-        session_rows.append(row)
-        cache_stats["parsed"] += 1
+            cache_stats["parsed"] += 1
     session_rows.sort(key=lambda row: (row.get("updated_at") or row.get("started_at") or "", row.get("session_id") or ""))
     daily_rows = build_daily(session_rows)
     recommendations = build_recommendations(session_rows, database_dir / RECOMMENDATION_OUTPUT)
@@ -1058,24 +1089,51 @@ def sync_codex_data(
     transcript_exports: list[dict[str, Any]] | None = None
     if public_transcripts:
         transcript_exports = []
-        if not dry_run:
-            for source in session_files:
-                export = export_codex_session_jsonl(
-                    source,
-                    codex_home,
-                    database_dir / CODEX_PUBLIC_RAW_ROOT,
-                )
-                export["chunk_refs"] = [
-                    (CODEX_PUBLIC_RAW_ROOT / ref).as_posix() for ref in export["chunk_refs"]
-                ]
-                for chunk in export["chunks"]:
-                    chunk["ref"] = (CODEX_PUBLIC_RAW_ROOT / chunk["ref"]).as_posix()
-                transcript_exports.append(export)
-    public_raw = build_public_raw_snapshot(session_rows, snapshot, transcript_exports)
-    public_raw_rel = public_raw_snapshot_path(public_raw)
+    raw_ledger = {
+        "status": "NOT_RUN",
+        "task_id": "S06-P2-T1",
+        "reason": "dry_run",
+        "source_mutation": False,
+    }
+    if not dry_run:
+        raw_writes_started = False
+        try:
+            with source_stat_guard(
+                codex_home,
+                directory_globs=source_inventory_patterns,
+                expected=source_inventory,
+            ):
+                preflight_raw_ledger(database_dir)
+                if public_transcripts:
+                    raw_writes_started = bool(session_files)
+                    for source in session_files:
+                        export = export_codex_session_jsonl(
+                            source,
+                            codex_home,
+                            database_dir / CODEX_PUBLIC_RAW_ROOT,
+                        )
+                        export["chunk_refs"] = [
+                            (CODEX_PUBLIC_RAW_ROOT / ref).as_posix() for ref in export["chunk_refs"]
+                        ]
+                        for chunk in export["chunks"]:
+                            chunk["ref"] = (CODEX_PUBLIC_RAW_ROOT / chunk["ref"]).as_posix()
+                        transcript_exports.append(export)
+                public_raw = build_public_raw_snapshot(session_rows, snapshot, transcript_exports)
+                public_raw_rel = public_raw_snapshot_path(public_raw)
+                raw_writes_started = True
+                write_json_append_only(database_dir / public_raw_rel, public_raw)
+                raw_ledger = record_raw_ledger(database_dir, snapshot["generated_at"])
+        except RawLedgerError as exc:
+            if raw_writes_started:
+                raise RawLedgerPostWriteError(
+                    f"append-only raw or ledger bytes may exist after commit failure: {exc}"
+                ) from exc
+            raise
+    else:
+        public_raw = build_public_raw_snapshot(session_rows, snapshot, transcript_exports)
+        public_raw_rel = public_raw_snapshot_path(public_raw)
 
     if not dry_run:
-        write_json_append_only(database_dir / public_raw_rel, public_raw)
         write_jsonl(database_dir / SESSION_OUTPUT, session_rows)
         write_jsonl(database_dir / DAILY_OUTPUT, daily_rows)
         write_json(database_dir / RECOMMENDATION_OUTPUT, recommendations)
@@ -1129,6 +1187,8 @@ def sync_codex_data(
         "derived_summary": DERIVED_SNAPSHOT_OUTPUT.as_posix(),
         "run_log_dir": SYNC_LOG_DIR.as_posix(),
         "append_only": True,
+        "raw_ledger": raw_ledger,
+        "source_stat_verified_count": len(session_files),
         "public_transcripts": public_transcripts,
         "public_transcript_event_count": public_raw["public_transcript_event_count"],
         "public_transcript_chunk_count": public_raw["public_transcript_chunk_count"],
@@ -1200,6 +1260,17 @@ def main(argv: list[str] | None = None) -> int:
             "writes_files": False,
         }, ensure_ascii=False, indent=2, sort_keys=True))
         return 5
+    except RawLedgerError as exc:
+        print(json.dumps({
+            "status": "FAIL_CLOSED",
+            "source_id": SOURCE_ID,
+            "reason": "raw_ledger_violation",
+            "error": str(exc),
+            "writes_files": isinstance(exc, RawLedgerPostWriteError),
+            "partial_append_only_raw_writes_possible": isinstance(exc, RawLedgerPostWriteError),
+            "source_mutation": "source stat changed" in str(exc),
+        }, ensure_ascii=False, indent=2, sort_keys=True))
+        return 7
     print(json.dumps(result, ensure_ascii=False, indent=2, sort_keys=True))
     return 0
 

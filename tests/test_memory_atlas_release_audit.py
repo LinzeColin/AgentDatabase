@@ -48,6 +48,7 @@ class MemoryAtlasReleaseAuditTests(unittest.TestCase):
             publish_dir = repo_root / "dist"
             raw_file = repo_root / "data/public_raw/codex/sessions/session-001.jsonl"
             credential_contract = repo_root / "config/data_sources/credential_exclusion.json"
+            raw_ledger_contract = repo_root / "config/data_sources/raw_ledger.json"
             ledger_dir = repo_root / "机器治理/证据与日志/raw_archive_manifests"
             publish_dir.mkdir(parents=True)
             raw_file.parent.mkdir(parents=True)
@@ -58,6 +59,10 @@ class MemoryAtlasReleaseAuditTests(unittest.TestCase):
                 (ROOT / "config/data_sources/credential_exclusion.json").read_text(
                     encoding="utf-8"
                 ),
+                encoding="utf-8",
+            )
+            raw_ledger_contract.write_text(
+                (ROOT / "config/data_sources/raw_ledger.json").read_text(encoding="utf-8"),
                 encoding="utf-8",
             )
 
@@ -88,6 +93,7 @@ class MemoryAtlasReleaseAuditTests(unittest.TestCase):
                     "git",
                     "add",
                     "config/data_sources/credential_exclusion.json",
+                    "config/data_sources/raw_ledger.json",
                     "data/public_raw",
                     "机器治理/证据与日志/raw_archive_manifests",
                 ],

@@ -20,6 +20,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Iterable
 
+from memory_atlas_cli.raw_ledger import RawLedgerError, RawLedgerPostWriteError, source_stat_guard
 from privacy_guard import PrivacyViolation, assert_no_credentials
 from public_raw_sanitizer import (
     PublicRawLimitError,
@@ -28,6 +29,7 @@ from public_raw_sanitizer import (
     require_public_raw_file_size,
     sanitize_public_value,
 )
+from raw_archive_manifest import preflight_raw_ledger, record_raw_ledger
 
 
 SOURCE_ID = "chatgpt"
@@ -400,7 +402,10 @@ def sync_official_export(
     dry_run: bool,
     redact_for_public_backup: bool = False,
 ) -> dict[str, Any]:
-    conversations = load_official_export(export_path)
+    directory_globs = ("**/conversations*.json",) if export_path.is_dir() else ()
+    with source_stat_guard(export_path, directory_globs=directory_globs) as source_inventory:
+        conversations = load_official_export(export_path)
+        export_sha = official_export_sha256(export_path)
     rows: list[dict[str, Any]] = []
     redaction_counts: dict[str, int] = {}
     for conversation in conversations:
@@ -411,7 +416,6 @@ def sync_official_export(
         rows.append(row)
         redaction_counts = merge_counts(redaction_counts, row_counts)
     generated_at = now_utc()
-    export_sha = official_export_sha256(export_path)
     raw_paths = [
         RAW_ROOT / f"{safe_filename(row['conversation_id'])}.{row['content_sha256'][:12]}.json"
         for row in rows
@@ -424,9 +428,31 @@ def sync_official_export(
         for row, relative_path in zip(rows, raw_paths)
     ]
 
+    raw_ledger = {
+        "status": "NOT_RUN",
+        "task_id": "S06-P2-T1",
+        "reason": "dry_run",
+        "source_mutation": False,
+    }
     if not dry_run:
-        for relative_path, payload in zip(raw_paths, raw_payloads):
-            write_if_changed(database_dir / relative_path, payload)
+        raw_writes_started = False
+        try:
+            with source_stat_guard(
+                export_path,
+                directory_globs=directory_globs,
+                expected=source_inventory,
+            ):
+                preflight_raw_ledger(database_dir)
+                raw_writes_started = True
+                for relative_path, payload in zip(raw_paths, raw_payloads):
+                    write_if_changed(database_dir / relative_path, payload)
+                raw_ledger = record_raw_ledger(database_dir, generated_at)
+        except RawLedgerError as exc:
+            if raw_writes_started:
+                raise RawLedgerPostWriteError(
+                    f"append-only raw or ledger bytes may exist after commit failure: {exc}"
+                ) from exc
+            raise
         write_current_jsonl(database_dir / PROCESSED_MANIFEST, manifest_rows)
         summary = build_summary(
             rows,
@@ -467,6 +493,8 @@ def sync_official_export(
         "writes_files": not dry_run,
         "append_only": True,
         "no_browser_mutation": True,
+        "source_stat_verified": True,
+        "raw_ledger": raw_ledger,
     }
 
 
@@ -517,7 +545,7 @@ def main(argv: list[str] | None = None) -> int:
         if args.official_export:
             result = sync_official_export(
                 args.database_dir.resolve(),
-                args.official_export.resolve(),
+                args.official_export.expanduser().absolute(),
                 args.dry_run,
                 redact_for_public_backup=args.redact_for_public_backup,
             )
@@ -561,6 +589,17 @@ def main(argv: list[str] | None = None) -> int:
             "no_browser_mutation": True,
         }, ensure_ascii=False, indent=2, sort_keys=True))
         return 6
+    except RawLedgerError as exc:
+        print(json.dumps({
+            "status": "FAIL_CLOSED",
+            "source_id": SOURCE_ID,
+            "reason": "raw_ledger_violation",
+            "error": str(exc),
+            "writes_files": isinstance(exc, RawLedgerPostWriteError),
+            "partial_append_only_raw_writes_possible": isinstance(exc, RawLedgerPostWriteError),
+            "source_mutation": "source stat changed" in str(exc),
+        }, ensure_ascii=False, indent=2, sort_keys=True))
+        return 7
 
     print(json.dumps(result, ensure_ascii=False, indent=2, sort_keys=True))
     return 0

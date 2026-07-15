@@ -56,6 +56,10 @@ class SourceRegistryContractTests(unittest.TestCase):
             contract["credential_exclusion_ref"],
             "config/data_sources/credential_exclusion.json",
         )
+        self.assertEqual(
+            contract["raw_ledger_ref"],
+            "config/data_sources/raw_ledger.json",
+        )
 
     def test_canonical_registry_covers_chatgpt_codex_and_generic_agent(self) -> None:
         sources = sync_source_map(load_source_registry(ROOT))

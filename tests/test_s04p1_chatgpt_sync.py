@@ -58,6 +58,13 @@ def write_export(path: Path, title: str = "普通 ChatGPT 讨论") -> None:
     path.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
 
 
+def install_raw_ledger_contract(database: Path) -> None:
+    source = REPO_ROOT / "config/data_sources/raw_ledger.json"
+    target = database / "config/data_sources/raw_ledger.json"
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_bytes(source.read_bytes())
+
+
 class ChatGptSyncS04P1Test(unittest.TestCase):
     def test_official_export_dry_run_counts_conversations_without_writes(self) -> None:
         self.assertTrue(SYNC_SCRIPT.exists(), "sync_chatgpt_memory_data.py should exist")
@@ -109,6 +116,7 @@ class ChatGptSyncS04P1Test(unittest.TestCase):
             root = Path(tmpdir)
             export_path = root / "conversations.json"
             write_export(export_path)
+            install_raw_ledger_contract(root)
             result = run_json([
                 sys.executable,
                 str(SYNC_SCRIPT),

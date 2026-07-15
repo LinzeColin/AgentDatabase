@@ -8,7 +8,7 @@ next_gate_id: "ACC.OpenAIDatabase.PAM1.0019"
 total_estimated_hours: 255
 completed_estimated_hours: 241
 taskpack_progress:
-  completed_tasks: 39
+  completed_tasks: 40
   total_tasks: 149
   delivery_state: "local_only_not_released"
 stages:
@@ -1688,7 +1688,7 @@ stages:
     person_goal: "为 ChatGPT、Codex 和后续 Agent 建立统一公开 raw 数据平面，同时保证源文件只读、归档只追加、可去重、可恢复且不提交凭证。"
     status: "in_progress"
     estimated_hours: 9
-    estimated_pct: 33
+    estimated_pct: 44
     stop_conditions:
       - "同步器需要修改、移动或删除源 raw"
       - "credential-like 文件准备进入 staged diff"
@@ -1843,15 +1843,15 @@ stages:
       - phase_id: "MA-V121-S06-P2"
         name: "append-only、hash、分片与恢复"
         objective: "建立不可变 raw ledger、确定性分片和 restore/verify 闭环。"
-        status: "planned"
+        status: "in_progress"
         estimated_hours: 3
-        estimated_pct: 0
+        estimated_pct: 33
         stop_conditions:
           - "同步改变源文件字节、mtime 或 size"
           - "分片或恢复结果无法由 manifest 校验"
         stop_gate:
           gate_id: "ACC-MA-V121-S06-P2"
-          status: "planned"
+          status: "in_progress"
           pass_conditions:
             - "append-only/hash/去重与 45 MiB 分片恢复通过 fixtures 验证"
           evidence_refs: []
@@ -1859,18 +1859,42 @@ stages:
           - task_id: "S06-P2-T1"
             name: "实现不可变 raw ledger"
             objective: "实现 source stat 前后校验、内容 hash、append-only ledger 和幂等去重。"
-            status: "planned"
+            status: "completed"
             estimated_hours: 1
-            estimated_pct: 0
+            estimated_pct: 100
             dependencies:
               - "S06-P1-T3"
             acceptance_ids:
               - "ACC-MA-V121-S06-P2-T1"
-            test_commands: []
-            evidence_refs: []
+            acceptance:
+              - acceptance_id: "ACC-MA-V121-S06-P2-T1"
+                description: "三类同步适配器均以 device/inode/mode/size/mtime/ctime 前后 stat 保护只读来源，公开 raw 使用 SHA-256 登记到独占锁保护的 append-only JSONL ledger；新增记录只追加，重复同步不改变任何既有 ledger 字节、inode 或 mtime。"
+                evidence_refs:
+                  - "EVID-MA-V121-S06-P2-T1-CONTRACT"
+                  - "EVID-MA-V121-S06-P2-T1-TEST"
+            test_commands:
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_raw_ledger OpenAIDatabase.tests.test_memory_atlas_r7_public_raw OpenAIDatabase.tests.test_s03p3_raw_manifest OpenAIDatabase.tests.test_memory_atlas_r7_raw_integrity -q"
+              - "python3 -B OpenAIDatabase/scripts/raw_archive_manifest.py audit --database-dir OpenAIDatabase"
+              - "python3 -B OpenAIDatabase/scripts/audit_memory_atlas_public_raw.py --database-dir OpenAIDatabase"
+              - "python3 -B OpenAIDatabase/scripts/privacy_guard.py --database-dir OpenAIDatabase --scan-only"
+              - "npm run validate:sync --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run validate:fast --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run validate:ui --prefix OpenAIDatabase/apps/memory-atlas"
+              - "python3 -B -m unittest discover -s OpenAIDatabase/tests -p 'test_*.py' -q"
+              - "python3 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+              - "python3.12 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+            test_results:
+              - "专用回归覆盖同尺寸源变更、目录 inventory 变更、Codex 非 transcript 读取、ChatGPT 读取、SHA-256、历史 drift/delete/unledgered、独占锁、ledger 前缀不可变和幂等重放；三个适配器 apply fixture 均证明源 bytes/size/mtime 不变且 ledger 注册可见。"
+              - "真实 ledger 审计覆盖 512 个 raw 文件：source stat verified=512，hash drift、delete、unledgered 均为 0；审计前后 ledger 保持 512 行、128,209 bytes、inode 156668907、mtime_ns 1783818229381278488 和 SHA-256 1a4fa71303903ca896c82640f7b4550cee47f3cc8ec600f81d03f7603e120c96。"
+              - "公开 raw 内容审计覆盖 512 文件与 452,781,632 bytes，privacy scan 覆盖 513 个 tracked raw/control 文件及 35 个大文件，无 credential、secret、路径、JSON 或 size 违规；validate:sync 7/7 PASS，raw mutation=false、remote push=false。"
+              - "治理/profile 聚焦回归 35/35、validate:fast 4/4、validate:ui 14/14 与完整 Python 384/384 PASS；完整 credential scan 覆盖 513 个 tracked raw/control 文件和 35 个大文件，实测 356.46 秒后将同一 critical 命令预算从不足的 300 秒调整为 600 秒，未缩扫描范围或放宽断言；命令工作流 fixture 补齐安装器真实 source workspace 所含 raw ledger 后，六个本地命令与 hosted-static 零 POST 门禁通过；Python 3.13/3.12 deterministic render 均为 drift=0、reference issue=0；工程/安全和产品/范围独立复核均为 Critical 0、Important 0、Minor 0。"
+            evidence_refs:
+              - "EVID-MA-V121-S06-P2-T1-CONTRACT"
+              - "EVID-MA-V121-S06-P2-T1-TEST"
             risks:
               - "同步过程修改源文件"
-            rollback: "git revert 本 Task 本地 commit。"
+            rollback: "提交前仅反向应用 S06-P2-T1 精确 Task patch；提交后使用 git revert <S06-P2-T1 commit>。"
+            current_result: "complete_local_only_40_of_149_pending_s06_p2_t2"
           - task_id: "S06-P2-T2"
             name: "实现确定性 45 MiB 分片"
             objective: "对超过阈值的包分片并生成顺序、bytes 和 SHA-256 manifest。"

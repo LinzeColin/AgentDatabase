@@ -69,6 +69,13 @@ def run_json(command: list[str], cwd: Path = REPO_ROOT, expect_success: bool = T
     return json.loads(result.stdout[start:])
 
 
+def install_raw_ledger_contract(database: Path) -> None:
+    source = REPO_ROOT / "config/data_sources/raw_ledger.json"
+    target = database / "config/data_sources/raw_ledger.json"
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_bytes(source.read_bytes())
+
+
 class S04P2CodexAgentSyncTest(unittest.TestCase):
     def test_codex_sync_dry_run_reports_raw_derived_run_log_without_writes(self) -> None:
         module = load_codex_module()
@@ -101,6 +108,7 @@ class S04P2CodexAgentSyncTest(unittest.TestCase):
             root = Path(tmpdir)
             db = root / "db"
             codex_home = root / ".codex"
+            install_raw_ledger_contract(db)
             write_codex_session(codex_home)
             result = module.sync_codex_data(
                 db,
@@ -125,6 +133,7 @@ class S04P2CodexAgentSyncTest(unittest.TestCase):
         self.assertTrue(FUTURE_AGENT_SCRIPT.exists(), "sync_future_agent_data.py should exist")
         with tempfile.TemporaryDirectory() as tmpdir:
             root = Path(tmpdir)
+            install_raw_ledger_contract(root)
             export_path = root / "future_agent_events.json"
             export_path.write_text(
                 json.dumps(

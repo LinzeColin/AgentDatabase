@@ -20,6 +20,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+from memory_atlas_cli.raw_ledger import RawLedgerError, RawLedgerPostWriteError, source_stat_guard
 from memory_atlas_cli.source_registry import SourceRegistryError, validate_portable_identifier
 from privacy_guard import PrivacyViolation, assert_no_credentials
 from public_raw_sanitizer import (
@@ -29,6 +30,7 @@ from public_raw_sanitizer import (
     require_public_raw_file_size,
     sanitize_public_value,
 )
+from raw_archive_manifest import preflight_raw_ledger, record_raw_ledger
 
 
 SOURCE_ID = "future-agent"
@@ -365,6 +367,8 @@ def sync_rows(
     *,
     source_sha256: str = "",
     source_id: str = SOURCE_ID,
+    source_path: Path | None = None,
+    source_inventory: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     validate_source_identity(source_id, safe_agent)
     if not rows:
@@ -379,9 +383,35 @@ def sync_rows(
         require_public_raw_file_size(payload, relative_path.as_posix())
     summary = build_summary(safe_agent, rows, generated_at, source_id=source_id)
 
+    raw_ledger = {
+        "status": "NOT_RUN",
+        "task_id": "S06-P2-T1",
+        "reason": "dry_run",
+        "source_mutation": False,
+    }
     if not dry_run:
-        for relative_path, payload in zip(raw_paths, raw_payloads):
-            write_if_changed(database_dir / relative_path, payload)
+        raw_writes_started = False
+
+        def commit_raw_and_ledger() -> None:
+            nonlocal raw_ledger, raw_writes_started
+            preflight_raw_ledger(database_dir)
+            raw_writes_started = True
+            for relative_path, payload in zip(raw_paths, raw_payloads):
+                write_if_changed(database_dir / relative_path, payload)
+            raw_ledger = record_raw_ledger(database_dir, generated_at)
+
+        try:
+            if source_path is not None and source_inventory is not None:
+                with source_stat_guard(source_path, expected=source_inventory):
+                    commit_raw_and_ledger()
+            else:
+                commit_raw_and_ledger()
+        except RawLedgerError as exc:
+            if raw_writes_started:
+                raise RawLedgerPostWriteError(
+                    f"append-only raw or ledger bytes may exist after commit failure: {exc}"
+                ) from exc
+            raise
         summary_path = database_dir / DERIVED_ROOT / safe_agent / "agent_sync_summary.json"
         write_json(summary_path, summary)
         append_jsonl(
@@ -413,6 +443,8 @@ def sync_rows(
         "source_formats": summary["source_formats"],
         "redaction_counts": summary["redaction_counts"],
         "source_sha256": source_sha256,
+        "source_stat_verified": bool(source_sha256),
+        "raw_ledger": raw_ledger,
     }
     if len(rows) == 1:
         result["event_id"] = rows[0]["event_id"]
@@ -429,8 +461,20 @@ def sync_future_agent(
     source_id: str = SOURCE_ID,
 ) -> dict[str, Any]:
     safe_agent = safe_name(agent_id)
-    rows = [normalize_event(safe_agent, event, source_id=source_id) for event in load_input(input_path)]
-    return sync_rows(database_dir, safe_agent, rows, dry_run, source_id=source_id)
+    with source_stat_guard(input_path) as source_inventory:
+        source_bytes = input_path.read_bytes()
+        events = load_input(input_path)
+    rows = [normalize_event(safe_agent, event, source_id=source_id) for event in events]
+    return sync_rows(
+        database_dir,
+        safe_agent,
+        rows,
+        dry_run,
+        source_sha256=hashlib.sha256(source_bytes).hexdigest(),
+        source_id=source_id,
+        source_path=input_path,
+        source_inventory=source_inventory,
+    )
 
 
 def sync_markdown_report(
@@ -444,7 +488,8 @@ def sync_markdown_report(
 ) -> dict[str, Any]:
     safe_agent = safe_name(agent_id)
     safe_event = safe_name(event_id)
-    source_bytes = markdown_report.read_bytes()
+    with source_stat_guard(markdown_report) as source_inventory:
+        source_bytes = markdown_report.read_bytes()
     text = source_bytes.decode("utf-8", errors="replace")
     row = normalize_markdown_event(safe_agent, safe_event, text, source_id=source_id)
     return sync_rows(
@@ -454,6 +499,8 @@ def sync_markdown_report(
         dry_run,
         source_sha256=hashlib.sha256(source_bytes).hexdigest(),
         source_id=source_id,
+        source_path=markdown_report,
+        source_inventory=source_inventory,
     )
 
 
@@ -481,7 +528,7 @@ def main(argv: list[str] | None = None) -> int:
             result = sync_markdown_report(
                 database_dir,
                 args.agent_id,
-                args.markdown_report.resolve(),
+                args.markdown_report.expanduser().absolute(),
                 event_id,
                 args.dry_run,
                 source_id=source_id,
@@ -490,7 +537,7 @@ def main(argv: list[str] | None = None) -> int:
             result = sync_future_agent(
                 database_dir,
                 args.agent_id,
-                args.input.resolve(),
+                args.input.expanduser().absolute(),
                 args.dry_run,
                 source_id=source_id,
             )
@@ -544,6 +591,17 @@ def main(argv: list[str] | None = None) -> int:
             "writes_files": False,
         }, ensure_ascii=False, indent=2, sort_keys=True))
         return 6
+    except RawLedgerError as exc:
+        print(json.dumps({
+            "status": "FAIL_CLOSED",
+            "source_id": source_id,
+            "reason": "raw_ledger_violation",
+            "error": str(exc),
+            "writes_files": isinstance(exc, RawLedgerPostWriteError),
+            "partial_append_only_raw_writes_possible": isinstance(exc, RawLedgerPostWriteError),
+            "source_mutation": "source stat changed" in str(exc),
+        }, ensure_ascii=False, indent=2, sort_keys=True))
+        return 7
 
     print(json.dumps(result, ensure_ascii=False, indent=2, sort_keys=True))
     return 0

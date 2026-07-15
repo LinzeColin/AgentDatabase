@@ -12,6 +12,13 @@ ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "scripts/raw_archive_manifest.py"
 
 
+def install_raw_ledger_contract(database: Path) -> None:
+    source = ROOT / "config/data_sources/raw_ledger.json"
+    target = database / "config/data_sources/raw_ledger.json"
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_bytes(source.read_bytes())
+
+
 def load_module():
     spec = importlib.util.spec_from_file_location("raw_archive_manifest", SCRIPT)
     module = importlib.util.module_from_spec(spec)
@@ -26,6 +33,7 @@ class S03P3RawManifestTests(unittest.TestCase):
         module = load_module()
         with tempfile.TemporaryDirectory() as temp_dir:
             database = Path(temp_dir)
+            install_raw_ledger_contract(database)
             raw_file = database / "data/public_raw/codex/session-001.jsonl"
             raw_file.parent.mkdir(parents=True)
             raw_file.write_text('{"role":"user","text":"ordinary transcript"}\n', encoding="utf-8")
@@ -54,6 +62,7 @@ class S03P3RawManifestTests(unittest.TestCase):
         module = load_module()
         with tempfile.TemporaryDirectory() as temp_dir:
             database = Path(temp_dir)
+            install_raw_ledger_contract(database)
             raw_file = database / "data/public_raw/chatgpt/export-001.jsonl"
             raw_file.parent.mkdir(parents=True)
             raw_file.write_text('{"role":"user","text":"original transcript"}\n', encoding="utf-8")
@@ -79,6 +88,7 @@ class S03P3RawManifestTests(unittest.TestCase):
         module = load_module()
         with tempfile.TemporaryDirectory() as temp_dir:
             database = Path(temp_dir)
+            install_raw_ledger_contract(database)
             readme = database / "data/public_raw/README.md"
             readme.parent.mkdir(parents=True)
             readme.write_text("# Public raw\n", encoding="utf-8")

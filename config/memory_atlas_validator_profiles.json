@@ -83,6 +83,7 @@
             "tests.test_memory_atlas_r7_raw_integrity",
             "tests.test_memory_atlas_source_registry",
             "tests.test_memory_atlas_public_raw_layout",
+            "tests.test_memory_atlas_raw_ledger",
             "-q"
           ],
           "cwd": "database",
@@ -167,7 +168,7 @@
             "--scan-only"
           ],
           "cwd": "database",
-          "timeout_seconds": 300,
+          "timeout_seconds": 600,
           "critical": true
         }
       ]

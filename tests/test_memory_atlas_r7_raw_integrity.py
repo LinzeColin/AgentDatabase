@@ -51,11 +51,19 @@ def seed_all_source_families(database: Path) -> None:
     )
 
 
+def install_raw_ledger_contract(database: Path) -> None:
+    source = ROOT / "config/data_sources/raw_ledger.json"
+    target = database / "config/data_sources/raw_ledger.json"
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_bytes(source.read_bytes())
+
+
 class RawManifestIntegrityTests(unittest.TestCase):
     def test_manifest_run_is_immutable_and_identical_regeneration_is_idempotent(self) -> None:
         module = load_module("r7_raw_manifest_immutable", MANIFEST_SCRIPT)
         with tempfile.TemporaryDirectory() as temp_dir:
             database = Path(temp_dir)
+            install_raw_ledger_contract(database)
             seed_all_source_families(database)
 
             first = module.generate_raw_manifest(
@@ -129,6 +137,7 @@ class RawManifestIntegrityTests(unittest.TestCase):
         module = load_module("r7_raw_manifest_sources", MANIFEST_SCRIPT)
         with tempfile.TemporaryDirectory() as temp_dir:
             database = Path(temp_dir)
+            install_raw_ledger_contract(database)
             with self.assertRaises(module.ManifestConflict):
                 module.generate_raw_manifest(
                     database,
@@ -165,6 +174,7 @@ class RawManifestIntegrityTests(unittest.TestCase):
         module = load_module("r7_raw_manifest_private_error", MANIFEST_SCRIPT)
         with tempfile.TemporaryDirectory() as temp_dir:
             database = Path(temp_dir)
+            install_raw_ledger_contract(database)
             ledger = module.hash_ledger_path(database)
             ledger.parent.mkdir(parents=True)
             ledger.write_text("{not-json}\n", encoding="utf-8")

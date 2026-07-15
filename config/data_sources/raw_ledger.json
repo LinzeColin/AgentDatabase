@@ -1,0 +1,68 @@
+{
+  "schema_version": "memory_atlas.raw_ledger.v1_2_1_s06_p2_t1",
+  "task_id": "S06-P2-T1",
+  "acceptance_id": "ACC-MA-V121-S06-P2-T1",
+  "policy": "immutable_raw_ledger",
+  "raw_root": "data/public_raw",
+  "source_stat_guard": {
+    "before_after_fields": [
+      "device",
+      "inode",
+      "mode",
+      "size_bytes",
+      "mtime_ns",
+      "ctime_ns"
+    ],
+    "directory_inventory_must_match": true,
+    "reject_symlinks": true,
+    "mutation_result": "fail_closed"
+  },
+  "content_hash": {
+    "algorithm": "sha256",
+    "read_chunk_bytes": 1048576,
+    "hex_length": 64
+  },
+  "ledger": {
+    "path": "机器治理/证据与日志/raw_archive_manifests/raw_hash_ledger.jsonl",
+    "format": "jsonl",
+    "required_fields": [
+      "source_id",
+      "relative_path",
+      "sha256",
+      "imported_at",
+      "size_bytes"
+    ],
+    "immutable_fields": [
+      "source_id",
+      "relative_path",
+      "sha256",
+      "size_bytes"
+    ],
+    "dedupe_key_fields": [
+      "source_id",
+      "relative_path",
+      "sha256",
+      "size_bytes"
+    ],
+    "append_only": true,
+    "rewrite_existing_bytes": false,
+    "exclusive_append_lock": true,
+    "lock_metadata_fields": [
+      "schema_version",
+      "pid",
+      "hostname",
+      "created_at_ns",
+      "ledger_identity"
+    ],
+    "stale_lock_policy": "manual_verify_never_auto_remove",
+    "fsync_after_append": true,
+    "legacy_rows_compatible": true
+  },
+  "phase_boundary": {
+    "does_not_split_archives": true,
+    "does_not_restore_archives": true,
+    "does_not_modify_source_bytes": true,
+    "does_not_push_remote": true,
+    "next_task": "S06-P2-T2"
+  }
+}

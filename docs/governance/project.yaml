@@ -742,6 +742,32 @@ features:
     evidence_refs:
       - "EVID-MA-V121-S06-P1-T3-CONTRACT"
       - "EVID-MA-V121-S06-P1-T3-TEST"
+  - feature_id: "FEAT-MA-V121-S06-P2-T1"
+    name: "Memory Atlas 不可变 raw ledger"
+    description: "v1.2.1 Task Pack 当前完成 40/149；ChatGPT、Codex 与 generic-agent 同步入口以 source stat 前后校验保护只读输入，以 SHA-256 登记公开 raw，并通过独占锁、只追加 JSONL、不可变 dedupe key 和历史漂移预检阻止 ledger 覆盖、重复登记及已登记 raw 变更。45 MiB 分片与 restore/verify 属于后续 T2/T3，当前未实现。"
+    status: "active"
+    fact_level: "EXTRACTED"
+    code_refs:
+      - "OpenAIDatabase/scripts/memory_atlas_cli/raw_ledger.py"
+      - "OpenAIDatabase/scripts/raw_archive_manifest.py"
+      - "OpenAIDatabase/scripts/sync_chatgpt_memory_data.py"
+      - "OpenAIDatabase/scripts/sync_codex_memory_data.py"
+      - "OpenAIDatabase/scripts/sync_future_agent_data.py"
+    config_refs:
+      - "OpenAIDatabase/config/data_sources/raw_ledger.json"
+      - "OpenAIDatabase/config/data_sources/source_registry.json"
+      - "OpenAIDatabase/config/memory_atlas_validator_profiles.json"
+    source_refs:
+      - "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s06_p2_t1_raw_ledger_review.md"
+    owner_actions:
+      - "同步失败若报告 raw_ledger_violation，先核对源 stat、现有 raw 与 ledger；不得改写 ledger 或删除 raw 来绕过，确认后重试只追加登记。"
+    test_refs:
+      - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_raw_ledger -q"
+      - "python3 -B OpenAIDatabase/scripts/raw_archive_manifest.py audit --database-dir OpenAIDatabase"
+      - "npm run validate:sync --prefix OpenAIDatabase/apps/memory-atlas"
+    evidence_refs:
+      - "EVID-MA-V121-S06-P2-T1-CONTRACT"
+      - "EVID-MA-V121-S06-P2-T1-TEST"
 models:
   -
     model_id: "MOD-001"
@@ -4907,4 +4933,14 @@ evidence_refs:
     evidence_id: "EVID-MA-V121-S06-P1-T3-TEST"
     kind: "test"
     ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s06_p1_t3_credential_exclusion_review.md"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S06-P2-T1-CONTRACT"
+    kind: "config"
+    ref: "OpenAIDatabase/config/data_sources/raw_ledger.json"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S06-P2-T1-TEST"
+    kind: "test"
+    ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s06_p2_t1_raw_ledger_review.md"
     fact_level: "EXTRACTED"

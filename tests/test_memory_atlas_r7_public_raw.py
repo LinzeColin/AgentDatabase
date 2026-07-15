@@ -56,6 +56,13 @@ def run_json(command: list[str], *, expect_success: bool = True) -> tuple[dict, 
     return json.loads(result.stdout[start:]), result
 
 
+def install_raw_ledger_contract(database: Path) -> None:
+    source = REPO_ROOT / "config/data_sources/raw_ledger.json"
+    target = database / "config/data_sources/raw_ledger.json"
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_bytes(source.read_bytes())
+
+
 def write_jsonl(path: Path, rows: list[dict]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(
@@ -373,6 +380,8 @@ class PublicRawConnectorTest(unittest.TestCase):
             root = Path(tmpdir)
             export_path = root / "official-export.json"
             write_chatgpt_export(export_path)
+            source_bytes_before = export_path.read_bytes()
+            source_stat_before = export_path.stat()
 
             strict, _ = run_json(
                 [
@@ -387,6 +396,7 @@ class PublicRawConnectorTest(unittest.TestCase):
             )
             self.assertEqual(strict["reason"], "credential_is_not_memory")
             self.assertFalse((root / "data/public_raw/chatgpt").exists())
+            install_raw_ledger_contract(root)
 
             result, _ = run_json(
                 [
@@ -420,6 +430,12 @@ class PublicRawConnectorTest(unittest.TestCase):
             self.assertEqual(result["processed_manifest"], "data/processed/conversations/conversation_manifest.jsonl")
             self.assertTrue(result["redact_for_public_backup"])
             self.assertGreater(sum(result["redaction_counts"].values()), 0)
+            self.assertTrue(result["source_stat_verified"])
+            self.assertEqual(result["raw_ledger"]["status"], "PASS")
+            self.assertEqual(result["raw_ledger"]["ledger_appended_count"], 1)
+            self.assertEqual(export_path.read_bytes(), source_bytes_before)
+            self.assertEqual(export_path.stat().st_size, source_stat_before.st_size)
+            self.assertEqual(export_path.stat().st_mtime_ns, source_stat_before.st_mtime_ns)
 
             source_absolute = str(export_path.resolve())
             public_outputs = "\n".join(
@@ -458,7 +474,10 @@ class PublicRawConnectorTest(unittest.TestCase):
             root = Path(tmpdir)
             database = root / "db"
             codex_home = root / ".codex"
-            _source, source_rows = write_codex_session(codex_home)
+            install_raw_ledger_contract(database)
+            source, source_rows = write_codex_session(codex_home)
+            source_bytes_before = source.read_bytes()
+            source_stat_before = source.stat()
 
             result = module.sync_codex_data(
                 database,
@@ -480,6 +499,13 @@ class PublicRawConnectorTest(unittest.TestCase):
             self.assertEqual(export["source_relative_path"], "sessions/2026/07/11/session.jsonl")
             self.assertEqual(export["event_count"], len(source_rows))
             self.assertEqual(export["chunk_count"], len(export["chunk_refs"]))
+            self.assertTrue(export["source_stat_verified"])
+            self.assertEqual(result["raw_ledger"]["status"], "PASS")
+            self.assertGreaterEqual(result["raw_ledger"]["ledger_appended_count"], 2)
+            self.assertEqual(result["source_stat_verified_count"], 1)
+            self.assertEqual(source.read_bytes(), source_bytes_before)
+            self.assertEqual(source.stat().st_size, source_stat_before.st_size)
+            self.assertEqual(source.stat().st_mtime_ns, source_stat_before.st_mtime_ns)
 
             chunk_paths = [database / ref for ref in export["chunk_refs"]]
             self.assertTrue(all(path.is_file() for path in chunk_paths))
@@ -532,6 +558,9 @@ class PublicRawConnectorTest(unittest.TestCase):
                 f"Contact reviewer@example.com. {credential_fixture()}\n",
                 encoding="utf-8",
             )
+            source_bytes_before = report.read_bytes()
+            source_stat_before = report.stat()
+            install_raw_ledger_contract(root)
             result, _ = run_json(
                 [
                     sys.executable,
@@ -561,6 +590,12 @@ class PublicRawConnectorTest(unittest.TestCase):
             self.assertIn("[REDACTED_LOCAL_PATH]", payload_text)
             self.assertNotIn(str(report.resolve()), payload_text)
             self.assertLessEqual(raw_path.stat().st_size, MAX_PUBLIC_RAW_FILE_BYTES)
+            self.assertTrue(result["source_stat_verified"])
+            self.assertEqual(result["raw_ledger"]["status"], "PASS")
+            self.assertEqual(result["raw_ledger"]["ledger_appended_count"], 1)
+            self.assertEqual(report.read_bytes(), source_bytes_before)
+            self.assertEqual(report.stat().st_size, source_stat_before.st_size)
+            self.assertEqual(report.stat().st_mtime_ns, source_stat_before.st_mtime_ns)
             sync_log_path = next((root / "data/run_logs/sync_runs").glob("*.jsonl"))
             sync_log = json.loads(sync_log_path.read_text(encoding="utf-8").strip())
             self.assertTrue(

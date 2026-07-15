@@ -13,6 +13,11 @@ from memory_atlas_cli.credential_exclusion import (
     POLICY_ID,
     load_credential_exclusion_contract,
 )
+from memory_atlas_cli.raw_ledger import (
+    RAW_LEDGER_CONTRACT_PATH,
+    RawLedgerError,
+    load_raw_ledger_contract,
+)
 
 
 REGISTRY_PATH = Path("config/data_sources/source_registry.json")
@@ -299,6 +304,7 @@ def validate_source_registry(payload: Any, database_dir: Path) -> dict[str, Any]
         "repository_relative_paths",
         "public_raw_layout_ref",
         "credential_exclusion_ref",
+        "raw_ledger_ref",
         "push_defaults",
     }
     if set(contract) != expected_contract_keys:
@@ -332,6 +338,17 @@ def validate_source_registry(payload: Any, database_dir: Path) -> dict[str, Any]
         load_credential_exclusion_contract(database_dir, database_dir / credential_ref)
     except CredentialExclusionError as exc:
         raise SourceRegistryError("sync_contract credential exclusion contract is invalid") from exc
+    raw_ledger_ref = _repo_relative_path(
+        contract.get("raw_ledger_ref"),
+        "sync_contract.raw_ledger_ref",
+        ("config/data_sources/",),
+    )
+    if raw_ledger_ref != RAW_LEDGER_CONTRACT_PATH.as_posix():
+        raise SourceRegistryError("sync_contract.raw_ledger_ref must name the canonical contract")
+    try:
+        load_raw_ledger_contract(database_dir, database_dir / raw_ledger_ref)
+    except RawLedgerError as exc:
+        raise SourceRegistryError("sync_contract raw-ledger contract is invalid") from exc
     if contract.get("push_defaults") != PUSH_DEFAULTS:
         raise SourceRegistryError("sync_contract.push_defaults drifted from the delivery boundary")
 
