@@ -32,6 +32,7 @@ from memory_atlas_cli.raw_ledger import (
 
 REGISTRY_PATH = Path("config/data_sources/source_registry.json")
 PUBLIC_RAW_LAYOUT_PATH = Path("config/data_sources/public_raw_layout.json")
+CODEX_DISCOVERY_CONTRACT_PATH = Path("config/data_sources/codex_source_discovery.json")
 REGISTRY_SCHEMA_VERSION = "memory_atlas_data_source_registry.v1"
 SYNC_CONTRACT_VERSION = "memory_atlas.source_sync_contract.v1_2_1_s06_p1_t1"
 TASK_ID = "S06-P1-T1"
@@ -133,10 +134,29 @@ def _string_list(value: Any, field: str) -> list[str]:
     return result
 
 
-def _validate_discovery(value: Any, field: str, allowed_arguments: set[str]) -> None:
+def _validate_discovery(
+    value: Any,
+    field: str,
+    allowed_arguments: set[str],
+    *,
+    contract_ref: Path | None = None,
+) -> None:
     discovery = _mapping(value, field)
+    expected_keys = {"strategy", "candidates"}
+    if contract_ref is not None:
+        expected_keys.add("contract_ref")
+    if set(discovery) != expected_keys:
+        raise SourceRegistryError(f"{field} keys do not match the source contract")
     if discovery.get("strategy") != "ordered_candidates":
         raise SourceRegistryError(f"{field}.strategy must be ordered_candidates")
+    if contract_ref is not None:
+        discovered_ref = _repo_relative_path(
+            discovery.get("contract_ref"),
+            f"{field}.contract_ref",
+            ("config/data_sources/",),
+        )
+        if discovered_ref != contract_ref.as_posix():
+            raise SourceRegistryError(f"{field}.contract_ref must name the canonical contract")
     candidates = discovery.get("candidates")
     if not isinstance(candidates, list) or not candidates:
         raise SourceRegistryError(f"{field}.candidates must be a non-empty list")
@@ -200,6 +220,7 @@ def _validate_source(source: dict[str, Any], database_dir: Path, push_defaults: 
         source.get("discovery"),
         f"{source_id}.discovery",
         _DISCOVERY_ARGUMENTS[source_type],
+        contract_ref=CODEX_DISCOVERY_CONTRACT_PATH if source_type == "codex_local" else None,
     )
     for index, raw_path in enumerate(_string_list(source.get("raw_paths"), f"{source_id}.raw_paths")):
         _repo_relative_path(raw_path, f"{source_id}.raw_paths[{index}]")

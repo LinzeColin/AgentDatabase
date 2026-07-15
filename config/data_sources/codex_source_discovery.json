@@ -1,0 +1,132 @@
+{
+  "schema_version": "memory_atlas.codex_source_discovery.v1_2_1_s07_p1_t1",
+  "task_id": "S07-P1-T1",
+  "acceptance_id": "ACC-MA-V121-S07-P1-T1",
+  "source_id": "codex",
+  "source_registry_ref": "config/data_sources/source_registry.json",
+  "credential_exclusion_ref": "config/data_sources/credential_exclusion.json",
+  "discovery": {
+    "strategy": "source_registry_ordered_candidates",
+    "explicit_candidate_failure": "fail_closed",
+    "default_missing_result": "not_found",
+    "root_symlink_policy": "reject",
+    "eligible_path_symlink_policy": "reject",
+    "serialized_root": "[CODEX_HOME]"
+  },
+  "eligible_sources": [
+    {
+      "source_kind": "session_index",
+      "path_kind": "file",
+      "paths": [
+        "session_index.jsonl"
+      ],
+      "suffixes": [],
+      "recursive": false
+    },
+    {
+      "source_kind": "active_sessions",
+      "path_kind": "tree",
+      "paths": [
+        "sessions"
+      ],
+      "suffixes": [
+        ".jsonl"
+      ],
+      "recursive": true
+    },
+    {
+      "source_kind": "archived_sessions",
+      "path_kind": "tree",
+      "paths": [
+        "archived_sessions"
+      ],
+      "suffixes": [
+        ".jsonl"
+      ],
+      "recursive": true
+    },
+    {
+      "source_kind": "history",
+      "path_kind": "file",
+      "paths": [
+        "history.jsonl",
+        "transcription-history.jsonl"
+      ],
+      "suffixes": [],
+      "recursive": false
+    },
+    {
+      "source_kind": "jsonl_logs",
+      "path_kind": "tree",
+      "paths": [
+        "log",
+        "logs"
+      ],
+      "suffixes": [
+        ".jsonl"
+      ],
+      "recursive": true
+    },
+    {
+      "source_kind": "sqlite_logs",
+      "path_kind": "file",
+      "paths": [
+        "logs_2.sqlite",
+        "sqlite/logs_2.sqlite"
+      ],
+      "suffixes": [],
+      "recursive": false
+    }
+  ],
+  "credential_exclusions": {
+    "policy": "credentials_not_transcript",
+    "allowlist_only": true,
+    "blocked_name_patterns": [
+      ".env",
+      ".env.*",
+      ".netrc",
+      ".npmrc",
+      ".pypirc",
+      "auth.json",
+      "config.toml",
+      "config.toml.*",
+      "installation_id",
+      "cookies",
+      "cookies.*",
+      "login data",
+      "login data.*",
+      "web data",
+      "web data.*",
+      "credentials",
+      "credentials.*",
+      "id_rsa",
+      "id_ed25519",
+      "*.pem",
+      "*.key",
+      "*.p12",
+      "*.pfx"
+    ],
+    "blocked_path_segments": [
+      "private_keys",
+      "mcp-oauth-locks",
+      "browser"
+    ],
+    "source_content_read": false,
+    "credential_value_echo": false
+  },
+  "safety": {
+    "metadata_only": true,
+    "source_content_read": false,
+    "source_mutation": false,
+    "network_access": false,
+    "remote_git_write": false,
+    "local_absolute_path_in_output": false
+  },
+  "phase_boundary": {
+    "does_not_archive_raw": true,
+    "does_not_write_sync_state": true,
+    "does_not_build_derived": true,
+    "does_not_commit_or_push": true,
+    "next_task": "S07-P1-T2"
+  }
+}

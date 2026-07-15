@@ -107,7 +107,17 @@
       "status": "active_local",
       "discovery": {
         "strategy": "ordered_candidates",
+        "contract_ref": "config/data_sources/codex_source_discovery.json",
         "candidates": [
+          {
+            "kind": "operator_argument",
+            "value": "--codex-home"
+          },
+          {
+            "kind": "environment_variable",
+            "value": "MEMORY_ATLAS_CODEX_HOME",
+            "target_argument": "--codex-home"
+          },
           {
             "kind": "environment_variable",
             "value": "CODEX_HOME",
@@ -123,8 +133,13 @@
       "raw_paths": [
         "session_index.jsonl",
         "sessions/**/*.jsonl",
+        "archived_sessions/**/*.jsonl",
         "history.jsonl",
-        "log/**/*.jsonl"
+        "transcription-history.jsonl",
+        "log/**/*.jsonl",
+        "logs/**/*.jsonl",
+        "logs_2.sqlite",
+        "sqlite/logs_2.sqlite"
       ],
       "credential_exclusions": {
         "policy": "credentials_not_transcript",

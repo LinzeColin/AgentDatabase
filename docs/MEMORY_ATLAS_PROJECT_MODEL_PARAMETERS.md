@@ -1,3 +1,45 @@
+## 170. Memory Atlas v1.2.1 S07-P1-T1 Codex Source Discovery Parameters
+
+状态：`COMPLETE_LOCAL_ONLY`。本 Task 不新增评分模型或业务公式；它为现有
+`MOD-009` data-source registry 增加一个确定性、本机 metadata-only discovery policy。
+
+参数：
+
+- `candidate_order = --codex-home; MEMORY_ATLAS_CODEX_HOME; CODEX_HOME; ~/.codex`
+- `explicit_candidate_failure = fail_closed`
+- `default_missing_result = not_found`
+- `serialized_root = [CODEX_HOME]`
+- `root_symlink_policy = reject`
+- `eligible_path_symlink_policy = reject`
+- `eligible_source_kinds = session_index; active_sessions; archived_sessions; history; jsonl_logs; sqlite_logs`
+- `eligible_suffix_for_trees = .jsonl case-insensitive`
+- `credential_policy = credentials_not_transcript; allowlist_only=true`
+- `blocked_name_rule_count = 23`
+- `blocked_segment_rule_count = 3`
+- `blocked_segments = private_keys; mcp-oauth-locks; browser`
+- `source_content_read = false`
+- `source_mutation = false`
+- `network_access = false`
+- `remote_git_write = false`
+- `archive_write = false`
+- `sync_state_write = false`
+- `derived_build = false`
+- `output_fields = source kind counts; eligible file count; total bytes; metadata SHA-256; exclusion rule counts`
+
+根路径选择公式是有序 first-valid：操作员参数优先，其次两个环境变量，最后才是当前
+home 下 `.codex`。任一显式候选出现 missing、relative、non-directory、symlink 或 stat/
+resolve error 时立即失败，不尝试较低优先级候选。文件选择公式是 exact allowlist 加
+递归 `.jsonl` tree；任何 eligible symlink、合同漂移、重复 inode identity 或扫描竞态都
+fail closed。metadata digest 输入为 source kind、repo-independent relative path、device、
+inode、mode、size、mtime 与 ctime；它用于同一来源点时证据，不用于跨机器内容等价。
+
+`2026-07-15T12:15:15Z` 本机非规范点时观测为 `eligible_files=433`、
+`nonempty_source_kinds=5`、`eligible_bytes=4265648215`、`excluded_entries=7`、
+`metadata_sha256=90bd0f6124a78d03ffcb57be0c72ae81b48c3b891015fbbf824034d1d5afb474`。
+这些数值会随 Codex 正常运行变化，不得写成验收阈值。内容级 credential 扫描、
+append-only archive、cursor、dedupe 和 resume 属于后续 Task；本 discovery 只保证已知
+account-control 文件不进入候选集合。
+
 ## 169. Memory Atlas v1.2 Remediation R7 Data And Recovery Parameters
 
 状态：`R7_COMPLETE_LOCAL_ONLY`；release 仍为 `FAIL_REMEDIATION_REQUIRED`。

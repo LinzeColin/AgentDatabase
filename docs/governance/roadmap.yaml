@@ -8,7 +8,7 @@ next_gate_id: "ACC.OpenAIDatabase.PAM1.0019"
 total_estimated_hours: 255
 completed_estimated_hours: 241
 taskpack_progress:
-  completed_tasks: 45
+  completed_tasks: 46
   total_tasks: 149
   delivery_state: "local_only_not_released"
 stages:
@@ -2152,9 +2152,9 @@ stages:
   - stage_id: "MA-V121-S07"
     name: "Codex 原始资料自动同步、分析与 main 直推"
     person_goal: "把本机 Codex sessions/logs/history 自动只读归档为公开 raw、增量派生到 Memory Atlas，并在验证通过后直接推送 GitHub main。"
-    status: "planned"
+    status: "in_progress"
     estimated_hours: 9
-    estimated_pct: 0
+    estimated_pct: 11
     stop_conditions:
       - "源 Codex 文件发生字节、mtime 或 size 改变"
       - "发现认证资料或 secret 进入 staged diff"
@@ -2163,47 +2163,71 @@ stages:
       - "本地完成整个 v1.2.1 Task Pack 前发生 push、deploy、branch 或 PR"
     stop_gate:
       gate_id: "ACC-MA-V121-S07"
-      status: "planned"
+      status: "in_progress"
       pass_conditions:
         - "真实 Codex raw 资料被自动只读归档，不再只有脱敏摘要"
         - "增量同步幂等、可中断恢复并可重建派生数据"
         - "验证通过后自动 commit 并直接 push main，无 branch、PR 或 force"
         - "至少完成一次真实本机同步、远端验证和恢复演练"
-      evidence_refs: []
+      evidence_refs:
+        - "EVID-MA-V121-S07-P1-T1-TEST"
+        - "EVID-MA-V121-S07-P1-T1-REVIEW"
     phases:
       - phase_id: "MA-V121-S07-P1"
         name: "本机来源发现与 raw 只读导出"
         objective: "发现可移植 Codex 来源并以只读、append-only 方式归档原始资料。"
-        status: "planned"
+        status: "in_progress"
         estimated_hours: 3
-        estimated_pct: 0
+        estimated_pct: 33
         stop_conditions:
           - "发现逻辑硬编码单一用户绝对路径"
           - "认证、secret 或浏览器 credential store 被纳入候选"
           - "同步修改、移动或删除源 Codex 文件"
         stop_gate:
           gate_id: "ACC-MA-V121-S07-P1"
-          status: "planned"
+          status: "in_progress"
           pass_conditions:
             - "来源发现可移植且显式排除认证资料"
             - "raw 归档 append-only、源 stat/hash 不变、重复运行无副本"
-          evidence_refs: []
+          evidence_refs:
+            - "EVID-MA-V121-S07-P1-T1-TEST"
+            - "EVID-MA-V121-S07-P1-T1-REVIEW"
         tasks:
           - task_id: "S07-P1-T1"
             name: "实现 Codex source discovery"
             objective: "从现有配置和实际环境发现 Codex 数据路径，不硬编码单一用户绝对路径。"
-            status: "planned"
+            status: "completed"
             estimated_hours: 1
-            estimated_pct: 0
+            estimated_pct: 100
             dependencies:
               - "S06-P3-T3"
             acceptance_ids:
               - "ACC-MA-V121-S07-P1-T1"
-            test_commands: []
-            evidence_refs: []
+            acceptance:
+              - acceptance_id: "ACC-MA-V121-S07-P1-T1"
+                description: "Codex 根目录按 operator、MEMORY_ATLAS_CODEX_HOME、CODEX_HOME、home-relative .codex 的固定顺序可移植发现；只枚举 session/history/log allowlist，认证、secret 与 browser credential 路径显式排除。运行只读取 stat 元数据，输出不含绝对路径或正文，不写 raw、state、derived 或 remote。"
+                evidence_refs:
+                  - "EVID-MA-V121-S07-P1-T1-TEST"
+                  - "EVID-MA-V121-S07-P1-T1-REVIEW"
+            test_commands:
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_codex_source_discovery -q"
+              - "python3 -B -m unittest discover -s OpenAIDatabase/tests -q"
+              - "python3 -B OpenAIDatabase/scripts/atlasctl.py audit --check codex-source-discovery --database-dir OpenAIDatabase"
+              - "npm run validate:fast --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run validate:sync --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run validate:ui --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run validate:release --prefix OpenAIDatabase/apps/memory-atlas"
+            test_results:
+              - "专用 9/9 覆盖候选优先级、显式 invalid 不回退、default not_found、六类 allowlist、credential 排除、metadata-only 零正文读取、source size/mtime/SHA-256 不变、root/eligible symlink 拒绝和 path-free CLI fail closed。"
+              - "真实本机 metadata-only audit PASS：2026-07-15T12:15:15Z 的非规范 observation 使用 metadata digest 90bd0f6124a78d03ffcb57be0c72ae81b48c3b891015fbbf824034d1d5afb474，发现 433 eligible files、5 个非空 source kinds、4265648215 bytes，识别 auth/config/installation id/private keys/OAuth locks/browser 等 7 个 excluded entries；序列化仅使用 [CODEX_HOME]。这些易变计数不是验收常量。"
+              - "全量 Python 456/456、fast 6/6、sync 7/7、ui 14/14、release 1/1 PASS；所有 profile 报告 raw_mutation=false、remote_push=false，release final audit 完成 tracked-only recovery。"
+            evidence_refs:
+              - "EVID-MA-V121-S07-P1-T1-TEST"
+              - "EVID-MA-V121-S07-P1-T1-REVIEW"
             risks:
               - "认证或 secret 文件未被发现边界排除"
             rollback: "git revert 本 Task 本地 commit；不得删除已存在 raw。"
+            current_result: "complete_local_only_46_of_149_pending_s07_p1_t2_no_remote_upload"
           - task_id: "S07-P1-T2"
             name: "实现 Codex public raw archive"
             objective: "将 sessions/logs/history 以原始格式或可恢复原始包 append-only 归档。"

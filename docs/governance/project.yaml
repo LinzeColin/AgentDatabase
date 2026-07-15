@@ -899,6 +899,33 @@ features:
     evidence_refs:
       - "EVID-MA-V121-S06-P3-T3-TEST"
       - "EVID-MA-V121-S06-P3-T3-REVIEW"
+  - feature_id: "FEAT-MA-V121-S07-P1-T1"
+    name: "Memory Atlas 可移植 Codex source discovery"
+    description: "v1.2.1 Task Pack 当前完成 46/149；source registry 按显式 --codex-home、MEMORY_ATLAS_CODEX_HOME、CODEX_HOME、home-relative .codex 的固定顺序发现根目录，显式无效配置 fail closed 且不回退。只允许 session index、active/archived session JSONL、history/transcription history、JSONL logs 和两个 canonical logs_2.sqlite 路径；auth/config/installation id、private keys、OAuth locks、browser credential stores 与常见 credential 文件名显式排除。发现过程只读 stat 元数据，输出只含 [CODEX_HOME]、计数、bytes 与 metadata digest，不含绝对路径或正文；不归档 raw、不写 cursor/derived、不访问 Git remote。非规范本机 observation 绑定 2026-07-15T12:15:15Z 与 metadata digest 90bd0f6124a78d03ffcb57be0c72ae81b48c3b891015fbbf824034d1d5afb474：433 files、5 source kinds、4265648215 bytes、7 个排除项；这些易变计数不是验收常量。"
+    status: "active"
+    fact_level: "EXTRACTED"
+    code_refs:
+      - "OpenAIDatabase/scripts/memory_atlas_cli/codex_source_discovery.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/parser.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/validate.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/source_registry.py"
+    config_refs:
+      - "OpenAIDatabase/config/data_sources/codex_source_discovery.json"
+      - "OpenAIDatabase/config/data_sources/source_registry.json"
+      - "OpenAIDatabase/config/data_sources/credential_exclusion.json"
+      - "OpenAIDatabase/config/memory_atlas_validator_profiles.json"
+    source_refs:
+      - "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s07_p1_t1_codex_source_discovery_review.md"
+    owner_actions:
+      - "使用 atlasctl audit --check codex-source-discovery 做 metadata-only 发现；仅在明确覆盖时传 --codex-home。任何显式路径无效、根或 eligible path 为 symlink、合同漂移、无 eligible source 时停止，不绕过到其他候选。S07-P1-T2 才能实现 archive，本 Task 不得归档或写 sync state。"
+    test_refs:
+      - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_codex_source_discovery -q"
+      - "python3 -B OpenAIDatabase/scripts/atlasctl.py audit --check codex-source-discovery --database-dir OpenAIDatabase"
+      - "npm run validate:sync --prefix OpenAIDatabase/apps/memory-atlas"
+      - "npm run validate:release --prefix OpenAIDatabase/apps/memory-atlas"
+    evidence_refs:
+      - "EVID-MA-V121-S07-P1-T1-TEST"
+      - "EVID-MA-V121-S07-P1-T1-REVIEW"
 models:
   -
     model_id: "MOD-001"
@@ -5124,4 +5151,14 @@ evidence_refs:
     evidence_id: "EVID-MA-V121-S06-P3-T3-REVIEW"
     kind: "review"
     ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s06_p3_t3_raw_contract_fixtures_review.md"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S07-P1-T1-TEST"
+    kind: "test"
+    ref: "OpenAIDatabase/tests/test_memory_atlas_codex_source_discovery.py"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S07-P1-T1-REVIEW"
+    kind: "review"
+    ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s07_p1_t1_codex_source_discovery_review.md"
     fact_level: "EXTRACTED"

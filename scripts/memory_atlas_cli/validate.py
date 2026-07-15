@@ -23,6 +23,7 @@ from .constants import (
     FINAL_AUDIT_TASK_ID,
     ROOT,
 )
+from .codex_source_discovery import run_codex_source_discovery_audit
 from .public_raw_layout import run_public_raw_layout_audit
 from .raw_isolation import run_raw_isolation_audit
 from .push_size_guard import run_push_size_audit
@@ -1706,6 +1707,8 @@ def run_chinese_ux_audit(args: argparse.Namespace) -> int:
 def run_audit(args: argparse.Namespace) -> int:
     if not args.check:
         return run_final_audit(args)
+    if args.check == "codex-source-discovery":
+        return run_codex_source_discovery_audit(args)
     if args.check == "chinese-ux":
         return run_chinese_ux_audit(args)
     if args.check == "public-raw-layout":
@@ -1737,7 +1740,7 @@ def run_audit(args: argparse.Namespace) -> int:
             "status": "NOT_IMPLEMENTED",
             "command": "audit",
             "check": args.check,
-            "reason": "Unknown audit check. Supported checks: insight-evidence, formulas, visual-roi, formula-what-if, agent-collaboration, agent-authorization, stage-flight, latent-safety, self-iteration-safety, decision-debt-safety, chinese-ux, public-raw-layout, raw-isolation, push-size.",
+            "reason": "Unknown audit check. Supported checks: insight-evidence, formulas, visual-roi, formula-what-if, agent-collaboration, agent-authorization, stage-flight, latent-safety, self-iteration-safety, decision-debt-safety, chinese-ux, public-raw-layout, raw-isolation, push-size, codex-source-discovery.",
         }, ensure_ascii=False, indent=2, sort_keys=True))
         return 2
 
@@ -1847,5 +1850,6 @@ __all__ = (
     "run_self_iteration_safety_audit",
     "run_decision_debt_safety_audit",
     "run_chinese_ux_audit",
+    "run_codex_source_discovery_audit",
     "run_audit",
 )

@@ -1,5 +1,31 @@
 # Memory Atlas Delivery Record
 
+## v1.2.1 S07-P1-T1 Codex Source Discovery
+
+状态：`COMPLETE_LOCAL_ONLY`；Task Pack 进度 `46/149`，下一且唯一 eligible Task 为
+`S07-P1-T2`。本 Task 未发布、未部署、未创建 branch/PR，也未执行 fetch/push。
+
+本 Task 新增 canonical Codex discovery contract 与 `atlasctl audit --check
+codex-source-discovery`。发现顺序固定为显式 `--codex-home`、
+`MEMORY_ATLAS_CODEX_HOME`、`CODEX_HOME`、home-relative `.codex`；显式候选无效时
+fail closed，不静默回退。allowlist 只包含 session index、active/archived session
+JSONL、history/transcription history、JSONL logs 和两个 canonical `logs_2.sqlite`
+位置。认证配置、installation id、private keys、OAuth locks、browser credential stores
+及常见 credential 文件名显式排除。
+
+实现只调用目录枚举与 `lstat/stat`，不读取来源正文；序列化结果只包含
+`[CODEX_HOME]`、分类计数、bytes 和 metadata SHA-256，不包含本机绝对路径。真实本机
+`2026-07-15T12:15:15Z` 点时 audit 发现 433 个 eligible files、5 个非空 source
+kinds、4,265,648,215 bytes，并识别 7 个排除项；metadata digest 为
+`90bd0f6124a78d03ffcb57be0c72ae81b48c3b891015fbbf824034d1d5afb474`。以上是易变、
+非规范的本机发现证据，不是跨机器固定阈值或验收常量。
+
+验证完成：专用 `9/9`、全量 Python `456/456`、fast `6/6`、sync `7/7`、ui
+`14/14`、release `1/1`，且 release 完成当前提交的 tracked-only recovery。合成 fixture
+同时证明来源文件 size、mtime 与 SHA-256 不变、source read API 未被调用、symlink
+fail closed、CLI 错误不泄露路径或 traceback。S07-P1-T2 才能实现 append-only raw
+archive；本 Task 不归档 raw、不写 cursor/derived，不改变 Git remote 或发布状态。
+
 ## Current Status Supersession: v1.2 Remediation R8
 
 当前状态：`R8_ACCEPTANCE_AND_LIVE_DELIVERY_VERIFIED_PENDING_SINGLE_FINAL_PUSH`。

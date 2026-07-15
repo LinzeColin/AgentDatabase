@@ -1,5 +1,34 @@
 # Memory Atlas v1.2 Remediation Handoff
 
+> **Current v1.2.1 note (2026-07-15 22:19 +10:00):** The v1.2.1 Task Pack is
+> 46/149 complete locally. This run completed only `S07-P1-T1`; S07 is 1/9,
+> S07-P1 is 1/3, and `S07-P1-T2` is the next/only eligible Task. The canonical
+> discovery order is explicit `--codex-home`, `MEMORY_ATLAS_CODEX_HOME`,
+> `CODEX_HOME`, then home-relative `.codex`; invalid explicit candidates fail
+> closed. The allowlist contains session index, active/archived session JSONL,
+> history/transcription history, JSONL logs and the two canonical `logs_2.sqlite`
+> paths. Auth/config/installation id, private keys, OAuth locks, browser credential
+> stores and common credential names are excluded. Discovery reads metadata only,
+> emits `[CODEX_HOME]` plus counts/bytes/digest, and performs no archive, cursor,
+> derived, network or remote Git write. The non-normative local observation at
+> `2026-07-15T12:15:15Z` was 433 files, 5 non-empty source kinds, 4,265,648,215
+> bytes, 7 excluded entries and metadata digest
+> `90bd0f6124a78d03ffcb57be0c72ae81b48c3b891015fbbf824034d1d5afb474`;
+> these values will drift with normal Codex activity and are not acceptance
+> thresholds. Dedicated 9/9, focused 54/54, full Python 456/456, fast 6/6, sync
+> 7/7, ui 14/14, release 1/1, privacy and Python 3.13/3.12 deterministic render
+> passed. Engineering/security and product/scope reviews both closed at 0 Critical /
+> 0 Important / 0 Minor after all findings were remediated. The supplemental root
+> governance validator is not claimed as PASS because this sparse checkout omits
+> its root templates and other project directories; no sparse settings were changed
+> to manufacture a result. Exact final staging is re-audited immediately before the
+> local commit rather than copied into this self-referential note. Four unrelated
+> KMFA changes remain unstaged. No source body, public raw, archive, state, derived
+> data, fetch, push, deploy, branch/PR, merge/rebase or cache cleanup changed. Do
+> not start more than `S07-P1-T2` next, and do not upload before all 149 Tasks plus
+> final review/remediation are complete.
+>
+
 > **Current v1.2.1 note (2026-07-15 20:32 +10:00):** The v1.2.1 Task Pack is
 > 45/149 complete locally. This run completed only `S06-P3-T3`, closed
 > `S06-P3` at 3/3 and S06 at 9/9, and left `S07-P1-T1` as the next/only eligible
