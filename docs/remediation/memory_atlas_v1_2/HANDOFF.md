@@ -31,13 +31,18 @@
 > A complete 180.39-second privacy scan covers 515 public raw files and reports
 > zero high-risk secrets, credential-like paths, tracked private raw or value
 > echo.
-> proof uses task-owned `HOME`, `CODEX_HOME`, temp and XDG paths, loads no user
+> The proof uses task-owned `HOME`, `CODEX_HOME`, temp and XDG paths, loads no user
 > site/PYTHONPATH, requires no live Codex home/cache or network, leaves source
 > archive identity and canonical raw/derived unchanged, and empties both run
-> workspaces. No fetch, push, deploy, branch/PR, merge/rebase, scheduler install
-> or general cleanup occurred. Real GitHub upload remains prohibited until all
-> 149 Tasks plus final review/remediation close. Do not start `S08-P1-T1` in
-> this run.
+> workspaces. No task-owned command invoked fetch, push, deploy, branch/PR,
+> merge/rebase, scheduler install or general cleanup. A separate concurrent
+> canonical-worktree flow did run `fetch --prune origin` at 01:32 and
+> `pull --rebase --autostash origin main` at 01:33, rebasing unrelated S04
+> commits onto fetched `origin/main=8b6b301d3` and leaving that shared worktree
+> detached at `216bc36ac`. It did not move this Task's `main` ref or upload;
+> S07-P3-T3 therefore closed in an isolated clean main worktree. Real GitHub
+> upload remains prohibited until all 149 Tasks plus final review/remediation
+> close. Do not start `S08-P1-T1` in this run.
 >
 > **Current v1.2.1 note (2026-07-17 00:39 +10:00):** The v1.2.1 Task Pack is
 > 53/149 complete locally. This run completes only `S07-P3-T2`; S07 is 8/9,

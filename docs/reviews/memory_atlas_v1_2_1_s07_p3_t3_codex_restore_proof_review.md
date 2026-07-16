@@ -72,6 +72,7 @@ python3 -I -B OpenAIDatabase/scripts/audit_memory_atlas_codex_restore_proof.py \
 - Human-plane PASS：7 个浅层中文入口、3 个 owner 入口、162 个机器文件、35 个 active configs、125 个 evidence payloads；test-value PASS。Script migration validation 无错误，scanned scripts 74、exact duplicates 0、mapped scoped scripts 213、retained representatives 18。
 - Project governance required validation 为 0 error/0 warning，renderer 为 0 drift/0 reference issue，48 条 governance events 全部为合法 JSONL。带全仓 semantic drift 的组合命令仍因本 Task 外既有 root/KMFA 62 条旧 manifest/private-runtime reference 错误返回非零，但其 OpenAIDatabase section 为 `errors: 0`；本 Task 未修改或掩盖这些外部错误。
 - 完整 privacy scan PASS（180.39 秒）：515 个 public raw files、35 个 large public raw files 全部纳入检查，high-risk secret、credential-like path、tracked private raw 和 credential echo 均为 0。
+- 共享仓库边界复核发现并行外部执行流在 01:32 运行 `fetch --prune origin`、01:33 运行 `pull --rebase --autostash origin main`，把 unrelated S04 commits 留在 canonical detached HEAD `216bc36ac`；它没有移动本 Task 的 `main` 引用、没有 push。本 Task 自身未调用 fetch/push/merge/rebase，并在隔离 clean main worktree 完成。该并发事件已显式记录，不能用“全仓无 fetch/rebase”掩盖。
 
 ## 回滚和边界
 
