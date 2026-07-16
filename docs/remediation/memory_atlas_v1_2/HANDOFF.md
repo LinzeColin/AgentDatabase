@@ -1,6 +1,6 @@
 # Memory Atlas v1.2 Remediation Handoff
 
-> **Current v1.2.1 note (2026-07-16 14:10 +10:00):** The v1.2.1 Task Pack is
+> **Current v1.2.1 note (2026-07-16 15:14 +10:00):** The v1.2.1 Task Pack is
 > 49/149 complete locally. This run completed only `S07-P2-T1`; S07 is 4/9,
 > S07-P2 is 1/3, and `S07-P2-T2` is the next/only eligible Task. The canonical
 > archive-derived builder consumes only raw-ledger registrations that pass the
@@ -15,7 +15,8 @@
 > `NO_CHANGES`, zero parsed archives and zero file writes. Git diff for raw,
 > public raw, raw manifest, ledger, Codex sync state and six legacy consumer files
 > is empty. Dedicated 9/9, Codex focused 68/68, pre-commit full Python 494/494,
-> final corrective full Python 495/495, fast 6/6,
+> fixture-corrective full Python 495/495, process-tree-corrective full Python
+> 496/496, fast 6/6,
 > sync 10/10 and ui 14/14 passed. The first release correctly failed because its
 > 900-second unit-test child budget was below the measured 879.438-second suite
 > runtime; the budget is now 1,800 seconds with 28/28 timeout regressions. The
@@ -35,8 +36,19 @@
 > files plus ignored-path sentinels, preserves production installer behavior, emits
 > captured diagnostics, and passes with the derived regression at 10/10; full Python
 > is 495/495 in 296.724 seconds. Two task-only failed-test temp directories were
-> removed to recover disk; no general cache cleanup occurred. A corrective local
-> commit and one complete exact-tree release still remain closeout work in this same Task. Unrelated
+> removed to recover disk; no general cache cleanup occurred. Fixture commit
+> `b56d59c1d` then completed unit/build, browser workflows, privacy, backup and exact
+> recovery but its 2,244.876-second exact-tree release failed closed only because
+> `rendered_chinese_ux` hung after writing all three screenshots and hit the
+> 300-second outer timeout; reconciliation was 54/58, raw mutation and remote push
+> were false. The timed-out parent left its Vite child on 4178; that exact task-owned
+> process was terminated and the identical gate passed standalone in 11.08 seconds.
+> Final-audit gates now use isolated process groups with complete timeout cleanup,
+> and Home validation has bounded Playwright action/viewport/shutdown operations plus
+> progress events. The corrected real gate passes in 15.28 seconds, focused R8/CLI
+> passes 15/15, consolidation 12/12, test-value and full Python 496/496 in 311.339
+> seconds pass. A corrective local commit and one complete exact-tree release still
+> remain closeout work in this same Task. Unrelated
 > KMFA and automation changes remain unstaged and untouched. No
 > Atlas snapshot, weekly report, sync-state, UI, fetch, push, deploy, branch/PR,
 > merge/rebase or cache cleanup changed. Do not start more than `S07-P2-T2` next,

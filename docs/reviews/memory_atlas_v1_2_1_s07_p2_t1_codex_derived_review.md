@@ -61,9 +61,9 @@ repeat completed in 10.328 seconds with `NO_CHANGES`, `parsed_archive_count=0` a
 - Validator profile tests: `18/18` PASS; test-value audit: PASS; raw-isolation
   tests: `8/8` PASS; script consolidation: `12/12` PASS; CLI modular tests:
   `7/7` PASS.
-- Pre-commit full Python suite: `494/494` PASS in 879.438 seconds. The final
-  corrective candidate passes `495/495` in 296.724 seconds after adding the
-  final-audit diagnostic regression and bounding the launcher test fixture.
+- Pre-commit full Python suite: `494/494` PASS in 879.438 seconds. The fixture
+  corrective candidate passed `495/495` in 296.724 seconds; the process-tree
+  corrective candidate passes `496/496` in 311.339 seconds.
 - `validate:fast`: `6/6` PASS in 66.061 seconds; `validate:sync`: `10/10`
   PASS in 297.596 seconds; `validate:ui`: `14/14` PASS in 742.800 seconds.
 - The first release candidate reached `56/58` but failed `S14-AC02` and
@@ -105,6 +105,25 @@ suite is `495/495`. Product installer behavior and its source-copy contract are
 unchanged. Another complete exact-tree release is required after the corrective
 commit.
 
+The fourth exact-tree attempt on fixture commit `b56d59c1d` ran for 2,244.876
+seconds and failed closed only at `rendered_chinese_ux` with return code 124;
+reconciliation therefore remained `54/58`. Raw mutation and remote push remained
+false, and the preceding unit, build, Chinese source audit, real browser workflow,
+privacy, backup and exact-commit recovery gates completed. The timed-out Home gate
+had already written all three expected screenshots within seven seconds, then hung
+until its 300-second outer budget and left its Vite child on port 4178. The identical
+gate passed standalone in 11.08 seconds, proving that the product assertions were
+not the failure.
+
+Final-audit gates now run in isolated process groups and terminate their complete
+descendant tree on timeout while retaining bounded stdout/stderr diagnostics. The
+Home browser gate adds 15-second Playwright action, 90-second per-viewport and
+10-second shutdown bounds plus started/finished viewport events. The corrected real
+three-viewport gate passes in 15.28 seconds and releases port 4178; the POSIX
+descendant-timeout regression and focused R8/CLI suite pass `15/15`. Script migration
+hash governance, consolidation `12/12`, test-value audit and full Python `496/496`
+also pass. Another exact-tree release remains required after the corrective commit.
+
 ## Independent Engineering And Security Review
 
 The review covers archive authorization, streamed package parsing, source and member
@@ -121,7 +140,8 @@ hashes. Review findings covering model-parameter/state binding, process locking,
 canonical credential/path rejection, symlink output boundaries, legacy-output scope
 and the final-audit timeout budget were fixed and regression-tested. Post-commit
 review additionally fixed the missing compact failed-gate diagnostic, tracked
-synthetic-credential representation and unbounded launcher test fixture. Final staged
+synthetic-credential representation, unbounded launcher test fixture, final-audit
+process-tree cleanup and Home browser internal timeout diagnostics. Final staged
 inspection also normalized the new validator-profile indentation without a semantic
 change. The final finding count after those fixes is
 `0 Critical / 0 Important / 0 Minor`.

@@ -860,7 +860,7 @@
       {
         "path": "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_home_multiviewport.cjs",
         "baseline": true,
-        "sha256": "fb054cbc6d9e770b93b51126f82bb7bdde99566818603bf065be937b7b851960",
+        "sha256": "8882578fd373db2d5716f4dcf2c476328c247f2cb05b4edcad1f223e524093d3",
         "matched_families": [
           "validator"
         ],

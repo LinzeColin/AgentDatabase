@@ -13,6 +13,9 @@ const targetUrl = `http://127.0.0.1:${port}`;
 const outputDir = process.env.MEMORY_ATLAS_V1_2_HOME_AUDIT_DIR
   || fs.mkdtempSync(path.join(os.tmpdir(), "memory-atlas-v1-2-home-"));
 const browserExecutable = process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH || findChromiumExecutable();
+const actionTimeoutMs = 15_000;
+const viewportTimeoutMs = 90_000;
+const shutdownTimeoutMs = 10_000;
 const viewports = [
   { name: "desktop-low-height", width: 1470, height: 661 },
   { name: "desktop-standard", width: 1440, height: 900 },
@@ -25,6 +28,16 @@ function assertCondition(condition, message, details = {}) {
     error.details = details;
     throw error;
   }
+}
+
+function withTimeout(promise, timeoutMs, label) {
+  let timeoutId;
+  return Promise.race([
+    Promise.resolve(promise),
+    new Promise((_, reject) => {
+      timeoutId = setTimeout(() => reject(new Error(`${label} after ${timeoutMs}ms`)), timeoutMs);
+    }),
+  ]).finally(() => clearTimeout(timeoutId));
 }
 
 function findChromiumExecutable() {
@@ -862,6 +875,7 @@ async function validateViewport(browser, viewport) {
     viewport: { width: viewport.width, height: viewport.height },
     deviceScaleFactor: 1,
   });
+  page.setDefaultTimeout(actionTimeoutMs);
   const consoleErrors = [];
   const failedResponses = [];
   page.on("console", (message) => {
@@ -952,7 +966,7 @@ async function validateViewport(browser, viewport) {
       failedResponses,
     };
   } finally {
-    await page.close();
+    await withTimeout(page.close(), shutdownTimeoutMs, `${viewport.name} page close timed out`);
   }
 }
 
@@ -963,13 +977,20 @@ async function runBrowserValidation() {
   try {
     const results = [];
     for (const viewport of viewports) {
-      results.push(await validateViewport(browser, viewport));
+      console.error(JSON.stringify({ event: "viewport_started", viewport: viewport.name }));
+      const result = await withTimeout(
+        validateViewport(browser, viewport),
+        viewportTimeoutMs,
+        `${viewport.name} viewport validation timed out`,
+      );
+      results.push(result);
+      console.error(JSON.stringify({ event: "viewport_finished", status: result.status, viewport: viewport.name }));
     }
     const failures = results.filter((result) => result.status !== "PASS");
     assertCondition(failures.length === 0, "One or more v1.2 home viewport contracts failed", { failures });
     return results;
   } finally {
-    await browser.close();
+    await withTimeout(browser.close(), shutdownTimeoutMs, "Chromium close timed out");
   }
 }
 

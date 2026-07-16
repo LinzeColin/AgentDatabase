@@ -2,9 +2,12 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import os
 import shutil
+import subprocess
 import sys
 import tempfile
+import time
 import unittest
 from pathlib import Path
 
@@ -130,12 +133,54 @@ class MemoryAtlasR8AcceptanceTests(unittest.TestCase):
         self.assertEqual(len(summary["failed_gates"][0]["stdout_tail"]), 1000)
         self.assertLess(len(json.dumps(summary)), 3000)
 
+    @unittest.skipUnless(os.name == "posix", "process-group cleanup contract is POSIX-specific")
+    def test_final_audit_gate_timeout_terminates_descendants_and_keeps_diagnostics(self) -> None:
+        atlasctl = load_atlasctl()
+        with tempfile.TemporaryDirectory() as temp_dir:
+            pid_file = Path(temp_dir) / "child.pid"
+            source = "\n".join(
+                (
+                    "import pathlib, subprocess, sys, time",
+                    "child = subprocess.Popen([sys.executable, '-c', 'import time; time.sleep(60)'])",
+                    f"pathlib.Path({str(pid_file)!r}).write_text(str(child.pid), encoding='utf-8')",
+                    "print('parent-started', flush=True)",
+                    "print('stderr-marker', file=sys.stderr, flush=True)",
+                    "time.sleep(60)",
+                )
+            )
+
+            returncode, stdout_tail, stderr_tail = atlasctl.run_final_audit_gate(
+                [sys.executable, "-c", source],
+                cwd=temp_dir,
+                timeout_seconds=1,
+            )
+
+            self.assertEqual(returncode, 124)
+            self.assertIn("parent-started", stdout_tail)
+            self.assertIn("stderr-marker", stderr_tail)
+            self.assertIn("process tree terminated", stderr_tail)
+            child_pid = int(pid_file.read_text(encoding="utf-8"))
+            for _ in range(40):
+                state = subprocess.run(
+                    ["ps", "-p", str(child_pid), "-o", "state="],
+                    text=True,
+                    capture_output=True,
+                    check=False,
+                ).stdout.strip()
+                if not state or state.startswith("Z"):
+                    break
+                time.sleep(0.05)
+            self.assertTrue(not state or state.startswith("Z"), f"descendant still running with state {state!r}")
+
     def test_rendered_chinese_gate_checks_human_copy_and_raw_manifest_pollution(self) -> None:
         source = HOME_BROWSER_GATE.read_text(encoding="utf-8")
 
         self.assertIn("assertRenderedChineseUx", source)
         self.assertIn('id: "raw_manifest_details"', source)
         self.assertIn("renderedChineseUx", source)
+        self.assertIn("page.setDefaultTimeout(actionTimeoutMs)", source)
+        self.assertIn("viewport validation timed out", source)
+        self.assertIn('event: "viewport_finished"', source)
 
     def test_final_records_serialize_five_promotions_and_fourteen_stage_truths(self) -> None:
         module = load_module()

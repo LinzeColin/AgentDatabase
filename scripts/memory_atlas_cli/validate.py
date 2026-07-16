@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
+import signal
 import subprocess
 import sys
 import tempfile
@@ -222,6 +224,87 @@ def compact_tail(value: str | bytes, limit: int = FINAL_AUDIT_OUTPUT_TAIL_CHARS)
     return value[-limit:]
 
 
+def _terminate_final_audit_process_tree(process: subprocess.Popen[bytes]) -> str:
+    errors: list[str] = []
+
+    def record(exc: OSError) -> None:
+        if not isinstance(exc, ProcessLookupError):
+            errors.append(type(exc).__name__)
+
+    if os.name == "posix":
+        try:
+            os.killpg(process.pid, signal.SIGTERM)
+        except OSError as exc:
+            record(exc)
+        try:
+            process.wait(timeout=2)
+        except subprocess.TimeoutExpired:
+            pass
+        except OSError as exc:
+            record(exc)
+        try:
+            os.killpg(process.pid, 0)
+        except OSError as exc:
+            record(exc)
+        else:
+            try:
+                os.killpg(process.pid, signal.SIGKILL)
+            except OSError as exc:
+                record(exc)
+    else:
+        try:
+            process.kill()
+        except OSError as exc:
+            record(exc)
+
+    try:
+        process.wait(timeout=5)
+    except subprocess.TimeoutExpired:
+        errors.append("CleanupTimeout")
+    except OSError as exc:
+        record(exc)
+    return ",".join(dict.fromkeys(errors))
+
+
+def run_final_audit_gate(
+    command: list[str],
+    *,
+    cwd: str,
+    timeout_seconds: int,
+) -> tuple[int, str, str]:
+    creationflags = getattr(subprocess, "CREATE_NEW_PROCESS_GROUP", 0) if os.name == "nt" else 0
+    try:
+        process = subprocess.Popen(
+            command,
+            cwd=cwd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=False,
+            shell=False,
+            start_new_session=os.name == "posix",
+            creationflags=creationflags,
+        )
+    except OSError as exc:
+        return 127, "", compact_tail(f"gate launch failed: {type(exc).__name__}: {exc}")
+
+    try:
+        stdout, stderr = process.communicate(timeout=timeout_seconds)
+        return process.returncode, compact_tail(stdout or b""), compact_tail(stderr or b"")
+    except subprocess.TimeoutExpired as exc:
+        cleanup_warning = _terminate_final_audit_process_tree(process)
+        try:
+            stdout, stderr = process.communicate(timeout=5)
+        except subprocess.TimeoutExpired:
+            stdout, stderr = exc.stdout or b"", exc.stderr or b""
+            cleanup_warning = ",".join(filter(None, (cleanup_warning, "PipeCleanupTimeout")))
+        timeout_message = f"gate timed out after {timeout_seconds}s; process tree terminated"
+        if cleanup_warning:
+            timeout_message += f"; cleanup warning: {cleanup_warning}"
+        stderr_text = compact_tail(stderr or exc.stderr or b"")
+        separator = "\n" if stderr_text and not stderr_text.endswith("\n") else ""
+        return 124, compact_tail(stdout or exc.stdout or b""), compact_tail(f"{stderr_text}{separator}{timeout_message}")
+
+
 def final_audit_compact_summary(
     payload: dict[str, object],
     gates: list[dict[str, object]],
@@ -307,22 +390,11 @@ def run_final_audit(args: argparse.Namespace) -> int:
     gates: list[dict[str, object]] = []
     for gate in final_audit_gate_plan(args.database_dir):
         command = [str(part) for part in gate["command"]]
-        try:
-            result = subprocess.run(
-                command,
-                cwd=str(gate.get("cwd") or ROOT),
-                text=True,
-                capture_output=True,
-                check=False,
-                timeout=int(gate["timeout_seconds"]),
-            )
-            returncode = result.returncode
-            stdout_tail = compact_tail(result.stdout or "")
-            stderr_tail = compact_tail(result.stderr or "")
-        except subprocess.TimeoutExpired as exc:
-            returncode = 124
-            stdout_tail = compact_tail(exc.stdout or "")
-            stderr_tail = compact_tail(exc.stderr or "")
+        returncode, stdout_tail, stderr_tail = run_final_audit_gate(
+            command,
+            cwd=str(gate.get("cwd") or ROOT),
+            timeout_seconds=int(gate["timeout_seconds"]),
+        )
 
         passed = returncode == 0
         gates.append({
@@ -1876,6 +1948,7 @@ __all__ = (
     "build_acceptance_summary",
     "final_audit_gate_plan",
     "compact_tail",
+    "run_final_audit_gate",
     "final_audit_compact_summary",
     "final_audit_dry_run_contract",
     "run_final_audit",
