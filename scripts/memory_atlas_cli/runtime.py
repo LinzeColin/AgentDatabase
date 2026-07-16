@@ -29,6 +29,7 @@ KNOWN_COMMANDS = frozenset(
     {
         "run",
         "sync",
+        "request-chatgpt-export",
         "build-atlas",
         "analyze",
         "audit",

@@ -8,7 +8,7 @@ next_gate_id: "ACC.OpenAIDatabase.PAM1.0019"
 total_estimated_hours: 255
 completed_estimated_hours: 241
 taskpack_progress:
-  completed_tasks: 54
+  completed_tasks: 55
   total_tasks: 149
   delivery_state: "local_only_not_released"
 stages:
@@ -2674,9 +2674,9 @@ stages:
   - stage_id: "MA-V121-S08"
     name: "ChatGPT 官方导出自动请求、通知发现、下载与归档"
     person_goal: "使用用户已登录会话和官方导出流程，自动请求 ChatGPT 数据导出、等待异步通知、在链接失效前下载、公开归档并准备 main 直推。"
-    status: "planned"
+    status: "in_progress"
     estimated_hours: 9
-    estimated_pct: 0
+    estimated_pct: 11
     stop_conditions:
       - "需要绕过登录、2FA、CAPTCHA 或平台访问控制"
       - "准备把 cookies、token、password 或 email credential 提交仓库"
@@ -2685,48 +2685,80 @@ stages:
       - "本地完成整个 v1.2.1 Task Pack 前发生 push、deploy、branch 或 PR"
     stop_gate:
       gate_id: "ACC-MA-V121-S08"
-      status: "planned"
+      status: "open"
       pass_conditions:
         - "自动请求只使用官方可见 UI 和用户已有登录态，不依赖未公开 API"
         - "至少一个只读通知 connector 在用户环境中真实工作并能发现导出通知"
         - "下载、分片、hash、公开归档和受控 main 直推链路完成真实证据"
         - "外部导出尚未生成时明确保持 WAITING，不把 fixture 当成生产通过"
-      evidence_refs: []
+      evidence_refs:
+        - "EVID-MA-V121-S08-P1-T1-SMOKE"
     phases:
       - phase_id: "MA-V121-S08-P1"
         name: "官方导出请求状态机"
         objective: "通过官方可见 UI 发起导出，并用可恢复状态机处理等待和人类认证。"
-        status: "planned"
+        status: "in_progress"
         estimated_hours: 3
-        estimated_pct: 0
+        estimated_pct: 33
         stop_conditions:
           - "请求路径需要未公开私有 API 或读取浏览器凭证"
           - "登录、2FA、CAPTCHA 或账号确认被尝试自动绕过"
           - "已有 pending 导出时重复发起请求"
         stop_gate:
           gate_id: "ACC-MA-V121-S08-P1"
-          status: "planned"
+          status: "open"
           pass_conditions:
             - "已登录 profile 只通过可见 UI 发起官方 Data Export，凭证不进入代码或证据"
             - "REQUESTED 到 FAILED_NEEDS_HUMAN_AUTH 状态完整、幂等且可恢复"
             - "平台要求人类认证时明确暂停，人工完成后可继续"
-          evidence_refs: []
+          evidence_refs:
+            - "EVID-MA-V121-S08-P1-T1-CONTRACT"
+            - "EVID-MA-V121-S08-P1-T1-TEST"
+            - "EVID-MA-V121-S08-P1-T1-SMOKE"
+            - "EVID-MA-V121-S08-P1-T1-REVIEW"
         tasks:
           - task_id: "S08-P1-T1"
             name: "实现官方 Data Export 请求 connector"
             objective: "实现基于可见 UI 的官方 Data Export 请求，复用用户已登录 profile。"
-            status: "planned"
+            status: "completed"
             estimated_hours: 1
-            estimated_pct: 0
+            estimated_pct: 100
             dependencies:
               - "S07-P3-T3"
             acceptance_ids:
               - "ACC-MA-V121-S08-P1-T1"
-            test_commands: []
-            evidence_refs: []
+            acceptance:
+              - acceptance_id: "ACC-MA-V121-S08-P1-T1"
+                description: "Loopback-CDP connector only reuses one existing logged-in Chrome context, opens one task-owned tab and follows unique visible accessibility UI through Open profile menu, Settings, Data controls and official export confirmation. Inspect mode cancels with zero request clicks; apply requires explicit --confirm-request and permits one click. Source and machine evidence contain no credential, cookie, storage state, account identity, page content or private API access."
+                evidence_refs:
+                  - "EVID-MA-V121-S08-P1-T1-CONTRACT"
+                  - "EVID-MA-V121-S08-P1-T1-TEST"
+                  - "EVID-MA-V121-S08-P1-T1-SMOKE"
+                  - "EVID-MA-V121-S08-P1-T1-REVIEW"
+            test_commands:
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_chatgpt_export_request -q"
+              - "node OpenAIDatabase/tests/chatgpt_export_request_connector.test.cjs"
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_atlasctl_modular_cli OpenAIDatabase.tests.test_atlasctl_runtime_core OpenAIDatabase.tests.test_memory_atlas_chatgpt_export_request -q"
+              - "python3 -B OpenAIDatabase/scripts/atlasctl.py request-chatgpt-export --apply --cdp-endpoint http://127.0.0.1:9222"
+              - "python3 -B OpenAIDatabase/scripts/atlasctl.py request-chatgpt-export --dry-run --cdp-endpoint http://127.0.0.1:9"
+              - "npm run validate:sync --prefix OpenAIDatabase/apps/memory-atlas"
+              - "python3 -B OpenAIDatabase/scripts/audit_memory_atlas_human_plane.py"
+              - "python3 -B OpenAIDatabase/scripts/audit_memory_atlas_test_value.py"
+              - "python3 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+            test_results:
+              - "Test-first ImportError 后 dedicated Python + real browser fixture 8/8 PASS；fixture 覆盖 6 个浏览器场景，inspect 0 次 request click、request 1 次 click，missing/ambiguous profile 与 wrong origin 均 fail closed；包装层严格绑定 mode/action，并在 apply 子进程超时时以 1 次点击上限记录不确定副作用。"
+              - "真实 Chrome 登录态只读 smoke 经官方可见 UI 到达 Request data export - are you sure? 确认框并点击 Cancel；confirm_export_clicked=false、production_request_submitted=false，未读取 browser credential/cookie/storage、未捕获账号身份或调用 private API。"
+              - "Modular CLI、runtime 与 connector 相关回归 30/30、focused 治理回归 77/77 PASS；缺显式 confirm 和不可用 loopback endpoint 分别以 explicit_request_confirmation_required 与 browser_connection_failed 在零 request click 下 fail closed。"
+              - "validate:fast 6/6 PASS（21.893 秒）；最终完整 validate:sync 10/10 PASS（178.901 秒）：sync unit 219/219、public-raw layout、三来源 dry-run、Codex archive/state/derived、raw append-only 和 129.327 秒 credential scan 全部通过；raw_mutation=false、remote_push=false、shell=false。"
+            evidence_refs:
+              - "EVID-MA-V121-S08-P1-T1-CONTRACT"
+              - "EVID-MA-V121-S08-P1-T1-TEST"
+              - "EVID-MA-V121-S08-P1-T1-SMOKE"
+              - "EVID-MA-V121-S08-P1-T1-REVIEW"
             risks:
               - "读取或提交浏览器凭证，或调用未公开 API"
             rollback: "git revert 本 Task 本地 commit；不删除或修改用户浏览器 profile、cookies 或账号设置。"
+            current_result: "complete_local_only_55_of_149_pending_s08_p1_t2_no_production_request_no_remote_upload"
           - task_id: "S08-P1-T2"
             name: "实现官方导出请求状态机"
             objective: "实现 REQUESTED、WAITING_FOR_EXPORT、LINK_READY、DOWNLOADED、ARCHIVED、PUSHED、FAILED_NEEDS_HUMAN_AUTH 状态。"

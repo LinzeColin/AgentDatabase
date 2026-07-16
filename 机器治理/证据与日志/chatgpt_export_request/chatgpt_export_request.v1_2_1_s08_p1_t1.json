@@ -1,0 +1,65 @@
+{
+  "schema_version": "memory_atlas.chatgpt_export_request_evidence.v1_2_1_s08_p1_t1",
+  "task_id": "S08-P1-T1",
+  "acceptance_id": "ACC-MA-V121-S08-P1-T1",
+  "status": "PASS_LOCAL_IMPLEMENTATION",
+  "observed_at": "2026-07-16T16:35:55Z",
+  "official_ui": {
+    "origin": "https://chatgpt.com",
+    "documentation": "https://help.openai.com/en/articles/7260999-how-do-i-export-my-chatgpt-history-and-data",
+    "visible_steps_observed": [
+      "Open profile menu",
+      "Settings",
+      "Data controls",
+      "Export data",
+      "Request data export - are you sure?"
+    ],
+    "existing_logged_in_session_reused": true,
+    "confirmation_dialog_reached": true,
+    "confirm_export_clicked": false,
+    "cancel_clicked": true,
+    "production_request_submitted": false,
+    "connector_cdp_live_execution": false,
+    "result": "PASS_READ_ONLY_UI_COMPATIBILITY"
+  },
+  "browser_fixture": {
+    "status": "PASS",
+    "scenario_count": 6,
+    "inspect_request_click_count": 0,
+    "request_mode_click_count": 1,
+    "missing_profile_fail_closed": true,
+    "ambiguous_profile_fail_closed": true,
+    "unexpected_origin_fail_closed": true
+  },
+  "security": {
+    "browser_credential_store_access": false,
+    "cookie_store_access": false,
+    "storage_state_access": false,
+    "private_api_calls": false,
+    "account_identity_captured": false,
+    "page_content_captured": false,
+    "loopback_cdp_only": true,
+    "explicit_apply_confirmation_required": true
+  },
+  "artifacts": {
+    "contract_sha256": "7e097c87ba375b380114b5d1dde76fcd3efd4dd3cd7a90d347b60432165b3167",
+    "model_parameters_sha256": "aa87bd6e85a4efcff9b27d9ab4e3ca9eb9326a4af3fe8425ba801d49cd5255d2",
+    "connector_sha256": "2f998a5b5a229462552b0b10b87efc30aa386233b68474528608310e4b575376",
+    "python_wrapper_sha256": "e32c23cb6e4b47bfabc198b9953c9e22fb603a60563736fb7e65f99c8f16adb3",
+    "python_test_sha256": "b40bebec9565eac7833eb5d2155e8815428542c4deb116ff00f404e5f0ba7c4e",
+    "browser_fixture_test_sha256": "7a22bb8727220728bae1cf86dc38f258ed3bdc98c18d467725302afa472f7326"
+  },
+  "effects": {
+    "chatgpt_request": false,
+    "browser_profile_mutation": false,
+    "raw_mutation": false,
+    "remote_push": false,
+    "deployment": false
+  },
+  "phase_boundary": {
+    "state_machine_implemented": false,
+    "pending_request_dedupe_implemented": false,
+    "human_auth_resume_implemented": false,
+    "next_task": "S08-P1-T2"
+  }
+}

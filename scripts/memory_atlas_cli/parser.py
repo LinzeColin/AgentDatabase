@@ -51,6 +51,17 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     future_input.add_argument("--markdown-report", type=Path)
     sync.add_argument("--event-id")
 
+    request_export = subparsers.add_parser(
+        "request-chatgpt-export",
+        help="Request an official ChatGPT data export through visible UI.",
+    )
+    request_mode = request_export.add_mutually_exclusive_group(required=True)
+    request_mode.add_argument("--dry-run", action="store_true")
+    request_mode.add_argument("--apply", action="store_true")
+    request_export.add_argument("--confirm-request", action="store_true")
+    request_export.add_argument("--cdp-endpoint", required=True)
+    request_export.add_argument("--database-dir", type=Path, default=ROOT)
+
     build_atlas = subparsers.add_parser("build-atlas", help="Build derived Memory Atlas visualization data.")
     build_atlas.add_argument("--dry-run", action="store_true")
 

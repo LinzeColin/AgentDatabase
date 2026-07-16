@@ -1,0 +1,66 @@
+{
+  "schema_version": "memory_atlas.chatgpt_export_request_contract.v1_2_1_s08_p1_t1",
+  "task_id": "S08-P1-T1",
+  "acceptance_id": "ACC-MA-V121-S08-P1-T1",
+  "source_id": "chatgpt",
+  "official_documentation": "https://help.openai.com/en/articles/7260999-how-do-i-export-my-chatgpt-history-and-data",
+  "browser_transport": {
+    "kind": "existing_chrome_loopback_cdp",
+    "existing_session_only": true,
+    "requires_explicit_endpoint": true,
+    "allowed_schemes": [
+      "http"
+    ],
+    "allowed_hosts": [
+      "127.0.0.1",
+      "::1"
+    ],
+    "opens_task_owned_tab": true,
+    "closes_task_owned_tab": true
+  },
+  "visible_ui": {
+    "origin": "https://chatgpt.com",
+    "steps": [
+      "open_profile_menu",
+      "open_settings",
+      "open_data_controls",
+      "open_export_confirmation"
+    ],
+    "confirmation_dialog_name": "Request data export - are you sure?",
+    "inspect_action": "cancel_before_request",
+    "request_action": "confirm_export_once"
+  },
+  "security": {
+    "reads_browser_credentials": false,
+    "reads_cookie_store": false,
+    "reads_storage_state": false,
+    "launches_persistent_profile": false,
+    "uses_private_api": false,
+    "captures_account_identity": false,
+    "captures_page_content": false,
+    "submits_request_without_explicit_confirmation": false
+  },
+  "cli": {
+    "command": "request-chatgpt-export",
+    "inspect_flags": [
+      "--dry-run"
+    ],
+    "request_flags": [
+      "--apply",
+      "--confirm-request"
+    ],
+    "machine_output": "stdout_json",
+    "state_persistence": false
+  },
+  "model_parameters_ref": "机器治理/参数与公式/chatgpt_export_request.v1_2_1_s08_p1_t1.json",
+  "phase_boundary": {
+    "implements_request_state_machine": false,
+    "implements_pending_request_dedupe": false,
+    "implements_human_auth_resume": false,
+    "downloads_export": false,
+    "writes_raw_archive": false,
+    "fetches_or_pushes": false,
+    "deploys": false,
+    "next_task": "S08-P1-T2"
+  }
+}

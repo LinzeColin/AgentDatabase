@@ -46,8 +46,8 @@ class MemoryAtlasTestValueAuditTests(unittest.TestCase):
                 "deleted_python_test_count": 2,
                 "retained_validator_count": 39,
                 "retained_baseline_python_test_count": 49,
-                "added_python_test_count": 23,
-                "current_python_test_count": 72,
+                "added_python_test_count": 24,
+                "current_python_test_count": 73,
             },
         )
 

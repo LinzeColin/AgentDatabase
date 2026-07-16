@@ -1,0 +1,29 @@
+{
+  "schema_version": "memory_atlas.chatgpt_export_request_model.v1_2_1_s08_p1_t1",
+  "task_id": "S08-P1-T1",
+  "acceptance_id": "ACC-MA-V121-S08-P1-T1",
+  "model_id": "MOD-009",
+  "formula_id": "FORM-009",
+  "purpose": "Bound one official ChatGPT Data Export request to visible UI in an existing logged-in browser session without reading browser credentials or using a private API.",
+  "parameters": {
+    "connection_timeout_seconds": 15,
+    "navigation_timeout_seconds": 30,
+    "action_timeout_seconds": 15,
+    "maximum_browser_contexts": 1,
+    "maximum_owned_tabs": 1,
+    "maximum_confirm_clicks": 1,
+    "maximum_machine_output_bytes": 16384
+  },
+  "formula": "connector_pass = loopback_cdp AND existing_session AND visible_chatgpt_origin AND unique_visible_steps AND credential_reads=0 AND private_api_calls=0 AND owned_tabs<=1 AND confirm_clicks<=1 AND sanitized_output",
+  "parameter_rationale": {
+    "connection_timeout_seconds": "A short loopback-only connection budget fails closed when the existing browser is unavailable.",
+    "navigation_timeout_seconds": "Thirty seconds covers an authenticated ChatGPT settings load without adding retries.",
+    "action_timeout_seconds": "Fifteen seconds bounds each visible UI action and exposes UI drift instead of guessing selectors.",
+    "maximum_browser_contexts": "Exactly one existing browser context avoids guessing which signed-in profile owns the request.",
+    "maximum_owned_tabs": "The connector creates and closes one task-owned tab while preserving all user tabs.",
+    "maximum_confirm_clicks": "One click is the hard upper bound; retry and pending-request suppression belong to S08-P1-T2.",
+    "maximum_machine_output_bytes": "A 16 KiB JSON ceiling prevents page content or browser diagnostics from leaking into evidence."
+  },
+  "failure_semantics": "Endpoint, context, origin, selector uniqueness, visibility, navigation, explicit confirmation, output schema, or browser action uncertainty fails closed. No automatic retry, credential inspection, private API call, request state persistence, download, raw write, Git remote action, or deployment is allowed.",
+  "calibration_boundary": "S08-P1-T1 implements and verifies the request connector only. S08-P1-T2 owns durable REQUESTED-to-terminal state and pending dedupe; S08-P1-T3 owns human-auth pause and resume."
+}
