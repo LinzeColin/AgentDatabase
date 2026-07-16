@@ -4,8 +4,9 @@
 
 - Task: `S07-P2-T3`
 - Acceptance: `ACC-MA-V121-S07-P2-T3`
-- Delivery: local implementation candidate; exact-commit closeout pending
-- Task Pack progress remains `50/149` until the exact committed tree passes release acceptance.
+- Delivery: complete local-only; exact implementation commit and release acceptance passed
+- Implementation commit: `c226e4d13e39dea5f8025de47689be435d97fd7f`
+- Task Pack progress: `51/149`; S07 is `6/9` and S07-P2 is `3/3` complete.
 - This run does not enter `S07-P3-T1`, fetch, push, deploy, create a branch/PR, or clean general caches.
 
 ## Scope
@@ -56,6 +57,15 @@ and the raw ledger remained
 - Dedicated compatibility migration: 6/6 PASS.
 - Codex, source registry, Atlas, Agent Context, CLI and sync focused suite: 91/91 PASS.
 - Acceptance, human-plane inventory, test-value and script-consolidation suite: 43/43 PASS.
+- Latest combined T3/governance suite: 50/50 PASS.
+- Post-closeout T3/acceptance/human-plane/test-value/script-consolidation suite:
+  49/49 PASS. Python 3.13 and 3.12 deterministic `check-render` both report
+  zero drift and zero reference issues; all 45 event rows parse as the required
+  JSONL schema; the real T3 dry-run remains `NO_CHANGES` with zero writes.
+- Broad `lean_governance validate --project OpenAIDatabase` remains nonzero on
+  pre-existing cross-project/root baselines: 62 sync diagnostics under KMFA/root
+  and 35 root/registered-path diagnostics. None names a T3 file or new evidence
+  reference, and this Task does not modify or claim to resolve those scopes.
 - The first full-suite invocation from the database subdirectory was invalid and
   is not counted: 502 tests ran with 10 historical absolute-package import
   errors caused by the wrong current working directory.
@@ -63,7 +73,35 @@ and the raw ledger remained
   layout/isolation checks failed only because external working-tree changes
   created ignored `.DS_Store` files and deleted the tracked ChatGPT archive
   directory during the run. Those unrelated changes are not restored, deleted,
-  staged, or included in this Task. Exact-commit validation remains required.
+  staged, or included in this Task.
+- A tracked-path exact-commit projection then ran both complete public-raw layout
+  and raw-isolation modules: 18/18 PASS. It materialized all 570 exact raw path
+  names without reading raw content and confirmed that the four prior failures
+  were caused only by the external main-worktree state.
+
+## Exact Commit Closeout
+
+Tracked-only recovery of `c226e4d13e39dea5f8025de47689be435d97fd7f`
+passed with 1,700 tracked files, both original source packages, 514 current raw
+files and 514 ledger entries, 432 canonical events/facets, a fresh `npm ci` and
+production build, and exact Pages parity against snapshot SHA-256
+`9788facd01bb2177035868068fec9324ca6e676839e4463c2f704a53ffbafa3d`.
+The recovery workspace and npm cache were removed by the auditor.
+
+The first full exact-tree release correctly failed closed for two acceptance
+topology/runtime reasons: the detached worktree made the staged push-size test
+report `branch_is_not_main`, and Chromium close exceeded 10 seconds once after
+all three Home viewports had passed. The exact failure was reproduced as 511/512
+unit tests with only the detached-branch test failing. The Home gate then passed
+standalone across 1470x661, 1440x900 and 390x844, including server shutdown.
+
+The final isolated shared clone used a local `main` with
+`HEAD=origin/main=c226e4d13`, no canonical or remote branch creation, and no
+network operation. The previously failing push-size test passed 1/1. Complete
+`validate:release` then passed `final_audit` 1/1 in 928.103 seconds with
+`failed_count=0`, `skipped_critical_count=0`, `commands_audited=true`,
+`raw_mutation=false`, `remote_push=false`, and `shell=false`. All task-owned
+worktrees, clones, recovery directories, browser artifacts and logs were removed.
 
 ## Risk And Rollback
 
@@ -78,7 +116,6 @@ Codex incremental sync state as rollback.
 
 ## Stop Boundary
 
-`S07-P3-T1` remains unimplemented. This Task can move to 51/149 only after its
-exact local commit passes tracked-only recovery and the final release gates from
-a complete committed tree. No remote upload is allowed before all 149 Tasks and
-the final review/remediation close.
+`S07-P3-T1` remains unimplemented and is only eligible in the next run.
+`S07-P2-T3` closes local-only at 51/149; no remote upload is allowed before all
+149 Tasks and the final review/remediation close.

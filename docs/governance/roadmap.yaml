@@ -8,7 +8,7 @@ next_gate_id: "ACC.OpenAIDatabase.PAM1.0019"
 total_estimated_hours: 255
 completed_estimated_hours: 241
 taskpack_progress:
-  completed_tasks: 50
+  completed_tasks: 51
   total_tasks: 149
   delivery_state: "local_only_not_released"
 stages:
@@ -2154,7 +2154,7 @@ stages:
     person_goal: "把本机 Codex sessions/logs/history 自动只读归档为公开 raw、增量派生到 Memory Atlas，并在验证通过后直接推送 GitHub main。"
     status: "in_progress"
     estimated_hours: 9
-    estimated_pct: 56
+    estimated_pct: 67
     stop_conditions:
       - "源 Codex 文件发生字节、mtime 或 size 改变"
       - "发现认证资料或 secret 进入 staged diff"
@@ -2189,6 +2189,10 @@ stages:
         - "EVID-MA-V121-S07-P2-T2-BROWSER"
         - "EVID-MA-V121-S07-P2-T2-TEST"
         - "EVID-MA-V121-S07-P2-T2-REVIEW"
+        - "EVID-MA-V121-S07-P2-T3-STATE"
+        - "EVID-MA-V121-S07-P2-T3-OUTPUT"
+        - "EVID-MA-V121-S07-P2-T3-TEST"
+        - "EVID-MA-V121-S07-P2-T3-REVIEW"
     phases:
       - phase_id: "MA-V121-S07-P1"
         name: "本机来源发现与 raw 只读导出"
@@ -2338,16 +2342,16 @@ stages:
       - phase_id: "MA-V121-S07-P2"
         name: "派生分析与 Atlas 更新"
         objective: "把已登记 Codex raw 增量派生为可追溯的 Atlas 数据、周报和同步状态。"
-        status: "in_progress"
+        status: "completed"
         estimated_hours: 3
-        estimated_pct: 67
+        estimated_pct: 100
         stop_conditions:
           - "派生结果无法追溯到 raw manifest"
           - "前端被要求直接读取 raw"
           - "脱敏摘要继续冒充 full raw backup"
         stop_gate:
           gate_id: "ACC-MA-V121-S07-P2"
-          status: "in_progress"
+          status: "completed"
           pass_conditions:
             - "Codex derived outputs、snapshot、周报与同步状态可追溯且可解释"
             - "旧消费者兼容读取但真相语义明确"
@@ -2362,6 +2366,10 @@ stages:
             - "EVID-MA-V121-S07-P2-T2-BROWSER"
             - "EVID-MA-V121-S07-P2-T2-TEST"
             - "EVID-MA-V121-S07-P2-T2-REVIEW"
+            - "EVID-MA-V121-S07-P2-T3-STATE"
+            - "EVID-MA-V121-S07-P2-T3-OUTPUT"
+            - "EVID-MA-V121-S07-P2-T3-TEST"
+            - "EVID-MA-V121-S07-P2-T3-REVIEW"
         tasks:
           - task_id: "S07-P2-T1"
             name: "构建 Codex derived outputs"
@@ -2464,18 +2472,44 @@ stages:
           - task_id: "S07-P2-T3"
             name: "迁移旧 Codex 摘要语义"
             objective: "保留现有脱敏摘要的兼容读取，但不再把它冒充 full raw backup。"
-            status: "planned"
+            status: "completed"
             estimated_hours: 1
-            estimated_pct: 0
+            estimated_pct: 100
             dependencies:
               - "S07-P2-T2"
             acceptance_ids:
               - "ACC-MA-V121-S07-P2-T3"
-            test_commands: []
-            evidence_refs: []
+            acceptance:
+              - acceptance_id: "ACC-MA-V121-S07-P2-T3"
+                description: "六个历史 Codex consumer 继续保留原 schema 和字段，并以 additive summary_semantics 明确声明 redacted_derived_summary、derived_summary_not_full_raw_backup、full_raw_backup=false、recoverable_raw_backup=false；缺失元数据可规范化，任何正向 full/raw claim 或 canonical hash/state 漂移均 fail closed。真实迁移把兼容层绑定到 2 个已验证可恢复 archive 与 432 个 canonical sessions，同时保持 raw、public raw、manifest、ledger 和原 Codex sync state 不变。"
+                evidence_refs:
+                  - "EVID-MA-V121-S07-P2-T3-STATE"
+                  - "EVID-MA-V121-S07-P2-T3-OUTPUT"
+                  - "EVID-MA-V121-S07-P2-T3-TEST"
+                  - "EVID-MA-V121-S07-P2-T3-REVIEW"
+            test_commands:
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_codex_legacy_summary -q"
+              - "python3 -B OpenAIDatabase/scripts/atlasctl.py analyze --stage codex-legacy-summary --database-dir OpenAIDatabase --dry-run"
+              - "python3 -B -m unittest discover -s OpenAIDatabase/tests -p 'test_*.py' -q"
+              - "python3 -B OpenAIDatabase/scripts/audit_memory_atlas_github_recovery.py --repo-root /absolute/path/to/CodexProject --commit c226e4d13e39dea5f8025de47689be435d97fd7f --output-dir /nonexistent/task-temp"
+              - "npm run validate:release --prefix OpenAIDatabase/apps/memory-atlas"
+              - "python3 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+              - "python3.12 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+            test_results:
+              - "真实迁移首轮原子更新 11 个 legacy/Atlas/Agent Context/state 路径：128 个 legacy sessions、7 个 activity days、7 条 recommendations；canonical truth 为 2 个可恢复 archive 与 432 个 sessions。紧接 T3 和 T2 publisher dry-run 均返回 NO_CHANGES、changed_paths=[]、零写入；Agent Context JSON/Markdown 与 canonical rebuild byte-identical。"
+              - "六个旧 schema/字段保持兼容，新增 summary_semantics 明确 summary 不是 full/raw/recoverable backup。Protected raw/public-raw/manifest digest、原 codex.json 和 raw ledger SHA-256 全程不变；实现使用 safe paths、process lock、原子 replace、目录 fsync 与失败回滚。"
+              - "专用 6/6、Codex/Atlas/source-registry/Agent Context focused 91/91、治理 focused 43/43 与最新组合 50/50 PASS。主工作区全量 512 中 508 通过，4 项仅受外部 .DS_Store/删除影响；exact commit 的 public-raw/raw-isolation 两模块 18/18 PASS。"
+              - "实现 commit c226e4d13 的 tracked-only recovery PASS：1,700 tracked files、2 个 source packages、514/514 raw ledger、432/432 canonical publication、fresh npm build 与 snapshot SHA-256 9788facd01bb2177035868068fec9324ca6e676839e4463c2f704a53ffbafa3d parity。首轮 detached release 正确暴露 push-size branch_is_not_main 与一次 Chromium close timeout；正式隔离 local-main clone 关闭两项后，完整 release final_audit 1/1 在 928.103 秒 PASS，failed=0、critical skip=0、raw_mutation=false、remote_push=false。"
+              - "Closeout 后 T3/acceptance/human-plane/test-value/script-consolidation 49/49 PASS，Python 3.13/3.12 check-render 均零 drift/零引用问题，events 45/45 JSONL 合法。Broad lean_governance validate 仍被本 Task 之外的既有 root/KMFA baseline 阻断（62 个 sync 与 35 个 root/registry diagnostics）；未修改或冒充解决这些跨项目问题。"
+            evidence_refs:
+              - "EVID-MA-V121-S07-P2-T3-STATE"
+              - "EVID-MA-V121-S07-P2-T3-OUTPUT"
+              - "EVID-MA-V121-S07-P2-T3-TEST"
+              - "EVID-MA-V121-S07-P2-T3-REVIEW"
             risks:
               - "兼容层混淆 summary 与 raw backup"
-            rollback: "git revert 本 Task 本地 commit；保留旧只读消费者并恢复明确标记。"
+            rollback: "提交后使用纠正提交回退 T3 code/config/derived/governance；保留旧只读消费者与 canonical raw/archive/manifest/ledger，不删除或改写任何 raw 证据。"
+            current_result: "complete_local_only_51_of_149_pending_s07_p3_t1_no_remote_upload"
       - phase_id: "MA-V121-S07-P3"
         name: "自动运行与 main 直推"
         objective: "在严格 base-current、验证与恢复门禁后提供单次 owner run 的 main 直推和恢复证明。"

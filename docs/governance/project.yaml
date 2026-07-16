@@ -1083,6 +1083,53 @@ features:
       - "EVID-MA-V121-S07-P2-T2-BROWSER"
       - "EVID-MA-V121-S07-P2-T2-TEST"
       - "EVID-MA-V121-S07-P2-T2-REVIEW"
+  - feature_id: "FEAT-MA-V121-S07-P2-T3"
+    name: "Memory Atlas Codex legacy summary truth migration"
+    description: "v1.2.1 Task Pack 当前完成 51/149；六个历史 Codex summary consumer 保持原 schema 和字段，同时新增 additive summary_semantics，明确 artifact_role=redacted_derived_summary、output_policy=derived_summary_not_full_raw_backup、full_raw_backup=false、recoverable_raw_backup=false。真实迁移保留 128 个 legacy sessions、7 个 activity days 和 7 条 recommendations，并把兼容层绑定到 2 个已验证可恢复 archive 与 432 个 canonical sessions。首轮原子更新 11 个 legacy/Atlas/Agent Context/state 路径，紧接 T3/T2 dry-run 均 NO_CHANGES、零写入，Agent Context JSON/Markdown canonical rebuild byte-identical。Raw、public raw、raw manifest、ledger 和原 Codex sync state 未修改；exact recovery 与完整 local-main release 均通过。"
+    status: "active"
+    fact_level: "EXTRACTED"
+    model_ids:
+      - "MOD-008"
+    formula_ids:
+      - "FORM-008"
+    parameter_ids:
+      - "PARAM-062"
+    code_refs:
+      - "OpenAIDatabase/scripts/memory_atlas_cli/codex_legacy_summary.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/analyze.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/codex_atlas.py"
+      - "OpenAIDatabase/scripts/build_agent_context_pack.py"
+      - "OpenAIDatabase/scripts/build_memory_atlas_data.py"
+      - "OpenAIDatabase/scripts/sync_codex_memory_data.py"
+      - "OpenAIDatabase/scripts/audit_memory_atlas_acceptance.py"
+    config_refs:
+      - "OpenAIDatabase/config/data_sources/codex_legacy_summary.json"
+      - "OpenAIDatabase/config/data_sources/source_registry.json"
+      - "OpenAIDatabase/机器治理/参数与公式/codex_legacy_summary.v1_2_1_s07_p2_t3.json"
+      - "OpenAIDatabase/config/memory_atlas_test_value_review.json"
+      - "OpenAIDatabase/config/atlasctl_script_migrations.json"
+    source_refs:
+      - "OpenAIDatabase/data/sync_state/codex_legacy_summary.json"
+      - "OpenAIDatabase/data/processed/codex/codex_session_manifest.jsonl"
+      - "OpenAIDatabase/data/processed/codex/codex_daily_activity.jsonl"
+      - "OpenAIDatabase/data/derived/codex/codex_activity_snapshot.json"
+      - "OpenAIDatabase/data/derived/codex/codex_agent_recommendations.json"
+      - "OpenAIDatabase/data/derived/codex/codex_behavior_report.md"
+      - "OpenAIDatabase/data/derived/agent_context/agent_context_pack.json"
+      - "OpenAIDatabase/data/derived/visualization/memory_atlas.json"
+      - "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s07_p2_t3_codex_legacy_summary_review.md"
+    owner_actions:
+      - "在 OpenAIDatabase 目录运行 python3 -B scripts/atlasctl.py analyze --stage codex-legacy-summary --database-dir . --dry-run；已迁移状态必须返回 NO_CHANGES、changed_paths=[]、writes_files=false。任何正向 full/raw/recoverable claim、canonical T1/T2 hash 漂移、unsafe path、lock contention 或事务失败必须 fail closed；不得手工修改 raw/archive/public index/manifest/ledger 来修兼容摘要。S07-P3-T1 才能实现 push-main 流程。"
+    test_refs:
+      - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_codex_legacy_summary -q"
+      - "python3 -B OpenAIDatabase/scripts/atlasctl.py analyze --stage codex-legacy-summary --database-dir OpenAIDatabase --dry-run"
+      - "python3 -B OpenAIDatabase/scripts/audit_memory_atlas_github_recovery.py --repo-root /absolute/path/to/CodexProject --commit c226e4d13e39dea5f8025de47689be435d97fd7f --output-dir /nonexistent/task-temp"
+      - "npm run validate:release --prefix OpenAIDatabase/apps/memory-atlas"
+    evidence_refs:
+      - "EVID-MA-V121-S07-P2-T3-STATE"
+      - "EVID-MA-V121-S07-P2-T3-OUTPUT"
+      - "EVID-MA-V121-S07-P2-T3-TEST"
+      - "EVID-MA-V121-S07-P2-T3-REVIEW"
 models:
   -
     model_id: "MOD-001"
@@ -5403,4 +5450,24 @@ evidence_refs:
     evidence_id: "EVID-MA-V121-S07-P2-T2-REVIEW"
     kind: "review"
     ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s07_p2_t2_codex_atlas_publication_review.md"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S07-P2-T3-STATE"
+    kind: "artifact"
+    ref: "OpenAIDatabase/data/sync_state/codex_legacy_summary.json"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S07-P2-T3-OUTPUT"
+    kind: "artifact"
+    ref: "OpenAIDatabase/data/processed/codex/codex_session_manifest.jsonl"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S07-P2-T3-TEST"
+    kind: "test"
+    ref: "OpenAIDatabase/tests/test_memory_atlas_codex_legacy_summary.py"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S07-P2-T3-REVIEW"
+    kind: "review"
+    ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s07_p2_t3_codex_legacy_summary_review.md"
     fact_level: "EXTRACTED"

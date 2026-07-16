@@ -1,5 +1,44 @@
 # Memory Atlas v1.2 Remediation Handoff
 
+> **Current v1.2.1 note (2026-07-16 22:13 +10:00):** The v1.2.1 Task Pack is
+> 51/149 complete locally. This run completes only `S07-P2-T3`; S07 is 6/9,
+> S07-P2 is 3/3 and closed, and `S07-P3-T1` is the next/only eligible Task in a
+> later run. Six legacy Codex outputs keep their original schemas and fields but
+> now carry additive `summary_semantics` declaring
+> `redacted_derived_summary`, `derived_summary_not_full_raw_backup`,
+> `full_raw_backup=false` and `recoverable_raw_backup=false`. The compatibility
+> layer binds to two verified recoverable archives and 432 canonical sessions;
+> real migration preserves 128 legacy sessions, seven activity days and seven
+> recommendations. First apply atomically changed 11 legacy/Atlas/Agent
+> Context/state paths. Immediate T3 and T2 publisher replays both return
+> `NO_CHANGES`, `changed_paths=[]` and zero writes; Agent Context JSON/Markdown
+> canonical rebuilds are byte-identical. Protected raw/public-raw/manifest,
+> original `codex.json` and raw ledger hashes are unchanged. Dedicated 6/6,
+> Codex/Atlas/registry/Agent Context 91/91, governance 43/43 and latest combined
+> 50/50 pass. The main worktree full suite reached 508/512; four failures were
+> caused only by externally created `.DS_Store` files and deleted tracked raw
+> paths, which remain untouched. Exact-commit public-raw/raw-isolation modules
+> pass 18/18. Implementation commit `c226e4d13` passes tracked-only recovery of
+> 1,700 files, both source packages, 514/514 raw ledger, 432/432 publication,
+> fresh build and snapshot parity at
+> `9788facd01bb2177035868068fec9324ca6e676839e4463c2f704a53ffbafa3d`.
+> A first detached release correctly failed only because push-size requires
+> branch `main` and one Chromium close exceeded 10 seconds after all viewports
+> passed. The exact unit rerun was 511/512 with only detached branch identity;
+> the Home gate then passed standalone including server shutdown. A task-only
+> shared clone with local `main` and `HEAD=origin/main=c226e4d13` closed both
+> conditions; complete release `final_audit` 1/1 passed in 928.103 seconds with
+> failed=0, critical skip=0, raw mutation=false and remote push=false. All
+> task-owned worktrees, clones, recovery/browser artifacts and logs were
+> removed. Post-closeout focused 49/49 and Python 3.13/3.12 deterministic render
+> pass with zero drift/reference issues. Broad governance validation remains
+> blocked only by pre-existing root/KMFA baselines (62 sync and 35 root/registry
+> diagnostics), which this Task does not modify or claim to close. External
+> `.codex`, KMFA, raw/session_history deletions and `.DS_Store`
+> files remain unstaged and untouched. No fetch, push, deploy, canonical branch,
+> PR, merge/rebase or general cleanup occurred. Do not start `S07-P3-T1` in this
+> run and do not upload before all 149 Tasks plus final review/remediation close.
+>
 > **Current v1.2.1 note (2026-07-16 19:17 +10:00):** The v1.2.1 Task Pack is
 > 50/149 complete locally. This run completes only `S07-P2-T2`; S07 is 5/9,
 > S07-P2 is 2/3, and `S07-P2-T3` is next only after this Task closes. The
