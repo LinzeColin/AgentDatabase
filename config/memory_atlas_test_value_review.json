@@ -27,8 +27,8 @@
     "deleted_python_test_count": 2,
     "retained_validator_count": 39,
     "retained_baseline_python_test_count": 49,
-    "added_python_test_count": 22,
-    "current_python_test_count": 71
+    "added_python_test_count": 23,
+    "current_python_test_count": 72
   },
   "profile_commands": {
     "fast": "npm run validate:fast",
@@ -52,6 +52,7 @@
     "tests/test_memory_atlas_codex_legacy_summary.py",
     "tests/test_memory_atlas_codex_push_main.py",
     "tests/test_memory_atlas_codex_scheduler.py",
+    "tests/test_memory_atlas_codex_restore_proof.py",
     "tests/test_memory_atlas_public_raw_layout.py",
     "tests/test_memory_atlas_credential_exclusion.py",
     "tests/test_memory_atlas_raw_ledger.py",
@@ -3449,6 +3450,16 @@
       ],
       "reason": "Retained because it proves S07-P3-T2 cadence and coalescing parameters, machine-local atomic state, source/repository path isolation, nonblocking concurrency, clock and profile fail closure, duplicate owner-run suppression, one T1 invocation, one child push-attempt cap and manual intervention after any Git-effectful failure.",
       "current_dependency": "S07-P3-T2 validate:sync and full Python suites"
+    },
+    {
+      "path": "tests/test_memory_atlas_codex_restore_proof.py",
+      "risk_bindings": [
+        "data_integrity",
+        "release_risk",
+        "runner_contract"
+      ],
+      "reason": "Retained because it proves S07-P3-T3 contract/model drift rejection, empty and isolated workspace enforcement, two independent archive restores, deterministic derived rebuilds, full restored-member provenance coverage, idempotent replay, source immutability, structured CLI failure and task-owned cleanup.",
+      "current_dependency": "S07-P3-T3 validate:sync, local restore rehearsal and full Python suites"
     },
     {
       "path": "tests/test_memory_atlas_public_raw_layout.py",

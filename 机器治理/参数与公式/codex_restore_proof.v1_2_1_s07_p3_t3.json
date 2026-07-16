@@ -1,0 +1,28 @@
+{
+  "schema_version": "memory_atlas.codex_restore_proof_model.v1_2_1_s07_p3_t3",
+  "task_id": "S07-P3-T3",
+  "acceptance_id": "ACC-MA-V121-S07-P3-T3",
+  "model_id": "MOD-008",
+  "formula_id": "FORM-008",
+  "purpose": "Prove that one immutable baseline Codex archive can restore and deterministically rebuild the derived snapshot without live Codex state or an online platform.",
+  "parameters": {
+    "independent_rehearsal_count": 2,
+    "minimum_free_space_bytes": 1073741824,
+    "free_space_safety_margin_bytes": 536870912,
+    "archive_copy_multiplier": 2,
+    "restore_timeout_seconds": 1800,
+    "subprocess_output_max_bytes": 65536,
+    "provenance_coverage_required": 1,
+    "hash_algorithm": "sha256"
+  },
+  "space_formula": "required_free_bytes = max(minimum_free_space_bytes, source_total_bytes + package_bytes*archive_copy_multiplier + free_space_safety_margin_bytes)",
+  "formula": "pass = archive_verified AND empty_start[1..2] AND restore_verified[1..2] AND derived_rebuilt[1..2] AND provenance_coverage=1 AND output_hashes_run_1=output_hashes_run_2 AND replay_no_changes[1..2] AND source_unchanged AND no_live_or_remote_dependency",
+  "parameter_rationale": {
+    "independent_rehearsal_count": "Two sequential empty-directory runs distinguish deterministic rebuild evidence from a single successful execution.",
+    "free_space_safety_margin_bytes": "A 512 MiB margin covers derived outputs and filesystem overhead beyond the conservative source and package estimate.",
+    "archive_copy_multiplier": "Two package-sized allocations cover the isolated archive copy and restore staging package without hardlinking canonical files.",
+    "restore_timeout_seconds": "Thirty minutes bounds a large local archive restore while remaining independent of network availability."
+  },
+  "failure_semantics": "Archive, workspace, space, subprocess, restore inventory, derived output, provenance, determinism, cleanup, source immutability, or isolation uncertainty fails closed and never performs a remote action.",
+  "calibration_boundary": "This proof validates deterministic local recoverability for one registered baseline archive. It does not install a scheduler, sync live Codex state, fetch, push, deploy, or start S08."
+}

@@ -1,0 +1,169 @@
+{
+  "acceptance_id": "ACC-MA-V121-S07-P3-T3",
+  "archive": {
+    "archive_id": "codex-public-raw-20260715t1300z",
+    "kind": "baseline",
+    "manifest_sha256": "6640cbdeed803df4c3090aaa2e51350d68210bf059bdcafe5ec65f40561cef81",
+    "package_bytes": 558731407,
+    "package_sha256": "e1406eea8b67ffdac96fb41f26f821696389b6eb5ed9ef069b1b42b186d1f174",
+    "part_count": 12,
+    "source_id": "codex",
+    "source_unchanged": true
+  },
+  "cleanup": {
+    "retained_runtime_data": false,
+    "workspace_empty_after": true
+  },
+  "contract_sha256": "fb2ad967834b5d4b08f54aa071d915029079ccd22a6d173597152f42517fb74b",
+  "derived": {
+    "event_count": 427,
+    "facet_count": 427,
+    "output_hashes": {
+      "data/derived/codex/codex_behavior_summary.json": {
+        "byte_size": 3989,
+        "sha256": "e164de6bd246b0b462e100ba42139d31b928861491f0bfd0c45d033da9ac3d0f"
+      },
+      "data/derived/codex/codex_derived_state.json": {
+        "byte_size": 2438,
+        "sha256": "adaac9aface70cd41fbe73e3fdf097a73cee3e6a355a1739d28c7aa5402a1350"
+      },
+      "data/derived/codex/codex_events.jsonl": {
+        "byte_size": 1978617,
+        "sha256": "aa425fc07738f4b737989eb1a59901f64d7772f7a41d6388916635e80d865988"
+      },
+      "data/derived/codex/codex_facets.jsonl": {
+        "byte_size": 719675,
+        "sha256": "41c5a0d6978182e7d9af81f56a95a8cc681223f5da6d716864f8a2f4ee15dfcc"
+      },
+      "data/derived/codex/codex_universe_state_input.json": {
+        "byte_size": 7211,
+        "sha256": "33032405f1cbba0735bc41d0e031ed1728d292d2176c5d8f2af2b78c9451f1ec"
+      }
+    }
+  },
+  "determinism": {
+    "output_hashes_equal": true,
+    "proof_runs_equal": true,
+    "replay_no_changes": true
+  },
+  "effects": {
+    "canonical_derived_mutation": false,
+    "deployment": false,
+    "raw_mutation": false,
+    "remote_push": false
+  },
+  "isolation": {
+    "canonical_cache_read": false,
+    "isolated_registration": "canonical_index_and_exact_ledger_row",
+    "network_required": false,
+    "user_codex_home_read": false,
+    "user_home_read": false
+  },
+  "model_parameters_sha256": "216716382705383c7440a0d629c4cefed30e32769816461b8aa545c19ab32a45",
+  "phase_boundary": {
+    "does_not_deploy": true,
+    "does_not_fetch_or_push": true,
+    "does_not_modify_canonical_derived": true,
+    "does_not_modify_raw_archive": true,
+    "does_not_read_live_codex_home": true,
+    "does_not_start_s08": true,
+    "next_task": "S08-P1-T1"
+  },
+  "provenance": {
+    "coverage_ratio": 1.0,
+    "restored_member_binding": "PASS",
+    "verified_event_count": 427
+  },
+  "rehearsal_count": 2,
+  "rehearsals": [
+    {
+      "archive_materialization": "verified_byte_copy",
+      "cleanup_verified": true,
+      "derived_output_hashes": {
+        "data/derived/codex/codex_behavior_summary.json": {
+          "byte_size": 3989,
+          "sha256": "e164de6bd246b0b462e100ba42139d31b928861491f0bfd0c45d033da9ac3d0f"
+        },
+        "data/derived/codex/codex_derived_state.json": {
+          "byte_size": 2438,
+          "sha256": "adaac9aface70cd41fbe73e3fdf097a73cee3e6a355a1739d28c7aa5402a1350"
+        },
+        "data/derived/codex/codex_events.jsonl": {
+          "byte_size": 1978617,
+          "sha256": "aa425fc07738f4b737989eb1a59901f64d7772f7a41d6388916635e80d865988"
+        },
+        "data/derived/codex/codex_facets.jsonl": {
+          "byte_size": 719675,
+          "sha256": "41c5a0d6978182e7d9af81f56a95a8cc681223f5da6d716864f8a2f4ee15dfcc"
+        },
+        "data/derived/codex/codex_universe_state_input.json": {
+          "byte_size": 7211,
+          "sha256": "33032405f1cbba0735bc41d0e031ed1728d292d2176c5d8f2af2b78c9451f1ec"
+        }
+      },
+      "empty_start": true,
+      "event_count": 427,
+      "facet_count": 427,
+      "initial_outcome": "BUILT_FROM_IMMUTABLE_RAW",
+      "isolated_home": true,
+      "network_required": false,
+      "replay_outcome": "NO_CHANGES",
+      "restore_verified": true,
+      "restored_data_file_count": 430,
+      "restored_file_count": 432,
+      "restored_inventory_sha256": "3442d5ffac6f574793eea20000a27bb5cc9e066d4fc3a2eadb29aace933751c6",
+      "restored_total_bytes": 2068870942,
+      "run_number": 1,
+      "verified_event_count": 427
+    },
+    {
+      "archive_materialization": "verified_byte_copy",
+      "cleanup_verified": true,
+      "derived_output_hashes": {
+        "data/derived/codex/codex_behavior_summary.json": {
+          "byte_size": 3989,
+          "sha256": "e164de6bd246b0b462e100ba42139d31b928861491f0bfd0c45d033da9ac3d0f"
+        },
+        "data/derived/codex/codex_derived_state.json": {
+          "byte_size": 2438,
+          "sha256": "adaac9aface70cd41fbe73e3fdf097a73cee3e6a355a1739d28c7aa5402a1350"
+        },
+        "data/derived/codex/codex_events.jsonl": {
+          "byte_size": 1978617,
+          "sha256": "aa425fc07738f4b737989eb1a59901f64d7772f7a41d6388916635e80d865988"
+        },
+        "data/derived/codex/codex_facets.jsonl": {
+          "byte_size": 719675,
+          "sha256": "41c5a0d6978182e7d9af81f56a95a8cc681223f5da6d716864f8a2f4ee15dfcc"
+        },
+        "data/derived/codex/codex_universe_state_input.json": {
+          "byte_size": 7211,
+          "sha256": "33032405f1cbba0735bc41d0e031ed1728d292d2176c5d8f2af2b78c9451f1ec"
+        }
+      },
+      "empty_start": true,
+      "event_count": 427,
+      "facet_count": 427,
+      "initial_outcome": "BUILT_FROM_IMMUTABLE_RAW",
+      "isolated_home": true,
+      "network_required": false,
+      "replay_outcome": "NO_CHANGES",
+      "restore_verified": true,
+      "restored_data_file_count": 430,
+      "restored_file_count": 432,
+      "restored_inventory_sha256": "3442d5ffac6f574793eea20000a27bb5cc9e066d4fc3a2eadb29aace933751c6",
+      "restored_total_bytes": 2068870942,
+      "run_number": 2,
+      "verified_event_count": 427
+    }
+  ],
+  "schema_version": "memory_atlas.codex_restore_proof.v1_2_1_s07_p3_t3",
+  "space": {
+    "package_bytes": 558731407,
+    "required_free_bytes": 5539261404,
+    "sequential_rehearsals": true,
+    "source_total_bytes": 3884927678
+  },
+  "status": "PASS",
+  "task_id": "S07-P3-T3"
+}

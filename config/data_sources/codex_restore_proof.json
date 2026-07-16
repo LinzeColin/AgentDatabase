@@ -1,0 +1,58 @@
+{
+  "schema_version": "memory_atlas.codex_restore_proof_contract.v1_2_1_s07_p3_t3",
+  "task_id": "S07-P3-T3",
+  "acceptance_id": "ACC-MA-V121-S07-P3-T3",
+  "source_id": "codex",
+  "archive": {
+    "required_kind": "baseline",
+    "archive_id_required": true,
+    "verifier": "verify_codex_public_raw_archive",
+    "restore_entrypoint": "restore.sh",
+    "source_manifest_member": "codex/_memory_atlas/source_manifest.json",
+    "immutable_source_required": true,
+    "materialization": "verified_byte_copy"
+  },
+  "workspace": {
+    "absolute_path_required": true,
+    "existing_empty_directory_required": true,
+    "symlink_components_forbidden": true,
+    "independent_rehearsals": 2,
+    "sequential_cleanup": true,
+    "retained_runtime_data": false
+  },
+  "isolation": {
+    "user_home_allowed": false,
+    "user_codex_home_allowed": false,
+    "network_required": false,
+    "canonical_cache_allowed": false,
+    "isolated_raw_registration": "canonical_index_and_exact_ledger_row",
+    "subprocess_environment": "empty_allowlist_with_task_owned_home"
+  },
+  "rebuild": {
+    "builder": "build_codex_derived",
+    "input_archive_count": 1,
+    "expected_initial_outcome": "BUILT_FROM_IMMUTABLE_RAW",
+    "expected_replay_outcome": "NO_CHANGES",
+    "output_hash_algorithm": "sha256",
+    "output_hashes_must_match_between_runs": true,
+    "event_provenance_must_match_restored_members": true
+  },
+  "proof": {
+    "machine_readable": true,
+    "absolute_paths_forbidden": true,
+    "restored_inventory_required": true,
+    "full_event_provenance_coverage_required": true,
+    "source_archive_before_after_verification_required": true,
+    "workspace_empty_after_required": true
+  },
+  "model_parameters_ref": "机器治理/参数与公式/codex_restore_proof.v1_2_1_s07_p3_t3.json",
+  "phase_boundary": {
+    "does_not_read_live_codex_home": true,
+    "does_not_modify_raw_archive": true,
+    "does_not_modify_canonical_derived": true,
+    "does_not_fetch_or_push": true,
+    "does_not_deploy": true,
+    "does_not_start_s08": true,
+    "next_task": "S08-P1-T1"
+  }
+}

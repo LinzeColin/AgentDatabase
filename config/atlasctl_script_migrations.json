@@ -21,7 +21,7 @@
       ".js",
       ".sh"
     ],
-    "scanned_script_count": 73,
+    "scanned_script_count": 74,
     "exact_sha256_duplicate_group_count": 0,
     "unlisted_scoped_script_policy": "retain_deletion_forbidden_until_mapped",
     "retained_default_deletion_blocker": "equivalent_command_callers_and_behavior_parity_not_all_proven",
@@ -1641,6 +1641,15 @@
         "disposition": "retained"
       },
       {
+        "path": "scripts/audit_memory_atlas_codex_restore_proof.py",
+        "baseline": false,
+        "sha256": "29422fba24e2ca17d62cd525d5ea22fadf731bc531a538d5c677585fc99a0df4",
+        "matched_families": [
+          "audit"
+        ],
+        "disposition": "retained"
+      },
+      {
         "path": "scripts/audit_memory_atlas_github_recovery.py",
         "baseline": true,
         "sha256": "a5e1e9b63e0eaaac47d54a9c6d398b5ceb3647b0ffdf6499fd8845a9726b117b",
@@ -1661,7 +1670,7 @@
       {
         "path": "scripts/audit_memory_atlas_human_plane.py",
         "baseline": false,
-        "sha256": "ace9db4c0f1f85f4f88e212764c4d8558fd43cab1833dea38325c05f7253a116",
+        "sha256": "9da3320b981730192794e5f80b9562bdbd629e267228dace4bc4fbada791e8d3",
         "matched_families": [
           "audit"
         ],
@@ -1697,7 +1706,7 @@
       {
         "path": "scripts/audit_memory_atlas_test_value.py",
         "baseline": false,
-        "sha256": "a1b644a212daabe48c2b446d9bb7cd6987364f55ef572b6eb8d3fae6bfd76fec",
+        "sha256": "26d0644b0065a398986a52b6ed0544871e3113b6bdeb86ec70f5fa597c3d576a",
         "matched_families": [
           "audit"
         ],
@@ -1949,11 +1958,11 @@
   },
   "summary": {
     "deleted_script_count": 139,
-    "retained_representative_script_count": 17,
+    "retained_representative_script_count": 18,
     "consolidated_execution_module_count": 5,
     "consolidated_execution_block_count": 8,
     "validator_profile_count_created": 4,
-    "mapped_scoped_script_count": 212
+    "mapped_scoped_script_count": 213
   },
   "profile_consolidation": {
     "task_id": "S04-P3-T1",
@@ -2104,6 +2113,15 @@
           "deletion_blockers": [
             "S04-P3-T2 current-value inventory and zero-caller gate depend on this audit",
             "deletion would remove the fail-closed proof for historical validator removal"
+          ]
+        },
+        {
+          "path": "scripts/audit_memory_atlas_codex_restore_proof.py",
+          "status": "retained_no_equivalent_command",
+          "canonical_command": null,
+          "deletion_blockers": [
+            "S07-P3-T3 acceptance requires the real empty-directory two-run restore and derived rebuild command",
+            "deletion would remove the portable machine-readable recovery proof entrypoint"
           ]
         }
       ]
