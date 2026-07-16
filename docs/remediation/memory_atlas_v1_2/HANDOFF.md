@@ -1,6 +1,6 @@
 # Memory Atlas v1.2 Remediation Handoff
 
-> **Current v1.2.1 note (2026-07-16 17:09 +10:00):** The v1.2.1 Task Pack is
+> **Current v1.2.1 note (2026-07-16 19:17 +10:00):** The v1.2.1 Task Pack is
 > 50/149 complete locally. This run completes only `S07-P2-T2`; S07 is 5/9,
 > S07-P2 is 2/3, and `S07-P2-T3` is next only after this Task closes. The
 > canonical T1 432 events/facets publish by `event_id` into a 3,327,670-byte
@@ -41,8 +41,10 @@
 > Corrective full Python 506/506 passes in 286.449 seconds. Corrective full release
 > `final_audit` 1/1 passes in 1,268.493 seconds with no failed/critical-skipped
 > gate, raw mutation or remote push; aggregate recovery and reconciliation pass.
-> Corrective commit and its final exact-tree release still remain required and
-> are not preclaimed.
+> Corrective commit `f597a31f1` then passed exact-tree full release 1/1 in
+> 980.106 seconds with no failed/critical-skipped gate, raw mutation or remote
+> push. `S07-P2-T2` is complete local-only at 50/149. This run stops before
+> `S07-P2-T3`; no upload is allowed before all 149 Tasks and final review close.
 > No fetch, push, deploy, branch/PR, merge/rebase or general cleanup
 > occurred. Do not start `S07-P2-T3` in this run and do not upload before all 149
 > Tasks plus final review/remediation are complete.
