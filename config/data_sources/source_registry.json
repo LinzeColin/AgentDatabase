@@ -156,6 +156,8 @@
         "derived_contract_ref": "config/data_sources/codex_derived.json",
         "legacy_summary_entrypoint": "scripts/memory_atlas_cli/codex_legacy_summary.py",
         "legacy_summary_contract_ref": "config/data_sources/codex_legacy_summary.json",
+        "push_main_entrypoint": "scripts/memory_atlas_cli/codex_push_main.py",
+        "push_main_contract_ref": "config/data_sources/codex_push_main.json",
         "complete_archive_root": "data/raw_archives/codex",
         "input_formats": [
           "codex_session_jsonl",

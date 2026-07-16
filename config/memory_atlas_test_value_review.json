@@ -27,8 +27,8 @@
     "deleted_python_test_count": 2,
     "retained_validator_count": 39,
     "retained_baseline_python_test_count": 49,
-    "added_python_test_count": 20,
-    "current_python_test_count": 69
+    "added_python_test_count": 21,
+    "current_python_test_count": 70
   },
   "profile_commands": {
     "fast": "npm run validate:fast",
@@ -50,6 +50,7 @@
     "tests/test_memory_atlas_codex_derived.py",
     "tests/test_memory_atlas_codex_atlas.py",
     "tests/test_memory_atlas_codex_legacy_summary.py",
+    "tests/test_memory_atlas_codex_push_main.py",
     "tests/test_memory_atlas_public_raw_layout.py",
     "tests/test_memory_atlas_credential_exclusion.py",
     "tests/test_memory_atlas_raw_ledger.py",
@@ -3427,6 +3428,16 @@
       ],
       "reason": "Retained because it proves S07-P2-T3 additive legacy schema compatibility, explicit not-full-raw semantics, canonical archive truth binding, consumer refresh, zero raw mutation, idempotent replay, conflict rejection and transactional rollback.",
       "current_dependency": "S07-P2-T3 validate:sync and full Python suites"
+    },
+    {
+      "path": "tests/test_memory_atlas_codex_push_main.py",
+      "risk_bindings": [
+        "data_integrity",
+        "release_risk",
+        "runner_contract"
+      ],
+      "reason": "Retained because it proves S07-P3-T1 main/clean/base-current gates, exact Codex-only staging, source and validation immutability, remote-race rejection, one ordinary push attempt, remote HEAD verification and truthful local-commit preservation after rejection.",
+      "current_dependency": "S07-P3-T1 validate:sync and full Python suites"
     },
     {
       "path": "tests/test_memory_atlas_public_raw_layout.py",

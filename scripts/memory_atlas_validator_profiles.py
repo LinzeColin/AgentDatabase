@@ -91,6 +91,7 @@ _AUDITED_STEP_POLICIES: dict[tuple[str, str], tuple[str, tuple[str, ...]]] = {
             "tests.test_memory_atlas_codex_public_raw_archive",
             "tests.test_memory_atlas_codex_sync_state",
             "tests.test_memory_atlas_codex_derived",
+            "tests.test_memory_atlas_codex_push_main",
             "tests.test_memory_atlas_public_raw_layout",
             "tests.test_memory_atlas_raw_ledger",
             "tests.test_memory_atlas_archive_chunking",

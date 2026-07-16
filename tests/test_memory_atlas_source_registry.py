@@ -79,6 +79,14 @@ class SourceRegistryContractTests(unittest.TestCase):
         self.assertEqual(sources["chatgpt"]["archive_path"], "data/public_raw/chatgpt")
         self.assertEqual(sources["codex"]["archive_path"], "data/public_raw/codex")
         self.assertEqual(
+            sources["codex"]["parser"]["push_main_entrypoint"],
+            "scripts/memory_atlas_cli/codex_push_main.py",
+        )
+        self.assertEqual(
+            sources["codex"]["parser"]["push_main_contract_ref"],
+            "config/data_sources/codex_push_main.json",
+        )
+        self.assertEqual(
             sources["generic_agent_template"]["archive_path"],
             "data/public_raw/agents/{source_id}",
         )
@@ -414,6 +422,9 @@ class SourceRegistryContractTests(unittest.TestCase):
                 {"entrypoint": "scripts/build_personalization_exports.py"}
             ),
             "push policy drift": lambda source: source["push_policy"].update({"force": True}),
+            "push-main adapter drift": lambda source: source["parser"].update(
+                {"push_main_entrypoint": "scripts/memory_atlas_cli/codex_sync_state.py"}
+            ),
             "unknown source type": lambda source: source.update({"source_type": "claude_special"}),
             "canonical status drift": lambda source: source.update({"status": "template"}),
             "unsupported operator argument": lambda source: source["discovery"]["candidates"].append(

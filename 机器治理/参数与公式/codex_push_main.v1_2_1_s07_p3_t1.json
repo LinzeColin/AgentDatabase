@@ -1,0 +1,30 @@
+{
+  "schema_version": "memory_atlas.codex_push_main_model.v1_2_1_s07_p3_t1",
+  "task_id": "S07-P3-T1",
+  "acceptance_id": "ACC-MA-V121-S07-P3-T1",
+  "model_id": "MOD-008",
+  "formula_id": "FORM-008",
+  "purpose": "Bind one Codex synchronization candidate to a clean current main base, one audited Git tree, one local commit and at most one ordinary push attempt.",
+  "parameters": {
+    "required_branch": "main",
+    "required_remote": "origin",
+    "required_remote_ref": "refs/heads/main",
+    "validation_profile": "sync",
+    "push_attempt_limit": 1,
+    "base_oid_equality_terms": 3,
+    "base_oid_terms": [
+      "HEAD",
+      "refs/remotes/origin/main",
+      "ls-remote origin refs/heads/main"
+    ],
+    "commit_parent_count": 1,
+    "force": false,
+    "fetch": false,
+    "automatic_retry": false,
+    "automatic_merge": false,
+    "automatic_rebase": false
+  },
+  "formula": "eligible = main AND clean AND (HEAD = tracking_main = remote_main); push_attempts <= 1; pushed = validation_pass AND source_unchanged AND audited_tree_stable AND remote_main_still_equals_parent",
+  "failure_semantics": "Any false or unknown term stops the pipeline. A created local commit and append-only raw evidence are preserved; history is never rewritten.",
+  "calibration_boundary": "This deterministic gate does not schedule runs, coalesce changes, fetch remote history, resolve divergence, or claim the S07-P3-T3 restore rehearsal."
+}

@@ -16,6 +16,7 @@ from memory_atlas_owner_daily import (
 from .constants import ROOT
 from .child_process import run_child_command
 from .codex_public_raw_archive import run_codex_public_raw_archive
+from .codex_push_main import run_codex_push_main
 from .codex_sync_state import run_codex_sync_state
 from .source_registry import (
     PUSH_DEFAULTS,
@@ -168,6 +169,9 @@ def run_sync(args: argparse.Namespace) -> int:
     parser_path = ROOT / str(registered_source["parser"]["entrypoint"])
     generic_agent_id = args.agent_id
     registered_source_id = str(registered_source["source_id"])
+    if bool(getattr(args, "push_main", False)):
+        args.database_dir = ROOT
+        return run_codex_push_main(args)
     if args.raw_archive:
         if source_type != "codex_local":
             print(json.dumps({

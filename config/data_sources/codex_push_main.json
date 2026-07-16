@@ -1,0 +1,75 @@
+{
+  "schema_version": "memory_atlas.codex_push_main_contract.v1_2_1_s07_p3_t1",
+  "task_id": "S07-P3-T1",
+  "acceptance_id": "ACC-MA-V121-S07-P3-T1",
+  "command": "sync codex --push-main",
+  "pipeline": [
+    "sync_incremental_raw",
+    "build_codex_derived",
+    "publish_codex_atlas",
+    "migrate_legacy_summary_truth",
+    "stage_exact_codex_outputs",
+    "validate_sync_profile",
+    "validate_push_size",
+    "commit_audited_tree",
+    "push_origin_main_once",
+    "verify_remote_main"
+  ],
+  "git": {
+    "required_branch": "main",
+    "remote": "origin",
+    "remote_ref": "refs/heads/main",
+    "require_clean_initial_worktree": true,
+    "require_head_equals_tracking_main": true,
+    "require_head_equals_remote_main": true,
+    "remote_race_stop": true,
+    "push_attempt_limit": 1,
+    "force": false,
+    "fetch": false,
+    "branch_creation": false,
+    "pull_request": false,
+    "merge": false,
+    "rebase": false,
+    "history_rewrite": false
+  },
+  "validation": {
+    "profile": "sync",
+    "credential_scan_required": true,
+    "push_size_guard_required": true,
+    "source_hash_stat_equal_required": true,
+    "index_tree_stable_required": true
+  },
+  "write_scope": {
+    "append_only_prefixes": [
+      "data/raw_archives/codex/",
+      "data/public_raw/codex/"
+    ],
+    "mutable_prefixes": [
+      "data/derived/codex/",
+      "data/derived/weekly/",
+      "data/processed/codex/"
+    ],
+    "mutable_exact_paths": [
+      "data/derived/agent_context/AGENT_CONTEXT.md",
+      "data/derived/agent_context/agent_context_pack.json",
+      "data/derived/visualization/memory_atlas.json",
+      "data/sync_state/codex.json",
+      "data/sync_state/codex_atlas.json",
+      "data/sync_state/codex_legacy_summary.json"
+    ],
+    "raw_ledger_path": "机器治理/证据与日志/raw_archive_manifests/raw_hash_ledger.jsonl",
+    "raw_manifest_prefix": "机器治理/证据与日志/raw_archive_manifests/raw_manifest.s07_p1_t3_"
+  },
+  "failure_policy": {
+    "stop_before_push": true,
+    "preserve_append_only_raw": true,
+    "preserve_failed_local_commit": true,
+    "automatic_cleanup": false,
+    "automatic_retry_push": false
+  },
+  "phase_boundary": {
+    "scheduler_not_implemented": true,
+    "full_restore_proof_not_claimed": true,
+    "next_task": "S07-P3-T2"
+  }
+}

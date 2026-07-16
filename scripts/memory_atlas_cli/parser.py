@@ -17,7 +17,8 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     run.add_argument("--step", choices=OWNER_DAILY_STEP_IDS)
 
     sync = subparsers.add_parser("sync", help="Run source sync.")
-    sync.add_argument("--source", required=True)
+    sync.add_argument("source_name", nargs="?", help="Source id, for example codex.")
+    sync.add_argument("--source", dest="source_option")
     sync.add_argument("--dry-run", action="store_true")
     sync.add_argument("--official-export", type=Path)
     sync.add_argument("--redact-for-public-backup", action="store_true")
@@ -34,6 +35,12 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         help="Use the S07-P1-T3 cursor, content dedupe and interrupted-run resume state.",
     )
     sync.add_argument("--archive-id", help="Explicit append-only Codex raw archive id.")
+    sync.add_argument(
+        "--push-main",
+        action="store_true",
+        help="Run the guarded Codex validate, commit and direct-main push flow.",
+    )
+    sync.add_argument("--message", help="Commit message for --push-main.")
     sync.add_argument("--agent-id", default="future-agent")
     future_input = sync.add_mutually_exclusive_group()
     future_input.add_argument("--input", type=Path)
@@ -101,7 +108,18 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     apply.add_argument("--dry-run", action="store_true")
     apply.add_argument("--database-dir", type=Path, default=ROOT)
     apply.add_argument("--simulate-validation-failure", action="store_true")
-    return parser.parse_args(argv)
+    args = parser.parse_args(argv)
+    if args.command == "sync":
+        source_name = args.source_name
+        source_option = args.source_option
+        if source_name and source_option and source_name != source_option:
+            parser.error("sync positional source and --source must match")
+        args.source = source_option or source_name
+        if not args.source:
+            parser.error("sync requires a source or --source")
+        del args.source_name
+        del args.source_option
+    return args
 
 __all__ = (
     "parse_args",
