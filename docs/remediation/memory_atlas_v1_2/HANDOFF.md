@@ -1,5 +1,44 @@
 # Memory Atlas v1.2 Remediation Handoff
 
+> **Current v1.2.1 note (2026-07-17 01:49 +10:00):** The v1.2.1 Task Pack is
+> 54/149 complete locally. This run completes only `S07-P3-T3`; S07 is 9/9 and
+> S07-P3 is 3/3. `S08-P1-T1` is the next/only eligible Task in a later run and
+> no S08 connector, browser or notification work starts here. Implementation
+> commit `9b9e6a1d4` adds an isolated Codex restore proof. Two sequential runs
+> each began from an existing empty task-owned directory, byte-copied and
+> reverified immutable baseline archive `codex-public-raw-20260715t1300z`, ran
+> its verifier-bound `restore.sh`, and called production `build_codex_derived`
+> inside a database registering only that archive. Each run restored 432 files,
+> including 430 data files and 2,068,870,942 data bytes, then rebuilt 427 events
+> and 427 facets with 427/427 provenance coverage. Both initial outcomes were
+> `BUILT_FROM_IMMUTABLE_RAW`; immediate replays were `NO_CHANGES`; all five
+> derived output bytes and hashes matched. The tracked machine proof SHA-256 is
+> `6dd8139b48ba528015a6d42e069048e4565b9d7cee1dc89b13f5470ad0afa7eb`.
+> This is deliberately one-baseline-archive evidence: its 427 events are not
+> claimed to equal the current canonical two-archive 432 events. Dedicated
+> regression is 4/4 and the expanded related suite is 105/105. A fresh exact
+> clone of `9b9e6a1d4` reproduced the proof byte-for-byte, passed fast 6/6 in
+> 31.224 seconds and sync 10/10 in 214.895 seconds. The raw-isolated CI audit
+> passed only after applying the exact GitHub Actions sparse patterns; 570
+> tracked raw paths remained unmaterialized and raw bodies were not read. The
+> final related closeout rerun is 105/105; human-plane and test-value pass with
+> 162 machine files, 35 active configs and 125 evidence payloads. Script
+> migration validation has zero errors, project governance required validation
+> has zero errors/warnings, renderer has zero drift/reference issues, and all
+> 48 governance event rows are valid JSONL. The optional all-repository semantic
+> command still returns nonzero only for 62 pre-existing root/KMFA manifest and
+> private-runtime reference errors; its OpenAIDatabase section is zero-error.
+> A complete 180.39-second privacy scan covers 515 public raw files and reports
+> zero high-risk secrets, credential-like paths, tracked private raw or value
+> echo.
+> proof uses task-owned `HOME`, `CODEX_HOME`, temp and XDG paths, loads no user
+> site/PYTHONPATH, requires no live Codex home/cache or network, leaves source
+> archive identity and canonical raw/derived unchanged, and empties both run
+> workspaces. No fetch, push, deploy, branch/PR, merge/rebase, scheduler install
+> or general cleanup occurred. Real GitHub upload remains prohibited until all
+> 149 Tasks plus final review/remediation close. Do not start `S08-P1-T1` in
+> this run.
+>
 > **Current v1.2.1 note (2026-07-17 00:39 +10:00):** The v1.2.1 Task Pack is
 > 53/149 complete locally. This run completes only `S07-P3-T2`; S07 is 8/9,
 > S07-P3 is 2/3 and remains in progress, and `S07-P3-T3` is the next/only

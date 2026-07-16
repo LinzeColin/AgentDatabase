@@ -1203,6 +1203,41 @@ features:
       - "EVID-MA-V121-S07-P3-T2-CONTRACT"
       - "EVID-MA-V121-S07-P3-T2-TEST"
       - "EVID-MA-V121-S07-P3-T2-REVIEW"
+  - feature_id: "FEAT-MA-V121-S07-P3-T3"
+    name: "Memory Atlas deterministic Codex archive restore proof"
+    description: "v1.2.1 Task Pack 当前完成 54/149；从空 task-owned 临时目录连续两次字节复制并验证同一 immutable baseline Codex archive，执行经 manifest 验证的 restore.sh，并在只登记该 archive 的隔离数据库中调用正式 build_codex_derived。两轮均恢复 432 files/430 data files，重建 427 events 与 427 facets，427/427 provenance 完整，初次 BUILT_FROM_IMMUTABLE_RAW、立即 replay NO_CHANGES，五个 derived outputs 逐字节一致。证明不读取 live Codex home/cache、不依赖网络、不修改 canonical raw/derived，也不把单 archive 的 427 events 冒充 canonical 两 archive 的 432 events。"
+    status: "active"
+    fact_level: "EXTRACTED"
+    model_ids:
+      - "MOD-008"
+    formula_ids:
+      - "FORM-008"
+    parameter_ids: []
+    code_refs:
+      - "OpenAIDatabase/scripts/memory_atlas_cli/codex_restore_proof.py"
+      - "OpenAIDatabase/scripts/audit_memory_atlas_codex_restore_proof.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/codex_public_raw_archive.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/codex_derived.py"
+    config_refs:
+      - "OpenAIDatabase/config/data_sources/codex_restore_proof.json"
+      - "OpenAIDatabase/机器治理/参数与公式/codex_restore_proof.v1_2_1_s07_p3_t3.json"
+      - "OpenAIDatabase/config/memory_atlas_validator_profiles.json"
+      - "OpenAIDatabase/config/memory_atlas_test_value_review.json"
+    source_refs:
+      - "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s07_p3_t3_codex_restore_proof_review.md"
+    owner_actions:
+      - "仅在已存在、绝对、canonical、非 symlink 且为空的 task-owned workspace 中运行 python3 -I -B scripts/audit_memory_atlas_codex_restore_proof.py --database-dir . --archive-id codex-public-raw-20260715t1300z --workspace-root /absolute/empty/path --output /absolute/report.json。任何 archive、空间、restore、provenance、determinism、cleanup、source identity 或 isolation 不确定均保留证据并停止；不得改 raw、借用 live Codex state、联网、fetch/push/deploy。S08-P1-T1 只能在后续单独 run 开始。"
+    test_refs:
+      - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_codex_restore_proof -q"
+      - "python3 -I -B OpenAIDatabase/scripts/audit_memory_atlas_codex_restore_proof.py --database-dir OpenAIDatabase --archive-id codex-public-raw-20260715t1300z --workspace-root /private/tmp/memory-atlas-s07-p3-t3-workspace --output /private/tmp/memory-atlas-s07-p3-t3.json"
+      - "npm run validate:fast --prefix OpenAIDatabase/apps/memory-atlas"
+      - "npm run validate:sync --prefix OpenAIDatabase/apps/memory-atlas"
+      - "MEMORY_ATLAS_RAW_ISOLATED=1 python3 -B OpenAIDatabase/scripts/atlasctl.py audit --check raw-isolation --ci-checkout"
+    evidence_refs:
+      - "EVID-MA-V121-S07-P3-T3-CONTRACT"
+      - "EVID-MA-V121-S07-P3-T3-TEST"
+      - "EVID-MA-V121-S07-P3-T3-PROOF"
+      - "EVID-MA-V121-S07-P3-T3-REVIEW"
 models:
   -
     model_id: "MOD-001"
@@ -5573,4 +5608,24 @@ evidence_refs:
     evidence_id: "EVID-MA-V121-S07-P3-T2-REVIEW"
     kind: "review"
     ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s07_p3_t2_codex_scheduler_review.md"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S07-P3-T3-CONTRACT"
+    kind: "config"
+    ref: "OpenAIDatabase/config/data_sources/codex_restore_proof.json"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S07-P3-T3-TEST"
+    kind: "test"
+    ref: "OpenAIDatabase/tests/test_memory_atlas_codex_restore_proof.py"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S07-P3-T3-PROOF"
+    kind: "artifact"
+    ref: "OpenAIDatabase/机器治理/证据与日志/codex_restore_proof/codex_restore_proof.v1_2_1_s07_p3_t3.json"
+    fact_level: "VERIFIED"
+  -
+    evidence_id: "EVID-MA-V121-S07-P3-T3-REVIEW"
+    kind: "review"
+    ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s07_p3_t3_codex_restore_proof_review.md"
     fact_level: "EXTRACTED"

@@ -8,7 +8,7 @@ next_gate_id: "ACC.OpenAIDatabase.PAM1.0019"
 total_estimated_hours: 255
 completed_estimated_hours: 241
 taskpack_progress:
-  completed_tasks: 53
+  completed_tasks: 54
   total_tasks: 149
   delivery_state: "local_only_not_released"
 stages:
@@ -2151,10 +2151,10 @@ stages:
             current_result: "complete_local_only_45_of_149_pending_s07_p1_t1_no_remote_upload"
   - stage_id: "MA-V121-S07"
     name: "Codex 原始资料自动同步、分析与 main 直推"
-    person_goal: "把本机 Codex sessions/logs/history 自动只读归档为公开 raw、增量派生到 Memory Atlas，并在验证通过后直接推送 GitHub main。"
-    status: "in_progress"
+    person_goal: "把本机 Codex sessions/logs/history 自动只读归档为公开 raw、增量派生到 Memory Atlas，并在验证通过后直接推送 GitHub main；S07 已完成本地实现与恢复证明，真实远端上传仍受整包最终交付边界约束。"
+    status: "completed"
     estimated_hours: 9
-    estimated_pct: 89
+    estimated_pct: 100
     stop_conditions:
       - "源 Codex 文件发生字节、mtime 或 size 改变"
       - "发现认证资料或 secret 进入 staged diff"
@@ -2163,7 +2163,7 @@ stages:
       - "本地完成整个 v1.2.1 Task Pack 前发生 push、deploy、branch 或 PR"
     stop_gate:
       gate_id: "ACC-MA-V121-S07"
-      status: "in_progress"
+      status: "passed"
       pass_conditions:
         - "真实 Codex raw 资料被自动只读归档，不再只有脱敏摘要"
         - "增量同步幂等、可中断恢复并可重建派生数据"
@@ -2199,6 +2199,10 @@ stages:
         - "EVID-MA-V121-S07-P3-T2-CONTRACT"
         - "EVID-MA-V121-S07-P3-T2-TEST"
         - "EVID-MA-V121-S07-P3-T2-REVIEW"
+        - "EVID-MA-V121-S07-P3-T3-CONTRACT"
+        - "EVID-MA-V121-S07-P3-T3-TEST"
+        - "EVID-MA-V121-S07-P3-T3-PROOF"
+        - "EVID-MA-V121-S07-P3-T3-REVIEW"
     phases:
       - phase_id: "MA-V121-S07-P1"
         name: "本机来源发现与 raw 只读导出"
@@ -2519,16 +2523,16 @@ stages:
       - phase_id: "MA-V121-S07-P3"
         name: "自动运行与 main 直推"
         objective: "在严格 base-current、验证与恢复门禁后提供单次 owner run 的 main 直推和恢复证明。"
-        status: "in_progress"
+        status: "completed"
         estimated_hours: 3
-        estimated_pct: 67
+        estimated_pct: 100
         stop_conditions:
           - "当前分支不是 main 或工作树/base 不满足门禁"
           - "一次 owner run 产生多次高频 push"
           - "restore 结果无法重复验证"
         stop_gate:
           gate_id: "ACC-MA-V121-S07-P3"
-          status: "in_progress"
+          status: "passed"
           pass_conditions:
             - "单命令 validate→commit→push main 在完整门禁下工作"
             - "调度合并短时变化且一次 owner run 至多一次 push"
@@ -2540,6 +2544,10 @@ stages:
             - "EVID-MA-V121-S07-P3-T2-CONTRACT"
             - "EVID-MA-V121-S07-P3-T2-TEST"
             - "EVID-MA-V121-S07-P3-T2-REVIEW"
+            - "EVID-MA-V121-S07-P3-T3-CONTRACT"
+            - "EVID-MA-V121-S07-P3-T3-TEST"
+            - "EVID-MA-V121-S07-P3-T3-PROOF"
+            - "EVID-MA-V121-S07-P3-T3-REVIEW"
         tasks:
           - task_id: "S07-P3-T1"
             name: "实现 sync codex --push-main"
@@ -2622,15 +2630,259 @@ stages:
           - task_id: "S07-P3-T3"
             name: "建立 Codex restore proof"
             objective: "从空临时目录恢复一份 Codex archive 并重建 derived snapshot。"
-            status: "planned"
+            status: "completed"
             estimated_hours: 1
-            estimated_pct: 0
+            estimated_pct: 100
             dependencies:
               - "S07-P3-T2"
             acceptance_ids:
               - "ACC-MA-V121-S07-P3-T3"
+            acceptance:
+              - acceptance_id: "ACC-MA-V121-S07-P3-T3"
+                description: "从两个独立空 task-owned 临时目录分别字节复制并重新验证同一 immutable baseline Codex archive，运行 archive 自带 restore.sh，再在只登记该 archive 的隔离数据库中调用 production build_codex_derived。两轮均恢复 432 files/430 data files，重建 427 events 与 427 facets，427/427 provenance 完整，初次 BUILT_FROM_IMMUTABLE_RAW、立即 replay NO_CHANGES；五个 derived output bytes/hash 一致，source archive 前后不变，workspace 清空。证明不读取 live Codex home/cache、不联网、不修改 canonical raw/derived，也不把单 archive 427 events 冒充 canonical 两 archive 432 events。"
+                evidence_refs:
+                  - "EVID-MA-V121-S07-P3-T3-CONTRACT"
+                  - "EVID-MA-V121-S07-P3-T3-TEST"
+                  - "EVID-MA-V121-S07-P3-T3-PROOF"
+                  - "EVID-MA-V121-S07-P3-T3-REVIEW"
+            test_commands:
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_codex_restore_proof -q"
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_codex_restore_proof OpenAIDatabase.tests.test_memory_atlas_codex_public_raw_archive OpenAIDatabase.tests.test_memory_atlas_codex_derived OpenAIDatabase.tests.test_memory_atlas_raw_ledger OpenAIDatabase.tests.test_memory_atlas_validator_profiles OpenAIDatabase.tests.test_memory_atlas_test_value_audit OpenAIDatabase.tests.test_memory_atlas_human_plane OpenAIDatabase.tests.test_atlasctl_script_consolidation -q"
+              - "python3 -I -B OpenAIDatabase/scripts/audit_memory_atlas_codex_restore_proof.py --database-dir OpenAIDatabase --archive-id codex-public-raw-20260715t1300z --workspace-root /private/tmp/memory-atlas-s07-p3-t3-workspace --output /private/tmp/memory-atlas-s07-p3-t3.json"
+              - "npm run validate:fast --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run validate:sync --prefix OpenAIDatabase/apps/memory-atlas"
+              - "MEMORY_ATLAS_RAW_ISOLATED=1 python3 -B OpenAIDatabase/scripts/atlasctl.py audit --check raw-isolation --ci-checkout"
+              - "python3 -B OpenAIDatabase/scripts/audit_memory_atlas_human_plane.py"
+              - "python3 -B OpenAIDatabase/scripts/audit_memory_atlas_test_value.py"
+              - "python3 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+            test_results:
+              - "Test-first import failure 后 dedicated fixture 4/4 PASS；restore/public-raw/derived/ledger/profile/test-value/human/script-migration 相关回归先 63/63，扩大后在实现候选 105/105（15.401 秒）、治理收口 105/105（11.331 秒）PASS。"
+              - "真实 baseline archive manifest SHA-256 6640cbdeed803df4c3090aaa2e51350d68210bf059bdcafe5ec65f40561cef81；558,731,407-byte package 分 12 parts，package SHA-256 e1406eea8b67ffdac96fb41f26f821696389b6eb5ed9ef069b1b42b186d1f174。两轮 restored inventory SHA-256 均为 3442d5ffac6f574793eea20000a27bb5cc9e066d4fc3a2eadb29aace933751c6；machine proof SHA-256 6dd8139b48ba528015a6d42e069048e4565b9d7cee1dc89b13f5470ad0afa7eb。"
+              - "实现提交 9b9e6a1d4 的干净 clone 再次从空目录完成双轮恢复，报告与 tracked proof byte-identical；validate:fast 6/6（31.224 秒）、validate:sync 10/10（214.895 秒）PASS，raw_mutation=false、remote_push=false。"
+              - "完整 checkout 误用 --ci-checkout 时 raw-isolation 正确 fail closed；切换到 GitHub Actions 精确 sparse patterns 后 PASS，570 个 tracked raw 路径未读取正文，raw_content_read=false、raw_mutation=false、remote_push=false。无 live Codex/cache/network、无 canonical raw/derived 写入、无 fetch/push/deploy。"
+              - "Human-plane、test-value、script migration 与 project governance required validation PASS；renderer 0 drift/0 reference issue，48 条 events JSONL 合法。全仓 semantic 组合命令仅被本 Task 外既有 root/KMFA 62 条旧 reference/manifest 错误拉为非零，其 OpenAIDatabase section 为 0 error。"
+            evidence_refs:
+              - "EVID-MA-V121-S07-P3-T3-CONTRACT"
+              - "EVID-MA-V121-S07-P3-T3-TEST"
+              - "EVID-MA-V121-S07-P3-T3-PROOF"
+              - "EVID-MA-V121-S07-P3-T3-REVIEW"
+            risks:
+              - "恢复依赖本机旧缓存或原平台在线"
+              - "单 baseline archive 的 427 events 被误写为 canonical 两 archive 的 432 events"
+            rollback: "git revert 本 Task 本地 commit；保留 immutable archive 和失败 manifest 证据。"
+            current_result: "complete_local_only_54_of_149_pending_s08_p1_t1_no_remote_upload"
+  - stage_id: "MA-V121-S08"
+    name: "ChatGPT 官方导出自动请求、通知发现、下载与归档"
+    person_goal: "使用用户已登录会话和官方导出流程，自动请求 ChatGPT 数据导出、等待异步通知、在链接失效前下载、公开归档并准备 main 直推。"
+    status: "planned"
+    estimated_hours: 9
+    estimated_pct: 0
+    stop_conditions:
+      - "需要绕过登录、2FA、CAPTCHA 或平台访问控制"
+      - "准备把 cookies、token、password 或 email credential 提交仓库"
+      - "导出链接已过期、账号不匹配或 ZIP 校验失败"
+      - "官方导出仍在等待却试图进入下一 Stage"
+      - "本地完成整个 v1.2.1 Task Pack 前发生 push、deploy、branch 或 PR"
+    stop_gate:
+      gate_id: "ACC-MA-V121-S08"
+      status: "planned"
+      pass_conditions:
+        - "自动请求只使用官方可见 UI 和用户已有登录态，不依赖未公开 API"
+        - "至少一个只读通知 connector 在用户环境中真实工作并能发现导出通知"
+        - "下载、分片、hash、公开归档和受控 main 直推链路完成真实证据"
+        - "外部导出尚未生成时明确保持 WAITING，不把 fixture 当成生产通过"
+      evidence_refs: []
+    phases:
+      - phase_id: "MA-V121-S08-P1"
+        name: "官方导出请求状态机"
+        objective: "通过官方可见 UI 发起导出，并用可恢复状态机处理等待和人类认证。"
+        status: "planned"
+        estimated_hours: 3
+        estimated_pct: 0
+        stop_conditions:
+          - "请求路径需要未公开私有 API 或读取浏览器凭证"
+          - "登录、2FA、CAPTCHA 或账号确认被尝试自动绕过"
+          - "已有 pending 导出时重复发起请求"
+        stop_gate:
+          gate_id: "ACC-MA-V121-S08-P1"
+          status: "planned"
+          pass_conditions:
+            - "已登录 profile 只通过可见 UI 发起官方 Data Export，凭证不进入代码或证据"
+            - "REQUESTED 到 FAILED_NEEDS_HUMAN_AUTH 状态完整、幂等且可恢复"
+            - "平台要求人类认证时明确暂停，人工完成后可继续"
+          evidence_refs: []
+        tasks:
+          - task_id: "S08-P1-T1"
+            name: "实现官方 Data Export 请求 connector"
+            objective: "实现基于可见 UI 的官方 Data Export 请求，复用用户已登录 profile。"
+            status: "planned"
+            estimated_hours: 1
+            estimated_pct: 0
+            dependencies:
+              - "S07-P3-T3"
+            acceptance_ids:
+              - "ACC-MA-V121-S08-P1-T1"
             test_commands: []
             evidence_refs: []
             risks:
-              - "恢复依赖本机旧缓存或原平台在线"
-            rollback: "git revert 本 Task 本地 commit；保留 immutable archive 和失败 manifest 证据。"
+              - "读取或提交浏览器凭证，或调用未公开 API"
+            rollback: "git revert 本 Task 本地 commit；不删除或修改用户浏览器 profile、cookies 或账号设置。"
+          - task_id: "S08-P1-T2"
+            name: "实现官方导出请求状态机"
+            objective: "实现 REQUESTED、WAITING_FOR_EXPORT、LINK_READY、DOWNLOADED、ARCHIVED、PUSHED、FAILED_NEEDS_HUMAN_AUTH 状态。"
+            status: "planned"
+            estimated_hours: 1
+            estimated_pct: 0
+            dependencies:
+              - "S08-P1-T1"
+            acceptance_ids:
+              - "ACC-MA-V121-S08-P1-T2"
+            test_commands: []
+            evidence_refs: []
+            risks:
+              - "pending 时重复请求或状态恢复产生重复副作用"
+            rollback: "git revert 本 Task 本地 commit；保留已产生的只读请求证据并恢复到最后可验证状态。"
+          - task_id: "S08-P1-T3"
+            name: "实现 human-auth 暂停与恢复"
+            objective: "遇到登录、2FA、CAPTCHA 或账号确认时暂停并请求人类完成，随后可恢复。"
+            status: "planned"
+            estimated_hours: 1
+            estimated_pct: 0
+            dependencies:
+              - "S08-P1-T2"
+            acceptance_ids:
+              - "ACC-MA-V121-S08-P1-T3"
+            test_commands: []
+            evidence_refs: []
+            risks:
+              - "自动化绕过平台安全验证或错误恢复账号状态"
+            rollback: "git revert 本 Task 本地 commit；状态保持 FAILED_NEEDS_HUMAN_AUTH，等待人工处理。"
+      - phase_id: "MA-V121-S08-P2"
+        name: "通知发现和自动下载"
+        objective: "通过可插拔只读通知源发现官方导出通知，校验一次性链接并在有效期内下载 ZIP。"
+        status: "planned"
+        estimated_hours: 3
+        estimated_pct: 0
+        stop_conditions:
+          - "通知 connector 需要把凭证或邮件正文提交仓库"
+          - "导出账号、时间或状态无法验证"
+          - "一次性链接过期或下载 ZIP 校验失败"
+        stop_gate:
+          gate_id: "ACC-MA-V121-S08-P2"
+          status: "planned"
+          pass_conditions:
+            - "至少一个真实只读通知 adapter 在用户环境工作，凭证只在 Keychain 或 env"
+            - "只提取经账号、时间和状态验证的 OpenAI 导出链接，不持久化邮件正文"
+            - "24 小时有效期内下载并校验 ZIP，重试不重复归档同一 hash"
+          evidence_refs: []
+        tasks:
+          - task_id: "S08-P2-T1"
+            name: "实现并配置只读通知 connector"
+            objective: "实现可插拔只读通知 connector，并在用户环境中配置至少一个真实可用适配器。"
+            status: "planned"
+            estimated_hours: 1
+            estimated_pct: 0
+            dependencies:
+              - "S08-P1-T3"
+            acceptance_ids:
+              - "ACC-MA-V121-S08-P2-T1"
+            test_commands: []
+            evidence_refs: []
+            risks:
+              - "Gmail OAuth、Apple Mail 或 IMAP credential 泄漏到仓库或日志"
+            rollback: "git revert 本 Task 本地 commit；移除 connector 配置引用，不删除 OS Keychain 或用户邮件数据。"
+          - task_id: "S08-P2-T2"
+            name: "发现并验证官方导出链接"
+            objective: "识别 OpenAI 导出通知、校验账号、时间和状态并提取一次性下载链接。"
+            status: "planned"
+            estimated_hours: 1
+            estimated_pct: 0
+            dependencies:
+              - "S08-P2-T1"
+            acceptance_ids:
+              - "ACC-MA-V121-S08-P2-T2"
+            test_commands: []
+            evidence_refs: []
+            risks:
+              - "邮件正文、错误账号链接或一次性 URL 进入仓库证据"
+            rollback: "git revert 本 Task 本地 commit；废弃未验证链接并保持 WAITING_FOR_EXPORT。"
+          - task_id: "S08-P2-T3"
+            name: "自动下载并校验官方导出 ZIP"
+            objective: "在 24 小时有效期内以同一账号会话自动下载并校验 ZIP。"
+            status: "planned"
+            estimated_hours: 1
+            estimated_pct: 0
+            dependencies:
+              - "S08-P2-T2"
+            acceptance_ids:
+              - "ACC-MA-V121-S08-P2-T3"
+            test_commands: []
+            evidence_refs: []
+            risks:
+              - "链接过期、账号不匹配、下载不完整或重复归档同一 hash"
+            rollback: "git revert 本 Task 本地 commit；删除 task-owned 未校验临时下载，保留失败状态和 hash 证据。"
+      - phase_id: "MA-V121-S08-P3"
+        name: "公开归档与真实外部验收"
+        objective: "按 S06 合同归档真实 ChatGPT export，并在最终交付边界允许时验证受控 main 直推链路。"
+        status: "planned"
+        estimated_hours: 3
+        estimated_pct: 0
+        stop_conditions:
+          - "导出批次、请求或下载元数据无法追溯"
+          - "staged 内容包含 credential、邮件正文或未校验 ZIP"
+          - "官方仍在生成却试图把 fixture 或等待状态标成真实通过"
+          - "整包最终交付前执行真实 push，或使用 branch、PR、force"
+        stop_gate:
+          gate_id: "ACC-MA-V121-S08-P3"
+          status: "planned"
+          pass_conditions:
+            - "真实 ChatGPT export 按 S06 分片、manifest、hash 和 append-only 合同归档"
+            - "受控 commit/main push 路径无 branch、PR 或 force，真实远端动作遵守最终交付边界"
+            - "仅在真实下载、归档和外部证据完整时通过；否则保持 WAITING 或 NEEDS_HUMAN_AUTH"
+          evidence_refs: []
+        tasks:
+          - task_id: "S08-P3-T1"
+            name: "归档 ChatGPT official export raw"
+            objective: "按 S06 合同分片、manifest、hash 并 append-only 写入 ChatGPT raw archive。"
+            status: "planned"
+            estimated_hours: 1
+            estimated_pct: 0
+            dependencies:
+              - "S08-P2-T3"
+            acceptance_ids:
+              - "ACC-MA-V121-S08-P3-T1"
+            test_commands: []
+            evidence_refs: []
+            risks:
+              - "导出批次、请求与下载 provenance 丢失或 raw 被覆盖"
+            rollback: "git revert 本 Task 本地 commit；已追加 raw 不覆盖，由 manifest 保留批次状态。"
+          - task_id: "S08-P3-T2"
+            name: "验证并准备 ChatGPT raw main backup"
+            objective: "验证 staged 内容后生成可受控提交并准备直接 main 交付路径。"
+            status: "planned"
+            estimated_hours: 1
+            estimated_pct: 0
+            dependencies:
+              - "S08-P3-T1"
+            acceptance_ids:
+              - "ACC-MA-V121-S08-P3-T2"
+            test_commands: []
+            evidence_refs: []
+            risks:
+              - "整包最终交付前真实 push，或出现 branch、PR、force push"
+            rollback: "git revert 本 Task 本地 commit；保留 append-only raw 和失败 staged/push 证据，不重写历史。"
+          - task_id: "S08-P3-T3"
+            name: "完成真实官方导出端到端证明"
+            objective: "完成一次真实官方导出端到端运行；若官方仍在生成，Stage 保持 WAITING，不得虚假通过。"
+            status: "planned"
+            estimated_hours: 1
+            estimated_pct: 0
+            dependencies:
+              - "S08-P3-T2"
+            acceptance_ids:
+              - "ACC-MA-V121-S08-P3-T3"
+            test_commands: []
+            evidence_refs: []
+            risks:
+              - "将模拟、过期链接或仍在等待的外部流程冒充生产通过"
+            rollback: "git revert connector/derived 本地提交；已追加 raw 不覆盖，授权失效时进入 FAILED_NEEDS_HUMAN_AUTH。"
