@@ -13,6 +13,31 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 INSTALLER = REPO_ROOT / "scripts" / "install_memory_atlas_app.py"
+LAUNCHER_FIXTURE_PATHS = (
+    "apps/memory-atlas/package.json",
+    "scripts/sync_codex_memory_data.py",
+    "scripts/memory_atlas_runtime_server.py",
+    "scripts/memory_atlas_command_bridge.py",
+    "scripts/build_memory_atlas_weekly_report.py",
+)
+
+
+def create_launcher_repo_fixture(root: Path) -> None:
+    for relative_path in LAUNCHER_FIXTURE_PATHS:
+        source = REPO_ROOT / relative_path
+        target = root / relative_path
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(source, target)
+
+    ignored_files = (
+        ".git/config",
+        ".local_keys/test.key",
+        "apps/memory-atlas/node_modules/sentinel",
+    )
+    for relative_path in ignored_files:
+        target = root / relative_path
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text("must not be copied\n", encoding="utf-8")
 
 
 class MemoryAtlasLauncherTests(unittest.TestCase):
@@ -20,22 +45,29 @@ class MemoryAtlasLauncherTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temp_dir:
             target = Path(temp_dir) / "Memory Atlas.app"
             app_support = Path(temp_dir) / "app-support"
+            fixture_root = Path(temp_dir) / "repo-fixture"
+            create_launcher_repo_fixture(fixture_root)
             env = os.environ.copy()
             env["MEMORY_ATLAS_APP_SUPPORT_ROOT"] = str(app_support)
-            subprocess.run(
+            result = subprocess.run(
                 [
                     sys.executable,
                     str(INSTALLER),
                     "--repo-root",
-                    str(REPO_ROOT),
+                    str(fixture_root),
                     "--target",
                     str(target),
                     "--skip-runtime",
                 ],
-                check=True,
+                check=False,
                 text=True,
                 capture_output=True,
                 env=env,
+            )
+            self.assertEqual(
+                result.returncode,
+                0,
+                f"installer stdout:\n{result.stdout}\ninstaller stderr:\n{result.stderr}",
             )
 
             info_plist = target / "Contents" / "Info.plist"
@@ -74,7 +106,7 @@ class MemoryAtlasLauncherTests(unittest.TestCase):
             launcher_text = executable.read_text(encoding="utf-8")
             runtime_server_text = (source_workspace / "scripts/memory_atlas_runtime_server.py").read_text(encoding="utf-8")
             command_bridge_text = (source_workspace / "scripts/memory_atlas_command_bridge.py").read_text(encoding="utf-8")
-            self.assertIn(str(REPO_ROOT), launcher_text)
+            self.assertIn(str(fixture_root), launcher_text)
             self.assertIn(str(source_workspace), launcher_text)
             self.assertIn("ORIGINAL_REPO_ROOT", launcher_text)
             self.assertIn("INSTALLED_GIT_COMMIT", launcher_text)

@@ -1,6 +1,6 @@
 # Memory Atlas v1.2 Remediation Handoff
 
-> **Current v1.2.1 note (2026-07-16 09:35 +10:00):** The v1.2.1 Task Pack is
+> **Current v1.2.1 note (2026-07-16 14:10 +10:00):** The v1.2.1 Task Pack is
 > 49/149 complete locally. This run completed only `S07-P2-T1`; S07 is 4/9,
 > S07-P2 is 1/3, and `S07-P2-T2` is the next/only eligible Task. The canonical
 > archive-derived builder consumes only raw-ledger registrations that pass the
@@ -14,7 +14,8 @@
 > rebuild completed in 74.431 seconds; the immediate replay completed in 10.328 seconds with
 > `NO_CHANGES`, zero parsed archives and zero file writes. Git diff for raw,
 > public raw, raw manifest, ledger, Codex sync state and six legacy consumer files
-> is empty. Dedicated 9/9, Codex focused 68/68, full Python 494/494, fast 6/6,
+> is empty. Dedicated 9/9, Codex focused 68/68, pre-commit full Python 494/494,
+> final corrective full Python 495/495, fast 6/6,
 > sync 10/10 and ui 14/14 passed. The first release correctly failed because its
 > 900-second unit-test child budget was below the measured 879.438-second suite
 > runtime; the budget is now 1,800 seconds with 28/28 timeout regressions. The
@@ -25,8 +26,17 @@
 > failed closed at 55/58 and 56/58 with different aggregate gate coverage, while
 > standalone GitHub backup 12/12 and exact-commit recovery both passed for the same
 > commit. The old profile tail hid `failed_gate_ids`; final audit now emits a bounded
-> stderr compact summary, covered by R8/CLI 14/14. A corrective local commit and one
-> complete exact-tree release still remain closeout work in this same Task. Unrelated
+> stderr compact summary, covered by R8/CLI 14/14. The third exact-tree attempt on
+> diagnostic commit `458c81467` then identified `unit_tests` and `credential_audit`:
+> one synthetic credential fixture contained a literal scanner-recognized token.
+> It is now assembled only at runtime; the tracked-tree privacy guard is clean. The
+> first 495-test rerun then exposed disk exhaustion in a launcher test that copied
+> the 7.2 GiB canonical database. That test now uses the five required production
+> files plus ignored-path sentinels, preserves production installer behavior, emits
+> captured diagnostics, and passes with the derived regression at 10/10; full Python
+> is 495/495 in 296.724 seconds. Two task-only failed-test temp directories were
+> removed to recover disk; no general cache cleanup occurred. A corrective local
+> commit and one complete exact-tree release still remain closeout work in this same Task. Unrelated
 > KMFA and automation changes remain unstaged and untouched. No
 > Atlas snapshot, weekly report, sync-state, UI, fetch, push, deploy, branch/PR,
 > merge/rebase or cache cleanup changed. Do not start more than `S07-P2-T2` next,

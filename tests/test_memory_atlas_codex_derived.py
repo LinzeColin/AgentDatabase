@@ -340,10 +340,14 @@ class CodexDerivedTests(unittest.TestCase):
             self.assertEqual(captured.exception.code, "codex_derived_lock_busy")
 
     def test_output_privacy_uses_canonical_credential_and_path_rules(self) -> None:
+        synthetic_credential = (
+            b'{"token":"'
+            + bytes((103, 104, 112, 95))
+            + b"1234567890abcdefghijklmnopqrst"
+            + b'"}'
+        )
         with self.assertRaises(CodexDerivedError) as credential:
-            _validate_output_privacy(
-                {"fixture.json": b'{"token":"ghp_1234567890abcdefghijklmnopqrst"}'}
-            )
+            _validate_output_privacy({"fixture.json": synthetic_credential})
         self.assertEqual(credential.exception.code, "codex_derived_output_credential")
         with self.assertRaises(CodexDerivedError) as absolute_path:
             _validate_output_privacy(

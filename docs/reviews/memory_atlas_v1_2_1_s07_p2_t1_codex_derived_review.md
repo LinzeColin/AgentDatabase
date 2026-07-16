@@ -61,7 +61,9 @@ repeat completed in 10.328 seconds with `NO_CHANGES`, `parsed_archive_count=0` a
 - Validator profile tests: `18/18` PASS; test-value audit: PASS; raw-isolation
   tests: `8/8` PASS; script consolidation: `12/12` PASS; CLI modular tests:
   `7/7` PASS.
-- Full Python suite: `494/494` PASS in 879.438 seconds.
+- Pre-commit full Python suite: `494/494` PASS in 879.438 seconds. The final
+  corrective candidate passes `495/495` in 296.724 seconds after adding the
+  final-audit diagnostic regression and bounding the launcher test fixture.
 - `validate:fast`: `6/6` PASS in 66.061 seconds; `validate:sync`: `10/10`
   PASS in 297.596 seconds; `validate:ui`: `14/14` PASS in 742.800 seconds.
 - The first release candidate reached `56/58` but failed `S14-AC02` and
@@ -76,8 +78,8 @@ repeat completed in 10.328 seconds with `NO_CHANGES`, `parsed_archive_count=0` a
   reference issue. Privacy guard found zero high-risk secret, credential-like path
   or tracked raw/private hit. Built-dist raw isolation, script consolidation
   `12/12` and `git diff --check` passed.
-- Exact-commit release/recovery remains a required post-commit closeout and is not
-  preclaimed in this review.
+- Exact-commit release/recovery remains a required post-commit closeout at this
+  review checkpoint and is not preclaimed.
 
 The first two post-commit aggregate attempts failed closed without raw or remote
 writes. The first reconciled `55/58` with S04 partial; standalone GitHub backup
@@ -86,7 +88,22 @@ reconciled `56/58` with S04 verified, proving a different four-line gate failed.
 The previous profile tail omitted the sorted `failed_gate_ids` behind the long
 requirement rows. The final audit now emits a bounded stderr compact summary with
 failed gate IDs, return codes and short output tails; R8/CLI regression is `14/14`.
-Another complete exact-tree release is required after the corrective commit.
+The third exact-tree attempt on diagnostic commit `458c81467` used that summary
+and identified both failed gates: `unit_tests` and `credential_audit`. Both traced
+to one tracked synthetic test value whose literal token prefix correctly matched
+the production privacy scanner. The fixture now assembles that prefix only at
+runtime, so the behavior remains covered while the tracked tree has zero high-risk
+secret, credential-like path or tracked raw/private hit.
+
+The first full-suite rerun after that correction exposed an independent environment
+failure: the launcher test copied the canonical 7.2 GiB database into a temporary
+directory and exhausted the remaining disk. The test now builds a minimal repository
+fixture from the five production files required by the launcher, plants `.git`,
+`.local_keys` and `node_modules` sentinels to prove exclusion, and surfaces captured
+installer output on failure. Launcher plus derived regression is `10/10`; the full
+suite is `495/495`. Product installer behavior and its source-copy contract are
+unchanged. Another complete exact-tree release is required after the corrective
+commit.
 
 ## Independent Engineering And Security Review
 
@@ -102,10 +119,11 @@ with temporary files, atomic replacement and parent-directory fsync. The state s
 hashes for every canonical output and binds the exact contract and model-parameter
 hashes. Review findings covering model-parameter/state binding, process locking,
 canonical credential/path rejection, symlink output boundaries, legacy-output scope
-and the final-audit timeout budget were fixed and regression-tested. Final staged
+and the final-audit timeout budget were fixed and regression-tested. Post-commit
+review additionally fixed the missing compact failed-gate diagnostic, tracked
+synthetic-credential representation and unbounded launcher test fixture. Final staged
 inspection also normalized the new validator-profile indentation without a semantic
-change. Post-commit review additionally fixed the missing compact failed-gate
-diagnostic; the final finding count after that fix is
+change. The final finding count after those fixes is
 `0 Critical / 0 Important / 0 Minor`.
 
 ## Independent Product And Scope Review
