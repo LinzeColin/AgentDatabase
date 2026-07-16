@@ -1168,6 +1168,41 @@ features:
       - "EVID-MA-V121-S07-P3-T1-CONTRACT"
       - "EVID-MA-V121-S07-P3-T1-TEST"
       - "EVID-MA-V121-S07-P3-T1-REVIEW"
+  - feature_id: "FEAT-MA-V121-S07-P3-T2"
+    name: "Memory Atlas guarded Codex scheduler profile"
+    description: "v1.2.1 Task Pack 当前完成 53/149；新增 portable codex-scheduler profile，以 900 秒 cadence、300 秒 quiet、1800 秒 max-wait 和成功后 3600 秒 minimum interval 合并短时 Codex metadata 变化。持续 churn 重置 quiet 但保留 pending deadline；machine-local 0600 atomic state、nonblocking lock、active attempt 和 owner-run id 在 T1 前持久化，一次 owner run 至多一次 T1 调用和一次普通 push attempt。Profile/model/path/clock/concurrency/duplicate/incomplete/T1 schema 或 Git-effect uncertainty 均 fail closed。Exact local-main clone 的 scheduler dry-run、fast 6/6、sync 10/10 和 raw-isolated CI audit 通过；未安装 OS scheduler，未执行真实 sync/push/fetch。"
+    status: "active"
+    fact_level: "EXTRACTED"
+    model_ids:
+      - "MOD-008"
+    formula_ids:
+      - "FORM-008"
+    parameter_ids:
+      - "PARAM-062"
+    code_refs:
+      - "OpenAIDatabase/scripts/memory_atlas_cli/codex_scheduler.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/parser.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/sync.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/source_registry.py"
+    config_refs:
+      - "OpenAIDatabase/config/data_sources/codex_scheduler_profile.json"
+      - "OpenAIDatabase/config/data_sources/source_registry.json"
+      - "OpenAIDatabase/机器治理/参数与公式/codex_scheduler_profile.v1_2_1_s07_p3_t2.json"
+      - "OpenAIDatabase/config/memory_atlas_validator_profiles.json"
+      - "OpenAIDatabase/config/memory_atlas_test_value_review.json"
+    source_refs:
+      - "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s07_p3_t2_codex_scheduler_review.md"
+    owner_actions:
+      - "当前只运行 python3 -B scripts/atlasctl.py run --profile codex-scheduler --dry-run --state-dir /absolute/machine-local/path 检查 profile/source/T1 前置门禁。S07-P3-T2 不安装或启用 launchd/cron，也不授权真实 sync/push；发生 active attempt、manual intervention、clock/path/profile/child contract 或 Git effect uncertainty 时保留 state/evidence 并停止，不得删 state、自动重试、fetch、force 或建 branch/PR。S07-P3-T3 才能建立空目录 restore proof。"
+    test_refs:
+      - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_codex_scheduler -q"
+      - "npm run validate:fast --prefix OpenAIDatabase/apps/memory-atlas"
+      - "npm run validate:sync --prefix OpenAIDatabase/apps/memory-atlas"
+      - "python3 -B OpenAIDatabase/scripts/atlasctl.py run --profile codex-scheduler --dry-run --owner-run-id s07-p3-t2-exact-dryrun --state-dir /tmp/memory-atlas-s07-p3-t2-exact-state"
+    evidence_refs:
+      - "EVID-MA-V121-S07-P3-T2-CONTRACT"
+      - "EVID-MA-V121-S07-P3-T2-TEST"
+      - "EVID-MA-V121-S07-P3-T2-REVIEW"
 models:
   -
     model_id: "MOD-001"
@@ -5523,4 +5558,19 @@ evidence_refs:
     evidence_id: "EVID-MA-V121-S07-P3-T1-REVIEW"
     kind: "review"
     ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s07_p3_t1_codex_push_main_review.md"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S07-P3-T2-CONTRACT"
+    kind: "config"
+    ref: "OpenAIDatabase/config/data_sources/codex_scheduler_profile.json"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S07-P3-T2-TEST"
+    kind: "test"
+    ref: "OpenAIDatabase/tests/test_memory_atlas_codex_scheduler.py"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S07-P3-T2-REVIEW"
+    kind: "review"
+    ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s07_p3_t2_codex_scheduler_review.md"
     fact_level: "EXTRACTED"

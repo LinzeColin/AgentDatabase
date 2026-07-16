@@ -1,5 +1,38 @@
 # Memory Atlas v1.2 Remediation Handoff
 
+> **Current v1.2.1 note (2026-07-17 00:39 +10:00):** The v1.2.1 Task Pack is
+> 53/149 complete locally. This run completes only `S07-P3-T2`; S07 is 8/9,
+> S07-P3 is 2/3 and remains in progress, and `S07-P3-T3` is the next/only
+> eligible Task in a later run. Implementation commit `7e4dc6366` adds the
+> portable `codex-scheduler` profile: 900-second cadence, 300-second quiet,
+> 1,800-second max-wait and 3,600-second minimum success interval. Metadata
+> churn resets quiet time while preserving the first pending deadline. Private
+> machine-local `0600` atomic state, a nonblocking lock and a persisted active
+> owner-run id enforce at most one T1 invocation and one ordinary push attempt
+> per owner run. Profile/model/path/clock/duplicate/concurrency/incomplete/T1
+> schema or Git-effect uncertainty fails closed; no fetch, force, branch, PR,
+> merge, rebase or automatic retry path exists. Test-first hardening closed
+> dry-run evidence loss, Owner Daily argument leakage, false child PASS
+> semantics, dead max-wait and relative-source write ordering. Dedicated
+> scheduler regression is 20/20; implementation focused regression is 44/44
+> and final closeout regression is 93/93. A fresh
+> local-main exact clone at `HEAD=origin/main=7e4dc6366` passes scheduler
+> `DRY_RUN_READY` with decision `COALESCING` and zero state/sync/push/install,
+> fast 6/6 in 34.694 seconds, sync 10/10 in 180.380 seconds including 207 sync
+> tests and a 134.160-second credential scan, plus the raw-isolated CI audit.
+> Machine inventory is exactly 160 files and 34 active configs; human-plane,
+> test-value, script migration, staged push-size and complete privacy audits
+> pass. Dual-runtime render has zero drift/reference issues and all 47 event
+> rows are valid JSONL. The canonical dirty-tree smoke
+> correctly stops at `initial_worktree_not_clean`; its broad-profile failures
+> are solely the pre-existing raw deletions and `.DS_Store`, which remain
+> untouched and unstaged. The task-owned clone/state/output paths were removed.
+> No OS scheduler was installed or enabled; no real sync, fetch, GitHub push,
+> deploy, canonical branch/PR, merge/rebase or general cleanup occurred. Real
+> GitHub upload remains prohibited until all 149 Tasks plus final
+> review/remediation close. Do not start `S07-P3-T3` in this run; empty-directory
+> archive restore and derived snapshot proof remain unimplemented and unclaimed.
+>
 > **Current v1.2.1 note (2026-07-16 23:28 +10:00):** The v1.2.1 Task Pack is
 > 52/149 complete locally. This run completes only `S07-P3-T1`; S07 is 7/9,
 > S07-P3 is 1/3 and remains in progress, and `S07-P3-T2` is the next/only
