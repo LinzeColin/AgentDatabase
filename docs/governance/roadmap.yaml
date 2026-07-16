@@ -8,7 +8,7 @@ next_gate_id: "ACC.OpenAIDatabase.PAM1.0019"
 total_estimated_hours: 255
 completed_estimated_hours: 241
 taskpack_progress:
-  completed_tasks: 51
+  completed_tasks: 52
   total_tasks: 149
   delivery_state: "local_only_not_released"
 stages:
@@ -2154,7 +2154,7 @@ stages:
     person_goal: "把本机 Codex sessions/logs/history 自动只读归档为公开 raw、增量派生到 Memory Atlas，并在验证通过后直接推送 GitHub main。"
     status: "in_progress"
     estimated_hours: 9
-    estimated_pct: 67
+    estimated_pct: 78
     stop_conditions:
       - "源 Codex 文件发生字节、mtime 或 size 改变"
       - "发现认证资料或 secret 进入 staged diff"
@@ -2193,6 +2193,9 @@ stages:
         - "EVID-MA-V121-S07-P2-T3-OUTPUT"
         - "EVID-MA-V121-S07-P2-T3-TEST"
         - "EVID-MA-V121-S07-P2-T3-REVIEW"
+        - "EVID-MA-V121-S07-P3-T1-CONTRACT"
+        - "EVID-MA-V121-S07-P3-T1-TEST"
+        - "EVID-MA-V121-S07-P3-T1-REVIEW"
     phases:
       - phase_id: "MA-V121-S07-P1"
         name: "本机来源发现与 raw 只读导出"
@@ -2513,37 +2516,63 @@ stages:
       - phase_id: "MA-V121-S07-P3"
         name: "自动运行与 main 直推"
         objective: "在严格 base-current、验证与恢复门禁后提供单次 owner run 的 main 直推和恢复证明。"
-        status: "planned"
+        status: "in_progress"
         estimated_hours: 3
-        estimated_pct: 0
+        estimated_pct: 33
         stop_conditions:
           - "当前分支不是 main 或工作树/base 不满足门禁"
           - "一次 owner run 产生多次高频 push"
           - "restore 结果无法重复验证"
         stop_gate:
           gate_id: "ACC-MA-V121-S07-P3"
-          status: "planned"
+          status: "in_progress"
           pass_conditions:
             - "单命令 validate→commit→push main 在完整门禁下工作"
             - "调度合并短时变化且一次 owner run 至多一次 push"
             - "空临时目录可恢复 archive 并重建相同 derived snapshot"
-          evidence_refs: []
+          evidence_refs:
+            - "EVID-MA-V121-S07-P3-T1-CONTRACT"
+            - "EVID-MA-V121-S07-P3-T1-TEST"
+            - "EVID-MA-V121-S07-P3-T1-REVIEW"
         tasks:
           - task_id: "S07-P3-T1"
             name: "实现 sync codex --push-main"
             objective: "为 Codex sync 实现 validate→commit→push main 的单命令流程。"
-            status: "planned"
+            status: "completed"
             estimated_hours: 1
-            estimated_pct: 0
+            estimated_pct: 100
             dependencies:
               - "S07-P2-T3"
             acceptance_ids:
               - "ACC-MA-V121-S07-P3-T1"
-            test_commands: []
-            evidence_refs: []
+            acceptance:
+              - acceptance_id: "ACC-MA-V121-S07-P3-T1"
+                description: "单命令在且仅在 branch=main、完整 worktree/index clean、HEAD=tracking=live origin/main、单一 origin push URL、Codex source 可安全发现时进入既有 raw→derived→Atlas→legacy pipeline；仅 allowlist Codex 输出可暂存，完整 sync profile、secret/path 与单提交 push-size gate 通过且 index/source/base 不漂移后创建单父提交，并在二次远端 CAS 检查后至多执行一次普通 main push。禁止 fetch、force、branch、PR、merge、rebase、history rewrite 和自动重试；dry-run 零写入，拒绝 push 保留本地提交并 fail closed。"
+                evidence_refs:
+                  - "EVID-MA-V121-S07-P3-T1-CONTRACT"
+                  - "EVID-MA-V121-S07-P3-T1-TEST"
+                  - "EVID-MA-V121-S07-P3-T1-REVIEW"
+            test_commands:
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_codex_push_main -q"
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_codex_push_main OpenAIDatabase.tests.test_memory_atlas_source_registry OpenAIDatabase.tests.test_atlasctl_modular_cli OpenAIDatabase.tests.test_memory_atlas_validator_profiles OpenAIDatabase.tests.test_memory_atlas_test_value_audit OpenAIDatabase.tests.test_memory_atlas_push_size OpenAIDatabase.tests.test_memory_atlas_s04_github_backup OpenAIDatabase.tests.test_memory_atlas_codex_source_discovery OpenAIDatabase.tests.test_memory_atlas_codex_public_raw_archive OpenAIDatabase.tests.test_memory_atlas_codex_sync_state OpenAIDatabase.tests.test_memory_atlas_codex_derived OpenAIDatabase.tests.test_memory_atlas_codex_atlas OpenAIDatabase.tests.test_memory_atlas_codex_legacy_summary -q"
+              - "npm run validate:fast --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run validate:sync --prefix OpenAIDatabase/apps/memory-atlas"
+              - "python3 -B OpenAIDatabase/scripts/atlasctl.py sync codex --push-main --dry-run --archive-id codex-incremental-20260716t-exact2"
+              - "python3 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+              - "python3.12 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+            test_results:
+              - "专用 isolated Git regression 13/13 PASS，覆盖 positional/legacy CLI、contract drift、非 main/dirty/stale base、source drift、hidden commit、scope/append-only/validator/push-size/remote race、idempotent no-change、dry-run、一次普通 local-bare main push 与拒绝后不重试；相关候选回归 133/133、最终 focused 50/50 PASS。"
+              - "实现提交 6d92fac69 的首个 exact clone 在 npm 依赖缺失时正确失败；npm ci 后 validate:sync 10/10 PASS。随后 validate:fast 发现 atlasctl_script_migrations 中 test-value audit SHA-256 过期，纠正提交 c9ad18547 仅修正该审计绑定。"
+              - "新鲜 local-main exact clone 上 c9ad18547 的 fast 6/6（29.431 秒）、sync 10/10（188.949 秒）和专用 13/13（15.195 秒）PASS；精确命令返回 DRY_RUN_READY，branch/main/base/source 全部满足，176 个 eligible Codex files，零写入、零 push。Canonical dirty worktree 同一命令在 initial_worktree_not_clean 前置门禁 fail closed。所有网络远端 push/fetch 均未执行；测试 push 仅使用任务临时 local bare origin。"
+              - "Closeout command/governance 86/86 PASS；新增模型参数使机器平面按预期增至 159 files/33 active configs，库存合同、冻结审计常量和 atlasctl script SHA-256 已按实测同步，human-plane audit 无错误。Python 3.13/3.12 deterministic render 零 drift/零引用问题，46 条 events JSONL 全部合法。"
+            evidence_refs:
+              - "EVID-MA-V121-S07-P3-T1-CONTRACT"
+              - "EVID-MA-V121-S07-P3-T1-TEST"
+              - "EVID-MA-V121-S07-P3-T1-REVIEW"
             risks:
               - "非 main、dirty 或 stale base 下发生远端写入"
-            rollback: "git revert 本 Task 本地 commit；不得 force 或重写历史。"
+            rollback: "使用纠正提交或 git revert 精确回退本 Task 本地提交；保留既有 append-only raw/archive/ledger，不得 force、重写历史或删除被拒 push 后的本地提交。"
+            current_result: "complete_local_only_52_of_149_pending_s07_p3_t2_no_remote_upload"
           - task_id: "S07-P3-T2"
             name: "配置 Codex scheduler profile"
             objective: "配置可调度增量同步，默认合并短时间内变化，避免高频小 push。"

@@ -1130,6 +1130,44 @@ features:
       - "EVID-MA-V121-S07-P2-T3-OUTPUT"
       - "EVID-MA-V121-S07-P2-T3-TEST"
       - "EVID-MA-V121-S07-P2-T3-REVIEW"
+  - feature_id: "FEAT-MA-V121-S07-P3-T1"
+    name: "Memory Atlas guarded Codex direct-main sync command"
+    description: "v1.2.1 Task Pack 当前完成 52/149；新增 sync codex --push-main 单命令编排，在 main、完整 clean worktree/index、HEAD=tracking=live origin/main、单一 push URL 和 source discovery 全部成立时复用既有 Codex raw、derived、Atlas 与 legacy pipeline。命令只暂存 Codex allowlist 输出，执行完整 sync validator、secret/path、append-only、单提交 push-size、index/tree/source/base 稳定性与远端 race 门禁，再创建单父提交并至多执行一次普通 main push。禁止 fetch、force、branch、PR、merge、rebase、history rewrite 和自动重试；push 拒绝时保留本地提交并 fail closed。Exact local-main clone 的 fast 6/6、sync 10/10、专用 13/13 与 DRY_RUN_READY 已通过，所有真实网络 push/fetch 均未执行。"
+    status: "active"
+    fact_level: "EXTRACTED"
+    model_ids:
+      - "MOD-008"
+    formula_ids:
+      - "FORM-008"
+    parameter_ids:
+      - "PARAM-062"
+    code_refs:
+      - "OpenAIDatabase/scripts/memory_atlas_cli/codex_push_main.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/parser.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/sync.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/source_registry.py"
+      - "OpenAIDatabase/scripts/github_backup.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/push_size_guard.py"
+    config_refs:
+      - "OpenAIDatabase/config/data_sources/codex_push_main.json"
+      - "OpenAIDatabase/config/data_sources/source_registry.json"
+      - "OpenAIDatabase/机器治理/参数与公式/codex_push_main.v1_2_1_s07_p3_t1.json"
+      - "OpenAIDatabase/config/memory_atlas_validator_profiles.json"
+      - "OpenAIDatabase/config/memory_atlas_test_value_review.json"
+      - "OpenAIDatabase/config/atlasctl_script_migrations.json"
+    source_refs:
+      - "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s07_p3_t1_codex_push_main_review.md"
+    owner_actions:
+      - "当前仅运行 python3 -B scripts/atlasctl.py sync codex --push-main --dry-run --database-dir OpenAIDatabase 检查门禁。真实 push 受 final_delivery_only 边界约束，只能在全部 149 Tasks 与最终 review/remediation 完成、canonical worktree 完整 clean 且 live origin/main base-current 时执行；任何 dirty/stale/source drift/secret/scope/append-only/validation/push-size/remote race 必须 fail closed，不得 fetch、force、建 branch/PR 或自动重试。S07-P3-T2 才能配置 scheduler/coalescing。"
+    test_refs:
+      - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_codex_push_main -q"
+      - "npm run validate:fast --prefix OpenAIDatabase/apps/memory-atlas"
+      - "npm run validate:sync --prefix OpenAIDatabase/apps/memory-atlas"
+      - "python3 -B OpenAIDatabase/scripts/atlasctl.py sync codex --push-main --dry-run --archive-id codex-incremental-20260716t-exact2"
+    evidence_refs:
+      - "EVID-MA-V121-S07-P3-T1-CONTRACT"
+      - "EVID-MA-V121-S07-P3-T1-TEST"
+      - "EVID-MA-V121-S07-P3-T1-REVIEW"
 models:
   -
     model_id: "MOD-001"
@@ -5470,4 +5508,19 @@ evidence_refs:
     evidence_id: "EVID-MA-V121-S07-P2-T3-REVIEW"
     kind: "review"
     ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s07_p2_t3_codex_legacy_summary_review.md"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S07-P3-T1-CONTRACT"
+    kind: "config"
+    ref: "OpenAIDatabase/config/data_sources/codex_push_main.json"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S07-P3-T1-TEST"
+    kind: "test"
+    ref: "OpenAIDatabase/tests/test_memory_atlas_codex_push_main.py"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S07-P3-T1-REVIEW"
+    kind: "review"
+    ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s07_p3_t1_codex_push_main_review.md"
     fact_level: "EXTRACTED"

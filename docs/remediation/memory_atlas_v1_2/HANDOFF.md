@@ -1,5 +1,41 @@
 # Memory Atlas v1.2 Remediation Handoff
 
+> **Current v1.2.1 note (2026-07-16 23:28 +10:00):** The v1.2.1 Task Pack is
+> 52/149 complete locally. This run completes only `S07-P3-T1`; S07 is 7/9,
+> S07-P3 is 1/3 and remains in progress, and `S07-P3-T2` is the next/only
+> eligible Task in a later run. Implementation commits `6d92fac69` and
+> `c9ad18547` add the exact `sync codex --push-main` command and its corrected
+> audited script hash. Before any source or Git write the command requires
+> branch `main`, a completely clean worktree/index including untracked files,
+> `HEAD=refs/remotes/origin/main=live origin/main`, exactly one origin push URL
+> and successful credential-excluding Codex discovery. It reuses the existing
+> raw, derived, Atlas and legacy pipeline, stages only Codex allowlisted output,
+> then runs complete sync validation, secret/path, append-only, single-commit
+> push-size, stable-index/source/base and remote-race gates. It creates one
+> single-parent CAS commit and permits at most one ordinary direct-main push.
+> There is no fetch, force, branch, PR, merge, rebase, history rewrite or
+> automatic retry. A rejected push preserves the local commit and fails closed;
+> dry-run is zero-write. Dedicated isolated Git regression is 13/13, candidate
+> related regression is 133/133 and final focused regression is 50/50. A fresh
+> exact local-main clone of `c9ad18547` passes fast 6/6 in 29.431 seconds, sync
+> 10/10 in 188.949 seconds and dedicated 13/13 in 15.195 seconds; exact dry-run
+> returns `DRY_RUN_READY` for 176 eligible files with zero writes/push attempts.
+> The canonical worktree smoke correctly stops at `initial_worktree_not_clean`.
+> Closeout command/governance regression passes 86/86. The new model parameter
+> legitimately increments machine inventory to 159 files and 33 active configs;
+> the inventory contract, frozen audit baseline and audited script SHA-256 now
+> match that measured set. Human-plane audit passes, dual-runtime deterministic
+> render has zero drift/reference issues, and all 46 event rows are valid JSONL.
+> Broad root changed-only governance validation remains fail-closed solely on
+> 36 pre-existing sparse-root/registry diagnostics, checks no project and names
+> no S07-P3-T1 path; this Task does not modify or claim those root baselines.
+> All push tests use task-owned local bare origins only; no real fetch, GitHub
+> push, deploy, canonical branch/PR, merge/rebase or general cleanup occurred.
+> External `.codex`, KMFA, raw/session_history deletions and `.DS_Store` remain
+> unstaged and untouched. Real GitHub upload remains prohibited until all 149
+> Tasks plus final review/remediation close. Do not start `S07-P3-T2` in this
+> run; scheduler/coalescing and full restore proof remain unimplemented.
+>
 > **Current v1.2.1 note (2026-07-16 22:13 +10:00):** The v1.2.1 Task Pack is
 > 51/149 complete locally. This run completes only `S07-P2-T3`; S07 is 6/9,
 > S07-P2 is 3/3 and closed, and `S07-P3-T1` is the next/only eligible Task in a
