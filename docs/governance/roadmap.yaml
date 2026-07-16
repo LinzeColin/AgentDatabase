@@ -8,7 +8,7 @@ next_gate_id: "ACC.OpenAIDatabase.PAM1.0019"
 total_estimated_hours: 255
 completed_estimated_hours: 241
 taskpack_progress:
-  completed_tasks: 56
+  completed_tasks: 57
   total_tasks: 149
   delivery_state: "local_only_not_released"
 stages:
@@ -2676,7 +2676,7 @@ stages:
     person_goal: "使用用户已登录会话和官方导出流程，自动请求 ChatGPT 数据导出、等待异步通知、在链接失效前下载、公开归档并准备 main 直推。"
     status: "in_progress"
     estimated_hours: 9
-    estimated_pct: 22
+    estimated_pct: 33
     stop_conditions:
       - "需要绕过登录、2FA、CAPTCHA 或平台访问控制"
       - "准备把 cookies、token、password 或 email credential 提交仓库"
@@ -2698,20 +2698,24 @@ stages:
         - "EVID-MA-V121-S08-P1-T2-TEST"
         - "EVID-MA-V121-S08-P1-T2-PROOF"
         - "EVID-MA-V121-S08-P1-T2-REVIEW"
+        - "EVID-MA-V121-S08-P1-T3-CONTRACT"
+        - "EVID-MA-V121-S08-P1-T3-TEST"
+        - "EVID-MA-V121-S08-P1-T3-PROOF"
+        - "EVID-MA-V121-S08-P1-T3-REVIEW"
     phases:
       - phase_id: "MA-V121-S08-P1"
         name: "官方导出请求状态机"
         objective: "通过官方可见 UI 发起导出，并用可恢复状态机处理等待和人类认证。"
-        status: "in_progress"
+        status: "completed"
         estimated_hours: 3
-        estimated_pct: 67
+        estimated_pct: 100
         stop_conditions:
           - "请求路径需要未公开私有 API 或读取浏览器凭证"
           - "登录、2FA、CAPTCHA 或账号确认被尝试自动绕过"
           - "已有 pending 导出时重复发起请求"
         stop_gate:
           gate_id: "ACC-MA-V121-S08-P1"
-          status: "open"
+          status: "passed"
           pass_conditions:
             - "已登录 profile 只通过可见 UI 发起官方 Data Export，凭证不进入代码或证据"
             - "REQUESTED 到 FAILED_NEEDS_HUMAN_AUTH 状态完整、幂等且可恢复"
@@ -2726,6 +2730,10 @@ stages:
             - "EVID-MA-V121-S08-P1-T2-TEST"
             - "EVID-MA-V121-S08-P1-T2-PROOF"
             - "EVID-MA-V121-S08-P1-T2-REVIEW"
+            - "EVID-MA-V121-S08-P1-T3-CONTRACT"
+            - "EVID-MA-V121-S08-P1-T3-TEST"
+            - "EVID-MA-V121-S08-P1-T3-PROOF"
+            - "EVID-MA-V121-S08-P1-T3-REVIEW"
         tasks:
           - task_id: "S08-P1-T1"
             name: "实现官方 Data Export 请求 connector"
@@ -2816,22 +2824,49 @@ stages:
           - task_id: "S08-P1-T3"
             name: "实现 human-auth 暂停与恢复"
             objective: "遇到登录、2FA、CAPTCHA 或账号确认时暂停并请求人类完成，随后可恢复。"
-            status: "planned"
+            status: "completed"
             estimated_hours: 1
-            estimated_pct: 0
+            estimated_pct: 100
             dependencies:
               - "S08-P1-T2"
             acceptance_ids:
               - "ACC-MA-V121-S08-P1-T3"
-            test_commands: []
-            evidence_refs: []
+            acceptance:
+              - acceptance_id: "ACC-MA-V121-S08-P1-T3"
+                description: "Visible-UI connector classifies only exact login, two-factor, CAPTCHA or account-confirmation challenges and pauses at zero request clicks in FAILED_NEEDS_HUMAN_AUTH. Authentication remains human-only. Resume requires an explicit completion flag, matching revision, bounded event id, SHA-256 evidence and valid pause provenance; a paused REQUESTED state resumes only to FAILED_RETRYABLE and requires a new explicit request, while other legal states return to their pre-auth state. Generic T2 transitions cannot resume auth, and no credential, account content, private API, automatic auth or automatic retry is permitted."
+                evidence_refs:
+                  - "EVID-MA-V121-S08-P1-T3-CONTRACT"
+                  - "EVID-MA-V121-S08-P1-T3-TEST"
+                  - "EVID-MA-V121-S08-P1-T3-PROOF"
+                  - "EVID-MA-V121-S08-P1-T3-REVIEW"
+            test_commands:
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_chatgpt_export_human_auth -q"
+              - "node OpenAIDatabase/tests/chatgpt_export_request_connector.test.cjs"
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_atlasctl_modular_cli OpenAIDatabase.tests.test_atlasctl_runtime_core OpenAIDatabase.tests.test_memory_atlas_validator_profiles OpenAIDatabase.tests.test_memory_atlas_test_value_audit OpenAIDatabase.tests.test_memory_atlas_chatgpt_export_request OpenAIDatabase.tests.test_memory_atlas_chatgpt_export_state OpenAIDatabase.tests.test_memory_atlas_chatgpt_export_human_auth -q"
+              - "python3 -B OpenAIDatabase/scripts/atlasctl.py chatgpt-export-auth --inspect"
+              - "npm run validate:fast --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run validate:sync --prefix OpenAIDatabase/apps/memory-atlas"
+              - "python3 -B OpenAIDatabase/scripts/audit_memory_atlas_human_plane.py"
+              - "python3 -B OpenAIDatabase/scripts/audit_memory_atlas_test_value.py"
+              - "python3 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+            test_results:
+              - "Test-first Python ImportError 与 JavaScript TypeError 后，T1/T2/T3 相关回归 26/26 PASS；10 个 Playwright 页面场景覆盖四种 exact visible auth challenge，另有 4/4 official auth URL 分类。所有挑战在 normal UI action 前停止且 request click 为 0。"
+              - "专用 resume 测试覆盖显式 confirmation、revision/event/evidence、pre-auth state、REQUESTED 到 FAILED_RETRYABLE、generic API 拒绝、重复 event 幂等、pending connector suppression 与严格 sanitized output；focused CLI/profile/test-value 70/70、script migration 20/20 PASS。"
+              - "精确 sync unit tests 237/237 PASS（46.559 秒）；validate:fast 6/6（30.848 秒）、validate:sync 10/10（201.924 秒）PASS，credential scan 138.566 秒；raw_mutation=false、remote_push=false、shell=false。"
+              - "chatgpt-export-auth --inspect 返回 IDLE/revision 0/INSPECTED_NO_CHANGES，state 文件 SHA-256 保持 da9b7f188ad0da9cb3dd482748b2d44ddfc65c4fc340b1214ad21d0a36b78aa3。机器平面精确为 168 files、38 active configs、128 evidence payloads。本 Task 未调用真实浏览器、未完成真实认证或提交生产导出请求。"
+            evidence_refs:
+              - "EVID-MA-V121-S08-P1-T3-CONTRACT"
+              - "EVID-MA-V121-S08-P1-T3-TEST"
+              - "EVID-MA-V121-S08-P1-T3-PROOF"
+              - "EVID-MA-V121-S08-P1-T3-REVIEW"
             risks:
               - "自动化绕过平台安全验证或错误恢复账号状态"
             rollback: "git revert 本 Task 本地 commit；状态保持 FAILED_NEEDS_HUMAN_AUTH，等待人工处理。"
+            current_result: "complete_local_only_57_of_149_pending_s08_p2_t1_no_production_request_no_remote_upload"
       - phase_id: "MA-V121-S08-P2"
         name: "通知发现和自动下载"
         objective: "通过可插拔只读通知源发现官方导出通知，校验一次性链接并在有效期内下载 ZIP。"
-        status: "planned"
+        status: "in_progress"
         estimated_hours: 3
         estimated_pct: 0
         stop_conditions:
@@ -2840,7 +2875,7 @@ stages:
           - "一次性链接过期或下载 ZIP 校验失败"
         stop_gate:
           gate_id: "ACC-MA-V121-S08-P2"
-          status: "planned"
+          status: "open"
           pass_conditions:
             - "至少一个真实只读通知 adapter 在用户环境工作，凭证只在 Keychain 或 env"
             - "只提取经账号、时间和状态验证的 OpenAI 导出链接，不持久化邮件正文"

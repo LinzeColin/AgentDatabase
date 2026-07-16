@@ -1,0 +1,71 @@
+{
+  "acceptance_id": "ACC-MA-V121-S08-P1-T3",
+  "challenge_detection": {
+    "captures_account_content": false,
+    "codes": [
+      "login_required",
+      "two_factor_required",
+      "captcha_required",
+      "account_confirmation_required"
+    ],
+    "official_auth_url_classification": true,
+    "visible_exact_markers_only": true
+  },
+  "cli": {
+    "command": "chatgpt-export-auth",
+    "inspect_is_read_only": true,
+    "modes": [
+      "--inspect",
+      "--pause",
+      "--resume"
+    ],
+    "pause_requires": [
+      "--challenge",
+      "--expected-revision",
+      "--event-id",
+      "--evidence-sha256"
+    ],
+    "resume_requires": [
+      "--confirm-human-auth-complete",
+      "--expected-revision",
+      "--event-id",
+      "--evidence-sha256"
+    ]
+  },
+  "model_parameters_ref": "机器治理/参数与公式/chatgpt_export_human_auth.v1_2_1_s08_p1_t3.json",
+  "pause": {
+    "automatic_auth_action": false,
+    "request_click_count_required": 0,
+    "target_state": "FAILED_NEEDS_HUMAN_AUTH"
+  },
+  "phase_boundary": {
+    "commits_or_pushes": false,
+    "deploys": false,
+    "discovers_notifications": false,
+    "downloads_export": false,
+    "implements_human_auth_resume": true,
+    "next_task": "S08-P2-T1",
+    "writes_raw_archive": false
+  },
+  "resume": {
+    "automatic_retry": false,
+    "evidence_sha256_required": true,
+    "explicit_human_confirmation_required": true,
+    "nonrequest_origin_target": "pre_auth_state",
+    "optimistic_revision_required": true,
+    "request_origin_target": "FAILED_RETRYABLE"
+  },
+  "schema_version": "memory_atlas.chatgpt_export_human_auth_contract.v1_2_1_s08_p1_t3",
+  "security": {
+    "automates_authentication": false,
+    "bypasses_login_2fa_captcha": false,
+    "raw_mutation": false,
+    "reads_credentials": false,
+    "remote_actions": false,
+    "stores_credentials_or_account_content": false,
+    "uses_private_api": false
+  },
+  "source_id": "chatgpt",
+  "state_path": "data/sync_state/chatgpt.json",
+  "task_id": "S08-P1-T3"
+}

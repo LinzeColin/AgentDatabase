@@ -41,6 +41,13 @@ function requirePlaywright() {
 }
 
 function fixtureHtml(options = {}) {
+  const challengeHeadings = {
+    login: "Log in",
+    "two-factor": "Enter your verification code",
+    captcha: "Verify you are human",
+    "account-confirmation": "Confirm your account",
+  };
+  const challengeHeading = challengeHeadings[options.challenge] || "";
   const profileButtons = options.duplicateProfile
     ? '<button aria-label="Open profile menu">Profile A</button><button aria-label="Open profile menu">Profile B</button>'
     : options.missingProfile
@@ -49,6 +56,7 @@ function fixtureHtml(options = {}) {
   return `<!doctype html>
 <html lang="en">
   <body>
+    ${challengeHeading ? `<h1>${challengeHeading}</h1>` : ""}
     ${profileButtons}
     <div role="menu" id="profile-menu" hidden>
       <button role="menuitem" id="settings">Settings</button>
@@ -112,6 +120,7 @@ async function closeServer(server) {
 async function main() {
   const {
     ConnectorError,
+    detectHumanAuthChallenge,
     normalizeLoopbackCdpEndpoint,
     runVisibleUiWorkflow,
   } = require(CONNECTOR_PATH);
@@ -124,6 +133,7 @@ async function main() {
       fixtureHtml({
         duplicateProfile: mode === "duplicate-profile",
         missingProfile: mode === "missing-profile",
+        challenge: mode,
       }),
     );
   });
@@ -184,6 +194,49 @@ async function main() {
       originError = error.code;
     }
 
+    const humanAuthScenarios = [
+      ["login", "login_required"],
+      ["two-factor", "two_factor_required"],
+      ["captcha", "captcha_required"],
+      ["account-confirmation", "account_confirmation_required"],
+    ];
+    const humanAuthResults = {};
+    for (const [fixture, expectedCode] of humanAuthScenarios) {
+      const page = await browser.newPage();
+      await page.goto(`${origin}/?fixture=${fixture}`);
+      humanAuthResults[fixture] = await detectHumanAuthChallenge(page);
+      let workflowError = null;
+      try {
+        await runVisibleUiWorkflow(page, { mode: "inspect", expectedOrigin: origin });
+      } catch (error) {
+        if (!(error instanceof ConnectorError)) throw error;
+        workflowError = error.code;
+      }
+      if (workflowError !== expectedCode) {
+        throw new Error(JSON.stringify({ fixture, expectedCode, workflowError }));
+      }
+      await page.close();
+    }
+    const officialAuthUrlScenarios = [
+      ["https://auth.openai.com/u/login", "login_required"],
+      ["https://auth.openai.com/u/login/mfa", "two_factor_required"],
+      ["https://auth.openai.com/captcha", "captcha_required"],
+      ["https://auth.openai.com/u/verify", "account_confirmation_required"],
+    ];
+    const officialAuthUrlResults = {};
+    for (const [url, expectedCode] of officialAuthUrlScenarios) {
+      const urlOnlyPage = {
+        url: () => url,
+        getByRole: () => {
+          throw new Error("visible marker lookup must not be needed for official auth URLs");
+        },
+      };
+      officialAuthUrlResults[url] = await detectHumanAuthChallenge(urlOnlyPage);
+      if (officialAuthUrlResults[url] !== expectedCode) {
+        throw new Error(JSON.stringify({ url, expectedCode, officialAuthUrlResults }));
+      }
+    }
+
     const source = fs.readFileSync(CONNECTOR_PATH, "utf8");
     const forbiddenSourcePatterns = [
       ".cookies(",
@@ -193,6 +246,9 @@ async function main() {
       "XMLHttpRequest",
       "/backend-api",
       "launchPersistentContext",
+      ".fill(",
+      ".type(",
+      "inputValue(",
     ];
     const forbiddenMatches = forbiddenSourcePatterns.filter((value) => source.includes(value));
 
@@ -218,6 +274,12 @@ async function main() {
       missingError === "profile_menu_unavailable",
       duplicateError === "profile_menu_ambiguous",
       originError === "unexpected_page_origin",
+      humanAuthScenarios.every(
+        ([fixture, expectedCode]) => humanAuthResults[fixture] === expectedCode,
+      ),
+      officialAuthUrlScenarios.every(
+        ([url, expectedCode]) => officialAuthUrlResults[url] === expectedCode,
+      ),
       forbiddenMatches.length === 0,
       endpointChecks.every(Boolean),
       remoteEndpointRejected,
@@ -230,7 +292,9 @@ async function main() {
       `${JSON.stringify({
         schema_version: "memory_atlas.chatgpt_export_request_browser_fixture.v1_2_1_s08_p1_t1",
         status: "PASS",
-        scenario_count: 6,
+        scenario_count: 10,
+        human_auth_challenges: humanAuthResults,
+        official_auth_url_checks: officialAuthUrlResults,
         request_clicks: { inspect: inspectClicks, request: requestClicks },
         credential_store_access: false,
         private_api_calls: false,

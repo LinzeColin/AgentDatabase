@@ -251,7 +251,25 @@ class ChatGPTExportRequestTests(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stderr)
         payload = json.loads(result.stdout)
         self.assertEqual(payload["status"], "PASS")
-        self.assertEqual(payload["scenario_count"], 6)
+        self.assertEqual(payload["scenario_count"], 10)
+        self.assertEqual(
+            payload["human_auth_challenges"],
+            {
+                "login": "login_required",
+                "two-factor": "two_factor_required",
+                "captcha": "captcha_required",
+                "account-confirmation": "account_confirmation_required",
+            },
+        )
+        self.assertEqual(
+            payload["official_auth_url_checks"],
+            {
+                "https://auth.openai.com/u/login": "login_required",
+                "https://auth.openai.com/u/login/mfa": "two_factor_required",
+                "https://auth.openai.com/captcha": "captcha_required",
+                "https://auth.openai.com/u/verify": "account_confirmation_required",
+            },
+        )
         self.assertEqual(payload["request_clicks"], {"inspect": 0, "request": 1})
 
 

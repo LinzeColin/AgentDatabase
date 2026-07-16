@@ -89,12 +89,75 @@ async function findExportButton(panel) {
   throw new ConnectorError("export_button_unavailable");
 }
 
+async function hasExactVisibleHeading(page, names) {
+  for (const name of names) {
+    const candidate = page.getByRole("heading", { name, exact: true });
+    const count = await candidate.count();
+    if (count > 0 && (await candidate.first().isVisible())) return true;
+  }
+  return false;
+}
+
+async function detectHumanAuthChallenge(page) {
+  let parsed;
+  try {
+    parsed = new URL(page.url());
+  } catch {
+    parsed = null;
+  }
+  if (parsed) {
+    const host = parsed.hostname.toLowerCase();
+    const pathname = parsed.pathname.toLowerCase();
+    const officialAuthHost = new Set(["auth.openai.com", "auth0.openai.com"]).has(host);
+    if (officialAuthHost && /(^|\/)(captcha|verify-human)(\/|$)/.test(pathname)) {
+      return "captcha_required";
+    }
+    if (officialAuthHost && /(^|\/)(mfa|otp|two-factor|2fa)(\/|$)/.test(pathname)) {
+      return "two_factor_required";
+    }
+    if (officialAuthHost && /(^|\/)(verify|challenge|confirm)(\/|$)/.test(pathname)) {
+      return "account_confirmation_required";
+    }
+    if (officialAuthHost || (host === "chatgpt.com" && pathname === "/auth/login")) {
+      return "login_required";
+    }
+  }
+  if (
+    await hasExactVisibleHeading(page, ["Verify you are human", "Security verification"])
+  ) {
+    return "captcha_required";
+  }
+  if (
+    await hasExactVisibleHeading(page, [
+      "Enter your verification code",
+      "Verify with your authenticator app",
+    ])
+  ) {
+    return "two_factor_required";
+  }
+  if (
+    await hasExactVisibleHeading(page, [
+      "Verify your identity",
+      "Confirm your identity",
+      "Confirm your account",
+    ])
+  ) {
+    return "account_confirmation_required";
+  }
+  if (await hasExactVisibleHeading(page, ["Log in", "Welcome back", "Sign in"])) {
+    return "login_required";
+  }
+  return null;
+}
+
 async function runVisibleUiWorkflow(page, options) {
   const mode = options && options.mode;
   const expectedOrigin = (options && options.expectedOrigin) || CHATGPT_ORIGIN;
   if (!new Set(["inspect", "request"]).has(mode)) {
     throw new ConnectorError("request_mode_invalid");
   }
+  const humanAuthChallenge = await detectHumanAuthChallenge(page);
+  if (humanAuthChallenge) throw new ConnectorError(humanAuthChallenge);
   let pageOrigin;
   try {
     pageOrigin = new URL(page.url()).origin;
@@ -279,6 +342,7 @@ async function cli(argv) {
 
 module.exports = {
   ConnectorError,
+  detectHumanAuthChallenge,
   normalizeLoopbackCdpEndpoint,
   runConnector,
   runVisibleUiWorkflow,

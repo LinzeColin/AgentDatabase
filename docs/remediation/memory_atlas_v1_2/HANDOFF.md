@@ -1,5 +1,29 @@
 # Memory Atlas v1.2 Remediation Handoff
 
+> **Current v1.2.1 note (2026-07-17 04:42 +10:00):** The v1.2.1 Task Pack is
+> 57/149 complete locally. This run completes only `S08-P1-T3`; S08-P1 is 3/3
+> and complete, while S08 remains in progress. `S08-P2-T1` is the next/only
+> eligible Task in a later run and no P2 implementation starts here. The
+> ChatGPT export connector now detects only four exact visible/official auth
+> challenges: login, two-factor, CAPTCHA and account confirmation. Detection
+> stops before any export click, credential field interaction, private API or
+> account-content capture and persists `FAILED_NEEDS_HUMAN_AUTH` plus a
+> `HUMAN_AUTH_REQUIRED` dispatch. A stateful request, including dry-run, is
+> suppressed while paused. Resume is explicit, revision-bound and requires a
+> SHA-256 evidence file; it never retries the browser action automatically.
+> The generic state transition still cannot exit the human-auth pause.
+> Regression is 115/115; the browser fixture covers 10 page scenarios and four
+> official auth URLs with zero credential-store/private-API access. Final
+> `validate:fast` is 6/6 in 23.091 seconds; the earlier final-scope
+> `validate:sync` is 10/10 in 201.924 seconds. Test-value, human-plane,
+> script-migration, renderer and required project-governance checks pass; the
+> latter reports zero errors/warnings. Machine truth is 168 files, 38 active
+> configs and 128 evidence payloads. The tracked ChatGPT sync baseline remains
+> IDLE at revision 0 and byte-identical. No fetch, push, deploy, branch/PR,
+> merge/rebase, live login, export request or shared cleanup occurred. Real
+> GitHub upload remains prohibited until all 149 Tasks plus final
+> review/remediation close. Do not start `S08-P2-T1` in this run.
+>
 > **Current v1.2.1 note (2026-07-17 01:49 +10:00):** The v1.2.1 Task Pack is
 > 54/149 complete locally. This run completes only `S07-P3-T3`; S07 is 9/9 and
 > S07-P3 is 3/3. `S08-P1-T1` is the next/only eligible Task in a later run and

@@ -1,0 +1,93 @@
+{
+  "schema_version": "memory_atlas.chatgpt_export_human_auth_evidence.v1_2_1_s08_p1_t3",
+  "task_id": "S08-P1-T3",
+  "acceptance_id": "ACC-MA-V121-S08-P1-T3",
+  "status": "PASS_LOCAL_IMPLEMENTATION",
+  "observed_at": "2026-07-16T18:36:00Z",
+  "challenge_handling": {
+    "codes": [
+      "login_required",
+      "two_factor_required",
+      "captcha_required",
+      "account_confirmation_required"
+    ],
+    "exact_visible_markers_only": true,
+    "official_auth_url_classification": true,
+    "request_click_count_before_pause": 0,
+    "pause_state": "FAILED_NEEDS_HUMAN_AUTH",
+    "connector_stopped_before_normal_ui_action": true,
+    "account_or_challenge_content_captured": false
+  },
+  "resume": {
+    "explicit_human_confirmation_required": true,
+    "expected_revision_required": true,
+    "bounded_event_id_required": true,
+    "evidence_sha256_required": true,
+    "pause_provenance_required": true,
+    "requested_origin_target": "FAILED_RETRYABLE",
+    "nonrequest_origin_target": "pre_auth_state",
+    "automatic_auth_action": false,
+    "automatic_resume": false,
+    "automatic_request_retry": false,
+    "generic_state_api_resume_allowed": false
+  },
+  "baseline": {
+    "state": "IDLE",
+    "revision": 0,
+    "request": null,
+    "state_file_sha256": "da9b7f188ad0da9cb3dd482748b2d44ddfc65c4fc340b1214ad21d0a36b78aa3",
+    "production_export_request_submitted": false,
+    "real_authentication_performed": false
+  },
+  "validation": {
+    "test_first": "Python ImportError and JavaScript TypeError observed before implementation",
+    "related_t1_t2_t3_python": "26/26 PASS",
+    "browser_fixture": "10 page scenarios PASS",
+    "official_auth_url_checks": "4/4 PASS",
+    "focused_cli_profile_test_value": "70/70 PASS",
+    "script_migration": "20/20 PASS",
+    "sync_unit_tests": "237/237 PASS in 46.559 seconds",
+    "validate_fast": "6/6 PASS in 30.848 seconds",
+    "validate_sync": "10/10 PASS in 201.924 seconds",
+    "credential_scan": "PASS in 138.566 seconds",
+    "auth_inspect": "PASS IDLE revision 0 with INSPECTED_NO_CHANGES"
+  },
+  "security": {
+    "automates_authentication": false,
+    "bypasses_login_2fa_captcha": false,
+    "credential_store_access": false,
+    "cookie_or_storage_state_access": false,
+    "password_otp_or_captcha_input": false,
+    "account_identity_captured": false,
+    "private_api_calls": false,
+    "raw_mutation": false,
+    "remote_actions": false
+  },
+  "artifacts": {
+    "contract_sha256": "f744912cf65c5add066d8bb6bf86f0af8a8817a1b682300ae46d156dc490084f",
+    "model_parameters_sha256": "666dbd44c7a6139a93a6d6de59ca36f68e5fbbadad9284a8a55000e227364d44",
+    "human_auth_module_sha256": "f398a801a7cd4178bd0a1d8d139d490d2ff3d8f727a884982cb72fdcebce16e7",
+    "state_module_sha256": "f540f9085c308701e8a9df5983710a6c4e4bcfecaf4eb3f5373b9a0910d914c6",
+    "connector_sha256": "da1ad0ca37a1c03d4318283a03098d7c45b90b5c19a5637440a776fe4c3dfcb7",
+    "python_test_sha256": "68df66205b0c055de1db9e7c3da9441b2dac055d0b758de2fde1e5abdb1db12c",
+    "browser_fixture_test_sha256": "e57766d8cb740bd930b4dfafc42e814a0023c88a43769dd142d3ec18051cf4a9"
+  },
+  "effects": {
+    "chatgpt_request": false,
+    "browser_invocation": false,
+    "browser_profile_mutation": false,
+    "raw_mutation": false,
+    "fetch": false,
+    "push": false,
+    "deployment": false,
+    "branch_or_pr": false
+  },
+  "phase_boundary": {
+    "human_auth_pause_resume_implemented": true,
+    "s08_p1_completed": true,
+    "notification_discovery_implemented": false,
+    "download_or_archive_implemented": false,
+    "stage_s08_completed": false,
+    "next_task": "S08-P2-T1"
+  }
+}

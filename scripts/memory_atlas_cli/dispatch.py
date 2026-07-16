@@ -14,6 +14,7 @@ from .build import (
     run_chatgpt_deep_explore,
     run_generate_personalization_prompt,
 )
+from .chatgpt_export_human_auth import run_chatgpt_export_human_auth
 from .chatgpt_export_state import (
     run_chatgpt_export_state,
     run_stateful_chatgpt_export_request,
@@ -29,6 +30,7 @@ RUNNERS: dict[str, Callable[[argparse.Namespace], int]] = {
     "sync": run_sync,
     "request-chatgpt-export": run_stateful_chatgpt_export_request,
     "chatgpt-export-state": run_chatgpt_export_state,
+    "chatgpt-export-auth": run_chatgpt_export_human_auth,
     "build-atlas": run_build_atlas,
     "analyze": run_analyze,
     "audit": run_audit,

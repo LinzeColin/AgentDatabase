@@ -72,6 +72,12 @@ HUMAN_AUTH_STATE = "FAILED_NEEDS_HUMAN_AUTH"
 RETRYABLE_STATE = "FAILED_RETRYABLE"
 FAILURE_STATES = frozenset({HUMAN_AUTH_STATE, RETRYABLE_STATE})
 FAILURE_SOURCES = frozenset(EXPORT_STATES) - {"PUSHED", *FAILURE_STATES}
+AUTH_CHALLENGE_CODES = (
+    "login_required",
+    "two_factor_required",
+    "captcha_required",
+    "account_confirmation_required",
+)
 MAX_STATE_BYTES = 64 * 1024
 MAX_HISTORY_ENTRIES = 128
 MAX_CONNECTOR_OUTPUT_BYTES = 16 * 1024
@@ -348,6 +354,7 @@ def _validate_request(value: object) -> dict[str, Any]:
         "DISPATCHED",
         "FAILED_BEFORE_CLICK",
         "OUTCOME_UNCERTAIN",
+        "HUMAN_AUTH_REQUIRED",
     }:
         raise ChatGPTExportStateError("export_state_request_invalid")
     if type(value["request_click_count"]) is not int or value[
@@ -408,6 +415,21 @@ def _validate_history(value: object) -> list[dict[str, Any]]:
             ),
             "request_click_outcome_uncertain": (
                 source == "REQUESTED" and target == "REQUESTED"
+            ),
+            "human_auth_required": (
+                source in FAILURE_SOURCES and target == HUMAN_AUTH_STATE
+            ),
+            "human_auth_completed": (
+                source == HUMAN_AUTH_STATE
+                and bool(result)
+                and result[-1]["reason_code"] == "human_auth_required"
+                and result[-1]["to_state"] == HUMAN_AUTH_STATE
+                and target
+                == (
+                    RETRYABLE_STATE
+                    if result[-1]["from_state"] == "REQUESTED"
+                    else result[-1]["from_state"]
+                )
             ),
         }
         if reason_code in coupled_transition:
@@ -799,6 +821,10 @@ def record_export_request_outcome(
         target = "WAITING_FOR_EXPORT"
         dispatch_status = "DISPATCHED"
         reason = "request_dispatched_waiting_for_export"
+    elif clicks == 0 and error_code in AUTH_CHALLENGE_CODES:
+        target = HUMAN_AUTH_STATE
+        dispatch_status = "HUMAN_AUTH_REQUIRED"
+        reason = "human_auth_required"
     elif clicks == 0:
         target = RETRYABLE_STATE
         dispatch_status = "FAILED_BEFORE_CLICK"
@@ -821,6 +847,175 @@ def record_export_request_outcome(
     updated["request"]["connector_result_sha256"] = result_hash
     updated["retry_from"] = "IDLE" if target == RETRYABLE_STATE else None
     updated["last_error_code"] = error_code
+    return validate_chatgpt_export_state(updated), True
+
+
+def _find_history_event(
+    state: dict[str, Any], event_id: str
+) -> dict[str, Any] | None:
+    return next(
+        (row for row in state["history"] if row["event_id"] == event_id),
+        None,
+    )
+
+
+def _validate_new_transition_input(
+    state: dict[str, Any],
+    *,
+    event_id: str,
+    evidence_sha256: str,
+    occurred_at: str,
+    expected_revision: int,
+) -> tuple[str, str, str]:
+    event_id = _validate_event_id(event_id)
+    evidence_sha256 = _validate_sha256(
+        evidence_sha256, "export_state_evidence_invalid"
+    )
+    occurred_at = _validate_utc(occurred_at, "export_state_occurred_at_invalid")
+    if type(expected_revision) is not int or expected_revision != state["revision"]:
+        raise ChatGPTExportStateError("export_state_revision_conflict")
+    return event_id, evidence_sha256, occurred_at
+
+
+def pause_export_for_human_auth(
+    state: dict[str, Any],
+    *,
+    challenge: str,
+    event_id: str,
+    evidence_sha256: str,
+    occurred_at: str,
+    expected_revision: int,
+) -> tuple[dict[str, Any], bool]:
+    current = validate_chatgpt_export_state(state)
+    if challenge not in AUTH_CHALLENGE_CODES:
+        raise ChatGPTExportStateError("human_auth_challenge_invalid")
+    event_id = _validate_event_id(event_id)
+    evidence_sha256 = _validate_sha256(
+        evidence_sha256, "export_state_evidence_invalid"
+    )
+    occurred_at = _validate_utc(occurred_at, "export_state_occurred_at_invalid")
+    existing = _find_history_event(current, event_id)
+    if existing is not None:
+        same_event = (
+            existing["to_state"] == HUMAN_AUTH_STATE
+            and existing["reason_code"] == "human_auth_required"
+            and existing["evidence_sha256"] == evidence_sha256
+            and current["status"] == HUMAN_AUTH_STATE
+            and current["last_error_code"] == challenge
+        )
+        if same_event:
+            return current, False
+        raise ChatGPTExportStateError("export_state_event_conflict")
+    _validate_new_transition_input(
+        current,
+        event_id=event_id,
+        evidence_sha256=evidence_sha256,
+        occurred_at=occurred_at,
+        expected_revision=expected_revision,
+    )
+    if current["status"] not in FAILURE_SOURCES:
+        raise ChatGPTExportStateError("human_auth_pause_state_invalid")
+    request = current["request"]
+    if (
+        current["status"] == "REQUESTED"
+        and isinstance(request, dict)
+        and request["request_click_count"] != 0
+    ):
+        raise ChatGPTExportStateError("human_auth_pause_click_outcome_uncertain")
+    updated = _append_history(
+        current,
+        to_state=HUMAN_AUTH_STATE,
+        event_id=event_id,
+        reason_code="human_auth_required",
+        evidence_sha256=evidence_sha256,
+        occurred_at=occurred_at,
+    )
+    updated["retry_from"] = None
+    updated["last_error_code"] = challenge
+    if current["status"] == "REQUESTED" and isinstance(updated["request"], dict):
+        updated["request"]["dispatch_status"] = "HUMAN_AUTH_REQUIRED"
+        updated["request"]["request_click_count"] = 0
+        updated["request"]["connector_error_code"] = challenge
+        updated["request"]["connector_result_sha256"] = evidence_sha256
+    return validate_chatgpt_export_state(updated), True
+
+
+def human_auth_resume_target(state: dict[str, Any]) -> str:
+    current = validate_chatgpt_export_state(state)
+    if current["status"] != HUMAN_AUTH_STATE:
+        raise ChatGPTExportStateError("human_auth_not_required")
+    if not current["history"]:
+        raise ChatGPTExportStateError("human_auth_pause_evidence_invalid")
+    pause_event = current["history"][-1]
+    if (
+        pause_event["reason_code"] != "human_auth_required"
+        or pause_event["to_state"] != HUMAN_AUTH_STATE
+        or current["last_error_code"] not in AUTH_CHALLENGE_CODES
+    ):
+        raise ChatGPTExportStateError("human_auth_pause_evidence_invalid")
+    source = pause_event["from_state"]
+    return RETRYABLE_STATE if source == "REQUESTED" else source
+
+
+def resume_export_after_human_auth(
+    state: dict[str, Any],
+    *,
+    event_id: str,
+    evidence_sha256: str,
+    occurred_at: str,
+    expected_revision: int,
+    explicit_confirmation: bool,
+) -> tuple[dict[str, Any], bool]:
+    current = validate_chatgpt_export_state(state)
+    if explicit_confirmation is not True:
+        raise ChatGPTExportStateError(
+            "explicit_human_auth_confirmation_required"
+        )
+    event_id = _validate_event_id(event_id)
+    evidence_sha256 = _validate_sha256(
+        evidence_sha256, "export_state_evidence_invalid"
+    )
+    occurred_at = _validate_utc(occurred_at, "export_state_occurred_at_invalid")
+    existing = _find_history_event(current, event_id)
+    if existing is not None:
+        same_event = (
+            existing["reason_code"] == "human_auth_completed"
+            and existing["evidence_sha256"] == evidence_sha256
+            and current["status"] == existing["to_state"]
+        )
+        if same_event:
+            return current, False
+        raise ChatGPTExportStateError("export_state_event_conflict")
+    _validate_new_transition_input(
+        current,
+        event_id=event_id,
+        evidence_sha256=evidence_sha256,
+        occurred_at=occurred_at,
+        expected_revision=expected_revision,
+    )
+    target = human_auth_resume_target(current)
+    updated = _append_history(
+        current,
+        to_state=target,
+        event_id=event_id,
+        reason_code="human_auth_completed",
+        evidence_sha256=evidence_sha256,
+        occurred_at=occurred_at,
+    )
+    if target == RETRYABLE_STATE:
+        updated["retry_from"] = "IDLE"
+        updated["last_error_code"] = "human_auth_resume_requires_new_request"
+        if isinstance(updated["request"], dict):
+            updated["request"]["dispatch_status"] = "FAILED_BEFORE_CLICK"
+            updated["request"]["request_click_count"] = 0
+            updated["request"]["connector_error_code"] = (
+                "human_auth_resume_requires_new_request"
+            )
+    else:
+        updated["retry_from"] = None
+        updated["last_error_code"] = None
+        if target == "IDLE":
+            updated["request"] = None
     return validate_chatgpt_export_state(updated), True
 
 
@@ -934,6 +1129,12 @@ def _failure_payload(
     pending_request_suppressed: bool = False,
 ) -> dict[str, Any]:
     safe_code = code if _CODE_RE.fullmatch(code) else "export_state_failed"
+    human_auth_required = bool(state and state["status"] == HUMAN_AUTH_STATE)
+    challenge = (
+        state["last_error_code"]
+        if human_auth_required and state["last_error_code"] in AUTH_CHALLENGE_CODES
+        else None
+    )
     return {
         "schema_version": RESULT_SCHEMA_VERSION,
         "status": "FAIL",
@@ -946,6 +1147,8 @@ def _failure_payload(
         if request_click_count in {0, 1}
         else 1,
         "pending_request_suppressed": pending_request_suppressed,
+        "human_auth_required": human_auth_required,
+        "human_auth_challenge": challenge,
         "credential_store_access": False,
         "private_api_calls": False,
         "raw_mutation": False,
@@ -957,6 +1160,7 @@ def _augment_connector_payload(
     payload: dict[str, Any], state: dict[str, Any]
 ) -> dict[str, Any]:
     result = dict(payload)
+    human_auth_required = state["status"] == HUMAN_AUTH_STATE
     result.update(
         {
             "state_task_id": TASK_ID,
@@ -964,6 +1168,13 @@ def _augment_connector_payload(
             "export_state": state["status"],
             "state_revision": state["revision"],
             "pending_request_suppressed": False,
+            "human_auth_required": human_auth_required,
+            "human_auth_challenge": (
+                state["last_error_code"]
+                if human_auth_required
+                and state["last_error_code"] in AUTH_CHALLENGE_CODES
+                else None
+            ),
             "raw_mutation": False,
             "remote_actions": False,
         }
@@ -984,8 +1195,21 @@ def execute_stateful_chatgpt_export_request(
         database_dir = _database_root(Path(args.database_dir))
         load_chatgpt_export_state_contract(database_dir)
         load_chatgpt_export_state_model_parameters(database_dir)
+        from .chatgpt_export_human_auth import (
+            load_chatgpt_export_human_auth_contract,
+            load_chatgpt_export_human_auth_model_parameters,
+        )
+
+        load_chatgpt_export_human_auth_contract(database_dir)
+        load_chatgpt_export_human_auth_model_parameters(database_dir)
         if bool(getattr(args, "dry_run", False)):
             state = load_chatgpt_export_state(database_dir)
+            if state["status"] == HUMAN_AUTH_STATE:
+                return 2, _failure_payload(
+                    "human_auth_required",
+                    state=state,
+                    pending_request_suppressed=True,
+                )
             exit_code, payload = _capture_connector(args, connector_runner)
             return exit_code, _augment_connector_payload(payload, state)
         if not bool(getattr(args, "apply", False)) or not bool(
@@ -994,6 +1218,12 @@ def execute_stateful_chatgpt_export_request(
             raise ChatGPTExportStateError("explicit_request_confirmation_required")
         with export_state_lock(database_dir):
             state = load_chatgpt_export_state(database_dir)
+            if state["status"] == HUMAN_AUTH_STATE:
+                return 2, _failure_payload(
+                    "human_auth_required",
+                    state=state,
+                    pending_request_suppressed=True,
+                )
             if state["status"] in PENDING_STATES:
                 return 2, _failure_payload(
                     "export_request_pending",
@@ -1039,6 +1269,7 @@ def run_stateful_chatgpt_export_request(args: Any) -> int:
 
 def _state_summary(state: dict[str, Any]) -> dict[str, Any]:
     request = state["request"] if isinstance(state["request"], dict) else None
+    human_auth_required = state["status"] == HUMAN_AUTH_STATE
     return {
         "schema_version": RESULT_SCHEMA_VERSION,
         "status": "PASS",
@@ -1047,6 +1278,12 @@ def _state_summary(state: dict[str, Any]) -> dict[str, Any]:
         "export_state": state["status"],
         "state_revision": state["revision"],
         "pending_request": state["status"] in PENDING_STATES,
+        "human_auth_required": human_auth_required,
+        "human_auth_challenge": (
+            state["last_error_code"]
+            if human_auth_required and state["last_error_code"] in AUTH_CHALLENGE_CODES
+            else None
+        ),
         "request_id": request["request_id"] if request else None,
         "request_dispatch_status": request["dispatch_status"] if request else None,
         "state_sha256": _sha256_payload(state),
@@ -1134,6 +1371,7 @@ def run_chatgpt_export_state(args: Any) -> int:
 
 __all__ = (
     "CONTRACT_RELATIVE",
+    "AUTH_CHALLENGE_CODES",
     "EXPECTED_CONTRACT",
     "EXPECTED_MODEL_PARAMETERS",
     "EXPORT_STATES",
@@ -1149,8 +1387,11 @@ __all__ = (
     "load_chatgpt_export_state",
     "load_chatgpt_export_state_contract",
     "load_chatgpt_export_state_model_parameters",
+    "human_auth_resume_target",
+    "pause_export_for_human_auth",
     "record_export_request_outcome",
     "reserve_export_request",
+    "resume_export_after_human_auth",
     "run_chatgpt_export_state",
     "run_stateful_chatgpt_export_request",
     "validate_chatgpt_export_state",

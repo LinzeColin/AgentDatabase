@@ -1,0 +1,27 @@
+{
+  "acceptance_id": "ACC-MA-V121-S08-P1-T3",
+  "calibration_boundary": "S08-P1-T3 owns human-auth pause and explicit resume only. S08-P2/P3 own notification, download, archive and push effects.",
+  "failure_semantics": "Unknown challenges, missing confirmation, malformed evidence, stale revision, invalid pause history and concurrent access fail closed without browser or remote action.",
+  "formula": "resume_permitted = state=FAILED_NEEDS_HUMAN_AUTH AND explicit_human_confirmation AND revision_match AND evidence_sha256_valid AND last_pause_valid; automatic_auth_actions=0; automatic_request_retries=0",
+  "formula_id": "FORM-009",
+  "model_id": "MOD-009",
+  "parameter_rationale": {
+    "automatic_auth_attempts": "Authentication remains a human-only action.",
+    "automatic_request_retries_after_resume": "A pre-click request pause resumes to a retryable state and requires a new explicit request.",
+    "automatic_resume_attempts": "Resume requires one explicit operator command after human completion.",
+    "challenge_type_count": "Only login, two-factor, CAPTCHA and account-confirmation challenges are recognized.",
+    "lock_wait_seconds": "A nonblocking lock fails closed under concurrent access.",
+    "maximum_evidence_sha256_characters": "Evidence is represented only by a fixed SHA-256 digest, never by account or challenge content."
+  },
+  "parameters": {
+    "automatic_auth_attempts": 0,
+    "automatic_request_retries_after_resume": 0,
+    "automatic_resume_attempts": 0,
+    "challenge_type_count": 4,
+    "lock_wait_seconds": 0,
+    "maximum_evidence_sha256_characters": 64
+  },
+  "purpose": "Pause on an exact authentication challenge and resume only after explicit human completion without automating or bypassing platform security.",
+  "schema_version": "memory_atlas.chatgpt_export_human_auth_model.v1_2_1_s08_p1_t3",
+  "task_id": "S08-P1-T3"
+}

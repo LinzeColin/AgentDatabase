@@ -4,6 +4,7 @@ import argparse
 from pathlib import Path
 
 from memory_atlas_owner_daily import OWNER_DAILY_STEP_IDS
+from .chatgpt_export_human_auth import AUTH_CHALLENGE_CODES
 from .chatgpt_export_state import EXPORT_STATES
 from .constants import ROOT
 
@@ -76,6 +77,21 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     export_state.add_argument("--reason-code")
     export_state.add_argument("--evidence-sha256")
     export_state.add_argument("--database-dir", type=Path, default=ROOT)
+
+    export_auth = subparsers.add_parser(
+        "chatgpt-export-auth",
+        help="Inspect, pause or explicitly resume the ChatGPT export auth boundary.",
+    )
+    export_auth_mode = export_auth.add_mutually_exclusive_group(required=True)
+    export_auth_mode.add_argument("--inspect", action="store_true")
+    export_auth_mode.add_argument("--pause", action="store_true")
+    export_auth_mode.add_argument("--resume", action="store_true")
+    export_auth.add_argument("--challenge", choices=AUTH_CHALLENGE_CODES)
+    export_auth.add_argument("--expected-revision", type=int)
+    export_auth.add_argument("--event-id")
+    export_auth.add_argument("--evidence-sha256")
+    export_auth.add_argument("--confirm-human-auth-complete", action="store_true")
+    export_auth.add_argument("--database-dir", type=Path, default=ROOT)
 
     build_atlas = subparsers.add_parser("build-atlas", help="Build derived Memory Atlas visualization data.")
     build_atlas.add_argument("--dry-run", action="store_true")

@@ -27,8 +27,8 @@
     "deleted_python_test_count": 2,
     "retained_validator_count": 39,
     "retained_baseline_python_test_count": 49,
-    "added_python_test_count": 25,
-    "current_python_test_count": 74
+    "added_python_test_count": 26,
+    "current_python_test_count": 75
   },
   "profile_commands": {
     "fast": "npm run validate:fast",
@@ -55,6 +55,7 @@
     "tests/test_memory_atlas_codex_restore_proof.py",
     "tests/test_memory_atlas_chatgpt_export_request.py",
     "tests/test_memory_atlas_chatgpt_export_state.py",
+    "tests/test_memory_atlas_chatgpt_export_human_auth.py",
     "tests/test_memory_atlas_public_raw_layout.py",
     "tests/test_memory_atlas_credential_exclusion.py",
     "tests/test_memory_atlas_raw_ledger.py",
@@ -3482,6 +3483,16 @@
       ],
       "reason": "Retained because it proves S08-P1-T2 strict contract/model drift rejection, the complete export-state vocabulary, atomic reservation before connector dispatch, pending-request suppression, legal transition history, revision and event idempotency, zero-click retry, uncertain-click fail closure, lock/symlink safety and sanitized connector output without account content.",
       "current_dependency": "S08-P1-T2 validate:sync, state CLI inspection and full Python suites"
+    },
+    {
+      "path": "tests/test_memory_atlas_chatgpt_export_human_auth.py",
+      "risk_bindings": [
+        "data_integrity",
+        "release_risk",
+        "runner_contract"
+      ],
+      "reason": "Retained because it proves S08-P1-T3 exact login, two-factor, CAPTCHA and account-confirmation pause classification, zero-click request coupling, explicit human-only resume, prior-state recovery, generic API closure, no automatic retry and sanitized read-only inspection.",
+      "current_dependency": "S08-P1-T3 validate:sync, auth CLI inspection and full Python suites"
     },
     {
       "path": "tests/test_memory_atlas_public_raw_layout.py",

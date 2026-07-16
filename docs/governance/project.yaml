@@ -1308,6 +1308,43 @@ features:
       - "EVID-MA-V121-S08-P1-T2-TEST"
       - "EVID-MA-V121-S08-P1-T2-PROOF"
       - "EVID-MA-V121-S08-P1-T2-REVIEW"
+  - feature_id: "FEAT-MA-V121-S08-P1-T3"
+    name: "Memory Atlas ChatGPT export human-auth pause and resume"
+    description: "v1.2.1 Task Pack 当前完成 57/149；connector 只按四种 exact visible marker 或 official auth URL 分类登录、2FA、CAPTCHA 与账号确认，并在 request click 0 时持久化 FAILED_NEEDS_HUMAN_AUTH。认证始终由人完成；专用 CLI 仅在显式确认、revision、event、SHA-256 evidence 和 pause provenance 全部有效时恢复。REQUESTED 恢复到 FAILED_RETRYABLE 并要求新显式请求，其他状态恢复到 auth 前状态；generic transition、自动认证和自动重试均被拒绝。仓库基线保持 IDLE，本 Task 未调用真实浏览器或提交生产导出请求。"
+    status: "active"
+    fact_level: "EXTRACTED"
+    model_ids:
+      - "MOD-009"
+    formula_ids:
+      - "FORM-009"
+    parameter_ids: []
+    code_refs:
+      - "OpenAIDatabase/apps/memory-atlas/scripts/chatgpt_export_request_connector.cjs"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/chatgpt_export_human_auth.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/chatgpt_export_state.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/parser.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/dispatch.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/runtime.py"
+    config_refs:
+      - "OpenAIDatabase/config/data_sources/chatgpt_export_human_auth.json"
+      - "OpenAIDatabase/机器治理/参数与公式/chatgpt_export_human_auth.v1_2_1_s08_p1_t3.json"
+      - "OpenAIDatabase/config/memory_atlas_validator_profiles.json"
+      - "OpenAIDatabase/config/memory_atlas_test_value_review.json"
+    source_refs:
+      - "OpenAIDatabase/机器治理/证据与日志/chatgpt_export_human_auth/chatgpt_export_human_auth.v1_2_1_s08_p1_t3.json"
+      - "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s08_p1_t3_chatgpt_export_human_auth_review.md"
+    owner_actions:
+      - "先运行 python3 -B scripts/atlasctl.py chatgpt-export-auth --inspect。状态为 FAILED_NEEDS_HUMAN_AUTH 时，只能由用户在官方平台完成登录、2FA、CAPTCHA 或账号确认；不得把 credential、OTP、answer、email、cookie/token 或页面正文传给 CLI。人工完成后使用 chatgpt-export-auth --resume，并同时提供 --confirm-human-auth-complete、匹配 revision、event id 与 evidence SHA-256。REQUESTED 恢复后必须重新显式执行 request；不得自动重试。下一 Task S08-P2-T1 才能实现通知 connector。"
+    test_refs:
+      - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_chatgpt_export_human_auth -q"
+      - "node OpenAIDatabase/tests/chatgpt_export_request_connector.test.cjs"
+      - "npm run validate:fast --prefix OpenAIDatabase/apps/memory-atlas"
+      - "npm run validate:sync --prefix OpenAIDatabase/apps/memory-atlas"
+    evidence_refs:
+      - "EVID-MA-V121-S08-P1-T3-CONTRACT"
+      - "EVID-MA-V121-S08-P1-T3-TEST"
+      - "EVID-MA-V121-S08-P1-T3-PROOF"
+      - "EVID-MA-V121-S08-P1-T3-REVIEW"
 models:
   -
     model_id: "MOD-001"
@@ -5743,4 +5780,24 @@ evidence_refs:
     evidence_id: "EVID-MA-V121-S08-P1-T2-REVIEW"
     kind: "review"
     ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s08_p1_t2_chatgpt_export_state_review.md"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S08-P1-T3-CONTRACT"
+    kind: "config"
+    ref: "OpenAIDatabase/config/data_sources/chatgpt_export_human_auth.json"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S08-P1-T3-TEST"
+    kind: "test"
+    ref: "OpenAIDatabase/tests/test_memory_atlas_chatgpt_export_human_auth.py"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S08-P1-T3-PROOF"
+    kind: "artifact"
+    ref: "OpenAIDatabase/机器治理/证据与日志/chatgpt_export_human_auth/chatgpt_export_human_auth.v1_2_1_s08_p1_t3.json"
+    fact_level: "VERIFIED"
+  -
+    evidence_id: "EVID-MA-V121-S08-P1-T3-REVIEW"
+    kind: "review"
+    ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s08_p1_t3_chatgpt_export_human_auth_review.md"
     fact_level: "EXTRACTED"

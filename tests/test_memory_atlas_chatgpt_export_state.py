@@ -41,6 +41,10 @@ from memory_atlas_cli.chatgpt_export_state import (  # noqa: E402
     write_chatgpt_export_state,
 )
 import memory_atlas_cli.chatgpt_export_state as state_module  # noqa: E402
+from memory_atlas_cli.chatgpt_export_human_auth import (  # noqa: E402
+    CONTRACT_RELATIVE as AUTH_CONTRACT_RELATIVE,
+    MODEL_RELATIVE as AUTH_MODEL_RELATIVE,
+)
 
 
 NOW = "2026-07-16T18:00:00Z"
@@ -91,7 +95,12 @@ def emitting_connector(payload: dict, calls: list[str]):
 class ExportStateFixture:
     def __init__(self, root: Path):
         self.root = root
-        for relative in (CONTRACT_RELATIVE, MODEL_RELATIVE):
+        for relative in (
+            CONTRACT_RELATIVE,
+            MODEL_RELATIVE,
+            AUTH_CONTRACT_RELATIVE,
+            AUTH_MODEL_RELATIVE,
+        ):
             target = root / relative
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_bytes((ROOT / relative).read_bytes())

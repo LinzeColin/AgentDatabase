@@ -158,6 +158,10 @@ class PublicProfileContractTests(unittest.TestCase):
             "tests.test_memory_atlas_chatgpt_export_state",
             sync_unit_tests["command"],
         )
+        self.assertIn(
+            "tests.test_memory_atlas_chatgpt_export_human_auth",
+            sync_unit_tests["command"],
+        )
         ui_isolation = next(
             step for step in payload["profiles"]["ui"]["steps"] if step["id"] == "public_raw_build_isolation"
         )

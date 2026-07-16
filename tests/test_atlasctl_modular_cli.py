@@ -30,6 +30,7 @@ EXPECTED_MODULES = {
     "runtime.py",
     "chatgpt_export_request.py",
     "chatgpt_export_state.py",
+    "chatgpt_export_human_auth.py",
 }
 
 EXPECTED_EXPORTS = {
@@ -53,6 +54,7 @@ EXPECTED_EXPORTS = {
     "run_chatgpt_export_request",
     "run_chatgpt_export_state",
     "run_stateful_chatgpt_export_request",
+    "run_chatgpt_export_human_auth",
     "load_runtime_config",
     "execute_with_runtime",
     "main",
@@ -133,6 +135,7 @@ class AtlasctlModularCliTests(unittest.TestCase):
                 "http://127.0.0.1:9222",
             ],
             "chatgpt-export-state": ["chatgpt-export-state", "--inspect"],
+            "chatgpt-export-auth": ["chatgpt-export-auth", "--inspect"],
             "build-atlas": ["build-atlas", "--dry-run"],
             "analyze": ["analyze", "--stage", "facets", "--dry-run"],
             "audit": ["audit", "--dry-run"],
