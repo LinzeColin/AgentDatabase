@@ -8,7 +8,7 @@ next_gate_id: "ACC.OpenAIDatabase.PAM1.0019"
 total_estimated_hours: 255
 completed_estimated_hours: 241
 taskpack_progress:
-  completed_tasks: 49
+  completed_tasks: 50
   total_tasks: 149
   delivery_state: "local_only_not_released"
 stages:
@@ -2154,7 +2154,7 @@ stages:
     person_goal: "把本机 Codex sessions/logs/history 自动只读归档为公开 raw、增量派生到 Memory Atlas，并在验证通过后直接推送 GitHub main。"
     status: "in_progress"
     estimated_hours: 9
-    estimated_pct: 44
+    estimated_pct: 56
     stop_conditions:
       - "源 Codex 文件发生字节、mtime 或 size 改变"
       - "发现认证资料或 secret 进入 staged diff"
@@ -2183,6 +2183,12 @@ stages:
         - "EVID-MA-V121-S07-P2-T1-OUTPUT"
         - "EVID-MA-V121-S07-P2-T1-TEST"
         - "EVID-MA-V121-S07-P2-T1-REVIEW"
+        - "EVID-MA-V121-S07-P2-T2-STATE"
+        - "EVID-MA-V121-S07-P2-T2-SNAPSHOT"
+        - "EVID-MA-V121-S07-P2-T2-WEEKLY"
+        - "EVID-MA-V121-S07-P2-T2-BROWSER"
+        - "EVID-MA-V121-S07-P2-T2-TEST"
+        - "EVID-MA-V121-S07-P2-T2-REVIEW"
     phases:
       - phase_id: "MA-V121-S07-P1"
         name: "本机来源发现与 raw 只读导出"
@@ -2334,7 +2340,7 @@ stages:
         objective: "把已登记 Codex raw 增量派生为可追溯的 Atlas 数据、周报和同步状态。"
         status: "in_progress"
         estimated_hours: 3
-        estimated_pct: 33
+        estimated_pct: 67
         stop_conditions:
           - "派生结果无法追溯到 raw manifest"
           - "前端被要求直接读取 raw"
@@ -2350,6 +2356,12 @@ stages:
             - "EVID-MA-V121-S07-P2-T1-OUTPUT"
             - "EVID-MA-V121-S07-P2-T1-TEST"
             - "EVID-MA-V121-S07-P2-T1-REVIEW"
+            - "EVID-MA-V121-S07-P2-T2-STATE"
+            - "EVID-MA-V121-S07-P2-T2-SNAPSHOT"
+            - "EVID-MA-V121-S07-P2-T2-WEEKLY"
+            - "EVID-MA-V121-S07-P2-T2-BROWSER"
+            - "EVID-MA-V121-S07-P2-T2-TEST"
+            - "EVID-MA-V121-S07-P2-T2-REVIEW"
         tasks:
           - task_id: "S07-P2-T1"
             name: "构建 Codex derived outputs"
@@ -2402,18 +2414,52 @@ stages:
           - task_id: "S07-P2-T2"
             name: "更新 Codex Atlas 数据"
             objective: "更新 Memory Atlas snapshot、周报和同步状态。"
-            status: "planned"
+            status: "completed"
             estimated_hours: 1
-            estimated_pct: 0
+            estimated_pct: 100
             dependencies:
               - "S07-P2-T1"
             acceptance_ids:
               - "ACC-MA-V121-S07-P2-T2"
-            test_commands: []
-            evidence_refs: []
+            acceptance:
+              - acceptance_id: "ACC-MA-V121-S07-P2-T2"
+                description: "Canonical T1 events/facets 以 event_id 作为唯一公开节点身份，原子发布 Memory Atlas snapshot、周报和独立 Codex Atlas sync state；真实数据包含 432 events、432 facets、717 memory nodes、756 total nodes 与 4,106 edges。最新 session `Codex session 归档备份删除` 可在 Search 2.0 首位发现，展示 session/event 身份和两条已验证归档证据，并可跳转星图、时间河和 Inspector。精确复跑返回 NO_CHANGES、零写入；state 篡改、derived hash/identity 漂移、不安全路径及替换后 fsync 失败均 fail closed 或事务回滚。raw、public raw、raw manifest、ledger、原 Codex sync state 与六个 T3 legacy consumers 不变。"
+                evidence_refs:
+                  - "EVID-MA-V121-S07-P2-T2-STATE"
+                  - "EVID-MA-V121-S07-P2-T2-SNAPSHOT"
+                  - "EVID-MA-V121-S07-P2-T2-WEEKLY"
+                  - "EVID-MA-V121-S07-P2-T2-BROWSER"
+                  - "EVID-MA-V121-S07-P2-T2-TEST"
+                  - "EVID-MA-V121-S07-P2-T2-REVIEW"
+            test_commands:
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_codex_atlas -q"
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_codex_atlas OpenAIDatabase.tests.test_memory_atlas_codex_derived OpenAIDatabase.tests.test_memory_atlas_codex_source_discovery OpenAIDatabase.tests.test_memory_atlas_codex_public_raw_archive OpenAIDatabase.tests.test_memory_atlas_codex_sync_state OpenAIDatabase.tests.test_memory_atlas_source_registry OpenAIDatabase.tests.test_atlasctl_modular_cli OpenAIDatabase.tests.test_atlasctl_runtime_core OpenAIDatabase.tests.test_atlasctl_script_consolidation OpenAIDatabase.tests.test_memory_atlas_data OpenAIDatabase.tests.test_memory_atlas_app_runtime -q"
+              - "python3 -B OpenAIDatabase/scripts/atlasctl.py analyze --stage codex-atlas --database-dir OpenAIDatabase"
+              - "node OpenAIDatabase/apps/memory-atlas/scripts/validate_search_2_0_browser.cjs --url http://127.0.0.1:4182/ --query 'Codex session 归档备份删除' --expected-result-id memory:codex_session_92f328412ed73c231096 --expected-evidence codex_session_92f328412ed73c231096"
+              - "npm run validate:fast --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run validate:sync --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run validate:ui --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run validate:release --prefix OpenAIDatabase/apps/memory-atlas"
+              - "python3 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+              - "python3.12 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+            test_results:
+              - "专用 9/9 覆盖合同/模型冻结、snapshot/weekly/state 原子发布、精确复跑零写入、dry-run、derived hash drift、event/facet identity drift、state symlink、state truth 篡改重建和替换后 fsync 失败事务回滚；Codex/registry/CLI/runtime/consolidation focused 131/131 PASS。"
+              - "真实发布读取 432 canonical events/facets，snapshot 为 3,327,670 bytes、SHA-256 1e826049d89be4195740e276fe99a89e58d849b1f793f9ab724ebd6f4352bd92；周报为 14,582 bytes、SHA-256 b9007b66b6c2bde7201be3a05e1c592516ed3953e318fcea7c6c3dbe217ef2e6。紧接真实复跑 outcome=NO_CHANGES、changed_paths=[]、writes_files=false。"
+              - "最新 session 的精确真实浏览器 Search 2.0 验收 PASS：首位 result ID 与 archive evidence 匹配，星图/时间河/Inspector 三条动作保持同一节点，截图 473,740 bytes，控制台和网络无 actionable error。"
+              - "fast 6/6（33.333 秒）、sync 10/10（207.566 秒）、最终 ui 14/14 PASS；数据增长暴露并关闭 Memory River 最近 260 事件挤掉风险/冷却证据层，以及 Obsidian 渐进 reveal 过早取样两个真实浏览器回归。最终 River 有 3 类 evidence layers，local graph 为 21 nodes/20 edges 并具有 local-neighbor 标签。"
+              - "首次完整 Python 候选正确 fail closed：旧 acceptance audit 仍把 Atlas session 数与 T3 legacy recommendations 耦合，机器平面库存也未登记新增 publication 参数文件。Acceptance 现通过同一 canonical publisher 的 dry-run 要求精确 NO_CHANGES，legacy recommendations 继续由独立门禁检查；机器平面精确更新为 157 files/31 active configs。相关 47/47 PASS，修复后完整 Python 505/505 PASS（262.126 秒）。"
+              - "双 runtime deterministic render 零 drift/零引用问题，privacy guard、built-dist raw isolation、raw/legacy git diff 与真实 publication NO_CHANGES 均 PASS。完整 pre-commit release final_audit 1/1 PASS（1,018.082 秒），failed=0、critical skip=0、raw mutation=false、remote push=false。Local commit 与 post-commit exact-tree release/recovery 仍是后续 closeout 门禁，未在本条预先声称通过。"
+            evidence_refs:
+              - "EVID-MA-V121-S07-P2-T2-STATE"
+              - "EVID-MA-V121-S07-P2-T2-SNAPSHOT"
+              - "EVID-MA-V121-S07-P2-T2-WEEKLY"
+              - "EVID-MA-V121-S07-P2-T2-BROWSER"
+              - "EVID-MA-V121-S07-P2-T2-TEST"
+              - "EVID-MA-V121-S07-P2-T2-REVIEW"
             risks:
               - "新 session 在 UI 中不可发现或无法解释"
-            rollback: "git revert 本 Task 本地 commit；恢复上一 derived snapshot 指针。"
+            rollback: "提交前反向应用 S07-P2-T2 code/config/UI/governance patch，并从上一提交恢复 snapshot/weekly/codex_atlas state；提交后使用纠正提交回退。本 Task 不删除或重写 canonical T1 derived、raw/archive/public index/ledger/original codex sync state 或 T3 legacy consumers。"
+            current_result: "complete_local_only_50_of_149_pending_s07_p2_t3_no_remote_upload"
           - task_id: "S07-P2-T3"
             name: "迁移旧 Codex 摘要语义"
             objective: "保留现有脱敏摘要的兼容读取，但不再把它冒充 full raw backup。"

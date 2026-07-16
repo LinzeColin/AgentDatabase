@@ -161,15 +161,27 @@ async function validateMemoryRiverVisualAcceptance(page) {
     await page.getByRole("button", { name: /^Memory River$/ }).click({ timeout: 5000 });
   }
   await page.waitForSelector(".memory-river-canvas", { timeout: 15000 });
-  await page.waitForFunction(() => {
-    const canvas = document.querySelector(".memory-river-canvas");
-    return Boolean(
-      canvas
-        && document.querySelectorAll(".memory-river-lane-flow").length >= 3
-        && document.querySelectorAll(".memory-river-evidence-layer").length >= 3
-        && document.querySelectorAll(".memory-river-marker").length >= 3,
-    );
-  }, null, { timeout: 10000 });
+  try {
+    await page.waitForFunction(() => {
+      const canvas = document.querySelector(".memory-river-canvas");
+      return Boolean(
+        canvas
+          && document.querySelectorAll(".memory-river-lane-flow").length >= 3
+          && document.querySelectorAll(".memory-river-evidence-layer").length >= 3
+          && document.querySelectorAll(".memory-river-marker").length >= 3,
+      );
+    }, null, { timeout: 10000 });
+  } catch (error) {
+    error.details = await page.evaluate(() => ({
+      renderer: document.querySelector(".timeline-map")?.getAttribute("data-timeline-renderer") || "",
+      canvasPresent: Boolean(document.querySelector(".memory-river-canvas")),
+      laneFlows: document.querySelectorAll(".memory-river-lane-flow").length,
+      evidenceLayers: document.querySelectorAll(".memory-river-evidence-layer").length,
+      markers: document.querySelectorAll(".memory-river-marker").length,
+      visibleText: document.querySelector(".timeline-map")?.textContent?.trim().slice(0, 500) || "",
+    }));
+    throw error;
+  }
 
   const river = await page.evaluate(() => {
     const canvas = document.querySelector(".memory-river-canvas");

@@ -14,6 +14,7 @@ from typing import Any
 
 SNAPSHOT_PATH = Path("data/derived/visualization/memory_atlas.json")
 WEEKLY_OUTPUT_DIR = Path("data/derived/weekly")
+MAX_SECTION_ITEMS = 25
 
 
 def _clean_text(value: Any, fallback: str = "") -> str:
@@ -132,7 +133,37 @@ def _render_recommendation(row: dict[str, Any]) -> str:
 
 def _append_section(lines: list[str], heading: str, items: list[str]) -> None:
     lines.extend(("", f"## {heading}", ""))
-    lines.extend(items or ["- \u65e0\u3002"])
+    if not items:
+        lines.append("- \u65e0\u3002")
+        return
+    lines.extend(items[:MAX_SECTION_ITEMS])
+    if len(items) > MAX_SECTION_ITEMS:
+        lines.append(
+            f"- \u5176\u4f59 `{len(items) - MAX_SECTION_ITEMS}` \u9879\u4fdd\u7559\u5728\u8131\u654f snapshot \u4e2d\uff0c"
+            "\u53ef\u5728 Memory Atlas \u641c\u7d22\u590d\u6838\u3002"
+        )
+
+
+def _append_codex_publication(lines: list[str], snapshot: dict[str, Any]) -> None:
+    publication = snapshot.get("codex_publication")
+    if not isinstance(publication, dict):
+        return
+    counts = publication.get("counts") if isinstance(publication.get("counts"), dict) else {}
+    latest = publication.get("latest_session") if isinstance(publication.get("latest_session"), dict) else {}
+    lines.extend(
+        (
+            "",
+            "## Codex \u540c\u6b65\u72b6\u6001",
+            "",
+            f"- \u72b6\u6001\uff1a`{_clean_text(publication.get('status'), 'unknown')}`",
+            f"- Publication state\uff1a`{_clean_text(publication.get('state_ref'), '\u672a\u63d0\u4f9b')}`",
+            f"- Canonical events / facets\uff1a`{int(counts.get('event_count') or 0)}` / `{int(counts.get('facet_count') or 0)}`",
+            f"- Atlas Codex nodes\uff1a`{int(counts.get('atlas_codex_node_count') or 0)}`",
+            f"- \u6700\u65b0\u4f1a\u8bdd\uff1a`{_clean_text(latest.get('thread_name'), '\u672a\u63d0\u4f9b')}`\uff08`{_clean_text(latest.get('updated_at'), '\u672a\u77e5\u65f6\u95f4')}`\uff09",
+            f"- UI \u67e5\u8be2\u8bcd\uff1a`{_clean_text(latest.get('ui_query'), '\u672a\u63d0\u4f9b')}`",
+            f"- \u89e3\u91ca\uff1a{_clean_text(latest.get('explanation_zh'), '\u672a\u63d0\u4f9b\u3002')}",
+        )
+    )
 
 
 def _render_report(
@@ -168,6 +199,7 @@ def _render_report(
         f"- Pending proposal count\uff1a`{len(pending_nodes)}`",
         f"- Agent recommendation count\uff1a`{len(recommendations)}`",
     ]
+    _append_codex_publication(lines, snapshot)
     _append_section(lines, "\u8fd1\u671f\u51b3\u7b56", [_render_node(*item) for item in decisions])
     _append_section(lines, "\u9ad8\u91cd\u8981\u6027\u53d8\u5316", [_render_node(*item) for item in high_changes])
     _append_section(lines, "Pending proposal\uff08\u5f85\u6388\u6743\u63d0\u6848\uff09", [_render_node(*item) for item in pending_nodes])
@@ -212,10 +244,7 @@ def _write_if_changed_atomic(path: Path, content: str) -> bool:
     return True
 
 
-def build_weekly_report(database_dir: Path) -> dict[str, Any]:
-    database_dir = Path(database_dir).resolve()
-    snapshot_file = database_dir / SNAPSHOT_PATH
-    snapshot = json.loads(snapshot_file.read_text(encoding="utf-8"))
+def build_weekly_report_payload(snapshot: dict[str, Any]) -> dict[str, Any]:
     if not isinstance(snapshot, dict):
         raise ValueError("\u8131\u654f\u6d3e\u751f\u5feb\u7167\u5fc5\u987b\u662f JSON object\u3002")
 
@@ -264,7 +293,6 @@ def build_weekly_report(database_dir: Path) -> dict[str, Any]:
     )
 
     output = WEEKLY_OUTPUT_DIR / f"{week_start.isoformat()}.memory_atlas_weekly_report.md"
-    changed = _write_if_changed_atomic(database_dir / output, report)
     return {
         "status": "PASS",
         "snapshot": SNAPSHOT_PATH.as_posix(),
@@ -281,11 +309,26 @@ def build_weekly_report(database_dir: Path) -> dict[str, Any]:
             "agent_recommendations": len(recommendations),
         },
         "output": output.as_posix(),
-        "writes_files": changed,
-        "output_changed": changed,
+        "content": report,
+        "writes_files": False,
+        "output_changed": False,
         "raw_mutation": False,
         "remote_push": False,
     }
+
+
+def build_weekly_report(database_dir: Path) -> dict[str, Any]:
+    database_dir = Path(database_dir).resolve()
+    snapshot_file = database_dir / SNAPSHOT_PATH
+    snapshot = json.loads(snapshot_file.read_text(encoding="utf-8"))
+    result = build_weekly_report_payload(snapshot)
+    changed = _write_if_changed_atomic(
+        database_dir / result["output"],
+        result.pop("content"),
+    )
+    result["writes_files"] = changed
+    result["output_changed"] = changed
+    return result
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:

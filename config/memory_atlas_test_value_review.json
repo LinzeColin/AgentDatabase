@@ -27,8 +27,8 @@
     "deleted_python_test_count": 2,
     "retained_validator_count": 39,
     "retained_baseline_python_test_count": 49,
-    "added_python_test_count": 18,
-    "current_python_test_count": 67
+    "added_python_test_count": 19,
+    "current_python_test_count": 68
   },
   "profile_commands": {
     "fast": "npm run validate:fast",
@@ -48,6 +48,7 @@
     "tests/test_memory_atlas_codex_public_raw_archive.py",
     "tests/test_memory_atlas_codex_sync_state.py",
     "tests/test_memory_atlas_codex_derived.py",
+    "tests/test_memory_atlas_codex_atlas.py",
     "tests/test_memory_atlas_public_raw_layout.py",
     "tests/test_memory_atlas_credential_exclusion.py",
     "tests/test_memory_atlas_raw_ledger.py",
@@ -3404,6 +3405,17 @@
       ],
       "reason": "Retained because it proves S07-P2-T1 immutable T2/T3 archive derivation, manifest-bound event provenance, facets and Universe State inputs, exact-repeat zero writes, one-archive incremental parsing, privacy boundaries and tamper fail closure.",
       "current_dependency": "S07-P2-T1 validate:sync and full Python suites"
+    },
+    {
+      "path": "tests/test_memory_atlas_codex_atlas.py",
+      "risk_bindings": [
+        "user_journey",
+        "data_integrity",
+        "release_risk",
+        "runner_contract"
+      ],
+      "reason": "Retained because it proves S07-P2-T2 contract/model binding, canonical snapshot/weekly/state publication, current-state truth checks, exact-repeat zero writes, UI evidence, privacy, output path safety and transactional rollback on fsync failure.",
+      "current_dependency": "S07-P2-T2 validate:sync, validate:ui and full Python suites"
     },
     {
       "path": "tests/test_memory_atlas_public_raw_layout.py",

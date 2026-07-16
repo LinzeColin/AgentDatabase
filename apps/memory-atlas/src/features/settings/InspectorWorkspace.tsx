@@ -52,6 +52,8 @@ export function NodeInspector({
   }
   const humanNode = buildHumanNodeSummary(node, edgeCount);
   const explanation = buildInspectorExplanation(node, edgeCount, sharedState);
+  const sourceRecordId = node.source_record_id;
+  const sourceEventId = node.source_event_id;
   return (
     <aside
       className="inspector"
@@ -152,6 +154,11 @@ export function NodeInspector({
             <div><dt>有效期</dt><dd>{node.validity || "未知"}</dd></div>
             <div><dt>置信度</dt><dd>{zhCNEnumLabel("confidence", node.confidence)}</dd></div>
             <div><dt>投入回报</dt><dd>{formatScore(node.metrics?.roi?.leverage_score)}</dd></div>
+            {sourceRecordId ? <div><dt>来源记录</dt><dd>{sourceRecordId}</dd></div> : null}
+            {sourceEventId ? <div><dt>派生事件</dt><dd>{sourceEventId}</dd></div> : null}
+            {node.evidence_refs?.length ? (
+              <div><dt>归档证据</dt><dd>{node.evidence_refs.map((ref) => ref.ref_id).filter(Boolean).join(" / ")}</dd></div>
+            ) : null}
           </dl>
         </section>
       ) : null}

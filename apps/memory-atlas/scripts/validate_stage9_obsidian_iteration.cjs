@@ -215,8 +215,12 @@ async function validateBrowserObsidian() {
     await page.waitForFunction(() => document.querySelector(".obsidian-graph-view")?.getAttribute("data-local-graph-mode") === "node", null, { timeout: 10000 });
     await page.waitForFunction(() => {
       const count = document.querySelectorAll(".obsidian-node").length;
-      return count > 3 && count <= 96;
-    }, null, { timeout: 10000 });
+      const edgeCount = document.querySelectorAll(".obsidian-link").length;
+      const localLabelCount = document.querySelectorAll(
+        '.obsidian-node-label[data-label-rule="local-neighbor"], .obsidian-node-label[data-label-rule="hub"]',
+      ).length;
+      return count > 3 && count <= 96 && edgeCount > 0 && localLabelCount > 0;
+    }, null, { timeout: 15000 });
     const localState = await inspectObsidian(page);
     assertCondition(
       localState.localMode === "node"
@@ -308,6 +312,8 @@ async function inspectObsidian(page) {
       edgeCount: document.querySelectorAll(".obsidian-link").length,
       labelCount: document.querySelectorAll(".obsidian-node-label").length,
       labelRules: Array.from(document.querySelectorAll(".obsidian-node-label")).map((label) => label.getAttribute("data-label-rule") || ""),
+      nodeLabels: Array.from(document.querySelectorAll(".obsidian-node")).slice(0, 12).map((node) => node.getAttribute("aria-label") || ""),
+      selectedNodeLabels: Array.from(document.querySelectorAll(".obsidian-node.selected")).map((node) => node.getAttribute("aria-label") || ""),
       localBudgetVisible: Boolean(document.querySelector(".obsidian-local-budget")),
       focusText: document.querySelector(".obsidian-focus-connectivity")?.textContent || "",
     };

@@ -1,0 +1,86 @@
+{
+  "acceptance_id": "ACC-MA-V121-S07-P2-T2",
+  "contract_ref": "config/data_sources/codex_atlas_publication.json",
+  "contract_sha256": "538f18a55796c4a7847b69a9c9c4f1f901f91c6e9cb68710b1815df57c69b042",
+  "counts": {
+    "archive_count": 2,
+    "event_count": 432,
+    "facet_count": 432,
+    "message_count": 23183,
+    "tool_call_count": 149776
+  },
+  "derived_state_ref": "data/derived/codex/codex_derived_state.json",
+  "derived_state_sha256": "aa686b41b2c587768e9bc43e195269575f98be7ce3fa79ddab688df861dc2b99",
+  "input_archives": [
+    {
+      "archive_id": "codex-public-raw-20260715t1300z",
+      "archive_manifest_ref": "data/raw_archives/codex/codex-public-raw-20260715t1300z/manifest.json",
+      "archive_manifest_sha256": "6640cbdeed803df4c3090aaa2e51350d68210bf059bdcafe5ec65f40561cef81",
+      "kind": "baseline",
+      "package_sha256": "e1406eea8b67ffdac96fb41f26f821696389b6eb5ed9ef069b1b42b186d1f174",
+      "public_index_ref": "data/public_raw/codex/codex_raw_archive.codex-public-raw-20260715t1300z.6640cbdeed80.json",
+      "public_index_sha256": "d5f946b5ec04c3babe3f24babc624fd342ad8876b6f539a357bfed4cd434825a",
+      "recorded_at_utc": "2026-07-15T14:00:40Z",
+      "sequence": 0
+    },
+    {
+      "archive_id": "codex-incremental-20260715t180600z",
+      "archive_manifest_ref": "data/raw_archives/codex/codex-incremental-20260715t180600z/manifest.json",
+      "archive_manifest_sha256": "d745adab38261d8c09195e80c86327aeb3da90fa8bf752ea3cbd1afaca57f024",
+      "kind": "incremental",
+      "package_sha256": "5b516b8ef34fab4e04a96e7f7ad70c13a5ad99f0407328bce5de0790c2831c8d",
+      "public_index_ref": "data/public_raw/codex/codex_incremental_archive.codex-incremental-20260715t180600z.d745adab3826.json",
+      "public_index_sha256": "6819da4472221c28232de58731d7c1da866d9cd2462c6c564052912b412beef6",
+      "recorded_at_utc": "2026-07-15T18:06:48Z",
+      "sequence": 1
+    }
+  ],
+  "last_result": {
+    "atlas_snapshot_updated": true,
+    "outcome": "PUBLISHED_CANONICAL_CODEX_ATLAS",
+    "sync_status_updated": true,
+    "ui_discoverability_verified": true,
+    "weekly_report_updated": true
+  },
+  "latest_session": {
+    "event_id": "codex_session_92f328412ed73c231096",
+    "evidence_ref_count": 2,
+    "explanation_zh": "页面展示会话名、时间、消息/工具统计、主题、来源和已验证归档证据；不展示 raw transcript、明文凭据或本机绝对路径。",
+    "node_id": "memory:codex_session_92f328412ed73c231096",
+    "session_id": "019f6688-1b1e-72f3-8dee-6352e2e7dd6f",
+    "state_ref": "data/sync_state/codex_atlas.json",
+    "thread_name": "Codex session 归档备份删除",
+    "ui_query": "Codex session 归档备份删除",
+    "updated_at": "2026-07-15T16:07:29.848000Z"
+  },
+  "model_parameters_ref": "机器治理/参数与公式/codex_atlas_publication.v1_2_1_s07_p2_t2.json",
+  "model_parameters_sha256": "70e5d9d629d5d6f5cb0f3eb36d61fa7e7738d3de10f1804f9eaff8a0911d625c",
+  "outputs": {
+    "atlas_snapshot": {
+      "byte_size": 2457464,
+      "path": "data/derived/visualization/memory_atlas.json",
+      "sha256": "4e86a2b8608e1e068050a295e8f67cdcdfc07340f4c36a0e4b3270b2bc07908b"
+    },
+    "weekly_report": {
+      "byte_size": 14582,
+      "path": "data/derived/weekly/2026-07-13.memory_atlas_weekly_report.md",
+      "sha256": "d77aeb1c5a96a38fb87fc92cc5536484821d577c87d6b7b89c07cd3952748e45"
+    }
+  },
+  "phase_boundary": {
+    "atlas_snapshot_updated": true,
+    "does_not_commit_or_push": true,
+    "does_not_deploy": true,
+    "does_not_modify_raw": true,
+    "does_not_regenerate_legacy_consumers": true,
+    "next_task": "S07-P2-T3",
+    "sync_status_updated": true,
+    "ui_code_updated_only_for_discoverability": true,
+    "weekly_report_updated": true
+  },
+  "published_at": "2026-07-16T06:23:26Z",
+  "schema_version": "memory_atlas.codex_atlas_publication_state.v1_2_1_s07_p2_t2",
+  "source_id": "codex",
+  "state_path": "data/sync_state/codex_atlas.json",
+  "task_id": "S07-P2-T2"
+}

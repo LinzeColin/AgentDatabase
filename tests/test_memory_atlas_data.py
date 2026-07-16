@@ -116,12 +116,19 @@ class MemoryAtlasDataTests(unittest.TestCase):
                 ],
             )
             write_jsonl(
-                db / "data/processed/codex/codex_session_manifest.jsonl",
+                db / "data/derived/codex/codex_events.jsonl",
                 [
                     {
+                        "schema_version": "memory_atlas.codex_derived_event.v1_2_1_s07_p2_t1",
+                        "source": "codex",
+                        "source_id": "codex",
+                        "event_id": "codex_session_fixture_1",
+                        "record_id": "codex-session-1",
                         "session_id": "codex-session-1",
+                        "source_relative_path": "sessions/2026/06/13/codex-session-1.jsonl",
                         "thread_name": "Memory Atlas 真实 Codex 数据同步",
                         "day": "2026-06-13",
+                        "updated_day": "2026-06-13",
                         "updated_at": "2026-06-13T01:00:00Z",
                         "message_count": 18,
                         "user_message_count": 9,
@@ -137,23 +144,25 @@ class MemoryAtlasDataTests(unittest.TestCase):
                 ],
             )
             write_jsonl(
-                db / "data/processed/codex/codex_daily_activity.jsonl",
+                db / "data/derived/codex/codex_facets.jsonl",
                 [
                     {
-                        "date": "2026-06-13",
-                        "conversation_count": 1,
-                        "message_count": 18,
-                        "user_message_count": 9,
-                        "assistant_message_count": 9,
-                        "tool_call_count": 7,
-                        "error_event_count": 1,
-                        "abort_count": 0,
-                        "activity_score": 61,
-                        "activity_level": 5,
+                        "schema_version": "memory_atlas.codex_derived_facet.v1_2_1_s07_p2_t1",
+                        "source": "codex",
+                        "source_id": "codex",
+                        "event_id": "codex_session_fixture_1",
+                        "record_id": "codex-session-1",
+                        "evidence_refs": [
+                            {
+                                "ref_type": "archive_manifest",
+                                "source_id": "codex",
+                                "evidence_level": "verified_recoverable_sanitized_raw_archive",
+                                "path": "data/raw_archives/codex/fixture/manifest.json",
+                            }
+                        ],
                     }
                 ],
             )
-            (db / "data/derived/codex").mkdir(parents=True)
             (db / "data/derived/codex/codex_agent_recommendations.json").write_text(
                 json.dumps(
                     {
@@ -261,7 +270,7 @@ class MemoryAtlasDataTests(unittest.TestCase):
         self.assertIn("codex", {source["id"] for source in atlas["data_sources"]})
         self.assertEqual(atlas["agent_recommendations"]["session_count"], 1)
         codex_node = next(node for node in atlas["nodes"] if node.get("data_source") == "codex")
-        self.assertEqual(codex_node["source_label"], "Codex 本地数据")
+        self.assertEqual(codex_node["source_label"], "Codex 已验证归档派生数据")
         self.assertIn("真实 Codex", codex_node["statement"])
         memory_node = next(node for node in atlas["nodes"] if node.get("memory_id") == "mem_core_0000")
         self.assertIn("核心画像 ·", memory_node["label"])

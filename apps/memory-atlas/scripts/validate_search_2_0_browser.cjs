@@ -7,6 +7,9 @@ const path = require("node:path");
 
 const outputDir = getArg("--output-dir") || fs.mkdtempSync(path.join(os.tmpdir(), "search-2-0-browser-"));
 const targetUrl = getArg("--url") || "http://127.0.0.1:5173/";
+const searchQuery = getArg("--query") || "Codex";
+const expectedResultId = getArg("--expected-result-id");
+const expectedEvidence = getArg("--expected-evidence");
 const browserExecutable = process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH || findChromiumExecutable();
 const checks = [];
 
@@ -134,7 +137,7 @@ async function main() {
       root,
     );
 
-    await fillSearch(page, "Codex");
+    await fillSearch(page, searchQuery);
     await page.waitForSelector("[data-search-result]", { timeout: 10_000 });
     const result = await firstResultSnapshot(page);
     assertCondition(
@@ -152,6 +155,14 @@ async function main() {
       "Search result exposes matched reason, evidence refs, proposal flag and three jump actions",
       "Search result fields or actions are incomplete",
       result,
+    );
+    assertCondition(
+      (!expectedResultId || result.resultId === expectedResultId) &&
+        (!expectedEvidence || result.evidenceRef.includes(expectedEvidence)),
+      "s07_p2_t2_latest_codex_session_discoverability",
+      "Requested canonical Codex session is the first Search 2.0 result with archive evidence",
+      "Requested canonical Codex session is missing, displaced or lacks the expected archive evidence",
+      { searchQuery, expectedResultId, expectedEvidence, result },
     );
 
     const debugSignal = await page.evaluate(() => window.__memoryAtlasStage7Phase1?.() ?? null);
@@ -192,7 +203,7 @@ async function main() {
       zeroRecovery,
     );
 
-    await fillSearch(page, "Codex");
+    await fillSearch(page, searchQuery);
     await page.waitForSelector("[data-search-result]", { timeout: 10_000 });
     const selectedResult = await firstResultSnapshot(page);
     await page.locator('[data-search-result] [data-search-jump="starfield"]').first().click({ timeout: 10_000 });
@@ -210,7 +221,7 @@ async function main() {
     );
 
     await openSearch(page);
-    await fillSearch(page, "Codex");
+    await fillSearch(page, searchQuery);
     await page.waitForSelector("[data-search-result]", { timeout: 10_000 });
     const riverResult = await firstResultSnapshot(page);
     await page.locator('[data-search-result] [data-search-jump="river"]').first().click({ timeout: 10_000 });
@@ -228,7 +239,7 @@ async function main() {
     );
 
     await openSearch(page);
-    await fillSearch(page, "Codex");
+    await fillSearch(page, searchQuery);
     await page.waitForSelector("[data-search-result]", { timeout: 10_000 });
     const inspectorResult = await firstResultSnapshot(page);
     await page.locator('[data-search-result] [data-search-jump="inspector"]').first().click({ timeout: 10_000 });
@@ -285,6 +296,7 @@ async function main() {
       status: "PASS",
       validator: "validate_search_2_0_browser",
       url: targetUrl,
+      query: searchQuery,
       output_dir: outputDir,
       checks,
     }, null, 2));
@@ -295,6 +307,7 @@ async function main() {
       status: "FAIL",
       validator: "validate_search_2_0_browser",
       url: targetUrl,
+      query: searchQuery,
       output_dir: outputDir,
       error: error.message,
       details: error.details || null,
@@ -311,6 +324,7 @@ main().catch((error) => {
     status: "FAIL",
     validator: "validate_search_2_0_browser",
     url: targetUrl,
+    query: searchQuery,
     output_dir: outputDir,
     error: error.message,
     checks,

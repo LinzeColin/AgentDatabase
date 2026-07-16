@@ -1535,7 +1535,7 @@
       {
         "path": "apps/memory-atlas/scripts/validate_search_2_0_browser.cjs",
         "baseline": true,
-        "sha256": "fe5bccbd7919e7043723df5639e4cad5de2555453ee579c34771dd2e6f1eff03",
+        "sha256": "9ec965bb6b58ec44fdb59e52f0eb3b1430731c64ea9873e96143c6819e0f0c25",
         "matched_families": [
           "validator"
         ],
@@ -1571,7 +1571,7 @@
       {
         "path": "apps/memory-atlas/scripts/validate_stage7_visual_acceptance.cjs",
         "baseline": true,
-        "sha256": "7d568bb9a707e9f82ea8059ab3e23875e500424e6ba97c6065813bbb39cd5f7c",
+        "sha256": "64f1ed57ec702b524dbaae1cb8584832377cfa497cdc825db63e1153fa4d3387",
         "matched_families": [
           "validator"
         ],
@@ -1598,7 +1598,7 @@
       {
         "path": "apps/memory-atlas/scripts/validate_stage9_obsidian_iteration.cjs",
         "baseline": true,
-        "sha256": "ceb0937714cbde6020375a3bb42c62850f5b707648d9945462dc6817b30cf219",
+        "sha256": "79766f0caba5d822dbffdd57602dd27d3c3e8a18d752b681a8ad4d8e6c5cd759",
         "matched_families": [
           "validator"
         ],
@@ -1634,7 +1634,7 @@
       {
         "path": "scripts/audit_memory_atlas_acceptance.py",
         "baseline": true,
-        "sha256": "97f46ca0574edd1906ecde61cf6de3851220c1cbbf7e63edd1c8e15046478ec2",
+        "sha256": "ee79c049c8036d772e6835e2e30d4f106295a6be67d6be2dee5ff75ef84bd4dc",
         "matched_families": [
           "audit"
         ],
@@ -1661,7 +1661,7 @@
       {
         "path": "scripts/audit_memory_atlas_human_plane.py",
         "baseline": false,
-        "sha256": "eca8d99ce43fab7817a41f5a23383640b85e95f9c9ea67f21e71415cfbb37f44",
+        "sha256": "6d8a8bdc723cd8508e217dc95ba94f80cd818363639749f3c64480f84c28ccf3",
         "matched_families": [
           "audit"
         ],
@@ -1697,7 +1697,7 @@
       {
         "path": "scripts/audit_memory_atlas_test_value.py",
         "baseline": false,
-        "sha256": "82207e96960336bfe78df6b49c44735304af0c2877f97f2cba30533d21759ab2",
+        "sha256": "57afd000a1e39fe5593264315cca43d4e35f7a6232c6e2052519b7fff638edca",
         "matched_families": [
           "audit"
         ],
@@ -1769,7 +1769,7 @@
       {
         "path": "scripts/build_memory_atlas_data.py",
         "baseline": true,
-        "sha256": "579e893aa8473a0c9f6ed0ffbe91c0c5b1b8e9fcc7dfc6792c25a0eea2f22cc5",
+        "sha256": "be161c31c0f9aeb610cf508a36bff8ddd1abda692d7e147df93bc886f631a0a3",
         "matched_families": [
           "build"
         ],
@@ -1886,7 +1886,7 @@
       {
         "path": "scripts/build_memory_atlas_weekly_report.py",
         "baseline": true,
-        "sha256": "f1f61c437caca8f7cbdc07d711e69f99f2d073f7702b3fa14581001b8e19e9f6",
+        "sha256": "55f806eef11fa295c149cca967cadb19b94633284e9877ed10734dc34ea7bfec",
         "matched_families": [
           "build"
         ],

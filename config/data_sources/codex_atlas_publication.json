@@ -1,0 +1,51 @@
+{
+  "schema_version": "memory_atlas.codex_atlas_publication_contract.v1_2_1_s07_p2_t2",
+  "task_id": "S07-P2-T2",
+  "acceptance_id": "ACC-MA-V121-S07-P2-T2",
+  "source_id": "codex",
+  "inputs": {
+    "derived_contract_ref": "config/data_sources/codex_derived.json",
+    "derived_state_ref": "data/derived/codex/codex_derived_state.json",
+    "events_ref": "data/derived/codex/codex_events.jsonl",
+    "facets_ref": "data/derived/codex/codex_facets.jsonl",
+    "behavior_summary_ref": "data/derived/codex/codex_behavior_summary.json",
+    "canonical_t1_required": true,
+    "verified_output_hashes_required": true
+  },
+  "outputs": {
+    "atlas_snapshot": "data/derived/visualization/memory_atlas.json",
+    "weekly_output_dir": "data/derived/weekly",
+    "sync_state": "data/sync_state/codex_atlas.json"
+  },
+  "publication": {
+    "session_identity": "event_id",
+    "latest_session_order": [
+      "updated_at",
+      "source_relative_path"
+    ],
+    "exact_repeat_no_write": true,
+    "snapshot_and_report_hash_bound_in_state": true,
+    "latest_session_must_be_ui_searchable": true,
+    "latest_session_must_have_archive_evidence": true,
+    "legacy_recommendation_timestamp_policy": "preserve_source_generated_at"
+  },
+  "privacy": {
+    "frontend_reads_raw": false,
+    "raw_message_text_persisted": false,
+    "plaintext_credentials_allowed": false,
+    "local_absolute_paths_allowed": false,
+    "source_policy": "verified_recoverable_sanitized_raw_archive_derived_only"
+  },
+  "model_parameters_ref": "机器治理/参数与公式/codex_atlas_publication.v1_2_1_s07_p2_t2.json",
+  "phase_boundary": {
+    "does_not_modify_raw": true,
+    "does_not_regenerate_legacy_consumers": true,
+    "atlas_snapshot_updated": true,
+    "weekly_report_updated": true,
+    "sync_status_updated": true,
+    "ui_code_updated_only_for_discoverability": true,
+    "does_not_commit_or_push": true,
+    "does_not_deploy": true,
+    "next_task": "S07-P2-T3"
+  }
+}

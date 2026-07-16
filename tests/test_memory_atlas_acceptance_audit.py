@@ -68,6 +68,10 @@ class MemoryAtlasAcceptanceAuditTests(unittest.TestCase):
         self.assertIn("memory_atlas_visual_acceptance", check_names)
         self.assertIn("runtime_atlas_fetch", check_names)
         self.assertIn("multi_source_registry_ready", check_names)
+        codex_check = next(
+            check for check in result["checks"] if check["name"] == "real_codex_snapshot_not_mock"
+        )
+        self.assertIn("canonical Codex Atlas publication is current", codex_check["evidence"])
 
     def test_acceptance_audit_rejects_unsafe_publish_dir(self) -> None:
         module = load_module()

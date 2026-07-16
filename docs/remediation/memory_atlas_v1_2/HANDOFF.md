@@ -1,5 +1,38 @@
 # Memory Atlas v1.2 Remediation Handoff
 
+> **Current v1.2.1 note (2026-07-16 17:09 +10:00):** The v1.2.1 Task Pack is
+> 50/149 complete locally. This run completes only `S07-P2-T2`; S07 is 5/9,
+> S07-P2 is 2/3, and `S07-P2-T3` is next only after this Task closes. The
+> canonical T1 432 events/facets publish by `event_id` into a 3,327,670-byte
+> Memory Atlas snapshot with 717 memory nodes, 756 total nodes and 4,106 edges;
+> SHA-256 is `1e826049d89be4195740e276fe99a89e58d849b1f793f9ab724ebd6f4352bd92`.
+> The 14,582-byte 2026-07-13 weekly report SHA-256 is
+> `b9007b66b6c2bde7201be3a05e1c592516ed3953e318fcea7c6c3dbe217ef2e6`.
+> Independent `data/sync_state/codex_atlas.json` binds contract/model, canonical
+> input and output hashes/counts. Immediate real replay is `NO_CHANGES` with
+> `changed_paths=[]` and zero writes. Exact browser Search 2.0 finds newest
+> `Codex session 归档备份删除` first, exposes two archive evidence refs and preserves
+> the node through starfield, Memory River and Inspector; screenshot inspection
+> found no overlap or actionable console/network error. Dedicated 9/9, focused
+> 131/131, lint/build, fast 6/6, sync 10/10 and final ui 14/14 pass. Publication
+> growth exposed and closed bounded Memory River evidence sampling and Obsidian
+> progressive-reveal validation regressions. Raw, public raw, raw manifest,
+> ledger, original Codex sync state and T3 legacy consumers remain unchanged.
+> Full Python initially failed closed because acceptance still coupled the new
+> Atlas count to T3 legacy recommendations and the protected machine inventory
+> omitted the new publication parameter file. The acceptance audit now requires
+> the canonical publisher dry-run to return exact `NO_CHANGES`, while the legacy
+> recommendation gate remains separate; machine inventory is exactly 157 files
+> and 31 active configs. Related 47/47 and final full Python 505/505 pass in
+> 262.126 seconds. Dual-runtime render, privacy, built-dist raw isolation,
+> raw/legacy diff, fast 6/6 and sync 10/10 pass. Full pre-commit release
+> `final_audit` 1/1 passes in 1,018.082 seconds with no failed/critical-skipped
+> gate, raw mutation or remote push. Local commit and post-commit exact-tree
+> release/recovery remain required and are not preclaimed.
+> No fetch, push, deploy, branch/PR, merge/rebase or general cleanup
+> occurred. Do not start `S07-P2-T3` in this run and do not upload before all 149
+> Tasks plus final review/remediation are complete.
+>
 > **Current v1.2.1 note (2026-07-16 15:14 +10:00):** The v1.2.1 Task Pack is
 > 49/149 complete locally. This run completed only `S07-P2-T1`; S07 is 4/9,
 > S07-P2 is 1/3, and `S07-P2-T2` is the next/only eligible Task. The canonical

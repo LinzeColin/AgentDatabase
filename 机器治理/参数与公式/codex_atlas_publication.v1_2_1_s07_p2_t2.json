@@ -1,0 +1,26 @@
+{
+  "schema_version": "memory_atlas.codex_atlas_publication_model.v1_2_1_s07_p2_t2",
+  "task_id": "S07-P2-T2",
+  "acceptance_id": "ACC-MA-V121-S07-P2-T2",
+  "model_id": "MOD-008",
+  "formula_id": "FORM-008",
+  "purpose": "Publish canonical Codex events and facets into the redacted Atlas snapshot, weekly report and independent publication state.",
+  "latest_session_order": [
+    "updated_at",
+    "source_relative_path"
+  ],
+  "ui_discoverability": {
+    "required_search_fields": [
+      "public_label",
+      "statement",
+      "source_record_id"
+    ],
+    "minimum_evidence_ref_count": 1,
+    "maximum_public_session_nodes": 1000
+  },
+  "weekly_report": {
+    "section_item_limit": 25,
+    "latest_session_summary_required": true
+  },
+  "calibration_boundary": "Publication parameters are deterministic safety and display bounds, not a claim of business-optimal ranking or model calibration."
+}

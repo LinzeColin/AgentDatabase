@@ -1036,6 +1036,51 @@ features:
       - "EVID-MA-V121-S07-P2-T1-OUTPUT"
       - "EVID-MA-V121-S07-P2-T1-TEST"
       - "EVID-MA-V121-S07-P2-T1-REVIEW"
+  - feature_id: "FEAT-MA-V121-S07-P2-T2"
+    name: "Memory Atlas canonical Codex publication"
+    description: "v1.2.1 Task Pack 当前完成 50/149；canonical T1 events/facets 以 event_id 唯一发布为 Memory Atlas snapshot、周报和独立 codex_atlas sync state。真实发布含 432 events/facets、717 memory nodes、756 total nodes 与 4,106 edges；最新 session `Codex session 归档备份删除` 可在 Search 2.0 首位发现并展示两条已验证 archive evidence，星图、时间河和 Inspector 跳转保持同一节点。Snapshot SHA-256 为 1e826049d89be4195740e276fe99a89e58d849b1f793f9ab724ebd6f4352bd92，周报 SHA-256 为 b9007b66b6c2bde7201be3a05e1c592516ed3953e318fcea7c6c3dbe217ef2e6；紧接真实复跑 NO_CHANGES、零写入。State 绑定 contract/model/derived/output hashes 并验证动态 truth；多文件发布具有 process lock、safe path、fsync 和失败回滚。数据增长暴露的 Memory River evidence sampling 与 Obsidian reveal 取样回归已关闭。Raw、public raw、ledger、原 codex sync state 与 T3 legacy consumers 不变；无 fetch/push/deploy。"
+    status: "active"
+    fact_level: "EXTRACTED"
+    model_ids:
+      - "MOD-008"
+    formula_ids:
+      - "FORM-008"
+    parameter_ids:
+      - "PARAM-062"
+    code_refs:
+      - "OpenAIDatabase/scripts/memory_atlas_cli/codex_atlas.py"
+      - "OpenAIDatabase/scripts/build_memory_atlas_data.py"
+      - "OpenAIDatabase/scripts/build_memory_atlas_weekly_report.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/analyze.py"
+      - "OpenAIDatabase/apps/memory-atlas/src/shared/atlas/searchModels.ts"
+      - "OpenAIDatabase/apps/memory-atlas/src/shared/atlas/timelineInteraction.ts"
+      - "OpenAIDatabase/apps/memory-atlas/src/features/settings/InspectorWorkspace.tsx"
+    config_refs:
+      - "OpenAIDatabase/config/data_sources/codex_atlas_publication.json"
+      - "OpenAIDatabase/机器治理/参数与公式/codex_atlas_publication.v1_2_1_s07_p2_t2.json"
+      - "OpenAIDatabase/config/memory_atlas_test_value_review.json"
+      - "OpenAIDatabase/config/atlasctl_script_migrations.json"
+    source_refs:
+      - "OpenAIDatabase/data/derived/visualization/memory_atlas.json"
+      - "OpenAIDatabase/data/derived/weekly/2026-07-13.memory_atlas_weekly_report.md"
+      - "OpenAIDatabase/data/sync_state/codex_atlas.json"
+      - "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s07_p2_t2_codex_atlas_publication_review.md"
+    owner_actions:
+      - "在 OpenAIDatabase 目录运行 python3 -B scripts/atlasctl.py analyze --stage codex-atlas --database-dir .；canonical derived 或 state/output truth 漂移时原子重建 snapshot、周报和独立 publication state，精确复跑必须 NO_CHANGES。使用 Search 2.0 查询最新 session 并检查 archive evidence、星图、时间河、Inspector。S07-P2-T3 才能迁移 legacy Codex 摘要语义。"
+    test_refs:
+      - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_codex_atlas -q"
+      - "node OpenAIDatabase/apps/memory-atlas/scripts/validate_search_2_0_browser.cjs --query 'Codex session 归档备份删除' --expected-result-id memory:codex_session_92f328412ed73c231096 --expected-evidence codex_session_92f328412ed73c231096"
+      - "npm run validate:fast --prefix OpenAIDatabase/apps/memory-atlas"
+      - "npm run validate:sync --prefix OpenAIDatabase/apps/memory-atlas"
+      - "npm run validate:ui --prefix OpenAIDatabase/apps/memory-atlas"
+      - "npm run validate:release --prefix OpenAIDatabase/apps/memory-atlas"
+    evidence_refs:
+      - "EVID-MA-V121-S07-P2-T2-STATE"
+      - "EVID-MA-V121-S07-P2-T2-SNAPSHOT"
+      - "EVID-MA-V121-S07-P2-T2-WEEKLY"
+      - "EVID-MA-V121-S07-P2-T2-BROWSER"
+      - "EVID-MA-V121-S07-P2-T2-TEST"
+      - "EVID-MA-V121-S07-P2-T2-REVIEW"
 models:
   -
     model_id: "MOD-001"
@@ -5326,4 +5371,34 @@ evidence_refs:
     evidence_id: "EVID-MA-V121-S07-P2-T1-REVIEW"
     kind: "review"
     ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s07_p2_t1_codex_derived_review.md"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S07-P2-T2-STATE"
+    kind: "artifact"
+    ref: "OpenAIDatabase/data/sync_state/codex_atlas.json"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S07-P2-T2-SNAPSHOT"
+    kind: "artifact"
+    ref: "OpenAIDatabase/data/derived/visualization/memory_atlas.json"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S07-P2-T2-WEEKLY"
+    kind: "artifact"
+    ref: "OpenAIDatabase/data/derived/weekly/2026-07-13.memory_atlas_weekly_report.md"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S07-P2-T2-BROWSER"
+    kind: "test"
+    ref: "OpenAIDatabase/apps/memory-atlas/scripts/validate_search_2_0_browser.cjs"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S07-P2-T2-TEST"
+    kind: "test"
+    ref: "OpenAIDatabase/tests/test_memory_atlas_codex_atlas.py"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S07-P2-T2-REVIEW"
+    kind: "review"
+    ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s07_p2_t2_codex_atlas_publication_review.md"
     fact_level: "EXTRACTED"

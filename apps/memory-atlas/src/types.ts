@@ -19,6 +19,9 @@ export interface AtlasNode {
   date?: string;
   data_source?: string;
   source_label?: string;
+  source_record_id?: string;
+  source_event_id?: string;
+  evidence_refs?: BehaviorEvidenceRef[];
   memory_tier?: string;
   category?: string;
   importance?: string;

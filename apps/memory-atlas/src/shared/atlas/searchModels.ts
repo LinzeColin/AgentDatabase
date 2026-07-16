@@ -79,12 +79,15 @@ export function duplicateCountForNode(nodes: AtlasNode[], node: AtlasNode): numb
 
 
 export function buildSearch2EvidenceRefs(atlas: MemoryAtlas, node: AtlasNode): string[] {
+  const directRefs = (node.evidence_refs ?? []).map((ref) =>
+    ref.ref_id || [ref.ref_type, ref.path].filter(Boolean).join(":"),
+  ).filter(Boolean);
   const refs = atlas.edges
     .filter((edge) => edge.source === node.id || edge.target === node.id)
     .slice(0, 4)
     .map((edge) => edge.id);
   if (node.memory_id) refs.unshift(`memory:${node.memory_id}`);
-  return Array.from(new Set(refs.length ? refs : [`node:${node.id}`])).slice(0, 4);
+  return Array.from(new Set([...directRefs, ...(refs.length ? refs : [`node:${node.id}`])])).slice(0, 4);
 }
 
 

@@ -22,6 +22,10 @@ from audit_memory_atlas_visual_acceptance import (  # noqa: E402
     VisualAcceptanceError,
     audit_visual_acceptance,
 )
+from memory_atlas_cli.codex_atlas import (  # noqa: E402
+    CodexAtlasError,
+    publish_codex_atlas,
+)
 from preflight_cloudflare_pages_access import (  # noqa: E402
     PreflightError,
     preflight as cloudflare_preflight,
@@ -90,6 +94,32 @@ def recommendation_bucket_ready(bucket: Any) -> bool:
         and recommendation_item_ready(item.get("after"))
         for item in modified
     )
+
+
+def canonical_codex_publication_ready(repo_root: Path) -> tuple[bool, str]:
+    try:
+        result = publish_codex_atlas(repo_root, dry_run=True)
+    except CodexAtlasError as exc:
+        return False, f"canonical Codex Atlas validation failed: {exc.code}"
+    except (OSError, ValueError, TypeError) as exc:
+        return False, f"canonical Codex Atlas validation failed: {type(exc).__name__}"
+
+    event_count = int(result.get("event_count") or 0)
+    facet_count = int(result.get("facet_count") or 0)
+    ready = (
+        result.get("status") == "PASS"
+        and result.get("outcome") == "NO_CHANGES"
+        and result.get("writes_files") is False
+        and result.get("changed_paths") == []
+        and result.get("raw_mutation") is False
+        and result.get("legacy_consumer_mutation") is False
+        and result.get("remote_push") is False
+        and event_count > 0
+        and event_count == facet_count
+    )
+    if not ready:
+        return False, "canonical Codex Atlas state or published outputs are stale"
+    return True, f"canonical Codex Atlas publication is current for {event_count} verified events/facets"
 
 
 def data_source_registry_ready(registry: Any, atlas: dict[str, Any]) -> tuple[bool, str]:
@@ -238,6 +268,7 @@ def audit_acceptance(repo_root: Path, publish_dir: Path | None = None, require_l
     atlas_path = repo_root / "data/derived/visualization/memory_atlas.json"
     atlas = load_json(atlas_path)
     codex_snapshot_path = repo_root / "data/processed/codex/codex_activity_snapshot.json"
+    codex_atlas_state_path = repo_root / "data/sync_state/codex_atlas.json"
     agent_context_path = repo_root / "data/derived/agent_context/agent_context_pack.json"
     data_source_registry_path = repo_root / "config/data_sources/source_registry.json"
     codex_snapshot = load_json(codex_snapshot_path) if codex_snapshot_path.exists() else {}
@@ -257,19 +288,30 @@ def audit_acceptance(repo_root: Path, publish_dir: Path | None = None, require_l
         registry_evidence,
         registry_evidence,
     )
+    if codex_atlas_state_path.exists():
+        codex_publication_ready, codex_publication_evidence = canonical_codex_publication_ready(repo_root)
+    else:
+        codex_publication_ready = (
+            codex_snapshot.get("schema_version") == "codex_activity_snapshot.v1"
+            and codex_snapshot.get("source") == "real_codex_local_data"
+            and int(codex_snapshot.get("session_count") or 0) > 0
+            and int(codex_snapshot.get("message_count") or 0) > 0
+            and int(codex_snapshot.get("tool_call_count") or 0) > 0
+            and atlas.get("overview", {}).get("codex_session_count") == codex_snapshot.get("session_count")
+            and recommendations.get("session_count") == codex_snapshot.get("session_count")
+            and recommendations.get("source") == "real_codex_local_sessions_redacted_summary"
+        )
+        codex_publication_evidence = (
+            "legacy Atlas and recommendations are backed by a non-empty real Codex activity snapshot"
+            if codex_publication_ready
+            else "legacy Codex snapshot is missing, empty, mock-like, or not aligned"
+        )
     require(
         checks,
-        codex_snapshot.get("schema_version") == "codex_activity_snapshot.v1"
-        and codex_snapshot.get("source") == "real_codex_local_data"
-        and int(codex_snapshot.get("session_count") or 0) > 0
-        and int(codex_snapshot.get("message_count") or 0) > 0
-        and int(codex_snapshot.get("tool_call_count") or 0) > 0
-        and atlas.get("overview", {}).get("codex_session_count") == codex_snapshot.get("session_count")
-        and recommendations.get("session_count") == codex_snapshot.get("session_count")
-        and recommendations.get("source") == "real_codex_local_sessions_redacted_summary",
+        codex_publication_ready,
         "real_codex_snapshot_not_mock",
-        "Atlas and recommendations are backed by non-empty real local Codex activity snapshot",
-        "Codex snapshot is missing, empty, mock-like, or not aligned with Atlas/recommendations",
+        codex_publication_evidence,
+        codex_publication_evidence,
     )
     require(
         checks,

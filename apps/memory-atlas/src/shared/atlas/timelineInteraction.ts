@@ -5,9 +5,37 @@ import { TimelineBrushDraft, TimelineEvent, TimelineFeedbackSettings, TimelineLa
 import { buildEventDateTicks, buildMonthTicks, formatAxisDate, laneColor, nodeColor } from "./contributionModels";
 import { stableHash } from "./inspectorWriteback";
 import { buildTimelineDensityBackdrops, buildTimelineDensityBands } from "./memoryRiverModels";
+import { isBlackHoleCandidate } from "./previewWeatherModels";
 import { MEMORY_RIVER_MAX_X, MEMORY_RIVER_MIN_X, MEMORY_RIVER_WIDTH, TIMELINE_FEEDBACK_SETTINGS_KEY } from "./runtimeConfig";
 import { compactThemeLabel, countBy, humanThemeLabel, topRows } from "./semanticHuman";
 import { parseTimelineUtcDay, timelineUtcMs, toDayKey, translateTierOrKind, truncate } from "./utils";
+
+
+
+type TimelineWindowEvent = {
+  source: TimelineEvent;
+  day: Date;
+  node: AtlasNode | undefined;
+};
+
+
+
+export function selectTimelineWindowEvents(
+  events: TimelineWindowEvent[],
+  limit = 260,
+): TimelineWindowEvent[] {
+  if (events.length <= limit) return events;
+  const evidenceLimit = Math.min(12, Math.max(1, Math.floor(limit / 4)));
+  const evidenceEvents = events
+    .filter((event) => Boolean(event.node && isBlackHoleCandidate(event.node)))
+    .slice(-evidenceLimit);
+  const evidenceSet = new Set(evidenceEvents);
+  const recentEvents = events
+    .filter((event) => !evidenceSet.has(event))
+    .slice(-Math.max(0, limit - evidenceEvents.length));
+  return [...recentEvents, ...evidenceEvents]
+    .sort((a, b) => timelineUtcMs(a.day) - timelineUtcMs(b.day));
+}
 
 
 
@@ -34,9 +62,9 @@ export function buildTimelineLayout(timeline: TimelineEvent[], nodeMap: Map<stri
   const span = Math.max(1, windowEndMs - windowStartMs);
   const cursor = Math.min(1, Math.max(0, controls.cursor));
   const cursorMs = windowStartMs + span * cursor;
-  const visibleEvents = allEvents
-    .filter((event) => timelineUtcMs(event.day) >= windowStartMs && timelineUtcMs(event.day) <= windowEndMs)
-    .slice(-260);
+  const visibleEvents = selectTimelineWindowEvents(
+    allEvents.filter((event) => timelineUtcMs(event.day) >= windowStartMs && timelineUtcMs(event.day) <= windowEndMs),
+  );
   const laneKeys = uniqueSorted(visibleEvents.map((event) => normalizeMemoryTier(event.source.memory_tier) || event.source.category)).slice(0, 7);
   const lanes = laneKeys.map((key, index) => ({
     key,

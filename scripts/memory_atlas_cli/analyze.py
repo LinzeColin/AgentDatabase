@@ -22,6 +22,7 @@ from .constants import (
     STAGE_FLIGHT_BUILDER,
 )
 from .child_process import run_child_command
+from .codex_atlas import run_codex_atlas
 
 
 def facet_analyze_contract() -> dict[str, object]:
@@ -389,12 +390,13 @@ def run_analyze(args: argparse.Namespace) -> int:
         "self-iteration",
         "decision-debt",
         "codex-derived",
+        "codex-atlas",
     }:
         print(json.dumps({
             "status": "NOT_IMPLEMENTED",
             "command": "analyze",
             "stage": args.stage,
-            "reason": "Unknown analyze stage. Supported stages: facets, clusters, low-value-loops, opportunities, economic-proxy, information-roi, formula-what-if, agent-collaboration, agent-authorization, stage-flight, latent, self-iteration, decision-debt, codex-derived.",
+            "reason": "Unknown analyze stage. Supported stages: facets, clusters, low-value-loops, opportunities, economic-proxy, information-roi, formula-what-if, agent-collaboration, agent-authorization, stage-flight, latent, self-iteration, decision-debt, codex-derived, codex-atlas.",
         }, ensure_ascii=False, indent=2, sort_keys=True))
         return 2
 
@@ -465,6 +467,8 @@ def run_analyze(args: argparse.Namespace) -> int:
         command = [sys.executable, str(CODEX_DERIVED_BUILDER), "--database-dir", str(args.database_dir)]
         if args.dry_run:
             command.append("--dry-run")
+    elif args.stage == "codex-atlas":
+        return run_codex_atlas(args)
     return run_child_command(command, cwd=ROOT)
 
 __all__ = (

@@ -26,8 +26,11 @@ DEFAULT_OUTPUT = Path("data/derived/visualization/memory_atlas.json")
 UTC = timezone.utc
 CANONICAL_MEMORY_SOURCE = "data/memory/records/manifest.json"
 DATA_SOURCE_REGISTRY_SOURCE = "config/data_sources/source_registry.json"
-CODEX_SESSION_SOURCE = "data/processed/codex/codex_session_manifest.jsonl"
-CODEX_DAILY_SOURCE = "data/processed/codex/codex_daily_activity.jsonl"
+CODEX_EVENT_SOURCE = "data/derived/codex/codex_events.jsonl"
+CODEX_FACET_SOURCE = "data/derived/codex/codex_facets.jsonl"
+CODEX_BEHAVIOR_SUMMARY_SOURCE = "data/derived/codex/codex_behavior_summary.json"
+CODEX_DERIVED_STATE_SOURCE = "data/derived/codex/codex_derived_state.json"
+CODEX_ATLAS_STATE_SOURCE = "data/sync_state/codex_atlas.json"
 CODEX_RECOMMENDATION_SOURCE = "data/derived/codex/codex_agent_recommendations.json"
 BEHAVIOR_CLUSTER_SOURCE = "data/derived/behavior_intelligence/clusters.json"
 LOW_VALUE_LOOP_SOURCE = "data/derived/behavior_intelligence/low_value_loops.json"
@@ -753,6 +756,9 @@ def public_node_label(row: dict[str, Any], memory_id: str, day: date | None, the
 
 
 def display_node_label(row: dict[str, Any], memory_id: str, themes: list[dict[str, Any]]) -> str:
+    public_label = str(row.get("public_label") or "").strip()
+    if public_label:
+        return truncate_label(public_label, 96)
     tier = normalize_tier(row.get("memory_tier") or "临时")
     theme_label = display_theme_label(themes)
     keywords = keyword_candidates(row, tier, theme_label, themes)[:2]
@@ -1289,6 +1295,15 @@ def add_memory_like_node(
             "roi": roi_metrics(row, day),
         },
     }
+    source_record_id = str(row.get("source_record_id") or "").strip()
+    source_event_id = str(row.get("source_event_id") or "").strip()
+    evidence_refs = limited_evidence_refs(row)
+    if source_record_id:
+        node["source_record_id"] = source_record_id
+    if source_event_id:
+        node["source_event_id"] = source_event_id
+    if evidence_refs:
+        node["evidence_refs"] = evidence_refs
     nodes.append(node)
     memory_nodes.append(node)
     for theme in themes:
@@ -1334,16 +1349,48 @@ def add_memory_like_node(
         )
 
 
-def codex_session_to_memory_row(row: dict[str, Any]) -> dict[str, Any]:
+def codex_session_evidence_refs(
+    row: dict[str, Any],
+    facet: dict[str, Any],
+) -> list[dict[str, Any]]:
+    refs: list[dict[str, Any]] = []
+    record_id = str(row.get("record_id") or row.get("session_id") or "")
+    event_id = str(row.get("event_id") or "")
+    for index, ref in enumerate(as_list(facet.get("evidence_refs"))[:3], 1):
+        if not isinstance(ref, dict):
+            continue
+        ref_type = str(ref.get("ref_type") or "archive_evidence")
+        refs.append(
+            {
+                "ref_id": f"{event_id or record_id}:{ref_type}:{index}",
+                "ref_type": ref_type,
+                "source_id": "codex",
+                "evidence_level": str(
+                    ref.get("evidence_level")
+                    or "verified_recoverable_sanitized_raw_archive"
+                ),
+                "path": public_relative_path(ref.get("path")),
+                "reason": "该公开派生摘要由已登记且哈希校验通过的 Codex 归档生成。",
+            }
+        )
+    return refs
+
+
+def codex_session_to_memory_row(
+    row: dict[str, Any],
+    facet: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    facet = facet or {}
     topics = [str(item.get("label")) for item in row.get("topics", []) if item.get("label")]
     signals = [str(item.get("label")) for item in row.get("preference_signals", []) if item.get("label")]
     top_tools = [str(item.get("name")) for item in row.get("top_tools", [])[:5] if item.get("name")]
     activity = int(row.get("activity_score") or 0)
     importance = "高" if activity >= 120 or len(signals) >= 3 else "中" if activity >= 40 or signals else "低"
     tier = "一般" if importance in {"高", "中"} else "临时"
-    title = f"Codex 会话 · {row.get('thread_name') or row.get('session_id')}"
+    thread_name = str(row.get("thread_name") or row.get("session_id") or "未命名会话").strip()
+    title = f"Codex 会话 · {thread_name}"
     statement = (
-        "真实 Codex 本地会话派生摘要："
+        f"Codex 会话「{thread_name}」的可追溯脱敏摘要："
         f"消息 {int(row.get('message_count') or 0)} 条，工具调用 {int(row.get('tool_call_count') or 0)} 次，"
         f"错误事件 {int(row.get('error_event_count') or 0)} 次；"
         f"主题：{'、'.join(topics[:5]) or '未检测到明确主题'}；"
@@ -1352,9 +1399,13 @@ def codex_session_to_memory_row(row: dict[str, Any]) -> dict[str, Any]:
         "原始 transcript、明文 secret、cookies、session 文件和本地绝对路径不进入 GitHub 静态快照。"
     )
     return {
-        "id": f"codex_session_{row.get('session_id') or stable_hash(json.dumps(row, ensure_ascii=False))}",
-        "date": row.get("day") or row.get("updated_at") or row.get("started_at") or "",
+        "id": str(
+            row.get("event_id")
+            or f"codex_session_{row.get('session_id') or stable_hash(json.dumps(row, ensure_ascii=False))}"
+        ),
+        "date": row.get("updated_day") or row.get("day") or row.get("updated_at") or row.get("started_at") or "",
         "title": title,
+        "public_label": title,
         "statement": statement,
         "memory_tier": tier,
         "category": "codex_development_record" if int(row.get("tool_call_count") or 0) else "codex_usage_record",
@@ -1366,7 +1417,10 @@ def codex_session_to_memory_row(row: dict[str, Any]) -> dict[str, Any]:
         "evidence_count": int(row.get("message_count") or 0),
         "source_kind": "codex_local_session_redacted_summary",
         "data_source": "codex",
-        "source_label": "Codex 本地数据",
+        "source_label": "Codex 已验证归档派生数据",
+        "source_record_id": str(row.get("record_id") or row.get("session_id") or ""),
+        "source_event_id": str(row.get("event_id") or ""),
+        "evidence_refs": codex_session_evidence_refs(row, facet),
         "use_when": "分析用户在 Codex 中的真实工作方式、交互强度、项目推进、工具偏好和交付标准。",
         "reason": "由本地 Codex session 派生摘要生成，不包含原始全文。",
         "usage": {
@@ -1381,11 +1435,15 @@ def codex_session_to_memory_row(row: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def recommendation_to_memory_row(item: dict[str, Any], group: str) -> dict[str, Any]:
+def recommendation_to_memory_row(
+    item: dict[str, Any],
+    group: str,
+    generated_date: str,
+) -> dict[str, Any]:
     title = str(item.get("title") or item.get("id") or "Codex 建议")
     return {
         "id": f"codex_recommendation_{group}_{item.get('id') or slugify(title)}",
-        "date": build_timestamp().date().isoformat(),
+        "date": generated_date,
         "title": f"{'Memory' if group == 'memory' else 'Meta Data'} · {title}",
         "statement": str(item.get("statement") or ""),
         "memory_tier": "核心画像" if group == "memory" else "一般",
@@ -1411,17 +1469,28 @@ def add_codex_context(
     timeline: list[dict[str, Any]],
     memory_nodes: list[dict[str, Any]],
     codex_sessions: list[dict[str, Any]],
+    codex_facets: list[dict[str, Any]],
     codex_recommendations: dict[str, Any],
 ) -> None:
+    facets_by_event = {
+        str(row.get("event_id") or ""): row
+        for row in codex_facets
+        if isinstance(row, dict) and str(row.get("event_id") or "")
+    }
     for row in codex_sessions:
         add_memory_like_node(
             nodes,
             edges,
             timeline,
             memory_nodes,
-            codex_session_to_memory_row(row),
-            source_file=CODEX_SESSION_SOURCE,
+            codex_session_to_memory_row(
+                row,
+                facets_by_event.get(str(row.get("event_id") or "")),
+            ),
+            source_file=CODEX_EVENT_SOURCE,
         )
+    recommendation_date_value = parse_date(codex_recommendations.get("generated_at"))
+    recommendation_date = recommendation_date_value.isoformat() if recommendation_date_value else ""
     for group_key in ("memory", "meta_data"):
         section = codex_recommendations.get(group_key, {})
         current = section.get("current", []) if isinstance(section, dict) else []
@@ -1432,10 +1501,52 @@ def add_codex_context(
                     edges,
                     timeline,
                     memory_nodes,
-                    recommendation_to_memory_row(item, "memory" if group_key == "memory" else "meta"),
+                    recommendation_to_memory_row(
+                        item,
+                        "memory" if group_key == "memory" else "meta",
+                        recommendation_date,
+                    ),
                     source_file=CODEX_RECOMMENDATION_SOURCE,
                     proposal_actions=["propose_update", "propose_accept_recommendation", "propose_note"],
                 )
+
+
+def codex_daily_from_events(codex_events: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    daily: dict[str, dict[str, Any]] = {}
+    for row in codex_events:
+        day = parse_date(
+            row.get("updated_day")
+            or row.get("day")
+            or row.get("updated_at")
+            or row.get("started_at")
+        )
+        if not day:
+            continue
+        key = day.isoformat()
+        bucket = daily.setdefault(
+            key,
+            {
+                "date": key,
+                "conversation_count": 0,
+                "message_count": 0,
+                "user_message_count": 0,
+                "assistant_message_count": 0,
+                "tool_call_count": 0,
+                "error_event_count": 0,
+                "abort_count": 0,
+            },
+        )
+        bucket["conversation_count"] += 1
+        for field in (
+            "message_count",
+            "user_message_count",
+            "assistant_message_count",
+            "tool_call_count",
+            "error_event_count",
+            "abort_count",
+        ):
+            bucket[field] += int(row.get(field) or 0)
+    return [daily[key] for key in sorted(daily)]
 
 
 def build_metrics_from_memory_nodes(memory_nodes: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -1539,15 +1650,21 @@ def add_document_context(
                 )
 
 
-def build_memory_atlas(database_dir: Path) -> dict[str, Any]:
+def build_memory_atlas(
+    database_dir: Path,
+    *,
+    generated_at: str | None = None,
+) -> dict[str, Any]:
     canonical_manifest_path = database_dir / CANONICAL_MEMORY_SOURCE
     registry_path = database_dir / DATA_SOURCE_REGISTRY_SOURCE
     manifest_path = database_dir / "data/processed/conversations/conversation_manifest.jsonl"
     project_index_path = database_dir / "data/derived/project_index/PROJECT_INDEX.md"
     decision_log_path = database_dir / "data/derived/decision_log/DECISION_LOG.md"
     timeline_path = database_dir / "data/derived/timeline/TIMELINE.md"
-    codex_session_path = database_dir / CODEX_SESSION_SOURCE
-    codex_daily_path = database_dir / CODEX_DAILY_SOURCE
+    codex_event_path = database_dir / CODEX_EVENT_SOURCE
+    codex_facet_path = database_dir / CODEX_FACET_SOURCE
+    codex_behavior_summary_path = database_dir / CODEX_BEHAVIOR_SUMMARY_SOURCE
+    codex_derived_state_path = database_dir / CODEX_DERIVED_STATE_SOURCE
     codex_recommendation_path = database_dir / CODEX_RECOMMENDATION_SOURCE
     behavior_intelligence = build_behavior_intelligence_summary(database_dir)
     visual_workflows = build_visual_workflow_registry(database_dir)
@@ -1565,15 +1682,26 @@ def build_memory_atlas(database_dir: Path) -> dict[str, Any]:
         if row.get("status") == "candidate"
     ]
     conversations = read_jsonl(manifest_path)
-    codex_sessions = read_jsonl(codex_session_path)
-    codex_daily = read_jsonl(codex_daily_path)
+    codex_sessions = read_jsonl(codex_event_path)
+    codex_facets = read_jsonl(codex_facet_path)
+    codex_daily = codex_daily_from_events(codex_sessions)
+    codex_behavior_summary = read_json(codex_behavior_summary_path)
+    codex_derived_state = read_json(codex_derived_state_path)
     codex_recommendations = read_json(codex_recommendation_path)
     data_source_registry = load_data_source_registry(database_dir)
     registered_sources = registry_source_map(data_source_registry)
     active_source_hash = str(canonical_manifest["dataset_sha256"]).removeprefix("sha256:")
     nodes, edges, memory_timeline, metric_rows, memory_node_rows = build_nodes_and_edges(active_rows, active_source_hash)
     add_document_context(nodes, edges, memory_timeline, memory_node_rows, database_dir)
-    add_codex_context(nodes, edges, memory_timeline, memory_node_rows, codex_sessions, codex_recommendations)
+    add_codex_context(
+        nodes,
+        edges,
+        memory_timeline,
+        memory_node_rows,
+        codex_sessions,
+        codex_facets,
+        codex_recommendations,
+    )
     memory_timeline = sorted(memory_timeline, key=lambda row: (row["date"], row["node_id"]))
     metric_rows = build_metrics_from_memory_nodes(memory_node_rows)
     contribution = build_contribution(active_rows, candidate_rows, conversations, codex_daily)
@@ -1601,8 +1729,8 @@ def build_memory_atlas(database_dir: Path) -> dict[str, Any]:
             "description": "真实 Codex session、工具调用、偏好信号和 agent personalization 建议的脱敏派生摘要。",
             "platform": "codex_local_derived_behavior",
             "status": "active",
-            "ingestion_status": "active_real_local_redacted_summary",
-            "record_types": ["codex_session_summary", "daily_activity", "agent_recommendation", "behavior_signal"],
+            "ingestion_status": "active_verified_archive_derived_published",
+            "record_types": ["canonical_codex_event", "canonical_codex_facet", "agent_recommendation", "behavior_signal"],
         },
     }
     source_activity_count = {
@@ -1658,7 +1786,8 @@ def build_memory_atlas(database_dir: Path) -> dict[str, Any]:
         "edge_count": len(edges),
         "memory_node_count": sum(1 for node in nodes if node["kind"] == "memory"),
         "theme_node_count": sum(1 for node in nodes if node["kind"] == "theme"),
-        "generated_at": build_timestamp().isoformat(timespec="milliseconds").replace("+00:00", "Z"),
+        "generated_at": generated_at
+        or build_timestamp().isoformat(timespec="milliseconds").replace("+00:00", "Z"),
     }
 
     return {
@@ -1674,8 +1803,11 @@ def build_memory_atlas(database_dir: Path) -> dict[str, Any]:
                 "project_index": str(project_index_path.relative_to(database_dir)),
                 "decision_log": str(decision_log_path.relative_to(database_dir)),
                 "timeline": str(timeline_path.relative_to(database_dir)),
-                "codex_session_manifest": str(codex_session_path.relative_to(database_dir)),
-                "codex_daily_activity": str(codex_daily_path.relative_to(database_dir)),
+                "codex_events": str(codex_event_path.relative_to(database_dir)),
+                "codex_facets": str(codex_facet_path.relative_to(database_dir)),
+                "codex_behavior_summary": str(codex_behavior_summary_path.relative_to(database_dir)),
+                "codex_derived_state": str(codex_derived_state_path.relative_to(database_dir)),
+                "codex_atlas_sync_state": CODEX_ATLAS_STATE_SOURCE,
                 "codex_agent_recommendations": str(codex_recommendation_path.relative_to(database_dir)),
                 "behavior_clusters": BEHAVIOR_CLUSTER_SOURCE,
                 "behavior_low_value_loops": LOW_VALUE_LOOP_SOURCE,
@@ -1698,6 +1830,15 @@ def build_memory_atlas(database_dir: Path) -> dict[str, Any]:
                 "mock_policy": data_source_registry.get("canonical_event_contract", {})
                 .get("privacy_contract", {})
                 .get("mock_policy", ""),
+            },
+            "raw_private_data_included": False,
+            "codex_canonical_input": {
+                "schema_version": str(codex_behavior_summary.get("schema_version") or ""),
+                "derived_state_schema_version": str(codex_derived_state.get("schema_version") or ""),
+                "event_count": len(codex_sessions),
+                "facet_count": len(codex_facets),
+                "archive_count": int(codex_behavior_summary.get("archive_count") or 0),
+                "backup_policy": "derived_summary_not_full_raw_backup",
             },
             "writeback_policy": {
                 "frontend_can_request_writeback": True,
