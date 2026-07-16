@@ -1,0 +1,73 @@
+{
+  "acceptance_id": "ACC-MA-V121-S08-P2-T1",
+  "adapter": {
+    "adapter_id": "apple-mail-local",
+    "configuration_path_emitted": false,
+    "credential_policy": "os_keychain_via_apple_mail",
+    "credential_store_access": false,
+    "enabled_account_present": true,
+    "inbox_readable": true,
+    "mail_values_emitted": false,
+    "message_content_read": false,
+    "message_metadata_read": false,
+    "probe_status": "READY",
+    "read_only": true,
+    "real_adapter_ready": true
+  },
+  "artifacts": [
+    {
+      "path": "config/data_sources/chatgpt_notification_connector.json",
+      "sha256": "18d694f6b2728800ab64c21968fab1ef8f30cc79dada81e46277821540d069a5"
+    },
+    {
+      "path": "机器治理/参数与公式/chatgpt_notification_connector.v1_2_1_s08_p2_t1.json",
+      "sha256": "2863236439396909293f7c717694576768d268f9dd150ffd8d255dc35e6251a1"
+    },
+    {
+      "path": "scripts/memory_atlas_cli/chatgpt_notification_connector.py",
+      "sha256": "b990ca9aa9847b794eaa92fa2c35649e728566ed1c6abb7d1c059fd3b473738a"
+    },
+    {
+      "path": "tests/test_memory_atlas_chatgpt_notification_connector.py",
+      "sha256": "ba85629f2af2dc644ad398bfad7ec3e54abe96a76bd988444331399b9373b734"
+    }
+  ],
+  "local_config": {
+    "bytes": 210,
+    "contains_absolute_paths": false,
+    "contains_account_identity": false,
+    "contains_credentials": false,
+    "file_mode_octal": "0600",
+    "first_action": "CONFIGURED",
+    "idempotent_action": "ALREADY_CONFIGURED",
+    "inspect_action": "INSPECTED_NO_CHANGES",
+    "sha256": "aee4abeb98e5fca795a62e67824842e3e0cf2f2b2aa9a0806237671ee2661cd8"
+  },
+  "observed_at": "2026-07-17T05:17:43+10:00",
+  "phase_boundary": {
+    "discovers_export_notifications": false,
+    "downloads_export": false,
+    "extracts_download_links": false,
+    "next_task": "S08-P2-T2",
+    "writes_raw_archive": false
+  },
+  "safety": {
+    "branch_or_pr": false,
+    "deployment": false,
+    "fetch": false,
+    "mail_or_credential_values_in_evidence": false,
+    "raw_mutation": false,
+    "remote_push": false,
+    "shell": false
+  },
+  "schema_version": "memory_atlas.chatgpt_notification_connector_evidence.v1_2_1_s08_p2_t1",
+  "status": "PASS",
+  "task_id": "S08-P2-T1",
+  "tests": {
+    "dedicated": "11/11 PASS",
+    "focused": "102/102 PASS",
+    "test_first": "ModuleNotFoundError before implementation",
+    "validate_fast": "6/6 PASS in 29.266 seconds",
+    "validate_sync": "10/10 PASS in 183.127 seconds; credential scan 130.163 seconds"
+  }
+}

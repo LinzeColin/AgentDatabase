@@ -1,0 +1,76 @@
+{
+  "acceptance_id": "ACC-MA-V121-S08-P2-T1",
+  "adapters": {
+    "apple-mail-local": {
+      "connector_reads_credentials": false,
+      "credential_policy": "os_keychain_via_apple_mail",
+      "probe_emits_counts": false,
+      "probe_operations": [
+        "count_accounts",
+        "count_enabled_accounts",
+        "count_inbox_messages"
+      ],
+      "probe_reads_account_identity": false,
+      "probe_reads_message_content": false,
+      "probe_reads_message_metadata": false,
+      "transport": "apple_mail_applescript"
+    }
+  },
+  "cli": {
+    "command": "chatgpt-notification-connector",
+    "configure_requires": [
+      "--adapter"
+    ],
+    "inspect_is_read_only": true,
+    "modes": [
+      "--configure",
+      "--inspect"
+    ],
+    "output_is_sanitized": true
+  },
+  "connector": {
+    "active_adapter_source": "machine_local_config",
+    "adapter_registry": [
+      "apple-mail-local"
+    ],
+    "configuration_location": "outside_repository",
+    "configuration_requires_live_probe": true,
+    "interface_version": "memory_atlas.notification_connector.v1",
+    "read_only": true
+  },
+  "local_config": {
+    "atomic_replace_and_directory_fsync": true,
+    "contains_absolute_paths": false,
+    "contains_account_identity": false,
+    "contains_credentials": false,
+    "directory_mode_octal": "0700",
+    "file_mode_octal": "0600",
+    "filename": "chatgpt_notification_connector.json",
+    "schema_version": "memory_atlas.chatgpt_notification_local_config.v1_2_1_s08_p2_t1"
+  },
+  "model_parameters_ref": "机器治理/参数与公式/chatgpt_notification_connector.v1_2_1_s08_p2_t1.json",
+  "phase_boundary": {
+    "commits_or_pushes": false,
+    "configures_read_only_connector": true,
+    "deploys": false,
+    "discovers_export_notifications": false,
+    "downloads_export": false,
+    "extracts_download_links": false,
+    "next_task": "S08-P2-T2",
+    "writes_raw_archive": false
+  },
+  "schema_version": "memory_atlas.chatgpt_notification_connector_contract.v1_2_1_s08_p2_t1",
+  "security": {
+    "emits_mail_values": false,
+    "raw_mutation": false,
+    "reads_account_identity": false,
+    "reads_credentials": false,
+    "reads_message_content": false,
+    "reads_message_metadata": false,
+    "remote_actions": false,
+    "repository_mutation": false,
+    "uses_private_api": false
+  },
+  "source_id": "chatgpt",
+  "task_id": "S08-P2-T1"
+}

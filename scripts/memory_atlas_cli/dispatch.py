@@ -19,6 +19,7 @@ from .chatgpt_export_state import (
     run_chatgpt_export_state,
     run_stateful_chatgpt_export_request,
 )
+from .chatgpt_notification_connector import run_chatgpt_notification_connector
 from .push import run_push
 from .runtime import RuntimeConfig, execute_with_runtime
 from .sync import run_profile, run_sync
@@ -31,6 +32,7 @@ RUNNERS: dict[str, Callable[[argparse.Namespace], int]] = {
     "request-chatgpt-export": run_stateful_chatgpt_export_request,
     "chatgpt-export-state": run_chatgpt_export_state,
     "chatgpt-export-auth": run_chatgpt_export_human_auth,
+    "chatgpt-notification-connector": run_chatgpt_notification_connector,
     "build-atlas": run_build_atlas,
     "analyze": run_analyze,
     "audit": run_audit,

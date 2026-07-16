@@ -6,6 +6,7 @@ from pathlib import Path
 from memory_atlas_owner_daily import OWNER_DAILY_STEP_IDS
 from .chatgpt_export_human_auth import AUTH_CHALLENGE_CODES
 from .chatgpt_export_state import EXPORT_STATES
+from .chatgpt_notification_connector import ADAPTER_IDS
 from .constants import ROOT
 
 
@@ -92,6 +93,17 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     export_auth.add_argument("--evidence-sha256")
     export_auth.add_argument("--confirm-human-auth-complete", action="store_true")
     export_auth.add_argument("--database-dir", type=Path, default=ROOT)
+
+    notification_connector = subparsers.add_parser(
+        "chatgpt-notification-connector",
+        help="Configure or inspect a read-only ChatGPT export notification adapter.",
+    )
+    notification_mode = notification_connector.add_mutually_exclusive_group(required=True)
+    notification_mode.add_argument("--configure", action="store_true")
+    notification_mode.add_argument("--inspect", action="store_true")
+    notification_connector.add_argument("--adapter", choices=ADAPTER_IDS)
+    notification_connector.add_argument("--runtime-dir", type=Path)
+    notification_connector.add_argument("--database-dir", type=Path, default=ROOT)
 
     build_atlas = subparsers.add_parser("build-atlas", help="Build derived Memory Atlas visualization data.")
     build_atlas.add_argument("--dry-run", action="store_true")

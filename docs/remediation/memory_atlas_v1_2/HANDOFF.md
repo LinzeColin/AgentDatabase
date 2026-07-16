@@ -1,5 +1,32 @@
 # Memory Atlas v1.2 Remediation Handoff
 
+> **Current v1.2.1 note (2026-07-17 05:24 +10:00):** The v1.2.1 Task Pack is
+> 58/149 complete locally. This run completes only `S08-P2-T1`; S08-P2 is 1/3
+> and remains in progress. `S08-P2-T2` is the next/only eligible Task in a
+> later run; message recognition, account/time/status validation and one-time
+> link extraction do not start here. A pluggable read-only notification
+> registry now configures the real `apple-mail-local` adapter only after a live
+> `READY` probe. Its fixed shell-free AppleScript counts configured/enabled
+> accounts and verifies Inbox count readability, but never requests or emits
+> account identity, message fields/content, links, credential values, counts,
+> paths or stderr. First configure returned `CONFIGURED`, inspect returned
+> `INSPECTED_NO_CHANGES`, and repeat configure returned `ALREADY_CONFIGURED`.
+> The credential-free machine-local config is 210 bytes, mode `0600`, and keeps
+> SHA-256 `aee4abeb98e5fca795a62e67824842e3e0cf2f2b2aa9a0806237671ee2661cd8`.
+> Test-first `ModuleNotFoundError` was closed by 11/11 dedicated tests; final
+> related regression is 126/126. `validate:fast` is 6/6 in 29.266 seconds and
+> `validate:sync` is 10/10 in 183.127 seconds including a 130.163-second
+> credential scan; both record raw mutation, remote push and shell as false.
+> Human-plane, test-value, script migration, renderer and required project
+> governance pass. Machine truth is 170 files, 39 active configs and 129
+> evidence payloads; all 52 governance event rows are valid JSONL. No message
+> discovery, export download, raw write, fetch, push, deploy, branch/PR,
+> merge/rebase or shared cleanup occurred. The runtime adapter selection is not
+> a GitHub artifact; tracked source, contract, model, tests and the deterministic
+> configure command recreate it after Apple Mail is user-configured on another
+> machine. Real GitHub upload remains prohibited until all 149 Tasks plus final
+> review/remediation close. Do not start `S08-P2-T2` in this run.
+>
 > **Current v1.2.1 note (2026-07-17 04:42 +10:00):** The v1.2.1 Task Pack is
 > 57/149 complete locally. This run completes only `S08-P1-T3`; S08-P1 is 3/3
 > and complete, while S08 remains in progress. `S08-P2-T1` is the next/only

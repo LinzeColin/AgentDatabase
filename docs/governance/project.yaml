@@ -1345,6 +1345,43 @@ features:
       - "EVID-MA-V121-S08-P1-T3-TEST"
       - "EVID-MA-V121-S08-P1-T3-PROOF"
       - "EVID-MA-V121-S08-P1-T3-REVIEW"
+  - feature_id: "FEAT-MA-V121-S08-P2-T1"
+    name: "Memory Atlas read-only ChatGPT notification connector"
+    description: "v1.2.1 Task Pack 当前完成 58/149。可插拔 notification registry 已配置真实 apple-mail-local adapter：固定 shell-free AppleScript 只 count 配置账号、enabled 账号并验证 Inbox count 可读，不请求或输出账号身份、邮件字段、正文、链接、数量、凭证、路径或 stderr。只有实时 READY 才会在仓库外原子写入无凭证 0600 选择配置；inspect 和重复 configure 均字节幂等。S08-P2-T2 的通知识别、账号/时间/状态验证和一次性链接提取未开始。"
+    status: "active"
+    fact_level: "EXTRACTED"
+    model_ids:
+      - "MOD-009"
+    formula_ids:
+      - "FORM-009"
+    parameter_ids: []
+    code_refs:
+      - "OpenAIDatabase/scripts/memory_atlas_cli/chatgpt_notification_connector.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/parser.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/dispatch.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/runtime.py"
+      - "OpenAIDatabase/scripts/atlasctl.py"
+      - "OpenAIDatabase/tests/test_memory_atlas_chatgpt_notification_connector.py"
+      - "OpenAIDatabase/config/memory_atlas_validator_profiles.json"
+      - "OpenAIDatabase/config/memory_atlas_test_value_review.json"
+    config_refs:
+      - "OpenAIDatabase/config/data_sources/chatgpt_notification_connector.json"
+      - "OpenAIDatabase/机器治理/参数与公式/chatgpt_notification_connector.v1_2_1_s08_p2_t1.json"
+    source_refs:
+      - "OpenAIDatabase/机器治理/证据与日志/chatgpt_notification_connector/chatgpt_notification_connector.v1_2_1_s08_p2_t1.json"
+      - "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s08_p2_t1_notification_connector_review.md"
+    owner_actions:
+      - "当前机器先运行 python3 -B scripts/atlasctl.py chatgpt-notification-connector --inspect。新机器在 Apple Mail 已由用户配置且允许本地自动化后，运行 chatgpt-notification-connector --configure --adapter apple-mail-local，再 inspect。不得把 Mail、Keychain、OAuth、IMAP 或 env credential 值传入 CLI/日志；不得在 S08-P2-T1 读取邮件字段或尝试发现链接。"
+    test_refs:
+      - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_chatgpt_notification_connector -q"
+      - "npm run validate:fast --prefix OpenAIDatabase/apps/memory-atlas"
+      - "npm run validate:sync --prefix OpenAIDatabase/apps/memory-atlas"
+      - "python3 -B OpenAIDatabase/scripts/audit_memory_atlas_human_plane.py"
+    evidence_refs:
+      - "EVID-MA-V121-S08-P2-T1-CONTRACT"
+      - "EVID-MA-V121-S08-P2-T1-TEST"
+      - "EVID-MA-V121-S08-P2-T1-REAL"
+      - "EVID-MA-V121-S08-P2-T1-REVIEW"
 models:
   -
     model_id: "MOD-001"
@@ -5800,4 +5837,24 @@ evidence_refs:
     evidence_id: "EVID-MA-V121-S08-P1-T3-REVIEW"
     kind: "review"
     ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s08_p1_t3_chatgpt_export_human_auth_review.md"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S08-P2-T1-CONTRACT"
+    kind: "config"
+    ref: "OpenAIDatabase/config/data_sources/chatgpt_notification_connector.json"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S08-P2-T1-TEST"
+    kind: "test"
+    ref: "OpenAIDatabase/tests/test_memory_atlas_chatgpt_notification_connector.py"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S08-P2-T1-REAL"
+    kind: "artifact"
+    ref: "OpenAIDatabase/机器治理/证据与日志/chatgpt_notification_connector/chatgpt_notification_connector.v1_2_1_s08_p2_t1.json"
+    fact_level: "VERIFIED"
+  -
+    evidence_id: "EVID-MA-V121-S08-P2-T1-REVIEW"
+    kind: "review"
+    ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s08_p2_t1_notification_connector_review.md"
     fact_level: "EXTRACTED"

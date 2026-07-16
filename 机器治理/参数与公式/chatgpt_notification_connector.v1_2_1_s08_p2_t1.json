@@ -1,0 +1,30 @@
+{
+  "acceptance_id": "ACC-MA-V121-S08-P2-T1",
+  "calibration_boundary": "S08-P2-T1 proves one real read-only notification transport is configured. It does not inspect message fields, discover OpenAI notifications, extract links, download exports, mutate raw data or perform Git remote actions.",
+  "failure_semantics": "Unsupported platform, missing Mail access, unknown probe output, timeout, unsafe runtime path, config drift, symlink or permission mismatch fails closed without storing config or echoing Mail and process values.",
+  "formula": "adapter_ready = supported_adapter AND platform_supported AND application_available AND enabled_account_present AND inbox_count_readable AND live_probe_token=READY; account_identity_reads=0; message_metadata_reads=0; message_content_reads=0; credential_store_reads=0",
+  "formula_id": "FORM-009",
+  "model_id": "MOD-009",
+  "parameter_rationale": {
+    "configuration_file_mode_octal": "The machine-local adapter selection is private-by-default even though it contains no credentials.",
+    "maximum_probe_stdout_bytes": "The adapter accepts only one short allowlisted readiness token and rejects all other output.",
+    "probe_message_content_reads": "Message content and export-link discovery belong to S08-P2-T2, not this Task.",
+    "probe_timeout_seconds": "Ten seconds bounds Apple event or permission stalls without retrying or reading fallback data.",
+    "supported_adapter_count": "S08-P2-T1 configures one real adapter; later adapters plug into the same registry without changing the result contract."
+  },
+  "parameters": {
+    "configuration_file_mode_octal": "0600",
+    "live_ready_observations_required": 1,
+    "maximum_probe_stdout_bytes": 64,
+    "probe_account_identity_reads": 0,
+    "probe_credential_store_reads": 0,
+    "probe_message_content_reads": 0,
+    "probe_message_metadata_reads": 0,
+    "probe_timeout_seconds": 10,
+    "runtime_directory_mode_octal": "0700",
+    "supported_adapter_count": 1
+  },
+  "purpose": "Declare a notification adapter ready only after a bounded, content-free, read-only capability probe succeeds in the user environment.",
+  "schema_version": "memory_atlas.chatgpt_notification_connector_model.v1_2_1_s08_p2_t1",
+  "task_id": "S08-P2-T1"
+}
