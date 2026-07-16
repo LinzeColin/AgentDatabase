@@ -9,6 +9,7 @@ from pathlib import Path as _Path
 from memory_atlas_cli.analyze import *
 from memory_atlas_cli.apply import *
 from memory_atlas_cli.build import *
+from memory_atlas_cli.chatgpt_export_archive import *
 from memory_atlas_cli.chatgpt_export_request import *
 from memory_atlas_cli.chatgpt_export_human_auth import *
 from memory_atlas_cli.chatgpt_export_link_discovery import *

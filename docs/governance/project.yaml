@@ -1459,6 +1459,46 @@ features:
       - "EVID-MA-V121-S08-P2-T3-TEST"
       - "EVID-MA-V121-S08-P2-T3-LIVE-GATE"
       - "EVID-MA-V121-S08-P2-T3-REVIEW"
+  - feature_id: "FEAT-MA-V121-S08-P3-T1"
+    name: "Memory Atlas append-only ChatGPT official export archive gate"
+    description: "S08-P3-T1 归档能力已实现但 Task 仍未完成，总进度保持 60/149。chatgpt-export-archive 仅在 DOWNLOADED 时通过 T3 verified private loader 读取仓库外 ZIP，以 download SHA-256 为唯一 archive identity，强制使用 S06 45 MiB parts/manifest/restore verifier，并为每个 request append sanitized provenance index 和 immutable raw ledger。只有 archive、public index 与 ledger 全部复核后才进入 ARCHIVED；state-write 失败与同 hash 新 request 均幂等恢复。当前 live state 为 IDLE/revision 0，inspect 在 private/raw 前返回 STATE_NOT_ELIGIBLE，因此没有生产 ZIP、真实 ChatGPT archive、P3 public index 或 ledger row，不能进入 S08-P3-T2。"
+    status: "in_progress"
+    fact_level: "EXTRACTED"
+    model_ids:
+      - "MOD-009"
+    formula_ids:
+      - "FORM-009"
+    parameter_ids: []
+    code_refs:
+      - "OpenAIDatabase/scripts/memory_atlas_cli/chatgpt_export_archive.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/archive_chunking.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/source_registry.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/parser.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/dispatch.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/runtime.py"
+      - "OpenAIDatabase/scripts/atlasctl.py"
+      - "OpenAIDatabase/tests/test_memory_atlas_chatgpt_export_archive.py"
+      - "OpenAIDatabase/AGENTS.md"
+    config_refs:
+      - "OpenAIDatabase/config/data_sources/chatgpt_export_archive.json"
+      - "OpenAIDatabase/config/data_sources/archive_chunking.json"
+      - "OpenAIDatabase/config/data_sources/source_registry.json"
+      - "OpenAIDatabase/机器治理/参数与公式/chatgpt_export_archive.v1_2_1_s08_p3_t1.json"
+    source_refs:
+      - "OpenAIDatabase/机器治理/证据与日志/chatgpt_export_archive/chatgpt_export_archive.v1_2_1_s08_p3_t1.json"
+      - "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s08_p3_t1_export_archive_review.md"
+    owner_actions:
+      - "先运行 python3 -B scripts/atlasctl.py chatgpt-export-archive --inspect。当前 IDLE 只能保持等待；只有真实流程已到 DOWNLOADED 时才运行 --archive --confirm-archive。真实 archive、request/download provenance、public index 和 raw ledger 均验证后才能关闭 T1；不得把 fixture 或 IDLE 结果标成完成。"
+    test_refs:
+      - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_chatgpt_export_archive -q"
+      - "python3 -B OpenAIDatabase/scripts/atlasctl.py chatgpt-export-archive --inspect --database-dir OpenAIDatabase"
+      - "npm run validate:fast --prefix OpenAIDatabase/apps/memory-atlas"
+      - "npm run validate:sync --prefix OpenAIDatabase/apps/memory-atlas"
+    evidence_refs:
+      - "EVID-MA-V121-S08-P3-T1-CONTRACT"
+      - "EVID-MA-V121-S08-P3-T1-TEST"
+      - "EVID-MA-V121-S08-P3-T1-LIVE-GATE"
+      - "EVID-MA-V121-S08-P3-T1-REVIEW"
 models:
   -
     model_id: "MOD-001"
@@ -5974,4 +6014,24 @@ evidence_refs:
     evidence_id: "EVID-MA-V121-S08-P2-T3-REVIEW"
     kind: "review"
     ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s08_p2_t3_export_download_review.md"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S08-P3-T1-CONTRACT"
+    kind: "config"
+    ref: "OpenAIDatabase/config/data_sources/chatgpt_export_archive.json"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S08-P3-T1-TEST"
+    kind: "test"
+    ref: "OpenAIDatabase/tests/test_memory_atlas_chatgpt_export_archive.py"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S08-P3-T1-LIVE-GATE"
+    kind: "artifact"
+    ref: "OpenAIDatabase/机器治理/证据与日志/chatgpt_export_archive/chatgpt_export_archive.v1_2_1_s08_p3_t1.json"
+    fact_level: "VERIFIED"
+  -
+    evidence_id: "EVID-MA-V121-S08-P3-T1-REVIEW"
+    kind: "review"
+    ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s08_p3_t1_export_archive_review.md"
     fact_level: "EXTRACTED"

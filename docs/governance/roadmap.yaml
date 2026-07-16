@@ -3029,7 +3029,7 @@ stages:
         objective: "按 S06 合同归档真实 ChatGPT export，并在最终交付边界允许时验证受控 main 直推链路。"
         status: "in_progress"
         estimated_hours: 3
-        estimated_pct: 0
+        estimated_pct: 20
         stop_conditions:
           - "导出批次、请求或下载元数据无法追溯"
           - "staged 内容包含 credential、邮件正文或未校验 ZIP"
@@ -3047,18 +3047,43 @@ stages:
           - task_id: "S08-P3-T1"
             name: "归档 ChatGPT official export raw"
             objective: "按 S06 合同分片、manifest、hash 并 append-only 写入 ChatGPT raw archive。"
-            status: "planned"
+            status: "in_progress"
             estimated_hours: 1
-            estimated_pct: 0
+            estimated_pct: 80
             dependencies:
               - "S08-P2-T3"
             acceptance_ids:
               - "ACC-MA-V121-S08-P3-T1"
-            test_commands: []
-            evidence_refs: []
+            acceptance:
+              - acceptance_id: "ACC-MA-V121-S08-P3-T1"
+                description: "A verified private ZIP returned only by the S08-P2-T3 loader is published under a SHA-256 archive identity using the S06 deterministic 45 MiB part, manifest and restore verifier contracts. A request-specific public index preserves sanitized request/download hashes and metadata, enters the immutable raw ledger, and only then advances DOWNLOADED to ARCHIVED. Replays and state-write recovery do not duplicate or overwrite the archive. The current live state is IDLE, so no real ZIP has been archived and this acceptance remains open."
+                evidence_refs:
+                  - "EVID-MA-V121-S08-P3-T1-CONTRACT"
+                  - "EVID-MA-V121-S08-P3-T1-TEST"
+                  - "EVID-MA-V121-S08-P3-T1-LIVE-GATE"
+                  - "EVID-MA-V121-S08-P3-T1-REVIEW"
+            test_commands:
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_chatgpt_export_archive -q"
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_archive_chunking OpenAIDatabase.tests.test_memory_atlas_archive_restore OpenAIDatabase.tests.test_memory_atlas_source_registry OpenAIDatabase.tests.test_atlasctl_modular_cli -q"
+              - "python3 -B OpenAIDatabase/scripts/atlasctl.py chatgpt-export-archive --inspect --database-dir OpenAIDatabase"
+              - "npm run validate:fast --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run validate:sync --prefix OpenAIDatabase/apps/memory-atlas"
+              - "python3 -B OpenAIDatabase/scripts/audit_memory_atlas_human_plane.py"
+              - "python3 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+            test_results:
+              - "Test-first initially failed because memory_atlas_cli.chatgpt_export_archive did not exist; dedicated synthetic regression now passes 9/9, including IDLE zero-access, exact restore, one/two-part archives, provenance redaction, request mismatch, deduplication and state-write recovery."
+              - "Final focused related regression passes 175/175; validate:fast passes 6/6 in 29.217 seconds; validate:sync passes 10/10 in 194.608 seconds, including a 137.382-second complete credential scan, with raw_mutation=false, remote_push=false and shell=false."
+              - "Live atlasctl inspect returns PASS/STATE_NOT_ELIGIBLE/IDLE with private_runtime_reads=0, raw_archive_reads=0 and raw_archive_writes=false. Tracked state remains revision 0 with SHA-256 da9b7f188ad0da9cb3dd482748b2d44ddfc65c4fc340b1214ad21d0a36b78aa3."
+              - "No production private ZIP, ChatGPT raw archive, public index or P3 raw-ledger row exists. This proves fail-closed readiness only and does not complete the Task."
+            evidence_refs:
+              - "EVID-MA-V121-S08-P3-T1-CONTRACT"
+              - "EVID-MA-V121-S08-P3-T1-TEST"
+              - "EVID-MA-V121-S08-P3-T1-LIVE-GATE"
+              - "EVID-MA-V121-S08-P3-T1-REVIEW"
             risks:
               - "导出批次、请求与下载 provenance 丢失或 raw 被覆盖"
             rollback: "git revert 本 Task 本地 commit；已追加 raw 不覆盖，由 manifest 保留批次状态。"
+            current_result: "in_progress_capability_implemented_live_idle_no_real_archive_60_of_149_s08_p3_t2_not_eligible_no_remote_upload"
           - task_id: "S08-P3-T2"
             name: "验证并准备 ChatGPT raw main backup"
             objective: "验证 staged 内容后生成可受控提交并准备直接 main 交付路径。"

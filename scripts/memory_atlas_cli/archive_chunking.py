@@ -162,6 +162,7 @@ def load_archive_chunking_contract(
         "github_warning_bytes": GITHUB_WARNING_BYTES,
         "github_hard_limit_bytes": GITHUB_HARD_LIMIT_BYTES,
         "part_bytes_below_warning": True,
+        "force_archive_below_threshold_supported": True,
     }:
         raise ArchiveChunkError("archive threshold drifted from the 45 MiB contract")
     if _mapping(contract.get("hashing"), "hashing") != {
@@ -282,8 +283,8 @@ def validate_chunk_manifest(payload: Any) -> dict[str, Any]:
     _exact_keys(package, set(PACKAGE_FIELDS), "package")
     _safe_package_filename(package.get("filename"))
     package_bytes = package.get("byte_size")
-    if isinstance(package_bytes, bool) or not isinstance(package_bytes, int) or package_bytes <= MAX_PART_BYTES:
-        raise ArchiveChunkError("chunk manifest package must exceed 45 MiB")
+    if isinstance(package_bytes, bool) or not isinstance(package_bytes, int) or package_bytes <= 0:
+        raise ArchiveChunkError("chunk manifest package must contain bytes")
     if not _valid_sha256(package.get("sha256")):
         raise ArchiveChunkError("package.sha256 is invalid")
 
@@ -298,8 +299,11 @@ def validate_chunk_manifest(payload: Any) -> dict[str, Any]:
     }:
         raise ArchiveChunkError("split keys do not match the chunk manifest contract")
     parts = manifest.get("parts")
-    if not isinstance(parts, list) or len(parts) < 2:
-        raise ArchiveChunkError("chunk manifest must contain at least two ordered parts")
+    if not isinstance(parts, list) or not parts:
+        raise ArchiveChunkError("chunk manifest must contain ordered parts")
+    expected_part_count = (package_bytes + MAX_PART_BYTES - 1) // MAX_PART_BYTES
+    if len(parts) != expected_part_count:
+        raise ArchiveChunkError("chunk manifest part count does not match package bytes")
     if split != {
         "method": "fixed_bytes",
         "max_part_bytes": MAX_PART_BYTES,
@@ -964,11 +968,15 @@ def chunk_archive_package(
     package_path: Path,
     source_id: str,
     archive_id: str,
+    *,
+    force_archive: bool = False,
 ) -> dict[str, Any]:
-    """Split a package above 45 MiB and publish a deterministic archive directory."""
+    """Publish deterministic parts, optionally retaining a package below 45 MiB."""
 
     source_id = _validate_portable_id(source_id, "source_id", max_length=64)
     archive_id = _validate_portable_id(archive_id, "archive_id", max_length=128)
+    if type(force_archive) is not bool:
+        raise ArchiveChunkError("force_archive must be a boolean")
     try:
         database_dir = database_dir.resolve(strict=True)
     except OSError as exc:
@@ -979,7 +987,7 @@ def chunk_archive_package(
     package_path, package_stat = _canonical_regular_file(package_path)
     candidate_archive_path = database_dir / ARCHIVE_ROOT / source_id / archive_id
 
-    if package_stat.size_bytes <= MAX_PART_BYTES:
+    if package_stat.size_bytes <= MAX_PART_BYTES and not force_archive:
         if os.path.lexists(candidate_archive_path):
             raise ArchiveChunkError(
                 "archive id already exists even though this package does not require chunking"

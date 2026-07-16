@@ -1,5 +1,28 @@
 # Memory Atlas v1.2 Remediation Handoff
 
+> **Current v1.2.1 note (2026-07-17 08:40 +10:00):** The v1.2.1 Task Pack
+> remains `60/149` complete. This run works only on `S08-P3-T1`; the archive
+> capability is implemented, but the Task remains `in_progress` because the
+> real export lifecycle is still `IDLE / revision 0` and no production ZIP is
+> available. `chatgpt-export-archive` exits before private/raw access unless
+> state is `DOWNLOADED` or already `ARCHIVED`; an eligible run consumes only
+> the verified T3 loader result, uses download SHA-256 as the unique archive
+> identity, publishes deterministic S06 parts and manifest, verifies exact
+> restore, appends request-specific sanitized provenance and the immutable raw
+> ledger, then advances to `ARCHIVED`. Synthetic 9/9 archive tests cover one
+> and two parts, exact restore, no private path publication, request mismatch,
+> same-hash/new-request dedupe and state-write recovery. Live inspect returns
+> `STATE_NOT_ELIGIBLE` with zero private reads, zero raw reads and no writes;
+> tracked state SHA-256 remains
+> `da9b7f188ad0da9cb3dd482748b2d44ddfc65c4fc340b1214ad21d0a36b78aa3`.
+> Final focused regression is 175/175. `validate:fast` is 6/6 in 29.217
+> seconds; `validate:sync` is 10/10 in 194.608 seconds, including a
+> 137.382-second complete credential scan, with raw mutation, remote push and
+> shell all false.
+> This is capability proof only, not a real archive claim. `S08-P3-T2` is not
+> eligible. No fetch, push, deploy, branch/PR, merge/rebase or shared cleanup has
+> occurred. Continue only `S08-P3-T1` until one real export is archived.
+>
 > **Current v1.2.1 note (2026-07-17 07:30 +10:00):** The v1.2.1 Task Pack is
 > 60/149 complete locally. This run completes only `S08-P2-T3`; S08-P2 is 3/3
 > and complete. `S08-P3-T1` is the next/only eligible Task in a later run and

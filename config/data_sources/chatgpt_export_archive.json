@@ -1,0 +1,97 @@
+{
+  "schema_version": "memory_atlas.chatgpt_export_archive_contract.v1_2_1_s08_p3_t1",
+  "task_id": "S08-P3-T1",
+  "acceptance_id": "ACC-MA-V121-S08-P3-T1",
+  "source_id": "chatgpt",
+  "input": {
+    "private_export_loader": "memory_atlas_cli.chatgpt_export_download:load_private_downloaded_export",
+    "verified_private_zip_required": true,
+    "request_id_must_match_state": true,
+    "source_bytes_read_only": true,
+    "private_path_emitted": false
+  },
+  "state_gate": {
+    "required_state": "DOWNLOADED",
+    "success_state": "ARCHIVED",
+    "idempotent_state": "ARCHIVED",
+    "noneligible_state_reads_private_runtime": false,
+    "state_lock_covers_archive_registration_and_transition": true
+  },
+  "archive": {
+    "chunk_contract_ref": "config/data_sources/archive_chunking.json",
+    "restore_contract_ref": "config/data_sources/archive_restore.json",
+    "root": "data/raw_archives/chatgpt",
+    "archive_id_formula": "chatgpt-export-{download_sha256}",
+    "maximum_part_bytes": 47185920,
+    "github_warning_bytes": 52428800,
+    "force_archive_below_threshold": true,
+    "manifest_publish_last": true,
+    "verify_after_publish": true,
+    "package_hash_identity_required": true
+  },
+  "provenance": {
+    "public_index_root": "data/public_raw/chatgpt",
+    "public_index_filename_formula": "chatgpt_raw_archive.{archive_id}.{request_id}.json",
+    "export_batch_id": "request_id",
+    "request_metadata_sha256": true,
+    "private_download_metadata_sha256": true,
+    "preserve_request_fields": [
+      "request_id",
+      "reserved_at",
+      "origin_state",
+      "dispatch_status",
+      "request_click_count",
+      "connector_error_code",
+      "connector_result_sha256"
+    ],
+    "preserve_download_fields": [
+      "link_sha256",
+      "account_digest",
+      "download_sha256",
+      "bytes_downloaded",
+      "downloaded_at",
+      "zip_member_count",
+      "conversations_member_count",
+      "uncompressed_bytes",
+      "transport"
+    ],
+    "private_relative_path_public": false,
+    "raw_account_or_url_public": false
+  },
+  "append_only": {
+    "archive_identity": "download_sha256",
+    "same_hash_creates_second_archive": false,
+    "new_request_same_hash_appends_provenance": true,
+    "existing_archive_rewritten": false,
+    "public_index_no_overwrite": true,
+    "raw_ledger_required": true,
+    "state_write_failure_reuses_archive_and_index": true
+  },
+  "cli": {
+    "command": "chatgpt-export-archive",
+    "modes": [
+      "--inspect",
+      "--archive --confirm-archive"
+    ],
+    "output_is_sanitized": true
+  },
+  "security": {
+    "browser_cookie_access": false,
+    "browser_profile_access": false,
+    "credential_access": false,
+    "private_zip_committed": false,
+    "private_path_emitted": false,
+    "raw_account_or_url_emitted": false,
+    "remote_git_actions": false
+  },
+  "model_parameters_ref": "机器治理/参数与公式/chatgpt_export_archive.v1_2_1_s08_p3_t1.json",
+  "phase_boundary": {
+    "writes_append_only_raw_archive": true,
+    "writes_public_provenance_index": true,
+    "parses_export": false,
+    "commits_or_pushes": false,
+    "deploys": false,
+    "real_archive_required_for_completion": true,
+    "next_task": "S08-P3-T2"
+  }
+}

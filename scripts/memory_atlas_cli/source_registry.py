@@ -32,6 +32,13 @@ from memory_atlas_cli.raw_ledger import (
 
 REGISTRY_PATH = Path("config/data_sources/source_registry.json")
 PUBLIC_RAW_LAYOUT_PATH = Path("config/data_sources/public_raw_layout.json")
+CHATGPT_EXPORT_ARCHIVE_CONTRACT_PATH = Path(
+    "config/data_sources/chatgpt_export_archive.json"
+)
+CHATGPT_EXPORT_ARCHIVE_ENTRYPOINT = Path(
+    "scripts/memory_atlas_cli/chatgpt_export_archive.py"
+)
+CHATGPT_COMPLETE_ARCHIVE_ROOT = Path("data/raw_archives/chatgpt")
 CODEX_DISCOVERY_CONTRACT_PATH = Path("config/data_sources/codex_source_discovery.json")
 CODEX_PUBLIC_RAW_ARCHIVE_CONTRACT_PATH = Path(
     "config/data_sources/codex_public_raw_archive.json"
@@ -267,7 +274,36 @@ def _validate_source(source: dict[str, Any], database_dir: Path, push_defaults: 
     resolved_parser = (database_dir / parser_path).resolve()
     if database_dir.resolve() not in resolved_parser.parents or not resolved_parser.is_file():
         raise SourceRegistryError(f"{source_id}.parser.entrypoint does not exist: {parser_path}")
-    if source_type == "codex_local":
+    if source_type == "chatgpt_export":
+        raw_archive_entrypoint = _repo_relative_path(
+            parser.get("raw_archive_entrypoint"),
+            f"{source_id}.parser.raw_archive_entrypoint",
+            ("scripts/",),
+        )
+        raw_archive_contract_ref = _repo_relative_path(
+            parser.get("raw_archive_contract_ref"),
+            f"{source_id}.parser.raw_archive_contract_ref",
+            ("config/data_sources/",),
+        )
+        complete_archive_root = _repo_relative_path(
+            parser.get("complete_archive_root"),
+            f"{source_id}.parser.complete_archive_root",
+            ("data/raw_archives/",),
+        )
+        if (
+            raw_archive_entrypoint != CHATGPT_EXPORT_ARCHIVE_ENTRYPOINT.as_posix()
+            or raw_archive_contract_ref
+            != CHATGPT_EXPORT_ARCHIVE_CONTRACT_PATH.as_posix()
+            or complete_archive_root != CHATGPT_COMPLETE_ARCHIVE_ROOT.as_posix()
+        ):
+            raise SourceRegistryError(
+                "chatgpt.parser must name the canonical S08 export archive adapter"
+            )
+        if not (database_dir / raw_archive_entrypoint).is_file():
+            raise SourceRegistryError("chatgpt raw archive entrypoint does not exist")
+        if not (database_dir / raw_archive_contract_ref).is_file():
+            raise SourceRegistryError("chatgpt raw archive contract does not exist")
+    elif source_type == "codex_local":
         raw_archive_entrypoint = _repo_relative_path(
             parser.get("raw_archive_entrypoint"),
             f"{source_id}.parser.raw_archive_entrypoint",
@@ -396,9 +432,7 @@ def _validate_source(source: dict[str, Any], database_dir: Path, push_defaults: 
             "complete_archive_root",
         )
     ):
-        raise SourceRegistryError(
-            f"{source_id}.parser cannot claim the canonical Codex raw archive adapter"
-        )
+        raise SourceRegistryError(f"{source_id}.parser cannot claim a canonical raw archive adapter")
 
     schedule = _mapping(source.get("schedule"), f"{source_id}.schedule")
     if source_type == "codex_local":

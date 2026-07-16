@@ -1,0 +1,87 @@
+{
+  "schema_version": "memory_atlas.chatgpt_export_archive_evidence.v1_2_1_s08_p3_t1",
+  "task_id": "S08-P3-T1",
+  "acceptance_id": "ACC-MA-V121-S08-P3-T1",
+  "status": "PARTIAL_WAITING_REAL_EXPORT",
+  "observed_at": "2026-07-17T08:40:00+10:00",
+  "artifacts": [
+    {
+      "path": "config/data_sources/chatgpt_export_archive.json",
+      "sha256": "d1de19a61db9aba8085fc37b53521100a57753943fb3c8767476f58b4b9009f9"
+    },
+    {
+      "path": "机器治理/参数与公式/chatgpt_export_archive.v1_2_1_s08_p3_t1.json",
+      "sha256": "332c1648e09963d82709de80613df0d82b4b9ccc80cca75ead44a202144d4a89"
+    },
+    {
+      "path": "scripts/memory_atlas_cli/chatgpt_export_archive.py",
+      "sha256": "0cd5db96b303540acd8e4f3720669508dcb507d9d3d0b503eb874c50c50535dd"
+    },
+    {
+      "path": "tests/test_memory_atlas_chatgpt_export_archive.py",
+      "sha256": "2fc5a567ca09da1f72606bec9df82a6a2c933be5bfb08bcd745feef6d3f3e037"
+    }
+  ],
+  "implementation": {
+    "state_transition": "DOWNLOADED_to_ARCHIVED",
+    "private_input": "verified_S08_P2_T3_loader_only",
+    "archive_identity": "download_sha256",
+    "maximum_part_bytes": 47185920,
+    "force_single_part_below_threshold": true,
+    "manifest_publish_last": true,
+    "restore_verification_required": true,
+    "request_specific_public_provenance": true,
+    "raw_ledger_required": true,
+    "same_hash_duplicate_archive_maximum": 1,
+    "state_write_failure_recovery": true
+  },
+  "live_gate": {
+    "export_state": "IDLE",
+    "revision": 0,
+    "state_sha256": "da9b7f188ad0da9cb3dd482748b2d44ddfc65c4fc340b1214ad21d0a36b78aa3",
+    "inspect_action": "STATE_NOT_ELIGIBLE",
+    "private_runtime_reads": 0,
+    "raw_archive_reads": 0,
+    "raw_archive_writes": false,
+    "production_private_zip_present": false,
+    "production_chatgpt_archive_present": false,
+    "production_public_index_present": false,
+    "production_raw_ledger_row_present": false
+  },
+  "fixture_proof": {
+    "single_part_archive_verified": true,
+    "two_part_45_mib_archive_verified": true,
+    "exact_restore_verified": true,
+    "request_mismatch_stops_before_raw": true,
+    "same_hash_new_request_reuses_archive": true,
+    "state_write_interruption_reuses_archive_and_index": true,
+    "private_path_or_url_in_public_index": false
+  },
+  "acceptance_truth": {
+    "archive_capability_implemented": true,
+    "real_export_archived": false,
+    "task_complete": false,
+    "completed_task_count": 60,
+    "total_task_count": 149,
+    "next_task_eligible": false
+  },
+  "tests": {
+    "test_first": "ModuleNotFoundError before implementation",
+    "dedicated": "9/9 PASS",
+    "focused_related": "175/175 PASS",
+    "static_check": "ruff and compileall PASS",
+    "live_inspect": "PASS / STATE_NOT_ELIGIBLE / IDLE",
+    "validate_fast": "6/6 PASS in 29.217 seconds",
+    "validate_sync": "10/10 PASS in 194.608 seconds; credential scan 137.382 seconds; raw_mutation=false; remote_push=false; shell=false"
+  },
+  "safety": {
+    "private_path_emitted": false,
+    "raw_account_or_url_emitted": false,
+    "private_zip_committed": false,
+    "production_raw_mutation": false,
+    "fetch": false,
+    "remote_push": false,
+    "deployment": false,
+    "branch_or_pr": false
+  }
+}

@@ -34,6 +34,7 @@ KNOWN_COMMANDS = frozenset(
         "chatgpt-export-auth",
         "chatgpt-export-link",
         "chatgpt-export-download",
+        "chatgpt-export-archive",
         "chatgpt-notification-connector",
         "build-atlas",
         "analyze",

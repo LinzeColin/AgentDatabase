@@ -8,7 +8,8 @@
     "max_part_bytes": 47185920,
     "github_warning_bytes": 52428800,
     "github_hard_limit_bytes": 104857600,
-    "part_bytes_below_warning": true
+    "part_bytes_below_warning": true,
+    "force_archive_below_threshold_supported": true
   },
   "hashing": {
     "algorithm": "sha256",

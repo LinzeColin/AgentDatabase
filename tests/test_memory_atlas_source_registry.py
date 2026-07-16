@@ -77,6 +77,18 @@ class SourceRegistryContractTests(unittest.TestCase):
         self.assertEqual(sources["codex"]["source_type"], "codex_local")
         self.assertEqual(sources["generic_agent_template"]["source_type"], "generic_agent")
         self.assertEqual(sources["chatgpt"]["archive_path"], "data/public_raw/chatgpt")
+        self.assertEqual(
+            sources["chatgpt"]["parser"]["raw_archive_entrypoint"],
+            "scripts/memory_atlas_cli/chatgpt_export_archive.py",
+        )
+        self.assertEqual(
+            sources["chatgpt"]["parser"]["raw_archive_contract_ref"],
+            "config/data_sources/chatgpt_export_archive.json",
+        )
+        self.assertEqual(
+            sources["chatgpt"]["parser"]["complete_archive_root"],
+            "data/raw_archives/chatgpt",
+        )
         self.assertEqual(sources["codex"]["archive_path"], "data/public_raw/codex")
         self.assertEqual(
             sources["codex"]["parser"]["push_main_entrypoint"],
@@ -530,6 +542,19 @@ class SourceRegistryContractTests(unittest.TestCase):
                 whitespace_identity["sync_sources"].append(source)
                 with self.assertRaises(SourceRegistryError):
                     validate_source_registry(whitespace_identity, ROOT)
+
+    def test_registry_rejects_chatgpt_archive_adapter_drift(self) -> None:
+        mutations = (
+            ("raw_archive_entrypoint", "scripts/memory_atlas_cli/codex_public_raw_archive.py"),
+            ("raw_archive_contract_ref", "config/data_sources/codex_public_raw_archive.json"),
+            ("complete_archive_root", "data/raw_archives/codex"),
+        )
+        for field, value in mutations:
+            with self.subTest(field=field):
+                payload = canonical_payload()
+                payload["sync_sources"][0]["parser"][field] = value
+                with self.assertRaises(SourceRegistryError):
+                    validate_source_registry(payload, ROOT)
 
     def test_generic_adapter_rejects_spoofed_canonical_provenance(self) -> None:
         result = subprocess.run(

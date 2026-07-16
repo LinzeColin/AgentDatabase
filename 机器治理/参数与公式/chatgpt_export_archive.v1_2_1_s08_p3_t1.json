@@ -1,0 +1,45 @@
+{
+  "schema_version": "memory_atlas.chatgpt_export_archive_model.v1_2_1_s08_p3_t1",
+  "task_id": "S08-P3-T1",
+  "acceptance_id": "ACC-MA-V121-S08-P3-T1",
+  "model_id": "MOD-MA-V121-S08-P3-T1",
+  "formula_id": "FORM-MA-V121-S08-P3-T1",
+  "purpose": "Publish one verified private ChatGPT export as a recoverable append-only archive while preserving request and download provenance without exposing private paths or raw account/link values.",
+  "parameters": {
+    "maximum_part_bytes": 47185920,
+    "github_warning_bytes": 52428800,
+    "hash_algorithm": "sha256",
+    "hash_hex_characters": 64,
+    "read_chunk_bytes": 1048576,
+    "maximum_contract_bytes": 131072,
+    "maximum_public_index_bytes": 131072,
+    "maximum_archived_registration_scan": 10000,
+    "archive_directory_mode_octal": "0700",
+    "archive_file_mode_octal": "0600",
+    "public_index_file_mode_octal": "0600",
+    "duplicate_archives_per_download_hash_maximum": 1,
+    "private_zip_bytes_in_repository": 0,
+    "remote_push_attempts": 0
+  },
+  "formulas": {
+    "archive_id": "chatgpt-export-{download_sha256}",
+    "part_count": "ceil(bytes_downloaded / 47185920)",
+    "public_index_identity": "sha256(canonical_public_index_json)",
+    "request_metadata_identity": "sha256(canonical_request_metadata_json)",
+    "download_metadata_identity": "sha256(canonical_private_download_metadata_json)",
+    "state_transition": "DOWNLOADED + verified_archive + public_index + raw_ledger -> ARCHIVED"
+  },
+  "invariants": [
+    "archive parts reconstruct exactly to download_sha256 and bytes_downloaded",
+    "all part files are at most 45 MiB and below the GitHub warning line",
+    "same download hash never creates a second archive directory",
+    "a new request for the same hash appends provenance without rewriting the archive",
+    "ARCHIVED is written only after archive verification and public raw ledger verification",
+    "no private path, raw account, one-time URL, cookie or credential is emitted or committed"
+  ],
+  "phase_boundary": {
+    "parses_export": false,
+    "commits_or_pushes": false,
+    "next_task": "S08-P3-T2"
+  }
+}

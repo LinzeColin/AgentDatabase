@@ -128,6 +128,10 @@ def make_database_fixture(parent: Path) -> Path:
     raw_archive_entrypoint = scripts / "memory_atlas_cli/codex_public_raw_archive.py"
     raw_archive_entrypoint.parent.mkdir()
     raw_archive_entrypoint.write_text("# fixture\n", encoding="utf-8")
+    (raw_archive_entrypoint.parent / "chatgpt_export_archive.py").write_text(
+        "# fixture\n",
+        encoding="utf-8",
+    )
     (raw_archive_entrypoint.parent / "codex_sync_state.py").write_text(
         "# fixture\n",
         encoding="utf-8",

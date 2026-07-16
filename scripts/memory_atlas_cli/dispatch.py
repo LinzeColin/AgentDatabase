@@ -14,6 +14,7 @@ from .build import (
     run_chatgpt_deep_explore,
     run_generate_personalization_prompt,
 )
+from .chatgpt_export_archive import run_chatgpt_export_archive
 from .chatgpt_export_human_auth import run_chatgpt_export_human_auth
 from .chatgpt_export_download import run_chatgpt_export_download
 from .chatgpt_export_link_discovery import run_chatgpt_export_link_discovery
@@ -36,6 +37,7 @@ RUNNERS: dict[str, Callable[[argparse.Namespace], int]] = {
     "chatgpt-export-auth": run_chatgpt_export_human_auth,
     "chatgpt-export-link": run_chatgpt_export_link_discovery,
     "chatgpt-export-download": run_chatgpt_export_download,
+    "chatgpt-export-archive": run_chatgpt_export_archive,
     "chatgpt-notification-connector": run_chatgpt_notification_connector,
     "build-atlas": run_build_atlas,
     "analyze": run_analyze,

@@ -76,6 +76,9 @@
       },
       "parser": {
         "entrypoint": "scripts/sync_chatgpt_memory_data.py",
+        "raw_archive_entrypoint": "scripts/memory_atlas_cli/chatgpt_export_archive.py",
+        "raw_archive_contract_ref": "config/data_sources/chatgpt_export_archive.json",
+        "complete_archive_root": "data/raw_archives/chatgpt",
         "input_formats": [
           "chatgpt_official_export_zip",
           "chatgpt_conversations_json"

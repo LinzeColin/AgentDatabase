@@ -116,6 +116,17 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     export_download.add_argument("--runtime-dir", type=Path)
     export_download.add_argument("--database-dir", type=Path, default=ROOT)
 
+    export_archive = subparsers.add_parser(
+        "chatgpt-export-archive",
+        help="Inspect or archive a verified private ChatGPT export ZIP.",
+    )
+    export_archive_mode = export_archive.add_mutually_exclusive_group(required=True)
+    export_archive_mode.add_argument("--inspect", action="store_true")
+    export_archive_mode.add_argument("--archive", action="store_true")
+    export_archive.add_argument("--confirm-archive", action="store_true")
+    export_archive.add_argument("--runtime-dir", type=Path)
+    export_archive.add_argument("--database-dir", type=Path, default=ROOT)
+
     notification_connector = subparsers.add_parser(
         "chatgpt-notification-connector",
         help="Configure or inspect a read-only ChatGPT export notification adapter.",
