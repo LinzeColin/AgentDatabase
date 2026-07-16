@@ -70,8 +70,20 @@ overlap.
 - Full pre-commit `validate:release` passed `1/1` in 1,018.082 seconds with
   `failed_count=0`, `skipped_critical_count=0`, `raw_mutation=false` and
   `remote_push=false`.
-- Local commit and post-commit exact-tree release/recovery are still required at
-  this checkpoint and are not preclaimed.
+- Implementation commit `02564125e47cfa35cfd68845ac1c5f0f30085205` was
+  created locally. Its first exact-tree release ran 1,104.548 seconds and failed
+  closed at `tracked_only_recovery`; downstream reconciliation was therefore
+  `55/58`. Raw mutation and remote push remained false.
+- The corrected recovery gate passes `23/23` focused tests and independently
+  recovers that same commit: 1,694 tracked files, two source packages, 514/514
+  current raw-ledger entries, the immutable release, 432/432 canonical
+  publication, fresh frontend build and current snapshot Pages parity all pass.
+- The corrective full Python suite passes `506/506` in 286.449 seconds.
+- Corrective `validate:release` passes `final_audit` `1/1` in 1,268.493 seconds
+  with `failed_count=0`, `skipped_critical_count=0`, `raw_mutation=false` and
+  `remote_push=false`; aggregate recovery and requirement reconciliation pass.
+- Corrective local commit and its post-commit exact-tree release remain required
+  and are not preclaimed.
 
 The implementation review found and closed these candidate defects:
 
@@ -84,6 +96,7 @@ The implementation review found and closed these candidate defects:
 | Obsidian validation sampled progressive reveal before any edge existed | Wait for a real edge and local/hub label, with bounded diagnostics on failure | CLOSED |
 | The old acceptance audit coupled the new Atlas session count to T3 legacy recommendations | When T2 state exists, run the canonical publisher in dry-run mode and require exact `NO_CHANGES`; retain the legacy recommendation contract as a separate gate | CLOSED |
 | The new publication model file was absent from the protected machine-plane inventory | Register the exact 157-file / 31-active-config bytes and manifest, retaining strict drift rejection | CLOSED |
+| Tracked-only recovery required the current derived snapshot to equal the older immutable release | Keep immutable release verification intact; allow a newer current snapshot only when the recovered canonical publisher dry-run returns exact `NO_CHANGES`, then build and compare Pages against that validated hash | CLOSED |
 
 Current review finding count after remediation is
 `0 Critical / 0 Important / 0 Minor`. This count covers the current candidate;

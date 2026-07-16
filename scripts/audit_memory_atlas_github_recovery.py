@@ -31,6 +31,7 @@ RAW_LEDGER_PATH = Path("机器治理/证据与日志/raw_archive_manifests/raw_h
 CURRENT_RELEASE_PATH = Path("机器治理/发布快照/memory_atlas_current_release.json")
 RELEASE_ROOT = Path("data/releases/memory_atlas/v1_2")
 DERIVED_SNAPSHOT_PATH = Path("data/derived/visualization/memory_atlas.json")
+CODEX_ATLAS_STATE_PATH = Path("data/sync_state/codex_atlas.json")
 FRONTEND_PATH = Path("apps/memory-atlas")
 PAGES_SNAPSHOT_PATH = FRONTEND_PATH / "dist/memory_atlas.json"
 PUBLIC_RAW_AUDITOR_PATH = Path("scripts/audit_memory_atlas_public_raw.py")
@@ -800,6 +801,102 @@ def _source_package_records(
     return manifest_path, manifest_sha256, manifest_size_bytes, tuple(rows)
 
 
+def _run_codex_atlas_publication_audit(
+    database_dir: Path,
+    derived_snapshot_sha256: str,
+) -> dict[str, Any]:
+    state_path = database_dir / CODEX_ATLAS_STATE_PATH
+    if not state_path.is_file():
+        raise RecoveryAuditError(
+            "DERIVED_SNAPSHOT_MISMATCH",
+            "Tracked derived snapshot differs from the immutable release without canonical publication state.",
+        )
+
+    scripts_dir = database_dir / "scripts"
+    publisher_path = scripts_dir / "memory_atlas_cli/codex_atlas.py"
+    if not publisher_path.is_file():
+        raise RecoveryAuditError(
+            "DERIVED_PUBLICATION_AUDITOR_MISSING",
+            "Canonical Codex Atlas publisher is missing from the recovered tree.",
+        )
+    audit_code = (
+        "import json; from pathlib import Path; "
+        "from memory_atlas_cli.codex_atlas import publish_codex_atlas; "
+        "print(json.dumps(publish_codex_atlas(Path('.'), dry_run=True), sort_keys=True))"
+    )
+    argv = [sys.executable, "-B", "-c", audit_code]
+    display_argv = ["python3", "-B", "-c", "<canonical-codex-atlas-dry-run>"]
+    env = _safe_environment()
+    env["PYTHONPATH"] = str(scripts_dir)
+    command_result = run_bounded_command(
+        argv,
+        cwd=database_dir,
+        env=env,
+        display_argv=display_argv,
+        timeout_seconds=300,
+        sensitive_roots=(database_dir,),
+    )
+    if command_result.get("status") != "PASS":
+        raise RecoveryAuditError(
+            "DERIVED_PUBLICATION_INVALID",
+            "Canonical Codex Atlas dry-run failed in the recovered tree.",
+            command=display_argv,
+            returncode=command_result.get("returncode"),
+            failure_status=command_result.get("failure_status"),
+            stdout_tail=command_result.get("stdout_tail"),
+            stderr_tail=command_result.get("stderr_tail"),
+        )
+    try:
+        publication = json.loads(str(command_result.get("stdout_tail") or ""))
+    except (TypeError, json.JSONDecodeError) as exc:
+        raise RecoveryAuditError(
+            "DERIVED_PUBLICATION_INVALID",
+            "Canonical Codex Atlas dry-run returned invalid JSON.",
+        ) from exc
+    if not isinstance(publication, dict):
+        raise RecoveryAuditError(
+            "DERIVED_PUBLICATION_INVALID",
+            "Canonical Codex Atlas dry-run must return an object.",
+        )
+    event_count = int(publication.get("event_count") or 0)
+    facet_count = int(publication.get("facet_count") or 0)
+    outputs = publication.get("outputs")
+    snapshot_record = outputs.get("atlas_snapshot") if isinstance(outputs, dict) else None
+    if (
+        publication.get("status") != "PASS"
+        or publication.get("outcome") != "NO_CHANGES"
+        or publication.get("dry_run") is not True
+        or publication.get("writes_files") is not False
+        or publication.get("changed_paths") != []
+        or publication.get("raw_mutation") is not False
+        or publication.get("legacy_consumer_mutation") is not False
+        or publication.get("remote_push") is not False
+        or event_count <= 0
+        or event_count != facet_count
+        or not isinstance(snapshot_record, dict)
+        or snapshot_record.get("path") != DERIVED_SNAPSHOT_PATH.as_posix()
+        or snapshot_record.get("sha256") != derived_snapshot_sha256
+        or snapshot_record.get("byte_size") != (database_dir / DERIVED_SNAPSHOT_PATH).stat().st_size
+    ):
+        raise RecoveryAuditError(
+            "DERIVED_PUBLICATION_INVALID",
+            "Canonical Codex Atlas state or tracked publication outputs are stale.",
+        )
+    weekly_record = outputs.get("weekly_report") if isinstance(outputs, dict) else None
+    return {
+        "status": "PASS",
+        "mode": "canonical_codex_atlas_publication",
+        "state_path": CODEX_ATLAS_STATE_PATH.as_posix(),
+        "snapshot_sha256": derived_snapshot_sha256,
+        "weekly_report_sha256": (
+            weekly_record.get("sha256") if isinstance(weekly_record, dict) else ""
+        ),
+        "event_count": event_count,
+        "facet_count": facet_count,
+        "writes_files": False,
+    }
+
+
 def _load_release_contract(database_dir: Path) -> tuple[ReleaseContract, dict[str, Any]]:
     pointer = _load_json(database_dir / CURRENT_RELEASE_PATH, "CURRENT_RELEASE_MISSING")
     _assert_relative_manifest_paths(pointer, "current_release")
@@ -897,8 +994,21 @@ def _load_release_contract(database_dir: Path) -> tuple[ReleaseContract, dict[st
     derived_path = database_dir / DERIVED_SNAPSHOT_PATH
     if not derived_path.is_file():
         raise RecoveryAuditError("DERIVED_SNAPSHOT_MISSING", "Tracked derived snapshot is missing.")
-    if sha256_file(derived_path) != snapshot_sha256:
-        raise RecoveryAuditError("DERIVED_SNAPSHOT_MISMATCH", "Tracked derived snapshot does not match the immutable release.")
+    derived_snapshot_sha256 = sha256_file(derived_path)
+    publication: dict[str, Any] | None = None
+    if derived_snapshot_sha256 == snapshot_sha256:
+        derived_snapshot_source = "immutable_release"
+    else:
+        publication = _run_codex_atlas_publication_audit(
+            database_dir,
+            derived_snapshot_sha256,
+        )
+        if publication.get("snapshot_sha256") != derived_snapshot_sha256:
+            raise RecoveryAuditError(
+                "DERIVED_PUBLICATION_INVALID",
+                "Canonical publication audit did not bind the tracked snapshot hash.",
+            )
+        derived_snapshot_source = "canonical_codex_atlas_publication"
     pointer_sha = pointer.get("snapshot_sha256")
     if pointer_sha is not None and _valid_sha256(pointer_sha, "current release snapshot") != snapshot_sha256:
         raise RecoveryAuditError("CURRENT_RELEASE_HASH_MISMATCH", "Current release pointer hash does not match its manifest.")
@@ -930,6 +1040,9 @@ def _load_release_contract(database_dir: Path) -> tuple[ReleaseContract, dict[st
         "snapshot_sha256": snapshot_sha256,
         "snapshot_counts": normalized_counts,
         "derived_snapshot_path": DERIVED_SNAPSHOT_PATH.as_posix(),
+        "derived_snapshot_sha256": derived_snapshot_sha256,
+        "derived_snapshot_source": derived_snapshot_source,
+        "codex_atlas_publication": publication,
         "raw_manifest_path": raw_manifest_relative.as_posix(),
         "raw_manifest_sha256": raw_manifest_sha256,
     }
@@ -1246,7 +1359,11 @@ def _normalized_command_result(
     }
 
 
-def _run_frontend_recovery(database_dir: Path, workspace: Path, release_sha256: str) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+def _run_frontend_recovery(
+    database_dir: Path,
+    workspace: Path,
+    expected_snapshot_sha256: str,
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     frontend = database_dir / FRONTEND_PATH
     if not (frontend / "package.json").is_file() or not (frontend / "package-lock.json").is_file():
         raise RecoveryAuditError("FRONTEND_PACKAGE_MISSING", "Recovered frontend package or lockfile is missing.")
@@ -1281,12 +1398,16 @@ def _run_frontend_recovery(database_dir: Path, workspace: Path, release_sha256: 
     if not pages_snapshot.is_file():
         raise RecoveryAuditError("PAGES_SNAPSHOT_MISSING", "Frontend build did not produce the Pages snapshot.")
     pages_sha256 = sha256_file(pages_snapshot)
-    if pages_sha256 != release_sha256:
-        raise RecoveryAuditError("PAGES_SNAPSHOT_MISMATCH", "Built Pages snapshot does not match the immutable release.")
+    if pages_sha256 != expected_snapshot_sha256:
+        raise RecoveryAuditError(
+            "PAGES_SNAPSHOT_MISMATCH",
+            "Built Pages snapshot does not match the validated tracked derived snapshot.",
+        )
     return results, {
         "status": "PASS",
         "pages_snapshot_path": PAGES_SNAPSHOT_PATH.as_posix(),
         "snapshot_sha256": pages_sha256,
+        "parity_target": DERIVED_SNAPSHOT_PATH.as_posix(),
     }
 
 
@@ -1356,7 +1477,7 @@ def rehearse_recovery(repo_root: Path, commit: str, output_dir: Path) -> dict[st
         command_results, pages_parity = _run_frontend_recovery(
             database_dir,
             output_dir,
-            str(tree_audit["release"]["snapshot_sha256"]),
+            str(tree_audit["release"]["derived_snapshot_sha256"]),
         )
         result.update(
             {

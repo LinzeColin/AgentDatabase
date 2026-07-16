@@ -1643,7 +1643,7 @@
       {
         "path": "scripts/audit_memory_atlas_github_recovery.py",
         "baseline": true,
-        "sha256": "f2cd7e0497cae1666f48b6958881bd04c16ef57e5ac5a1245054b2255e4b59c6",
+        "sha256": "a5e1e9b63e0eaaac47d54a9c6d398b5ceb3647b0ffdf6499fd8845a9726b117b",
         "matched_families": [
           "audit"
         ],

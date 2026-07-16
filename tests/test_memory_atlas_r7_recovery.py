@@ -462,6 +462,11 @@ class MemoryAtlasR7RecoveryTests(unittest.TestCase):
         self.assertEqual(result["raw_integrity"]["raw_file_count"], 3)
         self.assertEqual(result["raw_integrity"]["ledger_entry_count"], 3)
         self.assertEqual(result["release"]["snapshot_sha256"], sha256_bytes(self.fixture.snapshot_bytes))
+        self.assertEqual(result["release"]["derived_snapshot_source"], "immutable_release")
+        self.assertEqual(
+            result["release"]["derived_snapshot_sha256"],
+            sha256_bytes(self.fixture.snapshot_bytes),
+        )
         self.assertEqual(result["pages_parity"]["status"], "PASS")
         self.assertEqual(
             self.fixture.frontend_commands,
@@ -470,6 +475,80 @@ class MemoryAtlasR7RecoveryTests(unittest.TestCase):
         self.assertTrue(result["cleanup"]["output_dir_removed"])
         self.assertFalse(self.fixture.output_dir.exists())
         assert_portable(self, result)
+
+    def test_canonical_publication_can_advance_tracked_snapshot_without_rewriting_release(self) -> None:
+        current_snapshot = (
+            json.dumps(
+                {
+                    "schema_version": "memory_atlas.visualization.v1_2",
+                    "overview": {
+                        "active_memory_count": 2,
+                        "codex_session_count": 2,
+                        "conversation_count": 4,
+                        "edge_count": 2,
+                        "node_count": 3,
+                    },
+                    "nodes": [{"id": "one"}, {"id": "two"}, {"id": "three"}],
+                    "edges": [
+                        {"source": "one", "target": "two"},
+                        {"source": "two", "target": "three"},
+                    ],
+                },
+                ensure_ascii=False,
+                sort_keys=True,
+            )
+            + "\n"
+        ).encode("utf-8")
+        derived_path = self.fixture.database / "data/derived/visualization/memory_atlas.json"
+        derived_path.write_bytes(current_snapshot)
+        state_path = self.fixture.database / "data/sync_state/codex_atlas.json"
+        write_json(state_path, {"fixture": "canonical publisher validates this state"})
+        run_git(self.fixture.repo, "add", state_path.relative_to(self.fixture.repo).as_posix())
+        commit = self.fixture.commit_change("publish newer canonical snapshot")
+        current_sha256 = sha256_bytes(current_snapshot)
+
+        def current_snapshot_runner(
+            argv: list[str], *, cwd: Path, env: dict[str, str]
+        ) -> dict[str, Any]:
+            result = self.fixture.frontend_runner(argv, cwd=cwd, env=env)
+            if argv[:2] == ["npm", "run"]:
+                (cwd / "dist/memory_atlas.json").write_bytes(current_snapshot)
+            return result
+
+        publication_audit = {
+            "status": "PASS",
+            "mode": "canonical_codex_atlas_publication",
+            "state_path": "data/sync_state/codex_atlas.json",
+            "snapshot_sha256": current_sha256,
+            "weekly_report_sha256": "f" * 64,
+            "event_count": 2,
+            "facet_count": 2,
+            "writes_files": False,
+        }
+        with mock.patch.object(
+            self.module,
+            "_run_codex_atlas_publication_audit",
+            return_value=publication_audit,
+        ):
+            result = self.rehearse(commit=commit, runner=current_snapshot_runner)
+
+        self.assertEqual(result["status"], "PASS", result)
+        self.assertEqual(
+            result["release"]["snapshot_sha256"],
+            sha256_bytes(self.fixture.snapshot_bytes),
+        )
+        self.assertEqual(
+            result["release"]["derived_snapshot_source"],
+            "canonical_codex_atlas_publication",
+        )
+        self.assertEqual(result["release"]["derived_snapshot_sha256"], current_sha256)
+        self.assertEqual(result["release"]["codex_atlas_publication"], publication_audit)
+        self.assertEqual(result["pages_parity"]["snapshot_sha256"], current_sha256)
+        self.assertEqual(
+            result["pages_parity"]["parity_target"],
+            "data/derived/visualization/memory_atlas.json",
+        )
+        self.assertFalse(self.fixture.output_dir.exists())
 
     def test_rejects_symbolic_or_abbreviated_commit_before_creating_workspace(self) -> None:
         for commit in ("HEAD", self.commit[:12]):

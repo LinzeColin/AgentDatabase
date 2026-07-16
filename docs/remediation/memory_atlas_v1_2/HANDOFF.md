@@ -27,8 +27,22 @@
 > 262.126 seconds. Dual-runtime render, privacy, built-dist raw isolation,
 > raw/legacy diff, fast 6/6 and sync 10/10 pass. Full pre-commit release
 > `final_audit` 1/1 passes in 1,018.082 seconds with no failed/critical-skipped
-> gate, raw mutation or remote push. Local commit and post-commit exact-tree
-> release/recovery remain required and are not preclaimed.
+> gate, raw mutation or remote push. Implementation commit `02564125e` was then
+> created locally. Its first exact-tree release ran 1,104.548 seconds and failed
+> closed because tracked-only recovery still forced the new derived snapshot to
+> equal the older immutable release; downstream reconciliation was 55/58, with
+> raw mutation and remote push false. Recovery now keeps immutable release
+> verification intact and only accepts a newer current snapshot when the
+> recovered canonical publisher dry-run returns exact `NO_CHANGES`; fresh Pages
+> build parity targets that validated hash. Recovery regression 23/23 and
+> consolidation/test-value 17/17 pass. The same failed commit now independently
+> recovers 1,694 tracked files, both source packages, 514/514 current raw ledger,
+> 432/432 publication and fresh build with exact snapshot parity; cleanup passes.
+> Corrective full Python 506/506 passes in 286.449 seconds. Corrective full release
+> `final_audit` 1/1 passes in 1,268.493 seconds with no failed/critical-skipped
+> gate, raw mutation or remote push; aggregate recovery and reconciliation pass.
+> Corrective commit and its final exact-tree release still remain required and
+> are not preclaimed.
 > No fetch, push, deploy, branch/PR, merge/rebase or general cleanup
 > occurred. Do not start `S07-P2-T3` in this run and do not upload before all 149
 > Tasks plus final review/remediation are complete.
