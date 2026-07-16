@@ -12,9 +12,13 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     subparsers = parser.add_subparsers(dest="command", required=True)
 
     run = subparsers.add_parser("run", help="Run a named low-burden Memory Atlas profile.")
-    run.add_argument("--profile", choices=["owner-daily"], required=True)
+    run.add_argument("--profile", choices=["owner-daily", "codex-scheduler"], required=True)
     run.add_argument("--dry-run", action="store_true")
     run.add_argument("--step", choices=OWNER_DAILY_STEP_IDS)
+    run.add_argument("--owner-run-id")
+    run.add_argument("--state-dir", type=Path)
+    run.add_argument("--codex-home", type=Path)
+    run.add_argument("--database-dir", type=Path, default=ROOT)
 
     sync = subparsers.add_parser("sync", help="Run source sync.")
     sync.add_argument("source_name", nargs="?", help="Source id, for example codex.")

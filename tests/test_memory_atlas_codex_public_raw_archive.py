@@ -140,6 +140,10 @@ def make_database_fixture(parent: Path) -> Path:
         "# fixture\n",
         encoding="utf-8",
     )
+    (raw_archive_entrypoint.parent / "codex_scheduler.py").write_text(
+        "# fixture\n",
+        encoding="utf-8",
+    )
     (scripts / "build_memory_atlas_codex_derived.py").write_text(
         "# fixture\n",
         encoding="utf-8",

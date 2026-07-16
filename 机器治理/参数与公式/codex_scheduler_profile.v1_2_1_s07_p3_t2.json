@@ -1,0 +1,29 @@
+{
+  "schema_version": "memory_atlas.codex_scheduler_model.v1_2_1_s07_p3_t2",
+  "task_id": "S07-P3-T2",
+  "acceptance_id": "ACC-MA-V121-S07-P3-T2",
+  "model_id": "MOD-008",
+  "formula_id": "FORM-008",
+  "purpose": "Merge short-lived Codex source changes into one eligible owner run while preserving the S07-P3-T1 one-command and one-push-attempt boundary.",
+  "parameters": {
+    "timezone": "Australia/Sydney",
+    "schedule_interval_seconds": 900,
+    "quiet_period_seconds": 300,
+    "max_pending_seconds": 1800,
+    "minimum_success_interval_seconds": 3600,
+    "same_metadata_observations_required": 2,
+    "sync_invocation_limit_per_owner_run": 1,
+    "push_attempt_limit_per_owner_run": 1,
+    "lock_acquisition_wait_seconds": 0,
+    "attempted_owner_run_history_limit": 64
+  },
+  "formula": "eligible = source_changed_since_last_success AND ((same_metadata_observations >= 2 AND quiet_elapsed >= 300) OR pending_elapsed >= 1800) AND success_elapsed >= 3600; sync_invocations_per_owner_run <= 1; push_attempts_per_owner_run <= 1",
+  "parameter_rationale": {
+    "schedule_interval_seconds": "Fifteen-minute observations are responsive without treating each file write as a run.",
+    "quiet_period_seconds": "Five minutes merges bursty session and log writes before the expensive validated pipeline.",
+    "max_pending_seconds": "Thirty minutes bounds postponement under continuing metadata churn; T1 source-stability gates still stop an unsafe run.",
+    "minimum_success_interval_seconds": "One hour prevents repeated small successful pushes across adjacent cadence buckets."
+  },
+  "failure_semantics": "Profile, state, path, lock, clock, source or child-result uncertainty fails closed. An incomplete attempt or any failed child with a Git/remote effect requires manual intervention.",
+  "calibration_boundary": "The profile is portable configuration and runtime logic only. It does not install or enable an OS scheduler, perform a production push in S07-P3-T2, or claim the S07-P3-T3 restore proof."
+}

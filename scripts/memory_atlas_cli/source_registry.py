@@ -51,6 +51,8 @@ CODEX_LEGACY_SUMMARY_ENTRYPOINT = Path(
 )
 CODEX_PUSH_MAIN_CONTRACT_PATH = Path("config/data_sources/codex_push_main.json")
 CODEX_PUSH_MAIN_ENTRYPOINT = Path("scripts/memory_atlas_cli/codex_push_main.py")
+CODEX_SCHEDULER_PROFILE_PATH = Path("config/data_sources/codex_scheduler_profile.json")
+CODEX_SCHEDULER_ENTRYPOINT = Path("scripts/memory_atlas_cli/codex_scheduler.py")
 CODEX_COMPLETE_ARCHIVE_ROOT = Path("data/raw_archives/codex")
 REGISTRY_SCHEMA_VERSION = "memory_atlas_data_source_registry.v1"
 SYNC_CONTRACT_VERSION = "memory_atlas.source_sync_contract.v1_2_1_s06_p1_t1"
@@ -321,6 +323,16 @@ def _validate_source(source: dict[str, Any], database_dir: Path, push_defaults: 
             f"{source_id}.parser.push_main_contract_ref",
             ("config/data_sources/",),
         )
+        scheduler_entrypoint = _repo_relative_path(
+            parser.get("scheduler_entrypoint"),
+            f"{source_id}.parser.scheduler_entrypoint",
+            ("scripts/",),
+        )
+        scheduler_profile_ref = _repo_relative_path(
+            parser.get("scheduler_profile_ref"),
+            f"{source_id}.parser.scheduler_profile_ref",
+            ("config/data_sources/",),
+        )
         if (
             raw_archive_entrypoint != CODEX_PUBLIC_RAW_ARCHIVE_ENTRYPOINT.as_posix()
             or raw_archive_contract_ref
@@ -336,9 +348,11 @@ def _validate_source(source: dict[str, Any], database_dir: Path, push_defaults: 
             != CODEX_LEGACY_SUMMARY_CONTRACT_PATH.as_posix()
             or push_main_entrypoint != CODEX_PUSH_MAIN_ENTRYPOINT.as_posix()
             or push_main_contract_ref != CODEX_PUSH_MAIN_CONTRACT_PATH.as_posix()
+            or scheduler_entrypoint != CODEX_SCHEDULER_ENTRYPOINT.as_posix()
+            or scheduler_profile_ref != CODEX_SCHEDULER_PROFILE_PATH.as_posix()
         ):
             raise SourceRegistryError(
-                "codex.parser must name the canonical S07 raw, state, derived, legacy-summary and push-main adapters"
+                "codex.parser must name the canonical S07 raw, state, derived, legacy-summary, push-main and scheduler adapters"
             )
         if not (database_dir / raw_archive_entrypoint).is_file():
             raise SourceRegistryError("codex raw archive entrypoint does not exist")
@@ -360,6 +374,10 @@ def _validate_source(source: dict[str, Any], database_dir: Path, push_defaults: 
             raise SourceRegistryError("codex push-main entrypoint does not exist")
         if not (database_dir / push_main_contract_ref).is_file():
             raise SourceRegistryError("codex push-main contract does not exist")
+        if not (database_dir / scheduler_entrypoint).is_file():
+            raise SourceRegistryError("codex scheduler entrypoint does not exist")
+        if not (database_dir / scheduler_profile_ref).is_file():
+            raise SourceRegistryError("codex scheduler profile does not exist")
     elif any(
         key in parser
         for key in (
@@ -373,6 +391,8 @@ def _validate_source(source: dict[str, Any], database_dir: Path, push_defaults: 
             "legacy_summary_contract_ref",
             "push_main_entrypoint",
             "push_main_contract_ref",
+            "scheduler_entrypoint",
+            "scheduler_profile_ref",
             "complete_archive_root",
         )
     ):
@@ -381,13 +401,24 @@ def _validate_source(source: dict[str, Any], database_dir: Path, push_defaults: 
         )
 
     schedule = _mapping(source.get("schedule"), f"{source_id}.schedule")
-    if set(schedule) != {"mode", "frequency", "timezone"}:
-        raise SourceRegistryError(f"{source_id}.schedule keys do not match the contract")
-    if schedule.get("mode") not in {"manual", "scheduled", "template"}:
-        raise SourceRegistryError(f"{source_id}.schedule.mode is unsupported")
-    _non_empty_string(schedule.get("frequency"), f"{source_id}.schedule.frequency")
-    if schedule.get("timezone") not in {"local", "UTC"}:
-        raise SourceRegistryError(f"{source_id}.schedule.timezone is unsupported")
+    if source_type == "codex_local":
+        expected_schedule = {
+            "mode": "scheduled",
+            "frequency": "every_15_minutes",
+            "timezone": "Australia/Sydney",
+            "interval_seconds": 900,
+            "profile_ref": CODEX_SCHEDULER_PROFILE_PATH.as_posix(),
+        }
+        if schedule != expected_schedule:
+            raise SourceRegistryError("codex.schedule must bind the canonical S07-P3-T2 profile")
+    else:
+        if set(schedule) != {"mode", "frequency", "timezone"}:
+            raise SourceRegistryError(f"{source_id}.schedule keys do not match the contract")
+        if schedule.get("mode") not in {"manual", "scheduled", "template"}:
+            raise SourceRegistryError(f"{source_id}.schedule.mode is unsupported")
+        _non_empty_string(schedule.get("frequency"), f"{source_id}.schedule.frequency")
+        if schedule.get("timezone") not in {"local", "UTC"}:
+            raise SourceRegistryError(f"{source_id}.schedule.timezone is unsupported")
 
     state_path = _repo_relative_path(source.get("state_path"), f"{source_id}.state_path", ("data/sync_state/",))
     archive_path = _repo_relative_path(

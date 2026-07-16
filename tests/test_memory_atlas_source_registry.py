@@ -87,6 +87,24 @@ class SourceRegistryContractTests(unittest.TestCase):
             "config/data_sources/codex_push_main.json",
         )
         self.assertEqual(
+            sources["codex"]["parser"]["scheduler_entrypoint"],
+            "scripts/memory_atlas_cli/codex_scheduler.py",
+        )
+        self.assertEqual(
+            sources["codex"]["parser"]["scheduler_profile_ref"],
+            "config/data_sources/codex_scheduler_profile.json",
+        )
+        self.assertEqual(
+            sources["codex"]["schedule"],
+            {
+                "mode": "scheduled",
+                "frequency": "every_15_minutes",
+                "timezone": "Australia/Sydney",
+                "interval_seconds": 900,
+                "profile_ref": "config/data_sources/codex_scheduler_profile.json",
+            },
+        )
+        self.assertEqual(
             sources["generic_agent_template"]["archive_path"],
             "data/public_raw/agents/{source_id}",
         )
@@ -424,6 +442,12 @@ class SourceRegistryContractTests(unittest.TestCase):
             "push policy drift": lambda source: source["push_policy"].update({"force": True}),
             "push-main adapter drift": lambda source: source["parser"].update(
                 {"push_main_entrypoint": "scripts/memory_atlas_cli/codex_sync_state.py"}
+            ),
+            "scheduler adapter drift": lambda source: source["parser"].update(
+                {"scheduler_entrypoint": "scripts/memory_atlas_cli/codex_push_main.py"}
+            ),
+            "scheduler cadence drift": lambda source: source["schedule"].update(
+                {"interval_seconds": 60}
             ),
             "unknown source type": lambda source: source.update({"source_type": "claude_special"}),
             "canonical status drift": lambda source: source.update({"status": "template"}),

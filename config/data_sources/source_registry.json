@@ -158,6 +158,8 @@
         "legacy_summary_contract_ref": "config/data_sources/codex_legacy_summary.json",
         "push_main_entrypoint": "scripts/memory_atlas_cli/codex_push_main.py",
         "push_main_contract_ref": "config/data_sources/codex_push_main.json",
+        "scheduler_entrypoint": "scripts/memory_atlas_cli/codex_scheduler.py",
+        "scheduler_profile_ref": "config/data_sources/codex_scheduler_profile.json",
         "complete_archive_root": "data/raw_archives/codex",
         "input_formats": [
           "codex_session_jsonl",
@@ -167,8 +169,10 @@
       },
       "schedule": {
         "mode": "scheduled",
-        "frequency": "monday_wednesday_friday_03_00",
-        "timezone": "local"
+        "frequency": "every_15_minutes",
+        "timezone": "Australia/Sydney",
+        "interval_seconds": 900,
+        "profile_ref": "config/data_sources/codex_scheduler_profile.json"
       },
       "state_path": "data/sync_state/codex.json",
       "archive_path": "data/public_raw/codex",

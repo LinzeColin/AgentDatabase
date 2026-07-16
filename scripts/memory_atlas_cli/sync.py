@@ -17,6 +17,7 @@ from .constants import ROOT
 from .child_process import run_child_command
 from .codex_public_raw_archive import run_codex_public_raw_archive
 from .codex_push_main import run_codex_push_main
+from .codex_scheduler import run_codex_scheduler
 from .codex_sync_state import run_codex_sync_state
 from .source_registry import (
     PUSH_DEFAULTS,
@@ -42,12 +43,42 @@ def owner_daily_profile_contract() -> dict[str, object]:
 
 
 def run_profile(args: argparse.Namespace) -> int:
+    if args.profile == "codex-scheduler":
+        if getattr(args, "step", None) is not None:
+            print(json.dumps({
+                "status": "FAIL_CLOSED",
+                "command": "run",
+                "profile": "codex-scheduler",
+                "writes_files": False,
+                "remote_push": False,
+                "中文原因": "Codex scheduler 不接受 Owner Daily step 参数。",
+            }, ensure_ascii=False, indent=2, sort_keys=True))
+            return 2
+        return run_codex_scheduler(args)
     if args.profile != "owner-daily":
         print(json.dumps({
             "status": "NOT_IMPLEMENTED",
             "command": "run",
             "profile": args.profile,
-            "中文原因": "当前只支持 owner-daily profile。",
+            "中文原因": "当前只支持 owner-daily 和 codex-scheduler profile。",
+        }, ensure_ascii=False, indent=2, sort_keys=True))
+        return 2
+    scheduler_only_options = [
+        option
+        for option in ("owner_run_id", "state_dir", "codex_home")
+        if getattr(args, option, None) is not None
+    ]
+    if Path(getattr(args, "database_dir", ROOT)).resolve() != ROOT.resolve():
+        scheduler_only_options.append("database_dir")
+    if scheduler_only_options:
+        print(json.dumps({
+            "status": "FAIL_CLOSED",
+            "command": "run",
+            "profile": "owner-daily",
+            "writes_files": False,
+            "remote_push": False,
+            "rejected_scheduler_options": scheduler_only_options,
+            "中文原因": "Owner Daily 不接受 Codex scheduler 专用参数。",
         }, ensure_ascii=False, indent=2, sort_keys=True))
         return 2
     if args.dry_run:

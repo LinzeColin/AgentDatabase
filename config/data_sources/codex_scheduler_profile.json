@@ -1,0 +1,65 @@
+{
+  "schema_version": "memory_atlas.codex_scheduler_profile.v1_2_1_s07_p3_t2",
+  "task_id": "S07-P3-T2",
+  "acceptance_id": "ACC-MA-V121-S07-P3-T2",
+  "profile_id": "codex-scheduler",
+  "source_id": "codex",
+  "timezone": "Australia/Sydney",
+  "entrypoint": {
+    "command": "run --profile codex-scheduler",
+    "runner": "scripts/memory_atlas_cli/codex_scheduler.py",
+    "push_main_command": "sync codex --push-main",
+    "shell": false
+  },
+  "schedule": {
+    "frequency": "every_15_minutes",
+    "interval_seconds": 900,
+    "activation": "authorized_local_scheduler_manual_install",
+    "installed_by_default": false
+  },
+  "coalescing": {
+    "quiet_period_seconds": 300,
+    "max_pending_seconds": 1800,
+    "minimum_success_interval_seconds": 3600,
+    "same_metadata_observations_required": 2,
+    "state_location": "machine_local_outside_repository_and_codex_source"
+  },
+  "owner_run": {
+    "id_strategy": "utc_interval_bucket",
+    "sync_invocation_limit": 1,
+    "push_attempt_limit": 1,
+    "lock_mode": "nonblocking_exclusive",
+    "active_attempt_persisted_before_sync": true,
+    "duplicate_owner_run": "no_second_invocation",
+    "attempted_owner_run_history_limit": 64
+  },
+  "state": {
+    "schema_version": "memory_atlas.codex_scheduler_state.v1_2_1_s07_p3_t2",
+    "filename": "codex_scheduler_state.json",
+    "lock_filename": "codex_scheduler.lock",
+    "contains_source_content": false,
+    "contains_absolute_paths": false,
+    "file_mode_octal": "0600",
+    "atomic_replace_and_directory_fsync": true
+  },
+  "safety": {
+    "source_metadata_only_before_sync": true,
+    "source_mutation": false,
+    "automatic_scheduler_install": false,
+    "push_main_invocation_limit_per_owner_run": 1,
+    "push_attempt_limit_per_owner_run": 1,
+    "force": false,
+    "fetch": false,
+    "branch_creation": false,
+    "pull_request": false,
+    "merge": false,
+    "rebase": false,
+    "automatic_retry_after_git_effect": false
+  },
+  "phase_boundary": {
+    "scheduler_profile_implemented": true,
+    "scheduler_not_installed_or_enabled": true,
+    "full_restore_proof_not_claimed": true,
+    "next_task": "S07-P3-T3"
+  }
+}
