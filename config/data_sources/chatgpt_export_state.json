@@ -1,0 +1,106 @@
+{
+  "schema_version": "memory_atlas.chatgpt_export_state_contract.v1_2_1_s08_p1_t2",
+  "task_id": "S08-P1-T2",
+  "acceptance_id": "ACC-MA-V121-S08-P1-T2",
+  "source_id": "chatgpt",
+  "state_path": "data/sync_state/chatgpt.json",
+  "states": [
+    "IDLE",
+    "REQUESTED",
+    "WAITING_FOR_EXPORT",
+    "LINK_READY",
+    "DOWNLOADED",
+    "ARCHIVED",
+    "PARSED",
+    "VALIDATED",
+    "COMMITTED",
+    "PUSHED",
+    "FAILED_NEEDS_HUMAN_AUTH",
+    "FAILED_RETRYABLE"
+  ],
+  "normal_transitions": [
+    ["IDLE", "REQUESTED"],
+    ["REQUESTED", "WAITING_FOR_EXPORT"],
+    ["WAITING_FOR_EXPORT", "LINK_READY"],
+    ["LINK_READY", "DOWNLOADED"],
+    ["DOWNLOADED", "ARCHIVED"],
+    ["ARCHIVED", "PARSED"],
+    ["PARSED", "VALIDATED"],
+    ["VALIDATED", "COMMITTED"],
+    ["COMMITTED", "PUSHED"]
+  ],
+  "failure_transitions": {
+    "allowed_from": [
+      "IDLE",
+      "REQUESTED",
+      "WAITING_FOR_EXPORT",
+      "LINK_READY",
+      "DOWNLOADED",
+      "ARCHIVED",
+      "PARSED",
+      "VALIDATED",
+      "COMMITTED"
+    ],
+    "targets": [
+      "FAILED_NEEDS_HUMAN_AUTH",
+      "FAILED_RETRYABLE"
+    ],
+    "retryable_resume": "explicit_transition_or_new_confirmed_request_after_zero_click",
+    "human_auth_resume": "deferred_to_s08_p1_t3"
+  },
+  "no_duplicate_request_while": [
+    "REQUESTED",
+    "WAITING_FOR_EXPORT",
+    "LINK_READY"
+  ],
+  "request_coupling": {
+    "pre_effect_state": "REQUESTED",
+    "pre_effect_write": "atomic_before_connector_dispatch",
+    "success_state": "WAITING_FOR_EXPORT",
+    "zero_click_failure_state": "FAILED_RETRYABLE",
+    "uncertain_click_state": "REQUESTED",
+    "maximum_request_clicks": 1,
+    "lock_scope": "state_check_reservation_connector_and_finalize"
+  },
+  "state_integrity": {
+    "write": "exclusive_temp_fsync_atomic_replace_directory_fsync",
+    "lock": "nonblocking_process_advisory_lock",
+    "optimistic_revision_required": true,
+    "event_id_idempotency": true,
+    "maximum_state_bytes": 65536,
+    "maximum_history_entries": 128,
+    "symlinks_allowed": false
+  },
+  "cli": {
+    "request_command": "request-chatgpt-export",
+    "state_command": "chatgpt-export-state",
+    "inspect_is_read_only": true,
+    "state_apply_requires": [
+      "--to-state",
+      "--expected-revision",
+      "--event-id",
+      "--reason-code",
+      "--evidence-sha256"
+    ],
+    "request_state_requires_connector": true
+  },
+  "security": {
+    "credentials_in_state": false,
+    "cookies_in_state": false,
+    "download_links_in_state": false,
+    "account_identity_in_state": false,
+    "private_api_calls": false,
+    "raw_mutation": false,
+    "remote_actions": false
+  },
+  "model_parameters_ref": "机器治理/参数与公式/chatgpt_export_state.v1_2_1_s08_p1_t2.json",
+  "phase_boundary": {
+    "implements_human_auth_resume": false,
+    "discovers_notifications": false,
+    "downloads_export": false,
+    "writes_raw_archive": false,
+    "commits_or_pushes": false,
+    "deploys": false,
+    "next_task": "S08-P1-T3"
+  }
+}

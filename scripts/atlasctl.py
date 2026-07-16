@@ -9,6 +9,7 @@ from memory_atlas_cli.analyze import *
 from memory_atlas_cli.apply import *
 from memory_atlas_cli.build import *
 from memory_atlas_cli.chatgpt_export_request import *
+from memory_atlas_cli.chatgpt_export_state import *
 from memory_atlas_cli.constants import *
 from memory_atlas_cli.dispatch import dispatch
 from memory_atlas_cli.parser import *

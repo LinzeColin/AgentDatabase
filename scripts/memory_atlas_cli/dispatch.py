@@ -14,7 +14,10 @@ from .build import (
     run_chatgpt_deep_explore,
     run_generate_personalization_prompt,
 )
-from .chatgpt_export_request import run_chatgpt_export_request
+from .chatgpt_export_state import (
+    run_chatgpt_export_state,
+    run_stateful_chatgpt_export_request,
+)
 from .push import run_push
 from .runtime import RuntimeConfig, execute_with_runtime
 from .sync import run_profile, run_sync
@@ -24,7 +27,8 @@ from .validate import run_audit
 RUNNERS: dict[str, Callable[[argparse.Namespace], int]] = {
     "run": run_profile,
     "sync": run_sync,
-    "request-chatgpt-export": run_chatgpt_export_request,
+    "request-chatgpt-export": run_stateful_chatgpt_export_request,
+    "chatgpt-export-state": run_chatgpt_export_state,
     "build-atlas": run_build_atlas,
     "analyze": run_analyze,
     "audit": run_audit,

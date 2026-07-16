@@ -1,0 +1,29 @@
+{
+  "schema_version": "memory_atlas.chatgpt_export_state_model.v1_2_1_s08_p1_t2",
+  "task_id": "S08-P1-T2",
+  "acceptance_id": "ACC-MA-V121-S08-P1-T2",
+  "model_id": "MOD-009",
+  "formula_id": "FORM-009",
+  "purpose": "Persist the official ChatGPT export lifecycle and suppress every duplicate request while a prior request can still be pending.",
+  "parameters": {
+    "maximum_state_bytes": 65536,
+    "maximum_transition_history_entries": 128,
+    "maximum_connector_output_bytes": 16384,
+    "maximum_event_id_characters": 96,
+    "maximum_reason_code_characters": 96,
+    "maximum_request_clicks": 1,
+    "lock_wait_seconds": 0
+  },
+  "formula": "request_permitted = explicit_apply_confirmation AND lock_acquired AND state_valid AND state_not_in{REQUESTED,WAITING_FOR_EXPORT,LINK_READY} AND (state=IDLE OR safe_zero_click_retry); reservation_persisted_before_connector = true",
+  "parameter_rationale": {
+    "maximum_state_bytes": "A 64 KiB ceiling is ample for one bounded lifecycle journal and prevents arbitrary payload capture.",
+    "maximum_transition_history_entries": "One export requires fewer than twelve normal transitions; 128 entries retain retries without unbounded growth.",
+    "maximum_connector_output_bytes": "The state wrapper accepts only the same bounded sanitized machine payload as the visible-UI connector.",
+    "maximum_event_id_characters": "Short portable event identifiers remain reviewable and path-independent.",
+    "maximum_reason_code_characters": "Reason codes are bounded enums, never free-form account or notification content.",
+    "maximum_request_clicks": "One explicit connector dispatch is the hard limit for each reservation.",
+    "lock_wait_seconds": "A nonblocking lock fails closed instead of queueing a second possible request."
+  },
+  "failure_semantics": "Missing, malformed, oversized, symlinked, stale-revision or concurrently locked state fails before connector execution. A reservation is atomically durable before any request click. Zero-click failure is retryable; one-click or unknown outcome remains pending. Human-auth resume is forbidden until S08-P1-T3.",
+  "calibration_boundary": "S08-P1-T2 implements state persistence, transitions, idempotency and pending-request suppression only. S08-P1-T3 owns human-auth pause/resume behavior; S08-P2/P3 own notification, download, archive and push effects."
+}

@@ -1,0 +1,86 @@
+{
+  "schema_version": "memory_atlas.chatgpt_export_state_evidence.v1_2_1_s08_p1_t2",
+  "task_id": "S08-P1-T2",
+  "acceptance_id": "ACC-MA-V121-S08-P1-T2",
+  "status": "PASS_LOCAL_IMPLEMENTATION",
+  "observed_at": "2026-07-16T17:45:33Z",
+  "state_machine": {
+    "states": [
+      "IDLE",
+      "REQUESTED",
+      "WAITING_FOR_EXPORT",
+      "LINK_READY",
+      "DOWNLOADED",
+      "ARCHIVED",
+      "PARSED",
+      "VALIDATED",
+      "COMMITTED",
+      "PUSHED",
+      "FAILED_NEEDS_HUMAN_AUTH",
+      "FAILED_RETRYABLE"
+    ],
+    "pending_request_states": [
+      "REQUESTED",
+      "WAITING_FOR_EXPORT",
+      "LINK_READY"
+    ],
+    "reservation_persisted_before_connector": true,
+    "maximum_request_clicks_per_reservation": 1,
+    "event_id_idempotency": true,
+    "optimistic_revision_required": true,
+    "nonblocking_process_lock": true,
+    "atomic_state_write": true,
+    "human_auth_resume_implemented": false
+  },
+  "baseline": {
+    "state": "IDLE",
+    "revision": 0,
+    "request": null,
+    "state_file_sha256": "da9b7f188ad0da9cb3dd482748b2d44ddfc65c4fc340b1214ad21d0a36b78aa3",
+    "production_export_request_submitted": false
+  },
+  "validation": {
+    "dedicated_python": "10/10 PASS",
+    "related_cli_profile_and_connector": "63/63 PASS",
+    "sync_unit_tests": "229/229 PASS",
+    "validate_fast": "6/6 PASS in 29.715 seconds",
+    "validate_sync": "10/10 PASS in 180.430 seconds",
+    "credential_scan": "PASS in 128.848 seconds",
+    "state_inspect": "PASS IDLE revision 0 with INSPECTED_NO_CHANGES",
+    "missing_confirmation": "FAIL_CLOSED before connector with request_click_count 0 and unchanged state SHA-256",
+    "duplicate_request_fixture": "PASS connector called once; second pending request suppressed before connector"
+  },
+  "security": {
+    "credentials_in_state": false,
+    "cookies_in_state": false,
+    "download_links_in_state": false,
+    "account_identity_in_state": false,
+    "extra_connector_account_fields_rejected": true,
+    "private_api_calls": false,
+    "raw_mutation": false,
+    "remote_actions": false
+  },
+  "artifacts": {
+    "contract_sha256": "1d537ad0bf89d6cd582da8d179e7c5b1bce744411d6121a2a1ede413ab76cfb9",
+    "model_parameters_sha256": "cfd8c2472f8c858905a5ef3565450d11c0ac6cd47ec41f526aa36fe83eaeafa4",
+    "state_module_sha256": "31592ae8c3d2e503a10e55037033eac062a318080dcddc0fbe4812870da7cfbb",
+    "python_test_sha256": "3b0860e6bdf00ee86a5314fd94fe7caadcbf786ae9d26d43c4c8d92b669eae2"
+  },
+  "effects": {
+    "chatgpt_request": false,
+    "browser_invocation": false,
+    "raw_mutation": false,
+    "fetch": false,
+    "push": false,
+    "deployment": false,
+    "branch_or_pr": false
+  },
+  "phase_boundary": {
+    "state_machine_implemented": true,
+    "pending_request_dedupe_implemented": true,
+    "human_auth_resume_implemented": false,
+    "notification_discovery_implemented": false,
+    "download_or_archive_implemented": false,
+    "next_task": "S08-P1-T3"
+  }
+}

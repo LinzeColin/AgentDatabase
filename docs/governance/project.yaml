@@ -1271,6 +1271,43 @@ features:
       - "EVID-MA-V121-S08-P1-T1-TEST"
       - "EVID-MA-V121-S08-P1-T1-SMOKE"
       - "EVID-MA-V121-S08-P1-T1-REVIEW"
+  - feature_id: "FEAT-MA-V121-S08-P1-T2"
+    name: "Memory Atlas durable ChatGPT export state machine"
+    description: "v1.2.1 Task Pack 当前完成 56/149；新增 GitHub 可恢复的 ChatGPT export state、原子 reservation、非阻塞进程锁、严格 revision/event/history 校验和 pending request 去重。REQUESTED、WAITING_FOR_EXPORT、LINK_READY 时 connector 不再执行；零点击失败可显式重试，已点击或结果未知保持 pending。仓库基线仍是 IDLE，未调用浏览器或提交生产导出请求。FAILED_NEEDS_HUMAN_AUTH 可记录但恢复留给 S08-P1-T3。"
+    status: "active"
+    fact_level: "EXTRACTED"
+    model_ids:
+      - "MOD-009"
+    formula_ids:
+      - "FORM-009"
+    parameter_ids: []
+    code_refs:
+      - "OpenAIDatabase/scripts/memory_atlas_cli/chatgpt_export_state.py"
+      - "OpenAIDatabase/scripts/atlasctl.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/parser.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/dispatch.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/runtime.py"
+    config_refs:
+      - "OpenAIDatabase/config/data_sources/chatgpt_export_state.json"
+      - "OpenAIDatabase/机器治理/参数与公式/chatgpt_export_state.v1_2_1_s08_p1_t2.json"
+      - "OpenAIDatabase/config/memory_atlas_validator_profiles.json"
+      - "OpenAIDatabase/config/memory_atlas_test_value_review.json"
+    source_refs:
+      - "OpenAIDatabase/data/sync_state/chatgpt.json"
+      - "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s08_p1_t2_chatgpt_export_state_review.md"
+    owner_actions:
+      - "先运行 python3 -B scripts/atlasctl.py chatgpt-export-state --inspect。只有 operator 明确要产生外部请求时，才运行 request-chatgpt-export --apply --confirm-request 并提供 loopback CDP；不得删除 pending state 后重试，不得写入 cookie/token/password/email/通知正文/下载链接。外部步骤只能用 evidence-bound chatgpt-export-state --apply 迁移；FAILED_NEEDS_HUMAN_AUTH 必须等待 S08-P1-T3。"
+    test_refs:
+      - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_chatgpt_export_state -q"
+      - "npm run validate:fast --prefix OpenAIDatabase/apps/memory-atlas"
+      - "npm run validate:sync --prefix OpenAIDatabase/apps/memory-atlas"
+      - "python3 -B OpenAIDatabase/scripts/audit_memory_atlas_human_plane.py"
+    evidence_refs:
+      - "EVID-MA-V121-S08-P1-T2-CONTRACT"
+      - "EVID-MA-V121-S08-P1-T2-STATE"
+      - "EVID-MA-V121-S08-P1-T2-TEST"
+      - "EVID-MA-V121-S08-P1-T2-PROOF"
+      - "EVID-MA-V121-S08-P1-T2-REVIEW"
 models:
   -
     model_id: "MOD-001"
@@ -5681,4 +5718,29 @@ evidence_refs:
     evidence_id: "EVID-MA-V121-S08-P1-T1-REVIEW"
     kind: "review"
     ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s08_p1_t1_chatgpt_export_request_review.md"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S08-P1-T2-CONTRACT"
+    kind: "config"
+    ref: "OpenAIDatabase/config/data_sources/chatgpt_export_state.json"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S08-P1-T2-STATE"
+    kind: "artifact"
+    ref: "OpenAIDatabase/data/sync_state/chatgpt.json"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S08-P1-T2-TEST"
+    kind: "test"
+    ref: "OpenAIDatabase/tests/test_memory_atlas_chatgpt_export_state.py"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S08-P1-T2-PROOF"
+    kind: "artifact"
+    ref: "OpenAIDatabase/机器治理/证据与日志/chatgpt_export_state/chatgpt_export_state.v1_2_1_s08_p1_t2.json"
+    fact_level: "VERIFIED"
+  -
+    evidence_id: "EVID-MA-V121-S08-P1-T2-REVIEW"
+    kind: "review"
+    ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s08_p1_t2_chatgpt_export_state_review.md"
     fact_level: "EXTRACTED"

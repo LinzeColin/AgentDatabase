@@ -1,0 +1,23 @@
+{
+  "acceptance_id": "ACC-MA-V121-S08-P1-T2",
+  "history": [],
+  "last_error_code": null,
+  "phase_boundary": {
+    "commits_or_pushes": false,
+    "deploys": false,
+    "discovers_notifications": false,
+    "downloads_export": false,
+    "implements_human_auth_resume": false,
+    "next_task": "S08-P1-T3",
+    "writes_raw_archive": false
+  },
+  "request": null,
+  "retry_from": null,
+  "revision": 0,
+  "schema_version": "memory_atlas.chatgpt_export_state.v1_2_1_s08_p1_t2",
+  "source_id": "chatgpt",
+  "state_path": "data/sync_state/chatgpt.json",
+  "status": "IDLE",
+  "task_id": "S08-P1-T2",
+  "updated_at": null
+}

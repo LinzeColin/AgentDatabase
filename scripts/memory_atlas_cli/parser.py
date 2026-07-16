@@ -4,6 +4,7 @@ import argparse
 from pathlib import Path
 
 from memory_atlas_owner_daily import OWNER_DAILY_STEP_IDS
+from .chatgpt_export_state import EXPORT_STATES
 from .constants import ROOT
 
 
@@ -61,6 +62,20 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     request_export.add_argument("--confirm-request", action="store_true")
     request_export.add_argument("--cdp-endpoint", required=True)
     request_export.add_argument("--database-dir", type=Path, default=ROOT)
+
+    export_state = subparsers.add_parser(
+        "chatgpt-export-state",
+        help="Inspect or advance the durable ChatGPT export lifecycle.",
+    )
+    export_state_mode = export_state.add_mutually_exclusive_group(required=True)
+    export_state_mode.add_argument("--inspect", action="store_true")
+    export_state_mode.add_argument("--apply", action="store_true")
+    export_state.add_argument("--to-state", choices=EXPORT_STATES)
+    export_state.add_argument("--expected-revision", type=int)
+    export_state.add_argument("--event-id")
+    export_state.add_argument("--reason-code")
+    export_state.add_argument("--evidence-sha256")
+    export_state.add_argument("--database-dir", type=Path, default=ROOT)
 
     build_atlas = subparsers.add_parser("build-atlas", help="Build derived Memory Atlas visualization data.")
     build_atlas.add_argument("--dry-run", action="store_true")

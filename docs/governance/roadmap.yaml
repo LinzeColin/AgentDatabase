@@ -8,7 +8,7 @@ next_gate_id: "ACC.OpenAIDatabase.PAM1.0019"
 total_estimated_hours: 255
 completed_estimated_hours: 241
 taskpack_progress:
-  completed_tasks: 55
+  completed_tasks: 56
   total_tasks: 149
   delivery_state: "local_only_not_released"
 stages:
@@ -2676,7 +2676,7 @@ stages:
     person_goal: "使用用户已登录会话和官方导出流程，自动请求 ChatGPT 数据导出、等待异步通知、在链接失效前下载、公开归档并准备 main 直推。"
     status: "in_progress"
     estimated_hours: 9
-    estimated_pct: 11
+    estimated_pct: 22
     stop_conditions:
       - "需要绕过登录、2FA、CAPTCHA 或平台访问控制"
       - "准备把 cookies、token、password 或 email credential 提交仓库"
@@ -2693,13 +2693,18 @@ stages:
         - "外部导出尚未生成时明确保持 WAITING，不把 fixture 当成生产通过"
       evidence_refs:
         - "EVID-MA-V121-S08-P1-T1-SMOKE"
+        - "EVID-MA-V121-S08-P1-T2-CONTRACT"
+        - "EVID-MA-V121-S08-P1-T2-STATE"
+        - "EVID-MA-V121-S08-P1-T2-TEST"
+        - "EVID-MA-V121-S08-P1-T2-PROOF"
+        - "EVID-MA-V121-S08-P1-T2-REVIEW"
     phases:
       - phase_id: "MA-V121-S08-P1"
         name: "官方导出请求状态机"
         objective: "通过官方可见 UI 发起导出，并用可恢复状态机处理等待和人类认证。"
         status: "in_progress"
         estimated_hours: 3
-        estimated_pct: 33
+        estimated_pct: 67
         stop_conditions:
           - "请求路径需要未公开私有 API 或读取浏览器凭证"
           - "登录、2FA、CAPTCHA 或账号确认被尝试自动绕过"
@@ -2716,6 +2721,11 @@ stages:
             - "EVID-MA-V121-S08-P1-T1-TEST"
             - "EVID-MA-V121-S08-P1-T1-SMOKE"
             - "EVID-MA-V121-S08-P1-T1-REVIEW"
+            - "EVID-MA-V121-S08-P1-T2-CONTRACT"
+            - "EVID-MA-V121-S08-P1-T2-STATE"
+            - "EVID-MA-V121-S08-P1-T2-TEST"
+            - "EVID-MA-V121-S08-P1-T2-PROOF"
+            - "EVID-MA-V121-S08-P1-T2-REVIEW"
         tasks:
           - task_id: "S08-P1-T1"
             name: "实现官方 Data Export 请求 connector"
@@ -2762,18 +2772,47 @@ stages:
           - task_id: "S08-P1-T2"
             name: "实现官方导出请求状态机"
             objective: "实现 REQUESTED、WAITING_FOR_EXPORT、LINK_READY、DOWNLOADED、ARCHIVED、PUSHED、FAILED_NEEDS_HUMAN_AUTH 状态。"
-            status: "planned"
+            status: "completed"
             estimated_hours: 1
-            estimated_pct: 0
+            estimated_pct: 100
             dependencies:
               - "S08-P1-T1"
             acceptance_ids:
               - "ACC-MA-V121-S08-P1-T2"
-            test_commands: []
-            evidence_refs: []
+            acceptance:
+              - acceptance_id: "ACC-MA-V121-S08-P1-T2"
+                description: "Durable state persists REQUESTED before connector dispatch, validates the complete export lifecycle and legal history, and suppresses connector execution while REQUESTED, WAITING_FOR_EXPORT or LINK_READY is pending. Zero-click failure is explicitly retryable; one-click or unknown outcome stays pending. Exact state and connector schemas exclude credentials, account content and download links. Human-auth resume remains deferred to S08-P1-T3."
+                evidence_refs:
+                  - "EVID-MA-V121-S08-P1-T2-CONTRACT"
+                  - "EVID-MA-V121-S08-P1-T2-STATE"
+                  - "EVID-MA-V121-S08-P1-T2-TEST"
+                  - "EVID-MA-V121-S08-P1-T2-PROOF"
+                  - "EVID-MA-V121-S08-P1-T2-REVIEW"
+            test_commands:
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_chatgpt_export_state -q"
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_atlasctl_modular_cli OpenAIDatabase.tests.test_atlasctl_runtime_core OpenAIDatabase.tests.test_memory_atlas_validator_profiles OpenAIDatabase.tests.test_memory_atlas_test_value_audit OpenAIDatabase.tests.test_memory_atlas_chatgpt_export_request OpenAIDatabase.tests.test_memory_atlas_chatgpt_export_state -q"
+              - "python3 -B OpenAIDatabase/scripts/atlasctl.py chatgpt-export-state --inspect"
+              - "python3 -B OpenAIDatabase/scripts/atlasctl.py request-chatgpt-export --apply --cdp-endpoint http://127.0.0.1:9"
+              - "npm run validate:fast --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run validate:sync --prefix OpenAIDatabase/apps/memory-atlas"
+              - "python3 -B OpenAIDatabase/scripts/audit_memory_atlas_human_plane.py"
+              - "python3 -B OpenAIDatabase/scripts/audit_memory_atlas_test_value.py"
+              - "python3 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+            test_results:
+              - "Test-first 新增的 connector 多余字段、非法 history 跳转和跨时间 event replay 三项回归先失败；修复后 dedicated 10/10 PASS。Atomic reservation、pending 去重、zero-click retry、uncertain-click pending、revision/event idempotency、lock/symlink 与 strict sanitized output 均有行为测试。"
+              - "Modular CLI、runtime、validator profile、test-value、T1 connector 与 T2 state 相关回归 63/63 PASS；精确 validate:sync 单测 229/229 PASS。"
+              - "chatgpt-export-state --inspect 返回 IDLE/revision 0/INSPECTED_NO_CHANGES；缺 --confirm-request 的 apply 在 connector 前以 request_click_count=0 fail closed，state SHA-256 前后同为 da9b7f188ad0da9cb3dd482748b2d44ddfc65c4fc340b1214ad21d0a36b78aa3。"
+              - "validate:fast 6/6 PASS（29.715 秒）；validate:sync 10/10 PASS（180.430 秒），credential scan 128.848 秒；raw_mutation=false、remote_push=false、shell=false。Human-plane 及 machine-plane PASS，机器受保护集合精确为 166 files、37 active configs、127 evidence payloads。"
+            evidence_refs:
+              - "EVID-MA-V121-S08-P1-T2-CONTRACT"
+              - "EVID-MA-V121-S08-P1-T2-STATE"
+              - "EVID-MA-V121-S08-P1-T2-TEST"
+              - "EVID-MA-V121-S08-P1-T2-PROOF"
+              - "EVID-MA-V121-S08-P1-T2-REVIEW"
             risks:
               - "pending 时重复请求或状态恢复产生重复副作用"
             rollback: "git revert 本 Task 本地 commit；保留已产生的只读请求证据并恢复到最后可验证状态。"
+            current_result: "complete_local_only_56_of_149_pending_s08_p1_t3_no_production_request_no_remote_upload"
           - task_id: "S08-P1-T3"
             name: "实现 human-auth 暂停与恢复"
             objective: "遇到登录、2FA、CAPTCHA 或账号确认时暂停并请求人类完成，随后可恢复。"
