@@ -1,13 +1,40 @@
 {
   "behavior": {
-    "atlas_edges": 2325,
-    "atlas_nodes": 435,
+    "atlas_edges": 4106,
+    "atlas_nodes": 756,
     "backup_policy": "redacted_summary_only_no_raw_transcript_no_plaintext_secret",
     "message_count": 17963,
     "range_end": "2026-07-10",
     "range_start": "2026-07-04",
     "session_count": 128,
     "source": "real_codex_local_data",
+    "summary_semantics": {
+      "acceptance_id": "ACC-MA-V121-S07-P2-T3",
+      "artifact_kind": "processed_activity_snapshot",
+      "artifact_role": "redacted_derived_summary",
+      "canonical_raw_source": {
+        "archive_count": 2,
+        "archive_root": "data/raw_archives/codex",
+        "availability": "verified_recoverable_sanitized_archives",
+        "behavior_summary_ref": "data/derived/codex/codex_behavior_summary.json",
+        "canonical_session_count": 432,
+        "raw_ledger_ref": "机器治理/证据与日志/raw_archive_manifests/raw_hash_ledger.jsonl",
+        "role": "separate_source_of_truth"
+      },
+      "compatibility": {
+        "additive_metadata_only": true,
+        "existing_fields_preserved": true,
+        "legacy_schema_preserved": true
+      },
+      "full_raw_backup": false,
+      "local_absolute_paths_included": false,
+      "output_policy": "derived_summary_not_full_raw_backup",
+      "plaintext_credentials_included": false,
+      "raw_message_text_included": false,
+      "recoverable_raw_backup": false,
+      "schema_version": "memory_atlas.codex_legacy_summary_semantics.v1_2_1_s07_p2_t3",
+      "task_id": "S07-P2-T3"
+    },
     "tool_call_count": 80075,
     "top_topics": [
       {
@@ -68,9 +95,9 @@
           "tool_usage_analysis"
         ],
         "id": "codex",
-        "ingestion_status": "active_real_local_redacted_summary",
+        "ingestion_status": "active_verified_archive_derived_with_legacy_summary_compat",
         "label": "Codex",
-        "platform": "codex_local_derived_behavior",
+        "platform": "codex_verified_archive_derived",
         "status": "active"
       }
     ],
@@ -421,14 +448,19 @@
     "config/data_sources/source_registry.json"
   ],
   "safety": {
+    "canonical_raw_archive_ref": "data/raw_archives/codex",
+    "full_raw_backup": false,
+    "legacy_codex_summary_role": "redacted_derived_summary_read_only",
     "local_absolute_paths_included": false,
     "plaintext_high_risk_secrets_included": false,
     "raw_transcripts_included": false,
+    "recoverable_raw_backup": false,
     "writeback_policy": "proposal_only_with_agent_or_human_apply_and_git_rollback"
   },
   "schema_version": "agent_context_pack.v1",
   "source": "OpenAIDatabase redacted derived memory surfaces",
   "source_files": {
+    "codex_legacy_summary_contract": "config/data_sources/codex_legacy_summary.json",
     "codex_recommendations": "data/derived/codex/codex_agent_recommendations.json",
     "codex_snapshot": "data/processed/codex/codex_activity_snapshot.json",
     "core_profile": "data/derived/profile/CORE_PROFILE.md",

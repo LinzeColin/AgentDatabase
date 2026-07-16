@@ -23,6 +23,7 @@ from .constants import (
 )
 from .child_process import run_child_command
 from .codex_atlas import run_codex_atlas
+from .codex_legacy_summary import run_codex_legacy_summary
 
 
 def facet_analyze_contract() -> dict[str, object]:
@@ -391,12 +392,13 @@ def run_analyze(args: argparse.Namespace) -> int:
         "decision-debt",
         "codex-derived",
         "codex-atlas",
+        "codex-legacy-summary",
     }:
         print(json.dumps({
             "status": "NOT_IMPLEMENTED",
             "command": "analyze",
             "stage": args.stage,
-            "reason": "Unknown analyze stage. Supported stages: facets, clusters, low-value-loops, opportunities, economic-proxy, information-roi, formula-what-if, agent-collaboration, agent-authorization, stage-flight, latent, self-iteration, decision-debt, codex-derived, codex-atlas.",
+            "reason": "Unknown analyze stage. Supported stages: facets, clusters, low-value-loops, opportunities, economic-proxy, information-roi, formula-what-if, agent-collaboration, agent-authorization, stage-flight, latent, self-iteration, decision-debt, codex-derived, codex-atlas, codex-legacy-summary.",
         }, ensure_ascii=False, indent=2, sort_keys=True))
         return 2
 
@@ -469,6 +471,8 @@ def run_analyze(args: argparse.Namespace) -> int:
             command.append("--dry-run")
     elif args.stage == "codex-atlas":
         return run_codex_atlas(args)
+    elif args.stage == "codex-legacy-summary":
+        return run_codex_legacy_summary(args)
     return run_child_command(command, cwd=ROOT)
 
 __all__ = (

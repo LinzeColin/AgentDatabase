@@ -26,6 +26,7 @@ from memory_atlas_cli.raw_ledger import (
     assert_path_within_root_without_symlinks,
     source_stat_guard,
 )
+from memory_atlas_cli.codex_legacy_summary import build_summary_semantics
 from privacy_guard import credential_exclusion_hits, redact_credentials_in_text
 from public_raw_sanitizer import (
     MAX_PUBLIC_RAW_FILE_BYTES,
@@ -603,6 +604,7 @@ def parse_session_file(path: Path, codex_home: Path, index: dict[str, dict[str, 
         "activity_score": int(activity_score),
         "backup_policy": "redacted_summary_only_no_raw_transcript_no_plaintext_secret",
         "credential_boundary": "credentials_not_transcript",
+        "summary_semantics": build_summary_semantics("session_manifest_row"),
     }
 
 
@@ -649,6 +651,7 @@ def build_daily(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
     max_score = max((int(row["activity_score"]) for row in buckets.values()), default=0)
     for row in buckets.values():
         row["activity_level"] = activity_level(int(row["activity_score"]), max_score)
+        row["summary_semantics"] = build_summary_semantics("daily_activity_row")
     return sorted(buckets.values(), key=lambda row: row["date"])
 
 
@@ -756,6 +759,7 @@ def build_recommendations(rows: list[dict[str, Any]], previous_path: Path) -> di
         "top_topics": [{"label": label, "count": count} for label, count in topic_counts.most_common(12)],
         "memory": diff_items(memory_items, old_memory),
         "meta_data": diff_items(meta_items, old_meta),
+        "summary_semantics": build_summary_semantics("agent_recommendations"),
     }
 
 
@@ -790,6 +794,7 @@ def build_snapshot(rows: list[dict[str, Any]], daily: list[dict[str, Any]], reco
         "generated_at": recommendations["generated_at"],
         "source": "real_codex_local_data",
         "backup_policy": "redacted_summary_only_no_raw_transcript_no_plaintext_secret",
+        "summary_semantics": build_summary_semantics("activity_snapshot"),
         "session_count": len(rows),
         "day_count": len(daily),
         "range_start": coverage_start,
@@ -837,6 +842,10 @@ def build_public_raw_snapshot(
             else "redacted_summary_only_no_raw_transcript_no_plaintext_secret"
         ),
         "credential_boundary": "credentials_not_transcript",
+        "artifact_role": "legacy_sanitized_public_export",
+        "full_raw_backup": False,
+        "recoverable_raw_backup": False,
+        "summary_semantics": build_summary_semantics("sanitized_public_export_index"),
         "sync_mode": "codex_local_sync",
         "sessions": rows,
         "public_transcripts_included": public_transcripts_included,
@@ -899,6 +908,14 @@ def build_report(
         f"- 数据来源：{source_description}",
         f"- 覆盖范围：{snapshot['range_start']} 至 {snapshot['range_end']}，{snapshot['session_count']} 个 session，{snapshot['message_count']} 条消息，{snapshot['tool_call_count']} 次工具调用。",
         f"- 统计口径：覆盖范围按最早 session 开始日到最新 session 更新日；热度日历仍按 session 最新活动日聚合（{snapshot.get('activity_range_start', '')} 至 {snapshot.get('activity_range_end', '')}）。",
+        "",
+        "<!-- codex-legacy-summary-semantics:start -->",
+        "## 数据语义与恢复边界",
+        "",
+        "- 本报告及配套 JSON/JSONL 是脱敏派生摘要，不是 full raw backup，也不能单独恢复 Codex 原始数据。",
+        "- 旧 schema 和既有字段继续兼容读取；`summary_semantics` 只说明真相，不重算历史建议或活动分数。",
+        "- 可恢复真源必须使用另行验证的 sanitized Codex archives；本 legacy sync 不对其可用性作断言。",
+        "<!-- codex-legacy-summary-semantics:end -->",
         "",
         "## 主要话题",
     ]
@@ -1185,6 +1202,12 @@ def sync_codex_data(
         "writes_files": not dry_run,
         "raw_root": CODEX_PUBLIC_RAW_ROOT.as_posix(),
         "derived_summary": DERIVED_SNAPSHOT_OUTPUT.as_posix(),
+        "legacy_summary_contract": "config/data_sources/codex_legacy_summary.json",
+        "artifact_role": "redacted_derived_summary",
+        "output_policy": "derived_summary_not_full_raw_backup",
+        "full_raw_backup": False,
+        "recoverable_raw_backup": False,
+        "canonical_raw_archive_root": "data/raw_archives/codex",
         "run_log_dir": SYNC_LOG_DIR.as_posix(),
         "append_only": True,
         "raw_ledger": raw_ledger,

@@ -1,0 +1,56 @@
+{
+  "schema_version": "memory_atlas.codex_legacy_summary_contract.v1_2_1_s07_p2_t3",
+  "task_id": "S07-P2-T3",
+  "acceptance_id": "ACC-MA-V121-S07-P2-T3",
+  "source_id": "codex",
+  "purpose": "Preserve additive reads of the legacy redacted Codex summaries while making it impossible to treat those summaries as a full or recoverable raw backup.",
+  "legacy_outputs": {
+    "session_manifest": "data/processed/codex/codex_session_manifest.jsonl",
+    "daily_activity": "data/processed/codex/codex_daily_activity.jsonl",
+    "processed_snapshot": "data/processed/codex/codex_activity_snapshot.json",
+    "derived_snapshot": "data/derived/codex/codex_activity_snapshot.json",
+    "recommendations": "data/derived/codex/codex_agent_recommendations.json",
+    "behavior_report": "data/derived/codex/codex_behavior_report.md"
+  },
+  "canonical_truth": {
+    "derived_state_ref": "data/derived/codex/codex_derived_state.json",
+    "behavior_summary_ref": "data/derived/codex/codex_behavior_summary.json",
+    "raw_archive_root": "data/raw_archives/codex",
+    "raw_ledger_ref": "机器治理/证据与日志/raw_archive_manifests/raw_hash_ledger.jsonl",
+    "required_source_kind": "derived_from_verified_recoverable_sanitized_raw_archives",
+    "recoverable_sanitized_raw_required": true
+  },
+  "semantics": {
+    "metadata_field": "summary_semantics",
+    "artifact_role": "redacted_derived_summary",
+    "output_policy": "derived_summary_not_full_raw_backup",
+    "full_raw_backup": false,
+    "recoverable_raw_backup": false,
+    "raw_message_text_included": false,
+    "plaintext_credentials_included": false,
+    "local_absolute_paths_included": false
+  },
+  "compatibility": {
+    "legacy_schema_versions_preserved": true,
+    "existing_fields_preserved": true,
+    "additive_metadata_only": true,
+    "missing_metadata_read_policy": "normalize_in_memory_as_legacy_redacted_summary",
+    "conflicting_truth_policy": "fail_closed"
+  },
+  "consumers": {
+    "atlas_snapshot": "data/derived/visualization/memory_atlas.json",
+    "atlas_publication_state": "data/sync_state/codex_atlas.json",
+    "agent_context_json": "data/derived/agent_context/agent_context_pack.json",
+    "agent_context_markdown": "data/derived/agent_context/AGENT_CONTEXT.md",
+    "migration_state": "data/sync_state/codex_legacy_summary.json"
+  },
+  "model_parameters_ref": "机器治理/参数与公式/codex_legacy_summary.v1_2_1_s07_p2_t3.json",
+  "phase_boundary": {
+    "legacy_summary_migrated": true,
+    "does_not_modify_raw": true,
+    "does_not_rewrite_legacy_schema_versions": true,
+    "does_not_commit_or_push": true,
+    "does_not_deploy": true,
+    "next_task": "S07-P3-T1"
+  }
+}

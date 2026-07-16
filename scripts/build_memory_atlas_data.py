@@ -20,6 +20,7 @@ from pathlib import Path
 from typing import Any, Iterable
 
 from migrate_memory_records import load_canonical_records
+from memory_atlas_cli.codex_legacy_summary import normalize_legacy_summary_payload
 
 
 DEFAULT_OUTPUT = Path("data/derived/visualization/memory_atlas.json")
@@ -1687,7 +1688,10 @@ def build_memory_atlas(
     codex_daily = codex_daily_from_events(codex_sessions)
     codex_behavior_summary = read_json(codex_behavior_summary_path)
     codex_derived_state = read_json(codex_derived_state_path)
-    codex_recommendations = read_json(codex_recommendation_path)
+    codex_recommendations = normalize_legacy_summary_payload(
+        read_json(codex_recommendation_path),
+        "agent_recommendations",
+    )
     data_source_registry = load_data_source_registry(database_dir)
     registered_sources = registry_source_map(data_source_registry)
     active_source_hash = str(canonical_manifest["dataset_sha256"]).removeprefix("sha256:")
@@ -1726,11 +1730,11 @@ def build_memory_atlas(
         "codex": {
             "id": "codex",
             "label": "Codex",
-            "description": "真实 Codex session、工具调用、偏好信号和 agent personalization 建议的脱敏派生摘要。",
-            "platform": "codex_local_derived_behavior",
+            "description": "已验证 Codex raw archives 生成 canonical events/facets；旧摘要只读兼容且不是 full raw backup。",
+            "platform": "codex_verified_archive_derived",
             "status": "active",
-            "ingestion_status": "active_verified_archive_derived_published",
-            "record_types": ["canonical_codex_event", "canonical_codex_facet", "agent_recommendation", "behavior_signal"],
+            "ingestion_status": "active_verified_archive_derived_with_legacy_summary_compat",
+            "record_types": ["canonical_codex_event", "canonical_codex_facet", "legacy_redacted_summary_read_only"],
         },
     }
     source_activity_count = {
@@ -1809,6 +1813,7 @@ def build_memory_atlas(
                 "codex_derived_state": str(codex_derived_state_path.relative_to(database_dir)),
                 "codex_atlas_sync_state": CODEX_ATLAS_STATE_SOURCE,
                 "codex_agent_recommendations": str(codex_recommendation_path.relative_to(database_dir)),
+                "codex_legacy_summary_contract": "config/data_sources/codex_legacy_summary.json",
                 "behavior_clusters": BEHAVIOR_CLUSTER_SOURCE,
                 "behavior_low_value_loops": LOW_VALUE_LOOP_SOURCE,
                 "behavior_opportunities": OPPORTUNITY_SOURCE,
@@ -1840,6 +1845,10 @@ def build_memory_atlas(
                 "archive_count": int(codex_behavior_summary.get("archive_count") or 0),
                 "backup_policy": "derived_summary_not_full_raw_backup",
             },
+            "codex_legacy_summary_compatibility": codex_recommendations.get(
+                "summary_semantics",
+                {},
+            ),
             "writeback_policy": {
                 "frontend_can_request_writeback": True,
                 "writeback_must_use_proposals": True,

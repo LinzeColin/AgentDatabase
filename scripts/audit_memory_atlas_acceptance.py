@@ -26,6 +26,10 @@ from memory_atlas_cli.codex_atlas import (  # noqa: E402
     CodexAtlasError,
     publish_codex_atlas,
 )
+from memory_atlas_cli.codex_legacy_summary import (  # noqa: E402
+    CodexLegacySummaryError,
+    migrate_codex_legacy_summary,
+)
 from preflight_cloudflare_pages_access import (  # noqa: E402
     PreflightError,
     preflight as cloudflare_preflight,
@@ -120,6 +124,35 @@ def canonical_codex_publication_ready(repo_root: Path) -> tuple[bool, str]:
     if not ready:
         return False, "canonical Codex Atlas state or published outputs are stale"
     return True, f"canonical Codex Atlas publication is current for {event_count} verified events/facets"
+
+
+def codex_legacy_summary_semantics_ready(repo_root: Path) -> tuple[bool, str]:
+    try:
+        result = migrate_codex_legacy_summary(repo_root, dry_run=True)
+    except CodexLegacySummaryError as exc:
+        return False, f"Codex legacy summary validation failed: {exc.code}"
+    except (OSError, ValueError, TypeError) as exc:
+        return False, f"Codex legacy summary validation failed: {type(exc).__name__}"
+
+    counts = result.get("legacy_counts")
+    ready = (
+        result.get("status") == "PASS"
+        and result.get("outcome") == "NO_CHANGES"
+        and result.get("writes_files") is False
+        and result.get("changed_paths") == []
+        and result.get("raw_mutation") is False
+        and result.get("remote_push") is False
+        and isinstance(counts, dict)
+        and int(counts.get("legacy_session_count") or 0) > 0
+        and int(counts.get("legacy_day_count") or 0) > 0
+    )
+    if not ready:
+        return False, "Codex legacy summaries or their consumers are stale or ambiguously classified"
+    return (
+        True,
+        "Codex legacy summaries remain compatible and are explicitly classified as "
+        "redacted derived summaries, not full raw backups",
+    )
 
 
 def data_source_registry_ready(registry: Any, atlas: dict[str, Any]) -> tuple[bool, str]:
@@ -225,6 +258,7 @@ def audit_acceptance(repo_root: Path, publish_dir: Path | None = None, require_l
         "docs/MEMORY_ATLAS_PROJECT_MODEL_PARAMETERS.md",
         "docs/USER_REQUIREMENTS.md",
         "config/data_sources/source_registry.json",
+        "config/data_sources/codex_legacy_summary.json",
         "config/cloudflare/pages_direct_upload.template.json",
         "config/cloudflare/access_self_hosted_application.template.json",
         "wrangler.jsonc",
@@ -249,6 +283,7 @@ def audit_acceptance(repo_root: Path, publish_dir: Path | None = None, require_l
         "data/derived/agent_context/agent_context_pack.json",
         "data/derived/agent_context/AGENT_CONTEXT.md",
         "data/derived/visualization/memory_atlas.json",
+        "data/sync_state/codex_legacy_summary.json",
     ]
     missing = [relative for relative in required_paths if not (repo_root / relative).exists()]
     if not ci_workflow_path.is_file():
@@ -312,6 +347,16 @@ def audit_acceptance(repo_root: Path, publish_dir: Path | None = None, require_l
         "real_codex_snapshot_not_mock",
         codex_publication_evidence,
         codex_publication_evidence,
+    )
+    legacy_semantics_ready, legacy_semantics_evidence = codex_legacy_summary_semantics_ready(
+        repo_root
+    )
+    require(
+        checks,
+        legacy_semantics_ready,
+        "codex_legacy_summary_semantics_ready",
+        legacy_semantics_evidence,
+        legacy_semantics_evidence,
     )
     require(
         checks,

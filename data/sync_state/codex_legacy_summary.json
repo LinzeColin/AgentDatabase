@@ -1,0 +1,83 @@
+{
+  "acceptance_id": "ACC-MA-V121-S07-P2-T3",
+  "canonical_input_hashes": {
+    "data/derived/codex/codex_behavior_summary.json": "b27845b1b1ae14565382377f74c2062b1c5d7927c9a7e68a82c5eff2dda3e43c",
+    "data/derived/codex/codex_derived_state.json": "aa686b41b2c587768e9bc43e195269575f98be7ce3fa79ddab688df861dc2b99"
+  },
+  "canonical_truth": {
+    "archive_count": 2,
+    "behavior_summary_sha256": "b27845b1b1ae14565382377f74c2062b1c5d7927c9a7e68a82c5eff2dda3e43c",
+    "derived_state_sha256": "aa686b41b2c587768e9bc43e195269575f98be7ce3fa79ddab688df861dc2b99",
+    "session_count": 432
+  },
+  "contract_ref": "config/data_sources/codex_legacy_summary.json",
+  "contract_sha256": "5504d42def6fadc785d5277514349ff3291782f4410af5f4f368043f90d54b2e",
+  "last_result": {
+    "compatibility_preserved": true,
+    "full_raw_backup": false,
+    "outcome": "MIGRATED_LEGACY_REDACTED_SUMMARY_SEMANTICS",
+    "raw_mutation": false
+  },
+  "legacy_counts": {
+    "legacy_day_count": 7,
+    "legacy_recommendation_count": 7,
+    "legacy_session_count": 128
+  },
+  "migrated_at": "2026-07-16T10:09:25Z",
+  "model_parameters_ref": "机器治理/参数与公式/codex_legacy_summary.v1_2_1_s07_p2_t3.json",
+  "model_parameters_sha256": "0347d0db822a7bc5a65ea0da5eed93effcd5ae17a7ecef7160e8c1c5d371e7b5",
+  "output_hashes": {
+    "data/derived/agent_context/AGENT_CONTEXT.md": {
+      "byte_size": 5492,
+      "sha256": "63a4a45be272a72c159ece40ce38be8bca0b88d0585c5c4b739f24b470ebe4ab"
+    },
+    "data/derived/agent_context/agent_context_pack.json": {
+      "byte_size": 20408,
+      "sha256": "18d804934de677f827cc6829279ddcc8d24abe938cbadda271b23414d6fce4e4"
+    },
+    "data/derived/codex/codex_activity_snapshot.json": {
+      "byte_size": 3395,
+      "sha256": "42358c1f3813cc1c4e38b511d97469bb62bf8df46f26d7648410f8ee8f6670ad"
+    },
+    "data/derived/codex/codex_agent_recommendations.json": {
+      "byte_size": 6128,
+      "sha256": "e6c00a686ee93b7a7e46c43e363154329556ec9b3387a321b18419f690987c49"
+    },
+    "data/derived/codex/codex_behavior_report.md": {
+      "byte_size": 2044,
+      "sha256": "bb5b0f277ecb7f46544a60d622bc52f902e4e50a9826b5d728f464de6b07cf03"
+    },
+    "data/derived/visualization/memory_atlas.json": {
+      "byte_size": 3330447,
+      "sha256": "9788facd01bb2177035868068fec9324ca6e676839e4463c2f704a53ffbafa3d"
+    },
+    "data/processed/codex/codex_activity_snapshot.json": {
+      "byte_size": 3397,
+      "sha256": "af553140c059619350c81f61f7aadf47164747eca43685a4f89e8f2f5c0a0f97"
+    },
+    "data/processed/codex/codex_daily_activity.jsonl": {
+      "byte_size": 9597,
+      "sha256": "cee4a6310374a72283754977cf1b6d1eedc8fb62cfc7a47ee03757a0ae97ee60"
+    },
+    "data/processed/codex/codex_session_manifest.jsonl": {
+      "byte_size": 496938,
+      "sha256": "aa15ce8405cc3f7b4bd0b2fbe50440f3bb3e159b87e813f19bc730941b4116f1"
+    },
+    "data/sync_state/codex_atlas.json": {
+      "byte_size": 3986,
+      "sha256": "b9d5d68a97decac8963d783df47a820bac9704df00346d1cf7a92a13de187b85"
+    }
+  },
+  "phase_boundary": {
+    "does_not_commit_or_push": true,
+    "does_not_deploy": true,
+    "does_not_modify_raw": true,
+    "does_not_rewrite_legacy_schema_versions": true,
+    "legacy_summary_migrated": true,
+    "next_task": "S07-P3-T1"
+  },
+  "schema_version": "memory_atlas.codex_legacy_summary_state.v1_2_1_s07_p2_t3",
+  "source_id": "codex",
+  "state_path": "data/sync_state/codex_legacy_summary.json",
+  "task_id": "S07-P2-T3"
+}

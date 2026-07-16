@@ -398,16 +398,16 @@ def _inject_publication(
         source.update(
             {
                 "description": (
-                    "已验证 Codex 归档生成的 canonical session events/facets；"
-                    "兼容 recommendation 摘要保持只读，语义迁移留给 S07-P2-T3。"
+                    "已验证 Codex raw archives 生成 canonical events/facets；"
+                    "旧 snapshot/recommendations 仅作为兼容脱敏摘要读取，不是 full raw backup。"
                 ),
                 "platform": "codex_verified_archive_derived",
                 "status": "active",
-                "ingestion_status": "active_verified_archive_derived_published",
+                "ingestion_status": "active_verified_archive_derived_with_legacy_summary_compat",
                 "record_types": [
                     "canonical_codex_event",
                     "canonical_codex_facet",
-                    "legacy_agent_recommendation_read_only",
+                    "legacy_redacted_summary_read_only",
                 ],
                 "activity_count": len(events),
                 "latest_date": str(latest.get("updated_day") or latest.get("day") or ""),
@@ -436,6 +436,13 @@ def _inject_publication(
             "raw_message_text_included": False,
             "plaintext_credentials_included": False,
             "local_absolute_paths_included": False,
+        },
+        "legacy_summary_compatibility": {
+            "task_id": "S07-P2-T3",
+            "acceptance_id": "ACC-MA-V121-S07-P2-T3",
+            "state_ref": "data/sync_state/codex_legacy_summary.json",
+            "output_policy": "derived_summary_not_full_raw_backup",
+            "full_raw_backup": False,
         },
     }
     atlas["codex_publication"] = publication

@@ -68,7 +68,7 @@ STABLE_DRY_RUNS = {
     ("sync", "--source", "chatgpt", "--dry-run"):
         "d7f49a68e87dd7a9cb592c50db68e1b82a3662f2f09932e28209d5851ed8b3db",
     ("sync", "--source", "codex", "--dry-run"):
-        "e69e924a07f6a3f112b5c427b877774cdcc1f1de47d101e577f5d390bcdac971",
+        "99d2ada2aba2d6c79b6de4096eba5d7132d95a5c94f3c2edffd7a68f3e15230b",
     ("sync", "--source", "future-agent", "--dry-run"):
         "9e6f64a060139420c38c9611048efa9848860135ca2fa514329f167de6118c75",
     ("build-atlas", "--dry-run"):

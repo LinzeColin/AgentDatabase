@@ -42,3 +42,11 @@
 ## 风险
 - GitHub 仅包含 sanitized public transcripts；原始日志、凭据和被省略的二进制正文仍不可恢复。
 - plaintext secret 只允许存为 secret_ref 元数据，不提交到仓库。
+
+<!-- codex-legacy-summary-semantics:start -->
+## 数据语义与恢复边界
+
+- 本报告及配套 JSON/JSONL 是脱敏派生摘要，不是 full raw backup，也不能单独恢复 Codex 原始数据。
+- 旧 schema 和既有字段继续兼容读取；新增 `summary_semantics` 只负责说明真相，不重算历史建议或活动分数。
+- 可恢复真源是另行验证的 sanitized Codex archives：`data/raw_archives/codex`（2 个 archive，432 个 canonical session）。
+<!-- codex-legacy-summary-semantics:end -->

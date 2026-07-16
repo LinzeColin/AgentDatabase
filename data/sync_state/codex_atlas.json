@@ -57,9 +57,9 @@
   "model_parameters_sha256": "70e5d9d629d5d6f5cb0f3eb36d61fa7e7738d3de10f1804f9eaff8a0911d625c",
   "outputs": {
     "atlas_snapshot": {
-      "byte_size": 2457464,
+      "byte_size": 2460228,
       "path": "data/derived/visualization/memory_atlas.json",
-      "sha256": "4e86a2b8608e1e068050a295e8f67cdcdfc07340f4c36a0e4b3270b2bc07908b"
+      "sha256": "8029263fb24d0d2ce191795c7ff9bf92ca465e3c7c2e05512b41b063669b62e7"
     },
     "weekly_report": {
       "byte_size": 14582,

@@ -15,11 +15,11 @@
     "stage_humanized_readme_bytes": 90721
   },
   "inventory_after": {
-    "machine_file_count": 157,
+    "machine_file_count": 158,
     "nested_readme_count": 0,
     "root_index_count": 1,
     "current_release_count": 1,
-    "active_config_count": 31,
+    "active_config_count": 32,
     "evidence_payload_count": 124
   },
   "protected_sets": [
@@ -40,9 +40,9 @@
     {
       "id": "active_configs",
       "path_scope": "机器治理/** excluding README.md, 发布快照/** and 证据与日志/**",
-      "file_count": 31,
-      "bytes": 100197,
-      "manifest_sha256": "d027a61abd1fe5d4e7e8c7793a4a93e7686a7f5688dc23eb214cfe22f2810a33"
+      "file_count": 32,
+      "bytes": 101193,
+      "manifest_sha256": "7f03df7a8057e3c42f6f8fdb09f738c644e066cf68872968926f223f5cb05963"
     },
     {
       "id": "evidence_payload",

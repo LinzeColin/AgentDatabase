@@ -1,0 +1,21 @@
+{
+  "schema_version": "memory_atlas.codex_legacy_summary_model.v1_2_1_s07_p2_t3",
+  "task_id": "S07-P2-T3",
+  "acceptance_id": "ACC-MA-V121-S07-P2-T3",
+  "model_id": "MOD-008",
+  "formula_id": "FORM-008",
+  "purpose": "Classify legacy Codex summary artifacts without changing their historical schema or recommendation values.",
+  "classification": {
+    "artifact_role": "redacted_derived_summary",
+    "output_policy": "derived_summary_not_full_raw_backup",
+    "full_raw_backup": false,
+    "recoverable_raw_backup": false,
+    "canonical_raw_source_role": "separate_verified_recoverable_sanitized_archive"
+  },
+  "compatibility": {
+    "metadata_mode": "additive_summary_semantics_field",
+    "legacy_missing_field_mode": "normalize_on_read",
+    "conflicting_claim_mode": "fail_closed"
+  },
+  "calibration_boundary": "This Task adds deterministic truth labels only. It does not recalculate historical recommendations, activity scores, ranking weights or business-optimal model parameters."
+}

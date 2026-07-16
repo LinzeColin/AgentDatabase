@@ -94,6 +94,33 @@
   "schema_version": "codex_agent_recommendations.v1",
   "session_count": 128,
   "source": "real_codex_local_sessions_redacted_summary",
+  "summary_semantics": {
+    "acceptance_id": "ACC-MA-V121-S07-P2-T3",
+    "artifact_kind": "agent_recommendations",
+    "artifact_role": "redacted_derived_summary",
+    "canonical_raw_source": {
+      "archive_count": 2,
+      "archive_root": "data/raw_archives/codex",
+      "availability": "verified_recoverable_sanitized_archives",
+      "behavior_summary_ref": "data/derived/codex/codex_behavior_summary.json",
+      "canonical_session_count": 432,
+      "raw_ledger_ref": "机器治理/证据与日志/raw_archive_manifests/raw_hash_ledger.jsonl",
+      "role": "separate_source_of_truth"
+    },
+    "compatibility": {
+      "additive_metadata_only": true,
+      "existing_fields_preserved": true,
+      "legacy_schema_preserved": true
+    },
+    "full_raw_backup": false,
+    "local_absolute_paths_included": false,
+    "output_policy": "derived_summary_not_full_raw_backup",
+    "plaintext_credentials_included": false,
+    "raw_message_text_included": false,
+    "recoverable_raw_backup": false,
+    "schema_version": "memory_atlas.codex_legacy_summary_semantics.v1_2_1_s07_p2_t3",
+    "task_id": "S07-P2-T3"
+  },
   "top_topics": [
     {
       "count": 1275,

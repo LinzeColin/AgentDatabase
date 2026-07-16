@@ -43,6 +43,12 @@ CODEX_SYNC_STATE_CONTRACT_PATH = Path("config/data_sources/codex_sync_state.json
 CODEX_SYNC_STATE_ENTRYPOINT = Path("scripts/memory_atlas_cli/codex_sync_state.py")
 CODEX_DERIVED_CONTRACT_PATH = Path("config/data_sources/codex_derived.json")
 CODEX_DERIVED_ENTRYPOINT = Path("scripts/build_memory_atlas_codex_derived.py")
+CODEX_LEGACY_SUMMARY_CONTRACT_PATH = Path(
+    "config/data_sources/codex_legacy_summary.json"
+)
+CODEX_LEGACY_SUMMARY_ENTRYPOINT = Path(
+    "scripts/memory_atlas_cli/codex_legacy_summary.py"
+)
 CODEX_COMPLETE_ARCHIVE_ROOT = Path("data/raw_archives/codex")
 REGISTRY_SCHEMA_VERSION = "memory_atlas_data_source_registry.v1"
 SYNC_CONTRACT_VERSION = "memory_atlas.source_sync_contract.v1_2_1_s06_p1_t1"
@@ -293,6 +299,16 @@ def _validate_source(source: dict[str, Any], database_dir: Path, push_defaults: 
             f"{source_id}.parser.derived_contract_ref",
             ("config/data_sources/",),
         )
+        legacy_summary_entrypoint = _repo_relative_path(
+            parser.get("legacy_summary_entrypoint"),
+            f"{source_id}.parser.legacy_summary_entrypoint",
+            ("scripts/",),
+        )
+        legacy_summary_contract_ref = _repo_relative_path(
+            parser.get("legacy_summary_contract_ref"),
+            f"{source_id}.parser.legacy_summary_contract_ref",
+            ("config/data_sources/",),
+        )
         if (
             raw_archive_entrypoint != CODEX_PUBLIC_RAW_ARCHIVE_ENTRYPOINT.as_posix()
             or raw_archive_contract_ref
@@ -302,9 +318,13 @@ def _validate_source(source: dict[str, Any], database_dir: Path, push_defaults: 
             or sync_state_contract_ref != CODEX_SYNC_STATE_CONTRACT_PATH.as_posix()
             or derived_entrypoint != CODEX_DERIVED_ENTRYPOINT.as_posix()
             or derived_contract_ref != CODEX_DERIVED_CONTRACT_PATH.as_posix()
+            or legacy_summary_entrypoint
+            != CODEX_LEGACY_SUMMARY_ENTRYPOINT.as_posix()
+            or legacy_summary_contract_ref
+            != CODEX_LEGACY_SUMMARY_CONTRACT_PATH.as_posix()
         ):
             raise SourceRegistryError(
-                "codex.parser must name the canonical S07 raw archive, sync-state and derived adapters"
+                "codex.parser must name the canonical S07 raw, state, derived and legacy-summary adapters"
             )
         if not (database_dir / raw_archive_entrypoint).is_file():
             raise SourceRegistryError("codex raw archive entrypoint does not exist")
@@ -318,6 +338,10 @@ def _validate_source(source: dict[str, Any], database_dir: Path, push_defaults: 
             raise SourceRegistryError("codex derived entrypoint does not exist")
         if not (database_dir / derived_contract_ref).is_file():
             raise SourceRegistryError("codex derived contract does not exist")
+        if not (database_dir / legacy_summary_entrypoint).is_file():
+            raise SourceRegistryError("codex legacy-summary entrypoint does not exist")
+        if not (database_dir / legacy_summary_contract_ref).is_file():
+            raise SourceRegistryError("codex legacy-summary contract does not exist")
     elif any(
         key in parser
         for key in (
@@ -327,6 +351,8 @@ def _validate_source(source: dict[str, Any], database_dir: Path, push_defaults: 
             "sync_state_contract_ref",
             "derived_entrypoint",
             "derived_contract_ref",
+            "legacy_summary_entrypoint",
+            "legacy_summary_contract_ref",
             "complete_archive_root",
         )
     ):

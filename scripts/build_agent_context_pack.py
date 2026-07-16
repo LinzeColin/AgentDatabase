@@ -10,6 +10,8 @@ import re
 from pathlib import Path
 from typing import Any
 
+from memory_atlas_cli.codex_legacy_summary import normalize_legacy_summary_payload
+
 
 DEFAULT_JSON_OUTPUT = Path("data/derived/agent_context/agent_context_pack.json")
 DEFAULT_MARKDOWN_OUTPUT = Path("data/derived/agent_context/AGENT_CONTEXT.md")
@@ -114,8 +116,14 @@ def build_agent_context_pack(database_dir: Path) -> dict[str, Any]:
 
     core_profile_markdown = read_text(core_profile_path)
     core_profile_items = extract_core_profile_items(core_profile_markdown)
-    recommendations = read_json(recommendations_path)
-    snapshot = read_json(snapshot_path)
+    recommendations = normalize_legacy_summary_payload(
+        read_json(recommendations_path),
+        "agent_recommendations",
+    )
+    snapshot = normalize_legacy_summary_payload(
+        read_json(snapshot_path),
+        "processed_activity_snapshot",
+    )
     atlas = read_json(atlas_path)
     registry = read_json(registry_path)
     overview = atlas.get("overview", {}) if isinstance(atlas.get("overview"), dict) else {}
@@ -138,6 +146,7 @@ def build_agent_context_pack(database_dir: Path) -> dict[str, Any]:
             "codex_snapshot": rel(CODEX_SNAPSHOT),
             "memory_atlas": rel(MEMORY_ATLAS),
             "data_source_registry": rel(DATA_SOURCE_REGISTRY),
+            "codex_legacy_summary_contract": "config/data_sources/codex_legacy_summary.json",
         },
         "read_order": [
             rel(DEFAULT_MARKDOWN_OUTPUT),
@@ -189,6 +198,7 @@ def build_agent_context_pack(database_dir: Path) -> dict[str, Any]:
             "range_start": snapshot.get("range_start") or "",
             "range_end": snapshot.get("range_end") or "",
             "top_topics": snapshot.get("top_topics") or top_topics[:12],
+            "summary_semantics": snapshot.get("summary_semantics", {}),
             "atlas_nodes": int(overview.get("node_count") or 0),
             "atlas_edges": int(overview.get("edge_count") or 0),
         },
@@ -213,6 +223,10 @@ def build_agent_context_pack(database_dir: Path) -> dict[str, Any]:
             "raw_transcripts_included": False,
             "plaintext_high_risk_secrets_included": False,
             "local_absolute_paths_included": False,
+            "full_raw_backup": False,
+            "recoverable_raw_backup": False,
+            "canonical_raw_archive_ref": "data/raw_archives/codex",
+            "legacy_codex_summary_role": "redacted_derived_summary_read_only",
             "writeback_policy": "proposal_only_with_agent_or_human_apply_and_git_rollback",
         },
     }
@@ -220,6 +234,23 @@ def build_agent_context_pack(database_dir: Path) -> dict[str, Any]:
 
 def markdown_lines(pack: dict[str, Any]) -> list[str]:
     behavior = pack["behavior"]
+    semantics = behavior.get("summary_semantics", {})
+    canonical_source = (
+        semantics.get("canonical_raw_source", {})
+        if isinstance(semantics, dict)
+        else {}
+    )
+    if canonical_source.get("availability") == "verified_recoverable_sanitized_archives":
+        canonical_source_line = (
+            f"- 当前 canonical raw 真源：{int(canonical_source.get('archive_count') or 0)} 个 archive，"
+            f"{int(canonical_source.get('canonical_session_count') or 0)} 个 session；"
+            "摘要只用于读取、分析和 personalization。"
+        )
+    else:
+        canonical_source_line = (
+            "- canonical raw 真源与 legacy summary 分离；"
+            "摘要本身不对 raw archive 可恢复性作断言。"
+        )
     lines = [
         "# Agent Context Pack",
         "",
@@ -230,6 +261,14 @@ def markdown_lines(pack: dict[str, Any]) -> list[str]:
         f"- 覆盖 Codex：{behavior['range_start']} 至 {behavior['range_end']}，{behavior['session_count']} 个 session，{behavior['message_count']} 条消息，{behavior['tool_call_count']} 次工具调用。",
         f"- Memory Atlas：{behavior['atlas_nodes']} 个节点，{behavior['atlas_edges']} 条边。",
         f"- 数据源注册表：{pack['data_sources']['schema_version']}，当前 {len(pack['data_sources']['active'])} 个 active，{len(pack['data_sources']['planned'])} 个 planned。",
+        "",
+        "<!-- codex-legacy-summary-context:start -->",
+        "## Codex 数据语义",
+        "",
+        "- 兼容 Codex snapshot、recommendations、daily 和 session manifest 均为脱敏派生摘要，不是 full raw backup。",
+        "- 这些摘要不能独立恢复原始 Codex 数据；需要恢复时使用已验证、独立保存的 sanitized raw archives。",
+        canonical_source_line,
+        "<!-- codex-legacy-summary-context:end -->",
         "",
         "## Agent 启动规则",
         "",

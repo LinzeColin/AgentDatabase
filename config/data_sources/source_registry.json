@@ -154,6 +154,8 @@
         "sync_state_contract_ref": "config/data_sources/codex_sync_state.json",
         "derived_entrypoint": "scripts/build_memory_atlas_codex_derived.py",
         "derived_contract_ref": "config/data_sources/codex_derived.json",
+        "legacy_summary_entrypoint": "scripts/memory_atlas_cli/codex_legacy_summary.py",
+        "legacy_summary_contract_ref": "config/data_sources/codex_legacy_summary.json",
         "complete_archive_root": "data/raw_archives/codex",
         "input_formats": [
           "codex_session_jsonl",
@@ -384,16 +386,15 @@
     {
       "id": "codex",
       "label": "Codex",
-      "platform": "codex_local_derived_behavior",
+      "platform": "codex_verified_archive_derived",
       "status": "active",
-      "description": "真实 Codex session、工具调用、偏好信号和 agent personalization 建议的脱敏派生摘要。",
+      "description": "已验证 Codex raw archives 派生 canonical events/facets；旧 snapshot、daily、session manifest 和 recommendations 仅兼容读取，不是 full raw backup。",
       "record_types": [
-        "codex_session_summary",
-        "daily_activity",
-        "agent_recommendation",
-        "behavior_signal"
+        "canonical_codex_event",
+        "canonical_codex_facet",
+        "legacy_redacted_summary_read_only"
       ],
-      "ingestion_status": "active_real_local_redacted_summary",
+      "ingestion_status": "active_verified_archive_derived_with_legacy_summary_compat",
       "expected_minimal_fields": [
         "session_id",
         "day",
@@ -409,7 +410,7 @@
         "tool_usage_analysis"
       ],
       "privacy_level": "private_redacted_derived",
-      "raw_payload_policy": "no_raw_transcripts_or_source_files",
+      "raw_payload_policy": "legacy_summary_is_not_raw_backup_use_separate_verified_archives",
       "writeback_policy": "proposal_only"
     },
     {

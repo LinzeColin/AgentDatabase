@@ -5,8 +5,16 @@
 - 生成时间：2026-07-10T21:34:21Z
 - 数据来源：OpenAIDatabase redacted derived memory surfaces
 - 覆盖 Codex：2026-07-04 至 2026-07-10，128 个 session，17963 条消息，80075 次工具调用。
-- Memory Atlas：435 个节点，2325 条边。
+- Memory Atlas：756 个节点，4106 条边。
 - 数据源注册表：memory_atlas_data_source_registry.v1，当前 2 个 active，3 个 planned。
+
+<!-- codex-legacy-summary-context:start -->
+## Codex 数据语义
+
+- 兼容 Codex snapshot、recommendations、daily 和 session manifest 均为脱敏派生摘要，不是 full raw backup。
+- 这些摘要不能独立恢复原始 Codex 数据；需要恢复时使用已验证、独立保存的 sanitized raw archives。
+- 当前 canonical raw 真源：2 个 archive，432 个 session；摘要只用于读取、分析和 personalization。
+<!-- codex-legacy-summary-context:end -->
 
 ## Agent 启动规则
 
@@ -53,7 +61,7 @@
 
 Active:
 - ChatGPT（memory_atlas / openai_export_derived_memory）：active_redacted_derived_data
-- Codex（codex / codex_local_derived_behavior）：active_real_local_redacted_summary
+- Codex（codex / codex_verified_archive_derived）：active_verified_archive_derived_with_legacy_summary_compat
 Planned:
 - 微信数据（计划接入）（wechat / wechat）：planned_no_real_data
 - 小红书数据（计划接入）（xiaohongshu / xiaohongshu）：planned_no_real_data
