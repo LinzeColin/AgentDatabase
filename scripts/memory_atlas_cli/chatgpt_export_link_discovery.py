@@ -774,11 +774,25 @@ def _load_account_binding(directory: Path) -> dict[str, Any]:
     )
 
 
+def load_private_export_account_binding(
+    database_dir: Path,
+    *,
+    runtime_dir: Path | None,
+) -> dict[str, Any]:
+    """Load the salted private account binding for the T3 identity check."""
+    root = _database_root(database_dir)
+    load_chatgpt_export_link_discovery_contract(root)
+    load_chatgpt_export_link_discovery_model_parameters(root)
+    directory = notification_runtime_directory(root, runtime_dir=runtime_dir)
+    return _load_account_binding(directory)
+
+
 def load_private_export_link(
     database_dir: Path,
     *,
     runtime_dir: Path | None,
     now: datetime | None = None,
+    require_unexpired: bool = True,
 ) -> dict[str, Any]:
     """Load the validated URL for T3 without emitting it through the CLI."""
     root = _database_root(database_dir)
@@ -795,7 +809,9 @@ def load_private_export_link(
     current = datetime.now(timezone.utc) if now is None else now
     if current.tzinfo is None:
         raise LinkDiscoveryError("link_discovery_clock_invalid")
-    if current.astimezone(timezone.utc) >= _parse_utc(
+    if type(require_unexpired) is not bool:
+        raise LinkDiscoveryError("link_discovery_expiry_policy_invalid")
+    if require_unexpired and current.astimezone(timezone.utc) >= _parse_utc(
         payload["expires_at"], "link_discovery_private_link_invalid"
     ):
         raise LinkDiscoveryError("link_discovery_link_expired")
@@ -1071,6 +1087,7 @@ __all__ = (
     "inspect_export_link_discovery",
     "load_chatgpt_export_link_discovery_contract",
     "load_chatgpt_export_link_discovery_model_parameters",
+    "load_private_export_account_binding",
     "load_private_export_link",
     "run_chatgpt_export_link_discovery",
     "scan_apple_mail_sources",

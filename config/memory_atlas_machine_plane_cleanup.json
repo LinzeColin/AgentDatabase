@@ -15,12 +15,12 @@
     "stage_humanized_readme_bytes": 90721
   },
   "inventory_after": {
-    "machine_file_count": 172,
+    "machine_file_count": 174,
     "nested_readme_count": 0,
     "root_index_count": 1,
     "current_release_count": 1,
-    "active_config_count": 40,
-    "evidence_payload_count": 130
+    "active_config_count": 41,
+    "evidence_payload_count": 131
   },
   "protected_sets": [
     {
@@ -40,16 +40,16 @@
     {
       "id": "active_configs",
       "path_scope": "机器治理/** excluding README.md, 发布快照/** and 证据与日志/**",
-      "file_count": 40,
-      "bytes": 118167,
-      "manifest_sha256": "c615319fd259c4eaa40bf55802524ba5b072daeb003e84af3ea2ea02e0587adf"
+      "file_count": 41,
+      "bytes": 120800,
+      "manifest_sha256": "93ab232212472406dbf5d94e3d0c8b20a32591a2fdac44af5f53b6f60b60e6b5"
     },
     {
       "id": "evidence_payload",
       "path_scope": "机器治理/证据与日志/** excluding README.md",
-      "file_count": 130,
-      "bytes": 25636530,
-      "manifest_sha256": "20561459a9fd6a0c89a7bfdb7b887620cd454e9ff0dc6b115d5b151d34b44c22"
+      "file_count": 131,
+      "bytes": 25639811,
+      "manifest_sha256": "f4aa4e696eedfd31d7564ebe187c5e87efb279c6dc770a4db000ede6230bfa60"
     }
   ],
   "candidates": [

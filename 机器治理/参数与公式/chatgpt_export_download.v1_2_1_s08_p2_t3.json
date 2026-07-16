@@ -1,0 +1,34 @@
+{
+  "schema_version": "memory_atlas.chatgpt_export_download_model.v1_2_1_s08_p2_t3",
+  "task_id": "S08-P2-T3",
+  "acceptance_id": "ACC-MA-V121-S08-P2-T3",
+  "model_id": "MOD-MA-V121-S08-P2-T3",
+  "formula_id": "FORM-MA-V121-S08-P2-T3",
+  "purpose": "Download one unexpired account-bound export link into a private hash-addressed ZIP, validate it without extraction, and make retries idempotent.",
+  "parameters": {
+    "maximum_download_bytes": 2147483648,
+    "maximum_uncompressed_bytes": 17179869184,
+    "maximum_zip_members": 200000,
+    "maximum_zip_member_name_characters": 1024,
+    "maximum_compression_ratio": 1000,
+    "download_chunk_bytes": 1048576,
+    "download_timeout_seconds": 1800,
+    "socket_timeout_seconds": 30,
+    "maximum_redirects": 5,
+    "minimum_free_space_reserve_bytes": 536870912,
+    "private_directory_mode_octal": "0700",
+    "private_file_mode_octal": "0600",
+    "repository_private_zip_bytes": 0,
+    "repository_url_bytes": 0
+  },
+  "formula": "downloaded = state=LINK_READY AND link_unexpired AND request_id_match AND salted_account_digest_match AND https_transport_safe AND bytes<=2GiB AND zip_crc_valid AND safe_unique_members AND conversations_member_count>=1; destination=private/chatgpt_exports/chatgpt-export-{sha256}.zip; duplicate_files_per_sha256<=1",
+  "parameter_rationale": {
+    "maximum_download_bytes": "Two GiB accommodates a large account export while bounding disk and network exposure.",
+    "maximum_uncompressed_bytes": "Sixteen GiB permits ordinary export expansion but rejects unbounded archive bombs.",
+    "maximum_compression_ratio": "A 1000:1 ceiling is deliberately generous for JSON and HTML while blocking pathological expansion.",
+    "minimum_free_space_reserve_bytes": "A 512 MiB reserve prevents the private download from consuming the final operating-system headroom.",
+    "download_timeout_seconds": "Thirty minutes bounds a large streamed export without relying only on per-socket timeouts."
+  },
+  "failure_semantics": "Wrong state exits before private runtime or network access. Missing, expired or account-mismatched links, unsafe redirects, oversized responses, disk pressure, invalid ZIP structure or CRC, metadata conflict and concurrent state changes fail closed. Partial files are removed; a validated hash-addressed file survives a later metadata or state-write interruption and is reused on retry.",
+  "calibration_boundary": "S08-P2-T3 stores and validates the private downloaded ZIP only. S08-P3-T1 owns public raw archive chunking, manifest and append-only publication; parsing, commit, push and real end-to-end proof remain later tasks."
+}

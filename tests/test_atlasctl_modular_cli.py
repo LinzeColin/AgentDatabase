@@ -141,6 +141,7 @@ class AtlasctlModularCliTests(unittest.TestCase):
             "chatgpt-export-state": ["chatgpt-export-state", "--inspect"],
             "chatgpt-export-auth": ["chatgpt-export-auth", "--inspect"],
             "chatgpt-export-link": ["chatgpt-export-link", "--inspect"],
+            "chatgpt-export-download": ["chatgpt-export-download", "--inspect"],
             "chatgpt-notification-connector": [
                 "chatgpt-notification-connector",
                 "--inspect",

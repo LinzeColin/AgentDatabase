@@ -1420,6 +1420,45 @@ features:
       - "EVID-MA-V121-S08-P2-T2-TEST"
       - "EVID-MA-V121-S08-P2-T2-LIVE-GATE"
       - "EVID-MA-V121-S08-P2-T2-REVIEW"
+  - feature_id: "FEAT-MA-V121-S08-P2-T3"
+    name: "Memory Atlas private retryable ChatGPT export ZIP download"
+    description: "v1.2.1 Task Pack 当前完成 60/149。新增 chatgpt-export-download：非 LINK_READY/DOWNLOADED 状态在私有 runtime 和网络前退出；eligible 路径重新校验 request id、salted account digest 与链接有效期，以禁用 ambient proxy/cookie/auth 的 bounded HTTPS 流写仓库外 0700/0600 目录。ZIP 按 SHA-256 命名，不解压即校验大小、路径、Unicode/case 重复、加密/symlink、压缩比、conversations JSON 和全成员 CRC。失败删除 partial；若 ZIP/metadata 已写但 state write 中断，重试零网络复用同一 hash，链接过期后仍可恢复。当前 live state 为 IDLE/revision 0，inspect 返回 STATE_NOT_ELIGIBLE；没有生产 ZIP 或 metadata，不宣称真实下载。"
+    status: "active"
+    fact_level: "EXTRACTED"
+    model_ids:
+      - "MOD-009"
+    formula_ids:
+      - "FORM-009"
+    parameter_ids: []
+    code_refs:
+      - "OpenAIDatabase/scripts/memory_atlas_cli/chatgpt_export_download.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/chatgpt_export_link_discovery.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/parser.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/dispatch.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/runtime.py"
+      - "OpenAIDatabase/scripts/atlasctl.py"
+      - "OpenAIDatabase/tests/test_memory_atlas_chatgpt_export_download.py"
+      - "OpenAIDatabase/AGENTS.md"
+      - "OpenAIDatabase/config/memory_atlas_validator_profiles.json"
+      - "OpenAIDatabase/config/memory_atlas_test_value_review.json"
+    config_refs:
+      - "OpenAIDatabase/config/data_sources/chatgpt_export_download.json"
+      - "OpenAIDatabase/机器治理/参数与公式/chatgpt_export_download.v1_2_1_s08_p2_t3.json"
+    source_refs:
+      - "OpenAIDatabase/机器治理/证据与日志/chatgpt_export_download/chatgpt_export_download.v1_2_1_s08_p2_t3.json"
+      - "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s08_p2_t3_export_download_review.md"
+    owner_actions:
+      - "先运行 python3 -B scripts/atlasctl.py chatgpt-export-download --inspect。只有 T2 已建立 LINK_READY 时，才运行 --download --confirm-download；命令不应包含账号、一次性 URL、cookie、credential 或输出路径。当前 IDLE 不应访问私有 runtime 或网络。下一 Task S08-P3-T1 只能通过 load_private_downloaded_export 消费已验证私有 ZIP。"
+    test_refs:
+      - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_chatgpt_export_download -q"
+      - "python3 -B OpenAIDatabase/scripts/atlasctl.py chatgpt-export-download --inspect"
+      - "npm run validate:fast --prefix OpenAIDatabase/apps/memory-atlas"
+      - "npm run validate:sync --prefix OpenAIDatabase/apps/memory-atlas"
+    evidence_refs:
+      - "EVID-MA-V121-S08-P2-T3-CONTRACT"
+      - "EVID-MA-V121-S08-P2-T3-TEST"
+      - "EVID-MA-V121-S08-P2-T3-LIVE-GATE"
+      - "EVID-MA-V121-S08-P2-T3-REVIEW"
 models:
   -
     model_id: "MOD-001"
@@ -5915,4 +5954,24 @@ evidence_refs:
     evidence_id: "EVID-MA-V121-S08-P2-T2-REVIEW"
     kind: "review"
     ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s08_p2_t2_export_link_discovery_review.md"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S08-P2-T3-CONTRACT"
+    kind: "config"
+    ref: "OpenAIDatabase/config/data_sources/chatgpt_export_download.json"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S08-P2-T3-TEST"
+    kind: "test"
+    ref: "OpenAIDatabase/tests/test_memory_atlas_chatgpt_export_download.py"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S08-P2-T3-LIVE-GATE"
+    kind: "artifact"
+    ref: "OpenAIDatabase/机器治理/证据与日志/chatgpt_export_download/chatgpt_export_download.v1_2_1_s08_p2_t3.json"
+    fact_level: "VERIFIED"
+  -
+    evidence_id: "EVID-MA-V121-S08-P2-T3-REVIEW"
+    kind: "review"
+    ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s08_p2_t3_export_download_review.md"
     fact_level: "EXTRACTED"

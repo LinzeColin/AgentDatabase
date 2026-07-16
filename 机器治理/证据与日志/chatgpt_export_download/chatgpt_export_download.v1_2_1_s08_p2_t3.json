@@ -1,0 +1,86 @@
+{
+  "schema_version": "memory_atlas.chatgpt_export_download_evidence.v1_2_1_s08_p2_t3",
+  "task_id": "S08-P2-T3",
+  "acceptance_id": "ACC-MA-V121-S08-P2-T3",
+  "status": "PASS",
+  "observed_at": "2026-07-17T07:30:47+10:00",
+  "artifacts": [
+    {
+      "path": "config/data_sources/chatgpt_export_download.json",
+      "sha256": "7b049fd2b4a70a30335b20b6022ebfb6f6b0b948bca07132f30e17b1703fec60"
+    },
+    {
+      "path": "机器治理/参数与公式/chatgpt_export_download.v1_2_1_s08_p2_t3.json",
+      "sha256": "9bf5f29dd722cd9b2eed83ba6f1fb8356ea71f60cd8bbc2dc02fb89a3a2cf7d5"
+    },
+    {
+      "path": "scripts/memory_atlas_cli/chatgpt_export_download.py",
+      "sha256": "55538fe7e96ed53ed3582e510b01005d90db5c156fd52012de01b52d7a8bbc0c"
+    },
+    {
+      "path": "tests/test_memory_atlas_chatgpt_export_download.py",
+      "sha256": "d8a5005ef64e823beb9b23999505663aba6db85b247a0c348ec1e7ebdd981877"
+    }
+  ],
+  "implementation": {
+    "state_transition": "LINK_READY_to_DOWNLOADED",
+    "same_account_proof": "request_id_plus_salted_account_digest",
+    "browser_cookie_or_profile_access": false,
+    "ambient_proxy_or_auth_access": false,
+    "private_directory_mode_octal": "0700",
+    "private_file_mode_octal": "0600",
+    "download_identity": "zip_sha256",
+    "zip_crc_all_members": true,
+    "zip_members_extracted": false,
+    "partial_removed_on_failure": true,
+    "state_write_failure_recovery": true,
+    "duplicate_files_per_hash_maximum": 1
+  },
+  "live_gate": {
+    "export_state": "IDLE",
+    "revision": 0,
+    "state_sha256": "da9b7f188ad0da9cb3dd482748b2d44ddfc65c4fc340b1214ad21d0a36b78aa3",
+    "inspect_action": "STATE_NOT_ELIGIBLE",
+    "private_runtime_reads": 0,
+    "network_download_attempts": 0,
+    "production_private_zip_present": false,
+    "production_download_metadata_present": false,
+    "production_export_downloaded": false
+  },
+  "fixture_proof": {
+    "official_shape_zip_validated": true,
+    "conversations_member_variants_supported": true,
+    "invalid_zip_retry_succeeds": true,
+    "state_write_interruption_reuses_existing_hash": true,
+    "retry_after_link_expiry_reuses_already_validated_private_zip": true,
+    "repeat_download_network_calls": 0,
+    "unsafe_path_duplicate_missing_conversation_and_private_host_rejected": true
+  },
+  "phase_boundary": {
+    "private_download_capability_complete": true,
+    "real_production_download_claimed": false,
+    "raw_archive_written": false,
+    "export_parsed": false,
+    "next_task": "S08-P3-T1"
+  },
+  "tests": {
+    "test_first": "ModuleNotFoundError before implementation",
+    "dedicated": "11/11 PASS",
+    "focused": "102/102 PASS",
+    "python_compile": "PASS",
+    "live_inspect": "PASS / STATE_NOT_ELIGIBLE / IDLE",
+    "validate_fast": "6/6 PASS in 31.879 seconds",
+    "validate_sync": "10/10 PASS in 466.111 seconds; sync unit tests PASS in 106.110 seconds; credential scan PASS in 347.133 seconds",
+    "validate_sync_safety": "raw_mutation=false; remote_push=false; shell=false"
+  },
+  "safety": {
+    "account_link_or_zip_values_in_evidence": false,
+    "private_path_emitted": false,
+    "private_zip_in_repository": false,
+    "raw_mutation": false,
+    "fetch": false,
+    "remote_push": false,
+    "deployment": false,
+    "branch_or_pr": false
+  }
+}

@@ -1,5 +1,43 @@
 # Memory Atlas v1.2 Remediation Handoff
 
+> **Current v1.2.1 note (2026-07-17 07:30 +10:00):** The v1.2.1 Task Pack is
+> 60/149 complete locally. This run completes only `S08-P2-T3`; S08-P2 is 3/3
+> and complete. `S08-P3-T1` is the next/only eligible Task in a later run and
+> no public raw archive, parsing, commit or push starts here.
+> `chatgpt-export-download` exits before private runtime/network access unless
+> tracked state is `LINK_READY` or already `DOWNLOADED`. An eligible run binds
+> the T2 request id, salted account digest and link lifetime, disables ambient
+> proxy/cookie/auth/browser-profile access, follows only bounded global HTTPS
+> redirects and streams at most 2 GiB while preserving 512 MiB disk headroom.
+> The repository-external `0700/0600` store publishes exactly one
+> `chatgpt-export-{sha256}.zip`; validation rejects unsafe/duplicate paths,
+> encryption, symlinks, excessive expansion, missing conversations JSON and any
+> CRC failure without extracting members. Invalid partials are removed. A ZIP
+> and metadata surviving state-write failure are reused with zero network,
+> including after link expiry; repeat `DOWNLOADED` calls are also zero-network.
+> The downstream P3 loader returns the verified private path only in process;
+> CLI output never includes the URL, account or path. Test-first
+> `ModuleNotFoundError` is closed by 11/11 dedicated tests; current focused
+> ChatGPT/CLI/profile/test-value/script-migration regression is 102/102 and
+> `py_compile` passes. `validate:fast` is 6/6 in 31.879 seconds; final
+> `validate:sync` is 10/10 in 466.111 seconds, including sync unit tests in
+> 106.110 seconds and the complete credential scan in 347.133 seconds, with
+> raw mutation, remote push and shell all false. The first two full-profile
+> attempts exposed task-copy `.DS_Store` metadata and a pre-existing truncated
+> historical archive part in the shared checkout. The canonical Git blob was
+> complete and manifest-identical, so only the task validation copy was
+> restored; shared source data was not changed. Machine-plane audit passes at
+> 174 files, 41 active
+> configs and 131 evidence payloads. Live state remains `IDLE / revision 0`
+> with SHA-256 `da9b7f188ad0da9cb3dd482748b2d44ddfc65c4fc340b1214ad21d0a36b78aa3`:
+> inspect returns `STATE_NOT_ELIGIBLE` before private/runtime network effects,
+> and no production private ZIP or metadata exists. This is implementation and
+> fixture/live-gate proof, not a real export-download claim; genuine official
+> end-to-end proof remains `S08-P3-T3`. No account/link/ZIP value, raw mutation,
+> fetch, push, deploy, branch/PR, merge/rebase or shared cleanup occurred. Real
+> GitHub upload remains prohibited until all 149 Tasks plus final review and
+> remediation close. Do not start `S08-P3-T1` in this run.
+>
 > **Current v1.2.1 note (2026-07-17 06:10 +10:00):** The v1.2.1 Task Pack is
 > 59/149 complete locally. This run completes only `S08-P2-T2`; S08-P2 is 2/3
 > and remains in progress. `S08-P2-T3` is the next/only eligible Task in a

@@ -8,7 +8,7 @@ next_gate_id: "ACC.OpenAIDatabase.PAM1.0019"
 total_estimated_hours: 255
 completed_estimated_hours: 241
 taskpack_progress:
-  completed_tasks: 59
+  completed_tasks: 60
   total_tasks: 149
   delivery_state: "local_only_not_released"
 stages:
@@ -2870,16 +2870,16 @@ stages:
       - phase_id: "MA-V121-S08-P2"
         name: "通知发现和自动下载"
         objective: "通过可插拔只读通知源发现官方导出通知，校验一次性链接并在有效期内下载 ZIP。"
-        status: "in_progress"
+        status: "completed"
         estimated_hours: 3
-        estimated_pct: 67
+        estimated_pct: 100
         stop_conditions:
           - "通知 connector 需要把凭证或邮件正文提交仓库"
           - "导出账号、时间或状态无法验证"
           - "一次性链接过期或下载 ZIP 校验失败"
         stop_gate:
           gate_id: "ACC-MA-V121-S08-P2"
-          status: "open"
+          status: "passed"
           pass_conditions:
             - "至少一个真实只读通知 adapter 在用户环境工作，凭证只在 Keychain 或 env"
             - "只提取经账号、时间和状态验证的 OpenAI 导出链接，不持久化邮件正文"
@@ -2893,6 +2893,10 @@ stages:
             - "EVID-MA-V121-S08-P2-T2-TEST"
             - "EVID-MA-V121-S08-P2-T2-LIVE-GATE"
             - "EVID-MA-V121-S08-P2-T2-REVIEW"
+            - "EVID-MA-V121-S08-P2-T3-CONTRACT"
+            - "EVID-MA-V121-S08-P2-T3-TEST"
+            - "EVID-MA-V121-S08-P2-T3-LIVE-GATE"
+            - "EVID-MA-V121-S08-P2-T3-REVIEW"
         tasks:
           - task_id: "S08-P2-T1"
             name: "实现并配置只读通知 connector"
@@ -2981,22 +2985,49 @@ stages:
           - task_id: "S08-P2-T3"
             name: "自动下载并校验官方导出 ZIP"
             objective: "在 24 小时有效期内以同一账号会话自动下载并校验 ZIP。"
-            status: "planned"
+            status: "completed"
             estimated_hours: 1
-            estimated_pct: 0
+            estimated_pct: 100
             dependencies:
               - "S08-P2-T2"
             acceptance_ids:
               - "ACC-MA-V121-S08-P2-T3"
-            test_commands: []
-            evidence_refs: []
+            acceptance:
+              - acceptance_id: "ACC-MA-V121-S08-P2-T3"
+                description: "The command exits before private runtime and network access unless tracked export state is LINK_READY or already DOWNLOADED. An eligible download revalidates the T2 request id, salted account digest and lifetime, streams bounded cookie-free HTTPS into a repository-external 0600 partial, verifies size, safe unique ZIP members, expansion ratio, required conversations JSON and all-member CRC without extraction, then publishes one SHA-256-addressed private ZIP and advances to DOWNLOADED. Invalid or interrupted attempts are retryable; a validated private ZIP surviving a later state-write failure is reused without a second network call, including after link expiry. Current live state remains IDLE, so no production ZIP is claimed."
+                evidence_refs:
+                  - "EVID-MA-V121-S08-P2-T3-CONTRACT"
+                  - "EVID-MA-V121-S08-P2-T3-TEST"
+                  - "EVID-MA-V121-S08-P2-T3-LIVE-GATE"
+                  - "EVID-MA-V121-S08-P2-T3-REVIEW"
+            test_commands:
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_chatgpt_export_download -q"
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_chatgpt_export_request OpenAIDatabase.tests.test_memory_atlas_chatgpt_export_state OpenAIDatabase.tests.test_memory_atlas_chatgpt_export_human_auth OpenAIDatabase.tests.test_memory_atlas_chatgpt_notification_connector OpenAIDatabase.tests.test_memory_atlas_chatgpt_export_link_discovery OpenAIDatabase.tests.test_memory_atlas_chatgpt_export_download OpenAIDatabase.tests.test_atlasctl_modular_cli OpenAIDatabase.tests.test_atlasctl_script_consolidation OpenAIDatabase.tests.test_memory_atlas_test_value_audit OpenAIDatabase.tests.test_memory_atlas_validator_profiles -q"
+              - "python3 -B OpenAIDatabase/scripts/atlasctl.py chatgpt-export-download --inspect"
+              - "npm run validate:fast --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run validate:sync --prefix OpenAIDatabase/apps/memory-atlas"
+              - "python3 -B OpenAIDatabase/scripts/audit_memory_atlas_human_plane.py"
+              - "python3 -B OpenAIDatabase/scripts/audit_memory_atlas_test_value.py"
+              - "python3 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+            test_results:
+              - "Test-first dedicated regression failed with ModuleNotFoundError before implementation, then passed 11/11. It covers exact contract/model drift, IDLE zero-private-read/zero-network gating, successful private download, account mismatch, expiry, invalid-ZIP retry, state-write interruption, recovery after expiry, repeated zero-network execution, safe ZIP paths and disabled proxy/cookie/auth transport."
+              - "ChatGPT P1/P2 plus CLI/profile/test-value/script-migration focused regression passed 102/102. Production modules compile with py_compile."
+              - "Live inspect returned PASS/STATE_NOT_ELIGIBLE/IDLE before private runtime or network access. Tracked state remains IDLE revision 0 with SHA-256 da9b7f188ad0da9cb3dd482748b2d44ddfc65c4fc340b1214ad21d0a36b78aa3; no production private ZIP or download metadata exists."
+              - "validate:fast passed 6/6 in 31.879 seconds. Final validate:sync passed 10/10 in 466.111 seconds, including sync unit tests in 106.110 seconds and a complete 347.133-second credential scan; raw_mutation=false, remote_push=false and shell=false. Initial full-profile attempts exposed only task-copy .DS_Store metadata and one pre-existing truncated historical archive part in the shared checkout; the complete manifest-identical Git blob was restored only into the task validation copy before the final pass."
+              - "Machine-plane human audit passes at 174 files, 41 active configs and 131 evidence payloads. No real account/link/ZIP value, raw mutation, fetch, push, deployment, branch or PR occurred."
+            evidence_refs:
+              - "EVID-MA-V121-S08-P2-T3-CONTRACT"
+              - "EVID-MA-V121-S08-P2-T3-TEST"
+              - "EVID-MA-V121-S08-P2-T3-LIVE-GATE"
+              - "EVID-MA-V121-S08-P2-T3-REVIEW"
             risks:
               - "链接过期、账号不匹配、下载不完整或重复归档同一 hash"
             rollback: "git revert 本 Task 本地 commit；删除 task-owned 未校验临时下载，保留失败状态和 hash 证据。"
+            current_result: "complete_local_only_60_of_149_live_idle_zero_download_pending_s08_p3_t1_no_remote_upload"
       - phase_id: "MA-V121-S08-P3"
         name: "公开归档与真实外部验收"
         objective: "按 S06 合同归档真实 ChatGPT export，并在最终交付边界允许时验证受控 main 直推链路。"
-        status: "planned"
+        status: "in_progress"
         estimated_hours: 3
         estimated_pct: 0
         stop_conditions:
@@ -3006,7 +3037,7 @@ stages:
           - "整包最终交付前执行真实 push，或使用 branch、PR、force"
         stop_gate:
           gate_id: "ACC-MA-V121-S08-P3"
-          status: "planned"
+          status: "open"
           pass_conditions:
             - "真实 ChatGPT export 按 S06 分片、manifest、hash 和 append-only 合同归档"
             - "受控 commit/main push 路径无 branch、PR 或 force，真实远端动作遵守最终交付边界"

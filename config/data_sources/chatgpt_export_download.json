@@ -1,0 +1,98 @@
+{
+  "schema_version": "memory_atlas.chatgpt_export_download_contract.v1_2_1_s08_p2_t3",
+  "task_id": "S08-P2-T3",
+  "acceptance_id": "ACC-MA-V121-S08-P2-T3",
+  "source_id": "chatgpt",
+  "input": {
+    "private_link_loader": "memory_atlas_cli.chatgpt_export_link_discovery:load_private_export_link",
+    "private_account_binding_loader": "memory_atlas_cli.chatgpt_export_link_discovery:load_private_export_account_binding",
+    "link_must_be_unexpired_at_start": true,
+    "request_id_must_match_state": true,
+    "salted_account_digest_must_match": true,
+    "browser_session_or_cookie_read": false
+  },
+  "state_gate": {
+    "required_state": "LINK_READY",
+    "success_state": "DOWNLOADED",
+    "idempotent_state": "DOWNLOADED",
+    "noneligible_state_reads_private_runtime": false,
+    "state_lock_covers_download_and_transition": true
+  },
+  "download": {
+    "transport": "stdlib_https_get_without_ambient_cookie_auth_or_proxy",
+    "https_only": true,
+    "redirect_policy": "https_global_hostname_no_userinfo_no_ip_literal",
+    "maximum_redirects": 5,
+    "socket_timeout_seconds": 30,
+    "total_timeout_seconds": 1800,
+    "chunk_bytes": 1048576,
+    "maximum_download_bytes": 2147483648,
+    "minimum_free_space_reserve_bytes": 536870912,
+    "content_type_allowlist": [
+      "",
+      "application/octet-stream",
+      "application/x-zip-compressed",
+      "application/zip"
+    ],
+    "retryable": true,
+    "partial_file_removed_on_failure": true
+  },
+  "zip_validation": {
+    "crc_all_members": true,
+    "maximum_members": 200000,
+    "maximum_member_name_characters": 1024,
+    "maximum_uncompressed_bytes": 17179869184,
+    "maximum_compression_ratio": 1000,
+    "reject_encrypted_members": true,
+    "reject_symlinks": true,
+    "reject_unsafe_or_duplicate_paths": true,
+    "require_conversations_json_or_numbered_variant": true,
+    "extracts_members": false
+  },
+  "private_store": {
+    "location": "outside_repository",
+    "directory": "chatgpt_exports",
+    "directory_mode_octal": "0700",
+    "file_mode_octal": "0600",
+    "filename_formula": "chatgpt-export-{zip_sha256}.zip",
+    "metadata_filename": "chatgpt_export_download.json",
+    "downstream_loader": "memory_atlas_cli.chatgpt_export_download:load_private_downloaded_export",
+    "atomic_publish_and_directory_fsync": true,
+    "absolute_path_emitted": false,
+    "download_url_in_metadata": false
+  },
+  "deduplication": {
+    "identity": "zip_sha256",
+    "same_hash_creates_second_file": false,
+    "state_write_failure_reuses_private_download": true,
+    "network_retry_after_valid_private_download": false
+  },
+  "cli": {
+    "command": "chatgpt-export-download",
+    "modes": [
+      "--inspect",
+      "--download --confirm-download"
+    ],
+    "output_is_sanitized": true,
+    "inspect_uses_network": false
+  },
+  "security": {
+    "browser_cookie_access": false,
+    "browser_profile_access": false,
+    "credential_access": false,
+    "ambient_proxy_access": false,
+    "one_time_url_emitted": false,
+    "private_zip_in_repository": false,
+    "raw_mutation": false,
+    "remote_git_actions": false
+  },
+  "model_parameters_ref": "机器治理/参数与公式/chatgpt_export_download.v1_2_1_s08_p2_t3.json",
+  "phase_boundary": {
+    "downloads_and_validates_private_export_zip": true,
+    "writes_raw_archive": false,
+    "parses_export": false,
+    "commits_or_pushes": false,
+    "deploys": false,
+    "next_task": "S08-P3-T1"
+  }
+}
