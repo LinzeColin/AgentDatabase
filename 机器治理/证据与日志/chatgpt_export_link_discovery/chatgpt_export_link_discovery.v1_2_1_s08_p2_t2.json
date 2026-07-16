@@ -1,0 +1,70 @@
+{
+  "acceptance_id": "ACC-MA-V121-S08-P2-T2",
+  "artifacts": [
+    {
+      "path": "config/data_sources/chatgpt_export_link_discovery.json",
+      "sha256": "3bc94547a3ff2c823f61529982a8ba6101db974e5b636aed0165e5facdc1d1e1"
+    },
+    {
+      "path": "机器治理/参数与公式/chatgpt_export_link_discovery.v1_2_1_s08_p2_t2.json",
+      "sha256": "fd4d33dacd2ba862212fae95bbeca48c3e40560b8ac93a4f95442709bd16be3d"
+    },
+    {
+      "path": "scripts/memory_atlas_cli/chatgpt_export_link_discovery.py",
+      "sha256": "bd92e404f706d42e3a246177c96d7fccb04893bec84b4591c8f1561ac04fe16f"
+    },
+    {
+      "path": "tests/test_memory_atlas_chatgpt_export_link_discovery.py",
+      "sha256": "38b4553b75390a1954b712a57bd451cf25c3427ed01ceed6bd0f47a247eef9aa"
+    }
+  ],
+  "implementation": {
+    "account_binding_location": "outside_repository",
+    "account_value_persisted": false,
+    "account_binding_file_mode_octal": "0600",
+    "mail_body_persisted": false,
+    "private_link_file_mode_octal": "0600",
+    "repository_url_persisted": false,
+    "state_transition": "WAITING_FOR_EXPORT_to_LINK_READY",
+    "state_write_failure_recovery": true
+  },
+  "live_gate": {
+    "account_binding_configured": false,
+    "discover_action": "FAIL_CLOSED",
+    "discover_error_code": "link_discovery_state_not_eligible",
+    "export_state": "IDLE",
+    "inspect_action": "STATE_NOT_ELIGIBLE",
+    "mail_message_source_reads": 0,
+    "private_link_present": false,
+    "production_link_discovered": false,
+    "revision": 0,
+    "state_sha256": "da9b7f188ad0da9cb3dd482748b2d44ddfc65c4fc340b1214ad21d0a36b78aa3"
+  },
+  "observed_at": "2026-07-17T06:10:37+10:00",
+  "phase_boundary": {
+    "downloads_export": false,
+    "next_task": "S08-P2-T3",
+    "production_mail_scanned": false,
+    "raw_archive_written": false
+  },
+  "safety": {
+    "account_mail_or_url_values_in_evidence": false,
+    "branch_or_pr": false,
+    "deployment": false,
+    "fetch": false,
+    "raw_mutation": false,
+    "remote_push": false,
+    "shell": false
+  },
+  "schema_version": "memory_atlas.chatgpt_export_link_discovery_evidence.v1_2_1_s08_p2_t2",
+  "status": "PASS",
+  "task_id": "S08-P2-T2",
+  "tests": {
+    "applescript_compile": "PASS without execution",
+    "dedicated": "12/12 PASS",
+    "focused": "94/94 PASS",
+    "test_first": "ModuleNotFoundError before implementation",
+    "validate_fast": "6/6 PASS in 22.861 seconds",
+    "validate_sync": "10/10 PASS in 184.549 seconds; credential scan 130.230 seconds"
+  }
+}

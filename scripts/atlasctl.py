@@ -4,12 +4,14 @@
 from __future__ import annotations
 
 import sys as _sys
+from pathlib import Path as _Path
 
 from memory_atlas_cli.analyze import *
 from memory_atlas_cli.apply import *
 from memory_atlas_cli.build import *
 from memory_atlas_cli.chatgpt_export_request import *
 from memory_atlas_cli.chatgpt_export_human_auth import *
+from memory_atlas_cli.chatgpt_export_link_discovery import *
 from memory_atlas_cli.chatgpt_export_state import *
 from memory_atlas_cli.chatgpt_notification_connector import *
 from memory_atlas_cli.constants import *
@@ -19,6 +21,12 @@ from memory_atlas_cli.push import *
 from memory_atlas_cli.runtime import *
 from memory_atlas_cli.sync import *
 from memory_atlas_cli.validate import *
+
+
+# Relative implementation constants are not stable facade exports.
+for _name, _value in list(globals().items()):
+    if _name.isupper() and isinstance(_value, _Path) and not _value.is_absolute():
+        del globals()[_name]
 
 
 def main(argv: list[str] | None = None) -> int:

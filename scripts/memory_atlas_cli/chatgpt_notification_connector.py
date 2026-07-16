@@ -581,6 +581,18 @@ def inspect_notification_connector(
     )
 
 
+def notification_runtime_directory(
+    database_dir: Path,
+    *,
+    runtime_dir: Path | None,
+) -> Path:
+    """Return the configured private runtime without exposing its path."""
+    root = _database_root(database_dir)
+    directory = _runtime_directory(root, runtime_dir, create=False)
+    _load_local_config(directory)
+    return directory
+
+
 def run_chatgpt_notification_connector(args: Any) -> int:
     try:
         inspect = bool(getattr(args, "inspect", False))
@@ -641,6 +653,7 @@ __all__ = (
     "inspect_notification_connector",
     "load_chatgpt_notification_connector_contract",
     "load_chatgpt_notification_connector_model_parameters",
+    "notification_runtime_directory",
     "probe_apple_mail",
     "run_chatgpt_notification_connector",
     "validate_chatgpt_notification_connector_contract",

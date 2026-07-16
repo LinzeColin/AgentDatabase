@@ -27,8 +27,8 @@
     "deleted_python_test_count": 2,
     "retained_validator_count": 39,
     "retained_baseline_python_test_count": 49,
-    "added_python_test_count": 27,
-    "current_python_test_count": 76
+    "added_python_test_count": 28,
+    "current_python_test_count": 77
   },
   "profile_commands": {
     "fast": "npm run validate:fast",
@@ -57,6 +57,7 @@
     "tests/test_memory_atlas_chatgpt_export_state.py",
     "tests/test_memory_atlas_chatgpt_export_human_auth.py",
     "tests/test_memory_atlas_chatgpt_notification_connector.py",
+    "tests/test_memory_atlas_chatgpt_export_link_discovery.py",
     "tests/test_memory_atlas_public_raw_layout.py",
     "tests/test_memory_atlas_credential_exclusion.py",
     "tests/test_memory_atlas_raw_ledger.py",
@@ -3504,6 +3505,16 @@
       ],
       "reason": "Retained because it proves S08-P2-T1 exact connector/model drift rejection, fixed content-free Apple Mail probing, safe child env, live-readiness-before-config, repository-external 0600 atomic config, idempotent inspection, symlink and permission fail closure, and sanitized output without Mail or credential values.",
       "current_dependency": "S08-P2-T1 validate:sync, real Apple Mail configure/inspect and full Python suites"
+    },
+    {
+      "path": "tests/test_memory_atlas_chatgpt_export_link_discovery.py",
+      "risk_bindings": [
+        "data_integrity",
+        "release_risk",
+        "runner_contract"
+      ],
+      "reason": "Retained because it proves S08-P2-T2 exact contract/model drift rejection, fixed shell-free bounded Mail scanning, salted repository-external account binding, official sender/subject/recipient/time/state/HTTPS-link validation, private 0600 URL storage, ambiguous-candidate closure and LINK_READY transition without emitting Mail content, account values or the one-time URL.",
+      "current_dependency": "S08-P2-T2 validate:sync, live IDLE zero-scan guard and full Python suites"
     },
     {
       "path": "tests/test_memory_atlas_public_raw_layout.py",

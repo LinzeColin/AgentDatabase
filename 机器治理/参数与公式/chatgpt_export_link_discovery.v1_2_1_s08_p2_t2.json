@@ -1,0 +1,32 @@
+{
+  "acceptance_id": "ACC-MA-V121-S08-P2-T2",
+  "calibration_boundary": "S08-P2-T2 discovers and stores one validated link outside Git. It does not download the ZIP, write raw archives, commit, push or deploy; those begin at S08-P2-T3 or later.",
+  "failure_semantics": "Wrong state exits before Mail access. Missing account binding, unsupported sender, unready subject, recipient mismatch, out-of-window time, expired link, unsafe URL, oversized output or multiple valid candidates fails closed without persisting Mail content or emitting account/link values.",
+  "formula": "link_ready = export_state=WAITING_FOR_EXPORT AND one_valid_notification AND sender_allowlisted AND subject_ready AND recipient_digest=bound_account_digest AND request_reserved_at<=message_received_at<=request_reserved_at+7d AND now<=message_received_at+24h AND first_party_https_export_link; repository_url_bytes=0",
+  "formula_id": "FORM-MA-V121-S08-P2-T2",
+  "model_id": "MOD-MA-V121-S08-P2-T2",
+  "parameter_rationale": {
+    "account_value_bytes_persisted": "The normalized account exists only in process memory; private runtime stores a random salt and digest.",
+    "link_validity_seconds": "OpenAI documents that the email download link expires after 24 hours.",
+    "mail_scan_lookback_seconds": "Only notifications whose 24-hour link can still be usable need content inspection; five minutes covers bounded clock skew.",
+    "maximum_request_to_notification_seconds": "OpenAI documents that an export can take up to seven days to arrive.",
+    "maximum_scan_messages": "Eight official-sender candidates is enough for one pending request while bounding ambiguity and Mail output."
+  },
+  "parameters": {
+    "account_value_bytes_persisted": 0,
+    "link_validity_seconds": 86400,
+    "mail_body_bytes_persisted": 0,
+    "mail_scan_lookback_seconds": 86700,
+    "mail_scan_timeout_seconds": 15,
+    "maximum_clock_skew_seconds": 300,
+    "maximum_message_source_bytes": 524288,
+    "maximum_request_to_notification_seconds": 604800,
+    "maximum_scan_messages": 8,
+    "maximum_text_body_bytes": 524288,
+    "maximum_url_characters": 4096,
+    "repository_url_bytes_persisted": 0
+  },
+  "purpose": "Accept exactly one current official export notification only when state, sender, subject, bound recipient, request time and first-party HTTPS link all agree.",
+  "schema_version": "memory_atlas.chatgpt_export_link_discovery_model.v1_2_1_s08_p2_t2",
+  "task_id": "S08-P2-T2"
+}

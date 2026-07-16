@@ -1,5 +1,36 @@
 # Memory Atlas v1.2 Remediation Handoff
 
+> **Current v1.2.1 note (2026-07-17 06:10 +10:00):** The v1.2.1 Task Pack is
+> 59/149 complete locally. This run completes only `S08-P2-T2`; S08-P2 is 2/3
+> and remains in progress. `S08-P2-T3` is the next/only eligible Task in a
+> later run; ZIP download does not start here. `chatgpt-export-link` now exits
+> before Mail unless tracked state is `WAITING_FOR_EXPORT`, requires the real
+> T1 adapter plus a repository-external salted account binding, and accepts
+> exactly one current official-sender notification only after subject,
+> recipient, request-time, seven-day arrival, documented 24-hour expiry and
+> first-party HTTPS export/download URL checks all agree. The actual URL can be
+> stored only in an atomic `0600` private runtime file; Git state/evidence keep
+> hashes only. A private-write/state-write interruption is retryable without
+> replacing the same link. The fixed `shell=false` AppleScript is bounded to
+> 15 seconds, eight candidates and 512 KiB per source and compiled successfully
+> with macOS `osacompile` without Mail execution. Test-first
+> `ModuleNotFoundError` was closed by 12/12 dedicated tests including state-write
+> fault injection; final related regression is 94/94. `validate:fast` is 6/6
+> in 22.861 seconds and `validate:sync` is 10/10 in 184.549 seconds including
+> 260 sync tests and a 130.230-second credential scan; both record raw mutation,
+> remote push and shell as false. Human-plane, test-value, 49 governance/script
+> regressions, renderer and required project governance pass. Machine truth is
+> 172 files, 40 active configs and 130 evidence payloads; all 53 event rows are
+> valid JSONL. Live state remains `IDLE / revision 0` with
+> SHA-256 `da9b7f188ad0da9cb3dd482748b2d44ddfc65c4fc340b1214ad21d0a36b78aa3`:
+> inspect returned `STATE_NOT_ELIGIBLE`, discover failed closed before connector
+> or Mail source access, and no production account binding/private link exists.
+> This is implementation plus fixture/live-gate proof, not a claim that a real
+> export email was found. No Mail/account/credential/URL value, ZIP download,
+> raw write, fetch, push, deploy, branch/PR, merge/rebase or shared cleanup
+> occurred. Real GitHub upload remains prohibited until all 149 Tasks plus final
+> review/remediation close. Do not start `S08-P2-T3` in this run.
+>
 > **Current v1.2.1 note (2026-07-17 05:24 +10:00):** The v1.2.1 Task Pack is
 > 58/149 complete locally. This run completes only `S08-P2-T1`; S08-P2 is 1/3
 > and remains in progress. `S08-P2-T2` is the next/only eligible Task in a

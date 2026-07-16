@@ -94,6 +94,17 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     export_auth.add_argument("--confirm-human-auth-complete", action="store_true")
     export_auth.add_argument("--database-dir", type=Path, default=ROOT)
 
+    export_link = subparsers.add_parser(
+        "chatgpt-export-link",
+        help="Bind, inspect or discover a private ChatGPT export link.",
+    )
+    export_link_mode = export_link.add_mutually_exclusive_group(required=True)
+    export_link_mode.add_argument("--inspect", action="store_true")
+    export_link_mode.add_argument("--bind-account-from-env", action="store_true")
+    export_link_mode.add_argument("--discover", action="store_true")
+    export_link.add_argument("--runtime-dir", type=Path)
+    export_link.add_argument("--database-dir", type=Path, default=ROOT)
+
     notification_connector = subparsers.add_parser(
         "chatgpt-notification-connector",
         help="Configure or inspect a read-only ChatGPT export notification adapter.",

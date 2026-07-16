@@ -8,7 +8,7 @@ next_gate_id: "ACC.OpenAIDatabase.PAM1.0019"
 total_estimated_hours: 255
 completed_estimated_hours: 241
 taskpack_progress:
-  completed_tasks: 58
+  completed_tasks: 59
   total_tasks: 149
   delivery_state: "local_only_not_released"
 stages:
@@ -2872,7 +2872,7 @@ stages:
         objective: "通过可插拔只读通知源发现官方导出通知，校验一次性链接并在有效期内下载 ZIP。"
         status: "in_progress"
         estimated_hours: 3
-        estimated_pct: 33
+        estimated_pct: 67
         stop_conditions:
           - "通知 connector 需要把凭证或邮件正文提交仓库"
           - "导出账号、时间或状态无法验证"
@@ -2889,6 +2889,10 @@ stages:
             - "EVID-MA-V121-S08-P2-T1-TEST"
             - "EVID-MA-V121-S08-P2-T1-REAL"
             - "EVID-MA-V121-S08-P2-T1-REVIEW"
+            - "EVID-MA-V121-S08-P2-T2-CONTRACT"
+            - "EVID-MA-V121-S08-P2-T2-TEST"
+            - "EVID-MA-V121-S08-P2-T2-LIVE-GATE"
+            - "EVID-MA-V121-S08-P2-T2-REVIEW"
         tasks:
           - task_id: "S08-P2-T1"
             name: "实现并配置只读通知 connector"
@@ -2935,18 +2939,45 @@ stages:
           - task_id: "S08-P2-T2"
             name: "发现并验证官方导出链接"
             objective: "识别 OpenAI 导出通知、校验账号、时间和状态并提取一次性下载链接。"
-            status: "planned"
+            status: "completed"
             estimated_hours: 1
-            estimated_pct: 0
+            estimated_pct: 100
             dependencies:
               - "S08-P2-T1"
             acceptance_ids:
               - "ACC-MA-V121-S08-P2-T2"
-            test_commands: []
-            evidence_refs: []
+            acceptance:
+              - acceptance_id: "ACC-MA-V121-S08-P2-T2"
+                description: "The link-discovery command exits before Mail access unless export state is WAITING_FOR_EXPORT. In an eligible cycle it requires the configured read-only adapter, a repository-external salted account binding, the current documented OpenAI sender, ready subject, matching recipient, request-bound time window, unexpired 24-hour lifetime and exactly one first-party HTTPS export/download URL. The URL is stored atomically only in a 0600 private runtime file; Git state and evidence retain hashes but no account, Mail content or URL. Current live state remains IDLE, so production Mail was not scanned and no production link is claimed."
+                evidence_refs:
+                  - "EVID-MA-V121-S08-P2-T2-CONTRACT"
+                  - "EVID-MA-V121-S08-P2-T2-TEST"
+                  - "EVID-MA-V121-S08-P2-T2-LIVE-GATE"
+                  - "EVID-MA-V121-S08-P2-T2-REVIEW"
+            test_commands:
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_chatgpt_export_link_discovery -q"
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_chatgpt_export_request OpenAIDatabase.tests.test_memory_atlas_chatgpt_export_state OpenAIDatabase.tests.test_memory_atlas_chatgpt_export_human_auth OpenAIDatabase.tests.test_memory_atlas_chatgpt_notification_connector OpenAIDatabase.tests.test_memory_atlas_chatgpt_export_link_discovery OpenAIDatabase.tests.test_atlasctl_modular_cli OpenAIDatabase.tests.test_atlasctl_runtime_core OpenAIDatabase.tests.test_memory_atlas_validator_profiles OpenAIDatabase.tests.test_memory_atlas_test_value_audit -q"
+              - "python3 -B OpenAIDatabase/scripts/atlasctl.py chatgpt-export-link --inspect"
+              - "python3 -B OpenAIDatabase/scripts/atlasctl.py chatgpt-export-link --discover"
+              - "npm run validate:fast --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run validate:sync --prefix OpenAIDatabase/apps/memory-atlas"
+              - "python3 -B OpenAIDatabase/scripts/audit_memory_atlas_human_plane.py"
+              - "python3 -B OpenAIDatabase/scripts/audit_memory_atlas_test_value.py"
+              - "python3 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+            test_results:
+              - "Test-first dedicated regression failed with ModuleNotFoundError before implementation, then passed 12/12 including sender/subject/account/time/state/URL rejection, fixed shell-free scan bounds, private 0600 storage and state-write fault recovery. Related ChatGPT/CLI/profile regression passed 94/94; macOS osacompile accepted the fixed AppleScript without executing Mail."
+              - "Live inspect returned PASS/STATE_NOT_ELIGIBLE/IDLE and live discover returned FAIL_CLOSED/link_discovery_state_not_eligible before runtime, connector or Mail source access. Tracked state remains IDLE revision 0 with SHA-256 da9b7f188ad0da9cb3dd482748b2d44ddfc65c4fc340b1214ad21d0a36b78aa3; no production account binding or private link exists."
+              - "validate:fast passed 6/6 in 22.861 seconds. validate:sync passed 10/10 in 184.549 seconds, including 260 sync tests and a 130.230-second credential scan; both report raw_mutation=false, remote_push=false and shell=false."
+              - "Human-plane, test-value, 49 human/test-value/script-migration tests, renderer and required project governance pass. Machine truth is 172 files, 40 active configs and 130 evidence payloads; all 53 governance event rows are valid JSONL. No Mail/account/credential/URL value entered tracked evidence. No ZIP download, raw write, fetch, push, deployment, branch or PR occurred."
+            evidence_refs:
+              - "EVID-MA-V121-S08-P2-T2-CONTRACT"
+              - "EVID-MA-V121-S08-P2-T2-TEST"
+              - "EVID-MA-V121-S08-P2-T2-LIVE-GATE"
+              - "EVID-MA-V121-S08-P2-T2-REVIEW"
             risks:
               - "邮件正文、错误账号链接或一次性 URL 进入仓库证据"
             rollback: "git revert 本 Task 本地 commit；废弃未验证链接并保持 WAITING_FOR_EXPORT。"
+            current_result: "complete_local_only_59_of_149_live_idle_zero_scan_pending_s08_p2_t3_no_remote_upload"
           - task_id: "S08-P2-T3"
             name: "自动下载并校验官方导出 ZIP"
             objective: "在 24 小时有效期内以同一账号会话自动下载并校验 ZIP。"

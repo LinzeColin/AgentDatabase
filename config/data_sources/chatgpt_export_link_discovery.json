@@ -1,0 +1,96 @@
+{
+  "acceptance_id": "ACC-MA-V121-S08-P2-T2",
+  "account_binding": {
+    "file_mode_octal": "0600",
+    "input": "environment:MEMORY_ATLAS_CHATGPT_EXPORT_ACCOUNT",
+    "input_persisted": false,
+    "location": "outside_repository",
+    "message_recipient_must_match": true,
+    "stored_form": "random_salt_plus_sha256_of_normalized_account"
+  },
+  "cli": {
+    "command": "chatgpt-export-link",
+    "inspect_reads_mail": false,
+    "modes": [
+      "--inspect",
+      "--bind-account-from-env",
+      "--discover"
+    ],
+    "output_is_sanitized": true
+  },
+  "mail_scan": {
+    "adapter_id": "apple-mail-local",
+    "fixed_applescript": true,
+    "lookback_seconds": 86700,
+    "maximum_message_source_bytes": 524288,
+    "maximum_messages": 8,
+    "raw_source_emitted": false,
+    "raw_source_retained": false,
+    "read_only": true,
+    "shell": false,
+    "timeout_seconds": 15
+  },
+  "model_parameters_ref": "机器治理/参数与公式/chatgpt_export_link_discovery.v1_2_1_s08_p2_t2.json",
+  "official_source": {
+    "documentation": "https://help.openai.com/en/articles/7260999-how-do-i-export-my-data",
+    "link_host_suffix_allowlist": [
+      "openai.com",
+      "chatgpt.com"
+    ],
+    "link_required_any_of": [
+      "export",
+      "download"
+    ],
+    "link_validity_seconds": 86400,
+    "maximum_request_to_notification_seconds": 604800,
+    "sender_allowlist": [
+      "noreply@tm.openai.com"
+    ],
+    "subject_ready_any_of": [
+      "ready",
+      "download"
+    ],
+    "subject_required_markers": [
+      "chatgpt",
+      "data",
+      "export"
+    ]
+  },
+  "phase_boundary": {
+    "commits_or_pushes": false,
+    "deploys": false,
+    "discovers_official_export_notifications": true,
+    "downloads_export": false,
+    "extracts_private_one_time_link": true,
+    "next_task": "S08-P2-T3",
+    "validates_account_time_and_state": true,
+    "writes_raw_archive": false
+  },
+  "private_link_store": {
+    "atomic_replace_and_directory_fsync": true,
+    "contains_one_time_url": true,
+    "file_mode_octal": "0600",
+    "filename": "chatgpt_export_link.json",
+    "location": "outside_repository",
+    "url_or_mail_content_emitted": false
+  },
+  "schema_version": "memory_atlas.chatgpt_export_link_discovery_contract.v1_2_1_s08_p2_t2",
+  "security": {
+    "account_value_persisted": false,
+    "credentials_read": false,
+    "download": false,
+    "mail_body_persisted": false,
+    "one_time_url_in_repository": false,
+    "raw_mutation": false,
+    "remote_actions": false
+  },
+  "source_id": "chatgpt",
+  "state_gate": {
+    "noneligible_state_scans_mail": false,
+    "request_time_source": "data/sync_state/chatgpt.json:request.reserved_at",
+    "required_state": "WAITING_FOR_EXPORT",
+    "state_lock_required_before_write": true,
+    "success_state": "LINK_READY"
+  },
+  "task_id": "S08-P2-T2"
+}

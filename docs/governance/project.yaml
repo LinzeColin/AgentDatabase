@@ -1382,6 +1382,44 @@ features:
       - "EVID-MA-V121-S08-P2-T1-TEST"
       - "EVID-MA-V121-S08-P2-T1-REAL"
       - "EVID-MA-V121-S08-P2-T1-REVIEW"
+  - feature_id: "FEAT-MA-V121-S08-P2-T2"
+    name: "Memory Atlas privacy-safe ChatGPT export link discovery"
+    description: "v1.2.1 Task Pack 当前完成 59/149。新增 chatgpt-export-link：只有 tracked export state 为 WAITING_FOR_EXPORT 才检查消息；账号值仅从固定 env 在进程内标准化，仓库外只保存随机 salt 加 digest。固定 shell-free AppleScript 有 15 秒、8 封、单封 512 KiB 上限；Python 要求当前 OpenAI sender、ready subject、bound recipient、request 后且七天内的消息时间、仍在 24 小时有效期内，以及唯一 first-party HTTPS export/download URL。真实 URL 只原子写入仓库外 0600 文件，tracked state 只保存 evidence hash，并支持 private write 后 state write 失败的幂等恢复。当前 live state 为 IDLE/revision 0，inspect 返回 STATE_NOT_ELIGIBLE，discover 在 Mail 前 fail closed；没有扫描生产邮件、绑定生产账号或发现生产链接。"
+    status: "active"
+    fact_level: "EXTRACTED"
+    model_ids:
+      - "MOD-009"
+    formula_ids:
+      - "FORM-009"
+    parameter_ids: []
+    code_refs:
+      - "OpenAIDatabase/scripts/memory_atlas_cli/chatgpt_export_link_discovery.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/chatgpt_notification_connector.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/parser.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/dispatch.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/runtime.py"
+      - "OpenAIDatabase/scripts/atlasctl.py"
+      - "OpenAIDatabase/tests/test_memory_atlas_chatgpt_export_link_discovery.py"
+      - "OpenAIDatabase/config/memory_atlas_validator_profiles.json"
+      - "OpenAIDatabase/config/memory_atlas_test_value_review.json"
+    config_refs:
+      - "OpenAIDatabase/config/data_sources/chatgpt_export_link_discovery.json"
+      - "OpenAIDatabase/机器治理/参数与公式/chatgpt_export_link_discovery.v1_2_1_s08_p2_t2.json"
+    source_refs:
+      - "OpenAIDatabase/机器治理/证据与日志/chatgpt_export_link_discovery/chatgpt_export_link_discovery.v1_2_1_s08_p2_t2.json"
+      - "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s08_p2_t2_export_link_discovery_review.md"
+    owner_actions:
+      - "先运行 python3 -B scripts/atlasctl.py chatgpt-export-link --inspect。只有 state 为 WAITING_FOR_EXPORT 时，才通过一次性 MEMORY_ATLAS_CHATGPT_EXPORT_ACCOUNT 环境变量执行 --bind-account-from-env，再运行 --discover；不要把账号值、Mail source、正文或 URL 放进命令参数、日志或 evidence。当前 IDLE 不应绑定账号或扫描 Mail。下一 Task S08-P2-T3 才能加载私有 URL 并下载 ZIP。"
+    test_refs:
+      - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_chatgpt_export_link_discovery -q"
+      - "python3 -B OpenAIDatabase/scripts/atlasctl.py chatgpt-export-link --inspect"
+      - "npm run validate:fast --prefix OpenAIDatabase/apps/memory-atlas"
+      - "npm run validate:sync --prefix OpenAIDatabase/apps/memory-atlas"
+    evidence_refs:
+      - "EVID-MA-V121-S08-P2-T2-CONTRACT"
+      - "EVID-MA-V121-S08-P2-T2-TEST"
+      - "EVID-MA-V121-S08-P2-T2-LIVE-GATE"
+      - "EVID-MA-V121-S08-P2-T2-REVIEW"
 models:
   -
     model_id: "MOD-001"
@@ -5857,4 +5895,24 @@ evidence_refs:
     evidence_id: "EVID-MA-V121-S08-P2-T1-REVIEW"
     kind: "review"
     ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s08_p2_t1_notification_connector_review.md"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S08-P2-T2-CONTRACT"
+    kind: "config"
+    ref: "OpenAIDatabase/config/data_sources/chatgpt_export_link_discovery.json"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S08-P2-T2-TEST"
+    kind: "test"
+    ref: "OpenAIDatabase/tests/test_memory_atlas_chatgpt_export_link_discovery.py"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S08-P2-T2-LIVE-GATE"
+    kind: "artifact"
+    ref: "OpenAIDatabase/机器治理/证据与日志/chatgpt_export_link_discovery/chatgpt_export_link_discovery.v1_2_1_s08_p2_t2.json"
+    fact_level: "VERIFIED"
+  -
+    evidence_id: "EVID-MA-V121-S08-P2-T2-REVIEW"
+    kind: "review"
+    ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s08_p2_t2_export_link_discovery_review.md"
     fact_level: "EXTRACTED"
