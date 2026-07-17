@@ -1,0 +1,46 @@
+sequence	commit	subject	status	material_loss	current_canonical_evidence	next_action
+1	05d2f91a6cfe7c734b175d04fb5d1491799ca579	docs(openaidatabase): converge current owner records	integrated	no	当前 docs/governance 经 OpenAIDatabase/scripts/lean_governance.py 确定生成三份 human views，check-render PASS	保持 generated-only，不复制旧 owner review
+2	6ea076b4714a087e1ff23c9b4c817bb3d85df82a	docs(governance): consolidate agent loop guidance	superseded	no	迁移后根 AGENTS.md 与 OpenAIDatabase/AGENTS.md 已定义 canonical、路由与禁写边界	禁止恢复旧 scripts/agent_loop 与旧根 governance
+3	9cef9d79b760290c72fde17fc3e7198c32b02295	fix(openaidatabase): harden Cloudflare validation	superseded	no	当前 Cloudflare config/scripts/tests 保留在 OpenAIDatabase，live 状态未在本 run 重验	沿当前合同维护；不得复写 live PASS
+4	d4b3e4819c2eb380d268dc59b474a2f551208100	chore(governance): record S03 cleanup manifest	superseded	no	根双平面 machine/facts -> 文档/ 七文件与迁移 handoff 取代旧 cleanup manifest	禁止回灌旧 governance/
+5	0c9325209255e983b91d4f9232cdbdef7738d789	OpenAIDatabase v1.2.1 S04-P1: 拆分前端 feature 与共享状态	superseded	no	前端已迁为顶层 MemoryAtlas，现有 app/features/shared/state 已形成新边界	只在顶层 MemoryAtlas 维护
+6	1ee4b12f1ae2526748b1496996324403cc8c8739	OpenAIDatabase v1.2.1 S04-P2: 模块化 atlasctl 与运行时	pending	yes	当前无 OpenAIDatabase/scripts/atlasctl_core 与 config/atlasctl.runtime.json	下一 run 仅恢复 S04-P2 的当前架构等价实现
+7	6baeb8923ae8fac10935ec14949f1931907d21f6	OpenAIDatabase v1.2.1 S04-P3: 收敛验证 profiles	pending	yes	当前无 config/validation_profiles.v1.json 与 validation_command_migrations.v1.json	S04-P2 通过后单独执行 S04-P3
+8	29be66c89555dbe9d73307a4b9da16462dea8f27	feat(openaidatabase): harden S04 validation review	pending	yes	当前 candidate gate 不覆盖 preserved S04 semantic inventory/review hardening	S04 三个 phase 后重建 review gate
+9	425bc058469d4e50f9c5313d0e65db76ea931ff4	docs(openaidatabase): bind S04 whole-stage evidence	pending	yes	active canonical 尚无 S04 whole-stage 当前证据	S04 review 通过后再绑定
+10	024d17ccc677bbc8e18e5f07f7bb230ecf8c2dbc	docs(openaidatabase): complete S05-P1 human plane compression	superseded	no	根七文件与 OpenAIDatabase 三份 generated human views 已取代旧手写平面	维持双平面与 generated-only
+11	9cf9b83d9e3028f6d216b51540794c71b8a25edd	refactor(openaidatabase): make S05-P2 machine truth unique	superseded	no	根 machine/facts 与 OpenAIDatabase docs/governance 分属明确所有权，无旧第二事实源	不得恢复 legacy truth index
+12	0b34116ffc92f0c1fcbeb7b56c89769ed43819e0	feat(openaidatabase): complete S05 P3 zh-CN semantic gate	pending	yes	当前 check-render 不等于 preserved S05-P3 zh-CN semantic acceptance	单独重建并重验 S05-P3
+13	1bc4ee933078de4cf1527b30fd9e4cb23816f023	fix(openaidatabase): complete S05 whole-stage review	pending	yes	S05-P3 未恢复，whole-stage 不能先写 PASS	依赖 S05-P3 后 review
+14	5df633053b31b158925632fe0ec1d29b8821d9a8	feat(openaidatabase): complete S06 P1 source registry	superseded	no	当前 config/data_sources、context_sources 与 route_agent_resources.py 形成更严格 registry/routing	不恢复旧 registry 文件
+15	3eff4fa986359fbc6a1145d3d962e8c2ebe485e2	feat(openaidatabase): complete S06-P2 raw archive contract	superseded	no	当前 public_raw/private-origin/Release 与 40 MiB 边界更严格	7 月 7 日 raw 继续只绑定 raw-archives-20260708
+16	f53b726f1abbfd8296ba3013d4a43e3cdc56ad97	feat(openaidatabase): complete S06-P3 raw isolation	superseded	no	当前 privacy/raw isolation、credential no-echo 与 repository hygiene 已通过	不得恢复 data/**、macdata/**、private core
+17	535614524e34da6d5460ef150a08cc6b6a1fb9cb	fix(openaidatabase): complete S06 whole-stage review	pending	yes	材料合同有等价覆盖，但 preserved S06 whole-stage 未在当前 tree 重验	重建 current-architecture review
+18	65b97b094df9bd018eaada4d4dac7a0d6afc5158	feat(openaidatabase): complete S07 P1 Codex public raw export	superseded	no	patch 数据路径被有意排除；当前只允许 Release/manifest 绑定	不复制旧 public raw
+19	95159b770d866bb824cccbefb83f0533711e9973	feat(openaidatabase): derive Codex Atlas from public raw	superseded	no	当前 canonical builders 与顶层 MemoryAtlas 数据面取代旧派生路径	沿当前 builder 重验，不复制旧 aggregate
+20	3c4f3776170856c847e5cd24bdf1fa998273bda8	feat(OpenAIDatabase): complete S07-P3 automation restore handoff	superseded	no	当前 sync/update/install 入口与 local-first contract 已存在	旧 scheduler 路径不得回灌
+21	5c80958a272500fa87ce1210bd8d61116db79595	fix(openaidatabase): complete S07 whole-stage review	pending	yes	当前未重建 preserved S07 whole-stage evidence	在现数据/自动化合同上重新 review
+22	2e67b32cf2bf75e2ddd44258a71913d8c54eac8e	feat(openaidatabase): add S08 P1 export request state	superseded	no	当前明确禁止自动 login、UI scraping、export download；S08 保持 FAILED_NEEDS_HUMAN_AUTH	保持 human-auth debt
+23	dbe0c47f29e4b0a6c3c161dc70c62ed2689d099f	fix(openaidatabase): bind S08 auth recovery receipt	superseded	no	旧 receipt 不得解除当前 human authorization debt	只有真实 owner auth 可更新
+24	7e2aa7f9d3131b4908815fbba9be5193fa1672f3	fix(openaidatabase): accept exact sentinel auth origin	superseded	no	当前手工授权与 no-scrape contract 比旧 sentinel 更严格	未知 auth 事实保持 FAILED_NEEDS_HUMAN_AUTH
+25	3c521365fe5f120284013e7434ae23e96969cb90	feat(openaidatabase): complete S09-P1 ChatGPT parser	superseded	no	当前 sync_chatgpt_memory_data.py 保留 loss-aware parser 与私密边界	沿当前 parser 做回归，不恢复原始 export
+26	dbc35df2dc861a7005508af565164cf45c59bb54	feat(openaidatabase): add generic agent connectors	pending	yes	当前无 preserved generic_agent_connector 与相应 acceptance；另一路 66/149 scoped roadmap 不能作为本线证据	单独恢复 S09-P2 current-architecture connector contract
+27	6b378e5cf113b2922ef5ff0cf9263a8f020501af	feat(openaidatabase): complete S09-P3 source state restore	pending	yes	当前无 source_state_restore/sparse_git 等 preserved runtime	S09-P2 后单独执行 S09-P3
+28	17556400e4a9584ee79519c23d928655a9b6ec7b	fix(openaidatabase): complete S09 whole-stage review	pending	yes	S09-P2/P3 未恢复，whole-stage 不成立	依赖 S09 phase 完成
+29	b2ea6f4b9fae34c4a78742cd15df190a8c88c96d	feat(openaidatabase): complete S10-P1 owner pipeline	pending	yes	现有 owner-daily 能力不等于 preserved phase acceptance	单独重建 S10-P1
+30	86320286012212bdb8f0bfb0cc5689e5c356fecd	feat(openaidatabase): complete S10-P2 scheduler recovery	pending	yes	preserved scheduler/lock/checkpoint acceptance 未进入 current truth	单独重建 S10-P2
+31	17b987fe6ddba8799ebaf29fd473f2fb094269e9	fix(openaidatabase): restore S10-P2 dashboard truth	pending	yes	同名文档或 dashboard 不构成 generated current proof	与 S10-P2 同 run 校正 generated truth
+32	60a3b41e189ad4819eb8af225661a5568c6b8f2b	feat(openaidatabase): complete S10-P3 push-main recovery	pending	yes	preserved push-main protocol/atlasctl runtime 未进入 current tree	预检通过后单独执行 S10-P3
+33	d3950f1979bb7abb68c72feddc6b60eb8791795b	fix(openaidatabase): complete S10 whole-stage review	pending	yes	S10 phases 未重建	依赖 S10 phase 完成
+34	4e03934a1174d45a3bc948c8c632c7830c57f381	feat(openaidatabase): complete S11-P1 navigation overview	pending	yes	当前顶层 MemoryAtlas 无 preserved S11-P1 browser acceptance	单独恢复 S11-P1
+35	72b74ea5a7fee544f12c6b68fbe944e09df14eed	feat(openaidatabase): complete S11-P2 decision objects	pending	yes	preserved decision objects/workspace 未由 current gate 证明	单独恢复 S11-P2
+36	2ada160ced7b10cf4bffc5ba42e8440e282d41de	feat(openaidatabase): complete S11-P3 overview journey	pending	yes	preserved guide/recovery journey 未由 current gate 证明	单独恢复 S11-P3
+37	6712b055d1ff57743639181646e9fe382d44a733	feat(openaidatabase): complete S11 whole-stage review	pending	yes	S11 phases 未重建	依赖 S11 phase 完成
+38	62d6d97e49ca916380d4839aeac7604805ad7bba	feat(openaidatabase): complete S12-P1 workspaces	pending	yes	当前无 FirstClassWorkspace/WorkspaceEditor preserved contract	单独恢复 S12-P1
+39	05e5f738b3d9b64c57dec42c98383e0cbafe208a	feat(openaidatabase): complete S12-P2 proposal apply	pending	yes	当前无 workspaceProposal/workspace_proposal_service preserved contract	单独恢复 S12-P2
+40	36fa970378a78a5177d257289e4609be5df0ef0c	feat(openaidatabase): complete S12-P3 lifecycle consistency	pending	yes	当前无 workspaceLifecycle/consistency preserved contract	单独恢复 S12-P3
+41	2995b25f9b7cdf372beb71dad8103317a1ad119d	feat(openaidatabase): complete S12 whole-stage review	pending	yes	S12 phases 未重建	依赖 S12 phase 完成
+42	0f0d80e2cba7d7256db96532e4e78dd7a70766bc	feat(openaidatabase): complete S13-P1 human search evidence	pending	yes	当前无 HumanSearchEvidenceDrawer/humanQuestionSearch preserved contract	单独恢复 S13-P1
+43	2b1b7a47a059cfe1a74f73cea8690e5e2d272872	feat(openaidatabase): complete S13-P2 review summary	pending	yes	当前无 ReviewCollectionSummaryPanel/reviewCollection preserved contract	单独恢复 S13-P2
+44	e6d3426581a849d1effbc3445010875165bf9118	feat(openaidatabase): complete S13-P3 action report closure	pending	yes	当前无 ActionWeeklyClosurePanel/actionWeeklyClosure preserved contract	单独恢复 S13-P3
+45	0bc1b83bd37cc93f7316b1abbfbdbc335822eeac	feat(openaidatabase): complete S13 whole-stage review	pending	yes	0/0 与 36/50 仅由 preservation package 声明，active canonical 尚未重验	依赖 S13 phases 后执行 whole-stage review

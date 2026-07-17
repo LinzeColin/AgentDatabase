@@ -222,39 +222,39 @@
     "gates": {
       "index_rebuild_p95_ms": {
         "metric": "index_rebuild_p95_ms",
-        "observed": 7.334334,
+        "observed": 11.6205,
         "operator": "lte",
         "status": "PASS",
         "threshold": 30000
       },
       "local_query_p95_ms": {
         "metric": "local_query_p95_ms",
-        "observed": 0.239667,
+        "observed": 0.925375,
         "operator": "lte",
         "status": "PASS",
         "threshold": 250
       },
       "suite_elapsed_ms": {
         "metric": "suite_elapsed_ms",
-        "observed": 583.452166,
+        "observed": 3221.711125,
         "operator": "lte",
         "status": "PASS",
         "threshold": 360000
       }
     },
     "metrics": {
-      "index_rebuild_p50_ms": 5.24375,
-      "index_rebuild_p95_ms": 7.334334,
-      "local_query_p50_ms": 0.17,
-      "local_query_p95_ms": 0.239667,
-      "suite_elapsed_ms": 583.452166
+      "index_rebuild_p50_ms": 6.969625,
+      "index_rebuild_p95_ms": 11.6205,
+      "local_query_p50_ms": 0.197375,
+      "local_query_p95_ms": 0.925375,
+      "suite_elapsed_ms": 3221.711125
     },
     "query_iterations": 160,
     "rebuild_iterations": 10
   },
   "schema_version": "openai_database.memory_retrieval_performance_report.v1",
   "source_hashes": {
-    "agent_memory_sha256": "037ef025197a0530c9d325c9b330f721a8d3e9fe8c8e1f060077bba938578bcd",
+    "agent_memory_sha256": "239bb9ba696f523802aa38e228f8b626b6b056d9edaad997575d1b7563455be9",
     "canonical_manifest_sha256": "019931525ab56adb51847f5920f9d84f168da5ad0ce2d70314aada4bb0e5f39e",
     "config_sha256": "1742e5c69e32f07abc9ae66170e02e684794f1b49b56cc82865a90e32f554761",
     "evaluator_sha256": "050197aef99f3f78921f0e18d0bca1cde6bcf39e8a14cc72db252be2874acef1",
