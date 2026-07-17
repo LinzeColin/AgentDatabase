@@ -1,0 +1,92 @@
+{
+  "schema_version": "memory_atlas.generic_agent_read_adapter.v1_2_1_s09_p2_t1",
+  "task_id": "S09-P2-T1",
+  "acceptance_id": "ACC-MA-V121-S09-P2-T1",
+  "entrypoint": "scripts/inspect_memory_atlas_generic_agent_export.py",
+  "model_ref": "机器治理/参数与公式/generic_agent_read_adapter.v1_2_1_s09_p2_t1.json",
+  "source_shapes": [
+    "file",
+    "directory"
+  ],
+  "formats": [
+    "json",
+    "jsonl",
+    "sqlite"
+  ],
+  "suffixes": {
+    "json": [
+      ".json"
+    ],
+    "jsonl": [
+      ".jsonl"
+    ],
+    "sqlite": [
+      ".db",
+      ".sqlite",
+      ".sqlite3"
+    ]
+  },
+  "directory": {
+    "recursive": true,
+    "follow_symlinks": false,
+    "unsupported_regular_files": "skip_without_read",
+    "symlink_or_special_file": "fail_closed",
+    "ordering": "relative_path_utf8_lexical",
+    "snapshot_scope": "all_entries_and_supported_file_hashes"
+  },
+  "json": {
+    "encoding": "utf-8-sig-strict",
+    "top_level": [
+      "object",
+      "non_empty_object_list",
+      "events_object_list"
+    ],
+    "jsonl_blank_lines": "ignore",
+    "non_object_record": "fail_closed",
+    "non_finite_number": "fail_closed"
+  },
+  "sqlite": {
+    "open_mode": "mode=ro&immutable=1",
+    "query_only": true,
+    "self_contained_export_required": true,
+    "rejected_sidecars": [
+      "-journal",
+      "-shm",
+      "-wal"
+    ],
+    "table_scope": "user_tables_only",
+    "record_json_column": "allowed_only_as_single_column_object_payload",
+    "direct_columns": "json_scalar_values_only",
+    "blob_policy": "fail_closed",
+    "record_order": "canonical_json_utf8_lexical_per_table"
+  },
+  "limits": {
+    "max_tree_entries": 4096,
+    "max_source_files": 1024,
+    "max_file_bytes": 67108864,
+    "max_total_bytes": 536870912,
+    "max_records": 200000,
+    "max_sqlite_tables": 128,
+    "max_sqlite_columns": 256,
+    "max_scalar_utf8_bytes": 1048576,
+    "max_json_depth": 64
+  },
+  "safety": {
+    "source_read_only": true,
+    "writes_files": false,
+    "network_access": false,
+    "remote_git_write": false,
+    "source_content_in_cli_output": false,
+    "local_absolute_path_in_output": false,
+    "verify_before_and_after_downstream_commit": true
+  },
+  "phase_boundary": {
+    "future_agent_fixture_implemented": false,
+    "raw_archive_implemented": false,
+    "derived_pipeline_implemented": false,
+    "restore_proof_implemented": false,
+    "plugin_contract_implemented": false,
+    "remote_push": false,
+    "next_task": "S09-P2-T2"
+  }
+}

@@ -20,6 +20,13 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+from memory_atlas_cli.generic_agent_read_adapter import (
+    CONTRACT_PATH as GENERIC_AGENT_READ_ADAPTER_CONTRACT_PATH,
+    GenericAgentReadError,
+    GenericAgentReadResult,
+    generic_agent_export_guard,
+    read_generic_agent_export,
+)
 from memory_atlas_cli.raw_ledger import RawLedgerError, RawLedgerPostWriteError, source_stat_guard
 from memory_atlas_cli.source_registry import SourceRegistryError, validate_portable_identifier
 from privacy_guard import PrivacyViolation, assert_no_credentials
@@ -369,6 +376,7 @@ def sync_rows(
     source_id: str = SOURCE_ID,
     source_path: Path | None = None,
     source_inventory: dict[str, Any] | None = None,
+    source_snapshot: GenericAgentReadResult | None = None,
 ) -> dict[str, Any]:
     validate_source_identity(source_id, safe_agent)
     if not rows:
@@ -401,7 +409,10 @@ def sync_rows(
             raw_ledger = record_raw_ledger(database_dir, generated_at)
 
         try:
-            if source_path is not None and source_inventory is not None:
+            if source_snapshot is not None:
+                with generic_agent_export_guard(source_snapshot):
+                    commit_raw_and_ledger()
+            elif source_path is not None and source_inventory is not None:
                 with source_stat_guard(source_path, expected=source_inventory):
                     commit_raw_and_ledger()
             else:
@@ -449,6 +460,21 @@ def sync_rows(
     if len(rows) == 1:
         result["event_id"] = rows[0]["event_id"]
         result["source_format"] = rows[0].get("source_format") or "json_event"
+    if source_snapshot is not None:
+        adapter_summary = source_snapshot.public_summary()
+        result.update({
+            "adapter_contract": GENERIC_AGENT_READ_ADAPTER_CONTRACT_PATH.as_posix(),
+            "adapter_source_formats": adapter_summary["source_formats"],
+            "adapter_format_counts": adapter_summary["format_counts"],
+            "source_kind": adapter_summary["source_kind"],
+            "source_file_count": adapter_summary["source_file_count"],
+            "skipped_source_file_count": adapter_summary["skipped_file_count"],
+            "source_read_only": True,
+            "adapter_writes_files": False,
+            "source_content_in_output": False,
+            "local_absolute_path_in_output": False,
+            "sqlite_open_mode": adapter_summary["sqlite_open_mode"],
+        })
     return result
 
 
@@ -461,19 +487,32 @@ def sync_future_agent(
     source_id: str = SOURCE_ID,
 ) -> dict[str, Any]:
     safe_agent = safe_name(agent_id)
-    with source_stat_guard(input_path) as source_inventory:
-        source_bytes = input_path.read_bytes()
-        events = load_input(input_path)
-    rows = [normalize_event(safe_agent, event, source_id=source_id) for event in events]
+    try:
+        source_snapshot = read_generic_agent_export(database_dir, input_path)
+    except GenericAgentReadError as exc:
+        raise SourceInputError(exc.code) from exc
+    resolved_database = database_dir.resolve()
+    if (
+        not dry_run
+        and source_snapshot.source_kind == "directory"
+        and (
+            resolved_database == source_snapshot.source_path
+            or source_snapshot.source_path in resolved_database.parents
+        )
+    ):
+        raise SourceInputError("source_directory_contains_database_output")
+    rows = [
+        normalize_event(safe_agent, record.payload, source_id=source_id)
+        for record in source_snapshot.records
+    ]
     return sync_rows(
         database_dir,
         safe_agent,
         rows,
         dry_run,
-        source_sha256=hashlib.sha256(source_bytes).hexdigest(),
+        source_sha256=source_snapshot.source_sha256,
         source_id=source_id,
-        source_path=input_path,
-        source_inventory=source_inventory,
+        source_snapshot=source_snapshot,
     )
 
 

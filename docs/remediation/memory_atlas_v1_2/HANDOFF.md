@@ -1,5 +1,35 @@
 # Memory Atlas v1.2 Remediation Handoff
 
+> **Current v1.2.1 note (2026-07-17 12:50 +10:00):** The Task Pack is now
+> `64/149` complete locally. This run completes only `S09-P2-T1`; S09-P2 is
+> `1/3` and remains in progress, while `S09-P2-T2` is next-run only. One
+> registry-bound reader now covers explicit files and deterministic recursive
+> directories containing JSON, JSONL or self-contained SQLite exports. SQLite
+> opens with `mode=ro&immutable=1` plus `query_only`; sidecars and BLOBs are
+> rejected. Trees, files, bytes, records, tables, columns, scalars and JSON
+> depth are bounded. Full tree metadata plus supported-file hashes are verified
+> before return and before/after downstream append-only commit. Symlinks,
+> special files, invalid/non-object records, mutation, limits and database
+> output overlapping the source tree fail closed. Unsupported directory files
+> are skipped without reads. CLI output contains counts/digests only and never
+> source records or local paths. Test-first ModuleNotFoundError is closed by
+> 14/14 dedicated tests; generic compatibility is 56/56 and Codex cross-source
+> follow-up is 56/56. py_compile passes; ruff was unavailable in the current
+> global Python runtime and was not claimed. validate:fast is 6/6 in 73.960
+> seconds. Final validate:sync is 10/10 in 482.041 seconds, including a
+> 109.872-second sync unit step and a 346.132-second complete credential scan,
+> with raw mutation, remote push and shell all false. The first sync profile
+> passed new unit/layout/three-source dry-run paths and failed only on a copied
+> historical Codex archive part hash. Canonical Codex and known-empty ChatGPT
+> parts were restored from HEAD only in the isolated validation copy; shared
+> source data was not changed. T2 future-Agent fixture/raw/derived/restore/
+> main-push and T3 plugin work remain unimplemented. Owner stopped export work,
+> so `S08-P3-T1` remains deferred/open and uncounted. No export, browser, Mail,
+> download, production raw mutation, fetch, push, deploy, branch/PR,
+> merge/rebase or shared cleanup occurred. Run only `S09-P2-T2` next; do not
+> upload until all 149 Tasks plus final review close, and never push the current
+> divergent local line directly.
+>
 > **Current v1.2.1 note (2026-07-17 11:52 +10:00):** The Task Pack is now
 > `63/149` complete locally. This run completes only `S09-P1-T3`; S09-P1 is
 > `3/3` and complete, while `S09-P2-T1` is next-run only. The new builder

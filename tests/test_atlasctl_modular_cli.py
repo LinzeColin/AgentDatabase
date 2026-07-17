@@ -36,6 +36,7 @@ EXPECTED_MODULES = {
     "chatgpt_notification_connector.py",
     "chatgpt_canonical_events.py",
     "chatgpt_derived.py",
+    "generic_agent_read_adapter.py",
 }
 
 EXPECTED_EXPORTS = {
@@ -85,7 +86,7 @@ STABLE_DRY_RUNS = {
     ("sync", "--source", "codex", "--dry-run"):
         "99d2ada2aba2d6c79b6de4096eba5d7132d95a5c94f3c2edffd7a68f3e15230b",
     ("sync", "--source", "future-agent", "--dry-run"):
-        "9e6f64a060139420c38c9611048efa9848860135ca2fa514329f167de6118c75",
+        "437d2c4004483d937cdffd5853c7ebacd2abd1526c969a44a6460e169ea23150",
     ("build-atlas", "--dry-run"):
         "ec6fa449014356a6c810e08c45b197881c2e3f0a98d9ffe3e31d43fa3ed5660b",
     ("generate-personalization-prompt", "--dry-run"):

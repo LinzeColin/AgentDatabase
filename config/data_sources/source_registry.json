@@ -248,7 +248,10 @@
       "raw_paths": [
         "**/*.json",
         "**/*.jsonl",
-        "**/*.md"
+        "**/*.md",
+        "**/*.db",
+        "**/*.sqlite",
+        "**/*.sqlite3"
       ],
       "credential_exclusions": {
         "policy": "credentials_not_transcript",
@@ -257,9 +260,21 @@
       },
       "parser": {
         "entrypoint": "scripts/sync_future_agent_data.py",
+        "read_adapter_entrypoint": "scripts/inspect_memory_atlas_generic_agent_export.py",
+        "read_adapter_contract_ref": "config/data_sources/generic_agent_read_adapter.json",
+        "read_adapter_model_ref": "机器治理/参数与公式/generic_agent_read_adapter.v1_2_1_s09_p2_t1.json",
+        "read_adapter_formats": [
+          "file",
+          "directory",
+          "json",
+          "jsonl",
+          "sqlite"
+        ],
         "input_formats": [
           "agent_event_json",
           "agent_event_jsonl",
+          "agent_event_sqlite",
+          "agent_export_directory",
           "agent_report_markdown"
         ]
       },
@@ -302,7 +317,11 @@
       },
       "raw_paths": [
         "**/*.md",
-        "**/*.json"
+        "**/*.json",
+        "**/*.jsonl",
+        "**/*.db",
+        "**/*.sqlite",
+        "**/*.sqlite3"
       ],
       "credential_exclusions": {
         "policy": "credentials_not_transcript",
@@ -311,9 +330,22 @@
       },
       "parser": {
         "entrypoint": "scripts/sync_future_agent_data.py",
+        "read_adapter_entrypoint": "scripts/inspect_memory_atlas_generic_agent_export.py",
+        "read_adapter_contract_ref": "config/data_sources/generic_agent_read_adapter.json",
+        "read_adapter_model_ref": "机器治理/参数与公式/generic_agent_read_adapter.v1_2_1_s09_p2_t1.json",
+        "read_adapter_formats": [
+          "file",
+          "directory",
+          "json",
+          "jsonl",
+          "sqlite"
+        ],
         "input_formats": [
           "agent_report_markdown",
-          "agent_event_json"
+          "agent_event_json",
+          "agent_event_jsonl",
+          "agent_event_sqlite",
+          "agent_export_directory"
         ]
       },
       "schedule": {

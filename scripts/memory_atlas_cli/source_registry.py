@@ -68,6 +68,22 @@ CHATGPT_DERIVED_MODEL_PATH = Path(
 )
 CHATGPT_DERIVED_ENTRYPOINT = Path("scripts/build_memory_atlas_chatgpt_derived.py")
 CHATGPT_COMPLETE_ARCHIVE_ROOT = Path("data/raw_archives/chatgpt")
+GENERIC_AGENT_READ_ADAPTER_CONTRACT_PATH = Path(
+    "config/data_sources/generic_agent_read_adapter.json"
+)
+GENERIC_AGENT_READ_ADAPTER_MODEL_PATH = Path(
+    "机器治理/参数与公式/generic_agent_read_adapter.v1_2_1_s09_p2_t1.json"
+)
+GENERIC_AGENT_READ_ADAPTER_ENTRYPOINT = Path(
+    "scripts/inspect_memory_atlas_generic_agent_export.py"
+)
+GENERIC_AGENT_READ_ADAPTER_FORMATS = [
+    "file",
+    "directory",
+    "json",
+    "jsonl",
+    "sqlite",
+]
 CODEX_DISCOVERY_CONTRACT_PATH = Path("config/data_sources/codex_source_discovery.json")
 CODEX_PUBLIC_RAW_ARCHIVE_CONTRACT_PATH = Path(
     "config/data_sources/codex_public_raw_archive.json"
@@ -514,9 +530,39 @@ def _validate_source(source: dict[str, Any], database_dir: Path, push_defaults: 
             raise SourceRegistryError("codex scheduler entrypoint does not exist")
         if not (database_dir / scheduler_profile_ref).is_file():
             raise SourceRegistryError("codex scheduler profile does not exist")
-    elif any(
-        key in parser
-        for key in (
+    else:
+        read_adapter_entrypoint = _repo_relative_path(
+            parser.get("read_adapter_entrypoint"),
+            f"{source_id}.parser.read_adapter_entrypoint",
+            ("scripts/",),
+        )
+        read_adapter_contract_ref = _repo_relative_path(
+            parser.get("read_adapter_contract_ref"),
+            f"{source_id}.parser.read_adapter_contract_ref",
+            ("config/data_sources/",),
+        )
+        read_adapter_model_ref = _repo_relative_path(
+            parser.get("read_adapter_model_ref"),
+            f"{source_id}.parser.read_adapter_model_ref",
+            ("机器治理/参数与公式/",),
+        )
+        read_adapter_formats = _string_list(
+            parser.get("read_adapter_formats"),
+            f"{source_id}.parser.read_adapter_formats",
+        )
+        if (
+            read_adapter_entrypoint != GENERIC_AGENT_READ_ADAPTER_ENTRYPOINT.as_posix()
+            or read_adapter_contract_ref
+            != GENERIC_AGENT_READ_ADAPTER_CONTRACT_PATH.as_posix()
+            or read_adapter_model_ref != GENERIC_AGENT_READ_ADAPTER_MODEL_PATH.as_posix()
+            or read_adapter_formats != GENERIC_AGENT_READ_ADAPTER_FORMATS
+        ):
+            raise SourceRegistryError(
+                f"{source_id}.parser must bind the canonical generic read adapter"
+            )
+        if any(
+            key in parser
+            for key in (
             "raw_archive_entrypoint",
             "raw_archive_contract_ref",
             "sync_state_entrypoint",
@@ -531,9 +577,11 @@ def _validate_source(source: dict[str, Any], database_dir: Path, push_defaults: 
             "scheduler_entrypoint",
             "scheduler_profile_ref",
             "complete_archive_root",
-        )
-    ):
-        raise SourceRegistryError(f"{source_id}.parser cannot claim a canonical raw archive adapter")
+            )
+        ):
+            raise SourceRegistryError(
+                f"{source_id}.parser cannot claim a canonical raw archive adapter"
+            )
 
     schedule = _mapping(source.get("schedule"), f"{source_id}.schedule")
     if source_type == "codex_local":

@@ -1610,6 +1610,38 @@ features:
       - "EVID-MA-V121-S09-P1-T3-TEST"
       - "EVID-MA-V121-S09-P1-T3-PROOF"
       - "EVID-MA-V121-S09-P1-T3-REVIEW"
+  - feature_id: "FEAT-MA-V121-S09-P2-T1"
+    name: "Memory Atlas bounded read-only generic Agent adapter"
+    description: "S09-P2-T1 defines one registry-bound reader for explicit files and deterministic recursive directories containing JSON, JSONL or self-contained SQLite exports. It opens SQLite with mode=ro&immutable=1 and query_only, accepts object records only, bounds trees/files/bytes/records/schema/scalars, and revalidates full tree metadata plus supported-file hashes before return and before/after downstream commit. Symlinks, special files, sidecars, BLOBs, mutation, bounds drift and output/source overlap fail closed. CLI summaries expose counts and digests only, never source records or local paths. T2 fixture/raw/derived/restore and T3 plugin work remain unimplemented."
+    status: "active"
+    fact_level: "VERIFIED"
+    code_refs:
+      - "OpenAIDatabase/scripts/memory_atlas_cli/generic_agent_read_adapter.py"
+      - "OpenAIDatabase/scripts/inspect_memory_atlas_generic_agent_export.py"
+      - "OpenAIDatabase/scripts/sync_future_agent_data.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/source_registry.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/sync.py"
+      - "OpenAIDatabase/tests/test_memory_atlas_generic_agent_read_adapter.py"
+      - "OpenAIDatabase/AGENTS.md"
+    config_refs:
+      - "OpenAIDatabase/config/data_sources/generic_agent_read_adapter.json"
+      - "OpenAIDatabase/config/data_sources/source_registry.json"
+      - "OpenAIDatabase/机器治理/参数与公式/generic_agent_read_adapter.v1_2_1_s09_p2_t1.json"
+    source_refs:
+      - "OpenAIDatabase/机器治理/证据与日志/generic_agent_read_adapter/generic_agent_read_adapter.v1_2_1_s09_p2_t1.json"
+      - "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s09_p2_t1_generic_agent_read_adapter_review.md"
+    owner_actions:
+      - "Use one registered --input file or directory. Active SQLite databases with -wal/-shm/-journal sidecars must first be exported as a self-contained copy. Inspect only count/digest summaries. Run S09-P2-T2 separately to add the first future-Agent raw/parser/derived/restore fixture."
+    test_refs:
+      - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_generic_agent_read_adapter -q"
+      - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_source_registry OpenAIDatabase.tests.test_s04p2_codex_agent_sync OpenAIDatabase.tests.test_memory_atlas_r7_public_raw OpenAIDatabase.tests.test_atlasctl_modular_cli -q"
+      - "npm run validate:fast --prefix OpenAIDatabase/apps/memory-atlas"
+      - "npm run validate:sync --prefix OpenAIDatabase/apps/memory-atlas"
+    evidence_refs:
+      - "EVID-MA-V121-S09-P2-T1-CONTRACT"
+      - "EVID-MA-V121-S09-P2-T1-TEST"
+      - "EVID-MA-V121-S09-P2-T1-PROOF"
+      - "EVID-MA-V121-S09-P2-T1-REVIEW"
 models:
   -
     model_id: "MOD-001"
@@ -6205,4 +6237,24 @@ evidence_refs:
     evidence_id: "EVID-MA-V121-S09-P1-T3-REVIEW"
     kind: "review"
     ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s09_p1_t3_chatgpt_derived_review.md"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S09-P2-T1-CONTRACT"
+    kind: "config"
+    ref: "OpenAIDatabase/config/data_sources/generic_agent_read_adapter.json"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S09-P2-T1-TEST"
+    kind: "test"
+    ref: "OpenAIDatabase/tests/test_memory_atlas_generic_agent_read_adapter.py"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S09-P2-T1-PROOF"
+    kind: "artifact"
+    ref: "OpenAIDatabase/机器治理/证据与日志/generic_agent_read_adapter/generic_agent_read_adapter.v1_2_1_s09_p2_t1.json"
+    fact_level: "VERIFIED"
+  -
+    evidence_id: "EVID-MA-V121-S09-P2-T1-REVIEW"
+    kind: "review"
+    ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s09_p2_t1_generic_agent_read_adapter_review.md"
     fact_level: "EXTRACTED"

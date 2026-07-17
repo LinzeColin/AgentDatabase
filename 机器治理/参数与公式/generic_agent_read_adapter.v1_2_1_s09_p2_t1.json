@@ -1,0 +1,66 @@
+{
+  "schema_version": "memory_atlas.generic_agent_read_adapter_model.v1_2_1_s09_p2_t1",
+  "task_id": "S09-P2-T1",
+  "acceptance_id": "ACC-MA-V121-S09-P2-T1",
+  "contract_ref": "config/data_sources/generic_agent_read_adapter.json",
+  "model": {
+    "name": "bounded_read_only_standard_agent_export",
+    "source_shapes": [
+      "file",
+      "directory"
+    ],
+    "formats": [
+      "json",
+      "jsonl",
+      "sqlite"
+    ],
+    "directory_order": "relative_path_utf8_lexical",
+    "directory_snapshot": "all_entries_plus_supported_content_hashes",
+    "sqlite_open_mode": "mode=ro&immutable=1",
+    "sqlite_record_modes": [
+      "single_record_json_column",
+      "direct_json_scalar_columns"
+    ],
+    "source_digest": "sha256(canonical(source_kind,relative_path,format,size,content_sha256))",
+    "record_provenance": [
+      "source_format",
+      "relative_path_sha256",
+      "ordinal",
+      "sqlite_table_sha256"
+    ]
+  },
+  "parameters": {
+    "read_chunk_bytes": 1048576,
+    "max_contract_bytes": 131072,
+    "max_tree_entries": 4096,
+    "max_source_files": 1024,
+    "max_file_bytes": 67108864,
+    "max_total_bytes": 536870912,
+    "max_records": 200000,
+    "max_sqlite_tables": 128,
+    "max_sqlite_columns": 256,
+    "max_scalar_utf8_bytes": 1048576,
+    "max_json_depth": 64,
+    "follow_symlinks": false,
+    "sqlite_query_only": true,
+    "unsupported_directory_files_read": false,
+    "source_content_in_cli_output": false
+  },
+  "risk_controls": {
+    "source_mutation": "fail_closed_before_return_and_before_after_downstream_commit",
+    "symlink_or_special_file": "fail_closed",
+    "sqlite_sidecar": "fail_closed_require_self_contained_export",
+    "sqlite_blob": "fail_closed",
+    "record_or_size_limit": "fail_closed",
+    "private_runtime_path": "never_serialize",
+    "remote_action": "forbidden"
+  },
+  "phase_boundary": {
+    "future_agent_fixture_implemented": false,
+    "raw_archive_implemented": false,
+    "derived_pipeline_implemented": false,
+    "restore_proof_implemented": false,
+    "plugin_contract_implemented": false,
+    "next_task": "S09-P2-T2"
+  }
+}

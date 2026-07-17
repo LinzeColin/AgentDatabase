@@ -27,8 +27,8 @@
     "deleted_python_test_count": 2,
     "retained_validator_count": 39,
     "retained_baseline_python_test_count": 49,
-    "added_python_test_count": 33,
-    "current_python_test_count": 82
+    "added_python_test_count": 34,
+    "current_python_test_count": 83
   },
   "profile_commands": {
     "fast": "npm run validate:fast",
@@ -63,6 +63,7 @@
     "tests/test_memory_atlas_chatgpt_export_parser.py",
     "tests/test_memory_atlas_chatgpt_canonical_events.py",
     "tests/test_memory_atlas_chatgpt_derived.py",
+    "tests/test_memory_atlas_generic_agent_read_adapter.py",
     "tests/test_memory_atlas_public_raw_layout.py",
     "tests/test_memory_atlas_credential_exclusion.py",
     "tests/test_memory_atlas_raw_ledger.py",
@@ -3570,6 +3571,16 @@
       ],
       "reason": "Retained because it proves S09-P1-T3 strict contract/model drift rejection, validated raw/canonical dual provenance on every facet/topic/activity/Universe cluster, latest-version projection, complete version activity history, replay byte idempotency, tamper fail closure, CLI dispatch and normal sync integration without persisting message bodies.",
       "current_dependency": "S09-P1-T3 validate:sync, ChatGPT derived-input regression and full Python suites"
+    },
+    {
+      "path": "tests/test_memory_atlas_generic_agent_read_adapter.py",
+      "risk_bindings": [
+        "data_integrity",
+        "release_risk",
+        "runner_contract"
+      ],
+      "reason": "Retained because it proves S09-P2-T1 read-only file/directory/JSONL/JSON/SQLite coverage, deterministic bounded enumeration, immutable SQLite query mode, no content/path echo, source snapshot guards, symlink/sidecar/blob/limit fail closure, registry binding and legacy generic-agent compatibility.",
+      "current_dependency": "S09-P2-T1 validate:sync, generic Agent read-adapter regression and full Python suites"
     },
     {
       "path": "tests/test_memory_atlas_public_raw_layout.py",
