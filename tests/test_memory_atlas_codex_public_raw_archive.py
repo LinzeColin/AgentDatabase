@@ -123,6 +123,7 @@ def make_database_fixture(parent: Path) -> Path:
         "sync_chatgpt_memory_data.py",
         "sync_codex_memory_data.py",
         "sync_future_agent_data.py",
+        "sync_generic_agent_plugin.py",
     ):
         (scripts / name).write_text("# fixture\n", encoding="utf-8")
     raw_archive_entrypoint = scripts / "memory_atlas_cli/codex_public_raw_archive.py"
@@ -151,6 +152,12 @@ def make_database_fixture(parent: Path) -> Path:
     (scripts / "build_memory_atlas_codex_derived.py").write_text(
         "# fixture\n",
         encoding="utf-8",
+    )
+    plugin_model = database / "机器治理/参数与公式/generic_agent_plugin.v1_2_1_s09_p2_t3.json"
+    plugin_model.parent.mkdir(parents=True)
+    shutil.copy2(
+        ROOT / "机器治理/参数与公式/generic_agent_plugin.v1_2_1_s09_p2_t3.json",
+        plugin_model,
     )
     return database
 

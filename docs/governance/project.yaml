@@ -1676,6 +1676,42 @@ features:
       - "EVID-MA-V121-S09-P2-T2-TEST"
       - "EVID-MA-V121-S09-P2-T2-PROOF"
       - "EVID-MA-V121-S09-P2-T2-REVIEW"
+  - feature_id: "FEAT-MA-V121-S09-P2-T3"
+    name: "Memory Atlas bounded external plugin envelope"
+    description: "S09-P2-T3 permits non-standard producers only through a strict, bounded, registry-bound JSON envelope created outside Memory Atlas. The host does not import or execute arbitrary plugin code. It validates exact source/plugin identity and schema, recomputes canonical-event hashes, labels source-artifact hashes as producer claims, revalidates the source snapshot, and exclusively owns normalization, credential exclusion, public sanitization, append-only raw, immutable ledger, derived writes and final-delivery-only main policy. Unknown fields, duplicate IDs, invalid roles, identity/hash drift, limits, production fixture apply and plugin push attempts fail closed."
+    status: "active"
+    fact_level: "VERIFIED"
+    code_refs:
+      - "OpenAIDatabase/scripts/memory_atlas_cli/generic_agent_plugin.py"
+      - "OpenAIDatabase/scripts/sync_generic_agent_plugin.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/source_registry.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/parser.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/sync.py"
+      - "OpenAIDatabase/scripts/sync_future_agent_data.py"
+      - "OpenAIDatabase/tests/test_memory_atlas_generic_agent_plugin.py"
+      - "OpenAIDatabase/tests/test_memory_atlas_codex_public_raw_archive.py"
+      - "OpenAIDatabase/AGENTS.md"
+    config_refs:
+      - "OpenAIDatabase/config/data_sources/generic_agent_plugin.json"
+      - "OpenAIDatabase/config/data_sources/source_registry.json"
+      - "OpenAIDatabase/机器治理/参数与公式/generic_agent_plugin.v1_2_1_s09_p2_t3.json"
+    source_refs:
+      - "OpenAIDatabase/tests/fixtures/memory_atlas/generic_agent_plugin/example.plugin-envelope.json"
+      - "OpenAIDatabase/机器治理/证据与日志/generic_agent_plugin/generic_agent_plugin.v1_2_1_s09_p2_t3.json"
+      - "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s09_p2_t3_generic_agent_plugin_review.md"
+    owner_actions:
+      - "Keep any non-standard transformer outside Memory Atlas and emit only the documented envelope. Never add an executable/module/network/direct-write capability to registry. Treat source-artifact metadata as a producer claim and inspect host raw/ledger evidence. Run S09-P3-T1 separately for the unified source-state registry."
+    test_refs:
+      - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_generic_agent_plugin -q"
+      - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_generic_agent_read_adapter OpenAIDatabase.tests.test_memory_atlas_generic_agent_fixture OpenAIDatabase.tests.test_memory_atlas_source_registry OpenAIDatabase.tests.test_memory_atlas_public_raw_layout -q"
+      - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_codex_public_raw_archive OpenAIDatabase.tests.test_memory_atlas_codex_restore_proof -q"
+      - "npm run validate:fast --prefix OpenAIDatabase/apps/memory-atlas"
+      - "npm run validate:sync --prefix OpenAIDatabase/apps/memory-atlas"
+    evidence_refs:
+      - "EVID-MA-V121-S09-P2-T3-CONTRACT"
+      - "EVID-MA-V121-S09-P2-T3-TEST"
+      - "EVID-MA-V121-S09-P2-T3-PROOF"
+      - "EVID-MA-V121-S09-P2-T3-REVIEW"
 models:
   -
     model_id: "MOD-001"
@@ -6311,4 +6347,24 @@ evidence_refs:
     evidence_id: "EVID-MA-V121-S09-P2-T2-REVIEW"
     kind: "review"
     ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s09_p2_t2_generic_agent_fixture_review.md"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S09-P2-T3-CONTRACT"
+    kind: "config"
+    ref: "OpenAIDatabase/config/data_sources/generic_agent_plugin.json"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S09-P2-T3-TEST"
+    kind: "test"
+    ref: "OpenAIDatabase/tests/test_memory_atlas_generic_agent_plugin.py"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S09-P2-T3-PROOF"
+    kind: "artifact"
+    ref: "OpenAIDatabase/机器治理/证据与日志/generic_agent_plugin/generic_agent_plugin.v1_2_1_s09_p2_t3.json"
+    fact_level: "VERIFIED"
+  -
+    evidence_id: "EVID-MA-V121-S09-P2-T3-REVIEW"
+    kind: "review"
+    ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s09_p2_t3_generic_agent_plugin_review.md"
     fact_level: "EXTRACTED"

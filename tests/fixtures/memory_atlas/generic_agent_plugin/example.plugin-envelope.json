@@ -1,0 +1,41 @@
+{
+  "schema_version": "memory_atlas.generic_agent_plugin_envelope.v1",
+  "source_id": "nonstandard-agent-example",
+  "plugin_id": "nonstandard-envelope-example",
+  "source_format": "example-delimited-v1",
+  "source_artifact": {
+    "byte_size": 34,
+    "sha256": "421a8eab580a8d1f3438485a7397a37bc580df884f1594d57838c2d06fa0a248"
+  },
+  "event_count": 2,
+  "events_sha256": "9d64fff26281b1b2f9d696c1271781a3844949bef5efa053f1a14446ccb67632",
+  "canonical_events": [
+    {
+      "event_id": "plugin-roadmap-review",
+      "title": "Plugin roadmap review",
+      "messages": [
+        {
+          "message_id": "m1",
+          "role": "assistant",
+          "text": "Mapped a pipe-delimited export into the canonical envelope."
+        },
+        {
+          "message_id": "m2",
+          "role": "user",
+          "text": "Keep the import recoverable and subject to host gates."
+        }
+      ]
+    },
+    {
+      "event_id": "synthetic-rollout-check",
+      "title": "Synthetic non-standard source",
+      "messages": [
+        {
+          "message_id": "m3",
+          "role": "assistant",
+          "text": "Validated the bounded envelope before any append-only write."
+        }
+      ]
+    }
+  ]
+}

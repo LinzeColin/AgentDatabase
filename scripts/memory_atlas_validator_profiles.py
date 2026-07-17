@@ -106,6 +106,7 @@ _AUDITED_STEP_POLICIES: dict[tuple[str, str], tuple[str, tuple[str, ...]]] = {
             "tests.test_memory_atlas_chatgpt_derived",
             "tests.test_memory_atlas_generic_agent_read_adapter",
             "tests.test_memory_atlas_generic_agent_fixture",
+            "tests.test_memory_atlas_generic_agent_plugin",
             "tests.test_memory_atlas_public_raw_layout",
             "tests.test_memory_atlas_raw_ledger",
             "tests.test_memory_atlas_archive_chunking",

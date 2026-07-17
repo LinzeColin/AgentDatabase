@@ -1,0 +1,79 @@
+{
+  "schema_version": "memory_atlas.generic_agent_plugin.v1_2_1_s09_p2_t3",
+  "task_id": "S09-P2-T3",
+  "acceptance_id": "ACC-MA-V121-S09-P2-T3",
+  "entrypoint": "scripts/sync_generic_agent_plugin.py",
+  "model_ref": "机器治理/参数与公式/generic_agent_plugin.v1_2_1_s09_p2_t3.json",
+  "registry_ref": "config/data_sources/source_registry.json",
+  "protocol": {
+    "schema_version": "memory_atlas.generic_agent_plugin_envelope.v1",
+    "transport": "external_file_only",
+    "encoding": "utf-8-json",
+    "event_payload": "canonical_events",
+    "events_hash": "canonical_json_sha256",
+    "source_artifact_trust": "producer_claim_only"
+  },
+  "canonical_event": {
+    "required_keys": [
+      "event_id",
+      "title",
+      "messages"
+    ],
+    "message_required_keys": [
+      "message_id",
+      "role",
+      "text"
+    ],
+    "roles": [
+      "assistant",
+      "developer",
+      "system",
+      "tool",
+      "unknown",
+      "user"
+    ],
+    "unknown_keys": "fail_closed"
+  },
+  "limits": {
+    "max_envelope_bytes": 67108864,
+    "max_events": 10000,
+    "max_messages_per_event": 10000,
+    "max_total_messages": 200000,
+    "max_identifier_chars": 128,
+    "max_title_utf8_bytes": 65536,
+    "max_message_utf8_bytes": 1048576,
+    "max_source_artifact_bytes": 9223372036854775807
+  },
+  "host_gates": {
+    "read_adapter_contract_ref": "config/data_sources/generic_agent_read_adapter.json",
+    "credential_exclusion_contract_ref": "config/data_sources/credential_exclusion.json",
+    "raw_ledger_contract_ref": "config/data_sources/raw_ledger.json",
+    "raw_root_template": "data/public_raw/agents/{source_id}",
+    "derived_output_template": "data/derived/agents/{source_id}/agent_sync_summary.json",
+    "host_owned_write_pipeline": true,
+    "plugin_direct_write_api": false,
+    "push_policy": {
+      "mode": "final_delivery_only",
+      "branch": "main",
+      "open_pr": false,
+      "force": false,
+      "remote_race_stop": true
+    }
+  },
+  "safety": {
+    "arbitrary_plugin_code_execution": false,
+    "network_access": false,
+    "shell": false,
+    "source_read_only": true,
+    "envelope_outside_database_on_apply": true,
+    "source_content_in_cli_output": false,
+    "local_absolute_path_in_cli_output": false
+  },
+  "phase_boundary": {
+    "real_third_party_plugin_registered": false,
+    "source_state_registry_implemented": false,
+    "multi_source_restore_implemented": false,
+    "remote_push": false,
+    "next_task": "S09-P3-T1"
+  }
+}

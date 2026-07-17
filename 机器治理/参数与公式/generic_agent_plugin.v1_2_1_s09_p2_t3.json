@@ -1,0 +1,64 @@
+{
+  "schema_version": "memory_atlas.generic_agent_plugin_model.v1_2_1_s09_p2_t3",
+  "task_id": "S09-P2-T3",
+  "acceptance_id": "ACC-MA-V121-S09-P2-T3",
+  "purpose": "Allow a non-standard source to provide canonical events without granting plugin code access to Memory Atlas files, credentials, raw publication or Git.",
+  "trust_model": {
+    "plugin_execution": "external_to_memory_atlas",
+    "plugin_output": "untrusted_bounded_envelope",
+    "source_artifact_hash": "producer_claim_only",
+    "memory_atlas_host": "sole_owner_of_validation_and_writes"
+  },
+  "protocol": {
+    "transport": "external_file_only",
+    "schema_version": "memory_atlas.generic_agent_plugin_envelope.v1",
+    "identity_binding": "registry_source_id_plus_plugin_id",
+    "integrity_binding": "actual_envelope_sha256_plus_canonical_events_sha256",
+    "unknown_fields": "fail_closed"
+  },
+  "parameters": {
+    "max_envelope_bytes": 67108864,
+    "max_events": 10000,
+    "max_messages_per_event": 10000,
+    "max_total_messages": 200000,
+    "max_identifier_chars": 128,
+    "max_title_utf8_bytes": 65536,
+    "max_message_utf8_bytes": 1048576,
+    "hash_algorithm": "sha256"
+  },
+  "host_pipeline": {
+    "read": "generic_agent_read_adapter_read_only_snapshot",
+    "normalize": "strict_canonical_event_schema",
+    "credential": "credentials_not_transcript_fail_before_write",
+    "raw": "append_only_public_raw",
+    "ledger": "immutable_raw_ledger",
+    "derived": "replaceable_agent_sync_summary",
+    "main": "final_delivery_only_main_no_pr_no_force_remote_race_stop"
+  },
+  "invariants": {
+    "plugin_code": "never_loaded_or_executed_by_memory_atlas",
+    "plugin_output": "data_only_exact_schema",
+    "source": "read_only_hash_verified_before_and_after_commit",
+    "writes": "host_owned_only",
+    "credential": "blocked_before_raw_commit",
+    "raw": "append_only_and_ledger_bound",
+    "main": "no_generic_or_plugin_direct_push_path",
+    "cli": "counts_hashes_and_relative_contract_refs_only"
+  },
+  "failure_policy": {
+    "contract_or_registry_drift": "fail_closed",
+    "identity_or_hash_mismatch": "fail_closed",
+    "unknown_or_oversize_event": "fail_closed",
+    "credential": "fail_closed_before_database_write",
+    "internal_or_symlink_envelope": "fail_closed",
+    "fixture_production_apply": "fail_closed",
+    "push_request": "canonical_codex_only_gate"
+  },
+  "phase_boundary": {
+    "real_third_party_plugin_registered": false,
+    "source_state_registry_implemented": false,
+    "multi_source_restore_implemented": false,
+    "remote_push": false,
+    "next_task": "S09-P3-T1"
+  }
+}

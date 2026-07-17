@@ -27,8 +27,8 @@
     "deleted_python_test_count": 2,
     "retained_validator_count": 39,
     "retained_baseline_python_test_count": 49,
-    "added_python_test_count": 35,
-    "current_python_test_count": 84
+    "added_python_test_count": 36,
+    "current_python_test_count": 85
   },
   "profile_commands": {
     "fast": "npm run validate:fast",
@@ -65,6 +65,7 @@
     "tests/test_memory_atlas_chatgpt_derived.py",
     "tests/test_memory_atlas_generic_agent_read_adapter.py",
     "tests/test_memory_atlas_generic_agent_fixture.py",
+    "tests/test_memory_atlas_generic_agent_plugin.py",
     "tests/test_memory_atlas_public_raw_layout.py",
     "tests/test_memory_atlas_credential_exclusion.py",
     "tests/test_memory_atlas_raw_ledger.py",
@@ -3592,6 +3593,16 @@
       ],
       "reason": "Retained because it proves S09-P2-T2 registry-only standard-source reuse, isolated synthetic raw/ledger/manifest/derived/archive/restore coverage, exact replay, archive-tamper failure, no path/content echo, production fixture-write rejection and zero-effect main-push gating.",
       "current_dependency": "S09-P2-T2 validate:sync, generic Agent fixture acceptance and full Python suites"
+    },
+    {
+      "path": "tests/test_memory_atlas_generic_agent_plugin.py",
+      "risk_bindings": [
+        "data_integrity",
+        "release_risk",
+        "runner_contract"
+      ],
+      "reason": "Retained because it proves S09-P2-T3 external-envelope-only plugin reuse, strict identity/schema/hash bounds, host-owned credential/raw-ledger/derived gates, replay, symlink/internal-path failure, no arbitrary code execution, production fixture rejection and zero-effect main-push gating.",
+      "current_dependency": "S09-P2-T3 validate:sync, generic Agent plugin contract acceptance and full Python suites"
     },
     {
       "path": "tests/test_memory_atlas_public_raw_layout.py",

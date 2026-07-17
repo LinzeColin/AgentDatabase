@@ -426,6 +426,89 @@
         "force": false,
         "remote_race_stop": true
       }
+    },
+    {
+      "source_id": "nonstandard-agent-example",
+      "source_type": "generic_agent",
+      "label": "Non-standard Agent plugin fixture",
+      "status": "fixture",
+      "discovery": {
+        "strategy": "ordered_candidates",
+        "candidates": [
+          {
+            "kind": "environment_variable",
+            "value": "MEMORY_ATLAS_NONSTANDARD_AGENT_ENVELOPE",
+            "target_argument": "--plugin-envelope"
+          },
+          {
+            "kind": "operator_argument",
+            "value": "--plugin-envelope"
+          }
+        ]
+      },
+      "raw_paths": [
+        "*.plugin-envelope.json"
+      ],
+      "credential_exclusions": {
+        "policy": "credentials_not_transcript",
+        "contract_ref": "config/data_sources/credential_exclusion.json",
+        "status": "active"
+      },
+      "parser": {
+        "entrypoint": "scripts/sync_future_agent_data.py",
+        "read_adapter_entrypoint": "scripts/inspect_memory_atlas_generic_agent_export.py",
+        "read_adapter_contract_ref": "config/data_sources/generic_agent_read_adapter.json",
+        "read_adapter_model_ref": "机器治理/参数与公式/generic_agent_read_adapter.v1_2_1_s09_p2_t1.json",
+        "read_adapter_formats": [
+          "file",
+          "directory",
+          "json",
+          "jsonl",
+          "sqlite"
+        ],
+        "input_formats": [
+          "memory_atlas.generic_agent_plugin_envelope.v1"
+        ],
+        "plugin": {
+          "mode": "external_envelope_only",
+          "plugin_id": "nonstandard-envelope-example",
+          "protocol": "memory_atlas.generic_agent_plugin_envelope.v1",
+          "host_entrypoint": "scripts/sync_generic_agent_plugin.py",
+          "contract_ref": "config/data_sources/generic_agent_plugin.json",
+          "model_ref": "机器治理/参数与公式/generic_agent_plugin.v1_2_1_s09_p2_t3.json",
+          "arbitrary_code_execution": false,
+          "host_owned_gates": [
+            "credential_exclusion",
+            "append_only_raw",
+            "raw_ledger",
+            "final_delivery_main"
+          ],
+          "push_policy": {
+            "mode": "final_delivery_only",
+            "branch": "main",
+            "open_pr": false,
+            "force": false,
+            "remote_race_stop": true
+          }
+        }
+      },
+      "schedule": {
+        "mode": "manual",
+        "frequency": "fixture_only",
+        "timezone": "UTC"
+      },
+      "state_path": "data/sync_state/agents/nonstandard-agent-example.json",
+      "archive_path": "data/public_raw/agents/nonstandard-agent-example",
+      "derived_outputs": [
+        "data/derived/agents/nonstandard-agent-example/agent_sync_summary.json"
+      ],
+      "push_policy": {
+        "mode": "final_delivery_only",
+        "branch": "main",
+        "open_pr": false,
+        "force": false,
+        "remote_race_stop": true
+      }
     }
   ],
   "canonical_event_contract": {

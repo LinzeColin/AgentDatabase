@@ -52,6 +52,11 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     future_input = sync.add_mutually_exclusive_group()
     future_input.add_argument("--input", type=Path)
     future_input.add_argument("--markdown-report", type=Path)
+    future_input.add_argument(
+        "--plugin-envelope",
+        type=Path,
+        help="Read a registry-bound external plugin envelope; Memory Atlas never executes plugin code.",
+    )
     sync.add_argument("--event-id")
 
     request_export = subparsers.add_parser(

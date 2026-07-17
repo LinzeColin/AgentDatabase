@@ -8,7 +8,7 @@ next_gate_id: "ACC.OpenAIDatabase.PAM1.0019"
 total_estimated_hours: 255
 completed_estimated_hours: 241
 taskpack_progress:
-  completed_tasks: 65
+  completed_tasks: 66
   total_tasks: 149
   delivery_state: "local_only_not_released"
 stages:
@@ -3121,7 +3121,7 @@ stages:
     person_goal: "把 ChatGPT 导出稳定解析为增量可追溯数据，并让后续 Agent 通过统一注册表自动备份。"
     status: "in_progress"
     estimated_hours: 9
-    estimated_pct: 44
+    estimated_pct: 67
     scope_override: "Owner deferred incomplete S08-P3 real-export work on 2026-07-17 and authorized parser development without declaring S08 complete."
     stop_conditions:
       - "解析器覆盖或修改 raw 文件"
@@ -3290,15 +3290,15 @@ stages:
       - phase_id: "MA-V121-S09-P2"
         name: "通用 Agent connector 框架"
         objective: "用 registry 驱动标准来源，并为非标准来源提供最小插件合同。"
-        status: "in_progress"
+        status: "completed"
         estimated_hours: 3
-        estimated_pct: 67
+        estimated_pct: 100
         stop_conditions:
           - "标准来源仍需复制整套 pipeline"
           - "plugin 绕过 S06 安全合同"
         stop_gate:
           gate_id: "ACC-MA-V121-S09-P2"
-          status: "open"
+          status: "passed"
           pass_conditions:
             - "标准格式新增来源优先只改 registry"
             - "至少一个 fixture 覆盖 raw、parser、derived 和 restore"
@@ -3307,6 +3307,8 @@ stages:
             - "EVID-MA-V121-S09-P2-T1-REVIEW"
             - "EVID-MA-V121-S09-P2-T2-PROOF"
             - "EVID-MA-V121-S09-P2-T2-REVIEW"
+            - "EVID-MA-V121-S09-P2-T3-PROOF"
+            - "EVID-MA-V121-S09-P2-T3-REVIEW"
         tasks:
           - task_id: "S09-P2-T1"
             name: "定义通用只读 Agent adapter"
@@ -3396,15 +3398,46 @@ stages:
           - task_id: "S09-P2-T3"
             name: "定义非标准来源最小 plugin contract"
             objective: "允许非标准格式接入但不能绕过 raw、credential 和 main gate。"
-            status: "planned"
+            status: "completed"
             estimated_hours: 1
-            estimated_pct: 0
+            estimated_pct: 100
             dependencies: ["S09-P2-T2"]
             acceptance_ids: ["ACC-MA-V121-S09-P2-T3"]
-            test_commands: []
-            evidence_refs: []
-            risks: ["插件获得绕过 credential 或 append-only gate 的路径"]
+            acceptance:
+              - acceptance_id: "ACC-MA-V121-S09-P2-T3"
+                description: "A non-standard producer can emit only a strict, bounded, registry-bound JSON envelope outside Memory Atlas. The host never imports or executes arbitrary plugin code, recomputes canonical-event hashes, treats source-artifact hashes as producer claims, revalidates the read-only source snapshot before and after commit, and exclusively owns normalization, credential exclusion, public sanitization, append-only raw, immutable ledger, derived writes and final-delivery-only main policy. Unknown fields, identity/hash drift, duplicate IDs, invalid roles, limits, production fixture apply and plugin main-push attempts fail closed."
+                evidence_refs:
+                  - "EVID-MA-V121-S09-P2-T3-CONTRACT"
+                  - "EVID-MA-V121-S09-P2-T3-TEST"
+                  - "EVID-MA-V121-S09-P2-T3-PROOF"
+                  - "EVID-MA-V121-S09-P2-T3-REVIEW"
+            test_commands:
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_generic_agent_plugin -q"
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_generic_agent_read_adapter OpenAIDatabase.tests.test_memory_atlas_generic_agent_fixture OpenAIDatabase.tests.test_memory_atlas_source_registry OpenAIDatabase.tests.test_s04p2_codex_agent_sync OpenAIDatabase.tests.test_memory_atlas_public_raw_layout OpenAIDatabase.tests.test_atlasctl_modular_cli -q"
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_codex_public_raw_archive OpenAIDatabase.tests.test_memory_atlas_codex_restore_proof OpenAIDatabase.tests.test_memory_atlas_source_registry -q"
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_validator_profiles OpenAIDatabase.tests.test_memory_atlas_test_value_audit OpenAIDatabase.tests.test_atlasctl_script_consolidation -q"
+              - "python3 -B -m py_compile OpenAIDatabase/scripts/memory_atlas_cli/generic_agent_plugin.py OpenAIDatabase/scripts/sync_generic_agent_plugin.py OpenAIDatabase/scripts/memory_atlas_cli/source_registry.py OpenAIDatabase/scripts/memory_atlas_cli/parser.py OpenAIDatabase/scripts/memory_atlas_cli/sync.py OpenAIDatabase/scripts/sync_future_agent_data.py"
+              - "ruff check OpenAIDatabase/scripts/memory_atlas_cli/generic_agent_plugin.py OpenAIDatabase/scripts/sync_generic_agent_plugin.py OpenAIDatabase/scripts/memory_atlas_cli/source_registry.py OpenAIDatabase/scripts/memory_atlas_cli/parser.py OpenAIDatabase/scripts/memory_atlas_cli/sync.py OpenAIDatabase/scripts/sync_future_agent_data.py OpenAIDatabase/tests/test_memory_atlas_generic_agent_plugin.py"
+              - "npm run validate:fast --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run validate:sync --prefix OpenAIDatabase/apps/memory-atlas"
+              - "python3 -B OpenAIDatabase/scripts/audit_memory_atlas_human_plane.py"
+              - "python3 -B OpenAIDatabase/scripts/audit_memory_atlas_test_value.py"
+              - "python3 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+            test_results:
+              - "Test-first failed with ModuleNotFoundError before implementation. Dedicated exact schema/identity/hash/bounds, credential, replay, source mutation, fixture production block, atlasctl and main-push gate regression passes 12/12."
+              - "Source registry/read adapter/fixture/public layout/atlasctl/S04 compatibility passes 61/61. Script consolidation/test-value/validator-profile support passes 35/35. Cross-boundary plugin/raw/credential/archive/restore/main regression passes 183/183."
+              - "py_compile and ruff check pass. validate:fast passes 6/6 in 24.277 seconds."
+              - "The first validate:sync unit step found one failure and 26 errors because a complete-registry Codex temporary database fixture omitted the newly registered plugin host stub and model. Production registry existence gates stayed strict; the fixture was completed and targeted compatibility passed 33/33. Final validate:sync passes 10/10 in 500.686 seconds, including a 136.561-second sync unit step and a 354.267-second credential scan; raw_mutation=false, remote_push=false and shell=false."
+            evidence_refs:
+              - "EVID-MA-V121-S09-P2-T3-CONTRACT"
+              - "EVID-MA-V121-S09-P2-T3-TEST"
+              - "EVID-MA-V121-S09-P2-T3-PROOF"
+              - "EVID-MA-V121-S09-P2-T3-REVIEW"
+            risks:
+              - "The contract proves a synthetic external-envelope boundary only; no real third-party source is connected."
+              - "Source-artifact digest and byte size remain explicitly producer_claim_only; host-verifiable trust starts at received envelope bytes and canonical events."
             rollback: "revert plugin interface; keep registry-only adapters."
+            current_result: "complete_local_only_66_of_149_external_envelope_only_no_arbitrary_plugin_code_host_owned_credential_raw_ledger_derived_main_gates_no_remote_upload"
       - phase_id: "MA-V121-S09-P3"
         name: "统一状态与恢复"
         objective: "统一 source cursor/state 并证明多来源可离线恢复。"

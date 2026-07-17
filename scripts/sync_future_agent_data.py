@@ -15,7 +15,6 @@ import json
 import os
 import re
 import subprocess
-import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -148,6 +147,7 @@ def build_sync_log_row(
     source_sha256: str,
     *,
     source_id: str = SOURCE_ID,
+    adapter_mode: str = ADAPTER_MODE,
 ) -> dict[str, Any]:
     head = git_head(database_dir)
     residual_risk = (
@@ -162,7 +162,7 @@ def build_sync_log_row(
         "task": "sync_future_agent_data",
         "source_id": source_id,
         "agent_id": safe_agent,
-        "adapter_mode": ADAPTER_MODE,
+        "adapter_mode": adapter_mode,
         "dry_run": False,
         "event_count": summary["event_count"],
         "message_count": summary["message_count"],
@@ -343,6 +343,7 @@ def build_summary(
     generated_at: str,
     *,
     source_id: str = SOURCE_ID,
+    adapter_mode: str = ADAPTER_MODE,
 ) -> dict[str, Any]:
     redaction_counts: dict[str, int] = {}
     for row in rows:
@@ -351,7 +352,7 @@ def build_summary(
         "schema_version": "memory_atlas_future_agent_sync_summary.v1",
         "source_id": source_id,
         "agent_id": agent_id,
-        "adapter_mode": ADAPTER_MODE,
+        "adapter_mode": adapter_mode,
         "generated_at": generated_at,
         "event_count": len(rows),
         "message_count": sum(int(row.get("message_count") or 0) for row in rows),
@@ -392,6 +393,7 @@ def sync_rows(
     source_inventory: dict[str, Any] | None = None,
     source_snapshot: GenericAgentReadResult | None = None,
     generated_at: str | None = None,
+    adapter_mode: str = ADAPTER_MODE,
 ) -> dict[str, Any]:
     validate_source_identity(source_id, safe_agent)
     if not rows:
@@ -404,7 +406,13 @@ def sync_rows(
     raw_payloads = [json.dumps(row, ensure_ascii=False, indent=2, sort_keys=True) + "\n" for row in rows]
     for relative_path, payload in zip(raw_paths, raw_payloads):
         require_public_raw_file_size(payload, relative_path.as_posix())
-    summary = build_summary(safe_agent, rows, generated_at, source_id=source_id)
+    summary = build_summary(
+        safe_agent,
+        rows,
+        generated_at,
+        source_id=source_id,
+        adapter_mode=adapter_mode,
+    )
 
     raw_ledger = {
         "status": "NOT_RUN",
@@ -449,6 +457,7 @@ def sync_rows(
                 summary,
                 source_sha256,
                 source_id=source_id,
+                adapter_mode=adapter_mode,
             ),
         )
 
@@ -456,7 +465,7 @@ def sync_rows(
         "status": "PASS",
         "source_id": source_id,
         "agent_id": safe_agent,
-        "adapter_mode": ADAPTER_MODE,
+        "adapter_mode": adapter_mode,
         "dry_run": dry_run,
         "writes_files": not dry_run,
         "raw_root": (RAW_ROOT / safe_agent).as_posix(),

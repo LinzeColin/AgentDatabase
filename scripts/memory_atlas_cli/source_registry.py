@@ -84,6 +84,22 @@ GENERIC_AGENT_READ_ADAPTER_FORMATS = [
     "jsonl",
     "sqlite",
 ]
+GENERIC_AGENT_PLUGIN_CONTRACT_PATH = Path(
+    "config/data_sources/generic_agent_plugin.json"
+)
+GENERIC_AGENT_PLUGIN_MODEL_PATH = Path(
+    "机器治理/参数与公式/generic_agent_plugin.v1_2_1_s09_p2_t3.json"
+)
+GENERIC_AGENT_PLUGIN_HOST_ENTRYPOINT = Path(
+    "scripts/sync_generic_agent_plugin.py"
+)
+GENERIC_AGENT_PLUGIN_PROTOCOL = "memory_atlas.generic_agent_plugin_envelope.v1"
+GENERIC_AGENT_PLUGIN_HOST_GATES = [
+    "credential_exclusion",
+    "append_only_raw",
+    "raw_ledger",
+    "final_delivery_main",
+]
 CODEX_DISCOVERY_CONTRACT_PATH = Path("config/data_sources/codex_source_discovery.json")
 CODEX_PUBLIC_RAW_ARCHIVE_CONTRACT_PATH = Path(
     "config/data_sources/codex_public_raw_archive.json"
@@ -145,7 +161,7 @@ _CLI_SOURCE_ALIASES = {"future-agent": "generic_agent_template"}
 _DISCOVERY_ARGUMENTS = {
     "chatgpt_export": {"--official-export"},
     "codex_local": {"--codex-home"},
-    "generic_agent": {"--input", "--markdown-report"},
+    "generic_agent": {"--input", "--markdown-report", "--plugin-envelope"},
 }
 
 
@@ -561,6 +577,88 @@ def _validate_source(source: dict[str, Any], database_dir: Path, push_defaults: 
             raise SourceRegistryError(
                 f"{source_id}.parser must bind the canonical generic read adapter"
             )
+        plugin_value = parser.get("plugin")
+        discovery_targets = {
+            (
+                str(candidate.get("value"))
+                if candidate.get("kind") == "operator_argument"
+                else str(candidate.get("target_argument"))
+            )
+            for candidate in source["discovery"]["candidates"]
+        }
+        if plugin_value is None:
+            if "--plugin-envelope" in discovery_targets:
+                raise SourceRegistryError(
+                    f"{source_id}.discovery cannot use --plugin-envelope without a plugin binding"
+                )
+        else:
+            if source_id == "generic_agent_template":
+                raise SourceRegistryError(
+                    "generic_agent_template cannot bind a non-standard plugin"
+                )
+            plugin = _mapping(plugin_value, f"{source_id}.parser.plugin")
+            if set(plugin) != {
+                "mode",
+                "plugin_id",
+                "protocol",
+                "host_entrypoint",
+                "contract_ref",
+                "model_ref",
+                "arbitrary_code_execution",
+                "host_owned_gates",
+                "push_policy",
+            }:
+                raise SourceRegistryError(
+                    f"{source_id}.parser.plugin keys do not match the canonical contract"
+                )
+            validate_portable_identifier(
+                plugin.get("plugin_id"),
+                f"{source_id}.parser.plugin.plugin_id",
+                max_length=64,
+            )
+            host_entrypoint = _repo_relative_path(
+                plugin.get("host_entrypoint"),
+                f"{source_id}.parser.plugin.host_entrypoint",
+                ("scripts/",),
+            )
+            contract_ref = _repo_relative_path(
+                plugin.get("contract_ref"),
+                f"{source_id}.parser.plugin.contract_ref",
+                ("config/data_sources/",),
+            )
+            model_ref = _repo_relative_path(
+                plugin.get("model_ref"),
+                f"{source_id}.parser.plugin.model_ref",
+                ("机器治理/参数与公式/",),
+            )
+            if (
+                plugin.get("mode") != "external_envelope_only"
+                or plugin.get("protocol") != GENERIC_AGENT_PLUGIN_PROTOCOL
+                or host_entrypoint
+                != GENERIC_AGENT_PLUGIN_HOST_ENTRYPOINT.as_posix()
+                or contract_ref != GENERIC_AGENT_PLUGIN_CONTRACT_PATH.as_posix()
+                or model_ref != GENERIC_AGENT_PLUGIN_MODEL_PATH.as_posix()
+                or plugin.get("arbitrary_code_execution") is not False
+                or plugin.get("host_owned_gates")
+                != GENERIC_AGENT_PLUGIN_HOST_GATES
+                or plugin.get("push_policy") != PUSH_DEFAULTS
+                or parser.get("input_formats")
+                != [GENERIC_AGENT_PLUGIN_PROTOCOL]
+                or discovery_targets != {"--plugin-envelope"}
+            ):
+                raise SourceRegistryError(
+                    f"{source_id}.parser.plugin must bind the external-envelope host gates"
+                )
+            for relative, label in (
+                (host_entrypoint, "host entrypoint"),
+                (contract_ref, "contract"),
+                (model_ref, "model"),
+            ):
+                target = database_dir / relative
+                if not target.is_file() or target.is_symlink():
+                    raise SourceRegistryError(
+                        f"{source_id}.parser.plugin {label} does not exist"
+                    )
         if any(
             key in parser
             for key in (

@@ -1,5 +1,35 @@
 # Memory Atlas v1.2 Remediation Handoff
 
+> **Current v1.2.1 note (2026-07-17 14:46 +10:00):** The Task Pack is now
+> `66/149` complete locally. This run completes only `S09-P2-T3`; S09-P2 is
+> `3/3` and complete, while `S09-P3-T1` is next-run only. Non-standard
+> producers may only create a strict bounded JSON envelope outside Memory
+> Atlas. The host never imports or executes arbitrary plugin code, registry
+> exposes no module/command/network/Git/direct-write capability, and source
+> artifact metadata is explicitly only `producer_claim_only`. Host code binds
+> source/plugin identity, recomputes canonical-event hashes, revalidates the
+> source snapshot and exclusively owns normalization, credential exclusion,
+> public sanitization, append-only raw, immutable ledger, derived writes and
+> final-delivery-only main policy. Unknown fields, duplicates, invalid roles,
+> identity/hash drift, limits, source mutation, production fixture apply and
+> plugin push attempts fail closed. Test-first ModuleNotFoundError is closed by
+> 12/12 dedicated tests; registry/adapter compatibility is 61/61, governance
+> support is 35/35, cross-boundary regression is 183/183 and the full-registry
+> fixture remediation is 33/33. py_compile and ruff pass. validate:fast is 6/6
+> in 24.277 seconds. Final validate:sync is 10/10 in 500.686 seconds, including
+> a 136.561-second unit step and a 354.267-second credential scan, with raw
+> mutation, remote push and shell all false. Its first run exposed only the
+> Codex temporary full-registry fixture missing the newly registered plugin
+> host stub/model; production existence checks remained strict and the fixture
+> was completed. The task-only validation copies of node_modules, public_raw
+> and raw_archives must be deleted after final governance verification; shared
+> source data remains untouched. Owner stopped export work, so `S08-P3-T1`
+> remains deferred/open and uncounted. No export, browser, Mail, download,
+> production raw mutation, fetch, push, deploy, branch/PR, merge/rebase or
+> shared cleanup occurred. Run only `S09-P3-T1` next; do not upload until all
+> 149 Tasks plus final review close, and never push the current divergent local
+> line directly.
+>
 > **Current v1.2.1 note (2026-07-17 13:47 +10:00):** The Task Pack is now
 > `65/149` complete locally. This run completes only `S09-P2-T2`; S09-P2 is
 > `2/3` and remains in progress, while `S09-P2-T3` is next-run only. A

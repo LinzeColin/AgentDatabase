@@ -1,0 +1,150 @@
+{
+  "schema_version": "memory_atlas.generic_agent_plugin_evidence.v1_2_1_s09_p2_t3",
+  "task_id": "S09-P2-T3",
+  "acceptance_id": "ACC-MA-V121-S09-P2-T3",
+  "status": "PASS_LOCAL_ONLY",
+  "observed_at": "2026-07-17T14:46:28+10:00",
+  "acceptance_truth": {
+    "task_complete": true,
+    "completed_task_count_after_acceptance": 66,
+    "total_task_count": 149,
+    "phase_complete_after_acceptance": true,
+    "next_task_after_acceptance": "S09-P3-T1",
+    "s08_p3_owner_deferred": true,
+    "s08_p3_real_export_complete": false
+  },
+  "coverage": {
+    "external_envelope_only": true,
+    "arbitrary_plugin_code_execution": false,
+    "plugin_direct_network_api": false,
+    "plugin_direct_git_api": false,
+    "plugin_direct_database_write_api": false,
+    "strict_exact_key_schema": true,
+    "registry_bound_source_and_plugin_identity": true,
+    "canonical_events_sha256_recomputed_by_host": true,
+    "source_artifact_digest_proof_level": "producer_claim_only",
+    "bounded_envelope_events_messages_and_fields": true,
+    "source_snapshot_reverified_before_and_after_commit": true,
+    "credential_exclusion_host_owned": true,
+    "append_only_raw_host_owned": true,
+    "immutable_raw_ledger_host_owned": true,
+    "derived_write_host_owned": true,
+    "final_delivery_main_gate_host_owned": true,
+    "production_fixture_apply_blocked": true,
+    "plugin_push_attempt_count": 0,
+    "source_content_or_local_path_in_cli": false
+  },
+  "fixture_proof": {
+    "source_id": "nonstandard-agent-example",
+    "plugin_id": "nonstandard-envelope-example",
+    "protocol": "memory_atlas.generic_agent_plugin_envelope.v1",
+    "event_count": 2,
+    "message_count": 3,
+    "canonical_events_sha256": "9d64fff26281b1b2f9d696c1271781a3844949bef5efa053f1a14446ccb67632",
+    "source_artifact_claim_sha256": "421a8eab580a8d1f3438485a7397a37bc580df884f1594d57838c2d06fa0a248",
+    "replay_raw_and_ledger_unchanged": true,
+    "replay_ledger_appended_count": 0,
+    "production_database_mutation": false
+  },
+  "limits": {
+    "max_envelope_bytes": 67108864,
+    "max_events": 10000,
+    "max_messages_per_event": 10000,
+    "max_total_messages": 200000,
+    "max_identifier_chars": 128,
+    "max_title_utf8_bytes": 65536,
+    "max_message_utf8_bytes": 1048576
+  },
+  "main_push_contract": {
+    "mode": "final_delivery_only",
+    "branch": "main",
+    "open_pr": false,
+    "force": false,
+    "remote_race_stop": true,
+    "push_executed": false,
+    "fetch_executed": false,
+    "commit_created_by_plugin_path": false,
+    "remote_push_attempted": false
+  },
+  "tests": {
+    "test_first": "ModuleNotFoundError before implementation",
+    "dedicated": "12/12 PASS",
+    "registry_and_adapter_compatibility": "61/61 PASS",
+    "governance_support": "35/35 PASS",
+    "cross_boundary_regression": "183/183 PASS",
+    "fixture_compatibility_remediation": "33/33 PASS",
+    "static_check": "py_compile PASS; ruff check PASS",
+    "validate_fast": "6/6 PASS in 24.277 seconds; raw_mutation=false; remote_push=false; shell=false",
+    "validate_sync": "10/10 PASS in 500.686 seconds; sync unit 136.561 seconds; credential scan 354.267 seconds; raw_mutation=false; remote_push=false; shell=false",
+    "first_sync_failure": "349-test unit step found one failure and 26 errors because a full-registry Codex temporary database fixture omitted the newly registered plugin host stub and model",
+    "first_sync_remediation": "kept production registry file-existence checks strict and added the registered host stub plus model to the complete-registry fixture; targeted compatibility then passed 33/33"
+  },
+  "artifacts": [
+    {
+      "path": "config/data_sources/generic_agent_plugin.json",
+      "sha256": "fdfceeffcc6ecc685e211898f4d9d721b031c40e73f2ad5c7ff2a431337acf38"
+    },
+    {
+      "path": "机器治理/参数与公式/generic_agent_plugin.v1_2_1_s09_p2_t3.json",
+      "sha256": "0a724188263acfae0662459645d03efa50b1730c537dd2e0637948d4251aa468"
+    },
+    {
+      "path": "tests/fixtures/memory_atlas/generic_agent_plugin/example.plugin-envelope.json",
+      "sha256": "1f8029d76a08a6e49c8a315517a89a5c6fca7617da82cd5234afb33da0621d1c"
+    },
+    {
+      "path": "scripts/memory_atlas_cli/generic_agent_plugin.py",
+      "sha256": "247c0799bfd91e00bd26c96445ea7efb17fbb7f4c38c8a92e4a9aef241839736"
+    },
+    {
+      "path": "scripts/sync_generic_agent_plugin.py",
+      "sha256": "696a0a9a3a2fe2f9ee3e5d4979c71cf9bd092d1c59a8651b4e9354b777a24668"
+    },
+    {
+      "path": "config/data_sources/source_registry.json",
+      "sha256": "e3452c8812b13c73ce321d8762d163604ee472f7eb2536ab58a99b69c2028819"
+    },
+    {
+      "path": "scripts/memory_atlas_cli/source_registry.py",
+      "sha256": "f8fb7121e5c76e59050deabf1f9133ac16e4d53134ef13c8867f6e70387eeea1"
+    },
+    {
+      "path": "scripts/memory_atlas_cli/parser.py",
+      "sha256": "851ee3e9e8ded43a4f265a5ea55a00fff51ea27494974ff1eff4b15b0da3513a"
+    },
+    {
+      "path": "scripts/memory_atlas_cli/sync.py",
+      "sha256": "3f5e91ad90f0cda9825dd2022a745cf565cd929402d08dd5b39e2c86822a63de"
+    },
+    {
+      "path": "scripts/sync_future_agent_data.py",
+      "sha256": "62d64b0ed249b27916cf9a43de1f7a830941208a2592489655f07036769d2f6d"
+    },
+    {
+      "path": "tests/test_memory_atlas_generic_agent_plugin.py",
+      "sha256": "3e51ada6e5851663dded9748c2b08dc48655b30b5b076cac6560afce118ac989"
+    },
+    {
+      "path": "tests/test_memory_atlas_codex_public_raw_archive.py",
+      "sha256": "e3854c6a472533fdafebddeb82d90d4062c7f4d08c400dacfb8ac73b115dad7e"
+    }
+  ],
+  "phase_boundary": {
+    "real_third_party_plugin_connected": false,
+    "arbitrary_plugin_runtime_added": false,
+    "source_state_registry_implemented": false,
+    "production_source_data_created": false,
+    "remote_push": false,
+    "next_task_after_acceptance": "S09-P3-T1"
+  },
+  "safety": {
+    "export_browser_mail_or_download": false,
+    "production_raw_mutation": false,
+    "fetch": false,
+    "remote_push": false,
+    "deployment": false,
+    "branch_or_pr": false,
+    "merge_or_rebase": false,
+    "shared_cache_cleanup": false
+  }
+}

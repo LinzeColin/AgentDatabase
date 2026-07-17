@@ -33,10 +33,12 @@ _DISCOVERY_DESTINATIONS = {
     "--codex-home": "codex_home",
     "--input": "input",
     "--markdown-report": "markdown_report",
+    "--plugin-envelope": "plugin_envelope",
 }
 _DISCOVERY_EXCLUSIVE_DESTINATIONS = {
-    "input": ("input", "markdown_report"),
-    "markdown_report": ("input", "markdown_report"),
+    "input": ("input", "markdown_report", "plugin_envelope"),
+    "markdown_report": ("input", "markdown_report", "plugin_envelope"),
+    "plugin_envelope": ("input", "markdown_report", "plugin_envelope"),
 }
 def owner_daily_profile_contract() -> dict[str, object]:
     return build_owner_daily_profile_contract()
@@ -167,8 +169,9 @@ def future_agent_contract(
     event_id: str | None = None,
     *,
     source_id: str = "future-agent",
+    plugin_binding: dict[str, object] | None = None,
 ) -> dict[str, object]:
-    return {
+    contract: dict[str, object] = {
         "status": "PASS",
         "source_id": source_id,
         "agent_id": agent_id,
@@ -189,6 +192,20 @@ def future_agent_contract(
         "append_only": True,
         "event_id": event_id or "",
     }
+    if plugin_binding is not None:
+        contract.update({
+            "adapter_mode": "external_plugin_envelope",
+            "supported_source_shapes": ["file"],
+            "supported_source_formats": [
+                "memory_atlas.generic_agent_plugin_envelope.v1"
+            ],
+            "plugin_contract": plugin_binding["contract_ref"],
+            "plugin_protocol": plugin_binding["protocol"],
+            "plugin_execution_mode": plugin_binding["mode"],
+            "arbitrary_plugin_code_execution": False,
+            "host_owned_write_pipeline": True,
+        })
+    return contract
 
 
 def apply_environment_discovery(args: argparse.Namespace, registered_source: dict[str, object]) -> None:
@@ -324,6 +341,32 @@ def run_sync(args: argparse.Namespace) -> int:
             generic_source_identity = "future-agent"
         elif registered_source_id == "generic_agent_template":
             generic_source_identity = generic_agent_id
+    plugin_binding = (
+        registered_source["parser"].get("plugin")
+        if source_type == "generic_agent"
+        else None
+    )
+    if plugin_binding is not None:
+        if args.input is not None or args.markdown_report is not None or args.event_id:
+            print(json.dumps({
+                "status": "FAIL_CLOSED",
+                "source_id": registered_source_id,
+                "reason": "plugin source requires --plugin-envelope",
+                "writes_files": False,
+                "production_database_mutation": False,
+                "remote_push_attempted": False,
+            }, ensure_ascii=False, indent=2, sort_keys=True))
+            return 2
+    elif args.plugin_envelope is not None:
+        print(json.dumps({
+            "status": "FAIL_CLOSED",
+            "source_id": registered_source_id,
+            "reason": "--plugin-envelope requires a registry-bound plugin source",
+            "writes_files": False,
+            "production_database_mutation": False,
+            "remote_push_attempted": False,
+        }, ensure_ascii=False, indent=2, sort_keys=True))
+        return 2
 
     if source_type == "chatgpt_export" and args.dry_run and not args.official_export:
         print(json.dumps(chatgpt_contract(args.redact_for_public_backup), ensure_ascii=False, indent=2, sort_keys=True))
@@ -333,9 +376,20 @@ def run_sync(args: argparse.Namespace) -> int:
         print(json.dumps(codex_contract(args.public_transcripts), ensure_ascii=False, indent=2, sort_keys=True))
         return 0
 
-    if source_type == "generic_agent" and args.dry_run and not args.input and not args.markdown_report:
+    if (
+        source_type == "generic_agent"
+        and args.dry_run
+        and not args.input
+        and not args.markdown_report
+        and not args.plugin_envelope
+    ):
         print(json.dumps(
-            future_agent_contract(generic_agent_id, args.event_id, source_id=generic_source_identity),
+            future_agent_contract(
+                generic_agent_id,
+                args.event_id,
+                source_id=generic_source_identity,
+                plugin_binding=plugin_binding,
+            ),
             ensure_ascii=False,
             indent=2,
             sort_keys=True,
@@ -359,22 +413,38 @@ def run_sync(args: argparse.Namespace) -> int:
         if args.dry_run:
             command.append("--dry-run")
     elif source_type == "generic_agent":
-        command = [
-            sys.executable,
-            str(parser_path),
-            "--database-dir",
-            str(ROOT),
-            "--source-id",
-            generic_source_identity,
-            "--agent-id",
-            generic_agent_id,
-        ]
-        if args.input:
-            command.extend(["--input", str(args.input)])
-        if args.markdown_report:
-            command.extend(["--markdown-report", str(args.markdown_report)])
-        if args.event_id:
-            command.extend(["--event-id", args.event_id])
+        if plugin_binding is not None:
+            command = [
+                sys.executable,
+                str(ROOT / str(plugin_binding["host_entrypoint"])),
+                "--database-dir",
+                str(ROOT),
+                "--source-id",
+                generic_source_identity,
+                "--agent-id",
+                generic_agent_id,
+                "--plugin-id",
+                str(plugin_binding["plugin_id"]),
+            ]
+            if args.plugin_envelope:
+                command.extend(["--plugin-envelope", str(args.plugin_envelope)])
+        else:
+            command = [
+                sys.executable,
+                str(parser_path),
+                "--database-dir",
+                str(ROOT),
+                "--source-id",
+                generic_source_identity,
+                "--agent-id",
+                generic_agent_id,
+            ]
+            if args.input:
+                command.extend(["--input", str(args.input)])
+            if args.markdown_report:
+                command.extend(["--markdown-report", str(args.markdown_report)])
+            if args.event_id:
+                command.extend(["--event-id", args.event_id])
         if args.dry_run:
             command.append("--dry-run")
     else:  # pragma: no cover - registry validation owns the allowed source types.
