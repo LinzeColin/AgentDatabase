@@ -1,0 +1,35 @@
+{
+  "acceptance_id": "ACC-MA-V121-S09-P1-T1",
+  "formula_id": "FORM-MA-V121-S09-P1-T1",
+  "formulas": {
+    "attachment_count": "sum(recognized_dict_parts_in_message_content)",
+    "payload_identity": "sha256(canonical_json_or_source_bytes)",
+    "status": "PASS if conversation_count>0 and quarantine_count=0 else PASS_WITH_QUARANTINE if conversation_count>0 else QUARANTINED if quarantine_count>0 else NO_CONVERSATIONS"
+  },
+  "invariants": [
+    "source bytes are never modified",
+    "recognized payloads retain unknown fields",
+    "every rejected JSON file, conversation item, mapping node, or message has one sanitized quarantine record",
+    "quarantine records never contain raw payload values",
+    "stable IDs, version history, deduplication, and derived facets remain outside this task"
+  ],
+  "limits": {
+    "maximum_contract_bytes": 131072,
+    "maximum_conversations": 2000000,
+    "maximum_json_bytes": 536870912,
+    "maximum_json_files": 10000,
+    "maximum_total_json_bytes": 4294967296,
+    "read_chunk_bytes": 1048576
+  },
+  "model_id": "MOD-MA-V121-S09-P1-T1",
+  "phase_boundary": {
+    "implements_derived_facets": false,
+    "implements_incremental_ids": false,
+    "implements_version_history": false,
+    "mutates_source": false,
+    "next_task": "S09-P1-T2"
+  },
+  "purpose": "Parse recognizable ChatGPT export variants without silently dropping unknown fields or malformed items.",
+  "schema_version": "memory_atlas.chatgpt_export_parser_model.v1_2_1_s09_p1_t1",
+  "task_id": "S09-P1-T1"
+}

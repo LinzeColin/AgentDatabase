@@ -1,0 +1,75 @@
+{
+  "schema_version": "memory_atlas.chatgpt_export_parser_evidence.v1_2_1_s09_p1_t1",
+  "task_id": "S09-P1-T1",
+  "acceptance_id": "ACC-MA-V121-S09-P1-T1",
+  "status": "PASS_LOCAL_ONLY",
+  "observed_at": "2026-07-17T09:59:05+10:00",
+  "artifacts": [
+    {
+      "path": "config/data_sources/chatgpt_export_parser.json",
+      "sha256": "16a0f1e8cd4c5b723e99ff901179962a3437938302df58f2728599202098e89c"
+    },
+    {
+      "path": "机器治理/参数与公式/chatgpt_export_parser.v1_2_1_s09_p1_t1.json",
+      "sha256": "61630392605fb09c6bce52d0356f65e1ead509f13cc85ff529a0154aaa47c82e"
+    },
+    {
+      "path": "scripts/memory_atlas_cli/chatgpt_export_parser.py",
+      "sha256": "60c38f0b134331be176e303251e10f5ca59c3f5b15fca4ec00e6432f02ea77ae"
+    },
+    {
+      "path": "scripts/sync_chatgpt_memory_data.py",
+      "sha256": "e3b5757414adeeaeab48824b9d92c5ff3031372a6863eb3502504b1acca2b1fa"
+    },
+    {
+      "path": "tests/test_memory_atlas_chatgpt_export_parser.py",
+      "sha256": "11f2986fca45373ce3fc8d96453c6b0654d526e88fd37bf354edd839155bb550"
+    }
+  ],
+  "coverage": {
+    "canonical_conversations_json": true,
+    "numbered_conversation_json": true,
+    "zip_json_members": true,
+    "recognizable_future_list_data_items": true,
+    "attachment_payload_preserved": true,
+    "metadata_payload_preserved": true,
+    "container_extensions_preserved": true,
+    "unknown_fields_preserved": true,
+    "file_item_and_message_quarantine": true,
+    "quarantine_raw_values_copied": false,
+    "source_mutation": false,
+    "all_rejected_input_preserves_processed_outputs": true
+  },
+  "phase_boundary": {
+    "stable_ids": false,
+    "version_history": false,
+    "incremental_dedupe": false,
+    "derived_facets": false,
+    "next_task": "S09-P1-T2"
+  },
+  "tests": {
+    "test_first": "ModuleNotFoundError before implementation",
+    "dedicated": "13/13 PASS",
+    "focused_related": "88/88 PASS in 15.288 seconds",
+    "static_check": "ruff PASS",
+    "validate_fast": "6/6 PASS in 23.544 seconds",
+    "validate_sync": "10/10 PASS in 201.321 seconds; sync unit step 60.927 seconds; credential scan 131.039 seconds; raw_mutation=false; remote_push=false; shell=false"
+  },
+  "acceptance_truth": {
+    "task_complete": true,
+    "completed_task_count": 61,
+    "total_task_count": 149,
+    "s08_p3_real_export_complete": false,
+    "s08_p3_owner_deferred": true,
+    "next_task": "S09-P1-T2"
+  },
+  "safety": {
+    "real_export_requested": false,
+    "browser_or_mail_access": false,
+    "production_raw_mutation": false,
+    "fetch": false,
+    "remote_push": false,
+    "deployment": false,
+    "branch_or_pr": false
+  }
+}

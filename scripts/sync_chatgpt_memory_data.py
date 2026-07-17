@@ -14,12 +14,14 @@ import json
 import os
 import re
 import subprocess
-import sys
-import zipfile
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Iterable
 
+from memory_atlas_cli.chatgpt_export_parser import (
+    QUARANTINE_RELATIVE,
+    parse_chatgpt_export,
+)
 from memory_atlas_cli.raw_ledger import RawLedgerError, RawLedgerPostWriteError, source_stat_guard
 from privacy_guard import PrivacyViolation, assert_no_credentials
 from public_raw_sanitizer import (
@@ -43,6 +45,18 @@ OFFICIAL_EXPORT_MODE = "official_export_fallback"
 
 class AppendOnlyViolation(ValueError):
     pass
+
+
+class ParsedConversationList(list[dict[str, Any]]):
+    """List-compatible adapter carrying the loss-aware parser report."""
+
+    def __init__(
+        self,
+        conversations: Iterable[dict[str, Any]],
+        parse_report: dict[str, Any],
+    ) -> None:
+        super().__init__(conversations)
+        self.parse_report = parse_report
 
 
 def now_utc() -> str:
@@ -197,6 +211,82 @@ def extract_text(content: Any) -> str:
     return str(text) if text is not None else ""
 
 
+def extract_attachments(content: Any) -> list[dict[str, Any]]:
+    if not isinstance(content, dict):
+        return []
+    parts = content.get("parts")
+    if not isinstance(parts, list):
+        return []
+    attachment_keys = {
+        "asset_pointer",
+        "attachment_id",
+        "file_id",
+        "file_name",
+        "mime_type",
+        "size_bytes",
+    }
+    attachments: list[dict[str, Any]] = []
+    for part in parts:
+        if not isinstance(part, dict):
+            continue
+        content_type = str(part.get("content_type") or "").lower()
+        if attachment_keys.intersection(part) or any(
+            marker in content_type
+            for marker in ("asset", "image", "file", "audio", "video")
+        ):
+            attachments.append(part)
+    return attachments
+
+
+def extension_fields(
+    payload: Any,
+    known_fields: set[str],
+) -> dict[str, Any]:
+    if not isinstance(payload, dict):
+        return {}
+    return {key: value for key, value in payload.items() if key not in known_fields}
+
+
+def normalized_message(
+    message: dict[str, Any],
+    *,
+    fallback_id: str,
+) -> dict[str, Any] | None:
+    content = message.get("content")
+    if content is None:
+        content = message.get("text")
+    text = extract_text(content)
+    attachments = extract_attachments(content)
+    if not text.strip() and not attachments:
+        return None
+    author = message.get("author")
+    author_payload = author if isinstance(author, dict) else {}
+    role = (
+        author_payload.get("role")
+        or message.get("role")
+        or (author if isinstance(author, str) else None)
+        or "unknown"
+    )
+    return {
+        "message_id": str(message.get("id") or fallback_id),
+        "role": str(role),
+        "created_at": iso_from_value(
+            message.get("created_at") or message.get("create_time")
+        ),
+        "text": text,
+        "attachments": attachments,
+        "source_extensions": extension_fields(
+            message,
+            {"id", "author", "role", "created_at", "create_time", "content", "text"},
+        ),
+        "author_extensions": extension_fields(author_payload, {"role"}),
+        "content_extensions": extension_fields(
+            content,
+            {"parts", "text", "value"},
+        ),
+    }
+
+
 def normalize_messages(conversation: dict[str, Any]) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     mapping = conversation.get("mapping")
@@ -207,18 +297,12 @@ def normalize_messages(conversation: dict[str, Any]) -> list[dict[str, Any]]:
             message = node.get("message")
             if not isinstance(message, dict):
                 continue
-            text = extract_text(message.get("content"))
-            if not text.strip():
-                continue
-            author = message.get("author") if isinstance(message.get("author"), dict) else {}
-            rows.append(
-                {
-                    "message_id": str(message.get("id") or node.get("id") or stable_hash(message)[:16]),
-                    "role": str(author.get("role") or "unknown"),
-                    "created_at": iso_from_value(message.get("create_time")),
-                    "text": text,
-                }
+            row = normalized_message(
+                message,
+                fallback_id=str(node.get("id") or stable_hash(message)[:16]),
             )
+            if row is not None:
+                rows.append(row)
         return rows
 
     messages = conversation.get("messages")
@@ -226,17 +310,12 @@ def normalize_messages(conversation: dict[str, Any]) -> list[dict[str, Any]]:
         for index, message in enumerate(messages):
             if not isinstance(message, dict):
                 continue
-            text = extract_text(message.get("content") or message.get("text"))
-            if not text.strip():
-                continue
-            rows.append(
-                {
-                    "message_id": str(message.get("id") or f"message_{index + 1}"),
-                    "role": str(message.get("role") or message.get("author") or "unknown"),
-                    "created_at": iso_from_value(message.get("created_at") or message.get("create_time")),
-                    "text": text,
-                }
+            row = normalized_message(
+                message,
+                fallback_id=f"message_{index + 1}",
             )
+            if row is not None:
+                rows.append(row)
     return rows
 
 
@@ -253,6 +332,22 @@ def conversation_payload(conversation: dict[str, Any]) -> dict[str, Any]:
         "updated_at": iso_from_value(conversation.get("update_time") or conversation.get("updated_at")),
         "message_count": len(messages),
         "messages": messages,
+        "source_extensions": extension_fields(
+            conversation,
+            {
+                "id",
+                "conversation_id",
+                "title",
+                "create_time",
+                "created_at",
+                "update_time",
+                "updated_at",
+                "mapping",
+                "messages",
+                "_memory_atlas_parser",
+            },
+        ),
+        "parser_provenance": conversation.get("_memory_atlas_parser") or {},
         "credential_boundary": "credentials_not_transcript",
         "sync_mode": OFFICIAL_EXPORT_MODE,
     }
@@ -261,12 +356,10 @@ def conversation_payload(conversation: dict[str, Any]) -> dict[str, Any]:
 
 def assert_conversation_has_no_credentials(payload: dict[str, Any]) -> None:
     conversation_id = str(payload["conversation_id"])
-    assert_no_credentials(str(payload.get("title") or ""), f"{SOURCE_ID}:{conversation_id}:title")
-    for message in payload.get("messages") or []:
-        assert_no_credentials(
-            str(message.get("text") or ""),
-            f"{SOURCE_ID}:{conversation_id}:{message.get('message_id')}",
-        )
+    assert_no_credentials(
+        json.dumps(payload, ensure_ascii=False, sort_keys=True),
+        f"{SOURCE_ID}:{conversation_id}:normalized_payload",
+    )
 
 
 def normalize_conversation(conversation: dict[str, Any]) -> dict[str, Any]:
@@ -307,33 +400,15 @@ def coerce_conversation_list(payload: Any) -> list[dict[str, Any]]:
     return []
 
 
-def load_official_export(path: Path) -> list[dict[str, Any]]:
-    if path.is_dir():
-        candidates = sorted(path.glob("**/conversations*.json"))
-        conversations: list[dict[str, Any]] = []
-        for candidate in candidates:
-            conversations.extend(coerce_conversation_list(json.loads(candidate.read_text(encoding="utf-8"))))
-        return conversations
-
-    if path.suffix.lower() == ".zip":
-        conversations = []
-        with zipfile.ZipFile(path) as archive:
-            names = sorted(
-                name for name in archive.namelist()
-                if Path(name).name.startswith("conversations") and Path(name).suffix.lower() == ".json"
-            )
-            for name in names:
-                with archive.open(name) as handle:
-                    conversations.extend(coerce_conversation_list(json.loads(handle.read().decode("utf-8"))))
-        return conversations
-
-    return coerce_conversation_list(json.loads(path.read_text(encoding="utf-8")))
+def load_official_export(path: Path) -> ParsedConversationList:
+    report = parse_chatgpt_export(path)
+    return ParsedConversationList(report["conversations"], report)
 
 
 def official_export_sha256(path: Path) -> str:
     digest = hashlib.sha256()
     if path.is_dir():
-        candidates = sorted(path.glob("**/conversations*.json"))
+        candidates = sorted(path.glob("**/*.json"))
         for candidate in candidates:
             relative = candidate.relative_to(path).as_posix().encode("utf-8")
             digest.update(len(relative).to_bytes(8, "big"))
@@ -402,10 +477,66 @@ def sync_official_export(
     dry_run: bool,
     redact_for_public_backup: bool = False,
 ) -> dict[str, Any]:
-    directory_globs = ("**/conversations*.json",) if export_path.is_dir() else ()
+    directory_globs = ("**/*.json",) if export_path.is_dir() else ()
     with source_stat_guard(export_path, directory_globs=directory_globs) as source_inventory:
         conversations = load_official_export(export_path)
         export_sha = official_export_sha256(export_path)
+    parse_report = getattr(
+        conversations,
+        "parse_report",
+        {
+            "status": "PASS",
+            "attachment_count": 0,
+            "metadata_count": 0,
+            "quarantine_count": 0,
+            "quarantine": [],
+        },
+    )
+    if not conversations:
+        quarantine_rows = parse_report.get("quarantine") or []
+        writes_files = False
+        if not dry_run and quarantine_rows:
+            with source_stat_guard(
+                export_path,
+                directory_globs=directory_globs,
+                expected=source_inventory,
+            ):
+                write_current_jsonl(
+                    database_dir / QUARANTINE_RELATIVE,
+                    quarantine_rows,
+                )
+            writes_files = True
+        return {
+            "status": parse_report.get("status") or "NO_CONVERSATIONS",
+            "source_id": SOURCE_ID,
+            "mode": OFFICIAL_EXPORT_MODE,
+            "dry_run": dry_run,
+            "browser_connector": "readonly_contract",
+            "fallback": "official_export",
+            "conversation_count": 0,
+            "message_count": 0,
+            "attachment_count": int(parse_report.get("attachment_count") or 0),
+            "metadata_count": int(parse_report.get("metadata_count") or 0),
+            "quarantine_count": int(parse_report.get("quarantine_count") or 0),
+            "quarantine_path": QUARANTINE_RELATIVE.as_posix(),
+            "raw_paths": [],
+            "export_sha256": export_sha,
+            "redact_for_public_backup": redact_for_public_backup,
+            "redaction_counts": {},
+            "processed_manifest": PROCESSED_MANIFEST.as_posix(),
+            "derived_summary": DERIVED_SUMMARY.as_posix(),
+            "run_log_dir": SYNC_LOG_DIR.as_posix(),
+            "writes_files": writes_files,
+            "append_only": True,
+            "no_browser_mutation": True,
+            "source_stat_verified": True,
+            "processed_outputs_preserved": True,
+            "raw_ledger": {
+                "status": "NOT_RUN",
+                "reason": "no_parseable_conversations",
+                "source_mutation": False,
+            },
+        }
     rows: list[dict[str, Any]] = []
     redaction_counts: dict[str, int] = {}
     for conversation in conversations:
@@ -454,6 +585,10 @@ def sync_official_export(
                 ) from exc
             raise
         write_current_jsonl(database_dir / PROCESSED_MANIFEST, manifest_rows)
+        write_current_jsonl(
+            database_dir / QUARANTINE_RELATIVE,
+            parse_report.get("quarantine") or [],
+        )
         summary = build_summary(
             rows,
             generated_at,
@@ -475,7 +610,7 @@ def sync_official_export(
         )
 
     return {
-        "status": "PASS",
+        "status": parse_report.get("status") or "PASS",
         "source_id": SOURCE_ID,
         "mode": OFFICIAL_EXPORT_MODE,
         "dry_run": dry_run,
@@ -483,6 +618,10 @@ def sync_official_export(
         "fallback": "official_export",
         "conversation_count": len(rows),
         "message_count": sum(int(row.get("message_count") or 0) for row in rows),
+        "attachment_count": int(parse_report.get("attachment_count") or 0),
+        "metadata_count": int(parse_report.get("metadata_count") or 0),
+        "quarantine_count": int(parse_report.get("quarantine_count") or 0),
+        "quarantine_path": QUARANTINE_RELATIVE.as_posix(),
         "raw_paths": [path.as_posix() for path in raw_paths],
         "export_sha256": export_sha,
         "redact_for_public_backup": redact_for_public_backup,

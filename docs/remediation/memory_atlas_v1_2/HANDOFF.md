@@ -1,5 +1,39 @@
 # Memory Atlas v1.2 Remediation Handoff
 
+> **Current v1.2.1 note (2026-07-17 09:59 +10:00):** The Task Pack is now
+> `61/149` complete locally. This run completes only `S09-P1-T1`; `S09-P1-T2`
+> is next-run only. Owner explicitly stopped export/browser/download work, so
+> `S08-P3-T1` remains owner-deferred and open: no real official export was
+> archived and its acceptance was not backfilled. The new read-only parser
+> covers canonical conversations JSON, numbered JSON, ZIP JSON members,
+> attachment/metadata files and recognizable future list/data/items containers.
+> It preserves conversation/message/author/content/attachment/metadata
+> extensions, carries them through full credential scanning, and emits one
+> sanitized reason-coded SHA-256 quarantine row for every rejected file/item/
+> message without copying raw values. Stable IDs, version history, incremental
+> dedupe and derived facets remain outside T1. Test-first ModuleNotFoundError is
+> closed by 13/13 dedicated tests; final related regression is 88/88. Fast is
+> 6/6 in 23.544 seconds; sync is 10/10 in 201.321 seconds, including a
+> 60.927-second unit step and a 131.039-second credential scan, with raw
+> mutation, remote push and shell all
+> false. Human-plane passes at 178 machine files, 43 active configs and 133
+> evidence payloads; related governance regression is 59/59, official render
+> has zero drift/reference issues, and required governance has zero errors or
+> warnings. Two failed sync attempts exposed and closed only cross-source fixture
+> coupling and task-copy raw/.DS_Store validation setup; shared source data was
+> not changed. No export, browser, Mail, download, production raw mutation,
+> fetch, push, deploy, branch/PR, merge/rebase or shared cleanup occurred. Run
+> only `S09-P1-T2` next; do not resume S08 export work without a new owner
+> instruction, and do not upload until all 149 Tasks plus final review close.
+> The local Task commit was created on the existing local-only v1.2 line whose
+> parent is `19ecf112c0330bcb304c8321594afdcc6e474ab8`. A post-commit read-only
+> check found cached `origin/main=dbed65f6611af1367a224218d167114e0ad8b8a0`
+> with merge-base `24bf12987dc3c9cd4ef0aee2d1da7df1280f47a8` and a large pre-existing
+> divergence (`2609/2653`). No fetch or reconciliation was allowed here. Future
+> work must preserve this local v1.2 commit chain and resolve the canonical-main
+> integration only at the governed final-delivery boundary; never push this
+> divergent line directly.
+>
 > **Current v1.2.1 note (2026-07-17 08:40 +10:00):** The v1.2.1 Task Pack
 > remains `60/149` complete. This run works only on `S08-P3-T1`; the archive
 > capability is implemented, but the Task remains `in_progress` because the

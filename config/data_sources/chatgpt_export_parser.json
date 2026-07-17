@@ -1,0 +1,58 @@
+{
+  "acceptance_id": "ACC-MA-V121-S09-P1-T1",
+  "inputs": {
+    "canonical_names": [
+      "conversations*.json"
+    ],
+    "future_container_keys": [
+      "data",
+      "items"
+    ],
+    "metadata_names": [
+      "metadata*.json",
+      "export_metadata*.json",
+      "attachments*.json"
+    ],
+    "numbered_names": [
+      "<number>.json",
+      "conversation_<number>.json"
+    ],
+    "supported": [
+      "json_file",
+      "json_directory",
+      "zip_archive"
+    ]
+  },
+  "model_parameters_ref": "机器治理/参数与公式/chatgpt_export_parser.v1_2_1_s09_p1_t1.json",
+  "phase_boundary": {
+    "implements_derived_facets": false,
+    "implements_incremental_ids": false,
+    "implements_version_history": false,
+    "mutates_source": false,
+    "next_task": "S09-P1-T2"
+  },
+  "quarantine": {
+    "every_unparseable_item_required": true,
+    "field_names_allowed": true,
+    "path": "data/processed/conversations/chatgpt_parse_quarantine.jsonl",
+    "payload_sha256_required": true,
+    "raw_payload_forbidden": true
+  },
+  "schema_version": "memory_atlas.chatgpt_export_parser_contract.v1_2_1_s09_p1_t1",
+  "security": {
+    "quarantine_copies_private_values": false,
+    "remote_actions": false,
+    "source_read_only": true,
+    "source_symlinks_allowed": false,
+    "zip_path_traversal_allowed": false
+  },
+  "source_id": "chatgpt",
+  "task_id": "S09-P1-T1",
+  "unknown_fields": {
+    "attachment_payload_preserved": true,
+    "conversation_payload_preserved": true,
+    "message_payload_preserved": true,
+    "metadata_payload_preserved": true,
+    "preserve": true
+  }
+}

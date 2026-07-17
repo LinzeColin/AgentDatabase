@@ -8,7 +8,7 @@ next_gate_id: "ACC.OpenAIDatabase.PAM1.0019"
 total_estimated_hours: 255
 completed_estimated_hours: 241
 taskpack_progress:
-  completed_tasks: 60
+  completed_tasks: 61
   total_tasks: 149
   delivery_state: "local_only_not_released"
 stages:
@@ -3084,6 +3084,8 @@ stages:
               - "导出批次、请求与下载 provenance 丢失或 raw 被覆盖"
             rollback: "git revert 本 Task 本地 commit；已追加 raw 不覆盖，由 manifest 保留批次状态。"
             current_result: "in_progress_capability_implemented_live_idle_no_real_archive_60_of_149_s08_p3_t2_not_eligible_no_remote_upload"
+            owner_scope_decision: "deferred_no_export_2026_07_17"
+            deferred_reason: "Owner explicitly stopped export/browser/download work and directed immediate parser development. The real-export acceptance remains open and is not counted complete."
           - task_id: "S08-P3-T2"
             name: "验证并准备 ChatGPT raw main backup"
             objective: "验证 staged 内容后生成可受控提交并准备直接 main 交付路径。"
@@ -3114,3 +3116,225 @@ stages:
             risks:
               - "将模拟、过期链接或仍在等待的外部流程冒充生产通过"
             rollback: "git revert connector/derived 本地提交；已追加 raw 不覆盖，授权失效时进入 FAILED_NEEDS_HUMAN_AUTH。"
+  - stage_id: "MA-V121-S09"
+    name: "ChatGPT 解析同步与后续 Agent 通用接入"
+    person_goal: "把 ChatGPT 导出稳定解析为增量可追溯数据，并让后续 Agent 通过统一注册表自动备份。"
+    status: "in_progress"
+    estimated_hours: 9
+    estimated_pct: 11
+    scope_override: "Owner deferred incomplete S08-P3 real-export work on 2026-07-17 and authorized parser development without declaring S08 complete."
+    stop_conditions:
+      - "解析器覆盖或修改 raw 文件"
+      - "无法解释的消息、会话或 JSON 文件被静默丢弃"
+      - "为了一个未来来源复制整套独立 sync pipeline"
+      - "插件绕过 credential、append-only 或 final-delivery-only gate"
+    stop_gate:
+      gate_id: "ACC-MA-V121-S09"
+      status: "open"
+      pass_conditions:
+        - "ChatGPT 官方导出变体可稳定解析、增量去重并追溯 raw"
+        - "后续 Agent 使用统一 registry/adapter 模式"
+        - "至少一个非 ChatGPT/Codex fixture 完成 raw 到 derived 到 restore"
+        - "未知或失败记录可见，不静默丢数据"
+      evidence_refs: []
+    phases:
+      - phase_id: "MA-V121-S09-P1"
+        name: "ChatGPT 多格式解析与增量去重"
+        objective: "覆盖官方导出变体，随后建立稳定版本和可追溯派生。"
+        status: "in_progress"
+        estimated_hours: 3
+        estimated_pct: 33
+        stop_conditions:
+          - "未知字段被删除"
+          - "无法解析项未进入 quarantine"
+          - "在 T1 提前实现 T2 稳定 ID、版本或增量去重"
+        stop_gate:
+          gate_id: "ACC-MA-V121-S09-P1"
+          status: "open"
+          pass_conditions:
+            - "多格式 parser 不静默丢失字段或失败项"
+            - "后续版本与派生均可追溯到 append-only raw"
+          evidence_refs: []
+        tasks:
+          - task_id: "S09-P1-T1"
+            name: "支持 ChatGPT 多格式导出与显式 quarantine"
+            objective: "支持 conversations.json、编号 conversation JSON、附件/metadata 和未来可识别变体。"
+            status: "completed"
+            estimated_hours: 1
+            estimated_pct: 100
+            dependencies:
+              - "S08-P3-T1 owner-deferred scope override"
+            acceptance_ids:
+              - "ACC-MA-V121-S09-P1-T1"
+            acceptance:
+              - acceptance_id: "ACC-MA-V121-S09-P1-T1"
+                description: "The read-only parser recognizes canonical conversations JSON, numbered conversation JSON, ZIP members, attachment/metadata payloads and signature-recognizable future list/data/items containers. Recognized conversation, message, author, content, attachment and metadata fields are preserved. Every malformed or unrecognized file, conversation item, mapping node or message produces a sanitized SHA-256 quarantine row without copying raw values. Stable IDs, versions, incremental dedupe and derived facets remain explicitly outside T1."
+                evidence_refs:
+                  - "EVID-MA-V121-S09-P1-T1-CONTRACT"
+                  - "EVID-MA-V121-S09-P1-T1-TEST"
+                  - "EVID-MA-V121-S09-P1-T1-PROOF"
+                  - "EVID-MA-V121-S09-P1-T1-REVIEW"
+            test_commands:
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_chatgpt_export_parser -q"
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_source_registry OpenAIDatabase.tests.test_s04p1_chatgpt_sync OpenAIDatabase.tests.test_memory_atlas_raw_ledger -q"
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_validator_profiles OpenAIDatabase.tests.test_memory_atlas_test_value_audit OpenAIDatabase.tests.test_atlasctl_script_consolidation -q"
+              - "ruff check OpenAIDatabase/scripts/memory_atlas_cli/chatgpt_export_parser.py OpenAIDatabase/scripts/memory_atlas_cli/source_registry.py OpenAIDatabase/scripts/sync_chatgpt_memory_data.py OpenAIDatabase/tests/test_memory_atlas_chatgpt_export_parser.py"
+              - "npm run validate:fast --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run validate:sync --prefix OpenAIDatabase/apps/memory-atlas"
+              - "python3 -B OpenAIDatabase/scripts/audit_memory_atlas_human_plane.py"
+              - "python3 -B OpenAIDatabase/scripts/audit_memory_atlas_test_value.py"
+              - "python3 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+            test_results:
+              - "Test-first failed with ModuleNotFoundError before implementation. Dedicated parser contract, format, unknown-field preservation, quarantine, all-rejected no-clobber and sync-integration tests now pass 13/13."
+              - "Final parser/source-registry/legacy ChatGPT/raw-ledger/profile/test-value/script-migration regression passes 88/88 in 15.288 seconds; ruff passes."
+              - "validate:fast passes 6/6 in 23.544 seconds. validate:sync passes 10/10 in 201.321 seconds, including a 60.927-second sync unit step and a 131.039-second complete credential scan; raw_mutation=false, remote_push=false and shell=false."
+              - "The first two sync-profile attempts exposed only the new cross-source temp-fixture existence coupling and task-copy raw absence/.DS_Store. The coupling was removed while exact registry values remain strict; task validation data was restored from tracked Git blobs and no shared source data was changed."
+              - "Human-plane audit passes at 178 machine files, 43 active configs and 133 evidence payloads; final human/test-value/script/profile regression passes 59/59. Official renderer reports zero drift/reference issues and required project governance reports zero errors/warnings."
+            evidence_refs:
+              - "EVID-MA-V121-S09-P1-T1-CONTRACT"
+              - "EVID-MA-V121-S09-P1-T1-TEST"
+              - "EVID-MA-V121-S09-P1-T1-PROOF"
+              - "EVID-MA-V121-S09-P1-T1-REVIEW"
+            risks:
+              - "未来格式误识别、私密值进入 quarantine、旧 sync contract 回归"
+            rollback: "git revert 本 Task 本地 commit；source export 与 append-only raw 保持不变。"
+            current_result: "complete_local_only_61_of_149_unknown_fields_preserved_hash_only_quarantine_s08_export_deferred_no_remote_upload"
+          - task_id: "S09-P1-T2"
+            name: "建立稳定 conversation/message/version ID 与增量更新"
+            objective: "按 conversation/message/version 建立稳定 ID、hash 和增量更新。"
+            status: "planned"
+            estimated_hours: 1
+            estimated_pct: 0
+            dependencies:
+              - "S09-P1-T1"
+            acceptance_ids:
+              - "ACC-MA-V121-S09-P1-T2"
+            test_commands: []
+            evidence_refs: []
+            risks:
+              - "修改过的对话覆盖旧 raw 或版本 identity 不稳定"
+            rollback: "revert canonical-event changes; raw remains append-only."
+          - task_id: "S09-P1-T3"
+            name: "生成 ChatGPT 派生输入"
+            objective: "生成 ChatGPT facets、主题、活动和 Universe State 输入。"
+            status: "planned"
+            estimated_hours: 1
+            estimated_pct: 0
+            dependencies:
+              - "S09-P1-T2"
+            acceptance_ids:
+              - "ACC-MA-V121-S09-P1-T3"
+            test_commands: []
+            evidence_refs: []
+            risks:
+              - "派生记录缺少 raw evidence ref"
+            rollback: "revert derived outputs; raw and canonical events remain unchanged."
+      - phase_id: "MA-V121-S09-P2"
+        name: "通用 Agent connector 框架"
+        objective: "用 registry 驱动标准来源，并为非标准来源提供最小插件合同。"
+        status: "planned"
+        estimated_hours: 3
+        estimated_pct: 0
+        stop_conditions:
+          - "标准来源仍需复制整套 pipeline"
+          - "plugin 绕过 S06 安全合同"
+        stop_gate:
+          gate_id: "ACC-MA-V121-S09-P2"
+          status: "planned"
+          pass_conditions:
+            - "标准格式新增来源优先只改 registry"
+            - "至少一个 fixture 覆盖 raw、parser、derived 和 restore"
+          evidence_refs: []
+        tasks:
+          - task_id: "S09-P2-T1"
+            name: "定义通用只读 Agent adapter"
+            objective: "覆盖 file/directory/JSONL/JSON/SQLite export。"
+            status: "planned"
+            estimated_hours: 1
+            estimated_pct: 0
+            dependencies:
+              - "S09-P1-T3"
+            acceptance_ids: ["ACC-MA-V121-S09-P2-T1"]
+            test_commands: []
+            evidence_refs: []
+            risks: ["接口与 registry 重复或读取范围失控"]
+            rollback: "revert adapter contract; existing source adapters remain active."
+          - task_id: "S09-P2-T2"
+            name: "实现 future Agent fixture/source example"
+            objective: "覆盖 raw archive、manifest、parser、derived 和 main-push contract。"
+            status: "planned"
+            estimated_hours: 1
+            estimated_pct: 0
+            dependencies: ["S09-P2-T1"]
+            acceptance_ids: ["ACC-MA-V121-S09-P2-T2"]
+            test_commands: []
+            evidence_refs: []
+            risks: ["示例 agent 名称被写死为唯一未来来源"]
+            rollback: "revert fixture registration and derived example; raw remains append-only."
+          - task_id: "S09-P2-T3"
+            name: "定义非标准来源最小 plugin contract"
+            objective: "允许非标准格式接入但不能绕过 raw、credential 和 main gate。"
+            status: "planned"
+            estimated_hours: 1
+            estimated_pct: 0
+            dependencies: ["S09-P2-T2"]
+            acceptance_ids: ["ACC-MA-V121-S09-P2-T3"]
+            test_commands: []
+            evidence_refs: []
+            risks: ["插件获得绕过 credential 或 append-only gate 的路径"]
+            rollback: "revert plugin interface; keep registry-only adapters."
+      - phase_id: "MA-V121-S09-P3"
+        name: "统一状态与恢复"
+        objective: "统一 source cursor/state 并证明多来源可离线恢复。"
+        status: "planned"
+        estimated_hours: 3
+        estimated_pct: 0
+        stop_conditions:
+          - "一个来源失败导致其他来源状态不清"
+          - "恢复依赖原平台在线"
+          - "整包最终交付前真实 push"
+        stop_gate:
+          gate_id: "ACC-MA-V121-S09-P3"
+          status: "planned"
+          pass_conditions:
+            - "source-level cursor、last_success、raw_manifest、derived_version 完整"
+            - "ChatGPT 与示例 Agent 可从 raw archive 离线重建"
+            - "最终交付边界内无 branch、PR 或 force"
+          evidence_refs: []
+        tasks:
+          - task_id: "S09-P3-T1"
+            name: "统一 source state registry"
+            objective: "统一 ChatGPT、Codex 和其他 Agent 的 source-level 状态。"
+            status: "planned"
+            estimated_hours: 1
+            estimated_pct: 0
+            dependencies: ["S09-P2-T3"]
+            acceptance_ids: ["ACC-MA-V121-S09-P3-T1"]
+            test_commands: []
+            evidence_refs: []
+            risks: ["失败来源阻塞其他来源或整轮 push 状态不清"]
+            rollback: "revert state-registry adapter; retain source-specific state."
+          - task_id: "S09-P3-T2"
+            name: "证明 ChatGPT 与示例 Agent 离线恢复"
+            objective: "从 raw archive 重建 ChatGPT 和示例 Agent derived 数据。"
+            status: "planned"
+            estimated_hours: 1
+            estimated_pct: 0
+            dependencies: ["S09-P3-T1"]
+            acceptance_ids: ["ACC-MA-V121-S09-P3-T2"]
+            test_commands: []
+            evidence_refs: []
+            risks: ["恢复隐式依赖 live platform 或本机 cache"]
+            rollback: "remove task-owned restore workspace; preserve raw archives."
+          - task_id: "S09-P3-T3"
+            name: "验证 multi-source sync commit/main path"
+            objective: "验证后 commit 并在最终交付边界直接 push main。"
+            status: "planned"
+            estimated_hours: 1
+            estimated_pct: 0
+            dependencies: ["S09-P3-T2"]
+            acceptance_ids: ["ACC-MA-V121-S09-P3-T3"]
+            test_commands: []
+            evidence_refs: []
+            risks: ["整包最终交付前 push 或使用 branch、PR、force"]
+            rollback: "revert local sync commit; do not rewrite remote history."

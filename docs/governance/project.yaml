@@ -1499,6 +1499,42 @@ features:
       - "EVID-MA-V121-S08-P3-T1-TEST"
       - "EVID-MA-V121-S08-P3-T1-LIVE-GATE"
       - "EVID-MA-V121-S08-P3-T1-REVIEW"
+  - feature_id: "FEAT-MA-V121-S09-P1-T1"
+    name: "Memory Atlas loss-aware multi-format ChatGPT export parser"
+    description: "S09-P1-T1 introduces a read-only parser for canonical conversations JSON, numbered conversation JSON, ZIP members, attachment/metadata files and signature-recognizable future list/data/items containers. Recognized payloads preserve conversation, message, author, content, attachment and metadata extensions. Every malformed or unrecognized file/item/message enters sanitized hash-only quarantine instead of disappearing. The legacy list loader and S04 sync remain compatible; normalized extension fields are included in credential scanning. Stable IDs, versions, incremental dedupe and derived facets remain outside this Task. Owner explicitly deferred S08-P3 export work without accepting it."
+    status: "active"
+    fact_level: "VERIFIED"
+    model_ids:
+      - "MOD-009"
+    formula_ids:
+      - "FORM-009"
+    parameter_ids: []
+    code_refs:
+      - "OpenAIDatabase/scripts/memory_atlas_cli/chatgpt_export_parser.py"
+      - "OpenAIDatabase/scripts/sync_chatgpt_memory_data.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/source_registry.py"
+      - "OpenAIDatabase/tests/test_memory_atlas_chatgpt_export_parser.py"
+      - "OpenAIDatabase/tests/test_memory_atlas_source_registry.py"
+      - "OpenAIDatabase/AGENTS.md"
+    config_refs:
+      - "OpenAIDatabase/config/data_sources/chatgpt_export_parser.json"
+      - "OpenAIDatabase/config/data_sources/source_registry.json"
+      - "OpenAIDatabase/机器治理/参数与公式/chatgpt_export_parser.v1_2_1_s09_p1_t1.json"
+    source_refs:
+      - "OpenAIDatabase/机器治理/证据与日志/chatgpt_export_parser/chatgpt_export_parser.v1_2_1_s09_p1_t1.json"
+      - "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s09_p1_t1_chatgpt_export_parser_review.md"
+    owner_actions:
+      - "Do not resume export/browser/Mail/download work. Parse only an owner-provided or already governed export path. Inspect quarantine_count and reason_code before accepting a sync. S09-P1-T2 may add stable IDs/versioning only in a later run."
+    test_refs:
+      - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_chatgpt_export_parser -q"
+      - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_source_registry OpenAIDatabase.tests.test_s04p1_chatgpt_sync OpenAIDatabase.tests.test_memory_atlas_raw_ledger -q"
+      - "npm run validate:fast --prefix OpenAIDatabase/apps/memory-atlas"
+      - "npm run validate:sync --prefix OpenAIDatabase/apps/memory-atlas"
+    evidence_refs:
+      - "EVID-MA-V121-S09-P1-T1-CONTRACT"
+      - "EVID-MA-V121-S09-P1-T1-TEST"
+      - "EVID-MA-V121-S09-P1-T1-PROOF"
+      - "EVID-MA-V121-S09-P1-T1-REVIEW"
 models:
   -
     model_id: "MOD-001"
@@ -6034,4 +6070,24 @@ evidence_refs:
     evidence_id: "EVID-MA-V121-S08-P3-T1-REVIEW"
     kind: "review"
     ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s08_p3_t1_export_archive_review.md"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S09-P1-T1-CONTRACT"
+    kind: "config"
+    ref: "OpenAIDatabase/config/data_sources/chatgpt_export_parser.json"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S09-P1-T1-TEST"
+    kind: "test"
+    ref: "OpenAIDatabase/tests/test_memory_atlas_chatgpt_export_parser.py"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S09-P1-T1-PROOF"
+    kind: "artifact"
+    ref: "OpenAIDatabase/机器治理/证据与日志/chatgpt_export_parser/chatgpt_export_parser.v1_2_1_s09_p1_t1.json"
+    fact_level: "VERIFIED"
+  -
+    evidence_id: "EVID-MA-V121-S09-P1-T1-REVIEW"
+    kind: "review"
+    ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s09_p1_t1_chatgpt_export_parser_review.md"
     fact_level: "EXTRACTED"

@@ -78,6 +78,22 @@ class SourceRegistryContractTests(unittest.TestCase):
         self.assertEqual(sources["generic_agent_template"]["source_type"], "generic_agent")
         self.assertEqual(sources["chatgpt"]["archive_path"], "data/public_raw/chatgpt")
         self.assertEqual(
+            sources["chatgpt"]["parser"]["format_parser_entrypoint"],
+            "scripts/memory_atlas_cli/chatgpt_export_parser.py",
+        )
+        self.assertEqual(
+            sources["chatgpt"]["parser"]["format_parser_contract_ref"],
+            "config/data_sources/chatgpt_export_parser.json",
+        )
+        self.assertEqual(
+            sources["chatgpt"]["parser"]["format_parser_model_ref"],
+            "机器治理/参数与公式/chatgpt_export_parser.v1_2_1_s09_p1_t1.json",
+        )
+        self.assertEqual(
+            sources["chatgpt"]["parser"]["quarantine_path"],
+            "data/processed/conversations/chatgpt_parse_quarantine.jsonl",
+        )
+        self.assertEqual(
             sources["chatgpt"]["parser"]["raw_archive_entrypoint"],
             "scripts/memory_atlas_cli/chatgpt_export_archive.py",
         )

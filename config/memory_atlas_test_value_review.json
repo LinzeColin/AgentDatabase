@@ -27,8 +27,8 @@
     "deleted_python_test_count": 2,
     "retained_validator_count": 39,
     "retained_baseline_python_test_count": 49,
-    "added_python_test_count": 30,
-    "current_python_test_count": 79
+    "added_python_test_count": 31,
+    "current_python_test_count": 80
   },
   "profile_commands": {
     "fast": "npm run validate:fast",
@@ -60,6 +60,7 @@
     "tests/test_memory_atlas_chatgpt_export_link_discovery.py",
     "tests/test_memory_atlas_chatgpt_export_download.py",
     "tests/test_memory_atlas_chatgpt_export_archive.py",
+    "tests/test_memory_atlas_chatgpt_export_parser.py",
     "tests/test_memory_atlas_public_raw_layout.py",
     "tests/test_memory_atlas_credential_exclusion.py",
     "tests/test_memory_atlas_raw_ledger.py",
@@ -3537,6 +3538,16 @@
       ],
       "reason": "Retained because it proves S08-P3-T1 exact contract/model drift rejection, IDLE zero-private/raw access, forced single-part and 45 MiB multi-part archival, exact restore, append-only provenance and raw ledger registration, request/hash deduplication, state-write recovery, sanitized CLI output and ARCHIVED transition ordering.",
       "current_dependency": "S08-P3-T1 validate:sync, live IDLE zero-archive guard and full Python suites"
+    },
+    {
+      "path": "tests/test_memory_atlas_chatgpt_export_parser.py",
+      "risk_bindings": [
+        "data_integrity",
+        "release_risk",
+        "runner_contract"
+      ],
+      "reason": "Retained because it proves S09-P1-T1 strict contract/model drift rejection, canonical and numbered JSON, recognizable future containers, ZIP metadata and attachments, unknown-field preservation, explicit sanitized file/item/message quarantine, apply-sidecar safety and legacy sync compatibility.",
+      "current_dependency": "S09-P1-T1 validate:sync, ChatGPT parser regression and full Python suites"
     },
     {
       "path": "tests/test_memory_atlas_public_raw_layout.py",
