@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/LinzeColin/CodexProject/blob/main/OpenAIDatabase/config/memory.schema.json",
+  "$id": "https://github.com/LinzeColin/AgentDatabase/blob/main/OpenAIDatabase/config/memory.schema.json",
   "title": "OpenAIDatabase Memory Record V2",
   "description": "Single-record contract for the one logical portable-memory dataset. This schema does not create a database, service, writer, or second editable truth.",
   "type": "object",

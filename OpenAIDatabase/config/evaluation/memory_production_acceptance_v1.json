@@ -4,7 +4,7 @@
   "acceptance_id": "ACC.OpenAIDatabase.PAM1.0019",
   "release": {
     "version": "1.0.0",
-    "source_repository": "LinzeColin/CodexProject",
+    "source_repository": "LinzeColin/AgentDatabase",
     "source_tag": "portable-agent-memory-v1.0.0",
     "source_branch": "main",
     "snapshot_repository": "LinzeColin/AgentDatabase",

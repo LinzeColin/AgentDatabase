@@ -684,7 +684,7 @@ def evaluate_published(
         hygiene_report = run_json(
             (
                 sys.executable,
-                "scripts/repository_hygiene_audit.py",
+                "OpenAIDatabase/scripts/repository_hygiene_audit.py",
                 "--root",
                 ".",
                 "--tree-ish",

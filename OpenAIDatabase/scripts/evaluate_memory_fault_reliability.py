@@ -5,7 +5,6 @@ from __future__ import annotations
 
 import argparse
 import copy
-import importlib.util
 import json
 import os
 import shutil
@@ -26,6 +25,7 @@ if str(SCRIPTS_DIR) not in sys.path:
 
 import memory as memory_cli  # noqa: E402
 import memory_retrieval as retrieval  # noqa: E402
+from memory_settlement_policy import decide as decide_settlement  # noqa: E402
 from migrate_memory_records import record_hash, validate_dataset, validate_record  # noqa: E402
 from plan_memory_shards import (  # noqa: E402
     canonical_json_bytes,
@@ -40,7 +40,7 @@ SCHEMA_VERSION = "openai_database.memory_fault_reliability.v1"
 REPORT_SCHEMA_VERSION = "openai_database.memory_fault_reliability_report.v1"
 DEFAULT_CONFIG = Path("config/evaluation/memory_fault_reliability_v1.json")
 VALID_RECORDS = Path("tests/fixtures/memory_record_v2/valid_records.json")
-SETTLEMENT_FIXTURE = Path("tests/agent_loop/fixtures/settlement_cases.json")
+SETTLEMENT_FIXTURE = Path("tests/fixtures/memory_settlement_defaults.json")
 GITHUB_PATH = "OpenAIDatabase/data/memory/agent-memory.json"
 GITHUB_SHA = "a" * 40
 
@@ -50,13 +50,8 @@ class FaultReliabilityError(RuntimeError):
 
 
 def _load_settlement_decider(repository_root: Path) -> Callable[[Mapping[str, Any]], dict[str, Any]]:
-    path = repository_root / "scripts/agent_loop/settlement_policy.py"
-    spec = importlib.util.spec_from_file_location("fault_reliability_settlement_policy", path)
-    if spec is None or spec.loader is None:
-        raise FaultReliabilityError("settlement_policy_unavailable")
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    return module.decide
+    del repository_root
+    return decide_settlement
 
 
 def _safe_relative_path(value: str) -> Path:
@@ -428,7 +423,7 @@ def _settlement_case(
     decide: Callable[[Mapping[str, Any]], dict[str, Any]],
     case: Mapping[str, Any],
 ) -> dict[str, Any]:
-    fixture = _load_json(repository_root / SETTLEMENT_FIXTURE)
+    fixture = _load_json(DATABASE_DIR / SETTLEMENT_FIXTURE)
     payload = {**fixture["defaults"], **case.get("overrides", {})}
     scenario = str(case["scenario"])
     if scenario == "settlement_double_run":

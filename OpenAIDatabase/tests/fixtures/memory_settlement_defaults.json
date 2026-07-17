@@ -1,0 +1,20 @@
+{
+  "schema_version": "openai_database.memory_settlement_fixture.v1",
+  "defaults": {
+    "workflow_conclusion": "success",
+    "pr_state": "open",
+    "issue_open": false,
+    "duplicate_event": false,
+    "orphan": false,
+    "trusted_marker": true,
+    "same_repo": true,
+    "authorized_actor": true,
+    "head_exact": true,
+    "superseded": false,
+    "non_draft": true,
+    "base_main": true,
+    "tested_base_exact": true,
+    "mergeable": true,
+    "required_checks_pass": true
+  }
+}

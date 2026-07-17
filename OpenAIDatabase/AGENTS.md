@@ -35,7 +35,9 @@ Use route-specific files before broad repository search.
   `docs/governance/roadmap.yaml`, `docs/governance/events.jsonl`, `VERSION`, and
   `CHANGELOG.md`.
 - `功能清单.md`, `开发记录.md`, and `模型参数文件.md` are deterministic, non-editable
-  human views written only by `scripts/lean_governance.py render`.
+  human views written only from the current canonical governance source by
+  `OpenAIDatabase/scripts/lean_governance.py --database-dir OpenAIDatabase render --write`
+  when run from the repository root.
 - Files listed in `docs/governance/legacy_disposition.json` are hash-locked
   compatibility evidence. Do not edit or regenerate them without an explicit
   owner-authorized migration that updates the retention policy.
@@ -113,5 +115,5 @@ python3 -m unittest discover -s tests -p "test_*.py" -q
   避免大范围数据扫描。
 - 不得读取完整 `模型参数文件.md`，除非变更涉及 profile scoring、路由、个性化规则、
   评估指标、memory sync、隐私门禁或派生上下文生成。
-- 治理验证：`python -B scripts/lean_governance.py validate --project OpenAIDatabase --semantic`。
-- owner 预览：`python -B scripts/lean_governance.py check-render --project OpenAIDatabase`。
+- 治理验证：`python3 -B OpenAIDatabase/scripts/lean_governance.py --database-dir OpenAIDatabase validate`。
+- owner 预览：`python3 -B OpenAIDatabase/scripts/lean_governance.py --database-dir OpenAIDatabase check-render`。

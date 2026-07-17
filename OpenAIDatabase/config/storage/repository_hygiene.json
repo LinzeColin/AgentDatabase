@@ -1,0 +1,46 @@
+{
+  "schema_version": "agent_database.repository_hygiene.v1",
+  "default_blob_max_bytes": 1048576,
+  "allowed_large_objects": [
+    {
+      "prefix": "OpenAIDatabase/data/public_raw/",
+      "max_bytes": 41943040,
+      "reason": "tracked public sanitized append-only source evidence"
+    },
+    {
+      "prefix": "OpenAIDatabase/data/releases/memory_atlas/",
+      "max_bytes": 4194304,
+      "reason": "bounded redacted Memory Atlas release snapshot"
+    },
+    {
+      "prefix": "OpenAIDatabase/data/memory/active/",
+      "max_bytes": 2097152,
+      "reason": "read-only legacy migration evidence; no new writer"
+    }
+  ],
+  "allowed_archive_prefixes": [
+    "OpenAIDatabase/docs/migration_handoff/20260717_local_s04_s13_preservation/patches/"
+  ],
+  "archive_suffixes": [
+    ".zip",
+    ".gz",
+    ".tgz",
+    ".tar",
+    ".tar.gz",
+    ".7z",
+    ".rar"
+  ],
+  "forbidden_names": [
+    ".env",
+    ".env.local",
+    "credentials.json",
+    "id_rsa",
+    "id_ed25519"
+  ],
+  "forbidden_suffixes": [
+    ".pem",
+    ".p12",
+    ".pfx",
+    ".key"
+  ]
+}

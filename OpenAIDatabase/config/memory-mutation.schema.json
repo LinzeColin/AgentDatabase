@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/LinzeColin/CodexProject/blob/main/OpenAIDatabase/config/memory-mutation.schema.json",
+  "$id": "https://github.com/LinzeColin/AgentDatabase/blob/main/OpenAIDatabase/config/memory-mutation.schema.json",
   "title": "OpenAIDatabase Governed Memory Mutation Envelope V1",
   "type": "object",
   "additionalProperties": false,

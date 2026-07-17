@@ -122,7 +122,7 @@ def fail_not_git(database_dir: Path, dry_run: bool, apply: bool) -> dict[str, An
         "remote_push": False,
         "pushed": False,
         "中文原因": "当前 database-dir 不在 Git worktree 内，无法生成可恢复的 GitHub 备份提交。",
-        "fallback建议": "切换到 LinzeColin/CodexProject/OpenAIDatabase 的规范 checkout 后重试；不要在临时目录伪造备份。",
+        "fallback建议": "切换到 LinzeColin/AgentDatabase/OpenAIDatabase 的规范 checkout 后重试；不要在临时目录伪造备份。",
     }
 
 

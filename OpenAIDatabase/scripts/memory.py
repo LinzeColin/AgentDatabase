@@ -514,7 +514,7 @@ def build_agent_memory_views(
         "generated": True,
         "editable": False,
         "marker": AGENT_MEMORY_MARKER,
-        "repository": "LinzeColin/CodexProject",
+        "repository": "LinzeColin/AgentDatabase",
         "project_root": "OpenAIDatabase",
         "commit_sha": source_commit_sha,
         "commit_semantics": "canonical_source_commit",

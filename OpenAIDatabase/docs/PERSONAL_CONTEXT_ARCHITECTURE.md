@@ -2,7 +2,7 @@
 
 This document is the canonical architecture entry for future agents that need
 profile, preference, taste, history, pattern, project context, or
-personalization data from `LinzeColin/CodexProject/OpenAIDatabase`.
+personalization data from `LinzeColin/AgentDatabase/OpenAIDatabase`.
 
 ## Scope
 

@@ -134,7 +134,7 @@ def validate_policy(policy: Mapping[str, Any]) -> None:
         or policy.get("task_id") != TASK_ID
         or policy.get("acceptance_id") != ACCEPTANCE_ID
         or policy.get("snapshot_version") != SNAPSHOT_VERSION
-        or policy.get("source_repository") != "LinzeColin/CodexProject"
+        or policy.get("source_repository") != "LinzeColin/AgentDatabase"
     ):
         raise SnapshotError("snapshot_policy_identity_invalid")
     archive = _mapping(policy.get("archive"), "snapshot_policy_archive")

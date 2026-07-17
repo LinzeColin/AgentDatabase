@@ -292,7 +292,7 @@ def make_envelope(profile_id: str, path: str, payload: bytes, artifact_ref: str)
     digest = sha256_prefixed(payload)
     text = payload.decode("utf-8")
     if profile_id == "chatgpt_github":
-        return {"repository": "LinzeColin/CodexProject", "path": path, "ref": artifact_ref, "text": text, "sha256": digest}
+        return {"repository": "LinzeColin/AgentDatabase", "path": path, "ref": artifact_ref, "text": text, "sha256": digest}
     if profile_id == "codex_git":
         return {"path": path, "ref": artifact_ref, "text": text, "sha256": digest, "agents_chain": True}
     if profile_id == "github_mcp":
@@ -398,7 +398,7 @@ def run_profile(
     if len(accesses) > int(profile["max_repository_reads"]):
         raise CompatibilityError("profile_read_bound_exceeded")
     citation = {
-        "repository": "LinzeColin/CodexProject",
+        "repository": "LinzeColin/AgentDatabase",
         "path": repository_shard_path,
         "artifact_ref": artifact_ref,
         "id": identity["id"],

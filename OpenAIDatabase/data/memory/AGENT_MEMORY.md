@@ -6,7 +6,7 @@
 
 - protocol: `linze-agent-memory/3.0`
 - machine handshake: `data/memory/agent-memory.json`
-- canonical source commit: `bed2c13bec7b62653d76ec6711ce3a5c990bd34f`
+- canonical source commit: `be347c256c5343caaec2e8c747503c0c270853ef`
 - canonical dataset SHA-256: `sha256:fa9edb7191c5751331f52f4103aa1a6709a7a1e22044d6d85e38ed7d771ca927`
 - deterministic source timestamp: `2026-07-16T23:41:35Z`
 - hot context records: `6` (`status=active`, `importance=high`)

@@ -3,7 +3,7 @@
   "task_id": "TSK.OpenAIDatabase.PAM1.0018",
   "acceptance_id": "ACC.OpenAIDatabase.PAM1.0018",
   "snapshot_version": "portable-agent-memory-v1",
-  "source_repository": "LinzeColin/CodexProject",
+  "source_repository": "LinzeColin/AgentDatabase",
   "archive": {
     "format": "zip-stored-v1",
     "asset_name_template": "portable-agent-memory-v1-{commit}.zip",

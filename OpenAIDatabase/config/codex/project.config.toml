@@ -6,7 +6,7 @@
 schema_version = "openai_database.codex_project_config.v1"
 manifest_kind = "project_personalization_manifest"
 project_id = "OpenAIDatabase"
-canonical_github_path = "LinzeColin/CodexProject/OpenAIDatabase"
+canonical_github_path = "LinzeColin/AgentDatabase/OpenAIDatabase"
 default_intent = "startup"
 agents_file = "AGENTS.md"
 architecture_doc = "docs/PERSONAL_CONTEXT_ARCHITECTURE.md"

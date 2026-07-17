@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/LinzeColin/CodexProject/OpenAIDatabase/config/agent-memory.schema.json",
+  "$id": "https://github.com/LinzeColin/AgentDatabase/OpenAIDatabase/config/agent-memory.schema.json",
   "title": "OpenAIDatabase Agent Memory Handshake",
   "type": "object",
   "additionalProperties": false,
@@ -41,7 +41,7 @@
     "generated": {"const": true},
     "editable": {"const": false},
     "marker": {"const": "LINZE_AGENT_MEMORY_V3"},
-    "repository": {"const": "LinzeColin/CodexProject"},
+    "repository": {"const": "LinzeColin/AgentDatabase"},
     "project_root": {"const": "OpenAIDatabase"},
     "commit_sha": {"$ref": "#/$defs/gitSha"},
     "commit_semantics": {"const": "canonical_source_commit"},

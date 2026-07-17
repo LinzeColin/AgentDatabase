@@ -5,7 +5,7 @@
       "expected_terminal": "MERGE_DELETE",
       "id": "E2E-ADD-001",
       "observed": {
-        "base_sha": "17b8a03821a7193ee763e449183dc95dc3699c6d",
+        "base_sha": "34d57aad34e2623471c4439489efcafc19db93ff",
         "daily_manual_pending_count": 0,
         "duplicate_pr_count": 0,
         "duplicate_record_count": 0,
@@ -17,10 +17,10 @@
           "open_issue_count": 0,
           "open_pr_count": 0
         },
-        "final_commit_sha": "f348921db15b06db45f2a73c0cb74c6c9a3ad719",
-        "head_sha": "04c9cc8dd670298cc648da7be294eb3a33760dc1",
+        "final_commit_sha": "acb2d14188978553ae82b77c1daa4a14ce07e753",
+        "head_sha": "3d361d5d2a8e27fa004fc9d10b10a46bd8f4a25a",
         "live_network_request_count": 0,
-        "memory_id": "mem_497524680afad530f91d1564",
+        "memory_id": "mem_a9b7001a64f3d73c26431a7a",
         "mutation_cli": "PASS",
         "new_fact_profile_tested": true,
         "old_fact_invisible": null,
@@ -46,7 +46,7 @@
       "expected_terminal": "MERGE_DELETE",
       "id": "E2E-UPD-001",
       "observed": {
-        "base_sha": "17b8a03821a7193ee763e449183dc95dc3699c6d",
+        "base_sha": "34d57aad34e2623471c4439489efcafc19db93ff",
         "daily_manual_pending_count": 0,
         "duplicate_pr_count": 0,
         "duplicate_record_count": 0,
@@ -58,10 +58,10 @@
           "open_issue_count": 0,
           "open_pr_count": 0
         },
-        "final_commit_sha": "5d24f4b507b9000e77180ca9e91f82f905269d39",
-        "head_sha": "ba33580416e8c7144c00b69bfa6d8f4d67d3f032",
+        "final_commit_sha": "974231ac6c86988398ae0c4fbbbb0399f7cb5545",
+        "head_sha": "504209e767a0f03ccd155952e71351edc9ef6e7c",
         "live_network_request_count": 0,
-        "memory_id": "mem_7aee3d89b4c004dbb4a85e6a",
+        "memory_id": "mem_61a028476b57a8fd2ce12b4b",
         "mutation_cli": "PASS",
         "new_fact_profile_tested": true,
         "old_fact_invisible": true,
@@ -87,7 +87,7 @@
       "expected_terminal": "MERGE_DELETE",
       "id": "E2E-RET-001",
       "observed": {
-        "base_sha": "17b8a03821a7193ee763e449183dc95dc3699c6d",
+        "base_sha": "34d57aad34e2623471c4439489efcafc19db93ff",
         "daily_manual_pending_count": 0,
         "duplicate_pr_count": 0,
         "duplicate_record_count": 0,
@@ -99,8 +99,8 @@
           "open_issue_count": 0,
           "open_pr_count": 0
         },
-        "final_commit_sha": "047eb70d8b7cd8109357958bfdcd6d4aaaa3bd98",
-        "head_sha": "e7be52dbe17cae6949163fa9f8acac5bca640ac7",
+        "final_commit_sha": "272cb476a72bba05ebf7cc1c57a3f3de24c8314e",
+        "head_sha": "120b9c7db7c2f183474b0b8e276e211de70a506a",
         "live_network_request_count": 0,
         "memory_id": "mem_fixture_project_0003",
         "mutation_cli": "PASS",
@@ -128,7 +128,7 @@
       "expected_terminal": "CLOSE_DELETE",
       "id": "E2E-DSP-001",
       "observed": {
-        "base_sha": "17b8a03821a7193ee763e449183dc95dc3699c6d",
+        "base_sha": "34d57aad34e2623471c4439489efcafc19db93ff",
         "daily_manual_pending_count": 0,
         "duplicate_pr_count": 0,
         "duplicate_record_count": 0,
@@ -139,8 +139,8 @@
           "open_issue_count": 0,
           "open_pr_count": 0
         },
-        "final_commit_sha": "17b8a03821a7193ee763e449183dc95dc3699c6d",
-        "head_sha": "23c8afc83bdf7d5503cac81b72b64feb931550a0",
+        "final_commit_sha": "34d57aad34e2623471c4439489efcafc19db93ff",
+        "head_sha": "e47821ebeb5598345745f71cf6e0c7c681ca6764",
         "live_network_request_count": 0,
         "memory_id": "mem_fixture_project_0003",
         "mutation_cli": "FAIL_CLOSED",
@@ -167,7 +167,7 @@
       "expected_terminal": "MERGE_DELETE",
       "id": "E2E-NOP-001",
       "observed": {
-        "base_sha": "17b8a03821a7193ee763e449183dc95dc3699c6d",
+        "base_sha": "34d57aad34e2623471c4439489efcafc19db93ff",
         "daily_manual_pending_count": 0,
         "duplicate_pr_count": 0,
         "duplicate_record_count": 0,
@@ -179,10 +179,10 @@
           "open_issue_count": 0,
           "open_pr_count": 0
         },
-        "final_commit_sha": "c2491d8e1052b7888906d125fb8518868a340c8e",
-        "head_sha": "dd015295da65126639515dd99e95dececf595b83",
+        "final_commit_sha": "e0d7ae84263c3390ec6cb8d48a5a9c738e45d2eb",
+        "head_sha": "b4dfba51563a69529b3dd95960c846e3617c33b3",
         "live_network_request_count": 0,
-        "memory_id": "mem_10d047ff7ebb73400c8ddee3",
+        "memory_id": "mem_9199a76fd608b50f6a20a2d0",
         "mutation_cli": "PASS",
         "new_fact_profile_tested": true,
         "old_fact_invisible": null,
@@ -208,7 +208,7 @@
       "expected_terminal": "PRECHECK_REJECT",
       "id": "E2E-INV-001",
       "observed": {
-        "base_sha": "17b8a03821a7193ee763e449183dc95dc3699c6d",
+        "base_sha": "34d57aad34e2623471c4439489efcafc19db93ff",
         "daily_manual_pending_count": 0,
         "duplicate_pr_count": 0,
         "duplicate_record_count": 0,
@@ -219,7 +219,7 @@
           "open_issue_count": 0,
           "open_pr_count": 0
         },
-        "final_commit_sha": "17b8a03821a7193ee763e449183dc95dc3699c6d",
+        "final_commit_sha": "34d57aad34e2623471c4439489efcafc19db93ff",
         "head_sha": null,
         "live_network_request_count": 0,
         "memory_id": null,
@@ -247,7 +247,7 @@
       "expected_terminal": "PRECHECK_REJECT",
       "id": "E2E-INF-001",
       "observed": {
-        "base_sha": "17b8a03821a7193ee763e449183dc95dc3699c6d",
+        "base_sha": "34d57aad34e2623471c4439489efcafc19db93ff",
         "daily_manual_pending_count": 0,
         "duplicate_pr_count": 0,
         "duplicate_record_count": 0,
@@ -258,7 +258,7 @@
           "open_issue_count": 0,
           "open_pr_count": 0
         },
-        "final_commit_sha": "17b8a03821a7193ee763e449183dc95dc3699c6d",
+        "final_commit_sha": "34d57aad34e2623471c4439489efcafc19db93ff",
         "head_sha": null,
         "live_network_request_count": 0,
         "memory_id": null,
@@ -322,7 +322,7 @@
   "schema_version": "openai_database.memory_automation_c_e2e_report.v1",
   "status": "PASS",
   "synthetic_fixture_only": true,
-  "target_repository": "LinzeColin/CodexProject",
+  "target_repository": "LinzeColin/AgentDatabase",
   "target_repository_remote_writes": 0,
   "task_id": "TSK.OpenAIDatabase.PAM1.0017"
 }

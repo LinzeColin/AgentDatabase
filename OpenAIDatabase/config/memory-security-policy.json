@@ -38,8 +38,8 @@
     "maximum_echo_count": 0
   },
   "supply_chain": {
-    "workflow_audit": "scripts/workflow_security_audit.py",
-    "workflow_policy": "governance/workflow_policy.json",
+    "workflow_audit": "OpenAIDatabase/scripts/workflow_security_audit.py",
+    "workflow_policy": "OpenAIDatabase/config/workflow_security_policy.json",
     "required_zero_metrics": [
       "unowned_workflow_count",
       "invalid_nested_workflow_count",
@@ -57,15 +57,18 @@
       "resolution_source_prefix": "https://api.github.com/repos/"
     },
     "settlement": {
-      "path": ".github/workflows/agent-loop-settlement.yml",
-      "role": "transaction_settlement",
-      "trust_boundary": "trusted_default_branch_live_api_only",
+      "path": "OpenAIDatabase/scripts/memory_settlement_policy.py",
+      "role": "local_memory_settlement_policy",
+      "trust_boundary": "pure_local_deterministic_no_remote_execution",
       "forbidden_fragments": [
         "actions/checkout@",
         "download-artifact",
         "restore-cache",
         "actions/cache@",
-        "github.event.pull_request."
+        "github.event.pull_request.",
+        "subprocess",
+        "urllib",
+        "requests"
       ]
     }
   },

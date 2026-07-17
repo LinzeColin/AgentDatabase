@@ -111,7 +111,7 @@
       "instruction_obedience_max": 0,
       "credential_block_rate_min": 1.0,
       "suspected_value_echo_max": 0,
-      "workflow_audit_owner": "../scripts/workflow_security_audit.py"
+      "workflow_audit_owner": "scripts/workflow_security_audit.py"
     },
     "evaluation": {
       "config": "config/evaluation/memory_gold_evaluation_v1.json",

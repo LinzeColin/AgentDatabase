@@ -10,13 +10,13 @@ policy.
 from __future__ import annotations
 
 import argparse
-import importlib.util
 import json
 import re
 from pathlib import Path
 from typing import Any, Callable, Mapping, Sequence
 
 from plan_memory_shards import canonical_json_bytes, sha256_prefixed
+from memory_settlement_policy import decide as decide_settlement
 
 
 TASK_ID = "TSK.OpenAIDatabase.PAM1.0017"
@@ -25,7 +25,7 @@ MUTATION_TASK_ID = "TSK.OpenAIDatabase.PAM1.0009"
 MUTATION_ACCEPTANCE_ID = "ACC.OpenAIDatabase.PAM1.0009"
 SCHEMA_VERSION = "openai_database.memory_automation_c.v1"
 PLAN_SCHEMA_VERSION = "openai_database.memory_cli_plan.v1"
-REPOSITORY = "LinzeColin/CodexProject"
+REPOSITORY = "LinzeColin/AgentDatabase"
 REQUIRED_CI = "Project Governance / governance"
 SHA_RE = re.compile(r"^[0-9a-f]{40}$")
 TRANSACTION_ID_RE = re.compile(r"^mut_[0-9a-f]{20}$")
@@ -317,14 +317,8 @@ def settlement_input(
 def load_settlement_decider(
     repository_root: Path | None = None,
 ) -> Callable[[Mapping[str, Any]], dict[str, Any]]:
-    root = repository_root or Path(__file__).resolve().parents[2]
-    path = root / "scripts/agent_loop/settlement_policy.py"
-    spec = importlib.util.spec_from_file_location("memory_automation_c_settlement_policy", path)
-    if spec is None or spec.loader is None:
-        raise AutomationCError("settlement_policy_unavailable")
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    return module.decide
+    del repository_root
+    return decide_settlement
 
 
 def prepare_from_plan(plan: Mapping[str, Any], *, head_sha: str, repository: str) -> dict[str, Any]:

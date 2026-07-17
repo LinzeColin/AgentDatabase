@@ -1,0 +1,44 @@
+{
+  "schema_version": "agent_database.workflow_security_policy.v1",
+  "allowed_workflows": [
+    ".github/workflows/dual-plane.yml"
+  ],
+  "allowed_events": [
+    "push",
+    "pull_request",
+    "workflow_dispatch"
+  ],
+  "forbidden_events": [
+    "issue_comment",
+    "pull_request_target",
+    "repository_dispatch",
+    "workflow_run"
+  ],
+  "required_permissions": {
+    "contents": "read"
+  },
+  "action_pins": [
+    {
+      "action": "actions/checkout",
+      "commit_sha": "34e114876b0b11c390a56381ad16ebd13914f8d5",
+      "source": "https://api.github.com/repos/actions/checkout/git/ref/tags/v4"
+    },
+    {
+      "action": "actions/setup-python",
+      "commit_sha": "a26af69be951a213d495a4c3e4e4022e16d87065",
+      "source": "https://api.github.com/repos/actions/setup-python/git/ref/tags/v5"
+    }
+  ],
+  "workflows": [
+    {
+      "path": ".github/workflows/dual-plane.yml",
+      "role": "dual_plane_ci",
+      "trust_boundary": "trusted_repository_ci_read_only"
+    },
+    {
+      "path": "OpenAIDatabase/scripts/memory_settlement_policy.py",
+      "role": "local_memory_settlement_policy",
+      "trust_boundary": "pure_local_deterministic_no_remote_execution"
+    }
+  ]
+}
