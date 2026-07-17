@@ -15,7 +15,8 @@
 ## Canonical 与 patch 完整性
 
 - 本 run 起点：`HEAD == origin/main == 89d5a48dbebcc6ac0cba8126df11ad7c19e38d7e`，clean。
-- 本地 compatibility checkpoint：`b6d0e401acb0b2678a2b0c48ca34e9cba3e10bdc`；未 push。
+- compatibility checkpoint：`b6d0e401acb0b2678a2b0c48ca34e9cba3e10bdc`；作为本 run
+  正常 main commit series 的第一提交。
 - 逻辑 patch：`45`；存储文件：`46`。
 - stored series SHA-256：`c79feb8be37c63546cb5f0118b5687bc8c9fc1b14bca76981f5fbadc69a4f0e2`，PASS。
 - decompressed series SHA-256：`4ee88eb7be9a889308344dcd8540bee13caaa3924e253594a4e36b18fc20e0b9`，PASS。
