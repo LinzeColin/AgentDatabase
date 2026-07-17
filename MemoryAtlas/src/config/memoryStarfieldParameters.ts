@@ -1,4 +1,4 @@
-import memoryStarfieldParamsYaml from "../../../../config/visualization/model_parameters.memory_starfield.yaml?raw";
+import memoryStarfieldParamsYaml from "../../../OpenAIDatabase/config/visualization/model_parameters.memory_starfield.yaml?raw";
 
 export type StarfieldQuality = "high" | "mid" | "low";
 export type MemoryTerrainType = "ridge" | "valley" | "basin" | "fault-line" | "shoreline";

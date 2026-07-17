@@ -3,7 +3,9 @@ import react from "@vitejs/plugin-react";
 import { fileURLToPath, URL } from "node:url";
 
 const appDir = fileURLToPath(new URL(".", import.meta.url));
-const atlasDataDir = fileURLToPath(new URL("../../data/derived/visualization", import.meta.url));
+const atlasDataDir = fileURLToPath(
+  new URL("../OpenAIDatabase/data/derived/visualization", import.meta.url),
+);
 
 export default defineConfig({
   plugins: [react()],
