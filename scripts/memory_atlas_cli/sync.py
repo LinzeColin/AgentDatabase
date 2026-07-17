@@ -124,6 +124,20 @@ def chatgpt_contract(redact_for_public_backup: bool = False) -> dict[str, object
             "writes_files": False,
             "append_only": True,
         },
+        "derived_inputs": {
+            "status": "NOT_RUN",
+            "reason": "dry_run_without_committed_canonical_events",
+            "output_paths": {
+                "facets": "data/derived/chatgpt/chatgpt_facets.jsonl",
+                "topics": "data/derived/chatgpt/chatgpt_topics.json",
+                "activity": "data/derived/chatgpt/chatgpt_activity.jsonl",
+                "universe_state_input": "data/derived/chatgpt/chatgpt_universe_state_input.json",
+                "state": "data/derived/chatgpt/chatgpt_derived_state.json",
+            },
+            "writes_files": False,
+            "raw_mutation": False,
+            "canonical_mutation": False,
+        },
     }
 
 

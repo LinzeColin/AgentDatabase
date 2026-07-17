@@ -109,8 +109,26 @@ class SourceRegistryContractTests(unittest.TestCase):
             sources["chatgpt"]["parser"]["canonical_event_output"],
             "data/processed/conversations/chatgpt_canonical_events.jsonl",
         )
+        self.assertEqual(
+            sources["chatgpt"]["parser"]["derived_entrypoint"],
+            "scripts/build_memory_atlas_chatgpt_derived.py",
+        )
+        self.assertEqual(
+            sources["chatgpt"]["parser"]["derived_contract_ref"],
+            "config/data_sources/chatgpt_derived.json",
+        )
+        self.assertEqual(
+            sources["chatgpt"]["parser"]["derived_model_ref"],
+            "机器治理/参数与公式/chatgpt_derived.v1_2_1_s09_p1_t3.json",
+        )
+        for field in ("derived_entrypoint", "derived_contract_ref", "derived_model_ref"):
+            self.assertTrue((ROOT / sources["chatgpt"]["parser"][field]).is_file())
         self.assertIn(
             "data/processed/conversations/chatgpt_canonical_events.jsonl",
+            sources["chatgpt"]["derived_outputs"],
+        )
+        self.assertIn(
+            "data/derived/chatgpt/chatgpt_universe_state_input.json",
             sources["chatgpt"]["derived_outputs"],
         )
         self.assertEqual(
@@ -584,6 +602,12 @@ class SourceRegistryContractTests(unittest.TestCase):
             ("raw_archive_entrypoint", "scripts/memory_atlas_cli/codex_public_raw_archive.py"),
             ("raw_archive_contract_ref", "config/data_sources/codex_public_raw_archive.json"),
             ("complete_archive_root", "data/raw_archives/codex"),
+            ("derived_entrypoint", "scripts/build_memory_atlas_codex_derived.py"),
+            ("derived_contract_ref", "config/data_sources/codex_derived.json"),
+            (
+                "derived_model_ref",
+                "机器治理/参数与公式/codex_derived.v1_2_1_s07_p2_t1.json",
+            ),
         )
         for field, value in mutations:
             with self.subTest(field=field):

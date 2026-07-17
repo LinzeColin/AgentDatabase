@@ -8,7 +8,7 @@ next_gate_id: "ACC.OpenAIDatabase.PAM1.0019"
 total_estimated_hours: 255
 completed_estimated_hours: 241
 taskpack_progress:
-  completed_tasks: 62
+  completed_tasks: 63
   total_tasks: 149
   delivery_state: "local_only_not_released"
 stages:
@@ -3121,7 +3121,7 @@ stages:
     person_goal: "把 ChatGPT 导出稳定解析为增量可追溯数据，并让后续 Agent 通过统一注册表自动备份。"
     status: "in_progress"
     estimated_hours: 9
-    estimated_pct: 22
+    estimated_pct: 33
     scope_override: "Owner deferred incomplete S08-P3 real-export work on 2026-07-17 and authorized parser development without declaring S08 complete."
     stop_conditions:
       - "解析器覆盖或修改 raw 文件"
@@ -3141,20 +3141,26 @@ stages:
       - phase_id: "MA-V121-S09-P1"
         name: "ChatGPT 多格式解析与增量去重"
         objective: "覆盖官方导出变体，随后建立稳定版本和可追溯派生。"
-        status: "in_progress"
+        status: "completed"
         estimated_hours: 3
-        estimated_pct: 67
+        estimated_pct: 100
         stop_conditions:
           - "未知字段被删除"
           - "无法解析项未进入 quarantine"
           - "稳定 ID 依赖可变内容，或修改后的对话覆盖旧 raw"
         stop_gate:
           gate_id: "ACC-MA-V121-S09-P1"
-          status: "open"
+          status: "completed"
           pass_conditions:
             - "多格式 parser 不静默丢失字段或失败项"
             - "后续版本与派生均可追溯到 append-only raw"
-          evidence_refs: []
+          evidence_refs:
+            - "EVID-MA-V121-S09-P1-T1-PROOF"
+            - "EVID-MA-V121-S09-P1-T1-REVIEW"
+            - "EVID-MA-V121-S09-P1-T2-PROOF"
+            - "EVID-MA-V121-S09-P1-T2-REVIEW"
+            - "EVID-MA-V121-S09-P1-T3-PROOF"
+            - "EVID-MA-V121-S09-P1-T3-REVIEW"
         tasks:
           - task_id: "S09-P1-T1"
             name: "支持 ChatGPT 多格式导出与显式 quarantine"
@@ -3243,18 +3249,44 @@ stages:
           - task_id: "S09-P1-T3"
             name: "生成 ChatGPT 派生输入"
             objective: "生成 ChatGPT facets、主题、活动和 Universe State 输入。"
-            status: "planned"
+            status: "completed"
             estimated_hours: 1
-            estimated_pct: 0
+            estimated_pct: 100
             dependencies:
               - "S09-P1-T2"
             acceptance_ids:
               - "ACC-MA-V121-S09-P1-T3"
-            test_commands: []
-            evidence_refs: []
+            acceptance:
+              - acceptance_id: "ACC-MA-V121-S09-P1-T3"
+                description: "The builder validates the entire append-only canonical ledger and every referenced public-raw file before publication. Latest canonical versions generate current facets, shared-rule topics and Universe State clusters; all canonical versions generate activity history. Every facet, topic, activity row and cluster contains direct raw-file and canonical-event/version evidence. Message bodies are not persisted, exact replay writes no derived bytes, changed history rebuilds only replaceable derived files, and normal ChatGPT sync invokes the builder after canonical commit. Raw/canonical bytes and S09-P2 generic adapters remain outside T3."
+                evidence_refs:
+                  - "EVID-MA-V121-S09-P1-T3-CONTRACT"
+                  - "EVID-MA-V121-S09-P1-T3-TEST"
+                  - "EVID-MA-V121-S09-P1-T3-PROOF"
+                  - "EVID-MA-V121-S09-P1-T3-REVIEW"
+            test_commands:
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_chatgpt_derived -q"
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_chatgpt_canonical_events OpenAIDatabase.tests.test_memory_atlas_source_registry OpenAIDatabase.tests.test_s04p1_chatgpt_sync OpenAIDatabase.tests.test_atlasctl_modular_cli -q"
+              - "ruff check OpenAIDatabase/scripts/memory_atlas_cli/chatgpt_derived.py OpenAIDatabase/scripts/memory_atlas_cli/chatgpt_canonical_events.py OpenAIDatabase/scripts/memory_atlas_cli/source_registry.py OpenAIDatabase/scripts/sync_chatgpt_memory_data.py OpenAIDatabase/tests/test_memory_atlas_chatgpt_derived.py"
+              - "npm run validate:fast --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run validate:sync --prefix OpenAIDatabase/apps/memory-atlas"
+              - "python3 -B OpenAIDatabase/scripts/audit_memory_atlas_human_plane.py"
+              - "python3 -B OpenAIDatabase/scripts/audit_memory_atlas_test_value.py"
+              - "python3 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+            test_results:
+              - "Test-first failed with ModuleNotFoundError before implementation. Dedicated contract/model, direct raw/canonical evidence, replay, version-history, tamper, CLI and sync-integration regression passes 9/9."
+              - "Canonical/source-registry/S04/CLI compatibility passes 37/37; ruff and py_compile pass."
+              - "Related regression passes 154/154 before final evidence refresh. Codex/registry follow-up passes 52/52 after removing cross-source temp-fixture file-existence coupling while retaining exact registry values."
+              - "validate:fast passes 6/6 in 23.149 seconds after updating two remaining intentional ChatGPT dry-run stdout snapshots. validate:sync passes 10/10 in 193.074 seconds, including a 50.231-second sync unit step and a 136.698-second credential scan; raw_mutation=false, remote_push=false and shell=false."
+            evidence_refs:
+              - "EVID-MA-V121-S09-P1-T3-CONTRACT"
+              - "EVID-MA-V121-S09-P1-T3-TEST"
+              - "EVID-MA-V121-S09-P1-T3-PROOF"
+              - "EVID-MA-V121-S09-P1-T3-REVIEW"
             risks:
               - "派生记录缺少 raw evidence ref"
             rollback: "revert derived outputs; raw and canonical events remain unchanged."
+            current_result: "complete_local_only_63_of_149_traceable_facets_topics_activity_universe_inputs_s08_export_deferred_no_remote_upload"
       - phase_id: "MA-V121-S09-P2"
         name: "通用 Agent connector 框架"
         objective: "用 registry 驱动标准来源，并为非标准来源提供最小插件合同。"

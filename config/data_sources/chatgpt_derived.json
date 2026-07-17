@@ -1,0 +1,67 @@
+{
+  "schema_version": "memory_atlas.chatgpt_derived_contract.v1_2_1_s09_p1_t3",
+  "task_id": "S09-P1-T3",
+  "acceptance_id": "ACC-MA-V121-S09-P1-T3",
+  "source_id": "chatgpt",
+  "inputs": {
+    "canonical_event_ledger": "data/processed/conversations/chatgpt_canonical_events.jsonl",
+    "canonical_event_contract_ref": "config/data_sources/chatgpt_canonical_events.json",
+    "public_raw_root": "data/public_raw/chatgpt",
+    "source_read_only": true,
+    "canonical_read_only": true,
+    "validated_canonical_ledger_required": true
+  },
+  "raw_evidence": {
+    "required": true,
+    "repository_relative_ref_required": true,
+    "regular_file_required": true,
+    "raw_content_sha256_required": true,
+    "raw_file_sha256_recorded": true,
+    "canonical_rebuild_match_required": true,
+    "evidence_ref_types": [
+      "raw",
+      "canonical_event"
+    ]
+  },
+  "derivation": {
+    "facet_scope": "latest_canonical_version_per_conversation",
+    "topic_scope": "latest_canonical_version_per_conversation",
+    "activity_scope": "all_canonical_version_events",
+    "universe_scope": "latest_topic_clusters",
+    "message_text_usage": "transient_classification_only",
+    "message_text_persisted": false,
+    "deterministic_from_validated_inputs": true
+  },
+  "outputs": {
+    "facets": "data/derived/chatgpt/chatgpt_facets.jsonl",
+    "topics": "data/derived/chatgpt/chatgpt_topics.json",
+    "activity": "data/derived/chatgpt/chatgpt_activity.jsonl",
+    "universe_state_input": "data/derived/chatgpt/chatgpt_universe_state_input.json",
+    "state": "data/derived/chatgpt/chatgpt_derived_state.json"
+  },
+  "incremental": {
+    "canonical_ledger_must_remain_append_only": true,
+    "exact_repeat_no_write": true,
+    "changed_ledger_policy": "rebuild_replaceable_derived_projection",
+    "missing_or_drifted_output_policy": "rebuild_from_validated_canonical_and_raw",
+    "raw_and_canonical_never_modified": true
+  },
+  "privacy": {
+    "output_policy": "derived_summary_not_full_raw_backup",
+    "plaintext_credentials_allowed": false,
+    "local_absolute_paths_allowed": false,
+    "raw_message_text_persisted": false,
+    "frontend_reads_raw": false
+  },
+  "model_parameters_ref": "机器治理/参数与公式/chatgpt_derived.v1_2_1_s09_p1_t3.json",
+  "phase_boundary": {
+    "does_not_modify_raw": true,
+    "does_not_modify_canonical_events": true,
+    "does_not_update_atlas_snapshot": true,
+    "does_not_update_ui": true,
+    "does_not_implement_generic_agent_adapter": true,
+    "does_not_commit_or_push": true,
+    "does_not_deploy": true,
+    "next_task": "S09-P2-T1"
+  }
+}

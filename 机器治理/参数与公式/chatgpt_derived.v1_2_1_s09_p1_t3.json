@@ -1,0 +1,67 @@
+{
+  "schema_version": "memory_atlas.chatgpt_derived_model.v1_2_1_s09_p1_t3",
+  "task_id": "S09-P1-T3",
+  "acceptance_id": "ACC-MA-V121-S09-P1-T3",
+  "model_id": "MOD-MA-V121-S09-P1-T3",
+  "formula_id": "FORM-MA-V121-S09-P1-T3",
+  "purpose": "从已验证的 ChatGPT canonical version ledger 和对应 append-only public raw 生成可追溯 facets、主题、活动与 Universe State 输入。",
+  "input_truth": {
+    "source": "validated_append_only_canonical_events_plus_public_raw",
+    "raw_and_canonical_read_only": true,
+    "message_text_used_transiently": true,
+    "message_text_persisted_in_derived": false
+  },
+  "topic_parameters": {
+    "label_source": "first matching shared TOPIC_RULE, else redacted compacted latest conversation title",
+    "fallback_label": "unknown_topic",
+    "maximum_label_characters": 160,
+    "topic_identity": "shared rule id when matched, else sha256(casefolded whitespace-normalized topic label)[0:20]",
+    "aggregate_scope": "latest canonical version per conversation"
+  },
+  "activity_formula": {
+    "expression": "message_count + user_message_count*2 + assistant_message_count",
+    "coefficients": {
+      "message_count": 1,
+      "user_message_count": 2,
+      "assistant_message_count": 1
+    },
+    "semantic_status": "HUMAN_REVIEW_REQUIRED"
+  },
+  "universe_state_input": {
+    "recent_window_days": 45,
+    "inactive_normalization_days": 180,
+    "confidence_base": 0.5,
+    "confidence_max_increment": 0.45,
+    "confidence_per_conversation": 0.02,
+    "mass_score": "topic_conversation_count / max_topic_conversation_count, clamped 0..1",
+    "growth_score": "recent_topic_conversation_count / topic_conversation_count, clamped 0..1",
+    "decline_score": "inactive_days / inactive_normalization_days, clamped 0..1",
+    "confidence": "confidence_base + min(confidence_max_increment, topic_conversation_count*confidence_per_conversation), clamped 0..1",
+    "roi_potential": "conversations_with_value_signal / topic_conversation_count, clamped 0..1",
+    "activity_density": "recent_canonical_version_count / recent_window_days, clamped 0..1",
+    "semantic_status": "HUMAN_REVIEW_REQUIRED"
+  },
+  "facet_fallbacks": {
+    "topic": "latest title then unknown_topic",
+    "intent": "unknown",
+    "task_type": "unknown",
+    "project": null,
+    "output_type": "unknown",
+    "language": "unknown",
+    "tool": "chatgpt",
+    "friction": [],
+    "value_signal": []
+  },
+  "safety_limits": {
+    "maximum_raw_file_bytes": 67108864,
+    "maximum_classification_characters": 32768,
+    "maximum_evidence_refs_per_aggregate": 4000000
+  },
+  "privacy_parameters": {
+    "backup_policy": "derived_summary_not_full_raw_backup",
+    "credential_values_forbidden": true,
+    "local_absolute_paths_forbidden": true,
+    "message_body_in_output": false
+  },
+  "calibration_boundary": "主题分类与活动/Universe State 系数延续现有 MOD-008 工程启发式，仅完成机器可验证输入生成；不声称业务最优或因果解释。"
+}

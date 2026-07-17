@@ -395,11 +395,16 @@ class ChatGPTExportParserIntegrationTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temp_dir:
             root = Path(temp_dir)
             database = root / "database"
-            contract = database / "config/data_sources/raw_ledger.json"
-            contract.parent.mkdir(parents=True)
-            contract.write_bytes(
-                (ROOT / "config/data_sources/raw_ledger.json").read_bytes()
-            )
+            for relative in (
+                Path("config/data_sources/raw_ledger.json"),
+                Path("config/data_sources/chatgpt_derived.json"),
+                Path(
+                    "机器治理/参数与公式/chatgpt_derived.v1_2_1_s09_p1_t3.json"
+                ),
+            ):
+                target = database / relative
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_bytes((ROOT / relative).read_bytes())
             source = root / "conversations.json"
             source.write_text(
                 json.dumps(

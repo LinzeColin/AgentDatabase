@@ -57,10 +57,14 @@ def run_json(command: list[str], *, expect_success: bool = True) -> tuple[dict, 
 
 
 def install_raw_ledger_contract(database: Path) -> None:
-    source = REPO_ROOT / "config/data_sources/raw_ledger.json"
-    target = database / "config/data_sources/raw_ledger.json"
-    target.parent.mkdir(parents=True, exist_ok=True)
-    target.write_bytes(source.read_bytes())
+    for relative in (
+        Path("config/data_sources/raw_ledger.json"),
+        Path("config/data_sources/chatgpt_derived.json"),
+        Path("机器治理/参数与公式/chatgpt_derived.v1_2_1_s09_p1_t3.json"),
+    ):
+        target = database / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes((REPO_ROOT / relative).read_bytes())
 
 
 def write_jsonl(path: Path, rows: list[dict]) -> None:

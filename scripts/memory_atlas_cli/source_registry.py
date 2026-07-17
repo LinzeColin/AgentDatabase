@@ -62,6 +62,11 @@ CHATGPT_CANONICAL_EVENT_ENTRYPOINT = Path(
 CHATGPT_CANONICAL_EVENT_OUTPUT = Path(
     "data/processed/conversations/chatgpt_canonical_events.jsonl"
 )
+CHATGPT_DERIVED_CONTRACT_PATH = Path("config/data_sources/chatgpt_derived.json")
+CHATGPT_DERIVED_MODEL_PATH = Path(
+    "机器治理/参数与公式/chatgpt_derived.v1_2_1_s09_p1_t3.json"
+)
+CHATGPT_DERIVED_ENTRYPOINT = Path("scripts/build_memory_atlas_chatgpt_derived.py")
 CHATGPT_COMPLETE_ARCHIVE_ROOT = Path("data/raw_archives/chatgpt")
 CODEX_DISCOVERY_CONTRACT_PATH = Path("config/data_sources/codex_source_discovery.json")
 CODEX_PUBLIC_RAW_ARCHIVE_CONTRACT_PATH = Path(
@@ -339,6 +344,21 @@ def _validate_source(source: dict[str, Any], database_dir: Path, push_defaults: 
             f"{source_id}.parser.canonical_event_output",
             ("data/processed/conversations/",),
         )
+        derived_entrypoint = _repo_relative_path(
+            parser.get("derived_entrypoint"),
+            f"{source_id}.parser.derived_entrypoint",
+            ("scripts/",),
+        )
+        derived_contract_ref = _repo_relative_path(
+            parser.get("derived_contract_ref"),
+            f"{source_id}.parser.derived_contract_ref",
+            ("config/data_sources/",),
+        )
+        derived_model_ref = _repo_relative_path(
+            parser.get("derived_model_ref"),
+            f"{source_id}.parser.derived_model_ref",
+            ("机器治理/参数与公式/",),
+        )
         raw_archive_entrypoint = _repo_relative_path(
             parser.get("raw_archive_entrypoint"),
             f"{source_id}.parser.raw_archive_entrypoint",
@@ -367,6 +387,9 @@ def _validate_source(source: dict[str, Any], database_dir: Path, push_defaults: 
             or canonical_event_model_ref
             != CHATGPT_CANONICAL_EVENT_MODEL_PATH.as_posix()
             or canonical_event_output != CHATGPT_CANONICAL_EVENT_OUTPUT.as_posix()
+            or derived_entrypoint != CHATGPT_DERIVED_ENTRYPOINT.as_posix()
+            or derived_contract_ref != CHATGPT_DERIVED_CONTRACT_PATH.as_posix()
+            or derived_model_ref != CHATGPT_DERIVED_MODEL_PATH.as_posix()
             or raw_archive_entrypoint
             != CHATGPT_EXPORT_ARCHIVE_ENTRYPOINT.as_posix()
             or raw_archive_contract_ref
@@ -374,7 +397,7 @@ def _validate_source(source: dict[str, Any], database_dir: Path, push_defaults: 
             or complete_archive_root != CHATGPT_COMPLETE_ARCHIVE_ROOT.as_posix()
         ):
             raise SourceRegistryError(
-                "chatgpt.parser must name the S09 parser/canonical events and S08 archive adapter"
+                "chatgpt.parser must name the S09 parser/canonical/derived and S08 archive adapters"
             )
         if not (database_dir / raw_archive_entrypoint).is_file():
             raise SourceRegistryError("chatgpt raw archive entrypoint does not exist")
@@ -500,6 +523,7 @@ def _validate_source(source: dict[str, Any], database_dir: Path, push_defaults: 
             "sync_state_contract_ref",
             "derived_entrypoint",
             "derived_contract_ref",
+            "derived_model_ref",
             "legacy_summary_entrypoint",
             "legacy_summary_contract_ref",
             "push_main_entrypoint",
@@ -560,6 +584,11 @@ def _validate_source(source: dict[str, Any], database_dir: Path, push_defaults: 
             "data/processed/conversations/chatgpt_canonical_events.jsonl",
             "data/processed/conversations/chatgpt_parse_quarantine.jsonl",
             "data/derived/chatgpt/chatgpt_sync_summary.json",
+            "data/derived/chatgpt/chatgpt_facets.jsonl",
+            "data/derived/chatgpt/chatgpt_topics.json",
+            "data/derived/chatgpt/chatgpt_activity.jsonl",
+            "data/derived/chatgpt/chatgpt_universe_state_input.json",
+            "data/derived/chatgpt/chatgpt_derived_state.json",
         ]
     elif source_type == "codex_local":
         expected_state = "data/sync_state/codex.json"

@@ -665,6 +665,14 @@ def _read_ledger(database_dir: Path) -> tuple[bytes, list[dict[str, Any]]]:
     return raw, events
 
 
+def load_chatgpt_canonical_events(
+    database_dir: Path,
+) -> tuple[bytes, list[dict[str, Any]]]:
+    """Return validated append-only ledger bytes and events without mutation."""
+
+    return _read_ledger(_database_root(database_dir))
+
+
 def plan_chatgpt_canonical_events(
     database_dir: Path,
     rows: Iterable[dict[str, Any]],
@@ -819,6 +827,7 @@ __all__ = [
     "build_chatgpt_canonical_event",
     "canonical_plan_result",
     "commit_chatgpt_canonical_events",
+    "load_chatgpt_canonical_events",
     "load_chatgpt_canonical_event_contract",
     "load_chatgpt_canonical_event_model_parameters",
     "plan_chatgpt_canonical_events",

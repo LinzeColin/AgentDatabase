@@ -88,6 +88,9 @@
         "canonical_event_contract_ref": "config/data_sources/chatgpt_canonical_events.json",
         "canonical_event_model_ref": "机器治理/参数与公式/chatgpt_canonical_events.v1_2_1_s09_p1_t2.json",
         "canonical_event_output": "data/processed/conversations/chatgpt_canonical_events.jsonl",
+        "derived_entrypoint": "scripts/build_memory_atlas_chatgpt_derived.py",
+        "derived_contract_ref": "config/data_sources/chatgpt_derived.json",
+        "derived_model_ref": "机器治理/参数与公式/chatgpt_derived.v1_2_1_s09_p1_t3.json",
         "raw_archive_entrypoint": "scripts/memory_atlas_cli/chatgpt_export_archive.py",
         "raw_archive_contract_ref": "config/data_sources/chatgpt_export_archive.json",
         "complete_archive_root": "data/raw_archives/chatgpt",
@@ -110,7 +113,12 @@
         "data/processed/conversations/conversation_manifest.jsonl",
         "data/processed/conversations/chatgpt_canonical_events.jsonl",
         "data/processed/conversations/chatgpt_parse_quarantine.jsonl",
-        "data/derived/chatgpt/chatgpt_sync_summary.json"
+        "data/derived/chatgpt/chatgpt_sync_summary.json",
+        "data/derived/chatgpt/chatgpt_facets.jsonl",
+        "data/derived/chatgpt/chatgpt_topics.json",
+        "data/derived/chatgpt/chatgpt_activity.jsonl",
+        "data/derived/chatgpt/chatgpt_universe_state_input.json",
+        "data/derived/chatgpt/chatgpt_derived_state.json"
       ],
       "push_policy": {
         "mode": "final_delivery_only",

@@ -1,0 +1,100 @@
+{
+  "schema_version": "memory_atlas.chatgpt_derived_evidence.v1_2_1_s09_p1_t3",
+  "task_id": "S09-P1-T3",
+  "acceptance_id": "ACC-MA-V121-S09-P1-T3",
+  "status": "PASS_LOCAL_ONLY",
+  "observed_at": "2026-07-17T11:33:52+10:00",
+  "acceptance_truth": {
+    "task_complete": true,
+    "completed_task_count_after_acceptance": 63,
+    "total_task_count": 149,
+    "next_task_after_acceptance": "S09-P2-T1",
+    "s08_p3_owner_deferred": true,
+    "s08_p3_real_export_complete": false
+  },
+  "coverage": {
+    "canonical_ledger_fully_validated": true,
+    "every_raw_ref_file_and_content_hash_verified": true,
+    "latest_version_facets": true,
+    "latest_version_topics": true,
+    "all_version_activity_history": true,
+    "latest_topic_universe_clusters": true,
+    "direct_raw_and_canonical_refs_on_every_record": true,
+    "raw_message_text_persisted": false,
+    "replay_writes_derived_bytes": false,
+    "raw_mutation": false,
+    "canonical_mutation": false,
+    "normal_sync_integration": true,
+    "generic_agent_adapter_implemented": false
+  },
+  "artifacts": [
+    {
+      "path": "config/data_sources/chatgpt_derived.json",
+      "sha256": "2e5b79dfea5082b8f1e392baecc4c0956200c907a3e488bfcf9a5652396fb491"
+    },
+    {
+      "path": "机器治理/参数与公式/chatgpt_derived.v1_2_1_s09_p1_t3.json",
+      "sha256": "acb6689cf4f3b67ad173fe357e967b1929613202aeabb824efc5303b3a4cfd57"
+    },
+    {
+      "path": "scripts/memory_atlas_cli/chatgpt_derived.py",
+      "sha256": "0602e43eca4faf7a76ef0662cad35409dc2d8d2b4c179e592794dc3922a07a6c"
+    },
+    {
+      "path": "scripts/build_memory_atlas_chatgpt_derived.py",
+      "sha256": "607cca19c7ebf5361615933fc00f33c27189fbcf2d1dee860fe5838aaf8d095a"
+    },
+    {
+      "path": "scripts/sync_chatgpt_memory_data.py",
+      "sha256": "044df36eb41be1c906912686e8b17706582f376aac70fdd680749a7b20931cfe"
+    },
+    {
+      "path": "scripts/memory_atlas_cli/source_registry.py",
+      "sha256": "3673b2a61cc4094586d4249dcf8288420d71e016675076ee619b7ff89c950b48"
+    },
+    {
+      "path": "tests/test_memory_atlas_chatgpt_derived.py",
+      "sha256": "9c372c1b8c402908c181836cdbd9f7f8aad47298a636f37deb8a02f820a6c106"
+    }
+  ],
+  "synthetic_proof": {
+    "initial_canonical_event_count": 1,
+    "initial_facet_count": 1,
+    "initial_topic_count": 1,
+    "initial_activity_count": 1,
+    "initial_universe_cluster_count": 1,
+    "replay_outcome": "NO_CHANGES",
+    "changed_conversation_canonical_event_count": 2,
+    "changed_conversation_current_facet_count": 1,
+    "changed_conversation_activity_count": 2,
+    "missing_raw_error": "chatgpt_derived_raw_missing",
+    "tampered_raw_error": "chatgpt_derived_raw_canonical_mismatch"
+  },
+  "tests": {
+    "test_first": "ModuleNotFoundError before implementation",
+    "dedicated": "9/9 PASS",
+    "compatibility": "37/37 PASS",
+    "cross_source_follow_up": "52/52 PASS after removing temp-fixture file-existence coupling while retaining exact registry values",
+    "static_check": "ruff and py_compile PASS",
+    "related_before_final_evidence_refresh": "154/154 PASS",
+    "validate_fast": "6/6 PASS in 23.149 seconds; raw_mutation=false; remote_push=false; shell=false",
+    "validate_sync": "10/10 PASS in 193.074 seconds; sync unit step 50.231 seconds; credential scan 136.698 seconds; raw_mutation=false; remote_push=false; shell=false",
+    "governance_before_final_evidence_refresh": "human-plane PASS at 182 machine files / 45 active configs / 135 evidence payloads; renderer 0 drift/reference issues; required project governance 0 errors/warnings"
+  },
+  "phase_boundary": {
+    "raw_read_only": true,
+    "canonical_read_only": true,
+    "atlas_snapshot_unchanged": true,
+    "ui_unchanged": true,
+    "generic_agent_adapter": false,
+    "next_task_after_acceptance": "S09-P2-T1"
+  },
+  "safety": {
+    "export_browser_mail_or_download": false,
+    "production_raw_mutation": false,
+    "fetch": false,
+    "remote_push": false,
+    "deployment": false,
+    "branch_or_pr": false
+  }
+}

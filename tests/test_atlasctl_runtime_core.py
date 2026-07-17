@@ -20,7 +20,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SCRIPTS = ROOT / "scripts"
 ATLASCTL = SCRIPTS / "atlasctl.py"
 DEFAULT_CONFIG = ROOT / "config/atlasctl_runtime.json"
-CHATGPT_DRY_RUN_SHA256 = "ece42e1e16a18d2e99a1fd12fd8a9a88d5b64dbabc15aa98f8735e18bac865ef"
+CHATGPT_DRY_RUN_SHA256 = "4feb8ebf94a708cba956ac55fe5bed08397dc7d33225b92be63032560a096bf8"
 
 
 def load_runtime():

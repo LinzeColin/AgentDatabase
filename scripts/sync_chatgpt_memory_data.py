@@ -30,6 +30,11 @@ from memory_atlas_cli.chatgpt_export_parser import (
     QUARANTINE_RELATIVE,
     parse_chatgpt_export,
 )
+from memory_atlas_cli.chatgpt_derived import (
+    EXPECTED_OUTPUTS as CHATGPT_DERIVED_OUTPUTS,
+    ChatGPTDerivedError,
+    build_chatgpt_derived,
+)
 from memory_atlas_cli.raw_ledger import RawLedgerError, RawLedgerPostWriteError, source_stat_guard
 from privacy_guard import PrivacyViolation, assert_no_credentials
 from public_raw_sanitizer import (
@@ -440,6 +445,7 @@ def build_summary(
     redaction_counts: dict[str, int] | None = None,
     redact_for_public_backup: bool = False,
     canonical_events: dict[str, Any] | None = None,
+    derived_inputs: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     return {
         "schema_version": "memory_atlas_chatgpt_sync_summary.v1",
@@ -463,6 +469,15 @@ def build_summary(
             "event_count": 0,
             "writes_files": False,
             "append_only": True,
+        },
+        "derived_inputs": derived_inputs
+        or {
+            "status": "NOT_RUN",
+            "reason": "canonical_events_not_committed",
+            "output_paths": CHATGPT_DERIVED_OUTPUTS,
+            "writes_files": False,
+            "raw_mutation": False,
+            "canonical_mutation": False,
         },
     }
 
@@ -553,6 +568,14 @@ def sync_official_export(
                 "writes_files": False,
                 "append_only": True,
             },
+            "derived_inputs": {
+                "status": "NOT_RUN",
+                "reason": "no_parseable_conversations",
+                "output_paths": CHATGPT_DERIVED_OUTPUTS,
+                "writes_files": False,
+                "raw_mutation": False,
+                "canonical_mutation": False,
+            },
             "derived_summary": DERIVED_SUMMARY.as_posix(),
             "run_log_dir": SYNC_LOG_DIR.as_posix(),
             "writes_files": writes_files,
@@ -595,6 +618,14 @@ def sync_official_export(
         observed_at=generated_at,
     )
     canonical_events = canonical_plan_result(canonical_plan, dry_run=dry_run)
+    derived_inputs = {
+        "status": "NOT_RUN",
+        "reason": "dry_run",
+        "output_paths": CHATGPT_DERIVED_OUTPUTS,
+        "writes_files": False,
+        "raw_mutation": False,
+        "canonical_mutation": False,
+    }
 
     raw_ledger = {
         "status": "NOT_RUN",
@@ -629,6 +660,7 @@ def sync_official_export(
         except ChatGPTCanonicalEventError as exc:
             exc.writes_files = True
             raise
+        derived_inputs = build_chatgpt_derived(database_dir)
         write_current_jsonl(database_dir / PROCESSED_MANIFEST, manifest_rows)
         write_current_jsonl(
             database_dir / QUARANTINE_RELATIVE,
@@ -641,6 +673,7 @@ def sync_official_export(
             redaction_counts=redaction_counts,
             redact_for_public_backup=redact_for_public_backup,
             canonical_events=canonical_events,
+            derived_inputs=derived_inputs,
         )
         (database_dir / DERIVED_SUMMARY).parent.mkdir(parents=True, exist_ok=True)
         (database_dir / DERIVED_SUMMARY).write_text(json.dumps(summary, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
@@ -674,6 +707,7 @@ def sync_official_export(
         "redaction_counts": redaction_counts,
         "processed_manifest": PROCESSED_MANIFEST.as_posix(),
         "canonical_events": canonical_events,
+        "derived_inputs": derived_inputs,
         "derived_summary": DERIVED_SUMMARY.as_posix(),
         "run_log_dir": SYNC_LOG_DIR.as_posix(),
         "writes_files": not dry_run,
@@ -709,6 +743,14 @@ def dry_run_contract(redact_for_public_backup: bool = False) -> dict[str, Any]:
             "event_count": 0,
             "writes_files": False,
             "append_only": True,
+        },
+        "derived_inputs": {
+            "status": "NOT_RUN",
+            "reason": "dry_run_without_committed_canonical_events",
+            "output_paths": CHATGPT_DERIVED_OUTPUTS,
+            "writes_files": False,
+            "raw_mutation": False,
+            "canonical_mutation": False,
         },
     }
 
@@ -786,6 +828,18 @@ def main(argv: list[str] | None = None) -> int:
             "no_browser_mutation": True,
         }, ensure_ascii=False, indent=2, sort_keys=True))
         return 8
+    except ChatGPTDerivedError as exc:
+        print(json.dumps({
+            "status": "FAIL_CLOSED",
+            "source_id": SOURCE_ID,
+            "reason": "derived_input_violation",
+            "error": exc.code,
+            "writes_files": True,
+            "partial_append_only_raw_writes_possible": True,
+            "partial_append_only_canonical_writes_possible": True,
+            "no_browser_mutation": True,
+        }, ensure_ascii=False, indent=2, sort_keys=True))
+        return 9
     except (PublicRawLimitError, PublicRawSanitizationError) as exc:
         print(json.dumps({
             "status": "FAIL",

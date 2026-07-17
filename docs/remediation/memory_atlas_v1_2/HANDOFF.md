@@ -1,5 +1,35 @@
 # Memory Atlas v1.2 Remediation Handoff
 
+> **Current v1.2.1 note (2026-07-17 11:52 +10:00):** The Task Pack is now
+> `63/149` complete locally. This run completes only `S09-P1-T3`; S09-P1 is
+> `3/3` and complete, while `S09-P2-T1` is next-run only. The new builder
+> validates the complete T2 canonical ledger and every referenced public-raw
+> regular file, internal content hash and canonical rebuild before publishing.
+> Latest conversation versions generate current facets, shared-rule topics and
+> Universe State clusters; all canonical versions generate activity history.
+> Every facet/topic/activity/cluster carries direct raw file/content SHA-256 and
+> canonical event/version evidence. Message bodies are transient classification
+> input only and are absent from derived output. Normal ChatGPT sync invokes the
+> builder after canonical commit; exact replay is byte/mtime no-write, changed
+> history rebuilds only replaceable derived files, and raw/canonical mutation
+> fails closed. Test-first ModuleNotFoundError is closed by 9/9 dedicated tests;
+> initial compatibility is 37/37, the cross-source follow-up is 52/52, and final
+> post-evidence related regression is 154/154. Final fast is 6/6 in 23.149
+> seconds; its first run exposed only two remaining intentional ChatGPT dry-run
+> stdout hashes. Final sync is 10/10 in 193.074 seconds, including a 50.231-second
+> unit step and a 136.698-second credential scan, with raw mutation, remote push
+> and shell all false. Its first run exposed only Codex-only temp-fixture
+> file-existence coupling; registry values remain exact while cross-source file
+> existence coupling is removed. Human-plane passes at 182 machine files, 45
+> active configs and 135 evidence payloads. Owner explicitly stopped export
+> work, so `S08-P3-T1` remains deferred/open and is not counted. No export,
+> browser, Mail, download, production raw mutation, fetch, push, deploy,
+> branch/PR, merge/rebase or shared cleanup occurred. Run only `S09-P2-T1`
+> next; do not upload until all 149 Tasks plus final review close. Preserve the
+> existing local-only v1.2 chain and resolve its large cached origin/main
+> divergence only at the governed final-delivery boundary; never push this line
+> directly.
+>
 > **Current v1.2.1 note (2026-07-17 10:56 +10:00):** The Task Pack is now
 > `62/149` complete locally. This run completes only `S09-P1-T2`; `S09-P1-T3`
 > is next-run only. Stable canonical conversation/message IDs now depend on

@@ -96,10 +96,14 @@ def export_payload(text: str, *, update_time: int = 1_760_000_060) -> list[dict[
 
 
 def install_raw_ledger_contract(database: Path) -> None:
-    source = ROOT / "config/data_sources/raw_ledger.json"
-    target = database / "config/data_sources/raw_ledger.json"
-    target.parent.mkdir(parents=True, exist_ok=True)
-    target.write_bytes(source.read_bytes())
+    for relative in (
+        Path("config/data_sources/raw_ledger.json"),
+        Path("config/data_sources/chatgpt_derived.json"),
+        Path("机器治理/参数与公式/chatgpt_derived.v1_2_1_s09_p1_t3.json"),
+    ):
+        target = database / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes((ROOT / relative).read_bytes())
 
 
 def run_sync(
@@ -324,8 +328,10 @@ class ChatGPTCanonicalIncrementalTests(unittest.TestCase):
             self.assertEqual(replay["canonical_events"]["appended_version_count"], 0)
             self.assertEqual(ledger.read_bytes(), ledger_before_replay)
             self.assertEqual(len(list((database / "data/public_raw/chatgpt").glob("conv-stable.*.json"))), 2)
-            self.assertFalse((database / "data/derived/chatgpt/chatgpt_facets.jsonl").exists())
-            self.assertFalse((database / "data/derived/chatgpt/chatgpt_universe_state_input.json").exists())
+            self.assertTrue((database / "data/derived/chatgpt/chatgpt_facets.jsonl").is_file())
+            self.assertTrue(
+                (database / "data/derived/chatgpt/chatgpt_universe_state_input.json").is_file()
+            )
 
     def test_invalid_existing_ledger_fails_before_raw_write(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
