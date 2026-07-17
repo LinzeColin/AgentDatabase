@@ -91,6 +91,10 @@ class PublicRawLayoutTests(unittest.TestCase):
         self.assertGreater(result["layout"]["source_file_counts"]["chatgpt"], 0)
         self.assertGreater(result["layout"]["source_file_counts"]["codex"], 0)
         self.assertGreater(result["layout"]["source_file_counts"]["codex-reviewer"], 0)
+        self.assertEqual(
+            result["layout"]["source_file_counts"]["standard-agent-example"],
+            0,
+        )
         self.assertEqual(result["isolation"]["frontend"]["vite_public_dir"], "data/derived/visualization")
         self.assertEqual(result["isolation"]["default_codex_route"]["public_raw_source_count"], 0)
         self.assertIs(result["raw_content_read"], False)

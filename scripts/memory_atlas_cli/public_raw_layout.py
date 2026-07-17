@@ -183,7 +183,7 @@ def _audit_tree(
         if source["archive_path"] != expected:
             raise PublicRawLayoutError(f"registered agent archive_path is not source-partitioned: {source_id}")
         allowed_dirs.add(f"agents/{source_id}")
-        if source["status"] != "configured":
+        if source["status"] == "active_manual":
             required_source_dirs.add(f"agents/{source_id}")
             active_source_ids.add(source_id)
 

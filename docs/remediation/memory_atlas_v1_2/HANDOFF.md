@@ -1,5 +1,39 @@
 # Memory Atlas v1.2 Remediation Handoff
 
+> **Current v1.2.1 note (2026-07-17 13:47 +10:00):** The Task Pack is now
+> `65/149` complete locally. This run completes only `S09-P2-T2`; S09-P2 is
+> `2/3` and remains in progress, while `S09-P2-T3` is next-run only. A
+> synthetic `standard-agent-example` is registered entirely through source
+> configuration; runtime code remains source-id agnostic, and a second
+> configured standard source validates without core-code changes. Fixture
+> apply to the production database is rejected before parsing or writes.
+> Instead, a repository-external isolated runner uses the existing T1 reader
+> and generic sync to create two append-only public-raw files, immutable raw
+> ledger and run manifest, one replaceable derived summary, a canonical
+> five-file recovery bundle, deterministic 45 MiB archive parts, and exact
+> no-overwrite restore with per-file hash verification. Replay preserves
+> immutable bytes and mtimes; archive tamper, unsafe workspace and internal
+> symlink cases fail closed. The main policy remains final-delivery-only and
+> direct generic push dry-run records zero fetch, commit and push attempts.
+> Test-first ModuleNotFoundError is closed by 11/11 dedicated tests; related
+> regression is 141/141, public-layout follow-up is 36/36 and governance
+> support is 35/35. py_compile passes; ruff was unavailable in the current
+> global Python runtime and was not claimed. validate:fast is 6/6 in 25.771
+> seconds. Final validate:sync is 10/10 in 480.868 seconds, including an
+> 80.378-second unit step and a 377.118-second complete credential scan, with
+> raw mutation, remote push and shell all false. Its first run exposed only
+> fixture status being treated as a required production public-raw partition;
+> the final contract requires nonempty partitions only for active_manual
+> generic sources and adds no fake fixture data. The task-only validation
+> copies of node_modules, public_raw and raw_archives must be deleted after
+> final governance verification; shared source data remains untouched.
+> Non-standard plugin work is still outside this run. Owner stopped export
+> work, so `S08-P3-T1` remains deferred/open and uncounted. No export, browser,
+> Mail, download, production raw mutation, fetch, push, deploy, branch/PR,
+> merge/rebase or shared cleanup occurred. Run only `S09-P2-T3` next; do not
+> upload until all 149 Tasks plus final review close, and never push the current
+> divergent local line directly.
+>
 > **Current v1.2.1 note (2026-07-17 12:50 +10:00):** The Task Pack is now
 > `64/149` complete locally. This run completes only `S09-P2-T1`; S09-P2 is
 > `1/3` and remains in progress, while `S09-P2-T2` is next-run only. One

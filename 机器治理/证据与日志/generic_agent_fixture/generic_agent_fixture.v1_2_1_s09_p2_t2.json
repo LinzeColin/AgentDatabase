@@ -1,0 +1,135 @@
+{
+  "schema_version": "memory_atlas.generic_agent_fixture_evidence.v1_2_1_s09_p2_t2",
+  "task_id": "S09-P2-T2",
+  "acceptance_id": "ACC-MA-V121-S09-P2-T2",
+  "status": "PASS_LOCAL_ONLY",
+  "observed_at": "2026-07-17T13:47:21+10:00",
+  "acceptance_truth": {
+    "task_complete": true,
+    "completed_task_count_after_acceptance": 65,
+    "total_task_count": 149,
+    "next_task_after_acceptance": "S09-P2-T3",
+    "s08_p3_owner_deferred": true,
+    "s08_p3_real_export_complete": false
+  },
+  "coverage": {
+    "registry_only_standard_source_example": true,
+    "runtime_source_identity_parameterized": true,
+    "synthetic_jsonl_fixture": true,
+    "fixture_event_count": 2,
+    "fixture_message_count": 3,
+    "production_fixture_apply_blocked": true,
+    "append_only_public_raw": true,
+    "immutable_raw_ledger": true,
+    "immutable_run_manifest": true,
+    "replaceable_derived_summary": true,
+    "deterministic_archive_parts": true,
+    "manifest_bound_exact_restore": true,
+    "restored_embedded_files_verified": 5,
+    "idempotent_replay": true,
+    "archive_tamper_fail_closed": true,
+    "internal_symlink_fail_closed": true,
+    "main_push_contract_verified": true,
+    "direct_generic_push_attempt_count": 0,
+    "source_content_or_local_path_in_cli": false
+  },
+  "fixture_proof": {
+    "source_id": "standard-agent-example",
+    "fixture_input_sha256": "df6115c5adf5b37c4b9454266c9ad43b521e0f191d9528bcc7f4b6c6ebfe7f28",
+    "raw_file_count": 2,
+    "derived_file_count": 1,
+    "bundle_file_count": 5,
+    "bundle_sha256": "3686fce55fa3044f6fce051ca031ad4da37dc4177e5facc91a3391b893d324be",
+    "restored_sha256": "3686fce55fa3044f6fce051ca031ad4da37dc4177e5facc91a3391b893d324be",
+    "raw_manifest_sha256": "e943cf18bf33da7673e1314c1b10e53bb323d552a5bbc2043e1ed3d1b98445d6",
+    "archive_manifest_sha256": "98c5067f5ffcf6d120007c26ff625bfee0d7e9e2c9216f65b7a075f0d8045fd8",
+    "archive_part_count": 1,
+    "workspace_persisted": false,
+    "production_database_mutation": false
+  },
+  "main_push_contract": {
+    "mode": "final_delivery_only",
+    "branch": "main",
+    "open_pr": false,
+    "force": false,
+    "remote_race_stop": true,
+    "push_executed": false,
+    "fetch_executed": false,
+    "commit_created": false,
+    "remote_push_attempted": false
+  },
+  "tests": {
+    "test_first": "ModuleNotFoundError before implementation",
+    "dedicated": "11/11 PASS",
+    "related_regression": "141/141 PASS",
+    "layout_follow_up": "36/36 PASS",
+    "governance_support": "35/35 PASS",
+    "static_check": "py_compile PASS; ruff unavailable in current global Python runtime",
+    "validate_fast": "6/6 PASS in 25.771 seconds; raw_mutation=false; remote_push=false; shell=false",
+    "validate_sync": "10/10 PASS in 480.868 seconds; sync unit 80.378 seconds; credential scan 377.118 seconds; raw_mutation=false; remote_push=false; shell=false",
+    "first_sync_failure": "337-test unit step found fixture status was treated as a production-active public-raw partition; no implementation test or remote action failed",
+    "first_sync_remediation": "public-raw layout now requires only active_manual generic partitions and keeps fixture/configured sources allowed but non-active"
+  },
+  "artifacts": [
+    {
+      "path": "config/data_sources/generic_agent_fixture.json",
+      "sha256": "571a45bf65d093cce77ed80a61cf3e2d179ad976d902b7402fb4be1719512d39"
+    },
+    {
+      "path": "机器治理/参数与公式/generic_agent_fixture.v1_2_1_s09_p2_t2.json",
+      "sha256": "ca800b34d894992cdc8c30f99f44c4c21bf97a753c1ae024586dc4cfbdcdde4e"
+    },
+    {
+      "path": "tests/fixtures/memory_atlas/generic_agent_standard/events.jsonl",
+      "sha256": "df6115c5adf5b37c4b9454266c9ad43b521e0f191d9528bcc7f4b6c6ebfe7f28"
+    },
+    {
+      "path": "scripts/memory_atlas_cli/generic_agent_fixture.py",
+      "sha256": "dd433eb9295f3d1607c5e03dcb9680ee27f3aad6ba2b40cb46c6c9322ba746b2"
+    },
+    {
+      "path": "scripts/verify_memory_atlas_generic_agent_fixture.py",
+      "sha256": "477263fed8026b272e1bbddce65254c9650217e3efe621752aac0507d0418c3b"
+    },
+    {
+      "path": "config/data_sources/source_registry.json",
+      "sha256": "411459192d6d071c7af30f0329b6f72fe7f6d671da99b743182f7e7c62a29b32"
+    },
+    {
+      "path": "scripts/memory_atlas_cli/source_registry.py",
+      "sha256": "94d1fafab9c898d4b2d24da921d6442dfffe25a787b73fcf419ebb13567c48cb"
+    },
+    {
+      "path": "scripts/memory_atlas_cli/sync.py",
+      "sha256": "a02b1ce4047670b668a77416bff9c70ae6075474db2f694807289e9e8495ead6"
+    },
+    {
+      "path": "scripts/sync_future_agent_data.py",
+      "sha256": "66e02991ad16a5f95e92bc96416e922547ef0c1ff4f5632fbe7e9c45ac091cda"
+    },
+    {
+      "path": "scripts/memory_atlas_cli/public_raw_layout.py",
+      "sha256": "fcfc6c14b9877e6dcb0c4541e2f1ea22b39b4037c3879d6d5285a115410e2024"
+    },
+    {
+      "path": "tests/test_memory_atlas_generic_agent_fixture.py",
+      "sha256": "daaafc012cdfcb0dae0c7ee3c525180267f070fd9e434fd60577b1cb59817334"
+    }
+  ],
+  "phase_boundary": {
+    "production_source_data_created": false,
+    "non_standard_plugin_contract": false,
+    "remote_push": false,
+    "next_task_after_acceptance": "S09-P2-T3"
+  },
+  "safety": {
+    "export_browser_mail_or_download": false,
+    "production_raw_mutation": false,
+    "fetch": false,
+    "remote_push": false,
+    "deployment": false,
+    "branch_or_pr": false,
+    "merge_or_rebase": false,
+    "shared_cache_cleanup": false
+  }
+}

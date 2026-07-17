@@ -1,0 +1,62 @@
+{
+  "schema_version": "memory_atlas.generic_agent_fixture.v1_2_1_s09_p2_t2",
+  "task_id": "S09-P2-T2",
+  "acceptance_id": "ACC-MA-V121-S09-P2-T2",
+  "entrypoint": "scripts/verify_memory_atlas_generic_agent_fixture.py",
+  "model_ref": "机器治理/参数与公式/generic_agent_fixture.v1_2_1_s09_p2_t2.json",
+  "fixture_input": "tests/fixtures/memory_atlas/generic_agent_standard/events.jsonl",
+  "example_source_id": "standard-agent-example",
+  "fixed_observed_at": "2026-07-17T03:15:00Z",
+  "pipeline": {
+    "parser_entrypoint": "scripts/sync_future_agent_data.py",
+    "read_adapter_entrypoint": "scripts/inspect_memory_atlas_generic_agent_export.py",
+    "read_adapter_contract_ref": "config/data_sources/generic_agent_read_adapter.json",
+    "raw_root_template": "data/public_raw/agents/{source_id}",
+    "raw_ledger_contract_ref": "config/data_sources/raw_ledger.json",
+    "raw_manifest_entrypoint": "scripts/raw_archive_manifest.py",
+    "raw_manifest_root": "机器治理/证据与日志/raw_archive_manifests",
+    "derived_output_template": "data/derived/agents/{source_id}/agent_sync_summary.json",
+    "archive_chunking_contract_ref": "config/data_sources/archive_chunking.json",
+    "archive_restore_contract_ref": "config/data_sources/archive_restore.json",
+    "archive_root_template": "data/raw_archives/{source_id}/{archive_id}",
+    "bundle_schema_version": "memory_atlas.generic_agent_fixture_bundle.v1_2_1_s09_p2_t2"
+  },
+  "fixture": {
+    "synthetic_only": true,
+    "input_format": "jsonl",
+    "input_sha256": "df6115c5adf5b37c4b9454266c9ad43b521e0f191d9528bcc7f4b6c6ebfe7f28",
+    "expected_event_count": 2,
+    "expected_message_count": 3,
+    "manifest_run_id": "s09-p2-t2-fixture",
+    "archive_id": "s09-p2-t2-fixture-v1",
+    "force_archive": true,
+    "bundle_file_count": 5,
+    "repository_outputs_allowed": false
+  },
+  "main_push_contract": {
+    "mode": "final_delivery_only",
+    "branch": "main",
+    "open_pr": false,
+    "force": false,
+    "remote_race_stop": true
+  },
+  "safety": {
+    "isolated_workspace_required": true,
+    "empty_workspace_on_first_run_required": true,
+    "owned_replay_only": true,
+    "source_read_only": true,
+    "package_root_mutation": false,
+    "credential_exclusion_required": true,
+    "network_access": false,
+    "remote_push": false,
+    "source_content_in_cli_output": false,
+    "local_absolute_path_in_cli_output": false
+  },
+  "phase_boundary": {
+    "fixture_runtime_only": true,
+    "production_source_data_created": false,
+    "plugin_contract_implemented": false,
+    "remote_push": false,
+    "next_task": "S09-P2-T3"
+  }
+}

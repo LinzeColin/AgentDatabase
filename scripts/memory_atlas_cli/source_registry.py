@@ -286,6 +286,7 @@ def _validate_source(source: dict[str, Any], database_dir: Path, push_defaults: 
     if source_type == "generic_agent" and source_id != "generic_agent_template" and status not in {
         "active_manual",
         "configured",
+        "fixture",
     }:
         raise SourceRegistryError(f"{source_id}.status is unsupported for a concrete generic source")
 

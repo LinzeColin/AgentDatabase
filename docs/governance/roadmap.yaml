@@ -8,7 +8,7 @@ next_gate_id: "ACC.OpenAIDatabase.PAM1.0019"
 total_estimated_hours: 255
 completed_estimated_hours: 241
 taskpack_progress:
-  completed_tasks: 64
+  completed_tasks: 65
   total_tasks: 149
   delivery_state: "local_only_not_released"
 stages:
@@ -2676,7 +2676,7 @@ stages:
     person_goal: "使用用户已登录会话和官方导出流程，自动请求 ChatGPT 数据导出、等待异步通知、在链接失效前下载、公开归档并准备 main 直推。"
     status: "in_progress"
     estimated_hours: 9
-    estimated_pct: 44
+    estimated_pct: 56
     stop_conditions:
       - "需要绕过登录、2FA、CAPTCHA 或平台访问控制"
       - "准备把 cookies、token、password 或 email credential 提交仓库"
@@ -3292,7 +3292,7 @@ stages:
         objective: "用 registry 驱动标准来源，并为非标准来源提供最小插件合同。"
         status: "in_progress"
         estimated_hours: 3
-        estimated_pct: 33
+        estimated_pct: 67
         stop_conditions:
           - "标准来源仍需复制整套 pipeline"
           - "plugin 绕过 S06 安全合同"
@@ -3305,6 +3305,8 @@ stages:
           evidence_refs:
             - "EVID-MA-V121-S09-P2-T1-PROOF"
             - "EVID-MA-V121-S09-P2-T1-REVIEW"
+            - "EVID-MA-V121-S09-P2-T2-PROOF"
+            - "EVID-MA-V121-S09-P2-T2-REVIEW"
         tasks:
           - task_id: "S09-P2-T1"
             name: "定义通用只读 Agent adapter"
@@ -3353,15 +3355,44 @@ stages:
           - task_id: "S09-P2-T2"
             name: "实现 future Agent fixture/source example"
             objective: "覆盖 raw archive、manifest、parser、derived 和 main-push contract。"
-            status: "planned"
+            status: "completed"
             estimated_hours: 1
-            estimated_pct: 0
+            estimated_pct: 100
             dependencies: ["S09-P2-T1"]
             acceptance_ids: ["ACC-MA-V121-S09-P2-T2"]
-            test_commands: []
-            evidence_refs: []
-            risks: ["示例 agent 名称被写死为唯一未来来源"]
+            acceptance:
+              - acceptance_id: "ACC-MA-V121-S09-P2-T2"
+                description: "A registry-only standard Agent fixture exercises the existing bounded generic reader and sync pipeline without hard-coding its source identity in runtime code. In a repository-external isolated workspace it produces append-only public raw, immutable raw ledger and run manifest, replaceable derived output, a deterministic manifest-bound archive and an exact no-overwrite restore whose embedded files are reverified. Replay preserves immutable bytes and mtimes, tampering and unsafe workspaces fail closed, production fixture apply is rejected before writes, and the final-delivery-only main policy records zero fetch/commit/push attempts. Non-standard plugin behavior remains outside T2."
+                evidence_refs:
+                  - "EVID-MA-V121-S09-P2-T2-CONTRACT"
+                  - "EVID-MA-V121-S09-P2-T2-TEST"
+                  - "EVID-MA-V121-S09-P2-T2-PROOF"
+                  - "EVID-MA-V121-S09-P2-T2-REVIEW"
+            test_commands:
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_generic_agent_fixture -q"
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_generic_agent_read_adapter OpenAIDatabase.tests.test_memory_atlas_source_registry OpenAIDatabase.tests.test_s04p2_codex_agent_sync OpenAIDatabase.tests.test_memory_atlas_r7_public_raw OpenAIDatabase.tests.test_memory_atlas_raw_ledger OpenAIDatabase.tests.test_memory_atlas_codex_public_raw_archive OpenAIDatabase.tests.test_memory_atlas_codex_restore_proof OpenAIDatabase.tests.test_atlasctl_modular_cli -q"
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_public_raw_layout OpenAIDatabase.tests.test_memory_atlas_validator_profiles OpenAIDatabase.tests.test_memory_atlas_test_value_audit OpenAIDatabase.tests.test_atlasctl_script_consolidation -q"
+              - "python3 -B -m py_compile OpenAIDatabase/scripts/memory_atlas_cli/generic_agent_fixture.py OpenAIDatabase/scripts/verify_memory_atlas_generic_agent_fixture.py OpenAIDatabase/scripts/memory_atlas_cli/source_registry.py OpenAIDatabase/scripts/memory_atlas_cli/sync.py OpenAIDatabase/scripts/sync_future_agent_data.py"
+              - "npm run validate:fast --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run validate:sync --prefix OpenAIDatabase/apps/memory-atlas"
+              - "python3 -B OpenAIDatabase/scripts/audit_memory_atlas_human_plane.py"
+              - "python3 -B OpenAIDatabase/scripts/audit_memory_atlas_test_value.py"
+              - "python3 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+            test_results:
+              - "Test-first failed with ModuleNotFoundError before implementation. Dedicated registry-only source, second configured source, raw/ledger/manifest/derived/archive/restore, replay, tamper, workspace, symlink, CLI and production-apply rejection regression passes 11/11."
+              - "Related generic/registry/S04/S06/R7/CLI/profile/test-value regression passes 141/141. Public-raw layout/fixture/registry follow-up passes 36/36 after fixture/configured sources were correctly retained as allowed but non-active production partitions. Script/profile/test-value support passes 35/35. py_compile passes; the current global Python runtime did not provide ruff."
+              - "validate:fast passes 6/6 in 25.771 seconds. Final validate:sync passes 10/10 in 480.868 seconds, including an 80.378-second sync unit step and a 377.118-second complete credential scan; raw_mutation=false, remote_push=false and shell=false."
+              - "The first sync profile exposed only the fixture status being counted as a required production public-raw partition. The layout contract now requires nonempty partitions only for active_manual generic sources; no fake production fixture data was added."
+            evidence_refs:
+              - "EVID-MA-V121-S09-P2-T2-CONTRACT"
+              - "EVID-MA-V121-S09-P2-T2-TEST"
+              - "EVID-MA-V121-S09-P2-T2-PROOF"
+              - "EVID-MA-V121-S09-P2-T2-REVIEW"
+            risks:
+              - "The synthetic example proves the standard contract only; it is not evidence that any real future platform source is connected."
+              - "Non-standard formats and plugin permission boundaries remain for S09-P2-T3."
             rollback: "revert fixture registration and derived example; raw remains append-only."
+            current_result: "complete_local_only_65_of_149_registry_only_fixture_raw_ledger_manifest_derived_archive_restore_main_policy_zero_remote_no_plugin"
           - task_id: "S09-P2-T3"
             name: "定义非标准来源最小 plugin contract"
             objective: "允许非标准格式接入但不能绕过 raw、credential 和 main gate。"

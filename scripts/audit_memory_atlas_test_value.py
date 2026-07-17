@@ -73,8 +73,8 @@ SUMMARY = {
     "deleted_python_test_count": 2,
     "retained_validator_count": 39,
     "retained_baseline_python_test_count": 49,
-    "added_python_test_count": 34,
-    "current_python_test_count": 83,
+    "added_python_test_count": 35,
+    "current_python_test_count": 84,
 }
 ADDED_PATHS = [
     "tests/test_memory_atlas_test_value_audit.py",
@@ -104,6 +104,7 @@ ADDED_PATHS = [
     "tests/test_memory_atlas_chatgpt_canonical_events.py",
     "tests/test_memory_atlas_chatgpt_derived.py",
     "tests/test_memory_atlas_generic_agent_read_adapter.py",
+    "tests/test_memory_atlas_generic_agent_fixture.py",
     "tests/test_memory_atlas_public_raw_layout.py",
     "tests/test_memory_atlas_credential_exclusion.py",
     "tests/test_memory_atlas_raw_ledger.py",

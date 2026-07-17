@@ -1,0 +1,2 @@
+{"event_id":"fixture-plan-review","title":"Fixture planning review","messages":[{"id":"fixture-plan-review-1","role":"assistant","text":"The standard Agent fixture validates the registry-driven parser and recovery path."},{"id":"fixture-plan-review-2","role":"user","text":"Keep the example synthetic and isolated from production data."}]}
+{"event_id":"fixture-delivery-boundary","title":"Delivery boundary","messages":[{"id":"fixture-delivery-boundary-1","role":"assistant","text":"No production write is allowed before the full task pack and final review close."}]}

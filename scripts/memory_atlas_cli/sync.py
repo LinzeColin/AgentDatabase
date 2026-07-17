@@ -230,6 +230,16 @@ def run_sync(args: argparse.Namespace) -> int:
     parser_path = ROOT / str(registered_source["parser"]["entrypoint"])
     generic_agent_id = args.agent_id
     registered_source_id = str(registered_source["source_id"])
+    if registered_source.get("status") == "fixture" and not args.dry_run:
+        print(json.dumps({
+            "status": "FAIL_CLOSED",
+            "source_id": registered_source_id,
+            "reason": "fixture source is acceptance-only; use --dry-run or the isolated fixture verifier",
+            "writes_files": False,
+            "production_database_mutation": False,
+            "remote_push_attempted": False,
+        }, ensure_ascii=False, indent=2, sort_keys=True))
+        return 2
     if bool(getattr(args, "push_main", False)):
         args.database_dir = ROOT
         return run_codex_push_main(args)

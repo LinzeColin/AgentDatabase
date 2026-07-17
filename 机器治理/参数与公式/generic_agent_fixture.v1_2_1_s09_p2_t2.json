@@ -1,0 +1,60 @@
+{
+  "schema_version": "memory_atlas.generic_agent_fixture_model.v1_2_1_s09_p2_t2",
+  "task_id": "S09-P2-T2",
+  "acceptance_id": "ACC-MA-V121-S09-P2-T2",
+  "purpose": "Prove one standard future-Agent source can be added by registry configuration and recovered offline without writing fixture data into the production database.",
+  "source_example": {
+    "source_id": "standard-agent-example",
+    "source_type": "generic_agent",
+    "status": "fixture",
+    "input_format": "jsonl",
+    "synthetic_only": true,
+    "runtime_identity_is_parameterized": true
+  },
+  "pipeline": {
+    "reader": "generic_agent_read_adapter.v1_2_1_s09_p2_t1",
+    "parser": "sync_future_agent_data",
+    "raw": "append_only_public_raw",
+    "manifest": "raw_hash_ledger_and_run_manifest",
+    "derived": "replaceable_agent_sync_summary",
+    "archive": "deterministic_fixed_byte_parts",
+    "restore": "manifest_bound_exact_restore",
+    "push": "final_delivery_only_main_no_pr_no_force_remote_race_stop"
+  },
+  "parameters": {
+    "fixture_event_count": 2,
+    "fixture_message_count": 3,
+    "fixture_bundle_file_count": 5,
+    "archive_force_chunk": true,
+    "hash_algorithm": "sha256",
+    "archive_max_part_bytes": 47185920,
+    "github_warning_bytes": 52428800,
+    "fixed_observed_at": "2026-07-17T03:15:00Z"
+  },
+  "invariants": {
+    "fixture_workspace": "empty_on_first_run_outside_package_root_owned_replay_only",
+    "source": "read_only_and_hash_verified",
+    "raw": "append_only_and_ledger_bound",
+    "manifest": "immutable_per_run_id",
+    "archive": "manifest_and_part_hash_bound",
+    "restore": "exact_bytes_no_overwrite",
+    "derived": "contains_counts_and_ids_not_an_alternate_raw_backup",
+    "push": "contract_proof_only_no_remote_action",
+    "cli": "counts_and_hashes_only_no_source_content_or_local_path"
+  },
+  "failure_policy": {
+    "contract_or_registry_drift": "fail_closed_before_workspace_write",
+    "non_empty_or_overlapping_workspace": "fail_closed",
+    "credential_like_input": "fail_closed_before_public_raw_commit",
+    "raw_or_ledger_drift": "fail_closed_before_new_append",
+    "archive_part_or_manifest_drift": "fail_closed_before_restore",
+    "restore_conflict": "never_replace",
+    "push_policy_drift": "fail_closed"
+  },
+  "phase_boundary": {
+    "production_source_data_created": false,
+    "plugin_contract_implemented": false,
+    "remote_push": false,
+    "next_task": "S09-P2-T3"
+  }
+}

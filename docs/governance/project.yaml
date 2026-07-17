@@ -1642,6 +1642,40 @@ features:
       - "EVID-MA-V121-S09-P2-T1-TEST"
       - "EVID-MA-V121-S09-P2-T1-PROOF"
       - "EVID-MA-V121-S09-P2-T1-REVIEW"
+  - feature_id: "FEAT-MA-V121-S09-P2-T2"
+    name: "Memory Atlas generic Agent recovery fixture"
+    description: "S09-P2-T2 registers one synthetic standard-Agent example entirely through source registry configuration while keeping runtime code source-id agnostic. A repository-external acceptance runner exercises the existing bounded reader and generic sync to produce append-only public raw, an immutable raw ledger and run manifest, replaceable derived output, a deterministic 45 MiB-part archive contract and an exact no-overwrite restore with per-file hash verification. Replay preserves immutable bytes and mtimes; archive tampering, unsafe workspaces, symlinks and production fixture apply fail closed. The main policy remains final-delivery-only and records zero fetch, commit or push attempts. Non-standard plugin behavior remains unimplemented for T3."
+    status: "active"
+    fact_level: "VERIFIED"
+    code_refs:
+      - "OpenAIDatabase/scripts/memory_atlas_cli/generic_agent_fixture.py"
+      - "OpenAIDatabase/scripts/verify_memory_atlas_generic_agent_fixture.py"
+      - "OpenAIDatabase/scripts/sync_future_agent_data.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/source_registry.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/sync.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/public_raw_layout.py"
+      - "OpenAIDatabase/tests/test_memory_atlas_generic_agent_fixture.py"
+      - "OpenAIDatabase/AGENTS.md"
+    config_refs:
+      - "OpenAIDatabase/config/data_sources/generic_agent_fixture.json"
+      - "OpenAIDatabase/config/data_sources/source_registry.json"
+      - "OpenAIDatabase/机器治理/参数与公式/generic_agent_fixture.v1_2_1_s09_p2_t2.json"
+    source_refs:
+      - "OpenAIDatabase/tests/fixtures/memory_atlas/generic_agent_standard/events.jsonl"
+      - "OpenAIDatabase/机器治理/证据与日志/generic_agent_fixture/generic_agent_fixture.v1_2_1_s09_p2_t2.json"
+      - "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s09_p2_t2_generic_agent_fixture_review.md"
+    owner_actions:
+      - "Use the tracked fixture only through dry-run or the isolated verifier. Register a real standard source under a new configured source id; never reuse the fixture namespace or write synthetic fixture data into production raw. Run S09-P2-T3 separately for non-standard plugin boundaries."
+    test_refs:
+      - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_generic_agent_fixture -q"
+      - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_generic_agent_read_adapter OpenAIDatabase.tests.test_memory_atlas_source_registry OpenAIDatabase.tests.test_memory_atlas_public_raw_layout -q"
+      - "npm run validate:fast --prefix OpenAIDatabase/apps/memory-atlas"
+      - "npm run validate:sync --prefix OpenAIDatabase/apps/memory-atlas"
+    evidence_refs:
+      - "EVID-MA-V121-S09-P2-T2-CONTRACT"
+      - "EVID-MA-V121-S09-P2-T2-TEST"
+      - "EVID-MA-V121-S09-P2-T2-PROOF"
+      - "EVID-MA-V121-S09-P2-T2-REVIEW"
 models:
   -
     model_id: "MOD-001"
@@ -6257,4 +6291,24 @@ evidence_refs:
     evidence_id: "EVID-MA-V121-S09-P2-T1-REVIEW"
     kind: "review"
     ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s09_p2_t1_generic_agent_read_adapter_review.md"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S09-P2-T2-CONTRACT"
+    kind: "config"
+    ref: "OpenAIDatabase/config/data_sources/generic_agent_fixture.json"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S09-P2-T2-TEST"
+    kind: "test"
+    ref: "OpenAIDatabase/tests/test_memory_atlas_generic_agent_fixture.py"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S09-P2-T2-PROOF"
+    kind: "artifact"
+    ref: "OpenAIDatabase/机器治理/证据与日志/generic_agent_fixture/generic_agent_fixture.v1_2_1_s09_p2_t2.json"
+    fact_level: "VERIFIED"
+  -
+    evidence_id: "EVID-MA-V121-S09-P2-T2-REVIEW"
+    kind: "review"
+    ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s09_p2_t2_generic_agent_fixture_review.md"
     fact_level: "EXTRACTED"

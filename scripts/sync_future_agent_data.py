@@ -63,6 +63,20 @@ def now_utc() -> str:
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
 
+def validated_generated_at(value: str | None) -> str:
+    if value is None:
+        return now_utc()
+    if not re.fullmatch(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z", value):
+        raise SourceInputError("generated_at must be a second-precision UTC timestamp")
+    try:
+        parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError as exc:
+        raise SourceInputError("generated_at must be a valid UTC timestamp") from exc
+    if parsed.tzinfo != timezone.utc:
+        raise SourceInputError("generated_at must use UTC")
+    return value
+
+
 def stable_hash(value: Any) -> str:
     payload = json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()
@@ -377,11 +391,12 @@ def sync_rows(
     source_path: Path | None = None,
     source_inventory: dict[str, Any] | None = None,
     source_snapshot: GenericAgentReadResult | None = None,
+    generated_at: str | None = None,
 ) -> dict[str, Any]:
     validate_source_identity(source_id, safe_agent)
     if not rows:
         raise SourceInputError("source input must contain at least one event")
-    generated_at = now_utc()
+    generated_at = validated_generated_at(generated_at)
     raw_paths = [
         RAW_ROOT / safe_agent / f"{safe_name(row['event_id'])}.{row['content_sha256'][:12]}.json"
         for row in rows
@@ -485,6 +500,7 @@ def sync_future_agent(
     dry_run: bool,
     *,
     source_id: str = SOURCE_ID,
+    generated_at: str | None = None,
 ) -> dict[str, Any]:
     safe_agent = safe_name(agent_id)
     try:
@@ -513,6 +529,7 @@ def sync_future_agent(
         source_sha256=source_snapshot.source_sha256,
         source_id=source_id,
         source_snapshot=source_snapshot,
+        generated_at=generated_at,
     )
 
 
@@ -524,6 +541,7 @@ def sync_markdown_report(
     dry_run: bool,
     *,
     source_id: str = SOURCE_ID,
+    generated_at: str | None = None,
 ) -> dict[str, Any]:
     safe_agent = safe_name(agent_id)
     safe_event = safe_name(event_id)
@@ -540,6 +558,7 @@ def sync_markdown_report(
         source_id=source_id,
         source_path=markdown_report,
         source_inventory=source_inventory,
+        generated_at=generated_at,
     )
 
 
