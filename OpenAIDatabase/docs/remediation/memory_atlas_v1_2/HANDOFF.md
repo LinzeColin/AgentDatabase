@@ -1,5 +1,50 @@
 # Memory Atlas v1.2 Remediation Handoff
 
+## Migration Preservation Checkpoint (Authoritative)
+
+- Date: `2026-07-17`.
+- Canonical repository after the eight-repository split:
+  `LinzeColin/AgentDatabase`; the active frontend is now top-level
+  `MemoryAtlas/`.
+- Feature development is paused at `66/149` (`44.30%`).
+- `S09-P2` is `3/3` complete. `S08-P3-T1` remains owner-deferred/open and
+  uncounted. The next and only development task after migration is
+  `S09-P3-T1`.
+- The complete paused task line is reachable from `main` as an isolated
+  `OpenAIDatabase` subtree history:
+  - scoped baseline: `dfd6c4f44f7e9d743418c6e8d1bd3021c87a5fee`;
+  - scoped tip: `b77dc48288786735ee4a0b1ba933f668f7b7c42e`;
+  - 57 task commits plus one baseline commit;
+  - final scoped tree:
+    `7404f1ac43f3042da0e05d5722ada364ed91cb17`.
+- Every scoped task commit retains its source author/date/message and a
+  `Source-CodexProject-Commit` trailer. The source identifiers were
+  `12d10f63d15e41cec50026d5dfd2ea0fab5a0e69` (integration base),
+  `ade2c852ce077c36e5683caf25cdd408f5e45964` (integrated candidate), and
+  `3f7af705774a16986e06650050b63c5bcf13ac55` (original local tip).
+- The history-only merge keeps the migrated active tree byte-identical to the
+  target repository. The scoped history uses the old subtree layout, so
+  `apps/memory-atlas/` there maps to active `MemoryAtlas/`; never restore the
+  scoped root wholesale.
+- Before the repository split, the integrated candidate passed canonical
+  `fast` `19/19`, `unit` `33/33`, command ownership, directory lifecycle,
+  repository privacy, workflow security, TypeScript lint and production
+  build. Its three-viewport browser gate remained `FAIL` because seven SVG
+  `<title>` tooltips inherited thread names containing `S06-P2/P3`.
+- The migration-safe active checkpoint then passed TypeScript lint,
+  production build, canonical `fast` `19/19`, `unit` `33/33`, `integration`
+  `153/153`, security `151/151`, privacy guard, and the real `1470x661`,
+  `1440x900`, `390x844` browser gate. This validates the active checkpoint,
+  not the paused scoped product candidate.
+- No export, deployment, force push, branch or PR belongs to this checkpoint.
+  Do not re-enable automated ChatGPT login, UI scraping, export download or
+  repository raw-archive production.
+
+Read `migration_preserved/runtime/README.md` and
+`migration_preserved/validation/README.md` before inspecting the scoped
+history. The R0-R7 material below is historical; this checkpoint wins where
+the two conflict.
+
 ## Current Goal
 
 Complete reopened v1.2 remediation R0-R8 with at most one phase per run and one final
