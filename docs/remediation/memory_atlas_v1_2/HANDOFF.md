@@ -1,5 +1,31 @@
 # Memory Atlas v1.2 Remediation Handoff
 
+> **Current v1.2.1 note (2026-07-17 10:56 +10:00):** The Task Pack is now
+> `62/149` complete locally. This run completes only `S09-P1-T2`; `S09-P1-T3`
+> is next-run only. Stable canonical conversation/message IDs now depend on
+> source identity rather than mutable content. Message and conversation hashes
+> remain content-sensitive, and each unseen conversation version appends one
+> validated JSONL event with a contiguous previous-version chain. Export hash,
+> observed time, raw ref and parser provenance do not change version identity.
+> Replays append zero canonical bytes; changed conversations create a new
+> content-addressed raw file and retain every old raw byte. Invalid ledger
+> history fails before raw writes. No facets, topics, activity or Universe
+> State inputs were generated. Test-first ModuleNotFoundError is closed by 9/9
+> dedicated tests; legacy compatibility is 63/63 and final post-cleanup related
+> regression is 160/160. Final fast is 6/6 in 22.752 seconds; the first fast run exposed
+> only two intentional stale ChatGPT dry-run stdout hashes for the new output.
+> Sync is 10/10 in 201.480 seconds, including a 55.390-second unit step and a
+> 139.742-second credential scan, with raw mutation, remote push and shell all
+> false. Human-plane is expected at 180 machine files, 44 active configs and
+> 134 evidence payloads; official render and required governance must remain
+> clean after final evidence-hash refresh. Owner explicitly stopped export work,
+> so `S08-P3-T1` remains deferred/open and is not counted. No export, browser,
+> Mail, download, production raw mutation, fetch, push, deploy, branch/PR,
+> merge/rebase or shared cleanup occurred. Run only `S09-P1-T3` next; do not
+> upload until all 149 Tasks plus final review close. Preserve the existing
+> local-only v1.2 chain and resolve its large cached origin/main divergence only
+> at the governed final-delivery boundary; never push this line directly.
+>
 > **Current v1.2.1 note (2026-07-17 09:59 +10:00):** The Task Pack is now
 > `61/149` complete locally. This run completes only `S09-P1-T1`; `S09-P1-T2`
 > is next-run only. Owner explicitly stopped export/browser/download work, so

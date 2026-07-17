@@ -1,0 +1,39 @@
+{
+  "acceptance_id": "ACC-MA-V121-S09-P1-T2",
+  "formula_id": "FORM-MA-V121-S09-P1-T2",
+  "formulas": {
+    "canonical_json": "utf8(json(value, sort_keys=true, separators=(',', ':'), ensure_ascii=false))",
+    "conversation_id": "chatgpt-conversation- + sha256(canonical_json({source_id, source_conversation_id}))[0:32]",
+    "conversation_version_id": "chatgpt-version- + sha256(canonical_json(canonical_conversation))[0:32]",
+    "incremental_decision": "append iff version_id is absent from validated existing ledger",
+    "message_id": "chatgpt-message- + sha256(canonical_json({conversation_id, source_message_id}))[0:32]",
+    "message_sha256": "sha256(canonical_json(message_without_message_sha256))"
+  },
+  "invariants": [
+    "conversation and message IDs do not depend on mutable content",
+    "export hash, observed time, raw ref and parser provenance do not affect version identity",
+    "existing canonical event bytes remain an exact prefix after append",
+    "a replay of an existing version writes no canonical event bytes",
+    "a changed conversation writes a new raw content-addressed file and a chained canonical version without replacing old raw",
+    "facets, topics, activity and Universe State inputs remain outside this task"
+  ],
+  "limits": {
+    "maximum_contract_bytes": 131072,
+    "maximum_ledger_bytes": 536870912,
+    "maximum_ledger_events": 2000000,
+    "maximum_messages_per_conversation": 500000
+  },
+  "model_id": "MOD-MA-V121-S09-P1-T2",
+  "phase_boundary": {
+    "implements_derived_facets": false,
+    "implements_incremental_deduplication": true,
+    "implements_stable_ids": true,
+    "implements_topics_or_activity": false,
+    "implements_version_history": true,
+    "mutates_source": false,
+    "next_task": "S09-P1-T3"
+  },
+  "purpose": "Create stable ChatGPT conversation/message identities and append one immutable event for each unseen conversation version.",
+  "schema_version": "memory_atlas.chatgpt_canonical_event_model.v1_2_1_s09_p1_t2",
+  "task_id": "S09-P1-T2"
+}

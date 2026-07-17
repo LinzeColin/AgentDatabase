@@ -34,6 +34,7 @@ EXPECTED_MODULES = {
     "chatgpt_export_human_auth.py",
     "chatgpt_export_link_discovery.py",
     "chatgpt_notification_connector.py",
+    "chatgpt_canonical_events.py",
 }
 
 EXPECTED_EXPORTS = {
@@ -79,7 +80,7 @@ EXPECTED_DOMAIN_IMPORTS = {
 
 STABLE_DRY_RUNS = {
     ("sync", "--source", "chatgpt", "--dry-run"):
-        "d7f49a68e87dd7a9cb592c50db68e1b82a3662f2f09932e28209d5851ed8b3db",
+        "ece42e1e16a18d2e99a1fd12fd8a9a88d5b64dbabc15aa98f8735e18bac865ef",
     ("sync", "--source", "codex", "--dry-run"):
         "99d2ada2aba2d6c79b6de4096eba5d7132d95a5c94f3c2edffd7a68f3e15230b",
     ("sync", "--source", "future-agent", "--dry-run"):

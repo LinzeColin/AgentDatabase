@@ -84,6 +84,10 @@
         "format_parser_contract_ref": "config/data_sources/chatgpt_export_parser.json",
         "format_parser_model_ref": "机器治理/参数与公式/chatgpt_export_parser.v1_2_1_s09_p1_t1.json",
         "quarantine_path": "data/processed/conversations/chatgpt_parse_quarantine.jsonl",
+        "canonical_event_entrypoint": "scripts/memory_atlas_cli/chatgpt_canonical_events.py",
+        "canonical_event_contract_ref": "config/data_sources/chatgpt_canonical_events.json",
+        "canonical_event_model_ref": "机器治理/参数与公式/chatgpt_canonical_events.v1_2_1_s09_p1_t2.json",
+        "canonical_event_output": "data/processed/conversations/chatgpt_canonical_events.jsonl",
         "raw_archive_entrypoint": "scripts/memory_atlas_cli/chatgpt_export_archive.py",
         "raw_archive_contract_ref": "config/data_sources/chatgpt_export_archive.json",
         "complete_archive_root": "data/raw_archives/chatgpt",
@@ -104,6 +108,7 @@
       "archive_path": "data/public_raw/chatgpt",
       "derived_outputs": [
         "data/processed/conversations/conversation_manifest.jsonl",
+        "data/processed/conversations/chatgpt_canonical_events.jsonl",
         "data/processed/conversations/chatgpt_parse_quarantine.jsonl",
         "data/derived/chatgpt/chatgpt_sync_summary.json"
       ],

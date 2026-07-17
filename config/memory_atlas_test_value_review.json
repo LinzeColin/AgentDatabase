@@ -27,8 +27,8 @@
     "deleted_python_test_count": 2,
     "retained_validator_count": 39,
     "retained_baseline_python_test_count": 49,
-    "added_python_test_count": 31,
-    "current_python_test_count": 80
+    "added_python_test_count": 32,
+    "current_python_test_count": 81
   },
   "profile_commands": {
     "fast": "npm run validate:fast",
@@ -61,6 +61,7 @@
     "tests/test_memory_atlas_chatgpt_export_download.py",
     "tests/test_memory_atlas_chatgpt_export_archive.py",
     "tests/test_memory_atlas_chatgpt_export_parser.py",
+    "tests/test_memory_atlas_chatgpt_canonical_events.py",
     "tests/test_memory_atlas_public_raw_layout.py",
     "tests/test_memory_atlas_credential_exclusion.py",
     "tests/test_memory_atlas_raw_ledger.py",
@@ -3548,6 +3549,16 @@
       ],
       "reason": "Retained because it proves S09-P1-T1 strict contract/model drift rejection, canonical and numbered JSON, recognizable future containers, ZIP metadata and attachments, unknown-field preservation, explicit sanitized file/item/message quarantine, apply-sidecar safety and legacy sync compatibility.",
       "current_dependency": "S09-P1-T1 validate:sync, ChatGPT parser regression and full Python suites"
+    },
+    {
+      "path": "tests/test_memory_atlas_chatgpt_canonical_events.py",
+      "risk_bindings": [
+        "data_integrity",
+        "release_risk",
+        "runner_contract"
+      ],
+      "reason": "Retained because it proves S09-P1-T2 strict contract/model drift rejection, stable conversation and message identities, content-sensitive hashes, append-only version chaining, replay deduplication, invalid-ledger preflight and preservation of every prior raw version.",
+      "current_dependency": "S09-P1-T2 validate:sync, ChatGPT canonical event regression and full Python suites"
     },
     {
       "path": "tests/test_memory_atlas_public_raw_layout.py",

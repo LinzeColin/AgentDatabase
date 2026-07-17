@@ -1,0 +1,87 @@
+{
+  "acceptance_id": "ACC-MA-V121-S09-P1-T2",
+  "acceptance_truth": {
+    "completed_task_count": 62,
+    "next_task": "S09-P1-T3",
+    "s08_p3_owner_deferred": true,
+    "s08_p3_real_export_complete": false,
+    "task_complete": true,
+    "total_task_count": 149
+  },
+  "artifacts": [
+    {
+      "path": "config/data_sources/chatgpt_canonical_events.json",
+      "sha256": "bcd2880e8d847472059c94306ca817eb014658cc72e4b2455a37495ace85f10e"
+    },
+    {
+      "path": "机器治理/参数与公式/chatgpt_canonical_events.v1_2_1_s09_p1_t2.json",
+      "sha256": "6b39164af2bcacd7017b29b8282a97420e8d05cd60b0023f5f86fc7cd644f445"
+    },
+    {
+      "path": "scripts/memory_atlas_cli/chatgpt_canonical_events.py",
+      "sha256": "a4629d743a95fbb82a645b87e3ea53ec8b9077739d2ab5deba156d08848522a7"
+    },
+    {
+      "path": "scripts/sync_chatgpt_memory_data.py",
+      "sha256": "c5774b7c0fe459b363377d3f3fa63385cbbc87f7a01839a96d49219c27f5d508"
+    },
+    {
+      "path": "tests/test_memory_atlas_chatgpt_canonical_events.py",
+      "sha256": "c44a4a9aaa920780bec542c9c7f1e62cb9927c4f20819148df62539de53c3cfd"
+    }
+  ],
+  "coverage": {
+    "conversation_id_content_independent": true,
+    "derived_facets_or_topics_generated": false,
+    "invalid_ledger_fails_before_raw_write": true,
+    "message_id_content_independent": true,
+    "message_sha256_content_sensitive": true,
+    "modified_conversation_appends_new_version": true,
+    "old_raw_bytes_preserved": true,
+    "previous_version_chain_contiguous": true,
+    "replay_appends_zero_event_bytes": true,
+    "source_mutation": false,
+    "transport_provenance_excluded_from_version_identity": true,
+    "version_sha256_content_sensitive": true
+  },
+  "observed_at": "2026-07-17T10:46:24+10:00",
+  "phase_boundary": {
+    "derived_facets": false,
+    "incremental_dedupe": true,
+    "next_task": "S09-P1-T3",
+    "stable_ids": true,
+    "version_history": true
+  },
+  "safety": {
+    "branch_or_pr": false,
+    "browser_or_mail_access": false,
+    "deployment": false,
+    "fetch": false,
+    "production_raw_mutation": false,
+    "real_export_requested": false,
+    "remote_push": false
+  },
+  "schema_version": "memory_atlas.chatgpt_canonical_event_evidence.v1_2_1_s09_p1_t2",
+  "status": "PASS_LOCAL_ONLY",
+  "synthetic_incremental_proof": {
+    "first_import_appended_versions": 1,
+    "modified_import_appended_versions": 1,
+    "raw_files_after_change": 2,
+    "replay_appended_versions": 0,
+    "version_numbers": [
+      1,
+      2
+    ]
+  },
+  "task_id": "S09-P1-T2",
+  "tests": {
+    "compatibility": "63/63 PASS",
+    "dedicated": "9/9 PASS",
+    "final_related": "160/160 PASS after validation-copy cleanup",
+    "governance_related": "66/66 PASS",
+    "static_check": "ruff PASS",
+    "test_first": "ModuleNotFoundError before implementation",
+    "validate_fast": "6/6 PASS in 22.752 seconds; raw_mutation=false; remote_push=false; shell=false",
+    "validate_sync": "10/10 PASS in 201.480 seconds; sync unit step 55.390 seconds; credential scan 139.742 seconds; raw_mutation=false; remote_push=false; shell=false"
+  }
+}

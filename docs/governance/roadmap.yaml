@@ -8,7 +8,7 @@ next_gate_id: "ACC.OpenAIDatabase.PAM1.0019"
 total_estimated_hours: 255
 completed_estimated_hours: 241
 taskpack_progress:
-  completed_tasks: 61
+  completed_tasks: 62
   total_tasks: 149
   delivery_state: "local_only_not_released"
 stages:
@@ -3121,7 +3121,7 @@ stages:
     person_goal: "把 ChatGPT 导出稳定解析为增量可追溯数据，并让后续 Agent 通过统一注册表自动备份。"
     status: "in_progress"
     estimated_hours: 9
-    estimated_pct: 11
+    estimated_pct: 22
     scope_override: "Owner deferred incomplete S08-P3 real-export work on 2026-07-17 and authorized parser development without declaring S08 complete."
     stop_conditions:
       - "解析器覆盖或修改 raw 文件"
@@ -3143,11 +3143,11 @@ stages:
         objective: "覆盖官方导出变体，随后建立稳定版本和可追溯派生。"
         status: "in_progress"
         estimated_hours: 3
-        estimated_pct: 33
+        estimated_pct: 67
         stop_conditions:
           - "未知字段被删除"
           - "无法解析项未进入 quarantine"
-          - "在 T1 提前实现 T2 稳定 ID、版本或增量去重"
+          - "稳定 ID 依赖可变内容，或修改后的对话覆盖旧 raw"
         stop_gate:
           gate_id: "ACC-MA-V121-S09-P1"
           status: "open"
@@ -3202,18 +3202,44 @@ stages:
           - task_id: "S09-P1-T2"
             name: "建立稳定 conversation/message/version ID 与增量更新"
             objective: "按 conversation/message/version 建立稳定 ID、hash 和增量更新。"
-            status: "planned"
+            status: "completed"
             estimated_hours: 1
-            estimated_pct: 0
+            estimated_pct: 100
             dependencies:
               - "S09-P1-T1"
             acceptance_ids:
               - "ACC-MA-V121-S09-P1-T2"
-            test_commands: []
-            evidence_refs: []
+            acceptance:
+              - acceptance_id: "ACC-MA-V121-S09-P1-T2"
+                description: "Stable canonical conversation and message IDs are derived only from source identity, while message/version SHA-256 values change with normalized content. Each unseen conversation version appends one validated JSONL event with a contiguous previous-version chain. Replays append zero bytes, transport provenance does not change version identity, invalid ledgers fail before raw writes, and a modified conversation writes a new content-addressed raw file without changing any earlier raw bytes. Facets, topics, activity and Universe State remain outside T2."
+                evidence_refs:
+                  - "EVID-MA-V121-S09-P1-T2-CONTRACT"
+                  - "EVID-MA-V121-S09-P1-T2-TEST"
+                  - "EVID-MA-V121-S09-P1-T2-PROOF"
+                  - "EVID-MA-V121-S09-P1-T2-REVIEW"
+            test_commands:
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_chatgpt_canonical_events -q"
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_chatgpt_export_parser OpenAIDatabase.tests.test_s04p1_chatgpt_sync OpenAIDatabase.tests.test_memory_atlas_r7_public_raw OpenAIDatabase.tests.test_memory_atlas_raw_ledger -q"
+              - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_source_registry OpenAIDatabase.tests.test_atlasctl_modular_cli OpenAIDatabase.tests.test_memory_atlas_validator_profiles OpenAIDatabase.tests.test_memory_atlas_test_value_audit OpenAIDatabase.tests.test_atlasctl_script_consolidation -q"
+              - "ruff check OpenAIDatabase/scripts/memory_atlas_cli/chatgpt_canonical_events.py OpenAIDatabase/scripts/memory_atlas_cli/source_registry.py OpenAIDatabase/scripts/memory_atlas_cli/sync.py OpenAIDatabase/scripts/sync_chatgpt_memory_data.py OpenAIDatabase/tests/test_memory_atlas_chatgpt_canonical_events.py"
+              - "npm run validate:fast --prefix OpenAIDatabase/apps/memory-atlas"
+              - "npm run validate:sync --prefix OpenAIDatabase/apps/memory-atlas"
+              - "python3 -B OpenAIDatabase/scripts/audit_memory_atlas_human_plane.py"
+              - "python3 -B OpenAIDatabase/scripts/audit_memory_atlas_test_value.py"
+              - "python3 -B scripts/lean_governance.py check-render --project OpenAIDatabase"
+            test_results:
+              - "Test-first failed with ModuleNotFoundError before implementation. Dedicated stable identity, transport-independent version hash, append/replay, old-raw preservation, invalid-ledger preflight and CLI contract regression passes 9/9."
+              - "Legacy parser/S04/R7/raw-ledger compatibility passes 63/63; source-registry and canonical integration passes 42/42; governance/profile/script related regression passes 66/66; ruff passes."
+              - "Final post-cleanup related regression passes 160/160. validate:fast passes 6/6 in 22.752 seconds after updating two intentional ChatGPT dry-run stdout hashes for the new canonical output. validate:sync passes 10/10 in 201.480 seconds, including a 55.390-second sync unit step and a 139.742-second credential scan; raw_mutation=false, remote_push=false and shell=false."
+            evidence_refs:
+              - "EVID-MA-V121-S09-P1-T2-CONTRACT"
+              - "EVID-MA-V121-S09-P1-T2-TEST"
+              - "EVID-MA-V121-S09-P1-T2-PROOF"
+              - "EVID-MA-V121-S09-P1-T2-REVIEW"
             risks:
               - "修改过的对话覆盖旧 raw 或版本 identity 不稳定"
             rollback: "revert canonical-event changes; raw remains append-only."
+            current_result: "complete_local_only_62_of_149_stable_ids_append_only_version_chain_replay_deduped_no_t3_outputs_no_remote_upload"
           - task_id: "S09-P1-T3"
             name: "生成 ChatGPT 派生输入"
             objective: "生成 ChatGPT facets、主题、活动和 Universe State 输入。"

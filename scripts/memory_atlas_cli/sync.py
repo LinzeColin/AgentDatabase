@@ -115,6 +115,15 @@ def chatgpt_contract(redact_for_public_backup: bool = False) -> dict[str, object
         "no_browser_mutation": True,
         "redact_for_public_backup": redact_for_public_backup,
         "processed_manifest": "data/processed/conversations/conversation_manifest.jsonl",
+        "canonical_events": {
+            "status": "NOT_RUN",
+            "events_path": "data/processed/conversations/chatgpt_canonical_events.jsonl",
+            "appended_version_count": 0,
+            "unchanged_version_count": 0,
+            "event_count": 0,
+            "writes_files": False,
+            "append_only": True,
+        },
     }
 
 

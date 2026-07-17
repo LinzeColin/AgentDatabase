@@ -1535,6 +1535,43 @@ features:
       - "EVID-MA-V121-S09-P1-T1-TEST"
       - "EVID-MA-V121-S09-P1-T1-PROOF"
       - "EVID-MA-V121-S09-P1-T1-REVIEW"
+  - feature_id: "FEAT-MA-V121-S09-P1-T2"
+    name: "Memory Atlas stable append-only ChatGPT canonical versions"
+    description: "S09-P1-T2 creates canonical conversation/message identities from stable source identity, content hashes for messages and conversations, and one immutable JSONL event for every unseen conversation version. Export hash, observed time, raw path and parser provenance do not affect version identity. Existing ledger bytes remain an exact prefix, replay writes zero canonical bytes, malformed or inconsistent history fails before raw writes, and changed conversations retain all prior content-addressed raw files. This Task does not generate facets, topics, activity or Universe State inputs. S08-P3 real export remains owner-deferred and incomplete."
+    status: "active"
+    fact_level: "VERIFIED"
+    model_ids:
+      - "MOD-009"
+    formula_ids:
+      - "FORM-009"
+    parameter_ids: []
+    code_refs:
+      - "OpenAIDatabase/scripts/memory_atlas_cli/chatgpt_canonical_events.py"
+      - "OpenAIDatabase/scripts/sync_chatgpt_memory_data.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/source_registry.py"
+      - "OpenAIDatabase/scripts/memory_atlas_cli/sync.py"
+      - "OpenAIDatabase/tests/test_memory_atlas_chatgpt_canonical_events.py"
+      - "OpenAIDatabase/tests/test_memory_atlas_source_registry.py"
+      - "OpenAIDatabase/AGENTS.md"
+    config_refs:
+      - "OpenAIDatabase/config/data_sources/chatgpt_canonical_events.json"
+      - "OpenAIDatabase/config/data_sources/source_registry.json"
+      - "OpenAIDatabase/机器治理/参数与公式/chatgpt_canonical_events.v1_2_1_s09_p1_t2.json"
+    source_refs:
+      - "OpenAIDatabase/机器治理/证据与日志/chatgpt_canonical_events/chatgpt_canonical_events.v1_2_1_s09_p1_t2.json"
+      - "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s09_p1_t2_chatgpt_canonical_events_review.md"
+    owner_actions:
+      - "Do not resume export/browser/Mail/download work. For an owner-provided or already governed export, inspect canonical_events.appended_version_count and the append-only version chain. A replay must append zero versions; a changed conversation must retain every prior raw path. S09-P1-T3 may consume these canonical events in a later run but must not rewrite them."
+    test_refs:
+      - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_chatgpt_canonical_events -q"
+      - "python3 -B -m unittest OpenAIDatabase.tests.test_memory_atlas_chatgpt_export_parser OpenAIDatabase.tests.test_s04p1_chatgpt_sync OpenAIDatabase.tests.test_memory_atlas_raw_ledger -q"
+      - "npm run validate:fast --prefix OpenAIDatabase/apps/memory-atlas"
+      - "npm run validate:sync --prefix OpenAIDatabase/apps/memory-atlas"
+    evidence_refs:
+      - "EVID-MA-V121-S09-P1-T2-CONTRACT"
+      - "EVID-MA-V121-S09-P1-T2-TEST"
+      - "EVID-MA-V121-S09-P1-T2-PROOF"
+      - "EVID-MA-V121-S09-P1-T2-REVIEW"
 models:
   -
     model_id: "MOD-001"
@@ -6090,4 +6127,24 @@ evidence_refs:
     evidence_id: "EVID-MA-V121-S09-P1-T1-REVIEW"
     kind: "review"
     ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s09_p1_t1_chatgpt_export_parser_review.md"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S09-P1-T2-CONTRACT"
+    kind: "config"
+    ref: "OpenAIDatabase/config/data_sources/chatgpt_canonical_events.json"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S09-P1-T2-TEST"
+    kind: "test"
+    ref: "OpenAIDatabase/tests/test_memory_atlas_chatgpt_canonical_events.py"
+    fact_level: "EXTRACTED"
+  -
+    evidence_id: "EVID-MA-V121-S09-P1-T2-PROOF"
+    kind: "artifact"
+    ref: "OpenAIDatabase/机器治理/证据与日志/chatgpt_canonical_events/chatgpt_canonical_events.v1_2_1_s09_p1_t2.json"
+    fact_level: "VERIFIED"
+  -
+    evidence_id: "EVID-MA-V121-S09-P1-T2-REVIEW"
+    kind: "review"
+    ref: "OpenAIDatabase/docs/reviews/memory_atlas_v1_2_1_s09_p1_t2_chatgpt_canonical_events_review.md"
     fact_level: "EXTRACTED"

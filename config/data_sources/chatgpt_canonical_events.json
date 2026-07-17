@@ -1,0 +1,45 @@
+{
+  "acceptance_id": "ACC-MA-V121-S09-P1-T2",
+  "append_only": {
+    "ledger_prefix_preserved": true,
+    "modified_conversation_appends_new_version": true,
+    "previous_version_chain_required": true,
+    "raw_never_overwritten": true,
+    "replay_appends_zero_rows": true
+  },
+  "identity": {
+    "conversation_id": "sha256(source_id + stable source conversation identity)",
+    "message_id": "sha256(canonical conversation id + stable source message identity)",
+    "message_sha256": "sha256(canonical normalized message payload)",
+    "transport_provenance_excluded_from_version_hash": true,
+    "version_id": "sha256(canonical normalized conversation payload)"
+  },
+  "inputs": {
+    "normalized_conversation_schema": "memory_atlas_public_raw_chatgpt.v1",
+    "parser_task": "S09-P1-T1",
+    "raw_root": "data/public_raw/chatgpt"
+  },
+  "model_parameters_ref": "机器治理/参数与公式/chatgpt_canonical_events.v1_2_1_s09_p1_t2.json",
+  "outputs": {
+    "canonical_events": "data/processed/conversations/chatgpt_canonical_events.jsonl",
+    "event_type": "conversation_version",
+    "one_row_per_unseen_version": true
+  },
+  "phase_boundary": {
+    "implements_derived_facets": false,
+    "implements_incremental_deduplication": true,
+    "implements_stable_ids": true,
+    "implements_topics_or_activity": false,
+    "implements_version_history": true,
+    "mutates_source": false,
+    "next_task": "S09-P1-T3"
+  },
+  "schema_version": "memory_atlas.chatgpt_canonical_event_contract.v1_2_1_s09_p1_t2",
+  "security": {
+    "remote_actions": false,
+    "repository_relative_raw_refs": true,
+    "source_read_only": true
+  },
+  "source_id": "chatgpt",
+  "task_id": "S09-P1-T2"
+}

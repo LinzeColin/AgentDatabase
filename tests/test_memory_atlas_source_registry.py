@@ -94,6 +94,26 @@ class SourceRegistryContractTests(unittest.TestCase):
             "data/processed/conversations/chatgpt_parse_quarantine.jsonl",
         )
         self.assertEqual(
+            sources["chatgpt"]["parser"]["canonical_event_entrypoint"],
+            "scripts/memory_atlas_cli/chatgpt_canonical_events.py",
+        )
+        self.assertEqual(
+            sources["chatgpt"]["parser"]["canonical_event_contract_ref"],
+            "config/data_sources/chatgpt_canonical_events.json",
+        )
+        self.assertEqual(
+            sources["chatgpt"]["parser"]["canonical_event_model_ref"],
+            "机器治理/参数与公式/chatgpt_canonical_events.v1_2_1_s09_p1_t2.json",
+        )
+        self.assertEqual(
+            sources["chatgpt"]["parser"]["canonical_event_output"],
+            "data/processed/conversations/chatgpt_canonical_events.jsonl",
+        )
+        self.assertIn(
+            "data/processed/conversations/chatgpt_canonical_events.jsonl",
+            sources["chatgpt"]["derived_outputs"],
+        )
+        self.assertEqual(
             sources["chatgpt"]["parser"]["raw_archive_entrypoint"],
             "scripts/memory_atlas_cli/chatgpt_export_archive.py",
         )

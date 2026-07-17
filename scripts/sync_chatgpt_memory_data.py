@@ -18,6 +18,14 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Iterable
 
+from memory_atlas_cli.chatgpt_canonical_events import (
+    EVENTS_RELATIVE as CANONICAL_EVENTS_RELATIVE,
+    ChatGPTCanonicalEventError,
+    canonical_plan_result,
+    commit_chatgpt_canonical_events,
+    plan_chatgpt_canonical_events,
+    stable_source_conversation_id,
+)
 from memory_atlas_cli.chatgpt_export_parser import (
     QUARANTINE_RELATIVE,
     parse_chatgpt_export,
@@ -158,6 +166,7 @@ def build_sync_log_row(
         "output_files": [
             RAW_ROOT.as_posix(),
             PROCESSED_MANIFEST.as_posix(),
+            CANONICAL_EVENTS_RELATIVE.as_posix(),
             DERIVED_SUMMARY.as_posix(),
         ],
         "context_used": [
@@ -291,7 +300,7 @@ def normalize_messages(conversation: dict[str, Any]) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     mapping = conversation.get("mapping")
     if isinstance(mapping, dict):
-        for node in mapping.values():
+        for mapping_key, node in mapping.items():
             if not isinstance(node, dict):
                 continue
             message = node.get("message")
@@ -299,7 +308,7 @@ def normalize_messages(conversation: dict[str, Any]) -> list[dict[str, Any]]:
                 continue
             row = normalized_message(
                 message,
-                fallback_id=str(node.get("id") or stable_hash(message)[:16]),
+                fallback_id=str(node.get("id") or mapping_key),
             )
             if row is not None:
                 rows.append(row)
@@ -320,7 +329,7 @@ def normalize_messages(conversation: dict[str, Any]) -> list[dict[str, Any]]:
 
 
 def conversation_payload(conversation: dict[str, Any]) -> dict[str, Any]:
-    conversation_id = str(conversation.get("id") or conversation.get("conversation_id") or stable_hash(conversation)[:16])
+    conversation_id = stable_source_conversation_id(conversation)
     title = str(conversation.get("title") or "Untitled ChatGPT conversation")
     messages = normalize_messages(conversation)
     payload = {
@@ -430,6 +439,7 @@ def build_summary(
     export_sha256: str = "",
     redaction_counts: dict[str, int] | None = None,
     redact_for_public_backup: bool = False,
+    canonical_events: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     return {
         "schema_version": "memory_atlas_chatgpt_sync_summary.v1",
@@ -444,6 +454,16 @@ def build_summary(
         "redact_for_public_backup": redact_for_public_backup,
         "redaction_counts": redaction_counts or {},
         "processed_manifest": PROCESSED_MANIFEST.as_posix(),
+        "canonical_events": canonical_events
+        or {
+            "status": "NOT_RUN",
+            "events_path": CANONICAL_EVENTS_RELATIVE.as_posix(),
+            "appended_version_count": 0,
+            "unchanged_version_count": 0,
+            "event_count": 0,
+            "writes_files": False,
+            "append_only": True,
+        },
     }
 
 
@@ -524,6 +544,15 @@ def sync_official_export(
             "redact_for_public_backup": redact_for_public_backup,
             "redaction_counts": {},
             "processed_manifest": PROCESSED_MANIFEST.as_posix(),
+            "canonical_events": {
+                "status": "NOT_RUN",
+                "events_path": CANONICAL_EVENTS_RELATIVE.as_posix(),
+                "appended_version_count": 0,
+                "unchanged_version_count": 0,
+                "event_count": 0,
+                "writes_files": False,
+                "append_only": True,
+            },
             "derived_summary": DERIVED_SUMMARY.as_posix(),
             "run_log_dir": SYNC_LOG_DIR.as_posix(),
             "writes_files": writes_files,
@@ -558,6 +587,14 @@ def sync_official_export(
         build_manifest_row(row, relative_path, export_sha, generated_at)
         for row, relative_path in zip(rows, raw_paths)
     ]
+    canonical_plan = plan_chatgpt_canonical_events(
+        database_dir,
+        rows,
+        raw_paths,
+        export_sha256=export_sha,
+        observed_at=generated_at,
+    )
+    canonical_events = canonical_plan_result(canonical_plan, dry_run=dry_run)
 
     raw_ledger = {
         "status": "NOT_RUN",
@@ -584,6 +621,14 @@ def sync_official_export(
                     f"append-only raw or ledger bytes may exist after commit failure: {exc}"
                 ) from exc
             raise
+        try:
+            canonical_events = commit_chatgpt_canonical_events(
+                database_dir,
+                canonical_plan,
+            )
+        except ChatGPTCanonicalEventError as exc:
+            exc.writes_files = True
+            raise
         write_current_jsonl(database_dir / PROCESSED_MANIFEST, manifest_rows)
         write_current_jsonl(
             database_dir / QUARANTINE_RELATIVE,
@@ -595,6 +640,7 @@ def sync_official_export(
             export_sha256=export_sha,
             redaction_counts=redaction_counts,
             redact_for_public_backup=redact_for_public_backup,
+            canonical_events=canonical_events,
         )
         (database_dir / DERIVED_SUMMARY).parent.mkdir(parents=True, exist_ok=True)
         (database_dir / DERIVED_SUMMARY).write_text(json.dumps(summary, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
@@ -627,6 +673,7 @@ def sync_official_export(
         "redact_for_public_backup": redact_for_public_backup,
         "redaction_counts": redaction_counts,
         "processed_manifest": PROCESSED_MANIFEST.as_posix(),
+        "canonical_events": canonical_events,
         "derived_summary": DERIVED_SUMMARY.as_posix(),
         "run_log_dir": SYNC_LOG_DIR.as_posix(),
         "writes_files": not dry_run,
@@ -654,6 +701,15 @@ def dry_run_contract(redact_for_public_backup: bool = False) -> dict[str, Any]:
         "official_export_fallback": "official export ZIP/conversations.json fallback",
         "redact_for_public_backup": redact_for_public_backup,
         "processed_manifest": PROCESSED_MANIFEST.as_posix(),
+        "canonical_events": {
+            "status": "NOT_RUN",
+            "events_path": CANONICAL_EVENTS_RELATIVE.as_posix(),
+            "appended_version_count": 0,
+            "unchanged_version_count": 0,
+            "event_count": 0,
+            "writes_files": False,
+            "append_only": True,
+        },
     }
 
 
@@ -719,6 +775,17 @@ def main(argv: list[str] | None = None) -> int:
             "no_browser_mutation": True,
         }, ensure_ascii=False, indent=2, sort_keys=True))
         return 5
+    except ChatGPTCanonicalEventError as exc:
+        print(json.dumps({
+            "status": "FAIL_CLOSED",
+            "source_id": SOURCE_ID,
+            "reason": "canonical_event_violation",
+            "error": exc.code,
+            "writes_files": exc.writes_files,
+            "partial_append_only_raw_writes_possible": exc.writes_files,
+            "no_browser_mutation": True,
+        }, ensure_ascii=False, indent=2, sort_keys=True))
+        return 8
     except (PublicRawLimitError, PublicRawSanitizationError) as exc:
         print(json.dumps({
             "status": "FAIL",

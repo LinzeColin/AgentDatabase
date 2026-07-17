@@ -50,6 +50,18 @@ CHATGPT_EXPORT_PARSER_ENTRYPOINT = Path(
 CHATGPT_EXPORT_PARSER_QUARANTINE_PATH = Path(
     "data/processed/conversations/chatgpt_parse_quarantine.jsonl"
 )
+CHATGPT_CANONICAL_EVENT_CONTRACT_PATH = Path(
+    "config/data_sources/chatgpt_canonical_events.json"
+)
+CHATGPT_CANONICAL_EVENT_MODEL_PATH = Path(
+    "机器治理/参数与公式/chatgpt_canonical_events.v1_2_1_s09_p1_t2.json"
+)
+CHATGPT_CANONICAL_EVENT_ENTRYPOINT = Path(
+    "scripts/memory_atlas_cli/chatgpt_canonical_events.py"
+)
+CHATGPT_CANONICAL_EVENT_OUTPUT = Path(
+    "data/processed/conversations/chatgpt_canonical_events.jsonl"
+)
 CHATGPT_COMPLETE_ARCHIVE_ROOT = Path("data/raw_archives/chatgpt")
 CODEX_DISCOVERY_CONTRACT_PATH = Path("config/data_sources/codex_source_discovery.json")
 CODEX_PUBLIC_RAW_ARCHIVE_CONTRACT_PATH = Path(
@@ -307,6 +319,26 @@ def _validate_source(source: dict[str, Any], database_dir: Path, push_defaults: 
             f"{source_id}.parser.quarantine_path",
             ("data/processed/conversations/",),
         )
+        canonical_event_entrypoint = _repo_relative_path(
+            parser.get("canonical_event_entrypoint"),
+            f"{source_id}.parser.canonical_event_entrypoint",
+            ("scripts/",),
+        )
+        canonical_event_contract_ref = _repo_relative_path(
+            parser.get("canonical_event_contract_ref"),
+            f"{source_id}.parser.canonical_event_contract_ref",
+            ("config/data_sources/",),
+        )
+        canonical_event_model_ref = _repo_relative_path(
+            parser.get("canonical_event_model_ref"),
+            f"{source_id}.parser.canonical_event_model_ref",
+            ("机器治理/参数与公式/",),
+        )
+        canonical_event_output = _repo_relative_path(
+            parser.get("canonical_event_output"),
+            f"{source_id}.parser.canonical_event_output",
+            ("data/processed/conversations/",),
+        )
         raw_archive_entrypoint = _repo_relative_path(
             parser.get("raw_archive_entrypoint"),
             f"{source_id}.parser.raw_archive_entrypoint",
@@ -328,6 +360,13 @@ def _validate_source(source: dict[str, Any], database_dir: Path, push_defaults: 
             != CHATGPT_EXPORT_PARSER_CONTRACT_PATH.as_posix()
             or format_parser_model_ref != CHATGPT_EXPORT_PARSER_MODEL_PATH.as_posix()
             or quarantine_path != CHATGPT_EXPORT_PARSER_QUARANTINE_PATH.as_posix()
+            or canonical_event_entrypoint
+            != CHATGPT_CANONICAL_EVENT_ENTRYPOINT.as_posix()
+            or canonical_event_contract_ref
+            != CHATGPT_CANONICAL_EVENT_CONTRACT_PATH.as_posix()
+            or canonical_event_model_ref
+            != CHATGPT_CANONICAL_EVENT_MODEL_PATH.as_posix()
+            or canonical_event_output != CHATGPT_CANONICAL_EVENT_OUTPUT.as_posix()
             or raw_archive_entrypoint
             != CHATGPT_EXPORT_ARCHIVE_ENTRYPOINT.as_posix()
             or raw_archive_contract_ref
@@ -335,7 +374,7 @@ def _validate_source(source: dict[str, Any], database_dir: Path, push_defaults: 
             or complete_archive_root != CHATGPT_COMPLETE_ARCHIVE_ROOT.as_posix()
         ):
             raise SourceRegistryError(
-                "chatgpt.parser must name the canonical S09 parser and S08 archive adapter"
+                "chatgpt.parser must name the S09 parser/canonical events and S08 archive adapter"
             )
         if not (database_dir / raw_archive_entrypoint).is_file():
             raise SourceRegistryError("chatgpt raw archive entrypoint does not exist")
@@ -518,6 +557,7 @@ def _validate_source(source: dict[str, Any], database_dir: Path, push_defaults: 
         expected_state = "data/sync_state/chatgpt.json"
         expected_outputs = [
             "data/processed/conversations/conversation_manifest.jsonl",
+            "data/processed/conversations/chatgpt_canonical_events.jsonl",
             "data/processed/conversations/chatgpt_parse_quarantine.jsonl",
             "data/derived/chatgpt/chatgpt_sync_summary.json",
         ]
