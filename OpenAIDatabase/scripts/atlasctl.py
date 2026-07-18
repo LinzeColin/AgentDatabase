@@ -23,6 +23,11 @@ from memory_atlas_r8_acceptance import (
     AcceptanceHistoryError,
     build_acceptance_summary,
 )
+from memory_atlas_paths import (  # noqa: E402
+    default_publish_dir,
+    frontend_relative_to_database,
+    resolve_frontend_root,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -123,7 +128,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     audit.add_argument("--check")
     audit.add_argument("--dry-run", action="store_true")
     audit.add_argument("--database-dir", type=Path, default=ROOT)
-    audit.add_argument("--publish-dir", type=Path, default=Path("apps/memory-atlas/dist"))
+    audit.add_argument("--publish-dir", type=Path)
     audit.add_argument("--require-local-apps", action="store_true")
     audit.add_argument("--live-evidence", type=Path)
     audit.add_argument("--require-complete", action="store_true")
@@ -350,7 +355,9 @@ def run_sync(args: argparse.Namespace) -> int:
 
 
 def final_audit_gate_plan(database_dir: Path) -> list[dict[str, object]]:
-    app_dir = database_dir / "apps/memory-atlas"
+    database_dir = database_dir.resolve()
+    app_dir = resolve_frontend_root(database_dir)
+    app_relative = frontend_relative_to_database(database_dir, app_dir)
     worktree_root = database_dir.parent
     commit_result = subprocess.run(
         ["git", "rev-parse", "HEAD"],
@@ -374,7 +381,7 @@ def final_audit_gate_plan(database_dir: Path) -> list[dict[str, object]]:
         {
             "gate_id": "frontend_build",
             "name_zh": "Frontend build",
-            "command": ["npm", "run", "build", "--prefix", "apps/memory-atlas"],
+            "command": ["npm", "run", "build", "--prefix", app_relative],
             "cwd": str(database_dir),
             "timeout_seconds": 300,
             "pass_explanation_zh": "前端生产构建通过。",
@@ -2264,12 +2271,16 @@ def run_decision_debt_safety_audit(args: argparse.Namespace) -> int:
 
 
 def run_chinese_ux_audit(args: argparse.Namespace) -> int:
-    app_path = args.database_dir / "apps/memory-atlas/src/App.tsx"
-    copy_path = args.database_dir / "apps/memory-atlas/src/i18n/zh-CN.ts"
-    style_path = args.database_dir / "apps/memory-atlas/src/styles.css"
+    database_dir = args.database_dir.resolve()
+    frontend_root = resolve_frontend_root(database_dir)
+    frontend_relative = frontend_relative_to_database(database_dir, frontend_root)
+    app_path = frontend_root / "src/App.tsx"
+    source_root = frontend_root / "src"
+    copy_path = frontend_root / "src/i18n/zh-CN.ts"
+    style_path = frontend_root / "src/styles.css"
     missing_files = [
-        str(path.relative_to(args.database_dir))
-        for path in (app_path, copy_path, style_path)
+        f"{frontend_relative}/{path.relative_to(frontend_root).as_posix()}"
+        for path in (source_root, app_path, copy_path, style_path)
         if not path.exists()
     ]
     if missing_files:
@@ -2284,7 +2295,27 @@ def run_chinese_ux_audit(args: argparse.Namespace) -> int:
         }, ensure_ascii=False, indent=2, sort_keys=True))
         return 2
 
-    app_source = app_path.read_text(encoding="utf-8")
+    source_paths = sorted(
+        path
+        for path in source_root.rglob("*")
+        if path.is_file() and path.suffix in {".ts", ".tsx"}
+    )
+    if not source_paths:
+        print(json.dumps({
+            "status": "FAIL",
+            "command": "audit",
+            "check": "chinese-ux",
+            "task_id": "MA-V12-S10P3",
+            "acceptance_id": "ACC-MA-V12-S10P3",
+            "reason": "Chinese UX frontend source files missing",
+            "missing_files": [f"{frontend_relative}/src/**/*.ts(x)"],
+        }, ensure_ascii=False, indent=2, sort_keys=True))
+        return 2
+
+    # The active frontend is intentionally feature-sliced.  Audit the actual
+    # mounted source surface rather than treating the tiny composition root as
+    # the whole UI; this keeps the check meaningful after a structural split.
+    app_source = "\n\n".join(path.read_text(encoding="utf-8") for path in source_paths)
     copy_source = copy_path.read_text(encoding="utf-8")
     style_source = style_path.read_text(encoding="utf-8")
     required_copy = [
@@ -2424,7 +2455,9 @@ def run_chinese_ux_audit(args: argparse.Namespace) -> int:
 def run_audit(args: argparse.Namespace) -> int:
     if args.check in DELEGATED_AUDITS:
         command = [sys.executable, str(DELEGATED_AUDITS[args.check])]
-        if args.check in {"release", "acceptance", "goal-completion"}:
+        if args.check in {"release", "acceptance"}:
+            command.extend(["--publish-dir", str(args.publish_dir or default_publish_dir(args.database_dir))])
+        elif args.check == "goal-completion" and args.publish_dir is not None:
             command.extend(["--publish-dir", str(args.publish_dir)])
         if args.check == "goal-completion":
             if args.live_evidence:

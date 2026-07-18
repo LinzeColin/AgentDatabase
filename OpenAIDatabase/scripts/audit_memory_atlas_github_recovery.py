@@ -23,6 +23,17 @@ from pathlib import Path, PurePosixPath
 from typing import Any, BinaryIO, Iterable
 
 
+SCRIPT_DIR = Path(__file__).resolve().parent
+if str(SCRIPT_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPT_DIR))
+
+from memory_atlas_paths import (  # noqa: E402
+    MemoryAtlasPathError,
+    is_frontend_root,
+    resolve_frontend_root,
+)
+
+
 SCHEMA_VERSION = "memory_atlas.github_recovery_audit.v1_2_r7"
 SOURCE_PACKAGE_ROOT = Path("docs/source_packages/memory_atlas_v1_2")
 SOURCE_PACKAGE_MANIFEST = SOURCE_PACKAGE_ROOT / "SOURCE_MANIFEST.json"
@@ -31,8 +42,6 @@ RAW_LEDGER_PATH = Path("机器治理/证据与日志/raw_archive_manifests/raw_h
 CURRENT_RELEASE_PATH = Path("机器治理/发布快照/memory_atlas_current_release.json")
 RELEASE_ROOT = Path("data/releases/memory_atlas/v1_2")
 DERIVED_SNAPSHOT_PATH = Path("data/derived/visualization/memory_atlas.json")
-FRONTEND_PATH = Path("apps/memory-atlas")
-PAGES_SNAPSHOT_PATH = FRONTEND_PATH / "dist/memory_atlas.json"
 PUBLIC_RAW_AUDITOR_PATH = Path("scripts/audit_memory_atlas_public_raw.py")
 
 MAX_PUBLIC_RAW_FILE_BYTES = 40 * 1024 * 1024
@@ -697,9 +706,15 @@ def _stream_git_archive_safely(
 
 def _find_database_dir(recovered_root: Path) -> tuple[Path, str]:
     nested = recovered_root / "OpenAIDatabase"
-    if (nested / "scripts").is_dir() and (nested / "apps/memory-atlas").is_dir():
+    if (nested / "scripts").is_dir() and (
+        is_frontend_root(recovered_root / "MemoryAtlas")
+        or is_frontend_root(nested / "apps/memory-atlas")
+    ):
         return nested, "OpenAIDatabase"
-    if (recovered_root / "scripts").is_dir() and (recovered_root / "apps/memory-atlas").is_dir():
+    if (recovered_root / "scripts").is_dir() and (
+        is_frontend_root(recovered_root.parent / "MemoryAtlas")
+        or is_frontend_root(recovered_root / "apps/memory-atlas")
+    ):
         return recovered_root, "."
     raise RecoveryAuditError("DATABASE_ROOT_MISSING", "Recovered archive does not contain OpenAIDatabase.")
 
@@ -1213,7 +1228,10 @@ def _normalized_command_result(
 
 
 def _run_frontend_recovery(database_dir: Path, workspace: Path, release_sha256: str) -> tuple[list[dict[str, Any]], dict[str, Any]]:
-    frontend = database_dir / FRONTEND_PATH
+    try:
+        frontend = resolve_frontend_root(database_dir)
+    except MemoryAtlasPathError as exc:
+        raise RecoveryAuditError("FRONTEND_PACKAGE_MISSING", str(exc)) from exc
     if not (frontend / "package.json").is_file() or not (frontend / "package-lock.json").is_file():
         raise RecoveryAuditError("FRONTEND_PACKAGE_MISSING", "Recovered frontend package or lockfile is missing.")
     if (frontend / "node_modules").exists():
@@ -1243,7 +1261,7 @@ def _run_frontend_recovery(database_dir: Path, workspace: Path, release_sha256: 
                 commands=results,
             )
 
-    pages_snapshot = database_dir / PAGES_SNAPSHOT_PATH
+    pages_snapshot = frontend / "dist/memory_atlas.json"
     if not pages_snapshot.is_file():
         raise RecoveryAuditError("PAGES_SNAPSHOT_MISSING", "Frontend build did not produce the Pages snapshot.")
     pages_sha256 = sha256_file(pages_snapshot)
@@ -1251,7 +1269,7 @@ def _run_frontend_recovery(database_dir: Path, workspace: Path, release_sha256: 
         raise RecoveryAuditError("PAGES_SNAPSHOT_MISMATCH", "Built Pages snapshot does not match the immutable release.")
     return results, {
         "status": "PASS",
-        "pages_snapshot_path": PAGES_SNAPSHOT_PATH.as_posix(),
+        "pages_snapshot_path": pages_snapshot.resolve().relative_to(database_dir.resolve().parent).as_posix(),
         "snapshot_sha256": pages_sha256,
     }
 

@@ -164,7 +164,7 @@ def proposal_for(
         "rollback_plan_zh": "当前 phase 未写目标文件；若后续 proposal 被采纳，使用对应 commit 的 git revert 或 proposal rollback。",
         "validation_commands": [
             "python OpenAIDatabase/scripts/atlasctl.py audit --check self-iteration-safety",
-            "pnpm --dir OpenAIDatabase/apps/memory-atlas run validate:v1.2-s09-p2",
+            "pnpm --dir MemoryAtlas run validate:v1.2-s09-p2",
         ],
         "evidence_refs": evidence_refs[:5],
         "requires_human_approval_before_apply": True,

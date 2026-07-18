@@ -63,9 +63,7 @@ def is_tracked_transient(path: str) -> bool:
     parts = set(Path(path).parts)
     name = Path(path).name.lower()
     return (
-        lowered.startswith("apps/memory-atlas/dist/")
-        or lowered.startswith("apps/memory-atlas/node_modules/")
-        or "__pycache__" in parts
+        "__pycache__" in parts
         or ".cache" in parts
         or name.endswith((".sqlite", ".sqlite3", ".sqlite-wal", ".sqlite-shm"))
         or name.endswith((".db", ".db-wal", ".db-shm"))

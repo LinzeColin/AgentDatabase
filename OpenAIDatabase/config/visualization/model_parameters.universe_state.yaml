@@ -723,7 +723,7 @@ stage5_phase2_c3_river_spike:
     - stable
     - conflict
   data_boundary:
-    fixture: apps/memory-atlas/src/experiments/memory-river-spike/fixture.ts
+    fixture: ../MemoryAtlas/src/experiments/memory-river-spike/fixture.ts
     raw_private_data_allowed: false
     plaintext_secrets_allowed: false
     local_absolute_paths_allowed: false

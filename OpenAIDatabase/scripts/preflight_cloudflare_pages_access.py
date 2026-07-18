@@ -114,7 +114,7 @@ def audit_templates(repo_root: Path, checks: list[dict[str, str]]) -> None:
         checks,
         "cloudflare_pages_template_contract",
         pages_template.get("project_name") == "openai-memory-atlas"
-        and pages_template.get("source", {}).get("publish_dir") == "apps/memory-atlas/dist"
+        and pages_template.get("source", {}).get("publish_dir") == PUBLISH_DIR_ARG
         and pages_template.get("deploy", {}).get("requires_explicit_user_authorization") is True
         and pages_template.get("post_deploy", {}).get("access_required") is True,
         "Pages template names project, publish dir, explicit authorization, and Access requirement",
@@ -214,7 +214,7 @@ def audit_wrangler(repo_root: Path, checks: list[dict[str, str]]) -> str:
         checks,
         "wrangler_static_output_config",
         config.get("name") == "openai-memory-atlas"
-        and static_output_directory(config) == "apps/memory-atlas/dist"
+        and static_output_directory(config) == PUBLISH_DIR_ARG
         and mode in {WRANGLER_PAGES_CONFIG, WRANGLER_WORKERS_MIGRATION_CONFIG}
         and isinstance(config.get("compatibility_date"), str)
         and bool(config.get("compatibility_date")),

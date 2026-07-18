@@ -48,8 +48,8 @@ Recommended Pages project settings:
 ```text
 Framework preset: None / Vite-compatible custom build
 Root directory: repository root
-Build command: npm ci --prefix apps/memory-atlas && npm run build --prefix apps/memory-atlas
-Build output directory: apps/memory-atlas/dist
+Build command: cd OpenAIDatabase && npm ci --prefix ../MemoryAtlas && npm run build --prefix ../MemoryAtlas
+Build output directory: MemoryAtlas/dist
 ```
 
 ### Cloudflare deployment mode contract
@@ -77,7 +77,7 @@ The repository includes `wrangler.jsonc` with:
   "name": "openai-memory-atlas",
   "compatibility_date": "2026-07-10",
   "assets": {
-    "directory": "./apps/memory-atlas/dist",
+    "directory": "../MemoryAtlas/dist",
     "not_found_handling": "single-page-application"
   }
 }
@@ -92,15 +92,15 @@ Cloudflare status as external-authorization-blocked.
 Manual deploy after building locally:
 
 ```bash
-npm ci --prefix apps/memory-atlas
-npm run build --prefix apps/memory-atlas
-python3 scripts/audit_memory_atlas_release.py --publish-dir apps/memory-atlas/dist
+npm ci --prefix ../MemoryAtlas
+npm run build --prefix ../MemoryAtlas
+python3 scripts/audit_memory_atlas_release.py --publish-dir ../MemoryAtlas/dist
 python3 scripts/audit_memory_atlas_visual_acceptance.py
-python3 scripts/audit_memory_atlas_acceptance.py --publish-dir apps/memory-atlas/dist
-python3 scripts/audit_memory_atlas_goal_completion.py --publish-dir apps/memory-atlas/dist
-python3 scripts/preflight_cloudflare_pages_access.py --publish-dir apps/memory-atlas/dist
+python3 scripts/audit_memory_atlas_acceptance.py --publish-dir ../MemoryAtlas/dist
+python3 scripts/audit_memory_atlas_goal_completion.py --publish-dir ../MemoryAtlas/dist
+python3 scripts/preflight_cloudflare_pages_access.py --publish-dir ../MemoryAtlas/dist
 python3 scripts/deploy_memory_atlas_cloudflare.py
-npx wrangler pages deploy apps/memory-atlas/dist --project-name openai-memory-atlas
+npx wrangler pages deploy ../MemoryAtlas/dist --project-name openai-memory-atlas
 ```
 
 Do not run `wrangler pages deploy` until the redacted snapshot has been audited:
@@ -147,11 +147,11 @@ completion. Before live deploy evidence exists it should report:
 LOCAL_PASS_EXTERNAL_AUTHORIZATION_REQUIRED
 ```
 
-Run it with `--publish-dir apps/memory-atlas/dist` before local installer
+Run it with `--publish-dir ../MemoryAtlas/dist` before local installer
 cleanup when checking a deploy artifact. Run it without `--publish-dir` and with
 `--require-local-apps` after `scripts/install_memory_atlas_app.py`, because the
 installer cleans transient build folders after refreshing the local runtime.
-If a cleaned workspace no longer has `apps/memory-atlas/dist`, omit
+If a cleaned workspace no longer has `../MemoryAtlas/dist`, omit
 `--publish-dir`; passing a missing publish directory is treated as an explicit
 artifact-audit failure with a cleanup hint.
 
@@ -184,7 +184,7 @@ and run:
 
 ```bash
 python3 scripts/audit_memory_atlas_goal_completion.py \
-  --publish-dir apps/memory-atlas/dist \
+  --publish-dir ../MemoryAtlas/dist \
   --live-evidence /path/to/sanitized_live_evidence.json \
   --require-complete
 ```

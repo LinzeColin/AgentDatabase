@@ -22,11 +22,17 @@ from audit_memory_atlas_visual_acceptance import (  # noqa: E402
     VisualAcceptanceError,
     audit_visual_acceptance,
 )
+from memory_atlas_paths import (  # noqa: E402
+    MemoryAtlasPathError,
+    frontend_relative_to_database,
+    resolve_frontend_root,
+)
 from preflight_cloudflare_pages_access import (  # noqa: E402
     PreflightError,
     preflight as cloudflare_preflight,
     static_output_directory,
 )
+from memory_atlas_cloudflare_contract import PUBLISH_DIR_ARG  # noqa: E402
 
 
 class AcceptanceError(RuntimeError):
@@ -50,6 +56,44 @@ def require(checks: list[dict[str, str]], condition: bool, name: str, evidence: 
 
 def read_text(path: Path) -> str:
     return path.read_text(encoding="utf-8")
+
+
+def tracked_text(worktree_root: Path, path: Path) -> str:
+    """Read a tracked file even when this checkout intentionally omits it.
+
+    GitHubProject worktrees can be sparse. The workflow is still part of the
+    exact commit being audited, so reading it with ``git show`` is preferable
+    to treating a sparse checkout as a missing CI contract.
+    """
+
+    if path.is_file():
+        return read_text(path)
+    try:
+        relative = path.resolve().relative_to(worktree_root.resolve()).as_posix()
+    except ValueError:
+        return ""
+    result = subprocess.run(
+        ["git", "show", f"HEAD:{relative}"],
+        cwd=str(worktree_root),
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    return result.stdout if result.returncode == 0 else ""
+
+
+def resolve_ci_workflow_path(worktree_root: Path) -> Path:
+    """Prefer the dedicated active CI workflow with legacy compatibility."""
+
+    candidates = (
+        worktree_root / ".github/workflows/memory-atlas-acceptance.yml",
+        worktree_root / ".github/workflows/openai-database-ci.yml",
+        worktree_root / ".github/workflows/dual-plane.yml",
+    )
+    for candidate in candidates:
+        if candidate.is_file() or tracked_text(worktree_root, candidate):
+            return candidate
+    return candidates[0]
 
 
 def read_frontend_sources(source_root: Path) -> str:
@@ -174,7 +218,8 @@ def current_git_commit(repo_root: Path) -> str | None:
 
 def audit_acceptance(repo_root: Path, publish_dir: Path | None = None, require_local_apps: bool = False) -> dict[str, Any]:
     repo_root = repo_root.resolve()
-    ci_workflow_path = repo_root.parent / ".github/workflows/openai-database-ci.yml"
+    worktree_root = repo_root.parent
+    ci_workflow_path = resolve_ci_workflow_path(worktree_root)
     checks: list[dict[str, str]] = []
 
     if publish_dir is not None:
@@ -210,20 +255,34 @@ def audit_acceptance(repo_root: Path, publish_dir: Path | None = None, require_l
         "scripts/deploy_memory_atlas_cloudflare.py",
         "scripts/install_memory_atlas_app.py",
         "scripts/preflight_cloudflare_pages_access.py",
-        "apps/memory-atlas/index.html",
-        "apps/memory-atlas/package.json",
-        "apps/memory-atlas/vite.config.ts",
-        "apps/memory-atlas/src/App.tsx",
-        "apps/memory-atlas/src/components/GalaxyScene.tsx",
-        "apps/memory-atlas/src/data/atlas.ts",
         "data/derived/agent_context/agent_context_pack.json",
         "data/derived/agent_context/AGENT_CONTEXT.md",
         "data/derived/visualization/memory_atlas.json",
     ]
     missing = [relative for relative in required_paths if not (repo_root / relative).exists()]
-    if not ci_workflow_path.is_file():
-        missing.append("../.github/workflows/openai-database-ci.yml")
-    required_count = len(required_paths) + 1
+    try:
+        frontend_root = resolve_frontend_root(repo_root)
+        frontend_relative = frontend_relative_to_database(repo_root, frontend_root)
+    except MemoryAtlasPathError as exc:
+        frontend_root = resolve_frontend_root(repo_root, require_exists=False)
+        frontend_relative = frontend_relative_to_database(repo_root, frontend_root)
+        missing.append(str(exc))
+    frontend_required_paths = [
+        "index.html",
+        "package.json",
+        "vite.config.ts",
+        "src/App.tsx",
+        "src/components/GalaxyScene.tsx",
+        "src/data/atlas.ts",
+    ]
+    missing.extend(
+        f"{frontend_relative}/{relative}"
+        for relative in frontend_required_paths
+        if not (frontend_root / relative).exists()
+    )
+    if not tracked_text(worktree_root, ci_workflow_path):
+        missing.append(ci_workflow_path.relative_to(worktree_root).as_posix())
+    required_count = len(required_paths) + len(frontend_required_paths) + 1
     require(checks, not missing, "required_files_present", f"{required_count} files present", f"missing files: {missing}")
 
     tracked_problems = audit_tracked_files(repo_root)
@@ -331,18 +390,18 @@ def audit_acceptance(repo_root: Path, publish_dir: Path | None = None, require_l
         "writeback policy does not enforce proposal-only flow",
     )
 
-    vite_config = read_text(repo_root / "apps/memory-atlas/vite.config.ts")
-    atlas_loader = read_text(repo_root / "apps/memory-atlas/src/data/atlas.ts")
-    app_source = read_text(repo_root / "apps/memory-atlas/src/App.tsx")
-    frontend_source = read_frontend_sources(repo_root / "apps/memory-atlas/src")
+    vite_config = read_text(frontend_root / "vite.config.ts")
+    atlas_loader = read_text(frontend_root / "src/data/atlas.ts")
+    app_source = read_text(frontend_root / "src/App.tsx")
+    frontend_source = read_frontend_sources(frontend_root / "src")
     core_ui_source = "\n".join(
         [
-            read_text(repo_root / "apps/memory-atlas/src/features/assets/GalaxyView.tsx"),
-            read_text(repo_root / "apps/memory-atlas/src/features/assets/TimelineView.tsx"),
+            read_text(frontend_root / "src/features/assets/GalaxyView.tsx"),
+            read_text(frontend_root / "src/features/assets/TimelineView.tsx"),
         ]
     )
-    galaxy_source = read_text(repo_root / "apps/memory-atlas/src/components/GalaxyScene.tsx")
-    index_html = read_text(repo_root / "apps/memory-atlas/index.html")
+    galaxy_source = read_text(frontend_root / "src/components/GalaxyScene.tsx")
+    index_html = read_text(frontend_root / "index.html")
     installer_source = read_text(repo_root / "scripts/install_memory_atlas_app.py")
     runtime_server_source = read_text(repo_root / "scripts/memory_atlas_runtime_server.py")
     codex_sync_source = read_text(repo_root / "scripts/sync_codex_memory_data.py")
@@ -352,7 +411,7 @@ def audit_acceptance(repo_root: Path, publish_dir: Path | None = None, require_l
     deployment_doc = read_text(repo_root / "docs/MEMORY_ATLAS_DEPLOYMENT.md")
     model_parameters_doc = read_text(repo_root / "docs/MEMORY_ATLAS_PROJECT_MODEL_PARAMETERS.md")
     delivery_record_doc = read_text(repo_root / "docs/MEMORY_ATLAS_DELIVERY_RECORD.md")
-    ci_workflow = read_text(ci_workflow_path)
+    ci_workflow = tracked_text(worktree_root, ci_workflow_path)
 
     require(
         checks,
@@ -479,13 +538,14 @@ def audit_acceptance(repo_root: Path, publish_dir: Path | None = None, require_l
         fail_check(checks, "memory_atlas_visual_acceptance", str(exc))
     else:
         pass_check(checks, "memory_atlas_visual_acceptance", f"{len(visual_result['checks'])} visual acceptance checks passed")
+    pages_build_output = Path(PUBLISH_DIR_ARG).as_posix().removeprefix("../")
     require(
         checks,
         "Cloudflare Pages + Access" in deployment_doc
         and "Zero Trust Access" in deployment_doc
         and "MEMORY_ATLAS_CLOUDFLARE_RUNBOOK.md" in deployment_doc
-        and "Build output directory: apps/memory-atlas/dist" in deployment_doc
-        and static_output_directory(load_json(repo_root / "wrangler.jsonc")) == "apps/memory-atlas/dist",
+        and f"Build output directory: {pages_build_output}" in deployment_doc
+        and static_output_directory(load_json(repo_root / "wrangler.jsonc")) == PUBLISH_DIR_ARG,
         "cloudflare_pages_access_ready",
         "wrangler config and deployment docs cover Pages + Access",
         "Cloudflare Pages + Access readiness docs/config missing",
@@ -500,13 +560,13 @@ def audit_acceptance(repo_root: Path, publish_dir: Path | None = None, require_l
         pass_check(checks, "cloudflare_pages_access_preflight", f"{len(preflight_result['checks'])} Cloudflare preflight checks passed")
     require(
         checks,
-        "python scripts/atlasctl.py audit --check goal-completion" in ci_workflow
-        and "python scripts/atlasctl.py audit --check release" not in ci_workflow
-        and "python scripts/atlasctl.py audit --check visual-acceptance" not in ci_workflow
-        and "python scripts/atlasctl.py audit --check acceptance" not in ci_workflow
+        "python3 scripts/atlasctl.py audit --check goal-completion" in ci_workflow
+        and "python3 scripts/atlasctl.py audit --check release" not in ci_workflow
+        and "python3 scripts/atlasctl.py audit --check visual-acceptance" not in ci_workflow
+        and "python3 scripts/atlasctl.py audit --check acceptance" not in ci_workflow
         and "SOURCE_DATE_EPOCH=\"$(git log -1 --format=%ct)\"" in ci_workflow
         and "python3 scripts/run_verification.py --tier integration" in ci_workflow
-        and "npm run build --prefix apps/memory-atlas" in ci_workflow,
+        and f"npm run build --prefix {frontend_relative}" in ci_workflow,
         "ci_acceptance_gate",
         "CI runs disjoint verification tiers, reproducible data/frontend builds, and one aggregate local acceptance gate",
         "CI does not include the Memory Atlas acceptance gate",

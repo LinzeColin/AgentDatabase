@@ -12,8 +12,16 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import sys
 from pathlib import Path
 from typing import Any
+
+
+SCRIPT_DIR = Path(__file__).resolve().parent
+if str(SCRIPT_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPT_DIR))
+
+from memory_atlas_paths import resolve_frontend_root  # noqa: E402
 
 
 class VisualAcceptanceError(RuntimeError):
@@ -63,23 +71,24 @@ def audit_visual_acceptance(repo_root: Path) -> dict[str, Any]:
     repo_root = repo_root.resolve()
     checks: list[dict[str, str]] = []
 
-    source_root = repo_root / "apps/memory-atlas/src"
+    frontend_root = resolve_frontend_root(repo_root)
+    source_root = frontend_root / "src"
     app_source = read_frontend_sources(source_root)
-    i18n_source = read_optional_text(repo_root / "apps/memory-atlas/src/i18n/zh-CN.ts")
+    i18n_source = read_optional_text(frontend_root / "src/i18n/zh-CN.ts")
     ui_source = app_source + "\n" + i18n_source
-    galaxy_source = read_text(repo_root / "apps/memory-atlas/src/components/GalaxyScene.tsx")
-    starfield_params_source = read_text(repo_root / "apps/memory-atlas/src/config/memoryStarfieldParameters.ts")
-    obsidian_source = read_text(repo_root / "apps/memory-atlas/src/components/ObsidianGraphScene.tsx")
-    visual_flags_source = read_text(repo_root / "apps/memory-atlas/src/config/visualFlags.ts")
-    css_source = read_text(repo_root / "apps/memory-atlas/src/styles.css")
+    galaxy_source = read_text(frontend_root / "src/components/GalaxyScene.tsx")
+    starfield_params_source = read_text(frontend_root / "src/config/memoryStarfieldParameters.ts")
+    obsidian_source = read_text(frontend_root / "src/components/ObsidianGraphScene.tsx")
+    visual_flags_source = read_text(frontend_root / "src/config/visualFlags.ts")
+    css_source = read_text(frontend_root / "src/styles.css")
     model_params_source = read_text(repo_root / "config/visualization/model_parameters.memory_starfield.yaml")
     memory_river_params_source = read_text(repo_root / "config/visualization/model_parameters.memory_river.yaml")
     data_builder_source = read_text(repo_root / "scripts/build_memory_atlas_data.py")
     installer_source = read_text(repo_root / "scripts/install_memory_atlas_app.py")
     runtime_server_source = read_text(repo_root / "scripts/memory_atlas_runtime_server.py")
-    stage7_visual_source = read_text(repo_root / "apps/memory-atlas/scripts/validate_stage7_visual_acceptance.cjs")
-    stage7_performance_source = read_text(repo_root / "apps/memory-atlas/scripts/validate_stage7_performance_acceptance.cjs")
-    stage7_privacy_accessibility_source = read_text(repo_root / "apps/memory-atlas/scripts/validate_stage7_privacy_accessibility.cjs")
+    stage7_visual_source = read_text(frontend_root / "scripts/validate_stage7_visual_acceptance.cjs")
+    stage7_performance_source = read_text(frontend_root / "scripts/validate_stage7_performance_acceptance.cjs")
+    stage7_privacy_accessibility_source = read_text(frontend_root / "scripts/validate_stage7_privacy_accessibility.cjs")
     readme = read_text(repo_root / "README.md")
     atlas_path = repo_root / "data/derived/visualization/memory_atlas.json"
     atlas_source = atlas_path.read_text(encoding="utf-8") if atlas_path.exists() else ""
@@ -382,7 +391,7 @@ def audit_visual_acceptance(repo_root: Path) -> dict[str, Any]:
         "Memory River renders Stage 5.3 black-hole lifecycle, proto-star lifecycle, and stale/deprecated fade layers from redacted derived signals consistent with Home overview semantics",
         "Stage 5.3 Memory River evidence layers, derived-signal mapping, CSS, parameters, or audit contract are missing",
     )
-    shared_state_source = read_text(repo_root / "apps/memory-atlas/src/state/sharedAtlasState.ts")
+    shared_state_source = read_text(frontend_root / "src/state/sharedAtlasState.ts")
     require(
         checks,
         "export interface SharedAtlasSelectionState" in shared_state_source
@@ -437,7 +446,7 @@ def audit_visual_acceptance(repo_root: Path) -> dict[str, Any]:
     )
     require(
         checks,
-        '"validate:stage7-visual": "node scripts/validate_stage7_visual_acceptance.cjs"' in read_text(repo_root / "apps/memory-atlas/package.json")
+        '"validate:stage7-visual": "node scripts/validate_stage7_visual_acceptance.cjs"' in read_text(frontend_root / "package.json")
         and "function validateGalaxyVisualAcceptance" in stage7_visual_source
         and "function validateMemoryRiverVisualAcceptance" in stage7_visual_source
         and "stage7-galaxy-desktop.png" in stage7_visual_source
@@ -458,7 +467,7 @@ def audit_visual_acceptance(repo_root: Path) -> dict[str, Any]:
     )
     require(
         checks,
-        '"validate:stage7-performance": "node scripts/validate_stage7_performance_acceptance.cjs"' in read_text(repo_root / "apps/memory-atlas/package.json")
+        '"validate:stage7-performance": "node scripts/validate_stage7_performance_acceptance.cjs"' in read_text(frontend_root / "package.json")
         and "fps: latestPerformanceSnapshot.fps" in galaxy_source
         and "averageFrameMs: latestPerformanceSnapshot.averageFrameMs" in galaxy_source
         and "adaptiveQualityEnabled: latestPerformanceSnapshot.adaptiveQualityEnabled" in galaxy_source
@@ -479,7 +488,7 @@ def audit_visual_acceptance(repo_root: Path) -> dict[str, Any]:
     )
     require(
         checks,
-        '"validate:stage7-privacy-accessibility": "node scripts/validate_stage7_privacy_accessibility.cjs"' in read_text(repo_root / "apps/memory-atlas/package.json")
+        '"validate:stage7-privacy-accessibility": "node scripts/validate_stage7_privacy_accessibility.cjs"' in read_text(frontend_root / "package.json")
         and 'data-feedback-pseudo-haptic={feedbackSettings.pseudoHaptic ? "enabled" : "disabled"}' in app_source
         and 'data-feedback-audio={feedbackSettings.audio ? "enabled" : "disabled"}' in app_source
         and 'data-feedback-defaults={feedbackSettings.pseudoHaptic || feedbackSettings.audio ? "opted-in" : "silent-by-default"}' in app_source
@@ -1173,7 +1182,7 @@ def audit_visual_acceptance(repo_root: Path) -> dict[str, Any]:
     )
     require(
         checks,
-        '"validate:stage9-obsidian": "node scripts/validate_stage9_obsidian_iteration.cjs"' in read_text(repo_root / "apps/memory-atlas/package.json")
+        '"validate:stage9-obsidian": "node scripts/validate_stage9_obsidian_iteration.cjs"' in read_text(frontend_root / "package.json")
         and "LOCAL_GRAPH_PRIMARY_NODE_LIMIT" in obsidian_source
         and "LOCAL_GRAPH_SECONDARY_NODE_LIMIT" in obsidian_source
         and "LOCAL_GRAPH_CLUSTER_MEMBER_LIMIT" in obsidian_source
@@ -1195,7 +1204,7 @@ def audit_visual_acceptance(repo_root: Path) -> dict[str, Any]:
     )
     require(
         checks,
-        '"validate:stage9-visual-semantics": "node scripts/validate_stage9_visual_semantics.cjs"' in read_text(repo_root / "apps/memory-atlas/package.json")
+        '"validate:stage9-visual-semantics": "node scripts/validate_stage9_visual_semantics.cjs"' in read_text(frontend_root / "package.json")
         and ("Memory Weather v2" in app_source or "记忆天气 v2" in ui_source)
         and "data-memory-weather-v2" in app_source
         and "buildMemoryWeatherV2" in app_source

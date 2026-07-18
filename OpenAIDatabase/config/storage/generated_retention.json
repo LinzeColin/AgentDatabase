@@ -5,7 +5,7 @@
   "acceptance_id": "ACC.OpenAIDatabase.CLEAN1.0007",
   "last_updated_task_id": "TSK.OpenAIDatabase.PAM1.0008",
   "last_updated_acceptance_id": "ACC.OpenAIDatabase.PAM1.0008",
-  "implementation_base_sha": "ac871bd40082f4cb8a607d7e37c8750f50522018",
+  "implementation_base_sha": "91051a00ecdac72dc43ab8d0d2c0ecaeb1696fd0",
   "target_scopes": [
     "data/derived",
     "data/run_logs",
@@ -13,7 +13,6 @@
     "data/memory/AGENT_MEMORY.md and data/memory/agent-memory.json",
     "session_history",
     "token_usage",
-    "apps/memory-atlas/dist",
     "cache and local database sidecars"
   ],
   "retained_rules": [
@@ -138,8 +137,6 @@
   "local_transient_rules": [
     {"include": ["data/processed/indexes/*.sqlite*"], "classification": "local_rebuildable_index", "tracked": false, "gitignore_marker": "data/processed/indexes/*.sqlite*", "rebuild": "search/fetch auto-build from tracked active and candidate JSONL"},
     {"include": ["data/processed/indexes/*.db*"], "classification": "local_rebuildable_index", "tracked": false, "gitignore_marker": "data/processed/indexes/*.db*", "rebuild": "local only"},
-    {"include": ["apps/memory-atlas/dist/**"], "classification": "build_output", "tracked": false, "gitignore_marker": "dist/", "rebuild": "npm run build --prefix apps/memory-atlas"},
-    {"include": ["apps/memory-atlas/node_modules/**"], "classification": "dependency_cache", "tracked": false, "gitignore_marker": "node_modules/", "rebuild": "npm ci --prefix apps/memory-atlas"},
     {"include": ["**/__pycache__/**"], "classification": "interpreter_cache", "tracked": false, "gitignore_marker": "__pycache__/", "rebuild": "automatic"},
     {"include": ["**/*.tsbuildinfo"], "classification": "compiler_cache", "tracked": false, "gitignore_marker": "*.tsbuildinfo", "rebuild": "TypeScript build"},
     {"include": ["data/run_logs/**/*.log", "data/run_logs/**/*stdout*", "data/run_logs/**/*stderr*", "data/run_logs/**/*transcript*", "data/run_logs/**/*.tmp"], "classification": "unbounded_run_output", "tracked": false, "gitignore_markers": ["data/run_logs/**/*.log", "data/run_logs/**/*stdout*", "data/run_logs/**/*stderr*", "data/run_logs/**/*transcript*", "data/run_logs/**/*.tmp"], "rebuild": "not retained; use local artifact storage"}
@@ -154,7 +151,7 @@
       "active_reference_markers": ["token_usage/old-mac-20260630"],
       "reason": "legacy numeric package has no active consumer; current telemetry has a single canonical destination",
       "replacement": "data/run_logs/token_usage",
-      "recovery": "git restore --source=ac871bd40082f4cb8a607d7e37c8750f50522018 -- OpenAIDatabase/token_usage"
+      "recovery": "git restore --source=91051a00ecdac72dc43ab8d0d2c0ecaeb1696fd0 -- OpenAIDatabase/token_usage"
     },
     {
       "scope": "data/processed/indexes/memory_index.sqlite",

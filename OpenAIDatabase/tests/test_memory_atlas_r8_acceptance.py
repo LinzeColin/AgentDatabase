@@ -12,7 +12,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "scripts/memory_atlas_r8_acceptance.py"
 ATLASCTL = ROOT / "scripts/atlasctl.py"
-HOME_BROWSER_GATE = ROOT / "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_home_multiviewport.cjs"
+HOME_BROWSER_GATE = ROOT.parent / "MemoryAtlas/scripts/validate_memory_atlas_v1_2_home_multiviewport.cjs"
 
 
 def load_module():

@@ -60,7 +60,7 @@ class GeneratedRetentionTests(unittest.TestCase):
         for relative in (
             "OpenAIDatabase/data/processed/indexes/memory_index.sqlite",
             "OpenAIDatabase/data/processed/indexes/memory_index.sqlite-wal",
-            "OpenAIDatabase/apps/memory-atlas/dist/index.html",
+            "MemoryAtlas/dist/index.html",
             "OpenAIDatabase/data/run_logs/example/stdout.txt",
         ):
             result = subprocess.run(

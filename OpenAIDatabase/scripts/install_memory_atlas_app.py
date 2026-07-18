@@ -25,6 +25,7 @@ if str(SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPT_DIR))
 
 from materialize_memory_atlas_release import verify_current_release  # noqa: E402
+from memory_atlas_paths import resolve_frontend_root  # noqa: E402
 
 
 APP_NAME = "Memory Atlas.app"
@@ -295,19 +296,31 @@ def source_workspace_ignore(_directory: str, names: list[str]) -> set[str]:
 
 
 def sync_source_workspace(repo_root: Path) -> Path:
+    frontend_root = resolve_frontend_root(repo_root)
     source_dir = source_workspace_root()
     staging_dir = source_dir.with_name("source.next")
     if staging_dir.exists():
         remove_tree(staging_dir)
     source_dir.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copytree(repo_root, staging_dir, ignore=source_workspace_ignore)
+    database_dir = staging_dir / "OpenAIDatabase"
+    frontend_dir = staging_dir / "MemoryAtlas"
+    shutil.copytree(repo_root, database_dir, ignore=source_workspace_ignore)
+
+    # A legacy source can still contain the retired nested frontend.  The
+    # installed workspace always uses the current sibling layout so refreshes,
+    # audits and the runtime server agree on one canonical app root.
+    legacy_frontend = database_dir / "apps" / "memory-atlas"
+    if legacy_frontend.exists():
+        remove_tree(legacy_frontend)
+    shutil.copytree(frontend_root, frontend_dir, ignore=source_workspace_ignore)
 
     manifest = {
         "schema_version": "memory_atlas_source_workspace.v1",
         "original_repo_root": str(repo_root),
+        "original_frontend_root": str(frontend_root),
         "installed_git_commit": git_commit(repo_root),
         "installed_at_epoch": int(time.time()),
-        "purpose": "Runs Memory Atlas snapshot refresh outside Documents so every app launch can use the latest local data.",
+        "purpose": "Runs Memory Atlas snapshot refresh outside Documents with the canonical OpenAIDatabase + MemoryAtlas sibling layout.",
     }
     (staging_dir / "memory_atlas_source_workspace.json").write_text(
         json.dumps(manifest, ensure_ascii=False, indent=2) + "\n",
@@ -514,7 +527,7 @@ def prepare_static_runtime(
     *,
     explicit_refresh: bool = False,
 ) -> Path:
-    app_dir = repo_root / "apps" / "memory-atlas"
+    app_dir = resolve_frontend_root(repo_root)
     runtime_dir = runtime_root() / "runtime"
     staging_dir = runtime_root() / "runtime.next"
     build_info_repo_root = build_info_repo_root or repo_root
@@ -593,17 +606,18 @@ set -euo pipefail
 REPO_ROOT={quoted_repo}
 ORIGINAL_REPO_ROOT={quoted_original_repo}
 INSTALLED_GIT_COMMIT={installed_commit}
-APP_DIR="$REPO_ROOT/apps/memory-atlas"
+DATABASE_DIR="$REPO_ROOT/OpenAIDatabase"
+APP_DIR="$REPO_ROOT/MemoryAtlas"
 APP_SUPPORT="$HOME/Library/Application Support/OpenAIDatabase/MemoryAtlas"
 RUNTIME_DIR="$APP_SUPPORT/runtime"
 BUILD_INFO="$RUNTIME_DIR/memory_atlas_build.json"
 STATUS_FILE="$APP_SUPPORT/launching.html"
 PID_FILE="$APP_SUPPORT/server.pid"
 WATCHDOG_PID_FILE="$APP_SUPPORT/server_watchdog.pid"
-SERVER_SOURCE="$REPO_ROOT/scripts/memory_atlas_runtime_server.py"
+SERVER_SOURCE="$DATABASE_DIR/scripts/memory_atlas_runtime_server.py"
 SERVER_SCRIPT="$APP_SUPPORT/memory_atlas_runtime_server.py"
-SNAPSHOT="$REPO_ROOT/data/derived/visualization/memory_atlas.json"
-CURRENT_RELEASE_POINTER="$REPO_ROOT/机器治理/发布快照/memory_atlas_current_release.json"
+SNAPSHOT="$DATABASE_DIR/data/derived/visualization/memory_atlas.json"
+CURRENT_RELEASE_POINTER="$DATABASE_DIR/机器治理/发布快照/memory_atlas_current_release.json"
 PINNED_SNAPSHOT=""
 PINNED_RELEASE_ID=""
 PINNED_SNAPSHOT_SHA256=""
@@ -755,11 +769,11 @@ stop_port_managed_server() {{
 }}
 
 ensure_repo_access() {{
-  if [[ ! -d "$REPO_ROOT" ]]; then
+  if [[ ! -d "$REPO_ROOT" || ! -d "$DATABASE_DIR" || ! -d "$APP_DIR" ]]; then
     notify_error "未找到 Memory Atlas 运行副本：$REPO_ROOT。请从终端重新安装：cd $ORIGINAL_REPO_ROOT && python3 scripts/install_memory_atlas_app.py"
     exit 1
   fi
-  cd "$REPO_ROOT"
+  cd "$DATABASE_DIR"
 }}
 
 current_git_commit() {{
@@ -1139,7 +1153,7 @@ fi
 
 echo "Starting Memory Atlas on $URL"
 write_runtime_server
-PYTHONDONTWRITEBYTECODE=1 MEMORY_ATLAS_PID_FILE="$PID_FILE" nohup python3 "$SERVER_SCRIPT" "$RUNTIME_DIR" "$PORT" "$TTL_SECONDS" "$IDLE_SECONDS" "$REPO_ROOT" >> "$LOG_FILE" 2>&1 &
+PYTHONDONTWRITEBYTECODE=1 MEMORY_ATLAS_PID_FILE="$PID_FILE" nohup python3 "$SERVER_SCRIPT" "$RUNTIME_DIR" "$PORT" "$TTL_SECONDS" "$IDLE_SECONDS" "$DATABASE_DIR" >> "$LOG_FILE" 2>&1 &
 SERVER_PID=$!
 echo "$SERVER_PID" > "$PID_FILE"
 
@@ -1273,15 +1287,18 @@ def parse_args() -> argparse.Namespace:
 def main() -> int:
     args = parse_args()
     repo_root = args.repo_root.expanduser().resolve()
-    if not (repo_root / "apps" / "memory-atlas" / "package.json").exists():
-        raise SystemExit(f"Memory Atlas package not found under repo root: {repo_root}")
+    try:
+        resolve_frontend_root(repo_root)
+    except FileNotFoundError as exc:
+        raise SystemExit(f"Memory Atlas package not found for database root: {repo_root}") from exc
 
     source_repo_root = sync_source_workspace(repo_root)
+    source_database_root = source_repo_root / "OpenAIDatabase"
     targets = args.target or default_targets()
     installed = [install_app(target, source_repo_root, repo_root) for target in targets]
     if not args.skip_runtime:
         runtime_dir = prepare_static_runtime(
-            source_repo_root,
+            source_database_root,
             keep_build_cache=args.keep_build_cache,
             build_info_repo_root=repo_root,
             explicit_refresh=args.refresh_snapshot,

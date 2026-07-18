@@ -223,14 +223,14 @@
       "bytes": 5257,
       "sha256": "2fc3314d9157af603deffae11decc4ebcd0046791589ff48db122e557cba8839",
       "reference_source_count_before": 0,
-      "replacement": "apps/memory-atlas/scripts/validate_memory_starfield_interaction.mjs plus atlasctl audit --check visual-acceptance"
+      "replacement": "../MemoryAtlas/scripts/validate_memory_starfield_interaction.mjs plus atlasctl audit --check visual-acceptance"
     },
     {
       "path": "scripts/verify_memory_atlas_obsidian_graph.cjs",
       "bytes": 11671,
       "sha256": "0900d51e116d98488e674967882a07b982a86aadb4711b13f4db86199cd32480",
       "reference_source_count_before": 0,
-      "replacement": "apps/memory-atlas/scripts/validate_data_map_structure_browser.cjs plus atlasctl audit --check visual-acceptance"
+      "replacement": "../MemoryAtlas/scripts/validate_data_map_structure_browser.cjs plus atlasctl audit --check visual-acceptance"
     }
   ],
   "ci_policy": {

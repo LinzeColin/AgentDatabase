@@ -83,7 +83,7 @@ Do not silently drop memory-affecting changes.
   其他 private export/import 留在 git 外或 ignored/encrypted private paths；临时源不是交付。
 - 禁止自动化 ChatGPT login、UI scraping、export download 或 saved-memory writes。Generated
   memory candidates 审核前保持 pending。
-- `apps/memory-atlas/` 只读 `data/derived/visualization/memory_atlas.json` 等脱敏派生快照；UI
+- `../MemoryAtlas/` 只读 `data/derived/visualization/memory_atlas.json` 等脱敏派生快照；UI
   writeback 仅生成 proposal，不直接修改 `data/memory/records/records-NNNN.jsonl`。
 - `skills/openai-memory-analysis/` 是 tooling layer；`context/` 与
   `config/context_sources/` 是 routing/source contract。默认入口必须 repository-relative 并按

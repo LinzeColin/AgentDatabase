@@ -30,7 +30,7 @@ class MemoryAtlasCloudflareDeployTests(unittest.TestCase):
 
         self.assertEqual(result["status"], "DRY_RUN")
         commands = [entry["command"] for entry in result["commands"]]
-        self.assertIn(["npx", "wrangler", "pages", "deploy", "apps/memory-atlas/dist", "--project-name", "openai-memory-atlas"], commands)
+        self.assertIn(["npx", "wrangler", "pages", "deploy", "../MemoryAtlas/dist", "--project-name", "openai-memory-atlas"], commands)
         self.assertTrue(all(entry["status"] == "DRY_RUN" for entry in result["commands"]))
 
     def test_deploy_verifies_current_release_and_exact_parity_without_rebuilding_data(self) -> None:
@@ -56,13 +56,13 @@ class MemoryAtlasCloudflareDeployTests(unittest.TestCase):
             "--local-runtime-env",
             "MEMORY_ATLAS_LOCAL_RUNTIME_CANDIDATE",
             "--pages-candidate",
-            "apps/memory-atlas/dist/memory_atlas.json",
+            "../MemoryAtlas/dist/memory_atlas.json",
         ]
 
         self.assertEqual(commands[0], verify_command)
         self.assertIn(parity_command, commands)
-        self.assertLess(commands.index(["npm", "run", "build", "--prefix", "apps/memory-atlas"]), commands.index(parity_command))
-        self.assertLess(commands.index(parity_command), commands.index(["npx", "wrangler", "pages", "deploy", "apps/memory-atlas/dist", "--project-name", "openai-memory-atlas"]))
+        self.assertLess(commands.index(["npm", "run", "build", "--prefix", "../MemoryAtlas"]), commands.index(parity_command))
+        self.assertLess(commands.index(parity_command), commands.index(["npx", "wrangler", "pages", "deploy", "../MemoryAtlas/dist", "--project-name", "openai-memory-atlas"]))
         self.assertNotIn("build_memory_atlas_data.py", flattened)
         self.assertNotIn("/Users/", flattened)
         self.assertNotIn(str(args.repo_root.resolve()), json.dumps(result))

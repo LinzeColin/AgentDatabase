@@ -21,7 +21,7 @@ RUNTIME_SERVER_PATH = REPO_ROOT / "scripts" / "memory_atlas_runtime_server.py"
 PROPOSAL_WORKFLOW_PATH = REPO_ROOT / "scripts" / "memory_atlas_proposal_workflow.py"
 OWNER_DAILY_PATH = REPO_ROOT / "scripts" / "memory_atlas_owner_daily.py"
 WEEKLY_REPORT_PATH = REPO_ROOT / "scripts" / "build_memory_atlas_weekly_report.py"
-COMMAND_VALIDATOR_PATH = REPO_ROOT / "apps/memory-atlas/scripts/validate_memory_atlas_v1_2_command_workflows.cjs"
+COMMAND_VALIDATOR_PATH = REPO_ROOT.parent / "MemoryAtlas/scripts/validate_memory_atlas_v1_2_command_workflows.cjs"
 
 
 def load_module(name: str, path: Path) -> Any:

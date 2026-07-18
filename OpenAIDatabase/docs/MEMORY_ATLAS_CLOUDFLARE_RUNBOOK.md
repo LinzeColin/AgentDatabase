@@ -17,27 +17,27 @@ Official references used by this runbook:
 
 ## 1. Local Preflight
 
-Run from the repository root:
+Run from `OpenAIDatabase/` inside the repository root:
 
 ```bash
 python3 scripts/build_memory_atlas_data.py \
   --database-dir . \
   --output data/derived/visualization/memory_atlas.json
 
-npm ci --prefix apps/memory-atlas
-npm run build --prefix apps/memory-atlas
+npm ci --prefix ../MemoryAtlas
+npm run build --prefix ../MemoryAtlas
 
 python3 scripts/audit_memory_atlas_release.py \
-  --publish-dir apps/memory-atlas/dist
+  --publish-dir ../MemoryAtlas/dist
 
 python3 scripts/audit_memory_atlas_acceptance.py \
-  --publish-dir apps/memory-atlas/dist
+  --publish-dir ../MemoryAtlas/dist
 
 python3 scripts/preflight_cloudflare_pages_access.py \
-  --publish-dir apps/memory-atlas/dist
+  --publish-dir ../MemoryAtlas/dist
 
 python3 scripts/audit_memory_atlas_goal_completion.py \
-  --publish-dir apps/memory-atlas/dist
+  --publish-dir ../MemoryAtlas/dist
 
 python3 scripts/deploy_memory_atlas_cloudflare.py
 ```
@@ -66,7 +66,7 @@ export MEMORY_ATLAS_ACCESS_HOSTNAME="<memory-atlas.example.com or pages.dev host
 export MEMORY_ATLAS_ALLOWED_EMAIL="<allowed user email>"
 
 python3 scripts/preflight_cloudflare_pages_access.py \
-  --publish-dir apps/memory-atlas/dist \
+  --publish-dir ../MemoryAtlas/dist \
   --require-live-env
 ```
 
@@ -90,7 +90,7 @@ python3 scripts/deploy_memory_atlas_cloudflare.py --execute
 ```
 
 The script follows Cloudflare Direct Upload guidance: prebuilt assets are
-uploaded with `npx wrangler pages deploy apps/memory-atlas/dist --project-name
+uploaded with `npx wrangler pages deploy ../MemoryAtlas/dist --project-name
 openai-memory-atlas`. Cloudflare documents Direct Upload as uploading prebuilt
 assets to Pages, and the Wrangler deploy form as `npx wrangler pages deploy
 <BUILD_OUTPUT_DIRECTORY>`.
@@ -138,7 +138,7 @@ Run strict completion audit:
 
 ```bash
 python3 scripts/audit_memory_atlas_goal_completion.py \
-  --publish-dir apps/memory-atlas/dist \
+  --publish-dir ../MemoryAtlas/dist \
   --live-evidence /path/to/sanitized_live_evidence.json \
   --require-complete
 ```

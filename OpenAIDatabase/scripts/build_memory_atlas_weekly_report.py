@@ -127,7 +127,8 @@ def _render_recommendation(row: dict[str, Any]) -> str:
         details.append(f"\u539f\u56e0\uff1a{reason}")
     if scope:
         details.append(f"\u8303\u56f4\uff1a{scope}")
-    return f"- **{title}**\uff1a{' '.join(details) if details else '\u65e0\u8865\u5145\u8bf4\u660e\u3002'}"
+    detail_text = " ".join(details) if details else "\u65e0\u8865\u5145\u8bf4\u660e\u3002"
+    return f"- **{title}**\uff1a{detail_text}"
 
 
 def _append_section(lines: list[str], heading: str, items: list[str]) -> None:

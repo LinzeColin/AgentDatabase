@@ -4,7 +4,7 @@ from __future__ import annotations
 
 
 PROJECT_NAME = "openai-memory-atlas"
-PUBLISH_DIR_ARG = "apps/memory-atlas/dist"
+PUBLISH_DIR_ARG = "../MemoryAtlas/dist"
 DEPLOYMENT_MODE = "pages_direct_upload_with_workers_migration_ready_config"
 PAGES_DEPLOY_COMMAND = [
     "npx",

@@ -187,8 +187,10 @@ python3 skills/openai-memory-analysis/scripts/openai_memory_analysis.py search \
 
 ## Memory Atlas
 
-`apps/memory-atlas` is an independent Vite + React + Three.js local app for
+`../MemoryAtlas` is the sibling Vite + React + Three.js local app for
 interactive memory visualization. It is not an Obsidian/Notion/Chrome plugin.
+Unless stated otherwise, the commands in this document run from
+`OpenAIDatabase/`.
 
 The app is one merged platform with multiple selectable data-source slices.
 The homepage data-source selector must expose exactly three choices:
@@ -391,15 +393,15 @@ python3 scripts/route_agent_resources.py --database-dir . --intent startup
 python3 scripts/evaluate_personalization_context.py --database-dir .
 python3 scripts/install_codex_weekly_sync.py --load
 
-npm ci --prefix apps/memory-atlas
-npm run build --prefix apps/memory-atlas
-python3 scripts/atlasctl.py audit --check release --publish-dir apps/memory-atlas/dist
+npm ci --prefix ../MemoryAtlas
+npm run build --prefix ../MemoryAtlas
+python3 scripts/atlasctl.py audit --check release --publish-dir ../MemoryAtlas/dist
 python3 scripts/atlasctl.py audit --check visual-acceptance
-python3 scripts/atlasctl.py audit --check acceptance --publish-dir apps/memory-atlas/dist
-python3 scripts/atlasctl.py audit --check goal-completion --publish-dir apps/memory-atlas/dist
-python3 scripts/preflight_cloudflare_pages_access.py --publish-dir apps/memory-atlas/dist
+python3 scripts/atlasctl.py audit --check acceptance --publish-dir ../MemoryAtlas/dist
+python3 scripts/atlasctl.py audit --check goal-completion --publish-dir ../MemoryAtlas/dist
+python3 scripts/preflight_cloudflare_pages_access.py --publish-dir ../MemoryAtlas/dist
 python3 scripts/deploy_memory_atlas_cloudflare.py
-npm run dev --prefix apps/memory-atlas
+npm run dev --prefix ../MemoryAtlas
 ```
 
 After cleaning transient frontend folders or after local launcher install, use
@@ -413,8 +415,8 @@ Cloudflare Pages build settings:
 
 ```text
 Root directory: repository root
-Build command: npm ci --prefix apps/memory-atlas && npm run build --prefix apps/memory-atlas
-Build output directory: apps/memory-atlas/dist
+Build command: cd OpenAIDatabase && npm ci --prefix ../MemoryAtlas && npm run build --prefix ../MemoryAtlas
+Build output directory: MemoryAtlas/dist
 ```
 
 Install local macOS launchers:
@@ -465,15 +467,15 @@ open. It runs from the installed Application Support source workspace, which is
 refreshed by rerunning the installer from the trusted main repo:
 
 ```bash
-cd /Users/linzezhang/Documents/Codex/2026-06-15/files-mentioned-by-the-user-chatgpt/work/CodexProject/OpenAIDatabase
+cd <AgentDatabase checkout>/OpenAIDatabase
 python3 scripts/install_memory_atlas_app.py
 ```
 
 The launcher log is
 `~/Library/Logs/OpenAIDatabase/memory-atlas-launcher.log`.
 
-Local generated folders such as `apps/memory-atlas/node_modules`,
-`apps/memory-atlas/dist`, `*.tsbuildinfo`, and
+Local generated folders such as `../MemoryAtlas/node_modules`,
+`../MemoryAtlas/dist`, `*.tsbuildinfo`, and
 `data/processed/indexes/memory_index.sqlite` are ignored and should not be
 committed. Search/fetch rebuilds the local SQLite index from tracked JSONL when
 it is absent. `memory_atlas.json` is committed as a redacted visualization
@@ -529,7 +531,7 @@ data/derived/timeline/TIMELINE.md
 data/derived/visualization/memory_atlas.json
 data/processed/conversations/conversation_manifest.jsonl
 data/processed/indexes/memory_index.sqlite  # local generated; ignored and auto-built
-apps/memory-atlas/
+../MemoryAtlas/  # sibling UI/runtime package
 ```
 
 `data/memory/records/` is the only editable logical truth. Status is represented
@@ -544,7 +546,7 @@ raw-data disposition task; they are not write targets.
 OpenAIDatabase now treats app, skill, context, and private export layers as
 separate defaults:
 
-- App layer: `apps/memory-atlas/` is the Memory Atlas UI/runtime. It consumes
+- App layer: `../MemoryAtlas/` is the Memory Atlas UI/runtime. It consumes
   `data/derived/visualization/memory_atlas.json` and redacted derived context
   outputs only.
 - Skill layer: `skills/openai-memory-analysis/` contains reusable analysis

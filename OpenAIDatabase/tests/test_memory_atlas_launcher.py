@@ -42,20 +42,22 @@ class MemoryAtlasLauncherTests(unittest.TestCase):
             executable = target / "Contents" / "MacOS" / "memory-atlas-launcher"
             icon = target / "Contents" / "Resources" / "MemoryAtlas.icns"
             source_workspace = app_support / "source"
+            source_database = source_workspace / "OpenAIDatabase"
+            source_frontend = source_workspace / "MemoryAtlas"
 
             self.assertTrue(info_plist.exists())
             self.assertTrue(executable.exists())
             self.assertTrue(os.access(executable, os.X_OK))
             self.assertTrue(source_workspace.exists())
-            self.assertTrue((source_workspace / "apps/memory-atlas/package.json").exists())
-            self.assertTrue((source_workspace / "scripts/sync_codex_memory_data.py").exists())
-            self.assertTrue((source_workspace / "scripts/memory_atlas_runtime_server.py").exists())
-            self.assertTrue((source_workspace / "scripts/memory_atlas_command_bridge.py").exists())
-            self.assertTrue((source_workspace / "scripts/build_memory_atlas_weekly_report.py").exists())
+            self.assertTrue((source_frontend / "package.json").exists())
+            self.assertTrue((source_database / "scripts/sync_codex_memory_data.py").exists())
+            self.assertTrue((source_database / "scripts/memory_atlas_runtime_server.py").exists())
+            self.assertTrue((source_database / "scripts/memory_atlas_command_bridge.py").exists())
+            self.assertTrue((source_database / "scripts/build_memory_atlas_weekly_report.py").exists())
             self.assertTrue((source_workspace / "memory_atlas_source_workspace.json").exists())
             self.assertFalse((source_workspace / ".git").exists())
             self.assertFalse((source_workspace / ".local_keys").exists())
-            self.assertFalse((source_workspace / "apps/memory-atlas/node_modules").exists())
+            self.assertFalse((source_frontend / "node_modules").exists())
             icon_expected = platform.system() == "Darwin" or shutil.which("iconutil") is not None
             if icon_expected:
                 self.assertTrue(icon.exists())
@@ -72,12 +74,14 @@ class MemoryAtlasLauncherTests(unittest.TestCase):
             self.assertIn("Application Support", plist["NSDocumentsFolderUsageDescription"])
 
             launcher_text = executable.read_text(encoding="utf-8")
-            runtime_server_text = (source_workspace / "scripts/memory_atlas_runtime_server.py").read_text(encoding="utf-8")
-            command_bridge_text = (source_workspace / "scripts/memory_atlas_command_bridge.py").read_text(encoding="utf-8")
+            runtime_server_text = (source_database / "scripts/memory_atlas_runtime_server.py").read_text(encoding="utf-8")
+            command_bridge_text = (source_database / "scripts/memory_atlas_command_bridge.py").read_text(encoding="utf-8")
             self.assertIn(str(REPO_ROOT), launcher_text)
             self.assertIn(str(source_workspace), launcher_text)
             self.assertIn("ORIGINAL_REPO_ROOT", launcher_text)
             self.assertIn("INSTALLED_GIT_COMMIT", launcher_text)
+            self.assertIn('DATABASE_DIR="$REPO_ROOT/OpenAIDatabase"', launcher_text)
+            self.assertIn('APP_DIR="$REPO_ROOT/MemoryAtlas"', launcher_text)
             self.assertIn("scripts/sync_codex_memory_data.py", launcher_text)
             self.assertIn("--build-atlas", launcher_text)
             self.assertIn("refresh_latest_snapshot", launcher_text)
@@ -125,7 +129,7 @@ class MemoryAtlasLauncherTests(unittest.TestCase):
             self.assertIn("allow_reuse_address = True", runtime_server_text)
             self.assertIn("COMMAND_IDS", command_bridge_text)
             self.assertIn("shell=False", command_bridge_text)
-            runtime_provider = REPO_ROOT / "apps/memory-atlas/src/providers/AtlasRuntimeProvider.tsx"
+            runtime_provider = REPO_ROOT.parent / "MemoryAtlas/src/providers/AtlasRuntimeProvider.tsx"
             self.assertIn("window.addEventListener(\"beforeunload\"", runtime_provider.read_text(encoding="utf-8"))
             self.assertIn("/memory_atlas.json", launcher_text)
             self.assertIn("MEMORY_ATLAS_TTL_SECONDS", launcher_text)

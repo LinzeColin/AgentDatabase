@@ -126,8 +126,8 @@ def deploy(args: argparse.Namespace) -> dict[str, Any]:
     assert_authorized(args)
     commands = [
         ["python3", "scripts/materialize_memory_atlas_release.py", "verify", "--database-dir", "."],
-        ["npm", "ci", "--prefix", "apps/memory-atlas"],
-        ["npm", "run", "build", "--prefix", "apps/memory-atlas"],
+        ["npm", "ci", "--prefix", "../MemoryAtlas"],
+        ["npm", "run", "build", "--prefix", "../MemoryAtlas"],
         [
             "python3",
             "scripts/audit_memory_atlas_snapshot_parity.py",

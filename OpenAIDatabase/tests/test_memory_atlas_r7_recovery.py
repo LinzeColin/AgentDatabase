@@ -93,6 +93,7 @@ class RecoveryFixture:
         self.root = root
         self.repo = root / "repo"
         self.database = self.repo / "OpenAIDatabase"
+        self.frontend = self.repo / "MemoryAtlas"
         self.output_dir = root / "recovery-work"
         self.frontend_commands: list[list[str]] = []
         self.snapshot_bytes = (
@@ -262,7 +263,9 @@ class RecoveryFixture:
         )
 
     def _write_frontend_fixture(self) -> None:
-        app = self.database / "apps/memory-atlas"
+        app = self.frontend
+        (app / "src").mkdir(parents=True)
+        (app / "src/main.ts").write_text("export {};\n", encoding="utf-8")
         write_json(
             app / "package.json",
             {"name": "recovery-fixture", "private": True, "scripts": {"build": "fixture-build"}},
@@ -293,7 +296,7 @@ class RecoveryFixture:
 
     def frontend_runner(self, argv: list[str], *, cwd: Path, env: dict[str, str]) -> dict[str, Any]:
         self.frontend_commands.append(list(argv))
-        recovered_database = cwd.parents[1]
+        recovered_database = cwd.parent / "OpenAIDatabase"
         if (recovered_database / "untracked-private-input.txt").exists():
             raise AssertionError("untracked working-tree input entered the archive")
         if argv[:2] == ["npm", "run"]:

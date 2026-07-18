@@ -10,10 +10,12 @@
       "purpose": "Static policy, ownership, lifecycle and retention gates",
       "test_files": [
         "tests/test_command_ownership.py",
-        "tests/test_directory_lifecycle.py",
-        "tests/test_generated_retention.py",
-        "tests/test_personalization_architecture.py",
-        "tests/test_verification_policy.py"
+                "tests/test_directory_lifecycle.py",
+                "tests/test_generated_retention.py",
+                "tests/test_local_governance_views.py",
+                "tests/test_personalization_architecture.py",
+                "tests/test_repository_hygiene_audit.py",
+                "tests/test_verification_policy.py"
       ]
     },
     "unit": {
@@ -22,8 +24,9 @@
       "test_files": [
         "tests/test_codex_runtime_config.py",
         "tests/test_memory_atlas_v1_2_home_layout_contract.py",
-        "tests/test_memory_atlas_v1_2_product_identity_contract.py",
-        "tests/test_s05p2_facet_extractor.py",
+                "tests/test_memory_atlas_v1_2_product_identity_contract.py",
+                "tests/test_memory_settlement_policy.py",
+                "tests/test_s05p2_facet_extractor.py",
         "tests/test_s05p3_facet_evidence_refs.py",
         "tests/test_s06p1_cluster_builder.py",
         "tests/test_s06p2_low_value_loops.py",
@@ -86,8 +89,9 @@
         "tests/test_memory_atlas_deployment.py",
         "tests/test_memory_atlas_goal_completion.py",
         "tests/test_memory_atlas_launcher.py",
-        "tests/test_memory_atlas_owner_daily.py",
-        "tests/test_memory_atlas_proposal_apply.py",
+                "tests/test_memory_atlas_owner_daily.py",
+                "tests/test_memory_atlas_paths.py",
+                "tests/test_memory_atlas_proposal_apply.py",
         "tests/test_memory_atlas_r7_recovery.py",
         "tests/test_memory_atlas_r7_release_parity.py",
         "tests/test_memory_atlas_r8_acceptance.py",
@@ -139,32 +143,32 @@
     ]
   },
   "frontend": {
-    "package_json": "apps/memory-atlas/package.json",
-    "lockfile": "apps/memory-atlas/package-lock.json",
-    "script_directory": "apps/memory-atlas/scripts",
-    "required_install_command": "npm ci --prefix apps/memory-atlas",
-    "required_build_command": "npm run build --prefix apps/memory-atlas",
+    "package_json": "../MemoryAtlas/package.json",
+    "lockfile": "../MemoryAtlas/package-lock.json",
+    "script_directory": "../MemoryAtlas/scripts",
+    "required_install_command": "npm ci --prefix ../MemoryAtlas",
+    "required_build_command": "npm run build --prefix ../MemoryAtlas",
     "compatibility_aliases": {
       "validate:stage8-local-app-packaging": "npm run validate:stage8-local-app"
     }
   },
   "ci": {
-    "workflow": ".github/workflows/openai-database-ci.yml",
+    "workflow": ".github/workflows/memory-atlas-acceptance.yml",
     "required_tiers": [
       "fast",
       "unit",
       "security",
       "integration"
     ],
-    "required_reproducible_build_fragment": "SOURCE_DATE_EPOCH=\"$(git log -1 --format=%ct)\" python scripts/atlasctl.py build-atlas --apply",
+    "required_reproducible_build_fragment": "SOURCE_DATE_EPOCH=\"$(git log -1 --format=%ct)\" python3 scripts/atlasctl.py build-atlas --apply",
     "required_step_order": [
-      "SOURCE_DATE_EPOCH=\"$(git log -1 --format=%ct)\" python scripts/atlasctl.py build-atlas --apply",
-      "npm run build --prefix apps/memory-atlas",
+      "SOURCE_DATE_EPOCH=\"$(git log -1 --format=%ct)\" python3 scripts/atlasctl.py build-atlas --apply",
+      "npm run build --prefix ../MemoryAtlas",
       "python3 scripts/run_verification.py --tier integration",
-      "python scripts/atlasctl.py audit --check goal-completion"
+      "python3 scripts/atlasctl.py audit --check goal-completion"
     ],
     "aggregate_audit": {
-      "command": "python scripts/atlasctl.py audit --check goal-completion",
+      "command": "python3 scripts/atlasctl.py audit --check goal-completion",
       "root_script": "scripts/audit_memory_atlas_goal_completion.py",
       "root_required_calls": [
         "audit_acceptance(",
@@ -178,10 +182,10 @@
         "cloudflare_preflight("
       ],
       "forbidden_duplicate_commands": [
-        "python scripts/atlasctl.py audit --check release",
-        "python scripts/atlasctl.py audit --check visual-acceptance",
-        "python scripts/atlasctl.py audit --check acceptance",
-        "python scripts/preflight_cloudflare_pages_access.py --publish-dir"
+        "python3 scripts/atlasctl.py audit --check release",
+        "python3 scripts/atlasctl.py audit --check visual-acceptance",
+        "python3 scripts/atlasctl.py audit --check acceptance",
+        "python3 scripts/preflight_cloudflare_pages_access.py --publish-dir"
       ]
     },
     "full_tier_is_local_aggregate": true,

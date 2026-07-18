@@ -12,6 +12,13 @@ from pathlib import Path
 from typing import Any
 
 
+SCRIPT_DIR = Path(__file__).resolve().parent
+if str(SCRIPT_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPT_DIR))
+
+from memory_atlas_paths import default_publish_dir  # noqa: E402
+
+
 ALLOWED_PUBLISH_SUFFIXES = {".html", ".css", ".js", ".json", ".svg", ".png", ".ico", ".txt", ".webmanifest"}
 FORBIDDEN_PUBLISH_SUFFIXES = {".zip", ".sqlite", ".db", ".jsonl", ".md", ".pem", ".key", ".env", ".csv"}
 FORBIDDEN_NAME_PATTERNS = [
@@ -357,14 +364,16 @@ def audit_source_workspace_files(repo_root: Path) -> list[str]:
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Audit Memory Atlas static release output.")
     parser.add_argument("--repo-root", type=Path, default=Path(__file__).resolve().parents[1])
-    parser.add_argument("--publish-dir", type=Path, default=Path(__file__).resolve().parents[1] / "apps/memory-atlas/dist")
+    parser.add_argument("--publish-dir", type=Path)
     return parser.parse_args()
 
 
 def main(argv: list[str] | None = None) -> int:
     args = parse_args() if argv is None else parse_args_from(argv)
     try:
-        result = audit_release(args.repo_root, args.publish_dir)
+        repo_root = args.repo_root.resolve()
+        publish_dir = args.publish_dir or default_publish_dir(repo_root)
+        result = audit_release(repo_root, publish_dir)
     except AuditError as exc:
         print(json.dumps({"status": "FAIL", "error": str(exc)}, ensure_ascii=False, indent=2))
         return 1
@@ -375,7 +384,7 @@ def main(argv: list[str] | None = None) -> int:
 def parse_args_from(argv: list[str]) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Audit Memory Atlas static release output.")
     parser.add_argument("--repo-root", type=Path, default=Path(__file__).resolve().parents[1])
-    parser.add_argument("--publish-dir", type=Path, default=Path(__file__).resolve().parents[1] / "apps/memory-atlas/dist")
+    parser.add_argument("--publish-dir", type=Path)
     return parser.parse_args(argv)
 
 

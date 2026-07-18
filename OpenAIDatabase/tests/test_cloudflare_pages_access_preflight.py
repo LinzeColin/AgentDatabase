@@ -47,12 +47,12 @@ class CloudflarePagesAccessPreflightTests(unittest.TestCase):
         module = load_module()
 
         self.assertEqual(
-            module.static_output_directory({"pages_build_output_dir": "apps/memory-atlas/dist"}),
-            "apps/memory-atlas/dist",
+            module.static_output_directory({"pages_build_output_dir": "../MemoryAtlas/dist"}),
+            "../MemoryAtlas/dist",
         )
         self.assertEqual(
-            module.static_output_directory({"assets": {"directory": "./apps/memory-atlas/dist"}}),
-            "apps/memory-atlas/dist",
+            module.static_output_directory({"assets": {"directory": "../MemoryAtlas/dist"}}),
+            "../MemoryAtlas/dist",
         )
 
     def test_preflight_passes_for_repo_without_live_env(self) -> None:

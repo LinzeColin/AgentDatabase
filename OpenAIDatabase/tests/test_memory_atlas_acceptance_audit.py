@@ -46,10 +46,10 @@ class MemoryAtlasAcceptanceAuditTests(unittest.TestCase):
             mock.patch.object(module, "audit_release", return_value={"status": "PASS", "file_count": 3}) as release,
             mock.patch.object(module, "cloudflare_preflight", return_value={"status": "PASS", "checks": []}) as preflight,
         ):
-            result = module.audit_acceptance(ROOT, ROOT / "apps/memory-atlas/dist")
+            result = module.audit_acceptance(ROOT, ROOT.parent / "MemoryAtlas/dist")
 
         self.assertEqual(result["status"], "PASS")
-        release.assert_called_once_with(ROOT.resolve(), ROOT / "apps/memory-atlas/dist")
+        release.assert_called_once_with(ROOT.resolve(), ROOT.parent / "MemoryAtlas/dist")
         preflight.assert_called_once_with(ROOT.resolve(), None)
 
     def test_acceptance_audit_passes_for_current_repo_sources(self) -> None:
