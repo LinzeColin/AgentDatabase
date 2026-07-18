@@ -25,9 +25,10 @@ Until then, `--require-ready` must fail and no automation may upload anything.
 
 No Codex automation is created by this change. Any future job must validate this policy, encrypt the three logical
 source groups through a streaming `tar | gzip | age` pipeline with the checked-in public recipient, publish only a
-temporary `.age` asset and allowed-field manifest to a GitHub Release, fetch the remote asset again to verify its
-hash and size, and only then remove its local ciphertext. It must never persist a plaintext archive, use a different
-recipient, publish a path/name/content-bearing manifest, or delete original Codex data.
+temporary `.age` asset and allowed-field manifest to a GitHub Release, fetch the remote GitHub asset metadata to
+verify its server-calculated hash and size, and only then remove its local ciphertext. It must never persist a
+plaintext archive, use a different recipient, publish a path/name/content-bearing manifest, or delete original
+Codex data.
 
 ## Validation
 
