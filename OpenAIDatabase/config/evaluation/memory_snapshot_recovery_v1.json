@@ -2,7 +2,7 @@
   "schema_version": "openai_database.memory_snapshot_recovery_evaluation.v1",
   "task_id": "TSK.OpenAIDatabase.PAM1.0018",
   "acceptance_id": "ACC.OpenAIDatabase.PAM1.0018",
-  "source_commit": "b6d0e401acb0b2678a2b0c48ca34e9cba3e10bdc",
+  "source_commit": "722b275ee6d247d63c7c2b7742c6cac8bbd92eb2",
   "policy": "config/memory-snapshot-policy.json",
   "report": "data/derived/evaluation/memory_gold/reports/snapshot_recovery_v1.json",
   "smoke_query_iterations_per_surface": 5,
@@ -13,5 +13,5 @@
   ],
   "rto_target_seconds": 1800,
   "local_drill_bound_seconds": 30,
-  "generated_at": "2026-07-17T08:19:52Z"
+  "generated_at": "2026-07-18T09:41:15Z"
 }

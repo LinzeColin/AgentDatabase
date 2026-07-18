@@ -3,9 +3,11 @@ from __future__ import annotations
 import io
 import json
 import stat
+import subprocess
 import sys
 import unittest
 import zipfile
+from datetime import datetime, timezone
 from pathlib import Path
 
 
@@ -102,8 +104,17 @@ class MemorySnapshotRecoveryTests(unittest.TestCase):
         self.assertEqual(self.observed["snapshot"]["commit_file_count"], 15)
         self.assertEqual(self.observed["snapshot"]["runtime_file_count"], 0)
         self.assertRegex(self.observed["snapshot"]["manifest_sha256"], r"^sha256:[0-9a-f]{64}$")
+        source_epoch = subprocess.check_output(
+            ["git", "show", "-s", "--format=%ct", self.config["source_commit"]],
+            cwd=DATABASE_DIR.parent,
+            text=True,
+        ).strip()
+        expected_source_time = datetime.fromtimestamp(int(source_epoch), timezone.utc).strftime(
+            "%Y-%m-%dT%H:%M:%SZ"
+        )
+        self.assertEqual(self.observed["source"]["commit"], self.config["source_commit"])
         self.assertEqual(
-            self.observed["snapshot"]["source_commit_time"], "2026-07-16T23:41:35Z"
+            self.observed["snapshot"]["source_commit_time"], expected_source_time
         )
         self.assertEqual(self.observed["roundtrip"]["checked_file_count"], 15)
         self.assertEqual(self.observed["roundtrip"]["matched_file_count"], 15)
