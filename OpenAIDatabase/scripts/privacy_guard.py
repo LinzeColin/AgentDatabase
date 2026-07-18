@@ -81,6 +81,15 @@ CREDENTIAL_PATTERNS = (
         ),
     ),
 )
+LOCAL_ABSOLUTE_PATH_RE = re.compile(
+    r"(?:"
+    r"\bfile:///[^\s\"'<>`]+"
+    r"|(?<![A-Za-z0-9+.-])[A-Za-z]:[\\/][^\s\"'<>`]+"
+    r"|\\\\[^\s\"'<>`]+"
+    r"|(?<![A-Za-z0-9+./-])/(?!/)[^\s\"'<>`]+"
+    r"|(?<![A-Za-z0-9_])~/[^\s\"'<>`]+"
+    r")"
+)
 REDACTION_PATTERNS = (
     ("email", re.compile(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b"), "[REDACTED_EMAIL]"),
     ("phone", re.compile(r"\+?\d[\d\s().-]{8,}\d"), "[REDACTED_PHONE]"),
@@ -90,7 +99,7 @@ REDACTION_PATTERNS = (
     ("aws_access_key", SECRET_PATTERNS[3][1], "[REDACTED_SECRET]"),
     (
         "local_absolute_path",
-        re.compile(r"(?:[A-Za-z]:[\\/][^\s\"']+|/(?:Users|home)/[^\s\"']+)"),
+        LOCAL_ABSOLUTE_PATH_RE,
         "[REDACTED_LOCAL_PATH]",
     ),
 )

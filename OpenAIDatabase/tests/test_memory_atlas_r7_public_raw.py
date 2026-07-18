@@ -213,6 +213,35 @@ class PublicRawSanitizerTests(unittest.TestCase):
             },
         )
 
+    def test_recursive_redaction_blocks_all_local_absolute_path_forms_without_redacting_urls(self) -> None:
+        sanitizer = self.load_sanitizer("portable_paths")
+        value = {
+            "mac_private": "/private/var/folders/private-cache",
+            "mac_volume": "cwd: /Volumes/External/private-project",
+            "file_uri": "file:///Users/alice/.codex/sessions/session.jsonl",
+            "windows": r"C:\\Users\\Alice\\private.txt",
+            "unc": r"\\\\server\\share\\private.txt",
+            "home_shorthand": "~/Documents/private-notes.md",
+            "public_url": "https://example.com/public/path",
+            "relative_ref": "data/public_raw/codex/sessions/example.jsonl",
+        }
+
+        sanitized, counts = sanitizer.sanitize_public_value(value)
+        serialized = json.dumps(sanitized, ensure_ascii=False, sort_keys=True)
+
+        for sensitive in (
+            "/private/var/folders/private-cache",
+            "/Volumes/External/private-project",
+            "file:///Users/alice/.codex/sessions/session.jsonl",
+            r"C:\\Users\\Alice\\private.txt",
+            r"\\\\server\\share\\private.txt",
+            "~/Documents/private-notes.md",
+        ):
+            self.assertNotIn(sensitive, serialized)
+        self.assertEqual(sanitized["public_url"], value["public_url"])
+        self.assertEqual(sanitized["relative_ref"], value["relative_ref"])
+        self.assertEqual(counts, {"local_absolute_path": 6})
+
     def test_structured_hash_uuid_timestamp_and_relative_ref_are_not_phone_redacted(self) -> None:
         sanitizer = self.load_sanitizer("structured")
         values = [

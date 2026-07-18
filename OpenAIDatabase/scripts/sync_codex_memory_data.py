@@ -20,7 +20,11 @@ from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Any, Iterable
 
-from privacy_guard import credential_exclusion_hits, redact_credentials_in_text
+from privacy_guard import (
+    LOCAL_ABSOLUTE_PATH_RE,
+    credential_exclusion_hits,
+    redact_credentials_in_text,
+)
 from public_raw_sanitizer import (
     MAX_PUBLIC_RAW_FILE_BYTES,
     PublicRawLimitError,
@@ -55,7 +59,6 @@ SECRET_PATTERNS = [
 
 class AppendOnlyViolation(ValueError):
     pass
-ABSOLUTE_PATH_RE = re.compile(r"/Users/[^/\s]+(?:/[^\s'\"<>]+)+")
 EMAIL_RE = re.compile(r"([A-Za-z0-9._%+\-])[A-Za-z0-9._%+\-]*@([A-Za-z0-9.\-]+\.[A-Za-z]{2,})")
 
 TOPIC_RULES: list[tuple[str, str, list[str]]] = [
@@ -187,7 +190,7 @@ def redact_text(value: str, limit: int = 160) -> str:
     text, _credential_counts = redact_credentials_in_text(text)
     for pattern in SECRET_PATTERNS:
         text = pattern.sub("[REDACTED_SECRET]", text)
-    text = ABSOLUTE_PATH_RE.sub("[REDACTED_PATH]", text)
+    text = LOCAL_ABSOLUTE_PATH_RE.sub("[REDACTED_PATH]", text)
     text = EMAIL_RE.sub(r"\1***@\2", text)
     text = re.sub(r"\s+", " ", text).strip()
     if len(text) > limit:
