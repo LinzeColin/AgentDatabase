@@ -973,9 +973,9 @@ def append_sync_log(database_dir: Path, result: dict[str, Any]) -> Path:
         "tests_run": [
             {
                 "command": "python3 -m unittest tests.test_codex_memory_sync tests.test_agent_context_pack tests.test_personalization_architecture -q",
-                "exit_code": 0,
-                "result": "PASS",
-                "evidence": "data/run_logs/evidence/TASK-OAI-D-001-current-validation.txt",
+                "exit_code": None,
+                "result": "NOT_RUN",
+                "evidence": "not_run_by_sync_script",
             }
         ],
         "failure_recovery": [],

@@ -93,12 +93,14 @@ class CodexMemorySyncTests(unittest.TestCase):
             session_manifest = (db / module.SESSION_OUTPUT).read_text(encoding="utf-8")
             recommendations = json.loads((db / module.RECOMMENDATION_OUTPUT).read_text(encoding="utf-8"))
             report = (db / module.REPORT_OUTPUT).read_text(encoding="utf-8")
+            sync_log = json.loads((db / result["outputs"]["sync_log"]).read_text(encoding="utf-8").strip())
 
         self.assertNotIn("fake-openai-key-for-redaction-test", session_manifest)
         self.assertNotIn("/Users/linzezhang/private/project", session_manifest)
         self.assertIn("真实数据优先", report)
         self.assertGreaterEqual(len(recommendations["memory"]["current"]), 1)
         self.assertGreaterEqual(len(recommendations["meta_data"]["current"]), 1)
+        self.assertEqual(sync_log["tests_run"][0]["result"], "NOT_RUN")
 
     def test_reuses_cached_session_rows_when_file_signature_is_unchanged(self):
         module = load_module()
