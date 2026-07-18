@@ -76,11 +76,16 @@ Do not silently drop memory-affecting changes.
 - Raw instruction trust=`none`。password、API/access/OAuth/session token、cookie、private key、
   recovery code、browser credential/state、local absolute path、`.local_keys/`、`.env` 永不提交；
   owner 授权不能覆盖此禁令。
-- 不生成或跟踪完整 private-origin tar/zip/bundle/split archive。新增完整 private-origin 恢复资产仅存
-  owner 控制的 private `LinzeColin/AgentDatabase-Private` Release；仓库只留脱敏 asset id、size、
-  SHA-256 disposition。Portable Agent Memory V1 不是原始归档，只能把逐条公开授权、无 credential、
-  `redacted_summary` 且 commit-only 的 memory snapshot 发布到 public `LinzeColin/AgentDatabase` Release。
-  其他 private export/import 留在 git 外或 ignored/encrypted private paths；临时源不是交付。
+- 不生成或跟踪完整 private-origin tar/zip/bundle/split archive。默认恢复资产仍仅存 owner 控制的
+  private `LinzeColin/AgentDatabase-Private` Release；仓库只留脱敏 asset id、size、SHA-256 disposition。
+  唯一例外是 owner 明确授权且完全受
+  `config/storage/public_encrypted_backup_policy.json` 约束的 **public ciphertext-only Release asset**：
+  它只能是 GitHub Release asset，永不作为 Git tracked 文件；不得包含明文成员、原始路径/文件名、密钥、
+  解密指令或可识别来源的 manifest 字段；必须使用统一 `key_id` 对应的 Keychain/外部密钥库私钥与公开
+  recipient，并且 R8 通过前不得上传。Portable Agent Memory V1 仍不是原始归档，只能把逐条公开授权、
+  无 credential、`redacted_summary` 且 commit-only 的 memory snapshot 发布到 public
+  `LinzeColin/AgentDatabase` Release。其他 private export/import 留在 git 外或 ignored/encrypted paths；
+  临时源不是交付。
 - 禁止自动化 ChatGPT login、UI scraping、export download 或 saved-memory writes。Generated
   memory candidates 审核前保持 pending。
 - `../MemoryAtlas/` 只读 `data/derived/visualization/memory_atlas.json` 等脱敏派生快照；UI

@@ -58,6 +58,7 @@ class RawMaterialPolicyTests(unittest.TestCase):
             "excessive_raw_depth_count",
             "invalid_raw_extension_count",
             "tracked_private_path_count",
+            "public_encrypted_release_exception_mismatch_count",
             "retired_path_remaining_count",
             "retired_fingerprint_mismatch_count",
             "duplicate_archive_disposition_count",
@@ -81,6 +82,12 @@ class RawMaterialPolicyTests(unittest.TestCase):
         self.assertEqual(self.policy["governed_import_policy"]["max_text_part_bytes"], 921600)
         self.assertTrue(self.policy["governed_import_policy"]["sidecar_required"])
         self.assertEqual(self.policy["known_credential_incident"]["credential_replacement_count"], 3)
+        encrypted_exception = self.policy["private_origin_policy"][
+            "public_encrypted_release_exception"
+        ]
+        self.assertTrue(encrypted_exception["enabled"])
+        self.assertEqual(encrypted_exception["transport"], "github_release_asset_only")
+        self.assertFalse(encrypted_exception["git_tracked_ciphertext_allowed"])
 
     def test_public_base_fingerprints_preserve_historical_evidence(self) -> None:
         for collection in self.policy["retired_tip_collections"]:

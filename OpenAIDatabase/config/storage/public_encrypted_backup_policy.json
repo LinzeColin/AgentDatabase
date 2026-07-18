@@ -1,0 +1,72 @@
+{
+  "schema_version": "openai_database.public_encrypted_backup_policy.v1",
+  "task_id": "TSK.OpenAIDatabase.PEB1.0001",
+  "acceptance_id": "ACC.OpenAIDatabase.PEB1.0001",
+  "status": "UNPROVISIONED",
+  "owner_authorization_ref": "config/storage/raw_material_policy.json#public_encrypted_release_authorization",
+  "scope": {
+    "logical_sources": [
+      "codex_memories",
+      "codex_sessions"
+    ],
+    "full_recovery_intended": true,
+    "plaintext_publication_allowed": false,
+    "git_tracked_ciphertext_allowed": false,
+    "automatic_source_deletion_allowed": false
+  },
+  "release": {
+    "repository": "LinzeColin/AgentDatabase",
+    "visibility": "public",
+    "transport": "github_release_asset_only",
+    "r8_required_before_upload": true,
+    "remote_verification_required_before_local_ciphertext_cleanup": true,
+    "max_ciphertext_part_bytes": 1073741824
+  },
+  "encryption": {
+    "algorithm": "age-x25519-v1",
+    "required_tool": "age",
+    "stream_plain_archive": true,
+    "plain_archive_persisted": false,
+    "ciphertext_suffix": ".age",
+    "compression": "gzip"
+  },
+  "unified_key": {
+    "key_id": "agentdatabase-public-backup-v1",
+    "recipient_provisioning_status": "UNPROVISIONED",
+    "public_recipient": null,
+    "recipient_fingerprint": null,
+    "private_identity_source": "macos_keychain_or_owner_secret_manager",
+    "identity_file_persisted": false,
+    "key_export_allowed": false,
+    "rotation_requires_new_key_id": true
+  },
+  "manifest": {
+    "allowed_fields": [
+      "backup_id",
+      "created_at",
+      "key_id",
+      "recipient_fingerprint",
+      "ciphertext_sha256",
+      "ciphertext_size_bytes",
+      "part_number",
+      "part_count",
+      "logical_source_set",
+      "schema_version"
+    ],
+    "source_absolute_path_allowed": false,
+    "source_file_name_allowed": false,
+    "plaintext_content_allowed": false,
+    "credential_or_key_material_allowed": false
+  },
+  "automation": {
+    "default_enabled": false,
+    "required_preflight": [
+      "r8_release_pass",
+      "age_binary_available",
+      "unified_recipient_provisioned",
+      "private_identity_accessible",
+      "source_integrity_verified",
+      "remote_release_upload_verified"
+    ]
+  }
+}

@@ -14,6 +14,10 @@ from pathlib import Path, PurePosixPath
 from typing import Any
 
 from audit_memory_atlas_public_raw import audit_public_raw
+from validate_public_encrypted_backup_policy import (
+    BackupPolicyError,
+    validate_policy as validate_public_encrypted_backup_policy,
+)
 
 
 DEFAULT_CONTRACT = Path("config/storage/raw_material_policy.json")
@@ -249,6 +253,39 @@ def validate_policy(
         errors.append(f"private-origin paths are tracked: {sorted(set(tracked_private_paths))}")
     if private_policy.get("public_repository_is_private_storage") is not False:
         errors.append("public repository must not be classified as private storage")
+    public_encrypted_exception_errors: list[str] = []
+    public_encrypted_exception = private_policy.get("public_encrypted_release_exception")
+    if not isinstance(public_encrypted_exception, dict):
+        public_encrypted_exception_errors.append("public encrypted release exception is missing")
+    else:
+        expected_exception = {
+            "enabled": True,
+            "transport": "github_release_asset_only",
+            "git_tracked_ciphertext_allowed": False,
+            "plaintext_or_key_material_allowed": False,
+            "r8_required_before_upload": True,
+        }
+        for key, expected in expected_exception.items():
+            if public_encrypted_exception.get(key) != expected:
+                public_encrypted_exception_errors.append(
+                    f"public encrypted release exception {key} is invalid"
+                )
+        policy_relative = str(public_encrypted_exception.get("policy") or "")
+        if (
+            not policy_relative
+            or Path(policy_relative).is_absolute()
+            or ".." in Path(policy_relative).parts
+        ):
+            public_encrypted_exception_errors.append("public encrypted release policy path is invalid")
+        else:
+            policy_path = database_dir / policy_relative
+            try:
+                encrypted_policy = json.loads(policy_path.read_text(encoding="utf-8"))
+                validate_public_encrypted_backup_policy(encrypted_policy)
+            except (OSError, json.JSONDecodeError, BackupPolicyError):
+                public_encrypted_exception_errors.append("public encrypted release policy is invalid")
+    if public_encrypted_exception_errors:
+        errors.extend(public_encrypted_exception_errors)
 
     base_ref = str(contract.get("implementation_base_sha") or "")
     retired_remaining: list[str] = []
@@ -396,6 +433,9 @@ def validate_policy(
         "excessive_raw_depth_count": len(excessive_depth),
         "invalid_raw_extension_count": len(invalid_extensions),
         "tracked_private_path_count": len(set(tracked_private_paths)),
+        "public_encrypted_release_exception_mismatch_count": len(
+            public_encrypted_exception_errors
+        ),
         "retired_path_remaining_count": len(retired_remaining),
         "retired_fingerprint_mismatch_count": len(retired_fingerprint_mismatches),
         "old_archive_disposition_count": len(dispositions),

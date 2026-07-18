@@ -41,8 +41,10 @@ logs/
 tmp/
 work/
 
-# Large encrypted raw archives are local by default. Commit only if explicitly intended.
+# Encrypted backup ciphertext is upload-only to a governed Release asset, never Git-tracked.
 data/raw_encrypted/
+data/public_encrypted/
+*.age
 
 # Retired writer destination. Current numeric telemetry lives under data/run_logs/token_usage/.
 token_usage/current-mac-latest/

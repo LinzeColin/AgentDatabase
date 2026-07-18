@@ -3,8 +3,8 @@
   "project_id": "OpenAIDatabase",
   "task_id": "TSK.OpenAIDatabase.CLEAN1.0008",
   "acceptance_id": "ACC.OpenAIDatabase.CLEAN1.0008",
-  "last_updated_task_id": "TSK.OpenAIDatabase.PAM1.0006",
-  "last_updated_acceptance_id": "ACC.OpenAIDatabase.PAM1.0006",
+  "last_updated_task_id": "TSK.OpenAIDatabase.PEB1.0001",
+  "last_updated_acceptance_id": "ACC.OpenAIDatabase.PEB1.0001",
   "implementation_base_sha": "91051a00ecdac72dc43ab8d0d2c0ecaeb1696fd0",
   "owner_authorization": {
     "decision": "emergency_public_history_remediation",
@@ -16,6 +16,23 @@
       "rewrite only the named public Git history paths",
       "replace the exact known credential in all reachable public Git blobs without value echo",
       "publish this security remediation before the 37-task final publication"
+    ]
+  },
+  "public_encrypted_release_authorization": {
+    "decision": "owner_authorized_public_ciphertext_only_backup_governance",
+    "authorized_at": "2026-07-18T10:51:00Z",
+    "scope": [
+      "Codex memories and session records only",
+      "GitHub Release ciphertext assets only",
+      "one unified key identifier with Keychain or external secret-manager private identity",
+      "no plaintext, key material, local paths, source filenames, or content-bearing manifest fields"
+    ],
+    "does_not_authorize": [
+      "Git-tracked ciphertext",
+      "plaintext credential publication",
+      "key material publication",
+      "R8 gate bypass",
+      "automatic source deletion"
     ]
   },
   "tracked_raw_policy": {
@@ -56,10 +73,19 @@
       "data/private",
       "data/raw",
       "data/raw_encrypted",
+      "data/public_encrypted",
       "private_exports",
       "exports/private"
     ],
-    "public_repository_is_private_storage": false
+    "public_repository_is_private_storage": false,
+    "public_encrypted_release_exception": {
+      "enabled": true,
+      "policy": "config/storage/public_encrypted_backup_policy.json",
+      "transport": "github_release_asset_only",
+      "git_tracked_ciphertext_allowed": false,
+      "plaintext_or_key_material_allowed": false,
+      "r8_required_before_upload": true
+    }
   },
   "credential_policy": {
     "action": "block_without_value_echo",
@@ -109,8 +135,10 @@
       "*.tgz",
       "*.bundle",
       "*.part-*",
+      "*.age",
       "session_history/",
-      "data/raw_archives/"
+      "data/raw_archives/",
+      "data/public_encrypted/"
     ],
     "new_bundle_count_target": 0
   },
