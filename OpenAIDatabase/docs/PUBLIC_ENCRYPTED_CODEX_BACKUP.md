@@ -17,9 +17,9 @@ This repository may publish a ciphertext-only backup of Codex memories, session 
 
 ## Provisioning Gate
 
-The checked-in policy intentionally starts as `UNPROVISIONED`. Provisioning requires a public `age` recipient
-and its SHA-256 fingerprint, plus an independently recoverable private identity in the approved key store.
-Until then, `--require-ready` must fail and no automation may upload anything.
+The policy starts as `UNPROVISIONED` before key provisioning. Provisioning requires a public `age` recipient
+and its SHA-256 fingerprint, plus an independently recoverable private identity in the approved key store; only
+then may it be committed as `READY`. Until then, `--require-ready` must fail and no automation may upload anything.
 
 ## Future Automation Contract (Not Scheduled)
 
