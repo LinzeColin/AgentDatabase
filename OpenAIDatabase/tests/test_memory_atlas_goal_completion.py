@@ -77,7 +77,7 @@ def write_live_evidence(path: Path, git_commit: str) -> None:
 class MemoryAtlasGoalCompletionTests(unittest.TestCase):
     def test_goal_completion_does_not_repeat_publish_release_in_preflight(self) -> None:
         module = load_module()
-        publish_dir = Path("apps/memory-atlas/dist")
+        publish_dir = Path("../MemoryAtlas/dist")
         with (
             mock.patch.object(module, "audit_acceptance", return_value={"checks": []}) as acceptance,
             mock.patch.object(module, "cloudflare_preflight", return_value={"checks": []}) as preflight,
@@ -107,7 +107,7 @@ class MemoryAtlasGoalCompletionTests(unittest.TestCase):
         module = load_module()
 
         with self.assertRaises(module.GoalCompletionError) as raised:
-            module.audit_goal_completion(ROOT, publish_dir=Path("apps/memory-atlas/dist-missing"))
+            module.audit_goal_completion(ROOT, publish_dir=Path("../MemoryAtlas/dist-missing"))
 
         message = str(raised.exception)
         self.assertIn("publish_dir_available", message)

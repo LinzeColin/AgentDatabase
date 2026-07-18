@@ -308,9 +308,32 @@ class MemoryAtlasCommandBridgeTests(unittest.TestCase):
             self.assertTrue(result["action"]["url"].startswith("https://chatgpt.com/?q="))
             self.assertFalse(result["safety"]["sends_to_chatgpt"])
             argv = runner.calls[0]["argv"]
+            self.assertIn("--apply", argv)
             self.assertIn("prefill_only", argv)
             self.assertNotIn("auto_submit", argv)
             self.assertNotIn("--open", argv)
+            self.assertFalse(runner.calls[0]["shell"])
+
+    def test_personalization_uses_explicit_apply_on_installed_copy(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            app_support, source_root, runtime_dir = make_installed_workspace(root)
+            runner = RecordingRunner()
+            bridge = self.bridge_module.CommandBridge(
+                self.bridge_module.CommandContext(
+                    source_root=source_root,
+                    runtime_dir=runtime_dir,
+                    app_support=app_support,
+                    codex_home=root / "codex-home",
+                ),
+                runner=runner,
+            )
+            result = bridge.execute("generate_personalization_prompt")
+            self.assertEqual(result["status"], "success")
+            argv = runner.calls[0]["argv"]
+            self.assertIn("generate-personalization-prompt", argv)
+            self.assertIn("--apply", argv)
+            self.assertIn(str(source_root.resolve()), argv)
             self.assertFalse(runner.calls[0]["shell"])
 
     def test_bad_deep_explore_url_fails_closed_with_chinese_explanation(self) -> None:

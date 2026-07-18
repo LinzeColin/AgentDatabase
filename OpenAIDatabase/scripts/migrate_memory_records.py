@@ -634,8 +634,10 @@ def run(argv: list[str] | None = None) -> dict[str, Any]:
     contract = load_contract(database_dir, args.contract)
     records, first, summary = build_cutover(database_dir, contract)
     _, second, _ = build_cutover(database_dir, contract)
-    if first.manifest_bytes != second.manifest_bytes or any(
-        left.payload != right.payload for left, right in zip(first.shards, second.shards, strict=True)
+    if (
+        first.manifest_bytes != second.manifest_bytes
+        or len(first.shards) != len(second.shards)
+        or any(left.payload != right.payload for left, right in zip(first.shards, second.shards))
     ):
         raise CutoverError("repeat build drift detected")
     summary.update(

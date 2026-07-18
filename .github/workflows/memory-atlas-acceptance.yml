@@ -34,8 +34,8 @@ jobs:
         working-directory: OpenAIDatabase
         run: |
           set -euo pipefail
-          SOURCE_DATE_EPOCH="$(git log -1 --format=%ct)" python3 scripts/atlasctl.py build-atlas --apply
           npm ci --prefix ../MemoryAtlas
+          SOURCE_DATE_EPOCH="$(git log -1 --format=%ct)" python3 scripts/atlasctl.py build-atlas --apply
           npm run build --prefix ../MemoryAtlas
           python3 scripts/run_verification.py --tier fast
           python3 scripts/run_verification.py --tier unit

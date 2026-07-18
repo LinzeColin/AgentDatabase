@@ -9,7 +9,7 @@ const { spawn, spawnSync } = require("node:child_process");
 
 
 const appRoot = path.resolve(__dirname, "..");
-const databaseRoot = path.resolve(appRoot, "../..");
+const databaseRoot = path.resolve(appRoot, "../OpenAIDatabase");
 const localPort = Number(process.env.MEMORY_ATLAS_R3_COMMAND_PORT || 4181);
 const staticPort = Number(process.env.MEMORY_ATLAS_R3_STATIC_PORT || localPort + 1);
 const localUrl = `http://127.0.0.1:${localPort}`;

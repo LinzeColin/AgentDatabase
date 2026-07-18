@@ -6,9 +6,12 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+
+
+UTC = timezone.utc
 
 
 ROOT = Path(__file__).resolve().parents[1]

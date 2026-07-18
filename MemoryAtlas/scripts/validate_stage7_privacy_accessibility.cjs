@@ -8,7 +8,7 @@ const path = require("node:path");
 const { spawn, spawnSync } = require("node:child_process");
 
 const appRoot = path.resolve(__dirname, "..");
-const repoRoot = path.resolve(appRoot, "../..");
+const repoRoot = path.resolve(appRoot, "../OpenAIDatabase");
 const publishDir = path.join(appRoot, "dist");
 const port = Number(process.env.MEMORY_ATLAS_STAGE7_PRIVACY_PORT || 4177);
 const targetUrl = `http://127.0.0.1:${port}`;

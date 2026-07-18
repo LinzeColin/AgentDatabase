@@ -1,0 +1,59 @@
+name: OpenAIDatabase Governance
+
+on:
+  pull_request:
+    paths:
+      - "OpenAIDatabase/**"
+      - ".github/workflows/openai-database-ci.yml"
+  push:
+    branches: [main]
+    paths:
+      - "OpenAIDatabase/**"
+      - ".github/workflows/openai-database-ci.yml"
+  schedule:
+    - cron: "17 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: openai-database-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  memory-gold-fast:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+      - name: Run fast Memory Gold evaluation
+        working-directory: OpenAIDatabase
+        run: |
+          set -euo pipefail
+          python3 scripts/evaluate_memory_gold_benchmark.py --suite fast --check
+
+  governed-full:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+      - name: Run full governed memory checks
+        working-directory: OpenAIDatabase
+        run: |
+          set -euo pipefail
+          python3 scripts/evaluate_memory_gold_benchmark.py --suite full --check
+          python3 scripts/evaluate_memory_fault_reliability.py --check
+          python3 scripts/evaluate_memory_automation_c_e2e.py --check
+          python3 scripts/evaluate_memory_snapshot_recovery.py --check
+          python3 scripts/evaluate_memory_production_acceptance.py --phase candidate --check --reuse-current-reports
+          SOURCE_DATE_EPOCH="$(git log -1 --format=%ct)" python3 scripts/atlasctl.py build-atlas --apply
+          python3 scripts/atlasctl.py audit --check goal-completion

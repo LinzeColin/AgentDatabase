@@ -256,6 +256,8 @@ def sidecar_payload(
     sidecar_path: str,
     counts: dict[str, int],
 ) -> dict[str, Any]:
+    if len(part_paths) != len(parts):
+        raise RawImportError("raw sidecar part cardinality mismatch")
     original_sha = sha256_bytes(original)
     return {
         "schema_version": "openai_database.raw_evidence_sidecar.v1",
@@ -288,7 +290,7 @@ def sidecar_payload(
                 "bytes": len(part),
                 "sha256": f"sha256:{sha256_bytes(part)}",
             }
-            for index, (path, part) in enumerate(zip(part_paths, parts, strict=True), 1)
+            for index, (path, part) in enumerate(zip(part_paths, parts), 1)
         ],
         "instruction_trust": contract["instruction_trust"],
         "credential_scan": {"status": "PASS", "hit_count": 0},
@@ -322,6 +324,8 @@ def expected_artifacts(
         f"{contract['canonical_root']}/{partition}/{stem}.part-{index:04d}.md"
         for index in range(1, len(parts) + 1)
     ]
+    if len(part_rel_paths) != len(parts):
+        raise RawImportError("raw artifact part cardinality mismatch")
     sidecar_rel = f"{contract['canonical_root']}/{partition}/{stem}.sidecar.json"
     sidecar = sidecar_payload(
         contract,
@@ -334,7 +338,7 @@ def expected_artifacts(
         sidecar_rel,
         counts,
     )
-    artifacts = {database_dir / rel: part for rel, part in zip(part_rel_paths, parts, strict=True)}
+    artifacts = {database_dir / rel: part for rel, part in zip(part_rel_paths, parts)}
     sidecar_path = database_dir / sidecar_rel
     artifacts[sidecar_path] = (
         json.dumps(sidecar, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
@@ -380,7 +384,9 @@ def commit_new_artifacts(artifacts: dict[Path, bytes], partition_dir: Path) -> b
                 handle.flush()
                 os.fsync(handle.fileno())
             temp_paths.append(temp)
-        for temp, path in zip(temp_paths, artifacts, strict=True):
+        if len(temp_paths) != len(artifacts):
+            raise RawImportError("raw temporary artifact cardinality mismatch")
+        for temp, path in zip(temp_paths, artifacts):
             os.link(temp, path)
             committed.append(path)
         return False

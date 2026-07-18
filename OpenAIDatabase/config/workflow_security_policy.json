@@ -1,11 +1,14 @@
 {
   "schema_version": "agent_database.workflow_security_policy.v1",
   "allowed_workflows": [
-    ".github/workflows/dual-plane.yml"
+    ".github/workflows/dual-plane.yml",
+    ".github/workflows/memory-atlas-acceptance.yml",
+    ".github/workflows/openai-database-ci.yml"
   ],
   "allowed_events": [
     "push",
     "pull_request",
+    "schedule",
     "workflow_dispatch"
   ],
   "forbidden_events": [
@@ -33,6 +36,16 @@
     {
       "path": ".github/workflows/dual-plane.yml",
       "role": "dual_plane_ci",
+      "trust_boundary": "trusted_repository_ci_read_only"
+    },
+    {
+      "path": ".github/workflows/memory-atlas-acceptance.yml",
+      "role": "memory_atlas_acceptance_ci",
+      "trust_boundary": "trusted_repository_ci_read_only"
+    },
+    {
+      "path": ".github/workflows/openai-database-ci.yml",
+      "role": "openai_database_governance_ci",
       "trust_boundary": "trusted_repository_ci_read_only"
     },
     {
