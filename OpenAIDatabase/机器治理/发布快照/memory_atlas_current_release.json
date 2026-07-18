@@ -1,9 +1,9 @@
 {
-  "release_id": "memory-atlas-v1-2-r7-20260710",
-  "release_manifest_path": "data/releases/memory_atlas/v1_2/memory-atlas-v1-2-r7-20260710/release_manifest.json",
-  "release_manifest_sha256": "dcc1b2f71af18de82e0987fdf7becc451f82288ec90992d4931b18539ac3ac50",
+  "release_id": "memory-atlas-v1-2-r8-20260718",
+  "release_manifest_path": "data/releases/memory_atlas/v1_2/memory-atlas-v1-2-r8-20260718/release_manifest.json",
+  "release_manifest_sha256": "3ba992f4a49028fedfc24763b4f1efd3fbe7f64e04f6aa5b4a81448a754d6666",
   "schema_version": "memory_atlas.current_release.v1",
-  "snapshot_path": "data/releases/memory_atlas/v1_2/memory-atlas-v1-2-r7-20260710/memory_atlas.json",
-  "snapshot_sha256": "b608631fded9e116d350895be20e6e61be3c7e42ba651ccdf7fc52afd8fefcbc",
-  "updated_at": "2026-07-10T22:05:02Z"
+  "snapshot_path": "data/releases/memory_atlas/v1_2/memory-atlas-v1-2-r8-20260718/memory_atlas.json",
+  "snapshot_sha256": "5f5d7e04752eda0fe93cbb7ec18e3b815ae90a98e09280acc1a0de9c8773b506",
+  "updated_at": "2026-07-18T09:53:14Z"
 }
