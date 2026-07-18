@@ -27,12 +27,32 @@ class PublicEncryptedBackupPolicyTests(unittest.TestCase):
         cls.module = load_module()
         cls.policy = json.loads(POLICY_PATH.read_text(encoding="utf-8"))
 
-    def test_unprovisioned_policy_is_valid_but_not_upload_ready(self) -> None:
+    def test_ready_policy_is_valid_for_upload(self) -> None:
         result = self.module.validate_policy(self.policy)
         self.assertEqual(result["status"], "PASS")
+        self.assertTrue(result["ready_for_upload"])
+        self.module.validate_policy(self.policy, require_ready=True)
+        candidate = copy.deepcopy(self.policy)
+        candidate["status"] = "UNPROVISIONED"
+        candidate["unified_key"]["recipient_provisioning_status"] = "UNPROVISIONED"
+        candidate["unified_key"]["public_recipient"] = None
+        candidate["unified_key"]["recipient_fingerprint"] = None
+        result = self.module.validate_policy(candidate)
         self.assertFalse(result["ready_for_upload"])
         with self.assertRaisesRegex(self.module.BackupPolicyError, "backup_key_not_provisioned"):
-            self.module.validate_policy(self.policy, require_ready=True)
+            self.module.validate_policy(candidate, require_ready=True)
+
+    def test_policy_requires_narrow_historical_product_gate_override(self) -> None:
+        candidate = copy.deepcopy(self.policy)
+        candidate["release"]["r8_required_before_upload"] = True
+        with self.assertRaisesRegex(self.module.BackupPolicyError, "release_policy_invalid"):
+            self.module.validate_policy(candidate)
+        candidate = copy.deepcopy(self.policy)
+        del candidate["release"]["historical_product_gate_override"]
+        with self.assertRaisesRegex(
+            self.module.BackupPolicyError, "historical_product_gate_override_invalid"
+        ):
+            self.module.validate_policy(candidate)
 
     def test_policy_rejects_plaintext_or_git_tracked_ciphertext(self) -> None:
         for key in ("plaintext_publication_allowed", "git_tracked_ciphertext_allowed"):

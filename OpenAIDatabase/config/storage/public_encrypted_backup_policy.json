@@ -2,12 +2,13 @@
   "schema_version": "openai_database.public_encrypted_backup_policy.v1",
   "task_id": "TSK.OpenAIDatabase.PEB1.0001",
   "acceptance_id": "ACC.OpenAIDatabase.PEB1.0001",
-  "status": "UNPROVISIONED",
+  "status": "READY",
   "owner_authorization_ref": "config/storage/raw_material_policy.json#public_encrypted_release_authorization",
   "scope": {
     "logical_sources": [
       "codex_memories",
-      "codex_sessions"
+      "codex_sessions",
+      "codex_attachments"
     ],
     "full_recovery_intended": true,
     "plaintext_publication_allowed": false,
@@ -18,7 +19,21 @@
     "repository": "LinzeColin/AgentDatabase",
     "visibility": "public",
     "transport": "github_release_asset_only",
-    "r8_required_before_upload": true,
+    "r8_required_before_upload": false,
+    "historical_product_gate_override": {
+      "gate_id": "R8_OVERALL_ACCEPTANCE_AND_SINGLE_FINAL_DELIVERY",
+      "applicable_to": "Memory Atlas v1.2 product release",
+      "applicable_to_this_backup": false,
+      "owner_authorized_at": "2026-07-18T11:28:29Z",
+      "scope": "public ciphertext-only Codex backup Release assets only",
+      "does_not_override": [
+        "age encryption",
+        "unified recipient and fingerprint validation",
+        "GitHub Release asset-only transport",
+        "remote ciphertext hash verification",
+        "no automatic source deletion"
+      ]
+    },
     "remote_verification_required_before_local_ciphertext_cleanup": true,
     "max_ciphertext_part_bytes": 1073741824
   },
@@ -32,9 +47,9 @@
   },
   "unified_key": {
     "key_id": "agentdatabase-public-backup-v1",
-    "recipient_provisioning_status": "UNPROVISIONED",
-    "public_recipient": null,
-    "recipient_fingerprint": null,
+    "recipient_provisioning_status": "READY",
+    "public_recipient": "age1r0dxp7w0x0mx2tnleup5jad7ju7lrsyuewm2h9y4hss6le8f0pdslc0w50",
+    "recipient_fingerprint": "e92633e20b74672ff9e6d8a27db657e7fb770a4e47c12d107bcd9ab213e03be9",
     "private_identity_source": "macos_keychain_or_owner_secret_manager",
     "identity_file_persisted": false,
     "key_export_allowed": false,
@@ -61,7 +76,6 @@
   "automation": {
     "default_enabled": false,
     "required_preflight": [
-      "r8_release_pass",
       "age_binary_available",
       "unified_recipient_provisioned",
       "private_identity_accessible",

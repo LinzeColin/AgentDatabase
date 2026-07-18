@@ -13,9 +13,8 @@ POLICY_SCHEMA = "openai_database.public_encrypted_backup_policy.v1"
 TASK_ID = "TSK.OpenAIDatabase.PEB1.0001"
 ACCEPTANCE_ID = "ACC.OpenAIDatabase.PEB1.0001"
 DEFAULT_POLICY = Path("config/storage/public_encrypted_backup_policy.json")
-EXPECTED_LOGICAL_SOURCES = ["codex_memories", "codex_sessions"]
+EXPECTED_LOGICAL_SOURCES = ["codex_memories", "codex_sessions", "codex_attachments"]
 EXPECTED_PREFLIGHT = [
-    "r8_release_pass",
     "age_binary_available",
     "unified_recipient_provisioned",
     "private_identity_accessible",
@@ -81,12 +80,35 @@ def validate_policy(policy: Mapping[str, Any], *, require_ready: bool = False) -
         release.get("repository") != "LinzeColin/AgentDatabase"
         or release.get("visibility") != "public"
         or release.get("transport") != "github_release_asset_only"
-        or release.get("r8_required_before_upload") is not True
+        or release.get("r8_required_before_upload") is not False
         or release.get("remote_verification_required_before_local_ciphertext_cleanup") is not True
         or not isinstance(release.get("max_ciphertext_part_bytes"), int)
         or not 0 < int(release["max_ciphertext_part_bytes"]) <= 1073741824
     ):
         raise BackupPolicyError("release_policy_invalid")
+    historical_gate_override = mapping(
+        release.get("historical_product_gate_override"), "historical_product_gate_override"
+    )
+    if (
+        historical_gate_override.get("gate_id")
+        != "R8_OVERALL_ACCEPTANCE_AND_SINGLE_FINAL_DELIVERY"
+        or historical_gate_override.get("applicable_to")
+        != "Memory Atlas v1.2 product release"
+        or historical_gate_override.get("applicable_to_this_backup") is not False
+        or not isinstance(historical_gate_override.get("owner_authorized_at"), str)
+        or not historical_gate_override.get("owner_authorized_at")
+        or historical_gate_override.get("scope")
+        != "public ciphertext-only Codex backup Release assets only"
+        or historical_gate_override.get("does_not_override")
+        != [
+            "age encryption",
+            "unified recipient and fingerprint validation",
+            "GitHub Release asset-only transport",
+            "remote ciphertext hash verification",
+            "no automatic source deletion",
+        ]
+    ):
+        raise BackupPolicyError("historical_product_gate_override_invalid")
     if (
         encryption.get("algorithm") != "age-x25519-v1"
         or encryption.get("required_tool") != "age"

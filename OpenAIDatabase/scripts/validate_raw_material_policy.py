@@ -263,7 +263,8 @@ def validate_policy(
             "transport": "github_release_asset_only",
             "git_tracked_ciphertext_allowed": False,
             "plaintext_or_key_material_allowed": False,
-            "r8_required_before_upload": True,
+            "r8_required_before_upload": False,
+            "owner_authorized_historical_product_gate_override_required": True,
         }
         for key, expected in expected_exception.items():
             if public_encrypted_exception.get(key) != expected:

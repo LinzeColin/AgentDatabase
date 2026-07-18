@@ -3,8 +3,8 @@
   "project_id": "OpenAIDatabase",
   "task_id": "TSK.OpenAIDatabase.CLEAN1.0008",
   "acceptance_id": "ACC.OpenAIDatabase.CLEAN1.0008",
-  "last_updated_task_id": "TSK.OpenAIDatabase.PEB1.0001",
-  "last_updated_acceptance_id": "ACC.OpenAIDatabase.PEB1.0001",
+  "last_updated_task_id": "TSK.OpenAIDatabase.PEB1.0002",
+  "last_updated_acceptance_id": "ACC.OpenAIDatabase.PEB1.0002",
   "implementation_base_sha": "91051a00ecdac72dc43ab8d0d2c0ecaeb1696fd0",
   "owner_authorization": {
     "decision": "emergency_public_history_remediation",
@@ -19,20 +19,21 @@
     ]
   },
   "public_encrypted_release_authorization": {
-    "decision": "owner_authorized_public_ciphertext_only_backup_governance",
-    "authorized_at": "2026-07-18T10:51:00Z",
+    "decision": "owner_authorized_public_ciphertext_only_backup_governance_and_historical_product_gate_non_applicability",
+    "authorized_at": "2026-07-18T11:28:29Z",
     "scope": [
-      "Codex memories and session records only",
+      "Codex memories, session records, and session attachments only",
       "GitHub Release ciphertext assets only",
       "one unified key identifier with Keychain or external secret-manager private identity",
-      "no plaintext, key material, local paths, source filenames, or content-bearing manifest fields"
+      "no plaintext, key material, local paths, source filenames, or content-bearing manifest fields",
+      "R8 Memory Atlas product-release gate is not applicable to this separate backup Release channel"
     ],
     "does_not_authorize": [
       "Git-tracked ciphertext",
       "plaintext credential publication",
       "key material publication",
-      "R8 gate bypass",
-      "automatic source deletion"
+      "automatic source deletion",
+      "bypass of encryption, unified-key, Release-only transport, or remote-verification controls"
     ]
   },
   "tracked_raw_policy": {
@@ -84,7 +85,8 @@
       "transport": "github_release_asset_only",
       "git_tracked_ciphertext_allowed": false,
       "plaintext_or_key_material_allowed": false,
-      "r8_required_before_upload": true
+      "r8_required_before_upload": false,
+      "owner_authorized_historical_product_gate_override_required": true
     }
   },
   "credential_policy": {

@@ -82,7 +82,9 @@ Do not silently drop memory-affecting changes.
   `config/storage/public_encrypted_backup_policy.json` 约束的 **public ciphertext-only Release asset**：
   它只能是 GitHub Release asset，永不作为 Git tracked 文件；不得包含明文成员、原始路径/文件名、密钥、
   解密指令或可识别来源的 manifest 字段；必须使用统一 `key_id` 对应的 Keychain/外部密钥库私钥与公开
-  recipient，并且 R8 通过前不得上传。Portable Agent Memory V1 仍不是原始归档，只能把逐条公开授权、
+  recipient。历史的 R8 Memory Atlas 产品发布验收不适用于此独立备份通道；仅当
+  `raw_material_policy.json` 与该 policy 中存在明确 owner override 时可上传，且加密、统一 recipient、
+  Release-only、远端 hash 校验和禁止自动删源仍不可绕过。Portable Agent Memory V1 仍不是原始归档，只能把逐条公开授权、
   无 credential、`redacted_summary` 且 commit-only 的 memory snapshot 发布到 public
   `LinzeColin/AgentDatabase` Release。其他 private export/import 留在 git 外或 ignored/encrypted paths；
   临时源不是交付。

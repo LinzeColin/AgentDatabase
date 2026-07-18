@@ -1,6 +1,6 @@
 # Public Encrypted Codex Backup
 
-This repository may publish a ciphertext-only backup of Codex memories and session records only when
+This repository may publish a ciphertext-only backup of Codex memories, session records, and session attachments only when
 `config/storage/public_encrypted_backup_policy.json` is `READY` and every required preflight passes.
 
 ## Boundary
@@ -11,13 +11,23 @@ This repository may publish a ciphertext-only backup of Codex memories and sessi
   identity stays in macOS Keychain or an owner-controlled secret manager and is never exported to this repo.
 - Source packaging must stream directly into encryption. A plaintext archive must never be persisted.
 - The public manifest may contain only the policy-approved batch, key, ciphertext-hash, and part metadata.
-- R8 must pass before upload. Local source deletion is never automatic.
+- The historical R8 Memory Atlas product-release acceptance is not applicable to this separate backup channel;
+  the checked-in owner override is narrow and does not weaken encryption, unified-key, Release-only, remote-hash,
+  or no-source-deletion controls. Local source deletion is never automatic.
 
 ## Provisioning Gate
 
 The checked-in policy intentionally starts as `UNPROVISIONED`. Provisioning requires a public `age` recipient
 and its SHA-256 fingerprint, plus an independently recoverable private identity in the approved key store.
 Until then, `--require-ready` must fail and no automation may upload anything.
+
+## Future Automation Contract (Not Scheduled)
+
+No Codex automation is created by this change. Any future job must validate this policy, encrypt the three logical
+source groups through a streaming `tar | gzip | age` pipeline with the checked-in public recipient, publish only a
+temporary `.age` asset and allowed-field manifest to a GitHub Release, fetch the remote asset again to verify its
+hash and size, and only then remove its local ciphertext. It must never persist a plaintext archive, use a different
+recipient, publish a path/name/content-bearing manifest, or delete original Codex data.
 
 ## Validation
 

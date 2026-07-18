@@ -88,6 +88,10 @@ class RawMaterialPolicyTests(unittest.TestCase):
         self.assertTrue(encrypted_exception["enabled"])
         self.assertEqual(encrypted_exception["transport"], "github_release_asset_only")
         self.assertFalse(encrypted_exception["git_tracked_ciphertext_allowed"])
+        self.assertFalse(encrypted_exception["r8_required_before_upload"])
+        self.assertTrue(
+            encrypted_exception["owner_authorized_historical_product_gate_override_required"]
+        )
 
     def test_public_base_fingerprints_preserve_historical_evidence(self) -> None:
         for collection in self.policy["retired_tip_collections"]:
