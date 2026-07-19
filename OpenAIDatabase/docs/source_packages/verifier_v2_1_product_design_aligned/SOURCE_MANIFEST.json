@@ -1,0 +1,61 @@
+{
+  "schema_version": "verifier.source_package_manifest.v1",
+  "source_package_id": "verifier-v2.1-product-design-aligned-single-review",
+  "release_date": "2026-07-19",
+  "source": {
+    "kind": "user_supplied_incremental_installer",
+    "version": "2.1",
+    "sha256": "1acf2922d2976dd2e3aaef48aa0c7738df8d3b2fd8fa7beb8997c7c6ef0576a4"
+  },
+  "artifact": {
+    "name": "verifier-v2.1-product-design-aligned-single-review.zip",
+    "version": "2.1",
+    "bytes": 196507,
+    "sha256": "170272ac6a59faa5e72fe93f231e5103cb8431dc59c69709ff6f236786d38285",
+    "root_directory": "verifier_v2_1_product_design_aligned_incremental_installer",
+    "zip_member_count": 62,
+    "file_count": 52,
+    "payload_file_count": 31,
+    "patch_id": "verifier-v2.1-product-design-aligned-single-review-zip-20260719"
+  },
+  "baseline": {
+    "required_version": "2.0",
+    "exact_match_required": true,
+    "fixture_name": "tests/fixtures/verifier_v2_payload.zip",
+    "fixture_bytes": 36797,
+    "fixture_file_count": 21,
+    "fixture_sha256": "ea54a0ed7a933bcbd94830751b364744778932faa6106a801ba46d8edab4fed4"
+  },
+  "default_delivery_contract": {
+    "trigger_example": "验收一下",
+    "external_file_count": 1,
+    "format": "zip",
+    "filename_pattern": "*_acceptance_review_taskpack.zip",
+    "direct_developer_agent_handoff": true,
+    "internal_full_evidence_retained": true
+  },
+  "verification": {
+    "zip_integrity": "PASS",
+    "embedded_sha256": "PASS",
+    "unsafe_zip_entries": 0,
+    "symlink_entries": 0,
+    "machine_specific_or_secret_pattern_findings": 0,
+    "installer_tests_passed": 7,
+    "installer_tests_total": 7,
+    "payload_tests_passed": 35,
+    "payload_tests_total": 35,
+    "exact_v2_inspect": "PASS",
+    "dry_run": "PASS",
+    "apply": "PASS",
+    "post_apply_v2_1_inspect": "PASS",
+    "post_apply_payload_validation": "PASS"
+  },
+  "public_boundary": {
+    "contains_acceptance_run_evidence": false,
+    "contains_credentials": false,
+    "contains_chat_or_session_exports": false,
+    "contains_private_raw_data": false,
+    "contains_browser_or_account_state": false,
+    "contains_local_absolute_paths": false
+  }
+}
