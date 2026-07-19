@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased - Adaptive Human Voice Router v1.1.1 source package
+
+- Added the reviewed Hook-only v1.1.1 source archive under `docs/source_packages`, with a machine-readable manifest, provenance note and external SHA-256 checksum.
+- Changed the Router default from a two-marker cap to `max_discourse_markers: null` (no fixed numerical maximum) and strengthened context-sensitive natural phrasing without imposing filler quotas.
+- Verified ZIP integrity, 18/18 embedded checksums and 14/14 package tests; the public package contains no credentials, chat/session exports, private raw data, browser state or local absolute paths.
+
 ## 1.0.0 - Portable Agent Memory V1 (`TSK.OpenAIDatabase.PAM1.0019`)
 
 - Added one deterministic production-acceptance gate that reruns the existing five transport profiles, complete 160-case benchmark, security, performance, fault, Automation C E2E and clean-room recovery evidence without adding a second fixture corpus.

@@ -1,0 +1,45 @@
+{
+  "schema_version": "adaptive_voice_router.source_package_manifest.v1",
+  "source_package_id": "codex-adaptive-human-voice-router-v1.1.1",
+  "source": {
+    "kind": "user_supplied_archive",
+    "version": "1.1.0",
+    "sha256": "d14fd4a095477235d56c13b722db45d7fd0ba11fc8c92ef21713e52ca12de994"
+  },
+  "artifact": {
+    "name": "codex-adaptive-human-voice-router-v1.1.1.zip",
+    "version": "1.1.1",
+    "bytes": 31551,
+    "sha256": "f4e46d9e281b69c7cbc25f333933ab9c24772ae1fc476e300badf47fa6202449",
+    "root_directory": "codex-adaptive-voice-router",
+    "zip_member_count": 25,
+    "payload_file_count": 20
+  },
+  "behavior": {
+    "max_discourse_markers": null,
+    "null_semantics": "no_fixed_numerical_maximum",
+    "natural_enhancement": true,
+    "filler_or_quota_driven_markers": false
+  },
+  "recommended_install": {
+    "command": "python3 install.py --no-skill",
+    "scope": "current_user_global_codex_hooks",
+    "installs_optional_skill": false,
+    "modifies_codex_config_toml": false
+  },
+  "verification": {
+    "zip_integrity": "PASS",
+    "unsafe_zip_entries": 0,
+    "embedded_checksums_passed": 18,
+    "embedded_checksums_total": 18,
+    "tests_passed": 14,
+    "tests_total": 14
+  },
+  "public_boundary": {
+    "contains_credentials": false,
+    "contains_chat_or_session_exports": false,
+    "contains_private_raw_data": false,
+    "contains_browser_or_account_state": false,
+    "contains_local_absolute_paths": false
+  }
+}
