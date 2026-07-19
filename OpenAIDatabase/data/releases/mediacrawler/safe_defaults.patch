@@ -1,0 +1,43 @@
+diff --git a/config/base_config.py b/config/base_config.py
+index 28a852e..fc3b448 100644
+--- a/config/base_config.py
++++ b/config/base_config.py
+@@ -27 +27 @@ XHS_INTERNATIONAL = False
+-KEYWORDS = "编程副业,编程兼职"  # Keyword search configuration, separated by English commas
++KEYWORDS = ""  # Require an explicit keyword at launch; do not crawl defaults accidentally.
+@@ -83 +83 @@ BROWSER_LAUNCH_TIMEOUT = 60
+-CDP_CONNECT_EXISTING = True
++CDP_CONNECT_EXISTING = False
+@@ -102 +102 @@ START_PAGE = 1
+-CRAWLER_MAX_NOTES_COUNT = 15
++CRAWLER_MAX_NOTES_COUNT = 5
+@@ -110,2 +110,2 @@ ENABLE_GET_MEIDAS = False
+-# Whether to enable comment crawling mode. Comment crawling is enabled by default.
+-ENABLE_GET_COMMENTS = True
++# Whether to enable comment crawling mode. Keep disabled unless explicitly requested.
++ENABLE_GET_COMMENTS = False
+@@ -137 +137 @@ FONT_PATH = "./docs/STZHONGS.TTF"
+-CRAWLER_MAX_SLEEP_SEC = 2
++CRAWLER_MAX_SLEEP_SEC = 3
+diff --git a/pyproject.toml b/pyproject.toml
+index d68dec6..9e09c20 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -10 +10 @@ dependencies = [
+-    "aiomysql==0.2.0",
++    "aiomysql>=0.3.2",
+@@ -13,3 +13,2 @@ dependencies = [
+-    "asyncmy>=0.2.10",
+-    "cryptography>=45.0.7",
+-    "fastapi==0.110.2",
++    "cryptography>=49.0.0",
++    "fastapi>=0.139.2",
+@@ -28 +27 @@ dependencies = [
+-    "python-dotenv==1.0.1",
++    "python-dotenv>=1.2.2",
+@@ -30 +29 @@ dependencies = [
+-    "requests==2.32.3",
++    "requests>=2.34.2",
+@@ -46 +45 @@ dependencies = [
+-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
++url = "https://pypi.org/simple"

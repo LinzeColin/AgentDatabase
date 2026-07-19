@@ -1,0 +1,37 @@
+{
+  "schema_version": "openaidatabase.mediacrawler_validation.v1",
+  "validated_at": "2026-07-19",
+  "acceptance_status": "PASS_WITH_ENVIRONMENT_LIMIT",
+  "initial_dependency_audit": {
+    "known_vulnerabilities": 37,
+    "affected_packages": 16,
+    "action": "dependency constraints and lock were hardened before acceptance"
+  },
+  "final_dependency_audit": {
+    "tool": "pip-audit",
+    "result": "PASS",
+    "known_vulnerabilities": 0
+  },
+  "checks": [
+    {"name": "uv lock check", "result": "PASS", "detail": "93 packages resolved"},
+    {"name": "frozen offline sync", "result": "PASS", "detail": "89 installed packages checked"},
+    {"name": "official unit tests", "result": "PASS", "detail": "77 passed, 2 warnings"},
+    {"name": "core import smoke", "result": "PASS", "detail": "17 modules imported"},
+    {"name": "launcher help", "result": "PASS"},
+    {"name": "launcher negative controls", "result": "PASS", "detail": "no-argument, Cookie, empty/custom path, database, proxy and comment requests were rejected"},
+    {"name": "full upstream pytest collection", "result": "ENVIRONMENT_LIMITED", "detail": "84 passed, 8 skipped, 6 failed, 4 subtests passed; all 6 failures require Redis at 127.0.0.1:6379"}
+  ],
+  "acceptance_boundary": {
+    "redis_required_by_safe_launcher": false,
+    "proxy_enabled": false,
+    "database_output_enabled": false,
+    "live_platform_login_tested": false,
+    "live_collection_tested": false
+  },
+  "residual_risks": [
+    "Platform anti-bot controls and login flows may change without notice.",
+    "A successful local test does not grant permission to collect or republish platform content.",
+    "The six Redis integration tests remain unexecuted in a real Redis environment because Redis is outside the accepted JSONL-only runtime path.",
+    "X/Twitter, Reddit and Instagram require separate implementations."
+  ]
+}

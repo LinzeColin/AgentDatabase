@@ -1,0 +1,205 @@
+#!/usr/bin/env python3
+"""Pinned, fail-closed launcher for the user-level MediaCrawler install."""
+
+from __future__ import annotations
+
+import hashlib
+import os
+import subprocess
+import sys
+from pathlib import Path
+from typing import NoReturn
+
+
+EXPECTED_COMMIT = "0625e01a6bc717a3fc9c96d3dac7fb8957043838"
+EXPECTED_CONFIG_SHA256 = "e90548226cd036022ae3e4f9e3b078d5cbfa6bf6b9c7124878f5e327a0ba7eab"
+EXPECTED_PYPROJECT_SHA256 = "bf6b3ec3e8125dbb54129d689d1d7e4be5a6022227ccfdbc0234225a7cdc64c4"
+EXPECTED_LOCK_SHA256 = "3949abb57f0cbf0cc3bd5a88dd973d38afdfbf908d83e435bab55e5eaadbb214"
+RUNTIME_ROOT = Path.home() / "Library" / "Application Support" / "MediaCrawler"
+SOURCE_ROOT = RUNTIME_ROOT / "source"
+DATA_ROOT = RUNTIME_ROOT / "data"
+
+
+def fail(message: str) -> NoReturn:
+    print(f"MediaCrawler stopped: {message}", file=sys.stderr)
+    raise SystemExit(2)
+
+
+def sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def option_value(args: list[str], name: str) -> str | None:
+    for index, item in enumerate(args):
+        if item == name:
+            return args[index + 1] if index + 1 < len(args) else None
+        prefix = f"{name}="
+        if item.startswith(prefix):
+            return item[len(prefix) :]
+    return None
+
+
+def option_present(args: list[str], name: str) -> bool:
+    return any(item == name or item.startswith(f"{name}=") for item in args)
+
+
+def verify_install() -> Path:
+    config_path = SOURCE_ROOT / "config" / "base_config.py"
+    pyproject_path = SOURCE_ROOT / "pyproject.toml"
+    lock_path = SOURCE_ROOT / "uv.lock"
+    python = SOURCE_ROOT / ".venv" / "bin" / "python"
+    uv = Path.home() / ".local" / "bin" / "uv"
+    required_files = (config_path, pyproject_path, lock_path, python, uv)
+    if not SOURCE_ROOT.is_dir() or any(not path.is_file() for path in required_files):
+        fail("global source is missing; restore the pinned installation first")
+    if not python.is_file():
+        fail("the locked Python environment is missing; run the installation restore steps")
+    try:
+        commit = subprocess.check_output(
+            ["git", "rev-parse", "HEAD"], cwd=SOURCE_ROOT, text=True
+        ).strip()
+    except (OSError, subprocess.CalledProcessError) as exc:
+        fail(f"cannot verify the pinned Git commit: {exc}")
+    if commit != EXPECTED_COMMIT:
+        fail(f"unexpected source commit {commit}; expected {EXPECTED_COMMIT}")
+    expected_hashes = {
+        config_path: EXPECTED_CONFIG_SHA256,
+        pyproject_path: EXPECTED_PYPROJECT_SHA256,
+        lock_path: EXPECTED_LOCK_SHA256,
+    }
+    for path, expected in expected_hashes.items():
+        if sha256(path) != expected:
+            fail(f"verified file changed: {path.relative_to(SOURCE_ROOT)}")
+    try:
+        changed = subprocess.check_output(
+            ["git", "diff", "--name-only", "--"], cwd=SOURCE_ROOT, text=True
+        ).splitlines()
+        untracked = subprocess.check_output(
+            ["git", "ls-files", "--others", "--exclude-standard"],
+            cwd=SOURCE_ROOT,
+            text=True,
+        ).splitlines()
+    except (OSError, subprocess.CalledProcessError) as exc:
+        fail(f"cannot verify the source tree: {exc}")
+    if set(changed) != {"config/base_config.py", "pyproject.toml", "uv.lock"}:
+        fail("unexpected tracked source changes detected")
+    if untracked:
+        fail("unexpected untracked source files detected")
+    sync = subprocess.run(
+        [str(uv), "sync", "--frozen", "--offline", "--no-install-project"],
+        cwd=SOURCE_ROOT,
+        env={**os.environ, "UV_NO_PROGRESS": "1"},
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        text=True,
+        check=False,
+    )
+    if sync.returncode:
+        fail(f"locked environment check failed: {sync.stdout.strip()}")
+    return python
+
+
+def validate_request(args: list[str]) -> list[str]:
+    if not args:
+        fail(
+            "explicit arguments are required; try `mediacrawler --help` or specify "
+            "--platform, --type and a keyword/ID"
+        )
+    if any(item in {"-h", "--help"} for item in args):
+        return args
+    login_type = option_value(args, "--lt")
+    if option_present(args, "--cookies") or login_type == "cookie":
+        fail("Cookie login is disabled; use QR-code or phone login so credentials are not exposed")
+    if option_present(args, "--lt") and login_type not in {"qrcode", "phone"}:
+        fail("--lt must be qrcode or phone")
+    if option_present(args, "--init_db"):
+        fail("database initialization is disabled; the safe launcher is JSONL-only")
+    requested_data_path = option_value(args, "--save_data_path")
+    if option_present(args, "--save_data_path") and (
+        not requested_data_path
+        or Path(requested_data_path).expanduser() != DATA_ROOT
+    ):
+        fail("custom --save_data_path is disabled; collection data must stay in the private staging directory")
+    requested_format = option_value(args, "--save_data_option")
+    if option_present(args, "--save_data_option") and requested_format != "jsonl":
+        fail("only JSONL output is enabled for the governed backup pipeline")
+    blocked_proxy_options = ("--static_proxy_url", "--ip_proxy_provider_name", "--ip_proxy_pool_count")
+    if any(option_present(args, name) for name in blocked_proxy_options):
+        fail("proxy configuration arguments are disabled in the global safe launcher")
+    proxy_value = (option_value(args, "--enable_ip_proxy") or "no").lower()
+    if option_present(args, "--enable_ip_proxy") and proxy_value not in {"no", "false", "f", "n", "0"}:
+        fail("IP proxy use is disabled in the global safe launcher")
+    concurrency = option_value(args, "--max_concurrency_num")
+    if option_present(args, "--max_concurrency_num") and (
+        not concurrency or not concurrency.isdigit() or int(concurrency) != 1
+    ):
+        fail("--max_concurrency_num must remain 1")
+    note_limit = option_value(args, "--crawler_max_notes_count")
+    if option_present(args, "--crawler_max_notes_count") and (
+        not note_limit or not note_limit.isdigit() or not 1 <= int(note_limit) <= 50
+    ):
+        fail("--crawler_max_notes_count must be between 1 and 50")
+    false_values = {"no", "false", "f", "n", "0"}
+    for comment_option in ("--get_comment", "--get_sub_comment"):
+        comment_value = option_value(args, comment_option)
+        if option_present(args, comment_option) and (
+            not comment_value or comment_value.lower() not in false_values
+        ):
+            fail(f"{comment_option} must remain disabled in the safe launcher")
+    platform = option_value(args, "--platform")
+    crawl_type = option_value(args, "--type")
+    if not platform:
+        fail("--platform is required")
+    if not crawl_type:
+        fail("--type is required: search, detail or creator")
+    required_target = {
+        "search": "--keywords",
+        "detail": "--specified_id",
+        "creator": "--creator_id",
+    }.get(crawl_type)
+    if not required_target:
+        fail("--type must be search, detail or creator")
+    if not option_value(args, required_target):
+        fail(f"{required_target} is required for --type {crawl_type}")
+
+    defaults = [
+        ("--lt", "qrcode"),
+        ("--get_comment", "no"),
+        ("--get_sub_comment", "no"),
+        ("--headless", "no"),
+        ("--save_data_option", "jsonl"),
+        ("--crawler_max_notes_count", "5"),
+        ("--max_concurrency_num", "1"),
+        ("--save_data_path", str(DATA_ROOT)),
+        ("--enable_ip_proxy", "no"),
+    ]
+    normalized = list(args)
+    for name, value in defaults:
+        if not option_present(normalized, name):
+            normalized.extend([name, value])
+    return normalized
+
+
+def main() -> None:
+    python = verify_install()
+    args = validate_request(sys.argv[1:])
+    os.umask(0o077)
+    for path in (DATA_ROOT, SOURCE_ROOT / "browser_data"):
+        path.mkdir(parents=True, exist_ok=True)
+        path.chmod(0o700)
+    os.chdir(SOURCE_ROOT)
+    environment = dict(os.environ)
+    environment["PYTHONUNBUFFERED"] = "1"
+    os.execve(
+        str(python),
+        [str(python), str(SOURCE_ROOT / "main.py"), *args],
+        environment,
+    )
+
+
+if __name__ == "__main__":
+    main()

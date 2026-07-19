@@ -1,0 +1,17 @@
+{
+  "schema_version": "openaidatabase.mediacrawler_platform_support.v1",
+  "verified_at": "2026-07-19",
+  "live_collection_performed": false,
+  "platforms": [
+    {"name": "小红书", "code": "xhs", "supported_by_mediacrawler": true, "installation_status": "installed_not_live_verified", "modes_claimed_upstream": ["search", "detail", "creator"]},
+    {"name": "抖音", "code": "dy", "supported_by_mediacrawler": true, "installation_status": "installed_not_live_verified", "modes_claimed_upstream": ["search", "detail", "creator"], "extra_requirement": "Node.js >=16"},
+    {"name": "快手", "code": "ks", "supported_by_mediacrawler": true, "installation_status": "installed_not_live_verified", "modes_claimed_upstream": ["search", "detail", "creator"]},
+    {"name": "B站", "code": "bili", "supported_by_mediacrawler": true, "installation_status": "installed_not_live_verified", "modes_claimed_upstream": ["search", "detail", "creator"]},
+    {"name": "微博", "code": "wb", "supported_by_mediacrawler": true, "installation_status": "installed_not_live_verified", "modes_claimed_upstream": ["search", "detail", "creator"]},
+    {"name": "贴吧", "code": "tieba", "supported_by_mediacrawler": true, "installation_status": "installed_not_live_verified", "modes_claimed_upstream": ["search", "detail", "creator"]},
+    {"name": "知乎", "code": "zhihu", "supported_by_mediacrawler": true, "installation_status": "installed_not_live_verified", "modes_claimed_upstream": ["search", "detail", "creator"], "extra_requirement": "Node.js >=16"},
+    {"name": "X/Twitter", "code": null, "supported_by_mediacrawler": false, "installation_status": "not_installed", "reason": "requires a separate collector and authenticated risk review"},
+    {"name": "Reddit", "code": null, "supported_by_mediacrawler": false, "installation_status": "not_installed", "reason": "requires a separate collector and authenticated risk review"},
+    {"name": "Instagram", "code": null, "supported_by_mediacrawler": false, "installation_status": "not_installed", "reason": "requires a separate collector and authenticated risk review"}
+  ]
+}
