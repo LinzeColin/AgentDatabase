@@ -5,6 +5,7 @@
 - Added the reviewed Hook-only v1.1.1 source archive under `docs/source_packages`, with a machine-readable manifest, provenance note and external SHA-256 checksum.
 - Changed the Router default from a two-marker cap to `max_discourse_markers: null` (no fixed numerical maximum) and strengthened context-sensitive natural phrasing without imposing filler quotas.
 - Verified ZIP integrity, 18/18 embedded checksums and 14/14 package tests; the public package contains no credentials, chat/session exports, private raw data, browser state or local absolute paths.
+- Added one exact repository-hygiene exception for this audited 31,551-byte ZIP; neighboring or unrelated tracked archives remain forbidden and are covered by regression tests.
 
 ## 1.0.0 - Portable Agent Memory V1 (`TSK.OpenAIDatabase.PAM1.0019`)
 

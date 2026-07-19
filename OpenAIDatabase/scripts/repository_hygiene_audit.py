@@ -132,7 +132,11 @@ def evaluate_inventory(
                     "max_bytes": allowed_max,
                 }
             )
-        if lowered.endswith(archive_suffixes) and not path.startswith(allowed_archives):
+        archive_allowed = any(
+            path == rule or (rule.endswith("/") and path.startswith(rule))
+            for rule in allowed_archives
+        )
+        if lowered.endswith(archive_suffixes) and not archive_allowed:
             violations.append({"path": path, "reason": "unapproved_tracked_archive", "bytes": size})
     return violations
 

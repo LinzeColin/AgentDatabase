@@ -43,6 +43,31 @@ class RepositoryHygieneAuditTests(unittest.TestCase):
             {"tracked_blob_exceeds_bound", "forbidden_credential_shape"},
         )
 
+    def test_voice_router_archive_exception_is_exact(self) -> None:
+        approved = (
+            "OpenAIDatabase/docs/source_packages/"
+            "codex_adaptive_voice_router_v1_1_1/"
+            "codex-adaptive-human-voice-router-v1.1.1.zip"
+        )
+        nearby = f"{approved}.copy.zip"
+        violations = hygiene.evaluate_inventory(
+            {
+                approved: 31_551,
+                nearby: 31_551,
+            },
+            self.policy,
+        )
+        self.assertEqual(
+            violations,
+            [
+                {
+                    "path": nearby,
+                    "reason": "unapproved_tracked_archive",
+                    "bytes": 31_551,
+                }
+            ],
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

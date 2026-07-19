@@ -19,7 +19,8 @@
     }
   ],
   "allowed_archive_prefixes": [
-    "OpenAIDatabase/docs/migration_handoff/20260717_local_s04_s13_preservation/patches/"
+    "OpenAIDatabase/docs/migration_handoff/20260717_local_s04_s13_preservation/patches/",
+    "OpenAIDatabase/docs/source_packages/codex_adaptive_voice_router_v1_1_1/codex-adaptive-human-voice-router-v1.1.1.zip"
   ],
   "archive_suffixes": [
     ".zip",
