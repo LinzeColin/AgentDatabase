@@ -67,6 +67,7 @@
       "tests/test_memory_migration_profile.py",
       "tests/test_memory_record_schema_v2.py",
       "tests/test_memory_sharding.py",
+      "tests/test_public_encrypted_backup_policy.py",
       "tests/test_public_raw_import.py",
       "tests/test_raw_material_policy.py",
         "tests/test_s03p3_raw_manifest.py",

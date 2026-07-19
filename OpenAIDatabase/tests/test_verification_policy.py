@@ -32,7 +32,7 @@ class VerificationPolicyTests(unittest.TestCase):
         result = self.runner.validate_policy(DATABASE_DIR, POLICY)
 
         self.assertEqual(result["status"], "PASS", result["errors"])
-        self.assertEqual(result["metrics"]["test_file_count"], 75)
+        self.assertEqual(result["metrics"]["test_file_count"], 76)
         for metric in (
             "unowned_test_count",
             "multi_owned_test_count",
@@ -66,7 +66,7 @@ class VerificationPolicyTests(unittest.TestCase):
 
         self.assertEqual(executable, ["fast", "unit", "security", "integration"])
         self.assertEqual(len(files), len(set(files)))
-        self.assertEqual(len(files), 75)
+        self.assertEqual(len(files), 76)
 
 
 if __name__ == "__main__":

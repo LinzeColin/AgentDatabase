@@ -9,7 +9,7 @@
   "inventory": {
     "top_level_script_entrypoints_before": 54,
     "top_level_script_entrypoints_after": 53,
-    "top_level_script_entrypoints_current": 82,
+    "top_level_script_entrypoints_current": 83,
     "referenced_entrypoints_preserved": 52,
     "dead_entrypoints_before": 2,
     "dead_entrypoints_after": 0,

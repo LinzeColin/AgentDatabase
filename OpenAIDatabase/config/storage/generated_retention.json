@@ -105,8 +105,7 @@
       "generated": false,
       "consumer_bindings": [
         {"path": "scripts/evaluate_personalization_context.py", "marker": "tests_run_missing_evidence_file"},
-        {"path": "scripts/build_personalization_exports.py", "marker": "TASK-OAI-D-001-build-exports.txt"},
-        {"path": "scripts/sync_codex_memory_data.py", "marker": "TASK-OAI-D-001-current-validation.txt"}
+        {"path": "scripts/build_personalization_exports.py", "marker": "TASK-OAI-D-001-build-exports.txt"}
       ],
       "retention": "small evidence summaries referenced by structured PASS rows"
     },
