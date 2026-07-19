@@ -32,19 +32,37 @@ DENY_CONTENT = re.compile(rb"(-----BEGIN [A-Z ]*PRIVATE KEY-----|AKIA[0-9A-Z]{16
                           rb"ghp_[A-Za-z0-9]{36}|sk-[A-Za-z0-9]{20,}|eyJ[A-Za-z0-9_-]{10,}\.eyJ)")
 
 
-def _gh(args, input_bytes=None, raw_out=None, check=True):
-    """调用 gh api。raw_out 给定则把原始响应字节写入该文件路径。"""
+# 连接级瞬时错误（连接未建立，重试绝对安全）
+_TRANSIENT = re.compile(r"dial tcp|i/o timeout|operation timed out|connection reset|"
+                        r"connection refused|EOF|TLS handshake timeout|no such host", re.I)
+
+
+def _gh(args, input_bytes=None, raw_out=None, check=True, retries=4):
+    """调用 gh api；连接级瞬时错误自动重试（指数退避 1/2/4/8s）。
+    raw_out 给定则把原始响应字节写入该文件路径。"""
     cmd = ["gh", "api"] + args
-    if raw_out is not None:
-        with open(raw_out, "wb") as f:
-            p = subprocess.run(cmd, stdout=f, stderr=subprocess.PIPE)
-        if check and p.returncode != 0:
-            raise RuntimeError(p.stderr.decode("utf-8", "replace"))
-        return p.returncode
-    p = subprocess.run(cmd, input=input_bytes, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    if check and p.returncode != 0:
-        raise RuntimeError(p.stderr.decode("utf-8", "replace"))
-    return p.stdout
+    last = ""
+    for attempt in range(retries):
+        if raw_out is not None:
+            with open(raw_out, "wb") as f:
+                p = subprocess.run(cmd, stdout=f, stderr=subprocess.PIPE)
+            err = p.stderr.decode("utf-8", "replace")
+            if p.returncode == 0:
+                return 0
+        else:
+            p = subprocess.run(cmd, input=input_bytes, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            err = p.stderr.decode("utf-8", "replace")
+            if p.returncode == 0:
+                return p.stdout
+        last = err
+        if _TRANSIENT.search(err) and attempt < retries - 1:
+            import time
+            time.sleep(2 ** attempt)
+            continue
+        break
+    if check:
+        raise RuntimeError(last)
+    return p.returncode if raw_out is not None else p.stdout
 
 
 def _check_area(area):
