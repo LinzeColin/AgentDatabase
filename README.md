@@ -1,10 +1,6 @@
 # AgentDatabase
 
-Archived Codex agent history, migrated off this Mac to keep local storage clean.
-**Private repository** — these archives contain full agent session transcripts and
-may include API keys, tokens, file paths, and private conversation content.
-Do not make this repository public.
-
+Archived Codex agent history, migrated off this Mac to keep local storage 
 ## Contents
 
 Large archives are stored as **release assets** (not in git), because GitHub
