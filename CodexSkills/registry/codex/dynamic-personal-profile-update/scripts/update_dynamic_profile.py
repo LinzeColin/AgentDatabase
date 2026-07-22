@@ -383,7 +383,7 @@ def render(entries: list[dict[str, Any]], generated_at: str, source_hash: str, s
     lines += [
         "## 可立即试用的 Agent 行为",
         "",
-        "只把与当前任务直接相关且有证据的 `current`/`emerging` 条目转成临时行为；试用后再决定是否提炼为 Prompt Template、Workflow 或 Skill。",
+        "只把与当前任务直接相关且有证据的 `current`/`emerging` 条目转成临时行为；在真实任务中验证后再决定是否提炼为 Prompt Template、Workflow 或 Skill。",
         "",
         "## Recurring Asset 候选",
         "",
