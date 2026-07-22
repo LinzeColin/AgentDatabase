@@ -1,0 +1,15 @@
+{
+  "schema_version": "skill_registry_index.v1",
+  "source_namespaces": ["agents", "claude", "codex-system", "codex"],
+  "skills": [
+    {
+      "skill_id": "dynamic-personal-profile-update",
+      "source": "codex",
+      "version": "0.0.0.1",
+      "status": "candidate_for_acceptance",
+      "entry": "codex/dynamic-personal-profile-update/registry.yaml",
+      "skill_entry": "codex/dynamic-personal-profile-update/SKILL.md",
+      "persistent_output": "OpenAIDatabase/data/derived/profile/DYNAMIC_PROFILE.md"
+    }
+  ]
+}
