@@ -1,0 +1,155 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:source-material-policy:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "deletion_propagation_when_incomplete": {
+      "const": "BLOCK"
+    },
+    "excluded_file_count_and_bytes_required": {
+      "const": true
+    },
+    "exclusion_accounting_required": {
+      "const": true
+    },
+    "exclusions": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "pattern": {
+            "maxLength": 256,
+            "minLength": 1,
+            "type": "string"
+          },
+          "pattern_syntax": {
+            "const": "POSIX_GLOB"
+          },
+          "reason_code": {
+            "enum": [
+              "VCS_METADATA",
+              "SOURCE_OVERLAP",
+              "CACHE",
+              "OS_METADATA"
+            ]
+          },
+          "rule_id": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/enum_code"
+          },
+          "source_scope": {
+            "enum": [
+              "ALL",
+              "AGENTS",
+              "CLAUDE",
+              "CODEX_SYSTEM",
+              "CODEX"
+            ]
+          }
+        },
+        "required": [
+          "rule_id",
+          "source_scope",
+          "pattern",
+          "pattern_syntax",
+          "reason_code"
+        ],
+        "type": "object"
+      },
+      "minItems": 1,
+      "type": "array"
+    },
+    "hard_failure_codes": {
+      "items": {
+        "enum": [
+          "READ_ERROR",
+          "STAT_ERROR",
+          "PERMISSION_ERROR",
+          "OVERSIZE_NON_POLICY",
+          "SPECIAL_FILE",
+          "SYMLINK_UNSAFE",
+          "INVALID_PATH_ENCODING"
+        ]
+      },
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "hard_failure_result": {
+      "const": "INCOMPLETE"
+    },
+    "other_dotfiles_excluded": {
+      "const": false
+    },
+    "policy_id": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/urn_id"
+    },
+    "protocol_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/protocol_revision"
+    },
+    "regular_files_only_in_content_digest": {
+      "const": true
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:source-material-policy:v1"
+    },
+    "silent_skip_allowed": {
+      "const": false
+    },
+    "size_skip_allowed": {
+      "const": false
+    },
+    "symlink_alias_records_separate": {
+      "const": true
+    },
+    "symlink_policy": {
+      "additionalProperties": false,
+      "properties": {
+        "absolute_target_allowed": {
+          "const": false
+        },
+        "cycle_or_race_result": {
+          "const": "INCOMPLETE"
+        },
+        "lstat_first": {
+          "const": true
+        },
+        "public_target_field": {
+          "const": "normalized_target_ref"
+        },
+        "raw_target_public": {
+          "const": false
+        },
+        "same_source_root_required": {
+          "const": true
+        }
+      },
+      "required": [
+        "lstat_first",
+        "absolute_target_allowed",
+        "same_source_root_required",
+        "raw_target_public",
+        "public_target_field",
+        "cycle_or_race_result"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "policy_id",
+    "exclusions",
+    "other_dotfiles_excluded",
+    "size_skip_allowed",
+    "silent_skip_allowed",
+    "exclusion_accounting_required",
+    "excluded_file_count_and_bytes_required",
+    "regular_files_only_in_content_digest",
+    "symlink_alias_records_separate",
+    "symlink_policy",
+    "hard_failure_codes",
+    "hard_failure_result",
+    "deletion_propagation_when_incomplete"
+  ],
+  "title": "Source material policy",
+  "type": "object"
+}

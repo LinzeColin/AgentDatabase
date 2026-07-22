@@ -1,0 +1,11 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:negative-unknown-ref:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "value": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:not-in-bundle:v1"
+    }
+  },
+  "type": "object"
+}

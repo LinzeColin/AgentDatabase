@@ -1,0 +1,19 @@
+{
+  "bundle_digest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "canonical_name": "fixture-skill",
+  "capability_codes": ["FIXTURE_CAPABILITY"],
+  "applicability_manifest_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "created_at": "2026-07-23T00:00:00.000000Z",
+  "input_contract_digest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+  "instance_uids": ["skinst_00000000000000000000000000"],
+  "lifecycle_status": "REGISTERED",
+  "owner_ref": "owner-primary",
+  "output_contract_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+  "protocol_revision": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1",
+  "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:skill-identity:v1",
+  "skill_identity_uid": "ski_00000000000000000000000000",
+  "srv_revision": "v0.0.0.3",
+  "summary": "Negative contextual digest fixture.",
+  "supersedes_identity_uid": null,
+  "updated_at": "2026-07-23T00:00:00.000000Z"
+}

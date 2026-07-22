@@ -1,0 +1,59 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:notification-policy:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "actual_recipient_mapping_repo_external": {
+      "const": true
+    },
+    "automatic": {
+      "const": true
+    },
+    "emergency_containment_precedes_notification": {
+      "const": true
+    },
+    "notification_only": {
+      "const": true
+    },
+    "owner_approval_required": {
+      "const": false
+    },
+    "owner_reply_required": {
+      "const": false
+    },
+    "planned_major_provider_sent_before_write": {
+      "const": true
+    },
+    "policy_id": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/urn_id"
+    },
+    "protocol_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/protocol_revision"
+    },
+    "recipient_ref": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/recipient_ref"
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:notification-policy:v1"
+    },
+    "send_failure_blocks_planned_write": {
+      "const": true
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "policy_id",
+    "recipient_ref",
+    "automatic",
+    "notification_only",
+    "owner_reply_required",
+    "owner_approval_required",
+    "planned_major_provider_sent_before_write",
+    "send_failure_blocks_planned_write",
+    "emergency_containment_precedes_notification",
+    "actual_recipient_mapping_repo_external"
+  ],
+  "title": "Notification policy",
+  "type": "object"
+}

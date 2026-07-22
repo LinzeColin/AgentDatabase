@@ -1,0 +1,13 @@
+{
+  "$defs": {
+    "rebound": {
+      "$id": "urn:linzecolin:agentdatabase:skillops:schema:rebound:v1",
+      "type": "string"
+    }
+  },
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:negative-nested:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {},
+  "type": "object"
+}

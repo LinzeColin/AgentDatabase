@@ -1,0 +1,22 @@
+{
+  "clock_basis": "UTC_WALL_CLOCK",
+  "git_history_hard_erasure_claimed": false,
+  "managed_raw_max_hours": 72,
+  "offline_breach_code": "OFFLINE_TTL_BREACH",
+  "offline_gap_receipt_required": true,
+  "offline_period_hard_guarantee_claimed": false,
+  "offline_resume_first_cycle_receipt_required": true,
+  "persistent_managed_raw_default_enabled": false,
+  "policy_id": "urn:linzecolin:agentdatabase:skillops:policy:retention:v2",
+  "protected_root_classes": [
+    "SKILL_SOURCE",
+    "RUN_SOURCE",
+    "LEGACY_DATA"
+  ],
+  "protected_root_delete_allowed": false,
+  "protocol_revision": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1",
+  "sanitized_public_active_days": 365,
+  "sanitized_public_full_fidelity": true,
+  "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:retention-policy:v2",
+  "ttl_enforcement_availability": "LOCAL_RUNTIME_AVAILABLE_ONLY"
+}

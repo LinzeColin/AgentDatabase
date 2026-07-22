@@ -1,0 +1,27 @@
+{
+  "files": [
+    {
+      "path": "python3/src/org/webpki/json/Canonicalize.py",
+      "sha256": "644508c81fa4afa50e8f6c7626a8cb6ddbd9515b39128c55484222ad336fad35"
+    },
+    {
+      "path": "python3/src/org/webpki/json/NumberToJson.py",
+      "sha256": "b8f78dab5bd7cf32cc620df39db18c8a55c777fa8acb69294d1a4d6702ee7e2a"
+    },
+    {
+      "path": "python3/src/org/webpki/json/LICENSE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "python3/src/org/webpki/json/LICENSE.PSF",
+      "sha256": "af99833f38f9849acc41e2ca1de50a3cb266e712713efa6f377bae4befb16482"
+    }
+  ],
+  "retrieved_date": "2026-07-23",
+  "rfc_reference": "RFC 8785 Appendix G",
+  "runtime_network_required": false,
+  "upstream_commit": "19d51d7fe467d4706a3ff08adf8a748f29fc21e0",
+  "upstream_repository": "https://github.com/cyberphone/json-canonicalization",
+  "vendored_files_modified": false,
+  "wrapper_path": "CodexSkills/governance/tools/canonical_json.py"
+}

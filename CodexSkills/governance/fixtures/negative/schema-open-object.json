@@ -1,0 +1,6 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:negative-open-object:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {},
+  "type": "object"
+}

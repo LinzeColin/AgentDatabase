@@ -1,0 +1,13 @@
+{
+  "binding_state": "UNKNOWN",
+  "skill_ref": {
+    "content_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "registry_snapshot_digest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "skill_identity_uid": "ski_00000000000000000000000000",
+    "skill_instance_uid": "skinst_00000000000000000000000000",
+    "skill_version_uid": "skv_00000000000000000000000000",
+    "tree_digest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "version_record_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+  },
+  "unknown_reason_code": "EXACT_BINDING_UNPROVEN"
+}

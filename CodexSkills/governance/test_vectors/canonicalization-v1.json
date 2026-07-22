@@ -1,0 +1,63 @@
+{
+  "cases": [
+    {
+      "expected_canonical_json": "{\"a\":2,\"b\":1}",
+      "expected_sha256": "d3626ac30a87e6f7a6428233b3c68299976865fa5508e4267c5415c76af7a772",
+      "id": "KEY_ORDER",
+      "input_json": "{\"b\":1,\"a\":2}"
+    },
+    {
+      "expected_canonical_json": "{\"literals\":[null,true,false],\"numbers\":[333333333.3333333,1e+30,4.5,0.002,1e-27],\"string\":\"€$\\u000f\\nA'B\\\"\\\\\\\\\\\"/\"}",
+      "expected_sha256": "2d5e01a318d0f0879ab568c4be289c8b1f64ef8921a53c6277d5e069978baacb",
+      "id": "RFC_PRIMITIVES",
+      "input_json": "{\"numbers\":[333333333.33333329,1E30,4.50,2e-3,0.000000000000000000000000001],\"string\":\"\\u20ac$\\u000F\\u000aA'\\u0042\\u0022\\u005c\\\\\\\"\\/\",\"literals\":[null,true,false]}"
+    },
+    {
+      "expected_canonical_json": "{\"\\r\":\"Carriage Return\",\"1\":\"One\",\"\":\"Control\",\"ö\":\"Latin Small Letter O With Diaeresis\",\"€\":\"Euro Sign\",\"😀\":\"Emoji: Grinning Face\",\"דּ\":\"Hebrew Letter Dalet With Dagesh\"}",
+      "expected_sha256": "5e321556d22018a9656991a9e94f77ec175fa193e52a2429d312f8419ec8b08c",
+      "id": "UTF16_PROPERTY_ORDER",
+      "input_json": "{\"€\":\"Euro Sign\",\"\\r\":\"Carriage Return\",\"דּ\":\"Hebrew Letter Dalet With Dagesh\",\"1\":\"One\",\"😀\":\"Emoji: Grinning Face\",\"\\u0080\":\"Control\",\"ö\":\"Latin Small Letter O With Diaeresis\"}"
+    },
+    {
+      "expected_canonical_json": "{\"é\":2,\"é\":1}",
+      "expected_sha256": "a7962fb10dc1255be368ece9c22b2256605921dc6d0a8c9409d3ee406bcb86e5",
+      "id": "NO_UNICODE_NORMALIZATION",
+      "input_json": "{\"é\":1,\"é\":2}"
+    }
+  ],
+  "negative_cases": [
+    {
+      "error_code": "DUPLICATE_KEY",
+      "id": "DUPLICATE_KEY",
+      "input_json": "{\"a\":1,\"a\":2}"
+    },
+    {
+      "error_code": "NON_FINITE_NUMBER",
+      "id": "NAN",
+      "input_json": "{\"a\":NaN}"
+    },
+    {
+      "error_code": "NON_FINITE_NUMBER",
+      "id": "INFINITY",
+      "input_json": "{\"a\":Infinity}"
+    },
+    {
+      "error_code": "LONE_SURROGATE",
+      "id": "LONE_SURROGATE",
+      "input_json": "{\"a\":\"\\ud800\"}"
+    }
+  ],
+  "self_exclusion": {
+    "expected_canonical_json": "{\"payload\":{\"a\":2,\"b\":1}}",
+    "expected_sha256": "8ab0d2eccdb8638ae072375e7370d39356cc8338675398397625fa56411569f1",
+    "input": {
+      "event_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+      "payload": {
+        "a": 2,
+        "b": 1
+      }
+    },
+    "pointer": "/event_digest"
+  },
+  "vector_set": "RFC8785_IJSON_V1"
+}

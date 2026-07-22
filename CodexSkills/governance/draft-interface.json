@@ -1,0 +1,436 @@
+{
+  "activation_forbidden": true,
+  "auto_private_schema_ids_excluded_from_shared_bundle": [
+    "urn:linzecolin:agentdatabase:skillops:schema:lock-state:v1",
+    "urn:linzecolin:agentdatabase:skillops:schema:public-queue-envelope:v2",
+    "urn:linzecolin:agentdatabase:skillops:schema:raw-segment:v2",
+    "urn:linzecolin:agentdatabase:skillops:schema:watermark:v2"
+  ],
+  "auto_public_schema_contracts_required_for_complete_bundle": [
+    {
+      "id": "urn:linzecolin:agentdatabase:skillops:schema:auto-receipt:v2",
+      "owner_plane": "AUTO",
+      "self_digest_pointer": "/receipt_digest"
+    },
+    {
+      "id": "urn:linzecolin:agentdatabase:skillops:schema:migration-receipt:v2",
+      "owner_plane": "AUTO",
+      "self_digest_pointer": "/receipt_digest"
+    },
+    {
+      "id": "urn:linzecolin:agentdatabase:skillops:schema:notification-receipt:v3",
+      "owner_plane": "AUTO",
+      "self_digest_pointer": "/receipt_digest"
+    },
+    {
+      "id": "urn:linzecolin:agentdatabase:skillops:schema:public-run-event:v2",
+      "owner_plane": "AUTO",
+      "self_digest_pointer": "/event_digest"
+    },
+    {
+      "id": "urn:linzecolin:agentdatabase:skillops:schema:publication-manifest:v1",
+      "owner_plane": "AUTO",
+      "self_digest_pointer": "/manifest_digest"
+    },
+    {
+      "id": "urn:linzecolin:agentdatabase:skillops:schema:retention-receipt:v2",
+      "owner_plane": "AUTO",
+      "self_digest_pointer": "/receipt_digest"
+    },
+    {
+      "id": "urn:linzecolin:agentdatabase:skillops:schema:source-coverage-receipt:v1",
+      "owner_plane": "AUTO",
+      "self_digest_pointer": "/receipt_digest"
+    },
+    {
+      "id": "urn:linzecolin:agentdatabase:skillops:schema:source-inventory:v1",
+      "owner_plane": "AUTO",
+      "self_digest_pointer": "/inventory_digest"
+    }
+  ],
+  "auto_public_schema_ids_required_for_complete_bundle": [
+    "urn:linzecolin:agentdatabase:skillops:schema:auto-receipt:v2",
+    "urn:linzecolin:agentdatabase:skillops:schema:migration-receipt:v2",
+    "urn:linzecolin:agentdatabase:skillops:schema:notification-receipt:v3",
+    "urn:linzecolin:agentdatabase:skillops:schema:public-run-event:v2",
+    "urn:linzecolin:agentdatabase:skillops:schema:publication-manifest:v1",
+    "urn:linzecolin:agentdatabase:skillops:schema:retention-receipt:v2",
+    "urn:linzecolin:agentdatabase:skillops:schema:source-coverage-receipt:v1",
+    "urn:linzecolin:agentdatabase:skillops:schema:source-inventory:v1"
+  ],
+  "binding_contract": {
+    "bound_eval_eligible_surfaces": [
+      "CODEX_AUTOMATION",
+      "CODEX_CLI"
+    ],
+    "bound_required_objects": [
+      "skill_ref",
+      "controlled_invocation"
+    ],
+    "coverage_only_states": [
+      "UNOBSERVED",
+      "OFFLINE_GAP"
+    ],
+    "published_event_mutation": "FORBIDDEN_SUPERSEDE_ONLY",
+    "run_event_states": [
+      "BOUND",
+      "UNKNOWN"
+    ],
+    "schema_id": "urn:linzecolin:agentdatabase:skillops:schema:skill-binding:v1",
+    "unknown_forbids": [
+      "skill_ref",
+      "controlled_invocation",
+      "eval_refs",
+      "promotion_refs"
+    ]
+  },
+  "canonicalization": {
+    "duplicate_keys": "REJECT",
+    "encoding": "UTF-8",
+    "input_profile": "I_JSON",
+    "scheme": "RFC8785_JCS",
+    "self_digest_exclusion": "EXACT_DECLARED_JSON_POINTER_ONLY",
+    "test_vectors_digest": "c9df5d2140ca4a448f97d836e591c636df3dec00f5db700687f9f61cbfeaa130",
+    "unicode_normalization": "NONE"
+  },
+  "compatibility": {
+    "accepted_predecessor_bundle_digests": [],
+    "v0.0.0.2": "AUDIT_BASELINE_NOT_CANONICALLY_PUBLISHABLE",
+    "v0.0.0.3_first_active": "EXACT_PROTOCOL_AND_BUNDLE_DIGEST_ONLY"
+  },
+  "complete_bundle_contract": {
+    "auto_private_schemas_included": false,
+    "extra_schema_ids_allowed": false,
+    "policy_count": 5,
+    "schema_count": 29
+  },
+  "consumer_first_contract": {
+    "legacy_sibling_schema": "OpenAIDatabase/config/evaluation/task_run.schema.json",
+    "must_land_before_canonical_publish": true,
+    "owner_plane": "MECHANISM",
+    "required_change": "ROUTE_SKILLS_RUNS_TO_PUBLIC_RUN_EVENT_V2_WITHOUT_CHANGING_TASK_RUN_SIBLINGS",
+    "target_path": "OpenAIDatabase/data/run_logs/skills_runs/",
+    "target_schema_id": "urn:linzecolin:agentdatabase:skillops:schema:public-run-event:v2"
+  },
+  "coverage_subject_contract": {
+    "RUN_SURFACE": {
+      "adapter_identity_and_observation_window_required": true,
+      "inventory_or_tree_digest_forbidden": true,
+      "observed_projected_quarantined_counts_required": true
+    },
+    "SKILL_SOURCE": {
+      "inventory_ref_required_when_covered": true,
+      "source_material_policy_required": true
+    }
+  },
+  "entrypoints": {
+    "builder": "CodexSkills/governance/tools/build_draft.py",
+    "canonicalization": "CodexSkills/governance/tools/canonical_json.py",
+    "schema_set_lint_subcommand": "lint-schema-set",
+    "validator": "CodexSkills/governance/tools/validate_mechanism.py"
+  },
+  "mechanism_policy_count": 5,
+  "mechanism_policy_entries": [
+    {
+      "compatibility": "EXACT_ONLY",
+      "id": "urn:linzecolin:agentdatabase:skillops:policy:notification:v1",
+      "owner_plane": "MECHANISM",
+      "policy_sha256": "c7a02d5588bd97e2f23bc83b0c08dbdea5c7eb7a9f7bc1cf485f920ce20ab122",
+      "relative_path": "CodexSkills/governance/policies/notification-policy.v1.json",
+      "schema_id": "urn:linzecolin:agentdatabase:skillops:schema:notification-policy:v1"
+    },
+    {
+      "compatibility": "EXACT_ONLY",
+      "id": "urn:linzecolin:agentdatabase:skillops:policy:public-value:v1",
+      "owner_plane": "MECHANISM",
+      "policy_sha256": "48cc58d6f4b7dcbe7a2de48894420e1909a8d6433069f872e799ac387d5939e7",
+      "relative_path": "CodexSkills/governance/policies/public-value-policy.v1.json",
+      "schema_id": "urn:linzecolin:agentdatabase:skillops:schema:public-value-policy:v1"
+    },
+    {
+      "compatibility": "EXACT_ONLY",
+      "id": "urn:linzecolin:agentdatabase:skillops:policy:retention:v2",
+      "owner_plane": "MECHANISM",
+      "policy_sha256": "4a1032900d4dd569abee3e97d5886a2f8975dddcaccb590de9451a8a28c5e0e4",
+      "relative_path": "CodexSkills/governance/policies/retention-policy.v2.json",
+      "schema_id": "urn:linzecolin:agentdatabase:skillops:schema:retention-policy:v2"
+    },
+    {
+      "compatibility": "EXACT_ONLY",
+      "id": "urn:linzecolin:agentdatabase:skillops:policy:source-material:v1",
+      "owner_plane": "MECHANISM",
+      "policy_sha256": "7d8453b2dd5b78ec777c915d6cf009eac92bb6ff25cad9f88a9da38fb84cc183",
+      "relative_path": "CodexSkills/governance/policies/source-material-policy.v1.json",
+      "schema_id": "urn:linzecolin:agentdatabase:skillops:schema:source-material-policy:v1"
+    },
+    {
+      "compatibility": "EXACT_ONLY",
+      "id": "urn:linzecolin:agentdatabase:skillops:policy:version:v2",
+      "owner_plane": "MECHANISM",
+      "policy_sha256": "d4e04d9e63b8005528b5d5d3db3daf645ea0ea60af4da91e217f73fb0196b6a9",
+      "relative_path": "CodexSkills/governance/policies/version-policy.v2.json",
+      "schema_id": "urn:linzecolin:agentdatabase:skillops:schema:version-policy:v2"
+    }
+  ],
+  "mechanism_schema_count": 21,
+  "mechanism_schema_entries": [
+    {
+      "compatibility": "EXACT_ONLY",
+      "id": "urn:linzecolin:agentdatabase:skillops:schema:artifact-envelope:v1",
+      "owner_plane": "MECHANISM",
+      "relative_path": "CodexSkills/governance/schemas/artifact-envelope.schema.json",
+      "schema_sha256": "6fe5a0402e3e3bb080e66f794a96fb357bb66298921318f716e8255a6952220c",
+      "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:artifact-envelope:v1",
+      "self_digest_pointer": "/envelope_digest"
+    },
+    {
+      "compatibility": "EXACT_ONLY",
+      "id": "urn:linzecolin:agentdatabase:skillops:schema:capability-graph:v1",
+      "owner_plane": "MECHANISM",
+      "relative_path": "CodexSkills/governance/schemas/capability-graph.schema.json",
+      "schema_sha256": "10c9aad6f01719fad4f730f2a9dd33f49ef65a1cb46dc876e1274cb1096008ff",
+      "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:capability-graph:v1",
+      "self_digest_pointer": "/graph_digest"
+    },
+    {
+      "compatibility": "EXACT_ONLY",
+      "id": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1",
+      "owner_plane": "MECHANISM",
+      "relative_path": "CodexSkills/governance/schemas/common-definitions.schema.json",
+      "schema_sha256": "53c71fa362290244114ef4b21d21e303a152c68d450fc1253a54d472aff40061",
+      "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1",
+      "self_digest_pointer": null
+    },
+    {
+      "compatibility": "EXACT_ONLY",
+      "id": "urn:linzecolin:agentdatabase:skillops:schema:eval-profile:v1",
+      "owner_plane": "MECHANISM",
+      "relative_path": "CodexSkills/governance/schemas/eval-profile.schema.json",
+      "schema_sha256": "ccf4668dbbd30b3d37ee39bd8212e935d327472407fa86ef2edc2b151cc049e8",
+      "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:eval-profile:v1",
+      "self_digest_pointer": null
+    },
+    {
+      "compatibility": "EXACT_ONLY",
+      "id": "urn:linzecolin:agentdatabase:skillops:schema:eval-run:v1",
+      "owner_plane": "MECHANISM",
+      "relative_path": "CodexSkills/governance/schemas/eval-run.schema.json",
+      "schema_sha256": "4480f46566d18bd2dd60f57e69d3f50fc8a5306f471a4cbbb0a1b298733699d2",
+      "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:eval-run:v1",
+      "self_digest_pointer": "/eval_run_digest"
+    },
+    {
+      "compatibility": "EXACT_ONLY",
+      "id": "urn:linzecolin:agentdatabase:skillops:schema:identity-lineage-event:v1",
+      "owner_plane": "MECHANISM",
+      "relative_path": "CodexSkills/governance/schemas/identity-lineage-event.schema.json",
+      "schema_sha256": "7994bcc9f4f4872417def8b535207997346f4300ca5b26732bf8ac945cbd90e2",
+      "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:identity-lineage-event:v1",
+      "self_digest_pointer": "/event_digest"
+    },
+    {
+      "compatibility": "EXACT_ONLY",
+      "id": "urn:linzecolin:agentdatabase:skillops:schema:iteration-transition:v1",
+      "owner_plane": "MECHANISM",
+      "relative_path": "CodexSkills/governance/schemas/iteration-transition.schema.json",
+      "schema_sha256": "36672080981295fbad45477ad73dba7f06cc6b8efaa31ba9b1d6922c82697691",
+      "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:iteration-transition:v1",
+      "self_digest_pointer": "/transition_digest"
+    },
+    {
+      "compatibility": "EXACT_ONLY",
+      "id": "urn:linzecolin:agentdatabase:skillops:schema:notification-policy:v1",
+      "owner_plane": "MECHANISM",
+      "relative_path": "CodexSkills/governance/schemas/notification-policy.schema.json",
+      "schema_sha256": "79c1a2f12a3474580fb1234b4a8a2f609125a9c0e72aacb32f85a882b9b6a19e",
+      "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:notification-policy:v1",
+      "self_digest_pointer": null
+    },
+    {
+      "compatibility": "EXACT_ONLY",
+      "id": "urn:linzecolin:agentdatabase:skillops:schema:promotion-decision:v1",
+      "owner_plane": "MECHANISM",
+      "relative_path": "CodexSkills/governance/schemas/promotion-decision.schema.json",
+      "schema_sha256": "4da0edfd58b8b5aa3c156da7fb0dcf421df5e90d65c5d0a993ac2415e24dc011",
+      "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:promotion-decision:v1",
+      "self_digest_pointer": "/decision_digest"
+    },
+    {
+      "compatibility": "EXACT_ONLY",
+      "id": "urn:linzecolin:agentdatabase:skillops:schema:promotion-evidence-bundle:v1",
+      "owner_plane": "MECHANISM",
+      "relative_path": "CodexSkills/governance/schemas/promotion-evidence-bundle.schema.json",
+      "schema_sha256": "96b67f805b0785602014d5bd20703c773506759ff59a80615548cc67fe6cf19e",
+      "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:promotion-evidence-bundle:v1",
+      "self_digest_pointer": "/evidence_bundle_digest"
+    },
+    {
+      "compatibility": "EXACT_ONLY",
+      "id": "urn:linzecolin:agentdatabase:skillops:schema:public-value-policy:v1",
+      "owner_plane": "MECHANISM",
+      "relative_path": "CodexSkills/governance/schemas/public-value-policy.schema.json",
+      "schema_sha256": "9d79b6a8e054ce127dbb4d2904ed31fc4b0fd354e8c4e78988b8ac03e00ff53b",
+      "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:public-value-policy:v1",
+      "self_digest_pointer": null
+    },
+    {
+      "compatibility": "EXACT_ONLY",
+      "id": "urn:linzecolin:agentdatabase:skillops:schema:retention-policy:v2",
+      "owner_plane": "MECHANISM",
+      "relative_path": "CodexSkills/governance/schemas/retention-policy.schema.json",
+      "schema_sha256": "3b3eef9496b072af4b98e2f9039ff58d31b043ba00aace52147b66e65916cbbc",
+      "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:retention-policy:v2",
+      "self_digest_pointer": null
+    },
+    {
+      "compatibility": "EXACT_ONLY",
+      "id": "urn:linzecolin:agentdatabase:skillops:schema:schema-bundle-manifest:v1",
+      "owner_plane": "MECHANISM",
+      "relative_path": "CodexSkills/governance/schemas/schema-bundle-manifest.schema.json",
+      "schema_sha256": "903a1f1270815741effb2626d7ca5c6ce8887412e8148c346c0142239d30ff66",
+      "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:schema-bundle-manifest:v1",
+      "self_digest_pointer": "/bundle_digest"
+    },
+    {
+      "compatibility": "EXACT_ONLY",
+      "id": "urn:linzecolin:agentdatabase:skillops:schema:scorecard:v1",
+      "owner_plane": "MECHANISM",
+      "relative_path": "CodexSkills/governance/schemas/scorecard.schema.json",
+      "schema_sha256": "6d47e264cf371b8cdf9e0679bc27c725b8fc37457b895c16a4eed639ac4f6f73",
+      "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:scorecard:v1",
+      "self_digest_pointer": "/scorecard_digest"
+    },
+    {
+      "compatibility": "EXACT_ONLY",
+      "id": "urn:linzecolin:agentdatabase:skillops:schema:skill-binding:v1",
+      "owner_plane": "MECHANISM",
+      "relative_path": "CodexSkills/governance/schemas/skill-binding.schema.json",
+      "schema_sha256": "5a7899b6620f3ec337e8d47ede06d18330e5f556dc270969850ca28de2e40f0f",
+      "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:skill-binding:v1",
+      "self_digest_pointer": null
+    },
+    {
+      "compatibility": "EXACT_ONLY",
+      "id": "urn:linzecolin:agentdatabase:skillops:schema:skill-identity:v1",
+      "owner_plane": "MECHANISM",
+      "relative_path": "CodexSkills/governance/schemas/skill-identity.schema.json",
+      "schema_sha256": "7fa735f4f64d72eef899258738ebcc10d08d5f39d1d0e3a7893230c91ee4872a",
+      "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:skill-identity:v1",
+      "self_digest_pointer": null
+    },
+    {
+      "compatibility": "EXACT_ONLY",
+      "id": "urn:linzecolin:agentdatabase:skillops:schema:skill-instance:v1",
+      "owner_plane": "MECHANISM",
+      "relative_path": "CodexSkills/governance/schemas/skill-instance.schema.json",
+      "schema_sha256": "60ec1ee8ecc23cb051eff179618399f941cb1f1ca7230ae7354ba3f7bc84f68e",
+      "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:skill-instance:v1",
+      "self_digest_pointer": null
+    },
+    {
+      "compatibility": "EXACT_ONLY",
+      "id": "urn:linzecolin:agentdatabase:skillops:schema:skill-passport:v1",
+      "owner_plane": "MECHANISM",
+      "relative_path": "CodexSkills/governance/schemas/skill-passport.schema.json",
+      "schema_sha256": "98b33665c79008d9b094f6a9bd5bff37c8d9dca26c314e06173323e132476e20",
+      "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:skill-passport:v1",
+      "self_digest_pointer": "/passport_digest"
+    },
+    {
+      "compatibility": "EXACT_ONLY",
+      "id": "urn:linzecolin:agentdatabase:skillops:schema:skill-version:v1",
+      "owner_plane": "MECHANISM",
+      "relative_path": "CodexSkills/governance/schemas/skill-version.schema.json",
+      "schema_sha256": "87fb0529724134753fcb9ffb49e40f514aea6355b1eb1b1414fd1252a0a0619a",
+      "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:skill-version:v1",
+      "self_digest_pointer": null
+    },
+    {
+      "compatibility": "EXACT_ONLY",
+      "id": "urn:linzecolin:agentdatabase:skillops:schema:source-material-policy:v1",
+      "owner_plane": "MECHANISM",
+      "relative_path": "CodexSkills/governance/schemas/source-material-policy.schema.json",
+      "schema_sha256": "e45ae5e9db382e1c5201d0e1b2eb7c060828df5f87cce763c03bd278ba456721",
+      "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:source-material-policy:v1",
+      "self_digest_pointer": null
+    },
+    {
+      "compatibility": "EXACT_ONLY",
+      "id": "urn:linzecolin:agentdatabase:skillops:schema:version-policy:v2",
+      "owner_plane": "MECHANISM",
+      "relative_path": "CodexSkills/governance/schemas/version-policy.schema.json",
+      "schema_sha256": "1d45422976f7a16a07cd6d91d83d37a26e7ac0dfcd3baeb1ca90b16cc11b87ff",
+      "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:version-policy:v2",
+      "self_digest_pointer": null
+    }
+  ],
+  "next_phase": "AUTO_A1A",
+  "protocol_revision": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1",
+  "run_surface_baseline_contract": {
+    "action": "BASELINE_ESTABLISHED_NO_HISTORICAL_BACKFILL",
+    "coverage_state": "UNKNOWN",
+    "historical_public_run_events": 0,
+    "input_count": 577,
+    "mapped_breakdown": [
+      {
+        "actor_role": "AUTOMATION",
+        "count": 46,
+        "surface_class": "CODEX_AUTOMATION"
+      },
+      {
+        "actor_role": "CLI",
+        "count": 8,
+        "surface_class": "CODEX_CLI"
+      },
+      {
+        "actor_role": "SUBAGENT",
+        "count": 329,
+        "surface_class": "CODEX_DESKTOP"
+      },
+      {
+        "actor_role": "USER",
+        "count": 176,
+        "surface_class": "CODEX_DESKTOP"
+      }
+    ],
+    "mapped_count": 559,
+    "policy_excluded_count": 0,
+    "post_cutover_windows_only": true,
+    "private_exact_cursor_required": true,
+    "public_safe_watermark_ref_required": true,
+    "quarantined_count": 0,
+    "unmapped_count": 18,
+    "unmapped_reasons": [
+      {
+        "count": 18,
+        "reason_code": "LEGACY_THREAD_SOURCE_MISSING"
+      }
+    ]
+  },
+  "status": "DRAFT_NON_ACTIVE",
+  "target_srv": "v0.0.0.3",
+  "task_pack_revision": "v0.0.0.2",
+  "trust_bootstrap": {
+    "canonical_manifest_path": "CodexSkills/governance/bundles/schema-bundle-manifest.v1.json",
+    "missing_external_state": "FAIL_CLOSED_REBOOTSTRAP_REQUIRED",
+    "modes": [
+      "CANDIDATE",
+      "ACTIVE"
+    ],
+    "repo_self_report_is_trusted": false,
+    "tuple_fields": [
+      "verified_git_object_id",
+      "expected_bundle_digest",
+      "canonical_manifest_path",
+      "mode"
+    ]
+  },
+  "validator_runtime": {
+    "dependency_install_during_run": "FORBIDDEN",
+    "jsonschema": ">=4.25.1,<5",
+    "network_reference_resolution": "FORBIDDEN",
+    "python": ">=3.9,<3.14",
+    "referencing": ">=0.36.2,<1",
+    "unknown_schema_id": "FAIL_CLOSED"
+  }
+}

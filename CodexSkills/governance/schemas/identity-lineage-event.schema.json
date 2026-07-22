@@ -1,0 +1,85 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:identity-lineage-event:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "actor": {
+      "const": "SKILLOPS_CONTROLLER"
+    },
+    "bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "event_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "event_type": {
+      "enum": [
+        "ALIAS_ADDED",
+        "MERGED",
+        "SPLIT",
+        "SUPERSEDED",
+        "QUARANTINED"
+      ]
+    },
+    "event_uid": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/event_uid"
+    },
+    "evidence_digests": {
+      "items": {
+        "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+      },
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "occurred_at": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+    },
+    "protocol_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/protocol_revision"
+    },
+    "reason_codes": {
+      "items": {
+        "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/enum_code"
+      },
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:identity-lineage-event:v1"
+    },
+    "source_identity_uids": {
+      "items": {
+        "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/skill_identity_uid"
+      },
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "target_identity_uids": {
+      "items": {
+        "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/skill_identity_uid"
+      },
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "bundle_digest",
+    "event_uid",
+    "event_type",
+    "source_identity_uids",
+    "target_identity_uids",
+    "reason_codes",
+    "evidence_digests",
+    "actor",
+    "occurred_at",
+    "event_digest"
+  ],
+  "title": "Identity lineage event",
+  "type": "object"
+}

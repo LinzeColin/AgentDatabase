@@ -1,0 +1,290 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:skill-passport:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "abstain_when_codes": {
+      "items": {
+        "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/enum_code"
+      },
+      "minItems": 0,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "active_skill_version_uid": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/skill_version_uid"
+    },
+    "applicability_codes": {
+      "items": {
+        "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/enum_code"
+      },
+      "minItems": 0,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "canonical_name": {
+      "maxLength": 128,
+      "minLength": 1,
+      "type": "string"
+    },
+    "champion_model_snapshot_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "confidence_bps": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/basis_points"
+    },
+    "coverage_bps": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/basis_points"
+    },
+    "do_not_use_when_codes": {
+      "items": {
+        "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/enum_code"
+      },
+      "minItems": 0,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "freshness_state": {
+      "enum": [
+        "FRESH",
+        "STALE",
+        "UNKNOWN"
+      ]
+    },
+    "freshness_valid_until": {
+      "anyOf": [
+        {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/calendar_date"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "generated_at": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+    },
+    "known_failure_mode_codes": {
+      "items": {
+        "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/enum_code"
+      },
+      "minItems": 0,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "last_evaluated_at": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+    },
+    "lifecycle_status": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/lifecycle_status"
+    },
+    "negative_capability_codes": {
+      "items": {
+        "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/enum_code"
+      },
+      "minItems": 0,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "owner_ref": {
+      "pattern": "^[a-z][a-z0-9-]{2,63}$",
+      "type": "string"
+    },
+    "passport_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "passport_uid": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/passport_uid"
+    },
+    "permission_summary_codes": {
+      "items": {
+        "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/enum_code"
+      },
+      "minItems": 0,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "permissions": {
+      "additionalProperties": false,
+      "properties": {
+        "data_class_codes": {
+          "items": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/enum_code"
+          },
+          "minItems": 0,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "external_side_effect": {
+          "enum": [
+            "NONE",
+            "DECLARED",
+            "UNKNOWN"
+          ]
+        },
+        "filesystem_write": {
+          "enum": [
+            "NONE",
+            "WORKSPACE_ONLY",
+            "DECLARED_EXTERNAL",
+            "UNKNOWN"
+          ]
+        },
+        "network": {
+          "enum": [
+            "NONE",
+            "DECLARED",
+            "UNKNOWN"
+          ]
+        },
+        "tool_codes": {
+          "items": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/enum_code"
+          },
+          "minItems": 0,
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "tool_codes",
+        "network",
+        "filesystem_write",
+        "external_side_effect",
+        "data_class_codes"
+      ],
+      "type": "object"
+    },
+    "protocol_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/protocol_revision"
+    },
+    "provenance": {
+      "additionalProperties": false,
+      "properties": {
+        "content_digest": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+        },
+        "license_state": {
+          "enum": [
+            "KNOWN_ALLOWED",
+            "UNKNOWN",
+            "DENIED"
+          ]
+        },
+        "source_class": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/source_class"
+        },
+        "source_relative_path": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/repo_relative_posix_path"
+        },
+        "tree_digest": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+        },
+        "trust_tier": {
+          "enum": [
+            "LOCAL_TRUSTED",
+            "PINNED_UPSTREAM",
+            "UNVERIFIED",
+            "QUARANTINED"
+          ]
+        }
+      },
+      "required": [
+        "source_class",
+        "source_relative_path",
+        "content_digest",
+        "tree_digest",
+        "license_state",
+        "trust_tier"
+      ],
+      "type": "object"
+    },
+    "risk_tier": {
+      "enum": [
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "CRITICAL"
+      ]
+    },
+    "rollback_target_version_uid": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/skill_version_uid"
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:skill-passport:v1"
+    },
+    "scorecard_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "scorecard_uid": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/scorecard_uid"
+    },
+    "skill_identity_uid": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/skill_identity_uid"
+    },
+    "source_fact_digests": {
+      "items": {
+        "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+      },
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "summary": {
+      "maxLength": 1000,
+      "minLength": 1,
+      "type": "string"
+    },
+    "use_when_codes": {
+      "items": {
+        "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/enum_code"
+      },
+      "minItems": 0,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "weighted_score_bps": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/basis_points"
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "bundle_digest",
+    "passport_uid",
+    "skill_identity_uid",
+    "active_skill_version_uid",
+    "canonical_name",
+    "summary",
+    "owner_ref",
+    "lifecycle_status",
+    "provenance",
+    "permissions",
+    "applicability_codes",
+    "negative_capability_codes",
+    "use_when_codes",
+    "do_not_use_when_codes",
+    "abstain_when_codes",
+    "risk_tier",
+    "permission_summary_codes",
+    "scorecard_uid",
+    "scorecard_digest",
+    "weighted_score_bps",
+    "confidence_bps",
+    "coverage_bps",
+    "freshness_state",
+    "freshness_valid_until",
+    "last_evaluated_at",
+    "champion_model_snapshot_digest",
+    "known_failure_mode_codes",
+    "rollback_target_version_uid",
+    "source_fact_digests",
+    "generated_at",
+    "passport_digest"
+  ],
+  "title": "Skill passport",
+  "type": "object"
+}

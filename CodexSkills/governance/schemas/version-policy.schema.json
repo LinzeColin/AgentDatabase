@@ -1,0 +1,107 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:version-policy:v2",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "daily_schedule_local": {
+      "const": "04:15"
+    },
+    "daily_transaction_uid_separate": {
+      "const": true
+    },
+    "first_active_requires_exact_bundle_digest": {
+      "const": true
+    },
+    "impact_levels": {
+      "items": {
+        "enum": [
+          "PATCH",
+          "MINOR",
+          "MAJOR"
+        ]
+      },
+      "minItems": 3,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "late_start_rejected": {
+      "const": false
+    },
+    "major_trigger_codes": {
+      "items": {
+        "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/enum_code"
+      },
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "manual_uses_same_orchestrator": {
+      "const": true
+    },
+    "policy_id": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/urn_id"
+    },
+    "protocol_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/protocol_revision"
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:version-policy:v2"
+    },
+    "srv_last_component_bounded": {
+      "const": false
+    },
+    "srv_pattern": {
+      "const": "^v0\\.0\\.0\\.[1-9][0-9]*$"
+    },
+    "srv_release_scopes": {
+      "items": {
+        "enum": [
+          "MECHANISM",
+          "SCHEMA",
+          "POLICY",
+          "REGISTRY"
+        ]
+      },
+      "minItems": 4,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "srv_reuse_allowed": {
+      "const": false
+    },
+    "srv_update_mode": {
+      "const": "GLOBAL_ATOMIC_INCREMENT"
+    },
+    "sunday_forced_full": {
+      "const": true
+    },
+    "timezone": {
+      "const": "Australia/Sydney"
+    },
+    "transaction_uid_kind": {
+      "const": "AUTO_TRANSACTION_UID"
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "policy_id",
+    "srv_pattern",
+    "srv_release_scopes",
+    "srv_update_mode",
+    "srv_reuse_allowed",
+    "srv_last_component_bounded",
+    "impact_levels",
+    "major_trigger_codes",
+    "daily_transaction_uid_separate",
+    "transaction_uid_kind",
+    "timezone",
+    "daily_schedule_local",
+    "sunday_forced_full",
+    "late_start_rejected",
+    "manual_uses_same_orchestrator",
+    "first_active_requires_exact_bundle_digest"
+  ],
+  "title": "Version and schedule policy",
+  "type": "object"
+}

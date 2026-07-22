@@ -1,0 +1,139 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:capability-graph:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "edge_count": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "edges": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "confidence_bps": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/basis_points"
+          },
+          "edge_type": {
+            "enum": [
+              "PROVIDES",
+              "DEPENDS_ON",
+              "SUBSTITUTES",
+              "OVERLAPS",
+              "CONFLICTS_WITH",
+              "CALLS",
+              "REQUIRES_TOOL",
+              "READS_DATA_CLASS",
+              "PRODUCES",
+              "CONSUMES",
+              "WRITES_TO"
+            ]
+          },
+          "evidence_digest": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+          },
+          "from_uid": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/typed_uid"
+          },
+          "to_uid": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/typed_uid"
+          }
+        },
+        "required": [
+          "from_uid",
+          "to_uid",
+          "edge_type",
+          "evidence_digest",
+          "confidence_bps"
+        ],
+        "type": "object"
+      },
+      "minItems": 0,
+      "type": "array"
+    },
+    "generated_at": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+    },
+    "graph_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "graph_uid": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/graph_uid"
+    },
+    "node_count": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "nodes": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "label_code": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/enum_code"
+          },
+          "lifecycle_status": {
+            "anyOf": [
+              {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/lifecycle_status"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "node_type": {
+            "enum": [
+              "SKILL_IDENTITY",
+              "SKILL_INSTANCE",
+              "SKILL_VERSION",
+              "CAPABILITY",
+              "TOOL",
+              "DATA_CLASS",
+              "WRITE_SCOPE",
+              "MODEL",
+              "DATASET",
+              "EVALUATOR"
+            ]
+          },
+          "uid": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/typed_uid"
+          }
+        },
+        "required": [
+          "uid",
+          "node_type",
+          "label_code",
+          "lifecycle_status"
+        ],
+        "type": "object"
+      },
+      "minItems": 0,
+      "type": "array"
+    },
+    "protocol_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/protocol_revision"
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:capability-graph:v1"
+    },
+    "source_snapshot_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "bundle_digest",
+    "graph_uid",
+    "source_snapshot_digest",
+    "nodes",
+    "edges",
+    "node_count",
+    "edge_count",
+    "generated_at",
+    "graph_digest"
+  ],
+  "title": "Capability graph",
+  "type": "object"
+}

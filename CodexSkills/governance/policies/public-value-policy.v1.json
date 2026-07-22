@@ -1,0 +1,143 @@
+{
+  "allowed_high_entropy_field_names": [
+    "abstention_digest",
+    "accepted_predecessor_bundle_digests",
+    "applicability_manifest_digest",
+    "artifact_digest",
+    "artifact_schema_digest",
+    "baseline_model_snapshot_digest",
+    "bundle_digest",
+    "candidate_model_snapshot_digest",
+    "canary_evidence_digest",
+    "content_digest",
+    "decision_digest",
+    "champion_model_snapshot_digest",
+    "conflict_digest",
+    "controlled_invocation_envelope_digest",
+    "critical_incident_evidence_digests",
+    "dataset_manifest_digests",
+    "confirmed_regression_manifest_digests",
+    "dependency_manifest_digest",
+    "deterministic_check_manifest_digests",
+    "envelope_digest",
+    "environment_fingerprint_digest",
+    "evaluator_manifest_digests",
+    "eval_profile_digest",
+    "eval_run_digest",
+    "event_bundle_digest",
+    "event_digest",
+    "evidence_bundle_digest",
+    "evidence_digest",
+    "evidence_digests",
+    "experiment_matrix_digest",
+    "false_trigger_digest",
+    "graph_digest",
+    "human_calibration_manifest_digest",
+    "input_contract_digest",
+    "inventory_digest",
+    "invocation_envelope_digest",
+    "manifest_digest",
+    "judge_rubric_digest",
+    "metadata_digest",
+    "missed_trigger_digest",
+    "model_snapshot_digest",
+    "notification_receipt_digest",
+    "optimizer_evaluator_isolation_digest",
+    "output_contract_digest",
+    "passport_digest",
+    "permission_manifest_digest",
+    "policy_sha256",
+    "policy_snapshot_digest",
+    "receipt_digest",
+    "registry_snapshot_digest",
+    "positive_digest",
+    "resolved_digest",
+    "result_artifact_digests",
+    "rubric_digest",
+    "schema_sha256",
+    "scorecard_digest",
+    "sealed_access_audit_digest",
+    "sealed_holdout_manifest_digest",
+    "shadow_evidence_digest",
+    "skill_version_record_digest",
+    "source_fingerprint_digest",
+    "source_fact_digests",
+    "source_material_policy_digest",
+    "source_snapshot_digest",
+    "test_vectors_digest",
+    "tool_manifest_digest",
+    "transition_digest",
+    "tree_digest",
+    "version_record_digest"
+  ],
+  "detectors": [
+    {
+      "action": "BLOCK",
+      "code": "PUBLIC_EMAIL_BLOCK",
+      "kind": "EMAIL"
+    },
+    {
+      "action": "BLOCK",
+      "code": "PUBLIC_PHONE_NUMBER_BLOCK",
+      "kind": "PHONE_NUMBER"
+    },
+    {
+      "action": "BLOCK",
+      "code": "PUBLIC_IP_ADDRESS_BLOCK",
+      "kind": "IP_ADDRESS"
+    },
+    {
+      "action": "BLOCK",
+      "code": "PUBLIC_ABSOLUTE_PATH_BLOCK",
+      "kind": "ABSOLUTE_PATH"
+    },
+    {
+      "action": "BLOCK",
+      "code": "PUBLIC_SECRET_TOKEN_BLOCK",
+      "kind": "SECRET_TOKEN"
+    },
+    {
+      "action": "BLOCK",
+      "code": "PUBLIC_PRIVATE_KEY_BLOCK",
+      "kind": "PRIVATE_KEY"
+    },
+    {
+      "action": "BLOCK",
+      "code": "PUBLIC_URI_CREDENTIAL_BLOCK",
+      "kind": "URI_CREDENTIAL"
+    },
+    {
+      "action": "BLOCK",
+      "code": "PUBLIC_HIGH_ENTROPY_FREE_STRING_BLOCK",
+      "kind": "HIGH_ENTROPY_FREE_STRING"
+    }
+  ],
+  "forbidden_field_names": [
+    "absolute_path",
+    "address",
+    "command",
+    "credential",
+    "email",
+    "full_name",
+    "ip_address",
+    "output",
+    "password",
+    "phone_number",
+    "prompt",
+    "raw",
+    "reasoning",
+    "secret",
+    "stderr",
+    "stdout",
+    "token",
+    "tool_arguments"
+  ],
+  "max_public_string_length": 4096,
+  "policy_id": "urn:linzecolin:agentdatabase:skillops:policy:public-value:v1",
+  "protocol_revision": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1",
+  "recipient_rule": {
+    "actual_recipient_repo_external": true,
+    "public_field": "recipient_ref"
+  },
+  "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:public-value-policy:v1"
+}

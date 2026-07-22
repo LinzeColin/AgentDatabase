@@ -1,0 +1,86 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:retention-policy:v2",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "clock_basis": {
+      "const": "UTC_WALL_CLOCK"
+    },
+    "git_history_hard_erasure_claimed": {
+      "const": false
+    },
+    "managed_raw_max_hours": {
+      "const": 72,
+      "type": "integer"
+    },
+    "offline_breach_code": {
+      "const": "OFFLINE_TTL_BREACH"
+    },
+    "offline_gap_receipt_required": {
+      "const": true
+    },
+    "offline_period_hard_guarantee_claimed": {
+      "const": false
+    },
+    "offline_resume_first_cycle_receipt_required": {
+      "const": true
+    },
+    "persistent_managed_raw_default_enabled": {
+      "const": false
+    },
+    "policy_id": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/urn_id"
+    },
+    "protected_root_classes": {
+      "items": {
+        "enum": [
+          "SKILL_SOURCE",
+          "RUN_SOURCE",
+          "LEGACY_DATA"
+        ]
+      },
+      "minItems": 3,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "protected_root_delete_allowed": {
+      "const": false
+    },
+    "protocol_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/protocol_revision"
+    },
+    "sanitized_public_active_days": {
+      "const": 365,
+      "type": "integer"
+    },
+    "sanitized_public_full_fidelity": {
+      "const": true
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:retention-policy:v2"
+    },
+    "ttl_enforcement_availability": {
+      "const": "LOCAL_RUNTIME_AVAILABLE_ONLY"
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "policy_id",
+    "clock_basis",
+    "persistent_managed_raw_default_enabled",
+    "managed_raw_max_hours",
+    "ttl_enforcement_availability",
+    "offline_period_hard_guarantee_claimed",
+    "offline_resume_first_cycle_receipt_required",
+    "offline_gap_receipt_required",
+    "offline_breach_code",
+    "protected_root_classes",
+    "protected_root_delete_allowed",
+    "sanitized_public_active_days",
+    "sanitized_public_full_fidelity",
+    "git_history_hard_erasure_claimed"
+  ],
+  "title": "Retention policy",
+  "type": "object"
+}

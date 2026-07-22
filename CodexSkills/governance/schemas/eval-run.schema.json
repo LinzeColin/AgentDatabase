@@ -1,0 +1,186 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:eval-run:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "binding_state": {
+      "const": "BOUND"
+    },
+    "bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "controlled_invocation_envelope_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "dataset_manifest_digests": {
+      "items": {
+        "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+      },
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "environment_fingerprint_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "eval_profile_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "eval_profile_uid": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/eval_profile_uid"
+    },
+    "eval_run_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "eval_run_uid": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/eval_run_uid"
+    },
+    "evaluator_manifest_digests": {
+      "items": {
+        "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+      },
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "finished_at": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+    },
+    "model_snapshot": {
+      "additionalProperties": false,
+      "properties": {
+        "observed_at": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+        },
+        "provider_code": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/enum_code"
+        },
+        "requested_alias": {
+          "anyOf": [
+            {
+              "maxLength": 120,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "resolved_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "provider_code",
+        "requested_alias",
+        "resolved_id",
+        "observed_at"
+      ],
+      "type": "object"
+    },
+    "policy_snapshot_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "protocol_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/protocol_revision"
+    },
+    "result_artifact_digests": {
+      "items": {
+        "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+      },
+      "minItems": 0,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "rubric_digest": {
+      "anyOf": [
+        {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "run_event_refs": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "event_bundle_digest": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+          },
+          "event_digest": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+          },
+          "run_uid": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/run_uid"
+          }
+        },
+        "required": [
+          "run_uid",
+          "event_digest",
+          "event_bundle_digest"
+        ],
+        "type": "object"
+      },
+      "minItems": 1,
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:eval-run:v1"
+    },
+    "sealed_access_audit_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "skill_version_record_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "skill_version_uid": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/skill_version_uid"
+    },
+    "started_at": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+    },
+    "status": {
+      "enum": [
+        "PASS",
+        "FAIL",
+        "INCOMPLETE",
+        "QUARANTINED"
+      ]
+    },
+    "tool_manifest_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "bundle_digest",
+    "eval_run_uid",
+    "skill_version_uid",
+    "eval_profile_uid",
+    "skill_version_record_digest",
+    "eval_profile_digest",
+    "dataset_manifest_digests",
+    "evaluator_manifest_digests",
+    "rubric_digest",
+    "sealed_access_audit_digest",
+    "tool_manifest_digest",
+    "policy_snapshot_digest",
+    "binding_state",
+    "controlled_invocation_envelope_digest",
+    "run_event_refs",
+    "model_snapshot",
+    "environment_fingerprint_digest",
+    "started_at",
+    "finished_at",
+    "status",
+    "result_artifact_digests",
+    "eval_run_digest"
+  ],
+  "title": "Evaluation run",
+  "type": "object"
+}

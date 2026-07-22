@@ -1,0 +1,37 @@
+{
+  "daily_schedule_local": "04:15",
+  "daily_transaction_uid_separate": true,
+  "first_active_requires_exact_bundle_digest": true,
+  "impact_levels": [
+    "PATCH",
+    "MINOR",
+    "MAJOR"
+  ],
+  "late_start_rejected": false,
+  "major_trigger_codes": [
+    "ACTIVE_BUNDLE_CHANGE",
+    "CHAMPION_TRANSITION",
+    "MODEL_PROVIDER_CHANGE",
+    "NOTIFICATION_POLICY_CHANGE",
+    "RETENTION_POLICY_CHANGE",
+    "SCHEMA_BREAKING_CHANGE",
+    "SOURCE_LAYOUT_CHANGE"
+  ],
+  "manual_uses_same_orchestrator": true,
+  "policy_id": "urn:linzecolin:agentdatabase:skillops:policy:version:v2",
+  "protocol_revision": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1",
+  "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:version-policy:v2",
+  "srv_last_component_bounded": false,
+  "srv_pattern": "^v0\\.0\\.0\\.[1-9][0-9]*$",
+  "srv_release_scopes": [
+    "MECHANISM",
+    "SCHEMA",
+    "POLICY",
+    "REGISTRY"
+  ],
+  "srv_reuse_allowed": false,
+  "srv_update_mode": "GLOBAL_ATOMIC_INCREMENT",
+  "sunday_forced_full": true,
+  "timezone": "Australia/Sydney",
+  "transaction_uid_kind": "AUTO_TRANSACTION_UID"
+}

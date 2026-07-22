@@ -1,0 +1,21 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:negative-conditional:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "hidden": {"const": true}
+        }
+      },
+      "then": {
+        "required": ["hidden"]
+      }
+    }
+  ],
+  "properties": {
+    "state": {"type": "string"}
+  },
+  "type": "object"
+}

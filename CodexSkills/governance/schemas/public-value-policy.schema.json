@@ -1,0 +1,98 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:public-value-policy:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "allowed_high_entropy_field_names": {
+      "items": {
+        "pattern": "^[a-z][a-z0-9_]*$",
+        "type": "string"
+      },
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "detectors": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "action": {
+            "const": "BLOCK"
+          },
+          "code": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/enum_code"
+          },
+          "kind": {
+            "enum": [
+              "EMAIL",
+              "PHONE_NUMBER",
+              "IP_ADDRESS",
+              "ABSOLUTE_PATH",
+              "SECRET_TOKEN",
+              "PRIVATE_KEY",
+              "URI_CREDENTIAL",
+              "HIGH_ENTROPY_FREE_STRING"
+            ]
+          }
+        },
+        "required": [
+          "code",
+          "kind",
+          "action"
+        ],
+        "type": "object"
+      },
+      "minItems": 1,
+      "type": "array"
+    },
+    "forbidden_field_names": {
+      "items": {
+        "pattern": "^[a-z][a-z0-9_]*$",
+        "type": "string"
+      },
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "max_public_string_length": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/positive_count"
+    },
+    "policy_id": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/urn_id"
+    },
+    "protocol_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/protocol_revision"
+    },
+    "recipient_rule": {
+      "additionalProperties": false,
+      "properties": {
+        "actual_recipient_repo_external": {
+          "const": true
+        },
+        "public_field": {
+          "const": "recipient_ref"
+        }
+      },
+      "required": [
+        "public_field",
+        "actual_recipient_repo_external"
+      ],
+      "type": "object"
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:public-value-policy:v1"
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "policy_id",
+    "max_public_string_length",
+    "forbidden_field_names",
+    "allowed_high_entropy_field_names",
+    "detectors",
+    "recipient_rule"
+  ],
+  "title": "Public value policy",
+  "type": "object"
+}

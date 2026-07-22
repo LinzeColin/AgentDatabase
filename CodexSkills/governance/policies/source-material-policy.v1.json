@@ -1,0 +1,131 @@
+{
+  "deletion_propagation_when_incomplete": "BLOCK",
+  "excluded_file_count_and_bytes_required": true,
+  "exclusion_accounting_required": true,
+  "exclusions": [
+    {
+      "pattern": ".git",
+      "pattern_syntax": "POSIX_GLOB",
+      "reason_code": "VCS_METADATA",
+      "rule_id": "EXCLUDE_ROOT_GIT_NODE",
+      "source_scope": "ALL"
+    },
+    {
+      "pattern": ".git/**",
+      "pattern_syntax": "POSIX_GLOB",
+      "reason_code": "VCS_METADATA",
+      "rule_id": "EXCLUDE_ROOT_GIT_CONTENT",
+      "source_scope": "ALL"
+    },
+    {
+      "pattern": "**/.git",
+      "pattern_syntax": "POSIX_GLOB",
+      "reason_code": "VCS_METADATA",
+      "rule_id": "EXCLUDE_GIT_NODE",
+      "source_scope": "ALL"
+    },
+    {
+      "pattern": "**/.git/**",
+      "pattern_syntax": "POSIX_GLOB",
+      "reason_code": "VCS_METADATA",
+      "rule_id": "EXCLUDE_GIT_CONTENT",
+      "source_scope": "ALL"
+    },
+    {
+      "pattern": "**/.hg/**",
+      "pattern_syntax": "POSIX_GLOB",
+      "reason_code": "VCS_METADATA",
+      "rule_id": "EXCLUDE_HG_CONTENT",
+      "source_scope": "ALL"
+    },
+    {
+      "pattern": "**/.svn/**",
+      "pattern_syntax": "POSIX_GLOB",
+      "reason_code": "VCS_METADATA",
+      "rule_id": "EXCLUDE_SVN_CONTENT",
+      "source_scope": "ALL"
+    },
+    {
+      "pattern": ".system/**",
+      "pattern_syntax": "POSIX_GLOB",
+      "reason_code": "SOURCE_OVERLAP",
+      "rule_id": "EXCLUDE_CODEX_SYSTEM_OVERLAP",
+      "source_scope": "CODEX"
+    },
+    {
+      "pattern": "**/__pycache__/**",
+      "pattern_syntax": "POSIX_GLOB",
+      "reason_code": "CACHE",
+      "rule_id": "EXCLUDE_PYTHON_CACHE",
+      "source_scope": "ALL"
+    },
+    {
+      "pattern": "**/.pytest_cache/**",
+      "pattern_syntax": "POSIX_GLOB",
+      "reason_code": "CACHE",
+      "rule_id": "EXCLUDE_PYTEST_CACHE",
+      "source_scope": "ALL"
+    },
+    {
+      "pattern": "**/.mypy_cache/**",
+      "pattern_syntax": "POSIX_GLOB",
+      "reason_code": "CACHE",
+      "rule_id": "EXCLUDE_MYPY_CACHE",
+      "source_scope": "ALL"
+    },
+    {
+      "pattern": "**/.venv/**",
+      "pattern_syntax": "POSIX_GLOB",
+      "reason_code": "CACHE",
+      "rule_id": "EXCLUDE_VENV",
+      "source_scope": "ALL"
+    },
+    {
+      "pattern": "**/node_modules/**",
+      "pattern_syntax": "POSIX_GLOB",
+      "reason_code": "CACHE",
+      "rule_id": "EXCLUDE_NODE_MODULES",
+      "source_scope": "ALL"
+    },
+    {
+      "pattern": "**/.DS_Store",
+      "pattern_syntax": "POSIX_GLOB",
+      "reason_code": "OS_METADATA",
+      "rule_id": "EXCLUDE_DS_STORE",
+      "source_scope": "ALL"
+    },
+    {
+      "pattern": "**/Thumbs.db",
+      "pattern_syntax": "POSIX_GLOB",
+      "reason_code": "OS_METADATA",
+      "rule_id": "EXCLUDE_THUMBS_DB",
+      "source_scope": "ALL"
+    }
+  ],
+  "hard_failure_codes": [
+    "READ_ERROR",
+    "STAT_ERROR",
+    "PERMISSION_ERROR",
+    "OVERSIZE_NON_POLICY",
+    "SPECIAL_FILE",
+    "SYMLINK_UNSAFE",
+    "INVALID_PATH_ENCODING"
+  ],
+  "hard_failure_result": "INCOMPLETE",
+  "other_dotfiles_excluded": false,
+  "policy_id": "urn:linzecolin:agentdatabase:skillops:policy:source-material:v1",
+  "protocol_revision": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1",
+  "regular_files_only_in_content_digest": true,
+  "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:source-material-policy:v1",
+  "silent_skip_allowed": false,
+  "size_skip_allowed": false,
+  "symlink_alias_records_separate": true,
+  "symlink_policy": {
+    "absolute_target_allowed": false,
+    "cycle_or_race_result": "INCOMPLETE",
+    "lstat_first": true,
+    "public_target_field": "normalized_target_ref",
+    "raw_target_public": false,
+    "same_source_root_required": true
+  }
+}

@@ -1,0 +1,175 @@
+{
+  "$defs": {
+    "actor_role": {
+      "enum": [
+        "USER",
+        "AUTOMATION",
+        "SUBAGENT",
+        "CLI"
+      ]
+    },
+    "basis_points": {
+      "maximum": 10000,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "calendar_date": {
+      "format": "calendar-date-v1",
+      "pattern": "^[0-9]{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01])$",
+      "type": "string"
+    },
+    "enum_code": {
+      "maxLength": 96,
+      "pattern": "^[A-Z][A-Z0-9]*(?:_[A-Z0-9]+)*$",
+      "type": "string"
+    },
+    "envelope_uid": {
+      "pattern": "^env_[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+      "type": "string"
+    },
+    "eval_profile_uid": {
+      "pattern": "^evp_[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+      "type": "string"
+    },
+    "eval_run_uid": {
+      "pattern": "^evr_[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+      "type": "string"
+    },
+    "event_uid": {
+      "pattern": "^evt_[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+      "type": "string"
+    },
+    "git_object_id": {
+      "pattern": "^(?:sha1:[0-9a-f]{40}|sha256:[0-9a-f]{64})$",
+      "type": "string"
+    },
+    "graph_uid": {
+      "pattern": "^cpg_[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+      "type": "string"
+    },
+    "invocation_uid": {
+      "pattern": "^inv_[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+      "type": "string"
+    },
+    "iteration_transition_uid": {
+      "pattern": "^itr_[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+      "type": "string"
+    },
+    "lifecycle_status": {
+      "enum": [
+        "DISCOVERED",
+        "REGISTERED",
+        "QUARANTINED",
+        "EVALUATING",
+        "CHALLENGER",
+        "CHAMPION",
+        "DEPRECATED",
+        "REVOKED",
+        "UNKNOWN"
+      ]
+    },
+    "nonnegative_count": {
+      "maximum": 9007199254740991,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "passport_uid": {
+      "pattern": "^spp_[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+      "type": "string"
+    },
+    "positive_count": {
+      "maximum": 9007199254740991,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "promotion_bundle_uid": {
+      "pattern": "^peb_[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+      "type": "string"
+    },
+    "promotion_decision_uid": {
+      "pattern": "^prd_[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+      "type": "string"
+    },
+    "protocol_revision": {
+      "const": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1"
+    },
+    "recipient_ref": {
+      "pattern": "^[a-z][a-z0-9-]{2,63}$",
+      "type": "string"
+    },
+    "repo_relative_posix_path": {
+      "format": "repo-relative-posix-path-v1",
+      "maxLength": 4096,
+      "minLength": 1,
+      "type": "string"
+    },
+    "run_uid": {
+      "pattern": "^run_[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+      "type": "string"
+    },
+    "scorecard_uid": {
+      "pattern": "^sc_[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+      "type": "string"
+    },
+    "sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "signed_basis_points": {
+      "maximum": 10000,
+      "minimum": -10000,
+      "type": "integer"
+    },
+    "skill_identity_uid": {
+      "pattern": "^ski_[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+      "type": "string"
+    },
+    "skill_instance_uid": {
+      "pattern": "^skinst_[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+      "type": "string"
+    },
+    "skill_version_uid": {
+      "pattern": "^skv_[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+      "type": "string"
+    },
+    "source_class": {
+      "enum": [
+        "AGENTS",
+        "CLAUDE",
+        "CODEX_SYSTEM",
+        "CODEX"
+      ]
+    },
+    "srv_revision": {
+      "pattern": "^v0\\.0\\.0\\.[1-9][0-9]*$",
+      "type": "string"
+    },
+    "surface_class": {
+      "enum": [
+        "CODEX_DESKTOP",
+        "CODEX_AUTOMATION",
+        "CODEX_CLI",
+        "CLAUDE",
+        "AGENTS"
+      ]
+    },
+    "typed_uid": {
+      "pattern": "^[a-z][a-z0-9]{1,11}_[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+      "type": "string"
+    },
+    "urn_id": {
+      "maxLength": 240,
+      "pattern": "^urn:linzecolin:agentdatabase:skillops:(?:schema|policy|protocol):[a-z0-9][a-z0-9-]*(?::[a-z0-9][a-z0-9-]*)*:v[1-9][0-9]*$",
+      "type": "string"
+    },
+    "utc_z_timestamp": {
+      "format": "utc-z-timestamp-v1",
+      "pattern": "^[0-9]{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01])T(?:[01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]\\.[0-9]{6}Z$",
+      "type": "string"
+    }
+  },
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Closed scalar definitions shared by both ownership planes.",
+  "title": "SkillOps common definitions"
+}

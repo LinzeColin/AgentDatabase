@@ -1,0 +1,211 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:skill-version:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "compatibility_codes": {
+      "items": {
+        "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/enum_code"
+      },
+      "minItems": 0,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "content_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "created_at": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+    },
+    "dependencies": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "dependency_type": {
+            "enum": [
+              "SKILL",
+              "TOOL",
+              "RUNTIME",
+              "DATASET"
+            ]
+          },
+          "reference": {
+            "maxLength": 200,
+            "minLength": 1,
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "resolved_digest": {
+            "anyOf": [
+              {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "dependency_type",
+          "reference",
+          "resolved_digest",
+          "required"
+        ],
+        "type": "object"
+      },
+      "minItems": 0,
+      "type": "array"
+    },
+    "dependency_manifest_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "eval_profile_uid": {
+      "anyOf": [
+        {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/eval_profile_uid"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "git_object_id": {
+      "anyOf": [
+        {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/git_object_id"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "lifecycle_status": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/lifecycle_status"
+    },
+    "metadata_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "permission_manifest_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "permissions": {
+      "additionalProperties": false,
+      "properties": {
+        "external_side_effect": {
+          "enum": [
+            "NONE",
+            "DECLARED",
+            "UNKNOWN"
+          ]
+        },
+        "filesystem_write": {
+          "enum": [
+            "NONE",
+            "WORKSPACE_ONLY",
+            "DECLARED_EXTERNAL",
+            "UNKNOWN"
+          ]
+        },
+        "network": {
+          "enum": [
+            "NONE",
+            "DECLARED",
+            "UNKNOWN"
+          ]
+        },
+        "secrets": {
+          "enum": [
+            "NONE",
+            "REFERENCE_ONLY",
+            "UNKNOWN"
+          ]
+        }
+      },
+      "required": [
+        "network",
+        "filesystem_write",
+        "external_side_effect",
+        "secrets"
+      ],
+      "type": "object"
+    },
+    "protocol_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/protocol_revision"
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:skill-version:v1"
+    },
+    "skill_instance_uid": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/skill_instance_uid"
+    },
+    "skill_version_uid": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/skill_version_uid"
+    },
+    "source_material_policy_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "source_material_policy_id": {
+      "const": "urn:linzecolin:agentdatabase:skillops:policy:source-material:v1"
+    },
+    "source_observed_at": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+    },
+    "srv_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/srv_revision"
+    },
+    "supersedes_version_uid": {
+      "anyOf": [
+        {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/skill_version_uid"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "tree_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "trust_tier": {
+      "enum": [
+        "LOCAL_TRUSTED",
+        "PINNED_UPSTREAM",
+        "UNVERIFIED",
+        "QUARANTINED"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "bundle_digest",
+    "skill_version_uid",
+    "skill_instance_uid",
+    "srv_revision",
+    "content_digest",
+    "tree_digest",
+    "metadata_digest",
+    "dependency_manifest_digest",
+    "permission_manifest_digest",
+    "source_material_policy_id",
+    "source_material_policy_digest",
+    "source_observed_at",
+    "git_object_id",
+    "dependencies",
+    "permissions",
+    "compatibility_codes",
+    "trust_tier",
+    "lifecycle_status",
+    "eval_profile_uid",
+    "supersedes_version_uid",
+    "created_at"
+  ],
+  "title": "Skill version",
+  "type": "object"
+}

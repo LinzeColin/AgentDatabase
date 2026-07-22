@@ -1,0 +1,144 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:skill-binding:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "binding_state": {
+            "const": "BOUND"
+          }
+        },
+        "required": [
+          "binding_state"
+        ]
+      },
+      "then": {
+        "not": {
+          "required": [
+            "unknown_reason_code"
+          ]
+        },
+        "required": [
+          "skill_ref",
+          "controlled_invocation"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "binding_state": {
+            "const": "UNKNOWN"
+          }
+        },
+        "required": [
+          "binding_state"
+        ]
+      },
+      "then": {
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "skill_ref"
+              ]
+            },
+            {
+              "required": [
+                "controlled_invocation"
+              ]
+            }
+          ]
+        },
+        "required": [
+          "unknown_reason_code"
+        ]
+      }
+    }
+  ],
+  "properties": {
+    "binding_state": {
+      "enum": [
+        "BOUND",
+        "UNKNOWN"
+      ]
+    },
+    "controlled_invocation": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence_type": {
+          "const": "CONTROLLED_INVOCATION_EXACT_VERSION"
+        },
+        "invocation_envelope_digest": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+        },
+        "invocation_uid": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/invocation_uid"
+        },
+        "observed_at": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+        },
+        "surface_class": {
+          "enum": [
+            "CODEX_CLI",
+            "CODEX_AUTOMATION"
+          ]
+        }
+      },
+      "required": [
+        "invocation_uid",
+        "invocation_envelope_digest",
+        "surface_class",
+        "observed_at",
+        "evidence_type"
+      ],
+      "type": "object"
+    },
+    "skill_ref": {
+      "additionalProperties": false,
+      "properties": {
+        "content_digest": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+        },
+        "registry_snapshot_digest": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+        },
+        "skill_identity_uid": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/skill_identity_uid"
+        },
+        "skill_instance_uid": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/skill_instance_uid"
+        },
+        "skill_version_uid": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/skill_version_uid"
+        },
+        "tree_digest": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+        },
+        "version_record_digest": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+        }
+      },
+      "required": [
+        "skill_identity_uid",
+        "skill_instance_uid",
+        "skill_version_uid",
+        "content_digest",
+        "tree_digest",
+        "version_record_digest",
+        "registry_snapshot_digest"
+      ],
+      "type": "object"
+    },
+    "unknown_reason_code": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/enum_code"
+    }
+  },
+  "required": [
+    "binding_state"
+  ],
+  "title": "Skill binding",
+  "type": "object"
+}

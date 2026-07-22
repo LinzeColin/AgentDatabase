@@ -1,0 +1,14 @@
+{
+  "actual_recipient_mapping_repo_external": true,
+  "automatic": true,
+  "emergency_containment_precedes_notification": true,
+  "notification_only": true,
+  "owner_approval_required": false,
+  "owner_reply_required": false,
+  "planned_major_provider_sent_before_write": true,
+  "policy_id": "urn:linzecolin:agentdatabase:skillops:policy:notification:v1",
+  "protocol_revision": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1",
+  "recipient_ref": "owner-primary",
+  "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:notification-policy:v1",
+  "send_failure_blocks_planned_write": true
+}

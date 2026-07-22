@@ -1,0 +1,194 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:promotion-decision:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "action": {
+      "enum": [
+        "PROMOTE",
+        "REJECT",
+        "ROLLBACK",
+        "REVOKE"
+      ]
+    },
+    "actor": {
+      "const": "SKILLOPS_PROMOTION_CONTROLLER"
+    },
+    "baseline_model_snapshot_digest": {
+      "anyOf": [
+        {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "candidate_model_snapshot_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "candidate_skill_version_uid": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/skill_version_uid"
+    },
+    "decided_at": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+    },
+    "decision_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "emergency_containment": {
+      "type": "boolean"
+    },
+    "evidence_bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "from_status": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/lifecycle_status"
+    },
+    "hard_gates_passed": {
+      "type": "boolean"
+    },
+    "impact": {
+      "enum": [
+        "PATCH",
+        "MINOR",
+        "MAJOR"
+      ]
+    },
+    "known_risk_codes": {
+      "items": {
+        "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/enum_code"
+      },
+      "minItems": 0,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "major_change": {
+      "type": "boolean"
+    },
+    "notification_mode": {
+      "enum": [
+        "NOT_REQUIRED",
+        "PRE_WRITE_SENT",
+        "POST_CONTAINMENT_SENT"
+      ]
+    },
+    "notification_receipt_digest": {
+      "anyOf": [
+        {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "owner_approval_required": {
+      "const": false
+    },
+    "previous_champion_version_uid": {
+      "anyOf": [
+        {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/skill_version_uid"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "promotion_decision_uid": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/promotion_decision_uid"
+    },
+    "protocol_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/protocol_revision"
+    },
+    "reason_codes": {
+      "items": {
+        "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/enum_code"
+      },
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "resulting_champion_version_uid": {
+      "anyOf": [
+        {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/skill_version_uid"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "rollback_target_version_uid": {
+      "anyOf": [
+        {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/skill_version_uid"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:promotion-decision:v1"
+    },
+    "srv_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/srv_revision"
+    },
+    "stage": {
+      "enum": [
+        "STATIC_PASSED",
+        "OFFLINE_EVAL",
+        "SEALED_HOLDOUT",
+        "SHADOW",
+        "CANARY",
+        "REVIEW_AND_NOTIFY",
+        "CHAMPION",
+        "MONITORING",
+        "BLOCKED",
+        "REJECTED",
+        "ROLLED_BACK",
+        "REVOKED"
+      ]
+    },
+    "to_status": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/lifecycle_status"
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "bundle_digest",
+    "promotion_decision_uid",
+    "srv_revision",
+    "action",
+    "stage",
+    "impact",
+    "candidate_skill_version_uid",
+    "previous_champion_version_uid",
+    "resulting_champion_version_uid",
+    "candidate_model_snapshot_digest",
+    "baseline_model_snapshot_digest",
+    "from_status",
+    "to_status",
+    "evidence_bundle_digest",
+    "hard_gates_passed",
+    "known_risk_codes",
+    "reason_codes",
+    "actor",
+    "major_change",
+    "notification_receipt_digest",
+    "notification_mode",
+    "owner_approval_required",
+    "emergency_containment",
+    "rollback_target_version_uid",
+    "decided_at",
+    "decision_digest"
+  ],
+  "title": "Promotion decision",
+  "type": "object"
+}

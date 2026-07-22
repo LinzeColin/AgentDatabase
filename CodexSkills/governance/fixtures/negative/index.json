@@ -1,0 +1,26 @@
+{
+  "cases": [
+    {"expected_code": "DUPLICATE_KEY", "id": "DUPLICATE_KEY", "path": "duplicate-keys.json.txt"},
+    {"expected_code": "NON_FINITE_NUMBER", "id": "NAN", "path": "nan.json.txt"},
+    {"expected_code": "NON_FINITE_NUMBER", "id": "INFINITY", "path": "infinity.json.txt"},
+    {"expected_code": "LONE_SURROGATE", "id": "LONE_SURROGATE", "path": "lone-surrogate.json.txt"},
+    {"expected_code": "PUBLIC_EMAIL_BLOCK", "id": "PUBLIC_EMAIL", "path": "public-email.json"},
+    {"expected_code": "PUBLIC_ABSOLUTE_PATH_BLOCK", "id": "PUBLIC_ABSOLUTE_PATH", "path": "public-absolute-path.json"},
+    {"expected_code": "PUBLIC_HIGH_ENTROPY_FREE_STRING_BLOCK", "id": "PUBLIC_HIGH_ENTROPY", "path": "public-high-entropy.json"},
+    {"expected_code": "PUBLIC_PHONE_NUMBER_BLOCK", "id": "PUBLIC_PHONE_NUMBER", "path": "public-phone-number.json"},
+    {"expected_code": "PUBLIC_IP_ADDRESS_BLOCK", "id": "PUBLIC_IP_ADDRESS", "path": "public-ip-address.json"},
+    {"expected_code": "UTC_FORMAT_REJECT", "id": "TIMESTAMP_OFFSET", "path": "timestamp-offset.json"},
+    {"expected_code": "UTC_FORMAT_REJECT", "id": "TIMESTAMP_INVALID_DATE", "path": "timestamp-invalid-date.json"},
+    {"expected_code": "REPO_PATH_REJECT", "id": "PATH_TRAVERSAL", "path": "path-traversal.json"},
+    {"expected_code": "SCHEMA_VALIDATION_FAILED", "id": "UNKNOWN_BINDING_WITH_SKILL_REF", "path": "binding-unknown-with-skill-ref.json"},
+    {"expected_code": "NESTED_SCHEMA_ID_FORBIDDEN", "id": "SCHEMA_NESTED_ID", "path": "schema-nested-id.json"},
+    {"expected_code": "REF_SCHEMA_UNKNOWN", "id": "SCHEMA_UNKNOWN_REF", "path": "schema-unknown-ref.json"},
+    {"expected_code": "OPEN_OBJECT_SCHEMA_FORBIDDEN", "id": "SCHEMA_OPEN_OBJECT", "path": "schema-open-object.json"},
+    {"expected_code": "SCHEMA_REBINDING_KEYWORD_FORBIDDEN", "id": "SCHEMA_DYNAMIC_REF", "path": "schema-dynamic-ref.json"},
+    {"expected_code": "REF_URI_FORBIDDEN", "id": "SCHEMA_RELATIVE_REF", "path": "schema-relative-ref.json"},
+    {"expected_code": "UNKNOWN_FORMAT_FORBIDDEN", "id": "SCHEMA_IMPLICIT_DATE_TIME", "path": "schema-implicit-date-time.json"},
+    {"expected_code": "CONDITIONAL_FIELD_UNDECLARED", "id": "SCHEMA_CONDITIONAL_UNDECLARED", "path": "schema-conditional-undeclared.json"},
+    {"expected_code": "CONTEXT_BUNDLE_DIGEST_MISMATCH", "id": "BUNDLE_MISMATCH", "path": "bundle-mismatch.json"}
+  ],
+  "fixture_set": "MECHANISM_M0A_NEGATIVE_V1"
+}

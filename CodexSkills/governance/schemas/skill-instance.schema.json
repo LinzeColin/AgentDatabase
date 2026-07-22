@@ -1,0 +1,225 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:skill-instance:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "data_class_codes": {
+      "items": {
+        "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/enum_code"
+      },
+      "minItems": 0,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "first_seen_at": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+    },
+    "forked_from_instance_uid": {
+      "anyOf": [
+        {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/skill_instance_uid"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "last_seen_at": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+    },
+    "lifecycle_status": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/lifecycle_status"
+    },
+    "moved_from_instance_uid": {
+      "anyOf": [
+        {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/skill_instance_uid"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "parent_instance_uids": {
+      "items": {
+        "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/skill_instance_uid"
+      },
+      "minItems": 0,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "permissions": {
+      "additionalProperties": false,
+      "properties": {
+        "external_side_effect": {
+          "enum": [
+            "NONE",
+            "DECLARED",
+            "UNKNOWN"
+          ]
+        },
+        "filesystem_write": {
+          "enum": [
+            "NONE",
+            "WORKSPACE_ONLY",
+            "DECLARED_EXTERNAL",
+            "UNKNOWN"
+          ]
+        },
+        "network": {
+          "enum": [
+            "NONE",
+            "DECLARED",
+            "UNKNOWN"
+          ]
+        },
+        "secrets": {
+          "enum": [
+            "NONE",
+            "REFERENCE_ONLY",
+            "UNKNOWN"
+          ]
+        }
+      },
+      "required": [
+        "network",
+        "filesystem_write",
+        "external_side_effect",
+        "secrets"
+      ],
+      "type": "object"
+    },
+    "protocol_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/protocol_revision"
+    },
+    "provenance": {
+      "additionalProperties": false,
+      "properties": {
+        "git_object_id": {
+          "anyOf": [
+            {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/git_object_id"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "kind": {
+          "enum": [
+            "LOCAL_MANAGED",
+            "UPSTREAM_GIT",
+            "VENDORED",
+            "UNKNOWN"
+          ]
+        },
+        "license_id": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Za-z0-9.+-]{1,64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "license_state": {
+          "enum": [
+            "KNOWN_ALLOWED",
+            "UNKNOWN",
+            "DENIED"
+          ]
+        },
+        "trust_tier": {
+          "enum": [
+            "LOCAL_TRUSTED",
+            "PINNED_UPSTREAM",
+            "UNVERIFIED",
+            "QUARANTINED"
+          ]
+        },
+        "upstream_repo": {
+          "anyOf": [
+            {
+              "pattern": "^https://github\\.com/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+(?:\\.git)?$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "kind",
+        "upstream_repo",
+        "git_object_id",
+        "license_state",
+        "license_id",
+        "trust_tier"
+      ],
+      "type": "object"
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:skill-instance:v1"
+    },
+    "skill_identity_uid": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/skill_identity_uid"
+    },
+    "skill_instance_uid": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/skill_instance_uid"
+    },
+    "source_class": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/source_class"
+    },
+    "source_fingerprint_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "source_relative_path": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/repo_relative_posix_path"
+    },
+    "tool_codes": {
+      "items": {
+        "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/enum_code"
+      },
+      "minItems": 0,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "version_uids": {
+      "items": {
+        "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/skill_version_uid"
+      },
+      "minItems": 0,
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "bundle_digest",
+    "skill_instance_uid",
+    "skill_identity_uid",
+    "source_class",
+    "source_relative_path",
+    "source_fingerprint_digest",
+    "provenance",
+    "permissions",
+    "tool_codes",
+    "data_class_codes",
+    "first_seen_at",
+    "last_seen_at",
+    "parent_instance_uids",
+    "moved_from_instance_uid",
+    "forked_from_instance_uid",
+    "version_uids",
+    "lifecycle_status"
+  ],
+  "title": "Skill instance",
+  "type": "object"
+}

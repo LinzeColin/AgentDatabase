@@ -1,0 +1,86 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:iteration-transition:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "early_stop_codes": {
+      "items": {
+        "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/enum_code"
+      },
+      "minItems": 0,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "experiment_matrix_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "from_skill_version_uid": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/skill_version_uid"
+    },
+    "iteration_transition_uid": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/iteration_transition_uid"
+    },
+    "occurred_at": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+    },
+    "optimizer_evaluator_isolation_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "phase": {
+      "enum": [
+        "PROPOSED",
+        "STATIC_PASSED",
+        "OFFLINE_EVAL",
+        "SEALED_HOLDOUT",
+        "SHADOW",
+        "CANARY",
+        "REVIEW_AND_NOTIFY",
+        "CHAMPION",
+        "MONITORING",
+        "BLOCKED",
+        "REJECTED",
+        "ROLLED_BACK",
+        "REVOKED"
+      ]
+    },
+    "protocol_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/protocol_revision"
+    },
+    "rollback_target_version_uid": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/skill_version_uid"
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:iteration-transition:v1"
+    },
+    "side_effect_budget": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "to_skill_version_uid": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/skill_version_uid"
+    },
+    "transition_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "bundle_digest",
+    "iteration_transition_uid",
+    "from_skill_version_uid",
+    "to_skill_version_uid",
+    "phase",
+    "experiment_matrix_digest",
+    "optimizer_evaluator_isolation_digest",
+    "side_effect_budget",
+    "early_stop_codes",
+    "rollback_target_version_uid",
+    "occurred_at",
+    "transition_digest"
+  ],
+  "title": "Controlled iteration transition",
+  "type": "object"
+}
