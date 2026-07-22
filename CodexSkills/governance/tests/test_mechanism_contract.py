@@ -636,6 +636,25 @@ class MechanismContractTests(unittest.TestCase):
         self.assertFalse(validator.is_valid("ski_" + "0" * 24))
         self.assertFalse(validator.is_valid("ski_8" + "0" * 25))
         self.assertFalse(validator.is_valid("ski_0" + "I" * 25))
+        actor_role_schema = self.bundle.schemas[sid("common-definitions")]["$defs"]["actor_role"]
+        actor_role_validator = Draft202012Validator(actor_role_schema)
+        expected_actor_roles = ["USER", "AUTOMATION", "SUBAGENT", "CLI", "UNKNOWN"]
+        self.assertEqual(actor_role_schema["enum"], expected_actor_roles)
+        for actor_role in expected_actor_roles:
+            with self.subTest(actor_role=actor_role):
+                self.assertTrue(actor_role_validator.is_valid(actor_role))
+        self.assertFalse(actor_role_validator.is_valid("UNKNOWN_LEGACY"))
+        self.assertEqual(self.interface["actor_role_contract"]["allowed_codes"], expected_actor_roles)
+        self.assertEqual(
+            self.interface["actor_role_contract"]["initial_unknown_surfaces"],
+            ["AGENTS", "CLAUDE"],
+        )
+        self.assertFalse(self.interface["actor_role_contract"]["unknown_is_binding_state"])
+        self.assertFalse(self.interface["actor_role_contract"]["unknown_legacy_code_allowed"])
+        self.assertEqual(
+            self.interface["actor_role_contract"]["legacy_thread_source_missing_treatment"],
+            "UNMAPPED",
+        )
 
     def test_06_repo_path_and_symlink_public_target_contract(self) -> None:
         self.assertTrue(is_repo_relative_posix_path("codex/skill/SKILL.md"))
@@ -755,6 +774,23 @@ class MechanismContractTests(unittest.TestCase):
             with self.subTest(public_artifact=name):
                 scan_public_value(artifact_value, self.bundle.policies)
         scan_public_value({"artifact_digest": DIGEST_B}, self.bundle.policies)
+        auto_digest_fields = {
+            "adapter_schema_digest",
+            "included_tree_digest",
+            "mapping_policy_digest",
+        }
+        for field_name in sorted(auto_digest_fields):
+            with self.subTest(approved_auto_digest_field=field_name):
+                scan_public_value({field_name: DIGEST_B}, self.bundle.policies)
+                with self.assertRaisesRegex(ContractError, "PUBLIC_APPROVED_DIGEST_MALFORMED"):
+                    scan_public_value({field_name: "not-a-sha256"}, self.bundle.policies)
+        self.assertEqual(
+            set(self.interface["public_value_contract"]["approved_auto_public_sha256_fields"]),
+            auto_digest_fields,
+        )
+        self.assertFalse(
+            self.interface["public_value_contract"]["generic_digest_field_substitution_allowed"]
+        )
         with self.assertRaisesRegex(ContractError, "PUBLIC_EMAIL_BLOCK"):
             scan_public_value({"recipient_ref": "owner@example.com"}, self.bundle.policies)
         with self.assertRaisesRegex(ContractError, "PUBLIC_ABSOLUTE_PATH_BLOCK"):

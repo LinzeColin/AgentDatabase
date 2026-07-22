@@ -40,6 +40,18 @@ CORE_HARD_GATE_CODES = (
     "REPLAYABLE",
     "ROLLBACK_AVAILABLE",
 )
+ACTOR_ROLE_CODES = (
+    "USER",
+    "AUTOMATION",
+    "SUBAGENT",
+    "CLI",
+    "UNKNOWN",
+)
+AUTO_A1A_PUBLIC_DIGEST_FIELDS = (
+    "adapter_schema_digest",
+    "included_tree_digest",
+    "mapping_policy_digest",
+)
 
 
 def ref(name: str) -> Dict[str, str]:
@@ -220,7 +232,7 @@ def common_definitions() -> Dict[str, Any]:
         "surface_class": {
             "enum": ["CODEX_DESKTOP", "CODEX_AUTOMATION", "CODEX_CLI", "CLAUDE", "AGENTS"]
         },
-        "actor_role": {"enum": ["USER", "AUTOMATION", "SUBAGENT", "CLI"]},
+        "actor_role": {"enum": list(ACTOR_ROLE_CODES)},
     }
     for name, prefix in prefixes.items():
         defs[name] = {"type": "string", "pattern": rf"^{prefix}_{ulid}$"}
@@ -1034,6 +1046,7 @@ def policy_instances() -> Dict[str, Tuple[str, Dict[str, Any]]]:
                 "forbidden_field_names": ["absolute_path", "address", "command", "credential", "email", "full_name", "ip_address", "output", "password", "phone_number", "prompt", "raw", "reasoning", "secret", "stderr", "stdout", "token", "tool_arguments"],
                 "allowed_high_entropy_field_names": [
                     "abstention_digest", "accepted_predecessor_bundle_digests",
+                    "adapter_schema_digest",
                     "applicability_manifest_digest", "artifact_digest", "artifact_schema_digest",
                     "baseline_model_snapshot_digest", "bundle_digest", "candidate_model_snapshot_digest",
                     "canary_evidence_digest", "content_digest", "decision_digest",
@@ -1046,8 +1059,9 @@ def policy_instances() -> Dict[str, Tuple[str, Dict[str, Any]]]:
                     "eval_profile_digest", "eval_run_digest", "event_bundle_digest", "event_digest",
                     "evidence_bundle_digest", "evidence_digest", "evidence_digests",
                     "experiment_matrix_digest", "false_trigger_digest", "graph_digest",
-                    "human_calibration_manifest_digest", "input_contract_digest",
-                    "inventory_digest", "invocation_envelope_digest", "manifest_digest",
+                    "human_calibration_manifest_digest", "included_tree_digest",
+                    "input_contract_digest", "inventory_digest", "invocation_envelope_digest",
+                    "manifest_digest", "mapping_policy_digest",
                     "judge_rubric_digest", "metadata_digest", "missed_trigger_digest",
                     "model_snapshot_digest", "notification_receipt_digest",
                     "optimizer_evaluator_isolation_digest", "output_contract_digest",
@@ -1395,6 +1409,19 @@ def generated_files() -> Dict[Path, bytes]:
             "bound_eval_eligible_surfaces": ["CODEX_AUTOMATION", "CODEX_CLI"],
             "unknown_forbids": ["skill_ref", "controlled_invocation", "eval_refs", "promotion_refs"],
             "published_event_mutation": "FORBIDDEN_SUPERSEDE_ONLY",
+        },
+        "actor_role_contract": {
+            "allowed_codes": list(ACTOR_ROLE_CODES),
+            "unknown_semantics": "OBSERVED_ACTOR_ROLE_NOT_PROVABLE",
+            "initial_unknown_surfaces": ["AGENTS", "CLAUDE"],
+            "unknown_is_binding_state": False,
+            "unknown_legacy_code_allowed": False,
+            "legacy_thread_source_missing_treatment": "UNMAPPED",
+        },
+        "public_value_contract": {
+            "approved_auto_public_sha256_fields": list(AUTO_A1A_PUBLIC_DIGEST_FIELDS),
+            "approved_value_shape": "LOWERCASE_SHA256_HEX_64",
+            "generic_digest_field_substitution_allowed": False,
         },
         "run_surface_baseline_contract": {
             "action": "BASELINE_ESTABLISHED_NO_HISTORICAL_BACKFILL",

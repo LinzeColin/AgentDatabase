@@ -1,5 +1,22 @@
 {
   "activation_forbidden": true,
+  "actor_role_contract": {
+    "allowed_codes": [
+      "USER",
+      "AUTOMATION",
+      "SUBAGENT",
+      "CLI",
+      "UNKNOWN"
+    ],
+    "initial_unknown_surfaces": [
+      "AGENTS",
+      "CLAUDE"
+    ],
+    "legacy_thread_source_missing_treatment": "UNMAPPED",
+    "unknown_is_binding_state": false,
+    "unknown_legacy_code_allowed": false,
+    "unknown_semantics": "OBSERVED_ACTOR_ROLE_NOT_PROVABLE"
+  },
   "auto_private_schema_ids_excluded_from_shared_bundle": [
     "urn:linzecolin:agentdatabase:skillops:schema:lock-state:v1",
     "urn:linzecolin:agentdatabase:skillops:schema:public-queue-envelope:v2",
@@ -143,7 +160,7 @@
       "compatibility": "EXACT_ONLY",
       "id": "urn:linzecolin:agentdatabase:skillops:policy:public-value:v1",
       "owner_plane": "MECHANISM",
-      "policy_sha256": "48cc58d6f4b7dcbe7a2de48894420e1909a8d6433069f872e799ac387d5939e7",
+      "policy_sha256": "2541cefec223ea6194dc50f1d75ccb8d273d5a70f45861a1f2799680fb99a50a",
       "relative_path": "CodexSkills/governance/policies/public-value-policy.v1.json",
       "schema_id": "urn:linzecolin:agentdatabase:skillops:schema:public-value-policy:v1"
     },
@@ -197,7 +214,7 @@
       "id": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1",
       "owner_plane": "MECHANISM",
       "relative_path": "CodexSkills/governance/schemas/common-definitions.schema.json",
-      "schema_sha256": "53c71fa362290244114ef4b21d21e303a152c68d450fc1253a54d472aff40061",
+      "schema_sha256": "c15488f0381589534041fdfcc233cf9b9f3916a930f3392928256c6cb4fb24f7",
       "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1",
       "self_digest_pointer": null
     },
@@ -366,6 +383,15 @@
   ],
   "next_phase": "AUTO_A1A",
   "protocol_revision": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1",
+  "public_value_contract": {
+    "approved_auto_public_sha256_fields": [
+      "adapter_schema_digest",
+      "included_tree_digest",
+      "mapping_policy_digest"
+    ],
+    "approved_value_shape": "LOWERCASE_SHA256_HEX_64",
+    "generic_digest_field_substitution_allowed": false
+  },
   "run_surface_baseline_contract": {
     "action": "BASELINE_ESTABLISHED_NO_HISTORICAL_BACKFILL",
     "coverage_state": "UNKNOWN",

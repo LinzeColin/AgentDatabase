@@ -886,6 +886,26 @@ def load_draft_contract() -> ContractBundle:
         or binding_contract.get("published_event_mutation") != "FORBIDDEN_SUPERSEDE_ONLY"
     ):
         raise ContractError("DRAFT_BINDING_CONTRACT_MISMATCH")
+    actor_role_contract = interface.get("actor_role_contract", {})
+    if (
+        actor_role_contract.get("allowed_codes")
+        != ["USER", "AUTOMATION", "SUBAGENT", "CLI", "UNKNOWN"]
+        or actor_role_contract.get("unknown_semantics")
+        != "OBSERVED_ACTOR_ROLE_NOT_PROVABLE"
+        or actor_role_contract.get("initial_unknown_surfaces") != ["AGENTS", "CLAUDE"]
+        or actor_role_contract.get("unknown_is_binding_state") is not False
+        or actor_role_contract.get("unknown_legacy_code_allowed") is not False
+        or actor_role_contract.get("legacy_thread_source_missing_treatment") != "UNMAPPED"
+    ):
+        raise ContractError("DRAFT_ACTOR_ROLE_CONTRACT_MISMATCH")
+    public_value_contract = interface.get("public_value_contract", {})
+    if (
+        public_value_contract.get("approved_auto_public_sha256_fields")
+        != ["adapter_schema_digest", "included_tree_digest", "mapping_policy_digest"]
+        or public_value_contract.get("approved_value_shape") != "LOWERCASE_SHA256_HEX_64"
+        or public_value_contract.get("generic_digest_field_substitution_allowed") is not False
+    ):
+        raise ContractError("DRAFT_PUBLIC_VALUE_CONTRACT_MISMATCH")
     baseline = interface.get("run_surface_baseline_contract", {})
     breakdown = baseline.get("mapped_breakdown", [])
     unmapped_reasons = baseline.get("unmapped_reasons", [])

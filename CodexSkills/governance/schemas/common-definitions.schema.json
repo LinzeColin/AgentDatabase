@@ -5,7 +5,8 @@
         "USER",
         "AUTOMATION",
         "SUBAGENT",
-        "CLI"
+        "CLI",
+        "UNKNOWN"
       ]
     },
     "basis_points": {
