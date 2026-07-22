@@ -1,0 +1,4 @@
+interface:
+  display_name: "Dynamic Personal Profile Update"
+  short_description: "Update one time-aware profile Markdown from derived data"
+  default_prompt: "Update the dynamic personal profile from the allowlisted derived data, validate the single Markdown output, and report only material changes and trial-ready assets."
