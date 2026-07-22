@@ -39,6 +39,26 @@
       ]
     },
     {
+      "intent": "dynamic_profile",
+      "description": "Current time-aware generated profile delta and trial-ready asset candidates.",
+      "read_order": [
+        "data/derived/profile/DYNAMIC_PROFILE.md"
+      ],
+      "conditional_resources": [
+        {
+          "path": "data/derived/profile/CORE_PROFILE.md",
+          "condition": "Load only when stable profile comparison is needed; never overwrite it from this route."
+        }
+      ],
+      "access": "read_only_derived",
+      "canonical": false,
+      "update_targets": [
+        "profile",
+        "history",
+        "pattern"
+      ]
+    },
+    {
       "intent": "maintenance",
       "description": "Daily automation and maintenance bootstrap path.",
       "read_order": [
