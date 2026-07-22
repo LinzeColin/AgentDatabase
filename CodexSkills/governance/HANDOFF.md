@@ -28,10 +28,12 @@
   resolution, timestamps, paths, canonicalization, and contextual digests.
 - The A1a pre-write corrective gate explicitly admits only
   `adapter_schema_digest`, `included_tree_digest`, and
-  `mapping_policy_digest` as additional public SHA-256 fields, and adds the
-  closed `actor_role=UNKNOWN` value for observed CLAUDE/AGENTS activity whose
-  actor role cannot be proven. `UNKNOWN_LEGACY` remains forbidden; the 18
-  historical records remain unmapped and produce no run event.
+  `mapping_policy_digest` as source/coverage public SHA-256 fields. Its complete
+  Auto schema audit additionally admits `supersedes_event_digest` solely for
+  immutable correction events. The same gate adds the closed
+  `actor_role=UNKNOWN` value for observed CLAUDE/AGENTS activity whose actor
+  role cannot be proven. `UNKNOWN_LEGACY` remains forbidden; the 18 historical
+  records remain unmapped and produce no run event.
 
 ## Explicitly not active
 

@@ -901,7 +901,12 @@ def load_draft_contract() -> ContractBundle:
     public_value_contract = interface.get("public_value_contract", {})
     if (
         public_value_contract.get("approved_auto_public_sha256_fields")
-        != ["adapter_schema_digest", "included_tree_digest", "mapping_policy_digest"]
+        != [
+            "adapter_schema_digest",
+            "included_tree_digest",
+            "mapping_policy_digest",
+            "supersedes_event_digest",
+        ]
         or public_value_contract.get("approved_value_shape") != "LOWERCASE_SHA256_HEX_64"
         or public_value_contract.get("generic_digest_field_substitution_allowed") is not False
     ):

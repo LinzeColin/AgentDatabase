@@ -778,6 +778,7 @@ class MechanismContractTests(unittest.TestCase):
             "adapter_schema_digest",
             "included_tree_digest",
             "mapping_policy_digest",
+            "supersedes_event_digest",
         }
         for field_name in sorted(auto_digest_fields):
             with self.subTest(approved_auto_digest_field=field_name):

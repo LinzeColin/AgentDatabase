@@ -67,6 +67,7 @@
     "source_fact_digests",
     "source_material_policy_digest",
     "source_snapshot_digest",
+    "supersedes_event_digest",
     "test_vectors_digest",
     "tool_manifest_digest",
     "transition_digest",

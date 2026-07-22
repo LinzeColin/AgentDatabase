@@ -51,6 +51,7 @@ AUTO_A1A_PUBLIC_DIGEST_FIELDS = (
     "adapter_schema_digest",
     "included_tree_digest",
     "mapping_policy_digest",
+    "supersedes_event_digest",
 )
 
 
@@ -1073,7 +1074,7 @@ def policy_instances() -> Dict[str, Tuple[str, Dict[str, Any]]]:
                     "sealed_access_audit_digest", "sealed_holdout_manifest_digest", "shadow_evidence_digest",
                     "skill_version_record_digest", "source_fingerprint_digest",
                     "source_fact_digests", "source_material_policy_digest", "source_snapshot_digest",
-                    "test_vectors_digest", "tool_manifest_digest", "transition_digest",
+                    "supersedes_event_digest", "test_vectors_digest", "tool_manifest_digest", "transition_digest",
                     "tree_digest", "version_record_digest",
                 ],
                 "detectors": [

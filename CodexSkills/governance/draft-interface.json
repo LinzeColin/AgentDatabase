@@ -160,7 +160,7 @@
       "compatibility": "EXACT_ONLY",
       "id": "urn:linzecolin:agentdatabase:skillops:policy:public-value:v1",
       "owner_plane": "MECHANISM",
-      "policy_sha256": "2541cefec223ea6194dc50f1d75ccb8d273d5a70f45861a1f2799680fb99a50a",
+      "policy_sha256": "56440f27a18b9bc8726f6ef4edad455fc3ac07b7b23685aacc1a603a2dfbca4a",
       "relative_path": "CodexSkills/governance/policies/public-value-policy.v1.json",
       "schema_id": "urn:linzecolin:agentdatabase:skillops:schema:public-value-policy:v1"
     },
@@ -387,7 +387,8 @@
     "approved_auto_public_sha256_fields": [
       "adapter_schema_digest",
       "included_tree_digest",
-      "mapping_policy_digest"
+      "mapping_policy_digest",
+      "supersedes_event_digest"
     ],
     "approved_value_shape": "LOWERCASE_SHA256_HEX_64",
     "generic_digest_field_substitution_allowed": false
