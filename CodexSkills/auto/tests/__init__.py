@@ -1,0 +1,1 @@
+"""SkillOps Auto contract tests."""

@@ -1,0 +1,274 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:auto-receipt:v2",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "final_action": {
+            "const": "PUBLISH"
+          }
+        },
+        "required": [
+          "final_action"
+        ]
+      },
+      "then": {
+        "properties": {
+          "settled_lanes": {
+            "minItems": 1
+          }
+        },
+        "required": [
+          "publication"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "overall_status": {
+            "enum": [
+              "COALESCED_WITH_ACTIVE_RUN",
+              "DEFERRED_SINGLE_FLIGHT"
+            ]
+          }
+        },
+        "required": [
+          "overall_status"
+        ]
+      },
+      "then": {
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "publication"
+              ]
+            }
+          ]
+        },
+        "properties": {
+          "final_action": {
+            "const": "DEFER"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "overall_status": {
+            "const": "NO_CHANGE"
+          }
+        },
+        "required": [
+          "overall_status"
+        ]
+      },
+      "then": {
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "publication"
+              ]
+            }
+          ]
+        },
+        "properties": {
+          "final_action": {
+            "const": "NONE"
+          }
+        }
+      }
+    }
+  ],
+  "properties": {
+    "auto_transaction_uid": {
+      "pattern": "^atx_[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+      "type": "string"
+    },
+    "bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "execution_profile": {
+      "additionalProperties": false,
+      "properties": {
+        "model_ref": {
+          "pattern": "^[a-z][a-z0-9-]{2,63}$",
+          "type": "string"
+        },
+        "reasoning_effort": {
+          "enum": [
+            "HIGH",
+            "LOW",
+            "MAX",
+            "MEDIUM",
+            "ULTRA",
+            "XHIGH"
+          ]
+        }
+      },
+      "required": [
+        "model_ref",
+        "reasoning_effort"
+      ],
+      "type": "object"
+    },
+    "final_action": {
+      "enum": [
+        "DEFER",
+        "NONE",
+        "PUBLISH",
+        "STOP"
+      ]
+    },
+    "finished_at": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+    },
+    "lane_results": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "input_count": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+          },
+          "lane": {
+            "enum": [
+              "REGISTRY",
+              "RUN_LOG"
+            ]
+          },
+          "published_count": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+          },
+          "quarantined_count": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+          },
+          "status": {
+            "enum": [
+              "DEFERRED",
+              "FAILED",
+              "NO_CHANGE",
+              "QUARANTINED",
+              "SETTLED"
+            ]
+          }
+        },
+        "required": [
+          "lane",
+          "status",
+          "input_count",
+          "published_count",
+          "quarantined_count"
+        ],
+        "type": "object"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "notification_receipt_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "overall_status": {
+      "enum": [
+        "COALESCED_WITH_ACTIVE_RUN",
+        "DEFERRED_SINGLE_FLIGHT",
+        "FAILED",
+        "NO_CHANGE",
+        "PARTIAL",
+        "SUCCESS"
+      ]
+    },
+    "protocol_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/protocol_revision"
+    },
+    "publication": {
+      "additionalProperties": false,
+      "properties": {
+        "manifest_digest": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+        },
+        "observed_remote_head": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/git_object_id"
+        }
+      },
+      "required": [
+        "manifest_digest",
+        "observed_remote_head"
+      ],
+      "type": "object"
+    },
+    "reason_codes": {
+      "items": {
+        "enum": [
+          "BUNDLE_MISMATCH",
+          "CAPABILITY_GATE_FAILED",
+          "LOCK_BUSY",
+          "NO_CHANGES",
+          "NOTIFICATION_FAILED",
+          "PRIVACY_GATE_FAILED",
+          "REMOTE_HEAD_CHANGED",
+          "REMOTE_READBACK_FAILED",
+          "SOURCE_INCOMPLETE"
+        ]
+      },
+      "minItems": 0,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "receipt_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "receipt_uid": {
+      "pattern": "^ar_[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:auto-receipt:v2"
+    },
+    "settled_lanes": {
+      "items": {
+        "enum": [
+          "REGISTRY",
+          "RUN_LOG"
+        ]
+      },
+      "minItems": 0,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "started_at": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+    },
+    "trigger_kind": {
+      "enum": [
+        "MANUAL",
+        "SCHEDULED"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "bundle_digest",
+    "receipt_uid",
+    "auto_transaction_uid",
+    "trigger_kind",
+    "started_at",
+    "finished_at",
+    "execution_profile",
+    "final_action",
+    "overall_status",
+    "settled_lanes",
+    "lane_results",
+    "reason_codes",
+    "receipt_digest"
+  ],
+  "title": "Auto execution receipt",
+  "type": "object"
+}

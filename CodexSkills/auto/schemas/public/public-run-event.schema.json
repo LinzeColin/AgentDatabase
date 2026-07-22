@@ -1,0 +1,455 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:public-run-event:v2",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "binding_state": {
+            "const": "BOUND"
+          }
+        },
+        "required": [
+          "binding_state"
+        ]
+      },
+      "then": {
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "unknown_reason_code"
+              ]
+            }
+          ]
+        },
+        "properties": {
+          "surface_class": {
+            "enum": [
+              "CODEX_AUTOMATION",
+              "CODEX_CLI"
+            ]
+          }
+        },
+        "required": [
+          "skill_ref",
+          "controlled_invocation"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "binding_state": {
+            "const": "UNKNOWN"
+          }
+        },
+        "required": [
+          "binding_state"
+        ]
+      },
+      "then": {
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "skill_ref"
+              ]
+            },
+            {
+              "required": [
+                "controlled_invocation"
+              ]
+            }
+          ]
+        },
+        "required": [
+          "unknown_reason_code"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "const": "BINDING_CORRECTION"
+          }
+        },
+        "required": [
+          "event_type"
+        ]
+      },
+      "then": {
+        "required": [
+          "supersedes_event_uid",
+          "supersedes_event_digest"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "const": "RUN_OBSERVED"
+          }
+        },
+        "required": [
+          "event_type"
+        ]
+      },
+      "then": {
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "supersedes_event_uid"
+              ]
+            },
+            {
+              "required": [
+                "supersedes_event_digest"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "surface_class": {
+            "const": "CODEX_DESKTOP"
+          }
+        },
+        "required": [
+          "surface_class"
+        ]
+      },
+      "then": {
+        "properties": {
+          "actor_role": {
+            "enum": [
+              "SUBAGENT",
+              "USER"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "surface_class": {
+            "const": "CODEX_AUTOMATION"
+          }
+        },
+        "required": [
+          "surface_class"
+        ]
+      },
+      "then": {
+        "properties": {
+          "actor_role": {
+            "const": "AUTOMATION"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "surface_class": {
+            "const": "CODEX_CLI"
+          }
+        },
+        "required": [
+          "surface_class"
+        ]
+      },
+      "then": {
+        "properties": {
+          "actor_role": {
+            "const": "CLI"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "surface_class": {
+            "enum": [
+              "AGENTS",
+              "CLAUDE"
+            ]
+          }
+        },
+        "required": [
+          "surface_class"
+        ]
+      },
+      "then": {
+        "properties": {
+          "actor_role": {
+            "const": "UNKNOWN"
+          }
+        }
+      }
+    }
+  ],
+  "properties": {
+    "actor_role": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/actor_role"
+    },
+    "adapter_id": {
+      "pattern": "^[a-z][a-z0-9-]{2,63}$",
+      "type": "string"
+    },
+    "adapter_schema_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "adapter_version": {
+      "maxLength": 64,
+      "pattern": "^v?[0-9]+\\.[0-9]+\\.[0-9]+(?:-[a-z0-9]+(?:[.-][a-z0-9]+)*)?$",
+      "type": "string"
+    },
+    "binding_state": {
+      "enum": [
+        "BOUND",
+        "UNKNOWN"
+      ]
+    },
+    "bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "controlled_invocation": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:skill-binding:v1#/properties/controlled_invocation"
+    },
+    "event_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "event_type": {
+      "enum": [
+        "BINDING_CORRECTION",
+        "RUN_OBSERVED"
+      ]
+    },
+    "event_uid": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/event_uid"
+    },
+    "immutable": {
+      "const": true
+    },
+    "mapping_policy_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "mapping_policy_id": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/urn_id"
+    },
+    "metrics": {
+      "additionalProperties": false,
+      "properties": {
+        "duration_ms": {
+          "anyOf": [
+            {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "input_tokens": {
+          "anyOf": [
+            {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "output_tokens": {
+          "anyOf": [
+            {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "token_usage_status": {
+          "enum": [
+            "MEASURED",
+            "UNAVAILABLE",
+            "UNKNOWN"
+          ]
+        },
+        "tool_call_count": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+        }
+      },
+      "required": [
+        "duration_ms",
+        "tool_call_count",
+        "input_tokens",
+        "output_tokens",
+        "token_usage_status"
+      ],
+      "type": "object"
+    },
+    "model_ref": {
+      "anyOf": [
+        {
+          "pattern": "^[a-z][a-z0-9-]{2,63}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "occurred_at": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+    },
+    "protocol_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/protocol_revision"
+    },
+    "reasoning_effort": {
+      "anyOf": [
+        {
+          "enum": [
+            "HIGH",
+            "LOW",
+            "MAX",
+            "MEDIUM",
+            "ULTRA",
+            "UNKNOWN",
+            "XHIGH"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "redaction": {
+      "additionalProperties": false,
+      "properties": {
+        "omitted_category_codes": {
+          "items": {
+            "enum": [
+              "ABSOLUTE_PATH",
+              "COMMAND_ARGUMENTS",
+              "ENVIRONMENT_RAW",
+              "FILE_BODY",
+              "IDENTITY",
+              "OUTPUT",
+              "PROMPT",
+              "RAW_SOURCE",
+              "REASONING",
+              "SECRET",
+              "STDERR",
+              "STDOUT",
+              "TOOL_ARGUMENTS"
+            ]
+          },
+          "minItems": 0,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "policy_snapshot_digest": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+        },
+        "post_serialization_scan_passed": {
+          "const": true
+        },
+        "unknown_fields_dropped": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+        }
+      },
+      "required": [
+        "policy_snapshot_digest",
+        "unknown_fields_dropped",
+        "omitted_category_codes",
+        "post_serialization_scan_passed"
+      ],
+      "type": "object"
+    },
+    "run_status": {
+      "enum": [
+        "ABORTED",
+        "BLOCKED",
+        "FAILED",
+        "PARTIAL",
+        "SUCCESS",
+        "UNKNOWN"
+      ]
+    },
+    "run_uid": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/run_uid"
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:public-run-event:v2"
+    },
+    "skill_ref": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:skill-binding:v1#/properties/skill_ref"
+    },
+    "supersedes_event_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "supersedes_event_uid": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/event_uid"
+    },
+    "surface_class": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/surface_class"
+    },
+    "trigger_kind": {
+      "enum": [
+        "MANUAL",
+        "SCHEDULED"
+      ]
+    },
+    "unknown_reason_code": {
+      "enum": [
+        "ADAPTER_NOT_APPROVED",
+        "BUNDLE_DIGEST_MISMATCH",
+        "CONTROLLED_INVOCATION_INVALID",
+        "IDENTITY_REFERENCE_INCOMPLETE",
+        "MAPPING_NOT_PROVABLE",
+        "REGISTRY_SNAPSHOT_MISMATCH",
+        "SURFACE_NOT_BINDING_ELIGIBLE",
+        "VERSION_DIGEST_MISMATCH"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "bundle_digest",
+    "event_uid",
+    "run_uid",
+    "event_type",
+    "occurred_at",
+    "surface_class",
+    "actor_role",
+    "adapter_id",
+    "adapter_version",
+    "adapter_schema_digest",
+    "mapping_policy_id",
+    "mapping_policy_digest",
+    "trigger_kind",
+    "run_status",
+    "model_ref",
+    "reasoning_effort",
+    "metrics",
+    "binding_state",
+    "redaction",
+    "immutable",
+    "event_digest"
+  ],
+  "title": "Public observed run event",
+  "type": "object"
+}

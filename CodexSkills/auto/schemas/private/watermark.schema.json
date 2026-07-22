@@ -1,0 +1,100 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:watermark:v2",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "baseline_established": {
+      "type": "boolean"
+    },
+    "bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "lane_states": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "cursor_token": {
+            "maxLength": 4096,
+            "minLength": 1,
+            "type": "string"
+          },
+          "lane": {
+            "enum": [
+              "REGISTRY",
+              "RUN_LOG"
+            ]
+          },
+          "last_settled_manifest_digest": {
+            "anyOf": [
+              {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "last_settled_remote_head": {
+            "anyOf": [
+              {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/git_object_id"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "public_watermark_ref": {
+            "pattern": "^[a-z][a-z0-9-]{2,63}$",
+            "type": "string"
+          },
+          "source_generation_uid": {
+            "pattern": "^gen_[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "lane",
+          "source_generation_uid",
+          "cursor_token",
+          "public_watermark_ref",
+          "last_settled_manifest_digest",
+          "last_settled_remote_head"
+        ],
+        "type": "object"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "protocol_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/protocol_revision"
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:watermark:v2"
+    },
+    "state_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "updated_at": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+    },
+    "watermark_uid": {
+      "pattern": "^wm_[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "bundle_digest",
+    "watermark_uid",
+    "updated_at",
+    "baseline_established",
+    "lane_states",
+    "state_digest"
+  ],
+  "title": "Private lane watermark state",
+  "type": "object"
+}

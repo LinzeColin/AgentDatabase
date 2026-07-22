@@ -1,0 +1,137 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:retention-receipt:v2",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "action": {
+      "enum": [
+        "DELETE_OWNED_SEGMENT",
+        "KEEP",
+        "NO_CANDIDATE",
+        "OFFLINE_TTL_BREACH_CLEANUP",
+        "PRUNE_CURRENT_TREE"
+      ]
+    },
+    "affected_bytes": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "affected_count": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "auto_transaction_uid": {
+      "pattern": "^atx_[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+      "type": "string"
+    },
+    "bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "clock_basis": {
+      "const": "UTC_WALL_CLOCK"
+    },
+    "cutoff_at": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+    },
+    "evidence_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "executed_at": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+    },
+    "gap_code": {
+      "enum": [
+        "OFFLINE_TTL_BREACH",
+        "RAW_EXPIRED_UNPUBLISHED"
+      ]
+    },
+    "hard_delete_claimed": {
+      "const": false
+    },
+    "history_rewrite_performed": {
+      "const": false
+    },
+    "legacy_candidate_count": {
+      "const": 0
+    },
+    "offline_duration_seconds": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "policy_snapshot_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "protected_candidate_count": {
+      "const": 0
+    },
+    "protocol_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/protocol_revision"
+    },
+    "receipt_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "receipt_uid": {
+      "pattern": "^rtr_[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+      "type": "string"
+    },
+    "reprojection_status": {
+      "enum": [
+        "FAILED_GAP_RECORDED",
+        "NOT_APPLICABLE",
+        "SUCCEEDED"
+      ]
+    },
+    "retention_action_uid": {
+      "pattern": "^rta_[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+      "type": "string"
+    },
+    "retention_policy_id": {
+      "const": "urn:linzecolin:agentdatabase:skillops:policy:retention:v2"
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:retention-receipt:v2"
+    },
+    "scope": {
+      "enum": [
+        "GIT_CURRENT_TREE",
+        "MANAGED_RAW"
+      ]
+    },
+    "selected_bytes": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "selected_count": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "ttl_breach": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "bundle_digest",
+    "receipt_uid",
+    "retention_action_uid",
+    "auto_transaction_uid",
+    "executed_at",
+    "cutoff_at",
+    "clock_basis",
+    "scope",
+    "action",
+    "retention_policy_id",
+    "policy_snapshot_digest",
+    "selected_count",
+    "selected_bytes",
+    "affected_count",
+    "affected_bytes",
+    "protected_candidate_count",
+    "legacy_candidate_count",
+    "reprojection_status",
+    "offline_duration_seconds",
+    "ttl_breach",
+    "history_rewrite_performed",
+    "hard_delete_claimed",
+    "evidence_digest",
+    "receipt_digest"
+  ],
+  "title": "Truthful retention execution receipt",
+  "type": "object"
+}

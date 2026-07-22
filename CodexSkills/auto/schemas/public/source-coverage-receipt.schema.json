@@ -1,0 +1,500 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:source-coverage-receipt:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "coverage_subject": {
+            "const": "SKILL_SOURCE"
+          }
+        },
+        "required": [
+          "coverage_subject"
+        ]
+      },
+      "then": {
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "mapping_policy_id"
+              ]
+            },
+            {
+              "required": [
+                "mapping_policy_digest"
+              ]
+            },
+            {
+              "required": [
+                "input_record_count"
+              ]
+            },
+            {
+              "required": [
+                "mapped_input_record_count"
+              ]
+            },
+            {
+              "required": [
+                "unmapped_record_count"
+              ]
+            },
+            {
+              "required": [
+                "policy_excluded_record_count"
+              ]
+            },
+            {
+              "required": [
+                "quarantined_input_record_count"
+              ]
+            },
+            {
+              "required": [
+                "observed_run_count"
+              ]
+            },
+            {
+              "required": [
+                "projected_bound_run_count"
+              ]
+            },
+            {
+              "required": [
+                "projected_unknown_run_count"
+              ]
+            },
+            {
+              "required": [
+                "quarantined_run_count"
+              ]
+            },
+            {
+              "required": [
+                "projected_event_count"
+              ]
+            },
+            {
+              "required": [
+                "surface_breakdown"
+              ]
+            },
+            {
+              "required": [
+                "unmapped_reasons"
+              ]
+            },
+            {
+              "required": [
+                "baseline_action_code"
+              ]
+            },
+            {
+              "required": [
+                "cutover_at"
+              ]
+            },
+            {
+              "required": [
+                "public_safe_watermark_ref"
+              ]
+            },
+            {
+              "required": [
+                "historical_public_run_event_count"
+              ]
+            }
+          ]
+        },
+        "required": [
+          "source_class"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "coverage_subject": {
+            "const": "RUN_SURFACE"
+          }
+        },
+        "required": [
+          "coverage_subject"
+        ]
+      },
+      "then": {
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "source_class"
+              ]
+            },
+            {
+              "required": [
+                "inventory_uid"
+              ]
+            },
+            {
+              "required": [
+                "inventory_digest"
+              ]
+            },
+            {
+              "required": [
+                "inventory_completeness_status"
+              ]
+            },
+            {
+              "required": [
+                "source_material_policy_id"
+              ]
+            },
+            {
+              "required": [
+                "source_material_policy_digest"
+              ]
+            }
+          ]
+        },
+        "required": [
+          "mapping_policy_id",
+          "mapping_policy_digest",
+          "input_record_count",
+          "mapped_input_record_count",
+          "unmapped_record_count",
+          "policy_excluded_record_count",
+          "quarantined_input_record_count",
+          "observed_run_count",
+          "projected_bound_run_count",
+          "projected_unknown_run_count",
+          "quarantined_run_count",
+          "projected_event_count",
+          "surface_breakdown",
+          "unmapped_reasons"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "coverage_state": {
+            "const": "COVERED"
+          },
+          "coverage_subject": {
+            "const": "SKILL_SOURCE"
+          }
+        },
+        "required": [
+          "coverage_subject",
+          "coverage_state"
+        ]
+      },
+      "then": {
+        "properties": {
+          "inventory_completeness_status": {
+            "const": "COMPLETE_AFTER_POLICY_EXCLUSIONS"
+          }
+        },
+        "required": [
+          "inventory_uid",
+          "inventory_digest",
+          "inventory_completeness_status",
+          "source_material_policy_id",
+          "source_material_policy_digest"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "coverage_state": {
+            "enum": [
+              "OFFLINE_GAP",
+              "UNOBSERVED"
+            ]
+          },
+          "coverage_subject": {
+            "const": "SKILL_SOURCE"
+          }
+        },
+        "required": [
+          "coverage_subject",
+          "coverage_state"
+        ]
+      },
+      "then": {
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "inventory_uid"
+              ]
+            },
+            {
+              "required": [
+                "inventory_digest"
+              ]
+            },
+            {
+              "required": [
+                "inventory_completeness_status"
+              ]
+            },
+            {
+              "required": [
+                "source_material_policy_id"
+              ]
+            },
+            {
+              "required": [
+                "source_material_policy_digest"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "baseline_action_code"
+        ]
+      },
+      "then": {
+        "properties": {
+          "coverage_state": {
+            "const": "UNKNOWN"
+          },
+          "coverage_subject": {
+            "const": "RUN_SURFACE"
+          }
+        },
+        "required": [
+          "cutover_at",
+          "public_safe_watermark_ref",
+          "historical_public_run_event_count"
+        ]
+      }
+    }
+  ],
+  "properties": {
+    "adapter_id": {
+      "pattern": "^[a-z][a-z0-9-]{2,63}$",
+      "type": "string"
+    },
+    "adapter_schema_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "adapter_scope": {
+      "pattern": "^[a-z][a-z0-9-]{2,63}$",
+      "type": "string"
+    },
+    "adapter_version": {
+      "maxLength": 64,
+      "pattern": "^v?[0-9]+\\.[0-9]+\\.[0-9]+(?:-[a-z0-9]+(?:[.-][a-z0-9]+)*)?$",
+      "type": "string"
+    },
+    "baseline_action_code": {
+      "const": "BASELINE_ESTABLISHED_NO_HISTORICAL_BACKFILL"
+    },
+    "bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "coverage_state": {
+      "enum": [
+        "COVERED",
+        "OFFLINE_GAP",
+        "UNKNOWN",
+        "UNOBSERVED"
+      ]
+    },
+    "coverage_subject": {
+      "enum": [
+        "RUN_SURFACE",
+        "SKILL_SOURCE"
+      ]
+    },
+    "cutover_at": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+    },
+    "heartbeat_at": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+    },
+    "historical_public_run_event_count": {
+      "const": 0
+    },
+    "input_record_count": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "inventory_completeness_status": {
+      "enum": [
+        "COMPLETE_AFTER_POLICY_EXCLUSIONS",
+        "INCOMPLETE",
+        "UNKNOWN"
+      ]
+    },
+    "inventory_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "inventory_uid": {
+      "pattern": "^sinv_[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+      "type": "string"
+    },
+    "mapped_input_record_count": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "mapping_policy_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "mapping_policy_id": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/urn_id"
+    },
+    "observation_window_finished_at": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+    },
+    "observation_window_started_at": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+    },
+    "observed_run_count": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "policy_excluded_record_count": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "projected_bound_run_count": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "projected_event_count": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "projected_unknown_run_count": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "protocol_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/protocol_revision"
+    },
+    "public_safe_watermark_ref": {
+      "pattern": "^[a-z][a-z0-9-]{2,63}$",
+      "type": "string"
+    },
+    "quarantined_input_record_count": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "quarantined_run_count": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "reason_codes": {
+      "items": {
+        "enum": [
+          "ADAPTER_UNAVAILABLE",
+          "BASELINE_ONLY",
+          "CONTINUITY_GAP",
+          "INVENTORY_INCOMPLETE",
+          "OFFLINE_TTL_BREACH",
+          "QUARANTINED_RECORDS",
+          "SOURCE_UNOBSERVED",
+          "UNMAPPED_RECORDS"
+        ]
+      },
+      "minItems": 0,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "receipt_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "receipt_uid": {
+      "pattern": "^cov_[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:source-coverage-receipt:v1"
+    },
+    "source_class": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/source_class"
+    },
+    "source_material_policy_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "source_material_policy_id": {
+      "const": "urn:linzecolin:agentdatabase:skillops:policy:source-material:v1"
+    },
+    "surface_breakdown": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "actor_role": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/actor_role"
+          },
+          "count": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+          },
+          "surface_class": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/surface_class"
+          }
+        },
+        "required": [
+          "surface_class",
+          "actor_role",
+          "count"
+        ],
+        "type": "object"
+      },
+      "minItems": 0,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "unmapped_reasons": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "count": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/positive_count"
+          },
+          "reason_code": {
+            "enum": [
+              "ACTOR_ROLE_NOT_PROVABLE",
+              "LEGACY_THREAD_SOURCE_MISSING",
+              "MAPPING_POLICY_NO_MATCH",
+              "SOURCE_RECORD_INCOMPLETE"
+            ]
+          }
+        },
+        "required": [
+          "reason_code",
+          "count"
+        ],
+        "type": "object"
+      },
+      "minItems": 0,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "unmapped_record_count": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "bundle_digest",
+    "receipt_uid",
+    "coverage_subject",
+    "coverage_state",
+    "adapter_scope",
+    "adapter_id",
+    "adapter_version",
+    "adapter_schema_digest",
+    "observation_window_started_at",
+    "observation_window_finished_at",
+    "heartbeat_at",
+    "reason_codes",
+    "receipt_digest"
+  ],
+  "title": "Source and runtime coverage receipt",
+  "type": "object"
+}

@@ -1,0 +1,293 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:notification-receipt:v3",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "provider_status": {
+            "const": "SENT"
+          }
+        },
+        "required": [
+          "provider_status"
+        ]
+      },
+      "then": {
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "failure_code"
+              ]
+            }
+          ]
+        },
+        "properties": {
+          "provider_code": {
+            "const": "EMAIL_PROVIDER"
+          }
+        },
+        "required": [
+          "provider_receipt_ref",
+          "sent_at"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "provider_status": {
+            "const": "FAILED"
+          }
+        },
+        "required": [
+          "provider_status"
+        ]
+      },
+      "then": {
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "provider_receipt_ref"
+              ]
+            },
+            {
+              "required": [
+                "sent_at"
+              ]
+            }
+          ]
+        },
+        "properties": {
+          "provider_code": {
+            "const": "EMAIL_PROVIDER"
+          }
+        },
+        "required": [
+          "failure_code"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "provider_status": {
+            "const": "UNKNOWN"
+          }
+        },
+        "required": [
+          "provider_status"
+        ]
+      },
+      "then": {
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "provider_receipt_ref"
+              ]
+            },
+            {
+              "required": [
+                "sent_at"
+              ]
+            }
+          ]
+        },
+        "properties": {
+          "failure_code": {
+            "const": "RECEIPT_UNVERIFIED"
+          },
+          "provider_code": {
+            "const": "EMAIL_PROVIDER"
+          }
+        },
+        "required": [
+          "failure_code"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "provider_status": {
+            "const": "NOT_REQUIRED"
+          }
+        },
+        "required": [
+          "provider_status"
+        ]
+      },
+      "then": {
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "provider_receipt_ref"
+              ]
+            },
+            {
+              "required": [
+                "sent_at"
+              ]
+            },
+            {
+              "required": [
+                "failure_code"
+              ]
+            }
+          ]
+        },
+        "properties": {
+          "provider_code": {
+            "const": "NONE"
+          },
+          "timing": {
+            "const": "NOT_REQUIRED"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "timing": {
+            "enum": [
+              "POST_CONTAINMENT",
+              "PRE_WRITE"
+            ]
+          }
+        },
+        "required": [
+          "timing"
+        ]
+      },
+      "then": {
+        "properties": {
+          "provider_code": {
+            "const": "EMAIL_PROVIDER"
+          }
+        }
+      }
+    }
+  ],
+  "properties": {
+    "approval_required": {
+      "const": false
+    },
+    "auto_transaction_uid": {
+      "pattern": "^atx_[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+      "type": "string"
+    },
+    "bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "created_at": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+    },
+    "failure_code": {
+      "enum": [
+        "CREDENTIAL_UNAVAILABLE",
+        "PROVIDER_REJECTED",
+        "PROVIDER_TIMEOUT",
+        "RECEIPT_UNVERIFIED"
+      ]
+    },
+    "impact": {
+      "enum": [
+        "MAJOR",
+        "MATERIAL",
+        "ROUTINE"
+      ]
+    },
+    "metadata_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "notification_mode": {
+      "const": "AUTOMATIC_NOTIFICATION_ONLY"
+    },
+    "notification_policy_id": {
+      "const": "urn:linzecolin:agentdatabase:skillops:policy:notification:v1"
+    },
+    "notification_uid": {
+      "pattern": "^ntf_[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+      "type": "string"
+    },
+    "owner_reply_required": {
+      "const": false
+    },
+    "policy_snapshot_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "protocol_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/protocol_revision"
+    },
+    "provider_code": {
+      "enum": [
+        "EMAIL_PROVIDER",
+        "NONE"
+      ]
+    },
+    "provider_receipt_ref": {
+      "pattern": "^[a-z][a-z0-9-]{2,63}$",
+      "type": "string"
+    },
+    "provider_status": {
+      "enum": [
+        "FAILED",
+        "NOT_REQUIRED",
+        "SENT",
+        "UNKNOWN"
+      ]
+    },
+    "receipt_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "receipt_uid": {
+      "pattern": "^nrc_[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+      "type": "string"
+    },
+    "recipient_ref": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/recipient_ref"
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:notification-receipt:v3"
+    },
+    "sent_at": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+    },
+    "timing": {
+      "enum": [
+        "NOT_REQUIRED",
+        "POST_CONTAINMENT",
+        "PRE_WRITE"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "bundle_digest",
+    "receipt_uid",
+    "notification_uid",
+    "auto_transaction_uid",
+    "impact",
+    "notification_mode",
+    "timing",
+    "provider_code",
+    "provider_status",
+    "recipient_ref",
+    "notification_policy_id",
+    "policy_snapshot_digest",
+    "metadata_digest",
+    "created_at",
+    "approval_required",
+    "owner_reply_required",
+    "receipt_digest"
+  ],
+  "title": "Public-safe notification receipt",
+  "type": "object"
+}

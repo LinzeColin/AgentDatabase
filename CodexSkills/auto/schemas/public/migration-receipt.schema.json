@@ -1,0 +1,173 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:migration-receipt:v2",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "adapter_id": {
+      "pattern": "^[a-z][a-z0-9-]{2,63}$",
+      "type": "string"
+    },
+    "adapter_schema_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "adapter_scope": {
+      "pattern": "^[a-z][a-z0-9-]{2,63}$",
+      "type": "string"
+    },
+    "adapter_version": {
+      "maxLength": 64,
+      "pattern": "^v?[0-9]+\\.[0-9]+\\.[0-9]+(?:-[a-z0-9]+(?:[.-][a-z0-9]+)*)?$",
+      "type": "string"
+    },
+    "baseline_action_code": {
+      "const": "BASELINE_ESTABLISHED_NO_HISTORICAL_BACKFILL"
+    },
+    "bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "coverage_state": {
+      "const": "UNKNOWN"
+    },
+    "cutover_at": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+    },
+    "evidence_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "historical_public_run_event_count": {
+      "const": 0
+    },
+    "input_record_count": {
+      "const": 577
+    },
+    "legacy_local_mutation_performed": {
+      "const": false
+    },
+    "mapped_input_record_count": {
+      "const": 559
+    },
+    "mapping_policy_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "mapping_policy_id": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/urn_id"
+    },
+    "migration_uid": {
+      "pattern": "^mig_[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+      "type": "string"
+    },
+    "policy_excluded_record_count": {
+      "const": 0
+    },
+    "private_exact_cursor_stored": {
+      "const": true
+    },
+    "protocol_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/protocol_revision"
+    },
+    "public_safe_watermark_ref": {
+      "pattern": "^[a-z][a-z0-9-]{2,63}$",
+      "type": "string"
+    },
+    "quarantined_input_record_count": {
+      "const": 0
+    },
+    "receipt_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "receipt_uid": {
+      "pattern": "^mgr_[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:migration-receipt:v2"
+    },
+    "source_generation_uid": {
+      "pattern": "^gen_[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+      "type": "string"
+    },
+    "surface_breakdown": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "actor_role": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/actor_role"
+          },
+          "count": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+          },
+          "surface_class": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/surface_class"
+          }
+        },
+        "required": [
+          "surface_class",
+          "actor_role",
+          "count"
+        ],
+        "type": "object"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "unmapped_reasons": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "count": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/positive_count"
+          },
+          "reason_code": {
+            "const": "LEGACY_THREAD_SOURCE_MISSING"
+          }
+        },
+        "required": [
+          "reason_code",
+          "count"
+        ],
+        "type": "object"
+      },
+      "maxItems": 1,
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "unmapped_record_count": {
+      "const": 18
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "bundle_digest",
+    "receipt_uid",
+    "migration_uid",
+    "source_generation_uid",
+    "adapter_scope",
+    "adapter_id",
+    "adapter_version",
+    "adapter_schema_digest",
+    "mapping_policy_id",
+    "mapping_policy_digest",
+    "baseline_action_code",
+    "coverage_state",
+    "cutover_at",
+    "public_safe_watermark_ref",
+    "private_exact_cursor_stored",
+    "input_record_count",
+    "mapped_input_record_count",
+    "unmapped_record_count",
+    "policy_excluded_record_count",
+    "quarantined_input_record_count",
+    "surface_breakdown",
+    "unmapped_reasons",
+    "historical_public_run_event_count",
+    "legacy_local_mutation_performed",
+    "evidence_digest",
+    "receipt_digest"
+  ],
+  "title": "No-historical-backfill baseline receipt",
+  "type": "object"
+}

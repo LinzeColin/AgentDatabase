@@ -1,0 +1,208 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:source-inventory:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "adapter_id": {
+      "pattern": "^[a-z][a-z0-9-]{2,63}$",
+      "type": "string"
+    },
+    "adapter_schema_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "adapter_version": {
+      "maxLength": 64,
+      "pattern": "^v?[0-9]+\\.[0-9]+\\.[0-9]+(?:-[a-z0-9]+(?:[.-][a-z0-9]+)*)?$",
+      "type": "string"
+    },
+    "bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "completeness_status": {
+      "enum": [
+        "COMPLETE_AFTER_POLICY_EXCLUSIONS",
+        "INCOMPLETE",
+        "UNKNOWN"
+      ]
+    },
+    "excluded_bytes": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "excluded_file_count": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "excluded_node_count": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "exclusions": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "byte_count": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+          },
+          "file_count": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+          },
+          "node_count": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+          },
+          "reason_code": {
+            "enum": [
+              "CACHE",
+              "OS_METADATA",
+              "SOURCE_OVERLAP",
+              "VCS_METADATA"
+            ]
+          }
+        },
+        "required": [
+          "reason_code",
+          "node_count",
+          "file_count",
+          "byte_count"
+        ],
+        "type": "object"
+      },
+      "minItems": 0,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "included_bytes": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "included_file_count": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "included_tree_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "inventory_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "inventory_uid": {
+      "pattern": "^sinv_[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+      "type": "string"
+    },
+    "observed_finished_at": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+    },
+    "observed_started_at": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+    },
+    "oversize_blocked_count": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "protocol_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/protocol_revision"
+    },
+    "scan_error_counts": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "count": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/positive_count"
+          },
+          "reason_code": {
+            "enum": [
+              "INVALID_PATH_ENCODING",
+              "OVERSIZE_NON_POLICY",
+              "PERMISSION_ERROR",
+              "READ_ERROR",
+              "SPECIAL_FILE",
+              "STAT_ERROR",
+              "SYMLINK_UNSAFE"
+            ]
+          }
+        },
+        "required": [
+          "reason_code",
+          "count"
+        ],
+        "type": "object"
+      },
+      "minItems": 0,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:source-inventory:v1"
+    },
+    "source_class": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/source_class"
+    },
+    "source_material_policy_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "source_material_policy_id": {
+      "const": "urn:linzecolin:agentdatabase:skillops:policy:source-material:v1"
+    },
+    "source_root_ref": {
+      "pattern": "^[a-z][a-z0-9-]{2,63}$",
+      "type": "string"
+    },
+    "symlink_alias_count": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "symlink_aliases": {
+      "items": {
+        "additionalProperties": false,
+        "description": "Public alias evidence; raw readlink text is private and forbidden here.",
+        "properties": {
+          "alias_path": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/repo_relative_posix_path"
+          },
+          "content_digest": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+          },
+          "metadata_digest": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+          },
+          "normalized_target_ref": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/repo_relative_posix_path"
+          }
+        },
+        "required": [
+          "alias_path",
+          "normalized_target_ref",
+          "metadata_digest",
+          "content_digest"
+        ],
+        "type": "object"
+      },
+      "minItems": 0,
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "bundle_digest",
+    "inventory_uid",
+    "source_class",
+    "source_root_ref",
+    "observed_started_at",
+    "observed_finished_at",
+    "adapter_id",
+    "adapter_version",
+    "adapter_schema_digest",
+    "source_material_policy_id",
+    "source_material_policy_digest",
+    "completeness_status",
+    "included_file_count",
+    "included_bytes",
+    "included_tree_digest",
+    "excluded_node_count",
+    "excluded_file_count",
+    "excluded_bytes",
+    "exclusions",
+    "symlink_alias_count",
+    "symlink_aliases",
+    "oversize_blocked_count",
+    "scan_error_counts",
+    "inventory_digest"
+  ],
+  "title": "Public source inventory",
+  "type": "object"
+}

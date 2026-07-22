@@ -1,0 +1,75 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:public-queue-envelope:v2",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "artifact_repo_path": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/repo_relative_posix_path"
+    },
+    "artifact_schema_id": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/urn_id"
+    },
+    "artifact_uid": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/typed_uid"
+    },
+    "auto_transaction_uid": {
+      "pattern": "^atx_[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+      "type": "string"
+    },
+    "bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "envelope_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "envelope_uid": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/envelope_uid"
+    },
+    "lane": {
+      "enum": [
+        "REGISTRY",
+        "RUN_LOG"
+      ]
+    },
+    "protocol_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/protocol_revision"
+    },
+    "queue_state": {
+      "enum": [
+        "QUARANTINED",
+        "READY",
+        "SETTLED"
+      ]
+    },
+    "retry_count": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:public-queue-envelope:v2"
+    },
+    "sealed_at": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "bundle_digest",
+    "envelope_uid",
+    "auto_transaction_uid",
+    "lane",
+    "artifact_schema_id",
+    "artifact_uid",
+    "artifact_digest",
+    "artifact_repo_path",
+    "queue_state",
+    "sealed_at",
+    "retry_count",
+    "envelope_digest"
+  ],
+  "title": "Private public-safe queue envelope",
+  "type": "object"
+}
