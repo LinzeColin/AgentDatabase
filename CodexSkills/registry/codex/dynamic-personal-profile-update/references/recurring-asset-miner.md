@@ -19,7 +19,7 @@ This is the accepted Stage 1 opportunity. It is an extraction workflow, not an a
    - date-only repetition → Schedule/Recurring Prompt;
    - analysis or speculation without a repeatable action → observation.
 4. Produce one candidate with trigger, input, steps, output, exceptions, verification, evidence, confidence, and expiry.
-5. Run one low-cost real trial. Record pass/fail in the Skill evaluation area. Do not automatically install, publish, or promote it.
+5. Use the candidate once in a real task. Record whether it reduced clarification, rework, or context reconstruction. Do not automatically install, publish, or promote it.
 
 ## Candidate template
 
@@ -37,8 +37,8 @@ evidence:
 counterevidence:
 confidence:
 expiry_or_review_date:
-trial_result: pending
+validation_result: pending
 promotion_decision: pending
 ```
 
-`Emerging Capability Trial` is retained only as this one-trial gate. It is not an independent project or directory.
+There is no separate trial project or directory. A candidate remains pending until one real task demonstrates measurable usefulness; this validation is part of the miner, not another opportunity.
