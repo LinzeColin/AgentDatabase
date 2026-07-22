@@ -3,7 +3,8 @@
 ## P0 repository boundary
 
 This checkout is the sole canonical `LinzeColin/AgentDatabase` repository.
-Its active product scopes are `OpenAIDatabase/` and top-level `MemoryAtlas/`.
+Its active product scopes are `OpenAIDatabase/`, top-level `MemoryAtlas/`, and
+`CodexSkills/`.
 Do not restore projects migrated to other repositories, the retired root
 governance tree, a second OpenAIDatabase fact source, private core, credentials,
 session material, `data/raw_archives/**`, or historical large archives.
