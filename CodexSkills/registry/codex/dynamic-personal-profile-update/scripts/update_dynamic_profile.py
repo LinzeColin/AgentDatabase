@@ -178,7 +178,7 @@ def role_for(path: str, key: str) -> str:
     return "behavior_signal"
 
 
-def collect_json(value: Any, path: str, records: list[dict[str, Any]], source: str) -> None:
+def collect_json(value: Any, path: str, records: list[dict[str, Any]], source: str, now: datetime) -> None:
     if isinstance(value, dict):
         picked = None
         picked_key = ""
@@ -193,18 +193,18 @@ def collect_json(value: Any, path: str, records: list[dict[str, Any]], source: s
                 "source": source,
                 "field": picked_key,
                 "role": role_for(source, picked_key),
-                "window": date_window(json.dumps(value, ensure_ascii=False), datetime.now(timezone.utc)),
+                "window": date_window(json.dumps(value, ensure_ascii=False), now),
             })
         for key, child in value.items():
             if key in VOLATILE_KEYS:
                 continue
-            collect_json(child, f"{path}.{key}", records, source)
+            collect_json(child, f"{path}.{key}", records, source, now)
     elif isinstance(value, list):
         for index, child in enumerate(value):
-            collect_json(child, f"{path}[{index}]", records, source)
+            collect_json(child, f"{path}[{index}]", records, source, now)
 
 
-def collect_markdown(text: str, source: str, records: list[dict[str, Any]]) -> None:
+def collect_markdown(text: str, source: str, records: list[dict[str, Any]], now: datetime) -> None:
     in_code = False
     for line in text.splitlines():
         if line.strip().startswith("```"):
@@ -221,22 +221,22 @@ def collect_markdown(text: str, source: str, records: list[dict[str, Any]]) -> N
                     "source": source,
                     "field": "bullet",
                     "role": role_for(source, "bullet"),
-                    "window": date_window(candidate, datetime.now(timezone.utc)),
+                    "window": date_window(candidate, now),
                 })
 
 
-def collect_records(paths: list[Path], database_dir: Path) -> list[dict[str, Any]]:
+def collect_records(paths: list[Path], database_dir: Path, now: datetime) -> list[dict[str, Any]]:
     records: list[dict[str, Any]] = []
     for path in paths:
         relative = path.relative_to(database_dir).as_posix()
         text = path.read_text(encoding="utf-8", errors="replace")
         if path.suffix.lower() == ".json":
             try:
-                collect_json(json.loads(text), "$", records, relative)
+                collect_json(json.loads(text), "$", records, relative, now)
             except json.JSONDecodeError:
                 continue
         else:
-            collect_markdown(text, relative, records)
+            collect_markdown(text, relative, records, now)
     return records
 
 
@@ -433,7 +433,8 @@ def main(argv: list[str] | None = None) -> int:
         if not paths:
             raise ValueError("no allowlisted derived source files found")
         source_hash, source_records = source_snapshot(paths, database_dir)
-        entries = aggregate(collect_records(paths, database_dir), datetime.fromisoformat(now.replace("Z", "+00:00")))
+        now_dt = datetime.fromisoformat(now.replace("Z", "+00:00"))
+        entries = aggregate(collect_records(paths, database_dir, now_dt), now_dt)
         semantic = semantic_hash(source_hash, entries)
         if previous_semantic_hash(output) == semantic:
             print(json.dumps({"status": "NO_CHANGE", "semantic_snapshot_sha256": semantic}, ensure_ascii=False))
