@@ -36,7 +36,7 @@ This Skill is a generated-view tool. It is not the canonical stable profile and 
 3. Run `scripts/validate_dynamic_profile.py` against the single output file.
 4. Inspect the generated Profile Delta. Separate observed evidence from inference, counterevidence, confidence, validity, and proposed agent action.
 5. When a change affects the next task, use `references/profile-to-agent-action-prompt.md` to create a temporary action instruction. Do not promote it automatically.
-6. When repeated behavior may be reusable, use `references/recurring-asset-miner.md` to classify it as Prompt Template, Workflow, Skill, Schedule/Recurring Prompt, or observation. Require one real trial before promotion.
+6. When repeated behavior may be reusable, use `references/recurring-asset-miner.md` to classify it as Prompt Template, Workflow, Skill, Schedule/Recurring Prompt, or observation. Require one real-task validation before promotion.
 
 ## Running the deterministic processor
 
@@ -54,7 +54,7 @@ The processor prints a small JSON status object. `NO_CHANGE` is a successful res
 ## What the output means
 
 - `current`: repeated supported signal in the current derived sources; still not a stable memory write.
-- `emerging`: repeated or cross-source candidate that deserves one controlled trial.
+- `emerging`: repeated or cross-source candidate that deserves one controlled real-task validation.
 - `hypothesis`: plausible signal with insufficient independent evidence.
 - v0.0.0.1 emits only these three statuses; `declining` and `retired` require a later authorized temporal-state contract.
 
