@@ -98,6 +98,14 @@
       "sources": [
         "config/context_sources/resource_routes.json"
       ]
+    },
+    "dynamic_profile": {
+      "purpose": "Time-aware generated profile delta; read-only derived view, not canonical memory.",
+      "sources": [
+        "data/derived/profile/DYNAMIC_PROFILE.md"
+      ],
+      "access": "read_only_derived",
+      "canonical": false
     }
   },
   "sync_required_targets": [
