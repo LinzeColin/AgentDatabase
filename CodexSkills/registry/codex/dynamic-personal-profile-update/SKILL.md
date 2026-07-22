@@ -56,8 +56,7 @@ The processor prints a small JSON status object. `NO_CHANGE` is a successful res
 - `current`: repeated supported signal in the current derived sources; still not a stable memory write.
 - `emerging`: repeated or cross-source candidate that deserves one controlled trial.
 - `hypothesis`: plausible signal with insufficient independent evidence.
-- `declining`: previously observed signal with weaker recent support.
-- `retired`: explicitly invalidated or expired signal only when the source evidence says so.
+- v0.0.0.1 emits only these three statuses; `declining` and `retired` require a later authorized temporal-state contract.
 
 The output's YAML front matter is the machine contract. The Markdown sections are its human-readable projection. They are generated from the same data in one pass.
 
