@@ -1,0 +1,51 @@
+schema_version: kmfa.project_cost.formula_registry.v2
+formulas:
+  - formula_id: FORM-PROJECT-COST-SUM-V2
+    status: IMPLEMENTED_ENGINE_R9_RELEASE_VALIDATED_R12_VALIDATED_FACTS_REQUIRED
+    expression: sum_validated_facts_for_named_metric
+    required_dimensions: [metric_id, lifecycle_stage, legal_entity_id, canonical_project_id, wbs_or_cost_code]
+  - formula_id: FORM-ACCOUNTING-MARGIN-V2
+    status: IMPLEMENTED_ENGINE_R9_RELEASE_VALIDATED_R12_COMPATIBLE_BASIS_INPUTS_REQUIRED
+    expression: compatible_recognized_revenue_minus_validated_cost_metric
+  - formula_id: FORM-CASH-NET-V2
+    status: IMPLEMENTED_ENGINE_R9_RELEASE_VALIDATED_R12_VERIFIED_CASH_INPUTS_REQUIRED
+    expression: verified_collected_cash_minus_verified_paid_cash
+  - formula_id: FORM-MGMT-V2
+    status: IMPLEMENTED_ENGINE_R8_ACTIVE_PRIVATE_POLICY_REQUIRED
+    expression: allowlisted_rate_times_evidence_bound_base
+    required_profile_fields: [scope, effective_dates, rate_fraction, rounding_layer, policy_or_direct_evidence, request_input_config_hashes, test_vectors]
+  - formula_id: FORM-PAYROLL-V2
+    model_id: FULLY_LOADED_EMPLOYER_COST_WITH_APPROVED_TIME
+    status: IMPLEMENTED_ENGINE_R8_ACTIVE_COMPONENT_REGISTRY_CONTROL_TIME_AND_POLICY_REQUIRED
+    expression: fully_loaded_employer_cost_times_approved_project_time_divided_by_approved_total_time
+  - formula_id: FORM-TAX-V2
+    status: IMPLEMENTED_ENGINE_R8_DIRECT_PROJECT_EVIDENCE_OR_PROJECT_POLICY_REQUIRED
+    expression: preserve_source_tax_and_compare_to_half_up_rate_times_tax_base
+  - formula_id: FORM-INTEREST-V2
+    status: IMPLEMENTED_ENGINE_R8_PRINCIPAL_MOVEMENT_CALENDAR_AND_POLICY_REQUIRED
+    expression: interval_principal_times_effective_annual_rate_times_elapsed_days_divided_by_day_count_basis
+  - formula_id: FORM-WIP-BRIDGE-V2
+    status: IMPLEMENTED_ENGINE_R5_ACTIVE_PRIVATE_POLICY_REQUIRED
+    expression: opening_wip_plus_additions_adjustments_transfer_in_minus_reversals_other_transfers_and_net_recognized_cogs_equals_closing_wip
+    companion_control: net_5001_to_6401_transfer_minus_net_recognized_6401_cogs_equals_zero
+    required_policy_ref: account_mapping_and_wip_bridge
+
+notes:
+  - R1 implements no financial formula; R5 implements the governed WIP bridge engine; R8 implements policy-input engines without named-Metric inclusion.
+  - Reference differences cannot activate or populate a formula.
+  - The historical management 2 percent observation is REFERENCE_OBSERVED_NOT_ACTIVE and cannot supply a calculate-run default.
+  - Product 0.2 is CNY-only; FX rate profiles are registered by the R8 engine but ACTIVE FX is blocked as DEFERRED_P1.
+  - Every R8 result remains NOT_EVALUATED_R8 until R9 constructs and independently validates named Metrics.
+  - R12 validates registration and implementation coverage; real financial use still requires all active private inputs and final generation gates.
+
+reference_observations:
+  - observation_id: FORM-MGMT-2PCT-OBSERVED-V1
+    status: REFERENCE_OBSERVED_NOT_ACTIVE
+    activation_allowed: false
+
+rate_registry:
+  management_rate: IMPLEMENTED_R8_ACTIVE_PRIVATE_POLICY_REQUIRED
+  project_tax_rate: IMPLEMENTED_R8_DIRECT_OR_POLICY_EVIDENCE_REQUIRED
+  capital_interest_rate: IMPLEMENTED_R8_POLICY_AND_PRINCIPAL_SCHEDULE_REQUIRED
+  payroll_time_ratio: IMPLEMENTED_R8_APPROVED_TIME_CONTROL_REQUIRED
+  fx_rate: DEFERRED_P1_ACTIVE_BLOCKED_PRODUCT_0_2

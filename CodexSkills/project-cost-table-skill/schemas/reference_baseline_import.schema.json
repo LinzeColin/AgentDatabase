@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "kmfa.project_cost.reference_baseline_import.private.v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "classification",
+    "baseline_file",
+    "baseline_sha256",
+    "expected_project_count",
+    "task_pack_version",
+    "source_package_manifest_sha256"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "kmfa.project_cost.reference_baseline_import.private.v1"
+    },
+    "classification": {
+      "const": "PRIVATE_RUNTIME"
+    },
+    "baseline_file": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9._-]+\\.json$"
+    },
+    "baseline_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "expected_project_count": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "task_pack_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_package_manifest_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  },
+  "additionalProperties": false
+}

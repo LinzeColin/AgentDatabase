@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "kmfa.project_cost.interest_input.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["calculation_id", "scope", "start_date", "end_date", "opening_principal_minor", "movements", "same_day_order", "day_count_convention", "evidence_refs", "company_policy_refs", "input_resolution_refs", "bound_input_hash"],
+  "properties": {
+    "calculation_id": {"type": "string", "pattern": "^[a-z][a-z0-9_]{2,63}_[0-9a-f]{32}$"},
+    "scope": {
+      "type": "object", "additionalProperties": false,
+      "required": ["metric_id", "legal_entity_id", "canonical_project_id", "wbs_or_cost_code"],
+      "properties": {
+        "metric_id": {"type": "string", "minLength": 1},
+        "legal_entity_id": {"type": "string", "minLength": 1},
+        "canonical_project_id": {"type": "string", "minLength": 1},
+        "wbs_or_cost_code": {"type": "string", "minLength": 1}
+      }
+    },
+    "start_date": {"type": "string", "format": "date"},
+    "end_date": {"type": "string", "format": "date"},
+    "opening_principal_minor": {"type": "integer", "minimum": 0},
+    "movements": {
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["movement_id", "movement_date", "kind", "principal_delta_minor", "evidence_refs"],
+        "properties": {
+          "movement_id": {"type": "string", "pattern": "^[a-z][a-z0-9_]{2,63}_[0-9a-f]{32}$"},
+          "movement_date": {"type": "string", "format": "date"},
+          "kind": {"enum": ["RECEIPT", "PAYMENT", "PREPAYMENT"]},
+          "principal_delta_minor": {"type": "integer"},
+          "evidence_refs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "pattern": "^evidence://sha256/[0-9a-f]{64}$"}}
+        }
+      }
+    },
+    "same_day_order": {"type": "array", "minItems": 3, "maxItems": 3, "uniqueItems": true, "items": {"enum": ["RECEIPT", "PAYMENT", "PREPAYMENT"]}},
+    "day_count_convention": {"enum": ["ACTUAL_365", "ACTUAL_360"]},
+    "evidence_refs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "pattern": "^evidence://sha256/[0-9a-f]{64}$"}},
+    "company_policy_refs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "pattern": "^policy://sha256/[0-9a-f]{64}$"}},
+    "input_resolution_refs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^resolution_[0-9a-f]{32}$"}},
+    "bound_input_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

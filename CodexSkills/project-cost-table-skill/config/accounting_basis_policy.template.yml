@@ -1,0 +1,67 @@
+schema_version: kmfa.project_cost.accounting_basis_policy.v1
+policy_id: TEMPLATE-ACCOUNTING-BASIS-REPLACE-PRIVATELY
+policy_version: 0.0.0-template
+status: TEMPLATE_NOT_ACTIVE
+effective_from: '2000-01-01'
+effective_to: null
+base_currency: CNY
+evidence_refs: []
+valuation_policy_ref: null
+blank_counter_side_as_zero: false
+wip_to_cogs_control_required: true
+status_rules:
+  - source_status: REPLACE_POSTED_STATUS
+    action: INCLUDE
+    reason_code: INCLUDED_POSTED
+    evidence_ref: null
+  - source_status: REPLACE_VOID_STATUS
+    action: EXCLUDE
+    reason_code: EXCLUDED_VOID
+    evidence_ref: null
+row_kind_rules:
+  - source_row_kind: REPLACE_WIP_OPENING_KIND
+    semantic: WIP_OPENING
+    evidence_ref: null
+  - source_row_kind: REPLACE_WIP_CLOSING_KIND
+    semantic: WIP_CLOSING
+    evidence_ref: null
+  - source_row_kind: REPLACE_WIP_ADDITION_KIND
+    semantic: WIP_ADDITION
+    evidence_ref: null
+  - source_row_kind: REPLACE_WIP_TO_COGS_KIND
+    semantic: WIP_TO_COGS_TRANSFER
+    evidence_ref: null
+  - source_row_kind: REPLACE_COGS_RECOGNITION_KIND
+    semantic: COGS_RECOGNITION
+    evidence_ref: null
+  - source_row_kind: REPLACE_TOTAL_KIND
+    semantic: EXCLUDE_CONTROL
+    evidence_ref: null
+account_rules:
+  - account_code: REPLACE_WIP_ACCOUNT
+    bridge_group_id: REPLACE_WIP_COGS_BRIDGE_GROUP
+    valid_from: '2000-01-01'
+    valid_to: null
+    allowed_semantics:
+      - WIP_OPENING
+      - WIP_CLOSING
+      - WIP_ADDITION
+      - WIP_ADJUSTMENT
+      - WIP_TRANSFER_IN
+      - WIP_REVERSAL
+      - WIP_OTHER_TRANSFER_OUT
+      - WIP_TO_COGS_TRANSFER
+      - WIP_FROM_COGS_REVERSAL
+    evidence_ref: null
+  - account_code: REPLACE_COGS_ACCOUNT
+    bridge_group_id: REPLACE_WIP_COGS_BRIDGE_GROUP
+    valid_from: '2000-01-01'
+    valid_to: null
+    allowed_semantics:
+      - COGS_RECOGNITION
+      - COGS_REVERSAL
+    evidence_ref: null
+period_policy:
+  calendar_id: REPLACE_COMPANY_FISCAL_CALENDAR
+  closed_through: null
+  late_posting_mode: REQUIRE_BOUND_PRIOR_SNAPSHOT_FOR_CLOSED_PERIOD

@@ -1,0 +1,126 @@
+schema_version: kmfa.project_cost.input_manifest.v3
+manifest_id: SYNTHETIC_TEMPLATE_REPLACE_PRIVATELY
+input_root: /ABSOLUTE/PRIVATE/RAW_ROOT
+read_only: true
+base_currency: CNY
+as_of: '2000-01-01'
+project_selector:
+  project_code: SYNTHETIC_REPLACE_PRIVATELY
+metric_id: COST_POSTED_ACTUAL
+accounting_basis_id: JOB_COST_INCURRED
+requested_basis_ids: [JOB_COST_INCURRED, GL_RECOGNIZED_COGS]
+security_profile_id: LOCAL-FILE-SECURITY-V1
+selection_policy:
+  explicit_private_manifest_required: true
+  fail_on_multiple_without_decision: true
+  fail_on_missing_required: true
+  full_digest_required_for_final_run: true
+  mtime_is_authority: false
+  never_mutate_sources: true
+  input_sufficiency_required_before_source_body_read: true
+slots:
+  project_identity:
+    reader: project_identity_v2
+    reader_version: REPLACE_WITH_LOCKED_VERSION
+    missing_behavior: BLOCKED_IDENTITY
+    required_for: [calculate]
+    private_patterns: []
+    logical_source_period: REPLACE_PRIVATELY
+    expected_schema_id: REPLACE_PRIVATELY
+    expected_schema_fingerprint: null
+    selected_source_id: null
+    selected_sha256: null
+    selected_sources: []
+    selection_resolution_ref: null
+  general_ledger:
+    reader: kingdee_ledger_v2
+    reader_version: REPLACE_WITH_LOCKED_VERSION
+    missing_behavior: BLOCKED_SOURCE
+    required_for: [calculate]
+    private_patterns: []
+    logical_source_period: REPLACE_PRIVATELY
+    expected_schema_id: REPLACE_PRIVATELY
+    expected_schema_fingerprint: null
+    selected_source_id: null
+    selected_sha256: null
+    selected_sources: []
+    selection_resolution_ref: null
+  payroll_and_time:
+    reader: payroll_time_v2
+    reader_version: REPLACE_WITH_LOCKED_VERSION
+    missing_behavior: BLOCKED_FORMULA
+    required_for: [COST_ACCRUED, COST_POSTED_ACTUAL, MARGIN_ACCOUNTING]
+    private_patterns: []
+    logical_source_period: REPLACE_PRIVATELY
+    expected_schema_id: REPLACE_PRIVATELY
+    expected_schema_fingerprint: null
+    selected_source_id: null
+    selected_sha256: null
+    selected_sources: []
+    selection_resolution_ref: null
+  project_billing:
+    reader: project_invoice_v2
+    reader_version: 2.0.0
+    missing_behavior: BLOCKED_SOURCE
+    required_for: [REV_BILLED]
+    private_patterns: []
+    logical_source_period: REPLACE_PRIVATELY
+    expected_schema_id: REPLACE_PRIVATELY
+    expected_schema_fingerprint: null
+    selected_source_id: null
+    selected_sha256: null
+    selected_sources: []
+    selection_resolution_ref: null
+  cash_out:
+    reader: payment_v2
+    reader_version: 2.0.0
+    missing_behavior: BLOCKED_SOURCE
+    required_for: [COST_PAID, MARGIN_CASH]
+    private_patterns: []
+    logical_source_period: REPLACE_PRIVATELY
+    expected_schema_id: REPLACE_PRIVATELY
+    expected_schema_fingerprint: null
+    selected_source_id: null
+    selected_sha256: null
+    selected_sources: []
+    selection_resolution_ref: null
+  contract_and_changes:
+    reader: contract_change_v2
+    reader_version: 2.0.0
+    missing_behavior: BLOCKED_SOURCE
+    required_for: [COST_BUDGET, COST_COMMITTED, REV_CONTRACT_VALUE]
+    private_patterns: []
+    logical_source_period: REPLACE_PRIVATELY
+    expected_schema_id: REPLACE_PRIVATELY
+    expected_schema_fingerprint: null
+    selected_source_id: null
+    selected_sha256: null
+    selected_sources: []
+    selection_resolution_ref: null
+  cash_in:
+    reader: collection_v2
+    reader_version: 2.0.0
+    missing_behavior: BLOCKED_SOURCE
+    required_for: [CASH_COLLECTED, MARGIN_CASH]
+    private_patterns: []
+    logical_source_period: REPLACE_PRIVATELY
+    expected_schema_id: REPLACE_PRIVATELY
+    expected_schema_fingerprint: null
+    selected_source_id: null
+    selected_sha256: null
+    selected_sources: []
+    selection_resolution_ref: null
+  reference_reports:
+    reader: hash_bound_reference_v2
+    reader_version: REPLACE_WITH_LOCKED_VERSION
+    missing_behavior: REPLAY_BLOCKED
+    required_for: [reference-replay]
+    prohibited_in_calculate: true
+    private_patterns: []
+    logical_source_period: REPLACE_PRIVATELY
+    expected_schema_id: REPLACE_PRIVATELY
+    expected_schema_fingerprint: null
+    selected_source_id: null
+    selected_sha256: null
+    selected_sources: []
+    selection_resolution_ref: null

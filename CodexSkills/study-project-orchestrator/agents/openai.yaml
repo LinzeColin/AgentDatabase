@@ -1,0 +1,4 @@
+interface:
+  display_name: "Study Project Orchestrator"
+  short_description: "Daily GitHub-backed learning workflow"
+  default_prompt: "Use $study-project-orchestrator to start or continue a fixed-period Study Project."

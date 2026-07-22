@@ -1,0 +1,113 @@
+schema_version: kmfa.project_cost.input_requirements.v1
+default_output_directory: <private_runtime>/runs/<run_id>/outputs
+missing_input_user_options:
+  - SUPPLIED
+  - SCOPE_REDUCED
+  - QUALIFIED_ALTERNATE_EVIDENCE
+  - OMIT_OPTIONAL_PRESENTATION
+  - BLOCKED
+resolution_policy:
+  explicit_user_instruction_required_for:
+    - QUALIFIED_ALTERNATE_EVIDENCE
+    - SCOPE_REDUCED
+    - OMIT_OPTIONAL_PRESENTATION
+    - BLOCKED
+  evidence_ref_required_for:
+    - SUPPLIED
+    - QUALIFIED_ALTERNATE_EVIDENCE
+  supplied_input_requires_rescan_to_present: true
+  no_response_is_permission: false
+  non_waivable_omission_allowed: false
+global_requirements:
+  - requirement_id: RUN_MODE
+    classification: NON_WAIVABLE
+    applies_to_modes: [inventory, reference-replay, calculate, review, restate]
+    allowed_resolutions: [SUPPLIED, BLOCKED]
+  - requirement_id: PROJECT_SCOPE
+    classification: NON_WAIVABLE
+    applies_to_modes: [reference-replay, calculate, review, restate]
+    allowed_resolutions: [SUPPLIED, SCOPE_REDUCED, BLOCKED]
+  - requirement_id: AS_OF_DATE
+    classification: NON_WAIVABLE
+    applies_to_modes: [reference-replay, calculate, restate]
+    allowed_resolutions: [SUPPLIED, SCOPE_REDUCED, BLOCKED]
+  - requirement_id: METRIC_AND_BASIS
+    classification: NON_WAIVABLE
+    applies_to_modes: [calculate, restate]
+    allowed_resolutions: [SUPPLIED, SCOPE_REDUCED, BLOCKED]
+  - requirement_id: RAW_ROOT_AND_MANIFEST
+    classification: NON_WAIVABLE
+    applies_to_modes: [inventory, reference-replay, calculate, restate]
+    allowed_resolutions: [SUPPLIED, QUALIFIED_ALTERNATE_EVIDENCE, SCOPE_REDUCED, BLOCKED]
+  - requirement_id: SAFE_READ_AND_DIGEST
+    classification: NON_WAIVABLE
+    applies_to_modes: [inventory, reference-replay, calculate, restate]
+    allowed_resolutions: [SUPPLIED, BLOCKED]
+  - requirement_id: OUTPUT_DIRECTORY
+    classification: NON_WAIVABLE
+    applies_to_modes: [inventory, reference-replay, calculate, review, restate]
+    allowed_resolutions: [SUPPLIED, BLOCKED]
+mode_dependencies:
+  inventory:
+    required_slots: []
+  reference-replay:
+    required_slots: [reference_reports]
+  calculate:
+    required_slots: [project_identity]
+  review:
+    required_slots: []
+  restate:
+    required_slots: [project_identity]
+metric_dependencies:
+  COST_BUDGET:
+    required_slots: [project_identity, contract_and_changes]
+    required_policy_refs: [budget_version_policy]
+  COST_COMMITTED:
+    required_slots: [project_identity, contract_and_changes]
+    required_policy_refs: [commitment_status_policy]
+  COST_ACCRUED:
+    required_slots: [project_identity, general_ledger, payroll_and_time]
+    required_policy_refs: [accrual_and_reversal_policy, fully_loaded_payroll_policy]
+  COST_POSTED_ACTUAL:
+    required_slots: [project_identity, general_ledger, payroll_and_time]
+    required_basis_ids: [JOB_COST_INCURRED, GL_RECOGNIZED_COGS]
+    required_policy_refs: [account_mapping_and_wip_bridge, fully_loaded_payroll_policy]
+  COST_PAID:
+    required_slots: [project_identity, cash_out]
+    required_policy_refs: [verified_payment_status_and_mapping]
+  COST_FORECAST_EAC:
+    required_slots: [project_identity, general_ledger]
+    required_policy_refs: [approved_forecast_to_complete]
+  REV_CONTRACT_VALUE:
+    required_slots: [project_identity, contract_and_changes]
+    required_policy_refs: [contract_change_status_policy]
+  REV_BILLED:
+    required_slots: [project_identity, project_billing]
+    required_policy_refs: [invoice_credit_status_policy]
+  REV_RECOGNIZED:
+    required_slots: [project_identity, general_ledger]
+    required_policy_refs: [revenue_recognition_mapping]
+  CASH_COLLECTED:
+    required_slots: [project_identity, cash_in]
+    required_policy_refs: [verified_collection_status_and_mapping]
+  MARGIN_ACCOUNTING:
+    required_component_metrics: [REV_RECOGNIZED, COST_POSTED_ACTUAL]
+    conditional_component_metrics: [COST_ACCRUED]
+  MARGIN_CASH:
+    required_component_metrics: [CASH_COLLECTED, COST_PAID]
+payroll_model:
+  model_id: FULLY_LOADED_EMPLOYER_COST_WITH_APPROVED_TIME
+  classification: NON_WAIVABLE_WHEN_PAYROLL_IN_SCOPE
+  required_inputs:
+    - effective_dated_pay_component_registry
+    - payroll_period_control_total
+    - qualified_employee_identity
+    - approved_time_or_day_source
+    - project_entity_wbs_mapping
+    - allocation_and_residual_rule
+    - unallocated_payroll_pool
+  prohibited_defaults:
+    - guessed_pay_components
+    - inferred_day_rate
+    - historical_result_backsolve
+    - automatic_unallocated_spread

@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EvolutionResult",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "metrics", "proposals", "shadow_diff", "surprises", "published"],
+  "properties": {
+    "contract_version": {"const": "0.4.1"},
+    "metrics": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "numerator", "denominator", "value", "sample_size"],
+        "properties": {
+          "name": {"type": "string"},
+          "numerator": {"type": ["number", "null"]},
+          "denominator": {"type": ["number", "null"]},
+          "value": {"type": ["number", "null"]},
+          "sample_size": {"type": "integer", "minimum": 0}
+        }
+      }
+    },
+    "proposals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["proposal_id", "change_type", "evidence_refs", "requires_owner_approval", "rollback_version"],
+        "properties": {
+          "proposal_id": {"type": "string"},
+          "change_type": {"enum": ["recall_expand", "source_fix", "parser_fix", "ranking_change", "exclusion_change", "business_boundary_change"]},
+          "evidence_refs": {"type": "array", "items": {"type": "string"}},
+          "requires_owner_approval": {"type": "boolean"},
+          "rollback_version": {"type": ["string", "null"]}
+        }
+      }
+    },
+    "shadow_diff": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["added", "removed", "downgraded", "quality_regressions"],
+      "properties": {
+        "added": {"type": "integer", "minimum": 0},
+        "removed": {"type": "integer", "minimum": 0},
+        "downgraded": {"type": "integer", "minimum": 0},
+        "quality_regressions": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "surprises": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["signal_id", "layer", "claim", "confidence", "evidence_refs"],
+        "properties": {
+          "signal_id": {"type": "string"},
+          "layer": {"const": "SIGNAL"},
+          "claim": {"type": "string"},
+          "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+          "evidence_refs": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    },
+    "published": {"const": false}
+  }
+}

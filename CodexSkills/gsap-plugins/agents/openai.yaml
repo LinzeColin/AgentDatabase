@@ -1,0 +1,6 @@
+interface:
+  display_name: "GSAP Plugins"
+  short_description: "Plugin registration, Flip, Draggable, SplitText, SVG plugins"
+  default_prompt: "Use $gsap-plugins for GSAP plugin usage, registration, and plugin licensing guidance."
+policy:
+  allow_implicit_invocation: true

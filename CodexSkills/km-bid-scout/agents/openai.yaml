@@ -1,0 +1,4 @@
+interface:
+  display_name: "KM搜标总控"
+  short_description: "路由工业搜标全链路，控制最小 Skill 加载、只读边界与停止门"
+  default_prompt: "使用 $km-bid-scout 先做输入充分性预检，再按当前 mode 选择最小只读子 Skill 链；最后报告所有输出文件绝对路径。"

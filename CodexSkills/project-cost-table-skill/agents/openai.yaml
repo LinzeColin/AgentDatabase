@@ -1,0 +1,4 @@
+interface:
+  display_name: "项目成本表 Skill"
+  short_description: "先检查输入，再生成可复核项目成本最终文件并明确输出路径"
+  default_prompt: "请使用 $project-cost-table-skill 先检查本次输入是否足够；缺项时向我提供明确处理选项，全部门禁通过后立即生成双口径最终文件并告诉我所有输出的绝对路径。Skill 不设置负责人或授权人、不管理公司审批；生成后由调用方 Codex 在 Skill 外继续公司现有内部流程。"

@@ -1,0 +1,24 @@
+schema_version: kmfa.project_cost.governance.v1
+task_pack_version: 1.2.0
+product_version: 0.2.0
+task_id: KMFA-PROJECT-COST-TABLE-SKILL-V2-PROPOSED
+acceptance_id: ACC-KMFA-PROJECT-COST-TABLE-SKILL-V2-PROPOSED
+model_id: MODEL-KMFA-PROJECT-COST-002-PROPOSED
+risk_tier: T3
+repository: LinzeColin/KMOS
+project_path: KMFA/project-cost-table-skill
+run_status:
+  R0: COMPLETE
+  R1: COMPLETE
+  R2: COMPLETE
+  R3: COMPLETE
+  R4: COMPLETE
+  R5: COMPLETE
+  R6: COMPLETE
+  R7: COMPLETE
+  R8: COMPLETE
+  R9: COMPLETE
+  R10: COMPLETE
+  R11: COMPLETE
+  R12: COMPLETE
+  GLOBAL_INSTALL: MACHINE_LOCAL_EXTERNAL

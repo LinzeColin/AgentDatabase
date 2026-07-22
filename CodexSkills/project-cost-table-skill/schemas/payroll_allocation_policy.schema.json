@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "kmfa.project_cost.payroll_allocation_policy.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "policy_id", "policy_version", "status", "valid_from", "valid_to", "allocation_method", "time_unit", "residual_destination", "evidence_refs", "company_policy_refs", "input_resolution_refs", "bound_request_hash", "bound_input_hash", "bound_config_hash"],
+  "properties": {
+    "schema_version": {"const": "kmfa.project_cost.payroll_allocation_policy.v1"},
+    "policy_id": {"type": "string", "pattern": "^payroll_policy_[0-9a-f]{32}$"},
+    "policy_version": {"type": "string", "minLength": 1},
+    "status": {"enum": ["ACTIVE", "TEMPLATE_NOT_ACTIVE"]},
+    "valid_from": {"type": "string", "format": "date"},
+    "valid_to": {"type": ["string", "null"], "format": "date"},
+    "allocation_method": {"const": "APPROVED_TIME_PRO_RATA"},
+    "time_unit": {"type": "string", "minLength": 1},
+    "residual_destination": {"const": "UNALLOCATED_PAYROLL_POOL"},
+    "evidence_refs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^evidence://sha256/[0-9a-f]{64}$"}},
+    "company_policy_refs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^policy://sha256/[0-9a-f]{64}$"}},
+    "input_resolution_refs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^resolution_[0-9a-f]{32}$"}},
+    "bound_request_hash": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+    "bound_input_hash": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+    "bound_config_hash": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"}
+  }
+}

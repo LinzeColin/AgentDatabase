@@ -1,0 +1,400 @@
+schema_version: kmfa.project_cost.model_registry.v2
+models:
+  - model_id: MODEL-KMFA-PROJECT-COST-002-PROPOSED
+    model_type: deterministic_rule_and_event_pipeline
+    status: RELEASED_R12_FAIL_CLOSED_CURRENT_INPUT_GATED
+    product_version: 0.2.0
+    inputs:
+      - input_sufficiency_report
+      - governed_source_records
+      - explicit_input_resolutions
+      - effective_mappings
+      - company_policy_references
+      - formula_and_parameter_profiles
+      - metric_basis_as_of_selector
+    outputs:
+      - validated_lifecycle_facts
+      - reconciliations
+      - named_metric_snapshots
+      - final_or_blocked_outputs
+      - absolute_output_index
+      - internal_process_handoff
+      - review_tasks
+      - audit_and_output_hashes
+      - private_reference_replay_audit
+      - private_current_expected_block_validation
+    internal_company_approval_managed: false
+    generative_financial_fact_creation_allowed: false
+    acceptance_id: ACC-KMFA-PROJECT-COST-TABLE-SKILL-V2-PROPOSED
+  - model_id: POLICY-KMFA-ARTIFACT-BOUNDARY-001
+    model_type: deterministic_safety_policy
+    status: IMPLEMENTED_R1
+    product_version: 0.2.0
+    implementation: src/project_cost_table/artifact_boundary.py
+    configuration: config/artifact_classification.yml
+    financial_decision_use: prohibited
+  - model_id: POLICY-KMFA-MONEY-STRICT-001
+    model_type: deterministic_numeric_policy
+    status: IMPLEMENTED_R2
+    product_version: 0.2.0
+    implementation: src/project_cost_table/money.py
+    configuration: config/money_profile.yml
+    financial_decision_use: primitive_only
+  - model_id: POLICY-KMFA-FILE-SECURITY-001
+    model_type: deterministic_security_policy
+    status: IMPLEMENTED_R2
+    product_version: 0.2.0
+    implementation: src/project_cost_table/security.py
+    configuration: config/security_limits.yml
+    financial_decision_use: prohibited
+  - model_id: POLICY-KMFA-ATOMIC-PATHS-001
+    model_type: deterministic_io_policy
+    status: IMPLEMENTED_R2
+    product_version: 0.2.0
+    implementation: src/project_cost_table/paths.py
+    configuration: null
+    financial_decision_use: prohibited
+  - model_id: POLICY-KMFA-INPUT-SUFFICIENCY-001
+    model_type: deterministic_input_gate_policy
+    status: IMPLEMENTED_R3
+    product_version: 0.2.0
+    implementation: src/project_cost_table/input_gate.py plus src/project_cost_table/resolutions.py
+    configuration: config/input_requirements.yml plus config/metric_catalog.yml
+    financial_decision_use: prohibited_as_standalone_financial_decision
+  - model_id: POLICY-KMFA-MANIFEST-SELECTION-001
+    model_type: deterministic_source_selection_policy
+    status: IMPLEMENTED_R3_MULTI_SOURCE_EXTENSION_R6
+    product_version: 0.2.0
+    implementation: src/project_cost_table/manifest.py plus src/project_cost_table/inventory.py
+    configuration: config/input_manifest.template.yml plus config/source_priority.yml
+    financial_decision_use: prohibited_as_standalone_financial_decision
+  - model_id: MODEL-KMFA-SOURCE-LAYERS-001
+    model_type: deterministic_lineage_envelope_model
+    status: IMPLEMENTED_R3
+    product_version: 0.2.0
+    implementation: src/project_cost_table/source_records.py
+    configuration: null
+    internal_company_approval_managed: false
+    financial_decision_use: prohibited_as_standalone_financial_decision
+  - model_id: POLICY-KMFA-IDENTITY-MASTER-001
+    model_type: deterministic_effective_identity_policy
+    status: IMPLEMENTED_R4
+    product_version: 0.2.0
+    implementation: src/project_cost_table/identity.py
+    configuration: config/identity_policy.yml
+    schemas: schemas/project_record.schema.json plus schemas/review_task.schema.json
+    canonical_key: canonical_project_id plus legal_entity_id plus wbs_or_cost_code plus valid_at
+    fuzzy_final_mapping_allowed: false
+    unresolved_final_mapping_allowed: false
+    cross_entity_dimension_preserved: true
+    internal_company_approval_managed: false
+    financial_decision_use: prohibited_as_standalone_financial_decision
+  - model_id: POLICY-KMFA-KINGDEE-READER-001
+    model_type: deterministic_value_only_source_reader
+    status: IMPLEMENTED_R5
+    product_version: 0.2.0
+    implementation: src/project_cost_table/readers/kingdee.py
+    configuration: config/kingdee_reader_profile.template.yml
+    schemas: schemas/kingdee_reader_profile.schema.json plus schemas/kingdee_ledger_record.schema.json
+    reader_id: kingdee_ledger_v2
+    reader_version: 2.0.0
+    legacy_xls_policy: hard_block_until_locked_read_only_reader
+    reader_decides_final_metric_inclusion: false
+    financial_decision_use: requires_active_private_profile_and_all_downstream_gates
+  - model_id: POLICY-KMFA-KINGDEE-BUNDLE-001
+    model_type: deterministic_manifest_selected_bundle_reader
+    status: IMPLEMENTED_R5
+    product_version: 0.2.0
+    implementation: src/project_cost_table/readers/kingdee_bundle.py
+    configuration: config/kingdee_bundle_profile.template.yml
+    schemas: schemas/kingdee_bundle_profile.schema.json plus schemas/kingdee_ledger_record.schema.json
+    member_disposition_required: true
+    all_included_xlsx_read: true
+    included_legacy_xls_policy: hard_block_complete_slot
+    excluded_member_requires_hash_bound_evidence: true
+    exclusive_private_scratch_required: true
+    reader_decides_final_metric_inclusion: false
+    financial_decision_use: requires_active_private_profile_and_all_downstream_gates
+  - model_id: POLICY-KMFA-ACCOUNTING-BASIS-WIP-001
+    model_type: deterministic_effective_accounting_bridge
+    status: IMPLEMENTED_R5
+    product_version: 0.2.0
+    implementation: src/project_cost_table/accounting_basis.py
+    configuration: config/accounting_basis_policy.template.yml
+    schemas: schemas/accounting_basis_policy.schema.json
+    accounting_basis_ids: JOB_COST_INCURRED plus GL_RECOGNIZED_COGS
+    exact_requested_scope_filter: canonical project plus legal entity plus WBS plus contract
+    wip_bridge_delta_minor_required: 0
+    wip_cogs_transfer_delta_minor_required: 0
+    closed_period_snapshot_bound: true
+    internal_company_approval_managed: false
+    financial_decision_use: requires_active_private_policy_and_all_downstream_gates
+  - model_id: POLICY-KMFA-LIFECYCLE-READERS-001
+    model_type: deterministic_value_only_lifecycle_source_reader
+    status: IMPLEMENTED_R6_ACTIVE_PRIVATE_PROFILES_REQUIRED
+    product_version: 0.2.0
+    implementation: src/project_cost_table/readers/lifecycle.py
+    configuration: config/redcircle_invoice_reader_profile.template.yml plus config/redcircle_payment_reader_profile.template.yml plus config/contract_change_reader_profile.template.yml plus config/collection_reader_profile.template.yml
+    schemas: schemas/lifecycle_reader_profile.schema.json plus schemas/lifecycle_source_record.schema.json
+    reader_ids: project_invoice_v2 plus payment_v2 plus contract_change_v2 plus collection_v2
+    reader_version: 2.0.0
+    unknown_header_status_event_type_or_row_kind_policy: hard_block
+    automatic_project_assignment_allowed: false
+    reader_decides_final_metric_inclusion: false
+    internal_company_approval_managed: false
+    financial_decision_use: requires_active_private_profiles_and_all_downstream_gates
+  - model_id: MODEL-KMFA-ECONOMIC-EVENT-CANDIDATE-001
+    model_type: deterministic_lifecycle_candidate_model
+    status: IMPLEMENTED_R6_WITH_R7_RELATION_VIEW_AND_R9_EXPLICIT_METRIC_ADAPTER
+    product_version: 0.2.0
+    implementation: src/project_cost_table/events.py plus src/project_cost_table/readers/lifecycle.py
+    schemas: schemas/economic_event_candidate.schema.json plus schemas/relation_event.schema.json
+    lifecycle_separation: billed paid contract_value commitment collected
+    identity_status: PENDING_IDENTITY
+    metric_inclusion_status: NOT_EVALUATED_R6
+    source_reversal_lineage_required: true
+    internal_company_approval_managed: false
+    financial_decision_use: prohibited_as_standalone_financial_decision
+  - model_id: POLICY-KMFA-EXACT-EXPORT-DUPLICATE-001
+    model_type: deterministic_whole_export_duplicate_policy
+    status: IMPLEMENTED_R6_WITH_GENERIC_SAME_STAGE_EXTENSION_R7
+    product_version: 0.2.0
+    implementation: src/project_cost_table/readers/lifecycle.py
+    comparison: locked profile plus exact normalized business record multiset
+    exact_duplicate_download_counted_once: true
+    aliases_preserved: true
+    alias_inventory_changes_business_fingerprint: false
+    partial_overlap_or_changed_status_silently_deduplicated: false
+    financial_decision_use: prohibited_as_standalone_financial_decision
+  - model_id: POLICY-KMFA-SAME-STAGE-DEDUP-001
+    model_type: deterministic_same_stage_dedup_policy
+    status: IMPLEMENTED_R7_RELEASE_VALIDATED_R12
+    product_version: 0.2.0
+    implementation: src/project_cost_table/dedup.py
+    schemas: schemas/dedup_decision.schema.json
+    duplicate_classes: BYTE_DUPLICATE plus BUSINESS_CONTENT_DUPLICATE plus SAME_KEY_SAME_VERSION plus SAME_KEY_CHANGED_VERSION plus POSSIBLE_DUPLICATE plus DISTINCT
+    cross_stage_dedup_allowed: false
+    changed_version_requires_hash_bound_resolution: true
+    similarity_auto_resolution_allowed: false
+    candidate_pair_budget_max: 1000000
+    internal_company_approval_managed: false
+    financial_decision_use: prohibited_as_standalone_financial_decision
+  - model_id: MODEL-KMFA-EVENT-LINK-001
+    model_type: deterministic_typed_event_link_model
+    status: IMPLEMENTED_R7_WITH_R9_EXPLICIT_METRIC_ADAPTER
+    product_version: 0.2.0
+    implementation: src/project_cost_table/events.py plus src/project_cost_table/links.py
+    schemas: schemas/relation_event.schema.json plus schemas/event_link.schema.json
+    allocation_unit: CNY_integer_minor_units
+    allocation_autospread_allowed: false
+    amount_date_text_similarity_candidate_only: true
+    one_to_many_and_many_to_one_supported: true
+    connected_match_group_residual_required: true
+    metric_inclusion_status: NOT_EVALUATED_R7
+    internal_company_approval_managed: false
+    financial_decision_use: prohibited_as_standalone_financial_decision
+  - model_id: POLICY-KMFA-SOURCE-CONSERVATION-001
+    model_type: deterministic_source_and_dual_channel_reconciliation_policy
+    status: IMPLEMENTED_EVENT_LEVEL_R7_AND_METRIC_LEVEL_R9
+    product_version: 0.2.0
+    implementation: src/project_cost_table/reconciliation.py plus src/project_cost_table/links.py
+    schemas: schemas/source_conservation.schema.json plus schemas/event_link.schema.json
+    source_control_equation: included plus excluded plus pending plus parse_error equals source_control
+    signed_and_absolute_delta_minor_required: 0
+    independent_channel_delta_minor_required: 0
+    match_group_allocation_delta_minor_required: 0
+    internal_company_approval_managed: false
+    financial_decision_use: prohibited_as_standalone_financial_decision
+  - model_id: POLICY-KMFA-FORMULA-RATE-001
+    model_type: deterministic_allowlisted_formula_and_effective_rate_policy
+    status: IMPLEMENTED_R8_ACTIVE_PRIVATE_PROFILES_REQUIRED
+    product_version: 0.2.0
+    implementation: src/project_cost_table/formulas.py
+    configuration: config/formula_profile.template.yml plus formula_registry.yaml
+    schemas: schemas/formula_profile.schema.json plus schemas/formula_readiness.schema.json
+    expression_eval_or_float_allowed: false
+    active_scope_overlap_allowed: false
+    request_input_config_hashes_required: true
+    executable_test_vector_required: true
+    historical_management_observation_default_active: false
+    active_fx_product_0_2_allowed: false
+    metric_inclusion_status: NOT_EVALUATED_R8
+    internal_company_approval_managed: false
+    financial_decision_use: requires_active_private_profiles_and_all_downstream_gates
+  - model_id: POLICY-KMFA-FULLY-LOADED-PAYROLL-001
+    model_type: deterministic_employer_cost_and_approved_time_allocation_policy
+    status: IMPLEMENTED_R8_ACTIVE_PRIVATE_REGISTRY_CONTROLS_TIME_AND_POLICY_REQUIRED
+    product_version: 0.2.0
+    implementation: src/project_cost_table/payroll.py
+    configuration: config/pay_component_registry.template.yml plus config/payroll_allocation_policy.template.yml
+    schemas: schemas/pay_component_registry.schema.json plus schemas/payroll_allocation_policy.schema.json plus schemas/payroll_allocation.schema.json
+    payroll_model_id: FULLY_LOADED_EMPLOYER_COST_WITH_APPROVED_TIME
+    automatic_unallocated_spread_allowed: false
+    guessed_component_or_day_rate_allowed: false
+    cross_entity_allocation_allowed: false
+    payroll_control_delta_minor_required: 0
+    approved_time_control_delta_required: 0
+    allocation_delta_minor_required: 0
+    metric_inclusion_status: NOT_EVALUATED_R8
+    internal_company_approval_managed: false
+    financial_decision_use: requires_active_private_inputs_and_all_downstream_gates
+  - model_id: POLICY-KMFA-TAX-INTEREST-001
+    model_type: deterministic_project_tax_and_capital_interest_policy
+    status: IMPLEMENTED_R8_ACTIVE_PRIVATE_EVIDENCE_AND_POLICY_REQUIRED
+    product_version: 0.2.0
+    implementation: src/project_cost_table/formulas.py
+    schemas: schemas/project_tax.schema.json plus schemas/interest_input.schema.json
+    company_tax_return_default_project_allocation_allowed: false
+    source_tax_overwrite_allowed: false
+    interest_cash_order_and_day_count_required: true
+    metric_inclusion_status: NOT_EVALUATED_R8
+    internal_company_approval_managed: false
+    financial_decision_use: requires_active_private_inputs_and_all_downstream_gates
+  - model_id: MODEL-KMFA-MANUAL-ADJUSTMENT-001
+    model_type: deterministic_append_only_adjustment_candidate_model
+    status: IMPLEMENTED_R8_WITH_R9_EXPLICIT_METRIC_DECISION_REQUIRED
+    product_version: 0.2.0
+    implementation: src/project_cost_table/adjustments.py
+    schemas: schemas/manual_adjustment.schema.json
+    signed_reason_evidence_and_hash_bindings_required: true
+    automatic_reversal_allowed: false
+    expiry_and_supersession_visible: true
+    metric_inclusion_status: NOT_EVALUATED_R8
+    internal_company_approval_managed: false
+    financial_decision_use: prohibited_as_standalone_financial_decision
+  - model_id: MODEL-KMFA-NAMED-METRIC-001
+    model_type: deterministic_named_metric_and_basis_model
+    status: IMPLEMENTED_R9_RELEASE_VALIDATED_R12
+    product_version: 0.2.0
+    implementation: src/project_cost_table/metrics.py
+    configuration: config/metric_catalog.yml
+    schemas: schemas/metric_fact.schema.json plus schemas/metric_facts.schema.json plus schemas/metric_snapshot.schema.json plus schemas/metric_batch.schema.json
+    source_control_delta_minor_required: 0
+    independent_channel_signed_delta_minor_required: 0
+    independent_channel_absolute_delta_minor_required: 0
+    source_recomputed_calculated_values_preserved: true
+    actual_cost_bases_required_together: JOB_COST_INCURRED plus GL_RECOGNIZED_COGS
+    automatic_unresolved_fact_inclusion_allowed: false
+    internal_company_approval_managed: false
+    financial_decision_use: requires_real_input_validation_and_final_generation_gates
+  - model_id: POLICY-KMFA-FOUR-STATUS-PLANES-001
+    model_type: deterministic_run_status_policy
+    status: IMPLEMENTED_R9_RELEASE_VALIDATED_R12
+    product_version: 0.2.0
+    implementation: src/project_cost_table/statuses.py plus src/project_cost_table/generation.py
+    configuration: config/status_codes.yml
+    schemas: schemas/status_planes.schema.json
+    final_status_requires_all_gates: true
+    status_planes_collapsible: false
+    company_approval_status_managed: false
+    internal_company_approval_managed: false
+    finance_owner_or_authorized_person_managed: false
+    financial_decision_use: prohibited_as_standalone_financial_decision
+  - model_id: POLICY-KMFA-SAFE-WORKBOOK-001
+    model_type: deterministic_values_only_workbook_policy
+    status: IMPLEMENTED_R9_RELEASE_VALIDATED_R12
+    product_version: 0.2.0
+    implementation: src/project_cost_table/workbook.py plus scripts/build_project_cost_workbook.mjs
+    schemas: schemas/output_index.schema.json
+    workbook_runtime: injected Codex bundled artifact-tool only
+    visible_sheet_count: 8
+    formula_cells_allowed: false
+    external_relationships_allowed: false
+    active_content_allowed: false
+    all_sheet_visual_render_required: true
+    internal_company_approval_managed: false
+    financial_decision_use: requires_real_input_validation_and_final_generation_gates
+  - model_id: POLICY-KMFA-FINAL-GENERATION-001
+    model_type: deterministic_atomic_final_or_diagnostic_generation_policy
+    status: IMPLEMENTED_R9_RELEASE_VALIDATED_R12
+    product_version: 0.2.0
+    implementation: src/project_cost_table/generation.py plus src/project_cost_table/paths.py
+    schemas: schemas/run_manifest.schema.json plus schemas/output_index.schema.json
+    final_generation_waits_for_company_approval: false
+    final_generation_requires_validated_metrics: true
+    blocked_final_looking_workbook_allowed: false
+    absolute_output_locator_required: true
+    noncyclic_detached_seal_required: true
+    internal_process_handoff_final_only: true
+    internal_company_approval_managed: false
+    finance_owner_or_authorized_person_managed: false
+    financial_decision_use: requires_real_input_validation_and_final_generation_gates
+  - model_id: POLICY-KMFA-REFERENCE-REPLAY-ISOLATION-001
+    model_type: deterministic_mode_and_data_flow_isolation_policy
+    status: IMPLEMENTED_R10_RELEASE_VALIDATED_R12
+    product_version: 0.2.0
+    implementation: src/project_cost_table/reference_replay.py plus scripts/run_reference_regression.py
+    configuration: config/source_priority.yml plus config/status_codes.yml
+    schemas: schemas/reference_baseline.schema.json plus schemas/reference_baseline_import.schema.json plus schemas/reference_replay_result.schema.json plus schemas/run_manifest.schema.json
+    calculate_imports_reference_replay_allowed: false
+    reference_values_available_to_calculate: false
+    replay_calculation_status: NOT_EVALUATED
+    reference_replay_final_workbook_allowed: false
+    internal_company_approval_managed: false
+    financial_decision_use: prohibited
+  - model_id: MODEL-KMFA-REFERENCE-REPLAY-001
+    model_type: deterministic_hash_bound_private_reference_replay
+    status: IMPLEMENTED_R10_RELEASE_VALIDATED_R12
+    product_version: 0.2.0
+    implementation: src/project_cost_table/reference_replay.py
+    schemas: schemas/reference_baseline.schema.json plus schemas/reference_replay_result.schema.json
+    expected_reference_project_count: 8
+    integer_minor_units_only: true
+    baseline_and_pdf_hashes_required: true
+    exact_line_and_total_fidelity_required: true
+    source_arithmetic_differences_preserved: true
+    source_arithmetic_overwrite_allowed: false
+    absolute_output_locator_required: true
+    internal_process_handoff_allowed: false
+    internal_company_approval_managed: false
+    financial_decision_use: private_audit_display_only
+  - model_id: MODEL-KMFA-CURRENT-SOURCE-CONTRACT-001
+    model_type: deterministic_private_current_source_binding
+    status: IMPLEMENTED_R11_RELEASE_VALIDATED_R12
+    product_version: 0.2.0
+    implementation: src/project_cost_table/current_reconstruction.py plus src/project_cost_table/current_regression.py plus scripts/prepare_current_regression.py
+    schemas: schemas/current_source_contract.schema.json
+    selected_reference_source_allowed: false
+    both_actual_cost_bases_required: true
+    metadata_and_selected_full_digest_binding_required: true
+    source_drift_snapshot_overwrite_allowed: false
+    private_current_project_count: 8
+    internal_company_approval_managed: false
+    financial_decision_use: requires_all_real_input_gates_and_validated_final_generation
+  - model_id: POLICY-KMFA-CURRENT-EXPECTED-BLOCK-001
+    model_type: deterministic_production_and_harness_status_policy
+    status: IMPLEMENTED_R11_RELEASE_VALIDATED_R12
+    product_version: 0.2.0
+    implementation: src/project_cost_table/current_reconstruction.py plus src/project_cost_table/current_regression.py plus scripts/run_current_source_reconstruction.py plus scripts/validate_current_expected_block.py
+    schemas: schemas/expected_block_contract.schema.json plus schemas/expected_block_validation.schema.json
+    production_expected_exit_code: 3
+    harness_exact_match_exit_code: 0
+    current_expected_blocker_count: 9
+    production_reads_expected_contract: false
+    expected_contract_frozen_before_production: true
+    calculate_reference_data_flow_allowed: false
+    blocked_final_workbook_allowed: false
+    absolute_output_locator_required: true
+    finance_owner_or_authorized_person_managed: false
+    internal_company_approval_managed: false
+    financial_decision_use: prohibited
+  - model_id: POLICY-KMFA-RELEASE-PERFORMANCE-001
+    model_type: deterministic_release_performance_and_privacy_policy
+    status: IMPLEMENTED_R12_RELEASED
+    product_version: 0.2.0
+    implementation: src/project_cost_table/release.py plus scripts/run_release_benchmark.py plus scripts/validate_skill_package.py
+    configuration: config/performance_budgets.yml plus config/release_test_matrix.yml
+    schemas: schemas/performance_budget.schema.json plus schemas/performance_summary.schema.json
+    cold_process_baseline_required: true
+    subsequent_wall_and_peak_rss_factor_max: "1.50"
+    selected_source_full_digest_per_run_max: 1
+    candidate_pair_budget_max: 1000000
+    global_unpartitioned_matching_allowed: false
+    application_digest_cache_allowed: false
+    current_real_calculation_baseline_status: NOT_EVALUATED_BLOCKED_SOURCE
+    actual_workbook_runtime_required: true
+    staged_privacy_scan_required: true
+    global_install_performed: false
+    internal_company_approval_managed: false
+    finance_owner_or_authorized_person_managed: false
+    financial_decision_use: release_governance_only

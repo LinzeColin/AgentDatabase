@@ -1,0 +1,29 @@
+schema_version: kmfa.project_cost.formula_profile.v1
+profile_id: formula_profile_00000000000000000000000000000000
+profile_version: 0.0.0-template
+formula_id: FORM-MGMT-V2
+formula_kind: MANAGEMENT_RATE
+expression_id: RATE_TIMES_BASE
+status: TEMPLATE_NOT_ACTIVE
+valid_from: '2000-01-01'
+valid_to: null
+scope:
+  metric_id: '*'
+  legal_entity_id: '*'
+  canonical_project_id: '*'
+  wbs_or_cost_code: '*'
+base_currency: CNY
+rounding_layer: LINE_FORMULA
+rounding_mode: ROUND_HALF_UP
+parameters:
+  rate_numerator: 0
+  rate_denominator: 1
+authority_mode: COMPANY_POLICY
+company_policy_refs: []
+evidence_refs: []
+input_resolution_refs: []
+bound_request_hash: null
+bound_input_hash: null
+bound_config_hash: null
+supersedes: null
+test_vectors: []

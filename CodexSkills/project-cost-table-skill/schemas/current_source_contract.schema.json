@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "kmfa.project_cost.current_source_contract.private.v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "classification",
+    "contract_id",
+    "input_root",
+    "as_of",
+    "scope",
+    "source_snapshot",
+    "selected_sources",
+    "evidence_requirements",
+    "calculate_source_boundary"
+  ],
+  "properties": {
+    "schema_version": {"const": "kmfa.project_cost.current_source_contract.private.v1"},
+    "classification": {"const": "PRIVATE_RUNTIME_DO_NOT_COMMIT"},
+    "contract_id": {"type": "string", "minLength": 1},
+    "input_root": {"type": "string", "pattern": "^/"},
+    "as_of": {"type": "string", "format": "date"},
+    "scope": {
+      "type": "object",
+      "required": ["project_count", "requested_metrics", "requested_basis_ids"],
+      "properties": {
+        "project_count": {"type": "integer", "minimum": 1},
+        "requested_metrics": {"const": ["COST_POSTED_ACTUAL"]},
+        "requested_basis_ids": {"const": ["GL_RECOGNIZED_COGS", "JOB_COST_INCURRED"]}
+      },
+      "additionalProperties": false
+    },
+    "source_snapshot": {
+      "type": "object",
+      "required": [
+        "metadata_fingerprint",
+        "entry_count",
+        "total_size_bytes",
+        "unsafe_entry_count",
+        "task_pack_manifest_sha256",
+        "drift_review_sha256",
+        "drift_classification",
+        "snapshot_overwritten"
+      ],
+      "properties": {
+        "metadata_fingerprint": {"$ref": "#/$defs/sha256"},
+        "entry_count": {"type": "integer", "minimum": 0},
+        "total_size_bytes": {"type": "integer", "minimum": 0},
+        "unsafe_entry_count": {"type": "integer", "minimum": 0},
+        "task_pack_manifest_sha256": {"$ref": "#/$defs/sha256"},
+        "drift_review_sha256": {"$ref": "#/$defs/sha256"},
+        "drift_classification": {"const": "OUT_OF_SCOPE_INVENTORY_DRIFT_REVIEWED"},
+        "snapshot_overwritten": {"const": false}
+      },
+      "additionalProperties": false
+    },
+    "selected_sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["slot_id", "source_id", "private_relative_path", "sha256"],
+        "properties": {
+          "slot_id": {"type": "string", "pattern": "^[a-z][a-z0-9_]{1,63}$"},
+          "source_id": {"type": "string", "pattern": "^src_[0-9a-f]{32}$"},
+          "private_relative_path": {"type": "string", "minLength": 1},
+          "sha256": {"$ref": "#/$defs/sha256"}
+        },
+        "additionalProperties": false
+      }
+    },
+    "evidence_requirements": {
+      "type": "array",
+      "minItems": 9,
+      "maxItems": 9,
+      "items": {
+        "type": "object",
+        "required": ["requirement_id", "observed_status", "evidence_ref"],
+        "properties": {
+          "requirement_id": {
+            "enum": [
+              "CURRENT_INPUT_MANIFEST_V3",
+              "PROJECT_IDENTITY_EVIDENCE",
+              "KINGDEE_READER_PROFILE",
+              "ACCOUNTING_BASIS_POLICY",
+              "PAYROLL_AND_TIME_SOURCE",
+              "FULLY_LOADED_PAYROLL_POLICY",
+              "PROJECT_TAX_POLICY_OR_DIRECT_LEDGER",
+              "CAPITAL_INTEREST_POLICY",
+              "PAYMENT_PROJECT_MAPPING"
+            ]
+          },
+          "observed_status": {"enum": ["PRESENT", "MISSING", "CONFLICT", "UNSAFE"]},
+          "evidence_ref": {"type": ["string", "null"]}
+        },
+        "additionalProperties": false
+      }
+    },
+    "calculate_source_boundary": {"$ref": "#/$defs/calculateBoundary"}
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "calculateBoundary": {
+      "type": "object",
+      "required": ["baseline_values_allowed", "report_line_items_allowed", "replay_adapters_allowed"],
+      "properties": {
+        "baseline_values_allowed": {"const": false},
+        "report_line_items_allowed": {"const": false},
+        "replay_adapters_allowed": {"const": false}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

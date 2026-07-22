@@ -1,0 +1,7 @@
+interface:
+  display_name: "Goal to Delivery SOP"
+  short_description: "Clarify and deliver complex systems"
+  default_prompt: "Use $goal-to-delivery-sop to clarify my system idea before implementation."
+
+policy:
+  allow_implicit_invocation: true

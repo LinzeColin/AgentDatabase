@@ -1,0 +1,6 @@
+interface:
+  display_name: "GSAP Utils"
+  short_description: "gsap.utils helpers for clamp, mapRange, snap, wrap"
+  default_prompt: "Use $gsap-utils for gsap.utils helpers and animation value mapping."
+policy:
+  allow_implicit_invocation: true

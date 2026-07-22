@@ -1,0 +1,15 @@
+{
+  "canonical_project_id": "PROJECT-ID-PLACEHOLDER",
+  "legal_entity_id": "LEGAL-ENTITY-ID-PLACEHOLDER",
+  "wbs_or_cost_code": "WBS-OR-COST-CODE-PLACEHOLDER",
+  "project_code": null,
+  "project_name": null,
+  "customer_id": null,
+  "contract_ids": [],
+  "source_aliases": [],
+  "valid_from": "2000-01-01",
+  "valid_to": null,
+  "identity_status": "CANDIDATE",
+  "mapping_resolution_ref": "identity_resolution_00000000000000000000000000000000",
+  "evidence_refs": []
+}

@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "kmfa.project_cost.metric_batch.v1",
+  "type": "object",
+  "required": ["schema_version", "requested_pairs", "required_pairs", "calculation_status", "blocker_codes", "snapshots"],
+  "properties": {
+    "schema_version": {"const": "kmfa.project_cost.metric_batch.v1"},
+    "requested_pairs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "array", "prefixItems": [{"type": "string"}, {"type": "string"}], "items": false}},
+    "required_pairs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "array", "prefixItems": [{"type": "string"}, {"type": "string"}], "items": false}},
+    "calculation_status": {"enum": ["VALIDATED", "BLOCKED_SOURCE", "BLOCKED_SCHEMA", "BLOCKED_IDENTITY", "BLOCKED_RELATIONSHIP", "BLOCKED_FORMULA", "BLOCKED_RECONCILIATION", "BLOCKED_SECURITY", "BLOCKED_PERIOD", "ERROR"]},
+    "blocker_codes": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "snapshots": {"type": "array", "items": {"$ref": "metric_snapshot.schema.json"}}
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "投标资格核验"
+  short_description: "绑定单一法律投标载体，核验资格、商务、现金、产能与证据新鲜度"
+  default_prompt: "使用 $km-bid-qualify 先检查输入是否充分，再绑定单一合法主体核验资格；最后报告输出绝对路径。"

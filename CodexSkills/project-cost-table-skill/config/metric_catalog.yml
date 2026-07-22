@@ -1,0 +1,96 @@
+schema_version: kmfa.project_cost.metric_catalog.v2
+metrics:
+  COST_BUDGET:
+    allowed_basis_ids: [BUDGET_APPROVED]
+    as_of_date_rule: approval_or_effective_date
+    aggregation: DIRECT
+    direction: COST
+    included_lifecycle_stages: [BUDGET]
+    components_by_basis: {}
+  COST_COMMITTED:
+    allowed_basis_ids: [COMMITMENT_APPROVED]
+    as_of_date_rule: approval_date
+    aggregation: DIRECT
+    direction: COST
+    included_lifecycle_stages: [COMMITMENT]
+    components_by_basis: {}
+  COST_ACCRUED:
+    allowed_basis_ids: [JOB_COST_INCURRED]
+    as_of_date_rule: service_or_receipt_date
+    aggregation: DIRECT
+    direction: COST
+    included_lifecycle_stages: [ACCRUAL]
+    components_by_basis: {}
+  COST_POSTED_ACTUAL:
+    allowed_basis_ids: [JOB_COST_INCURRED, GL_RECOGNIZED_COGS]
+    as_of_date_rule: posting_date
+    aggregation: DIRECT
+    direction: COST
+    included_lifecycle_stages: [POSTED_ACTUAL]
+    components_by_basis: {}
+  COST_PAID:
+    allowed_basis_ids: [CASH_VERIFIED]
+    as_of_date_rule: verified_payment_date
+    aggregation: DIRECT
+    direction: CASH_OUT
+    included_lifecycle_stages: [PAID]
+    components_by_basis: {}
+  COST_FORECAST_EAC:
+    allowed_basis_ids: [JOB_COST_EAC_APPROVED]
+    as_of_date_rule: forecast_snapshot_date
+    aggregation: DIRECT
+    direction: COST
+    included_lifecycle_stages: [FORECAST]
+    components_by_basis: {}
+  REV_CONTRACT_VALUE:
+    allowed_basis_ids: [CONTRACT_APPROVED]
+    as_of_date_rule: approval_or_effective_date
+    aggregation: DIRECT
+    direction: REVENUE
+    included_lifecycle_stages: [CONTRACT_VALUE]
+    components_by_basis: {}
+  REV_BILLED:
+    allowed_basis_ids: [BILLING_STATUS_APPROVED]
+    as_of_date_rule: invoice_or_credit_note_date
+    aggregation: DIRECT
+    direction: REVENUE
+    included_lifecycle_stages: [BILLED]
+    components_by_basis: {}
+  REV_RECOGNIZED:
+    allowed_basis_ids: [GL_RECOGNIZED_REVENUE]
+    as_of_date_rule: posting_or_recognition_date
+    aggregation: DIRECT
+    direction: REVENUE
+    included_lifecycle_stages: [RECOGNIZED_REVENUE]
+    components_by_basis: {}
+  CASH_COLLECTED:
+    allowed_basis_ids: [CASH_VERIFIED]
+    as_of_date_rule: verified_receipt_date
+    aggregation: DIRECT
+    direction: CASH_IN
+    included_lifecycle_stages: [COLLECTED]
+    components_by_basis: {}
+  MARGIN_ACCOUNTING:
+    allowed_basis_ids: [REV_RECOGNIZED_MINUS_JOB_COST_INCURRED, REV_RECOGNIZED_MINUS_GL_RECOGNIZED_COGS]
+    as_of_date_rule: compatible_component_rules
+    aggregation: DERIVED
+    direction: DERIVED
+    included_lifecycle_stages: []
+    components_by_basis:
+      REV_RECOGNIZED_MINUS_JOB_COST_INCURRED:
+        - {metric_id: REV_RECOGNIZED, basis_id: GL_RECOGNIZED_REVENUE, sign: 1}
+        - {metric_id: COST_POSTED_ACTUAL, basis_id: JOB_COST_INCURRED, sign: -1}
+        - {metric_id: COST_ACCRUED, basis_id: JOB_COST_INCURRED, sign: -1}
+      REV_RECOGNIZED_MINUS_GL_RECOGNIZED_COGS:
+        - {metric_id: REV_RECOGNIZED, basis_id: GL_RECOGNIZED_REVENUE, sign: 1}
+        - {metric_id: COST_POSTED_ACTUAL, basis_id: GL_RECOGNIZED_COGS, sign: -1}
+  MARGIN_CASH:
+    allowed_basis_ids: [COLLECTED_MINUS_PAID]
+    as_of_date_rule: compatible_verified_cash_dates
+    aggregation: DERIVED
+    direction: DERIVED
+    included_lifecycle_stages: []
+    components_by_basis:
+      COLLECTED_MINUS_PAID:
+        - {metric_id: CASH_COLLECTED, basis_id: CASH_VERIFIED, sign: 1}
+        - {metric_id: COST_PAID, basis_id: CASH_VERIFIED, sign: -1}

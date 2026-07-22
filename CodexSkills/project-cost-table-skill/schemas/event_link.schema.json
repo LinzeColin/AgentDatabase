@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "kmfa.project_cost.event_link.v1",
+  "$defs": {
+    "participation": {
+      "type": "object",
+      "required": ["relation_event_ref", "economic_event_id", "event_binding_sha256", "direction", "lifecycle_stage", "identity_status", "legal_entity_id", "canonical_project_id", "wbs_or_cost_code", "canonical_contract_id", "base_amount_minor", "allocated_base_amount_minor", "reversal_of_event_id"],
+      "properties": {
+        "relation_event_ref": {"type": "string", "pattern": "^relation_event_[0-9a-f]{32}$"},
+        "economic_event_id": {"type": "string", "pattern": "^evt_[0-9a-f]{32}$"},
+        "event_binding_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "direction": {"enum": ["COST", "REVENUE", "CASH_OUT", "CASH_IN"]},
+        "lifecycle_stage": {"enum": ["BUDGET", "COMMITMENT", "ACCRUAL", "POSTED_ACTUAL", "PAID", "FORECAST", "CONTRACT_VALUE", "BILLED", "RECOGNIZED_REVENUE", "COLLECTED"]},
+        "identity_status": {"enum": ["VALIDATED_IDENTITY", "ALLOCATION_REQUIRED"]},
+        "legal_entity_id": {"type": "string", "minLength": 1},
+        "canonical_project_id": {"type": ["string", "null"]},
+        "wbs_or_cost_code": {"type": ["string", "null"]},
+        "canonical_contract_id": {"type": ["string", "null"]},
+        "base_amount_minor": {"type": "integer"},
+        "allocated_base_amount_minor": {"type": "integer", "minimum": 0},
+        "reversal_of_event_id": {"type": ["string", "null"], "pattern": "^evt_[0-9a-f]{32}$"}
+      },
+      "additionalProperties": false
+    }
+  },
+  "type": "object",
+  "required": ["schema_version", "link_id", "relation_type", "link_axis", "source_participations", "target_participations", "allocated_base_amount_minor", "source_residual_base_amount_minor", "target_residual_base_amount_minor", "completion_status", "status", "match_method", "input_resolution_ref", "company_policy_ref", "evidence_refs", "metric_inclusion_status", "source_event_ids", "target_event_ids", "allocation_delta_minor", "company_approval_state_managed"],
+  "properties": {
+    "schema_version": {"const": "kmfa.project_cost.event_link.v1"},
+    "link_id": {"type": "string", "pattern": "^event_link_[0-9a-f]{32}$"},
+    "relation_type": {"enum": ["DERIVED_FROM", "FULFILLS_COMMITMENT", "ACCRUAL_FOR", "REVERSES", "SUPERSEDES", "INVOICES", "POSTS_TO_GL", "SETTLES", "ALLOCATES_TO", "TRANSFERRED_BETWEEN", "REFERENCES_ONLY"]},
+    "link_axis": {"enum": ["DERIVATION", "COMMITMENT_FULFILLMENT", "ACCRUAL_POSTING", "REVERSAL", "VERSION", "CONTRACT_INVOICE", "INVOICE_GL", "CASH_SETTLEMENT", "GENERAL_ALLOCATION", "SCOPE_TRANSFER", "REFERENCE"]},
+    "source_participations": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/participation"}},
+    "target_participations": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/participation"}},
+    "allocated_base_amount_minor": {"type": "integer", "minimum": 0},
+    "source_residual_base_amount_minor": {"type": "integer", "minimum": 0},
+    "target_residual_base_amount_minor": {"type": "integer", "minimum": 0},
+    "completion_status": {"enum": ["FULLY_ALLOCATED", "PENDING_RESIDUAL", "NOT_APPLICABLE"]},
+    "status": {"enum": ["CANDIDATE", "APPROVED", "REJECTED", "BLOCKED", "SUPERSEDED"]},
+    "match_method": {"enum": ["STABLE_IDENTIFIER", "VALIDATED_IDENTITY_CONTRACT", "INPUT_RESOLUTION_ALLOCATION", "REVERSAL_LINEAGE", "VERSION_RESOLUTION", "AMOUNT_DATE_TEXT_SIMILARITY"]},
+    "input_resolution_ref": {"type": ["string", "null"], "pattern": "^resolution_[0-9a-f]{32}$"},
+    "company_policy_ref": {"type": ["string", "null"]},
+    "evidence_refs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^(evidence:[0-9a-f]{64}|evidence://sha256/[0-9a-f]{64})$"}},
+    "metric_inclusion_status": {"const": "NOT_EVALUATED_R7"},
+    "source_event_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "pattern": "^evt_[0-9a-f]{32}$"}},
+    "target_event_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "pattern": "^evt_[0-9a-f]{32}$"}},
+    "allocation_delta_minor": {"const": 0},
+    "company_approval_state_managed": {"const": false}
+  },
+  "additionalProperties": false
+}

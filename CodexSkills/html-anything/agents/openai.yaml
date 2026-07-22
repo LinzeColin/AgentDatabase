@@ -1,0 +1,6 @@
+interface:
+  display_name: "HTML Anything"
+  short_description: "HTML artifact generator and template library"
+  default_prompt: "Use $html-anything to turn content into a polished single-file HTML artifact."
+policy:
+  allow_implicit_invocation: false

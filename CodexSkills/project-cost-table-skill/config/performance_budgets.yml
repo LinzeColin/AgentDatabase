@@ -1,0 +1,21 @@
+schema_version: kmfa.project_cost.performance_budget.v1
+profile_id: KMFA-R12-RELEASE-PERFORMANCE-V1
+baseline:
+  cold_process_runs: 1
+  subsequent_process_runs: 3
+  max_wall_regression_factor: "1.50"
+  max_peak_rss_regression_factor: "1.50"
+workload:
+  selected_full_digest_verifications_per_source_max: 1
+  candidate_pair_budget_max: 1000000
+  global_unpartitioned_matching_allowed: false
+  application_cache_allowed: false
+  full_digest_required: true
+release_gates:
+  full_test_suite_required: true
+  adversarial_property_metamorphic_required: true
+  private_r10_r11_regression_required: true
+  actual_workbook_runtime_required: true
+  staged_privacy_scan_required: true
+  full_digest_for_final_generation_required: true
+  global_install_in_r12_allowed: false

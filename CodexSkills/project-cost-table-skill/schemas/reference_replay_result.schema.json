@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "kmfa.project_cost.reference_replay_result.private.v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "run_id",
+    "mode",
+    "as_of",
+    "baseline_sha256",
+    "execution_status",
+    "input_readiness_status",
+    "calculation_status",
+    "generation_status",
+    "replay_fidelity_status",
+    "source_quality_status",
+    "project_count",
+    "exact_count",
+    "source_arithmetic_difference_count",
+    "projects"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "kmfa.project_cost.reference_replay_result.private.v1"
+    },
+    "run_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+    },
+    "mode": {
+      "const": "reference-replay"
+    },
+    "as_of": {
+      "type": "string",
+      "format": "date"
+    },
+    "baseline_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "execution_status": {
+      "const": "SUCCEEDED"
+    },
+    "input_readiness_status": {
+      "const": "SUFFICIENT"
+    },
+    "calculation_status": {
+      "const": "NOT_EVALUATED"
+    },
+    "generation_status": {
+      "const": "NOT_GENERATED"
+    },
+    "replay_fidelity_status": {
+      "const": "EXACT"
+    },
+    "source_quality_status": {
+      "enum": [
+        "CONSISTENT",
+        "SOURCE_ARITHMETIC_DIFFERENCE"
+      ]
+    },
+    "project_count": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "exact_count": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "source_arithmetic_difference_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "projects": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "project_code",
+          "project_name",
+          "reference_pdf",
+          "reference_pdf_sha256",
+          "actual_pdf_sha256",
+          "pdf_hash_match",
+          "line_items",
+          "reference_line_values_sha256",
+          "replayed_line_values_sha256",
+          "source_revenue_cents",
+          "source_total_cost_cents",
+          "line_sum_cents",
+          "line_sum_delta_cents",
+          "source_profit_cents",
+          "recomputed_profit_cents",
+          "source_profit_delta_cents",
+          "expected_source_profit_delta_cents",
+          "source_profit_rate_text",
+          "replay_fidelity_status",
+          "source_quality_status",
+          "calculation_status"
+        ],
+        "properties": {
+          "project_code": {"type": "string", "minLength": 1},
+          "project_name": {"type": "string", "minLength": 1},
+          "reference_pdf": {"type": "string", "minLength": 1},
+          "reference_pdf_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "actual_pdf_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "pdf_hash_match": {"const": true},
+          "line_items": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": ["category", "label", "amount_cents"],
+              "properties": {
+                "category": {"type": "string", "minLength": 1},
+                "label": {"type": "string"},
+                "note": {"type": "string"},
+                "amount_cents": {"type": "integer"}
+              },
+              "additionalProperties": false
+            }
+          },
+          "reference_line_values_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "replayed_line_values_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "source_revenue_cents": {"type": "integer"},
+          "source_total_cost_cents": {"type": "integer"},
+          "line_sum_cents": {"type": "integer"},
+          "line_sum_delta_cents": {"const": 0},
+          "source_profit_cents": {"type": "integer"},
+          "recomputed_profit_cents": {"type": "integer"},
+          "source_profit_delta_cents": {"type": "integer"},
+          "expected_source_profit_delta_cents": {"type": "integer"},
+          "source_profit_rate_text": {"type": ["string", "null"]},
+          "replay_fidelity_status": {"const": "EXACT"},
+          "source_quality_status": {
+            "enum": ["CONSISTENT", "SOURCE_ARITHMETIC_DIFFERENCE"]
+          },
+          "calculation_status": {"const": "NOT_EVALUATED"}
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

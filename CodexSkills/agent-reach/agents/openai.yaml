@@ -1,0 +1,6 @@
+interface:
+  display_name: "Agent Reach"
+  short_description: "Internet research and platform retrieval router"
+  default_prompt: "Use $agent-reach to fetch current internet content from web, social, video, GitHub, RSS, or job platforms."
+policy:
+  allow_implicit_invocation: true

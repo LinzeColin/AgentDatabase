@@ -1,0 +1,6 @@
+interface:
+  display_name: "GSAP React"
+  short_description: "React and Next.js animation with useGSAP and cleanup"
+  default_prompt: "Use $gsap-react for GSAP animation patterns in React or Next.js."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,4 @@
+interface:
+  display_name: "视频复刻 Skill"
+  short_description: "逐帧复刻视频体验并默认输出 Downloads 压缩交付包"
+  default_prompt: "Use $video-replica to recreate this reference experience, validate fidelity, and finish with one verified ZIP in my Downloads folder."

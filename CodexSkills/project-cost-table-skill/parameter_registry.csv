@@ -1,0 +1,107 @@
+parameter_id,value,unit,status,rationale,change_control
+BASE_CURRENCY,CNY,ISO-4217,ACTIVE_R2,current approved scope,versioned profile
+MONEY_SCALE,2,decimal_places,ACTIVE_R2,CNY minor units,schema change
+DEFAULT_ROUNDING,ROUND_HALF_UP,decimal_rounding,ACTIVE_R2,current business contract,formula profile
+MONEY_DELTA_MINOR,0,minor_units,PROPOSED,one-fen gate,immutable P0
+FLOAT_MONEY_PATH_ALLOWED,0,count,ACTIVE_R2,exact arithmetic,immutable P0
+MONEY_DECIMAL_CONTEXT_PRECISION,38,decimal_digits,ACTIVE_R2,environment-independent Decimal context,profile and tests must change together
+MONEY_MAX_INPUT_SCALE,6,decimal_places,ACTIVE_R2,allow governed sub-cent source precision while blocking malformed scale,profile and tests must change together
+MONEY_MAX_ABS_MINOR_UNITS,9223372036854775807,minor_units,ACTIVE_R2,signed 64-bit interoperability ceiling,security review to increase
+SOURCE_FILE_BYTES_MAX,2147483648,bytes,ACTIVE_R2,pre-reader resource ceiling,security review to increase
+ARCHIVE_MEMBER_COUNT_MAX,10000,members,ACTIVE_R2_LOCAL_SECURITY_CEILING,resource control,security review to increase
+ARCHIVE_TOTAL_UNCOMPRESSED_MAX,2147483648,bytes,ACTIVE_R2_LOCAL_SECURITY_CEILING,recursive resource control,security review to increase
+ARCHIVE_SINGLE_MEMBER_MAX,536870912,bytes,ACTIVE_R2_LOCAL_SECURITY_CEILING,resource control,security review to increase
+ARCHIVE_COMPRESSION_RATIO_MAX,200,ratio,ACTIVE_R2_LOCAL_SECURITY_CEILING,zip bomb control,security review to increase
+ARCHIVE_NESTED_DEPTH_MAX,4,levels,ACTIVE_R2_LOCAL_SECURITY_CEILING,recursive archive control,security review to increase
+XML_SINGLE_PART_MAX,134217728,bytes,ACTIVE_R2_LOCAL_SECURITY_CEILING,XML resource control,security review to increase
+CANDIDATE_PAIR_BUDGET_MAX,1000000,pairs,ACTIVE_R7,partition before comparison and stop before global quadratic matching,performance review to increase
+PERFORMANCE_REGRESSION_FACTOR_MAX,1.50,ratio,ACTIVE_R12,subsequent wall time and peak RSS ceiling relative to cold independent process,performance profile and release evidence
+PERFORMANCE_COLD_PROCESS_RUNS,1,process_runs,ACTIVE_R12,one fresh process establishes the bound private snapshot baseline,release profile change review
+PERFORMANCE_SUBSEQUENT_PROCESS_RUNS,3,process_runs,ACTIVE_R12,at least three fresh subsequent processes exercise same scope with full digest,release profile change review
+SELECTED_SOURCE_FULL_DIGEST_PER_RUN_MAX,1,full_digest_verifications_per_source,ACTIVE_R12,each selected source reopens and full hashes once per process,immutable P0
+SELECTED_MEMBER_PARSE_PER_VERIFIED_DIGEST_MAX,1,parses_per_verified_digest,ACTIVE_R12,selected workbook or archive member may be parsed at most once per verified digest,immutable P0
+GLOBAL_UNPARTITIONED_MATCHING_ALLOWED,0,boolean_integer,ACTIVE_R12,global quadratic matching is forbidden,immutable P0
+APPLICATION_DIGEST_CACHE_ALLOWED,0,boolean_integer,ACTIVE_R12,application cache cannot replace final source full digest,immutable P0
+FINAL_GENERATION_FULL_DIGEST_REQUIRED,1,boolean_integer,ACTIVE_R12,final generating mode rehashes bound sources,immutable P0
+R12_GLOBAL_INSTALL_ALLOWED,0,boolean_integer,ACTIVE_R12,global installation is a separate post R12 parity run,immutable release boundary
+ARTIFACT_MAX_TEXT_BYTES,1048576,bytes,ACTIVE_R1,public boundary resource ceiling,policy and tests must change together
+MANIFEST_BYTES_MAX,1048576,bytes,ACTIVE_R3,private manifest metadata ceiling,manifest parser and tests must change together
+RESOLUTION_BYTES_MAX,1048576,bytes,ACTIVE_R3,private input-resolution metadata ceiling,resolution parser and tests must change together
+INPUT_NO_RESPONSE_IS_PERMISSION,0,boolean_integer,ACTIVE_R3,no response is never authorization,immutable P0
+INPUT_NON_WAIVABLE_OMISSION_ALLOWED,0,boolean_integer,ACTIVE_R3,non-waivable gates cannot use optional omission,immutable P0
+IDENTITY_AMBIGUITY_ALLOWED,0,boolean_integer,ACTIVE_R4,identity ambiguity is a hard blocker,immutable P0
+UNRESOLVED_FINAL_MAPPING_ALLOWED,0,boolean_integer,ACTIVE_R4,candidates cannot become final mappings,immutable P0
+IDENTITY_EFFECTIVE_END_INCLUSIVE,1,boolean_integer,ACTIVE_R4,effective valid_to includes the stated date,policy and boundary tests must change together
+IDENTITY_FUZZY_FINAL_MAPPING_ALLOWED,0,boolean_integer,ACTIVE_R4,names text and amounts are candidate-only,immutable P0
+KINGDEE_READER_VERSION,2.0.0,semantic_version,ACTIVE_R5,manifest and reader profile must bind the locked implementation,reader implementation and synthetic corpus
+KINGDEE_PROFILE_MAX_DATA_ROWS_CEILING,5000000,rows,ACTIVE_R5,upper resource ceiling below the XML and source-file security gates,security and performance review to increase
+KINGDEE_BUNDLE_MEMBER_DISPOSITION_REQUIRED,1,boolean_integer,ACTIVE_R5,every workbook member must be explicitly included or evidence-qualified as outside scope,immutable P0
+KINGDEE_BUNDLE_INCLUDED_LEGACY_XLS_ALLOWED,0,boolean_integer,ACTIVE_R5,an included legacy XLS blocks the complete ledger slot until a locked reader exists,immutable P0
+KINGDEE_BUNDLE_SCRATCH_EMPTY_REQUIRED,1,boolean_integer,ACTIVE_R5,bundle extraction uses an exclusive empty private scratch directory,immutable P0
+ACCOUNTING_POLICY_TEMPLATE_ACTIVE,0,boolean_integer,ACTIVE_R5,public template cannot activate real account semantics,immutable P0
+ACCOUNTING_UNKNOWN_STATUS_OR_ROW_KIND_ALLOWED,0,boolean_integer,ACTIVE_R5,unknown financial semantics fail closed,immutable P0
+WIP_BRIDGE_DELTA_MINOR,0,minor_units,ACTIVE_R5,both cost bases require an exact WIP bridge,immutable P0
+WIP_COGS_TRANSFER_DELTA_MINOR,0,minor_units,ACTIVE_R5,5001 transfer and net 6401 recognition must reconcile,immutable P0
+CLOSED_PERIOD_PRIOR_SNAPSHOT_REQUIRED,1,boolean_integer,ACTIVE_R5,late posting detection binds prior closed-period facts,immutable P0
+NON_CNY_FINAL_METRIC_ALLOWED,0,boolean_integer,ACTIVE_R5,product 0.2 is CNY only,scope and model change
+SKILL_COMPANY_APPROVAL_STATE_MANAGED,0,boolean_integer,ACTIVE_R5,company internal approval remains outside the Skill,immutable product boundary
+REQUESTED_ACCOUNTING_SCOPE_REQUIRED,1,boolean_integer,ACTIVE_R5,only exact canonical project entity WBS contract scopes may enter a basis view,immutable P0
+LIFECYCLE_READER_VERSION,2.0.0,semantic_version,ACTIVE_R6,all four R6 reader profiles and manifest locks bind this implementation,reader implementation schemas templates and tests
+LIFECYCLE_PROFILE_MAX_DATA_ROWS_CEILING,5000000,rows,ACTIVE_R6,profile row ceiling remains below source and XML security gates,security and performance review to increase
+LIFECYCLE_MULTI_SOURCE_SELECTION_ALLOWED,1,boolean_integer,ACTIVE_R6,invoice payment contract and collection slots may bind an explicit set of source files,manifest schema and deterministic selection tests
+LIFECYCLE_AUTOMATIC_PROJECT_ASSIGNMENT_ALLOWED,0,boolean_integer,ACTIVE_R6,source keys and free text remain identity candidates until R4 resolution,immutable P0
+LIFECYCLE_READER_FINAL_METRIC_INCLUSION_ALLOWED,0,boolean_integer,ACTIVE_R6,R6 emits candidates and cannot grant named Metric inclusion,immutable P0
+LIFECYCLE_UNKNOWN_SEMANTICS_ALLOWED,0,boolean_integer,ACTIVE_R6,unknown headers status event types and row kinds fail closed,immutable P0
+LIFECYCLE_REVERSED_EVENT_LINEAGE_REQUIRED,1,boolean_integer,ACTIVE_R6,reversed source status requires original source key and reversal date,immutable P0
+EXACT_EXPORT_DUPLICATE_CONTENT_REQUIRED,1,boolean_integer,ACTIVE_R6,only equal locked-profile normalized business multisets are duplicate downloads,immutable P0
+DUPLICATE_ALIAS_CHANGES_BUSINESS_FINGERPRINT,0,boolean_integer,ACTIVE_R6,another exact download alias cannot change business facts,immutable P0
+SOURCE_ARITHMETIC_OVERWRITE_ALLOWED,0,boolean_integer,ACTIVE_R6,gross net tax deltas remain visible and are never silently corrected,immutable P0
+CROSS_STAGE_DEDUP_ALLOWED,0,boolean_integer,ACTIVE_R7,lifecycle stages link but never deduplicate across stages,immutable P0
+SIMILARITY_AUTO_LINK_APPROVAL_ALLOWED,0,boolean_integer,ACTIVE_R7,amount date counterparty document or text similarity is candidate only,immutable P0
+LINK_ALLOCATION_AUTOSPREAD_ALLOWED,0,boolean_integer,ACTIVE_R7,partial allocations preserve explicit residuals and never spread automatically,immutable P0
+EVENT_LINK_ALLOCATION_DELTA_MINOR,0,minor_units,ACTIVE_R7,source and target allocation magnitudes must conserve exactly,immutable P0
+SOURCE_CONSERVATION_DELTA_MINOR,0,minor_units,ACTIVE_R7,included excluded pending and parse error pools equal source control,immutable P0
+DUAL_CHANNEL_DELTA_MINOR,0,minor_units,ACTIVE_R7,direct included aggregation equals independent control-minus-other-pools aggregation,immutable P0
+R7_FINAL_METRIC_INCLUSION_ALLOWED,0,boolean_integer,ACTIVE_R7,R7 links and reconciliation cannot grant final named Metric inclusion,immutable P0
+FORMULA_UNKNOWN_METRIC_INCLUSION_ALLOWED,0,boolean_integer,ACTIVE_R8,unknown or inactive formula cannot enter a named Metric,immutable P0
+FORMULA_ACTIVE_SCOPE_OVERLAP_ALLOWED,0,boolean_integer,ACTIVE_R8,active formula scope and date ranges must select uniquely,immutable P0
+FORMULA_EXECUTABLE_TEST_VECTOR_REQUIRED,1,boolean_integer,ACTIVE_R8,every active formula profile executes at least one exact test vector,immutable P0
+FORMULA_REQUEST_INPUT_CONFIG_HASH_BINDING_REQUIRED,1,boolean_integer,ACTIVE_R8,active formula profiles bind exact request input and config hashes,immutable P0
+MANAGEMENT_OBSERVED_RATE_DEFAULT_ACTIVE,0,boolean_integer,ACTIVE_R8,historical observed management rate is regression evidence only,immutable P0
+PAYROLL_AUTOMATIC_UNALLOCATED_SPREAD_ALLOWED,0,boolean_integer,ACTIVE_R8,payroll residual remains visible and is never automatically spread,immutable P0
+PAYROLL_CONTROL_DELTA_MINOR,0,minor_units,ACTIVE_R8,payroll source component sum must equal control total,immutable P0
+PAYROLL_TIME_CONTROL_DELTA_UNITS,0,time_units,ACTIVE_R8,project and unallocated time must equal approved time control,immutable P0
+PAYROLL_ALLOCATION_DELTA_MINOR,0,minor_units,ACTIVE_R8,project allocations plus unallocated payroll must equal allocable employer cost,immutable P0
+PAYROLL_CROSS_ENTITY_ALLOCATION_ALLOWED,0,boolean_integer,ACTIVE_R8,employee payroll cannot allocate across legal entities,immutable P0
+PROJECT_TAX_COMPANY_RETURN_DEFAULT_ALLOCATION_ALLOWED,0,boolean_integer,ACTIVE_R8,company tax controls cannot become project tax without project policy,immutable P0
+SOURCE_TAX_OVERWRITE_ALLOWED,0,boolean_integer,ACTIVE_R8,source tax and arithmetic differences remain visible,immutable P0
+FX_RATE_ACTIVE_PRODUCT_0_2_ALLOWED,0,boolean_integer,ACTIVE_R8,FX is registered but deferred and blocks CNY-only product 0.2,scope and model change
+MANUAL_ADJUSTMENT_AUTOMATIC_REVERSAL_ALLOWED,0,boolean_integer,ACTIVE_R8,adjustments require explicit append-only reversal records,immutable P0
+R8_FINAL_METRIC_INCLUSION_ALLOWED,0,boolean_integer,ACTIVE_R8,R8 policy calculations cannot grant final named Metric inclusion,immutable P0
+METRIC_DUAL_CHANNEL_DELTA_MINOR,0,minor_units,ACTIVE_R9,named Metric direct and independent control-minus-pools channels must agree,immutable P0
+METRIC_SOURCE_CONSERVATION_DELTA_MINOR,0,minor_units,ACTIVE_R9,named Metric source count signed and absolute controls must conserve,immutable P0
+FINAL_GENERATION_REQUIRES_ALL_GATES,1,boolean_integer,ACTIVE_R9,final generation requires sufficient input and validated calculation,immutable P0
+BLOCKED_FINAL_LOOKING_WORKBOOK_ALLOWED,0,boolean_integer,ACTIVE_R9,blocked or failed runs cannot publish a final-looking workbook,immutable P0
+OUTPUT_INDEX_ABSOLUTE_PATH_REQUIRED,1,boolean_integer,ACTIVE_R9,every terminal path is absolute and independently discoverable,immutable P0
+RUN_SEAL_SELF_HASH_ALLOWED,0,boolean_integer,ACTIVE_R9,detached seal covers all finalized files except itself,immutable P0
+INTERNAL_PROCESS_HANDOFF_FINAL_ONLY,1,boolean_integer,ACTIVE_R9,company-process locator exists only after final generation,immutable product boundary
+WORKBOOK_FORMULA_CELL_ALLOWED,0,boolean_integer,ACTIVE_R9,final workbook is values-only and never recalculates source formulas,immutable P0
+WORKBOOK_EXTERNAL_RELATIONSHIP_ALLOWED,0,boolean_integer,ACTIVE_R9,final workbook is self-contained,immutable P0
+WORKBOOK_ACTIVE_CONTENT_ALLOWED,0,boolean_integer,ACTIVE_R9,macros DDE data connections and embedded active content are forbidden,immutable P0
+WORKBOOK_VISIBLE_SHEET_COUNT,8,sheets,ACTIVE_R9,registered final workbook structure,output contract and tests must change together
+WORKBOOK_RUNTIME_EXPLICIT_DEPENDENCY_REQUIRED,1,boolean_integer,ACTIVE_R9,Codex bundled artifact-tool runtime is injected and validated before final generation,dependency contract
+FINANCE_OWNER_OR_AUTHORIZED_PERSON_MANAGED,0,boolean_integer,ACTIVE_R9,Skill generates and hands off but never assigns internal roles,immutable product boundary
+REFERENCE_REPLAY_EXPECTED_PROJECT_COUNT,8,count,ACTIVE_R10,locked private reference acceptance set,Task Pack and private baseline change review
+REFERENCE_REPLAY_FIDELITY_DELTA_MINOR,0,minor_units,ACTIVE_R10,every reference line sum and source total must replay exactly,immutable P0
+CALCULATE_REFERENCE_IMPORT_ALLOWED,0,boolean_integer,ACTIVE_R10,reference display values cannot enter calculate imports or data flow,immutable P0
+REFERENCE_SOURCE_ARITHMETIC_OVERWRITE_ALLOWED,0,boolean_integer,ACTIVE_R10,source and independently recomputed profit remain separate,immutable P0
+REFERENCE_REPLAY_CALCULATION_EVALUATED,0,boolean_integer,ACTIVE_R10,replay is audit display and calculation status stays NOT_EVALUATED,immutable P0
+REFERENCE_REPLAY_FINAL_WORKBOOK_ALLOWED,0,boolean_integer,ACTIVE_R10,replay never creates a formal calculate workbook,immutable P0
+REFERENCE_REPLAY_INTERNAL_HANDOFF_ALLOWED,0,boolean_integer,ACTIVE_R10,replay is not a final company process artifact,immutable product boundary
+CURRENT_PRODUCTION_BLOCK_EXIT_CODE,3,process_exit_code,ACTIVE_R11,current production preserves a hard business block,immutable P0
+CURRENT_EXPECTED_BLOCK_HARNESS_PASS_EXIT_CODE,0,process_exit_code,ACTIVE_R11,harness success means exact expected block only,immutable P0
+CURRENT_EXPECTED_BLOCKER_COUNT,9,count,ACTIVE_R11,reviewed current full-scope blocker contract,private expectation change review
+CURRENT_EXPECTED_PROJECT_COUNT,8,count,ACTIVE_R11,reviewed current regression scope,private expectation change review
+CURRENT_ACTUAL_COST_BASIS_COUNT,2,count,ACTIVE_R11,current actual cost requests both governed bases,immutable P0
+CALCULATE_REFERENCE_SOURCE_BINDING_ALLOWED,0,boolean_integer,ACTIVE_R11,current calculate cannot bind reference reports or replay data,immutable P0
+CURRENT_SOURCE_SNAPSHOT_OVERWRITE_ON_DRIFT_ALLOWED,0,boolean_integer,ACTIVE_R11,source drift requires append-only review and a new contract,immutable P0

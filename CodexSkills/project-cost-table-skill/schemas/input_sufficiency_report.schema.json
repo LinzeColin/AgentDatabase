@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "kmfa.project_cost.input_sufficiency_report.v1",
+  "type": "object",
+  "required": ["schema_version", "run_id", "request_hash", "mode", "requested_metrics", "requested_basis_ids", "output_dir", "overall_status", "items", "user_action_required", "resolution_ref"],
+  "properties": {
+    "schema_version": {"const": "kmfa.project_cost.input_sufficiency_report.v1"},
+    "run_id": {"type": "string", "minLength": 1},
+    "request_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "mode": {"enum": ["inventory", "reference-replay", "calculate", "review", "restate", "INVALID"]},
+    "requested_metrics": {"type": "array", "items": {"type": "string"}},
+    "requested_basis_ids": {"type": "array", "items": {"type": "string"}},
+    "output_dir": {"type": "string", "minLength": 1, "pattern": "^/"},
+    "overall_status": {"enum": ["NOT_EVALUATED", "SUFFICIENT", "SUFFICIENT_WITH_DOCUMENTED_SCOPE", "NEEDS_SUPPLEMENT", "NEEDS_EXPLICIT_HANDLING", "BLOCKED_NON_WAIVABLE"]},
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["requirement_id", "classification", "observed_status", "allowed_resolutions", "applies_to_metrics", "expected_source_or_policy", "evidence_ref", "selected_resolution", "resolution_evidence_refs", "user_instruction_ref", "effect_on_scope_or_metrics"],
+        "properties": {
+          "requirement_id": {"type": "string", "minLength": 1},
+          "classification": {"enum": ["NON_WAIVABLE", "SCOPE_DEPENDENT", "OPTIONAL_PRESENTATION"]},
+          "observed_status": {"enum": ["PRESENT", "MISSING", "CONFLICT", "UNSAFE", "NOT_IN_SCOPE"]},
+          "allowed_resolutions": {"type": "array", "items": {"enum": ["SUPPLIED", "QUALIFIED_ALTERNATE_EVIDENCE", "SCOPE_REDUCED", "OMIT_OPTIONAL_PRESENTATION", "BLOCKED"]}},
+          "applies_to_metrics": {"type": "array", "items": {"type": "string"}},
+          "expected_source_or_policy": {"type": ["string", "null"]},
+          "evidence_ref": {"type": ["string", "null"]},
+          "selected_resolution": {"anyOf": [{"enum": ["SUPPLIED", "QUALIFIED_ALTERNATE_EVIDENCE", "SCOPE_REDUCED", "OMIT_OPTIONAL_PRESENTATION", "BLOCKED"]}, {"type": "null"}]},
+          "resolution_evidence_refs": {"type": "array", "items": {"type": "string"}},
+          "user_instruction_ref": {"type": ["string", "null"]},
+          "effect_on_scope_or_metrics": {"type": ["string", "null"]}
+        },
+        "additionalProperties": false
+      }
+    },
+    "user_action_required": {"type": "boolean"},
+    "resolution_ref": {"type": ["string", "null"]}
+  },
+  "additionalProperties": false
+}

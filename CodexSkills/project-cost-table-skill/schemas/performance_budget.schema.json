@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kmfa.invalid/schemas/performance_budget.schema.json",
+  "title": "KMFA project cost release performance budget",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "profile_id", "baseline", "workload", "release_gates"],
+  "properties": {
+    "schema_version": {"const": "kmfa.project_cost.performance_budget.v1"},
+    "profile_id": {"const": "KMFA-R12-RELEASE-PERFORMANCE-V1"},
+    "baseline": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["cold_process_runs", "subsequent_process_runs", "max_wall_regression_factor", "max_peak_rss_regression_factor"],
+      "properties": {
+        "cold_process_runs": {"const": 1},
+        "subsequent_process_runs": {"type": "integer", "minimum": 3},
+        "max_wall_regression_factor": {"type": "string", "pattern": "^1\\.50$"},
+        "max_peak_rss_regression_factor": {"type": "string", "pattern": "^1\\.50$"}
+      }
+    },
+    "workload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["selected_full_digest_verifications_per_source_max", "candidate_pair_budget_max", "global_unpartitioned_matching_allowed", "application_cache_allowed", "full_digest_required"],
+      "properties": {
+        "selected_full_digest_verifications_per_source_max": {"const": 1},
+        "candidate_pair_budget_max": {"const": 1000000},
+        "global_unpartitioned_matching_allowed": {"const": false},
+        "application_cache_allowed": {"const": false},
+        "full_digest_required": {"const": true}
+      }
+    },
+    "release_gates": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["full_test_suite_required", "adversarial_property_metamorphic_required", "private_r10_r11_regression_required", "actual_workbook_runtime_required", "staged_privacy_scan_required", "full_digest_for_final_generation_required", "global_install_in_r12_allowed"],
+      "properties": {
+        "full_test_suite_required": {"const": true},
+        "adversarial_property_metamorphic_required": {"const": true},
+        "private_r10_r11_regression_required": {"const": true},
+        "actual_workbook_runtime_required": {"const": true},
+        "staged_privacy_scan_required": {"const": true},
+        "full_digest_for_final_generation_required": {"const": true},
+        "global_install_in_r12_allowed": {"const": false}
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+schema_version: kmfa.project_cost.payroll_allocation_policy.v1
+policy_id: payroll_policy_00000000000000000000000000000000
+policy_version: 0.0.0-template
+status: TEMPLATE_NOT_ACTIVE
+valid_from: '2000-01-01'
+valid_to: null
+allocation_method: APPROVED_TIME_PRO_RATA
+time_unit: REPLACE_WITH_APPROVED_TIME_UNIT
+residual_destination: UNALLOCATED_PAYROLL_POOL
+evidence_refs: []
+company_policy_refs: []
+input_resolution_refs: []
+bound_request_hash: null
+bound_input_hash: null
+bound_config_hash: null

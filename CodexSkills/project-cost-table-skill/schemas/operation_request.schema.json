@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "kmfa.project_cost.operation_request.v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "run_id",
+    "mode",
+    "requested_metrics",
+    "requested_basis_ids",
+    "project_selector",
+    "as_of",
+    "input_root",
+    "manifest_path",
+    "output_dir",
+    "policy_refs",
+    "resolution_path",
+    "prior_sufficiency_report_path"
+  ],
+  "properties": {
+    "schema_version": {"const": "kmfa.project_cost.operation_request.v1"},
+    "run_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"},
+    "mode": {
+      "anyOf": [
+        {"enum": ["inventory", "reference-replay", "calculate", "review", "restate"]},
+        {"type": "null"}
+      ]
+    },
+    "requested_metrics": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+    "requested_basis_ids": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+    "project_selector": {
+      "type": "object",
+      "additionalProperties": {"type": "string", "minLength": 1}
+    },
+    "as_of": {"anyOf": [{"type": "string", "format": "date"}, {"type": "null"}]},
+    "input_root": {"anyOf": [{"type": "string", "pattern": "^/"}, {"type": "null"}]},
+    "manifest_path": {"anyOf": [{"type": "string", "pattern": "^/"}, {"type": "null"}]},
+    "output_dir": {"anyOf": [{"type": "string", "pattern": "^/"}, {"type": "null"}]},
+    "policy_refs": {
+      "type": "object",
+      "additionalProperties": {"type": "string", "minLength": 1}
+    },
+    "resolution_path": {"anyOf": [{"type": "string", "pattern": "^/"}, {"type": "null"}]},
+    "prior_sufficiency_report_path": {"anyOf": [{"type": "string", "pattern": "^/"}, {"type": "null"}]}
+  },
+  "oneOf": [
+    {
+      "properties": {
+        "resolution_path": {"type": "null"},
+        "prior_sufficiency_report_path": {"type": "null"}
+      }
+    },
+    {
+      "properties": {
+        "resolution_path": {"type": "string", "pattern": "^/"},
+        "prior_sufficiency_report_path": {"type": "string", "pattern": "^/"}
+      }
+    }
+  ],
+  "additionalProperties": false
+}

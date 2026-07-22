@@ -1,0 +1,19 @@
+schema_version: kmfa.project_cost.source_priority.v2
+principles:
+  - stable_business_key_before_similarity
+  - direct_project_evidence_before_allocation
+  - same_stage_dedup_cross_stage_link
+  - source_system_validated_actual_before_estimate
+  - preserve_all_source_versions
+  - no_silent_overwrite
+identity_priority:
+  - effective_evidence_backed_mapping
+  - exact_project_entity_wbs_contract_mapping
+  - exact_governed_source_identifier
+candidate_only:
+  - free_text
+  - project_or_customer_name_only
+  - amount_only
+reference_display:
+  allowed_only_for: [reference-replay, regression]
+  prohibited_for: [calculate, formula_fitting, gap_filling]

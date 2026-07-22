@@ -1,0 +1,1 @@
+profile_id,profile_version,formula_id,formula_kind,metric_id,legal_entity_id,canonical_project_id,wbs_or_cost_code,unit,expression_id,rate_numerator,rate_denominator,rounding_layer,rounding_mode,valid_from,valid_to,authority_mode,company_policy_ref,input_resolution_ref,evidence_ref,bound_request_hash,bound_input_hash,bound_config_hash,supersedes,status

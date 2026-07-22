@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "kmfa.project_cost.review_task.v2",
+  "title": "Data-governance review task (not company approval workflow)",
+  "type": "object",
+  "required": [
+    "task_id",
+    "severity",
+    "task_type",
+    "status",
+    "blocking_metrics",
+    "description",
+    "required_input_or_resolution_type",
+    "candidate_refs",
+    "evidence_refs",
+    "resolution_ref"
+  ],
+  "properties": {
+    "task_id": {"type": "string", "pattern": "^review_identity_[0-9a-f]{32}$"},
+    "severity": {"enum": ["P0", "P1", "P2", "P3"]},
+    "task_type": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]{2,127}$"},
+    "status": {
+      "description": "Data-governance task status only; it does not model the company approval process.",
+      "enum": ["PENDING", "IN_REVIEW", "APPROVED", "REJECTED", "CLOSED", "SUPERSEDED"]
+    },
+    "blocking_metrics": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1, "maxLength": 128}},
+    "description": {"type": "string", "minLength": 1, "maxLength": 1024},
+    "required_input_or_resolution_type": {"type": ["string", "null"], "maxLength": 256},
+    "candidate_refs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^(identity_candidate_|identity_record_)[0-9a-f]{32}$"}},
+    "evidence_refs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^evidence:[0-9a-f]{64}$"}},
+    "resolution_ref": {"type": ["string", "null"], "pattern": "^identity_resolution_[0-9a-f]{32}$"}
+  },
+  "additionalProperties": false
+}

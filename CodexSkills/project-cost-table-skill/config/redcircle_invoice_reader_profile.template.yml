@@ -1,0 +1,86 @@
+schema_version: kmfa.project_cost.lifecycle_reader_profile.v1
+profile_id: TEMPLATE-REDCIRCLE-INVOICE-R6
+status: TEMPLATE_NOT_ACTIVE
+slot_id: project_billing
+reader_id: project_invoice_v2
+reader_version: 2.0.0
+schema_id: REPLACE_WITH_PRIVATE_LOCKED_SCHEMA
+sheet_name: REPLACE_WITH_PRIVATE_SHEET
+header_row: 1
+first_data_row: 2
+max_data_rows: 1000
+expected_headers:
+  - Entity
+  - Project
+  - WBS
+  - Contract
+  - Counterparty
+  - Document
+  - Line
+  - EventType
+  - Status
+  - RowKind
+  - ReversalOf
+  - Note
+  - DocumentDate
+  - ApprovalDate
+  - InvoiceDate
+  - PaymentDate
+  - CollectionDate
+  - EffectiveDate
+  - ReversalDate
+  - TransactionAmount
+  - GrossAmount
+  - NetAmount
+  - TaxAmount
+  - Currency
+column_bindings:
+  legal_entity_source_key: Entity
+  project_source_key: Project
+  wbs_source_key: WBS
+  contract_source_key: Contract
+  counterparty_source_key: Counterparty
+  document_id: Document
+  document_line_id: Line
+  source_event_type: EventType
+  source_status: Status
+  source_row_kind: RowKind
+  reversal_of_source_key: ReversalOf
+  free_text: Note
+  document_date: DocumentDate
+  approval_date: ApprovalDate
+  invoice_date: InvoiceDate
+  payment_date: PaymentDate
+  collection_date: CollectionDate
+  effective_date: EffectiveDate
+  reversal_date: ReversalDate
+  transaction_amount: TransactionAmount
+  gross_amount: GrossAmount
+  net_amount: NetAmount
+  tax_amount: TaxAmount
+  currency: Currency
+date_modes:
+  document_date: ISO_OR_EXCEL_SERIAL
+  approval_date: ISO_OR_EXCEL_SERIAL
+  invoice_date: ISO_OR_EXCEL_SERIAL
+  payment_date: ISO_OR_EXCEL_SERIAL
+  collection_date: ISO_OR_EXCEL_SERIAL
+  effective_date: ISO_OR_EXCEL_SERIAL
+  reversal_date: ISO_OR_EXCEL_SERIAL
+default_currency: null
+required_business_fields: [document_id, source_event_type, source_status, invoice_date, transaction_amount, gross_amount, net_amount, tax_amount, currency]
+status_rules:
+  - {source_status: REPLACE_APPROVED, event_status: SOURCE_ACTIVE, evidence_ref: null}
+  - {source_status: REPLACE_PENDING, event_status: SOURCE_PENDING, evidence_ref: null}
+  - {source_status: REPLACE_CANCELLED, event_status: SOURCE_CANCELLED, evidence_ref: null}
+  - {source_status: REPLACE_REVERSED, event_status: SOURCE_REVERSED, evidence_ref: null}
+event_type_rules:
+  - {source_event_type: REPLACE_INVOICE, event_type: CUSTOMER_INVOICE, direction: REVENUE, lifecycle_stage: BILLED, amount_multiplier: 1, evidence_ref: null}
+  - {source_event_type: REPLACE_CREDIT_NOTE, event_type: CUSTOMER_CREDIT_NOTE, direction: REVENUE, lifecycle_stage: BILLED, amount_multiplier: -1, evidence_ref: null}
+default_event_rule: null
+row_kind_rules:
+  - {source_row_kind: REPLACE_BUSINESS, action: EMIT_EVENT, reason_code: null, evidence_ref: null}
+  - {source_row_kind: REPLACE_TOTAL, action: EXCLUDE_CONTROL, reason_code: EXCLUDED_SOURCE_TOTAL, evidence_ref: null}
+automatic_project_assignment_allowed: false
+reader_decides_final_metric_inclusion: false
+evidence_refs: []

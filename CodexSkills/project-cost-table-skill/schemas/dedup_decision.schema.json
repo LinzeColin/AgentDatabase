@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "kmfa.project_cost.dedup_decision.v1",
+  "type": "object",
+  "required": ["relation_event_ref", "economic_event_id", "disposition", "duplicate_class", "canonical_event_ref", "resolution_ref", "evidence_refs", "reason_code"],
+  "properties": {
+    "relation_event_ref": {"type": "string", "pattern": "^relation_event_[0-9a-f]{32}$"},
+    "economic_event_id": {"type": "string", "pattern": "^evt_[0-9a-f]{32}$"},
+    "disposition": {"enum": ["INCLUDED", "EXCLUDED_DUPLICATE", "SUPERSEDED_VERSION", "PENDING_VERSION_CONFLICT", "PENDING_BUSINESS_DUPLICATE", "PENDING_POSSIBLE_DUPLICATE"]},
+    "duplicate_class": {"enum": ["BYTE_DUPLICATE", "BUSINESS_CONTENT_DUPLICATE", "SAME_KEY_SAME_VERSION", "SAME_KEY_CHANGED_VERSION", "POSSIBLE_DUPLICATE", "DISTINCT"]},
+    "canonical_event_ref": {"type": ["string", "null"], "pattern": "^relation_event_[0-9a-f]{32}$"},
+    "resolution_ref": {"type": ["string", "null"], "pattern": "^dedup_resolution_[0-9a-f]{32}$"},
+    "evidence_refs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^(evidence:[0-9a-f]{64}|evidence://sha256/[0-9a-f]{64})$"}},
+    "reason_code": {"type": "string", "minLength": 1}
+  },
+  "additionalProperties": false
+}

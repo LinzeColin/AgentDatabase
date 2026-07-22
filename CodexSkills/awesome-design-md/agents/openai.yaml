@@ -1,0 +1,4 @@
+interface:
+  display_name: "Awesome Design MD"
+  short_description: "Brand design markdown reference library"
+  default_prompt: "Use $awesome-design-md to apply a referenced brand design language."

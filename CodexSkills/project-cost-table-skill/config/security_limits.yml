@@ -1,0 +1,16 @@
+schema_version: kmfa.project_cost.security_limits.v1
+profile_id: LOCAL-FILE-SECURITY-V1
+source_file_bytes_max: 2147483648
+archive_member_count_max: 10000
+archive_total_uncompressed_bytes_max: 2147483648
+archive_single_member_bytes_max: 536870912
+archive_compression_ratio_max: 200
+archive_nested_depth_max: 4
+xml_single_part_bytes_max: 134217728
+allowed_zip_compression_methods:
+  - 0
+  - 8
+legacy_xls_policy: BLOCK_UNTIL_LOCKED_READER
+macro_enabled_ooxml_policy: BLOCK
+formula_cell_policy: BLOCK_UNTIL_GOVERNED_CACHED_VALUE_READER
+external_relationship_policy: BLOCK

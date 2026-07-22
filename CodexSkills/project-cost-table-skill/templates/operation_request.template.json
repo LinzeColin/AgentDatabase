@@ -1,0 +1,15 @@
+{
+  "schema_version": "kmfa.project_cost.operation_request.v1",
+  "run_id": "REPLACE_WITH_OPAQUE_RUN_ID",
+  "mode": null,
+  "requested_metrics": [],
+  "requested_basis_ids": [],
+  "project_selector": {},
+  "as_of": null,
+  "input_root": null,
+  "manifest_path": null,
+  "output_dir": null,
+  "policy_refs": {},
+  "resolution_path": null,
+  "prior_sufficiency_report_path": null
+}

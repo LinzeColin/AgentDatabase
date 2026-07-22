@@ -1,0 +1,61 @@
+"""Governed source readers. Readers emit source records, never final Metrics."""
+
+from .kingdee import (
+    KINGDEE_READER_ID,
+    KINGDEE_READER_VERSION,
+    KingdeeLedgerRecord,
+    KingdeeReaderError,
+    KingdeeReaderProfile,
+    KingdeeReaderResult,
+    public_reader_summary,
+    read_kingdee_ledger,
+)
+from .kingdee_bundle import (
+    KingdeeBundleError,
+    KingdeeBundleProfile,
+    KingdeeBundleResult,
+    public_bundle_summary,
+    read_kingdee_bundle,
+)
+from .lifecycle import (
+    LIFECYCLE_READER_VERSION,
+    SLOT_READER_IDS,
+    DuplicateExportGroup,
+    LifecycleBatchResult,
+    LifecycleReaderError,
+    LifecycleReaderProfile,
+    LifecycleReaderResult,
+    LifecycleSourceRecord,
+    public_lifecycle_batch_summary,
+    public_lifecycle_reader_summary,
+    read_lifecycle_batch,
+    read_lifecycle_source,
+)
+
+__all__ = [
+    "KINGDEE_READER_ID",
+    "KINGDEE_READER_VERSION",
+    "KingdeeLedgerRecord",
+    "KingdeeReaderError",
+    "KingdeeReaderProfile",
+    "KingdeeReaderResult",
+    "public_reader_summary",
+    "read_kingdee_ledger",
+    "KingdeeBundleError",
+    "KingdeeBundleProfile",
+    "KingdeeBundleResult",
+    "public_bundle_summary",
+    "read_kingdee_bundle",
+    "LIFECYCLE_READER_VERSION",
+    "SLOT_READER_IDS",
+    "DuplicateExportGroup",
+    "LifecycleBatchResult",
+    "LifecycleReaderError",
+    "LifecycleReaderProfile",
+    "LifecycleReaderResult",
+    "LifecycleSourceRecord",
+    "public_lifecycle_batch_summary",
+    "public_lifecycle_reader_summary",
+    "read_lifecycle_batch",
+    "read_lifecycle_source",
+]

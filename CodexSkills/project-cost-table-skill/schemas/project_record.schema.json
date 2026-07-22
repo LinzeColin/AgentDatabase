@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "kmfa.project_cost.project_record.v2",
+  "title": "Evidence-qualified project identity mapping (not company approval)",
+  "type": "object",
+  "required": [
+    "canonical_project_id",
+    "legal_entity_id",
+    "wbs_or_cost_code",
+    "project_code",
+    "project_name",
+    "customer_id",
+    "contract_ids",
+    "source_aliases",
+    "valid_from",
+    "valid_to",
+    "identity_status",
+    "mapping_resolution_ref",
+    "evidence_refs"
+  ],
+  "properties": {
+    "canonical_project_id": {"type": "string", "minLength": 1, "maxLength": 256, "pattern": "^(?!\\s)(?!.*\\s$)[^\\r\\n\\u0000]+$"},
+    "legal_entity_id": {"type": "string", "minLength": 1, "maxLength": 256, "pattern": "^(?!\\s)(?!.*\\s$)[^\\r\\n\\u0000]+$"},
+    "wbs_or_cost_code": {"type": "string", "minLength": 1, "maxLength": 256, "pattern": "^(?!\\s)(?!.*\\s$)[^\\r\\n\\u0000]+$"},
+    "project_code": {"type": ["string", "null"], "minLength": 1, "maxLength": 256, "pattern": "^(?!\\s)(?!.*\\s$)[^\\r\\n\\u0000]+$"},
+    "project_name": {"type": ["string", "null"], "minLength": 1, "maxLength": 512, "pattern": "^(?!\\s)(?!.*\\s$)[^\\r\\n\\u0000]+$"},
+    "customer_id": {"type": ["string", "null"], "minLength": 1, "maxLength": 256, "pattern": "^(?!\\s)(?!.*\\s$)[^\\r\\n\\u0000]+$"},
+    "contract_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1, "maxLength": 256}},
+    "source_aliases": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^source://[A-Za-z0-9._-]{1,64}/\\S{1,256}$"}},
+    "valid_from": {"type": "string", "format": "date"},
+    "valid_to": {"type": ["string", "null"], "format": "date"},
+    "identity_status": {
+      "description": "APPROVED means an evidence-qualified data mapping only; it is not company approval.",
+      "enum": ["APPROVED", "CANDIDATE", "CONFLICT", "UNMAPPED", "REVOKED", "SUPERSEDED"]
+    },
+    "mapping_resolution_ref": {"type": "string", "pattern": "^identity_resolution_[0-9a-f]{32}$"},
+    "evidence_refs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^evidence:[0-9a-f]{64}$"}}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"identity_status": {"const": "APPROVED"}}, "required": ["identity_status"]},
+      "then": {"properties": {"contract_ids": {"minItems": 1}, "evidence_refs": {"minItems": 1}}}
+    }
+  ],
+  "additionalProperties": false
+}

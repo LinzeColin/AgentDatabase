@@ -1,0 +1,17 @@
+schema_version: kmfa.project_cost.pay_component_registry.v1
+registry_id: pay_component_registry_00000000000000000000000000000000
+registry_version: 0.0.0-template
+status: TEMPLATE_NOT_ACTIVE
+valid_from: '2000-01-01'
+valid_to: null
+base_currency: CNY
+rules:
+  - component_id: REPLACE_WITH_SOURCE_COMPONENT_ID
+    treatment: INCLUDED_EMPLOYER_COST
+    legal_entity_id: '*'
+    valid_from: '2000-01-01'
+    valid_to: null
+    evidence_refs: []
+evidence_refs: []
+company_policy_refs: []
+bound_config_hash: null

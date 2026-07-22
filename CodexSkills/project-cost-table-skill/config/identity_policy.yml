@@ -1,0 +1,39 @@
+schema_version: kmfa.project_cost.identity_policy.v1
+policy_id: POLICY-KMFA-IDENTITY-MASTER-001
+canonical_key_fields:
+  - canonical_project_id
+  - legal_entity_id
+  - wbs_or_cost_code
+  - valid_at
+active_mapping_statuses:
+  - APPROVED
+final_match_order:
+  - EXACT_CANONICAL_SCOPE
+  - EXACT_CONTRACT_ID
+  - EXACT_GOVERNED_SOURCE_ID
+  - QUALIFIED_MAPPING_RESOLUTION
+  - CANDIDATE_ONLY
+candidate_only_fields:
+  - project_code
+  - project_name
+  - customer_id
+  - free_text_ref
+  - amount_only
+hard_conflict_codes:
+  - IDENTITY_EFFECTIVE_PERIOD_OVERLAP
+  - IDENTITY_ALIAS_CONFLICT
+  - IDENTITY_MULTIPLE_ACTIVE_MATCHES
+  - IDENTITY_CONTRACT_PROJECT_CONFLICT
+  - IDENTITY_IDENTIFIER_CONFLICT
+  - IDENTITY_CROSS_ENTITY_AMBIGUOUS
+  - IDENTITY_STALE_MAPPING
+  - IDENTITY_INCOMPLETE_CANONICAL_KEY
+  - IDENTITY_CANDIDATE_ONLY
+  - IDENTITY_UNMAPPED
+identifier_normalization: NFC_TRIM_CASE_SENSITIVE
+effective_period_end_inclusive: true
+identity_ambiguity_allowed: 0
+unresolved_final_mapping_allowed: 0
+fuzzy_final_mapping_allowed: false
+cross_entity_destructive_normalization_allowed: false
+company_approval_state_managed: false

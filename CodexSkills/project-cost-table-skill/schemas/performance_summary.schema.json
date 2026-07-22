@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kmfa.invalid/schemas/performance_summary.schema.json",
+  "title": "KMFA R12 aggregate-only performance summary",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "profile_id", "product_version", "release_code_sha256", "performance_budget_sha256", "release_scope", "status", "issues", "hardware", "budget", "samples", "aggregate", "real_calculation_baseline_status", "privacy", "company_approval_state_managed", "global_install_performed"],
+  "properties": {
+    "schema_version": {"const": "kmfa.project_cost.performance_summary.v1"},
+    "profile_id": {"const": "KMFA-R12-RELEASE-PERFORMANCE-V1"},
+    "product_version": {"const": "0.2.0"},
+    "release_code_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "performance_budget_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "release_scope": {"const": "BOUND_CURRENT_SOURCE_DIGEST_GATE"},
+    "status": {"enum": ["PASS", "FAILED"]},
+    "issues": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^[A-Z0-9_]+$"}},
+    "hardware": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["operating_system", "machine_architecture", "logical_cpu_count", "python_implementation", "python_version"],
+      "properties": {
+        "operating_system": {"type": "string", "minLength": 1},
+        "machine_architecture": {"type": "string", "minLength": 1},
+        "logical_cpu_count": {"type": "integer", "minimum": 1},
+        "python_implementation": {"type": "string", "minLength": 1},
+        "python_version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"}
+      }
+    },
+    "budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["cold_process_runs", "subsequent_process_runs", "max_wall_regression_factor", "max_peak_rss_regression_factor", "selected_full_digest_verifications_per_source_max", "candidate_pair_budget_max", "global_unpartitioned_matching_allowed", "application_cache_allowed", "full_digest_required"],
+      "properties": {
+        "cold_process_runs": {"const": 1},
+        "subsequent_process_runs": {"type": "integer", "minimum": 3},
+        "max_wall_regression_factor": {"type": "string", "pattern": "^1\\.50$"},
+        "max_peak_rss_regression_factor": {"type": "string", "pattern": "^1\\.50$"},
+        "selected_full_digest_verifications_per_source_max": {"const": 1},
+        "candidate_pair_budget_max": {"const": 1000000},
+        "global_unpartitioned_matching_allowed": {"const": false},
+        "application_cache_allowed": {"const": false},
+        "full_digest_required": {"const": true}
+      }
+    },
+    "samples": {
+      "type": "array",
+      "minItems": 4,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["phase", "sample_index", "wall_time_ns", "cpu_time_ns", "peak_rss_bytes", "bytes_read", "inventory_entry_count", "selected_source_count", "full_digest_verification_count", "max_full_digest_verifications_per_source", "archive_members_parsed", "business_files_parsed", "rows_parsed", "candidate_pairs", "application_cache_hits", "full_digest_required", "full_digest_completed", "global_unpartitioned_matching"],
+        "properties": {
+          "phase": {"enum": ["COLD_PROCESS", "SUBSEQUENT_PROCESS"]},
+          "sample_index": {"type": "integer", "minimum": 1},
+          "wall_time_ns": {"type": "integer", "minimum": 1},
+          "cpu_time_ns": {"type": "integer", "minimum": 1},
+          "peak_rss_bytes": {"type": "integer", "minimum": 1},
+          "bytes_read": {"type": "integer", "minimum": 1},
+          "inventory_entry_count": {"type": "integer", "minimum": 1},
+          "selected_source_count": {"type": "integer", "minimum": 1},
+          "full_digest_verification_count": {"type": "integer", "minimum": 1},
+          "max_full_digest_verifications_per_source": {"type": "integer", "minimum": 1},
+          "archive_members_parsed": {"type": "integer", "minimum": 0},
+          "business_files_parsed": {"type": "integer", "minimum": 0},
+          "rows_parsed": {"type": "integer", "minimum": 0},
+          "candidate_pairs": {"type": "integer", "minimum": 0},
+          "application_cache_hits": {"type": "integer", "minimum": 0},
+          "full_digest_required": {"const": true},
+          "full_digest_completed": {"type": "boolean"},
+          "global_unpartitioned_matching": {"type": "boolean"}
+        }
+      }
+    },
+    "aggregate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["cold_wall_time_ns", "cold_peak_rss_bytes", "max_subsequent_wall_time_ns", "max_subsequent_peak_rss_bytes", "total_bytes_read", "total_full_digest_verifications", "max_full_digest_verifications_per_source", "total_candidate_pairs", "total_application_cache_hits"],
+      "properties": {
+        "cold_wall_time_ns": {"type": "integer", "minimum": 1},
+        "cold_peak_rss_bytes": {"type": "integer", "minimum": 1},
+        "max_subsequent_wall_time_ns": {"type": "integer", "minimum": 1},
+        "max_subsequent_peak_rss_bytes": {"type": "integer", "minimum": 1},
+        "total_bytes_read": {"type": "integer", "minimum": 1},
+        "total_full_digest_verifications": {"type": "integer", "minimum": 1},
+        "max_full_digest_verifications_per_source": {"type": "integer", "minimum": 1},
+        "total_candidate_pairs": {"type": "integer", "minimum": 0},
+        "total_application_cache_hits": {"type": "integer", "minimum": 0}
+      }
+    },
+    "real_calculation_baseline_status": {"const": "NOT_EVALUATED_BLOCKED_SOURCE"},
+    "privacy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["contains_private_locators", "contains_source_names", "contains_source_hashes", "contains_business_values"],
+      "properties": {
+        "contains_private_locators": {"const": false},
+        "contains_source_names": {"const": false},
+        "contains_source_hashes": {"const": false},
+        "contains_business_values": {"const": false}
+      }
+    },
+    "company_approval_state_managed": {"const": false},
+    "global_install_performed": {"const": false}
+  }
+}

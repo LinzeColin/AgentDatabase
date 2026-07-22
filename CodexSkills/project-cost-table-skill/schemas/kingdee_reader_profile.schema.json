@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/kmfa/kingdee_reader_profile.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "profile_id", "status", "reader_id", "reader_version", "schema_id", "sheet_name", "header_row", "first_data_row", "max_data_rows", "expected_headers", "column_bindings", "date_modes", "evidence_refs"],
+  "properties": {
+    "schema_version": {"const": "kmfa.project_cost.kingdee_reader_profile.v1"},
+    "profile_id": {"type": "string", "minLength": 1},
+    "status": {"enum": ["ACTIVE", "TEMPLATE_NOT_ACTIVE"]},
+    "reader_id": {"const": "kingdee_ledger_v2"},
+    "reader_version": {"const": "2.0.0"},
+    "schema_id": {"type": "string", "minLength": 1},
+    "sheet_name": {"type": "string", "minLength": 1},
+    "header_row": {"type": "integer", "minimum": 1},
+    "first_data_row": {"type": "integer", "minimum": 2},
+    "max_data_rows": {"type": "integer", "minimum": 1, "maximum": 5000000},
+    "expected_headers": {"type": "array", "minItems": 16, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "column_bindings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["legal_entity_source_key", "project_source_key", "wbs_source_key", "contract_source_key", "account_code", "voucher_id", "voucher_line_id", "document_date", "business_date", "posting_date", "debit", "credit", "balance", "currency", "source_status", "source_row_kind"],
+      "properties": {
+        "legal_entity_source_key": {"type": "string", "minLength": 1},
+        "project_source_key": {"type": "string", "minLength": 1},
+        "wbs_source_key": {"type": "string", "minLength": 1},
+        "contract_source_key": {"type": "string", "minLength": 1},
+        "account_code": {"type": "string", "minLength": 1},
+        "voucher_id": {"type": "string", "minLength": 1},
+        "voucher_line_id": {"type": "string", "minLength": 1},
+        "document_date": {"type": "string", "minLength": 1},
+        "business_date": {"type": "string", "minLength": 1},
+        "posting_date": {"type": "string", "minLength": 1},
+        "debit": {"type": "string", "minLength": 1},
+        "credit": {"type": "string", "minLength": 1},
+        "balance": {"type": "string", "minLength": 1},
+        "currency": {"type": "string", "minLength": 1},
+        "source_status": {"type": "string", "minLength": 1},
+        "source_row_kind": {"type": "string", "minLength": 1}
+      }
+    },
+    "date_modes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["document_date", "business_date", "posting_date"],
+      "properties": {
+        "document_date": {"enum": ["ISO_TEXT", "ISO_OR_EXCEL_SERIAL"]},
+        "business_date": {"enum": ["ISO_TEXT", "ISO_OR_EXCEL_SERIAL"]},
+        "posting_date": {"enum": ["ISO_TEXT", "ISO_OR_EXCEL_SERIAL"]}
+      }
+    },
+    "evidence_refs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^evidence://sha256/[0-9a-f]{64}$"}}
+  },
+  "allOf": [
+    {"if": {"properties": {"status": {"const": "ACTIVE"}}}, "then": {"properties": {"evidence_refs": {"minItems": 1}}}}
+  ]
+}

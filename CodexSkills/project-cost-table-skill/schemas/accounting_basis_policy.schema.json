@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/kmfa/accounting_basis_policy.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "policy_id", "policy_version", "status", "effective_from", "effective_to", "base_currency", "evidence_refs", "valuation_policy_ref", "blank_counter_side_as_zero", "wip_to_cogs_control_required", "status_rules", "row_kind_rules", "account_rules", "period_policy"],
+  "properties": {
+    "schema_version": {"const": "kmfa.project_cost.accounting_basis_policy.v1"},
+    "policy_id": {"type": "string", "minLength": 1},
+    "policy_version": {"type": "string", "minLength": 1},
+    "status": {"enum": ["ACTIVE", "TEMPLATE_NOT_ACTIVE"]},
+    "effective_from": {"type": "string", "format": "date"},
+    "effective_to": {"type": ["string", "null"], "format": "date"},
+    "base_currency": {"const": "CNY"},
+    "evidence_refs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^evidence://sha256/[0-9a-f]{64}$"}},
+    "valuation_policy_ref": {"type": ["string", "null"], "pattern": "^evidence://sha256/[0-9a-f]{64}$"},
+    "blank_counter_side_as_zero": {"type": "boolean"},
+    "wip_to_cogs_control_required": {"const": true},
+    "status_rules": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["source_status", "action", "reason_code", "evidence_ref"],
+        "properties": {
+          "source_status": {"type": "string", "minLength": 1},
+          "action": {"enum": ["INCLUDE", "EXCLUDE"]},
+          "reason_code": {"type": "string", "minLength": 1},
+          "evidence_ref": {"type": ["string", "null"], "pattern": "^evidence://sha256/[0-9a-f]{64}$"}
+        }
+      }
+    },
+    "row_kind_rules": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["source_row_kind", "semantic", "evidence_ref"],
+        "properties": {
+          "source_row_kind": {"type": "string", "minLength": 1},
+          "semantic": {"enum": ["WIP_OPENING", "WIP_CLOSING", "WIP_ADDITION", "WIP_ADJUSTMENT", "WIP_TRANSFER_IN", "WIP_REVERSAL", "WIP_OTHER_TRANSFER_OUT", "WIP_TO_COGS_TRANSFER", "WIP_FROM_COGS_REVERSAL", "COGS_RECOGNITION", "COGS_REVERSAL", "EXCLUDE_CONTROL"]},
+          "evidence_ref": {"type": ["string", "null"], "pattern": "^evidence://sha256/[0-9a-f]{64}$"}
+        }
+      }
+    },
+    "account_rules": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["account_code", "bridge_group_id", "valid_from", "valid_to", "allowed_semantics", "evidence_ref"],
+        "properties": {
+          "account_code": {"type": "string", "minLength": 1},
+          "bridge_group_id": {"type": "string", "minLength": 1},
+          "valid_from": {"type": "string", "format": "date"},
+          "valid_to": {"type": ["string", "null"], "format": "date"},
+          "allowed_semantics": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"enum": ["WIP_OPENING", "WIP_CLOSING", "WIP_ADDITION", "WIP_ADJUSTMENT", "WIP_TRANSFER_IN", "WIP_REVERSAL", "WIP_OTHER_TRANSFER_OUT", "WIP_TO_COGS_TRANSFER", "WIP_FROM_COGS_REVERSAL", "COGS_RECOGNITION", "COGS_REVERSAL"]}},
+          "evidence_ref": {"type": ["string", "null"], "pattern": "^evidence://sha256/[0-9a-f]{64}$"}
+        }
+      }
+    },
+    "period_policy": {
+      "type": "object", "additionalProperties": false,
+      "required": ["calendar_id", "closed_through", "late_posting_mode"],
+      "properties": {
+        "calendar_id": {"type": "string", "minLength": 1},
+        "closed_through": {"type": ["string", "null"], "format": "date"},
+        "late_posting_mode": {"const": "REQUIRE_BOUND_PRIOR_SNAPSHOT_FOR_CLOSED_PERIOD"}
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"status": {"const": "ACTIVE"}}},
+      "then": {
+        "properties": {
+          "evidence_refs": {"minItems": 1},
+          "valuation_policy_ref": {"type": "string"}
+        }
+      }
+    }
+  ]
+}

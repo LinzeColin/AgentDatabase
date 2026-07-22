@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "kmfa.project_cost.run_manifest.v4",
+  "type": "object",
+  "required": [
+    "schema_version", "run_id", "request_hash", "created_at", "mode", "as_of", "project_scope",
+    "execution_status", "input_readiness_status", "calculation_status", "generation_status",
+    "metric_snapshot_keys", "source_bindings", "code_version", "config_hash", "supersedes_run_id",
+    "absolute_output_dir", "primary_output", "output_index_md", "output_index_json", "seal_path",
+    "internal_process_handoff", "output_hashes"
+  ],
+  "properties": {
+    "schema_version": {"const": "kmfa.project_cost.run_manifest.v4"},
+    "run_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"},
+    "request_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "created_at": {"type": "string", "format": "date-time"},
+    "mode": {"enum": ["calculate", "restate", "reference-replay"]},
+    "as_of": {"type": "string", "format": "date"},
+    "project_scope": {"type": ["object", "null"]},
+    "execution_status": {"enum": ["SUCCEEDED", "NEEDS_USER_INPUT", "EXPECTED_BLOCKED", "FAILED", "CANCELLED"]},
+    "input_readiness_status": {"enum": ["NOT_EVALUATED", "SUFFICIENT", "SUFFICIENT_WITH_DOCUMENTED_SCOPE", "NEEDS_SUPPLEMENT", "NEEDS_EXPLICIT_HANDLING", "BLOCKED_NON_WAIVABLE"]},
+    "calculation_status": {"enum": ["NOT_EVALUATED", "VALIDATED", "BLOCKED_SOURCE", "BLOCKED_SCHEMA", "BLOCKED_IDENTITY", "BLOCKED_RELATIONSHIP", "BLOCKED_FORMULA", "BLOCKED_RECONCILIATION", "BLOCKED_SECURITY", "BLOCKED_PERIOD", "ERROR"]},
+    "generation_status": {"enum": ["NOT_GENERATED", "FINAL_GENERATED", "BLOCKED_DIAGNOSTICS_GENERATED", "FAILED", "SUPERSEDED"]},
+    "replay_fidelity_status": {"enum": ["NOT_EVALUATED", "EXACT", "BLOCKED_HASH", "BLOCKED_LINE_DELTA"]},
+    "source_quality_status": {"enum": ["CONSISTENT", "SOURCE_ARITHMETIC_DIFFERENCE", "UNKNOWN"]},
+    "metric_snapshot_keys": {"type": "array", "items": {"type": "array", "prefixItems": [{"type": "string"}, {"type": "string"}], "items": false}},
+    "source_bindings": {"type": "array", "items": {"type": "object"}},
+    "code_version": {"type": "string", "minLength": 1},
+    "config_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "supersedes_run_id": {"type": ["string", "null"]},
+    "absolute_output_dir": {"type": "string", "pattern": "^/"},
+    "primary_output": {"type": "string", "pattern": "^/"},
+    "output_index_md": {"type": "string", "pattern": "^/"},
+    "output_index_json": {"type": "string", "pattern": "^/"},
+    "seal_path": {"type": "string", "pattern": "^/"},
+    "internal_process_handoff": {"type": ["string", "null"]},
+    "output_hashes": {"type": "object", "propertyNames": {"not": {"enum": ["run_manifest.json", "OUTPUT_INDEX.md", "output_index.json", "run_seal.sha256"]}}, "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{64}$"}}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"mode": {"const": "reference-replay"}}, "required": ["mode"]},
+      "then": {
+        "required": ["replay_fidelity_status", "source_quality_status"],
+        "properties": {
+          "calculation_status": {"const": "NOT_EVALUATED"},
+          "metric_snapshot_keys": {"maxItems": 0},
+          "internal_process_handoff": {"type": "null"}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"generation_status": {"const": "FINAL_GENERATED"}}, "required": ["generation_status"]},
+      "then": {
+        "properties": {
+          "execution_status": {"const": "SUCCEEDED"},
+          "input_readiness_status": {"enum": ["SUFFICIENT", "SUFFICIENT_WITH_DOCUMENTED_SCOPE"]},
+          "calculation_status": {"const": "VALIDATED"},
+          "internal_process_handoff": {"type": "string", "pattern": "^/"}
+        }
+      },
+      "else": {"properties": {"internal_process_handoff": {"type": "null"}}}
+    }
+  ],
+  "additionalProperties": false
+}

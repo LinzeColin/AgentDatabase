@@ -1,0 +1,4 @@
+interface:
+  display_name: "独立复核"
+  short_description: "独立反对者审计 P0/P1 和高风险排除的证据与冲突"
+  default_prompt: "使用 $km-bid-audit 先检查输入是否充分，再隔离前序辩护做反对者审计；最后报告输出绝对路径。"

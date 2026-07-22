@@ -1,0 +1,4 @@
+interface:
+  display_name: "Awesome Design Systems"
+  short_description: "Curated design system reference list"
+  default_prompt: "Use $awesome-design-systems to research relevant design systems before UI work."

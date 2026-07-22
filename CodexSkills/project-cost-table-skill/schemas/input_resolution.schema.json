@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "kmfa.project_cost.input_resolution.v1",
+  "type": "object",
+  "required": ["schema_version", "resolution_id", "run_id", "recorded_at", "bound_request_hash", "resulting_request_hash", "bound_manifest_sha256", "bound_requirements_sha256", "items"],
+  "properties": {
+    "schema_version": {"const": "kmfa.project_cost.input_resolution.v1"},
+    "resolution_id": {"type": "string", "pattern": "^resolution_[0-9a-f]{32}$"},
+    "run_id": {"type": "string", "minLength": 1},
+    "recorded_at": {"type": "string", "format": "date-time"},
+    "bound_request_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "resulting_request_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "bound_manifest_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "bound_requirements_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "items": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["requirement_id", "classification", "resolution", "user_instruction", "user_instruction_ref", "affected_metrics", "effect_on_scope_or_metrics", "evidence_refs"],
+        "properties": {
+          "requirement_id": {"type": "string", "minLength": 1},
+          "classification": {"enum": ["NON_WAIVABLE", "SCOPE_DEPENDENT", "OPTIONAL_PRESENTATION"]},
+          "resolution": {"enum": ["SUPPLIED", "QUALIFIED_ALTERNATE_EVIDENCE", "SCOPE_REDUCED", "OMIT_OPTIONAL_PRESENTATION", "BLOCKED"]},
+          "user_instruction": {"type": ["string", "null"]},
+          "user_instruction_ref": {"type": ["string", "null"]},
+          "affected_metrics": {"type": "array", "items": {"type": "string"}},
+          "effect_on_scope_or_metrics": {"type": "string", "minLength": 1},
+          "evidence_refs": {"type": "array", "items": {"type": "string"}}
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

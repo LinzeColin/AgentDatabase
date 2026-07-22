@@ -1,0 +1,170 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ScoutRunResult",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "run_id", "mode", "input_preflight", "status", "route", "steps", "coverage_degraded", "blockers", "artifacts", "output_locations", "next_action"],
+  "properties": {
+    "contract_version": {"const": "0.4.1"},
+    "run_id": {"type": "string", "minLength": 1},
+    "mode": {"enum": ["FULL_DISCOVERY", "INCREMENTAL_DISCOVERY", "EVIDENCE_BACKFILL", "DEADLINE_WATCH", "AUDIT_ONLY", "BRIEF_ONLY", "DINGTALK_SYNC", "OUTCOME_WATCH", "EVOLVE_SHADOW"]},
+    "input_preflight": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "checked_at_raw", "can_proceed", "items", "missing_required", "authorizations"],
+      "properties": {
+        "status": {"enum": ["SUFFICIENT", "BLOCKED", "PROCEED_WITH_AUTHORIZED_DEGRADATION"]},
+        "checked_at_raw": {"type": "string", "minLength": 1},
+        "can_proceed": {"type": "boolean"},
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "requirement", "state", "source", "evidence", "blocking"],
+            "properties": {
+              "name": {"type": "string", "minLength": 1},
+              "requirement": {"enum": ["required", "optional"]},
+              "state": {"enum": ["PRESENT_VERIFIED", "PRESENT_UNVERIFIED", "DERIVED_SAFE", "MISSING_REQUIRED", "MISSING_OPTIONAL", "EXPLICITLY_WAIVED", "NOT_APPLICABLE"]},
+              "source": {"enum": ["user_input", "verified_local", "verified_external", "derived_deterministically", "explicit_authorization", "none"]},
+              "evidence": {"type": ["string", "null"]},
+              "blocking": {"type": "boolean"}
+            }
+          }
+        },
+        "missing_required": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "authorizations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["authorization_id", "field", "treatment", "authorized_by", "authorized_at_raw", "scope", "impact", "expires_at_raw"],
+            "properties": {
+              "authorization_id": {"type": "string", "minLength": 1},
+              "field": {"type": "string", "minLength": 1},
+              "treatment": {"enum": ["OMIT", "BOUNDED_ASSUMPTION", "PUBLIC_SAFE_PLACEHOLDER", "DEFER_PHASE"]},
+              "authorized_by": {"const": "OWNER"},
+              "authorized_at_raw": {"type": "string", "minLength": 1},
+              "scope": {"type": "string", "minLength": 1},
+              "impact": {"type": "string", "minLength": 1},
+              "expires_at_raw": {"type": ["string", "null"]}
+            }
+          }
+        }
+      },
+      "oneOf": [
+        {
+          "properties": {
+            "status": {"const": "BLOCKED"},
+            "can_proceed": {"const": false},
+            "missing_required": {"minItems": 1}
+          }
+        },
+        {
+          "properties": {
+            "status": {"const": "SUFFICIENT"},
+            "can_proceed": {"const": true},
+            "missing_required": {"maxItems": 0},
+            "authorizations": {"maxItems": 0}
+          }
+        },
+        {
+          "properties": {
+            "status": {"const": "PROCEED_WITH_AUTHORIZED_DEGRADATION"},
+            "can_proceed": {"const": true},
+            "missing_required": {"maxItems": 0},
+            "authorizations": {"minItems": 1}
+          }
+        }
+      ]
+    },
+    "status": {"enum": ["PASS", "PARTIAL", "BLOCKED", "FAIL"]},
+    "route": {"type": "array", "minItems": 1, "items": {"enum": ["discover", "evidence", "adjudicate", "qualify", "audit", "brief", "lifecycle", "evolve"]}},
+    "steps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["skill", "status", "input_hash", "output_hash"],
+        "properties": {
+          "skill": {"type": "string", "pattern": "^km-bid-"},
+          "status": {"enum": ["PASS", "PARTIAL", "BLOCKED", "FAIL", "SKIPPED"]},
+          "input_hash": {"type": ["string", "null"]},
+          "output_hash": {"type": ["string", "null"]},
+          "reason_code": {"type": ["string", "null"]}
+        }
+      }
+    },
+    "coverage_degraded": {"type": "boolean"},
+    "blockers": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "artifacts": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "output_locations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["output_root", "file_result", "items", "user_notice"],
+      "properties": {
+        "output_root": {"type": "string", "pattern": "^/"},
+        "file_result": {"enum": ["FILES_CREATED_OR_UPDATED", "NO_FILES_CREATED"]},
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["path", "status", "kind", "visibility", "sha256"],
+            "properties": {
+              "path": {"type": "string", "pattern": "^/"},
+              "status": {"enum": ["CREATED", "UPDATED", "REUSED", "FAILED"]},
+              "kind": {"type": "string", "minLength": 1},
+              "visibility": {"enum": ["LOCAL_USER_ONLY", "PUBLIC_SAFE"]},
+              "sha256": {"type": ["string", "null"], "pattern": "^[a-f0-9]{64}$"}
+            }
+          }
+        },
+        "user_notice": {"type": "string", "minLength": 1}
+      },
+      "oneOf": [
+        {
+          "properties": {
+            "file_result": {"const": "FILES_CREATED_OR_UPDATED"},
+            "items": {"minItems": 1}
+          }
+        },
+        {
+          "properties": {
+            "file_result": {"const": "NO_FILES_CREATED"},
+            "items": {"maxItems": 0},
+            "user_notice": {"pattern": "本次未生成文件"}
+          }
+        }
+      ]
+    },
+    "next_action": {"type": "string", "minLength": 1}
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "input_preflight": {
+            "properties": {"status": {"const": "BLOCKED"}},
+            "required": ["status"]
+          }
+        },
+        "required": ["input_preflight"]
+      },
+      "then": {"properties": {"status": {"const": "BLOCKED"}}}
+    },
+    {
+      "if": {
+        "properties": {
+          "input_preflight": {
+            "properties": {"status": {"const": "PROCEED_WITH_AUTHORIZED_DEGRADATION"}},
+            "required": ["status"]
+          }
+        },
+        "required": ["input_preflight"]
+      },
+      "then": {"properties": {"status": {"const": "PARTIAL"}}}
+    }
+  ]
+}

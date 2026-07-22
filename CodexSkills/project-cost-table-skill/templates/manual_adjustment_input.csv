@@ -1,0 +1,1 @@
+adjustment_id,metric_id,lifecycle_stage,legal_entity_id,canonical_project_id,wbs_or_cost_code,cost_category,amount_minor,amount_sign,business_date,posting_period,reason,evidence_ref,formula_profile_id,company_policy_ref,input_resolution_ref,valid_from,valid_to,expires_on,reversal_policy,supersedes,reverses,bound_request_hash,bound_input_hash,bound_config_hash,status

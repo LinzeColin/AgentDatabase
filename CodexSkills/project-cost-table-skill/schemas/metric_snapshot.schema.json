@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "kmfa.project_cost.metric_snapshot.v2",
+  "type": "object",
+  "required": [
+    "schema_version", "metric_id", "accounting_basis_id", "as_of", "as_of_date_rule",
+    "included_lifecycle_stages", "scope", "scope_fingerprint", "calculation_status", "currency",
+    "source_value_minor", "recomputed_value_minor", "calculated_value_minor",
+    "source_recomputed_delta_minor", "recomputed_calculated_delta_minor",
+    "channel_signed_delta_minor", "channel_absolute_delta_minor",
+    "source_control_amount_minor", "source_control_absolute_minor", "source_record_count",
+    "facts_hash", "formula_profile_ids", "parameter_profile_ids", "company_policy_refs",
+    "input_resolution_refs", "blocker_codes"
+  ],
+  "properties": {
+    "schema_version": {"const": "kmfa.project_cost.metric_snapshot.v2"},
+    "metric_id": {"type": "string", "minLength": 1},
+    "accounting_basis_id": {"type": "string", "minLength": 1},
+    "as_of": {"type": "string", "format": "date"},
+    "as_of_date_rule": {"type": "string", "minLength": 1},
+    "included_lifecycle_stages": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "scope": {
+      "type": "object",
+      "required": ["legal_entity_id", "canonical_project_id", "wbs_or_cost_code"],
+      "properties": {
+        "legal_entity_id": {"type": "string", "minLength": 1},
+        "canonical_project_id": {"type": "string", "minLength": 1},
+        "wbs_or_cost_code": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "scope_fingerprint": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "calculation_status": {"enum": ["NOT_EVALUATED", "VALIDATED", "BLOCKED_SOURCE", "BLOCKED_SCHEMA", "BLOCKED_IDENTITY", "BLOCKED_RELATIONSHIP", "BLOCKED_FORMULA", "BLOCKED_RECONCILIATION", "BLOCKED_SECURITY", "BLOCKED_PERIOD", "ERROR"]},
+    "currency": {"const": "CNY"},
+    "source_value_minor": {"type": ["integer", "null"]},
+    "recomputed_value_minor": {"type": ["integer", "null"]},
+    "calculated_value_minor": {"type": ["integer", "null"]},
+    "source_recomputed_delta_minor": {"type": ["integer", "null"]},
+    "recomputed_calculated_delta_minor": {"type": ["integer", "null"]},
+    "channel_signed_delta_minor": {"type": ["integer", "null"]},
+    "channel_absolute_delta_minor": {"type": ["integer", "null"]},
+    "source_control_amount_minor": {"type": ["integer", "null"]},
+    "source_control_absolute_minor": {"type": ["integer", "null"]},
+    "source_record_count": {"type": "integer", "minimum": 0},
+    "facts_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "formula_profile_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "parameter_profile_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "company_policy_refs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "input_resolution_refs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "blocker_codes": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"calculation_status": {"const": "VALIDATED"}}, "required": ["calculation_status"]},
+      "then": {
+        "properties": {
+          "recomputed_value_minor": {"type": "integer"},
+          "calculated_value_minor": {"type": "integer"},
+          "source_recomputed_delta_minor": {"enum": [0, null]},
+          "recomputed_calculated_delta_minor": {"const": 0},
+          "channel_signed_delta_minor": {"const": 0},
+          "channel_absolute_delta_minor": {"const": 0},
+          "blocker_codes": {"maxItems": 0}
+        }
+      }
+    }
+  ],
+  "additionalProperties": false
+}

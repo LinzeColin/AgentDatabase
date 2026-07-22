@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "kmfa.project_cost.metric_fact.v1",
+  "type": "object",
+  "required": [
+    "schema_version", "fact_id", "metric_id", "accounting_basis_id", "direction", "lifecycle_stage",
+    "metric_date", "scope", "base_currency", "base_amount_minor", "disposition", "disposition_reason",
+    "source_record_refs", "mapping_resolution_ref", "formula_profile_id", "parameter_profile_id",
+    "company_policy_refs", "input_resolution_refs", "metric_inclusion_decision_ref",
+    "metric_inclusion_evidence_refs", "upstream_validation_status"
+  ],
+  "properties": {
+    "schema_version": {"const": "kmfa.project_cost.metric_fact.v1"},
+    "fact_id": {"type": "string", "pattern": "^fact_[0-9a-f]{32}$"},
+    "metric_id": {"type": "string", "minLength": 1},
+    "accounting_basis_id": {"type": "string", "minLength": 1},
+    "direction": {"enum": ["COST", "REVENUE", "CASH_OUT", "CASH_IN", "REFERENCE"]},
+    "lifecycle_stage": {"enum": ["BUDGET", "COMMITMENT", "ACCRUAL", "POSTED_ACTUAL", "PAID", "FORECAST", "CONTRACT_VALUE", "BILLED", "RECOGNIZED_REVENUE", "COLLECTED", "REFERENCE_DISPLAY"]},
+    "metric_date": {"type": "string", "format": "date"},
+    "scope": {
+      "type": "object",
+      "required": ["legal_entity_id", "canonical_project_id", "wbs_or_cost_code"],
+      "properties": {
+        "legal_entity_id": {"type": "string", "minLength": 1},
+        "canonical_project_id": {"type": "string", "minLength": 1},
+        "wbs_or_cost_code": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "base_currency": {"const": "CNY"},
+    "base_amount_minor": {"type": "integer"},
+    "disposition": {"enum": ["INCLUDED", "EXCLUDED", "PENDING", "PARSE_ERROR"]},
+    "disposition_reason": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]{2,127}$"},
+    "source_record_refs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "mapping_resolution_ref": {"type": "string", "minLength": 1},
+    "formula_profile_id": {"type": "string", "minLength": 1},
+    "parameter_profile_id": {"type": ["string", "null"]},
+    "company_policy_refs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "input_resolution_refs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "metric_inclusion_decision_ref": {"type": "string", "pattern": "^metric_decision_[0-9a-f]{32}$"},
+    "metric_inclusion_evidence_refs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "upstream_validation_status": {"const": "VALIDATED"}
+  },
+  "additionalProperties": false
+}

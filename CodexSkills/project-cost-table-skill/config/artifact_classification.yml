@@ -1,0 +1,60 @@
+policy_version: 1
+scope: project-cost-table-skill
+
+public_root_files:
+  - DEVELOPMENT_LOG.md
+  - FEATURE_CATALOG.md
+  - HANDOFF.md
+  - MODEL_SPEC.md
+  - SKILL.md
+  - TRACEABILITY_MATRIX.csv
+  - VERSION
+  - formula_registry.yaml
+  - governance.yaml
+  - model_registry.yaml
+  - parameter_registry.csv
+
+public_roots:
+  - agents
+  - config
+  - references
+  - schemas
+  - scripts
+  - src
+  - templates
+  - tests
+  - tools
+
+private_roots:
+  - private_runtime
+  - private_seed
+
+raw_roots:
+  - raw
+  - raw_inputs
+  - source_raw
+
+forbidden_public_extensions:
+  - .db
+  - .doc
+  - .docx
+  - .emf
+  - .gz
+  - .jsonl
+  - .pdf
+  - .sqlite
+  - .sqlite3
+  - .xls
+  - .xlsm
+  - .xlsx
+  - .zip
+
+max_text_bytes: 1048576
+
+forbidden_content_patterns:
+  - pattern_id: local_home_path
+    regex: '/(?:[U]sers|home)/[^/\s]+/'
+  - pattern_id: private_source_root_token
+    regex: '[K]MFA_MetaData'
+  - pattern_id: real_project_code_shape
+    regex: '\b[K]MX[0-9]{6,}(?:-[0-9]{3})?\b'

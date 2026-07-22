@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DiscoverResult",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "source_coverage", "candidates", "official_resolution_queue", "coverage_degraded"],
+  "properties": {
+    "contract_version": {"const": "0.4.1"},
+    "source_coverage": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["source_id", "status", "queries", "pages", "bytes", "items_seen"],
+        "properties": {
+          "source_id": {"type": "string", "minLength": 1},
+          "status": {"enum": ["ok", "degraded", "failed", "not_run"]},
+          "queries": {"type": "integer", "minimum": 0},
+          "pages": {"type": "integer", "minimum": 0},
+          "bytes": {"type": "integer", "minimum": 0},
+          "items_seen": {"type": "integer", "minimum": 0},
+          "cursor": {"type": ["string", "null"]},
+          "error": {"type": ["string", "null"]},
+          "skipped_query_ids": {"type": "array", "items": {"type": "string"}},
+          "dlq_count": {"type": "integer", "minimum": 0}
+        }
+      }
+    },
+    "candidates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["candidate_id", "source_id", "query_id", "source_url", "title", "first_seen_raw", "layer"],
+        "properties": {
+          "candidate_id": {"type": "string", "minLength": 1},
+          "source_id": {"type": "string", "minLength": 1},
+          "query_id": {"type": "string", "minLength": 1},
+          "source_url": {"type": "string", "format": "uri"},
+          "title": {"type": "string", "minLength": 1},
+          "first_seen_raw": {"type": "string", "minLength": 1},
+          "layer": {"enum": ["SIGNAL", "NOTICE"]},
+          "project_number": {"type": ["string", "null"]},
+          "buyer": {"type": ["string", "null"]},
+          "summary_raw": {"type": ["string", "null"]},
+          "identity_strength": {"enum": ["strong", "weak"]}
+        }
+      }
+    },
+    "official_resolution_queue": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["candidate_id", "discovery_url", "status"],
+        "properties": {
+          "candidate_id": {"type": "string"},
+          "discovery_url": {"type": "string", "format": "uri"},
+          "status": {"enum": ["resolved_official", "pending", "failed"]},
+          "official_url": {"type": ["string", "null"], "format": "uri"},
+          "reason_code": {"type": ["string", "null"]}
+        }
+      }
+    },
+    "coverage_degraded": {"type": "boolean"}
+  }
+}

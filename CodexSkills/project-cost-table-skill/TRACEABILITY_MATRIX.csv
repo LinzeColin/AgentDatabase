@@ -1,0 +1,20 @@
+requirement_id,run_id,primary_test,evidence,status
+REQ-001,R3,test_manifest_selection_and_hash_lock,tests/test_manifest.py plus tests/test_inventory.py,IMPLEMENTED_R3
+REQ-002,R2,test_strict_money_and_rounding,tests/test_money.py,IMPLEMENTED_R2
+REQ-003,R2,test_malicious_file_corpus,tests/test_archive_security.py plus tests/test_ooxml_security.py,IMPLEMENTED_R2
+REQ-004,R3,test_source_candidate_decision_fact_immutability,tests/test_source_records.py,IMPLEMENTED_R3
+REQ-005,R4,test_effective_identity_uniqueness,tests/test_identity.py plus validation/identity.json,IMPLEMENTED_R4
+REQ-006,R7,test_same_stage_dedup_and_cross_stage_link,tests/test_event_dedup.py plus tests/test_event_links.py plus schemas/dedup_decision.schema.json plus schemas/event_link.schema.json,IMPLEMENTED_R7
+REQ-007,R7,test_partial_allocation_and_reversal_conservation,tests/test_event_links.py plus tests/test_reconciliation.py plus schemas/source_conservation.schema.json,IMPLEMENTED_R7
+REQ-008,R9,test_lifecycle_metric_separation,tests/test_lifecycle_readers.py plus tests/test_metrics.py plus config/metric_catalog.yml plus schemas/metric_snapshot.schema.json,IMPLEMENTED_R9
+REQ-009,R8,test_formula_profile_authorization,tests/test_formulas.py plus tests/test_payroll.py plus tests/test_adjustments.py plus schemas/formula_profile.schema.json plus references/FORMULA_PAYROLL_POLICY_INPUTS.md,IMPLEMENTED_R8_POLICY_ENGINE_REAL_ACTIVE_INPUTS_REQUIRED
+REQ-010,R5,test_metric_specific_cutoff_and_restatement,tests/test_kingdee_bundle.py plus tests/test_accounting_basis.py plus references/KINGDEE_AND_ACCOUNTING_BASIS.md,IMPLEMENTED_R5
+REQ-011,R10/R11,test_reference_calculate_isolation_and_current_expected_block,tests/test_reference_replay.py plus tests/test_current_reconstruction.py plus src/project_cost_table/reference_replay.py plus src/project_cost_table/current_reconstruction.py plus private sealed R10/R11 evidence,IMPLEMENTED_R10_R11
+REQ-012,R9,test_source_recomputed_calculated_delta_output,tests/test_metrics.py plus tests/test_generation.py plus schemas/metric_snapshot.schema.json,IMPLEMENTED_R9
+REQ-013,R9,test_independent_aggregation_and_source_conservation,tests/test_reconciliation.py plus tests/test_metrics.py plus schemas/source_conservation.schema.json plus schemas/metric_snapshot.schema.json,IMPLEMENTED_EVENT_R7_AND_METRIC_R9
+REQ-014,R9/R11,test_validated_run_generates_final_and_current_run_blocks,tests/test_generation.py plus tests/test_current_reconstruction.py plus src/project_cost_table/statuses.py,IMPLEMENTED_R9_R11
+REQ-015,R9,test_atomic_failure_outputs_manifest_and_noncyclic_seal,tests/test_generation.py plus schemas/run_manifest.schema.json plus schemas/output_index.schema.json,IMPLEMENTED_R9
+REQ-016,R1,test_staged_private_boundary,tests/test_artifact_boundary.py,IMPLEMENTED_R1
+REQ-017,R12,test_performance_and_candidate_pair_budget,tests/test_release.py plus src/project_cost_table/release.py plus config/performance_budgets.yml plus private sealed R12 performance evidence,IMPLEMENTED_R12
+REQ-018,R3/R11,test_input_sufficiency_and_non_waivable_resolution,tests/test_input_gate.py plus tests/test_resolutions.py plus tests/test_current_reconstruction.py,IMPLEMENTED_R3_R11
+REQ-019,R9/R11,test_absolute_output_locator_and_internal_process_handoff,tests/test_input_gate.py plus tests/test_generation.py plus tests/test_current_reconstruction.py plus schemas/output_index.schema.json,IMPLEMENTED_R9_R11

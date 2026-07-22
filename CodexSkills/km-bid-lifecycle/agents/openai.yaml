@@ -1,0 +1,4 @@
+interface:
+  display_name: "投标结果追踪"
+  short_description: "只读对账 DWS 投标台账与官方结果、竞对和周期信号"
+  default_prompt: "使用 $km-bid-lifecycle 先检查输入及 DWS 授权是否充分，再只读同步台账；最后报告输出绝对路径。"

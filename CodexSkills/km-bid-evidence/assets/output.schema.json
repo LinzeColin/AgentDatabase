@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EvidenceResult",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "evidence_bundles", "missing_queue", "contract_drift"],
+  "properties": {
+    "contract_version": {"const": "0.4.1"},
+    "evidence_bundles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["bundle_id", "lot_id", "official_url", "evidence_quality", "artifacts"],
+        "properties": {
+          "bundle_id": {"type": "string", "minLength": 1},
+          "lot_id": {"type": "string", "minLength": 1},
+          "official_url": {"type": "string", "format": "uri"},
+          "evidence_quality": {"enum": ["complete", "partial", "insufficient"]},
+          "artifacts": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["artifact_id", "source_url", "sha256", "media_type", "parse_status", "spans"],
+              "properties": {
+                "artifact_id": {"type": "string"},
+                "source_url": {"type": "string", "format": "uri"},
+                "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+                "media_type": {"type": "string"},
+                "parser": {"type": ["string", "null"]},
+                "parser_version": {"type": ["string", "null"]},
+                "parse_status": {"enum": ["ok", "partial", "failed", "blocked"]},
+                "spans": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": ["span_id", "locator", "text_hash"],
+                    "properties": {
+                      "span_id": {"type": "string"},
+                      "locator": {"type": "string"},
+                      "text_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+                      "ocr_confidence": {"type": ["number", "null"], "minimum": 0, "maximum": 1}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "missing_queue": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["lot_id", "field", "reason_code", "next_action"],
+        "properties": {
+          "lot_id": {"type": "string"},
+          "field": {"type": "string"},
+          "reason_code": {"type": "string"},
+          "next_action": {"type": "string"}
+        }
+      }
+    },
+    "contract_drift": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["source_id", "observed_at_raw", "reason"],
+        "properties": {
+          "source_id": {"type": "string"},
+          "observed_at_raw": {"type": "string"},
+          "reason": {"type": "string"}
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,43 @@
+schema_version: kmfa.project_cost.status_codes.v1
+execution_status:
+  - SUCCEEDED
+  - NEEDS_USER_INPUT
+  - EXPECTED_BLOCKED
+  - FAILED
+  - CANCELLED
+input_readiness_status:
+  - NOT_EVALUATED
+  - SUFFICIENT
+  - SUFFICIENT_WITH_DOCUMENTED_SCOPE
+  - NEEDS_SUPPLEMENT
+  - NEEDS_EXPLICIT_HANDLING
+  - BLOCKED_NON_WAIVABLE
+calculation_status:
+  - NOT_EVALUATED
+  - VALIDATED
+  - BLOCKED_SOURCE
+  - BLOCKED_SCHEMA
+  - BLOCKED_IDENTITY
+  - BLOCKED_RELATIONSHIP
+  - BLOCKED_FORMULA
+  - BLOCKED_RECONCILIATION
+  - BLOCKED_SECURITY
+  - BLOCKED_PERIOD
+  - ERROR
+generation_status:
+  - NOT_GENERATED
+  - FINAL_GENERATED
+  - BLOCKED_DIAGNOSTICS_GENERATED
+  - FAILED
+  - SUPERSEDED
+replay_fidelity_status:
+  - NOT_EVALUATED
+  - EXACT
+  - BLOCKED_HASH
+  - BLOCKED_LINE_DELTA
+source_quality_status:
+  - CONSISTENT
+  - SOURCE_ARITHMETIC_DIFFERENCE
+  - UNKNOWN
+company_approval_status_managed: false
+finance_owner_or_authorized_person_managed: false

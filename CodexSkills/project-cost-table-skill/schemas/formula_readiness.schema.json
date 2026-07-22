@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "kmfa.project_cost.formula_readiness.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "request_hash", "input_hash", "config_hash", "overall_status", "items", "user_action_required", "metric_inclusion_status"],
+  "properties": {
+    "schema_version": {"const": "kmfa.project_cost.formula_readiness.v1"},
+    "request_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "input_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "config_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "overall_status": {"enum": ["READY_R8_POLICY_INPUTS", "BLOCKED_R8_POLICY_INPUTS"]},
+    "items": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["formula_id", "status", "reason_code", "allowed_resolutions"],
+        "properties": {
+          "formula_id": {"type": "string", "minLength": 1},
+          "status": {"enum": ["PRESENT", "BLOCKED"]},
+          "reason_code": {"type": ["string", "null"]},
+          "allowed_resolutions": {"type": "array", "items": {"enum": ["SUPPLIED", "QUALIFIED_ALTERNATE_EVIDENCE", "SCOPE_REDUCED", "BLOCKED"]}}
+        }
+      }
+    },
+    "user_action_required": {"type": "boolean"},
+    "metric_inclusion_status": {"const": "NOT_EVALUATED_R8"}
+  }
+}

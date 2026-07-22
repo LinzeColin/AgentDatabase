@@ -1,0 +1,11 @@
+fixture_type: public_synthetic
+contains_real_business_data: false
+cases:
+  - path: src/example.py
+    expected_plane: PUBLIC_SAFE
+  - path: private_runtime/runs/example.json
+    expected_plane: PRIVATE_RUNTIME
+  - path: raw/example.xlsx
+    expected_plane: RAW_SOURCE
+  - path: unknown/example.txt
+    expected_plane: UNCLASSIFIED

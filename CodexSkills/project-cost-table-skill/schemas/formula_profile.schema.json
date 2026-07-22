@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "kmfa.project_cost.formula_profile.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "profile_id", "profile_version", "formula_id", "formula_kind", "expression_id", "status", "valid_from", "valid_to", "scope", "base_currency", "rounding_layer", "rounding_mode", "parameters", "authority_mode", "company_policy_refs", "evidence_refs", "input_resolution_refs", "bound_request_hash", "bound_input_hash", "bound_config_hash", "supersedes", "test_vectors"],
+  "properties": {
+    "schema_version": {"const": "kmfa.project_cost.formula_profile.v1"},
+    "profile_id": {"type": "string", "pattern": "^formula_profile_[0-9a-f]{32}$"},
+    "profile_version": {"type": "string", "minLength": 1},
+    "formula_id": {"type": "string", "minLength": 1},
+    "formula_kind": {"enum": ["MANAGEMENT_RATE", "PAYROLL_TIME_ALLOCATION", "PROJECT_TAX_RATE", "CAPITAL_INTEREST", "FX_RATE"]},
+    "expression_id": {"enum": ["RATE_TIMES_BASE", "APPROVED_TIME_PRORATION", "SIMPLE_INTEREST_DAILY", "FX_RATE_TIMES_AMOUNT"]},
+    "status": {"enum": ["ACTIVE", "TEMPLATE_NOT_ACTIVE", "REFERENCE_OBSERVED_NOT_ACTIVE", "SUPERSEDED", "DEFERRED_NOT_ACTIVE"]},
+    "valid_from": {"type": "string", "format": "date"},
+    "valid_to": {"type": ["string", "null"], "format": "date"},
+    "scope": {
+      "type": "object", "additionalProperties": false,
+      "required": ["metric_id", "legal_entity_id", "canonical_project_id", "wbs_or_cost_code"],
+      "properties": {
+        "metric_id": {"type": "string", "minLength": 1},
+        "legal_entity_id": {"type": "string", "minLength": 1},
+        "canonical_project_id": {"type": "string", "minLength": 1},
+        "wbs_or_cost_code": {"type": "string", "minLength": 1}
+      }
+    },
+    "base_currency": {"const": "CNY"},
+    "rounding_layer": {"enum": ["LINE_FORMULA", "ALLOCATION_RESIDUAL", "TAX_CALCULATION"]},
+    "rounding_mode": {"const": "ROUND_HALF_UP"},
+    "parameters": {"type": "object", "additionalProperties": {"type": "integer"}},
+    "authority_mode": {"enum": ["DIRECT_SOURCE_EVIDENCE", "COMPANY_POLICY", "QUALIFIED_ALTERNATE_EVIDENCE"]},
+    "company_policy_refs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^policy://sha256/[0-9a-f]{64}$"}},
+    "evidence_refs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^evidence://sha256/[0-9a-f]{64}$"}},
+    "input_resolution_refs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^resolution_[0-9a-f]{32}$"}},
+    "bound_request_hash": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+    "bound_input_hash": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+    "bound_config_hash": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+    "supersedes": {"type": ["string", "null"], "pattern": "^formula_profile_[0-9a-f]{32}$"},
+    "test_vectors": {
+      "type": "array", "uniqueItems": true,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["vector_id", "inputs", "expected_amount_minor"],
+        "properties": {
+          "vector_id": {"type": "string", "minLength": 1},
+          "inputs": {"type": "object", "minProperties": 1, "additionalProperties": {"type": "integer"}},
+          "expected_amount_minor": {"type": "integer"}
+        }
+      }
+    }
+  },
+  "allOf": [{
+    "if": {"properties": {"status": {"const": "ACTIVE"}}},
+    "then": {
+      "properties": {
+        "evidence_refs": {"minItems": 1},
+        "bound_request_hash": {"type": "string"},
+        "bound_input_hash": {"type": "string"},
+        "bound_config_hash": {"type": "string"},
+        "test_vectors": {"minItems": 1}
+      }
+    }
+  }]
+}

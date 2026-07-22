@@ -1,0 +1,16 @@
+schema_version: kmfa.project_cost.money_profile.v1
+profile_id: CNY-MONEY-STRICT-V1
+currency: CNY
+minor_unit_scale: 2
+rounding: ROUND_HALF_UP
+decimal_context_precision: 38
+max_input_scale: 6
+max_abs_minor_units: 9223372036854775807
+float_input_allowed: false
+default_blank_policy: ERROR
+rounding_layers:
+  - SOURCE_PARSE
+  - LINE_FORMULA
+  - ALLOCATION_RESIDUAL
+  - SUBTOTAL_DISPLAY
+  - TAX_CALCULATION

@@ -1,0 +1,2 @@
+id,label,reference,actual,status,severity,note
+H-001,关键任务最终状态,,screenshots/H-001__success__a1.png,PLANNED,,用户可见结果 + 数据断言见 TEST_MATRIX.md

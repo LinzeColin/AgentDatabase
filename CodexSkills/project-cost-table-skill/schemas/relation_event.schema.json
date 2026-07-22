@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "kmfa.project_cost.relation_event.v1",
+  "type": "object",
+  "required": [
+    "schema_version", "relation_event_ref", "economic_event_id", "source_system_id",
+    "source_artifact_sha256", "source_business_key_hash", "source_business_digest",
+    "event_type", "direction", "lifecycle_stage", "event_status", "identity_binding",
+    "counterparty_key", "document_id", "document_line_id", "event_date",
+    "base_amount_minor", "base_currency", "reversal_of_event_id", "governed_relation_keys",
+    "source_record_refs", "metric_inclusion_status", "business_content_fingerprint"
+  ],
+  "properties": {
+    "schema_version": {"const": "kmfa.project_cost.relation_event.v1"},
+    "relation_event_ref": {"type": "string", "pattern": "^relation_event_[0-9a-f]{32}$"},
+    "economic_event_id": {"type": "string", "pattern": "^evt_[0-9a-f]{32}$"},
+    "source_system_id": {"type": "string", "pattern": "^[a-z][a-z0-9_.-]{1,63}$"},
+    "source_artifact_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "source_business_key_hash": {"type": "string", "pattern": "^(lifecycle_line|ledger_line|event_line)_[0-9a-f]{32}$"},
+    "source_business_digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "event_type": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]{1,63}$"},
+    "direction": {"enum": ["COST", "REVENUE", "CASH_OUT", "CASH_IN"]},
+    "lifecycle_stage": {"enum": ["BUDGET", "COMMITMENT", "ACCRUAL", "POSTED_ACTUAL", "PAID", "FORECAST", "CONTRACT_VALUE", "BILLED", "RECOGNIZED_REVENUE", "COLLECTED"]},
+    "event_status": {"enum": ["SOURCE_ACTIVE", "SOURCE_PENDING", "SOURCE_CANCELLED", "SOURCE_REVERSED"]},
+    "identity_binding": {
+      "type": "object",
+      "required": ["economic_event_id", "identity_status", "legal_entity_id", "canonical_project_id", "wbs_or_cost_code", "canonical_contract_id", "identity_record_ref", "mapping_resolution_ref", "evidence_refs", "company_approval_state_managed"],
+      "properties": {
+        "economic_event_id": {"type": "string", "pattern": "^evt_[0-9a-f]{32}$"},
+        "identity_status": {"enum": ["VALIDATED_IDENTITY", "ALLOCATION_REQUIRED"]},
+        "legal_entity_id": {"type": "string", "minLength": 1},
+        "canonical_project_id": {"type": ["string", "null"]},
+        "wbs_or_cost_code": {"type": ["string", "null"]},
+        "canonical_contract_id": {"type": ["string", "null"]},
+        "identity_record_ref": {"type": ["string", "null"], "pattern": "^identity_record_[0-9a-f]{32}$"},
+        "mapping_resolution_ref": {"type": ["string", "null"], "pattern": "^identity_resolution_[0-9a-f]{32}$"},
+        "evidence_refs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "pattern": "^(evidence:[0-9a-f]{64}|evidence://sha256/[0-9a-f]{64})$"}},
+        "company_approval_state_managed": {"const": false}
+      },
+      "additionalProperties": false
+    },
+    "counterparty_key": {"type": ["string", "null"]},
+    "document_id": {"type": ["string", "null"]},
+    "document_line_id": {"type": ["string", "null"]},
+    "event_date": {"type": "string", "format": "date"},
+    "base_amount_minor": {"type": "integer"},
+    "base_currency": {"const": "CNY"},
+    "reversal_of_event_id": {"type": ["string", "null"], "pattern": "^evt_[0-9a-f]{32}$"},
+    "governed_relation_keys": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^relation_key_[0-9a-f]{32}$"}},
+    "source_record_refs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "pattern": "^(rec_lifecycle|rec_source|rec_source_record)_[0-9a-f]{32}$"}},
+    "metric_inclusion_status": {"const": "NOT_EVALUATED_R7"},
+    "business_content_fingerprint": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  },
+  "additionalProperties": false
+}

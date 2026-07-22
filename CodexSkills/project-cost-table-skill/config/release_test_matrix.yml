@@ -1,0 +1,34 @@
+schema_version: kmfa.project_cost.release_test_matrix.v1
+release_id: KMFA-PROJECT-COST-0.2.0-R12
+families:
+  adversarial:
+    - tests/test_archive_security.py
+    - tests/test_ooxml_security.py
+    - tests/test_spreadsheet_text_safety.py
+    - tests/test_money.py
+    - tests/test_release.py
+  property:
+    - tests/test_money.py
+    - tests/test_reconciliation.py
+    - tests/test_event_links.py
+    - tests/test_release.py
+  metamorphic:
+    - tests/test_event_dedup.py
+    - tests/test_lifecycle_readers.py
+    - tests/test_accounting_basis.py
+    - tests/test_release.py
+  package_governance:
+    - tests/test_package_governance.py
+    - scripts/validate_skill_package.py
+  workbook_runtime:
+    - tests/test_generation.py
+    - scripts/build_project_cost_workbook.mjs
+  private_reference_replay:
+    - scripts/run_reference_regression.py
+  private_current_source:
+    - scripts/run_current_source_reconstruction.py
+    - scripts/validate_current_expected_block.py
+  performance:
+    - scripts/run_release_benchmark.py
+    - config/performance_budgets.yml
+    - schemas/performance_summary.schema.json

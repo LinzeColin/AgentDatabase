@@ -1,0 +1,6 @@
+interface:
+  display_name: "Frontend Slides"
+  short_description: "可运行 HTML slides 与 PPT 转网页"
+  default_prompt: "Use $frontend-slides to create a beautiful runnable HTML slide deck."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/kmfa/lifecycle_reader_profile.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "profile_id", "status", "slot_id", "reader_id", "reader_version", "schema_id",
+    "sheet_name", "header_row", "first_data_row", "max_data_rows", "expected_headers", "column_bindings",
+    "date_modes", "default_currency", "required_business_fields", "status_rules", "event_type_rules",
+    "default_event_rule", "row_kind_rules", "automatic_project_assignment_allowed",
+    "reader_decides_final_metric_inclusion", "evidence_refs"
+  ],
+  "$defs": {
+    "evidence_ref": {"type": ["string", "null"], "pattern": "^evidence://sha256/[0-9a-f]{64}$"},
+    "binding": {"type": ["string", "null"], "minLength": 1},
+    "event_rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_event_type", "event_type", "direction", "lifecycle_stage", "amount_multiplier", "evidence_ref"],
+      "properties": {
+        "source_event_type": {"type": ["string", "null"], "minLength": 1},
+        "event_type": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]{1,63}$"},
+        "direction": {"enum": ["COST", "REVENUE", "CASH_OUT", "CASH_IN"]},
+        "lifecycle_stage": {"enum": ["BUDGET", "COMMITMENT", "ACCRUAL", "POSTED_ACTUAL", "PAID", "FORECAST", "CONTRACT_VALUE", "BILLED", "RECOGNIZED_REVENUE", "COLLECTED"]},
+        "amount_multiplier": {"enum": [-1, 1]},
+        "evidence_ref": {"$ref": "#/$defs/evidence_ref"}
+      }
+    }
+  },
+  "properties": {
+    "schema_version": {"const": "kmfa.project_cost.lifecycle_reader_profile.v1"},
+    "profile_id": {"type": "string", "minLength": 1},
+    "status": {"enum": ["ACTIVE", "TEMPLATE_NOT_ACTIVE"]},
+    "slot_id": {"enum": ["project_billing", "cash_out", "contract_and_changes", "cash_in"]},
+    "reader_id": {"enum": ["project_invoice_v2", "payment_v2", "contract_change_v2", "collection_v2"]},
+    "reader_version": {"const": "2.0.0"},
+    "schema_id": {"type": "string", "minLength": 1},
+    "sheet_name": {"type": "string", "minLength": 1},
+    "header_row": {"type": "integer", "minimum": 1},
+    "first_data_row": {"type": "integer", "minimum": 2},
+    "max_data_rows": {"type": "integer", "minimum": 1, "maximum": 5000000},
+    "expected_headers": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "column_bindings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "legal_entity_source_key", "project_source_key", "wbs_source_key", "contract_source_key",
+        "counterparty_source_key", "document_id", "document_line_id", "source_event_type", "source_status",
+        "source_row_kind", "reversal_of_source_key", "free_text", "document_date", "approval_date", "invoice_date",
+        "payment_date", "collection_date", "effective_date", "reversal_date", "transaction_amount", "gross_amount",
+        "net_amount", "tax_amount", "currency"
+      ],
+      "properties": {
+        "legal_entity_source_key": {"$ref": "#/$defs/binding"},
+        "project_source_key": {"$ref": "#/$defs/binding"},
+        "wbs_source_key": {"$ref": "#/$defs/binding"},
+        "contract_source_key": {"$ref": "#/$defs/binding"},
+        "counterparty_source_key": {"$ref": "#/$defs/binding"},
+        "document_id": {"$ref": "#/$defs/binding"},
+        "document_line_id": {"$ref": "#/$defs/binding"},
+        "source_event_type": {"$ref": "#/$defs/binding"},
+        "source_status": {"$ref": "#/$defs/binding"},
+        "source_row_kind": {"$ref": "#/$defs/binding"},
+        "reversal_of_source_key": {"$ref": "#/$defs/binding"},
+        "free_text": {"$ref": "#/$defs/binding"},
+        "document_date": {"$ref": "#/$defs/binding"},
+        "approval_date": {"$ref": "#/$defs/binding"},
+        "invoice_date": {"$ref": "#/$defs/binding"},
+        "payment_date": {"$ref": "#/$defs/binding"},
+        "collection_date": {"$ref": "#/$defs/binding"},
+        "effective_date": {"$ref": "#/$defs/binding"},
+        "reversal_date": {"$ref": "#/$defs/binding"},
+        "transaction_amount": {"$ref": "#/$defs/binding"},
+        "gross_amount": {"$ref": "#/$defs/binding"},
+        "net_amount": {"$ref": "#/$defs/binding"},
+        "tax_amount": {"$ref": "#/$defs/binding"},
+        "currency": {"$ref": "#/$defs/binding"}
+      }
+    },
+    "date_modes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["document_date", "approval_date", "invoice_date", "payment_date", "collection_date", "effective_date", "reversal_date"],
+      "properties": {
+        "document_date": {"enum": ["ISO_TEXT", "ISO_OR_EXCEL_SERIAL"]},
+        "approval_date": {"enum": ["ISO_TEXT", "ISO_OR_EXCEL_SERIAL"]},
+        "invoice_date": {"enum": ["ISO_TEXT", "ISO_OR_EXCEL_SERIAL"]},
+        "payment_date": {"enum": ["ISO_TEXT", "ISO_OR_EXCEL_SERIAL"]},
+        "collection_date": {"enum": ["ISO_TEXT", "ISO_OR_EXCEL_SERIAL"]},
+        "effective_date": {"enum": ["ISO_TEXT", "ISO_OR_EXCEL_SERIAL"]},
+        "reversal_date": {"enum": ["ISO_TEXT", "ISO_OR_EXCEL_SERIAL"]}
+      }
+    },
+    "default_currency": {"enum": ["CNY", null]},
+    "required_business_fields": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "status_rules": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["source_status", "event_status", "evidence_ref"],
+        "properties": {
+          "source_status": {"type": "string", "minLength": 1},
+          "event_status": {"enum": ["SOURCE_ACTIVE", "SOURCE_PENDING", "SOURCE_CANCELLED", "SOURCE_REVERSED"]},
+          "evidence_ref": {"$ref": "#/$defs/evidence_ref"}
+        }
+      }
+    },
+    "event_type_rules": {"type": "array", "items": {"$ref": "#/$defs/event_rule"}},
+    "default_event_rule": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/event_rule"}]},
+    "row_kind_rules": {
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["source_row_kind", "action", "reason_code", "evidence_ref"],
+        "properties": {
+          "source_row_kind": {"type": "string", "minLength": 1},
+          "action": {"enum": ["EMIT_EVENT", "EXCLUDE_CONTROL"]},
+          "reason_code": {"type": ["string", "null"], "pattern": "^[A-Z][A-Z0-9_]{1,63}$"},
+          "evidence_ref": {"$ref": "#/$defs/evidence_ref"}
+        }
+      }
+    },
+    "automatic_project_assignment_allowed": {"const": false},
+    "reader_decides_final_metric_inclusion": {"const": false},
+    "evidence_refs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^evidence://sha256/[0-9a-f]{64}$"}}
+  },
+  "allOf": [
+    {"if": {"properties": {"status": {"const": "ACTIVE"}}}, "then": {"properties": {"evidence_refs": {"minItems": 1}}}},
+    {"if": {"properties": {"slot_id": {"const": "project_billing"}}}, "then": {"properties": {"reader_id": {"const": "project_invoice_v2"}}}},
+    {"if": {"properties": {"slot_id": {"const": "cash_out"}}}, "then": {"properties": {"reader_id": {"const": "payment_v2"}}}},
+    {"if": {"properties": {"slot_id": {"const": "contract_and_changes"}}}, "then": {"properties": {"reader_id": {"const": "contract_change_v2"}}}},
+    {"if": {"properties": {"slot_id": {"const": "cash_in"}}}, "then": {"properties": {"reader_id": {"const": "collection_v2"}}}}
+  ]
+}

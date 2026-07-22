@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "kmfa.project_cost.status_planes.v1",
+  "type": "object",
+  "required": ["execution_status", "input_readiness_status", "calculation_status", "generation_status"],
+  "properties": {
+    "execution_status": {"enum": ["SUCCEEDED", "NEEDS_USER_INPUT", "EXPECTED_BLOCKED", "FAILED", "CANCELLED"]},
+    "input_readiness_status": {"enum": ["NOT_EVALUATED", "SUFFICIENT", "SUFFICIENT_WITH_DOCUMENTED_SCOPE", "NEEDS_SUPPLEMENT", "NEEDS_EXPLICIT_HANDLING", "BLOCKED_NON_WAIVABLE"]},
+    "calculation_status": {"enum": ["NOT_EVALUATED", "VALIDATED", "BLOCKED_SOURCE", "BLOCKED_SCHEMA", "BLOCKED_IDENTITY", "BLOCKED_RELATIONSHIP", "BLOCKED_FORMULA", "BLOCKED_RECONCILIATION", "BLOCKED_SECURITY", "BLOCKED_PERIOD", "ERROR"]},
+    "generation_status": {"enum": ["NOT_GENERATED", "FINAL_GENERATED", "BLOCKED_DIAGNOSTICS_GENERATED", "FAILED", "SUPERSEDED"]}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"generation_status": {"const": "FINAL_GENERATED"}}, "required": ["generation_status"]},
+      "then": {
+        "properties": {
+          "execution_status": {"const": "SUCCEEDED"},
+          "input_readiness_status": {"enum": ["SUFFICIENT", "SUFFICIENT_WITH_DOCUMENTED_SCOPE"]},
+          "calculation_status": {"const": "VALIDATED"}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"generation_status": {"const": "BLOCKED_DIAGNOSTICS_GENERATED"}}, "required": ["generation_status"]},
+      "then": {
+        "properties": {
+          "execution_status": {"enum": ["NEEDS_USER_INPUT", "EXPECTED_BLOCKED"]},
+          "calculation_status": {"not": {"const": "VALIDATED"}}
+        }
+      }
+    }
+  ],
+  "additionalProperties": false
+}

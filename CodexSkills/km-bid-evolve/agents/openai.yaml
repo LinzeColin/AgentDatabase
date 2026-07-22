@@ -1,0 +1,4 @@
+interface:
+  display_name: "规则影子优化"
+  short_description: "用时间切片、漏报抽样和影子对比生成安全规则提案与 Surprise 信号"
+  default_prompt: "使用 $km-bid-evolve 先检查输入是否充分，再做时间切片影子评估且不发布规则；最后报告输出绝对路径。"

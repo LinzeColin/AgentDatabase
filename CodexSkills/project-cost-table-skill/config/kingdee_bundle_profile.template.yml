@@ -1,0 +1,13 @@
+schema_version: kmfa.project_cost.kingdee_bundle_profile.v1
+profile_id: TEMPLATE-KINGDEE-BUNDLE-REPLACE-PRIVATELY
+status: TEMPLATE_NOT_ACTIVE
+schema_id: REPLACE_WITH_OBSERVED_PRIVATE_BUNDLE_SCHEMA_ID
+bundle_source_sha256: "0000000000000000000000000000000000000000000000000000000000000000"
+evidence_refs: []
+members:
+  - member_path: REPLACE_WITH_APPROVED_ENTITY_WORKBOOK.xlsx
+    member_sha256: "0000000000000000000000000000000000000000000000000000000000000000"
+    disposition: INCLUDE
+    exclusion_reason_code: null
+    reader_profile_id: TEMPLATE-KINGDEE-LEDGER-REPLACE-PRIVATELY
+    evidence_ref: null

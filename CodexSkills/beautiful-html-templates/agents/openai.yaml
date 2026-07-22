@@ -1,0 +1,6 @@
+interface:
+  display_name: "Beautiful HTML Templates"
+  short_description: "Reference-only HTML slide style library"
+  default_prompt: "Use $beautiful-html-templates to choose an HTML slide style reference."
+policy:
+  allow_implicit_invocation: false

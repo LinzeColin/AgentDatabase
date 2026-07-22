@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "kmfa.project_cost.metric_facts.v1",
+  "type": "object",
+  "required": ["schema_version", "facts"],
+  "properties": {
+    "schema_version": {"const": "kmfa.project_cost.metric_facts.v1"},
+    "facts": {
+      "type": "array",
+      "items": {"$ref": "metric_fact.schema.json"}
+    }
+  },
+  "additionalProperties": false
+}

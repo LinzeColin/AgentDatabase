@@ -1,0 +1,6 @@
+interface:
+  display_name: "GSAP Skills"
+  short_description: "Reference-only index for the official GSAP skill package"
+  default_prompt: "Use $gsap-skills to inspect the installed GSAP skills package and choose the relevant specific GSAP skill."
+policy:
+  allow_implicit_invocation: false

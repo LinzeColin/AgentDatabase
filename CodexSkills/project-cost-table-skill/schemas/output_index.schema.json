@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "kmfa.project_cost.output_index.v2",
+  "type": "object",
+  "required": ["schema_version", "run_id", "result_status", "output_dir", "primary_output", "seal_path", "files", "next_step"],
+  "properties": {
+    "schema_version": {"const": "kmfa.project_cost.output_index.v2"},
+    "run_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"},
+    "result_status": {"enum": ["REFERENCE_REPLAY_EXACT", "FINAL_GENERATED", "BLOCKED_DIAGNOSTICS_GENERATED", "FAILED", "SUPERSEDED"]},
+    "output_dir": {"type": "string", "pattern": "^/"},
+    "primary_output": {"type": "string", "pattern": "^/"},
+    "seal_path": {"type": "string", "pattern": "^/"},
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path", "sha256", "artifact_type"],
+        "properties": {
+          "path": {"type": "string", "pattern": "^/"},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "artifact_type": {"type": "string", "minLength": 1}
+        },
+        "additionalProperties": false
+      }
+    },
+    "next_step": {"type": "string", "minLength": 1}
+  },
+  "additionalProperties": false
+}

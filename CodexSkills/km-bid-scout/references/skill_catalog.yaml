@@ -1,0 +1,51 @@
+catalog_version: "0.4.1"
+updated_on: "2026-07-18"
+naming_contract:
+  interface: "短中文名，供 Skill 选择器和用户识别"
+  invocation: "稳定英文 skill_id，使用 $skill_id 调用"
+skills:
+  - skill_id: km-bid-scout
+    chinese_name: KM搜标总控
+    english_name: KM Bid Scout
+    short_purpose: "输入预检、运行模式判断和最小子 Skill 路由"
+    use_when: "不确定应调用哪个搜标 Skill，或需要运行完整只读链路时"
+  - skill_id: km-bid-discover
+    chinese_name: 招标发现
+    english_name: KM Bid Discover
+    short_purpose: "在批准来源和预算内做高召回标讯发现"
+    use_when: "需要扩大候选池、记录来源覆盖和降级状态时"
+  - skill_id: km-bid-evidence
+    chinese_name: 官方取证
+    english_name: KM Bid Evidence
+    short_purpose: "回到官方正文和附件形成可定位、可重放证据"
+    use_when: "候选标讯需要版本、附件、标包或时间证据时"
+  - skill_id: km-bid-adjudicate
+    chinese_name: 标的判型
+    english_name: KM Bid Adjudicate
+    short_purpose: "依据证据判断采购实质、主要义务和 A/B 方向"
+    use_when: "标题或关键词不足以确定项目是否匹配时"
+  - skill_id: km-bid-qualify
+    chinese_name: 投标资格核验
+    english_name: KM Bid Qualify
+    short_purpose: "绑定单一法律主体核验资格、商务、现金和产能"
+    use_when: "需要判断具体主体是否具备可投条件时"
+  - skill_id: km-bid-audit
+    chinese_name: 独立复核
+    english_name: KM Bid Audit
+    short_purpose: "隔离前序辩护，对高风险结论做反对者审计"
+    use_when: "准备输出 P0/P1 或高风险排除结论前"
+  - skill_id: km-bid-brief
+    chinese_name: 搜标简报
+    english_name: KM Bid Brief
+    short_purpose: "将已审计机会整理为低噪声 Owner 行动简报"
+    use_when: "需要把结论、证据和下一步交给决策者时"
+  - skill_id: km-bid-lifecycle
+    chinese_name: 投标结果追踪
+    english_name: KM Bid Lifecycle
+    short_purpose: "只读对账投标台账与官方结果、竞对和周期信号"
+    use_when: "已有 DWS 授权且需要跟踪结果闭环时"
+  - skill_id: km-bid-evolve
+    chinese_name: 规则影子优化
+    english_name: KM Bid Evolve
+    short_purpose: "用时间切片和影子对比生成安全规则提案"
+    use_when: "需要发现漏报、漂移或 Surprise，但不自动发布规则时"

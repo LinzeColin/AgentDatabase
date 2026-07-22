@@ -1,0 +1,22 @@
+{
+  "schema_version": "kmfa.project_cost.input_resolution.v1",
+  "resolution_id": "resolution_00000000000000000000000000000000",
+  "run_id": "REPLACE_WITH_SAME_RUN_ID",
+  "recorded_at": "2000-01-01T00:00:00+00:00",
+  "bound_request_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+  "resulting_request_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+  "bound_manifest_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "bound_requirements_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "items": [
+    {
+      "requirement_id": "REPLACE_WITH_REQUIREMENT_ID",
+      "classification": "NON_WAIVABLE",
+      "resolution": "BLOCKED",
+      "user_instruction": "REPLACE_WITH_EXACT_USER_INSTRUCTION",
+      "user_instruction_ref": "instruction:REPLACE_WITH_OPAQUE_REF",
+      "affected_metrics": [],
+      "effect_on_scope_or_metrics": "REPLACE_WITH_EXACT_EFFECT",
+      "evidence_refs": []
+    }
+  ]
+}

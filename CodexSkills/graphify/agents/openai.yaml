@@ -1,0 +1,6 @@
+interface:
+  display_name: "Graphify"
+  short_description: "Codebase and document knowledge graph workflow"
+  default_prompt: "Use $graphify to map, query, or explain a project knowledge graph."
+policy:
+  allow_implicit_invocation: false

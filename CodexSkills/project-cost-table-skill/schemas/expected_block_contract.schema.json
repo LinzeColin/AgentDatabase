@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "kmfa.project_cost.expected_block_contract.private.v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "classification",
+    "expectation_id",
+    "current_source_contract_sha256",
+    "expected_production_exit_code",
+    "expected_status_planes",
+    "expected_blocker_codes",
+    "expected_project_count",
+    "calculate_source_boundary",
+    "expectation_frozen_before_production"
+  ],
+  "properties": {
+    "schema_version": {"const": "kmfa.project_cost.expected_block_contract.private.v1"},
+    "classification": {"const": "PRIVATE_RUNTIME_DO_NOT_COMMIT"},
+    "expectation_id": {"type": "string", "minLength": 1},
+    "current_source_contract_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "expected_production_exit_code": {"const": 3},
+    "expected_status_planes": {
+      "const": {
+        "execution_status": "NEEDS_USER_INPUT",
+        "input_readiness_status": "BLOCKED_NON_WAIVABLE",
+        "calculation_status": "BLOCKED_SOURCE",
+        "generation_status": "BLOCKED_DIAGNOSTICS_GENERATED"
+      }
+    },
+    "expected_blocker_codes": {
+      "type": "array",
+      "minItems": 9,
+      "maxItems": 9,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "expected_project_count": {"type": "integer", "minimum": 1},
+    "calculate_source_boundary": {
+      "const": {
+        "baseline_values_allowed": false,
+        "report_line_items_allowed": false,
+        "replay_adapters_allowed": false
+      }
+    },
+    "expectation_frozen_before_production": {"const": true}
+  },
+  "additionalProperties": false
+}

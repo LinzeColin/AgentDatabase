@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "kmfa.project_cost.reference_baseline.private.v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "classification",
+    "generated_from_snapshot",
+    "projects"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "kmfa.project_cost.reference_expected.private.v1"
+    },
+    "classification": {
+      "const": "PRIVATE_FINANCIAL_REFERENCE_DO_NOT_COMMIT_PUBLICLY"
+    },
+    "generated_from_snapshot": {
+      "type": "string",
+      "minLength": 1
+    },
+    "projects": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/project"
+      }
+    }
+  },
+  "$defs": {
+    "safeText": {
+      "type": "string",
+      "pattern": "^[^\\u0000\\r\\n]*$"
+    },
+    "moneyMinor": {
+      "type": "integer",
+      "minimum": -1000000000000000,
+      "maximum": 1000000000000000
+    },
+    "lineItem": {
+      "type": "object",
+      "required": [
+        "category",
+        "label",
+        "amount_cents"
+      ],
+      "properties": {
+        "category": {
+          "allOf": [
+            {"$ref": "#/$defs/safeText"},
+            {"minLength": 1}
+          ]
+        },
+        "label": {
+          "$ref": "#/$defs/safeText"
+        },
+        "note": {
+          "$ref": "#/$defs/safeText"
+        },
+        "amount_cents": {
+          "$ref": "#/$defs/moneyMinor"
+        }
+      },
+      "additionalProperties": false
+    },
+    "project": {
+      "type": "object",
+      "required": [
+        "project_code",
+        "project_name",
+        "reference_pdf",
+        "reference_pdf_sha256",
+        "source_revenue_cents",
+        "source_total_cost_cents",
+        "source_profit_cents",
+        "source_profit_rate_text",
+        "line_items",
+        "expected_kingdee_5001_cents_current_snapshot"
+      ],
+      "properties": {
+        "project_code": {
+          "allOf": [
+            {"$ref": "#/$defs/safeText"},
+            {"minLength": 1}
+          ]
+        },
+        "project_name": {
+          "allOf": [
+            {"$ref": "#/$defs/safeText"},
+            {"minLength": 1}
+          ]
+        },
+        "reference_pdf": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[^\\u0000\\r\\n\\\\]+\\.pdf$"
+        },
+        "reference_pdf_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "source_revenue_cents": {
+          "$ref": "#/$defs/moneyMinor"
+        },
+        "source_total_cost_cents": {
+          "$ref": "#/$defs/moneyMinor"
+        },
+        "source_profit_cents": {
+          "$ref": "#/$defs/moneyMinor"
+        },
+        "source_profit_rate_text": {
+          "anyOf": [
+            {"$ref": "#/$defs/safeText"},
+            {"type": "null"}
+          ]
+        },
+        "line_items": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/lineItem"
+          }
+        },
+        "expected_source_profit_delta_cents": {
+          "$ref": "#/$defs/moneyMinor"
+        },
+        "expected_kingdee_5001_cents_current_snapshot": {
+          "$ref": "#/$defs/moneyMinor"
+        },
+        "identity_status": {
+          "$ref": "#/$defs/safeText"
+        },
+        "note": {
+          "$ref": "#/$defs/safeText"
+        },
+        "critical_note": {
+          "$ref": "#/$defs/safeText"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

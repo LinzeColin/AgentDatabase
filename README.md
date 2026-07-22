@@ -26,3 +26,7 @@ imported into `~/.codex/sessions` on this machine.
 ## Integrity
 
 `checksums.txt` holds the sha256 of every asset, computed before upload.
+
+## CodexSkills
+
+本机 Codex Skill 的仓库镜像（51 个）。索引：[`CodexSkills/README.md`](CodexSkills/README.md)（人读）、[`CodexSkills/index.json`](CodexSkills/index.json)（机器读，供 Agent 按需检索单个 skill，不要整仓 clone）。
