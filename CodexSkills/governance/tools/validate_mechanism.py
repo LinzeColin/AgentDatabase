@@ -971,10 +971,36 @@ def load_draft_contract() -> ContractBundle:
     vectors_digest = hashlib.sha256(canonicalize_object(vectors)).hexdigest()
     if vectors_digest != interface["canonicalization"]["test_vectors_digest"]:
         raise ContractError("TEST_VECTOR_DIGEST_MISMATCH")
-    if _repo_path(CANONICAL_MANIFEST_PATH).exists():
-        raise ContractError("ACTIVE_OR_CANDIDATE_MANIFEST_FORBIDDEN_IN_M0A")
+    manifest_path = _repo_path(CANONICAL_MANIFEST_PATH)
+    if manifest_path.exists():
+        # A local candidate is structurally linted here, but it is never
+        # promoted to a trust root.  Only load_trusted_bundle() can construct
+        # the complete 29-schema bundle from an external Git/digest/path/mode
+        # tuple.
+        manifest = strict_load(manifest_path)
+        if not isinstance(manifest, dict):
+            raise ContractError("CANDIDATE_MANIFEST_ROOT_INVALID")
+        expected_digest = manifest.get("bundle_digest")
+        if not isinstance(expected_digest, str) or not SHA256_RE.fullmatch(
+            expected_digest
+        ):
+            raise ContractError("CANDIDATE_MANIFEST_DIGEST_INVALID")
+        validate_instance(
+            ContractBundle(
+                schemas,
+                registry,
+                checker,
+                pointers,
+                policies,
+                PROTOCOL,
+            ),
+            manifest,
+            MANIFEST_SCHEMA_ID,
+            expected_bundle_digest=expected_digest,
+        )
+        scan_public_value(manifest, policies)
     if (REPO_ROOT / "CodexSkills" / "VERSION").exists():
-        raise ContractError("ACTIVE_VERSION_FORBIDDEN_IN_M0A")
+        raise ContractError("ACTIVE_VERSION_FORBIDDEN_IN_NON_ACTIVE_CONTRACT")
     return ContractBundle(schemas, registry, checker, pointers, policies, PROTOCOL)
 
 

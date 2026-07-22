@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Positive, negative, privacy, and determinism gates for Mechanism M0a."""
+"""Positive, negative, privacy, and determinism gates for Mechanism M0a/M0b."""
 
 from __future__ import annotations
 
@@ -10,6 +10,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from unittest import mock
 from pathlib import Path
 from typing import Any, Dict, Mapping
 
@@ -17,6 +18,7 @@ from typing import Any, Dict, Mapping
 GOVERNANCE_DIR = Path(__file__).resolve().parents[1]
 REPO_ROOT = GOVERNANCE_DIR.parents[1]
 TOOLS_DIR = GOVERNANCE_DIR / "tools"
+AUTO_INTERFACE_PATH = REPO_ROOT / "CodexSkills" / "auto" / "draft-interface.json"
 sys.path.insert(0, str(TOOLS_DIR))
 
 from canonical_json import (  # noqa: E402
@@ -27,6 +29,7 @@ from canonical_json import (  # noqa: E402
     parse_json_bytes,
     verify_vendor,
 )
+import build_candidate_bundle as candidate_builder  # noqa: E402
 from validate_mechanism import (  # noqa: E402
     CANONICAL_MANIFEST_PATH,
     CORE_HARD_GATE_CODES,
@@ -531,6 +534,7 @@ class MechanismContractTests(unittest.TestCase):
     def setUpClass(cls) -> None:
         cls.bundle = load_draft_contract()
         cls.interface = strict_load(GOVERNANCE_DIR / "draft-interface.json")
+        cls.auto_interface = strict_load(AUTO_INTERFACE_PATH)
         cls.artifacts = representative_artifacts(cls.bundle, cls.interface)
         cls.fixture_dir = GOVERNANCE_DIR / "fixtures" / "negative"
 
@@ -1048,11 +1052,82 @@ class MechanismContractTests(unittest.TestCase):
         with self.assertRaisesRegex(ContractError, "TRUST_CANONICAL_MANIFEST_PATH_MISMATCH"):
             load_trusted_bundle(REPO_ROOT, wrong_path)
 
-    def test_15_m0a_cannot_claim_activation(self) -> None:
+    def test_15_m0b_candidate_is_complete_but_cannot_claim_activation(self) -> None:
         self.assertEqual(self.interface["status"], "DRAFT_NON_ACTIVE")
         self.assertTrue(self.interface["activation_forbidden"])
+        self.assertEqual(self.auto_interface["status"], "DRAFT_NON_ACTIVE")
+        self.assertTrue(self.auto_interface["activation_forbidden"])
         self.assertFalse((REPO_ROOT / "CodexSkills" / "VERSION").exists())
-        self.assertFalse((REPO_ROOT / CANONICAL_MANIFEST_PATH).exists())
+        manifest_path = REPO_ROOT / CANONICAL_MANIFEST_PATH
+        self.assertTrue(manifest_path.is_file())
+        manifest = strict_load(manifest_path)
+        self.assertEqual(
+            manifest["bundle_digest"],
+            canonical_digest(manifest, "/bundle_digest"),
+        )
+        self.assertEqual(manifest["schema_version"], sid("schema-bundle-manifest"))
+        self.assertEqual(manifest["protocol_revision"], PROTOCOL)
+        self.assertEqual(manifest["srv_revision"], SRV)
+        self.assertEqual(manifest["schema_count"], 29)
+        self.assertEqual(manifest["policy_count"], 5)
+        self.assertEqual(
+            manifest["compatibility"],
+            {
+                "active_bundle_mode": "EXACT_DIGEST",
+                "accepted_predecessor_bundle_digests": [],
+                "predecessor_acceptance_expires_at": None,
+            },
+        )
+        normalized_auto_entries = [
+            {
+                "id": entry["id"],
+                "owner_plane": "AUTO",
+                "relative_path": entry["relative_path"],
+                "schema_version": entry["id"],
+                "schema_sha256": entry["schema_sha256"],
+                "compatibility": "EXACT_ONLY",
+                "self_digest_pointer": entry["self_digest_pointer"],
+            }
+            for entry in self.auto_interface["auto_public_schema_entries"]
+        ]
+        expected_schema_entries = sorted(
+            [
+                *self.interface["mechanism_schema_entries"],
+                *normalized_auto_entries,
+            ],
+            key=lambda entry: entry["id"].encode("ascii"),
+        )
+        self.assertEqual(manifest["schemas"], expected_schema_entries)
+        self.assertEqual(
+            manifest["policies"],
+            self.interface["mechanism_policy_entries"],
+        )
+        self.assertFalse(
+            {entry["id"] for entry in manifest["schemas"]}.intersection(
+                {
+                    entry["id"]
+                    for entry in self.auto_interface["auto_private_schema_entries"]
+                }
+            )
+        )
+        for entry in manifest["schemas"]:
+            document = strict_load(REPO_ROOT / entry["relative_path"])
+            self.assertEqual(document["$id"], entry["id"])
+            self.assertEqual(
+                hashlib.sha256(canonicalize_object(document)).hexdigest(),
+                entry["schema_sha256"],
+            )
+        for entry in manifest["policies"]:
+            policy = strict_load(REPO_ROOT / entry["relative_path"])
+            self.assertEqual(policy["policy_id"], entry["id"])
+            self.assertEqual(
+                hashlib.sha256(canonicalize_object(policy)).hexdigest(),
+                entry["policy_sha256"],
+            )
+        # Merely loading the non-active draft never upgrades the candidate to
+        # the complete trusted bundle.
+        self.assertEqual(len(self.bundle.schemas), 21)
+        self.assertEqual(len(self.bundle.policies), 5)
         self.assertEqual(
             self.interface["auto_public_schema_ids_required_for_complete_bundle"],
             sorted(
@@ -1079,6 +1154,52 @@ class MechanismContractTests(unittest.TestCase):
         self.assertEqual(baseline["historical_public_run_events"], 0)
         self.assertEqual(baseline["coverage_state"], "UNKNOWN")
         self.assertTrue(self.interface["consumer_first_contract"]["must_land_before_canonical_publish"])
+
+    def test_16_m0b_candidate_builder_is_byte_equivalent(self) -> None:
+        process = subprocess.run(
+            [
+                "/usr/bin/python3",
+                "-B",
+                str(TOOLS_DIR / "build_candidate_bundle.py"),
+                "--check",
+            ],
+            cwd=REPO_ROOT,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            check=False,
+        )
+        self.assertEqual(process.returncode, 0, process.stderr)
+        self.assertIn(
+            "CANDIDATE_BUNDLE_BYTE_EQUIVALENT bundle_digest=",
+            process.stdout,
+        )
+        self.assertIn("schemas=29 policies=5", process.stdout)
+
+    def test_17_m0b_candidate_builder_fails_closed_on_trust_input_drift(self) -> None:
+        with mock.patch.object(
+            candidate_builder,
+            "AUTO_INTERFACE_RAW_SHA256",
+            "0" * 64,
+        ):
+            with self.assertRaisesRegex(
+                ContractError,
+                "AUTO_INTERFACE_RAW_DIGEST_MISMATCH",
+            ):
+                candidate_builder.candidate_manifest()
+        with tempfile.TemporaryDirectory() as temporary:
+            active_version = Path(temporary) / "VERSION"
+            active_version.write_text("v0.0.0.3\n", encoding="utf-8")
+            with mock.patch.object(
+                candidate_builder,
+                "VERSION_PATH",
+                active_version,
+            ):
+                with self.assertRaisesRegex(
+                    ContractError,
+                    "CANDIDATE_BUILD_ACTIVE_VERSION_FORBIDDEN",
+                ):
+                    candidate_builder.candidate_manifest()
 
 
 if __name__ == "__main__":

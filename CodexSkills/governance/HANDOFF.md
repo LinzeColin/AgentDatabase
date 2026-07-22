@@ -1,49 +1,52 @@
 # Mechanism handoff
 
-- State: `DRAFT_NON_ACTIVE`
-- Task Pack authority: immutable `CodexSkills-Mechanism-Design-TaskPack-v0.0.0.2`
-- Protocol: `urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1`
-- Mechanism schema owner: `CodexSkills/governance/schemas/`
-- Mechanism policy owner: `CodexSkills/governance/policies/`
-- Auto schema owner: `CodexSkills/auto/schemas/{public,private}/` (not present in M0a)
+- State: DRAFT_NON_ACTIVE
+- Phase: MECHANISM_M0B
+- Task Pack authority: immutable CodexSkills-Mechanism-Design-TaskPack-v0.0.0.2
+- Protocol: urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1
+- SRV candidate: v0.0.0.3
+- Candidate manifest: CodexSkills/governance/bundles/schema-bundle-manifest.v1.json
+- Candidate bundle digest: fd1df66e240695bd376803423bd09f9f341f7542f74a6ed92b0f79b0af4dc5e1
 
-## Completed in M0a
+## Pinned inputs
 
-- Mechanism schema IDs, policy instances, digest pointers, and compatibility
-  boundary are materialized and validated offline.
-- RFC 8785 canonicalization is pinned to a provenance-checked author reference
-  implementation and wrapped by strict raw-byte I-JSON parsing.
-- UTC-Z, UID, digest, Git OID, URN, enum, count, and repository-path semantics
-  are shared through `common-definitions:v1`.
-- Privacy, source material, retention, notification, and SRV/transaction
-  separation are represented as bundle-member policies without a self-cycle.
-- EvalProfile, EvalRun, Scorecard, PromotionEvidence, and PromotionDecision
-  bind the seven scoring dimensions, eight non-waivable gates, five routing
-  strata, calibration, critical incidents, sealed isolation, 2x2 attribution,
-  shadow/canary evidence, rollback, and one-way notification semantics.
-- `draft-interface.json` freezes all 29 shared schema IDs, single-owner planes,
-  exact self-digest pointers, the five policies, and the four Auto-private
-  schemas that can never enter the shared bundle.
-- Negative fixtures prove fail-closed behavior for privacy, binding, schema
-  resolution, timestamps, paths, canonicalization, and contextual digests.
-- The A1a pre-write corrective gate explicitly admits only
-  `adapter_schema_digest`, `included_tree_digest`, and
-  `mapping_policy_digest` as source/coverage public SHA-256 fields. Its complete
-  Auto schema audit additionally admits `supersedes_event_digest` solely for
-  immutable correction events. The same gate adds the closed
-  `actor_role=UNKNOWN` value for observed CLAUDE/AGENTS activity whose actor
-  role cannot be proven. `UNKNOWN_LEGACY` remains forbidden; the 18 historical
-  records remain unmapped and produce no run event.
+- Auto A1a verified Git object:
+  sha1:7ebf23576cace9dcaeec598fb6b376840e89b4b5
+- Auto interface raw SHA-256:
+  7e3b87e1a468be73ce15daced6bf85f776a2ebf96fb02fa50774206e3b60b718
+- Mechanism interface raw SHA-256:
+  0f4837d9cec37c845cd5e9e799b5f572944cf8fe2457e8b95f696db3b9c03998
+
+## Completed in M0b
+
+- The complete candidate contains exactly 21 Mechanism schemas, eight
+  Auto-public schemas, and five Mechanism policies.
+- All entries are ASCII-ID sorted, content-addressed with RFC 8785 canonical
+  SHA-256, owned by one plane, bound to an exact path, and marked EXACT_ONLY.
+- The four Auto-private schemas are excluded from the shared bundle.
+- The manifest digest excludes only /bundle_digest. Member and policy digests
+  remain covered by the manifest digest.
+- The candidate uses exact protocol and bundle-digest compatibility with no
+  accepted predecessor bundle.
+- The deterministic builder pins both machine-interface byte digests and
+  refuses interface drift, ACTIVE VERSION state, member-count drift, path or
+  owner mismatch, private-schema inclusion, digest mismatch, and malformed
+  public values.
+- Local draft loading structurally validates a candidate but returns only the
+  21-schema Mechanism draft. It never upgrades repository self-reporting into
+  a trusted complete bundle.
 
 ## Explicitly not active
 
-M0a does not create `CodexSkills/VERSION`, an active manifest, a complete
-candidate bundle, a canonical event, a public receipt, or a watermark. No
-runtime producer may consume this draft as ACTIVE.
+M0b does not create CodexSkills/VERSION, an ACTIVE manifest, canonical data, a
+public receipt, a runtime watermark, or publication authority. The manifest
+is trusted only when a caller supplies the repo-external tuple of verified M0b
+Git object, the exact candidate digest above, the canonical manifest path, and
+mode CANDIDATE. Missing external state fails closed.
 
 ## Next exact action
 
-Auto A1a rebases its expected head to the verified M0a main SHA, adds only
-Auto-owned public/private schemas and tests, and returns its verified main
-SHA. Mechanism M0b then consumes both ownership sets and constructs the first
-complete candidate manifest and digest without activating it.
+Auto A1b must start from the verified M0b main commit and consume the exact
+candidate digest and protocol. It may implement candidate-only integration but
+must not publish canonical data or claim ACTIVE. Mechanism M0c activation
+remains a later independent controlled run.
