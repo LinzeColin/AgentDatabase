@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AuditResult",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "lot_id", "audit_status", "recommended_state", "official_source_checked", "counterevidence", "missing_evidence", "reason_codes", "next_action"],
+  "properties": {
+    "contract_version": {"const": "0.4.1"},
+    "lot_id": {"type": "string", "minLength": 1},
+    "audit_status": {"enum": ["passed", "conflict", "pending"]},
+    "recommended_state": {"enum": ["P0_DIRECT", "P1_RESOLVABLE", "P2_EVIDENCE", "X_EXCLUDE", "DISAGREEMENT_REVIEW"]},
+    "official_source_checked": {"type": "boolean"},
+    "counterevidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["claim", "evidence_refs"],
+        "properties": {
+          "claim": {"type": "string"},
+          "evidence_refs": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    },
+    "missing_evidence": {"type": "array", "items": {"type": "string"}},
+    "reason_codes": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "next_action": {"type": "string", "minLength": 1}
+  }
+}

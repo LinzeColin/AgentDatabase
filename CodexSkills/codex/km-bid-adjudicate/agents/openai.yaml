@@ -1,0 +1,4 @@
+interface:
+  display_name: "标的判型"
+  short_description: "基于官方正文证据判断采购实质、主要义务、A/B 方向与反事实救援"
+  default_prompt: "使用 $km-bid-adjudicate 先检查输入是否充分，再按标包证据判断主要义务和 A/B 方向；最后报告输出绝对路径。"

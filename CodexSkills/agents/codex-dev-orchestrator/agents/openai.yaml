@@ -1,0 +1,7 @@
+interface:
+  display_name: "Codex Dev Orchestrator"
+  short_description: "Route multi-step product or system work into lean planning or controlled run contracts."
+  brand_color: "#2563EB"
+  default_prompt: "Use $codex-dev-orchestrator to classify this multi-step product or system request, then load only the matching planning or controlled-run reference. Do not use it for simple edits, command output, or ordinary Q&A."
+policy:
+  allow_implicit_invocation: true

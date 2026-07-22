@@ -1,0 +1,4 @@
+interface:
+  display_name: "招标发现"
+  short_description: "高召回发现工业标讯，记录来源合法性、覆盖、查询预算与失败降级"
+  default_prompt: "使用 $km-bid-discover 先检查输入是否充分，再在已批准来源中做有预算的高召回发现；最后报告输出绝对路径。"

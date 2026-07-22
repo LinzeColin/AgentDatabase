@@ -1,0 +1,4 @@
+interface:
+  display_name: "官方取证"
+  short_description: "官方回源、安全解析附件并生成标包级可定位、可哈希、可重放证据"
+  default_prompt: "使用 $km-bid-evidence 先检查输入是否充分，再回到官方版本和附件取证；最后报告输出绝对路径。"

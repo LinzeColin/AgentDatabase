@@ -1,0 +1,9 @@
+{
+  "_format_note": "Strict JSON. One row per authoritative Acceptance ID. task_ids must exist in the locked Task Graph; test_ids must exist in RUN_MANIFEST.results. change_impact requires at least one record for a complete verdict.",
+  "schema_version": "2.1",
+  "target_project_name": "",
+  "subject_identity": "",
+  "taskpack_digest_sha256": "",
+  "rows": [],
+  "change_impact": []
+}

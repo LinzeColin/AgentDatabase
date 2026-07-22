@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BriefResult",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "summary", "P0", "P1", "P2", "signals", "coverage"],
+  "$defs": {
+    "item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["opportunity_id", "lot_id", "readiness", "official_url", "deadline_status", "audit_status", "next_action"],
+      "properties": {
+        "opportunity_id": {"type": "string"},
+        "lot_id": {"type": "string"},
+        "readiness": {"enum": ["P0_DIRECT", "P1_RESOLVABLE", "P2_EVIDENCE"]},
+        "official_url": {"type": "string", "format": "uri"},
+        "deadline_status": {"enum": ["EXACT_OFFSET", "SOURCE_ZONE", "DATE_ONLY", "AMBIGUOUS", "MISSING", "SUPERSEDED"]},
+        "audit_status": {"enum": ["passed", "conflict", "pending"]},
+        "next_action": {"type": "string", "minLength": 1}
+      }
+    }
+  },
+  "properties": {
+    "contract_version": {"const": "0.4.1"},
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["run_id", "status", "p0_count", "p1_count", "p2_count"],
+      "properties": {
+        "run_id": {"type": "string"},
+        "status": {"enum": ["PASS", "PARTIAL", "BLOCKED", "FAIL"]},
+        "p0_count": {"type": "integer", "minimum": 0},
+        "p1_count": {"type": "integer", "minimum": 0},
+        "p2_count": {"type": "integer", "minimum": 0}
+      }
+    },
+    "P0": {"type": "array", "items": {"$ref": "#/$defs/item"}},
+    "P1": {"type": "array", "items": {"$ref": "#/$defs/item"}},
+    "P2": {"type": "array", "maxItems": 3, "items": {"$ref": "#/$defs/item"}},
+    "signals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["signal_id", "signal_type", "horizon", "confidence", "next_action"],
+        "properties": {
+          "signal_id": {"type": "string"},
+          "signal_type": {"type": "string"},
+          "horizon": {"type": "string"},
+          "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+          "next_action": {"type": "string"}
+        }
+      }
+    },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["degraded", "ok", "degraded_sources", "failed", "not_run"],
+      "properties": {
+        "degraded": {"type": "boolean"},
+        "ok": {"type": "array", "items": {"type": "string"}},
+        "degraded_sources": {"type": "array", "items": {"type": "string"}},
+        "failed": {"type": "array", "items": {"type": "string"}},
+        "not_run": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  }
+}

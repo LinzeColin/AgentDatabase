@@ -1,0 +1,6 @@
+interface:
+  display_name: "Verifier v2.1 / Taskpack 对齐的单项目验收与放行"
+  short_description: "验收一下：独立裁决并仅交付一个可直接给开发 agent 的验收复审 ZIP"
+  default_prompt: "Use $verifier when the user says 验收一下 or asks for software acceptance. Independently accept exactly one target project without altering Skill 1 or the product. Ingest any approved Product-Design-Taskpack read-only; freeze the complete relevant taskpack as TASKPACK_SOURCE_SNAPSHOT.zip; bind its normalized full-pack digest, separate seven-role contract digest, authorized digest, Acceptance IDs and Task IDs; require separate integrity, compatibility and drift evidence; enforce Requirement → Acceptance → Oracle → locked Task → executed Test → Evidence → exact Subject plus change_impact; bind source snapshot to build/artifact/image/deployment; verify real user and world-state outcomes, release/recovery gates, and independent cross-model blind AI grading when applicable; finalize and verify the in-toto attestation and sealed evidence bundle; then package the complete sealed run with a builder-first README as exactly one *_acceptance_review_taskpack.zip. In the default final response, link only that single ZIP as the sole file deliverable; expose internal reports or evidence only when the Owner explicitly asks."
+policy:
+  allow_implicit_invocation: true

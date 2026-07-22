@@ -1,0 +1,42 @@
+schema_version: "2.0"
+status: "INCOMPLETE"
+source:
+  path_or_url: ""
+  sha256: ""
+  evidence_route: "VIDEO_ONLY" # SOURCE_INSTRUMENTED|URL_INSTRUMENTED|VIDEO_ONLY|OFFLINE_CONCEPT
+  rights_and_privacy: "unknown"
+presentation:
+  player_or_runtime: "unknown"
+  player_version: "unknown"
+  playback_speed: "unknown"
+  playback_speed_evidence: "none"
+  viewport_px: "unknown"
+  device_pixel_ratio: "unknown"
+  display_resolution_px: "unknown"
+  display_refresh_hz: "unknown"
+  display_color_profile: "unknown"
+  hdr_tone_mapping: "unknown"
+  os_and_version: "unknown"
+  browser_and_version: "unknown"
+  reduced_motion: "unknown"
+input:
+  modality: "unknown" # pointer|touch|keyboard|controller|mixed
+  device: "unknown"
+  event_telemetry_available: false
+audio:
+  enabled: "unknown"
+  output_chain: "unknown"
+  latency_calibrated: false
+haptics:
+  present_in_target: "unknown"
+  telemetry_available: false
+  target_device_test_available: false
+runtime_evidence:
+  source_available: false
+  live_url_available: false
+  dom_or_native_tree: false
+  computed_styles: false
+  animation_objects: false
+  state_events: false
+  network_and_console: false
+open_decisions: []

@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "QualificationResult",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "lot_id", "legal_entity_id", "eligibility", "commercial_worth", "capacity_state", "evidence_quality", "readiness", "gaps", "next_action", "legal_vehicle_review"],
+  "properties": {
+    "contract_version": {"const": "0.4.1"},
+    "lot_id": {"type": "string", "minLength": 1},
+    "legal_entity_id": {"type": "string", "minLength": 1},
+    "eligibility": {"enum": ["met", "not_met", "unknown"]},
+    "commercial_worth": {"enum": ["worth", "not_worth", "unknown"]},
+    "capacity_state": {"enum": ["available", "conflict", "unknown"]},
+    "evidence_quality": {"enum": ["complete", "partial", "insufficient"]},
+    "readiness": {"enum": ["P0_DIRECT", "P1_RESOLVABLE", "P2_EVIDENCE", "X_EXCLUDE", "DISAGREEMENT_REVIEW"]},
+    "gaps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["requirement_id", "state", "reason_code", "evidence_refs", "resolvable_before_deadline"],
+        "properties": {
+          "requirement_id": {"type": "string"},
+          "state": {"enum": ["met", "not_met", "unknown"]},
+          "reason_code": {"type": "string"},
+          "evidence_refs": {"type": "array", "items": {"type": "string"}},
+          "resolvable_before_deadline": {"type": ["boolean", "null"]}
+        }
+      }
+    },
+    "next_action": {"type": "string", "minLength": 1},
+    "legal_vehicle_review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "owner_approved"],
+      "properties": {
+        "mode": {"enum": ["single_entity", "manual_consortium_review", "manual_prime_sub_review"]},
+        "owner_approved": {"type": "boolean"},
+        "evidence_refs": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  }
+}

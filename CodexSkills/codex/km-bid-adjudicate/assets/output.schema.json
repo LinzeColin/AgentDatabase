@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AdjudicationResult",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "lot_id", "principal_obligation", "business_direction", "decision_state", "semantic_confidence", "fields", "evidence_refs", "counterfactual_rescue_check"],
+  "properties": {
+    "contract_version": {"const": "0.4.1"},
+    "lot_id": {"type": "string", "minLength": 1},
+    "principal_obligation": {"enum": ["GOODS", "REPAIR", "ENGINEERING", "O_AND_M", "LABOR", "MACHINING", "MIXED", "UNKNOWN"]},
+    "business_direction": {"enum": ["A", "B", "A+B", "OUT_OF_SCOPE", "UNKNOWN"]},
+    "decision_state": {"enum": ["SEMANTIC_READY", "NEEDS_EVIDENCE"]},
+    "semantic_confidence": {"type": "number", "minimum": 0, "maximum": 1},
+    "fields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "state", "evidence_refs"],
+        "properties": {
+          "name": {"type": "string"},
+          "state": {"enum": ["TRUE", "FALSE", "UNKNOWN"]},
+          "evidence_refs": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    },
+    "evidence_refs": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "counterfactual_rescue_check": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["performed", "title_perturbation_stable", "rescuable_lot", "notes"],
+      "properties": {
+        "performed": {"type": "boolean"},
+        "title_perturbation_stable": {"type": ["boolean", "null"]},
+        "rescuable_lot": {"type": ["boolean", "null"]},
+        "notes": {"type": "string"}
+      }
+    }
+  }
+}
