@@ -1,0 +1,98 @@
+{
+  "activation_forbidden_without_coordinated_m0c": true,
+  "candidate_bundle_digest": "fd1df66e240695bd376803423bd09f9f341f7542f74a6ed92b0f79b0af4dc5e1",
+  "candidate_git_object_id": "sha1:4b1e1a318c8f9e1014839a8a3a46e057679c4b6b",
+  "candidate_manifest_path": "CodexSkills/governance/bundles/schema-bundle-manifest.v1.json",
+  "canonical_publication_permitted": false,
+  "capability_gate_precedes_state_write": true,
+  "fault_test_rounds_required": 2,
+  "manual_and_scheduled_same_orchestrator": true,
+  "module_artifacts": [
+    {
+      "artifact_digest": "4860eef97915a2622a8acb4c4ccf07d391615f28de8f6e44db8818c52740e66e",
+      "relative_path": "CodexSkills/auto/runtime/__init__.py"
+    },
+    {
+      "artifact_digest": "85323cb9fe2e61138fd1ff6ec22b0e0aebafaf567e7ef8ff6bf37c15622739fd",
+      "relative_path": "CodexSkills/auto/runtime/bootstrap.py"
+    },
+    {
+      "artifact_digest": "25e5b2b53da145843bc27f626cd9e92df9b188d5ba6d27b417a805fbce729969",
+      "relative_path": "CodexSkills/auto/runtime/core.py"
+    },
+    {
+      "artifact_digest": "072126d4f665477dcdc3138afd06eef759071174bac8ecc325ff5ffd21e1f4a2",
+      "relative_path": "CodexSkills/auto/runtime/notification.py"
+    },
+    {
+      "artifact_digest": "8a661eb608ea2c53a55612b7fd0363e42bc4010eceaa080b8400276d4a933e68",
+      "relative_path": "CodexSkills/auto/runtime/orchestrator.py"
+    },
+    {
+      "artifact_digest": "104438f81a6a50e17903bcf1438d9254cd223520f65d070ff319c861e20a2728",
+      "relative_path": "CodexSkills/auto/runtime/privacy.py"
+    },
+    {
+      "artifact_digest": "e21b4c7914cb4006d52d174e4323c58cc031882f3f7a7ad60e2186ad5bc47911",
+      "relative_path": "CodexSkills/auto/runtime/publication.py"
+    },
+    {
+      "artifact_digest": "8fad121d4443071a275fb08a2e4e2247fed9fffd54125ecaf8b6e7ab8790b253",
+      "relative_path": "CodexSkills/auto/runtime/queue.py"
+    },
+    {
+      "artifact_digest": "19abacee64837c4785dd8fa32af69456c4bedca23254c8700ec3643791e043c5",
+      "relative_path": "CodexSkills/auto/runtime/retention.py"
+    },
+    {
+      "artifact_digest": "8f097981d65eb38ba3f6a965b6bbac7467a3ec0be8112e65473f009553d4f395",
+      "relative_path": "CodexSkills/auto/runtime/roots.py"
+    },
+    {
+      "artifact_digest": "cc44934d151aad692ba446bdf38ced8ab3eedd2215002f96b1751ed45a350a2e",
+      "relative_path": "CodexSkills/auto/runtime/schedule.py"
+    },
+    {
+      "artifact_digest": "58204a8fa9caac8762e6476aa605099c3f14f14adb3938a07b6a08f781c2cde9",
+      "relative_path": "CodexSkills/auto/runtime/source.py"
+    },
+    {
+      "artifact_digest": "ace79be2fd4916c6f6ee0c9dd4deb8fbb828fa8dc85754bb234804d4aa658f3f",
+      "relative_path": "CodexSkills/auto/runtime/state.py"
+    },
+    {
+      "artifact_digest": "ae0e7348da26b30935e7a56856efa8d9fa72cc8a87c4cab97956251172cbb7c2",
+      "relative_path": "CodexSkills/auto/tools/build_runtime_interface.py"
+    },
+    {
+      "artifact_digest": "e9ee71c60bf4ffeebfe7034884ff69e74bb85b77be3ee0510cb705e6b21d4bf1",
+      "relative_path": "CodexSkills/auto/tools/run_fault_suite.py"
+    },
+    {
+      "artifact_digest": "0863986fd5c6e046b57b2cd6901e6add0e098eb64c6bfe006a87011e47cb9f35",
+      "relative_path": "CodexSkills/auto/tools/runtime_preflight.py"
+    },
+    {
+      "artifact_digest": "47a7e217554407c28f16fadabc4ecbf00a860ac7b68448e083d1dba363c952d7",
+      "relative_path": "CodexSkills/auto/tools/validate_auto.py"
+    }
+  ],
+  "module_count": 17,
+  "next_phase": "MECHANISM_M0C_COORDINATED_ACTIVATION",
+  "notification_actual_recipient_repo_external": true,
+  "notification_public_recipient_ref_only": true,
+  "persistent_managed_raw_default_enabled": false,
+  "protocol_revision": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1",
+  "remote_readback_precedes_watermark": true,
+  "schedule": {
+    "daily_local_time": "04:15",
+    "late_start_rejected": false,
+    "sunday_forced_full": true,
+    "timezone": "Australia/Sydney"
+  },
+  "shared_bundle_schema_count": 29,
+  "shared_policy_count": 5,
+  "state_root_repo_external": true,
+  "status": "DRAFT_NON_ACTIVE",
+  "trust_tuple_repo_external_only": true
+}

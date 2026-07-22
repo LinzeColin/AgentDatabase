@@ -14,6 +14,7 @@ import dataclasses
 import datetime as dt
 import hashlib
 import json
+import subprocess
 import sys
 from pathlib import Path
 from typing import Any, Dict, Iterable, Mapping, Optional, Sequence, Tuple
@@ -25,15 +26,22 @@ GOVERNANCE_DIR = REPO_ROOT / "CodexSkills" / "governance"
 GOVERNANCE_TOOLS = GOVERNANCE_DIR / "tools"
 sys.path.insert(0, str(GOVERNANCE_TOOLS))
 
-from canonical_json import CanonicalizationError, canonicalize_object  # noqa: E402
+from canonical_json import (  # noqa: E402
+    CanonicalizationError,
+    canonicalize_object,
+    parse_json_bytes,
+)
 from validate_mechanism import (  # noqa: E402
     ContractBundle,
     ContractError,
     EXPECTED_SCHEMA_SELF_POINTERS,
     PROTOCOL,
+    TrustTuple,
     build_registry,
+    capability_gate,
     load_draft_contract,
     load_schema_directories,
+    load_trusted_bundle,
     scan_public_value,
     strict_load,
     validate_instance,
@@ -59,6 +67,9 @@ PRIVATE_SELF_POINTERS = {
 }
 EXPECTED_MECHANISM_INTERFACE_RAW_SHA256 = (
     "0f4837d9cec37c845cd5e9e799b5f572944cf8fe2457e8b95f696db3b9c03998"
+)
+EXPECTED_AUTO_INTERFACE_RAW_SHA256 = (
+    "7e3b87e1a468be73ce15daced6bf85f776a2ebf96fb02fa50774206e3b60b718"
 )
 BASE_MECHANISM_GIT_OBJECT_ID = "sha1:37d07a47ae87fcf246046d1611d3e00f000d1fa4"
 LANES = ("REGISTRY", "RUN_LOG")
@@ -295,6 +306,97 @@ def load_auto_contract() -> AutoContract:
     )
     _validate_public_digest_field_policy(public, mechanism.policies)
     return AutoContract(shared, development, interface, mechanism_interface)
+
+
+def load_trusted_auto_contract(repo_root: Path, trust: TrustTuple) -> AutoContract:
+    """Compose Auto-private schemas around an externally trusted shared bundle.
+
+    The candidate/active shared Registry is selected exclusively by the caller's
+    repo-external ``TrustTuple``.  The local draft is used only to verify the
+    independently versioned Auto-private schemas and the A1a ownership
+    interface; it can never confer shared-bundle trust.
+    """
+
+    trusted_shared = load_trusted_bundle(repo_root, trust)
+    local = load_auto_contract()
+    if set(trusted_shared.schemas) != set(local.shared.schemas):
+        _fail("AUTO_TRUSTED_SHARED_SCHEMA_SET_MISMATCH")
+    for schema_id, trusted_schema in trusted_shared.schemas.items():
+        if canonicalize_object(trusted_schema) != canonicalize_object(
+            local.shared.schemas[schema_id]
+        ):
+            _fail(f"AUTO_TRUSTED_SHARED_SCHEMA_BYTES_MISMATCH:{schema_id}")
+    if set(trusted_shared.policies) != set(local.shared.policies):
+        _fail("AUTO_TRUSTED_POLICY_SET_MISMATCH")
+    for policy_id, trusted_policy in trusted_shared.policies.items():
+        if canonicalize_object(trusted_policy) != canonicalize_object(
+            local.shared.policies[policy_id]
+        ):
+            _fail(f"AUTO_TRUSTED_POLICY_BYTES_MISMATCH:{policy_id}")
+
+    object_id = trust.verified_git_object_id.split(":", 1)[1]
+
+    def git_blob(relative_path: str) -> bytes:
+        try:
+            result = subprocess.run(
+                ["git", "-C", str(repo_root), "show", f"{object_id}:{relative_path}"],
+                stdin=subprocess.DEVNULL,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                timeout=15,
+                check=False,
+            )
+        except (OSError, subprocess.TimeoutExpired) as exc:
+            _fail(f"AUTO_TRUSTED_BLOB_READ_FAILED:{relative_path}")
+        if result.returncode != 0:
+            _fail(f"AUTO_TRUSTED_BLOB_READ_FAILED:{relative_path}")
+        return result.stdout
+
+    trusted_interface_raw = git_blob("CodexSkills/auto/draft-interface.json")
+    if hashlib.sha256(trusted_interface_raw).hexdigest() != EXPECTED_AUTO_INTERFACE_RAW_SHA256:
+        _fail("AUTO_TRUSTED_INTERFACE_RAW_DIGEST_MISMATCH")
+    trusted_interface = parse_json_bytes(trusted_interface_raw)
+    if canonicalize_object(trusted_interface) != canonicalize_object(local.interface):
+        _fail("AUTO_TRUSTED_INTERFACE_LOCAL_DRIFT")
+    private_entries = _entry_map(
+        trusted_interface.get("auto_private_schema_entries"),
+        PRIVATE_SELF_POINTERS,
+        "PRIVATE",
+    )
+    private = {}
+    for schema_id, entry in private_entries.items():
+        raw = git_blob(entry["relative_path"])
+        schema = parse_json_bytes(raw)
+        if not isinstance(schema, dict) or schema.get("$id") != schema_id:
+            _fail(f"AUTO_TRUSTED_PRIVATE_SCHEMA_BINDING_MISMATCH:{schema_id}")
+        observed_digest = hashlib.sha256(canonicalize_object(schema)).hexdigest()
+        if observed_digest != entry["schema_sha256"]:
+            _fail(f"AUTO_TRUSTED_PRIVATE_SCHEMA_DIGEST_MISMATCH:{schema_id}")
+        private[schema_id] = schema
+    development_schemas = {**trusted_shared.schemas, **private}
+    development_registry, development_checker = build_registry(development_schemas)
+    development = ContractBundle(
+        development_schemas,
+        development_registry,
+        development_checker,
+        {**trusted_shared.self_digest_pointers, **PRIVATE_SELF_POINTERS},
+        trusted_shared.policies,
+        PROTOCOL,
+    )
+    _validate_public_digest_field_policy(
+        {
+            schema_id: schema
+            for schema_id, schema in trusted_shared.schemas.items()
+            if schema_id in PUBLIC_SELF_POINTERS
+        },
+        trusted_shared.policies,
+    )
+    return AutoContract(
+        trusted_shared,
+        development,
+        local.interface,
+        local.mechanism_interface,
+    )
 
 
 def _surface_breakdown(items: Sequence[Mapping[str, Any]]) -> Tuple[Tuple[str, str, int], ...]:

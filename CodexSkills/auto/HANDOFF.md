@@ -1,46 +1,60 @@
-# Auto A1a handoff
+# Auto A1b handoff
 
 - State: `DRAFT_NON_ACTIVE`
-- Phase: `AUTO_A1A`
+- Phase: `AUTO_A1B`
 - Protocol: `urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1`
-- Base Mechanism main: `sha1:37d07a47ae87fcf246046d1611d3e00f000d1fa4`
-- Public schema owner: `CodexSkills/auto/schemas/public/`
-- Private schema owner: `CodexSkills/auto/schemas/private/`
-- Machine interface: `CodexSkills/auto/draft-interface.json`
-- Machine interface raw SHA-256: `7e3b87e1a468be73ce15daced6bf85f776a2ebf96fb02fa50774206e3b60b718`
+- Verified M0b Git object:
+  `sha1:4b1e1a318c8f9e1014839a8a3a46e057679c4b6b`
+- Exact candidate bundle digest:
+  `fd1df66e240695bd376803423bd09f9f341f7542f74a6ed92b0f79b0af4dc5e1`
+- Candidate manifest:
+  `CodexSkills/governance/bundles/schema-bundle-manifest.v1.json`
+- A1a schema interface remains immutable:
+  `CodexSkills/auto/draft-interface.json`
+- A1b machine interface:
+  `CodexSkills/auto/runtime-interface.json`
 
-## A1a boundary
+## Completed in A1b
 
-A1a materializes schemas and tests only. It does not implement adapters,
-queues, locks, publishers, notification transports, retention execution, Git
-transactions, canonical data, or the production automation prompt.
+- Shared validation consumes only the caller-supplied external trust tuple and
+  verifies the exact 29-schema/5-policy Git object before composing the four
+  Auto-private schemas.
+- Startup checks Python/dependency ranges, vendored canonicalizer bytes,
+  canonicalization smoke vectors, and offline Registry closure before any
+  queue, watermark, lock, or other state write.
+- Repo-external owner-only state, atomic fsync+rename, single-flight leases,
+  explicit stale recovery, protected-root guards, and lane-local verified
+  watermarks are implemented.
+- Source inventory is lstat-first, excludes only frozen policy material,
+  accounts exclusions, never silently skips oversized/errors/special files,
+  permits only safe same-root relative aliases, and binds the policy digest
+  into the tree domain.
+- Public serialization is reparsed, exact-schema validated, and privacy
+  rescanned before the atomic public-safe queue. Raw persistence remains
+  disabled by default.
+- Planned MAJOR notification uses a transactional private outbox, external
+  recipient mapping, provider reconciliation, and public-safe receipts. No
+  production notification was sent in A1b.
+- Physical publication enforces exact shared gates, expected remote head,
+  fresh worktree, allowed path set, ordinary FF push, and remote byte readback.
+  Candidate runtime publication is blocked. Coordinated activation additionally
+  requires a verified envelope digest/artifact digest set and provider `SENT`.
+- UTC retention, Sydney 04:15/DST, Sunday forced full, manual parity, no late
+  window, lock-busy defer, and lane-isolation behaviors have deterministic
+  fake-clock/fault tests.
 
-The public set contains exactly eight schema IDs and self-digest pointers
-frozen by Mechanism. The private set contains exactly four operational schema
-IDs and is explicitly excluded from the shared bundle. No `VERSION`, bundle
-manifest, canonical artifact, or watermark is created in A1a.
+## Explicitly not done
 
-The public contract keeps actual recipients repo-external, rejects
-unapproved digest fields after serialization, separates notification timing
-from provider outcome, permits independent lane settlement behind shared
-gates, and restricts queued/published artifacts to the shared schema set and
-approved canonical write roots. `MANUAL` and `SCHEDULED` use the same artifact
-contract; there is no late-start window. The consumed version policy remains
-Australia/Sydney daily 04:15 with Sunday forced full.
-
-## Validation
-
-- Mechanism draft: byte-equivalent; 21-schema offline closure; 15 tests pass.
-- Auto draft: byte-equivalent; 29 shared + 4 private schema closure; 14 tests pass.
-- Both immutable v0.0.0.2 Task Packs: all checksums, package validators, and
-  cross-pack validator pass. Newer frozen Revision 5.2 decisions take
-  precedence over conflicting baseline examples.
-- Production-only privacy scan, staged-path boundary, and `git diff --check`
-  pass. No actual recipient, absolute local path, cache, active manifest, or
-  `CodexSkills/VERSION` is present.
+A1b did not create `CodexSkills/VERSION`, activate the candidate, publish
+canonical data, send a real notification, create a production state root,
+scan/migrate the real Skill sources, rebuild the 3,365 Registry views, modify
+OpenAIDatabase, update or run an automation, backfill historical runs, or call
+the verifier.
 
 ## Next exact action
 
-After this phase is on verified main, Mechanism M0b consumes both ownership
-sets and materializes the complete non-active candidate manifest/digest. Auto
-A1b must target that exact candidate and must not publish canonical data.
+Mechanism M0c must produce the content-addressed activation envelope. Auto may
+transport it only after a real provider `SENT` receipt and all shared gates
+pass. After FF-safe push and remote readback, Auto A1c may bootstrap the exact
+ACTIVE tuple. Registry A2 and consumer/automation A3 remain later independent
+CONTROLLED_RUN phases.
