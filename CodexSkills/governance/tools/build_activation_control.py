@@ -49,9 +49,9 @@ CANDIDATE_BUNDLE_DIGEST = (
 CANDIDATE_BUNDLE_GIT_OBJECT_ID = (
     "sha1:899a4374bc02f5e18444fea7404864df7b118adf"
 )
-BASE_AUTO_GIT_OBJECT_ID = "sha1:1836c44fe83bb911b0a5ca5d97b8e59ff2df84ab"
+BASE_AUTO_GIT_OBJECT_ID = "sha1:c2fc04ff24b8d8ad72ec14a1cc2b26000ba08f67"
 AUTO_RUNTIME_INTERFACE_RAW_SHA256 = (
-    "d38eae81ef4aa45ac119bcb3fefa3b67c3f9609ef2fe281bb7dcf5b68c60c838"
+    "e28040a58d4c68b2493025523982545d8aa80b1faf7961cf03860d735f8cdea2"
 )
 TARGET_SRV_REVISION = "v0.0.0.3"
 CANDIDATE_MANIFEST_REPO_PATH = (
@@ -379,7 +379,7 @@ def _preflight_inputs(
         or auto_interface.get("notification_test_transport_production_forbidden")
         is not True
         or auto_interface.get("next_phase")
-        != "MECHANISM_M0C_COORDINATED_ACTIVATION"
+        != "MECHANISM_CONSUMER_FIRST_PHASE"
     ):
         raise ContractError("ACTIVATION_AUTO_INTERFACE_CONTRACT_MISMATCH")
 

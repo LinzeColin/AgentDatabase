@@ -1,6 +1,6 @@
 {
   "activation_forbidden": true,
-  "base_auto_git_object_id": "sha1:1836c44fe83bb911b0a5ca5d97b8e59ff2df84ab",
+  "base_auto_git_object_id": "sha1:c2fc04ff24b8d8ad72ec14a1cc2b26000ba08f67",
   "bootstrap_schema_count": 2,
   "bootstrap_schema_entries": [
     {
@@ -64,7 +64,7 @@
   "status": "DRAFT_NON_ACTIVE",
   "target_srv_revision": "v0.0.0.3",
   "transport_runtime_interface": {
-    "artifact_digest": "d38eae81ef4aa45ac119bcb3fefa3b67c3f9609ef2fe281bb7dcf5b68c60c838",
+    "artifact_digest": "e28040a58d4c68b2493025523982545d8aa80b1faf7961cf03860d735f8cdea2",
     "relative_path": "CodexSkills/registry/auto/runtime-interface.json"
   },
   "validator_contract": {
