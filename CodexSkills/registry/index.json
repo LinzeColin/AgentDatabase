@@ -18,7 +18,7 @@
       "status": "candidate_for_acceptance",
       "entry": "codex/persona-distiller/registry.yaml",
       "skill_entry": "codex/persona-distiller/SKILL.md",
-      "persistent_output": "CodexSkills/registry/codex/persona-distiller/产物登记/"
+      "persistent_output": "CodexSkills/registry/codex/persona-distiller/"
     }
   ]
 }

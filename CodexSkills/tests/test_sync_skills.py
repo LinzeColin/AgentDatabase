@@ -23,9 +23,7 @@ class SyncSkillsRegistryRoutingTests(unittest.TestCase):
                 "---\nname: persona-distiller\ndescription: Test persona builder.\n---\n",
                 encoding="utf-8",
             )
-            product_root = local / "产物登记"
-            product_root.mkdir()
-            (product_root / "index.json").write_text(json.dumps({
+            (local / "persona-registry-index.json").write_text(json.dumps({
                 "products": [{
                     "canonical_name": "Example Person",
                     "registration_category": "技术工程",
@@ -71,6 +69,8 @@ class SyncSkillsRegistryRoutingTests(unittest.TestCase):
             readme = (mirror_root / "README.md").read_text(encoding="utf-8")
             self.assertIn("不得在不同身份下重复登记", readme)
             self.assertIn("Example Person", readme)
+            self.assertIn("persona-distiller/技术工程/", readme)
+            self.assertNotIn("persona-distiller/产物登记/", readme)
 
 
 if __name__ == "__main__":

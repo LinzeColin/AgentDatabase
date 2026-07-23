@@ -34,5 +34,7 @@ imported into `~/.codex/sessions` on this machine.
 “人物蒸馏 Skill”登记在
 [`CodexSkills/registry/codex/persona-distiller/`](CodexSkills/registry/codex/persona-distiller/)。
 它生成的每个人物产物必须且只能登记到对应的一个身份目录；多重身份只进入
-`多重身份/`，不得在不同身份下重复登记。完整发布 ZIP、canonical 登记与生成索引保存在
-[`产物登记/`](CodexSkills/registry/codex/persona-distiller/产物登记/)。
+`多重身份/`，不得在不同身份下重复登记。`技术工程/`、`企业领导/`、`金融投资/`、
+`软开设计/`、`思想教育/`、`政治法律/`、`多重身份/` 直接位于 Skill 根目录；
+完整发布 ZIP 与 canonical 登记保存在相应目录，生成索引为
+[`persona-registry-index.json`](CodexSkills/registry/codex/persona-distiller/persona-registry-index.json)。

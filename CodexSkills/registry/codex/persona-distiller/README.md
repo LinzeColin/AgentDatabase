@@ -74,8 +74,8 @@ python3 scripts/validate_persona_registry.py
 - 单身份产物进入对应目录；多重身份只进入 `多重身份/`，不得复制到组成身份目录。
 - 同一人物的新模型版本追加到原人物目录，不新建第二条人物登记。
 - 完整、通过发布门的目标人物 Skill ZIP 保存在
-  `产物登记/<分类>/<人物>/versions/<model_version>/`。
-- `产物登记/index.json` 是自动生成的检索视图，不是第二份登记。
+  `<分类>/<人物>/versions/<model_version>/`；七个分类目录直接位于本 Skill 根目录。
+- 根级 `persona-registry-index.json` 是自动生成的检索视图，不是第二份登记。
 - 重分类必须移动原登记；跨目录重复 `subject_uid`、人物规范键或产物 hash
   都是硬错误。
 - 公开仓不得登记原始私域正文、Holdout、凭据或未脱敏身份信息。

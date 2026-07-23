@@ -58,7 +58,8 @@ def main() -> int:
         'scripts/package_target.py', 'scripts/register_persona.py', 'scripts/validate_persona_registry.py',
         'scripts/persona_registry.py', 'scripts/build_manifest.py', 'scripts/install.py',
         'scripts/review_harness.py', 'schemas/persona-registration.schema.json',
-        '产物登记/index.json', 'audit/10-round-improvement.md', 'audit/2x6-review.md',
+        'persona-registry-index.json', 'references/persona-product-registration.md',
+        'audit/10-round-improvement.md', 'audit/2x6-review.md',
     ]
     for rel in required:
         if not (root / rel).is_file():

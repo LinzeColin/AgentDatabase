@@ -30,7 +30,8 @@ curl -s https://raw.githubusercontent.com/LinzeColin/AgentDatabase/main/CodexSki
 ## 人物蒸馏产物登记
 
 [`persona-distiller`](registry/codex/persona-distiller/SKILL.md) 生成的每个人物产物必须且只能登记在对应的一个身份目录中；多重身份只进入 `多重身份/`，不得在不同身份下重复登记。
-完整发布 ZIP、canonical 登记和机器索引位于 [`registry/codex/persona-distiller/产物登记/`](registry/codex/persona-distiller/产物登记/README.md)。
+完整发布 ZIP、canonical 登记和机器索引位于 [`registry/codex/persona-distiller/`](registry/codex/persona-distiller/README.md) 根级七个身份目录；规则见 [`references/persona-product-registration.md`](registry/codex/persona-distiller/references/persona-product-registration.md)。
+目录：[`技术工程/`](registry/codex/persona-distiller/技术工程/)、[`企业领导/`](registry/codex/persona-distiller/企业领导/)、[`金融投资/`](registry/codex/persona-distiller/金融投资/)、[`软开设计/`](registry/codex/persona-distiller/软开设计/)、[`思想教育/`](registry/codex/persona-distiller/思想教育/)、[`政治法律/`](registry/codex/persona-distiller/政治法律/)、[`多重身份/`](registry/codex/persona-distiller/多重身份/)。
 
 当前登记：**0 个人物**；首次产物登记后由本脚本自动生成清单。
 

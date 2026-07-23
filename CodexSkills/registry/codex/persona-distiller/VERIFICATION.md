@@ -10,7 +10,7 @@ Date: 2026-07-23
 
 | Gate | Result |
 |---|---:|
-| Offline unit/integration/concurrency tests | 41 / 41 passed |
+| Offline unit/integration/concurrency tests | 43 / 43 passed |
 | Standalone suite runtime | 10.898 seconds |
 | Final checksum-aware self-check runtime | 11.190 seconds |
 | Reviewer Round 1 | 6 roles, 24 / 24 checks passed |

@@ -297,8 +297,7 @@ def persona_product_index(mirror_root):
     path = os.path.join(
         mirror_root,
         REGISTRY_SKILL_ROUTES[("codex", "persona-distiller")],
-        "产物登记",
-        "index.json",
+        "persona-registry-index.json",
     )
     if not os.path.isfile(path):
         return []
@@ -386,7 +385,16 @@ def build_index(mirror_root):
         "[`persona-distiller`](registry/codex/persona-distiller/SKILL.md) 生成的每个人物产物"
         "必须且只能登记在对应的一个身份目录中；多重身份只进入 `多重身份/`，不得在不同身份下重复登记。",
         "完整发布 ZIP、canonical 登记和机器索引位于"
-        " [`registry/codex/persona-distiller/产物登记/`](registry/codex/persona-distiller/产物登记/README.md)。",
+        " [`registry/codex/persona-distiller/`](registry/codex/persona-distiller/README.md) 根级七个身份目录；"
+        "规则见 [`references/persona-product-registration.md`]"
+        "(registry/codex/persona-distiller/references/persona-product-registration.md)。",
+        "目录：[`技术工程/`](registry/codex/persona-distiller/技术工程/)、"
+        "[`企业领导/`](registry/codex/persona-distiller/企业领导/)、"
+        "[`金融投资/`](registry/codex/persona-distiller/金融投资/)、"
+        "[`软开设计/`](registry/codex/persona-distiller/软开设计/)、"
+        "[`思想教育/`](registry/codex/persona-distiller/思想教育/)、"
+        "[`政治法律/`](registry/codex/persona-distiller/政治法律/)、"
+        "[`多重身份/`](registry/codex/persona-distiller/多重身份/)。",
         "",
     ]
     products = persona_product_index(mirror_root)
@@ -397,7 +405,7 @@ def build_index(mirror_root):
             "| 人物 | 唯一分类 | 版本 | 完整 ZIP |",
             "|---|---|---|---|",
         ]
-        product_root = "registry/codex/persona-distiller/产物登记"
+        product_root = "registry/codex/persona-distiller"
         for product in products:
             name = str(product.get("canonical_name", "")).replace("|", "\\|")
             category = str(product.get("registration_category", "")).replace("|", "\\|")

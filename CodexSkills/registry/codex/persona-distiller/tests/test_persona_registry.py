@@ -84,6 +84,22 @@ def create_product_zip(
 
 
 class PersonaRegistryTests(unittest.TestCase):
+    def test_skill_root_layout_allows_non_registry_directories(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            initialize_registry(root)
+            (root / 'scripts').mkdir()
+            self.assertTrue(validate_registry(root)['passed'])
+
+    def test_legacy_nested_registry_directory_is_rejected(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            initialize_registry(root)
+            (root / '产物登记').mkdir()
+            result = validate_registry(root)
+            self.assertFalse(result['passed'])
+            self.assertTrue(any('legacy nested registry directory' in error for error in result['errors']))
+
     def test_single_identity_routes_to_exact_category_and_preserves_full_zip(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

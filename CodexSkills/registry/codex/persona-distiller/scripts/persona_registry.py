@@ -14,6 +14,8 @@ from typing import Any
 from common import SECRET_PATTERNS, atomic_write_json, sha256_file
 
 REGISTRY_SCHEMA_VERSION = '1.0'
+REGISTRY_INDEX_NAME = 'persona-registry-index.json'
+LEGACY_REGISTRY_DIR = '产物登记'
 PRIVATE_ORIGINS = {'private', 'self'}
 SAFE_COMPONENT = re.compile(r'^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$')
 SAFE_SLUG = re.compile(r'^[a-z0-9]+(?:-[a-z0-9]+)*$')
@@ -36,7 +38,11 @@ CATEGORY_BY_IDENTITY = {item['identity_family_id']: item for item in CATEGORIES}
 
 
 def default_registry_root() -> Path:
-    return Path(__file__).resolve().parents[1] / '产物登记'
+    return Path(__file__).resolve().parents[1]
+
+
+def registry_index_path(registry_root: Path) -> Path:
+    return registry_root / REGISTRY_INDEX_NAME
 
 
 def canonical_key(name: str, subject_origin: str) -> str:
@@ -242,14 +248,16 @@ def load_records(registry_root: Path) -> list[tuple[Path, dict[str, Any]]]:
     records: list[tuple[Path, dict[str, Any]]] = []
     if not registry_root.is_dir():
         return records
-    for path in sorted(registry_root.glob('*/*/registration.json')):
-        try:
-            value = json.loads(path.read_text(encoding='utf-8'))
-        except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
-            raise ValueError(f'invalid registration JSON {path}: {exc}') from exc
-        if not isinstance(value, dict):
-            raise ValueError(f'registration must be a JSON object: {path}')
-        records.append((path, value))
+    for category in CATEGORIES:
+        category_root = registry_root / category['folder']
+        for path in sorted(category_root.glob('*/registration.json')):
+            try:
+                value = json.loads(path.read_text(encoding='utf-8'))
+            except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
+                raise ValueError(f'invalid registration JSON {path}: {exc}') from exc
+            if not isinstance(value, dict):
+                raise ValueError(f'registration must be a JSON object: {path}')
+            records.append((path, value))
     return records
 
 
@@ -288,7 +296,7 @@ def build_index(registry_root: Path, records: list[tuple[Path, dict[str, Any]]] 
 
 def write_index(registry_root: Path, records: list[tuple[Path, dict[str, Any]]] | None = None) -> dict[str, Any]:
     index = build_index(registry_root, records)
-    atomic_write_json(registry_root / 'index.json', index)
+    atomic_write_json(registry_index_path(registry_root), index)
     return index
 
 
@@ -407,8 +415,12 @@ def validate_registry(registry_root: Path | None = None) -> dict[str, Any]:
     errors: list[str] = []
     expected_folders = set(CATEGORY_BY_FOLDER)
     actual_folders = {path.name for path in registry_root.iterdir() if path.is_dir()} if registry_root.is_dir() else set()
-    if actual_folders != expected_folders:
-        errors.append(f'category folders mismatch: expected={sorted(expected_folders)} actual={sorted(actual_folders)}')
+    missing_folders = expected_folders - actual_folders
+    if missing_folders:
+        errors.append(f'missing category folders: {sorted(missing_folders)}')
+    legacy_root = registry_root / LEGACY_REGISTRY_DIR
+    if legacy_root.exists():
+        errors.append(f'legacy nested registry directory is forbidden: {legacy_root}')
     for category in CATEGORIES:
         path = registry_root / category['folder'] / '_category.json'
         try:
@@ -527,7 +539,7 @@ def validate_registry(registry_root: Path | None = None) -> dict[str, Any]:
             except (OSError, ValueError, zipfile.BadZipFile) as exc:
                 errors.append(f'{path}: invalid artifact {relative}: {exc}')
     expected_index = build_index(registry_root, records)
-    index_path = registry_root / 'index.json'
+    index_path = registry_index_path(registry_root)
     try:
         actual_index = json.loads(index_path.read_text(encoding='utf-8'))
         if actual_index != expected_index:

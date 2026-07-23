@@ -22,6 +22,6 @@ The current Skill mirror migration must update `sync_skills.py` so the four sour
 
 `codex/persona-distiller` is routed directly to
 `registry/codex/persona-distiller`. Its generated target-person ZIPs use the
-seven folders under `产物登记/`; each subject has one canonical registration
+seven identity folders directly under the Skill root; each subject has one canonical registration
 across all categories, and the `CodexSkills/README.md` product list is generated
-from that registry.
+from `persona-registry-index.json`.

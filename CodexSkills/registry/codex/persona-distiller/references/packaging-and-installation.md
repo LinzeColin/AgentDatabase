@@ -11,4 +11,5 @@ A target ZIP contains exactly one top-level directory whose name equals `SKILL.m
 Release sequence: strict quality gate → secret scan → deterministic package →
 inspect ZIP paths → fresh extract → checksum verify → temp install → invoke
 menu/router/counter smoke test → delete temp install → register the full ZIP
-exactly once under `产物登记/` → validate the complete registry → publish checksum.
+exactly once under one of the seven root-level identity directories → validate
+the complete registry → publish checksum.

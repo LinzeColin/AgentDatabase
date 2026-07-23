@@ -81,7 +81,8 @@ Builder default install root: `~/.codex/skills/persona-distiller`. Do not keep a
 second installation under `~/.agents/skills/persona-distiller`.
 
 Released target-person ZIPs must be registered exactly once under
-`产物登记/<技术工程|企业领导|金融投资|软开设计|思想教育|政治法律|多重身份>/`.
+Skill 根级
+`<技术工程|企业领导|金融投资|软开设计|思想教育|政治法律|多重身份>/`.
 Multi-identity targets use only `多重身份`; later model versions remain under
 the same subject registration.
 
@@ -91,7 +92,7 @@ Generated target-person ZIPs also have one top-level directory, checksums, insta
 
 ## 7. Verification completed
 
-- 41 offline unit/integration/concurrency tests passed; final checksum-aware self-check also passed.
+- 43 offline unit/integration/concurrency tests passed; final checksum-aware self-check also passed.
 - Seven identity registration folders, cross-folder uniqueness, full target ZIP retention, generated index consistency, idempotence, and public-registry privacy refusal are executable gates.
 - Two reviewer rounds passed: six isolated roles; Round 1 has 24 checks, Round 2 has 39 adversarial checks.
 - First, failed, 999th, explicit override, recovery, reconciliation, concurrent allocation, and artifact hashing tested.

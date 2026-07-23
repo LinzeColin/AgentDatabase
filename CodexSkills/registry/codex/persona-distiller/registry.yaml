@@ -16,12 +16,12 @@ capability_contract:
     - target_name
     - identity
   primary_output: 完整、校验通过的目标人物 Agent Skill ZIP
-  persistent_output: 产物登记/
+  persistent_output: 技术工程/、企业领导/、金融投资/、软开设计/、思想教育/、政治法律/、多重身份/
   uniqueness: 同一人物只允许一个 canonical 登记；多重身份只进入多重身份目录。
   public_registry_policy: 拒绝 private/self 产物、原始材料、Holdout、私密来源正文和疑似秘密。
 verification:
-  offline_tests: 41
-  offline_tests_passed: 41
+  offline_tests: 43
+  offline_tests_passed: 43
   immutable_checksum_entries: 204
   persona_registry_validator: scripts/validate_persona_registry.py
   repository_secret_gate: CodexSkills/sync_skills.py

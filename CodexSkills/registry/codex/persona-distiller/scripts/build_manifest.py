@@ -13,7 +13,10 @@ EXCLUDED_DIRS = {
     '.git', '.mypy_cache', '.pytest_cache', '.ruff_cache', '__pycache__',
     '_build', 'build', 'dist', 'workspaces',
 }
-MUTABLE_REGISTRY_STATIC_FILES = {'README.md', '_category.json'}
+CATEGORY_FOLDERS = {
+    '技术工程', '企业领导', '金融投资', '软开设计', '思想教育', '政治法律', '多重身份',
+}
+REGISTRY_INDEX_NAME = 'persona-registry-index.json'
 
 
 def included(path: Path) -> bool:
@@ -22,10 +25,12 @@ def included(path: Path) -> bool:
         return False
     if path.suffix in {'.pyc', '.pyo', '.zip'}:
         return False
-    if relative.as_posix() in {'PACKAGE_MANIFEST.json', 'checksums.sha256'}:
+    if relative.as_posix() in {
+        'PACKAGE_MANIFEST.json', 'checksums.sha256', REGISTRY_INDEX_NAME, 'registry.yaml',
+    }:
         return False
-    if relative.parts and relative.parts[0] == '产物登记':
-        return path.name in MUTABLE_REGISTRY_STATIC_FILES
+    if relative.parts and relative.parts[0] in CATEGORY_FOLDERS:
+        return len(relative.parts) == 2 and path.name == '_category.json'
     return True
 
 
@@ -48,9 +53,9 @@ def main() -> int:
     }
     manifest['mutable_paths'] = {
         'excluded_from_release_checksums': [
-            '产物登记/index.json',
-            '产物登记/<分类>/<人物>/registration.json',
-            '产物登记/<分类>/<人物>/versions/<model_version>/*.zip',
+            REGISTRY_INDEX_NAME,
+            '<分类>/<人物>/registration.json',
+            '<分类>/<人物>/versions/<model_version>/*.zip',
         ],
         'validation': 'python3 scripts/validate_persona_registry.py',
     }
