@@ -55,15 +55,63 @@ class RuntimeBootstrapTests(unittest.TestCase):
         self.assertTrue(interface["trust_tuple_repo_external_only"])
         self.assertFalse(interface["canonical_publication_permitted"])
         self.assertEqual(interface["candidate_bundle_digest"], CANDIDATE_DIGEST)
-        self.assertFalse(interface["consumer_first_gate_satisfied"])
-        self.assertTrue(
+        self.assertTrue(interface["consumer_first_gate_satisfied"])
+        self.assertFalse(
             interface["consumer_first_trust_tuple_drift_detected"]
         )
         self.assertEqual(
-            interface["consumer_first_observed_failure_code"],
-            "skill_run_consumer_bootstrap_failed:"
-            "TRUST_SCHEMA_PATH_OWNER_MISMATCH",
+            interface["consumer_first_verified_git_object_id"],
+            "sha1:2177986e897fdc50a7273f099a1305b21de2096b",
         )
+        self.assertEqual(
+            interface["consumer_first_observed_candidate_git_object_id"],
+            CANDIDATE_GIT_OBJECT,
+        )
+        self.assertEqual(
+            interface["consumer_first_observed_bundle_digest"],
+            CANDIDATE_DIGEST,
+        )
+        self.assertEqual(
+            interface["consumer_first_observed_status"],
+            "DRAFT_NON_ACTIVE_CONSUMER_READY",
+        )
+        self.assertFalse(
+            interface["consumer_first_canonical_publication_permitted"]
+        )
+        self.assertFalse(
+            interface["consumer_first_repository_shards_permitted"]
+        )
+        self.assertFalse(interface["au_040_manifest_contract_resolved"])
+        self.assertFalse(
+            interface["au_040_consumer_manifest_path_contract_present"]
+        )
+        self.assertEqual(
+            interface["au_040_authority_ruling_status"],
+            "READ_ONLY_REVISION_6_NOT_REPOSITORY_BOUND",
+        )
+        self.assertFalse(
+            interface["au_040_transport_contract"]["repository_bound"]
+        )
+        self.assertEqual(
+            interface["au_040_transport_contract"][
+                "daily_manifest_schema_id"
+            ],
+            "urn:linzecolin:agentdatabase:skillops:"
+            "schema:daily-run-shard-manifest:v1",
+        )
+        self.assertEqual(
+            interface["au_040_transport_contract"][
+                "transaction_manifest_v1_role"
+            ],
+            "TRANSACTION_SETTLEMENT_ONLY",
+        )
+        self.assertEqual(
+            interface["next_phase"],
+            "AUTO_AU040_TRANSPORT_SCHEMA_DRAFT",
+        )
+        self.assertTrue(interface["schedule_authority_conflict_detected"])
+        self.assertFalse(interface["schedule_authority_resolved"])
+        self.assertFalse(interface["schedule_complete"])
         self.assertTrue(
             interface["notification_preflight_query_endpoint_implemented"]
         )
@@ -79,6 +127,14 @@ class RuntimeBootstrapTests(unittest.TestCase):
         )
         self.assertFalse(interface["external_gmail_ready_gate_satisfied"])
         self.assertFalse(interface["m0c_b_permitted"])
+        with tempfile.TemporaryDirectory() as temporary:
+            tampered = Path(temporary) / "skill_run_consumer.json"
+            tampered.write_bytes(b"{}\n")
+            with self.assertRaisesRegex(
+                ValueError,
+                "AUTO_CONSUMER_INTERFACE_RAW_DIGEST_MISMATCH",
+            ):
+                module._consumer_first_evidence(tampered)
 
     def test_bootstrap_failure_precedes_state_root_creation(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:

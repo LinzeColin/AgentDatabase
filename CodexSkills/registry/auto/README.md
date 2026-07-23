@@ -74,8 +74,12 @@ resolve schemas over the network, or install dependencies at runtime.
 - `runtime/retention.py` keeps persistent raw disabled by default and can act
   only on validated, owned managed segments. UTC wall-clock and active-tree
   retention claims are explicit.
-- `runtime/schedule.py` freezes Australia/Sydney 04:15, Sunday forced full,
-  DST-safe UTC conversion, manual parity, and no late-start rejection.
+- `runtime/schedule.py` currently implements the frozen Australia/Sydney
+  04:15 contract, Sunday forced full, DST-safe UTC conversion, manual parity,
+  and no late-start rejection. A later Auto goal says 05:30 but does not
+  explicitly supersede the earlier Owner-locked 04:15 value, so schedule
+  authority remains unresolved and this implementation is not claimed as the
+  final schedule.
 
 Run the exact candidate preflight from the repository root with the explicitly
 provisioned interpreter:
@@ -102,17 +106,22 @@ interface SHA-256, canonical interface path, and
 `DRAFT_NON_ACTIVE_CONTROL` mode. Repository self-reporting is never sufficient.
 
 The two-stage production CLI is intentionally not demonstrated with a live
-instance here. Registry relocation invalidated the Mechanism-owned
-consumer-first trust tuple: its interface still pins candidate object
-`4b1e1a318c8f9e1014839a8a3a46e057679c4b6b` and bundle digest `fd1df66e...`,
-while the required candidate is `899a4374...` / `2704ed79...`. The direct
-consumer validator therefore fails closed with
-`TRUST_SCHEMA_PATH_OWNER_MISMATCH`. Mechanism must independently repin that
-interface before the consumer-first gate can be true. A later independent
-run must also prove the repo-external state root, recipient mapping, Gmail
-OAuth scopes, authenticated-recipient binding, and query endpoint readiness.
-Only a later M0c-B run may create an intent, send the notification, create a
-settlement, or invoke `publish-settlement`.
+instance here. The Mechanism-owned consumer-first interface was independently
+repinned and GitHub-read back at object
+`2177986e897fdc50a7273f099a1305b21de2096b`. Its raw SHA-256 is
+`750a374f5eb20497baab79305dc31248a7495cf3c7dee827cad19d13e08e2082`,
+and it now binds the relocated candidate
+`899a4374...` / `2704ed79...`. The Auto runtime-interface builder reads and
+verifies those exact bytes and tuple before it may report
+`consumer_first_gate_satisfied=true`.
+
+That gate does not permit canonical publication. The consumer still declares
+`canonical_publication_permitted=false` and
+`repository_shards_permitted=false`. A later independent run must also prove
+the repo-external state root, recipient mapping, Gmail OAuth scopes,
+authenticated-recipient binding, and query endpoint readiness. Only a later
+M0c-B run may create an intent, send the notification, create a settlement,
+or invoke `publish-settlement`.
 
 ## Production Gmail private-path contract
 
@@ -165,12 +174,32 @@ manual and scheduled runs use the same path.
 `DRAFT_NON_ACTIVE` code must not create or update `CodexSkills/VERSION`, claim
 ACTIVE state, publish canonical data, send a production notification without
 the coordinated M0c intent, write a production watermark, or update the
-automation. The Mechanism-owned consumer-first gate is not complete. AU-040 is
-also not complete: `skills_runs/example.json` is only prior scaffolding, never
-the final run-layout contract. The immutable Task Pack requires bounded daily
-JSONL shards and a manifest under
-`OpenAIDatabase/data/run_logs/skills_runs/YYYY/MM/DD/part-NNNN.jsonl`.
-The external Gmail readiness gate also remains false until the Owner injects
-the repo-external state root and the controlled preflight succeeds.
+automation. The Mechanism-owned consumer-first trust tuple is complete, but
+its preactivation publication gates remain closed.
+
+AU-040 is not complete: `skills_runs/example.json` is only prior scaffolding,
+never the final run-layout contract. The immutable Task Packs require bounded
+daily JSONL shards and a manifest under `skills_runs`, while the current
+consumer allows only `YYYY/MM/DD/part-NNNN.jsonl` plus the root README and
+would reject a manifest path.
+
+Mechanism Authority Audit Revision 6 has now frozen the direction without
+modifying the repository: each day uses immutable `part-NNNN.jsonl` shards
+plus append-only `manifest-NNNN.json` revisions under the same Sydney date.
+The daily manifest has its own proposed
+`daily-run-shard-manifest:v1` schema and is not the transaction-level
+`publication-manifest:v1`. JSONL publication requires an explicit
+per-line-serialization discriminator, bounded streaming validation, an exact
+affected-path retention receipt, and retention/index readiness. Because the
+ruling has no repository SHA or machine-interface digest yet, the current
+machine interface records it as read-only and not repository-bound; AU-040
+remains false.
+
+The next independent Auto phase may draft the Auto-owned transport schemas
+and interfaces only. Mechanism must then build a new candidate and update its
+consumer before Auto can integrate the exact bundle. The schedule conflict
+remains unresolved. The external Gmail readiness gate remains false until the
+Owner injects the repo-external state root and the controlled preflight
+succeeds.
 Never invoke the verifier during development; the Owner selects a fresh
 verifier only after both planes finish.

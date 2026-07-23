@@ -15,6 +15,77 @@ OUTPUT = AUTO_DIR / "runtime-interface.json"
 CANDIDATE_GIT_OBJECT = "sha1:899a4374bc02f5e18444fea7404864df7b118adf"
 CANDIDATE_BUNDLE_DIGEST = "2704ed797c843f969965db600747abcdcd217550522e6479aab6817ef5a86ef5"
 CANDIDATE_MANIFEST_PATH = "CodexSkills/governance/bundles/schema-bundle-manifest.v1.json"
+CONSUMER_FIRST_EVIDENCE_GIT_OBJECT = (
+    "sha1:2177986e897fdc50a7273f099a1305b21de2096b"
+)
+CONSUMER_INTERFACE_PATH = (
+    REPO_ROOT
+    / "OpenAIDatabase"
+    / "config"
+    / "evaluation"
+    / "skill_run_consumer.json"
+)
+CONSUMER_INTERFACE_REPO_PATH = (
+    "OpenAIDatabase/config/evaluation/skill_run_consumer.json"
+)
+EXPECTED_CONSUMER_INTERFACE_RAW_SHA256 = (
+    "750a374f5eb20497baab79305dc31248a"
+    "7495cf3c7dee827cad19d13e08e2082"
+)
+EXPECTED_CONSUMER_REQUIRED_GATES = [
+    "ACTIVE_EXTERNAL_TRUST",
+    "AU_040_DAILY_JSONL_SHARD_MANIFEST",
+    "BOUND_REFERENCE_RESOLVER",
+]
+
+
+def _strict_object(pairs):
+    value = {}
+    for key, item in pairs:
+        if key in value:
+            raise ValueError("AUTO_CONSUMER_INTERFACE_DUPLICATE_KEY")
+        value[key] = item
+    return value
+
+
+def _consumer_first_evidence(path=CONSUMER_INTERFACE_PATH):
+    raw = path.read_bytes()
+    observed_raw_digest = hashlib.sha256(raw).hexdigest()
+    if observed_raw_digest != EXPECTED_CONSUMER_INTERFACE_RAW_SHA256:
+        raise ValueError("AUTO_CONSUMER_INTERFACE_RAW_DIGEST_MISMATCH")
+    try:
+        interface = json.loads(
+            raw.decode("utf-8"),
+            object_pairs_hook=_strict_object,
+        )
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise ValueError("AUTO_CONSUMER_INTERFACE_JSON_INVALID") from exc
+    expected_trust = {
+        "canonical_manifest_path": CANDIDATE_MANIFEST_PATH,
+        "expected_bundle_digest": CANDIDATE_BUNDLE_DIGEST,
+        "mode": "CANDIDATE",
+        "verified_git_object_id": CANDIDATE_GIT_OBJECT,
+    }
+    expected_gate = {
+        "canonical_publication_permitted": False,
+        "repository_shards_permitted": False,
+        "required_before_enable": EXPECTED_CONSUMER_REQUIRED_GATES,
+    }
+    if (
+        interface.get("status") != "DRAFT_NON_ACTIVE_CONSUMER_READY"
+        or interface.get("consumer_owner_plane") != "MECHANISM"
+        or interface.get("candidate_trust") != expected_trust
+        or interface.get("publication_gate") != expected_gate
+    ):
+        raise ValueError("AUTO_CONSUMER_INTERFACE_CONTRACT_MISMATCH")
+    return {
+        "canonical_publication_permitted": False,
+        "expected_bundle_digest": CANDIDATE_BUNDLE_DIGEST,
+        "required_before_enable": list(EXPECTED_CONSUMER_REQUIRED_GATES),
+        "repository_shards_permitted": False,
+        "status": "DRAFT_NON_ACTIVE_CONSUMER_READY",
+        "verified_git_object_id": CANDIDATE_GIT_OBJECT,
+    }
 
 
 def _files():
@@ -33,6 +104,7 @@ def _files():
 
 
 def build():
+    consumer = _consumer_first_evidence()
     artifacts = []
     for path in _files():
         relative = path.relative_to(REPO_ROOT).as_posix()
@@ -67,45 +139,72 @@ def build():
         ),
         "activation_instance_created": False,
         "activation_settlement_recomputed_before_publish": True,
+        "au_040_authority_ruling_status": (
+            "READ_ONLY_REVISION_6_NOT_REPOSITORY_BOUND"
+        ),
+        "au_040_consumer_manifest_path_contract_present": False,
         "au_040_daily_jsonl_shard_complete": False,
+        "au_040_manifest_contract_resolved": False,
+        "au_040_transport_contract": {
+            "daily_manifest_path_pattern": (
+                "OpenAIDatabase/data/run_logs/skills_runs/"
+                "YYYY/MM/DD/manifest-NNNN.json"
+            ),
+            "daily_manifest_schema_id": (
+                "urn:linzecolin:agentdatabase:skillops:"
+                "schema:daily-run-shard-manifest:v1"
+            ),
+            "manifest_entry_numbers_contiguous": True,
+            "part_numbers_reused": False,
+            "physical_part_gaps_after_prune_permitted": True,
+            "publisher_serialization_discriminator_required": True,
+            "repository_bound": False,
+            "retention_exact_affected_records_required": True,
+            "retention_index_readiness_required": True,
+            "transaction_manifest_v1_role": "TRANSACTION_SETTLEMENT_ONLY",
+        },
         "candidate_bundle_digest": CANDIDATE_BUNDLE_DIGEST,
         "candidate_git_object_id": CANDIDATE_GIT_OBJECT,
         "candidate_manifest_path": CANDIDATE_MANIFEST_PATH,
         "canonical_publication_permitted": False,
         "capability_gate_precedes_state_write": True,
-        "consumer_first_gate_satisfied": False,
-        "consumer_first_interface_path": (
-            "OpenAIDatabase/config/evaluation/"
-            "skill_run_consumer.json"
-        ),
+        "consumer_first_canonical_publication_permitted": consumer[
+            "canonical_publication_permitted"
+        ],
+        "consumer_first_gate_satisfied": True,
+        "consumer_first_interface_path": CONSUMER_INTERFACE_REPO_PATH,
         "consumer_first_interface_raw_sha256": (
-            "94a5186aeaad6947eec19ef67539e3f03"
-            "c0db06d47292d58088fdc4ee8bb53c6"
+            EXPECTED_CONSUMER_INTERFACE_RAW_SHA256
         ),
-        "consumer_first_observed_bundle_digest": (
-            "fd1df66e240695bd376803423bd09f9f"
-            "341f7542f74a6ed92b0f79b0af4dc5e1"
-        ),
-        "consumer_first_observed_candidate_git_object_id": (
-            "sha1:4b1e1a318c8f9e1014839a8a3a46e057679c4b6b"
-        ),
-        "consumer_first_observed_failure_code": (
-            "skill_run_consumer_bootstrap_failed:"
-            "TRUST_SCHEMA_PATH_OWNER_MISMATCH"
-        ),
+        "consumer_first_observed_bundle_digest": consumer[
+            "expected_bundle_digest"
+        ],
+        "consumer_first_observed_candidate_git_object_id": consumer[
+            "verified_git_object_id"
+        ],
+        "consumer_first_observed_status": consumer["status"],
         "consumer_first_owner_plane": "MECHANISM",
+        "consumer_first_repository_shards_permitted": consumer[
+            "repository_shards_permitted"
+        ],
+        "consumer_first_required_before_enable": consumer[
+            "required_before_enable"
+        ],
         "consumer_first_required_bundle_digest": CANDIDATE_BUNDLE_DIGEST,
         "consumer_first_required_candidate_git_object_id": (
             CANDIDATE_GIT_OBJECT
         ),
-        "consumer_first_trust_tuple_drift_detected": True,
+        "consumer_first_trust_tuple_drift_detected": False,
+        "consumer_first_verified_git_object_id": (
+            CONSUMER_FIRST_EVIDENCE_GIT_OBJECT
+        ),
         "external_gmail_ready_gate_satisfied": False,
         "fault_test_rounds_required": 2,
         "manual_and_scheduled_same_orchestrator": True,
         "module_artifacts": artifacts,
         "module_count": len(artifacts),
         "m0c_b_permitted": False,
-        "next_phase": "MECHANISM_REPIN_CONSUMER_TRUST_TUPLE",
+        "next_phase": "AUTO_AU040_TRANSPORT_SCHEMA_DRAFT",
         "notification_actual_recipient_repo_external": True,
         "notification_credentials_repo_external": True,
         "notification_external_path_contract": {
@@ -151,6 +250,9 @@ def build():
             "sunday_forced_full": True,
             "timezone": "Australia/Sydney",
         },
+        "schedule_authority_conflict_detected": True,
+        "schedule_authority_resolved": False,
+        "schedule_complete": False,
         "shared_bundle_schema_count": 29,
         "shared_policy_count": 5,
         "state_root_repo_external": True,
