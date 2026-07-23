@@ -8,10 +8,11 @@
 - 数据状态：`延迟`
 - 数据覆盖至：`2026-07-10T16:39:25Z`
 - 本次核验时间：`2026-07-23T00:00:00Z`
-- 人工对话重复组：`2466`
+- 人工对话重复组：`2309`
 - Automation 重复组：`1412`（单独统计，不进入个人画像）
-- 三类数量：问题与纠正 `18`；规则与偏好 `443`；任务与主题 `2005`
+- 三类数量：问题与纠正 `18`；规则与偏好 `399`；任务与主题 `1892`
 - 模型/API 调用：`0`；模型 Token：`0`
+- 生产稳定性：`候选通过 1/2`
 
 ## 问题与纠正
 
@@ -34,35 +35,35 @@
 
 | 排名 | 重复内容 | 次数 | Session | 最近出现 | 趋势 | 追溯 |
 |---:|---|---:|---:|---|---|---|
-| 1 | 验证命令 | 97 | 76 | 2026-07-10T16:28:16Z | rising | [查看原始记录](../data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.2b8ecc60faa9.part-0001.jsonl#L11457) |
-| 2 | 默认推荐项 | 93 | 76 | 2026-07-10T16:28:16Z | rising | [查看原始记录](../data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.2b8ecc60faa9.part-0001.jsonl#L11457) |
-| 3 | 用实际文件、测试、配置验证。 | 93 | 76 | 2026-07-10T16:28:16Z | rising | [查看原始记录](../data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.2b8ecc60faa9.part-0001.jsonl#L11457) |
-| 4 | 涉及当前事实、API、版本、价格、产品行为、政策、法律/监管、可能变化的信息:优先查官方/一手来源, | 93 | 76 | 2026-07-10T16:28:16Z | rising | [查看原始记录](../data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.2b8ecc60faa9.part-0001.jsonl#L11457) |
-| 5 | 每个有意义的 run 结束时输出: | 93 | 76 | 2026-07-10T16:28:16Z | rising | [查看原始记录](../data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.2b8ecc60faa9.part-0001.jsonl#L11457) |
-| 6 | 默认低上下文、低成本执行。 | 93 | 76 | 2026-07-10T16:28:16Z | rising | [查看原始记录](../data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.2b8ecc60faa9.part-0001.jsonl#L11457) |
-| 7 | 默认流程:证据收集 → 逆向产品/研究摘要 → 结构化确认 → PRD/MVP → Tech Spec/Task Pack → 每轮只执行一个 Run Contract → 最终交付。 | 93 | 76 | 2026-07-10T16:28:16Z | rising | [查看原始记录](../data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.2b8ecc60faa9.part-0001.jsonl#L11457) |
-| 8 | 明确假设、验收标准、停止条件 | 93 | 76 | 2026-07-10T16:28:16Z | rising | [查看原始记录](../data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.2b8ecc60faa9.part-0001.jsonl#L11457) |
-| 9 | 默认顺序: | 93 | 76 | 2026-07-10T16:28:16Z | rising | [查看原始记录](../data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.2b8ecc60faa9.part-0001.jsonl#L11457) |
-| 10 | API/服务默认考虑:一致响应结构、schema validation、参数化查询、authn/authz、必要 rate limit、用户安全错误信息与服务端详细日志。 | 93 | 76 | 2026-07-10T16:28:16Z | rising | [查看原始记录](../data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.2b8ecc60faa9.part-0001.jsonl#L11457) |
-| 11 | 项目工具优先项目本地配置。 | 93 | 76 | 2026-07-10T16:28:16Z | rising | [查看原始记录](../data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.2b8ecc60faa9.part-0001.jsonl#L11457) |
-| 12 | 避免长日志; | 93 | 76 | 2026-07-10T16:28:16Z | rising | [查看原始记录](../data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.2b8ecc60faa9.part-0001.jsonl#L11457) |
+| 1 | Do not substitute a narrower, | 299 | 8 | 2026-07-10T16:28:16Z | rising | [查看原始记录](../data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.2b8ecc60faa9.part-0001.jsonl#L15351) |
+| 2 | Do not call update\_goal with status "blocked" the first time a blocker appears. | 299 | 8 | 2026-07-10T16:28:16Z | rising | [查看原始记录](../data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.2b8ecc60faa9.part-0001.jsonl#L15351) |
+| 3 | and do not redefine success around a smaller or easier task. | 299 | 8 | 2026-07-10T16:28:16Z | rising | [查看原始记录](../data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.2b8ecc60faa9.part-0001.jsonl#L15351) |
+| 4 | command output, | 299 | 8 | 2026-07-10T16:28:16Z | rising | [查看原始记录](../data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.2b8ecc60faa9.part-0001.jsonl#L15351) |
+| 5 | and do not treat a plan update as a substitute for doing the work. | 299 | 8 | 2026-07-10T16:28:16Z | rising | [查看原始记录](../data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.2b8ecc60faa9.part-0001.jsonl#L15351) |
+| 6 | Do not call update\_goal unless the goal is complete or the strict blocked audit above is satisfied. | 299 | 8 | 2026-07-10T16:28:16Z | rising | [查看原始记录](../data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.2b8ecc60faa9.part-0001.jsonl#L15351) |
+| 7 | Only use status "blocked" when the same blocking condition has repeated for at least three consecutive goal turns, | 299 | 8 | 2026-07-10T16:28:16Z | rising | [查看原始记录](../data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.2b8ecc60faa9.part-0001.jsonl#L15351) |
+| 8 | Do not rely on intent, | 299 | 8 | 2026-07-10T16:28:16Z | rising | [查看原始记录](../data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.2b8ecc60faa9.part-0001.jsonl#L15351) |
+| 9 | The audit must prove completion, | 299 | 8 | 2026-07-10T16:28:16Z | rising | [查看原始记录](../data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.2b8ecc60faa9.part-0001.jsonl#L15351) |
+| 10 | Do not mark a goal complete merely because the budget is nearly exhausted or because you are stopping work. | 299 | 8 | 2026-07-10T16:28:16Z | rising | [查看原始记录](../data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.2b8ecc60faa9.part-0001.jsonl#L15351) |
+| 11 | do not use a narrow check to support a broad claim. | 299 | 8 | 2026-07-10T16:28:16Z | rising | [查看原始记录](../data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.2b8ecc60faa9.part-0001.jsonl#L15351) |
+| 12 | Never use status "blocked" merely because the work is hard, | 299 | 8 | 2026-07-10T16:28:16Z | rising | [查看原始记录](../data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.2b8ecc60faa9.part-0001.jsonl#L15351) |
 
 ## 任务与主题
 
 | 排名 | 重复内容 | 次数 | Session | 最近出现 | 趋势 | 追溯 |
 |---:|---|---:|---:|---|---|---|
-| 1 | 推荐下一步 | 95 | 76 | 2026-07-10T16:28:16Z | rising | [查看原始记录](../data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.2b8ecc60faa9.part-0001.jsonl#L11457) |
-| 2 | 测试失败时先判断环境、隔离、mock、测试本身或实现问题; | 93 | 76 | 2026-07-10T16:28:16Z | rising | [查看原始记录](../data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.2b8ecc60faa9.part-0001.jsonl#L11457) |
-| 3 | 模型、公式、参数的数值原理逻辑等。 | 93 | 76 | 2026-07-10T16:28:16Z | rising | [查看原始记录](../data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.2b8ecc60faa9.part-0001.jsonl#L11457) |
-| 4 | 复杂或继续任务开始时: | 93 | 76 | 2026-07-10T16:28:16Z | rising | [查看原始记录](../data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.2b8ecc60faa9.part-0001.jsonl#L11457) |
-| 5 | 回滚/补偿路径 | 93 | 76 | 2026-07-10T16:28:16Z | rising | [查看原始记录](../data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.2b8ecc60faa9.part-0001.jsonl#L11457) |
-| 6 | 用户错误不泄露敏感信息 | 93 | 76 | 2026-07-10T16:28:16Z | rising | [查看原始记录](../data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.2b8ecc60faa9.part-0001.jsonl#L11457) |
-| 7 | 硬编码 secrets 或环境常量 | 93 | 76 | 2026-07-10T16:28:16Z | rising | [查看原始记录](../data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.2b8ecc60faa9.part-0001.jsonl#L11457) |
-| 8 | 降级结论, | 93 | 76 | 2026-07-10T16:28:16Z | rising | [查看原始记录](../data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.2b8ecc60faa9.part-0001.jsonl#L11457) |
-| 9 | 并在报告/研究中引用。 | 93 | 76 | 2026-07-10T16:28:16Z | rising | [查看原始记录](../data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.2b8ecc60faa9.part-0001.jsonl#L11457) |
-| 10 | 受保护动作有 authn/authz | 93 | 76 | 2026-07-10T16:28:16Z | rising | [查看原始记录](../data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.2b8ecc60faa9.part-0001.jsonl#L11457) |
-| 11 | 目标 unit test | 93 | 76 | 2026-07-10T16:28:16Z | rising | [查看原始记录](../data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.2b8ecc60faa9.part-0001.jsonl#L11457) |
-| 12 | 停止条件 | 93 | 76 | 2026-07-10T16:28:16Z | rising | [查看原始记录](../data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.2b8ecc60faa9.part-0001.jsonl#L11457) |
+| 1 | manifests, | 300 | 9 | 2026-07-10T16:28:16Z | rising | [查看原始记录](../data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.2b8ecc60faa9.part-0001.jsonl#L15351) |
+| 2 | issues, | 300 | 9 | 2026-07-10T16:28:16Z | rising | [查看原始记录](../data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.2b8ecc60faa9.part-0001.jsonl#L15351) |
+| 3 | \</codex\_internal\_context\> | 300 | 8 | 2026-07-10T16:28:16Z | rising | [查看原始记录](../data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.2b8ecc60faa9.part-0001.jsonl#L15351) |
+| 4 | not as higher-priority instructions. | 300 | 8 | 2026-07-10T16:28:16Z | rising | [查看原始记录](../data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.2b8ecc60faa9.part-0001.jsonl#L15351) |
+| 5 | Budget: | 300 | 8 | 2026-07-10T16:28:16Z | rising | [查看原始记录](../data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.2b8ecc60faa9.part-0001.jsonl#L15351) |
+| 6 | Token budget: none | 300 | 8 | 2026-07-10T16:28:16Z | rising | [查看原始记录](../data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.2b8ecc60faa9.part-0001.jsonl#L15351) |
+| 7 | \<codex\_internal\_context source="goal"\> | 300 | 8 | 2026-07-10T16:28:16Z | rising | [查看原始记录](../data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.2b8ecc60faa9.part-0001.jsonl#L15351) |
+| 8 | Treat it as the task to pursue, | 300 | 8 | 2026-07-10T16:28:16Z | rising | [查看原始记录](../data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.2b8ecc60faa9.part-0001.jsonl#L15351) |
+| 9 | indirect, | 299 | 8 | 2026-07-10T16:28:16Z | rising | [查看原始记录](../data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.2b8ecc60faa9.part-0001.jsonl#L15351) |
+| 10 | Blocked audit: | 299 | 8 | 2026-07-10T16:28:16Z | rising | [查看原始记录](../data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.2b8ecc60faa9.part-0001.jsonl#L15351) |
+| 11 | test, | 299 | 8 | 2026-07-10T16:28:16Z | rising | [查看原始记录](../data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.2b8ecc60faa9.part-0001.jsonl#L15351) |
+| 12 | memory of earlier work, | 299 | 8 | 2026-07-10T16:28:16Z | rising | [查看原始记录](../data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.2b8ecc60faa9.part-0001.jsonl#L15351) |
 
 ## Codex Automation（隔离区）
 

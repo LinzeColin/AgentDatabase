@@ -7,306 +7,306 @@
     "problems_corrections": [],
     "rules_preferences": [
       {
-        "cluster_id": "sha256:fe71d43b5efbaf04804479c5296f833e3fcbeedb8745f53c54c8bf5d0465b018",
-        "count": 97,
-        "display_text": "验证命令",
+        "cluster_id": "sha256:2cd6b7d19e63d205f0d162924537a072eb8b7d655fc68c7f6cd7d1d0bac08e21",
+        "count": 299,
+        "display_text": "Do not substitute a narrower,",
         "last_seen": "2026-07-10T16:28:16Z",
         "needs_review": false,
-        "recurrence_score": 19.9754,
+        "recurrence_score": 13.1334,
         "trend_28d": "rising",
-        "unique_sessions": 76
-      },
-      {
-        "cluster_id": "sha256:0abf86638965b4681ff071a01589a9bb71e3656c1a83fc6c1585202e6ad89b3e",
-        "count": 93,
-        "display_text": "默认推荐项",
-        "last_seen": "2026-07-10T16:28:16Z",
-        "needs_review": false,
-        "recurrence_score": 19.7938,
-        "trend_28d": "rising",
-        "unique_sessions": 76
-      },
-      {
-        "cluster_id": "sha256:0d6f6913e9e241310cc1a918fbbd1b5bbdaced2758984e502f4d2c88a6ae3746",
-        "count": 93,
-        "display_text": "用实际文件、测试、配置验证。",
-        "last_seen": "2026-07-10T16:28:16Z",
-        "needs_review": false,
-        "recurrence_score": 19.7938,
-        "trend_28d": "rising",
-        "unique_sessions": 76
-      },
-      {
-        "cluster_id": "sha256:1b7db67ad390f35298d7dcb6c1e40a55b8c4a893f6c5c1e9525507cc88bd21f4",
-        "count": 93,
-        "display_text": "涉及当前事实、API、版本、价格、产品行为、政策、法律/监管、可能变化的信息:优先查官方/一手来源,",
-        "last_seen": "2026-07-10T16:28:16Z",
-        "needs_review": false,
-        "recurrence_score": 19.7938,
-        "trend_28d": "rising",
-        "unique_sessions": 76
-      },
-      {
-        "cluster_id": "sha256:2042f2a0cfe5ffb90e10d33bb7210871e87697c6ff2f6d181dab5446b39e84e7",
-        "count": 93,
-        "display_text": "每个有意义的 run 结束时输出:",
-        "last_seen": "2026-07-10T16:28:16Z",
-        "needs_review": false,
-        "recurrence_score": 19.7938,
-        "trend_28d": "rising",
-        "unique_sessions": 76
-      },
-      {
-        "cluster_id": "sha256:231beb51f141362c528b5e9a5b7e6aedfe30e416a73a62d9fb863b5e54e31ea5",
-        "count": 93,
-        "display_text": "默认低上下文、低成本执行。",
-        "last_seen": "2026-07-10T16:28:16Z",
-        "needs_review": false,
-        "recurrence_score": 19.7938,
-        "trend_28d": "rising",
-        "unique_sessions": 76
-      },
-      {
-        "cluster_id": "sha256:24d9b596f9e264215023baa414e2b85a2bb8b4f466279fd5bb5f793850db087b",
-        "count": 93,
-        "display_text": "默认流程:证据收集 → 逆向产品/研究摘要 → 结构化确认 → PRD/MVP → Tech Spec/Task Pack → 每轮只执行一个 Run Contract → 最终交付。",
-        "last_seen": "2026-07-10T16:28:16Z",
-        "needs_review": false,
-        "recurrence_score": 19.7938,
-        "trend_28d": "rising",
-        "unique_sessions": 76
-      },
-      {
-        "cluster_id": "sha256:2d7c02af5a25a7494fbf279b0066c17f4e7f5afb21e5264395d46ae76e9ebb18",
-        "count": 93,
-        "display_text": "明确假设、验收标准、停止条件",
-        "last_seen": "2026-07-10T16:28:16Z",
-        "needs_review": false,
-        "recurrence_score": 19.7938,
-        "trend_28d": "rising",
-        "unique_sessions": 76
-      },
-      {
-        "cluster_id": "sha256:2f067f0fc4ebf8629f384144e75f108d9c17052d3b155eabe8aa09ab7935f6e4",
-        "count": 93,
-        "display_text": "默认顺序:",
-        "last_seen": "2026-07-10T16:28:16Z",
-        "needs_review": false,
-        "recurrence_score": 19.7938,
-        "trend_28d": "rising",
-        "unique_sessions": 76
-      },
-      {
-        "cluster_id": "sha256:2fc8f62f1423c6e9023f4fa80ca49c84fe8bb70c9bc6ea367e606d1362139089",
-        "count": 93,
-        "display_text": "API/服务默认考虑:一致响应结构、schema validation、参数化查询、authn/authz、必要 rate limit、用户安全错误信息与服务端详细日志。",
-        "last_seen": "2026-07-10T16:28:16Z",
-        "needs_review": false,
-        "recurrence_score": 19.7938,
-        "trend_28d": "rising",
-        "unique_sessions": 76
-      },
-      {
-        "cluster_id": "sha256:342bdbfc7c7c4070a7b20468a6aebc89d1cf076d6be96d63926142088e567e6a",
-        "count": 93,
-        "display_text": "项目工具优先项目本地配置。",
-        "last_seen": "2026-07-10T16:28:16Z",
-        "needs_review": false,
-        "recurrence_score": 19.7938,
-        "trend_28d": "rising",
-        "unique_sessions": 76
+        "unique_sessions": 8
       }
     ],
     "tasks_topics": [
       {
-        "cluster_id": "sha256:568ec8b0c4669836a9ef89913eab7ce4636f6600299469868812ddb8cd408109",
-        "count": 95,
-        "display_text": "推荐下一步",
+        "cluster_id": "sha256:8fe9a2dd1263026cfada2f228ec18017176839c25c98aa6e68a1e91d56d96b73",
+        "count": 300,
+        "display_text": "manifests,",
         "last_seen": "2026-07-10T16:28:16Z",
         "needs_review": true,
-        "recurrence_score": 19.8855,
+        "recurrence_score": 13.6851,
         "trend_28d": "rising",
-        "unique_sessions": 76
+        "unique_sessions": 9
       },
       {
-        "cluster_id": "sha256:06397c9febac347c608e951a8134c8e6bef6bc26ba4e42dbd63c9f7c95bedcf7",
-        "count": 93,
-        "display_text": "测试失败时先判断环境、隔离、mock、测试本身或实现问题;",
+        "cluster_id": "sha256:c5612f62e9bdf4b127540faafcc0eab08b1a2b0d33ce909075489cd75c8ddeff",
+        "count": 300,
+        "display_text": "issues,",
+        "last_seen": "2026-07-10T16:28:16Z",
+        "needs_review": true,
+        "recurrence_score": 13.6851,
+        "trend_28d": "rising",
+        "unique_sessions": 9
+      },
+      {
+        "cluster_id": "sha256:4548ef4aff1529d39591f141e04654185c5fc7aba428823686c3fe026f38df9c",
+        "count": 300,
+        "display_text": "</codex_internal_context>",
+        "last_seen": "2026-07-10T16:28:16Z",
+        "needs_review": true,
+        "recurrence_score": 13.1411,
+        "trend_28d": "rising",
+        "unique_sessions": 8
+      },
+      {
+        "cluster_id": "sha256:51d663af315d4ee32fd9d640142d047e041b815e2c96febc5494365fdbced222",
+        "count": 300,
+        "display_text": "not as higher-priority instructions.",
+        "last_seen": "2026-07-10T16:28:16Z",
+        "needs_review": true,
+        "recurrence_score": 13.1411,
+        "trend_28d": "rising",
+        "unique_sessions": 8
+      },
+      {
+        "cluster_id": "sha256:78f0aad528962481ab4c0289555ea96927d41016636800e761b45b56113d32e9",
+        "count": 300,
+        "display_text": "Budget:",
+        "last_seen": "2026-07-10T16:28:16Z",
+        "needs_review": true,
+        "recurrence_score": 13.1411,
+        "trend_28d": "rising",
+        "unique_sessions": 8
+      },
+      {
+        "cluster_id": "sha256:7c59f1908ee5208e4481b24daef267792fe7a1cdc160397fc411f91cad6883dc",
+        "count": 300,
+        "display_text": "Token budget: none",
+        "last_seen": "2026-07-10T16:28:16Z",
+        "needs_review": true,
+        "recurrence_score": 13.1411,
+        "trend_28d": "rising",
+        "unique_sessions": 8
+      },
+      {
+        "cluster_id": "sha256:9413d02e49554307443346f71db7f8b5edf2a63fb651681cc9e6279d0ac01be7",
+        "count": 300,
+        "display_text": "<codex_internal_context source=\"goal\">",
+        "last_seen": "2026-07-10T16:28:16Z",
+        "needs_review": true,
+        "recurrence_score": 13.1411,
+        "trend_28d": "rising",
+        "unique_sessions": 8
+      },
+      {
+        "cluster_id": "sha256:aa7c36365f2cdce1515d0cc9da68fbf635eb91eb14ca5a4d157e4060df50548c",
+        "count": 300,
+        "display_text": "Treat it as the task to pursue,",
+        "last_seen": "2026-07-10T16:28:16Z",
+        "needs_review": true,
+        "recurrence_score": 13.1411,
+        "trend_28d": "rising",
+        "unique_sessions": 8
+      },
+      {
+        "cluster_id": "sha256:01bbae75f40d690ca4bc6233072172854a744dd44a1a354f9933d35b5d4a15e6",
+        "count": 299,
+        "display_text": "indirect,",
+        "last_seen": "2026-07-10T16:28:16Z",
+        "needs_review": true,
+        "recurrence_score": 13.1334,
+        "trend_28d": "rising",
+        "unique_sessions": 8
+      },
+      {
+        "cluster_id": "sha256:01f9eae71e9b0c84930b045b22176fb9370c3aa20c0d3a8d70e2e8a5b308b9ac",
+        "count": 299,
+        "display_text": "Blocked audit:",
+        "last_seen": "2026-07-10T16:28:16Z",
+        "needs_review": true,
+        "recurrence_score": 13.1334,
+        "trend_28d": "rising",
+        "unique_sessions": 8
+      },
+      {
+        "cluster_id": "sha256:029b596c4ed83f094f4f09b68ffdf48e1fae118b21a598cbbb539c11b2b05a44",
+        "count": 299,
+        "display_text": "test,",
         "last_seen": "2026-07-10T16:28:16Z",
         "needs_review": false,
-        "recurrence_score": 19.7938,
+        "recurrence_score": 13.1334,
         "trend_28d": "rising",
-        "unique_sessions": 76
+        "unique_sessions": 8
       },
       {
-        "cluster_id": "sha256:07123beff9b77db39e43845da272c83307c3777b335a36cc26fd65cd5e149d5c",
-        "count": 93,
-        "display_text": "模型、公式、参数的数值原理逻辑等。",
+        "cluster_id": "sha256:07f09f1ead67178645b754c1a43e391c24688e079c9a7da82cda26b0820e31ef",
+        "count": 299,
+        "display_text": "memory of earlier work,",
         "last_seen": "2026-07-10T16:28:16Z",
         "needs_review": true,
-        "recurrence_score": 19.7938,
+        "recurrence_score": 13.1334,
         "trend_28d": "rising",
-        "unique_sessions": 76
+        "unique_sessions": 8
       },
       {
-        "cluster_id": "sha256:0e3ff52ceb5d0b9181296be1e13f98017ffa33bb273fe434df8b3ce184c2500b",
-        "count": 93,
-        "display_text": "复杂或继续任务开始时:",
+        "cluster_id": "sha256:08771bd79b272f3df460ea3dce84895b1785ef54d3a1c446ac9cd0eef871aeb1",
+        "count": 299,
+        "display_text": "or other authoritative evidence.",
         "last_seen": "2026-07-10T16:28:16Z",
         "needs_review": true,
-        "recurrence_score": 19.7938,
+        "recurrence_score": 13.1334,
         "trend_28d": "rising",
-        "unique_sessions": 76
+        "unique_sessions": 8
       },
       {
-        "cluster_id": "sha256:0f1492c13047cc651573da06fc0cfecab9f15639fabd20ec6aa2ec1111bb4794",
-        "count": 93,
-        "display_text": "回滚/补偿路径",
+        "cluster_id": "sha256:0980e9b5d99e89576b86851f13a272ca450e1af33973eb6e145e649f5662f580",
+        "count": 299,
+        "display_text": "Previous conversation context can help locate relevant work,",
         "last_seen": "2026-07-10T16:28:16Z",
         "needs_review": true,
-        "recurrence_score": 19.7938,
+        "recurrence_score": 13.1334,
         "trend_28d": "rising",
-        "unique_sessions": 76
+        "unique_sessions": 8
       },
       {
-        "cluster_id": "sha256:0ff383aece8bee511690ed922f6c3dbc916dbdf8da1ae4861d8c79cfd7397041",
-        "count": 93,
-        "display_text": "用户错误不泄露敏感信息",
+        "cluster_id": "sha256:09ebd90f93644495c4ff8e45c99aba18a4f10837b7c9e6f02a50a9fafc6da2ed",
+        "count": 299,
+        "display_text": "</objective>",
         "last_seen": "2026-07-10T16:28:16Z",
         "needs_review": true,
-        "recurrence_score": 19.7938,
+        "recurrence_score": 13.1334,
         "trend_28d": "rising",
-        "unique_sessions": 76
+        "unique_sessions": 8
       },
       {
-        "cluster_id": "sha256:13164b0a0ff47022363a494fd67b51d0b056e0aaa5235d33052baef6405a4d19",
-        "count": 93,
-        "display_text": "硬编码 secrets 或环境常量",
+        "cluster_id": "sha256:0a3ca987976c3758572d3aea58b297fbf4e588bcaabdacea8f7dec1c119bc5d4",
+        "count": 299,
+        "display_text": "and deliverable,",
         "last_seen": "2026-07-10T16:28:16Z",
         "needs_review": true,
-        "recurrence_score": 19.7938,
+        "recurrence_score": 13.1334,
         "trend_28d": "rising",
-        "unique_sessions": 76
+        "unique_sessions": 8
       },
       {
-        "cluster_id": "sha256:13e6881d0ea7f6ce35649de0927f846dac50d6e5869afc7f16a151a26f6811c2",
-        "count": 93,
-        "display_text": "降级结论,",
+        "cluster_id": "sha256:19123344e31b1696c8c433dd2e63d9e9b0452128a47bf0ca4a22be4371e6df92",
+        "count": 299,
+        "display_text": "Keep the plan current as steps complete or the next best action changes.",
         "last_seen": "2026-07-10T16:28:16Z",
         "needs_review": true,
-        "recurrence_score": 19.7938,
+        "recurrence_score": 13.1334,
         "trend_28d": "rising",
-        "unique_sessions": 76
+        "unique_sessions": 8
       },
       {
-        "cluster_id": "sha256:142018299482b375198996cc0a88b943d63c3ec9a188c9f2900f35ce8f598063",
-        "count": 93,
-        "display_text": "并在报告/研究中引用。",
+        "cluster_id": "sha256:195dba575c8470a71d0fc3b3299eb8a2c7d4f2db402224e45d0b930b23935be7",
+        "count": 299,
+        "display_text": "Treat tests,",
         "last_seen": "2026-07-10T16:28:16Z",
         "needs_review": true,
-        "recurrence_score": 19.7938,
+        "recurrence_score": 13.1334,
         "trend_28d": "rising",
-        "unique_sessions": 76
+        "unique_sessions": 8
       },
       {
-        "cluster_id": "sha256:189b46a1c8999925278434cb29112e0bf3d03de141e9f2362af8e07aba6bd0b9",
-        "count": 93,
-        "display_text": "受保护动作有 authn/authz",
+        "cluster_id": "sha256:1bbeae54a068d64bd090673f50e172d5509d788fead396889229686f9cd85b6b",
+        "count": 299,
+        "display_text": "merely compatible,",
         "last_seen": "2026-07-10T16:28:16Z",
         "needs_review": true,
-        "recurrence_score": 19.7938,
+        "recurrence_score": 13.1334,
         "trend_28d": "rising",
-        "unique_sessions": 76
+        "unique_sessions": 8
       },
       {
-        "cluster_id": "sha256:1b27568de4133f5d0557c55cf72a76759da5ea6803cdc1963cae83d262781fdf",
-        "count": 93,
-        "display_text": "目标 unit test",
-        "last_seen": "2026-07-10T16:28:16Z",
-        "needs_review": false,
-        "recurrence_score": 19.7938,
-        "trend_28d": "rising",
-        "unique_sessions": 76
-      },
-      {
-        "cluster_id": "sha256:1df7548adf14c969646cf1d6082af6b5f055ea12d4ca4f824957437ad4087c54",
-        "count": 93,
-        "display_text": "停止条件",
+        "cluster_id": "sha256:2071984018b5c34e7d91322c959da648d5b2ddd80b040317642f681034354e5e",
+        "count": 299,
+        "display_text": "rendered artifacts,",
         "last_seen": "2026-07-10T16:28:16Z",
         "needs_review": true,
-        "recurrence_score": 19.7938,
+        "recurrence_score": 13.1334,
         "trend_28d": "rising",
-        "unique_sessions": 76
+        "unique_sessions": 8
       },
       {
-        "cluster_id": "sha256:1ee89811adac81379e0e35101ab4d6a7066ef18f40f517343bcdf7e3faa99527",
-        "count": 93,
-        "display_text": "Skills、agents、ECC、MCP",
+        "cluster_id": "sha256:246fb25cfe5cf8dbc0577f9eb21af944aa98c6449a731f458543a87cc4762f47",
+        "count": 299,
+        "display_text": "identify the authoritative evidence that would prove it,",
         "last_seen": "2026-07-10T16:28:16Z",
         "needs_review": true,
-        "recurrence_score": 19.7938,
+        "recurrence_score": 13.1334,
         "trend_28d": "rising",
-        "unique_sessions": 76
+        "unique_sessions": 8
       },
       {
-        "cluster_id": "sha256:2a3b1c43e4ecf18eb6276c7b8a9e0455dc581215176749fd1e06641b32b76e9f",
-        "count": 93,
-        "display_text": "重要代码、安全、构建、架构变更可用专门 reviewer/agent。",
+        "cluster_id": "sha256:275f95260eb4d94e1537e075ca06beaa72879821eab7b1797fdb11d6c6154bb9",
+        "count": 299,
+        "display_text": "weak,",
         "last_seen": "2026-07-10T16:28:16Z",
         "needs_review": true,
-        "recurrence_score": 19.7938,
+        "recurrence_score": 13.1334,
         "trend_28d": "rising",
-        "unique_sessions": 76
+        "unique_sessions": 8
       },
       {
-        "cluster_id": "sha256:2c53cd90e4499595756086a4dd4759fa7d5e0488ca7c44c315f8adb8d10c83fb",
-        "count": 93,
-        "display_text": "可维护简洁 `HANDOFF.md`。",
+        "cluster_id": "sha256:27b43bc92a2116093c5468eaef5a9e1788388abac72ccadea73827860ce8e48b",
+        "count": 299,
+        "display_text": "Ending this turn does not require shrinking the objective to what fits now.",
         "last_seen": "2026-07-10T16:28:16Z",
         "needs_review": true,
-        "recurrence_score": 19.7938,
+        "recurrence_score": 13.1334,
         "trend_28d": "rising",
-        "unique_sessions": 76
+        "unique_sessions": 8
       },
       {
-        "cluster_id": "sha256:2e922488fb7106071e7e709ad7e8ef3d389a0cb12a333028194ba17145f39249",
-        "count": 93,
-        "display_text": "先产出本地计划或草稿。",
+        "cluster_id": "sha256:28477878063ba74cec38706d8516f8cdc3da4a3293887934cbe57f21993e0ff2",
+        "count": 299,
+        "display_text": "shows incomplete work,",
         "last_seen": "2026-07-10T16:28:16Z",
         "needs_review": true,
-        "recurrence_score": 19.7938,
+        "recurrence_score": 13.1334,
         "trend_28d": "rising",
-        "unique_sessions": 76
+        "unique_sessions": 8
       },
       {
-        "cluster_id": "sha256:2f312212fbba03bf2e341b1b18281878dc5f81f68fd89d0d2ebd51d85c216e08",
-        "count": 93,
-        "display_text": "幂等操作",
+        "cluster_id": "sha256:28a44812538f0ef1fa1d569df47b1343e6ed37a228a3d547e60662b94fab0c3a",
+        "count": 299,
+        "display_text": "If the evidence is incomplete,",
         "last_seen": "2026-07-10T16:28:16Z",
         "needs_review": true,
-        "recurrence_score": 19.7938,
+        "recurrence_score": 13.1334,
         "trend_28d": "rising",
-        "unique_sessions": 76
+        "unique_sessions": 8
       },
       {
-        "cluster_id": "sha256:32390ffa4fb7390b886e1428fc39d2c044fc6d63da3351eef6b9598ae5e341bc",
-        "count": 93,
-        "display_text": "任务路由",
+        "cluster_id": "sha256:29e25dd8daf3583b789c8797a55de5b699516f91f796ec7eddb206e3224e210e",
+        "count": 299,
+        "display_text": "Once the blocked threshold is satisfied,",
         "last_seen": "2026-07-10T16:28:16Z",
         "needs_review": true,
-        "recurrence_score": 19.7938,
+        "recurrence_score": 13.1334,
         "trend_28d": "rising",
-        "unique_sessions": 76
+        "unique_sessions": 8
       },
       {
-        "cluster_id": "sha256:33bb6648cf9f38af21d94774c36a6c6aa7a5e5db59d31230210acb9cc54840e8",
-        "count": 93,
-        "display_text": "证据、时效与真实性",
+        "cluster_id": "sha256:2b12016add7dafd5293adc50a72ba2413f0b6078c17cfe6372901d73f2c24cd6",
+        "count": 299,
+        "display_text": "Treat alignment as movement toward the requested end state.",
         "last_seen": "2026-07-10T16:28:16Z",
         "needs_review": true,
-        "recurrence_score": 19.7938,
+        "recurrence_score": 13.1334,
         "trend_28d": "rising",
-        "unique_sessions": 76
+        "unique_sessions": 8
+      },
+      {
+        "cluster_id": "sha256:2cb76a6ba509e0f973a89edbbf1930e7412fd71f7702f42f62bf85d5d02e0a8b",
+        "count": 299,
+        "display_text": "specifications,",
+        "last_seen": "2026-07-10T16:28:16Z",
+        "needs_review": true,
+        "recurrence_score": 13.1334,
+        "trend_28d": "rising",
+        "unique_sessions": 8
+      },
+      {
+        "cluster_id": "sha256:2e2fb4d5c0450636a76fbddb76913b0bca53ded776c13d0754e4afb80533d9c6",
+        "count": 299,
+        "display_text": "Marking the goal complete is a claim that the full objective has been finished and can withstand requirement-by-requirement scrutiny.",
+        "last_seen": "2026-07-10T16:28:16Z",
+        "needs_review": true,
+        "recurrence_score": 13.1334,
+        "trend_28d": "rising",
+        "unique_sessions": 8
       }
     ]
   },

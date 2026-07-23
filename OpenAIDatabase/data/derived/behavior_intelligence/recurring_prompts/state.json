@@ -1,6 +1,6 @@
 {
-  "algorithm_version": "recurring_prompt.v4.0.1",
-  "config_sha256": "sha256:27de27733baedfa3c199a91a005bc216dd8af4cee49417cb2b4c3e8d053ce678",
+  "algorithm_version": "recurring_prompt.v4.1.0",
+  "config_sha256": "sha256:4c03f7a26c43c667a35de1b703d1ed9f1ef710cd42c0ec670bd8fbb2aa5adbb3",
   "files": {
     "OpenAIDatabase/data/public_raw/codex/sessions/019f2aa6-8374-7ca1-b0f2-546070adc26b.535432310d6a.part-0001.jsonl": {
       "line_count": 8199,
@@ -658,9 +658,19 @@
       "size_bytes": 398038
     }
   },
-  "implementation_sha256": "sha256:bf26f667f0cbd2e2d618ab68b94a54f6b7436b2e78489157407bf37264f3e0c0",
+  "implementation_sha256": "sha256:d580a65473b4f9230346b14c527aefa637bc19efc788e66330cefd70fef96a96",
   "input_state_sha256": "sha256:0f3fb9fdd481126045518de8919b0fa80946d45f7cac66648fbfc00e86b6e10b",
+  "production_acceptance": {
+    "current_source_batch_sha256": "sha256:0f3fb9fdd481126045518de8919b0fa80946d45f7cac66648fbfc00e86b6e10b",
+    "label_zh": "候选通过 1/2",
+    "required_distinct_source_batches": 2,
+    "status": "candidate",
+    "verified_distinct_source_batches": 1
+  },
   "schema_version": "recurring_state.v4",
   "source_commit": "3e55ec47a9f9e9bc957dbddfc8fae3cb53fbcef0",
-  "source_cutoff_at": "2026-07-10T16:39:25Z"
+  "source_cutoff_at": "2026-07-10T16:39:25Z",
+  "verified_source_batches": [
+    "sha256:0f3fb9fdd481126045518de8919b0fa80946d45f7cac66648fbfc00e86b6e10b"
+  ]
 }
