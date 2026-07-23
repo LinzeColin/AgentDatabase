@@ -1113,8 +1113,8 @@ def load_draft_contract(*, lint_candidate_manifest: bool = True) -> ContractBund
     if lint_candidate_manifest and manifest_path.exists():
         # A local candidate is structurally linted here, but it is never
         # promoted to a trust root.  Only load_trusted_bundle() can construct
-        # the complete 29-schema bundle from an external Git/digest/path/mode
-        # tuple.
+        # either explicitly supported complete bundle profile from an external
+        # Git/digest/path/mode tuple.
         manifest = strict_load(manifest_path)
         if not isinstance(manifest, dict):
             raise ContractError("CANDIDATE_MANIFEST_ROOT_INVALID")

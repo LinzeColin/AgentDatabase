@@ -290,6 +290,31 @@ class ActivationControlTests(unittest.TestCase):
         self.assertEqual(interface["status"], "DRAFT_NON_ACTIVE")
         self.assertTrue(interface["activation_forbidden"])
         self.assertEqual(interface["bundle_digest"], CANDIDATE_BUNDLE_DIGEST)
+        self.assertEqual(interface["candidate_schema_count"], 31)
+        self.assertEqual(interface["candidate_policy_count"], 5)
+        self.assertEqual(
+            interface["next_phase"],
+            "AUTO_EXACT_BUNDLE_INTEGRATION",
+        )
+        self.assertEqual(
+            interface["consumer_contract"]["verified_git_object_id"],
+            "sha1:91a12e48351be3ee05ec23ef61aec81056b02014",
+        )
+        self.assertFalse(
+            interface["consumer_contract"][
+                "canonical_publication_permitted"
+            ]
+        )
+        self.assertFalse(
+            interface["transition_contract"][
+                "auto_runtime_integration_complete"
+            ]
+        )
+        self.assertFalse(
+            interface["transition_contract"]["schedule_authority_resolved"]
+        )
+        self.assertFalse(interface["transition_contract"]["au_040_complete"])
+        self.assertFalse(interface["transition_contract"]["m0c_b_permitted"])
         self.assertEqual(interface["bootstrap_schema_count"], 2)
         self.assertNotIn(
             INTENT_ID, {entry["id"] for entry in manifest["schemas"]}

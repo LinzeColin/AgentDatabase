@@ -30,14 +30,15 @@ Key entrypoints:
   retention-boundary, manifest-chain, physical-byte, and transaction-closure
   regressions.
 - `draft-interface.json`: exact M0a interface for Auto A1a.
-- `bundles/schema-bundle-manifest.v1.json`: complete M0b candidate manifest.
-- `activation/control-interface.json`: exact M0c-A interface for the Auto
-  activation-handshake corrective.
+- `bundles/schema-bundle-manifest.v1.json`: final non-active 31/5 candidate
+  manifest.
+- `activation/control-interface.json`: final non-active candidate/consumer
+  control handoff for Auto exact-bundle integration.
 - `au040/semantic-policy-acceptance.json`: non-active handoff that accepts the
   four exact Auto transport-schema byte digests and freezes the two versioned
   Mechanism policy replacements plus seven production semantic guards.
-- `OpenAIDatabase/scripts/validate_skill_run_logs.py`: consumer-first recursive
-  run-log router and pre-activation publication block.
+- `OpenAIDatabase/scripts/validate_skill_run_logs.py`: four-artifact daily
+  ledger consumer and pre-activation publication block.
 
 Run from the repository root with the explicitly provisioned interpreter:
 
@@ -58,18 +59,20 @@ Run from the repository root with the explicitly provisioned interpreter:
   lint-schema-set --schema-dir CodexSkills/governance/schemas
 /usr/bin/python3 -B CodexSkills/governance/tools/validate_mechanism.py \
   lint-schema-set --schema-dir CodexSkills/governance/schemas \
-  --schema-dir CodexSkills/registry/auto/schemas/public
+  --schema-dir CodexSkills/governance/schemas-v2 \
+  --schema-dir CodexSkills/registry/auto/schemas/public \
+  --schema-dir CodexSkills/registry/auto/schemas/public-v2
 /usr/bin/python3 -B -m unittest discover \
   -s CodexSkills/governance/tests -p 'test_*.py'
 ```
 
 No command in this directory downloads dependencies or resolves schemas over
-the network. M0b assembles exactly 21 Mechanism schemas, eight Auto-public
-schemas, and five Mechanism policies. The four Auto-private schemas are never
-bundle members.
+the network. The final candidate assembles exactly 21 Mechanism schemas, ten
+Auto-public schemas, and five Mechanism policies. The four Auto-private
+schemas are never bundle members.
 
 The two schemas under `activation/schemas/` are bootstrap-control contracts,
-not members of the 29-schema runtime bundle. This is deliberate: activation
+not members of the 31-schema runtime bundle. This is deliberate: activation
 cannot trust the bundle it is in the process of activating. Their exact IDs,
 paths, canonical schema digests, self-digest pointers, candidate bundle, and
 Auto transport interface are pinned in `activation/control-interface.json`.
@@ -98,28 +101,29 @@ requires a repo-external tuple of verified Git object ID, expected bundle
 digest, canonical manifest path, and mode. Losing that external state fails
 closed; the current checkout cannot promote its own manifest to trusted.
 
-The M0b manifest and M0c-A control interface remain `DRAFT_NON_ACTIVE`. They do
-not create
+The final manifest and coordinated control interface remain
+`DRAFT_NON_ACTIVE`. They do not create
 `CodexSkills/VERSION`, authorize canonical publication, or establish an ACTIVE
 trust root. After commit, verify it with `trust-bundle` using the externally
 read-back commit, candidate digest, canonical manifest path, and
 `mode=CANDIDATE`.
 
 The consumer-first gate is separately installed under OpenAIDatabase. It
-routes only recursive `skills_runs/YYYY/MM/DD/part-NNNN.jsonl` records to the
-public-run consumer and leaves the four sibling task-run categories unchanged.
-The repository run root must remain README-only until ACTIVE external trust,
-Auto AU-040 daily shard/manifest support, and the Mechanism BOUND reference
-resolver all exist. Synthetic records may be tested; this draft does not
-authorize canonical run-log publication.
+recognizes recursive `part-NNNN.jsonl`, retained `index-NNNN.jsonl`,
+`manifest-NNNN.json`, and `retention-receipt-NNNN.json` artifacts while
+leaving the four sibling task-run categories unchanged. The repository run
+root must remain README-only until ACTIVE external trust, Auto AU-040
+writer/integration, and the Mechanism BOUND reference resolver all exist.
+Synthetic complete daily trees may be tested; this draft does not authorize
+canonical run-log publication.
 
-The AU-040 acceptance is deliberately outside the current candidate loaders:
-new Mechanism policy schemas live in `schemas-v2/`, policy instances live in
-`policies-v2/`, and Auto's accepted transport schemas remain in its
-`transport-draft/` root. The current 29-schema/5-policy candidate therefore
-remains byte-for-byte unchanged. The accepted target is 31 schemas and five
-policies: it replaces both the public-value and retention policy contracts
-rather than mutating either version in place.
+The final candidate consumes the exact promoted Auto schema bytes under
+`schemas/public-v2/` plus the accepted Mechanism policy schemas and instances
+under `schemas-v2/` and `policies-v2/`. It is exactly 31 schemas and five
+policies: both policy contracts and both replaced Auto transport contracts are
+versioned replacements, never in-place mutations. The old 29/5 candidate
+remains readable only through its exact historical object/digest; hybrid sets
+are rejected and no predecessor ACTIVE compatibility is implied.
 
 Schema shape alone is insufficient for the daily ledger. Production must also
 consume the Mechanism semantic guard set: exact 365 elapsed days from
@@ -128,3 +132,10 @@ manifest chaining, immutable part metadata, index/event/manifest and physical
 byte closure, paired part/index/manifest publication, and paired
 part-delete/retention-receipt/manifest publication. The Auto draft validator
 is useful draft evidence but is explicitly not a production trust root.
+
+The control interface now binds the final candidate Git object and the exact
+V2 consumer Git object, while recording that Auto runtime still consumes the
+historical 29/5 tuple. Its only next phase is
+`AUTO_EXACT_BUNDLE_INTEGRATION`. Schedule authority, Gmail/state readiness,
+AU-040 runtime completion, M0c-B, ACTIVE trust, and canonical publication
+remain false.

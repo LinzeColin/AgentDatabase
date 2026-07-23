@@ -1,6 +1,6 @@
 {
   "activation_forbidden": true,
-  "base_auto_git_object_id": "sha1:c2fc04ff24b8d8ad72ec14a1cc2b26000ba08f67",
+  "base_auto_git_object_id": "sha1:d16273c26b859379578ea9ec04e1473f175d14f6",
   "bootstrap_schema_count": 2,
   "bootstrap_schema_entries": [
     {
@@ -16,12 +16,20 @@
       "self_digest_pointer": "/envelope_digest"
     }
   ],
-  "bundle_digest": "2704ed797c843f969965db600747abcdcd217550522e6479aab6817ef5a86ef5",
-  "candidate_bundle_git_object_id": "sha1:899a4374bc02f5e18444fea7404864df7b118adf",
+  "bundle_digest": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e",
+  "candidate_bundle_git_object_id": "sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5",
   "candidate_manifest_path": "CodexSkills/governance/bundles/schema-bundle-manifest.v1.json",
   "candidate_policy_count": 5,
-  "candidate_schema_count": 29,
+  "candidate_schema_count": 31,
   "candidate_trust_mode": "CANDIDATE",
+  "consumer_contract": {
+    "artifact_digest": "189a47300fc1aa6012e87feb6184833cb717cdbe2b9dc9be6db89197f579939c",
+    "canonical_publication_permitted": false,
+    "contract_revision": "V2",
+    "relative_path": "OpenAIDatabase/config/evaluation/skill_run_consumer.json",
+    "repository_shards_permitted": false,
+    "verified_git_object_id": "sha1:91a12e48351be3ee05ec23ef61aec81056b02014"
+  },
   "control_trust_contract": {
     "canonical_path": "CodexSkills/governance/activation/control-interface.json",
     "expected_mode": "DRAFT_NON_ACTIVE_CONTROL",
@@ -29,7 +37,7 @@
     "external_verified_git_object_required": true,
     "repository_self_report_is_not_trust_root": true
   },
-  "next_phase": "AUTO_M0C_ACTIVATION_HANDSHAKE_CORRECTIVE",
+  "next_phase": "AUTO_EXACT_BUNDLE_INTEGRATION",
   "notification_contract": {
     "actual_recipient_repo_external": true,
     "affected_path_refs": [
@@ -63,9 +71,33 @@
   ],
   "status": "DRAFT_NON_ACTIVE",
   "target_srv_revision": "v0.0.0.3",
+  "transition_contract": {
+    "au_040_complete": false,
+    "auto_runtime_integration_complete": false,
+    "auto_runtime_source_candidate": {
+      "bundle_digest": "2704ed797c843f969965db600747abcdcd217550522e6479aab6817ef5a86ef5",
+      "policy_count": 5,
+      "schema_count": 29,
+      "verified_git_object_id": "sha1:899a4374bc02f5e18444fea7404864df7b118adf"
+    },
+    "canonical_publication_permitted": false,
+    "external_gmail_ready": false,
+    "final_candidate_integration_required": true,
+    "m0c_b_permitted": false,
+    "promotion_evidence": {
+      "artifact_digest": "65c2e83bb2491d1cb3059767cf1705fc7541bd7e97449f33a51ba17a04f5e595",
+      "relative_path": "CodexSkills/registry/auto/schemas/public-v2/promotion-interface.json",
+      "verified_git_object_id": "sha1:d16273c26b859379578ea9ec04e1473f175d14f6"
+    },
+    "repository_bound": false,
+    "schedule_authority_resolved": false,
+    "schedule_complete": false
+  },
   "transport_runtime_interface": {
-    "artifact_digest": "e28040a58d4c68b2493025523982545d8aa80b1faf7961cf03860d735f8cdea2",
-    "relative_path": "CodexSkills/registry/auto/runtime-interface.json"
+    "artifact_digest": "e8d8af9b74908e56a86550492f4cf26a100bfd674cf858c61e72e3193b3d8a24",
+    "integration_state": "SOURCE_CANDIDATE_NOT_FINAL",
+    "relative_path": "CodexSkills/registry/auto/runtime-interface.json",
+    "verified_git_object_id": "sha1:d16273c26b859379578ea9ec04e1473f175d14f6"
   },
   "validator_contract": {
     "artifact_reads": "DESCRIPTOR_RELATIVE_O_NOFOLLOW",

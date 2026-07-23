@@ -57,6 +57,10 @@ OpenAIDatabase exposes a structured agent-personalization layer:
 - Project config: `config/codex/project.config.toml`
 - Evaluation harness: `config/evaluation/personalization_harness.json`
 - Four run-log categories: `data/run_logs/sync_runs`, `export_runs`, `evaluation_runs`, and `agent_runs`
+- Separate pre-active SkillOps public ledger consumer:
+  `data/run_logs/skills_runs` with part, retained-index, daily-manifest, and
+  retention-receipt contracts; it is never interpreted as a legacy task-run
+  category
 - Authorized sanitized public evidence: `data/public_raw/`
 - New complete private-origin archives: owner-controlled private `LinzeColin/AgentDatabase-Private` Releases
 
