@@ -1,6 +1,6 @@
 {
   "activation_forbidden": true,
-  "base_auto_git_object_id": "sha1:7ed9e761921f557887440803d1fc7327f3e986a9",
+  "base_auto_git_object_id": "sha1:7f1bd87652f7cc88fbf2f6b542f9feb57750bf0d",
   "bootstrap_schema_count": 2,
   "bootstrap_schema_entries": [
     {
@@ -37,7 +37,7 @@
     "external_verified_git_object_required": true,
     "repository_self_report_is_not_trust_root": true
   },
-  "next_phase": "AUTO_AU040_RUNTIME_WRITER_INTEGRATION",
+  "next_phase": "AUTO_AU040_PUBLISHER_V2_RUNTIME_INTEGRATION",
   "notification_contract": {
     "actual_recipient_repo_external": true,
     "affected_path_refs": [
@@ -100,18 +100,18 @@
     "publisher_v2_runtime_integration_complete": false,
     "repository_bound": false,
     "runtime_preflight_shadow_permitted": true,
-    "runtime_shard_writer_integration_complete": false,
+    "runtime_shard_writer_integration_complete": true,
     "runtime_state_instance_created": false,
     "runtime_state_write_permitted": true,
     "schedule_authority_resolved": false,
     "schedule_complete": false
   },
   "transport_runtime_interface": {
-    "artifact_digest": "09af0c00273825e90a489f413a2f0bb6995042e5b4eea17973ce7582eab66340",
-    "integration_state": "FINAL_31_5_INTEGRATED_CONTROL_SYNCED",
-    "module_count": 21,
+    "artifact_digest": "f1f9331df1b56c80e2fa7415fe2fe3d714dcd831cec94390afa43c078dedf38b",
+    "integration_state": "AU040_RUNTIME_WRITER_INTEGRATED_CONTROL_SYNCED",
+    "module_count": 24,
     "relative_path": "CodexSkills/registry/auto/runtime-interface.json",
-    "verified_git_object_id": "sha1:7ed9e761921f557887440803d1fc7327f3e986a9"
+    "verified_git_object_id": "sha1:7f1bd87652f7cc88fbf2f6b542f9feb57750bf0d"
   },
   "validator_contract": {
     "artifact_reads": "DESCRIPTOR_RELATIVE_O_NOFOLLOW",

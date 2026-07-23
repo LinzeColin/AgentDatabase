@@ -779,6 +779,18 @@ class MechanismContractTests(unittest.TestCase):
 
     def test_10_public_value_scans_values_not_only_keys(self) -> None:
         scan_public_value({"recipient_ref": "owner-primary", "status": "PASS"}, self.bundle.policies)
+        scan_public_value(
+            {"next_phase": "AUTO_AU040_PUBLISHER_V2_RUNTIME_INTEGRATION"},
+            self.bundle.policies,
+        )
+        with self.assertRaisesRegex(
+            ContractError,
+            "PUBLIC_HIGH_ENTROPY_FREE_STRING_BLOCK",
+        ):
+            scan_public_value(
+                {"next_phase": "AutoPublisherV2RuntimeIntegrationUnsafeToken123456789"},
+                self.bundle.policies,
+            )
         for name, artifact_value in self.artifacts.items():
             with self.subTest(public_artifact=name):
                 scan_public_value(artifact_value, self.bundle.policies)

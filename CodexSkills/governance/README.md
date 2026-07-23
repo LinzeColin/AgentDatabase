@@ -134,11 +134,18 @@ part-delete/retention-receipt/manifest publication. The Auto draft validator
 is useful draft evidence but is explicitly not a production trust root.
 
 The successor control binds the exact final candidate and V2 consumer plus the
-integrated Auto runtime Git object, runtime-interface bytes, and 21 declared
-module digests. It records `auto_runtime_integration_complete=true` and allows
-state-writing entrypoints to pass only when callers supply both exact external
-candidate and successor-control trust tuples. Activation remains forbidden.
-Its only next phase is `AUTO_AU040_RUNTIME_WRITER_INTEGRATION`; publisher-v2
-integration is deliberately a later phase. Schedule authority, Gmail/state
-readiness, AU-040 completion, repository binding, M0c-B, ACTIVE trust, and
-canonical publication remain false.
+integrated Auto runtime Git object, runtime-interface bytes, and 24 declared
+module digests. It independently validates the immutable predecessor control
+and Mechanism runtime blobs cited by Auto's historical observation; the
+working tree is not substituted as historical evidence. It records
+`auto_runtime_integration_complete=true` and
+`runtime_shard_writer_integration_complete=true`, while
+`publisher_v2_runtime_integration_complete=false`, and allows state-writing
+entrypoints to pass only when callers supply both exact external candidate and
+successor-control trust tuples. Auto's materialization snapshot remains
+historically `current_auto_runtime_control_bound=false`; that snapshot is not
+rewritten into successor authorization. Activation remains forbidden. Its
+only next phase is `AUTO_AU040_PUBLISHER_V2_RUNTIME_INTEGRATION`. Schedule
+authority, Gmail/state readiness, runtime state-instance creation, AU-040
+completion, repository binding, M0c-B, ACTIVE trust, canonical shard creation,
+and canonical publication remain false.

@@ -64,18 +64,25 @@ CANDIDATE_BUNDLE_GIT_OBJECT_ID = (
     "sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5"
 )
 AUTO_RUNTIME_GIT_OBJECT_ID = (
-    "sha1:7ed9e761921f557887440803d1fc7327f3e986a9"
+    "sha1:7f1bd87652f7cc88fbf2f6b542f9feb57750bf0d"
 )
 AUTO_RUNTIME_INTERFACE_RAW_SHA256 = (
-    "09af0c00273825e90a489f413a2f0bb6995042e5b4eea17973ce7582eab66340"
+    "f1f9331df1b56c80e2fa7415fe2fe3d714dcd831cec94390afa43c078dedf38b"
 )
-AUTO_RUNTIME_MODULE_COUNT = 21
+AUTO_RUNTIME_MODULE_COUNT = 24
 AUTO_SOURCE_CONTROL_GIT_OBJECT_ID = (
-    "sha1:66d5bafadca508cad825b4ce49a42e81e8b66ef7"
+    "sha1:00c4a52d177898b1999b87b29ddb480e89908729"
 )
 AUTO_SOURCE_CONTROL_INTERFACE_RAW_SHA256 = (
-    "86e4d625bdab87261a39c949883d410822e25e0222dbab6a333d171ce420c614"
+    "31602443a685cc12a1eebd51ea8e0801ffd399c16a33186c372b7b81e8e46409"
 )
+AUTO_SOURCE_RUNTIME_GIT_OBJECT_ID = (
+    "sha1:7ed9e761921f557887440803d1fc7327f3e986a9"
+)
+AUTO_SOURCE_RUNTIME_INTERFACE_RAW_SHA256 = (
+    "09af0c00273825e90a489f413a2f0bb6995042e5b4eea17973ce7582eab66340"
+)
+AUTO_SOURCE_RUNTIME_MODULE_COUNT = 21
 AUTO_PROMOTION_GIT_OBJECT_ID = (
     "sha1:ab49666bd3343c2abbfc6766478fad63d44163d0"
 )
@@ -98,6 +105,12 @@ CANDIDATE_MANIFEST_REPO_PATH = (
 )
 CANDIDATE_MANIFEST_RAW_SHA256 = (
     "66ad125629cab71739ff2bc266219f995f7a45998936ca720c6db678ee77e65a"
+)
+HISTORICAL_MECHANISM_RUNTIME_PATHS = (
+    "CodexSkills/governance/tools/build_activation_control.py",
+    "CodexSkills/governance/tools/canonical_json.py",
+    "CodexSkills/governance/tools/validate_activation.py",
+    "CodexSkills/governance/tools/validate_mechanism.py",
 )
 
 COMMON_ID = "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1"
@@ -438,6 +451,136 @@ def _verify_auto_module_artifacts(
         raise ContractError("ACTIVATION_AUTO_MODULE_SET_INVALID")
 
 
+def _verify_auto_historical_control(
+    auto_interface: Mapping[str, Any],
+) -> None:
+    observation = auto_interface.get("historical_control_observation")
+    snapshot = auto_interface.get("runtime_interface_materialization_snapshot")
+    if not isinstance(observation, dict) or snapshot != {
+        "as_of_phase": "AUTO_AU040_RUNTIME_WRITER_INTEGRATION",
+        "control_sync_required_before_state_write": True,
+        "current_auto_runtime_control_bound": False,
+        "historical_control_git_object_id": (
+            AUTO_SOURCE_CONTROL_GIT_OBJECT_ID
+        ),
+        "runtime_state_write_permitted": False,
+        "semantic_scope": "INTERFACE_MATERIALIZATION_ONLY",
+    }:
+        raise ContractError("ACTIVATION_AUTO_CONTROL_SNAPSHOT_INVALID")
+
+    source_control_raw = _git_blob(
+        AUTO_SOURCE_CONTROL_GIT_OBJECT_ID,
+        CONTROL_INTERFACE_REPO_PATH,
+    )
+    if (
+        hashlib.sha256(source_control_raw).hexdigest()
+        != AUTO_SOURCE_CONTROL_INTERFACE_RAW_SHA256
+    ):
+        raise ContractError(
+            "ACTIVATION_AUTO_HISTORICAL_CONTROL_DIGEST_MISMATCH"
+        )
+    source_control = parse_json_bytes(source_control_raw)
+    source_transport = (
+        source_control.get("transport_runtime_interface", {})
+        if isinstance(source_control, dict)
+        else {}
+    )
+    source_transition = (
+        source_control.get("transition_contract", {})
+        if isinstance(source_control, dict)
+        else {}
+    )
+    if (
+        not isinstance(source_control, dict)
+        or source_control.get("status") != "DRAFT_NON_ACTIVE"
+        or source_control.get("activation_forbidden") is not True
+        or source_control.get("base_auto_git_object_id")
+        != AUTO_SOURCE_RUNTIME_GIT_OBJECT_ID
+        or source_control.get("next_phase")
+        != "AUTO_AU040_RUNTIME_WRITER_INTEGRATION"
+        or not isinstance(source_transport, dict)
+        or source_transport.get("verified_git_object_id")
+        != AUTO_SOURCE_RUNTIME_GIT_OBJECT_ID
+        or source_transport.get("artifact_digest")
+        != AUTO_SOURCE_RUNTIME_INTERFACE_RAW_SHA256
+        or source_transport.get("module_count")
+        != AUTO_SOURCE_RUNTIME_MODULE_COUNT
+        or not isinstance(source_transition, dict)
+        or source_transition.get("auto_runtime_integration_complete")
+        is not True
+        or source_transition.get("runtime_state_write_permitted")
+        is not True
+        or source_transition.get("runtime_shard_writer_integration_complete")
+        is not False
+        or source_transition.get("publisher_v2_runtime_integration_complete")
+        is not False
+    ):
+        raise ContractError(
+            "ACTIVATION_AUTO_HISTORICAL_CONTROL_CONTRACT_MISMATCH"
+        )
+
+    if any(
+        observation.get(key) != value
+        for key, value in {
+            "bound_auto_git_object_id": AUTO_SOURCE_RUNTIME_GIT_OBJECT_ID,
+            "bound_auto_module_count": AUTO_SOURCE_RUNTIME_MODULE_COUNT,
+            "bound_auto_runtime_interface_raw_sha256": (
+                AUTO_SOURCE_RUNTIME_INTERFACE_RAW_SHA256
+            ),
+            "canonical_path": CONTROL_INTERFACE_REPO_PATH,
+            "external_mode": "DRAFT_NON_ACTIVE_CONTROL",
+            "interface_raw_sha256": (
+                AUTO_SOURCE_CONTROL_INTERFACE_RAW_SHA256
+            ),
+            "next_phase_at_observation": (
+                "AUTO_AU040_RUNTIME_WRITER_INTEGRATION"
+            ),
+            "observed_auto_runtime_integration_complete": True,
+            "observed_runtime_state_write_permitted": True,
+            "root_status": "DRAFT_NON_ACTIVE",
+            "verified_git_object_id": AUTO_SOURCE_CONTROL_GIT_OBJECT_ID,
+            "working_tree_control_is_not_historical_trust_evidence": True,
+            "working_tree_mechanism_runtime_is_not_historical_trust_evidence": (
+                True
+            ),
+        }.items()
+    ):
+        raise ContractError(
+            "ACTIVATION_AUTO_HISTORICAL_CONTROL_OBSERVATION_MISMATCH"
+        )
+
+    runtime_artifacts = observation.get(
+        "historical_mechanism_runtime_artifacts"
+    )
+    if (
+        not isinstance(runtime_artifacts, list)
+        or [
+            entry.get("relative_path")
+            for entry in runtime_artifacts
+            if isinstance(entry, dict)
+        ]
+        != list(HISTORICAL_MECHANISM_RUNTIME_PATHS)
+    ):
+        raise ContractError(
+            "ACTIVATION_AUTO_HISTORICAL_RUNTIME_SET_INVALID"
+        )
+    for entry in runtime_artifacts:
+        if (
+            not isinstance(entry, dict)
+            or not _is_sha256(entry.get("artifact_digest"))
+            or hashlib.sha256(
+                _git_blob(
+                    AUTO_SOURCE_CONTROL_GIT_OBJECT_ID,
+                    entry["relative_path"],
+                )
+            ).hexdigest()
+            != entry["artifact_digest"]
+        ):
+            raise ContractError(
+                "ACTIVATION_AUTO_HISTORICAL_RUNTIME_DIGEST_MISMATCH"
+            )
+
+
 def _preflight_inputs(
     *,
     require_non_active: bool,
@@ -499,14 +642,12 @@ def _preflight_inputs(
             "ACTIVATION_AUTO_PROMOTION_INTERFACE_RAW_DIGEST_MISMATCH"
         )
     promotion_interface = parse_json_bytes(promotion_raw)
-    transport = (
-        auto_interface.get("au_040_transport_contract", {})
-        if isinstance(auto_interface, dict)
-        else {}
-    )
+    if not isinstance(auto_interface, dict):
+        raise ContractError("ACTIVATION_AUTO_INTERFACE_CONTRACT_MISMATCH")
+    _verify_auto_historical_control(auto_interface)
+    transport = auto_interface.get("au_040_transport_contract", {})
     if (
-        not isinstance(auto_interface, dict)
-        or auto_interface.get("status") != "DRAFT_NON_ACTIVE"
+        auto_interface.get("status") != "DRAFT_NON_ACTIVE"
         or auto_interface.get("auto_exact_bundle_integration_complete")
         is not True
         or auto_interface.get("candidate_bundle_digest")
@@ -522,27 +663,26 @@ def _preflight_inputs(
         != CONSUMER_GIT_OBJECT_ID
         or auto_interface.get("consumer_first_interface_raw_sha256")
         != CONSUMER_INTERFACE_RAW_SHA256
-        or auto_interface.get("activation_control_baseline_git_object_id")
-        != AUTO_SOURCE_CONTROL_GIT_OBJECT_ID
-        or auto_interface.get(
-            "activation_control_baseline_interface_raw_sha256"
-        )
-        != AUTO_SOURCE_CONTROL_INTERFACE_RAW_SHA256
         or auto_interface.get("activation_control_mode")
         != "DRAFT_NON_ACTIVE_CONTROL"
-        or auto_interface.get("activation_control_observed_root_status")
-        != "DRAFT_NON_ACTIVE"
+        or auto_interface.get(
+            "activation_control_trust_tuple_repo_external_only"
+        )
+        is not True
+        or auto_interface.get("trust_tuple_repo_external_only") is not True
         or auto_interface.get("dual_external_trust_tuples_required")
         is not True
         or auto_interface.get("control_sync_required_before_state_write")
         is not True
-        or auto_interface.get(
-            "control_observed_auto_runtime_integration_complete"
-        )
-        is not False
         or auto_interface.get("runtime_preflight_shadow_permitted")
         is not True
         or auto_interface.get("runtime_state_write_permitted") is not False
+        or auto_interface.get("runtime_shard_writer_integration_complete")
+        is not True
+        or auto_interface.get("publisher_v2_runtime_integration_complete")
+        is not False
+        or auto_interface.get("repository_bound") is not False
+        or auto_interface.get("au_040_complete") is not False
         or auto_interface.get("au_040_schema_promotion_complete") is not True
         or auto_interface.get(
             "au_040_retention_policy_v3_repository_accepted"
@@ -561,19 +701,30 @@ def _preflight_inputs(
         or auto_interface.get("schedule_complete") is not False
         or auto_interface.get("external_gmail_ready_gate_satisfied") is not False
         or auto_interface.get("m0c_b_permitted") is not False
+        or auto_interface.get("activation_instance_created") is not False
+        or auto_interface.get("runtime_writer_shadow_status")
+        != "UNBOUND_CONTROL_SYNC_PENDING"
+        or auto_interface.get("runtime_writer_shadow_validator_kind")
+        != "DEVELOPMENT_ONLY_UNBOUND"
+        or auto_interface.get("runtime_writer_shadow_returns_bootstrap_context")
+        is not False
+        or auto_interface.get("runtime_writer_shadow_state_access_permitted")
+        is not False
+        or auto_interface.get("au_040_authority_ruling_status")
+        != "RUNTIME_WRITER_INTEGRATED_CONTROL_SYNC_PENDING"
         or auto_interface.get("notification_production_transport")
         != "GMAIL_API_V1"
         or auto_interface.get("notification_provider_readback_required") is not True
         or auto_interface.get("notification_test_transport_production_forbidden")
         is not True
         or auto_interface.get("next_phase")
-        != "MECHANISM_POST_AUTO_INTEGRATION_CONTROL_SYNC"
+        != "MECHANISM_POST_AU040_WRITER_CONTROL_SYNC"
         or not isinstance(transport, dict)
         or transport.get("current_candidate_schema_count") != 31
         or transport.get("final_candidate_materialization_complete")
         is not True
         or transport.get("runtime_shard_writer_integration_complete")
-        is not False
+        is not True
         or transport.get("publisher_v2_runtime_integration_complete")
         is not False
         or transport.get("repository_bound") is not False
@@ -693,7 +844,7 @@ def control_interface(schemas: Mapping[str, Mapping[str, Any]]) -> Dict[str, Any
             "timing": "PRE_WRITE",
             "transport": "GMAIL_API_V1",
         },
-        "next_phase": "AUTO_AU040_RUNTIME_WRITER_INTEGRATION",
+        "next_phase": "AUTO_AU040_PUBLISHER_V2_RUNTIME_INTEGRATION",
         "protocol_revision": PROTOCOL_REVISION,
         "publication_contract": {
             "caller_boolean_is_not_trust_root": True,
@@ -742,7 +893,7 @@ def control_interface(schemas: Mapping[str, Mapping[str, Any]]) -> Dict[str, Any
             "publisher_v2_runtime_integration_complete": False,
             "repository_bound": False,
             "runtime_preflight_shadow_permitted": True,
-            "runtime_shard_writer_integration_complete": False,
+            "runtime_shard_writer_integration_complete": True,
             "runtime_state_instance_created": False,
             "runtime_state_write_permitted": True,
             "schedule_authority_resolved": False,
@@ -750,7 +901,9 @@ def control_interface(schemas: Mapping[str, Mapping[str, Any]]) -> Dict[str, Any
         },
         "transport_runtime_interface": {
             "artifact_digest": AUTO_RUNTIME_INTERFACE_RAW_SHA256,
-            "integration_state": "FINAL_31_5_INTEGRATED_CONTROL_SYNCED",
+            "integration_state": (
+                "AU040_RUNTIME_WRITER_INTEGRATED_CONTROL_SYNCED"
+            ),
             "module_count": AUTO_RUNTIME_MODULE_COUNT,
             "relative_path": "CodexSkills/registry/auto/runtime-interface.json",
             "verified_git_object_id": AUTO_RUNTIME_GIT_OBJECT_ID,

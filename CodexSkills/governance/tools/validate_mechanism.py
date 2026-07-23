@@ -919,8 +919,8 @@ def scan_public_value(value: Any, policies: Mapping[str, Any]) -> None:
             or field_name in {
                 "action", "actor", "binding_state", "compatibility", "edge_type",
                 "event_type", "freshness_state", "kind", "lifecycle_status",
-                "mode", "node_type", "phase", "reason", "risk_tier", "stage",
-                "state", "status", "surface_class",
+                "mode", "next_phase", "node_type", "phase", "reason",
+                "risk_tier", "stage", "state", "status", "surface_class",
             }
         )
         public_ref_field = field_name is not None and (

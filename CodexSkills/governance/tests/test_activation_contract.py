@@ -23,6 +23,7 @@ from build_activation_control import (  # noqa: E402
     AUTO_RUNTIME_GIT_OBJECT_ID,
     AUTO_RUNTIME_INTERFACE_RAW_SHA256,
     AUTO_RUNTIME_MODULE_COUNT,
+    AUTO_SOURCE_CONTROL_GIT_OBJECT_ID,
     CANDIDATE_BUNDLE_DIGEST,
     CANDIDATE_BUNDLE_GIT_OBJECT_ID,
     CONTROL_INTERFACE_PATH,
@@ -299,7 +300,7 @@ class ActivationControlTests(unittest.TestCase):
         self.assertEqual(interface["candidate_policy_count"], 5)
         self.assertEqual(
             interface["next_phase"],
-            "AUTO_AU040_RUNTIME_WRITER_INTEGRATION",
+            "AUTO_AU040_PUBLISHER_V2_RUNTIME_INTEGRATION",
         )
         self.assertEqual(
             interface["base_auto_git_object_id"],
@@ -332,6 +333,27 @@ class ActivationControlTests(unittest.TestCase):
         self.assertTrue(
             interface["transition_contract"]["runtime_state_write_permitted"]
         )
+        auto_interface = strict_load(
+            REPO_ROOT
+            / "CodexSkills"
+            / "registry"
+            / "auto"
+            / "runtime-interface.json"
+        )
+        self.assertFalse(auto_interface["runtime_state_write_permitted"])
+        self.assertEqual(
+            auto_interface["runtime_interface_materialization_snapshot"],
+            {
+                "as_of_phase": "AUTO_AU040_RUNTIME_WRITER_INTEGRATION",
+                "control_sync_required_before_state_write": True,
+                "current_auto_runtime_control_bound": False,
+                "historical_control_git_object_id": (
+                    "sha1:00c4a52d177898b1999b87b29ddb480e89908729"
+                ),
+                "runtime_state_write_permitted": False,
+                "semantic_scope": "INTERFACE_MATERIALIZATION_ONLY",
+            },
+        )
         self.assertFalse(
             interface["transition_contract"]["runtime_state_instance_created"]
         )
@@ -347,7 +369,7 @@ class ActivationControlTests(unittest.TestCase):
                 "au_040_daily_jsonl_shard_complete"
             ]
         )
-        self.assertFalse(
+        self.assertTrue(
             interface["transition_contract"][
                 "runtime_shard_writer_integration_complete"
             ]
@@ -371,7 +393,7 @@ class ActivationControlTests(unittest.TestCase):
             {
                 "artifact_digest": AUTO_RUNTIME_INTERFACE_RAW_SHA256,
                 "integration_state": (
-                    "FINAL_31_5_INTEGRATED_CONTROL_SYNCED"
+                    "AU040_RUNTIME_WRITER_INTEGRATED_CONTROL_SYNCED"
                 ),
                 "module_count": AUTO_RUNTIME_MODULE_COUNT,
                 "relative_path": (
@@ -427,6 +449,34 @@ class ActivationControlTests(unittest.TestCase):
             with self.assertRaisesRegex(
                 ContractError,
                 "ACTIVATION_AUTO_MODULE_DIGEST_MISMATCH",
+            ):
+                _preflight_inputs(
+                    require_non_active=False,
+                    require_current_auto=False,
+                )
+
+    def test_02c_historical_control_runtime_digest_drift_fails_closed(
+        self,
+    ) -> None:
+        target = (
+            "CodexSkills/governance/tools/build_activation_control.py"
+        )
+
+        def drift(object_id: str, relative_path: str) -> bytes:
+            if (
+                object_id == AUTO_SOURCE_CONTROL_GIT_OBJECT_ID
+                and relative_path == target
+            ):
+                return b"historical drift"
+            return _git_blob(object_id, relative_path)
+
+        with mock.patch(
+            "build_activation_control._git_blob",
+            side_effect=drift,
+        ):
+            with self.assertRaisesRegex(
+                ContractError,
+                "ACTIVATION_AUTO_HISTORICAL_RUNTIME_DIGEST_MISMATCH",
             ):
                 _preflight_inputs(
                     require_non_active=False,
