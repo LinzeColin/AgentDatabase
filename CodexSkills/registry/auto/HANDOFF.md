@@ -12,7 +12,7 @@
 - Candidate bundle digest:
   `2704ed797c843f969965db600747abcdcd217550522e6479aab6817ef5a86ef5`
 - Candidate Git object:
-  `sha1:4b1e1a318c8f9e1014839a8a3a46e057679c4b6b`
+  `sha1:899a4374bc02f5e18444fea7404864df7b118adf`
 - Auto runtime interface:
   `CodexSkills/registry/auto/runtime-interface.json`
 - Runtime interface raw SHA-256:

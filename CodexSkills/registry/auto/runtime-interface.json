@@ -16,7 +16,7 @@
   "activation_settlement_recomputed_before_publish": true,
   "au_040_daily_jsonl_shard_complete": false,
   "candidate_bundle_digest": "2704ed797c843f969965db600747abcdcd217550522e6479aab6817ef5a86ef5",
-  "candidate_git_object_id": "sha1:4b1e1a318c8f9e1014839a8a3a46e057679c4b6b",
+  "candidate_git_object_id": "sha1:899a4374bc02f5e18444fea7404864df7b118adf",
   "candidate_manifest_path": "CodexSkills/governance/bundles/schema-bundle-manifest.v1.json",
   "canonical_publication_permitted": false,
   "capability_gate_precedes_state_write": true,
@@ -92,7 +92,7 @@
       "relative_path": "CodexSkills/registry/auto/tools/activation_handshake_cli.py"
     },
     {
-      "artifact_digest": "16f4ee299ab6d7a2cafb91c47742185fb79d75581b78bca23e28c9db31467081",
+      "artifact_digest": "578ee4cbb9d64a61207d5f5c3c6068bce2e997b0f373de126f0b7e783aed2a4b",
       "relative_path": "CodexSkills/registry/auto/tools/build_runtime_interface.py"
     },
     {

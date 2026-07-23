@@ -16,7 +16,7 @@ from CodexSkills.registry.auto.runtime.core import (
 from CodexSkills.governance.tools.validate_mechanism import TrustTuple
 
 
-CANDIDATE_GIT_OBJECT = "sha1:4b1e1a318c8f9e1014839a8a3a46e057679c4b6b"
+CANDIDATE_GIT_OBJECT = "sha1:899a4374bc02f5e18444fea7404864df7b118adf"
 CANDIDATE_DIGEST = "2704ed797c843f969965db600747abcdcd217550522e6479aab6817ef5a86ef5"
 MANIFEST_PATH = "CodexSkills/governance/bundles/schema-bundle-manifest.v1.json"
 FIXED_NOW = dt.datetime(2026, 7, 23, 0, 0, 0, tzinfo=dt.timezone.utc)

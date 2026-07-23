@@ -19,7 +19,7 @@ from validate_public_run_event import (  # noqa: E402
 )
 
 
-CANDIDATE_GIT_OBJECT = "sha1:4b1e1a318c8f9e1014839a8a3a46e057679c4b6b"
+CANDIDATE_GIT_OBJECT = "sha1:899a4374bc02f5e18444fea7404864df7b118adf"
 CANDIDATE_DIGEST = (
     "fd1df66e240695bd376803423bd09f9f341f7542f74a6ed92b0f79b0af4dc5e1"
 )

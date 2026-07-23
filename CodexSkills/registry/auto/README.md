@@ -79,7 +79,7 @@ provisioned interpreter:
 ```bash
 /usr/bin/python3 -B CodexSkills/registry/auto/tools/runtime_preflight.py \
   --repo-root . \
-  --verified-git-object-id sha1:4b1e1a318c8f9e1014839a8a3a46e057679c4b6b \
+  --verified-git-object-id sha1:899a4374bc02f5e18444fea7404864df7b118adf \
   --expected-bundle-digest 2704ed797c843f969965db600747abcdcd217550522e6479aab6817ef5a86ef5 \
   --canonical-manifest-path CodexSkills/governance/bundles/schema-bundle-manifest.v1.json \
   --mode CANDIDATE
@@ -131,7 +131,7 @@ The provider preflight is explicit and performs no send:
   preflight \
   --repo-root . \
   --state-root "$SKILLOPS_STATE_ROOT" \
-  --verified-git-object-id sha1:4b1e1a318c8f9e1014839a8a3a46e057679c4b6b \
+  --verified-git-object-id sha1:899a4374bc02f5e18444fea7404864df7b118adf \
   --expected-bundle-digest 2704ed797c843f969965db600747abcdcd217550522e6479aab6817ef5a86ef5 \
   --canonical-manifest-path CodexSkills/governance/bundles/schema-bundle-manifest.v1.json \
   --mode CANDIDATE
