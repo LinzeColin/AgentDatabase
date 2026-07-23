@@ -1,0 +1,666 @@
+{
+  "algorithm_version": "recurring_prompt.v4.0.1",
+  "config_sha256": "sha256:27de27733baedfa3c199a91a005bc216dd8af4cee49417cb2b4c3e8d053ce678",
+  "files": {
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f2aa6-8374-7ca1-b0f2-546070adc26b.535432310d6a.part-0001.jsonl": {
+      "line_count": 8199,
+      "sha256": "sha256:22413b5b5d5454a8cbd2fe452b73d7739498ddfee79b5a0b37bf6e3d779a344e",
+      "size_bytes": 10296589
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f2c94-0024-77a3-ab01-a6fe1a4fc94b.0e9984861d98.part-0001.jsonl": {
+      "line_count": 226,
+      "sha256": "sha256:c9eb137385b401b0934f6d06db8f4f4c13e262d488504b888164e1717ddfee80",
+      "size_bytes": 343809
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f2fac-1afb-7b70-96ef-bf23e7dbff2b.44471b24a5ee.part-0001.jsonl": {
+      "line_count": 263,
+      "sha256": "sha256:0738fad1ae1b2f10ae15dbd7e3b322b706d2968a0c1e3ccefd917f5c16270da6",
+      "size_bytes": 373443
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f31b9-2696-7973-b9c3-22ae361227b2.761088aa43b9.part-0001.jsonl": {
+      "line_count": 176,
+      "sha256": "sha256:e4ee781e9007a0a6a8276f384644a30776a3b77f4bad819e034e3b95aaa35017",
+      "size_bytes": 343016
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f31e8-c530-7a60-b79b-9f765338b9cd.52f230f73a73.part-0001.jsonl": {
+      "line_count": 118,
+      "sha256": "sha256:e2759f7a7d5484cfb6386c25d45e7be26190092c02599d36269282ac86e3beed",
+      "size_bytes": 256121
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f3207-00ca-7833-b132-cf9bd08c4961.73c9cd3ce8de.part-0001.jsonl": {
+      "line_count": 2336,
+      "sha256": "sha256:1830d6cb95d8a029e6b86b38aeffb3674f139dd64bff88aff26772134ceb1469",
+      "size_bytes": 2445023
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f3244-7536-7320-860a-b554ce59078e.d6368ce64a1d.part-0001.jsonl": {
+      "line_count": 114,
+      "sha256": "sha256:c034ea1866b30ec57381b3e23c38d905bd47df58a0e5184a89c0e4403371f9bc",
+      "size_bytes": 152957
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f3252-5070-7d91-9cda-9c2bfd698efc.0ac364a7f066.part-0001.jsonl": {
+      "line_count": 94,
+      "sha256": "sha256:aeda2bcdb4a36915d3d6c9cc568f01fda3fa251a41e84a56f76e3b9152964ea7",
+      "size_bytes": 138336
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f32d5-6fdd-77b1-9b1b-f0de3aafaae7.01120c313584.part-0001.jsonl": {
+      "line_count": 59,
+      "sha256": "sha256:c0483996e1fc86ff0214826aa4128091f02c2c466bdc43462ce9602ea16d28ea",
+      "size_bytes": 160525
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f33a7-1b00-7a00-85ba-0bfaa2e2c684.0286879505bf.part-0001.jsonl": {
+      "line_count": 120,
+      "sha256": "sha256:9d3c7156b7c65dd0dd810863ffa5cadcf2c7be4263f82f126a86f629797663f1",
+      "size_bytes": 228791
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f34a8-dd00-71c0-9676-2c83c9374e2e.fff4efe59bbb.part-0001.jsonl": {
+      "line_count": 133,
+      "sha256": "sha256:14569f90493d791cb7c89bdb7f15655a933be6b5f9cdcf9e816f0e0c71a46827",
+      "size_bytes": 336853
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f363a-c7ff-7aa3-bfdc-47b610f65949.9a2ee2bf3e36.part-0001.jsonl": {
+      "line_count": 98,
+      "sha256": "sha256:288300295a65a98530a56479da82369ed5727102137056b05eb9158be96fd4de",
+      "size_bytes": 182574
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f36e0-d552-7223-a97b-4fff6b3793b5.2b1979bbbfb8.part-0001.jsonl": {
+      "line_count": 235,
+      "sha256": "sha256:82058c7e0a655d7480b849ee31219f5eb4f818f612c975800bf388eef835eb86",
+      "size_bytes": 293665
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f3741-d35d-79d1-aca8-cacb4b36a259.cb84f2de4947.part-0001.jsonl": {
+      "line_count": 822,
+      "sha256": "sha256:127046985c4fe135706e6ec23f75a97767c2d2141fc2a0d94941caf25d7d14b8",
+      "size_bytes": 1246368
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f37fb-bbc3-7930-8495-c63c2ab4a2d0.f3958658913e.part-0001.jsonl": {
+      "line_count": 55,
+      "sha256": "sha256:7e0325973092341ef51e2157bd17a6e81a22e24be718e48fdc5e20689337707c",
+      "size_bytes": 155430
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f38ce-c827-7a31-9054-362259f331c6.1da474fe30eb.part-0001.jsonl": {
+      "line_count": 170,
+      "sha256": "sha256:f084383572d0b69eea2f5aba52fb83d79fc5e0d90898d478365e900ae26ee99f",
+      "size_bytes": 335851
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f3a17-b597-7a11-8a66-0fe03301ef55.c5a7771f2479.part-0001.jsonl": {
+      "line_count": 7354,
+      "sha256": "sha256:1cd349f9ea9164bdddf209fa491eb2a5601d0ac0499fb8b7f1ce303b9be962b8",
+      "size_bytes": 11411354
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f3a17-eeca-7af3-928c-982ab3c8cd04.744765e72a7f.part-0001.jsonl": {
+      "line_count": 1497,
+      "sha256": "sha256:4cbe9537673f8d3fc2c94d2c564fb171e8df1826c5652a4258876ecf85182e0b",
+      "size_bytes": 1424196
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f3b48-4fec-7af2-bf59-f7f854cc5c72.1f09233fab0e.part-0001.jsonl": {
+      "line_count": 4150,
+      "sha256": "sha256:daae2f21d9ac84d92436f98122b772e8f3b76f34d62407b441f53f78ea6bb35f",
+      "size_bytes": 6361144
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.2b8ecc60faa9.part-0001.jsonl": {
+      "line_count": 15884,
+      "sha256": "sha256:c1795a7cba691c3455a355cd7ec13c267ccc4d65b114612f2a9d29351edc19a2",
+      "size_bytes": 22068511
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.5327799e38ce.part-0001.jsonl": {
+      "line_count": 16010,
+      "sha256": "sha256:bed5b00bb29081b18a428ef5715fdb2be759b4c9dddf8233c9629e5f21f06e83",
+      "size_bytes": 22304468
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.608ca641485c.part-0001.jsonl": {
+      "line_count": 16001,
+      "sha256": "sha256:e2775a08ef774cfc6c690122be30ae72c9d165912708b8cad9a8678b4a6ebffa",
+      "size_bytes": 22159421
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.792535cc4746.part-0001.jsonl": {
+      "line_count": 16041,
+      "sha256": "sha256:e1a92fa41d47fdc04b68368218ecb226ec03f008705341f86cca42cae438ee5f",
+      "size_bytes": 22202777
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.a7f9df6be550.part-0001.jsonl": {
+      "line_count": 21692,
+      "sha256": "sha256:113b9b9cd66703f55893b88e367b909563ace2d90eec6ac2c3ee307be6ae633b",
+      "size_bytes": 41942422
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.a7f9df6be550.part-0002.jsonl": {
+      "line_count": 20712,
+      "sha256": "sha256:86dec2c4655dc06b2ac955966198987684740f234530f73e5295d2f0a9919698",
+      "size_bytes": 41906208
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f3b5f-b76a-7df2-bc43-706f89ce3820.a7f9df6be550.part-0003.jsonl": {
+      "line_count": 8928,
+      "sha256": "sha256:bdb8579055f2e67b0227684fde2a3ec42ad66b6608a443c5118bdf00dd4eacfd",
+      "size_bytes": 14424265
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f3bce-be0e-7151-9d1a-6b29eb5d759f.aaa799a2e74a.part-0001.jsonl": {
+      "line_count": 130,
+      "sha256": "sha256:f3d8a8795cc637879340dd2182dbffe0c9b06676212f790576eac869a626e602",
+      "size_bytes": 361996
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f3c06-218c-7dd2-8681-138aa3a96005.40c8ecf7652e.part-0001.jsonl": {
+      "line_count": 988,
+      "sha256": "sha256:6e453f38d47fc1d589c3c9b6afada9bee3669b827cfd0acadc8db66f68d85a7b",
+      "size_bytes": 1247638
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f3c0b-72bc-7d72-aa08-76f4aec0f7c8.893b056ca050.part-0001.jsonl": {
+      "line_count": 10891,
+      "sha256": "sha256:11114df8c9c1dc56a26fcd1ba986c4bc249c561df2bff271370c2b7752451cdb",
+      "size_bytes": 16110755
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f3c84-a077-75c3-8342-2b0131a04dcf.87b3c314181c.part-0001.jsonl": {
+      "line_count": 3081,
+      "sha256": "sha256:247572d0cd3bef4e732d70d9def87eafd053ddd1c12cadcae45916e56a022f7e",
+      "size_bytes": 4054484
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f3d21-8131-7721-aa54-ce470e16a862.ff146b6e0e0e.part-0001.jsonl": {
+      "line_count": 4,
+      "sha256": "sha256:50c127b25c0e2164f6e878db902e4161bd168ece8266e8332e25003ef52fc788",
+      "size_bytes": 35116
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f3d33-d201-74a0-aee4-7a4a54a341da.7cddd899eaf5.part-0001.jsonl": {
+      "line_count": 312,
+      "sha256": "sha256:18b10daf11f56741b58efe540fcd644882010849719a19cc4bf7760cde82f144",
+      "size_bytes": 409944
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f3df5-030c-70a1-b2c5-84644fc1bafc.6f424300ebaf.part-0001.jsonl": {
+      "line_count": 760,
+      "sha256": "sha256:bcd771f496e66b9eb33a7582b35776ee694351e8e59862cfa540f3ff072ee328",
+      "size_bytes": 975865
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f3e39-ad1a-7c12-bbb3-b7224e1ef82b.885f2a0cdeef.part-0001.jsonl": {
+      "line_count": 462,
+      "sha256": "sha256:f3d36aba3f6c0a40cac88d45b3bc4aba897af171f57134f8bad2b6ce2af7821c",
+      "size_bytes": 645106
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f3ea4-a44e-7bd0-bf3f-1b8caf90ec9c.984b4eb0428d.part-0001.jsonl": {
+      "line_count": 28536,
+      "sha256": "sha256:7b9200759d5a2e60c913baf5bc222e481d0e0b9d05bc1663a08ee8e107c5fba0",
+      "size_bytes": 41942473
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f3ea4-a44e-7bd0-bf3f-1b8caf90ec9c.984b4eb0428d.part-0002.jsonl": {
+      "line_count": 17849,
+      "sha256": "sha256:eb8a1c893988c6fb14efa5103d9da644e525c3bae37bec2cbb296516d208093a",
+      "size_bytes": 33621479
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f3f27-c77c-7002-9fb6-720c4fb95ade.50cf278536e3.part-0001.jsonl": {
+      "line_count": 206,
+      "sha256": "sha256:5cb4aa311b1a12191bbbcc9051ece4142e8e6de7227ac9380e0f6e37aedba10b",
+      "size_bytes": 379315
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f3f3d-bf3c-76a2-85e9-75330e4534ae.460b75195a1b.part-0001.jsonl": {
+      "line_count": 276,
+      "sha256": "sha256:23a23453a69124ad1f4c9d9233c63d1c4cf3a006abb2e9702629f2fd6d56964b",
+      "size_bytes": 391955
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f3f59-abe9-7252-8a7f-4b1cd8216707.2768c80ba943.part-0001.jsonl": {
+      "line_count": 86,
+      "sha256": "sha256:8fc2a8d018acca64ef52242447cc75c7d70439f283ba3095257fc0911ff3af27",
+      "size_bytes": 212990
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f3fb1-1dc7-7d73-a1dc-dbf16a36e327.e1f160d9b1f6.part-0001.jsonl": {
+      "line_count": 54,
+      "sha256": "sha256:6ca001111b0873acb8e83e80d2653fc050155ff937abe913cdeeec98478ecf8d",
+      "size_bytes": 127071
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f3fcb-ab66-7951-8fbd-f5f50c579e62.360c6dd9b366.part-0001.jsonl": {
+      "line_count": 74,
+      "sha256": "sha256:47a969f453910063388dc095c6dcf99faa13ed8e1ca95fdfe8609d1aee7dd4ec",
+      "size_bytes": 153669
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4022-1a2f-7091-8836-0383af0c4b9d.1a4a15d48012.part-0001.jsonl": {
+      "line_count": 155,
+      "sha256": "sha256:2545936a829caee754c09deb584f6be6aa902fa3b54adaa413d0c9c031425086",
+      "size_bytes": 297732
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4022-48e4-7963-b060-6c8d5d257c0b.5fb6d5defbf5.part-0001.jsonl": {
+      "line_count": 204,
+      "sha256": "sha256:71fc6ae04b7f959f8587009a6b534da078720b6811c5788e000d96543ffefd81",
+      "size_bytes": 347587
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4027-4f56-70a0-ac22-96b29e3ad68b.dea47354b0cb.part-0001.jsonl": {
+      "line_count": 298,
+      "sha256": "sha256:1e0f17e4cc4ce4d5c0e812644b50573abd93976ad84792e1372740aeecab848a",
+      "size_bytes": 735741
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f40f6-9f31-7c60-a99d-84d253ca5f60.537ac738ffad.part-0001.jsonl": {
+      "line_count": 150,
+      "sha256": "sha256:ee84d6d5a9533c20fdcb9178d6c210efea9616a5219def7148da750d63945e42",
+      "size_bytes": 318197
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f40f6-ad8c-7f21-8ffc-0e1a1df793eb.9edc7a87c5b3.part-0001.jsonl": {
+      "line_count": 97,
+      "sha256": "sha256:e036c2abeee41644ac3c9c34f2066c935800f8da00c2d982a836aa3ea72d17c5",
+      "size_bytes": 256069
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f412c-a79b-74b3-ab87-be5cfc6bde59.0450858c1be7.part-0001.jsonl": {
+      "line_count": 117,
+      "sha256": "sha256:4826d1b03bd3c44dfc3c67d41d7a0edad2bd3ac7e608d86271ce5c5088821df2",
+      "size_bytes": 231597
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4131-3c1b-74e1-b5c0-44d7b556352b.0ca45e76615f.part-0001.jsonl": {
+      "line_count": 97,
+      "sha256": "sha256:41b9031c1b5f6962d34739225a630d019c9029cc8df271bf62fa53b2c6161e49",
+      "size_bytes": 169838
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4131-47b5-7bc2-853e-04d4df46d432.df7d7383089b.part-0001.jsonl": {
+      "line_count": 122,
+      "sha256": "sha256:585f6c57f86705926a6e154c132b414706838176e7f3f47aafef4322db53fe19",
+      "size_bytes": 183519
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f41f1-fdc0-7010-9c17-698213b76b94.3e539615ffaf.part-0001.jsonl": {
+      "line_count": 82,
+      "sha256": "sha256:7568d3344b18701849893c7da03224faa4b32b97cef33904e276b5671f317024",
+      "size_bytes": 156711
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f41f2-08b7-7291-9bbb-7cb4ff945f52.68beae309b7d.part-0001.jsonl": {
+      "line_count": 112,
+      "sha256": "sha256:fe1f05b932bd85fb71768bad65999ef9cadfb60d150cac804db95cf0325f0724",
+      "size_bytes": 195494
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4247-975a-71e3-896e-95ef806aef8b.57699debc2be.part-0001.jsonl": {
+      "line_count": 74,
+      "sha256": "sha256:32ccdece52c7ddfbed1664b84a84d16cdfe7ec795ac876a6b77a85e9bc8ad7b2",
+      "size_bytes": 164765
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4259-e825-7ff0-9662-8f9b5879d7a7.7f86468efe92.part-0001.jsonl": {
+      "line_count": 244,
+      "sha256": "sha256:3d1a0cfd677a764e69b7107402ea7268906b51d30077c9fb209c8a6439400b5d",
+      "size_bytes": 359460
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f427b-530e-7ab0-8265-25a3fcc4d991.f6caf0c2c0ce.part-0001.jsonl": {
+      "line_count": 211,
+      "sha256": "sha256:f2010be19c5edd7c74c687087f5d3be5714e898c8237c221c59b400676c2dead",
+      "size_bytes": 366409
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f431a-2e5e-7ea0-aaea-4a50706985de.5c38e7aa5483.part-0001.jsonl": {
+      "line_count": 192,
+      "sha256": "sha256:622bf8d01534b0f57c602807ea2e0ae68ebdb6c7e57e37dbac25a8f97d6761cf",
+      "size_bytes": 269628
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f444e-4a9b-7b82-9af6-ea601cdb6221.a160daf09089.part-0001.jsonl": {
+      "line_count": 97,
+      "sha256": "sha256:5c39ae3c22003f0aa355507788ce7534fac7210917a3d54b602924fa4752e8ea",
+      "size_bytes": 208693
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f444e-51a0-7b40-9cf1-332e864c4ec7.974304295a6b.part-0001.jsonl": {
+      "line_count": 107,
+      "sha256": "sha256:140a63e73641a8c17b574042f04dd1e9f770180016f4403646b90d7b1b029269",
+      "size_bytes": 256155
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4464-424b-72e0-9ba3-470fb64c2ffd.75df7258b18a.part-0001.jsonl": {
+      "line_count": 105,
+      "sha256": "sha256:55a0b73155dca3fbe5c13d5402cc5d687fca938a01a963679539ab8d0f305c6e",
+      "size_bytes": 271669
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4464-4db6-7601-a883-143911874ad4.d07d87d0f9f9.part-0001.jsonl": {
+      "line_count": 89,
+      "sha256": "sha256:783d13ad1c8f8c9291481f17f21c1a1b48b98f2c5d98c3fbc46cd80c3dc0b7e4",
+      "size_bytes": 273636
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4480-a4e5-71e1-ad2c-b02413546241.578f3ca41d37.part-0001.jsonl": {
+      "line_count": 152,
+      "sha256": "sha256:ff27470baa8fb80ad0c2c5def66428f4fcb25d306560c7168d00a3337bedca0b",
+      "size_bytes": 334666
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4480-b065-71e2-8c78-cd5737778118.b8dca7338feb.part-0001.jsonl": {
+      "line_count": 157,
+      "sha256": "sha256:3ade17e90b6edf9d3ebbac297f9893406c4cb27455661798c269d82a81a8cffd",
+      "size_bytes": 343907
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4589-cd8a-7161-bbf5-3623ad46c393.5136f47fbe29.part-0001.jsonl": {
+      "line_count": 82,
+      "sha256": "sha256:9add2cbdf70a1d374d687db73d1bbad3cc8df2a1a248cc16cf87ae5b82ce589e",
+      "size_bytes": 175503
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f461c-3a20-7482-a649-40efd29e1db1.5169bee92e31.part-0001.jsonl": {
+      "line_count": 858,
+      "sha256": "sha256:b22b6d7e4147d3921e4ebef48003ace5ef2dfdac6324875ec7286715c7c4ccf1",
+      "size_bytes": 1102977
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f461c-42a9-7323-bf51-be950a6ba640.fa9ef639fff6.part-0001.jsonl": {
+      "line_count": 677,
+      "sha256": "sha256:9cf4c478c7c200ff4c821325f9b073fd1c35ef08a5b707f184f13fb459520002",
+      "size_bytes": 822397
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4653-9edc-7762-b781-212f7a03f8ba.7155922560d9.part-0001.jsonl": {
+      "line_count": 282,
+      "sha256": "sha256:1e31d944a1cd45ee02d9978ad0ff6b7e163d76347069298fed51ad6038aebfd6",
+      "size_bytes": 555999
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4657-47cd-7df1-a1b9-986c7b89abe1.ca5191710be6.part-0001.jsonl": {
+      "line_count": 71,
+      "sha256": "sha256:aa41621d46740cf2213b04368157bf31f71862119651117e42439c863896cbf5",
+      "size_bytes": 204044
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4657-4eb1-7b13-8de1-8fe759fc5e6f.e2558176030f.part-0001.jsonl": {
+      "line_count": 74,
+      "sha256": "sha256:1169b8746e4af593f8ce80a45db1d6030c37661ec3f212965e8231e3cb079eff",
+      "size_bytes": 160667
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4665-7933-7a33-9fd2-9af914d279e0.c79fec5ef95b.part-0001.jsonl": {
+      "line_count": 51,
+      "sha256": "sha256:8f67412207f28ac876f912743e528c11d91371ebbc4b287ca371df7998834846",
+      "size_bytes": 118025
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f467a-03ba-79a1-a62a-507f71b5295e.3dd48a061286.part-0001.jsonl": {
+      "line_count": 71,
+      "sha256": "sha256:1fd7bcb807af6d5b3e6fe475177ef7d12a6958ce7ad035c1fd9d8fa6d6b820b6",
+      "size_bytes": 196152
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4718-7cd4-7922-8112-620ead96bf09.d1a9b459c326.part-0001.jsonl": {
+      "line_count": 83,
+      "sha256": "sha256:d2cab1b32e68e620d78e9e58e8aae8d1f676aabd3ebd578e91b1947eb8836295",
+      "size_bytes": 170616
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4740-c454-7dc2-b2c4-c905b7c4c8c2.451c4329831d.part-0001.jsonl": {
+      "line_count": 51,
+      "sha256": "sha256:76998da130c40c8759e035b3ccecf48553392d2581200b0d164e60f39b45fcf8",
+      "size_bytes": 114571
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f476e-16f4-7cb2-9f4a-ac7ef0fbee9e.798d6d67a19d.part-0001.jsonl": {
+      "line_count": 69,
+      "sha256": "sha256:f4d4f95a94b725398b640353aac363eed21afc3c035a708e9ce9e000a906e5cf",
+      "size_bytes": 160624
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4781-c7b7-73a3-a17f-2d34521442b8.903b0c320b1d.part-0001.jsonl": {
+      "line_count": 219,
+      "sha256": "sha256:b5dd8bb85c7a3f0da8bfc42cf959cd2854b9b4791513e2887d54c510dc381238",
+      "size_bytes": 407489
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f47a0-73c4-7de1-96b8-fdfc7fffc645.a845c8071723.part-0001.jsonl": {
+      "line_count": 162,
+      "sha256": "sha256:4163def5baaac82c52615411a605f13f83564e0167c0beb1e2a776f73e48a37e",
+      "size_bytes": 474920
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f481c-0ecb-78d3-847a-422f2de48698.9924d0838a43.part-0001.jsonl": {
+      "line_count": 52,
+      "sha256": "sha256:0c48f963448b78c98816c4a4737ab8488d835fad95b8c3216839af660d666df6",
+      "size_bytes": 114025
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4842-0c84-7aa3-b920-15458645cefd.77a74f695000.part-0001.jsonl": {
+      "line_count": 90,
+      "sha256": "sha256:91bac4367d847ec40b63c2e6fa7b9ee2c7f896733d446d0e20767ce7cfcb0a8a",
+      "size_bytes": 237836
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f48f8-3ff1-74d1-a9d3-f9cddf5d976a.493ba5630a34.part-0001.jsonl": {
+      "line_count": 51,
+      "sha256": "sha256:83c5e62c6603f3799be1f940fed812ef867d302f565acf4b064de4d8b861298c",
+      "size_bytes": 113032
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4974-94f6-7132-be33-4989eac5a7ca.0a05b9e6b389.part-0001.jsonl": {
+      "line_count": 100,
+      "sha256": "sha256:24c222c235963ba795f4a118d148377ad7705fd20b8c1d1275a885e4d40d8181",
+      "size_bytes": 227280
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f498a-8db0-7fe2-a124-975ded6d6993.a830e793d85e.part-0001.jsonl": {
+      "line_count": 181,
+      "sha256": "sha256:45495a0b6766d1583a139c4a55c069a918a5ad4169f2ff65bcc56a27511d0d53",
+      "size_bytes": 258224
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f49d4-b96a-7730-ae59-83b8b9aa47b6.4fe5fe4af897.part-0001.jsonl": {
+      "line_count": 74,
+      "sha256": "sha256:4925d6ede68b1ff293298467715c2276fc4760b38e0be46e12f4ef1bee4509b7",
+      "size_bytes": 131913
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4a39-179d-7481-a657-66f577f485f8.0a8306849edd.part-0001.jsonl": {
+      "line_count": 506,
+      "sha256": "sha256:f7c22e85bca720885512623acff740d1e5f6502ac7f483acea4e1b4e622c8435",
+      "size_bytes": 1026421
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4a39-179d-7481-a657-66f577f485f8.54be554fb758.part-0001.jsonl": {
+      "line_count": 497,
+      "sha256": "sha256:f49063a73b58a33564480aade936e5fb769a57d1e49b07671c40b28b88ff4e63",
+      "size_bytes": 1109939
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4a39-179d-7481-a657-66f577f485f8.a72364fd9779.part-0001.jsonl": {
+      "line_count": 405,
+      "sha256": "sha256:d785934f1031f4de1697223a9b86bf5be7e49deb87285050b03e2885b00257dc",
+      "size_bytes": 643274
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4a39-179d-7481-a657-66f577f485f8.c68fd1a178fe.part-0001.jsonl": {
+      "line_count": 1672,
+      "sha256": "sha256:8ef1065fcc8ce3ac5fab448363953efca1c8dfc0ac8c7829df8199fc627b164a",
+      "size_bytes": 3424747
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4a3c-9ae2-76a1-ada1-997499a23cf1.4fa6139ef3ee.part-0001.jsonl": {
+      "line_count": 269,
+      "sha256": "sha256:00f62513cf53e2cb41ab0b71c6986dea57b2f5964ad31aae23fc3057aad341ec",
+      "size_bytes": 784917
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4a3c-c264-7351-b694-7310aa65e176.ccb6d9ebd953.part-0001.jsonl": {
+      "line_count": 369,
+      "sha256": "sha256:f2753c8401f6a97ea92eb644b0a50dc3c04d1173063fa813e73b66183ca7bb9c",
+      "size_bytes": 713718
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4a3c-e045-7122-a224-afb3765b4268.7327aa597635.part-0001.jsonl": {
+      "line_count": 288,
+      "sha256": "sha256:3cfdf24f1acb65fd06d5d9227cf59f0bd27e1144ebfd3d217ac9ed7b16871ec1",
+      "size_bytes": 762876
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4aaf-0d6e-7f11-82bf-554ea526103c.6531f8356e2e.part-0001.jsonl": {
+      "line_count": 62,
+      "sha256": "sha256:4ae684e1f70d6a6d2eeb50d97c3c105a705c21660aaa3cea67cb48f743b560df",
+      "size_bytes": 126005
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4ab7-e863-79c0-ba44-b0991e61f130.17f2954809c4.part-0001.jsonl": {
+      "line_count": 2960,
+      "sha256": "sha256:99b42c30392a11c8225c36a43bca821a7a7229615e9bfdd20db6065076eac9b9",
+      "size_bytes": 6019378
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4ab7-e863-79c0-ba44-b0991e61f130.2e4b0637bc19.part-0001.jsonl": {
+      "line_count": 2992,
+      "sha256": "sha256:3cff75f9f773a9bd5bd1489f6e456315885655eaca2552be205bf625fd4bcb2e",
+      "size_bytes": 6300359
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4ab7-e863-79c0-ba44-b0991e61f130.2e6d1f7b2042.part-0001.jsonl": {
+      "line_count": 3416,
+      "sha256": "sha256:8548946e18297feeed7b22bdf336180cfea0cc8fb7394b42f1be72b24081ed51",
+      "size_bytes": 6960111
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4ab7-e863-79c0-ba44-b0991e61f130.5d181a4f16d5.part-0001.jsonl": {
+      "line_count": 3146,
+      "sha256": "sha256:e013becf5c324c49b21f6a1a3ed5f85c8c0a665f76ba4c78353078a0a831e844",
+      "size_bytes": 6328480
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4ab7-e863-79c0-ba44-b0991e61f130.7b492026a0a3.part-0001.jsonl": {
+      "line_count": 3142,
+      "sha256": "sha256:c5ad465d936dd2e9b73eb4af5297401cc830a1b7f468fae1049b7611b29d6bcb",
+      "size_bytes": 6374958
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4ab7-e863-79c0-ba44-b0991e61f130.908c8aad04e0.part-0001.jsonl": {
+      "line_count": 3119,
+      "sha256": "sha256:a5feaa7fa77d9c1ef3df6d02ea29296d82e9dad8aabd6ac673f887e7c94355f5",
+      "size_bytes": 6351445
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4ab7-e863-79c0-ba44-b0991e61f130.a7d282f13ee6.part-0001.jsonl": {
+      "line_count": 3078,
+      "sha256": "sha256:f7f54e479ab28d549eb469e0756604f2a106da4214a7ab386fce451ba5ed290d",
+      "size_bytes": 6368704
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4ab7-e863-79c0-ba44-b0991e61f130.cdf5f8357e12.part-0001.jsonl": {
+      "line_count": 9117,
+      "sha256": "sha256:93a316c97b43d38c08964d295d56199c22452fbd413c14ec79d287e928cb5a2b",
+      "size_bytes": 17383016
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4ab7-e863-79c0-ba44-b0991e61f130.eafbed08952e.part-0001.jsonl": {
+      "line_count": 2959,
+      "sha256": "sha256:2c99afc38ebcb6d059be071f4313d6736c7ecc941bd0ed62113e3dcc6f546701",
+      "size_bytes": 6217642
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4b1d-8bf2-7ee3-9059-c6346f5b5e5a.18e2d73d2f7b.part-0001.jsonl": {
+      "line_count": 225,
+      "sha256": "sha256:3de742e4b24be20d65362485796d882ef51230d311499f67b72199dc8372dcbf",
+      "size_bytes": 598351
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4b41-a405-7322-8af4-a516f1ca00f1.05465fcc433d.part-0001.jsonl": {
+      "line_count": 213,
+      "sha256": "sha256:8815ef59c12df529d6d102f23cc94e93374893160fccbf93cfc748e5ba5d4109",
+      "size_bytes": 299039
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4b45-0bc3-75c3-8a7f-a98165871dec.d60ae8235fc9.part-0001.jsonl": {
+      "line_count": 335,
+      "sha256": "sha256:02708bf753a3f651c10032e34d321b9687de824da0464c6c9b20b6ade1357245",
+      "size_bytes": 956438
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4b6b-0c02-7c20-a1ac-f3092cdd6295.d71d5e7bdd2f.part-0001.jsonl": {
+      "line_count": 148,
+      "sha256": "sha256:16692df15fee9f2313d122e9141be61b69591930bf080714b2c630e7f88c041a",
+      "size_bytes": 484462
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4b73-032f-75f0-92f3-af85b516b42d.aceadb7bc2f8.part-0001.jsonl": {
+      "line_count": 247,
+      "sha256": "sha256:b1f7b19794d4f1a47194cf3f5fc3f2bcd4515d4a0b9bcfc30c272ddba80dc2ba",
+      "size_bytes": 423022
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4b78-930d-7030-a9a8-f39924318c5b.614e8b288904.part-0001.jsonl": {
+      "line_count": 138,
+      "sha256": "sha256:bdde75295a632c78109830427c69dcfe473184590cbccd1f16b4eca7d2231b96",
+      "size_bytes": 217000
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4b88-dd12-7923-9b77-fb7071592825.7371bdff8a7b.part-0001.jsonl": {
+      "line_count": 205,
+      "sha256": "sha256:cf386859165884998b5eb87f840ed60587dfc16f07015fe9be8c5c9523af29ce",
+      "size_bytes": 715050
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4b8c-430a-7750-9f36-b2a931eb76d9.dfe16883d1df.part-0001.jsonl": {
+      "line_count": 41,
+      "sha256": "sha256:86beb27c8fc03ff64b91740c0334c2258bcbf07b1b7d4275c4d609da344c2561",
+      "size_bytes": 114905
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4ba7-73e5-7182-bb0a-5f9b3d396df1.b7665e337870.part-0001.jsonl": {
+      "line_count": 117,
+      "sha256": "sha256:33cb733107ef6e165e2d1f94a311caf81eb62a18e758829f5584802327a1bf61",
+      "size_bytes": 503438
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4bc0-1574-7473-9880-0d2c3491968f.29244bb5eb33.part-0001.jsonl": {
+      "line_count": 104,
+      "sha256": "sha256:02574d5da923b655490e50edb3a7bc3c94c3bdee9d5057ce544c1a9a085aa5f4",
+      "size_bytes": 244254
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4bc8-6f12-7c12-95a2-6bf0cfa311f7.49ce76100fa4.part-0001.jsonl": {
+      "line_count": 369,
+      "sha256": "sha256:42e30fc71270ce458f826018e66dc4c11d83816153d91872b069850b48dfa2ee",
+      "size_bytes": 997129
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4bde-d110-75e0-8273-c2073b684717.50d487237f6b.part-0001.jsonl": {
+      "line_count": 159,
+      "sha256": "sha256:2167fcbf74e9aee498528129b1da7df598fc8dc23aa67174b3bdcff39b9652bf",
+      "size_bytes": 508830
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4bf7-23b7-7513-86dc-733c1836f9e1.bec621a57576.part-0001.jsonl": {
+      "line_count": 111,
+      "sha256": "sha256:aecabaa3e3b1f3a092b97b9745e5ee927329560307aa9ef57ddc0c087d65ef70",
+      "size_bytes": 297835
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4bf7-3de0-7c31-9293-c5684db46143.1d96feed1105.part-0001.jsonl": {
+      "line_count": 242,
+      "sha256": "sha256:efea40f2cfdf5a301811528c29afa5a342f37d5e3dba38d9967128116dd93187",
+      "size_bytes": 804640
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4bf7-3de0-7c31-9293-c5684db46143.830e6a0c8efd.part-0001.jsonl": {
+      "line_count": 130,
+      "sha256": "sha256:f951923e85f13f137f24c9712f2cd151ca90fb7547431dab4bd23f94998f6173",
+      "size_bytes": 633243
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4c03-5bbf-7a92-b094-b820c9e69223.3e6dacae235e.part-0001.jsonl": {
+      "line_count": 752,
+      "sha256": "sha256:38725c07fdec3b23c83805afb3aed8ef83d34bc587b33bdd08e714e159368934",
+      "size_bytes": 1794791
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4c03-5bbf-7a92-b094-b820c9e69223.4ca45087485c.part-0001.jsonl": {
+      "line_count": 134,
+      "sha256": "sha256:be5e91ac6e3855d84a8d860b37878374133e4504145e5fae701c33292a46d86d",
+      "size_bytes": 502252
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4c03-7c11-7452-9988-cedb89749edd.e472fd278a2c.part-0001.jsonl": {
+      "line_count": 264,
+      "sha256": "sha256:42d9e22e65a1af9920c10a40f27808492b5f61df4c5d2ba6d4a6d873c0b116ae",
+      "size_bytes": 721276
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4c15-ffa9-77d2-b542-2f5750cba2e5.0fe7a9efac0e.part-0001.jsonl": {
+      "line_count": 1302,
+      "sha256": "sha256:7cad61c195b1891c7ab6f41d1c4f96dfbf74663ca7173406fe21c130bc682721",
+      "size_bytes": 2711949
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4c16-47d1-7bd2-8670-30fecfa04772.b8b8b6ccdf97.part-0001.jsonl": {
+      "line_count": 362,
+      "sha256": "sha256:d33d4faff233d75f66ced87cc10e39fea5fa1b0eba5a8c93b803db5e05cd2dc3",
+      "size_bytes": 567704
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4c24-4cac-79e3-bd73-859e2f6e6d2e.e8317baf500a.part-0001.jsonl": {
+      "line_count": 168,
+      "sha256": "sha256:6111fc620baf5817e7807bfd17abecd3e5660c4ed6a1429a6d502daa1899f50f",
+      "size_bytes": 819194
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4c2f-0ff8-7630-a539-549323077b92.38c2e5e7bb67.part-0001.jsonl": {
+      "line_count": 288,
+      "sha256": "sha256:bbb34144cb7f65d435eb7ec740faa0d6801f1d6bdb0b0b8ba2bb8f8d1248c2d6",
+      "size_bytes": 654806
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4c39-42a4-7312-aa69-7d93eaa96857.e72347799c2e.part-0001.jsonl": {
+      "line_count": 718,
+      "sha256": "sha256:4bf12edac5d26ba15450ec6e859e11448105514fb917b442552bdb94f9af6308",
+      "size_bytes": 1612639
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4c3e-d4e0-7540-a638-7545462d2500.d538832749cb.part-0001.jsonl": {
+      "line_count": 41,
+      "sha256": "sha256:bd02b204bf91c7878a046efa4f0e1537110a1a540ca796446f12ca2e4fc68def",
+      "size_bytes": 138322
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4c50-21a9-70e1-9ce4-32d29329f7ba.e6f13e4fd211.part-0001.jsonl": {
+      "line_count": 106,
+      "sha256": "sha256:7dd916791e4950da950d6d6919e400632738ea8acd7685e792c7b9044ffc9352",
+      "size_bytes": 695004
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4c57-3028-7d50-9c05-758647c23542.7d117ba86e7e.part-0001.jsonl": {
+      "line_count": 149,
+      "sha256": "sha256:c7983670a7d75218654ee1cd3289a927e257ce20411dcbc4afba2ea93c86de52",
+      "size_bytes": 425952
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4c68-07df-7a21-aa4d-c904f5aaa9a0.4c9cb0f50c8a.part-0001.jsonl": {
+      "line_count": 55,
+      "sha256": "sha256:bf876f2796f1b8fc155aff0b5878787dc9ab02ff6dbc893ed6b20eebd9c97b20",
+      "size_bytes": 119534
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4c75-d681-7970-851b-1b2cd32908ce.43681762f896.part-0001.jsonl": {
+      "line_count": 487,
+      "sha256": "sha256:aad6ce86e7b94430266912821fcb4475055065cf8412926667a3398c7ac6ecf7",
+      "size_bytes": 1277787
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4c95-cfa9-74d2-9c32-4261e5fe7455.7acd9cdf3583.part-0001.jsonl": {
+      "line_count": 76,
+      "sha256": "sha256:5694a86c2212ab72ee5a101f22d930e9ed33cc78bd9e8143249aa96379212deb",
+      "size_bytes": 182325
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4c9c-e64d-73f3-bcde-3f0ead9efb01.907d90fba81e.part-0001.jsonl": {
+      "line_count": 111,
+      "sha256": "sha256:120ecb56e903a9266f070ee38bf7aa99d96245ba5d2ed972f0c54a7c91947926",
+      "size_bytes": 461247
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4ca7-367b-7c41-8eb6-eef01925593b.731292183261.part-0001.jsonl": {
+      "line_count": 107,
+      "sha256": "sha256:c7b17e704d10bafa612c291f3e0790a7b19eb4e30e0fb25a533f5409e3b769f5",
+      "size_bytes": 207399
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4cb9-afd3-7531-80ae-863c3eeea00f.580a138564e0.part-0001.jsonl": {
+      "line_count": 510,
+      "sha256": "sha256:b7ee99eeae32b4a7789fb70fb6e4aeeaee5aeb1bbb890fcc6b0331f5f752dbef",
+      "size_bytes": 813394
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4cc7-b5e7-7e43-b141-55fdd2e68f44.ff047ad5f838.part-0001.jsonl": {
+      "line_count": 216,
+      "sha256": "sha256:9e591c65aa66b35523e78b0d2dc0f2d9011793a50b538b4730bd6b841d8f56bb",
+      "size_bytes": 321358
+    },
+    "OpenAIDatabase/data/public_raw/codex/sessions/019f4ccb-7798-7941-af6e-55dda07b851b.e6d347591777.part-0001.jsonl": {
+      "line_count": 299,
+      "sha256": "sha256:659028c8a2ee36010abfa1ae811fd42a1798b4867d2cceebb50df811b25eb04a",
+      "size_bytes": 398038
+    }
+  },
+  "implementation_sha256": "sha256:bf26f667f0cbd2e2d618ab68b94a54f6b7436b2e78489157407bf37264f3e0c0",
+  "input_state_sha256": "sha256:0f3fb9fdd481126045518de8919b0fa80946d45f7cac66648fbfc00e86b6e10b",
+  "schema_version": "recurring_state.v4",
+  "source_commit": "3e55ec47a9f9e9bc957dbddfc8fae3cb53fbcef0",
+  "source_cutoff_at": "2026-07-10T16:39:25Z"
+}
