@@ -2,7 +2,7 @@
 """本机 Skill → GitHub 全量镜像同步引擎。
 
 把本机所有来源的 skill（OpenAI 官方、Anthropic、自建、下载）全量镜像到
-`LinzeColin/AgentDatabase` 的 `CodexSkills/`，重建索引，提交并推送。
+`LinzeColin/AgentDatabase` 的 `CodexSkills/registry/`，重建索引，提交并推送。
 
     python3 sync_skills.py             # 正式同步
     python3 sync_skills.py --dry-run   # 只报告差异，不写不推
@@ -14,7 +14,7 @@
    绝不把密钥推进公开仓。这是无人值守运行时最重要的一道闸。
 2. **删除传播**：本机删掉的 skill，镜像里也删掉，保证 GitHub 永远等于本机现状。
 3. **按来源分目录**：四个来源里有 14 个重名（其中 `agent-reach` 内容还不同），
-   拍平会互相覆盖，所以用 `<来源>/<skill>/` 命名空间。
+   拍平会互相覆盖，所以用 `registry/<来源>/<skill>/` 命名空间。
 4. **幂等**：没有变化就不产生提交。
 """
 
@@ -41,11 +41,8 @@ SOURCES = {
 
 REPO = "LinzeColin/AgentDatabase"
 MIRROR_DIRNAME = "CodexSkills"
+REGISTRY_DIRNAME = "registry"
 
-# 已迁入治理 registry 的 Skill 使用显式物理路由；未迁移 Skill 保持兼容路径。
-REGISTRY_SKILL_ROUTES = {
-    ("codex", "persona-distiller"): "registry/codex/persona-distiller",
-}
 REPO_OWNED_FILES = {
     ("codex", "persona-distiller"): {"registry.yaml"},
 }
@@ -86,7 +83,12 @@ CATEGORY = {
                  "project-cost-table-skill", "gongzi-fafang-biaozhun", "hongquan-main-contract-dws",
                  "info-fee-update", "serenity-skill"],
     "协作与通讯": ["dws", "internal-comms", "agent-reach"],
-    "其他": ["codex-encrypted-backup", "gpt-tasteskill", "hatch-pet"],
+    "其他": [
+        "codex-encrypted-backup",
+        "dynamic-personal-profile-update",
+        "gpt-tasteskill",
+        "hatch-pet",
+    ],
 }
 
 # ---------------------------------------------------------------- 工具
@@ -137,7 +139,7 @@ def skill_digest(base, excluded_relative_paths=None):
 
 
 def mirror_relative_path(source, slug):
-    return REGISTRY_SKILL_ROUTES.get((source, slug), f"{source}/{slug}")
+    return f"{REGISTRY_DIRNAME}/{source}/{slug}"
 
 
 def parse_frontmatter(path):
@@ -191,14 +193,12 @@ def mirror(inv, mirror_root, dry_run=False, propagate_deletions=True):
     want = {mirror_relative_path(src, slug) for src, slug in inv}
     have = set()
     if os.path.isdir(mirror_root):
+        registry_root = os.path.join(mirror_root, REGISTRY_DIRNAME)
         for src in SOURCES:
-            sd = os.path.join(mirror_root, src)
+            sd = os.path.join(registry_root, src)
             if os.path.isdir(sd):
-                have |= {f"{src}/{d}" for d in os.listdir(sd)
+                have |= {f"{REGISTRY_DIRNAME}/{src}/{d}" for d in os.listdir(sd)
                          if os.path.isdir(os.path.join(sd, d))}
-        for rel in REGISTRY_SKILL_ROUTES.values():
-            if os.path.isdir(os.path.join(mirror_root, rel)):
-                have.add(rel)
 
     # 删除传播：本机没有了，镜像也删掉
     for gone in sorted(have - want if propagate_deletions else set()):
@@ -277,26 +277,21 @@ def credential_gate(mirror_root):
 
 def iter_mirrored_skills(mirror_root):
     """产出 (source, slug, physical_relative_path, absolute_directory)。"""
+    registry_root = os.path.join(mirror_root, REGISTRY_DIRNAME)
     for src in SOURCES:
-        sd = os.path.join(mirror_root, src)
+        sd = os.path.join(registry_root, src)
         if not os.path.isdir(sd):
             continue
         for slug in sorted(os.listdir(sd)):
-            if (src, slug) in REGISTRY_SKILL_ROUTES:
-                continue
             directory = os.path.join(sd, slug)
             if os.path.isdir(directory):
-                yield src, slug, f"{src}/{slug}", directory
-    for (src, slug), rel in sorted(REGISTRY_SKILL_ROUTES.items()):
-        directory = os.path.join(mirror_root, rel)
-        if os.path.isdir(directory):
-            yield src, slug, rel, directory
+                yield src, slug, mirror_relative_path(src, slug), directory
 
 
 def persona_product_index(mirror_root):
     path = os.path.join(
         mirror_root,
-        REGISTRY_SKILL_ROUTES[("codex", "persona-distiller")],
+        mirror_relative_path("codex", "persona-distiller"),
         "persona-registry-index.json",
     )
     if not os.path.isfile(path):
@@ -361,7 +356,10 @@ def build_index(mirror_root):
     ]
     for k, v in SOURCES.items():
         cnt = len([s for s in skills if s["source"] == k])
-        out.append(f"| `{k}/` | `{v['path'].replace(HOME, '~')}` | {v['label']}（{cnt} 个） |")
+        out.append(
+            f"| `{REGISTRY_DIRNAME}/{k}/` | `{v['path'].replace(HOME, '~')}` | "
+            f"{v['label']}（{cnt} 个） |"
+        )
     out += [
         "",
         "有多个 skill 在不同来源里重名（其中 `agent-reach` 两处内容还不同），"

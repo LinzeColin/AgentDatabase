@@ -16,7 +16,7 @@
       "self_digest_pointer": "/envelope_digest"
     }
   ],
-  "bundle_digest": "fd1df66e240695bd376803423bd09f9f341f7542f74a6ed92b0f79b0af4dc5e1",
+  "bundle_digest": "2704ed797c843f969965db600747abcdcd217550522e6479aab6817ef5a86ef5",
   "candidate_bundle_git_object_id": "sha1:4b1e1a318c8f9e1014839a8a3a46e057679c4b6b",
   "candidate_manifest_path": "CodexSkills/governance/bundles/schema-bundle-manifest.v1.json",
   "candidate_policy_count": 5,
@@ -65,7 +65,7 @@
   "target_srv_revision": "v0.0.0.3",
   "transport_runtime_interface": {
     "artifact_digest": "d38eae81ef4aa45ac119bcb3fefa3b67c3f9609ef2fe281bb7dcf5b68c60c838",
-    "relative_path": "CodexSkills/auto/runtime-interface.json"
+    "relative_path": "CodexSkills/registry/auto/runtime-interface.json"
   },
   "validator_contract": {
     "artifact_reads": "DESCRIPTOR_RELATIVE_O_NOFOLLOW",

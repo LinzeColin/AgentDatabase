@@ -43,7 +43,7 @@ Run from the repository root with the explicitly provisioned interpreter:
   lint-schema-set --schema-dir CodexSkills/governance/schemas
 /usr/bin/python3 -B CodexSkills/governance/tools/validate_mechanism.py \
   lint-schema-set --schema-dir CodexSkills/governance/schemas \
-  --schema-dir CodexSkills/auto/schemas/public
+  --schema-dir CodexSkills/registry/auto/schemas/public
 /usr/bin/python3 -B -m unittest discover \
   -s CodexSkills/governance/tests -p 'test_*.py'
 ```

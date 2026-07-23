@@ -18,7 +18,9 @@ from typing import Any, Dict, Mapping
 GOVERNANCE_DIR = Path(__file__).resolve().parents[1]
 REPO_ROOT = GOVERNANCE_DIR.parents[1]
 TOOLS_DIR = GOVERNANCE_DIR / "tools"
-AUTO_INTERFACE_PATH = REPO_ROOT / "CodexSkills" / "auto" / "draft-interface.json"
+AUTO_INTERFACE_PATH = (
+    REPO_ROOT / "CodexSkills" / "registry" / "auto" / "draft-interface.json"
+)
 sys.path.insert(0, str(TOOLS_DIR))
 
 from canonical_json import (  # noqa: E402
@@ -937,7 +939,7 @@ class MechanismContractTests(unittest.TestCase):
                 schema_id = contract["id"]
                 name = schema_id[len(SCHEMA_PREFIX):].rsplit(":v", 1)[0]
                 digest_field = contract["self_digest_pointer"][1:]
-                relative_path = f"CodexSkills/auto/schemas/public/{name}.schema.json"
+                relative_path = f"CodexSkills/registry/auto/schemas/public/{name}.schema.json"
                 document = {
                     "$schema": "https://json-schema.org/draft/2020-12/schema",
                     "$id": schema_id,

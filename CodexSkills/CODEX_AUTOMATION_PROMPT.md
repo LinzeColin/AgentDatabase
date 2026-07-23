@@ -13,12 +13,12 @@
 
 ## 要做什么
 
-把本机四个来源的 skill 全量镜像到 `LinzeColin/AgentDatabase` 的 `CodexSkills/`：
+把本机四个来源的 skill 全量镜像到 `LinzeColin/AgentDatabase` 的 `CodexSkills/registry/`：
 
-- `~/.codex/skills/` → `codex/`（自建、下载、从 GitHub 装的）
-- `~/.codex/skills/.system/` → `codex-system/`（OpenAI 官方，Apache-2.0）
-- `~/.claude/skills/` → `claude/`（Anthropic 侧）
-- `~/.agents/skills/` → `agents/`（跨工具通用目录）
+- `~/.codex/skills/` → `registry/codex/`（自建、下载、从 GitHub 装的）
+- `~/.codex/skills/.system/` → `registry/codex-system/`（OpenAI 官方，Apache-2.0）
+- `~/.claude/skills/` → `registry/claude/`（Anthropic 侧）
+- `~/.agents/skills/` → `registry/agents/`（跨工具通用目录）
 
 目标是**仓库永远等于本机现状**：本机新增的要上去，改过的要更新，**删掉的也要从仓库删掉**。不是只增不减的堆积。
 
@@ -50,9 +50,9 @@ python3 CodexSkills/sync_skills.py
 本周 Skill 备份 · <日期>
 
 变化：新增 N 个 / 修改 N 个 / 删除 N 个
-  + codex/<名字>
-  ~ agents/<名字>
-  - claude/<名字>
+  + registry/codex/<名字>
+  ~ registry/agents/<名字>
+  - registry/claude/<名字>
 （无变化就写「本机与仓库一致，无变化」）
 
 当前规模：X 份实例 / Y 个不同名字
@@ -94,4 +94,4 @@ python3 ~/Documents/Codex/GithubProject/AgentDatabase/CodexSkills/sync_skills.py
 
 ## 一个提醒
 
-因为是每周跑，如果周中删了一个 skill 又后悔，在同步发生前本机恢复即可；同步之后仓库那份也会被删掉，但 **Git 历史仍然留着**，可以用 `git log --diff-filter=D -- CodexSkills/<来源>/<名字>` 找回。
+因为是每周跑，如果周中删了一个 skill 又后悔，在同步发生前本机恢复即可；同步之后仓库那份也会被删掉，但 **Git 历史仍然留着**，可以用 `git log --diff-filter=D -- CodexSkills/registry/<来源>/<名字>` 找回。

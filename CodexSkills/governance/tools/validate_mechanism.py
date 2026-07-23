@@ -817,7 +817,7 @@ def _entry_order(entries: Sequence[Any], code: str) -> None:
     _ensure_sorted_unique(entries, "id", code)
 
 
-def load_draft_contract() -> ContractBundle:
+def load_draft_contract(*, lint_candidate_manifest: bool = True) -> ContractBundle:
     capability_gate()
     verify_vendor()
     interface = strict_load(INTERFACE_PATH)
@@ -972,7 +972,7 @@ def load_draft_contract() -> ContractBundle:
     if vectors_digest != interface["canonicalization"]["test_vectors_digest"]:
         raise ContractError("TEST_VECTOR_DIGEST_MISMATCH")
     manifest_path = _repo_path(CANONICAL_MANIFEST_PATH)
-    if manifest_path.exists():
+    if lint_candidate_manifest and manifest_path.exists():
         # A local candidate is structurally linted here, but it is never
         # promoted to a trust root.  Only load_trusted_bundle() can construct
         # the complete 29-schema bundle from an external Git/digest/path/mode
@@ -1115,7 +1115,7 @@ def load_trusted_bundle(repo_root: Path, trust: TrustTuple) -> ContractBundle:
         if entry["self_digest_pointer"] != EXPECTED_SCHEMA_SELF_POINTERS[schema_id]:
             raise ContractError(f"TRUST_SELF_DIGEST_POINTER_MISMATCH:{schema_id}")
         expected_prefix = (
-            "CodexSkills/auto/schemas/public/"
+            "CodexSkills/registry/auto/schemas/public/"
             if expected_owner == "AUTO"
             else "CodexSkills/governance/schemas/"
         )

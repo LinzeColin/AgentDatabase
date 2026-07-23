@@ -37,7 +37,7 @@ from validate_mechanism import (
 
 GOVERNANCE_DIR = Path(__file__).resolve().parents[1]
 REPO_ROOT = GOVERNANCE_DIR.parents[1]
-AUTO_DIR = REPO_ROOT / "CodexSkills" / "auto"
+AUTO_DIR = REPO_ROOT / "CodexSkills" / "registry" / "auto"
 MECHANISM_INTERFACE_PATH = GOVERNANCE_DIR / "draft-interface.json"
 AUTO_INTERFACE_PATH = AUTO_DIR / "draft-interface.json"
 MANIFEST_PATH = REPO_ROOT / CANONICAL_MANIFEST_PATH
@@ -48,7 +48,7 @@ MECHANISM_INTERFACE_RAW_SHA256 = (
     "0f4837d9cec37c845cd5e9e799b5f572944cf8fe2457e8b95f696db3b9c03998"
 )
 AUTO_INTERFACE_RAW_SHA256 = (
-    "7e3b87e1a468be73ce15daced6bf85f776a2ebf96fb02fa50774206e3b60b718"
+    "2c47d6a810a18f878e3935bad9bde42aeb8e7f9c8c51b0ead19acadc48a2b366"
 )
 AUTO_BASE_MECHANISM_GIT_OBJECT_ID = (
     "sha1:37d07a47ae87fcf246046d1611d3e00f000d1fa4"
@@ -134,7 +134,7 @@ def _validate_schema_entries(
         schema_id = entry["id"]
         expected_owner = "AUTO" if schema_id in AUTO_PUBLIC_SCHEMA_IDS else "MECHANISM"
         expected_prefix = (
-            "CodexSkills/auto/schemas/public/"
+            "CodexSkills/registry/auto/schemas/public/"
             if expected_owner == "AUTO"
             else "CodexSkills/governance/schemas/"
         )
@@ -201,7 +201,7 @@ def _validate_auto_private_exclusions(interface: Mapping[str, Any]) -> None:
             or entry.get("visibility") != "PRIVATE"
             or entry.get("self_digest_pointer")
             != AUTO_PRIVATE_SELF_POINTERS[schema_id]
-            or not relative_path.startswith("CodexSkills/auto/schemas/private/")
+            or not relative_path.startswith("CodexSkills/registry/auto/schemas/private/")
             or not is_repo_relative_posix_path(relative_path)
         ):
             raise ContractError(f"AUTO_PRIVATE_INTERFACE_ENTRY_MISMATCH:{schema_id}")
@@ -281,7 +281,9 @@ def candidate_manifest() -> Tuple[Mapping[str, Any], ContractBundle]:
         raise ContractError("CANDIDATE_INPUT_INTERFACE_CONTRACT_MISMATCH")
     _validate_auto_private_exclusions(auto_interface)
 
-    mechanism_bundle = load_draft_contract()
+    # The current generated manifest may be stale precisely because this
+    # builder is repairing it after a deterministic path migration.
+    mechanism_bundle = load_draft_contract(lint_candidate_manifest=False)
     schemas = load_schema_directories(
         [
             GOVERNANCE_DIR / "schemas",

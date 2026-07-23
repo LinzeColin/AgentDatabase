@@ -6,7 +6,7 @@
 - Protocol: urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1
 - SRV candidate: v0.0.0.3
 - Candidate manifest: CodexSkills/governance/bundles/schema-bundle-manifest.v1.json
-- Candidate bundle digest: fd1df66e240695bd376803423bd09f9f341f7542f74a6ed92b0f79b0af4dc5e1
+- Candidate bundle digest: 2704ed797c843f969965db600747abcdcd217550522e6479aab6817ef5a86ef5
 
 ## Pinned inputs
 

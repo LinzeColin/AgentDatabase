@@ -1,0 +1,144 @@
+{
+  "activation_caller_assertions_forbidden": [
+    "activation_artifact_digests",
+    "activation_envelope_verified",
+    "notification_provider_status",
+    "shared_gate_status_map"
+  ],
+  "activation_control_baseline_git_object_id": "sha1:6769eba64badac04a131bfa00dbb0e1a353ccae0",
+  "activation_control_baseline_interface_raw_sha256": "24af49e7f3c0ecac85154a2a9741d9d8ceb16368224cbf7900eceac9fe66e0f7",
+  "activation_control_interface_path": "CodexSkills/governance/activation/control-interface.json",
+  "activation_control_mode": "DRAFT_NON_ACTIVE_CONTROL",
+  "activation_control_trust_tuple_repo_external_only": true,
+  "activation_forbidden_without_coordinated_m0c": true,
+  "activation_handshake_entrypoint": "CodexSkills/registry/auto/tools/activation_handshake_cli.py",
+  "activation_instance_created": false,
+  "activation_settlement_recomputed_before_publish": true,
+  "au_040_daily_jsonl_shard_complete": false,
+  "candidate_bundle_digest": "2704ed797c843f969965db600747abcdcd217550522e6479aab6817ef5a86ef5",
+  "candidate_git_object_id": "sha1:4b1e1a318c8f9e1014839a8a3a46e057679c4b6b",
+  "candidate_manifest_path": "CodexSkills/governance/bundles/schema-bundle-manifest.v1.json",
+  "canonical_publication_permitted": false,
+  "capability_gate_precedes_state_write": true,
+  "consumer_first_gate_satisfied": false,
+  "consumer_first_owner_plane": "MECHANISM",
+  "external_gmail_ready_gate_satisfied": false,
+  "fault_test_rounds_required": 2,
+  "m0c_b_permitted": false,
+  "manual_and_scheduled_same_orchestrator": true,
+  "module_artifacts": [
+    {
+      "artifact_digest": "4860eef97915a2622a8acb4c4ccf07d391615f28de8f6e44db8818c52740e66e",
+      "relative_path": "CodexSkills/registry/auto/runtime/__init__.py"
+    },
+    {
+      "artifact_digest": "358c847bb0c28fa7797c43320b55678fb47d799fdfcd9337e0a2da6041ac9b95",
+      "relative_path": "CodexSkills/registry/auto/runtime/activation.py"
+    },
+    {
+      "artifact_digest": "d64dcc297520a6e15e01b47ffb508ad7ada1cc9ae6b418b692e1a7a9c3e142c3",
+      "relative_path": "CodexSkills/registry/auto/runtime/bootstrap.py"
+    },
+    {
+      "artifact_digest": "25e5b2b53da145843bc27f626cd9e92df9b188d5ba6d27b417a805fbce729969",
+      "relative_path": "CodexSkills/registry/auto/runtime/core.py"
+    },
+    {
+      "artifact_digest": "beb5a555a022863dbfda4afaca85c0bbc913ac9fe7c04e6d207e2f9ec2f7bd59",
+      "relative_path": "CodexSkills/registry/auto/runtime/gmail_api.py"
+    },
+    {
+      "artifact_digest": "7066995b6de7a43d77be0ea53bbfab4ffcd17a9c56aa4cf80405f640436785ef",
+      "relative_path": "CodexSkills/registry/auto/runtime/notification.py"
+    },
+    {
+      "artifact_digest": "8a661eb608ea2c53a55612b7fd0363e42bc4010eceaa080b8400276d4a933e68",
+      "relative_path": "CodexSkills/registry/auto/runtime/orchestrator.py"
+    },
+    {
+      "artifact_digest": "0cdce1a4b7bf769c78eeef1ffd67c3c413af5a308865331a76d19c872693151e",
+      "relative_path": "CodexSkills/registry/auto/runtime/privacy.py"
+    },
+    {
+      "artifact_digest": "17bea5e0600f3f427758137735336386c050724692aef58a15f7acb87ea0c9cf",
+      "relative_path": "CodexSkills/registry/auto/runtime/publication.py"
+    },
+    {
+      "artifact_digest": "ae38468227cef51795f4be928b03bafd0a8a15faa5245a1560938bf4b8907d3e",
+      "relative_path": "CodexSkills/registry/auto/runtime/queue.py"
+    },
+    {
+      "artifact_digest": "9061b62f824d5a8024227ba53b9f300d87110cedd08861f75ec89414a4da6039",
+      "relative_path": "CodexSkills/registry/auto/runtime/retention.py"
+    },
+    {
+      "artifact_digest": "8f097981d65eb38ba3f6a965b6bbac7467a3ec0be8112e65473f009553d4f395",
+      "relative_path": "CodexSkills/registry/auto/runtime/roots.py"
+    },
+    {
+      "artifact_digest": "cc44934d151aad692ba446bdf38ced8ab3eedd2215002f96b1751ed45a350a2e",
+      "relative_path": "CodexSkills/registry/auto/runtime/schedule.py"
+    },
+    {
+      "artifact_digest": "85d720a3231edbba2ea091d08bed14be5c82f4deb0a9a2e38695718be7f77471",
+      "relative_path": "CodexSkills/registry/auto/runtime/source.py"
+    },
+    {
+      "artifact_digest": "6b66ecbf7539b5daa3435d47beba709ae750161df4f348cbb2731e171b41b5b7",
+      "relative_path": "CodexSkills/registry/auto/runtime/state.py"
+    },
+    {
+      "artifact_digest": "448ead72e94d766cbfb8d3875b8e3127e0c40c95b1fbe5662b07a0f5e92a8bd8",
+      "relative_path": "CodexSkills/registry/auto/tools/activation_handshake_cli.py"
+    },
+    {
+      "artifact_digest": "16f4ee299ab6d7a2cafb91c47742185fb79d75581b78bca23e28c9db31467081",
+      "relative_path": "CodexSkills/registry/auto/tools/build_runtime_interface.py"
+    },
+    {
+      "artifact_digest": "e75ff378a3fb90e088d79bc459a8174d17d00500cc8a9a227cac5d4f7d49a45a",
+      "relative_path": "CodexSkills/registry/auto/tools/notification_transport_cli.py"
+    },
+    {
+      "artifact_digest": "86acd8e97f9bb00aca0da68dce61ff8166fccd4428a7201add6e1c4078a28825",
+      "relative_path": "CodexSkills/registry/auto/tools/run_fault_suite.py"
+    },
+    {
+      "artifact_digest": "ab9aff54655e8cedaa4177a2baef4e2558896f56d414be67e06cd0f9432d7b0e",
+      "relative_path": "CodexSkills/registry/auto/tools/runtime_preflight.py"
+    },
+    {
+      "artifact_digest": "fc4d3ee1a2f2f70e17f092d1bf6e77bf8787d51b745216bafe071d9f47fe2d7a",
+      "relative_path": "CodexSkills/registry/auto/tools/validate_auto.py"
+    }
+  ],
+  "module_count": 21,
+  "next_phase": "MECHANISM_CONSUMER_FIRST_PHASE",
+  "notification_actual_recipient_repo_external": true,
+  "notification_credentials_repo_external": true,
+  "notification_external_path_contract": {
+    "gmail_config_ref": "state-root/private/notification/gmail-api.v1.json",
+    "recipient_mapping_ref": "state-root/private/notification/recipient-mapping.v1.json"
+  },
+  "notification_production_transport": "GMAIL_API_V1",
+  "notification_provider_lookup": "RFC822_MESSAGE_ID_AND_PRIVATE_PAYLOAD_DIGEST",
+  "notification_provider_readback_required": true,
+  "notification_public_recipient_ref_only": true,
+  "notification_send_entrypoint": "CodexSkills/registry/auto/tools/activation_handshake_cli.py",
+  "notification_test_transport_production_forbidden": true,
+  "os_local_scheduler_or_daemon_used": false,
+  "persistent_managed_raw_default_enabled": false,
+  "protocol_revision": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1",
+  "remote_readback_precedes_watermark": true,
+  "schedule": {
+    "daily_local_time": "04:15",
+    "late_start_rejected": false,
+    "sunday_forced_full": true,
+    "timezone": "Australia/Sydney"
+  },
+  "shared_bundle_schema_count": 29,
+  "shared_policy_count": 5,
+  "state_root_repo_external": true,
+  "status": "DRAFT_NON_ACTIVE",
+  "trust_tuple_repo_external_only": true
+}

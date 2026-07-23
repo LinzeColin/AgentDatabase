@@ -37,12 +37,14 @@ CANDIDATE_MANIFEST_PATH = (
     / "bundles"
     / "schema-bundle-manifest.v1.json"
 )
-AUTO_RUNTIME_INTERFACE_PATH = REPO_ROOT / "CodexSkills" / "auto" / "runtime-interface.json"
+AUTO_RUNTIME_INTERFACE_PATH = (
+    REPO_ROOT / "CodexSkills" / "registry" / "auto" / "runtime-interface.json"
+)
 COMMON_SCHEMA_PATH = GOVERNANCE_DIR / "schemas" / "common-definitions.schema.json"
 
 PROTOCOL_REVISION = "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1"
 CANDIDATE_BUNDLE_DIGEST = (
-    "fd1df66e240695bd376803423bd09f9f341f7542f74a6ed92b0f79b0af4dc5e1"
+    "2704ed797c843f969965db600747abcdcd217550522e6479aab6817ef5a86ef5"
 )
 CANDIDATE_BUNDLE_GIT_OBJECT_ID = (
     "sha1:4b1e1a318c8f9e1014839a8a3a46e057679c4b6b"
@@ -354,7 +356,7 @@ def _preflight_inputs(
         raise ContractError("ACTIVATION_CANDIDATE_MANIFEST_MISMATCH")
     auto_raw = _git_blob(
         BASE_AUTO_GIT_OBJECT_ID,
-        "CodexSkills/auto/runtime-interface.json",
+        "CodexSkills/registry/auto/runtime-interface.json",
     )
     if hashlib.sha256(auto_raw).hexdigest() != AUTO_RUNTIME_INTERFACE_RAW_SHA256:
         raise ContractError("ACTIVATION_AUTO_INTERFACE_RAW_DIGEST_MISMATCH")
@@ -452,7 +454,7 @@ def control_interface(schemas: Mapping[str, Mapping[str, Any]]) -> Dict[str, Any
         "target_srv_revision": TARGET_SRV_REVISION,
         "transport_runtime_interface": {
             "artifact_digest": AUTO_RUNTIME_INTERFACE_RAW_SHA256,
-            "relative_path": "CodexSkills/auto/runtime-interface.json",
+            "relative_path": "CodexSkills/registry/auto/runtime-interface.json",
         },
         "validator_contract": {
             "artifact_reads": "DESCRIPTOR_RELATIVE_O_NOFOLLOW",

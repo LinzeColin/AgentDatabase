@@ -1,6 +1,7 @@
 # CodexSkills Registry
 
-This registry is the governance surface for Skill records. It is separate from the mirrored Skill content.
+This registry is the canonical home for mirrored Skill content and its compact
+registration records.
 
 ## Source namespaces
 
@@ -18,7 +19,13 @@ Each registered Skill uses one compact five-layer entity: `identity`, `provenanc
 - Controlled patch iteration: `CodexSkills/skill_controlled_iterate/`
 - Runtime records: `OpenAIDatabase/data/run_logs/skills_runs/`
 
-The current Skill mirror migration must update `sync_skills.py` so the four source namespaces are under `registry/`. The root `CodexSkills/README.md` and `index.json` remain compatibility entry points and must point to `registry/<source>/<slug>/SKILL.md`.
+`sync_skills.py` writes every mirrored Skill to
+`registry/<source>/<slug>/`. The root `CodexSkills/README.md` and `index.json`
+remain compatibility entry points and point to those canonical paths.
+
+The non-Skill Auto contract package and the sync regression tests also live
+under `registry/auto/` and `registry/tests/`. They are excluded from Skill
+deletion propagation.
 
 `codex/persona-distiller` is routed directly to
 `registry/codex/persona-distiller`. Its generated target-person ZIPs use the
