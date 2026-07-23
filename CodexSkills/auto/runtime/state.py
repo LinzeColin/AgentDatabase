@@ -207,6 +207,25 @@ class SingleFlightLock:
         atomic_write_json(self.state_path, state)
         return state
 
+    def assert_owned(
+        self,
+        owner_run_uid: str,
+        expected_digest: str,
+    ) -> Mapping[str, object]:
+        """Prove a live exact lock claim without extending or mutating it."""
+
+        state = self._read_existing()
+        if (
+            state["owner_run_uid"] != owner_run_uid
+            or state["state_digest"] != expected_digest
+        ):
+            raise AutoRuntimeError("LOCK_OWNERSHIP_MISMATCH")
+        if state["status"] != "HELD":
+            raise AutoRuntimeError("LOCK_NOT_HELD")
+        if parse_utc(str(state["lease_expires_at"])) <= self.clock.now():
+            raise AutoRuntimeError("LOCK_LEASE_EXPIRED")
+        return state
+
     def release(self, owner_run_uid: str, expected_digest: str) -> Mapping[str, object]:
         state = dict(self._read_existing())
         if state["owner_run_uid"] != owner_run_uid or state["state_digest"] != expected_digest:

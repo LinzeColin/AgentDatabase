@@ -118,6 +118,37 @@ class RuntimeStateTests(unittest.TestCase):
         self.assertEqual(released["status"], "RELEASED")
         self.assertFalse(lock.claim.exists())
 
+    def test_publication_lock_proof_requires_live_exact_claim(self) -> None:
+        layout = self.layout()
+        fake = clock()
+        lock = SingleFlightLock(
+            layout,
+            context().contract,
+            CANDIDATE_DIGEST,
+            fake,
+        )
+        acquired = lock.acquire(
+            uid("run", 1),
+            lease_seconds=1,
+            entropy=(1).to_bytes(10, "big"),
+        )
+        digest = str(acquired.state["state_digest"])
+        self.assertEqual(
+            lock.assert_owned(uid("run", 1), digest)["status"],
+            "HELD",
+        )
+        with self.assertRaisesRegex(
+            AutoRuntimeError,
+            "LOCK_OWNERSHIP_MISMATCH",
+        ):
+            lock.assert_owned(uid("run", 2), digest)
+        fake.advance(seconds=2)
+        with self.assertRaisesRegex(
+            AutoRuntimeError,
+            "LOCK_LEASE_EXPIRED",
+        ):
+            lock.assert_owned(uid("run", 1), digest)
+
     def test_partial_corrupt_claim_needs_grace_and_explicit_proof(self) -> None:
         layout = self.layout()
         fake = clock()

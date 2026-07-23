@@ -1,16 +1,39 @@
 {
+  "activation_caller_assertions_forbidden": [
+    "activation_artifact_digests",
+    "activation_envelope_verified",
+    "notification_provider_status",
+    "shared_gate_status_map"
+  ],
+  "activation_control_baseline_git_object_id": "sha1:6769eba64badac04a131bfa00dbb0e1a353ccae0",
+  "activation_control_baseline_interface_raw_sha256": "24af49e7f3c0ecac85154a2a9741d9d8ceb16368224cbf7900eceac9fe66e0f7",
+  "activation_control_interface_path": "CodexSkills/governance/activation/control-interface.json",
+  "activation_control_mode": "DRAFT_NON_ACTIVE_CONTROL",
+  "activation_control_trust_tuple_repo_external_only": true,
   "activation_forbidden_without_coordinated_m0c": true,
+  "activation_handshake_entrypoint": "CodexSkills/auto/tools/activation_handshake_cli.py",
+  "activation_instance_created": false,
+  "activation_settlement_recomputed_before_publish": true,
+  "au_040_daily_jsonl_shard_complete": false,
   "candidate_bundle_digest": "fd1df66e240695bd376803423bd09f9f341f7542f74a6ed92b0f79b0af4dc5e1",
   "candidate_git_object_id": "sha1:4b1e1a318c8f9e1014839a8a3a46e057679c4b6b",
   "candidate_manifest_path": "CodexSkills/governance/bundles/schema-bundle-manifest.v1.json",
   "canonical_publication_permitted": false,
   "capability_gate_precedes_state_write": true,
+  "consumer_first_gate_satisfied": false,
+  "consumer_first_owner_plane": "MECHANISM",
+  "external_gmail_ready_gate_satisfied": false,
   "fault_test_rounds_required": 2,
+  "m0c_b_permitted": false,
   "manual_and_scheduled_same_orchestrator": true,
   "module_artifacts": [
     {
       "artifact_digest": "4860eef97915a2622a8acb4c4ccf07d391615f28de8f6e44db8818c52740e66e",
       "relative_path": "CodexSkills/auto/runtime/__init__.py"
+    },
+    {
+      "artifact_digest": "358c847bb0c28fa7797c43320b55678fb47d799fdfcd9337e0a2da6041ac9b95",
+      "relative_path": "CodexSkills/auto/runtime/activation.py"
     },
     {
       "artifact_digest": "85323cb9fe2e61138fd1ff6ec22b0e0aebafaf567e7ef8ff6bf37c15622739fd",
@@ -37,7 +60,7 @@
       "relative_path": "CodexSkills/auto/runtime/privacy.py"
     },
     {
-      "artifact_digest": "e21b4c7914cb4006d52d174e4323c58cc031882f3f7a7ad60e2186ad5bc47911",
+      "artifact_digest": "67e217b27c45011abf9e5a82e6b7f330301f53f3d70c35c0817d099193886eae",
       "relative_path": "CodexSkills/auto/runtime/publication.py"
     },
     {
@@ -61,15 +84,19 @@
       "relative_path": "CodexSkills/auto/runtime/source.py"
     },
     {
-      "artifact_digest": "43189bb983bc1991ad94aa87937eb2da132b5e03586258d9e6ff3554e78befd7",
+      "artifact_digest": "e8f18f8e8bb9f7e3afbed6a0c3617ebc797818c43983c06f00975205eb766c9e",
       "relative_path": "CodexSkills/auto/runtime/state.py"
     },
     {
-      "artifact_digest": "618327db4eadc48c3927de1b3648f43ea5691bbbe1998a2c4d5f3aa09d3c08a5",
+      "artifact_digest": "cd36a66631ec2d545989f1f226f49f19bbc72f26f5984ce7fc409dbe448d5ab3",
+      "relative_path": "CodexSkills/auto/tools/activation_handshake_cli.py"
+    },
+    {
+      "artifact_digest": "de4a1c8d6e1d308809f3b0228c05f8711473c1821b91a3d08cc0fe6a95759267",
       "relative_path": "CodexSkills/auto/tools/build_runtime_interface.py"
     },
     {
-      "artifact_digest": "0d8114ebde296c9961ea60182b64450f0ccd9f26e310daf41f32403dc4e33805",
+      "artifact_digest": "ffb8162d63d7ffc5523fa3b11570d43127bb67b089108dd0e1cd874bcf6a2860",
       "relative_path": "CodexSkills/auto/tools/notification_transport_cli.py"
     },
     {
@@ -85,8 +112,8 @@
       "relative_path": "CodexSkills/auto/tools/validate_auto.py"
     }
   ],
-  "module_count": 19,
-  "next_phase": "MECHANISM_M0C_COORDINATED_ACTIVATION",
+  "module_count": 21,
+  "next_phase": "MECHANISM_CONSUMER_FIRST_PHASE",
   "notification_actual_recipient_repo_external": true,
   "notification_credentials_repo_external": true,
   "notification_external_path_contract": {
@@ -97,7 +124,7 @@
   "notification_provider_lookup": "RFC822_MESSAGE_ID_AND_PRIVATE_PAYLOAD_DIGEST",
   "notification_provider_readback_required": true,
   "notification_public_recipient_ref_only": true,
-  "notification_send_entrypoint": "CodexSkills/auto/tools/notification_transport_cli.py",
+  "notification_send_entrypoint": "CodexSkills/auto/tools/activation_handshake_cli.py",
   "notification_test_transport_production_forbidden": true,
   "os_local_scheduler_or_daemon_used": false,
   "persistent_managed_raw_default_enabled": false,

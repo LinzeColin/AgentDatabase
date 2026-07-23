@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build/check deterministic Auto A1b runtime interface evidence."""
+"""Build/check deterministic Auto activation-handshake interface evidence."""
 
 from __future__ import annotations
 
@@ -21,6 +21,7 @@ def _files():
     paths = sorted((AUTO_DIR / "runtime").glob("*.py"))
     paths.extend(
         [
+            AUTO_DIR / "tools" / "activation_handshake_cli.py",
             AUTO_DIR / "tools" / "build_runtime_interface.py",
             AUTO_DIR / "tools" / "notification_transport_cli.py",
             AUTO_DIR / "tools" / "run_fault_suite.py",
@@ -42,17 +43,45 @@ def build():
             }
         )
     return {
+        "activation_caller_assertions_forbidden": [
+            "activation_artifact_digests",
+            "activation_envelope_verified",
+            "notification_provider_status",
+            "shared_gate_status_map",
+        ],
+        "activation_control_baseline_git_object_id": (
+            "sha1:6769eba64badac04a131bfa00dbb0e1a353ccae0"
+        ),
+        "activation_control_baseline_interface_raw_sha256": (
+            "24af49e7f3c0ecac85154a2a9741d9d8"
+            "ceb16368224cbf7900eceac9fe66e0f7"
+        ),
+        "activation_control_interface_path": (
+            "CodexSkills/governance/activation/control-interface.json"
+        ),
+        "activation_control_mode": "DRAFT_NON_ACTIVE_CONTROL",
+        "activation_control_trust_tuple_repo_external_only": True,
         "activation_forbidden_without_coordinated_m0c": True,
+        "activation_handshake_entrypoint": (
+            "CodexSkills/auto/tools/activation_handshake_cli.py"
+        ),
+        "activation_instance_created": False,
+        "activation_settlement_recomputed_before_publish": True,
+        "au_040_daily_jsonl_shard_complete": False,
         "candidate_bundle_digest": CANDIDATE_BUNDLE_DIGEST,
         "candidate_git_object_id": CANDIDATE_GIT_OBJECT,
         "candidate_manifest_path": CANDIDATE_MANIFEST_PATH,
         "canonical_publication_permitted": False,
         "capability_gate_precedes_state_write": True,
+        "consumer_first_gate_satisfied": False,
+        "consumer_first_owner_plane": "MECHANISM",
+        "external_gmail_ready_gate_satisfied": False,
         "fault_test_rounds_required": 2,
         "manual_and_scheduled_same_orchestrator": True,
         "module_artifacts": artifacts,
         "module_count": len(artifacts),
-        "next_phase": "MECHANISM_M0C_COORDINATED_ACTIVATION",
+        "m0c_b_permitted": False,
+        "next_phase": "MECHANISM_CONSUMER_FIRST_PHASE",
         "notification_actual_recipient_repo_external": True,
         "notification_credentials_repo_external": True,
         "notification_external_path_contract": {
@@ -70,7 +99,7 @@ def build():
         "notification_provider_readback_required": True,
         "notification_public_recipient_ref_only": True,
         "notification_send_entrypoint": (
-            "CodexSkills/auto/tools/notification_transport_cli.py"
+            "CodexSkills/auto/tools/activation_handshake_cli.py"
         ),
         "notification_test_transport_production_forbidden": True,
         "os_local_scheduler_or_daemon_used": False,

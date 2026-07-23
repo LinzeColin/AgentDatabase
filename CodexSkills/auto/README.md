@@ -40,15 +40,33 @@ resolve schemas over the network, or install dependencies at runtime.
   after an unambiguous `NOT_FOUND`, and reads the provider message back before
   returning `SENT`. Provider timeouts, ambiguity, header mismatch, or missing
   scopes block the planned write without sending again.
-- `tools/notification_transport_cli.py` is the only production notification
-  entrypoint. It consumes the same external candidate/active trust tuple,
+- `runtime/activation.py` consumes both the external candidate trust tuple and
+  the external M0c-A control tuple. It verifies the local Mechanism activation
+  runtime against the selected Git object before loading the exact 31-schema /
+  five-policy offline closure. Intent, receipt, and settlement reads are
+  descriptor-relative `O_NOFOLLOW`; public JSON must be exact RFC 8785 JCS
+  bytes without a BOM or trailing newline.
+- `tools/activation_handshake_cli.py` is the production activation entrypoint.
+  `notify-intent` derives all notification metadata from a verified intent,
+  checks the live remote head, and then invokes Gmail. `publish-settlement`
+  revalidates every physical byte, proves the live single-flight lock, requires
+  the exact four settlement artifacts plus the distinguished settlement
+  itself, performs an ordinary expected-head FF push, and remotely reads every
+  byte back.
+- `tools/notification_transport_cli.py` remains the generic transport
+  preflight/non-activation entrypoint. It consumes the same external
+  candidate/active trust tuple,
   resolves only the fixed repo-external paths below, verifies the authenticated
   Gmail profile matches the owner mapping, renders the locked MAJOR template
-  from public-safe structured facts, and returns a public-safe receipt.
+  from public-safe structured facts, and returns a public-safe receipt. It
+  rejects `planned_action=ACTIVATE`; activation cannot bypass the verified
+  intent entrypoint.
 - `runtime/publication.py` permits only expected-head FF pushes followed by
-  remote byte readback. Candidate runtime publication is impossible; the
-  coordinated-activation path additionally requires a verified,
-  content-addressed envelope plus provider `SENT` evidence.
+  remote byte readback. Candidate runtime publication is impossible. The
+  coordinated-activation path no longer accepts caller booleans, caller digest
+  maps, caller `SENT` strings, or caller shared-gate status maps; it derives
+  those facts from the externally trusted settlement, exact bytes, live lock,
+  path gates, policy/privacy validation, and remote head.
 - `runtime/retention.py` keeps persistent raw disabled by default and can act
   only on validated, owned managed segments. UTC wall-clock and active-tree
   retention claims are explicit.
@@ -70,6 +88,21 @@ provisioned interpreter:
 This command is read-only. It does not accept the checkout's manifest or
 VERSION as a self-declared trust root, install packages, access a network
 resolver, create state, publish, notify, or update an automation.
+
+## M0c activation control
+
+The activation control interface remains `DRAFT_NON_ACTIVE` at
+`CodexSkills/governance/activation/control-interface.json`. Runtime use
+requires all four external values: the verified M0c-A Git object, expected raw
+interface SHA-256, canonical interface path, and
+`DRAFT_NON_ACTIVE_CONTROL` mode. Repository self-reporting is never sufficient.
+
+The two-stage production CLI is intentionally not demonstrated with a live
+instance here. A later independent run must first land the Mechanism-owned
+consumer-first change, then separately prove the repo-external state root,
+recipient mapping, Gmail OAuth scopes, authenticated recipient binding, and
+provider readback readiness. Only a later M0c-B run may create an intent, send
+the notification, create a settlement, or invoke `publish-settlement`.
 
 ## Production Gmail private-path contract
 
@@ -110,7 +143,11 @@ manual and scheduled runs use the same path.
 
 `DRAFT_NON_ACTIVE` code must not create or update `CodexSkills/VERSION`, claim
 ACTIVE state, publish canonical data, send a production notification without
-the coordinated M0c envelope, write a production watermark, or update the
-automation. A later coordinated M0c activation is required. Never invoke the
-verifier during development; the Owner selects a fresh verifier only after
-both planes finish.
+the coordinated M0c intent, write a production watermark, or update the
+automation. The Mechanism-owned consumer-first gate is not complete. AU-040 is
+also not complete: `skills_runs/example.json` is only prior scaffolding, never
+the final run-layout contract. The immutable Task Pack requires bounded daily
+JSONL shards and a manifest under
+`OpenAIDatabase/data/run_logs/skills_runs/YYYY/MM/DD/part-NNNN.jsonl`.
+Never invoke the verifier during development; the Owner selects a fresh
+verifier only after both planes finish.

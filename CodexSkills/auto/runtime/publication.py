@@ -1,4 +1,4 @@
-"""FF-only physical publication with remote readback before settlement."""
+"""FF-only physical publication from a verified activation settlement."""
 
 from __future__ import annotations
 
@@ -6,43 +6,33 @@ import os
 import re
 import stat
 import subprocess
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
-from typing import Iterable, Mapping, Optional, Sequence, Tuple
+from typing import Mapping, Optional, Sequence, Tuple
 
 from CodexSkills.auto.tools.validate_auto import AutoContract, _validate_artifact_target
-from CodexSkills.governance.tools.canonical_json import canonicalize_object
 
+from .activation import ActivationHandshake
 from .core import AutoRuntimeError, sha256_bytes
 from .privacy import validate_public_serialization
 
 
 GIT_OBJECT_RE = re.compile(r"^(sha1:[0-9a-f]{40}|sha256:[0-9a-f]{64})$")
-SHARED_GATES = (
-    "BUNDLE_DIGEST",
-    "EXPECTED_REMOTE_HEAD",
-    "LOCK_OWNERSHIP",
-    "PATH_BOUNDARY",
-    "POLICY_DIGEST",
-    "PRIVACY",
+AUTO_TRANSACTION_RE = re.compile(
+    r"^atx_[0-7][0-9A-HJKMNP-TV-Z]{25}$"
 )
-ACTIVATION_PATHS = {
-    "CodexSkills/VERSION",
-    "CodexSkills/HANDOFF.md",
-    "CodexSkills/CHANGELOG.md",
-    "CodexSkills/governance/bundles/schema-bundle-manifest.v1.json",
-    "CodexSkills/governance/HANDOFF.md",
-    "CodexSkills/governance/CHANGELOG.md",
-}
+COMMIT_MESSAGE_RE = re.compile(r"^[^\x00-\x1f\x7f]{1,120}$")
+ACTIVATION_ARTIFACT_COUNT = 5
+MAX_ACTIVATION_ARTIFACT_BYTES = 1024 * 1024
 
 
 @dataclass(frozen=True)
 class PublicationArtifact:
-    lane: str
-    schema_id: str
-    artifact_uid: str
     relative_path: str
     payload: bytes
+    lane: Optional[str] = None
+    schema_id: Optional[str] = None
+    artifact_uid: Optional[str] = None
 
 
 @dataclass(frozen=True)
@@ -53,11 +43,9 @@ class PublicationRequest:
     expected_remote_head: str
     commit_message: str
     artifacts: Tuple[PublicationArtifact, ...]
-    shared_gates: Mapping[str, str]
-    notification_provider_status: str
-    activation_envelope_verified: bool = False
-    activation_envelope_digest: Optional[str] = None
-    activation_artifact_digests: Mapping[str, str] = field(default_factory=dict)
+    lock_owner_run_uid: str
+    lock_state_digest: str
+    activation_settlement_repo_path: Optional[str] = None
 
 
 @dataclass(frozen=True)
@@ -65,6 +53,15 @@ class RemoteReadback:
     commit: str
     artifact_digests: Mapping[str, str]
     verified: bool
+
+
+class PublicationLock:
+    def assert_owned(
+        self,
+        owner_run_uid: str,
+        expected_digest: str,
+    ) -> Mapping[str, object]:
+        raise NotImplementedError
 
 
 class GitBackend:
@@ -267,6 +264,8 @@ class PhysicalPublisher:
         backend: GitBackend,
         *,
         trusted_mode: str,
+        lock: PublicationLock,
+        activation_handshake: Optional[ActivationHandshake] = None,
     ) -> None:
         if trusted_mode not in {"CANDIDATE", "ACTIVE"}:
             raise AutoRuntimeError("PUBLICATION_TRUST_MODE_INVALID")
@@ -274,11 +273,20 @@ class PhysicalPublisher:
         self.bundle_digest = bundle_digest
         self.backend = backend
         self.trusted_mode = trusted_mode
+        self.lock = lock
+        self.activation_handshake = activation_handshake
 
     @staticmethod
     def _safe_relative(path: str) -> None:
         parsed = PurePosixPath(path)
-        if parsed.is_absolute() or not parsed.parts or any(part in {"", ".", ".."} for part in parsed.parts):
+        if (
+            parsed.is_absolute()
+            or not parsed.parts
+            or any(
+                part in {"", ".", ".."} or part.casefold() == ".git"
+                for part in parsed.parts
+            )
+        ):
             raise AutoRuntimeError("PUBLICATION_PATH_INVALID")
         if "\\" in path or path.endswith("/"):
             raise AutoRuntimeError("PUBLICATION_PATH_INVALID")
@@ -288,49 +296,76 @@ class PhysicalPublisher:
             raise AutoRuntimeError("PUBLICATION_TRUST_CONTEXT_MISMATCH")
         if not GIT_OBJECT_RE.fullmatch(request.expected_remote_head):
             raise AutoRuntimeError("PUBLICATION_EXPECTED_HEAD_INVALID")
-        if set(request.shared_gates) != set(SHARED_GATES):
-            raise AutoRuntimeError("PUBLICATION_SHARED_GATE_SET_MISMATCH")
-        failed = sorted(code for code, status in request.shared_gates.items() if status != "PASS")
-        if failed:
-            raise AutoRuntimeError("PUBLICATION_SHARED_GATE_FAILED:" + ",".join(failed))
+        if not AUTO_TRANSACTION_RE.fullmatch(
+            request.auto_transaction_uid
+        ):
+            raise AutoRuntimeError("PUBLICATION_TRANSACTION_UID_INVALID")
+        if not COMMIT_MESSAGE_RE.fullmatch(request.commit_message):
+            raise AutoRuntimeError("PUBLICATION_COMMIT_MESSAGE_INVALID")
+        if (
+            not request.lock_owner_run_uid
+            or not re.fullmatch(r"[0-9a-f]{64}", request.lock_state_digest)
+        ):
+            raise AutoRuntimeError("PUBLICATION_LOCK_EVIDENCE_INVALID")
         if request.authority == "CANDIDATE_TEST":
             raise AutoRuntimeError("CANDIDATE_CANONICAL_PUBLICATION_FORBIDDEN")
         if request.authority == "ACTIVE_RUNTIME" and request.trust_mode != "ACTIVE":
             raise AutoRuntimeError("ACTIVE_PUBLICATION_REQUIRES_ACTIVE_TRUST")
         if request.authority == "COORDINATED_ACTIVATION":
-            if request.trust_mode != "CANDIDATE" or not request.activation_envelope_verified:
-                raise AutoRuntimeError("ACTIVATION_ENVELOPE_REQUIRED")
             if (
-                request.activation_envelope_digest is None
-                or not re.fullmatch(r"[0-9a-f]{64}", request.activation_envelope_digest)
+                request.trust_mode != "CANDIDATE"
+                or self.activation_handshake is None
+                or request.activation_settlement_repo_path is None
             ):
-                raise AutoRuntimeError("ACTIVATION_ENVELOPE_DIGEST_REQUIRED")
-            if request.notification_provider_status != "SENT":
-                raise AutoRuntimeError("ACTIVATION_MAJOR_NOTIFICATION_REQUIRED")
-            if not all(
-                artifact.relative_path in ACTIVATION_PATHS
-                or artifact.relative_path.startswith("CodexSkills/governance/activation-receipts/")
-                for artifact in request.artifacts
+                raise AutoRuntimeError(
+                    "ACTIVATION_SETTLEMENT_HANDSHAKE_REQUIRED"
+                )
+            self._safe_relative(
+                request.activation_settlement_repo_path
+            )
+            if (
+                request.lock_owner_run_uid
+                != request.auto_transaction_uid
+                or len(request.artifacts) != ACTIVATION_ARTIFACT_COUNT
             ):
-                raise AutoRuntimeError("ACTIVATION_PATH_OUTSIDE_ENVELOPE_SCOPE")
-            expected_paths = {artifact.relative_path for artifact in request.artifacts}
-            if set(request.activation_artifact_digests) != expected_paths:
-                raise AutoRuntimeError("ACTIVATION_ENVELOPE_ARTIFACT_SET_MISMATCH")
-            for artifact in request.artifacts:
-                if request.activation_artifact_digests[artifact.relative_path] != sha256_bytes(
-                    artifact.payload
-                ):
-                    raise AutoRuntimeError("ACTIVATION_ENVELOPE_ARTIFACT_DIGEST_MISMATCH")
+                raise AutoRuntimeError(
+                    "ACTIVATION_PUBLICATION_CONTEXT_INVALID"
+                )
         elif request.authority != "ACTIVE_RUNTIME":
             raise AutoRuntimeError("PUBLICATION_AUTHORITY_UNKNOWN")
+        elif request.activation_settlement_repo_path is not None:
+            raise AutoRuntimeError(
+                "ACTIVE_RUNTIME_ACTIVATION_SETTLEMENT_FORBIDDEN"
+            )
 
         paths = []
         uids = set()
         for artifact in request.artifacts:
             self._safe_relative(artifact.relative_path)
-            if artifact.relative_path in paths or artifact.artifact_uid in uids:
+            if not isinstance(artifact.payload, bytes):
+                raise AutoRuntimeError("PUBLICATION_ARTIFACT_PAYLOAD_INVALID")
+            if (
+                request.authority == "COORDINATED_ACTIVATION"
+                and len(artifact.payload)
+                > MAX_ACTIVATION_ARTIFACT_BYTES
+            ):
+                raise AutoRuntimeError(
+                    "ACTIVATION_PUBLICATION_ARTIFACT_SIZE_INVALID"
+                )
+            if artifact.relative_path in paths or (
+                artifact.artifact_uid is not None
+                and artifact.artifact_uid in uids
+            ):
                 raise AutoRuntimeError("PUBLICATION_ARTIFACT_DUPLICATE")
             if request.authority == "ACTIVE_RUNTIME":
+                if (
+                    artifact.lane is None
+                    or artifact.schema_id is None
+                    or artifact.artifact_uid is None
+                ):
+                    raise AutoRuntimeError(
+                        "PUBLICATION_ACTIVE_ARTIFACT_METADATA_REQUIRED"
+                    )
                 _validate_artifact_target(
                     artifact.lane,
                     artifact.schema_id,
@@ -343,40 +378,102 @@ class PhysicalPublisher:
                     self.bundle_digest,
                 )
             paths.append(artifact.relative_path)
-            uids.add(artifact.artifact_uid)
+            if artifact.artifact_uid is not None:
+                uids.add(artifact.artifact_uid)
         if not paths:
             raise AutoRuntimeError("PUBLICATION_EMPTY_TRANSACTION_FORBIDDEN")
         if paths != sorted(paths):
             raise AutoRuntimeError("PUBLICATION_ARTIFACT_ORDER_INVALID")
+        if (
+            request.authority == "COORDINATED_ACTIVATION"
+            and request.activation_settlement_repo_path not in paths
+        ):
+            raise AutoRuntimeError(
+                "ACTIVATION_SETTLEMENT_ARTIFACT_REQUIRED"
+            )
         return tuple(paths)
+
+    def _validate_activation_worktree(
+        self,
+        request: PublicationRequest,
+        worktree: Path,
+    ) -> None:
+        if (
+            self.activation_handshake is None
+            or request.activation_settlement_repo_path is None
+        ):
+            raise AutoRuntimeError(
+                "ACTIVATION_SETTLEMENT_HANDSHAKE_REQUIRED"
+            )
+        verified = self.activation_handshake.verify_settlement_root(
+            worktree,
+            request.activation_settlement_repo_path,
+            request.expected_remote_head,
+        )
+        requested = {
+            artifact.relative_path: artifact.payload
+            for artifact in request.artifacts
+        }
+        if (
+            verified.auto_transaction_uid
+            != request.auto_transaction_uid
+            or verified.expected_remote_head
+            != request.expected_remote_head
+        ):
+            raise AutoRuntimeError(
+                "ACTIVATION_SETTLEMENT_REQUEST_CONTEXT_MISMATCH"
+            )
+        if (
+            tuple(sorted(requested)) != verified.artifact_paths
+            or requested != dict(verified.payloads)
+        ):
+            raise AutoRuntimeError(
+                "ACTIVATION_SETTLEMENT_REQUEST_BYTES_MISMATCH"
+            )
 
     def publish(self, request: PublicationRequest) -> RemoteReadback:
         paths = self._validate_request(request)
-        if self.backend.remote_head() != request.expected_remote_head:
-            recovered = self.backend.find_transaction(
-                request.auto_transaction_uid,
-                request.expected_remote_head,
-            )
-            if recovered is None:
-                raise AutoRuntimeError("REMOTE_HEAD_CHANGED")
-            readback = self.backend.readback(recovered, request.artifacts)
-            if not readback.verified:
-                raise AutoRuntimeError("REMOTE_READBACK_FAILED")
-            return readback
+        self.lock.assert_owned(
+            request.lock_owner_run_uid,
+            request.lock_state_digest,
+        )
         worktree = self.backend.create_worktree(
             request.expected_remote_head, request.auto_transaction_uid
         )
         try:
             self.backend.write_artifacts(worktree, request.artifacts)
+            if request.authority == "COORDINATED_ACTIVATION":
+                self._validate_activation_worktree(request, worktree)
             changed = self.backend.changed_paths(worktree)
             if changed != paths:
                 raise AutoRuntimeError("PUBLICATION_CHANGED_PATH_SET_MISMATCH")
+            self.lock.assert_owned(
+                request.lock_owner_run_uid,
+                request.lock_state_digest,
+            )
+            if self.backend.remote_head() != request.expected_remote_head:
+                recovered = self.backend.find_transaction(
+                    request.auto_transaction_uid,
+                    request.expected_remote_head,
+                )
+                if recovered is None:
+                    raise AutoRuntimeError("REMOTE_HEAD_CHANGED")
+                readback = self.backend.readback(
+                    recovered, request.artifacts
+                )
+                if not readback.verified:
+                    raise AutoRuntimeError("REMOTE_READBACK_FAILED")
+                return readback
             message = (
                 request.commit_message
                 + "\n\nSkillOps-Auto-Transaction: "
                 + request.auto_transaction_uid
             )
             commit = self.backend.commit(worktree, message, paths)
+            self.lock.assert_owned(
+                request.lock_owner_run_uid,
+                request.lock_state_digest,
+            )
             self.backend.push(worktree, request.expected_remote_head)
             readback = self.backend.readback(commit, request.artifacts)
             if not readback.verified:

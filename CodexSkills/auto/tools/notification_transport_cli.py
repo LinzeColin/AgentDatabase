@@ -57,6 +57,13 @@ def _private_public_metadata(path: Path):
     return value
 
 
+def _reject_activation_bypass(metadata) -> None:
+    if metadata.get("planned_action") == "ACTIVATE":
+        raise AutoRuntimeError(
+            "ACTIVATION_HANDSHAKE_ENTRYPOINT_REQUIRED"
+        )
+
+
 def _components(args: argparse.Namespace):
     context = bootstrap_runtime(args.repo_root, _trust(args))
     paths = NotificationPathContract.resolve(
@@ -113,6 +120,7 @@ def main(argv: Sequence[str] = None) -> int:
         return 0
 
     metadata = _private_public_metadata(args.public_metadata_file)
+    _reject_activation_bypass(metadata)
     rendered = render_major_email(
         srv_revision=args.srv_revision,
         auto_transaction_uid=args.auto_transaction_uid,
