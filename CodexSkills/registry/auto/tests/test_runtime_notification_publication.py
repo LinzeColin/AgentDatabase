@@ -24,7 +24,7 @@ from CodexSkills.registry.auto.runtime.publication import (
 )
 from CodexSkills.governance.tools.canonical_json import canonicalize_object
 
-from runtime_helpers import CANDIDATE_DIGEST, clock, context, uid
+from runtime_helpers import CANDIDATE_DIGEST, clock, final_contract, uid
 
 
 class FakePublicationLock:
@@ -150,7 +150,7 @@ class RuntimeNotificationPublicationTests(unittest.TestCase):
     def notifier(self, transport):
         return TransactionalNotifier(
             self.outbox,
-            context().contract,
+            final_contract(),
             CANDIDATE_DIGEST,
             clock(),
             transport,
@@ -290,7 +290,7 @@ class RuntimeNotificationPublicationTests(unittest.TestCase):
 
     def publisher(self, backend):
         return PhysicalPublisher(
-            context().contract,
+            final_contract(),
             CANDIDATE_DIGEST,
             backend,
             trusted_mode="CANDIDATE",
@@ -314,7 +314,7 @@ class RuntimeNotificationPublicationTests(unittest.TestCase):
     def test_activation_requires_settlement_handshake(self) -> None:
         backend = FakeGitBackend()
         publisher = PhysicalPublisher(
-            context().contract,
+            final_contract(),
             CANDIDATE_DIGEST,
             backend,
             trusted_mode="CANDIDATE",

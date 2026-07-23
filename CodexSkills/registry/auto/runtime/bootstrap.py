@@ -330,6 +330,9 @@ def _verify_control_trust(
             ) from exc
         if (
             not isinstance(source_interface, dict)
+            or source_interface.get("status") != "DRAFT_NON_ACTIVE"
+            or source_interface.get("trust_tuple_repo_external_only")
+            is not True
             or source_interface.get(
                 "auto_exact_bundle_integration_complete"
             )
@@ -340,8 +343,6 @@ def _verify_control_trust(
             != candidate_trust.expected_bundle_digest
             or source_interface.get("shared_bundle_schema_count") != 31
             or source_interface.get("shared_policy_count") != 5
-            or source_interface.get("next_phase")
-            != "MECHANISM_POST_AUTO_INTEGRATION_CONTROL_SYNC"
         ):
             raise AutoRuntimeError(
                 "BOOTSTRAP_AUTO_RUNTIME_INTERFACE_CONTRACT_MISMATCH"
@@ -370,6 +371,18 @@ def _verify_control_trust(
                     "BOOTSTRAP_AUTO_RUNTIME_MODULE_ENTRY_INVALID"
                 )
             observed_paths.append(entry["relative_path"])
+            source_module_raw = _git_blob(
+                repo_root,
+                source_object_id,
+                entry["relative_path"],
+            )
+            if (
+                hashlib.sha256(source_module_raw).hexdigest()
+                != entry["artifact_digest"]
+            ):
+                raise AutoRuntimeError(
+                    "BOOTSTRAP_AUTO_RUNTIME_MODULE_GIT_DIGEST_MISMATCH"
+                )
             try:
                 module_raw = repo_root.joinpath(
                     *entry["relative_path"].split("/")
@@ -378,10 +391,7 @@ def _verify_control_trust(
                 raise AutoRuntimeError(
                     "BOOTSTRAP_AUTO_RUNTIME_MODULE_READ_FAILED"
                 ) from exc
-            if (
-                hashlib.sha256(module_raw).hexdigest()
-                != entry["artifact_digest"]
-            ):
+            if module_raw != source_module_raw:
                 raise AutoRuntimeError(
                     "BOOTSTRAP_AUTO_RUNTIME_MODULE_LOCAL_DRIFT"
                 )

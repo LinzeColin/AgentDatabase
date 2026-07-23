@@ -1,17 +1,19 @@
 from __future__ import annotations
 
 import datetime as dt
-import copy
-import dataclasses
+import hashlib
+import re
 from functools import lru_cache
 from pathlib import Path
 from types import MappingProxyType
 
 from CodexSkills.registry.auto.runtime.bootstrap import (
+    BootstrapContext,
     CONTROL_INTERFACE_PATH,
     CONTROL_MODE,
     ControlTrustTuple,
-    bootstrap_runtime,
+    _git_blob,
+    _split_git_object,
 )
 from CodexSkills.registry.auto.runtime.core import (
     FakeClock,
@@ -22,15 +24,19 @@ from CodexSkills.registry.auto.runtime.core import (
     new_uid,
 )
 from CodexSkills.governance.tools.validate_mechanism import TrustTuple
+from CodexSkills.governance.tools.canonical_json import parse_json_bytes
+from CodexSkills.registry.auto.tools.validate_auto import (
+    load_trusted_auto_contract,
+)
 
 
 CANDIDATE_GIT_OBJECT = "sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5"
 CANDIDATE_DIGEST = "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e"
 MANIFEST_PATH = "CodexSkills/governance/bundles/schema-bundle-manifest.v1.json"
-CONTROL_GIT_OBJECT = "sha1:66d5bafadca508cad825b4ce49a42e81e8b66ef7"
+CONTROL_GIT_OBJECT = "sha1:00c4a52d177898b1999b87b29ddb480e89908729"
 CONTROL_INTERFACE_RAW_SHA256 = (
-    "86e4d625bdab87261a39c949883d4108"
-    "22e25e0222dbab6a333d171ce420c614"
+    "31602443a685cc12a1eebd51ea8e0801"
+    "ffd399c16a33186c372b7b81e8e46409"
 )
 FIXED_NOW = dt.datetime(2026, 7, 23, 0, 0, 0, tzinfo=dt.timezone.utc)
 REPO_ROOT = Path(__file__).resolve().parents[4]
@@ -54,21 +60,63 @@ def control_trust(
 
 
 @lru_cache(maxsize=1)
-def context():
-    return bootstrap_runtime(REPO_ROOT, trust(), control_trust())
+def final_contract():
+    """Load final 31/5 content without claiming current control binding."""
+
+    return load_trusted_auto_contract(REPO_ROOT, trust())
 
 
 @lru_cache(maxsize=1)
-def control_synced_context():
-    current = context()
-    interface = copy.deepcopy(dict(current.control_interface))
-    interface["transition_contract"][
-        "auto_runtime_integration_complete"
-    ] = True
-    return dataclasses.replace(
-        current,
-        control_interface=MappingProxyType(interface),
+def synthetic_bound_context():
+    """Test-only historical control fixture; never a production bootstrap."""
+
+    object_id = _split_git_object(
+        REPO_ROOT,
+        CONTROL_GIT_OBJECT,
+        "TEST_HISTORICAL_CONTROL",
     )
+    raw = _git_blob(REPO_ROOT, object_id, CONTROL_INTERFACE_PATH)
+    if hashlib.sha256(raw).hexdigest() != CONTROL_INTERFACE_RAW_SHA256:
+        raise AssertionError("TEST_HISTORICAL_CONTROL_DIGEST_MISMATCH")
+    interface = parse_json_bytes(raw)
+    return BootstrapContext(
+        trust(),
+        control_trust(),
+        final_contract(),
+        MappingProxyType({}),
+        MappingProxyType(interface),
+    )
+
+
+@lru_cache(maxsize=1)
+def context():
+    """Compatibility alias for tests that only consume the final contract."""
+
+    return synthetic_bound_context()
+
+
+def expected_stale_control_failure_pattern() -> str:
+    """Return the one exact production failure expected for the stale tuple."""
+
+    object_id = _split_git_object(
+        REPO_ROOT,
+        CONTROL_GIT_OBJECT,
+        "TEST_HISTORICAL_CONTROL",
+    )
+    historical = _git_blob(
+        REPO_ROOT,
+        object_id,
+        CONTROL_INTERFACE_PATH,
+    )
+    local = REPO_ROOT.joinpath(
+        *CONTROL_INTERFACE_PATH.split("/")
+    ).read_bytes()
+    code = (
+        "BOOTSTRAP_AUTO_RUNTIME_INTERFACE_LOCAL_DRIFT"
+        if local == historical
+        else "BOOTSTRAP_CONTROL_INTERFACE_LOCAL_DRIFT"
+    )
+    return rf"^{re.escape(code)}$"
 
 
 def clock() -> FakeClock:

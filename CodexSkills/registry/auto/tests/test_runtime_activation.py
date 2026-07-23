@@ -29,7 +29,8 @@ from runtime_helpers import (
     CONTROL_GIT_OBJECT,
     CONTROL_INTERFACE_RAW_SHA256,
     REPO_ROOT,
-    context,
+    final_contract,
+    synthetic_bound_context,
 )
 
 
@@ -161,7 +162,7 @@ def notification_metadata(intent: Mapping[str, Any]):
 
 
 def receipt_fixture(intent: Mapping[str, Any]) -> Dict[str, Any]:
-    policy = context().contract.shared.policies[NOTIFICATION_POLICY_ID]
+    policy = final_contract().shared.policies[NOTIFICATION_POLICY_ID]
     value = {
         "schema_version": NOTIFICATION_RECEIPT_ID,
         "protocol_revision": PROTOCOL,
@@ -299,7 +300,7 @@ class RuntimeActivationTests(unittest.TestCase):
         )
         cls.handshake = ActivationHandshake(
             REPO_ROOT,
-            context(),
+            synthetic_bound_context(),
             cls.trust,
         )
 
@@ -318,7 +319,7 @@ class RuntimeActivationTests(unittest.TestCase):
             AutoRuntimeError,
             "ACTIVATION_CONTROL_CONTEXT_MISMATCH",
         ):
-            ActivationHandshake(REPO_ROOT, context(), bad)
+            ActivationHandshake(REPO_ROOT, synthetic_bound_context(), bad)
 
     def test_intent_derives_only_frozen_notification_metadata(self) -> None:
         intent = intent_fixture()
@@ -433,7 +434,11 @@ class RuntimeActivationTests(unittest.TestCase):
                 AutoRuntimeError,
                 "ACTIVATION_CONTROL_RUNTIME_LOCAL_DRIFT",
             ):
-                ActivationHandshake(REPO_ROOT, context(), self.trust)
+                ActivationHandshake(
+                    REPO_ROOT,
+                    synthetic_bound_context(),
+                    self.trust,
+                )
 
     def test_generic_notification_cli_cannot_bypass_intent(self) -> None:
         with self.assertRaisesRegex(

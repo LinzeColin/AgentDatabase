@@ -14,7 +14,13 @@ from CodexSkills.registry.auto.runtime.state import (
     WatermarkStore,
 )
 
-from runtime_helpers import CANDIDATE_DIGEST, REPO_ROOT, clock, context, uid
+from runtime_helpers import (
+    CANDIDATE_DIGEST,
+    REPO_ROOT,
+    clock,
+    final_contract,
+    uid,
+)
 
 
 class RuntimeStateTests(unittest.TestCase):
@@ -86,17 +92,23 @@ class RuntimeStateTests(unittest.TestCase):
 
     def test_two_starts_produce_one_writer(self) -> None:
         layout = self.layout()
-        first = SingleFlightLock(layout, context().contract, CANDIDATE_DIGEST, clock())
+        first = SingleFlightLock(
+            layout, final_contract(), CANDIDATE_DIGEST, clock()
+        )
         acquired = first.acquire(uid("run", 1), entropy=(1).to_bytes(10, "big"))
         self.assertEqual(acquired.status, "ACQUIRED")
-        second = SingleFlightLock(layout, context().contract, CANDIDATE_DIGEST, clock())
+        second = SingleFlightLock(
+            layout, final_contract(), CANDIDATE_DIGEST, clock()
+        )
         busy = second.acquire(uid("run", 2), entropy=(2).to_bytes(10, "big"))
         self.assertEqual(busy.status, "BUSY")
 
     def test_expired_lock_is_not_stolen_without_owner_probe(self) -> None:
         layout = self.layout()
         fake = clock()
-        lock = SingleFlightLock(layout, context().contract, CANDIDATE_DIGEST, fake)
+        lock = SingleFlightLock(
+            layout, final_contract(), CANDIDATE_DIGEST, fake
+        )
         acquired = lock.acquire(uid("run", 1), lease_seconds=1, entropy=(1).to_bytes(10, "big"))
         fake.advance(seconds=2)
         stale = lock.acquire(uid("run", 2), entropy=(2).to_bytes(10, "big"))
@@ -110,7 +122,9 @@ class RuntimeStateTests(unittest.TestCase):
 
     def test_lock_release_requires_exact_owner_and_digest(self) -> None:
         layout = self.layout()
-        lock = SingleFlightLock(layout, context().contract, CANDIDATE_DIGEST, clock())
+        lock = SingleFlightLock(
+            layout, final_contract(), CANDIDATE_DIGEST, clock()
+        )
         acquired = lock.acquire(uid("run", 1), entropy=(1).to_bytes(10, "big"))
         with self.assertRaisesRegex(AutoRuntimeError, "LOCK_OWNERSHIP_MISMATCH"):
             lock.release(uid("run", 2), str(acquired.state["state_digest"]))
@@ -123,7 +137,7 @@ class RuntimeStateTests(unittest.TestCase):
         fake = clock()
         lock = SingleFlightLock(
             layout,
-            context().contract,
+            final_contract(),
             CANDIDATE_DIGEST,
             fake,
         )
@@ -152,7 +166,9 @@ class RuntimeStateTests(unittest.TestCase):
     def test_partial_corrupt_claim_needs_grace_and_explicit_proof(self) -> None:
         layout = self.layout()
         fake = clock()
-        lock = SingleFlightLock(layout, context().contract, CANDIDATE_DIGEST, fake)
+        lock = SingleFlightLock(
+            layout, final_contract(), CANDIDATE_DIGEST, fake
+        )
         lock.claim.mkdir(mode=0o700)
         os.utime(lock.claim, (fake.now().timestamp(), fake.now().timestamp()))
         evidence = lock.corrupt_claim_evidence()
@@ -178,7 +194,7 @@ class RuntimeStateTests(unittest.TestCase):
         layout = self.layout()
         store = WatermarkStore(
             layout.watermarks / "watermark.json",
-            context().contract,
+            final_contract(),
             CANDIDATE_DIGEST,
             clock(),
         )
@@ -199,7 +215,7 @@ class RuntimeStateTests(unittest.TestCase):
         layout = self.layout()
         store = WatermarkStore(
             layout.watermarks / "watermark.json",
-            context().contract,
+            final_contract(),
             CANDIDATE_DIGEST,
             clock(),
         )

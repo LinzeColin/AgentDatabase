@@ -14,10 +14,12 @@ import dataclasses
 import datetime as dt
 import hashlib
 import json
+import re
 import subprocess
 import sys
 from pathlib import Path
 from typing import Any, Dict, Iterable, Mapping, Optional, Sequence, Tuple
+from zoneinfo import ZoneInfo
 
 
 AUTO_DIR = Path(__file__).resolve().parents[1]
@@ -96,6 +98,15 @@ REGISTRY_CONTROL_PATHS = {
     "CodexSkills/VERSION",
 }
 RUN_LOG_WRITE_PREFIX = "OpenAIDatabase/data/run_logs/skills_runs/"
+DAILY_MANIFEST_ID = SCHEMA_PREFIX + "daily-run-shard-manifest:v1"
+INDEX_ENTRY_ID = SCHEMA_PREFIX + "run-event-index-entry:v1"
+PUBLIC_RUN_EVENT_ID = SCHEMA_PREFIX + "public-run-event:v2"
+MAX_RUN_LOG_PART_BYTES = 20 * 1024 * 1024
+DAILY_RUN_PATH_RE = re.compile(
+    r"^OpenAIDatabase/data/run_logs/skills_runs/"
+    r"([0-9]{4})/([0-9]{2})/([0-9]{2})/"
+    r"(manifest|index|part)-([0-9]{4})\.(json|jsonl)$"
+)
 SHARED_GATES = (
     "BUNDLE_DIGEST",
     "EXPECTED_REMOTE_HEAD",
@@ -526,6 +537,154 @@ def _validate_public_run_event(instance: Mapping[str, Any]) -> None:
         _fail("RUN_EVENT_UNMEASURED_TOKENS_MUST_BE_NULL")
 
 
+def _sydney_date(value: str) -> str:
+    return _parse_utc(value).replace(
+        tzinfo=dt.timezone.utc
+    ).astimezone(ZoneInfo("Australia/Sydney")).date().isoformat()
+
+
+def _parse_daily_run_path(path: str) -> Tuple[str, int]:
+    match = DAILY_RUN_PATH_RE.fullmatch(path)
+    if match is None:
+        _fail(f"PUBLICATION_RUN_LOG_PATH_INVALID:{path}")
+    try:
+        local_date = dt.date(
+            int(match.group(1)),
+            int(match.group(2)),
+            int(match.group(3)),
+        )
+    except ValueError as exc:
+        raise ContractError(
+            f"PUBLICATION_RUN_LOG_DATE_INVALID:{path}"
+        ) from exc
+    if local_date.isoformat() != "-".join(
+        match.group(index) for index in (1, 2, 3)
+    ):
+        _fail(f"PUBLICATION_RUN_LOG_DATE_NONCANONICAL:{path}")
+    kind = match.group(4)
+    number = int(match.group(5))
+    extension = match.group(6)
+    if number < 1 or number > 9999:
+        _fail(f"PUBLICATION_RUN_LOG_SEQUENCE_INVALID:{path}")
+    if (kind == "manifest") != (extension == "json"):
+        _fail(f"PUBLICATION_RUN_LOG_EXTENSION_INVALID:{path}")
+    return kind, number
+
+
+def _validate_daily_manifest(instance: Mapping[str, Any]) -> None:
+    parts = instance["parts"]
+    numbers = [part["part_number"] for part in parts]
+    if (
+        numbers != list(range(1, len(parts) + 1))
+        or numbers[-1] > 9999
+    ):
+        _fail("DAILY_MANIFEST_PART_NUMBERS_NOT_CONTIGUOUS")
+    if instance["manifest_revision"] > 9999:
+        _fail("DAILY_MANIFEST_REVISION_EXCEEDS_PATH_WIDTH")
+    if instance["max_part_number"] != numbers[-1]:
+        _fail("DAILY_MANIFEST_MAX_PART_NUMBER_MISMATCH")
+    if instance["total_part_count"] != len(parts):
+        _fail("DAILY_MANIFEST_TOTAL_PART_COUNT_MISMATCH")
+
+    active = [part for part in parts if part["state"] == "ACTIVE"]
+    pruned = [part for part in parts if part["state"] == "PRUNED"]
+    if instance["manifest_revision"] == 1 and pruned:
+        _fail("DAILY_MANIFEST_REVISION_ONE_CANNOT_CONTAIN_PRUNED_PART")
+    if instance["active_part_count"] != len(active):
+        _fail("DAILY_MANIFEST_ACTIVE_PART_COUNT_MISMATCH")
+    if instance["pruned_part_count"] != len(pruned):
+        _fail("DAILY_MANIFEST_PRUNED_PART_COUNT_MISMATCH")
+    if len(active) + len(pruned) != len(parts):
+        _fail("DAILY_MANIFEST_STATE_COUNT_MISMATCH")
+    if instance["active_shard_bytes"] != sum(
+        part["shard_bytes"] for part in active
+    ):
+        _fail("DAILY_MANIFEST_ACTIVE_BYTES_MISMATCH")
+    if instance["active_record_count"] != sum(
+        part["record_count"] for part in active
+    ):
+        _fail("DAILY_MANIFEST_ACTIVE_RECORDS_MISMATCH")
+    if instance["retained_index_bytes"] != sum(
+        part["index_bytes"] for part in parts
+    ):
+        _fail("DAILY_MANIFEST_RETAINED_INDEX_BYTES_MISMATCH")
+    if instance["retained_index_record_count"] != sum(
+        part["index_record_count"] for part in parts
+    ):
+        _fail("DAILY_MANIFEST_RETAINED_INDEX_RECORDS_MISMATCH")
+
+    publication_at = _parse_utc(
+        instance["publication_transaction_at"]
+    ).replace(tzinfo=dt.timezone.utc)
+    for part in parts:
+        number = part["part_number"]
+        if part["shard_name"] != f"part-{number:04d}.jsonl":
+            _fail("DAILY_MANIFEST_SHARD_NAME_NUMBER_MISMATCH")
+        if part["index_name"] != f"index-{number:04d}.jsonl":
+            _fail("DAILY_MANIFEST_INDEX_NAME_NUMBER_MISMATCH")
+        if part["shard_bytes"] > MAX_RUN_LOG_PART_BYTES:
+            _fail("DAILY_MANIFEST_SHARD_SIZE_EXCEEDED")
+        if part["index_bytes"] > MAX_RUN_LOG_PART_BYTES:
+            _fail("DAILY_MANIFEST_INDEX_SIZE_EXCEEDED")
+        if part["record_count"] != part["index_record_count"]:
+            _fail("DAILY_MANIFEST_INDEX_RECORD_COUNT_MISMATCH")
+        first_key = (
+            _parse_utc(part["first_occurred_at"]),
+            part["first_event_uid"],
+        )
+        last_key = (
+            _parse_utc(part["last_occurred_at"]),
+            part["last_event_uid"],
+        )
+        if first_key > last_key:
+            _fail("DAILY_MANIFEST_EVENT_RANGE_REVERSED")
+        if (
+            _sydney_date(part["first_occurred_at"])
+            != instance["local_date"]
+            or _sydney_date(part["last_occurred_at"])
+            != instance["local_date"]
+        ):
+            _fail("DAILY_MANIFEST_SYDNEY_DATE_MISMATCH")
+        first_published = _parse_utc(
+            part["first_published_at"]
+        ).replace(tzinfo=dt.timezone.utc)
+        retention_anchor = _parse_utc(
+            part["retention_not_before"]
+        ).replace(tzinfo=dt.timezone.utc)
+        if first_published < last_key[0].replace(
+            tzinfo=dt.timezone.utc
+        ):
+            _fail("DAILY_MANIFEST_PUBLISHED_BEFORE_EVENT")
+        if publication_at < first_published:
+            _fail("DAILY_MANIFEST_REVISION_BEFORE_FIRST_PUBLICATION")
+        if retention_anchor != first_published + dt.timedelta(days=365):
+            _fail("DAILY_MANIFEST_RETENTION_ANCHOR_NOT_EXACT_365D")
+        if part["state"] == "PRUNED":
+            pruned_at = _parse_utc(part["pruned_at"]).replace(
+                tzinfo=dt.timezone.utc
+            )
+            if pruned_at <= retention_anchor:
+                _fail("DAILY_MANIFEST_PRUNE_NOT_STRICTLY_AFTER_ANCHOR")
+            if pruned_at > publication_at:
+                _fail(
+                    "DAILY_MANIFEST_PRUNE_AFTER_REVISION_PUBLICATION"
+                )
+
+
+def _validate_index_entry(instance: Mapping[str, Any]) -> None:
+    if _parse_utc(instance["first_published_at"]) < _parse_utc(
+        instance["occurred_at"]
+    ):
+        _fail("RUN_EVENT_INDEX_PUBLISHED_BEFORE_OCCURRED")
+    if instance["event_type"] == "BINDING_CORRECTION":
+        if (
+            instance["event_uid"] == instance["supersedes_event_uid"]
+            or instance["event_digest"]
+            == instance["supersedes_event_digest"]
+        ):
+            _fail("RUN_EVENT_INDEX_CORRECTION_SELF_REFERENCE")
+
+
 def _validate_source_coverage(instance: Mapping[str, Any]) -> None:
     _time_order(
         instance,
@@ -752,9 +911,90 @@ def _validate_retention_receipt(instance: Mapping[str, Any]) -> None:
 
 
 def _validate_retention_receipt_v3(instance: Mapping[str, Any]) -> None:
-    if instance["scope"] == "GIT_CURRENT_TREE":
-        _fail("AUTO_AU040_RUNTIME_WRITER_NOT_INTEGRATED")
     _validate_retention_receipt(instance)
+    affected = instance.get("affected_public_artifacts", [])
+    if (
+        instance["scope"] == "GIT_CURRENT_TREE"
+        and instance["action"] == "PRUNE_CURRENT_TREE"
+    ):
+        _require_sorted_unique(
+            affected,
+            lambda item: item["artifact_repo_path"],
+            "RETENTION_AFFECTED_ARTIFACT_ORDER",
+        )
+        if instance["affected_count"] != len(affected):
+            _fail("RETENTION_AFFECTED_ARTIFACT_COUNT_MISMATCH")
+        if instance["affected_bytes"] != sum(
+            item["prior_artifact_bytes"] for item in affected
+        ):
+            _fail("RETENTION_AFFECTED_ARTIFACT_BYTES_MISMATCH")
+        executed_at = _parse_utc(instance["executed_at"]).replace(
+            tzinfo=dt.timezone.utc
+        )
+        deadline_breached = False
+        for item in affected:
+            kind, number = _parse_daily_run_path(
+                item["artifact_repo_path"]
+            )
+            if kind != "part":
+                _fail("RETENTION_AFFECTED_ARTIFACT_NOT_PART")
+            index_kind, index_number = _parse_daily_run_path(
+                item["retained_index_path"]
+            )
+            if index_kind != "index" or index_number != number:
+                _fail("RETENTION_RETAINED_INDEX_PAIR_MISMATCH")
+            if item["artifact_repo_path"].rsplit("/", 1)[0] != item[
+                "retained_index_path"
+            ].rsplit("/", 1)[0]:
+                _fail("RETENTION_RETAINED_INDEX_DATE_MISMATCH")
+            first_published = _parse_utc(
+                item["first_published_at"]
+            ).replace(tzinfo=dt.timezone.utc)
+            anchor = _parse_utc(
+                item["retention_not_before"]
+            ).replace(tzinfo=dt.timezone.utc)
+            deadline = _parse_utc(item["prune_deadline_at"]).replace(
+                tzinfo=dt.timezone.utc
+            )
+            if anchor != first_published + dt.timedelta(days=365):
+                _fail("RETENTION_ANCHOR_NOT_EXACT_365D")
+            if deadline != anchor + dt.timedelta(hours=24):
+                _fail(
+                    "RETENTION_PRUNE_DEADLINE_NOT_24H_AFTER_ANCHOR"
+                )
+            if executed_at <= anchor:
+                _fail(
+                    "RETENTION_EXECUTION_NOT_STRICTLY_AFTER_ANCHOR"
+                )
+            if executed_at > deadline:
+                deadline_breached = True
+        if instance["prune_deadline_breached"] is not deadline_breached:
+            _fail(
+                "RETENTION_PRUNE_DEADLINE_BREACH_STATE_MISMATCH"
+            )
+        if deadline_breached:
+            if (
+                instance.get("gap_code")
+                != "GIT_CURRENT_TREE_PRUNE_DEADLINE_BREACH"
+            ):
+                _fail(
+                    "RETENTION_PRUNE_DEADLINE_BREACH_GAP_REQUIRED"
+                )
+        elif "gap_code" in instance:
+            _fail("RETENTION_ON_TIME_PRUNE_GAP_FORBIDDEN")
+    elif affected:
+        _fail("RETENTION_PUBLIC_DETAILS_OUTSIDE_ACTIVE_TREE_PRUNE")
+    elif (
+        instance["scope"] == "GIT_CURRENT_TREE"
+        and "gap_code" in instance
+    ):
+        _fail("RETENTION_GIT_GAP_OUTSIDE_PRUNE_FORBIDDEN")
+    if (
+        instance["scope"] == "MANAGED_RAW"
+        and instance.get("gap_code")
+        == "GIT_CURRENT_TREE_PRUNE_DEADLINE_BREACH"
+    ):
+        _fail("RETENTION_GIT_DEADLINE_GAP_ON_MANAGED_RAW")
 
 
 def _validate_migration_receipt(instance: Mapping[str, Any]) -> None:
@@ -827,6 +1067,8 @@ def _validate_raw_segment(instance: Mapping[str, Any]) -> None:
 
 AUTO_SEMANTIC_VALIDATORS = {
     SCHEMA_PREFIX + "auto-receipt:v2": _validate_auto_receipt,
+    DAILY_MANIFEST_ID: _validate_daily_manifest,
+    INDEX_ENTRY_ID: _validate_index_entry,
     SCHEMA_PREFIX + "migration-receipt:v2": _validate_migration_receipt,
     SCHEMA_PREFIX + "notification-receipt:v3": _validate_notification_receipt,
     SCHEMA_PREFIX + "public-run-event:v2": _validate_public_run_event,

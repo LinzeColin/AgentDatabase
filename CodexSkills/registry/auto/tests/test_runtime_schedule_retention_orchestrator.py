@@ -26,9 +26,10 @@ from runtime_helpers import (
     FIXED_NOW,
     REPO_ROOT,
     clock,
-    context,
-    control_synced_context,
     control_trust,
+    expected_stale_control_failure_pattern,
+    final_contract,
+    synthetic_bound_context,
     trust,
     uid,
 )
@@ -70,7 +71,7 @@ class RuntimeScheduleRetentionTests(unittest.TestCase):
 
     def executor(self, fake=None):
         return RetentionExecutor(
-            context().contract,
+            final_contract(),
             CANDIDATE_DIGEST,
             fake or clock(),
             self.roots,
@@ -241,7 +242,7 @@ class RuntimeOrchestratorTests(unittest.TestCase):
             control_trust=control_trust(),
             clock=clock(),
             bootstrap=lambda _repo, _trust, _control: (
-                control_synced_context()
+                synthetic_bound_context()
             ),
         )
 
@@ -283,7 +284,7 @@ class RuntimeOrchestratorTests(unittest.TestCase):
             )
             with self.assertRaisesRegex(
                 AutoRuntimeError,
-                "RUNTIME_CONTROL_SYNC_REQUIRED_BEFORE_STATE_WRITE",
+                expected_stale_control_failure_pattern(),
             ):
                 runner.run(
                     owner_run_uid=uid("run", 9),
@@ -340,7 +341,9 @@ class RuntimeOrchestratorTests(unittest.TestCase):
             protected_roots=[self.source],
         )
         layout = StateLayout.create(prepared)
-        held = SingleFlightLock(layout, context().contract, CANDIDATE_DIGEST, clock())
+        held = SingleFlightLock(
+            layout, final_contract(), CANDIDATE_DIGEST, clock()
+        )
         held.acquire(uid("run", 12), entropy=(12).to_bytes(10, "big"))
         outcome = self.orchestrator().run(
             owner_run_uid=uid("run", 13),
@@ -364,7 +367,7 @@ class RuntimeOrchestratorTests(unittest.TestCase):
                 control_trust=control_trust(),
                 clock=clock(),
                 bootstrap=lambda _repo, _trust, _control: (
-                    control_synced_context()
+                    synthetic_bound_context()
                 ),
             )
             return runner.run(

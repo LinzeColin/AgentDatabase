@@ -17,7 +17,13 @@ from CodexSkills.registry.auto.runtime.source import (
 )
 from CodexSkills.governance.tools.canonical_json import canonicalize_object
 
-from runtime_helpers import CANDIDATE_DIGEST, auto_receipt, clock, context, uid
+from runtime_helpers import (
+    CANDIDATE_DIGEST,
+    auto_receipt,
+    clock,
+    final_contract,
+    uid,
+)
 
 
 class RuntimeSourcePrivacyTests(unittest.TestCase):
@@ -25,7 +31,7 @@ class RuntimeSourcePrivacyTests(unittest.TestCase):
         self.temporary = tempfile.TemporaryDirectory()
         self.root = Path(self.temporary.name) / "source"
         self.root.mkdir()
-        self.policy = context().contract.shared.policies[SOURCE_POLICY_ID]
+        self.policy = final_contract().shared.policies[SOURCE_POLICY_ID]
 
     def tearDown(self) -> None:
         self.temporary.cleanup()
@@ -150,7 +156,7 @@ class RuntimeSourcePrivacyTests(unittest.TestCase):
     def test_adapter_emits_schema_valid_public_inventory_and_coverage(self) -> None:
         (self.root / "SKILL.md").write_text("# Demo", encoding="utf-8")
         adapter = SourceInventoryAdapter(
-            self.scanner(), context().contract, CANDIDATE_DIGEST, clock()
+            self.scanner(), final_contract(), CANDIDATE_DIGEST, clock()
         )
         observed = adapter.observe(
             self.root,
@@ -167,7 +173,7 @@ class RuntimeSourcePrivacyTests(unittest.TestCase):
         (self.root / "large.bin").write_bytes(b"x" * 17)
         adapter = SourceInventoryAdapter(
             self.scanner(max_file_bytes=16),
-            context().contract,
+            final_contract(),
             CANDIDATE_DIGEST,
             clock(),
         )
@@ -194,7 +200,7 @@ class RuntimeSourcePrivacyTests(unittest.TestCase):
         with self.assertRaisesRegex(AutoRuntimeError, "PUBLIC_SERIALIZATION_GATE_FAILED"):
             validate_public_serialization(
                 canonicalize_object(receipt),
-                context().contract,
+                final_contract(),
                 SCHEMA_PREFIX + "auto-receipt:v2",
                 CANDIDATE_DIGEST,
             )
@@ -202,7 +208,12 @@ class RuntimeSourcePrivacyTests(unittest.TestCase):
     def test_public_queue_is_idempotent_and_detects_uid_digest_corruption(self) -> None:
         queue_root = self.root.parent / "queue"
         queue_root.mkdir(mode=0o700)
-        queue = PublicSafeQueue(queue_root, context().contract, CANDIDATE_DIGEST, clock())
+        queue = PublicSafeQueue(
+            queue_root,
+            final_contract(),
+            CANDIDATE_DIGEST,
+            clock(),
+        )
         first_artifact = auto_receipt(1)
         kwargs = dict(
             auto_transaction_uid=uid("atx", 1),

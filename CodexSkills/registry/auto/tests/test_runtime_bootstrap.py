@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import contextlib
+import hashlib
 import tempfile
 import unittest
 import importlib.util
@@ -9,10 +10,17 @@ import json
 from pathlib import Path
 from unittest import mock
 
-from CodexSkills.registry.auto.runtime.bootstrap import bootstrap_runtime
+from CodexSkills.registry.auto.runtime.bootstrap import (
+    _capability_smoke,
+    bootstrap_runtime,
+)
+from CodexSkills.registry.auto.runtime import bootstrap as runtime_bootstrap
 from CodexSkills.registry.auto.runtime.core import AutoRuntimeError
 from CodexSkills.registry.auto.runtime.orchestrator import SkillOpsOrchestrator
 from CodexSkills.registry.auto.runtime.roots import RootEntry
+from CodexSkills.registry.auto.runtime.writer_shadow import (
+    validate_unbound_writer_candidate,
+)
 from CodexSkills.registry.auto.tools.activation_handshake_cli import (
     _context_and_handshake,
     _publish_settlement,
@@ -30,27 +38,73 @@ from runtime_helpers import (
     MANIFEST_PATH,
     REPO_ROOT,
     clock,
-    context,
     control_trust,
+    expected_stale_control_failure_pattern,
+    final_contract,
     trust,
     uid,
 )
 
 
 class RuntimeBootstrapTests(unittest.TestCase):
-    def test_exact_external_candidate_and_control_build_31_plus_4_registry(self) -> None:
-        observed = context()
-        self.assertEqual(len(observed.contract.shared.schemas), 31)
-        self.assertEqual(len(observed.contract.development.schemas), 35)
-        self.assertEqual(observed.trust.expected_bundle_digest, CANDIDATE_DIGEST)
+    def test_unbound_writer_shadow_proves_31_plus_4_registry(self) -> None:
+        contract = final_contract()
+        self.assertEqual(len(contract.shared.schemas), 31)
+        self.assertEqual(len(contract.development.schemas), 35)
+        evidence = validate_unbound_writer_candidate(
+            REPO_ROOT,
+            trust(),
+            control_trust(),
+        )
         self.assertEqual(
-            observed.control_trust.verified_git_object_id,
-            CONTROL_GIT_OBJECT,
+            evidence.status,
+            "UNBOUND_CONTROL_SYNC_PENDING",
+        )
+        self.assertEqual(evidence.schema_count, 31)
+        self.assertEqual(evidence.policy_count, 5)
+        self.assertEqual(evidence.historical_bound_module_count, 21)
+        self.assertFalse(
+            evidence.current_runtime_control_bound_at_materialization
+        )
+        self.assertFalse(evidence.runtime_state_write_permitted)
+        self.assertTrue(
+            evidence.runtime_shard_writer_integration_complete
         )
         self.assertFalse(
-            observed.control_interface["transition_contract"][
-                "auto_runtime_integration_complete"
-            ]
+            evidence.publisher_v2_runtime_integration_complete
+        )
+
+    def test_production_bootstrap_rejects_unbound_local_writer(self) -> None:
+        with self.assertRaisesRegex(
+            AutoRuntimeError,
+            expected_stale_control_failure_pattern(),
+        ):
+            bootstrap_runtime(
+                REPO_ROOT,
+                trust(),
+                control_trust(),
+            )
+
+    def test_shadow_rejects_forged_external_control_tuple(self) -> None:
+        with self.assertRaisesRegex(
+            AutoRuntimeError,
+            "WRITER_SHADOW_CONTROL_TRUST_TUPLE_MISMATCH",
+        ):
+            validate_unbound_writer_candidate(
+                REPO_ROOT,
+                trust(),
+                control_trust(raw_digest="0" * 64),
+            )
+
+    def test_successor_control_scope_is_exact(self) -> None:
+        observed = control_trust()
+        self.assertEqual(
+            observed.verified_git_object_id,
+            CONTROL_GIT_OBJECT,
+        )
+        self.assertEqual(
+            observed.expected_control_interface_raw_sha256,
+            CONTROL_INTERFACE_RAW_SHA256,
         )
 
     def test_wrong_external_digest_fails_closed(self) -> None:
@@ -109,7 +163,7 @@ class RuntimeBootstrapTests(unittest.TestCase):
             )
 
     def test_capability_evidence_is_public_path_free(self) -> None:
-        capabilities = context().capabilities
+        capabilities = _capability_smoke(REPO_ROOT)
         self.assertEqual(capabilities["network_schema_resolution"], "DISABLED")
         self.assertEqual(capabilities["runtime_install"], "FORBIDDEN")
         self.assertNotIn("interpreter_path", capabilities)
@@ -175,7 +229,7 @@ class RuntimeBootstrapTests(unittest.TestCase):
                 )
                 with self.assertRaisesRegex(
                     AutoRuntimeError,
-                    "RUNTIME_CONTROL_SYNC_REQUIRED_BEFORE_STATE_WRITE",
+                    expected_stale_control_failure_pattern(),
                 ):
                     _components(
                         notification_args,
@@ -220,12 +274,12 @@ class RuntimeBootstrapTests(unittest.TestCase):
                 )
                 with self.assertRaisesRegex(
                     AutoRuntimeError,
-                    "RUNTIME_CONTROL_SYNC_REQUIRED_BEFORE_STATE_WRITE",
+                    expected_stale_control_failure_pattern(),
                 ):
                     _context_and_handshake(activation_args)
                 with self.assertRaisesRegex(
                     AutoRuntimeError,
-                    "RUNTIME_CONTROL_SYNC_REQUIRED_BEFORE_STATE_WRITE",
+                    expected_stale_control_failure_pattern(),
                 ):
                     _publish_settlement(activation_args)
                 handshake.assert_not_called()
@@ -279,8 +333,9 @@ class RuntimeBootstrapTests(unittest.TestCase):
         )
         self.assertEqual(
             interface["au_040_authority_ruling_status"],
-            "FINAL_31_5_INTEGRATED_RUNTIME_WRITER_PENDING",
+            "RUNTIME_WRITER_INTEGRATED_CONTROL_SYNC_PENDING",
         )
+        self.assertFalse(interface["au_040_complete"])
         self.assertTrue(interface["au_040_transport_schema_draft_complete"])
         self.assertTrue(interface["au_040_retention_policy_v3_present"])
         self.assertTrue(
@@ -333,7 +388,7 @@ class RuntimeBootstrapTests(unittest.TestCase):
                 "final_candidate_materialization_complete"
             ]
         )
-        self.assertFalse(
+        self.assertTrue(
             interface["au_040_transport_contract"][
                 "runtime_shard_writer_integration_complete"
             ]
@@ -411,32 +466,92 @@ class RuntimeBootstrapTests(unittest.TestCase):
         )
         self.assertEqual(
             interface["next_phase"],
-            "MECHANISM_POST_AUTO_INTEGRATION_CONTROL_SYNC",
+            "MECHANISM_POST_AU040_WRITER_CONTROL_SYNC",
         )
         self.assertTrue(
             interface["auto_exact_bundle_integration_complete"]
         )
         self.assertTrue(interface["dual_external_trust_tuples_required"])
+        historical_control = interface[
+            "historical_control_observation"
+        ]
+        self.assertTrue(
+            historical_control[
+                "observed_auto_runtime_integration_complete"
+            ]
+        )
+        self.assertTrue(
+            historical_control[
+                "observed_runtime_state_write_permitted"
+            ]
+        )
         self.assertEqual(
-            interface["activation_control_baseline_git_object_id"],
+            historical_control["bound_auto_git_object_id"],
+            "sha1:7ed9e761921f557887440803d1fc7327f3e986a9",
+        )
+        self.assertEqual(
+            historical_control[
+                "bound_auto_runtime_interface_raw_sha256"
+            ],
+            "09af0c00273825e90a489f413a2f0bb6"
+            "995042e5b4eea17973ce7582eab66340",
+        )
+        self.assertEqual(
+            historical_control["bound_auto_module_count"],
+            21,
+        )
+        self.assertEqual(
+            historical_control["verified_git_object_id"],
             CONTROL_GIT_OBJECT,
         )
         self.assertEqual(
-            interface[
-                "activation_control_baseline_interface_raw_sha256"
-            ],
+            historical_control["interface_raw_sha256"],
             CONTROL_INTERFACE_RAW_SHA256,
         )
-        self.assertFalse(
-            interface[
-                "control_observed_auto_runtime_integration_complete"
+        self.assertTrue(
+            historical_control[
+                "working_tree_control_is_not_historical_trust_evidence"
             ]
+        )
+        materialization = interface[
+            "runtime_interface_materialization_snapshot"
+        ]
+        self.assertEqual(
+            materialization["semantic_scope"],
+            "INTERFACE_MATERIALIZATION_ONLY",
+        )
+        self.assertFalse(
+            materialization["current_auto_runtime_control_bound"]
+        )
+        self.assertFalse(
+            materialization["runtime_state_write_permitted"]
         )
         self.assertTrue(
             interface["control_sync_required_before_state_write"]
         )
         self.assertTrue(interface["runtime_preflight_shadow_permitted"])
+        self.assertTrue(
+            interface["runtime_shard_writer_integration_complete"]
+        )
+        self.assertFalse(
+            interface["publisher_v2_runtime_integration_complete"]
+        )
+        self.assertFalse(interface["repository_bound"])
         self.assertFalse(interface["runtime_state_write_permitted"])
+        self.assertEqual(
+            interface["runtime_writer_shadow_status"],
+            "UNBOUND_CONTROL_SYNC_PENDING",
+        )
+        self.assertEqual(
+            interface["runtime_writer_shadow_validator_kind"],
+            "DEVELOPMENT_ONLY_UNBOUND",
+        )
+        self.assertFalse(
+            interface["runtime_writer_shadow_returns_bootstrap_context"]
+        )
+        self.assertFalse(
+            interface["runtime_writer_shadow_state_access_permitted"]
+        )
         self.assertEqual(interface["shared_bundle_schema_count"], 31)
         self.assertTrue(interface["schedule_authority_conflict_detected"])
         self.assertFalse(interface["schedule_authority_resolved"])
@@ -474,11 +589,239 @@ class RuntimeBootstrapTests(unittest.TestCase):
                 "AUTO_SCHEMA_PROMOTION_INTERFACE_RAW_DIGEST_MISMATCH",
             ):
                 module._schema_promotion_evidence(tampered)
-            with self.assertRaisesRegex(
-                ValueError,
-                "AUTO_CONTROL_INTERFACE_RAW_DIGEST_MISMATCH",
+            original_git_blob = module._git_blob
+
+            def tampered_historical_blob(object_id, relative_path):
+                if (
+                    object_id == module.CONTROL_EVIDENCE_GIT_OBJECT
+                    and relative_path
+                    == module.CONTROL_INTERFACE_REPO_PATH
+                ):
+                    return b"{}\n"
+                return original_git_blob(object_id, relative_path)
+
+            with mock.patch.object(
+                module,
+                "_git_blob",
+                side_effect=tampered_historical_blob,
             ):
-                module._control_evidence(tampered)
+                with self.assertRaisesRegex(
+                    ValueError,
+                    "AUTO_CONTROL_INTERFACE_RAW_DIGEST_MISMATCH",
+                ):
+                    module._historical_control_observation()
+
+    def test_successor_control_change_preserves_historical_builder_and_shadow(
+        self,
+    ) -> None:
+        builder_path = (
+            REPO_ROOT
+            / "CodexSkills/registry/auto/tools/build_runtime_interface.py"
+        )
+        spec = importlib.util.spec_from_file_location(
+            "successor_stable_runtime_interface",
+            builder_path,
+        )
+        self.assertIsNotNone(spec)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        expected = module.render(module.build())
+        control_path = REPO_ROOT.joinpath(
+            *(
+                "CodexSkills/governance/activation/"
+                "control-interface.json"
+            ).split("/")
+        )
+        mechanism_builder_path = REPO_ROOT.joinpath(
+            *(
+                "CodexSkills/governance/tools/"
+                "build_activation_control.py"
+            ).split("/")
+        )
+        original_read_bytes = Path.read_bytes
+
+        def successor_read_bytes(path):
+            if path == control_path:
+                return (
+                    b'{"status":"DRAFT_NON_ACTIVE",'
+                    b'"successor_simulation":true}\n'
+                )
+            if path == mechanism_builder_path:
+                return b"# successor control builder simulation\n"
+            return original_read_bytes(path)
+
+        with mock.patch.object(
+            Path,
+            "read_bytes",
+            successor_read_bytes,
+        ):
+            self.assertEqual(module.render(module.build()), expected)
+            evidence = validate_unbound_writer_candidate(
+                REPO_ROOT,
+                trust(),
+                control_trust(),
+            )
+            self.assertEqual(
+                evidence.status,
+                "UNBOUND_CONTROL_SYNC_PENDING",
+            )
+            with self.assertRaisesRegex(
+                AutoRuntimeError,
+                "^BOOTSTRAP_CONTROL_INTERFACE_LOCAL_DRIFT$",
+            ):
+                bootstrap_runtime(
+                    REPO_ROOT,
+                    trust(),
+                    control_trust(),
+                )
+
+    def test_successor_bound_interface_and_git_modules_validate_exactly(
+        self,
+    ) -> None:
+        control_object = runtime_bootstrap._split_git_object(
+            REPO_ROOT,
+            CONTROL_GIT_OBJECT,
+            "TEST_SUCCESSOR_CONTROL",
+        )
+        historical_control_raw = runtime_bootstrap._git_blob(
+            REPO_ROOT,
+            control_object,
+            runtime_bootstrap.CONTROL_INTERFACE_PATH,
+        )
+        successor_control = json.loads(historical_control_raw)
+        current_interface_path = REPO_ROOT.joinpath(
+            "CodexSkills/registry/auto/runtime-interface.json"
+        )
+        current_interface_raw = current_interface_path.read_bytes()
+        current_interface = json.loads(current_interface_raw)
+        successor_control["transport_runtime_interface"][
+            "artifact_digest"
+        ] = hashlib.sha256(current_interface_raw).hexdigest()
+        successor_control["transport_runtime_interface"][
+            "module_count"
+        ] = current_interface["module_count"]
+        successor_control_raw = (
+            json.dumps(
+                successor_control,
+                ensure_ascii=False,
+                sort_keys=True,
+                separators=(",", ":"),
+            )
+            + "\n"
+        ).encode("utf-8")
+        successor_trust = runtime_bootstrap.ControlTrustTuple(
+            CONTROL_GIT_OBJECT,
+            hashlib.sha256(successor_control_raw).hexdigest(),
+            runtime_bootstrap.CONTROL_INTERFACE_PATH,
+            runtime_bootstrap.CONTROL_MODE,
+        )
+        source_object = runtime_bootstrap._split_git_object(
+            REPO_ROOT,
+            successor_control["transport_runtime_interface"][
+                "verified_git_object_id"
+            ],
+            "TEST_SUCCESSOR_AUTO",
+        )
+        current_modules = {
+            entry["relative_path"]: REPO_ROOT.joinpath(
+                *entry["relative_path"].split("/")
+            ).read_bytes()
+            for entry in current_interface["module_artifacts"]
+        }
+        original_git_blob = runtime_bootstrap._git_blob
+        original_read_bytes = Path.read_bytes
+        control_path = REPO_ROOT.joinpath(
+            *runtime_bootstrap.CONTROL_INTERFACE_PATH.split("/")
+        )
+
+        def successor_git_blob(repo_root, object_id, relative_path):
+            if (
+                object_id == control_object
+                and relative_path
+                == runtime_bootstrap.CONTROL_INTERFACE_PATH
+            ):
+                return successor_control_raw
+            if (
+                object_id == source_object
+                and relative_path
+                == "CodexSkills/registry/auto/runtime-interface.json"
+            ):
+                return current_interface_raw
+            if (
+                object_id == source_object
+                and relative_path in current_modules
+            ):
+                return current_modules[relative_path]
+            return original_git_blob(
+                repo_root,
+                object_id,
+                relative_path,
+            )
+
+        def successor_read_bytes(path):
+            if path == control_path:
+                return successor_control_raw
+            return original_read_bytes(path)
+
+        with mock.patch.object(
+            runtime_bootstrap,
+            "_git_blob",
+            side_effect=successor_git_blob,
+        ), mock.patch.object(
+            Path,
+            "read_bytes",
+            successor_read_bytes,
+        ):
+            observed = runtime_bootstrap._verify_control_trust(
+                REPO_ROOT,
+                trust(),
+                successor_trust,
+            )
+            self.assertEqual(
+                observed["transport_runtime_interface"][
+                    "artifact_digest"
+                ],
+                hashlib.sha256(current_interface_raw).hexdigest(),
+            )
+            self.assertEqual(
+                current_interface["next_phase"],
+                "MECHANISM_POST_AU040_WRITER_CONTROL_SYNC",
+            )
+
+        first_module = current_interface["module_artifacts"][0][
+            "relative_path"
+        ]
+
+        def forged_module_git_blob(repo_root, object_id, relative_path):
+            if (
+                object_id == source_object
+                and relative_path == first_module
+            ):
+                return b"forged successor module\n"
+            return successor_git_blob(
+                repo_root,
+                object_id,
+                relative_path,
+            )
+
+        with mock.patch.object(
+            runtime_bootstrap,
+            "_git_blob",
+            side_effect=forged_module_git_blob,
+        ), mock.patch.object(
+            Path,
+            "read_bytes",
+            successor_read_bytes,
+        ):
+            with self.assertRaisesRegex(
+                AutoRuntimeError,
+                "^BOOTSTRAP_AUTO_RUNTIME_MODULE_GIT_DIGEST_MISMATCH$",
+            ):
+                runtime_bootstrap._verify_control_trust(
+                    REPO_ROOT,
+                    trust(),
+                    successor_trust,
+                )
 
     def test_bootstrap_failure_precedes_state_root_creation(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:

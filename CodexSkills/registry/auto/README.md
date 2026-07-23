@@ -26,6 +26,7 @@ Deterministic contract entrypoints:
 /usr/bin/python3 -B CodexSkills/registry/auto/tools/validate_auto.py lint-draft
 /usr/bin/python3 -B CodexSkills/registry/auto/tools/validate_transport_draft.py lint-draft
 /usr/bin/python3 -B CodexSkills/registry/auto/tools/validate_schema_promotion.py lint-promotion
+/usr/bin/python3 -B CodexSkills/registry/auto/tools/validate_au040_writer.py --help
 /usr/bin/python3 -B -m unittest discover \
   -s CodexSkills/registry/auto/tests -p 'test_*.py'
 ```
@@ -46,6 +47,16 @@ resolve schemas over the network, or install dependencies at runtime.
   inventory/coverage projection.
 - `runtime/privacy.py` and `runtime/queue.py` enforce serialized public-value
   scanning and an atomic public-safe-only queue.
+- `runtime/run_log_writer.py` validates an existing daily tree through
+  descriptor-relative `O_NOFOLLOW` reads and deterministically plans exact
+  JCS-per-LF event shards, persistent index shards, and append-only daily
+  manifest revisions. It returns in-memory PUT artifacts only; it has no
+  publisher, queue, canonical-repository write, or state-root entrypoint.
+- `runtime/writer_shadow.py` is development-only. It proves the exact
+  00c4/7ed9 historical Git-object closure and current writer byte
+  self-consistency without requiring current working-tree control/Mechanism
+  bytes to equal 00c4. It returns `UNBOUND_CONTROL_SYNC_PENDING` and can never
+  return a production `BootstrapContext`.
 - `runtime/notification.py` keeps the actual recipient and provider payload in
   a repo-external outbox; public receipts contain only `recipient_ref`.
 - `runtime/gmail_api.py` is the production Gmail API transport. It refreshes
@@ -88,8 +99,9 @@ resolve schemas over the network, or install dependencies at runtime.
   path gates, policy/privacy validation, and remote head.
 - `runtime/retention.py` keeps persistent raw disabled by default and can act
   only on validated, owned managed segments under retention policy/receipt v3.
-  GIT current-tree pruning remains fail closed until the AU-040 writer is
-  independently integrated.
+  Final v3 receipt semantics now validate exact current-tree part/index
+  evidence, 365-day anchors, 24-hour deadlines, and truthful breach codes.
+  The GIT current-tree executor remains absent and fail closed.
 - `runtime/schedule.py` currently implements the frozen Australia/Sydney
   04:15 contract, Sunday forced full, DST-safe UTC conversion, manual parity,
   and no late-start rejection. A later Auto goal says 05:30 but does not
@@ -107,17 +119,24 @@ provisioned interpreter:
   --expected-bundle-digest 36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e \
   --canonical-manifest-path CodexSkills/governance/bundles/schema-bundle-manifest.v1.json \
   --mode CANDIDATE \
-  --verified-control-git-object-id sha1:66d5bafadca508cad825b4ce49a42e81e8b66ef7 \
-  --expected-control-interface-raw-sha256 86e4d625bdab87261a39c949883d410822e25e0222dbab6a333d171ce420c614 \
+  --verified-control-git-object-id sha1:00c4a52d177898b1999b87b29ddb480e89908729 \
+  --expected-control-interface-raw-sha256 31602443a685cc12a1eebd51ea8e0801ffd399c16a33186c372b7b81e8e46409 \
   --canonical-control-interface-path CodexSkills/governance/activation/control-interface.json \
   --control-mode DRAFT_NON_ACTIVE_CONTROL
 ```
 
-This command is read-only. The current control explicitly reports
-`auto_runtime_integration_complete=false`, so it returns a shadow preflight
-proof while every state-writing orchestrator/notification/activation
-entrypoint fails before state creation. Neither checkout self-reporting nor a
-caller boolean/digest map can replace either tuple.
+This command is read-only, but the current control binds exact Auto object
+`7ed9e761...`, runtime-interface raw `09af0c00...`, and 21 modules. The current
+writer checkout is deliberately not that byte set, so production preflight
+fails with `BOOTSTRAP_AUTO_RUNTIME_INTERFACE_LOCAL_DRIFT` before state, lock,
+watermark, recipient, Gmail, outbox, or publisher access. Development-only
+writer evidence is obtained with `validate_au040_writer.py`; it must not be
+interpreted as `TRUSTED`, `READY`, or a production preflight PASS. Neither
+checkout self-reporting nor a caller boolean/digest map can replace either
+external tuple. Once a successor control changes the working-tree control
+bytes, the stale 00c4 tuple instead fails earlier with the exact
+`BOOTSTRAP_CONTROL_INTERFACE_LOCAL_DRIFT` code; the historical builder and
+shadow evidence remain stable because they read 00c4 exclusively from Git.
 
 ## M0c activation control
 
@@ -134,9 +153,12 @@ GitHub-read back at object
 `189a47300fc1aa6012e87feb6184833cb717cdbe2b9dc9be6db89197f579939c`.
 It binds candidate `5ee37d74...` / `36f0c66d...`, daily part/index/manifest
 and retention-receipt contracts, while keeping both publication gates false.
-Control object `66d5bafa...`, raw SHA-256 `86e4d625...`, binds the same
-candidate and consumer. The runtime-interface builder verifies all three
-Git-object blobs independently.
+Control object `00c4a52d...`, raw SHA-256 `31602443...`, binds the same
+candidate and consumer plus historical Auto object `7ed9e761...`, interface
+raw `09af0c00...`, and 21 modules. The runtime-interface builder verifies all
+historical evidence from pinned Git blobs independently while reporting, in an
+`INTERFACE_MATERIALIZATION_ONLY` snapshot, the current 24-module writer
+candidate as unbound.
 
 That gate does not permit canonical publication. The consumer still declares
 `canonical_publication_permitted=false` and
@@ -177,13 +199,14 @@ The provider preflight is explicit and performs no send:
   --expected-bundle-digest 36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e \
   --canonical-manifest-path CodexSkills/governance/bundles/schema-bundle-manifest.v1.json \
   --mode CANDIDATE \
-  --verified-control-git-object-id sha1:66d5bafadca508cad825b4ce49a42e81e8b66ef7 \
-  --expected-control-interface-raw-sha256 86e4d625bdab87261a39c949883d410822e25e0222dbab6a333d171ce420c614 \
+  --verified-control-git-object-id sha1:00c4a52d177898b1999b87b29ddb480e89908729 \
+  --expected-control-interface-raw-sha256 31602443a685cc12a1eebd51ea8e0801ffd399c16a33186c372b7b81e8e46409 \
   --canonical-control-interface-path CodexSkills/governance/activation/control-interface.json \
   --control-mode DRAFT_NON_ACTIVE_CONTROL
 ```
 
-The preflight first binds the authenticated profile to the private owner
+After a future Mechanism control sync, the preflight first binds the
+authenticated profile to the private owner
 mapping, then calls `users.messages.list` with `maxResults=1` and the fixed
 query
 `in:sent rfc822msgid:<skillops-query-capability-v1@notification.skillops.invalid>`.
@@ -207,8 +230,10 @@ its preactivation publication gates remain closed.
 AU-040 is not complete: `skills_runs/example.json` is only prior scaffolding,
 never the final run-layout contract. The final candidate and consumer now bind
 bounded daily part/index JSONL, append-only daily manifest revisions, and
-retention receipt v3. No shard/manifest/index instance or runtime writer was
-created; `repository_bound=false` and canonical publication remains false.
+retention receipt v3. The deterministic runtime writer is integrated, but no
+shard/manifest/index instance was created; `repository_bound=false`,
+`au_040_daily_jsonl_shard_complete=false`, publisher-v2 integration is absent,
+and canonical publication remains false.
 
 Mechanism Authority Audit Revision 6 is represented by the Auto-owned source
 schemas under `transport-draft/`: daily manifest v1, persistent event index
