@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import copy
 import importlib.util
+import json
 import shutil
 import sys
 import tempfile
@@ -18,7 +19,14 @@ sys.path.insert(0, str(GOVERNANCE_TOOLS))
 from canonical_json import canonical_digest, canonicalize_object  # noqa: E402
 
 
+CANDIDATE_GIT_OBJECT = "sha1:899a4374bc02f5e18444fea7404864df7b118adf"
 CANDIDATE_DIGEST = (
+    "2704ed797c843f969965db600747abcdcd217550522e6479aab6817ef5a86ef5"
+)
+PRE_RELOCATION_GIT_OBJECT = (
+    "sha1:4b1e1a318c8f9e1014839a8a3a46e057679c4b6b"
+)
+PRE_RELOCATION_DIGEST = (
     "fd1df66e240695bd376803423bd09f9f341f7542f74a6ed92b0f79b0af4dc5e1"
 )
 SCHEMA_ID = "urn:linzecolin:agentdatabase:skillops:schema:public-run-event:v2"
@@ -109,6 +117,45 @@ class SkillRunConsumerTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         cls.consumer = load_script("validate_skill_run_logs")
+
+    def test_trust_tuple_matches_relocated_candidate(self) -> None:
+        contract = self.consumer.load_consumer_contract(
+            DATABASE_ROOT / self.consumer.CONFIG_PATH
+        )
+        self.assertEqual(
+            contract.trust.verified_git_object_id,
+            CANDIDATE_GIT_OBJECT,
+        )
+        self.assertEqual(contract.trust.expected_bundle_digest, CANDIDATE_DIGEST)
+        self.assertEqual(contract.expected_bundle_digest, CANDIDATE_DIGEST)
+
+    def test_pre_relocation_candidate_fails_closed(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            database = Path(temporary)
+            make_database(database)
+            config_path = database / self.consumer.CONFIG_PATH
+            config = json.loads(config_path.read_text(encoding="utf-8"))
+            config["candidate_trust"].update(
+                {
+                    "expected_bundle_digest": PRE_RELOCATION_DIGEST,
+                    "verified_git_object_id": PRE_RELOCATION_GIT_OBJECT,
+                }
+            )
+            config_path.write_text(
+                json.dumps(config, indent=2, sort_keys=True) + "\n",
+                encoding="utf-8",
+            )
+            errors = self.consumer.validate_skill_run_logs(
+                database,
+                repo_root=REPO_ROOT,
+            )
+        self.assertEqual(
+            errors,
+            [
+                "skill_run_consumer_bootstrap_failed:"
+                "TRUST_SCHEMA_PATH_OWNER_MISMATCH"
+            ],
+        )
 
     def test_empty_preactivation_root_passes_trusted_consumer_bootstrap(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:

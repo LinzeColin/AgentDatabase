@@ -4,9 +4,9 @@
   ],
   "candidate_trust": {
     "canonical_manifest_path": "CodexSkills/governance/bundles/schema-bundle-manifest.v1.json",
-    "expected_bundle_digest": "fd1df66e240695bd376803423bd09f9f341f7542f74a6ed92b0f79b0af4dc5e1",
+    "expected_bundle_digest": "2704ed797c843f969965db600747abcdcd217550522e6479aab6817ef5a86ef5",
     "mode": "CANDIDATE",
-    "verified_git_object_id": "sha1:4b1e1a318c8f9e1014839a8a3a46e057679c4b6b"
+    "verified_git_object_id": "sha1:899a4374bc02f5e18444fea7404864df7b118adf"
   },
   "consumer_owner_plane": "MECHANISM",
   "layout": {

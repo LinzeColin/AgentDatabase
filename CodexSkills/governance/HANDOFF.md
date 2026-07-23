@@ -1,7 +1,7 @@
 # Mechanism handoff
 
 - State: DRAFT_NON_ACTIVE
-- Phase: MECHANISM_CONSUMER_FIRST
+- Phase: MECHANISM_REPIN_CONSUMER_TRUST_TUPLE
 - Task Pack authority: immutable CodexSkills-Mechanism-Design-TaskPack-v0.0.0.2
 - Protocol: urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1
 - SRV candidate: v0.0.0.3
@@ -22,6 +22,12 @@
   sha1:3a0b8222cf52d6a35f31986c411ac98daed06c5c
 - M0c-A activation control interface raw SHA-256:
   70b4e8c8ab47db541c90bbc6ebf092a483ca776c07b84b939b5a9b0be783e5c2
+
+The later Auto Gmail query-capability corrective is not a replacement for the
+immutable M0c-A control tuple above. Its verified Git object is
+`sha1:befc5b0ee9e7f5157f31a2b6a8809cd118f1b5fd`; the current Auto runtime
+interface raw SHA-256 is
+`43a30b67903e9f5284f607129b7e3830aa507449552190b5992db770c01299d4`.
 
 ## Completed through M0b
 
@@ -78,6 +84,13 @@
 
 ## Completed in consumer-first
 
+- The registry relocation invalidated the prior consumer tuple because its
+  historical manifest referenced `CodexSkills/auto/**`, while the unique
+  validator now requires the canonical `CodexSkills/registry/auto/**` owner
+  paths. The validator fails closed on that old tuple; this repin binds the
+  consumer to relocated candidate object
+  `sha1:899a4374bc02f5e18444fea7404864df7b118adf` and bundle digest
+  `2704ed797c843f969965db600747abcdcd217550522e6479aab6817ef5a86ef5`.
 - The sibling task-run validator now enumerates only the four legacy task-run
   categories. It cannot glob or reinterpret recursive SkillOps shards as
   `task_run` rows.
@@ -85,7 +98,7 @@
   candidate Git object, bundle digest, manifest path, protocol, schema ID,
   Australia/Sydney shard calendar, RFC 8785 per-line framing, gapless
   `part-NNNN.jsonl` layout, and 20 MiB part budget. Its raw SHA-256 is
-  `94a5186aeaad6947eec19ef67539e3f03c0db06d47292d58088fdc4ee8bb53c6`.
+  `750a374f5eb20497baab79305dc31248a7495cf3c7dee827cad19d13e08e2082`.
 - Consumer bootstrap rejects duplicate keys, invalid I-JSON, untrusted bundle
   IDs, unknown URNs, unsafe roots, symlink/special-file entries, invalid
   dates, direct-root event files, unexpected directories, and every
@@ -111,11 +124,14 @@ candidate remains deterministic and is trusted only when a caller supplies
 the repo-external tuple of verified M0b Git object, exact candidate digest,
 canonical manifest path, and mode CANDIDATE.
 
-The production Gmail implementation now exists, but readiness of the
-repo-external state root, recipient mapping, and OAuth credential is `UNKNOWN`
-in this Mechanism run because `SKILLOPS_STATE_ROOT` is not provisioned in the
-runtime environment. A connected Gmail App is not a substitute for that
-production trust root. Missing external state fails closed.
+The production Gmail implementation and its deterministic no-send query
+capability probe now exist. Runtime readiness of the repo-external state root,
+recipient mapping, OAuth credential, authenticated profile binding, and query
+endpoint remains `UNKNOWN` because `SKILLOPS_STATE_ROOT` is not provisioned in
+the controlled runtime environment. Real-message metadata readback also
+remains unproved until M0c-B performs an actual send and exact provider
+readback. A connected Gmail App is not a substitute for that production trust
+root. Missing external state fails closed.
 
 This phase does not claim AU-040. The shared v0.0.0.3 candidate has individual
 `public-run-event:v2` records and a transaction-level
