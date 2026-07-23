@@ -4,18 +4,48 @@
   ],
   "candidate_trust": {
     "canonical_manifest_path": "CodexSkills/governance/bundles/schema-bundle-manifest.v1.json",
-    "expected_bundle_digest": "2704ed797c843f969965db600747abcdcd217550522e6479aab6817ef5a86ef5",
+    "expected_bundle_digest": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e",
     "mode": "CANDIDATE",
-    "verified_git_object_id": "sha1:899a4374bc02f5e18444fea7404864df7b118adf"
+    "verified_git_object_id": "sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5"
   },
   "consumer_owner_plane": "MECHANISM",
+  "artifact_contracts": {
+    "daily_manifest": {
+      "max_bytes": 1048576,
+      "name_regex": "^manifest-[0-9]{4}\\.json$",
+      "relative_pattern": "YYYY/MM/DD/manifest-NNNN.json",
+      "schema_id": "urn:linzecolin:agentdatabase:skillops:schema:daily-run-shard-manifest:v1",
+      "serialization": "RFC8785_JCS_UTF8_NO_BOM_NO_TRAILING_LF"
+    },
+    "index": {
+      "max_bytes": 20971520,
+      "name_regex": "^index-[0-9]{4}\\.jsonl$",
+      "relative_pattern": "YYYY/MM/DD/index-NNNN.jsonl",
+      "schema_id": "urn:linzecolin:agentdatabase:skillops:schema:run-event-index-entry:v1",
+      "serialization": "RFC8785_JCS_PER_LINE_LF"
+    },
+    "part": {
+      "max_bytes": 20971520,
+      "name_regex": "^part-[0-9]{4}\\.jsonl$",
+      "relative_pattern": "YYYY/MM/DD/part-NNNN.jsonl",
+      "schema_id": "urn:linzecolin:agentdatabase:skillops:schema:public-run-event:v2",
+      "serialization": "RFC8785_JCS_PER_LINE_LF"
+    },
+    "retention_receipt": {
+      "max_bytes": 1048576,
+      "name_regex": "^retention-receipt-[0-9]{4}\\.json$",
+      "relative_pattern": "YYYY/MM/DD/retention-receipt-NNNN.json",
+      "schema_id": "urn:linzecolin:agentdatabase:skillops:schema:retention-receipt:v3",
+      "serialization": "RFC8785_JCS_UTF8_NO_BOM_NO_TRAILING_LF"
+    }
+  },
   "layout": {
-    "max_part_bytes": 20971520,
-    "part_name_regex": "^part-[0-9]{4}\\.jsonl$",
-    "part_numbers_gapless": true,
-    "part_numbers_start_at": 1,
-    "record_framing": "RFC8785_JCS_PER_LINE_LF",
-    "relative_pattern": "YYYY/MM/DD/part-NNNN.jsonl",
+    "logical_part_numbers_gapless": true,
+    "manifest_revisions_gapless": true,
+    "numbers_start_at": 1,
+    "physical_part_gaps_after_prune_permitted": true,
+    "retained_index_required_for_every_part": true,
+    "sequence_width": 4,
     "shard_calendar_timezone": "Australia/Sydney"
   },
   "log_root": "data/run_logs/skills_runs",
@@ -29,7 +59,6 @@
       "BOUND_REFERENCE_RESOLVER"
     ]
   },
-  "record_schema_id": "urn:linzecolin:agentdatabase:skillops:schema:public-run-event:v2",
-  "schema_version": "openai_database.skill_run_consumer.v1",
+  "schema_version": "openai_database.skill_run_consumer.v2",
   "status": "DRAFT_NON_ACTIVE_CONSUMER_READY"
 }

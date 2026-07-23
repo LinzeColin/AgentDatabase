@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
+import hashlib
 import json
 import os
 import re
@@ -22,7 +23,15 @@ sys.path.insert(0, str(GOVERNANCE_TOOLS))
 
 from canonical_json import (  # noqa: E402
     CanonicalizationError,
+    canonicalize_object,
     parse_json_bytes,
+)
+from validate_au040_semantic_acceptance import (  # noqa: E402
+    bind_au040_acceptance_to_trusted_bundle,
+    validate_daily_tree_closure,
+    validate_manifest_revision_chain,
+    validate_part_index_manifest_closure,
+    validate_retained_index_manifest_closure,
 )
 from validate_mechanism import (  # noqa: E402
     CANONICAL_MANIFEST_PATH,
@@ -45,11 +54,41 @@ EXPECTED_REQUIRED_GATES = (
     "AU_040_DAILY_JSONL_SHARD_MANIFEST",
     "BOUND_REFERENCE_RESOLVER",
 )
+DAILY_MANIFEST_SCHEMA_ID = (
+    "urn:linzecolin:agentdatabase:skillops:"
+    "schema:daily-run-shard-manifest:v1"
+)
+INDEX_ENTRY_SCHEMA_ID = (
+    "urn:linzecolin:agentdatabase:skillops:schema:run-event-index-entry:v1"
+)
+RETENTION_RECEIPT_SCHEMA_ID = (
+    "urn:linzecolin:agentdatabase:skillops:schema:retention-receipt:v3"
+)
+JSONL_SERIALIZATION = "RFC8785_JCS_PER_LINE_LF"
+OBJECT_SERIALIZATION = "RFC8785_JCS_UTF8_NO_BOM_NO_TRAILING_LF"
 PART_PATH_RE = re.compile(
     r"^(?P<year>[0-9]{4})/"
     r"(?P<month>0[1-9]|1[0-2])/"
     r"(?P<day>0[1-9]|[12][0-9]|3[01])/"
     r"part-(?P<part>[0-9]{4})\.jsonl$"
+)
+INDEX_PATH_RE = re.compile(
+    r"^(?P<year>[0-9]{4})/"
+    r"(?P<month>0[1-9]|1[0-2])/"
+    r"(?P<day>0[1-9]|[12][0-9]|3[01])/"
+    r"index-(?P<index>[0-9]{4})\.jsonl$"
+)
+MANIFEST_PATH_RE = re.compile(
+    r"^(?P<year>[0-9]{4})/"
+    r"(?P<month>0[1-9]|1[0-2])/"
+    r"(?P<day>0[1-9]|[12][0-9]|3[01])/"
+    r"manifest-(?P<manifest>[0-9]{4})\.json$"
+)
+RETENTION_RECEIPT_PATH_RE = re.compile(
+    r"^(?P<year>[0-9]{4})/"
+    r"(?P<month>0[1-9]|1[0-2])/"
+    r"(?P<day>0[1-9]|[12][0-9]|3[01])/"
+    r"retention-receipt-(?P<receipt>[0-9]{4})\.json$"
 )
 MAX_CONFIG_BYTES = 1024 * 1024
 MAX_TREE_ENTRIES = 10_000
@@ -66,9 +105,13 @@ class SkillRunConsumerContract:
     expected_bundle_digest: str
     log_root: PurePosixPath
     max_part_bytes: int
+    max_object_bytes: int
     timezone: ZoneInfo
     allowed_root_files: tuple[str, ...]
     repository_shards_permitted: bool
+    daily_manifest_schema_id: str
+    index_entry_schema_id: str
+    retention_receipt_schema_id: str
 
 
 def _exact_keys(value: Any, expected: Iterable[str], code: str) -> Mapping[str, Any]:
@@ -221,8 +264,8 @@ def _parse_consumer_contract(raw: bytes) -> SkillRunConsumerContract:
             "consumer_owner_plane",
             "protocol_revision",
             "log_root",
-            "record_schema_id",
             "candidate_trust",
+            "artifact_contracts",
             "layout",
             "allowed_root_files",
             "publication_gate",
@@ -230,11 +273,10 @@ def _parse_consumer_contract(raw: bytes) -> SkillRunConsumerContract:
         "SKILL_RUN_CONSUMER_CONFIG",
     )
     if (
-        root["schema_version"] != "openai_database.skill_run_consumer.v1"
+        root["schema_version"] != "openai_database.skill_run_consumer.v2"
         or root["status"] != EXPECTED_STATUS
         or root["consumer_owner_plane"] != "MECHANISM"
         or root["protocol_revision"] != PROTOCOL
-        or root["record_schema_id"] != PUBLIC_RUN_EVENT_SCHEMA_ID
         or root["log_root"] != "data/run_logs/skills_runs"
     ):
         raise SkillRunConsumerError("SKILL_RUN_CONSUMER_CONFIG_IDENTITY_MISMATCH")
@@ -254,27 +296,81 @@ def _parse_consumer_contract(raw: bytes) -> SkillRunConsumerContract:
     if trust["mode"] != "CANDIDATE":
         raise SkillRunConsumerError("SKILL_RUN_CONSUMER_TRUST_MODE_INVALID")
 
+    artifact_contracts = _exact_keys(
+        root["artifact_contracts"],
+        {"daily_manifest", "index", "part", "retention_receipt"},
+        "SKILL_RUN_CONSUMER_ARTIFACT_CONTRACTS",
+    )
+    expected_artifacts = {
+        "daily_manifest": {
+            "relative_pattern": "YYYY/MM/DD/manifest-NNNN.json",
+            "name_regex": r"^manifest-[0-9]{4}\.json$",
+            "schema_id": DAILY_MANIFEST_SCHEMA_ID,
+            "serialization": OBJECT_SERIALIZATION,
+            "max_bytes": 1024 * 1024,
+        },
+        "index": {
+            "relative_pattern": "YYYY/MM/DD/index-NNNN.jsonl",
+            "name_regex": r"^index-[0-9]{4}\.jsonl$",
+            "schema_id": INDEX_ENTRY_SCHEMA_ID,
+            "serialization": JSONL_SERIALIZATION,
+            "max_bytes": 20 * 1024 * 1024,
+        },
+        "part": {
+            "relative_pattern": "YYYY/MM/DD/part-NNNN.jsonl",
+            "name_regex": r"^part-[0-9]{4}\.jsonl$",
+            "schema_id": PUBLIC_RUN_EVENT_SCHEMA_ID,
+            "serialization": JSONL_SERIALIZATION,
+            "max_bytes": 20 * 1024 * 1024,
+        },
+        "retention_receipt": {
+            "relative_pattern": (
+                "YYYY/MM/DD/retention-receipt-NNNN.json"
+            ),
+            "name_regex": r"^retention-receipt-[0-9]{4}\.json$",
+            "schema_id": RETENTION_RECEIPT_SCHEMA_ID,
+            "serialization": OBJECT_SERIALIZATION,
+            "max_bytes": 1024 * 1024,
+        },
+    }
+    for kind, expected in expected_artifacts.items():
+        observed = _exact_keys(
+            artifact_contracts[kind],
+            {
+                "relative_pattern",
+                "name_regex",
+                "schema_id",
+                "serialization",
+                "max_bytes",
+            },
+            f"SKILL_RUN_CONSUMER_{kind.upper()}_CONTRACT",
+        )
+        if observed != expected:
+            raise SkillRunConsumerError(
+                f"SKILL_RUN_CONSUMER_{kind.upper()}_CONTRACT_MISMATCH"
+            )
+
     layout = _exact_keys(
         root["layout"],
         {
-            "relative_pattern",
-            "part_name_regex",
             "shard_calendar_timezone",
-            "max_part_bytes",
-            "record_framing",
-            "part_numbers_start_at",
-            "part_numbers_gapless",
+            "sequence_width",
+            "numbers_start_at",
+            "manifest_revisions_gapless",
+            "logical_part_numbers_gapless",
+            "retained_index_required_for_every_part",
+            "physical_part_gaps_after_prune_permitted",
         },
         "SKILL_RUN_CONSUMER_LAYOUT",
     )
     if (
-        layout["relative_pattern"] != "YYYY/MM/DD/part-NNNN.jsonl"
-        or layout["part_name_regex"] != r"^part-[0-9]{4}\.jsonl$"
-        or layout["shard_calendar_timezone"] != "Australia/Sydney"
-        or layout["max_part_bytes"] != 20 * 1024 * 1024
-        or layout["record_framing"] != "RFC8785_JCS_PER_LINE_LF"
-        or layout["part_numbers_start_at"] != 1
-        or layout["part_numbers_gapless"] is not True
+        layout["shard_calendar_timezone"] != "Australia/Sydney"
+        or layout["sequence_width"] != 4
+        or layout["numbers_start_at"] != 1
+        or layout["manifest_revisions_gapless"] is not True
+        or layout["logical_part_numbers_gapless"] is not True
+        or layout["retained_index_required_for_every_part"] is not True
+        or layout["physical_part_gaps_after_prune_permitted"] is not True
     ):
         raise SkillRunConsumerError("SKILL_RUN_CONSUMER_LAYOUT_MISMATCH")
 
@@ -312,12 +408,16 @@ def _parse_consumer_contract(raw: bytes) -> SkillRunConsumerContract:
         ),
         expected_bundle_digest=str(trust["expected_bundle_digest"]),
         log_root=PurePosixPath(str(root["log_root"])),
-        max_part_bytes=int(layout["max_part_bytes"]),
+        max_part_bytes=int(expected_artifacts["part"]["max_bytes"]),
+        max_object_bytes=int(expected_artifacts["daily_manifest"]["max_bytes"]),
         timezone=timezone,
         allowed_root_files=tuple(allowed),
         repository_shards_permitted=bool(
             gate["repository_shards_permitted"]
         ),
+        daily_manifest_schema_id=DAILY_MANIFEST_SCHEMA_ID,
+        index_entry_schema_id=INDEX_ENTRY_SCHEMA_ID,
+        retention_receipt_schema_id=RETENTION_RECEIPT_SCHEMA_ID,
     )
 
 
@@ -351,6 +451,38 @@ def _directory_shape_valid(relative: str) -> bool:
             and bool(re.fullmatch(r"0[1-9]|[12][0-9]|3[01]", parts[2]))
         )
     return False
+
+
+def _artifact_path_details(
+    relative: str,
+) -> Optional[tuple[str, str, int]]:
+    contracts = (
+        ("part", PART_PATH_RE, "part"),
+        ("index", INDEX_PATH_RE, "index"),
+        ("manifest", MANIFEST_PATH_RE, "manifest"),
+        ("retention_receipt", RETENTION_RECEIPT_PATH_RE, "receipt"),
+    )
+    for kind, pattern, number_group in contracts:
+        match = pattern.fullmatch(relative)
+        if match is None:
+            continue
+        try:
+            local_date = dt.date(
+                int(match["year"]),
+                int(match["month"]),
+                int(match["day"]),
+            )
+        except ValueError as exc:
+            raise SkillRunConsumerError(
+                "SKILL_RUN_ARTIFACT_DATE_INVALID"
+            ) from exc
+        number = int(match[number_group])
+        if number < 1:
+            raise SkillRunConsumerError(
+                "SKILL_RUN_ARTIFACT_SEQUENCE_INVALID"
+            )
+        return kind, local_date.isoformat(), number
+    return None
 
 
 def _safe_tree_files(root_descriptor: int) -> tuple[list[str], list[str]]:
@@ -518,6 +650,220 @@ def validate_part_bytes(
     return events, errors
 
 
+def _parse_canonical_object_bytes(
+    raw: bytes,
+    *,
+    max_bytes: int,
+    code: str,
+) -> Mapping[str, Any]:
+    if (
+        not raw
+        or len(raw) > max_bytes
+        or raw.startswith(b"\xef\xbb\xbf")
+        or b"\r" in raw
+        or raw.endswith(b"\n")
+    ):
+        raise SkillRunConsumerError(f"{code}_FRAMING_INVALID")
+    try:
+        value = parse_json_bytes(raw)
+    except CanonicalizationError as exc:
+        raise SkillRunConsumerError(f"{code}_JSON_INVALID") from exc
+    if not isinstance(value, dict) or canonicalize_object(value) != raw:
+        raise SkillRunConsumerError(f"{code}_JCS_INVALID")
+    return value
+
+
+def _parse_canonical_jsonl_objects(
+    raw: bytes,
+    *,
+    max_bytes: int,
+    code: str,
+) -> list[Mapping[str, Any]]:
+    if (
+        not raw
+        or len(raw) > max_bytes
+        or not raw.endswith(b"\n")
+        or raw.startswith(b"\xef\xbb\xbf")
+        or b"\r" in raw
+    ):
+        raise SkillRunConsumerError(f"{code}_FRAMING_INVALID")
+    rows: list[Mapping[str, Any]] = []
+    for line in raw[:-1].split(b"\n"):
+        if not line:
+            raise SkillRunConsumerError(f"{code}_BLANK_RECORD")
+        try:
+            value = parse_json_bytes(line)
+        except CanonicalizationError as exc:
+            raise SkillRunConsumerError(f"{code}_JSON_INVALID") from exc
+        if not isinstance(value, dict) or canonicalize_object(value) != line:
+            raise SkillRunConsumerError(f"{code}_JCS_INVALID")
+        rows.append(value)
+    return rows
+
+
+def _full_repo_artifact_path(relative: str) -> str:
+    return "OpenAIDatabase/data/run_logs/skills_runs/" + relative
+
+
+def validate_daily_tree_bytes(
+    *,
+    bundle: Any,
+    contract: SkillRunConsumerContract,
+    manifest_relative_path: str,
+    manifest_bytes: bytes,
+    part_bytes: Mapping[str, bytes],
+    index_bytes: Mapping[str, bytes],
+    receipt_bytes: Mapping[str, bytes],
+    prior_manifest_relative_path: Optional[str] = None,
+    prior_manifest_bytes: Optional[bytes] = None,
+) -> Mapping[str, Any]:
+    """Validate a synthetic complete AU-040 day without enabling publication."""
+
+    details = _artifact_path_details(manifest_relative_path)
+    if details is None or details[0] != "manifest":
+        raise SkillRunConsumerError("SKILL_RUN_DAILY_MANIFEST_PATH_INVALID")
+    _kind, local_date, _revision = details
+    manifest = _parse_canonical_object_bytes(
+        manifest_bytes,
+        max_bytes=contract.max_object_bytes,
+        code="SKILL_RUN_DAILY_MANIFEST",
+    )
+    if (prior_manifest_relative_path is None) != (
+        prior_manifest_bytes is None
+    ):
+        raise SkillRunConsumerError(
+            "SKILL_RUN_PRIOR_MANIFEST_PAIR_INCOMPLETE"
+        )
+    prior_manifest: Optional[Mapping[str, Any]] = None
+    prior_repo_path: Optional[str] = None
+    if prior_manifest_relative_path is not None and prior_manifest_bytes is not None:
+        prior_details = _artifact_path_details(prior_manifest_relative_path)
+        if (
+            prior_details is None
+            or prior_details[0] != "manifest"
+            or prior_details[1] != local_date
+        ):
+            raise SkillRunConsumerError(
+                "SKILL_RUN_PRIOR_MANIFEST_PATH_INVALID"
+            )
+        prior_manifest = _parse_canonical_object_bytes(
+            prior_manifest_bytes,
+            max_bytes=contract.max_object_bytes,
+            code="SKILL_RUN_PRIOR_MANIFEST",
+        )
+        prior_repo_path = _full_repo_artifact_path(
+            prior_manifest_relative_path
+        )
+
+    accepted = bind_au040_acceptance_to_trusted_bundle(bundle)
+    manifest_repo_path = _full_repo_artifact_path(manifest_relative_path)
+    validate_manifest_revision_chain(
+        accepted,
+        manifest,
+        manifest_repo_path,
+        prior_manifest,
+        prior_repo_path,
+        expected_bundle_digest=contract.expected_bundle_digest,
+    )
+
+    artifact_descriptors: dict[str, Mapping[str, Any]] = {}
+    parsed_indexes: dict[str, list[Mapping[str, Any]]] = {}
+    for kind, values in (("part", part_bytes), ("index", index_bytes)):
+        for relative, raw in values.items():
+            observed = _artifact_path_details(relative)
+            if (
+                observed is None
+                or observed[0] != kind
+                or observed[1] != local_date
+            ):
+                raise SkillRunConsumerError(
+                    f"SKILL_RUN_{kind.upper()}_PATH_INVALID"
+                )
+            rows = _parse_canonical_jsonl_objects(
+                raw,
+                max_bytes=contract.max_part_bytes,
+                code=f"SKILL_RUN_{kind.upper()}",
+            )
+            if kind == "index":
+                parsed_indexes[relative] = rows
+            artifact_descriptors[_full_repo_artifact_path(relative)] = {
+                "bytes": len(raw),
+                "digest": hashlib.sha256(raw).hexdigest(),
+                "records": len(rows),
+            }
+
+    receipts: dict[str, Mapping[str, Any]] = {}
+    for relative, raw in receipt_bytes.items():
+        observed = _artifact_path_details(relative)
+        if (
+            observed is None
+            or observed[0] != "retention_receipt"
+            or observed[1] != local_date
+        ):
+            raise SkillRunConsumerError(
+                "SKILL_RUN_RETENTION_RECEIPT_PATH_INVALID"
+            )
+        receipts[_full_repo_artifact_path(relative)] = (
+            _parse_canonical_object_bytes(
+                raw,
+                max_bytes=contract.max_object_bytes,
+                code="SKILL_RUN_RETENTION_RECEIPT",
+            )
+        )
+
+    prefix = manifest_relative_path.rsplit("/", 1)[0] + "/"
+    known_events: dict[str, str] = {}
+    for part in manifest["parts"]:
+        number = part["part_number"]
+        part_path = prefix + f"part-{number:04d}.jsonl"
+        index_path = prefix + f"index-{number:04d}.jsonl"
+        observed_index = index_bytes.get(index_path)
+        if observed_index is None:
+            raise SkillRunConsumerError(
+                "SKILL_RUN_RETAINED_INDEX_MISSING"
+            )
+        if part["state"] == "ACTIVE":
+            observed_part = part_bytes.get(part_path)
+            if observed_part is None:
+                raise SkillRunConsumerError(
+                    "SKILL_RUN_ACTIVE_PART_MISSING"
+                )
+            validate_part_index_manifest_closure(
+                accepted,
+                manifest,
+                part_number=number,
+                part_bytes=observed_part,
+                index_bytes=observed_index,
+                known_events=known_events,
+                expected_bundle_digest=contract.expected_bundle_digest,
+            )
+        else:
+            if part_path in part_bytes:
+                raise SkillRunConsumerError(
+                    "SKILL_RUN_PRUNED_PART_PRESENT"
+                )
+            validate_retained_index_manifest_closure(
+                accepted,
+                manifest,
+                part_number=number,
+                index_bytes=observed_index,
+                known_events=known_events,
+                expected_bundle_digest=contract.expected_bundle_digest,
+            )
+        for entry in parsed_indexes[index_path]:
+            known_events[entry["event_uid"]] = entry["event_digest"]
+
+    validate_daily_tree_closure(
+        accepted,
+        manifest,
+        manifest_repo_path,
+        artifact_descriptors,
+        receipts,
+        expected_bundle_digest=contract.expected_bundle_digest,
+    )
+    return manifest
+
+
 def validate_skill_run_logs(
     database_dir: Path,
     *,
@@ -549,38 +895,61 @@ def validate_skill_run_logs(
         files, errors = _safe_tree_files(root_descriptor)
     finally:
         os.close(root_descriptor)
-    part_paths: list[str] = []
+    artifact_paths: list[str] = []
+    artifacts_by_day: dict[str, dict[str, list[int]]] = {}
     for relative in files:
         if "/" not in relative and relative in contract.allowed_root_files:
             continue
-        if PART_PATH_RE.fullmatch(relative) is None:
+        try:
+            details = _artifact_path_details(relative)
+        except SkillRunConsumerError as exc:
+            errors.append(
+                "skill_run_artifact_path_invalid:"
+                + _safe_reason_code(exc)
+            )
+            continue
+        if details is None:
             errors.append("skill_run_unapproved_path")
             continue
-        try:
-            match = PART_PATH_RE.fullmatch(relative)
-            assert match is not None
-            dt.date(int(match["year"]), int(match["month"]), int(match["day"]))
-        except ValueError:
-            errors.append(f"skill_run_part_date_invalid:{relative}")
-            continue
-        part_paths.append(relative)
+        kind, local_date, number = details
+        artifact_paths.append(relative)
+        by_kind = artifacts_by_day.setdefault(
+            local_date,
+            {
+                "index": [],
+                "manifest": [],
+                "part": [],
+                "retention_receipt": [],
+            },
+        )
+        by_kind[kind].append(number)
 
-    parts_by_day: dict[str, list[int]] = {}
-    for relative in part_paths:
-        match = PART_PATH_RE.fullmatch(relative)
-        assert match is not None
-        day = f"{match['year']}/{match['month']}/{match['day']}"
-        parts_by_day.setdefault(day, []).append(int(match["part"]))
-    for day, part_numbers in sorted(parts_by_day.items()):
-        observed = sorted(part_numbers)
-        expected = list(range(1, len(observed) + 1))
-        if observed != expected:
-            errors.append(f"skill_run_part_sequence_invalid:{day}")
+    for local_date, by_kind in sorted(artifacts_by_day.items()):
+        manifests = sorted(by_kind["manifest"])
+        if manifests != list(range(1, len(manifests) + 1)):
+            errors.append(
+                f"skill_run_manifest_sequence_invalid:{local_date}"
+            )
+        if (
+            by_kind["part"]
+            or by_kind["index"]
+            or by_kind["retention_receipt"]
+        ) and not manifests:
+            errors.append(
+                f"skill_run_daily_manifest_missing:{local_date}"
+            )
+        missing_indexes = set(by_kind["part"]).difference(
+            by_kind["index"]
+        )
+        if missing_indexes:
+            errors.append(
+                f"skill_run_part_index_pair_missing:{local_date}"
+            )
 
-    if part_paths and not contract.repository_shards_permitted:
+    if artifact_paths and not contract.repository_shards_permitted:
         errors.append(
             "skill_run_canonical_publication_blocked:"
-            + ",".join(sorted(part_paths))
+            + ",".join(sorted(artifact_paths))
         )
     return errors
 

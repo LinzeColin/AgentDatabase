@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import copy
+import hashlib
 import importlib.util
 import json
 import shutil
@@ -19,9 +20,9 @@ sys.path.insert(0, str(GOVERNANCE_TOOLS))
 from canonical_json import canonical_digest, canonicalize_object  # noqa: E402
 
 
-CANDIDATE_GIT_OBJECT = "sha1:899a4374bc02f5e18444fea7404864df7b118adf"
+CANDIDATE_GIT_OBJECT = "sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5"
 CANDIDATE_DIGEST = (
-    "2704ed797c843f969965db600747abcdcd217550522e6479aab6817ef5a86ef5"
+    "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e"
 )
 PRE_RELOCATION_GIT_OBJECT = (
     "sha1:4b1e1a318c8f9e1014839a8a3a46e057679c4b6b"
@@ -30,6 +31,13 @@ PRE_RELOCATION_DIGEST = (
     "fd1df66e240695bd376803423bd09f9f341f7542f74a6ed92b0f79b0af4dc5e1"
 )
 SCHEMA_ID = "urn:linzecolin:agentdatabase:skillops:schema:public-run-event:v2"
+INDEX_SCHEMA_ID = (
+    "urn:linzecolin:agentdatabase:skillops:schema:run-event-index-entry:v1"
+)
+DAILY_MANIFEST_SCHEMA_ID = (
+    "urn:linzecolin:agentdatabase:skillops:"
+    "schema:daily-run-shard-manifest:v1"
+)
 PROTOCOL = "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1"
 
 
@@ -63,10 +71,11 @@ def uid(prefix: str, discriminator: str = "0") -> str:
     return f"{prefix}_{discriminator}{'0' * 25}"
 
 
-def reseal(value: dict) -> dict:
+def reseal(value: dict, pointer: str = "/event_digest") -> dict:
     result = copy.deepcopy(value)
-    result["event_digest"] = "0" * 64
-    result["event_digest"] = canonical_digest(result, "/event_digest")
+    field = pointer.removeprefix("/")
+    result[field] = "0" * 64
+    result[field] = canonical_digest(result, pointer)
     return result
 
 
@@ -113,6 +122,76 @@ def valid_unknown_event() -> dict:
     return reseal(value)
 
 
+def valid_daily_tree() -> tuple[dict, bytes, bytes]:
+    event = valid_unknown_event()
+    first_published_at = "2026-07-23T01:00:00.000000Z"
+    index = reseal(
+        {
+            "schema_version": INDEX_SCHEMA_ID,
+            "protocol_revision": PROTOCOL,
+            "bundle_digest": CANDIDATE_DIGEST,
+            "event_uid": event["event_uid"],
+            "event_digest": event["event_digest"],
+            "event_type": event["event_type"],
+            "occurred_at": event["occurred_at"],
+            "part_number": 1,
+            "line_number": 1,
+            "first_published_at": first_published_at,
+        },
+        "/index_entry_digest",
+    )
+    part_bytes = canonicalize_object(event) + b"\n"
+    index_bytes = canonicalize_object(index) + b"\n"
+    part = {
+        "part_number": 1,
+        "shard_name": "part-0001.jsonl",
+        "state": "ACTIVE",
+        "shard_digest": hashlib.sha256(part_bytes).hexdigest(),
+        "shard_bytes": len(part_bytes),
+        "record_count": 1,
+        "index_name": "index-0001.jsonl",
+        "index_digest": hashlib.sha256(index_bytes).hexdigest(),
+        "index_bytes": len(index_bytes),
+        "index_record_count": 1,
+        "first_event_uid": event["event_uid"],
+        "first_event_digest": event["event_digest"],
+        "first_occurred_at": event["occurred_at"],
+        "last_event_uid": event["event_uid"],
+        "last_event_digest": event["event_digest"],
+        "last_occurred_at": event["occurred_at"],
+        "first_published_at": first_published_at,
+        "retention_not_before": "2027-07-23T01:00:00.000000Z",
+    }
+    manifest = reseal(
+        {
+            "schema_version": DAILY_MANIFEST_SCHEMA_ID,
+            "protocol_revision": PROTOCOL,
+            "bundle_digest": CANDIDATE_DIGEST,
+            "manifest_uid": uid("drm"),
+            "local_date": "2026-07-23",
+            "timezone": "Australia/Sydney",
+            "record_schema_id": SCHEMA_ID,
+            "artifact_serialization": "RFC8785_JCS_PER_LINE_LF",
+            "max_part_bytes": 20 * 1024 * 1024,
+            "manifest_revision": 1,
+            "previous_manifest_digest": None,
+            "auto_transaction_uid": uid("atx"),
+            "publication_transaction_at": first_published_at,
+            "max_part_number": 1,
+            "total_part_count": 1,
+            "active_part_count": 1,
+            "pruned_part_count": 0,
+            "active_shard_bytes": len(part_bytes),
+            "active_record_count": 1,
+            "retained_index_bytes": len(index_bytes),
+            "retained_index_record_count": 1,
+            "parts": [part],
+        },
+        "/manifest_digest",
+    )
+    return manifest, part_bytes, index_bytes
+
+
 class SkillRunConsumerTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
@@ -128,6 +207,18 @@ class SkillRunConsumerTests(unittest.TestCase):
         )
         self.assertEqual(contract.trust.expected_bundle_digest, CANDIDATE_DIGEST)
         self.assertEqual(contract.expected_bundle_digest, CANDIDATE_DIGEST)
+        self.assertEqual(
+            contract.daily_manifest_schema_id,
+            DAILY_MANIFEST_SCHEMA_ID,
+        )
+        self.assertEqual(contract.index_entry_schema_id, INDEX_SCHEMA_ID)
+        self.assertEqual(
+            contract.retention_receipt_schema_id,
+            (
+                "urn:linzecolin:agentdatabase:skillops:"
+                "schema:retention-receipt:v3"
+            ),
+        )
 
     def test_pre_relocation_candidate_fails_closed(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
@@ -167,6 +258,49 @@ class SkillRunConsumerTests(unittest.TestCase):
             )
         self.assertEqual(errors, [])
 
+    def test_synthetic_final_daily_tree_closes_schema_index_and_bytes(self) -> None:
+        contract = self.consumer.load_consumer_contract(
+            DATABASE_ROOT / self.consumer.CONFIG_PATH
+        )
+        bundle = self.consumer.load_trusted_bundle(
+            REPO_ROOT,
+            contract.trust,
+        )
+        manifest, part_raw, index_raw = valid_daily_tree()
+        observed = self.consumer.validate_daily_tree_bytes(
+            bundle=bundle,
+            contract=contract,
+            manifest_relative_path="2026/07/23/manifest-0001.json",
+            manifest_bytes=canonicalize_object(manifest),
+            part_bytes={"2026/07/23/part-0001.jsonl": part_raw},
+            index_bytes={"2026/07/23/index-0001.jsonl": index_raw},
+            receipt_bytes={},
+        )
+        self.assertEqual(observed["manifest_digest"], manifest["manifest_digest"])
+
+    def test_synthetic_daily_tree_fails_closed_without_retained_index(self) -> None:
+        contract = self.consumer.load_consumer_contract(
+            DATABASE_ROOT / self.consumer.CONFIG_PATH
+        )
+        bundle = self.consumer.load_trusted_bundle(
+            REPO_ROOT,
+            contract.trust,
+        )
+        manifest, part_raw, _index_raw = valid_daily_tree()
+        with self.assertRaisesRegex(
+            self.consumer.SkillRunConsumerError,
+            "SKILL_RUN_RETAINED_INDEX_MISSING",
+        ):
+            self.consumer.validate_daily_tree_bytes(
+                bundle=bundle,
+                contract=contract,
+                manifest_relative_path="2026/07/23/manifest-0001.json",
+                manifest_bytes=canonicalize_object(manifest),
+                part_bytes={"2026/07/23/part-0001.jsonl": part_raw},
+                index_bytes={},
+                receipt_bytes={},
+            )
+
     def test_direct_or_unknown_files_fail_closed(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             database = Path(temporary)
@@ -180,16 +314,19 @@ class SkillRunConsumerTests(unittest.TestCase):
         self.assertIn("skill_run_unapproved_path", errors)
         self.assertNotIn("example.jsonl", "\n".join(errors))
 
-    def test_final_layout_is_recognized_but_publication_remains_blocked(self) -> None:
+    def test_final_daily_tree_paths_are_recognized_but_remain_blocked(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             database = Path(temporary)
             make_database(database)
-            part = (
-                database
-                / "data/run_logs/skills_runs/2026/07/23/part-0001.jsonl"
+            day = database / "data/run_logs/skills_runs/2026/07/23"
+            day.mkdir(parents=True)
+            (day / "part-0001.jsonl").write_text("{}\n", encoding="utf-8")
+            (day / "index-0001.jsonl").write_text("{}\n", encoding="utf-8")
+            (day / "manifest-0001.json").write_text("{}", encoding="utf-8")
+            (day / "retention-receipt-0001.json").write_text(
+                "{}",
+                encoding="utf-8",
             )
-            part.parent.mkdir(parents=True)
-            part.write_text("{}\n", encoding="utf-8")
             errors = self.consumer.validate_skill_run_logs(
                 database,
                 repo_root=REPO_ROOT,
@@ -198,7 +335,10 @@ class SkillRunConsumerTests(unittest.TestCase):
             errors,
             [
                 "skill_run_canonical_publication_blocked:"
-                "2026/07/23/part-0001.jsonl"
+                "2026/07/23/index-0001.jsonl,"
+                "2026/07/23/manifest-0001.json,"
+                "2026/07/23/part-0001.jsonl,"
+                "2026/07/23/retention-receipt-0001.json"
             ],
         )
 
@@ -216,7 +356,8 @@ class SkillRunConsumerTests(unittest.TestCase):
                 repo_root=REPO_ROOT,
             )
         self.assertIn("skill_run_unapproved_directory", errors)
-        self.assertIn("skill_run_part_sequence_invalid:2026/07/23", errors)
+        self.assertIn("skill_run_daily_manifest_missing:2026-07-23", errors)
+        self.assertIn("skill_run_part_index_pair_missing:2026-07-23", errors)
         self.assertTrue(
             any(
                 error.startswith("skill_run_canonical_publication_blocked:")

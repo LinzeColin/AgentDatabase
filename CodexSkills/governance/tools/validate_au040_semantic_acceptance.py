@@ -67,6 +67,7 @@ from CodexSkills.registry.auto.tools.validate_transport_draft import (  # noqa: 
     _validate_index_entry,
     load_transport_draft,
     validate_index_entries,
+    validate_manifest_tree,
     validate_pruned_manifest_receipt_links,
     validate_transport_instance,
 )
@@ -661,6 +662,113 @@ def validate_part_index_manifest_closure(
     }
     if any(part[key] != value for key, value in expected_physical.items()):
         _fail("AU040_MANIFEST_PHYSICAL_ARTIFACT_MISMATCH")
+
+
+def validate_retained_index_manifest_closure(
+    contract: AU040AcceptanceContract,
+    manifest: Mapping[str, Any],
+    *,
+    part_number: int,
+    index_bytes: bytes,
+    known_events: Optional[Mapping[str, str]] = None,
+    expected_bundle_digest: str = CURRENT_CANDIDATE_BUNDLE_DIGEST,
+) -> None:
+    """Validate an immutable retained index even after its shard is pruned."""
+
+    validate_daily_manifest_semantics(
+        contract,
+        manifest,
+        expected_bundle_digest=expected_bundle_digest,
+    )
+    matching = [
+        part
+        for part in manifest["parts"]
+        if part["part_number"] == part_number
+    ]
+    if len(matching) != 1:
+        _fail("AU040_MANIFEST_PART_NUMBER_NOT_EXACT")
+    part = matching[0]
+    index_rows = _parse_canonical_jsonl(
+        index_bytes,
+        max_bytes=MAX_PART_BYTES,
+    )
+    for entry in index_rows:
+        validate_instance(
+            contract.bundle,
+            entry,
+            INDEX_ENTRY_ID,
+            expected_bundle_digest=expected_bundle_digest,
+            public=False,
+        )
+        _validate_index_entry(entry)
+        validate_public_value_v2(contract, entry)
+    validate_index_entries(
+        index_rows,
+        event_rows=index_rows,
+        expected_part_number=part_number,
+        expected_record_count=part["index_record_count"],
+        known_events=known_events,
+    )
+    if not index_rows:
+        _fail("AU040_RETAINED_INDEX_EMPTY")
+    if any(
+        entry["first_published_at"] != part["first_published_at"]
+        for entry in index_rows
+    ):
+        _fail("AU040_INDEX_FIRST_PUBLISHED_AT_PART_MISMATCH")
+    expected_boundary = {
+        "first_event_uid": index_rows[0]["event_uid"],
+        "first_event_digest": index_rows[0]["event_digest"],
+        "first_occurred_at": index_rows[0]["occurred_at"],
+        "last_event_uid": index_rows[-1]["event_uid"],
+        "last_event_digest": index_rows[-1]["event_digest"],
+        "last_occurred_at": index_rows[-1]["occurred_at"],
+    }
+    if any(part[key] != value for key, value in expected_boundary.items()):
+        _fail("AU040_RETAINED_INDEX_EVENT_BOUNDARY_MISMATCH")
+    if (
+        part["index_digest"] != hashlib.sha256(index_bytes).hexdigest()
+        or part["index_bytes"] != len(index_bytes)
+        or part["index_record_count"] != len(index_rows)
+    ):
+        _fail("AU040_RETAINED_INDEX_PHYSICAL_ARTIFACT_MISMATCH")
+
+
+def validate_daily_tree_closure(
+    contract: AU040AcceptanceContract,
+    manifest: Mapping[str, Any],
+    manifest_repo_path: str,
+    artifacts: Mapping[str, Mapping[str, Any]],
+    receipts: Mapping[str, Mapping[str, Any]],
+    *,
+    expected_bundle_digest: str = CURRENT_CANDIDATE_BUNDLE_DIGEST,
+) -> None:
+    """Close the latest manifest over active shards, retained indexes, and receipts."""
+
+    validate_daily_manifest_semantics(
+        contract,
+        manifest,
+        expected_bundle_digest=expected_bundle_digest,
+    )
+    for receipt in receipts.values():
+        validate_retention_receipt_semantics(
+            contract,
+            receipt,
+            expected_bundle_digest=expected_bundle_digest,
+        )
+    required_receipts = {
+        part["retention_receipt_path"]
+        for part in manifest["parts"]
+        if part["state"] == "PRUNED"
+    }
+    if set(receipts) != required_receipts:
+        _fail("AU040_DAILY_TREE_RETENTION_RECEIPT_SET_MISMATCH")
+    validate_manifest_tree(manifest, manifest_repo_path, artifacts)
+    validate_pruned_manifest_receipt_links(
+        manifest,
+        manifest_repo_path,
+        receipts,
+    )
 
 
 def _daily_artifact_path(path: str) -> tuple[str, str, int]:
