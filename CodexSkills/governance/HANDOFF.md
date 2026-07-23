@@ -25,9 +25,13 @@
 
 The later Auto Gmail query-capability corrective is not a replacement for the
 immutable M0c-A control tuple above. Its verified Git object is
-`sha1:befc5b0ee9e7f5157f31a2b6a8809cd118f1b5fd`; the current Auto runtime
-interface raw SHA-256 is
+`sha1:befc5b0ee9e7f5157f31a2b6a8809cd118f1b5fd`; its runtime-interface raw
+SHA-256 was
 `43a30b67903e9f5284f607129b7e3830aa507449552190b5992db770c01299d4`.
+The current Auto AU-040 transport draft is pinned to Git object
+`sha1:3a133ee8a812bac6a577e93102df9981240659e1`; its runtime-interface raw
+SHA-256 is
+`91e184f37e9b166b78847b654f17447e67df6bc92db66713e5feac4634e00127`.
 
 ## Completed through M0b
 
