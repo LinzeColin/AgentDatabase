@@ -5,8 +5,8 @@
     "notification_provider_status",
     "shared_gate_status_map"
   ],
-  "activation_control_baseline_git_object_id": "sha1:6769eba64badac04a131bfa00dbb0e1a353ccae0",
-  "activation_control_baseline_interface_raw_sha256": "24af49e7f3c0ecac85154a2a9741d9d8ceb16368224cbf7900eceac9fe66e0f7",
+  "activation_control_baseline_git_object_id": "sha1:3a0b8222cf52d6a35f31986c411ac98daed06c5c",
+  "activation_control_baseline_interface_raw_sha256": "70b4e8c8ab47db541c90bbc6ebf092a483ca776c07b84b939b5a9b0be783e5c2",
   "activation_control_interface_path": "CodexSkills/governance/activation/control-interface.json",
   "activation_control_mode": "DRAFT_NON_ACTIVE_CONTROL",
   "activation_control_trust_tuple_repo_external_only": true,
@@ -92,7 +92,7 @@
       "relative_path": "CodexSkills/registry/auto/tools/activation_handshake_cli.py"
     },
     {
-      "artifact_digest": "578ee4cbb9d64a61207d5f5c3c6068bce2e997b0f373de126f0b7e783aed2a4b",
+      "artifact_digest": "b16f279f439647f692606372e9759dcc72b4ad8e5a390df5d3a0cba3fae4b586",
       "relative_path": "CodexSkills/registry/auto/tools/build_runtime_interface.py"
     },
     {

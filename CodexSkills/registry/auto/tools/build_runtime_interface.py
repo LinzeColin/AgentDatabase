@@ -50,11 +50,11 @@ def build():
             "shared_gate_status_map",
         ],
         "activation_control_baseline_git_object_id": (
-            "sha1:6769eba64badac04a131bfa00dbb0e1a353ccae0"
+            "sha1:3a0b8222cf52d6a35f31986c411ac98daed06c5c"
         ),
         "activation_control_baseline_interface_raw_sha256": (
-            "24af49e7f3c0ecac85154a2a9741d9d8"
-            "ceb16368224cbf7900eceac9fe66e0f7"
+            "70b4e8c8ab47db541c90bbc6ebf092a4"
+            "83ca776c07b84b939b5a9b0be783e5c2"
         ),
         "activation_control_interface_path": (
             "CodexSkills/governance/activation/control-interface.json"

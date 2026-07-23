@@ -4,11 +4,11 @@
 - Phase: `AUTO_M0C_ACTIVATION_HANDSHAKE_CORRECTIVE`
 - Protocol: `urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1`
 - Verified M0c-A Git object:
-  `sha1:6769eba64badac04a131bfa00dbb0e1a353ccae0`
+  `sha1:3a0b8222cf52d6a35f31986c411ac98daed06c5c`
 - M0c-A control interface:
   `CodexSkills/governance/activation/control-interface.json`
 - Control interface raw SHA-256:
-  `24af49e7f3c0ecac85154a2a9741d9d8ceb16368224cbf7900eceac9fe66e0f7`
+  `70b4e8c8ab47db541c90bbc6ebf092a483ca776c07b84b939b5a9b0be783e5c2`
 - Candidate bundle digest:
   `2704ed797c843f969965db600747abcdcd217550522e6479aab6817ef5a86ef5`
 - Candidate Git object:
@@ -16,7 +16,7 @@
 - Auto runtime interface:
   `CodexSkills/registry/auto/runtime-interface.json`
 - Runtime interface raw SHA-256:
-  `cdd4c11e412045bd1ee36b6af7e9b1aa35a4f125681568955aa5796710414922`
+  `7a6047fd84d4ced5fde022980a28276f654db3839ca44726a70a3aa325581bfa`
 
 ## Completed in this corrective
 
@@ -49,7 +49,7 @@
 ## Validation evidence
 
 - Auto unittest: `102/102 PASS`.
-- Mechanism unittest: `36/36 PASS`.
+- Mechanism unittest: `42/42 PASS`.
 - Seeded fault/privacy: `88/88 PASS` for seed `271828`; `88/88 PASS` for seed
   `314159`.
 - Mechanism draft, candidate bundle, activation control, Auto schemas, and
@@ -72,18 +72,15 @@ state root, watermark, or automation change. It did not send email, run a real
 source migration, call the verifier, restart the App, extend a time window, or
 touch any paused automation.
 
-The Mechanism-owned consumer-first gate remains incomplete. AU-040 is also
-incomplete: `skills_runs/example.json` is A1b scaffolding, not the final path
-contract. The immutable Task Pack requires bounded daily JSONL shards and a
-manifest under
+The Mechanism-owned consumer-first gate is complete. AU-040 remains
+incomplete: the immutable Task Pack still requires bounded daily JSONL shards
+and a manifest under
 `OpenAIDatabase/data/run_logs/skills_runs/YYYY/MM/DD/part-NNNN.jsonl`.
 
 ## Next exact action
 
-After this corrective is FF-safe pushed and remotely read back, Mechanism must
-run the independent consumer-first Phase. A later independent capability gate
-must then prove the repo-external state root, recipient mapping, Gmail OAuth
-scopes, authenticated-recipient binding, and provider lookup/readback are
-ready. Only after both gates may a new Mechanism M0c-B run create the intent,
-obtain a real `PRE_WRITE` provider `SENT` receipt, settle, publish, and
-establish the external ACTIVE trust tuple.
+An independent capability gate must prove the repo-external state root,
+recipient mapping, Gmail OAuth scopes, authenticated-recipient binding, and
+provider lookup/readback are ready. Only after that gate is READY may a new
+Mechanism M0c-B run create the intent, obtain a real `PRE_WRITE` provider
+`SENT` receipt, settle, publish, and establish the external ACTIVE trust tuple.

@@ -32,11 +32,11 @@ from runtime_helpers import (
 
 
 CONTROL_GIT_OBJECT = (
-    "sha1:6769eba64badac04a131bfa00dbb0e1a353ccae0"
+    "sha1:3a0b8222cf52d6a35f31986c411ac98daed06c5c"
 )
 CONTROL_INTERFACE_RAW_SHA256 = (
-    "24af49e7f3c0ecac85154a2a9741d9d8"
-    "ceb16368224cbf7900eceac9fe66e0f7"
+    "70b4e8c8ab47db541c90bbc6ebf092a4"
+    "83ca776c07b84b939b5a9b0be783e5c2"
 )
 INTENT_ID = (
     "urn:linzecolin:agentdatabase:skillops:schema:activation-intent:v1"

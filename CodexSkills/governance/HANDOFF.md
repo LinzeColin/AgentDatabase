@@ -10,14 +10,18 @@
 
 ## Pinned inputs
 
-- Auto activation-handshake corrective verified Git object:
-  sha1:ee6f046619cb7f5584c89e1dbb81d5bd5c602a2b
+- Candidate bundle Git object:
+  sha1:899a4374bc02f5e18444fea7404864df7b118adf
+- Auto runtime baseline Git object:
+  sha1:c2fc04ff24b8d8ad72ec14a1cc2b26000ba08f67
 - Auto runtime interface raw SHA-256:
-  cdd4c11e412045bd1ee36b6af7e9b1aa35a4f125681568955aa5796710414922
+  e28040a58d4c68b2493025523982545d8aa80b1faf7961cf03860d735f8cdea2
 - Mechanism interface raw SHA-256:
   0f4837d9cec37c845cd5e9e799b5f572944cf8fe2457e8b95f696db3b9c03998
+- M0c-A activation control Git object:
+  sha1:3a0b8222cf52d6a35f31986c411ac98daed06c5c
 - M0c-A activation control interface raw SHA-256:
-  24af49e7f3c0ecac85154a2a9741d9d8ceb16368224cbf7900eceac9fe66e0f7
+  70b4e8c8ab47db541c90bbc6ebf092a483ca776c07b84b939b5a9b0be783e5c2
 
 ## Completed through M0b
 
@@ -102,9 +106,9 @@
 
 M0c-A does not create `CodexSkills/VERSION`, an ACTIVE manifest, activation
 intent instance, notification receipt, settlement instance, canonical data,
-runtime watermark, or publication authority. It sends no email. The candidate
-manifest remains byte-identical and is trusted only when a caller supplies the
-repo-external tuple of verified M0b Git object, exact candidate digest,
+runtime watermark, or publication authority. It sends no email. The relocated
+candidate remains deterministic and is trusted only when a caller supplies
+the repo-external tuple of verified M0b Git object, exact candidate digest,
 canonical manifest path, and mode CANDIDATE.
 
 The production Gmail implementation now exists, but readiness of the
