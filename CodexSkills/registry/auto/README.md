@@ -7,19 +7,21 @@ Auto-private schemas, deterministic builders/validators, and the non-active
 runtime safety kernel. The current public set belongs to the exact Mechanism
 M0b shared candidate; the private set never enters the shared bundle.
 
-`transport-draft/` separately holds four proposed AU-040 transport schemas. It
-is outside the current recursive public-schema loader, does not alter the
-trusted 29/5 candidate, and must be promoted to the stable sibling root
-`schemas/public-v2/` before any later candidate manifest may reference it.
+`transport-draft/` preserves the four accepted AU-040 source schemas.
+`schemas/public-v2/` contains their promoted exact-byte copies and a separate
+promotion interface. Both roots are outside the current recursive
+public-schema loader, so the trusted 29/5 candidate remains unchanged.
 
 Deterministic contract entrypoints:
 
 ```bash
 /usr/bin/python3 -B CodexSkills/registry/auto/tools/build_schemas.py --check
 /usr/bin/python3 -B CodexSkills/registry/auto/tools/build_transport_draft.py --check
+/usr/bin/python3 -B CodexSkills/registry/auto/tools/build_schema_promotion.py --check
 /usr/bin/python3 -B CodexSkills/registry/auto/tools/build_runtime_interface.py --check
 /usr/bin/python3 -B CodexSkills/registry/auto/tools/validate_auto.py lint-draft
 /usr/bin/python3 -B CodexSkills/registry/auto/tools/validate_transport_draft.py lint-draft
+/usr/bin/python3 -B CodexSkills/registry/auto/tools/validate_schema_promotion.py lint-promotion
 /usr/bin/python3 -B -m unittest discover \
   -s CodexSkills/registry/auto/tests -p 'test_*.py'
 ```
@@ -190,23 +192,26 @@ daily JSONL shards and a manifest under `skills_runs`, while the current
 consumer allows only `YYYY/MM/DD/part-NNNN.jsonl` plus the root README and
 would reject a manifest path.
 
-Mechanism Authority Audit Revision 6 is now represented by an Auto-owned
-repository draft under `transport-draft/`: daily manifest v1, persistent event
-index v1, publication manifest v2, and retention receipt v3. The draft
-validator composes 31 schemas with the current five policies for offline schema
-validation and tests JCS-per-line framing, exact byte evidence, daily
-arithmetic, persistent index closure, and receipt-backed pruning. The target
-`retention-policy:v3` remains absent pending Mechanism acceptance. The draft
-does not change the current candidate, consumer, control, or runtime publisher.
+Mechanism Authority Audit Revision 6 is represented by the Auto-owned source
+schemas under `transport-draft/`: daily manifest v1, persistent event index
+v1, publication manifest v2, and retention receipt v3. The draft validator
+tests JCS-per-line framing, exact byte evidence, daily arithmetic, persistent
+index closure, and receipt-backed pruning.
 
-The draft interface is deliberately `repository_bound=false`. Its schema
-entries bind both the isolation path and a unique future canonical path under
-`schemas/public-v2/`; paths containing `draft` are forbidden in a candidate
-manifest. Mechanism must first accept the semantics and public-value policy
-delta without materializing a bundle. Auto must then promote the accepted
-bytes before Mechanism creates the final 31/5 candidate, consumer, and control
-tuple. AU-040, activation, and canonical publication remain false throughout
-this phase.
+Mechanism independently accepted those exact bytes, the ten-field public-value
+allowlist delta, `public-value-policy:v2`, `retention-policy:v3`, and seven
+cross-artifact semantic guards. Auto then promoted the four unchanged schema
+files to `schemas/public-v2/`. The promotion interface binds both source
+interfaces, every raw and canonical digest, the stable final paths, and the
+guard-code set. Its validator proves exact-byte equality and the offline 31/5
+target closure while separately proving the current 29/5 candidate contains
+neither draft nor promoted paths.
+
+The next owner phase is Mechanism-only materialization of the final 31/5
+candidate, consumer, and activation-control tuples. No such tuple exists yet;
+the current candidate, consumer, control, runtime publisher, and runtime loader
+remain unchanged. `repository_bound=false`; AU-040, activation, and canonical
+publication remain false.
 
 The schedule conflict remains unresolved. The external Gmail readiness gate
 remains false until the Owner injects the repo-external state root and the

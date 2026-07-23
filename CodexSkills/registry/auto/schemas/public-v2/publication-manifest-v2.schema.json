@@ -1,0 +1,291 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:publication-manifest:v2",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "auto_transaction_uid": {
+      "pattern": "^atx_[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+      "type": "string"
+    },
+    "bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "created_at": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+    },
+    "expected_remote_head": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/git_object_id"
+    },
+    "lane_manifests": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "artifact_count": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+          },
+          "artifacts": {
+            "items": {
+              "additionalProperties": false,
+              "allOf": [
+                {
+                  "if": {
+                    "properties": {
+                      "artifact_operation": {
+                        "const": "PUT"
+                      }
+                    },
+                    "required": [
+                      "artifact_operation"
+                    ]
+                  },
+                  "then": {
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "prior_artifact_serialization"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "prior_artifact_digest"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "prior_artifact_bytes"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "prior_artifact_record_count"
+                          ]
+                        }
+                      ]
+                    },
+                    "required": [
+                      "artifact_serialization",
+                      "artifact_digest",
+                      "artifact_bytes",
+                      "artifact_record_count"
+                    ]
+                  }
+                },
+                {
+                  "if": {
+                    "properties": {
+                      "artifact_operation": {
+                        "const": "DELETE"
+                      }
+                    },
+                    "required": [
+                      "artifact_operation"
+                    ]
+                  },
+                  "then": {
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "artifact_serialization"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "artifact_digest"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "artifact_bytes"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "artifact_record_count"
+                          ]
+                        }
+                      ]
+                    },
+                    "required": [
+                      "prior_artifact_serialization",
+                      "prior_artifact_digest",
+                      "prior_artifact_bytes",
+                      "prior_artifact_record_count"
+                    ]
+                  }
+                }
+              ],
+              "properties": {
+                "artifact_bytes": {
+                  "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/positive_count"
+                },
+                "artifact_digest": {
+                  "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+                },
+                "artifact_operation": {
+                  "enum": [
+                    "DELETE",
+                    "PUT"
+                  ]
+                },
+                "artifact_record_count": {
+                  "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/positive_count"
+                },
+                "artifact_repo_path": {
+                  "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/repo_relative_posix_path"
+                },
+                "artifact_schema_id": {
+                  "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/urn_id"
+                },
+                "artifact_serialization": {
+                  "enum": [
+                    "RFC8785_JCS_OBJECT",
+                    "RFC8785_JCS_PER_LINE_LF"
+                  ]
+                },
+                "artifact_uid": {
+                  "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/typed_uid"
+                },
+                "prior_artifact_bytes": {
+                  "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/positive_count"
+                },
+                "prior_artifact_digest": {
+                  "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+                },
+                "prior_artifact_record_count": {
+                  "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/positive_count"
+                },
+                "prior_artifact_serialization": {
+                  "enum": [
+                    "RFC8785_JCS_OBJECT",
+                    "RFC8785_JCS_PER_LINE_LF"
+                  ]
+                }
+              },
+              "required": [
+                "artifact_uid",
+                "artifact_operation",
+                "artifact_schema_id",
+                "artifact_repo_path"
+              ],
+              "type": "object"
+            },
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": true
+          },
+          "lane": {
+            "enum": [
+              "REGISTRY",
+              "RUN_LOG"
+            ]
+          },
+          "lane_transaction_uid": {
+            "pattern": "^ltx_[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+            "type": "string"
+          },
+          "source_watermark_ref": {
+            "pattern": "^[a-z][a-z0-9-]{2,63}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "lane",
+          "lane_transaction_uid",
+          "source_watermark_ref",
+          "artifact_count",
+          "artifacts"
+        ],
+        "type": "object"
+      },
+      "maxItems": 2,
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "manifest_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "manifest_uid": {
+      "pattern": "^pub_[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+      "type": "string"
+    },
+    "mechanism_srv_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/srv_revision"
+    },
+    "protocol_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/protocol_revision"
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:publication-manifest:v2"
+    },
+    "settled_lanes": {
+      "items": {
+        "enum": [
+          "REGISTRY",
+          "RUN_LOG"
+        ]
+      },
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "shared_gates": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "evidence_digest": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+          },
+          "gate_code": {
+            "enum": [
+              "BUNDLE_DIGEST",
+              "EXPECTED_REMOTE_HEAD",
+              "LOCK_OWNERSHIP",
+              "PATH_BOUNDARY",
+              "POLICY_DIGEST",
+              "PRIVACY"
+            ]
+          },
+          "status": {
+            "const": "PASS"
+          }
+        },
+        "required": [
+          "gate_code",
+          "status",
+          "evidence_digest"
+        ],
+        "type": "object"
+      },
+      "maxItems": 6,
+      "minItems": 6,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "trigger_kind": {
+      "enum": [
+        "MANUAL",
+        "SCHEDULED"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "bundle_digest",
+    "manifest_uid",
+    "auto_transaction_uid",
+    "trigger_kind",
+    "created_at",
+    "mechanism_srv_revision",
+    "expected_remote_head",
+    "settled_lanes",
+    "lane_manifests",
+    "shared_gates",
+    "manifest_digest"
+  ],
+  "title": "Canonical publication transaction manifest with operation framing",
+  "type": "object"
+}

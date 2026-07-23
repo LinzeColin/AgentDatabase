@@ -10,12 +10,13 @@ current trusted candidate remains exactly 29 schemas and five policies:
 - `publication-manifest:v2`
 - `retention-receipt:v3`
 
-The draft composes 31 schemas with the current five policies for offline
-schema validation only. The target `retention-policy:v3` is not present; it
-must later replace v2 after independent Mechanism acceptance. This directory
-is not an active or candidate bundle, is not consumed by the runtime publisher,
-writer, queue, retention executor, or OpenAIDatabase consumer, and does not
-permit a repository shard.
+The historical draft validation context composes 31 schemas with the current
+five policies only. Mechanism has since accepted the exact schema bytes and
+provided the future `public-value-policy:v2` and `retention-policy:v3`; Auto
+has promoted unchanged copies to `schemas/public-v2/`. This directory remains
+the pinned source evidence. It is not an active or candidate bundle, is not
+consumed by the runtime publisher, writer, queue, retention executor, or
+OpenAIDatabase consumer, and does not permit a repository shard.
 
 Run the deterministic draft gates from the repository root:
 
@@ -51,9 +52,11 @@ the trusted 29-schema candidate before promotion.
 
 The ownership-safe sequence is fixed:
 
-1. Auto transport schema draft.
-2. Mechanism semantic/policy acceptance without bundle materialization.
-3. Auto promotion of the accepted exact bytes to `schemas/public-v2/`.
+1. Auto transport schema draft — complete.
+2. Mechanism semantic/policy acceptance without bundle materialization —
+   complete.
+3. Auto promotion of the accepted exact bytes to `schemas/public-v2/` —
+   complete.
 4. Mechanism final 31/5 candidate, consumer, and control materialization.
 5. Auto integration against the exact new bundle.
 

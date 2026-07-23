@@ -87,10 +87,19 @@ class RuntimeBootstrapTests(unittest.TestCase):
         )
         self.assertEqual(
             interface["au_040_authority_ruling_status"],
-            "AUTO_TRANSPORT_DRAFT_PRESENT_MECHANISM_NOT_ACCEPTED",
+            "AUTO_SCHEMA_PROMOTED_MECHANISM_MATERIALIZATION_PENDING",
         )
         self.assertTrue(interface["au_040_transport_schema_draft_complete"])
         self.assertFalse(interface["au_040_retention_policy_v3_present"])
+        self.assertTrue(
+            interface[
+                "au_040_retention_policy_v3_repository_accepted"
+            ]
+        )
+        self.assertTrue(
+            interface["au_040_semantic_policy_acceptance_complete"]
+        )
+        self.assertTrue(interface["au_040_schema_promotion_complete"])
         self.assertFalse(
             interface["au_040_transport_contract"]["repository_bound"]
         )
@@ -106,7 +115,7 @@ class RuntimeBootstrapTests(unittest.TestCase):
             ],
             31,
         )
-        self.assertFalse(
+        self.assertTrue(
             interface["au_040_transport_contract"][
                 "proposed_active_policy_contract_complete"
             ]
@@ -115,6 +124,32 @@ class RuntimeBootstrapTests(unittest.TestCase):
             interface["au_040_transport_contract"][
                 "promotion_required_before_candidate_materialization"
             ]
+        )
+        self.assertTrue(
+            interface["au_040_transport_contract"][
+                "promotion_requirement_satisfied"
+            ]
+        )
+        self.assertEqual(
+            interface["au_040_transport_contract"][
+                "schema_promotion_interface_raw_sha256"
+            ],
+            "65c2e83bb2491d1cb3059767cf1705fc"
+            "7541bd7e97449f33a51ba17a04f5e595",
+        )
+        self.assertEqual(
+            interface["au_040_transport_contract"][
+                "production_semantic_guard_codes_acknowledged"
+            ],
+            [
+                "CANONICAL_BYTES_PHYSICAL_DIGEST_CLOSURE",
+                "INDEX_EVENT_MANIFEST_CLOSURE",
+                "MANIFEST_PART_IMMUTABILITY",
+                "MANIFEST_PREDECESSOR_EXACT_CHAIN",
+                "PRUNE_TRANSACTION_ARTIFACT_SET_CLOSURE",
+                "RETENTION_ANCHOR_EXACT_365D",
+                "SHARD_TRANSACTION_ARTIFACT_SET_CLOSURE",
+            ],
         )
         self.assertTrue(
             interface["au_040_transport_contract"][
@@ -140,7 +175,7 @@ class RuntimeBootstrapTests(unittest.TestCase):
         )
         self.assertEqual(
             interface["next_phase"],
-            "MECHANISM_AU040_SEMANTIC_POLICY_ACCEPTANCE",
+            "MECHANISM_FINAL_31_5_CANDIDATE_CONSUMER_CONTROL",
         )
         self.assertTrue(interface["schedule_authority_conflict_detected"])
         self.assertFalse(interface["schedule_authority_resolved"])
@@ -173,6 +208,11 @@ class RuntimeBootstrapTests(unittest.TestCase):
                 "AUTO_TRANSPORT_DRAFT_INTERFACE_RAW_DIGEST_MISMATCH",
             ):
                 module._transport_draft_evidence(tampered)
+            with self.assertRaisesRegex(
+                ValueError,
+                "AUTO_SCHEMA_PROMOTION_INTERFACE_RAW_DIGEST_MISMATCH",
+            ):
+                module._schema_promotion_evidence(tampered)
 
     def test_bootstrap_failure_precedes_state_root_creation(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:

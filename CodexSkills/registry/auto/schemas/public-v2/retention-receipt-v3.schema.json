@@ -1,0 +1,365 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:retention-receipt:v3",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "else": {
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "affected_public_artifacts"
+              ]
+            },
+            {
+              "required": [
+                "prune_deadline_breached"
+              ]
+            }
+          ]
+        }
+      },
+      "if": {
+        "properties": {
+          "action": {
+            "const": "PRUNE_CURRENT_TREE"
+          },
+          "scope": {
+            "const": "GIT_CURRENT_TREE"
+          }
+        },
+        "required": [
+          "scope",
+          "action"
+        ]
+      },
+      "then": {
+        "required": [
+          "affected_public_artifacts",
+          "prune_deadline_breached"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "action": {
+            "const": "PRUNE_CURRENT_TREE"
+          },
+          "prune_deadline_breached": {
+            "const": true
+          },
+          "scope": {
+            "const": "GIT_CURRENT_TREE"
+          }
+        },
+        "required": [
+          "scope",
+          "action",
+          "prune_deadline_breached"
+        ]
+      },
+      "then": {
+        "properties": {
+          "gap_code": {
+            "const": "GIT_CURRENT_TREE_PRUNE_DEADLINE_BREACH"
+          }
+        },
+        "required": [
+          "gap_code"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "action": {
+            "const": "PRUNE_CURRENT_TREE"
+          },
+          "prune_deadline_breached": {
+            "const": false
+          },
+          "scope": {
+            "const": "GIT_CURRENT_TREE"
+          }
+        },
+        "required": [
+          "scope",
+          "action",
+          "prune_deadline_breached"
+        ]
+      },
+      "then": {
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "gap_code"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "scope": {
+            "const": "GIT_CURRENT_TREE"
+          }
+        },
+        "required": [
+          "scope"
+        ]
+      },
+      "then": {
+        "properties": {
+          "action": {
+            "enum": [
+              "KEEP",
+              "NO_CANDIDATE",
+              "PRUNE_CURRENT_TREE"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "scope": {
+            "const": "MANAGED_RAW"
+          }
+        },
+        "required": [
+          "scope"
+        ]
+      },
+      "then": {
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "affected_public_artifacts"
+              ]
+            }
+          ]
+        },
+        "properties": {
+          "action": {
+            "enum": [
+              "DELETE_OWNED_SEGMENT",
+              "KEEP",
+              "NO_CANDIDATE",
+              "OFFLINE_TTL_BREACH_CLEANUP"
+            ]
+          },
+          "gap_code": {
+            "enum": [
+              "OFFLINE_TTL_BREACH",
+              "RAW_EXPIRED_UNPUBLISHED"
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "properties": {
+    "action": {
+      "enum": [
+        "DELETE_OWNED_SEGMENT",
+        "KEEP",
+        "NO_CANDIDATE",
+        "OFFLINE_TTL_BREACH_CLEANUP",
+        "PRUNE_CURRENT_TREE"
+      ]
+    },
+    "affected_bytes": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "affected_count": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "affected_public_artifacts": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "artifact_repo_path": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/repo_relative_posix_path"
+          },
+          "artifact_schema_id": {
+            "const": "urn:linzecolin:agentdatabase:skillops:schema:public-run-event:v2"
+          },
+          "artifact_serialization": {
+            "const": "RFC8785_JCS_PER_LINE_LF"
+          },
+          "first_published_at": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+          },
+          "prior_artifact_bytes": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/positive_count"
+          },
+          "prior_artifact_digest": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+          },
+          "prior_daily_manifest_digest": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+          },
+          "prior_record_count": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/positive_count"
+          },
+          "prune_deadline_at": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+          },
+          "retained_index_digest": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+          },
+          "retained_index_path": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/repo_relative_posix_path"
+          },
+          "retention_not_before": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+          }
+        },
+        "required": [
+          "artifact_repo_path",
+          "artifact_schema_id",
+          "artifact_serialization",
+          "prior_artifact_digest",
+          "prior_artifact_bytes",
+          "prior_record_count",
+          "first_published_at",
+          "retention_not_before",
+          "prune_deadline_at",
+          "retained_index_path",
+          "retained_index_digest",
+          "prior_daily_manifest_digest"
+        ],
+        "type": "object"
+      },
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "auto_transaction_uid": {
+      "pattern": "^atx_[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+      "type": "string"
+    },
+    "bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "clock_basis": {
+      "const": "UTC_WALL_CLOCK"
+    },
+    "cutoff_at": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+    },
+    "evidence_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "executed_at": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+    },
+    "gap_code": {
+      "enum": [
+        "OFFLINE_TTL_BREACH",
+        "RAW_EXPIRED_UNPUBLISHED",
+        "GIT_CURRENT_TREE_PRUNE_DEADLINE_BREACH"
+      ]
+    },
+    "hard_delete_claimed": {
+      "const": false
+    },
+    "history_rewrite_performed": {
+      "const": false
+    },
+    "legacy_candidate_count": {
+      "const": 0
+    },
+    "offline_duration_seconds": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "policy_snapshot_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "protected_candidate_count": {
+      "const": 0
+    },
+    "protocol_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/protocol_revision"
+    },
+    "prune_deadline_breached": {
+      "type": "boolean"
+    },
+    "receipt_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "receipt_uid": {
+      "pattern": "^rtr_[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+      "type": "string"
+    },
+    "reprojection_status": {
+      "enum": [
+        "FAILED_GAP_RECORDED",
+        "NOT_APPLICABLE",
+        "SUCCEEDED"
+      ]
+    },
+    "retention_action_uid": {
+      "pattern": "^rta_[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+      "type": "string"
+    },
+    "retention_policy_id": {
+      "const": "urn:linzecolin:agentdatabase:skillops:policy:retention:v3"
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:retention-receipt:v3"
+    },
+    "scope": {
+      "enum": [
+        "GIT_CURRENT_TREE",
+        "MANAGED_RAW"
+      ]
+    },
+    "selected_bytes": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "selected_count": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "ttl_breach": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "bundle_digest",
+    "receipt_uid",
+    "retention_action_uid",
+    "auto_transaction_uid",
+    "executed_at",
+    "cutoff_at",
+    "clock_basis",
+    "scope",
+    "action",
+    "retention_policy_id",
+    "policy_snapshot_digest",
+    "selected_count",
+    "selected_bytes",
+    "affected_count",
+    "affected_bytes",
+    "protected_candidate_count",
+    "legacy_candidate_count",
+    "reprojection_status",
+    "offline_duration_seconds",
+    "ttl_breach",
+    "history_rewrite_performed",
+    "hard_delete_claimed",
+    "evidence_digest",
+    "receipt_digest"
+  ],
+  "title": "Retention receipt with exact active-tree prune evidence",
+  "type": "object"
+}

@@ -14,12 +14,17 @@
   "activation_handshake_entrypoint": "CodexSkills/registry/auto/tools/activation_handshake_cli.py",
   "activation_instance_created": false,
   "activation_settlement_recomputed_before_publish": true,
-  "au_040_authority_ruling_status": "AUTO_TRANSPORT_DRAFT_PRESENT_MECHANISM_NOT_ACCEPTED",
+  "au_040_authority_ruling_status": "AUTO_SCHEMA_PROMOTED_MECHANISM_MATERIALIZATION_PENDING",
   "au_040_consumer_manifest_path_contract_present": false,
   "au_040_daily_jsonl_shard_complete": false,
   "au_040_manifest_contract_resolved": false,
   "au_040_retention_policy_v3_present": false,
+  "au_040_retention_policy_v3_repository_accepted": true,
+  "au_040_schema_promotion_complete": true,
+  "au_040_semantic_policy_acceptance_complete": true,
   "au_040_transport_contract": {
+    "acceptance_interface_path": "CodexSkills/governance/au040/semantic-policy-acceptance.json",
+    "acceptance_interface_raw_sha256": "3385df5975859ef0774d2086a8aa28a0336307e3343e7832eec9e2f024504fda",
     "current_candidate_schema_count": 29,
     "daily_manifest_path_pattern": "OpenAIDatabase/data/run_logs/skills_runs/YYYY/MM/DD/manifest-NNNN.json",
     "daily_manifest_schema_id": "urn:linzecolin:agentdatabase:skillops:schema:daily-run-shard-manifest:v1",
@@ -31,8 +36,19 @@
     "manifest_entry_numbers_contiguous": true,
     "part_numbers_reused": false,
     "physical_part_gaps_after_prune_permitted": true,
+    "production_semantic_guard_codes_acknowledged": [
+      "CANONICAL_BYTES_PHYSICAL_DIGEST_CLOSURE",
+      "INDEX_EVENT_MANIFEST_CLOSURE",
+      "MANIFEST_PART_IMMUTABILITY",
+      "MANIFEST_PREDECESSOR_EXACT_CHAIN",
+      "PRUNE_TRANSACTION_ARTIFACT_SET_CLOSURE",
+      "RETENTION_ANCHOR_EXACT_365D",
+      "SHARD_TRANSACTION_ARTIFACT_SET_CLOSURE"
+    ],
+    "promoted_schema_count": 4,
     "promotion_required_before_candidate_materialization": true,
-    "proposed_active_policy_contract_complete": false,
+    "promotion_requirement_satisfied": true,
+    "proposed_active_policy_contract_complete": true,
     "proposed_active_policy_count": 5,
     "proposed_active_schema_count": 31,
     "publisher_serialization_discriminator_required": true,
@@ -51,6 +67,8 @@
     ],
     "retention_exact_affected_records_required": true,
     "retention_index_readiness_required": true,
+    "schema_promotion_interface_path": "CodexSkills/registry/auto/schemas/public-v2/promotion-interface.json",
+    "schema_promotion_interface_raw_sha256": "65c2e83bb2491d1cb3059767cf1705fc7541bd7e97449f33a51ba17a04f5e595",
     "transaction_manifest_v1_role": "TRANSACTION_SETTLEMENT_ONLY"
   },
   "au_040_transport_schema_draft_complete": true,
@@ -147,7 +165,7 @@
       "relative_path": "CodexSkills/registry/auto/tools/activation_handshake_cli.py"
     },
     {
-      "artifact_digest": "59397181d0a269ba207c435c433546af390ed61155dc5131bbb48d6242f307f7",
+      "artifact_digest": "aba4b7fdae4f40b332a19f9173c363def82d9d3350ea85ae741c21fc1cd29910",
       "relative_path": "CodexSkills/registry/auto/tools/build_runtime_interface.py"
     },
     {
@@ -168,7 +186,7 @@
     }
   ],
   "module_count": 21,
-  "next_phase": "MECHANISM_AU040_SEMANTIC_POLICY_ACCEPTANCE",
+  "next_phase": "MECHANISM_FINAL_31_5_CANDIDATE_CONSUMER_CONTROL",
   "notification_actual_recipient_repo_external": true,
   "notification_credentials_repo_external": true,
   "notification_external_path_contract": {
