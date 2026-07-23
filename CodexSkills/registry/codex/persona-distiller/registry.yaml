@@ -3,14 +3,14 @@ identity:
   skill_id: persona-distiller
   display_name: 人物蒸馏 Skill
   source: codex
-  version: 0.0.0.3
+  version: 0.0.0.4
   entry: SKILL.md
 provenance:
   upstream_archive: PersonaDistiller-Final-v0.0.0.3.zip
   upstream_sha256: e891912d98d14afb7677ac935a19be329d97d206f4ae74a644892f46b17f6748
   local_canonical_path: ~/.codex/skills/persona-distiller
   repository_path: CodexSkills/registry/codex/persona-distiller
-  customization: Codex 默认路径恢复为 ~/.codex/skills，并增加七类产物唯一登记。
+  customization: Codex 单路径安装；七类唯一登记；运行身份自动路由；调用不编号；人物产物按人独立编号。
 capability_contract:
   required_inputs:
     - target_name
@@ -20,14 +20,14 @@ capability_contract:
   uniqueness: 同一人物只允许一个 canonical 登记；多重身份只进入多重身份目录。
   public_registry_policy: 拒绝 private/self 产物、原始材料、Holdout、私密来源正文和疑似秘密。
 verification:
-  offline_tests: 43
-  offline_tests_passed: 43
-  immutable_checksum_entries: 204
+  offline_tests: 45
+  offline_tests_passed: 45
+  immutable_checksum_entries: 203
   persona_registry_validator: scripts/validate_persona_registry.py
   repository_secret_gate: CodexSkills/sync_skills.py
 controlled_iteration:
   status: candidate_for_acceptance
-  version_policy: 保持 builder v0.0.0.3；人物 model_version 与运行 artifact_version 独立。
+  version_policy: builder v0.0.0.4；人物产物按 canonical 人物使用 0.0.0.1..0.0.0.999；运行不编号。
   sync_route: codex/persona-distiller -> registry/codex/persona-distiller
   update_command: python3 CodexSkills/sync_skills.py --only codex/persona-distiller --no-commit
   promotion_gate: 全部测试、校验和、唯一登记校验、凭据硬门与远端回读必须通过。

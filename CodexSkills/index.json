@@ -453,11 +453,11 @@
       "slug": "persona-distiller",
       "source": "codex",
       "name": "persona-distiller",
-      "description": "Build, audit, update, package, or uniquely register an evidence-grounded target-person Agent Skill that can plan and execute work through the target's documented capabilities, strategies, cognition, decision policy, work system, temperament, and boundaries. Required build inputs are only the target person's name and one of six identity families or a weighted multi-identity selection; scenario is optional and otherwise inferred. Use for six-lane public/private/fictional research, source-universe coverage, Work/Persona separation, identity-weight routing, agentic task execution, invocation versioning 0.0.0.N, corrections, evaluation, refinement, rollback, one installable ZIP delivery, and deduplicated publication under one of seven product-registration folders. 中文名称：人物蒸馏 Skill。",
+      "description": "Build, audit, update, package, or uniquely register an evidence-grounded target-person Agent Skill that can plan and execute work through the target's documented capabilities, strategies, cognition, decision policy, work system, temperament, and boundaries. Required build inputs are only the target person's name and one of six identity families or a weighted multi-identity selection; scenario is optional and otherwise inferred. Use for six-lane public/private/fictional research, source-universe coverage, Work/Persona separation, automatic internal identity routing, agentic task execution without per-invocation versions, corrections, evaluation, refinement, rollback, one installable ZIP delivery, and per-person product releases 0.0.0.1 through 0.0.0.999 under one of seven unique registration folders. 中文名称：人物蒸馏 Skill。",
       "category": "工程与交付",
       "entry": "registry/codex/persona-distiller/SKILL.md",
-      "file_count": 207,
-      "size_bytes": 490967
+      "file_count": 206,
+      "size_bytes": 493785
     },
     {
       "slug": "project-cost-table-skill",

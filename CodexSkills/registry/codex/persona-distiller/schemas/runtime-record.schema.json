@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "artifacts": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "sha256": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "size_bytes": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "source_name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "source_name",
+          "sha256",
+          "size_bytes"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "error": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "identity_route": {
+      "type": "object"
+    },
+    "privacy_mode": {
+      "enum": [
+        "metadata",
+        "content"
+      ]
+    },
+    "recorded_at": {
+      "type": "string"
+    },
+    "result_summary": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "scenarios": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "1.0"
+    },
+    "status": {
+      "enum": [
+        "completed",
+        "failed"
+      ]
+    },
+    "task_content": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "task_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "status",
+    "recorded_at",
+    "task_sha256",
+    "privacy_mode",
+    "identity_route",
+    "scenarios",
+    "artifacts"
+  ],
+  "title": "Unnumbered runtime audit record",
+  "type": "object"
+}

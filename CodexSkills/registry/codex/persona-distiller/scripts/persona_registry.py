@@ -1,24 +1,31 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import contextlib
 import hashlib
 import json
+import os
 import re
 import shutil
 import stat
+import tempfile
+import time
 import unicodedata
 import zipfile
 from pathlib import Path, PurePosixPath
-from typing import Any
+from typing import Any, Iterator
 
 from common import SECRET_PATTERNS, atomic_write_json, sha256_file
 
-REGISTRY_SCHEMA_VERSION = '1.0'
+REGISTRY_SCHEMA_VERSION = '2.0'
+BUILDER_VERSION = 'v0.0.0.4'
 REGISTRY_INDEX_NAME = 'persona-registry-index.json'
 LEGACY_REGISTRY_DIR = '产物登记'
 PRIVATE_ORIGINS = {'private', 'self'}
 SAFE_COMPONENT = re.compile(r'^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$')
 SAFE_SLUG = re.compile(r'^[a-z0-9]+(?:-[a-z0-9]+)*$')
+PRODUCT_VERSION = re.compile(r'^0\.0\.0\.([1-9][0-9]{0,2})$')
+PRODUCT_VERSION_SCOPE = 'per-canonical-person'
 HEX_SHA256 = re.compile(r'^[0-9a-f]{64}$')
 TEXT_SUFFIXES = {
     '.csv', '.json', '.jsonl', '.md', '.py', '.rst', '.sh', '.toml', '.tsv', '.txt', '.yaml', '.yml',
@@ -56,6 +63,93 @@ def canonical_key(name: str, subject_origin: str) -> str:
 def subject_uid(name: str, subject_origin: str) -> str:
     digest = hashlib.sha256(canonical_key(name, subject_origin).encode('utf-8')).hexdigest()
     return f'person-{digest[:16]}'
+
+
+def product_version_serial(value: str) -> int:
+    match = PRODUCT_VERSION.fullmatch(value)
+    if not match:
+        raise ValueError('product version must be 0.0.0.1 through 0.0.0.999')
+    serial = int(match.group(1))
+    if serial > 999:
+        raise ValueError('product version maximum is 0.0.0.999')
+    return serial
+
+
+def next_product_version(versions: list[dict[str, Any]]) -> str:
+    serials = sorted(product_version_serial(str(item.get('product_version', ''))) for item in versions)
+    if len(serials) != len(set(serials)):
+        raise ValueError('duplicate product version in canonical person registration')
+    if serials and serials != list(range(1, serials[-1] + 1)):
+        raise ValueError(f'product versions must be contiguous from 0.0.0.1; found {serials}')
+    last = serials[-1] if serials else 0
+    if last >= 999:
+        raise ValueError('product version range exhausted at 0.0.0.999')
+    return f'0.0.0.{last + 1}'
+
+
+@contextlib.contextmanager
+def registry_lock(registry_root: Path, timeout: float = 30.0) -> Iterator[None]:
+    identity = hashlib.sha256(str(registry_root.resolve()).encode('utf-8')).hexdigest()[:20]
+    lock_path = Path(tempfile.gettempdir()) / f'persona-distiller-registry-{identity}.lock'
+    handle = lock_path.open('a+b')
+    started = time.monotonic()
+    try:
+        try:
+            import fcntl  # type: ignore
+        except ImportError:
+            fcntl = None  # type: ignore
+        if fcntl is not None:
+            while True:
+                try:
+                    fcntl.flock(handle.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+                    break
+                except BlockingIOError:
+                    if time.monotonic() - started > timeout:
+                        raise TimeoutError('persona product registry lock timeout')
+                    time.sleep(0.02)
+            try:
+                yield
+            finally:
+                fcntl.flock(handle.fileno(), fcntl.LOCK_UN)
+            return
+
+        try:
+            import msvcrt  # type: ignore
+        except ImportError:
+            msvcrt = None  # type: ignore
+        if msvcrt is not None:
+            while True:
+                try:
+                    handle.seek(0)
+                    msvcrt.locking(handle.fileno(), msvcrt.LK_NBLCK, 1)
+                    break
+                except OSError:
+                    if time.monotonic() - started > timeout:
+                        raise TimeoutError('persona product registry lock timeout')
+                    time.sleep(0.02)
+            try:
+                yield
+            finally:
+                handle.seek(0)
+                msvcrt.locking(handle.fileno(), msvcrt.LK_UNLCK, 1)
+            return
+
+        sentinel = lock_path.with_suffix('.exclusive')
+        while True:
+            try:
+                fd = os.open(sentinel, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
+                os.close(fd)
+                break
+            except FileExistsError:
+                if time.monotonic() - started > timeout:
+                    raise TimeoutError(f'persona product registry lock timeout; inspect {sentinel}')
+                time.sleep(0.02)
+        try:
+            yield
+        finally:
+            sentinel.unlink(missing_ok=True)
+    finally:
+        handle.close()
 
 
 def _safe_zip_members(archive: zipfile.ZipFile) -> tuple[str, dict[str, zipfile.ZipInfo]]:
@@ -199,8 +293,8 @@ def inspect_target_zip(zip_path: Path) -> dict[str, Any]:
         }
         if not isinstance(privacy, dict) or any(privacy.get(key) != value for key, value in expected_privacy.items()):
             raise ValueError('target package privacy contract is missing or unsafe')
-        if manifest.get('builder') != 'persona-distiller' or manifest.get('builder_version') != 'v0.0.0.3':
-            raise ValueError('target package was not built by persona-distiller v0.0.0.3')
+        if manifest.get('builder') != 'persona-distiller' or manifest.get('builder_version') != BUILDER_VERSION:
+            raise ValueError(f'target package was not built by persona-distiller {BUILDER_VERSION}')
         if manifest.get('top_level_count') != 1:
             raise ValueError('target package manifest must declare one top-level directory')
         if meta.get('subject_origin') in PRIVATE_ORIGINS:
@@ -208,6 +302,7 @@ def inspect_target_zip(zip_path: Path) -> dict[str, Any]:
         name = meta.get('name')
         slug = meta.get('slug')
         model_version = manifest.get('model_version')
+        product_version = manifest.get('product_version')
         if not isinstance(name, str) or not name.strip():
             raise ValueError('target meta.json name is required')
         if not isinstance(slug, str) or not SAFE_SLUG.fullmatch(slug):
@@ -218,6 +313,13 @@ def inspect_target_zip(zip_path: Path) -> dict[str, Any]:
             raise ValueError(f'invalid model version: {model_version!r}')
         if meta.get('model_version') != model_version:
             raise ValueError('target meta and package manifest model versions disagree')
+        if not isinstance(product_version, str):
+            raise ValueError('target package product_version is required')
+        product_version_serial(product_version)
+        if meta.get('product_version') != product_version:
+            raise ValueError('target meta and package manifest product versions disagree')
+        if meta.get('runtime_invocation_versioning') is not False:
+            raise ValueError('target package must disable per-invocation versioning')
         selection = meta.get('identity_selection')
         if not isinstance(selection, dict):
             raise ValueError('target identity_selection must be an object')
@@ -238,6 +340,7 @@ def inspect_target_zip(zip_path: Path) -> dict[str, Any]:
         'identity_family_id': category['identity_family_id'],
         'identity_mode': category['identity_mode'],
         'category': category['folder'],
+        'product_version': product_version,
         'model_version': model_version,
         'builder_version': str(manifest.get('builder_version')),
         'artifact_created_at': str(manifest.get('created_at') or meta.get('updated_at') or ''),
@@ -261,13 +364,27 @@ def load_records(registry_root: Path) -> list[tuple[Path, dict[str, Any]]]:
     return records
 
 
+def next_product_version_for(name: str, subject_origin: str, registry_root: Path | None = None) -> str:
+    registry_root = (registry_root or default_registry_root()).expanduser().resolve()
+    key = canonical_key(name, subject_origin)
+    matches = [
+        record
+        for _, record in load_records(registry_root)
+        if record.get('canonical_key') == key or record.get('subject_uid') == subject_uid(name, subject_origin)
+    ]
+    if len(matches) > 1:
+        raise ValueError('canonical person is duplicated across registry folders')
+    versions = list(matches[0].get('versions') or []) if matches else []
+    return next_product_version(versions)
+
+
 def build_index(registry_root: Path, records: list[tuple[Path, dict[str, Any]]] | None = None) -> dict[str, Any]:
     records = load_records(registry_root) if records is None else records
     products: list[dict[str, Any]] = []
     counts = {item['folder']: 0 for item in CATEGORIES}
     for path, record in records:
         versions = record.get('versions') or []
-        latest = sorted(versions, key=lambda item: (str(item.get('artifact_created_at', '')), str(item.get('model_version', ''))))[-1]
+        latest = max(versions, key=lambda item: product_version_serial(str(item.get('product_version', ''))))
         category = str(record.get('registration_category'))
         if category in counts:
             counts[category] += 1
@@ -279,7 +396,8 @@ def build_index(registry_root: Path, records: list[tuple[Path, dict[str, Any]]] 
             'registration_category': category,
             'identity_family_id': record.get('identity_family_id'),
             'registration': path.relative_to(registry_root).as_posix(),
-            'latest_model_version': latest.get('model_version'),
+            'latest_product_version': latest.get('product_version'),
+            'latest_model_snapshot': latest.get('model_version'),
             'latest_artifact': f"{path.parent.relative_to(registry_root).as_posix()}/{latest.get('artifact')}",
             'latest_sha256': latest.get('sha256'),
             'version_count': len(versions),
@@ -300,9 +418,7 @@ def write_index(registry_root: Path, records: list[tuple[Path, dict[str, Any]]] 
     return index
 
 
-def register_product(zip_path: Path, registry_root: Path | None = None) -> dict[str, Any]:
-    registry_root = (registry_root or default_registry_root()).expanduser().resolve()
-    product = inspect_target_zip(zip_path)
+def _register_inspected_product(product: dict[str, Any], registry_root: Path) -> dict[str, Any]:
     category = CATEGORY_BY_FOLDER[product['category']]
     category_root = registry_root / category['folder']
     if not (category_root / '_category.json').is_file():
@@ -352,11 +468,11 @@ def register_product(zip_path: Path, registry_root: Path | None = None) -> dict[
     if not isinstance(versions, list):
         raise ValueError(f'invalid versions array: {record_path}')
     for version in versions:
-        if version.get('model_version') != product['model_version']:
+        if version.get('product_version') != product['product_version']:
             continue
         if version.get('sha256') != product['sha256']:
             raise ValueError(
-                f'model version {product["model_version"]} is already registered with a different artifact hash'
+                f'product version {product["product_version"]} is already registered with a different artifact hash'
             )
         artifact = record_path.parent / str(version.get('artifact'))
         if artifact.is_file() and sha256_file(artifact) == product['sha256']:
@@ -370,15 +486,21 @@ def register_product(zip_path: Path, registry_root: Path | None = None) -> dict[
                 'index_products': len(index['products']),
             }
         break
-    safe_model = product['model_version'].replace('-draft', '')
-    artifact_name = f'{product["subject_slug"]}-persona-skill-v{safe_model}.zip'
-    artifact_relative = Path('versions') / product['model_version'] / artifact_name
+    expected_version = next_product_version(versions)
+    if product['product_version'] != expected_version:
+        raise ValueError(
+            f'next product version for this person is {expected_version}; '
+            f'package declares {product["product_version"]}'
+        )
+    artifact_name = f'{product["subject_slug"]}-persona-skill-v{product["product_version"]}.zip'
+    artifact_relative = Path('versions') / product['product_version'] / artifact_name
     artifact = record_path.parent / artifact_relative
     artifact.parent.mkdir(parents=True, exist_ok=True)
     if artifact.exists() and sha256_file(artifact) != product['sha256']:
         raise ValueError(f'artifact destination exists with a different hash: {artifact}')
     shutil.copy2(product['zip_path'], artifact)
     version_record = {
+        'product_version': product['product_version'],
         'model_version': product['model_version'],
         'artifact': artifact_relative.as_posix(),
         'sha256': product['sha256'],
@@ -388,13 +510,13 @@ def register_product(zip_path: Path, registry_root: Path | None = None) -> dict[
     }
     replaced = False
     for index, version in enumerate(versions):
-        if version.get('model_version') == product['model_version']:
+        if version.get('product_version') == product['product_version']:
             versions[index] = version_record
             replaced = True
             break
     if not replaced:
         versions.append(version_record)
-    versions.sort(key=lambda item: (str(item.get('artifact_created_at', '')), str(item.get('model_version', ''))))
+    versions.sort(key=lambda item: product_version_serial(str(item.get('product_version', ''))))
     atomic_write_json(record_path, record)
     records = [(path, value) for path, value in records if path != record_path]
     records.append((record_path, record))
@@ -405,9 +527,17 @@ def register_product(zip_path: Path, registry_root: Path | None = None) -> dict[
         'artifact': str(artifact),
         'subject_uid': product['subject_uid'],
         'category': product['category'],
+        'product_version': product['product_version'],
         'sha256': product['sha256'],
         'index_products': len(index['products']),
     }
+
+
+def register_product(zip_path: Path, registry_root: Path | None = None) -> dict[str, Any]:
+    registry_root = (registry_root or default_registry_root()).expanduser().resolve()
+    product = inspect_target_zip(zip_path)
+    with registry_lock(registry_root):
+        return _register_inspected_product(product, registry_root)
 
 
 def validate_registry(registry_root: Path | None = None) -> dict[str, Any]:
@@ -485,21 +615,26 @@ def validate_registry(registry_root: Path | None = None) -> dict[str, Any]:
             errors.append(f'{path}: versions must contain at least one release')
             continue
         seen_versions: set[str] = set()
+        serials: list[int] = []
         for version in versions:
             if not isinstance(version, dict):
                 errors.append(f'{path}: version entry must be an object')
                 continue
-            model_version = str(version.get('model_version', ''))
-            if model_version in seen_versions:
-                errors.append(f'{path}: duplicate model version {model_version}')
-            seen_versions.add(model_version)
+            product_version = str(version.get('product_version', ''))
+            try:
+                serials.append(product_version_serial(product_version))
+            except ValueError as exc:
+                errors.append(f'{path}: {exc}')
+            if product_version in seen_versions:
+                errors.append(f'{path}: duplicate product version {product_version}')
+            seen_versions.add(product_version)
             relative = Path(str(version.get('artifact', '')))
             if (
                 relative.is_absolute()
                 or '..' in relative.parts
                 or len(relative.parts) != 3
                 or relative.parts[0] != 'versions'
-                or relative.parts[1] != model_version
+                or relative.parts[1] != product_version
             ):
                 errors.append(f'{path}: invalid artifact path {relative}')
                 continue
@@ -530,7 +665,7 @@ def validate_registry(registry_root: Path | None = None) -> dict[str, Any]:
                     'subject_origin': record.get('subject_origin'),
                     'category': record.get('registration_category'),
                     'identity_family_id': record.get('identity_family_id'),
-                    'model_version': model_version,
+                    'product_version': product_version,
                     'sha256': checksum,
                 }
                 for key, expected in comparisons.items():
@@ -538,6 +673,8 @@ def validate_registry(registry_root: Path | None = None) -> dict[str, Any]:
                         errors.append(f'{path}: artifact {key} mismatch for {relative}')
             except (OSError, ValueError, zipfile.BadZipFile) as exc:
                 errors.append(f'{path}: invalid artifact {relative}: {exc}')
+        if serials and sorted(serials) != list(range(1, max(serials) + 1)):
+            errors.append(f'{path}: product versions must be contiguous from 0.0.0.1')
     expected_index = build_index(registry_root, records)
     index_path = registry_index_path(registry_root)
     try:

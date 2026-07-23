@@ -3,13 +3,23 @@
   "additionalProperties": true,
   "properties": {
     "builder_version": {
-      "const": "v0.0.0.3"
+      "const": "v0.0.0.4"
     },
     "identity_selection": {
       "$ref": "identity-selection.schema.json"
     },
     "model_version": {
       "type": "string"
+    },
+    "product_version": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^0\\.0\\.0\\.(?:[1-9]|[1-9][0-9]|[1-9][0-9]{2})$"
+    },
+    "runtime_invocation_versioning": {
+      "const": false
     },
     "name": {
       "minLength": 1,
@@ -55,7 +65,9 @@
     "profile",
     "status",
     "builder_version",
-    "model_version"
+    "model_version",
+    "product_version",
+    "runtime_invocation_versioning"
   ],
   "title": "Persona Distiller target metadata",
   "type": "object"

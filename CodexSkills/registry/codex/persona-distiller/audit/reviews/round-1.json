@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-23T05:06:15Z",
+  "generated_at": "2026-07-23T07:22:38Z",
   "method": "six isolated reviewer checklists; not six independently running models",
   "passed": true,
   "reviews": [
@@ -64,12 +64,12 @@
         },
         {
           "detail": "all required tokens present",
-          "name": "identity-gate",
+          "name": "automatic-identity-routing",
           "passed": true
         },
         {
           "detail": "present",
-          "name": "version-ledger",
+          "name": "unnumbered-runtime-audit",
           "passed": true
         },
         {
@@ -141,7 +141,7 @@
           "passed": true
         },
         {
-          "detail": "files=218; >25MB=[]",
+          "detail": "files=206; >25MB=[]",
           "name": "file-budget",
           "passed": true
         },

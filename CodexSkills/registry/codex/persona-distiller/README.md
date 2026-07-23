@@ -1,11 +1,11 @@
 # 人物蒸馏 Skill / Persona Distiller
 
-Persona Distiller 将公开人物、经授权的私域人物、自己、历史或虚构人物，构建为可安装的 Agent Skill。目标不是“像他说话”，而是让宿主 Agent 在明确身份选择后，调用目标人物的证据化能力、策略、认知、决策、工作方式和性格来真实完成任务。
+Persona Distiller 将公开人物、经授权的私域人物、自己、历史或虚构人物，构建为可安装的 Agent Skill。目标不是“像他说话”，而是让宿主 Agent 直接调用目标人物的证据化能力、策略、认知、决策、工作方式和性格来真实完成任务。身份分面由人物 Skill 根据当前任务在内部自动路由，运行用户不需要选择身份。
 
 ## 最短使用路径
 
 ```bash
-unzip PersonaDistiller-Final-v0.0.0.3.zip
+unzip PersonaDistiller-Final-v0.0.0.4.zip
 cd persona-distiller
 python3 scripts/self_check.py
 python3 scripts/install.py install
@@ -38,11 +38,11 @@ python3 scripts/init_target.py \
   --workspace ./workspaces
 ```
 
-场景可省略；运行时从任务自动路由。研究、综合、评测完成后：
+场景可省略；运行时从任务自动路由内部身份和场景。研究、综合、评测完成后：
 
 ```bash
 python3 scripts/package_target.py ./workspaces/<slug> --output ./dist
-python3 scripts/register_persona.py ./dist/<slug>-persona-skill-vX.Y.Z.zip
+python3 scripts/register_persona.py ./dist/<slug>-persona-skill-v0.0.0.N.zip
 python3 scripts/validate_persona_registry.py
 ```
 
@@ -72,21 +72,25 @@ python3 scripts/validate_persona_registry.py
 | `多重身份/` | weighted multi-identity |
 
 - 单身份产物进入对应目录；多重身份只进入 `多重身份/`，不得复制到组成身份目录。
-- 同一人物的新模型版本追加到原人物目录，不新建第二条人物登记。
+- 同一人物的每次新蒸馏产物追加到原人物目录，不新建第二条人物登记。
 - 完整、通过发布门的目标人物 Skill ZIP 保存在
-  `<分类>/<人物>/versions/<model_version>/`；七个分类目录直接位于本 Skill 根目录。
+  `<分类>/<人物>/versions/<product_version>/`；七个分类目录直接位于本 Skill 根目录。
 - 根级 `persona-registry-index.json` 是自动生成的检索视图，不是第二份登记。
 - 重分类必须移动原登记；跨目录重复 `subject_uid`、人物规范键或产物 hash
   都是硬错误。
 - 公开仓不得登记原始私域正文、Holdout、凭据或未脱敏身份信息。
 
-## 三种版本，禁止混用
+## 版本边界，禁止混用
 
-- `builder_version`：本工具版本，例如 `v0.0.0.3`；
-- `model_version`：人物模型经过研究/纠错后的语义版本；
-- `artifact_version`：每个已接受运行的不可变序号 `0.0.0.N`。
+- `builder_version`：人物蒸馏器版本，当前为 `v0.0.0.4`；
+- `model_version`：研究工作区内部的语义快照，不作为公开产物编号；
+- `product_version`：同一 canonical 人物独立递增的发布产物编号，范围为 `0.0.0.1` 至 `0.0.0.999`。
 
-版本号在身份选择完成、任务开始前占用。聊天答复标记该版本，新建文件使用同一版本并登记 hash；失败仍保留序号；只显示身份菜单的未开始请求不占号。
+候选包根据登记库计算下一个可用产物版本；只有质检、打包和登记全部成功后才正式占号，失败不占号。人物 Skill 的单次运行没有版本号，不显示运行版本，也不强制给输出文件名添加版本后缀。
+
+## 目标人物 Skill 的调用合同
+
+安装目标人物 Skill 后，用户直接调用它并描述任务。Skill 从已蒸馏分面中自动选择或组合内部身份并推断场景；不得要求用户选择身份、编号或权重。七类身份目录只是唯一登记位置，不是运行能力边界。
 
 ## 安全默认
 

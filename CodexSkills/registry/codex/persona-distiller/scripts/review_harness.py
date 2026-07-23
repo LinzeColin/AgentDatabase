@@ -92,15 +92,24 @@ def package_privacy_contract() -> tuple[bool, str]:
 
 
 def runtime_contract() -> tuple[bool, str]:
-    manager = (ROOT / 'templates/target/scripts/invocation_manager.py').read_text(encoding='utf-8')
+    recorder = (ROOT / 'templates/target/scripts/runtime_recorder.py').read_text(encoding='utf-8')
+    router = (ROOT / 'templates/target/scripts/runtime_router.py').read_text(encoding='utf-8')
     skill = (ROOT / 'templates/target/SKILL.md.tmpl').read_text(encoding='utf-8')
     required = [
-        "version = f'0.0.0.{serial}'", "failed_runs_consume_serial", '每个新的实质任务都必须先获得本次身份选择',
-        '用宿主可用工具真实执行', '不得用人物口吻伪造成功',
+        "'user_selection_required': False", "'invocation_version': None", '直接调用，不设身份门',
+        '用宿主可用工具真实执行', '不得用人物口吻伪造成功', 'FORBIDDEN_VERSION_FIELDS',
     ]
-    aggregate = manager + '\n' + skill + '\n' + (ROOT / 'references/agentic-runtime.md').read_text(encoding='utf-8') + '\n' + (ROOT / 'scripts/route_engine.py').read_text(encoding='utf-8')
+    aggregate = recorder + '\n' + router + '\n' + skill + '\n' + (ROOT / 'references/agentic-runtime.md').read_text(encoding='utf-8') + '\n' + (ROOT / 'scripts/route_engine.py').read_text(encoding='utf-8')
     missing = [item for item in required if item not in aggregate]
     return not missing, f'missing={missing}'
+
+
+def product_version_contract() -> tuple[bool, str]:
+    return contains(
+        'scripts/persona_registry.py',
+        '0.0.0.999', 'next_product_version', 'per-canonical-person',
+        'product version range exhausted', 'registry_lock',
+    )
 
 
 def model_separation_contract() -> tuple[bool, str]:
@@ -147,8 +156,8 @@ def checks_for_role(role: str, round_number: int) -> list[tuple[str, Callable[[]
         ],
         'agentic-execution': [
             ('runtime-loop', runtime_contract),
-            ('identity-gate', lambda: contains('templates/target/SKILL.md.tmpl', '每次先选身份', '然后停止')),
-            ('version-ledger', lambda: exists('templates/target/scripts/invocation_manager.py', 'schemas/invocation.schema.json')),
+            ('automatic-identity-routing', lambda: contains('templates/target/SKILL.md.tmpl', '直接调用，不设身份门', '自动选择或组合内部身份')),
+            ('unnumbered-runtime-audit', lambda: exists('templates/target/scripts/runtime_recorder.py', 'schemas/runtime-record.schema.json')),
             ('minimal-routing', lambda: contains('templates/target/scripts/runtime_router.py', 'load_files', 'Do not load source bodies')),
         ],
         'evaluation': [
@@ -182,9 +191,9 @@ def checks_for_role(role: str, round_number: int) -> list[tuple[str, Callable[[]
                 ('private-source-minimization', lambda: contains('scripts/package_target.py', 'sanitized_sources', 'local_path', 'private')),
             ],
             'agentic-execution': [
-                ('crash-recovery', lambda: contains('templates/target/scripts/invocation_manager.py', 'recover', 'interrupted-before-terminal-record')),
-                ('state-history-reconciliation', lambda: contains('templates/target/scripts/invocation_manager.py', 'max(history', 'state/history mismatch')),
-                ('artifact-hash-manifest', lambda: contains('templates/target/scripts/invocation_manager.py', 'artifact-manifest.json', 'sha256')),
+                ('concurrent-unnumbered-audit', lambda: contains('templates/target/scripts/runtime_recorder.py', 'file_lock', 'append_jsonl')),
+                ('no-runtime-versioning', lambda: not_contains('templates/target/SKILL.md.tmpl', 'invocation_manager.py', '运行版本：', '--identity')),
+                ('artifact-hash-audit', lambda: contains('templates/target/scripts/runtime_recorder.py', 'sha256_file', 'artifacts')),
             ],
             'evaluation': [
                 ('identity-and-anonymous-evals', lambda: exists('prompts/eval-identity-routing.md', 'prompts/eval-anonymous-fidelity.md')),
@@ -199,6 +208,7 @@ def checks_for_role(role: str, round_number: int) -> list[tuple[str, Callable[[]
                 ('installed-copy-verification', lambda: contains('templates/target/install.py.tmpl', 'installed_verification', 'verify_payload(destination)')),
                 ('deterministic-one-root-zip', lambda: contains('scripts/package_target.py', 'deterministic_zip', 'top_level_count')),
                 ('current-skill-root', lambda: contains('scripts/install.py', "'.codex' / 'skills'", 'conflicting source exists')),
+                ('per-person-product-version', product_version_contract),
             ],
         }
         checks.extend(adversarial[role])

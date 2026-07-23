@@ -12,27 +12,41 @@ from helpers import create_target, run_target_script
 
 
 class RuntimeConcurrencyTests(unittest.TestCase):
-    def test_concurrent_allocations_are_unique_and_contiguous(self) -> None:
+    def test_concurrent_audit_records_remain_complete_and_unnumbered(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             target = create_target(Path(tmp))
-            script = target / 'scripts' / 'invocation_manager.py'
+            script = target / 'scripts' / 'runtime_recorder.py'
 
-            def allocate(index: int) -> int:
+            def record(index: int) -> dict[str, object]:
                 completed = subprocess.run(
-                    [sys.executable, str(script), 'begin', '--identity', '1', '--task', f'job-{index}', '--lock-timeout', '30'],
-                    cwd=target, text=True, capture_output=True, timeout=60,
+                    [
+                        sys.executable,
+                        str(script),
+                        'record',
+                        '--status',
+                        'completed',
+                        '--task',
+                        f'job-{index}',
+                        '--lock-timeout',
+                        '30',
+                    ],
+                    cwd=target,
+                    text=True,
+                    capture_output=True,
+                    timeout=60,
                 )
                 if completed.returncode != 0:
                     raise AssertionError(completed.stderr)
-                return json.loads(completed.stdout)['serial']
+                return json.loads(completed.stdout)
 
             with concurrent.futures.ThreadPoolExecutor(max_workers=12) as pool:
-                serials = list(pool.map(allocate, range(1, 31)))
-            self.assertEqual(sorted(serials), list(range(1, 31)))
-            verify = json.loads(run_target_script(target, 'invocation_manager.py', 'verify').stdout)
+                records = list(pool.map(record, range(1, 31)))
+            self.assertEqual(len(records), 30)
+            self.assertTrue(all(not {'run_id', 'artifact_version', 'serial'} & set(item) for item in records))
+            verify = json.loads(run_target_script(target, 'runtime_recorder.py', 'verify').stdout)
             self.assertTrue(verify['valid'], verify)
-            self.assertEqual(verify['last_serial'], 30)
-            self.assertEqual(verify['run_count'], 30)
+            self.assertEqual(verify['record_count'], 30)
+            self.assertEqual(verify['numbered_records'], 0)
 
 
 if __name__ == '__main__':

@@ -14,6 +14,7 @@ from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from common import atomic_write_json, ensure_dir, ensure_target, parse_frontmatter, read_jsonl, scan_secrets, sha256_file, utc_now
+from persona_registry import default_registry_root, next_product_version_for
 
 CORE_FILES = [
     'SKILL.md', 'README.md', 'install.py', 'install.sh', 'install.ps1', 'meta.json', 'identity-catalog.json', 'route-manifest.json',
@@ -41,10 +42,12 @@ def package_timestamp(meta: dict[str, Any]) -> str:
     return str(meta.get('updated_at') or meta.get('created_at') or '2026-07-23T00:00:00Z')
 
 
-def sanitized_meta(meta: dict[str, Any]) -> dict[str, Any]:
+def sanitized_meta(meta: dict[str, Any], product_version: str) -> dict[str, Any]:
     clean = dict(meta)
     for key in ['consent_authority', 'retention_policy', 'last_rollback']:
         clean.pop(key, None)
+    clean['product_version'] = product_version
+    clean['runtime_invocation_versioning'] = False
     clean['packaged_at'] = package_timestamp(meta)
     clean['package_mode'] = 'runtime'
     return clean
@@ -79,6 +82,8 @@ def main() -> int:
     parser = argparse.ArgumentParser(description='Build one clean installable target-person Skill ZIP.')
     parser.add_argument('target', type=Path)
     parser.add_argument('--output', type=Path, default=Path('./dist'))
+    parser.add_argument('--registry-root', type=Path, default=default_registry_root())
+    parser.add_argument('--product-version', help='Optional assertion; must equal the registry-derived next product version.')
     parser.add_argument('--skip-quality', action='store_true')
     parser.add_argument('--include-audit-summary', action='store_true')
     parser.add_argument('--allow-secret-pattern', action='store_true')
@@ -98,6 +103,16 @@ def main() -> int:
             print(result.stdout, file=sys.stderr)
             print(result.stderr, file=sys.stderr)
             parser.error('strict release quality gate failed')
+    product_version = next_product_version_for(
+        str(meta.get('name', '')),
+        str(meta.get('subject_origin', '')),
+        args.registry_root,
+    )
+    if args.product_version and args.product_version != product_version:
+        parser.error(
+            f'--product-version {args.product_version} is not the next available version '
+            f'for this person; expected {product_version}'
+        )
     with tempfile.TemporaryDirectory(prefix='persona-target-package-') as tmp:
         staging_parent = Path(tmp)
         staging = staging_parent / target.name
@@ -108,7 +123,7 @@ def main() -> int:
         for rel in CORE_DIRS:
             if (target / rel).is_dir():
                 shutil.copytree(target / rel, staging / rel, dirs_exist_ok=True, ignore=shutil.ignore_patterns('__pycache__', '*.pyc'))
-        atomic_write_json(staging / 'meta.json', sanitized_meta(meta), mode=0o600)
+        atomic_write_json(staging / 'meta.json', sanitized_meta(meta, product_version), mode=0o600)
         write_jsonl(staging / 'evidence' / 'claims.jsonl', read_jsonl(target / 'evidence' / 'claims.jsonl'))
         write_jsonl(staging / 'evidence' / 'source-ledger.jsonl', sanitized_sources(target))
         write_jsonl(staging / 'corrections' / 'corrections.jsonl', [])
@@ -116,12 +131,7 @@ def main() -> int:
         for rel in ['memory/user-overlay.md', 'memory/procedural.md', 'memory/promotion-queue.md']:
             if (target / rel).is_file():
                 copy_file(target / rel, staging / rel)
-        atomic_write_json(staging / 'runtime' / 'state.json', {
-            'schema_version': '1.1', 'target_slug': target.name, 'last_serial': 0,
-            'last_artifact_version': None, 'last_identity_selection': None, 'updated_at': package_timestamp(meta)
-        }, mode=0o600)
         write_jsonl(staging / 'runtime' / 'invocations.jsonl', [])
-        ensure_dir(staging / 'runtime' / 'runs')
         if args.include_audit_summary:
             for rel in ['reports/quality-release.json', 'research/coverage-map.json', 'research/saturation-report.md']:
                 if (target / rel).is_file():
@@ -140,7 +150,8 @@ def main() -> int:
         (staging / 'checksums.sha256').write_text(checksums, encoding='utf-8')
         manifest = {
             'schema_version': '2.0', 'name': target.name, 'target_name': meta.get('name'),
-            'builder': 'persona-distiller', 'builder_version': 'v0.0.0.3', 'model_version': meta.get('model_version'),
+            'builder': 'persona-distiller', 'builder_version': 'v0.0.0.4',
+            'product_version': product_version, 'model_version': meta.get('model_version'),
             'created_at': package_timestamp(meta), 'top_level_count': 1,
             'privacy': {'raw_included': False, 'holdout_included': False, 'private_source_bodies_included': False, 'runtime_history_reset': True},
             'files': records,
@@ -149,8 +160,7 @@ def main() -> int:
         output = args.output.expanduser().resolve()
         if output.suffix.lower() != '.zip':
             output.mkdir(parents=True, exist_ok=True)
-            safe_model = str(meta.get('model_version', '0.1.0')).replace('-draft', '').replace('/', '-')
-            output = output / f'{target.name}-persona-skill-v{safe_model}.zip'
+            output = output / f'{target.name}-persona-skill-v{product_version}.zip'
         deterministic_zip(staging, output)
         checksum = sha256_file(output)
         Path(str(output) + '.sha256').write_text(f'{checksum}  {output.name}\n', encoding='utf-8')
@@ -158,7 +168,10 @@ def main() -> int:
         'package': str(output),
         'sha256': checksum,
         'top_level': target.name,
-        'runtime_counter_reset_to': 0,
+        'product_version': product_version,
+        'product_version_consumed': False,
+        'runtime_records_reset': True,
+        'runtime_invocation_versioning': False,
         'registration_required': True,
         'register_command': f'python3 scripts/register_persona.py {output}',
     }, ensure_ascii=False, indent=2))

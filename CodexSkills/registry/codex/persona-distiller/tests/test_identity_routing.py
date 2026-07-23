@@ -91,39 +91,43 @@ class IdentityRoutingTests(unittest.TestCase):
                 self.assertEqual(json.loads(created.stdout)['status'], 'draft')
                 # Remove before the next origin reuses a distinct slug only for clarity.
 
-    def test_runtime_router_loads_selected_facets_and_infers_scenario(self) -> None:
+    def test_runtime_router_uses_distilled_facets_without_user_identity_input(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             target = create_target(Path(tmp), identity='1:60+4:40')
-            menu = run_target_script(target, 'runtime_router.py', 'menu').stdout
-            self.assertIn('请选择本次身份', menu)
             plan = json.loads(run_target_script(
-                target, 'runtime_router.py', 'plan', '--identity', '1:70+4:30',
-                '--task', '请诊断代码架构并评审产品设计',
+                target, 'runtime_router.py', 'plan', '--task', '请诊断代码架构并评审产品设计',
             ).stdout)
             self.assertIn('research-problem-solving', plan['scenarios'])
             self.assertIn('identity-facets/technical-engineer.md', plan['load_files'])
             self.assertIn('identity-facets/developer-designer.md', plan['load_files'])
+            self.assertFalse(plan['identity_route']['user_selection_required'])
+            self.assertEqual(plan['identity_route']['strategy'], 'automatic-task-routing')
             self.assertFalse(any('/raw/' in item or 'references/research/' in item for item in plan['load_files']))
+            rejected = run_target_script(
+                target, 'runtime_router.py', 'plan', '--identity', '1', '--task', 'x', check=False,
+            )
+            self.assertNotEqual(rejected.returncode, 0)
 
 
     def test_empty_scenario_uses_identity_prior_without_user_scene_input(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             target = create_target(Path(tmp), identity='3')
             plan = json.loads(run_target_script(
-                target, 'runtime_router.py', 'plan', '--identity', '3', '--task', '请处理这件事'
+                target, 'runtime_router.py', 'plan', '--task', '请处理这件事'
             ).stdout)
-            self.assertEqual(plan['route_basis']['primary_basis'], 'identity-prior')
+            self.assertEqual(plan['route_basis']['primary_basis'], 'distilled-identity-prior')
             self.assertEqual(plan['scenarios'][0], 'investment-business')
             self.assertIn('scenario-adapters/investment-business.md', plan['load_files'])
 
-    def test_route_plan_has_identity_gate_and_runtime_version_contract(self) -> None:
+    def test_route_plan_automates_identity_and_disables_invocation_versions(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             target = create_target(Path(tmp), identity='2')
             route = json.loads((target / 'route-manifest.json').read_text())
-            self.assertTrue(route['runtime_identity_gate']['required_each_substantive_invocation'])
-            self.assertFalse(route['runtime_identity_gate']['aborted_gate_consumes_version'])
-            self.assertEqual(route['runtime_versioning']['format'], '0.0.0.N')
-            self.assertTrue(route['runtime_versioning']['failed_runs_consume_serial'])
+            self.assertEqual(route['runtime_identity_routing']['mode'], 'automatic')
+            self.assertFalse(route['runtime_identity_routing']['user_selection_required'])
+            self.assertFalse(route['runtime_invocation_versioning']['enabled'])
+            self.assertEqual(route['product_release_versioning']['scope'], 'per-canonical-person')
+            self.assertEqual(route['product_release_versioning']['maximum'], '0.0.0.999')
 
 
 if __name__ == '__main__':

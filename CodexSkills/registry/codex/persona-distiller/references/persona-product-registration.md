@@ -18,10 +18,11 @@
 
 1. 同一人物只能有一个 canonical `registration.json`，不得在不同身份目录重复登记。
 2. 单身份按 `identity_selection.primary` 自动归类；加权或多身份产物一律进入 `多重身份/`。
-3. 完整发布 ZIP 保存为 `<分类>/<人物>/versions/<model_version>/*.zip`；同版本不同哈希会被拒绝。
-4. 根级 `persona-registry-index.json` 是脚本生成的发现视图，不是第二份登记；不得手工制造平行记录。
-5. 公共 GitHub 登记拒绝 `private`、`self` 产物，以及包含原始材料、Holdout、私密来源正文或疑似秘密的包。
-6. 每次登记后必须运行 `python3 scripts/validate_persona_registry.py`，再通过仓库同步流程更新 `CodexSkills/README.md` 的人物产物清单。
+3. 每个 canonical 人物独立使用 `0.0.0.1` 至 `0.0.0.999` 的连续 `product_version`；完整发布 ZIP 保存为 `<分类>/<人物>/versions/<product_version>/*.zip`。
+4. 产物版本只在成功登记后正式占用；失败不占号，跳号、复用、同号异哈希和超过 `0.0.0.999` 都会被拒绝。
+5. 根级 `persona-registry-index.json` 是脚本生成的发现视图，不是第二份登记；不得手工制造平行记录。
+6. 公共 GitHub 登记拒绝 `private`、`self` 产物，以及包含原始材料、Holdout、私密来源正文或疑似秘密的包。
+7. 每次登记后必须运行 `python3 scripts/validate_persona_registry.py`，再通过仓库同步流程更新 `CodexSkills/README.md` 的人物产物清单。
 
 登记命令：
 

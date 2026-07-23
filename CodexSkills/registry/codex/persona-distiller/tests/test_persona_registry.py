@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import concurrent.futures
 import hashlib
 import json
 import sys
@@ -9,7 +10,14 @@ import zipfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
-from persona_registry import CATEGORIES, register_product, validate_registry, write_index
+from persona_registry import (
+    CATEGORIES,
+    next_product_version,
+    next_product_version_for,
+    register_product,
+    validate_registry,
+    write_index,
+)
 
 
 def initialize_registry(root: Path) -> None:
@@ -17,7 +25,7 @@ def initialize_registry(root: Path) -> None:
         folder = root / category['folder']
         folder.mkdir(parents=True)
         (folder / '_category.json').write_text(json.dumps({
-            'schema_version': '1.0',
+            'schema_version': '2.0',
             'folder': category['folder'],
             'identity_family_id': category['identity_family_id'],
             'identity_mode': category['identity_mode'],
@@ -34,6 +42,7 @@ def create_product_zip(
     mode: str = 'single',
     origin: str = 'public',
     model_version: str = '0.1.0',
+    product_version: str = '0.0.0.1',
 ) -> Path:
     top = slug
     selection = {
@@ -48,6 +57,8 @@ def create_product_zip(
         'subject_origin': origin,
         'identity_selection': selection,
         'model_version': model_version,
+        'product_version': product_version,
+        'runtime_invocation_versioning': False,
     }
     payloads = {
         'SKILL.md': f'---\nname: {slug}\ndescription: Synthetic registry fixture.\n---\n',
@@ -63,7 +74,8 @@ def create_product_zip(
         'name': slug,
         'target_name': name,
         'builder': 'persona-distiller',
-        'builder_version': 'v0.0.0.3',
+        'builder_version': 'v0.0.0.4',
+        'product_version': product_version,
         'model_version': model_version,
         'created_at': '2026-07-23T00:00:00Z',
         'top_level_count': 1,
@@ -108,6 +120,7 @@ class PersonaRegistryTests(unittest.TestCase):
             product = create_product_zip(root / 'person.zip')
             result = register_product(product, registry)
             self.assertEqual(result['category'], '技术工程')
+            self.assertEqual(result['product_version'], '0.0.0.1')
             self.assertTrue(Path(result['artifact']).is_file())
             self.assertTrue(validate_registry(registry)['passed'])
 
@@ -135,6 +148,77 @@ class PersonaRegistryTests(unittest.TestCase):
             repeated = register_product(product, registry)
             self.assertEqual(repeated['action'], 'already-registered')
             self.assertEqual(validate_registry(registry)['products'], 1)
+
+    def test_same_person_distillations_receive_contiguous_product_versions(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            registry = root / 'registry'
+            initialize_registry(registry)
+            first = create_product_zip(root / 'one.zip', product_version='0.0.0.1')
+            second = create_product_zip(
+                root / 'two.zip',
+                product_version='0.0.0.2',
+                model_version='0.1.0',
+            )
+            register_product(first, registry)
+            result = register_product(second, registry)
+            registration = json.loads(Path(result['registration']).read_text(encoding='utf-8'))
+            self.assertEqual(
+                [item['product_version'] for item in registration['versions']],
+                ['0.0.0.1', '0.0.0.2'],
+            )
+            self.assertTrue(validate_registry(registry)['passed'])
+
+    def test_out_of_sequence_product_version_is_rejected_without_consuming_number(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            registry = root / 'registry'
+            initialize_registry(registry)
+            skipped = create_product_zip(root / 'skipped.zip', product_version='0.0.0.2')
+            with self.assertRaisesRegex(ValueError, 'next product version.*0.0.0.1'):
+                register_product(skipped, registry)
+            self.assertEqual(validate_registry(registry)['products'], 0)
+            self.assertEqual(next_product_version_for('Example Person', 'public', registry), '0.0.0.1')
+
+    def test_product_version_range_starts_at_one_and_hard_stops_at_999(self) -> None:
+        self.assertEqual(next_product_version([]), '0.0.0.1')
+        self.assertEqual(
+            next_product_version([
+                {'product_version': f'0.0.0.{serial}'}
+                for serial in range(1, 999)
+            ]),
+            '0.0.0.999',
+        )
+        with self.assertRaisesRegex(ValueError, 'exhausted'):
+            next_product_version([
+                {'product_version': f'0.0.0.{serial}'}
+                for serial in range(1, 1000)
+            ])
+
+    def test_concurrent_competing_first_releases_cannot_both_take_same_number(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            registry = root / 'registry'
+            initialize_registry(registry)
+            candidates = [
+                create_product_zip(root / 'one.zip', model_version='snapshot-a'),
+                create_product_zip(root / 'two.zip', model_version='snapshot-b'),
+            ]
+
+            def attempt(path: Path) -> str:
+                try:
+                    return str(register_product(path, registry)['action'])
+                except ValueError as exc:
+                    return f'ERROR:{exc}'
+
+            with concurrent.futures.ThreadPoolExecutor(max_workers=2) as pool:
+                outcomes = list(pool.map(attempt, candidates))
+            self.assertEqual(sum(value == 'registered' for value in outcomes), 1)
+            self.assertEqual(sum(value.startswith('ERROR:') for value in outcomes), 1)
+            validation = validate_registry(registry)
+            self.assertTrue(validation['passed'], validation)
+            self.assertEqual(validation['artifacts'], 1)
+            self.assertEqual(next_product_version_for('Example Person', 'public', registry), '0.0.0.2')
 
     def test_same_subject_cannot_be_registered_in_another_category(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

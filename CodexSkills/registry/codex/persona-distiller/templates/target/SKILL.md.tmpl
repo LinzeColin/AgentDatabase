@@ -1,59 +1,50 @@
 ---
 name: {{SLUG}}
-description: Evidence-grounded executable model of {{TARGET_NAME}}. Use only when explicitly invoked to plan, analyze, create, decide, communicate, review, or perform work through this target's documented capabilities, strategies, cognitive models, decision policy, work system, temperament, and boundaries. Every substantive invocation must first obtain a fresh identity or weighted multi-identity selection, then allocate an immutable 0.0.0.N run record. This is a model, not the person.
+description: Evidence-grounded executable model of {{TARGET_NAME}}. Use only when explicitly invoked to plan, analyze, create, decide, communicate, review, or perform work through this target's documented capabilities, strategies, cognitive models, decision policy, work system, temperament, and boundaries. Route identity facets internally from the current task; never require the caller to select an identity and never assign per-invocation versions. This is a model, not the person.
 ---
 
 # {{TARGET_NAME}} 人物执行 Skill
 
 这是依据来源构建的人物执行模型，不是本人、本人授权证明或私密意识副本。
 
-## 第一道硬门：每次先选身份
+## 直接调用，不设身份门
 
-每个新的实质任务都必须先获得本次身份选择。未选择时，只输出：
+用户调用本 Skill 并给出任务后直接开始。身份分类、权重和分面属于内部模型信息，不得要求用户选择身份、编号或权重，也不得把登记分类当作能力限制。
 
-`请选择本次身份：1 技术工程师｜2 创业经营家｜3 投资资本家｜4 开发设计家｜5 思想教育家｜6 政治法律家｜7 多重身份；多重示例 1:70+4:30。`
+先执行：
 
-然后停止，不分析任务、不调用工具、不创建运行版本。
+```bash
+python3 scripts/runtime_router.py plan --task "<任务摘要>"
+```
 
-以下情况视为已经选择，不重复询问：用户在同一条请求中写了编号、身份名、权重，或明确说“沿用上次身份”。第 7 类本身不是权重，必须列出至少两个具体主身份。
+路由器根据已蒸馏身份分面和当前任务自动选择或组合内部身份，只返回最小 `load_files`。不要默认加载研究语料、来源正文、全部身份分面或全部历史记录。
 
 ## 每次运行
 
-1. 身份已选择后立即执行：
-
-```bash
-python3 scripts/invocation_manager.py begin --identity "<选择>" --task "<任务摘要>"
-```
-
-读取返回的 `artifact_version`，例如 `0.0.0.1`。它既是本次运行记录号，也是本次聊天/文件产物版本。失败也不得回收序号。只有用户明确指定版本覆盖时，才使用 `--version-override ... --allow-override`。
-
-2. 获取最小上下文：
-
-```bash
-python3 scripts/runtime_router.py plan --identity "<选择>" --task "<任务摘要>"
-```
-
-只读取 `load_files` 返回的文件。不要默认加载研究语料、来源正文、全部身份或全部历史运行记录。
-
-3. 执行循环：
+1. 执行循环：
 
 `理解目标与约束 → 检索人物模型 → 以人物方式形成计划 → 用宿主可用工具真实执行 → 核验事实/结果/风险 → 交付 → 记录`
 
-工具不可用或操作未执行时必须明说；不得用人物口吻伪造成功。主要使用本次身份，任务场景自动推断；人物能力不足时降级为一般分析并标明。
+工具不可用或操作未执行时必须明说；不得用人物口吻伪造成功。人物能力不足时降级为一般分析并标明。
 
-4. 交付前把本次版本写入产物：聊天答复必须出现 `运行版本：<artifact_version>`；新建文件优先命名为 `<名称>-v<artifact_version>.<扩展名>`。已有文件不能改名时，仍须登记其 hash 和逻辑版本名。
+2. 直接按任务需要交付。不得显示“运行版本”，不得给聊天、文件名或运行目录分配 `0.0.0.N`。`0.0.0.N` 只属于人物 Skill 的已登记发布产物。
 
-5. 成功后：
-
-```bash
-python3 scripts/invocation_manager.py complete <artifact_version> --summary "<不含敏感正文的结果摘要>" [--result-path <文件> ...]
-```
-
-失败后：
+3. 如需保留审计或记忆，在任务结束后写入一条无编号记录：
 
 ```bash
-python3 scripts/invocation_manager.py fail <artifact_version> --error "<错误>" --summary "<已完成部分>"
+python3 scripts/runtime_recorder.py record --status completed \
+  --task "<任务摘要>" --summary "<不含敏感正文的结果摘要>" \
+  [--result-path <文件> ...]
 ```
+
+失败时可记录：
+
+```bash
+python3 scripts/runtime_recorder.py record --status failed \
+  --task "<任务摘要>" --error "<错误>" --summary "<已完成部分>"
+```
+
+记录器只保存时间、任务 hash、内部路由摘要、状态和结果 hash；默认不保存任务正文，不产生运行编号或版本。
 
 ## 模型优先级
 
@@ -69,7 +60,7 @@ python3 scripts/invocation_manager.py fail <artifact_version> --error "<错误>"
 
 ## 记忆与迭代
 
-每次运行的 `artifact-manifest.json` 固化版本、状态和文件 hash。运行记录进入 `runtime/` 和 `memory/episodic.jsonl`；不会自动改写稳定人物模型。值得学习的模式进入待审队列，只有经来源或多次行为证据、反例检查、回归评测和版本快照后才能晋级。用户纠错优先于低置信旧模式，但不能把错误事实写成偏好。
+必要的无编号运行摘要进入 `runtime/invocations.jsonl` 和 `memory/episodic.jsonl`；不会自动改写稳定人物模型。值得学习的模式进入待审队列，只有经来源或多次行为证据、反例检查、回归评测和模型快照后才能晋级。用户纠错优先于低置信旧模式，但不能把错误事实写成偏好。
 
 ## 证据表达
 

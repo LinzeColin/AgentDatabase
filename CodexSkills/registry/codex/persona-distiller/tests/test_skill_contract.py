@@ -78,13 +78,21 @@ class SkillContractTests(unittest.TestCase):
             self.assertNotEqual(tampered.returncode, 0)
             self.assertIn('checksum mismatch', tampered.stderr)
 
-    def test_package_has_single_top_level_and_runtime_state_is_reset(self) -> None:
+    def test_package_has_single_top_level_product_version_and_unnumbered_runtime_reset(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             target = create_target(root)
             populate_release_ready(target, root / 'materials')
             subprocess.run(
-                [sys.executable, str(target / 'scripts/invocation_manager.py'), 'begin', '--identity', '1', '--task', 'internal run'],
+                [
+                    sys.executable,
+                    str(target / 'scripts/runtime_recorder.py'),
+                    'record',
+                    '--status',
+                    'completed',
+                    '--task',
+                    'internal run',
+                ],
                 cwd=target, text=True, check=True, capture_output=True,
             )
             package = root / 'target.zip'
@@ -93,10 +101,15 @@ class SkillContractTests(unittest.TestCase):
                 names = archive.namelist()
                 top_levels = {name.split('/', 1)[0] for name in names if name}
                 self.assertEqual(top_levels, {target.name})
-                state = json.loads(archive.read(f'{target.name}/runtime/state.json'))
+                meta = json.loads(archive.read(f'{target.name}/meta.json'))
+                manifest = json.loads(archive.read(f'{target.name}/PACKAGE_MANIFEST.json'))
                 invocations = archive.read(f'{target.name}/runtime/invocations.jsonl').decode('utf-8')
                 episodic = archive.read(f'{target.name}/memory/episodic.jsonl').decode('utf-8')
-            self.assertEqual(state['last_serial'], 0)
+                self.assertFalse(any('/runtime/runs/' in name for name in names))
+                self.assertFalse(any(name.endswith('/runtime/state.json') for name in names))
+            self.assertEqual(meta['product_version'], '0.0.0.1')
+            self.assertEqual(manifest['product_version'], '0.0.0.1')
+            self.assertFalse(meta['runtime_invocation_versioning'])
             self.assertEqual(invocations, '')
             self.assertEqual(episodic, '')
 

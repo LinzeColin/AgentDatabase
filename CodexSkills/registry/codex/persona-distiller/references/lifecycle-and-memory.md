@@ -1,10 +1,11 @@
 # Lifecycle, corrections and memory
 
-Three version axes:
+Release and snapshot boundaries:
 
-- Builder release `v0.0.0.3`.
-- Target model semantic version, changed only after evidence/eval promotion.
-- Per-invocation artifact `0.0.0.N`, monotonically increasing and never reused.
+- Builder release `v0.0.0.4`.
+- Internal target-model semantic snapshots, changed only after evidence/eval promotion.
+- Published person-Skill product version `0.0.0.1` through `0.0.0.999`, allocated independently per canonical person and consumed only by successful registration.
+- Runtime invocations are unversioned.
 
 Memory layers:
 
@@ -16,3 +17,5 @@ Memory layers:
 - promotion queue: candidate lessons awaiting evidence and regression tests.
 
 Update rule: snapshot → append new source/correction → impact graph → minimal patch → targeted and global regression → Architect proposal → Skeptic challenge → promote or rollback. One-off convenience must not become a global character rule.
+
+Repeated distillation of the same person may produce multiple published products even when the internal semantic snapshot label is unchanged. Registration order, not invocation count, determines `product_version`.

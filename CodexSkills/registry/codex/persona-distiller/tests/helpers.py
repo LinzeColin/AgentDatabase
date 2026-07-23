@@ -84,7 +84,7 @@ def _substantive_model(title: str, claim_markers: str = '') -> str:
     paragraphs.extend([
         '', '## Limits', '',
         'This fixture does not claim real-person fidelity. It exists only to validate contracts, packaging, routing, '
-        'evaluation plumbing, provenance handling, and immutable runtime records.',
+        'evaluation plumbing, provenance handling, and privacy-minimized unnumbered runtime records.',
     ])
     return '\n\n'.join(paragraphs).rstrip() + '\n'
 

@@ -38,3 +38,6 @@ imported into `~/.codex/sessions` on this machine.
 `软开设计/`、`思想教育/`、`政治法律/`、`多重身份/` 直接位于 Skill 根目录；
 完整发布 ZIP 与 canonical 登记保存在相应目录，生成索引为
 [`persona-registry-index.json`](CodexSkills/registry/codex/persona-distiller/persona-registry-index.json)。
+身份目录只用于唯一登记；安装后用户直接调用对应人物 Skill，内部自动路由身份与场景，
+不要求用户选择身份。每个 canonical 人物的成功蒸馏产物独立使用
+`0.0.0.1` 至 `0.0.0.999` 连续版本；单次运行没有版本编号。

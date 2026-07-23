@@ -48,14 +48,14 @@ def main() -> int:
     ]
     manifest['files'] = records
     manifest['distribution'] = {
-        'kind': 'repository-customized-v0.0.0.3',
+        'kind': 'repository-customized-v0.0.0.4',
         'source_archive_sha256': 'e891912d98d14afb7677ac935a19be329d97d206f4ae74a644892f46b17f6748',
     }
     manifest['mutable_paths'] = {
         'excluded_from_release_checksums': [
             REGISTRY_INDEX_NAME,
             '<分类>/<人物>/registration.json',
-            '<分类>/<人物>/versions/<model_version>/*.zip',
+            '<分类>/<人物>/versions/<product_version>/*.zip',
         ],
         'validation': 'python3 scripts/validate_persona_registry.py',
     }

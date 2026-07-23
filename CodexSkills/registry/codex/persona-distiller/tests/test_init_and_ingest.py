@@ -21,9 +21,14 @@ class InitAndIngestTests(unittest.TestCase):
             self.assertEqual(meta['profile'], 'quick')
             self.assertEqual(meta['status'], 'draft')
             self.assertEqual(meta['identity_selection']['primary'], 'thinker-educator')
+            self.assertEqual(meta['builder_version'], 'v0.0.0.4')
+            self.assertIsNone(meta['product_version'])
+            self.assertFalse(meta['runtime_invocation_versioning'])
             self.assertTrue((target / 'route-manifest.json').is_file())
-            self.assertTrue((target / 'runtime/state.json').is_file())
-            self.assertTrue((target / 'scripts/invocation_manager.py').is_file())
+            self.assertTrue((target / 'runtime/invocations.jsonl').is_file())
+            self.assertTrue((target / 'scripts/runtime_recorder.py').is_file())
+            self.assertFalse((target / 'runtime/state.json').exists())
+            self.assertFalse((target / 'scripts/invocation_manager.py').exists())
 
     def test_ingest_text_subtitle_email_and_holdout_protection(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

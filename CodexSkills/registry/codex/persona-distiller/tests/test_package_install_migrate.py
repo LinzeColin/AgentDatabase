@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import os
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -28,6 +29,33 @@ class PackageInstallMigrateTests(unittest.TestCase):
             self.assertFalse(any('/references/sources/' in name for name in names))
             self.assertTrue(any(name.endswith('/install.py') for name in names))
             self.assertTrue(any(name.endswith('/checksums.sha256') for name in names))
+
+    def test_successful_registration_advances_only_that_persons_next_product_version(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            target = create_target(root)
+            populate_release_ready(target, root / 'materials')
+            registry = root / 'registry'
+            skill_root = Path(__file__).resolve().parents[1]
+            registry.mkdir()
+            for category in ('技术工程', '企业领导', '金融投资', '软开设计', '思想教育', '政治法律', '多重身份'):
+                shutil.copytree(skill_root / category, registry / category)
+            shutil.copy2(skill_root / 'persona-registry-index.json', registry / 'persona-registry-index.json')
+            first = root / 'first.zip'
+            run_script('package_target.py', target, '--output', first, '--registry-root', registry)
+            with zipfile.ZipFile(first) as archive:
+                first_manifest = json.loads(archive.read(f'{target.name}/PACKAGE_MANIFEST.json'))
+            self.assertEqual(first_manifest['product_version'], '0.0.0.1')
+            run_script('register_persona.py', first, '--registry-root', registry)
+
+            second = root / 'second.zip'
+            run_script('package_target.py', target, '--output', second, '--registry-root', registry)
+            with zipfile.ZipFile(second) as archive:
+                second_manifest = json.loads(archive.read(f'{target.name}/PACKAGE_MANIFEST.json'))
+            self.assertEqual(second_manifest['product_version'], '0.0.0.2')
+            self.assertTrue(json.loads(run_script(
+                'validate_persona_registry.py', '--registry-root', registry,
+            ).stdout)['passed'])
 
     def test_installer_copy_backup_status_and_uninstall(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

@@ -52,11 +52,11 @@ def build_route(name: str, identity_spec: str, scenario: str | None = None, subj
         'scenario_policy': 'user-provided-primary' if scenario else 'infer-per-task',
         'build_depth': depth,
         'runtime_readiness': readiness,
-        'runtime_identity_gate': {
-            'required_each_substantive_invocation': True,
-            'selection_may_be_in_same_request': True,
-            'reuse_requires_explicit_phrase': '沿用上次身份',
-            'aborted_gate_consumes_version': False,
+        'runtime_identity_routing': {
+            'mode': 'automatic',
+            'source': 'distilled-identity-selection',
+            'user_selection_required': False,
+            'task_reweighting': True,
         },
         'research': {
             'base_lanes': ['writings', 'conversations', 'expression', 'external', 'decisions', 'timeline'],
@@ -70,12 +70,18 @@ def build_route(name: str, identity_spec: str, scenario: str | None = None, subj
             'cognitive-os.md', 'decision-policy.md', 'strategy.md', 'capabilities.md',
             'work.md', 'persona.md', 'scenario-adapters/<inferred>.md', 'divergence-map.md'
         ],
-        'runtime_versioning': {
+        'runtime_invocation_versioning': {
+            'enabled': False,
+            'user_visible_version': False,
+            'versioned_output_names': False,
+            'audit_records': 'optional-unnumbered',
+        },
+        'product_release_versioning': {
             'format': '0.0.0.N',
-            'allocate_after_identity_selection': True,
-            'failed_runs_consume_serial': True,
-            'serial_reuse_forbidden': True,
-            'override_requires_explicit_user_instruction': True,
+            'minimum': '0.0.0.1',
+            'maximum': '0.0.0.999',
+            'scope': 'per-canonical-person',
+            'consumed_on': 'successful-registration',
         },
     }
 

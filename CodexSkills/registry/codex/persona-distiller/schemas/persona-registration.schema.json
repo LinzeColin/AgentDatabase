@@ -18,7 +18,7 @@
   ],
   "properties": {
     "schema_version": {
-      "const": "1.0"
+      "const": "2.0"
     },
     "subject_uid": {
       "type": "string",
@@ -74,10 +74,12 @@
     "versions": {
       "type": "array",
       "minItems": 1,
+      "maxItems": 999,
       "items": {
         "type": "object",
         "additionalProperties": false,
         "required": [
+          "product_version",
           "model_version",
           "artifact",
           "sha256",
@@ -86,13 +88,17 @@
           "artifact_created_at"
         ],
         "properties": {
+          "product_version": {
+            "type": "string",
+            "pattern": "^0\\.0\\.0\\.(?:[1-9]|[1-9][0-9]|[1-9][0-9]{2})$"
+          },
           "model_version": {
             "type": "string",
             "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
           },
           "artifact": {
             "type": "string",
-            "pattern": "^versions/[^/]+/[^/]+\\.zip$"
+            "pattern": "^versions/0\\.0\\.0\\.(?:[1-9]|[1-9][0-9]|[1-9][0-9]{2})/[^/]+\\.zip$"
           },
           "sha256": {
             "type": "string",
@@ -103,7 +109,7 @@
             "minimum": 1
           },
           "builder_version": {
-            "const": "v0.0.0.3"
+            "const": "v0.0.0.4"
           },
           "artifact_created_at": {
             "type": "string"

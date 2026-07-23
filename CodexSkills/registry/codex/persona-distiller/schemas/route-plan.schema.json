@@ -6,7 +6,9 @@
     "identity_selection",
     "build_depth",
     "research",
-    "runtime_versioning"
+    "runtime_identity_routing",
+    "runtime_invocation_versioning",
+    "product_release_versioning"
   ],
   "title": "Build route",
   "type": "object"

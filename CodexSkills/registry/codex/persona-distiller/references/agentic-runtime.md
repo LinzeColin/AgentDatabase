@@ -1,10 +1,10 @@
 # Agentic runtime
 
-## Per-invocation state machine
+## Direct invocation state machine
 
-`WAIT_IDENTITY → ALLOCATED → PLANNED → ACTING → VERIFYING → COMPLETED|FAILED`
+`RECEIVED → INTERNAL_ROUTE → PLANNED → ACTING → VERIFYING → COMPLETED|FAILED`
 
-Identity questions do not consume a serial. `begin` atomically consumes `0.0.0.N`; terminal failures keep it. A run directory is immutable except the single transition from `started` to one terminal status.
+The caller invokes the installed person Skill and states a task. The Skill must not ask for an identity, number, or weight. It automatically selects or combines distilled identity facets and infers scenarios from the task. Identity categories remain internal routing and product-registration metadata.
 
 ## Execution quality
 
@@ -16,8 +16,8 @@ Before acting: identify objective, constraints, reversibility, unknowns, require
 
 The router returns only required files. Do not preload source bodies, all identity facets, all run history or full evidence ledgers. Retrieve source/Claim detail only for audits, citations, contested reasoning or high-stakes checks.
 
-## Output artifact contract
+## Output and audit contract
 
-Every accepted invocation receives one immutable `0.0.0.N`. The final chat response displays `运行版本：0.0.0.N`; newly created files use `-v0.0.0.N` when practical. `runtime/runs/0.0.0.N/artifact-manifest.json` records status, logical versioned names and hashes. A failed or interrupted invocation keeps its serial.
+Invocations have no version number. Do not display a runtime version, append `0.0.0.N` to files, or create numbered run directories. `0.0.0.N` is reserved for successfully registered person-Skill products.
 
-Use `invocation_manager.py recover --older-than-seconds N` to close stale started runs after a crash; never delete and reuse them.
+When audit or memory is useful, append one optional unnumbered record after completion or failure with `runtime_recorder.py`. Store the task hash by default, not task content. Record timestamps, internal routing summary, status, result summary, and result hashes without a serial or run version.

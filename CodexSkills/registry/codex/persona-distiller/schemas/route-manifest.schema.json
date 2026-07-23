@@ -8,9 +8,10 @@
   },
   "required": [
     "identity_selection",
-    "runtime_identity_gate",
+    "runtime_identity_routing",
     "research",
-    "runtime_versioning"
+    "runtime_invocation_versioning",
+    "product_release_versioning"
   ],
   "title": "Route manifest",
   "type": "object"

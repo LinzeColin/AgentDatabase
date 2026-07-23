@@ -14,7 +14,7 @@
     {
       "skill_id": "persona-distiller",
       "source": "codex",
-      "version": "0.0.0.3",
+      "version": "0.0.0.4",
       "status": "candidate_for_acceptance",
       "entry": "codex/persona-distiller/registry.yaml",
       "skill_entry": "codex/persona-distiller/SKILL.md",

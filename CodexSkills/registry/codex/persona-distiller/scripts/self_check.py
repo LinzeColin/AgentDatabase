@@ -46,18 +46,22 @@ def main() -> int:
     version = (root / 'VERSION').read_text(encoding='utf-8').strip() if (root / 'VERSION').is_file() else None
     manifest = read_json(root / 'manifest.json', default={}) or {}
     checks['version'] = version
-    if version != 'v0.0.0.3' or manifest.get('version') != version:
+    if version != 'v0.0.0.4' or manifest.get('version') != version:
         errors.append(f'version mismatch: VERSION={version!r}, manifest={manifest.get("version")!r}')
+    if manifest.get('runtime_identity_routing') != 'automatic':
+        errors.append('manifest must declare automatic runtime identity routing')
+    if manifest.get('runtime_invocation_versioning') is not False:
+        errors.append('manifest must disable per-invocation versioning')
 
     required = [
         'README.md', 'LICENSE', 'THIRD_PARTY_NOTICES.md', 'SECURITY.md', 'handoff.md',
         'agents/openai.yaml', 'registries/identity-families.json',
         'templates/target/SKILL.md.tmpl', 'templates/target/agents/openai.yaml.tmpl',
-        'templates/target/scripts/invocation_manager.py', 'templates/target/scripts/runtime_router.py',
+        'templates/target/scripts/runtime_recorder.py', 'templates/target/scripts/runtime_router.py',
         'scripts/identity.py', 'scripts/route_engine.py', 'scripts/init_target.py',
         'scripts/package_target.py', 'scripts/register_persona.py', 'scripts/validate_persona_registry.py',
         'scripts/persona_registry.py', 'scripts/build_manifest.py', 'scripts/install.py',
-        'scripts/review_harness.py', 'schemas/persona-registration.schema.json',
+        'scripts/review_harness.py', 'schemas/persona-registration.schema.json', 'schemas/runtime-record.schema.json',
         'persona-registry-index.json', 'references/persona-product-registration.md',
         'audit/10-round-improvement.md', 'audit/2x6-review.md',
     ]
@@ -117,11 +121,18 @@ def main() -> int:
         errors.append(f'source package contains symlinks: {symlinks}')
 
     # Detect stale operational contracts without rejecting historical changelog/audit references.
-    active_files = [root / 'SKILL.md', root / 'README.md', root / 'scripts/init_target.py', root / 'templates/target/SKILL.md.tmpl']
+    active_files = [
+        root / 'SKILL.md', root / 'README.md', root / 'scripts/init_target.py',
+        root / 'scripts/route_engine.py', root / 'templates/target/SKILL.md.tmpl',
+        root / 'templates/target/scripts/runtime_router.py',
+    ]
     for path in active_files:
         text = path.read_text(encoding='utf-8')
         if '--subject-type' in text or "builder-version: \"v0.0.0.1\"" in text:
             errors.append(f'stale v1 operational contract in {path.relative_to(root)}')
+        for token in ['invocation_manager.py', 'runtime_identity_gate', '运行版本：']:
+            if token in text:
+                errors.append(f'stale numbered runtime token {token!r} in {path.relative_to(root)}')
 
     registry_check = subprocess.run(
         [sys.executable, str(root / 'scripts' / 'validate_persona_registry.py')],

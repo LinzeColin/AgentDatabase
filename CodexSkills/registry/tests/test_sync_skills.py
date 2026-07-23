@@ -27,8 +27,8 @@ class SyncSkillsRegistryRoutingTests(unittest.TestCase):
                 "products": [{
                     "canonical_name": "Example Person",
                     "registration_category": "技术工程",
-                    "latest_model_version": "0.1.0",
-                    "latest_artifact": "技术工程/example/versions/0.1.0/example.zip",
+                    "latest_product_version": "0.0.0.1",
+                    "latest_artifact": "技术工程/example/versions/0.0.0.1/example.zip",
                 }],
             }), encoding="utf-8")
             mirror_root = root / "CodexSkills"
@@ -72,6 +72,8 @@ class SyncSkillsRegistryRoutingTests(unittest.TestCase):
             )
             readme = (mirror_root / "README.md").read_text(encoding="utf-8")
             self.assertIn("不得在不同身份下重复登记", readme)
+            self.assertIn("单次运行不编号", readme)
+            self.assertIn("0.0.0.1", readme)
             self.assertIn("Example Person", readme)
             self.assertIn("persona-distiller/技术工程/", readme)
             self.assertNotIn("persona-distiller/产物登记/", readme)

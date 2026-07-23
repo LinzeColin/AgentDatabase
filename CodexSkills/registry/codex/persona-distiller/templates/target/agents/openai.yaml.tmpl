@@ -1,6 +1,6 @@
 interface:
   display_name: {{TARGET_NAME_YAML}}
-  short_description: "证据化人物执行 Skill；每次任务先选择身份"
-  default_prompt: "使用 ${{SLUG}} 完成当前任务；先要求我选择身份或权重，再开始执行并记录 0.0.0.N。"
+  short_description: "证据化人物执行 Skill；内部自动路由身份与场景"
+  default_prompt: "使用 ${{SLUG}} 按已蒸馏的人物模型直接完成当前任务。"
 policy:
   allow_implicit_invocation: false

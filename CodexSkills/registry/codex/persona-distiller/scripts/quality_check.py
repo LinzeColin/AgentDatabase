@@ -29,8 +29,8 @@ REQUIRED_FILES = (
     'SKILL.md', 'README.md', 'meta.json', 'identity-catalog.json', 'route-manifest.json',
     'facts.md', 'cognitive-os.md', 'decision-policy.md', 'strategy.md', 'capabilities.md',
     'persona.md', 'work.md', 'boundaries.md', 'hypotheses.md', 'divergence-map.md',
-    'agents/openai.yaml', 'scripts/invocation_manager.py', 'scripts/runtime_router.py',
-    'runtime/state.json', 'evidence/source-ledger.jsonl',
+    'agents/openai.yaml', 'scripts/runtime_recorder.py', 'scripts/runtime_router.py',
+    'runtime/invocations.jsonl', 'evidence/source-ledger.jsonl',
     'evidence/claims.jsonl', 'corrections/corrections.jsonl',
     'corrections/ACTIVE.md', 'evals/cases.jsonl', 'evals/results.jsonl',
 )
@@ -374,23 +374,30 @@ def evaluate_runtime_contract(report: Report, target: Path, meta: dict[str, Any]
                 report.error('route.identity-sum', f'identity weights sum to {total}, not 1.0')
             if selection.get('mode') == 'multi' and len(weights) < 2:
                 report.error('route.identity-multi-count', 'multi identity requires at least two weighted main identities')
-        gate = route.get('runtime_identity_gate', {})
-        if not gate.get('required_each_substantive_invocation'):
-            report.error('route.identity-gate', 'runtime identity gate is not mandatory')
-        versioning = route.get('runtime_versioning', {})
-        if versioning.get('format') != '0.0.0.N' or not versioning.get('serial_reuse_forbidden'):
-            report.error('route.versioning', 'runtime versioning contract is incomplete')
+        routing = route.get('runtime_identity_routing', {})
+        if routing.get('mode') != 'automatic' or routing.get('user_selection_required') is not False:
+            report.error('route.identity-routing', 'runtime identity routing must be automatic and require no user selection')
+        runtime_versioning = route.get('runtime_invocation_versioning', {})
+        if (
+            runtime_versioning.get('enabled') is not False
+            or runtime_versioning.get('user_visible_version') is not False
+            or runtime_versioning.get('versioned_output_names') is not False
+        ):
+            report.error('route.runtime-versioning', 'per-invocation versioning must be disabled')
+        product_versioning = route.get('product_release_versioning', {})
+        if (
+            product_versioning.get('format') != '0.0.0.N'
+            or product_versioning.get('scope') != 'per-canonical-person'
+            or product_versioning.get('consumed_on') != 'successful-registration'
+        ):
+            report.error('route.product-versioning', 'product release versioning contract is incomplete')
     except (OSError, json.JSONDecodeError, ValueError) as exc:
         report.error('route.invalid', str(exc))
 
-    try:
-        state = json.loads((target / 'runtime/state.json').read_text(encoding='utf-8'))
-        if int(state.get('last_serial', -1)) < 0:
-            report.error('runtime.counter', 'last_serial must be >= 0')
-        if state.get('target_slug') != target.name:
-            report.error('runtime.slug', 'runtime state target_slug must match directory')
-    except (OSError, json.JSONDecodeError, ValueError, TypeError) as exc:
-        report.error('runtime.state-invalid', str(exc))
+    if meta.get('runtime_invocation_versioning') is not False:
+        report.error('runtime.versioning-enabled', 'target metadata must disable per-invocation versioning')
+    if meta.get('product_version') is not None:
+        report.warn('product.version-preassigned', 'workspace product_version is normally assigned only while packaging')
 
     for rel in ('cognitive-os.md', 'decision-policy.md', 'strategy.md', 'capabilities.md', 'work.md', 'persona.md', 'boundaries.md', 'divergence-map.md'):
         path = target / rel

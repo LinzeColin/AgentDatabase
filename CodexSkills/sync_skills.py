@@ -393,6 +393,9 @@ def build_index(mirror_root):
         "[`思想教育/`](registry/codex/persona-distiller/思想教育/)、"
         "[`政治法律/`](registry/codex/persona-distiller/政治法律/)、"
         "[`多重身份/`](registry/codex/persona-distiller/多重身份/)。",
+        "身份分类由人物 Skill 内部使用，不是调用门槛；用户安装后直接调用对应人物 Skill，"
+        "无需选择身份。人物产物按 canonical 人物分别从 `0.0.0.1` 连续编号到 "
+        "`0.0.0.999`，只在成功登记时占号；人物 Skill 的单次运行不编号。",
         "",
     ]
     products = persona_product_index(mirror_root)
@@ -400,14 +403,14 @@ def build_index(mirror_root):
         out += [
             f"当前登记：**{len(products)} 个人物**。",
             "",
-            "| 人物 | 唯一分类 | 版本 | 完整 ZIP |",
+            "| 人物 | 唯一分类 | 产物版本 | 完整 ZIP |",
             "|---|---|---|---|",
         ]
         product_root = "registry/codex/persona-distiller"
         for product in products:
             name = str(product.get("canonical_name", "")).replace("|", "\\|")
             category = str(product.get("registration_category", "")).replace("|", "\\|")
-            version = str(product.get("latest_model_version", "")).replace("|", "\\|")
+            version = str(product.get("latest_product_version", "")).replace("|", "\\|")
             artifact = str(product.get("latest_artifact", ""))
             out.append(f"| {name} | `{category}` | `{version}` | [ZIP]({product_root}/{artifact}) |")
         out.append("")

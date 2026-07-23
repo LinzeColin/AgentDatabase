@@ -1,15 +1,15 @@
-# Handoff — 人物蒸馏 Skill / Persona Distiller v0.0.0.3
+# Handoff — 人物蒸馏 Skill / Persona Distiller v0.0.0.4
 
-## 1. Final product contract
+## 1. Builder contract
 
-This package is the **builder/orchestrator Skill**. After installation, it accepts only:
+This package is the builder/orchestrator Skill. It accepts:
 
 - target person's name;
-- identity: one of six primary identities or a weighted multi-identity selection.
+- one of six primary build identities or a weighted multi-identity selection.
 
-Scenario is optional. The builder performs evidence research, synthesis, evaluation, refinement, and produces one directly installable target-person Skill ZIP.
+Scenario is optional. The builder performs evidence research, synthesis, evaluation, refinement, packaging, and unique registration.
 
-Identity menu:
+Build identity menu:
 
 1. 技术工程师
 2. 创业经营家
@@ -17,103 +17,84 @@ Identity menu:
 4. 开发设计家
 5. 思想教育家
 6. 政治法律家
-7. 多重身份（at least two weighted primary identities）
+7. 多重身份
 
-Private/self/fictional/historical are routed through multi-identity but remain separate `subject_origin` governance modes. Private/self data cannot pass the consent gate merely because an identity was selected.
+Private/self/fictional/historical targets remain separate `subject_origin` governance modes. Private/self data still requires authority and retention controls.
 
-## 2. Target-person runtime contract
+## 2. Generated person-Skill runtime contract
 
-Every substantive invocation of a generated person Skill must first receive a fresh identity/weight selection. A same-message selection is sufficient; `沿用上次身份` is an explicit selection. Merely displaying the menu consumes no serial.
-
-After identity selection, `invocation_manager.py begin` atomically allocates one immutable artifact/run version:
+An installed person Skill is directly callable:
 
 ```text
-0.0.0.1 ... 0.0.0.999 ... 0.0.0.N
+caller task → automatic internal identity/scenario route → minimum model load
+→ plan → act with host tools → verify → deliver → optional unnumbered audit
 ```
 
-- completed and failed calls both keep their number;
-- numbers are never reused;
-- explicit skips require user instruction plus an audited override flag;
-- crash recovery closes stale started calls as failed;
-- state/history reconciliation prevents reuse after a process dies between commits;
-- each run has `run.json` and `artifact-manifest.json` with identity, status, hashes, and logical versioned output names;
-- task text is not stored by default—only its SHA-256; content storage is opt-in.
+- Never ask the caller to select an identity, number, or weight.
+- Treat build identity and the seven registration folders as internal metadata, not runtime restrictions.
+- Automatically select or combine only the distilled identity facets relevant to the task.
+- Do not display a runtime version, append a version to output filenames, or create numbered run directories.
+- Optional audit records contain timestamps, task hashes, internal route summaries, status, and result hashes. Task content remains opt-in.
 
-## 3. Person model
+## 3. Product version contract
 
-A generated target model separates:
+`0.0.0.N` identifies published person-Skill products, not invocations.
 
-- verifiable facts and time/role scope;
-- Cognitive OS;
-- decision policy;
-- strategy and resource allocation;
-- demonstrated/limited/unavailable capabilities;
-- Work system, tools, quality standards, and delivery behavior;
-- Persona, values, temperament, conflict, and voice;
-- identity facets and weighted conflict routing;
-- negative capability, refusals, stop/escalation rules;
-- divergence map across periods, roles, speech, behavior, and sources;
-- quarantined psychological/existential hypotheses.
+- Each canonical person has an independent sequence.
+- The valid range is `0.0.0.1` through `0.0.0.999`.
+- Versions are contiguous; gaps, reuse, same-version/different-hash, and overflow are rejected.
+- Packaging derives the next candidate number from the canonical registry.
+- The number is consumed only when registration succeeds; failures do not consume it.
+- A registry lock serializes concurrent writers on one machine.
+- Repeated distillations of the same person append new product versions under the original canonical registration, even when an internal model snapshot label is unchanged.
 
-Priority is: law/safety/user constraints → boundaries → accepted corrections → facts → evidenced capability/decision patterns → bounded inference → style → quarantined hypotheses.
+## 4. Identity and registration
 
-## 4. Research and evaluation
+Released target-person ZIPs are registered exactly once under:
 
-Research uses six base lanes plus identity-specific source topology. “As complete as practical” is operationalized as source universe, coverage cube, canonical-origin/near-duplicate clustering, gap-driven expansion, and two consecutive rounds without new high-impact Claims. It never claims literal exhaustion of all public/private material.
+Skill 根级
+`<技术工程|企业领导|金融投资|软开设计|思想教育|政治法律|多重身份>/`
 
-The package contains 16 evaluation suites, including Holdout replay, boundary, voice, trajectory, contrast, fact preservation, style decoy, task completion, planning fidelity, tool use, capability calibration, refusal/stop, long horizon, identity routing, anonymous fidelity, and token efficiency.
+Single-identity products use the matching folder. Weighted multi-identity products use only `多重身份`. A person must never be copied across categories; reclassification moves the canonical record.
 
-Architect proposes minimal patches. Skeptic attacks provenance, overfit, privacy, capability hallucination, and regression. Stable model changes require snapshot, evidence/Claim impact analysis, targeted plus global regression, and promotion or rollback.
+Public GitHub registration rejects private/self products, raw materials, Holdout bodies, credentials, private source text, and secret-like content.
 
-## 5. Memory and lifecycle
+## 5. Version boundaries
 
-Three version axes are independent:
-
-- builder release: `v0.0.0.3`;
-- target semantic model version;
-- per-invocation artifact version: `0.0.0.N`.
-
-Stable model, procedural memory, episodic runs, user overlay, correction ledger, and promotion queue are separated. Runtime success or user convenience cannot silently rewrite the person.
+- Builder release: `v0.0.0.4`.
+- Internal model snapshot: research/correction lifecycle metadata only.
+- Published person product: per-person `0.0.0.1..0.0.0.999`.
+- Runtime invocation: unversioned.
 
 ## 6. Packaging and installation
 
-Builder default install root: `~/.codex/skills/persona-distiller`. Do not keep a
-second installation under `~/.agents/skills/persona-distiller`.
+Builder default and only user installation:
 
-Released target-person ZIPs must be registered exactly once under
-Skill 根级
-`<技术工程|企业领导|金融投资|软开设计|思想教育|政治法律|多重身份>/`.
-Multi-identity targets use only `多重身份`; later model versions remain under
-the same subject registration.
+`~/.codex/skills/persona-distiller`
 
-The builder ZIP has one top-level `persona-distiller/`, no symlinks, no caches, and a checksum manifest. Installation verifies source checksums, copies/links, verifies the installed copy, executes a post-install self-check, and restores the backup on failure.
+Do not keep a second source under `~/.agents/skills/persona-distiller`.
 
-Generated target-person ZIPs also have one top-level directory, checksums, installer, package manifest, sanitized source/Claim ledger, empty runtime counter/history, and no raw corpus or Holdout bodies by default.
+Builder and generated-person ZIPs have one top-level directory, checksums, installer metadata, no symlinks/caches, and privacy-minimized payloads. Generated-person packages reset runtime/episodic records but contain no invocation counter.
 
-## 7. Verification completed
+## 7. Verification gates
 
-- 43 offline unit/integration/concurrency tests passed; final checksum-aware self-check also passed.
-- Seven identity registration folders, cross-folder uniqueness, full target ZIP retention, generated index consistency, idempotence, and public-registry privacy refusal are executable gates.
-- Two reviewer rounds passed: six isolated roles; Round 1 has 24 checks, Round 2 has 39 adversarial checks.
-- First, failed, 999th, explicit override, recovery, reconciliation, concurrent allocation, and artifact hashing tested.
-- Source/Claim/Holdout separation, corrections, snapshots, diff, verification, rollback, deterministic target ZIP, checksum tamper rejection, root installation, and runtime reset tested.
-- A fresh extracted candidate passed checksum verification, clean install, weighted target initialization, automatic scenario routing, `0.0.0.1` allocation, result hashing, runtime verification, and uninstall.
-- A real initialization defect caused by cached Python files in templates was found during dynamic testing and fixed by excluding `__pycache__`, `.pyc`, and `.pyo`.
+- full offline unit/integration/concurrency suite;
+- strict target release quality gate;
+- automatic runtime router and unnumbered audit tests;
+- per-person first/next/999/exhaustion/gap/idempotence tests;
+- deterministic target packaging and checksum-tamper rejection;
+- seven-category uniqueness and generated-index validation;
+- source and installed-copy checksum verification;
+- reviewer rounds, schema parsing, syntax checks, secret scan, fresh extraction/install;
+- repository README/index synchronization and remote GitHub verification.
 
-The environment did not expose an independent SubAgent orchestration interface. The six roles are isolated checklists and tests, not falsely described as six independent models.
+## 8. Residual limits
 
-## 8. Residual risks and next upgrades
+- Target-specific fidelity remains unproven until lawful target research, frozen Holdout data, and independent judging are completed.
+- Host models and tools differ; execution portability requires separate evaluation.
+- The filesystem registry lock protects one machine. Multi-machine publishing still requires Git serialization or a transactional service.
+- Deletion, paywalls, private archives, oral history, and undigitized sources prevent proof of absolute source completeness.
 
-- Target-specific fidelity is unproven until lawful target research, frozen Holdout material, and independent judging are completed.
-- Dependency-free semantic near-duplicate detection relies on canonical origins, hashes, and host-assisted semantic review; an embedding/MinHash plugin remains a future enhancement.
-- The filesystem counter is safe for concurrent processes sharing one installation, not for distributed multi-machine writers; those need a transactional external allocator.
-- Host models and tools differ. Cross-host behavioral portability must be evaluated separately from installation portability.
-- Deletion, paywalls, private archives, oral history, and undigitized sources prevent proof of absolute global completeness.
+## 9. Core architectural insight
 
-## 9. Surprise retained in the architecture
-
-The most important long-term artifact is not a prose persona but a **versioned decision operating system plus divergence map**. High fidelity comes from preserving where the target changed, contradicted themselves, stopped, refused, lacked capability, or behaved differently under another role—not from smoothing all evidence into one confident voice.
-
-## 10. Repository-verification boundary
-
-The research pass accessed the public profile/root pages and relevant visible subdirectories of the seven public repositories shown under `LinzeColin`. The container could not resolve `github.com` for recursive cloning, so this handoff does not claim execution of every historical commit, release asset, submodule, nested external dependency, or private repository.
+The durable artifact is a versioned person-product release backed by an evidence-grounded decision operating system and divergence map. Runtime calls are ordinary executions of that installed product; they are not new releases.

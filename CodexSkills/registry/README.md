@@ -31,4 +31,6 @@ deletion propagation.
 `registry/codex/persona-distiller`. Its generated target-person ZIPs use the
 seven identity folders directly under the Skill root; each subject has one canonical registration
 across all categories, and the `CodexSkills/README.md` product list is generated
-from `persona-registry-index.json`.
+from `persona-registry-index.json`. Installed person Skills route identity facets internally
+without asking callers to choose an identity. Product releases are numbered per
+canonical person from `0.0.0.1` through `0.0.0.999`; invocations are unversioned.
