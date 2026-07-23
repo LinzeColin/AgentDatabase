@@ -10,8 +10,8 @@
   "files": [
     {
       "path": ".gitignore",
-      "sha256": "07c0f0f687f40ce44d8a3fcc7e2af2369ddf3e509653103ff24e446d59d43a9d",
-      "size_bytes": 103
+      "sha256": "9890b5f82388dc6dbb55f3c311794f81cabf75e02915d62f53dd9c8675cc9ca5",
+      "size_bytes": 403
     },
     {
       "path": "CHANGELOG.md",
@@ -510,8 +510,8 @@
     },
     {
       "path": "scripts/install.py",
-      "sha256": "168209217aa335252ef23a04dad71f31d65b7fa461ce2a5c85a5f9444d3ca503",
-      "size_bytes": 11161
+      "sha256": "1d8a29f2f19dc112dc800d8aa044a66f88654e4cbf9c6b95882053b800c10a1b",
+      "size_bytes": 11153
     },
     {
       "path": "scripts/install.sh",
@@ -950,8 +950,8 @@
     },
     {
       "path": "tests/test_package_install_migrate.py",
-      "sha256": "04903ba58376c9d497739e5e3190e8b8bee8c119c57b8e3dd4ec5fcd161f4124",
-      "size_bytes": 6210
+      "sha256": "fdbf1afcfefa133a5dbb227661bbae04f12a0c19e54b89e3ee19e4989458d808",
+      "size_bytes": 6548
     },
     {
       "path": "tests/test_persona_registry.py",

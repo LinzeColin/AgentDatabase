@@ -1,6 +1,6 @@
 # CodexSkills
 
-本机全部 Skill 的仓库镜像：**87 份实例 / 72 个不同名字**，3578 个文件，约 106 MB。
+本机全部 Skill 的仓库镜像：**87 份实例 / 72 个不同名字**，3584 个文件，约 106 MB。
 
 **由 `sync_skills.py` 自动生成，请勿手工编辑本文件。**
 
@@ -34,7 +34,13 @@ curl -s https://raw.githubusercontent.com/LinzeColin/AgentDatabase/main/CodexSki
 目录：[`技术工程/`](registry/codex/persona-distiller/技术工程/)、[`企业领导/`](registry/codex/persona-distiller/企业领导/)、[`金融投资/`](registry/codex/persona-distiller/金融投资/)、[`软开设计/`](registry/codex/persona-distiller/软开设计/)、[`思想教育/`](registry/codex/persona-distiller/思想教育/)、[`政治法律/`](registry/codex/persona-distiller/政治法律/)、[`多重身份/`](registry/codex/persona-distiller/多重身份/)。
 身份分类由人物 Skill 内部使用，不是调用门槛；用户安装后直接调用对应人物 Skill，无需选择身份。人物产物按 canonical 人物分别从 `0.0.0.1` 连续编号到 `0.0.0.999`，只在成功登记时占号；人物 Skill 的单次运行不编号。
 
-当前登记：**0 个人物**；首次产物登记后由本脚本自动生成清单。
+当前登记：**3 个人物**。
+
+| 人物 | 唯一分类 | 产物版本 | 完整 ZIP |
+|---|---|---|---|
+| Beth Wilkinson | `政治法律` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller/政治法律/beth-wilkinson/versions/0.0.0.1/beth-wilkinson-persona-skill-v0.0.0.1.zip) |
+| Evan R. Chesler | `政治法律` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller/政治法律/evan-r-chesler/versions/0.0.0.1/evan-r-chesler-persona-skill-v0.0.0.1.zip) |
+| Theodore V. Wells Jr. | `政治法律` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller/政治法律/theodore-v-wells-jr/versions/0.0.0.1/theodore-v-wells-jr-persona-skill-v0.0.0.1.zip) |
 
 ## 同步
 

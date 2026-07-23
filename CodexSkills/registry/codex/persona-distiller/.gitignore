@@ -8,4 +8,12 @@ workspaces/
 build/
 dist/
 *.zip
+# Registered persona release ZIPs are canonical repository products.
+!技术工程/*/versions/*/*.zip
+!企业领导/*/versions/*/*.zip
+!金融投资/*/versions/*/*.zip
+!软开设计/*/versions/*/*.zip
+!思想教育/*/versions/*/*.zip
+!政治法律/*/versions/*/*.zip
+!多重身份/*/versions/*/*.zip
 *.log

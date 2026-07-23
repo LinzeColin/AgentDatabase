@@ -62,6 +62,11 @@ class PackageInstallMigrateTests(unittest.TestCase):
             destination = Path(tmp) / 'persona-distiller'
             run_script('install.py', 'install', '--target', 'path', '--path', destination)
             self.assertTrue((destination / 'SKILL.md').is_file())
+            skill_root = Path(__file__).resolve().parents[1]
+            registered_artifacts = sorted(skill_root.glob('*/**/versions/**/*.zip'))
+            self.assertTrue(registered_artifacts)
+            for artifact in registered_artifacts:
+                self.assertTrue((destination / artifact.relative_to(skill_root)).is_file())
             status = run_script('install.py', 'status', '--target', 'path', '--path', destination)
             self.assertTrue(json.loads(status.stdout)['valid'])
             run_script('install.py', 'install', '--target', 'path', '--path', destination, '--force')

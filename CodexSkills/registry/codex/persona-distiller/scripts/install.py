@@ -99,7 +99,7 @@ def copy_skill(source: Path, dest: Path) -> None:
     ignored = {'.git', '__pycache__', '.pytest_cache', 'workspaces', 'build', 'dist', '_build'}
 
     def ignore(_directory: str, names: list[str]) -> set[str]:
-        return {name for name in names if name in ignored or name.endswith(('.zip', '.pyc', '.pyo'))}
+        return {name for name in names if name in ignored or name.endswith(('.pyc', '.pyo'))}
 
     shutil.copytree(source, dest, ignore=ignore)
     for script in list((dest / 'scripts').glob('*.py')) + list((dest / 'scripts').glob('*.sh')) + [dest / 'install.py', dest / 'install.sh']:

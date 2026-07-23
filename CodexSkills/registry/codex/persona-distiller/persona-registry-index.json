@@ -4,12 +4,55 @@
     "多重身份": 0,
     "思想教育": 0,
     "技术工程": 0,
-    "政治法律": 0,
+    "政治法律": 3,
     "软开设计": 0,
     "金融投资": 0
   },
   "generated": true,
-  "products": [],
+  "products": [
+    {
+      "canonical_name": "Beth Wilkinson",
+      "identity_family_id": "political-legal",
+      "latest_artifact": "政治法律/beth-wilkinson/versions/0.0.0.1/beth-wilkinson-persona-skill-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.1",
+      "latest_product_version": "0.0.0.1",
+      "latest_sha256": "e0a30abd20dc8740bc35fd21840ff62d2492ffc64fb1b59ced4525a0e66e9802",
+      "registration": "政治法律/beth-wilkinson/registration.json",
+      "registration_category": "政治法律",
+      "subject_origin": "public",
+      "subject_slug": "beth-wilkinson",
+      "subject_uid": "person-473d8314576afc9c",
+      "version_count": 1
+    },
+    {
+      "canonical_name": "Evan R. Chesler",
+      "identity_family_id": "political-legal",
+      "latest_artifact": "政治法律/evan-r-chesler/versions/0.0.0.1/evan-r-chesler-persona-skill-v0.0.0.1.zip",
+      "latest_model_snapshot": "0.1.0",
+      "latest_product_version": "0.0.0.1",
+      "latest_sha256": "cc97e267284eec2799656d1e357caa2b676b43e44e64449e285c1a4056becefd",
+      "registration": "政治法律/evan-r-chesler/registration.json",
+      "registration_category": "政治法律",
+      "subject_origin": "public",
+      "subject_slug": "evan-r-chesler",
+      "subject_uid": "person-97977eeaceed1506",
+      "version_count": 1
+    },
+    {
+      "canonical_name": "Theodore V. Wells Jr.",
+      "identity_family_id": "political-legal",
+      "latest_artifact": "政治法律/theodore-v-wells-jr/versions/0.0.0.1/theodore-v-wells-jr-persona-skill-v0.0.0.1.zip",
+      "latest_model_snapshot": "0.1.0",
+      "latest_product_version": "0.0.0.1",
+      "latest_sha256": "462a320084a6ba73388a7133a8627f39cd13b2696adfbf3b8598c280e3a4197a",
+      "registration": "政治法律/theodore-v-wells-jr/registration.json",
+      "registration_category": "政治法律",
+      "subject_origin": "public",
+      "subject_slug": "theodore-v-wells-jr",
+      "subject_uid": "person-1a4a76c0932b6aad",
+      "version_count": 1
+    }
+  ],
   "schema_version": "2.0",
   "uniqueness_scope": "all-seven-categories"
 }

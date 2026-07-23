@@ -1,0 +1,22 @@
+{
+  "canonical_key": "public:evanrchesler",
+  "canonical_name": "Evan R. Chesler",
+  "identity_family_id": "political-legal",
+  "identity_mode": "single",
+  "registration_category": "政治法律",
+  "schema_version": "2.0",
+  "subject_origin": "public",
+  "subject_slug": "evan-r-chesler",
+  "subject_uid": "person-97977eeaceed1506",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/evan-r-chesler-persona-skill-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-23T09:28:15Z",
+      "builder_version": "v0.0.0.4",
+      "model_version": "0.1.0",
+      "product_version": "0.0.0.1",
+      "sha256": "cc97e267284eec2799656d1e357caa2b676b43e44e64449e285c1a4056becefd",
+      "size_bytes": 61437
+    }
+  ]
+}
