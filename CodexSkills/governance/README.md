@@ -17,6 +17,8 @@ Key entrypoints:
   control schemas and pinned interface.
 - `tools/validate_activation.py`: offline intent/receipt/settlement and physical
   write-set validator.
+- `tools/validate_public_run_event.py`: Mechanism-owned semantic consumer for
+  the Auto-owned `public-run-event:v2` schema.
 - `tests/test_mechanism_contract.py`: positive, negative, and fault gates.
 - `tests/test_activation_contract.py`: M0c activation cycle, provider, and
   byte-binding gates.
@@ -24,6 +26,8 @@ Key entrypoints:
 - `bundles/schema-bundle-manifest.v1.json`: complete M0b candidate manifest.
 - `activation/control-interface.json`: exact M0c-A interface for the Auto
   activation-handshake corrective.
+- `OpenAIDatabase/scripts/validate_skill_run_logs.py`: consumer-first recursive
+  run-log router and pre-activation publication block.
 
 Run from the repository root with the explicitly provisioned interpreter:
 
@@ -85,3 +89,11 @@ not create
 trust root. After commit, verify it with `trust-bundle` using the externally
 read-back commit, candidate digest, canonical manifest path, and
 `mode=CANDIDATE`.
+
+The consumer-first gate is separately installed under OpenAIDatabase. It
+routes only recursive `skills_runs/YYYY/MM/DD/part-NNNN.jsonl` records to the
+public-run consumer and leaves the four sibling task-run categories unchanged.
+The repository run root must remain README-only until ACTIVE external trust,
+Auto AU-040 daily shard/manifest support, and the Mechanism BOUND reference
+resolver all exist. Synthetic records may be tested; this draft does not
+authorize canonical run-log publication.

@@ -25,6 +25,8 @@ Use route-specific files before broad repository search.
   `config/codex/config.template.toml` and `config/codex/project.config.toml`
 - Evaluation harness: `config/evaluation/personalization_harness.json`
 - Task-run evidence schema: `config/evaluation/task_run.schema.json`
+- SkillOps public-run consumer: `config/evaluation/skill_run_consumer.json` and
+  `scripts/validate_skill_run_logs.py`
 - Detailed user requirements: `docs/USER_REQUIREMENTS.md`
 - Model and parameter documentation: `docs/MEMORY_ATLAS_PROJECT_MODEL_PARAMETERS.md`
 - Delivery record: `docs/MEMORY_ATLAS_DELIVERY_RECORD.md`
@@ -68,6 +70,21 @@ pattern information must:
 If the update target is unclear, log it as `UNKNOWN` with a follow-up task.
 Do not silently drop memory-affecting changes.
 
+## SkillOps Run Consumer
+
+- `data/run_logs/skills_runs/` is a separate recursive consumer surface for
+  `public-run-event:v2`; never route it through the sibling task-run schema.
+- The final layout is
+  `data/run_logs/skills_runs/YYYY/MM/DD/part-NNNN.jsonl`, with one exact
+  RFC 8785 JCS event per LF-framed line and a 20 MiB part limit.
+- Until the consumer config explicitly records ACTIVE external trust, AU-040
+  shard/manifest completion, and BOUND reference resolution, only the tracked
+  README is allowed. Do not create test or placeholder shards in the canonical
+  tree.
+- Consumer validation is read-only. Raw/private run sources, cursors,
+  projection queues, watermarks, and publisher state remain outside this
+  subtree and outside this contract.
+
 ## Raw, Private and Stable Layers
 
 - 不把 taskpack 大段写入本文件。`data/public_raw/` 是唯一 tracked raw 目的地，属于可被
@@ -105,6 +122,7 @@ changes, use:
 ```bash
 python3 scripts/build_personalization_exports.py --database-dir .
 python3 scripts/route_agent_resources.py --database-dir . --intent startup
+python3 scripts/validate_skill_run_logs.py --database-dir . --repo-root ..
 python3 scripts/evaluate_personalization_context.py --database-dir .
 python3 -m unittest tests.test_personalization_architecture -q
 ```

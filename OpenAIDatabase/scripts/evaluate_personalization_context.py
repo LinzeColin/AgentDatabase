@@ -17,6 +17,10 @@ from build_personalization_exports import (
     CONTEXT_CONFIG as BUNDLE_CONTEXT_CONFIG,
     build_bundle_identity,
 )
+from validate_skill_run_logs import (
+    CONFIG_PATH as SKILL_RUN_CONFIG,
+    validate_skill_run_logs,
+)
 
 
 HARNESS_CONFIG = Path("config/evaluation/personalization_harness.json")
@@ -25,6 +29,12 @@ RUN_LOG_ROOT = Path("data/run_logs")
 EVALUATION_LOG_DIR = Path("data/run_logs/evaluation_runs")
 VALID_RUN_TYPES = {"sync_run", "export_run", "evaluation_run", "agent_run"}
 VALID_STATUSES = {"PASS", "FAIL", "NOT_RUN"}
+LEGACY_TASK_RUN_CATEGORIES = (
+    "agent_runs",
+    "evaluation_runs",
+    "export_runs",
+    "sync_runs",
+)
 
 
 def now_utc() -> str:
@@ -271,22 +281,26 @@ def validate_run_logs(database_dir: Path) -> list[str]:
         failures.append(f"missing_or_invalid_schema:{TASK_RUN_SCHEMA}")
 
     log_root = database_dir / RUN_LOG_ROOT
-    jsonl_files = sorted(log_root.glob("*/*.jsonl"))
+    jsonl_files = sorted(
+        path
+        for category in LEGACY_TASK_RUN_CATEGORIES
+        for path in (log_root / category).glob("*.jsonl")
+    )
     if not jsonl_files:
         failures.append("missing_jsonl_run_logs")
-        return failures
-
-    for path in jsonl_files:
-        text = path.read_text(encoding="utf-8")
-        for line_no, line in enumerate(text.splitlines(), 1):
-            if not line.strip():
-                continue
-            try:
-                row = json.loads(line)
-            except json.JSONDecodeError as exc:
-                failures.append(f"invalid_jsonl:{rel_to_database(database_dir, path)}:{line_no}:{exc.msg}")
-                continue
-            validate_task_run_record(database_dir, path, line_no, row, failures)
+    else:
+        for path in jsonl_files:
+            text = path.read_text(encoding="utf-8")
+            for line_no, line in enumerate(text.splitlines(), 1):
+                if not line.strip():
+                    continue
+                try:
+                    row = json.loads(line)
+                except json.JSONDecodeError as exc:
+                    failures.append(f"invalid_jsonl:{rel_to_database(database_dir, path)}:{line_no}:{exc.msg}")
+                    continue
+                validate_task_run_record(database_dir, path, line_no, row, failures)
+    failures.extend(validate_skill_run_logs(database_dir))
     return failures
 
 
@@ -411,6 +425,10 @@ def evaluate(database_dir: Path) -> dict[str, Any]:
         "context_used": [
             {"source": str(HARNESS_CONFIG), "reason": "evaluation harness contract"},
             {"source": str(TASK_RUN_SCHEMA), "reason": "task-run evidence schema"},
+            {
+                "source": str(SKILL_RUN_CONFIG),
+                "reason": "SkillOps public-run-event consumer contract",
+            },
             {"source": "data/derived/personalization/personalization_export.json", "reason": "generated personalization export"},
         ],
         "tools_used": [
@@ -425,6 +443,9 @@ def evaluate(database_dir: Path) -> dict[str, Any]:
             "task_run_schema",
             "jsonl_parse",
             "task_run_evidence",
+            "skill_run_consumer_bootstrap",
+            "skill_run_schema_routing",
+            "skill_run_pre_activation_publication_block",
             "forbidden_patterns",
             "provider_bundle_identity",
             "bundle_source_proof_recomputed",

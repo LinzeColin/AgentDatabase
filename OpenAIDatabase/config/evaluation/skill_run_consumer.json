@@ -1,0 +1,35 @@
+{
+  "allowed_root_files": [
+    "README.md"
+  ],
+  "candidate_trust": {
+    "canonical_manifest_path": "CodexSkills/governance/bundles/schema-bundle-manifest.v1.json",
+    "expected_bundle_digest": "fd1df66e240695bd376803423bd09f9f341f7542f74a6ed92b0f79b0af4dc5e1",
+    "mode": "CANDIDATE",
+    "verified_git_object_id": "sha1:4b1e1a318c8f9e1014839a8a3a46e057679c4b6b"
+  },
+  "consumer_owner_plane": "MECHANISM",
+  "layout": {
+    "max_part_bytes": 20971520,
+    "part_name_regex": "^part-[0-9]{4}\\.jsonl$",
+    "part_numbers_gapless": true,
+    "part_numbers_start_at": 1,
+    "record_framing": "RFC8785_JCS_PER_LINE_LF",
+    "relative_pattern": "YYYY/MM/DD/part-NNNN.jsonl",
+    "shard_calendar_timezone": "Australia/Sydney"
+  },
+  "log_root": "data/run_logs/skills_runs",
+  "protocol_revision": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1",
+  "publication_gate": {
+    "canonical_publication_permitted": false,
+    "repository_shards_permitted": false,
+    "required_before_enable": [
+      "ACTIVE_EXTERNAL_TRUST",
+      "AU_040_DAILY_JSONL_SHARD_MANIFEST",
+      "BOUND_REFERENCE_RESOLVER"
+    ]
+  },
+  "record_schema_id": "urn:linzecolin:agentdatabase:skillops:schema:public-run-event:v2",
+  "schema_version": "openai_database.skill_run_consumer.v1",
+  "status": "DRAFT_NON_ACTIVE_CONSUMER_READY"
+}

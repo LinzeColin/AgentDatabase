@@ -213,6 +213,31 @@ class PersonalizationArchitectureTests(unittest.TestCase):
         )
         self.assertTrue(any("tests_run_missing_evidence_file" in failure for failure in eval_result["failures"]))
 
+    def test_evaluator_routes_skill_run_tree_away_from_task_run_schema(self) -> None:
+        evaluator = load_script("evaluate_personalization_context")
+        with tempfile.TemporaryDirectory() as temp_dir:
+            db = Path(temp_dir)
+            write_minimal_database(db)
+            shard = db / "data/run_logs/skills_runs/2026/07/23/part-0001.jsonl"
+            shard.parent.mkdir(parents=True)
+            shard.write_text("{}\n", encoding="utf-8")
+
+            eval_result = evaluator.evaluate(db)
+
+        self.assertEqual(eval_result["status"], "FAIL")
+        self.assertIn(
+            "skill_run_canonical_publication_blocked:"
+            "2026/07/23/part-0001.jsonl",
+            eval_result["failures"],
+        )
+        self.assertFalse(
+            any(
+                failure.startswith("task_run_")
+                and "skills_runs" in failure
+                for failure in eval_result["failures"]
+            )
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -33,6 +33,7 @@
     {"domain": "export_run_log", "path": "data/run_logs/export_runs"},
     {"domain": "evaluation_run_log", "path": "data/run_logs/evaluation_runs"},
     {"domain": "agent_run_log", "path": "data/run_logs/agent_runs"},
+    {"domain": "skill_run_log", "path": "data/run_logs/skills_runs"},
     {"domain": "privacy_run_log", "path": "data/run_logs/privacy"},
     {"domain": "current_numeric_token_telemetry", "path": "data/run_logs/token_usage"},
     {"domain": "portable_context_contract", "path": "context"},
@@ -173,6 +174,7 @@
     "legacy_packages": "read-only until their named Task proves consumer and hash reconciliation",
     "raw_sessions": "no repository bundle producer; new authorized sanitized text uses data/public_raw/YYYY-MM plus a sidecar, legacy flat paths remain append-only read-only, and private-origin recovery uses private AgentDatabase releases",
     "local_indexes": "ignored and rebuilt from tracked JSONL on first search/fetch",
-    "structured_run_logs": "redacted JSONL audit facts only; full stdout/stderr/transcripts stay local"
+    "structured_run_logs": "redacted JSONL audit facts only; full stdout/stderr/transcripts stay local",
+    "structured_skill_run_logs": "public-run-event:v2 only under YYYY/MM/DD/part-NNNN.jsonl; pre-activation consumer rejects every shard until ACTIVE external trust, AU-040 shard/manifest, and BOUND reference resolution gates are complete"
   }
 }

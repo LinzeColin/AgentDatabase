@@ -1,7 +1,7 @@
 # Mechanism handoff
 
 - State: DRAFT_NON_ACTIVE
-- Phase: MECHANISM_M0C_A_ACTIVATION_PROTOCOL
+- Phase: MECHANISM_CONSUMER_FIRST
 - Task Pack authority: immutable CodexSkills-Mechanism-Design-TaskPack-v0.0.0.2
 - Protocol: urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1
 - SRV candidate: v0.0.0.3
@@ -10,10 +10,10 @@
 
 ## Pinned inputs
 
-- Auto Gmail transport corrective verified Git object:
-  sha1:1836c44fe83bb911b0a5ca5d97b8e59ff2df84ab
+- Auto activation-handshake corrective verified Git object:
+  sha1:ee6f046619cb7f5584c89e1dbb81d5bd5c602a2b
 - Auto runtime interface raw SHA-256:
-  d38eae81ef4aa45ac119bcb3fefa3b67c3f9609ef2fe281bb7dcf5b68c60c838
+  cdd4c11e412045bd1ee36b6af7e9b1aa35a4f125681568955aa5796710414922
 - Mechanism interface raw SHA-256:
   0f4837d9cec37c845cd5e9e799b5f572944cf8fe2457e8b95f696db3b9c03998
 - M0c-A activation control interface raw SHA-256:
@@ -72,6 +72,32 @@
 - Positive, negative, privacy, path, ordering, provider-state, evidence-binding,
   physical-digest, and cycle fixtures are executable offline.
 
+## Completed in consumer-first
+
+- The sibling task-run validator now enumerates only the four legacy task-run
+  categories. It cannot glob or reinterpret recursive SkillOps shards as
+  `task_run` rows.
+- `OpenAIDatabase/config/evaluation/skill_run_consumer.json` pins the exact
+  candidate Git object, bundle digest, manifest path, protocol, schema ID,
+  Australia/Sydney shard calendar, RFC 8785 per-line framing, gapless
+  `part-NNNN.jsonl` layout, and 20 MiB part budget. Its raw SHA-256 is
+  `94a5186aeaad6947eec19ef67539e3f03c0db06d47292d58088fdc4ee8bb53c6`.
+- Consumer bootstrap rejects duplicate keys, invalid I-JSON, untrusted bundle
+  IDs, unknown URNs, unsafe roots, symlink/special-file entries, invalid
+  dates, direct-root event files, unexpected directories, and every
+  unapproved path. Descriptor-relative `O_NOFOLLOW` reads close the config and
+  log-tree path race; fixed entry/error budgets bound hostile tree scans.
+- `tools/validate_public_run_event.py` applies schema, contextual bundle
+  equality, self-digest, public-value scanning, binding surface/role,
+  controlled-invocation time/surface, correction, and token-measurement
+  semantics without importing Auto runtime code or modifying M0c-A-pinned
+  validator bytes.
+- The canonical repository run root still contains only its README. Synthetic
+  final-layout records can be validated, but repository shards remain
+  unconditionally blocked.
+- OpenAIDatabase lifecycle, minimum validation, harness, README, and regression
+  tests now identify `skills_runs` as a separate consumer surface.
+
 ## Explicitly not active / current capability state
 
 M0c-A does not create `CodexSkills/VERSION`, an ACTIVE manifest, activation
@@ -87,17 +113,21 @@ in this Mechanism run because `SKILLOPS_STATE_ROOT` is not provisioned in the
 runtime environment. A connected Gmail App is not a substitute for that
 production trust root. Missing external state fails closed.
 
+This phase does not claim AU-040. The shared v0.0.0.3 candidate has individual
+`public-run-event:v2` records and a transaction-level
+`publication-manifest:v1`, but no proven daily JSONL shard/manifest payload
+contract. BOUND events also remain blocked from canonical publication until
+the Registry-backed exact reference resolver lands.
+
 ## Next exact action
 
-Auto must start from the verified M0c-A main commit, consume the exact
-`activation/control-interface.json`, and implement a production activation
-handshake/publisher that validates intent and settlement bytes, derives the
-notification request from the intent, recomputes the final physical write set,
-and removes caller-asserted envelope trust. It must not create VERSION or claim
-ACTIVE.
+A separate read-only capability gate must prove the owner-held state root,
+recipient mapping, Gmail OAuth scopes, authenticated-recipient binding, and
+provider lookup/readback are ready. If any fact remains absent, the only next
+action is owner provisioning; no intent instance or email may be fabricated.
 
-After that corrective, a separate capability gate must prove the owner-held
-state root, mapping, Gmail OAuth scopes, authenticated-recipient binding, and
-provider lookup/readback are ready. Only then may a later independent M0c-B run
-create the intent, obtain a real provider `SENT` receipt, settle, FF-safe
-publish, remotely read back, and establish the external ACTIVE trust tuple.
+Only after that gate is READY may an independent M0c-B run create the intent,
+obtain a real provider `SENT` receipt, settle, FF-safe publish, remotely read
+back, and establish the external ACTIVE trust tuple. AU-040 and the BOUND
+reference resolver remain later blockers for canonical run-log publication
+even after v0.0.0.3 activation.

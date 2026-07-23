@@ -47,7 +47,7 @@
   },
   "bundle_acceptance_id": "ACC-OAIDB-SM-P0-R1",
   "bundle_generator_version": "openai_database.shared_memory_bundle.v2",
-  "bundle_id": "sha256:2ae361e34f27137b48cc74f7d749f73add7598dde98f8cbb966cbe73eb69965f",
+  "bundle_id": "sha256:88748006fe08b8f72f4ce0928fd5bf4ae3773d3c4c955f8c05a5cb83e7cb9bb5",
   "bundle_manifest": "data/derived/personalization/memory_bundle_manifest.json",
   "bundle_task_id": "OAIDB-SM-P0-R1",
   "canonical_source_files": [
@@ -64,10 +64,10 @@
     "data/processed/codex/codex_daily_activity.jsonl",
     "data/processed/codex/codex_session_manifest.jsonl"
   ],
-  "canonical_source_hash": "sha256:f14ef93c25472711e9200b5b1be005f4015639e7096cbffe3a280db8e1cc1275",
+  "canonical_source_hash": "sha256:5dae07bbfc6135392782de2681ac35017c4dee05b755e9be3eef27f6e4a3f46f",
   "canonical_source_records": [
     {
-      "content_hash": "sha256:bb9477bfd981772e58c385a74f5a21b42a2543070813d457b1c738502430dc20",
+      "content_hash": "sha256:cc6ebed6f8394093ff038bd247a88b74d4b88c6a1cbc85321668a8890440d85f",
       "exists": true,
       "path": "config/context_sources/three_layer_context.json"
     },
@@ -217,7 +217,7 @@
     "registry_path": "config/data_sources/source_registry.json",
     "schema_version": "memory_atlas_data_source_registry.v1"
   },
-  "generated_at": "2026-07-16T23:07:55Z",
+  "generated_at": "2026-07-23T06:51:20Z",
   "latest_inputs": {
     "agent_collaboration": {
       "metrics": [
@@ -594,9 +594,9 @@
     "core_profile_path": "data/derived/profile/CORE_PROFILE.md"
   },
   "projection_hashes": {
-    "chatgpt": "sha256:b72e9f6346d0d7925d594ea62a6983c7d7483251fe83a737d052bfbb3738fee4",
-    "claude": "sha256:16cc6fe6ee25407fd9f760e50523f7c363c969a6e8edbb09123f1d87918274c8",
-    "codex": "sha256:5ffe431537e5722ba4cda188648941b95e4c5c8a0ef9b3bdb308621bd5272bd0"
+    "chatgpt": "sha256:479a6ec6e0052ed402ee10f513f8091cbe3ecc645ffd3a8661234327526d4831",
+    "claude": "sha256:fc94c0db271d8d58cd4dba0ce32f272e3a2aec5554dab952e5fa555ec2a85adc",
+    "codex": "sha256:195c50dd27d284b33b69aeeb60b76129ab298869cf6d855392708727f08468cb"
   },
   "projection_input_files": [
     "config/context_sources/resource_routes.json",
@@ -621,15 +621,15 @@
     "data/processed/codex/codex_daily_activity.jsonl",
     "data/processed/codex/codex_session_manifest.jsonl"
   ],
-  "projection_input_hash": "sha256:dc099d3ede89d121191a6c3192651f638ecfccef2146310bc0ed76b2b0caa6ea",
+  "projection_input_hash": "sha256:21305f905939edac418ea9f3935ebca442bee4dedef343b1435c3383ea811b97",
   "projection_input_records": [
     {
-      "content_hash": "sha256:ceae386a7dc8b2149d7ea4d6b2a0da5ebcdaf8415eb9cfb2920222e6acdf255b",
+      "content_hash": "sha256:629a53bfd122a56604fbe43dd8c18024ca9938b1f46c99806aea3a2d70e0edd6",
       "exists": true,
       "path": "config/context_sources/resource_routes.json"
     },
     {
-      "content_hash": "sha256:bb9477bfd981772e58c385a74f5a21b42a2543070813d457b1c738502430dc20",
+      "content_hash": "sha256:cc6ebed6f8394093ff038bd247a88b74d4b88c6a1cbc85321668a8890440d85f",
       "exists": true,
       "path": "config/context_sources/three_layer_context.json"
     },
