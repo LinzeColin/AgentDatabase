@@ -33,14 +33,15 @@ from CodexSkills.governance.tools.validate_mechanism import TrustTuple
 from runtime_helpers import (
     CANDIDATE_DIGEST,
     CANDIDATE_GIT_OBJECT,
-    CONTROL_GIT_OBJECT,
-    CONTROL_INTERFACE_RAW_SHA256,
+    HISTORICAL_CONTROL_GIT_OBJECT,
+    HISTORICAL_CONTROL_INTERFACE_RAW_SHA256,
     MANIFEST_PATH,
     REPO_ROOT,
     clock,
     control_trust,
     expected_stale_control_failure_pattern,
     final_contract,
+    historical_mechanism_runtime_view,
     trust,
     uid,
 )
@@ -96,27 +97,28 @@ class RuntimeBootstrapTests(unittest.TestCase):
                 control_trust(raw_digest="0" * 64),
             )
 
-    def test_successor_control_scope_is_exact(self) -> None:
+    def test_historical_control_scope_is_exact(self) -> None:
         observed = control_trust()
         self.assertEqual(
             observed.verified_git_object_id,
-            CONTROL_GIT_OBJECT,
+            HISTORICAL_CONTROL_GIT_OBJECT,
         )
         self.assertEqual(
             observed.expected_control_interface_raw_sha256,
-            CONTROL_INTERFACE_RAW_SHA256,
+            HISTORICAL_CONTROL_INTERFACE_RAW_SHA256,
         )
 
     def test_wrong_external_digest_fails_closed(self) -> None:
-        with self.assertRaisesRegex(
-            AutoRuntimeError,
-            "BOOTSTRAP_CONTROL_CANDIDATE_TRUST_MISMATCH",
-        ):
-            bootstrap_runtime(
-                REPO_ROOT,
-                trust(digest="0" * 64),
-                control_trust(),
-            )
+        with historical_mechanism_runtime_view():
+            with self.assertRaisesRegex(
+                AutoRuntimeError,
+                "BOOTSTRAP_CONTROL_CANDIDATE_TRUST_MISMATCH",
+            ):
+                bootstrap_runtime(
+                    REPO_ROOT,
+                    trust(digest="0" * 64),
+                    control_trust(),
+                )
 
     def test_unapproved_manifest_path_fails_before_bundle_load(self) -> None:
         bad = TrustTuple(CANDIDATE_GIT_OBJECT, CANDIDATE_DIGEST, "CodexSkills/other.json", "CANDIDATE")
@@ -124,15 +126,16 @@ class RuntimeBootstrapTests(unittest.TestCase):
             bootstrap_runtime(REPO_ROOT, bad, control_trust())
 
     def test_active_mode_cannot_reinterpret_candidate_control(self) -> None:
-        with self.assertRaisesRegex(
-            AutoRuntimeError,
-            "BOOTSTRAP_CONTROL_CANDIDATE_TRUST_MISMATCH",
-        ):
-            bootstrap_runtime(
-                REPO_ROOT,
-                trust(mode="ACTIVE"),
-                control_trust(),
-            )
+        with historical_mechanism_runtime_view():
+            with self.assertRaisesRegex(
+                AutoRuntimeError,
+                "BOOTSTRAP_CONTROL_CANDIDATE_TRUST_MISMATCH",
+            ):
+                bootstrap_runtime(
+                    REPO_ROOT,
+                    trust(mode="ACTIVE"),
+                    control_trust(),
+                )
 
     def test_forged_control_digest_fails_closed(self) -> None:
         with self.assertRaisesRegex(
@@ -152,15 +155,16 @@ class RuntimeBootstrapTests(unittest.TestCase):
             MANIFEST_PATH,
             "CANDIDATE",
         )
-        with self.assertRaisesRegex(
-            AutoRuntimeError,
-            "BOOTSTRAP_CONTROL_CANDIDATE_TRUST_MISMATCH",
-        ):
-            bootstrap_runtime(
-                REPO_ROOT,
-                historical,
-                control_trust(),
-            )
+        with historical_mechanism_runtime_view():
+            with self.assertRaisesRegex(
+                AutoRuntimeError,
+                "BOOTSTRAP_CONTROL_CANDIDATE_TRUST_MISMATCH",
+            ):
+                bootstrap_runtime(
+                    REPO_ROOT,
+                    historical,
+                    control_trust(),
+                )
 
     def test_capability_evidence_is_public_path_free(self) -> None:
         capabilities = _capability_smoke(REPO_ROOT)
@@ -179,9 +183,11 @@ class RuntimeBootstrapTests(unittest.TestCase):
                 "state_root": state_root,
                 "expected_bundle_digest": CANDIDATE_DIGEST,
                 "canonical_manifest_path": MANIFEST_PATH,
-                "verified_control_git_object_id": CONTROL_GIT_OBJECT,
+                "verified_control_git_object_id": (
+                    HISTORICAL_CONTROL_GIT_OBJECT
+                ),
                 "expected_control_interface_raw_sha256": (
-                    CONTROL_INTERFACE_RAW_SHA256
+                    HISTORICAL_CONTROL_INTERFACE_RAW_SHA256
                 ),
                 "canonical_control_interface_path": (
                     "CodexSkills/governance/activation/"
@@ -502,11 +508,11 @@ class RuntimeBootstrapTests(unittest.TestCase):
         )
         self.assertEqual(
             historical_control["verified_git_object_id"],
-            CONTROL_GIT_OBJECT,
+            HISTORICAL_CONTROL_GIT_OBJECT,
         )
         self.assertEqual(
             historical_control["interface_raw_sha256"],
-            CONTROL_INTERFACE_RAW_SHA256,
+            HISTORICAL_CONTROL_INTERFACE_RAW_SHA256,
         )
         self.assertTrue(
             historical_control[
@@ -678,22 +684,45 @@ class RuntimeBootstrapTests(unittest.TestCase):
     def test_successor_bound_interface_and_git_modules_validate_exactly(
         self,
     ) -> None:
-        control_object = runtime_bootstrap._split_git_object(
+        historical_control_object = runtime_bootstrap._split_git_object(
             REPO_ROOT,
-            CONTROL_GIT_OBJECT,
-            "TEST_SUCCESSOR_CONTROL",
+            HISTORICAL_CONTROL_GIT_OBJECT,
+            "TEST_HISTORICAL_CONTROL",
         )
         historical_control_raw = runtime_bootstrap._git_blob(
             REPO_ROOT,
-            control_object,
+            historical_control_object,
             runtime_bootstrap.CONTROL_INTERFACE_PATH,
         )
         successor_control = json.loads(historical_control_raw)
+        successor_commit = runtime_bootstrap._run_git(
+            REPO_ROOT,
+            "rev-parse",
+            "HEAD",
+        ).stdout.decode("ascii", errors="strict").strip()
+        successor_git_object = "sha1:" + successor_commit
+        successor_object = runtime_bootstrap._split_git_object(
+            REPO_ROOT,
+            successor_git_object,
+            "TEST_SUCCESSOR_CONTROL",
+        )
         current_interface_path = REPO_ROOT.joinpath(
             "CodexSkills/registry/auto/runtime-interface.json"
         )
         current_interface_raw = current_interface_path.read_bytes()
         current_interface = json.loads(current_interface_raw)
+        successor_control["next_phase"] = (
+            "AUTO_AU040_PUBLISHER_V2_RUNTIME_INTEGRATION"
+        )
+        successor_control["transition_contract"][
+            "runtime_shard_writer_integration_complete"
+        ] = True
+        successor_control["transition_contract"][
+            "publisher_v2_runtime_integration_complete"
+        ] = False
+        successor_control["transport_runtime_interface"][
+            "verified_git_object_id"
+        ] = successor_git_object
         successor_control["transport_runtime_interface"][
             "artifact_digest"
         ] = hashlib.sha256(current_interface_raw).hexdigest()
@@ -710,7 +739,7 @@ class RuntimeBootstrapTests(unittest.TestCase):
             + "\n"
         ).encode("utf-8")
         successor_trust = runtime_bootstrap.ControlTrustTuple(
-            CONTROL_GIT_OBJECT,
+            successor_git_object,
             hashlib.sha256(successor_control_raw).hexdigest(),
             runtime_bootstrap.CONTROL_INTERFACE_PATH,
             runtime_bootstrap.CONTROL_MODE,
@@ -728,19 +757,32 @@ class RuntimeBootstrapTests(unittest.TestCase):
             ).read_bytes()
             for entry in current_interface["module_artifacts"]
         }
+        successor_mechanism_runtime = {
+            relative_path: REPO_ROOT.joinpath(
+                *relative_path.split("/")
+            ).read_bytes()
+            for relative_path in (
+                runtime_bootstrap.TRUSTED_MECHANISM_RUNTIME_PATHS
+            )
+        }
+        successor_mechanism_runtime[
+            runtime_bootstrap.CONTROL_INTERFACE_PATH
+        ] = successor_control_raw
         original_git_blob = runtime_bootstrap._git_blob
         original_read_bytes = Path.read_bytes
-        control_path = REPO_ROOT.joinpath(
-            *runtime_bootstrap.CONTROL_INTERFACE_PATH.split("/")
-        )
+        successor_local_runtime = {
+            REPO_ROOT.joinpath(*relative_path.split("/")): payload
+            for relative_path, payload in (
+                successor_mechanism_runtime.items()
+            )
+        }
 
         def successor_git_blob(repo_root, object_id, relative_path):
             if (
-                object_id == control_object
-                and relative_path
-                == runtime_bootstrap.CONTROL_INTERFACE_PATH
+                object_id == successor_object
+                and relative_path in successor_mechanism_runtime
             ):
-                return successor_control_raw
+                return successor_mechanism_runtime[relative_path]
             if (
                 object_id == source_object
                 and relative_path
@@ -759,8 +801,8 @@ class RuntimeBootstrapTests(unittest.TestCase):
             )
 
         def successor_read_bytes(path):
-            if path == control_path:
-                return successor_control_raw
+            if path in successor_local_runtime:
+                return successor_local_runtime[path]
             return original_read_bytes(path)
 
         with mock.patch.object(
@@ -786,6 +828,16 @@ class RuntimeBootstrapTests(unittest.TestCase):
             self.assertEqual(
                 current_interface["next_phase"],
                 "MECHANISM_POST_AU040_WRITER_CONTROL_SYNC",
+            )
+            self.assertTrue(
+                observed["transition_contract"][
+                    "runtime_shard_writer_integration_complete"
+                ]
+            )
+            self.assertFalse(
+                observed["transition_contract"][
+                    "publisher_v2_runtime_integration_complete"
+                ]
             )
 
         first_module = current_interface["module_artifacts"][0][
@@ -816,6 +868,103 @@ class RuntimeBootstrapTests(unittest.TestCase):
             with self.assertRaisesRegex(
                 AutoRuntimeError,
                 "^BOOTSTRAP_AUTO_RUNTIME_MODULE_GIT_DIGEST_MISMATCH$",
+            ):
+                runtime_bootstrap._verify_control_trust(
+                    REPO_ROOT,
+                    trust(),
+                    successor_trust,
+                )
+
+        first_module_path = REPO_ROOT.joinpath(
+            *first_module.split("/")
+        )
+
+        def forged_module_local_read_bytes(path):
+            if path == first_module_path:
+                return b"forged successor local module\n"
+            return successor_read_bytes(path)
+
+        with mock.patch.object(
+            runtime_bootstrap,
+            "_git_blob",
+            side_effect=successor_git_blob,
+        ), mock.patch.object(
+            Path,
+            "read_bytes",
+            forged_module_local_read_bytes,
+        ):
+            with self.assertRaisesRegex(
+                AutoRuntimeError,
+                "^BOOTSTRAP_AUTO_RUNTIME_MODULE_LOCAL_DRIFT$",
+            ):
+                runtime_bootstrap._verify_control_trust(
+                    REPO_ROOT,
+                    trust(),
+                    successor_trust,
+                )
+
+        mechanism_path = next(
+            path
+            for path in runtime_bootstrap.TRUSTED_MECHANISM_RUNTIME_PATHS
+            if path != runtime_bootstrap.CONTROL_INTERFACE_PATH
+        )
+
+        def forged_mechanism_git_blob(
+            repo_root,
+            object_id,
+            relative_path,
+        ):
+            if (
+                object_id == successor_object
+                and relative_path == mechanism_path
+            ):
+                return b"forged successor Mechanism Git module\n"
+            return successor_git_blob(
+                repo_root,
+                object_id,
+                relative_path,
+            )
+
+        with mock.patch.object(
+            runtime_bootstrap,
+            "_git_blob",
+            side_effect=forged_mechanism_git_blob,
+        ), mock.patch.object(
+            Path,
+            "read_bytes",
+            successor_read_bytes,
+        ):
+            with self.assertRaisesRegex(
+                AutoRuntimeError,
+                "^BOOTSTRAP_TRUSTED_RUNTIME_LOCAL_DRIFT$",
+            ):
+                runtime_bootstrap._verify_control_trust(
+                    REPO_ROOT,
+                    trust(),
+                    successor_trust,
+                )
+
+        mechanism_local_path = REPO_ROOT.joinpath(
+            *mechanism_path.split("/")
+        )
+
+        def forged_mechanism_local_read_bytes(path):
+            if path == mechanism_local_path:
+                return b"forged successor local Mechanism module\n"
+            return successor_read_bytes(path)
+
+        with mock.patch.object(
+            runtime_bootstrap,
+            "_git_blob",
+            side_effect=successor_git_blob,
+        ), mock.patch.object(
+            Path,
+            "read_bytes",
+            forged_mechanism_local_read_bytes,
+        ):
+            with self.assertRaisesRegex(
+                AutoRuntimeError,
+                "^BOOTSTRAP_TRUSTED_RUNTIME_LOCAL_DRIFT$",
             ):
                 runtime_bootstrap._verify_control_trust(
                     REPO_ROOT,

@@ -26,11 +26,10 @@ from CodexSkills.governance.tools.canonical_json import (
 from runtime_helpers import (
     CANDIDATE_DIGEST,
     CANDIDATE_GIT_OBJECT,
-    CONTROL_GIT_OBJECT,
-    CONTROL_INTERFACE_RAW_SHA256,
     REPO_ROOT,
+    current_checkout_control_trust,
     final_contract,
-    synthetic_bound_context,
+    synthetic_current_control_context,
 )
 
 
@@ -292,15 +291,16 @@ def materialize(root: Path, payloads: Mapping[str, bytes]) -> None:
 class RuntimeActivationTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
+        observed = current_checkout_control_trust()
         cls.trust = ActivationControlTrustTuple(
-            CONTROL_GIT_OBJECT,
-            CONTROL_INTERFACE_RAW_SHA256,
+            observed.verified_git_object_id,
+            observed.expected_control_interface_raw_sha256,
             CONTROL_INTERFACE_PATH,
             CONTROL_MODE,
         )
         cls.handshake = ActivationHandshake(
             REPO_ROOT,
-            synthetic_bound_context(),
+            synthetic_current_control_context(),
             cls.trust,
         )
 
@@ -310,7 +310,7 @@ class RuntimeActivationTests(unittest.TestCase):
         self.assertEqual(len(self.handshake.bundle.schemas), 33)
         self.assertEqual(len(self.handshake.bundle.policies), 5)
         bad = ActivationControlTrustTuple(
-            CONTROL_GIT_OBJECT,
+            self.trust.verified_git_object_id,
             "d" * 64,
             CONTROL_INTERFACE_PATH,
             CONTROL_MODE,
@@ -319,7 +319,11 @@ class RuntimeActivationTests(unittest.TestCase):
             AutoRuntimeError,
             "ACTIVATION_CONTROL_CONTEXT_MISMATCH",
         ):
-            ActivationHandshake(REPO_ROOT, synthetic_bound_context(), bad)
+            ActivationHandshake(
+                REPO_ROOT,
+                synthetic_current_control_context(),
+                bad,
+            )
 
     def test_intent_derives_only_frozen_notification_metadata(self) -> None:
         intent = intent_fixture()
@@ -436,7 +440,7 @@ class RuntimeActivationTests(unittest.TestCase):
             ):
                 ActivationHandshake(
                     REPO_ROOT,
-                    synthetic_bound_context(),
+                    synthetic_current_control_context(),
                     self.trust,
                 )
 

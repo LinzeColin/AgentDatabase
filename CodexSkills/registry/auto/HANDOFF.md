@@ -1,9 +1,11 @@
-# Auto AU-040 runtime writer integration handoff
+# Auto successor-control test fixture corrective handoff
 
 - State: `DRAFT_NON_ACTIVE`
-- Phase: `AUTO_AU040_RUNTIME_WRITER_INTEGRATION`
+- Phase: `AUTO_SUCCESSOR_CONTROL_TEST_FIXTURE_CORRECTIVE`
 - Phase base Git object:
-  `e2cfb3950591ec4d5d1c876987786e79e38d3c54`
+  `2a64469d7da908b88b555a437fdcfdaf8cc3fb6e`
+- Runtime writer integration Git object:
+  `2a64469d7da908b88b555a437fdcfdaf8cc3fb6e`
 - Historical control observation Git object:
   `sha1:00c4a52d177898b1999b87b29ddb480e89908729`
 - Historical control observation raw SHA-256:
@@ -30,7 +32,37 @@
   `f1f9331df1b56c80e2fa7415fe2fe3d714dcd831cec94390afa43c078dedf38b`
 - Current Auto module count: `24`
 
-## Completed in this phase
+## Completed in this corrective
+
+Auto's test fixtures now keep three trust views separate without changing any
+production gate:
+
+1. The historical 00c4/3160 control fixture reads its complete ten-path
+   Mechanism runtime closure from the verified Git object. Candidate-specific
+   functional negatives may expose those exact blobs as a test-only historical
+   local view; the helper never returns a production bootstrap result.
+2. Candidate-tuple negative tests run inside that consistent historical
+   closure, so they reach and assert their exact candidate error rather than
+   being preempted by an unrelated later working-tree control drift.
+3. Activation functional tests derive a test-only tuple from the exact current
+   committed `HEAD`, require local control bytes to equal that Git blob, and
+   then execute the real handshake constructor. A later Mechanism successor
+   therefore becomes the functional fixture only after it has a local commit
+   object; uncommitted drift is never trusted.
+4. Production stale-tuple tests use the real working tree. They still require
+   exactly `BOOTSTRAP_AUTO_RUNTIME_INTERFACE_LOCAL_DRIFT` when local control is
+   00c4, or `BOOTSTRAP_CONTROL_INTERFACE_LOCAL_DRIFT` after a successor changes
+   it, and all state/Gmail/publisher sentinels remain uncalled.
+
+The successor-binding regression now derives a distinct external control
+object from current `HEAD`, binds the unchanged current runtime-interface and
+24-module set, and simulates the complete ten-path successor Mechanism
+Git/local closure. The exact successor passes. Forged Auto Git bytes, Auto
+local bytes, Mechanism Git bytes, and Mechanism local bytes each fail with
+their exact production drift code. No production verifier function is patched
+out and no arbitrary exception is accepted.
+
+## Preserved runtime writer integration
 
 The runtime-interface builder consumes 00c4 only as a historical Git-object
 observation. It reads the control and the four observed Mechanism runtime blobs
@@ -150,6 +182,17 @@ and the development-only functional shadow remain byte-stable, while
 production bootstrap with the stale 00c4 tuple fails exactly with
 `BOOTSTRAP_CONTROL_INTERFACE_LOCAL_DRIFT`.
 
+The same complete 157-test suite also passes under a coherent test-only
+successor Git/local overlay that changes both exact paths before test
+discovery while retaining every production verifier:
+
+```text
+CodexSkills/governance/activation/control-interface.json
+CodexSkills/governance/tools/build_activation_control.py
+Ran 157 tests
+OK
+```
+
 A separate successor-binding simulation proves that production bootstrap can
 consume a future externally pinned control that binds this exact interface and
 24-module set. Bootstrap no longer treats the prior
@@ -157,7 +200,10 @@ consume a future externally pinned control that binds this exact interface and
 condition; it instead re-reads every declared module from the control-bound
 Auto Git object, verifies its declared digest, and then requires the local byte
 to equal that Git blob. A forged bound-object module fails exactly with
-`BOOTSTRAP_AUTO_RUNTIME_MODULE_GIT_DIGEST_MISMATCH`.
+`BOOTSTRAP_AUTO_RUNTIME_MODULE_GIT_DIGEST_MISMATCH`; forged Auto local,
+Mechanism Git, and Mechanism local bytes fail exactly with
+`BOOTSTRAP_AUTO_RUNTIME_MODULE_LOCAL_DRIFT` and
+`BOOTSTRAP_TRUSTED_RUNTIME_LOCAL_DRIFT`.
 
 The Mechanism suite truthfully remains in the expected cross-owner transition:
 
