@@ -9,8 +9,8 @@ M0b shared candidate; the private set never enters the shared bundle.
 
 `transport-draft/` preserves the four accepted AU-040 source schemas.
 `schemas/public-v2/` contains their promoted exact-byte copies and a separate
-promotion interface. Both roots are outside the current recursive
-public-schema loader, so the trusted 29/5 candidate remains unchanged.
+promotion interface. Both roots are outside the recursive public-schema
+loader used by the historical 29/5 candidate.
 
 Deterministic contract entrypoints:
 
@@ -204,8 +204,12 @@ cross-artifact semantic guards. Auto then promoted the four unchanged schema
 files to `schemas/public-v2/`. The promotion interface binds both source
 interfaces, every raw and canonical digest, the stable final paths, and the
 guard-code set. Its validator proves exact-byte equality and the offline 31/5
-target closure while separately proving the current 29/5 candidate contains
-neither draft nor promoted paths.
+target closure. The historical 29/5 candidate is proved from the exact
+manifest blob at candidate object `899a4374...`; exact equality with the same
+blob at promotion object `ab49666...` proves that the Auto promotion did not
+change it. The validator deliberately does not use the current working-tree
+manifest as historical truth, so the authorized Mechanism 31/5
+materialization can follow without invalidating promotion evidence.
 
 The next owner phase is Mechanism-only materialization of the final 31/5
 candidate, consumer, and activation-control tuples. No such tuple exists yet;

@@ -32,6 +32,8 @@
     "draft_interface_raw_sha256": "aa4d1b174d45b87424b81f0896c7a594e72f24bfdc16e4128c133ed543fb3831",
     "draft_paths_forbidden_in_candidate_manifest": true,
     "draft_schema_count": 4,
+    "historical_candidate_manifest_exact_blob_verified": true,
+    "historical_candidate_manifest_raw_sha256": "0d2600fd54fcb1fb5dd0901d9acc31b43b5cae0be8ee599f5c3c7ca0b01f9109",
     "loader_isolation_root": "CodexSkills/registry/auto/schemas/public-v2/",
     "manifest_entry_numbers_contiguous": true,
     "part_numbers_reused": false,
@@ -67,9 +69,11 @@
     ],
     "retention_exact_affected_records_required": true,
     "retention_index_readiness_required": true,
+    "schema_promotion_evidence_git_object_id": "sha1:ab49666bd3343c2abbfc6766478fad63d44163d0",
     "schema_promotion_interface_path": "CodexSkills/registry/auto/schemas/public-v2/promotion-interface.json",
     "schema_promotion_interface_raw_sha256": "65c2e83bb2491d1cb3059767cf1705fc7541bd7e97449f33a51ba17a04f5e595",
-    "transaction_manifest_v1_role": "TRANSACTION_SETTLEMENT_ONLY"
+    "transaction_manifest_v1_role": "TRANSACTION_SETTLEMENT_ONLY",
+    "working_tree_manifest_assumed_historical_candidate": false
   },
   "au_040_transport_schema_draft_complete": true,
   "candidate_bundle_digest": "2704ed797c843f969965db600747abcdcd217550522e6479aab6817ef5a86ef5",
@@ -165,7 +169,7 @@
       "relative_path": "CodexSkills/registry/auto/tools/activation_handshake_cli.py"
     },
     {
-      "artifact_digest": "aba4b7fdae4f40b332a19f9173c363def82d9d3350ea85ae741c21fc1cd29910",
+      "artifact_digest": "a40d4c31c4ea3a20aeabd70b85658956d7faa3ade6f32cfaf9f4d4f5ac8eba43",
       "relative_path": "CodexSkills/registry/auto/tools/build_runtime_interface.py"
     },
     {

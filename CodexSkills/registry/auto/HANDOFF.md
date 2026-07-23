@@ -1,24 +1,42 @@
-# Auto AU-040 exact-byte schema promotion handoff
+# Auto AU-040 promotion historical-trust corrective handoff
 
 - State: `DRAFT_NON_ACTIVE_SCHEMA_PROMOTED`
-- Phase: `AUTO_SCHEMA_PROMOTION_TO_FINAL_PATHS`
-- Phase base: `25a955728fd18249d9b0ae7bc13428a5a69f259c`
-- Current trusted candidate Git object:
+- Phase: `AUTO_PROMOTION_HISTORICAL_TRUST_CORRECTIVE`
+- Phase base: `ab49666bd3343c2abbfc6766478fad63d44163d0`
+- Historical trusted candidate Git object:
   `sha1:899a4374bc02f5e18444fea7404864df7b118adf`
-- Current trusted candidate bundle digest:
+- Historical trusted candidate bundle digest:
   `2704ed797c843f969965db600747abcdcd217550522e6479aab6817ef5a86ef5`
-- Current candidate size: `29 schemas / 5 policies`
+- Historical candidate size: `29 schemas / 5 policies`
+- Historical candidate manifest raw SHA-256:
+  `0d2600fd54fcb1fb5dd0901d9acc31b43b5cae0be8ee599f5c3c7ca0b01f9109`
+- Promotion evidence Git object:
+  `sha1:ab49666bd3343c2abbfc6766478fad63d44163d0`
 - Promotion interface:
   `CodexSkills/registry/auto/schemas/public-v2/promotion-interface.json`
 - Promotion interface raw SHA-256:
   `65c2e83bb2491d1cb3059767cf1705fc7541bd7e97449f33a51ba17a04f5e595`
 - Auto runtime interface raw SHA-256:
-  `b1da80b2bba552f391863ec82d1c6ff18cedc6c370b55b8ddd81796c112c01b1`
+  `e8d8af9b74908e56a86550492f4cf26a100bfd674cf858c61e72e3193b3d8a24`
 
 ## Completed in this phase
 
-Auto consumed the independently verified Mechanism semantic/policy acceptance
-interface:
+The promotion validator no longer treats the current working-tree candidate
+manifest as a permanent copy of the historical 29/5 candidate. It now reads
+the canonical manifest directly from both the historical candidate object
+`899a4374...` and the Auto promotion object `ab49666...`, requires exact-byte
+equality and the pinned raw digest above, and then validates the exact
+29-schema / five-policy tuple and path isolation.
+
+The promotion interface itself remains byte-identical. The evidence object
+also proves that the Auto promotion commit did not change the candidate
+manifest. A later authorized Mechanism commit may therefore replace the
+working-tree manifest with the accepted 31/5 target without invalidating the
+historical promotion evidence. Forged historical tuples, raw digests, object
+bytes, or promotion-interface bytes fail closed.
+
+The prior promotion consumed the independently verified Mechanism
+semantic/policy acceptance interface:
 
 ```text
 path=CodexSkills/governance/au040/semantic-policy-acceptance.json
@@ -47,11 +65,13 @@ The deterministic promotion builder and validator prove:
 - every raw and canonical digest, `$id`, self pointer, relationship, and final
   path matches both source interfaces;
 - final paths are under `schemas/public-v2/` and contain no `draft` component;
-- the current recursive `schemas/public/` loader still sees exactly the
-  current candidate set;
-- the current candidate remains 29/5 and names neither draft nor promoted
-  paths;
+- at the promotion evidence object, the recursive `schemas/public/` loader
+  still saw exactly the historical candidate set;
+- the historical candidate manifest is 29/5 and names neither draft nor
+  promoted paths;
 - the accepted offline target closes at exactly 31 schemas / five policies;
+- the current working-tree manifest is not used as historical truth, so a
+  later legitimate 31/5 materialization does not break this evidence;
 - unknown schema URNs and any interface, guard-set, or byte drift fail closed.
 
 The promotion interface acknowledges all seven required Mechanism production
@@ -91,12 +111,13 @@ The accepted future policy material remains Mechanism-owned:
 - `schedule_authority_resolved=false`;
 - `schedule_complete=false`.
 
-This phase did not create or modify a candidate bundle, consumer, activation
-control, runtime schema loader, writer, publisher, queue, retention executor,
-`CodexSkills/VERSION`, activation instance, state root, Gmail notification,
-shard, manifest instance, index instance, automation, or watermark. It did not
-call the verifier, perform historical validation/backfill, add a time window,
-restart the App, or touch any paused automation.
+This corrective changed no candidate bundle, consumer, activation control,
+promotion interface, runtime schema loader, writer, publisher, queue,
+retention executor, `CodexSkills/VERSION`, activation instance, state root,
+Gmail notification, shard, manifest instance, index instance, automation, or
+watermark. It did not call the verifier, perform historical run
+validation/backfill, add a time window, restart the App, or touch any paused
+automation.
 
 ## Next exact action
 

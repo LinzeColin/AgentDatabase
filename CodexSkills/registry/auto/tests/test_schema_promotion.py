@@ -5,6 +5,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 
 AUTO_DIR = Path(__file__).resolve().parents[1]
@@ -19,6 +20,9 @@ from CodexSkills.governance.tools.validate_mechanism import (  # noqa: E402
     validate_instance,
 )
 from CodexSkills.registry.auto.tools import build_schema_promotion as builder
+from CodexSkills.registry.auto.tools import (
+    validate_schema_promotion as promotion_validator,
+)
 from CodexSkills.registry.auto.tools.validate_schema_promotion import (
     load_schema_promotion,
     validate_promoted_directory,
@@ -76,7 +80,7 @@ class SchemaPromotionTests(unittest.TestCase):
         self.assertFalse(interface["canonical_publication_permitted"])
         self.assertTrue(interface["activation_forbidden"])
 
-    def test_current_candidate_is_29_5_and_target_is_31_5(self) -> None:
+    def test_historical_candidate_is_29_5_and_target_is_31_5(self) -> None:
         acceptance = self.contract.acceptance
         self.assertEqual(
             len(acceptance.transport.current_candidate.schemas),
@@ -92,6 +96,110 @@ class SchemaPromotionTests(unittest.TestCase):
         self.assertEqual(current["schema_count"], 29)
         self.assertEqual(current["policy_count"], 5)
         self.assertTrue(current["unchanged_by_this_promotion"])
+        evidence = self.contract.historical_candidate_evidence
+        self.assertEqual(
+            evidence["historical_candidate_git_object_id"],
+            builder.CURRENT_CANDIDATE_GIT_OBJECT,
+        )
+        self.assertEqual(
+            evidence["promotion_evidence_git_object_id"],
+            promotion_validator.PROMOTION_EVIDENCE_GIT_OBJECT,
+        )
+        self.assertFalse(
+            evidence["working_tree_candidate_manifest_used"]
+        )
+
+    def test_later_current_tree_31_5_manifest_is_not_historical_truth(self) -> None:
+        later_current_manifest = {
+            "bundle_digest": "f" * 64,
+            "policy_count": 5,
+            "schema_count": 31,
+        }
+        with mock.patch.object(
+            promotion_validator,
+            "strict_load",
+            return_value=later_current_manifest,
+        ) as working_tree_loader:
+            evidence = (
+                promotion_validator.validate_historical_candidate_evidence(
+                    self.contract.interface
+                )
+            )
+        working_tree_loader.assert_not_called()
+        self.assertFalse(
+            evidence["working_tree_candidate_manifest_used"]
+        )
+
+    def test_forged_historical_tuple_and_blob_fail_closed(self) -> None:
+        forged_tuple = copy.deepcopy(self.contract.interface)
+        forged_tuple["current_trusted_candidate"][
+            "git_object_id"
+        ] = "sha1:" + "0" * 40
+        with self.assertRaisesRegex(
+            ContractError,
+            "AUTO_SCHEMA_PROMOTION_HISTORICAL_TRUST_TUPLE_MISMATCH",
+        ):
+            promotion_validator.validate_historical_candidate_evidence(
+                forged_tuple
+            )
+
+        candidate_raw = promotion_validator._git_blob(
+            REPO_ROOT,
+            builder.CURRENT_CANDIDATE_GIT_OBJECT,
+            builder.CURRENT_CANDIDATE_MANIFEST_PATH,
+        )
+
+        def drifted_blob(repo_root, object_id, relative_path):
+            if (
+                object_id
+                == promotion_validator.PROMOTION_EVIDENCE_GIT_OBJECT
+                and relative_path
+                == builder.CURRENT_CANDIDATE_MANIFEST_PATH
+            ):
+                return candidate_raw + b" "
+            return promotion_validator._git_blob(
+                repo_root,
+                object_id,
+                relative_path,
+            )
+
+        with self.assertRaisesRegex(
+            ContractError,
+            "AUTO_SCHEMA_PROMOTION_HISTORICAL_BLOB_DRIFT",
+        ):
+            promotion_validator.validate_historical_candidate_evidence(
+                self.contract.interface,
+                git_blob=drifted_blob,
+            )
+
+    def test_forged_historical_manifest_digest_fails_closed(self) -> None:
+        candidate_raw = promotion_validator._git_blob(
+            REPO_ROOT,
+            builder.CURRENT_CANDIDATE_GIT_OBJECT,
+            builder.CURRENT_CANDIDATE_MANIFEST_PATH,
+        )
+        forged_raw = candidate_raw.replace(
+            builder.CURRENT_CANDIDATE_BUNDLE_DIGEST.encode("ascii"),
+            ("f" * 64).encode("ascii"),
+        )
+
+        def forged_blob(repo_root, object_id, relative_path):
+            if relative_path == builder.CURRENT_CANDIDATE_MANIFEST_PATH:
+                return forged_raw
+            return promotion_validator._git_blob(
+                repo_root,
+                object_id,
+                relative_path,
+            )
+
+        with self.assertRaisesRegex(
+            ContractError,
+            "AUTO_SCHEMA_PROMOTION_HISTORICAL_RAW_DIGEST_MISMATCH",
+        ):
+            promotion_validator.validate_historical_candidate_evidence(
+                self.contract.interface,
+                git_blob=forged_blob,
+            )
 
     def test_loader_isolation_and_next_owner_phase_are_explicit(self) -> None:
         interface = self.contract.interface

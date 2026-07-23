@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import subprocess
 from pathlib import Path
 
 
@@ -109,6 +110,12 @@ EXPECTED_PROMOTED_SCHEMA_IDS = [
     "urn:linzecolin:agentdatabase:skillops:"
     "schema:run-event-index-entry:v1",
 ]
+SCHEMA_PROMOTION_EVIDENCE_GIT_OBJECT = (
+    "sha1:ab49666bd3343c2abbfc6766478fad63d44163d0"
+)
+HISTORICAL_CANDIDATE_MANIFEST_RAW_SHA256 = (
+    "0d2600fd54fcb1fb5dd0901d9acc31b43b5cae0be8ee599f5c3c7ca0b01f9109"
+)
 
 
 def _strict_object(pairs):
@@ -118,6 +125,38 @@ def _strict_object(pairs):
             raise ValueError("AUTO_CONSUMER_INTERFACE_DUPLICATE_KEY")
         value[key] = item
     return value
+
+
+def _git_blob(object_id, relative_path):
+    if (
+        not object_id.startswith("sha1:")
+        or len(object_id) != len("sha1:") + 40
+    ):
+        raise ValueError("AUTO_RUNTIME_INTERFACE_GIT_OBJECT_ID_INVALID")
+    try:
+        result = subprocess.run(
+            [
+                "git",
+                "-C",
+                str(REPO_ROOT),
+                "show",
+                f"{object_id.split(':', 1)[1]}:{relative_path}",
+            ],
+            stdin=subprocess.DEVNULL,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            timeout=15,
+            check=False,
+        )
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        raise ValueError(
+            "AUTO_RUNTIME_INTERFACE_HISTORICAL_BLOB_READ_FAILED"
+        ) from exc
+    if result.returncode != 0:
+        raise ValueError(
+            "AUTO_RUNTIME_INTERFACE_HISTORICAL_BLOB_READ_FAILED"
+        )
+    return result.stdout
 
 
 def _consumer_first_evidence(path=CONSUMER_INTERFACE_PATH):
@@ -274,6 +313,9 @@ def _schema_promotion_evidence(path=SCHEMA_PROMOTION_INTERFACE_PATH):
         or current.get("bundle_digest") != CANDIDATE_BUNDLE_DIGEST
         or current.get("schema_count") != 29
         or current.get("policy_count") != 5
+        or current.get("canonical_manifest_path")
+        != CANDIDATE_MANIFEST_PATH
+        or current.get("mode") != "CANDIDATE"
         or current.get("unchanged_by_this_promotion") is not True
         or not isinstance(acceptance, dict)
         or acceptance.get("interface_path")
@@ -332,6 +374,62 @@ def _schema_promotion_evidence(path=SCHEMA_PROMOTION_INTERFACE_PATH):
             raise ValueError(
                 "AUTO_SCHEMA_PROMOTION_INTERFACE_BYTES_MISMATCH"
             )
+    historical_manifest_raw = _git_blob(
+        current["git_object_id"],
+        current["canonical_manifest_path"],
+    )
+    promotion_manifest_raw = _git_blob(
+        SCHEMA_PROMOTION_EVIDENCE_GIT_OBJECT,
+        current["canonical_manifest_path"],
+    )
+    if historical_manifest_raw != promotion_manifest_raw:
+        raise ValueError(
+            "AUTO_SCHEMA_PROMOTION_HISTORICAL_MANIFEST_BLOB_DRIFT"
+        )
+    if (
+        hashlib.sha256(historical_manifest_raw).hexdigest()
+        != HISTORICAL_CANDIDATE_MANIFEST_RAW_SHA256
+    ):
+        raise ValueError(
+            "AUTO_SCHEMA_PROMOTION_HISTORICAL_MANIFEST_DIGEST_MISMATCH"
+        )
+    try:
+        historical_manifest = json.loads(
+            historical_manifest_raw.decode("utf-8"),
+            object_pairs_hook=_strict_object,
+        )
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise ValueError(
+            "AUTO_SCHEMA_PROMOTION_HISTORICAL_MANIFEST_INVALID"
+        ) from exc
+    if (
+        historical_manifest.get("bundle_digest")
+        != CANDIDATE_BUNDLE_DIGEST
+        or historical_manifest.get("schema_count") != 29
+        or historical_manifest.get("policy_count") != 5
+        or any(
+            not isinstance(entry, dict)
+            or not isinstance(entry.get("relative_path"), str)
+            or "/transport-draft/" in entry["relative_path"]
+            or entry["relative_path"].startswith(
+                "CodexSkills/registry/auto/schemas/public-v2/"
+            )
+            for entry in historical_manifest.get("schemas", [])
+        )
+    ):
+        raise ValueError(
+            "AUTO_SCHEMA_PROMOTION_HISTORICAL_MANIFEST_CONTRACT_MISMATCH"
+        )
+    if (
+        _git_blob(
+            SCHEMA_PROMOTION_EVIDENCE_GIT_OBJECT,
+            SCHEMA_PROMOTION_INTERFACE_REPO_PATH,
+        )
+        != raw
+    ):
+        raise ValueError(
+            "AUTO_SCHEMA_PROMOTION_HISTORICAL_INTERFACE_BLOB_DRIFT"
+        )
     return {
         "acceptance_interface_path": (
             AU040_ACCEPTANCE_INTERFACE_REPO_PATH
@@ -340,6 +438,10 @@ def _schema_promotion_evidence(path=SCHEMA_PROMOTION_INTERFACE_PATH):
             EXPECTED_AU040_ACCEPTANCE_INTERFACE_RAW_SHA256
         ),
         "guard_codes": list(EXPECTED_AU040_GUARD_CODES),
+        "historical_candidate_manifest_exact_blob_verified": True,
+        "historical_candidate_manifest_raw_sha256": (
+            HISTORICAL_CANDIDATE_MANIFEST_RAW_SHA256
+        ),
         "next_phase": interface["next_phase"],
         "promoted_schema_count": 4,
         "promotion_interface_path": (
@@ -348,8 +450,12 @@ def _schema_promotion_evidence(path=SCHEMA_PROMOTION_INTERFACE_PATH):
         "promotion_interface_raw_sha256": (
             EXPECTED_SCHEMA_PROMOTION_INTERFACE_RAW_SHA256
         ),
+        "schema_promotion_evidence_git_object_id": (
+            SCHEMA_PROMOTION_EVIDENCE_GIT_OBJECT
+        ),
         "target_policy_count": 5,
         "target_schema_count": 31,
+        "working_tree_manifest_assumed_historical_candidate": False,
     }
 
 
@@ -433,6 +539,12 @@ def build():
                 "schema:daily-run-shard-manifest:v1"
             ),
             "manifest_entry_numbers_contiguous": True,
+            "historical_candidate_manifest_exact_blob_verified": promotion[
+                "historical_candidate_manifest_exact_blob_verified"
+            ],
+            "historical_candidate_manifest_raw_sha256": promotion[
+                "historical_candidate_manifest_raw_sha256"
+            ],
             "current_candidate_schema_count": transport[
                 "current_schema_count"
             ],
@@ -473,7 +585,13 @@ def build():
             "schema_promotion_interface_raw_sha256": promotion[
                 "promotion_interface_raw_sha256"
             ],
+            "schema_promotion_evidence_git_object_id": promotion[
+                "schema_promotion_evidence_git_object_id"
+            ],
             "transaction_manifest_v1_role": "TRANSACTION_SETTLEMENT_ONLY",
+            "working_tree_manifest_assumed_historical_candidate": promotion[
+                "working_tree_manifest_assumed_historical_candidate"
+            ],
         },
         "candidate_bundle_digest": CANDIDATE_BUNDLE_DIGEST,
         "candidate_git_object_id": CANDIDATE_GIT_OBJECT,

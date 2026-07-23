@@ -137,6 +137,29 @@ class RuntimeBootstrapTests(unittest.TestCase):
             "65c2e83bb2491d1cb3059767cf1705fc"
             "7541bd7e97449f33a51ba17a04f5e595",
         )
+        self.assertTrue(
+            interface["au_040_transport_contract"][
+                "historical_candidate_manifest_exact_blob_verified"
+            ]
+        )
+        self.assertEqual(
+            interface["au_040_transport_contract"][
+                "historical_candidate_manifest_raw_sha256"
+            ],
+            "0d2600fd54fcb1fb5dd0901d9acc31b4"
+            "3b5cae0be8ee599f5c3c7ca0b01f9109",
+        )
+        self.assertEqual(
+            interface["au_040_transport_contract"][
+                "schema_promotion_evidence_git_object_id"
+            ],
+            "sha1:ab49666bd3343c2abbfc6766478fad63d44163d0",
+        )
+        self.assertFalse(
+            interface["au_040_transport_contract"][
+                "working_tree_manifest_assumed_historical_candidate"
+            ]
+        )
         self.assertEqual(
             interface["au_040_transport_contract"][
                 "production_semantic_guard_codes_acknowledged"

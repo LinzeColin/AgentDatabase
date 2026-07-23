@@ -6,9 +6,10 @@ from __future__ import annotations
 import argparse
 import dataclasses
 import hashlib
+import subprocess
 import sys
 from pathlib import Path
-from typing import Any, Mapping, Optional, Sequence
+from typing import Any, Callable, Mapping, Optional, Sequence
 
 
 AUTO_DIR = Path(__file__).resolve().parents[1]
@@ -21,6 +22,7 @@ sys.path.insert(
 
 from CodexSkills.governance.tools.canonical_json import (  # noqa: E402
     canonicalize_object,
+    parse_json_bytes,
 )
 from CodexSkills.governance.tools.validate_au040_semantic_acceptance import (  # noqa: E402
     AU040AcceptanceContract,
@@ -41,6 +43,18 @@ class SchemaPromotionContract:
     interface: Mapping[str, Any]
     acceptance: AU040AcceptanceContract
     promoted_schemas: Mapping[str, Any]
+    historical_candidate_evidence: Mapping[str, Any]
+
+
+PROMOTION_EVIDENCE_GIT_OBJECT = (
+    "sha1:ab49666bd3343c2abbfc6766478fad63d44163d0"
+)
+HISTORICAL_CANDIDATE_MANIFEST_RAW_SHA256 = (
+    "0d2600fd54fcb1fb5dd0901d9acc31b43b5cae0be8ee599f5c3c7ca0b01f9109"
+)
+PROMOTION_INTERFACE_RAW_SHA256 = (
+    "65c2e83bb2491d1cb3059767cf1705fc7541bd7e97449f33a51ba17a04f5e595"
+)
 
 
 def _fail(code: str) -> None:
@@ -91,17 +105,91 @@ def validate_promoted_directory(
     return promoted
 
 
-def _validate_current_candidate_manifest() -> None:
-    manifest = strict_load(
-        REPO_ROOT / builder.CURRENT_CANDIDATE_MANIFEST_PATH
+def _git_blob(
+    repo_root: Path,
+    object_id: str,
+    relative_path: str,
+) -> bytes:
+    if (
+        not object_id.startswith("sha1:")
+        or len(object_id) != len("sha1:") + 40
+    ):
+        _fail("AUTO_SCHEMA_PROMOTION_GIT_OBJECT_ID_INVALID")
+    try:
+        result = subprocess.run(
+            [
+                "git",
+                "-C",
+                str(repo_root),
+                "show",
+                f"{object_id.split(':', 1)[1]}:{relative_path}",
+            ],
+            stdin=subprocess.DEVNULL,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            timeout=15,
+            check=False,
+        )
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        raise ContractError(
+            "AUTO_SCHEMA_PROMOTION_HISTORICAL_BLOB_READ_FAILED"
+        ) from exc
+    if result.returncode != 0:
+        _fail("AUTO_SCHEMA_PROMOTION_HISTORICAL_BLOB_READ_FAILED")
+    return result.stdout
+
+
+def validate_historical_candidate_evidence(
+    interface: Mapping[str, Any],
+    *,
+    repo_root: Path = REPO_ROOT,
+    git_blob: Optional[Callable[[Path, str, str], bytes]] = None,
+) -> Mapping[str, Any]:
+    current = interface.get("current_trusted_candidate")
+    expected_current = {
+        "bundle_digest": builder.CURRENT_CANDIDATE_BUNDLE_DIGEST,
+        "canonical_manifest_path": (
+            builder.CURRENT_CANDIDATE_MANIFEST_PATH
+        ),
+        "git_object_id": builder.CURRENT_CANDIDATE_GIT_OBJECT,
+        "mode": "CANDIDATE",
+        "policy_count": 5,
+        "schema_count": 29,
+        "unchanged_by_this_promotion": True,
+    }
+    if current != expected_current:
+        _fail(
+            "AUTO_SCHEMA_PROMOTION_HISTORICAL_TRUST_TUPLE_MISMATCH"
+        )
+    read_blob = git_blob or _git_blob
+    manifest_path = current["canonical_manifest_path"]
+    historical_raw = read_blob(
+        repo_root,
+        current["git_object_id"],
+        manifest_path,
     )
+    promotion_raw = read_blob(
+        repo_root,
+        PROMOTION_EVIDENCE_GIT_OBJECT,
+        manifest_path,
+    )
+    if historical_raw != promotion_raw:
+        _fail("AUTO_SCHEMA_PROMOTION_HISTORICAL_BLOB_DRIFT")
+    if (
+        hashlib.sha256(historical_raw).hexdigest()
+        != HISTORICAL_CANDIDATE_MANIFEST_RAW_SHA256
+    ):
+        _fail("AUTO_SCHEMA_PROMOTION_HISTORICAL_RAW_DIGEST_MISMATCH")
+    manifest = parse_json_bytes(historical_raw)
+    if not isinstance(manifest, dict):
+        _fail("AUTO_SCHEMA_PROMOTION_HISTORICAL_MANIFEST_INVALID")
     if (
         manifest.get("bundle_digest")
         != builder.CURRENT_CANDIDATE_BUNDLE_DIGEST
         or manifest.get("schema_count") != 29
         or manifest.get("policy_count") != 5
     ):
-        _fail("AUTO_SCHEMA_PROMOTION_CURRENT_CANDIDATE_DRIFT")
+        _fail("AUTO_SCHEMA_PROMOTION_HISTORICAL_CANDIDATE_DRIFT")
     schema_paths = [
         entry.get("relative_path")
         for entry in manifest.get("schemas", [])
@@ -115,7 +203,31 @@ def _validate_current_candidate_manifest() -> None:
         )
         for relative_path in schema_paths
     ):
-        _fail("AUTO_SCHEMA_PROMOTION_CURRENT_CANDIDATE_PATH_CONTAMINATION")
+        _fail(
+            "AUTO_SCHEMA_PROMOTION_HISTORICAL_CANDIDATE_PATH_CONTAMINATION"
+        )
+    promotion_interface_raw = read_blob(
+        repo_root,
+        PROMOTION_EVIDENCE_GIT_OBJECT,
+        builder.PROMOTION_INTERFACE_REPO_PATH,
+    )
+    if (
+        hashlib.sha256(promotion_interface_raw).hexdigest()
+        != PROMOTION_INTERFACE_RAW_SHA256
+        or promotion_interface_raw
+        != builder.PROMOTION_INTERFACE_PATH.read_bytes()
+    ):
+        _fail("AUTO_SCHEMA_PROMOTION_EVIDENCE_INTERFACE_DRIFT")
+    return {
+        "historical_candidate_git_object_id": current["git_object_id"],
+        "historical_candidate_manifest_raw_sha256": (
+            HISTORICAL_CANDIDATE_MANIFEST_RAW_SHA256
+        ),
+        "promotion_evidence_git_object_id": (
+            PROMOTION_EVIDENCE_GIT_OBJECT
+        ),
+        "working_tree_candidate_manifest_used": False,
+    }
 
 
 def load_schema_promotion() -> SchemaPromotionContract:
@@ -164,8 +276,15 @@ def load_schema_promotion() -> SchemaPromotionContract:
             _fail(
                 f"AUTO_SCHEMA_PROMOTION_ACCEPTED_BYTES_MISMATCH:{schema_id}"
             )
-    _validate_current_candidate_manifest()
-    return SchemaPromotionContract(interface, acceptance, promoted)
+    historical_candidate_evidence = (
+        validate_historical_candidate_evidence(interface)
+    )
+    return SchemaPromotionContract(
+        interface,
+        acceptance,
+        promoted,
+        historical_candidate_evidence,
+    )
 
 
 def lint_promotion() -> None:
@@ -173,7 +292,8 @@ def lint_promotion() -> None:
     print(
         "AUTO_SCHEMA_PROMOTION_VALID "
         f"promoted={len(contract.promoted_schemas)} "
-        "current=29/5 target=31/5 "
+        "historical_candidate=29/5 target=31/5 "
+        "working_tree_manifest_independent=true "
         "repository_bound=false active=false"
     )
 
