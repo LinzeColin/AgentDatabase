@@ -22,6 +22,7 @@ def _files():
     paths.extend(
         [
             AUTO_DIR / "tools" / "build_runtime_interface.py",
+            AUTO_DIR / "tools" / "notification_transport_cli.py",
             AUTO_DIR / "tools" / "run_fault_suite.py",
             AUTO_DIR / "tools" / "runtime_preflight.py",
             AUTO_DIR / "tools" / "validate_auto.py",
@@ -53,7 +54,26 @@ def build():
         "module_count": len(artifacts),
         "next_phase": "MECHANISM_M0C_COORDINATED_ACTIVATION",
         "notification_actual_recipient_repo_external": True,
+        "notification_credentials_repo_external": True,
+        "notification_external_path_contract": {
+            "gmail_config_ref": (
+                "state-root/private/notification/gmail-api.v1.json"
+            ),
+            "recipient_mapping_ref": (
+                "state-root/private/notification/recipient-mapping.v1.json"
+            ),
+        },
+        "notification_production_transport": "GMAIL_API_V1",
+        "notification_provider_lookup": (
+            "RFC822_MESSAGE_ID_AND_PRIVATE_PAYLOAD_DIGEST"
+        ),
+        "notification_provider_readback_required": True,
         "notification_public_recipient_ref_only": True,
+        "notification_send_entrypoint": (
+            "CodexSkills/auto/tools/notification_transport_cli.py"
+        ),
+        "notification_test_transport_production_forbidden": True,
+        "os_local_scheduler_or_daemon_used": False,
         "persistent_managed_raw_default_enabled": False,
         "protocol_revision": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1",
         "remote_readback_precedes_watermark": True,

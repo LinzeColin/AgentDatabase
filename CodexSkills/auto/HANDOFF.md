@@ -1,7 +1,7 @@
-# Auto A1b handoff
+# Auto A1b + Gmail transport corrective handoff
 
 - State: `DRAFT_NON_ACTIVE`
-- Phase: `AUTO_A1B`
+- Phase: `AUTO_A1B_GMAIL_TRANSPORT_CORRECTIVE`
 - Protocol: `urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1`
 - Verified M0b Git object:
   `sha1:4b1e1a318c8f9e1014839a8a3a46e057679c4b6b`
@@ -35,6 +35,19 @@
 - Planned MAJOR notification uses a transactional private outbox, external
   recipient mapping, provider reconciliation, and public-safe receipts. No
   production notification was sent in A1b.
+- The corrective adds a concrete Gmail API transport and executable CLI. Its
+  repo-external path refs are
+  `state-root/private/notification/recipient-mapping.v1.json` and
+  `state-root/private/notification/gmail-api.v1.json`; no actual recipient,
+  credential, provider ID, body, or absolute path is stored in Git.
+- Only an unambiguous provider `NOT_FOUND` permits send. `UNKNOWN`, `FAILED`,
+  multiple matches, missing OAuth scopes, authenticated-recipient mismatch,
+  or header/readback mismatch block without sending. A deterministic RFC822
+  Message-ID and private payload-digest header permit post-crash lookup;
+  provider readback is required before public `SENT`.
+- `FakeNotificationTransport` remains test-only and is explicitly not a
+  production capability. The implementation contains no launchd/local
+  scheduler, daemon, background retry loop, or runtime package installation.
 - Physical publication enforces exact shared gates, expected remote head,
   fresh worktree, allowed path set, ordinary FF push, and remote byte readback.
   Candidate runtime publication is blocked. Coordinated activation additionally
@@ -45,16 +58,19 @@
 
 ## Explicitly not done
 
-A1b did not create `CodexSkills/VERSION`, activate the candidate, publish
-canonical data, send a real notification, create a production state root,
+A1b and the corrective did not create `CodexSkills/VERSION`, activate the
+candidate, publish canonical data, send a real notification, create a
+production state root,
 scan/migrate the real Skill sources, rebuild the 3,365 Registry views, modify
 OpenAIDatabase, update or run an automation, backfill historical runs, or call
 the verifier.
 
 ## Next exact action
 
-Mechanism M0c must produce the content-addressed activation envelope. Auto may
-transport it only after a real provider `SENT` receipt and all shared gates
-pass. After FF-safe push and remote readback, Auto A1c may bootstrap the exact
+After this corrective is FF-safe pushed and remotely read back, Mechanism M0c
+must produce the content-addressed activation envelope. Auto may invoke the
+production entrypoint only for that exact envelope and may transport the
+activation only after Gmail `SENT` plus exact provider readback and all shared
+gates pass. After activation remote readback, Auto A1c may bootstrap the exact
 ACTIVE tuple. Registry A2 and consumer/automation A3 remain later independent
 CONTROLLED_RUN phases.

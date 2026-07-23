@@ -11,7 +11,11 @@ from pathlib import Path, PurePosixPath
 from typing import Callable, Dict, Mapping, Optional
 
 from CodexSkills.auto.tools.validate_auto import AutoContract, validate_auto_instance
-from CodexSkills.governance.tools.canonical_json import canonicalize_object, parse_json_bytes
+from CodexSkills.governance.tools.canonical_json import (
+    canonical_digest,
+    canonicalize_object,
+    parse_json_bytes,
+)
 from CodexSkills.governance.tools.validate_mechanism import scan_public_value
 
 from .core import (
@@ -23,6 +27,7 @@ from .core import (
     canonical_with_digest,
     format_utc,
     new_uid,
+    parse_utc,
     read_json,
     sha256_bytes,
 )
@@ -31,6 +36,93 @@ from .core import (
 NOTIFICATION_SCHEMA = SCHEMA_PREFIX + "notification-receipt:v3"
 NOTIFICATION_POLICY_ID = "urn:linzecolin:agentdatabase:skillops:policy:notification:v1"
 EMAIL_RE = re.compile(r"^[^@\s]{1,64}@[^@\s]{1,190}$")
+SRV_RE = re.compile(r"^v[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$")
+TYPED_UID_RE = re.compile(r"^[a-z][a-z0-9]{1,11}_[0-7][0-9A-HJKMNP-TV-Z]{25}$")
+GIT_OBJECT_RE = re.compile(r"^(?:sha1:[0-9a-f]{40}|sha256:[0-9a-f]{64})$")
+
+
+@dataclass(frozen=True)
+class RenderedNotification:
+    subject: str
+    body: str
+
+
+def render_major_email(
+    *,
+    srv_revision: str,
+    auto_transaction_uid: str,
+    observed_at: str,
+    remote_baseline: str,
+    public_metadata: Mapping[str, object],
+) -> RenderedNotification:
+    """Render the locked MAJOR template from public-safe structured facts only."""
+
+    if not SRV_RE.fullmatch(srv_revision):
+        raise AutoRuntimeError("NOTIFICATION_SRV_INVALID")
+    if not TYPED_UID_RE.fullmatch(auto_transaction_uid):
+        raise AutoRuntimeError("NOTIFICATION_TRANSACTION_UID_INVALID")
+    if not re.fullmatch(
+        r"[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{6}Z",
+        observed_at,
+    ):
+        raise AutoRuntimeError("NOTIFICATION_OBSERVED_AT_INVALID")
+    parse_utc(observed_at)
+    if not GIT_OBJECT_RE.fullmatch(remote_baseline):
+        raise AutoRuntimeError("NOTIFICATION_REMOTE_BASELINE_INVALID")
+    required = {
+        "impact",
+        "change_code",
+        "planned_action",
+        "affected_path_refs",
+        "evidence_digests",
+    }
+    if not isinstance(public_metadata, dict) or not required.issubset(public_metadata):
+        raise AutoRuntimeError("NOTIFICATION_TEMPLATE_METADATA_INVALID")
+    if (
+        public_metadata.get("impact") != "MAJOR"
+        or not isinstance(public_metadata.get("change_code"), str)
+        or not isinstance(public_metadata.get("planned_action"), str)
+    ):
+        raise AutoRuntimeError("NOTIFICATION_TEMPLATE_ENUM_INVALID")
+    paths = public_metadata.get("affected_path_refs")
+    digests = public_metadata.get("evidence_digests")
+    if (
+        not isinstance(paths, list)
+        or not paths
+        or any(not isinstance(item, str) for item in paths)
+        or not isinstance(digests, list)
+        or any(not isinstance(item, str) for item in digests)
+    ):
+        raise AutoRuntimeError("NOTIFICATION_TEMPLATE_LIST_INVALID")
+    rollback = public_metadata.get("rollback_target_ref", "NONE")
+    if not isinstance(rollback, str):
+        raise AutoRuntimeError("NOTIFICATION_TEMPLATE_ROLLBACK_INVALID")
+    subject = (
+        "[CodexSkills][MAJOR]["
+        + srv_revision
+        + "] "
+        + str(public_metadata["change_code"])
+    )
+    body = "\n".join(
+        (
+            "SkillOps automatic MAJOR notification",
+            "",
+            "Revision: " + srv_revision,
+            "Auto transaction UID: " + auto_transaction_uid,
+            "Timestamp (UTC): " + observed_at,
+            "Change code: " + str(public_metadata["change_code"]),
+            "Impact: MAJOR",
+            "Affected paths: " + ", ".join(paths),
+            "Evidence digests: " + ", ".join(digests),
+            "Planned action: " + str(public_metadata["planned_action"]),
+            "Remote baseline: " + remote_baseline,
+            "Rollback target: " + rollback,
+            "",
+            "Notification mode: automatic; no reply or approval required.",
+            "Repository write remains blocked until Gmail provider SENT readback.",
+        )
+    )
+    return RenderedNotification(subject, body)
 
 
 @dataclass(frozen=True)
@@ -68,7 +160,11 @@ class RecipientMapping:
         if len(selected) != 1:
             raise AutoRuntimeError("RECIPIENT_MAPPING_NOT_UNIQUE")
         target = selected[0]["provider_target"]
-        if not isinstance(target, str) or not EMAIL_RE.fullmatch(target):
+        if (
+            not isinstance(target, str)
+            or not target.isascii()
+            or not EMAIL_RE.fullmatch(target)
+        ):
             raise AutoRuntimeError("RECIPIENT_PROVIDER_TARGET_INVALID")
         return cls(recipient_ref, target)
 
@@ -104,7 +200,7 @@ class FakeNotificationTransport(NotificationTransport):
         self.send_count = 0
 
     def lookup(self, idempotency_key: str) -> ProviderResult:
-        return self.sent.get(idempotency_key, ProviderResult("UNKNOWN", failure_code="RECEIPT_UNVERIFIED"))
+        return self.sent.get(idempotency_key, ProviderResult("NOT_FOUND"))
 
     def send(
         self,
@@ -221,6 +317,21 @@ class TransactionalNotifier:
     def _entry_path(self, notification_uid: str) -> Path:
         return self.outbox_root / f"{notification_uid}.json"
 
+    @staticmethod
+    def _seal_entry(entry: Mapping[str, object]) -> Mapping[str, object]:
+        output = dict(entry)
+        output["entry_digest"] = "0" * 64
+        output["entry_digest"] = canonical_digest(output, "/entry_digest")
+        return output
+
+    @staticmethod
+    def _verify_entry(entry: object) -> Mapping[str, object]:
+        if not isinstance(entry, dict) or not isinstance(entry.get("entry_digest"), str):
+            raise AutoRuntimeError("NOTIFICATION_OUTBOX_ENTRY_INVALID")
+        if canonical_digest(entry, "/entry_digest") != entry["entry_digest"]:
+            raise AutoRuntimeError("NOTIFICATION_OUTBOX_DIGEST_MISMATCH")
+        return entry
+
     def _public_receipt(
         self,
         *,
@@ -303,15 +414,28 @@ class TransactionalNotifier:
         path = self._entry_path(notification_uid)
         entry = None
         if path.exists():
-            entry = read_json(path)
+            entry = self._verify_entry(read_json(path))
             if (
-                not isinstance(entry, dict)
-                or entry.get("private_payload_digest") != private_payload_digest
+                entry.get("private_payload_digest") != private_payload_digest
                 or entry.get("idempotency_key") != idempotency_key
+                or entry.get("auto_transaction_uid") != auto_transaction_uid
+                or entry.get("recipient_ref") != mapping.recipient_ref
+                or entry.get("timing") != timing
             ):
                 raise AutoRuntimeError("NOTIFICATION_UID_PAYLOAD_CORRUPTION")
             if entry.get("status") == "SENT":
-                result = ProviderResult("SENT", provider_receipt_ref=entry["provider_receipt_ref"])
+                result = self.transport.lookup(idempotency_key)
+                if result.status == "NOT_FOUND":
+                    result = ProviderResult(
+                        "UNKNOWN",
+                        failure_code="RECEIPT_UNVERIFIED",
+                    )
+                if (
+                    result.status == "SENT"
+                    and result.provider_receipt_ref
+                    != entry.get("provider_receipt_ref")
+                ):
+                    raise AutoRuntimeError("NOTIFICATION_PROVIDER_RECEIPT_MISMATCH")
                 receipt = self._public_receipt(
                     notification_uid=notification_uid,
                     auto_transaction_uid=auto_transaction_uid,
@@ -322,30 +446,41 @@ class TransactionalNotifier:
                     recipient_ref=mapping.recipient_ref,
                     entropy=entropy,
                 )
-                return NotificationOutcome(receipt, True)
+                return NotificationOutcome(receipt, result.status == "SENT")
         else:
-            entry = {
-                "schema_version": "skillops.private-notification-outbox.v1",
-                "notification_uid": notification_uid,
-                "auto_transaction_uid": auto_transaction_uid,
-                "recipient_ref": mapping.recipient_ref,
-                "provider_target": mapping.provider_target,
-                "subject": subject,
-                "body": body,
-                "private_payload_digest": private_payload_digest,
-                "idempotency_key": idempotency_key,
-                "status": "PENDING",
-                "created_at": format_utc(self.clock.now()),
-            }
+            entry = self._seal_entry(
+                {
+                    "schema_version": "skillops.private-notification-outbox.v1",
+                    "notification_uid": notification_uid,
+                    "auto_transaction_uid": auto_transaction_uid,
+                    "recipient_ref": mapping.recipient_ref,
+                    "provider_target": mapping.provider_target,
+                    "subject": subject,
+                    "body": body,
+                    "private_payload_digest": private_payload_digest,
+                    "idempotency_key": idempotency_key,
+                    "timing": timing,
+                    "status": "PENDING",
+                    "created_at": format_utc(self.clock.now()),
+                    "entry_digest": "0" * 64,
+                }
+            )
             atomic_write_json(path, entry)
 
         observed = self.transport.lookup(idempotency_key)
-        result = observed if observed.status == "SENT" else self.transport.send(
-            idempotency_key=idempotency_key,
-            provider_target=mapping.provider_target,
-            subject=subject,
-            body=body,
-        )
+        if observed.status == "SENT":
+            result = observed
+        elif observed.status == "NOT_FOUND":
+            result = self.transport.send(
+                idempotency_key=idempotency_key,
+                provider_target=mapping.provider_target,
+                subject=subject,
+                body=body,
+            )
+        elif observed.status in {"FAILED", "UNKNOWN"}:
+            result = observed
+        else:
+            raise AutoRuntimeError("NOTIFICATION_LOOKUP_STATUS_INVALID")
         if failpoint is not None:
             failpoint("AFTER_PROVIDER_SEND")
         updated = dict(entry)
@@ -355,6 +490,7 @@ class TransactionalNotifier:
         if result.failure_code is not None:
             updated["failure_code"] = result.failure_code
         updated["updated_at"] = format_utc(self.clock.now())
+        updated = dict(self._seal_entry(updated))
         atomic_write_json(path, updated)
         receipt = self._public_receipt(
             notification_uid=notification_uid,

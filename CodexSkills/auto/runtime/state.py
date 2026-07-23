@@ -54,13 +54,30 @@ class StateLayout:
     outbox: Path
     staging: Path
     managed_raw: Path
+    private: Path
+    notification_private: Path
 
     @classmethod
     def create(cls, root: Path) -> "StateLayout":
-        names = ("locks", "lock-history", "watermarks", "queue", "outbox", "staging", "managed-raw")
+        names = (
+            "locks",
+            "lock-history",
+            "watermarks",
+            "queue",
+            "outbox",
+            "staging",
+            "managed-raw",
+            "private",
+        )
         for name in names:
             _mkdir_private(root / name)
-        return cls(root, *(root / name for name in names))
+        notification_private = root / "private" / "notification"
+        _mkdir_private(notification_private)
+        return cls(
+            root,
+            *(root / name for name in names),
+            notification_private,
+        )
 
 
 class JSONStateStore:

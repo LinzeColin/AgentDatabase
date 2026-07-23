@@ -21,7 +21,7 @@ All entrypoints use the repository-pinned canonicalizer and offline validator
 from `CodexSkills/governance/tools/`. They do not implement JCS independently,
 resolve schemas over the network, or install dependencies at runtime.
 
-## A1b runtime entrypoints
+## Runtime entrypoints
 
 - `tools/runtime_preflight.py` consumes the repo-external trust tuple and runs
   capability/vendor/offline-Registry checks before any runtime-state write.
@@ -34,6 +34,17 @@ resolve schemas over the network, or install dependencies at runtime.
   scanning and an atomic public-safe-only queue.
 - `runtime/notification.py` keeps the actual recipient and provider payload in
   a repo-external outbox; public receipts contain only `recipient_ref`.
+- `runtime/gmail_api.py` is the production Gmail API transport. It refreshes
+  an owner-held OAuth credential, searches `in:sent` by deterministic RFC822
+  Message-ID, verifies the exact private payload-digest header, sends only
+  after an unambiguous `NOT_FOUND`, and reads the provider message back before
+  returning `SENT`. Provider timeouts, ambiguity, header mismatch, or missing
+  scopes block the planned write without sending again.
+- `tools/notification_transport_cli.py` is the only production notification
+  entrypoint. It consumes the same external candidate/active trust tuple,
+  resolves only the fixed repo-external paths below, verifies the authenticated
+  Gmail profile matches the owner mapping, renders the locked MAJOR template
+  from public-safe structured facts, and returns a public-safe receipt.
 - `runtime/publication.py` permits only expected-head FF pushes followed by
   remote byte readback. Candidate runtime publication is impossible; the
   coordinated-activation path additionally requires a verified,
@@ -60,8 +71,46 @@ This command is read-only. It does not accept the checkout's manifest or
 VERSION as a self-declared trust root, install packages, access a network
 resolver, create state, publish, notify, or update an automation.
 
+## Production Gmail private-path contract
+
+The production state root is repo-external and owner-only (`0700`). Its
+notification directories are created by `StateLayout`; the Owner provisions
+the two files as regular `0600` files:
+
+```text
+state-root/private/notification/recipient-mapping.v1.json
+state-root/private/notification/gmail-api.v1.json
+```
+
+The recipient file uses private schema
+`skillops.private-recipient-mapping.v1` and binds `owner-primary` to the actual
+Gmail address. The Gmail file uses private schema
+`skillops.private-gmail-api-config.v1`, `user_id=me`, an OAuth client/refresh
+credential, and a sorted scope list containing both a send scope and a
+query/read scope. Actual addresses, client credentials, refresh/access tokens,
+provider message IDs, email bodies, and absolute paths never enter Git or a
+public receipt.
+
+The provider preflight is explicit and performs no send:
+
+```bash
+/usr/bin/python3 -B CodexSkills/auto/tools/notification_transport_cli.py \
+  preflight \
+  --repo-root . \
+  --state-root "$SKILLOPS_STATE_ROOT" \
+  --verified-git-object-id sha1:4b1e1a318c8f9e1014839a8a3a46e057679c4b6b \
+  --expected-bundle-digest fd1df66e240695bd376803423bd09f9f341f7542f74a6ed92b0f79b0af4dc5e1 \
+  --canonical-manifest-path CodexSkills/governance/bundles/schema-bundle-manifest.v1.json \
+  --mode CANDIDATE
+```
+
+There is no launchd job, local daemon, background retry loop, or runtime
+package installation. The Codex automation invokes the entrypoint directly;
+manual and scheduled runs use the same path.
+
 `DRAFT_NON_ACTIVE` code must not create or update `CodexSkills/VERSION`, claim
-ACTIVE state, publish canonical data, send a production notification, write a
-production watermark, or update the automation. A later coordinated M0c
-activation is required. Never invoke the verifier during development; the
-Owner selects a fresh verifier only after both planes finish.
+ACTIVE state, publish canonical data, send a production notification without
+the coordinated M0c envelope, write a production watermark, or update the
+automation. A later coordinated M0c activation is required. Never invoke the
+verifier during development; the Owner selects a fresh verifier only after
+both planes finish.

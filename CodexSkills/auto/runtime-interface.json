@@ -21,7 +21,11 @@
       "relative_path": "CodexSkills/auto/runtime/core.py"
     },
     {
-      "artifact_digest": "072126d4f665477dcdc3138afd06eef759071174bac8ecc325ff5ffd21e1f4a2",
+      "artifact_digest": "beb5a555a022863dbfda4afaca85c0bbc913ac9fe7c04e6d207e2f9ec2f7bd59",
+      "relative_path": "CodexSkills/auto/runtime/gmail_api.py"
+    },
+    {
+      "artifact_digest": "970670cd9603b6691d498dbe35fbf9e4a29eb2fb269f158d4288ed4a74a5687a",
       "relative_path": "CodexSkills/auto/runtime/notification.py"
     },
     {
@@ -57,12 +61,16 @@
       "relative_path": "CodexSkills/auto/runtime/source.py"
     },
     {
-      "artifact_digest": "ace79be2fd4916c6f6ee0c9dd4deb8fbb828fa8dc85754bb234804d4aa658f3f",
+      "artifact_digest": "43189bb983bc1991ad94aa87937eb2da132b5e03586258d9e6ff3554e78befd7",
       "relative_path": "CodexSkills/auto/runtime/state.py"
     },
     {
-      "artifact_digest": "ae0e7348da26b30935e7a56856efa8d9fa72cc8a87c4cab97956251172cbb7c2",
+      "artifact_digest": "618327db4eadc48c3927de1b3648f43ea5691bbbe1998a2c4d5f3aa09d3c08a5",
       "relative_path": "CodexSkills/auto/tools/build_runtime_interface.py"
+    },
+    {
+      "artifact_digest": "0d8114ebde296c9961ea60182b64450f0ccd9f26e310daf41f32403dc4e33805",
+      "relative_path": "CodexSkills/auto/tools/notification_transport_cli.py"
     },
     {
       "artifact_digest": "e9ee71c60bf4ffeebfe7034884ff69e74bb85b77be3ee0510cb705e6b21d4bf1",
@@ -77,10 +85,21 @@
       "relative_path": "CodexSkills/auto/tools/validate_auto.py"
     }
   ],
-  "module_count": 17,
+  "module_count": 19,
   "next_phase": "MECHANISM_M0C_COORDINATED_ACTIVATION",
   "notification_actual_recipient_repo_external": true,
+  "notification_credentials_repo_external": true,
+  "notification_external_path_contract": {
+    "gmail_config_ref": "state-root/private/notification/gmail-api.v1.json",
+    "recipient_mapping_ref": "state-root/private/notification/recipient-mapping.v1.json"
+  },
+  "notification_production_transport": "GMAIL_API_V1",
+  "notification_provider_lookup": "RFC822_MESSAGE_ID_AND_PRIVATE_PAYLOAD_DIGEST",
+  "notification_provider_readback_required": true,
   "notification_public_recipient_ref_only": true,
+  "notification_send_entrypoint": "CodexSkills/auto/tools/notification_transport_cli.py",
+  "notification_test_transport_production_forbidden": true,
+  "os_local_scheduler_or_daemon_used": false,
   "persistent_managed_raw_default_enabled": false,
   "protocol_revision": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1",
   "remote_readback_precedes_watermark": true,
