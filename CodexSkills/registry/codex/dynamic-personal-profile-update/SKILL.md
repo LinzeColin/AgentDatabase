@@ -1,13 +1,6 @@
 ---
 name: dynamic-personal-profile-update
 description: Read allowlisted redacted derived data and produce one human-readable and machine-readable dynamic personal profile Markdown file. Use when updating a time-aware user profile, detecting meaningful behavior or preference changes, turning profile changes into temporary agent actions, or mining recurring Prompt/Workflow/Skill candidates. Never read raw/private data, write stable memory, modify Custom Instructions, or create a second persistent state store.
-metadata:
-  version: "0.0.0.1"
-  owner: "Linze"
-  stage: "1"
-  output_contract: "one Markdown file"
-  input_mode: "derived_only"
-  compatibility: "Python 3.11+; local filesystem or GitHub Actions runner; no network, API key, LLM call, database, vector index, or external service required."
 ---
 
 # Dynamic Personal Profile Update
@@ -40,12 +33,14 @@ This Skill is a generated-view tool. It is not the canonical stable profile and 
 
 ## Running the deterministic processor
 
+From the `AgentDatabase` repository root, run:
+
 ```bash
-python3 scripts/update_dynamic_profile.py \
+python3 CodexSkills/registry/codex/dynamic-personal-profile-update/scripts/update_dynamic_profile.py \
   --database-dir . \
   --output OpenAIDatabase/data/derived/profile/DYNAMIC_PROFILE.md
 
-python3 scripts/validate_dynamic_profile.py \
+python3 CodexSkills/registry/codex/dynamic-personal-profile-update/scripts/validate_dynamic_profile.py \
   --profile OpenAIDatabase/data/derived/profile/DYNAMIC_PROFILE.md
 ```
 
@@ -58,7 +53,7 @@ The processor prints a small JSON status object. `NO_CHANGE` is a successful res
 - `hypothesis`: plausible signal with insufficient independent evidence.
 - v0.0.0.1 emits only these three statuses; `declining` and `retired` require a later authorized temporal-state contract.
 
-The output's YAML front matter is the machine contract. The Markdown sections are its human-readable projection. They are generated from the same data in one pass.
+The output's JSON-compatible YAML front matter is the machine contract. The Markdown sections are its exact human-readable projection. They are generated and validated from the same in-memory data in one pass without a YAML dependency.
 
 ## Stop conditions
 

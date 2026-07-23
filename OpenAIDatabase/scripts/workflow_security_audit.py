@@ -13,9 +13,9 @@ from typing import Any
 REPO_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_POLICY = Path("OpenAIDatabase/config/workflow_security_policy.json")
 FULL_SHA = re.compile(r"^[a-f0-9]{40}$")
-USES = re.compile(r"^\s*-\s*uses:\s*([^\s#]+)", re.MULTILINE)
+USES = re.compile(r"^\s*(?:-\s*)?uses:\s*([^\s#]+)", re.MULTILINE)
 WRITE_PERMISSION = re.compile(
-    r"^\s*(?:actions|checks|contents|deployments|id-token|issues|packages|"
+    r"^\s*(actions|checks|contents|deployments|id-token|issues|packages|"
     r"pages|pull-requests|repository-projects|security-events|statuses):\s*write\s*$",
     re.MULTILINE,
 )
@@ -62,8 +62,18 @@ def audit(root: Path, policy: dict[str, Any]) -> dict[str, Any]:
     root = root.resolve(strict=True)
     workflows, nested = tracked_workflows(root)
     allowed = sorted(str(value) for value in policy.get("allowed_workflows") or [])
+    allowed_nested = sorted(
+        str(value) for value in policy.get("allowed_nested_workflows") or []
+    )
     unowned = sorted(set(workflows) - set(allowed))
     missing = sorted(set(allowed) - set(workflows))
+    invalid_nested = sorted(set(nested) - set(allowed_nested))
+    missing_nested = sorted(set(allowed_nested) - set(nested))
+    workflow_contracts = {
+        str(row.get("path")): row
+        for row in policy.get("workflows") or []
+        if isinstance(row, dict) and isinstance(row.get("path"), str)
+    }
     pins = {
         str(item.get("action")): str(item.get("commit_sha"))
         for item in policy.get("action_pins") or []
@@ -104,10 +114,17 @@ def audit(root: Path, policy: dict[str, Any]) -> dict[str, Any]:
             text.count(fragment)
             for fragment in ("github.event.pull_request.", "github.event.issue.", "github.event.comment.")
         )
-        high_privilege += len(WRITE_PERMISSION.findall(text))
+        contract = workflow_contracts.get(relative, {})
+        required_permissions = contract.get("required_permissions")
+        if not isinstance(required_permissions, dict):
+            required_permissions = policy.get("required_permissions") or {}
+        allowed_write_permissions = {
+            str(value) for value in contract.get("allowed_write_permissions") or []
+        }
+        actual_write_permissions = set(WRITE_PERMISSION.findall(text))
+        high_privilege += len(actual_write_permissions - allowed_write_permissions)
         missing_timeouts += int("timeout-minutes:" not in text)
         missing_concurrency += int(not re.search(r"^concurrency:\s*$", text, re.MULTILINE))
-        required_permissions = policy.get("required_permissions") or {}
         overbroad_permissions += int(
             "permissions:" not in text
             or any(
@@ -118,11 +135,19 @@ def audit(root: Path, policy: dict[str, Any]) -> dict[str, Any]:
                 )
                 for key, value in required_permissions.items()
             )
+            or any(
+                required_permissions.get(key) != "write"
+                for key in allowed_write_permissions
+            )
+            or (
+                bool(allowed_write_permissions)
+                and not contract.get("write_allowlist")
+            )
         )
 
     metrics = {
         "unowned_workflow_count": len(unowned) + len(missing),
-        "invalid_nested_workflow_count": len(nested),
+        "invalid_nested_workflow_count": len(invalid_nested) + len(missing_nested),
         "unpinned_actions": unpinned,
         "unapproved_actions": unapproved,
         "forbidden_triggers": forbidden_triggers,
@@ -140,6 +165,8 @@ def audit(root: Path, policy: dict[str, Any]) -> dict[str, Any]:
         "unowned_workflows": unowned,
         "missing_workflows": missing,
         "nested_workflows": nested,
+        "invalid_nested_workflows": invalid_nested,
+        "missing_nested_workflows": missing_nested,
         **metrics,
     }
 

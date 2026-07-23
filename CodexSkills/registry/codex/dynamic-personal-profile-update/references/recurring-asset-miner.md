@@ -4,8 +4,7 @@ This is the accepted Stage 1 opportunity. It is an extraction workflow, not an a
 
 ## Input
 
-- Dynamic profile entries with evidence.
-- Existing redacted derived behavior, recommendation, timeline, and personalization reports.
+- Dynamic profile entries with evidence from the fixed v0.0.0.1 derived allowlist.
 - User instructions, revisions, successful deliveries, and failure repairs supplied in the current task context.
 
 ## Procedure

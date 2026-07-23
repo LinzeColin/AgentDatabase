@@ -2,7 +2,8 @@
 """本机 Skill → GitHub 全量镜像同步引擎。
 
 把本机所有来源的 skill（OpenAI 官方、Anthropic、自建、下载）全量镜像到
-`LinzeColin/AgentDatabase` 的 `CodexSkills/registry/`，重建索引，提交并推送。
+`LinzeColin/AgentDatabase` 的 `CodexSkills/registry/`，重建根兼容索引，
+提交并推送。
 
     python3 sync_skills.py             # 正式同步
     python3 sync_skills.py --dry-run   # 只报告差异，不写不推
@@ -40,9 +41,9 @@ SOURCES = {
 }
 
 REPO = "LinzeColin/AgentDatabase"
-MIRROR_DIRNAME = "CodexSkills"
-REGISTRY_DIRNAME = "registry"
-
+CATALOG_DIRNAME = "CodexSkills"
+REGISTRY_DIRNAME = os.path.join(CATALOG_DIRNAME, "registry")
+REGISTRY_METADATA_FILES = {"registry.yaml"}
 REPO_OWNED_FILES = {
     ("codex", "persona-distiller"): {"registry.yaml"},
 }
@@ -50,6 +51,8 @@ REPO_OWNED_FILES = {
 EXCLUDE_DIRS = {".git", "__pycache__", "node_modules", ".venv", ".mypy_cache", ".pytest_cache"}
 EXCLUDE_FILES = {".DS_Store", "Thumbs.db"}
 MAX_FILE_BYTES = 95 * 1024 * 1024          # GitHub 单文件 100MB 硬限，留余量
+CREDENTIAL_SCAN_CHUNK_BYTES = 1024 * 1024
+CREDENTIAL_SCAN_OVERLAP_BYTES = 4096
 
 # 凭据「值」模式。只匹配真实形态，避免把「不要写 api_key」这类句子误判。
 CRED_PATTERNS = {
@@ -75,7 +78,8 @@ CATEGORY = {
     "工程与交付": ["verifier", "webapp-testing", "mcp-builder", "use-railway", "video-replica",
                    "goal-to-delivery-sop", "domain-dual-plane", "output-skill", "codex-dev-orchestrator",
                    "impeccable", "review-agent", "plugin-creator", "skill-creator", "skill-installer",
-                   "skill-github-sync", "persona-distiller", "persona-distiller-group"],
+                   "skill-github-sync", "dynamic-personal-profile-update", "persona-distiller",
+                   "persona-distiller-group"],
     "学习与知识": ["study-project-orchestrator", "book-to-skill", "last30days", "chronicle",
                    "grill-me", "openai-docs"],
     "业务流程": ["km-bid-scout", "km-bid-discover", "km-bid-qualify", "km-bid-brief", "km-bid-evidence",
@@ -83,12 +87,7 @@ CATEGORY = {
                  "project-cost-table-skill", "gongzi-fafang-biaozhun", "hongquan-main-contract-dws",
                  "info-fee-update", "serenity-skill"],
     "协作与通讯": ["dws", "internal-comms", "agent-reach"],
-    "其他": [
-        "codex-encrypted-backup",
-        "dynamic-personal-profile-update",
-        "gpt-tasteskill",
-        "hatch-pet",
-    ],
+    "其他": ["codex-encrypted-backup", "gpt-tasteskill", "hatch-pet"],
 }
 
 # ---------------------------------------------------------------- 工具
@@ -123,23 +122,26 @@ def walk_files(base):
             yield os.path.relpath(full, base), full
 
 
+def repo_owned_files(source, slug):
+    """返回同步时必须保留、且不参与本机内容摘要的仓库元数据。"""
+    return REGISTRY_METADATA_FILES | REPO_OWNED_FILES.get((source, slug), set())
+
+
 def skill_digest(base, excluded_relative_paths=None):
-    excluded_relative_paths = excluded_relative_paths or set()
+    excluded_relative_paths = REGISTRY_METADATA_FILES | (excluded_relative_paths or set())
     h = hashlib.sha256()
     for rel, full in sorted(walk_files(base)):
         if rel.replace(os.sep, "/") in excluded_relative_paths:
             continue
         h.update(rel.encode())
-        try:
-            with open(full, "rb") as handle:
-                h.update(handle.read())
-        except Exception:
-            pass
+        with open(full, "rb") as handle:
+            h.update(handle.read())
     return h.hexdigest()
 
 
 def mirror_relative_path(source, slug):
-    return f"{REGISTRY_DIRNAME}/{source}/{slug}"
+    """返回相对于 CodexSkills/registry 的物理路径。"""
+    return f"{source}/{slug}"
 
 
 def parse_frontmatter(path):
@@ -167,12 +169,21 @@ def parse_frontmatter(path):
 
 def inventory():
     """扫描全部来源，返回 {(source, slug): 本机绝对路径}。"""
+    missing = [
+        (src, meta["path"])
+        for src, meta in SOURCES.items()
+        if not os.path.isdir(meta["path"])
+    ]
+    if missing:
+        for src, source_path in missing:
+            log(f"  ✗ {src}: 声明的来源目录不存在（{source_path}）")
+        raise RuntimeError(
+            "Skill 来源目录不完整；为防止把缺失来源误判为删除并传播到镜像，已中止"
+        )
+
     inv = {}
     for src, meta in SOURCES.items():
         base = meta["path"]
-        if not os.path.isdir(base):
-            log(f"  · {src}: 目录不存在，跳过（{base}）")
-            continue
         names = sorted(
             d for d in os.listdir(base)
             if os.path.isdir(os.path.join(base, d)) and not d.startswith(".")
@@ -193,23 +204,26 @@ def mirror(inv, mirror_root, dry_run=False, propagate_deletions=True):
     want = {mirror_relative_path(src, slug) for src, slug in inv}
     have = set()
     if os.path.isdir(mirror_root):
-        registry_root = os.path.join(mirror_root, REGISTRY_DIRNAME)
         for src in SOURCES:
-            sd = os.path.join(registry_root, src)
+            sd = os.path.join(mirror_root, src)
             if os.path.isdir(sd):
-                have |= {f"{REGISTRY_DIRNAME}/{src}/{d}" for d in os.listdir(sd)
+                have |= {f"{src}/{d}" for d in os.listdir(sd)
                          if os.path.isdir(os.path.join(sd, d))}
 
     # 删除传播：本机没有了，镜像也删掉
     for gone in sorted(have - want if propagate_deletions else set()):
-        removed.append(gone)
         if not dry_run:
-            shutil.rmtree(os.path.join(mirror_root, gone), ignore_errors=True)
+            gone_path = os.path.join(mirror_root, gone)
+            try:
+                shutil.rmtree(gone_path)
+            except OSError as exc:
+                raise RuntimeError(f"无法删除仓库镜像目录：{gone_path}") from exc
+        removed.append(gone)
 
     for (src, slug), localpath in sorted(inv.items()):
         rel = mirror_relative_path(src, slug)
         dest = os.path.join(mirror_root, rel)
-        repo_owned = REPO_OWNED_FILES.get((src, slug), set())
+        repo_owned = repo_owned_files(src, slug)
         before = skill_digest(dest, repo_owned) if os.path.isdir(dest) else None
 
         if dry_run:
@@ -222,14 +236,21 @@ def mirror(inv, mirror_root, dry_run=False, propagate_deletions=True):
                     with open(owned_path, "rb") as handle:
                         preserved[owned] = handle.read()
             if os.path.isdir(dest):
-                shutil.rmtree(dest)
+                try:
+                    shutil.rmtree(dest)
+                except OSError as exc:
+                    raise RuntimeError(f"无法替换仓库镜像目录：{dest}") from exc
             os.makedirs(dest, exist_ok=True)
             for r, full in walk_files(localpath):
+                normalized = r.replace(os.sep, "/")
+                if normalized in repo_owned:
+                    continue
                 try:
-                    if os.path.getsize(full) > MAX_FILE_BYTES:
-                        skipped_big.append(f"{rel}/{r}")
-                        continue
-                except OSError:
+                    size = os.path.getsize(full)
+                except OSError as exc:
+                    raise RuntimeError(f"无法读取本机 Skill 文件大小：{full}") from exc
+                if size > MAX_FILE_BYTES:
+                    skipped_big.append(f"{rel}/{r}")
                     continue
                 target = os.path.join(dest, r)
                 os.makedirs(os.path.dirname(target), exist_ok=True)
@@ -254,21 +275,42 @@ def mirror(inv, mirror_root, dry_run=False, propagate_deletions=True):
 
 def credential_gate(mirror_root):
     """扫描镜像内容。命中即返回明细 —— 调用方必须据此中止。"""
+    if not os.path.isdir(mirror_root) or os.path.islink(mirror_root):
+        raise RuntimeError(f"凭据扫描目录不可用或为符号链接：{mirror_root}")
+
+    def walk_error(error):
+        location = getattr(error, "filename", None) or mirror_root
+        raise RuntimeError(f"凭据扫描无法遍历目录：{location}") from error
+
     hits = []
-    for root, dirs, files in os.walk(mirror_root):
+    for root, dirs, files in os.walk(mirror_root, onerror=walk_error):
+        for directory in dirs:
+            directory_path = os.path.join(root, directory)
+            if os.path.islink(directory_path):
+                raise RuntimeError(f"凭据扫描拒绝符号链接：{directory_path}")
         dirs[:] = [d for d in dirs if d not in EXCLUDE_DIRS]
         for f in files:
-            p = os.path.join(root, f)
+            file_path = os.path.join(root, f)
+            if os.path.islink(file_path):
+                raise RuntimeError(f"凭据扫描拒绝符号链接：{file_path}")
             try:
-                if os.path.getsize(p) > 20 * 1024 * 1024:
-                    continue
-                with open(p, "rb") as handle:
-                    data = handle.read()
-            except Exception:
-                continue
-            for label, pat in CRED_PATTERNS.items():
-                if pat.search(data):
-                    hits.append((os.path.relpath(p, mirror_root), label))
+                found = set()
+                with open(file_path, "rb") as handle:
+                    overlap = b""
+                    while True:
+                        block = handle.read(CREDENTIAL_SCAN_CHUNK_BYTES)
+                        if not block:
+                            break
+                        data = overlap + block
+                        for label, pattern in CRED_PATTERNS.items():
+                            if label not in found and pattern.search(data):
+                                found.add(label)
+                        overlap = data[-CREDENTIAL_SCAN_OVERLAP_BYTES:]
+            except OSError as exc:
+                raise RuntimeError(f"凭据扫描无法读取文件：{file_path}") from exc
+            for label in CRED_PATTERNS:
+                if label in found:
+                    hits.append((os.path.relpath(file_path, mirror_root), label))
     return hits
 
 
@@ -277,15 +319,14 @@ def credential_gate(mirror_root):
 
 def iter_mirrored_skills(mirror_root):
     """产出 (source, slug, physical_relative_path, absolute_directory)。"""
-    registry_root = os.path.join(mirror_root, REGISTRY_DIRNAME)
     for src in SOURCES:
-        sd = os.path.join(registry_root, src)
+        sd = os.path.join(mirror_root, src)
         if not os.path.isdir(sd):
             continue
         for slug in sorted(os.listdir(sd)):
             directory = os.path.join(sd, slug)
             if os.path.isdir(directory):
-                yield src, slug, mirror_relative_path(src, slug), directory
+                yield src, slug, f"{src}/{slug}", directory
 
 
 def persona_product_index(mirror_root):
@@ -305,7 +346,7 @@ def persona_product_index(mirror_root):
     return products if isinstance(products, list) else []
 
 
-def build_index(mirror_root):
+def build_index(mirror_root, catalog_root):
     skills = []
     for src, slug, rel, directory in iter_mirrored_skills(mirror_root):
         name, desc = parse_frontmatter(os.path.join(directory, "SKILL.md"))
@@ -314,22 +355,19 @@ def build_index(mirror_root):
             dirs[:] = [x for x in dirs if x not in EXCLUDE_DIRS]
             for f in fs:
                 n += 1
-                try:
-                    size += os.path.getsize(os.path.join(root, f))
-                except Exception:
-                    pass
+                size += os.path.getsize(os.path.join(root, f))
         skills.append({
             "slug": slug,
             "source": src,
             "name": name or slug,
             "description": desc or "",
             "category": next((c for c, v in CATEGORY.items() if slug in v), "其他"),
-            "entry": f"{rel}/SKILL.md",
+            "entry": f"registry/{rel}/SKILL.md",
             "file_count": n,
             "size_bytes": size,
         })
 
-    with open(os.path.join(mirror_root, "index.json"), "w", encoding="utf-8") as f:
+    with open(os.path.join(catalog_root, "index.json"), "w", encoding="utf-8") as f:
         json.dump({
             "schema": "codex_skills_index.v2",
             "sources": {k: v["label"] for k, v in SOURCES.items()},
@@ -340,7 +378,7 @@ def build_index(mirror_root):
 
     total = sum(s["size_bytes"] for s in skills)
     uniq = len({s["slug"] for s in skills})
-    raw = "https://raw.githubusercontent.com/" + REPO + "/main/" + MIRROR_DIRNAME
+    raw = "https://raw.githubusercontent.com/" + REPO + "/main/" + CATALOG_DIRNAME
     out = [
         "# CodexSkills",
         "",
@@ -356,10 +394,7 @@ def build_index(mirror_root):
     ]
     for k, v in SOURCES.items():
         cnt = len([s for s in skills if s["source"] == k])
-        out.append(
-            f"| `{REGISTRY_DIRNAME}/{k}/` | `{v['path'].replace(HOME, '~')}` | "
-            f"{v['label']}（{cnt} 个） |"
-        )
+        out.append(f"| `registry/{k}/` | `{v['path'].replace(HOME, '~')}` | {v['label']}（{cnt} 个） |")
     out += [
         "",
         "有多个 skill 在不同来源里重名（其中 `agent-reach` 两处内容还不同），"
@@ -372,7 +407,7 @@ def build_index(mirror_root):
         f"curl -s {raw}/index.json",
         "",
         "# 2. 只拉命中的那一个入口，不要整仓 clone",
-        f"curl -s {raw}/<entry-from-index>",
+        f"curl -s {raw}/registry/<source>/<slug>/SKILL.md",
         "```",
         "",
         "把用户请求与 `index.json` 里各 skill 的 `description` 做匹配，命中就读它的 `entry`，"
@@ -454,7 +489,7 @@ def build_index(mirror_root):
                 "下列 skill 不在 `sync_skills.py` 的分类表里，已归入「其他」，请补分类：", ""]
         out += [f"- `{s}`" for s in orphan] + [""]
 
-    with open(os.path.join(mirror_root, "README.md"), "w", encoding="utf-8") as handle:
+    with open(os.path.join(catalog_root, "README.md"), "w", encoding="utf-8") as handle:
         handle.write("\n".join(out))
     return len(skills), uniq, orphan
 
@@ -471,10 +506,15 @@ def main():
     args = ap.parse_args()
 
     root = repo_root()
-    mirror_root = os.path.join(root, MIRROR_DIRNAME)
+    catalog_root = os.path.join(root, CATALOG_DIRNAME)
+    mirror_root = os.path.join(root, REGISTRY_DIRNAME)
 
     log("=== 1/6 盘点本机 skill ===")
-    inv = inventory()
+    try:
+        inv = inventory()
+    except RuntimeError as exc:
+        log(f"  ✗ {exc}")
+        return 2
     if not inv:
         log("没有找到任何 skill，中止（这多半是路径问题，不是真的没有）。")
         return 2
@@ -485,7 +525,7 @@ def main():
             log(f"未找到指定 Skill：{args.only}")
             return 2
         inv = {key: inv[key]}
-        log(f"  受控单项同步：{args.only} → {mirror_relative_path(*key)}")
+        log(f"  受控单项同步：{args.only} → registry/{mirror_relative_path(*key)}")
     log(f"  合计 {len(inv)} 份实例 / {len({s for _, s in inv})} 个不同名字")
 
     log("\n=== 2/6 镜像与删除传播 ===")
@@ -525,7 +565,7 @@ def main():
     log("  ✓ 0 命中")
 
     log("\n=== 4/6 重建索引 ===")
-    n, uniq, orphan = build_index(mirror_root)
+    n, uniq, orphan = build_index(mirror_root, catalog_root)
     log(f"  index.json / README.md 已生成：{n} 份实例 / {uniq} 个名字")
     if orphan:
         log(f"  ⚠️ {len(orphan)} 个 skill 未归类，已在 README 末尾列出：{orphan}")
@@ -535,8 +575,8 @@ def main():
         return 0
 
     log("\n=== 5/6 提交 ===")
-    run(["git", "add", "-A", MIRROR_DIRNAME], cwd=root)
-    st = run(["git", "status", "--porcelain", MIRROR_DIRNAME], cwd=root).stdout.strip()
+    run(["git", "add", "-A", CATALOG_DIRNAME], cwd=root)
+    st = run(["git", "status", "--porcelain", CATALOG_DIRNAME], cwd=root).stdout.strip()
     if not st:
         log("  无差异，不产生提交")
         return 0
@@ -565,11 +605,11 @@ def main():
     local_base = run(["git", "rev-parse", "HEAD~1"], cwd=root).stdout.strip()
     remote = run(["git", "rev-parse", "origin/main"], cwd=root).stdout.strip()
     if remote != local_base:
-        log("  ✗ 远端已变化，未推送。请先 `git pull --rebase origin main` 再重跑。")
+        log("  ✗ 远端已变化，未推送。请从最新 origin/main 新建干净 worktree 后重跑。")
         return 1
     run(["git", "push", "origin", "HEAD:main"], cwd=root)
     log(f"  已推送到 {REPO} main")
-    log(f"\n完成。索引：https://github.com/{REPO}/blob/main/{MIRROR_DIRNAME}/README.md")
+    log(f"\n完成。索引：https://github.com/{REPO}/blob/main/{CATALOG_DIRNAME}/README.md")
     return 0
 
 

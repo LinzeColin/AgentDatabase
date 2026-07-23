@@ -1,6 +1,6 @@
 # CodexSkills
 
-本机全部 Skill 的仓库镜像：**88 份实例 / 73 个不同名字**，3618 个文件，约 107 MB。
+本机全部 Skill 的仓库镜像：**88 份实例 / 73 个不同名字**，3629 个文件，约 108 MB。
 
 **由 `sync_skills.py` 自动生成，请勿手工编辑本文件。**
 
@@ -22,7 +22,7 @@
 curl -s https://raw.githubusercontent.com/LinzeColin/AgentDatabase/main/CodexSkills/index.json
 
 # 2. 只拉命中的那一个入口，不要整仓 clone
-curl -s https://raw.githubusercontent.com/LinzeColin/AgentDatabase/main/CodexSkills/<entry-from-index>
+curl -s https://raw.githubusercontent.com/LinzeColin/AgentDatabase/main/CodexSkills/registry/<source>/<slug>/SKILL.md
 ```
 
 把用户请求与 `index.json` 里各 skill 的 `description` 做匹配，命中就读它的 `entry`，再按 `SKILL.md` 的指示按需读该目录下的参考文件。**不要一次性加载全部 skill。**
@@ -34,12 +34,15 @@ curl -s https://raw.githubusercontent.com/LinzeColin/AgentDatabase/main/CodexSki
 目录：[`技术工程师/`](registry/codex/persona-distiller-group/技术工程师/)、[`创业经营家/`](registry/codex/persona-distiller-group/创业经营家/)、[`投资资本家/`](registry/codex/persona-distiller-group/投资资本家/)、[`开发设计家/`](registry/codex/persona-distiller-group/开发设计家/)、[`思想教育家/`](registry/codex/persona-distiller-group/思想教育家/)、[`政治法律家/`](registry/codex/persona-distiller-group/政治法律家/)、[`多重身份/`](registry/codex/persona-distiller-group/多重身份/)。
 身份分类由人物 Skill 内部使用，不是调用门槛；用户安装后直接调用对应人物 Skill，无需选择身份。人物产物按 canonical 人物分别从 `0.0.0.1` 连续编号到 `0.0.0.999`，只在成功登记时占号；人物 Skill 的单次运行不编号。团队调用会先按场景选择 5–20 个高相关角色，以正向解决者为主，并至少隔离一个复审、一个裁判和一个反证角色。
 
-当前登记：**3 个人物**。
+当前登记：**6 个人物**。
 
 | 人物 | 唯一分类 | 产物版本 | 完整 ZIP |
 |---|---|---|---|
+| Robert A. Kindler | `多重身份` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/多重身份/robert-a-kindler/versions/0.0.0.1/robert-a-kindler-persona-distillation-delivery-v0.0.0.1.zip) |
 | Beth Wilkinson | `政治法律家` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/政治法律家/beth-wilkinson/versions/0.0.0.1/beth-wilkinson-persona-distillation-delivery-v0.0.0.1.zip) |
 | Evan R. Chesler | `政治法律家` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/政治法律家/evan-r-chesler/versions/0.0.0.1/evan-r-chesler-persona-distillation-delivery-v0.0.0.1.zip) |
+| H. Rodgin Cohen | `政治法律家` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/政治法律家/h-rodgin-cohen/versions/0.0.0.1/h-rodgin-cohen-persona-distillation-delivery-v0.0.0.1.zip) |
+| Scott A. Barshay | `政治法律家` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/政治法律家/scott-a-barshay/versions/0.0.0.1/scott-a-barshay-persona-distillation-delivery-v0.0.0.1.zip) |
 | Theodore V. Wells Jr. | `政治法律家` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/政治法律家/theodore-v-wells-jr/versions/0.0.0.1/theodore-v-wells-jr-persona-distillation-delivery-v0.0.0.1.zip) |
 
 ## 同步
@@ -97,12 +100,13 @@ python3 CodexSkills/sync_skills.py --dry-run  # 只看差异
 | [`gitnexus-refactoring`](registry/agents/gitnexus-refactoring/SKILL.md) | `agents` | Use when the user wants to rename, extract, split, move, or restructure code safely. Examples: \"Rename this function\", \"Extract this into a module\", \"Refactor this class\", \"Move this to a separate file\ |
 | [`gitnexus-taint-analysis`](registry/agents/gitnexus-taint-analysis/SKILL.md) | `agents` | Use when working on, reviewing, or extending GitNexus's CFG/taint/PDG subsystem (the `--pdg` layers), or when reasoning about source→sink data-flow findings. Examples: \"How does taint analysis work here?\", \"Why didn't explain find this flow?\", \"Add a new… |
 
-## 工程与交付（20）
+## 工程与交付（21）
 
 | Skill | 来源 | 何时使用 |
 |---|---|---|
 | [`codex-dev-orchestrator`](registry/agents/codex-dev-orchestrator/SKILL.md) | `agents` | Use when the user asks to plan, scope, package, or deliver a multi-step software/product/system build, especially PRD, MVP, or controlled implementation workflows. Classify the request first, then load only the matching reference. Do not use for narrow bug fix… |
 | [`domain-dual-plane`](registry/codex/domain-dual-plane/SKILL.md) | `codex` | Fail-closed domain modeling for repositories governed by machine/facts and exactly seven human-facing documents. Use only to resolve domain terms, boundaries, scenarios, or irreversible domain decisions without creating parallel governance files or crossing re… |
+| [`dynamic-personal-profile-update`](registry/codex/dynamic-personal-profile-update/SKILL.md) | `codex` | Read allowlisted redacted derived data and produce one human-readable and machine-readable dynamic personal profile Markdown file. Use when updating a time-aware user profile, detecting meaningful behavior or preference changes, turning profile changes into te… |
 | [`goal-to-delivery-sop`](registry/codex/goal-to-delivery-sop/SKILL.md) | `codex` | Use when the user proposes a complex goal, vague product or system idea, software design request, automation system, data analysis task, business process redesign, finance/cost/collection/payroll/tax/budget/ROI feature, or explicitly asks to clarify requiremen… |
 | [`impeccable`](registry/agents/impeccable/SKILL.md) | `agents` | Use when the user wants to design, redesign, shape, critique, audit, polish, clarify, distill, harden, optimize, adapt, animate, colorize, extract, or otherwise improve a frontend interface. Covers websites, landing pages, dashboards, product UI, app shells, c… |
 | [`mcp-builder`](registry/codex/mcp-builder/SKILL.md) | `codex` | Guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools. Use when building MCP servers to integrate external APIs or services, whether in Python (FastMCP) or Node/Type… |
@@ -172,11 +176,10 @@ python3 CodexSkills/sync_skills.py --dry-run  # 只看差异
 | [`dws`](registry/codex/dws/SKILL.md) | `codex` | 管理钉钉产品能力(AI表格/AI搜问/日历/通讯录/群聊与机器人/待办/审批/考勤/日志/DING消息/开放平台文档/钉钉文档/钉钉云盘/AI听记/邮箱/在线电子表格/知识库等)。当用户需要操作表格数据、管理日程会议、模糊找人/查谁负责某事项、查询通讯录、管理群聊、机器人发消息、创建待办、提交审批、查看考勤、提交日报周报（钉钉日志模版）、读写钉钉文档、上传下载云盘文件、查询听记纪要、收发邮件、读写在线电子表格(axls)、管理钉钉知识库时使用。 |
 | [`internal-comms`](registry/codex/internal-comms/SKILL.md) | `codex` | A set of resources to help me write all kinds of internal communications, using the formats that my company likes to use. Claude should use this skill whenever asked to write some sort of internal communications (status reports, leadership updates, 3P updates,… |
 
-## 其他（4）
+## 其他（3）
 
 | Skill | 来源 | 何时使用 |
 |---|---|---|
 | [`codex-encrypted-backup`](registry/codex/codex-encrypted-backup/SKILL.md) | `codex` | 在不创建本地自动脚本或 launchd 的前提下，将本机 Codex 的 memories、全部 sessions（含 archived）及受管 attachments 加密备份到 LinzeColin/AgentDatabase 的 GitHub Release。用于创建、执行、核验、保留或恢复验证这一备份通道。 |
-| [`dynamic-personal-profile-update`](registry/codex/dynamic-personal-profile-update/SKILL.md) | `codex` | Read allowlisted redacted derived data and produce one human-readable and machine-readable dynamic personal profile Markdown file. Use when updating a time-aware user profile, detecting meaningful behavior or preference changes, turning profile changes into te… |
 | [`gpt-tasteskill`](registry/codex/gpt-tasteskill/SKILL.md) | `codex` | Elite UX/UI & Advanced GSAP Motion Engineer. Enforces Python-driven true randomization for layout variance, strict AIDA page structure, wide editorial typography (bans 6-line wraps), gapless bento grids, strict GSAP ScrollTriggers (pinning, stacking, scrubbing… |
 | [`hatch-pet`](registry/codex/hatch-pet/SKILL.md) | `codex` | Create, repair, validate, visually QA, and package Codex-compatible v2 animated pets from character art, generated images, company or prospect brand cues, or visual references. Use for any new Codex pet, custom mascot, non-pixel pet style, brand-inspired pet,… |

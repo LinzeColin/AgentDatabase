@@ -8,7 +8,7 @@ This is a derived view. It must not be treated as the canonical stable profile.
 
 ## Machine layer
 
-The file starts with YAML front matter containing:
+The file starts with a JSON object inside YAML front matter. JSON is a YAML 1.2 subset, so the same machine plane can be parsed with the Python standard library and by YAML consumers without adding a runtime dependency. It contains:
 
 - `schema_version`
 - `artifact`
@@ -16,6 +16,7 @@ The file starts with YAML front matter containing:
 - `skill_version`
 - `generated_at`
 - `input_mode`
+- `canonical_stable_profile_write`
 - `source_snapshot_sha256`
 - `semantic_snapshot_sha256`
 - `source_files`
@@ -25,7 +26,7 @@ The file starts with YAML front matter containing:
 
 Each entry contains:
 
-`id`, `type`, `status`, `statement`, `evidence`, `counterevidence`, `confidence`, `observed_window`, `valid_until`, `agent_action`, and `asset_candidate`.
+`id`, `type`, `status`, `statement`, `evidence`, `counterevidence`, `confidence`, `observed_window`, `valid_until`, `agent_action`, `asset_candidate`, `occurrences`, and `source_count`.
 
 ## Human layer
 
@@ -43,7 +44,8 @@ The human layer is a projection of the machine entries. It must not contain fact
 ## Size and evidence rules
 
 - Keep the total file below 80 KiB in v0.0.0.1.
-- Keep at most 24 entries; prefer high-confidence and cross-source entries.
+- Keep at most 18 entries; prefer high-confidence and cross-source entries.
+- The fixed v0.0.0.1 allowlist contains only `CORE_PROFILE.md`, `behavior_intelligence/low_value_loops.json`, and `codex/codex_agent_recommendations.json` under `OpenAIDatabase/data/derived/`.
 - Evidence references must be repository-relative and point only to allowlisted derived files.
 - Do not include full source text, transcript excerpts, credentials, raw paths, or personal secrets.
 - Do not synthesize exact timestamps when the source has no timestamp; say `source timestamp unavailable`.

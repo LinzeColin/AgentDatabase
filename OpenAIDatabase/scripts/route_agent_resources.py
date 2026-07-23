@@ -66,6 +66,12 @@ def route_resources(database_dir: Path, intent: str | None) -> dict[str, Any]:
             "intent": selected_intent,
             "valid_intents": valid,
         }
+    route_policy = {
+        key: route[key]
+        for key in DEFAULT_POLICY
+        if key in route
+    }
+    policy = {**policy, **route_policy}
     read_order = route.get("read_order", [])
     conditional_resources = route.get("conditional_resources", [])
     if not isinstance(read_order, list):
@@ -78,7 +84,7 @@ def route_resources(database_dir: Path, intent: str | None) -> dict[str, Any]:
         "conditional route resource; load only with a task-specific reason",
         policy,
     )
-    return {
+    result = {
         "status": "PASS",
         "schema_version": config.get("schema_version", ""),
         "intent": selected_intent,
@@ -90,6 +96,11 @@ def route_resources(database_dir: Path, intent: str | None) -> dict[str, Any]:
         "conditional_context": conditional_context,
         "update_targets": route.get("update_targets", []),
     }
+    if "access" in route:
+        result["access"] = policy["access"]
+    if "canonical" in route:
+        result["canonical"] = route["canonical"]
+    return result
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:

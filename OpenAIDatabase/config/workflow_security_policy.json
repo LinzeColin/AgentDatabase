@@ -2,8 +2,18 @@
   "schema_version": "agent_database.workflow_security_policy.v1",
   "allowed_workflows": [
     ".github/workflows/dual-plane.yml",
+    ".github/workflows/dynamic-profile-update.yml",
     ".github/workflows/memory-atlas-acceptance.yml",
-    ".github/workflows/openai-database-ci.yml"
+    ".github/workflows/openai-database-ci.yml",
+    ".github/workflows/recurring-prompt-analysis.yml"
+  ],
+  "allowed_nested_workflows": [
+    "CodexSkills/registry/codex/book-to-skill/.github/workflows/ci.yml",
+    "CodexSkills/registry/codex/book-to-skill/.github/workflows/codeql.yml",
+    "CodexSkills/registry/codex/book-to-skill/.github/workflows/deploy-docs.yml",
+    "CodexSkills/registry/codex/graphify/references/graphify-repo/.github/workflows/ci.yml",
+    "CodexSkills/registry/codex/graphify/references/graphify-repo/.github/workflows/release-graph.yml",
+    "CodexSkills/registry/codex/html-anything/references/html-anything/.github/workflows/ci.yml"
   ],
   "allowed_events": [
     "push",
@@ -30,6 +40,11 @@
       "action": "actions/setup-python",
       "commit_sha": "a26af69be951a213d495a4c3e4e4022e16d87065",
       "source": "https://api.github.com/repos/actions/setup-python/git/ref/tags/v5"
+    },
+    {
+      "action": "actions/upload-artifact",
+      "commit_sha": "ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "source": "https://api.github.com/repos/actions/upload-artifact/git/ref/tags/v4"
     }
   ],
   "workflows": [
@@ -37,6 +52,20 @@
       "path": ".github/workflows/dual-plane.yml",
       "role": "dual_plane_ci",
       "trust_boundary": "trusted_repository_ci_read_only"
+    },
+    {
+      "path": ".github/workflows/dynamic-profile-update.yml",
+      "role": "dynamic_profile_scheduled_writer",
+      "trust_boundary": "trusted_default_branch_single_file_writer",
+      "required_permissions": {
+        "contents": "write"
+      },
+      "allowed_write_permissions": [
+        "contents"
+      ],
+      "write_allowlist": [
+        "OpenAIDatabase/data/derived/profile/DYNAMIC_PROFILE.md"
+      ]
     },
     {
       "path": ".github/workflows/memory-atlas-acceptance.yml",
@@ -47,6 +76,22 @@
       "path": ".github/workflows/openai-database-ci.yml",
       "role": "openai_database_governance_ci",
       "trust_boundary": "trusted_repository_ci_read_only"
+    },
+    {
+      "path": ".github/workflows/recurring-prompt-analysis.yml",
+      "role": "recurring_prompt_scheduled_writer",
+      "trust_boundary": "trusted_default_branch_bounded_derived_writer",
+      "required_permissions": {
+        "contents": "write"
+      },
+      "allowed_write_permissions": [
+        "contents"
+      ],
+      "write_allowlist": [
+        "OpenAIDatabase/data/derived/behavior_intelligence/recurring_prompts/",
+        "OpenAIDatabase/人类可读/00_Recurring分析_最新.md",
+        "OpenAIDatabase/人类可读/00_Recurring运行状态.md"
+      ]
     },
     {
       "path": "OpenAIDatabase/scripts/memory_settlement_policy.py",

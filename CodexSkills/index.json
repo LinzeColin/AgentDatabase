@@ -114,10 +114,10 @@
       "source": "codex",
       "name": "dynamic-personal-profile-update",
       "description": "Read allowlisted redacted derived data and produce one human-readable and machine-readable dynamic personal profile Markdown file. Use when updating a time-aware user profile, detecting meaningful behavior or preference changes, turning profile changes into temporary agent actions, or mining recurring Prompt/Workflow/Skill candidates. Never read raw/private data, write stable memory, modify Custom Instructions, or create a second persistent state store.",
-      "category": "其他",
+      "category": "工程与交付",
       "entry": "registry/codex/dynamic-personal-profile-update/SKILL.md",
-      "file_count": 7,
-      "size_bytes": 29583
+      "file_count": 9,
+      "size_bytes": 65337
     },
     {
       "slug": "frontend-slides",
@@ -457,7 +457,7 @@
       "category": "工程与交付",
       "entry": "registry/codex/persona-distiller/SKILL.md",
       "file_count": 211,
-      "size_bytes": 532032
+      "size_bytes": 534939
     },
     {
       "slug": "persona-distiller-group",
@@ -466,8 +466,8 @@
       "description": "Route a real task to a 5–20 member expert team drawn from uniquely registered Persona Distiller products. Use when a task benefits from several complementary person-model specialists plus isolated review, adjudication, and counterevidence roles; also use to inspect, verify, rebuild, or govern the canonical persona delivery registry. Infer identity and scenario internally, select only evidence-supported experts, and never ask the caller to choose an identity.",
       "category": "工程与交付",
       "entry": "registry/codex/persona-distiller-group/SKILL.md",
-      "file_count": 35,
-      "size_bytes": 1064137
+      "file_count": 44,
+      "size_bytes": 2299254
     },
     {
       "slug": "project-cost-table-skill",

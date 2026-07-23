@@ -149,6 +149,24 @@ class PersonalizationArchitectureTests(unittest.TestCase):
         conditional_paths = [row["path"] for row in route_result["conditional_resources"]]
         self.assertIn("data/derived/profile/CORE_PROFILE.md", conditional_paths)
 
+    def test_dynamic_profile_route_preserves_derived_access_and_noncanonical_marker(self) -> None:
+        route_resources = load_script("route_agent_resources")
+        result = route_resources.route_resources(ROOT, "dynamic_profile")
+
+        self.assertEqual(result["status"], "PASS")
+        self.assertEqual(result["read_order"], ["data/derived/profile/DYNAMIC_PROFILE.md"])
+        self.assertEqual(result["access"], "read_only_derived")
+        self.assertIs(result["canonical"], False)
+        self.assertEqual(result["resource_policy"]["access"], "read_only_derived")
+        self.assertTrue(result["context_used"])
+        self.assertTrue(result["conditional_context"])
+        self.assertTrue(
+            all(row["access"] == "read_only_derived" for row in result["context_used"])
+        )
+        self.assertTrue(
+            all(row["access"] == "read_only_derived" for row in result["conditional_context"])
+        )
+
     def test_builds_exports_routes_and_evaluates_architecture(self) -> None:
         build_exports = load_script("build_personalization_exports")
         route_resources = load_script("route_agent_resources")

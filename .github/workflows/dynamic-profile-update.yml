@@ -15,13 +15,21 @@ concurrency:
 
 jobs:
   update:
+    if: github.ref_name == github.event.repository.default_branch
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - name: Checkout default branch
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           fetch-depth: 2
+
+      - name: Run deterministic regression tests
+        run: >-
+          python3 -m unittest discover
+          -s CodexSkills/registry/codex/dynamic-personal-profile-update/tests
+          -p 'test_*.py'
+          -q
 
       - name: Generate one derived profile file
         run: >-
@@ -38,12 +46,25 @@ jobs:
 
       - name: Commit only a material profile change
         run: |
-          if git diff --quiet -- OpenAIDatabase/data/derived/profile/DYNAMIC_PROFILE.md; then
+          profile="OpenAIDatabase/data/derived/profile/DYNAMIC_PROFILE.md"
+          unexpected="$({ git diff --name-only; git ls-files --others --exclude-standard; } \
+            | sort -u \
+            | grep -vx "$profile" || true)"
+          if [ -n "$unexpected" ]; then
+            echo "STOP: unexpected persistent output"
+            echo "$unexpected"
+            exit 1
+          fi
+          if [ -z "$(git status --porcelain --untracked-files=all -- "$profile")" ]; then
             echo "NO_CHANGE: no profile commit required"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- OpenAIDatabase/data/derived/profile/DYNAMIC_PROFILE.md
+          git add -- "$profile"
+          if [ "$(git diff --cached --name-only)" != "$profile" ]; then
+            echo "STOP: staged diff is outside the profile allowlist"
+            exit 1
+          fi
           git commit -m "chore(memory): update dynamic profile"
-          git push
+          git push origin "HEAD:${GITHUB_REF_NAME}"

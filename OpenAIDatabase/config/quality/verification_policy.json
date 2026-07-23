@@ -26,6 +26,7 @@
         "tests/test_memory_atlas_v1_2_home_layout_contract.py",
                 "tests/test_memory_atlas_v1_2_product_identity_contract.py",
                 "tests/test_memory_settlement_policy.py",
+                "tests/test_recurring_prompt_analysis.py",
                 "tests/test_s05p2_facet_extractor.py",
         "tests/test_s05p3_facet_evidence_refs.py",
         "tests/test_s06p1_cluster_builder.py",
@@ -72,7 +73,8 @@
       "tests/test_raw_material_policy.py",
         "tests/test_s03p3_raw_manifest.py",
         "tests/test_s08p2_agent_authorization.py",
-        "tests/test_s3pdt01_privacy.py"
+        "tests/test_s3pdt01_privacy.py",
+        "tests/test_workflow_security_audit.py"
       ]
     },
     "integration": {
@@ -100,6 +102,7 @@
         "tests/test_memory_atlas_visual_acceptance.py",
         "tests/test_memory_atlas_visual_workflows.py",
         "tests/test_openai_memory_analysis.py",
+        "tests/test_skill_run_consumer.py",
         "tests/test_s04p1_chatgpt_sync.py",
         "tests/test_s04p2_codex_agent_sync.py",
         "tests/test_s04p3_github_backup.py"

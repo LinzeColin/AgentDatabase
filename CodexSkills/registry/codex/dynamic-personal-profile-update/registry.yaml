@@ -1,0 +1,34 @@
+schema_version: "skill_registry.v1"
+skill_id: "dynamic-personal-profile-update"
+source: "codex"
+path: "CodexSkills/registry/codex/dynamic-personal-profile-update"
+version: "0.0.0.1"
+status: "candidate_for_acceptance"
+
+layers:
+  identity:
+    consumer: "registry discovery"
+    name: "Dynamic Personal Profile Update"
+    description: "Derived-only time-aware personal profile update and Stage 1 asset discovery."
+  provenance:
+    consumer: "trust and traceability"
+    author: "Linze"
+    origin: "Codex conversation and AgentDatabase derived context"
+    input_mode: "derived_only"
+    public_repo_safe: true
+  capability_contract:
+    consumer: "Codex/LLM activation"
+    trigger: "dynamic profile, profile delta, recurring asset mining, profile-to-agent action"
+    persistent_output: "OpenAIDatabase/data/derived/profile/DYNAMIC_PROFILE.md"
+    stable_memory_write: false
+  verification:
+    consumer: "skill_log_evals"
+    validator: "scripts/validate_dynamic_profile.py"
+    tests: "tests/test_dynamic_profile.py"
+    acceptance: "one-file dual-plane output, idempotence, derived-only input, fail-closed"
+  controlled_iteration:
+    consumer: "skill_controlled_iterate"
+    version_policy: "patch-only: 0.0.0.N"
+    current_version: "0.0.0.1"
+    promotion_rule: "one real-task validation plus evidence before reusable asset promotion"
+    rollback: "restore previous DYNAMIC_PROFILE.md and disable workflow"

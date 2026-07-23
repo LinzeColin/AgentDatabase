@@ -93,6 +93,81 @@ class RepositoryHygieneAuditTests(unittest.TestCase):
             ],
         )
 
+    def test_registered_persona_archive_exceptions_are_exact(self) -> None:
+        approved = [
+            (
+                "CodexSkills/registry/codex/persona-distiller-group/政治法律家/"
+                "beth-wilkinson/versions/0.0.0.1/"
+                "beth-wilkinson-persona-distillation-delivery-v0.0.0.1.zip"
+            ),
+            (
+                "CodexSkills/registry/codex/persona-distiller-group/政治法律家/"
+                "evan-r-chesler/versions/0.0.0.1/"
+                "evan-r-chesler-persona-distillation-delivery-v0.0.0.1.zip"
+            ),
+            (
+                "CodexSkills/registry/codex/persona-distiller-group/政治法律家/"
+                "theodore-v-wells-jr/versions/0.0.0.1/"
+                "theodore-v-wells-jr-persona-distillation-delivery-v0.0.0.1.zip"
+            ),
+            (
+                "CodexSkills/registry/codex/persona-distiller-group/多重身份/"
+                "robert-a-kindler/versions/0.0.0.1/"
+                "robert-a-kindler-persona-distillation-delivery-v0.0.0.1.zip"
+            ),
+            (
+                "CodexSkills/registry/codex/persona-distiller-group/政治法律家/"
+                "h-rodgin-cohen/versions/0.0.0.1/"
+                "h-rodgin-cohen-persona-distillation-delivery-v0.0.0.1.zip"
+            ),
+            (
+                "CodexSkills/registry/codex/persona-distiller-group/政治法律家/"
+                "scott-a-barshay/versions/0.0.0.1/"
+                "scott-a-barshay-persona-distillation-delivery-v0.0.0.1.zip"
+            ),
+        ]
+        inventory = {
+            **{path: 200_000 for path in approved},
+            **{f"{path}.copy.zip": 200_000 for path in approved},
+        }
+        violations = hygiene.evaluate_inventory(inventory, self.policy)
+        self.assertEqual(
+            violations,
+            [
+                {
+                    "path": f"{path}.copy.zip",
+                    "reason": "unapproved_tracked_archive",
+                    "bytes": 200_000,
+                }
+                for path in sorted(approved)
+            ],
+        )
+
+    def test_recurring_prompt_large_object_ceiling_is_exact(self) -> None:
+        prefix = (
+            "OpenAIDatabase/data/derived/behavior_intelligence/"
+            "recurring_prompts/"
+        )
+        current = f"{prefix}occurrences.jsonl"
+        violations = hygiene.evaluate_inventory(
+            {
+                current: 95_617_956,
+                f"{prefix}growth.jsonl": 95_617_957,
+            },
+            self.policy,
+        )
+        self.assertEqual(
+            violations,
+            [
+                {
+                    "path": f"{prefix}growth.jsonl",
+                    "reason": "tracked_blob_exceeds_bound",
+                    "bytes": 95_617_957,
+                    "max_bytes": 95_617_956,
+                }
+            ],
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
