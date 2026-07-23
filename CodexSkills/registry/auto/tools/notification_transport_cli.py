@@ -114,6 +114,8 @@ def main(argv: Sequence[str] = None) -> int:
             "GMAIL_TRANSPORT_PREFLIGHT_OK "
             f"provider={capability['provider_code']} "
             f"recipient_ref={mapping.recipient_ref} "
+            "query_endpoint=VERIFIED "
+            "metadata_readback=PENDING_REAL_SEND "
             f"mapping_ref={refs['recipient_mapping_ref']} "
             f"config_ref={refs['gmail_config_ref']}"
         )

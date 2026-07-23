@@ -21,7 +21,15 @@
   "canonical_publication_permitted": false,
   "capability_gate_precedes_state_write": true,
   "consumer_first_gate_satisfied": false,
+  "consumer_first_interface_path": "OpenAIDatabase/config/evaluation/skill_run_consumer.json",
+  "consumer_first_interface_raw_sha256": "94a5186aeaad6947eec19ef67539e3f03c0db06d47292d58088fdc4ee8bb53c6",
+  "consumer_first_observed_bundle_digest": "fd1df66e240695bd376803423bd09f9f341f7542f74a6ed92b0f79b0af4dc5e1",
+  "consumer_first_observed_candidate_git_object_id": "sha1:4b1e1a318c8f9e1014839a8a3a46e057679c4b6b",
+  "consumer_first_observed_failure_code": "skill_run_consumer_bootstrap_failed:TRUST_SCHEMA_PATH_OWNER_MISMATCH",
   "consumer_first_owner_plane": "MECHANISM",
+  "consumer_first_required_bundle_digest": "2704ed797c843f969965db600747abcdcd217550522e6479aab6817ef5a86ef5",
+  "consumer_first_required_candidate_git_object_id": "sha1:899a4374bc02f5e18444fea7404864df7b118adf",
+  "consumer_first_trust_tuple_drift_detected": true,
   "external_gmail_ready_gate_satisfied": false,
   "fault_test_rounds_required": 2,
   "m0c_b_permitted": false,
@@ -44,7 +52,7 @@
       "relative_path": "CodexSkills/registry/auto/runtime/core.py"
     },
     {
-      "artifact_digest": "beb5a555a022863dbfda4afaca85c0bbc913ac9fe7c04e6d207e2f9ec2f7bd59",
+      "artifact_digest": "293ed159513cc7d12c740b4aa6c99a48091784f8f94fc86bab61b99895cc39b0",
       "relative_path": "CodexSkills/registry/auto/runtime/gmail_api.py"
     },
     {
@@ -92,11 +100,11 @@
       "relative_path": "CodexSkills/registry/auto/tools/activation_handshake_cli.py"
     },
     {
-      "artifact_digest": "b16f279f439647f692606372e9759dcc72b4ad8e5a390df5d3a0cba3fae4b586",
+      "artifact_digest": "5b3f5889bf8529ac2996e95e14c3aafcb49671388bb71fdaade8d131d6f8a298",
       "relative_path": "CodexSkills/registry/auto/tools/build_runtime_interface.py"
     },
     {
-      "artifact_digest": "e75ff378a3fb90e088d79bc459a8174d17d00500cc8a9a227cac5d4f7d49a45a",
+      "artifact_digest": "1d3842163e6d04eeefd1de919fb6455735dba3ab8062c8972aa7871fa161e4c1",
       "relative_path": "CodexSkills/registry/auto/tools/notification_transport_cli.py"
     },
     {
@@ -113,17 +121,28 @@
     }
   ],
   "module_count": 21,
-  "next_phase": "MECHANISM_CONSUMER_FIRST_PHASE",
+  "next_phase": "MECHANISM_REPIN_CONSUMER_TRUST_TUPLE",
   "notification_actual_recipient_repo_external": true,
   "notification_credentials_repo_external": true,
   "notification_external_path_contract": {
     "gmail_config_ref": "state-root/private/notification/gmail-api.v1.json",
     "recipient_mapping_ref": "state-root/private/notification/recipient-mapping.v1.json"
   },
+  "notification_preflight_cannot_claim_metadata_readback": true,
+  "notification_preflight_query": {
+    "endpoint": "users.messages.list",
+    "max_results": 1,
+    "query": "in:sent rfc822msgid:<skillops-query-capability-v1@notification.skillops.invalid>",
+    "send_performed": false
+  },
+  "notification_preflight_query_endpoint_implemented": true,
+  "notification_preflight_query_endpoint_runtime_verified": false,
   "notification_production_transport": "GMAIL_API_V1",
   "notification_provider_lookup": "RFC822_MESSAGE_ID_AND_PRIVATE_PAYLOAD_DIGEST",
   "notification_provider_readback_required": true,
   "notification_public_recipient_ref_only": true,
+  "notification_real_message_metadata_readback_verified": false,
+  "notification_real_message_metadata_readback_with_send_only": true,
   "notification_send_entrypoint": "CodexSkills/registry/auto/tools/activation_handshake_cli.py",
   "notification_test_transport_production_forbidden": true,
   "os_local_scheduler_or_daemon_used": false,

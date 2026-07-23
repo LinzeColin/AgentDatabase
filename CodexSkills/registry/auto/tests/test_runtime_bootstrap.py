@@ -55,6 +55,30 @@ class RuntimeBootstrapTests(unittest.TestCase):
         self.assertTrue(interface["trust_tuple_repo_external_only"])
         self.assertFalse(interface["canonical_publication_permitted"])
         self.assertEqual(interface["candidate_bundle_digest"], CANDIDATE_DIGEST)
+        self.assertFalse(interface["consumer_first_gate_satisfied"])
+        self.assertTrue(
+            interface["consumer_first_trust_tuple_drift_detected"]
+        )
+        self.assertEqual(
+            interface["consumer_first_observed_failure_code"],
+            "skill_run_consumer_bootstrap_failed:"
+            "TRUST_SCHEMA_PATH_OWNER_MISMATCH",
+        )
+        self.assertTrue(
+            interface["notification_preflight_query_endpoint_implemented"]
+        )
+        self.assertFalse(
+            interface[
+                "notification_preflight_query_endpoint_runtime_verified"
+            ]
+        )
+        self.assertFalse(
+            interface[
+                "notification_real_message_metadata_readback_verified"
+            ]
+        )
+        self.assertFalse(interface["external_gmail_ready_gate_satisfied"])
+        self.assertFalse(interface["m0c_b_permitted"])
 
     def test_bootstrap_failure_precedes_state_root_creation(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:

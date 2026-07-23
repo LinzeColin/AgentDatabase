@@ -5,6 +5,7 @@ import json
 import os
 import tempfile
 import unittest
+import urllib.parse
 from email.parser import BytesParser
 from email.policy import default
 from pathlib import Path
@@ -18,6 +19,8 @@ from CodexSkills.registry.auto.runtime.core import (
 )
 from CodexSkills.registry.auto.runtime.gmail_api import (
     GMAIL_CONFIG_SCHEMA,
+    GMAIL_PREFLIGHT_QUERY,
+    GMAIL_PREFLIGHT_QUERY_MAX_RESULTS,
     GmailApiClient,
     GmailApiConfig,
     GmailApiNotificationTransport,
@@ -44,6 +47,10 @@ class FakeGmailApiClient(GmailApiClient):
         self.send_count = 0
         self.ambiguous = False
         self.failure_code = None
+        self.query_failure_code = None
+        self.query_response_override = None
+        self.query_calls = []
+        self.metadata_get_count = 0
 
     def _raise_if_failed(self):
         if self.failure_code is not None:
@@ -54,7 +61,12 @@ class FakeGmailApiClient(GmailApiClient):
         return {"emailAddress": "owner@example.invalid", "messagesTotal": 1}
 
     def list_messages(self, query, max_results):
+        self.query_calls.append((query, max_results))
+        if self.query_failure_code is not None:
+            raise GmailProviderError(self.query_failure_code)
         self._raise_if_failed()
+        if self.query_response_override is not None:
+            return self.query_response_override
         matches = []
         expected = query.removeprefix("in:sent rfc822msgid:")
         for message_id, message in self.messages.items():
@@ -69,6 +81,7 @@ class FakeGmailApiClient(GmailApiClient):
         return {"messages": matches[:max_results], "resultSizeEstimate": len(matches)}
 
     def get_message_metadata(self, message_id):
+        self.metadata_get_count += 1
         self._raise_if_failed()
         return self.messages.get(message_id, {"id": message_id, "payload": {"headers": []}})
 
@@ -229,6 +242,15 @@ class GmailApiTransportTests(unittest.TestCase):
         capability = self.transport.preflight(self.mapping.provider_target)
         self.assertEqual(capability["provider_code"], "GMAIL_API")
         self.assertTrue(capability["recipient_binding_verified"])
+        self.assertTrue(capability["query_endpoint_verified"])
+        self.assertFalse(capability["metadata_readback_verified"])
+        self.assertFalse(capability["send_performed"])
+        self.assertEqual(
+            self.client.query_calls,
+            [(GMAIL_PREFLIGHT_QUERY, GMAIL_PREFLIGHT_QUERY_MAX_RESULTS)],
+        )
+        self.assertEqual(self.client.send_count, 0)
+        self.assertEqual(self.client.metadata_get_count, 0)
         serialized = canonicalize_object(capability)
         self.assertNotIn(self.mapping.provider_target.encode("utf-8"), serialized)
         self.assertNotIn(self.config.client_secret.encode("utf-8"), serialized)
@@ -239,6 +261,48 @@ class GmailApiTransportTests(unittest.TestCase):
             "GMAIL_PREFLIGHT_RECIPIENT_BINDING_MISMATCH",
         ):
             self.transport.preflight("different@example.invalid")
+        self.assertEqual(self.client.query_calls, [])
+
+    def test_preflight_query_failure_is_fail_closed_without_send(self) -> None:
+        self.client.query_failure_code = "PROVIDER_TIMEOUT"
+        with self.assertRaisesRegex(
+            AutoRuntimeError,
+            "GMAIL_PREFLIGHT_QUERY_PROVIDER_TIMEOUT",
+        ):
+            self.transport.preflight(self.mapping.provider_target)
+        self.assertEqual(self.client.send_count, 0)
+        self.assertEqual(self.client.metadata_get_count, 0)
+
+    def test_preflight_accepts_provider_omitting_empty_default_fields(self) -> None:
+        self.client.query_response_override = {}
+        capability = self.transport.preflight(self.mapping.provider_target)
+        self.assertTrue(capability["query_endpoint_verified"])
+        self.assertFalse(capability["metadata_readback_verified"])
+        self.assertEqual(self.client.send_count, 0)
+        self.assertEqual(self.client.metadata_get_count, 0)
+
+    def test_preflight_rejects_malformed_query_response(self) -> None:
+        invalid_responses = (
+            {"resultSizeEstimate": True},
+            {"messages": "not-a-list", "resultSizeEstimate": 0},
+            {
+                "messages": [{"id": "provider-message"}],
+                "resultSizeEstimate": 1,
+            },
+            {"resultSizeEstimate": 0, "unexpected": "field"},
+        )
+        for response in invalid_responses:
+            with self.subTest(response=response):
+                self.client.query_response_override = response
+                with self.assertRaisesRegex(
+                    AutoRuntimeError,
+                    "GMAIL_PREFLIGHT_QUERY_RESPONSE_INVALID",
+                ):
+                    self.transport.preflight(
+                        self.mapping.provider_target
+                    )
+        self.assertEqual(self.client.send_count, 0)
+        self.assertEqual(self.client.metadata_get_count, 0)
 
     def test_stdlib_client_refreshes_with_required_scopes_and_bearer_header(self) -> None:
         responses = [
@@ -289,6 +353,60 @@ class GmailApiTransportTests(unittest.TestCase):
                 "CREDENTIAL_UNAVAILABLE",
             ):
                 StdlibGmailApiClient(self.config).profile()
+
+    def test_stdlib_preflight_calls_fixed_query_endpoint_without_send(
+        self,
+    ) -> None:
+        responses = [
+            FakeHttpResponse(
+                {
+                    "access_token": "private-access-token",
+                    "token_type": "Bearer",
+                    "scope": " ".join(self.config.required_scopes),
+                }
+            ),
+            FakeHttpResponse(
+                {
+                    "emailAddress": "owner@example.invalid",
+                    "messagesTotal": 1,
+                }
+            ),
+            FakeHttpResponse(
+                {
+                    "messages": [],
+                    "resultSizeEstimate": 0,
+                }
+            ),
+        ]
+        client = StdlibGmailApiClient(self.config)
+        transport = GmailApiNotificationTransport(
+            self.config,
+            client=client,
+        )
+        with mock.patch(
+            "CodexSkills.registry.auto.runtime.gmail_api.urllib.request.urlopen",
+            side_effect=responses,
+        ) as opened:
+            capability = transport.preflight(
+                self.mapping.provider_target
+            )
+        self.assertTrue(capability["query_endpoint_verified"])
+        self.assertFalse(capability["metadata_readback_verified"])
+        self.assertEqual(opened.call_count, 3)
+        query_request = opened.call_args_list[2].args[0]
+        parsed = urllib.parse.urlsplit(query_request.full_url)
+        parameters = urllib.parse.parse_qs(parsed.query)
+        self.assertEqual(
+            parsed.path,
+            "/gmail/v1/users/me/messages",
+        )
+        self.assertEqual(parameters["q"], [GMAIL_PREFLIGHT_QUERY])
+        self.assertEqual(
+            parameters["maxResults"],
+            [str(GMAIL_PREFLIGHT_QUERY_MAX_RESULTS)],
+        )
+        self.assertEqual(parameters["includeSpamTrash"], ["false"])
+        self.assertEqual(query_request.get_method(), "GET")
 
     def test_send_requires_provider_metadata_readback(self) -> None:
         outcome = self.notify()

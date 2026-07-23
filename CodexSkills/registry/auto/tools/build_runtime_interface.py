@@ -74,14 +74,38 @@ def build():
         "canonical_publication_permitted": False,
         "capability_gate_precedes_state_write": True,
         "consumer_first_gate_satisfied": False,
+        "consumer_first_interface_path": (
+            "OpenAIDatabase/config/evaluation/"
+            "skill_run_consumer.json"
+        ),
+        "consumer_first_interface_raw_sha256": (
+            "94a5186aeaad6947eec19ef67539e3f03"
+            "c0db06d47292d58088fdc4ee8bb53c6"
+        ),
+        "consumer_first_observed_bundle_digest": (
+            "fd1df66e240695bd376803423bd09f9f"
+            "341f7542f74a6ed92b0f79b0af4dc5e1"
+        ),
+        "consumer_first_observed_candidate_git_object_id": (
+            "sha1:4b1e1a318c8f9e1014839a8a3a46e057679c4b6b"
+        ),
+        "consumer_first_observed_failure_code": (
+            "skill_run_consumer_bootstrap_failed:"
+            "TRUST_SCHEMA_PATH_OWNER_MISMATCH"
+        ),
         "consumer_first_owner_plane": "MECHANISM",
+        "consumer_first_required_bundle_digest": CANDIDATE_BUNDLE_DIGEST,
+        "consumer_first_required_candidate_git_object_id": (
+            CANDIDATE_GIT_OBJECT
+        ),
+        "consumer_first_trust_tuple_drift_detected": True,
         "external_gmail_ready_gate_satisfied": False,
         "fault_test_rounds_required": 2,
         "manual_and_scheduled_same_orchestrator": True,
         "module_artifacts": artifacts,
         "module_count": len(artifacts),
         "m0c_b_permitted": False,
-        "next_phase": "MECHANISM_CONSUMER_FIRST_PHASE",
+        "next_phase": "MECHANISM_REPIN_CONSUMER_TRUST_TUPLE",
         "notification_actual_recipient_repo_external": True,
         "notification_credentials_repo_external": True,
         "notification_external_path_contract": {
@@ -93,11 +117,26 @@ def build():
             ),
         },
         "notification_production_transport": "GMAIL_API_V1",
+        "notification_preflight_cannot_claim_metadata_readback": True,
+        "notification_preflight_query": {
+            "endpoint": "users.messages.list",
+            "max_results": 1,
+            "query": (
+                "in:sent rfc822msgid:"
+                "<skillops-query-capability-v1@"
+                "notification.skillops.invalid>"
+            ),
+            "send_performed": False,
+        },
+        "notification_preflight_query_endpoint_implemented": True,
+        "notification_preflight_query_endpoint_runtime_verified": False,
         "notification_provider_lookup": (
             "RFC822_MESSAGE_ID_AND_PRIVATE_PAYLOAD_DIGEST"
         ),
         "notification_provider_readback_required": True,
         "notification_public_recipient_ref_only": True,
+        "notification_real_message_metadata_readback_verified": False,
+        "notification_real_message_metadata_readback_with_send_only": True,
         "notification_send_entrypoint": (
             "CodexSkills/registry/auto/tools/activation_handshake_cli.py"
         ),

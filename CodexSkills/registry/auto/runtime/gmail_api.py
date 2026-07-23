@@ -37,6 +37,13 @@ GMAIL_MESSAGE_ID_DOMAIN = "notification.skillops.invalid"
 GMAIL_CORRELATION_HEADER = "X-SkillOps-Correlation-Digest"
 GMAIL_PAYLOAD_HEADER = "X-SkillOps-Private-Payload-Digest"
 GMAIL_PROVIDER_CODE = "GMAIL_API"
+GMAIL_PREFLIGHT_QUERY_MESSAGE_ID = (
+    "<skillops-query-capability-v1@notification.skillops.invalid>"
+)
+GMAIL_PREFLIGHT_QUERY = (
+    "in:sent rfc822msgid:" + GMAIL_PREFLIGHT_QUERY_MESSAGE_ID
+)
+GMAIL_PREFLIGHT_QUERY_MAX_RESULTS = 1
 GMAIL_SEND_SCOPES = {
     "https://mail.google.com/",
     "https://www.googleapis.com/auth/gmail.modify",
@@ -52,6 +59,7 @@ PRIVATE_NOTIFICATION_RELATIVE = Path("private") / "notification"
 RECIPIENT_MAPPING_NAME = "recipient-mapping.v1.json"
 GMAIL_CONFIG_NAME = "gmail-api.v1.json"
 HEX64_RE = re.compile(r"^[0-9a-f]{64}$")
+GMAIL_PROVIDER_MESSAGE_REF_RE = re.compile(r"^[A-Za-z0-9_-]{1,256}$")
 SAFE_CONFIG_VALUE_RE = re.compile(r"^[^\x00-\x1f\x7f]{1,4096}$")
 MAX_PROVIDER_RESPONSE_BYTES = 1024 * 1024
 
@@ -420,6 +428,65 @@ class GmailApiNotificationTransport(NotificationTransport):
                 output[name.lower()] = value.strip()
         return output
 
+    @staticmethod
+    def _validate_query_capability_response(
+        response: Mapping[str, Any],
+    ) -> None:
+        allowed_keys = {
+            "messages",
+            "nextPageToken",
+            "resultSizeEstimate",
+        }
+        if not isinstance(response, dict) or not set(response).issubset(
+            allowed_keys
+        ):
+            raise AutoRuntimeError(
+                "GMAIL_PREFLIGHT_QUERY_RESPONSE_INVALID"
+            )
+        estimate = response.get("resultSizeEstimate")
+        if estimate is not None and (
+            not isinstance(estimate, int)
+            or isinstance(estimate, bool)
+            or estimate < 0
+        ):
+            raise AutoRuntimeError(
+                "GMAIL_PREFLIGHT_QUERY_RESPONSE_INVALID"
+            )
+        messages = response.get("messages", [])
+        if (
+            not isinstance(messages, list)
+            or len(messages) > GMAIL_PREFLIGHT_QUERY_MAX_RESULTS
+            or (
+                isinstance(estimate, int)
+                and estimate < len(messages)
+            )
+        ):
+            raise AutoRuntimeError(
+                "GMAIL_PREFLIGHT_QUERY_RESPONSE_INVALID"
+            )
+        for message in messages:
+            if (
+                not isinstance(message, dict)
+                or set(message) != {"id", "threadId"}
+                or not GMAIL_PROVIDER_MESSAGE_REF_RE.fullmatch(
+                    str(message.get("id", ""))
+                )
+                or not GMAIL_PROVIDER_MESSAGE_REF_RE.fullmatch(
+                    str(message.get("threadId", ""))
+                )
+            ):
+                raise AutoRuntimeError(
+                    "GMAIL_PREFLIGHT_QUERY_RESPONSE_INVALID"
+                )
+        next_page = response.get("nextPageToken")
+        if next_page is not None and (
+            not isinstance(next_page, str)
+            or not SAFE_CONFIG_VALUE_RE.fullmatch(next_page)
+        ):
+            raise AutoRuntimeError(
+                "GMAIL_PREFLIGHT_QUERY_RESPONSE_INVALID"
+            )
+
     def _verify_message(
         self,
         provider_message_id: str,
@@ -456,11 +523,24 @@ class GmailApiNotificationTransport(NotificationTransport):
             and profile_address.casefold() != provider_target.casefold()
         ):
             raise AutoRuntimeError("GMAIL_PREFLIGHT_RECIPIENT_BINDING_MISMATCH")
+        try:
+            query_response = self.client.list_messages(
+                GMAIL_PREFLIGHT_QUERY,
+                GMAIL_PREFLIGHT_QUERY_MAX_RESULTS,
+            )
+        except GmailProviderError as exc:
+            raise AutoRuntimeError(
+                "GMAIL_PREFLIGHT_QUERY_" + exc.code
+            ) from exc
+        self._validate_query_capability_response(query_response)
         return {
             "provider_code": GMAIL_PROVIDER_CODE,
             "authenticated_profile_verified": True,
             "recipient_binding_verified": provider_target is not None,
             "recipient_mode": "OWNER_MAPPING",
+            "query_endpoint_verified": True,
+            "metadata_readback_verified": False,
+            "send_performed": False,
         }
 
     def lookup(self, idempotency_key: str) -> ProviderResult:

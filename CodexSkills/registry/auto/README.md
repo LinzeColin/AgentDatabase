@@ -35,11 +35,14 @@ resolve schemas over the network, or install dependencies at runtime.
 - `runtime/notification.py` keeps the actual recipient and provider payload in
   a repo-external outbox; public receipts contain only `recipient_ref`.
 - `runtime/gmail_api.py` is the production Gmail API transport. It refreshes
-  an owner-held OAuth credential, searches `in:sent` by deterministic RFC822
-  Message-ID, verifies the exact private payload-digest header, sends only
-  after an unambiguous `NOT_FOUND`, and reads the provider message back before
-  returning `SENT`. Provider timeouts, ambiguity, header mismatch, or missing
-  scopes block the planned write without sending again.
+  an owner-held OAuth credential. Its no-send preflight verifies the
+  authenticated profile and performs one fixed `users.messages.list` query
+  for a reserved `.invalid` RFC822 Message-ID. Transactional lookup separately
+  searches `in:sent` by the real deterministic RFC822 Message-ID, verifies the
+  exact private payload-digest header, sends only after an unambiguous
+  `NOT_FOUND`, and reads the provider message back before returning `SENT`.
+  Provider timeouts, malformed query responses, ambiguity, header mismatch, or
+  missing scopes block the planned write without sending again.
 - `runtime/activation.py` consumes both the external candidate trust tuple and
   the external M0c-A control tuple. It verifies the local Mechanism activation
   runtime against the selected Git object before loading the exact 31-schema /
@@ -57,10 +60,11 @@ resolve schemas over the network, or install dependencies at runtime.
   preflight/non-activation entrypoint. It consumes the same external
   candidate/active trust tuple,
   resolves only the fixed repo-external paths below, verifies the authenticated
-  Gmail profile matches the owner mapping, renders the locked MAJOR template
-  from public-safe structured facts, and returns a public-safe receipt. It
-  rejects `planned_action=ACTIVATE`; activation cannot bypass the verified
-  intent entrypoint.
+  Gmail profile matches the owner mapping, proves the Gmail query endpoint
+  accepts the fixed no-send capability probe, renders the locked MAJOR
+  template from public-safe structured facts, and returns a public-safe
+  receipt. It rejects `planned_action=ACTIVATE`; activation cannot bypass the
+  verified intent entrypoint.
 - `runtime/publication.py` permits only expected-head FF pushes followed by
   remote byte readback. Candidate runtime publication is impossible. The
   coordinated-activation path no longer accepts caller booleans, caller digest
@@ -98,11 +102,17 @@ interface SHA-256, canonical interface path, and
 `DRAFT_NON_ACTIVE_CONTROL` mode. Repository self-reporting is never sufficient.
 
 The two-stage production CLI is intentionally not demonstrated with a live
-instance here. A later independent run must first land the Mechanism-owned
-consumer-first change, then separately prove the repo-external state root,
-recipient mapping, Gmail OAuth scopes, authenticated recipient binding, and
-provider readback readiness. Only a later M0c-B run may create an intent, send
-the notification, create a settlement, or invoke `publish-settlement`.
+instance here. Registry relocation invalidated the Mechanism-owned
+consumer-first trust tuple: its interface still pins candidate object
+`4b1e1a318c8f9e1014839a8a3a46e057679c4b6b` and bundle digest `fd1df66e...`,
+while the required candidate is `899a4374...` / `2704ed79...`. The direct
+consumer validator therefore fails closed with
+`TRUST_SCHEMA_PATH_OWNER_MISMATCH`. Mechanism must independently repin that
+interface before the consumer-first gate can be true. A later independent
+run must also prove the repo-external state root, recipient mapping, Gmail
+OAuth scopes, authenticated-recipient binding, and query endpoint readiness.
+Only a later M0c-B run may create an intent, send the notification, create a
+settlement, or invoke `publish-settlement`.
 
 ## Production Gmail private-path contract
 
@@ -137,6 +147,17 @@ The provider preflight is explicit and performs no send:
   --mode CANDIDATE
 ```
 
+The preflight first binds the authenticated profile to the private owner
+mapping, then calls `users.messages.list` with `maxResults=1` and the fixed
+query
+`in:sent rfc822msgid:<skillops-query-capability-v1@notification.skillops.invalid>`.
+The reserved Message-ID contains no recipient, credential, mailbox content, or
+transaction identifier. The response is shape-checked and discarded; no
+provider message ID is returned. This proves only query-endpoint capability.
+It does not claim that a real sent message or its metadata headers were read
+back. Exact metadata readback remains mandatory after the real M0c-B send
+before a receipt can become `SENT`.
+
 There is no launchd job, local daemon, background retry loop, or runtime
 package installation. The Codex automation invokes the entrypoint directly;
 manual and scheduled runs use the same path.
@@ -149,5 +170,7 @@ also not complete: `skills_runs/example.json` is only prior scaffolding, never
 the final run-layout contract. The immutable Task Pack requires bounded daily
 JSONL shards and a manifest under
 `OpenAIDatabase/data/run_logs/skills_runs/YYYY/MM/DD/part-NNNN.jsonl`.
+The external Gmail readiness gate also remains false until the Owner injects
+the repo-external state root and the controlled preflight succeeds.
 Never invoke the verifier during development; the Owner selects a fresh
 verifier only after both planes finish.
