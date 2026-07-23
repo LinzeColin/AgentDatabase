@@ -58,6 +58,28 @@ class FileInspection:
 
 
 @dataclasses.dataclass(frozen=True)
+class ExtractedUserMessage:
+    source_kind: str
+    text_blocks: tuple[str, ...]
+
+
+@dataclasses.dataclass(frozen=True)
+class SanitizedUserMessage:
+    text: str
+    retained_block_count: int
+    removed_injected_block_count: int
+    max_retained_injection_score: int
+    retained_configured_markers: tuple[str, ...]
+
+
+@dataclasses.dataclass(frozen=True)
+class StrippedInjectedText:
+    text: str
+    removed_pattern_blocks: int
+    removed_header_lines: int
+
+
+@dataclasses.dataclass(frozen=True)
 class MessageCandidate:
     relative_path: str
     jsonl_line: int
@@ -70,6 +92,10 @@ class MessageCandidate:
     normalized_full_text: str
     message_text_sha256: str
     message_key: str
+    retained_block_count: int
+    removed_injected_block_count: int
+    max_retained_injection_score: int
+    retained_configured_markers: tuple[str, ...]
 
 
 @dataclasses.dataclass
@@ -78,9 +104,13 @@ class ParseCounters:
     malformed_lines: int = 0
     ignored_non_user_events: int = 0
     excluded_injected_messages: int = 0
+    excluded_injected_blocks: int = 0
+    mixed_messages_preserved: int = 0
+    retained_configured_marker_messages: int = 0
     excluded_empty_messages: int = 0
     candidate_user_messages: int = 0
     deduplicated_event_copies: int = 0
+    response_items_suppressed_by_event_msg: int = 0
     clauses_created: int = 0
     clauses_discarded: int = 0
 
@@ -121,6 +151,12 @@ class RuntimeConfig:
     remove_block_patterns: tuple[re.Pattern[str], ...]
     whole_message_prefixes: tuple[str, ...]
     long_message_markers: tuple[str, ...]
+    request_boundary_patterns: tuple[re.Pattern[str], ...]
+    block_header_patterns: tuple[re.Pattern[str], ...]
+    instruction_heading_patterns: tuple[re.Pattern[str], ...]
+    directive_line_patterns: tuple[re.Pattern[str], ...]
+    minimum_instruction_block_chars: int
+    minimum_instruction_structure_score: int
     automation_prefix_patterns: tuple[re.Pattern[str], ...]
     automation_metadata_patterns: tuple[re.Pattern[str], ...]
     automation_exclude_line_patterns: tuple[re.Pattern[str], ...]
@@ -175,6 +211,18 @@ class RuntimeConfig:
             remove_block_patterns=compile_many(injected["remove_block_patterns"]),
             whole_message_prefixes=tuple(injected["whole_message_prefixes"]),
             long_message_markers=tuple(injected["long_message_markers"]),
+            request_boundary_patterns=compile_many(injected["request_boundary_patterns"]),
+            block_header_patterns=compile_many(injected["block_header_patterns"]),
+            instruction_heading_patterns=compile_many(
+                injected["instruction_heading_patterns"]
+            ),
+            directive_line_patterns=compile_many(injected["directive_line_patterns"]),
+            minimum_instruction_block_chars=int(
+                injected["minimum_instruction_block_chars"]
+            ),
+            minimum_instruction_structure_score=int(
+                injected["minimum_instruction_structure_score"]
+            ),
             automation_prefix_patterns=compile_many(automation["prefix_patterns"]),
             automation_metadata_patterns=compile_many(automation["metadata_patterns"]),
             automation_exclude_line_patterns=compile_many(
@@ -311,43 +359,84 @@ def flatten_text_content(value: Any) -> str:
                     "message",
                 }:
                     continue
-            text = flatten_text_content(item)
-            if text:
-                parts.append(text)
+            item_text = flatten_text_content(item)
+            if item_text:
+                parts.append(item_text)
         return "\n".join(parts)
     return ""
 
 
-def extract_user_message(obj: Mapping[str, Any]) -> tuple[str, str] | None:
-    """Return (source_kind, text) only for explicit Codex user-message shapes."""
+def extract_text_blocks(value: Any) -> tuple[str, ...]:
+    """Preserve top-level message content boundaries before injection filtering."""
+    if isinstance(value, str):
+        return (value,) if value else ()
+    if isinstance(value, Mapping):
+        text = flatten_text_content(value)
+        return (text,) if text else ()
+    if isinstance(value, Sequence) and not isinstance(value, (str, bytes, bytearray)):
+        blocks: list[str] = []
+        for item in value:
+            if isinstance(item, Mapping):
+                block_type = str(item.get("type", ""))
+                if block_type and block_type not in {
+                    "input_text",
+                    "text",
+                    "output_text",
+                    "message",
+                }:
+                    continue
+            item_text = flatten_text_content(item)
+            if item_text:
+                blocks.append(item_text)
+        return tuple(blocks)
+    return ()
+
+
+def extract_user_message(obj: Mapping[str, Any]) -> ExtractedUserMessage | None:
+    """Return explicit Codex user-message shapes while preserving text-block provenance."""
     obj_type = obj.get("type")
     payload = obj.get("payload")
     if not isinstance(payload, Mapping):
         return None
 
     if obj_type == "event_msg" and payload.get("type") == "user_message":
-        text = flatten_text_content(
+        blocks = extract_text_blocks(
             payload.get("message", payload.get("text", payload.get("content")))
         )
-        return ("event_msg", text)
+        return ExtractedUserMessage("event_msg", blocks)
 
     if (
         obj_type == "response_item"
         and payload.get("type") == "message"
         and payload.get("role") == "user"
     ):
-        text = flatten_text_content(payload.get("content", payload.get("message")))
-        return ("response_item", text)
+        blocks = extract_text_blocks(payload.get("content", payload.get("message")))
+        return ExtractedUserMessage("response_item", blocks)
 
     return None
 
 
-def strip_injected_blocks(text: str, config: RuntimeConfig) -> str:
+def strip_injected_blocks(text: str, config: RuntimeConfig) -> StrippedInjectedText:
+    """Remove explicit wrappers while reporting what was removed.
+
+    The caller uses this provenance to distinguish a safe suffix left after a complete
+    tagged block from an instruction body whose identifying header was merely deleted.
+    """
     result = text
+    removed_pattern_blocks = 0
     for pattern in config.remove_block_patterns:
-        result = pattern.sub("\n", result)
-    result = re.sub(r"(?im)^\s*#\s*AGENTS\.md instructions for[^\n]*\s*$", "", result)
-    return result.strip()
+        result, replacements = pattern.subn("\n", result)
+        removed_pattern_blocks += replacements
+    result, removed_header_lines = re.subn(
+        r"(?im)^\s*#\s*AGENTS\.md instructions(?:\s+for\b[^\n]*)?\s*$",
+        "",
+        result,
+    )
+    return StrippedInjectedText(
+        text=result.strip(),
+        removed_pattern_blocks=removed_pattern_blocks,
+        removed_header_lines=removed_header_lines,
+    )
 
 
 def looks_like_environment_only(text: str) -> bool:
@@ -360,20 +449,185 @@ def looks_like_environment_only(text: str) -> bool:
             "australia/melbourne",
             "zsh",
             "bash",
+            "permission_profile",
+            "sandbox_policy",
+            "type=\"disabled\"",
         )
     )
     meaningful_chars = len(re.sub(r"[\s\W_]+", "", text, flags=re.UNICODE))
-    return len(text) <= 700 and marker_count >= 2 and meaningful_chars <= 300
+    return len(text) <= 900 and marker_count >= 2 and meaningful_chars <= 360
 
 
-def is_injected_context(text: str, config: RuntimeConfig) -> bool:
+def injection_block_evidence(
+    text: str,
+    source_kind: str,
+    config: RuntimeConfig,
+) -> tuple[int, tuple[str, ...], tuple[str, ...]]:
+    """Return independent injection risk evidence without mutating the text."""
     stripped = text.lstrip()
+    lowered = text.lower()
+    reasons: list[str] = []
+    marker_matches = tuple(
+        marker for marker in config.long_message_markers if marker.lower() in lowered
+    )
     if any(stripped.startswith(prefix) for prefix in config.whole_message_prefixes):
+        reasons.append("whole_message_prefix")
+    header_hits = sum(bool(pattern.search(text)) for pattern in config.block_header_patterns)
+    if header_hits:
+        reasons.append(f"block_header:{header_hits}")
+    if looks_like_environment_only(text):
+        reasons.append("environment_only")
+    heading_hits = sum(
+        len(pattern.findall(text)) for pattern in config.instruction_heading_patterns
+    )
+    directive_hits = sum(
+        len(pattern.findall(text)) for pattern in config.directive_line_patterns
+    )
+    if heading_hits:
+        reasons.append(f"known_instruction_headings:{heading_hits}")
+    if directive_hits:
+        reasons.append(f"directive_lines:{directive_hits}")
+    if marker_matches:
+        reasons.append(f"configured_markers:{len(marker_matches)}")
+
+    hard_signal = bool(
+        "whole_message_prefix" in reasons
+        or "environment_only" in reasons
+        or header_hits
+    )
+    score = 10 if hard_signal else 0
+    score += min(4, len(marker_matches) * 2)
+    score += 2 if heading_hits >= 2 else (1 if heading_hits else 0)
+    score += 2 if directive_hits >= 4 else (1 if directive_hits >= 2 else 0)
+    if len(text) >= config.minimum_instruction_block_chars:
+        score += 1
+    if (
+        source_kind == "response_item"
+        and marker_matches
+        and len(text) >= config.minimum_instruction_block_chars
+    ):
+        score += 1
+    return score, tuple(sorted(set(reasons))), marker_matches
+
+
+def is_injected_context(
+    text: str,
+    config: RuntimeConfig,
+    source_kind: str = "response_item",
+) -> bool:
+    score, reasons, markers = injection_block_evidence(text, source_kind, config)
+    if any(
+        reason == "whole_message_prefix"
+        or reason == "environment_only"
+        or reason.startswith("block_header:")
+        for reason in reasons
+    ):
         return True
-    marker_hits = sum(marker.lower() in text.lower() for marker in config.long_message_markers)
-    if len(text) >= 1000 and marker_hits >= 2:
-        return True
-    return looks_like_environment_only(text)
+    # Structural heuristics are limited to response_item blocks. Codex's event_msg
+    # shape is the strongest available evidence that text is an actual user message;
+    # this prevents a genuine user-authored operating contract from being discarded.
+    if source_kind != "response_item":
+        return False
+    heading_hits = next(
+        (
+            int(reason.rsplit(":", 1)[1])
+            for reason in reasons
+            if reason.startswith("known_instruction_headings:")
+        ),
+        0,
+    )
+    return bool(
+        (markers and score >= config.minimum_instruction_structure_score)
+        or (
+            heading_hits >= 3
+            and score >= config.minimum_instruction_structure_score + 1
+        )
+    )
+
+
+def extract_user_request_tail(
+    text: str,
+    source_kind: str,
+    config: RuntimeConfig,
+) -> tuple[str, bool]:
+    """Keep an explicit user-request suffix after a positively identified injected prefix."""
+    for pattern in config.request_boundary_patterns:
+        matches = list(pattern.finditer(text))
+        for match in reversed(matches):
+            prefix = text[: match.start()].strip()
+            suffix = text[match.end() :].strip()
+            if not suffix:
+                continue
+            if prefix and is_injected_context(prefix, config, source_kind):
+                return suffix, True
+    return text, False
+
+
+def sanitize_user_text_blocks(
+    blocks: Sequence[str],
+    source_kind: str,
+    config: RuntimeConfig,
+) -> SanitizedUserMessage:
+    retained: list[str] = []
+    removed = 0
+    max_retained_score = 0
+    retained_markers: set[str] = set()
+
+    for raw_block in blocks:
+        normalized = normalize_unicode(raw_block).strip()
+        if not normalized:
+            continue
+
+        candidate, split_prefix = extract_user_request_tail(
+            normalized, source_kind, config
+        )
+        candidate_is_injected = is_injected_context(candidate, config, source_kind)
+        strip_result = strip_injected_blocks(candidate, config)
+        stripped = strip_result.text
+        explicit_wrapper_removed = strip_result.removed_pattern_blocks > 0
+        header_only_removed = (
+            strip_result.removed_header_lines > 0 and not explicit_wrapper_removed
+        )
+        changed = bool(
+            split_prefix
+            or strip_result.removed_pattern_blocks
+            or strip_result.removed_header_lines
+        )
+
+        if not stripped:
+            removed += 1
+            continue
+
+        # A hard/structured injected block remains injected even if deleting its title
+        # makes the body look ordinary. A complete tagged wrapper may safely leave an
+        # unrelated suffix; an explicit request boundary is handled above.
+        if (
+            candidate_is_injected
+            and not split_prefix
+            and (header_only_removed or not explicit_wrapper_removed)
+        ):
+            removed += 1
+            continue
+        if is_injected_context(stripped, config, source_kind):
+            removed += 1
+            continue
+
+        if changed:
+            removed += 1
+        score, _reasons, markers = injection_block_evidence(
+            stripped, source_kind, config
+        )
+        max_retained_score = max(max_retained_score, score)
+        retained_markers.update(markers)
+        retained.append(stripped)
+
+    return SanitizedUserMessage(
+        text="\n".join(retained).strip(),
+        retained_block_count=len(retained),
+        removed_injected_block_count=removed,
+        max_retained_injection_score=max_retained_score,
+        retained_configured_markers=tuple(sorted(retained_markers)),
+    )
 
 
 def redact_text(text: str, config: RuntimeConfig) -> str:
@@ -519,21 +773,25 @@ def extract_messages_from_file(
             if extracted is None:
                 counters.ignored_non_user_events += 1
                 continue
-            source_kind, raw_text = extracted
+            source_kind = extracted.source_kind
             payload = obj.get("payload")
             if not isinstance(payload, Mapping):
                 counters.ignored_non_user_events += 1
                 continue
-            normalized_raw_text = normalize_unicode(raw_text)
-            text = strip_injected_blocks(normalized_raw_text, config)
+            sanitized = sanitize_user_text_blocks(
+                extracted.text_blocks, source_kind, config
+            )
+            counters.excluded_injected_blocks += sanitized.removed_injected_block_count
+            if sanitized.removed_injected_block_count and sanitized.text:
+                counters.mixed_messages_preserved += 1
+            if sanitized.retained_configured_markers:
+                counters.retained_configured_marker_messages += 1
+            text = sanitized.text
             if not text:
-                if normalized_raw_text.strip():
+                if any(block.strip() for block in extracted.text_blocks):
                     counters.excluded_injected_messages += 1
                 else:
                     counters.excluded_empty_messages += 1
-                continue
-            if is_injected_context(text, config):
-                counters.excluded_injected_messages += 1
                 continue
             text = redact_text(text, config).strip()
             normalized = normalize_message_identity(text)
@@ -569,9 +827,34 @@ def extract_messages_from_file(
                     normalized_full_text=normalized,
                     message_text_sha256=message_sha,
                     message_key=message_key,
+                    retained_block_count=sanitized.retained_block_count,
+                    removed_injected_block_count=sanitized.removed_injected_block_count,
+                    max_retained_injection_score=sanitized.max_retained_injection_score,
+                    retained_configured_markers=sanitized.retained_configured_markers,
                 )
             )
             counters.candidate_user_messages += 1
+
+    # Codex can emit injected/runtime context as a user-role response_item and the
+    # actual user prompt as event_msg in the same turn. event_msg is authoritative.
+    # This source-level rule runs before text/keyword logic, so differing text cannot
+    # leak merely because it evades an injection-marker heuristic.
+    event_turns = {
+        (candidate.session_key, candidate.turn_id)
+        for candidate in candidates
+        if candidate.source_kind == "event_msg" and candidate.turn_id
+    }
+    authoritative_candidates: list[MessageCandidate] = []
+    for candidate in candidates:
+        if (
+            candidate.source_kind == "response_item"
+            and candidate.turn_id
+            and (candidate.session_key, candidate.turn_id) in event_turns
+        ):
+            counters.response_items_suppressed_by_event_msg += 1
+            continue
+        authoritative_candidates.append(candidate)
+    candidates = authoritative_candidates
 
     deduped: dict[tuple[str, str, str], MessageCandidate] = {}
     for candidate in candidates:
@@ -748,11 +1031,51 @@ def message_to_occurrences(
                     "turn_id": message.turn_id,
                     "clause_ordinal": ordinal,
                 },
+                "source_provenance": {
+                    "retained_text_blocks": message.retained_block_count,
+                    "removed_injected_blocks": message.removed_injected_block_count,
+                    "max_retained_injection_score": message.max_retained_injection_score,
+                    "retained_configured_markers": list(
+                        message.retained_configured_markers
+                    ),
+                },
                 "classification_confidence": confidence,
                 "needs_review": needs_review,
             }
         )
     return records
+
+
+def enforce_event_msg_authority(
+    occurrences: Iterable[dict[str, Any]], counters: ParseCounters
+) -> list[dict[str, Any]]:
+    """Drop response_item clauses when an authoritative event_msg exists for that turn.
+
+    The second pass is intentional: incremental builds can reuse an occurrence from a
+    prior part/file while the matching event_msg arrives in a newly appended segment.
+    """
+    records = list(occurrences)
+    event_turns = {
+        (str(item.get("session_key")), str(pointer.get("turn_id")))
+        for item in records
+        for pointer in [item.get("source_pointer")]
+        if item.get("source_kind") == "event_msg"
+        and isinstance(pointer, Mapping)
+        and pointer.get("turn_id")
+    }
+    filtered: list[dict[str, Any]] = []
+    for item in records:
+        pointer = item.get("source_pointer")
+        turn_id = pointer.get("turn_id") if isinstance(pointer, Mapping) else None
+        if (
+            item.get("source_kind") == "response_item"
+            and turn_id
+            and (str(item.get("session_key")), str(turn_id)) in event_turns
+        ):
+            counters.response_items_suppressed_by_event_msg += 1
+            continue
+        filtered.append(item)
+    return filtered
 
 
 def deduplicate_occurrences(
@@ -1029,6 +1352,112 @@ def build_candidate_context(
     }
 
 
+
+def standalone_configured_marker(text: str, config: RuntimeConfig) -> str | None:
+    """Return a configured marker when the output is only that marker/heading."""
+    def compact(value: str) -> str:
+        normalized = normalize_unicode(value).lower()
+        normalized = re.sub(r"[\s#*_`：:;,.，。!！?？\-–—]+", "", normalized)
+        return normalized.strip()
+
+    candidate = compact(text)
+    if not candidate:
+        return None
+    for marker in config.long_message_markers:
+        if candidate == compact(marker):
+            return marker
+    return None
+
+
+def audit_human_injection_leakage(
+    occurrences: Sequence[Mapping[str, Any]],
+    candidate_context: Mapping[str, Any],
+    config: RuntimeConfig,
+) -> list[str]:
+    """Fail closed when instruction provenance leaks into human-facing memory outputs."""
+    errors: list[str] = []
+    risky_clusters: set[str] = set()
+    cluster_ids = {
+        str(item.get("cluster_id"))
+        for item in occurrences
+        if item.get("origin") == "human_interactive"
+        and item.get("cluster_id") is not None
+    }
+
+    for occurrence in occurrences:
+        if occurrence.get("origin") != "human_interactive":
+            continue
+        occurrence_id = str(occurrence.get("occurrence_id"))
+        display_text = str(occurrence.get("display_text", ""))
+        normalized_text = str(occurrence.get("normalized_text", ""))
+        provenance = occurrence.get("source_provenance")
+        if not isinstance(provenance, Mapping):
+            errors.append(f"human occurrence missing source_provenance: {occurrence_id}")
+            continue
+        score = int(provenance.get("max_retained_injection_score", -1))
+        if score < 0:
+            errors.append(f"human occurrence has invalid injection score: {occurrence_id}")
+        source_kind = str(occurrence.get("source_kind", ""))
+        # Content heuristics only hard-fail response_item records. event_msg/user_message
+        # is treated as the strongest available proof that the user authored the text.
+        if source_kind == "response_item" and score >= config.minimum_instruction_structure_score:
+            errors.append(
+                f"human occurrence retained high-risk injected context: {occurrence_id} score={score}"
+            )
+            if occurrence.get("cluster_id") is not None:
+                risky_clusters.add(str(occurrence.get("cluster_id")))
+
+        combined = f"{display_text}\n{normalized_text}"
+        if source_kind == "response_item" and any(
+            pattern.search(combined) for pattern in config.block_header_patterns
+        ):
+            errors.append(f"human occurrence contains injected block header: {occurrence_id}")
+            if occurrence.get("cluster_id") is not None:
+                risky_clusters.add(str(occurrence.get("cluster_id")))
+        stripped = combined.lstrip()
+        if source_kind == "response_item" and any(
+            stripped.startswith(prefix) for prefix in config.whole_message_prefixes
+        ):
+            errors.append(f"human occurrence contains injected message prefix: {occurrence_id}")
+            if occurrence.get("cluster_id") is not None:
+                risky_clusters.add(str(occurrence.get("cluster_id")))
+        standalone_marker = standalone_configured_marker(display_text, config)
+        if source_kind == "response_item" and standalone_marker is not None:
+            errors.append(
+                f"human occurrence is standalone configured injection marker: "
+                f"{occurrence_id} marker={standalone_marker}"
+            )
+            if occurrence.get("cluster_id") is not None:
+                risky_clusters.add(str(occurrence.get("cluster_id")))
+
+    sections = candidate_context.get("sections", {})
+    if isinstance(sections, Mapping):
+        for category, items in sections.items():
+            if not isinstance(items, Sequence) or isinstance(items, (str, bytes, bytearray)):
+                continue
+            for item in items:
+                if not isinstance(item, Mapping):
+                    continue
+                cluster_id = str(item.get("cluster_id"))
+                if cluster_id not in cluster_ids:
+                    errors.append(
+                        f"agent_context points to unknown human cluster: {category}:{cluster_id}"
+                    )
+                if cluster_id in risky_clusters:
+                    errors.append(
+                        f"agent_context contains high-risk injected cluster: {category}:{cluster_id}"
+                    )
+                display_text = str(item.get("display_text", ""))
+                if any(
+                    pattern.search(display_text)
+                    for pattern in config.block_header_patterns
+                ):
+                    errors.append(
+                        f"agent_context contains injected block header: {category}:{cluster_id}"
+                    )
+
+    return sorted(set(errors))
+
 def build_freshness(
     source_cutoff: dt.datetime | None,
     as_of: dt.datetime,
@@ -1176,6 +1605,7 @@ def render_summary(
         f"- Automation 重复组：`{len(automation)}`（单独统计，不进入个人画像）",
         f"- 三类数量：问题与纠正 `{counts_by_category['problems_corrections']}`；规则与偏好 `{counts_by_category['rules_preferences']}`；任务与主题 `{counts_by_category['tasks_topics']}`",
         f"- 模型/API 调用：`{run_manifest.get('llm_calls', 0)}`；模型 Token：`{run_manifest.get('llm_input_tokens', 0) + run_manifest.get('llm_output_tokens', 0)}`",
+        f"- 生产稳定性：`{run_manifest.get('production_acceptance', {}).get('label_zh', '待验证')}`",
         "",
     ]
     for category in (
@@ -1253,14 +1683,18 @@ def render_status(
         f"| 规则与偏好 | `{counts['rules_preferences']}` |",
         f"| 任务与主题 | `{counts['tasks_topics']}` |",
         f"| 分析脚本 LLM / embedding / 外部模型 API | `0 / 0 / 0` |",
+        f"| 注入完整性防护 | **{run_manifest.get('injection_guard', {}).get('status', 'UNKNOWN')}** |",
+        f"| 修复后真实数据批次 | **{run_manifest.get('production_acceptance', {}).get('label_zh', '待验证')}** |",
         f"| 原始文件 | `{run_manifest.get('raw_files_seen', 0)}` |",
         f"| 派生数据指纹 | `{run_manifest.get('derived_payload_sha256', '生成中')}` |",
         "",
         "## 自动防护",
         "",
         "- ✅ 只读取明确的 user message event。",
-        "- ✅ AGENTS、environment、turn_context、系统/开发者注入被排除。",
-        "- ✅ `event_msg` / `response_item` 双记录只保留一份。",
+        "- ✅ 同一 turn 优先信任 `event_msg/user_message`，并在条款拆分前丢弃对应 `response_item`。",
+        "- ✅ 再按 content block 保留来源边界，剥离 AGENTS、environment、turn_context 和系统/开发者注入。",
+        "- ✅ Builder 发布前与 Validator 发布后分别独立执行注入完整性硬门。",
+        "- ✅ 增量复用后再次执行全局来源权威检查，避免跨 part 文件漏网。",
         "- ✅ 人工 Prompt 与 Codex Automation 分开统计。",
         "- ✅ 严格只有三类；Action 内执行单元测试、来源校验、隐私扫描和独立全量对账。",
         "",
@@ -1368,7 +1802,11 @@ def build_analysis(
     for relative_path in sorted(inspections):
         inspection = inspections[relative_path]
         path = path_lookup[relative_path]
-        previous_file = previous_files.get(relative_path) if compatible_previous else None
+        previous_file = (
+            previous_files.get(relative_path)
+            if compatible_previous and not full_rebuild
+            else None
+        )
         start_offset = 0
         starting_line = 0
         parse_required = True
@@ -1409,6 +1847,7 @@ def build_analysis(
             for message in messages:
                 all_occurrences.extend(message_to_occurrences(message, config, counters))
 
+    all_occurrences = enforce_event_msg_authority(all_occurrences, counters)
     occurrences = deduplicate_occurrences(all_occurrences, counters)
     clusters, occurrence_to_cluster = build_clusters(occurrences, config, as_of)
     for occurrence in occurrences:
@@ -1424,6 +1863,13 @@ def build_analysis(
     candidate_context = build_candidate_context(
         clusters, freshness["source_cutoff_at"], config
     )
+    injection_guard_errors = audit_human_injection_leakage(
+        occurrences, candidate_context, config
+    )
+    if injection_guard_errors:
+        raise AnalysisError(
+            "injection guard blocked publish: " + "; ".join(injection_guard_errors[:8])
+        )
 
     input_state_payload = [
         {
@@ -1435,6 +1881,29 @@ def build_analysis(
         for inspection in sorted(inspections.values(), key=lambda value: value.relative_path)
     ]
     input_state_sha = sha256_bytes(canonical_json_bytes(input_state_payload))
+    current_source_batch = f"sha256:{input_state_sha}"
+    previous_batches: list[str] = []
+    if compatible_previous and isinstance(previous_state, Mapping):
+        previous_batches = [
+            str(value)
+            for value in previous_state.get("verified_source_batches", [])
+            if isinstance(value, str) and value.startswith("sha256:")
+        ]
+    verified_source_batches = list(
+        dict.fromkeys(previous_batches + [current_source_batch])
+    )[-8:]
+    verified_batch_count = len(verified_source_batches)
+    production_acceptance = {
+        "required_distinct_source_batches": 2,
+        "verified_distinct_source_batches": verified_batch_count,
+        "status": "stable" if verified_batch_count >= 2 else "candidate",
+        "label_zh": (
+            "稳定通过 2/2"
+            if verified_batch_count >= 2
+            else f"候选通过 {verified_batch_count}/2"
+        ),
+        "current_source_batch_sha256": current_source_batch,
+    }
     state = {
         "schema_version": SCHEMA_STATE,
         "algorithm_version": config.algorithm_version,
@@ -1443,6 +1912,8 @@ def build_analysis(
         "input_state_sha256": f"sha256:{input_state_sha}",
         "source_commit": source_commit,
         "source_cutoff_at": format_timestamp(source_cutoff),
+        "verified_source_batches": verified_source_batches,
+        "production_acceptance": production_acceptance,
         "files": {
             relative_path: {
                 "size_bytes": inspection.size_bytes,
@@ -1508,6 +1979,13 @@ def build_analysis(
             "raw_session_payload_exported": False,
             "derived_prompt_text_included": True,
             "derived_prompt_text_redacted": True,
+            "injection_guard": {
+                "status": "PASS",
+                "human_high_risk_occurrences": 0,
+                "human_injected_headers": 0,
+                "retained_configured_marker_messages": counters.retained_configured_marker_messages,
+            },
+            "production_acceptance": production_acceptance,
             "status": "PASS",
         }
         temp_summary.write_text(
@@ -1690,6 +2168,71 @@ def validate_outputs(
         errors.append("run_manifest must disclose prompt-text redaction")
     if run_manifest.get("status") != "PASS":
         errors.append("run_manifest status must be PASS")
+    batch_history = state.get("verified_source_batches")
+    if not isinstance(batch_history, list) or not batch_history:
+        errors.append("state verified_source_batches must be a non-empty list")
+    elif len(batch_history) != len(set(batch_history)) or len(batch_history) > 8:
+        errors.append("state verified_source_batches must be unique and capped at 8")
+    acceptance = state.get("production_acceptance")
+    if not isinstance(acceptance, Mapping):
+        errors.append("state production_acceptance missing")
+    else:
+        expected_count = len(batch_history) if isinstance(batch_history, list) else 0
+        if int(acceptance.get("verified_distinct_source_batches", -1)) != expected_count:
+            errors.append("production_acceptance batch count mismatch")
+        expected_status = "stable" if expected_count >= 2 else "candidate"
+        if acceptance.get("status") != expected_status:
+            errors.append("production_acceptance status mismatch")
+        if batch_history and acceptance.get("current_source_batch_sha256") != batch_history[-1]:
+            errors.append("production_acceptance current batch mismatch")
+    if run_manifest.get("production_acceptance") != acceptance:
+        errors.append("production_acceptance mismatch between state and run_manifest")
+    injection_guard = run_manifest.get("injection_guard")
+    if not isinstance(injection_guard, Mapping) or injection_guard.get("status") != "PASS":
+        errors.append("run_manifest injection_guard status must be PASS")
+
+    errors.extend(audit_human_injection_leakage(occurrences, candidate_context, config))
+
+    if check_sources:
+        # Reconstruct authoritative user turns directly from raw envelopes. Any surviving
+        # response_item clause in a turn that also has event_msg is a hard provenance error.
+        authoritative_event_turns: set[tuple[str, str]] = set()
+        input_pattern = str(config.raw["input_glob"])
+        for source_path in sorted(path for path in repo_root.glob(input_pattern) if path.is_file()):
+            session_raw = source_path.name.split(".", 1)[0]
+            session_key = namespaced_id("codex-session", session_raw)
+            with source_path.open("rb") as handle:
+                for raw_line in handle:
+                    try:
+                        raw_obj = json.loads(raw_line.decode("utf-8"))
+                    except (UnicodeDecodeError, json.JSONDecodeError):
+                        continue
+                    if not isinstance(raw_obj, Mapping):
+                        continue
+                    extracted = extract_user_message(raw_obj)
+                    payload = raw_obj.get("payload")
+                    if (
+                        extracted is None
+                        or extracted.source_kind != "event_msg"
+                        or not isinstance(payload, Mapping)
+                    ):
+                        continue
+                    turn_id = extract_turn_id(raw_obj, payload)
+                    if turn_id:
+                        authoritative_event_turns.add((session_key, str(turn_id)))
+        for item in occurrences:
+            pointer = item.get("source_pointer")
+            turn_id = pointer.get("turn_id") if isinstance(pointer, Mapping) else None
+            if (
+                item.get("source_kind") == "response_item"
+                and turn_id
+                and (str(item.get("session_key")), str(turn_id))
+                in authoritative_event_turns
+            ):
+                errors.append(
+                    "response_item occurrence survived authoritative event_msg turn: "
+                    + str(item.get("occurrence_id"))
+                )
 
     expected_output_hashes = compute_output_hashes(output_dir, summary_path, status_path)
     if run_manifest.get("output_hashes") != expected_output_hashes:

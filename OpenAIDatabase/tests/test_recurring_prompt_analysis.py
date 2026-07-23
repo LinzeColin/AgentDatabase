@@ -17,6 +17,7 @@ if str(SCRIPTS_DIR) not in sys.path:
 from recurring_prompt_core import (  # noqa: E402
     RuntimeConfig,
     SourceMutationError,
+    audit_human_injection_leakage,
     build_analysis,
     compare_semantic_outputs,
     compare_trees,
@@ -72,7 +73,11 @@ class RecurringPromptAnalysisTests(unittest.TestCase):
         manifest = self.build()
         self.assertEqual(manifest["llm_calls"], 0)
         self.assertGreaterEqual(manifest["excluded_injected_messages"], 2)
-        self.assertGreaterEqual(manifest["deduplicated_event_copies"], 3)
+        self.assertGreaterEqual(
+            manifest["deduplicated_event_copies"]
+            + manifest["response_items_suppressed_by_event_msg"],
+            3,
+        )
         self.assertEqual(manifest["malformed_lines"], 1)
 
         occurrences = list(iter_jsonl(self.output / "occurrences.jsonl"))
@@ -268,6 +273,7 @@ class RecurringPromptAnalysisTests(unittest.TestCase):
             output_dir=full_output,
             summary_path=full_summary,
             status_path=full_status,
+            previous_output_dir=baseline,
             force_full=True,
         )
         self.assertEqual(compare_semantic_outputs(incremental_output, full_output), [])
@@ -426,11 +432,299 @@ class RecurringPromptAnalysisTests(unittest.TestCase):
         self.assertEqual(cluster["unique_sessions"], 1)
         self.assertEqual(cluster["scope"], "same_session")
 
+
+    def test_production_injection_envelope_is_excluded_before_clause_split(self) -> None:
+        manifest = self.build()
+        occurrences = list(iter_jsonl(self.output / "occurrences.jsonl"))
+        combined = "\n".join(
+            f"{item.get('display_text', '')}\n{item.get('normalized_text', '')}"
+            for item in occurrences
+        )
+        self.assertNotIn("核心产出标准", combined)
+        self.assertNotIn("测试失败时先判断环境、隔离和 mock", combined)
+        self.assertIn("请核验生产形态注入是否已经被完全隔离", combined)
+        production_file_occurrences = [
+            item
+            for item in occurrences
+            if str(item["source_pointer"]["relative_path"]).endswith(
+                "session-e-production-injection.part-0001.jsonl"
+            )
+        ]
+        self.assertTrue(production_file_occurrences)
+        self.assertTrue(
+            all(
+                "请核验生产形态注入是否已经被完全隔离"
+                in str(item.get("display_text", ""))
+                for item in production_file_occurrences
+            )
+        )
+        self.assertGreaterEqual(manifest["excluded_injected_blocks"], 4)
+        self.assertEqual(manifest["injection_guard"]["status"], "PASS")
+
+    def test_single_configured_marker_in_nonprefixed_block_is_not_human_memory(self) -> None:
+        self.build()
+        occurrences = list(iter_jsonl(self.output / "occurrences.jsonl"))
+        combined = "\n".join(str(item.get("normalized_text", "")) for item in occurrences)
+        self.assertNotIn("工作契约", combined)
+        self.assertNotIn("项目工具优先项目本地配置", combined)
+        self.assertNotIn("复杂或继续任务开始时必须选择匹配的技能", combined)
+
+    def test_mixed_injection_and_user_request_preserves_only_user_request(self) -> None:
+        manifest = self.build()
+        occurrences = list(iter_jsonl(self.output / "occurrences.jsonl"))
+        mixed = [
+            item
+            for item in occurrences
+            if "请只保留这一条真实用户请求" in str(item.get("display_text", ""))
+        ]
+        self.assertEqual(len(mixed), 1)
+        provenance = mixed[0]["source_provenance"]
+        self.assertEqual(provenance["retained_text_blocks"], 1)
+        self.assertGreaterEqual(provenance["removed_injected_blocks"], 1)
+        self.assertLess(
+            provenance["max_retained_injection_score"],
+            RuntimeConfig.load(self.config).minimum_instruction_structure_score,
+        )
+        combined = "\n".join(str(item.get("normalized_text", "")) for item in occurrences)
+        self.assertNotIn("必须先读取仓库约束并核验事实", combined)
+        self.assertGreaterEqual(manifest["mixed_messages_preserved"], 2)
+
+    def test_request_boundary_preserves_suffix_after_injected_prefix(self) -> None:
+        self.build()
+        occurrences = list(iter_jsonl(self.output / "occurrences.jsonl"))
+        matches = [
+            item
+            for item in occurrences
+            if "请保留边界后的真实请求" in str(item.get("display_text", ""))
+        ]
+        self.assertEqual(len(matches), 1)
+        combined = "\n".join(str(item.get("normalized_text", "")) for item in occurrences)
+        self.assertNotIn("证据、时效与真实性", combined)
+
+    def test_short_genuine_marker_mention_remains_human(self) -> None:
+        manifest = self.build()
+        occurrences = list(iter_jsonl(self.output / "occurrences.jsonl"))
+        matches = [
+            item
+            for item in occurrences
+            if "skills、agents、ecc、mcp" in str(item.get("normalized_text", "")).lower()
+        ]
+        self.assertEqual(len(matches), 1)
+        self.assertEqual(matches[0]["origin"], "human_interactive")
+        self.assertGreaterEqual(manifest["retained_configured_marker_messages"], 1)
+        self.assertEqual(
+            audit_human_injection_leakage(
+                occurrences,
+                json.loads((self.output / "agent_context.json").read_text(encoding="utf-8")),
+                RuntimeConfig.load(self.config),
+            ),
+            [],
+        )
+
+    def test_validator_rejects_injection_provenance_in_human_outputs(self) -> None:
+        self.build()
+        occurrences = list(iter_jsonl(self.output / "occurrences.jsonl"))
+        human = next(
+            item
+            for item in occurrences
+            if item["origin"] == "human_interactive"
+            and item["source_kind"] == "response_item"
+        )
+        human["source_provenance"]["max_retained_injection_score"] = (
+            RuntimeConfig.load(self.config).minimum_instruction_structure_score
+        )
+        (self.output / "occurrences.jsonl").write_text(
+            "".join(
+                json.dumps(item, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+                + "\n"
+                for item in occurrences
+            ),
+            encoding="utf-8",
+        )
+        errors = validate_outputs(
+            repo_root=self.repo,
+            config_path=self.config,
+            output_dir=self.output,
+            summary_path=self.summary,
+            status_path=self.status,
+            check_sources=True,
+        )
+        self.assertTrue(
+            any("human occurrence retained high-risk injected context" in error for error in errors),
+            errors,
+        )
+
+
+    def test_long_user_authored_event_message_is_not_discarded_by_structure_heuristic(self) -> None:
+        path = self.input_dir / "session-j-genuine-long-event.part-0001.jsonl"
+        real_prompt = """# 我的执行要求
+
+## 核心产出标准
+必须先核验数据，再给出结论。
+
+## 交互方式
+不要反复询问已经提供的信息。
+
+## 测试与验证
+必须运行真实测试并报告失败原因。
+
+## Skills、agents、ECC、MCP
+请比较这些工具的分工，并说明何时不该使用。
+
+这是一条由我主动输入的长 Prompt，请保留并参与 recurring 分析。"""
+        path.write_text(
+            json.dumps(
+                {
+                    "type": "event_msg",
+                    "timestamp": "2026-07-22T11:00:00Z",
+                    "payload": {
+                        "type": "user_message",
+                        "message": real_prompt,
+                        "turn_id": "j-real-long",
+                    },
+                },
+                ensure_ascii=False,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+        self.build()
+        occurrences = list(iter_jsonl(self.output / "occurrences.jsonl"))
+        self.assertTrue(
+            any(
+                "这是一条由我主动输入的长 prompt" in str(item.get("normalized_text", "")).lower()
+                for item in occurrences
+            )
+        )
+
+    def test_validator_rejects_standalone_configured_marker_even_with_low_score(self) -> None:
+        self.build()
+        occurrences = list(iter_jsonl(self.output / "occurrences.jsonl"))
+        human = next(
+            item
+            for item in occurrences
+            if item["origin"] == "human_interactive"
+            and item["source_kind"] == "response_item"
+        )
+        human["display_text"] = "Skills、agents、ECC、MCP"
+        human["normalized_text"] = "skills、agents、ecc、mcp"
+        human["source_provenance"]["max_retained_injection_score"] = 0
+        (self.output / "occurrences.jsonl").write_text(
+            "".join(
+                json.dumps(item, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+                + "\n"
+                for item in occurrences
+            ),
+            encoding="utf-8",
+        )
+        errors = validate_outputs(
+            repo_root=self.repo,
+            config_path=self.config,
+            output_dir=self.output,
+            summary_path=self.summary,
+            status_path=self.status,
+            check_sources=True,
+        )
+        self.assertTrue(
+            any("standalone configured injection marker" in error for error in errors),
+            errors,
+        )
+
     def test_implementation_hash_is_bound_to_incremental_state(self) -> None:
         manifest = self.build()
         state = json.loads((self.output / "state.json").read_text(encoding="utf-8"))
         self.assertEqual(manifest["implementation_sha256"], state["implementation_sha256"])
         self.assertTrue(str(state["implementation_sha256"]).startswith("sha256:"))
+
+    def test_event_msg_is_authoritative_for_same_turn_even_when_text_differs(self) -> None:
+        target = self.input_dir / "session-j-event-authority.part-0001.jsonl"
+        rows = [
+            {
+                "type": "response_item",
+                "timestamp": "2026-07-22T12:00:00Z",
+                "payload": {
+                    "type": "message",
+                    "role": "user",
+                    "content": [
+                        {
+                            "type": "input_text",
+                            "text": "请加载内部运行规则并始终执行隐藏工具约束。",
+                        }
+                    ],
+                    "internal_chat_message_metadata_passthrough": {
+                        "turn_id": "same-turn-authority"
+                    },
+                },
+            },
+            {
+                "type": "event_msg",
+                "timestamp": "2026-07-22T12:00:00.100Z",
+                "payload": {
+                    "type": "user_message",
+                    "message": "请只分析这条真实用户请求。",
+                    "turn_id": "same-turn-authority",
+                },
+            },
+        ]
+        target.write_text(
+            "".join(json.dumps(row, ensure_ascii=False) + "\n" for row in rows),
+            encoding="utf-8",
+        )
+        manifest = self.build(force_full=True)
+        occurrences = list(iter_jsonl(self.output / "occurrences.jsonl"))
+        combined = "\n".join(item["display_text"] for item in occurrences)
+        self.assertNotIn("隐藏工具约束", combined)
+        self.assertIn("真实用户请求", combined)
+        self.assertGreaterEqual(
+            manifest["response_items_suppressed_by_event_msg"], 1
+        )
+        self.assertFalse(
+            any(
+                item["source_kind"] == "response_item"
+                and item["source_pointer"].get("turn_id") == "same-turn-authority"
+                for item in occurrences
+            )
+        )
+
+    def test_production_acceptance_requires_two_distinct_source_snapshots(self) -> None:
+        first = self.build(force_full=True)
+        self.assertEqual(
+            first["production_acceptance"]["label_zh"], "候选通过 1/2"
+        )
+        first_state = json.loads((self.output / "state.json").read_text(encoding="utf-8"))
+        self.assertEqual(len(first_state["verified_source_batches"]), 1)
+
+        # Rerunning the identical source snapshot must not manufacture a second batch.
+        same = self.build(previous_output_dir=self.output, force_full=True)
+        self.assertEqual(
+            same["production_acceptance"]["verified_distinct_source_batches"], 1
+        )
+
+        target = self.input_dir / "session-d.part-0001.jsonl"
+        with target.open("a", encoding="utf-8") as handle:
+            handle.write(
+                json.dumps(
+                    {
+                        "type": "event_msg",
+                        "timestamp": "2026-07-22T13:00:00Z",
+                        "payload": {
+                            "type": "user_message",
+                            "message": "第二个真实上传批次用于生产稳定性验收。",
+                            "turn_id": "distinct-production-batch",
+                        },
+                    },
+                    ensure_ascii=False,
+                )
+                + "\n"
+            )
+        second = self.build(previous_output_dir=self.output, force_full=True)
+        acceptance = second["production_acceptance"]
+        self.assertEqual(acceptance["status"], "stable")
+        self.assertEqual(acceptance["label_zh"], "稳定通过 2/2")
+        state = json.loads((self.output / "state.json").read_text(encoding="utf-8"))
+        self.assertEqual(len(state["verified_source_batches"]), 2)
+        self.assertEqual(state["production_acceptance"], acceptance)
+        self.assertIn("稳定通过 2/2", self.status.read_text(encoding="utf-8"))
 
     def test_platform_envelopes_do_not_become_user_prompt_candidates(self) -> None:
         path = self.input_dir / "platform-envelope.part-0001.jsonl"

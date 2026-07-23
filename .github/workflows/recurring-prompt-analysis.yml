@@ -30,7 +30,7 @@ on:
   workflow_dispatch:
     inputs:
       force_full:
-        description: "忽略旧 state，执行一次全量重建"
+        description: "全量重建输入与派生结果；仅保留已验证的真实数据批次历史"
         required: false
         default: false
         type: boolean
@@ -214,10 +214,11 @@ jobs:
 
             local previous_args=()
             local canonical_args=()
+            if [[ -f "$CANONICAL_OUTPUT/state.json" ]]; then
+              previous_args=(--previous-output-dir "$CANONICAL_OUTPUT")
+            fi
             if [[ "$FORCE_FULL_REQUESTED" == "true" ]]; then
               canonical_args=(--force-full)
-            elif [[ -f "$CANONICAL_OUTPUT/state.json" ]]; then
-              previous_args=(--previous-output-dir "$CANONICAL_OUTPUT")
             fi
 
             # Bash 3.2 with `set -u` treats an empty array expansion as an
@@ -243,16 +244,21 @@ jobs:
 
             # Independent full rebuild is the correctness oracle. It is never used to
             # hide an incremental mismatch.
-            python3 -B OpenAIDatabase/scripts/build_recurring_prompt_analysis.py \
-              --repo-root . \
-              --config "$CONFIG_PATH" \
-              --output-dir "$work_dir/full/machine" \
-              --summary-output "$work_dir/full/00_Recurring分析_最新.md" \
-              --status-output "$work_dir/full/00_Recurring运行状态.md" \
-              --source-commit "$source_commit" \
-              --as-of "$as_of" \
-              --force-full \
+            local full_args=(
+              --repo-root .
+              --config "$CONFIG_PATH"
+              --output-dir "$work_dir/full/machine"
+              --summary-output "$work_dir/full/00_Recurring分析_最新.md"
+              --status-output "$work_dir/full/00_Recurring运行状态.md"
+              --source-commit "$source_commit"
+              --as-of "$as_of"
+              --force-full
               --no-atomic-publish
+            )
+            if [[ ${#previous_args[@]} -gt 0 ]]; then
+              full_args+=("${previous_args[@]}")
+            fi
+            python3 -B OpenAIDatabase/scripts/build_recurring_prompt_analysis.py "${full_args[@]}"
 
             for mode in incremental full; do
               python3 -B OpenAIDatabase/scripts/validate_recurring_prompt_analysis.py \
@@ -340,6 +346,7 @@ jobs:
             cp "$CANONICAL_OUTPUT/agent_context.json" "$artifact_dir/机器明细/"
             cp "$CANONICAL_OUTPUT/freshness.json" "$artifact_dir/机器明细/"
             cp "$CANONICAL_OUTPUT/run_manifest.json" "$artifact_dir/机器明细/"
+            cp "$CANONICAL_OUTPUT/state.json" "$artifact_dir/机器明细/"
           }
 
           attempt=1

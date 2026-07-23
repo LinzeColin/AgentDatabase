@@ -1,82 +1,11 @@
 {
-  "schema_version": "recurring_prompt_config.v4",
-  "algorithm_version": "recurring_prompt.v4.0.1",
-  "input_glob": "OpenAIDatabase/data/public_raw/codex/sessions/**/*.jsonl",
-  "output_dir": "OpenAIDatabase/data/derived/behavior_intelligence/recurring_prompts",
-  "human_summary": "OpenAIDatabase/人类可读/00_Recurring分析_最新.md",
-  "categories": [
-    "rules_preferences",
-    "tasks_topics",
-    "problems_corrections"
+  "absolute_path_patterns": [
+    "(?<![A-Za-z0-9_])/(?:Users|home|private|var/folders)/[^\\s]+",
+    "[A-Za-z]:\\\\(?:Users|Documents|Desktop)\\\\[^\\s]+"
   ],
-  "category_labels_zh": {
-    "rules_preferences": "规则与偏好",
-    "tasks_topics": "任务与主题",
-    "problems_corrections": "问题与纠正"
-  },
-  "origin_labels_zh": {
-    "human_interactive": "人工对话",
-    "codex_automation": "Codex Automation"
-  },
-  "minimum_clause_chars": 4,
-  "maximum_clause_chars": 500,
-  "display_text_chars": 180,
-  "minimum_cluster_count": 2,
-  "minimum_cross_session_count": 2,
-  "duplicate_window_seconds": 20,
-  "source_samples_per_cluster": 3,
-  "summary_items_per_category": 12,
-  "automation_summary_items": 5,
-  "candidate_context_max_items": 30,
-  "freshness": {
-    "current_hours": 216,
-    "delayed_hours": 384
-  },
-  "fuzzy_lexical": {
-    "enabled": true,
-    "sequence_ratio": 0.965,
-    "jaccard_ratio": 0.92,
-    "minimum_shared_tokens": 4,
-    "maximum_group_candidates": 80
-  },
-  "injected_context": {
-    "remove_block_patterns": [
-      "(?is)#\\s*AGENTS\\.md instructions for[^\\n]*\\n\\s*<INSTRUCTIONS>.*?</INSTRUCTIONS>",
-      "(?is)<environment_context>.*?</environment_context>",
-      "(?is)<user_instructions>.*?</user_instructions>",
-      "(?is)<system-reminder>.*?</system-reminder>",
-      "(?is)<developer_instructions>.*?</developer_instructions>",
-      "(?is)<recommended_plugins>.*?</recommended_plugins>",
-      "(?ims)^#\\s*Files mentioned by the user:\\s*\\n.*?^##\\s*My request for Codex:\\s*\\n"
-    ],
-    "whole_message_prefixes": [
-      "Side conversation boundary.",
-      "# AGENTS.md instructions for",
-      "You are Codex, a coding agent",
-      "<environment_context>",
-      "<user_instructions>",
-      "<system-reminder>"
-    ],
-    "long_message_markers": [
-      "STRICT ONE_SHOT MODE",
-      "Intermediary updates go to the `commentary` channel",
-      "Default user-facing language: Chinese",
-      "Skills、agents、ECC、MCP",
-      "Do not include extra explanation unless the user asks"
-    ]
-  },
+  "agent_context_filename": "agent_context.json",
+  "algorithm_version": "recurring_prompt.v4.1.0",
   "automation": {
-    "prefix_patterns": [
-      "(?i)^automation\\s*:",
-      "(?i)^scheduled task\\s*:",
-      "^自动化任务[：:]",
-      "^定时任务[：:]"
-    ],
-    "metadata_patterns": [
-      "(?i)automation id\\s*:",
-      "(?i)automation memory\\s*:",
-      "(?i)last run\\s*:"
-    ],
     "exclude_metadata_line_patterns": [
       "^定时任务[：:]",
       "^自动化任务[：:]",
@@ -85,7 +14,30 @@
       "(?i)^automation id\\s*:",
       "(?i)^automation memory\\s*:",
       "(?i)^last run\\s*:"
+    ],
+    "metadata_patterns": [
+      "(?i)automation id\\s*:",
+      "(?i)automation memory\\s*:",
+      "(?i)last run\\s*:"
+    ],
+    "prefix_patterns": [
+      "(?i)^automation\\s*:",
+      "(?i)^scheduled task\\s*:",
+      "^自动化任务[：:]",
+      "^定时任务[：:]"
     ]
+  },
+  "automation_summary_items": 5,
+  "candidate_context_max_items": 30,
+  "categories": [
+    "rules_preferences",
+    "tasks_topics",
+    "problems_corrections"
+  ],
+  "category_labels_zh": {
+    "problems_corrections": "问题与纠正",
+    "rules_preferences": "规则与偏好",
+    "tasks_topics": "任务与主题"
   },
   "classification": {
     "correction_patterns": [
@@ -105,6 +57,79 @@
       "(?i)\\b(?:analy[sz]e|build|implement|create|design|deploy|migrate|update|sync|review|research|search|fix|test|merge|upload|publish|optimi[sz]e|automate)\\b"
     ]
   },
+  "display_text_chars": 180,
+  "duplicate_window_seconds": 20,
+  "freshness": {
+    "current_hours": 216,
+    "delayed_hours": 384
+  },
+  "fuzzy_lexical": {
+    "enabled": true,
+    "jaccard_ratio": 0.92,
+    "maximum_group_candidates": 80,
+    "minimum_shared_tokens": 4,
+    "sequence_ratio": 0.965
+  },
+  "human_status": "OpenAIDatabase/人类可读/00_Recurring运行状态.md",
+  "human_summary": "OpenAIDatabase/人类可读/00_Recurring分析_最新.md",
+  "injected_context": {
+    "block_header_patterns": [
+      "(?im)^\\s*#\\s*AGENTS\\.md instructions(?:\\s+for\\b[^\\n]*)?\\s*$",
+      "(?im)^\\s*<\\s*(?:environment_context|user_instructions|system-reminder|developer_instructions|recommended_plugins)\\s*>",
+      "(?im)^\\s*(?:You are Codex, a coding agent|Side conversation boundary\\.)"
+    ],
+    "directive_line_patterns": [
+      "(?im)^\\s*(?:[-*+]\\s*)?(?:必须|务必|禁止|不要|不得|不允许|只能|默认|优先|应当|应该|需要|无需|避免|始终|绝不|严禁|推荐|执行前|完成后|测试失败时|复杂或继续任务开始时|项目工具优先).{4,}$",
+      "(?im)^\\s*(?:[-*+]\\s*)?(?:must|must not|never|always|do not|don\\'t|should|should not|required|forbidden|default|prefer|before|after|when tests fail)\\b.{4,}$"
+    ],
+    "event_msg_authoritative_per_turn": true,
+    "instruction_heading_patterns": [
+      "(?im)^\\s*#{1,6}\\s*(?:核心产出标准|交互方式|任务路由|上下文与成本效率|HANDOFF\\.md|证据、时效与真实性|工程标准|测试与验证|安全基线|Skills、agents、ECC、MCP)\\s*$",
+      "(?im)^\\s*#{1,6}\\s*(?:Core output standards|Interaction|Task routing|Context and cost efficiency|Evidence, freshness and truthfulness|Engineering standards|Testing and verification|Security baseline|Skills,? agents,? ECC,? MCP)\\s*$",
+      "(?im)^\\s*#{1,6}\\s*(?:Instructions|System instructions|Developer instructions|User instructions|Environment context|Tooling rules|Repository rules)\\s*$"
+    ],
+    "long_message_markers": [
+      "STRICT ONE_SHOT MODE",
+      "Intermediary updates go to the `commentary` channel",
+      "Default user-facing language: Chinese",
+      "Skills、agents、ECC、MCP",
+      "Do not include extra explanation unless the user asks"
+    ],
+    "minimum_instruction_block_chars": 320,
+    "minimum_instruction_structure_score": 5,
+    "remove_block_patterns": [
+      "(?is)#\\s*AGENTS\\.md instructions for[^\\n]*\\n\\s*<INSTRUCTIONS>.*?</INSTRUCTIONS>",
+      "(?is)<environment_context>.*?</environment_context>",
+      "(?is)<user_instructions>.*?</user_instructions>",
+      "(?is)<system-reminder>.*?</system-reminder>",
+      "(?is)<developer_instructions>.*?</developer_instructions>",
+      "(?is)<recommended_plugins>.*?</recommended_plugins>",
+      "(?ims)^#\\s*Files mentioned by the user:\\s*\\n.*?^##\\s*My request for Codex:\\s*\\n"
+    ],
+    "request_boundary_patterns": [
+      "(?im)^\\s*##\\s*My request for Codex:\\s*$",
+      "(?im)^\\s*(?:My request for Codex|My request|User request|Actual user request|我的请求|用户请求|实际请求)[：:]\\s*"
+    ],
+    "whole_message_prefixes": [
+      "Side conversation boundary.",
+      "# AGENTS.md instructions for",
+      "You are Codex, a coding agent",
+      "<environment_context>",
+      "<user_instructions>",
+      "<system-reminder>"
+    ]
+  },
+  "input_glob": "OpenAIDatabase/data/public_raw/codex/sessions/**/*.jsonl",
+  "maximum_clause_chars": 500,
+  "minimum_clause_chars": 4,
+  "minimum_cluster_count": 2,
+  "minimum_cross_session_count": 2,
+  "origin_labels_zh": {
+    "codex_automation": "Codex Automation",
+    "human_interactive": "人工对话"
+  },
+  "output_dir": "OpenAIDatabase/data/derived/behavior_intelligence/recurring_prompts",
+  "schema_version": "recurring_prompt_config.v4",
   "secret_redaction_patterns": [
     "(?i)github_pat_[A-Za-z0-9_]{20,}",
     "(?i)gh[pousr]_[A-Za-z0-9]{20,}",
@@ -113,10 +138,7 @@
     "(?is)-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----.*?-----END (?:RSA |EC |OPENSSH )?PRIVATE KEY-----",
     "(?i)(?:api[_-]?key|access[_-]?token|oauth[_-]?token|password|passwd|secret)\\s*[:=]\\s*[^\\s,;]{8,}"
   ],
-  "absolute_path_patterns": [
-    "(?<![A-Za-z0-9_])/(?:Users|home|private|var/folders)/[^\\s]+",
-    "[A-Za-z]:\\\\(?:Users|Documents|Desktop)\\\\[^\\s]+"
-  ],
+  "source_samples_per_cluster": 3,
   "stop_tokens": [
     "我们",
     "你们",
@@ -151,6 +173,5 @@
     "not",
     "only"
   ],
-  "human_status": "OpenAIDatabase/人类可读/00_Recurring运行状态.md",
-  "agent_context_filename": "agent_context.json"
+  "summary_items_per_category": 12
 }
