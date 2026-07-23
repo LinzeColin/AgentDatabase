@@ -1,22 +1,33 @@
-# 📍 数据在哪：本地 data/ 是活运行态，Private-Database 是跨仓快照入口
+# 📍 数据在哪 / 迁移状态：本地 data/ = 活运行态（只读镜像源），Private-AgentDatabase = 已镜像的跨仓入口
 
-> **给所有正在开发和后续新 agent 的路牌。**
->
-> ⚠️ **先读懂这条，别删本地 data/**：本目录 `OpenAIDatabase/data/` 是 MemoryAtlas 记忆系统的
-> **活运行态**——`data/memory/agent-memory.json` 是 agent 的**启动读取入口**，CI（`atlasctl build-atlas`）
-> 每次也读它，系统还在持续往这里写。**它不是可弃的迁移副本，删了整个系统会崩。**
+> **给所有开发中 / 后续新 agent 的路牌。动本目录前，先读完这条。**
 
-## 权威关系（务必分清）
+## 🚫 最重要：勿再上传 / 合并 / 重新同步（防重复）
+
+本目录 `OpenAIDatabase/data/` 已完整镜像到 `LinzeColin/Private-Database` 的 `Private-AgentDatabase/`，**迁移已完成**。
+
+- ✅ **已核对一致**：截至 **2026-07-23**，`data/` 下 **691 个文件两边 git blob sha 完全相同**。
+- ⚠️ 本地另有 2 个**非数据**文件——本路牌 `WHERE_IS_THE_DATA.md` + `run_logs/skills_runs/README.md`（本地脚手架）——**属本地专有，不镜像、无需上传补齐**。Private 是 691、本地是 693，这个差是**预期的，不是缺口**。
+- 🚫 **任何 agent 不要再把本地 `data/` 上传 / 同步 / 合并 / 重灌到 Private。** 数据的跨仓落地已完成；再传只会产生重复对象和 churn。机器可读信号见同目录 **`MIRROR_STATUS.json`**（`status: MIRRORED_DO_NOT_REUPLOAD`）。
+
+## ⚠️ 同样重要：别删本地 data/
+
+`data/memory/agent-memory.json` 是 agent 的**启动读取入口**，CI（`atlasctl build-atlas`）每次也读它，本仓运行时**仍在持续读写**本目录。**它是活运行态，删了本仓系统会崩。**
+
+## 权威 / 生命周期（务必分清）
 
 | 位置 | 角色 |
 |---|---|
-| 本仓 `OpenAIDatabase/data/`（692 文件） | **活的、权威的**运行记忆，随系统写入持续更新 |
-| `LinzeColin/Private-Database` 的 `Private-AgentDatabase/`（691 文件快照） | **时间点快照 + 跨仓访问入口**；自 2026-07-19 播种后本地已继续演进，此快照会过期 |
+| 本仓 `OpenAIDatabase/data/`（693 文件，其中 691 为数据） | **本仓运行时的活读写权威**；对迁移 / 同步类 agent 而言 = **只读源**，处于**逐步淘汰（gradual phase-out）**路径 |
+| `LinzeColin/Private-Database` 的 `Private-AgentDatabase/`（691 数据 + objects/ + manifest） | **已镜像的跨仓访问入口**；与本地一致，**不需再同步** |
 
-## 什么时候用哪个
+- **本仓自身运行时**（agent 记忆读写 / CI atlasctl）：照常读写本地 `data/`，不受迁移影响。
+- **迁移 / 同步 / 清理类 agent**：把本地 `data/` 当**只读**，**不上传、不合并、不删**。
+- **逐步淘汰说明**：长期目标是把消费者启动 / CI 的读取路径改为经 SDK 读 Private；**该改造尚未做**。在那之前本地 `data/` 仍是本仓活权威，保持只读对待、勿改勿删。改造完成、校验通过后，再按流程退役本地副本——**不是现在**。
 
-- **本仓自身的代码/CI/agent 启动**：照旧读写本地 `OpenAIDatabase/data/`，不要改。
-- **别的仓 / 别的 agent 想跨仓拿这批数据**：用 SDK 从 Private-Database 按需下载，**不要 `git clone` Private-Database**（预计 500GB+，损伤本地机器）：
+## 跨仓怎么读（别的仓 / 别的机器，免 clone）
+
+不要 `git clone` Private-Database（预计 500GB+，损伤本地机器）。用 SDK 按需取单文件：
 
 ```bash
 T=OpenAIDatabase/scripts/private_db_client.py
@@ -24,11 +35,11 @@ python3 $T get  Private-AgentDatabase data/processed/yyy.json ./out.json   # 按
 python3 $T list Private-AgentDatabase data/public_raw                       # 列目录
 ```
 
-## 若要真正「data 只存 Private-Database」（后续 agent 注意）
+## 大文件（会话历史 / 导出 / 恢复包）已迁 Release
 
-那需要把 OpenAIDatabase 的启动/CI 读取路径从本地 `data/` 改为经 SDK 读 Private-Database，
-并让 Private-AgentDatabase 保持与本地同步。**这是 OpenAIDatabase 系统自身的架构改造工作，
-不是「仓库拆分」线程能代做的**——拆分线程只负责把统一数据仓、SDK、路牌就位（已完成）。
-在那次改造完成前，**本地 data/ 是唯一权威，Private-AgentDatabase 是备份/跨仓入口**。
+会话历史、ChatGPT 导出、修复包等大文件（21 项，最大 ~1.5GB）已从**公开 AgentDatabase Release 删除**、迁到 **Private-Database Releases**（多数 `public_copy_status: DELETED_VERIFIED_ABSENT`）。
+
+- 旧的公开 AgentDatabase Release URL 已失效；**改从 Private-Database Releases 取**。
+- 完整 旧→新 映射账本：`Private-AgentDatabase/manifest.jsonl`（每条含 `original_name` / `destination_release_tag` / `object_path`）。
 
 协议见 `Private-Database/PROTOCOL.md`；统一数据仓总说明见 `Private-Database/README.md`。
