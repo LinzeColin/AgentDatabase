@@ -33,8 +33,8 @@ from .roots import RootRegistry
 
 
 RAW_SCHEMA = SCHEMA_PREFIX + "raw-segment:v2"
-RETENTION_SCHEMA = SCHEMA_PREFIX + "retention-receipt:v2"
-RETENTION_POLICY_ID = "urn:linzecolin:agentdatabase:skillops:policy:retention:v2"
+RETENTION_SCHEMA = SCHEMA_PREFIX + "retention-receipt:v3"
+RETENTION_POLICY_ID = "urn:linzecolin:agentdatabase:skillops:policy:retention:v3"
 
 
 @dataclass(frozen=True)
@@ -75,6 +75,14 @@ class RetentionExecutor:
             or policy.get("persistent_managed_raw_default_enabled") is not False
             or policy.get("protected_root_delete_allowed") is not False
             or policy.get("managed_raw_max_hours") != 72
+            or policy.get("retention_eligibility_condition")
+            != "NOW_STRICTLY_GREATER_THAN_RETENTION_NOT_BEFORE"
+            or policy.get("prune_deadline_hours_after_eligibility") != 24
+            or policy.get("prune_deadline_equal_is_on_time") is not True
+            or policy.get("prune_deadline_hard_guarantee_claimed")
+            is not False
+            or policy.get("retained_index_required_after_shard_prune")
+            is not True
         ):
             raise AutoRuntimeError("RETENTION_POLICY_CONTRACT_MISMATCH")
         self.policy = policy

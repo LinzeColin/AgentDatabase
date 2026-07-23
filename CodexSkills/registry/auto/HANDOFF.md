@@ -1,133 +1,122 @@
-# Auto AU-040 promotion historical-trust corrective handoff
+# Auto exact-bundle integration handoff
 
-- State: `DRAFT_NON_ACTIVE_SCHEMA_PROMOTED`
-- Phase: `AUTO_PROMOTION_HISTORICAL_TRUST_CORRECTIVE`
-- Phase base: `ab49666bd3343c2abbfc6766478fad63d44163d0`
-- Historical trusted candidate Git object:
-  `sha1:899a4374bc02f5e18444fea7404864df7b118adf`
-- Historical trusted candidate bundle digest:
-  `2704ed797c843f969965db600747abcdcd217550522e6479aab6817ef5a86ef5`
-- Historical candidate size: `29 schemas / 5 policies`
-- Historical candidate manifest raw SHA-256:
-  `0d2600fd54fcb1fb5dd0901d9acc31b43b5cae0be8ee599f5c3c7ca0b01f9109`
-- Promotion evidence Git object:
-  `sha1:ab49666bd3343c2abbfc6766478fad63d44163d0`
-- Promotion interface:
-  `CodexSkills/registry/auto/schemas/public-v2/promotion-interface.json`
-- Promotion interface raw SHA-256:
-  `65c2e83bb2491d1cb3059767cf1705fc7541bd7e97449f33a51ba17a04f5e595`
+- State: `DRAFT_NON_ACTIVE`
+- Phase: `AUTO_EXACT_BUNDLE_INTEGRATION`
+- Phase base/control object:
+  `66d5bafadca508cad825b4ce49a42e81e8b66ef7`
+- Final candidate Git object:
+  `sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5`
+- Final candidate bundle digest:
+  `36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e`
+- Final candidate manifest raw SHA-256:
+  `66ad125629cab71739ff2bc266219f995f7a45998936ca720c6db678ee77e65a`
+- Final candidate size: `31 schemas / 5 policies`
+- Consumer V2 Git object:
+  `sha1:91a12e48351be3ee05ec23ef61aec81056b02014`
+- Consumer raw SHA-256:
+  `189a47300fc1aa6012e87feb6184833cb717cdbe2b9dc9be6db89197f579939c`
+- Current control raw SHA-256:
+  `86e4d625bdab87261a39c949883d410822e25e0222dbab6a333d171ce420c614`
 - Auto runtime interface raw SHA-256:
-  `e8d8af9b74908e56a86550492f4cf26a100bfd674cf858c61e72e3193b3d8a24`
+  `09af0c00273825e90a489f413a2f0bb6995042e5b4eea17973ce7582eab66340`
 
 ## Completed in this phase
 
-The promotion validator no longer treats the current working-tree candidate
-manifest as a permanent copy of the historical 29/5 candidate. It now reads
-the canonical manifest directly from both the historical candidate object
-`899a4374...` and the Auto promotion object `ab49666...`, requires exact-byte
-equality and the pinned raw digest above, and then validates the exact
-29-schema / five-policy tuple and path isolation.
+The production bootstrap now requires two caller-supplied, repo-external trust
+tuples on every preflight and orchestrator call:
 
-The promotion interface itself remains byte-identical. The evidence object
-also proves that the Auto promotion commit did not change the candidate
-manifest. A later authorized Mechanism commit may therefore replace the
-working-tree manifest with the accepted 31/5 target without invalidating the
-historical promotion evidence. Forged historical tuples, raw digests, object
-bytes, or promotion-interface bytes fail closed.
+1. the candidate content tuple (`5ee37d7...`, `36f0c66...`, canonical manifest
+   path, `CANDIDATE`);
+2. the control tuple (`66d5baf...`, `86e4d62...`, canonical control path,
+   `DRAFT_NON_ACTIVE_CONTROL`).
 
-The prior promotion consumed the independently verified Mechanism
-semantic/policy acceptance interface:
+The candidate tuple selects all manifest, schema, policy, and canonicalization
+vector bytes from the candidate object. The control tuple selects the local
+Mechanism validation/control runtime and the control interface bytes. The
+checkout's self-report, caller booleans, caller digest maps, or the control's
+historical source-runtime pointer cannot replace either trust root.
 
-```text
-path=CodexSkills/governance/au040/semantic-policy-acceptance.json
-raw_sha256=3385df5975859ef0774d2086a8aa28a0336307e3343e7832eec9e2f024504fda
-verified_git_object=sha1:d4d488ab6f1720f3a837b071caf5c9cf6ac5f8e6
-status=DRAFT_NON_ACTIVE_SEMANTIC_POLICY_ACCEPTED
-```
+The immutable legacy 29/5 loader remains available only for historical draft
+and promotion evidence. Production bootstrap requires the exact final 31/5
+profile, composes the four private Auto schemas outside the shared bundle, and
+rejects the historical tuple or any hybrid profile. Public-value scanning now
+selects the trusted v2 policy for the final profile.
 
-The four accepted Auto schemas were copied byte-for-byte from the immutable
-`transport-draft/` source paths into the isolated stable sibling root
-`CodexSkills/registry/auto/schemas/public-v2/`. The draft interface remains
-byte-identical at raw SHA-256
-`aa4d1b174d45b87424b81f0896c7a594e72f24bfdc16e4128c133ed543fb3831`;
-it was not rewritten after Mechanism bound it.
+`runtime_preflight.py`, `notification_transport_cli.py`,
+`activation_handshake_cli.py`, and `SkillOpsOrchestrator` all consume both
+external tuples. Activation control loads the 31/5 bundle plus the two
+bundle-external activation schemas. Retention's managed-raw path uses
+`retention-policy:v3` and `retention-receipt:v3`; GIT current-tree pruning
+remains explicitly blocked because the AU-040 runtime writer is not integrated.
 
-| Schema | Raw SHA-256 | Canonical schema SHA-256 | Self pointer |
-| --- | --- | --- | --- |
-| `daily-run-shard-manifest:v1` | `5a38f1f4844b348f376a4c0633c16e7e4162df503c2403ac22e11a113bc1c820` | `e9214388da78376da47770934454d65a57659d1dde33fa0cb4e36b79e4665337` | `/manifest_digest` |
-| `publication-manifest:v2` | `ef0848afc6dbe82c33df87c8d550de9eeef591af4a50b86e191aefd0dff7de7e` | `e7f8c4dd623379052829a21e3fcae77a98f14b3da1d79bb8f1d416f828063346` | `/manifest_digest` |
-| `retention-receipt:v3` | `ddb464fe6a381580af486df25a85c4750b1743289cb631732f77d36944c8b215` | `81435881fbc5e1ced14975edbedee63ca6555674db36f906bdfdee20eb317c45` | `/receipt_digest` |
-| `run-event-index-entry:v1` | `dd9fa5c6a2163b38c37972e06cfb0b8b7990f5a8ef335a1c7559aeceef214014` | `27663e9da3d9511cf9a03d1fe6f4b3779b1bbdab8f2f8adb94a274b8653a1433` | `/index_entry_digest` |
+The current control truthfully says
+`transition_contract.auto_runtime_integration_complete=false`. Therefore:
 
-The deterministic promotion builder and validator prove:
+- read-only final-bundle preflight/shadow proof is available;
+- all production state-writing orchestrator and notification/activation
+  entrypoints fail with
+  `RUNTIME_CONTROL_SYNC_REQUIRED_BEFORE_STATE_WRITE` before state creation;
+- the current control's d162/e8d8 transport-runtime pointer is verified only as
+  lineage/source evidence and does not self-lock this new Auto runtime.
 
-- every promoted file is exact-byte equal to its accepted draft source;
-- every raw and canonical digest, `$id`, self pointer, relationship, and final
-  path matches both source interfaces;
-- final paths are under `schemas/public-v2/` and contain no `draft` component;
-- at the promotion evidence object, the recursive `schemas/public/` loader
-  still saw exactly the historical candidate set;
-- the historical candidate manifest is 29/5 and names neither draft nor
-  promoted paths;
-- the accepted offline target closes at exactly 31 schemas / five policies;
-- the current working-tree manifest is not used as historical truth, so a
-  later legitimate 31/5 materialization does not break this evidence;
-- unknown schema URNs and any interface, guard-set, or byte drift fail closed.
-
-The promotion interface acknowledges all seven required Mechanism production
-semantic guards:
+The deterministic runtime interface independently verifies the exact candidate
+A blob, consumer B blob, control C blob, local control runtime, historical
+promotion evidence, and all false gates. It reports:
 
 ```text
-CANONICAL_BYTES_PHYSICAL_DIGEST_CLOSURE
-INDEX_EVENT_MANIFEST_CLOSURE
-MANIFEST_PART_IMMUTABILITY
-MANIFEST_PREDECESSOR_EXACT_CHAIN
-PRUNE_TRANSACTION_ARTIFACT_SET_CLOSURE
-RETENTION_ANCHOR_EXACT_365D
-SHARD_TRANSACTION_ARTIFACT_SET_CLOSURE
+auto_exact_bundle_integration_complete=true
+control_observed_auto_runtime_integration_complete=false
+runtime_preflight_shadow_permitted=true
+runtime_state_write_permitted=false
+shared_bundle_schema_count=31
+shared_policy_count=5
+next_phase=MECHANISM_POST_AUTO_INTEGRATION_CONTROL_SYNC
 ```
-
-The accepted future policy material remains Mechanism-owned:
-
-- `public-value-policy:v2`
-  `cff871b00dec9d33ba6bd879e02b7039cef57d11e35bdc4c57a80d4d3ea519d4`
-- `retention-policy:v3`
-  `bcad1e50a847e040d1350ca2fd977503b4ae642deabd727266e9dbbd26acb7ce`
-- `public-value-policy` schema v2
-  `16a233cab9f403b25da933414156f0f776a76c06518b792a0ff9691d813793aa`
-- `retention-policy` schema v3
-  `ad5637fad9600941db02ce3cc5f3078d9cc96730603407ff0c019588a32d0ea3`
 
 ## Boundaries still closed
 
 - `repository_bound=false`;
-- `au_040_complete=false`;
-- `au_040_manifest_contract_resolved=false`;
-- `au_040_consumer_manifest_path_contract_present=false`;
 - `au_040_daily_jsonl_shard_complete=false`;
+- AU-040 runtime shard/index/manifest writer is absent;
+- publication-manifest:v2 publisher integration is absent;
 - `canonical_publication_permitted=false`;
 - `external_gmail_ready_gate_satisfied=false`;
+- real provider metadata readback remains false;
 - `m0c_b_permitted=false`;
+- `activation_instance_created=false`;
 - `schedule_authority_resolved=false`;
 - `schedule_complete=false`.
 
-This corrective changed no candidate bundle, consumer, activation control,
-promotion interface, runtime schema loader, writer, publisher, queue,
-retention executor, `CodexSkills/VERSION`, activation instance, state root,
-Gmail notification, shard, manifest instance, index instance, automation, or
-watermark. It did not call the verifier, perform historical run
-validation/backfill, add a time window, restart the App, or touch any paused
-automation.
+This phase created no VERSION, state root, Gmail operation, intent, receipt,
+settlement, shard, index, daily manifest, publication, watermark, automation,
+or App action. It did not call the verifier, replay historical runs, add a
+time window, or touch the three PAUSED automations.
+
+## Unrelated baseline failure
+
+The additional broad command-ownership check is not green:
+
+```text
+command=/usr/bin/python3 -B OpenAIDatabase/scripts/validate_command_ownership.py --database-dir OpenAIDatabase
+error=top-level script entrypoints: expected 84, observed 85
+status=FAIL
+```
+
+It has the identical error and metrics on exact base C
+`66d5bafadca508cad825b4ce49a42e81e8b66ef7` and on this Auto worktree.
+This phase changes no `OpenAIDatabase/**` path, so the failure is reported as a
+pre-existing broad baseline condition, not as PASS and not as an Auto
+regression.
 
 ## Next exact action
 
-Mechanism independently fetches and reads back this promotion, then performs
-only `MECHANISM_FINAL_31_5_CANDIDATE_CONSUMER_CONTROL`. That phase may bind the
-stable promoted paths plus the accepted Mechanism v2/v3 policy material into a
-new 31/5 candidate and synchronously rebuild the consumer/control tuples. Auto
-runtime integration must wait for the exact new bundle tuple from that
-independent phase.
+After ordinary FF-safe push and independent GitHub object readback of this Auto
+commit, Mechanism alone performs
+`MECHANISM_POST_AUTO_INTEGRATION_CONTROL_SYNC`. It must rebuild/read back a
+successor control that binds the new Auto object and runtime-interface raw
+SHA-256, then set `auto_runtime_integration_complete=true` without doing
+activation, Gmail/state readiness, shard publication, VERSION, automation,
+schedule, or verifier work.
 
 The Owner must still resolve 04:15 versus 05:30 explicitly and provision the
-repo-external owner-only state root before any later Gmail readiness or M0c-B
-run. Activation and canonical publication remain forbidden.
+repo-external owner-only state root before later Gmail readiness or M0c-B.

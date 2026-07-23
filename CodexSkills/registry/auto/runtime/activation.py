@@ -16,7 +16,7 @@ from CodexSkills.governance.tools.canonical_json import (
     parse_json_bytes,
 )
 
-from .bootstrap import BootstrapContext
+from .bootstrap import BootstrapContext, ControlTrustTuple
 from .core import AutoRuntimeError
 
 
@@ -35,12 +35,7 @@ SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 MAX_CONTROL_ARTIFACT_BYTES = 1024 * 1024
 
 
-@dataclass(frozen=True)
-class ActivationControlTrustTuple:
-    verified_git_object_id: str
-    expected_control_interface_raw_sha256: str
-    canonical_control_interface_path: str
-    mode: str
+ActivationControlTrustTuple = ControlTrustTuple
 
 
 @dataclass(frozen=True)
@@ -203,6 +198,10 @@ class ActivationHandshake:
             raise AutoRuntimeError(
                 "ACTIVATION_CANDIDATE_TRUST_MODE_REQUIRED"
             )
+        if candidate_context.control_trust != control_trust:
+            raise AutoRuntimeError(
+                "ACTIVATION_CONTROL_CONTEXT_MISMATCH"
+            )
         _verify_control_runtime(self.repo_root, control_trust)
         self.module = _load_control_module(self.repo_root)
         if (
@@ -227,7 +226,7 @@ class ActivationHandshake:
                 f"ACTIVATION_CONTROL_TRUST_FAILED:{exc}"
             ) from exc
         if (
-            len(self.bundle.schemas) != 31
+            len(self.bundle.schemas) != 33
             or len(self.bundle.policies) != 5
         ):
             raise AutoRuntimeError("ACTIVATION_CONTROL_CLOSURE_MISMATCH")

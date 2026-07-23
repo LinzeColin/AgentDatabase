@@ -17,7 +17,10 @@ from CodexSkills.registry.auto.runtime.activation import (  # noqa: E402
     ActivationControlTrustTuple,
     ActivationHandshake,
 )
-from CodexSkills.registry.auto.runtime.bootstrap import bootstrap_runtime  # noqa: E402
+from CodexSkills.registry.auto.runtime.bootstrap import (  # noqa: E402
+    bootstrap_runtime,
+    require_control_synced_runtime,
+)
 from CodexSkills.registry.auto.runtime.core import (  # noqa: E402
     AutoRuntimeError,
     SystemClock,
@@ -74,7 +77,9 @@ def _context_and_handshake(args: argparse.Namespace):
     context = bootstrap_runtime(
         args.repo_root,
         _candidate_trust(args),
+        _control_trust(args),
     )
+    require_control_synced_runtime(context)
     handshake = ActivationHandshake(
         args.repo_root,
         context,

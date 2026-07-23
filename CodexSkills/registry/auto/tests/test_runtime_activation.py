@@ -26,18 +26,13 @@ from CodexSkills.governance.tools.canonical_json import (
 from runtime_helpers import (
     CANDIDATE_DIGEST,
     CANDIDATE_GIT_OBJECT,
+    CONTROL_GIT_OBJECT,
+    CONTROL_INTERFACE_RAW_SHA256,
     REPO_ROOT,
     context,
 )
 
 
-CONTROL_GIT_OBJECT = (
-    "sha1:3a0b8222cf52d6a35f31986c411ac98daed06c5c"
-)
-CONTROL_INTERFACE_RAW_SHA256 = (
-    "70b4e8c8ab47db541c90bbc6ebf092a4"
-    "83ca776c07b84b939b5a9b0be783e5c2"
-)
 INTENT_ID = (
     "urn:linzecolin:agentdatabase:skillops:schema:activation-intent:v1"
 )
@@ -308,10 +303,10 @@ class RuntimeActivationTests(unittest.TestCase):
             cls.trust,
         )
 
-    def test_external_control_tuple_loads_exact_31_schema_closure(
+    def test_external_control_tuple_loads_31_plus_2_schema_closure(
         self,
     ) -> None:
-        self.assertEqual(len(self.handshake.bundle.schemas), 31)
+        self.assertEqual(len(self.handshake.bundle.schemas), 33)
         self.assertEqual(len(self.handshake.bundle.policies), 5)
         bad = ActivationControlTrustTuple(
             CONTROL_GIT_OBJECT,
@@ -321,7 +316,7 @@ class RuntimeActivationTests(unittest.TestCase):
         )
         with self.assertRaisesRegex(
             AutoRuntimeError,
-            "ACTIVATION_CONTROL_INTERFACE_RAW_DIGEST_MISMATCH",
+            "ACTIVATION_CONTROL_CONTEXT_MISMATCH",
         ):
             ActivationHandshake(REPO_ROOT, context(), bad)
 

@@ -2,15 +2,19 @@
 
 State: `DRAFT_NON_ACTIVE`.
 
-This Auto-owned directory contains eight current public schemas, four
-Auto-private schemas, deterministic builders/validators, and the non-active
-runtime safety kernel. The current public set belongs to the exact Mechanism
-M0b shared candidate; the private set never enters the shared bundle.
+This Auto-owned directory contains the historical eight-schema public set,
+four promoted public-v2 schemas, four Auto-private schemas, deterministic
+builders/validators, and the non-active runtime safety kernel. The final
+candidate uses six surviving historical Auto schemas plus all four promoted
+schemas inside an exact 31-schema / five-policy shared bundle. The private set
+never enters the shared bundle.
 
 `transport-draft/` preserves the four accepted AU-040 source schemas.
 `schemas/public-v2/` contains their promoted exact-byte copies and a separate
 promotion interface. Both roots are outside the recursive public-schema
-loader used by the historical 29/5 candidate.
+loader used by the historical 29/5 candidate. The final manifest explicitly
+names the promoted stable paths; the historical loader contract remains
+immutable evidence.
 
 Deterministic contract entrypoints:
 
@@ -32,7 +36,8 @@ resolve schemas over the network, or install dependencies at runtime.
 
 ## Runtime entrypoints
 
-- `tools/runtime_preflight.py` consumes the repo-external trust tuple and runs
+- `tools/runtime_preflight.py` requires two repo-external trust tuples: the
+  candidate content tuple and the Mechanism control tuple. It runs
   capability/vendor/offline-Registry checks before any runtime-state write.
 - `runtime/state.py` implements atomic writes, non-stealing single-flight
   leases, explicit stale reconciliation, and readback-gated lane watermarks.
@@ -53,9 +58,10 @@ resolve schemas over the network, or install dependencies at runtime.
   Provider timeouts, malformed query responses, ambiguity, header mismatch, or
   missing scopes block the planned write without sending again.
 - `runtime/activation.py` consumes both the external candidate trust tuple and
-  the external M0c-A control tuple. It verifies the local Mechanism activation
-  runtime against the selected Git object before loading the exact 31-schema /
-  five-policy offline closure. Intent, receipt, and settlement reads are
+  the external control tuple. It verifies the local Mechanism activation
+  runtime against the selected control Git object before loading the exact
+  31-schema / five-policy candidate closure plus two bundle-external
+  activation schemas. Intent, receipt, and settlement reads are
   descriptor-relative `O_NOFOLLOW`; public JSON must be exact RFC 8785 JCS
   bytes without a BOM or trailing newline.
 - `tools/activation_handshake_cli.py` is the production activation entrypoint.
@@ -66,8 +72,8 @@ resolve schemas over the network, or install dependencies at runtime.
   itself, performs an ordinary expected-head FF push, and remotely reads every
   byte back.
 - `tools/notification_transport_cli.py` remains the generic transport
-  preflight/non-activation entrypoint. It consumes the same external
-  candidate/active trust tuple,
+  preflight/non-activation entrypoint. It consumes the same external candidate
+  and control trust tuples,
   resolves only the fixed repo-external paths below, verifies the authenticated
   Gmail profile matches the owner mapping, proves the Gmail query endpoint
   accepts the fixed no-send capability probe, renders the locked MAJOR
@@ -81,8 +87,9 @@ resolve schemas over the network, or install dependencies at runtime.
   those facts from the externally trusted settlement, exact bytes, live lock,
   path gates, policy/privacy validation, and remote head.
 - `runtime/retention.py` keeps persistent raw disabled by default and can act
-  only on validated, owned managed segments. UTC wall-clock and active-tree
-  retention claims are explicit.
+  only on validated, owned managed segments under retention policy/receipt v3.
+  GIT current-tree pruning remains fail closed until the AU-040 writer is
+  independently integrated.
 - `runtime/schedule.py` currently implements the frozen Australia/Sydney
   04:15 contract, Sunday forced full, DST-safe UTC conversion, manual parity,
   and no late-start rejection. A later Auto goal says 05:30 but does not
@@ -96,33 +103,40 @@ provisioned interpreter:
 ```bash
 /usr/bin/python3 -B CodexSkills/registry/auto/tools/runtime_preflight.py \
   --repo-root . \
-  --verified-git-object-id sha1:899a4374bc02f5e18444fea7404864df7b118adf \
-  --expected-bundle-digest 2704ed797c843f969965db600747abcdcd217550522e6479aab6817ef5a86ef5 \
+  --verified-git-object-id sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5 \
+  --expected-bundle-digest 36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e \
   --canonical-manifest-path CodexSkills/governance/bundles/schema-bundle-manifest.v1.json \
-  --mode CANDIDATE
+  --mode CANDIDATE \
+  --verified-control-git-object-id sha1:66d5bafadca508cad825b4ce49a42e81e8b66ef7 \
+  --expected-control-interface-raw-sha256 86e4d625bdab87261a39c949883d410822e25e0222dbab6a333d171ce420c614 \
+  --canonical-control-interface-path CodexSkills/governance/activation/control-interface.json \
+  --control-mode DRAFT_NON_ACTIVE_CONTROL
 ```
 
-This command is read-only. It does not accept the checkout's manifest or
-VERSION as a self-declared trust root, install packages, access a network
-resolver, create state, publish, notify, or update an automation.
+This command is read-only. The current control explicitly reports
+`auto_runtime_integration_complete=false`, so it returns a shadow preflight
+proof while every state-writing orchestrator/notification/activation
+entrypoint fails before state creation. Neither checkout self-reporting nor a
+caller boolean/digest map can replace either tuple.
 
 ## M0c activation control
 
 The activation control interface remains `DRAFT_NON_ACTIVE` at
 `CodexSkills/governance/activation/control-interface.json`. Runtime use
-requires all four external values: the verified M0c-A Git object, expected raw
+requires all four external values: the verified control Git object, expected raw
 interface SHA-256, canonical interface path, and
 `DRAFT_NON_ACTIVE_CONTROL` mode. Repository self-reporting is never sufficient.
 
 The two-stage production CLI is intentionally not demonstrated with a live
-instance here. The Mechanism-owned consumer-first interface was independently
-repinned and GitHub-read back at object
-`2177986e897fdc50a7273f099a1305b21de2096b`. Its raw SHA-256 is
-`750a374f5eb20497baab79305dc31248a7495cf3c7dee827cad19d13e08e2082`,
-and it now binds the relocated candidate
-`899a4374...` / `2704ed79...`. The Auto runtime-interface builder reads and
-verifies those exact bytes and tuple before it may report
-`consumer_first_gate_satisfied=true`.
+instance here. The final Mechanism-owned consumer V2 was independently
+GitHub-read back at object
+`91a12e48351be3ee05ec23ef61aec81056b02014`; raw SHA-256
+`189a47300fc1aa6012e87feb6184833cb717cdbe2b9dc9be6db89197f579939c`.
+It binds candidate `5ee37d74...` / `36f0c66d...`, daily part/index/manifest
+and retention-receipt contracts, while keeping both publication gates false.
+Control object `66d5bafa...`, raw SHA-256 `86e4d625...`, binds the same
+candidate and consumer. The runtime-interface builder verifies all three
+Git-object blobs independently.
 
 That gate does not permit canonical publication. The consumer still declares
 `canonical_publication_permitted=false` and
@@ -159,10 +173,14 @@ The provider preflight is explicit and performs no send:
   preflight \
   --repo-root . \
   --state-root "$SKILLOPS_STATE_ROOT" \
-  --verified-git-object-id sha1:899a4374bc02f5e18444fea7404864df7b118adf \
-  --expected-bundle-digest 2704ed797c843f969965db600747abcdcd217550522e6479aab6817ef5a86ef5 \
+  --verified-git-object-id sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5 \
+  --expected-bundle-digest 36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e \
   --canonical-manifest-path CodexSkills/governance/bundles/schema-bundle-manifest.v1.json \
-  --mode CANDIDATE
+  --mode CANDIDATE \
+  --verified-control-git-object-id sha1:66d5bafadca508cad825b4ce49a42e81e8b66ef7 \
+  --expected-control-interface-raw-sha256 86e4d625bdab87261a39c949883d410822e25e0222dbab6a333d171ce420c614 \
+  --canonical-control-interface-path CodexSkills/governance/activation/control-interface.json \
+  --control-mode DRAFT_NON_ACTIVE_CONTROL
 ```
 
 The preflight first binds the authenticated profile to the private owner
@@ -187,10 +205,10 @@ automation. The Mechanism-owned consumer-first trust tuple is complete, but
 its preactivation publication gates remain closed.
 
 AU-040 is not complete: `skills_runs/example.json` is only prior scaffolding,
-never the final run-layout contract. The immutable Task Packs require bounded
-daily JSONL shards and a manifest under `skills_runs`, while the current
-consumer allows only `YYYY/MM/DD/part-NNNN.jsonl` plus the root README and
-would reject a manifest path.
+never the final run-layout contract. The final candidate and consumer now bind
+bounded daily part/index JSONL, append-only daily manifest revisions, and
+retention receipt v3. No shard/manifest/index instance or runtime writer was
+created; `repository_bound=false` and canonical publication remains false.
 
 Mechanism Authority Audit Revision 6 is represented by the Auto-owned source
 schemas under `transport-draft/`: daily manifest v1, persistent event index
@@ -211,11 +229,14 @@ change it. The validator deliberately does not use the current working-tree
 manifest as historical truth, so the authorized Mechanism 31/5
 materialization can follow without invalidating promotion evidence.
 
-The next owner phase is Mechanism-only materialization of the final 31/5
-candidate, consumer, and activation-control tuples. No such tuple exists yet;
-the current candidate, consumer, control, runtime publisher, and runtime loader
-remain unchanged. `repository_bound=false`; AU-040, activation, and canonical
-publication remain false.
+The exact final 31/5 candidate, V2 consumer, and current control now exist and
+the Auto loader accepts that exact bundle. The next phase is
+`MECHANISM_POST_AUTO_INTEGRATION_CONTROL_SYNC`: Mechanism must independently
+read back this Auto object and issue a successor control binding the new
+runtime-interface tuple. Until that successor sets
+`auto_runtime_integration_complete=true`, runtime state writes and settlement
+remain fail closed. Publisher v2, daily shard writer, `repository_bound`,
+AU-040 completion, activation, and canonical publication remain false.
 
 The schedule conflict remains unresolved. The external Gmail readiness gate
 remains false until the Owner injects the repo-external state root and the

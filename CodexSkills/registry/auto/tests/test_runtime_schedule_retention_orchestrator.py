@@ -1,9 +1,11 @@
 from __future__ import annotations
 
+import contextlib
 import datetime as dt
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 from CodexSkills.registry.auto.runtime.core import (
     AutoRuntimeError,
@@ -19,7 +21,17 @@ from CodexSkills.registry.auto.runtime.roots import RootEntry, RootRegistry, pre
 from CodexSkills.registry.auto.runtime.schedule import SchedulePolicy
 from CodexSkills.registry.auto.runtime.state import SingleFlightLock, StateLayout
 
-from runtime_helpers import CANDIDATE_DIGEST, FIXED_NOW, REPO_ROOT, clock, context, trust, uid
+from runtime_helpers import (
+    CANDIDATE_DIGEST,
+    FIXED_NOW,
+    REPO_ROOT,
+    clock,
+    context,
+    control_synced_context,
+    control_trust,
+    trust,
+    uid,
+)
 
 
 def all_shared_gates(value=True):
@@ -226,8 +238,64 @@ class RuntimeOrchestratorTests(unittest.TestCase):
             state_root=self.state,
             protected_roots=(RootEntry("source", "SKILL_SOURCE", self.source),),
             trust=trust(),
+            control_trust=control_trust(),
+            clock=clock(),
+            bootstrap=lambda _repo, _trust, _control: (
+                control_synced_context()
+            ),
+        )
+
+    def test_current_control_blocks_before_state_write(self) -> None:
+        runner = SkillOpsOrchestrator(
+            repo_root=REPO_ROOT,
+            state_root=self.state,
+            protected_roots=(
+                RootEntry("source", "SKILL_SOURCE", self.source),
+            ),
+            trust=trust(),
+            control_trust=control_trust(),
             clock=clock(),
         )
+        with contextlib.ExitStack() as stack:
+            state_preparer = stack.enter_context(
+                mock.patch(
+                    "CodexSkills.registry.auto.runtime.orchestrator."
+                    "prepare_state_root"
+                )
+            )
+            layout = stack.enter_context(
+                mock.patch(
+                    "CodexSkills.registry.auto.runtime.orchestrator."
+                    "StateLayout"
+                )
+            )
+            registry = stack.enter_context(
+                mock.patch(
+                    "CodexSkills.registry.auto.runtime.orchestrator."
+                    "RootRegistry"
+                )
+            )
+            lock = stack.enter_context(
+                mock.patch(
+                    "CodexSkills.registry.auto.runtime.orchestrator."
+                    "SingleFlightLock"
+                )
+            )
+            with self.assertRaisesRegex(
+                AutoRuntimeError,
+                "RUNTIME_CONTROL_SYNC_REQUIRED_BEFORE_STATE_WRITE",
+            ):
+                runner.run(
+                    owner_run_uid=uid("run", 9),
+                    trigger_kind="MANUAL",
+                    last_full_local_date=None,
+                    lane_executors={},
+                )
+            state_preparer.assert_not_called()
+            layout.assert_not_called()
+            registry.assert_not_called()
+            lock.assert_not_called()
+        self.assertFalse(self.state.exists())
 
     def test_candidate_run_uses_both_lanes_but_cannot_publish(self) -> None:
         def registry(_context, forced):
@@ -293,7 +361,11 @@ class RuntimeOrchestratorTests(unittest.TestCase):
                 state_root=state,
                 protected_roots=(RootEntry("source", "SKILL_SOURCE", self.source),),
                 trust=trust(),
+                control_trust=control_trust(),
                 clock=clock(),
+                bootstrap=lambda _repo, _trust, _control: (
+                    control_synced_context()
+                ),
             )
             return runner.run(
                 owner_run_uid=uid("run", 20 if trigger == "MANUAL" else 21),

@@ -7,12 +7,14 @@ Do not define or reinterpret Skill Identity, Instance, Version, Eval,
 Promotion, retention-policy, notification-policy, or bundle semantics here.
 Those remain Mechanism-owned under `CodexSkills/governance/`.
 
-Public schemas in `schemas/public/` are candidates for the shared 29-schema
-bundle. Private schemas in `schemas/private/` are operational state contracts
-and must never enter that bundle. Every object layer is closed, every public
-string is bounded by enum/pattern/length, and all references resolve through
-the repository's offline Registry. Network schema resolution and runtime
-dependency installation are forbidden.
+`schemas/public/` preserves the historical 29-schema candidate's Auto members.
+The final 31-schema candidate keeps six of those members and explicitly adds
+the four promoted schemas under the isolated stable
+`schemas/public-v2/` root. Private schemas in `schemas/private/` are
+operational state contracts and must never enter a shared bundle. Every object
+layer is closed, every public string is bounded by enum/pattern/length, and all
+references resolve through the repository's offline Registry. Network schema
+resolution and runtime dependency installation are forbidden.
 
 `DRAFT_NON_ACTIVE` files must not create or update `CodexSkills/VERSION`, an
 active/candidate bundle manifest, canonical data, an automation prompt, or a

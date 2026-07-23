@@ -5,35 +5,38 @@
     "notification_provider_status",
     "shared_gate_status_map"
   ],
-  "activation_control_baseline_git_object_id": "sha1:3a0b8222cf52d6a35f31986c411ac98daed06c5c",
-  "activation_control_baseline_interface_raw_sha256": "70b4e8c8ab47db541c90bbc6ebf092a483ca776c07b84b939b5a9b0be783e5c2",
+  "activation_control_baseline_git_object_id": "sha1:66d5bafadca508cad825b4ce49a42e81e8b66ef7",
+  "activation_control_baseline_interface_raw_sha256": "86e4d625bdab87261a39c949883d410822e25e0222dbab6a333d171ce420c614",
   "activation_control_interface_path": "CodexSkills/governance/activation/control-interface.json",
   "activation_control_mode": "DRAFT_NON_ACTIVE_CONTROL",
+  "activation_control_observed_root_status": "DRAFT_NON_ACTIVE",
   "activation_control_trust_tuple_repo_external_only": true,
   "activation_forbidden_without_coordinated_m0c": true,
   "activation_handshake_entrypoint": "CodexSkills/registry/auto/tools/activation_handshake_cli.py",
   "activation_instance_created": false,
   "activation_settlement_recomputed_before_publish": true,
-  "au_040_authority_ruling_status": "AUTO_SCHEMA_PROMOTED_MECHANISM_MATERIALIZATION_PENDING",
-  "au_040_consumer_manifest_path_contract_present": false,
+  "au_040_authority_ruling_status": "FINAL_31_5_INTEGRATED_RUNTIME_WRITER_PENDING",
+  "au_040_consumer_manifest_path_contract_present": true,
   "au_040_daily_jsonl_shard_complete": false,
-  "au_040_manifest_contract_resolved": false,
-  "au_040_retention_policy_v3_present": false,
+  "au_040_manifest_contract_resolved": true,
+  "au_040_retention_policy_v3_present": true,
   "au_040_retention_policy_v3_repository_accepted": true,
   "au_040_schema_promotion_complete": true,
   "au_040_semantic_policy_acceptance_complete": true,
   "au_040_transport_contract": {
     "acceptance_interface_path": "CodexSkills/governance/au040/semantic-policy-acceptance.json",
     "acceptance_interface_raw_sha256": "3385df5975859ef0774d2086a8aa28a0336307e3343e7832eec9e2f024504fda",
-    "current_candidate_schema_count": 29,
+    "current_candidate_schema_count": 31,
     "daily_manifest_path_pattern": "OpenAIDatabase/data/run_logs/skills_runs/YYYY/MM/DD/manifest-NNNN.json",
     "daily_manifest_schema_id": "urn:linzecolin:agentdatabase:skillops:schema:daily-run-shard-manifest:v1",
     "draft_interface_path": "CodexSkills/registry/auto/transport-draft/draft-interface.json",
     "draft_interface_raw_sha256": "aa4d1b174d45b87424b81f0896c7a594e72f24bfdc16e4128c133ed543fb3831",
     "draft_paths_forbidden_in_candidate_manifest": true,
     "draft_schema_count": 4,
+    "final_candidate_materialization_complete": true,
     "historical_candidate_manifest_exact_blob_verified": true,
     "historical_candidate_manifest_raw_sha256": "0d2600fd54fcb1fb5dd0901d9acc31b43b5cae0be8ee599f5c3c7ca0b01f9109",
+    "historical_candidate_schema_count": 29,
     "loader_isolation_root": "CodexSkills/registry/auto/schemas/public-v2/",
     "manifest_entry_numbers_contiguous": true,
     "part_numbers_reused": false,
@@ -54,6 +57,7 @@
     "proposed_active_policy_count": 5,
     "proposed_active_schema_count": 31,
     "publisher_serialization_discriminator_required": true,
+    "publisher_v2_runtime_integration_complete": false,
     "repository_bound": false,
     "required_mechanism_public_value_allowlist_additions": [
       "first_event_digest",
@@ -69,6 +73,7 @@
     ],
     "retention_exact_affected_records_required": true,
     "retention_index_readiness_required": true,
+    "runtime_shard_writer_integration_complete": false,
     "schema_promotion_evidence_git_object_id": "sha1:ab49666bd3343c2abbfc6766478fad63d44163d0",
     "schema_promotion_interface_path": "CodexSkills/registry/auto/schemas/public-v2/promotion-interface.json",
     "schema_promotion_interface_raw_sha256": "65c2e83bb2491d1cb3059767cf1705fc7541bd7e97449f33a51ba17a04f5e595",
@@ -76,17 +81,19 @@
     "working_tree_manifest_assumed_historical_candidate": false
   },
   "au_040_transport_schema_draft_complete": true,
-  "candidate_bundle_digest": "2704ed797c843f969965db600747abcdcd217550522e6479aab6817ef5a86ef5",
-  "candidate_git_object_id": "sha1:899a4374bc02f5e18444fea7404864df7b118adf",
+  "auto_exact_bundle_integration_complete": true,
+  "candidate_bundle_digest": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e",
+  "candidate_git_object_id": "sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5",
   "candidate_manifest_path": "CodexSkills/governance/bundles/schema-bundle-manifest.v1.json",
+  "candidate_manifest_raw_sha256": "66ad125629cab71739ff2bc266219f995f7a45998936ca720c6db678ee77e65a",
   "canonical_publication_permitted": false,
   "capability_gate_precedes_state_write": true,
   "consumer_first_canonical_publication_permitted": false,
   "consumer_first_gate_satisfied": true,
   "consumer_first_interface_path": "OpenAIDatabase/config/evaluation/skill_run_consumer.json",
-  "consumer_first_interface_raw_sha256": "750a374f5eb20497baab79305dc31248a7495cf3c7dee827cad19d13e08e2082",
-  "consumer_first_observed_bundle_digest": "2704ed797c843f969965db600747abcdcd217550522e6479aab6817ef5a86ef5",
-  "consumer_first_observed_candidate_git_object_id": "sha1:899a4374bc02f5e18444fea7404864df7b118adf",
+  "consumer_first_interface_raw_sha256": "189a47300fc1aa6012e87feb6184833cb717cdbe2b9dc9be6db89197f579939c",
+  "consumer_first_observed_bundle_digest": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e",
+  "consumer_first_observed_candidate_git_object_id": "sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5",
   "consumer_first_observed_status": "DRAFT_NON_ACTIVE_CONSUMER_READY",
   "consumer_first_owner_plane": "MECHANISM",
   "consumer_first_repository_shards_permitted": false,
@@ -95,10 +102,13 @@
     "AU_040_DAILY_JSONL_SHARD_MANIFEST",
     "BOUND_REFERENCE_RESOLVER"
   ],
-  "consumer_first_required_bundle_digest": "2704ed797c843f969965db600747abcdcd217550522e6479aab6817ef5a86ef5",
-  "consumer_first_required_candidate_git_object_id": "sha1:899a4374bc02f5e18444fea7404864df7b118adf",
+  "consumer_first_required_bundle_digest": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e",
+  "consumer_first_required_candidate_git_object_id": "sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5",
   "consumer_first_trust_tuple_drift_detected": false,
-  "consumer_first_verified_git_object_id": "sha1:2177986e897fdc50a7273f099a1305b21de2096b",
+  "consumer_first_verified_git_object_id": "sha1:91a12e48351be3ee05ec23ef61aec81056b02014",
+  "control_observed_auto_runtime_integration_complete": false,
+  "control_sync_required_before_state_write": true,
+  "dual_external_trust_tuples_required": true,
   "external_gmail_ready_gate_satisfied": false,
   "fault_test_rounds_required": 2,
   "m0c_b_permitted": false,
@@ -109,11 +119,11 @@
       "relative_path": "CodexSkills/registry/auto/runtime/__init__.py"
     },
     {
-      "artifact_digest": "358c847bb0c28fa7797c43320b55678fb47d799fdfcd9337e0a2da6041ac9b95",
+      "artifact_digest": "a2938a94d386861d0a0f51565809378fd1d70fe1c62c7dbe9376005cf2ffc9ea",
       "relative_path": "CodexSkills/registry/auto/runtime/activation.py"
     },
     {
-      "artifact_digest": "d64dcc297520a6e15e01b47ffb508ad7ada1cc9ae6b418b692e1a7a9c3e142c3",
+      "artifact_digest": "bb01106f6a46d29b344bf52a15a3c9aaabba25649eddd6dfb0b282d46161727c",
       "relative_path": "CodexSkills/registry/auto/runtime/bootstrap.py"
     },
     {
@@ -129,7 +139,7 @@
       "relative_path": "CodexSkills/registry/auto/runtime/notification.py"
     },
     {
-      "artifact_digest": "8a661eb608ea2c53a55612b7fd0363e42bc4010eceaa080b8400276d4a933e68",
+      "artifact_digest": "717257dae1ea25453322acdbcf9fe50d0cec8ba24a02a636a788317239cb7fc7",
       "relative_path": "CodexSkills/registry/auto/runtime/orchestrator.py"
     },
     {
@@ -145,7 +155,7 @@
       "relative_path": "CodexSkills/registry/auto/runtime/queue.py"
     },
     {
-      "artifact_digest": "9061b62f824d5a8024227ba53b9f300d87110cedd08861f75ec89414a4da6039",
+      "artifact_digest": "8b18ae837b8cc176ed8bc519948c31f1e5be63fc25917d03d48bcf922dee9a12",
       "relative_path": "CodexSkills/registry/auto/runtime/retention.py"
     },
     {
@@ -165,15 +175,15 @@
       "relative_path": "CodexSkills/registry/auto/runtime/state.py"
     },
     {
-      "artifact_digest": "448ead72e94d766cbfb8d3875b8e3127e0c40c95b1fbe5662b07a0f5e92a8bd8",
+      "artifact_digest": "6979e004b4fc6b26dbec90103a2518db2cd0e481c92f2ef836b2c5743fd27464",
       "relative_path": "CodexSkills/registry/auto/tools/activation_handshake_cli.py"
     },
     {
-      "artifact_digest": "a40d4c31c4ea3a20aeabd70b85658956d7faa3ade6f32cfaf9f4d4f5ac8eba43",
+      "artifact_digest": "6264cdfd3b0d32d1dee82cec63de7756e52b2f846983e6a8890ced25e9065759",
       "relative_path": "CodexSkills/registry/auto/tools/build_runtime_interface.py"
     },
     {
-      "artifact_digest": "1d3842163e6d04eeefd1de919fb6455735dba3ab8062c8972aa7871fa161e4c1",
+      "artifact_digest": "e832396535085980ceb84863119d7284b867c3f14c0430c2129e077f3acee5dc",
       "relative_path": "CodexSkills/registry/auto/tools/notification_transport_cli.py"
     },
     {
@@ -181,16 +191,16 @@
       "relative_path": "CodexSkills/registry/auto/tools/run_fault_suite.py"
     },
     {
-      "artifact_digest": "ab9aff54655e8cedaa4177a2baef4e2558896f56d414be67e06cd0f9432d7b0e",
+      "artifact_digest": "f3ee09a3270f152e0114516870a654fee4967fe767683bf67a76bc5b43ecf6e4",
       "relative_path": "CodexSkills/registry/auto/tools/runtime_preflight.py"
     },
     {
-      "artifact_digest": "fc4d3ee1a2f2f70e17f092d1bf6e77bf8787d51b745216bafe071d9f47fe2d7a",
+      "artifact_digest": "29789f298d47dcfaf981daeed27bb0cedb3394585e2bec5b32d2aa754a09eb40",
       "relative_path": "CodexSkills/registry/auto/tools/validate_auto.py"
     }
   ],
   "module_count": 21,
-  "next_phase": "MECHANISM_FINAL_31_5_CANDIDATE_CONSUMER_CONTROL",
+  "next_phase": "MECHANISM_POST_AUTO_INTEGRATION_CONTROL_SYNC",
   "notification_actual_recipient_repo_external": true,
   "notification_credentials_repo_external": true,
   "notification_external_path_contract": {
@@ -218,6 +228,8 @@
   "persistent_managed_raw_default_enabled": false,
   "protocol_revision": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1",
   "remote_readback_precedes_watermark": true,
+  "runtime_preflight_shadow_permitted": true,
+  "runtime_state_write_permitted": false,
   "schedule": {
     "daily_local_time": "04:15",
     "late_start_rejected": false,
@@ -227,7 +239,7 @@
   "schedule_authority_conflict_detected": true,
   "schedule_authority_resolved": false,
   "schedule_complete": false,
-  "shared_bundle_schema_count": 29,
+  "shared_bundle_schema_count": 31,
   "shared_policy_count": 5,
   "state_root_repo_external": true,
   "status": "DRAFT_NON_ACTIVE",

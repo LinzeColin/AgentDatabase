@@ -13,7 +13,11 @@ AUTO_DIR = Path(__file__).resolve().parents[1]
 REPO_ROOT = AUTO_DIR.parents[2]
 sys.path.insert(0, str(REPO_ROOT))
 
-from CodexSkills.registry.auto.runtime.bootstrap import bootstrap_runtime
+from CodexSkills.registry.auto.runtime.bootstrap import (
+    ControlTrustTuple,
+    bootstrap_runtime,
+    require_control_synced_runtime,
+)
 from CodexSkills.registry.auto.runtime.core import AutoRuntimeError, SystemClock
 from CodexSkills.registry.auto.runtime.gmail_api import (
     GmailApiConfig,
@@ -41,6 +45,15 @@ def _trust(args: argparse.Namespace) -> TrustTuple:
     )
 
 
+def _control_trust(args: argparse.Namespace) -> ControlTrustTuple:
+    return ControlTrustTuple(
+        args.verified_control_git_object_id,
+        args.expected_control_interface_raw_sha256,
+        args.canonical_control_interface_path,
+        args.control_mode,
+    )
+
+
 def _private_public_metadata(path: Path):
     try:
         raw = path.read_bytes()
@@ -64,8 +77,18 @@ def _reject_activation_bypass(metadata) -> None:
         )
 
 
-def _components(args: argparse.Namespace):
-    context = bootstrap_runtime(args.repo_root, _trust(args))
+def _components(
+    args: argparse.Namespace,
+    *,
+    state_write_requested: bool,
+):
+    context = bootstrap_runtime(
+        args.repo_root,
+        _trust(args),
+        _control_trust(args),
+    )
+    if state_write_requested:
+        require_control_synced_runtime(context)
     paths = NotificationPathContract.resolve(
         args.state_root,
         repo_root=args.repo_root,
@@ -88,6 +111,20 @@ def _common(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--expected-bundle-digest", required=True)
     parser.add_argument("--canonical-manifest-path", required=True)
     parser.add_argument("--mode", choices=("CANDIDATE", "ACTIVE"), required=True)
+    parser.add_argument("--verified-control-git-object-id", required=True)
+    parser.add_argument(
+        "--expected-control-interface-raw-sha256",
+        required=True,
+    )
+    parser.add_argument(
+        "--canonical-control-interface-path",
+        required=True,
+    )
+    parser.add_argument(
+        "--control-mode",
+        choices=("DRAFT_NON_ACTIVE_CONTROL",),
+        required=True,
+    )
 
 
 def main(argv: Sequence[str] = None) -> int:
@@ -106,7 +143,10 @@ def main(argv: Sequence[str] = None) -> int:
     notify.add_argument("--public-metadata-file", type=Path, required=True)
     args = parser.parse_args(argv)
 
-    context, paths, mapping, transport = _components(args)
+    context, paths, mapping, transport = _components(
+        args,
+        state_write_requested=args.command != "preflight",
+    )
     capability = transport.preflight(mapping.provider_target)
     if args.command == "preflight":
         refs = paths.public_refs()

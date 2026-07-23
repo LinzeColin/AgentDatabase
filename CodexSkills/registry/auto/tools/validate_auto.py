@@ -35,6 +35,9 @@ from validate_mechanism import (  # noqa: E402
     ContractBundle,
     ContractError,
     EXPECTED_SCHEMA_SELF_POINTERS,
+    FINAL_AUTO_PUBLIC_SCHEMA_IDS,
+    FINAL_POLICY_IDS,
+    FINAL_SCHEMA_SELF_POINTERS,
     PROTOCOL,
     TrustTuple,
     build_registry,
@@ -58,6 +61,14 @@ PUBLIC_SELF_POINTERS = {
     SCHEMA_PREFIX + "retention-receipt:v2": "/receipt_digest",
     SCHEMA_PREFIX + "source-coverage-receipt:v1": "/receipt_digest",
     SCHEMA_PREFIX + "source-inventory:v1": "/inventory_digest",
+}
+FINAL_PUBLIC_SELF_POINTERS = {
+    schema_id: FINAL_SCHEMA_SELF_POINTERS[schema_id]
+    for schema_id in FINAL_AUTO_PUBLIC_SCHEMA_IDS
+}
+ALL_PUBLIC_SELF_POINTERS = {
+    **PUBLIC_SELF_POINTERS,
+    **FINAL_PUBLIC_SELF_POINTERS,
 }
 PRIVATE_SELF_POINTERS = {
     SCHEMA_PREFIX + "lock-state:v1": "/state_digest",
@@ -204,8 +215,13 @@ def _validate_public_digest_field_policy(
     schemas: Mapping[str, Any],
     policies: Mapping[str, Any],
 ) -> None:
-    policy_id = "urn:linzecolin:agentdatabase:skillops:policy:public-value:v1"
-    policy = policies.get(policy_id)
+    policy = policies.get(
+        "urn:linzecolin:agentdatabase:skillops:policy:public-value:v2"
+    )
+    if policy is None:
+        policy = policies.get(
+            "urn:linzecolin:agentdatabase:skillops:policy:public-value:v1"
+        )
     if not isinstance(policy, dict):
         _fail("AUTO_PUBLIC_VALUE_POLICY_NOT_TRUSTED")
     allowed = set(policy["allowed_high_entropy_field_names"])
@@ -319,20 +335,54 @@ def load_trusted_auto_contract(repo_root: Path, trust: TrustTuple) -> AutoContra
 
     trusted_shared = load_trusted_bundle(repo_root, trust)
     local = load_auto_contract()
-    if set(trusted_shared.schemas) != set(local.shared.schemas):
-        _fail("AUTO_TRUSTED_SHARED_SCHEMA_SET_MISMATCH")
-    for schema_id, trusted_schema in trusted_shared.schemas.items():
-        if canonicalize_object(trusted_schema) != canonicalize_object(
-            local.shared.schemas[schema_id]
-        ):
-            _fail(f"AUTO_TRUSTED_SHARED_SCHEMA_BYTES_MISMATCH:{schema_id}")
-    if set(trusted_shared.policies) != set(local.shared.policies):
-        _fail("AUTO_TRUSTED_POLICY_SET_MISMATCH")
-    for policy_id, trusted_policy in trusted_shared.policies.items():
-        if canonicalize_object(trusted_policy) != canonicalize_object(
-            local.shared.policies[policy_id]
-        ):
-            _fail(f"AUTO_TRUSTED_POLICY_BYTES_MISMATCH:{policy_id}")
+    trusted_schema_ids = set(trusted_shared.schemas)
+    trusted_policy_ids = set(trusted_shared.policies)
+    legacy_profile = (
+        trusted_schema_ids == set(local.shared.schemas)
+        and trusted_policy_ids == set(local.shared.policies)
+    )
+    final_profile = (
+        trusted_schema_ids == set(FINAL_SCHEMA_SELF_POINTERS)
+        and trusted_policy_ids == set(FINAL_POLICY_IDS)
+    )
+    if not (legacy_profile or final_profile):
+        _fail("AUTO_TRUSTED_SHARED_PROFILE_UNSUPPORTED")
+    if legacy_profile:
+        for schema_id, trusted_schema in trusted_shared.schemas.items():
+            if canonicalize_object(trusted_schema) != canonicalize_object(
+                local.shared.schemas[schema_id]
+            ):
+                _fail(
+                    f"AUTO_TRUSTED_SHARED_SCHEMA_BYTES_MISMATCH:{schema_id}"
+                )
+        for policy_id, trusted_policy in trusted_shared.policies.items():
+            if canonicalize_object(trusted_policy) != canonicalize_object(
+                local.shared.policies[policy_id]
+            ):
+                _fail(
+                    f"AUTO_TRUSTED_POLICY_BYTES_MISMATCH:{policy_id}"
+                )
+    else:
+        local_public_schemas = load_schema_directories(
+            [
+                AUTO_DIR / "schemas" / "public",
+                AUTO_DIR / "schemas" / "public-v2",
+            ]
+        )
+        local_final_public = {
+            schema_id: local_public_schemas[schema_id]
+            for schema_id in FINAL_PUBLIC_SELF_POINTERS
+            if schema_id in local_public_schemas
+        }
+        if set(local_final_public) != set(FINAL_PUBLIC_SELF_POINTERS):
+            _fail("AUTO_FINAL_PUBLIC_SCHEMA_SET_MISMATCH")
+        for schema_id in sorted(FINAL_PUBLIC_SELF_POINTERS):
+            if canonicalize_object(
+                trusted_shared.schemas[schema_id]
+            ) != canonicalize_object(local_final_public[schema_id]):
+                _fail(
+                    f"AUTO_TRUSTED_FINAL_PUBLIC_SCHEMA_BYTES_MISMATCH:{schema_id}"
+                )
 
     object_id = trust.verified_git_object_id.split(":", 1)[1]
 
@@ -387,7 +437,7 @@ def load_trusted_auto_contract(repo_root: Path, trust: TrustTuple) -> AutoContra
         {
             schema_id: schema
             for schema_id, schema in trusted_shared.schemas.items()
-            if schema_id in PUBLIC_SELF_POINTERS
+            if schema_id in ALL_PUBLIC_SELF_POINTERS
         },
         trusted_shared.policies,
     )
@@ -701,6 +751,12 @@ def _validate_retention_receipt(instance: Mapping[str, Any]) -> None:
         _fail("RETENTION_GIT_ACTION_ON_RAW_SCOPE")
 
 
+def _validate_retention_receipt_v3(instance: Mapping[str, Any]) -> None:
+    if instance["scope"] == "GIT_CURRENT_TREE":
+        _fail("AUTO_AU040_RUNTIME_WRITER_NOT_INTEGRATED")
+    _validate_retention_receipt(instance)
+
+
 def _validate_migration_receipt(instance: Mapping[str, Any]) -> None:
     breakdown = _surface_breakdown(instance["surface_breakdown"])
     unmapped = _reason_counts(instance["unmapped_reasons"])
@@ -776,6 +832,7 @@ AUTO_SEMANTIC_VALIDATORS = {
     SCHEMA_PREFIX + "public-run-event:v2": _validate_public_run_event,
     SCHEMA_PREFIX + "publication-manifest:v1": _validate_publication_manifest,
     SCHEMA_PREFIX + "retention-receipt:v2": _validate_retention_receipt,
+    SCHEMA_PREFIX + "retention-receipt:v3": _validate_retention_receipt_v3,
     SCHEMA_PREFIX + "source-coverage-receipt:v1": _validate_source_coverage,
     SCHEMA_PREFIX + "source-inventory:v1": _validate_source_inventory,
     SCHEMA_PREFIX + "lock-state:v1": _validate_lock_state,
@@ -797,7 +854,7 @@ def validate_auto_instance(
 
     if schema_id not in AUTO_SEMANTIC_VALIDATORS:
         _fail(f"AUTO_SCHEMA_ID_UNKNOWN:{schema_id}")
-    public = schema_id in PUBLIC_SELF_POINTERS
+    public = schema_id in ALL_PUBLIC_SELF_POINTERS
     validate_instance(
         contract.development,
         instance,

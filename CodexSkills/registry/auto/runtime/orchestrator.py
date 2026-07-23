@@ -8,7 +8,12 @@ from typing import Callable, Mapping, Optional, Sequence, Tuple
 
 from CodexSkills.governance.tools.validate_mechanism import TrustTuple
 
-from .bootstrap import BootstrapContext, bootstrap_runtime
+from .bootstrap import (
+    BootstrapContext,
+    ControlTrustTuple,
+    bootstrap_runtime,
+    require_control_synced_runtime,
+)
 from .core import AutoRuntimeError, Clock
 from .roots import RootEntry, RootRegistry, prepare_state_root
 from .schedule import SchedulePolicy
@@ -44,7 +49,10 @@ class RunOutcome:
     reason_codes: Tuple[str, ...]
 
 
-BootstrapFunction = Callable[[Path, TrustTuple], BootstrapContext]
+BootstrapFunction = Callable[
+    [Path, TrustTuple, ControlTrustTuple],
+    BootstrapContext,
+]
 LaneExecutor = Callable[[BootstrapContext, bool], LaneOutcome]
 
 
@@ -58,6 +66,7 @@ class SkillOpsOrchestrator:
         state_root: Path,
         protected_roots: Sequence[RootEntry],
         trust: TrustTuple,
+        control_trust: ControlTrustTuple,
         clock: Clock,
         bootstrap: BootstrapFunction = bootstrap_runtime,
     ) -> None:
@@ -65,6 +74,7 @@ class SkillOpsOrchestrator:
         self.state_root = state_root
         self.protected_roots = tuple(protected_roots)
         self.trust = trust
+        self.control_trust = control_trust
         self.clock = clock
         self.bootstrap = bootstrap
         self.schedule = SchedulePolicy()
@@ -80,7 +90,12 @@ class SkillOpsOrchestrator:
         lock_entropy: Optional[bytes] = None,
     ) -> RunOutcome:
         # P0 ordering: nothing under state_root exists before this returns.
-        context = self.bootstrap(self.repo_root, self.trust)
+        context = self.bootstrap(
+            self.repo_root,
+            self.trust,
+            self.control_trust,
+        )
+        require_control_synced_runtime(context)
         self.schedule.validate_trusted_policy(
             context.contract.shared.policies[
                 "urn:linzecolin:agentdatabase:skillops:policy:version:v2"
