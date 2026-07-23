@@ -87,10 +87,43 @@ class RuntimeBootstrapTests(unittest.TestCase):
         )
         self.assertEqual(
             interface["au_040_authority_ruling_status"],
-            "READ_ONLY_REVISION_6_NOT_REPOSITORY_BOUND",
+            "AUTO_TRANSPORT_DRAFT_PRESENT_MECHANISM_NOT_ACCEPTED",
         )
+        self.assertTrue(interface["au_040_transport_schema_draft_complete"])
+        self.assertFalse(interface["au_040_retention_policy_v3_present"])
         self.assertFalse(
             interface["au_040_transport_contract"]["repository_bound"]
+        )
+        self.assertEqual(
+            interface["au_040_transport_contract"][
+                "current_candidate_schema_count"
+            ],
+            29,
+        )
+        self.assertEqual(
+            interface["au_040_transport_contract"][
+                "proposed_active_schema_count"
+            ],
+            31,
+        )
+        self.assertFalse(
+            interface["au_040_transport_contract"][
+                "proposed_active_policy_contract_complete"
+            ]
+        )
+        self.assertTrue(
+            interface["au_040_transport_contract"][
+                "promotion_required_before_candidate_materialization"
+            ]
+        )
+        self.assertTrue(
+            interface["au_040_transport_contract"][
+                "draft_paths_forbidden_in_candidate_manifest"
+            ]
+        )
+        self.assertEqual(
+            interface["au_040_transport_contract"]["loader_isolation_root"],
+            "CodexSkills/registry/auto/schemas/public-v2/",
         )
         self.assertEqual(
             interface["au_040_transport_contract"][
@@ -107,7 +140,7 @@ class RuntimeBootstrapTests(unittest.TestCase):
         )
         self.assertEqual(
             interface["next_phase"],
-            "AUTO_AU040_TRANSPORT_SCHEMA_DRAFT",
+            "MECHANISM_AU040_SEMANTIC_POLICY_ACCEPTANCE",
         )
         self.assertTrue(interface["schedule_authority_conflict_detected"])
         self.assertFalse(interface["schedule_authority_resolved"])
@@ -135,6 +168,11 @@ class RuntimeBootstrapTests(unittest.TestCase):
                 "AUTO_CONSUMER_INTERFACE_RAW_DIGEST_MISMATCH",
             ):
                 module._consumer_first_evidence(tampered)
+            with self.assertRaisesRegex(
+                ValueError,
+                "AUTO_TRANSPORT_DRAFT_INTERFACE_RAW_DIGEST_MISMATCH",
+            ):
+                module._transport_draft_evidence(tampered)
 
     def test_bootstrap_failure_precedes_state_root_creation(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:

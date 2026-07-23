@@ -2,17 +2,24 @@
 
 State: `DRAFT_NON_ACTIVE`.
 
-This Auto-owned directory contains eight public schemas, four Auto-private
-schemas, deterministic builders/validators, and the non-active runtime safety
-kernel. The public set belongs to the exact Mechanism M0b shared candidate;
-the private set never enters the shared bundle.
+This Auto-owned directory contains eight current public schemas, four
+Auto-private schemas, deterministic builders/validators, and the non-active
+runtime safety kernel. The current public set belongs to the exact Mechanism
+M0b shared candidate; the private set never enters the shared bundle.
+
+`transport-draft/` separately holds four proposed AU-040 transport schemas. It
+is outside the current recursive public-schema loader, does not alter the
+trusted 29/5 candidate, and must be promoted to the stable sibling root
+`schemas/public-v2/` before any later candidate manifest may reference it.
 
 Deterministic contract entrypoints:
 
 ```bash
 /usr/bin/python3 -B CodexSkills/registry/auto/tools/build_schemas.py --check
+/usr/bin/python3 -B CodexSkills/registry/auto/tools/build_transport_draft.py --check
 /usr/bin/python3 -B CodexSkills/registry/auto/tools/build_runtime_interface.py --check
 /usr/bin/python3 -B CodexSkills/registry/auto/tools/validate_auto.py lint-draft
+/usr/bin/python3 -B CodexSkills/registry/auto/tools/validate_transport_draft.py lint-draft
 /usr/bin/python3 -B -m unittest discover \
   -s CodexSkills/registry/auto/tests -p 'test_*.py'
 ```
@@ -183,23 +190,26 @@ daily JSONL shards and a manifest under `skills_runs`, while the current
 consumer allows only `YYYY/MM/DD/part-NNNN.jsonl` plus the root README and
 would reject a manifest path.
 
-Mechanism Authority Audit Revision 6 has now frozen the direction without
-modifying the repository: each day uses immutable `part-NNNN.jsonl` shards
-plus append-only `manifest-NNNN.json` revisions under the same Sydney date.
-The daily manifest has its own proposed
-`daily-run-shard-manifest:v1` schema and is not the transaction-level
-`publication-manifest:v1`. JSONL publication requires an explicit
-per-line-serialization discriminator, bounded streaming validation, an exact
-affected-path retention receipt, and retention/index readiness. Because the
-ruling has no repository SHA or machine-interface digest yet, the current
-machine interface records it as read-only and not repository-bound; AU-040
-remains false.
+Mechanism Authority Audit Revision 6 is now represented by an Auto-owned
+repository draft under `transport-draft/`: daily manifest v1, persistent event
+index v1, publication manifest v2, and retention receipt v3. The draft
+validator composes 31 schemas with the current five policies for offline schema
+validation and tests JCS-per-line framing, exact byte evidence, daily
+arithmetic, persistent index closure, and receipt-backed pruning. The target
+`retention-policy:v3` remains absent pending Mechanism acceptance. The draft
+does not change the current candidate, consumer, control, or runtime publisher.
 
-The next independent Auto phase may draft the Auto-owned transport schemas
-and interfaces only. Mechanism must then build a new candidate and update its
-consumer before Auto can integrate the exact bundle. The schedule conflict
-remains unresolved. The external Gmail readiness gate remains false until the
-Owner injects the repo-external state root and the controlled preflight
-succeeds.
+The draft interface is deliberately `repository_bound=false`. Its schema
+entries bind both the isolation path and a unique future canonical path under
+`schemas/public-v2/`; paths containing `draft` are forbidden in a candidate
+manifest. Mechanism must first accept the semantics and public-value policy
+delta without materializing a bundle. Auto must then promote the accepted
+bytes before Mechanism creates the final 31/5 candidate, consumer, and control
+tuple. AU-040, activation, and canonical publication remain false throughout
+this phase.
+
+The schedule conflict remains unresolved. The external Gmail readiness gate
+remains false until the Owner injects the repo-external state root and the
+controlled preflight succeeds.
 Never invoke the verifier during development; the Owner selects a fresh
 verifier only after both planes finish.

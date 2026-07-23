@@ -37,6 +37,33 @@ EXPECTED_CONSUMER_REQUIRED_GATES = [
     "AU_040_DAILY_JSONL_SHARD_MANIFEST",
     "BOUND_REFERENCE_RESOLVER",
 ]
+TRANSPORT_DRAFT_INTERFACE_PATH = (
+    REPO_ROOT
+    / "CodexSkills"
+    / "registry"
+    / "auto"
+    / "transport-draft"
+    / "draft-interface.json"
+)
+TRANSPORT_DRAFT_INTERFACE_REPO_PATH = (
+    "CodexSkills/registry/auto/transport-draft/draft-interface.json"
+)
+EXPECTED_TRANSPORT_DRAFT_INTERFACE_RAW_SHA256 = (
+    "aa4d1b174d45b87424b81f0896c7a594"
+    "e72f24bfdc16e4128c133ed543fb3831"
+)
+EXPECTED_TRANSPORT_ALLOWLIST_DELTA = [
+    "first_event_digest",
+    "index_digest",
+    "index_entry_digest",
+    "last_event_digest",
+    "previous_manifest_digest",
+    "prior_artifact_digest",
+    "prior_daily_manifest_digest",
+    "retained_index_digest",
+    "retention_receipt_digest",
+    "shard_digest",
+]
 
 
 def _strict_object(pairs):
@@ -88,6 +115,76 @@ def _consumer_first_evidence(path=CONSUMER_INTERFACE_PATH):
     }
 
 
+def _transport_draft_evidence(path=TRANSPORT_DRAFT_INTERFACE_PATH):
+    raw = path.read_bytes()
+    observed_raw_digest = hashlib.sha256(raw).hexdigest()
+    if observed_raw_digest != EXPECTED_TRANSPORT_DRAFT_INTERFACE_RAW_SHA256:
+        raise ValueError("AUTO_TRANSPORT_DRAFT_INTERFACE_RAW_DIGEST_MISMATCH")
+    try:
+        interface = json.loads(
+            raw.decode("utf-8"),
+            object_pairs_hook=_strict_object,
+        )
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise ValueError("AUTO_TRANSPORT_DRAFT_INTERFACE_JSON_INVALID") from exc
+    current = interface.get("current_trusted_candidate")
+    target = interface.get("proposed_active_shared_set")
+    loader = interface.get("loader_isolation_invariant")
+    validation_context = interface.get("draft_validation_context")
+    entries = interface.get("draft_schema_entries")
+    if (
+        interface.get("status") != "DRAFT_NON_ACTIVE"
+        or interface.get("activation_forbidden") is not True
+        or interface.get("repository_bound") is not False
+        or interface.get("au_040_complete") is not False
+        or interface.get("canonical_publication_permitted") is not False
+        or interface.get("promotion_required_before_candidate_materialization")
+        is not True
+        or interface.get("draft_paths_forbidden_in_candidate_manifest")
+        is not True
+        or interface.get("required_mechanism_public_value_allowlist_additions")
+        != EXPECTED_TRANSPORT_ALLOWLIST_DELTA
+        or not isinstance(current, dict)
+        or current.get("git_object_id") != CANDIDATE_GIT_OBJECT
+        or current.get("bundle_digest") != CANDIDATE_BUNDLE_DIGEST
+        or current.get("schema_count") != 29
+        or current.get("policy_count") != 5
+        or current.get("unchanged_by_this_draft") is not True
+        or not isinstance(target, dict)
+        or target.get("target_schema_count") != 31
+        or target.get("policy_count") != 5
+        or not isinstance(loader, dict)
+        or loader.get("current_candidate_recursive_loader_root")
+        != "CodexSkills/registry/auto/schemas/public/"
+        or loader.get("proposed_canonical_root")
+        != "CodexSkills/registry/auto/schemas/public-v2/"
+        or loader.get("proposed_paths_visible_to_current_loader") is not False
+        or not isinstance(validation_context, dict)
+        or validation_context.get("retention_policy_v3_present") is not False
+        or validation_context.get("mechanism_policy_acceptance_required")
+        is not True
+        or not isinstance(entries, list)
+        or len(entries) != 4
+        or any(
+            "/transport-draft/" not in entry.get("draft_relative_path", "")
+            or not entry.get("proposed_canonical_relative_path", "").startswith(
+                "CodexSkills/registry/auto/schemas/public-v2/"
+            )
+            for entry in entries
+        )
+    ):
+        raise ValueError("AUTO_TRANSPORT_DRAFT_INTERFACE_CONTRACT_MISMATCH")
+    return {
+        "allowlist_delta": list(EXPECTED_TRANSPORT_ALLOWLIST_DELTA),
+        "current_schema_count": 29,
+        "draft_schema_count": 4,
+        "next_phase": interface["next_phase"],
+        "policy_count": 5,
+        "retention_policy_v3_present": False,
+        "target_schema_count": 31,
+    }
+
+
 def _files():
     paths = sorted((AUTO_DIR / "runtime").glob("*.py"))
     paths.extend(
@@ -105,6 +202,7 @@ def _files():
 
 def build():
     consumer = _consumer_first_evidence()
+    transport = _transport_draft_evidence()
     artifacts = []
     for path in _files():
         relative = path.relative_to(REPO_ROOT).as_posix()
@@ -140,11 +238,13 @@ def build():
         "activation_instance_created": False,
         "activation_settlement_recomputed_before_publish": True,
         "au_040_authority_ruling_status": (
-            "READ_ONLY_REVISION_6_NOT_REPOSITORY_BOUND"
+            "AUTO_TRANSPORT_DRAFT_PRESENT_MECHANISM_NOT_ACCEPTED"
         ),
         "au_040_consumer_manifest_path_contract_present": False,
         "au_040_daily_jsonl_shard_complete": False,
         "au_040_manifest_contract_resolved": False,
+        "au_040_retention_policy_v3_present": False,
+        "au_040_transport_schema_draft_complete": True,
         "au_040_transport_contract": {
             "daily_manifest_path_pattern": (
                 "OpenAIDatabase/data/run_logs/skills_runs/"
@@ -155,10 +255,33 @@ def build():
                 "schema:daily-run-shard-manifest:v1"
             ),
             "manifest_entry_numbers_contiguous": True,
+            "current_candidate_schema_count": transport[
+                "current_schema_count"
+            ],
+            "draft_interface_path": TRANSPORT_DRAFT_INTERFACE_REPO_PATH,
+            "draft_interface_raw_sha256": (
+                EXPECTED_TRANSPORT_DRAFT_INTERFACE_RAW_SHA256
+            ),
+            "draft_paths_forbidden_in_candidate_manifest": True,
+            "draft_schema_count": transport["draft_schema_count"],
+            "loader_isolation_root": (
+                "CodexSkills/registry/auto/schemas/public-v2/"
+            ),
             "part_numbers_reused": False,
             "physical_part_gaps_after_prune_permitted": True,
             "publisher_serialization_discriminator_required": True,
             "repository_bound": False,
+            "promotion_required_before_candidate_materialization": True,
+            "proposed_active_policy_count": transport["policy_count"],
+            "proposed_active_policy_contract_complete": transport[
+                "retention_policy_v3_present"
+            ],
+            "proposed_active_schema_count": transport[
+                "target_schema_count"
+            ],
+            "required_mechanism_public_value_allowlist_additions": (
+                transport["allowlist_delta"]
+            ),
             "retention_exact_affected_records_required": True,
             "retention_index_readiness_required": True,
             "transaction_manifest_v1_role": "TRANSACTION_SETTLEMENT_ONLY",
@@ -204,7 +327,7 @@ def build():
         "module_artifacts": artifacts,
         "module_count": len(artifacts),
         "m0c_b_permitted": False,
-        "next_phase": "AUTO_AU040_TRANSPORT_SCHEMA_DRAFT",
+        "next_phase": transport["next_phase"],
         "notification_actual_recipient_repo_external": True,
         "notification_credentials_repo_external": True,
         "notification_external_path_contract": {

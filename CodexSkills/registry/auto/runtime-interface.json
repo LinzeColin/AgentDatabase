@@ -14,22 +14,46 @@
   "activation_handshake_entrypoint": "CodexSkills/registry/auto/tools/activation_handshake_cli.py",
   "activation_instance_created": false,
   "activation_settlement_recomputed_before_publish": true,
-  "au_040_authority_ruling_status": "READ_ONLY_REVISION_6_NOT_REPOSITORY_BOUND",
+  "au_040_authority_ruling_status": "AUTO_TRANSPORT_DRAFT_PRESENT_MECHANISM_NOT_ACCEPTED",
   "au_040_consumer_manifest_path_contract_present": false,
   "au_040_daily_jsonl_shard_complete": false,
   "au_040_manifest_contract_resolved": false,
+  "au_040_retention_policy_v3_present": false,
   "au_040_transport_contract": {
+    "current_candidate_schema_count": 29,
     "daily_manifest_path_pattern": "OpenAIDatabase/data/run_logs/skills_runs/YYYY/MM/DD/manifest-NNNN.json",
     "daily_manifest_schema_id": "urn:linzecolin:agentdatabase:skillops:schema:daily-run-shard-manifest:v1",
+    "draft_interface_path": "CodexSkills/registry/auto/transport-draft/draft-interface.json",
+    "draft_interface_raw_sha256": "aa4d1b174d45b87424b81f0896c7a594e72f24bfdc16e4128c133ed543fb3831",
+    "draft_paths_forbidden_in_candidate_manifest": true,
+    "draft_schema_count": 4,
+    "loader_isolation_root": "CodexSkills/registry/auto/schemas/public-v2/",
     "manifest_entry_numbers_contiguous": true,
     "part_numbers_reused": false,
     "physical_part_gaps_after_prune_permitted": true,
+    "promotion_required_before_candidate_materialization": true,
+    "proposed_active_policy_contract_complete": false,
+    "proposed_active_policy_count": 5,
+    "proposed_active_schema_count": 31,
     "publisher_serialization_discriminator_required": true,
     "repository_bound": false,
+    "required_mechanism_public_value_allowlist_additions": [
+      "first_event_digest",
+      "index_digest",
+      "index_entry_digest",
+      "last_event_digest",
+      "previous_manifest_digest",
+      "prior_artifact_digest",
+      "prior_daily_manifest_digest",
+      "retained_index_digest",
+      "retention_receipt_digest",
+      "shard_digest"
+    ],
     "retention_exact_affected_records_required": true,
     "retention_index_readiness_required": true,
     "transaction_manifest_v1_role": "TRANSACTION_SETTLEMENT_ONLY"
   },
+  "au_040_transport_schema_draft_complete": true,
   "candidate_bundle_digest": "2704ed797c843f969965db600747abcdcd217550522e6479aab6817ef5a86ef5",
   "candidate_git_object_id": "sha1:899a4374bc02f5e18444fea7404864df7b118adf",
   "candidate_manifest_path": "CodexSkills/governance/bundles/schema-bundle-manifest.v1.json",
@@ -123,7 +147,7 @@
       "relative_path": "CodexSkills/registry/auto/tools/activation_handshake_cli.py"
     },
     {
-      "artifact_digest": "167f06f29a590d3e0250c056228cb8788bd69efcf6389e1d1d857017fe7a1611",
+      "artifact_digest": "59397181d0a269ba207c435c433546af390ed61155dc5131bbb48d6242f307f7",
       "relative_path": "CodexSkills/registry/auto/tools/build_runtime_interface.py"
     },
     {
@@ -144,7 +168,7 @@
     }
   ],
   "module_count": 21,
-  "next_phase": "AUTO_AU040_TRANSPORT_SCHEMA_DRAFT",
+  "next_phase": "MECHANISM_AU040_SEMANTIC_POLICY_ACCEPTANCE",
   "notification_actual_recipient_repo_external": true,
   "notification_credentials_repo_external": true,
   "notification_external_path_contract": {
