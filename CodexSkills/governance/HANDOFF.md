@@ -1,7 +1,7 @@
 # Mechanism handoff
 
 - State: DRAFT_NON_ACTIVE
-- Phase: MECHANISM_REPIN_CONSUMER_TRUST_TUPLE
+- Phase: MECHANISM_AU040_SEMANTIC_POLICY_ACCEPTANCE
 - Task Pack authority: immutable CodexSkills-Mechanism-Design-TaskPack-v0.0.0.2
 - Protocol: urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1
 - SRV candidate: v0.0.0.3
@@ -115,6 +115,36 @@ interface raw SHA-256 is
 - OpenAIDatabase lifecycle, minimum validation, harness, README, and regression
   tests now identify `skills_runs` as a separate consumer surface.
 
+## Completed in AU-040 semantic/policy acceptance
+
+- Auto's four transport schemas are accepted at their exact draft byte
+  digests and self-digest pointers; promotion may only copy those bytes into
+  `CodexSkills/registry/auto/schemas/public-v2/`.
+- Public-value policy v1 is not mutated. Versioned
+  `public-value-policy:v2` / `public-value:v2` add exactly ten digest field
+  names while preserving the detector, forbidden-field and repo-external
+  recipient contracts. Generic digest aliases, malformed values and
+  low-entropy sensitive-value hashes remain forbidden.
+- Retention policy v3 freezes 365 elapsed 24-hour days from
+  `first_published_at`, retention at the exact boundary, strict eligibility
+  only after the boundary, a 24-hour audit deadline whose equality is on time,
+  and truthful gap evidence after a breach. Host/App unavailability remains a
+  recorded limitation, never a hard deadline guarantee.
+- Seven Mechanism-owned semantic gates close constraints JSON Schema cannot
+  establish alone: exact canonical physical bytes, index/event/manifest
+  linkage, immutable existing part metadata, exact append-only predecessor
+  revisions, paired new part/index/manifest publication, and paired
+  delete/retention-receipt/new-manifest publication.
+- Retention receipts use the versioned daily-tree pattern
+  `YYYY/MM/DD/retention-receipt-NNNN.json`; they are public JCS objects and
+  must be in the same RUN_LOG transaction as the deletion and new manifest.
+- The accepted target is exactly 31 schemas/five policies. The current
+  candidate remains exactly 29/five and no bundle, consumer, control,
+  VERSION, runtime state, shard, receipt instance or canonical publication was
+  materialized.
+- Machine handoff:
+  `CodexSkills/governance/au040/semantic-policy-acceptance.json`.
+
 ## Explicitly not active / current capability state
 
 M0c-A does not create `CodexSkills/VERSION`, an ACTIVE manifest, activation
@@ -133,7 +163,7 @@ remains unproved until M0c-B performs an actual send and exact provider
 readback. A connected Gmail App is not a substitute for that production trust
 root. Missing external state fails closed.
 
-This phase does not claim AU-040. The shared v0.0.0.3 candidate has individual
+This phase still does not claim AU-040. The shared v0.0.0.3 candidate has individual
 `public-run-event:v2` records and a transaction-level
 `publication-manifest:v1`, but no proven daily JSONL shard/manifest payload
 contract. BOUND events also remain blocked from canonical publication until
@@ -141,13 +171,14 @@ the Registry-backed exact reference resolver lands.
 
 ## Next exact action
 
-A separate read-only capability gate must prove the owner-held state root,
-recipient mapping, Gmail OAuth scopes, authenticated-recipient binding, and
-provider lookup/readback are ready. If any fact remains absent, the only next
-action is owner provisioning; no intent instance or email may be fabricated.
+Auto may run only `AUTO_SCHEMA_PROMOTION_TO_FINAL_PATHS`: copy the four
+accepted schema byte streams exactly into the frozen `public-v2/` paths,
+acknowledge the seven Mechanism semantic guards, and keep the candidate,
+consumer, control, runtime integration, activation and canonical publication
+unchanged. Mechanism may build the final 31/5 candidate and update the
+consumer/control only after that promotion is independently read back.
 
-Only after that gate is READY may an independent M0c-B run create the intent,
-obtain a real provider `SENT` receipt, settle, FF-safe publish, remotely read
-back, and establish the external ACTIVE trust tuple. AU-040 and the BOUND
-reference resolver remain later blockers for canonical run-log publication
-even after v0.0.0.3 activation.
+The exact daily schedule authority remains unresolved: the directly frozen
+contract says 04:15 while a later Auto goal says 05:30 without explicitly
+overriding it. Neither time may be presented as final until Owner resolves the
+precedence. Gmail/state readiness and M0c-B also remain false.

@@ -1,0 +1,188 @@
+{
+  "accepted_auto_transport_schemas": [
+    {
+      "draft_relative_path": "CodexSkills/registry/auto/transport-draft/schemas/public/daily-run-shard-manifest.schema.json",
+      "id": "urn:linzecolin:agentdatabase:skillops:schema:daily-run-shard-manifest:v1",
+      "proposed_canonical_relative_path": "CodexSkills/registry/auto/schemas/public-v2/daily-run-shard-manifest.schema.json",
+      "schema_sha256": "e9214388da78376da47770934454d65a57659d1dde33fa0cb4e36b79e4665337",
+      "self_digest_pointer": "/manifest_digest"
+    },
+    {
+      "draft_relative_path": "CodexSkills/registry/auto/transport-draft/schemas/public/publication-manifest-v2.schema.json",
+      "id": "urn:linzecolin:agentdatabase:skillops:schema:publication-manifest:v2",
+      "proposed_canonical_relative_path": "CodexSkills/registry/auto/schemas/public-v2/publication-manifest-v2.schema.json",
+      "schema_sha256": "e7f8c4dd623379052829a21e3fcae77a98f14b3da1d79bb8f1d416f828063346",
+      "self_digest_pointer": "/manifest_digest"
+    },
+    {
+      "draft_relative_path": "CodexSkills/registry/auto/transport-draft/schemas/public/retention-receipt-v3.schema.json",
+      "id": "urn:linzecolin:agentdatabase:skillops:schema:retention-receipt:v3",
+      "proposed_canonical_relative_path": "CodexSkills/registry/auto/schemas/public-v2/retention-receipt-v3.schema.json",
+      "schema_sha256": "81435881fbc5e1ced14975edbedee63ca6555674db36f906bdfdee20eb317c45",
+      "self_digest_pointer": "/receipt_digest"
+    },
+    {
+      "draft_relative_path": "CodexSkills/registry/auto/transport-draft/schemas/public/run-event-index-entry.schema.json",
+      "id": "urn:linzecolin:agentdatabase:skillops:schema:run-event-index-entry:v1",
+      "proposed_canonical_relative_path": "CodexSkills/registry/auto/schemas/public-v2/run-event-index-entry.schema.json",
+      "schema_sha256": "27663e9da3d9511cf9a03d1fe6f4b3779b1bbdab8f2f8adb94a274b8653a1433",
+      "self_digest_pointer": "/index_entry_digest"
+    }
+  ],
+  "activation_forbidden": true,
+  "auto_draft_semantic_validator_production_eligible": false,
+  "bundle_materialization_forbidden": true,
+  "canonical_publication_permitted": false,
+  "cross_artifact_semantic_gates": [
+    {
+      "code": "CANONICAL_BYTES_PHYSICAL_DIGEST_CLOSURE"
+    },
+    {
+      "code": "INDEX_EVENT_MANIFEST_CLOSURE"
+    },
+    {
+      "code": "MANIFEST_PART_IMMUTABILITY"
+    },
+    {
+      "code": "MANIFEST_PREDECESSOR_EXACT_CHAIN"
+    },
+    {
+      "code": "PRUNE_TRANSACTION_ARTIFACT_SET_CLOSURE"
+    },
+    {
+      "code": "RETENTION_ANCHOR_EXACT_365D"
+    },
+    {
+      "code": "SHARD_TRANSACTION_ARTIFACT_SET_CLOSURE"
+    }
+  ],
+  "current_candidate": {
+    "bundle_digest": "2704ed797c843f969965db600747abcdcd217550522e6479aab6817ef5a86ef5",
+    "canonical_manifest_path": "CodexSkills/governance/bundles/schema-bundle-manifest.v1.json",
+    "git_object_id": "sha1:899a4374bc02f5e18444fea7404864df7b118adf",
+    "policy_count": 5,
+    "schema_count": 29,
+    "unchanged_by_this_phase": true
+  },
+  "mechanism_policy_entries": [
+    {
+      "id": "urn:linzecolin:agentdatabase:skillops:policy:public-value:v2",
+      "policy_sha256": "cff871b00dec9d33ba6bd879e02b7039cef57d11e35bdc4c57a80d4d3ea519d4",
+      "relative_path": "CodexSkills/governance/policies-v2/public-value-policy.v2.json",
+      "replaces_policy_id": "urn:linzecolin:agentdatabase:skillops:policy:public-value:v1",
+      "schema_id": "urn:linzecolin:agentdatabase:skillops:schema:public-value-policy:v2"
+    },
+    {
+      "id": "urn:linzecolin:agentdatabase:skillops:policy:retention:v3",
+      "policy_sha256": "bcad1e50a847e040d1350ca2fd977503b4ae642deabd727266e9dbbd26acb7ce",
+      "relative_path": "CodexSkills/governance/policies-v2/retention-policy.v3.json",
+      "replaces_policy_id": "urn:linzecolin:agentdatabase:skillops:policy:retention:v2",
+      "schema_id": "urn:linzecolin:agentdatabase:skillops:schema:retention-policy:v3"
+    }
+  ],
+  "mechanism_policy_schema_entries": [
+    {
+      "id": "urn:linzecolin:agentdatabase:skillops:schema:public-value-policy:v2",
+      "relative_path": "CodexSkills/governance/schemas-v2/public-value-policy.schema.json",
+      "replaces_schema_id": "urn:linzecolin:agentdatabase:skillops:schema:public-value-policy:v1",
+      "schema_sha256": "16a233cab9f403b25da933414156f0f776a76c06518b792a0ff9691d813793aa",
+      "self_digest_pointer": null
+    },
+    {
+      "id": "urn:linzecolin:agentdatabase:skillops:schema:retention-policy:v3",
+      "relative_path": "CodexSkills/governance/schemas-v2/retention-policy.schema.json",
+      "replaces_schema_id": "urn:linzecolin:agentdatabase:skillops:schema:retention-policy:v2",
+      "schema_sha256": "ad5637fad9600941db02ce3cc5f3078d9cc96730603407ff0c019588a32d0ea3",
+      "self_digest_pointer": null
+    }
+  ],
+  "next_phase": "AUTO_SCHEMA_PROMOTION_TO_FINAL_PATHS",
+  "owner_plane": "MECHANISM",
+  "production_semantic_guard_codes_required": [
+    "CANONICAL_BYTES_PHYSICAL_DIGEST_CLOSURE",
+    "INDEX_EVENT_MANIFEST_CLOSURE",
+    "MANIFEST_PART_IMMUTABILITY",
+    "MANIFEST_PREDECESSOR_EXACT_CHAIN",
+    "PRUNE_TRANSACTION_ARTIFACT_SET_CLOSURE",
+    "RETENTION_ANCHOR_EXACT_365D",
+    "SHARD_TRANSACTION_ARTIFACT_SET_CLOSURE"
+  ],
+  "promotion_contract": {
+    "auto_schema_bytes_may_change_during_promotion": false,
+    "draft_paths_forbidden_in_candidate_manifest": true,
+    "exact_byte_auto_schema_promotion_permitted": true,
+    "final_auto_schema_path": "CodexSkills/registry/auto/schemas/public-v2",
+    "mechanism_semantic_guard_consumption_required_before_runtime_integration": true
+  },
+  "protocol_revision": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1",
+  "public_value_contract": {
+    "approved_value_shape": "LOWERCASE_SHA256_HEX_64",
+    "generic_digest_field_substitution_allowed": false,
+    "low_entropy_sensitive_value_hash_publication_allowed": false,
+    "replacement_policy_id": "urn:linzecolin:agentdatabase:skillops:policy:public-value:v2",
+    "required_allowlist_additions": [
+      "first_event_digest",
+      "index_digest",
+      "index_entry_digest",
+      "last_event_digest",
+      "previous_manifest_digest",
+      "prior_artifact_digest",
+      "prior_daily_manifest_digest",
+      "retained_index_digest",
+      "retention_receipt_digest",
+      "shard_digest"
+    ]
+  },
+  "repository_bound": false,
+  "retention_contract": {
+    "active_tree_days": 365,
+    "active_tree_elapsed_seconds": 31536000,
+    "boundary_is_retained": true,
+    "deadline_equality_is_on_time": true,
+    "hard_deadline_guarantee_claimed": false,
+    "prune_deadline_hours": 24,
+    "prune_eligibility": "NOW_STRICTLY_GREATER_THAN_RETENTION_NOT_BEFORE",
+    "receipt_path": "OpenAIDatabase/data/run_logs/skills_runs/YYYY/MM/DD/retention-receipt-NNNN.json",
+    "replacement_policy_id": "urn:linzecolin:agentdatabase:skillops:policy:retention:v3",
+    "schedule_independent": true,
+    "timezone": "Australia/Sydney"
+  },
+  "schema_version": "urn:linzecolin:agentdatabase:skillops:interface:au040-semantic-policy-acceptance:v1",
+  "source_auto_draft_trust": {
+    "canonical_interface_path": "CodexSkills/registry/auto/transport-draft/draft-interface.json",
+    "expected_interface_object_id": "sha256:aa4d1b174d45b87424b81f0896c7a594e72f24bfdc16e4128c133ed543fb3831",
+    "mode": "DRAFT_NON_ACTIVE",
+    "verified_git_object_id": "sha1:3a133ee8a812bac6a577e93102df9981240659e1"
+  },
+  "status": "DRAFT_NON_ACTIVE_SEMANTIC_POLICY_ACCEPTED",
+  "target_shared_set": {
+    "added_schema_ids": [
+      "urn:linzecolin:agentdatabase:skillops:schema:daily-run-shard-manifest:v1",
+      "urn:linzecolin:agentdatabase:skillops:schema:run-event-index-entry:v1"
+    ],
+    "current_policy_count": 5,
+    "current_schema_count": 29,
+    "replaced_policy_ids": [
+      "urn:linzecolin:agentdatabase:skillops:policy:public-value:v1",
+      "urn:linzecolin:agentdatabase:skillops:policy:retention:v2"
+    ],
+    "replaced_schema_ids": [
+      "urn:linzecolin:agentdatabase:skillops:schema:publication-manifest:v1",
+      "urn:linzecolin:agentdatabase:skillops:schema:public-value-policy:v1",
+      "urn:linzecolin:agentdatabase:skillops:schema:retention-receipt:v2",
+      "urn:linzecolin:agentdatabase:skillops:schema:retention-policy:v2"
+    ],
+    "replacement_policy_ids": [
+      "urn:linzecolin:agentdatabase:skillops:policy:public-value:v2",
+      "urn:linzecolin:agentdatabase:skillops:policy:retention:v3"
+    ],
+    "replacement_schema_ids": [
+      "urn:linzecolin:agentdatabase:skillops:schema:publication-manifest:v2",
+      "urn:linzecolin:agentdatabase:skillops:schema:public-value-policy:v2",
+      "urn:linzecolin:agentdatabase:skillops:schema:retention-receipt:v3",
+      "urn:linzecolin:agentdatabase:skillops:schema:retention-policy:v3"
+    ],
+    "target_policy_count": 5,
+    "target_schema_count": 31
+  }
+}

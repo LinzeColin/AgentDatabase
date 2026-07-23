@@ -19,13 +19,23 @@ Key entrypoints:
   write-set validator.
 - `tools/validate_public_run_event.py`: Mechanism-owned semantic consumer for
   the Auto-owned `public-run-event:v2` schema.
+- `tools/build_au040_semantic_acceptance.py`: deterministic, loader-isolated
+  AU-040 policy/schema acceptance materialization.
+- `tools/validate_au040_semantic_acceptance.py`: exact 365-day and
+  shard/index/manifest/publication cross-artifact gates.
 - `tests/test_mechanism_contract.py`: positive, negative, and fault gates.
 - `tests/test_activation_contract.py`: M0c activation cycle, provider, and
   byte-binding gates.
+- `tests/test_au040_semantic_policy_acceptance.py`: policy-version,
+  retention-boundary, manifest-chain, physical-byte, and transaction-closure
+  regressions.
 - `draft-interface.json`: exact M0a interface for Auto A1a.
 - `bundles/schema-bundle-manifest.v1.json`: complete M0b candidate manifest.
 - `activation/control-interface.json`: exact M0c-A interface for the Auto
   activation-handshake corrective.
+- `au040/semantic-policy-acceptance.json`: non-active handoff that accepts the
+  four exact Auto transport-schema byte digests and freezes the two versioned
+  Mechanism policy replacements plus seven production semantic guards.
 - `OpenAIDatabase/scripts/validate_skill_run_logs.py`: consumer-first recursive
   run-log router and pre-activation publication block.
 
@@ -39,6 +49,11 @@ Run from the repository root with the explicitly provisioned interpreter:
 /usr/bin/python3 -B CodexSkills/governance/tools/validate_mechanism.py lint-draft
 /usr/bin/python3 -B \
   CodexSkills/governance/tools/validate_activation.py lint-control
+/usr/bin/python3 -B \
+  CodexSkills/governance/tools/build_au040_semantic_acceptance.py --check
+/usr/bin/python3 -B \
+  CodexSkills/governance/tools/validate_au040_semantic_acceptance.py \
+  lint-acceptance
 /usr/bin/python3 -B CodexSkills/governance/tools/validate_mechanism.py \
   lint-schema-set --schema-dir CodexSkills/governance/schemas
 /usr/bin/python3 -B CodexSkills/governance/tools/validate_mechanism.py \
@@ -97,3 +112,19 @@ The repository run root must remain README-only until ACTIVE external trust,
 Auto AU-040 daily shard/manifest support, and the Mechanism BOUND reference
 resolver all exist. Synthetic records may be tested; this draft does not
 authorize canonical run-log publication.
+
+The AU-040 acceptance is deliberately outside the current candidate loaders:
+new Mechanism policy schemas live in `schemas-v2/`, policy instances live in
+`policies-v2/`, and Auto's accepted transport schemas remain in its
+`transport-draft/` root. The current 29-schema/5-policy candidate therefore
+remains byte-for-byte unchanged. The accepted target is 31 schemas and five
+policies: it replaces both the public-value and retention policy contracts
+rather than mutating either version in place.
+
+Schema shape alone is insufficient for the daily ledger. Production must also
+consume the Mechanism semantic guard set: exact 365 elapsed days from
+`first_published_at`, strict post-boundary eligibility, exact predecessor
+manifest chaining, immutable part metadata, index/event/manifest and physical
+byte closure, paired part/index/manifest publication, and paired
+part-delete/retention-receipt/manifest publication. The Auto draft validator
+is useful draft evidence but is explicitly not a production trust root.
