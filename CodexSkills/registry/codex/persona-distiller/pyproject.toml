@@ -1,0 +1,11 @@
+[project]
+name = "persona-distiller"
+version = "0.0.0.3"
+description = "Evidence-grounded executable target-person Agent Skill builder"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+
+[tool.persona-distiller]
+default_install_root = "~/.codex/skills"
+network_build = true
+network_runtime = false

@@ -1,0 +1,33 @@
+{
+  "chinese_name": "人物蒸馏 Skill",
+  "default_install_root": "~/.codex/skills",
+  "display_name": "人物蒸馏 Skill",
+  "identity_families": 7,
+  "license": "MIT",
+  "live_connectors_enabled": false,
+  "name": "persona-distiller",
+  "network_required_at_runtime": false,
+  "network_required_for_build": true,
+  "optional_build_inputs": [
+    "scenario",
+    "subject_origin",
+    "consent_authority",
+    "time_scope"
+  ],
+  "profiles": [
+    "quick",
+    "standard",
+    "deep"
+  ],
+  "python": ">=3.10",
+  "released_at": "2026-07-23",
+  "required_build_inputs": [
+    "target_name",
+    "identity"
+  ],
+  "research_lanes": 6,
+  "runtime_artifact_version": "0.0.0.N",
+  "runtime_identity_gate": true,
+  "subagent_review_disclosure": "This package contains six isolated reviewer-role protocols. The delivery environment did not expose an independent subagent execution tool.",
+  "version": "v0.0.0.3"
+}

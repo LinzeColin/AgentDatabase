@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "builder_version": {
+      "const": "v0.0.0.3"
+    },
+    "identity_selection": {
+      "$ref": "identity-selection.schema.json"
+    },
+    "model_version": {
+      "type": "string"
+    },
+    "name": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "profile": {
+      "enum": [
+        "quick",
+        "standard",
+        "deep"
+      ]
+    },
+    "schema_version": {
+      "const": "2.0"
+    },
+    "slug": {
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "subject_origin": {
+      "enum": [
+        "public",
+        "private",
+        "self",
+        "fictional",
+        "historical"
+      ]
+    },
+    "target_id": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "target_id",
+    "name",
+    "slug",
+    "identity_selection",
+    "subject_origin",
+    "profile",
+    "status",
+    "builder_version",
+    "model_version"
+  ],
+  "title": "Persona Distiller target metadata",
+  "type": "object"
+}

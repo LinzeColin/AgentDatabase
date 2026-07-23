@@ -1,0 +1,324 @@
+{
+  "families": [
+    {
+      "aliases": [
+        "技术",
+        "工程",
+        "科学家",
+        "研究者",
+        "工程师",
+        "工匠",
+        "technical",
+        "engineer",
+        "scientist",
+        "researcher",
+        "craft"
+      ],
+      "id": "technical-engineer",
+      "merged_from": [
+        "科学家/研究者/发明者",
+        "工程师/技术领导者",
+        "工匠/实践专家"
+      ],
+      "number": 1,
+      "research_focus": [
+        "理论与因果模型",
+        "实验设计与证伪",
+        "代码/专利/设计文档",
+        "故障与失败复盘",
+        "约束下的工程取舍",
+        "质量与工艺标准"
+      ],
+      "scenario_priors": [
+        "科研选题",
+        "技术架构",
+        "问题诊断",
+        "实验验证",
+        "工程实现",
+        "质量评审"
+      ],
+      "source_priorities": [
+        "papers",
+        "experiments",
+        "code",
+        "patents",
+        "design-docs",
+        "incident-reviews",
+        "technical-talks",
+        "craft-artifacts"
+      ],
+      "zh": "技术工程师"
+    },
+    {
+      "aliases": [
+        "创业",
+        "经营",
+        "企业家",
+        "创始人",
+        "CEO",
+        "operator",
+        "entrepreneur",
+        "founder",
+        "business"
+      ],
+      "id": "entrepreneur-operator",
+      "merged_from": [
+        "创业者/企业家/经营者"
+      ],
+      "number": 2,
+      "research_focus": [
+        "产品与市场判断",
+        "组织和用人",
+        "资源配置",
+        "危机处理",
+        "执行节奏",
+        "经营结果与复盘"
+      ],
+      "scenario_priors": [
+        "公司战略",
+        "产品经营",
+        "组织管理",
+        "资源配置",
+        "增长与危机",
+        "创业决策"
+      ],
+      "source_priorities": [
+        "shareholder-letters",
+        "company-memos",
+        "product-decisions",
+        "org-changes",
+        "crisis-records",
+        "interviews",
+        "operating-results"
+      ],
+      "zh": "创业经营家"
+    },
+    {
+      "aliases": [
+        "投资",
+        "资本",
+        "基金经理",
+        "投资人",
+        "allocator",
+        "investor",
+        "capital"
+      ],
+      "id": "investor-capital-allocator",
+      "merged_from": [
+        "投资人/资本配置者"
+      ],
+      "number": 3,
+      "research_focus": [
+        "估值与赔率",
+        "仓位与组合",
+        "风险预算",
+        "买入卖出和退出",
+        "逆风期行为",
+        "事后归因偏差"
+      ],
+      "scenario_priors": [
+        "公司研究",
+        "投资决策",
+        "组合管理",
+        "风险控制",
+        "资本配置",
+        "商业分析"
+      ],
+      "source_priorities": [
+        "investor-letters",
+        "filings",
+        "transactions",
+        "portfolio-history",
+        "risk-memos",
+        "downturn-behavior",
+        "postmortems"
+      ],
+      "zh": "投资资本家"
+    },
+    {
+      "aliases": [
+        "开发",
+        "设计",
+        "产品",
+        "艺术",
+        "导演",
+        "designer",
+        "developer",
+        "product",
+        "artist",
+        "creator"
+      ],
+      "id": "developer-designer",
+      "merged_from": [
+        "产品人/设计师/建筑师",
+        "艺术与表演创作者"
+      ],
+      "number": 4,
+      "research_focus": [
+        "作品和产品定义",
+        "审美与品味标准",
+        "草稿与迭代",
+        "评审和删改",
+        "用户与表达权衡",
+        "制作流程和协作"
+      ],
+      "scenario_priors": [
+        "产品定义",
+        "设计评审",
+        "创意开发",
+        "写作与制作",
+        "体验优化",
+        "审美判断"
+      ],
+      "source_priorities": [
+        "works",
+        "drafts",
+        "design-reviews",
+        "prototypes",
+        "revisions",
+        "production-notes",
+        "critiques",
+        "performances"
+      ],
+      "zh": "开发设计家"
+    },
+    {
+      "aliases": [
+        "思想",
+        "教育",
+        "作家",
+        "哲学家",
+        "教师",
+        "导师",
+        "教练",
+        "记者",
+        "thinker",
+        "educator",
+        "writer",
+        "philosopher",
+        "teacher",
+        "coach",
+        "journalist"
+      ],
+      "id": "thinker-educator",
+      "merged_from": [
+        "作家/哲学家/思想家",
+        "教师/导师/顾问",
+        "运动员/教练/竞技者",
+        "记者/内容传播者"
+      ],
+      "number": 5,
+      "research_focus": [
+        "概念体系与思想谱系",
+        "教学诊断与反馈",
+        "训练和竞技策略",
+        "叙事与传播",
+        "公开辩论与修正",
+        "长期价值和人生判断"
+      ],
+      "scenario_priors": [
+        "学习指导",
+        "思想分析",
+        "写作表达",
+        "训练复盘",
+        "内容判断",
+        "长期决策"
+      ],
+      "source_priorities": [
+        "books",
+        "essays",
+        "letters",
+        "courses",
+        "coaching-records",
+        "competitions",
+        "interviews",
+        "editorial-decisions",
+        "debates"
+      ],
+      "zh": "思想教育家"
+    },
+    {
+      "aliases": [
+        "政治",
+        "法律",
+        "政策",
+        "法官",
+        "律师",
+        "political",
+        "legal",
+        "policy",
+        "judge",
+        "lawyer"
+      ],
+      "id": "political-legal",
+      "merged_from": [
+        "政治与公共领导者",
+        "法律与制度设计者"
+      ],
+      "number": 6,
+      "research_focus": [
+        "制度与规则解释",
+        "政策和判决",
+        "联盟与博弈",
+        "承诺和执行差异",
+        "程序正义",
+        "公共风险和权力约束"
+      ],
+      "scenario_priors": [
+        "政策分析",
+        "制度设计",
+        "法律论证",
+        "公共治理",
+        "谈判博弈",
+        "政治风险"
+      ],
+      "source_priorities": [
+        "laws",
+        "judgments",
+        "votes",
+        "policy-documents",
+        "hearings",
+        "speeches",
+        "coalition-records",
+        "implementation-results"
+      ],
+      "zh": "政治法律家"
+    },
+    {
+      "aliases": [
+        "多重",
+        "混合",
+        "复合",
+        "私域",
+        "虚构",
+        "multiple",
+        "multi",
+        "private",
+        "fictional"
+      ],
+      "id": "multi-identity",
+      "merged_from": [
+        "多重身份人物",
+        "历史/虚构人物",
+        "私域人物/自己"
+      ],
+      "number": 7,
+      "research_focus": [
+        "按权重合并身份研究",
+        "角色冲突",
+        "时期和场域切换",
+        "私域授权或虚构谱系",
+        "跨身份能力迁移边界"
+      ],
+      "scenario_priors": [
+        "由权重与任务自动路由"
+      ],
+      "source_priorities": [
+        "weighted-union-of-selected-families"
+      ],
+      "zh": "多重身份"
+    }
+  ],
+  "menu_version": "2026-07-23",
+  "schema_version": "1.0"
+}

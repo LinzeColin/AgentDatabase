@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "canonical": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "mode": {
+      "enum": [
+        "single",
+        "multi"
+      ]
+    },
+    "primary": {
+      "enum": [
+        "technical-engineer",
+        "entrepreneur-operator",
+        "investor-capital-allocator",
+        "developer-designer",
+        "thinker-educator",
+        "political-legal"
+      ]
+    },
+    "weights": {
+      "additionalProperties": {
+        "exclusiveMinimum": 0,
+        "maximum": 1,
+        "type": "number"
+      },
+      "minProperties": 1,
+      "type": "object"
+    }
+  },
+  "required": [
+    "mode",
+    "primary",
+    "weights",
+    "canonical"
+  ],
+  "title": "Identity selection",
+  "type": "object"
+}

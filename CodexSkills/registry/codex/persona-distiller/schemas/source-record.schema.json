@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/persona-distiller/source-record.schema.json",
+  "title": "Source ledger record",
+  "type": "object",
+  "required": [
+    "source_id",
+    "title",
+    "source_type",
+    "tier",
+    "rights",
+    "split",
+    "checksum",
+    "dimensions",
+    "created_at"
+  ],
+  "properties": {
+    "source_id": {
+      "type": "string",
+      "pattern": "^src-[a-f0-9]{12}$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "author": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "published_at": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "accessed_at": {
+      "type": "string"
+    },
+    "url": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "local_path": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "normalized_path": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_type": {
+      "type": "string"
+    },
+    "tier": {
+      "enum": [
+        "P1",
+        "P2",
+        "S1",
+        "S2",
+        "U"
+      ]
+    },
+    "rights": {
+      "type": "string"
+    },
+    "language": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "split": {
+      "enum": [
+        "train",
+        "holdout"
+      ]
+    },
+    "checksum": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "normalized_checksum": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "dimensions": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "writings",
+          "conversations",
+          "expression",
+          "external",
+          "decisions",
+          "timeline"
+        ]
+      }
+    },
+    "derived_from": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "extraction_status": {
+      "enum": [
+        "normalized",
+        "needs_agent_read",
+        "failed"
+      ]
+    },
+    "abstract": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "locator": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "created_at": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}

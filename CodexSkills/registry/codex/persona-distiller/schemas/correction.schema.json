@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/persona-distiller/correction.schema.json",
+  "title": "Append-only correction event",
+  "type": "object",
+  "required": [
+    "event_id",
+    "correction_id",
+    "event_type",
+    "timestamp",
+    "scope",
+    "status"
+  ],
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "pattern": "^evt-[a-f0-9]{12}$"
+    },
+    "correction_id": {
+      "type": "string",
+      "pattern": "^cor-[a-f0-9]{12}$"
+    },
+    "event_type": {
+      "enum": [
+        "create",
+        "status",
+        "supersede"
+      ]
+    },
+    "timestamp": {
+      "type": "string"
+    },
+    "text": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "scope": {
+      "enum": [
+        "facts",
+        "persona",
+        "work",
+        "boundary",
+        "hypothesis",
+        "evaluation"
+      ]
+    },
+    "status": {
+      "enum": [
+        "active",
+        "pending",
+        "rejected",
+        "resolved",
+        "superseded"
+      ]
+    },
+    "source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "claim_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "rationale": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "supersedes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "impacted_suites": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": true
+}

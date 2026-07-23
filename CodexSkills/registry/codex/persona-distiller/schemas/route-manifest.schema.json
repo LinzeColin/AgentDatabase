@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "identity_selection": {
+      "$ref": "identity-selection.schema.json"
+    }
+  },
+  "required": [
+    "identity_selection",
+    "runtime_identity_gate",
+    "research",
+    "runtime_versioning"
+  ],
+  "title": "Route manifest",
+  "type": "object"
+}

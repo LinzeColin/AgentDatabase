@@ -42,6 +42,14 @@ SOURCES = {
 REPO = "LinzeColin/AgentDatabase"
 MIRROR_DIRNAME = "CodexSkills"
 
+# 已迁入治理 registry 的 Skill 使用显式物理路由；未迁移 Skill 保持兼容路径。
+REGISTRY_SKILL_ROUTES = {
+    ("codex", "persona-distiller"): "registry/codex/persona-distiller",
+}
+REPO_OWNED_FILES = {
+    ("codex", "persona-distiller"): {"registry.yaml"},
+}
+
 EXCLUDE_DIRS = {".git", "__pycache__", "node_modules", ".venv", ".mypy_cache", ".pytest_cache"}
 EXCLUDE_FILES = {".DS_Store", "Thumbs.db"}
 MAX_FILE_BYTES = 95 * 1024 * 1024          # GitHub 单文件 100MB 硬限，留余量
@@ -70,7 +78,7 @@ CATEGORY = {
     "工程与交付": ["verifier", "webapp-testing", "mcp-builder", "use-railway", "video-replica",
                    "goal-to-delivery-sop", "domain-dual-plane", "output-skill", "codex-dev-orchestrator",
                    "impeccable", "review-agent", "plugin-creator", "skill-creator", "skill-installer",
-                   "skill-github-sync"],
+                   "skill-github-sync", "persona-distiller"],
     "学习与知识": ["study-project-orchestrator", "book-to-skill", "last30days", "chronicle",
                    "grill-me", "openai-docs"],
     "业务流程": ["km-bid-scout", "km-bid-discover", "km-bid-qualify", "km-bid-brief", "km-bid-evidence",
@@ -113,20 +121,29 @@ def walk_files(base):
             yield os.path.relpath(full, base), full
 
 
-def skill_digest(base):
+def skill_digest(base, excluded_relative_paths=None):
+    excluded_relative_paths = excluded_relative_paths or set()
     h = hashlib.sha256()
     for rel, full in sorted(walk_files(base)):
+        if rel.replace(os.sep, "/") in excluded_relative_paths:
+            continue
         h.update(rel.encode())
         try:
-            h.update(open(full, "rb").read())
+            with open(full, "rb") as handle:
+                h.update(handle.read())
         except Exception:
             pass
     return h.hexdigest()
 
 
+def mirror_relative_path(source, slug):
+    return REGISTRY_SKILL_ROUTES.get((source, slug), f"{source}/{slug}")
+
+
 def parse_frontmatter(path):
     try:
-        text = open(path, encoding="utf-8", errors="ignore").read()
+        with open(path, encoding="utf-8", errors="ignore") as handle:
+            text = handle.read()
     except Exception:
         return None, None
     m = re.match(r"^---\s*\n(.*?)\n---\s*\n", text, flags=re.S)
@@ -167,11 +184,11 @@ def inventory():
 # ---------------------------------------------------------------- 镜像
 
 
-def mirror(inv, mirror_root, dry_run=False):
+def mirror(inv, mirror_root, dry_run=False, propagate_deletions=True):
     """把本机 skill 镜像进仓库，并传播删除。返回变更摘要。"""
     added, updated, removed, skipped_big = [], [], [], []
 
-    want = {f"{src}/{slug}" for src, slug in inv}
+    want = {mirror_relative_path(src, slug) for src, slug in inv}
     have = set()
     if os.path.isdir(mirror_root):
         for src in SOURCES:
@@ -179,21 +196,31 @@ def mirror(inv, mirror_root, dry_run=False):
             if os.path.isdir(sd):
                 have |= {f"{src}/{d}" for d in os.listdir(sd)
                          if os.path.isdir(os.path.join(sd, d))}
+        for rel in REGISTRY_SKILL_ROUTES.values():
+            if os.path.isdir(os.path.join(mirror_root, rel)):
+                have.add(rel)
 
     # 删除传播：本机没有了，镜像也删掉
-    for gone in sorted(have - want):
+    for gone in sorted(have - want if propagate_deletions else set()):
         removed.append(gone)
         if not dry_run:
             shutil.rmtree(os.path.join(mirror_root, gone), ignore_errors=True)
 
     for (src, slug), localpath in sorted(inv.items()):
-        rel = f"{src}/{slug}"
+        rel = mirror_relative_path(src, slug)
         dest = os.path.join(mirror_root, rel)
-        before = skill_digest(dest) if os.path.isdir(dest) else None
+        repo_owned = REPO_OWNED_FILES.get((src, slug), set())
+        before = skill_digest(dest, repo_owned) if os.path.isdir(dest) else None
 
         if dry_run:
             after = skill_digest(localpath)
         else:
+            preserved = {}
+            for owned in repo_owned:
+                owned_path = os.path.join(dest, owned)
+                if os.path.isfile(owned_path):
+                    with open(owned_path, "rb") as handle:
+                        preserved[owned] = handle.read()
             if os.path.isdir(dest):
                 shutil.rmtree(dest)
             os.makedirs(dest, exist_ok=True)
@@ -207,7 +234,12 @@ def mirror(inv, mirror_root, dry_run=False):
                 target = os.path.join(dest, r)
                 os.makedirs(os.path.dirname(target), exist_ok=True)
                 shutil.copy2(full, target)
-            after = skill_digest(dest)
+            for owned, payload in preserved.items():
+                owned_path = os.path.join(dest, owned)
+                os.makedirs(os.path.dirname(owned_path), exist_ok=True)
+                with open(owned_path, "wb") as handle:
+                    handle.write(payload)
+            after = skill_digest(dest, repo_owned)
 
         if before is None:
             added.append(rel)
@@ -230,7 +262,8 @@ def credential_gate(mirror_root):
             try:
                 if os.path.getsize(p) > 20 * 1024 * 1024:
                     continue
-                data = open(p, "rb").read()
+                with open(p, "rb") as handle:
+                    data = handle.read()
             except Exception:
                 continue
             for label, pat in CRED_PATTERNS.items():
@@ -242,36 +275,65 @@ def credential_gate(mirror_root):
 # ---------------------------------------------------------------- 索引
 
 
-def build_index(mirror_root):
-    skills = []
+def iter_mirrored_skills(mirror_root):
+    """产出 (source, slug, physical_relative_path, absolute_directory)。"""
     for src in SOURCES:
         sd = os.path.join(mirror_root, src)
         if not os.path.isdir(sd):
             continue
         for slug in sorted(os.listdir(sd)):
-            d = os.path.join(sd, slug)
-            if not os.path.isdir(d):
+            if (src, slug) in REGISTRY_SKILL_ROUTES:
                 continue
-            name, desc = parse_frontmatter(os.path.join(d, "SKILL.md"))
-            n = size = 0
-            for root, dirs, fs in os.walk(d):
-                dirs[:] = [x for x in dirs if x not in EXCLUDE_DIRS]
-                for f in fs:
-                    n += 1
-                    try:
-                        size += os.path.getsize(os.path.join(root, f))
-                    except Exception:
-                        pass
-            skills.append({
-                "slug": slug,
-                "source": src,
-                "name": name or slug,
-                "description": desc or "",
-                "category": next((c for c, v in CATEGORY.items() if slug in v), "其他"),
-                "entry": f"{src}/{slug}/SKILL.md",
-                "file_count": n,
-                "size_bytes": size,
-            })
+            directory = os.path.join(sd, slug)
+            if os.path.isdir(directory):
+                yield src, slug, f"{src}/{slug}", directory
+    for (src, slug), rel in sorted(REGISTRY_SKILL_ROUTES.items()):
+        directory = os.path.join(mirror_root, rel)
+        if os.path.isdir(directory):
+            yield src, slug, rel, directory
+
+
+def persona_product_index(mirror_root):
+    path = os.path.join(
+        mirror_root,
+        REGISTRY_SKILL_ROUTES[("codex", "persona-distiller")],
+        "产物登记",
+        "index.json",
+    )
+    if not os.path.isfile(path):
+        return []
+    try:
+        with open(path, encoding="utf-8") as handle:
+            value = json.load(handle)
+    except (OSError, json.JSONDecodeError):
+        return []
+    products = value.get("products", [])
+    return products if isinstance(products, list) else []
+
+
+def build_index(mirror_root):
+    skills = []
+    for src, slug, rel, directory in iter_mirrored_skills(mirror_root):
+        name, desc = parse_frontmatter(os.path.join(directory, "SKILL.md"))
+        n = size = 0
+        for root, dirs, fs in os.walk(directory):
+            dirs[:] = [x for x in dirs if x not in EXCLUDE_DIRS]
+            for f in fs:
+                n += 1
+                try:
+                    size += os.path.getsize(os.path.join(root, f))
+                except Exception:
+                    pass
+        skills.append({
+            "slug": slug,
+            "source": src,
+            "name": name or slug,
+            "description": desc or "",
+            "category": next((c for c, v in CATEGORY.items() if slug in v), "其他"),
+            "entry": f"{rel}/SKILL.md",
+            "file_count": n,
+            "size_bytes": size,
+        })
 
     with open(os.path.join(mirror_root, "index.json"), "w", encoding="utf-8") as f:
         json.dump({
@@ -313,12 +375,39 @@ def build_index(mirror_root):
         f"curl -s {raw}/index.json",
         "",
         "# 2. 只拉命中的那一个入口，不要整仓 clone",
-        f"curl -s {raw}/<source>/<slug>/SKILL.md",
+        f"curl -s {raw}/<entry-from-index>",
         "```",
         "",
         "把用户请求与 `index.json` 里各 skill 的 `description` 做匹配，命中就读它的 `entry`，"
         "再按 `SKILL.md` 的指示按需读该目录下的参考文件。**不要一次性加载全部 skill。**",
         "",
+        "## 人物蒸馏产物登记",
+        "",
+        "[`persona-distiller`](registry/codex/persona-distiller/SKILL.md) 生成的每个人物产物"
+        "必须且只能登记在对应的一个身份目录中；多重身份只进入 `多重身份/`，不得在不同身份下重复登记。",
+        "完整发布 ZIP、canonical 登记和机器索引位于"
+        " [`registry/codex/persona-distiller/产物登记/`](registry/codex/persona-distiller/产物登记/README.md)。",
+        "",
+    ]
+    products = persona_product_index(mirror_root)
+    if products:
+        out += [
+            f"当前登记：**{len(products)} 个人物**。",
+            "",
+            "| 人物 | 唯一分类 | 版本 | 完整 ZIP |",
+            "|---|---|---|---|",
+        ]
+        product_root = "registry/codex/persona-distiller/产物登记"
+        for product in products:
+            name = str(product.get("canonical_name", "")).replace("|", "\\|")
+            category = str(product.get("registration_category", "")).replace("|", "\\|")
+            version = str(product.get("latest_model_version", "")).replace("|", "\\|")
+            artifact = str(product.get("latest_artifact", ""))
+            out.append(f"| {name} | `{category}` | `{version}` | [ZIP]({product_root}/{artifact}) |")
+        out.append("")
+    else:
+        out += ["当前登记：**0 个人物**；首次产物登记后由本脚本自动生成清单。", ""]
+    out += [
         "## 同步",
         "",
         "本目录由本机镜像而来，排除嵌套 `.git`、`.DS_Store`、`__pycache__`、`node_modules` "
@@ -352,7 +441,8 @@ def build_index(mirror_root):
                 "下列 skill 不在 `sync_skills.py` 的分类表里，已归入「其他」，请补分类：", ""]
         out += [f"- `{s}`" for s in orphan] + [""]
 
-    open(os.path.join(mirror_root, "README.md"), "w", encoding="utf-8").write("\n".join(out))
+    with open(os.path.join(mirror_root, "README.md"), "w", encoding="utf-8") as handle:
+        handle.write("\n".join(out))
     return len(skills), uniq, orphan
 
 
@@ -363,6 +453,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true", help="只报告差异，不写不提交不推送")
     ap.add_argument("--no-push", action="store_true", help="提交但不推送")
+    ap.add_argument("--no-commit", action="store_true", help="完成镜像、凭据门和索引，但不暂存、不提交、不推送")
+    ap.add_argument("--only", metavar="SOURCE/SLUG", help="只同步一个 Skill；不传播其他 Skill 的删除")
     args = ap.parse_args()
 
     root = repo_root()
@@ -373,10 +465,23 @@ def main():
     if not inv:
         log("没有找到任何 skill，中止（这多半是路径问题，不是真的没有）。")
         return 2
+    if args.only:
+        source, separator, slug = args.only.partition("/")
+        key = (source, slug)
+        if not separator or key not in inv:
+            log(f"未找到指定 Skill：{args.only}")
+            return 2
+        inv = {key: inv[key]}
+        log(f"  受控单项同步：{args.only} → {mirror_relative_path(*key)}")
     log(f"  合计 {len(inv)} 份实例 / {len({s for _, s in inv})} 个不同名字")
 
     log("\n=== 2/6 镜像与删除传播 ===")
-    ch = mirror(inv, mirror_root, dry_run=args.dry_run)
+    ch = mirror(
+        inv,
+        mirror_root,
+        dry_run=args.dry_run,
+        propagate_deletions=not bool(args.only),
+    )
     for k, label in [("added", "新增"), ("updated", "修改"), ("removed", "删除")]:
         if ch[k]:
             log(f"  {label} {len(ch[k])}：")
@@ -411,6 +516,10 @@ def main():
     log(f"  index.json / README.md 已生成：{n} 份实例 / {uniq} 个名字")
     if orphan:
         log(f"  ⚠️ {len(orphan)} 个 skill 未归类，已在 README 末尾列出：{orphan}")
+
+    if args.no_commit:
+        log("\n--no-commit：镜像、凭据门和索引已完成；未暂存、未提交、未推送。")
+        return 0
 
     log("\n=== 5/6 提交 ===")
     run(["git", "add", "-A", MIRROR_DIRNAME], cwd=root)

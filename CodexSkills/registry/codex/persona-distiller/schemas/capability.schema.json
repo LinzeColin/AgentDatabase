@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "contexts": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "limits": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "source_ids": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "status": {
+      "enum": [
+        "demonstrated",
+        "bounded-inference",
+        "unsupported",
+        "unavailable"
+      ]
+    }
+  },
+  "required": [
+    "capability_id",
+    "name",
+    "status",
+    "source_ids",
+    "contexts",
+    "limits"
+  ],
+  "title": "Capability claim",
+  "type": "object"
+}

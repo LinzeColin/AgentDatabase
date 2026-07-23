@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/persona-distiller/version-manifest.schema.json",
+  "title": "Version snapshot manifest",
+  "type": "object",
+  "required": [
+    "version_id",
+    "created_at",
+    "reason",
+    "files",
+    "digest"
+  ],
+  "properties": {
+    "version_id": {
+      "type": "string",
+      "pattern": "^v[0-9]{8}T[0-9]{6}Z-[a-f0-9]{8}$"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "reason": {
+      "type": "string"
+    },
+    "parent_version": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "status": {
+      "enum": [
+        "candidate",
+        "accepted",
+        "rejected",
+        "release",
+        "backup"
+      ]
+    },
+    "include_sources": {
+      "type": "boolean"
+    },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "path",
+          "sha256",
+          "size"
+        ],
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "size": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      }
+    },
+    "digest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  },
+  "additionalProperties": true
+}

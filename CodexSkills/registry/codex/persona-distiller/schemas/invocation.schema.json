@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "artifact_version": {
+      "pattern": "^0\\.0\\.0\\.[1-9][0-9]*$",
+      "type": "string"
+    },
+    "artifacts": {
+      "items": {
+        "properties": {
+          "logical_versioned_name": {
+            "type": "string"
+          },
+          "sha256": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "size_bytes": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "source_name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "logical_versioned_name",
+          "sha256",
+          "size_bytes"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "identity_selection": {
+      "$ref": "identity-selection.schema.json"
+    },
+    "privacy_mode": {
+      "enum": [
+        "metadata",
+        "content"
+      ]
+    },
+    "serial": {
+      "minimum": 1,
+      "type": "integer"
+    },
+    "status": {
+      "enum": [
+        "started",
+        "completed",
+        "failed"
+      ]
+    }
+  },
+  "required": [
+    "run_id",
+    "artifact_version",
+    "serial",
+    "status",
+    "identity_selection",
+    "task_sha256"
+  ],
+  "title": "Invocation record",
+  "type": "object"
+}

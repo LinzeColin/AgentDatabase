@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/LinzeColin/AgentDatabase/CodexSkills/registry/codex/persona-distiller/schemas/persona-registration.schema.json",
+  "title": "Persona Distiller unique product registration",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "subject_uid",
+    "canonical_name",
+    "canonical_key",
+    "subject_slug",
+    "subject_origin",
+    "registration_category",
+    "identity_family_id",
+    "identity_mode",
+    "versions"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "subject_uid": {
+      "type": "string",
+      "pattern": "^person-[0-9a-f]{16}$"
+    },
+    "canonical_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "canonical_key": {
+      "type": "string",
+      "minLength": 3
+    },
+    "subject_slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "subject_origin": {
+      "enum": [
+        "public",
+        "fictional",
+        "historical"
+      ]
+    },
+    "registration_category": {
+      "enum": [
+        "技术工程",
+        "企业领导",
+        "金融投资",
+        "软开设计",
+        "思想教育",
+        "政治法律",
+        "多重身份"
+      ]
+    },
+    "identity_family_id": {
+      "enum": [
+        "technical-engineer",
+        "entrepreneur-operator",
+        "investor-capital-allocator",
+        "developer-designer",
+        "thinker-educator",
+        "political-legal",
+        "multi-identity"
+      ]
+    },
+    "identity_mode": {
+      "enum": [
+        "single",
+        "multi"
+      ]
+    },
+    "versions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "model_version",
+          "artifact",
+          "sha256",
+          "size_bytes",
+          "builder_version",
+          "artifact_created_at"
+        ],
+        "properties": {
+          "model_version": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          },
+          "artifact": {
+            "type": "string",
+            "pattern": "^versions/[^/]+/[^/]+\\.zip$"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "size_bytes": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "builder_version": {
+            "const": "v0.0.0.3"
+          },
+          "artifact_created_at": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

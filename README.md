@@ -29,4 +29,10 @@ imported into `~/.codex/sessions` on this machine.
 
 ## CodexSkills
 
-本机 Codex Skill 的仓库镜像（51 个）。索引：[`CodexSkills/README.md`](CodexSkills/README.md)（人读）、[`CodexSkills/index.json`](CodexSkills/index.json)（机器读，供 Agent 按需检索单个 skill，不要整仓 clone）。
+本机 Codex Skill 的仓库镜像与治理登记。索引：[`CodexSkills/README.md`](CodexSkills/README.md)（人读）、[`CodexSkills/index.json`](CodexSkills/index.json)（机器读，供 Agent 按需检索单个 skill，不要整仓 clone）。
+
+“人物蒸馏 Skill”登记在
+[`CodexSkills/registry/codex/persona-distiller/`](CodexSkills/registry/codex/persona-distiller/)。
+它生成的每个人物产物必须且只能登记到对应的一个身份目录；多重身份只进入
+`多重身份/`，不得在不同身份下重复登记。完整发布 ZIP、canonical 登记与生成索引保存在
+[`产物登记/`](CodexSkills/registry/codex/persona-distiller/产物登记/)。

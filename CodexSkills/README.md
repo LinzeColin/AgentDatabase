@@ -1,6 +1,6 @@
 # CodexSkills
 
-本机全部 Skill 的仓库镜像：**85 份实例 / 70 个不同名字**，3370 个文件，约 106 MB。
+本机全部 Skill 的仓库镜像：**86 份实例 / 71 个不同名字**，3572 个文件，约 106 MB。
 
 **由 `sync_skills.py` 自动生成，请勿手工编辑本文件。**
 
@@ -8,7 +8,7 @@
 
 | 目录 | 本机路径 | 说明 |
 |---|---|---|
-| `codex/` | `~/.codex/skills` | Codex 用户 Skill（自建 / 下载 / GitHub）（52 个） |
+| `codex/` | `~/.codex/skills` | Codex 用户 Skill（自建 / 下载 / GitHub）（53 个） |
 | `codex-system/` | `~/.codex/skills/.system` | Codex 系统 Skill（OpenAI 官方，Apache-2.0）（6 个） |
 | `claude/` | `~/.claude/skills` | Claude Skill（Anthropic 侧）（3 个） |
 | `agents/` | `~/.agents/skills` | Agent Skill（跨工具通用目录）（24 个） |
@@ -22,10 +22,17 @@
 curl -s https://raw.githubusercontent.com/LinzeColin/AgentDatabase/main/CodexSkills/index.json
 
 # 2. 只拉命中的那一个入口，不要整仓 clone
-curl -s https://raw.githubusercontent.com/LinzeColin/AgentDatabase/main/CodexSkills/<source>/<slug>/SKILL.md
+curl -s https://raw.githubusercontent.com/LinzeColin/AgentDatabase/main/CodexSkills/<entry-from-index>
 ```
 
 把用户请求与 `index.json` 里各 skill 的 `description` 做匹配，命中就读它的 `entry`，再按 `SKILL.md` 的指示按需读该目录下的参考文件。**不要一次性加载全部 skill。**
+
+## 人物蒸馏产物登记
+
+[`persona-distiller`](registry/codex/persona-distiller/SKILL.md) 生成的每个人物产物必须且只能登记在对应的一个身份目录中；多重身份只进入 `多重身份/`，不得在不同身份下重复登记。
+完整发布 ZIP、canonical 登记和机器索引位于 [`registry/codex/persona-distiller/产物登记/`](registry/codex/persona-distiller/产物登记/README.md)。
+
+当前登记：**0 个人物**；首次产物登记后由本脚本自动生成清单。
 
 ## 同步
 
@@ -82,7 +89,7 @@ python3 CodexSkills/sync_skills.py --dry-run  # 只看差异
 | [`gitnexus-refactoring`](agents/gitnexus-refactoring/SKILL.md) | `agents` | Use when the user wants to rename, extract, split, move, or restructure code safely. Examples: \"Rename this function\", \"Extract this into a module\", \"Refactor this class\", \"Move this to a separate file\ |
 | [`gitnexus-taint-analysis`](agents/gitnexus-taint-analysis/SKILL.md) | `agents` | Use when working on, reviewing, or extending GitNexus's CFG/taint/PDG subsystem (the `--pdg` layers), or when reasoning about source→sink data-flow findings. Examples: \"How does taint analysis work here?\", \"Why didn't explain find this flow?\", \"Add a new… |
 
-## 工程与交付（18）
+## 工程与交付（19）
 
 | Skill | 来源 | 何时使用 |
 |---|---|---|
@@ -92,6 +99,7 @@ python3 CodexSkills/sync_skills.py --dry-run  # 只看差异
 | [`impeccable`](agents/impeccable/SKILL.md) | `agents` | Use when the user wants to design, redesign, shape, critique, audit, polish, clarify, distill, harden, optimize, adapt, animate, colorize, extract, or otherwise improve a frontend interface. Covers websites, landing pages, dashboards, product UI, app shells, c… |
 | [`mcp-builder`](codex/mcp-builder/SKILL.md) | `codex` | Guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools. Use when building MCP servers to integrate external APIs or services, whether in Python (FastMCP) or Node/Type… |
 | [`output-skill`](codex/output-skill/SKILL.md) | `codex` | Overrides default LLM truncation behavior. Enforces complete code generation, bans placeholder patterns, and handles token-limit splits cleanly. Apply to any task requiring exhaustive, unabridged output. |
+| [`persona-distiller`](registry/codex/persona-distiller/SKILL.md) | `codex` | Build, audit, update, package, or uniquely register an evidence-grounded target-person Agent Skill that can plan and execute work through the target's documented capabilities, strategies, cognition, decision policy, work system, temperament, and boundaries. Re… |
 | [`plugin-creator`](codex-system/plugin-creator/SKILL.md) | `codex-system` | Create and scaffold plugin directories for Codex with a required `.codex-plugin/plugin.json`, optional plugin folders/files, valid manifest defaults, and personal-marketplace entries by default. Use when Codex needs to create a new personal plugin, add optiona… |
 | [`review-agent`](codex-system/review-agent/SKILL.md) | `codex-system` | Perform a read-only, defect-first review of a specified code change and return every actionable finding. Use when another agent delegates review of uncommitted changes, a base-branch diff, a commit, or custom review instructions. |
 | [`skill-creator`](codex-system/skill-creator/SKILL.md) | `codex-system` | Guide for creating effective skills. This skill should be used when users want to create a new skill (or update an existing skill) that extends Codex's capabilities with specialized knowledge, workflows, or tool integrations. |

@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/persona-distiller/eval-case.schema.json",
+  "title": "Evaluation case",
+  "type": "object",
+  "required": [
+    "case_id",
+    "suite",
+    "prompt",
+    "rubric",
+    "critical"
+  ],
+  "properties": {
+    "case_id": {
+      "type": "string",
+      "pattern": "^case-[a-z0-9-]+$"
+    },
+    "suite": {
+      "enum": [
+        "known",
+        "boundary",
+        "voice",
+        "trajectory",
+        "contrast",
+        "fact-preservation",
+        "style-decoy"
+      ]
+    },
+    "prompt": {
+      "type": "string"
+    },
+    "turns": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "holdout_source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "rubric": {
+      "type": "object"
+    },
+    "expected": {
+      "type": [
+        "object",
+        "string",
+        "null"
+      ]
+    },
+    "critical": {
+      "type": "boolean"
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "additionalProperties": true
+}

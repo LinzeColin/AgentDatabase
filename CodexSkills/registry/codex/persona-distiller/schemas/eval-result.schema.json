@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/persona-distiller/eval-result.schema.json",
+  "title": "Evaluation result",
+  "type": "object",
+  "required": [
+    "run_id",
+    "case_id",
+    "suite",
+    "system",
+    "judge_id",
+    "overall_score",
+    "dimension_scores",
+    "critical_failure",
+    "timestamp"
+  ],
+  "properties": {
+    "run_id": {
+      "type": "string"
+    },
+    "case_id": {
+      "type": "string"
+    },
+    "suite": {
+      "type": "string"
+    },
+    "system": {
+      "enum": [
+        "baseline",
+        "candidate",
+        "foil",
+        "prior"
+      ]
+    },
+    "blind_label": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "judge_id": {
+      "type": "string"
+    },
+    "overall_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "dimension_scores": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 1
+      }
+    },
+    "critical_failure": {
+      "type": "boolean"
+    },
+    "critical_failure_type": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "rationale": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "timestamp": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}

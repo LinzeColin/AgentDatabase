@@ -1,0 +1,240 @@
+{
+  "generated_at": "2026-07-23T05:06:15Z",
+  "method": "six isolated reviewer checklists; not six independently running models",
+  "passed": true,
+  "reviews": [
+    {
+      "checks": [
+        {
+          "detail": "present",
+          "name": "model-separation",
+          "passed": true
+        },
+        {
+          "detail": "ids=['technical-engineer', 'entrepreneur-operator', 'investor-capital-allocator', 'developer-designer', 'thinker-educator', 'political-legal', 'multi-identity']; numbers=[1, 2, 3, 4, 5, 6, 7]",
+          "name": "identity-taxonomy",
+          "passed": true
+        },
+        {
+          "detail": "present",
+          "name": "divergence-and-boundaries",
+          "passed": true
+        },
+        {
+          "detail": "all required tokens present",
+          "name": "no-core-auto-learning",
+          "passed": true
+        },
+        {
+          "detail": "all required tokens present",
+          "name": "identity-conflict-routing",
+          "passed": true
+        },
+        {
+          "detail": "all required tokens present",
+          "name": "memory-model-firewall",
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "role": "cognitive-fidelity"
+    },
+    {
+      "checks": [
+        {
+          "detail": "present",
+          "name": "provenance-artifacts",
+          "passed": true
+        },
+        {
+          "detail": "lane_files=6",
+          "name": "six-lane-research",
+          "passed": true
+        },
+        {
+          "detail": "all required tokens present",
+          "name": "holdout-isolation",
+          "passed": true
+        },
+        {
+          "detail": "all required tokens present",
+          "name": "saturation-not-absolute",
+          "passed": true
+        },
+        {
+          "detail": "all required tokens present",
+          "name": "origin-deduplication",
+          "passed": true
+        },
+        {
+          "detail": "all required tokens present",
+          "name": "private-source-minimization",
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "role": "research-provenance"
+    },
+    {
+      "checks": [
+        {
+          "detail": "missing=[]",
+          "name": "runtime-loop",
+          "passed": true
+        },
+        {
+          "detail": "all required tokens present",
+          "name": "identity-gate",
+          "passed": true
+        },
+        {
+          "detail": "present",
+          "name": "version-ledger",
+          "passed": true
+        },
+        {
+          "detail": "all required tokens present",
+          "name": "minimal-routing",
+          "passed": true
+        },
+        {
+          "detail": "all required tokens present",
+          "name": "crash-recovery",
+          "passed": true
+        },
+        {
+          "detail": "all required tokens present",
+          "name": "state-history-reconciliation",
+          "passed": true
+        },
+        {
+          "detail": "all required tokens present",
+          "name": "artifact-hash-manifest",
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "role": "agentic-execution"
+    },
+    {
+      "checks": [
+        {
+          "detail": "missing=[]; suites=16",
+          "name": "suite-prompts",
+          "passed": true
+        },
+        {
+          "detail": "all required tokens present",
+          "name": "blind-and-baseline",
+          "passed": true
+        },
+        {
+          "detail": "present",
+          "name": "dual-agent-refinement",
+          "passed": true
+        },
+        {
+          "detail": "present",
+          "name": "long-horizon-and-tools",
+          "passed": true
+        },
+        {
+          "detail": "present",
+          "name": "identity-and-anonymous-evals",
+          "passed": true
+        },
+        {
+          "detail": "present",
+          "name": "efficiency-regression",
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "role": "evaluation"
+    },
+    {
+      "checks": [
+        {
+          "detail": "all required tokens present",
+          "name": "governance",
+          "passed": true
+        },
+        {
+          "detail": "missing=[]; forbidden=[]",
+          "name": "package-privacy",
+          "passed": true
+        },
+        {
+          "detail": "none",
+          "name": "secret-scan",
+          "passed": true
+        },
+        {
+          "detail": "explicit invocation enforced",
+          "name": "explicit-invocation",
+          "passed": true
+        },
+        {
+          "detail": "all required tokens present",
+          "name": "source-prompt-is-data",
+          "passed": true
+        },
+        {
+          "detail": "all required tokens present",
+          "name": "private-consent-hard-gate",
+          "passed": true
+        },
+        {
+          "detail": "all required tokens present",
+          "name": "checksum-hardening",
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "role": "security-governance"
+    },
+    {
+      "checks": [
+        {
+          "detail": "only name and description",
+          "name": "frontmatter",
+          "passed": true
+        },
+        {
+          "detail": "files=218; >25MB=[]",
+          "name": "file-budget",
+          "passed": true
+        },
+        {
+          "detail": "present",
+          "name": "installer",
+          "passed": true
+        },
+        {
+          "detail": "no stale token found",
+          "name": "no-stale-cli",
+          "passed": true
+        },
+        {
+          "detail": "all required tokens present",
+          "name": "installed-copy-verification",
+          "passed": true
+        },
+        {
+          "detail": "all required tokens present",
+          "name": "deterministic-one-root-zip",
+          "passed": true
+        },
+        {
+          "detail": "all required tokens present",
+          "name": "current-skill-root",
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "role": "devops-efficiency"
+    }
+  ],
+  "round": 2,
+  "schema_version": "1.0"
+}

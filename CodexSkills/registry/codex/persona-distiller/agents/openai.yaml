@@ -1,0 +1,6 @@
+interface:
+  display_name: "人物蒸馏 Skill"
+  short_description: "把目标人物蒸馏为可执行、可验证、唯一登记的人物 Agent Skill"
+  default_prompt: "使用 $persona-distiller：接收目标人物姓名与身份，完成证据研究、模型构建、评测、单 ZIP 交付和唯一分类登记。"
+policy:
+  allow_implicit_invocation: false

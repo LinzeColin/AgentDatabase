@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "required": [
+    "target_name",
+    "identity_selection",
+    "build_depth",
+    "research",
+    "runtime_versioning"
+  ],
+  "title": "Build route",
+  "type": "object"
+}

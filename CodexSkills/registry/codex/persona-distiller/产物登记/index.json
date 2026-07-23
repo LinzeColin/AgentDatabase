@@ -1,0 +1,15 @@
+{
+  "category_counts": {
+    "企业领导": 0,
+    "多重身份": 0,
+    "思想教育": 0,
+    "技术工程": 0,
+    "政治法律": 0,
+    "软开设计": 0,
+    "金融投资": 0
+  },
+  "generated": true,
+  "products": [],
+  "schema_version": "1.0",
+  "uniqueness_scope": "all-seven-categories"
+}
