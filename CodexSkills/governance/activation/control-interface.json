@@ -1,6 +1,6 @@
 {
   "activation_forbidden": true,
-  "base_auto_git_object_id": "sha1:d16273c26b859379578ea9ec04e1473f175d14f6",
+  "base_auto_git_object_id": "sha1:7ed9e761921f557887440803d1fc7327f3e986a9",
   "bootstrap_schema_count": 2,
   "bootstrap_schema_entries": [
     {
@@ -37,7 +37,7 @@
     "external_verified_git_object_required": true,
     "repository_self_report_is_not_trust_root": true
   },
-  "next_phase": "AUTO_EXACT_BUNDLE_INTEGRATION",
+  "next_phase": "AUTO_AU040_RUNTIME_WRITER_INTEGRATION",
   "notification_contract": {
     "actual_recipient_repo_external": true,
     "affected_path_refs": [
@@ -73,7 +73,14 @@
   "target_srv_revision": "v0.0.0.3",
   "transition_contract": {
     "au_040_complete": false,
-    "auto_runtime_integration_complete": false,
+    "au_040_daily_jsonl_shard_complete": false,
+    "auto_runtime_integrated_candidate": {
+      "bundle_digest": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e",
+      "policy_count": 5,
+      "schema_count": 31,
+      "verified_git_object_id": "sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5"
+    },
+    "auto_runtime_integration_complete": true,
     "auto_runtime_source_candidate": {
       "bundle_digest": "2704ed797c843f969965db600747abcdcd217550522e6479aab6817ef5a86ef5",
       "policy_count": 5,
@@ -82,22 +89,29 @@
     },
     "canonical_publication_permitted": false,
     "external_gmail_ready": false,
-    "final_candidate_integration_required": true,
+    "external_state_ready": false,
+    "final_candidate_integration_required": false,
     "m0c_b_permitted": false,
     "promotion_evidence": {
       "artifact_digest": "65c2e83bb2491d1cb3059767cf1705fc7541bd7e97449f33a51ba17a04f5e595",
       "relative_path": "CodexSkills/registry/auto/schemas/public-v2/promotion-interface.json",
-      "verified_git_object_id": "sha1:d16273c26b859379578ea9ec04e1473f175d14f6"
+      "verified_git_object_id": "sha1:ab49666bd3343c2abbfc6766478fad63d44163d0"
     },
+    "publisher_v2_runtime_integration_complete": false,
     "repository_bound": false,
+    "runtime_preflight_shadow_permitted": true,
+    "runtime_shard_writer_integration_complete": false,
+    "runtime_state_instance_created": false,
+    "runtime_state_write_permitted": true,
     "schedule_authority_resolved": false,
     "schedule_complete": false
   },
   "transport_runtime_interface": {
-    "artifact_digest": "e8d8af9b74908e56a86550492f4cf26a100bfd674cf858c61e72e3193b3d8a24",
-    "integration_state": "SOURCE_CANDIDATE_NOT_FINAL",
+    "artifact_digest": "09af0c00273825e90a489f413a2f0bb6995042e5b4eea17973ce7582eab66340",
+    "integration_state": "FINAL_31_5_INTEGRATED_CONTROL_SYNCED",
+    "module_count": 21,
     "relative_path": "CodexSkills/registry/auto/runtime-interface.json",
-    "verified_git_object_id": "sha1:d16273c26b859379578ea9ec04e1473f175d14f6"
+    "verified_git_object_id": "sha1:7ed9e761921f557887440803d1fc7327f3e986a9"
   },
   "validator_contract": {
     "artifact_reads": "DESCRIPTOR_RELATIVE_O_NOFOLLOW",

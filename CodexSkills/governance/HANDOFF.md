@@ -1,7 +1,7 @@
 # Mechanism handoff
 
-- State: `DRAFT_NON_ACTIVE_FINAL_CANDIDATE_CONTROL`
-- Phase: `MECHANISM_FINAL_31_5_CANDIDATE_CONSUMER_CONTROL`
+- State: `DRAFT_NON_ACTIVE_POST_AUTO_CONTROL_SYNC`
+- Phase: `MECHANISM_POST_AUTO_INTEGRATION_CONTROL_SYNC`
 - Protocol:
   `urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1`
 - SRV candidate: `v0.0.0.3`
@@ -11,8 +11,12 @@
   `sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5`
 - Consumer Git object:
   `sha1:91a12e48351be3ee05ec23ef61aec81056b02014`
+- Integrated Auto Git object:
+  `sha1:7ed9e761921f557887440803d1fc7327f3e986a9`
+- Integrated Auto runtime-interface raw SHA-256:
+  `09af0c00273825e90a489f413a2f0bb6995042e5b4eea17973ce7582eab66340`
 - Control interface raw SHA-256:
-  `86e4d625bdab87261a39c949883d410822e25e0222dbab6a333d171ce420c614`
+  `31602443a685cc12a1eebd51ea8e0801ffd399c16a33186c372b7b81e8e46409`
 
 These Git objects are ordinary ancestors in the coordinated local commit
 chain. A downstream consumer must independently fetch and read them back from
@@ -57,12 +61,15 @@ the remote before treating either as an external trust root.
 ## Activation control
 
 - `CodexSkills/governance/activation/control-interface.json` pins the final
-  candidate object, the V2 consumer object, and Auto's verified historical
-  promotion/runtime evidence object
-  `sha1:d16273c26b859379578ea9ec04e1473f175d14f6`.
-- The source Auto runtime remains pinned to the historical 29/5 candidate.
-  The control records `auto_runtime_integration_complete=false` and requires a
-  separate `AUTO_EXACT_BUNDLE_INTEGRATION` phase.
+  candidate object, the V2 consumer object, the integrated Auto object
+  `sha1:7ed9e761921f557887440803d1fc7327f3e986a9`, and its exact
+  runtime-interface bytes.
+- Mechanism independently verifies all 21 Auto module digests declared by that
+  interface against the pinned Git object. The historical 29/5 tuple remains
+  lineage only.
+- The successor control records `auto_runtime_integration_complete=true`.
+  State-writing runtime entrypoints therefore require this successor's
+  repo-external control tuple in addition to the unchanged candidate tuple.
 - Activation remains forbidden. A future runtime must still use the existing
   intent → real provider `SENT` readback → settlement → FF publish → remote
   byte readback sequence with repo-external trust tuples.
@@ -84,12 +91,12 @@ the remote before treating either as an external trust root.
 
 ## Next exact action
 
-Auto may perform only `AUTO_EXACT_BUNDLE_INTEGRATION` from an independently
-verified remote head. It must consume the exact 31/5 candidate, V2 consumer,
-and control tuple; update only Auto-owned runtime/interface/tests; keep
-activation, Gmail send, state migration, shard instances, publication,
-VERSION, automation, and schedule changes disabled; and return a fresh remote
-readback tuple for the next coordinated phase.
+After this control is committed, FF-pushed, and independently read back, the
+only machine next phase is `AUTO_AU040_RUNTIME_WRITER_INTEGRATION`. That future
+Auto phase may implement only the shard/index/daily-manifest writer. It must
+leave publisher-v2 integration, repository binding, canonical shard creation,
+Gmail/state readiness, activation, VERSION, automation, and schedule changes
+disabled.
 
 Development still must not call verifier. After both planes are complete, the
 Owner will designate the last completed task to invoke a fresh verifier.

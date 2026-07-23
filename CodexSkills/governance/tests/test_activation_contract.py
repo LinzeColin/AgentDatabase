@@ -20,6 +20,9 @@ TOOLS_DIR = GOVERNANCE_DIR / "tools"
 sys.path.insert(0, str(TOOLS_DIR))
 
 from build_activation_control import (  # noqa: E402
+    AUTO_RUNTIME_GIT_OBJECT_ID,
+    AUTO_RUNTIME_INTERFACE_RAW_SHA256,
+    AUTO_RUNTIME_MODULE_COUNT,
     CANDIDATE_BUNDLE_DIGEST,
     CANDIDATE_BUNDLE_GIT_OBJECT_ID,
     CONTROL_INTERFACE_PATH,
@@ -30,6 +33,8 @@ from build_activation_control import (  # noqa: E402
     SETTLEMENT_ID,
     SETTLEMENT_SCHEMA_PATH,
     TARGET_SRV_REVISION,
+    _git_blob,
+    _preflight_inputs,
 )
 from canonical_json import canonical_digest, canonicalize_object  # noqa: E402
 from validate_activation import (  # noqa: E402
@@ -294,7 +299,11 @@ class ActivationControlTests(unittest.TestCase):
         self.assertEqual(interface["candidate_policy_count"], 5)
         self.assertEqual(
             interface["next_phase"],
-            "AUTO_EXACT_BUNDLE_INTEGRATION",
+            "AUTO_AU040_RUNTIME_WRITER_INTEGRATION",
+        )
+        self.assertEqual(
+            interface["base_auto_git_object_id"],
+            AUTO_RUNTIME_GIT_OBJECT_ID,
         )
         self.assertEqual(
             interface["consumer_contract"]["verified_git_object_id"],
@@ -305,16 +314,72 @@ class ActivationControlTests(unittest.TestCase):
                 "canonical_publication_permitted"
             ]
         )
-        self.assertFalse(
+        self.assertTrue(
             interface["transition_contract"][
                 "auto_runtime_integration_complete"
             ]
         )
         self.assertFalse(
+            interface["transition_contract"][
+                "final_candidate_integration_required"
+            ]
+        )
+        self.assertTrue(
+            interface["transition_contract"][
+                "runtime_preflight_shadow_permitted"
+            ]
+        )
+        self.assertTrue(
+            interface["transition_contract"]["runtime_state_write_permitted"]
+        )
+        self.assertFalse(
+            interface["transition_contract"]["runtime_state_instance_created"]
+        )
+        self.assertFalse(
+            interface["transition_contract"]["external_state_ready"]
+        )
+        self.assertFalse(
             interface["transition_contract"]["schedule_authority_resolved"]
         )
         self.assertFalse(interface["transition_contract"]["au_040_complete"])
+        self.assertFalse(
+            interface["transition_contract"][
+                "au_040_daily_jsonl_shard_complete"
+            ]
+        )
+        self.assertFalse(
+            interface["transition_contract"][
+                "runtime_shard_writer_integration_complete"
+            ]
+        )
+        self.assertFalse(
+            interface["transition_contract"][
+                "publisher_v2_runtime_integration_complete"
+            ]
+        )
         self.assertFalse(interface["transition_contract"]["m0c_b_permitted"])
+        self.assertFalse(
+            interface["transition_contract"][
+                "canonical_publication_permitted"
+            ]
+        )
+        self.assertFalse(
+            interface["transition_contract"]["repository_bound"]
+        )
+        self.assertEqual(
+            interface["transport_runtime_interface"],
+            {
+                "artifact_digest": AUTO_RUNTIME_INTERFACE_RAW_SHA256,
+                "integration_state": (
+                    "FINAL_31_5_INTEGRATED_CONTROL_SYNCED"
+                ),
+                "module_count": AUTO_RUNTIME_MODULE_COUNT,
+                "relative_path": (
+                    "CodexSkills/registry/auto/runtime-interface.json"
+                ),
+                "verified_git_object_id": AUTO_RUNTIME_GIT_OBJECT_ID,
+            },
+        )
         self.assertEqual(interface["bootstrap_schema_count"], 2)
         self.assertNotIn(
             INTENT_ID, {entry["id"] for entry in manifest["schemas"]}
@@ -337,6 +402,36 @@ class ActivationControlTests(unittest.TestCase):
             },
             observed,
         )
+
+    def test_02a_integrated_auto_interface_and_modules_are_exact(self) -> None:
+        _preflight_inputs(
+            require_non_active=True,
+            require_current_auto=True,
+        )
+
+    def test_02b_integrated_auto_module_digest_drift_fails_closed(self) -> None:
+        target = "CodexSkills/registry/auto/runtime/__init__.py"
+
+        def drift(object_id: str, relative_path: str) -> bytes:
+            if (
+                object_id == AUTO_RUNTIME_GIT_OBJECT_ID
+                and relative_path == target
+            ):
+                return b"drift"
+            return _git_blob(object_id, relative_path)
+
+        with mock.patch(
+            "build_activation_control._git_blob",
+            side_effect=drift,
+        ):
+            with self.assertRaisesRegex(
+                ContractError,
+                "ACTIVATION_AUTO_MODULE_DIGEST_MISMATCH",
+            ):
+                _preflight_inputs(
+                    require_non_active=False,
+                    require_current_auto=False,
+                )
 
     def test_03_valid_intent_and_settlement_close_two_stage_handshake(self) -> None:
         intent = intent_fixture()

@@ -8,7 +8,7 @@ import hashlib
 import json
 import subprocess
 import sys
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from typing import Any, Dict, Mapping, Optional, Sequence
 
 from canonical_json import canonicalize_object, parse_json_bytes
@@ -63,9 +63,21 @@ CANDIDATE_BUNDLE_DIGEST = (
 CANDIDATE_BUNDLE_GIT_OBJECT_ID = (
     "sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5"
 )
-BASE_AUTO_GIT_OBJECT_ID = "sha1:d16273c26b859379578ea9ec04e1473f175d14f6"
+AUTO_RUNTIME_GIT_OBJECT_ID = (
+    "sha1:7ed9e761921f557887440803d1fc7327f3e986a9"
+)
 AUTO_RUNTIME_INTERFACE_RAW_SHA256 = (
-    "e8d8af9b74908e56a86550492f4cf26a100bfd674cf858c61e72e3193b3d8a24"
+    "09af0c00273825e90a489f413a2f0bb6995042e5b4eea17973ce7582eab66340"
+)
+AUTO_RUNTIME_MODULE_COUNT = 21
+AUTO_SOURCE_CONTROL_GIT_OBJECT_ID = (
+    "sha1:66d5bafadca508cad825b4ce49a42e81e8b66ef7"
+)
+AUTO_SOURCE_CONTROL_INTERFACE_RAW_SHA256 = (
+    "86e4d625bdab87261a39c949883d410822e25e0222dbab6a333d171ce420c614"
+)
+AUTO_PROMOTION_GIT_OBJECT_ID = (
+    "sha1:ab49666bd3343c2abbfc6766478fad63d44163d0"
 )
 AUTO_PROMOTION_INTERFACE_RAW_SHA256 = (
     "65c2e83bb2491d1cb3059767cf1705fc7541bd7e97449f33a51ba17a04f5e595"
@@ -83,6 +95,9 @@ CONSUMER_GIT_OBJECT_ID = "sha1:91a12e48351be3ee05ec23ef61aec81056b02014"
 TARGET_SRV_REVISION = "v0.0.0.3"
 CANDIDATE_MANIFEST_REPO_PATH = (
     "CodexSkills/governance/bundles/schema-bundle-manifest.v1.json"
+)
+CANDIDATE_MANIFEST_RAW_SHA256 = (
+    "66ad125629cab71739ff2bc266219f995f7a45998936ca720c6db678ee77e65a"
 )
 
 COMMON_ID = "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1"
@@ -364,6 +379,65 @@ def _git_blob(object_id: str, relative_path: str) -> bytes:
     return process.stdout
 
 
+def _is_sha256(value: Any) -> bool:
+    return (
+        isinstance(value, str)
+        and len(value) == 64
+        and all(character in "0123456789abcdef" for character in value)
+    )
+
+
+def _verify_auto_module_artifacts(
+    auto_interface: Mapping[str, Any],
+    *,
+    require_current_auto: bool,
+) -> None:
+    artifacts = auto_interface.get("module_artifacts")
+    if (
+        not isinstance(artifacts, list)
+        or auto_interface.get("module_count") != AUTO_RUNTIME_MODULE_COUNT
+        or len(artifacts) != AUTO_RUNTIME_MODULE_COUNT
+    ):
+        raise ContractError("ACTIVATION_AUTO_MODULE_SET_INVALID")
+
+    observed_paths = []
+    for entry in artifacts:
+        if not isinstance(entry, dict):
+            raise ContractError("ACTIVATION_AUTO_MODULE_ENTRY_INVALID")
+        relative_path = entry.get("relative_path")
+        artifact_digest = entry.get("artifact_digest")
+        if (
+            not isinstance(relative_path, str)
+            or not relative_path.startswith("CodexSkills/registry/auto/")
+            or "\\" in relative_path
+            or ".." in PurePosixPath(relative_path).parts
+            or not _is_sha256(artifact_digest)
+        ):
+            raise ContractError("ACTIVATION_AUTO_MODULE_ENTRY_INVALID")
+        observed_paths.append(relative_path)
+        pinned_raw = _git_blob(AUTO_RUNTIME_GIT_OBJECT_ID, relative_path)
+        if hashlib.sha256(pinned_raw).hexdigest() != artifact_digest:
+            raise ContractError("ACTIVATION_AUTO_MODULE_DIGEST_MISMATCH")
+        if require_current_auto:
+            try:
+                local_raw = REPO_ROOT.joinpath(
+                    *relative_path.split("/")
+                ).read_bytes()
+            except OSError as exc:
+                raise ContractError(
+                    "ACTIVATION_AUTO_MODULE_READ_FAILED"
+                ) from exc
+            if local_raw != pinned_raw:
+                raise ContractError(
+                    "ACTIVATION_AUTO_MODULE_CURRENT_DRIFT"
+                )
+    if (
+        observed_paths != sorted(observed_paths)
+        or len(observed_paths) != len(set(observed_paths))
+    ):
+        raise ContractError("ACTIVATION_AUTO_MODULE_SET_INVALID")
+
+
 def _preflight_inputs(
     *,
     require_non_active: bool,
@@ -390,7 +464,9 @@ def _preflight_inputs(
             )
     manifest = parse_json_bytes(manifest_raw)
     if (
-        not isinstance(manifest, dict)
+        hashlib.sha256(manifest_raw).hexdigest()
+        != CANDIDATE_MANIFEST_RAW_SHA256
+        or not isinstance(manifest, dict)
         or manifest.get("bundle_digest") != CANDIDATE_BUNDLE_DIGEST
         or manifest.get("srv_revision") != TARGET_SRV_REVISION
         or manifest.get("schema_count") != 31
@@ -398,7 +474,7 @@ def _preflight_inputs(
     ):
         raise ContractError("ACTIVATION_CANDIDATE_MANIFEST_MISMATCH")
     auto_raw = _git_blob(
-        BASE_AUTO_GIT_OBJECT_ID,
+        AUTO_RUNTIME_GIT_OBJECT_ID,
         "CodexSkills/registry/auto/runtime-interface.json",
     )
     if hashlib.sha256(auto_raw).hexdigest() != AUTO_RUNTIME_INTERFACE_RAW_SHA256:
@@ -412,7 +488,7 @@ def _preflight_inputs(
             raise ContractError("ACTIVATION_AUTO_INTERFACE_CURRENT_DRIFT")
     auto_interface = parse_json_bytes(auto_raw)
     promotion_raw = _git_blob(
-        BASE_AUTO_GIT_OBJECT_ID,
+        AUTO_PROMOTION_GIT_OBJECT_ID,
         AUTO_PROMOTION_INTERFACE_REPO_PATH,
     )
     if (
@@ -431,21 +507,58 @@ def _preflight_inputs(
     if (
         not isinstance(auto_interface, dict)
         or auto_interface.get("status") != "DRAFT_NON_ACTIVE"
+        or auto_interface.get("auto_exact_bundle_integration_complete")
+        is not True
         or auto_interface.get("candidate_bundle_digest")
-        != SOURCE_AUTO_CANDIDATE_BUNDLE_DIGEST
+        != CANDIDATE_BUNDLE_DIGEST
         or auto_interface.get("candidate_git_object_id")
-        != SOURCE_AUTO_CANDIDATE_GIT_OBJECT_ID
-        or auto_interface.get("shared_bundle_schema_count") != 29
+        != CANDIDATE_BUNDLE_GIT_OBJECT_ID
+        or auto_interface.get("candidate_manifest_raw_sha256")
+        != CANDIDATE_MANIFEST_RAW_SHA256
+        or auto_interface.get("shared_bundle_schema_count") != 31
         or auto_interface.get("shared_policy_count") != 5
+        or auto_interface.get("consumer_first_gate_satisfied") is not True
+        or auto_interface.get("consumer_first_verified_git_object_id")
+        != CONSUMER_GIT_OBJECT_ID
+        or auto_interface.get("consumer_first_interface_raw_sha256")
+        != CONSUMER_INTERFACE_RAW_SHA256
+        or auto_interface.get("activation_control_baseline_git_object_id")
+        != AUTO_SOURCE_CONTROL_GIT_OBJECT_ID
+        or auto_interface.get(
+            "activation_control_baseline_interface_raw_sha256"
+        )
+        != AUTO_SOURCE_CONTROL_INTERFACE_RAW_SHA256
+        or auto_interface.get("activation_control_mode")
+        != "DRAFT_NON_ACTIVE_CONTROL"
+        or auto_interface.get("activation_control_observed_root_status")
+        != "DRAFT_NON_ACTIVE"
+        or auto_interface.get("dual_external_trust_tuples_required")
+        is not True
+        or auto_interface.get("control_sync_required_before_state_write")
+        is not True
+        or auto_interface.get(
+            "control_observed_auto_runtime_integration_complete"
+        )
+        is not False
+        or auto_interface.get("runtime_preflight_shadow_permitted")
+        is not True
+        or auto_interface.get("runtime_state_write_permitted") is not False
         or auto_interface.get("au_040_schema_promotion_complete") is not True
         or auto_interface.get(
             "au_040_retention_policy_v3_repository_accepted"
         )
         is not True
-        or auto_interface.get("au_040_manifest_contract_resolved") is not False
+        or auto_interface.get("au_040_retention_policy_v3_present")
+        is not True
+        or auto_interface.get("au_040_manifest_contract_resolved") is not True
+        or auto_interface.get(
+            "au_040_consumer_manifest_path_contract_present"
+        )
+        is not True
         or auto_interface.get("au_040_daily_jsonl_shard_complete") is not False
         or auto_interface.get("canonical_publication_permitted") is not False
         or auto_interface.get("schedule_authority_resolved") is not False
+        or auto_interface.get("schedule_complete") is not False
         or auto_interface.get("external_gmail_ready_gate_satisfied") is not False
         or auto_interface.get("m0c_b_permitted") is not False
         or auto_interface.get("notification_production_transport")
@@ -454,10 +567,20 @@ def _preflight_inputs(
         or auto_interface.get("notification_test_transport_production_forbidden")
         is not True
         or auto_interface.get("next_phase")
-        != "MECHANISM_FINAL_31_5_CANDIDATE_CONSUMER_CONTROL"
+        != "MECHANISM_POST_AUTO_INTEGRATION_CONTROL_SYNC"
         or not isinstance(transport, dict)
+        or transport.get("current_candidate_schema_count") != 31
+        or transport.get("final_candidate_materialization_complete")
+        is not True
+        or transport.get("runtime_shard_writer_integration_complete")
+        is not False
+        or transport.get("publisher_v2_runtime_integration_complete")
+        is not False
+        or transport.get("repository_bound") is not False
         or transport.get("schema_promotion_interface_raw_sha256")
         != AUTO_PROMOTION_INTERFACE_RAW_SHA256
+        or transport.get("schema_promotion_evidence_git_object_id")
+        != AUTO_PROMOTION_GIT_OBJECT_ID
         or not isinstance(promotion_interface, dict)
         or promotion_interface.get("status")
         != "DRAFT_NON_ACTIVE_SCHEMA_PROMOTED"
@@ -465,6 +588,10 @@ def _preflight_inputs(
         or promotion_interface.get("runtime_integration_performed") is not False
     ):
         raise ContractError("ACTIVATION_AUTO_INTERFACE_CONTRACT_MISMATCH")
+    _verify_auto_module_artifacts(
+        auto_interface,
+        require_current_auto=require_current_auto,
+    )
 
     consumer_raw = _git_blob(
         CONSUMER_GIT_OBJECT_ID,
@@ -531,7 +658,7 @@ def control_interface(schemas: Mapping[str, Mapping[str, Any]]) -> Dict[str, Any
         )
     return {
         "activation_forbidden": True,
-        "base_auto_git_object_id": BASE_AUTO_GIT_OBJECT_ID,
+        "base_auto_git_object_id": AUTO_RUNTIME_GIT_OBJECT_ID,
         "bootstrap_schema_entries": entries,
         "bootstrap_schema_count": len(entries),
         "bundle_digest": CANDIDATE_BUNDLE_DIGEST,
@@ -566,7 +693,7 @@ def control_interface(schemas: Mapping[str, Mapping[str, Any]]) -> Dict[str, Any
             "timing": "PRE_WRITE",
             "transport": "GMAIL_API_V1",
         },
-        "next_phase": "AUTO_EXACT_BUNDLE_INTEGRATION",
+        "next_phase": "AUTO_AU040_RUNTIME_WRITER_INTEGRATION",
         "protocol_revision": PROTOCOL_REVISION,
         "publication_contract": {
             "caller_boolean_is_not_trust_root": True,
@@ -588,7 +715,14 @@ def control_interface(schemas: Mapping[str, Mapping[str, Any]]) -> Dict[str, Any
         "target_srv_revision": TARGET_SRV_REVISION,
         "transition_contract": {
             "au_040_complete": False,
-            "auto_runtime_integration_complete": False,
+            "au_040_daily_jsonl_shard_complete": False,
+            "auto_runtime_integrated_candidate": {
+                "bundle_digest": CANDIDATE_BUNDLE_DIGEST,
+                "policy_count": 5,
+                "schema_count": 31,
+                "verified_git_object_id": CANDIDATE_BUNDLE_GIT_OBJECT_ID,
+            },
+            "auto_runtime_integration_complete": True,
             "auto_runtime_source_candidate": {
                 "bundle_digest": SOURCE_AUTO_CANDIDATE_BUNDLE_DIGEST,
                 "policy_count": 5,
@@ -597,22 +731,29 @@ def control_interface(schemas: Mapping[str, Mapping[str, Any]]) -> Dict[str, Any
             },
             "canonical_publication_permitted": False,
             "external_gmail_ready": False,
-            "final_candidate_integration_required": True,
+            "external_state_ready": False,
+            "final_candidate_integration_required": False,
             "m0c_b_permitted": False,
             "promotion_evidence": {
                 "artifact_digest": AUTO_PROMOTION_INTERFACE_RAW_SHA256,
                 "relative_path": AUTO_PROMOTION_INTERFACE_REPO_PATH,
-                "verified_git_object_id": BASE_AUTO_GIT_OBJECT_ID,
+                "verified_git_object_id": AUTO_PROMOTION_GIT_OBJECT_ID,
             },
+            "publisher_v2_runtime_integration_complete": False,
             "repository_bound": False,
+            "runtime_preflight_shadow_permitted": True,
+            "runtime_shard_writer_integration_complete": False,
+            "runtime_state_instance_created": False,
+            "runtime_state_write_permitted": True,
             "schedule_authority_resolved": False,
             "schedule_complete": False,
         },
         "transport_runtime_interface": {
             "artifact_digest": AUTO_RUNTIME_INTERFACE_RAW_SHA256,
-            "integration_state": "SOURCE_CANDIDATE_NOT_FINAL",
+            "integration_state": "FINAL_31_5_INTEGRATED_CONTROL_SYNCED",
+            "module_count": AUTO_RUNTIME_MODULE_COUNT,
             "relative_path": "CodexSkills/registry/auto/runtime-interface.json",
-            "verified_git_object_id": BASE_AUTO_GIT_OBJECT_ID,
+            "verified_git_object_id": AUTO_RUNTIME_GIT_OBJECT_ID,
         },
         "validator_contract": {
             "artifact_reads": "DESCRIPTOR_RELATIVE_O_NOFOLLOW",

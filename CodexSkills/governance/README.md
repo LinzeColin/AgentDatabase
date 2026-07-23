@@ -32,8 +32,8 @@ Key entrypoints:
 - `draft-interface.json`: exact M0a interface for Auto A1a.
 - `bundles/schema-bundle-manifest.v1.json`: final non-active 31/5 candidate
   manifest.
-- `activation/control-interface.json`: final non-active candidate/consumer
-  control handoff for Auto exact-bundle integration.
+- `activation/control-interface.json`: non-active successor control binding the
+  final candidate, V2 consumer, and exact integrated Auto runtime interface.
 - `au040/semantic-policy-acceptance.json`: non-active handoff that accepts the
   four exact Auto transport-schema byte digests and freezes the two versioned
   Mechanism policy replacements plus seven production semantic guards.
@@ -133,9 +133,12 @@ byte closure, paired part/index/manifest publication, and paired
 part-delete/retention-receipt/manifest publication. The Auto draft validator
 is useful draft evidence but is explicitly not a production trust root.
 
-The control interface now binds the final candidate Git object and the exact
-V2 consumer Git object, while recording that Auto runtime still consumes the
-historical 29/5 tuple. Its only next phase is
-`AUTO_EXACT_BUNDLE_INTEGRATION`. Schedule authority, Gmail/state readiness,
-AU-040 runtime completion, M0c-B, ACTIVE trust, and canonical publication
-remain false.
+The successor control binds the exact final candidate and V2 consumer plus the
+integrated Auto runtime Git object, runtime-interface bytes, and 21 declared
+module digests. It records `auto_runtime_integration_complete=true` and allows
+state-writing entrypoints to pass only when callers supply both exact external
+candidate and successor-control trust tuples. Activation remains forbidden.
+Its only next phase is `AUTO_AU040_RUNTIME_WRITER_INTEGRATION`; publisher-v2
+integration is deliberately a later phase. Schedule authority, Gmail/state
+readiness, AU-040 completion, repository binding, M0c-B, ACTIVE trust, and
+canonical publication remain false.
