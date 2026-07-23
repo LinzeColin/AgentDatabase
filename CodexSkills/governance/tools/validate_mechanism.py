@@ -58,7 +58,7 @@ SCHEMA_PREFIX = "urn:linzecolin:agentdatabase:skillops:schema:"
 PROTOCOL = "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1"
 JSON_SCHEMA = "https://json-schema.org/draft/2020-12/schema"
 MANIFEST_SCHEMA_ID = SCHEMA_PREFIX + "schema-bundle-manifest:v1"
-EXPECTED_SCHEMA_SELF_POINTERS = {
+LEGACY_SCHEMA_SELF_POINTERS = {
     SCHEMA_PREFIX + "common-definitions:v1": None,
     SCHEMA_PREFIX + "skill-binding:v1": None,
     SCHEMA_PREFIX + "public-value-policy:v1": None,
@@ -89,7 +89,7 @@ EXPECTED_SCHEMA_SELF_POINTERS = {
     SCHEMA_PREFIX + "retention-receipt:v2": "/receipt_digest",
     SCHEMA_PREFIX + "migration-receipt:v2": "/receipt_digest",
 }
-AUTO_PUBLIC_SCHEMA_IDS = {
+LEGACY_AUTO_PUBLIC_SCHEMA_IDS = {
     SCHEMA_PREFIX + "source-inventory:v1",
     SCHEMA_PREFIX + "public-run-event:v2",
     SCHEMA_PREFIX + "source-coverage-receipt:v1",
@@ -105,13 +105,69 @@ AUTO_PRIVATE_SCHEMA_IDS = {
     SCHEMA_PREFIX + "lock-state:v1",
     SCHEMA_PREFIX + "raw-segment:v2",
 }
-EXPECTED_POLICY_IDS = {
+LEGACY_POLICY_IDS = {
     "urn:linzecolin:agentdatabase:skillops:policy:public-value:v1",
     "urn:linzecolin:agentdatabase:skillops:policy:source-material:v1",
     "urn:linzecolin:agentdatabase:skillops:policy:retention:v2",
     "urn:linzecolin:agentdatabase:skillops:policy:notification:v1",
     "urn:linzecolin:agentdatabase:skillops:policy:version:v2",
 }
+FINAL_SCHEMA_SELF_POINTERS = {
+    **{
+        schema_id: pointer
+        for schema_id, pointer in LEGACY_SCHEMA_SELF_POINTERS.items()
+        if schema_id
+        not in {
+            SCHEMA_PREFIX + "public-value-policy:v1",
+            SCHEMA_PREFIX + "retention-policy:v2",
+            SCHEMA_PREFIX + "publication-manifest:v1",
+            SCHEMA_PREFIX + "retention-receipt:v2",
+        }
+    },
+    SCHEMA_PREFIX + "public-value-policy:v2": None,
+    SCHEMA_PREFIX + "retention-policy:v3": None,
+    SCHEMA_PREFIX + "daily-run-shard-manifest:v1": "/manifest_digest",
+    SCHEMA_PREFIX + "publication-manifest:v2": "/manifest_digest",
+    SCHEMA_PREFIX + "retention-receipt:v3": "/receipt_digest",
+    SCHEMA_PREFIX + "run-event-index-entry:v1": "/index_entry_digest",
+}
+FINAL_AUTO_PUBLIC_SCHEMA_IDS = {
+    **{
+        schema_id: None
+        for schema_id in LEGACY_AUTO_PUBLIC_SCHEMA_IDS
+        if schema_id
+        not in {
+            SCHEMA_PREFIX + "publication-manifest:v1",
+            SCHEMA_PREFIX + "retention-receipt:v2",
+        }
+    },
+    SCHEMA_PREFIX + "daily-run-shard-manifest:v1": None,
+    SCHEMA_PREFIX + "publication-manifest:v2": None,
+    SCHEMA_PREFIX + "retention-receipt:v3": None,
+    SCHEMA_PREFIX + "run-event-index-entry:v1": None,
+}
+FINAL_AUTO_PUBLIC_SCHEMA_IDS = set(FINAL_AUTO_PUBLIC_SCHEMA_IDS)
+FINAL_POLICY_IDS = {
+    *(
+        policy_id
+        for policy_id in LEGACY_POLICY_IDS
+        if policy_id
+        not in {
+            "urn:linzecolin:agentdatabase:skillops:policy:public-value:v1",
+            "urn:linzecolin:agentdatabase:skillops:policy:retention:v2",
+        }
+    ),
+    "urn:linzecolin:agentdatabase:skillops:policy:public-value:v2",
+    "urn:linzecolin:agentdatabase:skillops:policy:retention:v3",
+}
+
+# Backward-compatible names remain the immutable M0a/M0b draft profile.
+# Auto's non-active runtime imports these while it is still pinned to the
+# 29-schema predecessor candidate.  Final candidate validation selects an
+# explicit profile from the complete manifest member sets instead.
+EXPECTED_SCHEMA_SELF_POINTERS = LEGACY_SCHEMA_SELF_POINTERS
+AUTO_PUBLIC_SCHEMA_IDS = LEGACY_AUTO_PUBLIC_SCHEMA_IDS
+EXPECTED_POLICY_IDS = LEGACY_POLICY_IDS
 EVAL_DIMENSION_CODES = {
     "EFFICIENCY",
     "MAINTAINABILITY",
@@ -211,6 +267,84 @@ class TrustTuple:
     expected_bundle_digest: str
     canonical_manifest_path: str
     mode: str
+
+
+@dataclasses.dataclass(frozen=True)
+class BundleProfile:
+    name: str
+    schema_self_pointers: Mapping[str, Optional[str]]
+    auto_public_schema_ids: set[str]
+    policy_ids: set[str]
+
+
+LEGACY_BUNDLE_PROFILE = BundleProfile(
+    "LEGACY_29_5",
+    LEGACY_SCHEMA_SELF_POINTERS,
+    LEGACY_AUTO_PUBLIC_SCHEMA_IDS,
+    LEGACY_POLICY_IDS,
+)
+FINAL_BUNDLE_PROFILE = BundleProfile(
+    "FINAL_31_5",
+    FINAL_SCHEMA_SELF_POINTERS,
+    FINAL_AUTO_PUBLIC_SCHEMA_IDS,
+    FINAL_POLICY_IDS,
+)
+FINAL_MECHANISM_V2_SCHEMA_IDS = {
+    SCHEMA_PREFIX + "public-value-policy:v2",
+    SCHEMA_PREFIX + "retention-policy:v3",
+}
+FINAL_AUTO_V2_SCHEMA_IDS = {
+    SCHEMA_PREFIX + "daily-run-shard-manifest:v1",
+    SCHEMA_PREFIX + "publication-manifest:v2",
+    SCHEMA_PREFIX + "retention-receipt:v3",
+    SCHEMA_PREFIX + "run-event-index-entry:v1",
+}
+FINAL_MECHANISM_V2_POLICY_IDS = {
+    "urn:linzecolin:agentdatabase:skillops:policy:public-value:v2",
+    "urn:linzecolin:agentdatabase:skillops:policy:retention:v3",
+}
+
+
+def resolve_bundle_profile(
+    schema_ids: Iterable[str],
+    policy_ids: Iterable[str],
+) -> BundleProfile:
+    """Select only one of the two explicitly supported immutable member sets."""
+
+    observed_schemas = set(schema_ids)
+    observed_policies = set(policy_ids)
+    for profile in (LEGACY_BUNDLE_PROFILE, FINAL_BUNDLE_PROFILE):
+        if (
+            observed_schemas == set(profile.schema_self_pointers)
+            and observed_policies == profile.policy_ids
+        ):
+            return profile
+    raise ContractError("TRUST_BUNDLE_PROFILE_UNSUPPORTED")
+
+
+def expected_schema_path_prefix(
+    profile: BundleProfile,
+    schema_id: str,
+) -> str:
+    if schema_id in profile.auto_public_schema_ids:
+        if profile.name == FINAL_BUNDLE_PROFILE.name and schema_id in FINAL_AUTO_V2_SCHEMA_IDS:
+            return "CodexSkills/registry/auto/schemas/public-v2/"
+        return "CodexSkills/registry/auto/schemas/public/"
+    if profile.name == FINAL_BUNDLE_PROFILE.name and schema_id in FINAL_MECHANISM_V2_SCHEMA_IDS:
+        return "CodexSkills/governance/schemas-v2/"
+    return "CodexSkills/governance/schemas/"
+
+
+def expected_policy_path_prefix(
+    profile: BundleProfile,
+    policy_id: str,
+) -> str:
+    if (
+        profile.name == FINAL_BUNDLE_PROFILE.name
+        and policy_id in FINAL_MECHANISM_V2_POLICY_IDS
+    ):
+        return "CodexSkills/governance/policies-v2/"
+    return "CodexSkills/governance/policies/"
 
 
 def _release_tuple(value: str) -> Tuple[int, ...]:
@@ -725,8 +859,12 @@ def _entropy(value: str) -> float:
 
 def scan_public_value(value: Any, policies: Mapping[str, Any]) -> None:
     public_policy = policies.get(
-        "urn:linzecolin:agentdatabase:skillops:policy:public-value:v1"
+        "urn:linzecolin:agentdatabase:skillops:policy:public-value:v2"
     )
+    if not isinstance(public_policy, dict):
+        public_policy = policies.get(
+            "urn:linzecolin:agentdatabase:skillops:policy:public-value:v1"
+        )
     if not isinstance(public_policy, dict):
         raise ContractError("PUBLIC_VALUE_POLICY_NOT_TRUSTED")
     forbidden = set(public_policy["forbidden_field_names"])
@@ -1099,26 +1237,27 @@ def load_trusted_bundle(repo_root: Path, trust: TrustTuple) -> ContractBundle:
     if manifest.get("policy_count") != len(policy_entries):
         raise ContractError("TRUST_MANIFEST_POLICY_COUNT_MISMATCH")
     schema_ids = {entry["id"] for entry in schema_entries}
-    if schema_ids != set(EXPECTED_SCHEMA_SELF_POINTERS):
-        raise ContractError("TRUST_COMPLETE_SCHEMA_SET_MISMATCH")
+    policy_ids = {entry["id"] for entry in policy_entries}
+    profile = resolve_bundle_profile(schema_ids, policy_ids)
     if schema_ids.intersection(AUTO_PRIVATE_SCHEMA_IDS):
         raise ContractError("TRUST_AUTO_PRIVATE_SCHEMA_INCLUDED")
-    if {entry["id"] for entry in policy_entries} != EXPECTED_POLICY_IDS:
-        raise ContractError("TRUST_POLICY_SET_MISMATCH")
     schemas: Dict[str, Any] = {}
     pointers: Dict[str, Optional[str]] = {}
     for entry in schema_entries:
         schema_id = entry["id"]
-        expected_owner = "AUTO" if schema_id in AUTO_PUBLIC_SCHEMA_IDS else "MECHANISM"
+        expected_owner = (
+            "AUTO"
+            if schema_id in profile.auto_public_schema_ids
+            else "MECHANISM"
+        )
         if entry["owner_plane"] != expected_owner:
             raise ContractError(f"TRUST_SCHEMA_OWNER_MISMATCH:{schema_id}")
-        if entry["self_digest_pointer"] != EXPECTED_SCHEMA_SELF_POINTERS[schema_id]:
+        if (
+            entry["self_digest_pointer"]
+            != profile.schema_self_pointers[schema_id]
+        ):
             raise ContractError(f"TRUST_SELF_DIGEST_POINTER_MISMATCH:{schema_id}")
-        expected_prefix = (
-            "CodexSkills/registry/auto/schemas/public/"
-            if expected_owner == "AUTO"
-            else "CodexSkills/governance/schemas/"
-        )
+        expected_prefix = expected_schema_path_prefix(profile, schema_id)
         if not entry["relative_path"].startswith(expected_prefix):
             raise ContractError(f"TRUST_SCHEMA_PATH_OWNER_MISMATCH:{schema_id}")
         document = parse_json_bytes(_git_blob(repo_root, object_id, entry["relative_path"]))
@@ -1144,7 +1283,9 @@ def load_trusted_bundle(repo_root: Path, trust: TrustTuple) -> ContractBundle:
     for entry in policy_entries:
         if entry["owner_plane"] != "MECHANISM":
             raise ContractError(f"TRUST_POLICY_OWNER_MISMATCH:{entry['id']}")
-        if not entry["relative_path"].startswith("CodexSkills/governance/policies/"):
+        if not entry["relative_path"].startswith(
+            expected_policy_path_prefix(profile, entry["id"])
+        ):
             raise ContractError(f"TRUST_POLICY_PATH_OWNER_MISMATCH:{entry['id']}")
         policy = parse_json_bytes(_git_blob(repo_root, object_id, entry["relative_path"]))
         if not isinstance(policy, dict):

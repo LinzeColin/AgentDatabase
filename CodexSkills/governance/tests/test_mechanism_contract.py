@@ -32,6 +32,9 @@ from canonical_json import (  # noqa: E402
     verify_vendor,
 )
 import build_candidate_bundle as candidate_builder  # noqa: E402
+from validate_au040_semantic_acceptance import (  # noqa: E402
+    bind_au040_acceptance_to_trusted_bundle,
+)
 from validate_mechanism import (  # noqa: E402
     CANONICAL_MANIFEST_PATH,
     CORE_HARD_GATE_CODES,
@@ -1054,7 +1057,7 @@ class MechanismContractTests(unittest.TestCase):
         with self.assertRaisesRegex(ContractError, "TRUST_CANONICAL_MANIFEST_PATH_MISMATCH"):
             load_trusted_bundle(REPO_ROOT, wrong_path)
 
-    def test_15_m0b_candidate_is_complete_but_cannot_claim_activation(self) -> None:
+    def test_15_final_candidate_is_complete_but_cannot_claim_activation(self) -> None:
         self.assertEqual(self.interface["status"], "DRAFT_NON_ACTIVE")
         self.assertTrue(self.interface["activation_forbidden"])
         self.assertEqual(self.auto_interface["status"], "DRAFT_NON_ACTIVE")
@@ -1070,7 +1073,7 @@ class MechanismContractTests(unittest.TestCase):
         self.assertEqual(manifest["schema_version"], sid("schema-bundle-manifest"))
         self.assertEqual(manifest["protocol_revision"], PROTOCOL)
         self.assertEqual(manifest["srv_revision"], SRV)
-        self.assertEqual(manifest["schema_count"], 29)
+        self.assertEqual(manifest["schema_count"], 31)
         self.assertEqual(manifest["policy_count"], 5)
         self.assertEqual(
             manifest["compatibility"],
@@ -1080,29 +1083,41 @@ class MechanismContractTests(unittest.TestCase):
                 "predecessor_acceptance_expires_at": None,
             },
         )
-        normalized_auto_entries = [
-            {
-                "id": entry["id"],
-                "owner_plane": "AUTO",
-                "relative_path": entry["relative_path"],
-                "schema_version": entry["id"],
-                "schema_sha256": entry["schema_sha256"],
-                "compatibility": "EXACT_ONLY",
-                "self_digest_pointer": entry["self_digest_pointer"],
-            }
-            for entry in self.auto_interface["auto_public_schema_entries"]
-        ]
-        expected_schema_entries = sorted(
-            [
-                *self.interface["mechanism_schema_entries"],
-                *normalized_auto_entries,
-            ],
-            key=lambda entry: entry["id"].encode("ascii"),
+        schema_ids = {entry["id"] for entry in manifest["schemas"]}
+        policy_ids = {entry["id"] for entry in manifest["policies"]}
+        self.assertNotIn(sid("public-value-policy"), schema_ids)
+        self.assertNotIn(sid("retention-policy", 2), schema_ids)
+        self.assertNotIn(sid("publication-manifest"), schema_ids)
+        self.assertNotIn(sid("retention-receipt", 2), schema_ids)
+        self.assertIn(sid("public-value-policy", 2), schema_ids)
+        self.assertIn(sid("retention-policy", 3), schema_ids)
+        self.assertIn(sid("daily-run-shard-manifest"), schema_ids)
+        self.assertIn(sid("publication-manifest", 2), schema_ids)
+        self.assertIn(sid("retention-receipt", 3), schema_ids)
+        self.assertIn(sid("run-event-index-entry"), schema_ids)
+        self.assertNotIn(
+            "urn:linzecolin:agentdatabase:skillops:policy:public-value:v1",
+            policy_ids,
         )
-        self.assertEqual(manifest["schemas"], expected_schema_entries)
+        self.assertNotIn(
+            "urn:linzecolin:agentdatabase:skillops:policy:retention:v2",
+            policy_ids,
+        )
+        self.assertIn(
+            "urn:linzecolin:agentdatabase:skillops:policy:public-value:v2",
+            policy_ids,
+        )
+        self.assertIn(
+            "urn:linzecolin:agentdatabase:skillops:policy:retention:v3",
+            policy_ids,
+        )
         self.assertEqual(
-            manifest["policies"],
-            self.interface["mechanism_policy_entries"],
+            [entry["id"] for entry in manifest["schemas"]],
+            sorted(schema_ids, key=lambda value: value.encode("ascii")),
+        )
+        self.assertEqual(
+            [entry["id"] for entry in manifest["policies"]],
+            sorted(policy_ids, key=lambda value: value.encode("ascii")),
         )
         self.assertFalse(
             {entry["id"] for entry in manifest["schemas"]}.intersection(
@@ -1157,7 +1172,7 @@ class MechanismContractTests(unittest.TestCase):
         self.assertEqual(baseline["coverage_state"], "UNKNOWN")
         self.assertTrue(self.interface["consumer_first_contract"]["must_land_before_canonical_publish"])
 
-    def test_16_m0b_candidate_builder_is_byte_equivalent(self) -> None:
+    def test_16_final_candidate_builder_is_byte_equivalent(self) -> None:
         process = subprocess.run(
             [
                 "/usr/bin/python3",
@@ -1176,7 +1191,7 @@ class MechanismContractTests(unittest.TestCase):
             "CANDIDATE_BUNDLE_BYTE_EQUIVALENT bundle_digest=",
             process.stdout,
         )
-        self.assertIn("schemas=29 policies=5", process.stdout)
+        self.assertIn("schemas=31 policies=5", process.stdout)
 
     def test_17_m0b_candidate_builder_fails_closed_on_trust_input_drift(self) -> None:
         with mock.patch.object(
@@ -1202,6 +1217,75 @@ class MechanismContractTests(unittest.TestCase):
                     "CANDIDATE_BUILD_ACTIVE_VERSION_FORBIDDEN",
                 ):
                     candidate_builder.candidate_manifest()
+
+    def test_18_final_candidate_profile_is_trusted_offline(self) -> None:
+        manifest, _bundle = candidate_builder.candidate_manifest()
+        with tempfile.TemporaryDirectory() as temporary:
+            repo = Path(temporary)
+            for entry in [*manifest["schemas"], *manifest["policies"]]:
+                source = REPO_ROOT / entry["relative_path"]
+                target = repo / entry["relative_path"]
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(source, target)
+            vectors = (
+                "CodexSkills/governance/test_vectors/"
+                "canonicalization-v1.json"
+            )
+            target = repo / vectors
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(REPO_ROOT / vectors, target)
+            manifest_path = repo / CANONICAL_MANIFEST_PATH
+            manifest_path.parent.mkdir(parents=True, exist_ok=True)
+            manifest_path.write_text(
+                json.dumps(
+                    manifest,
+                    ensure_ascii=False,
+                    indent=2,
+                    sort_keys=True,
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+            for command in (
+                ["git", "init", "-q"],
+                ["git", "config", "user.name", "Mechanism Test"],
+                ["git", "config", "user.email", "mechanism-test@example.invalid"],
+                ["git", "add", "CodexSkills"],
+                ["git", "commit", "-q", "-m", "final candidate fixture"],
+            ):
+                process = subprocess.run(
+                    command,
+                    cwd=repo,
+                    text=True,
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.PIPE,
+                    check=False,
+                )
+                self.assertEqual(process.returncode, 0, process.stderr)
+            head = subprocess.check_output(
+                ["git", "rev-parse", "HEAD"],
+                cwd=repo,
+                text=True,
+            ).strip()
+            trusted = load_trusted_bundle(
+                repo,
+                TrustTuple(
+                    verified_git_object_id=f"sha1:{head}",
+                    expected_bundle_digest=manifest["bundle_digest"],
+                    canonical_manifest_path=CANONICAL_MANIFEST_PATH,
+                    mode="CANDIDATE",
+                ),
+            )
+        self.assertEqual(len(trusted.schemas), 31)
+        self.assertEqual(len(trusted.policies), 5)
+        accepted = bind_au040_acceptance_to_trusted_bundle(trusted)
+        self.assertIs(accepted.bundle, trusted)
+        scan_public_value({"shard_digest": "a" * 64}, trusted.policies)
+        with self.assertRaisesRegex(
+            ContractError,
+            "PUBLIC_HIGH_ENTROPY_FREE_STRING_BLOCK",
+        ):
+            scan_public_value({"digest": "a" * 64}, trusted.policies)
 
 
 if __name__ == "__main__":

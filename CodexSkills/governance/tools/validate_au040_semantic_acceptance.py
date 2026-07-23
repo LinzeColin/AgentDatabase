@@ -269,6 +269,33 @@ def load_au040_acceptance() -> AU040AcceptanceContract:
     )
 
 
+def bind_au040_acceptance_to_trusted_bundle(
+    trusted: ContractBundle,
+) -> AU040AcceptanceContract:
+    """Bind accepted AU-040 semantics to an externally trusted final bundle."""
+
+    accepted = load_au040_acceptance()
+    if (
+        trusted.protocol_revision != accepted.bundle.protocol_revision
+        or set(trusted.schemas) != set(accepted.bundle.schemas)
+        or set(trusted.policies) != set(accepted.bundle.policies)
+        or trusted.self_digest_pointers
+        != accepted.bundle.self_digest_pointers
+    ):
+        _fail("AU040_TRUSTED_FINAL_BUNDLE_MEMBER_SET_MISMATCH")
+    for schema_id, expected in accepted.bundle.schemas.items():
+        if canonicalize_object(trusted.schemas[schema_id]) != canonicalize_object(
+            expected
+        ):
+            _fail(f"AU040_TRUSTED_FINAL_SCHEMA_BYTES_MISMATCH:{schema_id}")
+    for policy_id, expected in accepted.bundle.policies.items():
+        if canonicalize_object(trusted.policies[policy_id]) != canonicalize_object(
+            expected
+        ):
+            _fail(f"AU040_TRUSTED_FINAL_POLICY_BYTES_MISMATCH:{policy_id}")
+    return dataclasses.replace(accepted, bundle=trusted)
+
+
 def _validate_policy_semantics(
     transport: TransportDraftContract,
     public_value_policy: Mapping[str, Any],
@@ -372,12 +399,14 @@ def prune_deadline_breached(
 def validate_daily_manifest_semantics(
     contract: AU040AcceptanceContract,
     instance: Mapping[str, Any],
+    *,
+    expected_bundle_digest: str = CURRENT_CANDIDATE_BUNDLE_DIGEST,
 ) -> None:
     validate_transport_instance(
         contract.transport,
         instance,
         DAILY_MANIFEST_ID,
-        expected_bundle_digest=CURRENT_CANDIDATE_BUNDLE_DIGEST,
+        expected_bundle_digest=expected_bundle_digest,
         allow_draft_policy_delta=True,
     )
     validate_public_value_v2(contract, instance)
@@ -391,12 +420,14 @@ def validate_daily_manifest_semantics(
 def validate_retention_receipt_semantics(
     contract: AU040AcceptanceContract,
     instance: Mapping[str, Any],
+    *,
+    expected_bundle_digest: str = CURRENT_CANDIDATE_BUNDLE_DIGEST,
 ) -> None:
     validate_transport_instance(
         contract.transport,
         instance,
         RETENTION_V3_ID,
-        expected_bundle_digest=CURRENT_CANDIDATE_BUNDLE_DIGEST,
+        expected_bundle_digest=expected_bundle_digest,
         allow_draft_policy_delta=True,
     )
     validate_public_value_v2(contract, instance)
@@ -451,8 +482,14 @@ def validate_manifest_revision_chain(
     current_repo_path: str,
     prior: Optional[Mapping[str, Any]],
     prior_repo_path: Optional[str],
+    *,
+    expected_bundle_digest: str = CURRENT_CANDIDATE_BUNDLE_DIGEST,
 ) -> None:
-    validate_daily_manifest_semantics(contract, current)
+    validate_daily_manifest_semantics(
+        contract,
+        current,
+        expected_bundle_digest=expected_bundle_digest,
+    )
     current_revision = current["manifest_revision"]
     current_date, _ = _manifest_path(current_repo_path, current_revision)
     if current_date != current["local_date"]:
@@ -467,7 +504,11 @@ def validate_manifest_revision_chain(
         return
     if prior is None or prior_repo_path is None:
         _fail("AU040_MANIFEST_PREDECESSOR_REQUIRED")
-    validate_daily_manifest_semantics(contract, prior)
+    validate_daily_manifest_semantics(
+        contract,
+        prior,
+        expected_bundle_digest=expected_bundle_digest,
+    )
     prior_revision = prior["manifest_revision"]
     prior_date, _ = _manifest_path(prior_repo_path, prior_revision)
     if (
@@ -539,8 +580,13 @@ def validate_part_index_manifest_closure(
     part_bytes: bytes,
     index_bytes: bytes,
     known_events: Optional[Mapping[str, str]] = None,
+    expected_bundle_digest: str = CURRENT_CANDIDATE_BUNDLE_DIGEST,
 ) -> None:
-    validate_daily_manifest_semantics(contract, manifest)
+    validate_daily_manifest_semantics(
+        contract,
+        manifest,
+        expected_bundle_digest=expected_bundle_digest,
+    )
     matching = [
         part
         for part in manifest["parts"]
@@ -563,14 +609,14 @@ def validate_part_index_manifest_closure(
         validate_public_run_event(
             _public_scanner_bundle(contract),
             event,
-            expected_bundle_digest=CURRENT_CANDIDATE_BUNDLE_DIGEST,
+            expected_bundle_digest=expected_bundle_digest,
         )
     for entry in index_rows:
         validate_instance(
             contract.bundle,
             entry,
             INDEX_ENTRY_ID,
-            expected_bundle_digest=CURRENT_CANDIDATE_BUNDLE_DIGEST,
+            expected_bundle_digest=expected_bundle_digest,
             public=False,
         )
         _validate_index_entry(entry)
@@ -645,12 +691,14 @@ def _daily_artifact_path(path: str) -> tuple[str, str, int]:
 def validate_publication_artifact_set(
     contract: AU040AcceptanceContract,
     instance: Mapping[str, Any],
+    *,
+    expected_bundle_digest: str = CURRENT_CANDIDATE_BUNDLE_DIGEST,
 ) -> None:
     validate_instance(
         contract.bundle,
         instance,
         PUBLICATION_V2_ID,
-        expected_bundle_digest=CURRENT_CANDIDATE_BUNDLE_DIGEST,
+        expected_bundle_digest=expected_bundle_digest,
         public=False,
     )
     validate_public_value_v2(contract, instance)
@@ -800,16 +848,22 @@ def validate_shard_transaction_closure(
     part_number: int,
     part_bytes: bytes,
     index_bytes: bytes,
+    expected_bundle_digest: str = CURRENT_CANDIDATE_BUNDLE_DIGEST,
 ) -> None:
     """Close one new immutable part against its transaction descriptors."""
 
-    validate_publication_artifact_set(contract, publication)
+    validate_publication_artifact_set(
+        contract,
+        publication,
+        expected_bundle_digest=expected_bundle_digest,
+    )
     validate_part_index_manifest_closure(
         contract,
         manifest,
         part_number=part_number,
         part_bytes=part_bytes,
         index_bytes=index_bytes,
+        expected_bundle_digest=expected_bundle_digest,
     )
     if (
         publication["auto_transaction_uid"]
@@ -859,11 +913,21 @@ def validate_prune_transaction_closure(
     manifest: Mapping[str, Any],
     manifest_repo_path: str,
     receipt_objects: Mapping[str, Mapping[str, Any]],
+    *,
+    expected_bundle_digest: str = CURRENT_CANDIDATE_BUNDLE_DIGEST,
 ) -> None:
     """Bind deleted parts, published receipts, and the new daily manifest."""
 
-    validate_publication_artifact_set(contract, publication)
-    validate_daily_manifest_semantics(contract, manifest)
+    validate_publication_artifact_set(
+        contract,
+        publication,
+        expected_bundle_digest=expected_bundle_digest,
+    )
+    validate_daily_manifest_semantics(
+        contract,
+        manifest,
+        expected_bundle_digest=expected_bundle_digest,
+    )
     if (
         publication["auto_transaction_uid"]
         != manifest["auto_transaction_uid"]
@@ -901,7 +965,11 @@ def validate_prune_transaction_closure(
         receipt = receipt_objects.get(path)
         if receipt is None:
             _fail("AU040_PRUNE_TRANSACTION_RECEIPT_OBJECT_MISSING")
-        validate_retention_receipt_semantics(contract, receipt)
+        validate_retention_receipt_semantics(
+            contract,
+            receipt,
+            expected_bundle_digest=expected_bundle_digest,
+        )
         if receipt["auto_transaction_uid"] != publication[
             "auto_transaction_uid"
         ]:
