@@ -1,0 +1,27 @@
+{
+  "schema": "openaidatabase.data.mirror_status.v1",
+  "status": "MIRRORED_DO_NOT_REUPLOAD",
+  "verified_at": "2026-07-23",
+  "source": "LinzeColin/AgentDatabase:OpenAIDatabase/data",
+  "mirror": "LinzeColin/Private-Database:Private-AgentDatabase/data",
+  "in_sync": {
+    "data_files_identical": 691,
+    "method": "git_blob_sha1_compare",
+    "source_total_files_in_data": 693,
+    "source_only_non_data_files": [
+      "WHERE_IS_THE_DATA.md",
+      "run_logs/skills_runs/README.md"
+    ],
+    "note": "the 2 source-only files are local scaffolding/signpost, intentionally NOT mirrored; the 691-vs-693 difference is expected, not a gap"
+  },
+  "source_role": "live_read_write_authority_for_this_repo",
+  "source_lifecycle": "read_only_for_migration_agents; gradual_phaseout_pending_consumer_sdk_cutover",
+  "do_not": [
+    "do NOT re-upload / sync / merge / reseed this data/ into Private-AgentDatabase (already mirrored; re-syncing only creates duplicate objects and churn)",
+    "do NOT delete local data/ (live runtime authority; data/memory/agent-memory.json is the agent startup entry + CI atlasctl reads it; deleting crashes this repo's system)",
+    "do NOT 'fix' the 691-vs-693 file-count difference by uploading the 2 source-only non-data files"
+  ],
+  "cross_repo_read": "python3 OpenAIDatabase/scripts/private_db_client.py get Private-AgentDatabase <path> <out>  (no clone)",
+  "relocated_large_assets": "session histories / exports / repair packs moved from public AgentDatabase Releases to Private-Database Releases; old public URLs are dead; ledger: LinzeColin/Private-Database:Private-AgentDatabase/manifest.jsonl (21 entries)",
+  "signpost_doc": "OpenAIDatabase/data/WHERE_IS_THE_DATA.md"
+}
