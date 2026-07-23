@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "persona-distiller-group/route-plan.schema.json",
+  "additionalProperties": true,
+  "properties": {
+    "actual_size": {"maximum": 20, "minimum": 0, "type": "integer"},
+    "control_roles": {
+      "contains": {"const": "decision-judge"},
+      "minItems": 3,
+      "type": "array"
+    },
+    "inferred_identity": {"minLength": 1, "type": "string"},
+    "inferred_scenario": {"minLength": 1, "type": "string"},
+    "requested_size": {"maximum": 20, "minimum": 5, "type": "integer"},
+    "schema_version": {"const": "1.0"},
+    "selected_roles": {"type": "array"},
+    "status": {"enum": ["ready", "insufficient_roster"]}
+  },
+  "required": [
+    "schema_version",
+    "status",
+    "inferred_identity",
+    "inferred_scenario",
+    "requested_size",
+    "actual_size",
+    "selected_roles",
+    "control_roles"
+  ],
+  "title": "Expert-team route plan",
+  "type": "object"
+}

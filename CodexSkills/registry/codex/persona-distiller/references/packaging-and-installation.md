@@ -1,16 +1,16 @@
 # Packaging and installation
 
-Meta-skill installation defaults to `$HOME/.codex/skills/persona-distiller`;
-project scope uses `<repo>/.codex/skills/persona-distiller`. `agents` remains
-an explicit alternate host target, but the installer refuses simultaneous
-`~/.codex/skills/persona-distiller` and `~/.agents/skills/persona-distiller`
-sources.
+The v0.0.0.5 release bundle contains both sibling Skills and installs only to:
 
-A target ZIP contains exactly one top-level directory whose name equals `SKILL.md.name`. Runtime package excludes raw data, Holdout answers, full private source text, secrets and prior run history. It includes model files, identity catalog, automatic internal router, optional unnumbered runtime recorder, active corrections, sanitized source/Claim metadata, installer, manifest and checksums.
+- `$HOME/.codex/skills/persona-distiller`
+- `$HOME/.codex/skills/persona-distiller-group`
 
-Release sequence: strict quality gate → secret scan → deterministic package →
-inspect ZIP paths → fresh extract → checksum verify → temp install → invoke
-router/unnumbered-recorder smoke test → delete temp install → register the full ZIP
-exactly once under one of the seven root-level identity directories → validate
-checksum. Packaging derives the next per-person product version, but the number
-is officially consumed only after registration succeeds.
+Do not keep duplicate sources under `$HOME/.agents/skills`. The bundle installer verifies every member, stages both Skills, replaces old versions atomically, and rolls back both if either post-install check fails.
+
+Each person release emits exactly one outer full-delivery ZIP and no sidecar. The outer ZIP has one top-level delivery directory and embeds exactly one immutable runtime Skill ZIP. It also contains installers, delivery manifest, complete internal checksums, portable registration, team card, verification, provenance, source coverage, evaluation summary, review record, handoff, and optional human reports.
+
+Release sequence:
+
+strict quality gate → complete team card → secret scan → deterministic runtime ZIP → deterministic full-delivery ZIP → all-member checksum verification → fresh outer install → runtime router/unnumbered-recorder smoke test → unique registration in the sibling group → rebuild group index/README/route → validate both hashes and all seven categories.
+
+Packaging derives the next per-person product version; the number is officially consumed only after registration succeeds. Historical normalization may preserve a v0.0.0.4 runtime byte-for-byte inside a v0.0.0.5 outer delivery without consuming a new person-product version, but every missing historical audit item must be marked unavailable rather than fabricated.

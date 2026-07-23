@@ -1,6 +1,6 @@
 # CodexSkills
 
-本机全部 Skill 的仓库镜像：**87 份实例 / 72 个不同名字**，3584 个文件，约 106 MB。
+本机全部 Skill 的仓库镜像：**88 份实例 / 73 个不同名字**，3618 个文件，约 107 MB。
 
 **由 `sync_skills.py` 自动生成，请勿手工编辑本文件。**
 
@@ -8,7 +8,7 @@
 
 | 目录 | 本机路径 | 说明 |
 |---|---|---|
-| `registry/codex/` | `~/.codex/skills` | Codex 用户 Skill（自建 / 下载 / GitHub）（54 个） |
+| `registry/codex/` | `~/.codex/skills` | Codex 用户 Skill（自建 / 下载 / GitHub）（55 个） |
 | `registry/codex-system/` | `~/.codex/skills/.system` | Codex 系统 Skill（OpenAI 官方，Apache-2.0）（6 个） |
 | `registry/claude/` | `~/.claude/skills` | Claude Skill（Anthropic 侧）（3 个） |
 | `registry/agents/` | `~/.agents/skills` | Agent Skill（跨工具通用目录）（24 个） |
@@ -30,17 +30,17 @@ curl -s https://raw.githubusercontent.com/LinzeColin/AgentDatabase/main/CodexSki
 ## 人物蒸馏产物登记
 
 [`persona-distiller`](registry/codex/persona-distiller/SKILL.md) 生成的每个人物产物必须且只能登记在对应的一个身份目录中；多重身份只进入 `多重身份/`，不得在不同身份下重复登记。
-完整发布 ZIP、canonical 登记和机器索引位于 [`registry/codex/persona-distiller/`](registry/codex/persona-distiller/README.md) 根级七个身份目录；规则见 [`references/persona-product-registration.md`](registry/codex/persona-distiller/references/persona-product-registration.md)。
-目录：[`技术工程/`](registry/codex/persona-distiller/技术工程/)、[`企业领导/`](registry/codex/persona-distiller/企业领导/)、[`金融投资/`](registry/codex/persona-distiller/金融投资/)、[`软开设计/`](registry/codex/persona-distiller/软开设计/)、[`思想教育/`](registry/codex/persona-distiller/思想教育/)、[`政治法律/`](registry/codex/persona-distiller/政治法律/)、[`多重身份/`](registry/codex/persona-distiller/多重身份/)。
-身份分类由人物 Skill 内部使用，不是调用门槛；用户安装后直接调用对应人物 Skill，无需选择身份。人物产物按 canonical 人物分别从 `0.0.0.1` 连续编号到 `0.0.0.999`，只在成功登记时占号；人物 Skill 的单次运行不编号。
+完整发布 ZIP、canonical 登记、团队卡与机器索引仅位于与构建器平级的 [`registry/codex/persona-distiller-group/`](registry/codex/persona-distiller-group/README.md)；完整交付规则见 [`references/delivery-package-standard.md`](registry/codex/persona-distiller-group/references/delivery-package-standard.md)，团队路由真源见 [`CANONICAL-ROOT-ROUTE.md`](registry/codex/persona-distiller-group/CANONICAL-ROOT-ROUTE.md)。
+目录：[`技术工程师/`](registry/codex/persona-distiller-group/技术工程师/)、[`创业经营家/`](registry/codex/persona-distiller-group/创业经营家/)、[`投资资本家/`](registry/codex/persona-distiller-group/投资资本家/)、[`开发设计家/`](registry/codex/persona-distiller-group/开发设计家/)、[`思想教育家/`](registry/codex/persona-distiller-group/思想教育家/)、[`政治法律家/`](registry/codex/persona-distiller-group/政治法律家/)、[`多重身份/`](registry/codex/persona-distiller-group/多重身份/)。
+身份分类由人物 Skill 内部使用，不是调用门槛；用户安装后直接调用对应人物 Skill，无需选择身份。人物产物按 canonical 人物分别从 `0.0.0.1` 连续编号到 `0.0.0.999`，只在成功登记时占号；人物 Skill 的单次运行不编号。团队调用会先按场景选择 5–20 个高相关角色，以正向解决者为主，并至少隔离一个复审、一个裁判和一个反证角色。
 
 当前登记：**3 个人物**。
 
 | 人物 | 唯一分类 | 产物版本 | 完整 ZIP |
 |---|---|---|---|
-| Beth Wilkinson | `政治法律` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller/政治法律/beth-wilkinson/versions/0.0.0.1/beth-wilkinson-persona-skill-v0.0.0.1.zip) |
-| Evan R. Chesler | `政治法律` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller/政治法律/evan-r-chesler/versions/0.0.0.1/evan-r-chesler-persona-skill-v0.0.0.1.zip) |
-| Theodore V. Wells Jr. | `政治法律` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller/政治法律/theodore-v-wells-jr/versions/0.0.0.1/theodore-v-wells-jr-persona-skill-v0.0.0.1.zip) |
+| Beth Wilkinson | `政治法律家` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/政治法律家/beth-wilkinson/versions/0.0.0.1/beth-wilkinson-persona-distillation-delivery-v0.0.0.1.zip) |
+| Evan R. Chesler | `政治法律家` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/政治法律家/evan-r-chesler/versions/0.0.0.1/evan-r-chesler-persona-distillation-delivery-v0.0.0.1.zip) |
+| Theodore V. Wells Jr. | `政治法律家` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/政治法律家/theodore-v-wells-jr/versions/0.0.0.1/theodore-v-wells-jr-persona-distillation-delivery-v0.0.0.1.zip) |
 
 ## 同步
 
@@ -97,7 +97,7 @@ python3 CodexSkills/sync_skills.py --dry-run  # 只看差异
 | [`gitnexus-refactoring`](registry/agents/gitnexus-refactoring/SKILL.md) | `agents` | Use when the user wants to rename, extract, split, move, or restructure code safely. Examples: \"Rename this function\", \"Extract this into a module\", \"Refactor this class\", \"Move this to a separate file\ |
 | [`gitnexus-taint-analysis`](registry/agents/gitnexus-taint-analysis/SKILL.md) | `agents` | Use when working on, reviewing, or extending GitNexus's CFG/taint/PDG subsystem (the `--pdg` layers), or when reasoning about source→sink data-flow findings. Examples: \"How does taint analysis work here?\", \"Why didn't explain find this flow?\", \"Add a new… |
 
-## 工程与交付（19）
+## 工程与交付（20）
 
 | Skill | 来源 | 何时使用 |
 |---|---|---|
@@ -108,6 +108,7 @@ python3 CodexSkills/sync_skills.py --dry-run  # 只看差异
 | [`mcp-builder`](registry/codex/mcp-builder/SKILL.md) | `codex` | Guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools. Use when building MCP servers to integrate external APIs or services, whether in Python (FastMCP) or Node/Type… |
 | [`output-skill`](registry/codex/output-skill/SKILL.md) | `codex` | Overrides default LLM truncation behavior. Enforces complete code generation, bans placeholder patterns, and handles token-limit splits cleanly. Apply to any task requiring exhaustive, unabridged output. |
 | [`persona-distiller`](registry/codex/persona-distiller/SKILL.md) | `codex` | Build, audit, update, package, or uniquely register an evidence-grounded target-person Agent Skill that can plan and execute work through the target's documented capabilities, strategies, cognition, decision policy, work system, temperament, and boundaries. Re… |
+| [`persona-distiller-group`](registry/codex/persona-distiller-group/SKILL.md) | `codex` | Route a real task to a 5–20 member expert team drawn from uniquely registered Persona Distiller products. Use when a task benefits from several complementary person-model specialists plus isolated review, adjudication, and counterevidence roles; also use to in… |
 | [`plugin-creator`](registry/codex-system/plugin-creator/SKILL.md) | `codex-system` | Create and scaffold plugin directories for Codex with a required `.codex-plugin/plugin.json`, optional plugin folders/files, valid manifest defaults, and personal-marketplace entries by default. Use when Codex needs to create a new personal plugin, add optiona… |
 | [`review-agent`](registry/codex-system/review-agent/SKILL.md) | `codex-system` | Perform a read-only, defect-first review of a specified code change and return every actionable finding. Use when another agent delegates review of uncommitted changes, a base-branch diff, a commit, or custom review instructions. |
 | [`skill-creator`](registry/codex-system/skill-creator/SKILL.md) | `codex-system` | Guide for creating effective skills. This skill should be used when users want to create a new skill (or update an existing skill) that extends Codex's capabilities with specialized knowledge, workflows, or tool integrations. |

@@ -197,6 +197,41 @@ def populate_release_ready(target: Path, material_root: Path) -> dict[str, Any]:
         markers = marker_lines if rel == 'cognitive-os.md' else ''
         (target / rel).write_text(_substantive_model(title, markers), encoding='utf-8')
 
+    meta = json.loads((target / 'meta.json').read_text(encoding='utf-8'))
+    team_card = json.loads((target / 'team-card.json').read_text(encoding='utf-8'))
+    team_card.update({
+        'readiness': 'ready',
+        'research_cutoff': '2026-07-23',
+        'selection_reasons': [
+            'Synthetic evidence exercises all release, routing, provenance, and privacy contracts.',
+        ],
+        'distillation_traits': [
+            'Separates observation from inference and uses explicit verification and stop rules.',
+        ],
+        'user_value': [
+            'Produces bounded, executable decisions with visible uncertainty and validation.',
+        ],
+        'application_scenarios': [
+            'research-problem-solving',
+            'strategy-decision',
+        ],
+        'key_capabilities': [
+            'Evidence synthesis',
+            'Decision analysis',
+            'Execution planning',
+        ],
+        'hard_boundaries': [
+            'Synthetic fixture only; it makes no real-person fidelity claim.',
+            'Never claim tools or actions ran when they did not.',
+        ],
+        'canonical_name': meta['name'],
+        'subject_slug': meta['slug'],
+    })
+    (target / 'team-card.json').write_text(
+        json.dumps(team_card, ensure_ascii=False, indent=2, sort_keys=True) + '\n',
+        encoding='utf-8',
+    )
+
     cases = []
     candidate_scores = {suite: 0.82 for suite in SUITES}
     candidate_scores.update({'voice': 0.78, 'fact-preservation': 0.92, 'boundary': 0.84})

@@ -46,7 +46,7 @@ def main() -> int:
     version = (root / 'VERSION').read_text(encoding='utf-8').strip() if (root / 'VERSION').is_file() else None
     manifest = read_json(root / 'manifest.json', default={}) or {}
     checks['version'] = version
-    if version != 'v0.0.0.4' or manifest.get('version') != version:
+    if version != 'v0.0.0.5' or manifest.get('version') != version:
         errors.append(f'version mismatch: VERSION={version!r}, manifest={manifest.get("version")!r}')
     if manifest.get('runtime_identity_routing') != 'automatic':
         errors.append('manifest must declare automatic runtime identity routing')
@@ -59,10 +59,14 @@ def main() -> int:
         'templates/target/SKILL.md.tmpl', 'templates/target/agents/openai.yaml.tmpl',
         'templates/target/scripts/runtime_recorder.py', 'templates/target/scripts/runtime_router.py',
         'scripts/identity.py', 'scripts/route_engine.py', 'scripts/init_target.py',
-        'scripts/package_target.py', 'scripts/register_persona.py', 'scripts/validate_persona_registry.py',
+        'scripts/package_target.py', 'scripts/delivery_builder.py', 'scripts/normalize_delivery.py',
+        'scripts/build_release_bundle.py',
+        'scripts/register_persona.py', 'scripts/validate_persona_registry.py',
         'scripts/persona_registry.py', 'scripts/build_manifest.py', 'scripts/install.py',
         'scripts/review_harness.py', 'schemas/persona-registration.schema.json', 'schemas/runtime-record.schema.json',
-        'persona-registry-index.json', 'references/persona-product-registration.md',
+        'templates/delivery/install.py', 'templates/target/team-card.json.tmpl',
+        'templates/bundle/install.py', 'templates/bundle/README.md',
+        'references/persona-product-registration.md',
         'audit/10-round-improvement.md', 'audit/2x6-review.md',
     ]
     for rel in required:
@@ -93,7 +97,21 @@ def main() -> int:
             errors.append(f'invalid schema {schema.name}: {exc}')
     checks['schema_count'] = schema_count
 
-    script_paths = list((root / 'scripts').glob('*.py')) + list((root / 'templates/target/scripts').glob('*.py'))
+    group_root = root.parent / 'persona-distiller-group'
+    group_required = [
+        'SKILL.md', 'README.md', 'CANONICAL-ROOT-ROUTE.md', 'team-index.json',
+        'scripts/registry_core.py', 'scripts/route_team.py', 'scripts/validate_group.py',
+    ]
+    for rel in group_required:
+        if not (group_root / rel).is_file():
+            errors.append(f'missing sibling group file: {rel}')
+
+    script_paths = (
+        list((root / 'scripts').glob('*.py'))
+        + list((root / 'templates/target/scripts').glob('*.py'))
+        + list((root / 'templates/delivery').glob('*.py'))
+        + list((group_root / 'scripts').glob('*.py'))
+    )
     for script in sorted(script_paths):
         try:
             source = script.read_text(encoding='utf-8')

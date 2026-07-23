@@ -1,6 +1,6 @@
 # Roadmap
 
-Post-v0.0.0.4 candidates, not current requirements:
+Post-v0.0.0.5 candidates, not current requirements:
 
 - pluggable semantic near-duplicate detector with a dependency-free fallback;
 - interactive Claim review UI;

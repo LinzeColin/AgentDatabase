@@ -1,32 +1,27 @@
-# 人物蒸馏产物唯一登记
+# 人物产物唯一登记
 
-“人物蒸馏 Skill”根目录下的七个身份目录保存通过发布门并打包后的完整目标人物 Skill ZIP。七个身份目录是产品登记标签，不替换构建时的七项身份菜单名称。
+v0.0.0.5 起，人物蒸馏构建器与 canonical registry 分离：
 
-## 分类映射
+- 构建器：`persona-distiller/`
+- 唯一登记与专家团队：`../persona-distiller-group/`
 
-| 登记目录 | 内部身份 ID | 登记模式 |
-|---|---|---|
-| `技术工程/` | `technical-engineer` | 单身份 |
-| `企业领导/` | `entrepreneur-operator` | 单身份 |
-| `金融投资/` | `investor-capital-allocator` | 单身份 |
-| `软开设计/` | `developer-designer` | 单身份 |
-| `思想教育/` | `thinker-educator` | 单身份 |
-| `政治法律/` | `political-legal` | 单身份 |
-| `多重身份/` | `multi-identity` | 多身份 |
+登记规则、七个身份目录、完整交付 schema、team card、route 和机器索引以
+[`../../persona-distiller-group/README.md`](../../persona-distiller-group/README.md)
+及其 [`CANONICAL-ROOT-ROUTE.md`](../../persona-distiller-group/CANONICAL-ROOT-ROUTE.md)
+为准。
 
 ## 强制规则
 
-1. 同一人物只能有一个 canonical `registration.json`，不得在不同身份目录重复登记。
-2. 单身份按 `identity_selection.primary` 自动归类；加权或多身份产物一律进入 `多重身份/`。
-3. 每个 canonical 人物独立使用 `0.0.0.1` 至 `0.0.0.999` 的连续 `product_version`；完整发布 ZIP 保存为 `<分类>/<人物>/versions/<product_version>/*.zip`。
-4. 产物版本只在成功登记后正式占用；失败不占号，跳号、复用、同号异哈希和超过 `0.0.0.999` 都会被拒绝。
-5. 根级 `persona-registry-index.json` 是脚本生成的发现视图，不是第二份登记；不得手工制造平行记录。
-6. 公共 GitHub 登记拒绝 `private`、`self` 产物，以及包含原始材料、Holdout、私密来源正文或疑似秘密的包。
-7. 每次登记后必须运行 `python3 scripts/validate_persona_registry.py`，再通过仓库同步流程更新 `CodexSkills/README.md` 的人物产物清单。
-
-登记命令：
+1. 登记对象只能是一个 v0.0.0.5 完整交付 ZIP，不能是裸运行时 ZIP、目录、sidecar 或同版本多文件。
+2. 同一人物只能有一个 canonical `registration.json`；不得跨身份重复。
+3. 目录名必须是 `技术工程师`、`创业经营家`、`投资资本家`、`开发设计家`、`思想教育家`、`政治法律家`、`多重身份` 之一。
+4. 每个版本目录只能保存一个完整交付 ZIP；外层和内层运行时 SHA-256 都要登记。
+5. 人物产品版本按 canonical 人物独立、连续使用 `0.0.0.1..0.0.0.999`，成功登记才占号；人物运行不编号。
+6. `team-card.json` 必须登记选入原因、最值得蒸馏特点、用户价值、应用场景、关键能力和硬边界。
+7. 每次登记后重建 group 的 `team-index.json`、README 和 canonical route，再运行全目录验证。
 
 ```bash
-python3 scripts/register_persona.py /absolute/path/to/target-persona-skill.zip
+python3 scripts/register_persona.py /absolute/path/to/full-delivery.zip
+python3 ../persona-distiller-group/scripts/rebuild_team_views.py
 python3 scripts/validate_persona_registry.py
 ```

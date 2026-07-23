@@ -1,0 +1,6 @@
+interface:
+  display_name: "人物蒸馏专家团队"
+  short_description: "按身份和场景组建人物专家团队，隔离复审、裁判与反证"
+  default_prompt: "使用 $persona-distiller-group 根据当前任务自动组建并路由专家团队。"
+policy:
+  allow_implicit_invocation: false

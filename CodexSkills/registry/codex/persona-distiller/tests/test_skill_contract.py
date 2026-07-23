@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import hashlib
+import io
 import json
 import subprocess
 import sys
@@ -59,7 +60,8 @@ class SkillContractTests(unittest.TestCase):
             extract = root / 'extract'
             with zipfile.ZipFile(package) as archive:
                 archive.extractall(extract)
-            packaged = extract / target.name
+                top = archive.namelist()[0].split('/', 1)[0]
+            packaged = extract / top
             install_root = root / 'installed'
             installed = subprocess.run(
                 [sys.executable, str(packaged / 'install.py'), '--root', str(install_root)],
@@ -67,10 +69,10 @@ class SkillContractTests(unittest.TestCase):
             )
             self.assertEqual(installed.returncode, 0, installed.stderr)
             payload = json.loads(installed.stdout)
-            self.assertTrue(payload['verification']['verified'])
+            self.assertTrue(payload['delivery_verification']['verified'])
             self.assertTrue((install_root / target.name / 'SKILL.md').is_file())
 
-            (packaged / 'facts.md').write_text('tampered', encoding='utf-8')
+            (packaged / 'team-card.json').write_text('tampered', encoding='utf-8')
             tampered = subprocess.run(
                 [sys.executable, str(packaged / 'install.py'), '--root', str(root / 'tampered-install')],
                 cwd=packaged, text=True, capture_output=True,
@@ -100,13 +102,21 @@ class SkillContractTests(unittest.TestCase):
             with zipfile.ZipFile(package) as archive:
                 names = archive.namelist()
                 top_levels = {name.split('/', 1)[0] for name in names if name}
-                self.assertEqual(top_levels, {target.name})
-                meta = json.loads(archive.read(f'{target.name}/meta.json'))
-                manifest = json.loads(archive.read(f'{target.name}/PACKAGE_MANIFEST.json'))
-                invocations = archive.read(f'{target.name}/runtime/invocations.jsonl').decode('utf-8')
-                episodic = archive.read(f'{target.name}/memory/episodic.jsonl').decode('utf-8')
-                self.assertFalse(any('/runtime/runs/' in name for name in names))
-                self.assertFalse(any(name.endswith('/runtime/state.json') for name in names))
+                self.assertEqual(len(top_levels), 1)
+                top = next(iter(top_levels))
+                delivery_manifest = json.loads(archive.read(f'{top}/delivery-manifest.json'))
+                runtime_path = f"{top}/{delivery_manifest['runtime']['path']}"
+                runtime_bytes = archive.read(runtime_path)
+                self.assertEqual(len([name for name in names if '/runtime/' in name and name.endswith('.zip')]), 1)
+                self.assertFalse(any(name.endswith('.zip.sha256') for name in names))
+            with zipfile.ZipFile(io.BytesIO(runtime_bytes)) as runtime_archive:
+                meta = json.loads(runtime_archive.read(f'{target.name}/meta.json'))
+                manifest = json.loads(runtime_archive.read(f'{target.name}/PACKAGE_MANIFEST.json'))
+                invocations = runtime_archive.read(f'{target.name}/runtime/invocations.jsonl').decode('utf-8')
+                episodic = runtime_archive.read(f'{target.name}/memory/episodic.jsonl').decode('utf-8')
+                runtime_names = runtime_archive.namelist()
+                self.assertFalse(any('/runtime/runs/' in name for name in runtime_names))
+                self.assertFalse(any(name.endswith('/runtime/state.json') for name in runtime_names))
             self.assertEqual(meta['product_version'], '0.0.0.1')
             self.assertEqual(manifest['product_version'], '0.0.0.1')
             self.assertFalse(meta['runtime_invocation_versioning'])

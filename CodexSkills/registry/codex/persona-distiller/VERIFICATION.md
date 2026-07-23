@@ -1,69 +1,70 @@
-# Release verification — Persona Distiller v0.0.0.4
+# Release verification — Persona Distiller v0.0.0.5
 
 Date: 2026-07-23
 
 ## Result
 
-**PASS candidate** — the identity-routing and version-boundary correction is covered by executable release gates. Final local replacement and remote push are release steps outside this source report.
+**PASS** — builder、平级 canonical group、单人物完整交付和最终双 Skill 发行 bundle 均通过离线验证。验证不声称任何真人模型已经获得本人授权、背书或超出其证据边界的能力。
 
-## Automated evidence
+## 自动化证据
 
 | Gate | Result |
 |---|---:|
-| Offline unit/integration/concurrency tests | 45 / 45 passed |
+| Offline unit / integration / concurrency tests | 52 / 52 passed |
 | Reviewer Round 1 | 6 roles, 24 / 24 checks passed |
 | Reviewer Round 2 | 6 roles, 40 / 40 adversarial checks passed |
-| JSON Schema files | 13 valid Draft 2020-12 documents |
-| Python scripts covered by syntax check | 22 |
-| Root `SKILL.md` progressive-disclosure ceiling | passed; under 500 lines |
+| Builder JSON Schema | 13 valid Draft 2020-12 documents |
+| Python syntax coverage | 32 scripts |
+| Root `SKILL.md` progressive-disclosure ceiling | 142 lines; passed |
 | Secret-pattern scan | 0 findings |
-| Target-package deterministic rebuild | passed |
-| Target-package checksum tamper rejection | passed |
-| Target runtime history reset | passed; no counter or numbered run directory |
-| Concurrent unnumbered audit append | 30 / 30 complete records |
+| Canonical group validation | 7 categories, 3 products, 3 artifacts; passed |
+| Complete-release deterministic rebuild | passed |
+| Complete-release checksum tamper rejection | passed |
+| Atomic dual-Skill clean install | passed |
+| Person-delivery deterministic rebuild | passed |
+| Person-delivery checksum tamper rejection | passed |
+| Runtime history reset | passed; no numbered invocation state |
+| Concurrent unnumbered audit append | complete records; passed |
 | Per-person product registration | first, next, gap, idempotence, contention, 999, exhaustion passed |
-| Seven-category persona registry | 7 / 7 category manifests valid |
-| Cross-category persona uniqueness | subject UID, canonical key, and ZIP hash hard gates passed |
+| Cross-category uniqueness | subject UID, canonical key, runtime hash and outer hash gates passed |
 
-## Corrected runtime contract
+## v0.0.0.5 交付合同
 
-- A caller directly invokes the installed person Skill and provides a task.
-- The Skill does not ask for an identity, number, or weight.
-- The router automatically selects or combines only the distilled identity facets relevant to the task.
-- Scenario inference and minimum-file loading remain deterministic.
-- Runtime responses and files have no `0.0.0.N` label or forced suffix.
-- Optional audit and episodic-memory records are unnumbered and task-content storage remains explicit opt-in.
+- 最终 Persona Distiller 发行只产生 `PersonaDistiller-Final-v0.0.0.5.zip`。
+- ZIP 只有一个顶层目录，完整包含 `persona-distiller/` 与 `persona-distiller-group/`、原子安装器、manifest 和全文件 SHA-256。
+- 默认只安装到 `~/.codex/skills`；不会同时在 `~/.agents/skills` 保留第二来源。
+- 每个人物发布只产生一个外层完整交付 ZIP；其中恰好嵌入一个不可变运行时 Skill ZIP，并包含安装、登记、team card、来源覆盖、评测、验证、provenance、review 和 handoff。
+- 文件与 schema 不枚举或限制人物姓名、语言、职业或内容风格；稳定 slug 仅用于安全、兼容的文件路径。
+- 七类 canonical 登记仅存在于平级 `persona-distiller-group/`，目录名与内部身份名称一致。
 
-## Corrected product-version contract
+## 版本与调用边界
 
-- `0.0.0.N` identifies a published person-Skill product, not an invocation.
-- Every canonical person has an independent sequence from `0.0.0.1` through `0.0.0.999`.
-- Registration rejects gaps, reuse, same-version/different-hash, cross-folder duplication, and exhaustion.
-- A candidate package does not consume its proposed number.
-- Successful registration advances only that person's next number.
-- Concurrent competing first releases cannot both take `0.0.0.1`.
-- Repeated distillations may receive consecutive product versions even when their internal model snapshot label is unchanged.
+- `v0.0.0.5` 是构建器与团队 Skill 的发行版本。
+- `0.0.0.N` 仅是每个 canonical 人物独立、连续的产品版本，范围 `0.0.0.1..0.0.0.999`。
+- 候选打包不占号；只有成功登记才占号。
+- 人物 Skill 的每次运行不编号，也不要求用户选择身份、编号或权重。
+- 既有三份人物产品仍为 `0.0.0.1`；迁移只增加 v0.0.0.5 完整外层，内层运行时字节与 SHA-256 保持不变。
 
-## Privacy and supply-chain cases
+## 团队路由边界
 
-- Holdout source IDs cannot be promoted into model Claims.
-- Target runtime ZIP excludes raw data, source bodies, Holdout bodies, and prior runtime history.
-- Private target source locators are sanitized.
-- Source and installed-copy checksum verification is enforced.
-- Empty, duplicate, path-escaping, or mismatched checksum entries are rejected.
-- Package top-level count is exactly one.
-- Secret-like credentials are a release hard failure.
-- Private/self products are rejected from the public GitHub registry.
-- The generated product index must equal canonical registrations.
+- 只有与当前任务高相关且 `ready` 的人物能进入 roster。
+- 团队规模 5–20，以正向解决问题的专家为主。
+- 至少隔离 1 个中立复审、1 个中立裁判和 1 个中立反证角色。
+- 库存不足时返回 `insufficient_roster`，不得用不相关人物凑数。
+- 哈希、登记或版本不一致时停止路由并先修复 registry。
 
-## Fresh-package integration
+## 隐私和供应链
 
-A synthetic, rights-clean target passed strict release quality, deterministic packaging, checksum verification, registration as `0.0.0.1`, complete registry validation, and a second packaging pass that correctly proposed `0.0.0.2` for the same person. Packaged runtime and episodic records were empty, with no state counter or numbered run tree.
+- 运行时 ZIP 排除 raw、Holdout 正文、私密来源正文、历史运行内容和凭据。
+- 私域人物要求真实授权；公开 registry 拒绝 private/self 产物。
+- 外层和内层校验均拒绝空清单、漏项、重复路径、越界路径、symlink 和哈希不一致。
+- 三份历史迁移交付对缺失证据明确标记 `not-available-in-source-artifact`，没有补造通过结论。
+- 外层 ZIP 哈希由 canonical `registration.json` 保存，避免自引用哈希悖论。
 
-## Review-method limitation
+## Review 独立性说明
 
-The environment did not use independent subagents for this release. The two review rounds are isolated domain checklists backed by deterministic checks and integration tests; they are not represented as independently sampled external models.
+本轮环境没有使用独立 subagent。两轮结果是六个隔离领域 checklist 的串行确定性复审，并由集成测试支撑；不能表述为六个独立外部模型的判断。
 
-## Scope limitation
+## 适用性限制
 
-This verifies engineering behavior and release integrity. It cannot establish fidelity to a particular real person until that target has a lawful source corpus, frozen unseen evaluation material, and independent behavior judging.
+工程验证只能证明结构、安装、路由、版本、隐私和供应链合同。特定人物的行为保真仍取决于合法来源、证据质量、冻结 Holdout、独立评价和宿主模型/工具能力；当前事实和高风险专业结论必须另行核验。

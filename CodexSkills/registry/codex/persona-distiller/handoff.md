@@ -1,15 +1,12 @@
-# Handoff — 人物蒸馏 Skill / Persona Distiller v0.0.0.4
+# Handoff — 人物蒸馏 Skill v0.0.0.5
 
-## 1. Builder contract
+## 当前架构
 
-This package is the builder/orchestrator Skill. It accepts:
+- `persona-distiller/`：人物研究、构建、评测、运行时打包和完整交付生成器。
+- `../persona-distiller-group/`：唯一 canonical registry、七个身份目录、团队卡、route 和 5–20 人专家团队路由。
+- 最终发布 bundle 同时安装二者到 `~/.codex/skills/`；不得在 `~/.agents/skills/` 保留第二来源。
 
-- target person's name;
-- one of six primary build identities or a weighted multi-identity selection.
-
-Scenario is optional. The builder performs evidence research, synthesis, evaluation, refinement, packaging, and unique registration.
-
-Build identity menu:
+## 七个 canonical 身份
 
 1. 技术工程师
 2. 创业经营家
@@ -19,82 +16,56 @@ Build identity menu:
 6. 政治法律家
 7. 多重身份
 
-Private/self/fictional/historical targets remain separate `subject_origin` governance modes. Private/self data still requires authority and retention controls.
+名称与构建器 `registries/identity-families.json` 完全一致。同一人物只能登记在一个目录；多身份只进入 `多重身份`。
 
-## 2. Generated person-Skill runtime contract
+## 运行合同
 
-An installed person Skill is directly callable:
+已安装人物 Skill 直接接收任务：
 
 ```text
 caller task → automatic internal identity/scenario route → minimum model load
 → plan → act with host tools → verify → deliver → optional unnumbered audit
 ```
 
-- Never ask the caller to select an identity, number, or weight.
-- Treat build identity and the seven registration folders as internal metadata, not runtime restrictions.
-- Automatically select or combine only the distilled identity facets relevant to the task.
-- Do not display a runtime version, append a version to output filenames, or create numbered run directories.
-- Optional audit records contain timestamps, task hashes, internal route summaries, status, and result hashes. Task content remains opt-in.
+不得要求运行用户选择身份、编号或权重。人物产品使用独立连续版本
+`0.0.0.1..0.0.0.999`；人物 Skill 的单次运行不编号。
 
-## 3. Product version contract
+## 单一完整交付
 
-`0.0.0.N` identifies published person-Skill products, not invocations.
+每次成功发布只输出：
 
-- Each canonical person has an independent sequence.
-- The valid range is `0.0.0.1` through `0.0.0.999`.
-- Versions are contiguous; gaps, reuse, same-version/different-hash, and overflow are rejected.
-- Packaging derives the next candidate number from the canonical registry.
-- The number is consumed only when registration succeeds; failures do not consume it.
-- A registry lock serializes concurrent writers on one machine.
-- Repeated distillations of the same person append new product versions under the original canonical registration, even when an internal model snapshot label is unchanged.
+`<slug>-persona-distillation-delivery-v<0.0.0.N>.zip`
 
-## 4. Identity and registration
+不输出 sidecar、第二个 ZIP 或散落文件。外层包含：
 
-Released target-person ZIPs are registered exactly once under:
+- 一个不可变人物运行时 ZIP；
+- 外层安装器、manifest 与全成员 checksums；
+- registration、team card、来源覆盖、评测、验证、provenance、review、handoff；
+- 可选人读报告。
 
-Skill 根级
-`<技术工程|企业领导|金融投资|软开设计|思想教育|政治法律|多重身份>/`
+外层 ZIP SHA-256 由 canonical registry 保存；内层运行时 SHA-256 同时保存于外层和 registry。规范只限制文件与架构，不限制人物姓名、语言、职业或文本风格。
 
-Single-identity products use the matching folder. Weighted multi-identity products use only `多重身份`. A person must never be copied across categories; reclassification moves the canonical record.
+## 历史迁移
 
-Public GitHub registration rejects private/self products, raw materials, Holdout bodies, credentials, private source text, and secret-like content.
+三个既有政治法律产品保留人物版本 `0.0.0.1`，并保留原运行时字节：
 
-## 5. Version boundaries
+- Beth Wilkinson runtime SHA-256 `e0a30abd20dc8740bc35fd21840ff62d2492ffc64fb1b59ced4525a0e66e9802`
+- Evan R. Chesler runtime SHA-256 `cc97e267284eec2799656d1e357caa2b676b43e44e64449e285c1a4056becefd`
+- Theodore V. Wells Jr. runtime SHA-256 `462a320084a6ba73388a7133a8627f39cd13b2696adfbf3b8598c280e3a4197a`
 
-- Builder release: `v0.0.0.4`.
-- Internal model snapshot: research/correction lifecycle metadata only.
-- Published person product: per-person `0.0.0.1..0.0.0.999`.
-- Runtime invocation: unversioned.
+v0.0.0.5 外层只规范交付，不消费新的人物版本。历史来源包没有的审计证据显式记为 `not-available-in-source-artifact`。
 
-## 6. Packaging and installation
+## 团队路由
 
-Builder default and only user installation:
+调用 `persona-distiller-group` 时，内部推断身份与场景并选择 5–20 个角色。人物专家主要担任正向解决者；至少一个中立复审、一个中立裁判和一个中立反证角色必须隔离。无合格人物时返回 `insufficient_roster`，不得虚构。
 
-`~/.codex/skills/persona-distiller`
+## 验证
 
-Do not keep a second source under `~/.agents/skills/persona-distiller`.
+```bash
+python3 scripts/self_check.py
+python3 ../persona-distiller-group/scripts/validate_group.py
+python3 ../persona-distiller-group/scripts/route_team.py \
+  --task "分析重大诉讼的证据、证人和策略风险"
+```
 
-Builder and generated-person ZIPs have one top-level directory, checksums, installer metadata, no symlinks/caches, and privacy-minimized payloads. Generated-person packages reset runtime/episodic records but contain no invocation counter.
-
-## 7. Verification gates
-
-- full offline unit/integration/concurrency suite;
-- strict target release quality gate;
-- automatic runtime router and unnumbered audit tests;
-- per-person first/next/999/exhaustion/gap/idempotence tests;
-- deterministic target packaging and checksum-tamper rejection;
-- seven-category uniqueness and generated-index validation;
-- source and installed-copy checksum verification;
-- reviewer rounds, schema parsing, syntax checks, secret scan, fresh extraction/install;
-- repository README/index synchronization and remote GitHub verification.
-
-## 8. Residual limits
-
-- Target-specific fidelity remains unproven until lawful target research, frozen Holdout data, and independent judging are completed.
-- Host models and tools differ; execution portability requires separate evaluation.
-- The filesystem registry lock protects one machine. Multi-machine publishing still requires Git serialization or a transactional service.
-- Deletion, paywalls, private archives, oral history, and undigitized sources prevent proof of absolute source completeness.
-
-## 9. Core architectural insight
-
-The durable artifact is a versioned person-product release backed by an evidence-grounded decision operating system and divergence map. Runtime calls are ordinary executions of that installed product; they are not new releases.
+最终 bundle 还必须通过：确定性重建、所有成员校验、新目录双 Skill 安装、三份人物完整交付安装、凭据扫描、CodexSkills 索引同步和 GitHub `main` 回读。

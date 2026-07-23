@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-23T07:22:38Z",
+  "generated_at": "2026-07-23T10:26:55Z",
   "method": "six isolated reviewer checklists; not six independently running models",
   "passed": true,
   "reviews": [
@@ -201,7 +201,7 @@
           "passed": true
         },
         {
-          "detail": "files=206; >25MB=[]",
+          "detail": "files=211; >25MB=[]",
           "name": "file-budget",
           "passed": true
         },
@@ -231,7 +231,7 @@
           "passed": true
         },
         {
-          "detail": "all required tokens present",
+          "detail": "canonical per-person version contract present in /Users/linzezhang/.codex/worktrees/f15e/AgentDatabase/CodexSkills/registry/codex/persona-distiller-group/scripts/registry_core.py",
           "name": "per-person-product-version",
           "passed": true
         }

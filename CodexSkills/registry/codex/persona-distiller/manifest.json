@@ -29,6 +29,8 @@
   "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
   "runtime_identity_routing": "automatic",
   "runtime_invocation_versioning": false,
-  "subagent_review_disclosure": "This package contains six isolated reviewer-role protocols. The delivery environment did not expose an independent subagent execution tool.",
-  "version": "v0.0.0.4"
+  "canonical_registry": "../persona-distiller-group",
+  "delivery_contract": "one-full-delivery-zip-v0.0.0.5",
+  "subagent_review_disclosure": "Independent agents are preferred. When unavailable, serialized sealed contexts must be disclosed and may not be called independent models.",
+  "version": "v0.0.0.5"
 }

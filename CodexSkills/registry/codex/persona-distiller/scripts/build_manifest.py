@@ -10,69 +10,75 @@ from common import atomic_write_json, atomic_write_text, sha256_file
 
 ROOT = Path(__file__).resolve().parents[1]
 EXCLUDED_DIRS = {
-    '.git', '.mypy_cache', '.pytest_cache', '.ruff_cache', '__pycache__',
-    '_build', 'build', 'dist', 'workspaces',
+    ".git",
+    ".mypy_cache",
+    ".pytest_cache",
+    ".ruff_cache",
+    "__pycache__",
+    "_build",
+    "build",
+    "dist",
+    "workspaces",
 }
-CATEGORY_FOLDERS = {
-    '技术工程', '企业领导', '金融投资', '软开设计', '思想教育', '政治法律', '多重身份',
-}
-REGISTRY_INDEX_NAME = 'persona-registry-index.json'
 
 
 def included(path: Path) -> bool:
     relative = path.relative_to(ROOT)
     if any(part in EXCLUDED_DIRS for part in relative.parts):
         return False
-    if path.suffix in {'.pyc', '.pyo', '.zip'}:
+    if path.suffix in {".pyc", ".pyo", ".zip"}:
         return False
     if relative.as_posix() in {
-        'PACKAGE_MANIFEST.json', 'checksums.sha256', REGISTRY_INDEX_NAME, 'registry.yaml',
+        "PACKAGE_MANIFEST.json",
+        "checksums.sha256",
+        "registry.yaml",
     }:
         return False
-    if relative.parts and relative.parts[0] in CATEGORY_FOLDERS:
-        return len(relative.parts) == 2 and path.name == '_category.json'
     return True
 
 
 def main() -> int:
-    manifest_path = ROOT / 'PACKAGE_MANIFEST.json'
-    manifest = json.loads(manifest_path.read_text(encoding='utf-8'))
-    files = sorted(path for path in ROOT.rglob('*') if path.is_file() and included(path))
+    manifest_path = ROOT / "PACKAGE_MANIFEST.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    files = sorted(path for path in ROOT.rglob("*") if path.is_file() and included(path))
     records = [
         {
-            'path': path.relative_to(ROOT).as_posix(),
-            'sha256': sha256_file(path),
-            'size_bytes': path.stat().st_size,
+            "path": path.relative_to(ROOT).as_posix(),
+            "sha256": sha256_file(path),
+            "size_bytes": path.stat().st_size,
         }
         for path in files
     ]
-    manifest['files'] = records
-    manifest['distribution'] = {
-        'kind': 'repository-customized-v0.0.0.4',
-        'source_archive_sha256': 'e891912d98d14afb7677ac935a19be329d97d206f4ae74a644892f46b17f6748',
+    manifest["files"] = records
+    manifest["distribution"] = {
+        "kind": "repository-customized-v0.0.0.5",
+        "lineage_base_archive_sha256": "e891912d98d14afb7677ac935a19be329d97d206f4ae74a644892f46b17f6748",
+        "canonical_registry": "../persona-distiller-group",
     }
-    manifest['mutable_paths'] = {
-        'excluded_from_release_checksums': [
-            REGISTRY_INDEX_NAME,
-            '<分类>/<人物>/registration.json',
-            '<分类>/<人物>/versions/<product_version>/*.zip',
-        ],
-        'validation': 'python3 scripts/validate_persona_registry.py',
+    manifest["mutable_paths"] = {
+        "excluded_from_release_checksums": [],
+        "registry_is_external": "../persona-distiller-group",
+        "validation": "python3 scripts/validate_persona_registry.py",
     }
     atomic_write_json(manifest_path, manifest)
     checksum_paths = files + [manifest_path]
-    lines = ''.join(
-        f'{sha256_file(path)}  {path.relative_to(ROOT).as_posix()}\n'
+    lines = "".join(
+        f"{sha256_file(path)}  {path.relative_to(ROOT).as_posix()}\n"
         for path in sorted(checksum_paths)
     )
-    atomic_write_text(ROOT / 'checksums.sha256', lines)
-    print(json.dumps({
-        'package_manifest_files': len(records),
-        'checksum_files': len(checksum_paths),
-        'mutable_registry_files_excluded': True,
-    }, indent=2))
+    atomic_write_text(ROOT / "checksums.sha256", lines)
+    print(
+        json.dumps(
+            {
+                "package_manifest_files": len(records),
+                "checksum_files": len(checksum_paths),
+                "canonical_registry": "../persona-distiller-group",
+            },
+            indent=2,
+        )
+    )
     return 0
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     raise SystemExit(main())

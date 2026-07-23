@@ -27,10 +27,12 @@ The non-Skill Auto contract package and the sync regression tests also live
 under `registry/auto/` and `registry/tests/`. They are excluded from Skill
 deletion propagation.
 
-`codex/persona-distiller` is routed directly to
-`registry/codex/persona-distiller`. Its generated target-person ZIPs use the
-seven identity folders directly under the Skill root; each subject has one canonical registration
-across all categories, and the `CodexSkills/README.md` product list is generated
-from `persona-registry-index.json`. Installed person Skills route identity facets internally
-without asking callers to choose an identity. Product releases are numbered per
-canonical person from `0.0.0.1` through `0.0.0.999`; invocations are unversioned.
+`codex/persona-distiller` is the builder at
+`registry/codex/persona-distiller`. Its sibling `codex/persona-distiller-group`
+is the only canonical product registry and expert-team router. Generated
+target-person deliveries use the group Skill's exact seven identity folders;
+each subject has one canonical registration across all categories, and the
+`CodexSkills/README.md` product list is generated from `team-index.json`.
+Installed person Skills route identity facets internally without asking callers
+to choose an identity. Product releases are numbered per canonical person from
+`0.0.0.1` through `0.0.0.999`; invocations are unversioned.

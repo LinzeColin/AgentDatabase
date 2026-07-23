@@ -3,20 +3,21 @@
   "default_install_root": "~/.codex/skills/persona-distiller",
   "display_name": "人物蒸馏 Skill / Persona Distiller",
   "distribution": {
-    "kind": "repository-customized-v0.0.0.4",
-    "source_archive_sha256": "e891912d98d14afb7677ac935a19be329d97d206f4ae74a644892f46b17f6748"
+    "canonical_registry": "../persona-distiller-group",
+    "kind": "repository-customized-v0.0.0.5",
+    "lineage_base_archive_sha256": "e891912d98d14afb7677ac935a19be329d97d206f4ae74a644892f46b17f6748"
   },
   "evaluation_suites": 16,
   "files": [
     {
       "path": ".gitignore",
-      "sha256": "9890b5f82388dc6dbb55f3c311794f81cabf75e02915d62f53dd9c8675cc9ca5",
-      "size_bytes": 403
+      "sha256": "07c0f0f687f40ce44d8a3fcc7e2af2369ddf3e509653103ff24e446d59d43a9d",
+      "size_bytes": 103
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "dc60d98218fa46e972f72c1ef1be8d791772fe1d9a69902ac3f87a1e3844f2d2",
-      "size_bytes": 2210
+      "sha256": "a8801393d8ba902ebfab286416398f27fcede23b6cd5d3c0281590be8ac5da73",
+      "size_bytes": 3166
     },
     {
       "path": "CONTRIBUTING.md",
@@ -30,12 +31,12 @@
     },
     {
       "path": "README.md",
-      "sha256": "7f415c5f7f0c457a932b025d46d621b141dd477e0a7a14c66b9e5388cdaa8d13",
-      "size_bytes": 4337
+      "sha256": "3a7af914ce661f73edca2fbf815444e711e5ffa3d14b0efc70360e0da332e59e",
+      "size_bytes": 3892
     },
     {
       "path": "ROADMAP.md",
-      "sha256": "fa2d47f0397f8e7180efc081dce7bae9bc7a3e4865e4cab7b8b92c4043adce67",
+      "sha256": "0970f8a1a096ed347fc23767cc75a6a1d6940a88545431c16f95cfe0553bd8cc",
       "size_bytes": 422
     },
     {
@@ -45,8 +46,8 @@
     },
     {
       "path": "SKILL.md",
-      "sha256": "d5062d6811682af91214ba98e7e7ea50484ad62b52013de1f4f211107876f863",
-      "size_bytes": 8782
+      "sha256": "3f5f53b38240f87078c4ab52dd8aa5bcf7a542125ffc34fd4b54368db024c498",
+      "size_bytes": 9303
     },
     {
       "path": "THIRD_PARTY_NOTICES.md",
@@ -55,23 +56,23 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "8ffc0d9d052fe6906f1167efc35a04e1e978568a93b56a7a6600fc64a05cb752",
-      "size_bytes": 3935
+      "sha256": "ab58e04a386446d83dcb941243e2d25e1de539db526aba72bf509ee88b318aa2",
+      "size_bytes": 4188
     },
     {
       "path": "VERSION",
-      "sha256": "9bd6126bd61fd3082d4109fb59248b9e75130d787c4108c517f5e41db1aef29c",
+      "sha256": "6bab983549f24f5eeebacd968fd85f2e5340b009bbd44c840a0a1a60d209226e",
       "size_bytes": 9
     },
     {
       "path": "agents/openai.yaml",
-      "sha256": "8450e3f5b9734d1532ec660911b0f8c0512fa3416669d61b04c928fed3d3177b",
-      "size_bytes": 364
+      "sha256": "3ebc3f9a341a3caaacd85ba33420f3bd83c1ec17fc0674ee06ca804929d9bb7d",
+      "size_bytes": 401
     },
     {
       "path": "audit/10-round-improvement.md",
-      "sha256": "3d63fbeb55b3918fe8e1db292682f58d3b3f3e99fe5e847da8e0333dd1f4bd2c",
-      "size_bytes": 3799
+      "sha256": "55c569ac40213fe363baefea9ce2cebfcb7b5dab5ab4e0c28aa06bc37a678084",
+      "size_bytes": 3877
     },
     {
       "path": "audit/2x6-review.md",
@@ -85,13 +86,13 @@
     },
     {
       "path": "audit/reviews/round-1.json",
-      "sha256": "302e639e59f66135347b1c738beaac0b18d29de6abf50b9cc0ebfd26f1de18c9",
+      "sha256": "6462e84628dd69213fa4f1da0d8650b0a50739e1b42c0fafedd5fb7471ee0149",
       "size_bytes": 3982
     },
     {
       "path": "audit/reviews/round-2.json",
-      "sha256": "6be11037e582da6c212a6b9f4b2c5ea5b10418e4a399bed29409e5724abb67ae",
-      "size_bytes": 6209
+      "sha256": "f27238d90c942c87dfec41638e5f064d94ad9bd83fbcdd85bfb9e01b18539704",
+      "size_bytes": 6360
     },
     {
       "path": "examples/README.md",
@@ -120,8 +121,8 @@
     },
     {
       "path": "handoff.md",
-      "sha256": "f477e1c411d63b876ac10065ee61c10c10b4c1a78af6066a1baf4608138da476",
-      "size_bytes": 4745
+      "sha256": "443bdc02ba5bb06b8951265f24024007e19bcaa12c2505afcd63b95950e17291",
+      "size_bytes": 3037
     },
     {
       "path": "install.ps1",
@@ -140,8 +141,8 @@
     },
     {
       "path": "manifest.json",
-      "sha256": "2013e2bb74b07d313f108ace1b57c96b30b68d30299ff8b6bd740a66b6379b9f",
-      "size_bytes": 1032
+      "sha256": "7ae87a0020548a806ee6b814269cd10fcecb762d86305bb4f8c85479e88bf1a8",
+      "size_bytes": 1142
     },
     {
       "path": "prompts/blind-judge.md",
@@ -340,7 +341,7 @@
     },
     {
       "path": "pyproject.toml",
-      "sha256": "8cc062d29219955744696a6728deea2bcd9c2b3acde81f040cad68007f9e30b4",
+      "sha256": "b470380d8d74095806f98f774df0f79a3e013ba74066866a7b236f30bb1fb528",
       "size_bytes": 300
     },
     {
@@ -370,7 +371,7 @@
     },
     {
       "path": "references/lifecycle-and-memory.md",
-      "sha256": "6d1e183989e37aa5c0839e37697e643e23bddd3b966ef6c1f09d41f8c0826f2c",
+      "sha256": "f25a764b8b59d43e4a78d3834074ca19f8fcc98218e0397ee2d197afb7a1319f",
       "size_bytes": 1252
     },
     {
@@ -380,13 +381,13 @@
     },
     {
       "path": "references/packaging-and-installation.md",
-      "sha256": "4907675c8fd0d083edf6448d1f8c17c8ba036c6df20cab9c21c4a311d8e9713e",
-      "size_bytes": 1215
+      "sha256": "1db714038c269b73ff33bc26f3b1bdde96e9cf9ef065ed758311e134959f7ce9",
+      "size_bytes": 1579
     },
     {
       "path": "references/persona-product-registration.md",
-      "sha256": "49a06b4cc1aee7d00415650e02fa9a1a9fe35ebc30eb9d1e3d91b4d7cc3db7a2",
-      "size_bytes": 1865
+      "sha256": "00d6f66ad28777c20748c57c832bb5d3860bcd30bc26fd72f9d7565dacab4013",
+      "size_bytes": 1556
     },
     {
       "path": "references/research-and-sources.md",
@@ -435,12 +436,12 @@
     },
     {
       "path": "schemas/meta.schema.json",
-      "sha256": "efacaa14ae86bb5a03ebad9aaecfad2db718951d7a15bc158309f126d04a3234",
+      "sha256": "f8d8d5455a3dbb28803a9ff7464ed955343138a5ba7c7a6e54c59ffd52d1fb3e",
       "size_bytes": 1422
     },
     {
       "path": "schemas/persona-registration.schema.json",
-      "sha256": "24095974d671b6c9373c799995ce463c4122af57a1bb523d53ab5ab4a3cbe84a",
+      "sha256": "73792727fa0c34d689aef8021e2a0b1de4b455642f2569a9c95ff24971c638c4",
       "size_bytes": 2902
     },
     {
@@ -470,8 +471,13 @@
     },
     {
       "path": "scripts/build_manifest.py",
-      "sha256": "fb3ea376116088eca2d45f61a217da562adc65443133de3e03a7ad2312b89fa9",
-      "size_bytes": 2664
+      "sha256": "0943c37af98dfb1cc701c57c762d40227b1aae40a7cc6c38a4ae7bc757549fe0",
+      "size_bytes": 2418
+    },
+    {
+      "path": "scripts/build_release_bundle.py",
+      "sha256": "6bd7f98809f154df52c2ca1eb35bd2662023e07f1d5e05f55f1de24ea5c07a8d",
+      "size_bytes": 6365
     },
     {
       "path": "scripts/common.py",
@@ -482,6 +488,11 @@
       "path": "scripts/correction_manager.py",
       "sha256": "a3daaea211ac36c998634bcc9a31c6c4606636a6403ed18d5d4b29a8d5457a95",
       "size_bytes": 8544
+    },
+    {
+      "path": "scripts/delivery_builder.py",
+      "sha256": "80c06f745483c73c6499097c3366af2c7ed3d13ff9ef6777815cb1d975c6c9f3",
+      "size_bytes": 12027
     },
     {
       "path": "scripts/eval_runner.py",
@@ -500,8 +511,8 @@
     },
     {
       "path": "scripts/init_target.py",
-      "sha256": "340e1b06b1fc573197baee2728d902d9e32f0a9e981a1bfe885d880f1735b9fc",
-      "size_bytes": 7322
+      "sha256": "965a6ba695bf5912e03d66bed724447073d43135f0864552a9c0cfa20de60ffe",
+      "size_bytes": 7550
     },
     {
       "path": "scripts/install.ps1",
@@ -534,14 +545,19 @@
       "size_bytes": 5759
     },
     {
+      "path": "scripts/normalize_delivery.py",
+      "sha256": "069f218a0a412877ecd19450e7f961cec6269aaa8f374288bb1d7221b402ac9f",
+      "size_bytes": 11716
+    },
+    {
       "path": "scripts/package_target.py",
-      "sha256": "9064361bb982f1a83fe111d817627242c5cefb5044deb24705b66ef3dca7c2b2",
-      "size_bytes": 9120
+      "sha256": "0070fc8148b5b8d2c0f9ae33f648a31b0be272bf604fd5398ec673e98c1f9345",
+      "size_bytes": 19438
     },
     {
       "path": "scripts/persona_registry.py",
-      "sha256": "36c8b2892827df43e2f14df6fa507d26011c864dce1526162ec53c49561e6cd6",
-      "size_bytes": 33113
+      "sha256": "2626277ff9e54f126c1bc7838e6ed096fbc0e5b28ac66c74f684b54ba1ab2622",
+      "size_bytes": 712
     },
     {
       "path": "scripts/quality_check.py",
@@ -555,8 +571,8 @@
     },
     {
       "path": "scripts/review_harness.py",
-      "sha256": "7e3c78269b29241129fb29455c4a0c1ad6513d68deaef7147ae5150c7ad7ade5",
-      "size_bytes": 13621
+      "sha256": "2d159069978b74a9bf83d7567857b88f474b4f50fcdf2759859793e7e65e694c",
+      "size_bytes": 14110
     },
     {
       "path": "scripts/route_engine.py",
@@ -565,8 +581,8 @@
     },
     {
       "path": "scripts/self_check.py",
-      "sha256": "3a64865d913c396caf34bd9e4f62895cc5e8b65574ed315e11b190b85977f122",
-      "size_bytes": 8247
+      "sha256": "7968882fdb7f9fd1309a92da406b9683d81f962c0acb72467e0b3f2ee0b51210",
+      "size_bytes": 9014
     },
     {
       "path": "scripts/validate_persona_registry.py",
@@ -599,8 +615,43 @@
       "size_bytes": 765
     },
     {
+      "path": "templates/bundle/README.md",
+      "sha256": "c750dcbe56cfbe904c8fe583c402fefbb14731874029ab7fbdfb5d8bcd64f7d2",
+      "size_bytes": 810
+    },
+    {
+      "path": "templates/bundle/install.ps1",
+      "sha256": "5fb2ca534f93f74df47724e1c57f7d63a7a0f62051a556dd9b2bf0552fe1005b",
+      "size_bytes": 91
+    },
+    {
+      "path": "templates/bundle/install.py",
+      "sha256": "cf9d297c247ef9050e66548e9410e8ddbc282fe7565575f3bdbca4a3edb1216d",
+      "size_bytes": 9281
+    },
+    {
+      "path": "templates/bundle/install.sh",
+      "sha256": "d297dbb500e407b69d68f85fc1f6b5c3fe4ef0532dab957770586a540f3d2cec",
+      "size_bytes": 102
+    },
+    {
+      "path": "templates/delivery/install.ps1",
+      "sha256": "5fb2ca534f93f74df47724e1c57f7d63a7a0f62051a556dd9b2bf0552fe1005b",
+      "size_bytes": 91
+    },
+    {
+      "path": "templates/delivery/install.py",
+      "sha256": "d9a24e23e516d678193d1975c52c05f1b4c7df0b07bfc06f4665f165f2f912e9",
+      "size_bytes": 5699
+    },
+    {
+      "path": "templates/delivery/install.sh",
+      "sha256": "1d31fca1dc383e19724caa14bd31e0d0f01da9db9f50e3deb3a1b52541ecade5",
+      "size_bytes": 73
+    },
+    {
       "path": "templates/target/README.md.tmpl",
-      "sha256": "8cfee641bd10537575a8a526c445a2b319075d84f8972eb42c9d2395c25b1174",
+      "sha256": "c3c4e6b6173e27d084716b2e33025eac91f96593e50c5ca2ab7cb84740e33524",
       "size_bytes": 1080
     },
     {
@@ -919,6 +970,11 @@
       "size_bytes": 170
     },
     {
+      "path": "templates/target/team-card.json.tmpl",
+      "sha256": "3db9a15dcf18466d440e97894ccd8c83028b749c721756cb552aa8918202d747",
+      "size_bytes": 835
+    },
+    {
       "path": "templates/target/versions/.gitkeep",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "size_bytes": 0
@@ -930,8 +986,13 @@
     },
     {
       "path": "tests/helpers.py",
-      "sha256": "b847979a626a1f49c58d369af673be99d774eeb5afb43f5d36f97e5d3de26f0c",
-      "size_bytes": 10717
+      "sha256": "a2972e444fa7b674226c5307dd8d886df44686a21c275ae3adaa18935eb1fd2c",
+      "size_bytes": 12078
+    },
+    {
+      "path": "tests/test_group_contract.py",
+      "sha256": "0c2c9ce251ccc0815dcd1758c14d6046f0fd3ed723eb6e37e1ceca4fbae53f2e",
+      "size_bytes": 5215
     },
     {
       "path": "tests/test_identity_routing.py",
@@ -940,7 +1001,7 @@
     },
     {
       "path": "tests/test_init_and_ingest.py",
-      "sha256": "85dacf5f85e2c9d7ee3919fa2b7af83c4a725b8b2be50d04f495b224a10f3755",
+      "sha256": "8b79023dff48b9f157e13edbb2abca2fc7a2de668d122126b929b21c86b06341",
       "size_bytes": 3430
     },
     {
@@ -950,18 +1011,23 @@
     },
     {
       "path": "tests/test_package_install_migrate.py",
-      "sha256": "fdbf1afcfefa133a5dbb227661bbae04f12a0c19e54b89e3ee19e4989458d808",
-      "size_bytes": 6548
+      "sha256": "886d280c4a04ac449995247f79750e34d6809ea5c3e492a308ffe8bf4be53572",
+      "size_bytes": 6990
     },
     {
       "path": "tests/test_persona_registry.py",
-      "sha256": "0d366852928403f7fe441959826415d078bfb8800c2d0d56f1fa318a3867fbcd",
-      "size_bytes": 10193
+      "sha256": "5b8f1046c8ecf9b26898789bdcc758bddb7c5feb1be3e3e19367879f36f60514",
+      "size_bytes": 11811
     },
     {
       "path": "tests/test_quality_and_eval.py",
       "sha256": "2d261e9a34eba048846efadc7ebc9bc522a687d68def1d875ddc9aa1a93f5241",
       "size_bytes": 2524
+    },
+    {
+      "path": "tests/test_release_bundle.py",
+      "sha256": "ca5a0c44dfebb1ce36f070d78d1eb21ae7f2934c876fcff848c40cd966a0caa5",
+      "size_bytes": 4068
     },
     {
       "path": "tests/test_runtime_recording.py",
@@ -970,8 +1036,8 @@
     },
     {
       "path": "tests/test_skill_contract.py",
-      "sha256": "077e04e9e98e2641607f36df499799083646a2cf708910085c933a1362ce5303",
-      "size_bytes": 6054
+      "sha256": "53de4c2efe32bb070e5e73e1b6921e4f7d5f96b932343576ac2382626123f4a2",
+      "size_bytes": 6791
     },
     {
       "path": "tests/test_versioning.py",
@@ -982,50 +1048,12 @@
       "path": "tests/test_zz_runtime_concurrency.py",
       "sha256": "9806fc0b9dc4aed42ded077dde79ad4e4bd16feddcb91f7c8a9f36a1191f1e7e",
       "size_bytes": 1919
-    },
-    {
-      "path": "企业领导/_category.json",
-      "sha256": "0147d2cccc3b1a4eae29d6b09015a8cec4853869be1fe3a437b6737d8a82a806",
-      "size_bytes": 136
-    },
-    {
-      "path": "多重身份/_category.json",
-      "sha256": "a83d534e1d95e96a9701df08ef2e2f7178ff82f1bd1e095b978544ba4708956a",
-      "size_bytes": 128
-    },
-    {
-      "path": "思想教育/_category.json",
-      "sha256": "2cf5fef5e716d75f0579127743fa4cb80e46e27440554784db6fa1b795e7a1e1",
-      "size_bytes": 131
-    },
-    {
-      "path": "技术工程/_category.json",
-      "sha256": "a93ffa7661f2bc09195b0777f3a5ac99e840afa4d150d4f399093145ea5627b9",
-      "size_bytes": 133
-    },
-    {
-      "path": "政治法律/_category.json",
-      "sha256": "aa199037e9b423d136506aeaf7f88fd163c08b9f112b11e9ea4564e5bbac4f64",
-      "size_bytes": 130
-    },
-    {
-      "path": "软开设计/_category.json",
-      "sha256": "62500e1149436b319602fdc72c0671524511660fce14c4d8e97483c6b801fa21",
-      "size_bytes": 133
-    },
-    {
-      "path": "金融投资/_category.json",
-      "sha256": "c35a790baf4a8eb5a0675e532669b4c1fc9ae86e1632a86adf0c476a4b40bf46",
-      "size_bytes": 141
     }
   ],
   "identity_choices": 7,
   "mutable_paths": {
-    "excluded_from_release_checksums": [
-      "persona-registry-index.json",
-      "<分类>/<人物>/registration.json",
-      "<分类>/<人物>/versions/<product_version>/*.zip"
-    ],
+    "excluded_from_release_checksums": [],
+    "registry_is_external": "../persona-distiller-group",
     "validation": "python3 scripts/validate_persona_registry.py"
   },
   "name": "persona-distiller",
@@ -1038,9 +1066,14 @@
   "schema_version": "2.0",
   "top_level_count": 1,
   "verification": {
+    "canonical_group_artifacts": 3,
+    "canonical_group_categories": 7,
+    "canonical_group_passed": true,
+    "canonical_group_products": 3,
+    "complete_release_bundle_passed": true,
     "fresh_package_smoke_passed": true,
-    "offline_tests": 45,
-    "offline_tests_passed": 45,
+    "offline_tests": 52,
+    "offline_tests_passed": 52,
     "review_round_1": {
       "checks": 24,
       "passed": 24,
@@ -1053,5 +1086,5 @@
     },
     "secret_findings": 0
   },
-  "version": "v0.0.0.4"
+  "version": "v0.0.0.5"
 }

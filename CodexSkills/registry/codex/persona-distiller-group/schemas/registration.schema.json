@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "persona-distiller-group/registration.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "canonical_key": {"minLength": 1, "type": "string"},
+    "canonical_name": {"minLength": 1, "type": "string"},
+    "identity_family_id": {"minLength": 1, "type": "string"},
+    "identity_mode": {"enum": ["single", "multi"]},
+    "registration_category": {"minLength": 1, "type": "string"},
+    "schema_version": {"const": "3.0"},
+    "subject_origin": {"minLength": 1, "type": "string"},
+    "subject_slug": {
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "type": "string"
+    },
+    "subject_uid": {"pattern": "^person-[0-9a-f]{16}$", "type": "string"},
+    "versions": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "artifact": {"minLength": 1, "type": "string"},
+          "artifact_created_at": {"type": "string"},
+          "builder_version": {"minLength": 1, "type": "string"},
+          "delivery_contract_status": {
+            "enum": ["native-v0.0.0.5", "legacy-normalized-v0.0.0.5"]
+          },
+          "model_version": {"minLength": 1, "type": "string"},
+          "outer_sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"},
+          "product_version": {
+            "pattern": "^0\\.0\\.0\\.([1-9][0-9]{0,2})$",
+            "type": "string"
+          },
+          "runtime_artifact": {"minLength": 1, "type": "string"},
+          "runtime_sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"},
+          "runtime_size_bytes": {"minimum": 1, "type": "integer"},
+          "size_bytes": {"minimum": 1, "type": "integer"}
+        },
+        "required": [
+          "product_version",
+          "model_version",
+          "artifact",
+          "outer_sha256",
+          "size_bytes",
+          "runtime_artifact",
+          "runtime_sha256",
+          "runtime_size_bytes",
+          "builder_version",
+          "artifact_created_at",
+          "delivery_contract_status"
+        ],
+        "type": "object"
+      },
+      "minItems": 1,
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "subject_uid",
+    "canonical_name",
+    "canonical_key",
+    "subject_slug",
+    "subject_origin",
+    "registration_category",
+    "identity_family_id",
+    "identity_mode",
+    "versions"
+  ],
+  "title": "Canonical persona registration",
+  "type": "object"
+}

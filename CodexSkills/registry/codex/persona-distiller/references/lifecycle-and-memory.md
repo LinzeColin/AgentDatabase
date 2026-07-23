@@ -2,7 +2,7 @@
 
 Release and snapshot boundaries:
 
-- Builder release `v0.0.0.4`.
+- Builder release `v0.0.0.5`.
 - Internal target-model semantic snapshots, changed only after evidence/eval promotion.
 - Published person-Skill product version `0.0.0.1` through `0.0.0.999`, allocated independently per canonical person and consumed only by successful registration.
 - Runtime invocations are unversioned.

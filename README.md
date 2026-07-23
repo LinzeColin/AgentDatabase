@@ -31,13 +31,17 @@ imported into `~/.codex/sessions` on this machine.
 
 本机 Codex Skill 的仓库镜像与治理登记。索引：[`CodexSkills/README.md`](CodexSkills/README.md)（人读）、[`CodexSkills/index.json`](CodexSkills/index.json)（机器读，供 Agent 按需检索单个 skill，不要整仓 clone）。
 
-“人物蒸馏 Skill”登记在
-[`CodexSkills/registry/codex/persona-distiller/`](CodexSkills/registry/codex/persona-distiller/)。
+“人物蒸馏 Skill”构建器位于
+[`CodexSkills/registry/codex/persona-distiller/`](CodexSkills/registry/codex/persona-distiller/)，
+唯一 canonical 登记与专家团队 Skill 位于平级的
+[`CodexSkills/registry/codex/persona-distiller-group/`](CodexSkills/registry/codex/persona-distiller-group/)。
 它生成的每个人物产物必须且只能登记到对应的一个身份目录；多重身份只进入
-`多重身份/`，不得在不同身份下重复登记。`技术工程/`、`企业领导/`、`金融投资/`、
-`软开设计/`、`思想教育/`、`政治法律/`、`多重身份/` 直接位于 Skill 根目录；
-完整发布 ZIP 与 canonical 登记保存在相应目录，生成索引为
-[`persona-registry-index.json`](CodexSkills/registry/codex/persona-distiller/persona-registry-index.json)。
+`多重身份/`，不得在不同身份下重复登记。七个目录固定为 `技术工程师/`、
+`创业经营家/`、`投资资本家/`、`开发设计家/`、`思想教育家/`、`政治法律家/`、
+`多重身份/`；每个版本只保存一个全量完整交付 ZIP，机器索引为
+[`team-index.json`](CodexSkills/registry/codex/persona-distiller-group/team-index.json)，
+最高优先级团队路由为
+[`CANONICAL-ROOT-ROUTE.md`](CodexSkills/registry/codex/persona-distiller-group/CANONICAL-ROOT-ROUTE.md)。
 身份目录只用于唯一登记；安装后用户直接调用对应人物 Skill，内部自动路由身份与场景，
 不要求用户选择身份。每个 canonical 人物的成功蒸馏产物独立使用
 `0.0.0.1` 至 `0.0.0.999` 连续版本；单次运行没有版本编号。

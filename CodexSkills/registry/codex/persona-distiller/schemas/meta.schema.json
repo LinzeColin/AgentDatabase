@@ -3,7 +3,7 @@
   "additionalProperties": true,
   "properties": {
     "builder_version": {
-      "const": "v0.0.0.4"
+      "const": "v0.0.0.5"
     },
     "identity_selection": {
       "$ref": "identity-selection.schema.json"

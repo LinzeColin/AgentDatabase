@@ -17,4 +17,4 @@ Each round started from a failure mode, changed executable behavior or release g
 
 ## Result
 
-The framework passes 45 offline unit/integration/concurrency tests. This validates the builder, source/Claim contracts, automatic internal routing, unnumbered runtime audit, packaging, installation, corrections, rollback machinery, root-level seven-category layout, legacy-layout rejection, and per-person product registry. It does **not** claim behavioral fidelity for a specific person before lawful target-specific research, frozen Holdout data, and independent evaluation are completed.
+The v0.0.0.5 framework passes 52 offline unit/integration/concurrency tests. This validates the builder, source/Claim contracts, automatic internal routing, unnumbered runtime audit, one-full-delivery packaging, atomic dual-Skill installation, corrections, rollback machinery, the sibling group's exact seven-category layout, legacy normalization, expert-team routing, and per-person product registry. It does **not** claim behavioral fidelity for a specific person before lawful target-specific research, frozen Holdout data, and independent evaluation are completed.

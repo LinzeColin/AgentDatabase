@@ -10,6 +10,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from common import atomic_write_json, atomic_write_text, ensure_dir, make_id, slugify, utc_now, valid_skill_name
 from identity import load_registry, parse_identity_spec
+from persona_registry import category_for_identity, subject_uid
 from route_engine import build_route, source_universe
 
 
@@ -87,7 +88,7 @@ def main() -> int:
             'replacement of accountable high-stakes professional judgment',
         ],
         'existential_hypotheses_enabled': bool(args.enable_existential_hypotheses),
-        'builder_version': 'v0.0.0.4',
+        'builder_version': 'v0.0.0.5',
         'model_version': '0.1.0-draft',
         'product_version': None,
         'product_version_policy': 'per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration',
@@ -108,6 +109,8 @@ def main() -> int:
         'LANGUAGE': args.language,
         'TIME_SCOPE': args.time_scope,
         'TARGET_ID': target_id,
+        'SUBJECT_UID': subject_uid(args.name, effective_origin),
+        'REGISTRATION_IDENTITY_FAMILY_ID': category_for_identity(selection)['identity_family_id'],
         'CREATED_AT': now,
         'IDENTITY_CATALOG_JSON': json.dumps(registry, ensure_ascii=False, indent=2, sort_keys=True),
         'ROUTE_MANIFEST_JSON': json.dumps(route, ensure_ascii=False, indent=2, sort_keys=True),

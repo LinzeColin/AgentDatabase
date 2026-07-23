@@ -75,7 +75,7 @@ CATEGORY = {
     "工程与交付": ["verifier", "webapp-testing", "mcp-builder", "use-railway", "video-replica",
                    "goal-to-delivery-sop", "domain-dual-plane", "output-skill", "codex-dev-orchestrator",
                    "impeccable", "review-agent", "plugin-creator", "skill-creator", "skill-installer",
-                   "skill-github-sync", "persona-distiller"],
+                   "skill-github-sync", "persona-distiller", "persona-distiller-group"],
     "学习与知识": ["study-project-orchestrator", "book-to-skill", "last30days", "chronicle",
                    "grill-me", "openai-docs"],
     "业务流程": ["km-bid-scout", "km-bid-discover", "km-bid-qualify", "km-bid-brief", "km-bid-evidence",
@@ -291,8 +291,8 @@ def iter_mirrored_skills(mirror_root):
 def persona_product_index(mirror_root):
     path = os.path.join(
         mirror_root,
-        mirror_relative_path("codex", "persona-distiller"),
-        "persona-registry-index.json",
+        mirror_relative_path("codex", "persona-distiller-group"),
+        "team-index.json",
     )
     if not os.path.isfile(path):
         return []
@@ -382,20 +382,24 @@ def build_index(mirror_root):
         "",
         "[`persona-distiller`](registry/codex/persona-distiller/SKILL.md) 生成的每个人物产物"
         "必须且只能登记在对应的一个身份目录中；多重身份只进入 `多重身份/`，不得在不同身份下重复登记。",
-        "完整发布 ZIP、canonical 登记和机器索引位于"
-        " [`registry/codex/persona-distiller/`](registry/codex/persona-distiller/README.md) 根级七个身份目录；"
-        "规则见 [`references/persona-product-registration.md`]"
-        "(registry/codex/persona-distiller/references/persona-product-registration.md)。",
-        "目录：[`技术工程/`](registry/codex/persona-distiller/技术工程/)、"
-        "[`企业领导/`](registry/codex/persona-distiller/企业领导/)、"
-        "[`金融投资/`](registry/codex/persona-distiller/金融投资/)、"
-        "[`软开设计/`](registry/codex/persona-distiller/软开设计/)、"
-        "[`思想教育/`](registry/codex/persona-distiller/思想教育/)、"
-        "[`政治法律/`](registry/codex/persona-distiller/政治法律/)、"
-        "[`多重身份/`](registry/codex/persona-distiller/多重身份/)。",
+        "完整发布 ZIP、canonical 登记、团队卡与机器索引仅位于与构建器平级的"
+        " [`registry/codex/persona-distiller-group/`](registry/codex/persona-distiller-group/README.md)；"
+        "完整交付规则见 [`references/delivery-package-standard.md`]"
+        "(registry/codex/persona-distiller-group/references/delivery-package-standard.md)，"
+        "团队路由真源见 [`CANONICAL-ROOT-ROUTE.md`]"
+        "(registry/codex/persona-distiller-group/CANONICAL-ROOT-ROUTE.md)。",
+        "目录：[`技术工程师/`](registry/codex/persona-distiller-group/技术工程师/)、"
+        "[`创业经营家/`](registry/codex/persona-distiller-group/创业经营家/)、"
+        "[`投资资本家/`](registry/codex/persona-distiller-group/投资资本家/)、"
+        "[`开发设计家/`](registry/codex/persona-distiller-group/开发设计家/)、"
+        "[`思想教育家/`](registry/codex/persona-distiller-group/思想教育家/)、"
+        "[`政治法律家/`](registry/codex/persona-distiller-group/政治法律家/)、"
+        "[`多重身份/`](registry/codex/persona-distiller-group/多重身份/)。",
         "身份分类由人物 Skill 内部使用，不是调用门槛；用户安装后直接调用对应人物 Skill，"
         "无需选择身份。人物产物按 canonical 人物分别从 `0.0.0.1` 连续编号到 "
-        "`0.0.0.999`，只在成功登记时占号；人物 Skill 的单次运行不编号。",
+        "`0.0.0.999`，只在成功登记时占号；人物 Skill 的单次运行不编号。"
+        "团队调用会先按场景选择 5–20 个高相关角色，以正向解决者为主，并至少隔离一个复审、"
+        "一个裁判和一个反证角色。",
         "",
     ]
     products = persona_product_index(mirror_root)
@@ -406,7 +410,7 @@ def build_index(mirror_root):
             "| 人物 | 唯一分类 | 产物版本 | 完整 ZIP |",
             "|---|---|---|---|",
         ]
-        product_root = "registry/codex/persona-distiller"
+        product_root = "registry/codex/persona-distiller-group"
         for product in products:
             name = str(product.get("canonical_name", "")).replace("|", "\\|")
             category = str(product.get("registration_category", "")).replace("|", "\\|")

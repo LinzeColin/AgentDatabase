@@ -17,18 +17,24 @@ class SyncSkillsRegistryRoutingTests(unittest.TestCase):
     def test_all_sources_use_registry_route_and_persona_preserves_repo_metadata(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            local = root / "local-persona"
-            local.mkdir()
-            (local / "SKILL.md").write_text(
+            local_builder = root / "local-persona-builder"
+            local_builder.mkdir()
+            (local_builder / "SKILL.md").write_text(
                 "---\nname: persona-distiller\ndescription: Test persona builder.\n---\n",
                 encoding="utf-8",
             )
-            (local / "persona-registry-index.json").write_text(json.dumps({
+            local_group = root / "local-persona-group"
+            local_group.mkdir()
+            (local_group / "SKILL.md").write_text(
+                "---\nname: persona-distiller-group\ndescription: Test persona group.\n---\n",
+                encoding="utf-8",
+            )
+            (local_group / "team-index.json").write_text(json.dumps({
                 "products": [{
                     "canonical_name": "Example Person",
-                    "registration_category": "技术工程",
+                    "registration_category": "技术工程师",
                     "latest_product_version": "0.0.0.1",
-                    "latest_artifact": "技术工程/example/versions/0.0.0.1/example.zip",
+                    "latest_artifact": "技术工程师/example/versions/0.0.0.1/example.zip",
                 }],
             }), encoding="utf-8")
             mirror_root = root / "CodexSkills"
@@ -37,13 +43,19 @@ class SyncSkillsRegistryRoutingTests(unittest.TestCase):
             (unrelated / "SKILL.md").write_text("---\nname: unrelated\ndescription: Keep.\n---\n", encoding="utf-8")
 
             changes = sync_skills.mirror(
-                {("codex", "persona-distiller"): str(local)},
+                {
+                    ("codex", "persona-distiller"): str(local_builder),
+                    ("codex", "persona-distiller-group"): str(local_group),
+                },
                 str(mirror_root),
                 propagate_deletions=False,
             )
             routed = mirror_root / "registry" / "codex" / "persona-distiller"
+            group_routed = mirror_root / "registry" / "codex" / "persona-distiller-group"
             self.assertIn("registry/codex/persona-distiller", changes["added"])
+            self.assertIn("registry/codex/persona-distiller-group", changes["added"])
             self.assertTrue((routed / "SKILL.md").is_file())
+            self.assertTrue((group_routed / "SKILL.md").is_file())
             self.assertFalse((mirror_root / "codex" / "persona-distiller").exists())
             self.assertTrue(unrelated.is_dir())
             self.assertEqual(
@@ -52,9 +64,9 @@ class SyncSkillsRegistryRoutingTests(unittest.TestCase):
             )
 
             (routed / "registry.yaml").write_text("identity: persona-distiller\n", encoding="utf-8")
-            (local / "README.md").write_text("updated\n", encoding="utf-8")
+            (local_builder / "README.md").write_text("updated\n", encoding="utf-8")
             sync_skills.mirror(
-                {("codex", "persona-distiller"): str(local)},
+                {("codex", "persona-distiller"): str(local_builder)},
                 str(mirror_root),
                 propagate_deletions=False,
             )
@@ -75,7 +87,7 @@ class SyncSkillsRegistryRoutingTests(unittest.TestCase):
             self.assertIn("单次运行不编号", readme)
             self.assertIn("0.0.0.1", readme)
             self.assertIn("Example Person", readme)
-            self.assertIn("persona-distiller/技术工程/", readme)
+            self.assertIn("persona-distiller-group/技术工程师/", readme)
             self.assertNotIn("persona-distiller/产物登记/", readme)
             self.assertIn("| `registry/codex/` |", readme)
 

@@ -3,31 +3,31 @@ identity:
   skill_id: persona-distiller
   display_name: 人物蒸馏 Skill
   source: codex
-  version: 0.0.0.4
+  version: 0.0.0.5
   entry: SKILL.md
 provenance:
   upstream_archive: PersonaDistiller-Final-v0.0.0.3.zip
   upstream_sha256: e891912d98d14afb7677ac935a19be329d97d206f4ae74a644892f46b17f6748
   local_canonical_path: ~/.codex/skills/persona-distiller
   repository_path: CodexSkills/registry/codex/persona-distiller
-  customization: Codex 单路径安装；七类唯一登记；运行身份自动路由；调用不编号；人物产物按人独立编号。
+  customization: Codex 单路径双 Skill 安装；canonical group 七类唯一登记；单一完整交付 ZIP；运行身份自动路由；调用不编号。
 capability_contract:
   required_inputs:
     - target_name
     - identity
-  primary_output: 完整、校验通过的目标人物 Agent Skill ZIP
-  persistent_output: 技术工程/、企业领导/、金融投资/、软开设计/、思想教育/、政治法律/、多重身份/
-  uniqueness: 同一人物只允许一个 canonical 登记；多重身份只进入多重身份目录。
+  primary_output: 单一、完整、校验通过的人物蒸馏交付 ZIP
+  persistent_output: ../persona-distiller-group/技术工程师、创业经营家、投资资本家、开发设计家、思想教育家、政治法律家、多重身份
+  uniqueness: 同一人物只允许一个 canonical 登记；多重身份只进入 persona-distiller-group/多重身份。
   public_registry_policy: 拒绝 private/self 产物、原始材料、Holdout、私密来源正文和疑似秘密。
 verification:
-  offline_tests: 45
-  offline_tests_passed: 45
-  immutable_checksum_entries: 203
+  offline_tests: 0
+  offline_tests_passed: 0
+  immutable_checksum_entries: 0
   persona_registry_validator: scripts/validate_persona_registry.py
   repository_secret_gate: CodexSkills/sync_skills.py
 controlled_iteration:
   status: candidate_for_acceptance
-  version_policy: builder v0.0.0.4；人物产物按 canonical 人物使用 0.0.0.1..0.0.0.999；运行不编号。
+  version_policy: builder v0.0.0.5；人物产物按 canonical 人物使用 0.0.0.1..0.0.0.999；运行不编号。
   sync_route: codex/persona-distiller -> registry/codex/persona-distiller
   update_command: python3 CodexSkills/sync_skills.py --only codex/persona-distiller --no-commit
   promotion_gate: 全部测试、校验和、唯一登记校验、凭据硬门与远端回读必须通过。

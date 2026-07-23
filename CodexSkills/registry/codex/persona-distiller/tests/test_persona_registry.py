@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import concurrent.futures
 import hashlib
+import io
 import json
 import sys
 import tempfile
@@ -15,9 +16,11 @@ from persona_registry import (
     next_product_version,
     next_product_version_for,
     register_product,
+    subject_uid,
     validate_registry,
     write_index,
 )
+from delivery_builder import build_full_delivery
 
 
 def initialize_registry(root: Path) -> None:
@@ -25,7 +28,7 @@ def initialize_registry(root: Path) -> None:
         folder = root / category['folder']
         folder.mkdir(parents=True)
         (folder / '_category.json').write_text(json.dumps({
-            'schema_version': '2.0',
+            'schema_version': '3.0',
             'folder': category['folder'],
             'identity_family_id': category['identity_family_id'],
             'identity_mode': category['identity_mode'],
@@ -74,7 +77,7 @@ def create_product_zip(
         'name': slug,
         'target_name': name,
         'builder': 'persona-distiller',
-        'builder_version': 'v0.0.0.4',
+        'builder_version': 'v0.0.0.5',
         'product_version': product_version,
         'model_version': model_version,
         'created_at': '2026-07-23T00:00:00Z',
@@ -87,11 +90,54 @@ def create_product_zip(
         },
         'files': records,
     }
-    with zipfile.ZipFile(path, 'w', compression=zipfile.ZIP_DEFLATED) as archive:
+    runtime_path = path.with_name(path.stem + '.runtime.zip')
+    with zipfile.ZipFile(runtime_path, 'w', compression=zipfile.ZIP_DEFLATED) as archive:
         for relative, content in payloads.items():
             archive.writestr(f'{top}/{relative}', content)
         archive.writestr(f'{top}/checksums.sha256', checksums)
         archive.writestr(f'{top}/PACKAGE_MANIFEST.json', json.dumps(manifest, ensure_ascii=False, sort_keys=True))
+    category_by_identity = {
+        'technical-engineer': 'technical-engineer',
+        'entrepreneur-operator': 'entrepreneur-operator',
+        'investor-capital-allocator': 'investor-capital-allocator',
+        'developer-designer': 'developer-designer',
+        'thinker-educator': 'thinker-educator',
+        'political-legal': 'political-legal',
+    }
+    identity_family = 'multi-identity' if mode == 'multi' else category_by_identity[primary]
+    card = {
+        'schema_version': '1.0',
+        'subject_uid': subject_uid(name, origin),
+        'canonical_name': name,
+        'subject_slug': slug,
+        'identity_family_id': identity_family,
+        'readiness': 'ready',
+        'research_cutoff': '2026-07-23',
+        'latest_product_version': product_version,
+        'selection_reasons': ['Synthetic registry fixture.'],
+        'distillation_traits': ['Evidence-bounded synthetic reasoning.'],
+        'user_value': ['Tests canonical delivery registration.'],
+        'application_scenarios': ['general-agentic-work'],
+        'key_capabilities': ['Synthetic verification'],
+        'hard_boundaries': ['Not a real person model.'],
+    }
+    audit = {
+        name: {'schema_version': '1.0', 'status': 'passed'}
+        for name in (
+            'verification.json',
+            'provenance.json',
+            'source-coverage.json',
+            'evaluation-summary.json',
+            'review-record.json',
+        )
+    }
+    build_full_delivery(
+        runtime_path,
+        path,
+        team_card=card,
+        audit=audit,
+        created_at='2026-07-23T00:00:00Z',
+    )
     return path
 
 
@@ -103,14 +149,14 @@ class PersonaRegistryTests(unittest.TestCase):
             (root / 'scripts').mkdir()
             self.assertTrue(validate_registry(root)['passed'])
 
-    def test_legacy_nested_registry_directory_is_rejected(self) -> None:
+    def test_missing_canonical_category_manifest_is_rejected(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             initialize_registry(root)
-            (root / '产物登记').mkdir()
+            (root / '技术工程师' / '_category.json').unlink()
             result = validate_registry(root)
             self.assertFalse(result['passed'])
-            self.assertTrue(any('legacy nested registry directory' in error for error in result['errors']))
+            self.assertTrue(any('category manifest' in error for error in result['errors']))
 
     def test_single_identity_routes_to_exact_category_and_preserves_full_zip(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -119,7 +165,7 @@ class PersonaRegistryTests(unittest.TestCase):
             initialize_registry(registry)
             product = create_product_zip(root / 'person.zip')
             result = register_product(product, registry)
-            self.assertEqual(result['category'], '技术工程')
+            self.assertEqual(result['category'], '技术工程师')
             self.assertEqual(result['product_version'], '0.0.0.1')
             self.assertTrue(Path(result['artifact']).is_file())
             self.assertTrue(validate_registry(registry)['passed'])
@@ -236,11 +282,8 @@ class PersonaRegistryTests(unittest.TestCase):
     def test_private_product_is_rejected_from_public_registry(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            registry = root / 'registry'
-            initialize_registry(registry)
-            private = create_product_zip(root / 'private.zip', origin='private')
             with self.assertRaisesRegex(ValueError, 'private/self'):
-                register_product(private, registry)
+                create_product_zip(root / 'private.zip', origin='private')
 
 
 if __name__ == '__main__':

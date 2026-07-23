@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.0.0.5 — 2026-07-23
+
+- 将七个身份目录和全部人物备份迁移到平级 `persona-distiller-group` canonical registry，目录名与内部身份名称完全一致。
+- 发布物升级为唯一外层完整交付 ZIP：内嵌一个不可变运行时 ZIP，并包含安装、双层哈希、登记、team card、来源覆盖、评测、验证、provenance、review 与 handoff；不再产生 sidecar。
+- 完整交付 schema 只约束文件与架构，不枚举或限制人物姓名、语言、职业和内容风格。
+- 增加 5–20 人专家团队路由；人物专家主要担任正向解决者，中立复审、裁判和反证角色强制隔离。
+- 三份既有政治法律人物产品以 `legacy-normalized-v0.0.0.5` 外层迁移，人物版本仍为 `0.0.0.1`，原运行时字节与 SHA-256 不变。
+- 最终安装 bundle 同时安装 `persona-distiller` 与 `persona-distiller-group` 到 `~/.codex/skills`，不保留第二来源。
+
 ## v0.0.0.4 — 2026-07-23
 
 - 目标人物 Skill 改为直接调用：用户无需选择身份、编号或权重。

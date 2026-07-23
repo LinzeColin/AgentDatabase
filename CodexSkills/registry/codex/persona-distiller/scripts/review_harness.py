@@ -84,8 +84,14 @@ def suite_prompt_coverage() -> tuple[bool, str]:
 
 def package_privacy_contract() -> tuple[bool, str]:
     text = (ROOT / 'scripts/package_target.py').read_text(encoding='utf-8')
-    required = ['runtime_history_reset', "write_jsonl(staging / 'memory' / 'episodic.jsonl', [])", "CORE_DIRS = ['agents', 'identity-facets', 'scenario-adapters', 'scripts']"]
-    forbidden = ["CORE_DIRS = ['raw'", "CORE_DIRS = ['references'"]
+    required = [
+        'runtime_history_reset',
+        'write_jsonl(runtime_staging / "memory" / "episodic.jsonl", [])',
+        'CORE_DIRS = ["agents", "identity-facets", "scenario-adapters", "scripts"]',
+        'build_full_delivery',
+        '"sidecars_emitted": False',
+    ]
+    forbidden = ['CORE_DIRS = ["raw"', 'CORE_DIRS = ["references"']
     missing = [item for item in required if item not in text]
     bad = [item for item in forbidden if item in text]
     return not missing and not bad, f'missing={missing}; forbidden={bad}'
@@ -105,10 +111,20 @@ def runtime_contract() -> tuple[bool, str]:
 
 
 def product_version_contract() -> tuple[bool, str]:
-    return contains(
-        'scripts/persona_registry.py',
-        '0.0.0.999', 'next_product_version', 'per-canonical-person',
-        'product version range exhausted', 'registry_lock',
+    path = ROOT.parent / 'persona-distiller-group' / 'scripts' / 'registry_core.py'
+    text = path.read_text(encoding='utf-8') if path.is_file() else ''
+    required = [
+        '0.0.0.999',
+        'def next_product_version(',
+        'canonical person',
+        'product version range exhausted',
+        'def registry_lock(',
+    ]
+    missing = [item for item in required if item not in text]
+    return not missing, (
+        f'missing={missing}; canonical registry={path}'
+        if missing
+        else f'canonical per-person version contract present in {path}'
     )
 
 

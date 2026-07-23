@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import io
 import os
 import shutil
 import subprocess
@@ -23,12 +24,13 @@ class PackageInstallMigrateTests(unittest.TestCase):
             run_script('package_target.py', target, '--output', output)
             with zipfile.ZipFile(output) as archive:
                 names = archive.namelist()
-            self.assertTrue(any(name.endswith('/PACKAGE_MANIFEST.json') for name in names))
+            self.assertTrue(any(name.endswith('/delivery-manifest.json') for name in names))
             self.assertFalse(any('/raw/' in name for name in names))
             self.assertFalse(any('/references/holdout/' in name for name in names))
             self.assertFalse(any('/references/sources/' in name for name in names))
             self.assertTrue(any(name.endswith('/install.py') for name in names))
-            self.assertTrue(any(name.endswith('/checksums.sha256') for name in names))
+            self.assertTrue(any(name.endswith('/delivery-checksums.sha256') for name in names))
+            self.assertEqual(len([name for name in names if '/runtime/' in name and name.endswith('.zip')]), 1)
 
     def test_successful_registration_advances_only_that_persons_next_product_version(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -37,21 +39,24 @@ class PackageInstallMigrateTests(unittest.TestCase):
             populate_release_ready(target, root / 'materials')
             registry = root / 'registry'
             skill_root = Path(__file__).resolve().parents[1]
+            group_root = skill_root.parent / 'persona-distiller-group'
             registry.mkdir()
-            for category in ('技术工程', '企业领导', '金融投资', '软开设计', '思想教育', '政治法律', '多重身份'):
-                shutil.copytree(skill_root / category, registry / category)
-            shutil.copy2(skill_root / 'persona-registry-index.json', registry / 'persona-registry-index.json')
+            for category in ('技术工程师', '创业经营家', '投资资本家', '开发设计家', '思想教育家', '政治法律家', '多重身份'):
+                shutil.copytree(group_root / category, registry / category, ignore=shutil.ignore_patterns('registration.json', 'team-card.json', 'versions'))
+            shutil.copy2(group_root / 'team-index.json', registry / 'team-index.json')
             first = root / 'first.zip'
             run_script('package_target.py', target, '--output', first, '--registry-root', registry)
             with zipfile.ZipFile(first) as archive:
-                first_manifest = json.loads(archive.read(f'{target.name}/PACKAGE_MANIFEST.json'))
+                top = archive.namelist()[0].split('/', 1)[0]
+                first_manifest = json.loads(archive.read(f'{top}/delivery-manifest.json'))
             self.assertEqual(first_manifest['product_version'], '0.0.0.1')
             run_script('register_persona.py', first, '--registry-root', registry)
 
             second = root / 'second.zip'
             run_script('package_target.py', target, '--output', second, '--registry-root', registry)
             with zipfile.ZipFile(second) as archive:
-                second_manifest = json.loads(archive.read(f'{target.name}/PACKAGE_MANIFEST.json'))
+                top = archive.namelist()[0].split('/', 1)[0]
+                second_manifest = json.loads(archive.read(f'{top}/delivery-manifest.json'))
             self.assertEqual(second_manifest['product_version'], '0.0.0.2')
             self.assertTrue(json.loads(run_script(
                 'validate_persona_registry.py', '--registry-root', registry,
@@ -60,13 +65,15 @@ class PackageInstallMigrateTests(unittest.TestCase):
     def test_installer_copy_backup_status_and_uninstall(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             destination = Path(tmp) / 'persona-distiller'
+            skill_root = Path(__file__).resolve().parents[1]
+            shutil.copytree(
+                skill_root.parent / 'persona-distiller-group',
+                destination.parent / 'persona-distiller-group',
+                ignore=shutil.ignore_patterns('__pycache__', '*.pyc', '.DS_Store'),
+            )
             run_script('install.py', 'install', '--target', 'path', '--path', destination)
             self.assertTrue((destination / 'SKILL.md').is_file())
-            skill_root = Path(__file__).resolve().parents[1]
-            registered_artifacts = sorted(skill_root.glob('*/**/versions/**/*.zip'))
-            self.assertTrue(registered_artifacts)
-            for artifact in registered_artifacts:
-                self.assertTrue((destination / artifact.relative_to(skill_root)).is_file())
+            self.assertFalse(any(destination.glob('*/**/versions/**/*.zip')))
             status = run_script('install.py', 'status', '--target', 'path', '--path', destination)
             self.assertTrue(json.loads(status.stdout)['valid'])
             run_script('install.py', 'install', '--target', 'path', '--path', destination, '--force')

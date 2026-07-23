@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:bethwilkinson",
+  "canonical_name": "Beth Wilkinson",
+  "identity_family_id": "political-legal",
+  "identity_mode": "single",
+  "registration_category": "政治法律家",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "beth-wilkinson",
+  "subject_uid": "person-473d8314576afc9c",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/beth-wilkinson-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-23T08:45:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "legacy-normalized-v0.0.0.5",
+      "model_version": "1.0.1",
+      "outer_sha256": "ecbebc05cad6461467cae340f32b20b22ba4263f407af307e1cc80ea00995eda",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/beth-wilkinson-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "e0a30abd20dc8740bc35fd21840ff62d2492ffc64fb1b59ced4525a0e66e9802",
+      "runtime_size_bytes": 66275,
+      "size_bytes": 72699
+    }
+  ]
+}

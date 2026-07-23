@@ -21,7 +21,7 @@ class InitAndIngestTests(unittest.TestCase):
             self.assertEqual(meta['profile'], 'quick')
             self.assertEqual(meta['status'], 'draft')
             self.assertEqual(meta['identity_selection']['primary'], 'thinker-educator')
-            self.assertEqual(meta['builder_version'], 'v0.0.0.4')
+            self.assertEqual(meta['builder_version'], 'v0.0.0.5')
             self.assertIsNone(meta['product_version'])
             self.assertFalse(meta['runtime_invocation_versioning'])
             self.assertTrue((target / 'route-manifest.json').is_file())
