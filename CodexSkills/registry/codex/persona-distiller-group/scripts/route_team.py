@@ -229,7 +229,8 @@ def score_candidate(
     capability_score = min(20, capability_matches * 4)
     if capability_score == 0 and identity_score:
         capability_score = 8
-    value_score = min(15, semantic_matches(candidate.get("user_value"), terms) * 3)
+    value_matches = semantic_matches(candidate.get("user_value"), terms)
+    value_score = min(15, value_matches * 3)
     if value_score == 0 and scenario_score:
         value_score = 6
     complementarity_score = 10
@@ -243,6 +244,13 @@ def score_candidate(
         f"complementarity={complementarity_score}/10",
         f"freshness={freshness}/5",
     ]
+    if (
+        identity == "多重身份"
+        and candidate.get("registration_category") == "多重身份"
+        and not exact_scenario
+        and semantic_matches(scenarios, terms) + capability_matches + value_matches == 0
+    ):
+        return score, reasons, "multi-identity category has no material task-semantic match"
     if identity_score == 0 and not exact_scenario and capability_matches < 2:
         return score, reasons, "no material identity, exact-scenario, or capability match"
     if score < 30:

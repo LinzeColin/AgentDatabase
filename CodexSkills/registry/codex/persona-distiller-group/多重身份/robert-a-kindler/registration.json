@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:robertakindler",
+  "canonical_name": "Robert A. Kindler",
+  "identity_family_id": "multi-identity",
+  "identity_mode": "multi",
+  "registration_category": "多重身份",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "robert-a-kindler",
+  "subject_uid": "person-72b93943734eb8aa",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/robert-a-kindler-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-23T12:00:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "0.1.0",
+      "outer_sha256": "dd7e863ac589d5038a7f7b51ca390798fa4ee76e112aedf5d048bd54715c98bc",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/robert-a-kindler-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "348d72e3b713ed92b2cbdf88d110d37295e0cece7c8cbf8d4bce4957f7870bec",
+      "runtime_size_bytes": 67153,
+      "size_bytes": 339176
+    }
+  ]
+}

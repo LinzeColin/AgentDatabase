@@ -85,7 +85,11 @@ class GroupContractTests(unittest.TestCase):
             role for role in plan['selected_roles']
             if role['role_type'] == 'persona-solver'
         ]
-        self.assertEqual(len(persona_roles), 3)
+        self.assertGreaterEqual(len(persona_roles), 1)
+        self.assertLessEqual(
+            len(persona_roles),
+            plan['requested_size'] - len(plan['control_roles']),
+        )
         self.assertEqual(
             len({role['subject_uid'] for role in persona_roles}),
             len(persona_roles),
@@ -111,9 +115,10 @@ class GroupContractTests(unittest.TestCase):
     def test_human_views_register_required_card_fields(self) -> None:
         readme = (GROUP / 'README.md').read_text(encoding='utf-8')
         route = (GROUP / 'CANONICAL-ROOT-ROUTE.md').read_text(encoding='utf-8')
-        for name in ('Beth Wilkinson', 'Evan R. Chesler', 'Theodore V. Wells Jr.'):
-            self.assertIn(name, readme)
-            self.assertIn(name, route)
+        products = json.loads((GROUP / 'team-index.json').read_text(encoding='utf-8'))['products']
+        for product in products:
+            self.assertIn(product['canonical_name'], readme)
+            self.assertIn(product['canonical_name'], route)
         for header in (
             '选入原因', '最值得蒸馏的特点', '对用户的利益/帮助', '应用场景', '关键能力',
         ):

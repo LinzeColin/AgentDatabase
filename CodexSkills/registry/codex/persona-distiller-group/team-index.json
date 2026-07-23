@@ -1,15 +1,75 @@
 {
   "category_counts": {
     "创业经营家": 0,
-    "多重身份": 0,
+    "多重身份": 1,
     "开发设计家": 0,
     "思想教育家": 0,
     "技术工程师": 0,
     "投资资本家": 0,
-    "政治法律家": 3
+    "政治法律家": 5
   },
   "generated": true,
   "products": [
+    {
+      "application_scenarios": [
+        "M&A strategy and transaction screening",
+        "board and corporate-governance decision support",
+        "activism and takeover-defense issue mapping",
+        "capital-markets and transaction-window analysis",
+        "deal process, stage-gate and red-team review",
+        "professional career and relationship-system design"
+      ],
+      "canonical_name": "Robert A. Kindler",
+      "distillation_traits": [
+        "dual legal-and-banker lens",
+        "separates strategic need from execution feasibility",
+        "stage-gated transaction reasoning",
+        "balance-sheet and system-fragility awareness",
+        "long-horizon relationship compounding",
+        "board-ready conditional communication"
+      ],
+      "hard_boundaries": [
+        "Evidence-grounded model, not Robert A. Kindler, his authorization, endorsement or current opinion.",
+        "No specific legal advice, conflict clearance, board authorization, signature or representation.",
+        "Capital scope is M&A and transaction strategy only; no security selection, portfolio management or personal investment advice.",
+        "No invented private client communications, motives, work product or sole-causation claims.",
+        "Current legal, regulatory, market, role and transaction facts must be reverified."
+      ],
+      "identity_family_id": "multi-identity",
+      "key_capabilities": [
+        "legal-commercial dual-track analysis",
+        "transaction lifecycle and stage-gate design",
+        "six-friction execution screen",
+        "downside and balance-sheet stress testing",
+        "stakeholder, authorization and veto mapping",
+        "conditional board-ready communication"
+      ],
+      "latest_artifact": "多重身份/robert-a-kindler/versions/0.0.0.1/robert-a-kindler-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "0.1.0",
+      "latest_outer_sha256": "dd7e863ac589d5038a7f7b51ca390798fa4ee76e112aedf5d048bd54715c98bc",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "348d72e3b713ed92b2cbdf88d110d37295e0cece7c8cbf8d4bce4957f7870bec",
+      "readiness": "ready",
+      "registration": "多重身份/robert-a-kindler/registration.json",
+      "registration_category": "多重身份",
+      "research_cutoff": "2026-07-23",
+      "selection_reasons": [
+        "Unique career spanning elite M&A legal practice and senior investment-banking leadership.",
+        "Public evidence supports a transferable interface between document precision, board strategy and transaction execution.",
+        "Repeated direct interviews expose decision conditions, not only biographical achievements."
+      ],
+      "subject_origin": "public",
+      "subject_slug": "robert-a-kindler",
+      "subject_uid": "person-72b93943734eb8aa",
+      "team_card": "多重身份/robert-a-kindler/team-card.json",
+      "user_value": [
+        "Review M&A and governance decisions without collapsing legal and commercial dimensions.",
+        "Build board-ready decision memos with explicit authorization, risk and stop conditions.",
+        "Pressure-test growth transactions against valuation, volatility, financing, regulation, shareholders and balance sheet.",
+        "Design long-term professional relationship and career-learning systems without imitating private personality."
+      ],
+      "version_count": 1
+    },
     {
       "application_scenarios": [
         "governance-legal",
@@ -115,6 +175,118 @@
         "为重大争议建立记录驱动、可信度优先的案件与证人策略。",
         "比较审判、和解与上诉路径的约束、信息需求和失败代价。",
         "为多团队、多专业的高风险任务设计职责、冗余和复核接口。"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "governance-legal",
+        "strategy-decision",
+        "communication-negotiation",
+        "red-team-risk",
+        "银行监管与重大金融机构交易",
+        "系统性危机与失败处置",
+        "董事会治理与监管沟通"
+      ],
+      "canonical_name": "H. Rodgin Cohen",
+      "distillation_traits": [
+        "把法律、监管、资产负债表、市场信心与公共合法性建成耦合系统",
+        "在预先定义权限和责任的前提下保留危机工具与执行顺序的弹性",
+        "用历史危机建立先验但按当前事实重算，并以镇定简洁方式推进多方协作"
+      ],
+      "hard_boundaries": [
+        "不得声称本人授权、背书、签名、实时意见或已阅读用户材料。",
+        "当前法律、监管政策、审批、交易状态和机构权限必须重新核验；本模型不替代律师。",
+        "不得把银行交易经验外推为证券选择、组合管理或收益预测能力。",
+        "必须披露大型金融机构与第一方来源偏差，并单列消费者、社区、竞争和道德风险。"
+      ],
+      "identity_family_id": "political-legal",
+      "key_capabilities": [
+        "银行监管、控制权与重大交易门槛结构化",
+        "系统性风险、流动性、信心传染与失败处置分析",
+        "法定权限、程序触发、损失承担与多路径方案设计",
+        "公共-私营多方协调、监管对话和高压沟通准备",
+        "董事会网络安全、治理与危机演练框架"
+      ],
+      "latest_artifact": "政治法律家/h-rodgin-cohen/versions/0.0.0.1/h-rodgin-cohen-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "effe07225fbb3bc953a2697774a8fcbfc942f657f9c8a20e42718ec0519df0c1",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "0a6a28885ce82efc602ae96edb6871e56a6fdad63fe5add618e5c080b391e819",
+      "readiness": "ready",
+      "registration": "政治法律家/h-rodgin-cohen/registration.json",
+      "registration_category": "政治法律家",
+      "research_cutoff": "2026-07-23",
+      "selection_reasons": [
+        "公开证据的主轴是银行监管、重大金融机构交易、系统性危机处置与制度设计。",
+        "模型具有可证伪的系统因果、程序与执行规则，并明确大型金融机构视角偏差和能力禁区。"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "h-rodgin-cohen",
+      "subject_uid": "person-8da4cba5393aa7e2",
+      "team_card": "政治法律家/h-rodgin-cohen/team-card.json",
+      "user_value": [
+        "为受监管金融机构的危机、交易或治理任务建立权限-系统风险-执行一体化框架。",
+        "把反对意见转化为带触发条件、责任主体、损失安排和验证指标的可执行替代方案。",
+        "在大型机构视角、道德风险、程序公平与市场稳定之间进行显式权衡。"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "governance-legal",
+        "strategy-decision",
+        "communication-negotiation",
+        "red-team-risk",
+        "复杂M&A与董事会决策",
+        "监管终局与交易确定性分析",
+        "股东积极主义与代理权争夺",
+        "交易团队与决策节奏设计"
+      ],
+      "canonical_name": "Scott A. Barshay",
+      "distillation_traits": [
+        "先听清客户与对手方约束，再设计可执行妥协",
+        "签约前倒推监管、诉讼、补救和退出终局",
+        "风险门满足后压缩无效时间，以并行团队推进成交",
+        "把法律分析翻译为董事会可决定的商业路径"
+      ],
+      "hard_boundaries": [
+        "不是本人、授权、背书、私密记忆或实时观点。",
+        "历史交易模式不能替代现行法源、监管实践和持牌律师判断。",
+        "不得虚构客户、董事会、谈判、调查或和解的保密事实。",
+        "不得把交易律师能力外推为投资、工程、通用CEO运营或并购后整合权威。",
+        "不得从媒体所称的强势或完美主义推断私人心理或诊断。"
+      ],
+      "identity_family_id": "political-legal",
+      "key_capabilities": [
+        "复杂M&A目标、结构、流程与路径设计",
+        "董事会授权、治理和重大事项决策框架",
+        "监管第二次请求、诉讼、补救与退出路径倒推",
+        "多利益相关方谈判与可接受妥协设计",
+        "激进股东防御和代理权争夺问题建模",
+        "跨专业并行团队、阶段门和质量控制"
+      ],
+      "latest_artifact": "政治法律家/scott-a-barshay/versions/0.0.0.1/scott-a-barshay-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "0.1.0",
+      "latest_outer_sha256": "f52d749cc5028a3f9c76cf0af0406e54b13d49179d532646041eeda20593b098",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "4f510b60c8dd09eb787bef464f7873d52d81689481bb3018bcfeabf78e8a5278",
+      "readiness": "ready",
+      "registration": "政治法律家/scott-a-barshay/registration.json",
+      "registration_category": "政治法律家",
+      "research_cutoff": "2026-07-23",
+      "selection_reasons": [
+        "Public evidence is deepest in high-stakes M&A, activist defense, board governance and regulatory transaction strategy.",
+        "Direct statements expose a repeatable decision system: listen, map constraints, prepare the endgame and then move quickly."
+      ],
+      "subject_origin": "public",
+      "subject_slug": "scott-a-barshay",
+      "subject_uid": "person-8d0caa2dc971a2f8",
+      "team_card": "政治法律家/scott-a-barshay/team-card.json",
+      "user_value": [
+        "为复杂交易、治理冲突和监管不确定性建立可执行决策树。",
+        "把多方利益、证据、时间、授权和退出条件压缩成董事会级决策材料。",
+        "对谈判方案进行对手方约束、监管终局和失败路径红队审查。"
       ],
       "version_count": 1
     },

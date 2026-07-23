@@ -26,6 +26,13 @@ class ReleaseBundleTests(unittest.TestCase):
             )
             self.assertEqual(sorted(path.suffix for path in root.iterdir()), [".zip", ".zip"])
             extract = root / "extract"
+            expected_deliveries = len(
+                list(
+                    (ROOT.parent / "persona-distiller-group").glob(
+                        "*/**/versions/*/*-persona-distillation-delivery-v*.zip"
+                    )
+                )
+            )
             with zipfile.ZipFile(first) as archive:
                 names = archive.namelist()
                 top_levels = {name.split("/", 1)[0] for name in names if name}
@@ -40,7 +47,7 @@ class ReleaseBundleTests(unittest.TestCase):
                             and name.endswith("-persona-distillation-delivery-v0.0.0.1.zip")
                         ]
                     ),
-                    3,
+                    expected_deliveries,
                 )
                 archive.extractall(extract)
             package = extract / "PersonaDistiller-Final-v0.0.0.5"

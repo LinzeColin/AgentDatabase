@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:scottabarshay",
+  "canonical_name": "Scott A. Barshay",
+  "identity_family_id": "political-legal",
+  "identity_mode": "single",
+  "registration_category": "政治法律家",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "scott-a-barshay",
+  "subject_uid": "person-8d0caa2dc971a2f8",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/scott-a-barshay-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-23T12:00:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "0.1.0",
+      "outer_sha256": "f52d749cc5028a3f9c76cf0af0406e54b13d49179d532646041eeda20593b098",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/scott-a-barshay-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "4f510b60c8dd09eb787bef464f7873d52d81689481bb3018bcfeabf78e8a5278",
+      "runtime_size_bytes": 62377,
+      "size_bytes": 304746
+    }
+  ]
+}

@@ -991,8 +991,8 @@
     },
     {
       "path": "tests/test_group_contract.py",
-      "sha256": "0c2c9ce251ccc0815dcd1758c14d6046f0fd3ed723eb6e37e1ceca4fbae53f2e",
-      "size_bytes": 5215
+      "sha256": "ad52d6d7ed5195cbe8d31b7f3b7f3a073971ba5154c41e197c1de137dd9a760f",
+      "size_bytes": 5449
     },
     {
       "path": "tests/test_identity_routing.py",
@@ -1026,8 +1026,8 @@
     },
     {
       "path": "tests/test_release_bundle.py",
-      "sha256": "ca5a0c44dfebb1ce36f070d78d1eb21ae7f2934c876fcff848c40cd966a0caa5",
-      "size_bytes": 4068
+      "sha256": "63d25eca3cb13528de084cacee7fa4b3853885880b228d10215304c5e5d42f80",
+      "size_bytes": 4350
     },
     {
       "path": "tests/test_runtime_recording.py",

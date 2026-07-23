@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:hrodgincohen",
+  "canonical_name": "H. Rodgin Cohen",
+  "identity_family_id": "political-legal",
+  "identity_mode": "single",
+  "registration_category": "政治法律家",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "h-rodgin-cohen",
+  "subject_uid": "person-8da4cba5393aa7e2",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/h-rodgin-cohen-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-23T12:00:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0",
+      "outer_sha256": "effe07225fbb3bc953a2697774a8fcbfc942f657f9c8a20e42718ec0519df0c1",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/h-rodgin-cohen-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "0a6a28885ce82efc602ae96edb6871e56a6fdad63fe5add618e5c080b391e819",
+      "runtime_size_bytes": 63211,
+      "size_bytes": 567646
+    }
+  ]
+}
