@@ -1,0 +1,388 @@
+name: Recurring Prompt Analysis｜重复提示词自动分析
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/recurring-prompt-analysis.yml"
+      - "OpenAIDatabase/config/behavior/recurring_prompt_analysis.json"
+      - "OpenAIDatabase/scripts/recurring_prompt_core.py"
+      - "OpenAIDatabase/scripts/build_recurring_prompt_analysis.py"
+      - "OpenAIDatabase/scripts/validate_recurring_prompt_analysis.py"
+      - "OpenAIDatabase/tests/test_recurring_prompt_analysis.py"
+      - "OpenAIDatabase/tests/fixtures/recurring_prompt/**"
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/recurring-prompt-analysis.yml"
+      - "OpenAIDatabase/config/behavior/recurring_prompt_analysis.json"
+      - "OpenAIDatabase/scripts/recurring_prompt_core.py"
+      - "OpenAIDatabase/scripts/build_recurring_prompt_analysis.py"
+      - "OpenAIDatabase/scripts/validate_recurring_prompt_analysis.py"
+      - "OpenAIDatabase/tests/test_recurring_prompt_analysis.py"
+      - "OpenAIDatabase/tests/fixtures/recurring_prompt/**"
+      - "OpenAIDatabase/data/public_raw/codex/sessions/**/*.jsonl"
+      - "OpenAIDatabase/data/public_raw/codex/sessions/*.jsonl"
+  schedule:
+    # Raw-data push is primary. This non-hourly weekly run only reconciles missed pushes
+    # and refreshes the truthful current/delayed/stale state.
+    - cron: "47 4 * * 2"
+  workflow_dispatch:
+    inputs:
+      force_full:
+        description: "忽略旧 state，执行一次全量重建"
+        required: false
+        default: false
+        type: boolean
+
+permissions: {}
+
+concurrency:
+  group: recurring-prompt-analysis-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  PYTHONUNBUFFERED: "1"
+  PYTHONDONTWRITEBYTECODE: "1"
+  CONFIG_PATH: OpenAIDatabase/config/behavior/recurring_prompt_analysis.json
+  CANONICAL_OUTPUT: OpenAIDatabase/data/derived/behavior_intelligence/recurring_prompts
+  HUMAN_REPORT: OpenAIDatabase/人类可读/00_Recurring分析_最新.md
+  HUMAN_STATUS: OpenAIDatabase/人类可读/00_Recurring运行状态.md
+
+jobs:
+  verify-pull-request:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+
+      - name: Run unit and regression tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -B - <<'PY'
+          import ast
+          from pathlib import Path
+          for name in (
+              "OpenAIDatabase/scripts/recurring_prompt_core.py",
+              "OpenAIDatabase/scripts/build_recurring_prompt_analysis.py",
+              "OpenAIDatabase/scripts/validate_recurring_prompt_analysis.py",
+              "OpenAIDatabase/tests/test_recurring_prompt_analysis.py",
+          ):
+              ast.parse(Path(name).read_text(encoding="utf-8"), filename=name)
+          print("PASS: Python syntax")
+          PY
+          python3 -B -m unittest OpenAIDatabase.tests.test_recurring_prompt_analysis -v
+
+      - name: Build twice and prove deterministic output
+        shell: bash
+        run: |
+          set -euo pipefail
+          WORK_DIR="$RUNNER_TEMP/recurring-pr"
+          rm -rf "$WORK_DIR"
+          mkdir -p "$WORK_DIR"
+          AS_OF="$(git show -s --format=%cI HEAD)"
+          SOURCE_COMMIT="$(git log -1 --format=%H -- OpenAIDatabase/data/public_raw/codex/sessions || git rev-parse HEAD)"
+
+          for build in a b; do
+            python3 -B OpenAIDatabase/scripts/build_recurring_prompt_analysis.py \
+              --repo-root . \
+              --config "$CONFIG_PATH" \
+              --output-dir "$WORK_DIR/$build/machine" \
+              --summary-output "$WORK_DIR/$build/00_Recurring分析_最新.md" \
+              --status-output "$WORK_DIR/$build/00_Recurring运行状态.md" \
+              --source-commit "$SOURCE_COMMIT" \
+              --as-of "$AS_OF" \
+              --force-full \
+              --no-atomic-publish
+
+            python3 -B OpenAIDatabase/scripts/validate_recurring_prompt_analysis.py \
+              --repo-root . \
+              --config "$CONFIG_PATH" \
+              --output-dir "$WORK_DIR/$build/machine" \
+              --summary-output "$WORK_DIR/$build/00_Recurring分析_最新.md" \
+              --status-output "$WORK_DIR/$build/00_Recurring运行状态.md"
+          done
+
+          python3 -B OpenAIDatabase/scripts/validate_recurring_prompt_analysis.py \
+            --repo-root . \
+            --config "$CONFIG_PATH" \
+            --output-dir "$WORK_DIR/a/machine" \
+            --summary-output "$WORK_DIR/a/00_Recurring分析_最新.md" \
+            --status-output "$WORK_DIR/a/00_Recurring运行状态.md" \
+            --compare-left "$WORK_DIR/a/machine" \
+            --compare-right "$WORK_DIR/b/machine"
+          cmp "$WORK_DIR/a/00_Recurring分析_最新.md" "$WORK_DIR/b/00_Recurring分析_最新.md"
+          cmp "$WORK_DIR/a/00_Recurring运行状态.md" "$WORK_DIR/b/00_Recurring运行状态.md"
+
+      - name: Publish Chinese PR summary
+        shell: bash
+        run: |
+          set -euo pipefail
+          WORK_DIR="$RUNNER_TEMP/recurring-pr/a"
+          {
+            echo "# Recurring Prompt：PR 验证"
+            echo
+            echo "- 状态：✅ 单元测试、全量双构建、来源校验、隐私扫描和逐字节确定性校验均通过"
+            echo "- LLM / embedding / 外部 API：0 / 0 / 0"
+            echo "- 本 job 只预览，不写入仓库"
+            echo
+            cat "$WORK_DIR/00_Recurring运行状态.md"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+          ARTIFACT_DIR="$RUNNER_TEMP/Recurring中文验收包"
+          rm -rf "$ARTIFACT_DIR"
+          mkdir -p "$ARTIFACT_DIR/机器明细"
+          cp "$WORK_DIR/00_Recurring分析_最新.md" "$ARTIFACT_DIR/"
+          cp "$WORK_DIR/00_Recurring运行状态.md" "$ARTIFACT_DIR/"
+          cp "$WORK_DIR/machine/agent_context.json" "$ARTIFACT_DIR/机器明细/"
+          cp "$WORK_DIR/machine/run_manifest.json" "$ARTIFACT_DIR/机器明细/"
+
+      - name: Upload Chinese acceptance artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: Recurring中文验收包-PR-${{ github.run_number }}
+          path: ${{ runner.temp }}/Recurring中文验收包
+          retention-days: 30
+          if-no-files-found: error
+
+  analyze-and-publish:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+
+      - name: Analyze, reconcile, publish, and push with bounded retry
+        shell: bash
+        env:
+          FORCE_FULL_REQUESTED: ${{ github.event_name == 'workflow_dispatch' && inputs.force_full || false }}
+        run: |
+          set -euo pipefail
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          run_tests() {
+            python3 -B - <<'PY'
+          import ast
+          from pathlib import Path
+          for name in (
+              "OpenAIDatabase/scripts/recurring_prompt_core.py",
+              "OpenAIDatabase/scripts/build_recurring_prompt_analysis.py",
+              "OpenAIDatabase/scripts/validate_recurring_prompt_analysis.py",
+              "OpenAIDatabase/tests/test_recurring_prompt_analysis.py",
+          ):
+              ast.parse(Path(name).read_text(encoding="utf-8"), filename=name)
+          print("PASS: Python syntax")
+          PY
+            python3 -B -m unittest OpenAIDatabase.tests.test_recurring_prompt_analysis -v
+          }
+
+          build_and_validate() {
+            local work_dir="$RUNNER_TEMP/recurring-main"
+            rm -rf "$work_dir"
+            mkdir -p "$work_dir"
+
+            # Rounded to UTC day: freshness remains truthful while avoiding a commit on
+            # every rerun within the same day.
+            local as_of
+            as_of="$(date -u +'%Y-%m-%dT00:00:00Z')"
+            local source_commit
+            source_commit="$(git log -1 --format=%H -- OpenAIDatabase/data/public_raw/codex/sessions || git rev-parse HEAD)"
+
+            local previous_args=()
+            local canonical_args=()
+            if [[ "$FORCE_FULL_REQUESTED" == "true" ]]; then
+              canonical_args=(--force-full)
+            elif [[ -f "$CANONICAL_OUTPUT/state.json" ]]; then
+              previous_args=(--previous-output-dir "$CANONICAL_OUTPUT")
+            fi
+
+            # Bash 3.2 with `set -u` treats an empty array expansion as an
+            # unbound variable. Append optional flags only when populated so
+            # the same production shell works in the portable E2E harness.
+            local build_args=(
+              --repo-root .
+              --config "$CONFIG_PATH"
+              --output-dir "$work_dir/incremental/machine"
+              --summary-output "$work_dir/incremental/00_Recurring分析_最新.md"
+              --status-output "$work_dir/incremental/00_Recurring运行状态.md"
+              --source-commit "$source_commit"
+              --as-of "$as_of"
+              --no-atomic-publish
+            )
+            if [[ ${#previous_args[@]} -gt 0 ]]; then
+              build_args+=("${previous_args[@]}")
+            fi
+            if [[ ${#canonical_args[@]} -gt 0 ]]; then
+              build_args+=("${canonical_args[@]}")
+            fi
+            python3 -B OpenAIDatabase/scripts/build_recurring_prompt_analysis.py "${build_args[@]}"
+
+            # Independent full rebuild is the correctness oracle. It is never used to
+            # hide an incremental mismatch.
+            python3 -B OpenAIDatabase/scripts/build_recurring_prompt_analysis.py \
+              --repo-root . \
+              --config "$CONFIG_PATH" \
+              --output-dir "$work_dir/full/machine" \
+              --summary-output "$work_dir/full/00_Recurring分析_最新.md" \
+              --status-output "$work_dir/full/00_Recurring运行状态.md" \
+              --source-commit "$source_commit" \
+              --as-of "$as_of" \
+              --force-full \
+              --no-atomic-publish
+
+            for mode in incremental full; do
+              python3 -B OpenAIDatabase/scripts/validate_recurring_prompt_analysis.py \
+                --repo-root . \
+                --config "$CONFIG_PATH" \
+                --output-dir "$work_dir/$mode/machine" \
+                --summary-output "$work_dir/$mode/00_Recurring分析_最新.md" \
+                --status-output "$work_dir/$mode/00_Recurring运行状态.md"
+            done
+
+            python3 -B OpenAIDatabase/scripts/validate_recurring_prompt_analysis.py \
+              --repo-root . \
+              --config "$CONFIG_PATH" \
+              --output-dir "$work_dir/incremental/machine" \
+              --summary-output "$work_dir/incremental/00_Recurring分析_最新.md" \
+              --status-output "$work_dir/incremental/00_Recurring运行状态.md" \
+              --compare-left "$work_dir/incremental/machine" \
+              --compare-right "$work_dir/full/machine" \
+              --semantic-compare
+            cmp "$work_dir/incremental/00_Recurring分析_最新.md" "$work_dir/full/00_Recurring分析_最新.md"
+            cmp "$work_dir/incremental/00_Recurring运行状态.md" "$work_dir/full/00_Recurring运行状态.md"
+
+            mkdir -p "$(dirname "$CANONICAL_OUTPUT")" "$(dirname "$HUMAN_REPORT")"
+            rm -rf "$CANONICAL_OUTPUT.new"
+            cp -a "$work_dir/incremental/machine" "$CANONICAL_OUTPUT.new"
+            rm -rf "$CANONICAL_OUTPUT"
+            mv "$CANONICAL_OUTPUT.new" "$CANONICAL_OUTPUT"
+            install -m 0644 "$work_dir/incremental/00_Recurring分析_最新.md" "$HUMAN_REPORT"
+            install -m 0644 "$work_dir/incremental/00_Recurring运行状态.md" "$HUMAN_STATUS"
+
+            python3 -B OpenAIDatabase/scripts/validate_recurring_prompt_analysis.py \
+              --repo-root . \
+              --config "$CONFIG_PATH" \
+              --output-dir "$CANONICAL_OUTPUT" \
+              --summary-output "$HUMAN_REPORT" \
+              --status-output "$HUMAN_STATUS"
+          }
+
+          enforce_allowlist() {
+            # `mapfile` is unavailable in macOS Bash 3.2, which is used by
+            # the portable production-shell E2E check. Keep the same sorted
+            # allowlist input while collecting it with a portable read loop.
+            local changed=()
+            local path
+            while IFS= read -r path; do
+              changed+=("$path")
+            done < <(
+              git -c core.quotepath=false status --porcelain=v1 --untracked-files=all \
+                | sed -E 's/^.. //' \
+                | sort -u
+            )
+            if [[ ${#changed[@]} -eq 0 ]]; then
+              return
+            fi
+            for path in "${changed[@]}"; do
+              case "$path" in
+                "$CANONICAL_OUTPUT"/*|"$HUMAN_REPORT"|"$HUMAN_STATUS") ;;
+                "") ;;
+                *)
+                  echo "ERROR: generated-output write allowlist violation: $path" >&2
+                  exit 1
+                  ;;
+              esac
+            done
+          }
+
+          publish_summary_and_artifact() {
+            {
+              cat "$HUMAN_STATUS"
+              echo
+              echo "---"
+              echo
+              echo "## 快速入口"
+              echo
+              echo "- 主报告：\`$HUMAN_REPORT\`"
+              echo "- 状态页：\`$HUMAN_STATUS\`"
+              echo "- Agent 低 Token 入口：\`$CANONICAL_OUTPUT/agent_context.json\`"
+            } >> "$GITHUB_STEP_SUMMARY"
+
+            local artifact_dir="$RUNNER_TEMP/Recurring中文验收包"
+            rm -rf "$artifact_dir"
+            mkdir -p "$artifact_dir/机器明细"
+            cp "$HUMAN_REPORT" "$artifact_dir/"
+            cp "$HUMAN_STATUS" "$artifact_dir/"
+            cp "$CANONICAL_OUTPUT/agent_context.json" "$artifact_dir/机器明细/"
+            cp "$CANONICAL_OUTPUT/freshness.json" "$artifact_dir/机器明细/"
+            cp "$CANONICAL_OUTPUT/run_manifest.json" "$artifact_dir/机器明细/"
+          }
+
+          attempt=1
+          max_attempts=3
+          while (( attempt <= max_attempts )); do
+            echo "Publish attempt $attempt/$max_attempts"
+            git fetch origin main
+            # Work from the refreshed remote tip without creating or resetting a
+            # local branch in the runner; commits push explicitly as HEAD:main.
+            git checkout --detach origin/main
+            run_tests
+            build_and_validate
+            enforce_allowlist
+
+            git add -- \
+              "$CANONICAL_OUTPUT" \
+              "$HUMAN_REPORT" \
+              "$HUMAN_STATUS"
+            git diff --cached --check
+
+            if git diff --cached --quiet; then
+              echo "No material recurring-prompt output change."
+              publish_summary_and_artifact
+              exit 0
+            fi
+
+            git commit -m "chore(memory): refresh recurring prompt analysis"
+            if git push origin HEAD:main; then
+              publish_summary_and_artifact
+              exit 0
+            fi
+
+            echo "Push raced with another main update; rebuilding from latest main." >&2
+            attempt=$((attempt + 1))
+          done
+
+          echo "ERROR: unable to publish after $max_attempts attempts" >&2
+          exit 1
+
+      - name: Upload Chinese acceptance artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: Recurring中文验收包-${{ github.run_number }}
+          path: ${{ runner.temp }}/Recurring中文验收包
+          retention-days: 30
+          if-no-files-found: error

@@ -1,0 +1,156 @@
+{
+  "schema_version": "recurring_prompt_config.v4",
+  "algorithm_version": "recurring_prompt.v4.0.1",
+  "input_glob": "OpenAIDatabase/data/public_raw/codex/sessions/**/*.jsonl",
+  "output_dir": "OpenAIDatabase/data/derived/behavior_intelligence/recurring_prompts",
+  "human_summary": "OpenAIDatabase/人类可读/00_Recurring分析_最新.md",
+  "categories": [
+    "rules_preferences",
+    "tasks_topics",
+    "problems_corrections"
+  ],
+  "category_labels_zh": {
+    "rules_preferences": "规则与偏好",
+    "tasks_topics": "任务与主题",
+    "problems_corrections": "问题与纠正"
+  },
+  "origin_labels_zh": {
+    "human_interactive": "人工对话",
+    "codex_automation": "Codex Automation"
+  },
+  "minimum_clause_chars": 4,
+  "maximum_clause_chars": 500,
+  "display_text_chars": 180,
+  "minimum_cluster_count": 2,
+  "minimum_cross_session_count": 2,
+  "duplicate_window_seconds": 20,
+  "source_samples_per_cluster": 3,
+  "summary_items_per_category": 12,
+  "automation_summary_items": 5,
+  "candidate_context_max_items": 30,
+  "freshness": {
+    "current_hours": 216,
+    "delayed_hours": 384
+  },
+  "fuzzy_lexical": {
+    "enabled": true,
+    "sequence_ratio": 0.965,
+    "jaccard_ratio": 0.92,
+    "minimum_shared_tokens": 4,
+    "maximum_group_candidates": 80
+  },
+  "injected_context": {
+    "remove_block_patterns": [
+      "(?is)#\\s*AGENTS\\.md instructions for[^\\n]*\\n\\s*<INSTRUCTIONS>.*?</INSTRUCTIONS>",
+      "(?is)<environment_context>.*?</environment_context>",
+      "(?is)<user_instructions>.*?</user_instructions>",
+      "(?is)<system-reminder>.*?</system-reminder>",
+      "(?is)<developer_instructions>.*?</developer_instructions>",
+      "(?is)<recommended_plugins>.*?</recommended_plugins>",
+      "(?ims)^#\\s*Files mentioned by the user:\\s*\\n.*?^##\\s*My request for Codex:\\s*\\n"
+    ],
+    "whole_message_prefixes": [
+      "Side conversation boundary.",
+      "# AGENTS.md instructions for",
+      "You are Codex, a coding agent",
+      "<environment_context>",
+      "<user_instructions>",
+      "<system-reminder>"
+    ],
+    "long_message_markers": [
+      "STRICT ONE_SHOT MODE",
+      "Intermediary updates go to the `commentary` channel",
+      "Default user-facing language: Chinese",
+      "Skills、agents、ECC、MCP",
+      "Do not include extra explanation unless the user asks"
+    ]
+  },
+  "automation": {
+    "prefix_patterns": [
+      "(?i)^automation\\s*:",
+      "(?i)^scheduled task\\s*:",
+      "^自动化任务[：:]",
+      "^定时任务[：:]"
+    ],
+    "metadata_patterns": [
+      "(?i)automation id\\s*:",
+      "(?i)automation memory\\s*:",
+      "(?i)last run\\s*:"
+    ],
+    "exclude_metadata_line_patterns": [
+      "^定时任务[：:]",
+      "^自动化任务[：:]",
+      "(?i)^scheduled task\\s*:",
+      "(?i)^automation\\s*:",
+      "(?i)^automation id\\s*:",
+      "(?i)^automation memory\\s*:",
+      "(?i)^last run\\s*:"
+    ]
+  },
+  "classification": {
+    "correction_patterns": [
+      "(?:你|系统|agent|codex|chatgpt).{0,18}(?:又|一直|总是|反复|仍然|没有|没能|忘记|遗漏|漏掉|偏离|错误|不对)",
+      "(?:为什么|怎么).{0,28}(?:没有|没|不能|还|又)",
+      "(?:不要再|别再|再次遗漏|反复纠正|仍然没有|一直不懂|我一直都不懂)",
+      "(?:方案|路线|理解|逻辑|结论).{0,24}(?:不对|错误|不现实|假的|偏离|有问题)",
+      "(?i)(?:you|the system|agent|codex|chatgpt).{0,24}(?:again|keeps?|forgot|missed|failed|wrong|ignored)",
+      "(?i)(?:do not|don't|never)\\s+.*\\s+again"
+    ],
+    "rule_patterns": [
+      "(?:必须|不要|不允许|禁止|默认|优先|务必|最好|尽量|只要|只能|应当|应该|需要|无需|不需要|不会再|直接|输出|格式|验收|核验|验证|保留|减少|避免|越少越好|越全越好|尽可能)",
+      "(?i)\\b(?:must|should|prefer|always|never|avoid|required|default|only|do not|don't|output|format|validate|retain|minimi[sz]e)\\b"
+    ],
+    "task_patterns": [
+      "(?:分析|开发|实现|生成|创建|设计|部署|迁移|更新|同步|检查|复审|调研|搜索|整理|修复|测试|合并|上传|发布|优化|自动化)",
+      "(?i)\\b(?:analy[sz]e|build|implement|create|design|deploy|migrate|update|sync|review|research|search|fix|test|merge|upload|publish|optimi[sz]e|automate)\\b"
+    ]
+  },
+  "secret_redaction_patterns": [
+    "(?i)github_pat_[A-Za-z0-9_]{20,}",
+    "(?i)gh[pousr]_[A-Za-z0-9]{20,}",
+    "(?i)sk-[A-Za-z0-9_-]{20,}",
+    "AKIA[0-9A-Z]{16}",
+    "(?is)-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----.*?-----END (?:RSA |EC |OPENSSH )?PRIVATE KEY-----",
+    "(?i)(?:api[_-]?key|access[_-]?token|oauth[_-]?token|password|passwd|secret)\\s*[:=]\\s*[^\\s,;]{8,}"
+  ],
+  "absolute_path_patterns": [
+    "(?<![A-Za-z0-9_])/(?:Users|home|private|var/folders)/[^\\s]+",
+    "[A-Za-z]:\\\\(?:Users|Documents|Desktop)\\\\[^\\s]+"
+  ],
+  "stop_tokens": [
+    "我们",
+    "你们",
+    "他们",
+    "这个",
+    "那个",
+    "这些",
+    "那些",
+    "以及",
+    "或者",
+    "可以",
+    "需要",
+    "应该",
+    "进行",
+    "一个",
+    "一些",
+    "如果",
+    "然后",
+    "目前",
+    "最后",
+    "the",
+    "and",
+    "for",
+    "with",
+    "that",
+    "this",
+    "from",
+    "into",
+    "your",
+    "you",
+    "are",
+    "not",
+    "only"
+  ],
+  "human_status": "OpenAIDatabase/人类可读/00_Recurring运行状态.md",
+  "agent_context_filename": "agent_context.json"
+}

@@ -1,0 +1,4 @@
+{"type":"event_msg","timestamp":"2026-07-08T01:00:00Z","payload":{"type":"user_message","message":"请先核验事实。不要动不动开发新系统；最后输出简明结论。","turn_id":"b-turn-1"}}
+{"type":"event_msg","timestamp":"2026-07-08T01:01:00Z","payload":{"type":"user_message","message":"你又忘记保留 handoff.md，请不要再遗漏。","turn_id":"b-turn-2"}}
+{"type":"event_msg","timestamp":"2026-07-08T01:02:00Z","payload":{"type":"user_message","message":"请分析 Memory Atlas v0.0.0.5 的 GitHub Action 产物。","turn_id":"b-turn-3"}}
+{"type":"event_msg","timestamp":"2026-07-08T01:03:00Z","payload":{"type":"user_message","message":"<environment_context>\n/Users/example/work\nzsh\nAustralia/Melbourne\n</environment_context>","turn_id":"b-env"}}
