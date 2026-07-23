@@ -1,0 +1,138 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:activation-settlement:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "activation_uid": {
+      "pattern": "^act_[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+      "type": "string"
+    },
+    "artifacts": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "artifact_digest": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+          },
+          "artifact_repo_path": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/repo_relative_posix_path"
+          },
+          "artifact_role": {
+            "enum": [
+              "ACTIVE_VERSION_MARKER",
+              "ACTIVATION_INTENT",
+              "MECHANISM_HANDOFF",
+              "NOTIFICATION_RECEIPT"
+            ]
+          },
+          "artifact_schema_id": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/urn_id"
+          },
+          "artifact_uid": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/typed_uid"
+          }
+        },
+        "required": [
+          "artifact_uid",
+          "artifact_role",
+          "artifact_repo_path",
+          "artifact_digest"
+        ],
+        "type": "object"
+      },
+      "maxItems": 15,
+      "minItems": 4,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "auto_transaction_uid": {
+      "pattern": "^atx_[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+      "type": "string"
+    },
+    "bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "created_at": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+    },
+    "envelope_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "envelope_uid": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/envelope_uid"
+    },
+    "evidence_refs": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "artifact_repo_path": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/repo_relative_posix_path"
+          },
+          "evidence_digest": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+          },
+          "evidence_type": {
+            "enum": [
+              "ACTIVATION_INTENT",
+              "NOTIFICATION_RECEIPT"
+            ]
+          },
+          "evidence_uid": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/typed_uid"
+          }
+        },
+        "required": [
+          "evidence_type",
+          "evidence_uid",
+          "evidence_digest",
+          "artifact_repo_path"
+        ],
+        "type": "object"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "expected_remote_head": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/git_object_id"
+    },
+    "notification_provider_status": {
+      "const": "SENT"
+    },
+    "notification_timing": {
+      "const": "PRE_WRITE"
+    },
+    "protocol_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/protocol_revision"
+    },
+    "recipient_ref": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/recipient_ref"
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:activation-settlement:v1"
+    },
+    "target_srv_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/srv_revision"
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "bundle_digest",
+    "activation_uid",
+    "envelope_uid",
+    "auto_transaction_uid",
+    "expected_remote_head",
+    "target_srv_revision",
+    "notification_provider_status",
+    "notification_timing",
+    "recipient_ref",
+    "evidence_refs",
+    "artifacts",
+    "created_at",
+    "envelope_digest"
+  ],
+  "title": "Post-provider coordinated activation settlement",
+  "type": "object"
+}

@@ -1,0 +1,163 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:activation-intent:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "activation_uid": {
+      "pattern": "^act_[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+      "type": "string"
+    },
+    "auto_transaction_uid": {
+      "pattern": "^atx_[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+      "type": "string"
+    },
+    "bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "bundle_git_object_id": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/git_object_id"
+    },
+    "candidate_manifest_path": {
+      "const": "CodexSkills/governance/bundles/schema-bundle-manifest.v1.json"
+    },
+    "change_code": {
+      "const": "ACTIVE_BUNDLE_CHANGE"
+    },
+    "created_at": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+    },
+    "envelope_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "envelope_uid": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/envelope_uid"
+    },
+    "expected_remote_head": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/git_object_id"
+    },
+    "impact": {
+      "const": "MAJOR"
+    },
+    "notification_affected_path_refs": {
+      "const": [
+        "CodexSkills/VERSION",
+        "CodexSkills/governance"
+      ]
+    },
+    "notification_timing": {
+      "const": "PRE_WRITE"
+    },
+    "notification_uid": {
+      "pattern": "^ntf_[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+      "type": "string"
+    },
+    "planned_action": {
+      "const": "ACTIVATE"
+    },
+    "planned_artifacts": {
+      "items": {
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "else": {
+              "not": {
+                "required": [
+                  "artifact_digest"
+                ]
+              }
+            },
+            "if": {
+              "properties": {
+                "digest_availability": {
+                  "const": "BOUND_IN_INTENT"
+                }
+              },
+              "required": [
+                "digest_availability"
+              ]
+            },
+            "then": {
+              "required": [
+                "artifact_digest"
+              ]
+            }
+          }
+        ],
+        "properties": {
+          "artifact_digest": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+          },
+          "artifact_repo_path": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/repo_relative_posix_path"
+          },
+          "artifact_role": {
+            "enum": [
+              "ACTIVE_VERSION_MARKER",
+              "ACTIVATION_INTENT",
+              "ACTIVATION_SETTLEMENT",
+              "MECHANISM_HANDOFF",
+              "NOTIFICATION_RECEIPT"
+            ]
+          },
+          "digest_availability": {
+            "enum": [
+              "BOUND_IN_INTENT",
+              "DERIVED_AFTER_PROVIDER_SENT",
+              "SELF_DIGESTED_INTENT"
+            ]
+          }
+        },
+        "required": [
+          "artifact_repo_path",
+          "artifact_role",
+          "digest_availability"
+        ],
+        "type": "object"
+      },
+      "maxItems": 16,
+      "minItems": 5,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "protocol_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/protocol_revision"
+    },
+    "recipient_ref": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/recipient_ref"
+    },
+    "rollback_target_ref": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/git_object_id"
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:activation-intent:v1"
+    },
+    "target_srv_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/srv_revision"
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "bundle_digest",
+    "activation_uid",
+    "envelope_uid",
+    "notification_uid",
+    "auto_transaction_uid",
+    "bundle_git_object_id",
+    "expected_remote_head",
+    "candidate_manifest_path",
+    "target_srv_revision",
+    "impact",
+    "change_code",
+    "planned_action",
+    "notification_timing",
+    "recipient_ref",
+    "rollback_target_ref",
+    "notification_affected_path_refs",
+    "planned_artifacts",
+    "created_at",
+    "envelope_digest"
+  ],
+  "title": "Pre-notification coordinated activation intent",
+  "type": "object"
+}
