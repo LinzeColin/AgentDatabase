@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:andrejkarpathy/安德烈卡帕西",
+  "canonical_name": "Andrej Karpathy / 安德烈·卡帕西",
+  "identity_family_id": "multi-identity",
+  "identity_mode": "multi",
+  "registration_category": "多重身份",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "andrej-karpathy",
+  "subject_uid": "person-007066b2d64b6110",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/andrej-karpathy-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T08:53:54Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0-evidence-grounded",
+      "outer_sha256": "91ddf357dc5b70ac6023b23dd6a2b30fe69ab8d6c83302928016f624bdd4c6ed",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/andrej-karpathy-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "44049e65d9a81f451251a8400fa06b0855d0c548b532c9522918400a7289982c",
+      "runtime_size_bytes": 66756,
+      "size_bytes": 77084
+    }
+  ]
+}

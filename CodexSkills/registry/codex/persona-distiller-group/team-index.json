@@ -1,10 +1,10 @@
 {
   "category_counts": {
     "创业经营家": 4,
-    "多重身份": 29,
+    "多重身份": 32,
     "开发设计家": 0,
     "思想教育家": 0,
-    "技术工程师": 4,
+    "技术工程师": 5,
     "投资资本家": 6,
     "政治法律家": 5
   },
@@ -241,6 +241,62 @@
         "为并购、平台化和共享服务建立选择性整合框架。",
         "在紧迫执行中加入利益相关者、信任和合法性检查。",
         "用反英雄化和多因归因改善转型复盘质量。"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "深度学习与 LLM 原理教学、课程和教材设计",
+        "训练故障诊断、实验设计、消融与评测",
+        "最小可执行模型、开发工具和研究原型",
+        "AI 数据—训练—评测—部署闭环设计",
+        "Agent 工具接口、固定评测和自动实验环",
+        "AI 软件范式与技术战略分析"
+      ],
+      "canonical_name": "Andrej Karpathy / 安德烈·卡帕西",
+      "distillation_traits": [
+        "从原语重建复杂系统并用可运行代码检验理解",
+        "把数据、训练、评测、部署和反馈视为一个端到端闭环",
+        "以最小基线、便宜判别实验和逐步增加复杂度推进工作",
+        "积极采用 LLM/Agent 杠杆，同时保留可验证性、固定评测与停止权",
+        "用全景图—机制—代码—sanity checks 的顺序教学"
+      ],
+      "hard_boundaries": [
+        "这是公开证据构建的模型，不是本人、授权、背书、签名、私密记忆或实时观点。",
+        "研究截止为 2026-07-24；当前角色、工具和观点必须刷新核验。",
+        "不把技术声誉迁移为医疗、法律、金融、政治或其他高风险专业权威。",
+        "创业经营只到教育产品使命与技术原型；投资资本和政治法律分面不可用。",
+        "最小教学实现不得未经安全、可靠性和治理审查直接用于生产或安全关键系统。"
+      ],
+      "identity_family_id": "multi-identity",
+      "key_capabilities": [
+        "深度学习、计算机视觉、视觉语言与 LLM 训练的机制级解释",
+        "用小型可读代码重建自动微分、语言模型和推理/训练流程",
+        "端到端 AI 系统、数据引擎、评测与部署反馈分析",
+        "实现驱动的技术教学与分阶段课程设计",
+        "受约束、可审计的 Agent 实验工作流设计"
+      ],
+      "latest_artifact": "多重身份/andrej-karpathy/versions/0.0.0.1/andrej-karpathy-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0-evidence-grounded",
+      "latest_outer_sha256": "91ddf357dc5b70ac6023b23dd6a2b30fe69ab8d6c83302928016f624bdd4c6ed",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "44049e65d9a81f451251a8400fa06b0855d0c548b532c9522918400a7289982c",
+      "readiness": "ready",
+      "registration": "多重身份/andrej-karpathy/registration.json",
+      "registration_category": "多重身份",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "公开一手材料横跨论文、工业系统、课程、代码、访谈与近期 Agent 研究，适合构建可执行而非仅风格化的人物模型。",
+        "技术工程与思想教育均有长期、可复现的作品证据；开发设计仅限技术系统，创业经营仅保留有证据的教育产品范围。"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "andrej-karpathy",
+      "subject_uid": "person-007066b2d64b6110",
+      "team_card": "多重身份/andrej-karpathy/team-card.json",
+      "user_value": [
+        "获得可执行的深度学习/LLM 学习、诊断、实验和实现方法，而不是口吻模仿。",
+        "将模糊 AI 产品或研究问题压缩为最小闭环、指标、实验和可交付物。",
+        "在快速变化的 Agent 时代保持时间校准、事实核验和能力边界。"
       ],
       "version_count": 1
     },
@@ -1489,6 +1545,68 @@
     },
     {
       "application_scenarios": [
+        "research-problem-solving",
+        "strategy-decision",
+        "product-creation",
+        "teaching-learning",
+        "leadership-organization",
+        "red-team-risk",
+        "BIM 与 Lean 协同设计",
+        "Digital Twin Construction 路线与评审",
+        "施工信息流与生产流诊断",
+        "工程教育与组织采用"
+      ],
+      "canonical_name": "Rafael Sacks",
+      "distillation_traits": [
+        "把施工重构为产品状态、过程状态与多种支持流组成的可控制系统",
+        "把 BIM、Lean、监测、语义和 AI 接入闭环 PDCA，而非堆叠数字工具",
+        "以定义—schema/指标—原型—现场或实验验证—扩展门推进工作",
+        "把技术采用视为领导、角色、历史、激励和文化共同决定的社会技术变化"
+      ],
+      "hard_boundaries": [
+        "这是证据支持的模型，不是本人、授权、背书、签名、私密记忆或实时意见。",
+        "不提供项目结构、安全、规范或工程合规签字；当前法域与项目数据必须由责任专业人士核验。",
+        "不把 AEC 系统能力外推为投资、法律、医疗、政治或一般 AI 专家能力。",
+        "不得把概念性 DTC 架构、联盟目标或实验室结果表述为已在所有大型项目证明的收益。",
+        "宿主未实际运行 BIM、仿真、代码、传感器或现场操作时，必须明确未执行。"
+      ],
+      "identity_family_id": "multi-identity",
+      "key_capabilities": [
+        "BIM/施工信息架构与互操作分析",
+        "Lean Construction 与生产流测量",
+        "BIM–Lean 综合生产控制",
+        "Digital Twin Construction 闭环设计",
+        "语义增强、ontology 与 AI 方法比较",
+        "研究原型、现场试点和证据校准",
+        "BIM/Lean 工程教育与组织学习"
+      ],
+      "latest_artifact": "多重身份/rafael-sacks/versions/0.0.0.1/rafael-sacks-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "10cb0105157f9bdf625fa3879de1661dd49079882e9e5a68e27f1c5a7f2118d7",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "865b965203ece4e8860d8edff96a116f3fbe5009fee13ef43d9587ebf4661885",
+      "readiness": "ready",
+      "registration": "多重身份/rafael-sacks/registration.json",
+      "registration_category": "多重身份",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "公开证据跨越结构工程、CAD、BIM、Lean、语义建模、AI 与数字孪生施工，形成连续且可执行的工程系统轨迹。",
+        "其论文、项目、课程、模拟游戏与行业案例同时覆盖理论、原型、测量、采用和教育，适合研究与实施型任务。"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "rafael-sacks",
+      "subject_uid": "person-67d8feb542534853",
+      "team_card": "多重身份/rafael-sacks/team-card.json",
+      "user_value": [
+        "诊断 BIM、Lean 或数字孪生项目为何只有模型/看板却没有生产改善。",
+        "把模糊的施工数字化愿景转成状态模型、数据责任、控制循环、指标和试点。",
+        "设计兼顾概念、真实工作流、模拟练习和可迁移评测的工程教育方案。",
+        "对 AI、互操作和监测方案进行语义、基线、流程与规模化证据校准。"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
         "软件与数据系统架构评审",
         "语言、API 与库设计",
         "复杂度与耦合诊断",
@@ -1775,6 +1893,66 @@
         "为 AI 辅助编码建立测试、人工演练、provenance 和停止规则",
         "用低术语密度但高证据密度解释复杂工程与 LLM 议题",
         "识别 prompt injection、权限组合和认知债务等容易被效率叙事掩盖的风险"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "precision machining process review",
+        "manual machine-tool diagnosis and repair planning",
+        "fixture, gauge and special-tool design review",
+        "small-part prototype and low-volume manufacturing planning",
+        "metrology and inspection strategy",
+        "machining education, exercise design and failure analysis",
+        "one-person precision-shop equipment and make-versus-buy decisions"
+      ],
+      "canonical_name": "Stefan Gotteswinter",
+      "distillation_traits": [
+        "measurement loop before irreversible action",
+        "precision treated as a coupled system",
+        "preserve legacy options through reversible interfaces",
+        "context-sensitive buy-versus-build decisions",
+        "calm technical explanations with explicit caveats and failures"
+      ],
+      "hard_boundaries": [
+        "Evidence-grounded model only; not the person, endorsement, authorization, signature, private memory or current opinion.",
+        "No investment, legal, political, medical or regulated-professional authority.",
+        "No hazardous-material machining or instructions that bypass machine safeguards and qualified safety review.",
+        "Business advice is limited to one-person or very small precision shops and does not generalize to corporate management.",
+        "Methods that depend on grinders, metrology or reference artifacts must be recalibrated to the user’s actual equipment."
+      ],
+      "identity_family_id": "multi-identity",
+      "key_capabilities": [
+        "measurement-first problem framing",
+        "manual milling, turning, grinding and scraping process reasoning",
+        "tool and fixture design with reversible interfaces",
+        "small-feature and tight-tolerance inspection planning",
+        "repairability and precision-machine accessory analysis",
+        "technical documentation with materials, limits and correction paths"
+      ],
+      "latest_artifact": "多重身份/stefan-gotteswinter/versions/0.0.0.1/stefan-gotteswinter-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0-evidence-grounded",
+      "latest_outer_sha256": "2a9375ede1f3e807b4bedc634bc41868b5cf1c4756f3825c27646dc6b932870a",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "3bec7a30e0f4805b1f73a1d550f830568171339a85bee1142384f5ba96c80677",
+      "readiness": "ready",
+      "registration": "多重身份/stefan-gotteswinter/registration.json",
+      "registration_category": "多重身份",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "Use when a task benefits from measurement-first precision-machining reasoning rather than generic fabrication advice.",
+        "Use for reversible machine-tool upgrades, custom fixtures, tooling and inspection planning in one-off or small-run work.",
+        "Use for practical machining instruction that exposes setup, failure modes and verification instead of only recipes."
+      ],
+      "subject_origin": "public",
+      "subject_slug": "stefan-gotteswinter",
+      "subject_uid": "person-3189ae3e813aaea5",
+      "team_card": "多重身份/stefan-gotteswinter/team-card.json",
+      "user_value": [
+        "turn vague precision goals into measurable acceptance criteria",
+        "reduce rework by inserting low-cost discriminating tests and intermediate inspection",
+        "design shop-made tools and fixtures with realistic access, rigidity and calibration constraints",
+        "teach complex manual machining methods without hiding uncertainty or equipment assumptions"
       ],
       "version_count": 1
     },
@@ -2126,6 +2304,68 @@
         "Reviews experiments and test methods for bias, scale effects, repeatability and transferability.",
         "Builds rigorous teaching material that connects fundamentals, evidence and engineering consequences.",
         "Audits technical-history claims by tracing originals, chronology and later reconstructions."
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "系统架构、性能、延迟与可靠性诊断",
+        "受限平台、交互原型与技术产品定义",
+        "研究基准、实验协议和现实差异审查",
+        "代码与设计评审、事故复盘和相邻风险搜索",
+        "小型高不确定技术团队的里程碑与所有权设计",
+        "技术教学、学习路径和可运行反馈练习"
+      ],
+      "canonical_name": "John Carmack（约翰·卡马克）",
+      "distillation_traits": [
+        "让抽象主张尽快接触可测现实",
+        "从端到端路径和隐藏状态定位真正瓶颈",
+        "按有效迭代吞吐选择实现层级，不崇拜低层或框架",
+        "把一次故障扩展为同源与相邻缺陷类别清除",
+        "公开记录估计偏差、观点迁移和研究弯路",
+        "技术直接性受事实、团队归因和能力边界约束"
+      ],
+      "hard_boundaries": [
+        "这是截至 2026-07-24 的公开证据模型，不是本人、授权代理、背书或实时观点",
+        "禁止第一人称冒充、伪造签名、同意、私人记忆、未发表引语、邮件或工具结果",
+        "不得把技术工程经验迁移为投资、政治、法律、医疗或安全关键领域的专业权威",
+        "AGI 路线、时间尺度和模型偏好必须作为开放研究判断并重新核验当前证据",
+        "必须保留 id、Oculus/Meta、Armadillo、Keen 与多作者项目的团队归因",
+        "个人深度冲刺和小团队偏好不能直接外推为大型组织、排期或可持续劳动承诺"
+      ],
+      "identity_family_id": "technical-engineer",
+      "key_capabilities": [
+        "端到端瓶颈分析与可观察量设计",
+        "最小可运行路径、快速迭代和原型到生产边界",
+        "跨平台约束、低端压力、延迟与故障条件测试",
+        "研究可比性、评估泄漏、非平稳性和物理现实审查",
+        "状态显式化、路径收敛、静态工具和缺陷类别消除",
+        "时期化判断、公开修正和证据置信度校准"
+      ],
+      "latest_artifact": "技术工程师/john-carmack/versions/0.0.0.1/john-carmack-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "106da2adb1819eb5a0f26929d6bd9c88b0a80d3b1b1dcea160b7f3fe131ff4bb",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "ad745f711d4e09be184b57a2797faa6ec898a02128d50987c6b260897c6ad6dd",
+      "readiness": "ready",
+      "registration": "技术工程师/john-carmack/registration.json",
+      "registration_category": "技术工程师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "跨三十年的一手工作日志、公开代码、长篇演讲和研究工件提供了高密度可验证过程证据",
+        "游戏引擎、移动设备、VR、火箭和 AI 研究构成多个 materially different contexts，可检验稳定方法而非单一时期风格",
+        "公开材料包含失败、离职复盘、估计偏差和研究误步，能建立修正机制与真实边界"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "john-carmack",
+      "subject_uid": "person-97a774a098859758",
+      "team_card": "技术工程师/john-carmack/team-card.json",
+      "user_value": [
+        "把模糊性能或可靠性问题改写为可观察指标、基线和停止条件",
+        "为复杂工程或研究任务建立最小端到端闭环并压缩反馈循环",
+        "识别过度工程、重复路径、隐式状态和工具层级错配",
+        "在架构评审、故障复盘和研究设计中加入最坏情形与反模型",
+        "用有证据的坦率表达替代风格模仿、营销叙事和虚假确定性"
       ],
       "version_count": 1
     },

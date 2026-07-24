@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:rafaelsacks",
+  "canonical_name": "Rafael Sacks",
+  "identity_family_id": "multi-identity",
+  "identity_mode": "multi",
+  "registration_category": "多重身份",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "rafael-sacks",
+  "subject_uid": "person-67d8feb542534853",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/rafael-sacks-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T08:30:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0",
+      "outer_sha256": "10cb0105157f9bdf625fa3879de1661dd49079882e9e5a68e27f1c5a7f2118d7",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/rafael-sacks-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "865b965203ece4e8860d8edff96a116f3fbe5009fee13ef43d9587ebf4661885",
+      "runtime_size_bytes": 69009,
+      "size_bytes": 78914
+    }
+  ]
+}

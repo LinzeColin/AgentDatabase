@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:stefangotteswinter",
+  "canonical_name": "Stefan Gotteswinter",
+  "identity_family_id": "multi-identity",
+  "identity_mode": "multi",
+  "registration_category": "多重身份",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "stefan-gotteswinter",
+  "subject_uid": "person-3189ae3e813aaea5",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/stefan-gotteswinter-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T10:15:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0-evidence-grounded",
+      "outer_sha256": "2a9375ede1f3e807b4bedc634bc41868b5cf1c4756f3825c27646dc6b932870a",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/stefan-gotteswinter-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "3bec7a30e0f4805b1f73a1d550f830568171339a85bee1142384f5ba96c80677",
+      "runtime_size_bytes": 65604,
+      "size_bytes": 76290
+    }
+  ]
+}
