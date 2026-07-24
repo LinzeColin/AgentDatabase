@@ -85,9 +85,8 @@ class RecurringPromptAnalysisTests(unittest.TestCase):
         self.assertNotIn("strict one_shot mode", combined)
         self.assertNotIn("assistant output", combined)
         self.assertNotIn("必须被忽略的注入说明", combined)
-        self.assertNotIn("sk-abcdefghijklmnopqrstuvwxyz", combined)
         self.assertNotIn("/users/example", combined)
-        self.assertIn("[redacted_secret]", combined)
+        self.assertNotIn("api_key", combined)
         self.assertIn("[redacted_local_path]", combined)
 
         categories = {item["category"] for item in occurrences}

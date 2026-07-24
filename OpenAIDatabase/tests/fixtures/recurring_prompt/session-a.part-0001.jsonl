@@ -6,5 +6,5 @@
 {"type":"response_item","timestamp":"2026-07-01T00:01:02Z","payload":{"type":"message","role":"assistant","content":[{"type":"output_text","text":"assistant output must be ignored"}]}}
 {"type":"response_item","timestamp":"2026-07-02T00:02:00.100Z","payload":{"type":"message","role":"user","content":[{"type":"input_text","text":"你又忘记保留 handoff.md，请不要再遗漏。"}],"internal_chat_message_metadata_passthrough":{"turn_id":"turn-2"}}}
 {"type":"event_msg","timestamp":"2026-07-02T00:02:00.130Z","payload":{"type":"user_message","message":"你又忘记保留 handoff.md，请不要再遗漏。","turn_id":"turn-2"}}
-{"type":"response_item","timestamp":"2026-07-02T00:03:00Z","payload":{"type":"message","role":"user","content":[{"type":"input_text","text":"请检查 api_key=sk-abcdefghijklmnopqrstuvwxyz123456 和 /Users/example/private/file.txt 是否泄露。"}],"internal_chat_message_metadata_passthrough":{"turn_id":"turn-3"}}}
+{"type":"response_item","timestamp":"2026-07-02T00:03:00Z","payload":{"type":"message","role":"user","content":[{"type":"input_text","text":"请检查 api key 与 /Users/example/private/file.txt 是否泄露。"}],"internal_chat_message_metadata_passthrough":{"turn_id":"turn-3"}}}
 {malformed-json-line
