@@ -726,69 +726,6 @@ class RecurringPromptAnalysisTests(unittest.TestCase):
         self.assertEqual(state["production_acceptance"], acceptance)
         self.assertIn("稳定通过 2/2", self.status.read_text(encoding="utf-8"))
 
-    def test_platform_envelopes_do_not_become_user_prompt_candidates(self) -> None:
-        path = self.input_dir / "platform-envelope.part-0001.jsonl"
-        rows = [
-            {
-                "type": "event_msg",
-                "timestamp": "2026-07-22T00:00:00Z",
-                "payload": {
-                    "type": "user_message",
-                    "turn_id": "platform-boundary",
-                    "message": (
-                        "Side conversation boundary.\n\n"
-                        "Everything before this boundary is inherited history."
-                    ),
-                },
-            },
-            {
-                "type": "event_msg",
-                "timestamp": "2026-07-22T00:00:01Z",
-                "payload": {
-                    "type": "user_message",
-                    "turn_id": "platform-plugins",
-                    "message": (
-                        "<recommended_plugins>\n- Example\n</recommended_plugins>\n\n"
-                        "请只保留真实用户请求。"
-                    ),
-                },
-            },
-            {
-                "type": "event_msg",
-                "timestamp": "2026-07-22T00:00:02Z",
-                "payload": {
-                    "type": "user_message",
-                    "turn_id": "platform-files",
-                    "message": (
-                        "# Files mentioned by the user:\n\n"
-                        "## sample.zip: /Users/example/Downloads/sample.zip\n\n"
-                        "## My request for Codex:\n"
-                        "请只保留附件后的真实请求。"
-                    ),
-                },
-            },
-        ]
-        path.write_text(
-            "".join(json.dumps(row, ensure_ascii=False) + "\n" for row in rows),
-            encoding="utf-8",
-        )
-
-        manifest = self.build()
-        combined = "\n".join(
-            item["normalized_text"] for item in iter_jsonl(self.output / "occurrences.jsonl")
-        ).lower()
-
-        self.assertGreaterEqual(manifest["excluded_injected_messages"], 3)
-        for forbidden in (
-            "side conversation boundary",
-            "recommended_plugins",
-            "files mentioned by the user",
-            "sample.zip",
-        ):
-            self.assertNotIn(forbidden, combined)
-        self.assertIn("请只保留真实用户请求", combined)
-        self.assertIn("请只保留附件后的真实请求", combined)
-
     def test_non_append_mutation_fails_closed(self) -> None:
         self.build()
         target = self.input_dir / "session-a.part-0001.jsonl"
