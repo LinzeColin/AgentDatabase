@@ -4,13 +4,13 @@
     "configuration": [
       {
         "digest": {
-          "sha256": "5056345fa887d35d27946df1de6560b083ec8bdecd6701ca2fa08e3093676331"
+          "sha256": "8875c24a8ed5924ca89fd560cd3b6c1001baf216d2c785b22a4a26d412d68996"
         },
         "name": "RUN_MANIFEST.yaml"
       },
       {
         "digest": {
-          "sha256": "363b999422ba92e274ff13a48cff459a9ac0e5c30d1ad964d294834c644c906d"
+          "sha256": "80cbaf6d57bfbbd095f32f513bb761ece164be5e63a0a088d42a98de0b967bf7"
         },
         "name": "TRACEABILITY_MATRIX.json"
       },
@@ -101,7 +101,7 @@
   "subject": [
     {
       "digest": {
-        "gitCommit": "761a51aa959e3c13ce7a6df2b6f450661f07b7d2"
+        "gitCommit": "6b536a4b0f6cb0f29edd172d8d1cdd8a58522228"
       },
       "name": "dynamic-personal-profile-update"
     }

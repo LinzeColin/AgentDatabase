@@ -1,7 +1,7 @@
 {
   "algorithm": "sha256",
   "assurance_note": "Tamper-evident after finalization; not an authenticity signature.",
-  "evidence_root_sha256": "9f1e6cf2c0dfb6271aabab74d27519cfbd419515518a85601588331f79d867d1",
+  "evidence_root_sha256": "cfee2016d1f655c4b65466b9d64d7feac3a55a87c0452cd7e0b32ca82592538d",
   "excluded_seal_files": [
     "ACCEPTANCE_ATTESTATION.intoto.json",
     "EVIDENCE_INDEX.json",
@@ -42,8 +42,8 @@
     },
     {
       "path": "RUN_MANIFEST.yaml",
-      "sha256": "5056345fa887d35d27946df1de6560b083ec8bdecd6701ca2fa08e3093676331",
-      "size": 19022
+      "sha256": "8875c24a8ed5924ca89fd560cd3b6c1001baf216d2c785b22a4a26d412d68996",
+      "size": 19088
     },
     {
       "path": "TEST_MATRIX.md",
@@ -52,13 +52,13 @@
     },
     {
       "path": "TRACEABILITY_MATRIX.json",
-      "sha256": "363b999422ba92e274ff13a48cff459a9ac0e5c30d1ad964d294834c644c906d",
-      "size": 5981
+      "sha256": "80cbaf6d57bfbbd095f32f513bb761ece164be5e63a0a088d42a98de0b967bf7",
+      "size": 5980
     },
     {
       "path": "VERDICT.md",
-      "sha256": "bc3381683376343a047f60d9be73c20e5e4e4b2db812eeec65c15bede5dddbb9",
-      "size": 4234
+      "sha256": "64cd77b99b0c99dc61463a0102b90968b59a5365c2ca6e20173a9441bb6e0ce7",
+      "size": 1090
     },
     {
       "path": "logs/compatibility_drift_report.txt",
@@ -196,7 +196,7 @@
       "size": 3014
     }
   ],
-  "generated_at": "2026-07-24T08:28:26.416110+00:00",
+  "generated_at": "2026-07-24T08:58:30.062001+00:00",
   "run_directory": "dynamic-personal-profile-update_acceptance_r15-final",
   "schema_version": "2.1"
 }

@@ -2,9 +2,9 @@
   "_format_note": "Strict JSON syntax; JSON is valid YAML. Do not add comments or duplicate keys.",
   "schema_version": "2.1",
   "run": {
-    "id": "r15-final",
+    "id": "r15-authoritative-20ad",
     "started_at": "2026-07-24T08:11:22.123456+00:00",
-    "ended_at": "2026-07-24T08:27:11.800513+00:00",
+    "ended_at": "2026-07-24T08:54:25.339835+00:00",
     "timezone": "UTC",
     "verifier_identity": "codex-verifier-stage1-r15",
     "independence_evidence": "raw-results/compatibility_drift_report.txt",
@@ -161,7 +161,8 @@
       "raw-results/compatibility_drift_report.txt",
       "raw-results/unittest_results.log"
     ],
-    "reason_if_absent": ""
+    "reason_if_absent": "",
+    "drift_reason": ""
   },
   "traceability": {
     "schema_version": "2.1",
@@ -178,7 +179,7 @@
     "repository_root": "/Users/linzezhang/Documents/Codex/GithubProject/AgentDatabase",
     "branch": "main",
     "upstream": "origin/main",
-    "git_head": "761a51aa959e3c13ce7a6df2b6f450661f07b7d2",
+    "git_head": "6b536a4b0f6cb0f29edd172d8d1cdd8a58522228",
     "git_status": "clean",
     "source_dirty": false,
     "source_snapshot_sha256": "",
@@ -622,5 +623,6 @@
     "reason": "Stage 1 r15 authoritative skill-pack and acceptance evidence are complete, deterministic, and pass all mandated gates.",
     "owner_next_action": "Proceed to Stage 1 authoritative GitHub push and continue to next phase only after upstream authorization remains valid.",
     "report": "VERDICT.md"
-  }
+  },
+  "acceptance_contract": ""
 }
