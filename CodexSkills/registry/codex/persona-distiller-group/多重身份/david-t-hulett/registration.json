@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:davidthulett",
+  "canonical_name": "David T. Hulett",
+  "identity_family_id": "multi-identity",
+  "identity_mode": "multi",
+  "registration_category": "多重身份",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "david-t-hulett",
+  "subject_uid": "person-ee85f7f45a3ff779",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/david-t-hulett-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T08:40:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.1-evidence",
+      "outer_sha256": "25788ee6525c9b3621dd4c3653e49fff103df3945171ccfd119491ad28954a50",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/david-t-hulett-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "987933e7e71843482ad0752da6230b36bbfed8c978e88a40585d3ba393ed578c",
+      "runtime_size_bytes": 67799,
+      "size_bytes": 75989
+    }
+  ]
+}

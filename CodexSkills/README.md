@@ -29,12 +29,7 @@ curl -s https://raw.githubusercontent.com/LinzeColin/AgentDatabase/main/CodexSki
 
 ## 人物蒸馏产物登记
 
-[`persona-distiller`](registry/codex/persona-distiller/SKILL.md) 生成的每个人物产物必须且只能登记在对应的一个身份目录中；多重身份只进入 `多重身份/`，不得在不同身份下重复登记。
-完整发布 ZIP、canonical 登记、团队卡与机器索引仅位于与构建器平级的 [`registry/codex/persona-distiller-group/`](registry/codex/persona-distiller-group/README.md)；完整交付规则见 [`references/delivery-package-standard.md`](registry/codex/persona-distiller-group/references/delivery-package-standard.md)，团队路由真源见 [`CANONICAL-ROOT-ROUTE.md`](registry/codex/persona-distiller-group/CANONICAL-ROOT-ROUTE.md)。
-目录：[`技术工程师/`](registry/codex/persona-distiller-group/技术工程师/)、[`创业经营家/`](registry/codex/persona-distiller-group/创业经营家/)、[`投资资本家/`](registry/codex/persona-distiller-group/投资资本家/)、[`开发设计家/`](registry/codex/persona-distiller-group/开发设计家/)、[`思想教育家/`](registry/codex/persona-distiller-group/思想教育家/)、[`政治法律家/`](registry/codex/persona-distiller-group/政治法律家/)、[`多重身份/`](registry/codex/persona-distiller-group/多重身份/)。
-身份分类由人物 Skill 内部使用，不是调用门槛；用户安装后直接调用对应人物 Skill，无需选择身份。人物产物按 canonical 人物分别从 `0.0.0.1` 连续编号到 `0.0.0.999`，只在成功登记时占号；人物 Skill 的单次运行不编号。团队调用会先按场景选择 5–20 个高相关角色，以正向解决者为主，并至少隔离一个复审、一个裁判和一个反证角色。
-
-当前登记：**23 个人物**。
+当前登记：**48 人物**。
 
 | 人物 | 唯一分类 | 产物版本 | 完整 ZIP |
 |---|---|---|---|
@@ -45,11 +40,36 @@ curl -s https://raw.githubusercontent.com/LinzeColin/AgentDatabase/main/CodexSki
 | Aswath Damodaran | `多重身份` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/多重身份/aswath-damodaran/versions/0.0.0.1/aswath-damodaran-persona-distillation-delivery-v0.0.0.1.zip) |
 | Ben Horowitz | `多重身份` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/多重身份/ben-horowitz/versions/0.0.0.1/ben-horowitz-persona-distillation-delivery-v0.0.0.1.zip) |
 | Charlie Munger | `多重身份` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/多重身份/charlie-munger/versions/0.0.0.1/charlie-munger-persona-distillation-delivery-v0.0.0.1.zip) |
+| Chip Huyen | `多重身份` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/多重身份/chip-huyen/versions/0.0.0.1/chip-huyen-persona-distillation-delivery-v0.0.0.1.zip) |
+| Christopher Manning | `多重身份` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/多重身份/christopher-manning/versions/0.0.0.1/christopher-manning-persona-distillation-delivery-v0.0.0.1.zip) |
+| Dan Gelbart | `多重身份` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/多重身份/dan-gelbart/versions/0.0.0.1/dan-gelbart-persona-distillation-delivery-v0.0.0.1.zip) |
 | David Packard | `多重身份` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/多重身份/david-packard/versions/0.0.0.1/david-packard-persona-distillation-delivery-v0.0.0.1.zip) |
+| David T. Hulett | `多重身份` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/多重身份/david-t-hulett/versions/0.0.0.1/david-t-hulett-persona-distillation-delivery-v0.0.0.1.zip) |
+| Donald G. Reinertsen | `多重身份` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/多重身份/donald-g-reinertsen/versions/0.0.0.1/donald-g-reinertsen-persona-distillation-delivery-v0.0.0.1.zip) |
 | Edward O. Thorp（爱德华·索普） | `多重身份` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/多重身份/edward-o-thorp/versions/0.0.0.1/edward-o-thorp-persona-distillation-delivery-v0.0.0.1.zip) |
+| Hamel Husain | `多重身份` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/多重身份/hamel-husain/versions/0.0.0.1/hamel-husain-persona-distillation-delivery-v0.0.0.1.zip) |
+| Harry Bhadeshia | `多重身份` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/多重身份/harry-bhadeshia/versions/0.0.0.1/harry-bhadeshia-persona-distillation-delivery-v0.0.0.1.zip) |
+| Karen Spärck Jones | `多重身份` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/多重身份/karen-sparck-jones/versions/0.0.0.1/karen-sparck-jones-persona-distillation-delivery-v0.0.0.1.zip) |
+| Kent Beck | `多重身份` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/多重身份/kent-beck/versions/0.0.0.1/kent-beck-persona-distillation-delivery-v0.0.0.1.zip) |
+| Lauri Koskela | `多重身份` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/多重身份/lauri-koskela/versions/0.0.0.1/lauri-koskela-persona-distillation-delivery-v0.0.0.1.zip) |
+| Martin Fischer | `多重身份` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/多重身份/martin-fischer-stanford/versions/0.0.0.1/martin-fischer-stanford-persona-distillation-delivery-v0.0.0.1.zip) |
+| Martin Fowler / 马丁·福勒 | `多重身份` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/多重身份/martin-fowler/versions/0.0.0.1/martin-fowler-persona-distillation-delivery-v0.0.0.1.zip) |
 | Michael J. Mauboussin | `多重身份` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/多重身份/michael-mauboussin/versions/0.0.0.1/michael-mauboussin-persona-distillation-delivery-v0.0.0.1.zip) |
+| Nancy Leveson | `多重身份` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/多重身份/nancy-leveson/versions/0.0.0.1/nancy-leveson-persona-distillation-delivery-v0.0.0.1.zip) |
+| Omar Khattab | `多重身份` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/多重身份/omar-khattab/versions/0.0.0.1/omar-khattab-persona-distillation-delivery-v0.0.0.1.zip) |
+| Paul Michael Teicholz | `多重身份` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/多重身份/paul-teicholz/versions/0.0.0.1/paul-teicholz-persona-distillation-delivery-v0.0.0.1.zip) |
+| Rich Hickey | `多重身份` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/多重身份/rich-hickey/versions/0.0.0.1/rich-hickey-persona-distillation-delivery-v0.0.0.1.zip) |
 | Robert A. Kindler | `多重身份` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/多重身份/robert-a-kindler/versions/0.0.0.1/robert-a-kindler-persona-distillation-delivery-v0.0.0.1.zip) |
 | Sam Walton | `多重身份` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/多重身份/sam-walton/versions/0.0.0.1/sam-walton-persona-distillation-delivery-v0.0.0.1.zip) |
+| Shreya Shankar | `多重身份` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/多重身份/shreya-shankar/versions/0.0.0.1/shreya-shankar-persona-distillation-delivery-v0.0.0.1.zip) |
+| Simon Willison | `多重身份` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/多重身份/simon-willison/versions/0.0.0.1/simon-willison-persona-distillation-delivery-v0.0.0.1.zip) |
+| Stephen E. Robertson | `多重身份` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/多重身份/stephen-e-robertson/versions/0.0.0.1/stephen-e-robertson-persona-distillation-delivery-v0.0.0.1.zip) |
+| Thomas L. Saaty | `多重身份` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/多重身份/thomas-saaty/versions/0.0.0.1/thomas-saaty-persona-distillation-delivery-v0.0.0.1.zip) |
+| 大野耐一 / Taiichi Ohno | `多重身份` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/多重身份/taiichi-ohno/versions/0.0.0.1/taiichi-ohno-persona-distillation-delivery-v0.0.0.1.zip) |
+| Barbara Liskov | `技术工程师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/技术工程师/barbara-liskov/versions/0.0.0.1/barbara-liskov-persona-distillation-delivery-v0.0.0.1.zip) |
+| George Antaki | `技术工程师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/技术工程师/george-antaki/versions/0.0.0.1/george-antaki-persona-distillation-delivery-v0.0.0.1.zip) |
+| Ian Michael Hutchings | `技术工程师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/技术工程师/ian-michael-hutchings/versions/0.0.0.1/ian-michael-hutchings-persona-distillation-delivery-v0.0.0.1.zip) |
+| R. Keith Mobley | `技术工程师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/技术工程师/r-keith-mobley/versions/0.0.0.1/r-keith-mobley-persona-distillation-delivery-v0.0.0.1.zip) |
 | Howard Marks | `投资资本家` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/投资资本家/howard-marks/versions/0.0.0.1/howard-marks-persona-distillation-delivery-v0.0.0.1.zip) |
 | Joel Greenblatt | `投资资本家` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/投资资本家/joel-greenblatt/versions/0.0.0.1/joel-greenblatt-persona-distillation-delivery-v0.0.0.1.zip) |
 | Nick Sleep | `投资资本家` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/投资资本家/nick-sleep/versions/0.0.0.1/nick-sleep-persona-distillation-delivery-v0.0.0.1.zip) |

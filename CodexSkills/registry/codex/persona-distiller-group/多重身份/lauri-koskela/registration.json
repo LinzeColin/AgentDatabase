@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:laurikoskela",
+  "canonical_name": "Lauri Koskela",
+  "identity_family_id": "multi-identity",
+  "identity_mode": "multi",
+  "registration_category": "多重身份",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "lauri-koskela",
+  "subject_uid": "person-7cbaeae29d4e3136",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/lauri-koskela-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T08:00:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0",
+      "outer_sha256": "cdd2483505c63eca9d38cd7c5f564c22907626fff84767f4489785d0dcb716df",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/lauri-koskela-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "43f9bab9a686bb38479322b36d199d74491110d622347b34513f99ced5ddaea1",
+      "runtime_size_bytes": 66721,
+      "size_bytes": 74938
+    }
+  ]
+}

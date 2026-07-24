@@ -1,0 +1,26 @@
+{
+  "canonical_key": "historical:大野耐一/taiichiohno",
+  "canonical_name": "大野耐一 / Taiichi Ohno",
+  "identity_family_id": "multi-identity",
+  "identity_mode": "multi",
+  "registration_category": "多重身份",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "taiichi-ohno",
+  "subject_uid": "person-2f24e754468cccc1",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/taiichi-ohno-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T07:52:13Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0",
+      "outer_sha256": "44a1655901a08a1a85ebf403dafc38563b4381b1fe38cb44292e982806a1f5e3",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/taiichi-ohno-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "8d94a8633078294a65fbb581779e625b167ccaa309caa5924588d5bc2f8dd422",
+      "runtime_size_bytes": 75552,
+      "size_bytes": 100970
+    }
+  ]
+}

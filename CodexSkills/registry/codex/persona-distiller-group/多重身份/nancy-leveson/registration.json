@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:nancyleveson",
+  "canonical_name": "Nancy Leveson",
+  "identity_family_id": "multi-identity",
+  "identity_mode": "multi",
+  "registration_category": "多重身份",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "nancy-leveson",
+  "subject_uid": "person-77558203545330f3",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/nancy-leveson-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T09:30:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0",
+      "outer_sha256": "e23f4ba887427b145d29406a22b0c9e551cb38507337569f8eb8721b18d3a92e",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/nancy-leveson-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "d070d701986f9db5216d61c6301827413607ef01817874bb66b150418a1eb20f",
+      "runtime_size_bytes": 86476,
+      "size_bytes": 678389
+    }
+  ]
+}
