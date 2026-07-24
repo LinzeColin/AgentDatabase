@@ -1,0 +1,385 @@
+{
+  "schema_version": 1,
+  "package_version": "v0.0.0.1",
+  "target_directory": "OpenAIDatabase/人类可读",
+  "workflow_path": ".github/workflows/recurring-prompt-analysis.yml",
+  "canonical_documents": [
+    {
+      "number": "00",
+      "filename": "00_快速入口与Recurring.md",
+      "title": "00 快速入口与 Recurring",
+      "summary": "自动生成的 Recurring 分析与运行状态，以及 Memory Atlas 快速入口。",
+      "sources": [
+        {
+          "id": "src-00-recurring-analysis",
+          "original_filename": "00_Recurring分析_最新.md",
+          "baseline_sha256": "fd01fec9954b951a994e363a5a5d8fdd8e3acdcac335ae6f3fc4b1e7e189a355",
+          "kind": "generated",
+          "generated_marker": "recurring-analysis"
+        },
+        {
+          "id": "src-00-recurring-status",
+          "original_filename": "00_Recurring运行状态.md",
+          "baseline_sha256": "7bd4df4bcc6ac1cd7fd9494fa422d33b7de9f139a68ff42ebd46aa37b549378a",
+          "kind": "generated",
+          "generated_marker": "recurring-status"
+        },
+        {
+          "id": "src-00-quick-entry",
+          "original_filename": "00_快速入口.md",
+          "baseline_sha256": "b43727d251f95f769efea7b76d86c9665382baec20d2c8ea55d38e994f18d1b3",
+          "kind": "static",
+          "canonical_body_sha256": "cb61a0edfcf8e0f6512379f96d049323aeef0db35e07ce3f46616885607a21fb"
+        }
+      ]
+    },
+    {
+      "number": "01",
+      "filename": "01_v1.2总览与同步归档.md",
+      "title": "01 v1.2 总览、同步归档与验收",
+      "summary": "v1.2 总览、Agent 同步、Raw 归档、凭证排除、机器账本、ChatGPT fallback 与运行手册。",
+      "sources": [
+        {
+          "id": "src-01-v12-overview",
+          "original_filename": "01_v1.2四线14Stage升级总览.md",
+          "baseline_sha256": "965b499e1b4867b1bc0fc0c409bb12618f29ac461bd3b7ed9724a60f7b39d2ae",
+          "kind": "static",
+          "canonical_body_sha256": "93f6c614f9a1da9e1bcbd2a1270bbf53562fb106a37050fc9d105a9a2f12bd58"
+        },
+        {
+          "id": "src-05-agent-sync",
+          "original_filename": "05_ChatGPT与Codex及其他Agent自动同步说明.md",
+          "baseline_sha256": "5d7789b21ab2bad780286ca42ef92a189b4a418fd63974f14a746d0a79b194eb",
+          "kind": "static",
+          "canonical_body_sha256": "5d7789b21ab2bad780286ca42ef92a189b4a418fd63974f14a746d0a79b194eb"
+        },
+        {
+          "id": "src-06-raw-public-archive",
+          "original_filename": "06_Raw明文公开与只读归档说明.md",
+          "baseline_sha256": "0404dfbf6f641b7a17a61db385455c71750fb9d96b1e1040aa85f5f2535bcc65",
+          "kind": "static",
+          "canonical_body_sha256": "0404dfbf6f641b7a17a61db385455c71750fb9d96b1e1040aa85f5f2535bcc65"
+        },
+        {
+          "id": "src-07-credential-exclusion",
+          "original_filename": "07_凭证排除说明.md",
+          "baseline_sha256": "c51de298788567fb07c13843c2c803a8634d3eab519efbfbfc2c681aaf5c70ce",
+          "kind": "static",
+          "canonical_body_sha256": "c51de298788567fb07c13843c2c803a8634d3eab519efbfbfc2c681aaf5c70ce"
+        },
+        {
+          "id": "src-08-raw-machine-ledger",
+          "original_filename": "08_Raw机器账本说明.md",
+          "baseline_sha256": "6acd8a2a0216329704326fef41099ec07051ba3800c493508631e1476439b66e",
+          "kind": "static",
+          "canonical_body_sha256": "6acd8a2a0216329704326fef41099ec07051ba3800c493508631e1476439b66e"
+        },
+        {
+          "id": "src-09-chatgpt-readonly-fallback",
+          "original_filename": "09_ChatGPT只读同步与官方导出Fallback.md",
+          "baseline_sha256": "e4369aff7ea93c12faea05927e2d62d837821847bfdc32979da1ae1686f173a7",
+          "kind": "static",
+          "canonical_body_sha256": "e4369aff7ea93c12faea05927e2d62d837821847bfdc32979da1ae1686f173a7"
+        },
+        {
+          "id": "src-09-acceptance-runbook",
+          "original_filename": "09_验收标准与运行手册.md",
+          "baseline_sha256": "63ae32848bab32a51ea4cf303e5e17a09353affedf3989211c6007529b7fd655",
+          "kind": "static",
+          "canonical_body_sha256": "63ae32848bab32a51ea4cf303e5e17a09353affedf3989211c6007529b7fd655"
+        }
+      ]
+    },
+    {
+      "number": "02",
+      "filename": "02_同步备份与行为治理.md",
+      "title": "02 同步备份、Facet 与行为治理",
+      "summary": "Codex/Future Agent 同步、GitHub 备份、Facet 事件、行为簇与低价值循环。",
+      "sources": [
+        {
+          "id": "src-10-codex-future-agent-sync",
+          "original_filename": "10_Codex与FutureAgent同步.md",
+          "baseline_sha256": "ba71d0d7de1513447b94444cb00d81ad460607244b923385d5aee6e799f8d4d2",
+          "kind": "static",
+          "canonical_body_sha256": "ba71d0d7de1513447b94444cb00d81ad460607244b923385d5aee6e799f8d4d2"
+        },
+        {
+          "id": "src-11-github-backup",
+          "original_filename": "11_GitHub备份DryRun与Apply.md",
+          "baseline_sha256": "8a95352ea371edcdb7204fa9fcb64d9a51b6a6791201104cf82c98d3734f13f5",
+          "kind": "static",
+          "canonical_body_sha256": "8a95352ea371edcdb7204fa9fcb64d9a51b6a6791201104cf82c98d3734f13f5"
+        },
+        {
+          "id": "src-12-facet-event-semantics",
+          "original_filename": "12_Facet字段与事件语义说明.md",
+          "baseline_sha256": "7de97725e38fc85fe3ecdef1a7abb594d3fe6835b57ca20e9b894a7e63d9475e",
+          "kind": "static",
+          "canonical_body_sha256": "7de97725e38fc85fe3ecdef1a7abb594d3fe6835b57ca20e9b894a7e63d9475e"
+        },
+        {
+          "id": "src-13-behavior-clusters",
+          "original_filename": "13_行为簇与层级簇说明.md",
+          "baseline_sha256": "c9255e4c9450723cbcb84c95deb4b0bfb47408e6992c51a1cbc677186cb0f672",
+          "kind": "static",
+          "canonical_body_sha256": "c9255e4c9450723cbcb84c95deb4b0bfb47408e6992c51a1cbc677186cb0f672"
+        },
+        {
+          "id": "src-14-low-value-loops",
+          "original_filename": "14_低价值循环与DecisionDebt说明.md",
+          "baseline_sha256": "409eb918574175aa00e092ebab49809fe1fb4d363415add7b22bbf520093d391",
+          "kind": "static",
+          "canonical_body_sha256": "409eb918574175aa00e092ebab49809fe1fb4d363415add7b22bbf520093d391"
+        }
+      ]
+    },
+    {
+      "number": "03",
+      "filename": "03_机会经济ROI与协作质量.md",
+      "title": "03 机会发现、经济代理、ROI 与协作质量",
+      "summary": "机会发现、Personal Economic Proxy、Information ROI、What-If 与 Agent 协作质量。",
+      "sources": [
+        {
+          "id": "src-15-opportunity-discovery",
+          "original_filename": "15_机会发现与为什么不是现在卡片.md",
+          "baseline_sha256": "2b9dc56ed3e8181eacf076ce3cc30ad975baaccb6d9e4932bb3bfe3adfa4cddd",
+          "kind": "static",
+          "canonical_body_sha256": "0d013cda4688d01a4b611ff98549b03a84f56fb2e987625a02c2a3e08ab3b82f"
+        },
+        {
+          "id": "src-16-personal-economic-proxy",
+          "original_filename": "16_PersonalEconomicProxy公式说明.md",
+          "baseline_sha256": "ac600922c1e5dc3110fc1b93171ab25f45ae369e8400466dcaccb568e5cc8549",
+          "kind": "static",
+          "canonical_body_sha256": "ac600922c1e5dc3110fc1b93171ab25f45ae369e8400466dcaccb568e5cc8549"
+        },
+        {
+          "id": "src-17-information-roi",
+          "original_filename": "17_InformationROI与VisualROIGate说明.md",
+          "baseline_sha256": "707858a2e53b540dfaf3aa40ddc5ccf292fd4fffb9a22e3ce9bbe658c4862654",
+          "kind": "static",
+          "canonical_body_sha256": "707858a2e53b540dfaf3aa40ddc5ccf292fd4fffb9a22e3ce9bbe658c4862654"
+        },
+        {
+          "id": "src-18-formula-what-if",
+          "original_filename": "18_FormulaWhatIf配置预览说明.md",
+          "baseline_sha256": "33d138a20e400d632730ca497760339cca3f36a7eddfbf9941c5adc35775382c",
+          "kind": "static",
+          "canonical_body_sha256": "33d138a20e400d632730ca497760339cca3f36a7eddfbf9941c5adc35775382c"
+        },
+        {
+          "id": "src-19-agent-collaboration-quality",
+          "original_filename": "19_Agent协作质量指标说明.md",
+          "baseline_sha256": "53a2bfb92c894f92d27f62ea0f998c4a37c6a1ab352e5e3b680d00fe1f043f2c",
+          "kind": "static",
+          "canonical_body_sha256": "53a2bfb92c894f92d27f62ea0f998c4a37c6a1ab352e5e3b680d00fe1f043f2c"
+        }
+      ]
+    },
+    {
+      "number": "04",
+      "filename": "04_Agent授权潜性迭代与决策债.md",
+      "title": "04 Agent 授权、潜性信号、自我迭代与决策债",
+      "summary": "Agent 授权边界、潜性信号、自我迭代建议、决策债与首页增量说明。",
+      "sources": [
+        {
+          "id": "src-20-agent-authorization",
+          "original_filename": "20_Agent授权边界说明.md",
+          "baseline_sha256": "7f8d8b3a624e71f9d1de91e9a75c3ac72845bbabf6aa74d25ace393e7b0c5aee",
+          "kind": "static",
+          "canonical_body_sha256": "7f8d8b3a624e71f9d1de91e9a75c3ac72845bbabf6aa74d25ace393e7b0c5aee"
+        },
+        {
+          "id": "src-21-latent-signals",
+          "original_filename": "21_潜性信号说明.md",
+          "baseline_sha256": "feb74709f4718ddebb29c7dce289d7a7c919a772f3ef72b0a667817a2dbe9f4f",
+          "kind": "static",
+          "canonical_body_sha256": "feb74709f4718ddebb29c7dce289d7a7c919a772f3ef72b0a667817a2dbe9f4f"
+        },
+        {
+          "id": "src-22-self-iteration",
+          "original_filename": "22_自我迭代建议说明.md",
+          "baseline_sha256": "61d098d9416463a615d0d23533cb883360c7dbb42747b7432ab932a1f010550f",
+          "kind": "static",
+          "canonical_body_sha256": "61d098d9416463a615d0d23533cb883360c7dbb42747b7432ab932a1f010550f"
+        },
+        {
+          "id": "src-23-decision-debt",
+          "original_filename": "23_决策债说明.md",
+          "baseline_sha256": "37118f61fb99a614530455b47606f92d1a648b5b5f8888384ddc1f007d23a39e",
+          "kind": "static",
+          "canonical_body_sha256": "37118f61fb99a614530455b47606f92d1a648b5b5f8888384ddc1f007d23a39e"
+        },
+        {
+          "id": "src-24-since-last-visit",
+          "original_filename": "24_首页上次来以后发生了什么说明.md",
+          "baseline_sha256": "700146ecfd8af903cd14c22324a2ab3829e30d47de1fc400ed9fcedb4fb762dc",
+          "kind": "static",
+          "canonical_body_sha256": "700146ecfd8af903cd14c22324a2ab3829e30d47de1fc400ed9fcedb4fb762dc"
+        }
+      ]
+    },
+    {
+      "number": "05",
+      "filename": "05_中文字段与多维可视化.md",
+      "title": "05 中文字段与多维可视化",
+      "summary": "全局中文、机器字段详情、ClioLike、EconomicLike 与 Workflow/Latent/Governance 可视化。",
+      "sources": [
+        {
+          "id": "src-25-global-chinese",
+          "original_filename": "25_全局中文说明.md",
+          "baseline_sha256": "5eac1dfea2e97cb7ed52714a10c9296dc6197fc8dd180a296e9bc54301724ec4",
+          "kind": "static",
+          "canonical_body_sha256": "5eac1dfea2e97cb7ed52714a10c9296dc6197fc8dd180a296e9bc54301724ec4"
+        },
+        {
+          "id": "src-26-machine-fields",
+          "original_filename": "26_机器字段高级详情说明.md",
+          "baseline_sha256": "edff7b2c5e5dbe3f86eb24cb075f6a5a10cfa6ef46bf201ed738d38353af88cb",
+          "kind": "static",
+          "canonical_body_sha256": "edff7b2c5e5dbe3f86eb24cb075f6a5a10cfa6ef46bf201ed738d38353af88cb"
+        },
+        {
+          "id": "src-27-clio-like",
+          "original_filename": "27_ClioLike多维可视化说明.md",
+          "baseline_sha256": "81d62cc82293848f378193036c753620a5f7cf105fda3b6702bc34e159713f28",
+          "kind": "static",
+          "canonical_body_sha256": "81d62cc82293848f378193036c753620a5f7cf105fda3b6702bc34e159713f28"
+        },
+        {
+          "id": "src-28-economic-like",
+          "original_filename": "28_EconomicLike经济可视化说明.md",
+          "baseline_sha256": "335e80f30cdbd427b579d1298d2f00a38c70a6103a786a85d9b041cf45e7a79d",
+          "kind": "static",
+          "canonical_body_sha256": "335e80f30cdbd427b579d1298d2f00a38c70a6103a786a85d9b041cf45e7a79d"
+        },
+        {
+          "id": "src-29-workflow-latent-governance",
+          "original_filename": "29_WorkflowLatentGovernance可视化说明.md",
+          "baseline_sha256": "3e3a771906508e05ccee273aae8fb0a0f51b2a1de5d41e21f75dacaf81e229bd",
+          "kind": "static",
+          "canonical_body_sha256": "3e3a771906508e05ccee273aae8fb0a0f51b2a1de5d41e21f75dacaf81e229bd"
+        }
+      ]
+    },
+    {
+      "number": "06",
+      "filename": "06_问题地图命令面板个性化与Proposal.md",
+      "title": "06 问题地图、命令面板、个性化与 Proposal",
+      "summary": "Human Question Map、Command Palette、Personalization Prompt、ChatGPT 深度探索与 Proposal 状态机。",
+      "sources": [
+        {
+          "id": "src-30-human-question-map",
+          "original_filename": "30_HumanQuestionMap说明.md",
+          "baseline_sha256": "80df52f7ca44a6e3ab9ce3c491785ace5b7d68bd2e2a186af338aca6e3ac6148",
+          "kind": "static",
+          "canonical_body_sha256": "80df52f7ca44a6e3ab9ce3c491785ace5b7d68bd2e2a186af338aca6e3ac6148"
+        },
+        {
+          "id": "src-31-command-palette",
+          "original_filename": "31_CommandPalette命令面板说明.md",
+          "baseline_sha256": "09196ecaa3d363c3bc44dcb7cffa2062e312f93e9ac7a132d9516147e8f05d33",
+          "kind": "static",
+          "canonical_body_sha256": "09196ecaa3d363c3bc44dcb7cffa2062e312f93e9ac7a132d9516147e8f05d33"
+        },
+        {
+          "id": "src-32-personalization-prompt",
+          "original_filename": "32_PersonalizationPrompt说明.md",
+          "baseline_sha256": "da8a17c5633c32b18c3362f90e3d6a4638a9913c831cafb7363990c1be75aa81",
+          "kind": "static",
+          "canonical_body_sha256": "da8a17c5633c32b18c3362f90e3d6a4638a9913c831cafb7363990c1be75aa81"
+        },
+        {
+          "id": "src-33-chatgpt-deep-exploration",
+          "original_filename": "33_ChatGPT深度探索说明.md",
+          "baseline_sha256": "22e80b6555a3df0200617e79601ba4a9b45b6f882bd0b73c887c50ebec4d450d",
+          "kind": "static",
+          "canonical_body_sha256": "22e80b6555a3df0200617e79601ba4a9b45b6f882bd0b73c887c50ebec4d450d"
+        },
+        {
+          "id": "src-34-proposal-state-machine",
+          "original_filename": "34_Proposal状态机说明.md",
+          "baseline_sha256": "f157d2ae230d73270767be18c40e1805dc506b8f1c974e34a01a204938345d8b",
+          "kind": "static",
+          "canonical_body_sha256": "f157d2ae230d73270767be18c40e1805dc506b8f1c974e34a01a204938345d8b"
+        }
+      ]
+    },
+    {
+      "number": "07",
+      "filename": "07_DiffNarrator与Apply回滚.md",
+      "title": "07 Diff Narrator 与 Apply 回滚",
+      "summary": "差异叙述、Apply 门禁与回滚边界。",
+      "sources": [
+        {
+          "id": "src-35-diff-narrator",
+          "original_filename": "35_DiffNarrator说明.md",
+          "baseline_sha256": "e8b42eac7e56758d7332c0540530e513f28ac8f9c8960d2a2c4d30094b835bb5",
+          "kind": "static",
+          "canonical_body_sha256": "e8b42eac7e56758d7332c0540530e513f28ac8f9c8960d2a2c4d30094b835bb5"
+        },
+        {
+          "id": "src-36-apply-rollback",
+          "original_filename": "36_Apply回滚说明.md",
+          "baseline_sha256": "862cd3e1e5f1467be1bdb8022b1748c149846e6897d99cc7ba7c86239d117516",
+          "kind": "static",
+          "canonical_body_sha256": "862cd3e1e5f1467be1bdb8022b1748c149846e6897d99cc7ba7c86239d117516"
+        }
+      ]
+    }
+  ],
+  "required_document_count": 8,
+  "required_numbers": [
+    "00",
+    "01",
+    "02",
+    "03",
+    "04",
+    "05",
+    "06",
+    "07"
+  ],
+  "legacy_generated_paths": [
+    "OpenAIDatabase/人类可读/00_Recurring分析_最新.md",
+    "OpenAIDatabase/人类可读/00_Recurring运行状态.md"
+  ],
+  "source_order": [
+    "00_Recurring分析_最新.md",
+    "00_Recurring运行状态.md",
+    "00_快速入口.md",
+    "01_v1.2四线14Stage升级总览.md",
+    "05_ChatGPT与Codex及其他Agent自动同步说明.md",
+    "06_Raw明文公开与只读归档说明.md",
+    "07_凭证排除说明.md",
+    "08_Raw机器账本说明.md",
+    "09_ChatGPT只读同步与官方导出Fallback.md",
+    "09_验收标准与运行手册.md",
+    "10_Codex与FutureAgent同步.md",
+    "11_GitHub备份DryRun与Apply.md",
+    "12_Facet字段与事件语义说明.md",
+    "13_行为簇与层级簇说明.md",
+    "14_低价值循环与DecisionDebt说明.md",
+    "15_机会发现与为什么不是现在卡片.md",
+    "16_PersonalEconomicProxy公式说明.md",
+    "17_InformationROI与VisualROIGate说明.md",
+    "18_FormulaWhatIf配置预览说明.md",
+    "19_Agent协作质量指标说明.md",
+    "20_Agent授权边界说明.md",
+    "21_潜性信号说明.md",
+    "22_自我迭代建议说明.md",
+    "23_决策债说明.md",
+    "24_首页上次来以后发生了什么说明.md",
+    "25_全局中文说明.md",
+    "26_机器字段高级详情说明.md",
+    "27_ClioLike多维可视化说明.md",
+    "28_EconomicLike经济可视化说明.md",
+    "29_WorkflowLatentGovernance可视化说明.md",
+    "30_HumanQuestionMap说明.md",
+    "31_CommandPalette命令面板说明.md",
+    "32_PersonalizationPrompt说明.md",
+    "33_ChatGPT深度探索说明.md",
+    "34_Proposal状态机说明.md",
+    "35_DiffNarrator说明.md",
+    "36_Apply回滚说明.md"
+  ]
+}

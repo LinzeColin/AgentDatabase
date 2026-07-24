@@ -11,6 +11,11 @@ on:
       - "OpenAIDatabase/scripts/validate_recurring_prompt_analysis.py"
       - "OpenAIDatabase/tests/test_recurring_prompt_analysis.py"
       - "OpenAIDatabase/tests/fixtures/recurring_prompt/**"
+      - "OpenAIDatabase/config/human_readable_merge.v1.json"
+      - "OpenAIDatabase/scripts/update_human_readable_recurring.py"
+      - "OpenAIDatabase/scripts/validate_human_readable_docs.py"
+      - "OpenAIDatabase/tests/test_human_readable_docs.py"
+      - "OpenAIDatabase/tests/fixtures/human_readable_docs/**"
   push:
     branches: [main]
     paths:
@@ -21,6 +26,11 @@ on:
       - "OpenAIDatabase/scripts/validate_recurring_prompt_analysis.py"
       - "OpenAIDatabase/tests/test_recurring_prompt_analysis.py"
       - "OpenAIDatabase/tests/fixtures/recurring_prompt/**"
+      - "OpenAIDatabase/config/human_readable_merge.v1.json"
+      - "OpenAIDatabase/scripts/update_human_readable_recurring.py"
+      - "OpenAIDatabase/scripts/validate_human_readable_docs.py"
+      - "OpenAIDatabase/tests/test_human_readable_docs.py"
+      - "OpenAIDatabase/tests/fixtures/human_readable_docs/**"
       - "OpenAIDatabase/data/public_raw/codex/sessions/**/*.jsonl"
       - "OpenAIDatabase/data/public_raw/codex/sessions/*.jsonl"
   schedule:
@@ -46,8 +56,7 @@ env:
   PYTHONDONTWRITEBYTECODE: "1"
   CONFIG_PATH: OpenAIDatabase/config/behavior/recurring_prompt_analysis.json
   CANONICAL_OUTPUT: OpenAIDatabase/data/derived/behavior_intelligence/recurring_prompts
-  HUMAN_REPORT: OpenAIDatabase/人类可读/00_Recurring分析_最新.md
-  HUMAN_STATUS: OpenAIDatabase/人类可读/00_Recurring运行状态.md
+  HUMAN_INDEX: OpenAIDatabase/人类可读/00_快速入口与Recurring.md
 
 jobs:
   verify-pull-request:
@@ -79,11 +88,15 @@ jobs:
               "OpenAIDatabase/scripts/build_recurring_prompt_analysis.py",
               "OpenAIDatabase/scripts/validate_recurring_prompt_analysis.py",
               "OpenAIDatabase/tests/test_recurring_prompt_analysis.py",
+              "OpenAIDatabase/scripts/update_human_readable_recurring.py",
+              "OpenAIDatabase/scripts/validate_human_readable_docs.py",
+              "OpenAIDatabase/tests/test_human_readable_docs.py",
           ):
               ast.parse(Path(name).read_text(encoding="utf-8"), filename=name)
           print("PASS: Python syntax")
           PY
           python3 -B -m unittest OpenAIDatabase.tests.test_recurring_prompt_analysis -v
+          python3 -B -m unittest OpenAIDatabase.tests.test_human_readable_docs -v
 
       - name: Build twice and prove deterministic output
         shell: bash
@@ -113,6 +126,19 @@ jobs:
               --output-dir "$WORK_DIR/$build/machine" \
               --summary-output "$WORK_DIR/$build/00_Recurring分析_最新.md" \
               --status-output "$WORK_DIR/$build/00_Recurring运行状态.md"
+
+            python3 -B OpenAIDatabase/scripts/update_human_readable_recurring.py \
+              --repo-root . \
+              --config OpenAIDatabase/config/human_readable_merge.v1.json \
+              --base "$HUMAN_INDEX" \
+              --summary "$WORK_DIR/$build/00_Recurring分析_最新.md" \
+              --status "$WORK_DIR/$build/00_Recurring运行状态.md" \
+              --output "$WORK_DIR/$build/00_快速入口与Recurring.md"
+
+            python3 -B OpenAIDatabase/scripts/validate_human_readable_docs.py \
+              --repo-root . \
+              --config OpenAIDatabase/config/human_readable_merge.v1.json \
+              --index-override "$WORK_DIR/$build/00_快速入口与Recurring.md"
           done
 
           python3 -B OpenAIDatabase/scripts/validate_recurring_prompt_analysis.py \
@@ -125,6 +151,7 @@ jobs:
             --compare-right "$WORK_DIR/b/machine"
           cmp "$WORK_DIR/a/00_Recurring分析_最新.md" "$WORK_DIR/b/00_Recurring分析_最新.md"
           cmp "$WORK_DIR/a/00_Recurring运行状态.md" "$WORK_DIR/b/00_Recurring运行状态.md"
+          cmp "$WORK_DIR/a/00_快速入口与Recurring.md" "$WORK_DIR/b/00_快速入口与Recurring.md"
 
       - name: Publish Chinese PR summary
         shell: bash
@@ -146,6 +173,7 @@ jobs:
           mkdir -p "$ARTIFACT_DIR/机器明细"
           cp "$WORK_DIR/00_Recurring分析_最新.md" "$ARTIFACT_DIR/"
           cp "$WORK_DIR/00_Recurring运行状态.md" "$ARTIFACT_DIR/"
+          cp "$WORK_DIR/00_快速入口与Recurring.md" "$ARTIFACT_DIR/"
           cp "$WORK_DIR/machine/agent_context.json" "$ARTIFACT_DIR/机器明细/"
           cp "$WORK_DIR/machine/run_manifest.json" "$ARTIFACT_DIR/机器明细/"
 
@@ -193,11 +221,15 @@ jobs:
               "OpenAIDatabase/scripts/build_recurring_prompt_analysis.py",
               "OpenAIDatabase/scripts/validate_recurring_prompt_analysis.py",
               "OpenAIDatabase/tests/test_recurring_prompt_analysis.py",
+              "OpenAIDatabase/scripts/update_human_readable_recurring.py",
+              "OpenAIDatabase/scripts/validate_human_readable_docs.py",
+              "OpenAIDatabase/tests/test_human_readable_docs.py",
           ):
               ast.parse(Path(name).read_text(encoding="utf-8"), filename=name)
           print("PASS: Python syntax")
           PY
             python3 -B -m unittest OpenAIDatabase.tests.test_recurring_prompt_analysis -v
+            python3 -B -m unittest OpenAIDatabase.tests.test_human_readable_docs -v
           }
 
           build_and_validate() {
@@ -267,6 +299,19 @@ jobs:
                 --output-dir "$work_dir/$mode/machine" \
                 --summary-output "$work_dir/$mode/00_Recurring分析_最新.md" \
                 --status-output "$work_dir/$mode/00_Recurring运行状态.md"
+
+              python3 -B OpenAIDatabase/scripts/update_human_readable_recurring.py \
+                --repo-root . \
+                --config OpenAIDatabase/config/human_readable_merge.v1.json \
+                --base "$HUMAN_INDEX" \
+                --summary "$work_dir/$mode/00_Recurring分析_最新.md" \
+                --status "$work_dir/$mode/00_Recurring运行状态.md" \
+                --output "$work_dir/$mode/00_快速入口与Recurring.md"
+
+              python3 -B OpenAIDatabase/scripts/validate_human_readable_docs.py \
+                --repo-root . \
+                --config OpenAIDatabase/config/human_readable_merge.v1.json \
+                --index-override "$work_dir/$mode/00_快速入口与Recurring.md"
             done
 
             python3 -B OpenAIDatabase/scripts/validate_recurring_prompt_analysis.py \
@@ -280,21 +325,24 @@ jobs:
               --semantic-compare
             cmp "$work_dir/incremental/00_Recurring分析_最新.md" "$work_dir/full/00_Recurring分析_最新.md"
             cmp "$work_dir/incremental/00_Recurring运行状态.md" "$work_dir/full/00_Recurring运行状态.md"
+            cmp "$work_dir/incremental/00_快速入口与Recurring.md" "$work_dir/full/00_快速入口与Recurring.md"
 
-            mkdir -p "$(dirname "$CANONICAL_OUTPUT")" "$(dirname "$HUMAN_REPORT")"
+            mkdir -p "$(dirname "$CANONICAL_OUTPUT")" "$(dirname "$HUMAN_INDEX")"
             rm -rf "$CANONICAL_OUTPUT.new"
             cp -a "$work_dir/incremental/machine" "$CANONICAL_OUTPUT.new"
             rm -rf "$CANONICAL_OUTPUT"
             mv "$CANONICAL_OUTPUT.new" "$CANONICAL_OUTPUT"
-            install -m 0644 "$work_dir/incremental/00_Recurring分析_最新.md" "$HUMAN_REPORT"
-            install -m 0644 "$work_dir/incremental/00_Recurring运行状态.md" "$HUMAN_STATUS"
+            install -m 0644 "$work_dir/incremental/00_快速入口与Recurring.md" "$HUMAN_INDEX"
 
             python3 -B OpenAIDatabase/scripts/validate_recurring_prompt_analysis.py \
               --repo-root . \
               --config "$CONFIG_PATH" \
               --output-dir "$CANONICAL_OUTPUT" \
-              --summary-output "$HUMAN_REPORT" \
-              --status-output "$HUMAN_STATUS"
+              --summary-output "$work_dir/incremental/00_Recurring分析_最新.md" \
+              --status-output "$work_dir/incremental/00_Recurring运行状态.md"
+            python3 -B OpenAIDatabase/scripts/validate_human_readable_docs.py \
+              --repo-root . \
+              --config OpenAIDatabase/config/human_readable_merge.v1.json
           }
 
           enforce_allowlist() {
@@ -315,7 +363,7 @@ jobs:
             fi
             for path in "${changed[@]}"; do
               case "$path" in
-                "$CANONICAL_OUTPUT"/*|"$HUMAN_REPORT"|"$HUMAN_STATUS") ;;
+                "$CANONICAL_OUTPUT"/*|"$HUMAN_INDEX") ;;
                 "") ;;
                 *)
                   echo "ERROR: generated-output write allowlist violation: $path" >&2
@@ -327,22 +375,22 @@ jobs:
 
           publish_summary_and_artifact() {
             {
-              cat "$HUMAN_STATUS"
+              cat "$RUNNER_TEMP/recurring-main/incremental/00_Recurring运行状态.md"
               echo
               echo "---"
               echo
               echo "## 快速入口"
               echo
-              echo "- 主报告：\`$HUMAN_REPORT\`"
-              echo "- 状态页：\`$HUMAN_STATUS\`"
+              echo "- 合并人类入口（含主报告与状态页）：\`$HUMAN_INDEX\`"
               echo "- Agent 低 Token 入口：\`$CANONICAL_OUTPUT/agent_context.json\`"
             } >> "$GITHUB_STEP_SUMMARY"
 
             local artifact_dir="$RUNNER_TEMP/Recurring中文验收包"
             rm -rf "$artifact_dir"
             mkdir -p "$artifact_dir/机器明细"
-            cp "$HUMAN_REPORT" "$artifact_dir/"
-            cp "$HUMAN_STATUS" "$artifact_dir/"
+            cp "$HUMAN_INDEX" "$artifact_dir/"
+            cp "$RUNNER_TEMP/recurring-main/incremental/00_Recurring分析_最新.md" "$artifact_dir/"
+            cp "$RUNNER_TEMP/recurring-main/incremental/00_Recurring运行状态.md" "$artifact_dir/"
             cp "$CANONICAL_OUTPUT/agent_context.json" "$artifact_dir/机器明细/"
             cp "$CANONICAL_OUTPUT/freshness.json" "$artifact_dir/机器明细/"
             cp "$CANONICAL_OUTPUT/run_manifest.json" "$artifact_dir/机器明细/"
@@ -363,8 +411,7 @@ jobs:
 
             git add -- \
               "$CANONICAL_OUTPUT" \
-              "$HUMAN_REPORT" \
-              "$HUMAN_STATUS"
+              "$HUMAN_INDEX"
             git diff --cached --check
 
             if git diff --cached --quiet; then

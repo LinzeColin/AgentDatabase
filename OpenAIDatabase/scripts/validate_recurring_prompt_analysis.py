@@ -28,19 +28,24 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--summary-output",
         type=Path,
-        default=Path("OpenAIDatabase/人类可读/00_Recurring分析_最新.md"),
+        required=True,
+        help="Explicit generated-analysis Markdown path to validate.",
     )
     parser.add_argument(
         "--status-output",
         type=Path,
-        default=Path("OpenAIDatabase/人类可读/00_Recurring运行状态.md"),
+        required=True,
+        help="Explicit generated-status Markdown path to validate.",
     )
     parser.add_argument("--compare-left", type=Path)
     parser.add_argument("--compare-right", type=Path)
     parser.add_argument(
         "--semantic-compare",
         action="store_true",
-        help="Compare result-bearing files while ignoring run-local diagnostics in run_manifest.json.",
+        help=(
+            "Compare result-bearing files while ignoring run-local diagnostics "
+            "in run_manifest.json."
+        ),
     )
     parser.add_argument("--skip-source-check", action="store_true")
     return parser
@@ -64,9 +69,12 @@ def main(argv: list[str] | None = None) -> int:
     if (args.compare_left is None) != (args.compare_right is None):
         errors.append("--compare-left and --compare-right must be provided together")
     elif args.compare_left and args.compare_right:
-        comparator = compare_semantic_outputs if args.semantic_compare else compare_trees
+        comparator = (
+            compare_semantic_outputs if args.semantic_compare else compare_trees
+        )
         differences = comparator(
-            resolve(repo_root, args.compare_left), resolve(repo_root, args.compare_right)
+            resolve(repo_root, args.compare_left),
+            resolve(repo_root, args.compare_right),
         )
         if differences:
             errors.append("non-deterministic build outputs: " + ", ".join(differences))
@@ -74,7 +82,10 @@ def main(argv: list[str] | None = None) -> int:
         for error in errors:
             print(f"ERROR: {error}", file=sys.stderr)
         return 1
-    print("PASS: recurring-prompt outputs are valid, source-linked, privacy-scanned and zero-LLM")
+    print(
+        "PASS: recurring-prompt outputs are valid, source-linked, "
+        "privacy-scanned and zero-LLM"
+    )
     return 0
 
 
