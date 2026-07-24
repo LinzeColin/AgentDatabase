@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:harrybhadeshia",
+  "canonical_name": "Harry Bhadeshia",
+  "identity_family_id": "multi-identity",
+  "identity_mode": "multi",
+  "registration_category": "多重身份",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "harry-bhadeshia",
+  "subject_uid": "person-9099fb1a6a5d5994",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/harry-bhadeshia-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T05:55:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0",
+      "outer_sha256": "4af5b1cba9f76f718650b3ab652c7ce7d0ee7185dfa53a429f9dabfc1464f5a8",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/harry-bhadeshia-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "e362b6eb61cb677f18c95ecfeb46c3083c3a23cfef8f69bb81e311f98445bfc2",
+      "runtime_size_bytes": 78574,
+      "size_bytes": 93232
+    }
+  ]
+}

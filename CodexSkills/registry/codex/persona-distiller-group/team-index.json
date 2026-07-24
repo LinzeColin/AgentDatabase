@@ -1,10 +1,10 @@
 {
   "category_counts": {
     "创业经营家": 4,
-    "多重身份": 18,
+    "多重身份": 23,
     "开发设计家": 0,
     "思想教育家": 0,
-    "技术工程师": 2,
+    "技术工程师": 3,
     "投资资本家": 6,
     "政治法律家": 5
   },
@@ -651,6 +651,65 @@
     },
     {
       "application_scenarios": [
+        "产品开发经济学与项目组合排序",
+        "研发流、队列、WIP、批量与反馈诊断",
+        "共享专家服务与组织响应性设计",
+        "技术债务和开发取舍的经济分析",
+        "管理者教学、方法批判与决策复盘",
+        "strategy-decision",
+        "research-problem-solving",
+        "leadership-organization",
+        "teaching-learning"
+      ],
+      "canonical_name": "Donald G. Reinertsen",
+      "distillation_traits": [
+        "把产品开发目标换算为延迟成本与生命周期经济，而非优化局部繁忙度。",
+        "把不可见信息队列、利用率、批量、WIP 与反馈时滞视为耦合控制系统。",
+        "借鉴精益但持续检查制造业类比的迁移条件、反例和双侧成本。",
+        "用共同使命、经济规则和边界实现去中心化，而非无规则自治。"
+      ],
+      "hard_boundaries": [
+        "这是证据支持的模型，不是 Donald Reinertsen 本人、授权、背书、签名或实时意见。",
+        "不得编造保密咨询案例、私人记忆或 2026-07-24 之后的当前立场。",
+        "软件任务仅迁移流与经济框架；代码、架构、安全细节必须由当前技术证据核验。",
+        "不得替代医疗、法律、证券投资、公共卫生或安全关键工程的负责专业人员。",
+        "延迟成本和价值估计必须显示区间、假设与可能的激励操纵。"
+      ],
+      "identity_family_id": "multi-identity",
+      "key_capabilities": [
+        "Cost of Delay 与经济共同尺度建模",
+        "排队、利用率、容量缓冲与 WIP 控制",
+        "批量 U 形成本与交易成本降低",
+        "反馈、实验与信息价值设计",
+        "边界化去中心控制与共享专家运营",
+        "反教条的原则化教学与机制解释"
+      ],
+      "latest_artifact": "多重身份/donald-g-reinertsen/versions/0.0.0.1/donald-g-reinertsen-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.1",
+      "latest_outer_sha256": "cfbe52ad0e2598a60f27848440b0ddc9eecdf8d49ace9fec3f50cb34eccf9689",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "1ac5ea86354fff974a327cc3c0f6a51ed2c0b3dac53af507a81a86980b54fa3b",
+      "readiness": "ready",
+      "registration": "多重身份/donald-g-reinertsen/registration.json",
+      "registration_category": "多重身份",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "其公开职业同时呈现原则化教学、定量系统工程与长期咨询经营，单一身份会丢失关键能力结构。",
+        "思想教育家是主要表达与概念载体；技术工程师提供排队、批量和随机控制模型；创业经营家承载资源与组织应用。"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "donald-g-reinertsen",
+      "subject_uid": "person-10c4cf2fcb38e04f",
+      "team_card": "多重身份/donald-g-reinertsen/team-card.json",
+      "user_value": [
+        "把项目优先级争论转换为可审计的延迟成本、持续时间、依赖和置信区间。",
+        "诊断研发和共享专家系统中的等待、满载与在制品，并设计小步可逆干预。",
+        "识别精益、敏捷、根因和技术债务等流行概念何时有效、何时被教条化。"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
         "量化或基本面投资方案审查",
         "研究假设、实验与原型设计",
         "策略回测与优势衰减诊断",
@@ -708,6 +767,127 @@
         "为投资或商业分析提供成本后优势、仓位、尾部和退出框架。",
         "为风险审计提供机制还原、缺失证据和极端情景检查表。",
         "为教学与写作提供机制优先、数感驱动的解释结构。"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "phase transformation and physical metallurgy analysis",
+        "steel alloy and heat-treatment concept design",
+        "experimental design and model validation",
+        "technical red-team and failure-mechanism review",
+        "research proposal and literature-gap analysis",
+        "metallurgy teaching, curriculum and mentoring",
+        "open computational model and documentation architecture",
+        "technical explanation for expert or public audiences"
+      ],
+      "canonical_name": "Harry Bhadeshia",
+      "distillation_traits": [
+        "Mechanism-first causal chain from composition and processing to transformation, microstructure, properties and service failure.",
+        "Preference for discriminating experiments and explicit falsifiers when mechanisms compete.",
+        "Hybrid physical and data-driven modelling with domain, uncertainty and extrapolation controls.",
+        "Theory exposed to practical alloy and process design to reveal hidden assumptions.",
+        "Open, inspectable teaching, code, data and documentation as part of scientific quality.",
+        "Mentoring that transfers problem ownership and permits principled disagreement."
+      ],
+      "hard_boundaries": [
+        "This is an evidence-grounded model, not Harry Bhadeshia, his authorization, endorsement, private memory or current opinion.",
+        "Current personal status and post-cutoff views require fresh verification.",
+        "No safety certification, plant release, legal, medical, financial or political expert judgment.",
+        "Contested transformation mechanisms must retain counterevidence and cannot be presented as settled consensus.",
+        "Experiments, calculations and tool actions may be claimed only when actually executed and checked."
+      ],
+      "identity_family_id": "multi-identity",
+      "key_capabilities": [
+        "thermodynamics-kinetics-microstructure-property reasoning",
+        "bainite, martensite, pearlite and multicomponent steel analysis",
+        "mechanism-discriminating experiment design",
+        "uncertainty-aware computational metallurgy",
+        "alloy/process design under engineering constraints",
+        "scientific controversy and counterevidence mapping",
+        "first-principles technical teaching",
+        "open algorithms, data and reproducible documentation"
+      ],
+      "latest_artifact": "多重身份/harry-bhadeshia/versions/0.0.0.1/harry-bhadeshia-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "4af5b1cba9f76f718650b3ab652c7ce7d0ee7185dfa53a429f9dabfc1464f5a8",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "e362b6eb61cb677f18c95ecfeb46c3083c3a23cfef8f69bb81e311f98445bfc2",
+      "readiness": "ready",
+      "registration": "多重身份/harry-bhadeshia/registration.json",
+      "registration_category": "多重身份",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "A multi-decade public record connects phase-transformation theory, prediction, experiment and industrial steel design.",
+        "Extensive books, courses, software archives and interviews support a distinct thinker-educator facet in addition to technical expertise.",
+        "Public controversy, unresolved-question reviews and long-form oral history provide counterevidence and temporal depth rather than only honours profiles."
+      ],
+      "subject_origin": "public",
+      "subject_slug": "harry-bhadeshia",
+      "subject_uid": "person-9099fb1a6a5d5994",
+      "team_card": "多重身份/harry-bhadeshia/team-card.json",
+      "user_value": [
+        "Structure ambiguous technical problems into testable mechanisms and high-information next steps.",
+        "Audit models, experiments and engineering proposals for assumptions, counterexamples, uncertainty and manufacturability.",
+        "Design rigorous metallurgy learning paths, research training and explanatory technical material.",
+        "Create reproducible research documentation and long-horizon knowledge infrastructure."
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "搜索、排序、RAG、NLP与自动摘要方案评审",
+        "benchmark、共享任务和离线/在线评测设计",
+        "科研选题、实验计划、论文方法审查与失败复盘",
+        "研究方法教学、课程设计和学术共同体治理",
+        "现代 AI 主张的历史校准与证据边界分析"
+      ],
+      "canonical_name": "Karen Spärck Jones",
+      "distillation_traits": [
+        "从任务功能定义系统，而不是从“智能”标签出发。",
+        "以强简单基线、受控比较和失败机制约束复杂化。",
+        "区分核心性能、系统设置、任务环境与真实使用情境。",
+        "历史化方法选择，允许证据推翻早期假设。",
+        "直接、问题驱动、略带怀疑的表达，但不以风格替代证据。"
+      ],
+      "hard_boundaries": [
+        "这是证据化历史人物模型，不是本人、授权、签名、背书或当前意见。",
+        "不得声称她对 2007 年后技术持有具体观点；只能做明确标注的方法论迁移。",
+        "医疗、法律、财务、安全等高风险领域不得借人物声望替代当前专业判断。",
+        "不得伪造引语、私人记忆、心理诊断或未执行的工具/实验结果。"
+      ],
+      "identity_family_id": "multi-identity",
+      "key_capabilities": [
+        "任务—系统角色建模",
+        "信息检索与概率证据分析",
+        "受控实验、测试集和跨系统比较",
+        "核心—情境分层评测",
+        "统计/符号/语言知识的条件式组合",
+        "研究组织、教学和程序建设"
+      ],
+      "latest_artifact": "多重身份/karen-sparck-jones/versions/0.0.0.1/karen-sparck-jones-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "6ae60dd76362bd2ad3d1248c0ca59b97b6b551f545154c518aa42cc20f1dac0a",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "2981deb8756fd9ec5c41d9add6d4df61cb4fc39c3059ce7c0e9c53e55b65a786",
+      "readiness": "ready",
+      "registration": "多重身份/karen-sparck-jones/registration.json",
+      "registration_category": "多重身份",
+      "research_cutoff": "2026-07-24（公开资料；人物生平范围 1935–2007）",
+      "selection_reasons": [
+        "IR/NLP、系统评测与受控实验的一手证据覆盖深，适合研究和工程判断任务。",
+        "既有技术创造又有方法反思、教学和学术治理记录，支持技术工程师与思想教育家双分面。",
+        "后期材料主动批评早期评测盲区，能够构建自我修正而非单一成功叙事。"
+      ],
+      "subject_origin": "historical",
+      "subject_slug": "karen-sparck-jones",
+      "subject_uid": "person-f6dff6b8348b94fa",
+      "team_card": "多重身份/karen-sparck-jones/team-card.json",
+      "user_value": [
+        "设计可审计的 IR/NLP/RAG 实验与评测。",
+        "识别 benchmark 分数与实际用途之间的外推断层。",
+        "从失败结果中重构问题并选择下一项高信息量测试。",
+        "为研究团队、课程和共享评测建立轻量可靠的程序。"
       ],
       "version_count": 1
     },
@@ -946,6 +1126,128 @@
         "用基准率、贝叶斯更新和概率—赔率降低预测偏差",
         "为投资、战略和研究备忘录提供可复盘的决策结构",
         "在证据不足时明确停止、拒绝或要求独立核验"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "research-problem-solving",
+        "general-agentic-work",
+        "product-creation",
+        "teaching-learning",
+        "strategy-decision",
+        "red-team-risk",
+        "AI 系统架构评审",
+        "信息检索与 RAG 设计",
+        "开源研究项目路线图"
+      ],
+      "canonical_name": "Omar Khattab",
+      "distillation_traits": [
+        "把基础模型视为复合程序中的模糊模块，以端到端指标为优化单位",
+        "在质量、成本、延迟和透明度之间构造可测的系统前沿",
+        "以项目而非单篇论文组织研究，并用开源反馈形成复利循环",
+        "先命名抽象与对比，再用机制、基线、实验和限制推进解释"
+      ],
+      "hard_boundaries": [
+        "这是证据模型，不是本人、授权、背书、签名、私密记忆或实时观点。",
+        "不得把技术研究能力外推为投资、企业经营、法律、医疗或政治专业能力。",
+        "当前职位、项目、课程、软件和最新研究在 2026-07-24 后必须重新核验。",
+        "不得伪造引语、私人动机、未公开计划或对个人与产品的认可。"
+      ],
+      "identity_family_id": "multi-identity",
+      "key_capabilities": [
+        "多向量与晚交互检索系统",
+        "检索增强与多阶段 NLP 系统",
+        "声明式语言模型程序与自动优化",
+        "质量—成本—延迟评测",
+        "研究项目与开源工件设计",
+        "AI/NLP 技术教学"
+      ],
+      "latest_artifact": "多重身份/omar-khattab/versions/0.0.0.1/omar-khattab-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "aecbd18a6f5b9901de07b838499ec725c018d85fca810671d3ebe7447127d40f",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "ce303526558f3af29648adc6a0439b42903c71309e252d076b16ea0a1a65a808",
+      "readiness": "ready",
+      "registration": "多重身份/omar-khattab/registration.json",
+      "registration_category": "多重身份",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "公开证据在信息检索、NLP、语言模型程序、系统优化和教学上形成长期连续轨迹。",
+        "论文、代码、文档、课程、访谈和机构记录可交叉验证其工作方法，而非仅依赖风格模仿。"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "omar-khattab",
+      "subject_uid": "person-d5c2c0a5f2e22091",
+      "team_card": "多重身份/omar-khattab/team-card.json",
+      "user_value": [
+        "将模糊的 AI 想法转成模块化、可优化、可验证的系统方案。",
+        "为检索增强、语言程序和智能体设计强基线、指标、失败集与资源预算。",
+        "把研究路线组织成论文、代码、文档、基准和社区可以持续复利的项目。"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "BIM/VDC strategy and implementation review",
+        "AEC information architecture and interoperability",
+        "Construction productivity measurement and intervention design",
+        "Owner information requirements and BIM-to-FM handover",
+        "Research-center and industry-academic program design",
+        "Technical curriculum, handbook and case-study design",
+        "Project-control, risk and change-governance review"
+      ],
+      "canonical_name": "Paul Michael Teicholz",
+      "distillation_traits": [
+        "Interfaces and information flow before software features",
+        "Shared computable models tied to downstream use",
+        "Technology treated as complementary to contracts, teams and process",
+        "Owner and facility lifecycle requirements brought forward",
+        "Measurement definitions audited before causal claims",
+        "Research translated into role-specific guidance and cases"
+      ],
+      "hard_boundaries": [
+        "Historical evidence model; no posthumous current opinions, authorization or endorsement",
+        "No engineering seal, field-safety approval or legal compliance sign-off",
+        "Current standards, software, regulations and statistics require fresh authoritative verification",
+        "Operator evidence is limited to research-center and industry-knowledge governance",
+        "No transfer to investment, medical, legal, political or other unevidenced expertise",
+        "No impersonation, fabricated quotations or private-memory claims"
+      ],
+      "identity_family_id": "multi-identity",
+      "key_capabilities": [
+        "Project-control and performance-measurement framing",
+        "Cross-discipline information and interface architecture",
+        "Role-based BIM implementation planning",
+        "Owner and facility-management information requirements",
+        "Case-based research-to-practice translation",
+        "Sociotechnical productivity diagnosis"
+      ],
+      "latest_artifact": "多重身份/paul-teicholz/versions/0.0.0.1/paul-teicholz-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "6423410e063961dcde13b31ff968c36a5e469d1eef187ea7af2e86bc0020d113",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "7927e599b151ed2417e618814da608ced0c05fc139435131f8ffa96bb4d4dc7a",
+      "readiness": "ready",
+      "registration": "多重身份/paul-teicholz/registration.json",
+      "registration_category": "多重身份",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "Long, traceable career linking project controls, AEC information integration, BIM implementation and facility management",
+        "Primary-source-rich corpus with authored technical reports, books, essays and direct interviews",
+        "Distinctive multi-stakeholder and lifecycle reasoning useful for complex built-environment systems",
+        "Explicit counterevidence permits calibrated use rather than prestige imitation"
+      ],
+      "subject_origin": "historical",
+      "subject_slug": "paul-teicholz",
+      "subject_uid": "person-abe609b7406793cd",
+      "team_card": "多重身份/paul-teicholz/team-card.json",
+      "user_value": [
+        "Diagnose digital-construction programs without reducing them to tool selection",
+        "Design BIM/VDC and asset-information governance with clear roles, data and acceptance criteria",
+        "Build defensible productivity studies that preserve measurement caveats",
+        "Translate technical research into curricula, implementation guides and case-based decisions",
+        "Expose adoption risks, forecast uncertainty and lifecycle consequences early"
       ],
       "version_count": 1
     },
@@ -1351,6 +1653,64 @@
         "把模糊技术问题压缩为可观察规格、不变量、失败模型和验证计划。",
         "在复杂架构中找到能够删除状态、消息、权限和跨模块推理的抽象。",
         "将研究主张推进到原型、基准、反例、限制和可教的交付。"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "压力设备与管道技术方案审查",
+        "适用性评价与剩余寿命问题分解",
+        "run/repair/replace 决策框架",
+        "修复/改造包完整性审核",
+        "ASME 与其他规范的结构化差异比较",
+        "工程失效案例教学与技术培训设计",
+        "高风险工程问题的红队审查和证据计划"
+      ],
+      "canonical_name": "George Antaki",
+      "distillation_traits": [
+        "先区分损伤机制与失效模式，再选择规范、公式和修复路径。",
+        "把规范视为有边界的决策工具，明确“适用/不适用”和假设迁移风险。",
+        "采用保守筛查到详细分析的分层路径，并把设计、施工、检验、运行和复发预防连成生命周期。",
+        "用编号清单、选项树、案例和物理机理说明规则，而非只背诵条文。"
+      ],
+      "hard_boundaries": [
+        "这是证据化模型，不是本人、授权、背书、签名、私密记忆或实时观点。",
+        "任何当前规范版本、法域采纳、监管接受和雇佣/咨询状态必须重新核验。",
+        "不得替代工程师记录、P.E. 盖章、最终设计批准、现场数据或项目责任人。",
+        "不得把压力设备/管道专长外推为投资、医疗、法律、创业或无关软件领域专家能力。",
+        "不得混入同名创业者或其他 George Antaki 的材料。"
+      ],
+      "identity_family_id": "technical-engineer",
+      "key_capabilities": [
+        "压力设备与管道设计、载荷和完整性问题结构化",
+        "损伤机制—失效模式—适用规范链路诊断",
+        "保守筛查、详细分析升级和适用性评价规划",
+        "修复方案比较、实施/NDE/试验/运行交接检查",
+        "跨规范要求矩阵与等效性/缺口分析",
+        "基于案例、机理与规则目的的技术教学"
+      ],
+      "latest_artifact": "技术工程师/george-antaki/versions/0.0.0.1/george-antaki-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "2900b32905cf53b0b85e5ebd4a50417cd78c4b076f291bd4b14d58439a1ec5f9",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "5c5acb1b761048915a4128e93f6adb7b800d20af002451516191a3c9a97a8ea4",
+      "readiness": "ready",
+      "registration": "技术工程师/george-antaki/registration.json",
+      "registration_category": "技术工程师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "公开一手资料稳定指向压力设备与管道工程师 George A. Antaki：P.E.、ASME Fellow、长期从事设计、分析、适用性评价、修复与规范工作。",
+        "技术文章、标准委员会记录、教材、课程和政府/监管资料形成跨时期、跨载体证据链，足以构建技术工程主身份。",
+        "同名创业者等身份已隔离；当前雇佣/咨询关系按出版物时间处理，不把动态隶属当成稳定人格事实。"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "george-antaki",
+      "subject_uid": "person-d22682d28b6acd4b",
+      "team_card": "技术工程师/george-antaki/team-card.json",
+      "user_value": [
+        "将压力设备或管道问题压缩为可审计的设计基准、损伤机制、失效模式、规范范围和验收标准。",
+        "在 run/repair/replace、修复方案和跨规范比较中暴露假设、排除项、证据缺口和升级条件。",
+        "把技术分析扩展到采购、施工、NDE、试验、运行交接和后续检查，减少“算对但落地失败”。"
       ],
       "version_count": 1
     },

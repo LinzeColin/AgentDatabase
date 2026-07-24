@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:georgeantaki",
+  "canonical_name": "George Antaki",
+  "identity_family_id": "technical-engineer",
+  "identity_mode": "single",
+  "registration_category": "技术工程师",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "george-antaki",
+  "subject_uid": "person-d22682d28b6acd4b",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/george-antaki-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T07:00:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0",
+      "outer_sha256": "2900b32905cf53b0b85e5ebd4a50417cd78c4b076f291bd4b14d58439a1ec5f9",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/george-antaki-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "5c5acb1b761048915a4128e93f6adb7b800d20af002451516191a3c9a97a8ea4",
+      "runtime_size_bytes": 71258,
+      "size_bytes": 534243
+    }
+  ]
+}

@@ -5,7 +5,7 @@
 ## 当前 canonical roster
 
 <!-- PERSONA-REGISTRY:START -->
-当前唯一登记：**35 个人物**。
+当前唯一登记：**41 个人物**。
 
 | 人物 | 唯一身份 | 版本 | 场景 | 关键能力 | 准备度 |
 |---|---|---|---|---|---|
@@ -20,11 +20,16 @@
 | Christopher Manning | `多重身份` | `0.0.0.1` | NLP/LLM research strategy and experiment design；Technical architecture and benchmark review | Frame NLP/LLM research questions as measurable phenomena, representations, baselines and falsifiable experiments.；Review model architectures, objectives, datasets and benchmarks with error, calibration, factuality and transfer controls. | `ready` |
 | Dan Gelbart | `多重身份` | `0.0.0.1` | 技术架构与故障诊断；实验与原型计划 | 跨物理域功能分解与误差路径建模；快速原型与直接测量闭环 | `ready` |
 | David Packard | `多重身份` | `0.0.0.1` | Company strategy and product-field selection；Leadership, organization design and management systems | Contribution-gated opportunity screening；Management-by-objectives operating design | `ready` |
+| Donald G. Reinertsen | `多重身份` | `0.0.0.1` | 产品开发经济学与项目组合排序；研发流、队列、WIP、批量与反馈诊断 | Cost of Delay 与经济共同尺度建模；排队、利用率、容量缓冲与 WIP 控制 | `ready` |
 | Edward O. Thorp（爱德华·索普） | `多重身份` | `0.0.0.1` | 量化或基本面投资方案审查；研究假设、实验与原型设计 | 状态变量建模与判别实验；概率优势、Kelly仓位与破产风险 | `ready` |
+| Harry Bhadeshia | `多重身份` | `0.0.0.1` | phase transformation and physical metallurgy analysis；steel alloy and heat-treatment concept design | thermodynamics-kinetics-microstructure-property reasoning；bainite, martensite, pearlite and multicomponent steel analysis | `ready` |
+| Karen Spärck Jones | `多重身份` | `0.0.0.1` | 搜索、排序、RAG、NLP与自动摘要方案评审；benchmark、共享任务和离线/在线评测设计 | 任务—系统角色建模；信息检索与概率证据分析 | `ready` |
 | Kent Beck | `多重身份` | `0.0.0.1` | TDD and test-strategy design；Refactoring and evolutionary architecture review | Software design and refactoring economics；Test-driven development and feedback-loop design | `ready` |
 | Martin Fischer | `多重身份` | `0.0.0.1` | VDC/BIM 战略与实施路线图；产品—组织—流程诊断 | 生命周期价值与业务目标建模；POP 系统分析 | `ready` |
 | Martin Fowler / 马丁·福勒 | `多重身份` | `0.0.0.1` | 软件架构与微服务/单体取舍评审；重构、技术债与遗留系统渐进迁移 | 小步保持行为的重构和迁移规划；架构收益、成本、前置条件和失败模式分析 | `ready` |
 | Michael J. Mauboussin | `多重身份` | `0.0.0.1` | 公司研究与价格隐含预期分析；资本配置、并购、回购和再投资评估 | Expectations Investing / reverse DCF；ROIC与资本成本驱动的价值创造分析 | `ready` |
+| Omar Khattab | `多重身份` | `0.0.0.1` | research-problem-solving；general-agentic-work | 多向量与晚交互检索系统；检索增强与多阶段 NLP 系统 | `ready` |
+| Paul Michael Teicholz | `多重身份` | `0.0.0.1` | BIM/VDC strategy and implementation review；AEC information architecture and interoperability | Project-control and performance-measurement framing；Cross-discipline information and interface architecture | `ready` |
 | Rich Hickey | `多重身份` | `0.0.0.1` | 软件与数据系统架构评审；语言、API 与库设计 | 把需求改写为问题、约束、非目标、替代方案与证伪条件；识别概念、职责、位置、时间和执行策略的缠结 | `ready` |
 | Robert A. Kindler | `多重身份` | `0.0.0.1` | M&A strategy and transaction screening；board and corporate-governance decision support | legal-commercial dual-track analysis；transaction lifecycle and stage-gate design | `ready` |
 | Sam Walton | `多重身份` | `0.0.0.1` | Retail and multi-site strategy；Inventory and supply-chain diagnosis | Unit-economics flywheel mapping；Store-cluster and distribution-density planning | `ready` |
@@ -32,6 +37,7 @@
 | Simon Willison | `多重身份` | `0.0.0.1` | 技术方案与代码变更审查；coding-agent 工作流设计与评测 | Python/SQLite/CLI 开源工程工作系统；测试驱动、可回退、可审查的变更与发布 | `ready` |
 | Stephen E. Robertson | `多重身份` | `0.0.0.1` | 信息检索与搜索架构评审；排序/过滤/告警实验设计 | 概率相关性与排序原则分析；BM25/BM25F 概念与工程取舍 | `ready` |
 | Barbara Liskov | `技术工程师` | `0.0.0.1` | research-problem-solving；technical-architecture | 数据抽象与行为规格；模块化与局部推理 | `ready` |
+| George Antaki | `技术工程师` | `0.0.0.1` | 压力设备与管道技术方案审查；适用性评价与剩余寿命问题分解 | 压力设备与管道设计、载荷和完整性问题结构化；损伤机制—失效模式—适用规范链路诊断 | `ready` |
 | R. Keith Mobley | `技术工程师` | `0.0.0.1` | research-problem-solving；strategy-decision | 全生命周期资产价值与维护战略诊断；正常状态、失效模式和状态监测设计 | `ready` |
 | Howard Marks | `投资资本家` | `0.0.0.1` | 公司与证券研究；组合风险审查 | 价格—价值与隐含预期分析；风险分布和压力测试 | `ready` |
 | Joel Greenblatt | `投资资本家` | `0.0.0.1` | 公司研究与估值备忘录；特殊情形研究计划 | 现金流与资本回报驱动的企业估值；结构性错价诊断 | `ready` |

@@ -1,0 +1,26 @@
+{
+  "canonical_key": "historical:karenspärckjones",
+  "canonical_name": "Karen Spärck Jones",
+  "identity_family_id": "multi-identity",
+  "identity_mode": "multi",
+  "registration_category": "多重身份",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "karen-sparck-jones",
+  "subject_uid": "person-f6dff6b8348b94fa",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/karen-sparck-jones-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T05:36:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0",
+      "outer_sha256": "6ae60dd76362bd2ad3d1248c0ca59b97b6b551f545154c518aa42cc20f1dac0a",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/karen-sparck-jones-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "2981deb8756fd9ec5c41d9add6d4df61cb4fc39c3059ce7c0e9c53e55b65a786",
+      "runtime_size_bytes": 69848,
+      "size_bytes": 80488
+    }
+  ]
+}

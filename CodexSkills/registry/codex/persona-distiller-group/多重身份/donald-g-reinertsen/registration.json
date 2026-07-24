@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:donaldgreinertsen",
+  "canonical_name": "Donald G. Reinertsen",
+  "identity_family_id": "multi-identity",
+  "identity_mode": "multi",
+  "registration_category": "多重身份",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "donald-g-reinertsen",
+  "subject_uid": "person-10c4cf2fcb38e04f",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/donald-g-reinertsen-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T04:40:50Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.1",
+      "outer_sha256": "cfbe52ad0e2598a60f27848440b0ddc9eecdf8d49ace9fec3f50cb34eccf9689",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/donald-g-reinertsen-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "1ac5ea86354fff974a327cc3c0f6a51ed2c0b3dac53af507a81a86980b54fa3b",
+      "runtime_size_bytes": 70990,
+      "size_bytes": 82407
+    }
+  ]
+}

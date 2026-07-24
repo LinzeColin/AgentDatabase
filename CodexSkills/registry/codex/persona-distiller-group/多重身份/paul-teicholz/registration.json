@@ -1,0 +1,26 @@
+{
+  "canonical_key": "historical:paulmichaelteicholz",
+  "canonical_name": "Paul Michael Teicholz",
+  "identity_family_id": "multi-identity",
+  "identity_mode": "multi",
+  "registration_category": "多重身份",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "paul-teicholz",
+  "subject_uid": "person-abe609b7406793cd",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/paul-teicholz-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T04:52:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0",
+      "outer_sha256": "6423410e063961dcde13b31ff968c36a5e469d1eef187ea7af2e86bc0020d113",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/paul-teicholz-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "7927e599b151ed2417e618814da608ced0c05fc139435131f8ffa96bb4d4dc7a",
+      "runtime_size_bytes": 73914,
+      "size_bytes": 89806
+    }
+  ]
+}
