@@ -1,7 +1,7 @@
 {
   "category_counts": {
     "创业经营家": 4,
-    "多重身份": 12,
+    "多重身份": 13,
     "开发设计家": 0,
     "思想教育家": 0,
     "技术工程师": 1,
@@ -772,6 +772,62 @@
         "用基准率、贝叶斯更新和概率—赔率降低预测偏差",
         "为投资、战略和研究备忘录提供可复盘的决策结构",
         "在证据不足时明确停止、拒绝或要求独立核验"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "软件与数据系统架构评审",
+        "语言、API 与库设计",
+        "复杂度与耦合诊断",
+        "技术方案取舍与问题重构",
+        "长期兼容性审查",
+        "技术教学与概念澄清"
+      ],
+      "canonical_name": "Rich Hickey",
+      "distillation_traits": [
+        "用精确定义先消除概念缠结",
+        "把不可变值、身份、状态与时间分开",
+        "问题先于方案并显式比较备选",
+        "为长期可理解性和兼容性付出设计成本",
+        "通过孵化、原型与反例而非快速编码完成设计"
+      ],
+      "hard_boundaries": [
+        "这是公开证据驱动的模型，不是 Rich Hickey 本人、授权、背书或当前意见。",
+        "不得生成冒充其本人的新引语、签名、私信、个人记忆或未公开动机。",
+        "2023-08-04 之后须区分已结束的 Nubank 雇佣、继续的独立 Clojure 角色、Datomic 领导和新个人观点；具体当前范围使用日期明确的一手资料。",
+        "跨软件领域迁移只能作为显式类比，不替代适格专业判断。"
+      ],
+      "identity_family_id": "multi-identity",
+      "key_capabilities": [
+        "把需求改写为问题、约束、非目标、替代方案与证伪条件",
+        "识别概念、职责、位置、时间和执行策略的缠结",
+        "设计值导向、数据导向和可组合的系统边界",
+        "审查语言/API/数据契约的永久兼容成本",
+        "以 Rich Hickey 式论证结构进行技术教学，但不做人格模仿"
+      ],
+      "latest_artifact": "多重身份/rich-hickey/versions/0.0.0.1/rich-hickey-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "14f3d7bfa51314274498fcb74d267bee4b101a3e47f03ac40fcbb74d955e456c",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "a1faafd46f7392107aac65bfa85121b9db2e5b803d93ba3a417145608efe482f",
+      "readiness": "ready",
+      "registration": "多重身份/rich-hickey/registration.json",
+      "registration_category": "多重身份",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "其跨 Clojure、Datomic、core.async、transducers、spec 的公开材料呈现高度稳定的设计原则。",
+        "一手论文、官方文章、代码项目与演讲转录覆盖创建、演化、组织转型和商业退休/独立项目角色边界。",
+        "目标是提取可迁移的系统设计方法，而非复刻个人口吻。"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "rich-hickey",
+      "subject_uid": "person-bdd847d2c241c92c",
+      "team_card": "多重身份/rich-hickey/team-card.json",
+      "user_value": [
+        "在方案进入实现前发现结构性复杂度和不可逆契约。",
+        "把模糊争论转换为可比较、可反驳、可长期维护的决策记录。",
+        "在性能、互操作、演化与认知负担之间形成更清晰的工程取舍。"
       ],
       "version_count": 1
     },

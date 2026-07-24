@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:richhickey",
+  "canonical_name": "Rich Hickey",
+  "identity_family_id": "multi-identity",
+  "identity_mode": "multi",
+  "registration_category": "多重身份",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "rich-hickey",
+  "subject_uid": "person-bdd847d2c241c92c",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/rich-hickey-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T01:10:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0",
+      "outer_sha256": "14f3d7bfa51314274498fcb74d267bee4b101a3e47f03ac40fcbb74d955e456c",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/rich-hickey-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "a1faafd46f7392107aac65bfa85121b9db2e5b803d93ba3a417145608efe482f",
+      "runtime_size_bytes": 92748,
+      "size_bytes": 107904
+    }
+  ]
+}

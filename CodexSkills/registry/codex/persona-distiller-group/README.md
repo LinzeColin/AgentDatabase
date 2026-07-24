@@ -56,7 +56,7 @@
 ## 当前登记
 
 <!-- PERSONA-REGISTRY:START -->
-当前唯一登记：**28 个人物**。
+当前唯一登记：**29 个人物**。
 
 | 唯一目录 | 人物数 |
 |---|---:|
@@ -66,8 +66,8 @@
 | `开发设计家/` | 0 |
 | `思想教育家/` | 0 |
 | `政治法律家/` | 5 |
-| `多重身份/` | 12 |
-| **总计** | **28** |
+| `多重身份/` | 13 |
+| **总计** | **29** |
 
 | 人物 | 唯一身份 | 版本 | 选入原因 | 最值得蒸馏的特点 | 对用户的利益/帮助 | 应用场景 | 关键能力 | 完整 ZIP |
 |---|---|---|---|---|---|---|---|---|
@@ -84,6 +84,7 @@
 | Kent Beck | `多重身份` | `0.0.0.1` | Four decades of inspectable software artifacts connect ideas to executable practice.；Public failures and adaptations reveal update behavior, not only polished doctrine. | Shrinks uncertainty through rapid, specific feedback.；Separates structural change from behavioral change to preserve intent and reversibility. | Produces executable plans with tests, baselines, rollback, and stopping rules.；Improves code and design reviews without reducing them to style imitation. | TDD and test-strategy design；Refactoring and evolutionary architecture review | Software design and refactoring economics；Test-driven development and feedback-loop design | [ZIP](多重身份/kent-beck/versions/0.0.0.1/kent-beck-persona-distillation-delivery-v0.0.0.1.zip) |
 | Martin Fowler / 马丁·福勒 | `多重身份` | `0.0.0.1` | 公开作品跨三十年持续覆盖重构、架构、敏捷技术实践与企业软件设计。；第一方资料对工作方法、编辑准则、证据局限和职业边界有明确自述。 | 以未来变化成本解释设计与内部质量。；用小步、快速反馈和安全网管理复杂改变。 | 把抽象架构争论转化为可执行、可验证、可回滚的演进路径。；识别敏捷仪式与真实工程能力之间的缺口。 | 软件架构与微服务/单体取舍评审；重构、技术债与遗留系统渐进迁移 | 小步保持行为的重构和迁移规划；架构收益、成本、前置条件和失败模式分析 | [ZIP](多重身份/martin-fowler/versions/0.0.0.1/martin-fowler-persona-distillation-delivery-v0.0.0.1.zip) |
 | Michael J. Mauboussin | `多重身份` | `0.0.0.1` | 适用于需要把估值、资本配置与决策科学放进同一分析框架的任务；在不确定性、概率、基准率和反馈方面拥有长期、跨来源一致的公开方法体系 | 从价格或现状反推隐含预期，而非先猜目标值；持续追问“与什么相比”并使用外部参考类 | 把模糊商业故事转换为可检验的价值驱动因素和情景；用基准率、贝叶斯更新和概率—赔率降低预测偏差 | 公司研究与价格隐含预期分析；资本配置、并购、回购和再投资评估 | Expectations Investing / reverse DCF；ROIC与资本成本驱动的价值创造分析 | [ZIP](多重身份/michael-mauboussin/versions/0.0.0.1/michael-mauboussin-persona-distillation-delivery-v0.0.0.1.zip) |
+| Rich Hickey | `多重身份` | `0.0.0.1` | 其跨 Clojure、Datomic、core.async、transducers、spec 的公开材料呈现高度稳定的设计原则。；一手论文、官方文章、代码项目与演讲转录覆盖创建、演化、组织转型和商业退休/独立项目角色边界。 | 用精确定义先消除概念缠结；把不可变值、身份、状态与时间分开 | 在方案进入实现前发现结构性复杂度和不可逆契约。；把模糊争论转换为可比较、可反驳、可长期维护的决策记录。 | 软件与数据系统架构评审；语言、API 与库设计 | 把需求改写为问题、约束、非目标、替代方案与证伪条件；识别概念、职责、位置、时间和执行策略的缠结 | [ZIP](多重身份/rich-hickey/versions/0.0.0.1/rich-hickey-persona-distillation-delivery-v0.0.0.1.zip) |
 | Robert A. Kindler | `多重身份` | `0.0.0.1` | Unique career spanning elite M&A legal practice and senior investment-banking leadership.；Public evidence supports a transferable interface between document precision, board strategy and transaction execution. | dual legal-and-banker lens；separates strategic need from execution feasibility | Review M&A and governance decisions without collapsing legal and commercial dimensions.；Build board-ready decision memos with explicit authorization, risk and stop conditions. | M&A strategy and transaction screening；board and corporate-governance decision support | legal-commercial dual-track analysis；transaction lifecycle and stage-gate design | [ZIP](多重身份/robert-a-kindler/versions/0.0.0.1/robert-a-kindler-persona-distillation-delivery-v0.0.0.1.zip) |
 | Sam Walton | `多重身份` | `0.0.0.1` | Multi-unit operating systems with customer value, inventory, logistics, field feedback or frontline execution；Evidence-grounded strategy teaching that needs concrete operating mechanisms | Customer-value flywheel；Density-before-dispersion expansion | Converts broad growth ideas into measurable pilots and rollout gates；Connects pricing, turns, logistics and organization in one operating model | Retail and multi-site strategy；Inventory and supply-chain diagnosis | Unit-economics flywheel mapping；Store-cluster and distribution-density planning | [ZIP](多重身份/sam-walton/versions/0.0.0.1/sam-walton-persona-distillation-delivery-v0.0.0.1.zip) |
 | Simon Willison | `多重身份` | `0.0.0.1` | 需要以可执行证据、测试和公开工作流审查软件与 AI 工程任务；需要把复杂技术解释为可运行示例、注释性报告和开放问题 | 测试、文档、issue、release notes 与 TIL 构成外部认知系统；从具体用户问题生长小而可组合的 CLI、SQLite 与插件工具 | 把模糊技术想法转成可验证的最小实现与发布闭环；为 AI 辅助编码建立测试、人工演练、provenance 和停止规则 | 技术方案与代码变更审查；coding-agent 工作流设计与评测 | Python/SQLite/CLI 开源工程工作系统；测试驱动、可回退、可审查的变更与发布 | [ZIP](多重身份/simon-willison/versions/0.0.0.1/simon-willison-persona-distillation-delivery-v0.0.0.1.zip) |
