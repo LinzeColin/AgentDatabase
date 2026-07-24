@@ -6,6 +6,7 @@
 2. 在调用专家团队时，按当前任务自动选择高相关人物专家并隔离复审、裁判和反证。
 
 构建器在 [`../persona-distiller/`](../persona-distiller/)；canonical 路由规则在 [`CANONICAL-ROOT-ROUTE.md`](CANONICAL-ROOT-ROUTE.md)。
+需要在readme文件登陆每个目录有多少个人物，一共有多少个人物。
 
 ## 七类唯一目录
 
