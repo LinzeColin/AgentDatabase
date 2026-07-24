@@ -1,0 +1,76 @@
+{
+  "observed_at": "2026-07-24T09:35:16Z",
+  "releases": [
+    {
+      "assets": [
+        {
+          "digest": "sha256:c0f7517b977111324df44066f83fa6b514d715f590f67376b9103fa83a8a739e",
+          "id": 483168055,
+          "name": "codex-session-history-20260703T063940Z.tar.gz",
+          "size": 925338589,
+          "state": "uploaded"
+        }
+      ],
+      "draft": false,
+      "prerelease": false,
+      "tag_name": "codex-sessions-20260703"
+    },
+    {
+      "assets": [
+        {
+          "digest": "sha256:1c5b34148fc1f9a23925f910c251bd1455550756a84451fbe2665806adf6ceab",
+          "id": 483158723,
+          "name": "current-mac-session-history-20260630.tar.gz",
+          "size": 38293927,
+          "state": "uploaded"
+        },
+        {
+          "digest": "sha256:bb8489bc3705f9f23d735608b14baf4844ceb6c7d9c4a85d6774c74680ea31f9",
+          "id": 483160285,
+          "name": "old-mac-session-history-20260630.tar.gz",
+          "size": 839096318,
+          "state": "uploaded"
+        }
+      ],
+      "draft": false,
+      "prerelease": false,
+      "tag_name": "old-mac-20260630"
+    },
+    {
+      "assets": [
+        {
+          "digest": "sha256:52f204dd8d78b76a79c6fc37e3e09987d3ab682c87098da017b894dd88c3a868",
+          "id": 483178213,
+          "name": "chatgpt_raw_export_2026-07-07.zip",
+          "size": 1473421021,
+          "state": "uploaded"
+        }
+      ],
+      "draft": false,
+      "prerelease": false,
+      "tag_name": "raw-archives-20260708"
+    }
+  ],
+  "repository": {
+    "archived": false,
+    "full_name": "LinzeColin/Private-Database",
+    "private": true,
+    "visibility": "PRIVATE"
+  },
+  "repository_privacy": {
+    "high_risk_scan": {
+      "high_risk_secret_hit_count": 0,
+      "status": "PASS",
+      "tracked_raw_private_file_count": 0
+    },
+    "public_raw_audit": {
+      "credential_or_private_text_file_count": 0,
+      "invalid_binary_marker_file_count": 0,
+      "invalid_json_file_count": 0,
+      "oversize_file_count": 0,
+      "status": "PASS",
+      "unmarked_binary_file_count": 0
+    }
+  },
+  "schema_version": "dynamic_profile.stage2_github_evidence.v1"
+}

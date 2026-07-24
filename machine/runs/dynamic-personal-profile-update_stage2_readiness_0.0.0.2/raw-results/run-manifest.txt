@@ -1,0 +1,5 @@
+evidence_path=machine/runs/dynamic-personal-profile-update_stage2_readiness_0.0.0.2/raw-results/stage2-readiness-evidence.json
+report_path=machine/runs/dynamic-personal-profile-update_stage2_readiness_0.0.0.2/raw-results/stage2-readiness-report.json
+evidence_sha256=ab4f77b523c56bfbf2e2a492ec950f79dae0093d613ee87b19300b39ff12231a
+report_sha256=ebef040ffa0d56e18950c6f1e357e9b213bc77d1cad7bd97af4091871906aed1
+returncode=0
