@@ -1,0 +1,26 @@
+{
+  "canonical_key": "historical:davidpackard",
+  "canonical_name": "David Packard",
+  "identity_family_id": "multi-identity",
+  "identity_mode": "multi",
+  "registration_category": "多重身份",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "david-packard",
+  "subject_uid": "person-bf71eaacc853bbd1",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/david-packard-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T00:00:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0-release-candidate",
+      "outer_sha256": "3792ae71473f0accd99e0da04dffa11f6bd6c77be9d5778abfe93cf3acf930cc",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/david-packard-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "7549c7700a824088e135fed5e9169bff71602463e943bba957fc528a2c362bda",
+      "runtime_size_bytes": 76432,
+      "size_bytes": 87601
+    }
+  ]
+}

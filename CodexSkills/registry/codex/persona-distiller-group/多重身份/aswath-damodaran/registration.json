@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:aswathdamodaran",
+  "canonical_name": "Aswath Damodaran",
+  "identity_family_id": "multi-identity",
+  "identity_mode": "multi",
+  "registration_category": "多重身份",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "aswath-damodaran",
+  "subject_uid": "person-44e9da7e6fbcb15e",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/aswath-damodaran-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-23T21:38:49Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.1",
+      "outer_sha256": "2189da19541ca1230a30de8b44454c08a5028a39407cb2157576d0dbfdc8503c",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/aswath-damodaran-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "68f8470e91a5d5e54c46b495131684ad17f3824a207c4aa7bd9f8cf20489bcca",
+      "runtime_size_bytes": 72382,
+      "size_bytes": 86557
+    }
+  ]
+}

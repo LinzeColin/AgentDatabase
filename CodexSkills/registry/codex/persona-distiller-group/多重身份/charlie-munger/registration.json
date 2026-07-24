@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:charliemunger",
+  "canonical_name": "Charlie Munger",
+  "identity_family_id": "multi-identity",
+  "identity_mode": "multi",
+  "registration_category": "多重身份",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "charlie-munger",
+  "subject_uid": "person-efb4000038a75aba",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/charlie-munger-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T00:00:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0-evidence",
+      "outer_sha256": "b34b84f8f61eb2c60a8fce0f15729700036251e2bfe8acae62b24333130a5a03",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/charlie-munger-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "3a75a1ab5b3742f86049d052ba9667198f1b8cb8bf21632f7d47c0400bcd2e5c",
+      "runtime_size_bytes": 67526,
+      "size_bytes": 77491
+    }
+  ]
+}

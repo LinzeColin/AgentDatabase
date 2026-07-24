@@ -42,14 +42,12 @@ def registry_block(index: dict[str, Any], *, route_view: bool) -> str:
             "当前登记：**0 个人物**。路由时必须返回 `insufficient_roster`，不得虚构候选。\n"
             f"{END}"
         )
-    lines = [
-        START,
-        f"当前唯一登记：**{len(products)} 个人物**。",
-        "",
-    ]
+    lines = [START]
     if route_view:
         lines.extend(
             [
+                f"当前唯一登记：**{len(products)} 个人物**。",
+                "",
                 "| 人物 | 唯一身份 | 版本 | 场景 | 关键能力 | 准备度 |",
                 "|---|---|---|---|---|---|",
             ]
@@ -68,6 +66,7 @@ def registry_block(index: dict[str, Any], *, route_view: bool) -> str:
     else:
         lines.extend(
             [
+                "",
                 "| 人物 | 唯一身份 | 版本 | 选入原因 | 最值得蒸馏的特点 | 对用户的利益/帮助 | 应用场景 | 关键能力 | 完整 ZIP |",
                 "|---|---|---|---|---|---|---|---|---|",
             ]

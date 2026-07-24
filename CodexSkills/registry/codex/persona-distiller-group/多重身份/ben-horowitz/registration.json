@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:benhorowitz",
+  "canonical_name": "Ben Horowitz",
+  "identity_family_id": "multi-identity",
+  "identity_mode": "multi",
+  "registration_category": "多重身份",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "ben-horowitz",
+  "subject_uid": "person-5923694696340ab4",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/ben-horowitz-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T00:00:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0",
+      "outer_sha256": "e63091d1a437dd339a40000f8affbf70fcfd3d8c83f3e28ac03f92f9695ee69d",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/ben-horowitz-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "804f7e221fb8bfa4cff0255cd92f29e3e2394bce5298215a0c7e187eaf490157",
+      "runtime_size_bytes": 74828,
+      "size_bytes": 88869
+    }
+  ]
+}

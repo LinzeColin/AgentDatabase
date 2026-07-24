@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:sethklarman",
+  "canonical_name": "Seth Klarman",
+  "identity_family_id": "investor-capital-allocator",
+  "identity_mode": "single",
+  "registration_category": "投资资本家",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "seth-klarman",
+  "subject_uid": "person-7f6b524aa85e5b7a",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/seth-klarman-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T00:00:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0-evidence-snapshot",
+      "outer_sha256": "b147861ccf54761b7263292148d067525f02a849ad48bfca10084b799a7efa34",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/seth-klarman-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "de3c403f60159b7d2669700fc177ac568f7caee24781a4a7e6701f8d815ecc7b",
+      "runtime_size_bytes": 73040,
+      "size_bytes": 81978
+    }
+  ]
+}

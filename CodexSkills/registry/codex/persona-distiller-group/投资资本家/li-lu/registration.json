@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:李录lilu",
+  "canonical_name": "李录 Li Lu",
+  "identity_family_id": "investor-capital-allocator",
+  "identity_mode": "single",
+  "registration_category": "投资资本家",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "li-lu",
+  "subject_uid": "person-5803388189728a4f",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/li-lu-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T00:00:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0-release-candidate",
+      "outer_sha256": "1b04ee257c771b2ab46d711460ba18c605c7810f8fb7e9fbc6b4eea5af4253bf",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/li-lu-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "2fb018b6c28cea17016a6f35991cc9337fd2eafcc51cf45e55b8158b6b9162b7",
+      "runtime_size_bytes": 67670,
+      "size_bytes": 78692
+    }
+  ]
+}

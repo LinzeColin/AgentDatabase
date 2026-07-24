@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:michaeljmauboussin",
+  "canonical_name": "Michael J. Mauboussin",
+  "identity_family_id": "multi-identity",
+  "identity_mode": "multi",
+  "registration_category": "多重身份",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "michael-mauboussin",
+  "subject_uid": "person-9322333a7db7b397",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/michael-mauboussin-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T00:00:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0",
+      "outer_sha256": "4377f81be76c19e63c4249e6b32bfb3708e92710f131f508503d09574886c5b8",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/michael-mauboussin-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "1742150834f7610c68b6c9c3f47c16d038ae92271e23c8e6382b731ff99e4a05",
+      "runtime_size_bytes": 67406,
+      "size_bytes": 77859
+    }
+  ]
+}

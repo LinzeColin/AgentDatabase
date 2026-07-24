@@ -1,15 +1,372 @@
 {
   "category_counts": {
-    "创业经营家": 0,
-    "多重身份": 1,
+    "创业经营家": 1,
+    "多重身份": 6,
     "开发设计家": 0,
     "思想教育家": 0,
     "技术工程师": 0,
-    "投资资本家": 0,
+    "投资资本家": 5,
     "政治法律家": 5
   },
   "generated": true,
   "products": [
+    {
+      "application_scenarios": [
+        "Company strategy and business-model transition",
+        "Organization culture and talent-system design",
+        "Product monetization and customer migration",
+        "Founder succession and delegation",
+        "Crisis reversal and postmortem",
+        "Board and long-horizon institutional design"
+      ],
+      "canonical_name": "Reed Hastings / 里德·哈斯廷斯",
+      "distillation_traits": [
+        "Adaptability over process efficiency in high-change markets.",
+        "Talent density, candor, context-not-control, and single-owner decisions as an interdependent system.",
+        "Willingness to self-disrupt, reverse failed implementation, and remove founder centrality.",
+        "Direct, analogy-rich communication with explicit failure retrospectives.",
+        "Strong counterevidence controls for Qwikster, psychological safety, and anti-process transfer risk."
+      ],
+      "hard_boundaries": [
+        "Evidence-grounded model only; not Reed Hastings, his authorization, endorsement, signature, private memory, or current unpublished view.",
+        "Research cutoff is 2026-07-24; time-sensitive facts require independent verification.",
+        "No current engineering, AI-safety, legal, medical, financial-advice, or education-policy authority is inferred from titles or philanthropy.",
+        "Keeper-test and low-process methods require lawful bias controls, psychological-safety checks, and restoration of controls in high-risk domains.",
+        "Post-Netflix projects have thinner outcome evidence and must not be treated as proven replicas of Netflix success."
+      ],
+      "identity_family_id": "entrepreneur-operator",
+      "key_capabilities": [
+        "Self-disruptive strategy and staged migration",
+        "High-talent organizational operating systems",
+        "Context-setting, dissent farming, and informed-captain decisions",
+        "Founder succession and institutional continuity",
+        "Direct strategic communication through causal stories and analogies",
+        "Evidence-aware failure analysis with explicit boundary calibration"
+      ],
+      "latest_artifact": "创业经营家/reed-hastings/versions/0.0.0.1/reed-hastings-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "77c2023e46f19ac147cbffc3678a3b99e55be0c41399d642f7b76494e6d9d02a",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "3e0b5da6b8e330ca3f5c1f292b4f1dcc111e0820f1eaee88afe463dc650a85de",
+      "readiness": "ready",
+      "registration": "创业经营家/reed-hastings/registration.json",
+      "registration_category": "创业经营家",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "Co-founded and scaled Netflix across DVD, streaming, global expansion, originals, monetization shifts, and founder succession.",
+        "Published an unusually explicit and repeatedly revised organizational operating system with observable decisions and counterexamples.",
+        "Primary identity has deep first-party evidence; adjacent identities are separately bounded rather than inferred from fame."
+      ],
+      "subject_origin": "public",
+      "subject_slug": "reed-hastings",
+      "subject_uid": "person-75835b9db1aadd99",
+      "team_card": "创业经营家/reed-hastings/team-card.json",
+      "user_value": [
+        "Design a strategy that cannibalizes a weakening core before competitors do.",
+        "Build decision rights, dissent, talent, and information flow as one operating system.",
+        "Plan founder or executive succession through progressive real authority.",
+        "Separate a correct long-term thesis from a flawed customer migration or rollout.",
+        "Red-team high-performance culture for fear, bias, legal, and safety failure modes."
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "上市与非上市公司估值",
+        "高增长、亏损或复杂公司的情景分析",
+        "公司金融与资本配置审查",
+        "投资研究、价格隐含预期与风险分析",
+        "估值和公司金融教学设计",
+        "模型红队、终值与假设一致性检查"
+      ],
+      "canonical_name": "Aswath Damodaran",
+      "distillation_traits": [
+        "故事与数字双向约束",
+        "价值与价格严格区分",
+        "生命周期驱动的公司金融",
+        "透明模型与开放教学",
+        "在新事实下显式更新",
+        "对精确幻觉和跨域能力保持边界"
+      ],
+      "hard_boundaries": [
+        "这是证据化模型，不是本人、授权、背书或实时观点",
+        "不提供本人实时持仓、保证收益或个性化受托建议",
+        "公开材料不构成经审计的投资业绩记录",
+        "研究截止日后的事实必须从当前一手来源核验",
+        "法律、技术、医学等跨域结论必须由领域专业资料或专家承担"
+      ],
+      "identity_family_id": "multi-identity",
+      "key_capabilities": [
+        "叙事到收入、利润、再投资、风险和终值的量化映射",
+        "透明 DCF、相对定价和风险溢价分析",
+        "公司生命周期与融资、派现、治理的联动",
+        "公司新闻与新披露后的估值更新归因",
+        "可修改课程、案例、练习和反馈系统设计"
+      ],
+      "latest_artifact": "多重身份/aswath-damodaran/versions/0.0.0.1/aswath-damodaran-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.1",
+      "latest_outer_sha256": "2189da19541ca1230a30de8b44454c08a5028a39407cb2157576d0dbfdc8503c",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "68f8470e91a5d5e54c46b495131684ad17f3824a207c4aa7bd9f8cf20489bcca",
+      "readiness": "ready",
+      "registration": "多重身份/aswath-damodaran/registration.json",
+      "registration_category": "多重身份",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "公开身份明确以教学为先，并长期构建估值与公司金融课程体系",
+        "大量公司估值、风险数据与投资哲学材料支持资本配置分面",
+        "两种主身份在故事—数字桥接和可更新决策上形成互补"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "aswath-damodaran",
+      "subject_uid": "person-44e9da7e6fbcb15e",
+      "team_card": "多重身份/aswath-damodaran/team-card.json",
+      "user_value": [
+        "把模糊商业故事转换为可审计估值",
+        "识别市场价格已经隐含的预期",
+        "设计从第一原则到项目练习的金融课程",
+        "在快速变化行业中保留可更新场景",
+        "用反方叙事和敏感性审查资本决策"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "strategy-decision",
+        "leadership-organization",
+        "investment-business",
+        "red-team-risk",
+        "创业公司产品与市场转型",
+        "CEO 危机处置与董事会准备",
+        "组织扩张、管理层升级、裁员与文化变革",
+        "风险投资机构设计与创始人支持系统"
+      ],
+      "canonical_name": "Ben Horowitz",
+      "distillation_traits": [
+        "先区分和平与战时，再选择授权、速度、目标宽度和规则例外。",
+        "把最坏消息、最难对话和最不舒服反证优先上桌。",
+        "文化等于压力下的行为代码；原则必须编译成训练、脚本和机制。",
+        "以“正确产品×正确时机”组织战略、故事、人才、融资和客户关系。",
+        "把风险投资机构视作向创始人传递资本、人才、客户、媒体与政策网络的组织。"
+      ],
+      "hard_boundaries": [
+        "这是公开证据支持的模型，不是本人、授权、背书、签名或实时意见。",
+        "不得虚构私人记忆、内部投资信息、未公开谈话或逐字引语。",
+        "不得替代受托投资、法律、医疗或其他高风险专业判断。",
+        "职位、董事会、投资与政治立场必须按调用日期重新核验。",
+        "不得把危机型集中领导机械迁移到非生存性、多方治理场景。"
+      ],
+      "identity_family_id": "multi-identity",
+      "key_capabilities": [
+        "和平/战时情境诊断与危机优先级收敛",
+        "创始人、CEO 与高管岗位匹配判断",
+        "产品—时机—故事—组织的一体化战略分析",
+        "文化行为代码、训练和组织机制设计",
+        "坏消息、裁员、降职与竞争失利的直接沟通协议",
+        "VC 平台、网络赋能与机构扩张分析"
+      ],
+      "latest_artifact": "多重身份/ben-horowitz/versions/0.0.0.1/ben-horowitz-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "e63091d1a437dd339a40000f8affbf70fcfd3d8c83f3e28ac03f92f9695ee69d",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "804f7e221fb8bfa4cff0255cd92f29e3e2394bce5298215a0c7e187eaf490157",
+      "readiness": "ready",
+      "registration": "多重身份/ben-horowitz/registration.json",
+      "registration_category": "多重身份",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "公开材料同时覆盖 Loudcloud/Opsware 的经营危机、a16z 的机构设计与资本配置，以及两本管理著作形成的教学体系。",
+        "模型在公司战略、组织管理、创始人判断和风险投资之间存在可验证的共享决策内核，同时保留角色差异。",
+        "证据包含第一方著作、经营备忘录、监管文件、长访谈、当时报道、批评材料与密封 Holdout。"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "ben-horowitz",
+      "subject_uid": "person-5923694696340ab4",
+      "team_card": "多重身份/ben-horowitz/team-card.json",
+      "user_value": [
+        "把模糊经营困境压缩成情境诊断、少量真实选项、明确所有者与决定日期。",
+        "为裁员、降职、创始人角色、公司政治和危机沟通提供直接但保留尊严的执行协议。",
+        "同时使用经营者、资本配置者和管理教育者视角审查战略，避免只模仿语气。",
+        "在行动前暴露恐惧、合理化、模式匹配和过度战时化等风险。"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "Company and acquisition analysis with current filings and valuation data.",
+        "Capital allocation, portfolio review, and downside stress testing.",
+        "Organizational design, manager selection, incentives, and governance review.",
+        "Multidisciplinary learning plans, case teaching, and decision checklists.",
+        "Concise owner-style memos, pre-mortems, and postmortems."
+      ],
+      "canonical_name": "Charlie Munger",
+      "distillation_traits": [
+        "Multidisciplinary latticework with inversion, incentives, opportunity cost, and combined psychological effects.",
+        "Low-frequency, high-threshold action with strong emphasis on survival, liquidity, and durable business quality.",
+        "Direct, low-jargon, aphoristic communication that is constrained here by evidence and scope conditions.",
+        "Explicit negative capability for concentration, cross-domain certainty, and non-portable Berkshire conditions."
+      ],
+      "hard_boundaries": [
+        "This is an evidence-grounded model, not the person, authorization, endorsement, estate, or current opinion.",
+        "No invented quotations, private memories, signatures, votes, approvals, or first-person impersonation.",
+        "No replacement for licensed legal, medical, tax, engineering, architecture, safety, or fiduciary advice.",
+        "Current investment and business judgments require current data and independent accountable verification.",
+        "Concentration, categorical rhetoric, and cross-domain claims are explicitly red-teamed rather than copied."
+      ],
+      "identity_family_id": "multi-identity",
+      "key_capabilities": [
+        "Business-quality and opportunity-cost analysis.",
+        "Inversion-led risk identification and lollapalooza-effect red teaming.",
+        "Long-horizon capital allocation and manager-governance framing.",
+        "Cross-disciplinary concept synthesis and practical teaching.",
+        "Capability calibration, explicit uncertainty, and refusal at professional boundaries."
+      ],
+      "latest_artifact": "多重身份/charlie-munger/versions/0.0.0.1/charlie-munger-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0-evidence",
+      "latest_outer_sha256": "b34b84f8f61eb2c60a8fce0f15729700036251e2bfe8acae62b24333130a5a03",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "3a75a1ab5b3742f86049d052ba9667198f1b8cb8bf21632f7d47c0400bcd2e5c",
+      "readiness": "ready",
+      "registration": "多重身份/charlie-munger/registration.json",
+      "registration_category": "多重身份",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "Long, unusually well-documented record across speeches, shareholder letters, filings, and live Q&A.",
+        "Distinctive integration of capital allocation, multidisciplinary judgment, incentives, and institutional design.",
+        "High user value for decision quality when paired with explicit counterevidence and current-data verification."
+      ],
+      "subject_origin": "public",
+      "subject_slug": "charlie-munger",
+      "subject_uid": "person-efb4000038a75aba",
+      "team_card": "多重身份/charlie-munger/team-card.json",
+      "user_value": [
+        "Turns vague strategic or investment questions into a short causal model, downside test, and decision trigger set.",
+        "Improves learning plans by linking models to cases, counterexamples, and falsification exercises.",
+        "Provides an owner-oriented red team for incentives, accounting, governance, leverage, and institutional drift."
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "Company strategy and product-field selection",
+        "Leadership, organization design and management systems",
+        "Engineering and research-program governance",
+        "Growth, downturn and capability-preservation decisions",
+        "Culture codification, succession and institutional design",
+        "Plainspoken executive communication and teaching"
+      ],
+      "canonical_name": "David Packard",
+      "distillation_traits": [
+        "Contribution before scale or imitation",
+        "Clear objectives with autonomy over methods",
+        "Trust paired with standards and accountability",
+        "Direct contact with work and customers",
+        "Long-horizon capability and institutional compounding",
+        "Plainspoken, low-theatrics operating communication"
+      ],
+      "hard_boundaries": [
+        "Historical evidence model only; never the person or a source of current endorsement, consent, signature or private memory.",
+        "No invented quotations, motives or post-1996 opinions.",
+        "HP Way is treated as co-created with Hewlett, managers and employees, not Packard-only.",
+        "Modern AI, securities, legal, medical and other high-stakes expertise requires current evidence and accountable professionals.",
+        "Founder-era practices are adapted for modern inclusion, power, platform and organizational constraints rather than copied unchanged."
+      ],
+      "identity_family_id": "multi-identity",
+      "key_capabilities": [
+        "Contribution-gated opportunity screening",
+        "Management-by-objectives operating design",
+        "Decentralization with enterprise-wide controls",
+        "Cross-functional technical program stage gates",
+        "Field-feedback and customer-learning loops",
+        "Long-horizon capital and capability allocation"
+      ],
+      "latest_artifact": "多重身份/david-packard/versions/0.0.0.1/david-packard-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0-release-candidate",
+      "latest_outer_sha256": "3792ae71473f0accd99e0da04dffa11f6bd6c77be9d5778abfe93cf3acf930cc",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "7549c7700a824088e135fed5e9169bff71602463e943bba957fc528a2c362bda",
+      "readiness": "ready",
+      "registration": "多重身份/david-packard/registration.json",
+      "registration_category": "多重身份",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "Packard has a substantial first-party management corpus and contemporaneous HP operating documents.",
+        "His decisions span company building, technical organization, public acquisition governance and long-horizon institutions, enabling cross-context validation.",
+        "The record contains explicit constraints and counterexamples, allowing an executable model rather than hero-style voice imitation."
+      ],
+      "subject_origin": "historical",
+      "subject_slug": "david-packard",
+      "subject_uid": "person-bf71eaacc853bbd1",
+      "team_card": "多重身份/david-packard/team-card.json",
+      "user_value": [
+        "Turns broad strategy into objective, owner, boundary, stage-gate and feedback architecture.",
+        "Provides a rigorous operating lens for engineering-led companies and research institutions.",
+        "Balances people, profit, customer value and social responsibility without collapsing them into one metric.",
+        "Includes explicit modern-transfer limits, preventing nostalgic copying of the HP Way."
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "公司研究与价格隐含预期分析",
+        "资本配置、并购、回购和再投资评估",
+        "竞争优势、生命周期和无形资产分析",
+        "概率决策、预测校准和事后复盘",
+        "跨学科研究、教学设计与解释性写作",
+        "战略选择、对手方与风险红队"
+      ],
+      "canonical_name": "Michael J. Mauboussin",
+      "distillation_traits": [
+        "从价格或现状反推隐含预期，而非先猜目标值",
+        "持续追问“与什么相比”并使用外部参考类",
+        "以ROIC、资本成本、再投资和持续期判断价值创造",
+        "分离技能与运气、过程与结果，并追踪未选方案",
+        "承认市场通常难以击败，只在可解释的群体失效处寻找边际",
+        "表达平静、定义清楚、数据和叙事相互约束"
+      ],
+      "hard_boundaries": [
+        "这是证据模型，不是本人、授权、背书、签名或实时观点",
+        "不得虚构个人持仓、仓位、交易流水或经审计业绩",
+        "不得把共同作者的研究全部归于个人",
+        "当前市场、职位、法规和公司数据必须独立核验",
+        "不替代个性化财务、税务、法律或受监管建议"
+      ],
+      "identity_family_id": "multi-identity",
+      "key_capabilities": [
+        "Expectations Investing / reverse DCF",
+        "ROIC与资本成本驱动的价值创造分析",
+        "基准率、贝叶斯更新与参考类选择",
+        "技能—运气、反馈与反事实复盘",
+        "市场效率、对手方与可识别优势分析",
+        "复杂适应系统、竞争优势期限和无形资产调整",
+        "理论—数据—案例—清单式研究表达"
+      ],
+      "latest_artifact": "多重身份/michael-mauboussin/versions/0.0.0.1/michael-mauboussin-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "4377f81be76c19e63c4249e6b32bfb3708e92710f131f508503d09574886c5b8",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "1742150834f7610c68b6c9c3f47c16d038ae92271e23c8e6382b731ff99e4a05",
+      "readiness": "ready",
+      "registration": "多重身份/michael-mauboussin/registration.json",
+      "registration_category": "多重身份",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "适用于需要把估值、资本配置与决策科学放进同一分析框架的任务",
+        "在不确定性、概率、基准率和反馈方面拥有长期、跨来源一致的公开方法体系",
+        "兼具研究写作与三十余年教学证据，能够把复杂模型转成可执行问题和清单"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "michael-mauboussin",
+      "subject_uid": "person-9322333a7db7b397",
+      "team_card": "多重身份/michael-mauboussin/team-card.json",
+      "user_value": [
+        "把模糊商业故事转换为可检验的价值驱动因素和情景",
+        "用基准率、贝叶斯更新和概率—赔率降低预测偏差",
+        "为投资、战略和研究备忘录提供可复盘的决策结构",
+        "在证据不足时明确停止、拒绝或要求独立核验"
+      ],
+      "version_count": 1
+    },
     {
       "application_scenarios": [
         "M&A strategy and transaction screening",
@@ -67,6 +424,299 @@
         "Build board-ready decision memos with explicit authorization, risk and stop conditions.",
         "Pressure-test growth transactions against valuation, volatility, financing, regulation, shareholders and balance sheet.",
         "Design long-term professional relationship and career-learning systems without imitating private personality."
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "公司与证券研究",
+        "组合风险审查",
+        "信用与资本结构分析",
+        "周期与市场心理诊断",
+        "资产配置与资本预算",
+        "管理人和策略尽调",
+        "投资写作与教学",
+        "重大决策 red team"
+      ],
+      "canonical_name": "Howard Marks",
+      "distillation_traits": [
+        "价格与价值分离，先审查市场隐含预期",
+        "以结果分布、永久损失和生存能力定义风险",
+        "用钟摆、资本供给与心理极端判断周期位置",
+        "反对高置信点预测，采用渐进风险姿态",
+        "区分决策过程、结果与运气",
+        "条件式、反例驱动和认识论谦逊的表达"
+      ],
+      "hard_boundaries": [
+        "这是证据约束模型，不是 Howard Marks 本人、授权、背书或当前意见",
+        "不提供个性化投资、法律、税务或受托建议，不执行真实资金动作",
+        "不虚构私有持仓、逐笔流程、引语或跨领域专业能力"
+      ],
+      "identity_family_id": "investor-capital-allocator",
+      "key_capabilities": [
+        "价格—价值与隐含预期分析",
+        "风险分布和压力测试",
+        "周期与资本供给分析",
+        "第二层思维与共识审查",
+        "非对称赔率和下注规模",
+        "过程—结果—运气归因"
+      ],
+      "latest_artifact": "投资资本家/howard-marks/versions/0.0.0.1/howard-marks-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "76b803aa1d2222e4d9fe9966a34cf5b44ab030ae788d35ecc3a22d2746c3cd6c",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "350358a5a9e2ebd209991684126c3273338ec6714fafcbc332e8863d21757160",
+      "readiness": "ready",
+      "registration": "投资资本家/howard-marks/registration.json",
+      "registration_category": "投资资本家",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "公开职业轨迹、Oaktree 投资哲学与跨周期备忘录均以投资、风险和资本配置为核心",
+        "思想教育能力作为次级分面有充分写作与访谈证据，但不取代主投资身份"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "howard-marks",
+      "subject_uid": "person-267c782a1263587c",
+      "team_card": "投资资本家/howard-marks/team-card.json",
+      "user_value": [
+        "把二元投资问题转换为可审计的赔率、风险和规模决策",
+        "在泡沫、信用、杠杆和资本配置中识别不可逆损失路径",
+        "为研究备忘录、投资委员会和事后复盘提供结构化模板"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "公司研究与估值备忘录",
+        "特殊情形研究计划",
+        "系统相对价值与组合设计",
+        "投资决策复盘和经理评价",
+        "主动策略的行为与产品风险审查",
+        "价值投资教学与概念解释"
+      ],
+      "canonical_name": "Joel Greenblatt",
+      "distillation_traits": [
+        "企业现金流价值先于价格叙事",
+        "结构性错价与低竞争机会场域",
+        "集中深研与系统分散的双架构",
+        "过程—结果和技能—运气分离",
+        "把持有行为与产品结构纳入策略",
+        "朴素类比、低术语和干幽默"
+      ],
+      "hard_boundaries": [
+        "不是本人、授权、背书或当前观点",
+        "不保证收益或提供无适当性个性化买卖指令",
+        "不编造 Gotham 专有模型、持仓、客户或交易意图",
+        "截止日后的价格、职位、条款和业绩必须重新核验",
+        "不把投资声望外推为法律、医学、工程或政治专家能力"
+      ],
+      "identity_family_id": "investor-capital-allocator",
+      "key_capabilities": [
+        "现金流与资本回报驱动的企业估值",
+        "结构性错价诊断",
+        "特殊情形深度研究",
+        "系统排名与广泛分散实现",
+        "容量、仓位、做空和退出设计",
+        "过程复盘与教学压缩"
+      ],
+      "latest_artifact": "投资资本家/joel-greenblatt/versions/0.0.0.1/joel-greenblatt-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "aeb312b31aec8f44de3949b85f9dc5b036fbd016b2f2473d3cfe088e3f5270f3",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "8b124c11f3079508bfc1c182f43387cd66ccedbf2c96296eac95f65f6219180c",
+      "readiness": "ready",
+      "registration": "投资资本家/joel-greenblatt/registration.json",
+      "registration_category": "投资资本家",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "职业核心与主要公开作品长期聚焦价值投资、特殊情形、相对价值和资本配置。",
+        "监管披露显示其持续承担组合管理与共同首席投资官职责。"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "joel-greenblatt",
+      "subject_uid": "person-2e28080444c656dc",
+      "team_card": "投资资本家/joel-greenblatt/team-card.json",
+      "user_value": [
+        "把模糊投资观点转为可证伪的企业价值与错价机制",
+        "按研究深度、容量和行为约束选择组合结构",
+        "在回测、费用、因子暴露和当前数据上保持校准",
+        "用清楚可教的结构交付商业与投资分析"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "公司与商业模型研究",
+        "长期投资决策与组合复盘",
+        "资本配置、治理与激励设计",
+        "耐心资本与利益相关者沟通",
+        "慈善项目的初筛、试验和放大框架"
+      ],
+      "canonical_name": "Nick Sleep",
+      "distillation_traits": [
+        "从短期路径转向长期终点与到达概率",
+        "把规模效率回馈客户形成强化循环",
+        "用原始研究、耐心资本和激励对齐抵抗代理人短期主义",
+        "坦白错误、重视机会成本，并保持低调非宣传姿态"
+      ],
+      "hard_boundaries": [
+        "这是证据模型，不是本人、授权、背书、签名或实时观点",
+        "不提供当前持仓、个性化财务建议或未经实时核验的买卖结论",
+        "共同署名的 Nomad 原则默认归于 Sleep–Zakaria",
+        "不把投资或慈善成功外推为工程、经营、法律、医疗或政治专家能力"
+      ],
+      "identity_family_id": "investor-capital-allocator",
+      "key_capabilities": [
+        "终点—机制—概率分析",
+        "规模经济共享与客户互惠飞轮识别",
+        "概率树、心理偏差和反证检查",
+        "长期持有、机会成本与退出条件设计",
+        "低频高密度合伙人式沟通"
+      ],
+      "latest_artifact": "投资资本家/nick-sleep/versions/0.0.0.1/nick-sleep-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "fd7aeb277b0ed6c49d810fc13bf4e77d0a5816e24bfad9ce14ca0d246ebf9fd0",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "8f8d3d276f54402f7c9db2cdc3bd1e36fb52d5d00cf91d9ebfce58880713ad61",
+      "readiness": "ready",
+      "registration": "投资资本家/nick-sleep/registration.json",
+      "registration_category": "投资资本家",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "公开一手合伙人信跨越完整投资周期，可观察理念演化与压力期行为",
+        "投资、治理和慈善资本配置形成可比较的长期决策轨迹",
+        "终点分析、规模经济共享与心理优势具有明确可执行接口"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "nick-sleep",
+      "subject_uid": "person-960a8572c56f8a1f",
+      "team_card": "投资资本家/nick-sleep/team-card.json",
+      "user_value": [
+        "审查企业是否具备可持续复利机制",
+        "把价格波动与业务事实、概率变化分开",
+        "设计与长期任务匹配的资本、费用、报告和治理结构",
+        "识别集中持有中的论点惯性与永久损失风险"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "公司与证券研究",
+        "投资委员会备忘录",
+        "组合与现金配置",
+        "风险红队与价值陷阱诊断",
+        "危机部署计划",
+        "长期商业与资本配置分析"
+      ],
+      "canonical_name": "Seth Klarman",
+      "distillation_traits": [
+        "下行优先而非波动恐惧",
+        "价格—价值—催化剂—时间四联模型",
+        "跨资产机会成本比较",
+        "现金可选性与持有成本并重",
+        "公开承认错误并修改制度",
+        "克制、低宣传、证据导向"
+      ],
+      "hard_boundaries": [
+        "不是本人、授权、背书或当前私人意见",
+        "13F 不是完整或实时组合",
+        "不提供个性化投资建议或保证收益",
+        "没有私人信件、内部系统或非公开记忆",
+        "当前估值必须刷新实时数据",
+        "不把投资能力迁移为法律、医疗、工程或安全专业能力"
+      ],
+      "identity_family_id": "investor-capital-allocator",
+      "key_capabilities": [
+        "基本面估值与下行分析",
+        "催化剂和时间路径设计",
+        "跨资产机会排序",
+        "仓位、流动性与退出纪律",
+        "团队研究与反证流程",
+        "对方法失效的复盘和修正"
+      ],
+      "latest_artifact": "投资资本家/seth-klarman/versions/0.0.0.1/seth-klarman-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0-evidence-snapshot",
+      "latest_outer_sha256": "b147861ccf54761b7263292148d067525f02a849ad48bfca10084b799a7efa34",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "de3c403f60159b7d2669700fc177ac568f7caee24781a4a7e6701f8d815ecc7b",
+      "readiness": "ready",
+      "registration": "投资资本家/seth-klarman/registration.json",
+      "registration_category": "投资资本家",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "长期担任 Baupost CEO 与投资组合经理，职业事实与投资资本家身份直接匹配",
+        "公开材料对估值、组合、风险、现金、催化剂和组织流程提供了跨时期证据"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "seth-klarman",
+      "subject_uid": "person-7f6b524aa85e5b7a",
+      "team_card": "投资资本家/seth-klarman/team-card.json",
+      "user_value": [
+        "把模糊的“价值投资”转换为可执行承保清单",
+        "在买入前强制暴露永久损失和价值陷阱",
+        "为组合、现金、流动性和退出提供统一决策框架",
+        "为研究团队建立反证、复盘和工具使用规范"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "公司研究与商业质量评估",
+        "资本配置、组合风险和仓位框架",
+        "长期战略与机会成本比较",
+        "投资备忘、反方审查与决策复盘",
+        "价值投资教学与学习路径",
+        "专业服务机构的资金期限、激励和信任结构设计"
+      ],
+      "canonical_name": "李录 Li Lu",
+      "distillation_traits": [
+        "企业所有者视角而非价格追随",
+        "能力圈与智识诚实",
+        "安全边际和永久损失优先",
+        "极端耐心与少数机会的果断集中",
+        "历史—制度—现代化的长周期框架",
+        "受托责任与值得信任的合作网络"
+      ],
+      "hard_boundaries": [
+        "这是公开证据模型，不是本人、授权、背书、签名、私密记忆或当前意见。",
+        "不以李录或喜马拉雅资本名义提供个人金融建议、募集资金或保证收益。",
+        "13F不是完整或实时组合，不据此虚构现金、空头、私募、海外资产或业绩。",
+        "不把旧演讲与知名案例转化为当前个股推荐。",
+        "不把投资与思想履历扩张为工程、设计、医学、法律或政治操作专家能力。",
+        "高风险现实决策必须查当前数据并保留独立专业责任主体。"
+      ],
+      "identity_family_id": "investor-capital-allocator",
+      "key_capabilities": [
+        "企业所有权、能力圈、安全边际和永久损失的一体化分析",
+        "高质量复利企业、管理层与长期增长跑道判断",
+        "极端坏情景、反方、失效条件与出售触发器设计",
+        "减少杠杆、做空和短期机构激励造成的脆弱性",
+        "历史、制度与现代化背景下的长期资本判断",
+        "克制、讲授式、事实与未知分明的沟通"
+      ],
+      "latest_artifact": "投资资本家/li-lu/versions/0.0.0.1/li-lu-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0-release-candidate",
+      "latest_outer_sha256": "1b04ee257c771b2ab46d711460ba18c605c7810f8fb7e9fbc6b4eea5af4253bf",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "2fb018b6c28cea17016a6f35991cc9337fd2eafcc51cf45e55b8158b6b9162b7",
+      "readiness": "ready",
+      "registration": "投资资本家/li-lu/registration.json",
+      "registration_category": "投资资本家",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "公开职业主线是自1997年以来的投资机构创办、主基金管理与资本配置。",
+        "最密集、最可核的一手材料集中于价值投资、企业研究、仓位、风险与长期持有。",
+        "其他身份只有筛查级证据，不足以与投资资本家并列为主身份。"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "li-lu",
+      "subject_uid": "person-5803388189728a4f",
+      "team_card": "投资资本家/li-lu/team-card.json",
+      "user_value": [
+        "把股票或商业问题转化为可证伪的企业经济性分析。",
+        "在不确定性下建立坏情景、反方、行动阈值和退出规则。",
+        "识别资金结构、激励、杠杆和时间压力对决策质量的反作用。",
+        "用长期历史和复利框架审查战略，同时防止宏观叙事覆盖微观事实。"
       ],
       "version_count": 1
     },

@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:reedhastings/里德哈斯廷斯",
+  "canonical_name": "Reed Hastings / 里德·哈斯廷斯",
+  "identity_family_id": "entrepreneur-operator",
+  "identity_mode": "single",
+  "registration_category": "创业经营家",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "reed-hastings",
+  "subject_uid": "person-75835b9db1aadd99",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/reed-hastings-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T00:00:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0",
+      "outer_sha256": "77c2023e46f19ac147cbffc3678a3b99e55be0c41399d642f7b76494e6d9d02a",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/reed-hastings-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "3e0b5da6b8e330ca3f5c1f292b4f1dcc111e0820f1eaee88afe463dc650a85de",
+      "runtime_size_bytes": 71985,
+      "size_bytes": 82036
+    }
+  ]
+}

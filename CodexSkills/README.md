@@ -1,6 +1,6 @@
 # CodexSkills
 
-本机全部 Skill 的仓库镜像：**88 份实例 / 73 个不同名字**，3629 个文件，约 108 MB。
+本机全部 Skill 的仓库镜像：**88 份实例 / 73 个不同名字**，3662 个文件，约 110 MB。
 
 **由 `sync_skills.py` 自动生成，请勿手工编辑本文件。**
 
@@ -34,11 +34,22 @@ curl -s https://raw.githubusercontent.com/LinzeColin/AgentDatabase/main/CodexSki
 目录：[`技术工程师/`](registry/codex/persona-distiller-group/技术工程师/)、[`创业经营家/`](registry/codex/persona-distiller-group/创业经营家/)、[`投资资本家/`](registry/codex/persona-distiller-group/投资资本家/)、[`开发设计家/`](registry/codex/persona-distiller-group/开发设计家/)、[`思想教育家/`](registry/codex/persona-distiller-group/思想教育家/)、[`政治法律家/`](registry/codex/persona-distiller-group/政治法律家/)、[`多重身份/`](registry/codex/persona-distiller-group/多重身份/)。
 身份分类由人物 Skill 内部使用，不是调用门槛；用户安装后直接调用对应人物 Skill，无需选择身份。人物产物按 canonical 人物分别从 `0.0.0.1` 连续编号到 `0.0.0.999`，只在成功登记时占号；人物 Skill 的单次运行不编号。团队调用会先按场景选择 5–20 个高相关角色，以正向解决者为主，并至少隔离一个复审、一个裁判和一个反证角色。
 
-当前登记：**6 个人物**。
+当前登记：**17 个人物**。
 
 | 人物 | 唯一分类 | 产物版本 | 完整 ZIP |
 |---|---|---|---|
+| Reed Hastings / 里德·哈斯廷斯 | `创业经营家` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/创业经营家/reed-hastings/versions/0.0.0.1/reed-hastings-persona-distillation-delivery-v0.0.0.1.zip) |
+| Aswath Damodaran | `多重身份` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/多重身份/aswath-damodaran/versions/0.0.0.1/aswath-damodaran-persona-distillation-delivery-v0.0.0.1.zip) |
+| Ben Horowitz | `多重身份` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/多重身份/ben-horowitz/versions/0.0.0.1/ben-horowitz-persona-distillation-delivery-v0.0.0.1.zip) |
+| Charlie Munger | `多重身份` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/多重身份/charlie-munger/versions/0.0.0.1/charlie-munger-persona-distillation-delivery-v0.0.0.1.zip) |
+| David Packard | `多重身份` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/多重身份/david-packard/versions/0.0.0.1/david-packard-persona-distillation-delivery-v0.0.0.1.zip) |
+| Michael J. Mauboussin | `多重身份` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/多重身份/michael-mauboussin/versions/0.0.0.1/michael-mauboussin-persona-distillation-delivery-v0.0.0.1.zip) |
 | Robert A. Kindler | `多重身份` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/多重身份/robert-a-kindler/versions/0.0.0.1/robert-a-kindler-persona-distillation-delivery-v0.0.0.1.zip) |
+| Howard Marks | `投资资本家` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/投资资本家/howard-marks/versions/0.0.0.1/howard-marks-persona-distillation-delivery-v0.0.0.1.zip) |
+| Joel Greenblatt | `投资资本家` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/投资资本家/joel-greenblatt/versions/0.0.0.1/joel-greenblatt-persona-distillation-delivery-v0.0.0.1.zip) |
+| Nick Sleep | `投资资本家` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/投资资本家/nick-sleep/versions/0.0.0.1/nick-sleep-persona-distillation-delivery-v0.0.0.1.zip) |
+| Seth Klarman | `投资资本家` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/投资资本家/seth-klarman/versions/0.0.0.1/seth-klarman-persona-distillation-delivery-v0.0.0.1.zip) |
+| 李录 Li Lu | `投资资本家` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/投资资本家/li-lu/versions/0.0.0.1/li-lu-persona-distillation-delivery-v0.0.0.1.zip) |
 | Beth Wilkinson | `政治法律家` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/政治法律家/beth-wilkinson/versions/0.0.0.1/beth-wilkinson-persona-distillation-delivery-v0.0.0.1.zip) |
 | Evan R. Chesler | `政治法律家` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/政治法律家/evan-r-chesler/versions/0.0.0.1/evan-r-chesler-persona-distillation-delivery-v0.0.0.1.zip) |
 | H. Rodgin Cohen | `政治法律家` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/政治法律家/h-rodgin-cohen/versions/0.0.0.1/h-rodgin-cohen-persona-distillation-delivery-v0.0.0.1.zip) |

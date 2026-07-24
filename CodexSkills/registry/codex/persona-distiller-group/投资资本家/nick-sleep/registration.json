@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:nicksleep",
+  "canonical_name": "Nick Sleep",
+  "identity_family_id": "investor-capital-allocator",
+  "identity_mode": "single",
+  "registration_category": "投资资本家",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "nick-sleep",
+  "subject_uid": "person-960a8572c56f8a1f",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/nick-sleep-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T00:00:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0",
+      "outer_sha256": "fd7aeb277b0ed6c49d810fc13bf4e77d0a5816e24bfad9ce14ca0d246ebf9fd0",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/nick-sleep-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "8f8d3d276f54402f7c9db2cdc3bd1e36fb52d5d00cf91d9ebfce58880713ad61",
+      "runtime_size_bytes": 66407,
+      "size_bytes": 85065
+    }
+  ]
+}
