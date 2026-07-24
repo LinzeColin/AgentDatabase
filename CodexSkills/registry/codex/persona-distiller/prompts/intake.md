@@ -13,7 +13,7 @@ User request, target name, intended use, available files/links, subject type, de
 1. Normalize the name across Unicode, aliases, translations, transliterations and abbreviations.
 2. Search the canonical registry and authoritative public sources before identity parsing or workspace initialization.
 3. If multiple candidates remain, stop and output every candidate with a letter; each candidate is exactly four lines: person/identity, professional background, application value, and distinguishing evidence. Do not display confidence.
-4. If one high-evidence candidate remains, bind `chosen_subject_uid`; if none remains, continue with an unresolved public-target contract.
+4. If one candidate remains, bind `chosen_subject_uid` automatically even when evidence is weak; if none remains, continue with an unresolved public-target contract.
 5. State the deliverable: cognition/decision model, Work methods, Persona, or all.
 6. Record subject type: public, private, self, fictional, historical.
 7. Record authority and rights for private materials.
@@ -26,4 +26,4 @@ User request, target name, intended use, available files/links, subject type, de
 
 ## Output
 
-A compact contract and a collection plan. Separate facts, assumptions, defaults, unknowns, and blockers. On a multi-candidate stop, return `BLOCKED_NAMESAKE_SELECTION` and do not create a workspace or start research. Never ask for credentials or secrets.
+A compact contract and a collection plan. Separate facts, assumptions, defaults, unknowns, and blockers. On a multi-candidate stop, return `BLOCKED_NAMESAKE_SELECTION` and do not create a workspace or start research. The machine gate result must be passed to `init_target.py`; never ask for credentials or secrets.

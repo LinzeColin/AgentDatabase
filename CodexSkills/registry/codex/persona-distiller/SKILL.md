@@ -1,6 +1,6 @@
 ---
 name: persona-distiller
-description: Build, audit, update, package, or uniquely register an evidence-grounded target-person Agent Skill that can plan and execute work through the target's documented capabilities, strategies, cognition, decision policy, work system, temperament, and boundaries. Before identity parsing or research, resolve same-name candidates from the canonical registry and authoritative public sources; stop for user selection when multiple candidates remain. Required build inputs are the target person's name and one of six identity families or a weighted multi-identity selection; scenario is optional and otherwise inferred. Use for six-lane public/private/fictional research, source-universe coverage, Work/Persona separation, automatic internal identity routing, agentic task execution without per-invocation versions, corrections, evaluation, refinement, rollback, one complete installable delivery ZIP, and per-person product releases 0.0.0.1 through 0.0.0.999 in the sibling canonical expert-team registry. 中文名称：人物蒸馏 Skill。
+description: Build, audit, update, package, or uniquely register an evidence-grounded target-person Agent Skill through documented capabilities, strategies, cognition, decision policy, work system, temperament, and boundaries. Before identity parsing or research, resolve same-name candidates from the canonical registry and authoritative sources; auto-bind one even with weak evidence, but stop for user selection when multiple remain. Required inputs are the target person's name and one identity family or weighted multi-identity selection; scenario is optional and inferred. Use for six-lane research, source-universe coverage, Work/Persona separation, automatic runtime identity routing, agentic execution without per-invocation versions, corrections, evaluation, refinement, rollback, one complete installable delivery ZIP, and per-person product releases 0.0.0.1 through 0.0.0.999 in the sibling canonical expert-team registry. 中文名称：人物蒸馏 Skill。
 ---
 
 # 人物蒸馏 Skill / Persona Distiller
@@ -15,7 +15,7 @@ description: Build, audit, update, package, or uniquely register an evidence-gro
 
 1. 将姓名按 Unicode、常用别名、中文译名、英文名、转写和缩写规范化；
 2. 先查 sibling canonical registry，再查权威公开资料，私域/自己资料不得在无授权时扩展检索；
-3. 没有候选时继续正常流程；只有一个高置信候选时自动绑定；多个候选时立即停止并等待用户选择；
+3. 没有候选时继续正常流程；只有一个候选时无论证据强弱都自动绑定，保证流程顺滑；多个候选时立即停止并等待用户选择；
 4. 多候选必须全部列出并连续分配字母（A–Z 后使用 AA、AB……），不得截断、合并或猜测；候选卡片不显示“置信度”，但内部仍可用证据强度判断是否能够自动绑定。
 
 每个候选严格输出四行，每行只保留最有价值的一句话：
@@ -27,7 +27,7 @@ A. 人物与身份：姓名、身份分类、职业或主要职务。
    区分依据：权威证据与其区别于其他同名者的关键特征。
 ```
 
-多候选暂停时不得运行 `init_target.py`、不得写入 workspace、不得开始六路研究；用户只需回复对应字母，或补充组织、年代、地区等消歧信息。一个候选自动绑定后，必须把 `chosen_subject_uid`、候选证据和规范化姓名写入构建合同，之后才进入身份解析。
+多候选暂停时不得运行 `init_target.py`、不得写入 workspace、不得开始六路研究；用户只需回复对应字母，或补充组织、年代、地区等消歧信息。一个候选自动绑定后，必须把 `chosen_subject_uid`、候选证据和规范化姓名写入构建合同，之后才进入身份解析。机器门禁由 `scripts/namesake_gate.py` 生成 schema 1.0 gate 文件，`init_target.py` 在身份解析和 workspace 写入之前强制验证它；多候选 gate 以 `BLOCKED_NAMESAKE_SELECTION` 失败，不得绕过。
 
 只要求用户提供：
 
@@ -65,12 +65,29 @@ A. 人物与身份：姓名、身份分类、职业或主要职务。
 
 执行上述“第一道人物消歧硬门”。这是构建期门禁，不改变已安装人物 Skill 的运行方式；运行时仍由 Skill 内部自动路由身份和场景，不要求用户选择身份。
 
+标准机器流程：先由编排层检索 canonical registry 与权威公开资料，整理候选 JSON，再运行：
+
+```bash
+python3 scripts/namesake_gate.py \
+  --name "目标人物" \
+  --candidates-file ./namesake-candidates.json \
+  --output ./namesake-gate.json
+python3 scripts/init_target.py \
+  --name "目标人物" \
+  --identity "技术工程师" \
+  --namesake-gate ./namesake-gate.json \
+  --workspace ./workspaces
+```
+
+单候选（包括低证据候选）会继续；多候选只生成带 A/B/C/D 卡片的 blocked gate，等待用户选择后重新生成 ready gate。
+
 ### 1. 解析输入并初始化
 
 ```bash
 python3 scripts/init_target.py \
   --name "目标人物" \
   --identity "1" \
+  --namesake-gate ./namesake-gate.json \
   --workspace ./workspaces
 ```
 

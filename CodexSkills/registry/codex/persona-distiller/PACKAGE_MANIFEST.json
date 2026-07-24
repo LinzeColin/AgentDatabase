@@ -16,8 +16,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "a8801393d8ba902ebfab286416398f27fcede23b6cd5d3c0281590be8ac5da73",
-      "size_bytes": 3166
+      "sha256": "601fdaa8209e037b3e71a184ecc91cd386a36c70b891165b33396cbfab383dbf",
+      "size_bytes": 3435
     },
     {
       "path": "CONTRIBUTING.md",
@@ -31,8 +31,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "97c94010d36c2f4a853530f5d7f089d1aa02af421442b41af1c28189e0a4c588",
-      "size_bytes": 4476
+      "sha256": "2ea86bb4830558bbd4790fd87ec99bbba47ae3d7d0eb560bbc142a5438a096ea",
+      "size_bytes": 4693
     },
     {
       "path": "ROADMAP.md",
@@ -46,8 +46,8 @@
     },
     {
       "path": "SKILL.md",
-      "sha256": "387395dbf35188181780ccb6696d5334daa4b5bbfb5c66b71fb98a0fb425b1f7",
-      "size_bytes": 11180
+      "sha256": "9f44d5fb1b9231af6f76faaaf9b0e4dbc0bf8d83e7a6e38b01415952730ee25c",
+      "size_bytes": 11987
     },
     {
       "path": "THIRD_PARTY_NOTICES.md",
@@ -96,8 +96,8 @@
     },
     {
       "path": "examples/README.md",
-      "sha256": "0a347cefdad5f7fe9c399ab1d1a61e0512d10f909cfa3ba06bacfec323e9b5df",
-      "size_bytes": 427
+      "sha256": "186af900f30462c849f01d901d59c16e889060c7274333407bee249e288a4ca8",
+      "size_bytes": 810
     },
     {
       "path": "examples/materials/holdout/01-heldout-case.md",
@@ -121,8 +121,8 @@
     },
     {
       "path": "handoff.md",
-      "sha256": "443bdc02ba5bb06b8951265f24024007e19bcaa12c2505afcd63b95950e17291",
-      "size_bytes": 3037
+      "sha256": "4a3d2b47c5d361a9aed57ca72225d7dedc0dcab192845e35598c069955014e7e",
+      "size_bytes": 3564
     },
     {
       "path": "install.ps1",
@@ -141,8 +141,8 @@
     },
     {
       "path": "manifest.json",
-      "sha256": "7ae87a0020548a806ee6b814269cd10fcecb762d86305bb4f8c85479e88bf1a8",
-      "size_bytes": 1142
+      "sha256": "144af6c4273af924166f39146a34de46a18fc12aab64aac1e339a526531e6ff6",
+      "size_bytes": 1189
     },
     {
       "path": "prompts/blind-judge.md",
@@ -256,8 +256,8 @@
     },
     {
       "path": "prompts/intake.md",
-      "sha256": "fdb7eb8d10ef40b587544ef5a6473f94c117d5f660c105a3ca91a352127c63ca",
-      "size_bytes": 1811
+      "sha256": "31e82f8d9bdb87137e322f186e558c15ec87a55e1c1d815f0ba00e8255a195ea",
+      "size_bytes": 1898
     },
     {
       "path": "prompts/persona-builder.md",
@@ -351,8 +351,8 @@
     },
     {
       "path": "references/build-workflow.md",
-      "sha256": "795a7f8bd3a2333a45f044d45ba1edf885ef47b17d65117889a4848a1d87c68b",
-      "size_bytes": 2588
+      "sha256": "1fe3b9bf8133213a52ba8a5007e8e52e8c58075b0a32d4f996c139a87236d739",
+      "size_bytes": 2945
     },
     {
       "path": "references/evaluation-and-refinement.md",
@@ -440,6 +440,11 @@
       "size_bytes": 1422
     },
     {
+      "path": "schemas/namesake-gate.schema.json",
+      "sha256": "511e73ad0c37ca87f0938cffe65492aca310fbfd21571f5f36b27373dfb850f7",
+      "size_bytes": 3110
+    },
+    {
       "path": "schemas/persona-registration.schema.json",
       "sha256": "73792727fa0c34d689aef8021e2a0b1de4b455642f2569a9c95ff24971c638c4",
       "size_bytes": 2902
@@ -511,8 +516,8 @@
     },
     {
       "path": "scripts/init_target.py",
-      "sha256": "965a6ba695bf5912e03d66bed724447073d43135f0864552a9c0cfa20de60ffe",
-      "size_bytes": 7550
+      "sha256": "b37cb7a98a73284482541c51a118ad2d18f86a6c47445fa1010a155c0ac42569",
+      "size_bytes": 10037
     },
     {
       "path": "scripts/install.ps1",
@@ -543,6 +548,11 @@
       "path": "scripts/migrate_legacy.py",
       "sha256": "7cb71ce5409288ab6223b1002890110a775e42072158a2835910415eedf213b4",
       "size_bytes": 5759
+    },
+    {
+      "path": "scripts/namesake_gate.py",
+      "sha256": "89498a7ac7c139058c336dcfcc77d0544cc584220545b9969ed185f335978ef1",
+      "size_bytes": 8744
     },
     {
       "path": "scripts/normalize_delivery.py",
@@ -581,8 +591,8 @@
     },
     {
       "path": "scripts/self_check.py",
-      "sha256": "7968882fdb7f9fd1309a92da406b9683d81f962c0acb72467e0b3f2ee0b51210",
-      "size_bytes": 9014
+      "sha256": "0858291920e9914e2e6d0511828f99a4ba02c9137cfd2edb1b08dca544dd9f48",
+      "size_bytes": 9079
     },
     {
       "path": "scripts/validate_persona_registry.py",
@@ -986,8 +996,8 @@
     },
     {
       "path": "tests/helpers.py",
-      "sha256": "a2972e444fa7b674226c5307dd8d886df44686a21c275ae3adaa18935eb1fd2c",
-      "size_bytes": 12078
+      "sha256": "82684dfb7fd2d09766315cbf83382b14518c02b30d16ed1fd06a477151966b7c",
+      "size_bytes": 12775
     },
     {
       "path": "tests/test_group_contract.py",
@@ -996,18 +1006,23 @@
     },
     {
       "path": "tests/test_identity_routing.py",
-      "sha256": "1191874d591b4557a597501369ff433a60b1635930bd2e3dc76e680af8427e09",
-      "size_bytes": 7152
+      "sha256": "d7220ab899f919e81de3f7e15450a97b16327e6efc566b64887ca25a5e994cc7",
+      "size_bytes": 7515
     },
     {
       "path": "tests/test_init_and_ingest.py",
-      "sha256": "8b79023dff48b9f157e13edbb2abca2fc7a2de668d122126b929b21c86b06341",
-      "size_bytes": 3430
+      "sha256": "e729dd59b81eedd62bf8f979615455568fc77260fcf6b84b72c73678c3eaec70",
+      "size_bytes": 3634
     },
     {
       "path": "tests/test_ledger_and_corrections.py",
       "sha256": "ab695401c94fda9d5a986b6e91ed98848741d107dcaa780b8857ee0a6b985efe",
       "size_bytes": 2772
+    },
+    {
+      "path": "tests/test_namesake_gate.py",
+      "sha256": "316d2c01e323174ccf79e6c6be72ce2269650ac62e748f97e280166d4fbca3e9",
+      "size_bytes": 3538
     },
     {
       "path": "tests/test_package_install_migrate.py",

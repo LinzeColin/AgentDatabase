@@ -8,6 +8,7 @@
   "name": "persona-distiller",
   "network_required_at_runtime": false,
   "network_required_for_build": true,
+  "namesake_gate": "scripts/namesake_gate.py",
   "optional_build_inputs": [
     "scenario",
     "subject_origin",

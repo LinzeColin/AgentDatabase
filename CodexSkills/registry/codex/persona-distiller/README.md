@@ -25,7 +25,7 @@ bundle 同时安装：
 
 ## 创建人物
 
-构建第一步不是身份选择，而是同名消歧：系统先按别名、译名、转写和缩写检索 canonical registry 与权威公开资料。没有候选时继续；只有一个高证据候选时自动绑定；多个候选时立即停止，完整列出带字母的候选卡片，等待用户选择。每个候选只输出四行：人物与身份、专业背景、应用价值、区分依据；不展示置信度。候选全部列出，超过 Z 后使用 AA、AB 等字母。这个门禁只属于构建阶段，安装后运行人物 Skill 仍不要求用户选择身份。
+构建第一步不是身份选择，而是同名消歧：系统先按别名、译名、转写和缩写检索 canonical registry 与权威公开资料。没有候选时继续；只有一个候选（即使证据较弱）也自动绑定，保证流程顺滑；多个候选时立即停止，完整列出带字母的候选卡片，等待用户选择。每个候选只输出四行：人物与身份、专业背景、应用价值、区分依据；不展示置信度。候选全部列出，超过 Z 后使用 AA、AB 等字母。机器门禁由 `scripts/namesake_gate.py` 生成，`init_target.py` 在初始化前强制验证；这个门禁只属于构建阶段，安装后运行人物 Skill 仍不要求用户选择身份。
 
 构建阶段需要目标人物姓名和内部研究身份：
 
@@ -33,6 +33,7 @@ bundle 同时安装：
 python3 scripts/init_target.py \
   --name "目标人物" \
   --identity "技术工程师" \
+  --namesake-gate ./namesake-gate.json \
   --workspace ./workspaces
 ```
 
@@ -42,6 +43,7 @@ python3 scripts/init_target.py \
 python3 scripts/init_target.py \
   --name "目标人物" \
   --identity "1:60+5:40" \
+  --namesake-gate ./namesake-gate.json \
   --workspace ./workspaces
 ```
 

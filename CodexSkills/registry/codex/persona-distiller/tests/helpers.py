@@ -42,6 +42,18 @@ def run_target_script(target: Path, name: str, *args: object, check: bool = True
     return completed
 
 
+def make_namesake_gate(root: Path, name: str, candidates: list[dict[str, Any]] | None = None) -> Path:
+    """Create a deterministic empty/supplied gate for an isolated test workspace."""
+    candidates_path = root / f'{name.replace(" ", "-").lower()}-candidates.json'
+    gate_path = root / f'{name.replace(" ", "-").lower()}-namesake-gate.json'
+    candidates_path.write_text(json.dumps(candidates or [], ensure_ascii=False), encoding='utf-8')
+    run_script(
+        'namesake_gate.py', '--name', name,
+        '--candidates-file', candidates_path, '--output', gate_path,
+    )
+    return gate_path
+
+
 def create_target(
     temp_root: Path,
     slug: str = 'example-thinker',
@@ -52,10 +64,12 @@ def create_target(
     retention_policy: str | None = None,
 ) -> Path:
     workspace = temp_root / 'workspaces'
+    gate = make_namesake_gate(temp_root, 'Example Thinker')
     args: list[object] = [
         '--name', 'Example Thinker', '--slug', slug,
         '--profile', profile, '--identity', identity,
         '--subject-origin', subject_origin, '--workspace', workspace,
+        '--namesake-gate', gate,
     ]
     if consent_authority:
         args.extend(['--consent-authority', consent_authority])

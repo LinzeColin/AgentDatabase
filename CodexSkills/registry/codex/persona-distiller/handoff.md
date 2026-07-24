@@ -30,6 +30,15 @@ caller task → automatic internal identity/scenario route → minimum model loa
 不得要求运行用户选择身份、编号或权重。人物产品使用独立连续版本
 `0.0.0.1..0.0.0.999`；人物 Skill 的单次运行不编号。
 
+## 构建前同名消歧 gate
+
+构建第一步由编排层检索 canonical registry 与权威公开资料，并整理候选 JSON。运行
+`scripts/namesake_gate.py` 后才可调用 `scripts/init_target.py --namesake-gate`。
+没有候选可继续；单候选即使证据较弱也自动绑定；多候选返回
+`BLOCKED_NAMESAKE_SELECTION`，输出完整 A/B/C/D 候选卡片，禁止身份解析、workspace
+写入和研究启动。gate 会把规范化姓名、候选证据与 `chosen_subject_uid` 写入目标
+`meta.json`。
+
 ## 单一完整交付
 
 每次成功发布只输出：

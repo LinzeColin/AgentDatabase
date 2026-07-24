@@ -2,6 +2,7 @@
 
 ## v0.0.0.5 — 2026-07-23
 
+- 将同名消歧升级为可验证的构建前 gate：canonical registry 与权威资料检索后，单候选（包括低证据）自动绑定，多候选输出 A/B/C/D 卡片并硬停止；`init_target.py` 在身份解析和 workspace 写入前拒绝 blocked gate。
 - 将七个身份目录和全部人物备份迁移到平级 `persona-distiller-group` canonical registry，目录名与内部身份名称完全一致。
 - 发布物升级为唯一外层完整交付 ZIP：内嵌一个不可变运行时 ZIP，并包含安装、双层哈希、登记、team card、来源覆盖、评测、验证、provenance、review 与 handoff；不再产生 sidecar。
 - 完整交付 schema 只约束文件与架构，不枚举或限制人物姓名、语言、职业和内容风格。

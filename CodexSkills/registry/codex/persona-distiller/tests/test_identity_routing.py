@@ -5,7 +5,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from helpers import create_target, run_script, run_target_script
+from helpers import create_target, make_namesake_gate, run_script, run_target_script
 
 
 class IdentityRoutingTests(unittest.TestCase):
@@ -50,9 +50,11 @@ class IdentityRoutingTests(unittest.TestCase):
     def test_private_target_requires_weighted_multi_and_consent(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
+            gate = make_namesake_gate(root, 'Private Mentor')
             single = run_script(
                 'init_target.py', '--name', 'Private Mentor', '--slug', 'private-mentor',
                 '--identity', '5', '--subject-origin', 'private', '--workspace', root,
+                '--namesake-gate', gate,
                 check=False,
             )
             self.assertNotEqual(single.returncode, 0)
@@ -61,6 +63,7 @@ class IdentityRoutingTests(unittest.TestCase):
             blocked = run_script(
                 'init_target.py', '--name', 'Private Mentor', '--slug', 'private-mentor',
                 '--identity', '1:40+5:60', '--subject-origin', 'private', '--workspace', root,
+                '--namesake-gate', gate,
             )
             self.assertEqual(json.loads(blocked.stdout)['status'], 'blocked-consent')
 
@@ -69,6 +72,7 @@ class IdentityRoutingTests(unittest.TestCase):
                 'init_target.py', '--name', 'Private Mentor', '--slug', 'private-mentor',
                 '--identity', '1:40+5:60', '--subject-origin', 'private', '--workspace', root,
                 '--consent-authority', 'documented-owner-consent', '--retention-policy', 'delete raw after 30 days', '--force',
+                '--namesake-gate', gate,
             )
             self.assertEqual(json.loads((target / 'meta.json').read_text())['status'], 'draft')
 
@@ -77,9 +81,11 @@ class IdentityRoutingTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             for origin in ['fictional', 'historical']:
+                gate = make_namesake_gate(root, f'{origin} target')
                 failed = run_script(
                     'init_target.py', '--name', f'{origin} target', '--slug', f'{origin}-target',
                     '--identity', '1', '--subject-origin', origin, '--workspace', root,
+                    '--namesake-gate', gate,
                     check=False,
                 )
                 self.assertNotEqual(failed.returncode, 0)
@@ -87,6 +93,7 @@ class IdentityRoutingTests(unittest.TestCase):
                 created = run_script(
                     'init_target.py', '--name', f'{origin} target', '--slug', f'{origin}-target',
                     '--identity', '1:70+5:30', '--subject-origin', origin, '--workspace', root,
+                    '--namesake-gate', gate,
                 )
                 self.assertEqual(json.loads(created.stdout)['status'], 'draft')
                 # Remove before the next origin reuses a distinct slug only for clarity.

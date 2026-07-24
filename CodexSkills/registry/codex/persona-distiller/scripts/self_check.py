@@ -58,7 +58,7 @@ def main() -> int:
         'agents/openai.yaml', 'registries/identity-families.json',
         'templates/target/SKILL.md.tmpl', 'templates/target/agents/openai.yaml.tmpl',
         'templates/target/scripts/runtime_recorder.py', 'templates/target/scripts/runtime_router.py',
-        'scripts/identity.py', 'scripts/route_engine.py', 'scripts/init_target.py',
+        'scripts/identity.py', 'scripts/route_engine.py', 'scripts/namesake_gate.py', 'scripts/init_target.py',
         'scripts/package_target.py', 'scripts/delivery_builder.py', 'scripts/normalize_delivery.py',
         'scripts/build_release_bundle.py',
         'scripts/register_persona.py', 'scripts/validate_persona_registry.py',
@@ -66,7 +66,7 @@ def main() -> int:
         'scripts/review_harness.py', 'schemas/persona-registration.schema.json', 'schemas/runtime-record.schema.json',
         'templates/delivery/install.py', 'templates/target/team-card.json.tmpl',
         'templates/bundle/install.py', 'templates/bundle/README.md',
-        'references/persona-product-registration.md',
+        'references/persona-product-registration.md', 'schemas/namesake-gate.schema.json',
         'audit/10-round-improvement.md', 'audit/2x6-review.md',
     ]
     for rel in required:
