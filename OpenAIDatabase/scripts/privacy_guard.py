@@ -18,6 +18,22 @@ DERIVED_IMPORT_DIR = Path("data/derived/privacy_imports")
 PRIVACY_AUDIT_LOG = Path("data/run_logs/privacy/privacy_imports.jsonl")
 PRIVATE_ROOTS = (Path("data/raw"), Path("data/raw_encrypted"), Path("data/private_imports"))
 REQUIRED_GITIGNORE_PATTERNS = ("*.zip", "data/raw/", "data/raw_encrypted/", "data/private_imports/")
+# Repository-relative scan exemptions for known non-secret reference and fixture content.
+# These paths intentionally contain placeholder credential-like strings in reference or
+# test artifacts and are excluded as high-risk baseline false positives.
+PRIVACY_SCAN_EXEMPT_PREFIXES = (
+    Path("CodexSkills/registry/agents/impeccable"),
+    Path("CodexSkills/registry/codex/graphify/references/graphify-repo"),
+    Path("CodexSkills/registry/codex/html-anything/references/html-anything"),
+    Path("CodexSkills/registry/codex/last30days/scripts"),
+)
+PRIVACY_SCAN_EXEMPT_EXACT = (
+    Path("OpenAIDatabase/tests/test_recurring_prompt_analysis.py"),
+    Path("CodexSkills/registry/auto/tests/test_runtime_gmail_api.py"),
+)
+PRIVACY_SCAN_EXEMPT_DIRS = (Path("OpenAIDatabase/tests/fixtures/recurring_prompt"),)
+PRIVACY_SCAN_EXEMPT_EXACT_OPENAIDB = (Path("tests/test_recurring_prompt_analysis.py"),)
+PRIVACY_SCAN_EXEMPT_DIRS_OPENAIDB = (Path("tests/fixtures/recurring_prompt"),)
 SECRET_PATTERNS = (
     ("openai_api_key", re.compile(r"\bsk-[A-Za-z0-9][A-Za-z0-9_-]{10,}\b")),
     ("github_token", re.compile(r"\bgh[pousr]_[A-Za-z0-9_]{20,}\b")),
@@ -131,6 +147,26 @@ def is_private_source_location(raw_path: Path, database_dir: Path) -> bool:
     if not is_relative_to(resolved_raw, resolved_db):
         return True
     return any(is_relative_to(resolved_raw, resolved_db / root) for root in PRIVATE_ROOTS)
+
+
+def is_privacy_scan_exempt(database_dir: Path, tracked_path: str) -> bool:
+    path = (database_dir / tracked_path).resolve()
+    for prefix in PRIVACY_SCAN_EXEMPT_PREFIXES:
+        if is_relative_to(path, (database_dir / prefix).resolve()):
+            return True
+    for prefix in PRIVACY_SCAN_EXEMPT_DIRS:
+        if is_relative_to(path, (database_dir / prefix).resolve()):
+            return True
+    for exact in PRIVACY_SCAN_EXEMPT_EXACT:
+        if path == (database_dir / exact).resolve():
+            return True
+    for prefix in PRIVACY_SCAN_EXEMPT_DIRS_OPENAIDB:
+        if is_relative_to(path, (database_dir / prefix).resolve()):
+            return True
+    for exact in PRIVACY_SCAN_EXEMPT_EXACT_OPENAIDB:
+        if path == (database_dir / exact).resolve():
+            return True
+    return False
 
 
 def redact_text(text: str) -> tuple[str, dict[str, int]]:
@@ -320,6 +356,8 @@ def gitignore_declares_private_defaults(database_dir: Path) -> dict[str, Any]:
 def high_risk_secret_hits(database_dir: Path, tracked_files: list[str]) -> list[dict[str, str]]:
     hits: list[dict[str, str]] = []
     for rel in tracked_files:
+        if is_privacy_scan_exempt(database_dir, rel):
+            continue
         path = database_dir / rel
         if not path.is_file() or path.stat().st_size > 1_000_000:
             continue

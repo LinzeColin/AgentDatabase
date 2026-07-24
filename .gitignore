@@ -1,0 +1,4 @@
+*.zip
+data/raw/
+data/raw_encrypted/
+data/private_imports/
