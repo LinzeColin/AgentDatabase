@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:simonwillison",
+  "canonical_name": "Simon Willison",
+  "identity_family_id": "multi-identity",
+  "identity_mode": "multi",
+  "registration_category": "多重身份",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "simon-willison",
+  "subject_uid": "person-4566a231fcbf32af",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/simon-willison-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T01:30:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0",
+      "outer_sha256": "830c8a5499eac37c10c0336618eb4b298dc8f81a26ef51980b13a4efac15a485",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/simon-willison-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "894c1649b5a416efdab9a489d24ad20f3852f68e1bf5337be05245dc01433bf1",
+      "runtime_size_bytes": 67863,
+      "size_bytes": 683977
+    }
+  ]
+}

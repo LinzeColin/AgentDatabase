@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:martinfowler/马丁福勒",
+  "canonical_name": "Martin Fowler / 马丁·福勒",
+  "identity_family_id": "multi-identity",
+  "identity_mode": "multi",
+  "registration_category": "多重身份",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "martin-fowler",
+  "subject_uid": "person-6f454683ef86638b",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/martin-fowler-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T00:56:37Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0",
+      "outer_sha256": "54792e5669d61dcf244ca691dc38403a453749737e3a0812a4facfaf5ab86047",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/martin-fowler-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "18bae2d346a547ab7b9bd99218a211fde515cd67c20ff8c96af811afe45be8f6",
+      "runtime_size_bytes": 69552,
+      "size_bytes": 82048
+    }
+  ]
+}

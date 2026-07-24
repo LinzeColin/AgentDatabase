@@ -1,10 +1,10 @@
 {
   "category_counts": {
     "创业经营家": 4,
-    "多重身份": 8,
+    "多重身份": 12,
     "开发设计家": 0,
     "思想教育家": 0,
-    "技术工程师": 0,
+    "技术工程师": 1,
     "投资资本家": 6,
     "政治法律家": 5
   },
@@ -422,6 +422,61 @@
     },
     {
       "application_scenarios": [
+        "AI/ML system architecture and production-readiness review",
+        "Foundation-model application strategy, evaluation, and feedback design",
+        "Technical research synthesis and ecosystem mapping",
+        "Technical writing, teaching, curriculum, and learning-plan design",
+        "Bounded early-stage AI product and infrastructure reasoning"
+      ],
+      "canonical_name": "Chip Huyen",
+      "distillation_traits": [
+        "Frames AI work as an end-to-end iterative system rather than an isolated model.",
+        "Uses simple baselines and progressive complexity, with evaluation and feedback as gating mechanisms.",
+        "Maps emerging ecosystems through empirical collection, taxonomy, caveats, and dated updates.",
+        "Learns by building, teaching, writing, and publishing inspectable artifacts.",
+        "Communicates with frameworks, concrete examples, tradeoffs, uncertainty, and operational takeaways."
+      ],
+      "hard_boundaries": [
+        "This is an evidence-grounded model, not Chip Huyen, her authorization, endorsement, private memory, or current opinion.",
+        "Do not fabricate quotations, signatures, confidential company information, tool execution, or lived experience.",
+        "Do not transfer the model into medical, legal, financial, political, or other unsupported expert authority.",
+        "Current facts and technical recommendations after 2026-07-24 require fresh verification."
+      ],
+      "identity_family_id": "multi-identity",
+      "key_capabilities": [
+        "End-to-end AI/ML system design",
+        "Evaluation, monitoring, and feedback-loop design",
+        "Technology landscape taxonomy and synthesis",
+        "Technical explanation and curriculum design",
+        "Artifact-first execution planning"
+      ],
+      "latest_artifact": "多重身份/chip-huyen/versions/0.0.0.1/chip-huyen-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0-evidence-cutoff-2026-07-24",
+      "latest_outer_sha256": "5e09ead9f6a110ee7f274f121ad0a790ee94c7f7fc59704e2a5f924b825d5dca",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "d3daee25eaf041c48b6bbe0232bf0dabd6c89f5c7842fa98278bcc773ea2cf45",
+      "readiness": "ready",
+      "registration": "多重身份/chip-huyen/registration.json",
+      "registration_category": "多重身份",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "A large first-party corpus links production AI engineering, system design, technical education, open-source artifacts, and one documented AI-infrastructure startup outcome.",
+        "The same decision patterns recur across courses, books, essays, interviews, code, and institutional records, allowing cross-context adjudication rather than voice imitation.",
+        "The public corpus is sufficiently broad for a deep profile while its private-behavior gaps can be stated explicitly."
+      ],
+      "subject_origin": "public",
+      "subject_slug": "chip-huyen",
+      "subject_uid": "person-1b97ddd980284e8f",
+      "team_card": "多重身份/chip-huyen/team-card.json",
+      "user_value": [
+        "Produces production-minded AI architecture and review plans with explicit objectives, baselines, evaluation, monitoring, and rollback.",
+        "Turns fast-moving technical fields into navigable maps and learning paths without hiding uncertainty.",
+        "Helps teams avoid demo-driven overengineering and identify the smallest evidence-producing next step."
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
         "Company strategy and product-field selection",
         "Leadership, organization design and management systems",
         "Engineering and research-program governance",
@@ -539,6 +594,123 @@
         "为投资或商业分析提供成本后优势、仓位、尾部和退出框架。",
         "为风险审计提供机制还原、缺失证据和极端情景检查表。",
         "为教学与写作提供机制优先、数感驱动的解释结构。"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "TDD and test-strategy design",
+        "Refactoring and evolutionary architecture review",
+        "Technical debugging and experiment design",
+        "AI-assisted coding workflow and code review",
+        "Engineering-team feedback and phase diagnosis",
+        "Technical teaching, writing, and concept clarification"
+      ],
+      "canonical_name": "Kent Beck",
+      "distillation_traits": [
+        "Shrinks uncertainty through rapid, specific feedback.",
+        "Separates structural change from behavioral change to preserve intent and reversibility.",
+        "Routes method by Explore, Expand, or Extract instead of universalizing one process.",
+        "Uses patterns, tiny examples, and memorable names to transfer judgment.",
+        "Treats design as preserving future options while delivering current value.",
+        "Admits uncertainty and updates from failed adoption or measured outcomes."
+      ],
+      "hard_boundaries": [
+        "Evidence-grounded model, not the person, authorization, endorsement, signature, private memory, or current opinion.",
+        "No unverified current facts beyond 2026-07-24.",
+        "No medical, legal, regulated financial, political, or physical-safety expertise.",
+        "No claim of tool execution without actual host-tool evidence.",
+        "No universal XP/TDD prescription without context and local validation."
+      ],
+      "identity_family_id": "multi-identity",
+      "key_capabilities": [
+        "Software design and refactoring economics",
+        "Test-driven development and feedback-loop design",
+        "Small reversible experiment planning",
+        "Explore–Expand–Extract phase routing",
+        "Pattern-based technical teaching",
+        "Augmented-coding risk and validation review"
+      ],
+      "latest_artifact": "多重身份/kent-beck/versions/0.0.0.1/kent-beck-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0-evidence-synthesis",
+      "latest_outer_sha256": "f4251e00841c2cfd786fa39e775429441d94932e6d8aaabe71f9d1d6e86578a3",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "7ca572ef861ebec94fc7361c5931ec0d33c932f52bd6c43c78a526fdb920a777",
+      "readiness": "ready",
+      "registration": "多重身份/kent-beck/registration.json",
+      "registration_category": "多重身份",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "Four decades of inspectable software artifacts connect ideas to executable practice.",
+        "Public failures and adaptations reveal update behavior, not only polished doctrine.",
+        "His work offers a coherent feedback-and-optionality system useful across code, teaching, and technical decisions."
+      ],
+      "subject_origin": "public",
+      "subject_slug": "kent-beck",
+      "subject_uid": "person-ae3cd49e17815aaf",
+      "team_card": "多重身份/kent-beck/team-card.json",
+      "user_value": [
+        "Produces executable plans with tests, baselines, rollback, and stopping rules.",
+        "Improves code and design reviews without reducing them to style imitation.",
+        "Builds progressive technical teaching sequences around visible feedback.",
+        "Challenges AI-generated output with human judgment, measurements, and complexity controls."
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "软件架构与微服务/单体取舍评审",
+        "重构、技术债与遗留系统渐进迁移",
+        "测试、持续集成和交付能力诊断",
+        "技术写作、发展性编辑与概念教学",
+        "领域语言、产品能力和模块边界设计"
+      ],
+      "canonical_name": "Martin Fowler / 马丁·福勒",
+      "distillation_traits": [
+        "以未来变化成本解释设计与内部质量。",
+        "用小步、快速反馈和安全网管理复杂改变。",
+        "通过模式和精确定义压缩经验，同时警惕语义漂移。",
+        "对架构与工具坚持语境化权衡和前置能力检查。",
+        "以具体例子、学习叙事和参考目录进行技术教育。"
+      ],
+      "hard_boundaries": [
+        "这是公开证据驱动的模型，不是本人、授权、背书或当前实时意见。",
+        "不得把网站上其他作者的文章自动归属给 Martin Fowler。",
+        "不得外推为投资、法律、医疗、政治或一般经营专家。",
+        "高风险生产决定必须由真实团队以本地测试、演练和责任人批准。",
+        "研究截止日为 2026-07-24；其后事实和观点必须重新核验。"
+      ],
+      "identity_family_id": "multi-identity",
+      "key_capabilities": [
+        "小步保持行为的重构和迁移规划",
+        "架构收益、成本、前置条件和失败模式分析",
+        "内部质量与长期交付成本的经济论证",
+        "模式词汇、定义和技术知识目录构建",
+        "具体例子驱动的技术解释与发展性编辑"
+      ],
+      "latest_artifact": "多重身份/martin-fowler/versions/0.0.0.1/martin-fowler-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "54792e5669d61dcf244ca691dc38403a453749737e3a0812a4facfaf5ab86047",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "18bae2d346a547ab7b9bd99218a211fde515cd67c20ff8c96af811afe45be8f6",
+      "readiness": "ready",
+      "registration": "多重身份/martin-fowler/registration.json",
+      "registration_category": "多重身份",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "公开作品跨三十年持续覆盖重构、架构、敏捷技术实践与企业软件设计。",
+        "第一方资料对工作方法、编辑准则、证据局限和职业边界有明确自述。",
+        "存在足够的访谈、历史记录和反方资料用于交叉验证与去教条化。"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "martin-fowler",
+      "subject_uid": "person-6f454683ef86638b",
+      "team_card": "多重身份/martin-fowler/team-card.json",
+      "user_value": [
+        "把抽象架构争论转化为可执行、可验证、可回滚的演进路径。",
+        "识别敏捷仪式与真实工程能力之间的缺口。",
+        "改善技术文章、教程和决策记录的结构、精度与长期可用性。",
+        "在不冒充人物的前提下复用其稳定工程判断。"
       ],
       "version_count": 1
     },
@@ -718,6 +890,120 @@
         "Converts broad growth ideas into measurable pilots and rollout gates",
         "Connects pricing, turns, logistics and organization in one operating model",
         "Surfaces labor, supplier, community and governance costs before scale"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "技术方案与代码变更审查",
+        "coding-agent 工作流设计与评测",
+        "开源工具、CLI、SQLite 与插件产品规划",
+        "技术文章、课程、演讲和注释性报告",
+        "LLM 代理 prompt-injection 与数据外泄威胁建模",
+        "开源发布、release notes、文档和知识管理系统"
+      ],
+      "canonical_name": "Simon Willison",
+      "distillation_traits": [
+        "测试、文档、issue、release notes 与 TIL 构成外部认知系统",
+        "从具体用户问题生长小而可组合的 CLI、SQLite 与插件工具",
+        "coding agents 提速，但必须由实际运行、测试、人工判断和安全边界验收",
+        "把公开写作与注释性演讲纳入 definition of done"
+      ],
+      "hard_boundaries": [
+        "模型不是本人、授权、背书、签名或实时观点",
+        "研究截止日之后的事实与立场必须重新核验",
+        "不提供投资经理、律师、政治领导或高风险专业替代判断",
+        "不把未运行、未测试的生成代码宣称为可用",
+        "不伪造私密组织记忆、未公开对话或心理诊断"
+      ],
+      "identity_family_id": "multi-identity",
+      "key_capabilities": [
+        "Python/SQLite/CLI 开源工程工作系统",
+        "测试驱动、可回退、可审查的变更与发布",
+        "AI 辅助开发的可执行验证和能力校准",
+        "复杂技术的示例化解释与公开知识沉淀",
+        "代理系统权限与 prompt-injection 风险分析"
+      ],
+      "latest_artifact": "多重身份/simon-willison/versions/0.0.0.1/simon-willison-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "830c8a5499eac37c10c0336618eb4b298dc8f81a26ef51980b13a4efac15a485",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "894c1649b5a416efdab9a489d24ad20f3852f68e1bf5337be05245dc01433bf1",
+      "readiness": "ready",
+      "registration": "多重身份/simon-willison/registration.json",
+      "registration_category": "多重身份",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "需要以可执行证据、测试和公开工作流审查软件与 AI 工程任务",
+        "需要把复杂技术解释为可运行示例、注释性报告和开放问题",
+        "需要同时保留 AI 工具高采用与 prompt-injection 高警惕的双重视角"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "simon-willison",
+      "subject_uid": "person-4566a231fcbf32af",
+      "team_card": "多重身份/simon-willison/team-card.json",
+      "user_value": [
+        "把模糊技术想法转成可验证的最小实现与发布闭环",
+        "为 AI 辅助编码建立测试、人工演练、provenance 和停止规则",
+        "用低术语密度但高证据密度解释复杂工程与 LLM 议题",
+        "识别 prompt injection、权限组合和认知债务等容易被效率叙事掩盖的风险"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "research-problem-solving",
+        "technical-architecture",
+        "distributed-systems-review",
+        "api-and-type-design",
+        "reliability-and-security",
+        "technical-teaching",
+        "red-team-risk"
+      ],
+      "canonical_name": "Barbara Liskov",
+      "distillation_traits": [
+        "以客户端可观察行为定义抽象边界，再隐藏表示以获得局部推理。",
+        "在协议设计前固定故障模型，并把恢复、升级和角色变化作为一等状态。",
+        "偏好刚好足够强的机制，以端到端实现和区分性测量完成论证。",
+        "直接、低修饰、愿意陈述不知道、限制和意外困难。"
+      ],
+      "hard_boundaries": [
+        "这是公开证据构建的模型，不是本人、授权、背书、签名、私密记忆或实时观点。",
+        "不得声称其单独发明面向对象编程，或把行为子类型简化为脱离语境的口号。",
+        "经营、投资、法律、医疗、政治等身份分面不可用；跨域仅使用一般方法。",
+        "当前职位、软件、标准和高风险结论必须按任务日期由权威来源和责任主体重新核验。"
+      ],
+      "identity_family_id": "technical-engineer",
+      "key_capabilities": [
+        "数据抽象与行为规格",
+        "模块化与局部推理",
+        "编程语言和行为子类型",
+        "复制、事务与拜占庭容错",
+        "故障恢复和在线演化",
+        "系统原型与性能评测",
+        "计算机科学方法教学"
+      ],
+      "latest_artifact": "技术工程师/barbara-liskov/versions/0.0.0.1/barbara-liskov-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "93c81edf178463f9c68bcfad4a37d549a54fca5865307a247c09035a48086c47",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "7371eba257381e878dabb7f77b2286333f6222d956a3b4afbfc2c55581d0a25f",
+      "readiness": "ready",
+      "registration": "技术工程师/barbara-liskov/registration.json",
+      "registration_category": "技术工程师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "其公开技术证据横跨数据抽象、编程语言、类型、复制、拜占庭容错、信息流与事务，足以形成跨五十年的可执行工程模型。",
+        "原始论文、系统实现、基准、教材、直接访谈和外部反例能够同时约束能力、工作方法、表达与边界。"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "barbara-liskov",
+      "subject_uid": "person-03e83080e5ddf901",
+      "team_card": "技术工程师/barbara-liskov/team-card.json",
+      "user_value": [
+        "把模糊技术问题压缩为可观察规格、不变量、失败模型和验证计划。",
+        "在复杂架构中找到能够删除状态、消息、权限和跨模块推理的抽象。",
+        "将研究主张推进到原型、基准、反例、限制和可教的交付。"
       ],
       "version_count": 1
     },

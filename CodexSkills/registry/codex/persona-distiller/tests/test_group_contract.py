@@ -101,7 +101,7 @@ class GroupContractTests(unittest.TestCase):
                 sys.executable,
                 str(GROUP / 'scripts/route_team.py'),
                 '--task',
-                '设计编译器后端和分布式存储引擎的性能架构',
+                '制定南极磷虾养殖场的兽医麻醉剂量与病原体隔离方案',
             ],
             cwd=GROUP,
             text=True,
@@ -140,6 +140,56 @@ class GroupContractTests(unittest.TestCase):
             'Tim Cook',
             '路易斯·郭士纳 / Louis V. Gerstner Jr.',
         }.issubset(selected))
+
+    def test_new_software_deliveries_are_available_to_routing(self) -> None:
+        tasks = (
+            (
+                'Design a software engineering review covering TDD, refactoring, '
+                'evolutionary architecture, Python SQLite CLI, coding-agent prompt '
+                'injection, AI/ML evaluation monitoring feedback loops, distributed '
+                'systems API type design and technical teaching',
+                '14',
+            ),
+            (
+                '评审软件架构、微服务与单体取舍、重构技术债、遗留系统渐进迁移、'
+                '持续集成、领域语言和模块边界',
+                '10',
+            ),
+        )
+        selected: set[str] = set()
+        for task, size in tasks:
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    str(GROUP / 'scripts/route_team.py'),
+                    '--task',
+                    task,
+                    '--size',
+                    size,
+                ],
+                cwd=GROUP,
+                text=True,
+                capture_output=True,
+            )
+            self.assertEqual(
+                completed.returncode,
+                0,
+                completed.stdout + completed.stderr,
+            )
+            plan = json.loads(completed.stdout)
+            self.assertEqual(plan['status'], 'ready')
+            selected.update(
+                role['canonical_name']
+                for role in plan['selected_roles']
+                if role['role_type'] == 'persona-solver'
+            )
+        self.assertTrue({
+            'Barbara Liskov',
+            'Chip Huyen',
+            'Kent Beck',
+            'Martin Fowler / 马丁·福勒',
+            'Simon Willison',
+        }.issubset(selected), selected)
 
     def test_human_views_register_required_card_fields(self) -> None:
         readme = (GROUP / 'README.md').read_text(encoding='utf-8')

@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:kentbeck",
+  "canonical_name": "Kent Beck",
+  "identity_family_id": "multi-identity",
+  "identity_mode": "multi",
+  "registration_category": "多重身份",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "kent-beck",
+  "subject_uid": "person-ae3cd49e17815aaf",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/kent-beck-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T02:30:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0-evidence-synthesis",
+      "outer_sha256": "f4251e00841c2cfd786fa39e775429441d94932e6d8aaabe71f9d1d6e86578a3",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/kent-beck-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "7ca572ef861ebec94fc7361c5931ec0d33c932f52bd6c43c78a526fdb920a777",
+      "runtime_size_bytes": 76520,
+      "size_bytes": 88186
+    }
+  ]
+}

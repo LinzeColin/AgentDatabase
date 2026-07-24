@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:chiphuyen",
+  "canonical_name": "Chip Huyen",
+  "identity_family_id": "multi-identity",
+  "identity_mode": "multi",
+  "registration_category": "多重身份",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "chip-huyen",
+  "subject_uid": "person-1b97ddd980284e8f",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/chip-huyen-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T01:30:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0-evidence-cutoff-2026-07-24",
+      "outer_sha256": "5e09ead9f6a110ee7f274f121ad0a790ee94c7f7fc59704e2a5f924b825d5dca",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/chip-huyen-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "d3daee25eaf041c48b6bbe0232bf0dabd6c89f5c7842fa98278bcc773ea2cf45",
+      "runtime_size_bytes": 68938,
+      "size_bytes": 81940
+    }
+  ]
+}
