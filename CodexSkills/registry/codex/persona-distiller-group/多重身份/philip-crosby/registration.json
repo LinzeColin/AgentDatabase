@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:philipcrosby",
+  "canonical_name": "Philip Crosby",
+  "identity_family_id": "multi-identity",
+  "identity_mode": "multi",
+  "registration_category": "多重身份",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "philip-crosby",
+  "subject_uid": "person-7b5f309c538fc0b9",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/philip-crosby-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T12:00:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0-evidence-snapshot",
+      "outer_sha256": "0921c44198ac46221baafa413a5a063d70ee150da67128d156be4082bad027a5",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/philip-crosby-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "287327deeff3a19329fb1067dc4ff0dfbb163fe7138558e464bd9ee33dd2aa81",
+      "runtime_size_bytes": 71246,
+      "size_bytes": 81171
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:mateizaharia",
+  "canonical_name": "Matei Zaharia",
+  "identity_family_id": "multi-identity",
+  "identity_mode": "multi",
+  "registration_category": "多重身份",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "matei-zaharia",
+  "subject_uid": "person-9b4517590a1fca74",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/matei-zaharia-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T12:30:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0",
+      "outer_sha256": "907d265a72d369b1edf9061c40889cfaea5bf3ae2f47163b4884dcd769cc76c8",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/matei-zaharia-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "a61d78a2d63ea9a7d56eadeead916121bd47efc2c77ff94baf7ec629fdd493b3",
+      "runtime_size_bytes": 69712,
+      "size_bytes": 80176
+    }
+  ]
+}

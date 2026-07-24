@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:jerryliu",
+  "canonical_name": "Jerry Liu",
+  "identity_family_id": "multi-identity",
+  "identity_mode": "multi",
+  "registration_category": "多重身份",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "jerry-liu-llamaindex",
+  "subject_uid": "person-e6b416cc83ed4f07",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/jerry-liu-llamaindex-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T10:30:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0",
+      "outer_sha256": "dcc1aa0db12474c23a1dd01b6795bbfd0ae644235cd23ebf4a91dc88df03ff13",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/jerry-liu-llamaindex-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "5f3ec933ec911d14f17bb6e8a72ffcdbe492e62ba7cb602a21e60d4f1d553467",
+      "runtime_size_bytes": 68718,
+      "size_bytes": 80009
+    }
+  ]
+}

@@ -5,7 +5,7 @@
 ## 当前 canonical roster
 
 <!-- PERSONA-REGISTRY:START -->
-当前唯一登记：**52 个人物**。
+当前唯一登记：**70 个人物**。
 
 | 人物 | 唯一身份 | 版本 | 场景 | 关键能力 | 准备度 |
 |---|---|---|---|---|---|
@@ -16,6 +16,8 @@
 | Andrej Karpathy / 安德烈·卡帕西 | `多重身份` | `0.0.0.1` | 深度学习与 LLM 原理教学、课程和教材设计；训练故障诊断、实验设计、消融与评测 | 深度学习、计算机视觉、视觉语言与 LLM 训练的机制级解释；用小型可读代码重建自动微分、语言模型和推理/训练流程 | `ready` |
 | Aswath Damodaran | `多重身份` | `0.0.0.1` | 上市与非上市公司估值；高增长、亏损或复杂公司的情景分析 | 叙事到收入、利润、再投资、风险和终值的量化映射；透明 DCF、相对定价和风险溢价分析 | `ready` |
 | Ben Horowitz | `多重身份` | `0.0.0.1` | strategy-decision；leadership-organization | 和平/战时情境诊断与危机优先级收敛；创始人、CEO 与高管岗位匹配判断 | `ready` |
+| Charles Becht IV | `多重身份` | `0.0.0.1` | Pressure-piping and pressure-equipment design review；Mechanical-integrity and fitness-for-service planning | ASME B31.3/B31.1 interpretation；Bellows and expansion-joint mechanics | `ready` |
+| Charles Eastman | `多重身份` | `0.0.0.1` | teaching-learning；research-problem-solving | 体验式教育与品格训练设计；历史思想与第一人称文本分析 | `ready` |
 | Charlie Munger | `多重身份` | `0.0.0.1` | Company and acquisition analysis with current filings and valuation data.；Capital allocation, portfolio review, and downside stress testing. | Business-quality and opportunity-cost analysis.；Inversion-led risk identification and lollapalooza-effect red teaming. | `ready` |
 | Chip Huyen | `多重身份` | `0.0.0.1` | AI/ML system architecture and production-readiness review；Foundation-model application strategy, evaluation, and feedback design | End-to-end AI/ML system design；Evaluation, monitoring, and feedback-loop design | `ready` |
 | Christopher Manning | `多重身份` | `0.0.0.1` | NLP/LLM research strategy and experiment design；Technical architecture and benchmark review | Frame NLP/LLM research questions as measurable phenomena, representations, baselines and falsifiable experiments.；Review model architectures, objectives, datasets and benchmarks with error, calibration, factuality and transfer controls. | `ready` |
@@ -24,19 +26,27 @@
 | David T. Hulett | `多重身份` | `0.0.0.1` | schedule quality review；schedule risk analysis design | CPM schedule diagnostics；Monte Carlo schedule risk analysis | `ready` |
 | Donald G. Reinertsen | `多重身份` | `0.0.0.1` | 产品开发经济学与项目组合排序；研发流、队列、WIP、批量与反馈诊断 | Cost of Delay 与经济共同尺度建模；排队、利用率、容量缓冲与 WIP 控制 | `ready` |
 | Edward O. Thorp（爱德华·索普） | `多重身份` | `0.0.0.1` | 量化或基本面投资方案审查；研究假设、实验与原型设计 | 状态变量建模与判别实验；概率优势、Kelly仓位与破产风险 | `ready` |
+| Ernest Rabinowicz | `多重身份` | `0.0.0.1` | Friction, wear, galling and fretting failure analysis.；Material-pair, coating, solid-film and clearance screening. | Build and rank physical mechanisms from contact conditions and surface evidence.；Select discriminating measurements and critical experiments. | `ready` |
 | Hamel Husain | `多重身份` | `0.0.0.1` | AI 产品错误分析与评测体系设计；LLM-as-a-judge 验证与 failure taxonomy 建立 | 真实 trace 驱动的错误分析与评测闭环；领域专家标注、定性编码与窄判据设计 | `ready` |
 | Harry Bhadeshia | `多重身份` | `0.0.0.1` | phase transformation and physical metallurgy analysis；steel alloy and heat-treatment concept design | thermodynamics-kinetics-microstructure-property reasoning；bainite, martensite, pearlite and multicomponent steel analysis | `ready` |
+| Jerry Liu | `多重身份` | `0.0.0.1` | LLM, RAG, long-context, and agent architecture design；Document parsing, retrieval, extraction, and workflow automation | Context and data architecture for LLM applications；Parse–Retrieve–Reason–Act workflow decomposition | `ready` |
+| John K. Hollmann | `多重身份` | `0.0.0.1` | capital-project estimate classification and independent validation；project cost and schedule risk quantification | estimate classification, benchmarking and validation；parametric systemic-risk and integrated cost-schedule QRA | `ready` |
+| John Moubray | `多重身份` | `0.0.0.1` | Reliability-centered maintenance analysis and review；Maintenance strategy design, optimization, and audit | Define functions, performance standards, functional failures, and reasonably likely failure modes in operating context.；Classify failure consequences and select proactive tasks or default actions with explicit criteria. | `ready` |
 | Karen Spärck Jones | `多重身份` | `0.0.0.1` | 搜索、排序、RAG、NLP与自动摘要方案评审；benchmark、共享任务和离线/在线评测设计 | 任务—系统角色建模；信息检索与概率证据分析 | `ready` |
 | Kent Beck | `多重身份` | `0.0.0.1` | TDD and test-strategy design；Refactoring and evolutionary architecture review | Software design and refactoring economics；Test-driven development and feedback-loop design | `ready` |
 | Lauri Koskela | `多重身份` | `0.0.0.1` | Lean construction and production-system diagnosis.；Project-management theory and planning-system review. | Transformation–Flow–Value analysis.；Implicit-theory reconstruction and abstraction audit. | `ready` |
+| Leslie Lamport | `多重身份` | `0.0.0.1` | 分布式协议和并发系统评审；TLA+/状态机规格设计 | 分布式因果、一致性、共识、互斥和快照推理；状态/动作规格与 safety/liveness 分解 | `ready` |
 | Martin Fischer | `多重身份` | `0.0.0.1` | VDC/BIM 战略与实施路线图；产品—组织—流程诊断 | 生命周期价值与业务目标建模；POP 系统分析 | `ready` |
 | Martin Fowler / 马丁·福勒 | `多重身份` | `0.0.0.1` | 软件架构与微服务/单体取舍评审；重构、技术债与遗留系统渐进迁移 | 小步保持行为的重构和迁移规划；架构收益、成本、前置条件和失败模式分析 | `ready` |
+| Matei Zaharia | `多重身份` | `0.0.0.1` | 分布式系统、数据库、数据平台与 AI 系统架构评审；科研选题、实验设计、基准与故障复盘 | 工作负载驱动的系统抽象与架构分解；统一平台与分层/专用替代方案比较 | `ready` |
 | Michael J. Mauboussin | `多重身份` | `0.0.0.1` | 公司研究与价格隐含预期分析；资本配置、并购、回购和再投资评估 | Expectations Investing / reverse DCF；ROIC与资本成本驱动的价值创造分析 | `ready` |
 | Nancy Leveson | `多重身份` | `0.0.0.1` | Complex system safety and cybersecurity review；STPA-style proactive hazard analysis | System-level causal reframing；Control-structure modeling | `ready` |
 | Omar Khattab | `多重身份` | `0.0.0.1` | research-problem-solving；general-agentic-work | 多向量与晚交互检索系统；检索增强与多阶段 NLP 系统 | `ready` |
 | Paul Michael Teicholz | `多重身份` | `0.0.0.1` | BIM/VDC strategy and implementation review；AEC information architecture and interoperability | Project-control and performance-measurement framing；Cross-discipline information and interface architecture | `ready` |
+| Philip Crosby | `多重身份` | `0.0.0.1` | 质量战略、流程可靠性与返工成本诊断；领导团队质量哲学与共同语言工作坊 | 要求工程与可操作质量定义；预防优先的根因与执行设计 | `ready` |
 | Rafael Sacks | `多重身份` | `0.0.0.1` | research-problem-solving；strategy-decision | BIM/施工信息架构与互操作分析；Lean Construction 与生产流测量 | `ready` |
 | Rich Hickey | `多重身份` | `0.0.0.1` | 软件与数据系统架构评审；语言、API 与库设计 | 把需求改写为问题、约束、非目标、替代方案与证伪条件；识别概念、职责、位置、时间和执行策略的缠结 | `ready` |
+| Richard (Doc) Palmer | `多重身份` | `0.0.0.1` | 维护计划与排程体系设计或重构；CMMS/EAM工单流程与job-plan library设计 | 规划—排程—执行—反馈闭环诊断；维护组织角色与责任设计 | `ready` |
 | Robert A. Kindler | `多重身份` | `0.0.0.1` | M&A strategy and transaction screening；board and corporate-governance decision support | legal-commercial dual-track analysis；transaction lifecycle and stage-gate design | `ready` |
 | Sam Walton | `多重身份` | `0.0.0.1` | Retail and multi-site strategy；Inventory and supply-chain diagnosis | Unit-economics flywheel mapping；Store-cluster and distribution-density planning | `ready` |
 | Shreya Shankar | `多重身份` | `0.0.0.1` | LLM application evaluation and error analysis；Unstructured document-processing architecture | End-to-end AI/ML system decomposition；Task-specific evaluation and validator design | `ready` |
@@ -45,9 +55,17 @@
 | Stephen E. Robertson | `多重身份` | `0.0.0.1` | 信息检索与搜索架构评审；排序/过滤/告警实验设计 | 概率相关性与排序原则分析；BM25/BM25F 概念与工程取舍 | `ready` |
 | Thomas L. Saaty | `多重身份` | `0.0.0.1` | Complex multi-criteria selection and prioritization；Strategy and portfolio decisions using benefits, opportunities, costs, and risks | AHP hierarchy and pairwise-comparison design；ANP dependence, feedback, and supermatrix modeling | `ready` |
 | 大野耐一 / Taiichi Ohno | `多重身份` | `0.0.0.1` | 制造与服务流程诊断；交付周期与在制品改善 | 端到端流动、WIP、周期和瓶颈诊断；拉动补充、看板约束与可视异常设计 | `ready` |
+| 新乡重夫 / Shigeo Shingo | `多重身份` | `0.0.0.1` | 制造与服务流程诊断；换模、部署、交接和准备时间压缩 | 流程—作业网络分析；SMED快速切换 | `ready` |
+| 田口玄一 Genichi Taguchi | `多重身份` | `0.0.0.1` | 稳健产品与工艺设计；实验与仿真方案评审 | 功能—信号—响应—噪声建模；参数设计与公差优先级 | `ready` |
+| 约瑟夫·M·朱兰（Joseph M. Juran） | `多重身份` | `0.0.0.1` | 运营与服务流程改善；企业质量治理和年度项目组合 | 客户与适用性分析；质量三部曲定位 | `ready` |
+| 辛多·寇 / Sindo Kou | `多重身份` | `0.0.0.1` | 焊接冶金与凝固裂纹机理诊断；焊池流动、熔深与表面活性效应分析 | 多物理因果建模与区域分解；竞争机制与区分性试验设计 | `ready` |
+| Adam Booth (Abom79) | `技术工程师` | `0.0.0.1` | manual-machining-process-planning；industrial-repair-and-replacement-parts | datum, setup and workholding analysis；manual-versus-CNC route selection | `ready` |
+| Ali Erdemir | `技术工程师` | `0.0.0.1` | 摩擦学与表面工程科研选题；涂层和润滑剂实验设计 | 摩擦系统工况建模；界面摩擦化学与低剪切机制分析 | `ready` |
 | Barbara Liskov | `技术工程师` | `0.0.0.1` | research-problem-solving；technical-architecture | 数据抽象与行为规格；模块化与局部推理 | `ready` |
 | George Antaki | `技术工程师` | `0.0.0.1` | 压力设备与管道技术方案审查；适用性评价与剩余寿命问题分解 | 压力设备与管道设计、载荷和完整性问题结构化；损伤机制—失效模式—适用规范链路诊断 | `ready` |
+| Heinz P. Bloch | `技术工程师` | `0.0.0.1` | rotating-equipment failure review；pump/compressor reliability strategy | failure definition and structured troubleshooting；machinery reliability and failure avoidance | `ready` |
 | Ian Michael Hutchings | `技术工程师` | `0.0.0.1` | Tribology, wear and erosion diagnosis；Inkjet and droplet-process research planning | Mechanism trees and discriminating experiments；High-speed/measurement-chain reasoning | `ready` |
+| John C. Lippold | `技术工程师` | `0.0.0.1` | 焊接裂纹与失效机理诊断；可焊性试验选择与研究设计 | 焊接冶金与热影响区/熔合边界分析；热裂、液化、DDC 与氢致裂纹机制区分 | `ready` |
 | John Carmack（约翰·卡马克） | `技术工程师` | `0.0.0.1` | 系统架构、性能、延迟与可靠性诊断；受限平台、交互原型与技术产品定义 | 端到端瓶颈分析与可观察量设计；最小可运行路径、快速迭代和原型到生产边界 | `ready` |
 | R. Keith Mobley | `技术工程师` | `0.0.0.1` | research-problem-solving；strategy-decision | 全生命周期资产价值与维护战略诊断；正常状态、失效模式和状态监测设计 | `ready` |
 | Howard Marks | `投资资本家` | `0.0.0.1` | 公司与证券研究；组合风险审查 | 价格—价值与隐含预期分析；风险分布和压力测试 | `ready` |

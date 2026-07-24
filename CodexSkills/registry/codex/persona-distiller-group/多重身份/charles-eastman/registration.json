@@ -1,0 +1,26 @@
+{
+  "canonical_key": "historical:charleseastman",
+  "canonical_name": "Charles Eastman",
+  "identity_family_id": "multi-identity",
+  "identity_mode": "multi",
+  "registration_category": "多重身份",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "charles-eastman",
+  "subject_uid": "person-7ebc47cec1b5b617",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/charles-eastman-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T12:30:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0",
+      "outer_sha256": "63f38bdf163a7df761a432b459187759929e7f75efe20725d21e7018f6784dfd",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/charles-eastman-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "ec6fe0414b27ef5a9941d904f86a18d16114a2ba0a5e41dd2ba13c6237aa64b9",
+      "runtime_size_bytes": 68895,
+      "size_bytes": 79228
+    }
+  ]
+}

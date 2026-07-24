@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:辛多寇/sindokou",
+  "canonical_name": "辛多·寇 / Sindo Kou",
+  "identity_family_id": "multi-identity",
+  "identity_mode": "multi",
+  "registration_category": "多重身份",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "sindo-kou",
+  "subject_uid": "person-bf55f8dae7410898",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/sindo-kou-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T12:00:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0",
+      "outer_sha256": "95b37dd38410343d6ec355a74196bd5cbf06599ba4ca5cb46ac479e8d5573a1e",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/sindo-kou-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "5009977e4bfa4dad926cca9ba26794ce1bd6b54d888221c137bd273a9fe2a027",
+      "runtime_size_bytes": 60696,
+      "size_bytes": 561572
+    }
+  ]
+}
