@@ -5,7 +5,7 @@
     {
       "skill_id": "dynamic-personal-profile-update",
       "source": "codex",
-      "version": "0.0.0.1",
+      "version": "0.0.0.2",
       "status": "candidate_for_acceptance",
       "entry": "codex/dynamic-personal-profile-update/registry.yaml",
       "skill_entry": "codex/dynamic-personal-profile-update/SKILL.md",

@@ -66,7 +66,7 @@ class DynamicProfileIntegrationTests(unittest.TestCase):
         self.assertTrue((REGISTRY / record["skill_entry"]).is_file())
         registry_text = (SKILL / "registry.yaml").read_text(encoding="utf-8")
         self.assertIn('schema_version: "skill_registry.v1"', registry_text)
-        self.assertIn('version: "0.0.0.1"', registry_text)
+        self.assertIn('version: "0.0.0.2"', registry_text)
 
     def test_dynamic_profile_route_is_derived_read_only(self) -> None:
         routes_path = REPO_ROOT / "OpenAIDatabase/config/context_sources/resource_routes.json"

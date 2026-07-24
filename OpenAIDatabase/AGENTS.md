@@ -94,7 +94,7 @@ Do not silently drop memory-affecting changes.
   recovery code、browser credential/state、local absolute path、`.local_keys/`、`.env` 永不提交；
   owner 授权不能覆盖此禁令。
 - 不生成或跟踪完整 private-origin tar/zip/bundle/split archive。默认恢复资产仍仅存 owner 控制的
-  private `LinzeColin/AgentDatabase-Private` Release；仓库只留脱敏 asset id、size、SHA-256 disposition。
+  private `LinzeColin/Private-Database` Release；仓库只留脱敏 asset id、size、SHA-256 disposition。
   唯一例外是 owner 明确授权且完全受
   `config/storage/public_encrypted_backup_policy.json` 约束的 **public ciphertext-only Release asset**：
   它只能是 GitHub Release asset，永不作为 Git tracked 文件；不得包含明文成员、原始路径/文件名、密钥、

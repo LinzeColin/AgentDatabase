@@ -3,12 +3,12 @@
   "schema_version": "dynamic_personal_profile.v1",
   "artifact": "dynamic_personal_profile",
   "artifact_status": "generated_derived_view",
-  "skill_version": "0.0.0.1",
-  "generated_at": "2026-07-22T10:35:21Z",
+  "skill_version": "0.0.0.2",
+  "generated_at": "2026-07-24T02:47:00Z",
   "input_mode": "derived_only",
   "canonical_stable_profile_write": false,
   "source_snapshot_sha256": "sha256:b9cf4e6941c8967150af02ca7fd0ec1dda1b08b3e14cc544e5906b4411ec38a0",
-  "semantic_snapshot_sha256": "sha256:ea19bd26de66f703650bac16a8b74d8fda3f09876d5a7d99a599d4362647e452",
+  "semantic_snapshot_sha256": "sha256:266c4b8d65f2228484fa884e612ea9d13a739f4c72a5ac066612d3d663f981a7",
   "source_files": [
     {
       "path": "OpenAIDatabase/data/derived/behavior_intelligence/low_value_loops.json",
@@ -42,7 +42,7 @@
         "OpenAIDatabase/data/derived/codex/codex_agent_recommendations.json"
       ],
       "counterevidence": [
-        "This redacted derived summary was not independently rechecked against its underlying sessions in v0.0.0.1."
+        "This redacted derived summary was not independently rechecked against its underlying sessions in v0.0.0.2."
       ],
       "confidence": "high",
       "observed_window": "recent_30d",
@@ -61,7 +61,7 @@
         "OpenAIDatabase/data/derived/codex/codex_agent_recommendations.json"
       ],
       "counterevidence": [
-        "This redacted derived summary was not independently rechecked against its underlying sessions in v0.0.0.1."
+        "This redacted derived summary was not independently rechecked against its underlying sessions in v0.0.0.2."
       ],
       "confidence": "high",
       "observed_window": "recent_30d",
@@ -80,7 +80,7 @@
         "OpenAIDatabase/data/derived/codex/codex_agent_recommendations.json"
       ],
       "counterevidence": [
-        "This redacted derived summary was not independently rechecked against its underlying sessions in v0.0.0.1."
+        "This redacted derived summary was not independently rechecked against its underlying sessions in v0.0.0.2."
       ],
       "confidence": "high",
       "observed_window": "recent_30d",
@@ -99,7 +99,7 @@
         "OpenAIDatabase/data/derived/codex/codex_agent_recommendations.json"
       ],
       "counterevidence": [
-        "This redacted derived summary was not independently rechecked against its underlying sessions in v0.0.0.1."
+        "This redacted derived summary was not independently rechecked against its underlying sessions in v0.0.0.2."
       ],
       "confidence": "high",
       "observed_window": "recent_30d",
@@ -118,7 +118,7 @@
         "OpenAIDatabase/data/derived/codex/codex_agent_recommendations.json"
       ],
       "counterevidence": [
-        "This redacted derived summary was not independently rechecked against its underlying sessions in v0.0.0.1."
+        "This redacted derived summary was not independently rechecked against its underlying sessions in v0.0.0.2."
       ],
       "confidence": "high",
       "observed_window": "recent_30d",
@@ -137,7 +137,7 @@
         "OpenAIDatabase/data/derived/codex/codex_agent_recommendations.json"
       ],
       "counterevidence": [
-        "This redacted derived summary was not independently rechecked against its underlying sessions in v0.0.0.1."
+        "This redacted derived summary was not independently rechecked against its underlying sessions in v0.0.0.2."
       ],
       "confidence": "high",
       "observed_window": "recent_30d",
@@ -156,7 +156,7 @@
         "OpenAIDatabase/data/derived/codex/codex_agent_recommendations.json"
       ],
       "counterevidence": [
-        "This redacted derived summary was not independently rechecked against its underlying sessions in v0.0.0.1."
+        "This redacted derived summary was not independently rechecked against its underlying sessions in v0.0.0.2."
       ],
       "confidence": "high",
       "observed_window": "recent_30d",
@@ -380,7 +380,7 @@
 - 类型：`profile_signal`；资产候选：`observation`
 - 观察：GitHub 上的 OpenAIDatabase 应作为任意 agent 可读取的长期记忆、画像、偏好和历史上下文数据库。
 - 证据：`OpenAIDatabase/data/derived/codex/codex_agent_recommendations.json`
-- 反证：This redacted derived summary was not independently rechecked against its underlying sessions in v0.0.0.1.
+- 反证：This redacted derived summary was not independently rechecked against its underlying sessions in v0.0.0.2.
 - 置信度：`high`；时间窗口：`recent_30d`
 - 临时 Agent 行为：在下一次与“GitHub 上的 OpenAIDatabase 应作为任意 agent 可读取的长期记忆、画像、偏好和历史上下文数据库。”直接相关的任务中试用一次；若没有可观察收益或出现反证，立即失效。
 
@@ -389,7 +389,7 @@
 - 类型：`profile_signal`；资产候选：`observation`
 - 观察：GitHub 备份中不得提交 plaintext high-risk secrets；金融/交易 agent 使用 secret_ref 和受控本地 resolver。
 - 证据：`OpenAIDatabase/data/derived/codex/codex_agent_recommendations.json`
-- 反证：This redacted derived summary was not independently rechecked against its underlying sessions in v0.0.0.1.
+- 反证：This redacted derived summary was not independently rechecked against its underlying sessions in v0.0.0.2.
 - 置信度：`high`；时间窗口：`recent_30d`
 - 临时 Agent 行为：在下一次与“GitHub 备份中不得提交 plaintext high-risk secrets；金融/交易 agent 使用 secret_ref 和受控本地 resolver。”直接相关的任务中试用一次；若没有可观察收益或出现反证，立即失效。
 
@@ -398,7 +398,7 @@
 - 类型：`profile_signal`；资产候选：`observation`
 - 观察：所有 agent 访问后都应能生成适配用户的 profile、preference、project context、rules 和 history summary。
 - 证据：`OpenAIDatabase/data/derived/codex/codex_agent_recommendations.json`
-- 反证：This redacted derived summary was not independently rechecked against its underlying sessions in v0.0.0.1.
+- 反证：This redacted derived summary was not independently rechecked against its underlying sessions in v0.0.0.2.
 - 置信度：`high`；时间窗口：`recent_30d`
 - 临时 Agent 行为：在下一次与“所有 agent 访问后都应能生成适配用户的 profile、preference、project context、rules 和 history summary。”直接相关的任务中试用一次；若没有可观察收益或出现反证，立即失效。
 
@@ -407,7 +407,7 @@
 - 类型：`profile_signal`；资产候选：`observation`
 - 观察：用户明确要求使用真实 Codex / ChatGPT / GitHub 数据，不接受 mock、伪进度或只给概念演示。
 - 证据：`OpenAIDatabase/data/derived/codex/codex_agent_recommendations.json`
-- 反证：This redacted derived summary was not independently rechecked against its underlying sessions in v0.0.0.1.
+- 反证：This redacted derived summary was not independently rechecked against its underlying sessions in v0.0.0.2.
 - 置信度：`high`；时间窗口：`recent_30d`
 - 临时 Agent 行为：在下一次与“用户明确要求使用真实 Codex / ChatGPT / GitHub 数据，不接受 mock、伪进度或只给概念演示。”直接相关的任务中试用一次；若没有可观察收益或出现反证，立即失效。
 
@@ -416,7 +416,7 @@
 - 类型：`profile_signal`；资产候选：`observation`
 - 观察：用户说先不开始时必须先澄清需求；用户授权开始后应持续推进到可验证结果。
 - 证据：`OpenAIDatabase/data/derived/codex/codex_agent_recommendations.json`
-- 反证：This redacted derived summary was not independently rechecked against its underlying sessions in v0.0.0.1.
+- 反证：This redacted derived summary was not independently rechecked against its underlying sessions in v0.0.0.2.
 - 置信度：`high`；时间窗口：`recent_30d`
 - 临时 Agent 行为：在下一次与“用户说先不开始时必须先澄清需求；用户授权开始后应持续推进到可验证结果。”直接相关的任务中试用一次；若没有可观察收益或出现反证，立即失效。
 
@@ -425,7 +425,7 @@
 - 类型：`profile_signal`；资产候选：`observation`
 - 观察：用户长期偏好中文输出；代码、API、库名、错误信息和专业术语可保留英文。
 - 证据：`OpenAIDatabase/data/derived/codex/codex_agent_recommendations.json`
-- 反证：This redacted derived summary was not independently rechecked against its underlying sessions in v0.0.0.1.
+- 反证：This redacted derived summary was not independently rechecked against its underlying sessions in v0.0.0.2.
 - 置信度：`high`；时间窗口：`recent_30d`
 - 临时 Agent 行为：在下一次与“用户长期偏好中文输出；代码、API、库名、错误信息和专业术语可保留英文。”直接相关的任务中试用一次；若没有可观察收益或出现反证，立即失效。
 
@@ -434,7 +434,7 @@
 - 类型：`profile_signal`；资产候选：`observation`
 - 观察：处理记忆或行为数据后，应输出人能直接使用的话题、行动、建议、机会、ROI、能力成长和风险提醒。
 - 证据：`OpenAIDatabase/data/derived/codex/codex_agent_recommendations.json`
-- 反证：This redacted derived summary was not independently rechecked against its underlying sessions in v0.0.0.1.
+- 反证：This redacted derived summary was not independently rechecked against its underlying sessions in v0.0.0.2.
 - 置信度：`high`；时间窗口：`recent_30d`
 - 临时 Agent 行为：在下一次与“处理记忆或行为数据后，应输出人能直接使用的话题、行动、建议、机会、ROI、能力成长和风险提醒。”直接相关的任务中试用一次；若没有可观察收益或出现反证，立即失效。
 

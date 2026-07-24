@@ -1,4 +1,4 @@
 interface:
   display_name: "Dynamic Personal Profile Update"
-  short_description: "Update one time-aware profile Markdown from derived data"
-  default_prompt: "Use $dynamic-personal-profile-update to update and validate the single profile Markdown from allowlisted derived data, then report only material changes and reusable asset candidates."
+  short_description: "Update one derived profile or audit Stage 2 readiness"
+  default_prompt: "Use $dynamic-personal-profile-update to update and validate the single profile Markdown from allowlisted derived data, or to audit Stage 2 readiness from GitHub metadata only; never read raw content unless a later phase contract is active."

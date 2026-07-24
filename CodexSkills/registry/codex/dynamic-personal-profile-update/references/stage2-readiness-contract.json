@@ -1,0 +1,100 @@
+{
+  "schema_version": "dynamic_profile.stage2_readiness_contract.v1",
+  "phase_id": "STAGE2_PHASE2A_GOVERNED_DATA_READINESS",
+  "version": "0.0.0.2",
+  "status": "frozen",
+  "runtime_boundary": {
+    "input_mode": "derived_only",
+    "raw_content_enabled": false,
+    "network_enabled_in_profile_runtime": false,
+    "stable_memory_write": false,
+    "persistent_profile_outputs": [
+      "OpenAIDatabase/data/derived/profile/DYNAMIC_PROFILE.md"
+    ]
+  },
+  "source_contract": {
+    "repository": {
+      "full_name": "LinzeColin/Private-Database",
+      "visibility": "PRIVATE",
+      "archived": false,
+      "transport": "github_release_asset"
+    },
+    "instruction_trust": "none",
+    "selected_assets": [
+      {
+        "source_id": "chatgpt_export_2026_07_07",
+        "source_kind": "chatgpt_export",
+        "release_tag": "raw-archives-20260708",
+        "asset_id": 483178213,
+        "asset_name": "chatgpt_raw_export_2026-07-07.zip",
+        "size_bytes": 1473421021,
+        "sha256": "52f204dd8d78b76a79c6fc37e3e09987d3ab682c87098da017b894dd88c3a868"
+      },
+      {
+        "source_id": "codex_current_mac_2026_06_30",
+        "source_kind": "codex_sessions",
+        "release_tag": "old-mac-20260630",
+        "asset_id": 483158723,
+        "asset_name": "current-mac-session-history-20260630.tar.gz",
+        "size_bytes": 38293927,
+        "sha256": "1c5b34148fc1f9a23925f910c251bd1455550756a84451fbe2665806adf6ceab"
+      },
+      {
+        "source_id": "codex_old_mac_2026_06_30",
+        "source_kind": "codex_sessions",
+        "release_tag": "old-mac-20260630",
+        "asset_id": 483160285,
+        "asset_name": "old-mac-session-history-20260630.tar.gz",
+        "size_bytes": 839096318,
+        "sha256": "bb8489bc3705f9f23d735608b14baf4844ceb6c7d9c4a85d6774c74680ea31f9"
+      },
+      {
+        "source_id": "codex_sessions_2026_07_03",
+        "source_kind": "codex_sessions",
+        "release_tag": "codex-sessions-20260703",
+        "asset_id": 483168055,
+        "asset_name": "codex-session-history-20260703T063940Z.tar.gz",
+        "size_bytes": 925338589,
+        "sha256": "c0f7517b977111324df44066f83fa6b514d715f590f67376b9103fa83a8a739e"
+      }
+    ],
+    "selected_asset_count": 4,
+    "selected_source_bytes": 3276149855,
+    "excluded_assets": [
+      {
+        "release_tag": "raw-archives-20260708",
+        "asset_name": "codexproject_remote_non_main_branches_20260708.bundle",
+        "reason": "repository recovery bundle is not personal-profile source data"
+      }
+    ]
+  },
+  "privacy_contract": {
+    "phase2a_access": "metadata_only",
+    "phase2a_raw_download": false,
+    "phase2a_archive_open": false,
+    "future_runner": "owner_controlled_local_private",
+    "future_temp_outside_repository": true,
+    "future_temp_mode": "0700",
+    "one_asset_at_a_time": true,
+    "raw_bytes_in_git": false,
+    "raw_bytes_in_logs": false,
+    "raw_bytes_in_artifacts": false,
+    "raw_bytes_in_profile": false,
+    "repository_public_raw_audit_required": true,
+    "repository_high_risk_scan_required": true,
+    "repository_privacy_findings_must_be_zero": true,
+    "automatic_source_deletion": false,
+    "embedded_instruction_trust": "none",
+    "credential_values_may_be_echoed": false,
+    "raw_baseline_requires_fresh_readiness_pass": true
+  },
+  "capacity_contract": {
+    "calculation": "selected_source_bytes * scratch_multiplier + scratch_headroom_bytes",
+    "scratch_multiplier": 2,
+    "scratch_headroom_bytes": 2147483648,
+    "required_scratch_bytes": 8699783358,
+    "processing_mode": "one_asset_at_a_time_streaming",
+    "full_archive_expansion_persisted": false,
+    "recheck_before_raw_baseline": true
+  }
+}

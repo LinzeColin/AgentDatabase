@@ -44,7 +44,7 @@
   "external_destinations": [
     {
       "domain": "private_origin_recovery",
-      "requirement": "owner-controlled private LinzeColin/AgentDatabase-Private Release; metadata only in CodexProject",
+      "requirement": "owner-controlled private LinzeColin/Private-Database Release; metadata only in AgentDatabase",
       "writer": "none in this repository"
     }
   ],

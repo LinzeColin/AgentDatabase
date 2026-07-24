@@ -68,7 +68,7 @@
   },
   "private_origin_policy": {
     "destination": "external private release storage",
-    "repository": "LinzeColin/AgentDatabase-Private",
+    "repository": "LinzeColin/Private-Database",
     "tracked_private_roots_forbidden": [
       "data/private_imports",
       "data/private",
