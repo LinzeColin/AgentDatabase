@@ -18,6 +18,8 @@ jobs:
     if: github.ref_name == github.event.repository.default_branch
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    env:
+      PYTHONDONTWRITEBYTECODE: "1"
     steps:
       - name: Checkout default branch
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
@@ -26,21 +28,21 @@ jobs:
 
       - name: Run deterministic regression tests
         run: >-
-          python3 -m unittest discover
+          python3 -B -m unittest discover
           -s CodexSkills/registry/codex/dynamic-personal-profile-update/tests
           -p 'test_*.py'
           -q
 
       - name: Generate one derived profile file
         run: >-
-          python3
+          python3 -B
           CodexSkills/registry/codex/dynamic-personal-profile-update/scripts/update_dynamic_profile.py
           --database-dir .
           --output OpenAIDatabase/data/derived/profile/DYNAMIC_PROFILE.md
 
       - name: Validate output
         run: >-
-          python3
+          python3 -B
           CodexSkills/registry/codex/dynamic-personal-profile-update/scripts/validate_dynamic_profile.py
           --profile OpenAIDatabase/data/derived/profile/DYNAMIC_PROFILE.md
 
