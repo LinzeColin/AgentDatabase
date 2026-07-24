@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:dangelbart",
+  "canonical_name": "Dan Gelbart",
+  "identity_family_id": "multi-identity",
+  "identity_mode": "multi",
+  "registration_category": "多重身份",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "dan-gelbart",
+  "subject_uid": "person-8780bb999e445f70",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/dan-gelbart-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T03:10:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0-evidence-20260724",
+      "outer_sha256": "fce5593317bfaf671cae8a21853f879da213f24af33bde8e9392c21e965787d9",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/dan-gelbart-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "e63773c31cbcfad3206acb9c45dfa871a8f5037b41b4f44386482d0b3f3f985f",
+      "runtime_size_bytes": 64622,
+      "size_bytes": 74668
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:christophermanning",
+  "canonical_name": "Christopher Manning",
+  "identity_family_id": "multi-identity",
+  "identity_mode": "multi",
+  "registration_category": "多重身份",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "christopher-manning",
+  "subject_uid": "person-96bb0442b3c17467",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/christopher-manning-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T02:40:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0-evidence-grounded",
+      "outer_sha256": "7b3a6f5daf3eaa1745feca51e14270ed18fe3fd3fe782554a9a9cd01b2c21870",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/christopher-manning-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "96b66228678b7a018075cdde1aa3c9aec83f324e62e300bca5b08c5083d231be",
+      "runtime_size_bytes": 79463,
+      "size_bytes": 554470
+    }
+  ]
+}

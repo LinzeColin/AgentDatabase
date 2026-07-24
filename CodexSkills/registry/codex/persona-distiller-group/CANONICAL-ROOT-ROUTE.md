@@ -5,7 +5,7 @@
 ## 当前 canonical roster
 
 <!-- PERSONA-REGISTRY:START -->
-当前唯一登记：**29 个人物**。
+当前唯一登记：**35 个人物**。
 
 | 人物 | 唯一身份 | 版本 | 场景 | 关键能力 | 准备度 |
 |---|---|---|---|---|---|
@@ -17,16 +17,22 @@
 | Ben Horowitz | `多重身份` | `0.0.0.1` | strategy-decision；leadership-organization | 和平/战时情境诊断与危机优先级收敛；创始人、CEO 与高管岗位匹配判断 | `ready` |
 | Charlie Munger | `多重身份` | `0.0.0.1` | Company and acquisition analysis with current filings and valuation data.；Capital allocation, portfolio review, and downside stress testing. | Business-quality and opportunity-cost analysis.；Inversion-led risk identification and lollapalooza-effect red teaming. | `ready` |
 | Chip Huyen | `多重身份` | `0.0.0.1` | AI/ML system architecture and production-readiness review；Foundation-model application strategy, evaluation, and feedback design | End-to-end AI/ML system design；Evaluation, monitoring, and feedback-loop design | `ready` |
+| Christopher Manning | `多重身份` | `0.0.0.1` | NLP/LLM research strategy and experiment design；Technical architecture and benchmark review | Frame NLP/LLM research questions as measurable phenomena, representations, baselines and falsifiable experiments.；Review model architectures, objectives, datasets and benchmarks with error, calibration, factuality and transfer controls. | `ready` |
+| Dan Gelbart | `多重身份` | `0.0.0.1` | 技术架构与故障诊断；实验与原型计划 | 跨物理域功能分解与误差路径建模；快速原型与直接测量闭环 | `ready` |
 | David Packard | `多重身份` | `0.0.0.1` | Company strategy and product-field selection；Leadership, organization design and management systems | Contribution-gated opportunity screening；Management-by-objectives operating design | `ready` |
 | Edward O. Thorp（爱德华·索普） | `多重身份` | `0.0.0.1` | 量化或基本面投资方案审查；研究假设、实验与原型设计 | 状态变量建模与判别实验；概率优势、Kelly仓位与破产风险 | `ready` |
 | Kent Beck | `多重身份` | `0.0.0.1` | TDD and test-strategy design；Refactoring and evolutionary architecture review | Software design and refactoring economics；Test-driven development and feedback-loop design | `ready` |
+| Martin Fischer | `多重身份` | `0.0.0.1` | VDC/BIM 战略与实施路线图；产品—组织—流程诊断 | 生命周期价值与业务目标建模；POP 系统分析 | `ready` |
 | Martin Fowler / 马丁·福勒 | `多重身份` | `0.0.0.1` | 软件架构与微服务/单体取舍评审；重构、技术债与遗留系统渐进迁移 | 小步保持行为的重构和迁移规划；架构收益、成本、前置条件和失败模式分析 | `ready` |
 | Michael J. Mauboussin | `多重身份` | `0.0.0.1` | 公司研究与价格隐含预期分析；资本配置、并购、回购和再投资评估 | Expectations Investing / reverse DCF；ROIC与资本成本驱动的价值创造分析 | `ready` |
 | Rich Hickey | `多重身份` | `0.0.0.1` | 软件与数据系统架构评审；语言、API 与库设计 | 把需求改写为问题、约束、非目标、替代方案与证伪条件；识别概念、职责、位置、时间和执行策略的缠结 | `ready` |
 | Robert A. Kindler | `多重身份` | `0.0.0.1` | M&A strategy and transaction screening；board and corporate-governance decision support | legal-commercial dual-track analysis；transaction lifecycle and stage-gate design | `ready` |
 | Sam Walton | `多重身份` | `0.0.0.1` | Retail and multi-site strategy；Inventory and supply-chain diagnosis | Unit-economics flywheel mapping；Store-cluster and distribution-density planning | `ready` |
+| Shreya Shankar | `多重身份` | `0.0.0.1` | LLM application evaluation and error analysis；Unstructured document-processing architecture | End-to-end AI/ML system decomposition；Task-specific evaluation and validator design | `ready` |
 | Simon Willison | `多重身份` | `0.0.0.1` | 技术方案与代码变更审查；coding-agent 工作流设计与评测 | Python/SQLite/CLI 开源工程工作系统；测试驱动、可回退、可审查的变更与发布 | `ready` |
+| Stephen E. Robertson | `多重身份` | `0.0.0.1` | 信息检索与搜索架构评审；排序/过滤/告警实验设计 | 概率相关性与排序原则分析；BM25/BM25F 概念与工程取舍 | `ready` |
 | Barbara Liskov | `技术工程师` | `0.0.0.1` | research-problem-solving；technical-architecture | 数据抽象与行为规格；模块化与局部推理 | `ready` |
+| R. Keith Mobley | `技术工程师` | `0.0.0.1` | research-problem-solving；strategy-decision | 全生命周期资产价值与维护战略诊断；正常状态、失效模式和状态监测设计 | `ready` |
 | Howard Marks | `投资资本家` | `0.0.0.1` | 公司与证券研究；组合风险审查 | 价格—价值与隐含预期分析；风险分布和压力测试 | `ready` |
 | Joel Greenblatt | `投资资本家` | `0.0.0.1` | 公司研究与估值备忘录；特殊情形研究计划 | 现金流与资本回报驱动的企业估值；结构性错价诊断 | `ready` |
 | Nick Sleep | `投资资本家` | `0.0.0.1` | 公司与商业模型研究；长期投资决策与组合复盘 | 终点—机制—概率分析；规模经济共享与客户互惠飞轮识别 | `ready` |

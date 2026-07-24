@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:stephenerobertson",
+  "canonical_name": "Stephen E. Robertson",
+  "identity_family_id": "multi-identity",
+  "identity_mode": "multi",
+  "registration_category": "多重身份",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "stephen-e-robertson",
+  "subject_uid": "person-ca503314765392ac",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/stephen-e-robertson-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T02:45:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0",
+      "outer_sha256": "9f2ba43ca9175c602c6c90ba69f8042e180f9dbd6f8d6a3b5f67db3fb028d99a",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/stephen-e-robertson-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "dfb2123fa1fae33819e28ebca79886941ec75e21b12cf2a5e33d7ffde2411260",
+      "runtime_size_bytes": 70198,
+      "size_bytes": 81723
+    }
+  ]
+}

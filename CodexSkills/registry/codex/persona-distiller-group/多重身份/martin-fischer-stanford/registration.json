@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:martinfischer",
+  "canonical_name": "Martin Fischer",
+  "identity_family_id": "multi-identity",
+  "identity_mode": "multi",
+  "registration_category": "多重身份",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "martin-fischer-stanford",
+  "subject_uid": "person-d252cba93ec14799",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/martin-fischer-stanford-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T02:30:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0",
+      "outer_sha256": "13ce1715b276e90e0025bd29dc130cb73d49c5c67aaf33dd604b5424cd7adc5f",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/martin-fischer-stanford-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "381249c95c6c5f7bd4c42bf0ffc4e257a5da8a4c4197f6a551e9a3b90aa0c4a0",
+      "runtime_size_bytes": 74261,
+      "size_bytes": 83959
+    }
+  ]
+}

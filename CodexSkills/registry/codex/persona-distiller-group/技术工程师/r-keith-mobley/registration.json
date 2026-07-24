@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:rkeithmobley",
+  "canonical_name": "R. Keith Mobley",
+  "identity_family_id": "technical-engineer",
+  "identity_mode": "single",
+  "registration_category": "技术工程师",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "r-keith-mobley",
+  "subject_uid": "person-1e5375a989575f11",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/r-keith-mobley-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T01:53:37Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0",
+      "outer_sha256": "63dfbaa6ba1667a0d3126cea3b6296c878a768d0cb1abd07ed430fd3ab0617ef",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/r-keith-mobley-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "333e100ae4c766bfff8dde6f78e852621c99b9897f30eac2a4f602b64f2c3d66",
+      "runtime_size_bytes": 77874,
+      "size_bytes": 93064
+    }
+  ]
+}
