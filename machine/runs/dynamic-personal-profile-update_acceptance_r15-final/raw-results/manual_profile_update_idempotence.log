@@ -1,0 +1,6 @@
+FIRST:
+{"status": "CHANGED", "output": "OpenAIDatabase/data/derived/profile/DYNAMIC_PROFILE.md", "entry_count": 4, "input_source_count": 3, "evidence_source_count": 3, "semantic_snapshot_sha256": "sha256:ef11a3563821d8c575ed55f5049e5b2bf44b8c3c0cf935ebb0a06e8da9897e27"}
+
+
+SECOND:
+{"status": "NO_CHANGE", "semantic_snapshot_sha256": "sha256:ef11a3563821d8c575ed55f5049e5b2bf44b8c3c0cf935ebb0a06e8da9897e27"}

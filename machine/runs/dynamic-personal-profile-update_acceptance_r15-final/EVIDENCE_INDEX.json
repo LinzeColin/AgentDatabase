@@ -1,0 +1,202 @@
+{
+  "algorithm": "sha256",
+  "assurance_note": "Tamper-evident after finalization; not an authenticity signature.",
+  "evidence_root_sha256": "9f1e6cf2c0dfb6271aabab74d27519cfbd419515518a85601588331f79d867d1",
+  "excluded_seal_files": [
+    "ACCEPTANCE_ATTESTATION.intoto.json",
+    "EVIDENCE_INDEX.json",
+    "FINAL_DECISION.json",
+    "SHA256SUMS.txt"
+  ],
+  "file_count": 37,
+  "files": [
+    {
+      "path": "ACCEPTANCE_REQUEST.yaml",
+      "sha256": "447ccecfcaabfecb1e0f80f6902c7efc24aad52aef0750963b6d77563a9be710",
+      "size": 3709
+    },
+    {
+      "path": "AI_EVAL_MATRIX.md",
+      "sha256": "bfdd3ea2f2a9c69d131de406a325060b7c80735628a0e977605dca107411413a",
+      "size": 2721
+    },
+    {
+      "path": "DEFECT_REPORT.md",
+      "sha256": "471d2eb00390528cc9697b2ee7bc4a7dead93d97e0cf1cb4408c85ef7f7ebcf9",
+      "size": 3195
+    },
+    {
+      "path": "HUMAN_JOURNEY.md",
+      "sha256": "fa063b7a1ff606232acabc814b78d8845614ab2575ddf9d79cd7d5b9fe940f9e",
+      "size": 988
+    },
+    {
+      "path": "MODIFICATION_REPORT.md",
+      "sha256": "1148a940ad86feee2a1eb9bbec1c704a77285198bbbd3456491b268c08943307",
+      "size": 908
+    },
+    {
+      "path": "RELEASE_ASSURANCE.md",
+      "sha256": "283b7e77b4a88ed5731a1e8465353f03c2001ed8eb98f5448960fe9a1248a863",
+      "size": 2543
+    },
+    {
+      "path": "RUN_MANIFEST.yaml",
+      "sha256": "5056345fa887d35d27946df1de6560b083ec8bdecd6701ca2fa08e3093676331",
+      "size": 19022
+    },
+    {
+      "path": "TEST_MATRIX.md",
+      "sha256": "8366c1596c23f1322fe8b0e71ff929ad6b4bef8db18abb1b044e4eb689b6cfc8",
+      "size": 3449
+    },
+    {
+      "path": "TRACEABILITY_MATRIX.json",
+      "sha256": "363b999422ba92e274ff13a48cff459a9ac0e5c30d1ad964d294834c644c906d",
+      "size": 5981
+    },
+    {
+      "path": "VERDICT.md",
+      "sha256": "bc3381683376343a047f60d9be73c20e5e4e4b2db812eeec65c15bede5dddbb9",
+      "size": 4234
+    },
+    {
+      "path": "logs/compatibility_drift_report.txt",
+      "sha256": "62c062ad3d897c66ae7e6eacc757a355e41c2baabfa7a0076ab2811647b1a5f5",
+      "size": 1543
+    },
+    {
+      "path": "logs/manual_profile_update.log",
+      "sha256": "63cc379c895a435ec7a8f2abecc54380c712dca1f6f69d3cf4af7ed631a92c20",
+      "size": 273
+    },
+    {
+      "path": "logs/manual_profile_update_idempotence.log",
+      "sha256": "b4b264e1d79cee157870130597e636bdc483c15ebace4a73372fb87bc670fccf",
+      "size": 408
+    },
+    {
+      "path": "logs/manual_profile_validate.log",
+      "sha256": "cff8f0053248ba7387727600d04f1c9acb8fd1b7755e4b1712f41a9528a1ca11",
+      "size": 31
+    },
+    {
+      "path": "logs/testsuite.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    {
+      "path": "manual/OpenAIDatabase/data/derived/behavior_intelligence/low_value_loops.json",
+      "sha256": "763901064dc132abc5f96189e225826bb332a669d7152074e3da1d6452d4638c",
+      "size": 200
+    },
+    {
+      "path": "manual/OpenAIDatabase/data/derived/codex/codex_agent_recommendations.json",
+      "sha256": "7853aa5688bf7851fa3384d8ab0597c75e5972e050d9162469ad28cc44785c9c",
+      "size": 229
+    },
+    {
+      "path": "manual/OpenAIDatabase/data/derived/profile/CORE_PROFILE.md",
+      "sha256": "190d3dc428898be1d0173f71284b49c65efebc580aa315ccc905766b9e488529",
+      "size": 119
+    },
+    {
+      "path": "manual/OpenAIDatabase/data/derived/profile/DYNAMIC_PROFILE.md",
+      "sha256": "887eba16b9bb07636265d09b3832091608637a9537ea75f0702b65f883737844",
+      "size": 9796
+    },
+    {
+      "path": "manual/OpenAIDatabase/data/raw/ignore.txt",
+      "sha256": "5f0af516936c6ab13dfce52362f84a3c0aa8d87aca8f2bcaf55ad4e1e0178034",
+      "size": 6
+    },
+    {
+      "path": "pairs.csv",
+      "sha256": "caea1118446ee67258dc29820d47cf1e10f8952a1b459a71d3043f40051def74",
+      "size": 175
+    },
+    {
+      "path": "raw-results/compatibility_drift_report.txt",
+      "sha256": "62c062ad3d897c66ae7e6eacc757a355e41c2baabfa7a0076ab2811647b1a5f5",
+      "size": 1543
+    },
+    {
+      "path": "raw-results/evidence_index.txt",
+      "sha256": "1dce699329b040c7a494767f870f2a9748d26fb677f44bfeace94d6b4fd54284",
+      "size": 616
+    },
+    {
+      "path": "raw-results/manual_profile_update.log",
+      "sha256": "63cc379c895a435ec7a8f2abecc54380c712dca1f6f69d3cf4af7ed631a92c20",
+      "size": 273
+    },
+    {
+      "path": "raw-results/manual_profile_update_idempotence.log",
+      "sha256": "b4b264e1d79cee157870130597e636bdc483c15ebace4a73372fb87bc670fccf",
+      "size": 408
+    },
+    {
+      "path": "raw-results/manual_profile_validate.log",
+      "sha256": "cff8f0053248ba7387727600d04f1c9acb8fd1b7755e4b1712f41a9528a1ca11",
+      "size": 31
+    },
+    {
+      "path": "raw-results/manual_run/update.returncode",
+      "sha256": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
+      "size": 1
+    },
+    {
+      "path": "raw-results/taskpack-lock.json",
+      "sha256": "6a96dda4edb886ff46ae1b4b9388b2b35bf788d2f2c25221922170cd3028a165",
+      "size": 8831
+    },
+    {
+      "path": "raw-results/unittest_results.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    {
+      "path": "taskpack/TASKPACK_SOURCE_SNAPSHOT.zip",
+      "sha256": "491b87ee6bc8ea231d9f59eb1259a85f04eadef3ce6d03dc030727ac03bc7710",
+      "size": 39503
+    },
+    {
+      "path": "taskpack/acceptance_contract.md",
+      "sha256": "18dfaf8d78c7c0f21a3a9f7353fd2aed271d117ef877edbaa446fc0261ad4003",
+      "size": 2823
+    },
+    {
+      "path": "taskpack/manifest.yaml",
+      "sha256": "60b14bfe4b99ff1358eb640a6c60b78210af784513d53e5a77a8effec1340225",
+      "size": 1820
+    },
+    {
+      "path": "taskpack/prd.md",
+      "sha256": "fdd4a3f111fe01a02d040ee4dc31ae96166cfee8769d225ef00c1186d125ac4e",
+      "size": 3274
+    },
+    {
+      "path": "taskpack/pursuing_goal.md",
+      "sha256": "298da9f255c8c70b5f6b73b2340c97a773606dff5a8df38c814322ea5345c208",
+      "size": 545
+    },
+    {
+      "path": "taskpack/roadmap.md",
+      "sha256": "1488d0768eec92f62668964ada5b8537be9b1fe1f8772660c50056d50e503ec8",
+      "size": 1254
+    },
+    {
+      "path": "taskpack/task_graph.yaml",
+      "sha256": "7077d37e5dba3fb18dd7cca28db076e4a8083ad018573f2ebe6dd77f03323653",
+      "size": 2979
+    },
+    {
+      "path": "taskpack/technical_design.md",
+      "sha256": "450156759c28bb985fac4664587a0fb44e2b035fc2a5fe19ef92cc546e4b9ca7",
+      "size": 3014
+    }
+  ],
+  "generated_at": "2026-07-24T08:28:26.416110+00:00",
+  "run_directory": "dynamic-personal-profile-update_acceptance_r15-final",
+  "schema_version": "2.1"
+}

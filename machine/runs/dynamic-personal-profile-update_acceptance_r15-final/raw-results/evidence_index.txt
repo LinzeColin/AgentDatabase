@@ -1,0 +1,37 @@
+# Stage1 r15 Evidence Index
+
+Taskpack authoritative: True, version 0.0.0.1, pack digest 87a2522936eb7328044021f517dba4d7467d695627f713514b4d6152135413a6
+
+Acceptance IDs (taskpack lock):
+- AC-01
+- AC-02
+- AC-03
+- AC-04
+- AC-05
+- AC-06
+- AC-07
+- AC-08
+- AC-09
+- AC-10
+- AC-11
+- AC-12
+- AC-13
+- AC-14
+
+Task IDs (lock):
+- T01
+- T02
+- T03
+- T04
+- T05
+- T06
+- T07
+- T08
+
+Evidence files:
+- raw-results/unittest_results.log
+- raw-results/manual_profile_update.log
+- raw-results/manual_profile_update_idempotence.log
+- raw-results/manual_profile_validate.log
+- raw-results/compatibility_drift_report.txt
+- logs/testsuite.log

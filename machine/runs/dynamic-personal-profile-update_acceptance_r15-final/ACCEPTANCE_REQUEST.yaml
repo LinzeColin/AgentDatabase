@@ -1,0 +1,130 @@
+schema_version: "2.1"
+
+# Owner 通常只填 owner_input；其余由 verifier 自动发现。
+owner_input:
+  repository: "" # URL / PR / release / zip / local path
+  target_project:
+    name: "dynamic-personal-profile-update"
+    path: "" # 不知道可留空
+  expected_outcome: "" # 一句话业务结果，或引用 source_documents/taskpack
+  product_design_taskpack:
+    source: "" # 已定版目录/ZIP；没有可留空
+    authorization_reference: "" # 例如：Owner已批准v1.4及内容摘要
+    authorized_pack_digest_sha256: "" # 规范化完整任务包摘要；已知时填写，不知道由 verifier 计算
+  delivery_reference: "" # commit / PR / build；发布级最终不能为空
+  source_documents: []
+  environment_or_url: ""
+  notes: ""
+
+preferences:
+  decision_scope: "release_candidate" # developer_check|release_candidate|staged_release|post_deploy
+  profile: "auto" # auto|quick|standard|deep
+  language: "zh-CN"
+  release_intent: "none" # none|internal|staged|production
+  baseline_reference: ""
+  allow_safe_local_setup: true
+  allow_network_read: true
+  allow_third_party_write: false
+  allow_production_write: false
+  allow_real_payment_email_sms: false
+  load_test_authorized: false
+  active_security_scan_authorized: false
+  fault_injection_authorized: false
+  destructive_data_test_authorized: false
+
+# verifier 自动填写；Owner 不需要预先理解。
+verifier_discovered:
+  repository_root: ""
+  repository_remote: ""
+  branch: ""
+  git_head: ""
+  git_status: ""
+  source_snapshot_sha256: ""
+  target_project_path: ""
+  project_type: "" # web|api|data-pipeline|desktop|mobile|service|library|ai-agent|mixed
+  project_resolution_evidence: []
+  acceptance_closure: []
+  closure_evidence: []
+  included_paths: []
+  excluded_projects: []
+  entrypoints: []
+  build_commands: []
+  test_commands: []
+  critical_journeys: []
+  quality_thresholds: []
+  risk_level: ""
+  risk_triggers: []
+  unknowns_requiring_owner: []
+  taskpack:
+    detected: false
+    declared_version: ""
+    pack_digest_sha256: "" # 全任务包规范化文件树摘要
+    contract_digest_sha256: "" # 七个语义角色摘要
+    source_snapshot_sha256: ""
+    source_file_count: 0
+    acceptance_ids: []
+    task_ids: []
+    integrity_status: "NOT_APPLICABLE"
+    compatibility_status: "NOT_APPLICABLE"
+    drift_status: "NOT_APPLICABLE"
+  traceability:
+    status: "NOT_RUN"
+    mapped_acceptance_count: 0
+    change_impact_count: 0
+
+access_and_data:
+  test_account_references: [] # 只写引用，不写秘密值
+  credential_source: ""
+  data_classification: "synthetic" # synthetic|masked|real-sensitive
+  seed_or_snapshot: ""
+  reset_command: ""
+  cleanup_command: ""
+  invariants: []
+
+quality_gates:
+  functional: []
+  data: []
+  performance:
+    workload_model: ""
+    target_concurrency: null
+    target_rps: null
+    p95_ms_max: null
+    p99_ms_max: null
+    error_rate_max: null
+  resilience:
+    recovery_seconds_max: null
+    rto_seconds_max: null
+    rpo_seconds_max: null
+
+release:
+  strategy: "" # canary|ring|blue-green|rolling|not-applicable
+  rollout_groups: []
+  health_signals: []
+  business_invariants: []
+  required_bake_seconds: null
+  abort_conditions: []
+  rollback_or_rollforward: ""
+
+ai_system:
+  expected_applicable: null
+  task_distribution_reference: ""
+  external_action_limits: []
+  max_cost: null
+  max_steps: null
+  independent_evaluator_preference: "deterministic_or_cross_model"
+
+safety:
+  target_allowlist: []
+  max_vus: null
+  max_rps: null
+  max_duration_seconds: null
+  max_requests: null
+  max_cost: null
+  abort_conditions: []
+  kill_command: ""
+  rollback_or_restore: ""
+
+evidence:
+  output_root: ""
+  private_sensitive_evidence_root: ""
+  retention_days: 30

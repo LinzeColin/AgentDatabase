@@ -1,0 +1,268 @@
+{
+  "_format_note": "Strict JSON. One row per authoritative Acceptance ID. task_ids must exist in the locked Task Graph; test_ids must exist in RUN_MANIFEST.results. change_impact requires at least one record for a complete verdict.",
+  "schema_version": "2.1",
+  "target_project_name": "dynamic-personal-profile-update",
+  "subject_identity": "761a51aa959e3c13ce7a6df2b6f450661f07b7d2",
+  "taskpack_digest_sha256": "87a2522936eb7328044021f517dba4d7467d695627f713514b4d6152135413a6",
+  "rows": [
+    {
+      "requirement_id": "AC-01",
+      "acceptance_id": "AC-01",
+      "oracle_id": "O-01",
+      "status": "PASS",
+      "blocking": true,
+      "task_ids": [
+        "T01"
+      ],
+      "test_ids": [
+        "T-AC01"
+      ],
+      "evidence_paths": [
+        "raw-results/unittest_results.log"
+      ]
+    },
+    {
+      "requirement_id": "AC-02",
+      "acceptance_id": "AC-02",
+      "oracle_id": "O-02",
+      "status": "PASS",
+      "blocking": true,
+      "task_ids": [
+        "T02"
+      ],
+      "test_ids": [
+        "T-AC02"
+      ],
+      "evidence_paths": [
+        "raw-results/unittest_results.log"
+      ]
+    },
+    {
+      "requirement_id": "AC-03",
+      "acceptance_id": "AC-03",
+      "oracle_id": "O-03",
+      "status": "PASS",
+      "blocking": true,
+      "task_ids": [
+        "T03"
+      ],
+      "test_ids": [
+        "T-AC03"
+      ],
+      "evidence_paths": [
+        "raw-results/unittest_results.log"
+      ]
+    },
+    {
+      "requirement_id": "AC-04",
+      "acceptance_id": "AC-04",
+      "oracle_id": "O-04",
+      "status": "PASS",
+      "blocking": true,
+      "task_ids": [
+        "T06"
+      ],
+      "test_ids": [
+        "T-AC04"
+      ],
+      "evidence_paths": [
+        "raw-results/unittest_results.log"
+      ]
+    },
+    {
+      "requirement_id": "AC-05",
+      "acceptance_id": "AC-05",
+      "oracle_id": "O-05",
+      "status": "PASS",
+      "blocking": true,
+      "task_ids": [
+        "T03"
+      ],
+      "test_ids": [
+        "T-AC05"
+      ],
+      "evidence_paths": [
+        "raw-results/unittest_results.log"
+      ]
+    },
+    {
+      "requirement_id": "AC-06",
+      "acceptance_id": "AC-06",
+      "oracle_id": "O-06",
+      "status": "PASS",
+      "blocking": true,
+      "task_ids": [
+        "T04"
+      ],
+      "test_ids": [
+        "T-AC06"
+      ],
+      "evidence_paths": [
+        "raw-results/unittest_results.log"
+      ]
+    },
+    {
+      "requirement_id": "AC-07",
+      "acceptance_id": "AC-07",
+      "oracle_id": "O-07",
+      "status": "PASS",
+      "blocking": true,
+      "task_ids": [
+        "T07"
+      ],
+      "test_ids": [
+        "T-AC07"
+      ],
+      "evidence_paths": [
+        "raw-results/unittest_results.log"
+      ]
+    },
+    {
+      "requirement_id": "AC-08",
+      "acceptance_id": "AC-08",
+      "oracle_id": "O-08",
+      "status": "PASS",
+      "blocking": true,
+      "task_ids": [
+        "T03"
+      ],
+      "test_ids": [
+        "T-AC08"
+      ],
+      "evidence_paths": [
+        "raw-results/unittest_results.log"
+      ]
+    },
+    {
+      "requirement_id": "AC-09",
+      "acceptance_id": "AC-09",
+      "oracle_id": "O-09",
+      "status": "PASS",
+      "blocking": true,
+      "task_ids": [
+        "T03"
+      ],
+      "test_ids": [
+        "T-AC09"
+      ],
+      "evidence_paths": [
+        "raw-results/unittest_results.log"
+      ]
+    },
+    {
+      "requirement_id": "AC-10",
+      "acceptance_id": "AC-10",
+      "oracle_id": "O-10",
+      "status": "PASS",
+      "blocking": true,
+      "task_ids": [
+        "T06"
+      ],
+      "test_ids": [
+        "T-AC10"
+      ],
+      "evidence_paths": [
+        "raw-results/unittest_results.log"
+      ]
+    },
+    {
+      "requirement_id": "AC-11",
+      "acceptance_id": "AC-11",
+      "oracle_id": "O-11",
+      "status": "NOT_APPLICABLE",
+      "blocking": false,
+      "task_ids": [
+        "T07"
+      ],
+      "test_ids": [
+        "T-AC11"
+      ],
+      "evidence_paths": [],
+      "reason": "Stage-1 deferral: no production trial execution in this acceptance cycle."
+    },
+    {
+      "requirement_id": "AC-12",
+      "acceptance_id": "AC-12",
+      "oracle_id": "O-12",
+      "status": "NOT_APPLICABLE",
+      "blocking": false,
+      "task_ids": [
+        "T05"
+      ],
+      "test_ids": [
+        "T-AC12"
+      ],
+      "evidence_paths": [],
+      "reason": "Stage-1 deferral: no production trial execution in this acceptance cycle."
+    },
+    {
+      "requirement_id": "AC-13",
+      "acceptance_id": "AC-13",
+      "oracle_id": "O-13",
+      "status": "PASS",
+      "blocking": true,
+      "task_ids": [
+        "T01"
+      ],
+      "test_ids": [
+        "T-AC13"
+      ],
+      "evidence_paths": [
+        "raw-results/unittest_results.log"
+      ]
+    },
+    {
+      "requirement_id": "AC-14",
+      "acceptance_id": "AC-14",
+      "oracle_id": "O-14",
+      "status": "PASS",
+      "blocking": true,
+      "task_ids": [
+        "T02"
+      ],
+      "test_ids": [
+        "T-AC14"
+      ],
+      "evidence_paths": [
+        "raw-results/unittest_results.log"
+      ]
+    }
+  ],
+  "change_impact": [
+    {
+      "change_id": "dyn-prof-stage1-r15-changes",
+      "changed_paths": [
+        "CodexSkills/registry/codex/dynamic-personal-profile-update",
+        ".github/workflows/dynamic-profile-update.yml",
+        "OpenAIDatabase/config/context_sources/resource_routes.json"
+      ],
+      "impacted_acceptance_ids": [
+        "AC-01",
+        "AC-02",
+        "AC-03",
+        "AC-04",
+        "AC-05",
+        "AC-06",
+        "AC-07",
+        "AC-08",
+        "AC-09",
+        "AC-10",
+        "AC-11",
+        "AC-12",
+        "AC-13",
+        "AC-14"
+      ],
+      "non_impact_reason": "",
+      "test_ids": [
+        "R-BS-01",
+        "R-CR-01",
+        "R-DO-01"
+      ],
+      "evidence_paths": [
+        "raw-results/unittest_results.log",
+        "raw-results/compatibility_drift_report.txt",
+        "raw-results/manual_profile_update_idempotence.log"
+      ]
+    }
+  ]
+}

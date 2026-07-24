@@ -1,0 +1,21 @@
+=== Taskpack compatibility and drift report ===
+repo= /Users/linzezhang/Documents/Codex/GithubProject/AgentDatabase
+acc /tmp/r15-verifier-run/dynamic-personal-profile-update_acceptance_r15-final/taskpack/acceptance_contract.md
+acceptance_ids_detected= ['AC-01', 'AC-02', 'AC-03', 'AC-04', 'AC-05', 'AC-06', 'AC-07', 'AC-08', 'AC-09', 'AC-10', 'AC-11', 'AC-12', 'AC-13', 'AC-14', 'AC-01', 'AC-10', 'AC-14', 'AC-11', 'AC-12']
+taskpack_lock_authoritative= True
+taskpack_lock_task_ids= ['T01', 'T02', 'T03', 'T04', 'T05', 'T06', 'T07', 'T08']
+taskpack_lock_taskpack_digest= 87a2522936eb7328044021f517dba4d7467d695627f713514b4d6152135413a6
+skill_name= dynamic-personal-profile-update
+skill_slug= None
+skill_version= None
+registry_records= 1
+registry_entry= codex/dynamic-personal-profile-update/registry.yaml
+registry_skill_entry= codex/dynamic-personal-profile-update/SKILL.md
+dynamic_profile_routes= 1
+{'intent': 'dynamic_profile', 'description': 'Current time-aware generated profile delta and trial-ready asset candidates.', 'read_order': ['data/derived/profile/DYNAMIC_PROFILE.md'], 'conditional_resources': [{'path': 'data/derived/profile/CORE_PROFILE.md', 'condition': 'Load only when stable profile comparison is needed; never overwrite it from this route.'}], 'access': 'read_only_derived', 'canonical': False, 'update_targets': ['profile', 'history', 'pattern']}
+workflow_has_schedule= True
+workflow_permissions_contents_write= True
+workflow_default_branch_guard= True
+registry_yaml_version= 0.0.0.1
+registry_schema= skill_registry.v1
+ok

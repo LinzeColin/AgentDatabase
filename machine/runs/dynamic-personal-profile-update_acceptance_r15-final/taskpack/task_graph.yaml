@@ -1,0 +1,65 @@
+---
+doc_id: "P01-TASK-DAG"
+doc_type: "machine_executable_task_graph"
+version: "0.0.0.1"
+status: "frozen_for_acceptance"
+---
+
+# Task DAG
+
+## Execution order
+
+| Task | Depends on | Input | Output | Stop condition |
+|---|---|---|---|---|
+| T01 Contract and path freeze | — | Canonical facts | frozen paths and allowlist | Any path collision or raw ambiguity |
+| T02 Registry/mirror migration and route wiring | T01 | latest `main`, current `sync_skills.py`, context route files | source namespaces under `registry/`; `dynamic_profile` read route | conflict, data loss, dirty tree, route points to canonical memory, failed credential gate |
+| T03 Deterministic processor | T01 | derived allowlist | one candidate profile output | parser escapes allowlist or requires network/LLM |
+| T04 Validator and fixtures | T03 | processor output + positive/negative fixtures | PASS/FAIL evidence | forbidden content or non-idempotence |
+| T05 Stage 1 asset references | T03 | profile entries and recurring evidence | action prompt + asset-miner workflow | automatic promotion or extra persistence |
+| T06 GitHub Action | T02,T03,T04 | fixed script and repository | scheduled/manual workflow | permission wider than contents write or extra diff |
+| T07 Real trial | T04,T05,T06 | one real task | trial result | no observable usefulness after three runs |
+| T08 Acceptance and handoff | T07 | evidence | acceptance record, roadmap, prompt | any unresolved critical gate |
+
+## Machine contract
+
+```yaml
+graph_id: P01-DYNAMIC-PROFILE-0.0.0.1
+max_parallel_tasks: 2
+tasks:
+  - id: T01
+    depends_on: []
+    command_class: inspect_and_freeze
+    writes: [taskpack, handoff]
+  - id: T02
+    depends_on: [T01]
+    command_class: controlled_repository_migration
+    writes: [CodexSkills/registry, CodexSkills/README.md, CodexSkills/index.json, CodexSkills/sync_skills.py, OpenAIDatabase/config/context_sources/resource_routes.json, OpenAIDatabase/config/context_sources/three_layer_context.json]
+    rollback: restore_previous_main_commit
+  - id: T03
+    depends_on: [T01]
+    command_class: deterministic_script
+    writes: [CodexSkills/registry/codex/dynamic-personal-profile-update]
+    output: [OpenAIDatabase/data/derived/profile/DYNAMIC_PROFILE.md]
+  - id: T04
+    depends_on: [T03]
+    command_class: validation
+    gates: [dual_plane, idempotence, allowlist, fail_closed, atomic_write]
+  - id: T05
+    depends_on: [T03]
+    command_class: reusable_reference_asset
+    writes: [CodexSkills/registry/codex/dynamic-personal-profile-update/references]
+  - id: T06
+    depends_on: [T02, T03, T04]
+    command_class: scheduled_runner
+    schedule: "17 1 */3 * * UTC"
+    permissions: {contents: write}
+    commit_allowlist: [OpenAIDatabase/data/derived/profile/DYNAMIC_PROFILE.md]
+  - id: T07
+    depends_on: [T04, T05, T06]
+    command_class: one_real_trial
+    persistence: none
+  - id: T08
+    depends_on: [T07]
+    command_class: acceptance_and_handoff
+    stop_if: any_critical_gate_failed
+```

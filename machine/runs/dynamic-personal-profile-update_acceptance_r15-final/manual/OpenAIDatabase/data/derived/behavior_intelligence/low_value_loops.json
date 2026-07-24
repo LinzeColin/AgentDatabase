@@ -1,0 +1,1 @@
+{"schema_version":"memory_atlas_low_value_loops.v1","generated_at":"2026-07-22T00:00:00Z","loop_clusters":[{"loop_type":"repeated_rework","event_count":2},{"loop_type":"scope_creep","event_count":3}]}

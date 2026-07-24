@@ -1,0 +1,262 @@
+{
+  "schema_version": "2.1",
+  "source_kind": "directory",
+  "source_reference": ".tmp_stage1",
+  "source_archive_sha256": "",
+  "source_snapshot_path": "taskpack/TASKPACK_SOURCE_SNAPSHOT.zip",
+  "source_snapshot_sha256": "491b87ee6bc8ea231d9f59eb1259a85f04eadef3ce6d03dc030727ac03bc7710",
+  "source_snapshot_size": 39503,
+  "source_file_count": 32,
+  "source_files": [
+    {
+      "source_path": "MANIFEST.md",
+      "sha256": "004bc1d49a9aaaee1ff2acce8bacfb3e4696111d82742ba7fdef7c3eb31ad806",
+      "size": 1170
+    },
+    {
+      "source_path": "PURSUING_GOAL_PROMPT.txt",
+      "sha256": "298da9f255c8c70b5f6b73b2340c97a773606dff5a8df38c814322ea5345c208",
+      "size": 545
+    },
+    {
+      "source_path": "ROADMAP.md",
+      "sha256": "1488d0768eec92f62668964ada5b8537be9b1fe1f8772660c50056d50e503ec8",
+      "size": 1254
+    },
+    {
+      "source_path": "acceptance_contract.md",
+      "sha256": "18dfaf8d78c7c0f21a3a9f7353fd2aed271d117ef877edbaa446fc0261ad4003",
+      "size": 2823
+    },
+    {
+      "source_path": "governance/run_logs/skills_runs/README.md",
+      "sha256": "9056ea91178b164ae310958c1a76aba344ff7d3f1a8d53c60715a6c7c7901da5",
+      "size": 552
+    },
+    {
+      "source_path": "governance/skill_controlled_iterate/dynamic-personal-profile-update/CHANGE_CONTROL.md",
+      "sha256": "107bfe87f323caa984191564c4bc52cc1d10da257e9d982f22ae18ec128cad32",
+      "size": 936
+    },
+    {
+      "source_path": "governance/skill_log_evals/dynamic-personal-profile-update/0.0.0.1.md",
+      "sha256": "087d95ad0351acdc881fca79229e96837243dfd74866ee42e1d777b0a94e9229",
+      "size": 1217
+    },
+    {
+      "source_path": "manifest.yaml",
+      "sha256": "60b14bfe4b99ff1358eb640a6c60b78210af784513d53e5a77a8effec1340225",
+      "size": 1820
+    },
+    {
+      "source_path": "prd.md",
+      "sha256": "fdd4a3f111fe01a02d040ee4dc31ae96166cfee8769d225ef00c1186d125ac4e",
+      "size": 3274
+    },
+    {
+      "source_path": "pursuing_goal.md",
+      "sha256": "298da9f255c8c70b5f6b73b2340c97a773606dff5a8df38c814322ea5345c208",
+      "size": 545
+    },
+    {
+      "source_path": "registry/README.md",
+      "sha256": "fa49df462b58e149e077c024ad63b8ff54d76e62ad168279b73a5362f7315948",
+      "size": 945
+    },
+    {
+      "source_path": "registry/codex/dynamic-personal-profile-update/registry.yaml",
+      "sha256": "8849e5d8f5a207520bf0d43726e5d3e573f7aaf118f2f5384480695d491a6aa2",
+      "size": 1472
+    },
+    {
+      "source_path": "registry/index.json",
+      "sha256": "891a71bb2956453d19c48c6094ee79b2866da60b64e3eb3be551129f083140f7",
+      "size": 526
+    },
+    {
+      "source_path": "skill/SKILL.md",
+      "sha256": "549cffe838e7297e0468478411b9dbf3fb7830e2df3d8854f59fe9d778178679",
+      "size": 4315
+    },
+    {
+      "source_path": "skill/agents/openai.yaml",
+      "sha256": "09a46b2bb31040451d5fa36226497c44bc5f9d65c0baee25a176ad8021c90366",
+      "size": 326
+    },
+    {
+      "source_path": "skill/references/output-contract.md",
+      "sha256": "a0056a9c6b4e56142be570977462d6d4948b78a756925924386d4177157857bf",
+      "size": 1456
+    },
+    {
+      "source_path": "skill/references/profile-to-agent-action-prompt.md",
+      "sha256": "28611004690323e9b02d57b0a783ffc4d7ddc7c6833e5ed874d5443f3740db87",
+      "size": 1106
+    },
+    {
+      "source_path": "skill/references/recurring-asset-miner.md",
+      "sha256": "9972334aecab6882e31e2e422ff519a65c649227bc5e3ed7a0e74259d6831c9a",
+      "size": 1585
+    },
+    {
+      "source_path": "skill/scripts/update_dynamic_profile.py",
+      "sha256": "f320afd83d62c1c7da0ad6067152df522c62ff04aba223a95ccd7dbd3c4eb343",
+      "size": 18027
+    },
+    {
+      "source_path": "skill/scripts/validate_dynamic_profile.py",
+      "sha256": "48b2d472ddd216185a7ffdb04e46e7ec8f5d7efd67a43db87b62a419e2167d13",
+      "size": 2594
+    },
+    {
+      "source_path": "skill/tests/test_dynamic_profile.py",
+      "sha256": "eb73c0e561868f2cea703bb0b5e0a28d298a10f0c2a3159c25e91f2a876829d4",
+      "size": 3232
+    },
+    {
+      "source_path": "task_graph.yaml",
+      "sha256": "7077d37e5dba3fb18dd7cca28db076e4a8083ad018573f2ebe6dd77f03323653",
+      "size": 2979
+    },
+    {
+      "source_path": "taskpack/00_CANONICAL_FACTS.md",
+      "sha256": "f8da41f6d96724221b13696843612c92c5c04e5984b1b038a6e1442d8cf1682b",
+      "size": 2604
+    },
+    {
+      "source_path": "taskpack/01_PRD.md",
+      "sha256": "fdd4a3f111fe01a02d040ee4dc31ae96166cfee8769d225ef00c1186d125ac4e",
+      "size": 3274
+    },
+    {
+      "source_path": "taskpack/02_ARCHITECTURE.md",
+      "sha256": "450156759c28bb985fac4664587a0fb44e2b035fc2a5fe19ef92cc546e4b9ca7",
+      "size": 3014
+    },
+    {
+      "source_path": "taskpack/03_TASK_DAG.md",
+      "sha256": "7077d37e5dba3fb18dd7cca28db076e4a8083ad018573f2ebe6dd77f03323653",
+      "size": 2979
+    },
+    {
+      "source_path": "taskpack/04_ACCEPTANCE_CONTRACT.md",
+      "sha256": "18dfaf8d78c7c0f21a3a9f7353fd2aed271d117ef877edbaa446fc0261ad4003",
+      "size": 2823
+    },
+    {
+      "source_path": "taskpack/05_SECURITY_PRIVACY.md",
+      "sha256": "1f460c1c9954a7a3b67bb7323621c0e11ec94ea22bf487a4a451377dacf7ed28",
+      "size": 2000
+    },
+    {
+      "source_path": "taskpack/06_OPERATIONS_ROLLBACK.md",
+      "sha256": "156443e9ba46d062b9eaaf01475bd9dabaa399aed35805a781bbd8de9cd6b2fa",
+      "size": 1678
+    },
+    {
+      "source_path": "taskpack/taskpack.yaml",
+      "sha256": "60b14bfe4b99ff1358eb640a6c60b78210af784513d53e5a77a8effec1340225",
+      "size": 1820
+    },
+    {
+      "source_path": "technical_design.md",
+      "sha256": "450156759c28bb985fac4664587a0fb44e2b035fc2a5fe19ef92cc546e4b9ca7",
+      "size": 3014
+    },
+    {
+      "source_path": "workflow/dynamic-profile-update.yml",
+      "sha256": "0bcf998ee9c62b6108124348ef796ec4cc09b244b1e01c420d0deac62f4c9ca2",
+      "size": 1557
+    }
+  ],
+  "pack_digest_sha256": "87a2522936eb7328044021f517dba4d7467d695627f713514b4d6152135413a6",
+  "contract_digest_sha256": "2f8601949f96c0188eac2dd5c6e7b85bb1308acde15c48e3da1bace83a211094",
+  "declared_version": "0.0.0.1",
+  "authoritative": true,
+  "authorization_reference": "Stage 1 r15 user provided authoritative pack",
+  "authorized_pack_digest_sha256": "87a2522936eb7328044021f517dba4d7467d695627f713514b4d6152135413a6",
+  "files": [
+    {
+      "role": "manifest",
+      "source_path": "manifest.yaml",
+      "path": "taskpack/manifest.yaml",
+      "sha256": "60b14bfe4b99ff1358eb640a6c60b78210af784513d53e5a77a8effec1340225",
+      "size": 1820
+    },
+    {
+      "role": "pursuing_goal",
+      "source_path": "pursuing_goal.md",
+      "path": "taskpack/pursuing_goal.md",
+      "sha256": "298da9f255c8c70b5f6b73b2340c97a773606dff5a8df38c814322ea5345c208",
+      "size": 545
+    },
+    {
+      "role": "prd",
+      "source_path": "prd.md",
+      "path": "taskpack/prd.md",
+      "sha256": "fdd4a3f111fe01a02d040ee4dc31ae96166cfee8769d225ef00c1186d125ac4e",
+      "size": 3274
+    },
+    {
+      "role": "technical_design",
+      "source_path": "technical_design.md",
+      "path": "taskpack/technical_design.md",
+      "sha256": "450156759c28bb985fac4664587a0fb44e2b035fc2a5fe19ef92cc546e4b9ca7",
+      "size": 3014
+    },
+    {
+      "role": "roadmap",
+      "source_path": "ROADMAP.md",
+      "path": "taskpack/roadmap.md",
+      "sha256": "1488d0768eec92f62668964ada5b8537be9b1fe1f8772660c50056d50e503ec8",
+      "size": 1254
+    },
+    {
+      "role": "task_graph",
+      "source_path": "task_graph.yaml",
+      "path": "taskpack/task_graph.yaml",
+      "sha256": "7077d37e5dba3fb18dd7cca28db076e4a8083ad018573f2ebe6dd77f03323653",
+      "size": 2979
+    },
+    {
+      "role": "acceptance_contract",
+      "source_path": "acceptance_contract.md",
+      "path": "taskpack/acceptance_contract.md",
+      "sha256": "18dfaf8d78c7c0f21a3a9f7353fd2aed271d117ef877edbaa446fc0261ad4003",
+      "size": 2823
+    }
+  ],
+  "acceptance_ids": [
+    "AC-01",
+    "AC-02",
+    "AC-03",
+    "AC-04",
+    "AC-05",
+    "AC-06",
+    "AC-07",
+    "AC-08",
+    "AC-09",
+    "AC-10",
+    "AC-11",
+    "AC-12",
+    "AC-13",
+    "AC-14"
+  ],
+  "task_ids": [
+    "T01",
+    "T02",
+    "T03",
+    "T04",
+    "T05",
+    "T06",
+    "T07",
+    "T08"
+  ],
+  "id_extraction": {
+    "acceptance_method": "explicit-label-and-section-scan",
+    "task_method": "explicit-label-and-section-scan",
+    "assurance": "Conservative explicit-ID extraction only. Verifier must compare the inventory with the locked Acceptance Contract and Task Graph before setting compatibility_status=PASS."
+  },
+  "assurance_note": "Normalized full taskpack file inventory and deterministic source snapshot are byte-locked; the seven semantic roles have a separate contract digest. Semantic compatibility, ID completeness, acceptance coverage, and authorization remain independent verifier gates.",
+  "compatibility_status": "PASS"
+}
