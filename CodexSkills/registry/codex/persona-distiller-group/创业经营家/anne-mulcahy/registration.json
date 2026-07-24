@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:annemulcahy",
+  "canonical_name": "Anne Mulcahy",
+  "identity_family_id": "entrepreneur-operator",
+  "identity_mode": "single",
+  "registration_category": "创业经营家",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "anne-mulcahy",
+  "subject_uid": "person-ccfd7af3701efdd8",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/anne-mulcahy-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T00:30:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0-evidence-grounded",
+      "outer_sha256": "c912b6fd0c3d391e19e4d7502df6f5f4a4d80f9c5aed161ce103151c21585497",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/anne-mulcahy-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "f5f37e2a875bf13bbaf5a73a98d6b22e996bc9e74c29da9e5cf0147df4b02317",
+      "runtime_size_bytes": 77804,
+      "size_bytes": 89525
+    }
+  ]
+}

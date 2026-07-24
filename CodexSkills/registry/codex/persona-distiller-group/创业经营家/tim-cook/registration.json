@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:timcook",
+  "canonical_name": "Tim Cook",
+  "identity_family_id": "entrepreneur-operator",
+  "identity_mode": "single",
+  "registration_category": "创业经营家",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "tim-cook",
+  "subject_uid": "person-5d2b961b1c591949",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/tim-cook-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T00:00:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0",
+      "outer_sha256": "ba7b66daa1524756bdd699c27af1062da172eb7c3a8afd337110e50264758092",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/tim-cook-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "e3b0686fcb7dbebb4d2bffb7ad123f80fa06a916b97e51be6f670678d9133169",
+      "runtime_size_bytes": 69933,
+      "size_bytes": 81436
+    }
+  ]
+}

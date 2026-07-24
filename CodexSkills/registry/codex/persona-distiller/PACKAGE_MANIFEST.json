@@ -991,8 +991,8 @@
     },
     {
       "path": "tests/test_group_contract.py",
-      "sha256": "ad52d6d7ed5195cbe8d31b7f3b7f3a073971ba5154c41e197c1de137dd9a760f",
-      "size_bytes": 5449
+      "sha256": "493172252fa008636e3adb3c20086b3314589491617e8eac5eb9108237a77877",
+      "size_bytes": 6875
     },
     {
       "path": "tests/test_identity_routing.py",

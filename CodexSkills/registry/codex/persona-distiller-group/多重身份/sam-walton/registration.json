@@ -1,0 +1,26 @@
+{
+  "canonical_key": "historical:samwalton",
+  "canonical_name": "Sam Walton",
+  "identity_family_id": "multi-identity",
+  "identity_mode": "multi",
+  "registration_category": "多重身份",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "sam-walton",
+  "subject_uid": "person-9f318f968e420d53",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/sam-walton-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T00:00:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0",
+      "outer_sha256": "bcc1c0671647b2e19d947a11d1e43acda6d300896ee5ff973fab05f61a8d72c8",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/sam-walton-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "ee4b49e7a8c59cfe04605c51a15ba1e8ad1db74c8a3783abe1bbae0835384475",
+      "runtime_size_bytes": 60145,
+      "size_bytes": 443124
+    }
+  ]
+}

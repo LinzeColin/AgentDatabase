@@ -8,7 +8,7 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
-from registry_core import default_registry_root, validate_registry, write_index
+from registry_core import CATEGORIES, default_registry_root, validate_registry, write_index
 
 START = "<!-- PERSONA-REGISTRY:START -->"
 END = "<!-- PERSONA-REGISTRY:END -->"
@@ -37,6 +37,24 @@ def compact(values: Any, limit: int = 2) -> str:
 def registry_block(index: dict[str, Any], *, route_view: bool) -> str:
     products = index.get("products", [])
     if not products:
+        if not route_view:
+            lines = [
+                START,
+                "当前唯一登记：**0 个人物**。",
+                "",
+                "| 唯一目录 | 人物数 |",
+                "|---|---:|",
+            ]
+            lines.extend(f"| `{category['folder']}/` | 0 |" for category in CATEGORIES)
+            lines.extend(
+                [
+                    "| **总计** | **0** |",
+                    "",
+                    "当前没有可路由人物；不得虚构候选。",
+                    END,
+                ]
+            )
+            return "\n".join(lines)
         return (
             f"{START}\n"
             "当前登记：**0 个人物**。路由时必须返回 `insufficient_roster`，不得虚构候选。\n"
@@ -66,6 +84,20 @@ def registry_block(index: dict[str, Any], *, route_view: bool) -> str:
     else:
         lines.extend(
             [
+                f"当前唯一登记：**{len(products)} 个人物**。",
+                "",
+                "| 唯一目录 | 人物数 |",
+                "|---|---:|",
+            ]
+        )
+        counts = index.get("category_counts", {})
+        lines.extend(
+            f"| `{category['folder']}/` | {int(counts.get(category['folder'], 0))} |"
+            for category in CATEGORIES
+        )
+        lines.extend(
+            [
+                f"| **总计** | **{len(products)}** |",
                 "",
                 "| 人物 | 唯一身份 | 版本 | 选入原因 | 最值得蒸馏的特点 | 对用户的利益/帮助 | 应用场景 | 关键能力 | 完整 ZIP |",
                 "|---|---|---|---|---|---|---|---|---|",

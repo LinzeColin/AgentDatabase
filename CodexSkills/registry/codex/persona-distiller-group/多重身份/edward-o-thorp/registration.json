@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:edwardothorp(爱德华索普)",
+  "canonical_name": "Edward O. Thorp（爱德华·索普）",
+  "identity_family_id": "multi-identity",
+  "identity_mode": "multi",
+  "registration_category": "多重身份",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "edward-o-thorp",
+  "subject_uid": "person-5d7562e7f00cf9ef",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/edward-o-thorp-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T00:00:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0",
+      "outer_sha256": "a7215f5897323425741f7aad5bb60c9d7e6e942c28f730069da3f805f7fe5c1c",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/edward-o-thorp-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "20a045e38340557df17b60910de923863e62568f5b0ac72cc59b67071badf310",
+      "runtime_size_bytes": 67504,
+      "size_bytes": 77876
+    }
+  ]
+}

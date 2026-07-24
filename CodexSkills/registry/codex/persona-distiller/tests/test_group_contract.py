@@ -112,10 +112,44 @@ class GroupContractTests(unittest.TestCase):
         self.assertEqual(plan['status'], 'insufficient_roster')
         self.assertEqual(plan['selected_roles'], [])
 
+    def test_new_operator_deliveries_are_available_to_routing(self) -> None:
+        completed = subprocess.run(
+            [
+                sys.executable,
+                str(GROUP / 'scripts/route_team.py'),
+                '--task',
+                '为零售企业设计低价、库存周转、门店集群、物流密度、供应链和一线客户反馈的扩张战略',
+                '--size',
+                '8',
+            ],
+            cwd=GROUP,
+            text=True,
+            capture_output=True,
+        )
+        self.assertEqual(completed.returncode, 0, completed.stdout + completed.stderr)
+        plan = json.loads(completed.stdout)
+        self.assertEqual(plan['status'], 'ready')
+        self.assertEqual(plan['inferred_identity'], '创业经营家')
+        selected = {
+            role['canonical_name']
+            for role in plan['selected_roles']
+            if role['role_type'] == 'persona-solver'
+        }
+        self.assertTrue({
+            'Anne Mulcahy',
+            'Tim Cook',
+            '路易斯·郭士纳 / Louis V. Gerstner Jr.',
+        }.issubset(selected))
+
     def test_human_views_register_required_card_fields(self) -> None:
         readme = (GROUP / 'README.md').read_text(encoding='utf-8')
         route = (GROUP / 'CANONICAL-ROOT-ROUTE.md').read_text(encoding='utf-8')
-        products = json.loads((GROUP / 'team-index.json').read_text(encoding='utf-8'))['products']
+        index = json.loads((GROUP / 'team-index.json').read_text(encoding='utf-8'))
+        products = index['products']
+        self.assertIn(f'当前唯一登记：**{len(products)} 个人物**', readme)
+        for category, count in index['category_counts'].items():
+            self.assertIn(f'| `{category}/` | {count} |', readme)
+        self.assertIn(f'| **总计** | **{len(products)}** |', readme)
         for product in products:
             self.assertIn(product['canonical_name'], readme)
             self.assertIn(product['canonical_name'], route)

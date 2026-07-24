@@ -457,7 +457,7 @@
       "category": "工程与交付",
       "entry": "registry/codex/persona-distiller/SKILL.md",
       "file_count": 211,
-      "size_bytes": 534939
+      "size_bytes": 536365
     },
     {
       "slug": "persona-distiller-group",
@@ -466,8 +466,8 @@
       "description": "Route a real task to a 5–20 member expert team drawn from uniquely registered Persona Distiller products. Use when a task benefits from several complementary person-model specialists plus isolated review, adjudication, and counterevidence roles; also use to inspect, verify, rebuild, or govern the canonical persona delivery registry. Infer identity and scenario internally, select only evidence-supported experts, and never ask the caller to choose an identity.",
       "category": "工程与交付",
       "entry": "registry/codex/persona-distiller-group/SKILL.md",
-      "file_count": 77,
-      "size_bytes": 3558082
+      "file_count": 95,
+      "size_bytes": 4492984
     },
     {
       "slug": "project-cost-table-skill",

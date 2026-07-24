@@ -19,11 +19,25 @@ IDENTITY_SIGNALS = {
         "架构",
         "故障",
         "代码",
+        "编译器",
+        "后端",
+        "分布式",
+        "存储",
+        "性能",
+        "数据库",
+        "算法",
         "science",
         "engineering",
         "technical",
         "architecture",
         "experiment",
+        "compiler",
+        "backend",
+        "distributed",
+        "storage",
+        "performance",
+        "database",
+        "algorithm",
     ),
     "创业经营家": (
         "创业",
@@ -33,11 +47,19 @@ IDENTITY_SIGNALS = {
         "公司",
         "市场",
         "运营",
+        "零售",
+        "客户",
+        "供应链",
+        "门店",
         "founder",
         "business",
         "growth",
         "operations",
         "organization",
+        "retail",
+        "customer",
+        "supply chain",
+        "store",
     ),
     "投资资本家": (
         "投资",
@@ -110,6 +132,32 @@ SCENARIO_SIGNALS = {
     "communication-negotiation": ("沟通", "谈判", "说服", "表达", "communication", "negotiation", "persuasion"),
     "teaching-learning": ("教学", "学习", "培训", "教育", "teaching", "learning", "education"),
     "red-team-risk": ("风险", "反证", "红队", "失败", "risk", "counterevidence", "red team", "failure"),
+}
+
+GENERIC_MATCH_TERMS = {
+    "研究",
+    "调查",
+    "诊断",
+    "验证",
+    "执行",
+    "完成",
+    "操作",
+    "产品",
+    "设计",
+    "创作",
+    "开发",
+    "架构",
+    "research",
+    "investigate",
+    "diagnose",
+    "agent",
+    "execute",
+    "implement",
+    "product",
+    "design",
+    "create",
+    "build",
+    "architecture",
 }
 
 CONTROL_ROLES = (
@@ -235,6 +283,11 @@ def score_candidate(
         value_score = 6
     complementarity_score = 10
     freshness = freshness_score(candidate.get("research_cutoff"))
+    specific_terms = terms - GENERIC_MATCH_TERMS
+    task_specific_matches = sum(
+        semantic_matches(candidate.get(field), specific_terms)
+        for field in ("application_scenarios", "key_capabilities", "user_value")
+    )
     score = identity_score + scenario_score + capability_score + value_score + complementarity_score + freshness
     reasons = [
         f"identity={identity_score}/25",
@@ -243,7 +296,14 @@ def score_candidate(
         f"user_value={value_score}/15",
         f"complementarity={complementarity_score}/10",
         f"freshness={freshness}/5",
+        f"task_specific_matches={task_specific_matches}",
     ]
+    if (
+        (identity == "多重身份" or candidate.get("registration_category") != identity)
+        and not exact_scenario
+        and task_specific_matches == 0
+    ):
+        return score, reasons, "fallback identity has no task-specific semantic match"
     if (
         identity == "多重身份"
         and candidate.get("registration_category") == "多重身份"

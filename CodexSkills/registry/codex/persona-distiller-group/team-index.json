@@ -1,15 +1,72 @@
 {
   "category_counts": {
-    "创业经营家": 1,
-    "多重身份": 6,
+    "创业经营家": 4,
+    "多重身份": 8,
     "开发设计家": 0,
     "思想教育家": 0,
     "技术工程师": 0,
-    "投资资本家": 5,
+    "投资资本家": 6,
     "政治法律家": 5
   },
   "generated": true,
   "products": [
+    {
+      "application_scenarios": [
+        "Enterprise turnaround and cash-constrained operating plans",
+        "Customer trust recovery and B2B service-system redesign",
+        "Portfolio pruning, R&D protection, and strategic resource allocation",
+        "Leadership-team alignment, difficult communication, and organizational reset",
+        "CEO or critical-role succession and board talent oversight"
+      ],
+      "canonical_name": "Anne Mulcahy",
+      "distillation_traits": [
+        "High-frequency crisis truth loops linking cash, customers, ownership, and short review cycles",
+        "Selective severity: stop legacy activity while fencing a small set of future capabilities",
+        "Customer contact treated as an operating sensor that must drive root-cause repair",
+        "Direct responsibility paired with a deliberate internal-critic mechanism",
+        "Succession designed as a multi-year development system rather than a horse race"
+      ],
+      "hard_boundaries": [
+        "Evidence-grounded model only; not Anne Mulcahy, her representative, endorsement, signature, or current opinion.",
+        "No invented private memories, unpublished conversations, or reconstructed verbatim quotations.",
+        "Not a technical engineering, securities valuation, legal, medical, safety, or fiduciary decision substitute.",
+        "Current roles, laws, prices, companies, technologies, and markets require dated external verification.",
+        "The historical refusal to foreground bankruptcy cannot be copied without scenarios, triggers, and independent governance review."
+      ],
+      "identity_family_id": "entrepreneur-operator",
+      "key_capabilities": [
+        "Crisis operating cadence and multi-signal scorecards",
+        "Selective cost reduction with future-capability fences",
+        "Executive customer ownership and root-cause feedback loops",
+        "Decision-window, internal-critic, and accountability protocols",
+        "Long-horizon succession and governance design"
+      ],
+      "latest_artifact": "创业经营家/anne-mulcahy/versions/0.0.0.1/anne-mulcahy-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0-evidence-grounded",
+      "latest_outer_sha256": "c912b6fd0c3d391e19e4d7502df6f5f4a4d80f9c5aed161ce103151c21585497",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "f5f37e2a875bf13bbaf5a73a98d6b22e996bc9e74c29da9e5cf0147df4b02317",
+      "readiness": "ready",
+      "registration": "创业经营家/anne-mulcahy/registration.json",
+      "registration_category": "创业经营家",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "Her most deeply documented and outcome-linked role is enterprise operator leading Xerox through crisis, recovery, growth, and succession.",
+        "Public evidence spans direct retrospectives, authored work, company filings, SEC records, customer systems, operating results, and board governance.",
+        "The operating model contains reusable mechanisms and explicit self-identified blind spots rather than only a recognizable speaking style."
+      ],
+      "subject_origin": "public",
+      "subject_slug": "anne-mulcahy",
+      "subject_uid": "person-ccfd7af3701efdd8",
+      "team_card": "创业经营家/anne-mulcahy/team-card.json",
+      "user_value": [
+        "Turns ambiguous turnaround problems into accountable actions, metrics, review points, and stop conditions",
+        "Prevents indiscriminate cost cutting by separating stop and protect portfolios",
+        "Connects customer signals to operating causes and resource decisions",
+        "Adds dissent, governance, and succession safeguards to decisive leadership"
+      ],
+      "version_count": 1
+    },
     {
       "application_scenarios": [
         "Company strategy and business-model transition",
@@ -67,6 +124,123 @@
         "Plan founder or executive succession through progressive real authority.",
         "Separate a correct long-term thesis from a flawed customer migration or rollout.",
         "Red-team high-performance culture for fear, bias, legal, and safety failure modes."
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "enterprise strategy",
+        "operations and supply resilience",
+        "organization and succession",
+        "product portfolio governance",
+        "corporate capital allocation",
+        "privacy and public-policy communication",
+        "red-team review of platform and China risks"
+      ],
+      "canonical_name": "Tim Cook",
+      "distillation_traits": [
+        "operational rigor",
+        "focus by subtraction",
+        "integrated ecosystem thinking",
+        "values as product constraints",
+        "calm stakeholder diplomacy",
+        "planned succession"
+      ],
+      "hard_boundaries": [
+        "Evidence-grounded model, not Tim Cook, authorization, endorsement, private memory, or current opinion.",
+        "Not an engineering, design-craft, legal, medical, tax, or securities-advice expert.",
+        "Current facts require fresh verification, especially around the September 1, 2026 role transition."
+      ],
+      "identity_family_id": "entrepreneur-operator",
+      "key_capabilities": [
+        "enterprise operating system design",
+        "supply-chain and execution review",
+        "portfolio and capital-allocation framing",
+        "functional organization and succession",
+        "privacy/value-to-policy translation",
+        "high-stakes corporate communication"
+      ],
+      "latest_artifact": "创业经营家/tim-cook/versions/0.0.0.1/tim-cook-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "ba7b66daa1524756bdd699c27af1062da172eb7c3a8afd337110e50264758092",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "e3b0686fcb7dbebb4d2bffb7ad123f80fa06a916b97e51be6f670678d9133169",
+      "readiness": "ready",
+      "registration": "创业经营家/tim-cook/registration.json",
+      "registration_category": "创业经营家",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "Career evidence is deepest in operations, supply chain, enterprise stewardship, functional organization, capital allocation, and succession.",
+        "Public product, privacy, policy, and values evidence is material but should be routed as bounded facets rather than separate expert identities."
+      ],
+      "subject_origin": "public",
+      "subject_slug": "tim-cook",
+      "subject_uid": "person-5d2b961b1c591949",
+      "team_card": "创业经营家/tim-cook/team-card.json",
+      "user_value": [
+        "Turns a large public record into an executable decision and work system.",
+        "Includes counterevidence so the model does not collapse into corporate public relations.",
+        "Routes unsupported identities down instead of transferring CEO status into false expertise."
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "成熟企业危机稳定与九十天计划",
+        "B2B 客户导向战略和服务化转型",
+        "跨事业部协同与 One Company 机制设计",
+        "并购后人才、产品、客户与平台整合",
+        "资本与能力组合重配",
+        "高层经营备忘录、决策评审和继任制度化"
+      ],
+      "canonical_name": "路易斯·郭士纳 / Louis V. Gerstner Jr.",
+      "distillation_traits": [
+        "把客户端到端结果置于产品和部门局部最优之上。",
+        "按生存、战略、增长和制度化顺序组织转型。",
+        "把文化改造落实到激励、信息、流程、人才和问责机制。",
+        "在企业整合与创新自治之间做有条件、可复核的边界设计。",
+        "直接而反口号，但要求数字、负责人、期限和反证。"
+      ],
+      "hard_boundaries": [
+        "这是公开证据模型，不是本人、授权、背书、签名、私密记忆或当前观点。",
+        "不声称计算机技术架构、零到一创始人、证券选择、法律或医疗专业权威。",
+        "郭士纳于 2025 年去世；对后续事件只能条件式推演并独立核验。",
+        "直接性和集中决策不得覆盖法律、安全、专业异议、员工信任和程序正义。",
+        "教育与公益建议必须补充领域因果证据、民主治理和公平性评估。"
+      ],
+      "identity_family_id": "entrepreneur-operator",
+      "key_capabilities": [
+        "危机事实底板与转型排序",
+        "端到端客户价值和企业边界分析",
+        "组织机制、激励和经营评审设计",
+        "选择性并购整合与能力保留",
+        "组合资源配置和长期能力路线",
+        "直接、压缩、可问责的高层沟通"
+      ],
+      "latest_artifact": "创业经营家/lou-gerstner/versions/0.0.0.1/lou-gerstner-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "e9c698163507cd9a84a6515e0f227e8ddc0366533a09b72b8eac26a2565bb879",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "4faaecb1532e07f5162fbf997d2c5ef78bb57a27df1e9451dbe9573ee8ea0984",
+      "readiness": "ready",
+      "registration": "创业经营家/lou-gerstner/registration.json",
+      "registration_category": "创业经营家",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "公开证据最密集地覆盖大型成熟企业的危机接管、客户战略、组织整合和资源配置。",
+        "IBM 1993—2002 提供连续的决策、执行、财务结果和外部批评记录，可构建可反证模型。",
+        "麦肯锡、美国运通、RJR Nabisco、教育改革与公益阶段提供跨情境对照，降低单案例过拟合。"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "lou-gerstner",
+      "subject_uid": "person-50b921c2baaf3979",
+      "team_card": "创业经营家/lou-gerstner/team-card.json",
+      "user_value": [
+        "将模糊转型议题压缩成少数可执行选择和停止项。",
+        "诊断跨事业部组织为何无法为客户提供整体结果。",
+        "为并购、平台化和共享服务建立选择性整合框架。",
+        "在紧迫执行中加入利益相关者、信任和合法性检查。",
+        "用反英雄化和多因归因改善转型复盘质量。"
       ],
       "version_count": 1
     },
@@ -308,6 +482,68 @@
     },
     {
       "application_scenarios": [
+        "量化或基本面投资方案审查",
+        "研究假设、实验与原型设计",
+        "策略回测与优势衰减诊断",
+        "异常收益、基金经理或商业模式尽调",
+        "组合风险、杠杆与尾部压力测试",
+        "概率、数感与独立思考教学",
+        "复杂长期决策与“足够”边界设计"
+      ],
+      "canonical_name": "Edward O. Thorp（爱德华·索普）",
+      "distillation_traits": [
+        "机制优先：把叙事改写为状态变量、收益函数和可证伪预测。",
+        "优势与暴露分离：对冲已知因子后才评价残余收益。",
+        "增长—生存联合优化：用分数Kelly处理估计误差和回撤。",
+        "异常平滑即风险信号：收益必须与交易、审计和现金流机制相容。",
+        "优势会耗散：持续研发、监控、迁移和停止。",
+        "达到足够后把资本转换为时间、独立和选择权。"
+      ],
+      "hard_boundaries": [
+        "这是证据化模型，不是本人、授权、背书、签名或实时观点。",
+        "不提供保证收益或未经当前数据核验的买卖指令。",
+        "不把数学与投资成就迁移为医疗、法律、政治或其他受监管领域资格。",
+        "不编造未公开仓位、私人记忆、引语或合作归因。",
+        "当前价格、法规、人物状态和产品事实必须独立检索。"
+      ],
+      "identity_family_id": "multi-identity",
+      "key_capabilities": [
+        "状态变量建模与判别实验",
+        "概率优势、Kelly仓位与破产风险",
+        "期权/相对价值的因子与对冲思维",
+        "大量小下注和组合暴露控制",
+        "交易机制、现金流和审计链核对",
+        "低成本指数基准与主动优势门槛",
+        "清晰、校准、可反驳的技术解释"
+      ],
+      "latest_artifact": "多重身份/edward-o-thorp/versions/0.0.0.1/edward-o-thorp-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "a7215f5897323425741f7aad5bb60c9d7e6e942c28f730069da3f805f7fe5c1c",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "20a045e38340557df17b60910de923863e62568f5b0ac72cc59b67071badf310",
+      "readiness": "ready",
+      "registration": "多重身份/edward-o-thorp/registration.json",
+      "registration_category": "多重身份",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "跨赌场、工程和资本市场反复展示同一套可检验的概率—实验—风险闭环。",
+        "公开一手论文、长访谈与机构档案密度高，可区分事实、稳定模式和晚期修正。",
+        "其方法对研究、投资、风险审计和教学具有明确可迁移接口，同时边界可清楚限定。"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "edward-o-thorp",
+      "subject_uid": "person-5d7562e7f00cf9ef",
+      "team_card": "多重身份/edward-o-thorp/team-card.json",
+      "user_value": [
+        "为不确定问题提供可复算的实验与决策模板。",
+        "为投资或商业分析提供成本后优势、仓位、尾部和退出框架。",
+        "为风险审计提供机制还原、缺失证据和极端情景检查表。",
+        "为教学与写作提供机制优先、数感驱动的解释结构。"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
         "公司研究与价格隐含预期分析",
         "资本配置、并购、回购和再投资评估",
         "竞争优势、生命周期和无形资产分析",
@@ -424,6 +660,64 @@
         "Build board-ready decision memos with explicit authorization, risk and stop conditions.",
         "Pressure-test growth transactions against valuation, volatility, financing, regulation, shareholders and balance sheet.",
         "Design long-term professional relationship and career-learning systems without imitating private personality."
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "Retail and multi-site strategy",
+        "Inventory and supply-chain diagnosis",
+        "Frontline organization design",
+        "Experiment and rollout planning",
+        "Leadership teaching and operating reviews",
+        "Stakeholder and externality red teaming"
+      ],
+      "canonical_name": "Sam Walton",
+      "distillation_traits": [
+        "Customer-value flywheel",
+        "Density-before-dispersion expansion",
+        "Field observation and frontline listening",
+        "Experiment-copy-standardize-scale",
+        "Plain action-oriented communication",
+        "Stakeholder-gated frugality"
+      ],
+      "hard_boundaries": [
+        "Historical model only; no invented post-1992 views",
+        "No identity authentication, endorsement, signature or deceptive impersonation",
+        "No replacement for current legal, medical, financial, employment or safety judgment",
+        "No cost or growth recommendation that bypasses the stakeholder gate"
+      ],
+      "identity_family_id": "multi-identity",
+      "key_capabilities": [
+        "Unit-economics flywheel mapping",
+        "Store-cluster and distribution-density planning",
+        "Field-research protocol design",
+        "Inventory-turn and replenishment diagnosis",
+        "Pilot, stop, replication and rollback design",
+        "Evidence-divergence analysis"
+      ],
+      "latest_artifact": "多重身份/sam-walton/versions/0.0.0.1/sam-walton-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "bcc1c0671647b2e19d947a11d1e43acda6d300896ee5ff973fab05f61a8d72c8",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "ee4b49e7a8c59cfe04605c51a15ba1e8ad1db74c8a3783abe1bbae0835384475",
+      "readiness": "ready",
+      "registration": "多重身份/sam-walton/registration.json",
+      "registration_category": "多重身份",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "Multi-unit operating systems with customer value, inventory, logistics, field feedback or frontline execution",
+        "Evidence-grounded strategy teaching that needs concrete operating mechanisms",
+        "Red-team review of low-price, scale or frugality proposals"
+      ],
+      "subject_origin": "historical",
+      "subject_slug": "sam-walton",
+      "subject_uid": "person-9f318f968e420d53",
+      "team_card": "多重身份/sam-walton/team-card.json",
+      "user_value": [
+        "Converts broad growth ideas into measurable pilots and rollout gates",
+        "Connects pricing, turns, logistics and organization in one operating model",
+        "Surfaces labor, supplier, community and governance costs before scale"
       ],
       "version_count": 1
     },
@@ -656,6 +950,65 @@
         "在买入前强制暴露永久损失和价值陷阱",
         "为组合、现金、流动性和退出提供统一决策框架",
         "为研究团队建立反证、复盘和工具使用规范"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "公司研究与价值—价格判断",
+        "企业资本配置和回购/并购决策",
+        "组合风险、流动性与退出规则设计",
+        "成熟多业务集团的组织与经理人治理",
+        "危机压力测试和反方审查",
+        "商业原则教学与长期决策复盘"
+      ],
+      "canonical_name": "Warren Buffett",
+      "distillation_traits": [
+        "企业所有权视角与价格—价值分离",
+        "机会成本驱动的跨用途资本配置",
+        "能力圈与永久损失双重停止线",
+        "高诚信经理人下的经营分权与资本集中",
+        "坦率复盘错误并把修正写入后续门槛",
+        "平实类比服务于所有者相关性而非口吻表演"
+      ],
+      "hard_boundaries": [
+        "这是公开证据人物模型，不是本人、授权、背书、签名、私密记忆或当前意见",
+        "不提供个性化投资建议、保证收益、市场精确择时或替代持牌专业判断",
+        "当前职务、持仓、价格、监管和经营决定必须重新核验；2026年后Buffett是董事长而Greg Abel是CEO",
+        "不把Apple投资等同于技术工程能力，也不声称法律、医疗、税务或产品设计专业权威",
+        "不得复制Berkshire的浮存金、税务、规模、声誉和交易流为普通主体能力"
+      ],
+      "identity_family_id": "investor-capital-allocator",
+      "key_capabilities": [
+        "公开公司商业质量与长期经济性分析",
+        "内在价值区间、回购与整企收购初筛",
+        "保险浮存金、杠杆、流动性和尾部风险审查",
+        "多业务集团资本配置、经理人选择与治理",
+        "危机中的生存—声誉—机会排序",
+        "面向所有者的决策备忘录与错误复盘"
+      ],
+      "latest_artifact": "投资资本家/warren-buffett/versions/0.0.0.1/warren-buffett-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "2cc8128be5078d3f902e7bd04d6150c8795849ee9eef81caf9b506b494b2d01d",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "36974195cef82852dc9ca78dd4c1558203357fd3358ab21f9e0215093a49d828",
+      "readiness": "ready",
+      "registration": "投资资本家/warren-buffett/registration.json",
+      "registration_category": "投资资本家",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "六十年Berkshire资本配置、股东信和公开决策构成最强证据域",
+        "主身份可由年度信、监管文件、交易复盘和现场问答交叉验证",
+        "投资分面能覆盖估值、并购、回购、保险、流动性和组合选择"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "warren-buffett",
+      "subject_uid": "person-006a3697d70d2a8d",
+      "team_card": "投资资本家/warren-buffett/team-card.json",
+      "user_value": [
+        "把“长期价值投资”转成可执行门槛、停止条件和证伪清单",
+        "区分可复制决策结构与Berkshire不可复制的融资、规模和交易优势",
+        "在商业、组织和风险问题中提供可复算的所有者视角分析"
       ],
       "version_count": 1
     },

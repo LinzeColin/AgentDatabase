@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:路易斯郭士纳/louisvgerstnerjr",
+  "canonical_name": "路易斯·郭士纳 / Louis V. Gerstner Jr.",
+  "identity_family_id": "entrepreneur-operator",
+  "identity_mode": "single",
+  "registration_category": "创业经营家",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "lou-gerstner",
+  "subject_uid": "person-50b921c2baaf3979",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/lou-gerstner-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T00:00:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0",
+      "outer_sha256": "e9c698163507cd9a84a6515e0f227e8ddc0366533a09b72b8eac26a2565bb879",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/lou-gerstner-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "4faaecb1532e07f5162fbf997d2c5ef78bb57a27df1e9451dbe9573ee8ea0984",
+      "runtime_size_bytes": 83532,
+      "size_bytes": 97646
+    }
+  ]
+}

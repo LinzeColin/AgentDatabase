@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:warrenbuffett",
+  "canonical_name": "Warren Buffett",
+  "identity_family_id": "investor-capital-allocator",
+  "identity_mode": "single",
+  "registration_category": "投资资本家",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "warren-buffett",
+  "subject_uid": "person-006a3697d70d2a8d",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/warren-buffett-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T00:00:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0",
+      "outer_sha256": "2cc8128be5078d3f902e7bd04d6150c8795849ee9eef81caf9b506b494b2d01d",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/warren-buffett-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "36974195cef82852dc9ca78dd4c1558203357fd3358ab21f9e0215093a49d828",
+      "runtime_size_bytes": 83452,
+      "size_bytes": 95224
+    }
+  ]
+}

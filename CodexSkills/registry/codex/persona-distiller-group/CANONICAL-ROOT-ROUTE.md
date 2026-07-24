@@ -5,21 +5,27 @@
 ## 当前 canonical roster
 
 <!-- PERSONA-REGISTRY:START -->
-当前唯一登记：**17 个人物**。
+当前唯一登记：**23 个人物**。
 
 | 人物 | 唯一身份 | 版本 | 场景 | 关键能力 | 准备度 |
 |---|---|---|---|---|---|
+| Anne Mulcahy | `创业经营家` | `0.0.0.1` | Enterprise turnaround and cash-constrained operating plans；Customer trust recovery and B2B service-system redesign | Crisis operating cadence and multi-signal scorecards；Selective cost reduction with future-capability fences | `ready` |
 | Reed Hastings / 里德·哈斯廷斯 | `创业经营家` | `0.0.0.1` | Company strategy and business-model transition；Organization culture and talent-system design | Self-disruptive strategy and staged migration；High-talent organizational operating systems | `ready` |
+| Tim Cook | `创业经营家` | `0.0.0.1` | enterprise strategy；operations and supply resilience | enterprise operating system design；supply-chain and execution review | `ready` |
+| 路易斯·郭士纳 / Louis V. Gerstner Jr. | `创业经营家` | `0.0.0.1` | 成熟企业危机稳定与九十天计划；B2B 客户导向战略和服务化转型 | 危机事实底板与转型排序；端到端客户价值和企业边界分析 | `ready` |
 | Aswath Damodaran | `多重身份` | `0.0.0.1` | 上市与非上市公司估值；高增长、亏损或复杂公司的情景分析 | 叙事到收入、利润、再投资、风险和终值的量化映射；透明 DCF、相对定价和风险溢价分析 | `ready` |
 | Ben Horowitz | `多重身份` | `0.0.0.1` | strategy-decision；leadership-organization | 和平/战时情境诊断与危机优先级收敛；创始人、CEO 与高管岗位匹配判断 | `ready` |
 | Charlie Munger | `多重身份` | `0.0.0.1` | Company and acquisition analysis with current filings and valuation data.；Capital allocation, portfolio review, and downside stress testing. | Business-quality and opportunity-cost analysis.；Inversion-led risk identification and lollapalooza-effect red teaming. | `ready` |
 | David Packard | `多重身份` | `0.0.0.1` | Company strategy and product-field selection；Leadership, organization design and management systems | Contribution-gated opportunity screening；Management-by-objectives operating design | `ready` |
+| Edward O. Thorp（爱德华·索普） | `多重身份` | `0.0.0.1` | 量化或基本面投资方案审查；研究假设、实验与原型设计 | 状态变量建模与判别实验；概率优势、Kelly仓位与破产风险 | `ready` |
 | Michael J. Mauboussin | `多重身份` | `0.0.0.1` | 公司研究与价格隐含预期分析；资本配置、并购、回购和再投资评估 | Expectations Investing / reverse DCF；ROIC与资本成本驱动的价值创造分析 | `ready` |
 | Robert A. Kindler | `多重身份` | `0.0.0.1` | M&A strategy and transaction screening；board and corporate-governance decision support | legal-commercial dual-track analysis；transaction lifecycle and stage-gate design | `ready` |
+| Sam Walton | `多重身份` | `0.0.0.1` | Retail and multi-site strategy；Inventory and supply-chain diagnosis | Unit-economics flywheel mapping；Store-cluster and distribution-density planning | `ready` |
 | Howard Marks | `投资资本家` | `0.0.0.1` | 公司与证券研究；组合风险审查 | 价格—价值与隐含预期分析；风险分布和压力测试 | `ready` |
 | Joel Greenblatt | `投资资本家` | `0.0.0.1` | 公司研究与估值备忘录；特殊情形研究计划 | 现金流与资本回报驱动的企业估值；结构性错价诊断 | `ready` |
 | Nick Sleep | `投资资本家` | `0.0.0.1` | 公司与商业模型研究；长期投资决策与组合复盘 | 终点—机制—概率分析；规模经济共享与客户互惠飞轮识别 | `ready` |
 | Seth Klarman | `投资资本家` | `0.0.0.1` | 公司与证券研究；投资委员会备忘录 | 基本面估值与下行分析；催化剂和时间路径设计 | `ready` |
+| Warren Buffett | `投资资本家` | `0.0.0.1` | 公司研究与价值—价格判断；企业资本配置和回购/并购决策 | 公开公司商业质量与长期经济性分析；内在价值区间、回购与整企收购初筛 | `ready` |
 | 李录 Li Lu | `投资资本家` | `0.0.0.1` | 公司研究与商业质量评估；资本配置、组合风险和仓位框架 | 企业所有权、能力圈、安全边际和永久损失的一体化分析；高质量复利企业、管理层与长期增长跑道判断 | `ready` |
 | Beth Wilkinson | `政治法律家` | `0.0.0.1` | governance-legal；communication-negotiation | 复杂事实记录压缩与结果敏感争点识别；审判、调查与制度风险结构化 | `ready` |
 | Evan R. Chesler | `政治法律家` | `0.0.0.1` | governance-legal；strategy-decision | 高风险商事诉讼框架与庭审准备；复杂事实和科学材料的非专家转译 | `ready` |
