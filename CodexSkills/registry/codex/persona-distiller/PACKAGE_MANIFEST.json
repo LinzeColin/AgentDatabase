@@ -31,8 +31,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "3a7af914ce661f73edca2fbf815444e711e5ffa3d14b0efc70360e0da332e59e",
-      "size_bytes": 3892
+      "sha256": "97c94010d36c2f4a853530f5d7f089d1aa02af421442b41af1c28189e0a4c588",
+      "size_bytes": 4476
     },
     {
       "path": "ROADMAP.md",
@@ -46,8 +46,8 @@
     },
     {
       "path": "SKILL.md",
-      "sha256": "3f5f53b38240f87078c4ab52dd8aa5bcf7a542125ffc34fd4b54368db024c498",
-      "size_bytes": 9303
+      "sha256": "387395dbf35188181780ccb6696d5334daa4b5bbfb5c66b71fb98a0fb425b1f7",
+      "size_bytes": 11180
     },
     {
       "path": "THIRD_PARTY_NOTICES.md",
@@ -256,8 +256,8 @@
     },
     {
       "path": "prompts/intake.md",
-      "sha256": "82718f33d3e58e401037422f7f994d20ac788a51fff89f6db59b39f79834ddac",
-      "size_bytes": 1113
+      "sha256": "fdb7eb8d10ef40b587544ef5a6473f94c117d5f660c105a3ca91a352127c63ca",
+      "size_bytes": 1811
     },
     {
       "path": "prompts/persona-builder.md",
@@ -351,8 +351,8 @@
     },
     {
       "path": "references/build-workflow.md",
-      "sha256": "46be00e3afc04122a9b401ad72251f79ae5252e8c3ddc234d3dcb098a56dfb53",
-      "size_bytes": 1270
+      "sha256": "795a7f8bd3a2333a45f044d45ba1edf885ef47b17d65117889a4848a1d87c68b",
+      "size_bytes": 2588
     },
     {
       "path": "references/evaluation-and-refinement.md",

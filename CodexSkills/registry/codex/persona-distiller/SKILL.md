@@ -1,6 +1,6 @@
 ---
 name: persona-distiller
-description: Build, audit, update, package, or uniquely register an evidence-grounded target-person Agent Skill that can plan and execute work through the target's documented capabilities, strategies, cognition, decision policy, work system, temperament, and boundaries. Required build inputs are only the target person's name and one of six identity families or a weighted multi-identity selection; scenario is optional and otherwise inferred. Use for six-lane public/private/fictional research, source-universe coverage, Work/Persona separation, automatic internal identity routing, agentic task execution without per-invocation versions, corrections, evaluation, refinement, rollback, one complete installable delivery ZIP, and per-person product releases 0.0.0.1 through 0.0.0.999 in the sibling canonical expert-team registry. 中文名称：人物蒸馏 Skill。
+description: Build, audit, update, package, or uniquely register an evidence-grounded target-person Agent Skill that can plan and execute work through the target's documented capabilities, strategies, cognition, decision policy, work system, temperament, and boundaries. Before identity parsing or research, resolve same-name candidates from the canonical registry and authoritative public sources; stop for user selection when multiple candidates remain. Required build inputs are the target person's name and one of six identity families or a weighted multi-identity selection; scenario is optional and otherwise inferred. Use for six-lane public/private/fictional research, source-universe coverage, Work/Persona separation, automatic internal identity routing, agentic task execution without per-invocation versions, corrections, evaluation, refinement, rollback, one complete installable delivery ZIP, and per-person product releases 0.0.0.1 through 0.0.0.999 in the sibling canonical expert-team registry. 中文名称：人物蒸馏 Skill。
 ---
 
 # 人物蒸馏 Skill / Persona Distiller
@@ -8,6 +8,26 @@ description: Build, audit, update, package, or uniquely register an evidence-gro
 把目标人物蒸馏为**能实际规划、调用工具、完成任务并接受校验**的人物执行模型，而不是只模仿口吻的角色提示词。
 
 ## 入口合同
+
+### 第一道人物消歧硬门
+
+蒸馏流程的第一步必须先检索同名人物，不能先解析身份、初始化 workspace、抓取研究资料或开始打包：
+
+1. 将姓名按 Unicode、常用别名、中文译名、英文名、转写和缩写规范化；
+2. 先查 sibling canonical registry，再查权威公开资料，私域/自己资料不得在无授权时扩展检索；
+3. 没有候选时继续正常流程；只有一个高置信候选时自动绑定；多个候选时立即停止并等待用户选择；
+4. 多候选必须全部列出并连续分配字母（A–Z 后使用 AA、AB……），不得截断、合并或猜测；候选卡片不显示“置信度”，但内部仍可用证据强度判断是否能够自动绑定。
+
+每个候选严格输出四行，每行只保留最有价值的一句话：
+
+```text
+A. 人物与身份：姓名、身份分类、职业或主要职务。
+   专业背景：组织、时代、地区与核心专业经历。
+   应用价值：可蒸馏的应用场景与关键能力。
+   区分依据：权威证据与其区别于其他同名者的关键特征。
+```
+
+多候选暂停时不得运行 `init_target.py`、不得写入 workspace、不得开始六路研究；用户只需回复对应字母，或补充组织、年代、地区等消歧信息。一个候选自动绑定后，必须把 `chosen_subject_uid`、候选证据和规范化姓名写入构建合同，之后才进入身份解析。
 
 只要求用户提供：
 
@@ -40,6 +60,10 @@ description: Build, audit, update, package, or uniquely register an evidence-gro
 不要一次加载全部 references、prompts 或研究材料。
 
 ## 构建工作流
+
+### 0. 同名消歧（第一步）
+
+执行上述“第一道人物消歧硬门”。这是构建期门禁，不改变已安装人物 Skill 的运行方式；运行时仍由 Skill 内部自动路由身份和场景，不要求用户选择身份。
 
 ### 1. 解析输入并初始化
 
