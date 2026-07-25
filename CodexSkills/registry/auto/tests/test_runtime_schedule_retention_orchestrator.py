@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import contextlib
 import datetime as dt
+import subprocess
 import tempfile
 import unittest
 from pathlib import Path
@@ -18,6 +19,7 @@ from CodexSkills.registry.auto.runtime.core import (
 from CodexSkills.registry.auto.runtime.orchestrator import LaneOutcome, SkillOpsOrchestrator
 from CodexSkills.registry.auto.runtime.retention import RetentionExecutor, raw_ownership_marker
 from CodexSkills.registry.auto.runtime.roots import RootEntry, RootRegistry, prepare_state_root
+from CodexSkills.registry.auto.runtime.repository_binding import REMOTE_URL
 from CodexSkills.registry.auto.runtime.schedule import SchedulePolicy
 from CodexSkills.registry.auto.runtime.state import SingleFlightLock, StateLayout
 
@@ -30,6 +32,7 @@ from runtime_helpers import (
     expected_stale_control_failure_pattern,
     final_contract,
     synthetic_bound_context,
+    synthetic_repository_bound_context,
     trust,
     uid,
 )
@@ -229,20 +232,55 @@ class RuntimeOrchestratorTests(unittest.TestCase):
         self.source = self.base / "source"
         self.source.mkdir()
         self.state = self.base / "state"
+        self.scratch = self.base / "scratch"
+        self.scratch.mkdir()
+        self.reference_repo = self.base / "reference"
+        self.reference_repo.mkdir()
+        for command in (
+            ("git", "init", "--initial-branch=main"),
+            ("git", "config", "user.name", "SkillOps Test"),
+            (
+                "git",
+                "config",
+                "user.email",
+                "skillops@example.invalid",
+            ),
+            ("git", "commit", "--allow-empty", "-m", "reference"),
+            ("git", "remote", "add", "origin", REMOTE_URL),
+        ):
+            subprocess.run(
+                command,
+                cwd=str(self.reference_repo),
+                stdin=subprocess.DEVNULL,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                check=True,
+            )
+        head = subprocess.run(
+            ("git", "rev-parse", "HEAD"),
+            cwd=str(self.reference_repo),
+            stdin=subprocess.DEVNULL,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            check=True,
+        ).stdout.decode("ascii").strip()
+        self.expected_head = "sha1:" + head
 
     def tearDown(self) -> None:
         self.temporary.cleanup()
 
     def orchestrator(self):
         return SkillOpsOrchestrator(
-            repo_root=REPO_ROOT,
+            repo_root=self.reference_repo,
             state_root=self.state,
+            scratch_root=self.scratch,
+            expected_remote_head=self.expected_head,
             protected_roots=(RootEntry("source", "SKILL_SOURCE", self.source),),
             trust=trust(),
             control_trust=control_trust(),
             clock=clock(),
             bootstrap=lambda _repo, _trust, _control: (
-                synthetic_bound_context()
+                synthetic_repository_bound_context()
             ),
         )
 
@@ -250,6 +288,8 @@ class RuntimeOrchestratorTests(unittest.TestCase):
         runner = SkillOpsOrchestrator(
             repo_root=REPO_ROOT,
             state_root=self.state,
+            scratch_root=self.scratch,
+            expected_remote_head=self.expected_head,
             protected_roots=(
                 RootEntry("source", "SKILL_SOURCE", self.source),
             ),
@@ -299,10 +339,10 @@ class RuntimeOrchestratorTests(unittest.TestCase):
         self.assertFalse(self.state.exists())
 
     def test_candidate_run_uses_both_lanes_but_cannot_publish(self) -> None:
-        def registry(_context, forced):
+        def registry(_context, forced, _repository_binding):
             return LaneOutcome("REGISTRY", "SHADOW_VALIDATED", input_count=1, output_count=1)
 
-        def broken(_context, _forced):
+        def broken(_context, _forced, _repository_binding):
             raise RuntimeError("lane local")
 
         outcome = self.orchestrator().run(
@@ -360,14 +400,16 @@ class RuntimeOrchestratorTests(unittest.TestCase):
         def execute(trigger):
             state = self.base / f"state-{trigger.lower()}"
             runner = SkillOpsOrchestrator(
-                repo_root=REPO_ROOT,
+                repo_root=self.reference_repo,
                 state_root=state,
+                scratch_root=self.scratch,
+                expected_remote_head=self.expected_head,
                 protected_roots=(RootEntry("source", "SKILL_SOURCE", self.source),),
                 trust=trust(),
                 control_trust=control_trust(),
                 clock=clock(),
                 bootstrap=lambda _repo, _trust, _control: (
-                    synthetic_bound_context()
+                    synthetic_repository_bound_context()
                 ),
             )
             return runner.run(

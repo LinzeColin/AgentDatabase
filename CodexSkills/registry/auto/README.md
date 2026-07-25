@@ -54,10 +54,11 @@ resolve schemas over the network, or install dependencies at runtime.
   manifest revisions. It returns in-memory PUT artifacts only; it has no
   publisher, queue, canonical-repository write, or state-root entrypoint.
 - `runtime/writer_shadow.py` is development-only. It proves the exact
-  fb9/7f1 historical Git-object closure and current publisher byte
+  e643/85ed historical Git-object closure and current repository-binding byte
   self-consistency without requiring current working-tree control/Mechanism
-  bytes to equal fb9. It returns `UNBOUND_CONTROL_SYNC_PENDING` and can never
-  return a production `BootstrapContext`.
+  bytes to equal e643. It returns
+  `UNBOUND_REPOSITORY_CONTROL_SYNC_PENDING` and can never return a production
+  `BootstrapContext`.
 - `runtime/notification.py` keeps the actual recipient and provider payload in
   a repo-external outbox; public receipts contain only `recipient_ref`.
 - `runtime/gmail_api.py` is the production Gmail API transport. It refreshes
@@ -98,6 +99,16 @@ resolve schemas over the network, or install dependencies at runtime.
   maps, caller `SENT` strings, or caller shared-gate status maps; it derives
   those facts from the externally trusted settlement, exact bytes, live lock,
   path gates, policy/privacy validation, and remote head.
+- `runtime/repository_binding.py` keeps repository integration distinct from
+  repository authority. It requires the exact external candidate, control,
+  and V2 consumer closure already proved by bootstrap, consumes the
+  Mechanism-owned `BOUND_REFERENCE_RESOLVER` decision, and only then checks a
+  clean real-directory `main` reference, exact SSH fetch/push URL, SHA-1
+  object format, repo-external scratch/state roots, and per-transaction
+  expected head without network access. A sealed in-process permit is required
+  before state, lock, Gmail, worktree, `ls-remote`, or canonical publisher
+  access. Caller booleans, URLs, digest maps, and `registry/index.json` cannot
+  create that permit.
 - `runtime/retention.py` keeps persistent raw disabled by default and can act
   only on validated, owned managed segments under retention policy/receipt v3.
   Final v3 receipt semantics now validate exact current-tree part/index
@@ -120,24 +131,25 @@ provisioned interpreter:
   --expected-bundle-digest 36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e \
   --canonical-manifest-path CodexSkills/governance/bundles/schema-bundle-manifest.v1.json \
   --mode CANDIDATE \
-  --verified-control-git-object-id sha1:fb9b99c36cb870b04f34b5ed3bcb75aeae52c296 \
-  --expected-control-interface-raw-sha256 3929db4e818864d02a596efe3e1aaae1af71a765cfafaf7b22f26157135d7953 \
+  --verified-control-git-object-id sha1:e6438db785c2f3f38da59be7ba9c1cd46651d7ea \
+  --expected-control-interface-raw-sha256 28a35148cc18362de4fc53b508754f263a015cf33e4cd187314cf48c767b6920 \
   --canonical-control-interface-path CodexSkills/governance/activation/control-interface.json \
   --control-mode DRAFT_NON_ACTIVE_CONTROL
 ```
 
 This command is read-only, but the predecessor control binds exact Auto object
-`7f1bd876...`, runtime-interface raw `f1f9331d...`, and 24 modules. The current
-publisher checkout is deliberately not that byte set, so production preflight
+`85edc67d...`, runtime-interface raw `ce3aae7a...`, and 25 modules. The current
+repository-binding checkout is deliberately not that byte set, so production preflight
 fails with `BOOTSTRAP_AUTO_RUNTIME_INTERFACE_LOCAL_DRIFT` before state, lock,
 watermark, recipient, Gmail, outbox, or publisher access. Development-only
-publisher evidence is obtained with `validate_au040_publisher.py`; it must not be
+repository evidence is obtained with the existing bounded
+`validate_au040_publisher.py` shadow entrypoint; it must not be
 interpreted as `TRUSTED`, `READY`, or a production preflight PASS. Neither
 checkout self-reporting nor a caller boolean/digest map can replace either
 external tuple. Once a successor control changes the working-tree control
-bytes, the stale fb9 tuple instead fails earlier with the exact
+bytes, the stale e643 tuple instead fails earlier with the exact
 `BOOTSTRAP_CONTROL_INTERFACE_LOCAL_DRIFT` code; the historical builder and
-shadow evidence remain stable because they read fb9 exclusively from Git.
+shadow evidence remain stable because they read e643 exclusively from Git.
 
 ## M0c activation control
 
@@ -154,11 +166,11 @@ GitHub-read back at object
 `189a47300fc1aa6012e87feb6184833cb717cdbe2b9dc9be6db89197f579939c`.
 It binds candidate `5ee37d74...` / `36f0c66d...`, daily part/index/manifest
 and retention-receipt contracts, while keeping both publication gates false.
-Control object `fb9b99c3...`, raw SHA-256 `3929db4e...`, binds the same
-candidate and consumer plus historical Auto object `7f1bd876...`, interface
-raw `f1f9331d...`, and 24 modules. The runtime-interface builder verifies all
+Control object `e6438db7...`, raw SHA-256 `28a35148...`, binds the same
+candidate and consumer plus historical Auto object `85edc67d...`, interface
+raw `ce3aae7a...`, and 25 modules. The runtime-interface builder verifies all
 historical evidence from pinned Git blobs independently while reporting, in an
-`INTERFACE_MATERIALIZATION_ONLY` snapshot, the current 25-module publisher
+`INTERFACE_MATERIALIZATION_ONLY` snapshot, the current 26-module repository
 candidate as unbound.
 
 That gate does not permit canonical publication. The consumer still declares
@@ -196,12 +208,14 @@ The provider preflight is explicit and performs no send:
   preflight \
   --repo-root . \
   --state-root "$SKILLOPS_STATE_ROOT" \
+  --scratch-root "$SKILLOPS_SCRATCH_ROOT" \
+  --expected-remote-head "$SKILLOPS_EXPECTED_REMOTE_HEAD" \
   --verified-git-object-id sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5 \
   --expected-bundle-digest 36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e \
   --canonical-manifest-path CodexSkills/governance/bundles/schema-bundle-manifest.v1.json \
   --mode CANDIDATE \
-  --verified-control-git-object-id sha1:fb9b99c36cb870b04f34b5ed3bcb75aeae52c296 \
-  --expected-control-interface-raw-sha256 3929db4e818864d02a596efe3e1aaae1af71a765cfafaf7b22f26157135d7953 \
+  --verified-control-git-object-id sha1:e6438db785c2f3f38da59be7ba9c1cd46651d7ea \
+  --expected-control-interface-raw-sha256 28a35148cc18362de4fc53b508754f263a015cf33e4cd187314cf48c767b6920 \
   --canonical-control-interface-path CodexSkills/governance/activation/control-interface.json \
   --control-mode DRAFT_NON_ACTIVE_CONTROL
 ```
@@ -232,14 +246,19 @@ AU-040 is not complete: `skills_runs/example.json` is only prior scaffolding,
 never the final run-layout contract. The final candidate and consumer now bind
 bounded daily part/index JSONL, append-only daily manifest revisions, and
 retention receipt v3. The deterministic runtime writer and
-publication-manifest:v2 publisher are integrated, but no
+publication-manifest:v2 publisher and repository-binding adapter are
+integrated, but no
 shard/manifest/index instance was created. The publisher recomputes its exact
 manifest from physical PUT/DELETE descriptors, validates JSONL per RFC 8785
-JCS line, and re-reads prior bytes before DELETE. Production still fails
-before lock, worktree, or Git backend access until a successor control binds
-the new Auto object; even after that, `repository_bound=false`,
+JCS line, re-reads prior part/index/manifest bytes before DELETE, and admits
+only the exact daily run-log path/schema/serialization closure. Production
+still fails before state, lock, Gmail, worktree, `ls-remote`, or Git backend
+access until a successor control binds the new Auto object and separately
+provides Mechanism-owned repository and resolver authority. This materialized
+interface deliberately keeps `repository_bound=false`,
+`bound_reference_resolver_gate_satisfied=false`,
 `au_040_daily_jsonl_shard_complete=false`, and
-`canonical_publication_permitted=false` keep physical publication disabled.
+`canonical_publication_permitted=false`; physical publication stays disabled.
 
 Mechanism Authority Audit Revision 6 is represented by the Auto-owned source
 schemas under `transport-draft/`: daily manifest v1, persistent event index
@@ -262,10 +281,10 @@ materialization can follow without invalidating promotion evidence.
 
 The exact final 31/5 candidate, V2 consumer, and predecessor control remain
 unchanged. The next phase is
-`MECHANISM_POST_AU040_PUBLISHER_V2_CONTROL_SYNC`: Mechanism must independently
+`MECHANISM_POST_AU040_REPOSITORY_BINDING_CONTROL_SYNC`: Mechanism must independently
 read back this Auto object and issue a successor control binding the new
-runtime-interface tuple and 25-module set. The materialized interface records
-`publisher_v2_runtime_integration_complete=true` as a local implementation
+runtime-interface tuple and 26-module set. The materialized interface records
+`repository_binding_integration_complete=true` as a local implementation
 fact while `current_auto_runtime_control_bound=false`,
 `runtime_state_write_permitted=false`, `repository_bound=false`, AU-040
 completion, activation, and canonical publication all remain false.

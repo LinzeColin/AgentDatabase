@@ -34,20 +34,23 @@ CANDIDATE_BUNDLE_DIGEST = (
     "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e"
 )
 CONTROL_GIT_OBJECT = (
-    "sha1:fb9b99c36cb870b04f34b5ed3bcb75aeae52c296"
+    "sha1:e6438db785c2f3f38da59be7ba9c1cd46651d7ea"
 )
 CONTROL_RAW_SHA256 = (
-    "3929db4e818864d02a596efe3e1aaae1"
-    "af71a765cfafaf7b22f26157135d7953"
+    "28a35148cc18362de4fc53b508754f263"
+    "a015cf33e4cd187314cf48c767b6920"
 )
 BOUND_AUTO_GIT_OBJECT = (
-    "sha1:7f1bd87652f7cc88fbf2f6b542f9feb57750bf0d"
+    "sha1:85edc67df48d4e5bc783f89ed3f3371f25f288e1"
 )
 BOUND_AUTO_INTERFACE_RAW_SHA256 = (
-    "f1f9331df1b56c80e2fa7415fe2fe3d7"
-    "14dcd831cec94390afa43c078dedf38b"
+    "ce3aae7a22419c3a01455e8e83cc67b2"
+    "3eeb2ada3f3c17e57590a890c0fdef31"
 )
-BOUND_AUTO_MODULE_COUNT = 24
+BOUND_AUTO_MODULE_COUNT = 25
+PUBLISHER_MATERIALIZATION_CONTROL_GIT_OBJECT = (
+    "sha1:fb9b99c36cb870b04f34b5ed3bcb75aeae52c296"
+)
 RUNTIME_INTERFACE_PATH = (
     "CodexSkills/registry/auto/runtime-interface.json"
 )
@@ -67,6 +70,9 @@ class UnboundWriterCandidateEvidence:
     runtime_state_write_permitted: bool
     runtime_shard_writer_integration_complete: bool
     publisher_v2_runtime_integration_complete: bool
+    repository_binding_integration_complete: bool
+    repository_bound: bool
+    bound_reference_resolver_gate_satisfied: bool
 
 
 def validate_unbound_writer_candidate(
@@ -145,7 +151,10 @@ def validate_unbound_writer_candidate(
         or transition.get("runtime_shard_writer_integration_complete")
         is not True
         or transition.get("publisher_v2_runtime_integration_complete")
-        is not False
+        is not True
+        or transition.get("repository_bound") is not False
+        or control.get("next_phase")
+        != "AUTO_AU040_REPOSITORY_BINDING"
     ):
         raise AutoRuntimeError(
             "WRITER_SHADOW_HISTORICAL_CONTROL_CONTRACT_MISMATCH"
@@ -245,6 +254,9 @@ def validate_unbound_writer_candidate(
     publisher_materialization = current.get(
         "publisher_v2_runtime_materialization_snapshot"
     )
+    repository_materialization = current.get(
+        "repository_binding_materialization_snapshot"
+    )
     historical_control = current.get(
         "historical_control_observation"
     )
@@ -268,7 +280,7 @@ def validate_unbound_writer_candidate(
         or publisher_materialization.get(
             "predecessor_control_git_object_id"
         )
-        != CONTROL_GIT_OBJECT
+        != PUBLISHER_MATERIALIZATION_CONTROL_GIT_OBJECT
         or publisher_materialization.get(
             "current_auto_runtime_control_bound"
         )
@@ -280,6 +292,37 @@ def validate_unbound_writer_candidate(
         or publisher_materialization.get("repository_bound")
         is not False
         or publisher_materialization.get(
+            "canonical_publication_permitted"
+        )
+        is not False
+        or not isinstance(repository_materialization, dict)
+        or repository_materialization.get("as_of_phase")
+        != "AUTO_AU040_REPOSITORY_BINDING"
+        or repository_materialization.get("semantic_scope")
+        != "INTERFACE_MATERIALIZATION_ONLY"
+        or repository_materialization.get(
+            "predecessor_control_git_object_id"
+        )
+        != CONTROL_GIT_OBJECT
+        or repository_materialization.get(
+            "current_auto_runtime_control_bound"
+        )
+        is not False
+        or repository_materialization.get(
+            "repository_binding_integration_complete"
+        )
+        is not True
+        or repository_materialization.get("repository_bound")
+        is not False
+        or repository_materialization.get(
+            "bound_reference_resolver_gate_satisfied"
+        )
+        is not False
+        or repository_materialization.get(
+            "runtime_state_write_permitted"
+        )
+        is not False
+        or repository_materialization.get(
             "canonical_publication_permitted"
         )
         is not False
@@ -295,8 +338,13 @@ def validate_unbound_writer_candidate(
         is not True
         or current.get("publisher_v2_runtime_integration_complete")
         is not True
+        or current.get("repository_binding_integration_complete")
+        is not True
+        or current.get("repository_bound") is not False
+        or current.get("bound_reference_resolver_gate_satisfied")
+        is not False
         or current.get("next_phase")
-        != "MECHANISM_POST_AU040_PUBLISHER_V2_CONTROL_SYNC"
+        != "MECHANISM_POST_AU040_REPOSITORY_BINDING_CONTROL_SYNC"
     ):
         raise AutoRuntimeError(
             "WRITER_SHADOW_CURRENT_INTERFACE_CONTRACT_MISMATCH"
@@ -316,7 +364,7 @@ def validate_unbound_writer_candidate(
                 "WRITER_SHADOW_CURRENT_MODULE_DIGEST_MISMATCH"
             )
     return UnboundWriterCandidateEvidence(
-        "UNBOUND_CONTROL_SYNC_PENDING",
+        "UNBOUND_REPOSITORY_CONTROL_SYNC_PENDING",
         31,
         5,
         CONTROL_GIT_OBJECT,
@@ -328,6 +376,9 @@ def validate_unbound_writer_candidate(
         False,
         True,
         True,
+        True,
+        False,
+        False,
     )
 
 
@@ -337,6 +388,20 @@ def validate_unbound_publisher_candidate(
     control_trust: ControlTrustTuple,
 ) -> UnboundWriterCandidateEvidence:
     """Explicit publisher-v2 name for the current unbound proof."""
+
+    return validate_unbound_writer_candidate(
+        repo_root,
+        candidate_trust,
+        control_trust,
+    )
+
+
+def validate_unbound_repository_binding_candidate(
+    repo_root: Path,
+    candidate_trust: TrustTuple,
+    control_trust: ControlTrustTuple,
+) -> UnboundWriterCandidateEvidence:
+    """Explicit name for the current repository-binding shadow proof."""
 
     return validate_unbound_writer_candidate(
         repo_root,

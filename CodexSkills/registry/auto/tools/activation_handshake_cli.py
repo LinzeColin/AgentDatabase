@@ -42,6 +42,10 @@ from CodexSkills.registry.auto.runtime.publication import (  # noqa: E402
     PublicationRequest,
     SubprocessGitBackend,
 )
+from CodexSkills.registry.auto.runtime.repository_binding import (  # noqa: E402
+    RepositoryBindingInputs,
+    authorize_repository_binding,
+)
 from CodexSkills.registry.auto.runtime.roots import prepare_state_root  # noqa: E402
 from CodexSkills.registry.auto.runtime.state import (  # noqa: E402
     SingleFlightLock,
@@ -80,12 +84,21 @@ def _context_and_handshake(args: argparse.Namespace):
         _control_trust(args),
     )
     require_control_synced_runtime(context)
+    repository_binding = authorize_repository_binding(
+        context,
+        RepositoryBindingInputs(
+            args.repo_root,
+            args.scratch_root,
+            args.state_root,
+            args.expected_remote_head,
+        ),
+    )
     handshake = ActivationHandshake(
         args.repo_root,
         context,
         _control_trust(args),
     )
-    return context, handshake
+    return context, handshake, repository_binding
 
 
 def _prepare_lock(
@@ -143,7 +156,9 @@ def _notification_components(
 
 
 def _notify_intent(args: argparse.Namespace) -> int:
-    context, handshake = _context_and_handshake(args)
+    context, handshake, repository_binding = (
+        _context_and_handshake(args)
+    )
     verified = handshake.verify_intent_root(
         args.artifact_root,
         args.intent_repo_path,
@@ -151,7 +166,8 @@ def _notify_intent(args: argparse.Namespace) -> int:
     )
     observed_remote_head = SubprocessGitBackend(
         args.repo_root,
-        args.artifact_root,
+        args.scratch_root,
+        repository_binding_permit=repository_binding,
     ).remote_head()
     if observed_remote_head != verified.expected_remote_head:
         raise AutoRuntimeError(
@@ -204,7 +220,9 @@ def _notify_intent(args: argparse.Namespace) -> int:
 
 
 def _publish_settlement(args: argparse.Namespace) -> int:
-    context, handshake = _context_and_handshake(args)
+    context, handshake, repository_binding = (
+        _context_and_handshake(args)
+    )
     verified = handshake.verify_settlement_root(
         args.artifact_root,
         args.settlement_repo_path,
@@ -224,10 +242,15 @@ def _publish_settlement(args: argparse.Namespace) -> int:
         publisher = PhysicalPublisher(
             context.contract,
             args.expected_bundle_digest,
-            SubprocessGitBackend(args.repo_root, args.scratch_root),
+            SubprocessGitBackend(
+                args.repo_root,
+                args.scratch_root,
+                repository_binding_permit=repository_binding,
+            ),
             trusted_mode="CANDIDATE",
             lock=lock,
             activation_handshake=handshake,
+            repository_binding_permit=repository_binding,
         )
         readback = publisher.publish(
             PublicationRequest(
@@ -269,6 +292,7 @@ def _common(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--repo-root", type=Path, required=True)
     parser.add_argument("--artifact-root", type=Path, required=True)
     parser.add_argument("--state-root", type=Path, required=True)
+    parser.add_argument("--scratch-root", type=Path, required=True)
     parser.add_argument("--expected-remote-head", required=True)
     parser.add_argument(
         "--verified-candidate-git-object-id",
@@ -309,7 +333,6 @@ def main(argv: Sequence[str] = None) -> int:
     publish = commands.add_parser("publish-settlement")
     _common(publish)
     publish.add_argument("--settlement-repo-path", required=True)
-    publish.add_argument("--scratch-root", type=Path, required=True)
     args = parser.parse_args(argv)
     if args.command == "notify-intent":
         return _notify_intent(args)

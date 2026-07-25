@@ -32,6 +32,12 @@ from .privacy import (
     validate_public_jsonl_serialization,
     validate_public_serialization,
 )
+from .repository_binding import (
+    RepositoryBindingPermit,
+    assert_repository_binding_permit,
+    validate_delete_prerequisites,
+    validate_run_log_transaction,
+)
 
 
 GIT_OBJECT_RE = re.compile(r"^(sha1:[0-9a-f]{40}|sha256:[0-9a-f]{64})$")
@@ -452,10 +458,36 @@ class GitBackend:
 class SubprocessGitBackend(GitBackend):
     """Production backend.  Commands intentionally contain no merge/rebase/force."""
 
-    def __init__(self, repo_root: Path, scratch_root: Path, remote: str = "origin") -> None:
+    def __init__(
+        self,
+        repo_root: Path,
+        scratch_root: Path,
+        remote: str = "origin",
+        *,
+        repository_binding_permit: Optional[
+            RepositoryBindingPermit
+        ] = None,
+    ) -> None:
         self.repo_root = repo_root.resolve(strict=True)
         self.scratch_root = scratch_root.resolve(strict=True)
         self.remote = remote
+        self.repository_binding_permit = (
+            repository_binding_permit
+        )
+        if repository_binding_permit is not None:
+            observation = assert_repository_binding_permit(
+                repository_binding_permit,
+                repository_binding_permit.context,
+                repository_binding_permit.observation.expected_remote_head,
+            )
+            if (
+                self.repo_root != observation.repo_root
+                or self.scratch_root != observation.scratch_root
+                or self.remote != observation.remote_name
+            ):
+                raise AutoRuntimeError(
+                    "REPOSITORY_BINDING_BACKEND_SCOPE_MISMATCH"
+                )
 
     def _run(
         self,
@@ -814,6 +846,9 @@ class PhysicalPublisher:
         lock: PublicationLock,
         activation_handshake: Optional[ActivationHandshake] = None,
         runtime_context: Optional[BootstrapContext] = None,
+        repository_binding_permit: Optional[
+            RepositoryBindingPermit
+        ] = None,
     ) -> None:
         if trusted_mode not in {"CANDIDATE", "ACTIVE"}:
             raise AutoRuntimeError("PUBLICATION_TRUST_MODE_INVALID")
@@ -824,6 +859,10 @@ class PhysicalPublisher:
         self.lock = lock
         self.activation_handshake = activation_handshake
         self.runtime_context = runtime_context
+        self.repository_binding_permit = repository_binding_permit
+        self._run_log_transaction_closure: Optional[
+            Mapping[str, Any]
+        ] = None
 
     @staticmethod
     def _safe_relative(path: str) -> None:
@@ -849,6 +888,19 @@ class PhysicalPublisher:
         require_canonical_publication_authority(
             self.runtime_context
         )
+        assert_repository_binding_permit(
+            self.repository_binding_permit,
+            self.runtime_context,
+            request.expected_remote_head,
+        )
+        if isinstance(self.backend, SubprocessGitBackend):
+            if (
+                self.backend.repository_binding_permit
+                is not self.repository_binding_permit
+            ):
+                raise AutoRuntimeError(
+                    "REPOSITORY_BINDING_BACKEND_PERMIT_REQUIRED"
+                )
         raw = request.publication_manifest_payload
         if not isinstance(raw, bytes):
             raise AutoRuntimeError(
@@ -903,6 +955,15 @@ class PhysicalPublisher:
             raise AutoRuntimeError(
                 "PUBLICATION_MANIFEST_REQUEST_BYTES_MISMATCH"
             )
+        assert self.repository_binding_permit is not None
+        self._run_log_transaction_closure = (
+            validate_run_log_transaction(
+                self.repository_binding_permit,
+                self.runtime_context,
+                request.expected_remote_head,
+                request.artifacts,
+            )
+        )
 
     def _validate_request(self, request: PublicationRequest) -> Tuple[str, ...]:
         if request.trust_mode != self.trusted_mode:
@@ -1118,6 +1179,21 @@ class PhysicalPublisher:
             if request.authority == "ACTIVE_RUNTIME":
                 self._validate_delete_artifacts(
                     request,
+                    worktree,
+                )
+                if self._run_log_transaction_closure is None:
+                    raise AutoRuntimeError(
+                        "REPOSITORY_BINDING_TRANSACTION_CLOSURE_MISSING"
+                    )
+                assert self.runtime_context is not None
+                assert self.repository_binding_permit is not None
+                validate_delete_prerequisites(
+                    self.repository_binding_permit,
+                    self.runtime_context,
+                    request.expected_remote_head,
+                    self._run_log_transaction_closure,
+                    request.artifacts,
+                    self.backend.read_artifact,
                     worktree,
                 )
             self.backend.write_artifacts(worktree, request.artifacts)

@@ -16,6 +16,11 @@ from .bootstrap import (
 )
 from .core import AutoRuntimeError, Clock
 from .roots import RootEntry, RootRegistry, prepare_state_root
+from .repository_binding import (
+    RepositoryBindingInputs,
+    RepositoryBindingPermit,
+    authorize_repository_binding,
+)
 from .schedule import SchedulePolicy
 from .state import SingleFlightLock, StateLayout
 
@@ -53,7 +58,10 @@ BootstrapFunction = Callable[
     [Path, TrustTuple, ControlTrustTuple],
     BootstrapContext,
 ]
-LaneExecutor = Callable[[BootstrapContext, bool], LaneOutcome]
+LaneExecutor = Callable[
+    [BootstrapContext, bool, RepositoryBindingPermit],
+    LaneOutcome,
+]
 
 
 class SkillOpsOrchestrator:
@@ -64,6 +72,8 @@ class SkillOpsOrchestrator:
         *,
         repo_root: Path,
         state_root: Path,
+        scratch_root: Path,
+        expected_remote_head: str,
         protected_roots: Sequence[RootEntry],
         trust: TrustTuple,
         control_trust: ControlTrustTuple,
@@ -72,6 +82,8 @@ class SkillOpsOrchestrator:
     ) -> None:
         self.repo_root = repo_root
         self.state_root = state_root
+        self.scratch_root = scratch_root
+        self.expected_remote_head = expected_remote_head
         self.protected_roots = tuple(protected_roots)
         self.trust = trust
         self.control_trust = control_trust
@@ -96,6 +108,15 @@ class SkillOpsOrchestrator:
             self.control_trust,
         )
         require_control_synced_runtime(context)
+        repository_binding = authorize_repository_binding(
+            context,
+            RepositoryBindingInputs(
+                self.repo_root,
+                self.scratch_root,
+                self.state_root,
+                self.expected_remote_head,
+            ),
+        )
         self.schedule.validate_trusted_policy(
             context.contract.shared.policies[
                 "urn:linzecolin:agentdatabase:skillops:policy:version:v2"
@@ -152,7 +173,11 @@ class SkillOpsOrchestrator:
                     lanes.append(LaneOutcome(lane, "NO_CHANGE"))
                     continue
                 try:
-                    outcome = executor(context, cadence.forced_full)
+                    outcome = executor(
+                        context,
+                        cadence.forced_full,
+                        repository_binding,
+                    )
                     if outcome.lane != lane:
                         raise AutoRuntimeError("LANE_EXECUTOR_IDENTITY_MISMATCH")
                     if outcome.status not in {

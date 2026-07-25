@@ -1,20 +1,20 @@
-# Auto AU-040 publisher-v2 runtime integration handoff
+# Auto AU-040 repository-binding integration handoff
 
 - State: `DRAFT_NON_ACTIVE`
-- Phase: `AUTO_AU040_PUBLISHER_V2_RUNTIME_INTEGRATION`
+- Phase: `AUTO_AU040_REPOSITORY_BINDING`
 - Phase base Git object:
-  `cf48f1a03050859f4abab9a39202a41c3d9a4d29`
+  `e6438db785c2f3f38da59be7ba9c1cd46651d7ea`
 - Predecessor control Git object:
-  `sha1:fb9b99c36cb870b04f34b5ed3bcb75aeae52c296`
+  `sha1:e6438db785c2f3f38da59be7ba9c1cd46651d7ea`
 - Predecessor control raw SHA-256:
-  `3929db4e818864d02a596efe3e1aaae1af71a765cfafaf7b22f26157135d7953`
+  `28a35148cc18362de4fc53b508754f263a015cf33e4cd187314cf48c767b6920`
 - Control external mode: `DRAFT_NON_ACTIVE_CONTROL`
 - Control root status: `DRAFT_NON_ACTIVE`
 - Control-bound Auto Git object:
-  `sha1:7f1bd87652f7cc88fbf2f6b542f9feb57750bf0d`
+  `sha1:85edc67df48d4e5bc783f89ed3f3371f25f288e1`
 - Control-bound Auto runtime-interface raw SHA-256:
-  `f1f9331df1b56c80e2fa7415fe2fe3d714dcd831cec94390afa43c078dedf38b`
-- Control-bound Auto module count: `24`
+  `ce3aae7a22419c3a01455e8e83cc67b23eeb2ada3f3c17e57590a890c0fdef31`
+- Control-bound Auto module count: `25`
 - Final candidate Git object:
   `sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5`
 - Final candidate bundle digest:
@@ -27,80 +27,84 @@
 - Consumer interface raw SHA-256:
   `189a47300fc1aa6012e87feb6184833cb717cdbe2b9dc9be6db89197f579939c`
 - Current Auto runtime-interface raw SHA-256:
-  `ce3aae7a22419c3a01455e8e83cc67b23eeb2ada3f3c17e57590a890c0fdef31`
-- Current Auto module count: `25`
+  `c7af9d1406fe2ed084d5a30fab6cded3897a83c1602e6c40587cf28c75a2c75c`
+- Current Auto module count: `26`
 
 ## Completed in this Phase
 
-The distinct publication-manifest:v2 runtime contract is implemented without
-creating or publishing a canonical artifact:
+Repository-binding code is integrated without claiming repository authority or
+creating a canonical run-log artifact:
 
-1. `build_publication_manifest_v2_payload()` derives every PUT/DELETE
-   descriptor from the physical request. Caller-provided digest maps and
-   booleans are not accepted as trust roots.
-2. The runtime recomputes the six ordered shared-gate evidence digests from
-   the exact bundle, expected head, validated lock identity, path/operation
-   set, canonical policy bytes, and schema/privacy-validated artifacts.
-3. PUT payloads use an explicit
-   `RFC8785_JCS_OBJECT|RFC8785_JCS_PER_LINE_LF` discriminator. JSON objects
-   must equal their RFC 8785 bytes exactly. JSONL is bounded to 20 MiB and
-   10,000 records, requires one JCS object per LF line, and validates every
-   line against its declared record schema and public-value policy.
-4. DELETE has no payload or new digest. Only a run-log `part-NNNN.jsonl`
-   deletion is accepted. Before mutation the publisher reads the existing
-   file through a non-following regular-file gate and revalidates its exact
-   prior digest, byte count, record count, schema, privacy, and framing.
-5. The physical backend supports exact PUT/DELETE changed-path closure,
-   append-only run-log PUT paths, FF-only push, post-push byte/absence
-   readback, and crash reconciliation. Parent symlinks and non-regular targets
-   fail closed.
-6. A production ACTIVE publication requires a real `BootstrapContext`, exact
-   successor control binding with
-   `publisher_v2_runtime_integration_complete=true`, and separate
-   `repository_bound=true` plus
-   `canonical_publication_permitted=true`. The current predecessor has
-   publisher-v2 false, so execution stops before lock, worktree, state, or Git
-   backend access.
+1. Production trust remains the external candidate tuple plus the external
+   control tuple. Bootstrap now also parses and validates the exact
+   Mechanism-owned V2 consumer bytes, including its candidate tuple, status,
+   run-log root, and three closed publication gates.
+2. `repository_binding.py` consumes a successor control decision before doing
+   any local repository probe. It requires
+   `repository_binding_integration_complete=true`,
+   `repository_bound=true`, and the distinct Mechanism-owned
+   `bound_reference_resolver_gate_satisfied=true`.
+3. Only after those control facts pass does a no-network probe verify the
+   repository root is a real directory, the exact top-level is selected,
+   object format is SHA-1, reference branch is clean `main`, fetch and push
+   URLs are both exactly
+   `git@github.com:LinzeColin/AgentDatabase.git`, local
+   `refs/heads/main` equals the repo-external per-transaction expected head,
+   and scratch/state roots are external, real, and non-overlapping.
+4. The probe issues a sealed in-process permit bound to the exact
+   `BootstrapContext`, expected head, repo root, and external roots. A caller
+   boolean, URL, digest map, forged object, or permit from another context is
+   rejected.
+5. Orchestrator, notification/Gmail, activation, and physical ACTIVE
+   publication paths now require repository authorization before state root,
+   lock, recipient mapping, Gmail client, outbox, worktree, `ls-remote`, or
+   mutable Git backend access.
+6. The ACTIVE publisher admits only the canonical
+   `OpenAIDatabase/data/run_logs/skills_runs/YYYY/MM/DD/` closure:
+   part/index JSONL at 20 MiB, daily manifest/retention receipt JCS objects at
+   1 MiB, Sydney calendar date, 0001..9999 logical numbering, immutable PUT,
+   and DELETE only for a part.
+7. A part DELETE must be closed by a new daily manifest plus an exact
+   retention receipt. Before mutation the runtime revalidates the prior part,
+   prior manifest self-digest/schema/privacy, and retained index physical
+   digest/bytes/record count/schema/privacy.
+8. The Auto adapter does not create or authenticate a BOUND resolver.
+   `CodexSkills/registry/index.json` remains only a compatibility index. The
+   absent global identities, four source catalogs, versioned registry
+   snapshot, and Mechanism resolver remain explicit blockers.
 
-The final Auto semantic validator now recognizes
-`publication-manifest:v2` independently of v1. It enforces operation
-conditionals, lane/path/schema/serialization closure, exact artifact counts,
-ordered unique paths and UIDs, and the complete ordered shared-gate set.
+## Authority separation
 
-## Stable cross-owner transition
-
-The runtime-interface builder consumes the predecessor control only from its
-verified Git object and exact raw digest. It never requires the current
-working-tree control or Mechanism runtime bytes to remain equal to that
-historical object.
-
-The writer materialization snapshot remains byte-for-byte historical as
-required by current Mechanism control. A separate publisher snapshot records:
+The machine interface records:
 
 ```text
-publisher_v2_runtime_materialization_snapshot.as_of_phase=
-  AUTO_AU040_PUBLISHER_V2_RUNTIME_INTEGRATION
-publisher_v2_runtime_materialization_snapshot.predecessor_control_git_object_id=
-  sha1:fb9b99c36cb870b04f34b5ed3bcb75aeae52c296
-publisher_v2_runtime_materialization_snapshot.current_auto_runtime_control_bound=false
-publisher_v2_runtime_materialization_snapshot.runtime_state_write_permitted=false
-publisher_v2_runtime_materialization_snapshot.repository_bound=false
-publisher_v2_runtime_materialization_snapshot.canonical_publication_permitted=false
+repository_binding_integration_complete=true
+repository_binding_readonly_preflight_verified=false
+repository_binding_materialization_snapshot.as_of_phase=
+  AUTO_AU040_REPOSITORY_BINDING
+repository_binding_materialization_snapshot.semantic_scope=
+  INTERFACE_MATERIALIZATION_ONLY
+repository_binding_materialization_snapshot.predecessor_control_git_object_id=
+  sha1:e6438db785c2f3f38da59be7ba9c1cd46651d7ea
+repository_binding_materialization_snapshot.current_auto_runtime_control_bound=false
+repository_binding_materialization_snapshot.repository_bound=false
+repository_binding_materialization_snapshot.bound_reference_resolver_gate_satisfied=false
+repository_binding_materialization_snapshot.runtime_state_write_permitted=false
+repository_binding_materialization_snapshot.canonical_publication_permitted=false
 ```
 
-The development-only publisher shadow validates the immutable predecessor
-control, its exact 7f1/f1f/24-module Auto closure, the final 31/5 candidate,
-the current 25-module interface, and all current local module digests. It
-returns `UNBOUND_CONTROL_SYNC_PENDING`, never a production
-`BootstrapContext`, and cannot access state, Gmail, outbox, worktree, or Git
-remote backends.
+`repository_binding_readonly_preflight_verified=false` is deliberate. No
+environment-dependent probe result is serialized as a persistent trust root.
+The positive probe is covered with isolated temporary repositories; the real
+production probe remains per transaction and cannot run until a successor
+control grants both repository and resolver authority.
 
-Production stale-tuple tests compute one exact expected error from byte
-equality. Before the successor control lands, the predecessor tuple fails
-`BOOTSTRAP_AUTO_RUNTIME_INTERFACE_LOCAL_DRIFT`; after a successor changes the
-working-tree control, the same tuple fails
-`BOOTSTRAP_CONTROL_INTERFACE_LOCAL_DRIFT`. Side-effect sentinels remain
-untouched in both states.
+When a future Mechanism resolver cannot prove identity → instance → version
+through an immutable externally pinned registry snapshot, projection must
+remain `binding_state=UNKNOWN` with one schema-approved reason and without
+`skill_ref` or `controlled_invocation`. Path, slug, name, or compatibility
+index inference is forbidden. An already published event is immutable and may
+only be superseded by a later `BINDING_CORRECTION`.
 
 ## Machine facts
 
@@ -108,22 +112,26 @@ untouched in both states.
 auto_exact_bundle_integration_complete=true
 runtime_shard_writer_integration_complete=true
 publisher_v2_runtime_integration_complete=true
-publisher_v2_runtime_materialization_snapshot.current_auto_runtime_control_bound=false
+repository_binding_integration_complete=true
+current_auto_runtime_control_bound=false
 runtime_state_write_permitted=false
-control_sync_required_before_state_write=true
+repository_bound=false
+bound_reference_resolver_gate_satisfied=false
+consumer_first_repository_shards_permitted=false
+canonical_publication_permitted=false
 au_040_daily_jsonl_shard_complete=false
 au_040_complete=false
-repository_bound=false
-canonical_publication_permitted=false
+runtime_state_instance_created=false
 external_gmail_ready_gate_satisfied=false
+notification_real_message_metadata_readback_verified=false
 m0c_b_permitted=false
 schedule_authority_resolved=false
 schedule_complete=false
-next_phase=MECHANISM_POST_AU040_PUBLISHER_V2_CONTROL_SYNC
+next_phase=MECHANISM_POST_AU040_REPOSITORY_BINDING_CONTROL_SYNC
 ```
 
 No VERSION, state instance, lock, watermark, queue/outbox entry, shard, index,
-daily manifest instance, retention receipt, Gmail/network operation,
+daily manifest instance, retention receipt instance, Gmail/network operation,
 activation, publication, automation, App action, verifier call, history
 replay, or added time window was performed. The three PAUSED automations were
 not touched.
@@ -135,69 +143,63 @@ The complete Auto suite is green:
 ```text
 /usr/bin/python3 -B -m unittest discover \
   -s CodexSkills/registry/auto/tests -p 'test_*.py'
-Ran 170 tests
+Ran 178 tests
 OK
 ```
 
-The suite includes exact manifest/physical closure, malformed conditional,
-whole-JSONL-as-object, missing LF, count/digest drift, unlisted DELETE,
-symlink parent, immutable-path, remote readback, control authority, and
-side-effect sentinel negatives.
+The repository-binding tests include exact SSH fetch/push URLs, clean `main`,
+object format and expected-head checks; URL/head/dirty/symlink/root
+containment negatives; unforgeable context-bound permits; exact writer
+part/index/manifest closure; Sydney date and path restrictions; resolver gate
+ordering; and positive/negative receipt-backed part pruning with retained
+index and prior manifest revalidation.
 
 The development-only closure emits:
 
 ```text
-AUTO_AU040_PUBLISHER_V2_SHADOW
-status=UNBOUND_CONTROL_SYNC_PENDING
-schemas=31 policies=5 modules=25
+AUTO_AU040_REPOSITORY_BINDING_SHADOW
+status=UNBOUND_REPOSITORY_CONTROL_SYNC_PENDING
+schemas=31 policies=5 modules=26
+resolver=UNSATISFIED repository_bound=FALSE
 state_write=FORBIDDEN canonical_write=FORBIDDEN
 ```
 
-The production preflight with exact candidate A and predecessor control fails
-as the expected safety assertion:
+The production preflight with exact candidate A and predecessor e643 control
+fails as the expected safety assertion:
 
 ```text
 BOOTSTRAP_AUTO_RUNTIME_INTERFACE_LOCAL_DRIFT
 ```
 
-The Mechanism suite retains one required cross-owner transition error:
+The pre-push cross-plane gates are:
 
 ```text
-Ran 60 tests
-59 passed
-1 error=test_02a_integrated_auto_interface_and_modules_are_exact
-error_code=ACTIVATION_AUTO_INTERFACE_CURRENT_DRIFT
+Mechanism: 60 run; 59 pass; one expected cross-owner transition error
+  test_02a_integrated_auto_interface_and_modules_are_exact
+  ACTIVATION_AUTO_INTERFACE_CURRENT_DRIFT
+OpenAIDatabase consumer + architecture: 23/23 PASS
+OpenAIDatabase consumer CLI: PASS; errors=[]; canonical publication=false
+fault/privacy seed 271828: 127/127 PASS
+fault/privacy seed 314159: 127/127 PASS
+candidate builder/trust: 31 schemas / 5 policies PASS
+activation control builder/lint: PASS; predecessor raw unchanged
+AU-040 semantic acceptance builder/lint: PASS
+Auto runtime-interface builder: byte-equivalent
 ```
 
-The directly related OpenAIDatabase consumer/architecture suite is `23/23`
-green. Its real consumer CLI returns `status=PASS`, `errors=[]`, and
-`canonical_publication_permitted=false`.
-
-Deterministic fault/privacy runs are both green:
-
-```text
-seed=271828 tests=119 failures=0 errors=0
-seed=314159 tests=119 failures=0 errors=0
-```
-
-Candidate/control/acceptance/promotion/runtime builders are byte-equivalent;
-candidate trust remains exact `31 schemas / 5 policies`.
-
-The broad command-ownership baseline is the same on phase base and this tree:
-`top-level script entrypoints: expected 84, observed 90`. It is not reported
-as PASS and this Phase has no `OpenAIDatabase/**` diff. The broad
-OpenAIDatabase privacy guard is PASS with zero high-risk hits on both trees.
+Detached GitHub object/raw readback and owned cleanup remain completion-time
+evidence and are reported only after the ordinary FF-safe push succeeds.
 
 ## Next exact action
 
 The next owner is Mechanism and the only next phase is
-`MECHANISM_POST_AU040_PUBLISHER_V2_CONTROL_SYNC`. It must independently read
-back the verified Auto object/interface/modules and issue a successor control
-binding them. It must not perform repository binding, create canonical
-shards, publish, activate, touch Gmail/state, create VERSION, modify schedule
-or automation, call verifier, or replay history.
+`MECHANISM_POST_AU040_REPOSITORY_BINDING_CONTROL_SYNC`. It must independently
+read back the verified Auto object/interface/26 modules and decide any
+successor repository/resolver authority from its own evidence. It must not
+generate canonical shards, publish, activate, touch Gmail/state, create
+VERSION, change schedule or automation, call verifier, or replay history.
 
-After successor control sync, AU-040 daily completion, repository binding,
-canonical publication, Gmail/state readiness, M0c-B, ACTIVE, and schedule
-authority remain false until their separately authorized phases and external
-facts are complete.
+After successor control sync, AU-040 daily completion, the BOUND resolver,
+consumer repository-shard permission, canonical publication, Gmail/state
+readiness, M0c-B, ACTIVE, and schedule authority remain false until their
+separately authorized phases and external facts are complete.

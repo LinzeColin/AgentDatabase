@@ -37,15 +37,16 @@ from runtime_helpers import (
     HISTORICAL_CONTROL_INTERFACE_RAW_SHA256,
     MANIFEST_PATH,
     PUBLISHER_CONTROL_GIT_OBJECT,
-    PUBLISHER_CONTROL_INTERFACE_RAW_SHA256,
+    REPOSITORY_CONTROL_GIT_OBJECT,
+    REPOSITORY_CONTROL_INTERFACE_RAW_SHA256,
     REPO_ROOT,
     clock,
     control_trust,
-    expected_publisher_control_failure_pattern,
+    expected_repository_control_failure_pattern,
     expected_stale_control_failure_pattern,
     final_contract,
     historical_mechanism_runtime_view,
-    publisher_control_trust,
+    repository_control_trust,
     trust,
     uid,
 )
@@ -59,15 +60,15 @@ class RuntimeBootstrapTests(unittest.TestCase):
         evidence = validate_unbound_writer_candidate(
             REPO_ROOT,
             trust(),
-            publisher_control_trust(),
+            repository_control_trust(),
         )
         self.assertEqual(
             evidence.status,
-            "UNBOUND_CONTROL_SYNC_PENDING",
+            "UNBOUND_REPOSITORY_CONTROL_SYNC_PENDING",
         )
         self.assertEqual(evidence.schema_count, 31)
         self.assertEqual(evidence.policy_count, 5)
-        self.assertEqual(evidence.historical_bound_module_count, 24)
+        self.assertEqual(evidence.historical_bound_module_count, 25)
         self.assertFalse(
             evidence.current_runtime_control_bound_at_materialization
         )
@@ -98,18 +99,18 @@ class RuntimeBootstrapTests(unittest.TestCase):
             validate_unbound_writer_candidate(
                 REPO_ROOT,
                 trust(),
-                publisher_control_trust(raw_digest="0" * 64),
+                repository_control_trust(raw_digest="0" * 64),
             )
 
-    def test_publisher_predecessor_control_scope_is_exact(self) -> None:
-        observed = publisher_control_trust()
+    def test_repository_predecessor_control_scope_is_exact(self) -> None:
+        observed = repository_control_trust()
         self.assertEqual(
             observed.verified_git_object_id,
-            PUBLISHER_CONTROL_GIT_OBJECT,
+            REPOSITORY_CONTROL_GIT_OBJECT,
         )
         self.assertEqual(
             observed.expected_control_interface_raw_sha256,
-            PUBLISHER_CONTROL_INTERFACE_RAW_SHA256,
+            REPOSITORY_CONTROL_INTERFACE_RAW_SHA256,
         )
 
     def test_historical_control_scope_is_exact(self) -> None:
@@ -196,13 +197,15 @@ class RuntimeBootstrapTests(unittest.TestCase):
             common = {
                 "repo_root": REPO_ROOT,
                 "state_root": state_root,
+                "scratch_root": Path(temporary) / "scratch",
+                "expected_remote_head": "sha1:" + ("a" * 40),
                 "expected_bundle_digest": CANDIDATE_DIGEST,
                 "canonical_manifest_path": MANIFEST_PATH,
                 "verified_control_git_object_id": (
-                    PUBLISHER_CONTROL_GIT_OBJECT
+                    REPOSITORY_CONTROL_GIT_OBJECT
                 ),
                 "expected_control_interface_raw_sha256": (
-                    PUBLISHER_CONTROL_INTERFACE_RAW_SHA256
+                    REPOSITORY_CONTROL_INTERFACE_RAW_SHA256
                 ),
                 "canonical_control_interface_path": (
                     "CodexSkills/governance/activation/"
@@ -248,9 +251,16 @@ class RuntimeBootstrapTests(unittest.TestCase):
                         "notification_transport_cli.TransactionalNotifier"
                     )
                 )
+                repository_authorizer = stack.enter_context(
+                    mock.patch(
+                        "CodexSkills.registry.auto.tools."
+                        "notification_transport_cli."
+                        "authorize_repository_binding"
+                    )
+                )
                 with self.assertRaisesRegex(
                     AutoRuntimeError,
-                    expected_publisher_control_failure_pattern(),
+                    expected_repository_control_failure_pattern(),
                 ):
                     _components(
                         notification_args,
@@ -261,6 +271,7 @@ class RuntimeBootstrapTests(unittest.TestCase):
                 gmail_config_loader.assert_not_called()
                 gmail_transport.assert_not_called()
                 notifier.assert_not_called()
+                repository_authorizer.assert_not_called()
             activation_args = argparse.Namespace(
                 **common,
                 verified_candidate_git_object_id=(
@@ -293,20 +304,28 @@ class RuntimeBootstrapTests(unittest.TestCase):
                         "activation_handshake_cli.PhysicalPublisher"
                     )
                 )
+                activation_repository_authorizer = stack.enter_context(
+                    mock.patch(
+                        "CodexSkills.registry.auto.tools."
+                        "activation_handshake_cli."
+                        "authorize_repository_binding"
+                    )
+                )
                 with self.assertRaisesRegex(
                     AutoRuntimeError,
-                    expected_publisher_control_failure_pattern(),
+                    expected_repository_control_failure_pattern(),
                 ):
                     _context_and_handshake(activation_args)
                 with self.assertRaisesRegex(
                     AutoRuntimeError,
-                    expected_publisher_control_failure_pattern(),
+                    expected_repository_control_failure_pattern(),
                 ):
                     _publish_settlement(activation_args)
                 handshake.assert_not_called()
                 lock_preparer.assert_not_called()
                 git_backend.assert_not_called()
                 publisher.assert_not_called()
+                activation_repository_authorizer.assert_not_called()
             self.assertFalse(state_root.exists())
 
     def test_runtime_interface_is_byte_equivalent_and_not_a_trust_root(self) -> None:
@@ -354,7 +373,7 @@ class RuntimeBootstrapTests(unittest.TestCase):
         )
         self.assertEqual(
             interface["au_040_authority_ruling_status"],
-            "PUBLISHER_V2_INTEGRATED_CONTROL_SYNC_PENDING",
+            "REPOSITORY_BINDING_INTEGRATED_CONTROL_SYNC_PENDING",
         )
         self.assertFalse(interface["au_040_complete"])
         self.assertTrue(interface["au_040_transport_schema_draft_complete"])
@@ -487,7 +506,7 @@ class RuntimeBootstrapTests(unittest.TestCase):
         )
         self.assertEqual(
             interface["next_phase"],
-            "MECHANISM_POST_AU040_PUBLISHER_V2_CONTROL_SYNC",
+            "MECHANISM_POST_AU040_REPOSITORY_BINDING_CONTROL_SYNC",
         )
         self.assertTrue(
             interface["auto_exact_bundle_integration_complete"]
@@ -508,26 +527,26 @@ class RuntimeBootstrapTests(unittest.TestCase):
         )
         self.assertEqual(
             historical_control["bound_auto_git_object_id"],
-            "sha1:7f1bd87652f7cc88fbf2f6b542f9feb57750bf0d",
+            "sha1:85edc67df48d4e5bc783f89ed3f3371f25f288e1",
         )
         self.assertEqual(
             historical_control[
                 "bound_auto_runtime_interface_raw_sha256"
             ],
-            "f1f9331df1b56c80e2fa7415fe2fe3d7"
-            "14dcd831cec94390afa43c078dedf38b",
+            "ce3aae7a22419c3a01455e8e83cc67b2"
+            "3eeb2ada3f3c17e57590a890c0fdef31",
         )
         self.assertEqual(
             historical_control["bound_auto_module_count"],
-            24,
+            25,
         )
         self.assertEqual(
             historical_control["verified_git_object_id"],
-            PUBLISHER_CONTROL_GIT_OBJECT,
+            REPOSITORY_CONTROL_GIT_OBJECT,
         )
         self.assertEqual(
             historical_control["interface_raw_sha256"],
-            PUBLISHER_CONTROL_INTERFACE_RAW_SHA256,
+            REPOSITORY_CONTROL_INTERFACE_RAW_SHA256,
         )
         self.assertTrue(
             historical_control[
@@ -578,6 +597,53 @@ class RuntimeBootstrapTests(unittest.TestCase):
                 "canonical_publication_permitted"
             ]
         )
+        repository_materialization = interface[
+            "repository_binding_materialization_snapshot"
+        ]
+        self.assertEqual(
+            repository_materialization["as_of_phase"],
+            "AUTO_AU040_REPOSITORY_BINDING",
+        )
+        self.assertEqual(
+            repository_materialization[
+                "predecessor_control_git_object_id"
+            ],
+            REPOSITORY_CONTROL_GIT_OBJECT,
+        )
+        self.assertFalse(
+            repository_materialization[
+                "current_auto_runtime_control_bound"
+            ]
+        )
+        self.assertTrue(
+            repository_materialization[
+                "repository_binding_integration_complete"
+            ]
+        )
+        self.assertFalse(
+            repository_materialization[
+                "bound_reference_resolver_gate_satisfied"
+            ]
+        )
+        self.assertFalse(
+            repository_materialization["repository_bound"]
+        )
+        self.assertFalse(
+            repository_materialization[
+                "runtime_state_write_permitted"
+            ]
+        )
+        self.assertFalse(
+            interface["repository_binding_readonly_preflight_verified"]
+        )
+        self.assertTrue(
+            interface["repository_binding_integration_complete"]
+        )
+        self.assertEqual(interface["module_count"], 26)
+        self.assertFalse(
+            interface["bound_reference_resolver_gate_satisfied"]
+        )
+        self.assertFalse(interface["current_auto_runtime_control_bound"])
         self.assertTrue(
             interface["control_sync_required_before_state_write"]
         )
@@ -592,7 +658,7 @@ class RuntimeBootstrapTests(unittest.TestCase):
         self.assertFalse(interface["runtime_state_write_permitted"])
         self.assertEqual(
             interface["runtime_writer_shadow_status"],
-            "UNBOUND_CONTROL_SYNC_PENDING",
+            "UNBOUND_REPOSITORY_CONTROL_SYNC_PENDING",
         )
         self.assertEqual(
             interface["runtime_writer_shadow_validator_kind"],
@@ -711,14 +777,14 @@ class RuntimeBootstrapTests(unittest.TestCase):
             evidence = validate_unbound_writer_candidate(
                 REPO_ROOT,
                 trust(),
-                publisher_control_trust(),
+                repository_control_trust(),
             )
             self.assertEqual(
                 evidence.status,
-                "UNBOUND_CONTROL_SYNC_PENDING",
+                "UNBOUND_REPOSITORY_CONTROL_SYNC_PENDING",
             )
             self.assertEqual(
-                expected_publisher_control_failure_pattern(),
+                expected_repository_control_failure_pattern(),
                 "^BOOTSTRAP_CONTROL_INTERFACE_LOCAL_DRIFT$",
             )
             with self.assertRaisesRegex(
@@ -736,8 +802,8 @@ class RuntimeBootstrapTests(unittest.TestCase):
     ) -> None:
         historical_control_object = runtime_bootstrap._split_git_object(
             REPO_ROOT,
-            PUBLISHER_CONTROL_GIT_OBJECT,
-            "TEST_PUBLISHER_CONTROL",
+            REPOSITORY_CONTROL_GIT_OBJECT,
+            "TEST_REPOSITORY_CONTROL",
         )
         historical_control_raw = runtime_bootstrap._git_blob(
             REPO_ROOT,
@@ -877,7 +943,7 @@ class RuntimeBootstrapTests(unittest.TestCase):
             )
             self.assertEqual(
                 current_interface["next_phase"],
-                "MECHANISM_POST_AU040_PUBLISHER_V2_CONTROL_SYNC",
+                "MECHANISM_POST_AU040_REPOSITORY_BINDING_CONTROL_SYNC",
             )
             self.assertTrue(
                 observed["transition_contract"][
@@ -1035,6 +1101,8 @@ class RuntimeBootstrapTests(unittest.TestCase):
             orchestrator = SkillOpsOrchestrator(
                 repo_root=REPO_ROOT,
                 state_root=state,
+                scratch_root=base / "scratch",
+                expected_remote_head="sha1:" + ("a" * 40),
                 protected_roots=(RootEntry("source", "SKILL_SOURCE", source),),
                 trust=trust(),
                 control_trust=control_trust(),

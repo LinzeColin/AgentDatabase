@@ -308,6 +308,55 @@ def _verify_control_trust(
         raise AutoRuntimeError(
             "BOOTSTRAP_CONSUMER_INTERFACE_LOCAL_DRIFT"
         )
+    try:
+        consumer_interface = parse_json_bytes(consumer_raw)
+    except Exception as exc:
+        raise AutoRuntimeError(
+            "BOOTSTRAP_CONSUMER_INTERFACE_JSON_INVALID"
+        ) from exc
+    publication_gate = (
+        consumer_interface.get("publication_gate")
+        if isinstance(consumer_interface, dict)
+        else None
+    )
+    candidate_contract = (
+        consumer_interface.get("candidate_trust")
+        if isinstance(consumer_interface, dict)
+        else None
+    )
+    if (
+        not isinstance(consumer_interface, dict)
+        or consumer_interface.get("schema_version")
+        != "openai_database.skill_run_consumer.v2"
+        or consumer_interface.get("status")
+        != "DRAFT_NON_ACTIVE_CONSUMER_READY"
+        or consumer_interface.get("consumer_owner_plane")
+        != "MECHANISM"
+        or consumer_interface.get("log_root")
+        != "data/run_logs/skills_runs"
+        or not isinstance(publication_gate, dict)
+        or publication_gate.get("canonical_publication_permitted")
+        is not False
+        or publication_gate.get("repository_shards_permitted")
+        is not False
+        or publication_gate.get("required_before_enable")
+        != [
+            "ACTIVE_EXTERNAL_TRUST",
+            "AU_040_DAILY_JSONL_SHARD_MANIFEST",
+            "BOUND_REFERENCE_RESOLVER",
+        ]
+        or not isinstance(candidate_contract, dict)
+        or candidate_contract.get("verified_git_object_id")
+        != candidate_trust.verified_git_object_id
+        or candidate_contract.get("expected_bundle_digest")
+        != candidate_trust.expected_bundle_digest
+        or candidate_contract.get("canonical_manifest_path")
+        != candidate_trust.canonical_manifest_path
+        or candidate_contract.get("mode") != candidate_trust.mode
+    ):
+        raise AutoRuntimeError(
+            "BOOTSTRAP_CONSUMER_INTERFACE_CONTRACT_MISMATCH"
+        )
     source_object_id = _split_git_object(
         repo_root,
         transport["verified_git_object_id"],
@@ -510,6 +559,7 @@ def require_control_synced_runtime(context: BootstrapContext) -> None:
     if (
         not isinstance(transition, dict)
         or transition.get("auto_runtime_integration_complete") is not True
+        or transition.get("runtime_state_write_permitted") is not True
     ):
         raise AutoRuntimeError(
             "RUNTIME_CONTROL_SYNC_REQUIRED_BEFORE_STATE_WRITE"
@@ -539,15 +589,50 @@ def require_control_synced_publisher_v2(
 def require_canonical_publication_authority(
     context: BootstrapContext,
 ) -> None:
-    """Keep physical publication closed until repository authority lands."""
+    """Keep physical publication closed until every external gate lands."""
+
+    require_repository_binding_authority(context)
+    transition = context.control_interface.get("transition_contract")
+    assert isinstance(transition, dict)
+    if transition.get("canonical_publication_permitted") is not True:
+        raise AutoRuntimeError(
+            "CANONICAL_PUBLICATION_NOT_AUTHORIZED"
+        )
+
+
+def require_control_synced_repository_binding(
+    context: BootstrapContext,
+) -> None:
+    """Require a successor control that binds this Auto integration."""
 
     require_control_synced_publisher_v2(context)
     transition = context.control_interface.get("transition_contract")
     assert isinstance(transition, dict)
     if (
-        transition.get("repository_bound") is not True
-        or transition.get("canonical_publication_permitted") is not True
+        transition.get("repository_binding_integration_complete")
+        is not True
     ):
         raise AutoRuntimeError(
-            "CANONICAL_PUBLICATION_NOT_AUTHORIZED"
+            "RUNTIME_REPOSITORY_BINDING_CONTROL_SYNC_REQUIRED"
+        )
+
+
+def require_repository_binding_authority(
+    context: BootstrapContext,
+) -> None:
+    """Consume Mechanism-owned repository and resolver decisions."""
+
+    require_control_synced_repository_binding(context)
+    transition = context.control_interface.get("transition_contract")
+    assert isinstance(transition, dict)
+    if transition.get("repository_bound") is not True:
+        raise AutoRuntimeError(
+            "REPOSITORY_BINDING_NOT_AUTHORIZED"
+        )
+    if (
+        transition.get("bound_reference_resolver_gate_satisfied")
+        is not True
+    ):
+        raise AutoRuntimeError(
+            "BOUND_REFERENCE_RESOLVER_NOT_SATISFIED"
         )

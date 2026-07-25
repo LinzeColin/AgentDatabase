@@ -56,13 +56,26 @@ def main() -> int:
     )
     context = bootstrap_runtime(args.repo_root, trust, control_trust)
     versions = context.capabilities
-    state_write = (
-        "ENABLED_BY_CONTROL"
-        if context.control_interface["transition_contract"][
-            "auto_runtime_integration_complete"
-        ]
-        else "CONTROL_SYNC_PENDING"
-    )
+    transition = context.control_interface["transition_contract"]
+    if (
+        transition.get("auto_runtime_integration_complete") is not True
+        or transition.get("runtime_state_write_permitted") is not True
+    ):
+        state_write = "CONTROL_SYNC_PENDING"
+    elif (
+        transition.get("repository_binding_integration_complete")
+        is not True
+    ):
+        state_write = "REPOSITORY_CONTROL_SYNC_PENDING"
+    elif transition.get("repository_bound") is not True:
+        state_write = "REPOSITORY_AUTHORITY_PENDING"
+    elif (
+        transition.get("bound_reference_resolver_gate_satisfied")
+        is not True
+    ):
+        state_write = "BOUND_REFERENCE_RESOLVER_PENDING"
+    else:
+        state_write = "ENABLED_BY_CONTROL"
     print(
         "AUTO_RUNTIME_PREFLIGHT_OK "
         f"mode={args.mode} schemas={len(context.contract.shared.schemas)} "

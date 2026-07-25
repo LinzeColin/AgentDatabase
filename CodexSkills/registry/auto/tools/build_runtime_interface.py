@@ -58,20 +58,23 @@ CONTROL_INTERFACE_REPO_PATH = (
     "CodexSkills/governance/activation/control-interface.json"
 )
 CONTROL_EVIDENCE_GIT_OBJECT = (
-    "sha1:fb9b99c36cb870b04f34b5ed3bcb75aeae52c296"
+    "sha1:e6438db785c2f3f38da59be7ba9c1cd46651d7ea"
 )
 EXPECTED_CONTROL_INTERFACE_RAW_SHA256 = (
-    "3929db4e818864d02a596efe3e1aaae1"
-    "af71a765cfafaf7b22f26157135d7953"
+    "28a35148cc18362de4fc53b508754f263"
+    "a015cf33e4cd187314cf48c767b6920"
 )
 CONTROL_BOUND_AUTO_GIT_OBJECT = (
-    "sha1:7f1bd87652f7cc88fbf2f6b542f9feb57750bf0d"
+    "sha1:85edc67df48d4e5bc783f89ed3f3371f25f288e1"
 )
 CONTROL_BOUND_AUTO_RUNTIME_INTERFACE_RAW_SHA256 = (
-    "f1f9331df1b56c80e2fa7415fe2fe3d7"
-    "14dcd831cec94390afa43c078dedf38b"
+    "ce3aae7a22419c3a01455e8e83cc67b2"
+    "3eeb2ada3f3c17e57590a890c0fdef31"
 )
-CONTROL_BOUND_AUTO_MODULE_COUNT = 24
+CONTROL_BOUND_AUTO_MODULE_COUNT = 25
+PUBLISHER_MATERIALIZATION_CONTROL_GIT_OBJECT = (
+    "sha1:fb9b99c36cb870b04f34b5ed3bcb75aeae52c296"
+)
 EXPECTED_CONSUMER_REQUIRED_GATES = [
     "ACTIVE_EXTERNAL_TRUST",
     "AU_040_DAILY_JSONL_SHARD_MANIFEST",
@@ -627,7 +630,7 @@ def _historical_control_observation():
         or interface.get("candidate_schema_count") != 31
         or interface.get("candidate_policy_count") != 5
         or interface.get("next_phase")
-        != "AUTO_AU040_PUBLISHER_V2_RUNTIME_INTEGRATION"
+        != "AUTO_AU040_REPOSITORY_BINDING"
         or not isinstance(consumer, dict)
         or consumer.get("verified_git_object_id")
         != CONSUMER_FIRST_EVIDENCE_GIT_OBJECT
@@ -642,7 +645,7 @@ def _historical_control_observation():
         or source.get("artifact_digest")
         != CONTROL_BOUND_AUTO_RUNTIME_INTERFACE_RAW_SHA256
         or source.get("integration_state")
-        != "AU040_RUNTIME_WRITER_INTEGRATED_CONTROL_SYNCED"
+        != "AU040_PUBLISHER_V2_SYNCED"
         or source.get("module_count") != CONTROL_BOUND_AUTO_MODULE_COUNT
         or not isinstance(transition, dict)
         or transition.get("auto_runtime_integration_complete") is not True
@@ -654,7 +657,7 @@ def _historical_control_observation():
         or transition.get("final_candidate_integration_required") is not False
         or transition.get("m0c_b_permitted") is not False
         or transition.get("publisher_v2_runtime_integration_complete")
-        is not False
+        is not True
         or transition.get("repository_bound") is not False
         or transition.get("runtime_preflight_shadow_permitted") is not True
         or transition.get("runtime_shard_writer_integration_complete")
@@ -701,6 +704,8 @@ def _historical_control_observation():
         ),
         "mode": "DRAFT_NON_ACTIVE_CONTROL",
         "next_phase": interface["next_phase"],
+        "publisher_v2_runtime_integration_complete": True,
+        "repository_bound": False,
         "runtime_state_write_permitted": True,
         "status": interface["status"],
         "historical_runtime_artifacts": historical_runtime_artifacts,
@@ -762,7 +767,7 @@ def build():
         "activation_instance_created": False,
         "activation_settlement_recomputed_before_publish": True,
         "au_040_authority_ruling_status": (
-            "PUBLISHER_V2_INTEGRATED_CONTROL_SYNC_PENDING"
+            "REPOSITORY_BINDING_INTEGRATED_CONTROL_SYNC_PENDING"
         ),
         "au_040_complete": False,
         "au_040_consumer_manifest_path_contract_present": True,
@@ -822,6 +827,7 @@ def build():
                 True
             ),
             "publisher_v2_runtime_integration_complete": True,
+            "repository_binding_integration_complete": True,
             "repository_bound": False,
             "promotion_required_before_candidate_materialization": True,
             "promotion_requirement_satisfied": True,
@@ -867,6 +873,7 @@ def build():
         "candidate_manifest_path": CANDIDATE_MANIFEST_PATH,
         "canonical_publication_permitted": False,
         "capability_gate_precedes_state_write": True,
+        "current_auto_runtime_control_bound": False,
         "consumer_first_canonical_publication_permitted": consumer[
             "canonical_publication_permitted"
         ],
@@ -924,6 +931,12 @@ def build():
             "observed_runtime_state_write_permitted": control[
                 "runtime_state_write_permitted"
             ],
+            "observed_publisher_v2_runtime_integration_complete": control[
+                "publisher_v2_runtime_integration_complete"
+            ],
+            "observed_repository_bound": control[
+                "repository_bound"
+            ],
             "root_status": control["status"],
             "verified_git_object_id": control["verified_git_object_id"],
             "working_tree_control_is_not_historical_trust_evidence": True,
@@ -936,7 +949,7 @@ def build():
         "module_count": len(artifacts),
         "m0c_b_permitted": False,
         "next_phase": (
-            "MECHANISM_POST_AU040_PUBLISHER_V2_CONTROL_SYNC"
+            "MECHANISM_POST_AU040_REPOSITORY_BINDING_CONTROL_SYNC"
         ),
         "notification_actual_recipient_repo_external": True,
         "notification_credentials_repo_external": True,
@@ -995,18 +1008,202 @@ def build():
             "canonical_publication_permitted": False,
             "control_sync_required_before_state_write": True,
             "current_auto_runtime_control_bound": False,
-            "predecessor_control_git_object_id": control[
-                "verified_git_object_id"
-            ],
+            "predecessor_control_git_object_id": (
+                PUBLISHER_MATERIALIZATION_CONTROL_GIT_OBJECT
+            ),
             "repository_bound": False,
             "runtime_state_write_permitted": False,
             "semantic_scope": "INTERFACE_MATERIALIZATION_ONLY",
+        },
+        "repository_binding_contract": {
+            "artifact_closure": [
+                {
+                    "artifact_kind": "INDEX",
+                    "artifact_operation": "PUT",
+                    "max_bytes": 20971520,
+                    "path_pattern": (
+                        "OpenAIDatabase/data/run_logs/skills_runs/"
+                        "YYYY/MM/DD/index-NNNN.jsonl"
+                    ),
+                    "schema_id": (
+                        "urn:linzecolin:agentdatabase:skillops:"
+                        "schema:run-event-index-entry:v1"
+                    ),
+                    "serialization": "RFC8785_JCS_PER_LINE_LF",
+                },
+                {
+                    "artifact_kind": "PART",
+                    "artifact_operation": "PUT|DELETE",
+                    "max_bytes": 20971520,
+                    "path_pattern": (
+                        "OpenAIDatabase/data/run_logs/skills_runs/"
+                        "YYYY/MM/DD/part-NNNN.jsonl"
+                    ),
+                    "schema_id": (
+                        "urn:linzecolin:agentdatabase:skillops:"
+                        "schema:public-run-event:v2"
+                    ),
+                    "serialization": "RFC8785_JCS_PER_LINE_LF",
+                },
+                {
+                    "artifact_kind": "DAILY_MANIFEST",
+                    "artifact_operation": "PUT",
+                    "max_bytes": 1048576,
+                    "path_pattern": (
+                        "OpenAIDatabase/data/run_logs/skills_runs/"
+                        "YYYY/MM/DD/manifest-NNNN.json"
+                    ),
+                    "schema_id": (
+                        "urn:linzecolin:agentdatabase:skillops:"
+                        "schema:daily-run-shard-manifest:v1"
+                    ),
+                    "serialization": "RFC8785_JCS_OBJECT",
+                },
+                {
+                    "artifact_kind": "RETENTION_RECEIPT",
+                    "artifact_operation": "PUT",
+                    "max_bytes": 1048576,
+                    "path_pattern": (
+                        "OpenAIDatabase/data/run_logs/skills_runs/"
+                        "YYYY/MM/DD/retention-receipt-NNNN.json"
+                    ),
+                    "schema_id": (
+                        "urn:linzecolin:agentdatabase:skillops:"
+                        "schema:retention-receipt:v3"
+                    ),
+                    "serialization": "RFC8785_JCS_OBJECT",
+                },
+            ],
+            "bound_reference_resolver_owner_plane": "MECHANISM",
+            "bound_reference_resolver_required_before_mutable_git": True,
+            "branch": "main",
+            "canonical_run_log_root": (
+                "OpenAIDatabase/data/run_logs/skills_runs/"
+            ),
+            "changed_path_exact_closure_required": True,
+            "expected_fetch_url": (
+                "git@github.com:LinzeColin/AgentDatabase.git"
+            ),
+            "expected_push_url": (
+                "git@github.com:LinzeColin/AgentDatabase.git"
+            ),
+            "expected_remote_head_repo_external_per_transaction": True,
+            "ff_only": True,
+            "logical_numbering": (
+                "0001_TO_9999_GAPLESS_MANIFEST_ENTRIES"
+            ),
+            "object_format": "sha1",
+            "push_refspec": "HEAD:main",
+            "reference_main_clean_required": True,
+            "remote_name": "origin",
+            "remote_readback_precedes_watermark": True,
+            "remote_ref": "refs/heads/main",
+            "repository_id": "github.com/LinzeColin/AgentDatabase",
+            "repository_self_report_is_not_trust_root": True,
+            "scratch_and_state_repo_external_nonoverlapping": True,
+            "sydney_calendar_date_required": True,
+        },
+        "repository_binding_integration_complete": True,
+        "repository_binding_materialization_snapshot": {
+            "as_of_phase": "AUTO_AU040_REPOSITORY_BINDING",
+            "bound_reference_resolver_gate_satisfied": False,
+            "canonical_publication_permitted": False,
+            "current_auto_runtime_control_bound": False,
+            "predecessor_control_git_object_id": control[
+                "verified_git_object_id"
+            ],
+            "repository_binding_integration_complete": True,
+            "repository_bound": False,
+            "runtime_state_write_permitted": False,
+            "semantic_scope": "INTERFACE_MATERIALIZATION_ONLY",
+        },
+        "repository_binding_readonly_preflight_verified": False,
+        "bound_reference_resolver_dependency_contract": {
+            "adapter_may_generate_or_authenticate_resolver": False,
+            "approved_surfaces": [
+                "CODEX_AUTOMATION",
+                "CODEX_CLI",
+            ],
+            "current_registry_compatibility_index_is_not_snapshot_truth": (
+                True
+            ),
+            "gate_owner_plane": "MECHANISM",
+            "controlled_invocation_required_fields": [
+                "evidence_type",
+                "invocation_envelope_digest",
+                "invocation_uid",
+                "observed_at",
+                "surface_class",
+            ],
+            "event_inputs_required": [
+                "CANONICAL_PUBLIC_RUN_EVENT_V2_BYTES_AND_SELF_DIGEST",
+                "CONTROLLED_INVOCATION_AND_RAW_ENVELOPE",
+                "EXTERNAL_CANDIDATE_PROTOCOL_AND_BUNDLE",
+                "FULL_SEVEN_FIELD_SKILL_REF",
+                "MECHANISM_IMMUTABLE_REGISTRY_SNAPSHOT_TUPLE",
+            ],
+            "missing_current_artifacts": [
+                "FOUR_SOURCE_IDENTITY_INSTANCE_VERSION_CATALOGS",
+                "GLOBAL_SKILL_IDENTITY_RECORDS",
+                "MECHANISM_RESOLVER_ARTIFACT",
+                "VERSIONED_REGISTRY_SNAPSHOT_CONTRACT",
+            ],
+            "must_precede": [
+                "GMAIL_CLIENT",
+                "GIT_LS_REMOTE",
+                "GIT_MUTABLE_BACKEND",
+                "LOCK",
+                "NOTIFICATION_OUTBOX",
+                "PUBLISHER",
+                "STATE_ROOT",
+                "WATERMARK",
+                "WORKTREE",
+            ],
+            "nonpublishable_states": [
+                "QUARANTINED",
+                "REVOKED",
+                "UNKNOWN_WITHOUT_EXPLICIT_PUBLISHABLE_STATUS",
+            ],
+            "pinned_git_object_reads_before_gate_permitted": True,
+            "registry_snapshot_tuple_required_fields": [
+                "canonical_snapshot_digest",
+                "canonical_snapshot_path",
+                "canonical_snapshot_schema_id",
+                "verified_git_object_id",
+            ],
+            "skill_ref_required_fields": [
+                "content_digest",
+                "registry_snapshot_digest",
+                "skill_identity_uid",
+                "skill_instance_uid",
+                "skill_version_uid",
+                "tree_digest",
+                "version_record_digest",
+            ],
+            "version_closure_required": (
+                "IDENTITY_TO_INSTANCE_TO_VERSION_UNIQUE_AND_DIGEST_EXACT"
+            ),
+            "unprovable_binding_action": (
+                "PROJECT_UNKNOWN_AND_BLOCK_CANONICAL_PUBLICATION"
+            ),
+            "unknown_reason_codes": [
+                "ADAPTER_NOT_APPROVED",
+                "BUNDLE_DIGEST_MISMATCH",
+                "CONTROLLED_INVOCATION_INVALID",
+                "IDENTITY_REFERENCE_INCOMPLETE",
+                "MAPPING_NOT_PROVABLE",
+                "REGISTRY_SNAPSHOT_MISMATCH",
+                "SURFACE_NOT_BINDING_ELIGIBLE",
+                "VERSION_DIGEST_MISMATCH",
+            ],
         },
         "runtime_shard_writer_integration_complete": True,
         "runtime_state_write_permitted": False,
         "runtime_writer_shadow_returns_bootstrap_context": False,
         "runtime_writer_shadow_state_access_permitted": False,
-        "runtime_writer_shadow_status": "UNBOUND_CONTROL_SYNC_PENDING",
+        "runtime_writer_shadow_status": (
+            "UNBOUND_REPOSITORY_CONTROL_SYNC_PENDING"
+        ),
         "runtime_writer_shadow_validator_kind": (
             "DEVELOPMENT_ONLY_UNBOUND"
         ),
@@ -1016,7 +1213,7 @@ def build():
         "runtime_publisher_shadow_returns_bootstrap_context": False,
         "runtime_publisher_shadow_state_access_permitted": False,
         "runtime_publisher_shadow_status": (
-            "UNBOUND_CONTROL_SYNC_PENDING"
+            "UNBOUND_REPOSITORY_CONTROL_SYNC_PENDING"
         ),
         "runtime_publisher_shadow_validator_kind": (
             "DEVELOPMENT_ONLY_UNBOUND"
@@ -1025,7 +1222,24 @@ def build():
             "CodexSkills/registry/auto/tools/"
             "validate_au040_publisher.py"
         ),
+        "runtime_repository_binding_shadow_returns_bootstrap_context": (
+            False
+        ),
+        "runtime_repository_binding_shadow_state_access_permitted": (
+            False
+        ),
+        "runtime_repository_binding_shadow_status": (
+            "UNBOUND_REPOSITORY_CONTROL_SYNC_PENDING"
+        ),
+        "runtime_repository_binding_shadow_validator_kind": (
+            "DEVELOPMENT_ONLY_UNBOUND"
+        ),
+        "runtime_repository_binding_shadow_validator_path": (
+            "CodexSkills/registry/auto/tools/"
+            "validate_au040_publisher.py"
+        ),
         "publisher_v2_runtime_integration_complete": True,
+        "bound_reference_resolver_gate_satisfied": False,
         "repository_bound": False,
         "schedule": {
             "daily_local_time": "04:15",

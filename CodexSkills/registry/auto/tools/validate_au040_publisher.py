@@ -22,7 +22,7 @@ from CodexSkills.registry.auto.runtime.bootstrap import (
 )
 from CodexSkills.registry.auto.runtime.core import AutoRuntimeError
 from CodexSkills.registry.auto.runtime.writer_shadow import (
-    validate_unbound_publisher_candidate,
+    validate_unbound_repository_binding_candidate,
 )
 
 
@@ -50,7 +50,7 @@ def main() -> int:
     )
     parser.add_argument("--control-mode", default=CONTROL_MODE)
     args = parser.parse_args()
-    evidence = validate_unbound_publisher_candidate(
+    evidence = validate_unbound_repository_binding_candidate(
         args.repo_root,
         TrustTuple(
             args.verified_git_object_id,
@@ -66,11 +66,12 @@ def main() -> int:
         ),
     )
     print(
-        "AUTO_AU040_PUBLISHER_V2_SHADOW "
+        "AUTO_AU040_REPOSITORY_BINDING_SHADOW "
         f"status={evidence.status} "
         f"schemas={evidence.schema_count} "
         f"policies={evidence.policy_count} "
         f"modules={evidence.current_module_count} "
+        "resolver=UNSATISFIED repository_bound=FALSE "
         "state_write=FORBIDDEN canonical_write=FORBIDDEN"
     )
     return 0

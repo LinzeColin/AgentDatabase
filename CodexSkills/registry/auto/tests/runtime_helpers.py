@@ -51,6 +51,13 @@ PUBLISHER_CONTROL_INTERFACE_RAW_SHA256 = (
     "3929db4e818864d02a596efe3e1aaae1"
     "af71a765cfafaf7b22f26157135d7953"
 )
+REPOSITORY_CONTROL_GIT_OBJECT = (
+    "sha1:e6438db785c2f3f38da59be7ba9c1cd46651d7ea"
+)
+REPOSITORY_CONTROL_INTERFACE_RAW_SHA256 = (
+    "28a35148cc18362de4fc53b508754f263"
+    "a015cf33e4cd187314cf48c767b6920"
+)
 FIXED_NOW = dt.datetime(2026, 7, 23, 0, 0, 0, tzinfo=dt.timezone.utc)
 REPO_ROOT = Path(__file__).resolve().parents[4]
 
@@ -89,6 +96,21 @@ def publisher_control_trust(
     )
 
 
+def repository_control_trust(
+    *,
+    object_id: str = REPOSITORY_CONTROL_GIT_OBJECT,
+    raw_digest: str = REPOSITORY_CONTROL_INTERFACE_RAW_SHA256,
+) -> ControlTrustTuple:
+    """Return the exact predecessor tuple for repository integration."""
+
+    return ControlTrustTuple(
+        object_id,
+        raw_digest,
+        CONTROL_INTERFACE_PATH,
+        CONTROL_MODE,
+    )
+
+
 @lru_cache(maxsize=1)
 def publisher_control_raw() -> bytes:
     object_id = _split_git_object(
@@ -103,6 +125,24 @@ def publisher_control_raw() -> bytes:
     ):
         raise AssertionError(
             "TEST_PUBLISHER_CONTROL_DIGEST_MISMATCH"
+        )
+    return raw
+
+
+@lru_cache(maxsize=1)
+def repository_control_raw() -> bytes:
+    object_id = _split_git_object(
+        REPO_ROOT,
+        REPOSITORY_CONTROL_GIT_OBJECT,
+        "TEST_REPOSITORY_CONTROL",
+    )
+    raw = _git_blob(REPO_ROOT, object_id, CONTROL_INTERFACE_PATH)
+    if (
+        hashlib.sha256(raw).hexdigest()
+        != REPOSITORY_CONTROL_INTERFACE_RAW_SHA256
+    ):
+        raise AssertionError(
+            "TEST_REPOSITORY_CONTROL_DIGEST_MISMATCH"
         )
     return raw
 
@@ -246,6 +286,37 @@ def synthetic_bound_context():
     )
 
 
+def synthetic_repository_bound_context(
+    *,
+    mode: str = "CANDIDATE",
+    canonical_publication_permitted: bool = False,
+) -> BootstrapContext:
+    """Test-only future Mechanism authority; never production bootstrap."""
+
+    return BootstrapContext(
+        trust(mode=mode),
+        repository_control_trust(),
+        final_contract(),
+        MappingProxyType({}),
+        MappingProxyType(
+            {
+                "transition_contract": {
+                    "auto_runtime_integration_complete": True,
+                    "runtime_state_write_permitted": True,
+                    "runtime_shard_writer_integration_complete": True,
+                    "publisher_v2_runtime_integration_complete": True,
+                    "repository_binding_integration_complete": True,
+                    "repository_bound": True,
+                    "bound_reference_resolver_gate_satisfied": True,
+                    "canonical_publication_permitted": (
+                        canonical_publication_permitted
+                    ),
+                }
+            }
+        ),
+    )
+
+
 @lru_cache(maxsize=1)
 def context():
     """Compatibility alias for tests that only consume the final contract."""
@@ -272,6 +343,21 @@ def expected_publisher_control_failure_pattern() -> str:
     """Exact safe failure before and after the next control sync."""
 
     predecessor = publisher_control_raw()
+    local = REPO_ROOT.joinpath(
+        *CONTROL_INTERFACE_PATH.split("/")
+    ).read_bytes()
+    code = (
+        "BOOTSTRAP_AUTO_RUNTIME_INTERFACE_LOCAL_DRIFT"
+        if local == predecessor
+        else "BOOTSTRAP_CONTROL_INTERFACE_LOCAL_DRIFT"
+    )
+    return rf"^{re.escape(code)}$"
+
+
+def expected_repository_control_failure_pattern() -> str:
+    """Exact production failure for the current repository predecessor."""
+
+    predecessor = repository_control_raw()
     local = REPO_ROOT.joinpath(
         *CONTROL_INTERFACE_PATH.split("/")
     ).read_bytes()

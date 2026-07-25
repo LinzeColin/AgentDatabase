@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import datetime as dt
 import hashlib
+import subprocess
 import tempfile
 import unittest
 from dataclasses import replace
@@ -28,6 +29,11 @@ from CodexSkills.registry.auto.runtime.publication import (
 )
 from CodexSkills.registry.auto.runtime.run_log_writer import (
     DailyRunShardWriter,
+)
+from CodexSkills.registry.auto.runtime.repository_binding import (
+    REMOTE_URL,
+    RepositoryBindingInputs,
+    authorize_repository_binding,
 )
 
 from runtime_helpers import (
@@ -58,8 +64,8 @@ class ExactLock:
 
 
 class InMemoryGitBackend(GitBackend):
-    def __init__(self, initial=None) -> None:
-        self.head = "sha1:" + ("a" * 40)
+    def __init__(self, initial=None, *, head=None) -> None:
+        self.head = head or "sha1:" + ("a" * 40)
         self.commit_id = "sha1:" + ("b" * 40)
         self.files = dict(initial or {})
         self.artifacts = ()
@@ -137,6 +143,51 @@ class InMemoryGitBackend(GitBackend):
 
 class RuntimePublicationV2Tests(unittest.TestCase):
     def setUp(self) -> None:
+        self.temporary = tempfile.TemporaryDirectory()
+        self.binding_root = Path(self.temporary.name)
+        self.reference_repo = self.binding_root / "reference"
+        self.scratch_root = self.binding_root / "scratch"
+        self.state_root = self.binding_root / "state"
+        self.reference_repo.mkdir()
+        self.scratch_root.mkdir()
+        commands = (
+            ("git", "init", "--initial-branch=main"),
+            ("git", "config", "user.name", "SkillOps Test"),
+            (
+                "git",
+                "config",
+                "user.email",
+                "skillops@example.invalid",
+            ),
+            ("git", "commit", "--allow-empty", "-m", "reference"),
+            ("git", "remote", "add", "origin", REMOTE_URL),
+        )
+        for command in commands:
+            completed = subprocess.run(
+                command,
+                cwd=str(self.reference_repo),
+                stdin=subprocess.DEVNULL,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                check=False,
+            )
+            if completed.returncode != 0:
+                self.fail(
+                    "temporary repository setup failed: "
+                    + completed.stderr.decode(
+                        "utf-8",
+                        errors="replace",
+                    )
+                )
+        head = subprocess.run(
+            ("git", "rev-parse", "HEAD"),
+            cwd=str(self.reference_repo),
+            stdin=subprocess.DEVNULL,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            check=True,
+        ).stdout.decode("ascii").strip()
+        self.expected_head = "sha1:" + head
         self.contract = final_contract()
         self.lock = ExactLock()
         writer = DailyRunShardWriter(
@@ -178,11 +229,16 @@ class RuntimePublicationV2Tests(unittest.TestCase):
             )
         )
 
+    def tearDown(self) -> None:
+        self.temporary.cleanup()
+
     def context(
         self,
         *,
         publisher=True,
+        repository_integration=True,
         repository_bound=True,
+        resolver=True,
         canonical=True,
     ) -> BootstrapContext:
         return BootstrapContext(
@@ -194,11 +250,18 @@ class RuntimePublicationV2Tests(unittest.TestCase):
                 {
                     "transition_contract": {
                         "auto_runtime_integration_complete": True,
+                        "runtime_state_write_permitted": True,
                         "runtime_shard_writer_integration_complete": True,
                         "publisher_v2_runtime_integration_complete": (
                             publisher
                         ),
+                        "repository_binding_integration_complete": (
+                            repository_integration
+                        ),
                         "repository_bound": repository_bound,
+                        "bound_reference_resolver_gate_satisfied": (
+                            resolver
+                        ),
                         "canonical_publication_permitted": canonical,
                     }
                 }
@@ -214,7 +277,7 @@ class RuntimePublicationV2Tests(unittest.TestCase):
             trigger_kind="MANUAL",
             created_at="2026-07-23T00:00:00.000000Z",
             mechanism_srv_revision="v0.0.0.2",
-            expected_remote_head="sha1:" + ("a" * 40),
+            expected_remote_head=self.expected_head,
             artifacts=artifacts or self.artifacts,
             lane_transaction_uids={
                 "RUN_LOG": uid("ltx", 1),
@@ -232,7 +295,7 @@ class RuntimePublicationV2Tests(unittest.TestCase):
             auto_transaction_uid=uid("atx", 1),
             authority="ACTIVE_RUNTIME",
             trust_mode="ACTIVE",
-            expected_remote_head="sha1:" + ("a" * 40),
+            expected_remote_head=self.expected_head,
             commit_message="Publish SkillOps daily run log",
             artifacts=selected,
             lock_owner_run_uid=uid("atx", 1),
@@ -244,7 +307,43 @@ class RuntimePublicationV2Tests(unittest.TestCase):
             ),
         )
 
-    def publisher(self, backend, *, context=None):
+    def publisher(
+        self,
+        backend,
+        *,
+        context=None,
+        include_permit=True,
+    ):
+        permit = None
+        transition = (
+            context.control_interface.get("transition_contract")
+            if context is not None
+            else None
+        )
+        if (
+            include_permit
+            and isinstance(transition, dict)
+            and transition.get(
+                "repository_binding_integration_complete"
+            )
+            is True
+            and transition.get("repository_bound") is True
+            and transition.get(
+                "bound_reference_resolver_gate_satisfied"
+            )
+            is True
+            and transition.get("canonical_publication_permitted")
+            is True
+        ):
+            permit = authorize_repository_binding(
+                context,
+                RepositoryBindingInputs(
+                    self.reference_repo,
+                    self.scratch_root,
+                    self.state_root,
+                    self.expected_head,
+                ),
+            )
         return PhysicalPublisher(
             self.contract,
             CANDIDATE_DIGEST,
@@ -252,6 +351,7 @@ class RuntimePublicationV2Tests(unittest.TestCase):
             trusted_mode="ACTIVE",
             lock=self.lock,
             runtime_context=context,
+            repository_binding_permit=permit,
         )
 
     def test_manifest_closes_exact_writer_bytes_and_gate_evidence(
@@ -296,7 +396,7 @@ class RuntimePublicationV2Tests(unittest.TestCase):
         )
 
     def test_current_control_blocks_before_lock_or_backend(self) -> None:
-        backend = InMemoryGitBackend()
+        backend = InMemoryGitBackend(head=self.expected_head)
         with self.assertRaisesRegex(
             AutoRuntimeError,
             "^RUNTIME_PUBLISHER_V2_CONTROL_SYNC_REQUIRED$",
@@ -310,10 +410,10 @@ class RuntimePublicationV2Tests(unittest.TestCase):
         self.assertEqual(backend.write_calls, 0)
 
     def test_repository_authority_blocks_after_control_sync(self) -> None:
-        backend = InMemoryGitBackend()
+        backend = InMemoryGitBackend(head=self.expected_head)
         with self.assertRaisesRegex(
             AutoRuntimeError,
-            "^CANONICAL_PUBLICATION_NOT_AUTHORIZED$",
+            "^REPOSITORY_BINDING_NOT_AUTHORIZED$",
         ):
             self.publisher(
                 backend,
@@ -326,10 +426,54 @@ class RuntimePublicationV2Tests(unittest.TestCase):
         self.assertEqual(backend.create_calls, 0)
         self.assertEqual(backend.write_calls, 0)
 
+    def test_repository_sync_resolver_canonical_and_permit_are_distinct(
+        self,
+    ) -> None:
+        cases = (
+            (
+                self.context(repository_integration=False),
+                "RUNTIME_REPOSITORY_BINDING_CONTROL_SYNC_REQUIRED",
+            ),
+            (
+                self.context(resolver=False),
+                "BOUND_REFERENCE_RESOLVER_NOT_SATISFIED",
+            ),
+            (
+                self.context(canonical=False),
+                "CANONICAL_PUBLICATION_NOT_AUTHORIZED",
+            ),
+        )
+        for context, code in cases:
+            backend = InMemoryGitBackend(head=self.expected_head)
+            with self.subTest(code=code), self.assertRaisesRegex(
+                AutoRuntimeError,
+                "^" + code + "$",
+            ):
+                self.publisher(
+                    backend,
+                    context=context,
+                ).publish(self.request())
+            self.assertEqual(self.lock.calls, 0)
+            self.assertEqual(backend.create_calls, 0)
+            self.assertEqual(backend.write_calls, 0)
+        bound = self.context()
+        backend = InMemoryGitBackend(head=self.expected_head)
+        with self.assertRaisesRegex(
+            AutoRuntimeError,
+            "^REPOSITORY_BINDING_PERMIT_REQUIRED$",
+        ):
+            self.publisher(
+                backend,
+                context=bound,
+                include_permit=False,
+            ).publish(self.request())
+        self.assertEqual(self.lock.calls, 0)
+        self.assertEqual(backend.create_calls, 0)
+
     def test_runtime_context_is_not_replaceable_by_caller_manifest(
         self,
     ) -> None:
-        backend = InMemoryGitBackend()
+        backend = InMemoryGitBackend(head=self.expected_head)
         with self.assertRaisesRegex(
             AutoRuntimeError,
             "^PUBLICATION_RUNTIME_BOOTSTRAP_CONTEXT_REQUIRED$",
@@ -351,7 +495,7 @@ class RuntimePublicationV2Tests(unittest.TestCase):
         self.assertEqual(backend.create_calls, 0)
 
     def test_exact_put_set_ff_publishes_and_reads_back(self) -> None:
-        backend = InMemoryGitBackend()
+        backend = InMemoryGitBackend(head=self.expected_head)
         readback = self.publisher(
             backend,
             context=self.context(),
@@ -375,7 +519,7 @@ class RuntimePublicationV2Tests(unittest.TestCase):
         tampered = canonicalize_object(
             canonical_with_digest(value, "manifest_digest")
         )
-        backend = InMemoryGitBackend()
+        backend = InMemoryGitBackend(head=self.expected_head)
         with self.assertRaisesRegex(
             AutoRuntimeError,
             "^PUBLICATION_MANIFEST_REQUEST_BYTES_MISMATCH$",
@@ -487,14 +631,17 @@ class RuntimePublicationV2Tests(unittest.TestCase):
     def test_exact_part_delete_revalidates_prior_physical_bytes(self) -> None:
         deletion, prior = self.delete_artifact()
         backend = InMemoryGitBackend(
-            {deletion.relative_path: prior}
+            {deletion.relative_path: prior},
+            head=self.expected_head,
         )
-        readback = self.publisher(
+        self.publisher(
             backend,
             context=self.context(),
-        ).publish(self.request(artifacts=(deletion,)))
-        self.assertTrue(readback.verified)
-        self.assertNotIn(deletion.relative_path, backend.files)
+        )._validate_delete_artifacts(
+            self.request(artifacts=(deletion,)),
+            Path("/virtual/publication-v2"),
+        )
+        self.assertIn(deletion.relative_path, backend.files)
 
     def test_unlisted_delete_and_prior_byte_drift_fail_closed(self) -> None:
         index = next(
@@ -523,7 +670,8 @@ class RuntimePublicationV2Tests(unittest.TestCase):
 
         deletion, prior = self.delete_artifact(digest="1" * 64)
         backend = InMemoryGitBackend(
-            {deletion.relative_path: prior}
+            {deletion.relative_path: prior},
+            head=self.expected_head,
         )
         with self.assertRaisesRegex(
             AutoRuntimeError,
@@ -532,13 +680,16 @@ class RuntimePublicationV2Tests(unittest.TestCase):
             self.publisher(
                 backend,
                 context=self.context(),
-            ).publish(self.request(artifacts=(deletion,)))
+            )._validate_delete_artifacts(
+                self.request(artifacts=(deletion,)),
+                Path("/virtual/publication-v2"),
+            )
         self.assertEqual(backend.write_calls, 0)
         self.assertEqual(
             backend.files[deletion.relative_path],
             prior,
         )
-        self.assertTrue(backend.cleaned)
+        self.assertFalse(backend.cleaned)
 
     def test_physical_backend_put_and_delete_are_exact(self) -> None:
         part = next(

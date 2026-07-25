@@ -29,6 +29,10 @@ from CodexSkills.registry.auto.runtime.notification import (
     TransactionalNotifier,
     render_major_email,
 )
+from CodexSkills.registry.auto.runtime.repository_binding import (
+    RepositoryBindingInputs,
+    authorize_repository_binding,
+)
 from CodexSkills.registry.auto.tools.validate_auto import TrustTuple
 from CodexSkills.governance.tools.canonical_json import (
     canonicalize_object,
@@ -89,6 +93,15 @@ def _components(
     )
     if state_write_requested:
         require_control_synced_runtime(context)
+    authorize_repository_binding(
+        context,
+        RepositoryBindingInputs(
+            args.repo_root,
+            args.scratch_root,
+            args.state_root,
+            args.expected_remote_head,
+        ),
+    )
     paths = NotificationPathContract.resolve(
         args.state_root,
         repo_root=args.repo_root,
@@ -107,6 +120,8 @@ def _components(
 def _common(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--repo-root", type=Path, required=True)
     parser.add_argument("--state-root", type=Path, required=True)
+    parser.add_argument("--scratch-root", type=Path, required=True)
+    parser.add_argument("--expected-remote-head", required=True)
     parser.add_argument("--verified-git-object-id", required=True)
     parser.add_argument("--expected-bundle-digest", required=True)
     parser.add_argument("--canonical-manifest-path", required=True)
