@@ -2,7 +2,7 @@
   "chinese_name": "人物蒸馏 Skill",
   "default_install_root": "~/.codex/skills",
   "display_name": "人物蒸馏 Skill",
-  "identity_families": 7,
+  "identity_families": 12,
   "license": "MIT",
   "live_connectors_enabled": false,
   "name": "persona-distiller",
@@ -33,5 +33,5 @@
   "canonical_registry": "../persona-distiller-group",
   "delivery_contract": "one-full-delivery-zip-v0.0.0.5",
   "subagent_review_disclosure": "Independent agents are preferred. When unavailable, serialized sealed contexts must be disclosed and may not be called independent models.",
-  "version": "v0.0.0.5"
+  "version": "v0.0.0.6"
 }

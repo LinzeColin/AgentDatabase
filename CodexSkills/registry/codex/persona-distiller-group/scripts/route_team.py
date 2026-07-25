@@ -11,113 +11,53 @@ from typing import Any
 from registry_core import CATEGORY_BY_FOLDER, default_registry_root
 
 IDENTITY_SIGNALS = {
-    "技术工程师": (
-        "技术",
-        "工程",
-        "科研",
-        "实验",
-        "架构",
-        "故障",
-        "代码",
-        "编译器",
-        "后端",
-        "分布式",
-        "存储",
-        "性能",
-        "数据库",
-        "算法",
-        "science",
-        "engineering",
-        "technical",
-        "architecture",
-        "experiment",
-        "compiler",
-        "backend",
-        "distributed",
-        "storage",
-        "performance",
-        "database",
-        "algorithm",
+    "材料建工师": (
+        "技术", "工程", "材料", "焊接", "冶金", "管道", "机械", "可靠性", "维护", "摩擦", "腐蚀", "无损检测",
+        "material", "welding", "metallurgy", "piping", "mechanical", "maintenance", "reliability", "tribology", "engineering", "technical",
     ),
-    "创业经营家": (
-        "创业",
-        "经营",
-        "组织",
-        "增长",
-        "公司",
-        "市场",
-        "运营",
-        "零售",
-        "客户",
-        "供应链",
-        "门店",
-        "founder",
-        "business",
-        "growth",
-        "operations",
-        "organization",
-        "retail",
-        "customer",
-        "supply chain",
-        "store",
+    "软件开发师": (
+        "软件", "开发", "编程", "算法", "代码", "数据", "人工智能", "机器学习", "系统", "架构", "后端", "前端",
+        "software", "developer", "programming", "algorithm", "code", "data", "ai", "ml", "backend", "frontend", "devops",
     ),
-    "投资资本家": (
-        "投资",
-        "估值",
-        "组合",
-        "资本",
-        "风险预算",
-        "回报",
-        "investment",
-        "valuation",
-        "portfolio",
-        "capital",
-        "returns",
+    "艺术设计师": (
+        "设计", "艺术", "产品设计", "平面", "交互", "建筑设计", "美术", "动画", "导演", "摄影", "音乐", "创意",
+        "design", "art", "ux", "ui", "creative", "illustration", "animation", "director",
     ),
-    "开发设计家": (
-        "开发",
-        "设计",
-        "产品",
-        "创意",
-        "用户体验",
-        "软件",
-        "写作",
-        "design",
-        "product",
-        "developer",
-        "software",
-        "creative",
-        "ux",
+    "创业经营师": (
+        "创业", "经营", "企业", "创始", "高管", "运营", "组织", "增长", "管理", "零售", "门店", "扩张",
+        "founder", "business", "startup", "operations", "organization", "management", "growth", "ceo", "retail",
     ),
-    "思想教育家": (
-        "思想",
-        "教育",
-        "学习",
-        "教学",
-        "训练",
-        "哲学",
-        "传播",
-        "education",
-        "learning",
-        "teaching",
-        "philosophy",
-        "training",
+    "投资资本师": (
+        "投资", "估值", "资本", "组合", "基金", "私募", "风投", "交易", "回报",
+        "investment", "valuation", "capital", "portfolio", "fund", "returns",
     ),
-    "政治法律家": (
-        "政治",
-        "法律",
-        "政策",
-        "治理",
-        "制度",
-        "诉讼",
-        "律师",
-        "法院",
-        "legal",
-        "law",
-        "policy",
-        "governance",
-        "litigation",
-        "court",
+    "思想教育师": (
+        "思想", "教育", "学习", "教学", "写作", "哲学", "训练", "传播", "记者",
+        "education", "learning", "teaching", "philosophy", "writing", "coach", "journalist",
+    ),
+    "政治法律师": (
+        "政治", "法律", "政策", "治理", "制度", "诉讼", "律师", "法院", "外交",
+        "legal", "law", "policy", "governance", "litigation", "diplomacy",
+    ),
+    "客户营销师": (
+        "营销", "市场", "客户", "品牌", "销售", "广告", "公关", "推广", "电商", "市场分析", "客户画像",
+        "marketing", "customer", "brand", "sales", "advertising", "growth", "seo", "crm",
+    ),
+    "建造采购师": (
+        "施工", "建造", "工程管理", "项目管理", "造价", "估算", "招投标", "进度", "采购", "供应链", "物流", "仓储",
+        "construction", "project", "estimation", "procurement", "supply chain", "logistics", "tender", "bidding", "bim",
+    ),
+    "财务合规师": (
+        "财务", "会计", "审计", "成本", "税务", "风控", "合规", "内控", "安全", "标准", "规范", "认证",
+        "finance", "accounting", "audit", "tax", "risk", "compliance", "safety", "ehs", "regulatory",
+    ),
+    "医疗护理师": (
+        "医疗", "医生", "护理", "护士", "临床", "诊断", "治疗", "药", "公共卫生", "兽医", "康复", "心理",
+        "healthcare", "medical", "doctor", "nurse", "clinical", "diagnosis", "therapy", "pharmacy",
+    ),
+    "农林牧渔师": (
+        "农业", "农学", "种植", "养殖", "畜牧", "林业", "渔业", "水产", "园艺", "农机", "食品",
+        "agriculture", "farming", "agronomy", "forestry", "livestock", "fishery", "aquaculture", "horticulture",
     ),
 }
 
@@ -209,9 +149,7 @@ def infer_identity(task: str) -> tuple[str, list[dict[str, Any]]]:
     scores.sort(key=lambda item: (-item["matches"], item["identity"]))
     positive = [item for item in scores if item["matches"] > 0]
     if not positive:
-        return "多重身份", scores
-    if len(positive) > 1 and positive[0]["matches"] == positive[1]["matches"]:
-        return "多重身份", scores
+        return str(scores[0]["identity"]), scores
     return str(positive[0]["identity"]), scores
 
 
@@ -267,8 +205,6 @@ def score_candidate(
     identity_score = 0
     if candidate.get("registration_category") == identity:
         identity_score = 25
-    elif candidate.get("registration_category") == "多重身份":
-        identity_score = 15
     scenarios = candidate.get("application_scenarios", [])
     scenario_text = " ".join(str(value).casefold() for value in scenarios)
     exact_scenario = scenario.casefold() in scenario_text
@@ -299,18 +235,11 @@ def score_candidate(
         f"task_specific_matches={task_specific_matches}",
     ]
     if (
-        (identity == "多重身份" or candidate.get("registration_category") != identity)
-        and not exact_scenario
+        candidate.get("registration_category") != identity
+        and (not exact_scenario or scenario == "general-agentic-work")
         and task_specific_matches == 0
     ):
-        return score, reasons, "fallback identity has no task-specific semantic match"
-    if (
-        identity == "多重身份"
-        and candidate.get("registration_category") == "多重身份"
-        and not exact_scenario
-        and semantic_matches(scenarios, terms) + capability_matches + value_matches == 0
-    ):
-        return score, reasons, "multi-identity category has no material task-semantic match"
+        return score, reasons, "cross-category candidate has no task-specific semantic match"
     if identity_score == 0 and not exact_scenario and capability_matches < 2:
         return score, reasons, "no material identity, exact-scenario, or capability match"
     if score < 30:

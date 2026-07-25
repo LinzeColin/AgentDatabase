@@ -23,11 +23,17 @@ SCENARIOS = {
 
 IDENTITY_SCENARIO_PRIORS = {
     'technical-engineer': ['research-problem-solving', 'red-team-risk'],
+    'software-developer': ['research-problem-solving', 'product-creation'],
+    'art-designer': ['product-creation', 'strategy-decision'],
     'entrepreneur-operator': ['strategy-decision', 'leadership-organization'],
     'investor-capital-allocator': ['investment-business', 'red-team-risk'],
-    'developer-designer': ['product-creation', 'strategy-decision'],
     'thinker-educator': ['teaching-learning', 'communication-negotiation'],
     'political-legal': ['governance-legal', 'strategy-decision'],
+    'customer-marketing': ['communication-negotiation', 'strategy-decision'],
+    'construction-procurement': ['strategy-decision', 'research-problem-solving'],
+    'finance-compliance': ['governance-legal', 'red-team-risk'],
+    'healthcare-nursing': ['research-problem-solving', 'teaching-learning'],
+    'agriculture-fishery': ['research-problem-solving', 'strategy-decision'],
 }
 
 

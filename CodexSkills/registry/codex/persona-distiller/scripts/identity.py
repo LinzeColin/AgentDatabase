@@ -3,8 +3,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import math
-import re
 import sys
 from pathlib import Path
 from typing import Any
@@ -15,8 +13,8 @@ REGISTRY_PATH = Path(__file__).resolve().parents[1] / 'registries' / 'identity-f
 def load_registry(path: Path = REGISTRY_PATH) -> dict[str, Any]:
     data = json.loads(path.read_text(encoding='utf-8'))
     families = data.get('families')
-    if not isinstance(families, list) or len(families) != 7:
-        raise ValueError('identity registry must contain exactly seven families')
+    if not isinstance(families, list) or len(families) != 12:
+        raise ValueError('identity registry must contain exactly twelve families')
     return data
 
 
@@ -42,82 +40,22 @@ def resolve_identity(value: str, registry: dict[str, Any] | None = None) -> str:
     return mapping[key]
 
 
-def _parse_weight_number(raw: Any) -> float:
-    if isinstance(raw, bool):
-        raise ValueError('boolean is not a valid weight')
-    text = str(raw).strip()
-    percent = text.endswith('%')
-    if percent:
-        text = text[:-1]
-    try:
-        value = float(text)
-    except ValueError as exc:
-        raise ValueError(f'invalid weight {raw!r}') from exc
-    if percent or value > 1:
-        value /= 100.0
-    if not math.isfinite(value) or value <= 0:
-        raise ValueError('weights must be finite and > 0')
-    return value
-
-
 def parse_identity_spec(spec: str, registry: dict[str, Any] | None = None) -> dict[str, Any]:
     registry = registry or load_registry()
     raw = spec.strip()
     if not raw:
         raise ValueError('identity selection is required')
-
-    weights_raw: dict[str, Any] = {}
-    if raw.startswith('{'):
-        value = json.loads(raw)
-        if not isinstance(value, dict):
-            raise ValueError('JSON identity selection must be an object')
-        weights_raw = {str(k): v for k, v in value.items()}
-    elif any(sep in raw for sep in [':', '=']) and any(sep in raw for sep in ['+', ',', '，', ';', '；']):
-        for part in re.split(r'[+,，;；]', raw):
-            part = part.strip()
-            if not part:
-                continue
-            match = re.fullmatch(r'(.+?)\s*[:=]\s*([0-9.]+%?)', part)
-            if not match:
-                raise ValueError(f'invalid weighted identity component: {part!r}')
-            weights_raw[match.group(1).strip()] = match.group(2)
-    elif ':' in raw or '=' in raw:
-        match = re.fullmatch(r'(.+?)\s*[:=]\s*([0-9.]+%?)', raw)
-        if not match:
-            raise ValueError(f'invalid weighted identity selection: {raw!r}')
-        weights_raw[match.group(1).strip()] = match.group(2)
-    else:
-        identity_id = resolve_identity(raw, registry)
-        if identity_id == 'multi-identity':
-            raise ValueError('多重身份必须给至少两个身份及权重，例如 1:60+5:40')
-        return {
-            'mode': 'single',
-            'primary': identity_id,
-            'weights': {identity_id: 1.0},
-            'canonical': identity_id,
-            'display': next(f['zh'] for f in registry['families'] if f['id'] == identity_id),
-        }
-
-    merged: dict[str, float] = {}
-    for key, raw_weight in weights_raw.items():
-        identity_id = resolve_identity(key, registry)
-        if identity_id == 'multi-identity':
-            raise ValueError('权重项不能使用“多重身份”本身；请列出具体主身份')
-        merged[identity_id] = merged.get(identity_id, 0.0) + _parse_weight_number(raw_weight)
-    if len(merged) < 2:
-        raise ValueError('多重身份必须至少包含两个不同主身份')
-    total = sum(merged.values())
-    normalized = {key: round(value / total, 6) for key, value in merged.items()}
-    # Correct rounding drift on the largest component.
-    drift = round(1.0 - sum(normalized.values()), 6)
-    if drift:
-        largest = max(normalized, key=normalized.get)
-        normalized[largest] = round(normalized[largest] + drift, 6)
-    primary = max(normalized, key=normalized.get)
-    by_id = {f['id']: f for f in registry['families']}
-    canonical = '+'.join(f'{key}:{normalized[key]:.6f}' for key in sorted(normalized))
-    display = ' + '.join(f"{by_id[key]['zh']} {normalized[key] * 100:.1f}%" for key in sorted(normalized, key=normalized.get, reverse=True))
-    return {'mode': 'multi', 'primary': primary, 'weights': normalized, 'canonical': canonical, 'display': display}
+    # 多重身份已移除：每个人物只归属 1–12 中的单一主身份。拒绝加权/复合选择。
+    if raw.startswith('{') or any(sep in raw for sep in [':', '=', '+', ',', '，', ';', '；']):
+        raise ValueError('多重身份已移除；请从 1–12 中选择单一主身份，例如 “2” 或 “软件开发师”')
+    identity_id = resolve_identity(raw, registry)
+    return {
+        'mode': 'single',
+        'primary': identity_id,
+        'weights': {identity_id: 1.0},
+        'canonical': identity_id,
+        'display': next(f['zh'] for f in registry['families'] if f['id'] == identity_id),
+    }
 
 
 def menu(compact: bool = True, registry: dict[str, Any] | None = None) -> str:

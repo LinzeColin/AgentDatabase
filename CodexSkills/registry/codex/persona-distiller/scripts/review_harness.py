@@ -35,12 +35,13 @@ def exact_identity_registry() -> tuple[bool, str]:
     registry = read_json(ROOT / 'registries/identity-families.json', default={}) or {}
     families = registry.get('families', [])
     expected = [
-        'technical-engineer', 'entrepreneur-operator', 'investor-capital-allocator',
-        'developer-designer', 'thinker-educator', 'political-legal', 'multi-identity',
+        'technical-engineer', 'software-developer', 'art-designer', 'entrepreneur-operator',
+        'investor-capital-allocator', 'thinker-educator', 'political-legal', 'customer-marketing',
+        'construction-procurement', 'finance-compliance', 'healthcare-nursing', 'agriculture-fishery',
     ]
     ids = [item.get('id') for item in families]
     numbers = [item.get('number') for item in families]
-    passed = ids == expected and numbers == list(range(1, 8))
+    passed = ids == expected and numbers == list(range(1, 13))
     return passed, f'ids={ids}; numbers={numbers}'
 
 

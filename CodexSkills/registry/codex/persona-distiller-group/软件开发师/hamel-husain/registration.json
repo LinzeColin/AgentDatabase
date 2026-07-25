@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:hamelhusain",
+  "canonical_name": "Hamel Husain",
+  "identity_family_id": "software-developer",
+  "identity_mode": "single",
+  "registration_category": "软件开发师",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "hamel-husain",
+  "subject_uid": "person-a79fe1b977a75a32",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/hamel-husain-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T08:00:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0",
+      "outer_sha256": "8e46315e86868b8c75cb4d64c2d5c710dc3135085cfd1dac15f206d2dc66deca",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/hamel-husain-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "bddc0608579732f55ed46b7fd943b09e261adf53220a5f0100c012288ae25d4b",
+      "runtime_size_bytes": 78513,
+      "size_bytes": 87797
+    }
+  ]
+}

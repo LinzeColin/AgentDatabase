@@ -1,0 +1,26 @@
+{
+  "canonical_key": "historical:ernestrabinowicz",
+  "canonical_name": "Ernest Rabinowicz",
+  "identity_family_id": "technical-engineer",
+  "identity_mode": "single",
+  "registration_category": "材料建工师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "ernest-rabinowicz",
+  "subject_uid": "person-5b85cfd6f411f3b5",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/ernest-rabinowicz-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T09:30:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0-evidence",
+      "outer_sha256": "5949c9facceb4a292cd4397f57c3673d2ef41883e1dfd35acee04ec42e6f133e",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/ernest-rabinowicz-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "d2258fc01400650f969b99e05af6e62b1f59ec4a803c922c90368590b737fb4b",
+      "runtime_size_bytes": 75453,
+      "size_bytes": 84447
+    }
+  ]
+}

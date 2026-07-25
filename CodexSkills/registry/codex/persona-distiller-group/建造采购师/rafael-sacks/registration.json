@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:rafaelsacks",
+  "canonical_name": "Rafael Sacks",
+  "identity_family_id": "construction-procurement",
+  "identity_mode": "single",
+  "registration_category": "建造采购师",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "rafael-sacks",
+  "subject_uid": "person-67d8feb542534853",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/rafael-sacks-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T08:30:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0",
+      "outer_sha256": "72d812a37fcab659f437625e4ddbc23586e05cc49599da59733c53faa3052c85",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/rafael-sacks-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "e6248443dd4d5d0fb349134a0cc4d85c85b71ccb9e6fffdbd2f53fd37e3bdbf7",
+      "runtime_size_bytes": 72456,
+      "size_bytes": 81593
+    }
+  ]
+}

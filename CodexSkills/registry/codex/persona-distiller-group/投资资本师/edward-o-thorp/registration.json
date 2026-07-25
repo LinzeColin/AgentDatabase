@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:edwardothorp(爱德华索普)",
+  "canonical_name": "Edward O. Thorp（爱德华·索普）",
+  "identity_family_id": "investor-capital-allocator",
+  "identity_mode": "single",
+  "registration_category": "投资资本师",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "edward-o-thorp",
+  "subject_uid": "person-5d7562e7f00cf9ef",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/edward-o-thorp-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T00:00:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0",
+      "outer_sha256": "da1f02656f03733b0802b2d7bfd8517ac8d45e4afff8c456aacddc926d199d6c",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/edward-o-thorp-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "922ec656d6463f965fb715ec4e6194cf70de2b8f94147b0b9d214c1b18637d03",
+      "runtime_size_bytes": 70345,
+      "size_bytes": 79922
+    }
+  ]
+}
