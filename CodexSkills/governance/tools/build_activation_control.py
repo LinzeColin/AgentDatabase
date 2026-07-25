@@ -11,7 +11,11 @@ import sys
 from pathlib import Path, PurePosixPath
 from typing import Any, Dict, Mapping, Optional, Sequence
 
-from canonical_json import canonicalize_object, parse_json_bytes
+from canonical_json import (
+    canonical_digest,
+    canonicalize_object,
+    parse_json_bytes,
+)
 from validate_mechanism import (
     ContractError,
     PROTOCOL,
@@ -55,6 +59,29 @@ CONSUMER_INTERFACE_REPO_PATH = (
     "OpenAIDatabase/config/evaluation/skill_run_consumer.json"
 )
 COMMON_SCHEMA_PATH = GOVERNANCE_DIR / "schemas" / "common-definitions.schema.json"
+RESOLVER_INTERFACE_PATH = (
+    GOVERNANCE_DIR / "registry" / "resolver-interface.json"
+)
+RESOLVER_INTERFACE_REPO_PATH = (
+    "CodexSkills/governance/registry/resolver-interface.json"
+)
+RESOLVER_BUILDER_PATH = (
+    GOVERNANCE_DIR / "tools" / "build_bound_reference_resolver.py"
+)
+RESOLVER_SNAPSHOT_DRAFT_REPO_PATH = (
+    "CodexSkills/governance/registry/materialized/_global/"
+    "registry-snapshot.v1.json"
+)
+RESOLVER_SNAPSHOT_ID = (
+    "urn:linzecolin:agentdatabase:skillops:schema:registry-snapshot:v1"
+)
+RESOLVER_REQUEST_ID = (
+    "urn:linzecolin:agentdatabase:skillops:schema:"
+    "bound-reference-request:v1"
+)
+RESOLVER_BINDING_ID = (
+    "urn:linzecolin:agentdatabase:skillops:schema:skill-binding:v1"
+)
 
 PROTOCOL_REVISION = "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1"
 CANDIDATE_BUNDLE_DIGEST = (
@@ -638,6 +665,99 @@ def _verify_auto_historical_control(
             )
 
 
+def _verified_resolver_interface() -> tuple[bytes, Mapping[str, Any]]:
+    try:
+        process = subprocess.run(
+            [
+                "/usr/bin/python3",
+                "-B",
+                str(RESOLVER_BUILDER_PATH),
+                "--check",
+            ],
+            cwd=REPO_ROOT,
+            stdin=subprocess.DEVNULL,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            timeout=30,
+            check=False,
+        )
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        raise ContractError(
+            "ACTIVATION_BOUND_RESOLVER_BUILDER_UNAVAILABLE"
+        ) from exc
+    if process.returncode != 0:
+        raise ContractError(
+            "ACTIVATION_BOUND_RESOLVER_GENERATED_DRIFT:"
+            + process.stderr.strip()
+        )
+    try:
+        current = RESOLVER_INTERFACE_PATH.read_bytes()
+    except OSError as exc:
+        raise ContractError(
+            "ACTIVATION_BOUND_RESOLVER_INTERFACE_READ_FAILED"
+        ) from exc
+    interface = parse_json_bytes(current)
+    if (
+        not isinstance(interface, dict)
+        or interface.get("artifact_digest")
+        != canonical_digest(interface, "/artifact_digest")
+        or interface.get("status")
+        != "DRAFT_NON_ACTIVE_RESOLVER_IMPLEMENTED"
+        or interface.get("protocol_revision") != PROTOCOL_REVISION
+        or interface.get("bundle_digest") != CANDIDATE_BUNDLE_DIGEST
+        or interface.get("candidate_git_object_id")
+        != CANDIDATE_BUNDLE_GIT_OBJECT_ID
+        or interface.get("candidate_manifest_path")
+        != CANDIDATE_MANIFEST_REPO_PATH
+        or interface.get("candidate_trust_mode") != "CANDIDATE"
+        or interface.get("catalog_count") != 4
+        or interface.get("catalog_path_reservation_required") is not True
+        or interface.get("current_materialization_promotable") is not False
+        or interface.get("exact_byte_promotion_required") is not True
+        or interface.get("exact_byte_promotion_scope")
+        != "POST_PARITY_COMPLETE_SUCCESSOR_MATERIALIZATION"
+        or interface.get("post_reservation_rebuild_required") is not True
+        or interface.get("auto_integration_complete") is not False
+        or interface.get("production_trust_permitted") is not False
+        or interface.get("canonical_publication_permitted") is not False
+        or interface.get("activation_forbidden") is not True
+        or interface.get("next_phase")
+        != "AUTO_REGISTRY_CATALOG_PATH_RESERVATION"
+    ):
+        raise ContractError(
+            "ACTIVATION_BOUND_RESOLVER_INTERFACE_CONTRACT_MISMATCH"
+        )
+    snapshot = interface.get("registry_snapshot", {})
+    contract = interface.get("resolver_contract", {})
+    if (
+        not isinstance(snapshot, dict)
+        or snapshot.get("binding_eligible_version_count") != 0
+        or snapshot.get("source_mirror_parity_satisfied") is not False
+        or snapshot.get("schema_id") != RESOLVER_SNAPSHOT_ID
+        or snapshot.get("draft_relative_path")
+        != RESOLVER_SNAPSHOT_DRAFT_REPO_PATH
+        or not isinstance(
+            snapshot.get("registry_snapshot_digest"),
+            str,
+        )
+        or not isinstance(contract, dict)
+        or contract.get("implementation_status")
+        != "DRAFT_NON_ACTIVE_IMPLEMENTED"
+        or contract.get("current_snapshot_can_emit_bound") is not False
+        or contract.get("bound_output_schema_id")
+        != RESOLVER_BINDING_ID
+        or contract.get("request_schema_id")
+        != RESOLVER_REQUEST_ID
+        or contract.get("fail_closed_unknown_reason_code")
+        != "MAPPING_NOT_PROVABLE"
+    ):
+        raise ContractError(
+            "ACTIVATION_BOUND_RESOLVER_INTERFACE_CONTRACT_MISMATCH"
+        )
+    return current, interface
+
+
 def _preflight_inputs(
     *,
     require_non_active: bool,
@@ -964,10 +1084,14 @@ def _preflight_inputs(
         or gate.get("repository_shards_permitted") is not False
     ):
         raise ContractError("ACTIVATION_CONSUMER_INTERFACE_CONTRACT_MISMATCH")
+    _verified_resolver_interface()
 
 
 def control_interface(schemas: Mapping[str, Mapping[str, Any]]) -> Dict[str, Any]:
     entries = []
+    resolver_raw = RESOLVER_INTERFACE_PATH.read_bytes()
+    resolver_interface = parse_json_bytes(resolver_raw)
+    resolver_snapshot = resolver_interface["registry_snapshot"]
     paths = {
         INTENT_ID: INTENT_SCHEMA_PATH,
         SETTLEMENT_ID: SETTLEMENT_SCHEMA_PATH,
@@ -991,6 +1115,32 @@ def control_interface(schemas: Mapping[str, Mapping[str, Any]]) -> Dict[str, Any
         "bootstrap_schema_entries": entries,
         "bootstrap_schema_count": len(entries),
         "bundle_digest": CANDIDATE_BUNDLE_DIGEST,
+        "bound_reference_resolver_contract": {
+            "artifact_digest": hashlib.sha256(
+                resolver_raw
+            ).hexdigest(),
+            "auto_integration_complete": False,
+            "binding_eligible_version_count": resolver_snapshot[
+                "binding_eligible_version_count"
+            ],
+            "catalog_path_reservation_required": True,
+            "current_snapshot_can_emit_bound": False,
+            "current_snapshot_promotable": False,
+            "gate_satisfied": False,
+            "implementation_complete": True,
+            "production_trust_permitted": False,
+            "post_reservation_rebuild_required": True,
+            "registry_snapshot_digest": resolver_snapshot[
+                "registry_snapshot_digest"
+            ],
+            "registry_snapshot_draft_relative_path": resolver_snapshot[
+                "draft_relative_path"
+            ],
+            "registry_snapshot_schema_id": resolver_snapshot["schema_id"],
+            "relative_path": RESOLVER_INTERFACE_REPO_PATH,
+            "source_mirror_parity_satisfied": False,
+            "status": "DRAFT_NON_ACTIVE_RESOLVER_IMPLEMENTED",
+        },
         "candidate_bundle_git_object_id": CANDIDATE_BUNDLE_GIT_OBJECT_ID,
         "candidate_manifest_path": CANDIDATE_MANIFEST_REPO_PATH,
         "candidate_policy_count": 5,
@@ -1022,7 +1172,7 @@ def control_interface(schemas: Mapping[str, Mapping[str, Any]]) -> Dict[str, Any
             "timing": "PRE_WRITE",
             "transport": "GMAIL_API_V1",
         },
-        "next_phase": "MECHANISM_BOUND_REFERENCE_RESOLVER_IMPLEMENTATION",
+        "next_phase": "AUTO_REGISTRY_CATALOG_PATH_RESERVATION",
         "protocol_revision": PROTOCOL_REVISION,
         "publication_contract": {
             "caller_boolean_is_not_trust_root": True,
@@ -1052,6 +1202,8 @@ def control_interface(schemas: Mapping[str, Mapping[str, Any]]) -> Dict[str, Any
                 "verified_git_object_id": CANDIDATE_BUNDLE_GIT_OBJECT_ID,
             },
             "auto_runtime_integration_complete": True,
+            "bound_reference_resolver_auto_integration_complete": False,
+            "bound_reference_resolver_implementation_complete": True,
             "auto_runtime_source_candidate": {
                 "bundle_digest": SOURCE_AUTO_CANDIDATE_BUNDLE_DIGEST,
                 "policy_count": 5,
@@ -1077,7 +1229,7 @@ def control_interface(schemas: Mapping[str, Mapping[str, Any]]) -> Dict[str, Any
             "runtime_shard_writer_integration_complete": True,
             "runtime_state_instance_created": False,
             "runtime_state_write_gate_status": (
-                "BOUND_REFERENCE_RESOLVER_PENDING"
+                "BOUND_REFERENCE_RESOLVER_AUTO_INTEGRATION_PENDING"
             ),
             "runtime_state_write_permitted": True,
             "schedule_authority_resolved": False,

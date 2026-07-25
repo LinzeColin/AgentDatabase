@@ -113,7 +113,8 @@ recognizes recursive `part-NNNN.jsonl`, retained `index-NNNN.jsonl`,
 `manifest-NNNN.json`, and `retention-receipt-NNNN.json` artifacts while
 leaving the four sibling task-run categories unchanged. The repository run
 root must remain README-only until ACTIVE external trust, Auto AU-040
-writer/integration, and the Mechanism BOUND reference resolver all exist.
+writer/integration, and a production-trusted Mechanism BOUND resolver gate all
+exist.
 Synthetic complete daily trees may be tested; this draft does not authorize
 canonical run-log publication.
 
@@ -148,13 +149,34 @@ clean reference root, and four-artifact path closure, while deliberately
 keeping `bound_reference_resolver_gate_satisfied=false`. Its control-level
 `runtime_state_write_permitted=true` is paired with
 `effective_runtime_state_write_permitted=false` and
-`runtime_state_write_gate_status=BOUND_REFERENCE_RESOLVER_PENDING`; state,
-lock, worktree, mutable Git, Gmail, outbox, watermark, and publisher access
-must stop before side effects with `BOUND_REFERENCE_RESOLVER_NOT_SATISFIED`.
+`runtime_state_write_gate_status=BOUND_REFERENCE_RESOLVER_AUTO_INTEGRATION_PENDING`;
+state, lock, worktree, mutable Git, Gmail, outbox, watermark, and publisher
+access must stop before side effects with
+`BOUND_REFERENCE_RESOLVER_NOT_SATISFIED`.
 Auto's writer, publisher, and repository-binding materialization snapshots
 remain historically `current_auto_runtime_control_bound=false`; none is
 rewritten into successor authorization. Activation remains forbidden. Its
-only next phase is `MECHANISM_BOUND_REFERENCE_RESOLVER_IMPLEMENTATION`.
-Schedule authority, the BOUND resolver, external Gmail/state readiness,
-runtime state-instance creation, AU-040 completion, M0c-B, ACTIVE trust,
-canonical shard creation, and canonical publication remain false.
+only next phase is `AUTO_REGISTRY_CATALOG_PATH_RESERVATION`.
+
+The bundle-outside Registry contract is under
+`CodexSkills/governance/registry/`. It materializes four draft source catalogs
+and one immutable snapshot from pinned Git object `sha1:44a38890…`, with 89
+separate Identity/Instance/Version records and explicit owner-review
+candidates for same-name cross-source identities. The current mirror has zero
+tracked symlink aliases versus 20 in frozen external inventory evidence, so
+all 89 versions remain quarantined, binding eligibility is zero, and real
+resolution returns `UNKNOWN/MAPPING_NOT_PROVABLE`. A separate registered
+fixture proves the same resolver's exact seven-field BOUND output, including
+controlled-invocation, content/tree, version-record, and snapshot digests.
+
+The draft remains under the Mechanism governance root because the current
+Auto-owned sync executor would enumerate/delete unreserved `_catalog`
+directories. The incomplete 44a materialization is non-promotable. The next
+Auto phase must reserve final catalog paths and restore source parity, after
+which Mechanism must rebuild from the successor Git object; exact-byte
+promotion applies only to that complete successor. Implementation alone does
+not satisfy the resolver gate.
+Schedule authority, resolver Auto integration and production trust, external
+Gmail/state readiness, runtime state-instance creation, AU-040 completion,
+M0c-B, ACTIVE trust, canonical shard creation, and canonical publication
+remain false.

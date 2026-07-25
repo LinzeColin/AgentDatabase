@@ -300,7 +300,7 @@ class ActivationControlTests(unittest.TestCase):
         self.assertEqual(interface["candidate_policy_count"], 5)
         self.assertEqual(
             interface["next_phase"],
-            "MECHANISM_BOUND_REFERENCE_RESOLVER_IMPLEMENTATION",
+            "AUTO_REGISTRY_CATALOG_PATH_RESERVATION",
         )
         self.assertEqual(
             interface["base_auto_git_object_id"],
@@ -342,7 +342,33 @@ class ActivationControlTests(unittest.TestCase):
             interface["transition_contract"][
                 "runtime_state_write_gate_status"
             ],
-            "BOUND_REFERENCE_RESOLVER_PENDING",
+            "BOUND_REFERENCE_RESOLVER_AUTO_INTEGRATION_PENDING",
+        )
+        self.assertTrue(
+            interface["transition_contract"][
+                "bound_reference_resolver_implementation_complete"
+            ]
+        )
+        self.assertFalse(
+            interface["transition_contract"][
+                "bound_reference_resolver_auto_integration_complete"
+            ]
+        )
+        resolver_contract = interface[
+            "bound_reference_resolver_contract"
+        ]
+        self.assertTrue(resolver_contract["implementation_complete"])
+        self.assertFalse(resolver_contract["auto_integration_complete"])
+        self.assertFalse(resolver_contract["gate_satisfied"])
+        self.assertFalse(resolver_contract["production_trust_permitted"])
+        self.assertFalse(resolver_contract["current_snapshot_can_emit_bound"])
+        self.assertFalse(resolver_contract["current_snapshot_promotable"])
+        self.assertTrue(
+            resolver_contract["post_reservation_rebuild_required"]
+        )
+        self.assertEqual(
+            resolver_contract["binding_eligible_version_count"],
+            0,
         )
         auto_interface = strict_load(
             REPO_ROOT

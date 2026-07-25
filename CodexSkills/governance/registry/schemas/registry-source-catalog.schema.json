@@ -1,0 +1,410 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:registry-source-catalog:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "entries": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "canonical_name": {
+            "maxLength": 128,
+            "minLength": 1,
+            "type": "string"
+          },
+          "eval_profile_ref": {
+            "additionalProperties": false,
+            "allOf": [
+              {
+                "if": {
+                  "properties": {
+                    "state": {
+                      "const": "AVAILABLE"
+                    }
+                  },
+                  "required": [
+                    "state"
+                  ]
+                },
+                "then": {
+                  "properties": {
+                    "artifact_digest": {
+                      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+                    },
+                    "reason_code": {
+                      "type": "null"
+                    },
+                    "uid": {
+                      "maxLength": 64,
+                      "minLength": 1,
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "state": {
+                      "const": "UNAVAILABLE"
+                    }
+                  },
+                  "required": [
+                    "state"
+                  ]
+                },
+                "then": {
+                  "properties": {
+                    "artifact_digest": {
+                      "type": "null"
+                    },
+                    "reason_code": {
+                      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/enum_code"
+                    },
+                    "uid": {
+                      "type": "null"
+                    }
+                  }
+                }
+              }
+            ],
+            "properties": {
+              "artifact_digest": {
+                "anyOf": [
+                  {
+                    "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "reason_code": {
+                "anyOf": [
+                  {
+                    "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/enum_code"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "state": {
+                "enum": [
+                  "AVAILABLE",
+                  "UNAVAILABLE"
+                ]
+              },
+              "uid": {
+                "anyOf": [
+                  {
+                    "maxLength": 64,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "state",
+              "uid",
+              "artifact_digest",
+              "reason_code"
+            ],
+            "type": "object"
+          },
+          "identity_ref": {
+            "additionalProperties": false,
+            "properties": {
+              "artifact_digest": {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+              },
+              "skill_identity_uid": {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/skill_identity_uid"
+              }
+            },
+            "required": [
+              "skill_identity_uid",
+              "artifact_digest"
+            ],
+            "type": "object"
+          },
+          "instance_ref": {
+            "additionalProperties": false,
+            "properties": {
+              "artifact_digest": {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+              },
+              "skill_instance_uid": {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/skill_instance_uid"
+              }
+            },
+            "required": [
+              "skill_instance_uid",
+              "artifact_digest"
+            ],
+            "type": "object"
+          },
+          "material": {
+            "additionalProperties": false,
+            "properties": {
+              "byte_count": {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+              },
+              "content_digest": {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+              },
+              "metadata_state": {
+                "enum": [
+                  "VALID",
+                  "INVALID"
+                ]
+              },
+              "regular_file_count": {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/positive_count"
+              },
+              "symlink_alias_count": {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+              },
+              "tree_digest": {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+              }
+            },
+            "required": [
+              "content_digest",
+              "tree_digest",
+              "regular_file_count",
+              "symlink_alias_count",
+              "byte_count",
+              "metadata_state"
+            ],
+            "type": "object"
+          },
+          "promotion_decision_ref": {
+            "additionalProperties": false,
+            "allOf": [
+              {
+                "if": {
+                  "properties": {
+                    "state": {
+                      "const": "AVAILABLE"
+                    }
+                  },
+                  "required": [
+                    "state"
+                  ]
+                },
+                "then": {
+                  "properties": {
+                    "artifact_digest": {
+                      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+                    },
+                    "reason_code": {
+                      "type": "null"
+                    },
+                    "uid": {
+                      "maxLength": 64,
+                      "minLength": 1,
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "state": {
+                      "const": "UNAVAILABLE"
+                    }
+                  },
+                  "required": [
+                    "state"
+                  ]
+                },
+                "then": {
+                  "properties": {
+                    "artifact_digest": {
+                      "type": "null"
+                    },
+                    "reason_code": {
+                      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/enum_code"
+                    },
+                    "uid": {
+                      "type": "null"
+                    }
+                  }
+                }
+              }
+            ],
+            "properties": {
+              "artifact_digest": {
+                "anyOf": [
+                  {
+                    "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "reason_code": {
+                "anyOf": [
+                  {
+                    "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/enum_code"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "state": {
+                "enum": [
+                  "AVAILABLE",
+                  "UNAVAILABLE"
+                ]
+              },
+              "uid": {
+                "anyOf": [
+                  {
+                    "maxLength": 64,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "state",
+              "uid",
+              "artifact_digest",
+              "reason_code"
+            ],
+            "type": "object"
+          },
+          "source_relative_path": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/repo_relative_posix_path"
+          },
+          "version_ref": {
+            "additionalProperties": false,
+            "properties": {
+              "skill_version_uid": {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/skill_version_uid"
+              },
+              "version_record_digest": {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+              }
+            },
+            "required": [
+              "skill_version_uid",
+              "version_record_digest"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "source_relative_path",
+          "canonical_name",
+          "identity_ref",
+          "instance_ref",
+          "version_ref",
+          "eval_profile_ref",
+          "promotion_decision_ref",
+          "material"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "entry_count": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "exclusions": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "byte_count": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+          },
+          "file_count": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+          },
+          "reason_code": {
+            "enum": [
+              "CACHE",
+              "OS_METADATA",
+              "SOURCE_OVERLAP",
+              "VCS_METADATA"
+            ]
+          }
+        },
+        "required": [
+          "reason_code",
+          "file_count",
+          "byte_count"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "metadata_invalid_count": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "protocol_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/protocol_revision"
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:registry-source-catalog:v1"
+    },
+    "source_class": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/source_class"
+    },
+    "source_material_git_object_id": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/git_object_id"
+    },
+    "source_material_policy_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "source_material_policy_id": {
+      "const": "urn:linzecolin:agentdatabase:skillops:policy:source-material:v1"
+    },
+    "source_root_path": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/repo_relative_posix_path"
+    },
+    "status": {
+      "enum": [
+        "DRAFT_NON_ACTIVE",
+        "REGISTERED"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "bundle_digest",
+    "status",
+    "source_class",
+    "source_root_path",
+    "source_material_git_object_id",
+    "source_material_policy_id",
+    "source_material_policy_digest",
+    "entry_count",
+    "metadata_invalid_count",
+    "exclusions",
+    "entries",
+    "artifact_digest"
+  ],
+  "title": "Mechanism Registry source catalog",
+  "type": "object"
+}

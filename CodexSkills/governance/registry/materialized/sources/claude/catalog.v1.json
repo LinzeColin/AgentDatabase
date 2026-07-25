@@ -1,0 +1,125 @@
+{
+  "artifact_digest": "26c25420d2f8461ec65176ba4affc6420aaf29880a42fecc2808c0e64b7fe89a",
+  "bundle_digest": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e",
+  "entries": [
+    {
+      "canonical_name": "dws",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "629ba18d5ba109c8fd226a78dccf4f06fb61246715f3824dc698c86fb62466b7",
+        "skill_identity_uid": "ski_2KPWNW1P90HKFSQC8BR2VJBPP5"
+      },
+      "instance_ref": {
+        "artifact_digest": "4e8ae5fb6646eb3ff06dc3f0e00ded32eaf155cf09e84e6fa14810d952b15fcd",
+        "skill_instance_uid": "skinst_0WWK1KDQG2W0B79D6YMWPM9GJN"
+      },
+      "material": {
+        "byte_count": 2181951,
+        "content_digest": "ed2d6d544fd3d8042aca5e718b96afff5a03797955e79bec6361ae9626b9b7df",
+        "metadata_state": "VALID",
+        "regular_file_count": 149,
+        "symlink_alias_count": 0,
+        "tree_digest": "7d86ff21ac6eb2943540ae56bb29181adb08fe915087113b9da30ca76de6f163"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "claude/dws",
+      "version_ref": {
+        "skill_version_uid": "skv_0KC9FRQ89S8AZPCP8WD1Q2KW0H",
+        "version_record_digest": "d3bd11708a89ecf1dfe5228e59effaed7ceca3fce9395ab2c1ef7f5396eb7e29"
+      }
+    },
+    {
+      "canonical_name": "verifier",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "b111efe88b20203351c5152a4c65b0b188088171e7cc4ebf7d9283e101a5ff1e",
+        "skill_identity_uid": "ski_6QZVWD531HPQJJB3XYDFJZT83J"
+      },
+      "instance_ref": {
+        "artifact_digest": "6881f65fcbab1b833a6f64a8620c1d9ab0004dd229e6e96907bb029e563977cd",
+        "skill_instance_uid": "skinst_6BVK5YYK39AB6Z8X4EP41EZGQ2"
+      },
+      "material": {
+        "byte_count": 346584,
+        "content_digest": "f5d8a195c1c4ce2285e922661b74d7c92d697d0f2ea0bab2ff0f03d62560c796",
+        "metadata_state": "VALID",
+        "regular_file_count": 31,
+        "symlink_alias_count": 0,
+        "tree_digest": "eaf4d9eab22ad87b14a8bd56a016622144d57e6edbdec380f50882ba3d61642c"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "claude/verifier",
+      "version_ref": {
+        "skill_version_uid": "skv_76RAQAYHYJ3ECBQX9RSC4A82NZ",
+        "version_record_digest": "32563146e6fb5d029dfa3a96e0561be7d2b635d7fb08507e00528bdc4dca26ce"
+      }
+    },
+    {
+      "canonical_name": "video-replica",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "b6bb72da23c0b9fefa270483ada2a2e87aaa47e9b38b878d3ebb8eaa57ed6c37",
+        "skill_identity_uid": "ski_53NF3KHQ2CDA1T09712XFA63C6"
+      },
+      "instance_ref": {
+        "artifact_digest": "ce50c6bb551f6003cfb874ca405ab27c69a0f88842fd02722aee20ccfcf73e87",
+        "skill_instance_uid": "skinst_3FQVZCQFB0VSJ2T8F79B5WN3JB"
+      },
+      "material": {
+        "byte_count": 100256,
+        "content_digest": "b3a188dc298164a3dc6413a3129f8f2b84576f14259b2d1e7481232fe58bb232",
+        "metadata_state": "VALID",
+        "regular_file_count": 11,
+        "symlink_alias_count": 0,
+        "tree_digest": "374b69005c294b9c0bf195afab4a2a97a95966ba4e6cf24cbde323db6d62b0f9"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "claude/video-replica",
+      "version_ref": {
+        "skill_version_uid": "skv_7XQGD58R9QXP3BPMC6711NK3N8",
+        "version_record_digest": "9c6d85bd4a62b99ffb45abf21028f11e89fbaa3b5f9477866e7e81cb1f79a11a"
+      }
+    }
+  ],
+  "entry_count": 3,
+  "exclusions": [],
+  "metadata_invalid_count": 0,
+  "protocol_revision": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1",
+  "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:registry-source-catalog:v1",
+  "source_class": "CLAUDE",
+  "source_material_git_object_id": "sha1:44a38890ec38ceb24ccae1ec6f5b1fc8e93aefa1",
+  "source_material_policy_digest": "7d8453b2dd5b78ec777c915d6cf009eac92bb6ff25cad9f88a9da38fb84cc183",
+  "source_material_policy_id": "urn:linzecolin:agentdatabase:skillops:policy:source-material:v1",
+  "source_root_path": "CodexSkills/registry/claude",
+  "status": "DRAFT_NON_ACTIVE"
+}

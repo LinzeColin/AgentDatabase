@@ -1,0 +1,140 @@
+{
+  "activation_forbidden": true,
+  "artifact_digest": "2b4c4a7f27f0942c17f57219332092ac6d14a5cb6694180f018df05d9240ee0a",
+  "auto_integration_complete": false,
+  "bundle_digest": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e",
+  "candidate_git_object_id": "sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5",
+  "candidate_manifest_path": "CodexSkills/governance/bundles/schema-bundle-manifest.v1.json",
+  "candidate_trust_mode": "CANDIDATE",
+  "canonical_publication_permitted": false,
+  "catalog_count": 4,
+  "catalog_path_reservation_required": true,
+  "current_materialization_path": "CodexSkills/governance/registry/materialized",
+  "current_materialization_promotable": false,
+  "current_sync_executor_contract": {
+    "artifact_digest": "d74ca2405ff12a3f9bd9421e0087d509f9483522af42b476292d5c56ccf4e431",
+    "deletes_unreserved_source_directories": true,
+    "enumerates_unreserved_source_directories_as_skills": true,
+    "relative_path": "CodexSkills/sync_skills.py",
+    "verified_git_object_id": "sha1:44a38890ec38ceb24ccae1ec6f5b1fc8e93aefa1"
+  },
+  "exact_byte_promotion_required": true,
+  "exact_byte_promotion_scope": "POST_PARITY_COMPLETE_SUCCESSOR_MATERIALIZATION",
+  "external_trust_tuple_required_fields": [
+    "canonical_snapshot_digest",
+    "canonical_snapshot_path",
+    "canonical_snapshot_schema_id",
+    "mode",
+    "verified_git_object_id"
+  ],
+  "final_catalog_entries": [
+    {
+      "relative_path": "CodexSkills/registry/agents/_catalog/catalog.v1.json",
+      "source_class": "AGENTS"
+    },
+    {
+      "relative_path": "CodexSkills/registry/claude/_catalog/catalog.v1.json",
+      "source_class": "CLAUDE"
+    },
+    {
+      "relative_path": "CodexSkills/registry/codex/_catalog/catalog.v1.json",
+      "source_class": "CODEX"
+    },
+    {
+      "relative_path": "CodexSkills/registry/codex-system/_catalog/catalog.v1.json",
+      "source_class": "CODEX_SYSTEM"
+    }
+  ],
+  "final_snapshot_path": "CodexSkills/registry/_global/registry-snapshot.v1.json",
+  "next_phase": "AUTO_REGISTRY_CATALOG_PATH_RESERVATION",
+  "post_reservation_rebuild_required": true,
+  "production_trust_permitted": false,
+  "protocol_revision": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1",
+  "registry_compatibility_index_is_not_snapshot_truth": true,
+  "registry_snapshot": {
+    "binding_eligible_version_count": 0,
+    "draft_relative_path": "CodexSkills/governance/registry/materialized/_global/registry-snapshot.v1.json",
+    "proposed_final_relative_path": "CodexSkills/registry/_global/registry-snapshot.v1.json",
+    "registry_snapshot_digest": "31f49c8ffa3bd2d268feec49b2869f409d61a5bfbb0b03f382bc562996b7fa76",
+    "schema_id": "urn:linzecolin:agentdatabase:skillops:schema:registry-snapshot:v1",
+    "source_material_git_object_id": "sha1:44a38890ec38ceb24ccae1ec6f5b1fc8e93aefa1",
+    "source_mirror_parity_satisfied": false
+  },
+  "resolver_contract": {
+    "approved_surfaces": [
+      "CODEX_AUTOMATION",
+      "CODEX_CLI"
+    ],
+    "bound_output_schema_id": "urn:linzecolin:agentdatabase:skillops:schema:skill-binding:v1",
+    "candidate_bundle_required": true,
+    "controlled_invocation_digest_contract": {
+      "self_digest_pointer": "/invocation_envelope_digest"
+    },
+    "current_snapshot_can_emit_bound": false,
+    "fail_closed_unknown_reason_code": "MAPPING_NOT_PROVABLE",
+    "full_seven_field_skill_ref_required": true,
+    "implementation_status": "DRAFT_NON_ACTIVE_IMPLEMENTED",
+    "request_schema_id": "urn:linzecolin:agentdatabase:skillops:schema:bound-reference-request:v1",
+    "source_path_name_match_is_not_identity_evidence": true,
+    "version_closure": "IDENTITY_TO_INSTANCE_TO_VERSION_UNIQUE_AND_DIGEST_EXACT"
+  },
+  "runtime_artifacts": [
+    {
+      "artifact_digest": "7b7aabcf1b226ad384205ba78101630e5d60179a624bf9b46cb4e3c29e7dd978",
+      "relative_path": "CodexSkills/governance/tools/build_bound_reference_resolver.py"
+    },
+    {
+      "artifact_digest": "a1389696e2758324b7e6d968ad7526053a5028b95d3aeb74731ac08c8a1530f2",
+      "relative_path": "CodexSkills/governance/tools/resolve_skill_binding.py"
+    }
+  ],
+  "schema_entries": [
+    {
+      "id": "urn:linzecolin:agentdatabase:skillops:schema:bound-reference-request:v1",
+      "relative_path": "CodexSkills/governance/registry/schemas/bound-reference-request.schema.json",
+      "schema_sha256": "c760666a485c81472ff8e8f07836c7f47ee87e0cbf0602fb7ae6a09a8b1f8611",
+      "self_digest_pointer": "/envelope_digest"
+    },
+    {
+      "id": "urn:linzecolin:agentdatabase:skillops:schema:registry-snapshot:v1",
+      "relative_path": "CodexSkills/governance/registry/schemas/registry-snapshot.schema.json",
+      "schema_sha256": "30684b2e024b0383f947b46aba0aab3fb3c9b4536770b365263c6e255dbc9cde",
+      "self_digest_pointer": "/registry_snapshot_digest"
+    },
+    {
+      "id": "urn:linzecolin:agentdatabase:skillops:schema:registry-source-catalog:v1",
+      "relative_path": "CodexSkills/governance/registry/schemas/registry-source-catalog.schema.json",
+      "schema_sha256": "20dac5971ff001af28d164b64f9c4d73f71c0a8765b89ed8e9d84390d263eb04",
+      "self_digest_pointer": "/artifact_digest"
+    }
+  ],
+  "schema_entry_count": 3,
+  "source_digest_contract": {
+    "alias_metadata_fields": [
+      "alias_path",
+      "normalized_target_ref",
+      "target_type"
+    ],
+    "canonicalization": "RFC8785_JCS_UTF8",
+    "content_material_domain": "SKILLOPS_SKILL_CONTENT_V1",
+    "content_material_fields": [
+      "domain",
+      "files"
+    ],
+    "file_fields": [
+      "byte_count",
+      "content_digest",
+      "relative_path"
+    ],
+    "tree_material_domain": "SKILLOPS_SOURCE_TREE_V1",
+    "tree_material_fields": [
+      "aliases",
+      "domain",
+      "files",
+      "source_class",
+      "source_material_policy_digest"
+    ],
+    "tree_paths_are_source_root_relative": true
+  },
+  "status": "DRAFT_NON_ACTIVE_RESOLVER_IMPLEMENTED"
+}

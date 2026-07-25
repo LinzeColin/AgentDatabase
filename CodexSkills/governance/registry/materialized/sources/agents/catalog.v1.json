@@ -1,0 +1,881 @@
+{
+  "artifact_digest": "5dee787dd3b8a06a8f844fbd15671e35242c2eaa403163425586243ef6fbc4a1",
+  "bundle_digest": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e",
+  "entries": [
+    {
+      "canonical_name": "agent-reach",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "d0a8af838843beac57f6274677ded8d99e709384c679d331c2afc9a67991c0a5",
+        "skill_identity_uid": "ski_7ZBGJSW7VGHF4EKW1NNX10PXNB"
+      },
+      "instance_ref": {
+        "artifact_digest": "8ae16dee4e7863296602713eec6e882a6601999e816f6933daa54203e34519d4",
+        "skill_instance_uid": "skinst_7EG7VHF1DJT1J2F17A73EVES5A"
+      },
+      "material": {
+        "byte_count": 23805,
+        "content_digest": "c58477e85a325fd01cc0fbbac50a5b13bf687a916919e656606414ae1e288ae2",
+        "metadata_state": "VALID",
+        "regular_file_count": 7,
+        "symlink_alias_count": 0,
+        "tree_digest": "fe30e09b107a62711c8fdfc255f3b1047412b03921b0a63ec5b0fec824c04ee2"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "agents/agent-reach",
+      "version_ref": {
+        "skill_version_uid": "skv_23CRP30PG6HHYWZ8XFKF90KZGK",
+        "version_record_digest": "ab0dd87c2c036574b1ec3a4961c84289295cb258cea16bccc534ff5e8ebb86ce"
+      }
+    },
+    {
+      "canonical_name": "codex-dev-orchestrator",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "5e1d9ad2e4febc37bd61283dd043e5561bc2bf2c6f2eaa9c720e0c9639bbbe29",
+        "skill_identity_uid": "ski_738X9NVZA8K1WJJ7MN6Z4552R6"
+      },
+      "instance_ref": {
+        "artifact_digest": "d4c804964afaea5ae35d86ea3db85b23e8e8e82661137af13f036949dd99ac49",
+        "skill_instance_uid": "skinst_10ETYKWV1ZNXB8ZTGWG5JNAE2M"
+      },
+      "material": {
+        "byte_count": 10859,
+        "content_digest": "74f27446c072ac5754645a7cecd1c68f0ce8cee718b198c47dc500a72e60c8b1",
+        "metadata_state": "VALID",
+        "regular_file_count": 9,
+        "symlink_alias_count": 0,
+        "tree_digest": "3c269c8f0f7e2f679e1abb99e1c23ba19b910154f8c54a98d468daf7d196e9fb"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "agents/codex-dev-orchestrator",
+      "version_ref": {
+        "skill_version_uid": "skv_1Z3HWA6J2YNQ3J31C622YR2PYN",
+        "version_record_digest": "530c953d554cedce6d4e09e996def4e8fa3fff388c403eae70f78c927f17c8f9"
+      }
+    },
+    {
+      "canonical_name": "dws",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "61e4c1ec5ee72e93ef2c34174ff80a7ddcc424b3a9a6606b413743065b8d89c5",
+        "skill_identity_uid": "ski_5MGBG8HAXCDYT1GN4F7FD3H9AK"
+      },
+      "instance_ref": {
+        "artifact_digest": "3683c91904d18edeaf3c9dbd2d85f444d2bfaa5f33c00e9619a9b3a7b2115318",
+        "skill_instance_uid": "skinst_1YKBDRA4FJNJE6P87NK43S8X62"
+      },
+      "material": {
+        "byte_count": 2181951,
+        "content_digest": "ed2d6d544fd3d8042aca5e718b96afff5a03797955e79bec6361ae9626b9b7df",
+        "metadata_state": "VALID",
+        "regular_file_count": 149,
+        "symlink_alias_count": 0,
+        "tree_digest": "c1b3a64218c0419bc4606fbf99c83244bbe733c8820ae4f9dcfc06e229a70054"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "agents/dws",
+      "version_ref": {
+        "skill_version_uid": "skv_0GSN7B1S9DEQR46GJPWFYXDRQK",
+        "version_record_digest": "dd27bd00fdf37a3f53fe99f22913297f280c1682a6d4f1f8325ee1dd6289e26c"
+      }
+    },
+    {
+      "canonical_name": "gitnexus-cli",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "628fd9532931ec81a5b29d785ca87c782a5baa4307554fb9252a30e3eb438528",
+        "skill_identity_uid": "ski_22YY8QZCQZC2BBRQQVYFSNMSS1"
+      },
+      "instance_ref": {
+        "artifact_digest": "60c6efeca19a6b7a27079db406d65709e475482fd1167d3c26fda6a7516cb497",
+        "skill_instance_uid": "skinst_4TZ17ADP56CD06VGWT68TEPP37"
+      },
+      "material": {
+        "byte_count": 4632,
+        "content_digest": "4fedf9af75bfad9bbc6e3cbee2e64b96580de2250841c272d9a2fdd9299d655c",
+        "metadata_state": "VALID",
+        "regular_file_count": 1,
+        "symlink_alias_count": 0,
+        "tree_digest": "04a4f0cd21828408886c05fc689ee74f63f8ad3e551f09f6c6be728f3a4eb6ef"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "agents/gitnexus-cli",
+      "version_ref": {
+        "skill_version_uid": "skv_2MT1EZAJ03JBPPA0F53MJT8ZKP",
+        "version_record_digest": "a4498f1556d81caf283a514db1e24b8e00e893c7e3d7f96c3380d410e1504c40"
+      }
+    },
+    {
+      "canonical_name": "gitnexus-debugging",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "764687965190c6d8adaf1ec59463dbbcb9c115309852ef40176c2ae682dc72eb",
+        "skill_identity_uid": "ski_251Q9HGKP6KPGWRSGTRYJDHZFZ"
+      },
+      "instance_ref": {
+        "artifact_digest": "3b117573f6601787f50a60571ab32921164db5a8446418095ba501a66e00c0d3",
+        "skill_instance_uid": "skinst_5H7VMKV2S4HSYV5HF8Q55EZ7MG"
+      },
+      "material": {
+        "byte_count": 3668,
+        "content_digest": "a52ac8a12d2fe50cc556edbe653f0e44ff6f708e2ce5b12356c261f039b4becf",
+        "metadata_state": "VALID",
+        "regular_file_count": 1,
+        "symlink_alias_count": 0,
+        "tree_digest": "36482b7faa13fc47a08537d8c02c4ab447d5d3ac7c5b76e5a3c60c5ed104db66"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "agents/gitnexus-debugging",
+      "version_ref": {
+        "skill_version_uid": "skv_07M3C8W4AVMYMKMC720J0JQ7MR",
+        "version_record_digest": "5ee08164deafa0b98218e43a4e41b6df5540115ac6977b42ef8dafdd5ffa46f4"
+      }
+    },
+    {
+      "canonical_name": "gitnexus-exploring",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "fb9e439e080eb58512f08288f5ebb79b8ab61054072b725acc67244068676f83",
+        "skill_identity_uid": "ski_3NVTV0M6SRH9SZ7F05MCFEB4NM"
+      },
+      "instance_ref": {
+        "artifact_digest": "986004cfa09ff86c7fbc775ce381cca85f024cf5d02a0d12a7d367c802cf70a1",
+        "skill_instance_uid": "skinst_5QXGZ6KJP48FMCCC5V0CE31ESH"
+      },
+      "material": {
+        "byte_count": 2978,
+        "content_digest": "64e1dab55e91b081e08da590b533e843705e42b803e8218e3e683642000b6e8f",
+        "metadata_state": "VALID",
+        "regular_file_count": 1,
+        "symlink_alias_count": 0,
+        "tree_digest": "6a7aa8e40f681f6a8e0bbcbaad5e21686a57ad25036c49371875ea3807a54227"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "agents/gitnexus-exploring",
+      "version_ref": {
+        "skill_version_uid": "skv_4J0M7XK7Q4ZHZH04EH35HREK5N",
+        "version_record_digest": "a867dc927709d79ab974f1e15cb201378f801508761cbb63c74f64ae2c1a02cc"
+      }
+    },
+    {
+      "canonical_name": "gitnexus-guide",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "0c6a7d2215eee733c0a7ef01fc8e45167a025b52734c927d8c69c21ddc47dc46",
+        "skill_identity_uid": "ski_3J0PGM992MQF4JKDHQ96QGPBJ7"
+      },
+      "instance_ref": {
+        "artifact_digest": "e74394d27aa711a9ecaefb9d3512299697818c4e87752e42819a86c57eb2c5c6",
+        "skill_instance_uid": "skinst_6N7JVHKJKJWFFXKKJWJFV3RKJ6"
+      },
+      "material": {
+        "byte_count": 10265,
+        "content_digest": "d9a899438f56f48fd7fe011f8773134f32bd5338a1025e37096b460958f27f5f",
+        "metadata_state": "VALID",
+        "regular_file_count": 1,
+        "symlink_alias_count": 0,
+        "tree_digest": "97afebd73c682aa3bb26965a2f5c2fe67ff1c69f0b945890a72a890ca5f87abf"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "agents/gitnexus-guide",
+      "version_ref": {
+        "skill_version_uid": "skv_5XMHNPJ1TVBHRDYV9YPYWQQXZM",
+        "version_record_digest": "975a66f7deefb03a08d320a56da497a4a32d91c67ecba2a45831b7fad6120b8d"
+      }
+    },
+    {
+      "canonical_name": "gitnexus-impact-analysis",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "0f54b219a8f8533656751c5c29a0a38e016806cdadcc49c5044d9b55b915e203",
+        "skill_identity_uid": "ski_78VTGNRB882A2RPJXYKF30JF79"
+      },
+      "instance_ref": {
+        "artifact_digest": "879b40c82d40caabfccea50aa5e89dbb197b98f4f3ffd1be3e76a3db4d945999",
+        "skill_instance_uid": "skinst_3CJBBQN506CZZKKWFMX9R232J3"
+      },
+      "material": {
+        "byte_count": 2848,
+        "content_digest": "446314c7230a49a005a642d59f4af182a533c46052f9782eda0908330c30ab9c",
+        "metadata_state": "VALID",
+        "regular_file_count": 1,
+        "symlink_alias_count": 0,
+        "tree_digest": "2fe746310406753bf3546354916937f490fc7cacd29964e2bac628e776972917"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "agents/gitnexus-impact-analysis",
+      "version_ref": {
+        "skill_version_uid": "skv_1A8GXNFKTM2TF6TZKW0W4XE9X4",
+        "version_record_digest": "baae5c7219628ad1e1ce1e537c6fa999289fe4f991478f55347ec71d8e3f288c"
+      }
+    },
+    {
+      "canonical_name": "gitnexus-pdg-query",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "6118b4322ef2636a3735945216bab92ff125b18b3c814bbd011643341a56ee4e",
+        "skill_identity_uid": "ski_2Y4NDHV99RNVASJCMEAWPTWRXK"
+      },
+      "instance_ref": {
+        "artifact_digest": "53f85ab267b1582fcba0a3c9b75f27d99bfc9b09d5d7a5b1c4621d7063701910",
+        "skill_instance_uid": "skinst_1RZQJ5BW3YQ2726DBGZPQ00HYF"
+      },
+      "material": {
+        "byte_count": 4714,
+        "content_digest": "2604b4fb803172f229c3eea6abd90775f926d97eb46c1624a6f1de1a2c4df995",
+        "metadata_state": "VALID",
+        "regular_file_count": 1,
+        "symlink_alias_count": 0,
+        "tree_digest": "1e5eb9ed652bd641201aff66ad178032e6b2c51bed0ce8fbf72a7d133ded7917"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "agents/gitnexus-pdg-query",
+      "version_ref": {
+        "skill_version_uid": "skv_3T8536Z2PKSNC19X2CFKRVRZCG",
+        "version_record_digest": "9ad639125c169807256c5f60b1882d9d735a868e0e456a59fcf71d501ea92547"
+      }
+    },
+    {
+      "canonical_name": "gitnexus-pr-review",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "1ed8c56fc3c583f8b19e6a3a083c935720155fd6838495077145373389de82da",
+        "skill_identity_uid": "ski_5JSHEZQA505XZYPC9RGV1HHJDR"
+      },
+      "instance_ref": {
+        "artifact_digest": "48d1e169289b5b592b2dec7475b3ebde8f0b1a8727fcdced969847bbd866c930",
+        "skill_instance_uid": "skinst_3ADJB3DXPJ2X0WW84BTFCVV3RP"
+      },
+      "material": {
+        "byte_count": 5277,
+        "content_digest": "f217fb8197a9ff65e0538385e454848a4cc87de719ed2d6401f5468e94ca0099",
+        "metadata_state": "VALID",
+        "regular_file_count": 1,
+        "symlink_alias_count": 0,
+        "tree_digest": "255b7eaf9b59a6de6f9a089a403f8caf5b62f19e084943ef94a914d731e290ae"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "agents/gitnexus-pr-review",
+      "version_ref": {
+        "skill_version_uid": "skv_3Z7P88D4QZQ14NDHKZPKN3E8WS",
+        "version_record_digest": "78e7a2e6456b4319f490d910c46847261de6d3d338d39c25a6399f51cd5289c5"
+      }
+    },
+    {
+      "canonical_name": "gitnexus-refactoring",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "9fc05cbbea08c2544abe6814df72ee97c995b1a385081907f4d75dadc0e4606c",
+        "skill_identity_uid": "ski_5R8C5Q8YSNNFQF3NVYYXVFE9FH"
+      },
+      "instance_ref": {
+        "artifact_digest": "d52bfe86c3e2ec7c01a1b01e830492187003082646d017acd18c6324da4a30f2",
+        "skill_instance_uid": "skinst_6P0GGJR47KWP27H4EDE9GT1T27"
+      },
+      "material": {
+        "byte_count": 3912,
+        "content_digest": "9a61ccf0b3f1f7ffc0af14d7ad39d18d05e24dd2b53ca95a919de862b4268cb7",
+        "metadata_state": "VALID",
+        "regular_file_count": 1,
+        "symlink_alias_count": 0,
+        "tree_digest": "b2c2ca49707340ebc598b6f784a12d777ae6199d46d8e82663dee4b5ab74da58"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "agents/gitnexus-refactoring",
+      "version_ref": {
+        "skill_version_uid": "skv_5EN16DQPS23BK11KWAWBRSEAAS",
+        "version_record_digest": "8d1759cee1202aa3a3595ef54395514337d0298913ed927b0f4babea13c2e236"
+      }
+    },
+    {
+      "canonical_name": "gitnexus-taint-analysis",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "00bcd4c85f2af0ee95e2298c4dfe93e55e4fed5ec5dbba2495bd5cab7aebd1c6",
+        "skill_identity_uid": "ski_260X2VQG65NAJ7WZG8HKJD3S4K"
+      },
+      "instance_ref": {
+        "artifact_digest": "c112e112b391570b33580e7ccab375356e6f5027318f1b81d6d69d65b7a97f6a",
+        "skill_instance_uid": "skinst_4TCFZC7V1EFTQJ4CV60S20ED1K"
+      },
+      "material": {
+        "byte_count": 10457,
+        "content_digest": "dbffceceaf6595432ea4531e9b8cdeb34761f3370252b8e86780abbb960eccfb",
+        "metadata_state": "VALID",
+        "regular_file_count": 1,
+        "symlink_alias_count": 0,
+        "tree_digest": "cb40aafff3d820202dc716e4f582ffede4e36136bc4507f2fd5578b318266d4c"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "agents/gitnexus-taint-analysis",
+      "version_ref": {
+        "skill_version_uid": "skv_2JFXZDTY8K2A7XCQ9NC50YSESQ",
+        "version_record_digest": "744fbe041cb86ea612acbd8a1fad6623ec798ab300e27d14f8fbf1e3f933ac8b"
+      }
+    },
+    {
+      "canonical_name": "grill-me",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "5dd9b62b6514451c55214ba611dcd30b20e3806d0925c3bab6b78ef88dcd4622",
+        "skill_identity_uid": "ski_7QPJXRQXXHJR96THKQQJ8T9Z7H"
+      },
+      "instance_ref": {
+        "artifact_digest": "1804966f53dd482d34ca803415ac3abbed488622cd0db702bfe5cfb0334affec",
+        "skill_instance_uid": "skinst_5RYHFCQ24ANC1NXQJCQGFR3E3M"
+      },
+      "material": {
+        "byte_count": 284,
+        "content_digest": "c870da56c4b212e44a381dc20f618acf70102ffd78202ac4fa0bcdc0d68285be",
+        "metadata_state": "VALID",
+        "regular_file_count": 2,
+        "symlink_alias_count": 0,
+        "tree_digest": "5159faaf19637f889fd904b49cf33230915091491486ee83e97b513d9b281d94"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "agents/grill-me",
+      "version_ref": {
+        "skill_version_uid": "skv_5MWT011BKC6K54DZK0KMG5W16W",
+        "version_record_digest": "e0bddf6a07882b692af6e8030242ba2bdc2e8bcb203d7c07de9a951cdca296cc"
+      }
+    },
+    {
+      "canonical_name": "impeccable",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "a662d5754918e4c870d225ea89e235592ff9f63cd9b5bdb9952ec9d40d543a22",
+        "skill_identity_uid": "ski_5XYMJPG9Y6B7P58TCPA68W96T7"
+      },
+      "instance_ref": {
+        "artifact_digest": "da89f584993d811362746e9059c98e5af20914213106bb7d0051fa93f5f3dc48",
+        "skill_instance_uid": "skinst_167XK66E88TZHTBJQ04FCHXQJR"
+      },
+      "material": {
+        "byte_count": 2127172,
+        "content_digest": "9567e6be508e9b9f7bc14b058a0891306264ec6ddf52e26de6c48e391e8c7c51",
+        "metadata_state": "VALID",
+        "regular_file_count": 99,
+        "symlink_alias_count": 0,
+        "tree_digest": "94ec2540a999204a9ab21d2b245be2cf63a85311ad9073dc5659cb5694cdf275"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "agents/impeccable",
+      "version_ref": {
+        "skill_version_uid": "skv_6RCSSWB8B7JQJ7H8NSNNBGRD3P",
+        "version_record_digest": "dd4e884c8188c7132e252c9d010332a035edc4562df8beaf9ab26175c35e4ec2"
+      }
+    },
+    {
+      "canonical_name": "km-bid-adjudicate",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "c2956192dd0e33a8d6a9471711733bda7a59c6811b019e78c6726a565ec7befe",
+        "skill_identity_uid": "ski_6923DE6YSBD4ZYNM8X8VJRPSNW"
+      },
+      "instance_ref": {
+        "artifact_digest": "6a55e4748fca9662feea84ccedabdb2634b57a019ce3f7c3d2627347cca305d2",
+        "skill_instance_uid": "skinst_55MS40139RSKR5RA1941ADBKCB"
+      },
+      "material": {
+        "byte_count": 5987,
+        "content_digest": "92856ead97ab89eda6efa510bfa2fee22a0ea5ee66e93b6c55ee6ee0702e0450",
+        "metadata_state": "VALID",
+        "regular_file_count": 6,
+        "symlink_alias_count": 0,
+        "tree_digest": "b7ff3c1e406cb0bbd04da3dd444ff9776601297dbb1b5f7381096751e48d287a"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "agents/km-bid-adjudicate",
+      "version_ref": {
+        "skill_version_uid": "skv_0CR1N2AQ0302N211YGB1QGPARM",
+        "version_record_digest": "1fcaa5b9945ef6d8c8438f16a5e8e47816483b8bdc4f996d8a60f5f64d9b3426"
+      }
+    },
+    {
+      "canonical_name": "km-bid-audit",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "7dc416ca1eb328994a6b323f6b41b0a97f2f1e78a9a72b33fed2584d9379bc3e",
+        "skill_identity_uid": "ski_69SB1NKNAH3B88GRFC8SPCWBNK"
+      },
+      "instance_ref": {
+        "artifact_digest": "5456b2d44e61187e73dce6e2a913ed32dd5756be94ef8b986e29cac0f2acb9ed",
+        "skill_instance_uid": "skinst_3HE21NBK1KM7MWGF47Y2XDWYXX"
+      },
+      "material": {
+        "byte_count": 4853,
+        "content_digest": "62398063006d0fd5cd89896a498fc73511840ad8db6b9c1c1f9fd9c9011c0ec1",
+        "metadata_state": "VALID",
+        "regular_file_count": 6,
+        "symlink_alias_count": 0,
+        "tree_digest": "9dfe371a80c6351494a68a9331e2895df3f396f55b564150748881ab0ad89e99"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "agents/km-bid-audit",
+      "version_ref": {
+        "skill_version_uid": "skv_5SEWH39HPJ5HQ8670FMB0AHJXT",
+        "version_record_digest": "f2e418ac57a0f99b4ea647d24e00622e371a60a84e17df7ff526b13086f4b9ca"
+      }
+    },
+    {
+      "canonical_name": "km-bid-brief",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "be97aaf60ba1eab7715158153112fbda15dadd1e4a00a621474fa2be9bf81359",
+        "skill_identity_uid": "ski_4EJN2HJYPZ94XP5KDV40DRSM24"
+      },
+      "instance_ref": {
+        "artifact_digest": "55df875489f7c5fa86008e7e236b21427e80e278ecb0a3402d4cb6aa15acdb86",
+        "skill_instance_uid": "skinst_11ZG5392SRRG1YTCA5M4Y2AHJH"
+      },
+      "material": {
+        "byte_count": 6381,
+        "content_digest": "f14ad8fde583cbf7068e6549a2b5f084b4b76a7a3b35b3c762a8d0d4ed97103e",
+        "metadata_state": "VALID",
+        "regular_file_count": 6,
+        "symlink_alias_count": 0,
+        "tree_digest": "60dc0a72056a4f632424682d1a1b1d460d9abe4b4acc05b7bea2edff0d6e59f7"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "agents/km-bid-brief",
+      "version_ref": {
+        "skill_version_uid": "skv_1STVAJ9XX21G7FQ29Z9Y4NEG3S",
+        "version_record_digest": "2649b75ac27014e78a3112bea385447799b7a3f2ff80156bae0dd7c4e433d8c2"
+      }
+    },
+    {
+      "canonical_name": "km-bid-discover",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "274689145a19fbcd07d9f1dc3ef2f254b0b89aee0c408557cd222a9a88b54fb3",
+        "skill_identity_uid": "ski_19M7CV5W79XKWE60ZKS61862PK"
+      },
+      "instance_ref": {
+        "artifact_digest": "9efe355663903c673553c6dd929f13f6de51cfd8290f19d0b423c0f53779b6de",
+        "skill_instance_uid": "skinst_3C9D15TKXZHMTHVC3GFQ06WPT0"
+      },
+      "material": {
+        "byte_count": 7340,
+        "content_digest": "be08f72922c785fd6651046109c80568c7cbada42785226f74a39d2f4dddd0cd",
+        "metadata_state": "VALID",
+        "regular_file_count": 6,
+        "symlink_alias_count": 0,
+        "tree_digest": "2a0578e347ebe552757a2959888f00a00d3b3ca934629b7991839e82cd5836f8"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "agents/km-bid-discover",
+      "version_ref": {
+        "skill_version_uid": "skv_6NHHHV30MBP88XNQZKSFQJ5Z31",
+        "version_record_digest": "bac994b3090cc8059e2b14fd81c8c7ae3d7513c0713bc57e138b9ce22a9e2d94"
+      }
+    },
+    {
+      "canonical_name": "km-bid-evidence",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "53c9d821122d9f9185e5493ff202d84d7159bb8091f8921ecceaedb2f54bc15f",
+        "skill_identity_uid": "ski_11491B0QSVEBCVCDCFMR2KAK6Z"
+      },
+      "instance_ref": {
+        "artifact_digest": "3e226f6970a6a5407b025c844fc4b37a32a94dbded7cccfefff7614cbc199255",
+        "skill_instance_uid": "skinst_7MPZDTFGWZGJJQDXNESE2HZ8S4"
+      },
+      "material": {
+        "byte_count": 7080,
+        "content_digest": "44543d4481f582339283384dc5dafa462f9d014a272d2609e5735ce9d8fd332b",
+        "metadata_state": "VALID",
+        "regular_file_count": 6,
+        "symlink_alias_count": 0,
+        "tree_digest": "ab372ae4fafe439f9f1fa1bbfcd09f661cfdfcaaaf74779281af22ad8a2636cf"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "agents/km-bid-evidence",
+      "version_ref": {
+        "skill_version_uid": "skv_13J7SCX0GDZ4NY1W2CT4T33WAT",
+        "version_record_digest": "ae095e443cb83d3b937d614fb4cd0b3c4822ce5ab8407aef6966e26f83cec026"
+      }
+    },
+    {
+      "canonical_name": "km-bid-evolve",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "a306b743727bf7476c931c099ad1d72a91ef95de89ae7f861cd37570edd504f0",
+        "skill_identity_uid": "ski_1ZMP60QENV4786AN09MNK39X2F"
+      },
+      "instance_ref": {
+        "artifact_digest": "0e82d3c464caf94022e9e138980b893196c8eac1490f44a4a3905bb6a1ed0a98",
+        "skill_instance_uid": "skinst_2FT9MC35Z8QJ4G5HK0A7P98CGA"
+      },
+      "material": {
+        "byte_count": 6352,
+        "content_digest": "ac806c58f8e23001b16387a63dcabe40763a43fe745e4924fb58a8b2571cbe87",
+        "metadata_state": "VALID",
+        "regular_file_count": 6,
+        "symlink_alias_count": 0,
+        "tree_digest": "bf98f6dc5b89d97c8a98e807b137c8b197447137d90b586a9fdf04e5bca0b02f"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "agents/km-bid-evolve",
+      "version_ref": {
+        "skill_version_uid": "skv_21QARZAR5TV338C9C12HZ6FEM4",
+        "version_record_digest": "2e105ba12a91b11a926c4fb75caf8582766db75fb6ac7fc99c846ee842ec1150"
+      }
+    },
+    {
+      "canonical_name": "km-bid-lifecycle",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "321918727e4710d35aa7ca19049877a031d138c5f9ae41f59dd25e4b6f1d2c90",
+        "skill_identity_uid": "ski_6ZK665K3GWNPYNTZKE565TKQ4E"
+      },
+      "instance_ref": {
+        "artifact_digest": "9eb892aebdf7df60bd4436fbb87f640a2df7cf8e60da2e3d819748c9c0771cd9",
+        "skill_instance_uid": "skinst_673EEM0VTR83SC07SYAC0ARF6A"
+      },
+      "material": {
+        "byte_count": 8315,
+        "content_digest": "ef26b8d9d8d92c45dff96726c0096cbdb68cf487185a5df5af590fa7428a8cd5",
+        "metadata_state": "VALID",
+        "regular_file_count": 6,
+        "symlink_alias_count": 0,
+        "tree_digest": "8eafac52ddad5a0b5e29f7f1209ac9aa953c2dda2042592edf54661fbd401ccf"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "agents/km-bid-lifecycle",
+      "version_ref": {
+        "skill_version_uid": "skv_4JZBQYYSBCT8T4G49HE9A9TJ8J",
+        "version_record_digest": "3fa8c8c8deea5eed470fe95c2636c9a94321f495655f91035e27ea3eeb1d3734"
+      }
+    },
+    {
+      "canonical_name": "km-bid-qualify",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "341486d1fd7fa2ca737cde6f5ba054b989c37350cc004a8a63dbeb508fbc1ab9",
+        "skill_identity_uid": "ski_2JXDXBFJ2VJQ7VSNBXDB738DX0"
+      },
+      "instance_ref": {
+        "artifact_digest": "dd63d52a1146fc9d565ea179a3bb0e46d00055539c389cb531a2dbe7c34bf7b3",
+        "skill_instance_uid": "skinst_658RHR7YK1WA0V4PBPE0B01PZM"
+      },
+      "material": {
+        "byte_count": 6180,
+        "content_digest": "5842c31515128f0bd59fed58956ad7d8915c1802a53eb9a9b6050c7e9d7dd9cd",
+        "metadata_state": "VALID",
+        "regular_file_count": 6,
+        "symlink_alias_count": 0,
+        "tree_digest": "4648c0656ec2f5a30723b58fafbdb3f384a0ef42e9b99207342547e384069f54"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "agents/km-bid-qualify",
+      "version_ref": {
+        "skill_version_uid": "skv_72XW7HTYZTJWGN1TW8RN1W2HGY",
+        "version_record_digest": "9ac234a575dd2555fbfa4eb71802f847da5a2fb8cdc81bd9a1f16b7d7eaf2c7b"
+      }
+    },
+    {
+      "canonical_name": "km-bid-scout",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "cd6eef939616c7621abb0e42f07efdb804900d2eec3b63bb7bab915e12a25694",
+        "skill_identity_uid": "ski_5BSPSS5P1CJTS6HHBV9A4BKKZ0"
+      },
+      "instance_ref": {
+        "artifact_digest": "f2bfbf52bfab717b4ad6c0308de74cb7ed7d4dc27f2f3fc7bd464929df5fcd2a",
+        "skill_instance_uid": "skinst_57BH2TVNRG5VXZA12S7BKVBHX5"
+      },
+      "material": {
+        "byte_count": 22030,
+        "content_digest": "019d6da640c804a21f18def256e544c98d91f9c34def5ee1ea7a4a6105e565e0",
+        "metadata_state": "VALID",
+        "regular_file_count": 8,
+        "symlink_alias_count": 0,
+        "tree_digest": "6627da96913bdbabbfdd8ced206dbd44745f4224950f88507cc7cda71252536f"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "agents/km-bid-scout",
+      "version_ref": {
+        "skill_version_uid": "skv_5SMJSWMZ7G127M44314WAZ055N",
+        "version_record_digest": "c4dc24ce790fe1cef4278fe2bf81bd3748b257539fdea917a00fa59d0c1f5bb0"
+      }
+    },
+    {
+      "canonical_name": "use-railway",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "e811a570fc66a519b857b09209560ad4db62d43df2848c46f3081260b06a3190",
+        "skill_identity_uid": "ski_2M6Z5YD943SV5RRSQQZGGV5AAM"
+      },
+      "instance_ref": {
+        "artifact_digest": "e5a733de66e1a62c0fa5af5fe3e5e0e5fe4d9d3987d46bbd30ca00f2c0087213",
+        "skill_instance_uid": "skinst_16VTQPAQSJHVDK8GXHFZJ26SN1"
+      },
+      "material": {
+        "byte_count": 499762,
+        "content_digest": "706a9d366be789c43987ee80ad2008c36c3c73b3f7ce879e92f4fbb6a39457bc",
+        "metadata_state": "VALID",
+        "regular_file_count": 19,
+        "symlink_alias_count": 0,
+        "tree_digest": "f442df4a3bab73fb2e456c8571826c7012154be2a05d2b14bc5d112bb78f8222"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "agents/use-railway",
+      "version_ref": {
+        "skill_version_uid": "skv_2GZG5J4CJN9B94EP9DSNX9CC91",
+        "version_record_digest": "7df0c40b0727b74b73466429ea31cd424b90bf3cacfa5609d8109ca5b769abc6"
+      }
+    }
+  ],
+  "entry_count": 24,
+  "exclusions": [],
+  "metadata_invalid_count": 0,
+  "protocol_revision": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1",
+  "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:registry-source-catalog:v1",
+  "source_class": "AGENTS",
+  "source_material_git_object_id": "sha1:44a38890ec38ceb24ccae1ec6f5b1fc8e93aefa1",
+  "source_material_policy_digest": "7d8453b2dd5b78ec777c915d6cf009eac92bb6ff25cad9f88a9da38fb84cc183",
+  "source_material_policy_id": "urn:linzecolin:agentdatabase:skillops:policy:source-material:v1",
+  "source_root_path": "CodexSkills/registry/agents",
+  "status": "DRAFT_NON_ACTIVE"
+}

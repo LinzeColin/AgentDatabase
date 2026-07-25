@@ -1,0 +1,2033 @@
+{
+  "artifact_digest": "1c181de1c8540822b010e55913022cb5134348825be143f0968e2e64943bdcec",
+  "bundle_digest": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e",
+  "entries": [
+    {
+      "canonical_name": "agent-reach",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "2925ad3e49c767048a2362604a50bf611dfda8c7a8525d2a359f59be4a3b8a23",
+        "skill_identity_uid": "ski_33XW2CSCBNAVP9T8CBFQKJAGBC"
+      },
+      "instance_ref": {
+        "artifact_digest": "5864dc5ad274db7f914b9ff4e2022a7bff29bf5441486828cac192508b3d66fb",
+        "skill_instance_uid": "skinst_43PKTN0QFRQ9C9BVVT8JSG78ZK"
+      },
+      "material": {
+        "byte_count": 27879,
+        "content_digest": "fb05610eedb390be608ced2756e48c4c6b0c0f5bb0ef8495d2b9b60d8ec5dccb",
+        "metadata_state": "VALID",
+        "regular_file_count": 9,
+        "symlink_alias_count": 0,
+        "tree_digest": "a5bdf86cdef97bab38d16e9ab072c99b8e495841cc5673354d2388c0d348641d"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/agent-reach",
+      "version_ref": {
+        "skill_version_uid": "skv_1R35GFNVG5FHNMBJ5SSXY3ABG0",
+        "version_record_digest": "cea94b795327d7e57d21da5d1b46529a503fc9a51d5d9355a81ad705d58aa4d5"
+      }
+    },
+    {
+      "canonical_name": "awesome-design-md",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "e2177eb2b9a2ef9ea9b34305608efa6ad01ca636589a2a0a4074809a18bc3428",
+        "skill_identity_uid": "ski_7BSGR882TYG6YDJ9Q3CATB6SP2"
+      },
+      "instance_ref": {
+        "artifact_digest": "7deec18f54d9666538c733c914523fc1a72d3bc871cc2bf8bbe8d544786cb62c",
+        "skill_instance_uid": "skinst_0W7VMMT8ZAASWY6C7PFY63F9NJ"
+      },
+      "material": {
+        "byte_count": 2186083,
+        "content_digest": "a4fa3fecdf9cf249cf401e67a0a57dc277576e23b875da7ca2f9855217a60d8d",
+        "metadata_state": "VALID",
+        "regular_file_count": 155,
+        "symlink_alias_count": 0,
+        "tree_digest": "5a08175bbbb9aeaf74b7b6ede0f98cb7483f054bf48afb7f951fd111763448e8"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/awesome-design-md",
+      "version_ref": {
+        "skill_version_uid": "skv_51QCD24CM190RDXBRFQ1ADPJAQ",
+        "version_record_digest": "b886ee854b8b3f3d97d7b59240788673a181f33386431f48065eeeb022384c39"
+      }
+    },
+    {
+      "canonical_name": "awesome-design-systems",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "16901662b5f38124ff090dd92676dcd3ea1ce08a73ac5f47aac4049f842fe3e2",
+        "skill_identity_uid": "ski_26678ND4EH0WBKC9BM7QBDPN81"
+      },
+      "instance_ref": {
+        "artifact_digest": "271d8f2941dc51d5119a32492ed439d311a7aae332bd59c63a3c0acefdaf7a07",
+        "skill_instance_uid": "skinst_1P6CFNX1JJNWAJ0VHDGHXD4QQF"
+      },
+      "material": {
+        "byte_count": 63800,
+        "content_digest": "e39b7ce3d8a2073ca780eaecd79e8a95c6a33a5d889fd1726422b03d20af64e6",
+        "metadata_state": "VALID",
+        "regular_file_count": 5,
+        "symlink_alias_count": 0,
+        "tree_digest": "7dc8b0d88d97acb4e317abbbd4fcd9b20b8c187537578408984fba480c961614"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/awesome-design-systems",
+      "version_ref": {
+        "skill_version_uid": "skv_525CWNVPK8BRJBZ9VCJ6PTK59X",
+        "version_record_digest": "108d61fb0a1560bc6b9fa87df9ea09f1bfec666588b40d43efda367f05a24e84"
+      }
+    },
+    {
+      "canonical_name": "beautiful-html-templates",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "96ccbaad852956a4b261ae45edf229ad31cb96c019667780f00036d9b8980e5f",
+        "skill_identity_uid": "ski_7CFE3BV702KKAHBN14R1QKKFR6"
+      },
+      "instance_ref": {
+        "artifact_digest": "c9905397f56394470086148cbafc74098751a384bcd4335495234d56a3ddfbea",
+        "skill_instance_uid": "skinst_7968RY5920S32DBHB9WZ3NC016"
+      },
+      "material": {
+        "byte_count": 36050842,
+        "content_digest": "b99a1c3ce85726022dd84e1bfe5a53783707de9c5759dcf158c19e0aeb3b2739",
+        "metadata_state": "VALID",
+        "regular_file_count": 225,
+        "symlink_alias_count": 0,
+        "tree_digest": "e6efba41594edbaefcd4fea7ec8177507bb274adff907f2ed79d25508b68e330"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/beautiful-html-templates",
+      "version_ref": {
+        "skill_version_uid": "skv_092XYV10Q5KP24C8T3ZCED5W7S",
+        "version_record_digest": "2fb64f11ddb80887d87b9dbebf7ab1eda634fd83fda9fb7a55b6a6a55481dd53"
+      }
+    },
+    {
+      "canonical_name": "book-to-skill",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "00f1c34cff502c3fa14a217ca9a0e2865c6b4b7bf63f12b77505f0eae94abae7",
+        "skill_identity_uid": "ski_4FD0970T54R52H5CEZMD1DWR3S"
+      },
+      "instance_ref": {
+        "artifact_digest": "b5dc00b3e14e8a4362c46da95cbc39b9bfc261219a635d5540244d838bc2876e",
+        "skill_instance_uid": "skinst_525FZQ2R5B1940JJ9DCWJP731J"
+      },
+      "material": {
+        "byte_count": 433818,
+        "content_digest": "78ce90e10861f60a47e52c91735bc80dc6f4ea5b75d79ec291b233c593355aac",
+        "metadata_state": "VALID",
+        "regular_file_count": 44,
+        "symlink_alias_count": 0,
+        "tree_digest": "bb26abcc53920aeb18e7429a5606c6f1aceceedf2562f3e953e340eea0e362ee"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/book-to-skill",
+      "version_ref": {
+        "skill_version_uid": "skv_0BX3B3RYBXFHP1G39EQ00ZB1A6",
+        "version_record_digest": "42dbb1a76e9e316afbed688d85e3142545ea33c27ad4656d043f5704b2c9ee44"
+      }
+    },
+    {
+      "canonical_name": "canvas-design",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "ba13d33d91d8e29873cb2c2849bf6c07e76e6cf32a862fafc1034b9053799ea3",
+        "skill_identity_uid": "ski_4BKJKZB6R4JZTV8PQF4EFG5GWY"
+      },
+      "instance_ref": {
+        "artifact_digest": "3e95b08e95b6e20c745a97dcebedc2e608a0afb1afb64ff322997b329f59dfee",
+        "skill_instance_uid": "skinst_6VP9SWEBS2Z7DTJEXQKW1XY1XJ"
+      },
+      "material": {
+        "byte_count": 5554015,
+        "content_digest": "44b990beea8d5a448ba029e1bce530abb0106bf57a46a2f01acc724e7e3be4dc",
+        "metadata_state": "VALID",
+        "regular_file_count": 83,
+        "symlink_alias_count": 0,
+        "tree_digest": "0cd7fcb42f973201ed2ca1db872a634497c1eef7c4ddcc986ba748c99eec8c30"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/canvas-design",
+      "version_ref": {
+        "skill_version_uid": "skv_5ZFA5B2HDEN17B3J0QQYGMWSPA",
+        "version_record_digest": "78ac9124388773e470137af0eb744e27ec4e57f24aa4a6f9f8f61ea1beb6ea32"
+      }
+    },
+    {
+      "canonical_name": "chronicle",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "746dc950ad4b22076a9acf38397e1dc3a0fcca81f0942099cfdace18b61716fb",
+        "skill_identity_uid": "ski_19CZ5STPZHBNT31E6MBGG20S5E"
+      },
+      "instance_ref": {
+        "artifact_digest": "bc43356d27b0d4838ec891ab0a90dbc3addeb931abaf18e74551a74b0c020cf1",
+        "skill_instance_uid": "skinst_3RRCE2HSD3BNASRKZGQN7HJQK6"
+      },
+      "material": {
+        "byte_count": 5650,
+        "content_digest": "0e904b47dedf4b345b540d0e8e4e7b2601590897af5cbc8af82fe5b2be50d114",
+        "metadata_state": "VALID",
+        "regular_file_count": 1,
+        "symlink_alias_count": 0,
+        "tree_digest": "7ebfa4d7cd275aff231428279acd52ee553b3c283f259ab5664e6b4f24779b09"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/chronicle",
+      "version_ref": {
+        "skill_version_uid": "skv_061N2KY23CTWMDHTV2AK9D365Z",
+        "version_record_digest": "d92355ee50cf5aa46e1ade311f38dd89f02f84027ef713147ee581d8e9a0bea6"
+      }
+    },
+    {
+      "canonical_name": "codex-encrypted-backup",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "76131842bccb466b9f2e4ebe780c8813bb4c014b2f0a9d583d29b2715c8a0390",
+        "skill_identity_uid": "ski_6FBNHFGN6P5MHVARAKH01BGN1P"
+      },
+      "instance_ref": {
+        "artifact_digest": "84e755dfaa2cd10414589a552481d86aa9f8061d1be8007e9ccec36cfa7ea705",
+        "skill_instance_uid": "skinst_4CPN0TEWGQG5HYXEA365E7WAS4"
+      },
+      "material": {
+        "byte_count": 6543,
+        "content_digest": "310bd6bd20fe994842cef0fc9154fd086643c59cfb805f5ad22fd9d7ce1cf9ee",
+        "metadata_state": "VALID",
+        "regular_file_count": 1,
+        "symlink_alias_count": 0,
+        "tree_digest": "aeeab0e5701ccb3693a2126dc319bcb922efad337a3cebc3fe85bc7e24f1aabc"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/codex-encrypted-backup",
+      "version_ref": {
+        "skill_version_uid": "skv_2NFJ64ZSGDYJ6ED5J3YD0GS163",
+        "version_record_digest": "98207feeaecde38ebf8e9183bea9aa9a8c03a876c15318b316309208c668e7ed"
+      }
+    },
+    {
+      "canonical_name": "context-kernel",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "33c475ae027f191a709a0668779b566a0352a2f4e980cb76ae539ffe042a7eeb",
+        "skill_identity_uid": "ski_4KND2WTWF3JYMK12R283X0W00G"
+      },
+      "instance_ref": {
+        "artifact_digest": "e3e0b081193381e013afd9904121af58cb996320c291ab022b46b74837c4640d",
+        "skill_instance_uid": "skinst_1FTQ8SRB57QJWDK8RZWSVX3RTF"
+      },
+      "material": {
+        "byte_count": 159241,
+        "content_digest": "42bdf85d63e25ea63b2bfdbc17b116b07c5d0c42dc2a538044041cd0fca4239d",
+        "metadata_state": "INVALID",
+        "regular_file_count": 3,
+        "symlink_alias_count": 0,
+        "tree_digest": "a60a928ffd53cee1d2b27ba3fb869e4d944f498a8493c11c7ff52881868c44c9"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/context-kernel",
+      "version_ref": {
+        "skill_version_uid": "skv_5WCBT1AA644FA7HBSNND3HKCHX",
+        "version_record_digest": "5e6ba473c1354efc327d078ca3244000f7bab2d960c08b7925502cc05caafb53"
+      }
+    },
+    {
+      "canonical_name": "domain-dual-plane",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "9868316a8e8a2e07f277b41c797d14e418b98ac25efa6ca8915ad18f73b88c1a",
+        "skill_identity_uid": "ski_7561W8EAAPY2PKDY09EWHBH399"
+      },
+      "instance_ref": {
+        "artifact_digest": "7373639e601cb6c1db32f9c038b33e42d2f12d8ecca713c0dcb07e7dbdfff60e",
+        "skill_instance_uid": "skinst_6Q1JXB7DG0X875F2HHZNG4DG0N"
+      },
+      "material": {
+        "byte_count": 9918,
+        "content_digest": "e6a8fe63957c18fe3341a7a25a9e69fb3866f1be91d118a68e28226bcd428d7c",
+        "metadata_state": "VALID",
+        "regular_file_count": 1,
+        "symlink_alias_count": 0,
+        "tree_digest": "7e9ce34bdf6e9062e71f94d89dc465c25e35b8202d1cffb1fd3a9ec740c56f76"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/domain-dual-plane",
+      "version_ref": {
+        "skill_version_uid": "skv_0MSFNH6W7FNQ49T9NQN9CGW5WM",
+        "version_record_digest": "c1a7a043f3682ba1f6fb91100a3c11015554b9a001973181ff615211a7e0e104"
+      }
+    },
+    {
+      "canonical_name": "dws",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "63654fc6031cf72bb51f8d51c509fba2688daccf0cdb2637a7e91891a17a743e",
+        "skill_identity_uid": "ski_7T59ZE37315644SBFSPF8KXDAC"
+      },
+      "instance_ref": {
+        "artifact_digest": "f08516d7f052496ddae4f62dfd989f2248e105e61993ddb79225f7e2042d6409",
+        "skill_instance_uid": "skinst_6QFH391ZZ5RX0J2H9A36CX5M6P"
+      },
+      "material": {
+        "byte_count": 2181951,
+        "content_digest": "ed2d6d544fd3d8042aca5e718b96afff5a03797955e79bec6361ae9626b9b7df",
+        "metadata_state": "VALID",
+        "regular_file_count": 149,
+        "symlink_alias_count": 0,
+        "tree_digest": "8335a6d6ab1b8649ff9930255e597c9b85819a68f670f3e9f0407c61b27c8378"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/dws",
+      "version_ref": {
+        "skill_version_uid": "skv_7C20FXJ52Q9G3N7EC3JACC6STC",
+        "version_record_digest": "f27b925602e80f890bd04f4f297727139a5ad2485357f48d414ced763295a141"
+      }
+    },
+    {
+      "canonical_name": "dynamic-personal-profile-update",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "da2eb395acc9f8f0f83a3cb255ccab8d3292b5a5165e4211036e143c365ed8a2",
+        "skill_identity_uid": "ski_0NBHP6PQGVR9K2A7D38Y23TC0Q"
+      },
+      "instance_ref": {
+        "artifact_digest": "1ec3254184cbb018743068b894e92874134525f6ca992932e76f32af946f3900",
+        "skill_instance_uid": "skinst_1TNWZD04JYZ17KQTG6RWKZ50FR"
+      },
+      "material": {
+        "byte_count": 65490,
+        "content_digest": "74630840e86208bd3e93daca1506440da39715d68fa768aef3b3c4bbb5489c2a",
+        "metadata_state": "VALID",
+        "regular_file_count": 9,
+        "symlink_alias_count": 0,
+        "tree_digest": "a0f8760f2296ae7a2b7eb419506956672d8940d42f11d5bf4482149141d3cd92"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/dynamic-personal-profile-update",
+      "version_ref": {
+        "skill_version_uid": "skv_1GPM9ATYSKER09RJ86Z237NTVJ",
+        "version_record_digest": "a3531870899c38c717881185737af9a611cb6c982ee92dbb18e91042fb30b70b"
+      }
+    },
+    {
+      "canonical_name": "frontend-slides",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "b53d19739d47d726da545cdd5890fae27d2b10cbb666c082ad0d44cbf863097e",
+        "skill_identity_uid": "ski_3VJ7AJS2665YP4AZ5ZKSYH4A0A"
+      },
+      "instance_ref": {
+        "artifact_digest": "1184c85e8e53e8a8c655ae338321131aee31b4c6ed906082ef17d813fc24a7d4",
+        "skill_instance_uid": "skinst_16Y7B1KWF9HJZW8KMH668962ZB"
+      },
+      "material": {
+        "byte_count": 1789264,
+        "content_digest": "4619b0fe15270c8969205f6f9bb705e2ceb08b2e69d7712c3da31a3d7e8131ad",
+        "metadata_state": "VALID",
+        "regular_file_count": 85,
+        "symlink_alias_count": 0,
+        "tree_digest": "973df83383d2be935132ecd5c4472aec97c2ebce57d7e1a19fe03241353a49f0"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/frontend-slides",
+      "version_ref": {
+        "skill_version_uid": "skv_2BZHGXQPAPXWYRHB41WW4NNTQG",
+        "version_record_digest": "1b305c48beda253b3702a9c886e4e8e9d4ee20c74c74314c18248f1d96a61802"
+      }
+    },
+    {
+      "canonical_name": "goal-to-delivery-sop",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "082a28c6aec85d7172c0a97b093a1f6a57d4313a0d077a701e31e330cf008d49",
+        "skill_identity_uid": "ski_3YJH74HRB9SAKRTWTKTAJHHTBV"
+      },
+      "instance_ref": {
+        "artifact_digest": "29568561012134d2d53ebc2bf7030f737f5bfd3956fb3dbd559316ae641ecf12",
+        "skill_instance_uid": "skinst_4CVVS1810EXBNKPQMNDVCKPEJZ"
+      },
+      "material": {
+        "byte_count": 7768,
+        "content_digest": "8d33c0cec78c3ac03106f706cc929619291780e5180e94cf4ccc51e7cb677c22",
+        "metadata_state": "VALID",
+        "regular_file_count": 2,
+        "symlink_alias_count": 0,
+        "tree_digest": "53f283ab5fa655e4ecfbaa08e947c79d9f1fe18641b5f610347192034d667004"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/goal-to-delivery-sop",
+      "version_ref": {
+        "skill_version_uid": "skv_0XN6FBE6MQNV74R3MSEZBJ266Y",
+        "version_record_digest": "56d6b7a8f1ff017ea9fd700baa858ec9cdb8900e8c8296de0f335a5cb21e22a1"
+      }
+    },
+    {
+      "canonical_name": "gongzi-fafang-biaozhun",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "c856b811c151160566b5bd329e8b08581cddb59f8f80c65859c27dfce5cfc141",
+        "skill_identity_uid": "ski_6YTSH02JPA3FDENECM8E7PXKP6"
+      },
+      "instance_ref": {
+        "artifact_digest": "767060425af9b9f11a89357fe4834b9a5b60d75078005136999787b6c8076359",
+        "skill_instance_uid": "skinst_0PEFEFC04TT4JJN7R7RMY8AEXM"
+      },
+      "material": {
+        "byte_count": 37884,
+        "content_digest": "3f5a264eae1605a1fea55401817870c84afaca496f1ec507c4fe320002043779",
+        "metadata_state": "VALID",
+        "regular_file_count": 3,
+        "symlink_alias_count": 0,
+        "tree_digest": "fbedd220b08307f1d507a0247e5ac5da451092bfe0eb9633f61b617d40f66b2e"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/gongzi-fafang-biaozhun",
+      "version_ref": {
+        "skill_version_uid": "skv_6CVCRSRMQNY8924WTTET2YRC67",
+        "version_record_digest": "c52acd13e7faf087539c8b6ea1a2940a3f51087ed3b1cf577e0d491a9584dd62"
+      }
+    },
+    {
+      "canonical_name": "gpt-tasteskill",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "1f3702f1027a9ae0d074d4063d9170c3b8bd054c730a82d1328e9f7a277e5a5a",
+        "skill_identity_uid": "ski_35M264ZX7D0AKN7Q85JPQBYZN5"
+      },
+      "instance_ref": {
+        "artifact_digest": "8c94f380298ca5f826207846484e8618157f04d1f2cfb1911f4789577c5b5d9a",
+        "skill_instance_uid": "skinst_0V4JJFK146QPD7HEW3V9XGJFB2"
+      },
+      "material": {
+        "byte_count": 7857,
+        "content_digest": "23a778ae12d32f755ed55b9250c54d3da5bcd8fd8feb6c4f3dbd1902ebb4f473",
+        "metadata_state": "VALID",
+        "regular_file_count": 1,
+        "symlink_alias_count": 0,
+        "tree_digest": "1aeabfad86e9949f842e9551608dd024833dc2fc22d4352c826b03e536c54956"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/gpt-tasteskill",
+      "version_ref": {
+        "skill_version_uid": "skv_6GYKTGMZ3GED9P839E9MDCQHE1",
+        "version_record_digest": "54f26dea8947a1f471dadafe3be3712c962733f16de8ec7c9616752a530461b0"
+      }
+    },
+    {
+      "canonical_name": "graphify",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "b621bfbd1936e0627aaeafb598d98b215a0f630a5d8580fb95eb7a812118729f",
+        "skill_identity_uid": "ski_6S80WMK31482H77RAW8DT45WZ3"
+      },
+      "instance_ref": {
+        "artifact_digest": "5255648aa5c562d6d6d2739b81ab16a7faf6813b2caa1a132911a04ec5738999",
+        "skill_instance_uid": "skinst_3FH10TTMYECRMDSN8S10YDEFE7"
+      },
+      "material": {
+        "byte_count": 13360073,
+        "content_digest": "be083b55ccaa1eae1ee2772ba81b16d71945c359ed2bb684bfd0bd5307a87a20",
+        "metadata_state": "VALID",
+        "regular_file_count": 690,
+        "symlink_alias_count": 0,
+        "tree_digest": "b15513a0b3c1f144d85d5407cf1239f4372f749558c687a1d11b06b62dda965f"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/graphify",
+      "version_ref": {
+        "skill_version_uid": "skv_2EA5FCEM36MM7GERWEEB42JZKS",
+        "version_record_digest": "6891b08a985fc7517376d125ef28abf8587d93658ff0c1d6b9c18d8b3bcf5628"
+      }
+    },
+    {
+      "canonical_name": "gsap-core",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "3b666d62359cf0551b588bf223080e3d5c4e1e8b45c343f5d170c311f3b64bd0",
+        "skill_identity_uid": "ski_3H1MX5KCBMNK5EK1A2MMP7MBAX"
+      },
+      "instance_ref": {
+        "artifact_digest": "043d4edd033212dd261caca92c254029a0bfd96c0b2e5846ba19bb3ec327bc56",
+        "skill_instance_uid": "skinst_6WYJFJ8SDYD7JFKT6XP47TRD7B"
+      },
+      "material": {
+        "byte_count": 160617,
+        "content_digest": "4e9aaac858fe4a67a103e6e7c8219cbbf8176cdb43b615ee1edf8488c607a23f",
+        "metadata_state": "VALID",
+        "regular_file_count": 44,
+        "symlink_alias_count": 0,
+        "tree_digest": "cdb6df0619ff7b40da2bb6e8831e975c5990ca37f6c0c7ea2eb17d258386789c"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/gsap-core",
+      "version_ref": {
+        "skill_version_uid": "skv_0AZX68JBW25PTXVGCQTMA93PSZ",
+        "version_record_digest": "d0fbda4536fe26bc67bdff64af24b7577c81bd12b3688d0246f3b769ff0e46c5"
+      }
+    },
+    {
+      "canonical_name": "gsap-frameworks",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "8b1fa91406fa1c6d1b2524a54dbe4a09bf8bad139dedb5ed720b90e2f0081694",
+        "skill_identity_uid": "ski_5X6TNS2E73TAMMWNSWQKCQ9S16"
+      },
+      "instance_ref": {
+        "artifact_digest": "5164599e95254e5e286b6af5b0b022d5850b1a9cfd59877923fd197d18903c14",
+        "skill_instance_uid": "skinst_0WJG6WD6C83WFJQV0D26HQH82G"
+      },
+      "material": {
+        "byte_count": 156473,
+        "content_digest": "e29323c6e2518228ddedb3b647f4671cbdf994e72794b629103ee0daf14ec9eb",
+        "metadata_state": "VALID",
+        "regular_file_count": 44,
+        "symlink_alias_count": 0,
+        "tree_digest": "60d13ff1bbcdc1c01d85993b2fd8347ed74ffeeec8292b3c92ac696b4db136c0"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/gsap-frameworks",
+      "version_ref": {
+        "skill_version_uid": "skv_3S4ZC8SZ92P7JW9AQGGAN8C0VX",
+        "version_record_digest": "5e44d0d7ff04fd60c509b739f1777e97851d921d2636eed716caa3ab18eec06a"
+      }
+    },
+    {
+      "canonical_name": "gsap-performance",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "eca1b82e031d3c2fb578adf0c545b7d702267b1f79542841ac05842f006e17e5",
+        "skill_identity_uid": "ski_6T5AH3D0VFMPVYPX6KP69JZ873"
+      },
+      "instance_ref": {
+        "artifact_digest": "f015637d832542d2f639c0e537a0c5e10b34ae79f100694ed516a614ac67f53a",
+        "skill_instance_uid": "skinst_5JM27SHK7S8KY1338PF8DEEMJN"
+      },
+      "material": {
+        "byte_count": 149986,
+        "content_digest": "21335eae6db76c1adb1517a25684fed477b91073b1304532ef57cea7cf3d6556",
+        "metadata_state": "VALID",
+        "regular_file_count": 44,
+        "symlink_alias_count": 0,
+        "tree_digest": "ca6418346497bb8bebf748038590c75b7cb98af8e13489b3edee14a7c5a1b7fc"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/gsap-performance",
+      "version_ref": {
+        "skill_version_uid": "skv_4ADDXNJWXT18HMZQW7EFK1W04Y",
+        "version_record_digest": "4f5e3695da76bcf15cee93721c3ab088fad186c3ac9d4d056873b5f8438ce88d"
+      }
+    },
+    {
+      "canonical_name": "gsap-plugins",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "3eb73935071b46c966a5918de6d4781e6c0ab11c85ff7619c080e6336911b0fe",
+        "skill_identity_uid": "ski_675DD4ZFEEK8NRGTC3ZQFEDGEE"
+      },
+      "instance_ref": {
+        "artifact_digest": "012b0e5a5945e9c3483a45e8c43eda18a8e7aae57ad6d47e189ea7b7d76ed486",
+        "skill_instance_uid": "skinst_1Z6X7SB37NJ3CPYF7M7HC4VTC6"
+      },
+      "material": {
+        "byte_count": 167437,
+        "content_digest": "863312b4f0a190ed1995ffda5172ca93d77da2a8772a53a4ade7c534904ddf20",
+        "metadata_state": "VALID",
+        "regular_file_count": 44,
+        "symlink_alias_count": 0,
+        "tree_digest": "40a7ce8e6703490aee7b733c23ad6e5c9f068fdfce262b3312e7fab54d987fe8"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/gsap-plugins",
+      "version_ref": {
+        "skill_version_uid": "skv_4YQB9G0P1X0GW8N91K4NVRWPWW",
+        "version_record_digest": "1c08aa22efdb21ec6d48a96a005e224bf34487dbc40dc76b27d1ef7e4facbe4e"
+      }
+    },
+    {
+      "canonical_name": "gsap-react",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "a0bfab0859f6734f52206df61b96313a524865d93c25cf2e3fca10296ad0b6da",
+        "skill_identity_uid": "ski_302K147CJKHXQ4NKPCYH4P3MNF"
+      },
+      "instance_ref": {
+        "artifact_digest": "fc8f70bb1a532cd169a010ce04f183c2cab3189e1cfbab3695458dd0968a8766",
+        "skill_instance_uid": "skinst_64CTANBVNBE32ZG9EQTHTDC3NF"
+      },
+      "material": {
+        "byte_count": 152392,
+        "content_digest": "54f812571e977918ea8efbf4074433497c09fd7e700c2553e4ea3d43cd5f30cf",
+        "metadata_state": "VALID",
+        "regular_file_count": 44,
+        "symlink_alias_count": 0,
+        "tree_digest": "000ae96e24960560a1f6ab1079e4efb835d69e191541f0ca01f0a645a2856554"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/gsap-react",
+      "version_ref": {
+        "skill_version_uid": "skv_5XYDSVFWBSMGWHFD58SDCT6Z88",
+        "version_record_digest": "9f32641425fd4fceb3697d940dcd1a434aa3ebc18b43f258dfafb2c07e0a016f"
+      }
+    },
+    {
+      "canonical_name": "gsap-scrolltrigger",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "db4c0be36d73f40bf59bf70d8cf651a77092376db1e37c0af4d5dab019a189a2",
+        "skill_identity_uid": "ski_6QDDBHYV1PHYHA3F64PZBC87BY"
+      },
+      "instance_ref": {
+        "artifact_digest": "4a5ee74a52e0214f47157fd462b4b1c774351fc6283faa825a3cb7b1c521c91f",
+        "skill_instance_uid": "skinst_4Q9C3BJKMH4B3G3EY2NGG094X1"
+      },
+      "material": {
+        "byte_count": 164250,
+        "content_digest": "fb546ff2196dbb38e1fccb9362626953f0feb3a0e825a3008a23db0263346450",
+        "metadata_state": "VALID",
+        "regular_file_count": 44,
+        "symlink_alias_count": 0,
+        "tree_digest": "9e866447c999c242f6807d01170c301b9972dcf85ddd36e008bb13b2e6c85b6d"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/gsap-scrolltrigger",
+      "version_ref": {
+        "skill_version_uid": "skv_21VZ7ZBZRGKYP8MPPA7C89635X",
+        "version_record_digest": "44abc601077fba9bc6c8766c2594fd279b419159327b170ab57fd5a2ba294e0b"
+      }
+    },
+    {
+      "canonical_name": "gsap-skills",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "bda8e51d452d764c58f141f185bc0c38b07fbf94e5156df1c2ebbbc5ed05236d",
+        "skill_identity_uid": "ski_41YD2Z67KBG0Z6Y3XE7CPNN7VW"
+      },
+      "instance_ref": {
+        "artifact_digest": "2d82777b575a3786a28949364c1d0b321316325f0193646b0744f54ca40086ec",
+        "skill_instance_uid": "skinst_1HVWFY2EAC2V90X1FC0E3D200Q"
+      },
+      "material": {
+        "byte_count": 147510,
+        "content_digest": "74a3e95ad2570ee1bfa9a8999fd5be7a1ebf8d83ac5fd9ece62e6f888d93a7f7",
+        "metadata_state": "VALID",
+        "regular_file_count": 44,
+        "symlink_alias_count": 0,
+        "tree_digest": "96dceca4fded8367721200c6e12d8ec2bec40b08e49fa115093c07eeb0771bcf"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/gsap-skills",
+      "version_ref": {
+        "skill_version_uid": "skv_2E1BF5RPQG009YYMGWPQ4K5XNA",
+        "version_record_digest": "1cfe8befb5a83c32e7f681c55a4feaf8fbe045c8e543facd68e398852895f030"
+      }
+    },
+    {
+      "canonical_name": "gsap-timeline",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "d0caad7e393ddbd28f3915cd647a245d318c64bca9d31c9e3473eb2ce7b73a47",
+        "skill_identity_uid": "ski_765WX0HYJ9317R99QEFWPETKX9"
+      },
+      "instance_ref": {
+        "artifact_digest": "74f7000c78b43af81aa3138403d387e6b3227cf8b7b5a908c6ed84b4332542e8",
+        "skill_instance_uid": "skinst_40FE05TKFVWBMW7CPV6YNJVBZR"
+      },
+      "material": {
+        "byte_count": 150221,
+        "content_digest": "79fd0fdefbbcfbba77ee9667ca3085cc42ecb31f54e3d993837dcace95ecb4d2",
+        "metadata_state": "VALID",
+        "regular_file_count": 44,
+        "symlink_alias_count": 0,
+        "tree_digest": "fe3b127b25a4d1d535143aa5261fa35a7400e70c68d8f6bf30abfeb985dbed03"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/gsap-timeline",
+      "version_ref": {
+        "skill_version_uid": "skv_10F78GW9KWT9WMBSTAY7DD34TZ",
+        "version_record_digest": "7d1181286bb91de21ebed34cfce7e3a3eeb8da6357ff2e7d7b92ce4bbf84fb2f"
+      }
+    },
+    {
+      "canonical_name": "gsap-utils",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "677fdf86a69ca47660b9c4e8ad80b5e6d5d90bd10373d3fa1b6a50bc9da0e8e6",
+        "skill_identity_uid": "ski_60E8EWKCPDX5ASQCW8MTVNZWE1"
+      },
+      "instance_ref": {
+        "artifact_digest": "770e152f981d9cb546d90d1b8b87b0b965a106aa354987df7e8d69e521a17f53",
+        "skill_instance_uid": "skinst_6FS1M79ED17T54V28D80AK6PMW"
+      },
+      "material": {
+        "byte_count": 157921,
+        "content_digest": "41859440abb69ee3f466691d1cd1511d95b46c5cc93d146d4f5fe56d23a63d5c",
+        "metadata_state": "VALID",
+        "regular_file_count": 44,
+        "symlink_alias_count": 0,
+        "tree_digest": "1753bbc432f8e2fbdcd7cfd6e36a8d565215b6d3e66755f5ecaaa8e6c32f2472"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/gsap-utils",
+      "version_ref": {
+        "skill_version_uid": "skv_707A9VZHGY3KFKVCVATNZJRNKR",
+        "version_record_digest": "afef28dd1ece8dbf9a71f9594a6e392f7071ad26ab8cf171d05feea2024ae691"
+      }
+    },
+    {
+      "canonical_name": "guizang-ppt-skill",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "edc3c1c979b8d4a332609de5d297c9c9adcda07380da5d194012d51db600b850",
+        "skill_identity_uid": "ski_1698SKTCZRCW126QX7XM3M7Y11"
+      },
+      "instance_ref": {
+        "artifact_digest": "6e49ec0bf6d4f46b0bc42a38fe0f3aaed85ec344086a8474ae8b08e77ab11f7f",
+        "skill_instance_uid": "skinst_6WRG5AGFRSX3Y50AQK9Q26AJG1"
+      },
+      "material": {
+        "byte_count": 2330298,
+        "content_digest": "b06a3adf9c08b3dd7f1ca2f9a0097b8d8b02e1bf0c1039a0e590e424f76e9bad",
+        "metadata_state": "VALID",
+        "regular_file_count": 37,
+        "symlink_alias_count": 0,
+        "tree_digest": "88653b13990a5086df0340f651adaac6dd0c998eebe7acd421a347dde1c110ec"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/guizang-ppt-skill",
+      "version_ref": {
+        "skill_version_uid": "skv_709MM120SKCRRF1C49J63Q7D0Q",
+        "version_record_digest": "5cf0b002785b93776bea56b771d46d6f28ceedeb495a795e134ebda851ad2d92"
+      }
+    },
+    {
+      "canonical_name": "hatch-pet",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "7427584151134b9c78ad7847bc4e4f4db5dfe97671317631c0b61208d62de853",
+        "skill_identity_uid": "ski_0QP84PP5YNAJF6QG76DK78NEWX"
+      },
+      "instance_ref": {
+        "artifact_digest": "426b4aca3a346e291ebda60058a0d6e83b606dafbd0fc99a90aea65610d4480b",
+        "skill_instance_uid": "skinst_2ZKB2CBZAM42W23TACZPR26RRC"
+      },
+      "material": {
+        "byte_count": 298506,
+        "content_digest": "dac0ee3a0a7776bacf2201aed48c33428750aba171cc5a025641ab7409f49f29",
+        "metadata_state": "VALID",
+        "regular_file_count": 29,
+        "symlink_alias_count": 0,
+        "tree_digest": "2f3e724ea8147675736c61ac315e6170f3127651ace46f622a4bd85d0cb583bf"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/hatch-pet",
+      "version_ref": {
+        "skill_version_uid": "skv_2W20E4NY60ZBVHMFSVP44PBBBQ",
+        "version_record_digest": "7e76c23bc3d07ea808fc055747c6212a1c6673676a57d3fea55c9abe89611b2c"
+      }
+    },
+    {
+      "canonical_name": "hongquan-main-contract-dws",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "3c2074e155bda288e506f15e1c1ecc33d8de8cb5eeb22b4aec7d693c8e642b1b",
+        "skill_identity_uid": "ski_1KY2HEXCA6WDK6BTEAYNB0QBCJ"
+      },
+      "instance_ref": {
+        "artifact_digest": "4377a63d98a5fdaaf0c6830c2622cd0465d026ff990a88afca3282a7c1af1193",
+        "skill_instance_uid": "skinst_5VWNE8XS45SZ07P73F28WTCGEQ"
+      },
+      "material": {
+        "byte_count": 6100,
+        "content_digest": "6c6439dc4a4fff6bf7b1b50bf8078e39b166d94f4cb0afbbe45063060e5ff89c",
+        "metadata_state": "VALID",
+        "regular_file_count": 2,
+        "symlink_alias_count": 0,
+        "tree_digest": "ecaec260755a20f2b079e81ca5db751457c12bbd8729cbafb06e8bb809369c89"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/hongquan-main-contract-dws",
+      "version_ref": {
+        "skill_version_uid": "skv_6TFK685Z7DEMEJSK3AY51VH76N",
+        "version_record_digest": "846d93abc91e92552d39287989577e910bc702e30c8c09ea14f33cbfd25fe0b5"
+      }
+    },
+    {
+      "canonical_name": "html-anything",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "ac781ee613c9a63544173b7ab74c05651d7d1ed3a0710786e6712ee9e6a1b91a",
+        "skill_identity_uid": "ski_0R9M7HPXPGJ33FRNT13C4NTB4X"
+      },
+      "instance_ref": {
+        "artifact_digest": "057de28c0b6a3ae09ca1993102783161d7404b5a41a293d34054a0aac282b1ff",
+        "skill_instance_uid": "skinst_11TZZFB0G1CG2V11FPTNJ4RACV"
+      },
+      "material": {
+        "byte_count": 17554463,
+        "content_digest": "883db99b56e2d65a06d748bb94ee61aadcec176945b2df2d25f337f646718787",
+        "metadata_state": "VALID",
+        "regular_file_count": 377,
+        "symlink_alias_count": 0,
+        "tree_digest": "fb3e52efe6d9d0e66d5670d5ab2b03552836b28f14809261fb3a83c1d1a43c68"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/html-anything",
+      "version_ref": {
+        "skill_version_uid": "skv_0W8Q98QKHGMMFAC8CP364ER64R",
+        "version_record_digest": "48475343a76d758f4b809edb68f32a0781fe896b35d2c0c55679a64772162ab8"
+      }
+    },
+    {
+      "canonical_name": "image-enhancer",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "e2c75374e32c8754a14d70621b25b10fed20655a758d0650d48ff2da70cefd88",
+        "skill_identity_uid": "ski_2DTJ4PPSYQXTT5YXXT9YF8P629"
+      },
+      "instance_ref": {
+        "artifact_digest": "ef3a4aeaab4e2c387eb1edf1f00bb6cfe188c8205c6d2f7c0fa3abb36934134e",
+        "skill_instance_uid": "skinst_0FEFVNMS91N3EK3KZYX22ZQN8W"
+      },
+      "material": {
+        "byte_count": 2540,
+        "content_digest": "7751991f12b092e296b789fc1fafa3dfde219c63eb071ea3d731d2f0f5f3b33f",
+        "metadata_state": "VALID",
+        "regular_file_count": 1,
+        "symlink_alias_count": 0,
+        "tree_digest": "12cabc0af4f12037e9013fc85f974262fd80afd98c2d1c1c42f401d6686b9251"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/image-enhancer",
+      "version_ref": {
+        "skill_version_uid": "skv_1F0RGHVRAAPS87F6JJ2PEYGRHV",
+        "version_record_digest": "209c35511af61924ac748767656fbdbd7120c9bf658039f744056b4dc2305d84"
+      }
+    },
+    {
+      "canonical_name": "info-fee-update",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "d9bf5da0043973c17eef82e2870c944ec0465c7ddc9c669bd658cc434fb1236e",
+        "skill_identity_uid": "ski_7PKPAYPBMMZ6DP02JA19DZZ9TJ"
+      },
+      "instance_ref": {
+        "artifact_digest": "7029ed9c6fdb315092ca4c1dbc5f402fc3a93513faa0a63baf218e7897f0321e",
+        "skill_instance_uid": "skinst_3Z6HTB2N65743V1GM2GVT2X0GM"
+      },
+      "material": {
+        "byte_count": 10403,
+        "content_digest": "d3e772d6775f32d9ead2bd7c0c9626e806971be51ea8f1e5914f349464835e78",
+        "metadata_state": "VALID",
+        "regular_file_count": 2,
+        "symlink_alias_count": 0,
+        "tree_digest": "5a0c63ce01411517e2a7736257e2583155c8195189f3263edf3a31cfc0943c46"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/info-fee-update",
+      "version_ref": {
+        "skill_version_uid": "skv_0KKWPE1V0X1R8DWXN1WEMR8AYS",
+        "version_record_digest": "827eca1f234d190338dfc9703a199f617fc19c6063cf1db60b0f1fd93401b33a"
+      }
+    },
+    {
+      "canonical_name": "internal-comms",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "81dc76c6c4f8b2a8537df343bfd7208599e5ca9eff9ba3898976852e10cbe201",
+        "skill_identity_uid": "ski_1P8SJZGJZPBNNCW27KWQZ6QB55"
+      },
+      "instance_ref": {
+        "artifact_digest": "bda21ccde06447ce76b2122fc11944e441d70f12a96ae52bdcabb8f843fcbc5f",
+        "skill_instance_uid": "skinst_07WZ8234EB9MTH9ANG5SZ7DTKK"
+      },
+      "material": {
+        "byte_count": 22405,
+        "content_digest": "02a46a04fd76394aed9cf3088ad51995eb24249efa1460be075fd0246625d97e",
+        "metadata_state": "VALID",
+        "regular_file_count": 6,
+        "symlink_alias_count": 0,
+        "tree_digest": "e7e54c36c5e99759bad9e6024984ccd6c0ee6efb7dd17ed1d546cfa14420d5c5"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/internal-comms",
+      "version_ref": {
+        "skill_version_uid": "skv_42MF2G559WH989JR7823TGRPKG",
+        "version_record_digest": "0f0bc298ba1f8ec67d98979b4eda487b5dc5f2a40d4d625d0e81285183ca9c63"
+      }
+    },
+    {
+      "canonical_name": "km-bid-adjudicate",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "95c7dd207b826ee938e64a1fa6175deedcf7bcc720f88d3cb13bd9d356362eb3",
+        "skill_identity_uid": "ski_1NKSDGMQWZNHNHC177HCG5RPQ2"
+      },
+      "instance_ref": {
+        "artifact_digest": "fbef75ce896077698e609347b64485929b734efdbcf27cf585b99bdcd4c46d7f",
+        "skill_instance_uid": "skinst_3KZ7MS12T10R29F3YN9ACZRJFS"
+      },
+      "material": {
+        "byte_count": 5987,
+        "content_digest": "92856ead97ab89eda6efa510bfa2fee22a0ea5ee66e93b6c55ee6ee0702e0450",
+        "metadata_state": "VALID",
+        "regular_file_count": 6,
+        "symlink_alias_count": 0,
+        "tree_digest": "82ff0554efb90bca07624c979abcfeca88764b715b95a18c21aed3657eff9daf"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/km-bid-adjudicate",
+      "version_ref": {
+        "skill_version_uid": "skv_2Z4MRREN481Z6XHWFVYTW0QAY8",
+        "version_record_digest": "26cf16352f2a619b2b3f804788e16845a1726ab9984d9828bb6f67fc27c653ba"
+      }
+    },
+    {
+      "canonical_name": "km-bid-audit",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "892ecf740c12718952156f4c0b9c2e77ad6eaaf5d269bb4b32b01f93b18b5235",
+        "skill_identity_uid": "ski_37MN09Z3KB6DVC73G46DZNWZ2B"
+      },
+      "instance_ref": {
+        "artifact_digest": "3a72290a36bac7bbe8e776eef4c620f4430b27a1c8745dbb45c91a99ccd70142",
+        "skill_instance_uid": "skinst_1Y2NRV8T38XD6RRD2XEA8T4V89"
+      },
+      "material": {
+        "byte_count": 4853,
+        "content_digest": "62398063006d0fd5cd89896a498fc73511840ad8db6b9c1c1f9fd9c9011c0ec1",
+        "metadata_state": "VALID",
+        "regular_file_count": 6,
+        "symlink_alias_count": 0,
+        "tree_digest": "c35ee1e5effa55d143396a0576f9b109ca7b31fadc8cf935535869e06a32e5d9"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/km-bid-audit",
+      "version_ref": {
+        "skill_version_uid": "skv_7HTN8J1WJN99TXE8RJ8QE5BFZH",
+        "version_record_digest": "0713dff19c12984fc15820ba95cc95b2b0a5d02fb0d8c57534fc93db10cae0cb"
+      }
+    },
+    {
+      "canonical_name": "km-bid-brief",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "870b07cda78208317137568d1ff96b99861296d0fbe915f50851aa7b6dff2511",
+        "skill_identity_uid": "ski_38DMQ5VHKTX07RA803H7V0XNDG"
+      },
+      "instance_ref": {
+        "artifact_digest": "7d3858463ec770c9d7a2f65f2cb9c9cfd63039bfbdff057ebce231ae29f37981",
+        "skill_instance_uid": "skinst_31NBJ4QEPSW3AHET7QZ6PTZ8G4"
+      },
+      "material": {
+        "byte_count": 6381,
+        "content_digest": "f14ad8fde583cbf7068e6549a2b5f084b4b76a7a3b35b3c762a8d0d4ed97103e",
+        "metadata_state": "VALID",
+        "regular_file_count": 6,
+        "symlink_alias_count": 0,
+        "tree_digest": "e6d2b4688f0bb0ce97bbdc4329d8114d9bb004f8bc41698d4c95e775bcac7fb9"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/km-bid-brief",
+      "version_ref": {
+        "skill_version_uid": "skv_3YH8A5GATQD873N6GJCN3553NX",
+        "version_record_digest": "9b63ba0c22f699a2b2ec2296460266d6da15cf295c667b8db1ae92ff80bff1e9"
+      }
+    },
+    {
+      "canonical_name": "km-bid-discover",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "32b524c657d3c1ed0ec1ff746ded1162f2406f05257c3a755b965ae0196b6853",
+        "skill_identity_uid": "ski_4CDQ4PY8H621BGX4WXRQ8GNWG0"
+      },
+      "instance_ref": {
+        "artifact_digest": "b68333d95d4c7a11ee30110d0df70527108f3d7a22489ae2e79fdacd04c31632",
+        "skill_instance_uid": "skinst_51BRJ63NCAWNN0A2ECBB0YK4VY"
+      },
+      "material": {
+        "byte_count": 7340,
+        "content_digest": "be08f72922c785fd6651046109c80568c7cbada42785226f74a39d2f4dddd0cd",
+        "metadata_state": "VALID",
+        "regular_file_count": 6,
+        "symlink_alias_count": 0,
+        "tree_digest": "de12c4a502b0744d7c9c1a343bf064b2f7041d3d43da660867da85d35d829638"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/km-bid-discover",
+      "version_ref": {
+        "skill_version_uid": "skv_60A4TK4EG21BDSK2CS96X625XA",
+        "version_record_digest": "51e87a3045004b2e4a4a27aa5de3362e255e21e6803d325f9c2e38ada6622c7e"
+      }
+    },
+    {
+      "canonical_name": "km-bid-evidence",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "aaeb2925ea932353b1c24418122d91872675f639dc6a02871d29db2c61a7442f",
+        "skill_identity_uid": "ski_3M4R9BP4699K45F6CBTBY50DGX"
+      },
+      "instance_ref": {
+        "artifact_digest": "4b5bea77bc02a36860151849ff1086725b70cf33890cd1a1f79c4e63f5a85c99",
+        "skill_instance_uid": "skinst_63XKM0AHDC799XNE60YE43J7QR"
+      },
+      "material": {
+        "byte_count": 7080,
+        "content_digest": "44543d4481f582339283384dc5dafa462f9d014a272d2609e5735ce9d8fd332b",
+        "metadata_state": "VALID",
+        "regular_file_count": 6,
+        "symlink_alias_count": 0,
+        "tree_digest": "9053f4bd0b42751798ef6656eb52597dbc3ceeb88289b76a0d54d3e63818c78a"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/km-bid-evidence",
+      "version_ref": {
+        "skill_version_uid": "skv_59GPDZTCKMCGSWQ67PVFNFKH9S",
+        "version_record_digest": "a5c6949db578f3b862dc3f8d025af0dc6329b282a75e842a230caf9f5ee231e4"
+      }
+    },
+    {
+      "canonical_name": "km-bid-evolve",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "07f44e893b428c2d97ababe7105acef3c034eac92262c6e7058cefe942db5fcd",
+        "skill_identity_uid": "ski_58AKTHBW3VQE0B7JM8WC6M1VPP"
+      },
+      "instance_ref": {
+        "artifact_digest": "c1a6f3bab9321b6445d639d8ef36ed65057fb5fa9987972efbd79e0e20407a55",
+        "skill_instance_uid": "skinst_7DJPEH0R7E7BHQ5Q7GNTM72TMV"
+      },
+      "material": {
+        "byte_count": 6352,
+        "content_digest": "ac806c58f8e23001b16387a63dcabe40763a43fe745e4924fb58a8b2571cbe87",
+        "metadata_state": "VALID",
+        "regular_file_count": 6,
+        "symlink_alias_count": 0,
+        "tree_digest": "c79e03e6b10f68ec751bedb167fc019b1eff4858d3a04b9fc88d0c3f4d06d19d"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/km-bid-evolve",
+      "version_ref": {
+        "skill_version_uid": "skv_2HAJG2J7C1R3FFX194NRARWNKG",
+        "version_record_digest": "b803ac74da95476fc37c77757fa3c1a1940fcc7ac4d3fd27f9d12f8966388593"
+      }
+    },
+    {
+      "canonical_name": "km-bid-lifecycle",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "55bcdfdaf42ac143bc617b1d5fc03bc35185761667b4a9e824cab7cd205e7fbb",
+        "skill_identity_uid": "ski_04KQ9VQNRK3E10WXA6QXJE7XW0"
+      },
+      "instance_ref": {
+        "artifact_digest": "c018dc38f1062d16e49e7d0c72230c2228398d3e9ce36944152e44c7edb859bf",
+        "skill_instance_uid": "skinst_7Z40YAANXBP02KT5Q4BPJJCS5A"
+      },
+      "material": {
+        "byte_count": 8315,
+        "content_digest": "ef26b8d9d8d92c45dff96726c0096cbdb68cf487185a5df5af590fa7428a8cd5",
+        "metadata_state": "VALID",
+        "regular_file_count": 6,
+        "symlink_alias_count": 0,
+        "tree_digest": "9daaa267901540b5eba292262cdf671d17804fcd3373f80f6778bc6ec394ea8e"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/km-bid-lifecycle",
+      "version_ref": {
+        "skill_version_uid": "skv_2CW788BR0DGG5Q2ERQEXS66FXF",
+        "version_record_digest": "2005e2b6b2c1d50a1fdd7ef318fefecfc9e9e2bae8ad5eed0b1c2dafc9989879"
+      }
+    },
+    {
+      "canonical_name": "km-bid-qualify",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "652cb0bed6afaf404bcd48a14f543c207ae225bf0f1c5b7bb8c63ef3e09d34eb",
+        "skill_identity_uid": "ski_49ER3H6PRQY0CCVK700YSYAV2Z"
+      },
+      "instance_ref": {
+        "artifact_digest": "308343f32ffef19bc5b840730f91785df0b580a05529611c8a0d6b84bef65e8f",
+        "skill_instance_uid": "skinst_105EE8A45P93C74MEC52AJZQYT"
+      },
+      "material": {
+        "byte_count": 6180,
+        "content_digest": "5842c31515128f0bd59fed58956ad7d8915c1802a53eb9a9b6050c7e9d7dd9cd",
+        "metadata_state": "VALID",
+        "regular_file_count": 6,
+        "symlink_alias_count": 0,
+        "tree_digest": "47d640b2795407f3204ab6666ed51a41f0b6235826dc55c6202e3686611e1d4b"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/km-bid-qualify",
+      "version_ref": {
+        "skill_version_uid": "skv_2M7FY3NQ1CAW91DRNB46YVKPZY",
+        "version_record_digest": "10e9e9a19e07d167380e60d911cfb2627848b02519bb66547db4c4a668af1702"
+      }
+    },
+    {
+      "canonical_name": "km-bid-scout",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "958e22e8aa8dfb400f3fe120b2d2eead75f7d8ef3db82af7c8b31afc4a851635",
+        "skill_identity_uid": "ski_50547YVQ6YXS44BE9TDWC2XCX5"
+      },
+      "instance_ref": {
+        "artifact_digest": "126823577ba0dbe5aae3fb55589eb0797c70d04c8c9191b627847cd54c4419d1",
+        "skill_instance_uid": "skinst_7HNHVJN3P886NCQ2FT5V28KXQF"
+      },
+      "material": {
+        "byte_count": 22030,
+        "content_digest": "019d6da640c804a21f18def256e544c98d91f9c34def5ee1ea7a4a6105e565e0",
+        "metadata_state": "VALID",
+        "regular_file_count": 8,
+        "symlink_alias_count": 0,
+        "tree_digest": "b40027ed6312d4c3aefa7a021843be9e6b31b4b78b58e06abfa2305c15732ee2"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/km-bid-scout",
+      "version_ref": {
+        "skill_version_uid": "skv_06TN1DZQ25MYAA7Q0CKZC9TBTN",
+        "version_record_digest": "22d19bf6850b9eb0328d998a26897ae90c60f447b32547f21dab2277cfc6d2c4"
+      }
+    },
+    {
+      "canonical_name": "last30days",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "d385f0c0a05cbf8a3d894e537f6b1334f81c68ba03d9863b021d11de429708b8",
+        "skill_identity_uid": "ski_6WT8ENCGJ39X0RXAVJP156JEGA"
+      },
+      "instance_ref": {
+        "artifact_digest": "d9f9e3dececab253b3d67f127b5662eb7aeddbb1f115bebf0e9a0439934b00ef",
+        "skill_instance_uid": "skinst_1EFGCKXHGHHAMZNB53JBAK0MCD"
+      },
+      "material": {
+        "byte_count": 16106096,
+        "content_digest": "880384b2132981ae15d42a12acac392750b8917d15463d7903dcbc0f50faeeaf",
+        "metadata_state": "VALID",
+        "regular_file_count": 114,
+        "symlink_alias_count": 0,
+        "tree_digest": "8f9ca4de5a3c7d19c31c05ca1471eebe3749d6dcc286e4a4c0eb23f8f394ba8c"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/last30days",
+      "version_ref": {
+        "skill_version_uid": "skv_1C39FJ13BPV4HVZT1QDQ1A7C5B",
+        "version_record_digest": "721b81be82f2435c9a45cf278ef72583d021fb612c2da59f6da8f77ef85b22ea"
+      }
+    },
+    {
+      "canonical_name": "mcp-builder",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "067c16cbe9e6fd7f63d67039cb899d88f815c2e10610d935883204474be0ed57",
+        "skill_identity_uid": "ski_419SYK9JD1RRS949GBM78GW5Y8"
+      },
+      "instance_ref": {
+        "artifact_digest": "069b4adbc6e3dcd40addc1863109248bf64c222ece42f14ff57fec3787578a3e",
+        "skill_instance_uid": "skinst_2HCC5V5HXSP2XBM9PCY9P5D75R"
+      },
+      "material": {
+        "byte_count": 147050,
+        "content_digest": "49f90bd518e22c25c03dd3b7b52c6aba185e6f0c9b21d77d4042552fbc959af1",
+        "metadata_state": "VALID",
+        "regular_file_count": 10,
+        "symlink_alias_count": 0,
+        "tree_digest": "8dde6d62f218b782e49e3fabe76e1f920ebc6925917e36f89475e0ce60197137"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/mcp-builder",
+      "version_ref": {
+        "skill_version_uid": "skv_6N5QW31ZSSESSYQ95NQVN48SJ3",
+        "version_record_digest": "811b6e941c9e2b578cd4b1727168b2a3ba30d36e4a11bf0895d6e8630cdca766"
+      }
+    },
+    {
+      "canonical_name": "output-skill",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "47bb08a00e101420c5021fd2d48951cdc5bd4a8fac5b1feec8d1fe5763c135a9",
+        "skill_identity_uid": "ski_4RZXS44E50T55HH7K674QH3Q6W"
+      },
+      "instance_ref": {
+        "artifact_digest": "77dc8eff1a8efaf2e52dd1c44aef6922c5c0eeebe8a665aeec7845a1f00273f0",
+        "skill_instance_uid": "skinst_5S4S01M8C5V7V34MQQX0W9AH8F"
+      },
+      "material": {
+        "byte_count": 2592,
+        "content_digest": "90d4824c5518dda220ba9af2cbfa6f41db33ef75145333c27e8149566348bd98",
+        "metadata_state": "VALID",
+        "regular_file_count": 1,
+        "symlink_alias_count": 0,
+        "tree_digest": "afdd9094fec1f49b2304f21dad9cd47f00eb6c652aee800efe808bbcca60a368"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/output-skill",
+      "version_ref": {
+        "skill_version_uid": "skv_6NGMET7WY31W69ZZMP3NDNP3T2",
+        "version_record_digest": "59dfacf22d4ca1462d9e79c0bb7aff96b4ef218af17883e756f073c9de249388"
+      }
+    },
+    {
+      "canonical_name": "persona-distiller",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "d75502c2094edf7beaea7fd0e3284a0804025d07a5c3b71b350f274f159fd1a2",
+        "skill_identity_uid": "ski_55CSSZA00F131M0PWMHM0H8ZH7"
+      },
+      "instance_ref": {
+        "artifact_digest": "6ab96f4a05afc3e2e4597c2f365e3cf6677b1e7a2e81a4d30c74f69d9e5447fc",
+        "skill_instance_uid": "skinst_4G02YBSWG9WNZWWVBCJR6PGWFX"
+      },
+      "material": {
+        "byte_count": 534423,
+        "content_digest": "8529bfe858d0ad8c79d461f5e3d86fdca76b793e777f5d51337ebb8a4862b28a",
+        "metadata_state": "VALID",
+        "regular_file_count": 211,
+        "symlink_alias_count": 0,
+        "tree_digest": "cfcdafa139b86f0962dec96f6e898fd7b9a09acb1649b1c5fb9d184ce8e0aea2"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/persona-distiller",
+      "version_ref": {
+        "skill_version_uid": "skv_1NMVXTBK2ABNEHT4GPTD0QD88E",
+        "version_record_digest": "0bef34c3b0b79bac68a9f03b8ab0e6ffbd94a2e225cabf0500157bcf48348565"
+      }
+    },
+    {
+      "canonical_name": "persona-distiller-group",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "7d7c834c815841897ffda8ddd91c5fb4f94b940b9008ac4f5d957f88546638ab",
+        "skill_identity_uid": "ski_6MZ5J14W2GW7V5A3AP54YF4DTG"
+      },
+      "instance_ref": {
+        "artifact_digest": "3f129e320129b776197e075e1015a3eaab258d8e37335a6cd5634d6d372ad30a",
+        "skill_instance_uid": "skinst_5VDZC6VSC6BD20FYWFQ78BBSBD"
+      },
+      "material": {
+        "byte_count": 118865,
+        "content_digest": "948ad20c343f3045bc302212b6a501bc4de199f938aa81bea7e870c62db6a6db",
+        "metadata_state": "VALID",
+        "regular_file_count": 32,
+        "symlink_alias_count": 0,
+        "tree_digest": "6e1e7182412341847f3ab6d2f934b0aa6cd5c5b9ac3e53be6808fc9058efa81c"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/persona-distiller-group",
+      "version_ref": {
+        "skill_version_uid": "skv_4Z0ZYYAQ19MY7PNDFCDMNSQ8MA",
+        "version_record_digest": "e3b1d6475e3501d5ac05b65667aa76c697b895863b8ba440d25afe9314340cd8"
+      }
+    },
+    {
+      "canonical_name": "project-cost-table-skill",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "18b40e3f04a3fe8269baf00f9f84d3b8d47b2f1a82bdf11f7d46b485fdaa82b5",
+        "skill_identity_uid": "ski_3K3A3MEMQV5W9J4ZG6ZM3NM8KE"
+      },
+      "instance_ref": {
+        "artifact_digest": "9d0f3421f1cc8dc10dbe3a38b10c86b3f72fbb333d433e104bce5792431c8f86",
+        "skill_instance_uid": "skinst_2V8745XAMSQFBCCSKWC84SXMQV"
+      },
+      "material": {
+        "byte_count": 1774338,
+        "content_digest": "a62a5b6507fd658fdd9a0ce7307b652a2b30351127366a9c17156a53cc9c9ca8",
+        "metadata_state": "VALID",
+        "regular_file_count": 174,
+        "symlink_alias_count": 0,
+        "tree_digest": "2010e4e2c1b3be343b760c52280f242ecabc4399a58b4135be55e7ea8cef279c"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/project-cost-table-skill",
+      "version_ref": {
+        "skill_version_uid": "skv_5KVDSC4F9TF2H1N9FYFPC72QP1",
+        "version_record_digest": "1c201d7ff559dd19658d74481b4ff36848b00a429eb8f663b6a0a6896755eb85"
+      }
+    },
+    {
+      "canonical_name": "serenity-skill",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "640b364f6f19752e9d682edcb62e3c0971ed5447cfd1cf185819d8a1995fa50b",
+        "skill_identity_uid": "ski_1V9NPSHADQWX4J6JKRXNB82SSZ"
+      },
+      "instance_ref": {
+        "artifact_digest": "b74bb66144d0b683679b989ead8afc64e1168edc01cd8990e80d8aa5d2af75e9",
+        "skill_instance_uid": "skinst_0TR9BYRYZQ41DAZPPNJXAAMBWC"
+      },
+      "material": {
+        "byte_count": 93713,
+        "content_digest": "0208103d1b986a1daa58e8d9861f9e37f8d03d6d32547eae9eb5f605e71f4e51",
+        "metadata_state": "VALID",
+        "regular_file_count": 28,
+        "symlink_alias_count": 0,
+        "tree_digest": "1fd56c7ec5bcab91df46b9b4720f46f587d84806265e1b21acffce08ec759c1e"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/serenity-skill",
+      "version_ref": {
+        "skill_version_uid": "skv_3ENG20H0MVDDWG3N9VMPRF90AG",
+        "version_record_digest": "4f338708e5a0bad6cd86140e22692e20ec0c644d381cf112cf524fc8d40f93cc"
+      }
+    },
+    {
+      "canonical_name": "skill-github-sync",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "f4daddd6490fe10ce6aba84bf35e8628512d6ca0b33c2bc56282a14bef33184a",
+        "skill_identity_uid": "ski_1QARE0ZFYJN806AKTRY7DK6WD1"
+      },
+      "instance_ref": {
+        "artifact_digest": "54c58213229684270efbd7c8a385fefd53c112b0753a29fb37827c0106da3c8e",
+        "skill_instance_uid": "skinst_6J5XB621FKWD6JEXPBJ9GZX0W4"
+      },
+      "material": {
+        "byte_count": 4295,
+        "content_digest": "254693f0288682f869a8803e95c1f8eb8b232079fa9f7bf97becb701df3217b0",
+        "metadata_state": "VALID",
+        "regular_file_count": 1,
+        "symlink_alias_count": 0,
+        "tree_digest": "4b0a477fb21f76acd8af87c12f78ed5d3c370aab3526a63af4defbaf480e757f"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/skill-github-sync",
+      "version_ref": {
+        "skill_version_uid": "skv_30AXF3FPQVK6K360R02V5H5WA8",
+        "version_record_digest": "90e392d40477ad9e47a75f9201380becca9511f2ef69a32efe4d86f326509181"
+      }
+    },
+    {
+      "canonical_name": "study-project-orchestrator",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "6ab81a471fc9398ac74414a64c1cc52e3445dc2cd6b200f4790450e1c5c9580a",
+        "skill_identity_uid": "ski_770GT8PSE2EFGY3DWAYZFVR1PQ"
+      },
+      "instance_ref": {
+        "artifact_digest": "8d182cbc6365abc7f21f9500dfdf2baa8bf79327510a0d72806e3196d7491aa2",
+        "skill_instance_uid": "skinst_5KMT83M87K2W376M1JAD679794"
+      },
+      "material": {
+        "byte_count": 43405,
+        "content_digest": "de375af55db9a9ace87ee8cdf74237e3ea2393b4da6493cb61b624db0ec12e55",
+        "metadata_state": "VALID",
+        "regular_file_count": 3,
+        "symlink_alias_count": 0,
+        "tree_digest": "a40f8aa9aef19d8fb5a0926a3d8e04812e966ae2de4d95791b675b4e99c672c9"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/study-project-orchestrator",
+      "version_ref": {
+        "skill_version_uid": "skv_274FSQPE6D0KCH5PB9HSK9YVY9",
+        "version_record_digest": "a94ba2d1f3b986d000722f4af4ed1ee1affacae1ac90e5eec083c89f5a2355fb"
+      }
+    },
+    {
+      "canonical_name": "theme-factory",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "85a60df30667d813c57cac9ee0875907269ad58ed808fdc097a93e7d65db6221",
+        "skill_identity_uid": "ski_730YWC4C4SA602JDP7R2ZN2DRF"
+      },
+      "instance_ref": {
+        "artifact_digest": "e21170ef9c9b2c429e4d324620de45db4c6fa785159db01d5ea03b150234a4cc",
+        "skill_instance_uid": "skinst_1SFFVRBPKC0DY2F5B10H0DQPW5"
+      },
+      "material": {
+        "byte_count": 144106,
+        "content_digest": "b1f09ddeaf26b6976329b9bef7d178cab03ecfddd91684749c4d0273b48eac1d",
+        "metadata_state": "VALID",
+        "regular_file_count": 13,
+        "symlink_alias_count": 0,
+        "tree_digest": "cc892d80fb09f8a10943f3707051f73845eb363c5037044d3ab6ac07a0adaeea"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/theme-factory",
+      "version_ref": {
+        "skill_version_uid": "skv_2R9V1TC3TMQZDSHQ0YH0QBKP10",
+        "version_record_digest": "bd2c91c6354614de51eb11b65bd44ba39a409013c8608213afbdfdd7fe9f2b6e"
+      }
+    },
+    {
+      "canonical_name": "use-railway",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "a84376e3366fea83578d625b0c79a4b01bae15752609cad648c092e80c2e79fa",
+        "skill_identity_uid": "ski_7RQCEEDNTJFRRRQ9VNYV8DQFP7"
+      },
+      "instance_ref": {
+        "artifact_digest": "d1514de8c2ae4de2cb31104ab1899c7703a1efde5592e7b04460ae0f2bc53c95",
+        "skill_instance_uid": "skinst_49HH1T71TQHTH2CFDNY1F65N0S"
+      },
+      "material": {
+        "byte_count": 499762,
+        "content_digest": "706a9d366be789c43987ee80ad2008c36c3c73b3f7ce879e92f4fbb6a39457bc",
+        "metadata_state": "VALID",
+        "regular_file_count": 19,
+        "symlink_alias_count": 0,
+        "tree_digest": "58dcaa0fc052a48ecccbafa97f8f1fca048c2d20c95613ab060c5112989a101f"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/use-railway",
+      "version_ref": {
+        "skill_version_uid": "skv_2XJ61TM4Z2JPBPN4WE4ZN0XGA2",
+        "version_record_digest": "2ff9455f49a6e089e4e7bfa3cecf79dbb7661c917a26ffc819b9372c89925b85"
+      }
+    },
+    {
+      "canonical_name": "verifier",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "bb3d61247cff6f28737bdf34cbfa777255352cbdc293a99e6a2ab95060e1ea11",
+        "skill_identity_uid": "ski_26CXXZYHXAP6ZM6BSBWC6PSKFB"
+      },
+      "instance_ref": {
+        "artifact_digest": "fa69a43480ebd3a13245405eb370e152aa1218fd5ccbd768f3eea39456479a37",
+        "skill_instance_uid": "skinst_5ZY4SKTRZV8C39ET7DQSCXWC2X"
+      },
+      "material": {
+        "byte_count": 346584,
+        "content_digest": "f5d8a195c1c4ce2285e922661b74d7c92d697d0f2ea0bab2ff0f03d62560c796",
+        "metadata_state": "VALID",
+        "regular_file_count": 31,
+        "symlink_alias_count": 0,
+        "tree_digest": "ee4b4e200eaaafc3b545972d6de6524e0b8370d93a2bcbf16af5ba57523caa6f"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/verifier",
+      "version_ref": {
+        "skill_version_uid": "skv_44R8KRKBHZY1VGX9FHCBWGDQVE",
+        "version_record_digest": "26b96103e7d1556a5fb4dd7f40549a84abbcf2066b011ee074b6272c3f8c603b"
+      }
+    },
+    {
+      "canonical_name": "video-replica",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "9260b7d4174aa58f43f53f7cffff9b29f1ff0014ce3474c4bd0b239939322483",
+        "skill_identity_uid": "ski_0GEJY9PG3BZM680TX8AW3XJ75B"
+      },
+      "instance_ref": {
+        "artifact_digest": "9d8c505fbab58c1c62d9102529509a3f9ac2b234d28e681ab751b789fb3c38d7",
+        "skill_instance_uid": "skinst_62GP6CMP1447DSQ0MRRZVETXKR"
+      },
+      "material": {
+        "byte_count": 100256,
+        "content_digest": "b3a188dc298164a3dc6413a3129f8f2b84576f14259b2d1e7481232fe58bb232",
+        "metadata_state": "VALID",
+        "regular_file_count": 11,
+        "symlink_alias_count": 0,
+        "tree_digest": "a93c4df1057571a4bc478d65ebcbc4ac4d6c081c02232455c135f7cad8a80a56"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/video-replica",
+      "version_ref": {
+        "skill_version_uid": "skv_20B798VR1J2CXQ9BHV67H3NR35",
+        "version_record_digest": "09d6fc6b01c1a86e88e8afee9cdd2b0840bc029e830449d85129d20da743d24f"
+      }
+    },
+    {
+      "canonical_name": "webapp-testing",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "1433ae2ff63b82fae3199bc8e5cfec03d3608526541e3a1ab1a1cdf00827dff9",
+        "skill_identity_uid": "ski_3BDE9WP6NG3YZKP920R8FEY4WX"
+      },
+      "instance_ref": {
+        "artifact_digest": "ea1f0953f145fe5d68bd93a8d2c06d9c083aaf0fdda061dcfc26407706b138f5",
+        "skill_instance_uid": "skinst_7EKBT1ZDW9K11HCSGG89ZB4RF2"
+      },
+      "material": {
+        "byte_count": 22406,
+        "content_digest": "9d51f0b13ff35a6311ed87bdd87958c4a054254c75d2f068e8a7fcc9642712d4",
+        "metadata_state": "VALID",
+        "regular_file_count": 6,
+        "symlink_alias_count": 0,
+        "tree_digest": "fea152a8328226ca142c8d452212e5f1b35f45c89ca7238073dbee3257727a40"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/webapp-testing",
+      "version_ref": {
+        "skill_version_uid": "skv_7DWPA9Q57WRK27D3SH2HJ5TPWT",
+        "version_record_digest": "5c0534add43fa161ed8e60b05f4dfd23d13f0b8ecd184b2e19c60d51b96e536b"
+      }
+    }
+  ],
+  "entry_count": 56,
+  "exclusions": [],
+  "metadata_invalid_count": 1,
+  "protocol_revision": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1",
+  "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:registry-source-catalog:v1",
+  "source_class": "CODEX",
+  "source_material_git_object_id": "sha1:44a38890ec38ceb24ccae1ec6f5b1fc8e93aefa1",
+  "source_material_policy_digest": "7d8453b2dd5b78ec777c915d6cf009eac92bb6ff25cad9f88a9da38fb84cc183",
+  "source_material_policy_id": "urn:linzecolin:agentdatabase:skillops:policy:source-material:v1",
+  "source_root_path": "CodexSkills/registry/codex",
+  "status": "DRAFT_NON_ACTIVE"
+}

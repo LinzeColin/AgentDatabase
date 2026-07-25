@@ -16,6 +16,24 @@
       "self_digest_pointer": "/envelope_digest"
     }
   ],
+  "bound_reference_resolver_contract": {
+    "artifact_digest": "0fe26ab55d92a1c6f5628e2a8d27becbdcc839ccfd73372150a2339ffe7eb4cb",
+    "auto_integration_complete": false,
+    "binding_eligible_version_count": 0,
+    "catalog_path_reservation_required": true,
+    "current_snapshot_can_emit_bound": false,
+    "current_snapshot_promotable": false,
+    "gate_satisfied": false,
+    "implementation_complete": true,
+    "post_reservation_rebuild_required": true,
+    "production_trust_permitted": false,
+    "registry_snapshot_digest": "31f49c8ffa3bd2d268feec49b2869f409d61a5bfbb0b03f382bc562996b7fa76",
+    "registry_snapshot_draft_relative_path": "CodexSkills/governance/registry/materialized/_global/registry-snapshot.v1.json",
+    "registry_snapshot_schema_id": "urn:linzecolin:agentdatabase:skillops:schema:registry-snapshot:v1",
+    "relative_path": "CodexSkills/governance/registry/resolver-interface.json",
+    "source_mirror_parity_satisfied": false,
+    "status": "DRAFT_NON_ACTIVE_RESOLVER_IMPLEMENTED"
+  },
   "bundle_digest": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e",
   "candidate_bundle_git_object_id": "sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5",
   "candidate_manifest_path": "CodexSkills/governance/bundles/schema-bundle-manifest.v1.json",
@@ -37,7 +55,7 @@
     "external_verified_git_object_required": true,
     "repository_self_report_is_not_trust_root": true
   },
-  "next_phase": "MECHANISM_BOUND_REFERENCE_RESOLVER_IMPLEMENTATION",
+  "next_phase": "AUTO_REGISTRY_CATALOG_PATH_RESERVATION",
   "notification_contract": {
     "actual_recipient_repo_external": true,
     "affected_path_refs": [
@@ -87,7 +105,9 @@
       "schema_count": 29,
       "verified_git_object_id": "sha1:899a4374bc02f5e18444fea7404864df7b118adf"
     },
+    "bound_reference_resolver_auto_integration_complete": false,
     "bound_reference_resolver_gate_satisfied": false,
+    "bound_reference_resolver_implementation_complete": true,
     "canonical_publication_permitted": false,
     "effective_runtime_state_write_permitted": false,
     "external_gmail_ready": false,
@@ -105,7 +125,7 @@
     "runtime_preflight_shadow_permitted": true,
     "runtime_shard_writer_integration_complete": true,
     "runtime_state_instance_created": false,
-    "runtime_state_write_gate_status": "BOUND_REFERENCE_RESOLVER_PENDING",
+    "runtime_state_write_gate_status": "BOUND_REFERENCE_RESOLVER_AUTO_INTEGRATION_PENDING",
     "runtime_state_write_permitted": true,
     "schedule_authority_resolved": false,
     "schedule_complete": false

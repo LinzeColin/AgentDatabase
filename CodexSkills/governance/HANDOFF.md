@@ -1,7 +1,7 @@
 # Mechanism handoff
 
-- State: `DRAFT_NON_ACTIVE_POST_AU040_REPOSITORY_BINDING_CONTROL_SYNC`
-- Phase: `MECHANISM_POST_AU040_REPOSITORY_BINDING_CONTROL_SYNC`
+- State: `DRAFT_NON_ACTIVE_BOUND_REFERENCE_RESOLVER_IMPLEMENTED`
+- Phase: `MECHANISM_BOUND_REFERENCE_RESOLVER_IMPLEMENTATION`
 - Protocol:
   `urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1`
 - SRV candidate: `v0.0.0.3`
@@ -16,7 +16,11 @@
 - Integrated Auto runtime-interface raw SHA-256:
   `c7af9d1406fe2ed084d5a30fab6cded3897a83c1602e6c40587cf28c75a2c75c`
 - Control interface raw SHA-256:
-  `db9b83ac2e841300bf7cf1150cad989d609128cffb40160cd17c426d326490d3`
+  `6f7a2bdedfc7c388c4b6e1c2345855e110305b7ed906874676a5ba6daf7779f2`
+- Resolver interface raw SHA-256:
+  `0fe26ab55d92a1c6f5628e2a8d27becbdcc839ccfd73372150a2339ffe7eb4cb`
+- Draft Registry snapshot digest:
+  `31f49c8ffa3bd2d268feec49b2869f409d61a5bfbb0b03f382bc562996b7fa76`
 
 These Git objects are ordinary ancestors in the coordinated local commit
 chain. A downstream consumer must independently fetch and read them back from
@@ -79,13 +83,18 @@ the remote before treating either as an external trust root.
   `repository_binding_integration_complete=true`. It establishes the exact
   repository authority as `repository_bound=true`, while keeping
   `bound_reference_resolver_gate_satisfied=false`.
+- It now also binds the byte-equivalent Mechanism resolver interface and
+  records `bound_reference_resolver_implementation_complete=true`.
+  `bound_reference_resolver_auto_integration_complete=false` remains
+  truthful: implementation is not the same as an Auto-consumed production
+  gate.
 - The control-level `runtime_state_write_permitted=true` means only that the
   exact candidate/control tuple has reached the state-writing gate. Effective
   state writing is separately recorded as
   `effective_runtime_state_write_permitted=false` with status
-  `BOUND_REFERENCE_RESOLVER_PENDING`; state, lock, worktree, mutable Git,
-  Gmail, outbox, watermark, and publisher access remain blocked before side
-  effects with `BOUND_REFERENCE_RESOLVER_NOT_SATISFIED`.
+  `BOUND_REFERENCE_RESOLVER_AUTO_INTEGRATION_PENDING`; state, lock, worktree,
+  mutable Git, Gmail, outbox, watermark, and publisher access remain blocked
+  before side effects with `BOUND_REFERENCE_RESOLVER_NOT_SATISFIED`.
 - Auto's
   `runtime_interface_materialization_snapshot.current_auto_runtime_control_bound=false`
   and
@@ -100,16 +109,51 @@ the remote before treating either as an external trust root.
 - Caller booleans, repository self-report, digest maps, provider status
   strings, or the current checkout are never trust roots.
 
+## Registry and BOUND resolver
+
+- `CodexSkills/governance/registry/resolver-interface.json` binds three
+  bundle-outside schemas, the resolver/builder bytes, four source catalogs,
+  and one immutable Registry snapshot. Production loading requires a
+  repo-external candidate tuple and a separate snapshot tuple containing the
+  verified Git object, snapshot digest, canonical path, schema ID, and mode.
+- The pinned source observation is Git object `sha1:44a38890…`: 89 Skill
+  roots close to 89 distinct Identity, Instance, and Version records
+  (`agents=24`, `claude=3`, `codex=56`, `codex-system=6`). Same names across
+  sources remain separate; 14 name groups are explicit owner-review merge
+  candidates.
+- Every observed version is `QUARANTINED/UNVERIFIED`, with unknown permission
+  and provenance fields represented explicitly. The single invalid metadata
+  root is `codex/context-kernel`; no eval profile or promotion decision is
+  fabricated.
+- The Git mirror contains zero tracked symlink aliases while the frozen
+  external inventory evidence contains 20. The snapshot therefore records
+  `INCOMPLETE`, zero binding-eligible versions, and
+  `SOURCE_MIRROR_SYMLINK_ALIAS_LOSS`. Real requests deterministically return
+  `UNKNOWN/MAPPING_NOT_PROVABLE`; no real `skill_ref` is emitted.
+- A registered synthetic fixture proves the same implementation emits BOUND
+  only after `REGISTERED + COMPLETE` parity, known provenance/permissions,
+  eligible lifecycle state, exact controlled-invocation self digest, and
+  unique identity → instance → version/content/tree/record digest closure.
+- Draft catalogs stay under
+  `CodexSkills/governance/registry/materialized/**`. Directly placing
+  `_catalog` under the source namespaces is currently unsafe because the
+  Auto-owned `sync_skills.py` treats every source child as a Skill and deletes
+  unreserved directories. No final Registry catalog path is created here, and
+  the incomplete 44a materialization is explicitly non-promotable. After Auto
+  restores path/source parity, Mechanism must rebuild from that successor Git
+  object; exact-byte promotion applies only to the complete successor.
+
 ## Unresolved gates
 
 - Schedule authority is unresolved: the locked 04:15 value conflicts with a
   later 05:30 objective that did not explicitly override it. Neither time is
   final.
-- AU-040 completion, BOUND reference resolver, ACTIVE external trust,
-  Gmail/state readiness, real-message metadata readback, runtime
-  state-instance creation, M0c-B, A1c, canonical publication, and verifier
-  review all remain false or unperformed. No canonical shard, index, daily
-  manifest, or retention receipt instance was created.
+- AU-040 completion, resolver Auto integration/path reservation, source
+  mirror parity, production Registry trust, ACTIVE external trust, Gmail/state
+  readiness, real-message metadata readback, runtime state-instance creation,
+  M0c-B, A1c, canonical publication, and verifier review all remain false or
+  unperformed. No canonical shard, index, daily manifest, retention receipt,
+  or BOUND run event was created.
 - The 72-hour retention behavior remains limited by host/App availability;
   recovery must record an offline breach/gap and may not claim an impossible
   hard guarantee.
@@ -117,13 +161,13 @@ the remote before treating either as an external trust root.
 ## Next exact action
 
 After this control is committed, FF-pushed, and independently read back, the
-only machine next phase is
-`MECHANISM_BOUND_REFERENCE_RESOLVER_IMPLEMENTATION`. That future Mechanism
-phase must build the immutable Registry snapshot tuple and exact
-identity → instance → version resolver closure required by the Auto dependency
-contract. It must not treat repository binding as AU-040 completion or
-permission to create canonical shards, publish, touch Gmail/state, activate,
-create VERSION, change automation, or resolve the schedule conflict.
+only machine next phase is `AUTO_REGISTRY_CATALOG_PATH_RESERVATION`. That
+Auto-owned phase must reserve `_catalog`/global snapshot paths in the mirror,
+exclude them from Skill enumeration/deletion, and restore exact source alias
+parity before any exact-byte promotion or production resolver trust. It must
+not treat resolver implementation or repository binding as AU-040 completion,
+create canonical shards, publish, touch Gmail/state, activate, create VERSION,
+change automation, or resolve the schedule conflict.
 
 Development still must not call verifier. After both planes are complete, the
 Owner will designate the last completed task to invoke a fresh verifier.

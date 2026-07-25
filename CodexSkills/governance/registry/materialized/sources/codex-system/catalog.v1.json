@@ -1,0 +1,233 @@
+{
+  "artifact_digest": "35b4f09628213c7ce540c06a4fd6cfe3623c1cba44ace157a648f7200a044a61",
+  "bundle_digest": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e",
+  "entries": [
+    {
+      "canonical_name": "imagegen",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "fb676e21c16468051a6511e87f7b04bfe82d00af0a634c8821184596b369cd28",
+        "skill_identity_uid": "ski_1F2DECE6CRWRDQ0V5XY099HWY4"
+      },
+      "instance_ref": {
+        "artifact_digest": "237bc1bd2a345ecb27a99f482a35a43f527d83427dc03973f10b7f9d3228490d",
+        "skill_instance_uid": "skinst_5B52DQ5A7B96RNE9ZZGE7Z9SNN"
+      },
+      "material": {
+        "byte_count": 134942,
+        "content_digest": "338eb118e4e99547de0efe1ea35d7b3158499b7b7cd21f61227fa71502a1886a",
+        "metadata_state": "VALID",
+        "regular_file_count": 12,
+        "symlink_alias_count": 0,
+        "tree_digest": "cd0a4c0324973f98b199c9c7cced4d778f7e60b410bc992d78185a8da98605ba"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex-system/imagegen",
+      "version_ref": {
+        "skill_version_uid": "skv_7991B9J12Z2X67YNF60143A543",
+        "version_record_digest": "16073bb00d1f2c439a90b7da803ffcaac5fb2c8510cbadf1dc56f77ff6c54257"
+      }
+    },
+    {
+      "canonical_name": "openai-docs",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "69b6c05ffad1353668b593de0f566e5a572b79dc6a31e0a75da11d09329d9411",
+        "skill_identity_uid": "ski_0DBQKMJAX8ED88BDB4VPV7GYQN"
+      },
+      "instance_ref": {
+        "artifact_digest": "7003a2ea138b30f385ba6d1693f49fc9769b8bd80460710fae80002e4b312b70",
+        "skill_instance_uid": "skinst_36F6PGF8E066XQ79ER1B0H0S95"
+      },
+      "material": {
+        "byte_count": 102056,
+        "content_digest": "1abd7c38e31def976a85605c5634e38f0465c0bf93eaa72120ee591d2f7cb43e",
+        "metadata_state": "VALID",
+        "regular_file_count": 12,
+        "symlink_alias_count": 0,
+        "tree_digest": "40646b9f7c3d95523614c94f0419fbb5391d4bd83ce95dc43ab664fec577ba90"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex-system/openai-docs",
+      "version_ref": {
+        "skill_version_uid": "skv_1THDNYK86RC1AKMF9BKWRM7TYD",
+        "version_record_digest": "accfd549a9e7b008ddf458b1b05f050fb325aca6e9b3a2c05e393facd1c54f40"
+      }
+    },
+    {
+      "canonical_name": "plugin-creator",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "86740ba81f213cb593ada74bef9521b0ccefff2ddd2b7761e6cc60be9b3ff84c",
+        "skill_identity_uid": "ski_4KTR6WEM77TAR8W6495N4ZBC0C"
+      },
+      "instance_ref": {
+        "artifact_digest": "9f1a8eccf62f7984f9c50ea93e63b738fd2f69bfdb8690a8b924051ebe086483",
+        "skill_instance_uid": "skinst_0PEEE5HB9C9KZ983RK0CF4XYGJ"
+      },
+      "material": {
+        "byte_count": 65862,
+        "content_digest": "04bba72ef38e9abfca9b8f1f0fc0223e11508eb2a44029147961c802c87cc824",
+        "metadata_state": "VALID",
+        "regular_file_count": 10,
+        "symlink_alias_count": 0,
+        "tree_digest": "9400b3b5d939ac7bb37702492aff863f5b6b14b47d10c1b7da468a2d27ff81e8"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex-system/plugin-creator",
+      "version_ref": {
+        "skill_version_uid": "skv_4EV37DSNMTSDXK8C5P4X3C6ZBD",
+        "version_record_digest": "1911e57db226ab051fef65b98475eb2c04bcb259d4d841b0cb3d0e3adc0107bf"
+      }
+    },
+    {
+      "canonical_name": "review-agent",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "4f8559b434ea52365d02b5071fef6de2095cb227f98486f4ea02b5f3365fefa4",
+        "skill_identity_uid": "ski_495YQ80BHG130Q78CQY0AKSVD1"
+      },
+      "instance_ref": {
+        "artifact_digest": "5d626aca9f357ae31c65510b54357600c44546bb7315f8da7e0c70b735d05c19",
+        "skill_instance_uid": "skinst_25BWEW6RE5M8C7YGDP4829MVAF"
+      },
+      "material": {
+        "byte_count": 2913,
+        "content_digest": "8057b6c15cc404c8f070fb0edc4ee90071e0364ff36e92e3b2d65af0abea30d7",
+        "metadata_state": "VALID",
+        "regular_file_count": 2,
+        "symlink_alias_count": 0,
+        "tree_digest": "cf36114e0da407369b8ae2bec6432a40ee3207e55662710614b2f3aa31fadf7d"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex-system/review-agent",
+      "version_ref": {
+        "skill_version_uid": "skv_455FDGX0ANX425MXBEZHQGN7BW",
+        "version_record_digest": "773055318826b74f2c721cd2bafa6eb993b7cb4543042d3be2594a8509392bd8"
+      }
+    },
+    {
+      "canonical_name": "skill-creator",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "73568044498123df83d58219e8915fcb100502616979cfd0b16f4ab1fa6998d2",
+        "skill_identity_uid": "ski_2BYJ6E5M98192CV74R0HEGJ5FX"
+      },
+      "instance_ref": {
+        "artifact_digest": "e6064e9d2a1325d2c5dee91c3c1d055e9265c36f3a682f20dd3be703509ccc0a",
+        "skill_instance_uid": "skinst_21Z3HG0AZ9XBFEWNF7QV69WNJM"
+      },
+      "material": {
+        "byte_count": 63340,
+        "content_digest": "f66ceea480f620d9a99219b6a0c5a60e43ace4c873d2ba64b38b341ff6ad2bc3",
+        "metadata_state": "VALID",
+        "regular_file_count": 9,
+        "symlink_alias_count": 0,
+        "tree_digest": "cc5e61aef2501fd852f2c32c6fb0ade04727a97a78186edcbfdbe94890459680"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex-system/skill-creator",
+      "version_ref": {
+        "skill_version_uid": "skv_2GN7M4AV4W504BV1HN1JWVQNZH",
+        "version_record_digest": "eec220e8c44c718882bc8feabf57a1810048d91908980e521194a5962d7b8759"
+      }
+    },
+    {
+      "canonical_name": "skill-installer",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "882addd4a0dafaf8fc89ab89580949a1020d1adb8874a6df47a51b6af6857303",
+        "skill_identity_uid": "ski_1BSZVSPTEMQY27BEANTZZSPYEY"
+      },
+      "instance_ref": {
+        "artifact_digest": "fe4e8d828cd76b1dcefafb95d4dc9d5731de228d528ec0ef090ace03b2471a9b",
+        "skill_instance_uid": "skinst_6HFT54VTKRB4RP1XWC193SAYC6"
+      },
+      "material": {
+        "byte_count": 30677,
+        "content_digest": "ae6d5c78757e2d96ffb7d8c95e74cd670f1edfc7459a404c6e736c2de12e9513",
+        "metadata_state": "VALID",
+        "regular_file_count": 8,
+        "symlink_alias_count": 0,
+        "tree_digest": "c580c7c7954d9b6f3c48af0744a487ff259cfc5b953e629700d8b6349fc64061"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex-system/skill-installer",
+      "version_ref": {
+        "skill_version_uid": "skv_7S9XB3A7DF8RX0D0ZS1BYQDF1C",
+        "version_record_digest": "6ad460d9ce8c3613e121e0f04f671a8814842655fcc2b8c6a9dd7b46a946e3d1"
+      }
+    }
+  ],
+  "entry_count": 6,
+  "exclusions": [],
+  "metadata_invalid_count": 0,
+  "protocol_revision": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1",
+  "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:registry-source-catalog:v1",
+  "source_class": "CODEX_SYSTEM",
+  "source_material_git_object_id": "sha1:44a38890ec38ceb24ccae1ec6f5b1fc8e93aefa1",
+  "source_material_policy_digest": "7d8453b2dd5b78ec777c915d6cf009eac92bb6ff25cad9f88a9da38fb84cc183",
+  "source_material_policy_id": "urn:linzecolin:agentdatabase:skillops:policy:source-material:v1",
+  "source_root_path": "CodexSkills/registry/codex-system",
+  "status": "DRAFT_NON_ACTIVE"
+}

@@ -1,0 +1,47 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:bound-reference-request:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "content_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "controlled_invocation": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:skill-binding:v1#/properties/controlled_invocation"
+    },
+    "envelope_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "protocol_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/protocol_revision"
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:bound-reference-request:v1"
+    },
+    "source_class": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/source_class"
+    },
+    "source_relative_path": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/repo_relative_posix_path"
+    },
+    "tree_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "bundle_digest",
+    "source_class",
+    "source_relative_path",
+    "content_digest",
+    "tree_digest",
+    "controlled_invocation",
+    "envelope_digest"
+  ],
+  "title": "Mechanism BOUND reference request",
+  "type": "object"
+}
