@@ -14,6 +14,15 @@ pushes only after the active task gates pass. Do not create a temporary remote
 branch or pull request, and never reset, rebase, merge, force-push, or rewrite
 history as a migration shortcut.
 
+## 数据落地铁律（长期有效 · 自运行分仓治理）
+
+长期/业务/运行时数据一律写私有仓 `LinzeColin/Private-Database`（Agent 会话/记忆 → `Private-AgentDatabase/`；
+其余按仓分区），用 `private_db_client.py` 免 clone 读写（`ingest/get/list/verify`）；**禁止把数据提交进本代码仓**，
+派生/临时/可再生产物走 `.gitignore`。目的：分仓治理长期自运行，不需人工反复迁移。
+
+⛔ **唯一尚未闭环的缺口**：`OpenAIDatabase/data/` 仍是活运行记忆、尚未迁走。
+接手 OpenAIDatabase 前必读 [`OpenAIDatabase/MIGRATION_MANDATE.md`](OpenAIDatabase/MIGRATION_MANDATE.md)——那是一项**必须完成**的迁移，但在启动/CI 完成 SDK cutover 前**不得删除**本地 `data/`。
+
 ## OpenAIDatabase routing
 
 Read `OpenAIDatabase/AGENTS.md` before changing OpenAIDatabase. Start task

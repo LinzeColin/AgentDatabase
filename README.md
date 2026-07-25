@@ -1,6 +1,19 @@
 # AgentDatabase
 
-Archived Codex agent history, migrated off this Mac to keep local storage 
+Agent 数据仓。三个活动范围：
+- **`OpenAIDatabase/`** —— Codex / OpenAI 会话与记忆运行时（记忆图谱、个性化、行为智能）。
+- **`MemoryAtlas/`** —— 记忆图谱发布件。
+- **`CodexSkills/`** —— 本机 Codex Skill 的仓库镜像与治理登记（人物蒸馏等）。
+
+以及从旧 Mac 迁出的历史归档（作为 Release 资产，不占本地存储）。
+
+## 📦 数据落地政策（长期有效 · 自运行分仓治理）
+
+**本仓存代码/治理/技能登记与已发布制品；开发中新产生的长期/业务/运行时数据不入本仓**，
+一律写私有仓 `LinzeColin/Private-Database`：Agent 会话/记忆数据 → `Private-AgentDatabase/`。
+用各仓内 `private_db_client.py` 免 clone 读写（`ingest/get/list/verify`）；Private-Database 禁止 `git clone`；派生/临时物走 `.gitignore`。
+> ⛔ 唯一待闭环：`OpenAIDatabase/data/` 仍是活运行记忆、尚未迁走，详见 [`OpenAIDatabase/MIGRATION_MANDATE.md`](OpenAIDatabase/MIGRATION_MANDATE.md)（SDK cutover 完成前不得删）。
+
 ## Contents
 
 Large archives are stored as **release assets** (not in git), because GitHub
