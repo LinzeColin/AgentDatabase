@@ -1,6 +1,6 @@
 {
   "activation_forbidden": true,
-  "base_auto_git_object_id": "sha1:85edc67df48d4e5bc783f89ed3f3371f25f288e1",
+  "base_auto_git_object_id": "sha1:49ac09dbd9c8a2e18d5a199088a910dc77e7d365",
   "bootstrap_schema_count": 2,
   "bootstrap_schema_entries": [
     {
@@ -37,7 +37,7 @@
     "external_verified_git_object_required": true,
     "repository_self_report_is_not_trust_root": true
   },
-  "next_phase": "AUTO_AU040_REPOSITORY_BINDING",
+  "next_phase": "MECHANISM_BOUND_REFERENCE_RESOLVER_IMPLEMENTATION",
   "notification_contract": {
     "actual_recipient_repo_external": true,
     "affected_path_refs": [
@@ -87,7 +87,9 @@
       "schema_count": 29,
       "verified_git_object_id": "sha1:899a4374bc02f5e18444fea7404864df7b118adf"
     },
+    "bound_reference_resolver_gate_satisfied": false,
     "canonical_publication_permitted": false,
+    "effective_runtime_state_write_permitted": false,
     "external_gmail_ready": false,
     "external_state_ready": false,
     "final_candidate_integration_required": false,
@@ -98,20 +100,22 @@
       "verified_git_object_id": "sha1:ab49666bd3343c2abbfc6766478fad63d44163d0"
     },
     "publisher_v2_runtime_integration_complete": true,
-    "repository_bound": false,
+    "repository_binding_integration_complete": true,
+    "repository_bound": true,
     "runtime_preflight_shadow_permitted": true,
     "runtime_shard_writer_integration_complete": true,
     "runtime_state_instance_created": false,
+    "runtime_state_write_gate_status": "BOUND_REFERENCE_RESOLVER_PENDING",
     "runtime_state_write_permitted": true,
     "schedule_authority_resolved": false,
     "schedule_complete": false
   },
   "transport_runtime_interface": {
-    "artifact_digest": "ce3aae7a22419c3a01455e8e83cc67b23eeb2ada3f3c17e57590a890c0fdef31",
-    "integration_state": "AU040_PUBLISHER_V2_SYNCED",
-    "module_count": 25,
+    "artifact_digest": "c7af9d1406fe2ed084d5a30fab6cded3897a83c1602e6c40587cf28c75a2c75c",
+    "integration_state": "AU040_REPOSITORY_BINDING_SYNCED",
+    "module_count": 26,
     "relative_path": "CodexSkills/registry/auto/runtime-interface.json",
-    "verified_git_object_id": "sha1:85edc67df48d4e5bc783f89ed3f3371f25f288e1"
+    "verified_git_object_id": "sha1:49ac09dbd9c8a2e18d5a199088a910dc77e7d365"
   },
   "validator_contract": {
     "artifact_reads": "DESCRIPTOR_RELATIVE_O_NOFOLLOW",

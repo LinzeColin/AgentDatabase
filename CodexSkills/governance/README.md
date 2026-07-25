@@ -134,19 +134,27 @@ part-delete/retention-receipt/manifest publication. The Auto draft validator
 is useful draft evidence but is explicitly not a production trust root.
 
 The successor control binds the exact final candidate and V2 consumer plus the
-integrated Auto runtime Git object, runtime-interface bytes, and 25 declared
+integrated Auto runtime Git object, runtime-interface bytes, and 26 declared
 module digests. It independently validates the immutable predecessor control
 and Mechanism runtime blobs cited by Auto's historical observation, plus the
-separate writer and publisher materialization snapshots; the working tree is
-not substituted as historical evidence. It records
+separate writer, publisher, and repository-binding materialization snapshots;
+the working tree is not substituted as historical evidence. It records
 `auto_runtime_integration_complete=true` and
 `runtime_shard_writer_integration_complete=true` together with
-`publisher_v2_runtime_integration_complete=true`, and allows state-writing
-entrypoints to pass only when callers supply both exact external candidate and
-successor-control trust tuples. Auto's writer and publisher materialization
-snapshots remain historically `current_auto_runtime_control_bound=false`;
-neither snapshot is rewritten into successor authorization. Activation remains
-forbidden. Its only next phase is `AUTO_AU040_REPOSITORY_BINDING`. Schedule
-authority, external Gmail/state readiness, runtime state-instance creation,
-AU-040 completion, repository binding, M0c-B, ACTIVE trust, canonical shard
-creation, and canonical publication remain false.
+`publisher_v2_runtime_integration_complete=true` and
+`repository_binding_integration_complete=true`. The successor establishes
+`repository_bound=true` for the exact logical repository, remote, refspec,
+clean reference root, and four-artifact path closure, while deliberately
+keeping `bound_reference_resolver_gate_satisfied=false`. Its control-level
+`runtime_state_write_permitted=true` is paired with
+`effective_runtime_state_write_permitted=false` and
+`runtime_state_write_gate_status=BOUND_REFERENCE_RESOLVER_PENDING`; state,
+lock, worktree, mutable Git, Gmail, outbox, watermark, and publisher access
+must stop before side effects with `BOUND_REFERENCE_RESOLVER_NOT_SATISFIED`.
+Auto's writer, publisher, and repository-binding materialization snapshots
+remain historically `current_auto_runtime_control_bound=false`; none is
+rewritten into successor authorization. Activation remains forbidden. Its
+only next phase is `MECHANISM_BOUND_REFERENCE_RESOLVER_IMPLEMENTATION`.
+Schedule authority, the BOUND resolver, external Gmail/state readiness,
+runtime state-instance creation, AU-040 completion, M0c-B, ACTIVE trust,
+canonical shard creation, and canonical publication remain false.

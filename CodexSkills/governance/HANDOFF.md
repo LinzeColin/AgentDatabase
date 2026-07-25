@@ -1,7 +1,7 @@
 # Mechanism handoff
 
-- State: `DRAFT_NON_ACTIVE_POST_AU040_PUBLISHER_V2_CONTROL_SYNC`
-- Phase: `MECHANISM_POST_AU040_PUBLISHER_V2_CONTROL_SYNC`
+- State: `DRAFT_NON_ACTIVE_POST_AU040_REPOSITORY_BINDING_CONTROL_SYNC`
+- Phase: `MECHANISM_POST_AU040_REPOSITORY_BINDING_CONTROL_SYNC`
 - Protocol:
   `urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1`
 - SRV candidate: `v0.0.0.3`
@@ -12,11 +12,11 @@
 - Consumer Git object:
   `sha1:91a12e48351be3ee05ec23ef61aec81056b02014`
 - Integrated Auto Git object:
-  `sha1:85edc67df48d4e5bc783f89ed3f3371f25f288e1`
+  `sha1:49ac09dbd9c8a2e18d5a199088a910dc77e7d365`
 - Integrated Auto runtime-interface raw SHA-256:
-  `ce3aae7a22419c3a01455e8e83cc67b23eeb2ada3f3c17e57590a890c0fdef31`
+  `c7af9d1406fe2ed084d5a30fab6cded3897a83c1602e6c40587cf28c75a2c75c`
 - Control interface raw SHA-256:
-  `28a35148cc18362de4fc53b508754f263a015cf33e4cd187314cf48c767b6920`
+  `db9b83ac2e841300bf7cf1150cad989d609128cffb40160cd17c426d326490d3`
 
 These Git objects are ordinary ancestors in the coordinated local commit
 chain. A downstream consumer must independently fetch and read them back from
@@ -62,28 +62,38 @@ the remote before treating either as an external trust root.
 
 - `CodexSkills/governance/activation/control-interface.json` pins the final
   candidate object, the V2 consumer object, the integrated Auto object
-  `sha1:85edc67df48d4e5bc783f89ed3f3371f25f288e1`, and its exact
+  `sha1:49ac09dbd9c8a2e18d5a199088a910dc77e7d365`, and its exact
   runtime-interface bytes.
-- Mechanism independently verifies all 25 Auto module digests declared by that
+- Mechanism independently verifies all 26 Auto module digests declared by that
   interface against the pinned Git object. It also verifies Auto's historical
   control observation, including predecessor control
-  `sha1:fb9b99c36cb870b04f34b5ed3bcb75aeae52c296`, its exact bound
-  `7f1bd876…` / `f1f9331…` / 24-module Auto tuple, and four Mechanism
+  `sha1:e6438db785c2f3f38da59be7ba9c1cd46651d7ea`, its exact bound
+  `85edc67d…` / `ce3aae7a…` / 25-module Auto tuple, and four Mechanism
   runtime blobs, from immutable Git objects rather than from the working tree.
-  The separate writer and publisher materialization snapshots remain
-  historical evidence. The historical 29/5 tuple remains lineage only.
+  The separate writer, publisher, and repository-binding materialization
+  snapshots remain historical evidence. The historical 29/5 tuple remains
+  lineage only.
 - The successor control records `auto_runtime_integration_complete=true` and
   `runtime_shard_writer_integration_complete=true` together with
-  `publisher_v2_runtime_integration_complete=true`.
-  State-writing runtime entrypoints therefore require this successor's
-  repo-external control tuple in addition to the unchanged candidate tuple.
+  `publisher_v2_runtime_integration_complete=true` and
+  `repository_binding_integration_complete=true`. It establishes the exact
+  repository authority as `repository_bound=true`, while keeping
+  `bound_reference_resolver_gate_satisfied=false`.
+- The control-level `runtime_state_write_permitted=true` means only that the
+  exact candidate/control tuple has reached the state-writing gate. Effective
+  state writing is separately recorded as
+  `effective_runtime_state_write_permitted=false` with status
+  `BOUND_REFERENCE_RESOLVER_PENDING`; state, lock, worktree, mutable Git,
+  Gmail, outbox, watermark, and publisher access remain blocked before side
+  effects with `BOUND_REFERENCE_RESOLVER_NOT_SATISFIED`.
 - Auto's
   `runtime_interface_materialization_snapshot.current_auto_runtime_control_bound=false`
   and
   `publisher_v2_runtime_materialization_snapshot.current_auto_runtime_control_bound=false`
-  remain truthful historical snapshots of their materialization points.
-  Neither is rewritten or treated as the successor control's authorization
-  value.
+  and
+  `repository_binding_materialization_snapshot.current_auto_runtime_control_bound=false`
+  remain truthful historical snapshots of their materialization points. None
+  is rewritten or treated as the successor control's authorization value.
 - Activation remains forbidden. A future runtime must still use the existing
   intent → real provider `SENT` readback → settlement → FF publish → remote
   byte readback sequence with repo-external trust tuples.
@@ -95,11 +105,11 @@ the remote before treating either as an external trust root.
 - Schedule authority is unresolved: the locked 04:15 value conflicts with a
   later 05:30 objective that did not explicitly override it. Neither time is
   final.
-- AU-040 completion, repository binding, BOUND reference resolver, ACTIVE
-  external trust, Gmail/state readiness, real-message metadata readback,
-  runtime state-instance creation, M0c-B, A1c, canonical publication, and
-  verifier review all remain false or unperformed. No canonical shard, index,
-  daily manifest, or retention receipt instance was created.
+- AU-040 completion, BOUND reference resolver, ACTIVE external trust,
+  Gmail/state readiness, real-message metadata readback, runtime
+  state-instance creation, M0c-B, A1c, canonical publication, and verifier
+  review all remain false or unperformed. No canonical shard, index, daily
+  manifest, or retention receipt instance was created.
 - The 72-hour retention behavior remains limited by host/App availability;
   recovery must record an offline breach/gap and may not claim an impossible
   hard guarantee.
@@ -108,11 +118,12 @@ the remote before treating either as an external trust root.
 
 After this control is committed, FF-pushed, and independently read back, the
 only machine next phase is
-`AUTO_AU040_REPOSITORY_BINDING`. That future Auto phase may establish only its
-separately authorized repository-binding contract. It must not treat this
-control sync as AU-040 completion or permission to create canonical shards,
-publish, touch Gmail/state, activate, create VERSION, change automation, or
-resolve the schedule conflict.
+`MECHANISM_BOUND_REFERENCE_RESOLVER_IMPLEMENTATION`. That future Mechanism
+phase must build the immutable Registry snapshot tuple and exact
+identity → instance → version resolver closure required by the Auto dependency
+contract. It must not treat repository binding as AU-040 completion or
+permission to create canonical shards, publish, touch Gmail/state, activate,
+create VERSION, change automation, or resolve the schedule conflict.
 
 Development still must not call verifier. After both planes are complete, the
 Owner will designate the last completed task to invoke a fresh verifier.

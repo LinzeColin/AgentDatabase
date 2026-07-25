@@ -64,25 +64,28 @@ CANDIDATE_BUNDLE_GIT_OBJECT_ID = (
     "sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5"
 )
 AUTO_RUNTIME_GIT_OBJECT_ID = (
-    "sha1:85edc67df48d4e5bc783f89ed3f3371f25f288e1"
+    "sha1:49ac09dbd9c8a2e18d5a199088a910dc77e7d365"
 )
 AUTO_RUNTIME_INTERFACE_RAW_SHA256 = (
-    "ce3aae7a22419c3a01455e8e83cc67b23eeb2ada3f3c17e57590a890c0fdef31"
+    "c7af9d1406fe2ed084d5a30fab6cded3897a83c1602e6c40587cf28c75a2c75c"
 )
-AUTO_RUNTIME_MODULE_COUNT = 25
+AUTO_RUNTIME_MODULE_COUNT = 26
 AUTO_SOURCE_CONTROL_GIT_OBJECT_ID = (
-    "sha1:fb9b99c36cb870b04f34b5ed3bcb75aeae52c296"
+    "sha1:e6438db785c2f3f38da59be7ba9c1cd46651d7ea"
 )
 AUTO_SOURCE_CONTROL_INTERFACE_RAW_SHA256 = (
-    "3929db4e818864d02a596efe3e1aaae1af71a765cfafaf7b22f26157135d7953"
+    "28a35148cc18362de4fc53b508754f263a015cf33e4cd187314cf48c767b6920"
 )
 AUTO_SOURCE_RUNTIME_GIT_OBJECT_ID = (
-    "sha1:7f1bd87652f7cc88fbf2f6b542f9feb57750bf0d"
+    "sha1:85edc67df48d4e5bc783f89ed3f3371f25f288e1"
 )
 AUTO_SOURCE_RUNTIME_INTERFACE_RAW_SHA256 = (
-    "f1f9331df1b56c80e2fa7415fe2fe3d714dcd831cec94390afa43c078dedf38b"
+    "ce3aae7a22419c3a01455e8e83cc67b23eeb2ada3f3c17e57590a890c0fdef31"
 )
-AUTO_SOURCE_RUNTIME_MODULE_COUNT = 24
+AUTO_SOURCE_RUNTIME_MODULE_COUNT = 25
+AUTO_PUBLISHER_SOURCE_CONTROL_GIT_OBJECT_ID = (
+    "sha1:fb9b99c36cb870b04f34b5ed3bcb75aeae52c296"
+)
 AUTO_WRITER_SOURCE_CONTROL_GIT_OBJECT_ID = (
     "sha1:00c4a52d177898b1999b87b29ddb480e89908729"
 )
@@ -464,6 +467,9 @@ def _verify_auto_historical_control(
     publisher_snapshot = auto_interface.get(
         "publisher_v2_runtime_materialization_snapshot"
     )
+    repository_snapshot = auto_interface.get(
+        "repository_binding_materialization_snapshot"
+    )
     if (
         not isinstance(observation, dict)
         or writer_snapshot
@@ -484,8 +490,22 @@ def _verify_auto_historical_control(
             "control_sync_required_before_state_write": True,
             "current_auto_runtime_control_bound": False,
             "predecessor_control_git_object_id": (
+                AUTO_PUBLISHER_SOURCE_CONTROL_GIT_OBJECT_ID
+            ),
+            "repository_bound": False,
+            "runtime_state_write_permitted": False,
+            "semantic_scope": "INTERFACE_MATERIALIZATION_ONLY",
+        }
+        or repository_snapshot
+        != {
+            "as_of_phase": "AUTO_AU040_REPOSITORY_BINDING",
+            "bound_reference_resolver_gate_satisfied": False,
+            "canonical_publication_permitted": False,
+            "current_auto_runtime_control_bound": False,
+            "predecessor_control_git_object_id": (
                 AUTO_SOURCE_CONTROL_GIT_OBJECT_ID
             ),
+            "repository_binding_integration_complete": True,
             "repository_bound": False,
             "runtime_state_write_permitted": False,
             "semantic_scope": "INTERFACE_MATERIALIZATION_ONLY",
@@ -522,7 +542,7 @@ def _verify_auto_historical_control(
         or source_control.get("base_auto_git_object_id")
         != AUTO_SOURCE_RUNTIME_GIT_OBJECT_ID
         or source_control.get("next_phase")
-        != "AUTO_AU040_PUBLISHER_V2_RUNTIME_INTEGRATION"
+        != "AUTO_AU040_REPOSITORY_BINDING"
         or not isinstance(source_transport, dict)
         or source_transport.get("verified_git_object_id")
         != AUTO_SOURCE_RUNTIME_GIT_OBJECT_ID
@@ -531,7 +551,7 @@ def _verify_auto_historical_control(
         or source_transport.get("module_count")
         != AUTO_SOURCE_RUNTIME_MODULE_COUNT
         or source_transport.get("integration_state")
-        != "AU040_RUNTIME_WRITER_INTEGRATED_CONTROL_SYNCED"
+        != "AU040_PUBLISHER_V2_SYNCED"
         or not isinstance(source_transition, dict)
         or source_transition.get("auto_runtime_integration_complete")
         is not True
@@ -540,7 +560,7 @@ def _verify_auto_historical_control(
         or source_transition.get("runtime_shard_writer_integration_complete")
         is not True
         or source_transition.get("publisher_v2_runtime_integration_complete")
-        is not False
+        is not True
         or source_transition.get("repository_bound") is not False
         or source_transition.get("canonical_publication_permitted")
         is not False
@@ -568,9 +588,11 @@ def _verify_auto_historical_control(
                 AUTO_SOURCE_CONTROL_INTERFACE_RAW_SHA256
             ),
             "next_phase_at_observation": (
-                "AUTO_AU040_PUBLISHER_V2_RUNTIME_INTEGRATION"
+                "AUTO_AU040_REPOSITORY_BINDING"
             ),
             "observed_auto_runtime_integration_complete": True,
+            "observed_publisher_v2_runtime_integration_complete": True,
+            "observed_repository_bound": False,
             "observed_runtime_state_write_permitted": True,
             "root_status": "DRAFT_NON_ACTIVE",
             "verified_git_object_id": AUTO_SOURCE_CONTROL_GIT_OBJECT_ID,
@@ -681,6 +703,12 @@ def _preflight_inputs(
         raise ContractError("ACTIVATION_AUTO_INTERFACE_CONTRACT_MISMATCH")
     _verify_auto_historical_control(auto_interface)
     transport = auto_interface.get("au_040_transport_contract", {})
+    repository_contract = auto_interface.get(
+        "repository_binding_contract", {}
+    )
+    resolver_contract = auto_interface.get(
+        "bound_reference_resolver_dependency_contract", {}
+    )
     if (
         auto_interface.get("status") != "DRAFT_NON_ACTIVE"
         or auto_interface.get("auto_exact_bundle_integration_complete")
@@ -716,7 +744,15 @@ def _preflight_inputs(
         is not True
         or auto_interface.get("publisher_v2_runtime_integration_complete")
         is not True
+        or auto_interface.get("repository_binding_integration_complete")
+        is not True
+        or auto_interface.get(
+            "repository_binding_readonly_preflight_verified"
+        )
+        is not False
         or auto_interface.get("repository_bound") is not False
+        or auto_interface.get("bound_reference_resolver_gate_satisfied")
+        is not False
         or auto_interface.get("au_040_complete") is not False
         or auto_interface.get("au_040_schema_promotion_complete") is not True
         or auto_interface.get(
@@ -738,7 +774,7 @@ def _preflight_inputs(
         or auto_interface.get("m0c_b_permitted") is not False
         or auto_interface.get("activation_instance_created") is not False
         or auto_interface.get("runtime_writer_shadow_status")
-        != "UNBOUND_CONTROL_SYNC_PENDING"
+        != "UNBOUND_REPOSITORY_CONTROL_SYNC_PENDING"
         or auto_interface.get("runtime_writer_shadow_validator_kind")
         != "DEVELOPMENT_ONLY_UNBOUND"
         or auto_interface.get("runtime_writer_shadow_returns_bootstrap_context")
@@ -746,7 +782,7 @@ def _preflight_inputs(
         or auto_interface.get("runtime_writer_shadow_state_access_permitted")
         is not False
         or auto_interface.get("runtime_publisher_shadow_status")
-        != "UNBOUND_CONTROL_SYNC_PENDING"
+        != "UNBOUND_REPOSITORY_CONTROL_SYNC_PENDING"
         or auto_interface.get("runtime_publisher_shadow_validator_kind")
         != "DEVELOPMENT_ONLY_UNBOUND"
         or auto_interface.get(
@@ -759,15 +795,33 @@ def _preflight_inputs(
         is not False
         or auto_interface.get("runtime_publisher_shadow_validator_path")
         != "CodexSkills/registry/auto/tools/validate_au040_publisher.py"
+        or auto_interface.get("runtime_repository_binding_shadow_status")
+        != "UNBOUND_REPOSITORY_CONTROL_SYNC_PENDING"
+        or auto_interface.get(
+            "runtime_repository_binding_shadow_validator_kind"
+        )
+        != "DEVELOPMENT_ONLY_UNBOUND"
+        or auto_interface.get(
+            "runtime_repository_binding_shadow_returns_bootstrap_context"
+        )
+        is not False
+        or auto_interface.get(
+            "runtime_repository_binding_shadow_state_access_permitted"
+        )
+        is not False
+        or auto_interface.get(
+            "runtime_repository_binding_shadow_validator_path"
+        )
+        != "CodexSkills/registry/auto/tools/validate_au040_publisher.py"
         or auto_interface.get("au_040_authority_ruling_status")
-        != "PUBLISHER_V2_INTEGRATED_CONTROL_SYNC_PENDING"
+        != "REPOSITORY_BINDING_INTEGRATED_CONTROL_SYNC_PENDING"
         or auto_interface.get("notification_production_transport")
         != "GMAIL_API_V1"
         or auto_interface.get("notification_provider_readback_required") is not True
         or auto_interface.get("notification_test_transport_production_forbidden")
         is not True
         or auto_interface.get("next_phase")
-        != "MECHANISM_POST_AU040_PUBLISHER_V2_CONTROL_SYNC"
+        != "MECHANISM_POST_AU040_REPOSITORY_BINDING_CONTROL_SYNC"
         or not isinstance(transport, dict)
         or transport.get("current_candidate_schema_count") != 31
         or transport.get("final_candidate_materialization_complete")
@@ -775,6 +829,8 @@ def _preflight_inputs(
         or transport.get("runtime_shard_writer_integration_complete")
         is not True
         or transport.get("publisher_v2_runtime_integration_complete")
+        is not True
+        or transport.get("repository_binding_integration_complete")
         is not True
         or transport.get(
             "publisher_v2_control_sync_required_before_canonical_write"
@@ -791,6 +847,65 @@ def _preflight_inputs(
         or transport.get("publisher_serialization_discriminator_required")
         is not True
         or transport.get("repository_bound") is not False
+        or not isinstance(repository_contract, dict)
+        or repository_contract.get("repository_id")
+        != "github.com/LinzeColin/AgentDatabase"
+        or repository_contract.get("remote_name") != "origin"
+        or repository_contract.get("branch") != "main"
+        or repository_contract.get("remote_ref") != "refs/heads/main"
+        or repository_contract.get("push_refspec") != "HEAD:main"
+        or repository_contract.get("object_format") != "sha1"
+        or repository_contract.get("expected_fetch_url")
+        != "git@github.com:LinzeColin/AgentDatabase.git"
+        or repository_contract.get("expected_push_url")
+        != "git@github.com:LinzeColin/AgentDatabase.git"
+        or repository_contract.get("canonical_run_log_root")
+        != "OpenAIDatabase/data/run_logs/skills_runs/"
+        or repository_contract.get("reference_main_clean_required")
+        is not True
+        or repository_contract.get("changed_path_exact_closure_required")
+        is not True
+        or repository_contract.get(
+            "bound_reference_resolver_required_before_mutable_git"
+        )
+        is not True
+        or repository_contract.get("bound_reference_resolver_owner_plane")
+        != "MECHANISM"
+        or not isinstance(resolver_contract, dict)
+        or resolver_contract.get("gate_owner_plane") != "MECHANISM"
+        or resolver_contract.get(
+            "adapter_may_generate_or_authenticate_resolver"
+        )
+        is not False
+        or resolver_contract.get(
+            "current_registry_compatibility_index_is_not_snapshot_truth"
+        )
+        is not True
+        or resolver_contract.get(
+            "pinned_git_object_reads_before_gate_permitted"
+        )
+        is not True
+        or resolver_contract.get("unprovable_binding_action")
+        != "PROJECT_UNKNOWN_AND_BLOCK_CANONICAL_PUBLICATION"
+        or resolver_contract.get("must_precede")
+        != [
+            "GMAIL_CLIENT",
+            "GIT_LS_REMOTE",
+            "GIT_MUTABLE_BACKEND",
+            "LOCK",
+            "NOTIFICATION_OUTBOX",
+            "PUBLISHER",
+            "STATE_ROOT",
+            "WATERMARK",
+            "WORKTREE",
+        ]
+        or resolver_contract.get("missing_current_artifacts")
+        != [
+            "FOUR_SOURCE_IDENTITY_INSTANCE_VERSION_CATALOGS",
+            "GLOBAL_SKILL_IDENTITY_RECORDS",
+            "MECHANISM_RESOLVER_ARTIFACT",
+            "VERSIONED_REGISTRY_SNAPSHOT_CONTRACT",
+        ]
         or transport.get("schema_promotion_interface_raw_sha256")
         != AUTO_PROMOTION_INTERFACE_RAW_SHA256
         or transport.get("schema_promotion_evidence_git_object_id")
@@ -907,7 +1022,7 @@ def control_interface(schemas: Mapping[str, Mapping[str, Any]]) -> Dict[str, Any
             "timing": "PRE_WRITE",
             "transport": "GMAIL_API_V1",
         },
-        "next_phase": "AUTO_AU040_REPOSITORY_BINDING",
+        "next_phase": "MECHANISM_BOUND_REFERENCE_RESOLVER_IMPLEMENTATION",
         "protocol_revision": PROTOCOL_REVISION,
         "publication_contract": {
             "caller_boolean_is_not_trust_root": True,
@@ -944,6 +1059,7 @@ def control_interface(schemas: Mapping[str, Mapping[str, Any]]) -> Dict[str, Any
                 "verified_git_object_id": SOURCE_AUTO_CANDIDATE_GIT_OBJECT_ID,
             },
             "canonical_publication_permitted": False,
+            "effective_runtime_state_write_permitted": False,
             "external_gmail_ready": False,
             "external_state_ready": False,
             "final_candidate_integration_required": False,
@@ -954,17 +1070,22 @@ def control_interface(schemas: Mapping[str, Mapping[str, Any]]) -> Dict[str, Any
                 "verified_git_object_id": AUTO_PROMOTION_GIT_OBJECT_ID,
             },
             "publisher_v2_runtime_integration_complete": True,
-            "repository_bound": False,
+            "repository_binding_integration_complete": True,
+            "repository_bound": True,
+            "bound_reference_resolver_gate_satisfied": False,
             "runtime_preflight_shadow_permitted": True,
             "runtime_shard_writer_integration_complete": True,
             "runtime_state_instance_created": False,
+            "runtime_state_write_gate_status": (
+                "BOUND_REFERENCE_RESOLVER_PENDING"
+            ),
             "runtime_state_write_permitted": True,
             "schedule_authority_resolved": False,
             "schedule_complete": False,
         },
         "transport_runtime_interface": {
             "artifact_digest": AUTO_RUNTIME_INTERFACE_RAW_SHA256,
-            "integration_state": "AU040_PUBLISHER_V2_SYNCED",
+            "integration_state": "AU040_REPOSITORY_BINDING_SYNCED",
             "module_count": AUTO_RUNTIME_MODULE_COUNT,
             "relative_path": "CodexSkills/registry/auto/runtime-interface.json",
             "verified_git_object_id": AUTO_RUNTIME_GIT_OBJECT_ID,

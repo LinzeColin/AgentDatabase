@@ -300,7 +300,7 @@ class ActivationControlTests(unittest.TestCase):
         self.assertEqual(interface["candidate_policy_count"], 5)
         self.assertEqual(
             interface["next_phase"],
-            "AUTO_AU040_REPOSITORY_BINDING",
+            "MECHANISM_BOUND_REFERENCE_RESOLVER_IMPLEMENTATION",
         )
         self.assertEqual(
             interface["base_auto_git_object_id"],
@@ -333,6 +333,17 @@ class ActivationControlTests(unittest.TestCase):
         self.assertTrue(
             interface["transition_contract"]["runtime_state_write_permitted"]
         )
+        self.assertFalse(
+            interface["transition_contract"][
+                "effective_runtime_state_write_permitted"
+            ]
+        )
+        self.assertEqual(
+            interface["transition_contract"][
+                "runtime_state_write_gate_status"
+            ],
+            "BOUND_REFERENCE_RESOLVER_PENDING",
+        )
         auto_interface = strict_load(
             REPO_ROOT
             / "CodexSkills"
@@ -341,6 +352,16 @@ class ActivationControlTests(unittest.TestCase):
             / "runtime-interface.json"
         )
         self.assertFalse(auto_interface["runtime_state_write_permitted"])
+        self.assertTrue(
+            auto_interface["repository_binding_integration_complete"]
+        )
+        self.assertFalse(
+            auto_interface["repository_binding_readonly_preflight_verified"]
+        )
+        self.assertFalse(auto_interface["repository_bound"])
+        self.assertFalse(
+            auto_interface["bound_reference_resolver_gate_satisfied"]
+        )
         self.assertEqual(
             auto_interface["runtime_interface_materialization_snapshot"],
             {
@@ -373,6 +394,22 @@ class ActivationControlTests(unittest.TestCase):
                 "semantic_scope": "INTERFACE_MATERIALIZATION_ONLY",
             },
         )
+        self.assertEqual(
+            auto_interface["repository_binding_materialization_snapshot"],
+            {
+                "as_of_phase": "AUTO_AU040_REPOSITORY_BINDING",
+                "bound_reference_resolver_gate_satisfied": False,
+                "canonical_publication_permitted": False,
+                "current_auto_runtime_control_bound": False,
+                "predecessor_control_git_object_id": (
+                    "sha1:e6438db785c2f3f38da59be7ba9c1cd46651d7ea"
+                ),
+                "repository_binding_integration_complete": True,
+                "repository_bound": False,
+                "runtime_state_write_permitted": False,
+                "semantic_scope": "INTERFACE_MATERIALIZATION_ONLY",
+            },
+        )
         self.assertFalse(
             interface["transition_contract"]["runtime_state_instance_created"]
         )
@@ -398,20 +435,30 @@ class ActivationControlTests(unittest.TestCase):
                 "publisher_v2_runtime_integration_complete"
             ]
         )
+        self.assertTrue(
+            interface["transition_contract"][
+                "repository_binding_integration_complete"
+            ]
+        )
         self.assertFalse(interface["transition_contract"]["m0c_b_permitted"])
         self.assertFalse(
             interface["transition_contract"][
                 "canonical_publication_permitted"
             ]
         )
-        self.assertFalse(
+        self.assertTrue(
             interface["transition_contract"]["repository_bound"]
+        )
+        self.assertFalse(
+            interface["transition_contract"][
+                "bound_reference_resolver_gate_satisfied"
+            ]
         )
         self.assertEqual(
             interface["transport_runtime_interface"],
             {
                 "artifact_digest": AUTO_RUNTIME_INTERFACE_RAW_SHA256,
-                "integration_state": "AU040_PUBLISHER_V2_SYNCED",
+                "integration_state": "AU040_REPOSITORY_BINDING_SYNCED",
                 "module_count": AUTO_RUNTIME_MODULE_COUNT,
                 "relative_path": (
                     "CodexSkills/registry/auto/runtime-interface.json"
