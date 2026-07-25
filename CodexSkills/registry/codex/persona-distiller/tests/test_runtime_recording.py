@@ -12,7 +12,7 @@ from helpers import create_target, run_target_script
 class RuntimeRecordingTests(unittest.TestCase):
     def test_direct_runtime_plan_has_no_identity_gate_or_invocation_version(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
-            target = create_target(Path(tmp), identity='1')
+            target = create_target(Path(tmp), identity='1:40+4:60')
             plan = json.loads(run_target_script(
                 target, 'runtime_router.py', 'plan', '--task', '设计并审查一个代码架构',
             ).stdout)

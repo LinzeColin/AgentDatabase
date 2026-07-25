@@ -1,6 +1,6 @@
 ---
 name: persona-distiller
-description: Build, audit, update, package, or uniquely register an evidence-grounded target-person Agent Skill through documented capabilities, strategies, cognition, decision policy, work system, temperament, and boundaries. Before identity parsing or research, resolve same-name candidates from the canonical registry and authoritative sources; auto-bind one even with weak evidence, but stop for user selection when multiple remain. Required inputs are the target person's name and one identity family or weighted multi-identity selection; scenario is optional and inferred. Use for six-lane research, source-universe coverage, Work/Persona separation, automatic runtime identity routing, agentic execution without per-invocation versions, corrections, evaluation, refinement, rollback, one complete installable delivery ZIP, and per-person product releases 0.0.0.1 through 0.0.0.999 in the sibling canonical expert-team registry. 中文名称：人物蒸馏 Skill。
+description: Build, audit, update, package, or uniquely register an evidence-grounded target-person Agent Skill that can plan and execute work through the target's documented capabilities, strategies, cognition, decision policy, work system, temperament, and boundaries. Required build inputs are only the target person's name and one of six identity families or a weighted multi-identity selection; scenario is optional and otherwise inferred. Use for six-lane public/private/fictional research, source-universe coverage, Work/Persona separation, automatic internal identity routing, agentic task execution without per-invocation versions, corrections, evaluation, refinement, rollback, one complete installable delivery ZIP, and per-person product releases 0.0.0.1 through 0.0.0.999 in the sibling canonical expert-team registry. 中文名称：人物蒸馏 Skill。
 ---
 
 # 人物蒸馏 Skill / Persona Distiller
@@ -9,40 +9,20 @@ description: Build, audit, update, package, or uniquely register an evidence-gro
 
 ## 入口合同
 
-### 第一道人物消歧硬门
-
-蒸馏流程的第一步必须先检索同名人物，不能先解析身份、初始化 workspace、抓取研究资料或开始打包：
-
-1. 将姓名按 Unicode、常用别名、中文译名、英文名、转写和缩写规范化；
-2. 先查 sibling canonical registry，再查权威公开资料，私域/自己资料不得在无授权时扩展检索；
-3. 没有候选时继续正常流程；只有一个候选时无论证据强弱都自动绑定，保证流程顺滑；多个候选时立即停止并等待用户选择；
-4. 多候选必须全部列出并连续分配字母（A–Z 后使用 AA、AB……），不得截断、合并或猜测；候选卡片不显示“置信度”，但内部仍可用证据强度判断是否能够自动绑定。
-
-每个候选严格输出四行，每行只保留最有价值的一句话：
-
-```text
-A. 人物与身份：姓名、身份分类、职业或主要职务。
-   专业背景：组织、时代、地区与核心专业经历。
-   应用价值：可蒸馏的应用场景与关键能力。
-   区分依据：权威证据与其区别于其他同名者的关键特征。
-```
-
-多候选暂停时不得运行 `init_target.py`、不得写入 workspace、不得开始六路研究；用户只需回复对应字母，或补充组织、年代、地区等消歧信息。一个候选自动绑定后，必须把 `chosen_subject_uid`、候选证据和规范化姓名写入构建合同，之后才进入身份解析。机器门禁由 `scripts/namesake_gate.py` 生成 schema 1.0 gate 文件，`init_target.py` 在身份解析和 workspace 写入之前强制验证它；多候选 gate 以 `BLOCKED_NAMESAKE_SELECTION` 失败，不得绕过。
-
 只要求用户提供：
 
 1. `目标人物姓名`
-2. `身份`：十二个主身份之一（单一主身份；多重身份已移除）
+2. `身份`：六个主身份之一，或带权重的多重身份
 
 场景不是必填。用户未给场景时，根据身份和当前任务自动路由。信息已齐时禁止重复追问。
 
 身份菜单：
 
-`1 材料建工师｜2 软件开发师｜3 艺术设计师｜4 创业经营师｜5 投资资本师｜6 思想教育师｜7 政治法律师｜8 客户营销师｜9 建造采购师｜10 财务合规师｜11 医疗护理师｜12 农林牧渔师`
+`1 技术工程师｜2 创业经营家｜3 投资资本家｜4 开发设计家｜5 思想教育家｜6 政治法律家｜7 多重身份`
 
-接受：`1`、`材料建工师` 等编号或身份名；只能选单一主身份，不再接受加权/复合选择。
+接受：`1`、`技术工程师`、`1:70+4:30`、`技术工程师=0.7,开发设计家=0.3`。多重身份必须给至少两个正权重；系统归一化为 1.0。
 
-私域、自己、虚构和历史人物的 `subject_origin` 是独立治理属性，由系统识别，与身份分类正交。私域资料必须有授权，不能因“身份已选择”绕过同意门。
+私域、自己、虚构和历史人物仍使用第 7 类；`subject_origin` 是独立治理属性，由系统识别。私域资料必须有授权，不能因“身份已选择”绕过同意门。
 
 ## 任务路由
 
@@ -61,33 +41,12 @@ A. 人物与身份：姓名、身份分类、职业或主要职务。
 
 ## 构建工作流
 
-### 0. 同名消歧（第一步）
-
-执行上述“第一道人物消歧硬门”。这是构建期门禁，不改变已安装人物 Skill 的运行方式；运行时仍由 Skill 内部自动路由身份和场景，不要求用户选择身份。
-
-标准机器流程：先由编排层检索 canonical registry 与权威公开资料，整理候选 JSON，再运行：
-
-```bash
-python3 scripts/namesake_gate.py \
-  --name "目标人物" \
-  --candidates-file ./namesake-candidates.json \
-  --output ./namesake-gate.json
-python3 scripts/init_target.py \
-  --name "目标人物" \
-  --identity "技术工程师" \
-  --namesake-gate ./namesake-gate.json \
-  --workspace ./workspaces
-```
-
-单候选（包括低证据候选）会继续；多候选只生成带 A/B/C/D 卡片的 blocked gate，等待用户选择后重新生成 ready gate。
-
 ### 1. 解析输入并初始化
 
 ```bash
 python3 scripts/init_target.py \
   --name "目标人物" \
   --identity "1" \
-  --namesake-gate ./namesake-gate.json \
   --workspace ./workspaces
 ```
 
@@ -162,8 +121,9 @@ Skill ZIP，以及安装器、delivery manifest、全内容校验、registration
 不作为通用硬要求。缺失的历史证据必须显式写为不可用，不得伪造通过。
 
 发布 ZIP 后必须完成唯一登记。canonical registry 是平级 Skill
-`../persona-distiller-group/`。人物按机器身份映射到十二个单一身份目录之一：
-`材料建工师|软件开发师|艺术设计师|创业经营师|投资资本师|思想教育师|政治法律师|客户营销师|建造采购师|财务合规师|医疗护理师|农林牧渔师`。同一人物的新版本追加到原目录。
+`../persona-distiller-group/`。单身份按机器身份映射到
+`技术工程师|创业经营家|投资资本家|开发设计家|思想教育家|政治法律家`；
+多重身份只登记到 `多重身份`。同一人物的新版本追加到原目录。
 每个 canonical 人物独立从 `0.0.0.1` 连续递增到 `0.0.0.999`；候选包可预览下一个号码，但只有成功登记才正式占号，失败不占号，达到 `0.0.0.999` 后硬停止。跨目录重复人物、重复产物 hash、版本号跳号/同号异 hash 或未通过登记校验时，发布未完成。
 
 ## 不可违反
@@ -179,4 +139,4 @@ Skill ZIP，以及安装器、delivery manifest、全内容校验、registration
 
 ## 完成定义
 
-姓名和身份构建合同可用；十二类身份解析无歧义；六路与身份研究落盘；来源覆盖和饱和可审计；人物具备能力、策略、认知、决策、Work、Persona、负能力、分歧地图和完整 team card；运行时直接调用并自动路由内部身份，不产生调用版本；评测、纠错、快照、回滚、秘密扫描、双层哈希、干净安装和新环境复测全部通过；只输出一个完整交付 ZIP；ZIP 在平级 canonical group 的唯一身份目录按该人物连续版本完成登记，group README、route 和机器索引同步且全目录校验通过。
+姓名和身份构建合同可用；七类身份解析无歧义；六路与身份研究落盘；来源覆盖和饱和可审计；人物具备能力、策略、认知、决策、Work、Persona、负能力、分歧地图和完整 team card；运行时直接调用并自动路由内部身份，不产生调用版本；评测、纠错、快照、回滚、秘密扫描、双层哈希、干净安装和新环境复测全部通过；只输出一个完整交付 ZIP；ZIP 在平级 canonical group 的唯一身份目录按该人物连续版本完成登记，group README、route 和机器索引同步且全目录校验通过。

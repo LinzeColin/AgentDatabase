@@ -8,9 +8,8 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from common import atomic_write_json, atomic_write_text, ensure_dir, make_id, read_json, slugify, utc_now, valid_skill_name
+from common import atomic_write_json, atomic_write_text, ensure_dir, make_id, slugify, utc_now, valid_skill_name
 from identity import load_registry, parse_identity_spec
-from namesake_gate import normalize_name
 from persona_registry import category_for_identity, subject_uid
 from route_engine import build_route, source_universe
 
@@ -21,33 +20,10 @@ def render(text: str, values: dict[str, str]) -> str:
     return text
 
 
-def load_namesake_gate(path: Path, target_name: str) -> dict[str, object]:
-    gate = read_json(path.expanduser().resolve())
-    if not isinstance(gate, dict) or gate.get('schema_version') != '1.0':
-        raise ValueError('namesake gate must be a schema 1.0 object')
-    if gate.get('normalized_name') != normalize_name(target_name):
-        raise ValueError('namesake gate target name does not match --name')
-    candidates = gate.get('candidates')
-    count = gate.get('candidate_count')
-    if not isinstance(candidates, list) or count != len(candidates):
-        raise ValueError('namesake gate candidate_count does not match candidates')
-    if gate.get('status') == 'blocked' or gate.get('resolution') == 'multiple' or count > 1:
-        raise ValueError('BLOCKED_NAMESAKE_SELECTION: choose one candidate before initialization')
-    if gate.get('status') != 'ready' or gate.get('resolution') not in {'none', 'single'}:
-        raise ValueError('namesake gate is not ready')
-    if count == 1 and gate.get('selected_subject_uid') != candidates[0].get('subject_uid'):
-        raise ValueError('namesake gate selected_subject_uid does not match its candidate')
-    cards = gate.get('candidate_cards')
-    if not isinstance(cards, list) or len(cards) != count:
-        raise ValueError('namesake gate candidate_cards does not match candidates')
-    return gate
-
-
 def main() -> int:
     parser = argparse.ArgumentParser(description='Create a target-person executable Agent Skill workspace.')
     parser.add_argument('--name', required=True, help='Target person name.')
-    parser.add_argument('--identity', required=True, help='single primary identity, 1-12 or name, e.g. 1 or 材料建工师.')
-    parser.add_argument('--namesake-gate', required=True, type=Path, help='Ready schema-1 namesake gate produced before initialization.')
+    parser.add_argument('--identity', required=True, help='1-6 identity or weighted multi, e.g. 1:70+4:30.')
     parser.add_argument('--scenario', help='Optional primary scenario. Runtime still routes other scenarios.')
     parser.add_argument('--slug')
     parser.add_argument('--workspace', default='./workspaces')
@@ -60,12 +36,6 @@ def main() -> int:
     parser.add_argument('--enable-existential-hypotheses', action='store_true')
     parser.add_argument('--force', action='store_true')
     args = parser.parse_args()
-
-    try:
-        # This is intentionally before identity parsing, workspace creation, or --force deletion.
-        namesake_gate = load_namesake_gate(args.namesake_gate, args.name)
-    except (OSError, ValueError, json.JSONDecodeError) as exc:
-        parser.error(str(exc))
 
     try:
         selection = parse_identity_spec(args.identity)
@@ -86,7 +56,8 @@ def main() -> int:
     origin = args.subject_origin
     origin_review_required = origin == 'auto'
     effective_origin = 'public' if origin == 'auto' else origin
-    # 多重身份已移除：所有 origin 都使用单一主身份。private/self 仍需 consent 授权。
+    if effective_origin in {'private', 'self', 'fictional', 'historical'} and selection['mode'] != 'multi':
+        parser.error('private/self/fictional/historical targets use the multi-identity route and require explicit weights')
     status = 'blocked-consent' if effective_origin in {'private', 'self'} and not args.consent_authority else 'draft'
     now = utc_now()
     target_id = make_id('tgt')
@@ -100,16 +71,6 @@ def main() -> int:
         'name': args.name,
         'slug': slug,
         'identity_selection': selection,
-        'namesake_gate': {
-            'schema_version': namesake_gate.get('schema_version'),
-            'normalized_name': namesake_gate.get('normalized_name'),
-            'resolution': namesake_gate.get('resolution'),
-            'candidate_count': namesake_gate.get('candidate_count'),
-            'chosen_subject_uid': namesake_gate.get('selected_subject_uid'),
-            'chosen_candidate': (namesake_gate.get('candidates') or [None])[0] if namesake_gate.get('resolution') == 'single' else None,
-        },
-        'chosen_subject_uid': namesake_gate.get('selected_subject_uid'),
-        'normalized_name': namesake_gate.get('normalized_name'),
         'subject_origin': effective_origin,
         'origin_review_required': origin_review_required,
         'profile': args.profile,

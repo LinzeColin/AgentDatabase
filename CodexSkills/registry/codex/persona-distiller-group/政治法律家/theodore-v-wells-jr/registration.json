@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:theodorevwellsjr",
+  "canonical_name": "Theodore V. Wells Jr.",
+  "identity_family_id": "political-legal",
+  "identity_mode": "single",
+  "registration_category": "政治法律家",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "theodore-v-wells-jr",
+  "subject_uid": "person-1a4a76c0932b6aad",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/theodore-v-wells-jr-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-23T08:30:40Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "legacy-normalized-v0.0.0.5",
+      "model_version": "0.1.0",
+      "outer_sha256": "4fdd1c1f4592a7dcc9619bbe94e25ad31e3627133f951718575ff795d0396c58",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/theodore-v-wells-jr-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "462a320084a6ba73388a7133a8627f39cd13b2696adfbf3b8598c280e3a4197a",
+      "runtime_size_bytes": 77607,
+      "size_bytes": 734016
+    }
+  ]
+}

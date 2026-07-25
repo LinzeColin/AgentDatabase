@@ -11,7 +11,7 @@ import sys
 import tempfile
 from pathlib import Path, PurePosixPath
 
-BUNDLE_VERSION = "v0.0.0.6"
+BUNDLE_VERSION = "v0.0.0.5"
 SKILL_NAMES = ("persona-distiller", "persona-distiller-group")
 SOURCE = Path(__file__).resolve().parent
 

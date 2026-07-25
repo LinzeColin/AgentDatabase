@@ -51,7 +51,7 @@ def main() -> int:
     ]
     manifest["files"] = records
     manifest["distribution"] = {
-        "kind": "repository-customized-v0.0.0.6",
+        "kind": "repository-customized-v0.0.0.5",
         "lineage_base_archive_sha256": "e891912d98d14afb7677ac935a19be329d97d206f4ae74a644892f46b17f6748",
         "canonical_registry": "../persona-distiller-group",
     }

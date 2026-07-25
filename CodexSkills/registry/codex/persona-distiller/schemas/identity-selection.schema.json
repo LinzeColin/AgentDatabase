@@ -15,17 +15,11 @@
     "primary": {
       "enum": [
         "technical-engineer",
-        "software-developer",
-        "art-designer",
         "entrepreneur-operator",
         "investor-capital-allocator",
+        "developer-designer",
         "thinker-educator",
-        "political-legal",
-        "customer-marketing",
-        "construction-procurement",
-        "finance-compliance",
-        "healthcare-nursing",
-        "agriculture-fishery"
+        "political-legal"
       ]
     },
     "weights": {

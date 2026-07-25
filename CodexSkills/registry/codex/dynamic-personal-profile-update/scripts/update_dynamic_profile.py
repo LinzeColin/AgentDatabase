@@ -16,8 +16,7 @@ from pathlib import Path, PurePosixPath
 from typing import Any
 
 
-SKILL_VERSION = "0.0.0.2"
-MIGRATABLE_PREVIOUS_SKILL_VERSIONS = frozenset({"0.0.0.1"})
+SKILL_VERSION = "0.0.0.1"
 SCHEMA_VERSION = "dynamic_personal_profile.v1"
 DEFAULT_OUTPUT = Path("OpenAIDatabase/data/derived/profile/DYNAMIC_PROFILE.md")
 MAX_FILE_BYTES = 5 * 1024 * 1024
@@ -408,7 +407,7 @@ def collect_codex_recommendations(
                     "confidence_hint": confidence,
                     "counterevidence": (
                         "This redacted derived summary was not independently rechecked "
-                        "against its underlying sessions in v0.0.0.2."
+                        "against its underlying sessions in v0.0.0.1."
                     ),
                     "asset_type": "observation",
                 },
@@ -741,11 +740,7 @@ def split_profile(content: str) -> tuple[dict[str, Any], str]:
     return machine, human
 
 
-def validate_profile_content(
-    content: str,
-    *,
-    allowed_skill_versions: frozenset[str] | None = None,
-) -> list[str]:
+def validate_profile_content(content: str) -> list[str]:
     errors: list[str] = []
     if len(content.encode("utf-8")) > MAX_OUTPUT_BYTES:
         errors.append("profile exceeds 80 KiB")
@@ -773,8 +768,7 @@ def validate_profile_content(
         errors.append("unexpected artifact")
     if machine["artifact_status"] != "generated_derived_view":
         errors.append("unexpected artifact_status")
-    accepted_versions = allowed_skill_versions or frozenset({SKILL_VERSION})
-    if machine["skill_version"] not in accepted_versions:
+    if machine["skill_version"] != SKILL_VERSION:
         errors.append("unexpected skill_version")
     if machine["input_mode"] != "derived_only":
         errors.append("input_mode must be derived_only")
@@ -876,7 +870,7 @@ def validate_profile_content(
         if entry["asset_candidate"] not in ALLOWED_ASSET_TYPES:
             errors.append(f"entries[{index}] has invalid asset_candidate")
         if entry["valid_until"] is not None:
-            errors.append(f"entries[{index}] valid_until must be null in v0.0.0.2")
+            errors.append(f"entries[{index}] valid_until must be null in v0.0.0.1")
 
         evidence = entry["evidence"]
         if not isinstance(evidence, list) or not 1 <= len(evidence) <= 6:
@@ -941,25 +935,14 @@ def validate_profile_file(path: Path) -> list[str]:
     return validate_profile_content(content)
 
 
-def previous_profile_state(output: Path) -> tuple[str | None, str | None]:
+def previous_semantic_hash(output: Path) -> str | None:
     if not output.exists():
-        return None, None
-    if output.is_symlink():
-        raise ValueError("existing output is invalid: profile path must not be a symlink")
-    try:
-        content = output.read_text(encoding="utf-8")
-    except UnicodeDecodeError as exc:
-        raise ValueError("existing output is invalid: profile is not valid UTF-8") from exc
-    errors = validate_profile_content(
-        content,
-        allowed_skill_versions=(
-            MIGRATABLE_PREVIOUS_SKILL_VERSIONS | frozenset({SKILL_VERSION})
-        ),
-    )
+        return None
+    errors = validate_profile_file(output)
     if errors:
         raise ValueError("existing output is invalid: " + "; ".join(errors[:3]))
-    machine, _ = split_profile(content)
-    return str(machine["semantic_snapshot_sha256"]), str(machine["skill_version"])
+    machine, _ = split_profile(output.read_text(encoding="utf-8"))
+    return str(machine["semantic_snapshot_sha256"])
 
 
 def atomic_write(path: Path, content: str) -> None:
@@ -1014,8 +997,7 @@ def main(argv: list[str] | None = None) -> int:
         used_source_records = records_used_by_entries(all_source_records, entries)
         source_hash = source_snapshot_digest(used_source_records)
         semantic = semantic_hash(entries)
-        previous_semantic, previous_version = previous_profile_state(output)
-        if previous_semantic == semantic and previous_version == SKILL_VERSION:
+        if previous_semantic_hash(output) == semantic:
             print(
                 json.dumps(
                     {

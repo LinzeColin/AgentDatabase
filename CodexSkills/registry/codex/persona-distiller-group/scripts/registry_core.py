@@ -52,18 +52,13 @@ SECRET_PATTERNS = {
 }
 
 CATEGORIES: tuple[dict[str, str], ...] = (
-    {"folder": "材料建工师", "identity_family_id": "technical-engineer", "identity_mode": "single"},
-    {"folder": "软件开发师", "identity_family_id": "software-developer", "identity_mode": "single"},
-    {"folder": "艺术设计师", "identity_family_id": "art-designer", "identity_mode": "single"},
-    {"folder": "创业经营师", "identity_family_id": "entrepreneur-operator", "identity_mode": "single"},
-    {"folder": "投资资本师", "identity_family_id": "investor-capital-allocator", "identity_mode": "single"},
-    {"folder": "思想教育师", "identity_family_id": "thinker-educator", "identity_mode": "single"},
-    {"folder": "政治法律师", "identity_family_id": "political-legal", "identity_mode": "single"},
-    {"folder": "客户营销师", "identity_family_id": "customer-marketing", "identity_mode": "single"},
-    {"folder": "建造采购师", "identity_family_id": "construction-procurement", "identity_mode": "single"},
-    {"folder": "财务合规师", "identity_family_id": "finance-compliance", "identity_mode": "single"},
-    {"folder": "医疗护理师", "identity_family_id": "healthcare-nursing", "identity_mode": "single"},
-    {"folder": "农林牧渔师", "identity_family_id": "agriculture-fishery", "identity_mode": "single"},
+    {"folder": "技术工程师", "identity_family_id": "technical-engineer", "identity_mode": "single"},
+    {"folder": "创业经营家", "identity_family_id": "entrepreneur-operator", "identity_mode": "single"},
+    {"folder": "投资资本家", "identity_family_id": "investor-capital-allocator", "identity_mode": "single"},
+    {"folder": "开发设计家", "identity_family_id": "developer-designer", "identity_mode": "single"},
+    {"folder": "思想教育家", "identity_family_id": "thinker-educator", "identity_mode": "single"},
+    {"folder": "政治法律家", "identity_family_id": "political-legal", "identity_mode": "single"},
+    {"folder": "多重身份", "identity_family_id": "multi-identity", "identity_mode": "multi"},
 )
 CATEGORY_BY_FOLDER = {item["folder"]: item for item in CATEGORIES}
 CATEGORY_BY_IDENTITY = {item["identity_family_id"]: item for item in CATEGORIES}
@@ -297,7 +292,7 @@ def _scan_zip_secrets(
 def category_for_identity(selection: dict[str, Any]) -> dict[str, str]:
     mode = selection.get("mode")
     if mode == "multi":
-        raise ValueError("multi-identity mode has been removed; every persona is single-identity")
+        return CATEGORY_BY_IDENTITY["multi-identity"]
     if mode != "single":
         raise ValueError(f"unsupported identity mode: {mode!r}")
     primary = str(selection.get("primary"))
@@ -781,7 +776,7 @@ def build_index(
     return {
         "schema_version": REGISTRY_SCHEMA_VERSION,
         "generated": True,
-        "uniqueness_scope": "all-twelve-categories",
+        "uniqueness_scope": "all-seven-categories",
         "category_counts": counts,
         "products": products,
     }

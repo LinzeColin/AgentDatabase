@@ -1,4 +1,4 @@
-# 思想教育师 identity facet
+# 思想教育家 identity facet
 
 ## Readiness
 

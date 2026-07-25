@@ -12,7 +12,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 GROUP_ROOT = ROOT.parent / "persona-distiller-group"
 TEMPLATE_ROOT = ROOT / "templates" / "bundle"
-VERSION = "v0.0.0.6"
+VERSION = "v0.0.0.5"
 TOP_NAME = f"PersonaDistiller-Final-{VERSION}"
 FIXED_ZIP_TIME = (2026, 7, 23, 0, 0, 0)
 EXCLUDED_DIRS = {
@@ -80,7 +80,7 @@ def deterministic_zip(staging: Path, output: Path) -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Build the one-file Persona Distiller v0.0.0.6 release bundle."
+        description="Build the one-file Persona Distiller v0.0.0.5 release bundle."
     )
     parser.add_argument(
         "--output",

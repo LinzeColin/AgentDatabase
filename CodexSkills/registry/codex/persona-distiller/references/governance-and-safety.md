@@ -1,7 +1,7 @@
 # Governance and safety
 
 - Public figure: use lawful public sources and identify cut-off date.
-- Private/self: single primary identity plus explicit authority, source scope, retention, withdrawal and sharing rules.
+- Private/self: multi-identity weights plus explicit authority, source scope, retention, withdrawal and sharing rules.
 - Fictional: record canon, edition, author/adapter and distinguish narrator/character evidence.
 - Historical: tier sources and keep historiographic disagreement.
 

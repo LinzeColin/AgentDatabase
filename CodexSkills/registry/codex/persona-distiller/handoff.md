@@ -3,25 +3,20 @@
 ## 当前架构
 
 - `persona-distiller/`：人物研究、构建、评测、运行时打包和完整交付生成器。
-- `../persona-distiller-group/`：唯一 canonical registry、十二个身份目录、团队卡、route 和 5–20 人专家团队路由。
+- `../persona-distiller-group/`：唯一 canonical registry、七个身份目录、团队卡、route 和 5–20 人专家团队路由。
 - 最终发布 bundle 同时安装二者到 `~/.codex/skills/`；不得在 `~/.agents/skills/` 保留第二来源。
 
-## 十二个 canonical 身份
+## 七个 canonical 身份
 
-1. 材料建工师
-2. 软件开发师
-3. 艺术设计师
-4. 创业经营师
-5. 投资资本师
-6. 思想教育师
-7. 政治法律师
-8. 客户营销师
-9. 建造采购师
-10. 财务合规师
-11. 医疗护理师
-12. 农林牧渔师
+1. 技术工程师
+2. 创业经营家
+3. 投资资本家
+4. 开发设计家
+5. 思想教育家
+6. 政治法律家
+7. 多重身份
 
-名称与构建器 `registries/identity-families.json` 完全一致。同一人物只能登记在一个目录（多重身份已移除，每个人物只归属单一主身份）。
+名称与构建器 `registries/identity-families.json` 完全一致。同一人物只能登记在一个目录；多身份只进入 `多重身份`。
 
 ## 运行合同
 
@@ -34,15 +29,6 @@ caller task → automatic internal identity/scenario route → minimum model loa
 
 不得要求运行用户选择身份、编号或权重。人物产品使用独立连续版本
 `0.0.0.1..0.0.0.999`；人物 Skill 的单次运行不编号。
-
-## 构建前同名消歧 gate
-
-构建第一步由编排层检索 canonical registry 与权威公开资料，并整理候选 JSON。运行
-`scripts/namesake_gate.py` 后才可调用 `scripts/init_target.py --namesake-gate`。
-没有候选可继续；单候选即使证据较弱也自动绑定；多候选返回
-`BLOCKED_NAMESAKE_SELECTION`，输出完整 A/B/C/D 候选卡片，禁止身份解析、workspace
-写入和研究启动。gate 会把规范化姓名、候选证据与 `chosen_subject_uid` 写入目标
-`meta.json`。
 
 ## 单一完整交付
 

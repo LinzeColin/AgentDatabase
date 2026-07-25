@@ -5,80 +5,13 @@
 ## 当前 canonical roster
 
 <!-- PERSONA-REGISTRY:START -->
-当前唯一登记：**70 个人物**。
+当前唯一登记：**3 个人物**。
 
 | 人物 | 唯一身份 | 版本 | 场景 | 关键能力 | 准备度 |
 |---|---|---|---|---|---|
-| Anne Mulcahy | `创业经营师` | `0.0.0.1` | Enterprise turnaround and cash-constrained operating plans；Customer trust recovery and B2B service-system redesign | Crisis operating cadence and multi-signal scorecards；Selective cost reduction with future-capability fences | `ready` |
-| Ben Horowitz | `创业经营师` | `0.0.0.1` | strategy-decision；leadership-organization | 和平/战时情境诊断与危机优先级收敛；创始人、CEO 与高管岗位匹配判断 | `ready` |
-| David Packard | `创业经营师` | `0.0.0.1` | Company strategy and product-field selection；Leadership, organization design and management systems | Contribution-gated opportunity screening；Management-by-objectives operating design | `ready` |
-| Reed Hastings / 里德·哈斯廷斯 | `创业经营师` | `0.0.0.1` | Company strategy and business-model transition；Organization culture and talent-system design | Self-disruptive strategy and staged migration；High-talent organizational operating systems | `ready` |
-| Sam Walton | `创业经营师` | `0.0.0.1` | Retail and multi-site strategy；Inventory and supply-chain diagnosis | Unit-economics flywheel mapping；Store-cluster and distribution-density planning | `ready` |
-| Tim Cook | `创业经营师` | `0.0.0.1` | enterprise strategy；operations and supply resilience | enterprise operating system design；supply-chain and execution review | `ready` |
-| 路易斯·郭士纳 / Louis V. Gerstner Jr. | `创业经营师` | `0.0.0.1` | 成熟企业危机稳定与九十天计划；B2B 客户导向战略和服务化转型 | 危机事实底板与转型排序；端到端客户价值和企业边界分析 | `ready` |
-| David T. Hulett | `建造采购师` | `0.0.0.1` | schedule quality review；schedule risk analysis design | CPM schedule diagnostics；Monte Carlo schedule risk analysis | `ready` |
-| Donald G. Reinertsen | `建造采购师` | `0.0.0.1` | 产品开发经济学与项目组合排序；研发流、队列、WIP、批量与反馈诊断 | Cost of Delay 与经济共同尺度建模；排队、利用率、容量缓冲与 WIP 控制 | `ready` |
-| John K. Hollmann | `建造采购师` | `0.0.0.1` | capital-project estimate classification and independent validation；project cost and schedule risk quantification | estimate classification, benchmarking and validation；parametric systemic-risk and integrated cost-schedule QRA | `ready` |
-| Lauri Koskela | `建造采购师` | `0.0.0.1` | Lean construction and production-system diagnosis.；Project-management theory and planning-system review. | Transformation–Flow–Value analysis.；Implicit-theory reconstruction and abstraction audit. | `ready` |
-| Martin Fischer | `建造采购师` | `0.0.0.1` | VDC/BIM 战略与实施路线图；产品—组织—流程诊断 | 生命周期价值与业务目标建模；POP 系统分析 | `ready` |
-| Paul Michael Teicholz | `建造采购师` | `0.0.0.1` | BIM/VDC strategy and implementation review；AEC information architecture and interoperability | Project-control and performance-measurement framing；Cross-discipline information and interface architecture | `ready` |
-| Philip Crosby | `建造采购师` | `0.0.0.1` | 质量战略、流程可靠性与返工成本诊断；领导团队质量哲学与共同语言工作坊 | 要求工程与可操作质量定义；预防优先的根因与执行设计 | `ready` |
-| Rafael Sacks | `建造采购师` | `0.0.0.1` | research-problem-solving；strategy-decision | BIM/施工信息架构与互操作分析；Lean Construction 与生产流测量 | `ready` |
-| 大野耐一 / Taiichi Ohno | `建造采购师` | `0.0.0.1` | 制造与服务流程诊断；交付周期与在制品改善 | 端到端流动、WIP、周期和瓶颈诊断；拉动补充、看板约束与可视异常设计 | `ready` |
-| 新乡重夫 / Shigeo Shingo | `建造采购师` | `0.0.0.1` | 制造与服务流程诊断；换模、部署、交接和准备时间压缩 | 流程—作业网络分析；SMED快速切换 | `ready` |
-| 田口玄一 Genichi Taguchi | `建造采购师` | `0.0.0.1` | 稳健产品与工艺设计；实验与仿真方案评审 | 功能—信号—响应—噪声建模；参数设计与公差优先级 | `ready` |
-| 约瑟夫·M·朱兰（Joseph M. Juran） | `建造采购师` | `0.0.0.1` | 运营与服务流程改善；企业质量治理和年度项目组合 | 客户与适用性分析；质量三部曲定位 | `ready` |
-| Charles Eastman | `思想教育师` | `0.0.0.1` | teaching-learning；research-problem-solving | 体验式教育与品格训练设计；历史思想与第一人称文本分析 | `ready` |
-| Thomas L. Saaty | `思想教育师` | `0.0.0.1` | Complex multi-criteria selection and prioritization；Strategy and portfolio decisions using benefits, opportunities, costs, and risks | AHP hierarchy and pairwise-comparison design；ANP dependence, feedback, and supermatrix modeling | `ready` |
-| Aswath Damodaran | `投资资本师` | `0.0.0.1` | 上市与非上市公司估值；高增长、亏损或复杂公司的情景分析 | 叙事到收入、利润、再投资、风险和终值的量化映射；透明 DCF、相对定价和风险溢价分析 | `ready` |
-| Charlie Munger | `投资资本师` | `0.0.0.1` | Company and acquisition analysis with current filings and valuation data.；Capital allocation, portfolio review, and downside stress testing. | Business-quality and opportunity-cost analysis.；Inversion-led risk identification and lollapalooza-effect red teaming. | `ready` |
-| Edward O. Thorp（爱德华·索普） | `投资资本师` | `0.0.0.1` | 量化或基本面投资方案审查；研究假设、实验与原型设计 | 状态变量建模与判别实验；概率优势、Kelly仓位与破产风险 | `ready` |
-| Howard Marks | `投资资本师` | `0.0.0.1` | 公司与证券研究；组合风险审查 | 价格—价值与隐含预期分析；风险分布和压力测试 | `ready` |
-| Joel Greenblatt | `投资资本师` | `0.0.0.1` | 公司研究与估值备忘录；特殊情形研究计划 | 现金流与资本回报驱动的企业估值；结构性错价诊断 | `ready` |
-| Michael J. Mauboussin | `投资资本师` | `0.0.0.1` | 公司研究与价格隐含预期分析；资本配置、并购、回购和再投资评估 | Expectations Investing / reverse DCF；ROIC与资本成本驱动的价值创造分析 | `ready` |
-| Nick Sleep | `投资资本师` | `0.0.0.1` | 公司与商业模型研究；长期投资决策与组合复盘 | 终点—机制—概率分析；规模经济共享与客户互惠飞轮识别 | `ready` |
-| Robert A. Kindler | `投资资本师` | `0.0.0.1` | M&A strategy and transaction screening；board and corporate-governance decision support | legal-commercial dual-track analysis；transaction lifecycle and stage-gate design | `ready` |
-| Seth Klarman | `投资资本师` | `0.0.0.1` | 公司与证券研究；投资委员会备忘录 | 基本面估值与下行分析；催化剂和时间路径设计 | `ready` |
-| Warren Buffett | `投资资本师` | `0.0.0.1` | 公司研究与价值—价格判断；企业资本配置和回购/并购决策 | 公开公司商业质量与长期经济性分析；内在价值区间、回购与整企收购初筛 | `ready` |
-| 李录 Li Lu | `投资资本师` | `0.0.0.1` | 公司研究与商业质量评估；资本配置、组合风险和仓位框架 | 企业所有权、能力圈、安全边际和永久损失的一体化分析；高质量复利企业、管理层与长期增长跑道判断 | `ready` |
-| Beth Wilkinson | `政治法律师` | `0.0.0.1` | governance-legal；communication-negotiation | 复杂事实记录压缩与结果敏感争点识别；审判、调查与制度风险结构化 | `ready` |
-| Evan R. Chesler | `政治法律师` | `0.0.0.1` | governance-legal；strategy-decision | 高风险商事诉讼框架与庭审准备；复杂事实和科学材料的非专家转译 | `ready` |
-| H. Rodgin Cohen | `政治法律师` | `0.0.0.1` | governance-legal；strategy-decision | 银行监管、控制权与重大交易门槛结构化；系统性风险、流动性、信心传染与失败处置分析 | `ready` |
-| Scott A. Barshay | `政治法律师` | `0.0.0.1` | governance-legal；strategy-decision | 复杂M&A目标、结构、流程与路径设计；董事会授权、治理和重大事项决策框架 | `ready` |
-| Theodore V. Wells Jr. | `政治法律师` | `0.0.0.1` | governance-legal；strategy-decision | 复杂商事、证券和白领刑事争议的中心理论与证据矩阵；证明责任、举证与当事人作证的阶段性决策 | `ready` |
-| Adam Booth (Abom79) | `材料建工师` | `0.0.0.1` | manual-machining-process-planning；industrial-repair-and-replacement-parts | datum, setup and workholding analysis；manual-versus-CNC route selection | `ready` |
-| Ali Erdemir | `材料建工师` | `0.0.0.1` | 摩擦学与表面工程科研选题；涂层和润滑剂实验设计 | 摩擦系统工况建模；界面摩擦化学与低剪切机制分析 | `ready` |
-| Charles Becht IV | `材料建工师` | `0.0.0.1` | Pressure-piping and pressure-equipment design review；Mechanical-integrity and fitness-for-service planning | ASME B31.3/B31.1 interpretation；Bellows and expansion-joint mechanics | `ready` |
-| Dan Gelbart | `材料建工师` | `0.0.0.1` | 技术架构与故障诊断；实验与原型计划 | 跨物理域功能分解与误差路径建模；快速原型与直接测量闭环 | `ready` |
-| Ernest Rabinowicz | `材料建工师` | `0.0.0.1` | Friction, wear, galling and fretting failure analysis.；Material-pair, coating, solid-film and clearance screening. | Build and rank physical mechanisms from contact conditions and surface evidence.；Select discriminating measurements and critical experiments. | `ready` |
-| George Antaki | `材料建工师` | `0.0.0.1` | 压力设备与管道技术方案审查；适用性评价与剩余寿命问题分解 | 压力设备与管道设计、载荷和完整性问题结构化；损伤机制—失效模式—适用规范链路诊断 | `ready` |
-| Harry Bhadeshia | `材料建工师` | `0.0.0.1` | phase transformation and physical metallurgy analysis；steel alloy and heat-treatment concept design | thermodynamics-kinetics-microstructure-property reasoning；bainite, martensite, pearlite and multicomponent steel analysis | `ready` |
-| Heinz P. Bloch | `材料建工师` | `0.0.0.1` | rotating-equipment failure review；pump/compressor reliability strategy | failure definition and structured troubleshooting；machinery reliability and failure avoidance | `ready` |
-| Ian Michael Hutchings | `材料建工师` | `0.0.0.1` | Tribology, wear and erosion diagnosis；Inkjet and droplet-process research planning | Mechanism trees and discriminating experiments；High-speed/measurement-chain reasoning | `ready` |
-| John C. Lippold | `材料建工师` | `0.0.0.1` | 焊接裂纹与失效机理诊断；可焊性试验选择与研究设计 | 焊接冶金与热影响区/熔合边界分析；热裂、液化、DDC 与氢致裂纹机制区分 | `ready` |
-| John Moubray | `材料建工师` | `0.0.0.1` | Reliability-centered maintenance analysis and review；Maintenance strategy design, optimization, and audit | Define functions, performance standards, functional failures, and reasonably likely failure modes in operating context.；Classify failure consequences and select proactive tasks or default actions with explicit criteria. | `ready` |
-| R. Keith Mobley | `材料建工师` | `0.0.0.1` | research-problem-solving；strategy-decision | 全生命周期资产价值与维护战略诊断；正常状态、失效模式和状态监测设计 | `ready` |
-| Richard (Doc) Palmer | `材料建工师` | `0.0.0.1` | 维护计划与排程体系设计或重构；CMMS/EAM工单流程与job-plan library设计 | 规划—排程—执行—反馈闭环诊断；维护组织角色与责任设计 | `ready` |
-| Stefan Gotteswinter | `材料建工师` | `0.0.0.1` | precision machining process review；manual machine-tool diagnosis and repair planning | measurement-first problem framing；manual milling, turning, grinding and scraping process reasoning | `ready` |
-| 辛多·寇 / Sindo Kou | `材料建工师` | `0.0.0.1` | 焊接冶金与凝固裂纹机理诊断；焊池流动、熔深与表面活性效应分析 | 多物理因果建模与区域分解；竞争机制与区分性试验设计 | `ready` |
-| Nancy Leveson | `财务合规师` | `0.0.0.1` | Complex system safety and cybersecurity review；STPA-style proactive hazard analysis | System-level causal reframing；Control-structure modeling | `ready` |
-| Andrej Karpathy / 安德烈·卡帕西 | `软件开发师` | `0.0.0.1` | 深度学习与 LLM 原理教学、课程和教材设计；训练故障诊断、实验设计、消融与评测 | 深度学习、计算机视觉、视觉语言与 LLM 训练的机制级解释；用小型可读代码重建自动微分、语言模型和推理/训练流程 | `ready` |
-| Barbara Liskov | `软件开发师` | `0.0.0.1` | research-problem-solving；technical-architecture | 数据抽象与行为规格；模块化与局部推理 | `ready` |
-| Chip Huyen | `软件开发师` | `0.0.0.1` | AI/ML system architecture and production-readiness review；Foundation-model application strategy, evaluation, and feedback design | End-to-end AI/ML system design；Evaluation, monitoring, and feedback-loop design | `ready` |
-| Christopher Manning | `软件开发师` | `0.0.0.1` | NLP/LLM research strategy and experiment design；Technical architecture and benchmark review | Frame NLP/LLM research questions as measurable phenomena, representations, baselines and falsifiable experiments.；Review model architectures, objectives, datasets and benchmarks with error, calibration, factuality and transfer controls. | `ready` |
-| Hamel Husain | `软件开发师` | `0.0.0.1` | AI 产品错误分析与评测体系设计；LLM-as-a-judge 验证与 failure taxonomy 建立 | 真实 trace 驱动的错误分析与评测闭环；领域专家标注、定性编码与窄判据设计 | `ready` |
-| Jerry Liu | `软件开发师` | `0.0.0.1` | LLM, RAG, long-context, and agent architecture design；Document parsing, retrieval, extraction, and workflow automation | Context and data architecture for LLM applications；Parse–Retrieve–Reason–Act workflow decomposition | `ready` |
-| John Carmack（约翰·卡马克） | `软件开发师` | `0.0.0.1` | 系统架构、性能、延迟与可靠性诊断；受限平台、交互原型与技术产品定义 | 端到端瓶颈分析与可观察量设计；最小可运行路径、快速迭代和原型到生产边界 | `ready` |
-| Karen Spärck Jones | `软件开发师` | `0.0.0.1` | 搜索、排序、RAG、NLP与自动摘要方案评审；benchmark、共享任务和离线/在线评测设计 | 任务—系统角色建模；信息检索与概率证据分析 | `ready` |
-| Kent Beck | `软件开发师` | `0.0.0.1` | TDD and test-strategy design；Refactoring and evolutionary architecture review | Software design and refactoring economics；Test-driven development and feedback-loop design | `ready` |
-| Leslie Lamport | `软件开发师` | `0.0.0.1` | 分布式协议和并发系统评审；TLA+/状态机规格设计 | 分布式因果、一致性、共识、互斥和快照推理；状态/动作规格与 safety/liveness 分解 | `ready` |
-| Martin Fowler / 马丁·福勒 | `软件开发师` | `0.0.0.1` | 软件架构与微服务/单体取舍评审；重构、技术债与遗留系统渐进迁移 | 小步保持行为的重构和迁移规划；架构收益、成本、前置条件和失败模式分析 | `ready` |
-| Matei Zaharia | `软件开发师` | `0.0.0.1` | 分布式系统、数据库、数据平台与 AI 系统架构评审；科研选题、实验设计、基准与故障复盘 | 工作负载驱动的系统抽象与架构分解；统一平台与分层/专用替代方案比较 | `ready` |
-| Omar Khattab | `软件开发师` | `0.0.0.1` | research-problem-solving；general-agentic-work | 多向量与晚交互检索系统；检索增强与多阶段 NLP 系统 | `ready` |
-| Rich Hickey | `软件开发师` | `0.0.0.1` | 软件与数据系统架构评审；语言、API 与库设计 | 把需求改写为问题、约束、非目标、替代方案与证伪条件；识别概念、职责、位置、时间和执行策略的缠结 | `ready` |
-| Shreya Shankar | `软件开发师` | `0.0.0.1` | LLM application evaluation and error analysis；Unstructured document-processing architecture | End-to-end AI/ML system decomposition；Task-specific evaluation and validator design | `ready` |
-| Simon Willison | `软件开发师` | `0.0.0.1` | 技术方案与代码变更审查；coding-agent 工作流设计与评测 | Python/SQLite/CLI 开源工程工作系统；测试驱动、可回退、可审查的变更与发布 | `ready` |
-| Stephen E. Robertson | `软件开发师` | `0.0.0.1` | 信息检索与搜索架构评审；排序/过滤/告警实验设计 | 概率相关性与排序原则分析；BM25/BM25F 概念与工程取舍 | `ready` |
+| Beth Wilkinson | `政治法律家` | `0.0.0.1` | governance-legal；communication-negotiation | 复杂事实记录压缩与结果敏感争点识别；审判、调查与制度风险结构化 | `ready` |
+| Evan R. Chesler | `政治法律家` | `0.0.0.1` | governance-legal；strategy-decision | 高风险商事诉讼框架与庭审准备；复杂事实和科学材料的非专家转译 | `ready` |
+| Theodore V. Wells Jr. | `政治法律家` | `0.0.0.1` | governance-legal；strategy-decision | 复杂商事、证券和白领刑事争议的中心理论与证据矩阵；证明责任、举证与当事人作证的阶段性决策 | `ready` |
 <!-- PERSONA-REGISTRY:END -->
 
 ## 1. 内部身份分类
@@ -87,20 +20,15 @@
 
 | 身份目录 | 优先任务信号 |
 |---|---|
-| `材料建工师` | 材料、焊接、冶金、管道、机械、工程、可靠维护、工艺质量 |
-| `软件开发师` | 软件、开发、编程、算法、数据、AI/ML、系统架构、代码 |
-| `艺术设计师` | 设计、艺术、产品美学、平面/工业/交互、建筑设计、影音表演 |
-| `创业经营师` | 创业、经营、组织、增长、产品市场、资源配置、危机 |
-| `投资资本师` | 投资、估值、组合、资本、风险预算、商业分析 |
-| `思想教育师` | 思想、教育、学习、写作、训练、传播、长期判断 |
-| `政治法律师` | 法律、政策、治理、制度、诉讼、谈判、公共风险 |
-| `客户营销师` | 营销、市场、客户画像、品牌、销售、增长转化、市场分析 |
-| `建造采购师` | 施工、工程/项目管理、BIM、造价估算、招投标、采购、供应链、物流 |
-| `财务合规师` | 财务、会计、审计、成本、税务、风控、合规、安全 EHS、标准规范 |
-| `医疗护理师` | 医疗、临床、诊断、治疗、护理、用药、公共卫生、康复 |
-| `农林牧渔师` | 农业、种植、养殖、畜牧、林业、渔业、水产、农机、食品 |
+| `技术工程师` | 科研、工程、架构、实验、诊断、实现、质量 |
+| `创业经营家` | 创业、经营、组织、增长、产品市场、资源配置、危机 |
+| `投资资本家` | 投资、估值、组合、资本、风险预算、商业分析 |
+| `开发设计家` | 软件开发、产品、设计、创意、写作制作、体验与审美 |
+| `思想教育家` | 思想、教育、学习、写作、训练、传播、长期判断 |
+| `政治法律家` | 法律、政策、治理、制度、诉讼、谈判、公共风险 |
+| `多重身份` | 两个以上身份都对结果有实质影响，不能安全压成单一身份 |
 
-分类只是候选检索入口（多重身份已移除，每个人物只归属单一主身份）。最终选择仍受能力、场景、证据、边界和互补性约束。
+分类只是候选检索入口。最终选择仍受能力、场景、证据、边界和互补性约束。
 
 ## 2. 场景识别
 

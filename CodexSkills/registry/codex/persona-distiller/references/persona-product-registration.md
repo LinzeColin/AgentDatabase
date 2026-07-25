@@ -5,7 +5,7 @@ v0.0.0.5 起，人物蒸馏构建器与 canonical registry 分离：
 - 构建器：`persona-distiller/`
 - 唯一登记与专家团队：`../persona-distiller-group/`
 
-登记规则、十二个身份目录、完整交付 schema、team card、route 和机器索引以
+登记规则、七个身份目录、完整交付 schema、team card、route 和机器索引以
 [`../../persona-distiller-group/README.md`](../../persona-distiller-group/README.md)
 及其 [`CANONICAL-ROOT-ROUTE.md`](../../persona-distiller-group/CANONICAL-ROOT-ROUTE.md)
 为准。
@@ -14,7 +14,7 @@ v0.0.0.5 起，人物蒸馏构建器与 canonical registry 分离：
 
 1. 登记对象只能是一个 v0.0.0.5 完整交付 ZIP，不能是裸运行时 ZIP、目录、sidecar 或同版本多文件。
 2. 同一人物只能有一个 canonical `registration.json`；不得跨身份重复。
-3. 目录名必须是 `材料建工师`、`软件开发师`、`艺术设计师`、`创业经营师`、`投资资本师`、`思想教育师`、`政治法律师`、`客户营销师`、`建造采购师`、`财务合规师`、`医疗护理师`、`农林牧渔师` 之一（多重身份已移除）。
+3. 目录名必须是 `技术工程师`、`创业经营家`、`投资资本家`、`开发设计家`、`思想教育家`、`政治法律家`、`多重身份` 之一。
 4. 每个版本目录只能保存一个完整交付 ZIP；外层和内层运行时 SHA-256 都要登记。
 5. 人物产品版本按 canonical 人物独立、连续使用 `0.0.0.1..0.0.0.999`，成功登记才占号；人物运行不编号。
 6. `team-card.json` 必须登记选入原因、最值得蒸馏特点、用户价值、应用场景、关键能力和硬边界。
