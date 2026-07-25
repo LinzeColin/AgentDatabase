@@ -25,8 +25,28 @@ import json
 import os
 import re
 import shutil
+import stat
 import subprocess
 import sys
+from pathlib import Path, PurePosixPath
+
+
+SCRIPT_REPO_ROOT = Path(__file__).resolve().parent.parent
+if str(SCRIPT_REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(SCRIPT_REPO_ROOT))
+
+from CodexSkills.registry.auto.runtime.catalog_reservation import (  # noqa: E402
+    CatalogReservationError,
+    EXPECTED_SOURCE_ALIASES,
+    GLOBAL_REGISTRY_NAMESPACE,
+    SOURCE_CATALOG_COMPONENT,
+    SOURCE_NAMESPACES,
+    assert_real_directory,
+    assert_safe_skill_removal_target,
+    inventory_source_roots,
+    is_reserved_source_child,
+    observe_alias,
+)
 
 # ---------------------------------------------------------------- 配置
 
@@ -109,17 +129,193 @@ def repo_root():
     return os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
+def _same_lstat(left, right):
+    return (
+        left.st_dev,
+        left.st_ino,
+        left.st_mode,
+        left.st_size,
+        left.st_mtime_ns,
+    ) == (
+        right.st_dev,
+        right.st_ino,
+        right.st_mode,
+        right.st_size,
+        right.st_mtime_ns,
+    )
+
+
+def _alias_map(alias_specs=EXPECTED_SOURCE_ALIASES):
+    return {
+        (item.source_namespace, item.alias_path): item
+        for item in alias_specs
+    }
+
+
+def _read_regular_digest(path, expected=None):
+    descriptor = None
+    digest = hashlib.sha256()
+    try:
+        before = expected or os.lstat(path)
+        if stat.S_ISLNK(before.st_mode) or not stat.S_ISREG(before.st_mode):
+            raise RuntimeError(f"Skill 节点不是普通文件：{path}")
+        if before.st_size > MAX_FILE_BYTES:
+            raise RuntimeError(
+                f"Skill 文件超过镜像硬限且无策略排除：{path} "
+                f"({before.st_size}>{MAX_FILE_BYTES})"
+            )
+        descriptor = os.open(path, os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0))
+        opened = os.fstat(descriptor)
+        if not _same_lstat(before, opened):
+            raise RuntimeError(f"Skill 文件在读取前发生变化：{path}")
+        while True:
+            block = os.read(descriptor, CREDENTIAL_SCAN_CHUNK_BYTES)
+            if not block:
+                break
+            digest.update(block)
+        after = os.lstat(path)
+        if not _same_lstat(before, after):
+            raise RuntimeError(f"Skill 文件在读取中发生变化：{path}")
+    except RuntimeError:
+        raise
+    except OSError as exc:
+        raise RuntimeError(f"无法稳定读取 Skill 文件：{path}") from exc
+    finally:
+        if descriptor is not None:
+            os.close(descriptor)
+    return digest.hexdigest()
+
+
+def walk_entries(
+    base,
+    *,
+    source_namespace=None,
+    source_root=None,
+    alias_specs=EXPECTED_SOURCE_ALIASES,
+):
+    """Lstat-first 遍历 Skill，显式产出普通文件或受控 alias。
+
+    返回 `(相对路径, 绝对路径, 节点类型, 证据)`；任何未分类 symlink、
+    special node、oversize 或遍历竞态都 fail closed。
+    """
+
+    base_path = Path(base)
+    try:
+        base_real = assert_real_directory(
+            base_path,
+            "SOURCE_SKILL_ROOT_NOT_REAL_DIRECTORY",
+        )
+    except CatalogReservationError as exc:
+        raise RuntimeError(str(exc)) from exc
+    if source_root is None:
+        source_root_path = base_real
+    else:
+        try:
+            source_root_path = assert_real_directory(
+                Path(source_root),
+                "SOURCE_ROOT_NOT_REAL_DIRECTORY",
+            )
+        except CatalogReservationError as exc:
+            raise RuntimeError(str(exc)) from exc
+    if os.path.commonpath((str(source_root_path), str(base_real))) != str(
+        source_root_path
+    ):
+        raise RuntimeError(f"Skill 根逃逸来源目录：{base}")
+    allowed_aliases = _alias_map(alias_specs)
+
+    def walk(directory, relative):
+        try:
+            before = os.lstat(directory)
+            if stat.S_ISLNK(before.st_mode) or not stat.S_ISDIR(before.st_mode):
+                raise RuntimeError(f"Skill 子目录不是实际目录：{directory}")
+            with os.scandir(directory) as iterator:
+                entries = sorted(
+                    iterator,
+                    key=lambda item: item.name.encode("utf-8"),
+                )
+        except RuntimeError:
+            raise
+        except (OSError, UnicodeError) as exc:
+            raise RuntimeError(f"无法遍历 Skill 目录：{directory}") from exc
+        for entry in entries:
+            try:
+                info = entry.stat(follow_symlinks=False)
+            except OSError as exc:
+                raise RuntimeError(
+                    f"无法 lstat Skill 节点：{directory / entry.name}"
+                ) from exc
+            child_relative = (
+                relative / entry.name
+                if relative.parts
+                else PurePosixPath(entry.name)
+            )
+            child = directory / entry.name
+            if any(part in EXCLUDE_DIRS for part in child_relative.parts):
+                continue
+            if (
+                stat.S_ISREG(info.st_mode)
+                and child_relative.parts[-1] in EXCLUDE_FILES
+            ):
+                continue
+            if stat.S_ISDIR(info.st_mode):
+                yield from walk(child, child_relative)
+            elif stat.S_ISREG(info.st_mode):
+                if info.st_size > MAX_FILE_BYTES:
+                    raise RuntimeError(
+                        "Skill 文件超过镜像硬限且无策略排除："
+                        f"{child} ({info.st_size}>{MAX_FILE_BYTES})"
+                    )
+                yield child_relative.as_posix(), str(child), "REGULAR_FILE", info
+            elif stat.S_ISLNK(info.st_mode):
+                if source_namespace is None:
+                    raise RuntimeError(f"无法判定 Skill alias 来源：{child}")
+                source_relative = child.relative_to(source_root_path).as_posix()
+                expected_alias = allowed_aliases.get(
+                    (source_namespace, source_relative)
+                )
+                if expected_alias is None:
+                    raise RuntimeError(
+                        f"未登记的 Skill alias：{source_namespace}/{source_relative}"
+                    )
+                try:
+                    observed = observe_alias(source_root_path, source_relative)
+                except CatalogReservationError as exc:
+                    raise RuntimeError(str(exc)) from exc
+                if (
+                    observed.alias_path != expected_alias.alias_path
+                    or observed.raw_target != expected_alias.raw_target
+                    or observed.normalized_target_ref
+                    != expected_alias.normalized_target_ref
+                    or observed.target_type != expected_alias.target_type
+                ):
+                    raise RuntimeError(
+                        "Skill alias 与冻结合同不一致："
+                        f"{source_namespace}/{source_relative}"
+                    )
+                yield (
+                    child_relative.as_posix(),
+                    str(child),
+                    "SYMLINK_ALIAS",
+                    expected_alias,
+                )
+            else:
+                raise RuntimeError(f"Skill 含特殊文件，拒绝镜像：{child}")
+        try:
+            after = os.lstat(directory)
+        except OSError as exc:
+            raise RuntimeError(f"无法复核 Skill 目录：{directory}") from exc
+        if not _same_lstat(before, after):
+            raise RuntimeError(f"Skill 目录在遍历中发生变化：{directory}")
+
+    yield from walk(base_real, PurePosixPath())
+
+
 def walk_files(base):
-    """遍历一个 skill 目录，按排除规则产出 (相对路径, 绝对路径)。"""
-    for root, dirs, files in os.walk(base):
-        dirs[:] = [d for d in dirs if d not in EXCLUDE_DIRS]
-        for f in files:
-            if f in EXCLUDE_FILES:
-                continue
-            full = os.path.join(root, f)
-            if os.path.islink(full):
-                continue
-            yield os.path.relpath(full, base), full
+    """兼容入口：只接受无 alias 的树，不再静默跳过 symlink/oversize。"""
+    for rel, full, kind, _ in walk_entries(base, alias_specs=()):
+        if kind != "REGULAR_FILE":
+            raise RuntimeError(f"Skill alias 未提供显式来源合同：{full}")
+        yield rel, full
 
 
 def repo_owned_files(source, slug):
@@ -127,20 +323,46 @@ def repo_owned_files(source, slug):
     return REGISTRY_METADATA_FILES | REPO_OWNED_FILES.get((source, slug), set())
 
 
-def skill_digest(base, excluded_relative_paths=None):
+def skill_digest(
+    base,
+    excluded_relative_paths=None,
+    *,
+    source_namespace=None,
+    source_root=None,
+    alias_specs=EXPECTED_SOURCE_ALIASES,
+):
     excluded_relative_paths = REGISTRY_METADATA_FILES | (excluded_relative_paths or set())
     h = hashlib.sha256()
-    for rel, full in sorted(walk_files(base)):
-        if rel.replace(os.sep, "/") in excluded_relative_paths:
+    for rel, full, kind, evidence in walk_entries(
+        base,
+        source_namespace=source_namespace,
+        source_root=source_root,
+        alias_specs=alias_specs,
+    ):
+        normalized = rel.replace(os.sep, "/")
+        if normalized in excluded_relative_paths:
             continue
-        h.update(rel.encode())
-        with open(full, "rb") as handle:
-            h.update(handle.read())
+        h.update(normalized.encode("utf-8"))
+        h.update(b"\0")
+        h.update(kind.encode("ascii"))
+        h.update(b"\0")
+        if kind == "REGULAR_FILE":
+            h.update(_read_regular_digest(full, evidence).encode("ascii"))
+        else:
+            h.update(evidence.raw_target.encode("utf-8"))
     return h.hexdigest()
 
 
 def mirror_relative_path(source, slug):
     """返回相对于 CodexSkills/registry 的物理路径。"""
+    if (
+        source not in SOURCE_NAMESPACES
+        or not slug
+        or "/" in slug
+        or slug in {".", ".."}
+        or is_reserved_source_child(source, slug)
+    ):
+        raise RuntimeError(f"Registry Skill 路径无效或已保留：{source}/{slug}")
     return f"{source}/{slug}"
 
 
@@ -167,53 +389,207 @@ def parse_frontmatter(path):
 # ---------------------------------------------------------------- 盘点
 
 
-def inventory():
-    """扫描全部来源，返回 {(source, slug): 本机绝对路径}。"""
-    missing = [
-        (src, meta["path"])
-        for src, meta in SOURCES.items()
-        if not os.path.isdir(meta["path"])
-    ]
-    if missing:
-        for src, source_path in missing:
-            log(f"  ✗ {src}: 声明的来源目录不存在（{source_path}）")
+def inventory(*, enforce_exact_aliases=False):
+    """Lstat-first 扫描全部来源，返回 {(source, slug): 本机绝对路径}。"""
+    source_roots = {
+        source: Path(meta["path"])
+        for source, meta in SOURCES.items()
+    }
+    try:
+        observed = inventory_source_roots(
+            source_roots,
+            enforce_exact_aliases=enforce_exact_aliases,
+        )
+    except CatalogReservationError as exc:
+        for source, source_path in source_roots.items():
+            try:
+                info = os.lstat(source_path)
+            except OSError:
+                log(f"  ✗ {source}: 声明的来源目录不存在（{source_path}）")
+                break
+            if stat.S_ISLNK(info.st_mode) or not stat.S_ISDIR(info.st_mode):
+                log(f"  ✗ {source}: 声明的来源不是实际目录（{source_path}）")
+                break
         raise RuntimeError(
-            "Skill 来源目录不完整；为防止把缺失来源误判为删除并传播到镜像，已中止"
-        )
+            "Skill 来源目录/节点/alias 不完整；"
+            "为防止把缺失来源误判为删除并传播到镜像，已中止："
+            f"{exc}"
+        ) from exc
 
-    inv = {}
-    for src, meta in SOURCES.items():
-        base = meta["path"]
-        names = sorted(
-            d for d in os.listdir(base)
-            if os.path.isdir(os.path.join(base, d)) and not d.startswith(".")
-        )
-        for n in names:
-            inv[(src, n)] = os.path.join(base, n)
-        log(f"  · {src}: {len(names)} 个")
-    return inv
+    for source in SOURCE_NAMESPACES:
+        log(f"  · {source}: {observed.skill_counts[source]} 个")
+        for row in observed.explicit_non_skill_entries[source]:
+            log(
+                "    · 显式非 Skill："
+                f"{row['entry_name']} [{row['reason_code']}]"
+            )
+    if enforce_exact_aliases:
+        log(f"  · source alias: {observed.alias_count}/{len(EXPECTED_SOURCE_ALIASES)}")
+    return dict(observed.skills)
 
 
 # ---------------------------------------------------------------- 镜像
 
 
-def mirror(inv, mirror_root, dry_run=False, propagate_deletions=True):
+def _enumerate_mirrored_skill_roots(mirror_root):
+    have = set()
+    root = Path(mirror_root)
+    if not root.exists():
+        return have
+    try:
+        root = assert_real_directory(root, "REGISTRY_ROOT_NOT_REAL_DIRECTORY")
+    except CatalogReservationError as exc:
+        raise RuntimeError(str(exc)) from exc
+    for source in SOURCE_NAMESPACES:
+        source_root = root / source
+        if not source_root.exists():
+            continue
+        try:
+            source_root = assert_real_directory(
+                source_root,
+                "REGISTRY_SOURCE_NOT_REAL_DIRECTORY",
+            )
+            with os.scandir(source_root) as iterator:
+                entries = sorted(
+                    iterator,
+                    key=lambda item: item.name.encode("utf-8"),
+                )
+        except CatalogReservationError as exc:
+            raise RuntimeError(str(exc)) from exc
+        except (OSError, UnicodeError) as exc:
+            raise RuntimeError(
+                f"无法枚举 Registry 来源目录：{source_root}"
+            ) from exc
+        for entry in entries:
+            if is_reserved_source_child(source, entry.name):
+                try:
+                    info = entry.stat(follow_symlinks=False)
+                except OSError as exc:
+                    raise RuntimeError(
+                        f"无法 lstat Registry 保留目录：{source}/{entry.name}"
+                    ) from exc
+                if stat.S_ISLNK(info.st_mode) or not stat.S_ISDIR(info.st_mode):
+                    raise RuntimeError(
+                        f"Registry 保留目录不是实际目录：{source}/{entry.name}"
+                    )
+                continue
+            try:
+                info = entry.stat(follow_symlinks=False)
+            except OSError as exc:
+                raise RuntimeError(
+                    f"无法 lstat Registry Skill 根：{source}/{entry.name}"
+                ) from exc
+            if stat.S_ISLNK(info.st_mode) or not stat.S_ISDIR(info.st_mode):
+                raise RuntimeError(
+                    f"Registry 来源命名空间含非 Skill 目录：{source}/{entry.name}"
+                )
+            have.add(f"{source}/{entry.name}")
+    return have
+
+
+def _copy_regular_file(source, target, expected):
+    source_fd = target_fd = None
+    try:
+        source_fd = os.open(
+            source,
+            os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0),
+        )
+        opened = os.fstat(source_fd)
+        if not _same_lstat(expected, opened):
+            raise RuntimeError(f"Skill 文件在复制前发生变化：{source}")
+        target_fd = os.open(
+            target,
+            os.O_WRONLY | os.O_CREAT | os.O_EXCL,
+            stat.S_IMODE(expected.st_mode),
+        )
+        while True:
+            block = os.read(source_fd, CREDENTIAL_SCAN_CHUNK_BYTES)
+            if not block:
+                break
+            offset = 0
+            while offset < len(block):
+                written = os.write(target_fd, block[offset:])
+                if written <= 0:
+                    raise OSError("short write")
+                offset += written
+        if not _same_lstat(expected, os.lstat(source)):
+            raise RuntimeError(f"Skill 文件在复制中发生变化：{source}")
+    except RuntimeError:
+        raise
+    except OSError as exc:
+        raise RuntimeError(f"无法复制 Skill 普通文件：{source}") from exc
+    finally:
+        if target_fd is not None:
+            os.close(target_fd)
+        if source_fd is not None:
+            os.close(source_fd)
+
+
+def mirror(
+    inv,
+    mirror_root,
+    dry_run=False,
+    propagate_deletions=True,
+    *,
+    alias_specs=EXPECTED_SOURCE_ALIASES,
+    source_roots=None,
+):
     """把本机 skill 镜像进仓库，并传播删除。返回变更摘要。"""
-    added, updated, removed, skipped_big = [], [], [], []
+    added, updated, removed = [], [], []
+
+    mirror_path = Path(mirror_root)
+    if mirror_path.exists():
+        try:
+            assert_real_directory(
+                mirror_path,
+                "REGISTRY_ROOT_NOT_REAL_DIRECTORY",
+            )
+        except CatalogReservationError as exc:
+            raise RuntimeError(str(exc)) from exc
+
+    # 全部源 Skill 必须在任何删除/替换前通过 lstat、size、alias、special 检查。
+    plans = {}
+    effective_source_roots = {
+        source: str(path)
+        for source, path in (
+            source_roots
+            or {
+                source: metadata["path"]
+                for source, metadata in SOURCES.items()
+            }
+        ).items()
+    }
+    for (source, slug), localpath in sorted(inv.items()):
+        if source not in effective_source_roots:
+            raise RuntimeError(f"未知 Skill 来源：{source}")
+        mirror_relative_path(source, slug)
+        plans[(source, slug)] = tuple(
+            walk_entries(
+                localpath,
+                source_namespace=source,
+                source_root=effective_source_roots[source],
+                alias_specs=alias_specs,
+            )
+        )
 
     want = {mirror_relative_path(src, slug) for src, slug in inv}
-    have = set()
-    if os.path.isdir(mirror_root):
-        for src in SOURCES:
-            sd = os.path.join(mirror_root, src)
-            if os.path.isdir(sd):
-                have |= {f"{src}/{d}" for d in os.listdir(sd)
-                         if os.path.isdir(os.path.join(sd, d))}
+    have = _enumerate_mirrored_skill_roots(mirror_root)
+    removal_targets = []
+    for gone in sorted(have - want if propagate_deletions else set()):
+        source, slug = gone.split("/", 1)
+        try:
+            target = assert_safe_skill_removal_target(
+                mirror_path,
+                source,
+                slug,
+            )
+        except CatalogReservationError as exc:
+            raise RuntimeError(str(exc)) from exc
+        removal_targets.append((gone, target))
 
     # 删除传播：本机没有了，镜像也删掉
-    for gone in sorted(have - want if propagate_deletions else set()):
+    for gone, gone_path in removal_targets:
         if not dry_run:
-            gone_path = os.path.join(mirror_root, gone)
             try:
                 shutil.rmtree(gone_path)
             except OSError as exc:
@@ -224,78 +600,205 @@ def mirror(inv, mirror_root, dry_run=False, propagate_deletions=True):
         rel = mirror_relative_path(src, slug)
         dest = os.path.join(mirror_root, rel)
         repo_owned = repo_owned_files(src, slug)
-        before = skill_digest(dest, repo_owned) if os.path.isdir(dest) else None
+        source_mirror_root = os.path.join(mirror_root, src)
+        if os.path.lexists(dest):
+            try:
+                dest_info = os.lstat(dest)
+            except OSError as exc:
+                raise RuntimeError(f"无法 lstat 仓库 Skill 根：{dest}") from exc
+            if stat.S_ISLNK(dest_info.st_mode) or not stat.S_ISDIR(
+                dest_info.st_mode
+            ):
+                raise RuntimeError(f"仓库 Skill 根不是实际目录：{dest}")
+            before = skill_digest(
+                dest,
+                repo_owned,
+                source_namespace=src,
+                source_root=source_mirror_root,
+                alias_specs=alias_specs,
+            )
+        else:
+            before = None
 
         if dry_run:
-            after = skill_digest(localpath)
+            after = skill_digest(
+                localpath,
+                source_namespace=src,
+                source_root=effective_source_roots[src],
+                alias_specs=alias_specs,
+            )
         else:
             preserved = {}
             for owned in repo_owned:
                 owned_path = os.path.join(dest, owned)
-                if os.path.isfile(owned_path):
+                if os.path.lexists(owned_path):
+                    try:
+                        owned_info = os.lstat(owned_path)
+                    except OSError as exc:
+                        raise RuntimeError(
+                            f"无法 lstat 仓库自有元数据：{owned_path}"
+                        ) from exc
+                    if stat.S_ISLNK(owned_info.st_mode) or not stat.S_ISREG(
+                        owned_info.st_mode
+                    ):
+                        raise RuntimeError(
+                            f"仓库自有元数据不是普通文件：{owned_path}"
+                        )
                     with open(owned_path, "rb") as handle:
                         preserved[owned] = handle.read()
-            if os.path.isdir(dest):
+            if os.path.lexists(dest):
                 try:
-                    shutil.rmtree(dest)
+                    safe_dest = assert_safe_skill_removal_target(
+                        mirror_path,
+                        src,
+                        slug,
+                    )
+                except CatalogReservationError as exc:
+                    raise RuntimeError(str(exc)) from exc
+                try:
+                    shutil.rmtree(safe_dest)
                 except OSError as exc:
                     raise RuntimeError(f"无法替换仓库镜像目录：{dest}") from exc
             os.makedirs(dest, exist_ok=True)
-            for r, full in walk_files(localpath):
+            for r, full, kind, evidence in plans[(src, slug)]:
                 normalized = r.replace(os.sep, "/")
                 if normalized in repo_owned:
                     continue
-                try:
-                    size = os.path.getsize(full)
-                except OSError as exc:
-                    raise RuntimeError(f"无法读取本机 Skill 文件大小：{full}") from exc
-                if size > MAX_FILE_BYTES:
-                    skipped_big.append(f"{rel}/{r}")
-                    continue
                 target = os.path.join(dest, r)
                 os.makedirs(os.path.dirname(target), exist_ok=True)
-                shutil.copy2(full, target)
+                if kind == "REGULAR_FILE":
+                    _copy_regular_file(full, target, evidence)
+                else:
+                    try:
+                        os.symlink(evidence.raw_target, target)
+                    except OSError as exc:
+                        raise RuntimeError(
+                            f"无法恢复 Skill alias：{rel}/{r}"
+                        ) from exc
             for owned, payload in preserved.items():
                 owned_path = os.path.join(dest, owned)
                 os.makedirs(os.path.dirname(owned_path), exist_ok=True)
                 with open(owned_path, "wb") as handle:
                     handle.write(payload)
-            after = skill_digest(dest, repo_owned)
+            after = skill_digest(
+                dest,
+                repo_owned,
+                source_namespace=src,
+                source_root=source_mirror_root,
+                alias_specs=alias_specs,
+            )
 
         if before is None:
             added.append(rel)
         elif before != after:
             updated.append(rel)
 
-    return {"added": added, "updated": updated, "removed": removed, "skipped_big": skipped_big}
+    return {
+        "added": added,
+        "updated": updated,
+        "removed": removed,
+        "skipped_big": [],
+    }
 
 
 # ---------------------------------------------------------------- 凭据硬门
 
 
-def credential_gate(mirror_root):
+def credential_gate(mirror_root, *, expected_aliases=()):
     """扫描镜像内容。命中即返回明细 —— 调用方必须据此中止。"""
-    if not os.path.isdir(mirror_root) or os.path.islink(mirror_root):
-        raise RuntimeError(f"凭据扫描目录不可用或为符号链接：{mirror_root}")
+    try:
+        mirror_real = assert_real_directory(
+            Path(mirror_root),
+            "CREDENTIAL_SCAN_ROOT_NOT_REAL_DIRECTORY",
+        )
+    except CatalogReservationError as exc:
+        raise RuntimeError(f"凭据扫描目录不可用或为符号链接：{mirror_root}") from exc
+    expected_by_path = {
+        f"{item.source_namespace}/{item.alias_path}": item
+        for item in expected_aliases
+    }
+    observed_aliases = set()
 
     def walk_error(error):
         location = getattr(error, "filename", None) or mirror_root
         raise RuntimeError(f"凭据扫描无法遍历目录：{location}") from error
 
     hits = []
-    for root, dirs, files in os.walk(mirror_root, onerror=walk_error):
-        for directory in dirs:
+    for root, dirs, files in os.walk(
+        mirror_real,
+        onerror=walk_error,
+        followlinks=False,
+    ):
+        retained_dirs = []
+        for directory in sorted(dirs):
             directory_path = os.path.join(root, directory)
-            if os.path.islink(directory_path):
-                raise RuntimeError(f"凭据扫描拒绝符号链接：{directory_path}")
-        dirs[:] = [d for d in dirs if d not in EXCLUDE_DIRS]
-        for f in files:
+            try:
+                info = os.lstat(directory_path)
+            except OSError as exc:
+                raise RuntimeError(
+                    f"凭据扫描无法 lstat 目录：{directory_path}"
+                ) from exc
+            if stat.S_ISLNK(info.st_mode):
+                relative = Path(directory_path).relative_to(mirror_real).as_posix()
+                expected = expected_by_path.get(relative)
+                if expected is None:
+                    raise RuntimeError(f"凭据扫描拒绝未登记符号链接：{relative}")
+                source_root = mirror_real / expected.source_namespace
+                try:
+                    observed = observe_alias(source_root, expected.alias_path)
+                except CatalogReservationError as exc:
+                    raise RuntimeError(str(exc)) from exc
+                if (
+                    observed.raw_target != expected.raw_target
+                    or observed.normalized_target_ref
+                    != expected.normalized_target_ref
+                    or observed.target_type != expected.target_type
+                ):
+                    raise RuntimeError(f"凭据扫描 alias 合同漂移：{relative}")
+                observed_aliases.add(relative)
+                continue
+            if not stat.S_ISDIR(info.st_mode):
+                raise RuntimeError(f"凭据扫描目录节点类型异常：{directory_path}")
+            if directory in EXCLUDE_DIRS:
+                continue
+            retained_dirs.append(directory)
+        dirs[:] = retained_dirs
+        for f in sorted(files):
             file_path = os.path.join(root, f)
-            if os.path.islink(file_path):
-                raise RuntimeError(f"凭据扫描拒绝符号链接：{file_path}")
+            try:
+                info = os.lstat(file_path)
+            except OSError as exc:
+                raise RuntimeError(
+                    f"凭据扫描无法 lstat 文件：{file_path}"
+                ) from exc
+            if stat.S_ISLNK(info.st_mode):
+                relative = Path(file_path).relative_to(mirror_real).as_posix()
+                expected = expected_by_path.get(relative)
+                if expected is None:
+                    raise RuntimeError(f"凭据扫描拒绝未登记符号链接：{relative}")
+                source_root = mirror_real / expected.source_namespace
+                try:
+                    observed = observe_alias(source_root, expected.alias_path)
+                except CatalogReservationError as exc:
+                    raise RuntimeError(str(exc)) from exc
+                if (
+                    observed.raw_target != expected.raw_target
+                    or observed.normalized_target_ref
+                    != expected.normalized_target_ref
+                    or observed.target_type != expected.target_type
+                ):
+                    raise RuntimeError(f"凭据扫描 alias 合同漂移：{relative}")
+                observed_aliases.add(relative)
+                continue
+            if not stat.S_ISREG(info.st_mode):
+                raise RuntimeError(f"凭据扫描拒绝特殊文件：{file_path}")
             try:
                 found = set()
-                with open(file_path, "rb") as handle:
+                descriptor = os.open(
+                    file_path,
+                    os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0),
+                )
+                with os.fdopen(descriptor, "rb", closefd=True) as handle:
                     overlap = b""
                     while True:
                         block = handle.read(CREDENTIAL_SCAN_CHUNK_BYTES)
@@ -310,7 +813,18 @@ def credential_gate(mirror_root):
                 raise RuntimeError(f"凭据扫描无法读取文件：{file_path}") from exc
             for label in CRED_PATTERNS:
                 if label in found:
-                    hits.append((os.path.relpath(file_path, mirror_root), label))
+                    hits.append(
+                        (
+                            Path(file_path).relative_to(mirror_real).as_posix(),
+                            label,
+                        )
+                    )
+    missing_aliases = sorted(set(expected_by_path) - observed_aliases)
+    if missing_aliases:
+        raise RuntimeError(
+            "凭据扫描 alias 集合缺失："
+            + json.dumps(missing_aliases, ensure_ascii=False)
+        )
     return hits
 
 
@@ -319,14 +833,14 @@ def credential_gate(mirror_root):
 
 def iter_mirrored_skills(mirror_root):
     """产出 (source, slug, physical_relative_path, absolute_directory)。"""
+    have = _enumerate_mirrored_skill_roots(mirror_root)
     for src in SOURCES:
-        sd = os.path.join(mirror_root, src)
-        if not os.path.isdir(sd):
-            continue
-        for slug in sorted(os.listdir(sd)):
-            directory = os.path.join(sd, slug)
-            if os.path.isdir(directory):
-                yield src, slug, f"{src}/{slug}", directory
+        for relative in sorted(
+            item for item in have if item.startswith(f"{src}/")
+        ):
+            _, slug = relative.split("/", 1)
+            directory = os.path.join(mirror_root, src, slug)
+            yield src, slug, relative, directory
 
 
 def persona_product_index(mirror_root):
@@ -351,11 +865,17 @@ def build_index(mirror_root, catalog_root):
     for src, slug, rel, directory in iter_mirrored_skills(mirror_root):
         name, desc = parse_frontmatter(os.path.join(directory, "SKILL.md"))
         n = size = 0
-        for root, dirs, fs in os.walk(directory):
-            dirs[:] = [x for x in dirs if x not in EXCLUDE_DIRS]
-            for f in fs:
-                n += 1
-                size += os.path.getsize(os.path.join(root, f))
+        for _, _, kind, evidence in walk_entries(
+            directory,
+            source_namespace=src,
+            source_root=os.path.join(mirror_root, src),
+            alias_specs=EXPECTED_SOURCE_ALIASES,
+        ):
+            n += 1
+            if kind == "REGULAR_FILE":
+                size += evidence.st_size
+            else:
+                size += len(evidence.raw_target.encode("utf-8"))
         skills.append({
             "slug": slug,
             "source": src,
@@ -459,7 +979,10 @@ def build_index(mirror_root, catalog_root):
         "## 同步",
         "",
         "本目录由本机镜像而来，排除嵌套 `.git`、`.DS_Store`、`__pycache__`、`node_modules` "
-        f"和超过 {MAX_FILE_BYTES // 1048576}MB 的文件。**同步方向永远是本机 → 仓库**，"
+        "等明确策略项；任何未被策略排除且超过 "
+        f"{MAX_FILE_BYTES // 1048576}MB 的文件会使同步 fail closed。"
+        "`registry/<source>/_catalog/**` 与 `registry/_global/**` 是保留控制命名空间，"
+        "永不枚举为 Skill、永不由同步器删除。**同步方向永远是本机 → 仓库**，"
         "本机删掉的 skill 镜像里也会删掉。",
         "",
         "```bash",
@@ -511,7 +1034,7 @@ def main():
 
     log("=== 1/6 盘点本机 skill ===")
     try:
-        inv = inventory()
+        inv = inventory(enforce_exact_aliases=True)
     except RuntimeError as exc:
         log(f"  ✗ {exc}")
         return 2
@@ -542,10 +1065,6 @@ def main():
                 log(f"    - {x}")
             if len(ch[k]) > 20:
                 log(f"    …… 另有 {len(ch[k]) - 20} 个")
-    if ch["skipped_big"]:
-        log(f"  ⚠️ 因超过 {MAX_FILE_BYTES // 1048576}MB 被跳过 {len(ch['skipped_big'])} 个文件：")
-        for x in ch["skipped_big"][:10]:
-            log(f"    - {x}")
     if not any(ch[k] for k in ("added", "updated", "removed")):
         log("  本机与仓库一致，无变化")
 
@@ -554,7 +1073,10 @@ def main():
         return 0
 
     log("\n=== 3/6 凭据硬门 ===")
-    hits = credential_gate(mirror_root)
+    hits = credential_gate(
+        mirror_root,
+        expected_aliases=EXPECTED_SOURCE_ALIASES,
+    )
     if hits:
         log(f"  ✗ 命中 {len(hits)} 处，**已中止，未提交未推送**：")
         for p, label in hits[:30]:

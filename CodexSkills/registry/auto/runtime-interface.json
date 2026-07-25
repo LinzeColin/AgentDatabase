@@ -12,7 +12,7 @@
   "activation_handshake_entrypoint": "CodexSkills/registry/auto/tools/activation_handshake_cli.py",
   "activation_instance_created": false,
   "activation_settlement_recomputed_before_publish": true,
-  "au_040_authority_ruling_status": "REPOSITORY_BINDING_INTEGRATED_CONTROL_SYNC_PENDING",
+  "au_040_authority_ruling_status": "REGISTRY_CATALOG_RESERVED_SOURCE_DRIFT_PENDING",
   "au_040_complete": false,
   "au_040_consumer_manifest_path_contract_present": true,
   "au_040_daily_jsonl_shard_complete": false,
@@ -85,6 +85,7 @@
   },
   "au_040_transport_schema_draft_complete": true,
   "auto_exact_bundle_integration_complete": true,
+  "bound_reference_resolver_auto_integration_complete": false,
   "bound_reference_resolver_dependency_contract": {
     "adapter_may_generate_or_authenticate_resolver": false,
     "approved_surfaces": [
@@ -110,8 +111,7 @@
     "missing_current_artifacts": [
       "FOUR_SOURCE_IDENTITY_INSTANCE_VERSION_CATALOGS",
       "GLOBAL_SKILL_IDENTITY_RECORDS",
-      "MECHANISM_RESOLVER_ARTIFACT",
-      "VERSIONED_REGISTRY_SNAPSHOT_CONTRACT"
+      "PROMOTABLE_VERSIONED_REGISTRY_SNAPSHOT"
     ],
     "must_precede": [
       "GMAIL_CLIENT",
@@ -159,12 +159,329 @@
     "version_closure_required": "IDENTITY_TO_INSTANCE_TO_VERSION_UNIQUE_AND_DIGEST_EXACT"
   },
   "bound_reference_resolver_gate_satisfied": false,
+  "bound_reference_resolver_implementation_complete": true,
   "candidate_bundle_digest": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e",
   "candidate_git_object_id": "sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5",
   "candidate_manifest_path": "CodexSkills/governance/bundles/schema-bundle-manifest.v1.json",
   "candidate_manifest_raw_sha256": "66ad125629cab71739ff2bc266219f995f7a45998936ca720c6db678ee77e65a",
   "canonical_publication_permitted": false,
   "capability_gate_precedes_state_write": true,
+  "catalog_path_reservation_complete": true,
+  "catalog_reservation_materialization_snapshot": {
+    "alias_contract_entries": [
+      {
+        "alias_path": "frontend-slides/references/beautiful-html-templates",
+        "content_digest": "6fce6f28999e3684c13505d67201175ce50e08d9867fc61931b9036c05e8f255",
+        "metadata_digest": "be83d7548ab47929048690a7a2ad82a8ef388c1d3f07c6a300c4cf554f89ab5b",
+        "normalized_target_ref": "beautiful-html-templates/references/beautiful-html-templates",
+        "raw_target": "../../beautiful-html-templates/references/beautiful-html-templates",
+        "source_namespace": "codex",
+        "target_type": "DIRECTORY"
+      },
+      {
+        "alias_path": "gsap-core/references/gsap-skills/CLAUDE.md",
+        "content_digest": "1900bd27da156a2048919a652980b2c47a44b6f1e8b85f1b32cc5b31e26a6e0e",
+        "metadata_digest": "d84da930073b3187fc88d38d3db1b89ef0c983ed17721a58321371f136b6ddf2",
+        "normalized_target_ref": "gsap-core/references/gsap-skills/AGENTS.md",
+        "raw_target": "AGENTS.md",
+        "source_namespace": "codex",
+        "target_type": "REGULAR_FILE"
+      },
+      {
+        "alias_path": "gsap-core/references/gsap-skills/GEMINI.md",
+        "content_digest": "1900bd27da156a2048919a652980b2c47a44b6f1e8b85f1b32cc5b31e26a6e0e",
+        "metadata_digest": "86d05e07a6202a05dfa6aa67fa871e400d97b06dbbda5367b94c0e357828a78f",
+        "normalized_target_ref": "gsap-core/references/gsap-skills/AGENTS.md",
+        "raw_target": "AGENTS.md",
+        "source_namespace": "codex",
+        "target_type": "REGULAR_FILE"
+      },
+      {
+        "alias_path": "gsap-frameworks/references/gsap-skills/CLAUDE.md",
+        "content_digest": "1900bd27da156a2048919a652980b2c47a44b6f1e8b85f1b32cc5b31e26a6e0e",
+        "metadata_digest": "95756e6e91fca2e761e8829bd32bdf12226330d9b0af71867a287272757e7365",
+        "normalized_target_ref": "gsap-frameworks/references/gsap-skills/AGENTS.md",
+        "raw_target": "AGENTS.md",
+        "source_namespace": "codex",
+        "target_type": "REGULAR_FILE"
+      },
+      {
+        "alias_path": "gsap-frameworks/references/gsap-skills/GEMINI.md",
+        "content_digest": "1900bd27da156a2048919a652980b2c47a44b6f1e8b85f1b32cc5b31e26a6e0e",
+        "metadata_digest": "51e524d735abe13866c81789faf56bb7ab30a119efdffcfeb87ecf3455b729e1",
+        "normalized_target_ref": "gsap-frameworks/references/gsap-skills/AGENTS.md",
+        "raw_target": "AGENTS.md",
+        "source_namespace": "codex",
+        "target_type": "REGULAR_FILE"
+      },
+      {
+        "alias_path": "gsap-performance/references/gsap-skills/CLAUDE.md",
+        "content_digest": "1900bd27da156a2048919a652980b2c47a44b6f1e8b85f1b32cc5b31e26a6e0e",
+        "metadata_digest": "6e96f2f8605521e5ee74dcb341d890cc374fc12873315742f87727e165b25294",
+        "normalized_target_ref": "gsap-performance/references/gsap-skills/AGENTS.md",
+        "raw_target": "AGENTS.md",
+        "source_namespace": "codex",
+        "target_type": "REGULAR_FILE"
+      },
+      {
+        "alias_path": "gsap-performance/references/gsap-skills/GEMINI.md",
+        "content_digest": "1900bd27da156a2048919a652980b2c47a44b6f1e8b85f1b32cc5b31e26a6e0e",
+        "metadata_digest": "0ba4c6240f67c7a2669eaa1b9a62eca3ff78147645914cb9dbaa20188bf1c15b",
+        "normalized_target_ref": "gsap-performance/references/gsap-skills/AGENTS.md",
+        "raw_target": "AGENTS.md",
+        "source_namespace": "codex",
+        "target_type": "REGULAR_FILE"
+      },
+      {
+        "alias_path": "gsap-plugins/references/gsap-skills/CLAUDE.md",
+        "content_digest": "1900bd27da156a2048919a652980b2c47a44b6f1e8b85f1b32cc5b31e26a6e0e",
+        "metadata_digest": "1c7c5c0f42b67bfdd1cf080b8a4462be3a0478043aeb6d6fd0d20c69873e5f0b",
+        "normalized_target_ref": "gsap-plugins/references/gsap-skills/AGENTS.md",
+        "raw_target": "AGENTS.md",
+        "source_namespace": "codex",
+        "target_type": "REGULAR_FILE"
+      },
+      {
+        "alias_path": "gsap-plugins/references/gsap-skills/GEMINI.md",
+        "content_digest": "1900bd27da156a2048919a652980b2c47a44b6f1e8b85f1b32cc5b31e26a6e0e",
+        "metadata_digest": "c685d7fd85e61ecde5210635b3153845e77d4128be3c2841f916d07145173baf",
+        "normalized_target_ref": "gsap-plugins/references/gsap-skills/AGENTS.md",
+        "raw_target": "AGENTS.md",
+        "source_namespace": "codex",
+        "target_type": "REGULAR_FILE"
+      },
+      {
+        "alias_path": "gsap-react/references/gsap-skills/CLAUDE.md",
+        "content_digest": "1900bd27da156a2048919a652980b2c47a44b6f1e8b85f1b32cc5b31e26a6e0e",
+        "metadata_digest": "c3b4ab61cf28e5f6eee5ccf6a3064811507de93ae3db73a22fbf473c8b089c18",
+        "normalized_target_ref": "gsap-react/references/gsap-skills/AGENTS.md",
+        "raw_target": "AGENTS.md",
+        "source_namespace": "codex",
+        "target_type": "REGULAR_FILE"
+      },
+      {
+        "alias_path": "gsap-react/references/gsap-skills/GEMINI.md",
+        "content_digest": "1900bd27da156a2048919a652980b2c47a44b6f1e8b85f1b32cc5b31e26a6e0e",
+        "metadata_digest": "02330fa6ac8cc5c515804013a390185bc9554a548f3aa4f63c0b6e55c74a78d6",
+        "normalized_target_ref": "gsap-react/references/gsap-skills/AGENTS.md",
+        "raw_target": "AGENTS.md",
+        "source_namespace": "codex",
+        "target_type": "REGULAR_FILE"
+      },
+      {
+        "alias_path": "gsap-scrolltrigger/references/gsap-skills/CLAUDE.md",
+        "content_digest": "1900bd27da156a2048919a652980b2c47a44b6f1e8b85f1b32cc5b31e26a6e0e",
+        "metadata_digest": "b6ab619cedccb60126883068b0cd5fb7a6c4f608c961623ca16f02b10684164a",
+        "normalized_target_ref": "gsap-scrolltrigger/references/gsap-skills/AGENTS.md",
+        "raw_target": "AGENTS.md",
+        "source_namespace": "codex",
+        "target_type": "REGULAR_FILE"
+      },
+      {
+        "alias_path": "gsap-scrolltrigger/references/gsap-skills/GEMINI.md",
+        "content_digest": "1900bd27da156a2048919a652980b2c47a44b6f1e8b85f1b32cc5b31e26a6e0e",
+        "metadata_digest": "ed612037ea514a14aa992a57be1a3ac2a838163852381218b0718797607ccc0c",
+        "normalized_target_ref": "gsap-scrolltrigger/references/gsap-skills/AGENTS.md",
+        "raw_target": "AGENTS.md",
+        "source_namespace": "codex",
+        "target_type": "REGULAR_FILE"
+      },
+      {
+        "alias_path": "gsap-skills/references/gsap-skills/CLAUDE.md",
+        "content_digest": "1900bd27da156a2048919a652980b2c47a44b6f1e8b85f1b32cc5b31e26a6e0e",
+        "metadata_digest": "d27c60cc33db6b685dbaf8c53b38442d3d7093ecc9ed6ee2def4c95f15bc3bce",
+        "normalized_target_ref": "gsap-skills/references/gsap-skills/AGENTS.md",
+        "raw_target": "AGENTS.md",
+        "source_namespace": "codex",
+        "target_type": "REGULAR_FILE"
+      },
+      {
+        "alias_path": "gsap-skills/references/gsap-skills/GEMINI.md",
+        "content_digest": "1900bd27da156a2048919a652980b2c47a44b6f1e8b85f1b32cc5b31e26a6e0e",
+        "metadata_digest": "2153d33dbe378b14d0d7af23a36fde0b030875d8aa525433e401217cfd45ac68",
+        "normalized_target_ref": "gsap-skills/references/gsap-skills/AGENTS.md",
+        "raw_target": "AGENTS.md",
+        "source_namespace": "codex",
+        "target_type": "REGULAR_FILE"
+      },
+      {
+        "alias_path": "gsap-timeline/references/gsap-skills/CLAUDE.md",
+        "content_digest": "1900bd27da156a2048919a652980b2c47a44b6f1e8b85f1b32cc5b31e26a6e0e",
+        "metadata_digest": "4d406f34ac309d8afefd6171d0637f44c43b13d3e71f5b8ca3a3f216ca78fe35",
+        "normalized_target_ref": "gsap-timeline/references/gsap-skills/AGENTS.md",
+        "raw_target": "AGENTS.md",
+        "source_namespace": "codex",
+        "target_type": "REGULAR_FILE"
+      },
+      {
+        "alias_path": "gsap-timeline/references/gsap-skills/GEMINI.md",
+        "content_digest": "1900bd27da156a2048919a652980b2c47a44b6f1e8b85f1b32cc5b31e26a6e0e",
+        "metadata_digest": "c7e23fd72550b4b641ba160c8fde02636313ffd19da174979f06e8349f688fc7",
+        "normalized_target_ref": "gsap-timeline/references/gsap-skills/AGENTS.md",
+        "raw_target": "AGENTS.md",
+        "source_namespace": "codex",
+        "target_type": "REGULAR_FILE"
+      },
+      {
+        "alias_path": "gsap-utils/references/gsap-skills/CLAUDE.md",
+        "content_digest": "1900bd27da156a2048919a652980b2c47a44b6f1e8b85f1b32cc5b31e26a6e0e",
+        "metadata_digest": "824cee704f081d4a3495db0c7675c20ac682fde584a37d84d53d6dd0885a8af0",
+        "normalized_target_ref": "gsap-utils/references/gsap-skills/AGENTS.md",
+        "raw_target": "AGENTS.md",
+        "source_namespace": "codex",
+        "target_type": "REGULAR_FILE"
+      },
+      {
+        "alias_path": "gsap-utils/references/gsap-skills/GEMINI.md",
+        "content_digest": "1900bd27da156a2048919a652980b2c47a44b6f1e8b85f1b32cc5b31e26a6e0e",
+        "metadata_digest": "adb0d10b7cec24a3bf1271de43588295f76ec8d8b2c203cf9e5a4b77a5a0f5c9",
+        "normalized_target_ref": "gsap-utils/references/gsap-skills/AGENTS.md",
+        "raw_target": "AGENTS.md",
+        "source_namespace": "codex",
+        "target_type": "REGULAR_FILE"
+      },
+      {
+        "alias_path": "guizang-ppt-skill/references/beautiful-html-templates",
+        "content_digest": "6fce6f28999e3684c13505d67201175ce50e08d9867fc61931b9036c05e8f255",
+        "metadata_digest": "02fc19e94b5708e15dc4d324950e57a9ad12b0b5d001df300a36bf6be23aa7e3",
+        "normalized_target_ref": "beautiful-html-templates/references/beautiful-html-templates",
+        "raw_target": "../../beautiful-html-templates/references/beautiful-html-templates",
+        "source_namespace": "codex",
+        "target_type": "DIRECTORY"
+      }
+    ],
+    "alias_set_digest": "75f6db86e5a18cc000985dc32a719ac7e0bc15b22b2e3f20c0d32d3138f27387",
+    "as_of_phase": "AUTO_REGISTRY_CATALOG_PATH_RESERVATION",
+    "bound_reference_resolver_auto_integration_complete": false,
+    "bound_reference_resolver_gate_satisfied": false,
+    "canonical_publication_permitted": false,
+    "catalog_or_snapshot_artifacts_generated": false,
+    "catalog_path_reservation_complete": true,
+    "current_auto_runtime_control_bound": false,
+    "current_source_skill_count": 88,
+    "current_source_skill_counts": {
+      "agents": 24,
+      "claude": 3,
+      "codex": 55,
+      "codex-system": 6
+    },
+    "existing_incomplete_materialization_promotable": false,
+    "global_snapshot_namespace_reserved": true,
+    "historical_source_material_git_object_id": "sha1:44a38890ec38ceb24ccae1ec6f5b1fc8e93aefa1",
+    "historical_source_skill_count": 89,
+    "historical_source_skill_counts": {
+      "agents": 24,
+      "claude": 3,
+      "codex": 56,
+      "codex-system": 6
+    },
+    "mirror_alias_count": 20,
+    "mirror_alias_parity_satisfied": true,
+    "mirror_removal_artifacts": [
+      {
+        "historical_byte_count": 464,
+        "historical_raw_sha256": "d143b80b4a0834efd286449b253a80bef82238c3791c99cb4de0456eb0dba1c9",
+        "relative_path": "CodexSkills/registry/codex/context-kernel/MANIFEST.json"
+      },
+      {
+        "historical_byte_count": 9407,
+        "historical_raw_sha256": "558a67d4bc65e5451151821cb92ec882d3ab67e69705a17f7d9523803045d694",
+        "relative_path": "CodexSkills/registry/codex/context-kernel/SKILL.md"
+      },
+      {
+        "historical_byte_count": 149370,
+        "historical_raw_sha256": "eb730551bb4431da816fdacf8c02f8904d50b3c4031a9cbb055b6f28fcf412f0",
+        "relative_path": "CodexSkills/registry/codex/context-kernel/scripts/context_kernel.py"
+      }
+    ],
+    "mirror_removal_performed": true,
+    "mirror_removed_skill_roots": [
+      "codex/context-kernel"
+    ],
+    "mirror_skill_count": 88,
+    "mirror_skill_counts": {
+      "agents": 24,
+      "claude": 3,
+      "codex": 55,
+      "codex-system": 6
+    },
+    "missing_source_skill_roots": [
+      "codex/context-kernel"
+    ],
+    "non_alias_content_drift_observed_paths": [
+      "codex/graphify",
+      "codex/persona-distiller-group",
+      "codex/verifier"
+    ],
+    "reserved_registry_paths": [
+      "CodexSkills/registry/agents/_catalog/",
+      "CodexSkills/registry/claude/_catalog/",
+      "CodexSkills/registry/codex/_catalog/",
+      "CodexSkills/registry/codex-system/_catalog/",
+      "CodexSkills/registry/_global/"
+    ],
+    "runtime_state_write_permitted": false,
+    "semantic_scope": "INTERFACE_MATERIALIZATION_ONLY",
+    "source_alias_count": 20,
+    "source_alias_parity_satisfied": true,
+    "source_root_parity_satisfied": false,
+    "source_scan_observations": [
+      {
+        "alias_count": 0,
+        "completeness_status": "COMPLETE_AFTER_POLICY_EXCLUSIONS",
+        "included_file_count": 350,
+        "included_tree_digest": "93af33c94c38f910df35a08dfd294a955b137d74bec6eebb4e083825014c7a64",
+        "source_namespace": "agents",
+        "source_snapshot_digest": "9cc710e9dc8d6bf011f19e4576d4e558dd6cdd72f0814e519b23d7aa08de47c5"
+      },
+      {
+        "alias_count": 0,
+        "completeness_status": "COMPLETE_AFTER_POLICY_EXCLUSIONS",
+        "included_file_count": 191,
+        "included_tree_digest": "03d37e741ace0feffc19a4dac1f3550b8ffccb0d6d66c95cb84fe6cf250e8e2b",
+        "source_namespace": "claude",
+        "source_snapshot_digest": "b7c44c9118f1385ffb82c7a4c32e6e5db00d74d5aab43e9066259bc375459dc4"
+      },
+      {
+        "alias_count": 20,
+        "completeness_status": "COMPLETE_AFTER_POLICY_EXCLUSIONS",
+        "included_file_count": 3091,
+        "included_tree_digest": "746b945b967502edd30872a69a713cd679432ef89059856cbe819fa74e06cab5",
+        "source_namespace": "codex",
+        "source_snapshot_digest": "1f41a69acd5de4a0017ae596bf80ce70632369ddf2377eb4fe659fc00f7905b4"
+      },
+      {
+        "alias_count": 0,
+        "completeness_status": "COMPLETE_AFTER_POLICY_EXCLUSIONS",
+        "included_file_count": 54,
+        "included_tree_digest": "cbd66243b0c52fabe69284386316350ee5ef6e7308bdd9e629c2abffefd9b378",
+        "source_namespace": "codex-system",
+        "source_snapshot_digest": "33163f9473ca2865e5bf159eff914010583a842842c1bcc8aa4d567db9b70a36"
+      }
+    ],
+    "source_skill_count_delta": -1,
+    "sync_executor_artifact": {
+      "artifact_digest": "1fd015a043dfe48034df03d8a821cda5793c90694191a8b629672efaf33283ac",
+      "relative_path": "CodexSkills/sync_skills.py"
+    },
+    "whole_source_parity_satisfied": false
+  },
+  "catalog_reservation_predecessor_observation": {
+    "bound_auto_git_object_id": "sha1:49ac09dbd9c8a2e18d5a199088a910dc77e7d365",
+    "bound_auto_module_count": 26,
+    "bound_auto_runtime_interface_raw_sha256": "c7af9d1406fe2ed084d5a30fab6cded3897a83c1602e6c40587cf28c75a2c75c",
+    "canonical_control_path": "CodexSkills/governance/activation/control-interface.json",
+    "control_interface_raw_sha256": "6f7a2bdedfc7c388c4b6e1c2345855e110305b7ed906874676a5ba6daf7779f2",
+    "control_root_status": "DRAFT_NON_ACTIVE",
+    "external_control_mode": "DRAFT_NON_ACTIVE_CONTROL",
+    "next_phase_at_observation": "AUTO_REGISTRY_CATALOG_PATH_RESERVATION",
+    "resolver_interface_path": "CodexSkills/governance/registry/resolver-interface.json",
+    "resolver_interface_raw_sha256": "0fe26ab55d92a1c6f5628e2a8d27becbdcc839ccfd73372150a2339ffe7eb4cb",
+    "resolver_status": "DRAFT_NON_ACTIVE_RESOLVER_IMPLEMENTED",
+    "verified_git_object_id": "sha1:488321c83b2a669ea964873e22a94b8e65429350",
+    "working_tree_control_is_not_historical_trust_evidence": true,
+    "working_tree_resolver_is_not_historical_trust_evidence": true
+  },
   "consumer_first_canonical_publication_permitted": false,
   "consumer_first_gate_satisfied": true,
   "consumer_first_interface_path": "OpenAIDatabase/config/evaluation/skill_run_consumer.json",
@@ -239,6 +556,10 @@
       "relative_path": "CodexSkills/registry/auto/runtime/bootstrap.py"
     },
     {
+      "artifact_digest": "49ba6c0a294f61bf716e388517489f634c343a4b1f2747d91a1149297a2fc836",
+      "relative_path": "CodexSkills/registry/auto/runtime/catalog_reservation.py"
+    },
+    {
       "artifact_digest": "25e5b2b53da145843bc27f626cd9e92df9b188d5ba6d27b417a805fbce729969",
       "relative_path": "CodexSkills/registry/auto/runtime/core.py"
     },
@@ -295,7 +616,7 @@
       "relative_path": "CodexSkills/registry/auto/runtime/state.py"
     },
     {
-      "artifact_digest": "2b15431913e1238c9f95278e9ab6ce39c443982236b4523af7032b7c3d74980a",
+      "artifact_digest": "837a7ed2b4ee8045ac5e223faaea5ebb65e2b5ece058a6be27da155a0e5a9c5c",
       "relative_path": "CodexSkills/registry/auto/runtime/writer_shadow.py"
     },
     {
@@ -303,7 +624,7 @@
       "relative_path": "CodexSkills/registry/auto/tools/activation_handshake_cli.py"
     },
     {
-      "artifact_digest": "066fc532c4fa1a56c9df746ac31bf83263dafa4faf443d078abfaabd734ed816",
+      "artifact_digest": "6d2cf63228a879a73ad8147a95cc3b34b89184afdc13082f0e56f511e2efc513",
       "relative_path": "CodexSkills/registry/auto/tools/build_runtime_interface.py"
     },
     {
@@ -331,8 +652,8 @@
       "relative_path": "CodexSkills/registry/auto/tools/validate_auto.py"
     }
   ],
-  "module_count": 26,
-  "next_phase": "MECHANISM_POST_AU040_REPOSITORY_BINDING_CONTROL_SYNC",
+  "module_count": 27,
+  "next_phase": "MECHANISM_REGISTRY_SOURCE_DRIFT_RECONCILIATION",
   "notification_actual_recipient_repo_external": true,
   "notification_credentials_repo_external": true,
   "notification_external_path_contract": {
@@ -370,6 +691,11 @@
     "runtime_state_write_permitted": false,
     "semantic_scope": "INTERFACE_MATERIALIZATION_ONLY"
   },
+  "registry_alias_set_digest": "75f6db86e5a18cc000985dc32a719ac7e0bc15b22b2e3f20c0d32d3138f27387",
+  "registry_mirror_alias_parity_satisfied": true,
+  "registry_source_alias_parity_satisfied": true,
+  "registry_source_root_parity_satisfied": false,
+  "registry_whole_source_parity_satisfied": false,
   "remote_readback_precedes_watermark": true,
   "repository_binding_contract": {
     "artifact_closure": [

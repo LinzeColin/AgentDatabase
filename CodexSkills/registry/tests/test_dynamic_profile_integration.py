@@ -1,9 +1,15 @@
 from __future__ import annotations
 
 import json
+import os
 import re
+import stat
 import unittest
 from pathlib import Path
+
+from CodexSkills.registry.auto.runtime.catalog_reservation import (
+    SOURCE_CATALOG_COMPONENT,
+)
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
@@ -26,7 +32,9 @@ class DynamicProfileIntegrationTests(unittest.TestCase):
             (source, path.name)
             for source in ("agents", "claude", "codex-system", "codex")
             for path in (REGISTRY / source).iterdir()
-            if path.is_dir()
+            if path.name != SOURCE_CATALOG_COMPONENT
+            and stat.S_ISDIR(os.lstat(path).st_mode)
+            and not stat.S_ISLNK(os.lstat(path).st_mode)
         }
         self.assertEqual(indexed, actual)
         missing = [

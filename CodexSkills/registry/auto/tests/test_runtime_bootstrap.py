@@ -373,7 +373,7 @@ class RuntimeBootstrapTests(unittest.TestCase):
         )
         self.assertEqual(
             interface["au_040_authority_ruling_status"],
-            "REPOSITORY_BINDING_INTEGRATED_CONTROL_SYNC_PENDING",
+            "REGISTRY_CATALOG_RESERVED_SOURCE_DRIFT_PENDING",
         )
         self.assertFalse(interface["au_040_complete"])
         self.assertTrue(interface["au_040_transport_schema_draft_complete"])
@@ -506,7 +506,7 @@ class RuntimeBootstrapTests(unittest.TestCase):
         )
         self.assertEqual(
             interface["next_phase"],
-            "MECHANISM_POST_AU040_REPOSITORY_BINDING_CONTROL_SYNC",
+            "MECHANISM_REGISTRY_SOURCE_DRIFT_RECONCILIATION",
         )
         self.assertTrue(
             interface["auto_exact_bundle_integration_complete"]
@@ -639,7 +639,86 @@ class RuntimeBootstrapTests(unittest.TestCase):
         self.assertTrue(
             interface["repository_binding_integration_complete"]
         )
-        self.assertEqual(interface["module_count"], 26)
+        self.assertEqual(interface["module_count"], 27)
+        self.assertTrue(interface["catalog_path_reservation_complete"])
+        self.assertTrue(
+            interface["registry_source_alias_parity_satisfied"]
+        )
+        self.assertTrue(
+            interface["registry_mirror_alias_parity_satisfied"]
+        )
+        self.assertFalse(
+            interface["registry_source_root_parity_satisfied"]
+        )
+        self.assertFalse(
+            interface["registry_whole_source_parity_satisfied"]
+        )
+        reservation = interface[
+            "catalog_reservation_materialization_snapshot"
+        ]
+        self.assertEqual(
+            reservation["as_of_phase"],
+            "AUTO_REGISTRY_CATALOG_PATH_RESERVATION",
+        )
+        self.assertEqual(reservation["historical_source_skill_count"], 89)
+        self.assertEqual(reservation["current_source_skill_count"], 88)
+        self.assertEqual(reservation["mirror_skill_count"], 88)
+        self.assertEqual(
+            reservation["missing_source_skill_roots"],
+            ["codex/context-kernel"],
+        )
+        self.assertTrue(reservation["mirror_removal_performed"])
+        self.assertEqual(
+            reservation["mirror_removed_skill_roots"],
+            ["codex/context-kernel"],
+        )
+        self.assertEqual(reservation["source_alias_count"], 20)
+        self.assertEqual(reservation["mirror_alias_count"], 20)
+        self.assertTrue(reservation["source_alias_parity_satisfied"])
+        self.assertTrue(reservation["mirror_alias_parity_satisfied"])
+        self.assertFalse(reservation["source_root_parity_satisfied"])
+        self.assertFalse(reservation["whole_source_parity_satisfied"])
+        self.assertFalse(
+            reservation["catalog_or_snapshot_artifacts_generated"]
+        )
+        self.assertFalse(
+            reservation["existing_incomplete_materialization_promotable"]
+        )
+        self.assertFalse(
+            reservation[
+                "bound_reference_resolver_auto_integration_complete"
+            ]
+        )
+        self.assertFalse(
+            reservation["bound_reference_resolver_gate_satisfied"]
+        )
+        predecessor = interface[
+            "catalog_reservation_predecessor_observation"
+        ]
+        self.assertEqual(
+            predecessor["verified_git_object_id"],
+            "sha1:488321c83b2a669ea964873e22a94b8e65429350",
+        )
+        self.assertEqual(
+            predecessor["control_interface_raw_sha256"],
+            "6f7a2bdedfc7c388c4b6e1c2345855e"
+            "110305b7ed906874676a5ba6daf7779f2",
+        )
+        self.assertEqual(
+            predecessor["resolver_interface_raw_sha256"],
+            "0fe26ab55d92a1c6f5628e2a8d27bec"
+            "bdcc839ccfd73372150a2339ffe7eb4cb",
+        )
+        self.assertEqual(
+            predecessor["next_phase_at_observation"],
+            "AUTO_REGISTRY_CATALOG_PATH_RESERVATION",
+        )
+        self.assertFalse(
+            interface["bound_reference_resolver_auto_integration_complete"]
+        )
+        self.assertTrue(
+            interface["bound_reference_resolver_implementation_complete"]
+        )
         self.assertFalse(
             interface["bound_reference_resolver_gate_satisfied"]
         )
@@ -728,6 +807,28 @@ class RuntimeBootstrapTests(unittest.TestCase):
                     "AUTO_CONTROL_INTERFACE_RAW_DIGEST_MISMATCH",
                 ):
                     module._historical_control_observation()
+            original_git_blob = module._git_blob
+
+            def tampered_resolver_blob(object_id, relative_path):
+                if (
+                    object_id
+                    == module.CATALOG_RESERVATION_CONTROL_GIT_OBJECT
+                    and relative_path
+                    == module.RESOLVER_INTERFACE_REPO_PATH
+                ):
+                    return b"{}\n"
+                return original_git_blob(object_id, relative_path)
+
+            with mock.patch.object(
+                module,
+                "_git_blob",
+                side_effect=tampered_resolver_blob,
+            ):
+                with self.assertRaisesRegex(
+                    ValueError,
+                    "AUTO_CATALOG_RESERVATION_RESOLVER_RAW_DIGEST_MISMATCH",
+                ):
+                    module._catalog_reservation_predecessor_observation()
 
     def test_successor_control_change_preserves_historical_builder_and_shadow(
         self,
@@ -943,7 +1044,7 @@ class RuntimeBootstrapTests(unittest.TestCase):
             )
             self.assertEqual(
                 current_interface["next_phase"],
-                "MECHANISM_POST_AU040_REPOSITORY_BINDING_CONTROL_SYNC",
+                "MECHANISM_REGISTRY_SOURCE_DRIFT_RECONCILIATION",
             )
             self.assertTrue(
                 observed["transition_contract"][

@@ -46,6 +46,13 @@ resolve schemas over the network, or install dependencies at runtime.
 - `runtime/source.py` implements lstat-first source inventory, exact policy
   exclusions, safe same-root aliases, deterministic tree digests, and public
   inventory/coverage projection.
+- `runtime/catalog_reservation.py` reserves every
+  `registry/<source>/_catalog/**` path plus `registry/_global/**` outside
+  Skill enumeration/deletion, and binds the exact 20-entry relative-symlink
+  alias set. `CodexSkills/sync_skills.py` consumes that contract with a
+  full-source lstat/containment/size/special-node preflight before any mirror
+  removal or replacement; registered aliases are preserved without
+  dereference and unregistered aliases fail closed.
 - `runtime/privacy.py` and `runtime/queue.py` enforce serialized public-value
   scanning and an atomic public-safe-only queue.
 - `runtime/run_log_writer.py` validates an existing daily tree through
@@ -280,14 +287,22 @@ manifest as historical truth, so the authorized Mechanism 31/5
 materialization can follow without invalidating promotion evidence.
 
 The exact final 31/5 candidate, V2 consumer, and predecessor control remain
-unchanged. The next phase is
-`MECHANISM_POST_AU040_REPOSITORY_BINDING_CONTROL_SYNC`: Mechanism must independently
-read back this Auto object and issue a successor control binding the new
-runtime-interface tuple and 26-module set. The materialized interface records
-`repository_binding_integration_complete=true` as a local implementation
-fact while `current_auto_runtime_control_bound=false`,
+unchanged. The Registry reservation materialization records exact alias parity
+as 20/20 while separately recording source-root drift: the historical source
+object had 89 roots and the current source has 88, with
+`codex/context-kernel` missing. The mirror removal is auditable, but the
+historical incomplete catalog/snapshot materialization is not promotable and
+alias parity is never interpreted as whole-source parity. The next phase is
+`MECHANISM_REGISTRY_SOURCE_DRIFT_RECONCILIATION`: Mechanism must independently
+read back this Auto object, reconcile the missing root and outstanding
+non-alias content drift, then decide whether a new catalog/snapshot
+materialization can be promoted. The Auto interface contains 27 runtime
+modules and a separately digested sync executor. It keeps
+`bound_reference_resolver_auto_integration_complete=false`,
+`bound_reference_resolver_gate_satisfied=false`,
+`current_auto_runtime_control_bound=false`,
 `runtime_state_write_permitted=false`, `repository_bound=false`, AU-040
-completion, activation, and canonical publication all remain false.
+completion, activation, and canonical publication all false.
 
 The schedule conflict remains unresolved. The external Gmail readiness gate
 remains false until the Owner injects the repo-external state root and the

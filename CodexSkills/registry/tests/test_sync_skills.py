@@ -52,6 +52,7 @@ class SyncSkillsRegistryRoutingTests(unittest.TestCase):
                 },
                 str(registry),
                 propagate_deletions=False,
+                source_roots={"codex": root},
             )
             routed = registry / "codex" / "persona-distiller"
             group_routed = registry / "codex" / "persona-distiller-group"
@@ -72,6 +73,7 @@ class SyncSkillsRegistryRoutingTests(unittest.TestCase):
                 {("codex", "persona-distiller"): str(local_builder)},
                 str(registry),
                 propagate_deletions=False,
+                source_roots={"codex": root},
             )
             self.assertEqual(
                 (routed / "registry.yaml").read_text(encoding="utf-8"),
@@ -119,7 +121,9 @@ class SyncSkillsFailClosedTests(unittest.TestCase):
         self.root = Path(self.temp.name)
         self.catalog = self.root / "CodexSkills"
         self.registry = self.catalog / "registry"
-        self.local = self.root / "local-skill"
+        self.source = self.root / "local"
+        self.source.mkdir()
+        self.local = self.source / "demo-skill"
         self.local.mkdir(parents=True)
         (self.local / "SKILL.md").write_text(
             "---\nname: demo-skill\ndescription: Demo registry migration.\n---\n",
@@ -127,7 +131,7 @@ class SyncSkillsFailClosedTests(unittest.TestCase):
         )
         self.original_sources = sync_skills.SOURCES
         sync_skills.SOURCES = {
-            "codex": {"path": str(self.root / "local"), "label": "Codex test source"}
+            "codex": {"path": str(self.source), "label": "Codex test source"}
         }
 
     def tearDown(self) -> None:
@@ -145,6 +149,7 @@ class SyncSkillsFailClosedTests(unittest.TestCase):
             {("codex", "demo-skill"): str(self.local)},
             str(self.registry),
             dry_run=True,
+            source_roots={"codex": self.source},
         )
         self.assertEqual(dry_run["updated"], [])
 
@@ -155,6 +160,7 @@ class SyncSkillsFailClosedTests(unittest.TestCase):
         changed = sync_skills.mirror(
             {("codex", "demo-skill"): str(self.local)},
             str(self.registry),
+            source_roots={"codex": self.source},
         )
         self.assertEqual(changed["updated"], ["codex/demo-skill"])
         self.assertEqual((destination / "registry.yaml").read_bytes(), metadata)
@@ -188,14 +194,11 @@ class SyncSkillsFailClosedTests(unittest.TestCase):
         destination.mkdir(parents=True)
         target = destination / "SKILL.md"
         target.write_bytes((self.local / "SKILL.md").read_bytes())
-        real_open = open
-
-        def selective_open(path, *args, **kwargs):
-            if Path(path) == target:
-                raise OSError("synthetic read failure")
-            return real_open(path, *args, **kwargs)
-
-        with mock.patch("builtins.open", side_effect=selective_open):
+        with mock.patch.object(
+            sync_skills.os,
+            "open",
+            side_effect=OSError("synthetic read failure"),
+        ):
             with self.assertRaisesRegex(RuntimeError, "凭据扫描无法读取文件"):
                 sync_skills.credential_gate(str(self.registry))
 
@@ -220,6 +223,8 @@ class SyncSkillsFailClosedTests(unittest.TestCase):
         missing = self.root / "missing-source"
         sync_skills.SOURCES = {
             "codex": {"path": str(existing), "label": "Existing source"},
+            "codex-system": {"path": str(existing), "label": "Existing system"},
+            "claude": {"path": str(existing), "label": "Existing claude"},
             "agents": {"path": str(missing), "label": "Missing source"},
         }
 
@@ -261,6 +266,7 @@ class SyncSkillsFailClosedTests(unittest.TestCase):
                     {("codex", "demo-skill"): str(self.local)},
                     str(self.registry),
                     propagate_deletions=False,
+                    source_roots={"codex": self.source},
                 )
 
         self.assertEqual((destination / "SKILL.md").read_bytes(), original)

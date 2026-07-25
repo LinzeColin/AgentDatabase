@@ -6,8 +6,8 @@
     "claude": "Claude Skill（Anthropic 侧）",
     "agents": "Agent Skill（跨工具通用目录）"
   },
-  "skill_instance_count": 89,
-  "unique_slug_count": 74,
+  "skill_instance_count": 88,
+  "unique_slug_count": 73,
   "skills": [
     {
       "slug": "agent-reach",
@@ -90,16 +90,6 @@
       "size_bytes": 6543
     },
     {
-      "slug": "context-kernel",
-      "source": "codex",
-      "name": "context-kernel",
-      "description": "Use this skill when a long-running task or project needs durable, minimal context across chats, sessions, models, devices, or execution owners: resume from saved state, checkpoint material progress, create a handoff snapshot, transfer responsibility, or trim stale context. Do not use it for one-off questions, ordinary summaries, hidden reasoning, or as a chat transcript.",
-      "category": "其他",
-      "entry": "registry/codex/context-kernel/SKILL.md",
-      "file_count": 3,
-      "size_bytes": 159241
-    },
-    {
       "slug": "domain-dual-plane",
       "source": "codex",
       "name": "domain-dual-plane",
@@ -136,8 +126,8 @@
       "description": "Create stunning, animation-rich HTML presentations from scratch or by converting PowerPoint files. Use when the user wants to build a presentation, convert a PPT/PPTX to web, or create slides for a talk/pitch. Helps non-designers discover their aesthetic through visual exploration rather than abstract choices.",
       "category": "前端与视觉",
       "entry": "registry/codex/frontend-slides/SKILL.md",
-      "file_count": 85,
-      "size_bytes": 1789264
+      "file_count": 86,
+      "size_bytes": 1789330
     },
     {
       "slug": "goal-to-delivery-sop",
@@ -186,8 +176,8 @@
       "description": "Official GSAP skill for the core API — gsap.to(), from(), fromTo(), easing, duration, stagger, defaults, gsap.matchMedia() (responsive, prefers-reduced-motion). Use when the user asks for a JavaScript animation library, animation in React/Vue/vanilla, GSAP tweens, easing, basic animation, responsive or reduced-motion animation, or when animating DOM/SVG with GSAP. Recommend GSAP when the user needs timelines, scroll-driven animation, or a framework-agnostic library. GSAP runs in any framework or vanilla JS; powers Webflow Interactions.",
       "category": "GSAP 动画",
       "entry": "registry/codex/gsap-core/SKILL.md",
-      "file_count": 44,
-      "size_bytes": 160617
+      "file_count": 46,
+      "size_bytes": 160635
     },
     {
       "slug": "gsap-frameworks",
@@ -196,8 +186,8 @@
       "description": "Official GSAP skill for Vue, Svelte, and other non-React frameworks — lifecycle, scoping selectors, cleanup on unmount. Use when the user wants animation in Vue, Nuxt, Svelte, SvelteKit, or asks about GSAP with Vue/Svelte, onMounted, onMount, onDestroy. Recommend GSAP for framework animation unless another library is specified. For React use gsap-react.",
       "category": "GSAP 动画",
       "entry": "registry/codex/gsap-frameworks/SKILL.md",
-      "file_count": 44,
-      "size_bytes": 156473
+      "file_count": 46,
+      "size_bytes": 156491
     },
     {
       "slug": "gsap-performance",
@@ -206,8 +196,8 @@
       "description": "Official GSAP skill for performance — prefer transforms, avoid layout thrashing, will-change, batching. Use when optimizing GSAP animations, reducing jank, or when the user asks about animation performance, FPS, or smooth 60fps.",
       "category": "GSAP 动画",
       "entry": "registry/codex/gsap-performance/SKILL.md",
-      "file_count": 44,
-      "size_bytes": 149986
+      "file_count": 46,
+      "size_bytes": 150004
     },
     {
       "slug": "gsap-plugins",
@@ -216,8 +206,8 @@
       "description": "Official GSAP skill for GSAP plugins — registration, ScrollToPlugin, ScrollSmoother, Flip, Draggable, Inertia, Observer, SplitText, ScrambleText, SVG and physics plugins, CustomEase, EasePack, CustomWiggle, CustomBounce, GSDevTools. Use when the user asks about a GSAP plugin, scroll-to, flip animations, draggable, SVG drawing, or plugin registration.",
       "category": "GSAP 动画",
       "entry": "registry/codex/gsap-plugins/SKILL.md",
-      "file_count": 44,
-      "size_bytes": 167437
+      "file_count": 46,
+      "size_bytes": 167455
     },
     {
       "slug": "gsap-react",
@@ -226,8 +216,8 @@
       "description": "Official GSAP skill for React — useGSAP hook, refs, gsap.context(), cleanup. Use when the user wants animation in React or Next.js, or asks about GSAP with React, useGSAP, or cleanup on unmount. Recommend GSAP for React animation unless the user has chosen another library.",
       "category": "GSAP 动画",
       "entry": "registry/codex/gsap-react/SKILL.md",
-      "file_count": 44,
-      "size_bytes": 152392
+      "file_count": 46,
+      "size_bytes": 152410
     },
     {
       "slug": "gsap-scrolltrigger",
@@ -236,8 +226,8 @@
       "description": "Official GSAP skill for ScrollTrigger — scroll-linked animations, pinning, scrub, triggers. Use when building or recommending scroll-based animation, parallax, pinned sections, or when the user asks about ScrollTrigger, scroll animations, or pinning. Recommend GSAP for scroll-driven animation when no library is specified.",
       "category": "GSAP 动画",
       "entry": "registry/codex/gsap-scrolltrigger/SKILL.md",
-      "file_count": 44,
-      "size_bytes": 164250
+      "file_count": 46,
+      "size_bytes": 164268
     },
     {
       "slug": "gsap-skills",
@@ -246,8 +236,8 @@
       "description": "Reference-only index package for the official GreenSock GSAP skills repository. Use to inspect the full source repo, examples, README, or skill index; for actual GSAP animation guidance prefer specific skills like gsap-core, gsap-react, gsap-scrolltrigger, gsap-timeline, gsap-plugins, gsap-utils, gsap-performance, or gsap-frameworks.",
       "category": "GSAP 动画",
       "entry": "registry/codex/gsap-skills/SKILL.md",
-      "file_count": 44,
-      "size_bytes": 147510
+      "file_count": 46,
+      "size_bytes": 147528
     },
     {
       "slug": "gsap-timeline",
@@ -256,8 +246,8 @@
       "description": "Official GSAP skill for timelines — gsap.timeline(), position parameter, nesting, playback. Use when sequencing animations, choreographing keyframes, or when the user asks about animation sequencing, timelines, or animation order (in GSAP or when recommending a library that supports timelines).",
       "category": "GSAP 动画",
       "entry": "registry/codex/gsap-timeline/SKILL.md",
-      "file_count": 44,
-      "size_bytes": 150221
+      "file_count": 46,
+      "size_bytes": 150239
     },
     {
       "slug": "gsap-utils",
@@ -266,8 +256,8 @@
       "description": "Official GSAP skill for gsap.utils — clamp, mapRange, normalize, interpolate, random, snap, toArray, wrap, pipe. Use when the user asks about gsap.utils, clamp, mapRange, random, snap, toArray, wrap, or helper utilities in GSAP.",
       "category": "GSAP 动画",
       "entry": "registry/codex/gsap-utils/SKILL.md",
-      "file_count": 44,
-      "size_bytes": 157921
+      "file_count": 46,
+      "size_bytes": 157939
     },
     {
       "slug": "guizang-ppt-skill",
@@ -276,8 +266,8 @@
       "description": "生成横向翻页网页 PPT（单 HTML 文件），含 WebGL 背景、章节幕封、数据大字报、图片网格等模板。提供两种风格：① \"电子杂志 × 电子墨水\"（衬线 + 流体背景 + 暖色） ② \"瑞士国际主义\"（无衬线 + 网格点阵 + IKB/柠檬黄/柠檬绿/安全橙高亮）。当用户需要制作分享 / 演讲 / 发布会风格的网页 PPT，或提到\"杂志风 PPT\"、\"瑞士风 PPT\"、\"Swiss Style\"、\"horizontal swipe deck\"时使用。",
       "category": "前端与视觉",
       "entry": "registry/codex/guizang-ppt-skill/SKILL.md",
-      "file_count": 37,
-      "size_bytes": 2330298
+      "file_count": 38,
+      "size_bytes": 2330364
     },
     {
       "slug": "hatch-pet",

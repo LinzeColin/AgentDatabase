@@ -257,6 +257,9 @@ def validate_unbound_writer_candidate(
     repository_materialization = current.get(
         "repository_binding_materialization_snapshot"
     )
+    catalog_materialization = current.get(
+        "catalog_reservation_materialization_snapshot"
+    )
     historical_control = current.get(
         "historical_control_observation"
     )
@@ -326,6 +329,51 @@ def validate_unbound_writer_candidate(
             "canonical_publication_permitted"
         )
         is not False
+        or not isinstance(catalog_materialization, dict)
+        or catalog_materialization.get("as_of_phase")
+        != "AUTO_REGISTRY_CATALOG_PATH_RESERVATION"
+        or catalog_materialization.get("semantic_scope")
+        != "INTERFACE_MATERIALIZATION_ONLY"
+        or catalog_materialization.get(
+            "current_auto_runtime_control_bound"
+        )
+        is not False
+        or catalog_materialization.get(
+            "catalog_path_reservation_complete"
+        )
+        is not True
+        or catalog_materialization.get(
+            "source_alias_parity_satisfied"
+        )
+        is not True
+        or catalog_materialization.get(
+            "mirror_alias_parity_satisfied"
+        )
+        is not True
+        or catalog_materialization.get(
+            "source_root_parity_satisfied"
+        )
+        is not False
+        or catalog_materialization.get(
+            "whole_source_parity_satisfied"
+        )
+        is not False
+        or catalog_materialization.get(
+            "bound_reference_resolver_auto_integration_complete"
+        )
+        is not False
+        or catalog_materialization.get(
+            "bound_reference_resolver_gate_satisfied"
+        )
+        is not False
+        or catalog_materialization.get(
+            "runtime_state_write_permitted"
+        )
+        is not False
+        or catalog_materialization.get(
+            "canonical_publication_permitted"
+        )
+        is not False
         or not isinstance(historical_control, dict)
         or historical_control.get("verified_git_object_id")
         != CONTROL_GIT_OBJECT
@@ -343,8 +391,16 @@ def validate_unbound_writer_candidate(
         or current.get("repository_bound") is not False
         or current.get("bound_reference_resolver_gate_satisfied")
         is not False
+        or current.get(
+            "bound_reference_resolver_auto_integration_complete"
+        )
+        is not False
+        or current.get(
+            "bound_reference_resolver_implementation_complete"
+        )
+        is not True
         or current.get("next_phase")
-        != "MECHANISM_POST_AU040_REPOSITORY_BINDING_CONTROL_SYNC"
+        != "MECHANISM_REGISTRY_SOURCE_DRIFT_RECONCILIATION"
     ):
         raise AutoRuntimeError(
             "WRITER_SHADOW_CURRENT_INTERFACE_CONTRACT_MISMATCH"
