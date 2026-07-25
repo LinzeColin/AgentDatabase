@@ -64,25 +64,28 @@ CANDIDATE_BUNDLE_GIT_OBJECT_ID = (
     "sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5"
 )
 AUTO_RUNTIME_GIT_OBJECT_ID = (
-    "sha1:7f1bd87652f7cc88fbf2f6b542f9feb57750bf0d"
+    "sha1:85edc67df48d4e5bc783f89ed3f3371f25f288e1"
 )
 AUTO_RUNTIME_INTERFACE_RAW_SHA256 = (
-    "f1f9331df1b56c80e2fa7415fe2fe3d714dcd831cec94390afa43c078dedf38b"
+    "ce3aae7a22419c3a01455e8e83cc67b23eeb2ada3f3c17e57590a890c0fdef31"
 )
-AUTO_RUNTIME_MODULE_COUNT = 24
+AUTO_RUNTIME_MODULE_COUNT = 25
 AUTO_SOURCE_CONTROL_GIT_OBJECT_ID = (
-    "sha1:00c4a52d177898b1999b87b29ddb480e89908729"
+    "sha1:fb9b99c36cb870b04f34b5ed3bcb75aeae52c296"
 )
 AUTO_SOURCE_CONTROL_INTERFACE_RAW_SHA256 = (
-    "31602443a685cc12a1eebd51ea8e0801ffd399c16a33186c372b7b81e8e46409"
+    "3929db4e818864d02a596efe3e1aaae1af71a765cfafaf7b22f26157135d7953"
 )
 AUTO_SOURCE_RUNTIME_GIT_OBJECT_ID = (
-    "sha1:7ed9e761921f557887440803d1fc7327f3e986a9"
+    "sha1:7f1bd87652f7cc88fbf2f6b542f9feb57750bf0d"
 )
 AUTO_SOURCE_RUNTIME_INTERFACE_RAW_SHA256 = (
-    "09af0c00273825e90a489f413a2f0bb6995042e5b4eea17973ce7582eab66340"
+    "f1f9331df1b56c80e2fa7415fe2fe3d714dcd831cec94390afa43c078dedf38b"
 )
-AUTO_SOURCE_RUNTIME_MODULE_COUNT = 21
+AUTO_SOURCE_RUNTIME_MODULE_COUNT = 24
+AUTO_WRITER_SOURCE_CONTROL_GIT_OBJECT_ID = (
+    "sha1:00c4a52d177898b1999b87b29ddb480e89908729"
+)
 AUTO_PROMOTION_GIT_OBJECT_ID = (
     "sha1:ab49666bd3343c2abbfc6766478fad63d44163d0"
 )
@@ -455,17 +458,39 @@ def _verify_auto_historical_control(
     auto_interface: Mapping[str, Any],
 ) -> None:
     observation = auto_interface.get("historical_control_observation")
-    snapshot = auto_interface.get("runtime_interface_materialization_snapshot")
-    if not isinstance(observation, dict) or snapshot != {
-        "as_of_phase": "AUTO_AU040_RUNTIME_WRITER_INTEGRATION",
-        "control_sync_required_before_state_write": True,
-        "current_auto_runtime_control_bound": False,
-        "historical_control_git_object_id": (
-            AUTO_SOURCE_CONTROL_GIT_OBJECT_ID
-        ),
-        "runtime_state_write_permitted": False,
-        "semantic_scope": "INTERFACE_MATERIALIZATION_ONLY",
-    }:
+    writer_snapshot = auto_interface.get(
+        "runtime_interface_materialization_snapshot"
+    )
+    publisher_snapshot = auto_interface.get(
+        "publisher_v2_runtime_materialization_snapshot"
+    )
+    if (
+        not isinstance(observation, dict)
+        or writer_snapshot
+        != {
+            "as_of_phase": "AUTO_AU040_RUNTIME_WRITER_INTEGRATION",
+            "control_sync_required_before_state_write": True,
+            "current_auto_runtime_control_bound": False,
+            "historical_control_git_object_id": (
+                AUTO_WRITER_SOURCE_CONTROL_GIT_OBJECT_ID
+            ),
+            "runtime_state_write_permitted": False,
+            "semantic_scope": "INTERFACE_MATERIALIZATION_ONLY",
+        }
+        or publisher_snapshot
+        != {
+            "as_of_phase": "AUTO_AU040_PUBLISHER_V2_RUNTIME_INTEGRATION",
+            "canonical_publication_permitted": False,
+            "control_sync_required_before_state_write": True,
+            "current_auto_runtime_control_bound": False,
+            "predecessor_control_git_object_id": (
+                AUTO_SOURCE_CONTROL_GIT_OBJECT_ID
+            ),
+            "repository_bound": False,
+            "runtime_state_write_permitted": False,
+            "semantic_scope": "INTERFACE_MATERIALIZATION_ONLY",
+        }
+    ):
         raise ContractError("ACTIVATION_AUTO_CONTROL_SNAPSHOT_INVALID")
 
     source_control_raw = _git_blob(
@@ -497,7 +522,7 @@ def _verify_auto_historical_control(
         or source_control.get("base_auto_git_object_id")
         != AUTO_SOURCE_RUNTIME_GIT_OBJECT_ID
         or source_control.get("next_phase")
-        != "AUTO_AU040_RUNTIME_WRITER_INTEGRATION"
+        != "AUTO_AU040_PUBLISHER_V2_RUNTIME_INTEGRATION"
         or not isinstance(source_transport, dict)
         or source_transport.get("verified_git_object_id")
         != AUTO_SOURCE_RUNTIME_GIT_OBJECT_ID
@@ -505,15 +530,25 @@ def _verify_auto_historical_control(
         != AUTO_SOURCE_RUNTIME_INTERFACE_RAW_SHA256
         or source_transport.get("module_count")
         != AUTO_SOURCE_RUNTIME_MODULE_COUNT
+        or source_transport.get("integration_state")
+        != "AU040_RUNTIME_WRITER_INTEGRATED_CONTROL_SYNCED"
         or not isinstance(source_transition, dict)
         or source_transition.get("auto_runtime_integration_complete")
         is not True
         or source_transition.get("runtime_state_write_permitted")
         is not True
         or source_transition.get("runtime_shard_writer_integration_complete")
-        is not False
+        is not True
         or source_transition.get("publisher_v2_runtime_integration_complete")
         is not False
+        or source_transition.get("repository_bound") is not False
+        or source_transition.get("canonical_publication_permitted")
+        is not False
+        or source_transition.get("au_040_complete") is not False
+        or source_transition.get("au_040_daily_jsonl_shard_complete")
+        is not False
+        or source_transition.get("external_state_ready") is not False
+        or source_transition.get("external_gmail_ready") is not False
     ):
         raise ContractError(
             "ACTIVATION_AUTO_HISTORICAL_CONTROL_CONTRACT_MISMATCH"
@@ -533,7 +568,7 @@ def _verify_auto_historical_control(
                 AUTO_SOURCE_CONTROL_INTERFACE_RAW_SHA256
             ),
             "next_phase_at_observation": (
-                "AUTO_AU040_RUNTIME_WRITER_INTEGRATION"
+                "AUTO_AU040_PUBLISHER_V2_RUNTIME_INTEGRATION"
             ),
             "observed_auto_runtime_integration_complete": True,
             "observed_runtime_state_write_permitted": True,
@@ -680,7 +715,7 @@ def _preflight_inputs(
         or auto_interface.get("runtime_shard_writer_integration_complete")
         is not True
         or auto_interface.get("publisher_v2_runtime_integration_complete")
-        is not False
+        is not True
         or auto_interface.get("repository_bound") is not False
         or auto_interface.get("au_040_complete") is not False
         or auto_interface.get("au_040_schema_promotion_complete") is not True
@@ -710,15 +745,29 @@ def _preflight_inputs(
         is not False
         or auto_interface.get("runtime_writer_shadow_state_access_permitted")
         is not False
+        or auto_interface.get("runtime_publisher_shadow_status")
+        != "UNBOUND_CONTROL_SYNC_PENDING"
+        or auto_interface.get("runtime_publisher_shadow_validator_kind")
+        != "DEVELOPMENT_ONLY_UNBOUND"
+        or auto_interface.get(
+            "runtime_publisher_shadow_returns_bootstrap_context"
+        )
+        is not False
+        or auto_interface.get(
+            "runtime_publisher_shadow_state_access_permitted"
+        )
+        is not False
+        or auto_interface.get("runtime_publisher_shadow_validator_path")
+        != "CodexSkills/registry/auto/tools/validate_au040_publisher.py"
         or auto_interface.get("au_040_authority_ruling_status")
-        != "RUNTIME_WRITER_INTEGRATED_CONTROL_SYNC_PENDING"
+        != "PUBLISHER_V2_INTEGRATED_CONTROL_SYNC_PENDING"
         or auto_interface.get("notification_production_transport")
         != "GMAIL_API_V1"
         or auto_interface.get("notification_provider_readback_required") is not True
         or auto_interface.get("notification_test_transport_production_forbidden")
         is not True
         or auto_interface.get("next_phase")
-        != "MECHANISM_POST_AU040_WRITER_CONTROL_SYNC"
+        != "MECHANISM_POST_AU040_PUBLISHER_V2_CONTROL_SYNC"
         or not isinstance(transport, dict)
         or transport.get("current_candidate_schema_count") != 31
         or transport.get("final_candidate_materialization_complete")
@@ -726,7 +775,21 @@ def _preflight_inputs(
         or transport.get("runtime_shard_writer_integration_complete")
         is not True
         or transport.get("publisher_v2_runtime_integration_complete")
-        is not False
+        is not True
+        or transport.get(
+            "publisher_v2_control_sync_required_before_canonical_write"
+        )
+        is not True
+        or transport.get("publisher_v2_delete_prior_bytes_revalidated")
+        is not True
+        or transport.get("publisher_v2_jsonl_per_line_validation")
+        is not True
+        or transport.get(
+            "publisher_v2_manifest_recomputed_from_physical_descriptors"
+        )
+        is not True
+        or transport.get("publisher_serialization_discriminator_required")
+        is not True
         or transport.get("repository_bound") is not False
         or transport.get("schema_promotion_interface_raw_sha256")
         != AUTO_PROMOTION_INTERFACE_RAW_SHA256
@@ -844,7 +907,7 @@ def control_interface(schemas: Mapping[str, Mapping[str, Any]]) -> Dict[str, Any
             "timing": "PRE_WRITE",
             "transport": "GMAIL_API_V1",
         },
-        "next_phase": "AUTO_AU040_PUBLISHER_V2_RUNTIME_INTEGRATION",
+        "next_phase": "AUTO_AU040_REPOSITORY_BINDING",
         "protocol_revision": PROTOCOL_REVISION,
         "publication_contract": {
             "caller_boolean_is_not_trust_root": True,
@@ -890,7 +953,7 @@ def control_interface(schemas: Mapping[str, Mapping[str, Any]]) -> Dict[str, Any
                 "relative_path": AUTO_PROMOTION_INTERFACE_REPO_PATH,
                 "verified_git_object_id": AUTO_PROMOTION_GIT_OBJECT_ID,
             },
-            "publisher_v2_runtime_integration_complete": False,
+            "publisher_v2_runtime_integration_complete": True,
             "repository_bound": False,
             "runtime_preflight_shadow_permitted": True,
             "runtime_shard_writer_integration_complete": True,
@@ -901,9 +964,7 @@ def control_interface(schemas: Mapping[str, Mapping[str, Any]]) -> Dict[str, Any
         },
         "transport_runtime_interface": {
             "artifact_digest": AUTO_RUNTIME_INTERFACE_RAW_SHA256,
-            "integration_state": (
-                "AU040_RUNTIME_WRITER_INTEGRATED_CONTROL_SYNCED"
-            ),
+            "integration_state": "AU040_PUBLISHER_V2_SYNCED",
             "module_count": AUTO_RUNTIME_MODULE_COUNT,
             "relative_path": "CodexSkills/registry/auto/runtime-interface.json",
             "verified_git_object_id": AUTO_RUNTIME_GIT_OBJECT_ID,

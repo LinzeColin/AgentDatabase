@@ -300,7 +300,7 @@ class ActivationControlTests(unittest.TestCase):
         self.assertEqual(interface["candidate_policy_count"], 5)
         self.assertEqual(
             interface["next_phase"],
-            "AUTO_AU040_PUBLISHER_V2_RUNTIME_INTEGRATION",
+            "AUTO_AU040_REPOSITORY_BINDING",
         )
         self.assertEqual(
             interface["base_auto_git_object_id"],
@@ -354,6 +354,25 @@ class ActivationControlTests(unittest.TestCase):
                 "semantic_scope": "INTERFACE_MATERIALIZATION_ONLY",
             },
         )
+        self.assertEqual(
+            auto_interface[
+                "publisher_v2_runtime_materialization_snapshot"
+            ],
+            {
+                "as_of_phase": (
+                    "AUTO_AU040_PUBLISHER_V2_RUNTIME_INTEGRATION"
+                ),
+                "canonical_publication_permitted": False,
+                "control_sync_required_before_state_write": True,
+                "current_auto_runtime_control_bound": False,
+                "predecessor_control_git_object_id": (
+                    "sha1:fb9b99c36cb870b04f34b5ed3bcb75aeae52c296"
+                ),
+                "repository_bound": False,
+                "runtime_state_write_permitted": False,
+                "semantic_scope": "INTERFACE_MATERIALIZATION_ONLY",
+            },
+        )
         self.assertFalse(
             interface["transition_contract"]["runtime_state_instance_created"]
         )
@@ -374,7 +393,7 @@ class ActivationControlTests(unittest.TestCase):
                 "runtime_shard_writer_integration_complete"
             ]
         )
-        self.assertFalse(
+        self.assertTrue(
             interface["transition_contract"][
                 "publisher_v2_runtime_integration_complete"
             ]
@@ -392,9 +411,7 @@ class ActivationControlTests(unittest.TestCase):
             interface["transport_runtime_interface"],
             {
                 "artifact_digest": AUTO_RUNTIME_INTERFACE_RAW_SHA256,
-                "integration_state": (
-                    "AU040_RUNTIME_WRITER_INTEGRATED_CONTROL_SYNCED"
-                ),
+                "integration_state": "AU040_PUBLISHER_V2_SYNCED",
                 "module_count": AUTO_RUNTIME_MODULE_COUNT,
                 "relative_path": (
                     "CodexSkills/registry/auto/runtime-interface.json"
