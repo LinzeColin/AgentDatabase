@@ -93,6 +93,30 @@ class RepositoryHygieneAuditTests(unittest.TestCase):
             ],
         )
 
+    def test_verifier_v022_archive_exception_is_exact(self) -> None:
+        approved = (
+            "OpenAIDatabase/docs/source_packages/"
+            "verifier_v0_0_2_2/verifier-skill-v0.0.2.2.zip"
+        )
+        nearby = f"{approved}.copy.zip"
+        violations = hygiene.evaluate_inventory(
+            {
+                approved: 533_392,
+                nearby: 533_392,
+            },
+            self.policy,
+        )
+        self.assertEqual(
+            violations,
+            [
+                {
+                    "path": nearby,
+                    "reason": "unapproved_tracked_archive",
+                    "bytes": 533_392,
+                }
+            ],
+        )
+
     def test_registered_persona_archive_exceptions_are_exact(self) -> None:
         approved = [
             (
