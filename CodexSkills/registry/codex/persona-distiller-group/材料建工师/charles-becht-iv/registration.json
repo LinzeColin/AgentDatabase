@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:charlesbechtiv",
+  "canonical_name": "Charles Becht IV",
+  "identity_family_id": "technical-engineer",
+  "identity_mode": "single",
+  "registration_category": "材料建工师",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "charles-becht-iv",
+  "subject_uid": "person-b1330f1111935f58",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/charles-becht-iv-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T12:00:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0",
+      "outer_sha256": "804df75d5a0ac995a356147bfab1efd961efafc501046cb2dc8efc38bfc1efb3",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/charles-becht-iv-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "605927659bd4ca039771f5579f7c67c5741f190d24368fb366c38d6cd8bad449",
+      "runtime_size_bytes": 63203,
+      "size_bytes": 72592
+    }
+  ]
+}

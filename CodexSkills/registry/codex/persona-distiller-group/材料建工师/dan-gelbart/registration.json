@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:dangelbart",
+  "canonical_name": "Dan Gelbart",
+  "identity_family_id": "technical-engineer",
+  "identity_mode": "single",
+  "registration_category": "材料建工师",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "dan-gelbart",
+  "subject_uid": "person-8780bb999e445f70",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/dan-gelbart-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T03:10:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0-evidence-20260724",
+      "outer_sha256": "8a53ee548c9c3fcd989f9a68d17d2cfaa45dffcafe1aec6f15a18b3578fe49dd",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/dan-gelbart-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "eb8db1611a7df8ee11a7366ec9da2206476c46d0244c1ca323512afe419697c1",
+      "runtime_size_bytes": 66938,
+      "size_bytes": 76197
+    }
+  ]
+}

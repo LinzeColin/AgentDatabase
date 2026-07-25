@@ -1,4 +1,4 @@
-# 投资资本家 identity facet
+# 投资资本师 identity facet
 
 ## Readiness
 

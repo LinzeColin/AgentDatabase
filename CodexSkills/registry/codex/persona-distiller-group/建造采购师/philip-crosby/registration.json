@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:philipcrosby",
+  "canonical_name": "Philip Crosby",
+  "identity_family_id": "construction-procurement",
+  "identity_mode": "single",
+  "registration_category": "建造采购师",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "philip-crosby",
+  "subject_uid": "person-7b5f309c538fc0b9",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/philip-crosby-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T12:00:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0-evidence-snapshot",
+      "outer_sha256": "228b6d38746a1cdb3febd530f11f6d7deee0654814a581c89f4445f43bcc0e1d",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/philip-crosby-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "ddf1b535e2d6aedcf2425e23fb3118efa9c3c7edf3e5ef7b6049cdd408170c75",
+      "runtime_size_bytes": 73524,
+      "size_bytes": 82612
+    }
+  ]
+}

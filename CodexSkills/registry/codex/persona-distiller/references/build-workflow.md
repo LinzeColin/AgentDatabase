@@ -31,4 +31,4 @@ Each gate writes a machine-readable artifact and blocks downstream promotion on 
 
 ## Primary/secondary depth
 
-The selected identity receives deep evidence collection and scenario benchmarks. The other five identities receive screening so runtime can state readiness rather than hallucinate cross-domain competence. A weighted multi-identity selection gives deep budget to every positive-weight family, proportional to weight but never below minimum evidence coverage.
+The selected identity receives deep evidence collection and scenario benchmarks. The other eleven identities receive screening so runtime can state readiness rather than hallucinate cross-domain competence. Each persona has exactly one primary identity; multi-identity selection has been removed.

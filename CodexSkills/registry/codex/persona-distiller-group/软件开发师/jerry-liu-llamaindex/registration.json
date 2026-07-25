@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:jerryliu",
+  "canonical_name": "Jerry Liu",
+  "identity_family_id": "software-developer",
+  "identity_mode": "single",
+  "registration_category": "软件开发师",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "jerry-liu-llamaindex",
+  "subject_uid": "person-e6b416cc83ed4f07",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/jerry-liu-llamaindex-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T10:30:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0",
+      "outer_sha256": "9deeb9ce95255014c7733aafafb29ea7aa5715bad4a223135f9a152bf0d409af",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/jerry-liu-llamaindex-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "1ed5f5959f6e36538c201526f3e1c03f599086039a738788882ebfccde5ce2ac",
+      "runtime_size_bytes": 71687,
+      "size_bytes": 82102
+    }
+  ]
+}

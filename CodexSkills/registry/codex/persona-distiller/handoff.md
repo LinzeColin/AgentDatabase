@@ -3,20 +3,25 @@
 ## 当前架构
 
 - `persona-distiller/`：人物研究、构建、评测、运行时打包和完整交付生成器。
-- `../persona-distiller-group/`：唯一 canonical registry、七个身份目录、团队卡、route 和 5–20 人专家团队路由。
+- `../persona-distiller-group/`：唯一 canonical registry、十二个身份目录、团队卡、route 和 5–20 人专家团队路由。
 - 最终发布 bundle 同时安装二者到 `~/.codex/skills/`；不得在 `~/.agents/skills/` 保留第二来源。
 
-## 七个 canonical 身份
+## 十二个 canonical 身份
 
-1. 技术工程师
-2. 创业经营家
-3. 投资资本家
-4. 开发设计家
-5. 思想教育家
-6. 政治法律家
-7. 多重身份
+1. 材料建工师
+2. 软件开发师
+3. 艺术设计师
+4. 创业经营师
+5. 投资资本师
+6. 思想教育师
+7. 政治法律师
+8. 客户营销师
+9. 建造采购师
+10. 财务合规师
+11. 医疗护理师
+12. 农林牧渔师
 
-名称与构建器 `registries/identity-families.json` 完全一致。同一人物只能登记在一个目录；多身份只进入 `多重身份`。
+名称与构建器 `registries/identity-families.json` 完全一致。同一人物只能登记在一个目录（多重身份已移除，每个人物只归属单一主身份）。
 
 ## 运行合同
 

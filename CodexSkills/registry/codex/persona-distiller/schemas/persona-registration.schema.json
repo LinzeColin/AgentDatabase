@@ -45,24 +45,34 @@
     },
     "registration_category": {
       "enum": [
-        "技术工程",
-        "企业领导",
-        "金融投资",
-        "软开设计",
-        "思想教育",
-        "政治法律",
-        "多重身份"
+        "材料建工师",
+        "软件开发师",
+        "艺术设计师",
+        "创业经营师",
+        "投资资本师",
+        "思想教育师",
+        "政治法律师",
+        "客户营销师",
+        "建造采购师",
+        "财务合规师",
+        "医疗护理师",
+        "农林牧渔师"
       ]
     },
     "identity_family_id": {
       "enum": [
         "technical-engineer",
+        "software-developer",
+        "art-designer",
         "entrepreneur-operator",
         "investor-capital-allocator",
-        "developer-designer",
         "thinker-educator",
         "political-legal",
-        "multi-identity"
+        "customer-marketing",
+        "construction-procurement",
+        "finance-compliance",
+        "healthcare-nursing",
+        "agriculture-fishery"
       ]
     },
     "identity_mode": {

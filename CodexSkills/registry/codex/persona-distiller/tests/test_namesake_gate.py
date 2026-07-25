@@ -12,7 +12,7 @@ def candidate(name: str, uid: str, evidence_level: str = 'low') -> dict[str, obj
     return {
         'canonical_name': name,
         'subject_uid': uid,
-        'identity_category': '技术工程师',
+        'identity_category': '材料建工师',
         'occupation_or_role': '研究员',
         'professional_background': '组织、时代、地区与核心专业经历的低证据测试摘要',
         'application_scenarios': ['技术方案评审'],

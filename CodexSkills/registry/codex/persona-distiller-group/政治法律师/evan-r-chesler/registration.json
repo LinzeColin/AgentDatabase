@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:evanrchesler",
+  "canonical_name": "Evan R. Chesler",
+  "identity_family_id": "political-legal",
+  "identity_mode": "single",
+  "registration_category": "政治法律师",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "evan-r-chesler",
+  "subject_uid": "person-97977eeaceed1506",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/evan-r-chesler-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-23T09:28:15Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "legacy-normalized-v0.0.0.5",
+      "model_version": "0.1.0",
+      "outer_sha256": "0664462ec6358f087c7e6858309289600d2c215e47c767b79383fba46902afd7",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/evan-r-chesler-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "fa76425d4772ff77346bd445b1941b8de6ac6035cca4eda05d668aed5f45f296",
+      "runtime_size_bytes": 66092,
+      "size_bytes": 142375
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:leslielamport",
+  "canonical_name": "Leslie Lamport",
+  "identity_family_id": "software-developer",
+  "identity_mode": "single",
+  "registration_category": "软件开发师",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "leslie-lamport",
+  "subject_uid": "person-f1e0ea8cc19ee684",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/leslie-lamport-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T13:00:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0",
+      "outer_sha256": "958aaabbd0922273f7b950a013fb9b91cfdcc6199b34f5853c7a373258eba1de",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/leslie-lamport-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "0cb7ac273c97319e6aa6224dae22e9db50fea15375670a97efe2767c54d26e02",
+      "runtime_size_bytes": 70861,
+      "size_bytes": 408124
+    }
+  ]
+}

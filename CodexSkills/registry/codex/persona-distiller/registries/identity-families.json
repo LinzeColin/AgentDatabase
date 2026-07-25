@@ -4,38 +4,57 @@
       "aliases": [
         "技术",
         "工程",
-        "科学家",
-        "研究者",
+        "材料",
+        "冶金",
+        "焊接",
+        "管道",
+        "机械",
+        "化工",
         "工程师",
         "工匠",
+        "维护",
+        "可靠性",
+        "无损检测",
+        "腐蚀",
+        "摩擦学",
+        "材料科学",
         "technical",
         "engineer",
-        "scientist",
-        "researcher",
+        "materials",
+        "metallurgy",
+        "welding",
+        "piping",
+        "mechanical",
+        "maintenance",
+        "reliability",
+        "machinist",
+        "fabrication",
+        "tribology",
+        "corrosion",
         "craft"
       ],
       "id": "technical-engineer",
       "merged_from": [
-        "科学家/研究者/发明者",
-        "工程师/技术领导者",
-        "工匠/实践专家"
+        "科学家/研究者/发明者（应用）",
+        "机械/材料/焊接/管道/化工工程师",
+        "工匠/机加工/维护/可靠性实践专家"
       ],
       "number": 1,
       "research_focus": [
         "理论与因果模型",
-        "实验设计与证伪",
+        "材料/焊接/冶金与工艺",
         "代码/专利/设计文档",
         "故障与失败复盘",
         "约束下的工程取舍",
-        "质量与工艺标准"
+        "质量运营与可靠维护"
       ],
       "scenario_priors": [
-        "科研选题",
         "技术架构",
         "问题诊断",
         "实验验证",
         "工程实现",
-        "质量评审"
+        "质量评审",
+        "可靠维护"
       ],
       "source_priorities": [
         "papers",
@@ -45,115 +64,117 @@
         "design-docs",
         "incident-reviews",
         "technical-talks",
-        "craft-artifacts"
+        "craft-artifacts",
+        "maintenance-records"
       ],
-      "zh": "技术工程师"
+      "zh": "材料建工师"
     },
     {
       "aliases": [
-        "创业",
-        "经营",
-        "企业家",
-        "创始人",
-        "CEO",
-        "operator",
-        "entrepreneur",
-        "founder",
-        "business"
+        "软件",
+        "程序员",
+        "开发",
+        "编程",
+        "算法",
+        "数据",
+        "人工智能",
+        "机器学习",
+        "后端",
+        "前端",
+        "全栈",
+        "系统",
+        "架构师",
+        "运维",
+        "网络安全",
+        "software",
+        "developer",
+        "programmer",
+        "coding",
+        "algorithm",
+        "data",
+        "ai",
+        "ml",
+        "backend",
+        "frontend",
+        "fullstack",
+        "devops",
+        "sre",
+        "security"
       ],
-      "id": "entrepreneur-operator",
+      "id": "software-developer",
       "merged_from": [
-        "创业者/企业家/经营者"
+        "软件/系统/嵌入式工程师",
+        "数据科学/机器学习/AI 研究",
+        "计算机科学与算法研究"
       ],
       "number": 2,
       "research_focus": [
-        "产品与市场判断",
-        "组织和用人",
-        "资源配置",
-        "危机处理",
-        "执行节奏",
-        "经营结果与复盘"
+        "系统与架构设计",
+        "算法与数据结构",
+        "代码质量与测试",
+        "数据/训练/评测闭环",
+        "性能与可扩展性",
+        "安全与可靠性"
       ],
       "scenario_priors": [
-        "公司战略",
-        "产品经营",
-        "组织管理",
-        "资源配置",
-        "增长与危机",
-        "创业决策"
+        "技术架构",
+        "问题诊断",
+        "算法设计",
+        "实验验证",
+        "工程实现",
+        "代码评审"
       ],
       "source_priorities": [
-        "shareholder-letters",
-        "company-memos",
-        "product-decisions",
-        "org-changes",
-        "crisis-records",
-        "interviews",
-        "operating-results"
+        "code",
+        "papers",
+        "design-docs",
+        "benchmarks",
+        "technical-talks",
+        "postmortems",
+        "open-source-artifacts"
       ],
-      "zh": "创业经营家"
+      "zh": "软件开发师"
     },
     {
       "aliases": [
-        "投资",
-        "资本",
-        "基金经理",
-        "投资人",
-        "allocator",
-        "investor",
-        "capital"
+        "设计",
+        "艺术",
+        "产品设计",
+        "平面",
+        "工业设计",
+        "交互",
+        "建筑设计",
+        "室内",
+        "时装",
+        "美术",
+        "插画",
+        "动画",
+        "导演",
+        "摄影",
+        "音乐",
+        "表演",
+        "创作",
+        "design",
+        "art",
+        "designer",
+        "ux",
+        "ui",
+        "architecture",
+        "illustration",
+        "animation",
+        "director",
+        "photography",
+        "music",
+        "performance",
+        "creative"
       ],
-      "id": "investor-capital-allocator",
+      "id": "art-designer",
       "merged_from": [
-        "投资人/资本配置者"
+        "产品/工业/交互设计师",
+        "建筑与空间设计师",
+        "美术/影音/表演创作者"
       ],
       "number": 3,
-      "research_focus": [
-        "估值与赔率",
-        "仓位与组合",
-        "风险预算",
-        "买入卖出和退出",
-        "逆风期行为",
-        "事后归因偏差"
-      ],
-      "scenario_priors": [
-        "公司研究",
-        "投资决策",
-        "组合管理",
-        "风险控制",
-        "资本配置",
-        "商业分析"
-      ],
-      "source_priorities": [
-        "investor-letters",
-        "filings",
-        "transactions",
-        "portfolio-history",
-        "risk-memos",
-        "downturn-behavior",
-        "postmortems"
-      ],
-      "zh": "投资资本家"
-    },
-    {
-      "aliases": [
-        "开发",
-        "设计",
-        "产品",
-        "艺术",
-        "导演",
-        "designer",
-        "developer",
-        "product",
-        "artist",
-        "creator"
-      ],
-      "id": "developer-designer",
-      "merged_from": [
-        "产品人/设计师/建筑师",
-        "艺术与表演创作者"
-      ],
-      "number": 4,
       "research_focus": [
         "作品和产品定义",
         "审美与品味标准",
@@ -180,7 +201,111 @@
         "critiques",
         "performances"
       ],
-      "zh": "开发设计家"
+      "zh": "艺术设计师"
+    },
+    {
+      "aliases": [
+        "创业",
+        "经营",
+        "企业家",
+        "创始人",
+        "高管",
+        "总经理",
+        "运营",
+        "组织管理",
+        "CEO",
+        "COO",
+        "operator",
+        "entrepreneur",
+        "founder",
+        "executive",
+        "management",
+        "business"
+      ],
+      "id": "entrepreneur-operator",
+      "merged_from": [
+        "创业者/企业家/经营者",
+        "高管/总经理/运营负责人"
+      ],
+      "number": 4,
+      "research_focus": [
+        "产品与市场判断",
+        "组织和用人",
+        "资源配置",
+        "危机处理",
+        "执行节奏",
+        "经营结果与复盘"
+      ],
+      "scenario_priors": [
+        "公司战略",
+        "产品经营",
+        "组织管理",
+        "资源配置",
+        "增长与危机",
+        "创业决策"
+      ],
+      "source_priorities": [
+        "shareholder-letters",
+        "company-memos",
+        "product-decisions",
+        "org-changes",
+        "crisis-records",
+        "interviews",
+        "operating-results"
+      ],
+      "zh": "创业经营师"
+    },
+    {
+      "aliases": [
+        "投资",
+        "资本",
+        "基金经理",
+        "投资人",
+        "私募",
+        "风投",
+        "交易",
+        "估值",
+        "组合管理",
+        "allocator",
+        "investor",
+        "capital",
+        "fund",
+        "vc",
+        "private-equity",
+        "trading"
+      ],
+      "id": "investor-capital-allocator",
+      "merged_from": [
+        "投资人/资本配置者",
+        "基金/私募/风投经理"
+      ],
+      "number": 5,
+      "research_focus": [
+        "估值与赔率",
+        "仓位与组合",
+        "风险预算",
+        "买入卖出和退出",
+        "逆风期行为",
+        "事后归因偏差"
+      ],
+      "scenario_priors": [
+        "公司研究",
+        "投资决策",
+        "组合管理",
+        "风险控制",
+        "资本配置",
+        "商业分析"
+      ],
+      "source_priorities": [
+        "investor-letters",
+        "filings",
+        "transactions",
+        "portfolio-history",
+        "risk-memos",
+        "downturn-behavior",
+        "postmortems"
+      ],
+      "zh": "投资资本师"
     },
     {
       "aliases": [
@@ -189,16 +314,21 @@
         "作家",
         "哲学家",
         "教师",
+        "教授",
         "导师",
         "教练",
         "记者",
+        "研究者",
+        "翻译",
         "thinker",
         "educator",
         "writer",
         "philosopher",
         "teacher",
+        "professor",
         "coach",
-        "journalist"
+        "journalist",
+        "researcher"
       ],
       "id": "thinker-educator",
       "merged_from": [
@@ -207,7 +337,7 @@
         "运动员/教练/竞技者",
         "记者/内容传播者"
       ],
-      "number": 5,
+      "number": 6,
       "research_focus": [
         "概念体系与思想谱系",
         "教学诊断与反馈",
@@ -235,7 +365,7 @@
         "editorial-decisions",
         "debates"
       ],
-      "zh": "思想教育家"
+      "zh": "思想教育师"
     },
     {
       "aliases": [
@@ -244,18 +374,26 @@
         "政策",
         "法官",
         "律师",
+        "外交",
+        "公共管理",
+        "监管",
+        "立法",
         "political",
         "legal",
         "policy",
         "judge",
-        "lawyer"
+        "lawyer",
+        "diplomacy",
+        "public-administration",
+        "regulation"
       ],
       "id": "political-legal",
       "merged_from": [
         "政治与公共领导者",
-        "法律与制度设计者"
+        "法律与制度设计者",
+        "外交与公共管理者"
       ],
-      "number": 6,
+      "number": 7,
       "research_focus": [
         "制度与规则解释",
         "政策和判决",
@@ -282,43 +420,307 @@
         "coalition-records",
         "implementation-results"
       ],
-      "zh": "政治法律家"
+      "zh": "政治法律师"
     },
     {
       "aliases": [
-        "多重",
-        "混合",
-        "复合",
-        "私域",
-        "虚构",
-        "multiple",
-        "multi",
-        "private",
-        "fictional"
+        "营销",
+        "市场",
+        "客户",
+        "品牌",
+        "销售",
+        "广告",
+        "公关",
+        "增长",
+        "推广",
+        "市场分析",
+        "客户画像",
+        "电商",
+        "marketing",
+        "customer",
+        "brand",
+        "sales",
+        "advertising",
+        "pr",
+        "growth",
+        "seo",
+        "crm",
+        "ecommerce"
       ],
-      "id": "multi-identity",
+      "id": "customer-marketing",
       "merged_from": [
-        "多重身份人物",
-        "历史/虚构人物",
-        "私域人物/自己"
+        "市场营销/品牌/增长",
+        "销售/客户成功/客户体验",
+        "广告/公关/市场研究"
       ],
-      "number": 7,
+      "number": 8,
       "research_focus": [
-        "按权重合并身份研究",
-        "角色冲突",
-        "时期和场域切换",
-        "私域授权或虚构谱系",
-        "跨身份能力迁移边界"
+        "客户画像与细分",
+        "需求与定位",
+        "品牌与叙事",
+        "渠道与转化",
+        "定价与促销",
+        "复购与口碑"
       ],
       "scenario_priors": [
-        "由权重与任务自动路由"
+        "市场分析",
+        "客户洞察",
+        "品牌传播",
+        "增长转化",
+        "销售谈判",
+        "内容营销"
       ],
       "source_priorities": [
-        "weighted-union-of-selected-families"
+        "campaigns",
+        "market-research",
+        "customer-data",
+        "brand-guidelines",
+        "sales-records",
+        "ab-tests",
+        "case-studies"
       ],
-      "zh": "多重身份"
+      "zh": "客户营销师"
+    },
+    {
+      "aliases": [
+        "施工",
+        "建造",
+        "工程管理",
+        "项目管理",
+        "BIM",
+        "造价",
+        "估算",
+        "招投标",
+        "进度",
+        "采购",
+        "寻源",
+        "供应链",
+        "物流",
+        "仓储",
+        "供应商",
+        "construction",
+        "project",
+        "bim",
+        "estimation",
+        "procurement",
+        "sourcing",
+        "supply-chain",
+        "logistics",
+        "tender",
+        "bidding"
+      ],
+      "id": "construction-procurement",
+      "merged_from": [
+        "施工/工程项目管理与 BIM",
+        "造价估算/进度/招投标",
+        "采购/供应链/物流"
+      ],
+      "number": 9,
+      "research_focus": [
+        "项目分解与计划",
+        "造价与估算",
+        "进度与资源",
+        "招投标与合约",
+        "采购与寻源",
+        "供应链与物流"
+      ],
+      "scenario_priors": [
+        "项目计划",
+        "造价估算",
+        "进度控制",
+        "招投标",
+        "采购寻源",
+        "供应链管理"
+      ],
+      "source_priorities": [
+        "project-plans",
+        "cost-estimates",
+        "schedules",
+        "tender-documents",
+        "contracts",
+        "procurement-records",
+        "bim-models"
+      ],
+      "zh": "建造采购师"
+    },
+    {
+      "aliases": [
+        "财务",
+        "会计",
+        "审计",
+        "成本",
+        "税务",
+        "资金",
+        "风控",
+        "合规",
+        "内控",
+        "安全",
+        "EHS",
+        "标准",
+        "规范",
+        "认证",
+        "finance",
+        "accounting",
+        "audit",
+        "tax",
+        "risk",
+        "compliance",
+        "safety",
+        "ehs",
+        "controls",
+        "regulatory"
+      ],
+      "id": "finance-compliance",
+      "merged_from": [
+        "会计/审计/财务管理",
+        "风险/内控/合规",
+        "安全工程/EHS/标准规范"
+      ],
+      "number": 10,
+      "research_focus": [
+        "财务报表与核算",
+        "成本与预算",
+        "审计与内控",
+        "风险与合规",
+        "安全与 EHS",
+        "标准与认证"
+      ],
+      "scenario_priors": [
+        "财务分析",
+        "成本管控",
+        "审计内控",
+        "风险合规",
+        "安全评估",
+        "规范符合"
+      ],
+      "source_priorities": [
+        "financial-statements",
+        "audit-records",
+        "cost-reports",
+        "risk-registers",
+        "safety-cases",
+        "standards",
+        "regulatory-filings"
+      ],
+      "zh": "财务合规师"
+    },
+    {
+      "aliases": [
+        "医疗",
+        "医生",
+        "护理",
+        "护士",
+        "临床",
+        "药",
+        "诊断",
+        "治疗",
+        "公共卫生",
+        "兽医",
+        "康复",
+        "心理",
+        "healthcare",
+        "medical",
+        "doctor",
+        "nurse",
+        "clinical",
+        "pharmacy",
+        "diagnosis",
+        "therapy",
+        "public-health",
+        "veterinary",
+        "rehabilitation"
+      ],
+      "id": "healthcare-nursing",
+      "merged_from": [
+        "医生/临床/诊断治疗",
+        "护理/康复/照护",
+        "药学/公共卫生/兽医"
+      ],
+      "number": 11,
+      "research_focus": [
+        "诊断与鉴别",
+        "治疗与循证",
+        "护理与照护",
+        "用药与安全",
+        "公共卫生",
+        "医患沟通"
+      ],
+      "scenario_priors": [
+        "临床诊断",
+        "治疗方案",
+        "护理照护",
+        "用药安全",
+        "公共卫生",
+        "健康教育"
+      ],
+      "source_priorities": [
+        "clinical-guidelines",
+        "trials",
+        "case-records",
+        "pharmacopoeia",
+        "public-health-data",
+        "medical-literature"
+      ],
+      "zh": "医疗护理师"
+    },
+    {
+      "aliases": [
+        "农业",
+        "农学",
+        "种植",
+        "养殖",
+        "畜牧",
+        "林业",
+        "渔业",
+        "水产",
+        "农艺",
+        "园艺",
+        "农机",
+        "食品",
+        "agriculture",
+        "farming",
+        "agronomy",
+        "forestry",
+        "livestock",
+        "fishery",
+        "aquaculture",
+        "horticulture",
+        "food-production"
+      ],
+      "id": "agriculture-fishery",
+      "merged_from": [
+        "农学/种植/园艺",
+        "畜牧/养殖/兽医",
+        "林业/渔业/水产"
+      ],
+      "number": 12,
+      "research_focus": [
+        "作物与土壤",
+        "种植与栽培",
+        "畜牧与养殖",
+        "林业与生态",
+        "渔业与水产",
+        "农机与食品"
+      ],
+      "scenario_priors": [
+        "种植管理",
+        "养殖管理",
+        "林业经营",
+        "渔业水产",
+        "农机应用",
+        "食品生产"
+      ],
+      "source_priorities": [
+        "field-trials",
+        "agronomy-records",
+        "breeding-data",
+        "yield-records",
+        "extension-guides",
+        "agricultural-research"
+      ],
+      "zh": "农林牧渔师"
     }
   ],
-  "menu_version": "2026-07-23",
-  "schema_version": "1.0"
+  "menu_version": "2026-07-25",
+  "schema_version": "1.1"
 }

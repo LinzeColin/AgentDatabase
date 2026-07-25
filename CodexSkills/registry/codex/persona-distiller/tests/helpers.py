@@ -58,7 +58,7 @@ def create_target(
     temp_root: Path,
     slug: str = 'example-thinker',
     profile: str = 'quick',
-    identity: str = '5',
+    identity: str = '6',
     subject_origin: str = 'public',
     consent_authority: str | None = None,
     retention_policy: str | None = None,

@@ -41,7 +41,7 @@ class PackageInstallMigrateTests(unittest.TestCase):
             skill_root = Path(__file__).resolve().parents[1]
             group_root = skill_root.parent / 'persona-distiller-group'
             registry.mkdir()
-            for category in ('技术工程师', '创业经营家', '投资资本家', '开发设计家', '思想教育家', '政治法律家', '多重身份'):
+            for category in ('材料建工师', '软件开发师', '艺术设计师', '创业经营师', '投资资本师', '思想教育师', '政治法律师', '客户营销师', '建造采购师', '财务合规师', '医疗护理师', '农林牧渔师'):
                 shutil.copytree(group_root / category, registry / category, ignore=shutil.ignore_patterns('registration.json', 'team-card.json', 'versions'))
             shutil.copy2(group_root / 'team-index.json', registry / 'team-index.json')
             first = root / 'first.zip'

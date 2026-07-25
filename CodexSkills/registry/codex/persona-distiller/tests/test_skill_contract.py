@@ -25,11 +25,12 @@ class SkillContractTests(unittest.TestCase):
         self.assertIn('allow_implicit_invocation: false', (ROOT / 'agents/openai.yaml').read_text())
         self.assertIn('allow_implicit_invocation: false', (ROOT / 'templates/target/agents/openai.yaml.tmpl').read_text())
 
-    def test_identity_registry_is_exact_seven_choice_contract(self) -> None:
+    def test_identity_registry_is_exact_twelve_choice_contract(self) -> None:
         registry = json.loads((ROOT / 'registries/identity-families.json').read_text())
-        self.assertEqual([item['number'] for item in registry['families']], list(range(1, 8)))
+        self.assertEqual([item['number'] for item in registry['families']], list(range(1, 13)))
         self.assertEqual([item['zh'] for item in registry['families']], [
-            '技术工程师', '创业经营家', '投资资本家', '开发设计家', '思想教育家', '政治法律家', '多重身份',
+            '材料建工师', '软件开发师', '艺术设计师', '创业经营师', '投资资本师', '思想教育师',
+            '政治法律师', '客户营销师', '建造采购师', '财务合规师', '医疗护理师', '农林牧渔师',
         ])
 
     def test_six_reviewer_harness_passes_both_rounds(self) -> None:

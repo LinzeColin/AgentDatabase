@@ -36,7 +36,7 @@ class ReleaseBundleTests(unittest.TestCase):
             with zipfile.ZipFile(first) as archive:
                 names = archive.namelist()
                 top_levels = {name.split("/", 1)[0] for name in names if name}
-                self.assertEqual(top_levels, {"PersonaDistiller-Final-v0.0.0.5"})
+                self.assertEqual(top_levels, {"PersonaDistiller-Final-v0.0.0.6"})
                 self.assertFalse(any(name.endswith(".zip.sha256") for name in names))
                 self.assertEqual(
                     len(
@@ -50,7 +50,7 @@ class ReleaseBundleTests(unittest.TestCase):
                     expected_deliveries,
                 )
                 archive.extractall(extract)
-            package = extract / "PersonaDistiller-Final-v0.0.0.5"
+            package = extract / "PersonaDistiller-Final-v0.0.0.6"
             manifest = json.loads((package / "PACKAGE_MANIFEST.json").read_text())
             self.assertTrue(manifest["single_archive_only"])
             self.assertFalse(manifest["person_name_constraints"])
@@ -74,7 +74,7 @@ class ReleaseBundleTests(unittest.TestCase):
                 self.assertTrue((install_root / name / "SKILL.md").is_file())
                 self.assertEqual(
                     (install_root / name / "VERSION").read_text().strip(),
-                    "v0.0.0.5",
+                    "v0.0.0.6",
                 )
 
     def test_complete_release_installer_rejects_tampering(self) -> None:
@@ -85,7 +85,7 @@ class ReleaseBundleTests(unittest.TestCase):
             extract = root / "extract"
             with zipfile.ZipFile(package_zip) as archive:
                 archive.extractall(extract)
-            package = extract / "PersonaDistiller-Final-v0.0.0.5"
+            package = extract / "PersonaDistiller-Final-v0.0.0.6"
             (package / "README.md").write_text("tampered\n", encoding="utf-8")
             completed = subprocess.run(
                 [

@@ -46,7 +46,7 @@ def load_namesake_gate(path: Path, target_name: str) -> dict[str, object]:
 def main() -> int:
     parser = argparse.ArgumentParser(description='Create a target-person executable Agent Skill workspace.')
     parser.add_argument('--name', required=True, help='Target person name.')
-    parser.add_argument('--identity', required=True, help='1-6 identity or weighted multi, e.g. 1:70+4:30.')
+    parser.add_argument('--identity', required=True, help='single primary identity, 1-12 or name, e.g. 1 or 材料建工师.')
     parser.add_argument('--namesake-gate', required=True, type=Path, help='Ready schema-1 namesake gate produced before initialization.')
     parser.add_argument('--scenario', help='Optional primary scenario. Runtime still routes other scenarios.')
     parser.add_argument('--slug')
@@ -86,8 +86,7 @@ def main() -> int:
     origin = args.subject_origin
     origin_review_required = origin == 'auto'
     effective_origin = 'public' if origin == 'auto' else origin
-    if effective_origin in {'private', 'self', 'fictional', 'historical'} and selection['mode'] != 'multi':
-        parser.error('private/self/fictional/historical targets use the multi-identity route and require explicit weights')
+    # 多重身份已移除：所有 origin 都使用单一主身份。private/self 仍需 consent 授权。
     status = 'blocked-consent' if effective_origin in {'private', 'self'} and not args.consent_authority else 'draft'
     now = utc_now()
     target_id = make_id('tgt')
