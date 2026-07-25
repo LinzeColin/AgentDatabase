@@ -27,6 +27,7 @@ Deterministic contract entrypoints:
 /usr/bin/python3 -B CodexSkills/registry/auto/tools/validate_transport_draft.py lint-draft
 /usr/bin/python3 -B CodexSkills/registry/auto/tools/validate_schema_promotion.py lint-promotion
 /usr/bin/python3 -B CodexSkills/registry/auto/tools/validate_au040_writer.py --help
+/usr/bin/python3 -B CodexSkills/registry/auto/tools/validate_au040_publisher.py --help
 /usr/bin/python3 -B -m unittest discover \
   -s CodexSkills/registry/auto/tests -p 'test_*.py'
 ```
@@ -53,9 +54,9 @@ resolve schemas over the network, or install dependencies at runtime.
   manifest revisions. It returns in-memory PUT artifacts only; it has no
   publisher, queue, canonical-repository write, or state-root entrypoint.
 - `runtime/writer_shadow.py` is development-only. It proves the exact
-  00c4/7ed9 historical Git-object closure and current writer byte
+  fb9/7f1 historical Git-object closure and current publisher byte
   self-consistency without requiring current working-tree control/Mechanism
-  bytes to equal 00c4. It returns `UNBOUND_CONTROL_SYNC_PENDING` and can never
+  bytes to equal fb9. It returns `UNBOUND_CONTROL_SYNC_PENDING` and can never
   return a production `BootstrapContext`.
 - `runtime/notification.py` keeps the actual recipient and provider payload in
   a repo-external outbox; public receipts contain only `recipient_ref`.
@@ -119,24 +120,24 @@ provisioned interpreter:
   --expected-bundle-digest 36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e \
   --canonical-manifest-path CodexSkills/governance/bundles/schema-bundle-manifest.v1.json \
   --mode CANDIDATE \
-  --verified-control-git-object-id sha1:00c4a52d177898b1999b87b29ddb480e89908729 \
-  --expected-control-interface-raw-sha256 31602443a685cc12a1eebd51ea8e0801ffd399c16a33186c372b7b81e8e46409 \
+  --verified-control-git-object-id sha1:fb9b99c36cb870b04f34b5ed3bcb75aeae52c296 \
+  --expected-control-interface-raw-sha256 3929db4e818864d02a596efe3e1aaae1af71a765cfafaf7b22f26157135d7953 \
   --canonical-control-interface-path CodexSkills/governance/activation/control-interface.json \
   --control-mode DRAFT_NON_ACTIVE_CONTROL
 ```
 
-This command is read-only, but the current control binds exact Auto object
-`7ed9e761...`, runtime-interface raw `09af0c00...`, and 21 modules. The current
-writer checkout is deliberately not that byte set, so production preflight
+This command is read-only, but the predecessor control binds exact Auto object
+`7f1bd876...`, runtime-interface raw `f1f9331d...`, and 24 modules. The current
+publisher checkout is deliberately not that byte set, so production preflight
 fails with `BOOTSTRAP_AUTO_RUNTIME_INTERFACE_LOCAL_DRIFT` before state, lock,
 watermark, recipient, Gmail, outbox, or publisher access. Development-only
-writer evidence is obtained with `validate_au040_writer.py`; it must not be
+publisher evidence is obtained with `validate_au040_publisher.py`; it must not be
 interpreted as `TRUSTED`, `READY`, or a production preflight PASS. Neither
 checkout self-reporting nor a caller boolean/digest map can replace either
 external tuple. Once a successor control changes the working-tree control
-bytes, the stale 00c4 tuple instead fails earlier with the exact
+bytes, the stale fb9 tuple instead fails earlier with the exact
 `BOOTSTRAP_CONTROL_INTERFACE_LOCAL_DRIFT` code; the historical builder and
-shadow evidence remain stable because they read 00c4 exclusively from Git.
+shadow evidence remain stable because they read fb9 exclusively from Git.
 
 ## M0c activation control
 
@@ -153,11 +154,11 @@ GitHub-read back at object
 `189a47300fc1aa6012e87feb6184833cb717cdbe2b9dc9be6db89197f579939c`.
 It binds candidate `5ee37d74...` / `36f0c66d...`, daily part/index/manifest
 and retention-receipt contracts, while keeping both publication gates false.
-Control object `00c4a52d...`, raw SHA-256 `31602443...`, binds the same
-candidate and consumer plus historical Auto object `7ed9e761...`, interface
-raw `09af0c00...`, and 21 modules. The runtime-interface builder verifies all
+Control object `fb9b99c3...`, raw SHA-256 `3929db4e...`, binds the same
+candidate and consumer plus historical Auto object `7f1bd876...`, interface
+raw `f1f9331d...`, and 24 modules. The runtime-interface builder verifies all
 historical evidence from pinned Git blobs independently while reporting, in an
-`INTERFACE_MATERIALIZATION_ONLY` snapshot, the current 24-module writer
+`INTERFACE_MATERIALIZATION_ONLY` snapshot, the current 25-module publisher
 candidate as unbound.
 
 That gate does not permit canonical publication. The consumer still declares
@@ -199,8 +200,8 @@ The provider preflight is explicit and performs no send:
   --expected-bundle-digest 36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e \
   --canonical-manifest-path CodexSkills/governance/bundles/schema-bundle-manifest.v1.json \
   --mode CANDIDATE \
-  --verified-control-git-object-id sha1:00c4a52d177898b1999b87b29ddb480e89908729 \
-  --expected-control-interface-raw-sha256 31602443a685cc12a1eebd51ea8e0801ffd399c16a33186c372b7b81e8e46409 \
+  --verified-control-git-object-id sha1:fb9b99c36cb870b04f34b5ed3bcb75aeae52c296 \
+  --expected-control-interface-raw-sha256 3929db4e818864d02a596efe3e1aaae1af71a765cfafaf7b22f26157135d7953 \
   --canonical-control-interface-path CodexSkills/governance/activation/control-interface.json \
   --control-mode DRAFT_NON_ACTIVE_CONTROL
 ```
@@ -230,10 +231,15 @@ its preactivation publication gates remain closed.
 AU-040 is not complete: `skills_runs/example.json` is only prior scaffolding,
 never the final run-layout contract. The final candidate and consumer now bind
 bounded daily part/index JSONL, append-only daily manifest revisions, and
-retention receipt v3. The deterministic runtime writer is integrated, but no
-shard/manifest/index instance was created; `repository_bound=false`,
-`au_040_daily_jsonl_shard_complete=false`, publisher-v2 integration is absent,
-and canonical publication remains false.
+retention receipt v3. The deterministic runtime writer and
+publication-manifest:v2 publisher are integrated, but no
+shard/manifest/index instance was created. The publisher recomputes its exact
+manifest from physical PUT/DELETE descriptors, validates JSONL per RFC 8785
+JCS line, and re-reads prior bytes before DELETE. Production still fails
+before lock, worktree, or Git backend access until a successor control binds
+the new Auto object; even after that, `repository_bound=false`,
+`au_040_daily_jsonl_shard_complete=false`, and
+`canonical_publication_permitted=false` keep physical publication disabled.
 
 Mechanism Authority Audit Revision 6 is represented by the Auto-owned source
 schemas under `transport-draft/`: daily manifest v1, persistent event index
@@ -254,14 +260,15 @@ change it. The validator deliberately does not use the current working-tree
 manifest as historical truth, so the authorized Mechanism 31/5
 materialization can follow without invalidating promotion evidence.
 
-The exact final 31/5 candidate, V2 consumer, and current control now exist and
-the Auto loader accepts that exact bundle. The next phase is
-`MECHANISM_POST_AUTO_INTEGRATION_CONTROL_SYNC`: Mechanism must independently
+The exact final 31/5 candidate, V2 consumer, and predecessor control remain
+unchanged. The next phase is
+`MECHANISM_POST_AU040_PUBLISHER_V2_CONTROL_SYNC`: Mechanism must independently
 read back this Auto object and issue a successor control binding the new
-runtime-interface tuple. Until that successor sets
-`auto_runtime_integration_complete=true`, runtime state writes and settlement
-remain fail closed. Publisher v2, daily shard writer, `repository_bound`,
-AU-040 completion, activation, and canonical publication remain false.
+runtime-interface tuple and 25-module set. The materialized interface records
+`publisher_v2_runtime_integration_complete=true` as a local implementation
+fact while `current_auto_runtime_control_bound=false`,
+`runtime_state_write_permitted=false`, `repository_bound=false`, AU-040
+completion, activation, and canonical publication all remain false.
 
 The schedule conflict remains unresolved. The external Gmail readiness gate
 remains false until the Owner injects the repo-external state root and the

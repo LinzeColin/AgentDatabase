@@ -12,7 +12,7 @@
   "activation_handshake_entrypoint": "CodexSkills/registry/auto/tools/activation_handshake_cli.py",
   "activation_instance_created": false,
   "activation_settlement_recomputed_before_publish": true,
-  "au_040_authority_ruling_status": "RUNTIME_WRITER_INTEGRATED_CONTROL_SYNC_PENDING",
+  "au_040_authority_ruling_status": "PUBLISHER_V2_INTEGRATED_CONTROL_SYNC_PENDING",
   "au_040_complete": false,
   "au_040_consumer_manifest_path_contract_present": true,
   "au_040_daily_jsonl_shard_complete": false,
@@ -55,7 +55,11 @@
     "proposed_active_policy_count": 5,
     "proposed_active_schema_count": 31,
     "publisher_serialization_discriminator_required": true,
-    "publisher_v2_runtime_integration_complete": false,
+    "publisher_v2_control_sync_required_before_canonical_write": true,
+    "publisher_v2_delete_prior_bytes_revalidated": true,
+    "publisher_v2_jsonl_per_line_validation": true,
+    "publisher_v2_manifest_recomputed_from_physical_descriptors": true,
+    "publisher_v2_runtime_integration_complete": true,
     "repository_bound": false,
     "required_mechanism_public_value_allowlist_additions": [
       "first_event_digest",
@@ -109,14 +113,14 @@
   "external_gmail_ready_gate_satisfied": false,
   "fault_test_rounds_required": 2,
   "historical_control_observation": {
-    "bound_auto_git_object_id": "sha1:7ed9e761921f557887440803d1fc7327f3e986a9",
-    "bound_auto_module_count": 21,
-    "bound_auto_runtime_interface_raw_sha256": "09af0c00273825e90a489f413a2f0bb6995042e5b4eea17973ce7582eab66340",
+    "bound_auto_git_object_id": "sha1:7f1bd87652f7cc88fbf2f6b542f9feb57750bf0d",
+    "bound_auto_module_count": 24,
+    "bound_auto_runtime_interface_raw_sha256": "f1f9331df1b56c80e2fa7415fe2fe3d714dcd831cec94390afa43c078dedf38b",
     "canonical_path": "CodexSkills/governance/activation/control-interface.json",
     "external_mode": "DRAFT_NON_ACTIVE_CONTROL",
     "historical_mechanism_runtime_artifacts": [
       {
-        "artifact_digest": "4cc646f87dcd69a77e3e3153f9a873de4674b66455932658c6b27571255831ba",
+        "artifact_digest": "aff50f4fba176bd589c2ab1b529b6480d4e8ffc0e3db2df4c06c5841e8760eb5",
         "relative_path": "CodexSkills/governance/tools/build_activation_control.py"
       },
       {
@@ -128,16 +132,16 @@
         "relative_path": "CodexSkills/governance/tools/validate_activation.py"
       },
       {
-        "artifact_digest": "1fa1ffe6aaafa7e398388e34bc117f98e6814d6e1e7f33361cd16f199febfdd8",
+        "artifact_digest": "245f296fb5553b46eba59bf95ab6f66361e5ddc7b35e9a4268e752b9c2b8b333",
         "relative_path": "CodexSkills/governance/tools/validate_mechanism.py"
       }
     ],
-    "interface_raw_sha256": "31602443a685cc12a1eebd51ea8e0801ffd399c16a33186c372b7b81e8e46409",
-    "next_phase_at_observation": "AUTO_AU040_RUNTIME_WRITER_INTEGRATION",
+    "interface_raw_sha256": "3929db4e818864d02a596efe3e1aaae1af71a765cfafaf7b22f26157135d7953",
+    "next_phase_at_observation": "AUTO_AU040_PUBLISHER_V2_RUNTIME_INTEGRATION",
     "observed_auto_runtime_integration_complete": true,
     "observed_runtime_state_write_permitted": true,
     "root_status": "DRAFT_NON_ACTIVE",
-    "verified_git_object_id": "sha1:00c4a52d177898b1999b87b29ddb480e89908729",
+    "verified_git_object_id": "sha1:fb9b99c36cb870b04f34b5ed3bcb75aeae52c296",
     "working_tree_control_is_not_historical_trust_evidence": true,
     "working_tree_mechanism_runtime_is_not_historical_trust_evidence": true
   },
@@ -153,7 +157,7 @@
       "relative_path": "CodexSkills/registry/auto/runtime/activation.py"
     },
     {
-      "artifact_digest": "6e6491cacc6d58818349829a10704de09ed5c089a0eef47622e5d4592e54ae05",
+      "artifact_digest": "1ae4bbb3719df852eac01efe4f550a5a98161bd6f76207ba04831fe05a892358",
       "relative_path": "CodexSkills/registry/auto/runtime/bootstrap.py"
     },
     {
@@ -173,11 +177,11 @@
       "relative_path": "CodexSkills/registry/auto/runtime/orchestrator.py"
     },
     {
-      "artifact_digest": "0cdce1a4b7bf769c78eeef1ffd67c3c413af5a308865331a76d19c872693151e",
+      "artifact_digest": "887fccf64e2116a4a09f665f55a7a604f35a7cd2a0baa65941f96b92cac70a3a",
       "relative_path": "CodexSkills/registry/auto/runtime/privacy.py"
     },
     {
-      "artifact_digest": "17bea5e0600f3f427758137735336386c050724692aef58a15f7acb87ea0c9cf",
+      "artifact_digest": "189c7ce4a81c1670dfa8f4303fbb1fec8824796202f55f9971106cf6db43f969",
       "relative_path": "CodexSkills/registry/auto/runtime/publication.py"
     },
     {
@@ -209,7 +213,7 @@
       "relative_path": "CodexSkills/registry/auto/runtime/state.py"
     },
     {
-      "artifact_digest": "ea86c0797ffa8f0757d57be687e088c673c2d0f311cfc372d6b1196c267c4425",
+      "artifact_digest": "1cc68669b9cdf11f2ab4cbdd6f6d10187fed98431635673a5c7e6859b57e749d",
       "relative_path": "CodexSkills/registry/auto/runtime/writer_shadow.py"
     },
     {
@@ -217,7 +221,7 @@
       "relative_path": "CodexSkills/registry/auto/tools/activation_handshake_cli.py"
     },
     {
-      "artifact_digest": "775e99971376c7d531203cb381a05e2b6c8ae516496ee3a4b4bbf3d91ea0f326",
+      "artifact_digest": "701a6be55ebf508ca3bb878d01e37d662cbc9471010fd9c72ab4c65501f92148",
       "relative_path": "CodexSkills/registry/auto/tools/build_runtime_interface.py"
     },
     {
@@ -233,16 +237,20 @@
       "relative_path": "CodexSkills/registry/auto/tools/runtime_preflight.py"
     },
     {
+      "artifact_digest": "3bfab77eb5a27194a77af96f6b0ffaeaf9347b6fd33676acf243206a83a98b80",
+      "relative_path": "CodexSkills/registry/auto/tools/validate_au040_publisher.py"
+    },
+    {
       "artifact_digest": "bcee47cde1b5e69be25a51644cd8b8b1a1ce3d4530b5cbb8654fa3d036ab5975",
       "relative_path": "CodexSkills/registry/auto/tools/validate_au040_writer.py"
     },
     {
-      "artifact_digest": "13176226dfca62a8d59a55d584a3a6baf27c1ea2fa1cb794109dc0ba691600b1",
+      "artifact_digest": "a3550f78b06051935e84b17f5e69c248949c83cf521e6596c1cab8e78ad80a2b",
       "relative_path": "CodexSkills/registry/auto/tools/validate_auto.py"
     }
   ],
-  "module_count": 24,
-  "next_phase": "MECHANISM_POST_AU040_WRITER_CONTROL_SYNC",
+  "module_count": 25,
+  "next_phase": "MECHANISM_POST_AU040_PUBLISHER_V2_CONTROL_SYNC",
   "notification_actual_recipient_repo_external": true,
   "notification_credentials_repo_external": true,
   "notification_external_path_contract": {
@@ -269,7 +277,17 @@
   "os_local_scheduler_or_daemon_used": false,
   "persistent_managed_raw_default_enabled": false,
   "protocol_revision": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1",
-  "publisher_v2_runtime_integration_complete": false,
+  "publisher_v2_runtime_integration_complete": true,
+  "publisher_v2_runtime_materialization_snapshot": {
+    "as_of_phase": "AUTO_AU040_PUBLISHER_V2_RUNTIME_INTEGRATION",
+    "canonical_publication_permitted": false,
+    "control_sync_required_before_state_write": true,
+    "current_auto_runtime_control_bound": false,
+    "predecessor_control_git_object_id": "sha1:fb9b99c36cb870b04f34b5ed3bcb75aeae52c296",
+    "repository_bound": false,
+    "runtime_state_write_permitted": false,
+    "semantic_scope": "INTERFACE_MATERIALIZATION_ONLY"
+  },
   "remote_readback_precedes_watermark": true,
   "repository_bound": false,
   "runtime_interface_materialization_snapshot": {
@@ -281,6 +299,11 @@
     "semantic_scope": "INTERFACE_MATERIALIZATION_ONLY"
   },
   "runtime_preflight_shadow_permitted": true,
+  "runtime_publisher_shadow_returns_bootstrap_context": false,
+  "runtime_publisher_shadow_state_access_permitted": false,
+  "runtime_publisher_shadow_status": "UNBOUND_CONTROL_SYNC_PENDING",
+  "runtime_publisher_shadow_validator_kind": "DEVELOPMENT_ONLY_UNBOUND",
+  "runtime_publisher_shadow_validator_path": "CodexSkills/registry/auto/tools/validate_au040_publisher.py",
   "runtime_shard_writer_integration_complete": true,
   "runtime_state_write_permitted": false,
   "runtime_writer_shadow_returns_bootstrap_context": false,

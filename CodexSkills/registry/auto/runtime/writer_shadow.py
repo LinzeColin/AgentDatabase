@@ -1,4 +1,4 @@
-"""Development-only proof for an unbound AU-040 writer candidate.
+"""Development-only proof for an unbound AU-040 runtime candidate.
 
 The result is deliberately not a production ``BootstrapContext``.  It proves
 historical control closure and current byte self-consistency without touching
@@ -34,20 +34,20 @@ CANDIDATE_BUNDLE_DIGEST = (
     "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e"
 )
 CONTROL_GIT_OBJECT = (
-    "sha1:00c4a52d177898b1999b87b29ddb480e89908729"
+    "sha1:fb9b99c36cb870b04f34b5ed3bcb75aeae52c296"
 )
 CONTROL_RAW_SHA256 = (
-    "31602443a685cc12a1eebd51ea8e0801"
-    "ffd399c16a33186c372b7b81e8e46409"
+    "3929db4e818864d02a596efe3e1aaae1"
+    "af71a765cfafaf7b22f26157135d7953"
 )
 BOUND_AUTO_GIT_OBJECT = (
-    "sha1:7ed9e761921f557887440803d1fc7327f3e986a9"
+    "sha1:7f1bd87652f7cc88fbf2f6b542f9feb57750bf0d"
 )
 BOUND_AUTO_INTERFACE_RAW_SHA256 = (
-    "09af0c00273825e90a489f413a2f0bb6"
-    "995042e5b4eea17973ce7582eab66340"
+    "f1f9331df1b56c80e2fa7415fe2fe3d7"
+    "14dcd831cec94390afa43c078dedf38b"
 )
-BOUND_AUTO_MODULE_COUNT = 21
+BOUND_AUTO_MODULE_COUNT = 24
 RUNTIME_INTERFACE_PATH = (
     "CodexSkills/registry/auto/runtime-interface.json"
 )
@@ -143,7 +143,7 @@ def validate_unbound_writer_candidate(
         is not True
         or transition.get("runtime_state_write_permitted") is not True
         or transition.get("runtime_shard_writer_integration_complete")
-        is not False
+        is not True
         or transition.get("publisher_v2_runtime_integration_complete")
         is not False
     ):
@@ -242,6 +242,9 @@ def validate_unbound_writer_candidate(
     materialization = current.get(
         "runtime_interface_materialization_snapshot"
     )
+    publisher_materialization = current.get(
+        "publisher_v2_runtime_materialization_snapshot"
+    )
     historical_control = current.get(
         "historical_control_observation"
     )
@@ -259,6 +262,27 @@ def validate_unbound_writer_candidate(
             "control_sync_required_before_state_write"
         )
         is not True
+        or not isinstance(publisher_materialization, dict)
+        or publisher_materialization.get("semantic_scope")
+        != "INTERFACE_MATERIALIZATION_ONLY"
+        or publisher_materialization.get(
+            "predecessor_control_git_object_id"
+        )
+        != CONTROL_GIT_OBJECT
+        or publisher_materialization.get(
+            "current_auto_runtime_control_bound"
+        )
+        is not False
+        or publisher_materialization.get(
+            "runtime_state_write_permitted"
+        )
+        is not False
+        or publisher_materialization.get("repository_bound")
+        is not False
+        or publisher_materialization.get(
+            "canonical_publication_permitted"
+        )
+        is not False
         or not isinstance(historical_control, dict)
         or historical_control.get("verified_git_object_id")
         != CONTROL_GIT_OBJECT
@@ -270,9 +294,9 @@ def validate_unbound_writer_candidate(
         or current.get("runtime_shard_writer_integration_complete")
         is not True
         or current.get("publisher_v2_runtime_integration_complete")
-        is not False
+        is not True
         or current.get("next_phase")
-        != "MECHANISM_POST_AU040_WRITER_CONTROL_SYNC"
+        != "MECHANISM_POST_AU040_PUBLISHER_V2_CONTROL_SYNC"
     ):
         raise AutoRuntimeError(
             "WRITER_SHADOW_CURRENT_INTERFACE_CONTRACT_MISMATCH"
@@ -303,5 +327,19 @@ def validate_unbound_writer_candidate(
         False,
         False,
         True,
-        False,
+        True,
+    )
+
+
+def validate_unbound_publisher_candidate(
+    repo_root: Path,
+    candidate_trust: TrustTuple,
+    control_trust: ControlTrustTuple,
+) -> UnboundWriterCandidateEvidence:
+    """Explicit publisher-v2 name for the current unbound proof."""
+
+    return validate_unbound_writer_candidate(
+        repo_root,
+        candidate_trust,
+        control_trust,
     )

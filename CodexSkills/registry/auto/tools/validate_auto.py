@@ -101,6 +101,11 @@ RUN_LOG_WRITE_PREFIX = "OpenAIDatabase/data/run_logs/skills_runs/"
 DAILY_MANIFEST_ID = SCHEMA_PREFIX + "daily-run-shard-manifest:v1"
 INDEX_ENTRY_ID = SCHEMA_PREFIX + "run-event-index-entry:v1"
 PUBLIC_RUN_EVENT_ID = SCHEMA_PREFIX + "public-run-event:v2"
+PUBLICATION_MANIFEST_V2_ID = (
+    SCHEMA_PREFIX + "publication-manifest:v2"
+)
+OBJECT_SERIALIZATION = "RFC8785_JCS_OBJECT"
+JSONL_SERIALIZATION = "RFC8785_JCS_PER_LINE_LF"
 MAX_RUN_LOG_PART_BYTES = 20 * 1024 * 1024
 DAILY_RUN_PATH_RE = re.compile(
     r"^OpenAIDatabase/data/run_logs/skills_runs/"
@@ -861,6 +866,114 @@ def _validate_publication_manifest(instance: Mapping[str, Any]) -> None:
         _fail("PUBLICATION_SHARED_GATE_SET_INCOMPLETE")
 
 
+def _validate_publication_artifact_v2(
+    lane: str,
+    artifact: Mapping[str, Any],
+) -> None:
+    path = artifact["artifact_repo_path"]
+    operation = artifact["artifact_operation"]
+    schema_id = artifact["artifact_schema_id"]
+    serialization_field = (
+        "artifact_serialization"
+        if operation == "PUT"
+        else "prior_artifact_serialization"
+    )
+    serialization = artifact[serialization_field]
+    if lane == "REGISTRY":
+        if operation != "PUT":
+            _fail(f"PUBLICATION_UNLISTED_DELETION:{path}")
+        if not (
+            path in REGISTRY_CONTROL_PATHS
+            or any(
+                path.startswith(prefix)
+                for prefix in REGISTRY_WRITE_PREFIXES
+            )
+        ):
+            _fail(f"PUBLICATION_REGISTRY_PATH_INVALID:{path}")
+        if serialization != OBJECT_SERIALIZATION:
+            _fail("PUBLICATION_REGISTRY_SERIALIZATION_INVALID")
+        if schema_id not in FINAL_SCHEMA_SELF_POINTERS:
+            _fail("PUBLICATION_REGISTRY_SCHEMA_UNKNOWN")
+        return
+
+    kind, _ = _parse_daily_run_path(path)
+    if kind == "part":
+        if (
+            schema_id != PUBLIC_RUN_EVENT_ID
+            or serialization != JSONL_SERIALIZATION
+        ):
+            _fail(
+                "PUBLICATION_PART_PATH_OPERATION_SCHEMA_MISMATCH"
+            )
+        return
+    if operation == "DELETE":
+        _fail(f"PUBLICATION_UNLISTED_DELETION:{path}")
+    if kind == "index":
+        if (
+            schema_id != INDEX_ENTRY_ID
+            or serialization != JSONL_SERIALIZATION
+        ):
+            _fail(
+                "PUBLICATION_INDEX_PATH_OPERATION_SCHEMA_MISMATCH"
+            )
+        return
+    if (
+        schema_id != DAILY_MANIFEST_ID
+        or serialization != OBJECT_SERIALIZATION
+    ):
+        _fail(
+            "PUBLICATION_MANIFEST_PATH_OPERATION_SCHEMA_MISMATCH"
+        )
+
+
+def _validate_publication_manifest_v2(
+    instance: Mapping[str, Any],
+) -> None:
+    lanes = instance["lane_manifests"]
+    _require_sorted_unique(
+        lanes,
+        lambda item: item["lane"],
+        "PUBLICATION_LANE_ORDER",
+    )
+    if instance["settled_lanes"] != [
+        item["lane"] for item in lanes
+    ]:
+        _fail("PUBLICATION_SETTLED_LANE_MISMATCH")
+    artifact_uids = []
+    paths = []
+    for lane in lanes:
+        artifacts = lane["artifacts"]
+        if lane["artifact_count"] != len(artifacts):
+            _fail("PUBLICATION_ARTIFACT_COUNT_MISMATCH")
+        _require_sorted_unique(
+            artifacts,
+            lambda item: (
+                item["artifact_repo_path"],
+                item["artifact_uid"],
+            ),
+            "PUBLICATION_ARTIFACT_ORDER",
+        )
+        for artifact in artifacts:
+            artifact_uids.append(artifact["artifact_uid"])
+            paths.append(artifact["artifact_repo_path"])
+            _validate_publication_artifact_v2(
+                lane["lane"],
+                artifact,
+            )
+    if len(artifact_uids) != len(set(artifact_uids)):
+        _fail("PUBLICATION_ARTIFACT_UID_DUPLICATE")
+    if len(paths) != len(set(paths)):
+        _fail("PUBLICATION_PATH_OPERATION_COLLISION")
+    gates = instance["shared_gates"]
+    _require_sorted_unique(
+        gates,
+        lambda item: item["gate_code"],
+        "PUBLICATION_GATE_ORDER",
+    )
+    if tuple(item["gate_code"] for item in gates) != SHARED_GATES:
+        _fail("PUBLICATION_SHARED_GATE_SET_INCOMPLETE")
+
+
 def _validate_notification_receipt(instance: Mapping[str, Any]) -> None:
     status = instance["provider_status"]
     timing = instance["timing"]
@@ -1073,6 +1186,7 @@ AUTO_SEMANTIC_VALIDATORS = {
     SCHEMA_PREFIX + "notification-receipt:v3": _validate_notification_receipt,
     SCHEMA_PREFIX + "public-run-event:v2": _validate_public_run_event,
     SCHEMA_PREFIX + "publication-manifest:v1": _validate_publication_manifest,
+    PUBLICATION_MANIFEST_V2_ID: _validate_publication_manifest_v2,
     SCHEMA_PREFIX + "retention-receipt:v2": _validate_retention_receipt,
     SCHEMA_PREFIX + "retention-receipt:v3": _validate_retention_receipt_v3,
     SCHEMA_PREFIX + "source-coverage-receipt:v1": _validate_source_coverage,

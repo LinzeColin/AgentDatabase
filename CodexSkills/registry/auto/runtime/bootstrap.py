@@ -232,11 +232,27 @@ def _verify_control_trust(
         )
         or not isinstance(transition.get("au_040_complete"), bool)
         or not isinstance(
+            transition.get("au_040_daily_jsonl_shard_complete"),
+            bool,
+        )
+        or not isinstance(
             transition.get("canonical_publication_permitted"), bool
         )
         or not isinstance(transition.get("external_gmail_ready"), bool)
         or not isinstance(transition.get("m0c_b_permitted"), bool)
         or not isinstance(transition.get("repository_bound"), bool)
+        or not isinstance(
+            transition.get("runtime_shard_writer_integration_complete"),
+            bool,
+        )
+        or not isinstance(
+            transition.get("publisher_v2_runtime_integration_complete"),
+            bool,
+        )
+        or not isinstance(
+            transition.get("runtime_state_write_permitted"),
+            bool,
+        )
         or not isinstance(
             transition.get("schedule_authority_resolved"), bool
         )
@@ -497,4 +513,41 @@ def require_control_synced_runtime(context: BootstrapContext) -> None:
     ):
         raise AutoRuntimeError(
             "RUNTIME_CONTROL_SYNC_REQUIRED_BEFORE_STATE_WRITE"
+        )
+
+
+def require_control_synced_publisher_v2(
+    context: BootstrapContext,
+) -> None:
+    """Require exact successor control binding for the v2 publisher."""
+
+    transition = context.control_interface.get("transition_contract")
+    if (
+        not isinstance(transition, dict)
+        or transition.get("auto_runtime_integration_complete")
+        is not True
+        or transition.get("runtime_shard_writer_integration_complete")
+        is not True
+        or transition.get("publisher_v2_runtime_integration_complete")
+        is not True
+    ):
+        raise AutoRuntimeError(
+            "RUNTIME_PUBLISHER_V2_CONTROL_SYNC_REQUIRED"
+        )
+
+
+def require_canonical_publication_authority(
+    context: BootstrapContext,
+) -> None:
+    """Keep physical publication closed until repository authority lands."""
+
+    require_control_synced_publisher_v2(context)
+    transition = context.control_interface.get("transition_contract")
+    assert isinstance(transition, dict)
+    if (
+        transition.get("repository_bound") is not True
+        or transition.get("canonical_publication_permitted") is not True
+    ):
+        raise AutoRuntimeError(
+            "CANONICAL_PUBLICATION_NOT_AUTHORIZED"
         )

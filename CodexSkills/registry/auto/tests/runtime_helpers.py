@@ -44,6 +44,13 @@ HISTORICAL_CONTROL_INTERFACE_RAW_SHA256 = (
     "31602443a685cc12a1eebd51ea8e0801"
     "ffd399c16a33186c372b7b81e8e46409"
 )
+PUBLISHER_CONTROL_GIT_OBJECT = (
+    "sha1:fb9b99c36cb870b04f34b5ed3bcb75aeae52c296"
+)
+PUBLISHER_CONTROL_INTERFACE_RAW_SHA256 = (
+    "3929db4e818864d02a596efe3e1aaae1"
+    "af71a765cfafaf7b22f26157135d7953"
+)
 FIXED_NOW = dt.datetime(2026, 7, 23, 0, 0, 0, tzinfo=dt.timezone.utc)
 REPO_ROOT = Path(__file__).resolve().parents[4]
 
@@ -65,6 +72,39 @@ def control_trust(
         CONTROL_INTERFACE_PATH,
         CONTROL_MODE,
     )
+
+
+def publisher_control_trust(
+    *,
+    object_id: str = PUBLISHER_CONTROL_GIT_OBJECT,
+    raw_digest: str = PUBLISHER_CONTROL_INTERFACE_RAW_SHA256,
+) -> ControlTrustTuple:
+    """Return the exact successor tuple that authorizes this Phase."""
+
+    return ControlTrustTuple(
+        object_id,
+        raw_digest,
+        CONTROL_INTERFACE_PATH,
+        CONTROL_MODE,
+    )
+
+
+@lru_cache(maxsize=1)
+def publisher_control_raw() -> bytes:
+    object_id = _split_git_object(
+        REPO_ROOT,
+        PUBLISHER_CONTROL_GIT_OBJECT,
+        "TEST_PUBLISHER_CONTROL",
+    )
+    raw = _git_blob(REPO_ROOT, object_id, CONTROL_INTERFACE_PATH)
+    if (
+        hashlib.sha256(raw).hexdigest()
+        != PUBLISHER_CONTROL_INTERFACE_RAW_SHA256
+    ):
+        raise AssertionError(
+            "TEST_PUBLISHER_CONTROL_DIGEST_MISMATCH"
+        )
+    return raw
 
 
 @lru_cache(maxsize=1)
@@ -223,6 +263,21 @@ def expected_stale_control_failure_pattern() -> str:
     code = (
         "BOOTSTRAP_AUTO_RUNTIME_INTERFACE_LOCAL_DRIFT"
         if local == historical
+        else "BOOTSTRAP_CONTROL_INTERFACE_LOCAL_DRIFT"
+    )
+    return rf"^{re.escape(code)}$"
+
+
+def expected_publisher_control_failure_pattern() -> str:
+    """Exact safe failure before and after the next control sync."""
+
+    predecessor = publisher_control_raw()
+    local = REPO_ROOT.joinpath(
+        *CONTROL_INTERFACE_PATH.split("/")
+    ).read_bytes()
+    code = (
+        "BOOTSTRAP_AUTO_RUNTIME_INTERFACE_LOCAL_DRIFT"
+        if local == predecessor
         else "BOOTSTRAP_CONTROL_INTERFACE_LOCAL_DRIFT"
     )
     return rf"^{re.escape(code)}$"

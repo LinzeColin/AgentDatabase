@@ -58,20 +58,20 @@ CONTROL_INTERFACE_REPO_PATH = (
     "CodexSkills/governance/activation/control-interface.json"
 )
 CONTROL_EVIDENCE_GIT_OBJECT = (
-    "sha1:00c4a52d177898b1999b87b29ddb480e89908729"
+    "sha1:fb9b99c36cb870b04f34b5ed3bcb75aeae52c296"
 )
 EXPECTED_CONTROL_INTERFACE_RAW_SHA256 = (
-    "31602443a685cc12a1eebd51ea8e0801"
-    "ffd399c16a33186c372b7b81e8e46409"
+    "3929db4e818864d02a596efe3e1aaae1"
+    "af71a765cfafaf7b22f26157135d7953"
 )
 CONTROL_BOUND_AUTO_GIT_OBJECT = (
-    "sha1:7ed9e761921f557887440803d1fc7327f3e986a9"
+    "sha1:7f1bd87652f7cc88fbf2f6b542f9feb57750bf0d"
 )
 CONTROL_BOUND_AUTO_RUNTIME_INTERFACE_RAW_SHA256 = (
-    "09af0c00273825e90a489f413a2f0bb6"
-    "995042e5b4eea17973ce7582eab66340"
+    "f1f9331df1b56c80e2fa7415fe2fe3d7"
+    "14dcd831cec94390afa43c078dedf38b"
 )
-CONTROL_BOUND_AUTO_MODULE_COUNT = 21
+CONTROL_BOUND_AUTO_MODULE_COUNT = 24
 EXPECTED_CONSUMER_REQUIRED_GATES = [
     "ACTIVE_EXTERNAL_TRUST",
     "AU_040_DAILY_JSONL_SHARD_MANIFEST",
@@ -627,7 +627,7 @@ def _historical_control_observation():
         or interface.get("candidate_schema_count") != 31
         or interface.get("candidate_policy_count") != 5
         or interface.get("next_phase")
-        != "AUTO_AU040_RUNTIME_WRITER_INTEGRATION"
+        != "AUTO_AU040_PUBLISHER_V2_RUNTIME_INTEGRATION"
         or not isinstance(consumer, dict)
         or consumer.get("verified_git_object_id")
         != CONSUMER_FIRST_EVIDENCE_GIT_OBJECT
@@ -642,7 +642,7 @@ def _historical_control_observation():
         or source.get("artifact_digest")
         != CONTROL_BOUND_AUTO_RUNTIME_INTERFACE_RAW_SHA256
         or source.get("integration_state")
-        != "FINAL_31_5_INTEGRATED_CONTROL_SYNCED"
+        != "AU040_RUNTIME_WRITER_INTEGRATED_CONTROL_SYNCED"
         or source.get("module_count") != CONTROL_BOUND_AUTO_MODULE_COUNT
         or not isinstance(transition, dict)
         or transition.get("auto_runtime_integration_complete") is not True
@@ -658,7 +658,7 @@ def _historical_control_observation():
         or transition.get("repository_bound") is not False
         or transition.get("runtime_preflight_shadow_permitted") is not True
         or transition.get("runtime_shard_writer_integration_complete")
-        is not False
+        is not True
         or transition.get("runtime_state_instance_created") is not False
         or transition.get("runtime_state_write_permitted") is not True
         or transition.get("schedule_authority_resolved") is not False
@@ -717,6 +717,7 @@ def _files():
             AUTO_DIR / "tools" / "notification_transport_cli.py",
             AUTO_DIR / "tools" / "run_fault_suite.py",
             AUTO_DIR / "tools" / "runtime_preflight.py",
+            AUTO_DIR / "tools" / "validate_au040_publisher.py",
             AUTO_DIR / "tools" / "validate_au040_writer.py",
             AUTO_DIR / "tools" / "validate_auto.py",
         ]
@@ -761,7 +762,7 @@ def build():
         "activation_instance_created": False,
         "activation_settlement_recomputed_before_publish": True,
         "au_040_authority_ruling_status": (
-            "RUNTIME_WRITER_INTEGRATED_CONTROL_SYNC_PENDING"
+            "PUBLISHER_V2_INTEGRATED_CONTROL_SYNC_PENDING"
         ),
         "au_040_complete": False,
         "au_040_consumer_manifest_path_contract_present": True,
@@ -812,7 +813,15 @@ def build():
             "part_numbers_reused": False,
             "physical_part_gaps_after_prune_permitted": True,
             "publisher_serialization_discriminator_required": True,
-            "publisher_v2_runtime_integration_complete": False,
+            "publisher_v2_control_sync_required_before_canonical_write": (
+                True
+            ),
+            "publisher_v2_delete_prior_bytes_revalidated": True,
+            "publisher_v2_jsonl_per_line_validation": True,
+            "publisher_v2_manifest_recomputed_from_physical_descriptors": (
+                True
+            ),
+            "publisher_v2_runtime_integration_complete": True,
             "repository_bound": False,
             "promotion_required_before_candidate_materialization": True,
             "promotion_requirement_satisfied": True,
@@ -926,7 +935,9 @@ def build():
         "module_artifacts": artifacts,
         "module_count": len(artifacts),
         "m0c_b_permitted": False,
-        "next_phase": "MECHANISM_POST_AU040_WRITER_CONTROL_SYNC",
+        "next_phase": (
+            "MECHANISM_POST_AU040_PUBLISHER_V2_CONTROL_SYNC"
+        ),
         "notification_actual_recipient_repo_external": True,
         "notification_credentials_repo_external": True,
         "notification_external_path_contract": {
@@ -971,9 +982,23 @@ def build():
             "as_of_phase": "AUTO_AU040_RUNTIME_WRITER_INTEGRATION",
             "control_sync_required_before_state_write": True,
             "current_auto_runtime_control_bound": False,
-            "historical_control_git_object_id": control[
+            "historical_control_git_object_id": (
+                "sha1:00c4a52d177898b1999b87b29ddb480e89908729"
+            ),
+            "runtime_state_write_permitted": False,
+            "semantic_scope": "INTERFACE_MATERIALIZATION_ONLY",
+        },
+        "publisher_v2_runtime_materialization_snapshot": {
+            "as_of_phase": (
+                "AUTO_AU040_PUBLISHER_V2_RUNTIME_INTEGRATION"
+            ),
+            "canonical_publication_permitted": False,
+            "control_sync_required_before_state_write": True,
+            "current_auto_runtime_control_bound": False,
+            "predecessor_control_git_object_id": control[
                 "verified_git_object_id"
             ],
+            "repository_bound": False,
             "runtime_state_write_permitted": False,
             "semantic_scope": "INTERFACE_MATERIALIZATION_ONLY",
         },
@@ -988,7 +1013,19 @@ def build():
         "runtime_writer_shadow_validator_path": (
             "CodexSkills/registry/auto/tools/validate_au040_writer.py"
         ),
-        "publisher_v2_runtime_integration_complete": False,
+        "runtime_publisher_shadow_returns_bootstrap_context": False,
+        "runtime_publisher_shadow_state_access_permitted": False,
+        "runtime_publisher_shadow_status": (
+            "UNBOUND_CONTROL_SYNC_PENDING"
+        ),
+        "runtime_publisher_shadow_validator_kind": (
+            "DEVELOPMENT_ONLY_UNBOUND"
+        ),
+        "runtime_publisher_shadow_validator_path": (
+            "CodexSkills/registry/auto/tools/"
+            "validate_au040_publisher.py"
+        ),
+        "publisher_v2_runtime_integration_complete": True,
         "repository_bound": False,
         "schedule": {
             "daily_local_time": "04:15",

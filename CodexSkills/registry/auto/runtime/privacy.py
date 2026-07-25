@@ -10,7 +10,10 @@ from pathlib import Path
 from typing import Mapping, Tuple
 
 from CodexSkills.registry.auto.tools.validate_auto import AutoContract, validate_auto_instance
-from CodexSkills.governance.tools.canonical_json import parse_json_bytes
+from CodexSkills.governance.tools.canonical_json import (
+    canonicalize_object,
+    parse_json_bytes,
+)
 from CodexSkills.governance.tools.validate_mechanism import scan_public_value
 
 from .core import AutoRuntimeError
@@ -32,6 +35,8 @@ SECRET_PATTERNS = (
     ),
     ("GOOGLE_API_KEY", re.compile(rb"\bAIza[A-Za-z0-9_-]{35}\b")),
 )
+MAX_PUBLIC_JSONL_BYTES = 20 * 1024 * 1024
+MAX_PUBLIC_JSONL_RECORDS = 10_000
 
 
 @dataclass(frozen=True)
@@ -84,7 +89,7 @@ def validate_public_serialization(
     schema_id: str,
     expected_bundle_digest: str,
 ) -> Mapping[str, object]:
-    """Reparse serialized bytes, validate exact schema, then rescan values."""
+    """Validate one exact RFC 8785 JSON object and rescan its values."""
 
     try:
         instance = parse_json_bytes(raw)
@@ -92,6 +97,14 @@ def validate_public_serialization(
         raise AutoRuntimeError("PUBLIC_SERIALIZATION_PARSE_FAILED") from exc
     if not isinstance(instance, dict):
         raise AutoRuntimeError("PUBLIC_SERIALIZATION_ROOT_INVALID")
+    try:
+        canonical = canonicalize_object(instance)
+    except Exception as exc:
+        raise AutoRuntimeError(
+            "PUBLIC_SERIALIZATION_CANONICALIZATION_FAILED"
+        ) from exc
+    if canonical != raw:
+        raise AutoRuntimeError("PUBLIC_SERIALIZATION_NOT_EXACT_JCS")
     try:
         validate_auto_instance(
             contract,
@@ -103,3 +116,52 @@ def validate_public_serialization(
     except Exception as exc:
         raise AutoRuntimeError(f"PUBLIC_SERIALIZATION_GATE_FAILED:{exc}") from exc
     return instance
+
+
+def validate_public_jsonl_serialization(
+    raw: bytes,
+    contract: AutoContract,
+    schema_id: str,
+    expected_bundle_digest: str,
+    *,
+    maximum_bytes: int = MAX_PUBLIC_JSONL_BYTES,
+    maximum_records: int = MAX_PUBLIC_JSONL_RECORDS,
+) -> Tuple[Mapping[str, object], ...]:
+    """Validate bounded RFC 8785 JSON objects framed one-per-LF line."""
+
+    if (
+        maximum_bytes <= 0
+        or maximum_records <= 0
+        or not raw
+        or len(raw) > maximum_bytes
+        or not raw.endswith(b"\n")
+        or b"\r" in raw
+        or raw.startswith(b"\xef\xbb\xbf")
+    ):
+        raise AutoRuntimeError("PUBLIC_JSONL_FRAMING_INVALID")
+    rows = []
+    for line_number, line in enumerate(
+        raw[:-1].split(b"\n"),
+        1,
+    ):
+        if line_number > maximum_records:
+            raise AutoRuntimeError("PUBLIC_JSONL_RECORD_BUDGET_EXCEEDED")
+        if not line:
+            raise AutoRuntimeError(
+                f"PUBLIC_JSONL_EMPTY_LINE:{line_number}"
+            )
+        try:
+            row = validate_public_serialization(
+                line,
+                contract,
+                schema_id,
+                expected_bundle_digest,
+            )
+        except AutoRuntimeError as exc:
+            raise AutoRuntimeError(
+                f"PUBLIC_JSONL_LINE_INVALID:{line_number}:{exc.code}"
+            ) from exc
+        rows.append(row)
+    if not rows:
+        raise AutoRuntimeError("PUBLIC_JSONL_EMPTY")
+    return tuple(rows)
