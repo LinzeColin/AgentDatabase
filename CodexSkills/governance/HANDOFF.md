@@ -36,7 +36,7 @@
 - Readiness self digest:
   `049809b3292f5591fc63f899c2172e67da66bb0a152998e04a341bda401d1228`
 - Readiness schema canonical SHA-256:
-  `60db683a5ed1f96d68ed382eaa763951ffed2ad357ae42138fa5a1098f5d8084`
+  `d63de0996742f8943f905827b4eeb35ba0137b09b10acd3a84e45460ba717e9e`
 - Immutable M-064 predecessor:
   `sha1:9b8f20f3ab97a7ec06aedfbe53670569ac036f9b`
 - Immutable M-060 protected-local boundary:
@@ -83,8 +83,8 @@ OpenAIDatabase are unchanged.
 ## M-065 validation
 
 ```text
-M-065 targeted parity/mutation/rollback/negative tests: 16/16 PASS
-complete Mechanism suite: 236/236 PASS
+M-065 targeted parity/mutation/rollback/negative tests: 17/17 PASS
+complete Mechanism suite: 237/237 PASS
 M-065 builder/schema/observation/plan/readiness: BYTE_EQUIVALENT
 complete synthetic parity + dual-read: CUTOVER_ELIGIBLE / execution false
 current evidence: BLOCKED / SHADOW_ONLY / delete budget 0

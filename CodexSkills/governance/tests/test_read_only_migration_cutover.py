@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import copy
+import hashlib
 import inspect
 import unittest
 
@@ -491,6 +492,30 @@ class ReadOnlyMigrationCutoverTests(unittest.TestCase):
         self.assertTrue(plan["parity_complete"])
         self.assertTrue(plan["dual_read_complete"])
         self.assertTrue(plan["zero_local_mutation_verified"])
+
+    def test_17_handoff_digests_match_materialized_bytes(self) -> None:
+        handoff = (
+            builder.GOVERNANCE_DIR / "HANDOFF.md"
+        ).read_text(encoding="utf-8")
+        checks = (
+            hashlib.sha256(builder.COMPONENT_PATH.read_bytes()).hexdigest(),
+            hashlib.sha256(
+                builder.OBSERVATION_PATH.read_bytes()
+            ).hexdigest(),
+            self.observation["evidence_bundle_digest"],
+            canonical_digest(builder.build_observation_schema()),
+            hashlib.sha256(builder.PLAN_PATH.read_bytes()).hexdigest(),
+            self.plan["evidence_bundle_digest"],
+            canonical_digest(builder.build_plan_schema()),
+            hashlib.sha256(builder.READINESS_PATH.read_bytes()).hexdigest(),
+            self.readiness["artifact_digest"],
+            canonical_digest(
+                parse_json_bytes(builder.READINESS_SCHEMA_PATH.read_bytes())
+            ),
+        )
+        for digest in checks:
+            with self.subTest(digest=digest):
+                self.assertEqual(handoff.count(digest), 1)
 
 
 if __name__ == "__main__":
