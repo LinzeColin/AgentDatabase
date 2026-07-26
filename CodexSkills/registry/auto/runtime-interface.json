@@ -12,7 +12,7 @@
   "activation_handshake_entrypoint": "CodexSkills/registry/auto/tools/activation_handshake_cli.py",
   "activation_instance_created": false,
   "activation_settlement_recomputed_before_publish": true,
-  "au_040_authority_ruling_status": "REGISTRY_CATALOG_RESERVED_SOURCE_DRIFT_PENDING",
+  "au_040_authority_ruling_status": "REGISTRY_SOURCE_CONTENT_SYNCED_CONTROL_PENDING",
   "au_040_complete": false,
   "au_040_consumer_manifest_path_contract_present": true,
   "au_040_daily_jsonl_shard_complete": false,
@@ -616,7 +616,7 @@
       "relative_path": "CodexSkills/registry/auto/runtime/state.py"
     },
     {
-      "artifact_digest": "837a7ed2b4ee8045ac5e223faaea5ebb65e2b5ece058a6be27da155a0e5a9c5c",
+      "artifact_digest": "fb032e30cd0d0678b185bf564dc36938db1d1a7e0dd0dbd30b6ad9ad6acd54e2",
       "relative_path": "CodexSkills/registry/auto/runtime/writer_shadow.py"
     },
     {
@@ -624,7 +624,7 @@
       "relative_path": "CodexSkills/registry/auto/tools/activation_handshake_cli.py"
     },
     {
-      "artifact_digest": "6d2cf63228a879a73ad8147a95cc3b34b89184afdc13082f0e56f511e2efc513",
+      "artifact_digest": "5cd623e914c8661a7356a1f755225d58aa43f6b293a5c693122f4ad3f34f6384",
       "relative_path": "CodexSkills/registry/auto/tools/build_runtime_interface.py"
     },
     {
@@ -653,7 +653,7 @@
     }
   ],
   "module_count": 27,
-  "next_phase": "MECHANISM_REGISTRY_SOURCE_DRIFT_RECONCILIATION",
+  "next_phase": "MECHANISM_REGISTRY_PARITY_COMPLETE_MATERIALIZATION",
   "notification_actual_recipient_repo_external": true,
   "notification_credentials_repo_external": true,
   "notification_external_path_contract": {
@@ -694,6 +694,8 @@
   "registry_alias_set_digest": "75f6db86e5a18cc000985dc32a719ac7e0bc15b22b2e3f20c0d32d3138f27387",
   "registry_mirror_alias_parity_satisfied": true,
   "registry_source_alias_parity_satisfied": true,
+  "registry_source_content_sync_complete": true,
+  "registry_source_mirror_parity_satisfied": true,
   "registry_source_root_parity_satisfied": false,
   "registry_whole_source_parity_satisfied": false,
   "remote_readback_precedes_watermark": true,
@@ -778,19 +780,19 @@
   "runtime_preflight_shadow_permitted": true,
   "runtime_publisher_shadow_returns_bootstrap_context": false,
   "runtime_publisher_shadow_state_access_permitted": false,
-  "runtime_publisher_shadow_status": "UNBOUND_REPOSITORY_CONTROL_SYNC_PENDING",
+  "runtime_publisher_shadow_status": "UNBOUND_REGISTRY_SOURCE_CONTENT_SYNCED_CONTROL_PENDING",
   "runtime_publisher_shadow_validator_kind": "DEVELOPMENT_ONLY_UNBOUND",
   "runtime_publisher_shadow_validator_path": "CodexSkills/registry/auto/tools/validate_au040_publisher.py",
   "runtime_repository_binding_shadow_returns_bootstrap_context": false,
   "runtime_repository_binding_shadow_state_access_permitted": false,
-  "runtime_repository_binding_shadow_status": "UNBOUND_REPOSITORY_CONTROL_SYNC_PENDING",
+  "runtime_repository_binding_shadow_status": "UNBOUND_REGISTRY_SOURCE_CONTENT_SYNCED_CONTROL_PENDING",
   "runtime_repository_binding_shadow_validator_kind": "DEVELOPMENT_ONLY_UNBOUND",
   "runtime_repository_binding_shadow_validator_path": "CodexSkills/registry/auto/tools/validate_au040_publisher.py",
   "runtime_shard_writer_integration_complete": true,
   "runtime_state_write_permitted": false,
   "runtime_writer_shadow_returns_bootstrap_context": false,
   "runtime_writer_shadow_state_access_permitted": false,
-  "runtime_writer_shadow_status": "UNBOUND_REPOSITORY_CONTROL_SYNC_PENDING",
+  "runtime_writer_shadow_status": "UNBOUND_REGISTRY_SOURCE_CONTENT_SYNCED_CONTROL_PENDING",
   "runtime_writer_shadow_validator_kind": "DEVELOPMENT_ONLY_UNBOUND",
   "runtime_writer_shadow_validator_path": "CodexSkills/registry/auto/tools/validate_au040_writer.py",
   "schedule": {
@@ -804,6 +806,93 @@
   "schedule_complete": false,
   "shared_bundle_schema_count": 31,
   "shared_policy_count": 5,
+  "source_content_sync_materialization_snapshot": {
+    "as_of_phase": "AUTO_REGISTRY_SOURCE_CONTENT_SYNC",
+    "bound_reference_resolver_auto_integration_complete": false,
+    "bound_reference_resolver_gate_satisfied": false,
+    "canonical_publication_permitted": false,
+    "catalog_or_snapshot_artifacts_generated": false,
+    "current_auto_runtime_control_bound": false,
+    "exact_synchronized_paths": [
+      "codex/graphify",
+      "codex/persona-distiller-group",
+      "codex/verifier"
+    ],
+    "external_source_dry_run_required": true,
+    "git_tracked_exact_closure_verified": true,
+    "missing_source_skill_roots": [
+      "codex/context-kernel"
+    ],
+    "next_phase": "MECHANISM_REGISTRY_PARITY_COMPLETE_MATERIALIZATION",
+    "predecessor_control_git_object_id": "sha1:5db5beecf3de7ac916020ca988f6e875891e19b1",
+    "remaining_content_drift_paths": [],
+    "repository_bound": false,
+    "reserved_registry_namespaces_preserved": true,
+    "runtime_state_write_permitted": false,
+    "semantic_scope": "INTERFACE_MATERIALIZATION_ONLY",
+    "source_content_sync_complete": true,
+    "source_mirror_parity_satisfied": true,
+    "source_root_parity_satisfied": false,
+    "synchronized_entries": [
+      {
+        "alias_count": 0,
+        "byte_count": 13373911,
+        "content_digest": "816bfb795d8998983a3df2b8786a2d1c691e9e2280dd7be2bdc07acd47775587",
+        "exact_source_mirror_content_equal": true,
+        "mirror_content_digest": "816bfb795d8998983a3df2b8786a2d1c691e9e2280dd7be2bdc07acd47775587",
+        "regular_file_count": 695,
+        "source_content_digest": "816bfb795d8998983a3df2b8786a2d1c691e9e2280dd7be2bdc07acd47775587",
+        "source_relative_path": "codex/graphify"
+      },
+      {
+        "alias_count": 0,
+        "byte_count": 1064137,
+        "content_digest": "eaf8f8e32b1ade683387346adec8a21b241541567e910609247426ec3626b921",
+        "exact_source_mirror_content_equal": true,
+        "mirror_content_digest": "eaf8f8e32b1ade683387346adec8a21b241541567e910609247426ec3626b921",
+        "regular_file_count": 35,
+        "source_content_digest": "eaf8f8e32b1ade683387346adec8a21b241541567e910609247426ec3626b921",
+        "source_relative_path": "codex/persona-distiller-group"
+      },
+      {
+        "alias_count": 0,
+        "byte_count": 525884,
+        "content_digest": "7727bcfb4d03bcc97fafeedea1f8e773945e6be70f0351e8ca32525ff1e8d556",
+        "exact_source_mirror_content_equal": true,
+        "mirror_content_digest": "7727bcfb4d03bcc97fafeedea1f8e773945e6be70f0351e8ca32525ff1e8d556",
+        "regular_file_count": 61,
+        "source_content_digest": "7727bcfb4d03bcc97fafeedea1f8e773945e6be70f0351e8ca32525ff1e8d556",
+        "source_relative_path": "codex/verifier"
+      }
+    ],
+    "whole_source_parity_satisfied": false
+  },
+  "source_content_sync_predecessor_observation": {
+    "bound_auto_git_object_id": "sha1:b5a32c817e4016f595fa33caed6bce1d51199e63",
+    "bound_auto_module_count": 27,
+    "bound_auto_runtime_interface_raw_sha256": "e88ec8c711434619756ee8f91c451e941501764e30e4a7fff310d8685b02140a",
+    "canonical_control_path": "CodexSkills/governance/activation/control-interface.json",
+    "control_interface_raw_sha256": "a31751bf1258f646412aba84e0b5c46f84f09b77e33156caea372873b819ff36",
+    "control_root_status": "DRAFT_NON_ACTIVE",
+    "external_control_mode": "DRAFT_NON_ACTIVE_CONTROL",
+    "next_phase_at_observation": "AUTO_REGISTRY_SOURCE_CONTENT_SYNC",
+    "pending_content_drift_paths": [
+      "codex/graphify",
+      "codex/persona-distiller-group",
+      "codex/verifier"
+    ],
+    "reconciliation_artifact_digest": "24d02db5182463912074c109f2b5be350126d62340f58e6463755edbad1b799c",
+    "reconciliation_interface_path": "CodexSkills/governance/registry/source-drift-reconciliation.v1.json",
+    "reconciliation_interface_raw_sha256": "f36f20f8ee8551eae155c5b58ba0d776cc4fdd2b9f08d3186519ce052a297120",
+    "reconciliation_status": "DRAFT_NON_ACTIVE_SOURCE_DRIFT_RECONCILED",
+    "resolver_interface_path": "CodexSkills/governance/registry/resolver-interface.json",
+    "resolver_interface_raw_sha256": "38c7952ae712e6d4543bb4f4c1f3e5f8a98b00b36780c99bfce6944a722eabf0",
+    "resolver_status": "DRAFT_NON_ACTIVE_SOURCE_DRIFT_RECONCILED",
+    "verified_git_object_id": "sha1:5db5beecf3de7ac916020ca988f6e875891e19b1",
+    "working_tree_control_is_not_historical_trust_evidence": true,
+    "working_tree_reconciliation_is_not_historical_trust_evidence": true,
+    "working_tree_resolver_is_not_historical_trust_evidence": true
+  },
   "state_root_repo_external": true,
   "status": "DRAFT_NON_ACTIVE",
   "trust_tuple_repo_external_only": true

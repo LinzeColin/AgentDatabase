@@ -64,7 +64,7 @@ class RuntimeBootstrapTests(unittest.TestCase):
         )
         self.assertEqual(
             evidence.status,
-            "UNBOUND_REPOSITORY_CONTROL_SYNC_PENDING",
+            "UNBOUND_REGISTRY_SOURCE_CONTENT_SYNCED_CONTROL_PENDING",
         )
         self.assertEqual(evidence.schema_count, 31)
         self.assertEqual(evidence.policy_count, 5)
@@ -373,7 +373,7 @@ class RuntimeBootstrapTests(unittest.TestCase):
         )
         self.assertEqual(
             interface["au_040_authority_ruling_status"],
-            "REGISTRY_CATALOG_RESERVED_SOURCE_DRIFT_PENDING",
+            "REGISTRY_SOURCE_CONTENT_SYNCED_CONTROL_PENDING",
         )
         self.assertFalse(interface["au_040_complete"])
         self.assertTrue(interface["au_040_transport_schema_draft_complete"])
@@ -506,7 +506,7 @@ class RuntimeBootstrapTests(unittest.TestCase):
         )
         self.assertEqual(
             interface["next_phase"],
-            "MECHANISM_REGISTRY_SOURCE_DRIFT_RECONCILIATION",
+            "MECHANISM_REGISTRY_PARITY_COMPLETE_MATERIALIZATION",
         )
         self.assertTrue(
             interface["auto_exact_bundle_integration_complete"]
@@ -647,6 +647,12 @@ class RuntimeBootstrapTests(unittest.TestCase):
         self.assertTrue(
             interface["registry_mirror_alias_parity_satisfied"]
         )
+        self.assertTrue(
+            interface["registry_source_content_sync_complete"]
+        )
+        self.assertTrue(
+            interface["registry_source_mirror_parity_satisfied"]
+        )
         self.assertFalse(
             interface["registry_source_root_parity_satisfied"]
         )
@@ -713,6 +719,104 @@ class RuntimeBootstrapTests(unittest.TestCase):
             predecessor["next_phase_at_observation"],
             "AUTO_REGISTRY_CATALOG_PATH_RESERVATION",
         )
+        source_predecessor = interface[
+            "source_content_sync_predecessor_observation"
+        ]
+        self.assertEqual(
+            source_predecessor["verified_git_object_id"],
+            "sha1:5db5beecf3de7ac916020ca988f6e875891e19b1",
+        )
+        self.assertEqual(
+            source_predecessor["control_interface_raw_sha256"],
+            "a31751bf1258f646412aba84e0b5c46f"
+            "84f09b77e33156caea372873b819ff36",
+        )
+        self.assertEqual(
+            source_predecessor["resolver_interface_raw_sha256"],
+            "38c7952ae712e6d4543bb4f4c1f3e5f8"
+            "a98b00b36780c99bfce6944a722eabf0",
+        )
+        self.assertEqual(
+            source_predecessor[
+                "reconciliation_interface_raw_sha256"
+            ],
+            "f36f20f8ee8551eae155c5b58ba0d776"
+            "cc4fdd2b9f08d3186519ce052a297120",
+        )
+        self.assertEqual(
+            source_predecessor["reconciliation_artifact_digest"],
+            "24d02db5182463912074c109f2b5be350"
+            "126d62340f58e6463755edbad1b799c",
+        )
+        self.assertEqual(
+            source_predecessor["pending_content_drift_paths"],
+            [
+                "codex/graphify",
+                "codex/persona-distiller-group",
+                "codex/verifier",
+            ],
+        )
+        source_sync = interface[
+            "source_content_sync_materialization_snapshot"
+        ]
+        self.assertEqual(
+            source_sync["as_of_phase"],
+            "AUTO_REGISTRY_SOURCE_CONTENT_SYNC",
+        )
+        self.assertEqual(
+            source_sync["semantic_scope"],
+            "INTERFACE_MATERIALIZATION_ONLY",
+        )
+        self.assertFalse(
+            source_sync["current_auto_runtime_control_bound"]
+        )
+        self.assertTrue(source_sync["source_content_sync_complete"])
+        self.assertTrue(source_sync["source_mirror_parity_satisfied"])
+        self.assertFalse(source_sync["source_root_parity_satisfied"])
+        self.assertFalse(source_sync["whole_source_parity_satisfied"])
+        self.assertEqual(
+            source_sync["missing_source_skill_roots"],
+            ["codex/context-kernel"],
+        )
+        self.assertEqual(
+            source_sync["exact_synchronized_paths"],
+            [
+                "codex/graphify",
+                "codex/persona-distiller-group",
+                "codex/verifier",
+            ],
+        )
+        self.assertEqual(source_sync["remaining_content_drift_paths"], [])
+        self.assertTrue(
+            source_sync["reserved_registry_namespaces_preserved"]
+        )
+        self.assertTrue(
+            source_sync["git_tracked_exact_closure_verified"]
+        )
+        self.assertFalse(
+            source_sync["catalog_or_snapshot_artifacts_generated"]
+        )
+        self.assertFalse(
+            source_sync[
+                "bound_reference_resolver_auto_integration_complete"
+            ]
+        )
+        self.assertFalse(
+            source_sync["bound_reference_resolver_gate_satisfied"]
+        )
+        self.assertFalse(source_sync["runtime_state_write_permitted"])
+        self.assertFalse(source_sync["canonical_publication_permitted"])
+        self.assertEqual(
+            [
+                entry["source_relative_path"]
+                for entry in source_sync["synchronized_entries"]
+            ],
+            [
+                "codex/graphify",
+                "codex/persona-distiller-group",
+                "codex/verifier",
+            ],
+        )
         self.assertFalse(
             interface["bound_reference_resolver_auto_integration_complete"]
         )
@@ -737,7 +841,7 @@ class RuntimeBootstrapTests(unittest.TestCase):
         self.assertFalse(interface["runtime_state_write_permitted"])
         self.assertEqual(
             interface["runtime_writer_shadow_status"],
-            "UNBOUND_REPOSITORY_CONTROL_SYNC_PENDING",
+            "UNBOUND_REGISTRY_SOURCE_CONTENT_SYNCED_CONTROL_PENDING",
         )
         self.assertEqual(
             interface["runtime_writer_shadow_validator_kind"],
@@ -882,7 +986,7 @@ class RuntimeBootstrapTests(unittest.TestCase):
             )
             self.assertEqual(
                 evidence.status,
-                "UNBOUND_REPOSITORY_CONTROL_SYNC_PENDING",
+                "UNBOUND_REGISTRY_SOURCE_CONTENT_SYNCED_CONTROL_PENDING",
             )
             self.assertEqual(
                 expected_repository_control_failure_pattern(),
@@ -1044,7 +1148,7 @@ class RuntimeBootstrapTests(unittest.TestCase):
             )
             self.assertEqual(
                 current_interface["next_phase"],
-                "MECHANISM_REGISTRY_SOURCE_DRIFT_RECONCILIATION",
+                "MECHANISM_REGISTRY_PARITY_COMPLETE_MATERIALIZATION",
             )
             self.assertTrue(
                 observed["transition_contract"][

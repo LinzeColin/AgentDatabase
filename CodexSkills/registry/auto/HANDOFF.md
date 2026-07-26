@@ -1,30 +1,89 @@
-# Auto Registry catalog path reservation handoff
+# Auto Registry source-content sync handoff
 
-- State: `DRAFT_NON_ACTIVE_REGISTRY_CATALOG_RESERVED_SOURCE_DRIFT_PENDING`
-- Phase: `AUTO_REGISTRY_CATALOG_PATH_RESERVATION`
+- State: `DRAFT_NON_ACTIVE_REGISTRY_SOURCE_CONTENT_SYNCED_CONTROL_PENDING`
+- Phase: `AUTO_REGISTRY_SOURCE_CONTENT_SYNC`
 - Phase base / predecessor control Git object:
-  `sha1:488321c83b2a669ea964873e22a94b8e65429350`
+  `sha1:5db5beecf3de7ac916020ca988f6e875891e19b1`
 - Predecessor control raw SHA-256:
-  `6f7a2bdedfc7c388c4b6e1c2345855e110305b7ed906874676a5ba6daf7779f2`
-- Predecessor resolver interface raw SHA-256:
-  `0fe26ab55d92a1c6f5628e2a8d27becbdcc839ccfd73372150a2339ffe7eb4cb`
-- Control external mode: `DRAFT_NON_ACTIVE_CONTROL`
-- Control root status: `DRAFT_NON_ACTIVE`
+  `a31751bf1258f646412aba84e0b5c46f84f09b77e33156caea372873b819ff36`
+- Predecessor resolver raw SHA-256:
+  `38c7952ae712e6d4543bb4f4c1f3e5f8a98b00b36780c99bfce6944a722eabf0`
+- Predecessor reconciliation raw SHA-256:
+  `f36f20f8ee8551eae155c5b58ba0d776cc4fdd2b9f08d3186519ce052a297120`
+- Reconciliation self digest:
+  `24d02db5182463912074c109f2b5be350126d62340f58e6463755edbad1b799c`
 - Control-bound Auto Git object:
-  `sha1:49ac09dbd9c8a2e18d5a199088a910dc77e7d365`
+  `sha1:b5a32c817e4016f595fa33caed6bce1d51199e63`
 - Control-bound Auto runtime-interface raw SHA-256:
-  `c7af9d1406fe2ed084d5a30fab6cded3897a83c1602e6c40587cf28c75a2c75c`
-- Control-bound Auto module count: `26`
-- Current Auto runtime-interface raw SHA-256:
   `e88ec8c711434619756ee8f91c451e941501764e30e4a7fff310d8685b02140a`
+- Control-bound Auto module count: `27`
+- Current Auto runtime-interface raw SHA-256:
+  `7f2e335b682ec98c15f2e21e74bc0c2af24768cda7e5ed1ddc1b5e341449ac84`
 - Current Auto module count: `27`
-- Current sync executor raw SHA-256:
-  `1fd015a043dfe48034df03d8a821cda5793c90694191a8b629672efaf33283ac`
 
-## Completed
+## Exact source-content closure
 
-The Auto-owned sync plane now reserves, but does not create, every future
-Mechanism control namespace:
+Only the three paths authorized by the predecessor control were synchronized:
+
+```text
+codex/graphify
+  regular files=695
+  aliases=0
+  bytes=13373911
+  content digest=
+    816bfb795d8998983a3df2b8786a2d1c691e9e2280dd7be2bdc07acd47775587
+
+codex/persona-distiller-group
+  regular files=35
+  aliases=0
+  bytes=1064137
+  content digest=
+    eaf8f8e32b1ade683387346adec8a21b241541567e910609247426ec3626b921
+
+codex/verifier
+  regular files=61
+  aliases=0
+  bytes=525884
+  content digest=
+    7727bcfb4d03bcc97fafeedea1f8e773945e6be70f0351e8ca32525ff1e8d556
+```
+
+Each content digest is computed by the existing lstat-first sync contract over
+the complete source-relative path/kind/content set. Source and mirror digests
+are equal. The materialization builder additionally requires the complete
+physical mirror set for all three paths to be Git tracked; ignored fixture
+cache objects and distribution ZIP files therefore cannot silently disappear
+from the committed tree.
+
+The final full-source dry-run reports no additions, updates, or removals:
+
+```text
+source roots=88
+source counts=agents:24,claude:3,codex:55,codex-system:6
+source aliases=20/20
+mirror aliases=20/20
+remaining source/mirror content drift=[]
+source_mirror_parity_satisfied=true
+```
+
+## Historical-root and ownership truth
+
+The missing `codex/context-kernel` root remains absent from both current source
+and mirror. It remains `UNOBSERVED` under the Mechanism reconciliation; Auto
+did not restore it, infer a lifecycle transition, or modify historical
+Identity/Instance/Version references.
+
+Historical 89-root parity is therefore deliberately still false:
+
+```text
+historical source roots=89
+current source roots=88
+missing exact root=[codex/context-kernel]
+source_root_parity_satisfied=false
+whole_source_parity_satisfied=false
+```
+
+The five reserved namespaces remain protected and physically absent:
 
 ```text
 CodexSkills/registry/agents/_catalog/**
@@ -34,85 +93,20 @@ CodexSkills/registry/codex-system/_catalog/**
 CodexSkills/registry/_global/**
 ```
 
-Enumeration, compatibility-index generation, deletion propagation and prune
-selection exclude those paths. A reserved path that is a symlink or special
-node fails closed.
+No catalog, global Identity record, Registry snapshot, resolver payload, or
+promotion artifact was generated. The historical incomplete materialization
+remains non-promotable.
 
-Before any mirror deletion or replacement, `sync_skills.py` now performs a
-full lstat-first source preflight. Source roots, skill roots and parents must
-be real contained directories; unclassified dot roots, special nodes,
-unsafe/dangling/escaping aliases, unreadable nodes and non-policy oversize
-files fail closed. Oversize content is never silently skipped. The credential
-gate admits only the exact registered relative aliases and scans their target
-bytes through the ordinary real-file traversal.
+## Closed gates
 
-The exact frozen alias set is restored in the repository without dereference:
+This materialization is not a new production trust root:
 
 ```text
-expected aliases=20
-observed source aliases=20
-observed mirror aliases=20
-directory aliases=2
-regular-file aliases=18
-alias_set_digest=
-  75f6db86e5a18cc000985dc32a719ac7e0bc15b22b2e3f20c0d32d3138f27387
-source_alias_parity_satisfied=true
-mirror_alias_parity_satisfied=true
-```
-
-Each interface entry binds source namespace, alias path, raw relative link
-target, normalized same-root target, target type, metadata digest and target
-content digest. Git object readback must additionally prove mode `120000`.
-
-## Source-root drift and mirror removal
-
-Alias parity is deliberately separate from whole-source parity:
-
-```text
-historical source material Git object=
-  sha1:44a38890ec38ceb24ccae1ec6f5b1fc8e93aefa1
-historical source roots=89
-current source roots=88
-delta=-1
-missing exact root=[codex/context-kernel]
-source_root_parity_satisfied=false
-whole_source_parity_satisfied=false
-```
-
-The existing local→repository deletion-propagation contract removed that
-exact mirror root and regenerated only the Auto-owned compatibility
-`CodexSkills/index.json` / `README.md`. The interface binds the historical
-byte count and SHA-256 of all three removed paths from object `488321c...`;
-the current mirror and compatibility index both contain 88 roots and no
-`codex/context-kernel`.
-
-The source dry-run also observed three non-alias content drifts which this
-bounded Phase did not copy:
-
-```text
-codex/graphify
-codex/persona-distiller-group
-codex/verifier
-```
-
-Mechanism must reconcile those facts and the missing root before deciding
-identity/version lifecycle or producing a successor catalog/snapshot.
-
-## Authority separation
-
-No final source catalog, global identity, Registry snapshot or resolver
-payload was generated or promoted. The incomplete 44a materialization remains
-non-promotable. The existing Mechanism resolver implementation remains
-present but is not Auto-integrated and cannot satisfy the BOUND gate.
-
-```text
-catalog_path_reservation_complete=true
-bound_reference_resolver_implementation_complete=true
-bound_reference_resolver_auto_integration_complete=false
-bound_reference_resolver_gate_satisfied=false
 current_auto_runtime_control_bound=false
 runtime_state_write_permitted=false
 repository_bound=false
+bound_reference_resolver_auto_integration_complete=false
+bound_reference_resolver_gate_satisfied=false
 consumer_first_repository_shards_permitted=false
 canonical_publication_permitted=false
 au_040_daily_jsonl_shard_complete=false
@@ -123,51 +117,51 @@ notification_real_message_metadata_readback_verified=false
 m0c_b_permitted=false
 schedule_authority_resolved=false
 schedule_complete=false
-next_phase=MECHANISM_REGISTRY_SOURCE_DRIFT_RECONCILIATION
 ```
 
 No VERSION, state instance, lock, watermark, queue/outbox entry, shard, index
-shard, daily manifest instance, retention receipt instance, Gmail/network
-operation, activation, canonical publication, automation, App action,
-verifier call, history replay or added time window was performed. The three
-PAUSED automations were not touched.
+shard, daily manifest, retention receipt, Gmail/network operation, activation,
+canonical publication, automation, App action, verifier call, history replay,
+or added time window occurred. The three PAUSED automations were untouched.
 
 ## Validation
 
+Completion requires and records:
+
 ```text
-Auto full suite: 190/190 PASS
-sync + dynamic-profile integration: 15/15 PASS
-fault/privacy seed 271828: 139/139 PASS
-fault/privacy seed 314159: 139/139 PASS
+Auto full suite: 192/192 PASS
+Registry sync + dynamic-profile integration: 15/15 PASS
+fault/privacy seed 271828: 141/141 PASS
+fault/privacy seed 314159: 141/141 PASS
 OpenAIDatabase consumer + architecture: 23/23 PASS
 consumer CLI: PASS; errors=[]; canonical publication=false
-Mechanism: 72 run; 71 pass; one expected cross-owner transition error
-  test_02a_integrated_auto_interface_and_modules_are_exact
-  ACTIVATION_AUTO_INTERFACE_CURRENT_DRIFT
+Mechanism base 5db: 73/73 PASS
+Mechanism transition tree: exact expected cross-owner failures only
+  REGISTRY_AUTO_RESERVATION_INTERFACE_CURRENT_DRIFT
+  ACTIVATION_BOUND_RESOLVER_GENERATED_DRIFT:
+    REGISTRY_AUTO_RESERVATION_INTERFACE_CURRENT_DRIFT
 candidate builder/trust: 31 schemas / 5 policies PASS
-activation control builder/lint: PASS; predecessor raw unchanged
-BOUND resolver builder: byte-equivalent; frozen 89-root draft unchanged
-AU-040 semantic acceptance builder/lint: PASS
-Auto schema/draft/promotion/runtime builders: byte-equivalent
-Auto draft/promotion validators: PASS
+activation, resolver, AU-040 and Auto builders/lints: byte-equivalent
+external full-source dry-run: 88 roots / 20 aliases / no drift
+Git tracked closure: all three synchronized trees exact
+Registry credential scan: PASS; hits=0; aliases=20
+Python 3.9 AST: 19 changed Python files PASS
 Broad command ownership retains the pre-existing external baseline failure:
   top-level script entrypoints: expected 84, observed 90
-  (this Phase changes no OpenAIDatabase path)
 ```
 
 Detached GitHub object/raw readback and owned cleanup are completion-time
-evidence and must only be appended to the external handoff after the ordinary
-FF-safe push succeeds.
+evidence and are reported externally after the FF-safe push.
 
 ## Next exact action
 
-The next owner is Mechanism and the only next phase is
-`MECHANISM_REGISTRY_SOURCE_DRIFT_RECONCILIATION`. It must independently read
-back the verified Auto successor object, its runtime interface, 27 modules,
-sync artifact, 20 Git symlink blobs and three exact removals. It then owns the
-source-drift/lifecycle ruling and any complete catalog/snapshot
-rematerialization decision.
+The only next phase is
+`MECHANISM_REGISTRY_PARITY_COMPLETE_MATERIALIZATION`. Mechanism must
+independently read back the verified Auto successor object and exact current
+interface, then rebuild the four source catalogs and global snapshot from the
+current 88-root content-closed tree. It must retain the reconciled historical
+`context-kernel` references without fabricating a current source root.
 
 This handoff does not authorize resolver Auto integration, BOUND, state,
 canonical run logs, AU-040 completion, Gmail, M0c-B, ACTIVE, schedule changes,
-VERSION, automation, verifier or history replay.
+VERSION, automation, verifier, or history replay.

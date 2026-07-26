@@ -207,6 +207,42 @@
     "retention_days": 30,
     "external_signature_ref": ""
   },
+  "assurance_v22": {
+    "skill_version": "0.0.2.2",
+    "enforced": true,
+    "capability_report": {
+      "path": "CAPABILITY_REPORT.json",
+      "status": "NOT_RUN",
+      "sha256": ""
+    },
+    "acceptance_plan": {
+      "path": "ACCEPTANCE_PLAN.json",
+      "status": "NOT_RUN",
+      "sha256": ""
+    },
+    "command_policy": {
+      "path": "COMMAND_POLICY_REPORT.json",
+      "status": "NOT_RUN",
+      "sha256": "",
+      "unauthorized_execution_count": 0,
+      "evidence_paths": []
+    },
+    "evidence_privacy": {
+      "path": "EVIDENCE_PRIVACY_REPORT.json",
+      "status": "NOT_RUN",
+      "sha256": "",
+      "blocking_findings": 0
+    },
+    "review_panel": {
+      "path": "REVIEW_PANEL.json",
+      "status": "NOT_RUN",
+      "sha256": "",
+      "rounds_required": 2,
+      "roles_per_round": 6,
+      "independence_claim": "UNVERIFIED",
+      "evidence_paths": []
+    }
+  },
   "verdict": {
     "value": "",
     "action": "",

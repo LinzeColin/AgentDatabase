@@ -22,6 +22,7 @@ from CodexSkills.registry.auto.runtime.catalog_reservation import (
     is_reserved_registry_relative_path,
     reserved_registry_paths,
 )
+from CodexSkills.registry.auto.tools import build_runtime_interface
 
 
 REPO_ROOT = Path(__file__).resolve().parents[4]
@@ -167,6 +168,53 @@ class RuntimeCatalogReservationTests(unittest.TestCase):
                 / "CodexSkills/registry/codex/context-kernel"
             ).exists()
         )
+
+    def test_exact_three_path_source_content_materialization_is_closed(
+        self,
+    ) -> None:
+        evidence = (
+            build_runtime_interface._source_content_sync_materialization()
+        )
+        self.assertTrue(evidence["source_content_sync_complete"])
+        self.assertTrue(evidence["source_mirror_parity_satisfied"])
+        self.assertFalse(evidence["source_root_parity_satisfied"])
+        self.assertFalse(evidence["whole_source_parity_satisfied"])
+        self.assertEqual(
+            evidence["exact_synchronized_paths"],
+            [
+                "codex/graphify",
+                "codex/persona-distiller-group",
+                "codex/verifier",
+            ],
+        )
+        self.assertEqual(evidence["remaining_content_drift_paths"], [])
+        self.assertEqual(
+            [
+                row["content_digest"]
+                for row in evidence["synchronized_entries"]
+            ],
+            [
+                "816bfb795d8998983a3df2b8786a2d1c"
+                "691e9e2280dd7be2bdc07acd47775587",
+                "eaf8f8e32b1ade683387346adec8a21b"
+                "241541567e910609247426ec3626b921",
+                "7727bcfb4d03bcc97fafeedea1f8e773"
+                "945e6be70f0351e8ca32525ff1e8d556",
+            ],
+        )
+
+    def test_untracked_source_content_fails_closed(self) -> None:
+        empty = mock.Mock(stdout=b"")
+        with mock.patch.object(
+            build_runtime_interface.subprocess,
+            "run",
+            return_value=empty,
+        ):
+            with self.assertRaisesRegex(
+                ValueError,
+                "AUTO_SOURCE_CONTENT_SYNC_GIT_TRACKED_CLOSURE_MISMATCH",
+            ):
+                build_runtime_interface._source_content_sync_materialization()
 
     def test_reserved_paths_survive_enumeration_and_deletion(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:

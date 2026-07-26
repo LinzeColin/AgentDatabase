@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Initialize a verifier v2.1 acceptance evidence directory."""
+"""Initialize a Verifier v0.0.2.2 acceptance evidence directory (evidence schema 2.1)."""
 
 from __future__ import annotations
 
@@ -16,6 +16,7 @@ from typing import Optional
 
 
 TEMPLATE_MAP = {
+    "ACCEPTANCE_REQUEST.json": "ACCEPTANCE_REQUEST.json",
     "ACCEPTANCE_REQUEST.yaml": "ACCEPTANCE_REQUEST.yaml",
     "TEST_MATRIX.md": "TEST_MATRIX.md",
     "HUMAN_JOURNEY.md": "HUMAN_JOURNEY.md",
@@ -27,6 +28,14 @@ TEMPLATE_MAP = {
     "RUN_MANIFEST.yaml": "RUN_MANIFEST.yaml",
     "TRACEABILITY_MATRIX.json": "TRACEABILITY_MATRIX.json",
     "GALLERY_PAIRS.csv": "pairs.csv",
+    "CAPABILITY_REPORT.json": "CAPABILITY_REPORT.json",
+    "ACCEPTANCE_PLAN.json": "ACCEPTANCE_PLAN.json",
+    "REVIEW_PANEL.json": "REVIEW_PANEL.json",
+    "EVIDENCE_POLICY.json": "EVIDENCE_POLICY.json",
+    "EVIDENCE_PRIVACY_REPORT.json": "EVIDENCE_PRIVACY_REPORT.json",
+    "COMMAND_LOG.json": "COMMAND_LOG.json",
+    "COMMAND_POLICY_REPORT.json": "COMMAND_POLICY_REPORT.json",
+    "WAIVER_TEMPLATE.json": "WAIVER_TEMPLATE.json",
 }
 EVIDENCE_DIRECTORIES = (
     "logs",
@@ -110,6 +119,14 @@ def initialize(
         traceability["target_project_name"] = project
         _atomic_json(traceability_path, traceability)
 
+        request_json_path = destination / "ACCEPTANCE_REQUEST.json"
+        request_json = json.loads(request_json_path.read_text(encoding="utf-8"))
+        request_json["owner_input"]["target_project"]["name"] = project
+        request_json["owner_input"]["target_project"]["path"] = target_path
+        request_json["preferences"]["decision_scope"] = decision_scope
+        _atomic_json(request_json_path, request_json)
+
+        # Legacy human-readable YAML is retained for v2.1 compatibility, but planning uses strict JSON.
         request_path = destination / "ACCEPTANCE_REQUEST.yaml"
         request = request_path.read_text(encoding="utf-8")
         request = request.replace('    name: ""', f'    name: {json.dumps(project, ensure_ascii=False)}', 1)
@@ -129,7 +146,8 @@ def initialize(
 def parse_args(argv: Optional[list[str]] = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("output_root", type=Path)
-    parser.add_argument("project")
+    parser.add_argument("project_positional", nargs="?")
+    parser.add_argument("--project", dest="project_option")
     parser.add_argument("--run-id")
     parser.add_argument("--target-path", default="")
     parser.add_argument(
@@ -142,10 +160,17 @@ def parse_args(argv: Optional[list[str]] = None) -> argparse.Namespace:
 
 def main(argv: Optional[list[str]] = None) -> int:
     args = parse_args(argv)
+    if args.project_positional and args.project_option and args.project_positional != args.project_option:
+        print("error: positional project and --project disagree", file=sys.stderr)
+        return 2
+    project = args.project_option or args.project_positional
+    if not project:
+        print("error: project is required (positional or --project)", file=sys.stderr)
+        return 2
     try:
         destination = initialize(
             args.output_root,
-            args.project,
+            project,
             args.run_id,
             args.decision_scope,
             args.target_path,

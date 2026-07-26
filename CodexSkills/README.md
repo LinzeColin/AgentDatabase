@@ -1,6 +1,6 @@
 # CodexSkills
 
-本机全部 Skill 的仓库镜像：**88 份实例 / 73 个不同名字**，3637 个文件，约 106 MB。
+本机全部 Skill 的仓库镜像：**88 份实例 / 73 个不同名字**，3675 个文件，约 107 MB。
 
 **由 `sync_skills.py` 自动生成，请勿手工编辑本文件。**
 
@@ -118,7 +118,7 @@ python3 CodexSkills/sync_skills.py --dry-run  # 只看差异
 | [`use-railway`](registry/agents/use-railway/SKILL.md) | `agents` | Operate Railway infrastructure: sign up for or sign in to a Railway account, create projects, provision services and databases, manage object storage buckets, deploy code, configure environments and variables, manage domains, troubleshoot failures, check statu… |
 | [`use-railway`](registry/codex/use-railway/SKILL.md) | `codex` | Operate Railway infrastructure: sign up for or sign in to a Railway account, create projects, provision services and databases, manage object storage buckets, deploy code, configure environments and variables, manage domains, troubleshoot failures, check statu… |
 | [`verifier`](registry/claude/verifier/SKILL.md) | `claude` | Independently verify exactly one selected software project per run and issue an evidence-backed acceptance or release verdict. Use when the user says 验收一下, 调用软件验收skill, 软件验收, verifier, or asks for release recheck. When an approved Product-Design-Taskpack exist… |
-| [`verifier`](registry/codex/verifier/SKILL.md) | `codex` | Independently verify exactly one selected software project per run and issue an evidence-backed acceptance or release verdict. Use when the user says 验收一下, 调用软件验收skill, 软件验收, verifier, or asks for release recheck. When an approved Product-Design-Taskpack exist… |
+| [`verifier`](registry/codex/verifier/SKILL.md) | `codex` | Independently accept or block exactly one software project/version using a frozen acceptance contract, exact subject identity, risk-driven real execution, Requirement→Acceptance→Oracle→Test→Evidence traceability, release/AI gates, and sealed evidence. Use for… |
 | [`video-replica`](registry/claude/video-replica/SKILL.md) | `claude` | Evidence-backed video experience replication from local videos, screen recordings, prototype walkthroughs, live URLs, or runnable source, ending by default with one validated ZIP deliverable in the user's Downloads directory. Use when the user says “视频复刻skill”… |
 | [`video-replica`](registry/codex/video-replica/SKILL.md) | `codex` | Evidence-backed video experience replication from local videos, screen recordings, prototype walkthroughs, live URLs, or runnable source, ending by default with one validated ZIP deliverable in the user's Downloads directory. Use when the user says “视频复刻skill”… |
 | [`webapp-testing`](registry/codex/webapp-testing/SKILL.md) | `codex` | Toolkit for interacting with and testing local web applications using Playwright. Supports verifying frontend functionality, debugging UI behavior, capturing browser screenshots, and viewing browser logs. |

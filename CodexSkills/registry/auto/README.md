@@ -64,7 +64,8 @@ resolve schemas over the network, or install dependencies at runtime.
   e643/85ed historical Git-object closure and current repository-binding byte
   self-consistency without requiring current working-tree control/Mechanism
   bytes to equal e643. It returns
-  `UNBOUND_REPOSITORY_CONTROL_SYNC_PENDING` and can never return a production
+  `UNBOUND_REGISTRY_SOURCE_CONTENT_SYNCED_CONTROL_PENDING` and can never
+  return a production
   `BootstrapContext`.
 - `runtime/notification.py` keeps the actual recipient and provider payload in
   a repo-external outbox; public receipts contain only `recipient_ref`.
@@ -290,14 +291,27 @@ The exact final 31/5 candidate, V2 consumer, and predecessor control remain
 unchanged. The Registry reservation materialization records exact alias parity
 as 20/20 while separately recording source-root drift: the historical source
 object had 89 roots and the current source has 88, with
-`codex/context-kernel` missing. The mirror removal is auditable, but the
-historical incomplete catalog/snapshot materialization is not promotable and
-alias parity is never interpreted as whole-source parity. The next phase is
-`MECHANISM_REGISTRY_SOURCE_DRIFT_RECONCILIATION`: Mechanism must independently
-read back this Auto object, reconcile the missing root and outstanding
-non-alias content drift, then decide whether a new catalog/snapshot
-materialization can be promoted. The Auto interface contains 27 runtime
-modules and a separately digested sync executor. It keeps
+`codex/context-kernel` missing. Mechanism records that missing root as
+`UNOBSERVED`, retains its historical references, and forbids inferred
+lifecycle or promotion.
+
+The bounded source-content phase exact-synced only `codex/graphify`,
+`codex/persona-distiller-group`, and `codex/verifier`. Its machine evidence
+binds every mirror file through the existing lstat-first digest contract,
+requires the complete physical set to be Git tracked, and proves no remaining
+current source/mirror content drift. The 88-root/20-alias closure is distinct
+from historical 89-root parity: `source_mirror_parity_satisfied=true` while
+`source_root_parity_satisfied=false` and
+`whole_source_parity_satisfied=false`. No reserved catalog/global namespace,
+catalog, or Registry snapshot was created.
+
+The next phase is
+`MECHANISM_REGISTRY_PARITY_COMPLETE_MATERIALIZATION`: Mechanism must
+independently read back this Auto object, rebuild the four catalogs and
+snapshot from the current 88-root successor, retain the reconciled historical
+`context-kernel` references without restoring a source root, and decide
+promotion. The Auto interface contains 27 runtime modules and a separately
+digested sync executor. It keeps
 `bound_reference_resolver_auto_integration_complete=false`,
 `bound_reference_resolver_gate_satisfied=false`,
 `current_auto_runtime_control_bound=false`,

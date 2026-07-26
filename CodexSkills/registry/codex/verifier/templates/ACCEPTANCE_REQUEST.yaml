@@ -128,3 +128,32 @@ evidence:
   output_root: ""
   private_sensitive_evidence_root: ""
   retention_days: 30
+
+# v2.2 运行控制；为空时由 plan_acceptance.py 按风险保守生成。
+execution_budget:
+  max_commands: null
+  max_elapsed_seconds: null
+  max_output_bytes: null
+
+command_policy:
+  allowed_argv: [] # 参数数组；禁止 shell 拼接
+  allowed_working_directories: []
+  allowed_network_targets: []
+  forbidden_patterns:
+    - "curl ... | sh"
+    - "shell=True"
+    - "credential export"
+  budget_exhaustion_action: "STOP_AND_REPORT_PARTIAL"
+
+review_panel:
+  required_roles: 6
+  rounds: 2
+  require_fresh_context_for_critical_positive: true
+  same_context_roles_count_as_independent: false
+
+evidence_policy:
+  classification: "internal"
+  private_evidence_root: ""
+  external_sharing_authorized: false
+  redaction_required: true
+  retention_expires_at: ""

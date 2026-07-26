@@ -44,6 +44,120 @@ TINY_PNG = base64.b64decode(
 )
 
 
+def _write_json(path: Path, value: object) -> None:
+    path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
+def _file_sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def refresh_v22_assurance(run_dir: Path, manifest: dict, subject_identity: str | None = None) -> None:
+    subject_identity = subject_identity or (
+        manifest["subject"].get("image_digest")
+        or manifest["subject"].get("artifact_sha256")
+        or manifest["subject"].get("source_snapshot_sha256")
+        or manifest["subject"].get("git_head")
+    )
+    capability = {
+        "schema_version": "1.0",
+        "generated_at": manifest["run"]["started_at"],
+        "read_only": True,
+        "repository": {
+            "root": manifest["subject"].get("repository_root", "/tmp/repo"),
+            "target_project_path": manifest["scope"]["target_project_path"],
+            "target_inventory_digest_sha256": "f" * 64,
+            "observed_entry_count": 10,
+            "walk_truncated": False,
+            "unsafe_entries": [],
+            "case_collisions": [],
+        },
+        "git": {},
+        "environment": {},
+        "project": {"ecosystems": ["python"], "markers": [], "ci_systems": [], "candidate_commands": []},
+        "risk": {"signals": [], "suggested_profile": manifest["run"]["profile"], "requires_owner_authorization_before_side_effects": True},
+        "limitations": [],
+    }
+    plan = {
+        "schema_version": "1.0",
+        "generated_at": manifest["run"]["started_at"],
+        "inputs": {"request_sha256": "1" * 64, "capabilities_sha256": "2" * 64},
+        "target": {
+            "project_name": manifest["scope"]["target_project_name"],
+            "project_path": manifest["scope"]["target_project_path"],
+            "expected_outcome": "observable core task succeeds",
+            "single_project": True,
+        },
+        "decision_scope": manifest["release"]["decision_scope"],
+        "profile": {"selected": manifest["run"]["profile"], "reasons": ["test fixture"]},
+        "risk": {"level": manifest["run"]["risk_level"], "score": 0, "triggers": manifest["run"]["risk_triggers"], "reasons": ["test fixture"]},
+        "dimensions": [],
+        "execution_budget": {"max_commands": 20, "max_elapsed_seconds": 900, "max_output_bytes": 25000000, "max_network_requests": 0, "max_cost": None, "budget_exhaustion_action": "STOP_AND_REPORT_PARTIAL"},
+        "command_allowlist": [],
+        "command_policy": {"allowed_working_directories": [], "allowed_network_targets": [], "forbidden_patterns": ["curl ... | sh"], "budget_exhaustion_action": "STOP_AND_REPORT_PARTIAL"},
+        "authorization": {},
+        "hard_stops": ["identity drift"],
+        "independence": {},
+        "required_artifacts": [],
+        "unknowns": [],
+    }
+    command_log = {"schema_version": "1.0", "commands": []}
+    command_report = {
+        "schema_version": "1.0", "generated_at": manifest["run"]["started_at"], "status": "PASS",
+        "plan_path": "ACCEPTANCE_PLAN.json", "command_log_path": "COMMAND_LOG.json",
+        "authorized_command_count": 0, "executed_command_count": 0, "unauthorized_execution_count": 0,
+        "budget_exceeded": False, "unmatched_commands": [], "forbidden_pattern_matches": [],
+        "budget_exceeded_details": [], "recorded_commands": [], "validation_errors": [],
+        "totals": {"elapsed_seconds": 0, "output_bytes": 0, "network_requests": 0, "cost": 0},
+        "evidence_paths": ["COMMAND_LOG.json"], "limitations": [],
+    }
+    privacy = {
+        "schema_version": "1.0", "generated_at": manifest["run"]["started_at"], "root": str(run_dir),
+        "scanned_file_count": 1, "scanned_total_bytes": 1, "findings": [], "blocking_findings": [],
+        "binary_files": [], "skipped_large_text": [], "filesystem_issues": [], "status": "PASS", "limitations": [],
+    }
+    rounds = [
+        {
+            "round": number, "status": "COMPLETE", "panel_verdict": "PASS", "response_count": 6,
+            "subject_identity": subject_identity, "independence_claim": "ROLE_SEPARATED_REVIEW",
+            "independent_context_count": 1, "open_finding_count": 0, "blocker_count": 0,
+            "decision_path": f"raw-results/review-round-{number}.json", "decision_sha256": str(number) * 64,
+        }
+        for number in (1, 2)
+    ]
+    panel = {
+        "schema_version": "1.0", "generated_at": manifest["run"]["started_at"], "status": "COMPLETE",
+        "panel_verdict": "PASS", "subject_identity": subject_identity, "independence_claim": "ROLE_SEPARATED_REVIEW",
+        "rounds": rounds, "unresolved_disagreements": [], "open_findings": [], "blockers": [],
+        "evidence_paths": [], "limitations": ["test fixture"],
+    }
+    values = {
+        "CAPABILITY_REPORT.json": capability,
+        "ACCEPTANCE_PLAN.json": plan,
+        "COMMAND_LOG.json": command_log,
+        "COMMAND_POLICY_REPORT.json": command_report,
+        "EVIDENCE_PRIVACY_REPORT.json": privacy,
+        "REVIEW_PANEL.json": panel,
+    }
+    for name, value in values.items():
+        _write_json(run_dir / name, value)
+    assurance = manifest["assurance_v22"]
+    assurance.update({"skill_version": "0.0.2.2", "enforced": True})
+    assurance["capability_report"].update({"status": "PASS", "sha256": _file_sha256(run_dir / "CAPABILITY_REPORT.json")})
+    assurance["acceptance_plan"].update({"status": "PASS", "sha256": _file_sha256(run_dir / "ACCEPTANCE_PLAN.json")})
+    assurance["command_policy"].update({
+        "status": "PASS", "sha256": _file_sha256(run_dir / "COMMAND_POLICY_REPORT.json"),
+        "unauthorized_execution_count": 0, "evidence_paths": ["COMMAND_LOG.json"],
+    })
+    assurance["evidence_privacy"].update({
+        "status": "PASS", "sha256": _file_sha256(run_dir / "EVIDENCE_PRIVACY_REPORT.json"), "blocking_findings": 0,
+    })
+    assurance["review_panel"].update({
+        "status": "PASS", "sha256": _file_sha256(run_dir / "REVIEW_PANEL.json"),
+        "rounds_required": 2, "roles_per_round": 6, "independence_claim": "ROLE_SEPARATED_REVIEW", "evidence_paths": [],
+    })
+
+
 def prepare_valid_pass(root: Path, *, ai: bool = False) -> Path:
     run_dir = initializer.initialize(
         root,
@@ -273,6 +387,7 @@ def prepare_valid_pass(root: Path, *, ai: bool = False) -> Path:
     (run_dir / "TRACEABILITY_MATRIX.json").write_text(
         json.dumps(traceability, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
+    refresh_v22_assurance(run_dir, manifest, "a" * 40)
     manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     (run_dir / "VERDICT.md").write_text(
         """ACTION: NONE
@@ -391,6 +506,7 @@ def prepare_valid_release_candidate(root: Path) -> Path:
     traceability_path.write_text(
         json.dumps(traceability, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
+    refresh_v22_assurance(run_dir, manifest, artifact_sha)
     manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     (run_dir / "VERDICT.md").write_text(
         f"""ACTION: NONE
@@ -564,6 +680,12 @@ class InitializerTests(unittest.TestCase):
                 "RELEASE_ASSURANCE.md",
                 "AI_EVAL_MATRIX.md",
                 "TRACEABILITY_MATRIX.json",
+                "ACCEPTANCE_REQUEST.json",
+                "CAPABILITY_REPORT.json",
+                "COMMAND_LOG.json",
+                "COMMAND_POLICY_REPORT.json",
+                "EVIDENCE_PRIVACY_REPORT.json",
+                "REVIEW_PANEL.json",
             ):
                 self.assertTrue((destination / name).is_file())
             manifest = json.loads((destination / "RUN_MANIFEST.yaml").read_text(encoding="utf-8"))
@@ -626,6 +748,45 @@ class FinalizerTests(unittest.TestCase):
             manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
             _, errors = finalizer.validate_run(run_dir)
             self.assertTrue(any("identity" in error for error in errors), errors)
+
+    def test_positive_verdict_rejects_tampered_v22_bound_report(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            run_dir = prepare_valid_pass(Path(temporary))
+            capability_path = run_dir / "CAPABILITY_REPORT.json"
+            capability_path.write_text(capability_path.read_text(encoding="utf-8") + " ", encoding="utf-8")
+            _, errors = finalizer.validate_run(run_dir)
+            self.assertTrue(any("capability_report.sha256 does not match" in error for error in errors), errors)
+
+    def test_positive_verdict_requires_two_complete_six_role_rounds(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            run_dir = prepare_valid_pass(Path(temporary))
+            panel_path = run_dir / "REVIEW_PANEL.json"
+            panel_value = json.loads(panel_path.read_text(encoding="utf-8"))
+            panel_value["rounds"].pop()
+            _write_json(panel_path, panel_value)
+            manifest_path = run_dir / "RUN_MANIFEST.yaml"
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            manifest["assurance_v22"]["review_panel"]["sha256"] = _file_sha256(panel_path)
+            _write_json(manifest_path, manifest)
+            _, errors = finalizer.validate_run(run_dir)
+            self.assertTrue(any("exactly two rounds" in error for error in errors), errors)
+
+    def test_positive_verdict_rejects_unauthorized_command_report(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            run_dir = prepare_valid_pass(Path(temporary))
+            report_path = run_dir / "COMMAND_POLICY_REPORT.json"
+            report = json.loads(report_path.read_text(encoding="utf-8"))
+            report["status"] = "BLOCKED"
+            report["unauthorized_execution_count"] = 1
+            report["unmatched_commands"] = [{"id": "CMD-999", "argv": ["unknown"]}]
+            _write_json(report_path, report)
+            manifest_path = run_dir / "RUN_MANIFEST.yaml"
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            manifest["assurance_v22"]["command_policy"]["sha256"] = _file_sha256(report_path)
+            _write_json(manifest_path, manifest)
+            _, errors = finalizer.validate_run(run_dir)
+            self.assertTrue(any("status PASS" in error for error in errors), errors)
+            self.assertTrue(any("zero unauthorized" in error for error in errors), errors)
 
     def test_pass_with_blocking_not_run_is_rejected(self):
         with tempfile.TemporaryDirectory() as temporary:

@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "",
+  "status": "NOT_RUN",
+  "plan_path": "ACCEPTANCE_PLAN.json",
+  "command_log_path": "COMMAND_LOG.json",
+  "authorized_command_count": 0,
+  "executed_command_count": 0,
+  "unauthorized_execution_count": 0,
+  "budget_exceeded": false,
+  "unmatched_commands": [],
+  "forbidden_pattern_matches": [],
+  "evidence_paths": [],
+  "limitations": [
+    "This report proves recorded command-policy reconciliation, not that an uninstrumented command was impossible."
+  ]
+}

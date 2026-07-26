@@ -109,6 +109,72 @@ EXPECTED_RESOLVER_INTERFACE_RAW_SHA256 = (
     "0fe26ab55d92a1c6f5628e2a8d27bec"
     "bdcc839ccfd73372150a2339ffe7eb4cb"
 )
+SOURCE_CONTENT_SYNC_CONTROL_GIT_OBJECT = (
+    "sha1:5db5beecf3de7ac916020ca988f6e875891e19b1"
+)
+EXPECTED_SOURCE_CONTENT_SYNC_CONTROL_RAW_SHA256 = (
+    "a31751bf1258f646412aba84e0b5c46f"
+    "84f09b77e33156caea372873b819ff36"
+)
+EXPECTED_SOURCE_CONTENT_SYNC_RESOLVER_RAW_SHA256 = (
+    "38c7952ae712e6d4543bb4f4c1f3e5f8"
+    "a98b00b36780c99bfce6944a722eabf0"
+)
+SOURCE_DRIFT_RECONCILIATION_REPO_PATH = (
+    "CodexSkills/governance/registry/"
+    "source-drift-reconciliation.v1.json"
+)
+EXPECTED_SOURCE_DRIFT_RECONCILIATION_RAW_SHA256 = (
+    "f36f20f8ee8551eae155c5b58ba0d776"
+    "cc4fdd2b9f08d3186519ce052a297120"
+)
+EXPECTED_SOURCE_DRIFT_RECONCILIATION_SELF_DIGEST = (
+    "24d02db5182463912074c109f2b5be350"
+    "126d62340f58e6463755edbad1b799c"
+)
+SOURCE_CONTENT_SYNC_BOUND_AUTO_GIT_OBJECT = (
+    "sha1:b5a32c817e4016f595fa33caed6bce1d51199e63"
+)
+SOURCE_CONTENT_SYNC_BOUND_AUTO_INTERFACE_RAW_SHA256 = (
+    "e88ec8c711434619756ee8f91c451e94"
+    "1501764e30e4a7fff310d8685b02140a"
+)
+SOURCE_CONTENT_SYNC_BOUND_AUTO_MODULE_COUNT = 27
+SOURCE_CONTENT_SYNC_NEXT_PHASE = (
+    "MECHANISM_REGISTRY_PARITY_COMPLETE_MATERIALIZATION"
+)
+SOURCE_CONTENT_SYNC_ENTRIES = [
+    {
+        "alias_count": 0,
+        "byte_count": 13373911,
+        "content_digest": (
+            "816bfb795d8998983a3df2b8786a2d1c"
+            "691e9e2280dd7be2bdc07acd47775587"
+        ),
+        "regular_file_count": 695,
+        "source_relative_path": "codex/graphify",
+    },
+    {
+        "alias_count": 0,
+        "byte_count": 1064137,
+        "content_digest": (
+            "eaf8f8e32b1ade683387346adec8a21b"
+            "241541567e910609247426ec3626b921"
+        ),
+        "regular_file_count": 35,
+        "source_relative_path": "codex/persona-distiller-group",
+    },
+    {
+        "alias_count": 0,
+        "byte_count": 525884,
+        "content_digest": (
+            "7727bcfb4d03bcc97fafeedea1f8e773"
+            "945e6be70f0351e8ca32525ff1e8d556"
+        ),
+        "regular_file_count": 61,
+        "source_relative_path": "codex/verifier",
+    },
+]
 INCOMPLETE_REGISTRY_SNAPSHOT_DIGEST = (
     "31f49c8ffa3bd2d268feec49b2869f40"
     "9d61a5bfbb0b03f382bc562996b7fa76"
@@ -1014,6 +1080,351 @@ def _catalog_reservation_predecessor_observation():
     }
 
 
+def _source_content_sync_predecessor_observation():
+    control_raw = _git_blob(
+        SOURCE_CONTENT_SYNC_CONTROL_GIT_OBJECT,
+        CONTROL_INTERFACE_REPO_PATH,
+    )
+    resolver_raw = _git_blob(
+        SOURCE_CONTENT_SYNC_CONTROL_GIT_OBJECT,
+        RESOLVER_INTERFACE_REPO_PATH,
+    )
+    reconciliation_raw = _git_blob(
+        SOURCE_CONTENT_SYNC_CONTROL_GIT_OBJECT,
+        SOURCE_DRIFT_RECONCILIATION_REPO_PATH,
+    )
+    if (
+        hashlib.sha256(control_raw).hexdigest()
+        != EXPECTED_SOURCE_CONTENT_SYNC_CONTROL_RAW_SHA256
+    ):
+        raise ValueError(
+            "AUTO_SOURCE_CONTENT_SYNC_CONTROL_RAW_DIGEST_MISMATCH"
+        )
+    if (
+        hashlib.sha256(resolver_raw).hexdigest()
+        != EXPECTED_SOURCE_CONTENT_SYNC_RESOLVER_RAW_SHA256
+    ):
+        raise ValueError(
+            "AUTO_SOURCE_CONTENT_SYNC_RESOLVER_RAW_DIGEST_MISMATCH"
+        )
+    if (
+        hashlib.sha256(reconciliation_raw).hexdigest()
+        != EXPECTED_SOURCE_DRIFT_RECONCILIATION_RAW_SHA256
+    ):
+        raise ValueError(
+            "AUTO_SOURCE_CONTENT_SYNC_RECONCILIATION_RAW_DIGEST_MISMATCH"
+        )
+    try:
+        control = json.loads(
+            control_raw.decode("utf-8"),
+            object_pairs_hook=_strict_object,
+        )
+        resolver = json.loads(
+            resolver_raw.decode("utf-8"),
+            object_pairs_hook=_strict_object,
+        )
+        reconciliation = json.loads(
+            reconciliation_raw.decode("utf-8"),
+            object_pairs_hook=_strict_object,
+        )
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise ValueError(
+            "AUTO_SOURCE_CONTENT_SYNC_PREDECESSOR_JSON_INVALID"
+        ) from exc
+
+    pending_paths = [
+        entry["source_relative_path"]
+        for entry in SOURCE_CONTENT_SYNC_ENTRIES
+    ]
+    transport = control.get("transport_runtime_interface")
+    transition = control.get("transition_contract")
+    bound_resolver = control.get("bound_reference_resolver_contract")
+    control_reconciliation = (
+        bound_resolver.get("source_drift_reconciliation")
+        if isinstance(bound_resolver, dict)
+        else None
+    )
+    resolver_reconciliation = resolver.get("source_drift_reconciliation")
+    resolver_snapshot = resolver.get("registry_snapshot")
+    resolver_sync = resolver.get("current_sync_executor_contract")
+    disposition = reconciliation.get("disposition")
+    auto_evidence = reconciliation.get("auto_evidence")
+    if (
+        control.get("status") != "DRAFT_NON_ACTIVE"
+        or control.get("activation_forbidden") is not True
+        or control.get("base_auto_git_object_id")
+        != SOURCE_CONTENT_SYNC_BOUND_AUTO_GIT_OBJECT
+        or control.get("next_phase") != "AUTO_REGISTRY_SOURCE_CONTENT_SYNC"
+        or not isinstance(transport, dict)
+        or transport.get("verified_git_object_id")
+        != SOURCE_CONTENT_SYNC_BOUND_AUTO_GIT_OBJECT
+        or transport.get("artifact_digest")
+        != SOURCE_CONTENT_SYNC_BOUND_AUTO_INTERFACE_RAW_SHA256
+        or transport.get("module_count")
+        != SOURCE_CONTENT_SYNC_BOUND_AUTO_MODULE_COUNT
+        or transport.get("integration_state")
+        != "REGISTRY_CATALOG_RESERVED_SOURCE_CONTENT_SYNC_PENDING"
+        or not isinstance(transition, dict)
+        or transition.get("bound_reference_resolver_auto_integration_complete")
+        is not False
+        or transition.get("bound_reference_resolver_gate_satisfied")
+        is not False
+        or transition.get("bound_reference_resolver_implementation_complete")
+        is not True
+        or transition.get("canonical_publication_permitted") is not False
+        or transition.get("catalog_path_reservation_complete") is not True
+        or transition.get("effective_runtime_state_write_permitted")
+        is not False
+        or transition.get("external_gmail_ready") is not False
+        or transition.get("external_state_ready") is not False
+        or transition.get("m0c_b_permitted") is not False
+        or transition.get("repository_bound") is not True
+        or transition.get("runtime_state_instance_created") is not False
+        or transition.get("runtime_state_write_gate_status")
+        != "BOUND_REFERENCE_RESOLVER_SOURCE_CONTENT_SYNC_PENDING"
+        or transition.get("runtime_state_write_permitted") is not True
+        or transition.get("schedule_authority_resolved") is not False
+        or transition.get("schedule_complete") is not False
+        or transition.get("source_content_sync_required") is not True
+        or transition.get("source_drift_reconciliation_complete") is not True
+        or not isinstance(bound_resolver, dict)
+        or bound_resolver.get("artifact_digest")
+        != EXPECTED_SOURCE_CONTENT_SYNC_RESOLVER_RAW_SHA256
+        or bound_resolver.get("auto_integration_complete") is not False
+        or bound_resolver.get("gate_satisfied") is not False
+        or bound_resolver.get("implementation_complete") is not True
+        or bound_resolver.get("post_source_content_sync_rebuild_required")
+        is not True
+        or bound_resolver.get("production_trust_permitted") is not False
+        or bound_resolver.get("source_content_sync_required") is not True
+        or bound_resolver.get("source_mirror_parity_satisfied") is not False
+        or not isinstance(control_reconciliation, dict)
+        or control_reconciliation.get("artifact_digest")
+        != EXPECTED_SOURCE_DRIFT_RECONCILIATION_SELF_DIGEST
+        or control_reconciliation.get("missing_source_skill_roots")
+        != MISSING_SOURCE_SKILL_ROOTS
+        or control_reconciliation.get("pending_content_drift_paths")
+        != pending_paths
+        or control_reconciliation.get("source_drift_reconciliation_complete")
+        is not True
+        or resolver.get("status")
+        != "DRAFT_NON_ACTIVE_SOURCE_DRIFT_RECONCILED"
+        or resolver.get("activation_forbidden") is not True
+        or resolver.get("auto_integration_complete") is not False
+        or resolver.get("canonical_publication_permitted") is not False
+        or resolver.get("current_materialization_promotable") is not False
+        or resolver.get("next_phase") != "AUTO_REGISTRY_SOURCE_CONTENT_SYNC"
+        or resolver.get("post_source_content_sync_rebuild_required")
+        is not True
+        or resolver.get("production_trust_permitted") is not False
+        or resolver.get("source_content_sync_required") is not True
+        or resolver.get("source_drift_reconciliation_complete") is not True
+        or not isinstance(resolver_reconciliation, dict)
+        or resolver_reconciliation.get("artifact_digest")
+        != EXPECTED_SOURCE_DRIFT_RECONCILIATION_SELF_DIGEST
+        or resolver_reconciliation.get("missing_source_skill_roots")
+        != MISSING_SOURCE_SKILL_ROOTS
+        or resolver_reconciliation.get("pending_content_drift_paths")
+        != pending_paths
+        or not isinstance(resolver_snapshot, dict)
+        or resolver_snapshot.get("source_mirror_parity_satisfied")
+        is not False
+        or not isinstance(resolver_sync, dict)
+        or resolver_sync.get("verified_git_object_id")
+        != SOURCE_CONTENT_SYNC_BOUND_AUTO_GIT_OBJECT
+        or resolver_sync.get("artifact_digest")
+        != hashlib.sha256(
+            _git_blob(
+                SOURCE_CONTENT_SYNC_BOUND_AUTO_GIT_OBJECT,
+                "CodexSkills/sync_skills.py",
+            )
+        ).hexdigest()
+        or resolver_sync.get("reserved_registry_paths_excluded_from_deletion")
+        is not True
+        or resolver_sync.get(
+            "reserved_registry_paths_excluded_from_skill_enumeration"
+        )
+        is not True
+        or reconciliation.get("status")
+        != "DRAFT_NON_ACTIVE_SOURCE_DRIFT_RECONCILED"
+        or reconciliation.get("artifact_digest")
+        != EXPECTED_SOURCE_DRIFT_RECONCILIATION_SELF_DIGEST
+        or reconciliation.get("next_phase")
+        != "AUTO_REGISTRY_SOURCE_CONTENT_SYNC"
+        or not isinstance(auto_evidence, dict)
+        or auto_evidence.get("verified_git_object_id")
+        != SOURCE_CONTENT_SYNC_BOUND_AUTO_GIT_OBJECT
+        or auto_evidence.get("artifact_digest")
+        != SOURCE_CONTENT_SYNC_BOUND_AUTO_INTERFACE_RAW_SHA256
+        or reconciliation.get("pending_content_drift")
+        != [
+            {
+                "action_owner": "AUTO",
+                "required_action": "EXACT_CONTENT_SYNC",
+                "source_relative_path": path,
+            }
+            for path in pending_paths
+        ]
+        or not isinstance(disposition, dict)
+        or disposition.get("historical_registry_records_retained")
+        is not True
+        or disposition.get("lifecycle_transition_permitted") is not False
+        or disposition.get("missing_root_observation_state") != "UNOBSERVED"
+        or disposition.get("promotion_permitted") is not False
+    ):
+        raise ValueError(
+            "AUTO_SOURCE_CONTENT_SYNC_PREDECESSOR_CONTRACT_MISMATCH"
+        )
+    for artifact in resolver.get("runtime_artifacts", []):
+        if (
+            not isinstance(artifact, dict)
+            or hashlib.sha256(
+                _git_blob(
+                    SOURCE_CONTENT_SYNC_CONTROL_GIT_OBJECT,
+                    artifact.get("relative_path", ""),
+                )
+            ).hexdigest()
+            != artifact.get("artifact_digest")
+        ):
+            raise ValueError(
+                "AUTO_SOURCE_CONTENT_SYNC_RESOLVER_RUNTIME_DRIFT"
+            )
+    return {
+        "bound_auto_git_object_id": (
+            SOURCE_CONTENT_SYNC_BOUND_AUTO_GIT_OBJECT
+        ),
+        "bound_auto_module_count": SOURCE_CONTENT_SYNC_BOUND_AUTO_MODULE_COUNT,
+        "bound_auto_runtime_interface_raw_sha256": (
+            SOURCE_CONTENT_SYNC_BOUND_AUTO_INTERFACE_RAW_SHA256
+        ),
+        "canonical_control_path": CONTROL_INTERFACE_REPO_PATH,
+        "control_interface_raw_sha256": (
+            EXPECTED_SOURCE_CONTENT_SYNC_CONTROL_RAW_SHA256
+        ),
+        "control_root_status": control["status"],
+        "external_control_mode": "DRAFT_NON_ACTIVE_CONTROL",
+        "next_phase_at_observation": control["next_phase"],
+        "pending_content_drift_paths": pending_paths,
+        "reconciliation_artifact_digest": (
+            EXPECTED_SOURCE_DRIFT_RECONCILIATION_SELF_DIGEST
+        ),
+        "reconciliation_interface_raw_sha256": (
+            EXPECTED_SOURCE_DRIFT_RECONCILIATION_RAW_SHA256
+        ),
+        "reconciliation_status": reconciliation["status"],
+        "resolver_interface_raw_sha256": (
+            EXPECTED_SOURCE_CONTENT_SYNC_RESOLVER_RAW_SHA256
+        ),
+        "resolver_status": resolver["status"],
+        "verified_git_object_id": SOURCE_CONTENT_SYNC_CONTROL_GIT_OBJECT,
+    }
+
+
+def _source_content_sync_materialization():
+    from CodexSkills import sync_skills
+
+    mirror_root = REPO_ROOT / "CodexSkills" / "registry"
+    for relative_path in reserved_registry_paths():
+        target = REPO_ROOT.joinpath(*relative_path.rstrip("/").split("/"))
+        if os.path.lexists(target):
+            raise ValueError(
+                "AUTO_SOURCE_CONTENT_SYNC_RESERVED_PAYLOAD_PRESENT"
+            )
+    if os.path.lexists(mirror_root / "codex" / "context-kernel"):
+        raise ValueError("AUTO_SOURCE_CONTENT_SYNC_ABSENT_ROOT_RESTORED")
+
+    entries = []
+    for expected in SOURCE_CONTENT_SYNC_ENTRIES:
+        source_namespace, slug = expected[
+            "source_relative_path"
+        ].split("/", 1)
+        root = mirror_root / source_namespace / slug
+        rows = tuple(
+            sync_skills.walk_entries(
+                root,
+                source_namespace=source_namespace,
+                source_root=mirror_root / source_namespace,
+            )
+        )
+        regular_rows = [row for row in rows if row[2] == "REGULAR_FILE"]
+        alias_rows = [row for row in rows if row[2] != "REGULAR_FILE"]
+        byte_count = sum(os.lstat(row[1]).st_size for row in regular_rows)
+        content_digest = sync_skills.skill_digest(
+            root,
+            sync_skills.repo_owned_files(source_namespace, slug),
+            source_namespace=source_namespace,
+            source_root=mirror_root / source_namespace,
+        )
+        if (
+            len(regular_rows) != expected["regular_file_count"]
+            or len(alias_rows) != expected["alias_count"]
+            or byte_count != expected["byte_count"]
+            or content_digest != expected["content_digest"]
+        ):
+            raise ValueError(
+                "AUTO_SOURCE_CONTENT_SYNC_MIRROR_CONTENT_DRIFT"
+            )
+        expected_paths = {
+            (
+                f"CodexSkills/registry/{source_namespace}/{slug}/"
+                f"{row[0].replace(os.sep, '/')}"
+            )
+            for row in rows
+        }
+        tracked = subprocess.run(
+            [
+                "git",
+                "ls-files",
+                "-z",
+                "--",
+                f"CodexSkills/registry/{source_namespace}/{slug}",
+            ],
+            cwd=REPO_ROOT,
+            check=True,
+            stdout=subprocess.PIPE,
+        ).stdout
+        tracked_paths = {
+            item.decode("utf-8")
+            for item in tracked.split(b"\0")
+            if item
+        }
+        if tracked_paths != expected_paths:
+            raise ValueError(
+                "AUTO_SOURCE_CONTENT_SYNC_GIT_TRACKED_CLOSURE_MISMATCH"
+            )
+        entries.append(
+            {
+                **expected,
+                "exact_source_mirror_content_equal": True,
+                "mirror_content_digest": content_digest,
+                "source_content_digest": expected["content_digest"],
+            }
+        )
+    return {
+        "bound_reference_resolver_auto_integration_complete": False,
+        "bound_reference_resolver_gate_satisfied": False,
+        "canonical_publication_permitted": False,
+        "catalog_or_snapshot_artifacts_generated": False,
+        "current_auto_runtime_control_bound": False,
+        "exact_synchronized_paths": [
+            entry["source_relative_path"] for entry in entries
+        ],
+        "external_source_dry_run_required": True,
+        "git_tracked_exact_closure_verified": True,
+        "missing_source_skill_roots": list(MISSING_SOURCE_SKILL_ROOTS),
+        "next_phase": SOURCE_CONTENT_SYNC_NEXT_PHASE,
+        "remaining_content_drift_paths": [],
+        "repository_bound": False,
+        "reserved_registry_namespaces_preserved": True,
+        "runtime_state_write_permitted": False,
+        "source_content_sync_complete": True,
+        "source_mirror_parity_satisfied": True,
+        "source_root_parity_satisfied": False,
+        "synchronized_entries": entries,
+        "whole_source_parity_satisfied": False,
+    }
+
+
 def _catalog_reservation_materialization():
     mirror_roots = {
         namespace: REPO_ROOT / "CodexSkills" / "registry" / namespace
@@ -1188,7 +1599,9 @@ def build():
     final_candidate = _final_candidate_evidence()
     control = _historical_control_observation()
     reservation_control = _catalog_reservation_predecessor_observation()
+    source_sync_control = _source_content_sync_predecessor_observation()
     catalog_reservation = _catalog_reservation_materialization()
+    source_content_sync = _source_content_sync_materialization()
     artifacts = []
     for path in _files():
         relative = path.relative_to(REPO_ROOT).as_posix()
@@ -1220,7 +1633,7 @@ def build():
         "activation_instance_created": False,
         "activation_settlement_recomputed_before_publish": True,
         "au_040_authority_ruling_status": (
-            "REGISTRY_CATALOG_RESERVED_SOURCE_DRIFT_PENDING"
+            "REGISTRY_SOURCE_CONTENT_SYNCED_CONTROL_PENDING"
         ),
         "au_040_complete": False,
         "au_040_consumer_manifest_path_contract_present": True,
@@ -1331,6 +1744,8 @@ def build():
         ),
         "registry_mirror_alias_parity_satisfied": True,
         "registry_source_alias_parity_satisfied": True,
+        "registry_source_content_sync_complete": True,
+        "registry_source_mirror_parity_satisfied": True,
         "registry_source_root_parity_satisfied": False,
         "registry_whole_source_parity_satisfied": False,
         "catalog_reservation_materialization_snapshot": {
@@ -1375,6 +1790,26 @@ def build():
                 "verified_git_object_id"
             ],
             "working_tree_control_is_not_historical_trust_evidence": True,
+            "working_tree_resolver_is_not_historical_trust_evidence": True,
+        },
+        "source_content_sync_materialization_snapshot": {
+            "as_of_phase": "AUTO_REGISTRY_SOURCE_CONTENT_SYNC",
+            "predecessor_control_git_object_id": source_sync_control[
+                "verified_git_object_id"
+            ],
+            "semantic_scope": "INTERFACE_MATERIALIZATION_ONLY",
+            **source_content_sync,
+        },
+        "source_content_sync_predecessor_observation": {
+            **source_sync_control,
+            "reconciliation_interface_path": (
+                SOURCE_DRIFT_RECONCILIATION_REPO_PATH
+            ),
+            "resolver_interface_path": RESOLVER_INTERFACE_REPO_PATH,
+            "working_tree_control_is_not_historical_trust_evidence": True,
+            "working_tree_reconciliation_is_not_historical_trust_evidence": (
+                True
+            ),
             "working_tree_resolver_is_not_historical_trust_evidence": True,
         },
         "capability_gate_precedes_state_write": True,
@@ -1453,9 +1888,7 @@ def build():
         "module_artifacts": artifacts,
         "module_count": len(artifacts),
         "m0c_b_permitted": False,
-        "next_phase": (
-            "MECHANISM_REGISTRY_SOURCE_DRIFT_RECONCILIATION"
-        ),
+        "next_phase": SOURCE_CONTENT_SYNC_NEXT_PHASE,
         "notification_actual_recipient_repo_external": True,
         "notification_credentials_repo_external": True,
         "notification_external_path_contract": {
@@ -1708,7 +2141,7 @@ def build():
         "runtime_writer_shadow_returns_bootstrap_context": False,
         "runtime_writer_shadow_state_access_permitted": False,
         "runtime_writer_shadow_status": (
-            "UNBOUND_REPOSITORY_CONTROL_SYNC_PENDING"
+            "UNBOUND_REGISTRY_SOURCE_CONTENT_SYNCED_CONTROL_PENDING"
         ),
         "runtime_writer_shadow_validator_kind": (
             "DEVELOPMENT_ONLY_UNBOUND"
@@ -1719,7 +2152,7 @@ def build():
         "runtime_publisher_shadow_returns_bootstrap_context": False,
         "runtime_publisher_shadow_state_access_permitted": False,
         "runtime_publisher_shadow_status": (
-            "UNBOUND_REPOSITORY_CONTROL_SYNC_PENDING"
+            "UNBOUND_REGISTRY_SOURCE_CONTENT_SYNCED_CONTROL_PENDING"
         ),
         "runtime_publisher_shadow_validator_kind": (
             "DEVELOPMENT_ONLY_UNBOUND"
@@ -1735,7 +2168,7 @@ def build():
             False
         ),
         "runtime_repository_binding_shadow_status": (
-            "UNBOUND_REPOSITORY_CONTROL_SYNC_PENDING"
+            "UNBOUND_REGISTRY_SOURCE_CONTENT_SYNCED_CONTROL_PENDING"
         ),
         "runtime_repository_binding_shadow_validator_kind": (
             "DEVELOPMENT_ONLY_UNBOUND"

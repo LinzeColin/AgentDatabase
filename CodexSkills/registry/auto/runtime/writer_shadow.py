@@ -51,6 +51,12 @@ BOUND_AUTO_MODULE_COUNT = 25
 PUBLISHER_MATERIALIZATION_CONTROL_GIT_OBJECT = (
     "sha1:fb9b99c36cb870b04f34b5ed3bcb75aeae52c296"
 )
+SOURCE_CONTENT_SYNC_CONTROL_GIT_OBJECT = (
+    "sha1:5db5beecf3de7ac916020ca988f6e875891e19b1"
+)
+SOURCE_CONTENT_SYNC_NEXT_PHASE = (
+    "MECHANISM_REGISTRY_PARITY_COMPLETE_MATERIALIZATION"
+)
 RUNTIME_INTERFACE_PATH = (
     "CodexSkills/registry/auto/runtime-interface.json"
 )
@@ -260,6 +266,9 @@ def validate_unbound_writer_candidate(
     catalog_materialization = current.get(
         "catalog_reservation_materialization_snapshot"
     )
+    source_content_sync = current.get(
+        "source_content_sync_materialization_snapshot"
+    )
     historical_control = current.get(
         "historical_control_observation"
     )
@@ -374,6 +383,52 @@ def validate_unbound_writer_candidate(
             "canonical_publication_permitted"
         )
         is not False
+        or not isinstance(source_content_sync, dict)
+        or source_content_sync.get("as_of_phase")
+        != "AUTO_REGISTRY_SOURCE_CONTENT_SYNC"
+        or source_content_sync.get("semantic_scope")
+        != "INTERFACE_MATERIALIZATION_ONLY"
+        or source_content_sync.get(
+            "predecessor_control_git_object_id"
+        )
+        != SOURCE_CONTENT_SYNC_CONTROL_GIT_OBJECT
+        or source_content_sync.get("current_auto_runtime_control_bound")
+        is not False
+        or source_content_sync.get("source_content_sync_complete")
+        is not True
+        or source_content_sync.get("source_mirror_parity_satisfied")
+        is not True
+        or source_content_sync.get("source_root_parity_satisfied")
+        is not False
+        or source_content_sync.get("whole_source_parity_satisfied")
+        is not False
+        or source_content_sync.get("exact_synchronized_paths")
+        != [
+            "codex/graphify",
+            "codex/persona-distiller-group",
+            "codex/verifier",
+        ]
+        or source_content_sync.get("remaining_content_drift_paths") != []
+        or source_content_sync.get("missing_source_skill_roots")
+        != ["codex/context-kernel"]
+        or source_content_sync.get(
+            "reserved_registry_namespaces_preserved"
+        )
+        is not True
+        or source_content_sync.get("catalog_or_snapshot_artifacts_generated")
+        is not False
+        or source_content_sync.get(
+            "bound_reference_resolver_auto_integration_complete"
+        )
+        is not False
+        or source_content_sync.get(
+            "bound_reference_resolver_gate_satisfied"
+        )
+        is not False
+        or source_content_sync.get("runtime_state_write_permitted")
+        is not False
+        or source_content_sync.get("canonical_publication_permitted")
+        is not False
         or not isinstance(historical_control, dict)
         or historical_control.get("verified_git_object_id")
         != CONTROL_GIT_OBJECT
@@ -399,8 +454,15 @@ def validate_unbound_writer_candidate(
             "bound_reference_resolver_implementation_complete"
         )
         is not True
+        or current.get("registry_source_content_sync_complete") is not True
+        or current.get("registry_source_mirror_parity_satisfied")
+        is not True
+        or current.get("registry_source_root_parity_satisfied")
+        is not False
+        or current.get("registry_whole_source_parity_satisfied")
+        is not False
         or current.get("next_phase")
-        != "MECHANISM_REGISTRY_SOURCE_DRIFT_RECONCILIATION"
+        != SOURCE_CONTENT_SYNC_NEXT_PHASE
     ):
         raise AutoRuntimeError(
             "WRITER_SHADOW_CURRENT_INTERFACE_CONTRACT_MISMATCH"
@@ -420,7 +482,7 @@ def validate_unbound_writer_candidate(
                 "WRITER_SHADOW_CURRENT_MODULE_DIGEST_MISMATCH"
             )
     return UnboundWriterCandidateEvidence(
-        "UNBOUND_REPOSITORY_CONTROL_SYNC_PENDING",
+        "UNBOUND_REGISTRY_SOURCE_CONTENT_SYNCED_CONTROL_PENDING",
         31,
         5,
         CONTROL_GIT_OBJECT,

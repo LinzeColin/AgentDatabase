@@ -1745,6 +1745,248 @@ def _validate_ai(
         allow_empty=True,
     )
 
+
+def _normalized_project_path(value: Any) -> str:
+    if not isinstance(value, str):
+        return ""
+    text = value.strip().replace("\\", "/")
+    while text.startswith("./"):
+        text = text[2:]
+    return text.rstrip("/") or "."
+
+
+def _bound_assurance_report(
+    run_dir: Path,
+    assurance: dict[str, Any],
+    key: str,
+    expected_path: str,
+    allowed_statuses: set[str],
+    errors: list[str],
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    entry = assurance.get(key)
+    label = f"assurance_v22.{key}"
+    if not isinstance(entry, dict):
+        errors.append(f"{label} must be an object")
+        return {}, {}
+    path_value = entry.get("path")
+    if path_value != expected_path:
+        errors.append(f"{label}.path must be {expected_path!r}")
+    status = entry.get("status")
+    if status not in allowed_statuses:
+        errors.append(f"{label}.status must be one of {sorted(allowed_statuses)}, got {status!r}")
+    digest_value = entry.get("sha256")
+    if not isinstance(digest_value, str) or not SHA256_RE.fullmatch(digest_value):
+        errors.append(f"{label}.sha256 must be a 64-character SHA-256")
+    report = _load_json_object_file(run_dir, expected_path, expected_path, errors)
+    path = run_dir / expected_path
+    if path.is_file() and isinstance(digest_value, str) and SHA256_RE.fullmatch(digest_value):
+        actual_digest, _ = _sha256_file(path)
+        if actual_digest != digest_value.lower():
+            errors.append(f"{label}.sha256 does not match {expected_path}")
+    return entry, report
+
+
+def _validate_assurance_v22(
+    run_dir: Path,
+    manifest: dict[str, Any],
+    verdict: str,
+    subject_identity: str,
+    errors: list[str],
+) -> None:
+    positive = verdict in {"PASS", "PASS_WITH_RISKS"}
+    raw = manifest.get("assurance_v22")
+    if not isinstance(raw, dict):
+        if positive:
+            errors.append("positive verdict requires assurance_v22 object")
+        return
+    assurance = raw
+    if assurance.get("skill_version") != "0.0.2.2":
+        errors.append("assurance_v22.skill_version must be 0.0.2.2")
+    if assurance.get("enforced") is not True:
+        if positive:
+            errors.append("positive verdict requires assurance_v22.enforced=true")
+        return
+    if not positive:
+        return
+
+    scope = manifest.get("scope") if isinstance(manifest.get("scope"), dict) else {}
+    run = manifest.get("run") if isinstance(manifest.get("run"), dict) else {}
+    release = manifest.get("release") if isinstance(manifest.get("release"), dict) else {}
+    manifest_findings = manifest.get("findings") if isinstance(manifest.get("findings"), list) else []
+    finding_ids = {
+        item.get("id") for item in manifest_findings
+        if isinstance(item, dict) and isinstance(item.get("id"), str)
+    }
+
+    capability_entry, capability = _bound_assurance_report(
+        run_dir, assurance, "capability_report", "CAPABILITY_REPORT.json", {"PASS"}, errors
+    )
+    if capability.get("schema_version") != "1.0":
+        errors.append("CAPABILITY_REPORT.json schema_version must be 1.0")
+    if capability.get("read_only") is not True:
+        errors.append("CAPABILITY_REPORT.json must declare read_only=true")
+    repository = capability.get("repository") if isinstance(capability.get("repository"), dict) else {}
+    if _normalized_project_path(repository.get("target_project_path")) != _normalized_project_path(scope.get("target_project_path")):
+        errors.append("CAPABILITY_REPORT target_project_path does not match acceptance scope")
+    if repository.get("walk_truncated") is True:
+        errors.append("positive verdict cannot use a truncated capability inventory")
+    for key in ("unsafe_entries", "case_collisions"):
+        value = repository.get(key)
+        if not isinstance(value, list):
+            errors.append(f"CAPABILITY_REPORT repository.{key} must be a list")
+        elif value:
+            errors.append(f"positive verdict requires empty CAPABILITY_REPORT repository.{key}")
+
+    plan_entry, plan = _bound_assurance_report(
+        run_dir, assurance, "acceptance_plan", "ACCEPTANCE_PLAN.json", {"PASS"}, errors
+    )
+    if plan.get("schema_version") != "1.0":
+        errors.append("ACCEPTANCE_PLAN.json schema_version must be 1.0")
+    target = plan.get("target") if isinstance(plan.get("target"), dict) else {}
+    if target.get("single_project") is not True:
+        errors.append("ACCEPTANCE_PLAN target.single_project must be true")
+    if target.get("project_name") != scope.get("target_project_name"):
+        errors.append("ACCEPTANCE_PLAN target.project_name does not match acceptance scope")
+    if _normalized_project_path(target.get("project_path")) != _normalized_project_path(scope.get("target_project_path")):
+        errors.append("ACCEPTANCE_PLAN target.project_path does not match acceptance scope")
+    if plan.get("decision_scope") != release.get("decision_scope"):
+        errors.append("ACCEPTANCE_PLAN decision_scope does not match RUN_MANIFEST release.decision_scope")
+    profile_obj = plan.get("profile") if isinstance(plan.get("profile"), dict) else {}
+    if profile_obj.get("selected") != run.get("profile"):
+        errors.append("ACCEPTANCE_PLAN profile.selected does not match run.profile")
+    risk_obj = plan.get("risk") if isinstance(plan.get("risk"), dict) else {}
+    if risk_obj.get("level") != run.get("risk_level"):
+        errors.append("ACCEPTANCE_PLAN risk.level does not match run.risk_level")
+    unknowns = plan.get("unknowns")
+    if not isinstance(unknowns, list):
+        errors.append("ACCEPTANCE_PLAN unknowns must be a list")
+    elif any(isinstance(item, dict) and item.get("blocking") is True for item in unknowns):
+        errors.append("positive verdict cannot contain blocking ACCEPTANCE_PLAN unknowns")
+    if not isinstance(plan.get("command_allowlist"), list):
+        errors.append("ACCEPTANCE_PLAN command_allowlist must be a list")
+    if not isinstance(plan.get("execution_budget"), dict):
+        errors.append("ACCEPTANCE_PLAN execution_budget must be an object")
+
+    command_entry, command_report = _bound_assurance_report(
+        run_dir, assurance, "command_policy", "COMMAND_POLICY_REPORT.json", {"PASS"}, errors
+    )
+    if command_report.get("schema_version") != "1.0":
+        errors.append("COMMAND_POLICY_REPORT.json schema_version must be 1.0")
+    if command_report.get("status") != "PASS":
+        errors.append("positive verdict requires COMMAND_POLICY_REPORT status PASS")
+    unauthorized = command_report.get("unauthorized_execution_count")
+    if unauthorized != 0 or command_entry.get("unauthorized_execution_count") != 0:
+        errors.append("positive verdict requires zero unauthorized command executions")
+    if command_report.get("budget_exceeded") is not False:
+        errors.append("positive verdict requires command budget_exceeded=false")
+    for key in ("unmatched_commands", "forbidden_pattern_matches", "validation_errors"):
+        value = command_report.get(key)
+        if not isinstance(value, list):
+            errors.append(f"COMMAND_POLICY_REPORT {key} must be a list")
+        elif value:
+            errors.append(f"positive verdict requires empty COMMAND_POLICY_REPORT {key}")
+    _validate_evidence_path_list(
+        run_dir, command_entry.get("evidence_paths"),
+        "assurance_v22.command_policy.evidence_paths", errors, allow_empty=True
+    )
+
+    privacy_entry, privacy = _bound_assurance_report(
+        run_dir, assurance, "evidence_privacy", "EVIDENCE_PRIVACY_REPORT.json", {"PASS"}, errors
+    )
+    if privacy.get("schema_version") != "1.0":
+        errors.append("EVIDENCE_PRIVACY_REPORT.json schema_version must be 1.0")
+    if privacy.get("status") != "PASS":
+        errors.append("positive verdict requires EVIDENCE_PRIVACY_REPORT status PASS")
+    blocking = privacy.get("blocking_findings")
+    if not isinstance(blocking, list):
+        errors.append("EVIDENCE_PRIVACY_REPORT blocking_findings must be a list")
+    else:
+        if blocking:
+            errors.append("positive verdict requires zero privacy blocking findings")
+        if privacy_entry.get("blocking_findings") != len(blocking):
+            errors.append("assurance_v22.evidence_privacy.blocking_findings count mismatch")
+    filesystem_issues = privacy.get("filesystem_issues")
+    if not isinstance(filesystem_issues, list):
+        errors.append("EVIDENCE_PRIVACY_REPORT filesystem_issues must be a list")
+    elif filesystem_issues:
+        errors.append("positive verdict requires zero evidence privacy filesystem issues")
+
+    panel_entry, panel = _bound_assurance_report(
+        run_dir, assurance, "review_panel", "REVIEW_PANEL.json", {"PASS", "PASS_WITH_RISKS"}, errors
+    )
+    if panel.get("schema_version") != "1.0":
+        errors.append("REVIEW_PANEL.json schema_version must be 1.0")
+    if panel.get("status") != "COMPLETE":
+        errors.append("positive verdict requires REVIEW_PANEL status COMPLETE")
+    if panel.get("subject_identity") != subject_identity:
+        errors.append("REVIEW_PANEL subject_identity does not match acceptance subject")
+    panel_verdict = panel.get("panel_verdict")
+    if panel_verdict not in {"PASS", "PASS_WITH_RISKS"}:
+        errors.append("positive verdict requires a positive REVIEW_PANEL panel_verdict")
+    if verdict == "PASS" and panel_verdict != "PASS":
+        errors.append("overall PASS requires REVIEW_PANEL panel_verdict PASS")
+    if panel_entry.get("status") != panel_verdict:
+        errors.append("assurance_v22.review_panel.status must match REVIEW_PANEL panel_verdict")
+    claim = panel.get("independence_claim")
+    if not isinstance(claim, str) or not claim:
+        errors.append("REVIEW_PANEL independence_claim is required")
+    elif panel_entry.get("independence_claim") != claim:
+        errors.append("assurance_v22.review_panel.independence_claim mismatch")
+    rounds_required = panel_entry.get("rounds_required")
+    roles_per_round = panel_entry.get("roles_per_round")
+    if rounds_required != 2 or roles_per_round != 6:
+        errors.append("assurance_v22 review panel must require two rounds and six roles per round")
+    rounds = panel.get("rounds")
+    if not isinstance(rounds, list) or len(rounds) != 2:
+        errors.append("REVIEW_PANEL must contain exactly two rounds")
+    else:
+        seen_rounds: set[int] = set()
+        for index, item in enumerate(rounds):
+            label = f"REVIEW_PANEL.rounds[{index}]"
+            if not isinstance(item, dict):
+                errors.append(f"{label} must be an object")
+                continue
+            round_number = item.get("round")
+            if round_number not in {1, 2} or round_number in seen_rounds:
+                errors.append(f"{label}.round must be a unique 1 or 2")
+            if isinstance(round_number, int):
+                seen_rounds.add(round_number)
+            if item.get("status") != "COMPLETE":
+                errors.append(f"{label}.status must be COMPLETE")
+            if item.get("response_count") != 6:
+                errors.append(f"{label}.response_count must be 6")
+            if item.get("subject_identity") != subject_identity:
+                errors.append(f"{label}.subject_identity mismatch")
+            round_verdict = item.get("panel_verdict")
+            if round_verdict not in {"PASS", "PASS_WITH_RISKS"}:
+                errors.append(f"{label}.panel_verdict must be positive")
+            if verdict == "PASS" and round_verdict != "PASS":
+                errors.append(f"overall PASS requires {label}.panel_verdict PASS")
+            if item.get("blocker_count") not in {0, None}:
+                errors.append(f"{label}.blocker_count must be zero")
+        if seen_rounds != {1, 2}:
+            errors.append("REVIEW_PANEL rounds must be exactly {1, 2}")
+    for key in ("blockers", "unresolved_disagreements"):
+        value = panel.get(key)
+        if not isinstance(value, list):
+            errors.append(f"REVIEW_PANEL {key} must be a list")
+        elif value:
+            errors.append(f"positive verdict requires empty REVIEW_PANEL {key}")
+    panel_open = panel.get("open_findings")
+    if not isinstance(panel_open, list):
+        errors.append("REVIEW_PANEL open_findings must be a list")
+    else:
+        for item in panel_open:
+            if not isinstance(item, dict) or item.get("id") not in finding_ids:
+                errors.append("every REVIEW_PANEL open finding must be represented in RUN_MANIFEST findings")
+    _validate_evidence_path_list(
+        run_dir, panel_entry.get("evidence_paths"),
+        "assurance_v22.review_panel.evidence_paths", errors, allow_empty=True
+    )
+
+    # Keep these assignments explicit so static review can see all five bound gates are consumed.
+    _ = capability_entry, plan_entry
+
 def validate_run(run_dir: Path) -> tuple[dict[str, Any], list[str]]:
     run_dir = _absolute_no_resolve(run_dir)
     errors: list[str] = []
@@ -1851,6 +2093,7 @@ def validate_run(run_dir: Path) -> tuple[dict[str, Any], list[str]]:
                     f"WAIVED result requires exactly one matching finding waiver: {result.get('test_id')}"
                 )
     _validate_ai(run_dir, manifest, verdict, gates, errors)
+    _validate_assurance_v22(run_dir, manifest, verdict, subject_identity, errors)
 
     positive = verdict in {"PASS", "PASS_WITH_RISKS"}
     if positive:
