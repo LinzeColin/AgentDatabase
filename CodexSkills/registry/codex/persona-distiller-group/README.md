@@ -60,12 +60,12 @@
 ## 当前登记
 
 <!-- PERSONA-REGISTRY:START -->
-当前唯一登记：**82 个人物**。
+当前唯一登记：**83 个人物**。
 
 | 唯一目录 | 人物数 |
 |---|---:|
 | `材料建工师/` | 15 |
-| `软件开发师/` | 29 |
+| `软件开发师/` | 30 |
 | `艺术设计师/` | 0 |
 | `创业经营师/` | 7 |
 | `投资资本师/` | 11 |
@@ -76,7 +76,7 @@
 | `财务合规师/` | 1 |
 | `医疗护理师/` | 0 |
 | `农林牧渔师/` | 0 |
-| **总计** | **82** |
+| **总计** | **83** |
 
 | 人物 | 唯一身份 | 版本 | 选入原因 | 最值得蒸馏的特点 | 对用户的利益/帮助 | 应用场景 | 关键能力 | 完整 ZIP |
 |---|---|---|---|---|---|---|---|---|
@@ -147,6 +147,7 @@
 | Hamel Husain | `软件开发师` | `0.0.0.1` | 其公开作品从 CodeSearchNet、MLOps 与开发者工具延伸到数十个 AI 产品的评测实践，形成可追溯的测量与调试谱系。；公开语料同时覆盖工程实现、教学表达、工具反转、商业化取舍与咨询能力转移，可构建执行模型而非只复制文风。 | 先看真实数据和失败样本，再谈模型、指标与平台；把难评估重构为产品可验证性、provenance 与小判定单元 | 把模糊的“AI 质量不好”转成可观察、可排序、可修复的失败系统。；设计最小 data viewer、标注流程、rubric、LLM judge 验证和回归评测。 | AI 产品错误分析与评测体系设计；LLM-as-a-judge 验证与 failure taxonomy 建立 | 真实 trace 驱动的错误分析与评测闭环；领域专家标注、定性编码与窄判据设计 | [ZIP](软件开发师/hamel-husain/versions/0.0.0.1/hamel-husain-persona-distillation-delivery-v0.0.0.1.zip) |
 | Jerry Liu | `软件开发师` | `0.0.0.1` | Strong public record spanning code, technical essays, interviews, product launches, and company strategy from 2022 through 2026.；Distinctive, transferable model for external context, RAG evolution, document processing, and developer-platform design. | Find the current bottleneck and move the architecture toward it.；Treat LLMs as reasoning engines that need reliable external context. | Produces rigorous LLM/RAG/agent architecture reviews tied to data shape and failure cost.；Translates frontier-model changes into concrete product and platform decisions. | LLM, RAG, long-context, and agent architecture design；Document parsing, retrieval, extraction, and workflow automation | Context and data architecture for LLM applications；Parse–Retrieve–Reason–Act workflow decomposition | [ZIP](软件开发师/jerry-liu-llamaindex/versions/0.0.0.1/jerry-liu-llamaindex-persona-distillation-delivery-v0.0.0.1.zip) |
 | John Carmack（约翰·卡马克） | `软件开发师` | `0.0.0.1` | 跨三十年的一手工作日志、公开代码、长篇演讲和研究工件提供了高密度可验证过程证据；游戏引擎、移动设备、VR、火箭和 AI 研究构成多个 materially different contexts，可检验稳定方法而非单一时期风格 | 让抽象主张尽快接触可测现实；从端到端路径和隐藏状态定位真正瓶颈 | 把模糊性能或可靠性问题改写为可观察指标、基线和停止条件；为复杂工程或研究任务建立最小端到端闭环并压缩反馈循环 | 系统架构、性能、延迟与可靠性诊断；受限平台、交互原型与技术产品定义 | 端到端瓶颈分析与可观察量设计；最小可运行路径、快速迭代和原型到生产边界 | [ZIP](软件开发师/john-carmack/versions/0.0.0.1/john-carmack-persona-distillation-delivery-v0.0.0.1.zip) |
+| John McCarthy | `软件开发师` | `0.0.0.1` | 1971 年 ACM 图灵奖得主；LISP 的定义与设计、垃圾回收、限定均属其本人；其斯坦福主页收录 80 余篇自撰论文与随笔，一手材料充足可核 | 先要求把关键词精确化，再判断命题真假；不给定义就不给答案；讲自己的成果时讲那个数学定义，不讲实现技巧 | 把「加规则要改一堆地方」的系统诊断为知识写进了过程，并给出可执行的分离检验；给出四条判据判断一个知识表示能否长期增补 | 把散落在过程里的业务知识改写为可增补的陈述式表示；需要在新信息到来时收回旧结论的推理系统设计 | 从形式定义推导出表示法与语言设计；把领域知识写成与推理过程分离的陈述式事实与规则 | [ZIP](软件开发师/john-mccarthy/versions/0.0.0.1/john-mccarthy-persona-distillation-delivery-v0.0.0.1.zip) |
 | Karen Spärck Jones | `软件开发师` | `0.0.0.1` | IR/NLP、系统评测与受控实验的一手证据覆盖深，适合研究和工程判断任务。；既有技术创造又有方法反思、教学和学术治理记录，支持技术工程师与思想教育家双分面。 | 从任务功能定义系统，而不是从“智能”标签出发。；以强简单基线、受控比较和失败机制约束复杂化。 | 设计可审计的 IR/NLP/RAG 实验与评测。；识别 benchmark 分数与实际用途之间的外推断层。 | 搜索、排序、RAG、NLP与自动摘要方案评审；benchmark、共享任务和离线/在线评测设计 | 任务—系统角色建模；信息检索与概率证据分析 | [ZIP](软件开发师/karen-sparck-jones/versions/0.0.0.1/karen-sparck-jones-persona-distillation-delivery-v0.0.0.1.zip) |
 | Ken Thompson | `软件开发师` | `0.0.0.1` | Unix 主要创造者之一与 B 语言设计者，其抽象选择构成现代操作系统的事实基线；《Reflections on Trusting Trust》是供应链安全与可复现构建领域的奠基性威胁模型，至今是编译器可信性讨论的起点 | 最小覆盖抽象：先找能覆盖所有情况的最小抽象，找到就不再为特例加机制；只认覆盖性不认票数：反对意见的数量不改变判断，只有举出覆盖不了的情况才改变判断 | 设计要被长期依赖的接口时，帮你判断哪个机制是多余的、抽象是否还需为特例开口子；面对“业内都这么做”的压力时，把争论从票数转回到“这个抽象覆盖不了什么” | 底层抽象设计：为要被长期依赖的系统找出能覆盖全部用例的最小概念集合；字符编码与协议设计：在多条不可协商的兼容约束下取最简方案 | 找出能覆盖全部用例的最小抽象，并判断某个机制是否多余；在一组不可协商的硬约束下设计编码与协议（UTF-8 为完整样本） | [ZIP](软件开发师/ken-thompson/versions/0.0.0.1/ken-thompson-persona-distillation-delivery-v0.0.0.1.zip) |
 | Kent Beck | `软件开发师` | `0.0.0.1` | Four decades of inspectable software artifacts connect ideas to executable practice.；Public failures and adaptations reveal update behavior, not only polished doctrine. | Shrinks uncertainty through rapid, specific feedback.；Separates structural change from behavioral change to preserve intent and reversibility. | Produces executable plans with tests, baselines, rollback, and stopping rules.；Improves code and design reviews without reducing them to style imitation. | TDD and test-strategy design；Refactoring and evolutionary architecture review | Software design and refactoring economics；Test-driven development and feedback-loop design | [ZIP](软件开发师/kent-beck/versions/0.0.0.1/kent-beck-persona-distillation-delivery-v0.0.0.1.zip) |
