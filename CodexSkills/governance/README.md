@@ -101,6 +101,12 @@ Key entrypoints:
   observation/plan/readiness schemas bound to the immutable M-060/M-064
   predecessors, historical path evidence, registered snapshot, resolver, and
   exact 31/5 candidate.
+- `performance/capacity_budgets.py`: pure M-066 completeness and provisional
+  capacity evaluator for Registry, inventory, event, shard, transaction,
+  graph, evaluation-cache, and repository-growth profiles.
+- `tools/build_performance_capacity_budgets.py`: deterministic M-066
+  bundle-external profile/budget/readiness schemas bound to the immutable
+  M-063/M-065 predecessors, scorecard, daily shard, and exact 31/5 candidate.
 - `tools/validate_au040_semantic_acceptance.py`: exact 365-day and
   shard/index/manifest/publication cross-artifact gates.
 - `tests/test_mechanism_contract.py`: positive, negative, and fault gates.
@@ -161,6 +167,8 @@ Run from the repository root with the explicitly provisioned interpreter:
   CodexSkills/governance/tools/build_public_safe_queue_lifecycle.py --check
 /usr/bin/python3 -B \
   CodexSkills/governance/tools/build_git_active_tree_365d_policy.py --check
+/usr/bin/python3 -B \
+  CodexSkills/governance/tools/build_performance_capacity_budgets.py --check
 /usr/bin/python3 -B CodexSkills/governance/tools/validate_mechanism.py lint-draft
 /usr/bin/python3 -B \
   CodexSkills/governance/tools/validate_activation.py lint-control

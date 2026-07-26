@@ -1,0 +1,110 @@
+{
+  "artifact_contract": {
+    "content_addressed": true,
+    "deduplication_required": true,
+    "oversize_behavior": "FAIL_CLOSED_OR_ROTATE_WITHOUT_TRUNCATION"
+  },
+  "artifact_digest": "be9c45b723fb659353bfd5417d82a74c8fb250716214acee936785bf9d3d0565",
+  "artifact_uid": "pcb_01ARZ3NDEKTSV4RRFFQ69G5FAV",
+  "budgets": [
+    {
+      "remediation": "PROFILE_AND_RUN_COMPLETE_PATH",
+      "scenario": "REGISTRY_FAST_PATH",
+      "threshold": {
+        "duration_ms_max": 60000,
+        "full_source_coverage_required": true
+      }
+    },
+    {
+      "remediation": "DIAGNOSE_PER_SOURCE_NO_SKIP",
+      "scenario": "FOUR_SOURCE_FULL_INVENTORY",
+      "threshold": {
+        "duration_ms_max": 300000,
+        "required_source_classes": [
+          "AGENTS",
+          "CLAUDE",
+          "CODEX",
+          "CODEX_SYSTEM"
+        ]
+      }
+    },
+    {
+      "remediation": "BACKPRESSURE_AND_ROTATE_NO_EVENT_DROP",
+      "scenario": "PUBLIC_EVENTS_10000",
+      "threshold": {
+        "duration_ms_max": 600000,
+        "input_count": 10000,
+        "peak_memory_bytes_max": 536870912
+      }
+    },
+    {
+      "remediation": "ROTATE_NEW_SHARD_NO_TRUNCATION",
+      "scenario": "SINGLE_GIT_SHARD",
+      "threshold": {
+        "artifact_bytes_max": 20971520,
+        "rotation_required_above_limit": true
+      }
+    },
+    {
+      "remediation": "ABORT_TRANSACTION_NO_WATERMARK_ADVANCE",
+      "scenario": "CANONICAL_TRANSACTION",
+      "threshold": {
+        "commit_count_max": 1,
+        "watermark_requires_remote_readback": true
+      }
+    },
+    {
+      "remediation": "OWNER_MAJOR_ARCHITECTURE_PROPOSAL",
+      "scenario": "REPOSITORY_GROWTH_FORECAST",
+      "threshold": {
+        "silent_sampling_permitted": false,
+        "warning_horizon_days_min": 90
+      }
+    },
+    {
+      "remediation": "FILTER_CANDIDATES_BEFORE_PAIR_ANALYSIS",
+      "scenario": "CAPABILITY_GRAPH_PAIRING",
+      "threshold": {
+        "pairing_mode": "FILTERED_CANDIDATE_SET",
+        "unconditional_all_pairs_permitted": false
+      }
+    },
+    {
+      "remediation": "RECOMPUTE_WITH_COMPLETE_DIGEST_KEY",
+      "scenario": "EVALUATION_CACHE",
+      "threshold": {
+        "partial_cache_key_permitted": false,
+        "required_cache_key_fields": [
+          "dataset_manifest_digests",
+          "environment_fingerprint_digest",
+          "evaluator_manifest_digests",
+          "model_snapshot_digest",
+          "skill_version_record_digest",
+          "tool_manifest_digest"
+        ]
+      }
+    }
+  ],
+  "calibration": {
+    "calibration_change_requires_evidence": true,
+    "cold_and_warm_profiles_required": true,
+    "provisional_budget_is_production_sla": false,
+    "real_hardware_profile_required": true,
+    "real_workload_manifest_required": true,
+    "state": "UNCALIBRATED"
+  },
+  "completeness_invariants": {
+    "event_drop_permitted": false,
+    "input_count_must_equal_processed_count": true,
+    "sampled_count": 0,
+    "silent_sampling_permitted": false,
+    "skipped_count": 0,
+    "source_skip_permitted": false,
+    "truncation_permitted": false,
+    "watermark_advance_on_failure_permitted": false
+  },
+  "owner_plane": "MECHANISM",
+  "protocol_revision": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1",
+  "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:performance-capacity-budget:v1",
+  "status": "DRAFT_NON_ACTIVE_UNCALIBRATED"
+}

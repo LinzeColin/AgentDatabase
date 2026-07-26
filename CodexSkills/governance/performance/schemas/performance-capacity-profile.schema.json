@@ -1,0 +1,159 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:performance-capacity-profile:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "bundle_digest": {
+      "const": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e"
+    },
+    "cache_key_digests": {
+      "additionalProperties": false,
+      "properties": {
+        "dataset_manifest_digests": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+        },
+        "environment_fingerprint_digest": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+        },
+        "evaluator_manifest_digests": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+        },
+        "model_snapshot_digest": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+        },
+        "skill_version_record_digest": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+        },
+        "tool_manifest_digest": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "cache_state": {
+      "enum": [
+        "COLD",
+        "WARM"
+      ]
+    },
+    "commit_count": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "duration_ms": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "environment_fingerprint_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "evidence_bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "graph_pairing_mode": {
+      "enum": [
+        "FILTERED_CANDIDATE_SET",
+        "NOT_APPLICABLE",
+        "UNCONDITIONAL_ALL_PAIRS"
+      ]
+    },
+    "growth_warning_horizon_days": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "input_contract_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "input_count": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "output_artifact_bytes": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "owner_plane": {
+      "const": "MECHANISM"
+    },
+    "peak_memory_bytes": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "processed_count": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "profile_uid": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/typed_uid"
+    },
+    "protocol_revision": {
+      "const": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1"
+    },
+    "sampled_count": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "scenario": {
+      "enum": [
+        "CAPABILITY_GRAPH_PAIRING",
+        "CANONICAL_TRANSACTION",
+        "EVALUATION_CACHE",
+        "FOUR_SOURCE_FULL_INVENTORY",
+        "PUBLIC_EVENTS_10000",
+        "REGISTRY_FAST_PATH",
+        "REPOSITORY_GROWTH_FORECAST",
+        "SINGLE_GIT_SHARD"
+      ]
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:performance-capacity-profile:v1"
+    },
+    "skipped_count": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "source_classes": {
+      "items": {
+        "enum": [
+          "AGENTS",
+          "CLAUDE",
+          "CODEX",
+          "CODEX_SYSTEM"
+        ]
+      },
+      "maxItems": 4,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "status": {
+      "const": "DRAFT_NON_ACTIVE"
+    },
+    "truncated": {
+      "type": "boolean"
+    },
+    "watermark_advanced": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "bundle_digest",
+    "profile_uid",
+    "owner_plane",
+    "status",
+    "scenario",
+    "cache_state",
+    "environment_fingerprint_digest",
+    "input_contract_digest",
+    "input_count",
+    "processed_count",
+    "skipped_count",
+    "sampled_count",
+    "duration_ms",
+    "peak_memory_bytes",
+    "output_artifact_bytes",
+    "commit_count",
+    "source_classes",
+    "truncated",
+    "watermark_advanced",
+    "cache_key_digests",
+    "graph_pairing_mode",
+    "growth_warning_horizon_days",
+    "evidence_bundle_digest"
+  ],
+  "title": "Mechanism M-066 performance/capacity profile",
+  "type": "object"
+}

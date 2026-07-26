@@ -1,0 +1,140 @@
+{
+  "artifact_digest": "9cd49a73c30729de3b0443e6a8024035cdc138a8e2d690f720def0d4400b881e",
+  "calibration_state": {
+    "cold_cache_baseline_verified": false,
+    "hardware_baseline_verified": false,
+    "production_sla_proven": false,
+    "provisional_budgets_enforced_as_integrity_guards": true,
+    "real_profile_count": 0,
+    "state": "UNCALIBRATED",
+    "ten_thousand_event_baseline_verified": false,
+    "warm_cache_baseline_verified": false
+  },
+  "dependency_evidence": {
+    "m028_status": "GENERATED_INDEX_BYTES_PINNED_REBUILD_GATE_NOT_REPLAYED",
+    "m043_status": "SCORECARD_SCHEMA_VERIFIED",
+    "m063_status": "GIT_ACTIVE_TREE_POLICY_VERIFIED",
+    "runtime_capacity_readiness": "BLOCKED_UNCALIBRATED"
+  },
+  "implementation_contract": {
+    "budget": {
+      "canonical_path": "CodexSkills/governance/performance/schemas/performance-capacity-budget.schema.json",
+      "content_digest": "531fb0c1b0bdac9399854c040ec8cb6a2b0680c38a7a9db9b2d38907198cb93f",
+      "instance": {
+        "artifact_digest": "be9c45b723fb659353bfd5417d82a74c8fb250716214acee936785bf9d3d0565",
+        "canonical_path": "CodexSkills/governance/performance/performance-capacity-budget.json",
+        "content_digest": "858b6c7c6607b1feb05394cb84fc8c73b4a8f475f39aa2f2eb11effd16f4e01a"
+      },
+      "schema_sha256": "af8effa381ad3c09917f5c90087074126de71e9f26e4f49febd4ebce976db4b2",
+      "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:performance-capacity-budget:v1",
+      "self_digest_pointer": "/artifact_digest"
+    },
+    "cache_mutation_capability_present": false,
+    "capability_mode": "PURE_IMMUTABLE_OBJECTS_ONLY",
+    "component_path": "CodexSkills/governance/performance/capacity_budgets.py",
+    "content_digest": "f306b278179eb4abe5abb5bd96e6af4b5d41683394fa2473cd0cc81016a2b053",
+    "event_drop_permitted": false,
+    "failure_watermark_advance_permitted": false,
+    "filesystem_capability_present": false,
+    "profile_schema": {
+      "canonical_path": "CodexSkills/governance/performance/schemas/performance-capacity-profile.schema.json",
+      "content_digest": "1ca909c5d641618d93dbbd528500999f84bbbeb1f935de1b704ca0387f9e1a14",
+      "schema_sha256": "ff9a910b7c85b1d5b75e6ece67ab4728f632c086540cbeee374108c9abf7d1a7",
+      "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:performance-capacity-profile:v1",
+      "self_digest_pointer": "/evidence_bundle_digest"
+    },
+    "publisher_capability_present": false,
+    "real_profiler_capability_present": false,
+    "silent_sampling_permitted": false,
+    "source_skip_permitted": false,
+    "state_capability_present": false,
+    "truncation_permitted": false
+  },
+  "next_phase": "MECHANISM_DASHBOARDS_ACTIONABLE_ALERTS",
+  "nonmutation": {
+    "activation_forbidden": true,
+    "auto_plane_unchanged": true,
+    "cache_write_permitted": false,
+    "candidate_bundle_unchanged": true,
+    "canonical_publication_permitted": false,
+    "openai_database_unchanged": true,
+    "real_profile_executed": false,
+    "shard_write_permitted": false,
+    "state_write_permitted": false,
+    "version_file_created": false,
+    "watermark_advance_permitted": false
+  },
+  "owner_plane": "MECHANISM",
+  "policy_count": 5,
+  "protocol_revision": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1",
+  "real_execution_permitted": false,
+  "schema_closure_count": 34,
+  "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:performance-capacity-readiness:v1",
+  "self_digest_pointer": "/artifact_digest",
+  "source_trust": {
+    "candidate_bundle": {
+      "artifact_digest": "66ad125629cab71739ff2bc266219f995f7a45998936ca720c6db678ee77e65a",
+      "bundle_digest": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e",
+      "canonical_path": "CodexSkills/governance/bundles/schema-bundle-manifest.v1.json",
+      "expected_mode": "CANDIDATE",
+      "policy_count": 5,
+      "schema_count": 31,
+      "verified_git_object_id": "sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5"
+    },
+    "daily_manifest_schema": {
+      "canonical_path": "CodexSkills/registry/auto/schemas/public-v2/daily-run-shard-manifest.schema.json",
+      "content_digest": "5a38f1f4844b348f376a4c0633c16e7e4162df503c2403ac22e11a113bc1c820",
+      "max_shard_bytes": 20971520,
+      "schema_sha256": "e9214388da78376da47770934454d65a57659d1dde33fa0cb4e36b79e4665337",
+      "verified_git_object_id": "sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5"
+    },
+    "m028_global_index_dependency": {
+      "byte_equivalent_rebuild_replayed": false,
+      "canonical_path": "CodexSkills/index.json",
+      "content_digest": "f3932c7297668415469064086f5f98830a75077a1b03ee96bb57952dfd1d09bd",
+      "current_source_freshness_verified": false,
+      "schema": "codex_skills_index.v2",
+      "skill_instance_count": 90,
+      "verified_git_object_id": "sha1:f7195edd6fa992f8306491494e838fff34d425f1"
+    },
+    "m043_scorecard_schema": {
+      "canonical_path": "CodexSkills/governance/schemas/scorecard.schema.json",
+      "content_digest": "66716ff85edfce9ee0e608a8223bdf212ca74826eda82880e349c65de6c0b376",
+      "schema_sha256": "6d47e264cf371b8cdf9e0679bc27c725b8fc37457b895c16a4eed639ac4f6f73",
+      "verified_git_object_id": "sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5"
+    },
+    "m063_retention_dependency": {
+      "artifact_digest": "0bb6c1fb335115785495805ed001d6747a311dd1cbee335547beccaf8501df88",
+      "canonical_path": "CodexSkills/governance/retention/git-active-tree-365d-readiness.json",
+      "content_digest": "91592f339854fb205993e96a67698d7b6ce8fc54afd3b226f3090dfd49ab86f2",
+      "status": "DRAFT_NON_ACTIVE_GIT_ACTIVE_TREE_365D_READY",
+      "verified_git_object_id": "sha1:039f3844b36961f1d8432b9c0d86d6cda408f430"
+    },
+    "m065_predecessor": {
+      "artifact_digest": "049809b3292f5591fc63f899c2172e67da66bb0a152998e04a341bda401d1228",
+      "canonical_path": "CodexSkills/governance/migration/read-only-migration-cutover-readiness.json",
+      "content_digest": "839b363d904116d8657f78e10b53a1cd11c86f1d64f06064090e5a71b24ca02c",
+      "status": "DRAFT_NON_ACTIVE_READ_ONLY_MIGRATION_CUTOVER_IMPLEMENTED_BLOCKED",
+      "verified_git_object_id": "sha1:f7195edd6fa992f8306491494e838fff34d425f1"
+    },
+    "repository_self_report_is_not_trust_root": true
+  },
+  "status": "DRAFT_NON_ACTIVE_PERFORMANCE_CAPACITY_BUDGETS_IMPLEMENTED_UNCALIBRATED",
+  "task_contract": {
+    "dependency_task_ids": [
+      "M-028",
+      "M-043",
+      "M-063"
+    ],
+    "done_gate": "NO_SILENT_SAMPLING_OR_SKIPPED_SOURCE",
+    "implemented_task_ids": [
+      "M-066"
+    ],
+    "pending_task_ids": [
+      "M-067"
+    ],
+    "required_output_code": "PROFILING_SHARD_CACHE_GROWTH_BUDGETS",
+    "runtime_calibration_status": "BLOCKED_UNCALIBRATED"
+  },
+  "task_pack_revision": "v0.0.0.2"
+}

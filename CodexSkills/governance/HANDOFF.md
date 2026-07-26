@@ -1,3 +1,129 @@
+# Mechanism performance and capacity budget handoff
+
+- State:
+  `DRAFT_NON_ACTIVE_PERFORMANCE_CAPACITY_BUDGETS_IMPLEMENTED_UNCALIBRATED`
+- Phase: `MECHANISM_PERFORMANCE_CAPACITY_BUDGETS`
+- Task Pack task implemented: `M-066`
+- M-066 dependencies: `M-028`, `M-043`, `M-063`
+- Required output: `PROFILING_SHARD_CACHE_GROWTH_BUDGETS`
+- Done gate: `NO_SILENT_SAMPLING_OR_SKIPPED_SOURCE`
+- Acceptance criterion: `AC-38`
+- Pure guard:
+  `CodexSkills/governance/performance/capacity_budgets.py`
+- Pure guard raw SHA-256:
+  `f306b278179eb4abe5abb5bd96e6af4b5d41683394fa2473cd0cc81016a2b053`
+- Provisional budget:
+  `CodexSkills/governance/performance/performance-capacity-budget.json`
+- Provisional budget raw SHA-256:
+  `858b6c7c6607b1feb05394cb84fc8c73b4a8f475f39aa2f2eb11effd16f4e01a`
+- Provisional budget self digest:
+  `be9c45b723fb659353bfd5417d82a74c8fb250716214acee936785bf9d3d0565`
+- Budget schema raw / canonical SHA-256:
+  `531fb0c1b0bdac9399854c040ec8cb6a2b0680c38a7a9db9b2d38907198cb93f`
+  / `af8effa381ad3c09917f5c90087074126de71e9f26e4f49febd4ebce976db4b2`
+- Profile schema raw / canonical SHA-256:
+  `1ca909c5d641618d93dbbd528500999f84bbbeb1f935de1b704ca0387f9e1a14`
+  / `ff9a910b7c85b1d5b75e6ece67ab4728f632c086540cbeee374108c9abf7d1a7`
+- M-066 readiness:
+  `CodexSkills/governance/performance/performance-capacity-readiness.json`
+- Readiness raw SHA-256:
+  `000154c32d895b35960cadbad80582c09121ee1103a31a63577ad8a6cf5b1a3d`
+- Readiness self digest:
+  `9cd49a73c30729de3b0443e6a8024035cdc138a8e2d690f720def0d4400b881e`
+- Readiness schema raw / canonical SHA-256:
+  `1d88c6b2363a76804a42beb8ce3e1ac978ab4efe81a4c3312f32d43f0ee5957d`
+  / `91d79757ed32076cc45b7e2b90d48b05546e81489c60405085607a4fb0c0916b`
+- Immutable M-065 predecessor:
+  `sha1:f7195edd6fa992f8306491494e838fff34d425f1`
+- Immutable M-063 dependency:
+  `sha1:039f3844b36961f1d8432b9c0d86d6cda408f430`
+- Immutable M-028 global-index evidence:
+  `sha1:f7195edd6fa992f8306491494e838fff34d425f1`
+- M-028 global-index raw SHA-256 / instance count:
+  `f3932c7297668415469064086f5f98830a75077a1b03ee96bb57952dfd1d09bd`
+  / `90`
+- M-028 delete/rebuild replayed / current source freshness verified:
+  `false / false`
+- Immutable candidate:
+  `sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5`
+- Immutable candidate bundle digest:
+  `36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e`
+- Calibration: `UNCALIBRATED`
+- Real profile count: `0`
+- Production SLA proven: `false`
+- Runtime capacity readiness: `BLOCKED_UNCALIBRATED`
+- Silent sampling / source skipping / event dropping / truncation:
+  `false / false / false / false`
+- Real profiling / shard write / cache write / state write / publication:
+  `false / false / false / false / false`
+- Pending Task Pack task: `M-067`
+- Exact next Phase: `MECHANISM_DASHBOARDS_ACTIONABLE_ALERTS`
+
+M-066 materializes the Task Pack's provisional budgets without inventing a
+production baseline. Registry fast path is bounded at 60 seconds, complete
+four-source inventory at 5 minutes, 10,000 new public-safe events at 10
+minutes and 512 MiB, one Git shard at 20 MiB, one canonical transaction at
+one commit, and repository growth warning at 90 days. Capability analysis
+must filter candidates before pair analysis. Evaluation-cache evidence binds
+the Skill version, model, environment, evaluator, dataset, and tool digests.
+
+Completeness always wins over speed. Input and processed counts must match;
+skipped and sampled counts must be zero; truncation is forbidden; Registry and
+inventory profiles must cover AGENTS, CLAUDE, CODEX, and CODEX_SYSTEM.
+Over-budget evidence returns an explicit remediation and cannot advance a
+watermark. It rotates/backpressures without dropping events, aborts an
+over-commit transaction, or raises a MAJOR architecture proposal rather than
+silently weakening the evidence.
+
+The checked-in contract is intentionally uncalibrated. A production baseline
+must identify the real hardware and workload, event volume, Git size, and cold
+and warm cache state. The M-028 global index is exact-byte pinned, but this
+Phase does not replay its delete-and-byte-equivalent-rebuild gate or infer
+freshness after later source changes. M-066 has no profiler, filesystem, Git,
+cache, state, watermark, shard-writer, publisher, network, or activation
+capability. It creates no VERSION, runtime profile, canonical artifact, or
+publication.
+
+## M-066 validation
+
+```text
+M-066 targeted budget/completeness/negative tests: 17/17 PASS
+complete Mechanism suite: 254/254 PASS
+M-066 builder/budget/readiness/schemas: BYTE_EQUIVALENT
+all eight synthetic exact-boundary profiles: WITHIN_PROVISIONAL_BUDGET
+current calibration: UNCALIBRATED / production SLA false
+candidate trust: 31 schemas / 5 policies PASS
+schema-set lint:
+  base 21 / candidate-compatible 41 / version 24 /
+  M-066 full closure 81 PASS
+OpenAIDatabase consumer + architecture: 23/23 PASS
+consumer CLI: PASS / errors=[] / canonical publication=false
+```
+
+The pre-existing cross-owner transition remains fail-closed and is not
+modified or relabeled by M-066:
+
+```text
+complete Auto suite: 200 tests / 5 failures / 20 errors
+fault/privacy seed 271828: 149 tests / 5 failures / 25 errors
+fault/privacy seed 314159: 149 tests / 5 failures / 25 errors
+AUTO_REGISTRY_MIRROR_SKILL_COUNT_DRIFT
+BOUND_REFERENCE_RESOLVER_RUNTIME_LOCAL_DRIFT
+ACTIVATION_CONTROL_INTERFACE_SEMANTIC_MISMATCH
+```
+
+The Registry compatibility index remains `90` while Auto is pinned to `89`.
+Those exact failures predate M-066 and are outside this Phase's changed-path
+set. No Auto file may be changed in this Mechanism Phase.
+
+Final acceptance additionally requires an ordinary commit, FF-safe
+`HEAD:main` push, and fresh detached GitHub object/raw-byte readback of every
+changed path. No verifier call, historical Task Pack replay, real profiling,
+cache/state/shard write, publication, activation, or follow-on Phase belongs
+to this run.
+
+## Prior M-065 read-only migration/cutover handoff
+
 # Mechanism read-only migration/cutover handoff
 
 - State:
