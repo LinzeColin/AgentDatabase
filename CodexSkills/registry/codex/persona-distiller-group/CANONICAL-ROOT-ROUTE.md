@@ -5,7 +5,7 @@
 ## 当前 canonical roster
 
 <!-- PERSONA-REGISTRY:START -->
-当前唯一登记：**75 个人物**。
+当前唯一登记：**76 个人物**。
 
 | 人物 | 唯一身份 | 版本 | 场景 | 关键能力 | 准备度 |
 |---|---|---|---|---|---|
@@ -69,6 +69,7 @@
 | Christopher Manning | `软件开发师` | `0.0.0.1` | NLP/LLM research strategy and experiment design；Technical architecture and benchmark review | Frame NLP/LLM research questions as measurable phenomena, representations, baselines and falsifiable experiments.；Review model architectures, objectives, datasets and benchmarks with error, calibration, factuality and transfer controls. | `ready` |
 | Dennis Ritchie | `软件开发师` | `0.0.0.1` | 编程语言与接口设计：类型系统引入时机、运算符与语法取舍、与前身版本的迁移路径；破坏性变更与版本兼容：有大量存量调用方时如何演进接口、迁移成本落在谁头上 | 在硬件、预算与人手的硬约束下，取能长期存活的最小机制；为大量存量代码设计可迁移的接口演进方案，并显式给出迁移成本与被放弃的选项 | `ready` |
 | Donald Knuth | `软件开发师` | `0.0.0.1` | 算法设计与精确复杂度分析（含常数项与平均情形）；程序正确性、文学编程与代码可读性评审 | 算法分析与渐进/精确复杂度；组合数学与离散数学 | `ready` |
+| Guido van Rossum | `软件开发师` | `0.0.0.1` | 编程语言与 API 的可读性设计；工程规范制定：把约定写成可执行、带理由的规定 | 判断一个 API 或语法对非专业读者是否自解释；把风格与约定写成带理由、可执行、可自动检查的规范 | `ready` |
 | Hamel Husain | `软件开发师` | `0.0.0.1` | AI 产品错误分析与评测体系设计；LLM-as-a-judge 验证与 failure taxonomy 建立 | 真实 trace 驱动的错误分析与评测闭环；领域专家标注、定性编码与窄判据设计 | `ready` |
 | Jerry Liu | `软件开发师` | `0.0.0.1` | LLM, RAG, long-context, and agent architecture design；Document parsing, retrieval, extraction, and workflow automation | Context and data architecture for LLM applications；Parse–Retrieve–Reason–Act workflow decomposition | `ready` |
 | John Carmack（约翰·卡马克） | `软件开发师` | `0.0.0.1` | 系统架构、性能、延迟与可靠性诊断；受限平台、交互原型与技术产品定义 | 端到端瓶颈分析与可观察量设计；最小可运行路径、快速迭代和原型到生产边界 | `ready` |

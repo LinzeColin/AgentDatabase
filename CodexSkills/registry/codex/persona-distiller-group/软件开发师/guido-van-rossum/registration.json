@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:guidovanrossum",
+  "canonical_name": "Guido van Rossum",
+  "identity_family_id": "software-developer",
+  "identity_mode": "single",
+  "registration_category": "软件开发师",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "guido-van-rossum",
+  "subject_uid": "person-434af52cfe3c6ded",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/guido-van-rossum-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-26T13:51:22Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "f81329ec4625b2b4dc69b0ffec2b2e07095d2805e3bb6a943b616e00719fe4e1",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/guido-van-rossum-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "6ccd6e7025be80bef8af17c474333a98c7d80d183fa18ae9e9cabc46780ddc55",
+      "runtime_size_bytes": 62754,
+      "size_bytes": 70028
+    }
+  ]
+}
