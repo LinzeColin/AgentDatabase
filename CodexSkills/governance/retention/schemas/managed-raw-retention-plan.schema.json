@@ -1,0 +1,190 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:managed-raw-retention-plan:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "actions": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "action_order": {
+            "items": {
+              "enum": [
+                "DELETE_OWNED_SEGMENT",
+                "EMIT_RETENTION_RECEIPT",
+                "RECORD_OFFLINE_TTL_BREACH",
+                "RECORD_RAW_EXPIRED_GAP_IF_REPROJECTION_FAILED",
+                "REPROJECT_PUBLIC_SAFE"
+              ]
+            },
+            "maxItems": 5,
+            "type": "array",
+            "uniqueItems": true
+          },
+          "candidate_ref": {
+            "pattern": "^[a-z][a-z0-9-]{2,63}$",
+            "type": "string"
+          },
+          "decision": {
+            "enum": [
+              "EXPIRE",
+              "KEEP"
+            ]
+          },
+          "delete_authority_granted": {
+            "const": false
+          },
+          "destructive_action_performed": {
+            "const": false
+          },
+          "execution_receipt_required": {
+            "type": "boolean"
+          },
+          "offline_gap_receipt_required": {
+            "type": "boolean"
+          },
+          "projection_required": {
+            "type": "boolean"
+          },
+          "stage": {
+            "enum": [
+              "PROJECT_IMMEDIATELY",
+              "WARNING_24H",
+              "CRITICAL_48H",
+              "EMERGENCY_CATCH_UP_60H",
+              "HARD_EXPIRY_72H"
+            ]
+          },
+          "ttl_breach": {
+            "type": "boolean"
+          },
+          "unpublished_gap_required_if_reprojection_fails": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "candidate_ref",
+          "stage",
+          "decision",
+          "ttl_breach",
+          "projection_required",
+          "offline_gap_receipt_required",
+          "unpublished_gap_required_if_reprojection_fails",
+          "execution_receipt_required",
+          "action_order",
+          "delete_authority_granted",
+          "destructive_action_performed"
+        ],
+        "type": "object"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "actor": {
+      "const": "SKILLOPS_MANAGED_RAW_POLICY_GUARD"
+    },
+    "boundary_rule": {
+      "const": "ELAPSED_LT_72H_KEEP_ELAPSED_GTE_72H_EXPIRE"
+    },
+    "bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "canonical_publication_permitted": {
+      "const": false
+    },
+    "clock_basis": {
+      "const": "UTC_WALL_CLOCK"
+    },
+    "evidence_bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "expire_count": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "generated_at": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+    },
+    "input_count": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "keep_count": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "legacy_candidate_count": {
+      "const": 0
+    },
+    "max_age_seconds": {
+      "const": 259200
+    },
+    "observation_ref": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_digest": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+        }
+      },
+      "required": [
+        "artifact_digest"
+      ],
+      "type": "object"
+    },
+    "plan_uid": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/typed_uid"
+    },
+    "protected_candidate_count": {
+      "const": 0
+    },
+    "protocol_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/protocol_revision"
+    },
+    "public_queue_candidate_count": {
+      "const": 0
+    },
+    "real_execution_permitted": {
+      "const": false
+    },
+    "receipt_emitted": {
+      "const": false
+    },
+    "retention_policy_id": {
+      "const": "urn:linzecolin:agentdatabase:skillops:policy:retention:v3"
+    },
+    "retention_receipt_schema_id": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:retention-receipt:v3"
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:managed-raw-retention-plan:v1"
+    },
+    "ttl_breach_count": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "bundle_digest",
+    "plan_uid",
+    "observation_ref",
+    "generated_at",
+    "clock_basis",
+    "max_age_seconds",
+    "boundary_rule",
+    "retention_policy_id",
+    "retention_receipt_schema_id",
+    "actions",
+    "input_count",
+    "keep_count",
+    "expire_count",
+    "ttl_breach_count",
+    "protected_candidate_count",
+    "legacy_candidate_count",
+    "public_queue_candidate_count",
+    "real_execution_permitted",
+    "receipt_emitted",
+    "canonical_publication_permitted",
+    "actor",
+    "evidence_bundle_digest"
+  ],
+  "title": "M-061 managed raw non-mutating retention plan",
+  "type": "object"
+}

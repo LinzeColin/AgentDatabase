@@ -1,4 +1,115 @@
-# Mechanism protected-local / managed-raw boundary handoff
+# Mechanism managed-raw 72-hour policy handoff
+
+- State: `DRAFT_NON_ACTIVE_MANAGED_RAW_72H_POLICY_READY`
+- Phase: `MECHANISM_MANAGED_RAW_72H_POLICY`
+- Task Pack task completed: `M-061`
+- M-061 dependency: `M-060`
+- Required output: `SEGMENT_MARKERS_RECEIPTS_CLOCK_TESTS`
+- Done gate: `71_59_59_KEEP_AND_72_00_00_EXPIRE`
+- M-061 policy guard:
+  `CodexSkills/governance/retention/managed_raw_policy.py`
+- M-061 policy guard raw SHA-256:
+  `d18da577b0530c319579ca95c77d6126cee0e56de9552a13965c2fbd2eadaf66`
+- M-061 readiness:
+  `CodexSkills/governance/retention/managed-raw-72h-readiness.json`
+- M-061 readiness raw SHA-256:
+  `d60a71554ffbe4bde30fbd639e723086598df22b69b4ceee04b070dd4ddb6e0f`
+- M-061 readiness self digest:
+  `dad952d9df1523bb63765dc028a4f3609251834dcb52dfa06a085341f555f774`
+- Clock-observation schema canonical SHA-256:
+  `3d136e72d7758cfb4d23d5356110ae12c73eabaf6033e4202d661d4ffac7131e`
+- Retention-plan schema canonical SHA-256:
+  `9ebc4777898d2804cc68bf6c17dfbc995110c6ff0baf30e4b0de814c7f1071cc`
+- Readiness schema canonical SHA-256:
+  `d43ac89cab969eca94ec0a80789e3deda242e114d919cba77dc89df8aca01ddb`
+- Immutable M-060 predecessor:
+  `sha1:21235d49fca818b74677172711cfe279d2da68a6`
+- Immutable candidate:
+  `sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5`
+- Immutable candidate bundle digest:
+  `36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e`
+- Retention policy:
+  `urn:linzecolin:agentdatabase:skillops:policy:retention:v3`
+- Retention policy canonical SHA-256:
+  `bcad1e50a847e040d1350ca2fd977503b4ae642deabd727266e9dbbd26acb7ce`
+- Retention receipt schema:
+  `urn:linzecolin:agentdatabase:skillops:schema:retention-receipt:v3`
+- Retention receipt schema canonical SHA-256:
+  `81435881fbc5e1ced14975edbedee63ca6555674db36f906bdfdee20eb317c45`
+- Persistent managed raw default enabled: `false`
+- Production certification granted: `false`
+- Real retention execution permitted: `false`
+- Pending Task Pack task: `M-062`
+- Exact next Phase: `MECHANISM_PUBLIC_SAFE_QUEUE_LIFECYCLE`
+
+M-061 adds a pure UTC elapsed-time policy over candidates already authorized
+by the immutable M-060 protected-root guard. It revalidates the exact
+`raw-segment:v2` schema, ownership marker, candidate set, selection report,
+and M-060 scope authorization before it evaluates time. A supplied receipt
+must close back to the same M-060 report; a self-consistent replacement
+observation, plan, and receipt cannot detach from that protected-root proof.
+
+The clock is anchored to `created_at + 72 elapsed hours`.
+`sealed_at` cannot extend TTL. The exact stages are immediate projection,
+24-hour warning, 48-hour critical, 60-hour emergency catch-up, and 72-hour
+hard expiry. `71:59:59` is `KEEP`; `72:00:00` is `EXPIRE`. Exact expiry is
+not itself a breach. Any later observation requires an explicit recovery
+cycle and last-runtime evidence at or before expiry; otherwise evaluation
+fails closed. A truthful recovery receipt must carry
+`OFFLINE_TTL_BREACH`.
+
+An expiry plan freezes the required order: reproject public-safe evidence,
+record `RAW_EXPIRED_UNPUBLISHED` if reprojection fails, delete only the owned
+segment, then emit `retention-receipt:v3`. For an offline breach,
+`OFFLINE_TTL_BREACH` is recorded first. The plan deliberately grants no
+delete authority and emits no receipt itself. M-061 creates no persistent raw
+segment, state, lock, watermark, queue record, receipt instance, Registry
+write, Git publication, VERSION, activation, notification, or canonical run
+artifact. Production certification and Auto executor binding remain false.
+
+## M-061 validation
+
+```text
+M-061 targeted clock/scope/receipt tests: 13/13 PASS
+complete Mechanism suite: 173/173 PASS
+M-061 builder/schema/readiness: BYTE_EQUIVALENT
+71:59:59 KEEP / 72:00:00 EXPIRE: PASS
+offline overdue without gap evidence: FAIL_CLOSED
+forged M-060 report binding: FAIL_CLOSED
+candidate trust: 31 schemas / 5 policies PASS
+Mechanism draft/candidate/resolver/release/v3/promotion/rollback/
+  freshness/evaluator-protection/AU-040/M-060/M-061 builders: PASS
+schema-set lint:
+  base 21 / candidate-compatible 35 / version 24 / Registry 25 /
+  Auto closure 37 / M-061 full closure 43 PASS
+OpenAIDatabase consumer + architecture: 23/23 PASS
+consumer CLI: PASS / errors=[] / canonical publication=false
+```
+
+The pre-existing cross-owner transition remains fail-closed and is not
+modified or relabeled by M-061:
+
+```text
+complete Auto suite: 200 tests / 5 failures / 20 errors
+fault/privacy seed 271828: 149 tests / 5 failures / 25 errors
+fault/privacy seed 314159: 149 tests / 5 failures / 25 errors
+AUTO_REGISTRY_MIRROR_SKILL_COUNT_DRIFT
+BOUND_REFERENCE_RESOLVER_RUNTIME_LOCAL_DRIFT
+ACTIVATION_CONTROL_INTERFACE_SEMANTIC_MISMATCH
+activation builder/lint:
+  ACTIVATION_BOUND_RESOLVER_INTERFACE_CONTRACT_MISMATCH
+```
+
+The mirror count is `90` while Auto remains pinned to `89`. These failures
+are identical to the M-061 base and occur entirely outside the M-061 changed
+path set.
+
+No Auto, candidate-bundle, policy, retention-receipt, OpenAIDatabase,
+automation, or VERSION path change belongs to M-061. No verifier call,
+historical Task Pack replay, persistent raw write, real receipt emission, or
+destructive action belongs to this development Phase.
+
+## Prior M-060 protected-local / managed-raw boundary handoff
 
 - State: `DRAFT_NON_ACTIVE_PROTECTED_LOCAL_MANAGED_RAW_BOUNDARY_READY`
 - Phase: `MECHANISM_PROTECTED_LOCAL_DATA_MANAGED_RAW_BOUNDARY`

@@ -1,0 +1,179 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:managed-raw-clock-observation:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "actor": {
+      "const": "SKILLOPS_MANAGED_RAW_POLICY_GUARD"
+    },
+    "bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "candidate_observations": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "byte_count": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+          },
+          "candidate_ref": {
+            "pattern": "^[a-z][a-z0-9-]{2,63}$",
+            "type": "string"
+          },
+          "created_at": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+          },
+          "elapsed_microseconds": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+          },
+          "expires_at": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+          },
+          "metadata_contract_valid": {
+            "const": true
+          },
+          "overdue_microseconds": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+          },
+          "persistence_mode": {
+            "const": "TEST_ONLY"
+          },
+          "remaining_microseconds": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+          },
+          "sealed_at": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+          },
+          "stage": {
+            "enum": [
+              "PROJECT_IMMEDIATELY",
+              "WARNING_24H",
+              "CRITICAL_48H",
+              "EMERGENCY_CATCH_UP_60H",
+              "HARD_EXPIRY_72H"
+            ]
+          },
+          "ttl_breach": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "candidate_ref",
+          "created_at",
+          "sealed_at",
+          "expires_at",
+          "persistence_mode",
+          "byte_count",
+          "elapsed_microseconds",
+          "remaining_microseconds",
+          "overdue_microseconds",
+          "metadata_contract_valid",
+          "stage",
+          "ttl_breach"
+        ],
+        "type": "object"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "clock_basis": {
+      "const": "UTC_WALL_CLOCK"
+    },
+    "destructive_action_performed": {
+      "const": false
+    },
+    "evidence_bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "input_count": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "last_runtime_available_at": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+        }
+      ]
+    },
+    "legacy_candidate_count": {
+      "const": 0
+    },
+    "m060_selection_report_ref": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_digest": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+        }
+      },
+      "required": [
+        "artifact_digest"
+      ],
+      "type": "object"
+    },
+    "observation_uid": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/typed_uid"
+    },
+    "observed_at": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+    },
+    "offline_duration_seconds": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "offline_period_hard_guarantee_claimed": {
+      "const": false
+    },
+    "persistent_managed_raw_default_enabled": {
+      "const": false
+    },
+    "protected_candidate_count": {
+      "const": 0
+    },
+    "protocol_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/protocol_revision"
+    },
+    "public_queue_candidate_count": {
+      "const": 0
+    },
+    "recovery_cycle": {
+      "type": "boolean"
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:managed-raw-clock-observation:v1"
+    },
+    "time_evaluation_performed": {
+      "const": true
+    },
+    "ttl_enforcement_availability": {
+      "const": "LOCAL_RUNTIME_AVAILABLE_ONLY"
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "bundle_digest",
+    "observation_uid",
+    "m060_selection_report_ref",
+    "observed_at",
+    "clock_basis",
+    "recovery_cycle",
+    "last_runtime_available_at",
+    "offline_duration_seconds",
+    "ttl_enforcement_availability",
+    "offline_period_hard_guarantee_claimed",
+    "persistent_managed_raw_default_enabled",
+    "candidate_observations",
+    "input_count",
+    "protected_candidate_count",
+    "legacy_candidate_count",
+    "public_queue_candidate_count",
+    "time_evaluation_performed",
+    "destructive_action_performed",
+    "actor",
+    "evidence_bundle_digest"
+  ],
+  "title": "M-061 managed raw UTC clock observation",
+  "type": "object"
+}

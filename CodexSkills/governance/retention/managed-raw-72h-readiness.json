@@ -1,0 +1,167 @@
+{
+  "artifact_digest": "dad952d9df1523bb63765dc028a4f3609251834dcb52dfa06a085341f555f774",
+  "managed_raw_policy_contract": {
+    "auto_executor_integration_status": "NOT_BOUND",
+    "boundary_rule": "ELAPSED_LT_72H_KEEP_ELAPSED_GTE_72H_EXPIRE",
+    "clock_anchor": "CREATED_AT_PLUS_72_ELAPSED_HOURS",
+    "clock_basis": "UTC_WALL_CLOCK",
+    "component_path": "CodexSkills/governance/retention/managed_raw_policy.py",
+    "component_source_binding_mode": "SUCCESSOR_EXTERNAL_TUPLE_REQUIRED",
+    "content_digest": "d18da577b0530c319579ca95c77d6126cee0e56de9552a13965c2fbd2eadaf66",
+    "delete_authority_granted_by_plan": false,
+    "expire_boundary_seconds": 259200,
+    "expiry_action_order": [
+      "REPROJECT_PUBLIC_SAFE",
+      "RECORD_RAW_EXPIRED_GAP_IF_REPROJECTION_FAILED",
+      "DELETE_OWNED_SEGMENT",
+      "EMIT_RETENTION_RECEIPT"
+    ],
+    "keep_boundary_seconds": 259199,
+    "max_age_seconds": 259200,
+    "observation_schema": {
+      "artifact_digest": "a1e4ba893ce217490a9b06a49a5b9a0ab68fbdb59e2cdd853e31976b8b0363fb",
+      "canonical_path": "CodexSkills/governance/retention/schemas/managed-raw-clock-observation.schema.json",
+      "schema_sha256": "3d136e72d7758cfb4d23d5356110ae12c73eabaf6033e4202d661d4ffac7131e",
+      "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:managed-raw-clock-observation:v1",
+      "self_digest_pointer": "/evidence_bundle_digest"
+    },
+    "offline_breach_action_order": [
+      "RECORD_OFFLINE_TTL_BREACH",
+      "REPROJECT_PUBLIC_SAFE",
+      "RECORD_RAW_EXPIRED_GAP_IF_REPROJECTION_FAILED",
+      "DELETE_OWNED_SEGMENT",
+      "EMIT_RETENTION_RECEIPT"
+    ],
+    "offline_breach_code": "OFFLINE_TTL_BREACH",
+    "offline_overdue_requires_gap_evidence": true,
+    "persistent_managed_raw_default_enabled": false,
+    "physical_path_consumed": false,
+    "plan_schema": {
+      "artifact_digest": "477a4656501e4edfba2ebbadab68b203b43ab8e7ad843c3fe64dd8c79a714f8b",
+      "canonical_path": "CodexSkills/governance/retention/schemas/managed-raw-retention-plan.schema.json",
+      "schema_sha256": "9ebc4777898d2804cc68bf6c17dfbc995110c6ff0baf30e4b0de814c7f1071cc",
+      "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:managed-raw-retention-plan:v1",
+      "self_digest_pointer": "/evidence_bundle_digest"
+    },
+    "production_certification_status": "NOT_GRANTED",
+    "real_execution_permitted": false,
+    "receipt_created_by_mechanism": false,
+    "receipt_evidence_domain": "SKILLOPS_MANAGED_RAW_RETENTION_RECEIPT_EVIDENCE_V1",
+    "receipt_schema_semantics_validated": true,
+    "sealed_at_may_extend_ttl": false,
+    "stage_thresholds": [
+      {
+        "elapsed_seconds": 0,
+        "stage": "PROJECT_IMMEDIATELY"
+      },
+      {
+        "elapsed_seconds": 86400,
+        "stage": "WARNING_24H"
+      },
+      {
+        "elapsed_seconds": 172800,
+        "stage": "CRITICAL_48H"
+      },
+      {
+        "elapsed_seconds": 216000,
+        "stage": "EMERGENCY_CATCH_UP_60H"
+      },
+      {
+        "elapsed_seconds": 259200,
+        "stage": "HARD_EXPIRY_72H"
+      }
+    ],
+    "unpublished_gap_code": "RAW_EXPIRED_UNPUBLISHED"
+  },
+  "next_phase": "MECHANISM_PUBLIC_SAFE_QUEUE_LIFECYCLE",
+  "nonmutation": {
+    "activation_forbidden": true,
+    "auto_plane_unchanged": true,
+    "candidate_bundle_unchanged": true,
+    "canonical_publication_permitted": false,
+    "raw_expiry_delete_permitted": false,
+    "raw_segment_write_permitted": false,
+    "receipt_write_permitted": false,
+    "retention_policy_unchanged": true,
+    "retention_receipt_schema_unchanged": true,
+    "state_write_permitted": false,
+    "version_file_created": false
+  },
+  "offline_contract": {
+    "first_recovery_cycle_receipt_required": true,
+    "offline_breach_code": "OFFLINE_TTL_BREACH",
+    "offline_gap_evidence_required_for_overdue": true,
+    "offline_period_hard_guarantee_claimed": false,
+    "ttl_enforcement_availability": "LOCAL_RUNTIME_AVAILABLE_ONLY"
+  },
+  "owner_plane": "MECHANISM",
+  "protocol_revision": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1",
+  "real_execution_permitted": false,
+  "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:managed-raw-72h-readiness:v1",
+  "self_digest_pointer": "/artifact_digest",
+  "source_trust": {
+    "candidate_bundle": {
+      "artifact_digest": "66ad125629cab71739ff2bc266219f995f7a45998936ca720c6db678ee77e65a",
+      "bundle_digest": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e",
+      "canonical_path": "CodexSkills/governance/bundles/schema-bundle-manifest.v1.json",
+      "expected_mode": "CANDIDATE",
+      "policy_count": 5,
+      "schema_count": 31,
+      "verified_git_object_id": "sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5"
+    },
+    "m060_predecessor": {
+      "component": {
+        "component_path": "CodexSkills/governance/retention/root_lifecycle.py",
+        "content_digest": "0b2436b889c7ff386f0468c2bfb7012159706784c830daa0ef1c19df4c663bf2"
+      },
+      "done_gate": "LEGACY_LOCAL_SOURCE_NEVER_SELECTED_BY_72H_JOB",
+      "readiness": {
+        "artifact_digest": "b7c1ba479d0a47b97cb00b0556b2bf5db5b035bc156c9ae4e3bdc71337707080",
+        "canonical_path": "CodexSkills/governance/retention/protected-local-managed-raw-readiness.json",
+        "content_digest": "6376e6776b6f23cf45080f5d3a9191fcdf0238168032b14356da8b88dd45bef4"
+      },
+      "status": "DRAFT_NON_ACTIVE_PROTECTED_LOCAL_MANAGED_RAW_BOUNDARY_READY",
+      "verified_git_object_id": "sha1:21235d49fca818b74677172711cfe279d2da68a6"
+    },
+    "raw_segment_schema": {
+      "artifact_digest": "238f3861bafd257c3ed0a5525383b357a17c65ef68049d8fbc519045982c584f",
+      "bundle_member": false,
+      "canonical_path": "CodexSkills/registry/auto/schemas/private/raw-segment.schema.json",
+      "private_schema": true,
+      "schema_sha256": "032bdfb38c704a031e6c6f9c2f84dfbc82c9cc13af89e01723d8f439dff47dd5",
+      "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:raw-segment:v2",
+      "self_digest_pointer": "/segment_digest",
+      "verified_git_object_id": "sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5"
+    },
+    "repository_self_report_is_not_trust_root": true,
+    "retention_policy": {
+      "bundle_member": true,
+      "policy_id": "urn:linzecolin:agentdatabase:skillops:policy:retention:v3",
+      "policy_sha256": "bcad1e50a847e040d1350ca2fd977503b4ae642deabd727266e9dbbd26acb7ce"
+    },
+    "retention_receipt_schema": {
+      "artifact_digest": "ddb464fe6a381580af486df25a85c4750b1743289cb631732f77d36944c8b215",
+      "bundle_member": true,
+      "canonical_path": "CodexSkills/registry/auto/schemas/public-v2/retention-receipt-v3.schema.json",
+      "schema_sha256": "81435881fbc5e1ced14975edbedee63ca6555674db36f906bdfdee20eb317c45",
+      "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:retention-receipt:v3",
+      "self_digest_pointer": "/receipt_digest",
+      "verified_git_object_id": "sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5"
+    }
+  },
+  "status": "DRAFT_NON_ACTIVE_MANAGED_RAW_72H_POLICY_READY",
+  "task_contract": {
+    "completed_task_ids": [
+      "M-061"
+    ],
+    "dependency_task_ids": [
+      "M-060"
+    ],
+    "done_gate": "71_59_59_KEEP_AND_72_00_00_EXPIRE",
+    "pending_task_ids": [
+      "M-062"
+    ],
+    "required_output": "SEGMENT_MARKERS_RECEIPTS_CLOCK_TESTS"
+  },
+  "task_pack_revision": "v0.0.0.2"
+}

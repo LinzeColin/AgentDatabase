@@ -65,6 +65,13 @@ Key entrypoints:
   bundle-external observation/report schemas and non-active readiness bound to
   the exact candidate, retention-policy:v3, raw-segment:v2, and
   public-run-event:v2 contracts.
+- `retention/managed_raw_policy.py`: pure M-061 UTC elapsed-time stages,
+  exact 72-hour boundary, offline-breach evidence, deterministic action plan,
+  and receipt-to-M-060 scope binding; no physical path or mutation authority.
+- `tools/build_managed_raw_72h_policy.py`: deterministic M-061
+  bundle-external observation/plan/readiness schemas bound to the exact
+  candidate, immutable M-060 predecessor, retention-policy:v3,
+  raw-segment:v2, and retention-receipt:v3 contracts.
 - `tools/validate_au040_semantic_acceptance.py`: exact 365-day and
   shard/index/manifest/publication cross-artifact gates.
 - `tests/test_mechanism_contract.py`: positive, negative, and fault gates.
@@ -119,6 +126,8 @@ Run from the repository root with the explicitly provisioned interpreter:
 /usr/bin/python3 -B \
   CodexSkills/governance/tools/build_protected_local_raw_boundary.py \
   --check
+/usr/bin/python3 -B \
+  CodexSkills/governance/tools/build_managed_raw_72h_policy.py --check
 /usr/bin/python3 -B CodexSkills/governance/tools/validate_mechanism.py lint-draft
 /usr/bin/python3 -B \
   CodexSkills/governance/tools/validate_activation.py lint-control
