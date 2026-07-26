@@ -1,3 +1,115 @@
+# Mechanism Failure-to-Test corrective handoff
+
+- State:
+  `DRAFT_NON_ACTIVE_FAILURE_TO_TEST_CONVERSION_READY_SHADOW_FIXTURE_ONLY`
+- Phase: `MECHANISM_FAILURE_TO_TEST_CONVERSION_CORRECTIVE`
+- Task Pack task implemented: `M-046`
+- M-046 dependency: `M-045`
+- M-045 standalone repository artifact present: `false`
+- M-045 functional input contract:
+  `FUNCTIONAL_CONTRACT_RECONSTRUCTED_FAIL_CLOSED`
+- Required output: `CONFIRMED_REGRESSION_CASE_WITH_LINEAGE`
+- Done gate: `SEALED_HOLDOUT_NEVER_CONTAMINATED`
+- Pure converter:
+  `CodexSkills/governance/evaluation/failure_to_test.py`
+- Pure converter raw SHA-256:
+  `749ad93c1434d3b7d8bf665b165f10117bdf8e1371259bf96a49509253dcd277`
+- Synthetic confirmed incident:
+  `CodexSkills/governance/evaluation/confirmed-failure-incident.json`
+- Incident raw / self SHA-256:
+  `8890cdced1f491c69c4f0cd89b80f91e68e0e609f54eb02c6831d8af906a34da`
+  / `8704a5700fb4f807c44bf2eb0a55cd9065f17c2e4f649d7372b51527becf3cb3`
+- Synthetic confirmed regression case:
+  `CodexSkills/governance/evaluation/confirmed-regression-case.json`
+- Regression raw / self SHA-256:
+  `006e5e770688cce4d144b8d49271c09451b7216d97da7674bf39e01cf7956bf2`
+  / `aab2854eb272c63e2d0a1fac033f5d8aca6a371afb12e37eaf979a92028b037d`
+- M-046 readiness:
+  `CodexSkills/governance/evaluation/failure-to-test-readiness.json`
+- Readiness raw / self SHA-256:
+  `ab243507d8384a849ea9488e1a6d717c87f12195b7397300658c83d2c6e3eaf6`
+  / `0fd20eef7a9aad02fe5301f28a3bbd91ee352dc431f9832fd372601e1425c496`
+- Incident schema raw / canonical SHA-256:
+  `7f84652a281135623ada9bea884523c343738a7d865d741b42b0282a6cf9f24e`
+  / `4af6d1a70b1ac506f5fee46466cb02d55062928b6c3064ac3aacdec828659975`
+- Regression schema raw / canonical SHA-256:
+  `b7bf08c93a0fe3d994d8f62583bb404fffa0ec33cbfe1d1ba39f8a473858dd2a`
+  / `4c0a97958901365e75b2243289a7f1d52e3352b488fb8a7ecf98748d1ffd6555`
+- Readiness schema raw / canonical SHA-256:
+  `1fb1c5ecada48eddb408730c53157877f32acd2c6a3109d99f0dab846f6022ce`
+  / `9db5bc8721954e702adb63d4ed9a075f62959240261b4793a8cb2a0991d6bff9`
+- Immutable candidate:
+  `sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5`
+- Candidate bundle digest:
+  `36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e`
+- Real incident read / production incident converted:
+  `false / false`
+- Raw material read / sealed holdout read / labels copied:
+  `false / false / false`
+- Evaluation profile mutation / publication / activation:
+  `false / false / false`
+- Pending Task Pack task: `M-068`
+- Exact next Phase: `MECHANISM_THREE_REPRESENTATIVE_PILOTS`
+
+The pre-M-068 dependency audit found that the candidate eval-profile schema
+contained the M-046 field vocabulary, but there was no standalone converter,
+lineage evidence, or regression gate. This corrective closes that functional
+gap without fabricating a production incident or silently claiming a missing
+M-045 repository artifact.
+
+The converter accepts only a closed, self-digested incident envelope whose
+privacy triage is `PUBLIC_SAFE_METADATA_ONLY` and whose root cause is
+`CONFIRMED`. It derives every regression field, preserves incident and source
+fact lineage, and rejects any sealed-holdout digest reused as incident,
+root-cause, or deterministic-check input. The converter has no filesystem,
+Git, network, raw-material, sealed-holdout, state, publisher, notification, or
+activation capability. Rehashing altered caller output does not bypass exact
+recomputation.
+
+The checked-in incident and regression are deterministic synthetic metadata
+fixtures for `codex/km-bid-evolve`; they prove the conversion boundary only.
+They are not evidence that a real incident occurred, that a real regression
+test ran, or that an eval profile was changed. M-068 may consume this exact
+shadow contract, but production pilots remain blocked until real Registry
+versions become evaluated and binding-eligible.
+
+## M-046 validation
+
+```text
+M-046 targeted conversion/privacy/lineage/negative tests: 15/15 PASS
+complete Mechanism suite: 287/287 PASS
+M-046 builder/fixtures/readiness/schemas: BYTE_EQUIVALENT
+lineage closed / sealed contaminated / production ready:
+  true / false / false
+candidate trust: 31 schemas / 5 policies PASS
+schema-set lint:
+  base 21 / candidate-compatible 41 / version 24 /
+  complete repository closure 83 PASS
+OpenAIDatabase consumer + architecture: 23/23 PASS
+consumer CLI: PASS / errors=[] / canonical publication=false
+```
+
+The pre-existing cross-owner transition remains fail-closed and is not
+modified or relabeled by M-046:
+
+```text
+complete Auto suite: 200 tests / 5 failures / 20 errors
+fault/privacy seed 271828: 149 tests / 5 failures / 25 errors
+fault/privacy seed 314159: 149 tests / 5 failures / 25 errors
+AUTO_REGISTRY_MIRROR_SKILL_COUNT_DRIFT
+BOUND_REFERENCE_RESOLVER_RUNTIME_LOCAL_DRIFT
+ACTIVATION_CONTROL_INTERFACE_SEMANTIC_MISMATCH
+```
+
+Those exact signatures match the M-066/M-067 baseline. No Auto file changes
+belong to this corrective. Final acceptance additionally requires an ordinary
+commit, FF-safe `HEAD:main` push, and fresh detached GitHub object/raw-byte
+readback of every changed path. No verifier call, historical Task Pack replay,
+real incident read, evaluator mutation, notification, state write,
+publication, activation, or follow-on Phase belongs to this run.
+
+## Prior M-067 operational dashboard handoff
+
 # Mechanism operational dashboard and actionable-alert handoff
 
 - State:

@@ -1,0 +1,37 @@
+{
+  "artifact_digest": "aab2854eb272c63e2d0a1fac033f5d8aca6a371afb12e37eaf979a92028b037d",
+  "bundle_digest": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e",
+  "created_at": "2026-07-26T01:00:01.000000Z",
+  "deterministic_check_manifest_digests": [
+    "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+  ],
+  "expected_outcome_code": "DETECT_REGRESSION_AND_FAIL_CLOSED",
+  "lineage": {
+    "artifact_digest": "8704a5700fb4f807c44bf2eb0a55cd9065f17c2e4f649d7372b51527becf3cb3",
+    "conversion_mode": "PUBLIC_SAFE_METADATA_ONLY",
+    "incident_uid": "inc_01ARZ3NDEKTSV4RRFFQ69G5FA1",
+    "root_cause_code": "DETERMINISTIC_OUTPUT_MISMATCH",
+    "source_fact_digests": [
+      "1111111111111111111111111111111111111111111111111111111111111111",
+      "2222222222222222222222222222222222222222222222222222222222222222"
+    ]
+  },
+  "protocol_revision": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1",
+  "regression_case_uid": "reg_01ARZ3NDEKTSV4RRFFQ69G5FA2",
+  "replay_contract": {
+    "deterministic": true,
+    "evaluation_profile_mutation_permitted": false,
+    "raw_material_required": false,
+    "side_effects_permitted": false
+  },
+  "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:confirmed-regression-case:v1",
+  "sealed_boundary": {
+    "optimizer_visibility": "DENIED",
+    "sealed_holdout_accessed": false,
+    "sealed_holdout_labels_copied": false,
+    "sealed_holdout_manifest_digest": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+  },
+  "skill_identity_uid": "ski_58AKTHBW3VQE0B7JM8WC6M1VPP",
+  "skill_version_uid": "skv_2HAJG2J7C1R3FFX194NRARWNKG",
+  "status": "CONFIRMED_REGRESSION"
+}

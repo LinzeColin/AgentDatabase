@@ -1,0 +1,151 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:confirmed-regression-case:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "created_at": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+    },
+    "deterministic_check_manifest_digests": {
+      "items": {
+        "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+      },
+      "maxItems": 1,
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "expected_outcome_code": {
+      "const": "DETECT_REGRESSION_AND_FAIL_CLOSED"
+    },
+    "lineage": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_digest": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+        },
+        "conversion_mode": {
+          "const": "PUBLIC_SAFE_METADATA_ONLY"
+        },
+        "incident_uid": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/typed_uid"
+        },
+        "root_cause_code": {
+          "enum": [
+            "CONTRACT_MISMATCH",
+            "DETERMINISTIC_OUTPUT_MISMATCH",
+            "PERMISSION_OVERREACH",
+            "PRIVACY_POLICY_VIOLATION",
+            "ROUTING_FALSE_TRIGGER"
+          ]
+        },
+        "source_fact_digests": {
+          "items": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "incident_uid",
+        "artifact_digest",
+        "source_fact_digests",
+        "root_cause_code",
+        "conversion_mode"
+      ],
+      "type": "object"
+    },
+    "protocol_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/protocol_revision"
+    },
+    "regression_case_uid": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/typed_uid"
+    },
+    "replay_contract": {
+      "additionalProperties": false,
+      "properties": {
+        "deterministic": {
+          "const": true
+        },
+        "evaluation_profile_mutation_permitted": {
+          "const": false
+        },
+        "raw_material_required": {
+          "const": false
+        },
+        "side_effects_permitted": {
+          "const": false
+        }
+      },
+      "required": [
+        "deterministic",
+        "side_effects_permitted",
+        "raw_material_required",
+        "evaluation_profile_mutation_permitted"
+      ],
+      "type": "object"
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:confirmed-regression-case:v1"
+    },
+    "sealed_boundary": {
+      "additionalProperties": false,
+      "properties": {
+        "optimizer_visibility": {
+          "const": "DENIED"
+        },
+        "sealed_holdout_accessed": {
+          "const": false
+        },
+        "sealed_holdout_labels_copied": {
+          "const": false
+        },
+        "sealed_holdout_manifest_digest": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+        }
+      },
+      "required": [
+        "sealed_holdout_manifest_digest",
+        "sealed_holdout_accessed",
+        "sealed_holdout_labels_copied",
+        "optimizer_visibility"
+      ],
+      "type": "object"
+    },
+    "skill_identity_uid": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/skill_identity_uid"
+    },
+    "skill_version_uid": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/skill_version_uid"
+    },
+    "status": {
+      "const": "CONFIRMED_REGRESSION"
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "bundle_digest",
+    "regression_case_uid",
+    "skill_identity_uid",
+    "skill_version_uid",
+    "status",
+    "lineage",
+    "sealed_boundary",
+    "deterministic_check_manifest_digests",
+    "expected_outcome_code",
+    "replay_contract",
+    "created_at",
+    "artifact_digest"
+  ],
+  "title": "Confirmed public-safe regression case",
+  "type": "object"
+}

@@ -1,0 +1,129 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:confirmed-failure-incident:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "failure_class_code": {
+      "enum": [
+        "DETERMINISTIC_CORRECTNESS",
+        "PERMISSION_BOUNDARY",
+        "PRIVACY_GUARD",
+        "ROUTING_REGRESSION"
+      ]
+    },
+    "incident_uid": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/typed_uid"
+    },
+    "observed_at": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+    },
+    "privacy_triage": {
+      "additionalProperties": false,
+      "properties": {
+        "personal_data_present": {
+          "const": false
+        },
+        "raw_content_present": {
+          "const": false
+        },
+        "sealed_holdout_content_present": {
+          "const": false
+        },
+        "state": {
+          "const": "PUBLIC_SAFE_METADATA_ONLY"
+        }
+      },
+      "required": [
+        "state",
+        "raw_content_present",
+        "personal_data_present",
+        "sealed_holdout_content_present"
+      ],
+      "type": "object"
+    },
+    "protocol_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/protocol_revision"
+    },
+    "root_cause": {
+      "additionalProperties": false,
+      "properties": {
+        "cause_code": {
+          "enum": [
+            "CONTRACT_MISMATCH",
+            "DETERMINISTIC_OUTPUT_MISMATCH",
+            "PERMISSION_OVERREACH",
+            "PRIVACY_POLICY_VIOLATION",
+            "ROUTING_FALSE_TRIGGER"
+          ]
+        },
+        "evidence_digests": {
+          "items": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "status": {
+          "const": "CONFIRMED"
+        }
+      },
+      "required": [
+        "status",
+        "cause_code",
+        "evidence_digests"
+      ],
+      "type": "object"
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:confirmed-failure-incident:v1"
+    },
+    "severity": {
+      "enum": [
+        "MAJOR",
+        "CRITICAL"
+      ]
+    },
+    "skill_identity_uid": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/skill_identity_uid"
+    },
+    "skill_version_uid": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/skill_version_uid"
+    },
+    "source_fact_digests": {
+      "items": {
+        "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+      },
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "status": {
+      "const": "CONFIRMED"
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "bundle_digest",
+    "incident_uid",
+    "skill_identity_uid",
+    "skill_version_uid",
+    "severity",
+    "status",
+    "failure_class_code",
+    "privacy_triage",
+    "root_cause",
+    "source_fact_digests",
+    "observed_at",
+    "artifact_digest"
+  ],
+  "title": "Public-safe confirmed failure incident",
+  "type": "object"
+}

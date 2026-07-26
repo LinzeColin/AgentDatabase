@@ -36,6 +36,11 @@ Key entrypoints:
   version-policy v3 draft and consumer-first handoff.
 - `tools/build_version_policy_v3_consumer_readiness.py`: deterministic
   Mechanism dual-read readiness and actual cross-plane consumer inventory.
+- `evaluation/failure_to_test.py`: pure M-046 confirmed-incident to
+  regression-case conversion with exact lineage, privacy triage, and sealed
+  holdout isolation.
+- `tools/build_failure_to_test.py`: deterministic M-046 public-safe shadow
+  fixture, three bundle-external schemas, and non-active readiness.
 - `promotion/controller.py`: pure append-only `PROMOTE` / `REJECT`
   controller with complete Registry, evaluation, evidence, and decision
   closure; no state writer or activation authority.
@@ -153,6 +158,8 @@ Run from the repository root with the explicitly provisioned interpreter:
 /usr/bin/python3 -B \
   CodexSkills/governance/tools/build_version_policy_v3_consumer_readiness.py \
   --check
+/usr/bin/python3 -B \
+  CodexSkills/governance/tools/build_failure_to_test.py --check
 /usr/bin/python3 -B \
   CodexSkills/governance/tools/build_promotion_controller.py --check
 /usr/bin/python3 -B \

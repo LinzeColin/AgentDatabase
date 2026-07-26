@@ -1,0 +1,176 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:failure-to-test-readiness:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "bundle_digest": {
+      "const": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e"
+    },
+    "dependency_contract": {
+      "const": {
+        "dependency_status": "FUNCTIONAL_CONTRACT_RECONSTRUCTED_FAIL_CLOSED",
+        "functional_input_contract_embedded": true,
+        "privacy_triage_required": true,
+        "raw_data_publication_permitted": false,
+        "root_cause_confirmation_required": true,
+        "standalone_repository_artifact_present": false,
+        "task_id": "M-045"
+      }
+    },
+    "implementation_contract": {
+      "const": {
+        "caller_output_fields_accepted": false,
+        "capability_mode": "PURE_IMMUTABLE_OBJECTS_ONLY",
+        "component_path": "CodexSkills/governance/evaluation/failure_to_test.py",
+        "content_digest": "749ad93c1434d3b7d8bf665b165f10117bdf8e1371259bf96a49509253dcd277",
+        "filesystem_capability_present": false,
+        "git_capability_present": false,
+        "incident_schema": {
+          "canonical_path": "CodexSkills/governance/evaluation/schemas/confirmed-failure-incident.schema.json",
+          "content_digest": "7f84652a281135623ada9bea884523c343738a7d865d741b42b0282a6cf9f24e",
+          "schema_sha256": "4af6d1a70b1ac506f5fee46466cb02d55062928b6c3064ac3aacdec828659975",
+          "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:confirmed-failure-incident:v1",
+          "self_digest_pointer": "/artifact_digest"
+        },
+        "network_capability_present": false,
+        "publisher_capability_present": false,
+        "raw_material_read_capability_present": false,
+        "regression_schema": {
+          "canonical_path": "CodexSkills/governance/evaluation/schemas/confirmed-regression-case.schema.json",
+          "content_digest": "b7bf08c93a0fe3d994d8f62583bb404fffa0ec33cbfe1d1ba39f8a473858dd2a",
+          "schema_sha256": "4c0a97958901365e75b2243289a7f1d52e3352b488fb8a7ecf98748d1ffd6555",
+          "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:confirmed-regression-case:v1",
+          "self_digest_pointer": "/artifact_digest"
+        },
+        "sealed_holdout_read_capability_present": false,
+        "state_capability_present": false
+      }
+    },
+    "next_phase": {
+      "const": "MECHANISM_THREE_REPRESENTATIVE_PILOTS"
+    },
+    "nonmutation": {
+      "const": {
+        "activation_forbidden": true,
+        "auto_plane_unchanged": true,
+        "candidate_bundle_unchanged": true,
+        "canonical_publication_permitted": false,
+        "evaluation_profile_mutated": false,
+        "notification_sent": false,
+        "openai_database_unchanged": true,
+        "raw_material_read": false,
+        "real_incident_read": false,
+        "sealed_holdout_read": false,
+        "state_write_permitted": false,
+        "version_file_created": false
+      }
+    },
+    "owner_plane": {
+      "const": "MECHANISM"
+    },
+    "policy_count": {
+      "const": 5
+    },
+    "production_conversion_ready": {
+      "const": false
+    },
+    "protocol_revision": {
+      "const": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1"
+    },
+    "schema_closure_count": {
+      "const": 34
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:failure-to-test-readiness:v1"
+    },
+    "self_digest_pointer": {
+      "const": "/artifact_digest"
+    },
+    "shadow_fixture": {
+      "const": {
+        "incident": {
+          "artifact_digest": "8704a5700fb4f807c44bf2eb0a55cd9065f17c2e4f649d7372b51527becf3cb3",
+          "canonical_path": "CodexSkills/governance/evaluation/confirmed-failure-incident.json",
+          "content_digest": "8890cdced1f491c69c4f0cd89b80f91e68e0e609f54eb02c6831d8af906a34da"
+        },
+        "lineage_closed": true,
+        "mode": "SYNTHETIC_PUBLIC_SAFE_METADATA_ONLY",
+        "production_incident_converted": false,
+        "regression_case": {
+          "artifact_digest": "aab2854eb272c63e2d0a1fac033f5d8aca6a371afb12e37eaf979a92028b037d",
+          "canonical_path": "CodexSkills/governance/evaluation/confirmed-regression-case.json",
+          "content_digest": "006e5e770688cce4d144b8d49271c09451b7216d97da7674bf39e01cf7956bf2"
+        },
+        "root_cause_confirmed": true,
+        "sealed_holdout_accessed": false,
+        "sealed_holdout_contaminated": false,
+        "sealed_holdout_labels_copied": false
+      }
+    },
+    "source_trust": {
+      "const": {
+        "candidate_bundle": {
+          "artifact_digest": "66ad125629cab71739ff2bc266219f995f7a45998936ca720c6db678ee77e65a",
+          "bundle_digest": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e",
+          "canonical_path": "CodexSkills/governance/bundles/schema-bundle-manifest.v1.json",
+          "expected_mode": "CANDIDATE",
+          "policy_count": 5,
+          "schema_count": 31,
+          "verified_git_object_id": "sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5"
+        },
+        "public_value_policy": {
+          "expected_mode": "CANDIDATE_MEMBER",
+          "policy_id": "urn:linzecolin:agentdatabase:skillops:policy:public-value:v2",
+          "policy_sha256": "cff871b00dec9d33ba6bd879e02b7039cef57d11e35bdc4c57a80d4d3ea519d4"
+        },
+        "repository_self_report_is_not_trust_root": true
+      }
+    },
+    "status": {
+      "const": "DRAFT_NON_ACTIVE_FAILURE_TO_TEST_CONVERSION_READY_SHADOW_FIXTURE_ONLY"
+    },
+    "task_contract": {
+      "const": {
+        "dependency_task_ids": [
+          "M-045"
+        ],
+        "done_gate": "SEALED_HOLDOUT_NEVER_CONTAMINATED",
+        "implemented_task_ids": [
+          "M-046"
+        ],
+        "pending_task_ids": [
+          "M-068"
+        ],
+        "required_output_code": "CONFIRMED_REGRESSION_CASE_WITH_LINEAGE"
+      }
+    },
+    "task_pack_revision": {
+      "const": "v0.0.0.2"
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "bundle_digest",
+    "status",
+    "owner_plane",
+    "source_trust",
+    "dependency_contract",
+    "implementation_contract",
+    "shadow_fixture",
+    "nonmutation",
+    "task_contract",
+    "schema_closure_count",
+    "policy_count",
+    "production_conversion_ready",
+    "next_phase",
+    "self_digest_pointer",
+    "task_pack_revision",
+    "artifact_digest"
+  ],
+  "title": "Mechanism M-046 Failure-to-Test readiness",
+  "type": "object"
+}
