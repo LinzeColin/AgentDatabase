@@ -6,8 +6,8 @@
     "claude": "Claude Skill（Anthropic 侧）",
     "agents": "Agent Skill（跨工具通用目录）"
   },
-  "skill_instance_count": 89,
-  "unique_slug_count": 74,
+  "skill_instance_count": 90,
+  "unique_slug_count": 75,
   "skills": [
     {
       "slug": "agent-reach",
@@ -88,6 +88,16 @@
       "entry": "registry/codex/codex-encrypted-backup/SKILL.md",
       "file_count": 1,
       "size_bytes": 6543
+    },
+    {
+      "slug": "context-kernel",
+      "source": "codex",
+      "name": "context-kernel",
+      "description": "Use this skill when a long-running task or project needs durable, minimal context across chats, sessions, models, devices, or execution owners: resume from saved state, checkpoint material progress, create a handoff snapshot, transfer responsibility, or trim stale context. Do not use it for one-off questions, ordinary summaries, hidden reasoning, or as a chat transcript.",
+      "category": "其他",
+      "entry": "registry/codex/context-kernel/SKILL.md",
+      "file_count": 3,
+      "size_bytes": 159241
     },
     {
       "slug": "domain-dual-plane",
