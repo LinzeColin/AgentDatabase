@@ -1,4 +1,9 @@
 *.zip
+# 例外：人物蒸馏交付 ZIP 是不可再生资产，必须入库。
+# 没有这条，register_persona 之后 `git add -A` 会静默漏掉 ZIP，
+# 仓库就会出现「team-index 说 N 人、实际只有 N-1 个 ZIP」的坏状态。
+# 见 README「治理规则：受保护资产」。
+!CodexSkills/registry/codex/persona-distiller-group/**/*.zip
 data/raw/
 data/raw_encrypted/
 data/private_imports/

@@ -59,3 +59,60 @@ imported into `~/.codex/sessions` on this machine.
 身份目录只用于唯一登记；安装后用户直接调用对应人物 Skill，内部自动路由身份与场景，
 不要求用户选择身份。每个 canonical 人物的成功蒸馏产物独立使用
 `0.0.0.1` 至 `0.0.0.999` 连续版本；单次运行没有版本编号。
+
+## 治理规则：受保护资产
+
+`CodexSkills/registry/codex/persona-distiller/**` 与
+`CodexSkills/registry/codex/persona-distiller-group/**` 是**不可再生资产**。
+每个交付 ZIP 都是一次数十万 token、约一小时的蒸馏产出，丢了只能重蒸。
+
+**为什么有这条规则**：2026-07-26 出过一次严重丢失 —— 一次例行同步
+（`chore(skills): 同步本机 Skill 到仓库（更新 4）`）把本机上一份**陈旧的**副本按
+「本机 → 仓库」方向覆盖回仓库，`team-index.json` 从 **70 人掉到 3 人**，
+两个 skill 合计删掉 11159 行 / 311 个文件，事后靠 git 历史恢复。
+根因不是有人误删，而是**同步器默认本机永远是真相源，而这两个 skill 的真相源其实是仓库**。
+
+1. **仓库优先**：受保护资产以仓库为准。本机副本陈旧时，从仓库更新本机，
+   **绝不**把本机推平仓库。
+2. **只增不减**：任何操作若会让 `team-index.json` 的 `products` 数量减少、
+   或删除任一已登记人物目录，一律视为事故并中止。
+   `CodexSkills/sync_skills.py` 已内置这道硬门（写入前比对本机与仓库的已登记人物集合，
+   会抹人就中止、不写不提交不推送），绕过需显式 `--allow-persona-shrink` 并写明理由。
+3. **改前留基线、改后验数**：数字必须只增不减。
+
+   ```bash
+   python3 CodexSkills/registry/codex/persona-distiller-group/scripts/validate_group.py \
+       --registry-root CodexSkills/registry/codex/persona-distiller-group
+   python3 CodexSkills/registry/codex/persona-distiller/scripts/self_check.py
+   # 已入库的交付 ZIP 数必须等于 team-index 的 products 数
+   git -c core.quotepath=false ls-files -- CodexSkills/registry/codex/persona-distiller-group \
+       | grep -c '\.zip$'
+   ```
+
+   > `git ls-files` 默认会把中文路径转义成 `"...\350..."`，结尾是引号不是 `zip`，
+   > 直接 `grep '\.zip$'` 会数出 0 —— 必须带 `-c core.quotepath=false`。
+
+4. **交付 ZIP 必须入库**：根 `.gitignore` 有全局 `*.zip`，已针对
+   `CodexSkills/registry/codex/persona-distiller-group/**/*.zip` 开了否定例外。
+   不要删掉那条例外 —— 没有它，`register_persona` 之后 `git add -A` 会**静默漏掉 ZIP**，
+   仓库会变成「`team-index` 说 N 人、实际只有 N−1 个 ZIP」的坏状态。
+5. **禁止**：对受保护路径 `rm -rf`；`git push --force`；`git reset --hard` 到丢失点之前的提交；
+   `git gc --prune=now`（立即销毁不可达对象、没有后悔药，本机已有线程因此丢过 2467 个提交
+   且不可恢复 —— 清缓存只用 `git gc`）。
+5. **三条恢复退路**：① git 历史（`git log --diff-filter=D -- <路径>` 定位删除点，
+   `git checkout <删除前的提交> -- <路径>` 取回）；② 本机快照 `~/Downloads/蒸馏/` 里的交付 ZIP
+   （`register_persona.py <zip>` 重新登记即可完全复原）；③ GitHub release 资产。
+   恢复后必须重跑上面两条校验，并让 `persona-distiller/tests` 全绿。
+6. **文档由数据派生**：身份目录清单与登记人数一律从 `team-index.json` 生成，
+   不在文档或脚本里硬编码，避免分类改版后文档滞留旧分类。
+
+## 全量专家团队蒸馏（长期任务）
+
+目标 12 组 × 50 = 600 人。单会话、并发 1、不花 API 钱、**每周只用 20% 周额度**；
+撞额度即推送 main 并休眠，下周继续。
+作业规程与锁定决策不在本仓，在本机 `~/Downloads/蒸馏/`：
+`_每次开工必读.md`（总入口）、`_决策台账.md`、`_质量评分矩阵_v1.md`、
+`_蒸馏名单_v1草稿.md`、`_pipeline/RUNBOOK.md`（每人 12 步）、
+`_pipeline/next_person.py`（确定性算出“下一个是谁” —— done 状态实时从本仓 +
+Downloads 推导，不靠记忆，因此换会话、隔几周都不会漂移）。
+每周开工只需一句：**「开始本周蒸馏」**。

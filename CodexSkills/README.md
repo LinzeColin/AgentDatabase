@@ -1,6 +1,6 @@
 # CodexSkills
 
-本机全部 Skill 的仓库镜像：**90 份实例 / 75 个不同名字**，3782 个文件，约 108 MB。
+本机全部 Skill 的仓库镜像：**90 份实例 / 75 个不同名字**，4129 个文件，约 119 MB。
 
 **由 `sync_skills.py` 自动生成，请勿手工编辑本文件。**
 
@@ -29,12 +29,12 @@ curl -s https://raw.githubusercontent.com/LinzeColin/AgentDatabase/main/CodexSki
 
 ## 人物蒸馏产物登记
 
-[`persona-distiller`](registry/codex/persona-distiller/SKILL.md) 为 **v0.0.0.6** 十二类单一主身份版本；人物产物必须且只能登记在一个身份目录中。
-完整发布 ZIP、canonical 登记、团队卡与机器索引仅位于与构建器平级的 [`registry/codex/persona-distiller-group/`](registry/codex/persona-distiller-group/README.md)。
-身份分类是内部登记与路由元数据，不是调用门槛；安装后用户直接调用人物 Skill，不要求选择身份。
-十二个目录：`材料建工师/`、`软件开发师/`、`艺术设计师/`、`创业经营师/`、`投资资本师/`、`思想教育师/`、`政治法律师/`、`客户营销师/`、`建造采购师/`、`财务合规师/`、`医疗护理师/`、`农林牧渔师/`。
+[`persona-distiller`](registry/codex/persona-distiller/SKILL.md) 生成的每个人物产物必须且只能登记在对应的一个身份目录中，同一 canonical 人物不得在不同身份下重复登记。
+完整发布 ZIP、canonical 登记、团队卡与机器索引仅位于与构建器平级的 [`registry/codex/persona-distiller-group/`](registry/codex/persona-distiller-group/README.md)；完整交付规则见 [`references/delivery-package-standard.md`](registry/codex/persona-distiller-group/references/delivery-package-standard.md)，团队路由真源见 [`CANONICAL-ROOT-ROUTE.md`](registry/codex/persona-distiller-group/CANONICAL-ROOT-ROUTE.md)。
+目录（由 `team-index.json` 实时派生，不在本脚本里硬编码，避免分类改版后文档漂移）：[`农林牧渔师/`](registry/codex/persona-distiller-group/农林牧渔师/)、[`创业经营师/`](registry/codex/persona-distiller-group/创业经营师/)、[`医疗护理师/`](registry/codex/persona-distiller-group/医疗护理师/)、[`客户营销师/`](registry/codex/persona-distiller-group/客户营销师/)、[`建造采购师/`](registry/codex/persona-distiller-group/建造采购师/)、[`思想教育师/`](registry/codex/persona-distiller-group/思想教育师/)、[`投资资本师/`](registry/codex/persona-distiller-group/投资资本师/)、[`政治法律师/`](registry/codex/persona-distiller-group/政治法律师/)、[`材料建工师/`](registry/codex/persona-distiller-group/材料建工师/)、[`艺术设计师/`](registry/codex/persona-distiller-group/艺术设计师/)、[`财务合规师/`](registry/codex/persona-distiller-group/财务合规师/)、[`软件开发师/`](registry/codex/persona-distiller-group/软件开发师/)。
+身份分类由人物 Skill 内部使用，不是调用门槛；用户安装后直接调用对应人物 Skill，无需选择身份。人物产物按 canonical 人物分别从 `0.0.0.1` 连续编号到 `0.0.0.999`，只在成功登记时占号；人物 Skill 的单次运行不编号。团队调用会先按场景选择 5–20 个高相关角色，以正向解决者为主，并至少隔离一个复审、一个裁判和一个反证角色。
 
-当前登记：**70 人物**。
+当前登记：**71 个人物**。
 
 | 人物 | 唯一分类 | 产物版本 | 完整 ZIP |
 |---|---|---|---|
@@ -95,6 +95,7 @@ curl -s https://raw.githubusercontent.com/LinzeColin/AgentDatabase/main/CodexSki
 | Barbara Liskov | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/barbara-liskov/versions/0.0.0.1/barbara-liskov-persona-distillation-delivery-v0.0.0.1.zip) |
 | Chip Huyen | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/chip-huyen/versions/0.0.0.1/chip-huyen-persona-distillation-delivery-v0.0.0.1.zip) |
 | Christopher Manning | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/christopher-manning/versions/0.0.0.1/christopher-manning-persona-distillation-delivery-v0.0.0.1.zip) |
+| Donald Knuth | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/donald-knuth/versions/0.0.0.1/donald-knuth-persona-distillation-delivery-v0.0.0.1.zip) |
 | Hamel Husain | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/hamel-husain/versions/0.0.0.1/hamel-husain-persona-distillation-delivery-v0.0.0.1.zip) |
 | Jerry Liu | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/jerry-liu-llamaindex/versions/0.0.0.1/jerry-liu-llamaindex-persona-distillation-delivery-v0.0.0.1.zip) |
 | John Carmack（约翰·卡马克） | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/john-carmack/versions/0.0.0.1/john-carmack-persona-distillation-delivery-v0.0.0.1.zip) |
@@ -109,16 +110,44 @@ curl -s https://raw.githubusercontent.com/LinzeColin/AgentDatabase/main/CodexSki
 | Simon Willison | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/simon-willison/versions/0.0.0.1/simon-willison-persona-distillation-delivery-v0.0.0.1.zip) |
 | Stephen E. Robertson | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/stephen-e-robertson/versions/0.0.0.1/stephen-e-robertson-persona-distillation-delivery-v0.0.0.1.zip) |
 
+## 治理规则：受保护资产（不可再生，丢了就没了）
+
+2026-07-26 发生过一次严重丢失：一次例行同步（`chore(skills): 同步本机 Skill 到仓库（更新 4）`）把本机上一份**陈旧的** `persona-distiller` / `persona-distiller-group` 副本反向覆盖进仓库，`team-index.json` 从 **70 人 掉到 3 人**，两个 skill 合计删掉 11159 行 / 311 个文件，事后靠 git 历史恢复。以下规则据此设立。
+
+**受保护资产**：`registry/codex/persona-distiller/**`（构建器）与 `registry/codex/persona-distiller-group/**`（唯一 canonical 登记、团队卡、全部交付 ZIP）。每个交付 ZIP 是一次数十万 token、约一小时的蒸馏产出，**仓库是它们的唯一真相源，本机副本不是**。
+
+1. **仓库优先**：受保护资产以仓库为准。同步器的「本机 → 仓库」单向覆盖对它们不成立；本机副本陈旧时，正确动作是从仓库更新本机，不是把本机推平仓库。
+2. **只增不减硬门**：任何操作若会让 `team-index.json` 的 `products` 数量减少、或删除任一已登记人物目录，一律视为事故并中止。本脚本已内置该门（见下方“同步”一节），绕过它需要显式 `--allow-persona-shrink` 并写明理由。
+3. **改前留基线，改后验数**：任何涉及这两个 skill 的改动，前后各跑一次校验，数字必须只增不减。
+
+```bash
+python3 CodexSkills/registry/codex/persona-distiller-group/scripts/validate_group.py \
+    --registry-root CodexSkills/registry/codex/persona-distiller-group
+python3 CodexSkills/registry/codex/persona-distiller/scripts/self_check.py
+# 已入库的交付 ZIP 数必须等于 team-index 的 products 数
+git -c core.quotepath=false ls-files -- CodexSkills/registry/codex/persona-distiller-group | grep -c '\.zip$'
+```
+
+> `git ls-files` 默认把中文路径转义成 `"...\350..."`，结尾是引号不是 `zip`，直接 `grep '\.zip$'` 会数出 0 —— 必须带 `-c core.quotepath=false`。
+
+4. **交付 ZIP 必须入库**：根 `.gitignore` 有全局 `*.zip`，已针对 `registry/codex/persona-distiller-group/**/*.zip` 开了否定例外。不要删掉那条例外 —— 没有它，`register_persona` 之后 `git add -A` 会**静默漏掉 ZIP**，仓库会变成「`team-index` 说 N 人、实际只有 N−1 个 ZIP」的坏状态。
+5. **禁止的动作**：对受保护路径 `rm -rf`；`git push --force`；`git reset --hard` 到丢失点之前的提交；`git gc --prune=now`（立即销毁不可达对象、没有后悔药，本机已有线程因此丢过 2467 个提交且不可恢复，清缓存只用 `git gc`）。
+6. **三条恢复退路**（按顺序尝试）：① git 历史 —— `git log --diff-filter=D -- <路径>` 定位删除点，`git checkout <删除前的提交> -- <路径>` 取回；② 本机快照 `~/Downloads/蒸馏/` 里的交付 ZIP —— 用 `register_persona.py <zip>` 重新登记即可完全复原；③ GitHub release 资产。恢复后必须重跑上面两条校验并让 `persona-distiller/tests` 全绿。
+7. **文档由数据派生**：身份目录清单与登记人数一律从 `team-index.json` 生成，不在文档或脚本里硬编码，避免分类改版后文档滞留旧分类。
+
 ## 同步
 
-本目录由本机镜像而来，排除嵌套 `.git`、`.DS_Store`、`__pycache__`、`node_modules` 等明确策略项；任何未被策略排除且超过 95MB 的文件会使同步 fail closed。`registry/<source>/_catalog/**` 与 `registry/_global/**` 是保留控制命名空间，永不枚举为 Skill、永不由同步器删除。**同步方向永远是本机 → 仓库**，本机删掉的 skill 镜像里也会删掉。
+本目录由本机镜像而来，排除嵌套 `.git`、`.DS_Store`、`__pycache__`、`node_modules` 等明确策略项；任何未被策略排除且超过 95MB 的文件会使同步 fail closed。`registry/<source>/_catalog/**` 与 `registry/_global/**` 是保留控制命名空间，永不枚举为 Skill、永不由同步器删除。**同步方向永远是本机 → 仓库**，本机删掉的 skill 镜像里也会删掉 —— 唯一例外是上面那条受保护资产规则。
 
 ```bash
 python3 CodexSkills/sync_skills.py            # 正式同步
 python3 CodexSkills/sync_skills.py --dry-run  # 只看差异
 ```
 
-推送前有一道**凭据硬门**：扫到任何密钥、令牌或私钥就中止，绝不自动推进公开仓。
+同步前后各有一道硬门，命中即中止、不写不提交不推送：
+
+- **人物登记只增不减门**（写入前）：比对本机副本与仓库镜像的已登记人物集合，本次同步若会抹掉任何已登记人物就中止，并打印如何用仓库反向刷新本机。确认是有意下线时才加 `--allow-persona-shrink`。
+- **凭据硬门**（推送前）：扫到任何密钥、令牌或私钥就中止，绝不自动推进公开仓。
 
 ## 前端与视觉（11）
 
@@ -175,14 +204,14 @@ python3 CodexSkills/sync_skills.py --dry-run  # 只看差异
 | [`impeccable`](registry/agents/impeccable/SKILL.md) | `agents` | Use when the user wants to design, redesign, shape, critique, audit, polish, clarify, distill, harden, optimize, adapt, animate, colorize, extract, or otherwise improve a frontend interface. Covers websites, landing pages, dashboards, product UI, app shells, c… |
 | [`mcp-builder`](registry/codex/mcp-builder/SKILL.md) | `codex` | Guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools. Use when building MCP servers to integrate external APIs or services, whether in Python (FastMCP) or Node/Type… |
 | [`output-skill`](registry/codex/output-skill/SKILL.md) | `codex` | Overrides default LLM truncation behavior. Enforces complete code generation, bans placeholder patterns, and handles token-limit splits cleanly. Apply to any task requiring exhaustive, unabridged output. |
-| [`persona-distiller`](registry/codex/persona-distiller/SKILL.md) | `codex` | Build, audit, update, package, or uniquely register an evidence-grounded target-person Agent Skill that can plan and execute work through the target's documented capabilities, strategies, cognition, decision policy, work system, temperament, and boundaries. Re… |
+| [`persona-distiller`](registry/codex/persona-distiller/SKILL.md) | `codex` | Build, audit, update, package, or uniquely register an evidence-grounded target-person Agent Skill through documented capabilities, strategies, cognition, decision policy, work system, temperament, and boundaries. Before identity parsing or research, resolve s… |
 | [`persona-distiller-group`](registry/codex/persona-distiller-group/SKILL.md) | `codex` | Route a real task to a 5–20 member expert team drawn from uniquely registered Persona Distiller products. Use when a task benefits from several complementary person-model specialists plus isolated review, adjudication, and counterevidence roles; also use to in… |
 | [`plugin-creator`](registry/codex-system/plugin-creator/SKILL.md) | `codex-system` | Create and scaffold plugin directories for Codex with a required `.codex-plugin/plugin.json`, optional plugin folders/files, valid manifest defaults, and personal-marketplace entries by default. Use when Codex needs to create a new personal plugin, add optiona… |
 | [`review-agent`](registry/codex-system/review-agent/SKILL.md) | `codex-system` | Perform a read-only, defect-first review of a specified code change and return every actionable finding. Use when another agent delegates review of uncommitted changes, a base-branch diff, a commit, or custom review instructions. |
 | [`skill-creator`](registry/codex-system/skill-creator/SKILL.md) | `codex-system` | Guide for creating effective skills. This skill should be used when users want to create a new skill (or update an existing skill) that extends Codex's capabilities with specialized knowledge, workflows, or tool integrations. |
 | [`skill-github-sync`](registry/codex/skill-github-sync/SKILL.md) | `codex` | 把本机全部 Skill（Codex 用户、Codex 系统/OpenAI 官方、Claude/Anthropic、Agents 通用目录）全量镜像备份到 GitHub 公开仓 LinzeColin/AgentDatabase 的 CodexSkills/registry/，重建人读与机器读索引，提交并推送。当用户要求备份 skill、同步 skill 到 GitHub、更新 skill 索引，或由每周定时自动化触发时使用。推送前有凭据硬门，扫到密钥即中止。 |
 | [`skill-installer`](registry/codex-system/skill-installer/SKILL.md) | `codex-system` | Install Codex skills into $CODEX_HOME/skills from a curated list or a GitHub repo path. Use when a user asks to list installable skills, install a curated skill, or install a skill from another repo (including private repos). |
-| [`teleiosis`](registry/codex/teleiosis/SKILL.md) | `codex` | White-box iteration, evaluation, and controlled evolution for an existing Agent Skill or for Teleiosis itself. Use when a user asks to improve, benchmark, refactor, harden, compare, self-evolve, productize, or package a Skill with frozen baselines, current res… |
+| [`teleiosis`](registry/codex/teleiosis/SKILL.md) | `codex` | White-box iteration for an Agent Skill or Teleiosis itself. Use to challenge existence, research real peers, evolve and benchmark Candidates, prevent negative optimization, bind current-environment evidence, govern independent review, and deliver reversible pa… |
 | [`use-railway`](registry/agents/use-railway/SKILL.md) | `agents` | Operate Railway infrastructure: sign up for or sign in to a Railway account, create projects, provision services and databases, manage object storage buckets, deploy code, configure environments and variables, manage domains, troubleshoot failures, check statu… |
 | [`use-railway`](registry/codex/use-railway/SKILL.md) | `codex` | Operate Railway infrastructure: sign up for or sign in to a Railway account, create projects, provision services and databases, manage object storage buckets, deploy code, configure environments and variables, manage domains, troubleshoot failures, check statu… |
 | [`verifier`](registry/claude/verifier/SKILL.md) | `claude` | Independently verify exactly one selected software project per run and issue an evidence-backed acceptance or release verdict. Use when the user says 验收一下, 调用软件验收skill, 软件验收, verifier, or asks for release recheck. When an approved Product-Design-Taskpack exist… |
@@ -246,6 +275,12 @@ python3 CodexSkills/sync_skills.py --dry-run  # 只看差异
 | Skill | 来源 | 何时使用 |
 |---|---|---|
 | [`codex-encrypted-backup`](registry/codex/codex-encrypted-backup/SKILL.md) | `codex` | 在不创建本地自动脚本或 launchd 的前提下，将本机 Codex 的 memories、全部 sessions（含 archived）及受管 attachments 加密备份到 LinzeColin/AgentDatabase 的 GitHub Release。用于创建、执行、核验、保留或恢复验证这一备份通道。 |
-| [`context-kernel`](registry/codex/context-kernel/SKILL.md) | `codex` | Use this skill when a long-running task or project needs durable, minimal context across chats, sessions, models, devices, or execution owners: resume from saved state, checkpoint material progress, create a handoff snapshot, transfer responsibility, or trim stale context. Do not use it for one-off questions, ordinary summaries, hidden reasoning, or as a chat transcript. |
+| [`context-kernel`](registry/codex/context-kernel/SKILL.md) | `codex` | Use this skill when a long-running task or project needs durable, minimal context across chats, sessions, models, devices, or execution owners: resume from saved state, checkpoint material progress, create a handoff snapshot, transfer responsibility, or trim s… |
 | [`gpt-tasteskill`](registry/codex/gpt-tasteskill/SKILL.md) | `codex` | Elite UX/UI & Advanced GSAP Motion Engineer. Enforces Python-driven true randomization for layout variance, strict AIDA page structure, wide editorial typography (bans 6-line wraps), gapless bento grids, strict GSAP ScrollTriggers (pinning, stacking, scrubbing… |
 | [`hatch-pet`](registry/codex/hatch-pet/SKILL.md) | `codex` | Create, repair, validate, visually QA, and package Codex-compatible v2 animated pets from character art, generated images, company or prospect brand cues, or visual references. Use for any new Codex pet, custom mascot, non-pixel pet style, brand-inspired pet,… |
+
+## ⚠️ 未归类
+
+下列 skill 不在 `sync_skills.py` 的分类表里，已归入「其他」，请补分类：
+
+- `context-kernel`

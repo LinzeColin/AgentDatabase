@@ -463,11 +463,11 @@
       "slug": "persona-distiller",
       "source": "codex",
       "name": "persona-distiller",
-      "description": "Build, audit, update, package, or uniquely register an evidence-grounded target-person Agent Skill that can plan and execute work through the target's documented capabilities, strategies, cognition, decision policy, work system, temperament, and boundaries. Required build inputs are only the target person's name and one of six identity families or a weighted multi-identity selection; scenario is optional and otherwise inferred. Use for six-lane public/private/fictional research, source-universe coverage, Work/Persona separation, automatic internal identity routing, agentic task execution without per-invocation versions, corrections, evaluation, refinement, rollback, one complete installable delivery ZIP, and per-person product releases 0.0.0.1 through 0.0.0.999 in the sibling canonical expert-team registry. 中文名称：人物蒸馏 Skill。",
+      "description": "Build, audit, update, package, or uniquely register an evidence-grounded target-person Agent Skill through documented capabilities, strategies, cognition, decision policy, work system, temperament, and boundaries. Before identity parsing or research, resolve same-name candidates from the canonical registry and authoritative sources; auto-bind one even with weak evidence, but stop for user selection when multiple remain. Required inputs are the target person's name and one identity family or weighted multi-identity selection; scenario is optional and inferred. Use for six-lane research, source-universe coverage, Work/Persona separation, automatic runtime identity routing, agentic execution without per-invocation versions, corrections, evaluation, refinement, rollback, one complete installable delivery ZIP, and per-person product releases 0.0.0.1 through 0.0.0.999 in the sibling canonical expert-team registry. 中文名称：人物蒸馏 Skill。",
       "category": "工程与交付",
       "entry": "registry/codex/persona-distiller/SKILL.md",
-      "file_count": 211,
-      "size_bytes": 538204
+      "file_count": 219,
+      "size_bytes": 579201
     },
     {
       "slug": "persona-distiller-group",
@@ -476,8 +476,8 @@
       "description": "Route a real task to a 5–20 member expert team drawn from uniquely registered Persona Distiller products. Use when a task benefits from several complementary person-model specialists plus isolated review, adjudication, and counterevidence roles; also use to inspect, verify, rebuild, or govern the canonical persona delivery registry. Infer identity and scenario internally, select only evidence-supported experts, and never ask the caller to choose an identity.",
       "category": "工程与交付",
       "entry": "registry/codex/persona-distiller-group/SKILL.md",
-      "file_count": 110,
-      "size_bytes": 5545950
+      "file_count": 244,
+      "size_bytes": 11839884
     },
     {
       "slug": "project-cost-table-skill",
@@ -523,7 +523,7 @@
       "slug": "teleiosis",
       "source": "codex",
       "name": "teleiosis",
-      "description": "White-box iteration, evaluation, and controlled evolution for an existing Agent Skill or for Teleiosis itself. Use when a user asks to improve, benchmark, refactor, harden, compare, self-evolve, productize, or package a Skill with frozen baselines, current research, real peers, ten evidence-led system reviews, rollback, genuinely independent review, and installable delivery. Do not use for ordinary code review or direct in-place edits to a production Skill.",
+      "description": "White-box iteration for an Agent Skill or Teleiosis itself. Use to challenge existence, research real peers, evolve and benchmark Candidates, prevent negative optimization, bind current-environment evidence, govern independent review, and deliver reversible packages; not for ordinary code review or in-place production edits.",
       "category": "工程与交付",
       "entry": "registry/codex/teleiosis/SKILL.md",
       "file_count": 234,

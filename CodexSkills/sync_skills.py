@@ -843,21 +843,78 @@ def iter_mirrored_skills(mirror_root):
             yield src, slug, relative, directory
 
 
-def persona_product_index(mirror_root):
+def persona_team_index(mirror_root):
     path = os.path.join(
         mirror_root,
         mirror_relative_path("codex", "persona-distiller-group"),
         "team-index.json",
     )
     if not os.path.isfile(path):
-        return []
+        return {}
     try:
         with open(path, encoding="utf-8") as handle:
             value = json.load(handle)
     except (OSError, json.JSONDecodeError):
-        return []
-    products = value.get("products", [])
+        return {}
+    return value if isinstance(value, dict) else {}
+
+
+def persona_product_index(mirror_root):
+    products = persona_team_index(mirror_root).get("products", [])
     return products if isinstance(products, list) else []
+
+
+def persona_categories(mirror_root):
+    """身份目录清单从 team-index.json 实时派生，分类改版后文档不会滞留旧分类。"""
+    counts = persona_team_index(mirror_root).get("category_counts", {})
+    return sorted(counts) if isinstance(counts, dict) else []
+
+
+def _registered_persona_slugs(products):
+    slugs = set()
+    for product in products:
+        slug = str(product.get("subject_slug") or "").strip()
+        if slug:
+            slugs.add(slug)
+    return slugs
+
+
+def persona_shrink_gate(inv, mirror_root):
+    """受保护资产「只增不减」硬门 —— 在写任何东西之前跑。
+
+    2026-07-26 出过一次事故：一次例行同步把本机一份**陈旧的**
+    persona-distiller-group 副本按「本机 → 仓库」方向覆盖回仓库，
+    team-index.json 的 products 从 70 掉到 3，两个 skill 合计删掉 11159 行。
+    根因是同步器默认本机永远是真相源，而这两个 skill 的真相源其实是仓库。
+
+    这里在镜像之前比对本机副本与仓库镜像的已登记人物集合：
+    仓库有、本机没有 —— 说明这次同步会抹掉已登记人物，判为事故。
+    返回 (repo_count, local_count, missing_slugs)。
+    """
+    repo_products = persona_product_index(mirror_root)
+    repo_slugs = _registered_persona_slugs(repo_products)
+    if not repo_slugs:
+        return 0, 0, set()
+
+    key = ("codex", "persona-distiller-group")
+    local_root = inv.get(key)
+    if not local_root:
+        # 本机整份不见了；若继续，删除传播会把整个登记目录 rmtree 掉。
+        return len(repo_slugs), 0, set(repo_slugs)
+
+    local_index = os.path.join(local_root, "team-index.json")
+    if not os.path.isfile(local_index):
+        return len(repo_slugs), 0, set(repo_slugs)
+    try:
+        with open(local_index, encoding="utf-8") as handle:
+            local_value = json.load(handle)
+    except (OSError, json.JSONDecodeError):
+        return len(repo_slugs), 0, set(repo_slugs)
+    local_products = local_value.get("products", [])
+    if not isinstance(local_products, list):
+        local_products = []
+    local_slugs = _registered_persona_slugs(local_products)
+    return len(repo_slugs), len(local_slugs), repo_slugs - local_slugs
 
 
 def build_index(mirror_root, catalog_root):
@@ -936,20 +993,19 @@ def build_index(mirror_root, catalog_root):
         "## 人物蒸馏产物登记",
         "",
         "[`persona-distiller`](registry/codex/persona-distiller/SKILL.md) 生成的每个人物产物"
-        "必须且只能登记在对应的一个身份目录中；多重身份只进入 `多重身份/`，不得在不同身份下重复登记。",
+        "必须且只能登记在对应的一个身份目录中，同一 canonical 人物不得在不同身份下重复登记。",
         "完整发布 ZIP、canonical 登记、团队卡与机器索引仅位于与构建器平级的"
         " [`registry/codex/persona-distiller-group/`](registry/codex/persona-distiller-group/README.md)；"
         "完整交付规则见 [`references/delivery-package-standard.md`]"
         "(registry/codex/persona-distiller-group/references/delivery-package-standard.md)，"
         "团队路由真源见 [`CANONICAL-ROOT-ROUTE.md`]"
         "(registry/codex/persona-distiller-group/CANONICAL-ROOT-ROUTE.md)。",
-        "目录：[`技术工程师/`](registry/codex/persona-distiller-group/技术工程师/)、"
-        "[`创业经营家/`](registry/codex/persona-distiller-group/创业经营家/)、"
-        "[`投资资本家/`](registry/codex/persona-distiller-group/投资资本家/)、"
-        "[`开发设计家/`](registry/codex/persona-distiller-group/开发设计家/)、"
-        "[`思想教育家/`](registry/codex/persona-distiller-group/思想教育家/)、"
-        "[`政治法律家/`](registry/codex/persona-distiller-group/政治法律家/)、"
-        "[`多重身份/`](registry/codex/persona-distiller-group/多重身份/)。",
+        "目录（由 `team-index.json` 实时派生，不在本脚本里硬编码，避免分类改版后文档漂移）："
+        + "、".join(
+            f"[`{name}/`](registry/codex/persona-distiller-group/{name}/)"
+            for name in persona_categories(mirror_root)
+        )
+        + "。",
         "身份分类由人物 Skill 内部使用，不是调用门槛；用户安装后直接调用对应人物 Skill，"
         "无需选择身份。人物产物按 canonical 人物分别从 `0.0.0.1` 连续编号到 "
         "`0.0.0.999`，只在成功登记时占号；人物 Skill 的单次运行不编号。"
@@ -976,6 +1032,54 @@ def build_index(mirror_root, catalog_root):
     else:
         out += ["当前登记：**0 个人物**；首次产物登记后由本脚本自动生成清单。", ""]
     out += [
+        "## 治理规则：受保护资产（不可再生，丢了就没了）",
+        "",
+        "2026-07-26 发生过一次严重丢失：一次例行同步"
+        "（`chore(skills): 同步本机 Skill 到仓库（更新 4）`）把本机上一份**陈旧的**"
+        " `persona-distiller` / `persona-distiller-group` 副本反向覆盖进仓库，"
+        "`team-index.json` 从 **70 人 掉到 3 人**，两个 skill 合计删掉 11159 行 / 311 个文件，"
+        "事后靠 git 历史恢复。以下规则据此设立。",
+        "",
+        "**受保护资产**："
+        "`registry/codex/persona-distiller/**`（构建器）与 "
+        "`registry/codex/persona-distiller-group/**`（唯一 canonical 登记、团队卡、全部交付 ZIP）。"
+        "每个交付 ZIP 是一次数十万 token、约一小时的蒸馏产出，**仓库是它们的唯一真相源，本机副本不是**。",
+        "",
+        "1. **仓库优先**：受保护资产以仓库为准。同步器的「本机 → 仓库」单向覆盖对它们不成立；"
+        "本机副本陈旧时，正确动作是从仓库更新本机，不是把本机推平仓库。",
+        "2. **只增不减硬门**：任何操作若会让 `team-index.json` 的 `products` 数量减少、"
+        "或删除任一已登记人物目录，一律视为事故并中止。本脚本已内置该门"
+        "（见下方“同步”一节），绕过它需要显式 `--allow-persona-shrink` 并写明理由。",
+        "3. **改前留基线，改后验数**：任何涉及这两个 skill 的改动，前后各跑一次校验，数字必须只增不减。",
+        "",
+        "```bash",
+        "python3 CodexSkills/registry/codex/persona-distiller-group/scripts/validate_group.py \\",
+        "    --registry-root CodexSkills/registry/codex/persona-distiller-group",
+        "python3 CodexSkills/registry/codex/persona-distiller/scripts/self_check.py",
+        "# 已入库的交付 ZIP 数必须等于 team-index 的 products 数",
+        "git -c core.quotepath=false ls-files -- "
+        "CodexSkills/registry/codex/persona-distiller-group | grep -c '\\.zip$'",
+        "```",
+        "",
+        "> `git ls-files` 默认把中文路径转义成 `\"...\\350...\"`，结尾是引号不是 `zip`，"
+        "直接 `grep '\\.zip$'` 会数出 0 —— 必须带 `-c core.quotepath=false`。",
+        "",
+        "4. **交付 ZIP 必须入库**：根 `.gitignore` 有全局 `*.zip`，已针对"
+        " `registry/codex/persona-distiller-group/**/*.zip` 开了否定例外。"
+        "不要删掉那条例外 —— 没有它，`register_persona` 之后 `git add -A` 会**静默漏掉 ZIP**，"
+        "仓库会变成「`team-index` 说 N 人、实际只有 N−1 个 ZIP」的坏状态。",
+        "5. **禁止的动作**：对受保护路径 `rm -rf`；`git push --force`；"
+        "`git reset --hard` 到丢失点之前的提交；`git gc --prune=now`"
+        "（立即销毁不可达对象、没有后悔药，本机已有线程因此丢过 2467 个提交且不可恢复，"
+        "清缓存只用 `git gc`）。",
+        "6. **三条恢复退路**（按顺序尝试）："
+        "① git 历史 —— `git log --diff-filter=D -- <路径>` 定位删除点，"
+        "`git checkout <删除前的提交> -- <路径>` 取回；"
+        "② 本机快照 `~/Downloads/蒸馏/` 里的交付 ZIP —— 用 `register_persona.py <zip>` 重新登记即可完全复原；"
+        "③ GitHub release 资产。恢复后必须重跑上面两条校验并让 `persona-distiller/tests` 全绿。",
+        "7. **文档由数据派生**：身份目录清单与登记人数一律从 `team-index.json` 生成，"
+        "不在文档或脚本里硬编码，避免分类改版后文档滞留旧分类。",
+        "",
         "## 同步",
         "",
         "本目录由本机镜像而来，排除嵌套 `.git`、`.DS_Store`、`__pycache__`、`node_modules` "
@@ -983,14 +1087,19 @@ def build_index(mirror_root, catalog_root):
         f"{MAX_FILE_BYTES // 1048576}MB 的文件会使同步 fail closed。"
         "`registry/<source>/_catalog/**` 与 `registry/_global/**` 是保留控制命名空间，"
         "永不枚举为 Skill、永不由同步器删除。**同步方向永远是本机 → 仓库**，"
-        "本机删掉的 skill 镜像里也会删掉。",
+        "本机删掉的 skill 镜像里也会删掉 —— 唯一例外是上面那条受保护资产规则。",
         "",
         "```bash",
         "python3 CodexSkills/sync_skills.py            # 正式同步",
         "python3 CodexSkills/sync_skills.py --dry-run  # 只看差异",
         "```",
         "",
-        "推送前有一道**凭据硬门**：扫到任何密钥、令牌或私钥就中止，绝不自动推进公开仓。",
+        "同步前后各有一道硬门，命中即中止、不写不提交不推送：",
+        "",
+        "- **人物登记只增不减门**（写入前）：比对本机副本与仓库镜像的已登记人物集合，"
+        "本次同步若会抹掉任何已登记人物就中止，并打印如何用仓库反向刷新本机。"
+        "确认是有意下线时才加 `--allow-persona-shrink`。",
+        "- **凭据硬门**（推送前）：扫到任何密钥、令牌或私钥就中止，绝不自动推进公开仓。",
         "",
     ]
     for cat in CATEGORY:
@@ -1026,6 +1135,11 @@ def main():
     ap.add_argument("--no-push", action="store_true", help="提交但不推送")
     ap.add_argument("--no-commit", action="store_true", help="完成镜像、凭据门和索引，但不暂存、不提交、不推送")
     ap.add_argument("--only", metavar="SOURCE/SLUG", help="只同步一个 Skill；不传播其他 Skill 的删除")
+    ap.add_argument(
+        "--allow-persona-shrink",
+        action="store_true",
+        help="显式放行会减少已登记人物的同步（默认中止；只有确认是有意下线时才用）",
+    )
     args = ap.parse_args()
 
     root = repo_root()
@@ -1050,6 +1164,27 @@ def main():
         inv = {key: inv[key]}
         log(f"  受控单项同步：{args.only} → registry/{mirror_relative_path(*key)}")
     log(f"  合计 {len(inv)} 份实例 / {len({s for _, s in inv})} 个不同名字")
+
+    repo_persona, local_persona, lost_persona = persona_shrink_gate(inv, mirror_root)
+    if repo_persona:
+        log(f"  · 人物登记只增不减门：仓库 {repo_persona} 人 / 本机 {local_persona} 人")
+    if lost_persona and not args.allow_persona_shrink:
+        log(
+            f"  ✗ 本次同步会抹掉 {len(lost_persona)} 个已登记人物"
+            f"（仓库 {repo_persona} → 本机 {local_persona}），**已中止，未写入任何内容**。"
+        )
+        for slug in sorted(lost_persona)[:20]:
+            log(f"    - {slug}")
+        if len(lost_persona) > 20:
+            log(f"    …… 另有 {len(lost_persona) - 20} 个")
+        log("    受保护资产的真相源是仓库，不是本机。正确动作是先从仓库更新本机副本：")
+        log("      git -C <仓库> pull")
+        log("      rsync -a --delete <仓库>/CodexSkills/registry/codex/persona-distiller-group/ \\")
+        log("            ~/.codex/skills/persona-distiller-group/")
+        log("    确认确实要下线这些人物时，才加 --allow-persona-shrink。")
+        return 2
+    if lost_persona:
+        log(f"  ⚠ --allow-persona-shrink：已放行，将抹掉 {len(lost_persona)} 个已登记人物。")
 
     log("\n=== 2/6 镜像与删除传播 ===")
     ch = mirror(
