@@ -60,7 +60,7 @@
 ## 当前登记
 
 <!-- PERSONA-REGISTRY:START -->
-当前唯一登记：**85 个人物**。
+当前唯一登记：**86 个人物**。
 
 | 唯一目录 | 人物数 |
 |---|---:|
@@ -68,7 +68,7 @@
 | `软件开发师/` | 32 |
 | `艺术设计师/` | 0 |
 | `创业经营师/` | 7 |
-| `投资资本师/` | 11 |
+| `投资资本师/` | 12 |
 | `思想教育师/` | 2 |
 | `政治法律师/` | 5 |
 | `客户营销师/` | 0 |
@@ -76,7 +76,7 @@
 | `财务合规师/` | 1 |
 | `医疗护理师/` | 0 |
 | `农林牧渔师/` | 0 |
-| **总计** | **85** |
+| **总计** | **86** |
 
 | 人物 | 唯一身份 | 版本 | 选入原因 | 最值得蒸馏的特点 | 对用户的利益/帮助 | 应用场景 | 关键能力 | 完整 ZIP |
 |---|---|---|---|---|---|---|---|---|
@@ -102,6 +102,7 @@
 | Charles Eastman | `思想教育师` | `0.0.0.1` | 其公开著作与行动横跨教育、宗教解释、保留地医疗、青年组织、公共政策和原住民权利倡议，足以构建跨身份但有明确边界的执行模型。；一手文本数量充足，同时存在同化—批判、作者中介和采集伦理等可用于防止英雄化的反证。 | 直接经验优先：抽象知识回到观察、实践和可复核痕迹。；以行为后果而非文明、宗教或制度的自我称谓作判断。 | 把学习或研究任务转化为观察、示范、渐进挑战、服务成果和复盘。；从家庭、健康、生计、尊严和代表性审查制度与组织方案。 | teaching-learning；research-problem-solving | 体验式教育与品格训练设计；历史思想与第一人称文本分析 | [ZIP](思想教育师/charles-eastman/versions/0.0.0.1/charles-eastman-persona-distillation-delivery-v0.0.0.1.zip) |
 | Thomas L. Saaty | `思想教育师` | `0.0.0.1` | His documented work is primarily mathematical decision engineering, with a substantial teaching corpus and a smaller method/tool-design dimension.；Historical-person governance requires multi-identity routing rather than pretending one occupational label captures the full record. | Hierarchy-first decomposition of complexity；Pairwise ratio judgment for intangible criteria | Turns ambiguous multi-criteria choices into inspectable decision models.；Shows which judgments drive a ranking and where the conclusion can reverse. | Complex multi-criteria selection and prioritization；Strategy and portfolio decisions using benefits, opportunities, costs, and risks | AHP hierarchy and pairwise-comparison design；ANP dependence, feedback, and supermatrix modeling | [ZIP](思想教育师/thomas-saaty/versions/0.0.0.1/thomas-saaty-persona-distillation-delivery-v0.0.0.1.zip) |
 | Aswath Damodaran | `投资资本师` | `0.0.0.1` | 公开身份明确以教学为先，并长期构建估值与公司金融课程体系；大量公司估值、风险数据与投资哲学材料支持资本配置分面 | 故事与数字双向约束；价值与价格严格区分 | 把模糊商业故事转换为可审计估值；识别市场价格已经隐含的预期 | 上市与非上市公司估值；高增长、亏损或复杂公司的情景分析 | 叙事到收入、利润、再投资、风险和终值的量化映射；透明 DCF、相对定价和风险溢价分析 | [ZIP](投资资本师/aswath-damodaran/versions/0.0.0.1/aswath-damodaran-persona-distillation-delivery-v0.0.0.1.zip) |
+| Benjamin Graham | `投资资本师` | `0.0.0.1` | 价值投资的奠基者；安全边际、市场先生、净流动资产估值法均出自其本人；其著作在 archive.org 有大量可核著录，一手材料充足 | 不承诺收益，只说明如何限制损失——句子落点在「最多会亏多少」；把「我会算错」当作方法的前提写进方案，不是当作谦辞 | 把「这家公司值不值这个价」拆成四步可执行动作；给出判断一个估值可不可靠的五条判据 | 用可核查的财务事实而非价格走势判断企业价值；把「自己会算错」转成可计算的安全边际差额 | 以净流动资产、账面价值、盈利记录等可核查项估值；把可能的判断误差量化为买入价与估值之间的差额 | [ZIP](投资资本师/benjamin-graham/versions/0.0.0.1/benjamin-graham-persona-distillation-delivery-v0.0.0.1.zip) |
 | Charlie Munger | `投资资本师` | `0.0.0.1` | Long, unusually well-documented record across speeches, shareholder letters, filings, and live Q&A.；Distinctive integration of capital allocation, multidisciplinary judgment, incentives, and institutional design. | Multidisciplinary latticework with inversion, incentives, opportunity cost, and combined psychological effects.；Low-frequency, high-threshold action with strong emphasis on survival, liquidity, and durable business quality. | Turns vague strategic or investment questions into a short causal model, downside test, and decision trigger set.；Improves learning plans by linking models to cases, counterexamples, and falsification exercises. | Company and acquisition analysis with current filings and valuation data.；Capital allocation, portfolio review, and downside stress testing. | Business-quality and opportunity-cost analysis.；Inversion-led risk identification and lollapalooza-effect red teaming. | [ZIP](投资资本师/charlie-munger/versions/0.0.0.1/charlie-munger-persona-distillation-delivery-v0.0.0.1.zip) |
 | Edward O. Thorp（爱德华·索普） | `投资资本师` | `0.0.0.1` | 跨赌场、工程和资本市场反复展示同一套可检验的概率—实验—风险闭环。；公开一手论文、长访谈与机构档案密度高，可区分事实、稳定模式和晚期修正。 | 机制优先：把叙事改写为状态变量、收益函数和可证伪预测。；优势与暴露分离：对冲已知因子后才评价残余收益。 | 为不确定问题提供可复算的实验与决策模板。；为投资或商业分析提供成本后优势、仓位、尾部和退出框架。 | 量化或基本面投资方案审查；研究假设、实验与原型设计 | 状态变量建模与判别实验；概率优势、Kelly仓位与破产风险 | [ZIP](投资资本师/edward-o-thorp/versions/0.0.0.1/edward-o-thorp-persona-distillation-delivery-v0.0.0.1.zip) |
 | Howard Marks | `投资资本师` | `0.0.0.1` | 公开职业轨迹、Oaktree 投资哲学与跨周期备忘录均以投资、风险和资本配置为核心；思想教育能力作为次级分面有充分写作与访谈证据，但不取代主投资身份 | 价格与价值分离，先审查市场隐含预期；以结果分布、永久损失和生存能力定义风险 | 把二元投资问题转换为可审计的赔率、风险和规模决策；在泡沫、信用、杠杆和资本配置中识别不可逆损失路径 | 公司与证券研究；组合风险审查 | 价格—价值与隐含预期分析；风险分布和压力测试 | [ZIP](投资资本师/howard-marks/versions/0.0.0.1/howard-marks-persona-distillation-delivery-v0.0.0.1.zip) |

@@ -5,7 +5,7 @@
 ## 当前 canonical roster
 
 <!-- PERSONA-REGISTRY:START -->
-当前唯一登记：**85 个人物**。
+当前唯一登记：**86 个人物**。
 
 | 人物 | 唯一身份 | 版本 | 场景 | 关键能力 | 准备度 |
 |---|---|---|---|---|---|
@@ -31,6 +31,7 @@
 | Charles Eastman | `思想教育师` | `0.0.0.1` | teaching-learning；research-problem-solving | 体验式教育与品格训练设计；历史思想与第一人称文本分析 | `ready` |
 | Thomas L. Saaty | `思想教育师` | `0.0.0.1` | Complex multi-criteria selection and prioritization；Strategy and portfolio decisions using benefits, opportunities, costs, and risks | AHP hierarchy and pairwise-comparison design；ANP dependence, feedback, and supermatrix modeling | `ready` |
 | Aswath Damodaran | `投资资本师` | `0.0.0.1` | 上市与非上市公司估值；高增长、亏损或复杂公司的情景分析 | 叙事到收入、利润、再投资、风险和终值的量化映射；透明 DCF、相对定价和风险溢价分析 | `ready` |
+| Benjamin Graham | `投资资本师` | `0.0.0.1` | 用可核查的财务事实而非价格走势判断企业价值；把「自己会算错」转成可计算的安全边际差额 | 以净流动资产、账面价值、盈利记录等可核查项估值；把可能的判断误差量化为买入价与估值之间的差额 | `ready` |
 | Charlie Munger | `投资资本师` | `0.0.0.1` | Company and acquisition analysis with current filings and valuation data.；Capital allocation, portfolio review, and downside stress testing. | Business-quality and opportunity-cost analysis.；Inversion-led risk identification and lollapalooza-effect red teaming. | `ready` |
 | Edward O. Thorp（爱德华·索普） | `投资资本师` | `0.0.0.1` | 量化或基本面投资方案审查；研究假设、实验与原型设计 | 状态变量建模与判别实验；概率优势、Kelly仓位与破产风险 | `ready` |
 | Howard Marks | `投资资本师` | `0.0.0.1` | 公司与证券研究；组合风险审查 | 价格—价值与隐含预期分析；风险分布和压力测试 | `ready` |

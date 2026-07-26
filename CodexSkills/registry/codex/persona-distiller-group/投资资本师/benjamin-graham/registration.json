@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:benjamingraham",
+  "canonical_name": "Benjamin Graham",
+  "identity_family_id": "investor-capital-allocator",
+  "identity_mode": "single",
+  "registration_category": "投资资本师",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "benjamin-graham",
+  "subject_uid": "person-9a530b4ac07aeaf9",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/benjamin-graham-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-26T21:06:41Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "c0cde77a78187d75e2482a487d8a1e1e4a3d3c61321c5eef46ac2817b918b8e9",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/benjamin-graham-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "e1e4c2f2f7201fde8eb506fcfe2a08aa2d0e567409382a41551c00eeca010620",
+      "runtime_size_bytes": 66719,
+      "size_bytes": 73012
+    }
+  ]
+}
