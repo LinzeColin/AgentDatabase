@@ -1,0 +1,123 @@
+{
+  "artifact_digest": "b94cfab93ad5383dda32b45506f267cf126c7400925fd4d371278bde392a007e",
+  "disclosure_contract": {
+    "active_tree_scope": "GIT_CURRENT_TREE_ONLY",
+    "automatic_history_rewrite_permitted": false,
+    "component_path": "CodexSkills/governance/retention/git_history_disclosure.py",
+    "content_digest": "f45d8fd67fa52a8eac0305af0e6f47c47fd91a2052fa9915eb82a7128754c792",
+    "fork_clone_cache_archive_backup_may_retain": true,
+    "future_hard_erasure_design": "OWNER_AUTHORIZED_MAJOR_REPOSITORY_ROTATION_OR_PRIVATE_STORAGE",
+    "git_history_may_retain_bytes_indefinitely": true,
+    "hard_deletion_claimed": false,
+    "markdown_disclosure": {
+      "audiences": [
+        "OPERATOR",
+        "USER"
+      ],
+      "canonical_path": "CodexSkills/governance/retention/GIT_HISTORY_PERSISTENCE_DISCLOSURE.md",
+      "content_digest": "429433091272a378793f9b4b2577994d60509c16b2fc7a628abd70e0ea264484",
+      "languages": [
+        "en",
+        "zh-CN"
+      ]
+    },
+    "receipt_proves_current_tree_transition_only": true,
+    "structured_disclosure": {
+      "artifact_digest": "7a43821d89e63393f2c1cf952a79d788777e606d546b3e15787e4bebddf470b0",
+      "canonical_path": "CodexSkills/governance/retention/git-history-persistence-disclosure.json",
+      "content_digest": "6972902c9b54918b392c54cc18645260168cdc942719ff2555aa541c607a47a5"
+    },
+    "structured_disclosure_schema": {
+      "canonical_path": "CodexSkills/governance/retention/schemas/git-history-persistence-disclosure.schema.json",
+      "content_digest": "a038b9dfc34ed419b6cdd7b67917a6f7a7699e937d0c603e81b677f924b1d30e",
+      "schema_sha256": "7afb8cfa3f4039d91b272307f5d92a162e0d85ed972589bba1289c01fc74d440",
+      "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:git-history-persistence-disclosure:v1",
+      "self_digest_pointer": "/artifact_digest"
+    },
+    "third_party_copy_deletion_guaranteed": false
+  },
+  "next_phase": "MECHANISM_READ_ONLY_MIGRATION_CUTOVER",
+  "nonmutation": {
+    "activation_forbidden": true,
+    "auto_plane_unchanged": true,
+    "candidate_bundle_unchanged": true,
+    "canonical_publication_permitted": false,
+    "git_current_tree_artifact_removed": false,
+    "git_history_rewrite_performed": false,
+    "openai_database_unchanged": true,
+    "private_storage_rotation_performed": false,
+    "repository_rotation_performed": false,
+    "retention_policy_unchanged": true,
+    "state_write_permitted": false,
+    "version_file_created": false
+  },
+  "owner_plane": "MECHANISM",
+  "policy_count": 5,
+  "protocol_revision": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1",
+  "real_execution_permitted": false,
+  "schema_closure_count": 33,
+  "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:git-history-persistence-readiness:v1",
+  "self_digest_pointer": "/artifact_digest",
+  "source_trust": {
+    "candidate_bundle": {
+      "artifact_digest": "66ad125629cab71739ff2bc266219f995f7a45998936ca720c6db678ee77e65a",
+      "bundle_digest": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e",
+      "canonical_path": "CodexSkills/governance/bundles/schema-bundle-manifest.v1.json",
+      "expected_mode": "CANDIDATE",
+      "policy_count": 5,
+      "schema_count": 31,
+      "verified_git_object_id": "sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5"
+    },
+    "m063_predecessor": {
+      "component": {
+        "component_path": "CodexSkills/governance/retention/git_active_tree_policy.py",
+        "content_digest": "5789e1051c3060cfb1d221c710a51f47a631174708248a633e1e13c9becf8421"
+      },
+      "done_gate": "DAY_364_AND_365_RETAINED_AFTER_365_ELIGIBLE",
+      "readiness": {
+        "artifact_digest": "0bb6c1fb335115785495805ed001d6747a311dd1cbee335547beccaf8501df88",
+        "canonical_path": "CodexSkills/governance/retention/git-active-tree-365d-readiness.json",
+        "content_digest": "91592f339854fb205993e96a67698d7b6ce8fc54afd3b226f3090dfd49ab86f2"
+      },
+      "status": "DRAFT_NON_ACTIVE_GIT_ACTIVE_TREE_365D_READY",
+      "verified_git_object_id": "sha1:039f3844b36961f1d8432b9c0d86d6cda408f430"
+    },
+    "repository_self_report_is_not_trust_root": true
+  },
+  "status": "DRAFT_NON_ACTIVE_GIT_HISTORY_PERSISTENCE_DISCLOSURE_READY",
+  "surface_guard": {
+    "declared_surface_roots": [
+      {
+        "canonical_path": "CodexSkills/governance",
+        "glob": "**/*.md"
+      },
+      {
+        "canonical_path": "CodexSkills/registry/auto",
+        "glob": "**/*.md"
+      },
+      {
+        "canonical_path": "OpenAIDatabase/data/run_logs",
+        "glob": "**/*.md"
+      }
+    ],
+    "exact_bilingual_disclosure_required": true,
+    "mode": "READ_ONLY_BOUNDED_UTF8_SCAN",
+    "positive_hard_erasure_claims_permitted": false,
+    "ui_runtime_integration_status": "NOT_BOUND"
+  },
+  "task_contract": {
+    "acceptance_criterion": "AC-19",
+    "completed_task_ids": [
+      "M-064"
+    ],
+    "dependency_task_ids": [
+      "M-063"
+    ],
+    "done_gate": "SYSTEM_NEVER_CLAIMS_HARD_DELETION",
+    "pending_task_ids": [
+      "M-065"
+    ],
+    "required_output": "OPERATOR_USER_DISCLOSURE"
+  },
+  "task_pack_revision": "v0.0.0.2"
+}

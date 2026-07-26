@@ -88,6 +88,12 @@ Key entrypoints:
   observation/plan/readiness schemas bound to the exact candidate, immutable
   M-062 predecessor, retention-policy:v3, daily manifest, index, receipt, and
   publication-manifest:v2 contracts.
+- `retention/git_history_disclosure.py`: pure M-064 bilingual
+  operator/user disclosure and bounded user-surface guard that rejects
+  affirmative hard-erasure claims without any Git or mutation capability.
+- `tools/build_git_history_persistence_disclosure.py`: deterministic M-064
+  disclosure/readiness schemas and evidence bound to the immutable M-063
+  predecessor and exact 31/5 candidate.
 - `tools/validate_au040_semantic_acceptance.py`: exact 365-day and
   shard/index/manifest/publication cross-artifact gates.
 - `tests/test_mechanism_contract.py`: positive, negative, and fault gates.
@@ -373,3 +379,19 @@ time; a later execution requires the explicit deadline-breach receipt reason.
 Real Auto executor integration, current-tree mutation, canonical publication,
 VERSION, and activation remain false. M-064 separately documents persistence
 in Git history; it is not part of M-063.
+
+M-064 makes that persistence boundary explicit for both operators and users.
+The 365-day rule governs full-fidelity artifacts in the Git current tree only.
+An ordinary successor commit and its retention receipt prove an audited
+current-tree transition; they do not prove erasure from Git history, forks,
+clones, caches, archives, provider backups, or uncontrolled third-party
+copies. Those locations may retain the bytes indefinitely.
+
+The bilingual canonical disclosure and its structured counterpart are
+byte-reproducible and scanned by a pure bounded guard. Affirmative English or
+Chinese claims of completed permanent deletion, history erasure, all-copy
+removal, or irrecoverability fail closed. M-064 performs no current-tree
+removal, history rewrite, repository rotation, private-storage rotation,
+state write, publication, activation, or VERSION creation. A future
+hard-erasure capability would require a separate Owner-authorized MAJOR
+design; it is not implied by this retention mechanism.

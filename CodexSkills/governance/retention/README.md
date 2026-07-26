@@ -140,3 +140,39 @@ The readiness artifact is
 index, manifest, receipt, state, Git commit, VERSION, activation, or canonical
 publication. Real execution and Auto integration remain `NOT_BOUND`. Its only
 successor is M-064, `MECHANISM_GIT_HISTORY_PERSISTENCE_DISCLOSURE`.
+
+## M-064 Git-history persistence disclosure
+
+Status: **DRAFT_NON_ACTIVE**
+
+`git_history_disclosure.py` freezes exact English and zh-CN operator/user
+statements for the retention boundary. The 365-day contract is limited to
+full-fidelity artifacts in the Git current tree. A strictly post-boundary
+shard can become eligible for ordinary current-tree removal, but Git history,
+forks, clones, caches, archives, provider backups, and third-party copies may
+retain the bytes indefinitely.
+
+A retention receipt proves only the audited current-tree transition. It is
+not evidence of permanent deletion, Git-history erasure, all-copy erasure, or
+irrecoverability. The bounded UTF-8 surface guard rejects affirmative English
+and Chinese hard-erasure claims while accepting the exact truthful
+negations. The canonical disclosure is
+`retention/GIT_HISTORY_PERSISTENCE_DISCLOSURE.md`; a structured, self-digested
+counterpart supports deterministic validation.
+
+Deterministic materialization and tests:
+
+```bash
+/usr/bin/python3 -B \
+  CodexSkills/governance/tools/build_git_history_persistence_disclosure.py \
+  --check
+/usr/bin/python3 -B -m unittest \
+  CodexSkills.governance.tests.test_git_history_persistence_disclosure
+```
+
+The readiness artifact is
+`retention/git-history-persistence-readiness.json`. M-064 performs no
+current-tree removal, Git-history rewrite, repository or private-storage
+rotation, state write, publication, activation, or VERSION creation. A future
+hard-erasure capability requires a separate Owner-authorized MAJOR design.
+Its only successor is M-065, `MECHANISM_READ_ONLY_MIGRATION_CUTOVER`.

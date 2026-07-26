@@ -1,4 +1,112 @@
-# Mechanism Git active-tree 365-day policy handoff
+# Mechanism Git-history persistence disclosure handoff
+
+- State: `DRAFT_NON_ACTIVE_GIT_HISTORY_PERSISTENCE_DISCLOSURE_READY`
+- Phase: `MECHANISM_GIT_HISTORY_PERSISTENCE_DISCLOSURE`
+- Task Pack task completed: `M-064`
+- M-064 dependency: `M-063`
+- Required output: `OPERATOR_USER_DISCLOSURE`
+- Done gate: `SYSTEM_NEVER_CLAIMS_HARD_DELETION`
+- Acceptance criterion: `AC-19`
+- M-064 pure guard:
+  `CodexSkills/governance/retention/git_history_disclosure.py`
+- M-064 pure guard raw SHA-256:
+  `f45d8fd67fa52a8eac0305af0e6f47c47fd91a2052fa9915eb82a7128754c792`
+- Canonical bilingual disclosure:
+  `CodexSkills/governance/retention/GIT_HISTORY_PERSISTENCE_DISCLOSURE.md`
+- Bilingual disclosure raw SHA-256:
+  `429433091272a378793f9b4b2577994d60509c16b2fc7a628abd70e0ea264484`
+- Structured disclosure:
+  `CodexSkills/governance/retention/git-history-persistence-disclosure.json`
+- Structured disclosure raw SHA-256:
+  `6972902c9b54918b392c54cc18645260168cdc942719ff2555aa541c607a47a5`
+- Structured disclosure self digest:
+  `7a43821d89e63393f2c1cf952a79d788777e606d546b3e15787e4bebddf470b0`
+- Disclosure schema canonical SHA-256:
+  `7afb8cfa3f4039d91b272307f5d92a162e0d85ed972589bba1289c01fc74d440`
+- M-064 readiness:
+  `CodexSkills/governance/retention/git-history-persistence-readiness.json`
+- M-064 readiness raw SHA-256:
+  `3cb7f9b6c5528f6c7415fa45c53da1fd38f2dbb7561f8d123b56769e96db567f`
+- M-064 readiness self digest:
+  `b94cfab93ad5383dda32b45506f267cf126c7400925fd4d371278bde392a007e`
+- Readiness schema canonical SHA-256:
+  `247053b03b42750fd2bdf76732ee311967850661b97fe9181b722a8b5d677351`
+- Immutable M-063 predecessor:
+  `sha1:039f3844b36961f1d8432b9c0d86d6cda408f430`
+- Immutable candidate:
+  `sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5`
+- Immutable candidate bundle digest:
+  `36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e`
+- Retention scope: `GIT_CURRENT_TREE_ONLY`
+- Receipt proof scope: `CURRENT_TREE_TRANSITION_ONLY`
+- Git history, fork, clone, cache, archive, and provider-backup
+  persistence: `MAY_RETAIN_INDEFINITELY`
+- Hard-deletion claim: `false`
+- Automatic history rewrite: `false`
+- User/UI runtime integration: `NOT_BOUND`
+- Pending Task Pack task: `M-065`
+- Exact next Phase: `MECHANISM_READ_ONLY_MIGRATION_CUTOVER`
+
+M-064 turns the Task Pack's retention caveat into an exact operator/user
+contract. The 365-day rule covers full-fidelity artifacts in the Git current
+tree only. Strictly post-boundary eligibility permits only a later
+current-tree transition. It does not make Git history, forks, clones, caches,
+archives, provider backups, or third-party copies disappear.
+
+The canonical English and zh-CN disclosure states that a retention receipt
+proves only the audited current-tree transition. The bounded pure guard rejects
+affirmative claims of completed permanent deletion, history erasure, all-copy
+removal, or irrecoverability. Self-consistent weakening of the structured
+text is rejected by both semantic validation and the const-closed schema.
+
+M-064 has no filesystem, Git, network, state, queue, lock, publisher,
+deletion, history-rewrite, or repository-rotation capability. It creates no
+real retention artifact, VERSION, activation, or canonical publication. A
+future hard-erasure design requires separate Owner authorization and MAJOR
+governance; M-064 neither implements nor promises it.
+
+## M-064 validation
+
+```text
+M-064 targeted disclosure/persistence/negative tests: 15/15 PASS
+complete Mechanism suite: 220/220 PASS
+M-064 builder/schema/readiness/Markdown: BYTE_EQUIVALENT
+English and zh-CN affirmative hard-erasure claims: FAIL_CLOSED
+self-consistent disclosure weakening: FAIL_CLOSED
+all declared governance/Auto/run-log Markdown surfaces: PASS
+candidate trust: 31 schemas / 5 policies PASS
+schema-set lint:
+  base 21 / candidate-compatible 41 / version 24 /
+  M-064 full closure 75 PASS
+OpenAIDatabase consumer + architecture: 23/23 PASS
+consumer CLI: PASS / errors=[] / canonical publication=false
+```
+
+The pre-existing cross-owner transition remains fail-closed and is not
+modified or relabeled by M-064:
+
+```text
+complete Auto suite: 200 tests / 5 failures / 20 errors
+fault/privacy seed 271828: 149 tests / 5 failures / 25 errors
+fault/privacy seed 314159: 149 tests / 5 failures / 25 errors
+AUTO_REGISTRY_MIRROR_SKILL_COUNT_DRIFT
+BOUND_REFERENCE_RESOLVER_RUNTIME_LOCAL_DRIFT
+ACTIVATION_CONTROL_INTERFACE_SEMANTIC_MISMATCH
+activation builder/lint:
+  ACTIVATION_BOUND_RESOLVER_INTERFACE_CONTRACT_MISMATCH
+```
+
+The mirror count remains `90` while Auto is pinned to `89`. These failures are
+the exact M-063 baseline and occur outside the M-064 changed path set. Final
+acceptance additionally requires an ordinary commit, FF-safe push, and fresh
+GitHub detached object/raw-byte readback of every changed path.
+
+No Auto, candidate-bundle, policy, OpenAIDatabase, automation, or VERSION path
+change belongs to M-064. No verifier call, historical Task Pack replay, real
+current-tree removal, Git-history rewrite, repository rotation, activation,
+or canonical publication belongs to this development Phase.
+
+## Prior M-063 Git active-tree 365-day policy handoff
 
 - State: `DRAFT_NON_ACTIVE_GIT_ACTIVE_TREE_365D_READY`
 - Phase: `MECHANISM_GIT_ACTIVE_TREE_365D_POLICY`

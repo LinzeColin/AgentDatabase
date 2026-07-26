@@ -1,0 +1,53 @@
+{
+  "active_tree_contract": {
+    "eligibility_condition": "NOW_STRICTLY_GREATER_THAN_RETENTION_NOT_BEFORE",
+    "full_fidelity_retention_seconds": 31536000,
+    "ordinary_removal_effect": "REMOVES_EXACT_BYTES_FROM_SUCCESSOR_CURRENT_TREE_ONLY",
+    "scope": "GIT_CURRENT_TREE_ONLY"
+  },
+  "artifact_digest": "7a43821d89e63393f2c1cf952a79d788777e606d546b3e15787e4bebddf470b0",
+  "artifact_uid": "ghd_00000000000000000000000000",
+  "audiences": [
+    "OPERATOR",
+    "USER"
+  ],
+  "disclosures": {
+    "hard_erasure_en": "This mechanism never claims hard deletion. Hard erasure would require a separate owner-authorized MAJOR design for repository rotation or private storage, and still cannot guarantee deletion of third-party copies outside the owner's control.",
+    "hard_erasure_zh_cn": "本机制绝不声称完成硬删除。硬擦除必须另行取得 Owner 授权，并以 MAJOR 级方案设计仓库轮换或私有存储；即便如此，也不能保证删除 Owner 控制范围外的第三方副本。",
+    "operator_en": "The 365-day rule governs full-fidelity artifacts in the Git current tree only. After the strict boundary, an eligible shard may be removed from a later current tree, while Git history, forks, clones, caches, archives, and provider backups can retain the bytes indefinitely.",
+    "operator_zh_cn": "365 天规则只约束 Git 当前树中的全保真工件。严格超过边界后，符合条件的 shard 可以从后续当前树移除，但 Git 历史、fork、clone、cache、archive 和服务商备份仍可能无限期保留这些字节。",
+    "user_en": "A retention receipt proves only the audited current-tree transition. It does not prove permanent deletion, removal from Git history or other copies, or irrecoverability.",
+    "user_zh_cn": "retention receipt 只证明经审计的当前树转换；它不证明永久删除、不证明已从 Git 历史或其他副本移除，也不证明数据不可恢复。"
+  },
+  "hard_erasure_contract": {
+    "automatic_history_rewrite_permitted": false,
+    "future_design_required": "OWNER_AUTHORIZED_MAJOR_REPOSITORY_ROTATION_OR_PRIVATE_STORAGE",
+    "hard_deletion_claimed": false,
+    "private_storage_rotation_performed": false,
+    "repository_rotation_performed": false
+  },
+  "owner_plane": "MECHANISM",
+  "persistence_contract": {
+    "archives_may_retain_bytes_indefinitely": true,
+    "caches_may_retain_bytes_indefinitely": true,
+    "clones_may_retain_bytes_indefinitely": true,
+    "forks_may_retain_bytes_indefinitely": true,
+    "git_history_may_retain_bytes_indefinitely": true,
+    "provider_backups_may_retain_bytes_indefinitely": true,
+    "third_party_copy_deletion_guaranteed": false
+  },
+  "protocol_revision": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1",
+  "receipt_contract": {
+    "proves_current_tree_transition_only": true,
+    "proves_git_history_erasure": false,
+    "proves_irrecoverability": false,
+    "proves_other_copy_erasure": false
+  },
+  "retention_policy": {
+    "policy_id": "urn:linzecolin:agentdatabase:skillops:policy:retention:v3",
+    "policy_snapshot_digest": "bcad1e50a847e040d1350ca2fd977503b4ae642deabd727266e9dbbd26acb7ce"
+  },
+  "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:git-history-persistence-disclosure:v1",
+  "self_digest_pointer": "/artifact_digest",
+  "status": "DRAFT_NON_ACTIVE"
+}
