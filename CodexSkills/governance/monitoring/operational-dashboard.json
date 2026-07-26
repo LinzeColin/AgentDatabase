@@ -1,0 +1,182 @@
+{
+  "alerts": [
+    {
+      "action_code": "REGISTER_EVALUATED_VERSION_AND_RUN_FRESHNESS_MONITOR",
+      "alert_uid": "alr_01ARZ3NDEKTSV4RRFFQ69G5FA1",
+      "artifact_digest": "a977741f419286d084e2a5716630221bbefa09b106d5a3a29753e740fa65b5e1",
+      "blocking": false,
+      "category": "FRESHNESS",
+      "evidence_link_codes": [
+        "FRESHNESS"
+      ],
+      "owner": "MECHANISM",
+      "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:actionable-operational-alert:v1",
+      "severity": "WARNING"
+    },
+    {
+      "action_code": "BIND_MANAGED_RAW_EXECUTOR_AND_CERTIFY_RUNTIME",
+      "alert_uid": "alr_01ARZ3NDEKTSV4RRFFQ69G5FA2",
+      "artifact_digest": "4dc632b247c27ae0460c26709769788bf4f138f70fd59e564ad6f908bf7484c0",
+      "blocking": true,
+      "category": "PRIVACY",
+      "evidence_link_codes": [
+        "MANAGED_RAW"
+      ],
+      "owner": "AUTO",
+      "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:actionable-operational-alert:v1",
+      "severity": "CRITICAL"
+    },
+    {
+      "action_code": "BIND_ACTIVE_TREE_EXECUTOR_AND_VALIDATE_LEDGER",
+      "alert_uid": "alr_01ARZ3NDEKTSV4RRFFQ69G5FA3",
+      "artifact_digest": "c54e689c54e80e042720afa72ba7a6b61bce6b05c5b8132e8e49945584ace7fa",
+      "blocking": true,
+      "category": "RETENTION",
+      "evidence_link_codes": [
+        "ACTIVE_TREE"
+      ],
+      "owner": "AUTO",
+      "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:actionable-operational-alert:v1",
+      "severity": "CRITICAL"
+    },
+    {
+      "action_code": "CAPTURE_REAL_COLD_WARM_CAPACITY_BASELINES",
+      "alert_uid": "alr_01ARZ3NDEKTSV4RRFFQ69G5FA4",
+      "artifact_digest": "822cf4bc6f594f719072b0ecf06ed376040f16945d40dc0f8beabe5f08d54723",
+      "blocking": false,
+      "category": "CAPACITY",
+      "evidence_link_codes": [
+        "CAPACITY"
+      ],
+      "owner": "MECHANISM",
+      "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:actionable-operational-alert:v1",
+      "severity": "WARNING"
+    }
+  ],
+  "artifact_digest": "671885cd00049d7cf8577909824ebdbdd06b5f62f2ccf890fbbd2a4a8cf2dbf8",
+  "bundle_digest": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e",
+  "dashboard_uid": "dsh_01ARZ3NDEKTSV4RRFFQ69G5FAV",
+  "owner_plane": "MECHANISM",
+  "protocol_revision": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1",
+  "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:operational-dashboard:v1",
+  "source_evidence": [
+    {
+      "artifact_digest": "9cd49a73c30729de3b0443e6a8024035cdc138a8e2d690f720def0d4400b881e",
+      "canonical_path": "CodexSkills/governance/performance/performance-capacity-readiness.json",
+      "content_digest": "000154c32d895b35960cadbad80582c09121ee1103a31a63577ad8a6cf5b1a3d",
+      "evidence_code": "CAPACITY",
+      "status": "DRAFT_NON_ACTIVE_PERFORMANCE_CAPACITY_BUDGETS_IMPLEMENTED_UNCALIBRATED",
+      "verified_git_object_id": "sha1:9968a706dd729839efa707bf64ef893c44d324bd"
+    },
+    {
+      "artifact_digest": "8864203d59f925f8f3110ff1e779ebdb19d26818a337de764596de2de1afa96d",
+      "canonical_path": "CodexSkills/governance/monitoring/freshness-drift-readiness.json",
+      "content_digest": "416beacd6a72d3d5517211a3758452228bd445ab10fc887928b0575e2865d812",
+      "evidence_code": "FRESHNESS",
+      "status": "DRAFT_NON_ACTIVE_FRESHNESS_DRIFT_MONITOR_READY",
+      "verified_git_object_id": "sha1:3d3c202ee629d79eadfb027da131e1afcb88a1f2"
+    },
+    {
+      "artifact_digest": "dad952d9df1523bb63765dc028a4f3609251834dcb52dfa06a085341f555f774",
+      "canonical_path": "CodexSkills/governance/retention/managed-raw-72h-readiness.json",
+      "content_digest": "d60a71554ffbe4bde30fbd639e723086598df22b69b4ceee04b070dd4ddb6e0f",
+      "evidence_code": "MANAGED_RAW",
+      "status": "DRAFT_NON_ACTIVE_MANAGED_RAW_72H_POLICY_READY",
+      "verified_git_object_id": "sha1:b023ac71c5c7852a95f4b87a56981fe7a42c32d9"
+    },
+    {
+      "artifact_digest": "0bb6c1fb335115785495805ed001d6747a311dd1cbee335547beccaf8501df88",
+      "canonical_path": "CodexSkills/governance/retention/git-active-tree-365d-readiness.json",
+      "content_digest": "91592f339854fb205993e96a67698d7b6ce8fc54afd3b226f3090dfd49ab86f2",
+      "evidence_code": "ACTIVE_TREE",
+      "status": "DRAFT_NON_ACTIVE_GIT_ACTIVE_TREE_365D_READY",
+      "verified_git_object_id": "sha1:039f3844b36961f1d8432b9c0d86d6cda408f430"
+    }
+  ],
+  "status": "DRAFT_NON_ACTIVE_ALERTS_PRESENT",
+  "summary": {
+    "alert_count": 4,
+    "critical_count": 2,
+    "info_count": 0,
+    "notification_sent": false,
+    "production_dashboard_ready": false,
+    "view_count": 5,
+    "warning_count": 2
+  },
+  "views": [
+    {
+      "alert_uids": [
+        "alr_01ARZ3NDEKTSV4RRFFQ69G5FA1",
+        "alr_01ARZ3NDEKTSV4RRFFQ69G5FA2",
+        "alr_01ARZ3NDEKTSV4RRFFQ69G5FA3",
+        "alr_01ARZ3NDEKTSV4RRFFQ69G5FA4"
+      ],
+      "evidence_link_codes": [
+        "CAPACITY",
+        "FRESHNESS",
+        "MANAGED_RAW",
+        "ACTIVE_TREE"
+      ],
+      "fact_codes": [
+        "SOURCE_EVIDENCE_CLOSURE_COMPLETE",
+        "OPERATIONAL_ALERTS_PRESENT"
+      ],
+      "status": "CRITICAL",
+      "view_code": "HEALTH"
+    },
+    {
+      "alert_uids": [
+        "alr_01ARZ3NDEKTSV4RRFFQ69G5FA2"
+      ],
+      "evidence_link_codes": [
+        "MANAGED_RAW"
+      ],
+      "fact_codes": [
+        "PERSISTENT_MANAGED_RAW_DEFAULT_DISABLED",
+        "MANAGED_RAW_RUNTIME_NOT_CERTIFIED"
+      ],
+      "status": "CRITICAL",
+      "view_code": "PRIVACY"
+    },
+    {
+      "alert_uids": [
+        "alr_01ARZ3NDEKTSV4RRFFQ69G5FA1"
+      ],
+      "evidence_link_codes": [
+        "FRESHNESS"
+      ],
+      "fact_codes": [
+        "FRESHNESS_MONITOR_EXECUTION_NOT_READY"
+      ],
+      "status": "WARNING",
+      "view_code": "FRESHNESS"
+    },
+    {
+      "alert_uids": [
+        "alr_01ARZ3NDEKTSV4RRFFQ69G5FA3"
+      ],
+      "evidence_link_codes": [
+        "ACTIVE_TREE"
+      ],
+      "fact_codes": [
+        "ACTIVE_TREE_EXECUTOR_NOT_BOUND"
+      ],
+      "status": "CRITICAL",
+      "view_code": "RETENTION"
+    },
+    {
+      "alert_uids": [
+        "alr_01ARZ3NDEKTSV4RRFFQ69G5FA4"
+      ],
+      "evidence_link_codes": [
+        "CAPACITY"
+      ],
+      "fact_codes": [
+        "CAPACITY_BASELINE_UNCALIBRATED",
+        "SILENT_SAMPLING_FORBIDDEN"
+      ],
+      "status": "WARNING",
+      "view_code": "CAPACITY"
+    }
+  ]
+}

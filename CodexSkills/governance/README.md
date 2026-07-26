@@ -52,6 +52,11 @@ Key entrypoints:
 - `tools/build_freshness_drift_monitor.py`: deterministic M-058
   bundle-external observation/report schemas and non-active readiness bound to
   the immutable M-056/M-057 predecessors.
+- `monitoring/operational_dashboard.py`: pure M-067 five-view dashboard and
+  owner/action/evidence-linked alert projection over exact M-058/M-061/M-063/
+  M-066 readiness evidence.
+- `tools/build_operational_dashboard.py`: deterministic M-067 dashboard,
+  human-readable view, three bundle-external schemas, and non-active readiness.
 - `release/policy_protection.py`: pure M-059 protected-surface classifier,
   seven-operation optimizer access-denial gate, and exact M-059 → M-058 →
   M-056 promotion delegation.
@@ -155,6 +160,8 @@ Run from the repository root with the explicitly provisioned interpreter:
   --check
 /usr/bin/python3 -B \
   CodexSkills/governance/tools/build_freshness_drift_monitor.py --check
+/usr/bin/python3 -B \
+  CodexSkills/governance/tools/build_operational_dashboard.py --check
 /usr/bin/python3 -B \
   CodexSkills/governance/tools/build_evaluator_release_protection.py \
   --check

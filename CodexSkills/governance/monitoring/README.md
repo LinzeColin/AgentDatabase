@@ -49,3 +49,32 @@ root:
 /usr/bin/python3 -B -m unittest \
   CodexSkills.governance.tests.test_freshness_drift_monitor
 ```
+
+## M-067 operational dashboard
+
+`operational_dashboard.py` is a pure projection over exact, externally pinned
+M-058 freshness, M-061 managed-raw, M-063 active-tree, and M-066 capacity
+readiness evidence. It derives five views: health, privacy, freshness,
+retention, and capacity. Callers cannot supply view status, severity, owner,
+action, or evidence links.
+
+Every alert carries one accountable owner, one fixed action code, and at least
+one evidence link that closes to a verified Git object, raw content digest,
+self digest, status, and canonical repository path. Removing an evidence link
+or self-consistently changing the owner/action is rejected by exact
+recomputation.
+
+`OPERATIONAL_DASHBOARD.md` is a deterministic human-readable rendering of the
+same JSON artifact. It is not live telemetry. M-067 sends no notification and
+has no filesystem, state, Git publisher, Auto runtime, or activation
+capability. The current projection remains non-active and reports the real
+unbound runtime/calibration alerts rather than hiding them.
+
+Reproduce it with:
+
+```bash
+/usr/bin/python3 -B \
+  CodexSkills/governance/tools/build_operational_dashboard.py --check
+/usr/bin/python3 -B -m unittest \
+  CodexSkills.governance.tests.test_operational_dashboard
+```

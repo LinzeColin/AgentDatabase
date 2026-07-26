@@ -1,3 +1,122 @@
+# Mechanism operational dashboard and actionable-alert handoff
+
+- State:
+  `DRAFT_NON_ACTIVE_OPERATIONAL_DASHBOARD_READY_ALERTS_PRESENT`
+- Phase: `MECHANISM_DASHBOARDS_ACTIONABLE_ALERTS`
+- Task Pack task implemented: `M-067`
+- M-067 dependencies: `M-058`, `M-061`, `M-063`, `M-066`
+- Required output:
+  `HEALTH_PRIVACY_FRESHNESS_RETENTION_CAPACITY_VIEWS`
+- Done gate: `EVERY_ALERT_HAS_OWNER_ACTION_EVIDENCE_LINK`
+- Pure guard:
+  `CodexSkills/governance/monitoring/operational_dashboard.py`
+- Pure guard raw SHA-256:
+  `d4cce58cacbd90e92fa02873d39c369a4a2a6c8007a64a14b56b79df97de68e5`
+- Structured dashboard:
+  `CodexSkills/governance/monitoring/operational-dashboard.json`
+- Structured dashboard raw / self SHA-256:
+  `8eb694589f5fed6e98668839a7f5039829896d74edbb40df4c68e81b666d69e6`
+  / `671885cd00049d7cf8577909824ebdbdd06b5f62f2ccf890fbbd2a4a8cf2dbf8`
+- Human dashboard:
+  `CodexSkills/governance/monitoring/OPERATIONAL_DASHBOARD.md`
+- Human dashboard raw SHA-256:
+  `c9f63222769e818cdede952699f039c5b98b0664c3b72bf728d7db574fef2a97`
+- M-067 readiness:
+  `CodexSkills/governance/monitoring/operational-dashboard-readiness.json`
+- Readiness raw / self SHA-256:
+  `342359e4194346b0b41cd75fd14bda456f3ec85fc9d8a59656cfa18a51188f12`
+  / `9b565de75a721d670a623486d4410d7c3876db3c0d89fdebc999f4cb93fba580`
+- Alert schema raw / canonical SHA-256:
+  `5853c126c7697873f1dc54d81f49f5cb1cfebb5aed0583203cb5dfd4ba5cfadc`
+  / `3ab699ac6345f0e10a4528c7db69b7a5bb9676b29fc748d220d0d19ec6a55b69`
+- Dashboard schema raw / canonical SHA-256:
+  `106755f3f0d1386604a6e82b7061441d1310068da589d46ed4f839a291ecf6e9`
+  / `0952ef9cd3c1fa45eb0ea62e5e9df30d6a3807d3f22f4c3b91b3934e5f58fc24`
+- Readiness schema raw / canonical SHA-256:
+  `eb3209bc9d5e15b605338b5e421c259deee36bfdad31b2197ec916504cc64a7c`
+  / `f5d3083e43769c32a8d5e1bafc586450139184c50ff651a401b00670a1470c72`
+- Immutable M-058 freshness source:
+  `sha1:3d3c202ee629d79eadfb027da131e1afcb88a1f2`
+- Immutable M-061 managed-raw source:
+  `sha1:b023ac71c5c7852a95f4b87a56981fe7a42c32d9`
+- Immutable M-063 active-tree source:
+  `sha1:039f3844b36961f1d8432b9c0d86d6cda408f430`
+- Immutable M-066 capacity source:
+  `sha1:9968a706dd729839efa707bf64ef893c44d324bd`
+- Views: `HEALTH`, `PRIVACY`, `FRESHNESS`, `RETENTION`, `CAPACITY`
+- Current alerts / critical / warning: `4 / 2 / 2`
+- Every alert owner/action/evidence link present: `true / true / true`
+- Live telemetry / notification sent / production dashboard ready:
+  `false / false / false`
+- Pending Task Pack task: `M-068`
+- Exact next Phase: `MECHANISM_THREE_REPRESENTATIVE_PILOTS`
+
+M-067 projects five deterministic views from four exact, self-digested,
+externally pinned readiness artifacts. Current evidence produces:
+
+```text
+WARNING  FRESHNESS owner=MECHANISM
+  action=REGISTER_EVALUATED_VERSION_AND_RUN_FRESHNESS_MONITOR
+CRITICAL PRIVACY owner=AUTO
+  action=BIND_MANAGED_RAW_EXECUTOR_AND_CERTIFY_RUNTIME
+CRITICAL RETENTION owner=AUTO
+  action=BIND_ACTIVE_TREE_EXECUTOR_AND_VALIDATE_LEDGER
+WARNING  CAPACITY owner=MECHANISM
+  action=CAPTURE_REAL_COLD_WARM_CAPACITY_BASELINES
+```
+
+Each alert carries one or more evidence codes that resolve to a canonical
+repository path plus verified Git object, raw content digest, self digest, and
+source status. Caller-supplied status, severity, owner, action, or evidence
+links are not accepted. Removing a link or self-consistently changing an
+owner/action is rejected by exact dashboard recomputation.
+
+The human Markdown dashboard is generated from the same structured object and
+links every view and alert to its source evidence. It is not a live telemetry
+surface. M-067 has no clock, profiler, filesystem, Git, notification, state,
+publisher, Auto runtime, or activation capability. No message was sent, and
+the current CRITICAL/WARNING states are not relabeled as production readiness.
+
+## M-067 validation
+
+```text
+M-067 targeted dashboard/alert/negative tests: 18/18 PASS
+complete Mechanism suite: 272/272 PASS
+M-067 builder/dashboard/Markdown/readiness/schemas: BYTE_EQUIVALENT
+current views / alerts / critical / warning: 5 / 4 / 2 / 2
+every alert owner/action/evidence link: PASS
+candidate trust: 31 schemas / 5 policies PASS
+schema-set lint:
+  base 21 / candidate-compatible 41 / version 24 /
+  M-067 full closure 84 PASS
+OpenAIDatabase consumer + architecture: 23/23 PASS
+consumer CLI: PASS / errors=[] / canonical publication=false
+```
+
+The pre-existing cross-owner transition remains fail-closed and is not
+modified or relabeled by M-067:
+
+```text
+complete Auto suite: 200 tests / 5 failures / 20 errors
+fault/privacy seed 271828: 149 tests / 5 failures / 25 errors
+fault/privacy seed 314159: 149 tests / 5 failures / 25 errors
+AUTO_REGISTRY_MIRROR_SKILL_COUNT_DRIFT
+BOUND_REFERENCE_RESOLVER_RUNTIME_LOCAL_DRIFT
+ACTIVATION_CONTROL_INTERFACE_SEMANTIC_MISMATCH
+```
+
+The Registry compatibility index remains `90` while Auto is pinned to `89`.
+Those exact failures predate M-067 and are outside this Phase's changed paths.
+No Auto file may be changed in this Mechanism Phase.
+
+Final acceptance additionally requires an ordinary commit, FF-safe
+`HEAD:main` push, and fresh detached GitHub object/raw-byte readback of every
+changed path. No verifier call, historical Task Pack replay, real telemetry,
+notification, state write, publication, activation, or follow-on Phase belongs
+to this run.
+
+## Prior M-066 performance and capacity budget handoff
+
 # Mechanism performance and capacity budget handoff
 
 - State:

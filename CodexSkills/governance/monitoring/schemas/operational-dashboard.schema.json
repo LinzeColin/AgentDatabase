@@ -1,0 +1,193 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:operational-dashboard:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "alerts": {
+      "items": {
+        "$ref": "urn:linzecolin:agentdatabase:skillops:schema:actionable-operational-alert:v1"
+      },
+      "maxItems": 4,
+      "type": "array"
+    },
+    "artifact_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "bundle_digest": {
+      "const": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e"
+    },
+    "dashboard_uid": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/typed_uid"
+    },
+    "owner_plane": {
+      "const": "MECHANISM"
+    },
+    "protocol_revision": {
+      "const": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1"
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:operational-dashboard:v1"
+    },
+    "source_evidence": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "artifact_digest": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+          },
+          "canonical_path": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/repo_relative_posix_path"
+          },
+          "content_digest": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+          },
+          "evidence_code": {
+            "enum": [
+              "CAPACITY",
+              "FRESHNESS",
+              "MANAGED_RAW",
+              "ACTIVE_TREE"
+            ]
+          },
+          "status": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/enum_code"
+          },
+          "verified_git_object_id": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/git_object_id"
+          }
+        },
+        "required": [
+          "evidence_code",
+          "verified_git_object_id",
+          "canonical_path",
+          "content_digest",
+          "artifact_digest",
+          "status"
+        ],
+        "type": "object"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array"
+    },
+    "status": {
+      "enum": [
+        "DRAFT_NON_ACTIVE_ALERTS_PRESENT",
+        "DRAFT_NON_ACTIVE_NO_ALERTS"
+      ]
+    },
+    "summary": {
+      "additionalProperties": false,
+      "properties": {
+        "alert_count": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+        },
+        "critical_count": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+        },
+        "info_count": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+        },
+        "notification_sent": {
+          "type": "boolean"
+        },
+        "production_dashboard_ready": {
+          "type": "boolean"
+        },
+        "view_count": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+        },
+        "warning_count": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+        }
+      },
+      "required": [
+        "view_count",
+        "alert_count",
+        "critical_count",
+        "warning_count",
+        "info_count",
+        "production_dashboard_ready",
+        "notification_sent"
+      ],
+      "type": "object"
+    },
+    "views": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "alert_uids": {
+            "items": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/typed_uid"
+            },
+            "type": "array",
+            "uniqueItems": true
+          },
+          "evidence_link_codes": {
+            "items": {
+              "enum": [
+                "CAPACITY",
+                "FRESHNESS",
+                "MANAGED_RAW",
+                "ACTIVE_TREE"
+              ]
+            },
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": true
+          },
+          "fact_codes": {
+            "items": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/enum_code"
+            },
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": true
+          },
+          "status": {
+            "enum": [
+              "OK",
+              "WARNING",
+              "CRITICAL"
+            ]
+          },
+          "view_code": {
+            "enum": [
+              "HEALTH",
+              "PRIVACY",
+              "FRESHNESS",
+              "RETENTION",
+              "CAPACITY"
+            ]
+          }
+        },
+        "required": [
+          "view_code",
+          "status",
+          "fact_codes",
+          "alert_uids",
+          "evidence_link_codes"
+        ],
+        "type": "object"
+      },
+      "maxItems": 5,
+      "minItems": 5,
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "bundle_digest",
+    "dashboard_uid",
+    "owner_plane",
+    "status",
+    "source_evidence",
+    "views",
+    "alerts",
+    "summary",
+    "artifact_digest"
+  ],
+  "title": "Mechanism M-067 operational dashboard",
+  "type": "object"
+}

@@ -1,0 +1,75 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:actionable-operational-alert:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "action_code": {
+      "enum": [
+        "BIND_ACTIVE_TREE_EXECUTOR_AND_VALIDATE_LEDGER",
+        "BIND_MANAGED_RAW_EXECUTOR_AND_CERTIFY_RUNTIME",
+        "CAPTURE_REAL_COLD_WARM_CAPACITY_BASELINES",
+        "DISABLE_PERSISTENT_MANAGED_RAW_DEFAULT",
+        "REGISTER_EVALUATED_VERSION_AND_RUN_FRESHNESS_MONITOR"
+      ]
+    },
+    "alert_uid": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/typed_uid"
+    },
+    "artifact_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "blocking": {
+      "type": "boolean"
+    },
+    "category": {
+      "enum": [
+        "PRIVACY",
+        "FRESHNESS",
+        "RETENTION",
+        "CAPACITY"
+      ]
+    },
+    "evidence_link_codes": {
+      "items": {
+        "enum": [
+          "CAPACITY",
+          "FRESHNESS",
+          "MANAGED_RAW",
+          "ACTIVE_TREE"
+        ]
+      },
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "owner": {
+      "enum": [
+        "AUTO",
+        "MECHANISM"
+      ]
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:actionable-operational-alert:v1"
+    },
+    "severity": {
+      "enum": [
+        "INFO",
+        "WARNING",
+        "CRITICAL"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "alert_uid",
+    "category",
+    "severity",
+    "owner",
+    "action_code",
+    "evidence_link_codes",
+    "blocking",
+    "artifact_digest"
+  ],
+  "title": "Mechanism M-067 actionable operational alert",
+  "type": "object"
+}

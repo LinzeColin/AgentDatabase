@@ -1,0 +1,201 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:operational-dashboard-readiness:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "current_projection": {
+      "const": {
+        "active_tree_executor_bound": false,
+        "alert_count": 4,
+        "artifact_digest": "671885cd00049d7cf8577909824ebdbdd06b5f62f2ccf890fbbd2a4a8cf2dbf8",
+        "capacity_calibrated": false,
+        "critical_count": 2,
+        "freshness_runtime_ready": false,
+        "info_count": 0,
+        "managed_raw_runtime_certified": false,
+        "notification_sent": false,
+        "production_dashboard_ready": false,
+        "source_evidence_count": 4,
+        "view_count": 5,
+        "warning_count": 2
+      }
+    },
+    "implementation_contract": {
+      "const": {
+        "alert_schema": {
+          "canonical_path": "CodexSkills/governance/monitoring/schemas/actionable-operational-alert.schema.json",
+          "content_digest": "5853c126c7697873f1dc54d81f49f5cb1cfebb5aed0583203cb5dfd4ba5cfadc",
+          "schema_sha256": "3ab699ac6345f0e10a4528c7db69b7a5bb9676b29fc748d220d0d19ec6a55b69",
+          "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:actionable-operational-alert:v1",
+          "self_digest_pointer": "/artifact_digest"
+        },
+        "caller_alert_fields_accepted": false,
+        "capability_mode": "PURE_IMMUTABLE_OBJECTS_ONLY",
+        "component_path": "CodexSkills/governance/monitoring/operational_dashboard.py",
+        "content_digest": "d4cce58cacbd90e92fa02873d39c369a4a2a6c8007a64a14b56b79df97de68e5",
+        "dashboard": {
+          "artifact_digest": "671885cd00049d7cf8577909824ebdbdd06b5f62f2ccf890fbbd2a4a8cf2dbf8",
+          "canonical_path": "CodexSkills/governance/monitoring/operational-dashboard.json",
+          "content_digest": "8eb694589f5fed6e98668839a7f5039829896d74edbb40df4c68e81b666d69e6"
+        },
+        "dashboard_schema": {
+          "canonical_path": "CodexSkills/governance/monitoring/schemas/operational-dashboard.schema.json",
+          "content_digest": "106755f3f0d1386604a6e82b7061441d1310068da589d46ed4f839a291ecf6e9",
+          "schema_sha256": "0952ef9cd3c1fa45eb0ea62e5e9df30d6a3807d3f22f4c3b91b3934e5f58fc24",
+          "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:operational-dashboard:v1",
+          "self_digest_pointer": "/artifact_digest"
+        },
+        "every_alert_action_required": true,
+        "every_alert_evidence_link_required": true,
+        "every_alert_owner_required": true,
+        "human_dashboard": {
+          "canonical_path": "CodexSkills/governance/monitoring/OPERATIONAL_DASHBOARD.md",
+          "content_digest": "c9f63222769e818cdede952699f039c5b98b0664c3b72bf728d7db574fef2a97"
+        },
+        "live_telemetry_capability_present": false,
+        "notification_transport_capability_present": false,
+        "publisher_capability_present": false,
+        "state_capability_present": false,
+        "views": [
+          "HEALTH",
+          "PRIVACY",
+          "FRESHNESS",
+          "RETENTION",
+          "CAPACITY"
+        ]
+      }
+    },
+    "next_phase": {
+      "const": "MECHANISM_THREE_REPRESENTATIVE_PILOTS"
+    },
+    "nonmutation": {
+      "const": {
+        "activation_forbidden": true,
+        "auto_plane_unchanged": true,
+        "candidate_bundle_unchanged": true,
+        "canonical_publication_permitted": false,
+        "notification_sent": false,
+        "openai_database_unchanged": true,
+        "real_telemetry_collected": false,
+        "state_write_permitted": false,
+        "version_file_created": false
+      }
+    },
+    "owner_plane": {
+      "const": "MECHANISM"
+    },
+    "policy_count": {
+      "const": 5
+    },
+    "production_dashboard_ready": {
+      "const": false
+    },
+    "protocol_revision": {
+      "const": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1"
+    },
+    "schema_closure_count": {
+      "const": 37
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:operational-dashboard-readiness:v1"
+    },
+    "self_digest_pointer": {
+      "const": "/artifact_digest"
+    },
+    "source_trust": {
+      "const": {
+        "candidate_bundle": {
+          "artifact_digest": "66ad125629cab71739ff2bc266219f995f7a45998936ca720c6db678ee77e65a",
+          "bundle_digest": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e",
+          "canonical_path": "CodexSkills/governance/bundles/schema-bundle-manifest.v1.json",
+          "expected_mode": "CANDIDATE",
+          "policy_count": 5,
+          "schema_count": 31,
+          "verified_git_object_id": "sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5"
+        },
+        "operational_sources": [
+          {
+            "artifact_digest": "9cd49a73c30729de3b0443e6a8024035cdc138a8e2d690f720def0d4400b881e",
+            "canonical_path": "CodexSkills/governance/performance/performance-capacity-readiness.json",
+            "content_digest": "000154c32d895b35960cadbad80582c09121ee1103a31a63577ad8a6cf5b1a3d",
+            "evidence_code": "CAPACITY",
+            "status": "DRAFT_NON_ACTIVE_PERFORMANCE_CAPACITY_BUDGETS_IMPLEMENTED_UNCALIBRATED",
+            "verified_git_object_id": "sha1:9968a706dd729839efa707bf64ef893c44d324bd"
+          },
+          {
+            "artifact_digest": "8864203d59f925f8f3110ff1e779ebdb19d26818a337de764596de2de1afa96d",
+            "canonical_path": "CodexSkills/governance/monitoring/freshness-drift-readiness.json",
+            "content_digest": "416beacd6a72d3d5517211a3758452228bd445ab10fc887928b0575e2865d812",
+            "evidence_code": "FRESHNESS",
+            "status": "DRAFT_NON_ACTIVE_FRESHNESS_DRIFT_MONITOR_READY",
+            "verified_git_object_id": "sha1:3d3c202ee629d79eadfb027da131e1afcb88a1f2"
+          },
+          {
+            "artifact_digest": "dad952d9df1523bb63765dc028a4f3609251834dcb52dfa06a085341f555f774",
+            "canonical_path": "CodexSkills/governance/retention/managed-raw-72h-readiness.json",
+            "content_digest": "d60a71554ffbe4bde30fbd639e723086598df22b69b4ceee04b070dd4ddb6e0f",
+            "evidence_code": "MANAGED_RAW",
+            "status": "DRAFT_NON_ACTIVE_MANAGED_RAW_72H_POLICY_READY",
+            "verified_git_object_id": "sha1:b023ac71c5c7852a95f4b87a56981fe7a42c32d9"
+          },
+          {
+            "artifact_digest": "0bb6c1fb335115785495805ed001d6747a311dd1cbee335547beccaf8501df88",
+            "canonical_path": "CodexSkills/governance/retention/git-active-tree-365d-readiness.json",
+            "content_digest": "91592f339854fb205993e96a67698d7b6ce8fc54afd3b226f3090dfd49ab86f2",
+            "evidence_code": "ACTIVE_TREE",
+            "status": "DRAFT_NON_ACTIVE_GIT_ACTIVE_TREE_365D_READY",
+            "verified_git_object_id": "sha1:039f3844b36961f1d8432b9c0d86d6cda408f430"
+          }
+        ],
+        "repository_self_report_is_not_trust_root": true
+      }
+    },
+    "status": {
+      "const": "DRAFT_NON_ACTIVE_OPERATIONAL_DASHBOARD_READY_ALERTS_PRESENT"
+    },
+    "task_contract": {
+      "const": {
+        "dependency_task_ids": [
+          "M-058",
+          "M-061",
+          "M-063",
+          "M-066"
+        ],
+        "done_gate": "EVERY_ALERT_HAS_OWNER_ACTION_EVIDENCE_LINK",
+        "implemented_task_ids": [
+          "M-067"
+        ],
+        "pending_task_ids": [
+          "M-068"
+        ],
+        "required_output_code": "HEALTH_PRIVACY_FRESHNESS_RETENTION_CAPACITY_VIEWS"
+      }
+    },
+    "task_pack_revision": {
+      "const": "v0.0.0.2"
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "status",
+    "owner_plane",
+    "source_trust",
+    "implementation_contract",
+    "current_projection",
+    "nonmutation",
+    "task_contract",
+    "schema_closure_count",
+    "policy_count",
+    "production_dashboard_ready",
+    "next_phase",
+    "self_digest_pointer",
+    "task_pack_revision",
+    "artifact_digest"
+  ],
+  "title": "Mechanism M-067 operational dashboard readiness",
+  "type": "object"
+}
