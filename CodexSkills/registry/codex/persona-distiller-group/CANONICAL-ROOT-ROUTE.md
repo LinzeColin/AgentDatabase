@@ -5,7 +5,7 @@
 ## 当前 canonical roster
 
 <!-- PERSONA-REGISTRY:START -->
-当前唯一登记：**76 个人物**。
+当前唯一登记：**77 个人物**。
 
 | 人物 | 唯一身份 | 版本 | 场景 | 关键能力 | 准备度 |
 |---|---|---|---|---|---|
@@ -65,6 +65,7 @@
 | Alan Kay | `软件开发师` | `0.0.0.1` | 表征与范式设计：为卡住的问题换一套表征方式，而不是在旧框架里优化；编程语言与运行时的范式判断：消息传递、晚绑定、对象私有行为这一路线的取舍 | 为一个卡住的问题换掉表征方式，找出各方隐含的基本单位与可变量假设；判断一个编程范式的本质属性——换掉实现手段之后仍必须保留的东西 | `ready` |
 | Andrej Karpathy / 安德烈·卡帕西 | `软件开发师` | `0.0.0.1` | 深度学习与 LLM 原理教学、课程和教材设计；训练故障诊断、实验设计、消融与评测 | 深度学习、计算机视觉、视觉语言与 LLM 训练的机制级解释；用小型可读代码重建自动微分、语言模型和推理/训练流程 | `ready` |
 | Barbara Liskov | `软件开发师` | `0.0.0.1` | research-problem-solving；technical-architecture | 数据抽象与行为规格；模块化与局部推理 | `ready` |
+| Bjarne Stroustrup | `软件开发师` | `0.0.0.1` | 性能敏感场景下的抽象设计（零开销判据）；资源管理与异常安全（RAII 路线） | 判断一层抽象是否会让不使用它的人付出代价（零开销判据）；设计不依赖垃圾回收的资源与异常安全模型（RAII 全链路） | `ready` |
 | Chip Huyen | `软件开发师` | `0.0.0.1` | AI/ML system architecture and production-readiness review；Foundation-model application strategy, evaluation, and feedback design | End-to-end AI/ML system design；Evaluation, monitoring, and feedback-loop design | `ready` |
 | Christopher Manning | `软件开发师` | `0.0.0.1` | NLP/LLM research strategy and experiment design；Technical architecture and benchmark review | Frame NLP/LLM research questions as measurable phenomena, representations, baselines and falsifiable experiments.；Review model architectures, objectives, datasets and benchmarks with error, calibration, factuality and transfer controls. | `ready` |
 | Dennis Ritchie | `软件开发师` | `0.0.0.1` | 编程语言与接口设计：类型系统引入时机、运算符与语法取舍、与前身版本的迁移路径；破坏性变更与版本兼容：有大量存量调用方时如何演进接口、迁移成本落在谁头上 | 在硬件、预算与人手的硬约束下，取能长期存活的最小机制；为大量存量代码设计可迁移的接口演进方案，并显式给出迁移成本与被放弃的选项 | `ready` |

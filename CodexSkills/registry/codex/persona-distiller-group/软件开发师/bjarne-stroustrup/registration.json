@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:bjarnestroustrup",
+  "canonical_name": "Bjarne Stroustrup",
+  "identity_family_id": "software-developer",
+  "identity_mode": "single",
+  "registration_category": "软件开发师",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "bjarne-stroustrup",
+  "subject_uid": "person-e4696e741f5ba56e",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/bjarne-stroustrup-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-26T14:26:03Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "6d30e2e86a9201242a24ddbae378d47fe58e8b3e7788b76e21e2ecbcd244cb2c",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/bjarne-stroustrup-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "bfd393381141013b447c70f94e9ea9bbacd505f3f1554fb4182a333f2b2fde2c",
+      "runtime_size_bytes": 65521,
+      "size_bytes": 72636
+    }
+  ]
+}
