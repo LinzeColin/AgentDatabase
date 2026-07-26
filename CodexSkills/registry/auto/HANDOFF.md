@@ -1,7 +1,7 @@
 # Auto BOUND reference resolver integration handoff
 
 - State: `DRAFT_NON_ACTIVE_BOUND_REFERENCE_RESOLVER_INTEGRATED_CONTROL_SYNC_PENDING`
-- Phase: `AUTO_BOUND_REFERENCE_RESOLVER_INTEGRATION`
+- Phase: `AUTO_BOUND_REFERENCE_RESOLVER_HISTORICAL_RUNTIME_FIXTURE_CORRECTIVE`
 - Phase base / predecessor control Git object:
   `sha1:df63339e1bb6106250ce169241477191744c254f`
 - Predecessor control raw SHA-256:
@@ -118,7 +118,8 @@ Mechanism transition tree: 73 tests PASS plus the one exact expected
 candidate trust: 31 schemas / 5 policies PASS
 Auto, Mechanism, activation, resolver, AU-040 builders/lints:
   byte-equivalent / PASS
-Python 3.9 AST and exact 17-path Auto ownership boundary: PASS
+Python 3.9 AST and exact two-path Auto test/document ownership boundary: PASS
+test-only successor Mechanism local-byte regression: 1/1 PASS
 stale predecessor production preflight/resolver CLI:
   BOOTSTRAP_AUTO_RUNTIME_INTERFACE_LOCAL_DRIFT before side effects
 Broad command ownership retains the pre-existing external baseline failure:
@@ -126,9 +127,11 @@ Broad command ownership retains the pre-existing external baseline failure:
 ```
 
 The successor-control test fixture is transition-safe: the immutable
-`df63339...` predecessor is always loaded from Git, a coherent historical view
-is used only inside the one test that must reach the missing-snapshot gate, and
-stale production calls expect the exact first failure for the current checkout
+`df63339...` predecessor and every path in its complete
+`TRUSTED_MECHANISM_RUNTIME_PATHS` closure are always loaded from Git. That
+coherent historical view is used only inside the one test that must reach the
+missing-snapshot gate, while stale production calls expect the exact first
+failure for the current checkout
 (`BOOTSTRAP_AUTO_RUNTIME_INTERFACE_LOCAL_DRIFT` before a successor control,
 `BOOTSTRAP_CONTROL_INTERFACE_LOCAL_DRIFT` after one). No production gate is
 patched or skipped.

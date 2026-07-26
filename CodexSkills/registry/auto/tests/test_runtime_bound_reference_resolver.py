@@ -16,7 +16,7 @@ from CodexSkills.registry.auto.runtime.binding_resolver import (
 )
 from CodexSkills.registry.auto.runtime.bootstrap import (
     BootstrapContext,
-    CONTROL_INTERFACE_PATH,
+    TRUSTED_MECHANISM_RUNTIME_PATHS,
     bootstrap_runtime,
     require_bound_reference_resolver_authority,
 )
@@ -27,7 +27,6 @@ from runtime_helpers import (
     BOUND_REFERENCE_CONTROL_GIT_OBJECT,
     REPO_ROOT,
     bound_reference_control_trust,
-    bound_reference_control_raw,
     expected_bound_reference_control_failure_pattern,
     final_contract,
     registered_snapshot_trust,
@@ -236,14 +235,20 @@ class RuntimeBoundReferenceResolverTests(unittest.TestCase):
             transport["relative_path"],
         )
         auto_interface = parse_json_bytes(auto_raw)
+        bound_object = BOUND_REFERENCE_CONTROL_GIT_OBJECT.split(":", 1)[1]
         coherent = {
-            REPO_ROOT.joinpath(*CONTROL_INTERFACE_PATH.split("/")): (
-                bound_reference_control_raw()
-            ),
-            REPO_ROOT.joinpath(*transport["relative_path"].split("/")): (
-                auto_raw
+            REPO_ROOT.joinpath(*relative_path.split("/")): (
+                binding_resolver._git_blob(
+                    REPO_ROOT,
+                    bound_object,
+                    relative_path,
+                )
             )
+            for relative_path in TRUSTED_MECHANISM_RUNTIME_PATHS
         }
+        coherent[
+            REPO_ROOT.joinpath(*transport["relative_path"].split("/"))
+        ] = auto_raw
         for entry in auto_interface["module_artifacts"]:
             relative_path = entry["relative_path"]
             coherent[
