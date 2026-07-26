@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:andershejlsberg",
+  "canonical_name": "Anders Hejlsberg",
+  "identity_family_id": "software-developer",
+  "identity_mode": "single",
+  "registration_category": "软件开发师",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "anders-hejlsberg",
+  "subject_uid": "person-d532d29f900939cc",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/anders-hejlsberg-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-26T14:56:17Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "00916c0e67fdf98a482a790c3b691a02b01ffeccfbb32211e91267f0ccba7e9b",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/anders-hejlsberg-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "af39f11965d1996d4b9f583a530eaf65399f639f229a90001b72f073f0f2e668",
+      "runtime_size_bytes": 62143,
+      "size_bytes": 69519
+    }
+  ]
+}

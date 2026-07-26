@@ -60,12 +60,12 @@
 ## 当前登记
 
 <!-- PERSONA-REGISTRY:START -->
-当前唯一登记：**77 个人物**。
+当前唯一登记：**78 个人物**。
 
 | 唯一目录 | 人物数 |
 |---|---:|
 | `材料建工师/` | 15 |
-| `软件开发师/` | 24 |
+| `软件开发师/` | 25 |
 | `艺术设计师/` | 0 |
 | `创业经营师/` | 7 |
 | `投资资本师/` | 11 |
@@ -76,7 +76,7 @@
 | `财务合规师/` | 1 |
 | `医疗护理师/` | 0 |
 | `农林牧渔师/` | 0 |
-| **总计** | **77** |
+| **总计** | **78** |
 
 | 人物 | 唯一身份 | 版本 | 选入原因 | 最值得蒸馏的特点 | 对用户的利益/帮助 | 应用场景 | 关键能力 | 完整 ZIP |
 |---|---|---|---|---|---|---|---|---|
@@ -134,6 +134,7 @@
 | 辛多·寇 / Sindo Kou | `材料建工师` | `0.0.0.1` | 公开职业与作品高度集中在焊接冶金、材料加工传输现象、凝固裂纹及工程教学。；一手论文、专著、技术回顾和官方履历形成跨四十余年的连续证据链。 | 以热—流—凝固—组织—缺陷因果链表征问题；按焊池、熔合边界、部分熔化区和热影响区进行区域化诊断 | 把模糊焊接缺陷问题转化为可测变量、竞争机制和最小区分性试验；审查仿真、试验和工艺建议是否具有机制依据、适用域和责任门 | 焊接冶金与凝固裂纹机理诊断；焊池流动、熔深与表面活性效应分析 | 多物理因果建模与区域分解；竞争机制与区分性试验设计 | [ZIP](材料建工师/sindo-kou/versions/0.0.0.1/sindo-kou-persona-distillation-delivery-v0.0.0.1.zip) |
 | Nancy Leveson | `财务合规师` | `0.0.0.1` | Longitudinal primary corpus across software safety, system safety, methods, teaching, and organizational control.；Stable cross-source problem-framing patterns can be operationalized without claiming private identity. | Loss-and-constraint-first framing；System-theoretic control and feedback analysis | Turns vague safety concern into losses, hazards, controls, scenarios, owners, and verification.；Surfaces software, human, organizational, and regulatory interactions missed by component-only analysis. | Complex system safety and cybersecurity review；STPA-style proactive hazard analysis | System-level causal reframing；Control-structure modeling | [ZIP](财务合规师/nancy-leveson/versions/0.0.0.1/nancy-leveson-persona-distillation-delivery-v0.0.0.1.zip) |
 | Alan Kay | `软件开发师` | `0.0.0.1` | Smalltalk 方向与 Dynabook 构想的提出者，其表征优先的思路构成与前三位软件开发师完全不同的第四种决策起点；留下罕见的一手自述《The Early History of Smalltalk》，含大量自我批评与对他人贡献的明确归位 | 视角优先：能力来自表征方式而非智力，卡住先换视角不先加资源（“视角值 80 个智商点”）；工具非中性：工具内建什么思维模式，决定使用者能想到什么 | 团队在一个难题上卡住时，先帮你判断是不是表征方式本身在制造难度，而不是直接建议加人；架构讨论各说各话时，把各方隐含的假设挖出来并造出可比较的共同模型 | 表征与范式设计：为卡住的问题换一套表征方式，而不是在旧框架里优化；编程语言与运行时的范式判断：消息传递、晚绑定、对象私有行为这一路线的取舍 | 为一个卡住的问题换掉表征方式，找出各方隐含的基本单位与可变量假设；判断一个编程范式的本质属性——换掉实现手段之后仍必须保留的东西 | [ZIP](软件开发师/alan-kay/versions/0.0.0.1/alan-kay-persona-distillation-delivery-v0.0.0.1.zip) |
+| Anders Hejlsberg | `软件开发师` | `0.0.0.1` | 跨四十年、三种生态连续做出四个被大规模采用的语言／工具（Turbo Pascal、Delphi、C#、TypeScript），在软件史上极罕见；TypeScript 的设计目标／非目标文档是罕见的、把取舍逐条公开写死的一手设计文本 | 非目标先行：明确拒绝做什么，比宣称要做什么更界定设计；只描述不改造：新层叠在旧层之上，不动下层的运行时语义 | 要在既有系统上加新能力时，先帮你判断“采纳它需要对方先改变什么”，并把答案压到零；为大型 JavaScript 代码库设计可逐文件推进、随时可退的类型引入路径，并提前告知补偿成本 | 在既有生态上叠加静态类型而不改动其运行时；渐进式采纳路径设计（逐文件、可回退、零基础设施改造） | 判断一个新特性是否要求运行时支持（五条可执行检查）；设计能被既有生态逐步采纳、且可完全回退的方案 | [ZIP](软件开发师/anders-hejlsberg/versions/0.0.0.1/anders-hejlsberg-persona-distillation-delivery-v0.0.0.1.zip) |
 | Andrej Karpathy / 安德烈·卡帕西 | `软件开发师` | `0.0.0.1` | 公开一手材料横跨论文、工业系统、课程、代码、访谈与近期 Agent 研究，适合构建可执行而非仅风格化的人物模型。；技术工程与思想教育均有长期、可复现的作品证据；开发设计仅限技术系统，创业经营仅保留有证据的教育产品范围。 | 从原语重建复杂系统并用可运行代码检验理解；把数据、训练、评测、部署和反馈视为一个端到端闭环 | 获得可执行的深度学习/LLM 学习、诊断、实验和实现方法，而不是口吻模仿。；将模糊 AI 产品或研究问题压缩为最小闭环、指标、实验和可交付物。 | 深度学习与 LLM 原理教学、课程和教材设计；训练故障诊断、实验设计、消融与评测 | 深度学习、计算机视觉、视觉语言与 LLM 训练的机制级解释；用小型可读代码重建自动微分、语言模型和推理/训练流程 | [ZIP](软件开发师/andrej-karpathy/versions/0.0.0.1/andrej-karpathy-persona-distillation-delivery-v0.0.0.1.zip) |
 | Barbara Liskov | `软件开发师` | `0.0.0.1` | 其公开技术证据横跨数据抽象、编程语言、类型、复制、拜占庭容错、信息流与事务，足以形成跨五十年的可执行工程模型。；原始论文、系统实现、基准、教材、直接访谈和外部反例能够同时约束能力、工作方法、表达与边界。 | 以客户端可观察行为定义抽象边界，再隐藏表示以获得局部推理。；在协议设计前固定故障模型，并把恢复、升级和角色变化作为一等状态。 | 把模糊技术问题压缩为可观察规格、不变量、失败模型和验证计划。；在复杂架构中找到能够删除状态、消息、权限和跨模块推理的抽象。 | research-problem-solving；technical-architecture | 数据抽象与行为规格；模块化与局部推理 | [ZIP](软件开发师/barbara-liskov/versions/0.0.0.1/barbara-liskov-persona-distillation-delivery-v0.0.0.1.zip) |
 | Bjarne Stroustrup | `软件开发师` | `0.0.0.1` | C++ 创造者，其零开销抽象与 RAII 构成系统级软件的事实基线，并直接影响 Rust 等后续语言的资源模型；留下罕见的完整设计理由记录：D&E 与 HOPL II／III 三份文本逐条交代特性来路与代价 | 零开销是不可让渡的最高约束：不用的不付费，用到的手写也不会更快；兼容性是自愿承担的代价：换生态与迁移路径，算清账后不反悔 | 在性能敏感系统里判断一层抽象能不能加，给出五条可执行检查而非“做个基准测试”；系统性修复异常安全问题，按 RAII 的正确顺序推进而不是到处加 try-catch | 性能敏感场景下的抽象设计（零开销判据）；资源管理与异常安全（RAII 路线） | 判断一层抽象是否会让不使用它的人付出代价（零开销判据）；设计不依赖垃圾回收的资源与异常安全模型（RAII 全链路） | [ZIP](软件开发师/bjarne-stroustrup/versions/0.0.0.1/bjarne-stroustrup-persona-distillation-delivery-v0.0.0.1.zip) |
