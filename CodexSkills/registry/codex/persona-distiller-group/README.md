@@ -60,12 +60,12 @@
 ## 当前登记
 
 <!-- PERSONA-REGISTRY:START -->
-当前唯一登记：**72 个人物**。
+当前唯一登记：**73 个人物**。
 
 | 唯一目录 | 人物数 |
 |---|---:|
 | `材料建工师/` | 15 |
-| `软件开发师/` | 19 |
+| `软件开发师/` | 20 |
 | `艺术设计师/` | 0 |
 | `创业经营师/` | 7 |
 | `投资资本师/` | 11 |
@@ -76,7 +76,7 @@
 | `财务合规师/` | 1 |
 | `医疗护理师/` | 0 |
 | `农林牧渔师/` | 0 |
-| **总计** | **72** |
+| **总计** | **73** |
 
 | 人物 | 唯一身份 | 版本 | 选入原因 | 最值得蒸馏的特点 | 对用户的利益/帮助 | 应用场景 | 关键能力 | 完整 ZIP |
 |---|---|---|---|---|---|---|---|---|
@@ -143,6 +143,7 @@
 | Jerry Liu | `软件开发师` | `0.0.0.1` | Strong public record spanning code, technical essays, interviews, product launches, and company strategy from 2022 through 2026.；Distinctive, transferable model for external context, RAG evolution, document processing, and developer-platform design. | Find the current bottleneck and move the architecture toward it.；Treat LLMs as reasoning engines that need reliable external context. | Produces rigorous LLM/RAG/agent architecture reviews tied to data shape and failure cost.；Translates frontier-model changes into concrete product and platform decisions. | LLM, RAG, long-context, and agent architecture design；Document parsing, retrieval, extraction, and workflow automation | Context and data architecture for LLM applications；Parse–Retrieve–Reason–Act workflow decomposition | [ZIP](软件开发师/jerry-liu-llamaindex/versions/0.0.0.1/jerry-liu-llamaindex-persona-distillation-delivery-v0.0.0.1.zip) |
 | John Carmack（约翰·卡马克） | `软件开发师` | `0.0.0.1` | 跨三十年的一手工作日志、公开代码、长篇演讲和研究工件提供了高密度可验证过程证据；游戏引擎、移动设备、VR、火箭和 AI 研究构成多个 materially different contexts，可检验稳定方法而非单一时期风格 | 让抽象主张尽快接触可测现实；从端到端路径和隐藏状态定位真正瓶颈 | 把模糊性能或可靠性问题改写为可观察指标、基线和停止条件；为复杂工程或研究任务建立最小端到端闭环并压缩反馈循环 | 系统架构、性能、延迟与可靠性诊断；受限平台、交互原型与技术产品定义 | 端到端瓶颈分析与可观察量设计；最小可运行路径、快速迭代和原型到生产边界 | [ZIP](软件开发师/john-carmack/versions/0.0.0.1/john-carmack-persona-distillation-delivery-v0.0.0.1.zip) |
 | Karen Spärck Jones | `软件开发师` | `0.0.0.1` | IR/NLP、系统评测与受控实验的一手证据覆盖深，适合研究和工程判断任务。；既有技术创造又有方法反思、教学和学术治理记录，支持技术工程师与思想教育家双分面。 | 从任务功能定义系统，而不是从“智能”标签出发。；以强简单基线、受控比较和失败机制约束复杂化。 | 设计可审计的 IR/NLP/RAG 实验与评测。；识别 benchmark 分数与实际用途之间的外推断层。 | 搜索、排序、RAG、NLP与自动摘要方案评审；benchmark、共享任务和离线/在线评测设计 | 任务—系统角色建模；信息检索与概率证据分析 | [ZIP](软件开发师/karen-sparck-jones/versions/0.0.0.1/karen-sparck-jones-persona-distillation-delivery-v0.0.0.1.zip) |
+| Ken Thompson | `软件开发师` | `0.0.0.1` | Unix 主要创造者之一与 B 语言设计者，其抽象选择构成现代操作系统的事实基线；《Reflections on Trusting Trust》是供应链安全与可复现构建领域的奠基性威胁模型，至今是编译器可信性讨论的起点 | 最小覆盖抽象：先找能覆盖所有情况的最小抽象，找到就不再为特例加机制；只认覆盖性不认票数：反对意见的数量不改变判断，只有举出覆盖不了的情况才改变判断 | 设计要被长期依赖的接口时，帮你判断哪个机制是多余的、抽象是否还需为特例开口子；面对“业内都这么做”的压力时，把争论从票数转回到“这个抽象覆盖不了什么” | 底层抽象设计：为要被长期依赖的系统找出能覆盖全部用例的最小概念集合；字符编码与协议设计：在多条不可协商的兼容约束下取最简方案 | 找出能覆盖全部用例的最小抽象，并判断某个机制是否多余；在一组不可协商的硬约束下设计编码与协议（UTF-8 为完整样本） | [ZIP](软件开发师/ken-thompson/versions/0.0.0.1/ken-thompson-persona-distillation-delivery-v0.0.0.1.zip) |
 | Kent Beck | `软件开发师` | `0.0.0.1` | Four decades of inspectable software artifacts connect ideas to executable practice.；Public failures and adaptations reveal update behavior, not only polished doctrine. | Shrinks uncertainty through rapid, specific feedback.；Separates structural change from behavioral change to preserve intent and reversibility. | Produces executable plans with tests, baselines, rollback, and stopping rules.；Improves code and design reviews without reducing them to style imitation. | TDD and test-strategy design；Refactoring and evolutionary architecture review | Software design and refactoring economics；Test-driven development and feedback-loop design | [ZIP](软件开发师/kent-beck/versions/0.0.0.1/kent-beck-persona-distillation-delivery-v0.0.0.1.zip) |
 | Leslie Lamport | `软件开发师` | `0.0.0.1` | 公开作品长期集中于并发/分布式系统与形式化方法；同时存在系统性的证明、写作和教学材料 | 状态机与动作优先；因果偏序先于物理时间 | 把模糊技术方案转成可验证规格；发现并发与故障模型中的隐藏假设 | 分布式协议和并发系统评审；TLA+/状态机规格设计 | 分布式因果、一致性、共识、互斥和快照推理；状态/动作规格与 safety/liveness 分解 | [ZIP](软件开发师/leslie-lamport/versions/0.0.0.1/leslie-lamport-persona-distillation-delivery-v0.0.0.1.zip) |
 | Martin Fowler / 马丁·福勒 | `软件开发师` | `0.0.0.1` | 公开作品跨三十年持续覆盖重构、架构、敏捷技术实践与企业软件设计。；第一方资料对工作方法、编辑准则、证据局限和职业边界有明确自述。 | 以未来变化成本解释设计与内部质量。；用小步、快速反馈和安全网管理复杂改变。 | 把抽象架构争论转化为可执行、可验证、可回滚的演进路径。；识别敏捷仪式与真实工程能力之间的缺口。 | 软件架构与微服务/单体取舍评审；重构、技术债与遗留系统渐进迁移 | 小步保持行为的重构和迁移规划；架构收益、成本、前置条件和失败模式分析 | [ZIP](软件开发师/martin-fowler/versions/0.0.0.1/martin-fowler-persona-distillation-delivery-v0.0.0.1.zip) |

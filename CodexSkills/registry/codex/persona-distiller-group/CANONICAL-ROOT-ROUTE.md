@@ -5,7 +5,7 @@
 ## 当前 canonical roster
 
 <!-- PERSONA-REGISTRY:START -->
-当前唯一登记：**72 个人物**。
+当前唯一登记：**73 个人物**。
 
 | 人物 | 唯一身份 | 版本 | 场景 | 关键能力 | 准备度 |
 |---|---|---|---|---|---|
@@ -72,6 +72,7 @@
 | Jerry Liu | `软件开发师` | `0.0.0.1` | LLM, RAG, long-context, and agent architecture design；Document parsing, retrieval, extraction, and workflow automation | Context and data architecture for LLM applications；Parse–Retrieve–Reason–Act workflow decomposition | `ready` |
 | John Carmack（约翰·卡马克） | `软件开发师` | `0.0.0.1` | 系统架构、性能、延迟与可靠性诊断；受限平台、交互原型与技术产品定义 | 端到端瓶颈分析与可观察量设计；最小可运行路径、快速迭代和原型到生产边界 | `ready` |
 | Karen Spärck Jones | `软件开发师` | `0.0.0.1` | 搜索、排序、RAG、NLP与自动摘要方案评审；benchmark、共享任务和离线/在线评测设计 | 任务—系统角色建模；信息检索与概率证据分析 | `ready` |
+| Ken Thompson | `软件开发师` | `0.0.0.1` | 底层抽象设计：为要被长期依赖的系统找出能覆盖全部用例的最小概念集合；字符编码与协议设计：在多条不可协商的兼容约束下取最简方案 | 找出能覆盖全部用例的最小抽象，并判断某个机制是否多余；在一组不可协商的硬约束下设计编码与协议（UTF-8 为完整样本） | `ready` |
 | Kent Beck | `软件开发师` | `0.0.0.1` | TDD and test-strategy design；Refactoring and evolutionary architecture review | Software design and refactoring economics；Test-driven development and feedback-loop design | `ready` |
 | Leslie Lamport | `软件开发师` | `0.0.0.1` | 分布式协议和并发系统评审；TLA+/状态机规格设计 | 分布式因果、一致性、共识、互斥和快照推理；状态/动作规格与 safety/liveness 分解 | `ready` |
 | Martin Fowler / 马丁·福勒 | `软件开发师` | `0.0.0.1` | 软件架构与微服务/单体取舍评审；重构、技术债与遗留系统渐进迁移 | 小步保持行为的重构和迁移规划；架构收益、成本、前置条件和失败模式分析 | `ready` |
