@@ -62,6 +62,14 @@ fails closed. Only an unchanged protected snapshot can delegate through M-058
 and then M-056; none of these pure functions writes state, Git, VERSION,
 notification, or public artifacts.
 
+`cold_start/` is the final M-069 release-review boundary. It binds 23 critical
+artifacts to named external Git objects, generates the top-level human Handoff
+and changelog, and exposes one deterministic repository-only reconstruction
+command. It records Task Pack completion through the actual final task M-069
+while keeping production readiness false. There is no M-070; after an
+ordinary push and detached remote readback, the only next action is an
+Owner-selected fresh verifier.
+
 Validate from the repository root:
 
 ```bash
@@ -87,4 +95,8 @@ Validate from the repository root:
   --check
 /usr/bin/python3 -B -m unittest \
   CodexSkills.governance.tests.test_evaluator_release_protection
+/usr/bin/python3 -B \
+  CodexSkills/governance/tools/build_cold_start_release_review.py --check
+/usr/bin/python3 -B -m unittest \
+  CodexSkills.governance.tests.test_cold_start_release_review
 ```

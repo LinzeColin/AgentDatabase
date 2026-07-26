@@ -1,4 +1,133 @@
-# Mechanism three representative pilots handoff
+# Mechanism cold-start release-review handoff
+
+- State:
+  `DRAFT_NON_ACTIVE_MECHANISM_TASKPACK_RELEASE_REVIEW_COMPLETE_WITH_BLOCKERS`
+- Phase: `MECHANISM_COLD_START_HANDOFF_RELEASE_REVIEW`
+- Task Pack task implemented: `M-069`
+- M-069 dependency: `M-068`
+- Required output:
+  `VALIDATED_HANDOFF / CHANGELOG / EVIDENCE_INDEX`
+- Done gate:
+  `NEW_AGENT_RECONSTRUCTS_EXACT_STATE_WITHOUT_CHAT_CONTEXT`
+- Done gate satisfied: `true`
+- Task Pack last task / task count: `M-069 / 69`
+- M-070 present in Task Pack: `false`
+- Reviewed predecessor:
+  `sha1:1fb0f80a3f90bf1e1dfc41d04556f7088b004b2d`
+- Human cold-start entry:
+  `CodexSkills/HANDOFF.md`
+- Human handoff raw SHA-256:
+  `232b863048622b86afcb27ce88a8d0386a1a072c034dfade8564f808b79796a7`
+- Release changelog:
+  `CodexSkills/CHANGELOG.md`
+- Changelog raw SHA-256:
+  `1cf6756a6e08c8545865c7feb67d8ced5f302659921dc6eb5029bcbdb0c60db2`
+- Machine evidence index:
+  `CodexSkills/governance/release/cold_start/evidence-index.json`
+- Evidence index raw / self SHA-256:
+  `275efb2d1217a53592b5780f7581d80361b6987d50eb6e321d6a0980bce08444`
+  / `e708086479475b13189c75be328524868d8495a7c527ae0c7ccbeaf3e9fc8a53`
+- Evidence entries / unique paths: `23 / 23`
+- Machine cold-start handoff:
+  `CodexSkills/governance/release/cold_start/cold-start-handoff.json`
+- Machine handoff raw / self SHA-256:
+  `2b8b1a476fbfc54f71116f013ee27e36fbff3da85571a6436ee41cbbe7fa7952`
+  / `2caeed2f7d539a543c33c67d3bcafacc98c644868ff5d7ab757f8e18aa4b5b01`
+- Pure review module:
+  `CodexSkills/governance/release/cold_start/review.py`
+- Module raw SHA-256:
+  `78affcff24de9977565ad3636ff69120aef5fd542e6cb041b20f8b1fadf1493e`
+- Deterministic builder:
+  `CodexSkills/governance/tools/build_cold_start_release_review.py`
+- Builder raw SHA-256:
+  `f9766395716ce1b27492669155cd7581562bc6c3fdd9e3ef222d2695f6a16c7e`
+- Targeted test:
+  `CodexSkills/governance/tests/test_cold_start_release_review.py`
+- Test raw SHA-256:
+  `ab93e7f89a777013c2987ca7b06323eb299fa069c4ffaa7c6eee7cd4c161dc33`
+- Evidence-index schema raw / canonical SHA-256:
+  `ddcc578d214830771695cd03ce392e4a908b7ccf9c09b3195e26469a6408535f`
+  / `270fdfcc11c524aee823fef08771fc71d951da8b6492feeac015f554a2cfce0f`
+- Cold-start-handoff schema raw / canonical SHA-256:
+  `127320c6178a23db03a16f58da61cb3c96dc500a46d28184dfb9dcf85d7147e6`
+  / `10c9a168b063d83959ae6a971b00aeb3d593929cd8307a2d98c8d5783efe3af1`
+- Candidate:
+  `sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5`
+  / bundle
+  `36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e`
+  / `31 schemas + 5 policies`
+- Registry Identity / Instance / Version / binding-eligible:
+  `89 / 89 / 89 / 0`
+- Registered snapshot / current mirror instances / parity:
+  `89 / 90 / false`
+- Representative pilots / stable Shadow cycles / synthetic rollback drills:
+  `3 / 9 / 9`
+- Production pilots executed: `false`
+- Schedule authority resolved: `false`
+- Schedule candidates:
+  `04:15 / 05:30 Australia/Sydney`
+- ACTIVE trust / VERSION / canonical publication / activation:
+  `false / absent / false / false`
+- External Gmail-state readiness / runtime state write:
+  `false / false`
+- Exact next action:
+  `OWNER_SELECT_AND_RUN_FRESH_VERIFIER`
+- Follow-on Mechanism Task Pack Phase exists: `false`
+
+The 23-entry evidence index pins every material source to an external Git
+object and raw digest. The builder verifies each Git blob against the reviewed
+predecessor and the current bytes; repository self-report is never promoted
+to a trust root. The human handoff provides the two commands required for a
+new agent to reconstruct and revalidate the state without chat history.
+
+M-069 closes the immutable Task Pack review, not the production system.
+The exact fail-closed blockers remain:
+
+```text
+ACTIVATION_CONTROL_INTERFACE_SEMANTIC_MISMATCH
+ACTIVE_TRUST_ABSENT
+AUTO_REGISTRY_MIRROR_SKILL_COUNT_DRIFT
+BOUND_REFERENCE_RESOLVER_RUNTIME_LOCAL_DRIFT
+EXTERNAL_GMAIL_STATE_READINESS_UNVERIFIED
+PRODUCTION_PILOTS_NOT_RUN
+SCHEDULE_AUTHORITY_UNRESOLVED
+```
+
+## M-069 validation
+
+```text
+M-069 targeted cold-start/evidence/privacy/negative tests: 24/24 PASS
+complete Mechanism suite: 331/331 PASS
+M-069 builder/handoff/changelog/index/schemas: BYTE_EQUIVALENT
+candidate trust: 31 schemas / 5 policies PASS
+schema-set lint:
+  base 21 / candidate-compatible 41 / version 24 /
+  complete repository closure 87 PASS
+OpenAIDatabase consumer + architecture: 23/23 PASS
+consumer CLI: PASS / errors=[] / canonical publication=false
+```
+
+The pre-existing cross-owner transition remains the accepted fail-closed
+baseline from M-068 and is not modified or relabeled by M-069:
+
+```text
+complete Auto suite: 200 tests / 5 failures / 20 errors
+fault/privacy seed 271828: 149 tests / 5 failures / 25 errors
+fault/privacy seed 314159: 149 tests / 5 failures / 25 errors
+AUTO_REGISTRY_MIRROR_SKILL_COUNT_DRIFT
+BOUND_REFERENCE_RESOLVER_RUNTIME_LOCAL_DRIFT
+ACTIVATION_CONTROL_INTERFACE_SEMANTIC_MISMATCH
+```
+
+No Auto or OpenAIDatabase file change belongs to this Phase. Final acceptance
+additionally requires an ordinary commit, FF-safe `HEAD:main` push, and fresh
+detached GitHub object/raw-byte readback of every changed path. No verifier
+call, historical Task Pack replay, real Skill/evaluator run, Registry/source/
+state/watermark mutation, notification, migration, publication, activation,
+`CodexSkills/VERSION`, schedule, automation, App operation, or invented M-070
+belongs to this run.
+
+## Prior M-068 three representative pilots handoff
 
 - State:
   `DRAFT_NON_ACTIVE_THREE_REPRESENTATIVE_PILOTS_SHADOW_COMPLETE_PRODUCTION_BLOCKED`

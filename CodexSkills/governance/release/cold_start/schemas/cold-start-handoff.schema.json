@@ -1,0 +1,216 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:cold-start-handoff:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "blocker_codes": {
+      "const": [
+        "ACTIVATION_CONTROL_INTERFACE_SEMANTIC_MISMATCH",
+        "ACTIVE_TRUST_ABSENT",
+        "AUTO_REGISTRY_MIRROR_SKILL_COUNT_DRIFT",
+        "BOUND_REFERENCE_RESOLVER_RUNTIME_LOCAL_DRIFT",
+        "EXTERNAL_GMAIL_STATE_READINESS_UNVERIFIED",
+        "PRODUCTION_PILOTS_NOT_RUN",
+        "SCHEDULE_AUTHORITY_UNRESOLVED"
+      ]
+    },
+    "bundle_digest": {
+      "const": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e"
+    },
+    "current_state": {
+      "const": {
+        "activation_permitted": false,
+        "active_trust_present": false,
+        "auto_runtime_state_write_permitted": false,
+        "binding_eligible_version_count": 0,
+        "canonical_publication_permitted": false,
+        "external_gmail_state_ready": false,
+        "mechanism_final_task_review_complete": true,
+        "mechanism_production_ready": false,
+        "pilot_count": 3,
+        "production_pilots_executed": false,
+        "registry_identity_count": 89,
+        "registry_instance_count": 89,
+        "registry_mirror_parity": false,
+        "registry_version_count": 89,
+        "repository_mirror_skill_instance_count": 90,
+        "schedule_authority_resolved": false,
+        "schedule_candidates_local": [
+          "04:15",
+          "05:30"
+        ],
+        "shadow_pilot_cycle_count": 9,
+        "version_file_present": false
+      }
+    },
+    "documents": {
+      "const": {
+        "changelog": {
+          "canonical_path": "CodexSkills/CHANGELOG.md",
+          "content_digest": "1cf6756a6e08c8545865c7feb67d8ced5f302659921dc6eb5029bcbdb0c60db2",
+          "digest_basis": "RAW_BYTES"
+        },
+        "human_handoff": {
+          "canonical_path": "CodexSkills/HANDOFF.md",
+          "content_digest": "232b863048622b86afcb27ce88a8d0386a1a072c034dfade8564f808b79796a7",
+          "digest_basis": "RAW_BYTES"
+        },
+        "machine_handoff": {
+          "canonical_path": "CodexSkills/governance/release/cold_start/cold-start-handoff.json",
+          "self_digest_pointer": "/artifact_digest"
+        }
+      }
+    },
+    "nonmutation": {
+      "const": {
+        "activation_executed": false,
+        "auto_plane_unchanged": true,
+        "automation_or_app_changed": false,
+        "candidate_bundle_unchanged": true,
+        "canonical_artifact_published": false,
+        "migration_executed": false,
+        "notification_sent": false,
+        "openai_database_unchanged": true,
+        "registry_unchanged": true,
+        "source_roots_unchanged": true,
+        "state_or_watermark_written": false,
+        "version_file_created": false
+      }
+    },
+    "phase": {
+      "const": "MECHANISM_COLD_START_HANDOFF_RELEASE_REVIEW"
+    },
+    "protocol_revision": {
+      "const": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1"
+    },
+    "release_decision": {
+      "const": {
+        "exact_next_action": "OWNER_SELECT_AND_RUN_FRESH_VERIFIER",
+        "follow_on_mechanism_taskpack_phase_exists": false,
+        "outcome": "STOP_BEFORE_OWNER_FRESH_VERIFIER",
+        "owner_fresh_verifier_required": true,
+        "verifier_called_during_development": false
+      }
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:cold-start-handoff:v1"
+    },
+    "source_trust": {
+      "const": {
+        "candidate": {
+          "bundle_digest": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e",
+          "canonical_path": "CodexSkills/governance/bundles/schema-bundle-manifest.v1.json",
+          "mode": "CANDIDATE",
+          "policy_count": 5,
+          "schema_count": 31,
+          "verified_git_object_id": "sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5"
+        },
+        "evidence_index": {
+          "artifact_digest": "e708086479475b13189c75be328524868d8495a7c527ae0c7ccbeaf3e9fc8a53",
+          "canonical_path": "CodexSkills/governance/release/cold_start/evidence-index.json"
+        },
+        "repository_self_report_is_not_trust_root": true,
+        "review_base": {
+          "verified_git_object_id": "sha1:1fb0f80a3f90bf1e1dfc41d04556f7088b004b2d"
+        }
+      }
+    },
+    "status": {
+      "const": "DRAFT_NON_ACTIVE_MECHANISM_TASKPACK_RELEASE_REVIEW_COMPLETE_WITH_BLOCKERS"
+    },
+    "task_contract": {
+      "const": {
+        "dependency_task_ids": [
+          "M-068"
+        ],
+        "done_gate": "NEW_AGENT_RECONSTRUCTS_EXACT_STATE_WITHOUT_CHAT_CONTEXT",
+        "done_gate_satisfied": true,
+        "implemented_task_ids": [
+          "M-069"
+        ],
+        "m070_exists_in_task_pack": false,
+        "required_output_codes": [
+          "VALIDATED_HANDOFF",
+          "CHANGELOG",
+          "EVIDENCE_INDEX"
+        ],
+        "task_pack_last_task_id": "M-069",
+        "task_pack_task_count": 69
+      }
+    },
+    "task_pack_revision": {
+      "const": "v0.0.0.2"
+    },
+    "validation_baseline": {
+      "const": {
+        "auto_known_transition": {
+          "errors": 20,
+          "failures": 5,
+          "tests_run": 200
+        },
+        "candidate_trust": {
+          "policies": 5,
+          "schemas": 31
+        },
+        "complete_mechanism": {
+          "errors": 0,
+          "failures": 0,
+          "tests_run": 307
+        },
+        "consumer": {
+          "canonical_publication_permitted": false,
+          "errors": 0,
+          "failures": 0,
+          "tests_run": 23
+        },
+        "fault_privacy_known_transition": [
+          {
+            "errors": 25,
+            "failures": 5,
+            "seed": 271828,
+            "tests_run": 149
+          },
+          {
+            "errors": 25,
+            "failures": 5,
+            "seed": 314159,
+            "tests_run": 149
+          }
+        ],
+        "schema_sets": {
+          "base": 21,
+          "candidate_compatible": 41,
+          "repository_closure_before_m069": 85,
+          "version": 24
+        },
+        "targeted_m068_tests": {
+          "errors": 0,
+          "failures": 0,
+          "tests_run": 20
+        }
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "task_pack_revision",
+    "bundle_digest",
+    "status",
+    "phase",
+    "task_contract",
+    "source_trust",
+    "current_state",
+    "validation_baseline",
+    "blocker_codes",
+    "release_decision",
+    "nonmutation",
+    "documents",
+    "artifact_digest"
+  ],
+  "title": "Mechanism M-069 cold-start Handoff",
+  "type": "object"
+}

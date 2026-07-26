@@ -41,6 +41,12 @@ Key entrypoints:
   holdout isolation.
 - `tools/build_failure_to_test.py`: deterministic M-046 public-safe shadow
   fixture, three bundle-external schemas, and non-active readiness.
+- `release/cold_start/review.py`: pure M-069 evidence-index and cold-start
+  Handoff reconstruction over exact public-safe raw bytes; no repository,
+  runtime, verifier, or side-effect capability.
+- `tools/build_cold_start_release_review.py`: deterministic final Task Pack
+  evidence index, machine Handoff, top-level human Handoff/changelog, and two
+  bundle-external schemas.
 - `pilots/representative_pilots.py`: pure M-068 deterministic sync,
   same-name/multi-source identity, and high-risk iterative Shadow pilot
   projection with three-cycle stability and synthetic pre-write rollback
@@ -167,6 +173,8 @@ Run from the repository root with the explicitly provisioned interpreter:
   --check
 /usr/bin/python3 -B \
   CodexSkills/governance/tools/build_failure_to_test.py --check
+/usr/bin/python3 -B \
+  CodexSkills/governance/tools/build_cold_start_release_review.py --check
 /usr/bin/python3 -B \
   CodexSkills/governance/tools/build_representative_pilots.py --check
 /usr/bin/python3 -B \
