@@ -172,7 +172,7 @@ fault/privacy seed 314159: 156/156 PASS
 Auto schema/transport/promotion/runtime builders and lints: PASS
 ```
 
-The same standard Auto command against the uncommitted 89-root successor
+The same standard Auto command against the 89-root successor
 correctly does **not** pass: it ran 200 tests with four failures and 20 errors.
 All observed failures stop at the cross-owner transition boundary:
 
