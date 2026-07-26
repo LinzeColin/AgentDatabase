@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:joelgreenblatt",
+  "canonical_name": "Joel Greenblatt",
+  "identity_family_id": "investor-capital-allocator",
+  "identity_mode": "single",
+  "registration_category": "投资资本师",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "joel-greenblatt",
+  "subject_uid": "person-2e28080444c656dc",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/joel-greenblatt-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T00:00:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0",
+      "outer_sha256": "c4fa4a409b047a2609faf536c2d7ec7a2c10cfc68db961e14cd1f3d95b5f69c3",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/joel-greenblatt-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "5293f3ab3e967358819cf660d74b7d98ed052052b4c18518c6ee95e342017842",
+      "runtime_size_bytes": 82371,
+      "size_bytes": 93043
+    }
+  ]
+}

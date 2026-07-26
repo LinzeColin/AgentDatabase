@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:辛多寇/sindokou",
+  "canonical_name": "辛多·寇 / Sindo Kou",
+  "identity_family_id": "technical-engineer",
+  "identity_mode": "single",
+  "registration_category": "材料建工师",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "sindo-kou",
+  "subject_uid": "person-bf55f8dae7410898",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/sindo-kou-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T12:00:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0",
+      "outer_sha256": "57bff4c660160c29bb262a0b2073fa0af900238caac9baa9495b5c941319c4be",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/sindo-kou-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "4272834c637f7cb928e1a6698871b76e97d2d46892f564dee050350e3729c443",
+      "runtime_size_bytes": 64374,
+      "size_bytes": 564518
+    }
+  ]
+}

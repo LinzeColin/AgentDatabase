@@ -1,4 +1,4 @@
-# 创业经营家 identity facet
+# 创业经营师 identity facet
 
 ## Readiness
 

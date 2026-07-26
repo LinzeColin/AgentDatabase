@@ -48,10 +48,11 @@ imported into `~/.codex/sessions` on this machine.
 [`CodexSkills/registry/codex/persona-distiller/`](CodexSkills/registry/codex/persona-distiller/)，
 唯一 canonical 登记与专家团队 Skill 位于平级的
 [`CodexSkills/registry/codex/persona-distiller-group/`](CodexSkills/registry/codex/persona-distiller-group/)。
-它生成的每个人物产物必须且只能登记到对应的一个身份目录；多重身份只进入
-`多重身份/`，不得在不同身份下重复登记。七个目录固定为 `技术工程师/`、
-`创业经营家/`、`投资资本家/`、`开发设计家/`、`思想教育家/`、`政治法律家/`、
-`多重身份/`；每个版本只保存一个全量完整交付 ZIP，机器索引为
+它生成的每个人物产物必须且只能登记到对应的一个身份目录；每个人物只进入一个
+单一主身份目录，不再使用“多重身份”目录。十二个目录固定为 `材料建工师/`、
+`软件开发师/`、`艺术设计师/`、`创业经营师/`、`投资资本师/`、`思想教育师/`、
+`政治法律师/`、`客户营销师/`、`建造采购师/`、`财务合规师/`、`医疗护理师/`、
+`农林牧渔师/`；每个版本只保存一个全量完整交付 ZIP，机器索引为
 [`team-index.json`](CodexSkills/registry/codex/persona-distiller-group/team-index.json)，
 最高优先级团队路由为
 [`CANONICAL-ROOT-ROUTE.md`](CodexSkills/registry/codex/persona-distiller-group/CANONICAL-ROOT-ROUTE.md)。

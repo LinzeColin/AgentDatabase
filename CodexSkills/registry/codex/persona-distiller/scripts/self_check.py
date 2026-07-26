@@ -46,7 +46,7 @@ def main() -> int:
     version = (root / 'VERSION').read_text(encoding='utf-8').strip() if (root / 'VERSION').is_file() else None
     manifest = read_json(root / 'manifest.json', default={}) or {}
     checks['version'] = version
-    if version != 'v0.0.0.5' or manifest.get('version') != version:
+    if version != 'v0.0.0.6' or manifest.get('version') != version:
         errors.append(f'version mismatch: VERSION={version!r}, manifest={manifest.get("version")!r}')
     if manifest.get('runtime_identity_routing') != 'automatic':
         errors.append('manifest must declare automatic runtime identity routing')
@@ -58,7 +58,7 @@ def main() -> int:
         'agents/openai.yaml', 'registries/identity-families.json',
         'templates/target/SKILL.md.tmpl', 'templates/target/agents/openai.yaml.tmpl',
         'templates/target/scripts/runtime_recorder.py', 'templates/target/scripts/runtime_router.py',
-        'scripts/identity.py', 'scripts/route_engine.py', 'scripts/init_target.py',
+        'scripts/identity.py', 'scripts/route_engine.py', 'scripts/namesake_gate.py', 'scripts/init_target.py',
         'scripts/package_target.py', 'scripts/delivery_builder.py', 'scripts/normalize_delivery.py',
         'scripts/build_release_bundle.py',
         'scripts/register_persona.py', 'scripts/validate_persona_registry.py',
@@ -66,7 +66,7 @@ def main() -> int:
         'scripts/review_harness.py', 'schemas/persona-registration.schema.json', 'schemas/runtime-record.schema.json',
         'templates/delivery/install.py', 'templates/target/team-card.json.tmpl',
         'templates/bundle/install.py', 'templates/bundle/README.md',
-        'references/persona-product-registration.md',
+        'references/persona-product-registration.md', 'schemas/namesake-gate.schema.json',
         'audit/10-round-improvement.md', 'audit/2x6-review.md',
     ]
     for rel in required:
@@ -77,12 +77,12 @@ def main() -> int:
         registry = read_json(root / 'registries/identity-families.json', default={}) or {}
         families = registry.get('families', [])
         checks['identity_families'] = len(families)
-        if len(families) != 7:
-            errors.append('identity registry must contain exactly seven choices')
+        if len(families) != 12:
+            errors.append('identity registry must contain exactly twelve choices')
         numbers = [item.get('number') for item in families]
         ids = [item.get('id') for item in families]
-        if numbers != list(range(1, 8)) or len(ids) != len(set(ids)):
-            errors.append('identity numbers must be 1..7 and IDs unique')
+        if numbers != list(range(1, 13)) or len(ids) != len(set(ids)):
+            errors.append('identity numbers must be 1..12 and IDs unique')
     except Exception as exc:
         errors.append(f'identity registry invalid: {exc}')
 

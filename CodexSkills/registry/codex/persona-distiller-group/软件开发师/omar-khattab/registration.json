@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:omarkhattab",
+  "canonical_name": "Omar Khattab",
+  "identity_family_id": "software-developer",
+  "identity_mode": "single",
+  "registration_category": "软件开发师",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "omar-khattab",
+  "subject_uid": "person-d5c2c0a5f2e22091",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/omar-khattab-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T06:00:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0",
+      "outer_sha256": "3b33129ce6eacab0b335364573bea7b192f8e698789cd8a1fab8a19c7908c18b",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/omar-khattab-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "53137761cc73a6ac55ea76d7e92533e71dcb1548a6c821b095fd0b3a4f37e32c",
+      "runtime_size_bytes": 68365,
+      "size_bytes": 77600
+    }
+  ]
+}

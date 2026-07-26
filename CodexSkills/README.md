@@ -29,18 +29,85 @@ curl -s https://raw.githubusercontent.com/LinzeColin/AgentDatabase/main/CodexSki
 
 ## 人物蒸馏产物登记
 
-[`persona-distiller`](registry/codex/persona-distiller/SKILL.md) 生成的每个人物产物必须且只能登记在对应的一个身份目录中；多重身份只进入 `多重身份/`，不得在不同身份下重复登记。
-完整发布 ZIP、canonical 登记、团队卡与机器索引仅位于与构建器平级的 [`registry/codex/persona-distiller-group/`](registry/codex/persona-distiller-group/README.md)；完整交付规则见 [`references/delivery-package-standard.md`](registry/codex/persona-distiller-group/references/delivery-package-standard.md)，团队路由真源见 [`CANONICAL-ROOT-ROUTE.md`](registry/codex/persona-distiller-group/CANONICAL-ROOT-ROUTE.md)。
-目录：[`技术工程师/`](registry/codex/persona-distiller-group/技术工程师/)、[`创业经营家/`](registry/codex/persona-distiller-group/创业经营家/)、[`投资资本家/`](registry/codex/persona-distiller-group/投资资本家/)、[`开发设计家/`](registry/codex/persona-distiller-group/开发设计家/)、[`思想教育家/`](registry/codex/persona-distiller-group/思想教育家/)、[`政治法律家/`](registry/codex/persona-distiller-group/政治法律家/)、[`多重身份/`](registry/codex/persona-distiller-group/多重身份/)。
-身份分类由人物 Skill 内部使用，不是调用门槛；用户安装后直接调用对应人物 Skill，无需选择身份。人物产物按 canonical 人物分别从 `0.0.0.1` 连续编号到 `0.0.0.999`，只在成功登记时占号；人物 Skill 的单次运行不编号。团队调用会先按场景选择 5–20 个高相关角色，以正向解决者为主，并至少隔离一个复审、一个裁判和一个反证角色。
+[`persona-distiller`](registry/codex/persona-distiller/SKILL.md) 为 **v0.0.0.6** 十二类单一主身份版本；人物产物必须且只能登记在一个身份目录中。
+完整发布 ZIP、canonical 登记、团队卡与机器索引仅位于与构建器平级的 [`registry/codex/persona-distiller-group/`](registry/codex/persona-distiller-group/README.md)。
+身份分类是内部登记与路由元数据，不是调用门槛；安装后用户直接调用人物 Skill，不要求选择身份。
+十二个目录：`材料建工师/`、`软件开发师/`、`艺术设计师/`、`创业经营师/`、`投资资本师/`、`思想教育师/`、`政治法律师/`、`客户营销师/`、`建造采购师/`、`财务合规师/`、`医疗护理师/`、`农林牧渔师/`。
 
-当前登记：**3 个人物**。
+当前登记：**70 人物**。
 
 | 人物 | 唯一分类 | 产物版本 | 完整 ZIP |
 |---|---|---|---|
-| Beth Wilkinson | `政治法律家` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/政治法律家/beth-wilkinson/versions/0.0.0.1/beth-wilkinson-persona-distillation-delivery-v0.0.0.1.zip) |
-| Evan R. Chesler | `政治法律家` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/政治法律家/evan-r-chesler/versions/0.0.0.1/evan-r-chesler-persona-distillation-delivery-v0.0.0.1.zip) |
-| Theodore V. Wells Jr. | `政治法律家` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/政治法律家/theodore-v-wells-jr/versions/0.0.0.1/theodore-v-wells-jr-persona-distillation-delivery-v0.0.0.1.zip) |
+| Anne Mulcahy | `创业经营师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/创业经营师/anne-mulcahy/versions/0.0.0.1/anne-mulcahy-persona-distillation-delivery-v0.0.0.1.zip) |
+| Ben Horowitz | `创业经营师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/创业经营师/ben-horowitz/versions/0.0.0.1/ben-horowitz-persona-distillation-delivery-v0.0.0.1.zip) |
+| David Packard | `创业经营师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/创业经营师/david-packard/versions/0.0.0.1/david-packard-persona-distillation-delivery-v0.0.0.1.zip) |
+| Reed Hastings / 里德·哈斯廷斯 | `创业经营师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/创业经营师/reed-hastings/versions/0.0.0.1/reed-hastings-persona-distillation-delivery-v0.0.0.1.zip) |
+| Sam Walton | `创业经营师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/创业经营师/sam-walton/versions/0.0.0.1/sam-walton-persona-distillation-delivery-v0.0.0.1.zip) |
+| Tim Cook | `创业经营师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/创业经营师/tim-cook/versions/0.0.0.1/tim-cook-persona-distillation-delivery-v0.0.0.1.zip) |
+| 路易斯·郭士纳 / Louis V. Gerstner Jr. | `创业经营师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/创业经营师/lou-gerstner/versions/0.0.0.1/lou-gerstner-persona-distillation-delivery-v0.0.0.1.zip) |
+| David T. Hulett | `建造采购师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/建造采购师/david-t-hulett/versions/0.0.0.1/david-t-hulett-persona-distillation-delivery-v0.0.0.1.zip) |
+| Donald G. Reinertsen | `建造采购师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/建造采购师/donald-g-reinertsen/versions/0.0.0.1/donald-g-reinertsen-persona-distillation-delivery-v0.0.0.1.zip) |
+| John K. Hollmann | `建造采购师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/建造采购师/john-k-hollmann/versions/0.0.0.1/john-k-hollmann-persona-distillation-delivery-v0.0.0.1.zip) |
+| Lauri Koskela | `建造采购师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/建造采购师/lauri-koskela/versions/0.0.0.1/lauri-koskela-persona-distillation-delivery-v0.0.0.1.zip) |
+| Martin Fischer | `建造采购师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/建造采购师/martin-fischer-stanford/versions/0.0.0.1/martin-fischer-stanford-persona-distillation-delivery-v0.0.0.1.zip) |
+| Paul Michael Teicholz | `建造采购师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/建造采购师/paul-teicholz/versions/0.0.0.1/paul-teicholz-persona-distillation-delivery-v0.0.0.1.zip) |
+| Philip Crosby | `建造采购师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/建造采购师/philip-crosby/versions/0.0.0.1/philip-crosby-persona-distillation-delivery-v0.0.0.1.zip) |
+| Rafael Sacks | `建造采购师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/建造采购师/rafael-sacks/versions/0.0.0.1/rafael-sacks-persona-distillation-delivery-v0.0.0.1.zip) |
+| 大野耐一 / Taiichi Ohno | `建造采购师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/建造采购师/taiichi-ohno/versions/0.0.0.1/taiichi-ohno-persona-distillation-delivery-v0.0.0.1.zip) |
+| 新乡重夫 / Shigeo Shingo | `建造采购师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/建造采购师/shigeo-shingo/versions/0.0.0.1/shigeo-shingo-persona-distillation-delivery-v0.0.0.1.zip) |
+| 田口玄一 Genichi Taguchi | `建造采购师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/建造采购师/genichi-taguchi/versions/0.0.0.1/genichi-taguchi-persona-distillation-delivery-v0.0.0.1.zip) |
+| 约瑟夫·M·朱兰（Joseph M. Juran） | `建造采购师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/建造采购师/joseph-juran/versions/0.0.0.1/joseph-juran-persona-distillation-delivery-v0.0.0.1.zip) |
+| Charles Eastman | `思想教育师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/思想教育师/charles-eastman/versions/0.0.0.1/charles-eastman-persona-distillation-delivery-v0.0.0.1.zip) |
+| Thomas L. Saaty | `思想教育师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/思想教育师/thomas-saaty/versions/0.0.0.1/thomas-saaty-persona-distillation-delivery-v0.0.0.1.zip) |
+| Aswath Damodaran | `投资资本师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/投资资本师/aswath-damodaran/versions/0.0.0.1/aswath-damodaran-persona-distillation-delivery-v0.0.0.1.zip) |
+| Charlie Munger | `投资资本师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/投资资本师/charlie-munger/versions/0.0.0.1/charlie-munger-persona-distillation-delivery-v0.0.0.1.zip) |
+| Edward O. Thorp（爱德华·索普） | `投资资本师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/投资资本师/edward-o-thorp/versions/0.0.0.1/edward-o-thorp-persona-distillation-delivery-v0.0.0.1.zip) |
+| Howard Marks | `投资资本师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/投资资本师/howard-marks/versions/0.0.0.1/howard-marks-persona-distillation-delivery-v0.0.0.1.zip) |
+| Joel Greenblatt | `投资资本师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/投资资本师/joel-greenblatt/versions/0.0.0.1/joel-greenblatt-persona-distillation-delivery-v0.0.0.1.zip) |
+| Michael J. Mauboussin | `投资资本师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/投资资本师/michael-mauboussin/versions/0.0.0.1/michael-mauboussin-persona-distillation-delivery-v0.0.0.1.zip) |
+| Nick Sleep | `投资资本师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/投资资本师/nick-sleep/versions/0.0.0.1/nick-sleep-persona-distillation-delivery-v0.0.0.1.zip) |
+| Robert A. Kindler | `投资资本师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/投资资本师/robert-a-kindler/versions/0.0.0.1/robert-a-kindler-persona-distillation-delivery-v0.0.0.1.zip) |
+| Seth Klarman | `投资资本师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/投资资本师/seth-klarman/versions/0.0.0.1/seth-klarman-persona-distillation-delivery-v0.0.0.1.zip) |
+| Warren Buffett | `投资资本师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/投资资本师/warren-buffett/versions/0.0.0.1/warren-buffett-persona-distillation-delivery-v0.0.0.1.zip) |
+| 李录 Li Lu | `投资资本师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/投资资本师/li-lu/versions/0.0.0.1/li-lu-persona-distillation-delivery-v0.0.0.1.zip) |
+| Beth Wilkinson | `政治法律师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/政治法律师/beth-wilkinson/versions/0.0.0.1/beth-wilkinson-persona-distillation-delivery-v0.0.0.1.zip) |
+| Evan R. Chesler | `政治法律师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/政治法律师/evan-r-chesler/versions/0.0.0.1/evan-r-chesler-persona-distillation-delivery-v0.0.0.1.zip) |
+| H. Rodgin Cohen | `政治法律师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/政治法律师/h-rodgin-cohen/versions/0.0.0.1/h-rodgin-cohen-persona-distillation-delivery-v0.0.0.1.zip) |
+| Scott A. Barshay | `政治法律师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/政治法律师/scott-a-barshay/versions/0.0.0.1/scott-a-barshay-persona-distillation-delivery-v0.0.0.1.zip) |
+| Theodore V. Wells Jr. | `政治法律师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/政治法律师/theodore-v-wells-jr/versions/0.0.0.1/theodore-v-wells-jr-persona-distillation-delivery-v0.0.0.1.zip) |
+| Adam Booth (Abom79) | `材料建工师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/材料建工师/adam-booth-abom79/versions/0.0.0.1/adam-booth-abom79-persona-distillation-delivery-v0.0.0.1.zip) |
+| Ali Erdemir | `材料建工师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/材料建工师/ali-erdemir/versions/0.0.0.1/ali-erdemir-persona-distillation-delivery-v0.0.0.1.zip) |
+| Charles Becht IV | `材料建工师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/材料建工师/charles-becht-iv/versions/0.0.0.1/charles-becht-iv-persona-distillation-delivery-v0.0.0.1.zip) |
+| Dan Gelbart | `材料建工师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/材料建工师/dan-gelbart/versions/0.0.0.1/dan-gelbart-persona-distillation-delivery-v0.0.0.1.zip) |
+| Ernest Rabinowicz | `材料建工师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/材料建工师/ernest-rabinowicz/versions/0.0.0.1/ernest-rabinowicz-persona-distillation-delivery-v0.0.0.1.zip) |
+| George Antaki | `材料建工师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/材料建工师/george-antaki/versions/0.0.0.1/george-antaki-persona-distillation-delivery-v0.0.0.1.zip) |
+| Harry Bhadeshia | `材料建工师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/材料建工师/harry-bhadeshia/versions/0.0.0.1/harry-bhadeshia-persona-distillation-delivery-v0.0.0.1.zip) |
+| Heinz P. Bloch | `材料建工师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/材料建工师/heinz-p-bloch/versions/0.0.0.1/heinz-p-bloch-persona-distillation-delivery-v0.0.0.1.zip) |
+| Ian Michael Hutchings | `材料建工师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/材料建工师/ian-michael-hutchings/versions/0.0.0.1/ian-michael-hutchings-persona-distillation-delivery-v0.0.0.1.zip) |
+| John C. Lippold | `材料建工师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/材料建工师/john-c-lippold/versions/0.0.0.1/john-c-lippold-persona-distillation-delivery-v0.0.0.1.zip) |
+| John Moubray | `材料建工师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/材料建工师/john-moubray/versions/0.0.0.1/john-moubray-persona-distillation-delivery-v0.0.0.1.zip) |
+| R. Keith Mobley | `材料建工师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/材料建工师/r-keith-mobley/versions/0.0.0.1/r-keith-mobley-persona-distillation-delivery-v0.0.0.1.zip) |
+| Richard (Doc) Palmer | `材料建工师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/材料建工师/doc-palmer/versions/0.0.0.1/doc-palmer-persona-distillation-delivery-v0.0.0.1.zip) |
+| Stefan Gotteswinter | `材料建工师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/材料建工师/stefan-gotteswinter/versions/0.0.0.1/stefan-gotteswinter-persona-distillation-delivery-v0.0.0.1.zip) |
+| 辛多·寇 / Sindo Kou | `材料建工师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/材料建工师/sindo-kou/versions/0.0.0.1/sindo-kou-persona-distillation-delivery-v0.0.0.1.zip) |
+| Nancy Leveson | `财务合规师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/财务合规师/nancy-leveson/versions/0.0.0.1/nancy-leveson-persona-distillation-delivery-v0.0.0.1.zip) |
+| Andrej Karpathy / 安德烈·卡帕西 | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/andrej-karpathy/versions/0.0.0.1/andrej-karpathy-persona-distillation-delivery-v0.0.0.1.zip) |
+| Barbara Liskov | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/barbara-liskov/versions/0.0.0.1/barbara-liskov-persona-distillation-delivery-v0.0.0.1.zip) |
+| Chip Huyen | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/chip-huyen/versions/0.0.0.1/chip-huyen-persona-distillation-delivery-v0.0.0.1.zip) |
+| Christopher Manning | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/christopher-manning/versions/0.0.0.1/christopher-manning-persona-distillation-delivery-v0.0.0.1.zip) |
+| Hamel Husain | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/hamel-husain/versions/0.0.0.1/hamel-husain-persona-distillation-delivery-v0.0.0.1.zip) |
+| Jerry Liu | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/jerry-liu-llamaindex/versions/0.0.0.1/jerry-liu-llamaindex-persona-distillation-delivery-v0.0.0.1.zip) |
+| John Carmack（约翰·卡马克） | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/john-carmack/versions/0.0.0.1/john-carmack-persona-distillation-delivery-v0.0.0.1.zip) |
+| Karen Spärck Jones | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/karen-sparck-jones/versions/0.0.0.1/karen-sparck-jones-persona-distillation-delivery-v0.0.0.1.zip) |
+| Kent Beck | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/kent-beck/versions/0.0.0.1/kent-beck-persona-distillation-delivery-v0.0.0.1.zip) |
+| Leslie Lamport | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/leslie-lamport/versions/0.0.0.1/leslie-lamport-persona-distillation-delivery-v0.0.0.1.zip) |
+| Martin Fowler / 马丁·福勒 | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/martin-fowler/versions/0.0.0.1/martin-fowler-persona-distillation-delivery-v0.0.0.1.zip) |
+| Matei Zaharia | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/matei-zaharia/versions/0.0.0.1/matei-zaharia-persona-distillation-delivery-v0.0.0.1.zip) |
+| Omar Khattab | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/omar-khattab/versions/0.0.0.1/omar-khattab-persona-distillation-delivery-v0.0.0.1.zip) |
+| Rich Hickey | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/rich-hickey/versions/0.0.0.1/rich-hickey-persona-distillation-delivery-v0.0.0.1.zip) |
+| Shreya Shankar | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/shreya-shankar/versions/0.0.0.1/shreya-shankar-persona-distillation-delivery-v0.0.0.1.zip) |
+| Simon Willison | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/simon-willison/versions/0.0.0.1/simon-willison-persona-distillation-delivery-v0.0.0.1.zip) |
+| Stephen E. Robertson | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/stephen-e-robertson/versions/0.0.0.1/stephen-e-robertson-persona-distillation-delivery-v0.0.0.1.zip) |
 
 ## 同步
 

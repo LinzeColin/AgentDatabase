@@ -1,0 +1,26 @@
+{
+  "canonical_key": "historical:大野耐一/taiichiohno",
+  "canonical_name": "大野耐一 / Taiichi Ohno",
+  "identity_family_id": "construction-procurement",
+  "identity_mode": "single",
+  "registration_category": "建造采购师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "taiichi-ohno",
+  "subject_uid": "person-2f24e754468cccc1",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/taiichi-ohno-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T07:52:13Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0",
+      "outer_sha256": "d4580e8558cd291e40f78a87d662e40f80c6c2cb0c5b3e1887e907bab073f678",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/taiichi-ohno-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "685e5ea01d71ec22bdbe4fb6e85aafdc7f62c801d09a4feb4d52b6267a252e76",
+      "runtime_size_bytes": 77876,
+      "size_bytes": 102504
+    }
+  ]
+}

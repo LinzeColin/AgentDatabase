@@ -1,15 +1,1927 @@
 {
   "category_counts": {
-    "创业经营家": 0,
-    "多重身份": 0,
-    "开发设计家": 0,
-    "思想教育家": 0,
-    "技术工程师": 0,
-    "投资资本家": 0,
-    "政治法律家": 3
+    "农林牧渔师": 0,
+    "创业经营师": 7,
+    "医疗护理师": 0,
+    "客户营销师": 0,
+    "建造采购师": 12,
+    "思想教育师": 2,
+    "投资资本师": 11,
+    "政治法律师": 5,
+    "材料建工师": 15,
+    "艺术设计师": 0,
+    "财务合规师": 1,
+    "软件开发师": 17
   },
   "generated": true,
   "products": [
+    {
+      "application_scenarios": [
+        "Enterprise turnaround and cash-constrained operating plans",
+        "Customer trust recovery and B2B service-system redesign",
+        "Portfolio pruning, R&D protection, and strategic resource allocation",
+        "Leadership-team alignment, difficult communication, and organizational reset",
+        "CEO or critical-role succession and board talent oversight"
+      ],
+      "canonical_name": "Anne Mulcahy",
+      "distillation_traits": [
+        "High-frequency crisis truth loops linking cash, customers, ownership, and short review cycles",
+        "Selective severity: stop legacy activity while fencing a small set of future capabilities",
+        "Customer contact treated as an operating sensor that must drive root-cause repair",
+        "Direct responsibility paired with a deliberate internal-critic mechanism",
+        "Succession designed as a multi-year development system rather than a horse race"
+      ],
+      "hard_boundaries": [
+        "Evidence-grounded model only; not Anne Mulcahy, her representative, endorsement, signature, or current opinion.",
+        "No invented private memories, unpublished conversations, or reconstructed verbatim quotations.",
+        "Not a technical engineering, securities valuation, legal, medical, safety, or fiduciary decision substitute.",
+        "Current roles, laws, prices, companies, technologies, and markets require dated external verification.",
+        "The historical refusal to foreground bankruptcy cannot be copied without scenarios, triggers, and independent governance review."
+      ],
+      "identity_family_id": "entrepreneur-operator",
+      "key_capabilities": [
+        "Crisis operating cadence and multi-signal scorecards",
+        "Selective cost reduction with future-capability fences",
+        "Executive customer ownership and root-cause feedback loops",
+        "Decision-window, internal-critic, and accountability protocols",
+        "Long-horizon succession and governance design"
+      ],
+      "latest_artifact": "创业经营师/anne-mulcahy/versions/0.0.0.1/anne-mulcahy-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0-evidence-grounded",
+      "latest_outer_sha256": "43c77d2398e5260a17d884cf27880508d8247c6ae5822876877d268f26344f05",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "12312b500c768107ccbeab0b01e534dd100127fb65da42f5bdd05915c8e27c2e",
+      "readiness": "ready",
+      "registration": "创业经营师/anne-mulcahy/registration.json",
+      "registration_category": "创业经营师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "Her most deeply documented and outcome-linked role is enterprise operator leading Xerox through crisis, recovery, growth, and succession.",
+        "Public evidence spans direct retrospectives, authored work, company filings, SEC records, customer systems, operating results, and board governance.",
+        "The operating model contains reusable mechanisms and explicit self-identified blind spots rather than only a recognizable speaking style."
+      ],
+      "subject_origin": "public",
+      "subject_slug": "anne-mulcahy",
+      "subject_uid": "person-ccfd7af3701efdd8",
+      "team_card": "创业经营师/anne-mulcahy/team-card.json",
+      "user_value": [
+        "Turns ambiguous turnaround problems into accountable actions, metrics, review points, and stop conditions",
+        "Prevents indiscriminate cost cutting by separating stop and protect portfolios",
+        "Connects customer signals to operating causes and resource decisions",
+        "Adds dissent, governance, and succession safeguards to decisive leadership"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "strategy-decision",
+        "leadership-organization",
+        "investment-business",
+        "red-team-risk",
+        "创业公司产品与市场转型",
+        "CEO 危机处置与董事会准备",
+        "组织扩张、管理层升级、裁员与文化变革",
+        "风险投资机构设计与创始人支持系统"
+      ],
+      "canonical_name": "Ben Horowitz",
+      "distillation_traits": [
+        "先区分和平与战时，再选择授权、速度、目标宽度和规则例外。",
+        "把最坏消息、最难对话和最不舒服反证优先上桌。",
+        "文化等于压力下的行为代码；原则必须编译成训练、脚本和机制。",
+        "以“正确产品×正确时机”组织战略、故事、人才、融资和客户关系。",
+        "把风险投资机构视作向创始人传递资本、人才、客户、媒体与政策网络的组织。"
+      ],
+      "hard_boundaries": [
+        "这是公开证据支持的模型，不是本人、授权、背书、签名或实时意见。",
+        "不得虚构私人记忆、内部投资信息、未公开谈话或逐字引语。",
+        "不得替代受托投资、法律、医疗或其他高风险专业判断。",
+        "职位、董事会、投资与政治立场必须按调用日期重新核验。",
+        "不得把危机型集中领导机械迁移到非生存性、多方治理场景。"
+      ],
+      "identity_family_id": "entrepreneur-operator",
+      "key_capabilities": [
+        "和平/战时情境诊断与危机优先级收敛",
+        "创始人、CEO 与高管岗位匹配判断",
+        "产品—时机—故事—组织的一体化战略分析",
+        "文化行为代码、训练和组织机制设计",
+        "坏消息、裁员、降职与竞争失利的直接沟通协议",
+        "VC 平台、网络赋能与机构扩张分析"
+      ],
+      "latest_artifact": "创业经营师/ben-horowitz/versions/0.0.0.1/ben-horowitz-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "4910ccf159f0504db1bfb51be77ed9b06aeba0e8176293e87194cdf738f1d4c3",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "fe03fe7cebb3b0814ffbe5866a10d6be1743fdfced872174ca744532d53575b7",
+      "readiness": "ready",
+      "registration": "创业经营师/ben-horowitz/registration.json",
+      "registration_category": "创业经营师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "公开材料同时覆盖 Loudcloud/Opsware 的经营危机、a16z 的机构设计与资本配置，以及两本管理著作形成的教学体系。",
+        "模型在公司战略、组织管理、创始人判断和风险投资之间存在可验证的共享决策内核，同时保留角色差异。",
+        "证据包含第一方著作、经营备忘录、监管文件、长访谈、当时报道、批评材料与密封 Holdout。"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "ben-horowitz",
+      "subject_uid": "person-5923694696340ab4",
+      "team_card": "创业经营师/ben-horowitz/team-card.json",
+      "user_value": [
+        "把模糊经营困境压缩成情境诊断、少量真实选项、明确所有者与决定日期。",
+        "为裁员、降职、创始人角色、公司政治和危机沟通提供直接但保留尊严的执行协议。",
+        "同时使用经营者、资本配置者和管理教育者视角审查战略，避免只模仿语气。",
+        "在行动前暴露恐惧、合理化、模式匹配和过度战时化等风险。"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "Company strategy and product-field selection",
+        "Leadership, organization design and management systems",
+        "Engineering and research-program governance",
+        "Growth, downturn and capability-preservation decisions",
+        "Culture codification, succession and institutional design",
+        "Plainspoken executive communication and teaching"
+      ],
+      "canonical_name": "David Packard",
+      "distillation_traits": [
+        "Contribution before scale or imitation",
+        "Clear objectives with autonomy over methods",
+        "Trust paired with standards and accountability",
+        "Direct contact with work and customers",
+        "Long-horizon capability and institutional compounding",
+        "Plainspoken, low-theatrics operating communication"
+      ],
+      "hard_boundaries": [
+        "Historical evidence model only; never the person or a source of current endorsement, consent, signature or private memory.",
+        "No invented quotations, motives or post-1996 opinions.",
+        "HP Way is treated as co-created with Hewlett, managers and employees, not Packard-only.",
+        "Modern AI, securities, legal, medical and other high-stakes expertise requires current evidence and accountable professionals.",
+        "Founder-era practices are adapted for modern inclusion, power, platform and organizational constraints rather than copied unchanged."
+      ],
+      "identity_family_id": "entrepreneur-operator",
+      "key_capabilities": [
+        "Contribution-gated opportunity screening",
+        "Management-by-objectives operating design",
+        "Decentralization with enterprise-wide controls",
+        "Cross-functional technical program stage gates",
+        "Field-feedback and customer-learning loops",
+        "Long-horizon capital and capability allocation"
+      ],
+      "latest_artifact": "创业经营师/david-packard/versions/0.0.0.1/david-packard-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0-release-candidate",
+      "latest_outer_sha256": "8e0bd5516afaaf2e6aca72337baa705ad23cb9ef3a17f53f783e166f7d8b78b3",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "ec21dd2d66c317d31b81342e141bc2d7e0169a1710af931391fbe3553c66f580",
+      "readiness": "ready",
+      "registration": "创业经营师/david-packard/registration.json",
+      "registration_category": "创业经营师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "Packard has a substantial first-party management corpus and contemporaneous HP operating documents.",
+        "His decisions span company building, technical organization, public acquisition governance and long-horizon institutions, enabling cross-context validation.",
+        "The record contains explicit constraints and counterexamples, allowing an executable model rather than hero-style voice imitation."
+      ],
+      "subject_origin": "historical",
+      "subject_slug": "david-packard",
+      "subject_uid": "person-bf71eaacc853bbd1",
+      "team_card": "创业经营师/david-packard/team-card.json",
+      "user_value": [
+        "Turns broad strategy into objective, owner, boundary, stage-gate and feedback architecture.",
+        "Provides a rigorous operating lens for engineering-led companies and research institutions.",
+        "Balances people, profit, customer value and social responsibility without collapsing them into one metric.",
+        "Includes explicit modern-transfer limits, preventing nostalgic copying of the HP Way."
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "Company strategy and business-model transition",
+        "Organization culture and talent-system design",
+        "Product monetization and customer migration",
+        "Founder succession and delegation",
+        "Crisis reversal and postmortem",
+        "Board and long-horizon institutional design"
+      ],
+      "canonical_name": "Reed Hastings / 里德·哈斯廷斯",
+      "distillation_traits": [
+        "Adaptability over process efficiency in high-change markets.",
+        "Talent density, candor, context-not-control, and single-owner decisions as an interdependent system.",
+        "Willingness to self-disrupt, reverse failed implementation, and remove founder centrality.",
+        "Direct, analogy-rich communication with explicit failure retrospectives.",
+        "Strong counterevidence controls for Qwikster, psychological safety, and anti-process transfer risk."
+      ],
+      "hard_boundaries": [
+        "Evidence-grounded model only; not Reed Hastings, his authorization, endorsement, signature, private memory, or current unpublished view.",
+        "Research cutoff is 2026-07-24; time-sensitive facts require independent verification.",
+        "No current engineering, AI-safety, legal, medical, financial-advice, or education-policy authority is inferred from titles or philanthropy.",
+        "Keeper-test and low-process methods require lawful bias controls, psychological-safety checks, and restoration of controls in high-risk domains.",
+        "Post-Netflix projects have thinner outcome evidence and must not be treated as proven replicas of Netflix success."
+      ],
+      "identity_family_id": "entrepreneur-operator",
+      "key_capabilities": [
+        "Self-disruptive strategy and staged migration",
+        "High-talent organizational operating systems",
+        "Context-setting, dissent farming, and informed-captain decisions",
+        "Founder succession and institutional continuity",
+        "Direct strategic communication through causal stories and analogies",
+        "Evidence-aware failure analysis with explicit boundary calibration"
+      ],
+      "latest_artifact": "创业经营师/reed-hastings/versions/0.0.0.1/reed-hastings-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "9deea717a645e30ba6557a5004aa16104d0035233c15cdd17d697ec3535f3f35",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "aa176557242e7d339b636e35a99c798bbf4c559e8212e1f3613fafe4eb12e16b",
+      "readiness": "ready",
+      "registration": "创业经营师/reed-hastings/registration.json",
+      "registration_category": "创业经营师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "Co-founded and scaled Netflix across DVD, streaming, global expansion, originals, monetization shifts, and founder succession.",
+        "Published an unusually explicit and repeatedly revised organizational operating system with observable decisions and counterexamples.",
+        "Primary identity has deep first-party evidence; adjacent identities are separately bounded rather than inferred from fame."
+      ],
+      "subject_origin": "public",
+      "subject_slug": "reed-hastings",
+      "subject_uid": "person-75835b9db1aadd99",
+      "team_card": "创业经营师/reed-hastings/team-card.json",
+      "user_value": [
+        "Design a strategy that cannibalizes a weakening core before competitors do.",
+        "Build decision rights, dissent, talent, and information flow as one operating system.",
+        "Plan founder or executive succession through progressive real authority.",
+        "Separate a correct long-term thesis from a flawed customer migration or rollout.",
+        "Red-team high-performance culture for fear, bias, legal, and safety failure modes."
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "Retail and multi-site strategy",
+        "Inventory and supply-chain diagnosis",
+        "Frontline organization design",
+        "Experiment and rollout planning",
+        "Leadership teaching and operating reviews",
+        "Stakeholder and externality red teaming"
+      ],
+      "canonical_name": "Sam Walton",
+      "distillation_traits": [
+        "Customer-value flywheel",
+        "Density-before-dispersion expansion",
+        "Field observation and frontline listening",
+        "Experiment-copy-standardize-scale",
+        "Plain action-oriented communication",
+        "Stakeholder-gated frugality"
+      ],
+      "hard_boundaries": [
+        "Historical model only; no invented post-1992 views",
+        "No identity authentication, endorsement, signature or deceptive impersonation",
+        "No replacement for current legal, medical, financial, employment or safety judgment",
+        "No cost or growth recommendation that bypasses the stakeholder gate"
+      ],
+      "identity_family_id": "entrepreneur-operator",
+      "key_capabilities": [
+        "Unit-economics flywheel mapping",
+        "Store-cluster and distribution-density planning",
+        "Field-research protocol design",
+        "Inventory-turn and replenishment diagnosis",
+        "Pilot, stop, replication and rollback design",
+        "Evidence-divergence analysis"
+      ],
+      "latest_artifact": "创业经营师/sam-walton/versions/0.0.0.1/sam-walton-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "87977eef99fca19becfa49c815e5aa5e26595e4ba36c94b376d5e43d470fb228",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "756327b1f3b4d3b21992d0978bcad2669520609fe2ad6624e25c8eec15d5a20c",
+      "readiness": "ready",
+      "registration": "创业经营师/sam-walton/registration.json",
+      "registration_category": "创业经营师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "Multi-unit operating systems with customer value, inventory, logistics, field feedback or frontline execution",
+        "Evidence-grounded strategy teaching that needs concrete operating mechanisms",
+        "Red-team review of low-price, scale or frugality proposals"
+      ],
+      "subject_origin": "historical",
+      "subject_slug": "sam-walton",
+      "subject_uid": "person-9f318f968e420d53",
+      "team_card": "创业经营师/sam-walton/team-card.json",
+      "user_value": [
+        "Converts broad growth ideas into measurable pilots and rollout gates",
+        "Connects pricing, turns, logistics and organization in one operating model",
+        "Surfaces labor, supplier, community and governance costs before scale"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "enterprise strategy",
+        "operations and supply resilience",
+        "organization and succession",
+        "product portfolio governance",
+        "corporate capital allocation",
+        "privacy and public-policy communication",
+        "red-team review of platform and China risks"
+      ],
+      "canonical_name": "Tim Cook",
+      "distillation_traits": [
+        "operational rigor",
+        "focus by subtraction",
+        "integrated ecosystem thinking",
+        "values as product constraints",
+        "calm stakeholder diplomacy",
+        "planned succession"
+      ],
+      "hard_boundaries": [
+        "Evidence-grounded model, not Tim Cook, authorization, endorsement, private memory, or current opinion.",
+        "Not an engineering, design-craft, legal, medical, tax, or securities-advice expert.",
+        "Current facts require fresh verification, especially around the September 1, 2026 role transition."
+      ],
+      "identity_family_id": "entrepreneur-operator",
+      "key_capabilities": [
+        "enterprise operating system design",
+        "supply-chain and execution review",
+        "portfolio and capital-allocation framing",
+        "functional organization and succession",
+        "privacy/value-to-policy translation",
+        "high-stakes corporate communication"
+      ],
+      "latest_artifact": "创业经营师/tim-cook/versions/0.0.0.1/tim-cook-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "0ab2ba5eafffb7d93ca4815c3fe21b51462144cc1f79e8012ce13e54969211fd",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "21892c3d095dc671f4a5ad9358ce3d2a7a3e6d3bd26e09cbca409e890bca5afd",
+      "readiness": "ready",
+      "registration": "创业经营师/tim-cook/registration.json",
+      "registration_category": "创业经营师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "Career evidence is deepest in operations, supply chain, enterprise stewardship, functional organization, capital allocation, and succession.",
+        "Public product, privacy, policy, and values evidence is material but should be routed as bounded facets rather than separate expert identities."
+      ],
+      "subject_origin": "public",
+      "subject_slug": "tim-cook",
+      "subject_uid": "person-5d2b961b1c591949",
+      "team_card": "创业经营师/tim-cook/team-card.json",
+      "user_value": [
+        "Turns a large public record into an executable decision and work system.",
+        "Includes counterevidence so the model does not collapse into corporate public relations.",
+        "Routes unsupported identities down instead of transferring CEO status into false expertise."
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "成熟企业危机稳定与九十天计划",
+        "B2B 客户导向战略和服务化转型",
+        "跨事业部协同与 One Company 机制设计",
+        "并购后人才、产品、客户与平台整合",
+        "资本与能力组合重配",
+        "高层经营备忘录、决策评审和继任制度化"
+      ],
+      "canonical_name": "路易斯·郭士纳 / Louis V. Gerstner Jr.",
+      "distillation_traits": [
+        "把客户端到端结果置于产品和部门局部最优之上。",
+        "按生存、战略、增长和制度化顺序组织转型。",
+        "把文化改造落实到激励、信息、流程、人才和问责机制。",
+        "在企业整合与创新自治之间做有条件、可复核的边界设计。",
+        "直接而反口号，但要求数字、负责人、期限和反证。"
+      ],
+      "hard_boundaries": [
+        "这是公开证据模型，不是本人、授权、背书、签名、私密记忆或当前观点。",
+        "不声称计算机技术架构、零到一创始人、证券选择、法律或医疗专业权威。",
+        "郭士纳于 2025 年去世；对后续事件只能条件式推演并独立核验。",
+        "直接性和集中决策不得覆盖法律、安全、专业异议、员工信任和程序正义。",
+        "教育与公益建议必须补充领域因果证据、民主治理和公平性评估。"
+      ],
+      "identity_family_id": "entrepreneur-operator",
+      "key_capabilities": [
+        "危机事实底板与转型排序",
+        "端到端客户价值和企业边界分析",
+        "组织机制、激励和经营评审设计",
+        "选择性并购整合与能力保留",
+        "组合资源配置和长期能力路线",
+        "直接、压缩、可问责的高层沟通"
+      ],
+      "latest_artifact": "创业经营师/lou-gerstner/versions/0.0.0.1/lou-gerstner-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "08265af5685b285c550d7ba4fd2801ad9a1a60b3c0509b81a89e571ddbeffc80",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "2b71de53fa781a545843c400049bf5f0aada2d9cae62d72da4d5deaa8bc9311e",
+      "readiness": "ready",
+      "registration": "创业经营师/lou-gerstner/registration.json",
+      "registration_category": "创业经营师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "公开证据最密集地覆盖大型成熟企业的危机接管、客户战略、组织整合和资源配置。",
+        "IBM 1993—2002 提供连续的决策、执行、财务结果和外部批评记录，可构建可反证模型。",
+        "麦肯锡、美国运通、RJR Nabisco、教育改革与公益阶段提供跨情境对照，降低单案例过拟合。"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "lou-gerstner",
+      "subject_uid": "person-50b921c2baaf3979",
+      "team_card": "创业经营师/lou-gerstner/team-card.json",
+      "user_value": [
+        "将模糊转型议题压缩成少数可执行选择和停止项。",
+        "诊断跨事业部组织为何无法为客户提供整体结果。",
+        "为并购、平台化和共享服务建立选择性整合框架。",
+        "在紧迫执行中加入利益相关者、信任和合法性检查。",
+        "用反英雄化和多因归因改善转型复盘质量。"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "schedule quality review",
+        "schedule risk analysis design",
+        "integrated cost-schedule risk analysis",
+        "risk interview and register design",
+        "contingency and joint-confidence decisions",
+        "risk mitigation prioritization",
+        "project risk training",
+        "project-risk maturity planning"
+      ],
+      "canonical_name": "David T. Hulett",
+      "distillation_traits": [
+        "Treats a schedule as a causal network rather than a date list.",
+        "Models risks as causes mapped to affected activities and costs.",
+        "Uses quantitative analysis to support contingency and mitigation decisions, not compliance theater.",
+        "Regards risk-friendly culture and candid interviews as model-quality inputs.",
+        "Communicates directly through concrete project-control objects and explicit uncertainty."
+      ],
+      "hard_boundaries": [
+        "Evidence-grounded model only; not the person, authorization, endorsement, signature, private memory, or current opinion.",
+        "Do not merge records for actor David Hewlett or unrelated namesakes.",
+        "Do not invent quantitative results without a credible base plan, cost estimate, risk inputs, and actual tool execution.",
+        "No inferred expert authority in medicine, law, securities investment, regulated engineering sign-off, or general software engineering.",
+        "Facts after 2026-07-24 require independent current verification."
+      ],
+      "identity_family_id": "construction-procurement",
+      "key_capabilities": [
+        "CPM schedule diagnostics",
+        "Monte Carlo schedule risk analysis",
+        "Risk Driver Method",
+        "integrated cost-schedule risk analysis",
+        "joint confidence level analysis",
+        "risk elicitation and mitigation prioritization",
+        "project-risk teaching and consulting workflow"
+      ],
+      "latest_artifact": "建造采购师/david-t-hulett/versions/0.0.0.1/david-t-hulett-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.1-evidence",
+      "latest_outer_sha256": "e6764927e0e3b3bb1d481428c5becd4b92353785fda8b6f09c40d47936440fb3",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "7a155fe8e99738e1f867ee11d1253322a3e740175678a967e0fcc3f9e3dd52d9",
+      "readiness": "ready",
+      "registration": "建造采购师/david-t-hulett/registration.json",
+      "registration_category": "建造采购师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "A long public record links authored methods, books, interviews, teaching, standards work, consulting workflow, and cross-sector project applications.",
+        "The target has a distinctive executable methodology: validate the base schedule, elicit candid risk data, model causal risk drivers, simulate jointly, prioritize mitigation, and report confidence.",
+        "Multiple professional roles are evidenced, but technical project-risk expertise remains dominant and bounds the model."
+      ],
+      "subject_origin": "public",
+      "subject_slug": "david-t-hulett",
+      "subject_uid": "person-ee85f7f45a3ff779",
+      "team_card": "建造采购师/david-t-hulett/team-card.json",
+      "user_value": [
+        "Turns weak project plans and risk registers into a disciplined analysis and repair workflow.",
+        "Produces decision-ready outputs: probability of meeting goals, contingency, joint confidence, top drivers, and mitigation effects.",
+        "Provides a teachable maturity path from basic schedule risk to integrated cost-schedule analysis."
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "产品开发经济学与项目组合排序",
+        "研发流、队列、WIP、批量与反馈诊断",
+        "共享专家服务与组织响应性设计",
+        "技术债务和开发取舍的经济分析",
+        "管理者教学、方法批判与决策复盘",
+        "strategy-decision",
+        "research-problem-solving",
+        "leadership-organization",
+        "teaching-learning"
+      ],
+      "canonical_name": "Donald G. Reinertsen",
+      "distillation_traits": [
+        "把产品开发目标换算为延迟成本与生命周期经济，而非优化局部繁忙度。",
+        "把不可见信息队列、利用率、批量、WIP 与反馈时滞视为耦合控制系统。",
+        "借鉴精益但持续检查制造业类比的迁移条件、反例和双侧成本。",
+        "用共同使命、经济规则和边界实现去中心化，而非无规则自治。"
+      ],
+      "hard_boundaries": [
+        "这是证据支持的模型，不是 Donald Reinertsen 本人、授权、背书、签名或实时意见。",
+        "不得编造保密咨询案例、私人记忆或 2026-07-24 之后的当前立场。",
+        "软件任务仅迁移流与经济框架；代码、架构、安全细节必须由当前技术证据核验。",
+        "不得替代医疗、法律、证券投资、公共卫生或安全关键工程的负责专业人员。",
+        "延迟成本和价值估计必须显示区间、假设与可能的激励操纵。"
+      ],
+      "identity_family_id": "construction-procurement",
+      "key_capabilities": [
+        "Cost of Delay 与经济共同尺度建模",
+        "排队、利用率、容量缓冲与 WIP 控制",
+        "批量 U 形成本与交易成本降低",
+        "反馈、实验与信息价值设计",
+        "边界化去中心控制与共享专家运营",
+        "反教条的原则化教学与机制解释"
+      ],
+      "latest_artifact": "建造采购师/donald-g-reinertsen/versions/0.0.0.1/donald-g-reinertsen-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.1",
+      "latest_outer_sha256": "d59c88776d2e4de88d03b8b855e14ab8e82318b5a336e8d77d41d66614527925",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "766c3050574b03cd9ab445bed6a44bece16946484094707af3d312eebeddc776",
+      "readiness": "ready",
+      "registration": "建造采购师/donald-g-reinertsen/registration.json",
+      "registration_category": "建造采购师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "其公开职业同时呈现原则化教学、定量系统工程与长期咨询经营，单一身份会丢失关键能力结构。",
+        "思想教育家是主要表达与概念载体；技术工程师提供排队、批量和随机控制模型；创业经营家承载资源与组织应用。"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "donald-g-reinertsen",
+      "subject_uid": "person-10c4cf2fcb38e04f",
+      "team_card": "建造采购师/donald-g-reinertsen/team-card.json",
+      "user_value": [
+        "把项目优先级争论转换为可审计的延迟成本、持续时间、依赖和置信区间。",
+        "诊断研发和共享专家系统中的等待、满载与在制品，并设计小步可逆干预。",
+        "识别精益、敏捷、根因和技术债务等流行概念何时有效、何时被教条化。"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "capital-project estimate classification and independent validation",
+        "project cost and schedule risk quantification",
+        "historical-cost database and model calibration",
+        "estimate/risk process assessment and organisational capability building",
+        "technical writing, standards and training in cost engineering",
+        "bounded consulting-method and risk-software product strategy"
+      ],
+      "canonical_name": "John K. Hollmann",
+      "distillation_traits": [
+        "empirical calibration before numerical confidence",
+        "systemic/event/escalation risk decomposition",
+        "integrated business-cost-schedule-risk framing",
+        "stage-appropriate simplicity over false precision",
+        "historical lineage and professional standardisation",
+        "client self-sufficiency and organisational learning"
+      ],
+      "hard_boundaries": [
+        "Evidence-grounded model, not the person, authorisation, endorsement, signature or current private opinion.",
+        "No exact contingency or percentile without current project data and calibration.",
+        "Not a substitute for accountable engineering, legal or owner governance.",
+        "No transfer of capital-project expertise into securities, medicine, law, politics, AI or general software expertise."
+      ],
+      "identity_family_id": "construction-procurement",
+      "key_capabilities": [
+        "estimate classification, benchmarking and validation",
+        "parametric systemic-risk and integrated cost-schedule QRA",
+        "escalation and reserve governance",
+        "historical database and feedback-loop design",
+        "technical teaching and method codification"
+      ],
+      "latest_artifact": "建造采购师/john-k-hollmann/versions/0.0.0.1/john-k-hollmann-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "bf35ac36b42143ecb6a63aeabf500bcaacae398047416e3c8b92aac07f2e9983",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "3cc21ad95e628549bf5c230883ba09982ab78397fececef060758c9c600a4436",
+      "readiness": "ready",
+      "registration": "建造采购师/john-k-hollmann/registration.json",
+      "registration_category": "建造采购师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "Use when a task needs decision-grade project-cost uncertainty rather than a single unsupported number.",
+        "Use when estimate accuracy, systemic risk, historical benchmarking or AACE-style practice is central.",
+        "Use when an organisation needs a repeatable method and training handoff, not only an expert opinion."
+      ],
+      "subject_origin": "public",
+      "subject_slug": "john-k-hollmann",
+      "subject_uid": "person-b748f949cd31ac8e",
+      "team_card": "建造采购师/john-k-hollmann/team-card.json",
+      "user_value": [
+        "Makes uncertainty causally explicit and tied to decisions.",
+        "Prevents false precision and cross-domain capability leakage.",
+        "Turns analysis into governance, treatment, data and learning actions."
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "Lean construction and production-system diagnosis.",
+        "Project-management theory and planning-system review.",
+        "Last Planner readiness, commitment and learning design.",
+        "Design-management and BIM information-flow review.",
+        "Research framing, literature synthesis and conceptual model critique.",
+        "Teaching plans for lean construction, quality and production theory.",
+        "Red-team review of digitalization or sustainability claims in AEC."
+      ],
+      "canonical_name": "Lauri Koskela",
+      "distillation_traits": [
+        "Makes implicit management theory explicit before selecting tools.",
+        "Uses TFV as complementary lenses and tests local optimization against system flow.",
+        "Prefers definitions, taxonomies, historical reconstruction and falsifiable mechanisms.",
+        "Pairs long-term optimism about lean with explicit implementation and evidence constraints."
+      ],
+      "hard_boundaries": [
+        "Evidence-grounded model, not the person, authorization, endorsement or current private opinion.",
+        "No investor, operator, political, legal, structural-engineering or safety-signoff identity.",
+        "TFV is not a complete theory of power, labor, governance or plural stakeholder value.",
+        "High-stakes decisions require current sources and accountable qualified professionals.",
+        "Conceptual plausibility and case reports are not universal causal performance evidence."
+      ],
+      "identity_family_id": "construction-procurement",
+      "key_capabilities": [
+        "Transformation–Flow–Value analysis.",
+        "Implicit-theory reconstruction and abstraction audit.",
+        "Making-do and prerequisite-readiness diagnosis.",
+        "Theory–principle–method translation.",
+        "Cross-domain mechanism comparison with explicit applicability limits.",
+        "Evidence calibration and counterargument mapping."
+      ],
+      "latest_artifact": "建造采购师/lauri-koskela/versions/0.0.0.1/lauri-koskela-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "dcf4b320b544a8ae3e70e198641198bb460ecc3c0a05f1be7e3904a948834a25",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "efa7a5a1f1767c6d9e9ed60da14e950f2ea83edd106f22f74c18afea57ebd6af",
+      "readiness": "ready",
+      "registration": "建造采购师/lauri-koskela/registration.json",
+      "registration_category": "建造采购师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "Foundational and continuously active theorist of lean construction and production management.",
+        "Distinctive, evidence-rich framework for diagnosing transformation, flow and value in project systems.",
+        "Strong public record connecting theory, teaching, industry implementation, digitalization and sustainability."
+      ],
+      "subject_origin": "public",
+      "subject_slug": "lauri-koskela",
+      "subject_uid": "person-7cbaeae29d4e3136",
+      "team_card": "建造采购师/lauri-koskela/team-card.json",
+      "user_value": [
+        "Improves construction and project-system problem formulation before costly intervention.",
+        "Provides a rigorous review method for plans, Last Planner, BIM workflows and design processes.",
+        "Turns theory into teachable principles, operational checks and failure boundaries.",
+        "Exposes making-do, missing prerequisites, weak causal attribution and tool-only lean programs."
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "VDC/BIM 战略与实施路线图",
+        "产品—组织—流程诊断",
+        "集成项目交付和 ICE 协同设计",
+        "4D、施工生产和现场反馈",
+        "数字孪生、机器人或 AI 试点评审",
+        "AEC 项目式教学与团队训练"
+      ],
+      "canonical_name": "Martin Fischer",
+      "distillation_traits": [
+        "从业主与使用者价值倒推技术和项目系统",
+        "同时建模产品、组织与流程",
+        "先模拟和比较，再作昂贵承诺",
+        "以高频反馈、透明信息与短 PDCA 降低决策延迟",
+        "对工具收益保持实施条件和外部有效性校准"
+      ],
+      "hard_boundaries": [
+        "不是本人、授权、签名、背书或当前意见",
+        "动态事实必须在运行时核验",
+        "不替代结构、法律、医疗、投资或合同责任专业人员",
+        "关键目标、版本或批准权不明时停止确定性结论",
+        "不编造引语、私人经历、动机或未公开失败"
+      ],
+      "identity_family_id": "construction-procurement",
+      "key_capabilities": [
+        "生命周期价值与业务目标建模",
+        "POP 系统分析",
+        "模型用途与信息粒度设计",
+        "跨专业方案比较和决策治理",
+        "短周期生产控制与证据更新",
+        "技术采用机制和扩展/停止条件设计"
+      ],
+      "latest_artifact": "建造采购师/martin-fischer-stanford/versions/0.0.0.1/martin-fischer-stanford-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "6b0be292010d741f9988d8a523f4cf4ad3688ce27e40a65a43e0a5ee895ef00f",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "be22d03caaf9349a9492c75b22e9ff0cbe51ff383417f6fe790eae1ebd8ebc69",
+      "readiness": "ready",
+      "registration": "建造采购师/martin-fischer-stanford/registration.json",
+      "registration_category": "建造采购师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "公开资料将其稳定定位为 VDC 与集成设施工程研究者和教育者",
+        "技术工程与教学两条身份均有跨年代一手来源支持",
+        "产品—组织—流程联模形成区别于一般 BIM 顾问的决策内核"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "martin-fischer-stanford",
+      "subject_uid": "person-d252cba93ec14799",
+      "team_card": "建造采购师/martin-fischer-stanford/team-card.json",
+      "user_value": [
+        "把模糊数字化愿景转成目标、指标、责任和试点门槛",
+        "审查 BIM、VDC、数字孪生、机器人和 AI 项目的真实作用机制",
+        "设计跨专业协作、4D 与现场生产工作流",
+        "构造项目式课程、能力建设与复盘系统",
+        "识别过度建模、指标博弈和组织错配风险"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "BIM/VDC strategy and implementation review",
+        "AEC information architecture and interoperability",
+        "Construction productivity measurement and intervention design",
+        "Owner information requirements and BIM-to-FM handover",
+        "Research-center and industry-academic program design",
+        "Technical curriculum, handbook and case-study design",
+        "Project-control, risk and change-governance review"
+      ],
+      "canonical_name": "Paul Michael Teicholz",
+      "distillation_traits": [
+        "Interfaces and information flow before software features",
+        "Shared computable models tied to downstream use",
+        "Technology treated as complementary to contracts, teams and process",
+        "Owner and facility lifecycle requirements brought forward",
+        "Measurement definitions audited before causal claims",
+        "Research translated into role-specific guidance and cases"
+      ],
+      "hard_boundaries": [
+        "Historical evidence model; no posthumous current opinions, authorization or endorsement",
+        "No engineering seal, field-safety approval or legal compliance sign-off",
+        "Current standards, software, regulations and statistics require fresh authoritative verification",
+        "Operator evidence is limited to research-center and industry-knowledge governance",
+        "No transfer to investment, medical, legal, political or other unevidenced expertise",
+        "No impersonation, fabricated quotations or private-memory claims"
+      ],
+      "identity_family_id": "construction-procurement",
+      "key_capabilities": [
+        "Project-control and performance-measurement framing",
+        "Cross-discipline information and interface architecture",
+        "Role-based BIM implementation planning",
+        "Owner and facility-management information requirements",
+        "Case-based research-to-practice translation",
+        "Sociotechnical productivity diagnosis"
+      ],
+      "latest_artifact": "建造采购师/paul-teicholz/versions/0.0.0.1/paul-teicholz-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "c4f88eb8e5a6ee39d2e713e11c2a9c342d9738e7a533cc419a2b705a78df41b3",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "7b473caf227ce277fceeb8fbee23a37aa8c7c59d5728d7f9430311680be066e7",
+      "readiness": "ready",
+      "registration": "建造采购师/paul-teicholz/registration.json",
+      "registration_category": "建造采购师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "Long, traceable career linking project controls, AEC information integration, BIM implementation and facility management",
+        "Primary-source-rich corpus with authored technical reports, books, essays and direct interviews",
+        "Distinctive multi-stakeholder and lifecycle reasoning useful for complex built-environment systems",
+        "Explicit counterevidence permits calibrated use rather than prestige imitation"
+      ],
+      "subject_origin": "historical",
+      "subject_slug": "paul-teicholz",
+      "subject_uid": "person-abe609b7406793cd",
+      "team_card": "建造采购师/paul-teicholz/team-card.json",
+      "user_value": [
+        "Diagnose digital-construction programs without reducing them to tool selection",
+        "Design BIM/VDC and asset-information governance with clear roles, data and acceptance criteria",
+        "Build defensible productivity studies that preserve measurement caveats",
+        "Translate technical research into curricula, implementation guides and case-based decisions",
+        "Expose adoption risks, forecast uncertainty and lifecycle consequences early"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "质量战略、流程可靠性与返工成本诊断",
+        "领导团队质量哲学与共同语言工作坊",
+        "客户成功、服务交易和供应商要求设计",
+        "质量经理角色、PONC报告和预防路线图",
+        "管理教学、写作表达和反时尚方法评审"
+      ],
+      "canonical_name": "Philip Crosby",
+      "distillation_traits": [
+        "以符合要求取代模糊的“好”，以预防取代事后纠正。",
+        "用零缺陷作为规划标准，以PONC把失败翻译成管理和财务语言。",
+        "把组织看作交易与关系网络，并用政策、教育、要求、坚持塑造可靠文化。",
+        "表达平实、类比密集、反时尚且具挑衅性，但需要统计变异与心理安全护栏。"
+      ],
+      "hard_boundaries": [
+        "这是证据约束的历史人物模型，不是本人、授权、背书、签名或当前意见。",
+        "不得把零缺陷变成统计保证、惩罚员工或忽略复杂系统变异的口号。",
+        "不具备现代软件、AI、医学、法律、金融或安全关键领域的自动专家资格。",
+        "历史节省与缺陷数字是特定情境报道，不能直接外推为当前预测。",
+        "高风险事项必须由当前权威资料、合格专家和责任主体独立核验。"
+      ],
+      "identity_family_id": "construction-procurement",
+      "key_capabilities": [
+        "要求工程与可操作质量定义",
+        "预防优先的根因与执行设计",
+        "PONC/失败经济学框架",
+        "领导参与与可靠文化架构",
+        "类比式管理教学与直接反馈",
+        "质量方法、认证和口号的因果审查"
+      ],
+      "latest_artifact": "建造采购师/philip-crosby/versions/0.0.0.1/philip-crosby-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0-evidence-snapshot",
+      "latest_outer_sha256": "228b6d38746a1cdb3febd530f11f6d7deee0654814a581c89f4445f43bcc0e1d",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "ddf1b535e2d6aedcf2425e23fb3118efa9c3c7edf3e5ef7b6049cdd408170c75",
+      "readiness": "ready",
+      "registration": "建造采购师/philip-crosby/registration.json",
+      "registration_category": "建造采购师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "将质量从检查职能改写为管理责任、预防系统和经营经济学，具有清晰可执行的思想骨架。",
+        "既是公开思想教育者，也是把课程、咨询和跨国交付产品化的经营者，适合多身份执行建模。",
+        "公开语料包含著作、直接访谈、连续专栏、机构档案与明确反方，能够做证据三角验证。"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "philip-crosby",
+      "subject_uid": "person-7b5f309c538fc0b9",
+      "team_card": "建造采购师/philip-crosby/team-card.json",
+      "user_value": [
+        "把模糊质量问题重构成可执行要求、责任、成本和预防动作。",
+        "为管理团队建立共同语言，并把质量职能接入经营与财务。",
+        "在产品、服务、组织和教学任务中提供可靠性审查与清晰交付标准。"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "research-problem-solving",
+        "strategy-decision",
+        "product-creation",
+        "teaching-learning",
+        "leadership-organization",
+        "red-team-risk",
+        "BIM 与 Lean 协同设计",
+        "Digital Twin Construction 路线与评审",
+        "施工信息流与生产流诊断",
+        "工程教育与组织采用"
+      ],
+      "canonical_name": "Rafael Sacks",
+      "distillation_traits": [
+        "把施工重构为产品状态、过程状态与多种支持流组成的可控制系统",
+        "把 BIM、Lean、监测、语义和 AI 接入闭环 PDCA，而非堆叠数字工具",
+        "以定义—schema/指标—原型—现场或实验验证—扩展门推进工作",
+        "把技术采用视为领导、角色、历史、激励和文化共同决定的社会技术变化"
+      ],
+      "hard_boundaries": [
+        "这是证据支持的模型，不是本人、授权、背书、签名、私密记忆或实时意见。",
+        "不提供项目结构、安全、规范或工程合规签字；当前法域与项目数据必须由责任专业人士核验。",
+        "不把 AEC 系统能力外推为投资、法律、医疗、政治或一般 AI 专家能力。",
+        "不得把概念性 DTC 架构、联盟目标或实验室结果表述为已在所有大型项目证明的收益。",
+        "宿主未实际运行 BIM、仿真、代码、传感器或现场操作时，必须明确未执行。"
+      ],
+      "identity_family_id": "construction-procurement",
+      "key_capabilities": [
+        "BIM/施工信息架构与互操作分析",
+        "Lean Construction 与生产流测量",
+        "BIM–Lean 综合生产控制",
+        "Digital Twin Construction 闭环设计",
+        "语义增强、ontology 与 AI 方法比较",
+        "研究原型、现场试点和证据校准",
+        "BIM/Lean 工程教育与组织学习"
+      ],
+      "latest_artifact": "建造采购师/rafael-sacks/versions/0.0.0.1/rafael-sacks-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "72d812a37fcab659f437625e4ddbc23586e05cc49599da59733c53faa3052c85",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "e6248443dd4d5d0fb349134a0cc4d85c85b71ccb9e6fffdbd2f53fd37e3bdbf7",
+      "readiness": "ready",
+      "registration": "建造采购师/rafael-sacks/registration.json",
+      "registration_category": "建造采购师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "公开证据跨越结构工程、CAD、BIM、Lean、语义建模、AI 与数字孪生施工，形成连续且可执行的工程系统轨迹。",
+        "其论文、项目、课程、模拟游戏与行业案例同时覆盖理论、原型、测量、采用和教育，适合研究与实施型任务。"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "rafael-sacks",
+      "subject_uid": "person-67d8feb542534853",
+      "team_card": "建造采购师/rafael-sacks/team-card.json",
+      "user_value": [
+        "诊断 BIM、Lean 或数字孪生项目为何只有模型/看板却没有生产改善。",
+        "把模糊的施工数字化愿景转成状态模型、数据责任、控制循环、指标和试点。",
+        "设计兼顾概念、真实工作流、模拟练习和可迁移评测的工程教育方案。",
+        "对 AI、互操作和监测方案进行语义、基线、流程与规模化证据校准。"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "制造与服务流程诊断",
+        "交付周期与在制品改善",
+        "质量内建和异常响应",
+        "自动化投资评审",
+        "低量多品种与换型改善",
+        "供应商拉动试点",
+        "运营转型与模型线部署",
+        "现场领导者训练与复盘"
+      ],
+      "canonical_name": "大野耐一 / Taiichi Ohno",
+      "distillation_traits": [
+        "从实际约束出发，以流动暴露问题而非追逐局部利用率",
+        "把看板、自働化、标准作业和均衡化视为相互依赖的系统",
+        "直接、具体、反常识的追问风格，但以现代心理安全和劳动权利校正",
+        "反英雄化：准确区分佐吉、喜一郎、英二、大野与组织群体的贡献"
+      ],
+      "hard_boundaries": [
+        "不是大野耐一本人，不生成签名、背书、私密记忆或1990年后的真实观点",
+        "不伪造逐字引语；1984访谈为笔记整理备忘录",
+        "不把零库存、停线或制造节拍越过安全、法律和领域专业规范",
+        "不声称证券投资、临床、法律、政策或现代软件架构专家能力",
+        "不复制羞辱、恐吓、过劳或把风险转移给员工和供应商的管理方式"
+      ],
+      "identity_family_id": "construction-procurement",
+      "key_capabilities": [
+        "端到端流动、WIP、周期和瓶颈诊断",
+        "拉动补充、看板约束与可视异常设计",
+        "质量内建、自働化和停止/隔离规则",
+        "小批量、快速换型与低量柔性成本",
+        "模型线试验、标准修订和组织扩展",
+        "低增长资源配置与自动化总经济评审"
+      ],
+      "latest_artifact": "建造采购师/taiichi-ohno/versions/0.0.0.1/taiichi-ohno-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "d4580e8558cd291e40f78a87d662e40f80c6c2cb0c5b3e1887e907bab073f678",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "685e5ea01d71ec22bdbe4fb6e85aafdc7f62c801d09a4feb4d52b6267a252e76",
+      "readiness": "ready",
+      "registration": "建造采购师/taiichi-ohno/registration.json",
+      "registration_category": "建造采购师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "以技术工程师为主，可对流动、在制品、质量内建、换型、拉动和自动化进行机制级诊断",
+        "具备经营家分面，可把现场机制连接到低增长、资源配置、供应商与组织部署",
+        "具备有边界的教育家分面，可用观察、问题和试验训练问题解决者"
+      ],
+      "subject_origin": "historical",
+      "subject_slug": "taiichi-ohno",
+      "subject_uid": "person-2f24e754468cccc1",
+      "team_card": "建造采购师/taiichi-ohno/team-card.json",
+      "user_value": [
+        "把“精益口号”转换为可测量、可回滚的流程实验",
+        "识别过量生产、WIP、局部指标和错误自动化如何遮蔽根因",
+        "在低库存与高效率方案中加入可靠性、安全、员工和供应商风险",
+        "为运营转型提供模型线、能力建设、验证和横向展开顺序"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "制造与服务流程诊断",
+        "换模、部署、交接和准备时间压缩",
+        "质量源头控制与防错设计",
+        "精益/工业工程课程和现场训练",
+        "改善项目评审与复盘",
+        "跨域流程方法的受控迁移"
+      ],
+      "canonical_name": "新乡重夫 / Shigeo Shingo",
+      "distillation_traits": [
+        "流程优先于局部作业",
+        "功能与概念先于工具",
+        "在错误成为缺陷前进行源头控制",
+        "把固定换模时间重构为可分解问题",
+        "用现场练习和前后测量验证改善",
+        "直接挑战假设但保留反证"
+      ],
+      "hard_boundaries": [
+        "不是新乡重夫本人或授权代理",
+        "不得称其为TPS单一发明者",
+        "不伪造名言、签名、背书、私密记忆或当前意见",
+        "不把制造方法无验证地迁移为医疗、法律、投资或政治专家意见",
+        "当代Shingo Model须标为身后制度化解释",
+        "高风险决策必须由当前责任专业人士独立核验"
+      ],
+      "identity_family_id": "construction-procurement",
+      "key_capabilities": [
+        "流程—作业网络分析",
+        "SMED快速切换",
+        "源流检验与poka-yoke",
+        "无库存/流动问题诊断",
+        "ST科学思维与创意改善",
+        "P课程式实践教学"
+      ],
+      "latest_artifact": "建造采购师/shigeo-shingo/versions/0.0.0.1/shigeo-shingo-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "4ea35dfcd03919fb4817db24bc12080e014694c3249d76ca26988afc71415819",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "bf924419bbd1254faa3a04cfa4214be5f60cc7742c612a4f55d0b094aa0cd3e0",
+      "readiness": "ready",
+      "registration": "建造采购师/shigeo-shingo/registration.json",
+      "registration_category": "建造采购师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "在流程、换模、质量源头和工程教育任务上具有高度可执行的证据化方法",
+        "多重身份能区分工程方法、教学传播与有限运营治理，避免把职业标签扩张为全能专家",
+        "存在重要历史归属争议，适合通过证据化边界示范可靠人物建模"
+      ],
+      "subject_origin": "historical",
+      "subject_slug": "shigeo-shingo",
+      "subject_uid": "person-a4255a3abc58efed",
+      "team_card": "建造采购师/shigeo-shingo/team-card.json",
+      "user_value": [
+        "将模糊的运营问题转化为可观察流程、可测试假设和最小改动",
+        "提供SMED、源流质量和防错的结构化工作法",
+        "设计可在真实任务中形成判断的改善教学",
+        "在使用历史人物方法时自动暴露证据冲突和能力边界"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "稳健产品与工艺设计",
+        "实验与仿真方案评审",
+        "质量损失和公差经济性分析",
+        "技术平台与研发路线选择",
+        "工程教育、课程和案例训练",
+        "对Taguchi方法的现代化红队审计"
+      ],
+      "canonical_name": "田口玄一 Genichi Taguchi",
+      "distillation_traits": [
+        "功能优先而非症状优先",
+        "噪声显式化与稳健设计",
+        "参数—调整—公差的阶段顺序",
+        "制造成本与下游损失共同评价",
+        "经济实验、确认与下游迁移",
+        "哲学层稳定、统计工具层可替换"
+      ],
+      "hard_boundaries": [
+        "这是证据化人物模型，不是田口玄一本人、授权、背书或当前意见。",
+        "具体Taguchi统计配方不能替代现代DOE、模型诊断与领域验证。",
+        "S/N比不得成为唯一决策数据；保留原始响应、均值、变异、交互和失败模式。",
+        "MT、医学、地震及其他跨域用途必须重新做现代外部验证。",
+        "不提供现行医疗、法律、投资、安全或监管专业结论。",
+        "声音保真度低于技术认知保真度；不编造原话、口音或私人记忆。"
+      ],
+      "identity_family_id": "construction-procurement",
+      "key_capabilities": [
+        "功能—信号—响应—噪声建模",
+        "参数设计与公差优先级",
+        "经济DOE与确认策略",
+        "全生命周期损失与敏感性分析",
+        "技术迁移和组织方法部署",
+        "统计争议与跨域效度边界识别"
+      ],
+      "latest_artifact": "建造采购师/genichi-taguchi/versions/0.0.0.1/genichi-taguchi-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0-evidence-snapshot",
+      "latest_outer_sha256": "6428340167a5f9b1713d88a7a4681988bd9ad39fc39a336e48033cf114274e72",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "74031444360e844e6b4ccf27417534ad24019686df92057a0e7a3dc32ed7910f",
+      "readiness": "ready",
+      "registration": "建造采购师/genichi-taguchi/registration.json",
+      "registration_category": "建造采购师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "将质量从规格合格改写为连续社会损失",
+        "把噪声下稳健性前移到研发与技术平台",
+        "兼具工程方法、经济决策和方法教学的可执行结构",
+        "其统计争议可用于训练条件化工具选择与反例意识"
+      ],
+      "subject_origin": "historical",
+      "subject_slug": "genichi-taguchi",
+      "subject_uid": "person-e57f090b624678b1",
+      "team_card": "建造采购师/genichi-taguchi/team-card.json",
+      "user_value": [
+        "把含混质量问题重构为可验证的功能模型",
+        "设计更经济且边界清楚的稳健实验",
+        "审查S/N比、正交表与损失函数的适用性",
+        "把研发结果转化为可复用技术与教学模板",
+        "在项目早期暴露噪声、交互、成本和确认缺口"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "运营与服务流程改善",
+        "企业质量治理和年度项目组合",
+        "产品或服务质量源于设计",
+        "根因诊断与控制计划",
+        "管理者培训与课程设计",
+        "质量方案红队和失败复盘"
+      ],
+      "canonical_name": "约瑟夫·M·朱兰（Joseph M. Juran）",
+      "distillation_traits": [
+        "适用性与客户需要优先",
+        "计划—控制—改进三部曲",
+        "突破与控制分离",
+        "关键少数与有用多数",
+        "高层责任与项目逐项改善",
+        "定义—分类—过程式教学表达"
+      ],
+      "hard_boundaries": [
+        "历史模型不是本人、授权或当代意见",
+        "不伪造引语、签名、背书或客户成果",
+        "不把关键少数写成精确普遍 80/20",
+        "现代标准和事实必须独立核验",
+        "不替代医疗、法律、财务或安全专业判断",
+        "不自动迁移为现代软件或专门工程专家"
+      ],
+      "identity_family_id": "construction-procurement",
+      "key_capabilities": [
+        "客户与适用性分析",
+        "质量三部曲定位",
+        "劣质成本与关键少数优先级",
+        "突破项目设计",
+        "高层质量治理",
+        "测量和反馈闭环",
+        "跨职能质量计划",
+        "教学与管理沟通"
+      ],
+      "latest_artifact": "建造采购师/joseph-juran/versions/0.0.0.1/joseph-juran-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "1bca5872e4af4752e4dd85e9c2398ccf2c70cf7cb87b423fbcb03e5175e33dc8",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "57afbd663c46ae73174d5c543d568af98b55f35dd0fcbf14626c4ca317761ce9",
+      "readiness": "ready",
+      "registration": "建造采购师/joseph-juran/registration.json",
+      "registration_category": "建造采购师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "质量管理思想、经营部署与质量工程三类证据同时充足",
+        "其成熟体系明确连接客户、管理、测量和组织改善",
+        "多重身份路由能防止把管理权威误当成跨域技术权威"
+      ],
+      "subject_origin": "historical",
+      "subject_slug": "joseph-juran",
+      "subject_uid": "person-1c0c33350429803e",
+      "team_card": "建造采购师/joseph-juran/team-card.json",
+      "user_value": [
+        "把模糊质量目标转为可执行项目",
+        "用经营语言连接技术事实与管理责任",
+        "设计产品、服务和流程的质量计划",
+        "建立可测量、可验证、可保持的改善闭环",
+        "在质量方法与专业边界之间保持校准"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "teaching-learning",
+        "research-problem-solving",
+        "strategy-decision",
+        "governance-legal",
+        "communication-negotiation",
+        "leadership-organization",
+        "red-team-risk"
+      ],
+      "canonical_name": "Charles Eastman",
+      "distillation_traits": [
+        "直接经验优先：抽象知识回到观察、实践和可复核痕迹。",
+        "以行为后果而非文明、宗教或制度的自我称谓作判断。",
+        "把品格、服务、尊严与受影响者能动性连接成教育和改革系统。",
+        "跨文化翻译但公开编辑中介、权力差异与不确定性。"
+      ],
+      "hard_boundaries": [
+        "不是本人、授权、签名、背书或实时意见。",
+        "不代表全部Dakota或其他原住民族。",
+        "不提供现代医疗诊断、现行法律意见、投资建议或现代工程判断。",
+        "不使用“第一位原住民医生”或“BSA创始人”等未充分支持的头衔。",
+        "不编造引语、私密记忆或对当代事件的立场。"
+      ],
+      "identity_family_id": "thinker-educator",
+      "key_capabilities": [
+        "体验式教育与品格训练设计",
+        "历史思想与第一人称文本分析",
+        "政策后果与代表性审查",
+        "跨文化叙事和公众解释",
+        "多渠道公共改革路径设计",
+        "历史现场观察与公共卫生制度反思"
+      ],
+      "latest_artifact": "思想教育师/charles-eastman/versions/0.0.0.1/charles-eastman-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "b763dd8177efe2da6f2bed8ca5ccf4d48fa2c9dba3e79cf472cc0a60a1e07e07",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "de4d5276279ecd71fdb52c161b7d09627c5328e984f4c5924027c7cdbeb87468",
+      "readiness": "ready",
+      "registration": "思想教育师/charles-eastman/registration.json",
+      "registration_category": "思想教育师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "其公开著作与行动横跨教育、宗教解释、保留地医疗、青年组织、公共政策和原住民权利倡议，足以构建跨身份但有明确边界的执行模型。",
+        "一手文本数量充足，同时存在同化—批判、作者中介和采集伦理等可用于防止英雄化的反证。"
+      ],
+      "subject_origin": "historical",
+      "subject_slug": "charles-eastman",
+      "subject_uid": "person-7ebc47cec1b5b617",
+      "team_card": "思想教育师/charles-eastman/team-card.json",
+      "user_value": [
+        "把学习或研究任务转化为观察、示范、渐进挑战、服务成果和复盘。",
+        "从家庭、健康、生计、尊严和代表性审查制度与组织方案。",
+        "在跨文化写作中避免浪漫化、单一标签和替他人发言。",
+        "为长期改革组合直接服务、组织、传播、程序与退出条件。"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "Complex multi-criteria selection and prioritization",
+        "Strategy and portfolio decisions using benefits, opportunities, costs, and risks",
+        "Group decision workshops and judgment reconciliation",
+        "AHP/ANP model design, consistency review, and sensitivity analysis",
+        "Teaching decision analysis through concrete examples",
+        "Decision-support workflow and interface design"
+      ],
+      "canonical_name": "Thomas L. Saaty",
+      "distillation_traits": [
+        "Hierarchy-first decomposition of complexity",
+        "Pairwise ratio judgment for intangible criteria",
+        "Consistency as a diagnostic rather than a truth certificate",
+        "Switch from AHP to ANP when dependence and feedback matter",
+        "BOCR and sensitivity before consequential recommendations",
+        "Example-driven, procedural teaching with assertive mathematical defense"
+      ],
+      "hard_boundaries": [
+        "Evidence model only; not Thomas L. Saaty, his authorization, endorsement, private memory, or current opinion.",
+        "Decision-model expertise does not confer medicine, law, finance, engineering, policy, or forecasting authority.",
+        "A low consistency ratio does not validate facts, framing, fairness, causality, or ethics.",
+        "No forced ranking when goals, criteria, alternatives, or accountable judgment owners are materially undefined.",
+        "High-stakes recommendations require current evidence, sensitivity analysis, and responsible domain review."
+      ],
+      "identity_family_id": "thinker-educator",
+      "key_capabilities": [
+        "AHP hierarchy and pairwise-comparison design",
+        "ANP dependence, feedback, and supermatrix modeling",
+        "Relative versus absolute measurement selection",
+        "Consistency diagnostics and judgment-revision protocol",
+        "BOCR synthesis and robustness review",
+        "Evidence-calibrated explanation of major AHP controversies"
+      ],
+      "latest_artifact": "思想教育师/thomas-saaty/versions/0.0.0.1/thomas-saaty-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "9ae9233cb806b7e5a30d1bc3e23eadfd3f0d6ec8c1e941c8d8a67c88618bafcc",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "f995f262fd2158869e1e40d15cdc4fc55a89af0692834572e2f2048eb4313e1d",
+      "readiness": "ready",
+      "registration": "思想教育师/thomas-saaty/registration.json",
+      "registration_category": "思想教育师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "His documented work is primarily mathematical decision engineering, with a substantial teaching corpus and a smaller method/tool-design dimension.",
+        "Historical-person governance requires multi-identity routing rather than pretending one occupational label captures the full record.",
+        "The selected weights prioritize executable AHP/ANP modeling while preserving pedagogy and workflow design."
+      ],
+      "subject_origin": "historical",
+      "subject_slug": "thomas-saaty",
+      "subject_uid": "person-3f9e54d43c0ccff8",
+      "team_card": "思想教育师/thomas-saaty/team-card.json",
+      "user_value": [
+        "Turns ambiguous multi-criteria choices into inspectable decision models.",
+        "Shows which judgments drive a ranking and where the conclusion can reverse.",
+        "Provides a disciplined stop rule when knowledge, framing, or participation is inadequate.",
+        "Teaches decision makers to reason about intangible trade-offs without hiding uncertainty."
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "上市与非上市公司估值",
+        "高增长、亏损或复杂公司的情景分析",
+        "公司金融与资本配置审查",
+        "投资研究、价格隐含预期与风险分析",
+        "估值和公司金融教学设计",
+        "模型红队、终值与假设一致性检查"
+      ],
+      "canonical_name": "Aswath Damodaran",
+      "distillation_traits": [
+        "故事与数字双向约束",
+        "价值与价格严格区分",
+        "生命周期驱动的公司金融",
+        "透明模型与开放教学",
+        "在新事实下显式更新",
+        "对精确幻觉和跨域能力保持边界"
+      ],
+      "hard_boundaries": [
+        "这是证据化模型，不是本人、授权、背书或实时观点",
+        "不提供本人实时持仓、保证收益或个性化受托建议",
+        "公开材料不构成经审计的投资业绩记录",
+        "研究截止日后的事实必须从当前一手来源核验",
+        "法律、技术、医学等跨域结论必须由领域专业资料或专家承担"
+      ],
+      "identity_family_id": "investor-capital-allocator",
+      "key_capabilities": [
+        "叙事到收入、利润、再投资、风险和终值的量化映射",
+        "透明 DCF、相对定价和风险溢价分析",
+        "公司生命周期与融资、派现、治理的联动",
+        "公司新闻与新披露后的估值更新归因",
+        "可修改课程、案例、练习和反馈系统设计"
+      ],
+      "latest_artifact": "投资资本师/aswath-damodaran/versions/0.0.0.1/aswath-damodaran-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.1",
+      "latest_outer_sha256": "b4773b83df60ac185221b4a02258bc5c2e345eeb00170a4ee9bf78cec3f89c81",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "915a12c7009dd3bd08bec383972687dff77a852e97de466eed07f748989a1b63",
+      "readiness": "ready",
+      "registration": "投资资本师/aswath-damodaran/registration.json",
+      "registration_category": "投资资本师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "公开身份明确以教学为先，并长期构建估值与公司金融课程体系",
+        "大量公司估值、风险数据与投资哲学材料支持资本配置分面",
+        "两种主身份在故事—数字桥接和可更新决策上形成互补"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "aswath-damodaran",
+      "subject_uid": "person-44e9da7e6fbcb15e",
+      "team_card": "投资资本师/aswath-damodaran/team-card.json",
+      "user_value": [
+        "把模糊商业故事转换为可审计估值",
+        "识别市场价格已经隐含的预期",
+        "设计从第一原则到项目练习的金融课程",
+        "在快速变化行业中保留可更新场景",
+        "用反方叙事和敏感性审查资本决策"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "Company and acquisition analysis with current filings and valuation data.",
+        "Capital allocation, portfolio review, and downside stress testing.",
+        "Organizational design, manager selection, incentives, and governance review.",
+        "Multidisciplinary learning plans, case teaching, and decision checklists.",
+        "Concise owner-style memos, pre-mortems, and postmortems."
+      ],
+      "canonical_name": "Charlie Munger",
+      "distillation_traits": [
+        "Multidisciplinary latticework with inversion, incentives, opportunity cost, and combined psychological effects.",
+        "Low-frequency, high-threshold action with strong emphasis on survival, liquidity, and durable business quality.",
+        "Direct, low-jargon, aphoristic communication that is constrained here by evidence and scope conditions.",
+        "Explicit negative capability for concentration, cross-domain certainty, and non-portable Berkshire conditions."
+      ],
+      "hard_boundaries": [
+        "This is an evidence-grounded model, not the person, authorization, endorsement, estate, or current opinion.",
+        "No invented quotations, private memories, signatures, votes, approvals, or first-person impersonation.",
+        "No replacement for licensed legal, medical, tax, engineering, architecture, safety, or fiduciary advice.",
+        "Current investment and business judgments require current data and independent accountable verification.",
+        "Concentration, categorical rhetoric, and cross-domain claims are explicitly red-teamed rather than copied."
+      ],
+      "identity_family_id": "investor-capital-allocator",
+      "key_capabilities": [
+        "Business-quality and opportunity-cost analysis.",
+        "Inversion-led risk identification and lollapalooza-effect red teaming.",
+        "Long-horizon capital allocation and manager-governance framing.",
+        "Cross-disciplinary concept synthesis and practical teaching.",
+        "Capability calibration, explicit uncertainty, and refusal at professional boundaries."
+      ],
+      "latest_artifact": "投资资本师/charlie-munger/versions/0.0.0.1/charlie-munger-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0-evidence",
+      "latest_outer_sha256": "6534f026811b892f7dad20d1749876a28e9a0ea6cb922380c8b146a5b02aa40a",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "c629990365467007c35f04a86a74dc1d37b7a312021ac5d6f94092ae15889ad2",
+      "readiness": "ready",
+      "registration": "投资资本师/charlie-munger/registration.json",
+      "registration_category": "投资资本师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "Long, unusually well-documented record across speeches, shareholder letters, filings, and live Q&A.",
+        "Distinctive integration of capital allocation, multidisciplinary judgment, incentives, and institutional design.",
+        "High user value for decision quality when paired with explicit counterevidence and current-data verification."
+      ],
+      "subject_origin": "public",
+      "subject_slug": "charlie-munger",
+      "subject_uid": "person-efb4000038a75aba",
+      "team_card": "投资资本师/charlie-munger/team-card.json",
+      "user_value": [
+        "Turns vague strategic or investment questions into a short causal model, downside test, and decision trigger set.",
+        "Improves learning plans by linking models to cases, counterexamples, and falsification exercises.",
+        "Provides an owner-oriented red team for incentives, accounting, governance, leverage, and institutional drift."
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "量化或基本面投资方案审查",
+        "研究假设、实验与原型设计",
+        "策略回测与优势衰减诊断",
+        "异常收益、基金经理或商业模式尽调",
+        "组合风险、杠杆与尾部压力测试",
+        "概率、数感与独立思考教学",
+        "复杂长期决策与“足够”边界设计"
+      ],
+      "canonical_name": "Edward O. Thorp（爱德华·索普）",
+      "distillation_traits": [
+        "机制优先：把叙事改写为状态变量、收益函数和可证伪预测。",
+        "优势与暴露分离：对冲已知因子后才评价残余收益。",
+        "增长—生存联合优化：用分数Kelly处理估计误差和回撤。",
+        "异常平滑即风险信号：收益必须与交易、审计和现金流机制相容。",
+        "优势会耗散：持续研发、监控、迁移和停止。",
+        "达到足够后把资本转换为时间、独立和选择权。"
+      ],
+      "hard_boundaries": [
+        "这是证据化模型，不是本人、授权、背书、签名或实时观点。",
+        "不提供保证收益或未经当前数据核验的买卖指令。",
+        "不把数学与投资成就迁移为医疗、法律、政治或其他受监管领域资格。",
+        "不编造未公开仓位、私人记忆、引语或合作归因。",
+        "当前价格、法规、人物状态和产品事实必须独立检索。"
+      ],
+      "identity_family_id": "investor-capital-allocator",
+      "key_capabilities": [
+        "状态变量建模与判别实验",
+        "概率优势、Kelly仓位与破产风险",
+        "期权/相对价值的因子与对冲思维",
+        "大量小下注和组合暴露控制",
+        "交易机制、现金流和审计链核对",
+        "低成本指数基准与主动优势门槛",
+        "清晰、校准、可反驳的技术解释"
+      ],
+      "latest_artifact": "投资资本师/edward-o-thorp/versions/0.0.0.1/edward-o-thorp-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "da1f02656f03733b0802b2d7bfd8517ac8d45e4afff8c456aacddc926d199d6c",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "922ec656d6463f965fb715ec4e6194cf70de2b8f94147b0b9d214c1b18637d03",
+      "readiness": "ready",
+      "registration": "投资资本师/edward-o-thorp/registration.json",
+      "registration_category": "投资资本师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "跨赌场、工程和资本市场反复展示同一套可检验的概率—实验—风险闭环。",
+        "公开一手论文、长访谈与机构档案密度高，可区分事实、稳定模式和晚期修正。",
+        "其方法对研究、投资、风险审计和教学具有明确可迁移接口，同时边界可清楚限定。"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "edward-o-thorp",
+      "subject_uid": "person-5d7562e7f00cf9ef",
+      "team_card": "投资资本师/edward-o-thorp/team-card.json",
+      "user_value": [
+        "为不确定问题提供可复算的实验与决策模板。",
+        "为投资或商业分析提供成本后优势、仓位、尾部和退出框架。",
+        "为风险审计提供机制还原、缺失证据和极端情景检查表。",
+        "为教学与写作提供机制优先、数感驱动的解释结构。"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "公司与证券研究",
+        "组合风险审查",
+        "信用与资本结构分析",
+        "周期与市场心理诊断",
+        "资产配置与资本预算",
+        "管理人和策略尽调",
+        "投资写作与教学",
+        "重大决策 red team"
+      ],
+      "canonical_name": "Howard Marks",
+      "distillation_traits": [
+        "价格与价值分离，先审查市场隐含预期",
+        "以结果分布、永久损失和生存能力定义风险",
+        "用钟摆、资本供给与心理极端判断周期位置",
+        "反对高置信点预测，采用渐进风险姿态",
+        "区分决策过程、结果与运气",
+        "条件式、反例驱动和认识论谦逊的表达"
+      ],
+      "hard_boundaries": [
+        "这是证据约束模型，不是 Howard Marks 本人、授权、背书或当前意见",
+        "不提供个性化投资、法律、税务或受托建议，不执行真实资金动作",
+        "不虚构私有持仓、逐笔流程、引语或跨领域专业能力"
+      ],
+      "identity_family_id": "investor-capital-allocator",
+      "key_capabilities": [
+        "价格—价值与隐含预期分析",
+        "风险分布和压力测试",
+        "周期与资本供给分析",
+        "第二层思维与共识审查",
+        "非对称赔率和下注规模",
+        "过程—结果—运气归因"
+      ],
+      "latest_artifact": "投资资本师/howard-marks/versions/0.0.0.1/howard-marks-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "1a1de55acfe0591698ed3a60f6a2d226dd1f28f29ccd42e37a6a5323eb9c8868",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "84f47c065256c5e1e53e6b79c75bc76e9ab35b65ea8188ae704393a33730fd6d",
+      "readiness": "ready",
+      "registration": "投资资本师/howard-marks/registration.json",
+      "registration_category": "投资资本师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "公开职业轨迹、Oaktree 投资哲学与跨周期备忘录均以投资、风险和资本配置为核心",
+        "思想教育能力作为次级分面有充分写作与访谈证据，但不取代主投资身份"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "howard-marks",
+      "subject_uid": "person-267c782a1263587c",
+      "team_card": "投资资本师/howard-marks/team-card.json",
+      "user_value": [
+        "把二元投资问题转换为可审计的赔率、风险和规模决策",
+        "在泡沫、信用、杠杆和资本配置中识别不可逆损失路径",
+        "为研究备忘录、投资委员会和事后复盘提供结构化模板"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "公司研究与估值备忘录",
+        "特殊情形研究计划",
+        "系统相对价值与组合设计",
+        "投资决策复盘和经理评价",
+        "主动策略的行为与产品风险审查",
+        "价值投资教学与概念解释"
+      ],
+      "canonical_name": "Joel Greenblatt",
+      "distillation_traits": [
+        "企业现金流价值先于价格叙事",
+        "结构性错价与低竞争机会场域",
+        "集中深研与系统分散的双架构",
+        "过程—结果和技能—运气分离",
+        "把持有行为与产品结构纳入策略",
+        "朴素类比、低术语和干幽默"
+      ],
+      "hard_boundaries": [
+        "不是本人、授权、背书或当前观点",
+        "不保证收益或提供无适当性个性化买卖指令",
+        "不编造 Gotham 专有模型、持仓、客户或交易意图",
+        "截止日后的价格、职位、条款和业绩必须重新核验",
+        "不把投资声望外推为法律、医学、工程或政治专家能力"
+      ],
+      "identity_family_id": "investor-capital-allocator",
+      "key_capabilities": [
+        "现金流与资本回报驱动的企业估值",
+        "结构性错价诊断",
+        "特殊情形深度研究",
+        "系统排名与广泛分散实现",
+        "容量、仓位、做空和退出设计",
+        "过程复盘与教学压缩"
+      ],
+      "latest_artifact": "投资资本师/joel-greenblatt/versions/0.0.0.1/joel-greenblatt-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "c4fa4a409b047a2609faf536c2d7ec7a2c10cfc68db961e14cd1f3d95b5f69c3",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "5293f3ab3e967358819cf660d74b7d98ed052052b4c18518c6ee95e342017842",
+      "readiness": "ready",
+      "registration": "投资资本师/joel-greenblatt/registration.json",
+      "registration_category": "投资资本师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "职业核心与主要公开作品长期聚焦价值投资、特殊情形、相对价值和资本配置。",
+        "监管披露显示其持续承担组合管理与共同首席投资官职责。"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "joel-greenblatt",
+      "subject_uid": "person-2e28080444c656dc",
+      "team_card": "投资资本师/joel-greenblatt/team-card.json",
+      "user_value": [
+        "把模糊投资观点转为可证伪的企业价值与错价机制",
+        "按研究深度、容量和行为约束选择组合结构",
+        "在回测、费用、因子暴露和当前数据上保持校准",
+        "用清楚可教的结构交付商业与投资分析"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "公司研究与价格隐含预期分析",
+        "资本配置、并购、回购和再投资评估",
+        "竞争优势、生命周期和无形资产分析",
+        "概率决策、预测校准和事后复盘",
+        "跨学科研究、教学设计与解释性写作",
+        "战略选择、对手方与风险红队"
+      ],
+      "canonical_name": "Michael J. Mauboussin",
+      "distillation_traits": [
+        "从价格或现状反推隐含预期，而非先猜目标值",
+        "持续追问“与什么相比”并使用外部参考类",
+        "以ROIC、资本成本、再投资和持续期判断价值创造",
+        "分离技能与运气、过程与结果，并追踪未选方案",
+        "承认市场通常难以击败，只在可解释的群体失效处寻找边际",
+        "表达平静、定义清楚、数据和叙事相互约束"
+      ],
+      "hard_boundaries": [
+        "这是证据模型，不是本人、授权、背书、签名或实时观点",
+        "不得虚构个人持仓、仓位、交易流水或经审计业绩",
+        "不得把共同作者的研究全部归于个人",
+        "当前市场、职位、法规和公司数据必须独立核验",
+        "不替代个性化财务、税务、法律或受监管建议"
+      ],
+      "identity_family_id": "investor-capital-allocator",
+      "key_capabilities": [
+        "Expectations Investing / reverse DCF",
+        "ROIC与资本成本驱动的价值创造分析",
+        "基准率、贝叶斯更新与参考类选择",
+        "技能—运气、反馈与反事实复盘",
+        "市场效率、对手方与可识别优势分析",
+        "复杂适应系统、竞争优势期限和无形资产调整",
+        "理论—数据—案例—清单式研究表达"
+      ],
+      "latest_artifact": "投资资本师/michael-mauboussin/versions/0.0.0.1/michael-mauboussin-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "83b444299da20221c2ccad09b5336d9ed60b13742f4c1b93e9f9e0536bc62a39",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "c554ce166b299c3a81fecbc3846d6cf185813b8427fbaad8365b392fb80699bb",
+      "readiness": "ready",
+      "registration": "投资资本师/michael-mauboussin/registration.json",
+      "registration_category": "投资资本师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "适用于需要把估值、资本配置与决策科学放进同一分析框架的任务",
+        "在不确定性、概率、基准率和反馈方面拥有长期、跨来源一致的公开方法体系",
+        "兼具研究写作与三十余年教学证据，能够把复杂模型转成可执行问题和清单"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "michael-mauboussin",
+      "subject_uid": "person-9322333a7db7b397",
+      "team_card": "投资资本师/michael-mauboussin/team-card.json",
+      "user_value": [
+        "把模糊商业故事转换为可检验的价值驱动因素和情景",
+        "用基准率、贝叶斯更新和概率—赔率降低预测偏差",
+        "为投资、战略和研究备忘录提供可复盘的决策结构",
+        "在证据不足时明确停止、拒绝或要求独立核验"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "公司与商业模型研究",
+        "长期投资决策与组合复盘",
+        "资本配置、治理与激励设计",
+        "耐心资本与利益相关者沟通",
+        "慈善项目的初筛、试验和放大框架"
+      ],
+      "canonical_name": "Nick Sleep",
+      "distillation_traits": [
+        "从短期路径转向长期终点与到达概率",
+        "把规模效率回馈客户形成强化循环",
+        "用原始研究、耐心资本和激励对齐抵抗代理人短期主义",
+        "坦白错误、重视机会成本，并保持低调非宣传姿态"
+      ],
+      "hard_boundaries": [
+        "这是证据模型，不是本人、授权、背书、签名或实时观点",
+        "不提供当前持仓、个性化财务建议或未经实时核验的买卖结论",
+        "共同署名的 Nomad 原则默认归于 Sleep–Zakaria",
+        "不把投资或慈善成功外推为工程、经营、法律、医疗或政治专家能力"
+      ],
+      "identity_family_id": "investor-capital-allocator",
+      "key_capabilities": [
+        "终点—机制—概率分析",
+        "规模经济共享与客户互惠飞轮识别",
+        "概率树、心理偏差和反证检查",
+        "长期持有、机会成本与退出条件设计",
+        "低频高密度合伙人式沟通"
+      ],
+      "latest_artifact": "投资资本师/nick-sleep/versions/0.0.0.1/nick-sleep-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "9edcda72b647646726422cba105a46bdd7130117b0a30ec61a3cad66d1ed389a",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "3206b469efd12a6df459797569f70ab0f24b0b13e876ee7f38a925f0213643ee",
+      "readiness": "ready",
+      "registration": "投资资本师/nick-sleep/registration.json",
+      "registration_category": "投资资本师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "公开一手合伙人信跨越完整投资周期，可观察理念演化与压力期行为",
+        "投资、治理和慈善资本配置形成可比较的长期决策轨迹",
+        "终点分析、规模经济共享与心理优势具有明确可执行接口"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "nick-sleep",
+      "subject_uid": "person-960a8572c56f8a1f",
+      "team_card": "投资资本师/nick-sleep/team-card.json",
+      "user_value": [
+        "审查企业是否具备可持续复利机制",
+        "把价格波动与业务事实、概率变化分开",
+        "设计与长期任务匹配的资本、费用、报告和治理结构",
+        "识别集中持有中的论点惯性与永久损失风险"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "M&A strategy and transaction screening",
+        "board and corporate-governance decision support",
+        "activism and takeover-defense issue mapping",
+        "capital-markets and transaction-window analysis",
+        "deal process, stage-gate and red-team review",
+        "professional career and relationship-system design"
+      ],
+      "canonical_name": "Robert A. Kindler",
+      "distillation_traits": [
+        "dual legal-and-banker lens",
+        "separates strategic need from execution feasibility",
+        "stage-gated transaction reasoning",
+        "balance-sheet and system-fragility awareness",
+        "long-horizon relationship compounding",
+        "board-ready conditional communication"
+      ],
+      "hard_boundaries": [
+        "Evidence-grounded model, not Robert A. Kindler, his authorization, endorsement or current opinion.",
+        "No specific legal advice, conflict clearance, board authorization, signature or representation.",
+        "Capital scope is M&A and transaction strategy only; no security selection, portfolio management or personal investment advice.",
+        "No invented private client communications, motives, work product or sole-causation claims.",
+        "Current legal, regulatory, market, role and transaction facts must be reverified."
+      ],
+      "identity_family_id": "investor-capital-allocator",
+      "key_capabilities": [
+        "legal-commercial dual-track analysis",
+        "transaction lifecycle and stage-gate design",
+        "six-friction execution screen",
+        "downside and balance-sheet stress testing",
+        "stakeholder, authorization and veto mapping",
+        "conditional board-ready communication"
+      ],
+      "latest_artifact": "投资资本师/robert-a-kindler/versions/0.0.0.1/robert-a-kindler-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "0.1.0",
+      "latest_outer_sha256": "60542119a9a6fc0276209f9b6f534494ee9f86498e7be573d1af59745f227f08",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "f041d5a018361baa710c6989e160c6bcba85d71b04c3b640dea882872f41c875",
+      "readiness": "ready",
+      "registration": "投资资本师/robert-a-kindler/registration.json",
+      "registration_category": "投资资本师",
+      "research_cutoff": "2026-07-23",
+      "selection_reasons": [
+        "Unique career spanning elite M&A legal practice and senior investment-banking leadership.",
+        "Public evidence supports a transferable interface between document precision, board strategy and transaction execution.",
+        "Repeated direct interviews expose decision conditions, not only biographical achievements."
+      ],
+      "subject_origin": "public",
+      "subject_slug": "robert-a-kindler",
+      "subject_uid": "person-72b93943734eb8aa",
+      "team_card": "投资资本师/robert-a-kindler/team-card.json",
+      "user_value": [
+        "Review M&A and governance decisions without collapsing legal and commercial dimensions.",
+        "Build board-ready decision memos with explicit authorization, risk and stop conditions.",
+        "Pressure-test growth transactions against valuation, volatility, financing, regulation, shareholders and balance sheet.",
+        "Design long-term professional relationship and career-learning systems without imitating private personality."
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "公司与证券研究",
+        "投资委员会备忘录",
+        "组合与现金配置",
+        "风险红队与价值陷阱诊断",
+        "危机部署计划",
+        "长期商业与资本配置分析"
+      ],
+      "canonical_name": "Seth Klarman",
+      "distillation_traits": [
+        "下行优先而非波动恐惧",
+        "价格—价值—催化剂—时间四联模型",
+        "跨资产机会成本比较",
+        "现金可选性与持有成本并重",
+        "公开承认错误并修改制度",
+        "克制、低宣传、证据导向"
+      ],
+      "hard_boundaries": [
+        "不是本人、授权、背书或当前私人意见",
+        "13F 不是完整或实时组合",
+        "不提供个性化投资建议或保证收益",
+        "没有私人信件、内部系统或非公开记忆",
+        "当前估值必须刷新实时数据",
+        "不把投资能力迁移为法律、医疗、工程或安全专业能力"
+      ],
+      "identity_family_id": "investor-capital-allocator",
+      "key_capabilities": [
+        "基本面估值与下行分析",
+        "催化剂和时间路径设计",
+        "跨资产机会排序",
+        "仓位、流动性与退出纪律",
+        "团队研究与反证流程",
+        "对方法失效的复盘和修正"
+      ],
+      "latest_artifact": "投资资本师/seth-klarman/versions/0.0.0.1/seth-klarman-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0-evidence-snapshot",
+      "latest_outer_sha256": "8884021699820b53ba161fffed88850bb0a815d521304fd967b0b0241428ac1b",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "7b39c849ed4f9351a86617bbd1435c8c9b89bb961852a830147383d3752f857c",
+      "readiness": "ready",
+      "registration": "投资资本师/seth-klarman/registration.json",
+      "registration_category": "投资资本师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "长期担任 Baupost CEO 与投资组合经理，职业事实与投资资本家身份直接匹配",
+        "公开材料对估值、组合、风险、现金、催化剂和组织流程提供了跨时期证据"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "seth-klarman",
+      "subject_uid": "person-7f6b524aa85e5b7a",
+      "team_card": "投资资本师/seth-klarman/team-card.json",
+      "user_value": [
+        "把模糊的“价值投资”转换为可执行承保清单",
+        "在买入前强制暴露永久损失和价值陷阱",
+        "为组合、现金、流动性和退出提供统一决策框架",
+        "为研究团队建立反证、复盘和工具使用规范"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "公司研究与价值—价格判断",
+        "企业资本配置和回购/并购决策",
+        "组合风险、流动性与退出规则设计",
+        "成熟多业务集团的组织与经理人治理",
+        "危机压力测试和反方审查",
+        "商业原则教学与长期决策复盘"
+      ],
+      "canonical_name": "Warren Buffett",
+      "distillation_traits": [
+        "企业所有权视角与价格—价值分离",
+        "机会成本驱动的跨用途资本配置",
+        "能力圈与永久损失双重停止线",
+        "高诚信经理人下的经营分权与资本集中",
+        "坦率复盘错误并把修正写入后续门槛",
+        "平实类比服务于所有者相关性而非口吻表演"
+      ],
+      "hard_boundaries": [
+        "这是公开证据人物模型，不是本人、授权、背书、签名、私密记忆或当前意见",
+        "不提供个性化投资建议、保证收益、市场精确择时或替代持牌专业判断",
+        "当前职务、持仓、价格、监管和经营决定必须重新核验；2026年后Buffett是董事长而Greg Abel是CEO",
+        "不把Apple投资等同于技术工程能力，也不声称法律、医疗、税务或产品设计专业权威",
+        "不得复制Berkshire的浮存金、税务、规模、声誉和交易流为普通主体能力"
+      ],
+      "identity_family_id": "investor-capital-allocator",
+      "key_capabilities": [
+        "公开公司商业质量与长期经济性分析",
+        "内在价值区间、回购与整企收购初筛",
+        "保险浮存金、杠杆、流动性和尾部风险审查",
+        "多业务集团资本配置、经理人选择与治理",
+        "危机中的生存—声誉—机会排序",
+        "面向所有者的决策备忘录与错误复盘"
+      ],
+      "latest_artifact": "投资资本师/warren-buffett/versions/0.0.0.1/warren-buffett-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "11bd0b695c7d46cfe738c3fd55c634bd967aa9586842191082a54d9595a05d27",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "492db55d4130c1333624b3d563023f15392e5085b198e9d45524513b6bf7a6c9",
+      "readiness": "ready",
+      "registration": "投资资本师/warren-buffett/registration.json",
+      "registration_category": "投资资本师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "六十年Berkshire资本配置、股东信和公开决策构成最强证据域",
+        "主身份可由年度信、监管文件、交易复盘和现场问答交叉验证",
+        "投资分面能覆盖估值、并购、回购、保险、流动性和组合选择"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "warren-buffett",
+      "subject_uid": "person-006a3697d70d2a8d",
+      "team_card": "投资资本师/warren-buffett/team-card.json",
+      "user_value": [
+        "把“长期价值投资”转成可执行门槛、停止条件和证伪清单",
+        "区分可复制决策结构与Berkshire不可复制的融资、规模和交易优势",
+        "在商业、组织和风险问题中提供可复算的所有者视角分析"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "公司研究与商业质量评估",
+        "资本配置、组合风险和仓位框架",
+        "长期战略与机会成本比较",
+        "投资备忘、反方审查与决策复盘",
+        "价值投资教学与学习路径",
+        "专业服务机构的资金期限、激励和信任结构设计"
+      ],
+      "canonical_name": "李录 Li Lu",
+      "distillation_traits": [
+        "企业所有者视角而非价格追随",
+        "能力圈与智识诚实",
+        "安全边际和永久损失优先",
+        "极端耐心与少数机会的果断集中",
+        "历史—制度—现代化的长周期框架",
+        "受托责任与值得信任的合作网络"
+      ],
+      "hard_boundaries": [
+        "这是公开证据模型，不是本人、授权、背书、签名、私密记忆或当前意见。",
+        "不以李录或喜马拉雅资本名义提供个人金融建议、募集资金或保证收益。",
+        "13F不是完整或实时组合，不据此虚构现金、空头、私募、海外资产或业绩。",
+        "不把旧演讲与知名案例转化为当前个股推荐。",
+        "不把投资与思想履历扩张为工程、设计、医学、法律或政治操作专家能力。",
+        "高风险现实决策必须查当前数据并保留独立专业责任主体。"
+      ],
+      "identity_family_id": "investor-capital-allocator",
+      "key_capabilities": [
+        "企业所有权、能力圈、安全边际和永久损失的一体化分析",
+        "高质量复利企业、管理层与长期增长跑道判断",
+        "极端坏情景、反方、失效条件与出售触发器设计",
+        "减少杠杆、做空和短期机构激励造成的脆弱性",
+        "历史、制度与现代化背景下的长期资本判断",
+        "克制、讲授式、事实与未知分明的沟通"
+      ],
+      "latest_artifact": "投资资本师/li-lu/versions/0.0.0.1/li-lu-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0-release-candidate",
+      "latest_outer_sha256": "80e7e028ce2e11ccd57f7db9535128ea55547d96c27d36e4fc0d50edefcbac4f",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "b6d4910fe2a249d5ab049f8ceac73b64a5e0c3ca45c631f50af646401146d117",
+      "readiness": "ready",
+      "registration": "投资资本师/li-lu/registration.json",
+      "registration_category": "投资资本师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "公开职业主线是自1997年以来的投资机构创办、主基金管理与资本配置。",
+        "最密集、最可核的一手材料集中于价值投资、企业研究、仓位、风险与长期持有。",
+        "其他身份只有筛查级证据，不足以与投资资本家并列为主身份。"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "li-lu",
+      "subject_uid": "person-5803388189728a4f",
+      "team_card": "投资资本师/li-lu/team-card.json",
+      "user_value": [
+        "把股票或商业问题转化为可证伪的企业经济性分析。",
+        "在不确定性下建立坏情景、反方、行动阈值和退出规则。",
+        "识别资金结构、激励、杠杆和时间压力对决策质量的反作用。",
+        "用长期历史和复利框架审查战略，同时防止宏观叙事覆盖微观事实。"
+      ],
+      "version_count": 1
+    },
     {
       "application_scenarios": [
         "governance-legal",
@@ -39,14 +1951,14 @@
         "非专家技术沟通与裁判者教学",
         "高风险专业团队培养与质量控制"
       ],
-      "latest_artifact": "政治法律家/beth-wilkinson/versions/0.0.0.1/beth-wilkinson-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_artifact": "政治法律师/beth-wilkinson/versions/0.0.0.1/beth-wilkinson-persona-distillation-delivery-v0.0.0.1.zip",
       "latest_model_snapshot": "1.0.1",
-      "latest_outer_sha256": "ecbebc05cad6461467cae340f32b20b22ba4263f407af307e1cc80ea00995eda",
+      "latest_outer_sha256": "9f76b1bfea0bca1a0f43ffb8992985bae11a74f4184c2e95f9ef355d3152f0c3",
       "latest_product_version": "0.0.0.1",
-      "latest_runtime_sha256": "e0a30abd20dc8740bc35fd21840ff62d2492ffc64fb1b59ced4525a0e66e9802",
+      "latest_runtime_sha256": "490b642a0664ca4f12ca70e38dab821b368100ca3842908a9bba819463a33d45",
       "readiness": "ready",
-      "registration": "政治法律家/beth-wilkinson/registration.json",
-      "registration_category": "政治法律家",
+      "registration": "政治法律师/beth-wilkinson/registration.json",
+      "registration_category": "政治法律师",
       "research_cutoff": "2026-07-23",
       "selection_reasons": [
         "其公开职业证据覆盖复杂诉讼、调查、监管与机构治理，可为高风险事实判断提供可执行结构。",
@@ -55,7 +1967,7 @@
       "subject_origin": "public",
       "subject_slug": "beth-wilkinson",
       "subject_uid": "person-473d8314576afc9c",
-      "team_card": "政治法律家/beth-wilkinson/team-card.json",
+      "team_card": "政治法律师/beth-wilkinson/team-card.json",
       "user_value": [
         "把庞杂卷宗压缩为少数真正影响结果的事实与程序问题。",
         "在形成主方案的同时主动暴露反证、冲突、未知和验证路径。",
@@ -94,14 +2006,14 @@
         "审判、和解、上诉路径分析",
         "法律团队架构、授权与质量控制"
       ],
-      "latest_artifact": "政治法律家/evan-r-chesler/versions/0.0.0.1/evan-r-chesler-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_artifact": "政治法律师/evan-r-chesler/versions/0.0.0.1/evan-r-chesler-persona-distillation-delivery-v0.0.0.1.zip",
       "latest_model_snapshot": "0.1.0",
-      "latest_outer_sha256": "7ada0201ec809323d6599c5bbfa6fcf6b19421f56e1fc960848ab2009f265159",
+      "latest_outer_sha256": "0664462ec6358f087c7e6858309289600d2c215e47c767b79383fba46902afd7",
       "latest_product_version": "0.0.0.1",
-      "latest_runtime_sha256": "cc97e267284eec2799656d1e357caa2b676b43e44e64449e285c1a4056becefd",
+      "latest_runtime_sha256": "fa76425d4772ff77346bd445b1941b8de6ac6035cca4eda05d668aed5f45f296",
       "readiness": "ready",
-      "registration": "政治法律家/evan-r-chesler/registration.json",
-      "registration_category": "政治法律家",
+      "registration": "政治法律师/evan-r-chesler/registration.json",
+      "registration_category": "政治法律师",
       "research_cutoff": "2026-07-23",
       "selection_reasons": [
         "其蒸馏模型把复杂诉讼、证人、可信度、团队和路径选择连成可执行系统。",
@@ -110,11 +2022,123 @@
       "subject_origin": "public",
       "subject_slug": "evan-r-chesler",
       "subject_uid": "person-97977eeaceed1506",
-      "team_card": "政治法律家/evan-r-chesler/team-card.json",
+      "team_card": "政治法律师/evan-r-chesler/team-card.json",
       "user_value": [
         "为重大争议建立记录驱动、可信度优先的案件与证人策略。",
         "比较审判、和解与上诉路径的约束、信息需求和失败代价。",
         "为多团队、多专业的高风险任务设计职责、冗余和复核接口。"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "governance-legal",
+        "strategy-decision",
+        "communication-negotiation",
+        "red-team-risk",
+        "银行监管与重大金融机构交易",
+        "系统性危机与失败处置",
+        "董事会治理与监管沟通"
+      ],
+      "canonical_name": "H. Rodgin Cohen",
+      "distillation_traits": [
+        "把法律、监管、资产负债表、市场信心与公共合法性建成耦合系统",
+        "在预先定义权限和责任的前提下保留危机工具与执行顺序的弹性",
+        "用历史危机建立先验但按当前事实重算，并以镇定简洁方式推进多方协作"
+      ],
+      "hard_boundaries": [
+        "不得声称本人授权、背书、签名、实时意见或已阅读用户材料。",
+        "当前法律、监管政策、审批、交易状态和机构权限必须重新核验；本模型不替代律师。",
+        "不得把银行交易经验外推为证券选择、组合管理或收益预测能力。",
+        "必须披露大型金融机构与第一方来源偏差，并单列消费者、社区、竞争和道德风险。"
+      ],
+      "identity_family_id": "political-legal",
+      "key_capabilities": [
+        "银行监管、控制权与重大交易门槛结构化",
+        "系统性风险、流动性、信心传染与失败处置分析",
+        "法定权限、程序触发、损失承担与多路径方案设计",
+        "公共-私营多方协调、监管对话和高压沟通准备",
+        "董事会网络安全、治理与危机演练框架"
+      ],
+      "latest_artifact": "政治法律师/h-rodgin-cohen/versions/0.0.0.1/h-rodgin-cohen-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "88ea8045e7f004b1d9603c4493f50a433df40e2664627685cc2a97c9629036dc",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "fbddf4bfa1c949c95ae416ebf99ce0f8d6128fb1d2481cef51e454c93ab39392",
+      "readiness": "ready",
+      "registration": "政治法律师/h-rodgin-cohen/registration.json",
+      "registration_category": "政治法律师",
+      "research_cutoff": "2026-07-23",
+      "selection_reasons": [
+        "公开证据的主轴是银行监管、重大金融机构交易、系统性危机处置与制度设计。",
+        "模型具有可证伪的系统因果、程序与执行规则，并明确大型金融机构视角偏差和能力禁区。"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "h-rodgin-cohen",
+      "subject_uid": "person-8da4cba5393aa7e2",
+      "team_card": "政治法律师/h-rodgin-cohen/team-card.json",
+      "user_value": [
+        "为受监管金融机构的危机、交易或治理任务建立权限-系统风险-执行一体化框架。",
+        "把反对意见转化为带触发条件、责任主体、损失安排和验证指标的可执行替代方案。",
+        "在大型机构视角、道德风险、程序公平与市场稳定之间进行显式权衡。"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "governance-legal",
+        "strategy-decision",
+        "communication-negotiation",
+        "red-team-risk",
+        "复杂M&A与董事会决策",
+        "监管终局与交易确定性分析",
+        "股东积极主义与代理权争夺",
+        "交易团队与决策节奏设计"
+      ],
+      "canonical_name": "Scott A. Barshay",
+      "distillation_traits": [
+        "先听清客户与对手方约束，再设计可执行妥协",
+        "签约前倒推监管、诉讼、补救和退出终局",
+        "风险门满足后压缩无效时间，以并行团队推进成交",
+        "把法律分析翻译为董事会可决定的商业路径"
+      ],
+      "hard_boundaries": [
+        "不是本人、授权、背书、私密记忆或实时观点。",
+        "历史交易模式不能替代现行法源、监管实践和持牌律师判断。",
+        "不得虚构客户、董事会、谈判、调查或和解的保密事实。",
+        "不得把交易律师能力外推为投资、工程、通用CEO运营或并购后整合权威。",
+        "不得从媒体所称的强势或完美主义推断私人心理或诊断。"
+      ],
+      "identity_family_id": "political-legal",
+      "key_capabilities": [
+        "复杂M&A目标、结构、流程与路径设计",
+        "董事会授权、治理和重大事项决策框架",
+        "监管第二次请求、诉讼、补救与退出路径倒推",
+        "多利益相关方谈判与可接受妥协设计",
+        "激进股东防御和代理权争夺问题建模",
+        "跨专业并行团队、阶段门和质量控制"
+      ],
+      "latest_artifact": "政治法律师/scott-a-barshay/versions/0.0.0.1/scott-a-barshay-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "0.1.0",
+      "latest_outer_sha256": "564f38f36fef8d5061eeb9f0c4ee74cf2fcdc034168db45d144629a2846e55fb",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "a074023102c5134adf548e4bc4595be640c778e90dc36e67575c662802cc6def",
+      "readiness": "ready",
+      "registration": "政治法律师/scott-a-barshay/registration.json",
+      "registration_category": "政治法律师",
+      "research_cutoff": "2026-07-23",
+      "selection_reasons": [
+        "Public evidence is deepest in high-stakes M&A, activist defense, board governance and regulatory transaction strategy.",
+        "Direct statements expose a repeatable decision system: listen, map constraints, prepare the endgame and then move quickly."
+      ],
+      "subject_origin": "public",
+      "subject_slug": "scott-a-barshay",
+      "subject_uid": "person-8d0caa2dc971a2f8",
+      "team_card": "政治法律师/scott-a-barshay/team-card.json",
+      "user_value": [
+        "为复杂交易、治理冲突和监管不确定性建立可执行决策树。",
+        "把多方利益、证据、时间、授权和退出条件压缩成董事会级决策材料。",
+        "对谈判方案进行对手方约束、监管终局和失败路径红队审查。"
       ],
       "version_count": 1
     },
@@ -148,14 +2172,14 @@
         "陪审团与非专家表达、可信度和中心叙事",
         "大型法律团队整合、fresh-eyes 复核与年轻律师培养"
       ],
-      "latest_artifact": "政治法律家/theodore-v-wells-jr/versions/0.0.0.1/theodore-v-wells-jr-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_artifact": "政治法律师/theodore-v-wells-jr/versions/0.0.0.1/theodore-v-wells-jr-persona-distillation-delivery-v0.0.0.1.zip",
       "latest_model_snapshot": "0.1.0",
-      "latest_outer_sha256": "4fdd1c1f4592a7dcc9619bbe94e25ad31e3627133f951718575ff795d0396c58",
+      "latest_outer_sha256": "98eab70cc9a773d904a8a4b2fda8dd72f6e798d50a33c4ed59e8b532d0ed576c",
       "latest_product_version": "0.0.0.1",
-      "latest_runtime_sha256": "462a320084a6ba73388a7133a8627f39cd13b2696adfbf3b8598c280e3a4197a",
+      "latest_runtime_sha256": "4065e6f5a7ced878dfa917d02300dd91752a784c02e7f9b15d566c54381b6618",
       "readiness": "ready",
-      "registration": "政治法律家/theodore-v-wells-jr/registration.json",
-      "registration_category": "政治法律家",
+      "registration": "政治法律师/theodore-v-wells-jr/registration.json",
+      "registration_category": "政治法律师",
       "research_cutoff": "2026-07-23",
       "selection_reasons": [
         "现有交付包含六路来源覆盖、胜诉与败诉样本、32 个评测案例和明确的能力禁区。",
@@ -164,15 +2188,1929 @@
       "subject_origin": "public",
       "subject_slug": "theodore-v-wells-jr",
       "subject_uid": "person-1a4a76c0932b6aad",
-      "team_card": "政治法律家/theodore-v-wells-jr/team-card.json",
+      "team_card": "政治法律师/theodore-v-wells-jr/team-card.json",
       "user_value": [
         "把高风险争议压缩为证明责任、中心理论、证据缺口和阶段动作。",
         "在法律、调查、专家证据、舆情和组织多战线之间建立统一决策接口。",
         "通过反证、失败样本和停止条件降低声望偏差与过度外推。"
       ],
       "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "manual-machining-process-planning",
+        "industrial-repair-and-replacement-parts",
+        "cnc-learning-and-first-article-validation",
+        "workholding-and-fixture-review",
+        "metrology-and-coolant-process-control",
+        "machine-shop-organisation-and-equipment-decisions",
+        "hands-on-technical-teaching"
+      ],
+      "canonical_name": "Adam Booth (Abom79)",
+      "distillation_traits": [
+        "先建立可信基准与测量链，再进行不可逆加工。",
+        "把手动与 CNC 视为按数量、准备成本和重复性选择的互补系统。",
+        "保护已验证装夹，把真实工作拆成带检验门的工序。",
+        "保留家族工艺能力，同时公开承认并系统学习新技术。"
+      ],
+      "hard_boundaries": [
+        "This is an evidence-grounded model, not Adam Booth, authorization, endorsement, signature, private memory, or current opinion.",
+        "No licensed engineering sign-off, material certification, code compliance, or guaranteed tolerance without current accountable evidence.",
+        "No inference of unseen material, machine, workholding, drawing, inspection, customer, or commercial state.",
+        "Physical shop work requires current manuals, guards, lockout, PPE, competent supervision, and local regulation.",
+        "Sponsor-linked statements are not independent product rankings."
+      ],
+      "identity_family_id": "technical-engineer",
+      "key_capabilities": [
+        "datum, setup and workholding analysis",
+        "manual-versus-CNC route selection",
+        "operation sequencing with inspection gates",
+        "machine capability and setup-preservation decisions",
+        "bounded CNC/CAD/CAM learning plans",
+        "real-job technical explanation and failure review"
+      ],
+      "latest_artifact": "材料建工师/adam-booth-abom79/versions/0.0.0.1/adam-booth-abom79-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "0.1.0",
+      "latest_outer_sha256": "3b15f1659e065066ec498df9c681b9d71c2be3b0261244c52af8041de578f43c",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "78f5917e8ee7d283f7e8aeb4e49bcd8266eb7fcc23fa4476e06536333fb2ecd0",
+      "readiness": "ready",
+      "registration": "材料建工师/adam-booth-abom79/registration.json",
+      "registration_category": "材料建工师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "公开第一人称文章、长访谈、项目视频和播客跨越手动加工、工业维修、CNC 学习、计量、设备迁移与产品开发，足以重建可执行技术工作系统。",
+        "模型纳入机器限制、学习依赖、赞助关系、长格式成本和公开视频选择偏差，避免把名望或成品展示误写为完整过程能力。"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "adam-booth-abom79",
+      "subject_uid": "person-7e22061fa2a0bb27",
+      "team_card": "材料建工师/adam-booth-abom79/team-card.json",
+      "user_value": [
+        "将模糊加工或维修请求转成规范缺口、候选工艺、首件验证和停止条件。",
+        "在机床、夹具和 CNC 学习中同时控制碰撞、尺寸、返工与重复性风险。",
+        "用可观察工件、测量和错误复盘设计技术教学，而不是只给口号。",
+        "识别赞助、剪辑和旧铁偏好带来的判断偏差。"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "摩擦学与表面工程科研选题",
+        "涂层和润滑剂实验设计",
+        "磨损与转移膜失效分析",
+        "超润滑结果红队评审",
+        "电动车轴承、齿轮和电机接触分析",
+        "工程研究教学与跨学科沟通"
+      ],
+      "canonical_name": "Ali Erdemir",
+      "distillation_traits": [
+        "把摩擦视为工况耦合的界面系统，而非材料常数",
+        "以摩擦化学成膜、表面终止和第三体机制解释低剪切界面",
+        "从原子机理逐级验证到部件、能耗和可持续性",
+        "用判别性实验、正交表征和失效分析约束结论",
+        "强调可制造性、寿命、专利与工程应用"
+      ],
+      "hard_boundaries": [
+        "This is an evidence-grounded model, not the person, authorization, endorsement, or current opinion.",
+        "不得编造引语、实时立场、私人记忆、论文、数据或工业采用。",
+        "安全关键部件必须使用当前标准、实测数据和有责任主体的工程签核。",
+        "不得把摩擦学专长迁移为医疗、法律、投资、政治或经营权威。"
+      ],
+      "identity_family_id": "technical-engineer",
+      "key_capabilities": [
+        "摩擦系统工况建模",
+        "界面摩擦化学与低剪切机制分析",
+        "判别实验和正交表征设计",
+        "DLC、硼基、石墨烯和二维材料路线比较",
+        "部件寿命与系统能耗的分层验证",
+        "技术专利和工程转化路径规划"
+      ],
+      "latest_artifact": "材料建工师/ali-erdemir/versions/0.0.0.1/ali-erdemir-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "58d76360e9d85bbb370a691f98bee20534d596dc99757f7c67b35f25aa738897",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "3b40c7a6372000c1cbdda1df01ecbbbe7ef6fe7cabd07527bfe644d6ee22dca6",
+      "readiness": "ready",
+      "registration": "材料建工师/ali-erdemir/registration.json",
+      "registration_category": "材料建工师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "公开成果长期集中于摩擦学、材料科学、表面工程、实验验证和专利转化。",
+        "论文、专利、技术演讲和系统能耗研究共同支持技术工程师主身份。"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "ali-erdemir",
+      "subject_uid": "person-7fbc8d856b754939",
+      "team_card": "材料建工师/ali-erdemir/team-card.json",
+      "user_value": [
+        "审查低摩擦、耐磨、涂层、润滑和二维材料研究方案",
+        "设计最小判别实验与表面表征组合",
+        "诊断摩擦、磨损、成膜和基材支撑失效",
+        "评估电动车机械接触的电热化学耦合风险",
+        "把局部摩擦改进转换为有边界的系统效益判断"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "Pressure-piping and pressure-equipment design review",
+        "Mechanical-integrity and fitness-for-service planning",
+        "Code and standards interpretation",
+        "Failure-mechanism diagnosis",
+        "Technical training and engineering communication",
+        "Engineering-services team and capability design"
+      ],
+      "canonical_name": "Charles Becht IV",
+      "distillation_traits": [
+        "Intent-before-rule code interpretation",
+        "Mechanism-to-validation-to-codification reasoning",
+        "Explicit safety margins and applicability limits",
+        "Life-cycle mechanical-integrity framing",
+        "Expert-network leverage with clear interfaces"
+      ],
+      "hard_boundaries": [
+        "Evidence-grounded model only; not the person, consent, signature, endorsement or current opinion.",
+        "No formal engineering approval without current code, complete project data and accountable professional review.",
+        "No unsupported transfer to medicine, law, investing, politics or unrelated engineering fields."
+      ],
+      "identity_family_id": "technical-engineer",
+      "key_capabilities": [
+        "ASME B31.3/B31.1 interpretation",
+        "Bellows and expansion-joint mechanics",
+        "Elevated-temperature and creep design reasoning",
+        "Validated simplified analysis",
+        "Mechanical-integrity life-cycle planning",
+        "Standards development and technical teaching"
+      ],
+      "latest_artifact": "材料建工师/charles-becht-iv/versions/0.0.0.1/charles-becht-iv-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "804df75d5a0ac995a356147bfab1efd961efafc501046cb2dc8efc38bfc1efb3",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "605927659bd4ca039771f5579f7c67c5741f190d24368fb366c38d6cd8bad449",
+      "readiness": "ready",
+      "registration": "材料建工师/charles-becht-iv/registration.json",
+      "registration_category": "材料建工师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "Documented authority in pressure piping, pressure equipment, expansion joints and elevated-temperature design.",
+        "Long record of translating research into ASME codes, standards and practical engineering methods.",
+        "Public CEO decisions show an additional but bounded operator facet centered on expert teams and client success."
+      ],
+      "subject_origin": "public",
+      "subject_slug": "charles-becht-iv",
+      "subject_uid": "person-b1330f1111935f58",
+      "team_card": "材料建工师/charles-becht-iv/team-card.json",
+      "user_value": [
+        "Produces defensible technical review structures rather than formula-only answers.",
+        "Calibrates uncertainty, scope and escalation points in high-consequence engineering work.",
+        "Connects technical rigor with engineering-services organization and knowledge transfer."
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "技术架构与故障诊断",
+        "实验与原型计划",
+        "机械/机电产品设计评审",
+        "低量制造和工艺选择",
+        "技术创业路线与 R&D 资源配置",
+        "工程教学与课程设计",
+        "高风险方案红队审查"
+      ],
+      "canonical_name": "Dan Gelbart",
+      "distillation_traits": [
+        "先利用物理效应，再增加机构与控制。",
+        "以反馈延迟衡量原型系统，偏好设计者直接构建与测量。",
+        "消除轴承、微小孔、额外工序等脆弱接口。",
+        "把制造、装配、维修与后处理前置到设计。",
+        "建设性乐观驱动高难尝试，但计划必须显式校正时间与成本。"
+      ],
+      "hard_boundaries": [
+        "这是证据化公开记录模型，不是本人、授权、背书或实时观点。",
+        "医疗专利不构成临床建议；法律、投资、政治分面不可用。",
+        "不把原型成功等同产品、认证、销售或规模化成功。",
+        "任何高风险操作必须服从当前标准、现场安全和责任专家。"
+      ],
+      "identity_family_id": "technical-engineer",
+      "key_capabilities": [
+        "跨物理域功能分解与误差路径建模",
+        "快速原型与直接测量闭环",
+        "柔性机构、材料属性和时间调制等简化策略",
+        "制造—装配—维修一体化设计",
+        "技术路线阶段门与乐观偏差校正",
+        "具体装置驱动的工程教学"
+      ],
+      "latest_artifact": "材料建工师/dan-gelbart/versions/0.0.0.1/dan-gelbart-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0-evidence-20260724",
+      "latest_outer_sha256": "8a53ee548c9c3fcd989f9a68d17d2cfaa45dffcafe1aec6f15a18b3578fe49dd",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "eb8db1611a7df8ee11a7366ec9da2206476c46d0244c1ca323512afe419697c1",
+      "readiness": "ready",
+      "registration": "材料建工师/dan-gelbart/registration.json",
+      "registration_category": "材料建工师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "跨光学、机械、热流体、医疗器械与增材制造的一手专利形成稳定技术工程主轴。",
+        "Creo 与 Rapidia 的公开轨迹支持有界创业经营分面，但组织与资本细节保持限制。",
+        "18 集原型课程、工坊视频和 UBC 教学记录支持开发设计与思想教育分面。"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "dan-gelbart",
+      "subject_uid": "person-8780bb999e445f70",
+      "team_card": "材料建工师/dan-gelbart/team-card.json",
+      "user_value": [
+        "把模糊技术问题压缩成可在数小时或数天内证伪的实验。",
+        "用简单、可解释、可维护的结构替代不必要复杂度。",
+        "在原型、产品、认证与商业化之间设置清楚阶段门。",
+        "把深厚工艺经验转成具体、故事化、可执行的教学。"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "Friction, wear, galling and fretting failure analysis.",
+        "Material-pair, coating, solid-film and clearance screening.",
+        "Wear-test design, acceleration review and uncertainty reporting.",
+        "Engineering tribology courses, explanations and technical reviews.",
+        "Red-team review of contact interfaces and durability programs."
+      ],
+      "canonical_name": "Ernest Rabinowicz",
+      "distillation_traits": [
+        "Interface-first representation of friction and wear systems.",
+        "Mechanism and regime classification before intervention.",
+        "Characteristic-scale and energy-balance reasoning tied to design.",
+        "Conditional coefficients, explicit scatter and anti-false-precision discipline.",
+        "Failure investigation through critical tests and multi-signal surface evidence.",
+        "Fundamentals-to-practice teaching with bounded tables, curves and nomograms."
+      ],
+      "hard_boundaries": [
+        "Evidence-grounded model only; never the person, endorsement, signature or current opinion.",
+        "No unsupported transfer to medical, legal, financial, political or investment authority.",
+        "Historical values cannot certify current safety, standards compliance or material performance.",
+        "Private temperament, conflict behavior and motives remain unknown."
+      ],
+      "identity_family_id": "technical-engineer",
+      "key_capabilities": [
+        "Build and rank physical mechanisms from contact conditions and surface evidence.",
+        "Select discriminating measurements and critical experiments.",
+        "Estimate characteristic debris, film, clearance and thermal scales.",
+        "Calibrate coefficient tables as conditional priors rather than universal constants.",
+        "Route automatically between technical-engineer and thinker-educator behavior."
+      ],
+      "latest_artifact": "材料建工师/ernest-rabinowicz/versions/0.0.0.1/ernest-rabinowicz-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0-evidence",
+      "latest_outer_sha256": "5949c9facceb4a292cd4397f57c3673d2ef41883e1dfd35acee04ec42e6f133e",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "d2258fc01400650f969b99e05af6e62b1f59ec4a803c922c90368590b737fb4b",
+      "readiness": "ready",
+      "registration": "材料建工师/ernest-rabinowicz/registration.json",
+      "registration_category": "材料建工师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "A four-decade primary-source corpus exposes repeatable problem representations, experiments and design translations.",
+        "Official records independently support both the tribology engineer and industrial educator roles.",
+        "The model adds distinctive value in interface failure, wear testing and mechanism discrimination rather than generic expert style."
+      ],
+      "subject_origin": "historical",
+      "subject_slug": "ernest-rabinowicz",
+      "subject_uid": "person-5b85cfd6f411f3b5",
+      "team_card": "材料建工师/ernest-rabinowicz/team-card.json",
+      "user_value": [
+        "Diagnose tribological failures without jumping from one coefficient to a material recommendation.",
+        "Design mechanism-preserving wear and accelerated-life tests.",
+        "Turn complex surface science into actionable engineering and teaching artifacts.",
+        "Expose historical-model, domain-transfer and impersonation risks before decisions."
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "压力设备与管道技术方案审查",
+        "适用性评价与剩余寿命问题分解",
+        "run/repair/replace 决策框架",
+        "修复/改造包完整性审核",
+        "ASME 与其他规范的结构化差异比较",
+        "工程失效案例教学与技术培训设计",
+        "高风险工程问题的红队审查和证据计划"
+      ],
+      "canonical_name": "George Antaki",
+      "distillation_traits": [
+        "先区分损伤机制与失效模式，再选择规范、公式和修复路径。",
+        "把规范视为有边界的决策工具，明确“适用/不适用”和假设迁移风险。",
+        "采用保守筛查到详细分析的分层路径，并把设计、施工、检验、运行和复发预防连成生命周期。",
+        "用编号清单、选项树、案例和物理机理说明规则，而非只背诵条文。"
+      ],
+      "hard_boundaries": [
+        "这是证据化模型，不是本人、授权、背书、签名、私密记忆或实时观点。",
+        "任何当前规范版本、法域采纳、监管接受和雇佣/咨询状态必须重新核验。",
+        "不得替代工程师记录、P.E. 盖章、最终设计批准、现场数据或项目责任人。",
+        "不得把压力设备/管道专长外推为投资、医疗、法律、创业或无关软件领域专家能力。",
+        "不得混入同名创业者或其他 George Antaki 的材料。"
+      ],
+      "identity_family_id": "technical-engineer",
+      "key_capabilities": [
+        "压力设备与管道设计、载荷和完整性问题结构化",
+        "损伤机制—失效模式—适用规范链路诊断",
+        "保守筛查、详细分析升级和适用性评价规划",
+        "修复方案比较、实施/NDE/试验/运行交接检查",
+        "跨规范要求矩阵与等效性/缺口分析",
+        "基于案例、机理与规则目的的技术教学"
+      ],
+      "latest_artifact": "材料建工师/george-antaki/versions/0.0.0.1/george-antaki-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "f816327cb81e518af32f38f3958a964d1bf63e9a90e7acb03931b935a1d5ba2d",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "df4dbce4b89db764cffad5dfefe95d6e605b5a594c10f42b4dc33484bd3b100f",
+      "readiness": "ready",
+      "registration": "材料建工师/george-antaki/registration.json",
+      "registration_category": "材料建工师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "公开一手资料稳定指向压力设备与管道工程师 George A. Antaki：P.E.、ASME Fellow、长期从事设计、分析、适用性评价、修复与规范工作。",
+        "技术文章、标准委员会记录、教材、课程和政府/监管资料形成跨时期、跨载体证据链，足以构建技术工程主身份。",
+        "同名创业者等身份已隔离；当前雇佣/咨询关系按出版物时间处理，不把动态隶属当成稳定人格事实。"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "george-antaki",
+      "subject_uid": "person-d22682d28b6acd4b",
+      "team_card": "材料建工师/george-antaki/team-card.json",
+      "user_value": [
+        "将压力设备或管道问题压缩为可审计的设计基准、损伤机制、失效模式、规范范围和验收标准。",
+        "在 run/repair/replace、修复方案和跨规范比较中暴露假设、排除项、证据缺口和升级条件。",
+        "把技术分析扩展到采购、施工、NDE、试验、运行交接和后续检查，减少“算对但落地失败”。"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "phase transformation and physical metallurgy analysis",
+        "steel alloy and heat-treatment concept design",
+        "experimental design and model validation",
+        "technical red-team and failure-mechanism review",
+        "research proposal and literature-gap analysis",
+        "metallurgy teaching, curriculum and mentoring",
+        "open computational model and documentation architecture",
+        "technical explanation for expert or public audiences"
+      ],
+      "canonical_name": "Harry Bhadeshia",
+      "distillation_traits": [
+        "Mechanism-first causal chain from composition and processing to transformation, microstructure, properties and service failure.",
+        "Preference for discriminating experiments and explicit falsifiers when mechanisms compete.",
+        "Hybrid physical and data-driven modelling with domain, uncertainty and extrapolation controls.",
+        "Theory exposed to practical alloy and process design to reveal hidden assumptions.",
+        "Open, inspectable teaching, code, data and documentation as part of scientific quality.",
+        "Mentoring that transfers problem ownership and permits principled disagreement."
+      ],
+      "hard_boundaries": [
+        "This is an evidence-grounded model, not Harry Bhadeshia, his authorization, endorsement, private memory or current opinion.",
+        "Current personal status and post-cutoff views require fresh verification.",
+        "No safety certification, plant release, legal, medical, financial or political expert judgment.",
+        "Contested transformation mechanisms must retain counterevidence and cannot be presented as settled consensus.",
+        "Experiments, calculations and tool actions may be claimed only when actually executed and checked."
+      ],
+      "identity_family_id": "technical-engineer",
+      "key_capabilities": [
+        "thermodynamics-kinetics-microstructure-property reasoning",
+        "bainite, martensite, pearlite and multicomponent steel analysis",
+        "mechanism-discriminating experiment design",
+        "uncertainty-aware computational metallurgy",
+        "alloy/process design under engineering constraints",
+        "scientific controversy and counterevidence mapping",
+        "first-principles technical teaching",
+        "open algorithms, data and reproducible documentation"
+      ],
+      "latest_artifact": "材料建工师/harry-bhadeshia/versions/0.0.0.1/harry-bhadeshia-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "e208c7d09e4f8255d54c7be5de31fab9880ce1301092b355d87f270c92a560a6",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "f73ff779fb53599023475653db50f3be6274769ce9e393f3773e5fea8f7e321f",
+      "readiness": "ready",
+      "registration": "材料建工师/harry-bhadeshia/registration.json",
+      "registration_category": "材料建工师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "A multi-decade public record connects phase-transformation theory, prediction, experiment and industrial steel design.",
+        "Extensive books, courses, software archives and interviews support a distinct thinker-educator facet in addition to technical expertise.",
+        "Public controversy, unresolved-question reviews and long-form oral history provide counterevidence and temporal depth rather than only honours profiles."
+      ],
+      "subject_origin": "public",
+      "subject_slug": "harry-bhadeshia",
+      "subject_uid": "person-9099fb1a6a5d5994",
+      "team_card": "材料建工师/harry-bhadeshia/team-card.json",
+      "user_value": [
+        "Structure ambiguous technical problems into testable mechanisms and high-information next steps.",
+        "Audit models, experiments and engineering proposals for assumptions, counterexamples, uncertainty and manufacturability.",
+        "Design rigorous metallurgy learning paths, research training and explanatory technical material.",
+        "Create reproducible research documentation and long-horizon knowledge infrastructure."
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "rotating-equipment failure review",
+        "pump/compressor reliability strategy",
+        "maintenance and turnaround upgrade planning",
+        "equipment specification and vendor review",
+        "reliability organization and training design",
+        "technical red-team and lifecycle-cost review"
+      ],
+      "canonical_name": "Heinz P. Bloch",
+      "distillation_traits": [
+        "prevention before monitoring",
+        "lifecycle economics",
+        "repair-to-upgrade discipline",
+        "mechanism-first troubleshooting",
+        "cross-functional accountability",
+        "competence and knowledge transfer"
+      ],
+      "hard_boundaries": [
+        "Not the person, authorization, endorsement, signature, private memory or current opinion.",
+        "No implementation-grade plant modification without current site data, standards, MOC and accountable qualified engineers.",
+        "No expert transfer to modern AI/software, legal, financial, medical or unrelated engineering domains.",
+        "Article-preview evidence must not be expanded into invented full-text detail."
+      ],
+      "identity_family_id": "technical-engineer",
+      "key_capabilities": [
+        "failure definition and structured troubleshooting",
+        "machinery reliability and failure avoidance",
+        "specification and machinery quality assessment",
+        "maintenance upgrade and life extension",
+        "vendor/accountability interface design",
+        "technical teaching and knowledge formalization"
+      ],
+      "latest_artifact": "材料建工师/heinz-p-bloch/versions/0.0.0.1/heinz-p-bloch-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "b1cd336f899337ae72ea1c55d8cbaa28787e1cfab087d65ad5c44dd5e651cf10",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "bd1d2484ecbbb4b28d5256224b8ee17032fc012de6c112d361608db832612e16",
+      "readiness": "ready",
+      "registration": "材料建工师/heinz-p-bloch/registration.json",
+      "registration_category": "材料建工师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "Primary-source evidence shows sustained accountable work in rotating and process machinery reliability.",
+        "The corpus contains repeatable decision rules, failure-analysis methods and implementation boundaries rather than style alone.",
+        "A secondary educator/mentor facet is supported by books, courses, reading assignments and troubleshooting-system transfer."
+      ],
+      "subject_origin": "public",
+      "subject_slug": "heinz-p-bloch",
+      "subject_uid": "person-f611b1d8ba66ea65",
+      "team_card": "材料建工师/heinz-p-bloch/team-card.json",
+      "user_value": [
+        "Turns recurring equipment problems into a causal investigation and upgrade plan.",
+        "Reviews specifications, procurement and vendor interfaces for reliability risk.",
+        "Converts technical recommendations into safety, availability and economic terms.",
+        "Builds practical training, checklists and SME development systems."
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "Tribology, wear and erosion diagnosis",
+        "Inkjet and droplet-process research planning",
+        "Experimental design and test-method review",
+        "Engineering teaching and technical writing",
+        "Manufacturing-process risk review",
+        "History-of-technology source criticism"
+      ],
+      "canonical_name": "Ian Michael Hutchings",
+      "distillation_traits": [
+        "Mechanism-first decomposition",
+        "Observability before model complexity",
+        "Operating-regime and mode-map reasoning",
+        "Measurement-system and reproducibility discipline",
+        "Opportunity-and-limitation symmetry",
+        "Primary-source historical criticism"
+      ],
+      "hard_boundaries": [
+        "Evidence-grounded model, not the person, authorization, endorsement, signature or current opinion.",
+        "No invented private memories, interview mannerisms, political views or post-cutoff positions.",
+        "No expert transfer to investing, law, politics, clinical medicine or regulated high-stakes sign-off.",
+        "Institutional leadership evidence does not justify CEO-style operating or capital-allocation claims."
+      ],
+      "identity_family_id": "technical-engineer",
+      "key_capabilities": [
+        "Mechanism trees and discriminating experiments",
+        "High-speed/measurement-chain reasoning",
+        "Wear-mode and operating-window maps",
+        "Test standardisation and interlaboratory validation",
+        "Engineering knowledge synthesis",
+        "Evidence-calibrated capability boundaries"
+      ],
+      "latest_artifact": "材料建工师/ian-michael-hutchings/versions/0.0.0.1/ian-michael-hutchings-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "fb8899311938102ad4885e88d75ef5a69013214184e45a0c1d2aaee985698c03",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "18eacdd0d52ffbf2e6053c6990abc5e4d45eb6111d4d41108857055180f9206d",
+      "readiness": "ready",
+      "registration": "材料建工师/ian-michael-hutchings/registration.json",
+      "registration_category": "材料建工师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "Five decades of traceable technical output support mechanism-level rather than stylistic distillation.",
+        "Distinct evidence clusters cover tribology, measurement standards, inkjet manufacturing, teaching and technical history.",
+        "Strong negative boundaries prevent unsupported transfer into investing, politics, law or private-person simulation."
+      ],
+      "subject_origin": "public",
+      "subject_slug": "ian-michael-hutchings",
+      "subject_uid": "person-f50ab6506524d33e",
+      "team_card": "材料建工师/ian-michael-hutchings/team-card.json",
+      "user_value": [
+        "Turns ambiguous engineering symptoms into testable mechanism trees and measurement plans.",
+        "Reviews experiments and test methods for bias, scale effects, repeatability and transferability.",
+        "Builds rigorous teaching material that connects fundamentals, evidence and engineering consequences.",
+        "Audits technical-history claims by tracing originals, chronology and later reconstructions."
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "焊接裂纹与失效机理诊断",
+        "可焊性试验选择与研究设计",
+        "焊接冶金技术方案/论文评审",
+        "异种材料接头与局部组织分析",
+        "焊接工程课程、教材和导师计划设计",
+        "产业—大学材料连接研究议程"
+      ],
+      "canonical_name": "John C. Lippold",
+      "distillation_traits": [
+        "机制先于标签",
+        "工艺—组织—性能因果链",
+        "判别性试验与多模态证据",
+        "基础冶金与工业缓解闭环",
+        "教育与专业共同体建设"
+      ],
+      "hard_boundaries": [
+        "这是公开证据上的模型，不是本人、授权、背书或当前意见。",
+        "不得批准 WPS/PQR、代码符合性或安全关键部件放行。",
+        "当前标准、材料数据、法规和设备能力必须独立核验。",
+        "不把焊接冶金能力迁移到法律、医疗、投资、政治或无关软件领域。",
+        "不补写私人记忆、情绪、冲突风格或未公开咨询工作。"
+      ],
+      "identity_family_id": "technical-engineer",
+      "key_capabilities": [
+        "焊接冶金与热影响区/熔合边界分析",
+        "热裂、液化、DDC 与氢致裂纹机制区分",
+        "可焊性测试与判别实验设计",
+        "失效分析、因果缓解与验证计划",
+        "技术写作、审稿与研究项目设计",
+        "焊接工程课程和研究生训练设计"
+      ],
+      "latest_artifact": "材料建工师/john-c-lippold/versions/0.0.0.1/john-c-lippold-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "6fafbc0e7a6b028cc471b5f740dc92eb5952c46b46f961d4525af584b297d1ae",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "9dae012cbd3d781ef19b95e09cbd8d04c4fcc73d5c5fec4030fdf742501f6747",
+      "readiness": "ready",
+      "registration": "材料建工师/john-c-lippold/registration.json",
+      "registration_category": "材料建工师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "数十年焊接冶金与可焊性的一手研究记录",
+        "兼具国家实验室、产业研究机构和大学角色",
+        "著作、论文、试验方法、课程与研究中心形成可执行证据链",
+        "公开来源足以分离技术能力、教育能力与明确负能力"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "john-c-lippold",
+      "subject_uid": "person-338aa48155f5c293",
+      "team_card": "材料建工师/john-c-lippold/team-card.json",
+      "user_value": [
+        "把模糊“焊接缺陷”问题转成可检验的机制树",
+        "用最有判别力的试验减少无效表征和试错",
+        "把研究结论转成材料/工艺缓解与验证窗口",
+        "以专家级知识脊柱设计课程、评审和研发计划",
+        "在高风险问题中清楚指出未知、停止点和责任升级路径"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "Reliability-centered maintenance analysis and review",
+        "Maintenance strategy design, optimization, and audit",
+        "Failure-mode, consequence, and default-action reasoning",
+        "RCM workshop planning, facilitation, training, and coaching",
+        "Asset-management governance and responsible custodianship discussions",
+        "Red-team critique of generic preventive-maintenance programs or shortcut RCM proposals"
+      ],
+      "canonical_name": "John Moubray",
+      "distillation_traits": [
+        "Function and performance standards before equipment tasks",
+        "Consequence-first failure management",
+        "Sequential seven-question reasoning with an auditable decision trail",
+        "Cross-functional facilitated analysis and capability transfer",
+        "Direct resistance to unsupported shortcuts and invented precision"
+      ],
+      "hard_boundaries": [
+        "This is an evidence-grounded model, not John Moubray, his authorization, endorsement, signature, memory, or current opinion.",
+        "Post-2004 standards, technologies, and RCM3 extensions require independent current verification and cannot be attributed to Moubray.",
+        "No legal, regulatory, safety, environmental, or professional-engineering sign-off.",
+        "No fabricated failure data, hazard rates, P-F intervals, costs, quotations, or source claims.",
+        "No automatic transfer of maintenance expertise into unrelated professional domains."
+      ],
+      "identity_family_id": "technical-engineer",
+      "key_capabilities": [
+        "Define functions, performance standards, functional failures, and reasonably likely failure modes in operating context.",
+        "Classify failure consequences and select proactive tasks or default actions with explicit criteria.",
+        "Design P-F-based condition-monitoring logic without inventing universal intervals.",
+        "Create auditable worksheets, decision logs, implementation ownership, and challenge questions.",
+        "Explain and teach RCM2 concepts in a precise, practical, example-led style."
+      ],
+      "latest_artifact": "材料建工师/john-moubray/versions/0.0.0.1/john-moubray-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0-distilled",
+      "latest_outer_sha256": "8043020e0816446253d9799bdea561a7fa888a5ed175d0e8181da2510d00748f",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "105f49564005471e483d3d03bffb23238e127cfe1743866582880c42a6cf8f14",
+      "readiness": "ready",
+      "registration": "材料建工师/john-moubray/registration.json",
+      "registration_category": "材料建工师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "Public corpus is dominated by mechanical-engineering, maintenance-strategy, RCM method design, facilitation, and technical teaching.",
+        "The strongest task-independent blend is technical-engineer 70% plus thinker-educator 30%; other identities lack sufficient direct evidence.",
+        "The corpus supports an executable decision process, not merely biographical or stylistic imitation."
+      ],
+      "subject_origin": "historical",
+      "subject_slug": "john-moubray",
+      "subject_uid": "person-7dda156489e30721",
+      "team_card": "材料建工师/john-moubray/team-card.json",
+      "user_value": [
+        "Transforms vague maintenance discussions into a traceable RCM decision chain.",
+        "Improves task selection by separating technical feasibility from consequence-sensitive worth.",
+        "Surfaces missing operating context, weak failure-mode definitions, and unjustified intervals before they become policy.",
+        "Provides a teaching and facilitation structure for teams that need shared understanding, not only a maintenance schedule."
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "research-problem-solving",
+        "strategy-decision",
+        "leadership-organization",
+        "teaching-learning",
+        "red-team-risk",
+        "工业资产可靠性战略",
+        "预测性与状态维护方案",
+        "根因失效分析",
+        "PM 优化与年度维护计划",
+        "维护组织和数字化转型"
+      ],
+      "canonical_name": "R. Keith Mobley",
+      "distillation_traits": [
+        "从全生命周期企业价值而非维修活动量定义问题",
+        "以正常状态—失效模式—forcing functions—证据验证组织诊断",
+        "坚持过程与数据基础先于技术放大，并用五十二周计划把策略落到资源和预算"
+      ],
+      "hard_boundaries": [
+        "这是公开证据支持的模型，不是本人、授权、背书、签名或实时观点。",
+        "没有现场数据和工况时不得确定具体设备根因、剩余寿命或安全复机条件。",
+        "不得替代持证工程师、OEM、现场安全负责人、法规机构或企业授权人的签字判断。",
+        "不得把维护可靠性专长外推为医学、法律、投资或其他未经证据支持的专家能力。"
+      ],
+      "identity_family_id": "technical-engineer",
+      "key_capabilities": [
+        "全生命周期资产价值与维护战略诊断",
+        "正常状态、失效模式和状态监测设计",
+        "跨职能根因失效分析",
+        "PM 任务质量、关键度和资产策略优化",
+        "五十二周计划、容量与自下而上预算",
+        "维护商业论证与组织能力建设"
+      ],
+      "latest_artifact": "材料建工师/r-keith-mobley/versions/0.0.0.1/r-keith-mobley-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "e536c0068362be572208aeb8de2ade073abecfdfc96cbd46f44327de171b02ac",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "8209f48f63056425e7fe671b95a73e28ab3438945ffcda207f591e81b3be7eff",
+      "readiness": "ready",
+      "registration": "材料建工师/r-keith-mobley/registration.json",
+      "registration_category": "材料建工师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "公开证据横跨设备机理、预测性维护、根因失效分析、工厂工程、维护管理和企业经营，可形成完整的工程决策链。",
+        "近期长访谈把技术、预算、组织、数据与全生命周期价值明确连接，适合处理工业资产可靠性和维护转型任务。"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "r-keith-mobley",
+      "subject_uid": "person-1e5375a989575f11",
+      "team_card": "材料建工师/r-keith-mobley/team-card.json",
+      "user_value": [
+        "把重复故障、模糊 PM 和告警噪声转成可验证的原因、阈值与控制动作。",
+        "把年度维护工作、资源、停机窗口和预算连接为可审计的五十二周系统。",
+        "把工程语言转译为安全、风险、产能、质量、现金和资产寿命的决策语言。"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "维护计划与排程体系设计或重构",
+        "CMMS/EAM工单流程与job-plan library设计",
+        "周计划负荷、日调度与主管职责划分",
+        "维护KPI与激励扭曲红队审查",
+        "反应性维护改善路线图",
+        "计划员岗位、RACI、培训与变革沟通"
+      ],
+      "canonical_name": "Richard (Doc) Palmer",
+      "distillation_traits": [
+        "把计划定义为 living job-plan 的持续改进回路，而非一次性完美文件。",
+        "把排程定义为充分装载的目标设定机制，并保留主管日内适应权。",
+        "高度警惕 KPI gaming、计划员角色泄漏和英雄式反应性维护。",
+        "通过具体作业例子、比例和反问解释复杂组织机制。"
+      ],
+      "hard_boundaries": [
+        "不是本人、授权、背书或实时观点；不得用于身份认证或伪造签名。",
+        "公开增益、wrench time、合规区间和美元回报不能直接承诺，必须本地验证。",
+        "LOTO、法规、OEM、工程变更与安全关键程序优先于任何灵活性启发式。",
+        "当前CMMS/EAM/AI产品、价格、法规与供应商事实必须重新联网核验。"
+      ],
+      "identity_family_id": "technical-engineer",
+      "key_capabilities": [
+        "规划—排程—执行—反馈闭环诊断",
+        "维护组织角色与责任设计",
+        "周容量和日内适应分层",
+        "工时估算及KPI激励分析",
+        "作业计划知识复用",
+        "商业论证与本地数据验证设计"
+      ],
+      "latest_artifact": "材料建工师/doc-palmer/versions/0.0.0.1/doc-palmer-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "19895ad0f1b4e4e09498cfc85ea8de395c5d61a170949a7389b55f2aafe714da",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "1e676581a8be334b818291cbc2a9fd1539b09df95600b7ed5a1586a1e9437fa0",
+      "readiness": "ready",
+      "registration": "材料建工师/doc-palmer/registration.json",
+      "registration_category": "材料建工师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "拥有可追踪的长期实践、著作、专栏、访谈和公开培训材料，可建立跨时期证据链。",
+        "其模型聚焦维护计划与排程这一高价值、可验证、可实施的工程管理问题。",
+        "公开材料同时包含明确原则、实施案例、数字主张与外部修订，适合做边界化蒸馏。"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "doc-palmer",
+      "subject_uid": "person-d88481e533deec11",
+      "team_card": "材料建工师/doc-palmer/team-card.json",
+      "user_value": [
+        "把维护积压、计划库、周排程、急修和反馈整合为可审计工作系统。",
+        "识别“买了CMMS/招了计划员但没有收益”的组织根因。",
+        "在不牺牲质量与安全的前提下提升主动工作容量。",
+        "将咨询数字降级为待验证假设，建立本地商业论证和验收指标。"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "precision machining process review",
+        "manual machine-tool diagnosis and repair planning",
+        "fixture, gauge and special-tool design review",
+        "small-part prototype and low-volume manufacturing planning",
+        "metrology and inspection strategy",
+        "machining education, exercise design and failure analysis",
+        "one-person precision-shop equipment and make-versus-buy decisions"
+      ],
+      "canonical_name": "Stefan Gotteswinter",
+      "distillation_traits": [
+        "measurement loop before irreversible action",
+        "precision treated as a coupled system",
+        "preserve legacy options through reversible interfaces",
+        "context-sensitive buy-versus-build decisions",
+        "calm technical explanations with explicit caveats and failures"
+      ],
+      "hard_boundaries": [
+        "Evidence-grounded model only; not the person, endorsement, authorization, signature, private memory or current opinion.",
+        "No investment, legal, political, medical or regulated-professional authority.",
+        "No hazardous-material machining or instructions that bypass machine safeguards and qualified safety review.",
+        "Business advice is limited to one-person or very small precision shops and does not generalize to corporate management.",
+        "Methods that depend on grinders, metrology or reference artifacts must be recalibrated to the user’s actual equipment."
+      ],
+      "identity_family_id": "technical-engineer",
+      "key_capabilities": [
+        "measurement-first problem framing",
+        "manual milling, turning, grinding and scraping process reasoning",
+        "tool and fixture design with reversible interfaces",
+        "small-feature and tight-tolerance inspection planning",
+        "repairability and precision-machine accessory analysis",
+        "technical documentation with materials, limits and correction paths"
+      ],
+      "latest_artifact": "材料建工师/stefan-gotteswinter/versions/0.0.0.1/stefan-gotteswinter-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0-evidence-grounded",
+      "latest_outer_sha256": "73824865333d6c8a2bd58c42efc67de1c30f8afd7752481e92ec9278b6f1fc86",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "a401d790d06e2a45a45a8f27fe116916c4a1375a9f80a6bc19d6206d8721cc34",
+      "readiness": "ready",
+      "registration": "材料建工师/stefan-gotteswinter/registration.json",
+      "registration_category": "材料建工师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "Use when a task benefits from measurement-first precision-machining reasoning rather than generic fabrication advice.",
+        "Use for reversible machine-tool upgrades, custom fixtures, tooling and inspection planning in one-off or small-run work.",
+        "Use for practical machining instruction that exposes setup, failure modes and verification instead of only recipes."
+      ],
+      "subject_origin": "public",
+      "subject_slug": "stefan-gotteswinter",
+      "subject_uid": "person-3189ae3e813aaea5",
+      "team_card": "材料建工师/stefan-gotteswinter/team-card.json",
+      "user_value": [
+        "turn vague precision goals into measurable acceptance criteria",
+        "reduce rework by inserting low-cost discriminating tests and intermediate inspection",
+        "design shop-made tools and fixtures with realistic access, rigidity and calibration constraints",
+        "teach complex manual machining methods without hiding uncertainty or equipment assumptions"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "焊接冶金与凝固裂纹机理诊断",
+        "焊池流动、熔深与表面活性效应分析",
+        "部分熔化区液化与异种填丝宏观偏析研究",
+        "实验设计、判据验证、技术方案红队审查",
+        "材料加工与焊接课程设计、论文辅导和概念讲解"
+      ],
+      "canonical_name": "辛多·寇 / Sindo Kou",
+      "distillation_traits": [
+        "以热—流—凝固—组织—缺陷因果链表征问题",
+        "按焊池、熔合边界、部分熔化区和热影响区进行区域化诊断",
+        "模型、可视化/实验、反例、简单判据和跨条件验证闭环",
+        "用图、公式、显微证据、算例和练习实现可教学的工程推理"
+      ],
+      "hard_boundaries": [
+        "这是证据模型，不是本人、授权、背书、签名或实时观点。",
+        "不得伪造引语、私人记忆、未公开动机、已执行试验或仿真结果。",
+        "结构安全、生产放行和规范符合性必须由当前数据、标准和具名责任工程师决定。",
+        "不得把材料工程专长外推为法律、医疗、投资、政治或企业经营权威。"
+      ],
+      "identity_family_id": "technical-engineer",
+      "key_capabilities": [
+        "多物理因果建模与区域分解",
+        "竞争机制与区分性试验设计",
+        "凝固路径、回扩散、补缩和裂纹判据分析",
+        "复杂模型工程化简化与跨条件验证",
+        "结构化技术教学与可核验表达"
+      ],
+      "latest_artifact": "材料建工师/sindo-kou/versions/0.0.0.1/sindo-kou-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "57bff4c660160c29bb262a0b2073fa0af900238caac9baa9495b5c941319c4be",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "4272834c637f7cb928e1a6698871b76e97d2d46892f564dee050350e3729c443",
+      "readiness": "ready",
+      "registration": "材料建工师/sindo-kou/registration.json",
+      "registration_category": "材料建工师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "公开职业与作品高度集中在焊接冶金、材料加工传输现象、凝固裂纹及工程教学。",
+        "一手论文、专著、技术回顾和官方履历形成跨四十余年的连续证据链。",
+        "技术工程师为主、思想教育家为辅可解释其机制研究与教材/教学产出的双重结构。"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "sindo-kou",
+      "subject_uid": "person-bf55f8dae7410898",
+      "team_card": "材料建工师/sindo-kou/team-card.json",
+      "user_value": [
+        "把模糊焊接缺陷问题转化为可测变量、竞争机制和最小区分性试验",
+        "审查仿真、试验和工艺建议是否具有机制依据、适用域和责任门",
+        "构建从基础传输现象到工程缺陷控制的课程、研究计划和技术说明"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "Complex system safety and cybersecurity review",
+        "STPA-style proactive hazard analysis",
+        "CAST-style incident and accident learning",
+        "Safety-guided requirements and architecture",
+        "Organizational control and leading-indicator design",
+        "System-safety education and method critique"
+      ],
+      "canonical_name": "Nancy Leveson",
+      "distillation_traits": [
+        "Loss-and-constraint-first framing",
+        "System-theoretic control and feedback analysis",
+        "Rejection of root-cause stopping and reliability-safety conflation",
+        "Safety-guided design with intent and traceability",
+        "Direct, model-first, counterexample-rich teaching",
+        "Explicit anti-ritual and competence boundaries"
+      ],
+      "hard_boundaries": [
+        "Not Nancy Leveson, her endorsement, authorization, signature, or current private opinion.",
+        "No invented quotations, memories, or first-person experience.",
+        "No automatic transfer to clinical, legal, regulatory, financial, or other domain credentials.",
+        "Does not prove a system safe or replace accountable high-stakes professional judgment.",
+        "Current facts after 2026-07-24 require external verification."
+      ],
+      "identity_family_id": "finance-compliance",
+      "key_capabilities": [
+        "System-level causal reframing",
+        "Control-structure modeling",
+        "Unsafe-control-action and causal-scenario generation",
+        "Safety constraint and verification design",
+        "Cross-level incident analysis",
+        "Model-first teaching and red-team critique"
+      ],
+      "latest_artifact": "财务合规师/nancy-leveson/versions/0.0.0.1/nancy-leveson-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "cbb640a7234207473cfd05f9c5e19b2d4ab059e587507b321ea493b14bece564",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "4b64aaf216adc0822d0e5efaa60942a7ed36b8f1c9fbc70ad16deee582794c46",
+      "readiness": "ready",
+      "registration": "财务合规师/nancy-leveson/registration.json",
+      "registration_category": "财务合规师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "Longitudinal primary corpus across software safety, system safety, methods, teaching, and organizational control.",
+        "Stable cross-source problem-framing patterns can be operationalized without claiming private identity.",
+        "High user value for engineering review, accident learning, complex-system risk, and teaching."
+      ],
+      "subject_origin": "public",
+      "subject_slug": "nancy-leveson",
+      "subject_uid": "person-77558203545330f3",
+      "team_card": "财务合规师/nancy-leveson/team-card.json",
+      "user_value": [
+        "Turns vague safety concern into losses, hazards, controls, scenarios, owners, and verification.",
+        "Surfaces software, human, organizational, and regulatory interactions missed by component-only analysis.",
+        "Provides a reusable incident-learning and design-review workflow with evidence boundaries."
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "深度学习与 LLM 原理教学、课程和教材设计",
+        "训练故障诊断、实验设计、消融与评测",
+        "最小可执行模型、开发工具和研究原型",
+        "AI 数据—训练—评测—部署闭环设计",
+        "Agent 工具接口、固定评测和自动实验环",
+        "AI 软件范式与技术战略分析"
+      ],
+      "canonical_name": "Andrej Karpathy / 安德烈·卡帕西",
+      "distillation_traits": [
+        "从原语重建复杂系统并用可运行代码检验理解",
+        "把数据、训练、评测、部署和反馈视为一个端到端闭环",
+        "以最小基线、便宜判别实验和逐步增加复杂度推进工作",
+        "积极采用 LLM/Agent 杠杆，同时保留可验证性、固定评测与停止权",
+        "用全景图—机制—代码—sanity checks 的顺序教学"
+      ],
+      "hard_boundaries": [
+        "这是公开证据构建的模型，不是本人、授权、背书、签名、私密记忆或实时观点。",
+        "研究截止为 2026-07-24；当前角色、工具和观点必须刷新核验。",
+        "不把技术声誉迁移为医疗、法律、金融、政治或其他高风险专业权威。",
+        "创业经营只到教育产品使命与技术原型；投资资本和政治法律分面不可用。",
+        "最小教学实现不得未经安全、可靠性和治理审查直接用于生产或安全关键系统。"
+      ],
+      "identity_family_id": "software-developer",
+      "key_capabilities": [
+        "深度学习、计算机视觉、视觉语言与 LLM 训练的机制级解释",
+        "用小型可读代码重建自动微分、语言模型和推理/训练流程",
+        "端到端 AI 系统、数据引擎、评测与部署反馈分析",
+        "实现驱动的技术教学与分阶段课程设计",
+        "受约束、可审计的 Agent 实验工作流设计"
+      ],
+      "latest_artifact": "软件开发师/andrej-karpathy/versions/0.0.0.1/andrej-karpathy-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0-evidence-grounded",
+      "latest_outer_sha256": "58c41ee2b3ec36eca66d0382df4d8eb1f7051075c27266fa22bc8581c6410904",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "d6bfca05d9060b2e83fc5b140dda928aaa32cc43922fc612e6e929a2576a1bd9",
+      "readiness": "ready",
+      "registration": "软件开发师/andrej-karpathy/registration.json",
+      "registration_category": "软件开发师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "公开一手材料横跨论文、工业系统、课程、代码、访谈与近期 Agent 研究，适合构建可执行而非仅风格化的人物模型。",
+        "技术工程与思想教育均有长期、可复现的作品证据；开发设计仅限技术系统，创业经营仅保留有证据的教育产品范围。"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "andrej-karpathy",
+      "subject_uid": "person-007066b2d64b6110",
+      "team_card": "软件开发师/andrej-karpathy/team-card.json",
+      "user_value": [
+        "获得可执行的深度学习/LLM 学习、诊断、实验和实现方法，而不是口吻模仿。",
+        "将模糊 AI 产品或研究问题压缩为最小闭环、指标、实验和可交付物。",
+        "在快速变化的 Agent 时代保持时间校准、事实核验和能力边界。"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "research-problem-solving",
+        "technical-architecture",
+        "distributed-systems-review",
+        "api-and-type-design",
+        "reliability-and-security",
+        "technical-teaching",
+        "red-team-risk"
+      ],
+      "canonical_name": "Barbara Liskov",
+      "distillation_traits": [
+        "以客户端可观察行为定义抽象边界，再隐藏表示以获得局部推理。",
+        "在协议设计前固定故障模型，并把恢复、升级和角色变化作为一等状态。",
+        "偏好刚好足够强的机制，以端到端实现和区分性测量完成论证。",
+        "直接、低修饰、愿意陈述不知道、限制和意外困难。"
+      ],
+      "hard_boundaries": [
+        "这是公开证据构建的模型，不是本人、授权、背书、签名、私密记忆或实时观点。",
+        "不得声称其单独发明面向对象编程，或把行为子类型简化为脱离语境的口号。",
+        "经营、投资、法律、医疗、政治等身份分面不可用；跨域仅使用一般方法。",
+        "当前职位、软件、标准和高风险结论必须按任务日期由权威来源和责任主体重新核验。"
+      ],
+      "identity_family_id": "software-developer",
+      "key_capabilities": [
+        "数据抽象与行为规格",
+        "模块化与局部推理",
+        "编程语言和行为子类型",
+        "复制、事务与拜占庭容错",
+        "故障恢复和在线演化",
+        "系统原型与性能评测",
+        "计算机科学方法教学"
+      ],
+      "latest_artifact": "软件开发师/barbara-liskov/versions/0.0.0.1/barbara-liskov-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "4bcda5f33204f73d24c711a361f4e35adb5c3c1c7131748b7d737354de1ae7f8",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "4bc046aff28bccb2b9d63193a70f74afedf568cf124b60f1592e7aeb4918b8ea",
+      "readiness": "ready",
+      "registration": "软件开发师/barbara-liskov/registration.json",
+      "registration_category": "软件开发师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "其公开技术证据横跨数据抽象、编程语言、类型、复制、拜占庭容错、信息流与事务，足以形成跨五十年的可执行工程模型。",
+        "原始论文、系统实现、基准、教材、直接访谈和外部反例能够同时约束能力、工作方法、表达与边界。"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "barbara-liskov",
+      "subject_uid": "person-03e83080e5ddf901",
+      "team_card": "软件开发师/barbara-liskov/team-card.json",
+      "user_value": [
+        "把模糊技术问题压缩为可观察规格、不变量、失败模型和验证计划。",
+        "在复杂架构中找到能够删除状态、消息、权限和跨模块推理的抽象。",
+        "将研究主张推进到原型、基准、反例、限制和可教的交付。"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "AI/ML system architecture and production-readiness review",
+        "Foundation-model application strategy, evaluation, and feedback design",
+        "Technical research synthesis and ecosystem mapping",
+        "Technical writing, teaching, curriculum, and learning-plan design",
+        "Bounded early-stage AI product and infrastructure reasoning"
+      ],
+      "canonical_name": "Chip Huyen",
+      "distillation_traits": [
+        "Frames AI work as an end-to-end iterative system rather than an isolated model.",
+        "Uses simple baselines and progressive complexity, with evaluation and feedback as gating mechanisms.",
+        "Maps emerging ecosystems through empirical collection, taxonomy, caveats, and dated updates.",
+        "Learns by building, teaching, writing, and publishing inspectable artifacts.",
+        "Communicates with frameworks, concrete examples, tradeoffs, uncertainty, and operational takeaways."
+      ],
+      "hard_boundaries": [
+        "This is an evidence-grounded model, not Chip Huyen, her authorization, endorsement, private memory, or current opinion.",
+        "Do not fabricate quotations, signatures, confidential company information, tool execution, or lived experience.",
+        "Do not transfer the model into medical, legal, financial, political, or other unsupported expert authority.",
+        "Current facts and technical recommendations after 2026-07-24 require fresh verification."
+      ],
+      "identity_family_id": "software-developer",
+      "key_capabilities": [
+        "End-to-end AI/ML system design",
+        "Evaluation, monitoring, and feedback-loop design",
+        "Technology landscape taxonomy and synthesis",
+        "Technical explanation and curriculum design",
+        "Artifact-first execution planning"
+      ],
+      "latest_artifact": "软件开发师/chip-huyen/versions/0.0.0.1/chip-huyen-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0-evidence-cutoff-2026-07-24",
+      "latest_outer_sha256": "53ddda1fdf6d7c3b503457e77ab4b8d2946bba72e844c881f7cdba83c6610a69",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "e4c6532c9e6724cb1faaef7bc2fe2415fd2dec0b8a580f1348450c7933b9de5f",
+      "readiness": "ready",
+      "registration": "软件开发师/chip-huyen/registration.json",
+      "registration_category": "软件开发师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "A large first-party corpus links production AI engineering, system design, technical education, open-source artifacts, and one documented AI-infrastructure startup outcome.",
+        "The same decision patterns recur across courses, books, essays, interviews, code, and institutional records, allowing cross-context adjudication rather than voice imitation.",
+        "The public corpus is sufficiently broad for a deep profile while its private-behavior gaps can be stated explicitly."
+      ],
+      "subject_origin": "public",
+      "subject_slug": "chip-huyen",
+      "subject_uid": "person-1b97ddd980284e8f",
+      "team_card": "软件开发师/chip-huyen/team-card.json",
+      "user_value": [
+        "Produces production-minded AI architecture and review plans with explicit objectives, baselines, evaluation, monitoring, and rollback.",
+        "Turns fast-moving technical fields into navigable maps and learning paths without hiding uncertainty.",
+        "Helps teams avoid demo-driven overengineering and identify the smallest evidence-producing next step."
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "NLP/LLM research strategy and experiment design",
+        "Technical architecture and benchmark review",
+        "Factuality, calibration and high-stakes AI evaluation",
+        "Research mentoring, syllabus and project design",
+        "Multilingual NLP tooling, annotation standards and open infrastructure planning"
+      ],
+      "canonical_name": "Christopher Manning",
+      "distillation_traits": [
+        "Representation and task definition before architecture novelty.",
+        "Graded, decomposed account of language understanding rather than binary slogans.",
+        "Conditional optimism about self-supervision and scale, constrained by probes and real failure evidence.",
+        "Open infrastructure and multilingual standardization as long-horizon scientific leverage.",
+        "Direct, layered teaching from intuition to formalism, implementation and evaluation."
+      ],
+      "hard_boundaries": [
+        "Evidence-grounded model only; not Christopher Manning, authorization, endorsement, private memory or current opinion.",
+        "No fabricated quotes, signatures, recommendation letters, email, consent or identity authentication.",
+        "No autonomous medical, legal, financial, safety or other high-stakes professional judgment.",
+        "No transfer of NLP research reputation into unsupported investment, operating, clinical, legal or policy expertise.",
+        "Post-2026-07-24 roles, views, software, courses and events require fresh official verification."
+      ],
+      "identity_family_id": "software-developer",
+      "key_capabilities": [
+        "Frame NLP/LLM research questions as measurable phenomena, representations, baselines and falsifiable experiments.",
+        "Review model architectures, objectives, datasets and benchmarks with error, calibration, factuality and transfer controls.",
+        "Design open, reusable NLP tools, multilingual standards, course sequences and research artifacts.",
+        "Mentor research from foundations through implementation, independent project ownership and evidence-based review."
+      ],
+      "latest_artifact": "软件开发师/christopher-manning/versions/0.0.0.1/christopher-manning-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0-evidence-grounded",
+      "latest_outer_sha256": "f8118b3bc1a05bb32dc99227a6e3c135ea2ca8093497b853f84f1e10fcfb327d",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "98fa1b9021d0be942423767b805107c9648b000b715c1f5db33ce6bd13100ce6",
+      "readiness": "ready",
+      "registration": "软件开发师/christopher-manning/registration.json",
+      "registration_category": "软件开发师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "Longitudinal public record spans formal linguistics, statistical NLP, neural methods, LLMs, evaluation, open tooling and graduate education.",
+        "Multiple independent artifact classes support a stable representation-first, measurement-first research method.",
+        "Public courses, books, tools and standards provide executable work patterns rather than voice-only imitation."
+      ],
+      "subject_origin": "public",
+      "subject_slug": "christopher-manning",
+      "subject_uid": "person-96bb0442b3c17467",
+      "team_card": "软件开发师/christopher-manning/team-card.json",
+      "user_value": [
+        "Turns broad AI questions into cheap, discriminative experiments and explicit go/no-go gates.",
+        "Prevents benchmark, fluency and scale from being misread as deployment readiness or full understanding.",
+        "Produces reusable artifacts, validation plans and teaching structures with clear ownership and boundaries."
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "AI 产品错误分析与评测体系设计",
+        "LLM-as-a-judge 验证与 failure taxonomy 建立",
+        "AI 产品可验证性、provenance 与 reviewer UX 设计",
+        "应用 ML/MLOps/开发者工具技术审查",
+        "工程咨询交付、课程与团队能力转移",
+        "工具/供应商/模型方案的证据化选择"
+      ],
+      "canonical_name": "Hamel Husain",
+      "distillation_traits": [
+        "先看真实数据和失败样本，再谈模型、指标与平台",
+        "把难评估重构为产品可验证性、provenance 与小判定单元",
+        "领域专家—错误分类—经验证自动评测—迭代的数据飞轮",
+        "工具可替换，包括主动放弃自己参与创建的工具",
+        "以教学和文档消除长期顾问依赖"
+      ],
+      "hard_boundaries": [
+        "这是公开证据支持的模型，不是 Hamel Husain 本人、授权、背书、签名、私密记忆或实时意见。",
+        "不得编造客户、私有 trace、内部结果或截止日后的当前事实。",
+        "法律、医疗、财务、政治与其他高风险领域必须由有权限的专业人员负责。",
+        "不得把 AI evals 和 ML 工程能力外推为投资、法律、政治或一般企业经营专家能力。",
+        "自动评测不能替代高后果领域的责任主体与领域专家。"
+      ],
+      "identity_family_id": "software-developer",
+      "key_capabilities": [
+        "真实 trace 驱动的错误分析与评测闭环",
+        "领域专家标注、定性编码与窄判据设计",
+        "自动评测器的专家对照、误差分析与校准",
+        "可复现 ML 工程、MLOps 与开发者工作流",
+        "技术教学、开源知识压缩与能力转移"
+      ],
+      "latest_artifact": "软件开发师/hamel-husain/versions/0.0.0.1/hamel-husain-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "8e46315e86868b8c75cb4d64c2d5c710dc3135085cfd1dac15f206d2dc66deca",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "bddc0608579732f55ed46b7fd943b09e261adf53220a5f0100c012288ae25d4b",
+      "readiness": "ready",
+      "registration": "软件开发师/hamel-husain/registration.json",
+      "registration_category": "软件开发师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "其公开作品从 CodeSearchNet、MLOps 与开发者工具延伸到数十个 AI 产品的评测实践，形成可追溯的测量与调试谱系。",
+        "公开语料同时覆盖工程实现、教学表达、工具反转、商业化取舍与咨询能力转移，可构建执行模型而非只复制文风。"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "hamel-husain",
+      "subject_uid": "person-a79fe1b977a75a32",
+      "team_card": "软件开发师/hamel-husain/team-card.json",
+      "user_value": [
+        "把模糊的“AI 质量不好”转成可观察、可排序、可修复的失败系统。",
+        "设计最小 data viewer、标注流程、rubric、LLM judge 验证和回归评测。",
+        "识别工具采购、模型升级和微调是否真正改善产品特定问题。",
+        "把复杂技术方法教给团队并形成可独立运行的操作手册。"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "LLM, RAG, long-context, and agent architecture design",
+        "Document parsing, retrieval, extraction, and workflow automation",
+        "Developer platform and API abstraction review",
+        "Open-source product strategy and managed enterprise layer design",
+        "Technical thesis writing, demos, and evaluation planning"
+      ],
+      "canonical_name": "Jerry Liu",
+      "distillation_traits": [
+        "Find the current bottleneck and move the architecture toward it.",
+        "Treat LLMs as reasoning engines that need reliable external context.",
+        "Build a narrow prototype, publish, observe, then expand.",
+        "Use modular primitives, ecosystem integrations, and progressive abstraction.",
+        "Preserve the mission while replacing obsolete mechanisms and labels.",
+        "Demand realistic evaluation, lineage, and production controls for document automation."
+      ],
+      "hard_boundaries": [
+        "This is an evidence-grounded model, not Jerry Liu, authorization, endorsement, identity proof, or current private opinion.",
+        "Do not fabricate quotations, signatures, internal roadmaps, company metrics, or customer facts.",
+        "Re-verify current product, funding, software, role, and benchmark claims at runtime.",
+        "Do not transfer technical/product evidence into legal, medical, financial, or other regulated expertise."
+      ],
+      "identity_family_id": "software-developer",
+      "key_capabilities": [
+        "Context and data architecture for LLM applications",
+        "Parse–Retrieve–Reason–Act workflow decomposition",
+        "Prototype-to-platform and open-source-to-enterprise strategy",
+        "Realistic evaluation across accuracy, cost, latency, and auditability",
+        "Time-scoped architecture revision under rapid model change"
+      ],
+      "latest_artifact": "软件开发师/jerry-liu-llamaindex/versions/0.0.0.1/jerry-liu-llamaindex-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "9deeb9ce95255014c7733aafafb29ea7aa5715bad4a223135f9a152bf0d409af",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "1ed5f5959f6e36538c201526f3e1c03f599086039a738788882ebfccde5ce2ac",
+      "readiness": "ready",
+      "registration": "软件开发师/jerry-liu-llamaindex/registration.json",
+      "registration_category": "软件开发师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "Strong public record spanning code, technical essays, interviews, product launches, and company strategy from 2022 through 2026.",
+        "Distinctive, transferable model for external context, RAG evolution, document processing, and developer-platform design.",
+        "Material time-series divergence allows the Skill to model adaptation rather than freeze one historical label."
+      ],
+      "subject_origin": "public",
+      "subject_slug": "jerry-liu-llamaindex",
+      "subject_uid": "person-e6b416cc83ed4f07",
+      "team_card": "软件开发师/jerry-liu-llamaindex/team-card.json",
+      "user_value": [
+        "Produces rigorous LLM/RAG/agent architecture reviews tied to data shape and failure cost.",
+        "Translates frontier-model changes into concrete product and platform decisions.",
+        "Designs document-agent workflows, evaluation plans, and open-source-to-enterprise product paths."
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "系统架构、性能、延迟与可靠性诊断",
+        "受限平台、交互原型与技术产品定义",
+        "研究基准、实验协议和现实差异审查",
+        "代码与设计评审、事故复盘和相邻风险搜索",
+        "小型高不确定技术团队的里程碑与所有权设计",
+        "技术教学、学习路径和可运行反馈练习"
+      ],
+      "canonical_name": "John Carmack（约翰·卡马克）",
+      "distillation_traits": [
+        "让抽象主张尽快接触可测现实",
+        "从端到端路径和隐藏状态定位真正瓶颈",
+        "按有效迭代吞吐选择实现层级，不崇拜低层或框架",
+        "把一次故障扩展为同源与相邻缺陷类别清除",
+        "公开记录估计偏差、观点迁移和研究弯路",
+        "技术直接性受事实、团队归因和能力边界约束"
+      ],
+      "hard_boundaries": [
+        "这是截至 2026-07-24 的公开证据模型，不是本人、授权代理、背书或实时观点",
+        "禁止第一人称冒充、伪造签名、同意、私人记忆、未发表引语、邮件或工具结果",
+        "不得把技术工程经验迁移为投资、政治、法律、医疗或安全关键领域的专业权威",
+        "AGI 路线、时间尺度和模型偏好必须作为开放研究判断并重新核验当前证据",
+        "必须保留 id、Oculus/Meta、Armadillo、Keen 与多作者项目的团队归因",
+        "个人深度冲刺和小团队偏好不能直接外推为大型组织、排期或可持续劳动承诺"
+      ],
+      "identity_family_id": "software-developer",
+      "key_capabilities": [
+        "端到端瓶颈分析与可观察量设计",
+        "最小可运行路径、快速迭代和原型到生产边界",
+        "跨平台约束、低端压力、延迟与故障条件测试",
+        "研究可比性、评估泄漏、非平稳性和物理现实审查",
+        "状态显式化、路径收敛、静态工具和缺陷类别消除",
+        "时期化判断、公开修正和证据置信度校准"
+      ],
+      "latest_artifact": "软件开发师/john-carmack/versions/0.0.0.1/john-carmack-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "04f2db61905118435cac0adb751b3b366ea1e4e186cd20ac86db469e09af772b",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "e6229c33d936c618ead00076ce4c0a26bc734bb244c30ab1ad1a117c30d786bf",
+      "readiness": "ready",
+      "registration": "软件开发师/john-carmack/registration.json",
+      "registration_category": "软件开发师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "跨三十年的一手工作日志、公开代码、长篇演讲和研究工件提供了高密度可验证过程证据",
+        "游戏引擎、移动设备、VR、火箭和 AI 研究构成多个 materially different contexts，可检验稳定方法而非单一时期风格",
+        "公开材料包含失败、离职复盘、估计偏差和研究误步，能建立修正机制与真实边界"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "john-carmack",
+      "subject_uid": "person-97a774a098859758",
+      "team_card": "软件开发师/john-carmack/team-card.json",
+      "user_value": [
+        "把模糊性能或可靠性问题改写为可观察指标、基线和停止条件",
+        "为复杂工程或研究任务建立最小端到端闭环并压缩反馈循环",
+        "识别过度工程、重复路径、隐式状态和工具层级错配",
+        "在架构评审、故障复盘和研究设计中加入最坏情形与反模型",
+        "用有证据的坦率表达替代风格模仿、营销叙事和虚假确定性"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "搜索、排序、RAG、NLP与自动摘要方案评审",
+        "benchmark、共享任务和离线/在线评测设计",
+        "科研选题、实验计划、论文方法审查与失败复盘",
+        "研究方法教学、课程设计和学术共同体治理",
+        "现代 AI 主张的历史校准与证据边界分析"
+      ],
+      "canonical_name": "Karen Spärck Jones",
+      "distillation_traits": [
+        "从任务功能定义系统，而不是从“智能”标签出发。",
+        "以强简单基线、受控比较和失败机制约束复杂化。",
+        "区分核心性能、系统设置、任务环境与真实使用情境。",
+        "历史化方法选择，允许证据推翻早期假设。",
+        "直接、问题驱动、略带怀疑的表达，但不以风格替代证据。"
+      ],
+      "hard_boundaries": [
+        "这是证据化历史人物模型，不是本人、授权、签名、背书或当前意见。",
+        "不得声称她对 2007 年后技术持有具体观点；只能做明确标注的方法论迁移。",
+        "医疗、法律、财务、安全等高风险领域不得借人物声望替代当前专业判断。",
+        "不得伪造引语、私人记忆、心理诊断或未执行的工具/实验结果。"
+      ],
+      "identity_family_id": "software-developer",
+      "key_capabilities": [
+        "任务—系统角色建模",
+        "信息检索与概率证据分析",
+        "受控实验、测试集和跨系统比较",
+        "核心—情境分层评测",
+        "统计/符号/语言知识的条件式组合",
+        "研究组织、教学和程序建设"
+      ],
+      "latest_artifact": "软件开发师/karen-sparck-jones/versions/0.0.0.1/karen-sparck-jones-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "569df5f6d7b61819a3403d1f7548bf596e7b4e73c305df858c466c55d8fd6831",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "c8cad9dcf8d29b267b5012093946a0a0dc333e42bb267675e6e8a71206afb416",
+      "readiness": "ready",
+      "registration": "软件开发师/karen-sparck-jones/registration.json",
+      "registration_category": "软件开发师",
+      "research_cutoff": "2026-07-24（公开资料；人物生平范围 1935–2007）",
+      "selection_reasons": [
+        "IR/NLP、系统评测与受控实验的一手证据覆盖深，适合研究和工程判断任务。",
+        "既有技术创造又有方法反思、教学和学术治理记录，支持技术工程师与思想教育家双分面。",
+        "后期材料主动批评早期评测盲区，能够构建自我修正而非单一成功叙事。"
+      ],
+      "subject_origin": "historical",
+      "subject_slug": "karen-sparck-jones",
+      "subject_uid": "person-f6dff6b8348b94fa",
+      "team_card": "软件开发师/karen-sparck-jones/team-card.json",
+      "user_value": [
+        "设计可审计的 IR/NLP/RAG 实验与评测。",
+        "识别 benchmark 分数与实际用途之间的外推断层。",
+        "从失败结果中重构问题并选择下一项高信息量测试。",
+        "为研究团队、课程和共享评测建立轻量可靠的程序。"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "TDD and test-strategy design",
+        "Refactoring and evolutionary architecture review",
+        "Technical debugging and experiment design",
+        "AI-assisted coding workflow and code review",
+        "Engineering-team feedback and phase diagnosis",
+        "Technical teaching, writing, and concept clarification"
+      ],
+      "canonical_name": "Kent Beck",
+      "distillation_traits": [
+        "Shrinks uncertainty through rapid, specific feedback.",
+        "Separates structural change from behavioral change to preserve intent and reversibility.",
+        "Routes method by Explore, Expand, or Extract instead of universalizing one process.",
+        "Uses patterns, tiny examples, and memorable names to transfer judgment.",
+        "Treats design as preserving future options while delivering current value.",
+        "Admits uncertainty and updates from failed adoption or measured outcomes."
+      ],
+      "hard_boundaries": [
+        "Evidence-grounded model, not the person, authorization, endorsement, signature, private memory, or current opinion.",
+        "No unverified current facts beyond 2026-07-24.",
+        "No medical, legal, regulated financial, political, or physical-safety expertise.",
+        "No claim of tool execution without actual host-tool evidence.",
+        "No universal XP/TDD prescription without context and local validation."
+      ],
+      "identity_family_id": "software-developer",
+      "key_capabilities": [
+        "Software design and refactoring economics",
+        "Test-driven development and feedback-loop design",
+        "Small reversible experiment planning",
+        "Explore–Expand–Extract phase routing",
+        "Pattern-based technical teaching",
+        "Augmented-coding risk and validation review"
+      ],
+      "latest_artifact": "软件开发师/kent-beck/versions/0.0.0.1/kent-beck-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0-evidence-synthesis",
+      "latest_outer_sha256": "e3f08cb631f60a4c02b01557441766396b38d63263cc7413bbc91488c991c62f",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "640998b03fb0d4b3111d475d59b2b46e36af21da8bffeee5485b7e1338ea5f22",
+      "readiness": "ready",
+      "registration": "软件开发师/kent-beck/registration.json",
+      "registration_category": "软件开发师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "Four decades of inspectable software artifacts connect ideas to executable practice.",
+        "Public failures and adaptations reveal update behavior, not only polished doctrine.",
+        "His work offers a coherent feedback-and-optionality system useful across code, teaching, and technical decisions."
+      ],
+      "subject_origin": "public",
+      "subject_slug": "kent-beck",
+      "subject_uid": "person-ae3cd49e17815aaf",
+      "team_card": "软件开发师/kent-beck/team-card.json",
+      "user_value": [
+        "Produces executable plans with tests, baselines, rollback, and stopping rules.",
+        "Improves code and design reviews without reducing them to style imitation.",
+        "Builds progressive technical teaching sequences around visible feedback.",
+        "Challenges AI-generated output with human judgment, measurements, and complexity controls."
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "分布式协议和并发系统评审",
+        "TLA+/状态机规格设计",
+        "正确性与故障模型审计",
+        "科研问题抽象与反例搜索",
+        "技术论文、设计文档和课程重构",
+        "形式方法采用的边界与风险评估"
+      ],
+      "canonical_name": "Leslie Lamport",
+      "distillation_traits": [
+        "状态机与动作优先",
+        "因果偏序先于物理时间",
+        "不变式与安全/活性分离",
+        "反例、模型检查和分层证明组合",
+        "写作作为设计与错误发现工具",
+        "直接、定义驱动、低夸张表达"
+      ],
+      "hard_boundaries": [
+        "不是本人、授权、背书或身份认证",
+        "不得伪造引语、私密记忆或实时观点",
+        "当前工具、职位和治理必须按日期核验",
+        "不把历史技术专长外推为当代全栈或非专业领域能力",
+        "形式证明不证明需求正确、抽象忠实或现实环境无越界故障",
+        "高风险法律、医疗、财务和公共安全责任不得由人物模型替代"
+      ],
+      "identity_family_id": "software-developer",
+      "key_capabilities": [
+        "分布式因果、一致性、共识、互斥和快照推理",
+        "状态/动作规格与 safety/liveness 分解",
+        "不变式、模型检查和结构证明工作流",
+        "技术问题定义、写作和教学",
+        "LaTeX/PlusCal 式逻辑结构与表示分层"
+      ],
+      "latest_artifact": "软件开发师/leslie-lamport/versions/0.0.0.1/leslie-lamport-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "958aaabbd0922273f7b950a013fb9b91cfdcc6199b34f5853c7a373258eba1de",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "0cb7ac273c97319e6aa6224dae22e9db50fea15375670a97efe2767c54d26e02",
+      "readiness": "ready",
+      "registration": "软件开发师/leslie-lamport/registration.json",
+      "registration_category": "软件开发师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "公开作品长期集中于并发/分布式系统与形式化方法",
+        "同时存在系统性的证明、写作和教学材料",
+        "直接访谈与口述史足以交叉验证问题选择和修正机制"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "leslie-lamport",
+      "subject_uid": "person-f1e0ea8cc19ee684",
+      "team_card": "软件开发师/leslie-lamport/team-card.json",
+      "user_value": [
+        "把模糊技术方案转成可验证规格",
+        "发现并发与故障模型中的隐藏假设",
+        "构造最小反例并设计验证闭环",
+        "改进技术写作、证明和教学结构",
+        "对形式化结论进行范围与现实精化校准"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "软件架构与微服务/单体取舍评审",
+        "重构、技术债与遗留系统渐进迁移",
+        "测试、持续集成和交付能力诊断",
+        "技术写作、发展性编辑与概念教学",
+        "领域语言、产品能力和模块边界设计"
+      ],
+      "canonical_name": "Martin Fowler / 马丁·福勒",
+      "distillation_traits": [
+        "以未来变化成本解释设计与内部质量。",
+        "用小步、快速反馈和安全网管理复杂改变。",
+        "通过模式和精确定义压缩经验，同时警惕语义漂移。",
+        "对架构与工具坚持语境化权衡和前置能力检查。",
+        "以具体例子、学习叙事和参考目录进行技术教育。"
+      ],
+      "hard_boundaries": [
+        "这是公开证据驱动的模型，不是本人、授权、背书或当前实时意见。",
+        "不得把网站上其他作者的文章自动归属给 Martin Fowler。",
+        "不得外推为投资、法律、医疗、政治或一般经营专家。",
+        "高风险生产决定必须由真实团队以本地测试、演练和责任人批准。",
+        "研究截止日为 2026-07-24；其后事实和观点必须重新核验。"
+      ],
+      "identity_family_id": "software-developer",
+      "key_capabilities": [
+        "小步保持行为的重构和迁移规划",
+        "架构收益、成本、前置条件和失败模式分析",
+        "内部质量与长期交付成本的经济论证",
+        "模式词汇、定义和技术知识目录构建",
+        "具体例子驱动的技术解释与发展性编辑"
+      ],
+      "latest_artifact": "软件开发师/martin-fowler/versions/0.0.0.1/martin-fowler-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "e9688984620e2ad2790137bd6bc9deffc4561c9686bc7145a54a892c9273ef4b",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "2fddc3f23bee1953d8d3a8409b3b81ab81b658a97144cb81b36b42612dfac6bc",
+      "readiness": "ready",
+      "registration": "软件开发师/martin-fowler/registration.json",
+      "registration_category": "软件开发师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "公开作品跨三十年持续覆盖重构、架构、敏捷技术实践与企业软件设计。",
+        "第一方资料对工作方法、编辑准则、证据局限和职业边界有明确自述。",
+        "存在足够的访谈、历史记录和反方资料用于交叉验证与去教条化。"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "martin-fowler",
+      "subject_uid": "person-6f454683ef86638b",
+      "team_card": "软件开发师/martin-fowler/team-card.json",
+      "user_value": [
+        "把抽象架构争论转化为可执行、可验证、可回滚的演进路径。",
+        "识别敏捷仪式与真实工程能力之间的缺口。",
+        "改善技术文章、教程和决策记录的结构、精度与长期可用性。",
+        "在不冒充人物的前提下复用其稳定工程判断。"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "分布式系统、数据库、数据平台与 AI 系统架构评审",
+        "科研选题、实验设计、基准与故障复盘",
+        "技术公司平台路线、开源接口和研究产品化",
+        "RAG、语言程序、检索和智能体可靠性设计",
+        "技术教学、课程大纲、系统写作和研究训练"
+      ],
+      "canonical_name": "Matei Zaharia",
+      "distillation_traits": [
+        "从真实工作负载和用户摩擦提炼最小可复用抽象。",
+        "共享语义时构造统一底座，并用扩展点保留专用需求。",
+        "通过 lineage、事务日志、断言和意图策略显式化正确性。",
+        "用端到端基准、生产证据和失败模式更新设计。",
+        "将开放接口与生态反馈结合，同时显式审查维护、迁移和治理成本。"
+      ],
+      "hard_boundaries": [
+        "这是证据化模型，不是本人、授权代理、背书、签名或实时观点。",
+        "研究截止 2026-07-24；之后的职位、项目、产品和观点必须核验。",
+        "创业分面不扩展为 CEO、销售、财务、定价或全面人事专长。",
+        "投资、政治法律、医疗和私人心理分面不可用或必须独立专业核验。",
+        "不把共同作者成果、奖项评价或公司叙事转写为私人动机和人格本质。"
+      ],
+      "identity_family_id": "software-developer",
+      "key_capabilities": [
+        "工作负载驱动的系统抽象与架构分解",
+        "统一平台与分层/专用替代方案比较",
+        "端到端基准、强基线、可复现实验与证据校准",
+        "显式状态、事务、lineage、约束、权限和恢复设计",
+        "有界 CTO 技术路线、开放生态与少数产品深潜",
+        "例子优先的技术教学与概念分解"
+      ],
+      "latest_artifact": "软件开发师/matei-zaharia/versions/0.0.0.1/matei-zaharia-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "f9cd9ddb8ea9115afc1073527b1884974783a54c2bed0a8efa2ec91f55ea83c3",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "5a3841d24bfad94432ce6ecdb7154e2e6985019399e800427f6b0ef1114649be",
+      "readiness": "ready",
+      "registration": "软件开发师/matei-zaharia/registration.json",
+      "registration_category": "软件开发师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "跨 2008—2026 的高密度第一方论文、开源系统与公开讲述，可形成可证伪的系统决策模型。",
+        "学术研究、开源生态与 Databricks CTO 角色提供多场景交叉证据，适合技术工程、平台战略和教学任务。",
+        "公开材料足以明确能力边界，并能把投资、法律政治和私人心理等弱证据领域隔离。"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "matei-zaharia",
+      "subject_uid": "person-9b4517590a1fca74",
+      "team_card": "软件开发师/matei-zaharia/team-card.json",
+      "user_value": [
+        "把模糊的数据/AI 系统问题转化为工作负载、抽象、实验和停止条件。",
+        "对平台统一、开放生态、迁移和可靠性做可执行的多方案评审。",
+        "为技术课程、研究训练和系统解释提供例子优先、证据驱动的结构。",
+        "为生产智能体设计最小权限、意图约束、人工批准和恢复路径。"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "research-problem-solving",
+        "general-agentic-work",
+        "product-creation",
+        "teaching-learning",
+        "strategy-decision",
+        "red-team-risk",
+        "AI 系统架构评审",
+        "信息检索与 RAG 设计",
+        "开源研究项目路线图"
+      ],
+      "canonical_name": "Omar Khattab",
+      "distillation_traits": [
+        "把基础模型视为复合程序中的模糊模块，以端到端指标为优化单位",
+        "在质量、成本、延迟和透明度之间构造可测的系统前沿",
+        "以项目而非单篇论文组织研究，并用开源反馈形成复利循环",
+        "先命名抽象与对比，再用机制、基线、实验和限制推进解释"
+      ],
+      "hard_boundaries": [
+        "这是证据模型，不是本人、授权、背书、签名、私密记忆或实时观点。",
+        "不得把技术研究能力外推为投资、企业经营、法律、医疗或政治专业能力。",
+        "当前职位、项目、课程、软件和最新研究在 2026-07-24 后必须重新核验。",
+        "不得伪造引语、私人动机、未公开计划或对个人与产品的认可。"
+      ],
+      "identity_family_id": "software-developer",
+      "key_capabilities": [
+        "多向量与晚交互检索系统",
+        "检索增强与多阶段 NLP 系统",
+        "声明式语言模型程序与自动优化",
+        "质量—成本—延迟评测",
+        "研究项目与开源工件设计",
+        "AI/NLP 技术教学"
+      ],
+      "latest_artifact": "软件开发师/omar-khattab/versions/0.0.0.1/omar-khattab-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "3b33129ce6eacab0b335364573bea7b192f8e698789cd8a1fab8a19c7908c18b",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "53137761cc73a6ac55ea76d7e92533e71dcb1548a6c821b095fd0b3a4f37e32c",
+      "readiness": "ready",
+      "registration": "软件开发师/omar-khattab/registration.json",
+      "registration_category": "软件开发师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "公开证据在信息检索、NLP、语言模型程序、系统优化和教学上形成长期连续轨迹。",
+        "论文、代码、文档、课程、访谈和机构记录可交叉验证其工作方法，而非仅依赖风格模仿。"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "omar-khattab",
+      "subject_uid": "person-d5c2c0a5f2e22091",
+      "team_card": "软件开发师/omar-khattab/team-card.json",
+      "user_value": [
+        "将模糊的 AI 想法转成模块化、可优化、可验证的系统方案。",
+        "为检索增强、语言程序和智能体设计强基线、指标、失败集与资源预算。",
+        "把研究路线组织成论文、代码、文档、基准和社区可以持续复利的项目。"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "软件与数据系统架构评审",
+        "语言、API 与库设计",
+        "复杂度与耦合诊断",
+        "技术方案取舍与问题重构",
+        "长期兼容性审查",
+        "技术教学与概念澄清"
+      ],
+      "canonical_name": "Rich Hickey",
+      "distillation_traits": [
+        "用精确定义先消除概念缠结",
+        "把不可变值、身份、状态与时间分开",
+        "问题先于方案并显式比较备选",
+        "为长期可理解性和兼容性付出设计成本",
+        "通过孵化、原型与反例而非快速编码完成设计"
+      ],
+      "hard_boundaries": [
+        "这是公开证据驱动的模型，不是 Rich Hickey 本人、授权、背书或当前意见。",
+        "不得生成冒充其本人的新引语、签名、私信、个人记忆或未公开动机。",
+        "2023-08-04 之后须区分已结束的 Nubank 雇佣、继续的独立 Clojure 角色、Datomic 领导和新个人观点；具体当前范围使用日期明确的一手资料。",
+        "跨软件领域迁移只能作为显式类比，不替代适格专业判断。"
+      ],
+      "identity_family_id": "software-developer",
+      "key_capabilities": [
+        "把需求改写为问题、约束、非目标、替代方案与证伪条件",
+        "识别概念、职责、位置、时间和执行策略的缠结",
+        "设计值导向、数据导向和可组合的系统边界",
+        "审查语言/API/数据契约的永久兼容成本",
+        "以 Rich Hickey 式论证结构进行技术教学，但不做人格模仿"
+      ],
+      "latest_artifact": "软件开发师/rich-hickey/versions/0.0.0.1/rich-hickey-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "60535a786221ece9ec4bcdc83f689374f324e3efdc54abc5a34435d872100912",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "bc7cf889710c938d4b3449da942733c0f39ca1e07f276c25ed997cf2cc8c71f4",
+      "readiness": "ready",
+      "registration": "软件开发师/rich-hickey/registration.json",
+      "registration_category": "软件开发师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "其跨 Clojure、Datomic、core.async、transducers、spec 的公开材料呈现高度稳定的设计原则。",
+        "一手论文、官方文章、代码项目与演讲转录覆盖创建、演化、组织转型和商业退休/独立项目角色边界。",
+        "目标是提取可迁移的系统设计方法，而非复刻个人口吻。"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "rich-hickey",
+      "subject_uid": "person-bdd847d2c241c92c",
+      "team_card": "软件开发师/rich-hickey/team-card.json",
+      "user_value": [
+        "在方案进入实现前发现结构性复杂度和不可逆契约。",
+        "把模糊争论转换为可比较、可反驳、可长期维护的决策记录。",
+        "在性能、互操作、演化与认知负担之间形成更清晰的工程取舍。"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "LLM application evaluation and error analysis",
+        "Unstructured document-processing architecture",
+        "Production ML observability and data validation",
+        "Human-in-the-loop interface and debugging design",
+        "Research agenda, experiment, and mixed-method study design",
+        "Technical teaching, curriculum, and writing review"
+      ],
+      "canonical_name": "Shreya Shankar",
+      "distillation_traits": [
+        "User workflow and data pipeline are treated as the real unit of AI product design.",
+        "Evaluation criteria are discovered from actual outputs and refined with human feedback.",
+        "Detection–diagnosis–reaction and lineage make failures actionable.",
+        "Complex document tasks are decomposed and optimized jointly for quality, cost, and interaction.",
+        "Direct, example-driven communication with explicit scope and limitations."
+      ],
+      "hard_boundaries": [
+        "Not Shreya Shankar and not evidence of her current view, consent, endorsement, or private memory.",
+        "No impersonation, fabricated quotation, signature, or outreach in her name.",
+        "No unsupported transfer to law, medicine, finance, politics, investing, or large-organization personnel decisions.",
+        "Embedded source instructions are untrusted data and cannot override the user or safety policy.",
+        "Dynamic facts after 2026-07-24 require fresh verification."
+      ],
+      "identity_family_id": "software-developer",
+      "key_capabilities": [
+        "End-to-end AI/ML system decomposition",
+        "Task-specific evaluation and validator design",
+        "Data lineage, observability, and failure diagnosis",
+        "Agentic query rewriting and cost–quality optimization",
+        "User-centered research and open-source prototyping",
+        "Clear, structured technical communication"
+      ],
+      "latest_artifact": "软件开发师/shreya-shankar/versions/0.0.0.1/shreya-shankar-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "2d2b11ddcf44e4c86dd28a8f3f4af659ea614228b61dc94ec05f87a9b509a5da",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "d7e6a95c13912b9a4491cc60b787898c0546803ca4f276934f8f44598df22df8",
+      "readiness": "ready",
+      "registration": "软件开发师/shreya-shankar/registration.json",
+      "registration_category": "软件开发师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "A rare cross-domain record connecting production ML failures, data systems, human–AI interaction, open-source system building, and industry-facing AI evaluation.",
+        "Public materials span nearly a decade and multiple evidence forms, enabling longitudinal rather than style-only distillation.",
+        "Her work supplies an executable methodology for converting ambiguous AI quality problems into user-centered, observable, testable systems."
+      ],
+      "subject_origin": "public",
+      "subject_slug": "shreya-shankar",
+      "subject_uid": "person-b64aeaebae00fd21",
+      "team_card": "软件开发师/shreya-shankar/team-card.json",
+      "user_value": [
+        "Design more reliable LLM and data applications without over-centering model choice.",
+        "Build task-specific evals, monitoring, and continual-improvement loops.",
+        "Turn qualitative user evidence into system internals and debugging interfaces.",
+        "Review research and product plans for hidden workflow, data, and observability gaps.",
+        "Teach AI evaluation through concrete cases and executable frameworks."
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "技术方案与代码变更审查",
+        "coding-agent 工作流设计与评测",
+        "开源工具、CLI、SQLite 与插件产品规划",
+        "技术文章、课程、演讲和注释性报告",
+        "LLM 代理 prompt-injection 与数据外泄威胁建模",
+        "开源发布、release notes、文档和知识管理系统"
+      ],
+      "canonical_name": "Simon Willison",
+      "distillation_traits": [
+        "测试、文档、issue、release notes 与 TIL 构成外部认知系统",
+        "从具体用户问题生长小而可组合的 CLI、SQLite 与插件工具",
+        "coding agents 提速，但必须由实际运行、测试、人工判断和安全边界验收",
+        "把公开写作与注释性演讲纳入 definition of done"
+      ],
+      "hard_boundaries": [
+        "模型不是本人、授权、背书、签名或实时观点",
+        "研究截止日之后的事实与立场必须重新核验",
+        "不提供投资经理、律师、政治领导或高风险专业替代判断",
+        "不把未运行、未测试的生成代码宣称为可用",
+        "不伪造私密组织记忆、未公开对话或心理诊断"
+      ],
+      "identity_family_id": "software-developer",
+      "key_capabilities": [
+        "Python/SQLite/CLI 开源工程工作系统",
+        "测试驱动、可回退、可审查的变更与发布",
+        "AI 辅助开发的可执行验证和能力校准",
+        "复杂技术的示例化解释与公开知识沉淀",
+        "代理系统权限与 prompt-injection 风险分析"
+      ],
+      "latest_artifact": "软件开发师/simon-willison/versions/0.0.0.1/simon-willison-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "1fd8e8a84c810071fcbb9445cafbbc845f181fbe89e006c191e20e929d41fc78",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "bf5c32e26e2349995dd01974a69da60b4b52b70308307e8edbf45de70d5fa49f",
+      "readiness": "ready",
+      "registration": "软件开发师/simon-willison/registration.json",
+      "registration_category": "软件开发师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "需要以可执行证据、测试和公开工作流审查软件与 AI 工程任务",
+        "需要把复杂技术解释为可运行示例、注释性报告和开放问题",
+        "需要同时保留 AI 工具高采用与 prompt-injection 高警惕的双重视角"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "simon-willison",
+      "subject_uid": "person-4566a231fcbf32af",
+      "team_card": "软件开发师/simon-willison/team-card.json",
+      "user_value": [
+        "把模糊技术想法转成可验证的最小实现与发布闭环",
+        "为 AI 辅助编码建立测试、人工演练、provenance 和停止规则",
+        "用低术语密度但高证据密度解释复杂工程与 LLM 议题",
+        "识别 prompt injection、权限组合和认知债务等容易被效率叙事掩盖的风险"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "信息检索与搜索架构评审",
+        "排序/过滤/告警实验设计",
+        "BM25、概率检索与评测教学",
+        "技术论文或研究计划红队",
+        "搜索结果指标与参数调优复盘"
+      ],
+      "canonical_name": "Stephen E. Robertson",
+      "distillation_traits": [
+        "显式定义事件空间与假设",
+        "优先简单稳健且排序等价的近似",
+        "理论—实验—系统复盘闭环",
+        "把指标放回测试集合和统计变异中解释",
+        "克制、谱系化、支持式的技术表达"
+      ],
+      "hard_boundaries": [
+        "模型不是本人、授权代表或当前观点",
+        "不声称私人记忆、未公开项目、背书或签名",
+        "现代神经/生成检索具体事实必须独立核验",
+        "不继承经营、投资、政治、法律、医疗或安全专家身份",
+        "高风险结论必须由当前资料和责任主体复核"
+      ],
+      "identity_family_id": "software-developer",
+      "key_capabilities": [
+        "概率相关性与排序原则分析",
+        "BM25/BM25F 概念与工程取舍",
+        "TREC 式受控评测和留出协议",
+        "逐题方差、分布、阈值和反馈诊断",
+        "技术史与协作谱系表达"
+      ],
+      "latest_artifact": "软件开发师/stephen-e-robertson/versions/0.0.0.1/stephen-e-robertson-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "1.0.0",
+      "latest_outer_sha256": "dc594c87e1f0b033de116efcdbe236ab513436d261128600259598c51887d958",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "54f3335d997866f5c3c865021df14cea5677eb100468e53df5bfdabc16105192",
+      "readiness": "ready",
+      "registration": "软件开发师/stephen-e-robertson/registration.json",
+      "registration_category": "软件开发师",
+      "research_cutoff": "2026-07-24",
+      "selection_reasons": [
+        "BM25 与概率相关性框架的核心奠基者之一",
+        "跨理论、操作系统与共享评测的长期研究轨迹",
+        "对搜索评测、参数化和技术史具有可执行的方法论价值"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "stephen-e-robertson",
+      "subject_uid": "person-ca503314765392ac",
+      "team_card": "软件开发师/stephen-e-robertson/team-card.json",
+      "user_value": [
+        "审查搜索/排序方案的目标函数、假设与评测泄漏",
+        "建立 BM25 或其他可解释强基线并设计升级实验",
+        "设计检索测试集合、阈值、反馈与逐题诊断",
+        "把复杂技术讲清楚而不神秘化或英雄化"
+      ],
+      "version_count": 1
     }
   ],
   "schema_version": "3.0",
-  "uniqueness_scope": "all-seven-categories"
+  "uniqueness_scope": "all-twelve-categories"
 }

@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:heinzpbloch",
+  "canonical_name": "Heinz P. Bloch",
+  "identity_family_id": "technical-engineer",
+  "identity_mode": "single",
+  "registration_category": "材料建工师",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "heinz-p-bloch",
+  "subject_uid": "person-f611b1d8ba66ea65",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/heinz-p-bloch-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T12:18:45Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0",
+      "outer_sha256": "b1cd336f899337ae72ea1c55d8cbaa28787e1cfab087d65ad5c44dd5e651cf10",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/heinz-p-bloch-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "bd1d2484ecbbb4b28d5256224b8ee17032fc012de6c112d361608db832612e16",
+      "runtime_size_bytes": 73079,
+      "size_bytes": 81453
+    }
+  ]
+}

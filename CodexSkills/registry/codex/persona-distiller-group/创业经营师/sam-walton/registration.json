@@ -1,0 +1,26 @@
+{
+  "canonical_key": "historical:samwalton",
+  "canonical_name": "Sam Walton",
+  "identity_family_id": "entrepreneur-operator",
+  "identity_mode": "single",
+  "registration_category": "创业经营师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "sam-walton",
+  "subject_uid": "person-9f318f968e420d53",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/sam-walton-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T00:00:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0",
+      "outer_sha256": "87977eef99fca19becfa49c815e5aa5e26595e4ba36c94b376d5e43d470fb228",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/sam-walton-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "756327b1f3b4d3b21992d0978bcad2669520609fe2ad6624e25c8eec15d5a20c",
+      "runtime_size_bytes": 64129,
+      "size_bytes": 440643
+    }
+  ]
+}

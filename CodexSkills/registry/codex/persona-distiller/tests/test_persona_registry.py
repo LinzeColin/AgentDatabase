@@ -96,15 +96,7 @@ def create_product_zip(
             archive.writestr(f'{top}/{relative}', content)
         archive.writestr(f'{top}/checksums.sha256', checksums)
         archive.writestr(f'{top}/PACKAGE_MANIFEST.json', json.dumps(manifest, ensure_ascii=False, sort_keys=True))
-    category_by_identity = {
-        'technical-engineer': 'technical-engineer',
-        'entrepreneur-operator': 'entrepreneur-operator',
-        'investor-capital-allocator': 'investor-capital-allocator',
-        'developer-designer': 'developer-designer',
-        'thinker-educator': 'thinker-educator',
-        'political-legal': 'political-legal',
-    }
-    identity_family = 'multi-identity' if mode == 'multi' else category_by_identity[primary]
+    identity_family = primary
     card = {
         'schema_version': '1.0',
         'subject_uid': subject_uid(name, origin),
@@ -153,7 +145,7 @@ class PersonaRegistryTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             initialize_registry(root)
-            (root / '技术工程师' / '_category.json').unlink()
+            (root / '材料建工师' / '_category.json').unlink()
             result = validate_registry(root)
             self.assertFalse(result['passed'])
             self.assertTrue(any('category manifest' in error for error in result['errors']))
@@ -165,23 +157,9 @@ class PersonaRegistryTests(unittest.TestCase):
             initialize_registry(registry)
             product = create_product_zip(root / 'person.zip')
             result = register_product(product, registry)
-            self.assertEqual(result['category'], '技术工程师')
+            self.assertEqual(result['category'], '材料建工师')
             self.assertEqual(result['product_version'], '0.0.0.1')
             self.assertTrue(Path(result['artifact']).is_file())
-            self.assertTrue(validate_registry(registry)['passed'])
-
-    def test_multi_identity_always_routes_to_multi_category(self) -> None:
-        with tempfile.TemporaryDirectory() as tmp:
-            root = Path(tmp)
-            registry = root / 'registry'
-            initialize_registry(registry)
-            product = create_product_zip(
-                root / 'person.zip',
-                mode='multi',
-                primary='developer-designer',
-            )
-            result = register_product(product, registry)
-            self.assertEqual(result['category'], '多重身份')
             self.assertTrue(validate_registry(registry)['passed'])
 
     def test_registration_is_idempotent_for_same_version_and_hash(self) -> None:

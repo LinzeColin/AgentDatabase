@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:johnclippold",
+  "canonical_name": "John C. Lippold",
+  "identity_family_id": "technical-engineer",
+  "identity_mode": "single",
+  "registration_category": "材料建工师",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "john-c-lippold",
+  "subject_uid": "person-338aa48155f5c293",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/john-c-lippold-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-24T10:20:00Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "1.0.0",
+      "outer_sha256": "6fafbc0e7a6b028cc471b5f740dc92eb5952c46b46f961d4525af584b297d1ae",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/john-c-lippold-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "9dae012cbd3d781ef19b95e09cbd8d04c4fcc73d5c5fec4030fdf742501f6747",
+      "runtime_size_bytes": 70938,
+      "size_bytes": 80057
+    }
+  ]
+}
