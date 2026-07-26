@@ -145,57 +145,42 @@ byte closure, paired part/index/manifest publication, and paired
 part-delete/retention-receipt/manifest publication. The Auto draft validator
 is useful draft evidence but is explicitly not a production trust root.
 
-The successor control binds the exact final candidate and V2 consumer plus
-Auto corrective object `sha1:3feb585…`, runtime-interface digest `3ca77e…`,
-and 29 declared module digests. It independently verifies that the corrective
-preserved the exact interface materialized at `sha1:6fe7c09…`, as well as the
-immutable predecessor controls, Mechanism runtime blobs, and writer,
-publisher, repository-binding, Registry, and resolver snapshots. The working
-tree is never substituted as historical evidence.
-
-The control records writer, publisher-v2, repository binding, and BOUND
-resolver Auto integration as complete. It establishes
-`repository_bound=true`,
-`bound_reference_resolver_gate_satisfied=true`,
-`runtime_state_write_permitted=true`, and
-`effective_runtime_state_write_permitted=true`, with
-`runtime_state_write_gate_status=ENABLED_BY_CONTROL`. Resolver production
-trust still yields only `UNKNOWN/MAPPING_NOT_PROVABLE` for all 88 current
-Versions because `binding_eligible_version_count=0`;
-`current_snapshot_can_emit_bound=false` remains mandatory. Auto's historical
-materialization snapshots stay `current_auto_runtime_control_bound=false` and
-are not rewritten into successor authority. No state root, lock, worktree,
-mutable Git, Gmail, outbox, watermark, shard, publisher, activation, or
-VERSION instance is created here. Activation and canonical publication remain
-forbidden. The only next Phase is the read-only
-`MECHANISM_EXTERNAL_RUNTIME_READINESS_PREFLIGHT`.
+The previously synchronized control remains immutable historical evidence,
+but the later Teleiosis source addition invalidates its 88-root Registry tuple.
+It must not be treated as authority for the current working tree or the new
+snapshot. Until a later Auto exact-tuple integration and a separate Mechanism
+control sync both finish, `bound_reference_resolver_gate_satisfied`,
+`runtime_state_write_permitted`, and `production_trust_permitted` remain
+false. No state root, lock, worktree, mutable Git, Gmail, outbox, watermark,
+shard, publisher, activation, or VERSION instance is created here.
 
 The bundle-outside Registry contract is under
-`CodexSkills/governance/registry/`. It materializes four draft source catalogs
-and one immutable snapshot from pinned Git object `sha1:44a38890…`, with 89
-separate Identity/Instance/Version records and explicit owner-review
-candidates for same-name cross-source identities. The successor Auto evidence
-at `sha1:b5a32c81…` proves the reserved `_catalog`/`_global` namespaces and
-20/20 source/mirror alias parity, but the current source set is 88 roots:
-`codex/context-kernel` is absent and `codex/graphify`,
-`codex/persona-distiller-group`, and `codex/verifier` have exact content drift
-pending Auto sync. The missing root is recorded as `UNOBSERVED`; its historical
-Identity/Instance/Version records are retained, with no inferred lifecycle
-transition. The new reconciliation artifact is non-promotable, all historical
-89 versions remain quarantined, binding eligibility is zero, and real
-resolution returns `UNKNOWN/MAPPING_NOT_PROVABLE`. A separate registered
-fixture proves the same resolver's exact seven-field BOUND output, including
+`CodexSkills/governance/registry/`. Its current materialization consumes
+source object `sha1:a8f1f6ff…` and immutable Auto evidence
+`sha1:1c829553…`. It produces four draft catalogs, four byte-identical
+registered catalogs, and one 89-root registered snapshot. Counts close at
+24 AGENTS + 3 CLAUDE + 56 CODEX + 6 CODEX_SYSTEM, with 20/20 aliases,
+zero invalid metadata roots, and zero binding-eligible Versions.
+
+The registered 88-root predecessor is loaded only from
+`sha1:df63339e…`. All 88 assignments, Identity records, Instance records,
+and Version records are preserved byte-for-byte. The only new record chain is
+`codex/teleiosis`; it is `QUARANTINED/UNVERIFIED`, has no EvalProfile or
+PromotionDecision, and cannot emit BOUND. Real resolution therefore remains
+`UNKNOWN/MAPPING_NOT_PROVABLE`. A separate synthetic registered fixture still
+proves the resolver's exact seven-field BOUND output, including
 controlled-invocation, content/tree, version-record, and snapshot digests.
 
-The Auto sync executor now excludes the reserved Registry namespaces from
-Skill enumeration and deletion. No final catalog or snapshot artifact has
-been generated, and the incomplete 44a materialization remains historical,
-non-promotable evidence. The next Auto phase must exact-sync the three drifted
-source roots without fabricating the missing root. Mechanism must then rebuild
-from that successor Git object; exact-byte promotion applies only after full
-current-source closure. Implementation or path reservation alone does not
-satisfy the resolver gate.
-Schedule authority, resolver Auto integration and production trust, external
-Gmail/state readiness, runtime state-instance creation, AU-040 completion,
-M0c-B, ACTIVE trust, canonical shard creation, and canonical publication
-remain false.
+`codex/context-kernel` remains absent and `UNOBSERVED`. Its older records are
+retained only through the immutable historical reconciliation object; no
+current catalog entry, deletion transition, promotion, or binding is
+fabricated. Current 89-root source/mirror parity is complete, while historical
+whole-source/root parity remains false.
+
+The next Phase is
+`AUTO_TELEIOSIS_REGISTRY_EXACT_TUPLE_INTEGRATION`, which may bind only the
+remotely verified Mechanism successor object, resolver-interface bytes, and
+registered snapshot digest. Schedule authority, resolver production trust,
+external Gmail/state readiness, runtime state-instance creation, AU-040
+completion, M0c-B, ACTIVE trust, canonical shard creation, and canonical
+publication remain false.

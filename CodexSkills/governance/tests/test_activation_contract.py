@@ -38,7 +38,11 @@ from build_activation_control import (  # noqa: E402
     _git_blob,
     _preflight_inputs,
 )
-from canonical_json import canonical_digest, canonicalize_object  # noqa: E402
+from canonical_json import (  # noqa: E402
+    canonical_digest,
+    canonicalize_object,
+    parse_json_bytes,
+)
 from validate_activation import (  # noqa: E402
     HANDOFF_PATH,
     NOTIFICATION_RECEIPT_ID,
@@ -65,6 +69,21 @@ ULID_3 = "0" * 25 + "3"
 TS_0 = "2026-07-23T00:00:00.000000Z"
 TS_1 = "2026-07-23T00:00:01.000000Z"
 TS_2 = "2026-07-23T00:00:02.000000Z"
+HISTORICAL_CONTROL_GIT_OBJECT_ID = (
+    "sha1:2091d89fc2cbd2ff8c82375a3820bb829d0fa96d"
+)
+HISTORICAL_CONTROL_RAW_SHA256 = (
+    "8caf7e5dbb922714c3afa39040e55b8a83015ea0f02de153e19cc3010b0e0e1a"
+)
+HISTORICAL_RESOLVER_GIT_OBJECT_ID = (
+    "sha1:df63339e1bb6106250ce169241477191744c254f"
+)
+HISTORICAL_RESOLVER_INTERFACE_REPO_PATH = (
+    "CodexSkills/governance/registry/resolver-interface.json"
+)
+HISTORICAL_RESOLVER_INTERFACE_RAW_SHA256 = (
+    "9351465917c344269b37f470bd30d127afe764bae223ba0368e39d9d9a64af41"
+)
 
 
 def uid(prefix: str, suffix: str = ULID_0) -> str:
@@ -73,6 +92,38 @@ def uid(prefix: str, suffix: str = ULID_0) -> str:
 
 def sha(payload: bytes) -> str:
     return hashlib.sha256(payload).hexdigest()
+
+
+def historical_resolver_interface() -> tuple[bytes, Mapping[str, Any]]:
+    raw = _git_blob(
+        HISTORICAL_RESOLVER_GIT_OBJECT_ID,
+        HISTORICAL_RESOLVER_INTERFACE_REPO_PATH,
+    )
+    if sha(raw) != HISTORICAL_RESOLVER_INTERFACE_RAW_SHA256:
+        raise AssertionError("historical resolver raw digest drift")
+    value = parse_json_bytes(raw)
+    if not isinstance(value, dict):
+        raise AssertionError("historical resolver root invalid")
+    return raw, value
+
+
+def historical_activation_bundle():
+    resolver_raw, _ = historical_resolver_interface()
+    with tempfile.TemporaryDirectory() as temporary_directory:
+        resolver_path = Path(temporary_directory) / "resolver-interface.json"
+        resolver_path.write_bytes(resolver_raw)
+        with mock.patch(
+            "build_activation_control.RESOLVER_INTERFACE_PATH",
+            resolver_path,
+        ):
+            return load_activation_bundle(
+                ActivationControlTrustTuple(
+                    HISTORICAL_CONTROL_GIT_OBJECT_ID,
+                    HISTORICAL_CONTROL_RAW_SHA256,
+                    CONTROL_INTERFACE_REPO_PATH,
+                    CONTROL_MODE,
+                )
+            )
 
 
 def activation_paths(activation_uid: str) -> Mapping[str, str]:
@@ -270,9 +321,9 @@ def settlement_fixture(
 class ActivationControlTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        cls.bundle = load_activation_bundle(allow_current_draft=True)
+        cls.bundle = historical_activation_bundle()
 
-    def test_01_generated_control_is_byte_equivalent(self) -> None:
+    def test_01_current_successor_requires_control_sync(self) -> None:
         result = subprocess.run(
             [
                 "/usr/bin/python3",
@@ -286,8 +337,12 @@ class ActivationControlTests(unittest.TestCase):
             text=True,
             check=False,
         )
-        self.assertEqual(result.returncode, 0, result.stderr)
-        self.assertIn("ACTIVATION_CONTROL_BYTE_EQUIVALENT", result.stdout)
+        self.assertEqual(result.returncode, 2, result.stderr)
+        self.assertEqual(result.stdout, "")
+        self.assertEqual(
+            result.stderr.strip(),
+            "ACTIVATION_BOUND_RESOLVER_INTERFACE_CONTRACT_MISMATCH",
+        )
 
     def test_02_bootstrap_schemas_are_digest_pinned_outside_bundle(self) -> None:
         interface = strict_load(CONTROL_INTERFACE_PATH)
@@ -415,13 +470,13 @@ class ActivationControlTests(unittest.TestCase):
             resolver_contract["binding_eligible_version_count"],
             0,
         )
-        auto_interface = strict_load(
-            REPO_ROOT
-            / "CodexSkills"
-            / "registry"
-            / "auto"
-            / "runtime-interface.json"
+        auto_interface = parse_json_bytes(
+            _git_blob(
+                AUTO_RUNTIME_GIT_OBJECT_ID,
+                "CodexSkills/registry/auto/runtime-interface.json",
+            )
         )
+        self.assertIsInstance(auto_interface, dict)
         self.assertFalse(auto_interface["runtime_state_write_permitted"])
         self.assertTrue(
             auto_interface["repository_binding_integration_complete"]
@@ -598,11 +653,15 @@ class ActivationControlTests(unittest.TestCase):
             observed,
         )
 
-    def test_02a_integrated_auto_interface_and_modules_are_exact(self) -> None:
-        _preflight_inputs(
-            require_non_active=True,
-            require_current_auto=True,
-        )
+    def test_02a_current_production_tuple_fails_closed(self) -> None:
+        with self.assertRaisesRegex(
+            ContractError,
+            "ACTIVATION_AUTO_INTERFACE_CURRENT_DRIFT",
+        ):
+            _preflight_inputs(
+                require_non_active=True,
+                require_current_auto=True,
+            )
 
     def test_02b_integrated_auto_module_digest_drift_fails_closed(self) -> None:
         target = "CodexSkills/registry/auto/runtime/__init__.py"
@@ -616,6 +675,9 @@ class ActivationControlTests(unittest.TestCase):
             return _git_blob(object_id, relative_path)
 
         with mock.patch(
+            "build_activation_control._verified_resolver_interface",
+            side_effect=historical_resolver_interface,
+        ), mock.patch(
             "build_activation_control._git_blob",
             side_effect=drift,
         ):
@@ -644,6 +706,9 @@ class ActivationControlTests(unittest.TestCase):
             return _git_blob(object_id, relative_path)
 
         with mock.patch(
+            "build_activation_control._verified_resolver_interface",
+            side_effect=historical_resolver_interface,
+        ), mock.patch(
             "build_activation_control._git_blob",
             side_effect=drift,
         ):
@@ -670,6 +735,9 @@ class ActivationControlTests(unittest.TestCase):
             return _git_blob(object_id, relative_path)
 
         with mock.patch(
+            "build_activation_control._verified_resolver_interface",
+            side_effect=historical_resolver_interface,
+        ), mock.patch(
             "build_activation_control._git_blob",
             side_effect=drift,
         ):
@@ -1018,24 +1086,33 @@ class ActivationControlTests(unittest.TestCase):
             "ACTIVATION_CONTROL_EXTERNAL_TRUST_TUPLE_REQUIRED",
         ):
             load_activation_bundle()
-        with mock.patch(
-            "validate_activation._git_blob_for_control",
-            side_effect=fake_blob,
-        ):
-            trusted = load_activation_bundle(trust)
-            self.assertIn(INTENT_ID, trusted.schemas)
-            self.assertIn(SETTLEMENT_ID, trusted.schemas)
-            bad = ActivationControlTrustTuple(
-                object_id,
-                "d" * 64,
-                CONTROL_INTERFACE_REPO_PATH,
-                CONTROL_MODE,
+        resolver_raw, _ = historical_resolver_interface()
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            resolver_path = (
+                Path(temporary_directory) / "resolver-interface.json"
             )
-            with self.assertRaisesRegex(
-                ContractError,
-                "ACTIVATION_CONTROL_INTERFACE_RAW_DIGEST_MISMATCH",
+            resolver_path.write_bytes(resolver_raw)
+            with mock.patch(
+                "validate_activation._git_blob_for_control",
+                side_effect=fake_blob,
+            ), mock.patch(
+                "build_activation_control.RESOLVER_INTERFACE_PATH",
+                resolver_path,
             ):
-                load_activation_bundle(bad)
+                trusted = load_activation_bundle(trust)
+                self.assertIn(INTENT_ID, trusted.schemas)
+                self.assertIn(SETTLEMENT_ID, trusted.schemas)
+                bad = ActivationControlTrustTuple(
+                    object_id,
+                    "d" * 64,
+                    CONTROL_INTERFACE_REPO_PATH,
+                    CONTROL_MODE,
+                )
+                with self.assertRaisesRegex(
+                    ContractError,
+                    "ACTIVATION_CONTROL_INTERFACE_RAW_DIGEST_MISMATCH",
+                ):
+                    load_activation_bundle(bad)
 
 
 if __name__ == "__main__":

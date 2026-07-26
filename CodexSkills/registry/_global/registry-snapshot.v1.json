@@ -3,14 +3,14 @@
   "bundle_digest": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e",
   "counts": {
     "binding_eligible_version_count": 0,
-    "identity_count": 88,
-    "instance_count": 88,
+    "identity_count": 89,
+    "instance_count": 89,
     "metadata_invalid_count": 0,
-    "quarantined_version_count": 88,
+    "quarantined_version_count": 89,
     "source_catalog_count": 4,
-    "source_skill_count": 88,
+    "source_skill_count": 89,
     "tracked_symlink_alias_count": 20,
-    "version_count": 88
+    "version_count": 89
   },
   "identities": [
     {
@@ -1598,6 +1598,30 @@
       }
     },
     {
+      "artifact_digest": "024cb2ca18e54291a23d56bb09a7bbb5dbe4c3ead085cc0ccfc09a4deef3a481",
+      "record": {
+        "applicability_manifest_digest": "25ec77580f2aa53b30517d330d2e5003d6a60a839e5d4bbe46183003682f7495",
+        "bundle_digest": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e",
+        "canonical_name": "teleiosis",
+        "capability_codes": [],
+        "created_at": "2026-07-26T05:10:51.000000Z",
+        "input_contract_digest": "25ec77580f2aa53b30517d330d2e5003d6a60a839e5d4bbe46183003682f7495",
+        "instance_uids": [
+          "skinst_2MQKB8MH3WP7GQJT017WRD1X4G"
+        ],
+        "lifecycle_status": "QUARANTINED",
+        "output_contract_digest": "25ec77580f2aa53b30517d330d2e5003d6a60a839e5d4bbe46183003682f7495",
+        "owner_ref": "owner-primary",
+        "protocol_revision": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1",
+        "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:skill-identity:v1",
+        "skill_identity_uid": "ski_6E4M0H86C26YQQPZ0GQ4MGE8ZS",
+        "srv_revision": "v0.0.0.3",
+        "summary": "Unverified Registry baseline for codex/teleiosis.",
+        "supersedes_identity_uid": null,
+        "updated_at": "2026-07-26T05:10:51.000000Z"
+      }
+    },
+    {
       "artifact_digest": "8860e3e38006f05ded9cfd163eb238017fc788ca232da8678706847d604a52d5",
       "record": {
         "applicability_manifest_digest": "25ec77580f2aa53b30517d330d2e5003d6a60a839e5d4bbe46183003682f7495",
@@ -2707,6 +2731,13 @@
       "skill_identity_uid": "ski_770GT8PSE2EFGY3DWAYZFVR1PQ",
       "source_class": "CODEX",
       "source_relative_path": "codex/study-project-orchestrator"
+    },
+    {
+      "first_seen_at": "2026-07-26T05:10:51.000000Z",
+      "identity_assignment_reason": "INITIAL_SOURCE_PATH_ANCHOR",
+      "skill_identity_uid": "ski_6E4M0H86C26YQQPZ0GQ4MGE8ZS",
+      "source_class": "CODEX",
+      "source_relative_path": "codex/teleiosis"
     },
     {
       "first_seen_at": "2026-07-26T00:49:03.000000Z",
@@ -3959,6 +3990,44 @@
         "tool_codes": [],
         "version_uids": [
           "skv_6N5QW31ZSSESSYQ95NQVN48SJ3"
+        ]
+      }
+    },
+    {
+      "artifact_digest": "d3d64567e5f443f1fcf6741fd0869e2753dc8872bbed2db77e7c148511ade7fd",
+      "record": {
+        "bundle_digest": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e",
+        "data_class_codes": [],
+        "first_seen_at": "2026-07-26T05:10:51.000000Z",
+        "forked_from_instance_uid": null,
+        "last_seen_at": "2026-07-26T05:10:51.000000Z",
+        "lifecycle_status": "QUARANTINED",
+        "moved_from_instance_uid": null,
+        "parent_instance_uids": [],
+        "permissions": {
+          "external_side_effect": "UNKNOWN",
+          "filesystem_write": "UNKNOWN",
+          "network": "UNKNOWN",
+          "secrets": "UNKNOWN"
+        },
+        "protocol_revision": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1",
+        "provenance": {
+          "git_object_id": "sha1:a8f1f6ff8003db43fad722a5afd3b19615dd325e",
+          "kind": "VENDORED",
+          "license_id": null,
+          "license_state": "UNKNOWN",
+          "trust_tier": "UNVERIFIED",
+          "upstream_repo": null
+        },
+        "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:skill-instance:v1",
+        "skill_identity_uid": "ski_6E4M0H86C26YQQPZ0GQ4MGE8ZS",
+        "skill_instance_uid": "skinst_2MQKB8MH3WP7GQJT017WRD1X4G",
+        "source_class": "CODEX",
+        "source_fingerprint_digest": "9f1d875625836d34c062fb6deb2c91384a7aacf45c014e002b6ef3597d698454",
+        "source_relative_path": "codex/teleiosis",
+        "tool_codes": [],
+        "version_uids": [
+          "skv_091PBMDHKAXFWC5K9C580Y59NJ"
         ]
       }
     },
@@ -6207,41 +6276,41 @@
   ],
   "protocol_revision": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1",
   "registry_compatibility_index_is_not_snapshot_truth": true,
-  "registry_snapshot_digest": "10979826bf63b49fbde8da6ece51d6ead6909225b3c62af994e110dea31e1718",
+  "registry_snapshot_digest": "7b5a74bd459a4737299444b68439c1799ba8a2159032636a24a987113eee9d12",
   "same_name_auto_merge_permitted": false,
   "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:registry-snapshot:v1",
-  "snapshot_observed_at": "2026-07-26T00:49:03.000000Z",
+  "snapshot_observed_at": "2026-07-26T05:10:51.000000Z",
   "source_catalogs": [
     {
-      "artifact_digest": "e63dd7fc5fb71b0fbbb9c141cd3591d5d84ed6b6bdab69cd0345000b4b84b822",
+      "artifact_digest": "3e08890e90efc4c9f2385b235b25f04cbea5903aa6444946bf322f41af8f9874",
       "draft_relative_path": "CodexSkills/governance/registry/materialized/sources/agents/catalog.v1.json",
       "entry_count": 24,
       "proposed_final_relative_path": "CodexSkills/registry/agents/_catalog/catalog.v1.json",
       "source_class": "AGENTS"
     },
     {
-      "artifact_digest": "b56765774a5d9fcfa15c38c38b8280993ba792c80df4b658c4bbf71aeba6b95f",
+      "artifact_digest": "93683a13657e02ef59e099174d24b42100c96a1dbbcedd7bbc9636baba857de5",
       "draft_relative_path": "CodexSkills/governance/registry/materialized/sources/claude/catalog.v1.json",
       "entry_count": 3,
       "proposed_final_relative_path": "CodexSkills/registry/claude/_catalog/catalog.v1.json",
       "source_class": "CLAUDE"
     },
     {
-      "artifact_digest": "50c26406329f594b531e29a3ca4c66f16371bc0d0ddfa0dcf103b4cf734fb8b3",
+      "artifact_digest": "6c64b03d075b7f92553d4c57866f447ea6f60ad8a401fcf365c48fb90bbd5406",
       "draft_relative_path": "CodexSkills/governance/registry/materialized/sources/codex/catalog.v1.json",
-      "entry_count": 55,
+      "entry_count": 56,
       "proposed_final_relative_path": "CodexSkills/registry/codex/_catalog/catalog.v1.json",
       "source_class": "CODEX"
     },
     {
-      "artifact_digest": "4a49b93ec8c94d2a801a485f29c721565985c53767115471ce7ccda70f53157a",
+      "artifact_digest": "ea9771ff32ab1c5982c2b19586fd3a3113bc7fc5a98bcb65dc0c734b1574e026",
       "draft_relative_path": "CodexSkills/governance/registry/materialized/sources/codex-system/catalog.v1.json",
       "entry_count": 6,
       "proposed_final_relative_path": "CodexSkills/registry/codex-system/_catalog/catalog.v1.json",
       "source_class": "CODEX_SYSTEM"
     }
   ],
-  "source_material_git_object_id": "sha1:dc653654603f5bfee3bd41890b49cfad700cf541",
+  "source_material_git_object_id": "sha1:a8f1f6ff8003db43fad722a5afd3b19615dd325e",
   "source_material_policy_digest": "7d8453b2dd5b78ec777c915d6cf009eac92bb6ff25cad9f88a9da38fb84cc183",
   "source_material_policy_id": "urn:linzecolin:agentdatabase:skillops:policy:source-material:v1",
   "source_mirror_parity": {
@@ -6352,6 +6421,39 @@
         "trust_tier": "UNVERIFIED"
       },
       "version_record_digest": "5ee08164deafa0b98218e43a4e41b6df5540115ac6977b42ef8dafdd5ffa46f4"
+    },
+    {
+      "record": {
+        "bundle_digest": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e",
+        "compatibility_codes": [],
+        "content_digest": "dbfbb07976a375a6d1b3e563476d2041bfabd772597aeb8a0925a1800d4b4364",
+        "created_at": "2026-07-26T05:10:51.000000Z",
+        "dependencies": [],
+        "dependency_manifest_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "eval_profile_uid": null,
+        "git_object_id": "sha1:a8f1f6ff8003db43fad722a5afd3b19615dd325e",
+        "lifecycle_status": "QUARANTINED",
+        "metadata_digest": "1eabb926a1cb556bd5663e3ccf1c9e1cd3e9b3e0988f219b174deb1e6809643f",
+        "permission_manifest_digest": "8f3984506ae7f1d2d3b8bcc7bec2cfbcb0c05c8ab9d9bff0b4a9799cfec455b1",
+        "permissions": {
+          "external_side_effect": "UNKNOWN",
+          "filesystem_write": "UNKNOWN",
+          "network": "UNKNOWN",
+          "secrets": "UNKNOWN"
+        },
+        "protocol_revision": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1",
+        "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:skill-version:v1",
+        "skill_instance_uid": "skinst_2MQKB8MH3WP7GQJT017WRD1X4G",
+        "skill_version_uid": "skv_091PBMDHKAXFWC5K9C580Y59NJ",
+        "source_material_policy_digest": "7d8453b2dd5b78ec777c915d6cf009eac92bb6ff25cad9f88a9da38fb84cc183",
+        "source_material_policy_id": "urn:linzecolin:agentdatabase:skillops:policy:source-material:v1",
+        "source_observed_at": "2026-07-26T05:10:51.000000Z",
+        "srv_revision": "v0.0.0.3",
+        "supersedes_version_uid": null,
+        "tree_digest": "079d557cefe596f5285ca6389b069c553efab1ced342824f0370151883941d35",
+        "trust_tier": "UNVERIFIED"
+      },
+      "version_record_digest": "57c3145fbf3eaa8433c193416d3ad9025f32038491666846bc475888204b11e9"
     },
     {
       "record": {

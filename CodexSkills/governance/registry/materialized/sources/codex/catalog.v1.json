@@ -1,5 +1,5 @@
 {
-  "artifact_digest": "d170570a16982b020ed677573fcab4f9eb76fd01a87e92339276e3b966422c5d",
+  "artifact_digest": "b506f904208542df984e6aec47056cf79fdde9c792e082da67677b69eb518aa8",
   "bundle_digest": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e",
   "entries": [
     {
@@ -1803,6 +1803,42 @@
       }
     },
     {
+      "canonical_name": "teleiosis",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "024cb2ca18e54291a23d56bb09a7bbb5dbe4c3ead085cc0ccfc09a4deef3a481",
+        "skill_identity_uid": "ski_6E4M0H86C26YQQPZ0GQ4MGE8ZS"
+      },
+      "instance_ref": {
+        "artifact_digest": "d3d64567e5f443f1fcf6741fd0869e2753dc8872bbed2db77e7c148511ade7fd",
+        "skill_instance_uid": "skinst_2MQKB8MH3WP7GQJT017WRD1X4G"
+      },
+      "material": {
+        "byte_count": 598392,
+        "content_digest": "dbfbb07976a375a6d1b3e563476d2041bfabd772597aeb8a0925a1800d4b4364",
+        "metadata_state": "VALID",
+        "regular_file_count": 104,
+        "symlink_alias_count": 0,
+        "tree_digest": "079d557cefe596f5285ca6389b069c553efab1ced342824f0370151883941d35"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/teleiosis",
+      "version_ref": {
+        "skill_version_uid": "skv_091PBMDHKAXFWC5K9C580Y59NJ",
+        "version_record_digest": "57c3145fbf3eaa8433c193416d3ad9025f32038491666846bc475888204b11e9"
+      }
+    },
+    {
       "canonical_name": "theme-factory",
       "eval_profile_ref": {
         "artifact_digest": null,
@@ -1983,13 +2019,13 @@
       }
     }
   ],
-  "entry_count": 55,
+  "entry_count": 56,
   "exclusions": [],
   "metadata_invalid_count": 0,
   "protocol_revision": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1",
   "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:registry-source-catalog:v1",
   "source_class": "CODEX",
-  "source_material_git_object_id": "sha1:dc653654603f5bfee3bd41890b49cfad700cf541",
+  "source_material_git_object_id": "sha1:a8f1f6ff8003db43fad722a5afd3b19615dd325e",
   "source_material_policy_digest": "7d8453b2dd5b78ec777c915d6cf009eac92bb6ff25cad9f88a9da38fb84cc183",
   "source_material_policy_id": "urn:linzecolin:agentdatabase:skillops:policy:source-material:v1",
   "source_root_path": "CodexSkills/registry/codex",

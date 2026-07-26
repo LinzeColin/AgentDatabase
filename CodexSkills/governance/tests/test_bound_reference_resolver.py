@@ -252,14 +252,14 @@ class BoundReferenceResolverTests(unittest.TestCase):
             counts,
             {
                 "binding_eligible_version_count": 0,
-                "identity_count": 88,
-                "instance_count": 88,
+                "identity_count": 89,
+                "instance_count": 89,
                 "metadata_invalid_count": 0,
-                "quarantined_version_count": 88,
+                "quarantined_version_count": 89,
                 "source_catalog_count": 4,
-                "source_skill_count": 88,
+                "source_skill_count": 89,
                 "tracked_symlink_alias_count": 20,
-                "version_count": 88,
+                "version_count": 89,
             },
         )
         self.assertEqual(
@@ -297,12 +297,12 @@ class BoundReferenceResolverTests(unittest.TestCase):
         )
         self.assertEqual(
             sum(len(catalog["entries"]) for catalog in self.catalogs.values()),
-            88,
+            89,
         )
-        self.assertEqual(len(self.context.assignments), 88)
-        self.assertEqual(len(self.context.identities), 88)
-        self.assertEqual(len(self.context.instances), 88)
-        self.assertEqual(len(self.context.versions), 88)
+        self.assertEqual(len(self.context.assignments), 89)
+        self.assertEqual(len(self.context.identities), 89)
+        self.assertEqual(len(self.context.instances), 89)
+        self.assertEqual(len(self.context.versions), 89)
 
     def test_04_same_names_remain_distinct_owner_review_candidates(self) -> None:
         candidates = {
@@ -604,7 +604,7 @@ class BoundReferenceResolverTests(unittest.TestCase):
                     "REGISTERED",
                 ),
             )
-            self.assertEqual(len(context.versions), 88)
+            self.assertEqual(len(context.versions), 89)
             with self.assertRaisesRegex(
                 ContractError,
                 "REGISTRY_SNAPSHOT_EXTERNAL_DIGEST_MISMATCH",
@@ -652,7 +652,11 @@ class BoundReferenceResolverTests(unittest.TestCase):
         )
         self.assertEqual(
             interface["next_phase"],
-            "AUTO_BOUND_REFERENCE_RESOLVER_INTEGRATION",
+            "AUTO_TELEIOSIS_REGISTRY_EXACT_TUPLE_INTEGRATION",
+        )
+        self.assertEqual(
+            interface["status"],
+            "DRAFT_NON_ACTIVE_TELEIOSIS_PARITY_MATERIALIZED",
         )
         self.assertFalse(interface["auto_integration_complete"])
         self.assertFalse(interface["production_trust_permitted"])
@@ -669,7 +673,7 @@ class BoundReferenceResolverTests(unittest.TestCase):
         self.assertEqual(
             interface["exact_byte_promotion_scope"],
             (
-                "POST_SOURCE_CONTENT_SYNC_PARITY_COMPLETE_"
+                "TELEIOSIS_SOURCE_PARITY_COMPLETE_"
                 "SUCCESSOR_MATERIALIZATION"
             ),
         )
@@ -692,11 +696,71 @@ class BoundReferenceResolverTests(unittest.TestCase):
         )
         self.assertEqual(
             interface["registry_snapshot"]["current_source_skill_count"],
-            88,
+            89,
         )
         self.assertEqual(
             interface["registry_snapshot"]["tracked_symlink_alias_count"],
             20,
+        )
+        teleiosis = interface["teleiosis_materialization"]
+        self.assertEqual(
+            teleiosis["added_source_skill_roots"],
+            ["codex/teleiosis"],
+        )
+        self.assertFalse(teleiosis["binding_eligible"])
+        self.assertTrue(
+            teleiosis["exact_predecessor_record_sets_preserved"]
+        )
+        self.assertEqual(
+            teleiosis["source_material_git_object_id"],
+            builder.SOURCE_MATERIAL_GIT_OBJECT_ID,
+        )
+        self.assertEqual(teleiosis["source_skill_count"], 89)
+        self.assertEqual(
+            teleiosis["predecessor_registry_snapshot"],
+            {
+                "registry_snapshot_digest": (
+                    builder.PREDECESSOR_SNAPSHOT_DIGEST
+                ),
+                "source_skill_count": 88,
+                "verified_git_object_id": (
+                    builder.PREDECESSOR_MATERIALIZATION_GIT_OBJECT_ID
+                ),
+            },
+        )
+        teleiosis_entry = teleiosis["teleiosis_catalog_entry"]
+        self.assertEqual(
+            teleiosis_entry["source_relative_path"],
+            "codex/teleiosis",
+        )
+        self.assertEqual(
+            teleiosis_entry["identity_ref"]["skill_identity_uid"],
+            "ski_6E4M0H86C26YQQPZ0GQ4MGE8ZS",
+        )
+        self.assertEqual(
+            teleiosis_entry["instance_ref"]["skill_instance_uid"],
+            "skinst_2MQKB8MH3WP7GQJT017WRD1X4G",
+        )
+        self.assertEqual(
+            teleiosis_entry["version_ref"]["skill_version_uid"],
+            "skv_091PBMDHKAXFWC5K9C580Y59NJ",
+        )
+        self.assertEqual(
+            teleiosis_entry["material"],
+            {
+                "byte_count": 598392,
+                "content_digest": (
+                    "dbfbb07976a375a6d1b3e563476d2041"
+                    "bfabd772597aeb8a0925a1800d4b4364"
+                ),
+                "metadata_state": "VALID",
+                "regular_file_count": 104,
+                "symlink_alias_count": 0,
+                "tree_digest": (
+                    "079d557cefe596f5285ca6389b069c553"
+                    "efab1ced342824f0370151883941d35"
+                ),
+            },
         )
         self.assertEqual(
             interface["source_drift_reconciliation"][
@@ -818,10 +882,14 @@ class BoundReferenceResolverTests(unittest.TestCase):
             REPO_ROOT
             / builder.AUTO_SOURCE_SYNC_INTERFACE_PATH
         ).read_bytes()
-        self.assertNotEqual(current_raw, historical_raw)
+        self.assertEqual(current_raw, historical_raw)
+        self.assertEqual(
+            hashlib.sha256(historical_raw).hexdigest(),
+            builder.AUTO_SOURCE_SYNC_INTERFACE_RAW_SHA256,
+        )
         self.assertEqual(
             builder._verified_auto_source_sync()["next_phase"],
-            "MECHANISM_REGISTRY_PARITY_COMPLETE_MATERIALIZATION",
+            "MECHANISM_REGISTRY_TELEIOSIS_PARITY_MATERIALIZATION",
         )
 
         original = builder._git_blob
@@ -846,67 +914,130 @@ class BoundReferenceResolverTests(unittest.TestCase):
             ):
                 builder._verified_auto_source_sync()
 
-    def test_14_immutable_versions_and_successor_lineage_are_exact(self) -> None:
-        historical = builder._historical_registry_records()
-        historical_versions = historical["versions"]
+    def test_14_predecessor_records_and_new_root_lineage_are_exact(
+        self,
+    ) -> None:
+        predecessor = builder._predecessor_registry_records()
+        current_identities = {
+            row["record"]["skill_identity_uid"]: row
+            for row in self.snapshot["identities"]
+        }
+        current_instances = {
+            row["record"]["skill_instance_uid"]: row
+            for row in self.snapshot["instances"]
+        }
         current_versions = {
             row["record"]["skill_version_uid"]: row
             for row in self.snapshot["versions"]
         }
-        unchanged = set(historical_versions) & set(current_versions)
-        self.assertEqual(len(unchanged), 74)
-        self.assertTrue(
-            all(
-                historical_versions[uid] == current_versions[uid]
-                for uid in unchanged
-            )
-        )
-        changed_paths = set()
-        for source_class, source_path in self.context.assignments:
-            historical_identity_uid = historical["assignments"][
-                (source_class, source_path)
-            ]
-            historical_identity = historical["identities"][
-                historical_identity_uid
-            ]["record"]
-            historical_instance = historical["instances"][
-                historical_identity["instance_uids"][0]
-            ]["record"]
-            historical_version_uid = historical_instance["version_uids"][0]
-            current_identity = self.context.identities[
-                self.context.assignments[(source_class, source_path)]
-            ]
-            current_instance = self.context.instances[
-                current_identity["instance_uids"][0]
-            ]
-            current_version_uid = current_instance["version_uids"][0]
-            if current_version_uid != historical_version_uid:
-                changed_paths.add(source_path)
-                self.assertEqual(
-                    self.context.versions[current_version_uid][
-                        "supersedes_version_uid"
-                    ],
-                    historical_version_uid,
+        for key, current, previous in (
+            (
+                "identity",
+                current_identities,
+                predecessor["identities"],
+            ),
+            (
+                "instance",
+                current_instances,
+                predecessor["instances"],
+            ),
+            (
+                "version",
+                current_versions,
+                predecessor["versions"],
+            ),
+        ):
+            with self.subTest(record_kind=key):
+                self.assertEqual(len(previous), 88)
+                self.assertEqual(len(current), 89)
+                self.assertEqual(set(previous) - set(current), set())
+                self.assertEqual(len(set(current) - set(previous)), 1)
+                self.assertTrue(
+                    all(
+                        previous[uid] == current[uid]
+                        for uid in previous
+                    )
                 )
+
+        current_assignments = {
+            (
+                row["source_class"],
+                row["source_relative_path"],
+            ): row
+            for row in self.snapshot["identity_assignments"]
+        }
         self.assertEqual(
-            changed_paths,
             {
-                "codex/frontend-slides",
-                "codex/graphify",
-                "codex/gsap-core",
-                "codex/gsap-frameworks",
-                "codex/gsap-performance",
-                "codex/gsap-plugins",
-                "codex/gsap-react",
-                "codex/gsap-scrolltrigger",
-                "codex/gsap-skills",
-                "codex/gsap-timeline",
-                "codex/gsap-utils",
-                "codex/guizang-ppt-skill",
-                "codex/persona-distiller-group",
-                "codex/verifier",
+                key: current_assignments[key]
+                for key in predecessor["assignment_records"]
             },
+            predecessor["assignment_records"],
         )
+        teleiosis_key = ("CODEX", "codex/teleiosis")
+        self.assertEqual(
+            set(current_assignments)
+            - set(predecessor["assignment_records"]),
+            {teleiosis_key},
+        )
+        identity_uid = self.context.assignments[teleiosis_key]
+        identity = self.context.identities[identity_uid]
+        instance_uid = identity["instance_uids"][0]
+        instance = self.context.instances[instance_uid]
+        version_uid = instance["version_uids"][0]
+        version = self.context.versions[version_uid]
+        self.assertEqual(identity_uid, "ski_6E4M0H86C26YQQPZ0GQ4MGE8ZS")
+        self.assertEqual(
+            instance_uid,
+            "skinst_2MQKB8MH3WP7GQJT017WRD1X4G",
+        )
+        self.assertEqual(version_uid, "skv_091PBMDHKAXFWC5K9C580Y59NJ")
+        self.assertEqual(identity["lifecycle_status"], "QUARANTINED")
+        self.assertEqual(instance["lifecycle_status"], "QUARANTINED")
+        self.assertEqual(version["lifecycle_status"], "QUARANTINED")
+        self.assertEqual(version["trust_tier"], "UNVERIFIED")
+        self.assertIsNone(version["supersedes_version_uid"])
+        self.assertEqual(
+            version["git_object_id"],
+            builder.SOURCE_MATERIAL_GIT_OBJECT_ID,
+        )
+        self.assertEqual(
+            version["source_observed_at"],
+            builder.SOURCE_OBSERVED_AT,
+        )
+
+        historical = builder._historical_registry_records()
+        self.assertIn(
+            ("CODEX", "codex/context-kernel"),
+            historical["assignments"],
+        )
+        self.assertNotIn(
+            ("CODEX", "codex/context-kernel"),
+            self.context.assignments,
+        )
+
+    def test_15_predecessor_snapshot_tuple_tamper_fails_closed(
+        self,
+    ) -> None:
+        original = builder._git_blob
+
+        def drift(commit: str, relative_path: str) -> bytes:
+            if (
+                commit == builder.PREDECESSOR_MATERIALIZATION_COMMIT
+                and relative_path == builder.FINAL_SNAPSHOT_REPO_PATH
+            ):
+                return b"{}"
+            return original(commit, relative_path)
+
+        with mock.patch.object(
+            builder,
+            "_git_blob",
+            side_effect=drift,
+        ):
+            with self.assertRaisesRegex(
+                ContractError,
+                "REGISTRY_PREDECESSOR_SNAPSHOT_RAW_DIGEST_MISMATCH",
+            ):
+                builder._predecessor_registry_records()
 
 
 if __name__ == "__main__":

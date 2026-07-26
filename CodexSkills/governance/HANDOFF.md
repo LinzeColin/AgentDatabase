@@ -1,107 +1,54 @@
-# Mechanism handoff
+# Mechanism Teleiosis Registry handoff
 
-- State: `DRAFT_NON_ACTIVE_POLICY_RECONCILIATION_REQUIRED`
-- Phase: `MECHANISM_M0_GOVERNANCE_RUNTIME_FOUNDATIONS`
+- State: `DRAFT_NON_ACTIVE_TELEIOSIS_PARITY_MATERIALIZED`
+- Phase: `MECHANISM_REGISTRY_TELEIOSIS_PARITY_MATERIALIZATION`
 - Protocol:
   `urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1`
 - SRV candidate: `v0.0.0.3`
-- Candidate bundle digest:
+- Candidate bundle:
+  `sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5` /
   `36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e`
-- Candidate Git object:
-  `sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5`
-- Consumer Git object:
-  `sha1:91a12e48351be3ee05ec23ef61aec81056b02014`
-- Source-content-sync Auto Git object:
-  `sha1:dc653654603f5bfee3bd41890b49cfad700cf541`
-- Source-content-sync Auto runtime-interface raw SHA-256:
-  `7f2e335b682ec98c15f2e21e74bc0c2af24768cda7e5ed1ddc1b5e341449ac84`
-- Source-content-sync Auto module count: `27`
-- Current Auto corrective Git object:
-  `sha1:3feb5854b597abf98320c35b86edf8215294a313`
-- Auto resolver materialization Git object:
-  `sha1:6fe7c09abb03abd42e476f20fd1388a24707b7a5`
-- Current Auto runtime-interface raw SHA-256:
-  `3ca77e4670f1d891a280e3932d92ce1dfa17b3c95f2645174bf5ae72b8570173`
-- Current Auto module count: `29`
-- Control interface raw SHA-256:
-  `8caf7e5dbb922714c3afa39040e55b8a83015ea0f02de153e19cc3010b0e0e1a`
-- Resolver interface raw SHA-256:
-  `9351465917c344269b37f470bd30d127afe764bae223ba0368e39d9d9a64af41`
-- Resolver interface self digest:
-  `e67799c396a49d42b49c2e1960f760fbdb23dd32496575b7bbd81bd388026ae8`
-- Registered Registry snapshot self digest:
+- Auto Teleiosis source-sync object:
+  `sha1:1c829553996c792e46cedc4570b30545fba9e071`
+- Auto runtime-interface raw SHA-256:
+  `3e91bf41c9550fa48264db3b72ee102b0acec65b883374d2735fbd7169801d9e`
+- Auto module count: `29`
+- Source material object:
+  `sha1:a8f1f6ff8003db43fad722a5afd3b19615dd325e`
+- Registered predecessor:
+  `sha1:df63339e1bb6106250ce169241477191744c254f` /
   `10979826bf63b49fbde8da6ece51d6ead6909225b3c62af994e110dea31e1718`
-- Release foundation interface digest:
-  `681ce19f993878d578b2d636dbede007cdf7acd7e73986e3253571b875f9e74b`
+- Current Registry snapshot digest:
+  `7b5a74bd459a4737299444b68439c1799ba8a2159032636a24a987113eee9d12`
+- Resolver-interface raw SHA-256:
+  `f83032d5cb8c9dda9c6e903bb9dc5bf4f2a5de8bd687beeb010047f9e6b3ba2a`
+- Resolver-interface self digest:
+  `d75e9b1d112b95d7ce0c5b9579140e78847ebc228b7347df7340e211522c0077`
+- Exact next Phase:
+  `AUTO_TELEIOSIS_REGISTRY_EXACT_TUPLE_INTEGRATION`
 
-These Git objects are ordinary ancestors in the coordinated commit chain.
-Every production consumer must independently fetch them and receive its
-expected candidate, control, and Registry snapshot tuples from repo-external
-trusted state. The current checkout and any artifact self-report are not trust
-roots.
+All Git objects above are immutable evidence, not self-authorizing trust
+roots. A runtime consumer must receive the final Mechanism successor object,
+snapshot digest, canonical path, schema ID, and `REGISTERED` mode from
+repo-external trusted state.
 
-## M0 release foundations
+## 89-root materialization
 
-The Mechanism release foundation now implements Task Pack M-004, M-006,
-M-008, and M-009, plus the semantic half of M-005. It provides:
-
-```text
-unbounded SRV: v0.0.0.999 -> v0.0.0.1000
-missing VERSION allocation floor: v0.0.0.2
-first target after missing VERSION: v0.0.0.3
-single-flight reservation
-reserved/abandoned SRV never reused
-atomic settlement validation over VERSION + all artifact SRVs + remote readback
-ROUTINE -> PATCH, MATERIAL -> MINOR, MAJOR -> MAJOR
-unknown impact code -> fail closed
-policy conflict -> stop write with sanitized source/value-digest evidence
-stale/missing machine Handoff -> fail closed
-```
-
-The revision ledger is a pure Mechanism state machine. Persisting it atomically
-before a planned write remains an executor responsibility and was not performed
-here.
-
-The current version-policy v2 omits six locked MAJOR trigger codes:
-
-```text
-AUTOMATIC_SIDE_EFFECT_CHANGE
-EVALUATOR_OR_HOLDOUT_CHANGE
-HARD_GATE_CHANGE
-MIGRATION_OR_DELETE_SEMANTICS_CHANGE
-NETWORK_OR_PERMISSION_CHANGE
-PRIVACY_POLICY_CHANGE
-```
-
-`release/foundation-interface.json` binds that exact higher-precedence
-conflict. It remains non-active, does not join or alter the 31/5 candidate,
-does not alter the activation control, and sets
-`release_write_permitted=false`.
-
-The read-only external runtime preflight also completed before this Phase.
-Candidate/control/Registry and the repository-binding permit closed, then the
-production entrypoint stopped exactly at
-`NOTIFICATION_STATE_ROOT_UNAVAILABLE`. A full-home non-test filename search
-found zero recipient-mapping or Gmail configuration files. No state root,
-Gmail query, message, credential readback, or write occurred.
-
-## Registered current Registry
-
-The current materialization reads only immutable Git object
-`sha1:dc653654603f5bfee3bd41890b49cfad700cf541`. It contains exactly 88 current
-Skill roots:
+The four registered source catalogs and the global Registry snapshot now
+close the current source set:
 
 ```text
 AGENTS=24
 CLAUDE=3
-CODEX=55
+CODEX=56
 CODEX_SYSTEM=6
-total=88
+total=89
 tracked aliases=20
 metadata-invalid roots=0
+binding-eligible versions=0
 ```
 
-The four final source catalogs and global snapshot are:
+The final artifacts remain:
 
 ```text
 CodexSkills/registry/agents/_catalog/catalog.v1.json
@@ -111,122 +58,76 @@ CodexSkills/registry/codex-system/_catalog/catalog.v1.json
 CodexSkills/registry/_global/registry-snapshot.v1.json
 ```
 
-All five final artifacts have status `REGISTERED`. The global snapshot closes
-88 Identity, 88 Instance, and 88 current Version records; all Versions remain
-`QUARANTINED/UNVERIFIED`, so `binding_eligible_version_count=0`.
-`source_mirror_parity.status=COMPLETE`,
-`source_mirror_parity.binding_eligible=true`, aliases close at `20 == 20`, and
-`reason_codes=[]`. The parity boolean means the source/mirror prerequisite is
-closed; it does not make any Version eligible or permit BOUND.
+Their governance draft and registered-candidate copies are generated from the
+same deterministic builder. Registered-candidate bytes equal final Registry
+bytes exactly. The candidate bundle remains 31 schemas / five policies; the
+four Registry schemas stay bundle-external bootstrap contracts.
 
-The registered snapshot is loaded only with this repo-external tuple shape:
+## Exact predecessor preservation
+
+The builder loads the registered 88-root predecessor only from
+`sha1:df63339…`, verifies its raw and canonical snapshot digests, and then
+proves all 88 predecessor assignments, Identity records, Instance records,
+and Version records are byte-identical in the 89-root successor. No existing
+UID is silently rewritten with a new observation timestamp or provenance
+object.
+
+The only new current record chain is:
 
 ```text
-verified_git_object_id=sha1:<this Mechanism successor commit>
-canonical_snapshot_digest=
-  10979826bf63b49fbde8da6ece51d6ead6909225b3c62af994e110dea31e1718
-canonical_snapshot_path=
-  CodexSkills/registry/_global/registry-snapshot.v1.json
-canonical_snapshot_schema_id=
-  urn:linzecolin:agentdatabase:skillops:schema:registry-snapshot:v1
-mode=REGISTERED
+source_relative_path=codex/teleiosis
+skill_identity_uid=ski_6E4M0H86C26YQQPZ0GQ4MGE8ZS
+skill_instance_uid=skinst_2MQKB8MH3WP7GQJT017WRD1X4G
+skill_version_uid=skv_091PBMDHKAXFWC5K9C580Y59NJ
+version_record_digest=
+  57c3145fbf3eaa8433c193416d3ad9025f32038491666846bc475888204b11e9
+regular_file_count=104
+alias_count=0
+byte_count=598392
+content_digest=
+  dbfbb07976a375a6d1b3e563476d2041bfabd772597aeb8a0925a1800d4b4364
+tree_digest=
+  079d557cefe596f5285ca6389b069c553efab1ced342824f0370151883941d35
 ```
 
-The final commit ID is deliberately external to the snapshot bytes and is
-filled only after the ordinary commit is remotely verified. The artifact's
-`source_material_git_object_id` remains the distinct Auto source object
-`sha1:dc653654…`.
+The Auto content-sync digest
+`252e9cf65b991dd7bd7c36734257b0b5da47689cbf2d1c7d7bb4ca766aa93bcb`
+and the Mechanism policy-scoped content/tree digests intentionally use their
+separately declared domains. Both bind the same immutable source object and
+104-file / 598392-byte physical closure.
 
-Governance draft catalogs and the draft snapshot are rebuilt from the same
-current tree under `CodexSkills/governance/registry/materialized/**`, with
-status `DRAFT_NON_ACTIVE`. The registered files are not accepted by the draft
-trust mode, and draft files are not accepted by `REGISTERED` mode.
-The registered candidate bytes are also retained under
-`CodexSkills/governance/registry/materialized/registered/**`; each is exactly
-byte-equal to its final Registry artifact, so the promotion claim is
-independently reproducible rather than inferred from matching semantic fields.
+Teleiosis is `QUARANTINED/UNVERIFIED`, has no EvalProfile or PromotionDecision,
+has `supersedes_version_uid=null`, and is not binding eligible. The resolver
+therefore continues to return `UNKNOWN/MAPPING_NOT_PROVABLE`; no `skill_ref`
+or BOUND event can be emitted from the real snapshot.
 
-## Immutable lineage
+## Historical missing-root lineage
 
-The historical 89-root snapshot remains immutable at Mechanism Git object
-`sha1:5db5beecf3de7ac916020ca988f6e875891e19b1`, with self digest
-`31f49c8ffa3bd2d268feec49b2869f409d61a5bfbb0b03f382bc562996b7fa76`.
-The current builder verifies that object and preserves every unchanged
-SkillVersion record byte-for-byte.
+`codex/context-kernel` remains absent from the current source, mirror,
+catalogs, assignments, and snapshot. Its older 89-root record chain remains
+available only through immutable object `sha1:5db5beec…` and
+`source-drift-reconciliation.v1.json`. Its observation remains `UNOBSERVED`;
+no deletion, lifecycle transition, promotion, or binding is inferred.
 
-Of the 88 current paths, 74 keep their exact historical Version record. Fourteen
-paths receive a new content-addressed Version and an exact
-`supersedes_version_uid`:
+Thus current source/mirror parity is complete for 89 roots, while historical
+whole-source/root parity remains false because the old missing root is not
+fabricated.
 
-```text
-codex/frontend-slides
-codex/graphify
-codex/gsap-core
-codex/gsap-frameworks
-codex/gsap-performance
-codex/gsap-plugins
-codex/gsap-react
-codex/gsap-scrolltrigger
-codex/gsap-skills
-codex/gsap-timeline
-codex/gsap-utils
-codex/guizang-ppt-skill
-codex/persona-distiller-group
-codex/verifier
-```
+## Closed gates
 
-The changed set covers the three source-content corrections and the Skills
-whose versioned tree now includes the 20 verified aliases. No unchanged
-Version UID maps to changed record bytes.
-
-`codex/context-kernel` remains absent from current source, mirror, catalog,
-assignment, and snapshot records. Its historical Identity/Instance/Version
-references are retained only in
-`CodexSkills/governance/registry/source-drift-reconciliation.v1.json`, pinned
-to the historical Mechanism object. Its current observation stays
-`UNOBSERVED`; no lifecycle transition, deletion, promotion, or binding is
-inferred. Therefore historical `source_root_parity_satisfied` and
-`whole_source_parity_satisfied` remain false even though current 88-root
-source/mirror parity is complete.
-
-## Control and closed gates
-
-The resolver lineage verifies source-sync evidence only from immutable Auto
-object `sha1:dc653654…`; it does not require the current checkout to equal that
-historical interface or module set. The successor control separately
-exact-binds current Auto corrective object `sha1:3feb585…`, interface
-`3ca77e…`, and all 29 modules. It also proves that the corrective did not
-rewrite the interface materialized at `sha1:6fe7c09…`. It records:
+This Phase does not update the activation control or Auto runtime tuple. The
+previous resolver/control tuple is historical and cannot authorize the new
+snapshot. These facts remain false:
 
 ```text
-repository_bound=true
-runtime_state_write_permitted=true
-effective_runtime_state_write_permitted=true
-bound_reference_resolver_implementation_complete=true
-bound_reference_resolver_auto_integration_complete=true
-bound_reference_resolver_gate_satisfied=true
-runtime_state_write_gate_status=ENABLED_BY_CONTROL
-production_trust_permitted=true
-current_snapshot_can_emit_bound=false
-```
-
-`production_trust_permitted=true` authorizes only the exact sealed resolver
-projection under the repo-external candidate/control/Registry tuples. The
-registered snapshot still has zero binding-eligible Versions, so all 88 real
-entries deterministically remain `UNKNOWN/MAPPING_NOT_PROVABLE` and no
-`skill_ref` or BOUND event can be produced. Control-level state-write gates
-are now closed, but no external state root, credential, recipient mapping,
-provider capability, runtime instance, lock, watermark, worktree, mutable Git,
-outbox, or publisher was opened or created in this Phase.
-
-The following also remain false or unperformed:
-
-```text
-current_snapshot_can_emit_bound
+auto_integration_complete
+production_trust_permitted
+bound_reference_resolver_gate_satisfied
+runtime_state_write_permitted
+runtime_state_instance_created
 consumer_first_repository_shards_permitted
 au_040_daily_jsonl_shard_complete
 au_040_complete
-runtime_state_instance_created
 external state/Gmail READY
 notification real-message metadata readback
 m0c_b_permitted
@@ -236,21 +137,63 @@ schedule_authority_resolved
 schedule_complete
 ```
 
-No `CodexSkills/VERSION`, canonical run artifact, state instance, Gmail or
-network action, automation change, App action, history replay, or verifier
-call occurred.
+No `CodexSkills/VERSION`, state, lock, watermark, queue/outbox item, shard,
+index, daily manifest, retention receipt, Gmail/network operation, automation
+change, App action, history replay, or verifier call belongs to this Phase.
 
-## Next exact action
+## Validation
 
-After this Mechanism commit is FF-pushed and independently read back, the only
-next Phase is `MECHANISM_VERSION_POLICY_V3_DRAFT`.
+Pre-push local gates:
 
-That Phase may draft the versioned replacement that closes the six missing
-MAJOR codes. It must keep the unresolved 04:15/05:30 schedule authority,
-external state/Gmail readiness, runtime instance, activation, VERSION, and
-canonical publication false. It must not change Auto-owned runtime files or
-insert the draft schemas/policy into the trusted candidate before a later
-consumer-first coordinated bundle sequence.
+```text
+bound resolver builder:
+  PASS / 89 roots / 4 catalogs / 0 binding eligible
+  snapshot=7b5a74bd459a4737299444b68439c1799ba8a2159032636a24a987113eee9d12
+  interface_raw=f83032d5cb8c9dda9c6e903bb9dc5bf4f2a5de8bd687beeb010047f9e6b3ba2a
+Registry sync tests: 10/10 PASS
+complete Mechanism suite: 91/91 PASS
+candidate trust: 31 schemas / 5 policies PASS
+Mechanism draft/candidate/resolver/release/AU-040 builders and lints: PASS
+schema-set lint: 38 schemas PASS
+OpenAIDatabase consumer + architecture: 23/23 PASS
+consumer CLI: PASS / errors=[] / canonical publication=false
+live source dry-run:
+  89 instances / 74 names / aliases 20/20 / mirror unchanged / no write
+diff-check, Python 3.9 compilation, public literal scan: PASS
+```
 
-Development still must not call verifier. After both planes are complete, the
-Owner designates the final task that may invoke a fresh verifier.
+The unchanged predecessor Auto checkout at
+`sha1:1c829553996c792e46cedc4570b30545fba9e071` remains green:
+
+```text
+complete Auto suite: 207/207 PASS
+fault/privacy seed 271828: 156/156 PASS
+fault/privacy seed 314159: 156/156 PASS
+Auto schema/transport/promotion/runtime builders and lints: PASS
+```
+
+The same standard Auto command against the uncommitted 89-root successor
+correctly does **not** pass: it ran 200 tests with four failures and 20 errors.
+All observed failures stop at the cross-owner transition boundary:
+
+```text
+BOUND_REFERENCE_RESOLVER_RUNTIME_LOCAL_DRIFT
+AUTO_BOUND_REFERENCE_RESOLVER_INTERFACE_DRIFT
+ACTIVATION_CONTROL_INTERFACE_SEMANTIC_MISMATCH
+```
+
+No Auto production or test file is changed to hide that result. The current
+activation builder and activation lint likewise exit 2 with exact
+`ACTIVATION_BOUND_RESOLVER_INTERFACE_CONTRACT_MISMATCH`; the Mechanism test
+suite separately proves that this stale production tuple fails closed before
+state, Git, Gmail, or publisher authority.
+
+Final acceptance additionally requires FF-safe push plus a fresh detached
+GitHub object/blob readback of every changed path.
+
+The next Auto Phase may only bind the exact remotely verified Mechanism
+successor tuple and update Auto-owned 89-root resolver expectations. A later,
+separate Mechanism control sync may restore the production resolver gate.
+The queued `MECHANISM_VERSION_POLICY_V3_DRAFT` must be re-landed only after
+that cross-owner tuple chain is coherent. Development still must not call the
+verifier.

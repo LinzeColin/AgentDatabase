@@ -1,6 +1,6 @@
 {
   "activation_forbidden": true,
-  "artifact_digest": "e67799c396a49d42b49c2e1960f760fbdb23dd32496575b7bbd81bd388026ae8",
+  "artifact_digest": "d75e9b1d112b95d7ce0c5b9579140e78847ebc228b7347df7340e211522c0077",
   "auto_integration_complete": false,
   "bundle_digest": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e",
   "candidate_git_object_id": "sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5",
@@ -14,17 +14,17 @@
   "current_materialization_promotable": true,
   "current_materialization_structurally_promoted": true,
   "current_sync_executor_contract": {
-    "artifact_digest": "1fd015a043dfe48034df03d8a821cda5793c90694191a8b629672efaf33283ac",
+    "artifact_digest": "919bcb95b8a8dd4034ec22f12dff75a9edba8ebf0a08abba973025a85d9f1eac",
     "deletes_unreserved_source_directories": true,
     "enumerates_unreserved_source_directories_as_skills": true,
     "relative_path": "CodexSkills/sync_skills.py",
     "reserved_registry_paths_excluded_from_deletion": true,
     "reserved_registry_paths_excluded_from_skill_enumeration": true,
-    "verified_git_object_id": "sha1:dc653654603f5bfee3bd41890b49cfad700cf541"
+    "verified_git_object_id": "sha1:1c829553996c792e46cedc4570b30545fba9e071"
   },
   "exact_byte_promotion_complete": true,
   "exact_byte_promotion_required": true,
-  "exact_byte_promotion_scope": "POST_SOURCE_CONTENT_SYNC_PARITY_COMPLETE_SUCCESSOR_MATERIALIZATION",
+  "exact_byte_promotion_scope": "TELEIOSIS_SOURCE_PARITY_COMPLETE_SUCCESSOR_MATERIALIZATION",
   "external_trust_tuple_required_fields": [
     "canonical_snapshot_digest",
     "canonical_snapshot_path",
@@ -34,7 +34,7 @@
   ],
   "final_catalog_entries": [
     {
-      "artifact_digest": "e63dd7fc5fb71b0fbbb9c141cd3591d5d84ed6b6bdab69cd0345000b4b84b822",
+      "artifact_digest": "3e08890e90efc4c9f2385b235b25f04cbea5903aa6444946bf322f41af8f9874",
       "candidate_relative_path": "CodexSkills/governance/registry/materialized/registered/sources/agents/catalog.v1.json",
       "draft_relative_path": "CodexSkills/governance/registry/materialized/sources/agents/catalog.v1.json",
       "relative_path": "CodexSkills/registry/agents/_catalog/catalog.v1.json",
@@ -42,7 +42,7 @@
       "status": "REGISTERED"
     },
     {
-      "artifact_digest": "b56765774a5d9fcfa15c38c38b8280993ba792c80df4b658c4bbf71aeba6b95f",
+      "artifact_digest": "93683a13657e02ef59e099174d24b42100c96a1dbbcedd7bbc9636baba857de5",
       "candidate_relative_path": "CodexSkills/governance/registry/materialized/registered/sources/claude/catalog.v1.json",
       "draft_relative_path": "CodexSkills/governance/registry/materialized/sources/claude/catalog.v1.json",
       "relative_path": "CodexSkills/registry/claude/_catalog/catalog.v1.json",
@@ -50,7 +50,7 @@
       "status": "REGISTERED"
     },
     {
-      "artifact_digest": "50c26406329f594b531e29a3ca4c66f16371bc0d0ddfa0dcf103b4cf734fb8b3",
+      "artifact_digest": "6c64b03d075b7f92553d4c57866f447ea6f60ad8a401fcf365c48fb90bbd5406",
       "candidate_relative_path": "CodexSkills/governance/registry/materialized/registered/sources/codex/catalog.v1.json",
       "draft_relative_path": "CodexSkills/governance/registry/materialized/sources/codex/catalog.v1.json",
       "relative_path": "CodexSkills/registry/codex/_catalog/catalog.v1.json",
@@ -58,7 +58,7 @@
       "status": "REGISTERED"
     },
     {
-      "artifact_digest": "4a49b93ec8c94d2a801a485f29c721565985c53767115471ce7ccda70f53157a",
+      "artifact_digest": "ea9771ff32ab1c5982c2b19586fd3a3113bc7fc5a98bcb65dc0c734b1574e026",
       "candidate_relative_path": "CodexSkills/governance/registry/materialized/registered/sources/codex-system/catalog.v1.json",
       "draft_relative_path": "CodexSkills/governance/registry/materialized/sources/codex-system/catalog.v1.json",
       "relative_path": "CodexSkills/registry/codex-system/_catalog/catalog.v1.json",
@@ -67,7 +67,7 @@
     }
   ],
   "final_snapshot_path": "CodexSkills/registry/_global/registry-snapshot.v1.json",
-  "next_phase": "AUTO_BOUND_REFERENCE_RESOLVER_INTEGRATION",
+  "next_phase": "AUTO_TELEIOSIS_REGISTRY_EXACT_TUPLE_INTEGRATION",
   "post_reservation_rebuild_required": false,
   "post_source_content_sync_rebuild_required": false,
   "production_trust_permitted": false,
@@ -76,31 +76,31 @@
     "canonical_snapshot_path": "CodexSkills/registry/_global/registry-snapshot.v1.json",
     "canonical_snapshot_schema_id": "urn:linzecolin:agentdatabase:skillops:schema:registry-snapshot:v1",
     "mode": "REGISTERED",
-    "registry_snapshot_digest": "10979826bf63b49fbde8da6ece51d6ead6909225b3c62af994e110dea31e1718",
+    "registry_snapshot_digest": "7b5a74bd459a4737299444b68439c1799ba8a2159032636a24a987113eee9d12",
     "verified_git_object_id_source": "REPO_EXTERNAL_MECHANISM_SUCCESSOR_COMMIT"
   },
   "registry_compatibility_index_is_not_snapshot_truth": true,
   "registry_snapshot": {
     "binding_eligible_version_count": 0,
-    "current_identity_count": 88,
-    "current_instance_count": 88,
-    "current_source_skill_count": 88,
-    "current_version_count": 88,
+    "current_identity_count": 89,
+    "current_instance_count": 89,
+    "current_source_skill_count": 89,
+    "current_version_count": 89,
     "draft_relative_path": "CodexSkills/governance/registry/materialized/_global/registry-snapshot.v1.json",
     "draft_snapshot": {
-      "artifact_digest": "28aee7362be02651eaf1769f7e76cc7a844dec79094067d529bf3b12af7f3405",
+      "artifact_digest": "6cbdb3cd62f02fd9820bd14f5237ad83dc5c847be3e6c8b586743da2f33ffef3",
       "relative_path": "CodexSkills/governance/registry/materialized/_global/registry-snapshot.v1.json",
       "status": "DRAFT_NON_ACTIVE"
     },
     "proposed_final_relative_path": "CodexSkills/registry/_global/registry-snapshot.v1.json",
     "registered_candidate": {
-      "artifact_digest": "10979826bf63b49fbde8da6ece51d6ead6909225b3c62af994e110dea31e1718",
+      "artifact_digest": "7b5a74bd459a4737299444b68439c1799ba8a2159032636a24a987113eee9d12",
       "relative_path": "CodexSkills/governance/registry/materialized/registered/_global/registry-snapshot.v1.json",
       "status": "REGISTERED"
     },
-    "registry_snapshot_digest": "10979826bf63b49fbde8da6ece51d6ead6909225b3c62af994e110dea31e1718",
+    "registry_snapshot_digest": "7b5a74bd459a4737299444b68439c1799ba8a2159032636a24a987113eee9d12",
     "schema_id": "urn:linzecolin:agentdatabase:skillops:schema:registry-snapshot:v1",
-    "source_material_git_object_id": "sha1:dc653654603f5bfee3bd41890b49cfad700cf541",
+    "source_material_git_object_id": "sha1:a8f1f6ff8003db43fad722a5afd3b19615dd325e",
     "source_mirror_parity_satisfied": true,
     "status": "REGISTERED",
     "tracked_symlink_alias_count": 20
@@ -118,14 +118,14 @@
     "current_snapshot_can_emit_bound": false,
     "fail_closed_unknown_reason_code": "MAPPING_NOT_PROVABLE",
     "full_seven_field_skill_ref_required": true,
-    "implementation_status": "REGISTERED_NON_BINDING_MATERIALIZED",
+    "implementation_status": "REGISTERED_NON_BINDING_TELEIOSIS_MATERIALIZED",
     "request_schema_id": "urn:linzecolin:agentdatabase:skillops:schema:bound-reference-request:v1",
     "source_path_name_match_is_not_identity_evidence": true,
     "version_closure": "IDENTITY_TO_INSTANCE_TO_VERSION_UNIQUE_AND_DIGEST_EXACT"
   },
   "runtime_artifacts": [
     {
-      "artifact_digest": "4e19a4cd4eb612c29d2b4a604d0f0d335d2747770f81ddb48f8d28b6dfa76783",
+      "artifact_digest": "57b9ab36f3d98a03239698121ce6a63010d011c56b4ed7555e88f93fb1144a28",
       "relative_path": "CodexSkills/governance/tools/build_bound_reference_resolver.py"
     },
     {
@@ -191,11 +191,11 @@
   "source_drift_reconciliation": {
     "artifact_digest": "24d02db5182463912074c109f2b5be350126d62340f58e6463755edbad1b799c",
     "auto_evidence": {
-      "artifact_digest": "7f2e335b682ec98c15f2e21e74bc0c2af24768cda7e5ed1ddc1b5e341449ac84",
-      "verified_git_object_id": "sha1:dc653654603f5bfee3bd41890b49cfad700cf541"
+      "artifact_digest": "3e91bf41c9550fa48264db3b72ee102b0acec65b883374d2735fbd7169801d9e",
+      "verified_git_object_id": "sha1:1c829553996c792e46cedc4570b30545fba9e071"
     },
     "current_source_alias_count": 20,
-    "current_source_skill_count": 88,
+    "current_source_skill_count": 89,
     "historical_reconciliation_verified_git_object_id": "sha1:5db5beecf3de7ac916020ca988f6e875891e19b1",
     "historical_registry_records_retained": true,
     "missing_source_skill_roots": [
@@ -215,6 +215,60 @@
   "source_drift_reconciliation_complete": true,
   "source_mirror_parity_satisfied": true,
   "source_root_parity_satisfied": false,
-  "status": "DRAFT_NON_ACTIVE_PARITY_COMPLETE_MATERIALIZED",
+  "status": "DRAFT_NON_ACTIVE_TELEIOSIS_PARITY_MATERIALIZED",
+  "teleiosis_materialization": {
+    "added_source_skill_roots": [
+      "codex/teleiosis"
+    ],
+    "auto_source_sync": {
+      "artifact_digest": "3e91bf41c9550fa48264db3b72ee102b0acec65b883374d2735fbd7169801d9e",
+      "verified_git_object_id": "sha1:1c829553996c792e46cedc4570b30545fba9e071"
+    },
+    "binding_eligible": false,
+    "exact_predecessor_record_sets_preserved": true,
+    "predecessor_registry_snapshot": {
+      "registry_snapshot_digest": "10979826bf63b49fbde8da6ece51d6ead6909225b3c62af994e110dea31e1718",
+      "source_skill_count": 88,
+      "verified_git_object_id": "sha1:df63339e1bb6106250ce169241477191744c254f"
+    },
+    "source_material_git_object_id": "sha1:a8f1f6ff8003db43fad722a5afd3b19615dd325e",
+    "source_skill_count": 89,
+    "teleiosis_catalog_entry": {
+      "canonical_name": "teleiosis",
+      "eval_profile_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "identity_ref": {
+        "artifact_digest": "024cb2ca18e54291a23d56bb09a7bbb5dbe4c3ead085cc0ccfc09a4deef3a481",
+        "skill_identity_uid": "ski_6E4M0H86C26YQQPZ0GQ4MGE8ZS"
+      },
+      "instance_ref": {
+        "artifact_digest": "d3d64567e5f443f1fcf6741fd0869e2753dc8872bbed2db77e7c148511ade7fd",
+        "skill_instance_uid": "skinst_2MQKB8MH3WP7GQJT017WRD1X4G"
+      },
+      "material": {
+        "byte_count": 598392,
+        "content_digest": "dbfbb07976a375a6d1b3e563476d2041bfabd772597aeb8a0925a1800d4b4364",
+        "metadata_state": "VALID",
+        "regular_file_count": 104,
+        "symlink_alias_count": 0,
+        "tree_digest": "079d557cefe596f5285ca6389b069c553efab1ced342824f0370151883941d35"
+      },
+      "promotion_decision_ref": {
+        "artifact_digest": null,
+        "reason_code": "NOT_MATERIALIZED",
+        "state": "UNAVAILABLE",
+        "uid": null
+      },
+      "source_relative_path": "codex/teleiosis",
+      "version_ref": {
+        "skill_version_uid": "skv_091PBMDHKAXFWC5K9C580Y59NJ",
+        "version_record_digest": "57c3145fbf3eaa8433c193416d3ad9025f32038491666846bc475888204b11e9"
+      }
+    }
+  },
   "whole_source_parity_satisfied": false
 }

@@ -1,5 +1,5 @@
 {
-  "artifact_digest": "4a49b93ec8c94d2a801a485f29c721565985c53767115471ce7ccda70f53157a",
+  "artifact_digest": "ea9771ff32ab1c5982c2b19586fd3a3113bc7fc5a98bcb65dc0c734b1574e026",
   "bundle_digest": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e",
   "entries": [
     {
@@ -225,7 +225,7 @@
   "protocol_revision": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1",
   "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:registry-source-catalog:v1",
   "source_class": "CODEX_SYSTEM",
-  "source_material_git_object_id": "sha1:dc653654603f5bfee3bd41890b49cfad700cf541",
+  "source_material_git_object_id": "sha1:a8f1f6ff8003db43fad722a5afd3b19615dd325e",
   "source_material_policy_digest": "7d8453b2dd5b78ec777c915d6cf009eac92bb6ff25cad9f88a9da38fb84cc183",
   "source_material_policy_id": "urn:linzecolin:agentdatabase:skillops:policy:source-material:v1",
   "source_root_path": "CodexSkills/registry/codex-system",

@@ -1,5 +1,5 @@
 {
-  "artifact_digest": "b56765774a5d9fcfa15c38c38b8280993ba792c80df4b658c4bbf71aeba6b95f",
+  "artifact_digest": "93683a13657e02ef59e099174d24b42100c96a1dbbcedd7bbc9636baba857de5",
   "bundle_digest": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e",
   "entries": [
     {
@@ -117,7 +117,7 @@
   "protocol_revision": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1",
   "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:registry-source-catalog:v1",
   "source_class": "CLAUDE",
-  "source_material_git_object_id": "sha1:dc653654603f5bfee3bd41890b49cfad700cf541",
+  "source_material_git_object_id": "sha1:a8f1f6ff8003db43fad722a5afd3b19615dd325e",
   "source_material_policy_digest": "7d8453b2dd5b78ec777c915d6cf009eac92bb6ff25cad9f88a9da38fb84cc183",
   "source_material_policy_id": "urn:linzecolin:agentdatabase:skillops:policy:source-material:v1",
   "source_root_path": "CodexSkills/registry/claude",
