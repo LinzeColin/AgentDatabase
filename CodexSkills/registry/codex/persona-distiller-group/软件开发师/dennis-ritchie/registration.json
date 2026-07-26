@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:dennisritchie",
+  "canonical_name": "Dennis Ritchie",
+  "identity_family_id": "software-developer",
+  "identity_mode": "single",
+  "registration_category": "软件开发师",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "dennis-ritchie",
+  "subject_uid": "person-be1d2b08b315a98f",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/dennis-ritchie-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-26T11:20:51Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "dc784e20aa78fe20c323da7d7c465bf73b913616e7f0687714a972f636db39fc",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/dennis-ritchie-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "e4d9375d622d790f9c3131aba52476168c9f4f9254af5fa26e33d5e8909001c8",
+      "runtime_size_bytes": 65790,
+      "size_bytes": 73374
+    }
+  ]
+}

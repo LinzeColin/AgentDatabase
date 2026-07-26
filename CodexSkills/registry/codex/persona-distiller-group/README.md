@@ -60,12 +60,12 @@
 ## 当前登记
 
 <!-- PERSONA-REGISTRY:START -->
-当前唯一登记：**71 个人物**。
+当前唯一登记：**72 个人物**。
 
 | 唯一目录 | 人物数 |
 |---|---:|
 | `材料建工师/` | 15 |
-| `软件开发师/` | 18 |
+| `软件开发师/` | 19 |
 | `艺术设计师/` | 0 |
 | `创业经营师/` | 7 |
 | `投资资本师/` | 11 |
@@ -76,7 +76,7 @@
 | `财务合规师/` | 1 |
 | `医疗护理师/` | 0 |
 | `农林牧渔师/` | 0 |
-| **总计** | **71** |
+| **总计** | **72** |
 
 | 人物 | 唯一身份 | 版本 | 选入原因 | 最值得蒸馏的特点 | 对用户的利益/帮助 | 应用场景 | 关键能力 | 完整 ZIP |
 |---|---|---|---|---|---|---|---|---|
@@ -137,6 +137,7 @@
 | Barbara Liskov | `软件开发师` | `0.0.0.1` | 其公开技术证据横跨数据抽象、编程语言、类型、复制、拜占庭容错、信息流与事务，足以形成跨五十年的可执行工程模型。；原始论文、系统实现、基准、教材、直接访谈和外部反例能够同时约束能力、工作方法、表达与边界。 | 以客户端可观察行为定义抽象边界，再隐藏表示以获得局部推理。；在协议设计前固定故障模型，并把恢复、升级和角色变化作为一等状态。 | 把模糊技术问题压缩为可观察规格、不变量、失败模型和验证计划。；在复杂架构中找到能够删除状态、消息、权限和跨模块推理的抽象。 | research-problem-solving；technical-architecture | 数据抽象与行为规格；模块化与局部推理 | [ZIP](软件开发师/barbara-liskov/versions/0.0.0.1/barbara-liskov-persona-distillation-delivery-v0.0.0.1.zip) |
 | Chip Huyen | `软件开发师` | `0.0.0.1` | A large first-party corpus links production AI engineering, system design, technical education, open-source artifacts, and one documented AI-infrastructure startup outcome.；The same decision patterns recur across courses, books, essays, interviews, code, and institutional records, allowing cross-context adjudication rather than voice imitation. | Frames AI work as an end-to-end iterative system rather than an isolated model.；Uses simple baselines and progressive complexity, with evaluation and feedback as gating mechanisms. | Produces production-minded AI architecture and review plans with explicit objectives, baselines, evaluation, monitoring, and rollback.；Turns fast-moving technical fields into navigable maps and learning paths without hiding uncertainty. | AI/ML system architecture and production-readiness review；Foundation-model application strategy, evaluation, and feedback design | End-to-end AI/ML system design；Evaluation, monitoring, and feedback-loop design | [ZIP](软件开发师/chip-huyen/versions/0.0.0.1/chip-huyen-persona-distillation-delivery-v0.0.0.1.zip) |
 | Christopher Manning | `软件开发师` | `0.0.0.1` | Longitudinal public record spans formal linguistics, statistical NLP, neural methods, LLMs, evaluation, open tooling and graduate education.；Multiple independent artifact classes support a stable representation-first, measurement-first research method. | Representation and task definition before architecture novelty.；Graded, decomposed account of language understanding rather than binary slogans. | Turns broad AI questions into cheap, discriminative experiments and explicit go/no-go gates.；Prevents benchmark, fluency and scale from being misread as deployment readiness or full understanding. | NLP/LLM research strategy and experiment design；Technical architecture and benchmark review | Frame NLP/LLM research questions as measurable phenomena, representations, baselines and falsifiable experiments.；Review model architectures, objectives, datasets and benchmarks with error, calibration, factuality and transfer controls. | [ZIP](软件开发师/christopher-manning/versions/0.0.0.1/christopher-manning-persona-distillation-delivery-v0.0.0.1.zip) |
+| Dennis Ritchie | `软件开发师` | `0.0.0.1` | C 语言创造者与 Unix 共同创造者，其设计取舍构成现代系统软件的事实基线；留下罕见的第一手设计史自述（HOPL II 论文与演讲实录），可追溯到具体特性、具体机器、具体年份 | 约束优先：先算真实机器、预算与人手的账，撑不住的方案不进候选集；存量优先：已发布的接口视为承诺，破坏性变更的代价由设计者吸收而非转嫁使用者 | 接口要改而调用方动不了时，给出保兼容的具体做法与迁移成本估算，而不是原则口号；技术选型时先帮你把撑不住的方案筛掉，再在可行集里比优劣 | 编程语言与接口设计：类型系统引入时机、运算符与语法取舍、与前身版本的迁移路径；破坏性变更与版本兼容：有大量存量调用方时如何演进接口、迁移成本落在谁头上 | 在硬件、预算与人手的硬约束下，取能长期存活的最小机制；为大量存量代码设计可迁移的接口演进方案，并显式给出迁移成本与被放弃的选项 | [ZIP](软件开发师/dennis-ritchie/versions/0.0.0.1/dennis-ritchie-persona-distillation-delivery-v0.0.0.1.zip) |
 | Donald Knuth | `软件开发师` | `0.0.0.1` | 其著作、访谈、决策与外部评价构成密集且连续的一手证据，可构建可反证的执行模型。；以'算法分析'奠基者与 TeX 作者身份，提供可迁移的形式化与精确分析方法内核。 | 不满足于大 O，追求精确常数与平均情形分析；把程序视为写给人看的文学（文学编程） | 把模糊的性能/正确性问题转为可精确分析与证明的结构。；在代码与文档中贯彻'向人解释'，提升可靠性与可维护性。 | 算法设计与精确复杂度分析（含常数项与平均情形）；程序正确性、文学编程与代码可读性评审 | 算法分析与渐进/精确复杂度；组合数学与离散数学 | [ZIP](软件开发师/donald-knuth/versions/0.0.0.1/donald-knuth-persona-distillation-delivery-v0.0.0.1.zip) |
 | Hamel Husain | `软件开发师` | `0.0.0.1` | 其公开作品从 CodeSearchNet、MLOps 与开发者工具延伸到数十个 AI 产品的评测实践，形成可追溯的测量与调试谱系。；公开语料同时覆盖工程实现、教学表达、工具反转、商业化取舍与咨询能力转移，可构建执行模型而非只复制文风。 | 先看真实数据和失败样本，再谈模型、指标与平台；把难评估重构为产品可验证性、provenance 与小判定单元 | 把模糊的“AI 质量不好”转成可观察、可排序、可修复的失败系统。；设计最小 data viewer、标注流程、rubric、LLM judge 验证和回归评测。 | AI 产品错误分析与评测体系设计；LLM-as-a-judge 验证与 failure taxonomy 建立 | 真实 trace 驱动的错误分析与评测闭环；领域专家标注、定性编码与窄判据设计 | [ZIP](软件开发师/hamel-husain/versions/0.0.0.1/hamel-husain-persona-distillation-delivery-v0.0.0.1.zip) |
 | Jerry Liu | `软件开发师` | `0.0.0.1` | Strong public record spanning code, technical essays, interviews, product launches, and company strategy from 2022 through 2026.；Distinctive, transferable model for external context, RAG evolution, document processing, and developer-platform design. | Find the current bottleneck and move the architecture toward it.；Treat LLMs as reasoning engines that need reliable external context. | Produces rigorous LLM/RAG/agent architecture reviews tied to data shape and failure cost.；Translates frontier-model changes into concrete product and platform decisions. | LLM, RAG, long-context, and agent architecture design；Document parsing, retrieval, extraction, and workflow automation | Context and data architecture for LLM applications；Parse–Retrieve–Reason–Act workflow decomposition | [ZIP](软件开发师/jerry-liu-llamaindex/versions/0.0.0.1/jerry-liu-llamaindex-persona-distillation-delivery-v0.0.0.1.zip) |
