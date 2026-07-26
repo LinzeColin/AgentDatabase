@@ -125,6 +125,14 @@ Broad command ownership retains the pre-existing external baseline failure:
   top-level script entrypoints: expected 84, observed 90
 ```
 
+The successor-control test fixture is transition-safe: the immutable
+`df63339...` predecessor is always loaded from Git, a coherent historical view
+is used only inside the one test that must reach the missing-snapshot gate, and
+stale production calls expect the exact first failure for the current checkout
+(`BOOTSTRAP_AUTO_RUNTIME_INTERFACE_LOCAL_DRIFT` before a successor control,
+`BOOTSTRAP_CONTROL_INTERFACE_LOCAL_DRIFT` after one). No production gate is
+patched or skipped.
+
 Ordinary FF-safe push, detached GitHub object/raw readback, and owned cleanup
 remain completion-time evidence and are reported externally.
 

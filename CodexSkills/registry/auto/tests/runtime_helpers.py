@@ -212,6 +212,26 @@ def repository_control_raw() -> bytes:
 
 
 @lru_cache(maxsize=1)
+def bound_reference_control_raw() -> bytes:
+    """Read the immutable pre-resolver-integration control from Git."""
+
+    object_id = _split_git_object(
+        REPO_ROOT,
+        BOUND_REFERENCE_CONTROL_GIT_OBJECT,
+        "TEST_BOUND_REFERENCE_CONTROL",
+    )
+    raw = _git_blob(REPO_ROOT, object_id, CONTROL_INTERFACE_PATH)
+    if (
+        hashlib.sha256(raw).hexdigest()
+        != BOUND_REFERENCE_CONTROL_INTERFACE_RAW_SHA256
+    ):
+        raise AssertionError(
+            "TEST_BOUND_REFERENCE_CONTROL_DIGEST_MISMATCH"
+        )
+    return raw
+
+
+@lru_cache(maxsize=1)
 def final_contract():
     """Load final 31/5 content without claiming current control binding."""
 
@@ -435,6 +455,21 @@ def expected_repository_control_failure_pattern() -> str:
     """Exact production failure for the current repository predecessor."""
 
     predecessor = repository_control_raw()
+    local = REPO_ROOT.joinpath(
+        *CONTROL_INTERFACE_PATH.split("/")
+    ).read_bytes()
+    code = (
+        "BOOTSTRAP_AUTO_RUNTIME_INTERFACE_LOCAL_DRIFT"
+        if local == predecessor
+        else "BOOTSTRAP_CONTROL_INTERFACE_LOCAL_DRIFT"
+    )
+    return rf"^{re.escape(code)}$"
+
+
+def expected_bound_reference_control_failure_pattern() -> str:
+    """Exact safe failure before and after the resolver control sync."""
+
+    predecessor = bound_reference_control_raw()
     local = REPO_ROOT.joinpath(
         *CONTROL_INTERFACE_PATH.split("/")
     ).read_bytes()

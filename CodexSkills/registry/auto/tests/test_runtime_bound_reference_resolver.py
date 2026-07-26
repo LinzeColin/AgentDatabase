@@ -16,6 +16,7 @@ from CodexSkills.registry.auto.runtime.binding_resolver import (
 )
 from CodexSkills.registry.auto.runtime.bootstrap import (
     BootstrapContext,
+    CONTROL_INTERFACE_PATH,
     bootstrap_runtime,
     require_bound_reference_resolver_authority,
 )
@@ -26,6 +27,8 @@ from runtime_helpers import (
     BOUND_REFERENCE_CONTROL_GIT_OBJECT,
     REPO_ROOT,
     bound_reference_control_trust,
+    bound_reference_control_raw,
+    expected_bound_reference_control_failure_pattern,
     final_contract,
     registered_snapshot_trust,
     synthetic_repository_bound_context,
@@ -212,7 +215,7 @@ class RuntimeBoundReferenceResolverTests(unittest.TestCase):
     ) -> None:
         with self.assertRaisesRegex(
             AutoRuntimeError,
-            "^BOOTSTRAP_AUTO_RUNTIME_INTERFACE_LOCAL_DRIFT$",
+            expected_bound_reference_control_failure_pattern(),
         ):
             bootstrap_runtime(
                 REPO_ROOT,
@@ -234,6 +237,9 @@ class RuntimeBoundReferenceResolverTests(unittest.TestCase):
         )
         auto_interface = parse_json_bytes(auto_raw)
         coherent = {
+            REPO_ROOT.joinpath(*CONTROL_INTERFACE_PATH.split("/")): (
+                bound_reference_control_raw()
+            ),
             REPO_ROOT.joinpath(*transport["relative_path"].split("/")): (
                 auto_raw
             )
@@ -310,7 +316,7 @@ class RuntimeBoundReferenceResolverTests(unittest.TestCase):
         ) as request_reader:
             with self.assertRaisesRegex(
                 AutoRuntimeError,
-                "^BOOTSTRAP_AUTO_RUNTIME_INTERFACE_LOCAL_DRIFT$",
+                expected_bound_reference_control_failure_pattern(),
             ):
                 bound_reference_resolver_cli.main(argv)
             request_reader.assert_not_called()
