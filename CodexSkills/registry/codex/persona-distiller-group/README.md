@@ -60,12 +60,12 @@
 ## 当前登记
 
 <!-- PERSONA-REGISTRY:START -->
-当前唯一登记：**84 个人物**。
+当前唯一登记：**85 个人物**。
 
 | 唯一目录 | 人物数 |
 |---|---:|
 | `材料建工师/` | 15 |
-| `软件开发师/` | 31 |
+| `软件开发师/` | 32 |
 | `艺术设计师/` | 0 |
 | `创业经营师/` | 7 |
 | `投资资本师/` | 11 |
@@ -76,7 +76,7 @@
 | `财务合规师/` | 1 |
 | `医疗护理师/` | 0 |
 | `农林牧渔师/` | 0 |
-| **总计** | **84** |
+| **总计** | **85** |
 
 | 人物 | 唯一身份 | 版本 | 选入原因 | 最值得蒸馏的特点 | 对用户的利益/帮助 | 应用场景 | 关键能力 | 完整 ZIP |
 |---|---|---|---|---|---|---|---|---|
@@ -142,6 +142,7 @@
 | Christopher Manning | `软件开发师` | `0.0.0.1` | Longitudinal public record spans formal linguistics, statistical NLP, neural methods, LLMs, evaluation, open tooling and graduate education.；Multiple independent artifact classes support a stable representation-first, measurement-first research method. | Representation and task definition before architecture novelty.；Graded, decomposed account of language understanding rather than binary slogans. | Turns broad AI questions into cheap, discriminative experiments and explicit go/no-go gates.；Prevents benchmark, fluency and scale from being misread as deployment readiness or full understanding. | NLP/LLM research strategy and experiment design；Technical architecture and benchmark review | Frame NLP/LLM research questions as measurable phenomena, representations, baselines and falsifiable experiments.；Review model architectures, objectives, datasets and benchmarks with error, calibration, factuality and transfer controls. | [ZIP](软件开发师/christopher-manning/versions/0.0.0.1/christopher-manning-persona-distillation-delivery-v0.0.0.1.zip) |
 | Dennis Ritchie | `软件开发师` | `0.0.0.1` | C 语言创造者与 Unix 共同创造者，其设计取舍构成现代系统软件的事实基线；留下罕见的第一手设计史自述（HOPL II 论文与演讲实录），可追溯到具体特性、具体机器、具体年份 | 约束优先：先算真实机器、预算与人手的账，撑不住的方案不进候选集；存量优先：已发布的接口视为承诺，破坏性变更的代价由设计者吸收而非转嫁使用者 | 接口要改而调用方动不了时，给出保兼容的具体做法与迁移成本估算，而不是原则口号；技术选型时先帮你把撑不住的方案筛掉，再在可行集里比优劣 | 编程语言与接口设计：类型系统引入时机、运算符与语法取舍、与前身版本的迁移路径；破坏性变更与版本兼容：有大量存量调用方时如何演进接口、迁移成本落在谁头上 | 在硬件、预算与人手的硬约束下，取能长期存活的最小机制；为大量存量代码设计可迁移的接口演进方案，并显式给出迁移成本与被放弃的选项 | [ZIP](软件开发师/dennis-ritchie/versions/0.0.0.1/dennis-ritchie-persona-distillation-delivery-v0.0.0.1.zip) |
 | Donald Knuth | `软件开发师` | `0.0.0.1` | 其著作、访谈、决策与外部评价构成密集且连续的一手证据，可构建可反证的执行模型。；以'算法分析'奠基者与 TeX 作者身份，提供可迁移的形式化与精确分析方法内核。 | 不满足于大 O，追求精确常数与平均情形分析；把程序视为写给人看的文学（文学编程） | 把模糊的性能/正确性问题转为可精确分析与证明的结构。；在代码与文档中贯彻'向人解释'，提升可靠性与可维护性。 | 算法设计与精确复杂度分析（含常数项与平均情形）；程序正确性、文学编程与代码可读性评审 | 算法分析与渐进/精确复杂度；组合数学与离散数学 | [ZIP](软件开发师/donald-knuth/versions/0.0.0.1/donald-knuth-persona-distillation-delivery-v0.0.0.1.zip) |
+| Douglas Engelbart | `软件开发师` | `0.0.0.1` | 1997 年 ACM 图灵奖、2000 年美国国家技术奖章；1962 年框架与 1968 年演示的作者与主导者；dougengelbart.org 完整存活，1962 年报告全文与站内大量含其原话的材料可直接取用 | 先给整体框架再谈局部；被问具体功能会先拉回「这在提升什么能力」；坚持使用自造术语（H-LAM/T、bootstrapping、collective IQ）并解释它，不换流行说法 | 把「买了工具没效果」诊断为只动了五样里的一样，并给出一体化补救；给出五项检查判断团队是真采纳还是只装了工具 | 诊断「换了工具却没提升」的团队；把模糊的能力提升愿望转成可倒推的工程目标 | 把「让人更强」转成可倒推的能力目标与整体系统设计；识别只换工具导致的伪改进，并给出人—方法—训练—工具的一体化方案 | [ZIP](软件开发师/douglas-engelbart/versions/0.0.0.1/douglas-engelbart-persona-distillation-delivery-v0.0.0.1.zip) |
 | Edsger Dijkstra | `软件开发师` | `0.0.0.1` | 1972 年 ACM 图灵奖得主，最短路径算法、信号量、银行家算法、自稳定均为其本人工作；留下约 1300 份亲笔编号的 EWD 手稿并生前公开分发，是本项目可得的最大单人一手语料库 | 短句、判断在前、论证紧随、不加缓冲词；不说机器知道／想要／试图；把「测试只能证明缺陷存在、永远不能证明缺陷不存在」当作硬前提而非修辞 | 在验收前问出「你能说出它为什么一定对吗」，把隐性缺陷从上线后挪到设计期；偶发死锁不靠复现，靠资源获取顺序与安全序列判据直接定位 | 算法设计与正确性论证：给出不变式与终止性论证，而不是靠测试建立信心；并发与同步问题诊断：从共享资源与获取顺序层面分析死锁，而不是加日志复现 | 对算法给出不变式、终止性与正确性论证；从原语层面分析并发死锁：资源获取偏序或安全序列判据 | [ZIP](软件开发师/edsger-dijkstra/versions/0.0.0.1/edsger-dijkstra-persona-distillation-delivery-v0.0.0.1.zip) |
 | Guido van Rossum | `软件开发师` | `0.0.0.1` | Python 创造者，其可读性优先的语法取向影响了数以千万计的开发者与几乎所有编程教学入口；留下罕见的完整决策留档：PEP 体系加上他本人的两个博客，可逐条追溯三十余年的设计理由 | 可读性来自目标：为让普通人能编程，可读性是硬约束不是审美偏好；合法性来自流程：变更走公开提案，理由与被否方案一起留档，自己也服从 | 判断一个 API 或语法是否自解释，给出具体判据而非主观评价；把团队规范写成真会被执行的样子：每条附理由、区分硬约束与偏好、写明例外、能自动检查的交给工具 | 编程语言与 API 的可读性设计；工程规范制定：把约定写成可执行、带理由的规定 | 判断一个 API 或语法对非专业读者是否自解释；把风格与约定写成带理由、可执行、可自动检查的规范 | [ZIP](软件开发师/guido-van-rossum/versions/0.0.0.1/guido-van-rossum-persona-distillation-delivery-v0.0.0.1.zip) |
 | Hamel Husain | `软件开发师` | `0.0.0.1` | 其公开作品从 CodeSearchNet、MLOps 与开发者工具延伸到数十个 AI 产品的评测实践，形成可追溯的测量与调试谱系。；公开语料同时覆盖工程实现、教学表达、工具反转、商业化取舍与咨询能力转移，可构建执行模型而非只复制文风。 | 先看真实数据和失败样本，再谈模型、指标与平台；把难评估重构为产品可验证性、provenance 与小判定单元 | 把模糊的“AI 质量不好”转成可观察、可排序、可修复的失败系统。；设计最小 data viewer、标注流程、rubric、LLM judge 验证和回归评测。 | AI 产品错误分析与评测体系设计；LLM-as-a-judge 验证与 failure taxonomy 建立 | 真实 trace 驱动的错误分析与评测闭环；领域专家标注、定性编码与窄判据设计 | [ZIP](软件开发师/hamel-husain/versions/0.0.0.1/hamel-husain-persona-distillation-delivery-v0.0.0.1.zip) |

@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:douglasengelbart",
+  "canonical_name": "Douglas Engelbart",
+  "identity_family_id": "software-developer",
+  "identity_mode": "single",
+  "registration_category": "软件开发师",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "douglas-engelbart",
+  "subject_uid": "person-a6460803d705cd4a",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/douglas-engelbart-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-26T19:06:15Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "cb5443588919e7527dbf0d0479a783da6946f05dc5645959f610a5199fc3c3b5",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/douglas-engelbart-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "f497e26ec19997474f78bbe25cb98d3857882c5554bd83df42e73c94c87b6b05",
+      "runtime_size_bytes": 63107,
+      "size_bytes": 69315
+    }
+  ]
+}

@@ -11,7 +11,7 @@
     "材料建工师": 15,
     "艺术设计师": 0,
     "财务合规师": 1,
-    "软件开发师": 31
+    "软件开发师": 32
   },
   "generated": true,
   "products": [
@@ -3697,6 +3697,64 @@
         "在代码与文档中贯彻'向人解释'，提升可靠性与可维护性。",
         "以长期正确优先的框架审查工程取舍与优先级。",
         "明确其能力边界，避免把声望外推为跨域权威。"
+      ],
+      "version_count": 1
+    },
+    {
+      "application_scenarios": [
+        "诊断「换了工具却没提升」的团队",
+        "把模糊的能力提升愿望转成可倒推的工程目标",
+        "设计工具时同时设计配套的方法与训练",
+        "用完整可运行的系统确立一个尚不存在的范式",
+        "为熟练者的能力上限做取舍并把训练成本写进方案",
+        "判断一个能力提升方案会不会落空"
+      ],
+      "canonical_name": "Douglas Engelbart",
+      "distillation_traits": [
+        "先给整体框架再谈局部；被问具体功能会先拉回「这在提升什么能力」",
+        "坚持使用自造术语（H-LAM/T、bootstrapping、collective IQ）并解释它，不换流行说法",
+        "谈自己的发明时放回系统里讲，不单独展示",
+        "讲成果带上团队：鼠标原型讲 Bill English，1968 演示讲 ARC",
+        "对「只要工具不要方法」明确表达不认同，不因掌声默认接受",
+        "承认自己的框架只有工具层被采纳，且从未改变做法"
+      ],
+      "hard_boundaries": [
+        "This is an evidence-grounded model, not the person, authorization, endorsement, or current opinion."
+      ],
+      "identity_family_id": "software-developer",
+      "key_capabilities": [
+        "把「让人更强」转成可倒推的能力目标与整体系统设计",
+        "识别只换工具导致的伪改进，并给出人—方法—训练—工具的一体化方案",
+        "设计自举机制让改进产生复利",
+        "用端到端完整跑通的系统证明新范式",
+        "为能力上限而非上手速度做界面取舍并说明代价",
+        "用五项检查区分真采纳与伪采纳（工具使用率是最常见的伪信号）"
+      ],
+      "latest_artifact": "软件开发师/douglas-engelbart/versions/0.0.0.1/douglas-engelbart-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "0.1.0-draft",
+      "latest_outer_sha256": "cb5443588919e7527dbf0d0479a783da6946f05dc5645959f610a5199fc3c3b5",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "f497e26ec19997474f78bbe25cb98d3857882c5554bd83df42e73c94c87b6b05",
+      "readiness": "ready",
+      "registration": "软件开发师/douglas-engelbart/registration.json",
+      "registration_category": "软件开发师",
+      "research_cutoff": "2013-07-02",
+      "selection_reasons": [
+        "1997 年 ACM 图灵奖、2000 年美国国家技术奖章；1962 年框架与 1968 年演示的作者与主导者",
+        "dougengelbart.org 完整存活，1962 年报告全文与站内大量含其原话的材料可直接取用",
+        "他与 Alan Kay 在「新手学不会是谁的问题」上给出相反答案，是团队内极干净的一组对照",
+        "其框架只有工具层被采纳、ARC 解体、NLS 商业化失败——是校准而非神化的好样本"
+      ],
+      "subject_origin": "public",
+      "subject_slug": "douglas-engelbart",
+      "subject_uid": "person-a6460803d705cd4a",
+      "team_card": "软件开发师/douglas-engelbart/team-card.json",
+      "user_value": [
+        "把「买了工具没效果」诊断为只动了五样里的一样，并给出一体化补救",
+        "给出五项检查判断团队是真采纳还是只装了工具",
+        "在评审时问出「这在提升什么能力」——说不清就不往下做",
+        "把「做的人自己先用」设为硬性条件，让改进产生复利",
+        "引用其观点时自动拦下「鼠标是他发明并命名的」「hypertext 是他提的」这类常见错误归属"
       ],
       "version_count": 1
     },
