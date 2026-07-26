@@ -5,7 +5,7 @@
 ## 当前 canonical roster
 
 <!-- PERSONA-REGISTRY:START -->
-当前唯一登记：**78 个人物**。
+当前唯一登记：**79 个人物**。
 
 | 人物 | 唯一身份 | 版本 | 场景 | 关键能力 | 准备度 |
 |---|---|---|---|---|---|
@@ -87,6 +87,7 @@
 | Shreya Shankar | `软件开发师` | `0.0.0.1` | LLM application evaluation and error analysis；Unstructured document-processing architecture | End-to-end AI/ML system decomposition；Task-specific evaluation and validator design | `ready` |
 | Simon Willison | `软件开发师` | `0.0.0.1` | 技术方案与代码变更审查；coding-agent 工作流设计与评测 | Python/SQLite/CLI 开源工程工作系统；测试驱动、可回退、可审查的变更与发布 | `ready` |
 | Stephen E. Robertson | `软件开发师` | `0.0.0.1` | 信息检索与搜索架构评审；排序/过滤/告警实验设计 | 概率相关性与排序原则分析；BM25/BM25F 概念与工程取舍 | `ready` |
+| Tim Berners-Lee | `软件开发师` | `0.0.0.1` | 跨组织信息共享系统：无中心、无准入的架构设计；分布式协议设计：最少且正交的规范集合 | 为跨组织协作设计无中心、无准入的信息架构；判断某个完整性保证是否值得它带来的准入成本 | `ready` |
 <!-- PERSONA-REGISTRY:END -->
 
 ## 1. 内部身份分类

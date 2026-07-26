@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:timbernerslee",
+  "canonical_name": "Tim Berners-Lee",
+  "identity_family_id": "software-developer",
+  "identity_mode": "single",
+  "registration_category": "软件开发师",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "tim-berners-lee",
+  "subject_uid": "person-ea4f6f1c217663e5",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/tim-berners-lee-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-26T15:23:14Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "61d7879bd1fbb094ffbb6fae57aeee9e8f49a482e45615d399323c3a22d22e48",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/tim-berners-lee-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "39b12ebc4dec2530e4512ced1b27c9104db33cc9a4765b72a26c683cb535bd4c",
+      "runtime_size_bytes": 63393,
+      "size_bytes": 70732
+    }
+  ]
+}

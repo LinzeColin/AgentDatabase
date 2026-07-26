@@ -60,12 +60,12 @@
 ## 当前登记
 
 <!-- PERSONA-REGISTRY:START -->
-当前唯一登记：**78 个人物**。
+当前唯一登记：**79 个人物**。
 
 | 唯一目录 | 人物数 |
 |---|---:|
 | `材料建工师/` | 15 |
-| `软件开发师/` | 25 |
+| `软件开发师/` | 26 |
 | `艺术设计师/` | 0 |
 | `创业经营师/` | 7 |
 | `投资资本师/` | 11 |
@@ -76,7 +76,7 @@
 | `财务合规师/` | 1 |
 | `医疗护理师/` | 0 |
 | `农林牧渔师/` | 0 |
-| **总计** | **78** |
+| **总计** | **79** |
 
 | 人物 | 唯一身份 | 版本 | 选入原因 | 最值得蒸馏的特点 | 对用户的利益/帮助 | 应用场景 | 关键能力 | 完整 ZIP |
 |---|---|---|---|---|---|---|---|---|
@@ -158,6 +158,7 @@
 | Shreya Shankar | `软件开发师` | `0.0.0.1` | A rare cross-domain record connecting production ML failures, data systems, human–AI interaction, open-source system building, and industry-facing AI evaluation.；Public materials span nearly a decade and multiple evidence forms, enabling longitudinal rather than style-only distillation. | User workflow and data pipeline are treated as the real unit of AI product design.；Evaluation criteria are discovered from actual outputs and refined with human feedback. | Design more reliable LLM and data applications without over-centering model choice.；Build task-specific evals, monitoring, and continual-improvement loops. | LLM application evaluation and error analysis；Unstructured document-processing architecture | End-to-end AI/ML system decomposition；Task-specific evaluation and validator design | [ZIP](软件开发师/shreya-shankar/versions/0.0.0.1/shreya-shankar-persona-distillation-delivery-v0.0.0.1.zip) |
 | Simon Willison | `软件开发师` | `0.0.0.1` | 需要以可执行证据、测试和公开工作流审查软件与 AI 工程任务；需要把复杂技术解释为可运行示例、注释性报告和开放问题 | 测试、文档、issue、release notes 与 TIL 构成外部认知系统；从具体用户问题生长小而可组合的 CLI、SQLite 与插件工具 | 把模糊技术想法转成可验证的最小实现与发布闭环；为 AI 辅助编码建立测试、人工演练、provenance 和停止规则 | 技术方案与代码变更审查；coding-agent 工作流设计与评测 | Python/SQLite/CLI 开源工程工作系统；测试驱动、可回退、可审查的变更与发布 | [ZIP](软件开发师/simon-willison/versions/0.0.0.1/simon-willison-persona-distillation-delivery-v0.0.0.1.zip) |
 | Stephen E. Robertson | `软件开发师` | `0.0.0.1` | BM25 与概率相关性框架的核心奠基者之一；跨理论、操作系统与共享评测的长期研究轨迹 | 显式定义事件空间与假设；优先简单稳健且排序等价的近似 | 审查搜索/排序方案的目标函数、假设与评测泄漏；建立 BM25 或其他可解释强基线并设计升级实验 | 信息检索与搜索架构评审；排序/过滤/告警实验设计 | 概率相关性与排序原则分析；BM25/BM25F 概念与工程取舍 | [ZIP](软件开发师/stephen-e-robertson/versions/0.0.0.1/stephen-e-robertson-persona-distillation-delivery-v0.0.0.1.zip) |
+| Tim Berners-Lee | `软件开发师` | `0.0.0.1` | 万维网发明人，HTML／HTTP／URI 三件规范是当今几乎全部信息系统的地基；1993 年推动 CERN 免版税开放，是“采纳门槛而非技术优势决定扩散”这一判断最强的历史证据 | 照观察到的真实结构建模，而不是照组织图；容错换扩散：宁可允许引用失效，也不要中心登记与准入 | 设计跨组织系统时，帮你判断哪些保证必须放弃才能让各方都不被别人管；让一个标准或工具被自愿采用时，逐项把技术、学习、审批、法律门槛归零 | 跨组织信息共享系统：无中心、无准入的架构设计；分布式协议设计：最少且正交的规范集合 | 为跨组织协作设计无中心、无准入的信息架构；判断某个完整性保证是否值得它带来的准入成本 | [ZIP](软件开发师/tim-berners-lee/versions/0.0.0.1/tim-berners-lee-persona-distillation-delivery-v0.0.0.1.zip) |
 <!-- PERSONA-REGISTRY:END -->
 
 ## 团队路由
