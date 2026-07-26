@@ -1,0 +1,132 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:revision-allocation-ledger:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "allocation_floor_srv": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/srv_revision"
+    },
+    "allocations": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "abandon_reason_code": {
+            "anyOf": [
+              {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/enum_code"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "expected_remote_head": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/git_object_id"
+          },
+          "impact": {
+            "enum": [
+              "PATCH",
+              "MINOR",
+              "MAJOR"
+            ]
+          },
+          "remote_readback_head": {
+            "anyOf": [
+              {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/git_object_id"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "reserved_at": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+          },
+          "settled_at": {
+            "anyOf": [
+              {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "status": {
+            "enum": [
+              "RESERVED",
+              "SETTLED",
+              "ABANDONED"
+            ]
+          },
+          "target_srv": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/srv_revision"
+          },
+          "transaction_uid": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/typed_uid"
+          },
+          "trigger_codes": {
+            "items": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/enum_code"
+            },
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "transaction_uid",
+          "target_srv",
+          "expected_remote_head",
+          "impact",
+          "trigger_codes",
+          "status",
+          "reserved_at",
+          "settled_at",
+          "remote_readback_head",
+          "abandon_reason_code"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "bootstrap_srv": {
+      "const": "v0.0.0.2"
+    },
+    "committed_srv": {
+      "anyOf": [
+        {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/srv_revision"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "ledger_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "protocol_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/protocol_revision"
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:revision-allocation-ledger:v1"
+    },
+    "version_file_present": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "bootstrap_srv",
+    "version_file_present",
+    "allocation_floor_srv",
+    "committed_srv",
+    "allocations",
+    "ledger_digest"
+  ],
+  "title": "SkillOps global revision allocation ledger",
+  "type": "object"
+}

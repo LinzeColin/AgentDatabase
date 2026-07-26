@@ -1,7 +1,7 @@
 # Mechanism handoff
 
-- State: `DRAFT_NON_ACTIVE_BOUND_REFERENCE_RESOLVER_CONTROL_SYNCED`
-- Phase: `MECHANISM_POST_BOUND_REFERENCE_RESOLVER_CONTROL_SYNC`
+- State: `DRAFT_NON_ACTIVE_POLICY_RECONCILIATION_REQUIRED`
+- Phase: `MECHANISM_M0_GOVERNANCE_RUNTIME_FOUNDATIONS`
 - Protocol:
   `urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1`
 - SRV candidate: `v0.0.0.3`
@@ -31,12 +31,59 @@
   `e67799c396a49d42b49c2e1960f760fbdb23dd32496575b7bbd81bd388026ae8`
 - Registered Registry snapshot self digest:
   `10979826bf63b49fbde8da6ece51d6ead6909225b3c62af994e110dea31e1718`
+- Release foundation interface digest:
+  `681ce19f993878d578b2d636dbede007cdf7acd7e73986e3253571b875f9e74b`
 
 These Git objects are ordinary ancestors in the coordinated commit chain.
 Every production consumer must independently fetch them and receive its
 expected candidate, control, and Registry snapshot tuples from repo-external
 trusted state. The current checkout and any artifact self-report are not trust
 roots.
+
+## M0 release foundations
+
+The Mechanism release foundation now implements Task Pack M-004, M-006,
+M-008, and M-009, plus the semantic half of M-005. It provides:
+
+```text
+unbounded SRV: v0.0.0.999 -> v0.0.0.1000
+missing VERSION allocation floor: v0.0.0.2
+first target after missing VERSION: v0.0.0.3
+single-flight reservation
+reserved/abandoned SRV never reused
+atomic settlement validation over VERSION + all artifact SRVs + remote readback
+ROUTINE -> PATCH, MATERIAL -> MINOR, MAJOR -> MAJOR
+unknown impact code -> fail closed
+policy conflict -> stop write with sanitized source/value-digest evidence
+stale/missing machine Handoff -> fail closed
+```
+
+The revision ledger is a pure Mechanism state machine. Persisting it atomically
+before a planned write remains an executor responsibility and was not performed
+here.
+
+The current version-policy v2 omits six locked MAJOR trigger codes:
+
+```text
+AUTOMATIC_SIDE_EFFECT_CHANGE
+EVALUATOR_OR_HOLDOUT_CHANGE
+HARD_GATE_CHANGE
+MIGRATION_OR_DELETE_SEMANTICS_CHANGE
+NETWORK_OR_PERMISSION_CHANGE
+PRIVACY_POLICY_CHANGE
+```
+
+`release/foundation-interface.json` binds that exact higher-precedence
+conflict. It remains non-active, does not join or alter the 31/5 candidate,
+does not alter the activation control, and sets
+`release_write_permitted=false`.
+
+The read-only external runtime preflight also completed before this Phase.
+Candidate/control/Registry and the repository-binding permit closed, then the
+production entrypoint stopped exactly at
+`NOTIFICATION_STATE_ROOT_UNAVAILABLE`. A full-home non-test filename search
+found zero recipient-mapping or Gmail configuration files. No state root,
+Gmail query, message, credential readback, or write occurred.
 
 ## Registered current Registry
 
@@ -196,14 +243,14 @@ call occurred.
 ## Next exact action
 
 After this Mechanism commit is FF-pushed and independently read back, the only
-next phase is `MECHANISM_EXTERNAL_RUNTIME_READINESS_PREFLIGHT`.
+next Phase is `MECHANISM_VERSION_POLICY_V3_DRAFT`.
 
-That Phase must remain read-only. It may verify repo-external state-root
-location/ownership/mode, recipient mapping presence without revealing the
-recipient, Gmail profile and query capability, and exact candidate/control/
-Registry tuples. UNKNOWN or absent external facts remain false/fail-closed. It
-must not create state, lock, watermark, outbox, Gmail message, shard,
-publication, activation, VERSION, schedule override, or automation change.
+That Phase may draft the versioned replacement that closes the six missing
+MAJOR codes. It must keep the unresolved 04:15/05:30 schedule authority,
+external state/Gmail readiness, runtime instance, activation, VERSION, and
+canonical publication false. It must not change Auto-owned runtime files or
+insert the draft schemas/policy into the trusted candidate before a later
+consumer-first coordinated bundle sequence.
 
 Development still must not call verifier. After both planes are complete, the
 Owner designates the final task that may invoke a fresh verifier.

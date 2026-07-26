@@ -1,0 +1,152 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:release-handoff:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "activation_forbidden": {
+      "type": "boolean"
+    },
+    "bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "expected_remote_head": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/git_object_id"
+    },
+    "external_runtime_readiness": {
+      "enum": [
+        "READY",
+        "NOT_READY",
+        "UNKNOWN"
+      ]
+    },
+    "gates": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "evidence_digest": {
+            "anyOf": [
+              {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "gate_code": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/enum_code"
+          },
+          "reason_code": {
+            "anyOf": [
+              {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/enum_code"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "status": {
+            "enum": [
+              "PASS",
+              "FAIL",
+              "UNKNOWN"
+            ]
+          }
+        },
+        "required": [
+          "gate_code",
+          "status",
+          "evidence_digest",
+          "reason_code"
+        ],
+        "type": "object"
+      },
+      "maxItems": 7,
+      "minItems": 7,
+      "type": "array"
+    },
+    "artifact_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "impact": {
+      "enum": [
+        "PATCH",
+        "MINOR",
+        "MAJOR"
+      ]
+    },
+    "next_phase": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/enum_code"
+    },
+    "phase": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/enum_code"
+    },
+    "policy_conflict_count": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "protocol_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/protocol_revision"
+    },
+    "residual_risk_codes": {
+      "items": {
+        "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/enum_code"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "schedule_authority_resolved": {
+      "type": "boolean"
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:release-handoff:v1"
+    },
+    "srv_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/srv_revision"
+    },
+    "status": {
+      "enum": [
+        "DRAFT_NON_ACTIVE",
+        "BLOCKED",
+        "READY_FOR_ACTIVATION"
+      ]
+    },
+    "trigger_codes": {
+      "items": {
+        "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/enum_code"
+      },
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "updated_at": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+    },
+    "version_policy_major_trigger_coverage_complete": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "status",
+    "phase",
+    "srv_revision",
+    "bundle_digest",
+    "expected_remote_head",
+    "impact",
+    "trigger_codes",
+    "policy_conflict_count",
+    "version_policy_major_trigger_coverage_complete",
+    "external_runtime_readiness",
+    "schedule_authority_resolved",
+    "gates",
+    "residual_risk_codes",
+    "next_phase",
+    "activation_forbidden",
+    "updated_at",
+    "artifact_digest"
+  ],
+  "title": "Machine-readable SkillOps release Handoff",
+  "type": "object"
+}

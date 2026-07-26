@@ -23,6 +23,10 @@ Key entrypoints:
   AU-040 policy/schema acceptance materialization.
 - `tools/build_bound_reference_resolver.py`: immutable source-catalog,
   Registry-snapshot, and source-drift reconciliation materialization.
+- `release/foundations.py`: pure unbounded-SRV allocation, impact,
+  policy-precedence, and machine-readable Handoff gates.
+- `tools/build_release_foundations.py`: deterministic non-active M0 foundation
+  interface and policy-reconciliation evidence.
 - `tools/validate_au040_semantic_acceptance.py`: exact 365-day and
   shard/index/manifest/publication cross-artifact gates.
 - `tests/test_mechanism_contract.py`: positive, negative, and fault gates.
@@ -51,6 +55,8 @@ Run from the repository root with the explicitly provisioned interpreter:
   CodexSkills/governance/tools/build_activation_control.py --check
 /usr/bin/python3 -B \
   CodexSkills/governance/tools/build_bound_reference_resolver.py --check
+/usr/bin/python3 -B \
+  CodexSkills/governance/tools/build_release_foundations.py --check
 /usr/bin/python3 -B CodexSkills/governance/tools/validate_mechanism.py lint-draft
 /usr/bin/python3 -B \
   CodexSkills/governance/tools/validate_activation.py lint-control
@@ -64,6 +70,7 @@ Run from the repository root with the explicitly provisioned interpreter:
 /usr/bin/python3 -B CodexSkills/governance/tools/validate_mechanism.py \
   lint-schema-set --schema-dir CodexSkills/governance/schemas \
   --schema-dir CodexSkills/governance/schemas-v2 \
+  --schema-dir CodexSkills/governance/release/schemas \
   --schema-dir CodexSkills/registry/auto/schemas/public \
   --schema-dir CodexSkills/registry/auto/schemas/public-v2
 /usr/bin/python3 -B -m unittest discover \

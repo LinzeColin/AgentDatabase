@@ -1,0 +1,314 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:release-foundation-interface:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "activation_forbidden": {
+      "const": true
+    },
+    "bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "candidate_bundle_unchanged": {
+      "const": true
+    },
+    "control_interface": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_digest": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+        },
+        "digest_basis": {
+          "const": "RAW_BYTES"
+        },
+        "relative_path": {
+          "const": "CodexSkills/governance/activation/control-interface.json"
+        }
+      },
+      "required": [
+        "relative_path",
+        "digest_basis",
+        "artifact_digest"
+      ],
+      "type": "object"
+    },
+    "control_interface_unchanged": {
+      "const": true
+    },
+    "foundation_schemas": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/urn_id"
+          },
+          "relative_path": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/repo_relative_posix_path"
+          },
+          "schema_sha256": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+          },
+          "self_digest_pointer": {
+            "enum": [
+              "/artifact_digest",
+              "/ledger_digest"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "relative_path",
+          "schema_sha256",
+          "self_digest_pointer"
+        ],
+        "type": "object"
+      },
+      "minItems": 3,
+      "type": "array"
+    },
+    "artifact_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "m0_task_statuses": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "status": {
+            "enum": [
+              "IMPLEMENTED",
+              "IMPLEMENTED_POLICY_RECONCILIATION_REQUIRED",
+              "SEMANTIC_CONTRACT_IMPLEMENTED_EXECUTOR_PENDING"
+            ]
+          },
+          "task_id": {
+            "pattern": "^M-00[4-9]$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "task_id",
+          "status"
+        ],
+        "type": "object"
+      },
+      "minItems": 5,
+      "type": "array"
+    },
+    "next_phase": {
+      "const": "MECHANISM_VERSION_POLICY_V3_DRAFT"
+    },
+    "policy_conflicts": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "authoritative_source_class": {
+            "anyOf": [
+              {
+                "enum": [
+                  "OWNER_LOCK",
+                  "VALIDATED_CONFIG",
+                  "NUMBERED_SPEC",
+                  "TASK_ACCEPTANCE",
+                  "EXAMPLE_OR_PDF"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "authoritative_source_refs": {
+            "items": {
+              "maxLength": 96,
+              "pattern": "^[A-Z][A-Z0-9_.:-]*$",
+              "type": "string"
+            },
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": true
+          },
+          "claims": {
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "source_class": {
+                  "enum": [
+                    "OWNER_LOCK",
+                    "VALIDATED_CONFIG",
+                    "NUMBERED_SPEC",
+                    "TASK_ACCEPTANCE",
+                    "EXAMPLE_OR_PDF"
+                  ]
+                },
+                "source_ref": {
+                  "maxLength": 96,
+                  "pattern": "^[A-Z][A-Z0-9_.:-]*$",
+                  "type": "string"
+                },
+                "evidence_digest": {
+                  "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+                }
+              },
+              "required": [
+                "source_class",
+                "source_ref",
+                "evidence_digest"
+              ],
+              "type": "object"
+            },
+            "minItems": 2,
+            "type": "array"
+          },
+          "field_ref": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/enum_code"
+          },
+          "impact": {
+            "enum": [
+              "MINOR",
+              "MAJOR"
+            ]
+          },
+          "resolution_code": {
+            "enum": [
+              "STOP_WRITE_RECONCILE_TO_HIGHER_PRECEDENCE",
+              "STOP_WRITE_OWNER_DISAMBIGUATION_REQUIRED"
+            ]
+          },
+          "srv_increment_required": {
+            "const": true
+          },
+          "write_permitted": {
+            "const": false
+          }
+        },
+        "required": [
+          "field_ref",
+          "impact",
+          "authoritative_source_class",
+          "authoritative_source_refs",
+          "claims",
+          "resolution_code",
+          "srv_increment_required",
+          "write_permitted"
+        ],
+        "type": "object"
+      },
+      "minItems": 1,
+      "type": "array"
+    },
+    "protocol_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/protocol_revision"
+    },
+    "release_write_permitted": {
+      "const": false
+    },
+    "schedule_authority_resolved": {
+      "const": false
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:release-foundation-interface:v1"
+    },
+    "status": {
+      "const": "DRAFT_NON_ACTIVE_POLICY_RECONCILIATION_REQUIRED"
+    },
+    "task_pack_provenance": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "artifact_code": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/enum_code"
+          },
+          "artifact_digest": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+          },
+          "digest_basis": {
+            "const": "RAW_BYTES"
+          }
+        },
+        "required": [
+          "artifact_code",
+          "digest_basis",
+          "artifact_digest"
+        ],
+        "type": "object"
+      },
+      "minItems": 5,
+      "type": "array"
+    },
+    "task_pack_revision": {
+      "const": "v0.0.0.2"
+    },
+    "version_policy": {
+      "additionalProperties": false,
+      "properties": {
+        "policy_sha256": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+        },
+        "impact_translation": {
+          "additionalProperties": false,
+          "properties": {
+            "MAJOR": {
+              "const": "MAJOR"
+            },
+            "MATERIAL": {
+              "const": "MINOR"
+            },
+            "ROUTINE": {
+              "const": "PATCH"
+            }
+          },
+          "required": [
+            "ROUTINE",
+            "MATERIAL",
+            "MAJOR"
+          ],
+          "type": "object"
+        },
+        "major_trigger_coverage_complete": {
+          "const": false
+        },
+        "missing_major_trigger_codes": {
+          "items": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/enum_code"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "policy_id": {
+          "const": "urn:linzecolin:agentdatabase:skillops:policy:version:v2"
+        }
+      },
+      "required": [
+        "policy_id",
+        "policy_sha256",
+        "impact_translation",
+        "major_trigger_coverage_complete",
+        "missing_major_trigger_codes"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "status",
+    "task_pack_revision",
+    "task_pack_provenance",
+    "bundle_digest",
+    "candidate_bundle_unchanged",
+    "control_interface",
+    "control_interface_unchanged",
+    "foundation_schemas",
+    "version_policy",
+    "policy_conflicts",
+    "m0_task_statuses",
+    "schedule_authority_resolved",
+    "release_write_permitted",
+    "activation_forbidden",
+    "next_phase",
+    "artifact_digest"
+  ],
+  "title": "Non-active M0 release foundation interface",
+  "type": "object"
+}

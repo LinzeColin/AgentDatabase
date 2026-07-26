@@ -1,0 +1,131 @@
+{
+  "activation_forbidden": true,
+  "artifact_digest": "681ce19f993878d578b2d636dbede007cdf7acd7e73986e3253571b875f9e74b",
+  "bundle_digest": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e",
+  "candidate_bundle_unchanged": true,
+  "control_interface": {
+    "artifact_digest": "8caf7e5dbb922714c3afa39040e55b8a83015ea0f02de153e19cc3010b0e0e1a",
+    "digest_basis": "RAW_BYTES",
+    "relative_path": "CodexSkills/governance/activation/control-interface.json"
+  },
+  "control_interface_unchanged": true,
+  "foundation_schemas": [
+    {
+      "id": "urn:linzecolin:agentdatabase:skillops:schema:release-foundation-interface:v1",
+      "relative_path": "CodexSkills/governance/release/schemas/release-foundation-interface.schema.json",
+      "schema_sha256": "5b1e4a00faa62502459daf3a6fd30314a9e4a6c1a7348b65c6f19236e3f55c66",
+      "self_digest_pointer": "/artifact_digest"
+    },
+    {
+      "id": "urn:linzecolin:agentdatabase:skillops:schema:release-handoff:v1",
+      "relative_path": "CodexSkills/governance/release/schemas/release-handoff.schema.json",
+      "schema_sha256": "e7908f57cc04dbf0bb0601507690ba3c8555f8f31552d827ef37ad316253efd6",
+      "self_digest_pointer": "/artifact_digest"
+    },
+    {
+      "id": "urn:linzecolin:agentdatabase:skillops:schema:revision-allocation-ledger:v1",
+      "relative_path": "CodexSkills/governance/release/schemas/revision-allocation-ledger.schema.json",
+      "schema_sha256": "936c3ca5d56fa3a2d41653d5903ac543c00c20d9609603ba629c578e4a03db14",
+      "self_digest_pointer": "/ledger_digest"
+    }
+  ],
+  "m0_task_statuses": [
+    {
+      "status": "IMPLEMENTED",
+      "task_id": "M-004"
+    },
+    {
+      "status": "SEMANTIC_CONTRACT_IMPLEMENTED_EXECUTOR_PENDING",
+      "task_id": "M-005"
+    },
+    {
+      "status": "IMPLEMENTED_POLICY_RECONCILIATION_REQUIRED",
+      "task_id": "M-006"
+    },
+    {
+      "status": "IMPLEMENTED",
+      "task_id": "M-008"
+    },
+    {
+      "status": "IMPLEMENTED",
+      "task_id": "M-009"
+    }
+  ],
+  "next_phase": "MECHANISM_VERSION_POLICY_V3_DRAFT",
+  "policy_conflicts": [
+    {
+      "authoritative_source_class": "OWNER_LOCK",
+      "authoritative_source_refs": [
+        "TASKPACK_06_VERSION_NOTIFICATION_POLICY"
+      ],
+      "claims": [
+        {
+          "evidence_digest": "89dcfffa51ada1228dc84ba410a49885f94c693a65fd5d463318d0cb3d80b1a2",
+          "source_class": "OWNER_LOCK",
+          "source_ref": "TASKPACK_06_VERSION_NOTIFICATION_POLICY"
+        },
+        {
+          "evidence_digest": "e7f9d4432688a0c0728b55f0637828bf4c4581b35ab4914f675e97a027dd1e91",
+          "source_class": "VALIDATED_CONFIG",
+          "source_ref": "VERSION_POLICY_V2"
+        }
+      ],
+      "field_ref": "VERSION_MAJOR_TRIGGER_CODES",
+      "impact": "MAJOR",
+      "resolution_code": "STOP_WRITE_RECONCILE_TO_HIGHER_PRECEDENCE",
+      "srv_increment_required": true,
+      "write_permitted": false
+    }
+  ],
+  "protocol_revision": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1",
+  "release_write_permitted": false,
+  "schedule_authority_resolved": false,
+  "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:release-foundation-interface:v1",
+  "status": "DRAFT_NON_ACTIVE_POLICY_RECONCILIATION_REQUIRED",
+  "task_pack_provenance": [
+    {
+      "artifact_code": "CHECKSUM_MANIFEST",
+      "artifact_digest": "ac931ae956ecc115fa051550b1b5d652c6cf4212a8f831bc35d2c8c177f81e00",
+      "digest_basis": "RAW_BYTES"
+    },
+    {
+      "artifact_code": "MECHANISM_TASK_GRAPH",
+      "artifact_digest": "0d383361187186690583684b702bbff934455e1b6782916bfee31baac2a87b06",
+      "digest_basis": "RAW_BYTES"
+    },
+    {
+      "artifact_code": "OWNER_DECISIONS",
+      "artifact_digest": "b1bfe37f8ceb57b49a44ccc284b790b6ad6eb0155d054ffc07b44a928a237dc1",
+      "digest_basis": "RAW_BYTES"
+    },
+    {
+      "artifact_code": "POLICY_PRECEDENCE",
+      "artifact_digest": "bfba0de7b78978d220338f7e88f8889b3895abefd78b2d3561d60c5342f3b987",
+      "digest_basis": "RAW_BYTES"
+    },
+    {
+      "artifact_code": "VERSION_NOTIFICATION_POLICY",
+      "artifact_digest": "dfc66399a12c2e63abab437bdf9f788f645ea460590cd3eceead7046b6a1a45c",
+      "digest_basis": "RAW_BYTES"
+    }
+  ],
+  "task_pack_revision": "v0.0.0.2",
+  "version_policy": {
+    "impact_translation": {
+      "MAJOR": "MAJOR",
+      "MATERIAL": "MINOR",
+      "ROUTINE": "PATCH"
+    },
+    "major_trigger_coverage_complete": false,
+    "missing_major_trigger_codes": [
+      "AUTOMATIC_SIDE_EFFECT_CHANGE",
+      "EVALUATOR_OR_HOLDOUT_CHANGE",
+      "HARD_GATE_CHANGE",
+      "MIGRATION_OR_DELETE_SEMANTICS_CHANGE",
+      "NETWORK_OR_PERMISSION_CHANGE",
+      "PRIVACY_POLICY_CHANGE"
+    ],
+    "policy_id": "urn:linzecolin:agentdatabase:skillops:policy:version:v2",
+    "policy_sha256": "d4e04d9e63b8005528b5d5d3db3daf645ea0ea60af4da91e217f73fb0196b6a9"
+  }
+}
