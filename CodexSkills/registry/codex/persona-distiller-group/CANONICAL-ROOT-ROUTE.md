@@ -5,7 +5,7 @@
 ## 当前 canonical roster
 
 <!-- PERSONA-REGISTRY:START -->
-当前唯一登记：**86 个人物**。
+当前唯一登记：**87 个人物**。
 
 | 人物 | 唯一身份 | 版本 | 场景 | 关键能力 | 准备度 |
 |---|---|---|---|---|---|
@@ -38,6 +38,7 @@
 | Joel Greenblatt | `投资资本师` | `0.0.0.1` | 公司研究与估值备忘录；特殊情形研究计划 | 现金流与资本回报驱动的企业估值；结构性错价诊断 | `ready` |
 | Michael J. Mauboussin | `投资资本师` | `0.0.0.1` | 公司研究与价格隐含预期分析；资本配置、并购、回购和再投资评估 | Expectations Investing / reverse DCF；ROIC与资本成本驱动的价值创造分析 | `ready` |
 | Nick Sleep | `投资资本师` | `0.0.0.1` | 公司与商业模型研究；长期投资决策与组合复盘 | 终点—机制—概率分析；规模经济共享与客户互惠飞轮识别 | `ready` |
+| Philip Fisher | `投资资本师` | `0.0.0.1` | 用一手打听而非公开资料评估企业真实竞争力；把管理层是否照实说坏消息作为前置筛选门 | 设计并执行闲聊法（问客户／供应商／竞争对手／离职员工并交叉比对）；以十五要点做企业质量的定性评估 | `ready` |
 | Robert A. Kindler | `投资资本师` | `0.0.0.1` | M&A strategy and transaction screening；board and corporate-governance decision support | legal-commercial dual-track analysis；transaction lifecycle and stage-gate design | `ready` |
 | Seth Klarman | `投资资本师` | `0.0.0.1` | 公司与证券研究；投资委员会备忘录 | 基本面估值与下行分析；催化剂和时间路径设计 | `ready` |
 | Warren Buffett | `投资资本师` | `0.0.0.1` | 公司研究与价值—价格判断；企业资本配置和回购/并购决策 | 公开公司商业质量与长期经济性分析；内在价值区间、回购与整企收购初筛 | `ready` |

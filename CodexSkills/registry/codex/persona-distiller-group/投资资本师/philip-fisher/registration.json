@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:philipfisher",
+  "canonical_name": "Philip Fisher",
+  "identity_family_id": "investor-capital-allocator",
+  "identity_mode": "single",
+  "registration_category": "投资资本师",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "philip-fisher",
+  "subject_uid": "person-00da3b6328276e72",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/philip-fisher-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-26T21:32:51Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "086f223419de21d559a2b30974c3db68b40438423985a090dffca57ac07b5e7e",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/philip-fisher-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "cce9c69def55b0cd632df84139a774eec5ec29fdeb1bc61c6e634cb8f2bdbc7c",
+      "runtime_size_bytes": 62481,
+      "size_bytes": 68827
+    }
+  ]
+}
