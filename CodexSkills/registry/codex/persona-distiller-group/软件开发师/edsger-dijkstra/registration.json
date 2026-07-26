@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:edsgerdijkstra",
+  "canonical_name": "Edsger Dijkstra",
+  "identity_family_id": "software-developer",
+  "identity_mode": "single",
+  "registration_category": "软件开发师",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "edsger-dijkstra",
+  "subject_uid": "person-76fe8a6e2d65d889",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/edsger-dijkstra-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-26T16:09:26Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "a4ea2c493e5a04ace0ed7854b123e7e25be80bffda410827f0b406d43e856d31",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/edsger-dijkstra-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "612f5f0167c72eb3601fe59151c83501517ca4c793350a06e17a1fc214220403",
+      "runtime_size_bytes": 65380,
+      "size_bytes": 71798
+    }
+  ]
+}
