@@ -1,5 +1,5 @@
 {
-  "artifact_digest": "dc9b53a44243dd63b80c58ff811ca19059609ac071addc7401a07f229a8a31ec",
+  "artifact_digest": "b56765774a5d9fcfa15c38c38b8280993ba792c80df4b658c4bbf71aeba6b95f",
   "bundle_digest": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e",
   "entries": [
     {
@@ -121,5 +121,5 @@
   "source_material_policy_digest": "7d8453b2dd5b78ec777c915d6cf009eac92bb6ff25cad9f88a9da38fb84cc183",
   "source_material_policy_id": "urn:linzecolin:agentdatabase:skillops:policy:source-material:v1",
   "source_root_path": "CodexSkills/registry/claude",
-  "status": "DRAFT_NON_ACTIVE"
+  "status": "REGISTERED"
 }

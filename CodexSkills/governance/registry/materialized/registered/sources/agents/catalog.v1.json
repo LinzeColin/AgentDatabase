@@ -1,5 +1,5 @@
 {
-  "artifact_digest": "486d3c20ee3c3672ac91ed3bdcafca3fd03869316027821ef5d7f5513ad5a755",
+  "artifact_digest": "e63dd7fc5fb71b0fbbb9c141cd3591d5d84ed6b6bdab69cd0345000b4b84b822",
   "bundle_digest": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e",
   "entries": [
     {
@@ -877,5 +877,5 @@
   "source_material_policy_digest": "7d8453b2dd5b78ec777c915d6cf009eac92bb6ff25cad9f88a9da38fb84cc183",
   "source_material_policy_id": "urn:linzecolin:agentdatabase:skillops:policy:source-material:v1",
   "source_root_path": "CodexSkills/registry/agents",
-  "status": "DRAFT_NON_ACTIVE"
+  "status": "REGISTERED"
 }

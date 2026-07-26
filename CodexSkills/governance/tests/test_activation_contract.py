@@ -300,7 +300,7 @@ class ActivationControlTests(unittest.TestCase):
         self.assertEqual(interface["candidate_policy_count"], 5)
         self.assertEqual(
             interface["next_phase"],
-            "AUTO_REGISTRY_SOURCE_CONTENT_SYNC",
+            "AUTO_BOUND_REFERENCE_RESOLVER_INTEGRATION",
         )
         self.assertEqual(
             interface["base_auto_git_object_id"],
@@ -342,7 +342,7 @@ class ActivationControlTests(unittest.TestCase):
             interface["transition_contract"][
                 "runtime_state_write_gate_status"
             ],
-            "BOUND_REFERENCE_RESOLVER_SOURCE_CONTENT_SYNC_PENDING",
+            "BOUND_REFERENCE_RESOLVER_AUTO_INTEGRATION_PENDING",
         )
         self.assertTrue(
             interface["transition_contract"][
@@ -364,7 +364,7 @@ class ActivationControlTests(unittest.TestCase):
                 "source_drift_reconciliation_complete"
             ]
         )
-        self.assertTrue(
+        self.assertFalse(
             interface["transition_contract"][
                 "source_content_sync_required"
             ]
@@ -377,11 +377,14 @@ class ActivationControlTests(unittest.TestCase):
         self.assertFalse(resolver_contract["gate_satisfied"])
         self.assertFalse(resolver_contract["production_trust_permitted"])
         self.assertFalse(resolver_contract["current_snapshot_can_emit_bound"])
-        self.assertFalse(resolver_contract["current_snapshot_promotable"])
+        self.assertTrue(resolver_contract["current_snapshot_promotable"])
         self.assertTrue(
+            resolver_contract["current_snapshot_structurally_promoted"]
+        )
+        self.assertFalse(
             resolver_contract["post_reservation_rebuild_required"]
         )
-        self.assertTrue(
+        self.assertFalse(
             resolver_contract[
                 "post_source_content_sync_rebuild_required"
             ]
@@ -392,8 +395,15 @@ class ActivationControlTests(unittest.TestCase):
         self.assertFalse(
             resolver_contract["catalog_path_reservation_required"]
         )
-        self.assertTrue(
+        self.assertFalse(
             resolver_contract["source_content_sync_required"]
+        )
+        self.assertTrue(
+            resolver_contract["source_mirror_parity_satisfied"]
+        )
+        self.assertEqual(
+            resolver_contract["registry_snapshot_registered_relative_path"],
+            "CodexSkills/registry/_global/registry-snapshot.v1.json",
         )
         self.assertTrue(
             resolver_contract["source_drift_reconciliation"][
@@ -519,8 +529,8 @@ class ActivationControlTests(unittest.TestCase):
             {
                 "artifact_digest": AUTO_RUNTIME_INTERFACE_RAW_SHA256,
                 "integration_state": (
-                    "REGISTRY_CATALOG_RESERVED_"
-                    "SOURCE_CONTENT_SYNC_PENDING"
+                    "REGISTRY_PARITY_COMPLETE_"
+                    "RESOLVER_INTEGRATION_PENDING"
                 ),
                 "module_count": AUTO_RUNTIME_MODULE_COUNT,
                 "relative_path": (

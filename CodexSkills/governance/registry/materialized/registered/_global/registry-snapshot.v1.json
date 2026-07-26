@@ -6207,34 +6207,34 @@
   ],
   "protocol_revision": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1",
   "registry_compatibility_index_is_not_snapshot_truth": true,
-  "registry_snapshot_digest": "28aee7362be02651eaf1769f7e76cc7a844dec79094067d529bf3b12af7f3405",
+  "registry_snapshot_digest": "10979826bf63b49fbde8da6ece51d6ead6909225b3c62af994e110dea31e1718",
   "same_name_auto_merge_permitted": false,
   "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:registry-snapshot:v1",
   "snapshot_observed_at": "2026-07-26T00:49:03.000000Z",
   "source_catalogs": [
     {
-      "artifact_digest": "486d3c20ee3c3672ac91ed3bdcafca3fd03869316027821ef5d7f5513ad5a755",
+      "artifact_digest": "e63dd7fc5fb71b0fbbb9c141cd3591d5d84ed6b6bdab69cd0345000b4b84b822",
       "draft_relative_path": "CodexSkills/governance/registry/materialized/sources/agents/catalog.v1.json",
       "entry_count": 24,
       "proposed_final_relative_path": "CodexSkills/registry/agents/_catalog/catalog.v1.json",
       "source_class": "AGENTS"
     },
     {
-      "artifact_digest": "dc9b53a44243dd63b80c58ff811ca19059609ac071addc7401a07f229a8a31ec",
+      "artifact_digest": "b56765774a5d9fcfa15c38c38b8280993ba792c80df4b658c4bbf71aeba6b95f",
       "draft_relative_path": "CodexSkills/governance/registry/materialized/sources/claude/catalog.v1.json",
       "entry_count": 3,
       "proposed_final_relative_path": "CodexSkills/registry/claude/_catalog/catalog.v1.json",
       "source_class": "CLAUDE"
     },
     {
-      "artifact_digest": "d170570a16982b020ed677573fcab4f9eb76fd01a87e92339276e3b966422c5d",
+      "artifact_digest": "50c26406329f594b531e29a3ca4c66f16371bc0d0ddfa0dcf103b4cf734fb8b3",
       "draft_relative_path": "CodexSkills/governance/registry/materialized/sources/codex/catalog.v1.json",
       "entry_count": 55,
       "proposed_final_relative_path": "CodexSkills/registry/codex/_catalog/catalog.v1.json",
       "source_class": "CODEX"
     },
     {
-      "artifact_digest": "a6a434e8a2a447ba626b24d41009a69108c33843dcf1f9e21144747f243bf18c",
+      "artifact_digest": "4a49b93ec8c94d2a801a485f29c721565985c53767115471ce7ccda70f53157a",
       "draft_relative_path": "CodexSkills/governance/registry/materialized/sources/codex-system/catalog.v1.json",
       "entry_count": 6,
       "proposed_final_relative_path": "CodexSkills/registry/codex-system/_catalog/catalog.v1.json",
@@ -6252,7 +6252,7 @@
     "tracked_symlink_alias_count": 20
   },
   "srv_revision": "v0.0.0.3",
-  "status": "DRAFT_NON_ACTIVE",
+  "status": "REGISTERED",
   "versions": [
     {
       "record": {

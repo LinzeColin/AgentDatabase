@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-"""Build/check the non-active Mechanism BOUND reference resolver draft.
+"""Build/check the registered, non-binding Mechanism Registry materialization.
 
-The builder reads Skill material only from one immutable Git object.  It does
-not trust the working tree, the compatibility index, or source names as
-identity evidence.  Current catalog bytes stay under the Mechanism draft root
-until the Auto-owned mirror closes the remaining source-content drift and a
-successor Mechanism run rebuilds from that immutable Git object.
+The builder reads current Skill material only from the immutable Auto
+source-content-sync Git object.  It does not trust the working tree, the
+compatibility index, or source names as identity evidence.  The four current
+catalogs and global snapshot are materialized both as a governance draft and
+at their registered paths.  Registration makes the exact snapshot tuple
+loadable; it does not make any quarantined version binding eligible.
 """
 
 from __future__ import annotations
@@ -83,49 +84,64 @@ CANDIDATE_MANIFEST_PATH = (
     "CodexSkills/governance/bundles/schema-bundle-manifest.v1.json"
 )
 SOURCE_MATERIAL_GIT_OBJECT_ID = (
-    "sha1:44a38890ec38ceb24ccae1ec6f5b1fc8e93aefa1"
+    "sha1:dc653654603f5bfee3bd41890b49cfad700cf541"
 )
 SOURCE_MATERIAL_COMMIT = SOURCE_MATERIAL_GIT_OBJECT_ID.split(":", 1)[1]
-SOURCE_OBSERVED_AT = "2026-07-25T21:44:29.000000Z"
-AUTO_RESERVATION_GIT_OBJECT_ID = (
-    "sha1:b5a32c817e4016f595fa33caed6bce1d51199e63"
+SOURCE_OBSERVED_AT = "2026-07-26T00:49:03.000000Z"
+HISTORICAL_SOURCE_MATERIAL_GIT_OBJECT_ID = (
+    "sha1:44a38890ec38ceb24ccae1ec6f5b1fc8e93aefa1"
 )
-AUTO_RESERVATION_COMMIT = AUTO_RESERVATION_GIT_OBJECT_ID.split(":", 1)[1]
-AUTO_RESERVATION_INTERFACE_PATH = (
+HISTORICAL_MATERIALIZATION_GIT_OBJECT_ID = (
+    "sha1:5db5beecf3de7ac916020ca988f6e875891e19b1"
+)
+HISTORICAL_MATERIALIZATION_COMMIT = (
+    HISTORICAL_MATERIALIZATION_GIT_OBJECT_ID.split(":", 1)[1]
+)
+HISTORICAL_SNAPSHOT_RAW_SHA256 = (
+    "d07b4d921534eabc065e2b4e7a509e5dd7e42ef3c678698958cbc3f74ef268b4"
+)
+HISTORICAL_SNAPSHOT_DIGEST = (
+    "31f49c8ffa3bd2d268feec49b2869f409d61a5bfbb0b03f382bc562996b7fa76"
+)
+AUTO_SOURCE_SYNC_GIT_OBJECT_ID = (
+    "sha1:dc653654603f5bfee3bd41890b49cfad700cf541"
+)
+AUTO_SOURCE_SYNC_COMMIT = AUTO_SOURCE_SYNC_GIT_OBJECT_ID.split(":", 1)[1]
+AUTO_SOURCE_SYNC_INTERFACE_PATH = (
     "CodexSkills/registry/auto/runtime-interface.json"
 )
-AUTO_RESERVATION_INTERFACE_RAW_SHA256 = (
-    "e88ec8c711434619756ee8f91c451e941501764e30e4a7fff310d8685b02140a"
+AUTO_SOURCE_SYNC_INTERFACE_RAW_SHA256 = (
+    "7f2e335b682ec98c15f2e21e74bc0c2af24768cda7e5ed1ddc1b5e341449ac84"
 )
-AUTO_RESERVATION_MODULE_COUNT = 27
-AUTO_RESERVATION_ALIAS_SET_DIGEST = (
+AUTO_SOURCE_SYNC_MODULE_COUNT = 27
+AUTO_SOURCE_SYNC_ALIAS_SET_DIGEST = (
     "75f6db86e5a18cc000985dc32a719ac7e0bc15b22b2e3f20c0d32d3138f27387"
 )
-AUTO_RESERVATION_SYNC_EXECUTOR_DIGEST = (
+AUTO_SOURCE_SYNC_EXECUTOR_DIGEST = (
     "1fd015a043dfe48034df03d8a821cda5793c90694191a8b629672efaf33283ac"
 )
-AUTO_RESERVATION_PARENT_COMMIT = (
-    "488321c83b2a669ea964873e22a94b8e65429350"
+AUTO_SOURCE_SYNC_PARENT_COMMIT = (
+    "5db5beecf3de7ac916020ca988f6e875891e19b1"
 )
-AUTO_RESERVATION_CURRENT_COUNTS = {
+AUTO_SOURCE_SYNC_CURRENT_COUNTS = {
     "agents": 24,
     "claude": 3,
     "codex": 55,
     "codex-system": 6,
 }
-AUTO_RESERVATION_CURRENT_SKILL_COUNT = 88
-AUTO_RESERVATION_MISSING_ROOTS = ("codex/context-kernel",)
-AUTO_RESERVATION_CONTENT_DRIFT = (
+AUTO_SOURCE_SYNC_CURRENT_SKILL_COUNT = 88
+AUTO_SOURCE_SYNC_MISSING_ROOTS = ("codex/context-kernel",)
+AUTO_SOURCE_SYNC_CLOSED_CONTENT_DRIFT = (
     "codex/graphify",
     "codex/persona-distiller-group",
     "codex/verifier",
 )
-AUTO_RESERVATION_REMOVED_PATHS = (
+AUTO_SOURCE_SYNC_REMOVED_PATHS = (
     "CodexSkills/registry/codex/context-kernel/MANIFEST.json",
     "CodexSkills/registry/codex/context-kernel/SKILL.md",
     "CodexSkills/registry/codex/context-kernel/scripts/context_kernel.py",
 )
-AUTO_RESERVATION_RESERVED_PATHS = (
+AUTO_SOURCE_SYNC_RESERVED_PATHS = (
     "CodexSkills/registry/agents/_catalog/",
     "CodexSkills/registry/claude/_catalog/",
     "CodexSkills/registry/codex/_catalog/",
@@ -154,16 +170,29 @@ SOURCE_CLASSES = {
 EXPECTED_SOURCE_SKILL_COUNTS = {
     "agents": 24,
     "claude": 3,
-    "codex": 56,
+    "codex": 55,
     "codex-system": 6,
 }
-EXPECTED_TOTAL_SKILLS = 89
-EXPECTED_INVALID_METADATA = {"codex/context-kernel"}
+EXPECTED_TOTAL_SKILLS = 88
+EXPECTED_INVALID_METADATA: set[str] = set()
 FROZEN_EXTERNAL_ALIAS_COUNT = 20
 
 DRAFT_CATALOG_PATHS = {
     source: (
         MATERIALIZED_DIR / "sources" / source / "catalog.v1.json"
+    )
+    for source in SOURCE_NAMES
+}
+REGISTERED_CANDIDATE_DIR = MATERIALIZED_DIR / "registered"
+REGISTERED_CANDIDATE_SNAPSHOT_PATH = (
+    REGISTERED_CANDIDATE_DIR / "_global" / "registry-snapshot.v1.json"
+)
+REGISTERED_CANDIDATE_CATALOG_PATHS = {
+    source: (
+        REGISTERED_CANDIDATE_DIR
+        / "sources"
+        / source
+        / "catalog.v1.json"
     )
     for source in SOURCE_NAMES
 }
@@ -173,6 +202,11 @@ FINAL_SNAPSHOT_REPO_PATH = (
 FINAL_CATALOG_REPO_PATHS = {
     source: f"CodexSkills/registry/{source}/_catalog/catalog.v1.json"
     for source in SOURCE_NAMES
+}
+FINAL_SNAPSHOT_PATH = REPO_ROOT / FINAL_SNAPSHOT_REPO_PATH
+FINAL_CATALOG_PATHS = {
+    source: REPO_ROOT / relative_path
+    for source, relative_path in FINAL_CATALOG_REPO_PATHS.items()
 }
 
 UID_ALPHABET = "0123456789ABCDEFGHJKMNPQRSTVWXYZ"
@@ -1506,6 +1540,103 @@ def _source_material(
     return material, tracked_alias_count
 
 
+def _historical_registry_records() -> Mapping[str, Any]:
+    """Load the immutable 89-root baseline used only for lineage evidence."""
+
+    snapshot_raw = _git_blob(
+        HISTORICAL_MATERIALIZATION_COMMIT,
+        SNAPSHOT_PATH.relative_to(REPO_ROOT).as_posix(),
+    )
+    if _sha(snapshot_raw) != HISTORICAL_SNAPSHOT_RAW_SHA256:
+        raise ContractError(
+            "REGISTRY_HISTORICAL_SNAPSHOT_RAW_DIGEST_MISMATCH"
+        )
+    snapshot = parse_json_bytes(snapshot_raw)
+    if (
+        not isinstance(snapshot, dict)
+        or snapshot.get("registry_snapshot_digest")
+        != HISTORICAL_SNAPSHOT_DIGEST
+        or canonical_digest(snapshot, "/registry_snapshot_digest")
+        != HISTORICAL_SNAPSHOT_DIGEST
+        or snapshot.get("source_material_git_object_id")
+        != HISTORICAL_SOURCE_MATERIAL_GIT_OBJECT_ID
+        or snapshot.get("counts", {}).get("source_skill_count") != 89
+        or snapshot.get("counts", {}).get("identity_count") != 89
+        or snapshot.get("counts", {}).get("instance_count") != 89
+        or snapshot.get("counts", {}).get("version_count") != 89
+    ):
+        raise ContractError(
+            "REGISTRY_HISTORICAL_SNAPSHOT_CONTRACT_MISMATCH"
+        )
+    identities = {
+        row["record"]["skill_identity_uid"]: row
+        for row in snapshot["identities"]
+    }
+    instances = {
+        row["record"]["skill_instance_uid"]: row
+        for row in snapshot["instances"]
+    }
+    versions = {
+        row["record"]["skill_version_uid"]: row
+        for row in snapshot["versions"]
+    }
+    assignments = {
+        (
+            row["source_class"],
+            row["source_relative_path"],
+        ): row["skill_identity_uid"]
+        for row in snapshot["identity_assignments"]
+    }
+    catalog_entries: Dict[Tuple[str, str], Mapping[str, Any]] = {}
+    for source in SOURCE_NAMES:
+        catalog = parse_json_bytes(
+            _git_blob(
+                HISTORICAL_MATERIALIZATION_COMMIT,
+                DRAFT_CATALOG_PATHS[source]
+                .relative_to(REPO_ROOT)
+                .as_posix(),
+            )
+        )
+        if (
+            not isinstance(catalog, dict)
+            or catalog.get("source_class") != SOURCE_CLASSES[source]
+            or catalog.get("source_material_git_object_id")
+            != HISTORICAL_SOURCE_MATERIAL_GIT_OBJECT_ID
+            or catalog.get("entry_count") != len(catalog.get("entries", []))
+        ):
+            raise ContractError(
+                "REGISTRY_HISTORICAL_CATALOG_CONTRACT_MISMATCH"
+            )
+        for entry in catalog["entries"]:
+            key = (catalog["source_class"], entry["source_relative_path"])
+            if key in catalog_entries:
+                raise ContractError(
+                    "REGISTRY_HISTORICAL_CATALOG_ENTRY_DUPLICATE"
+                )
+            catalog_entries[key] = entry
+    if (
+        len(identities) != 89
+        or len(instances) != 89
+        or len(versions) != 89
+        or len(assignments) != 89
+        or len(catalog_entries) != 89
+    ):
+        raise ContractError("REGISTRY_HISTORICAL_RECORD_COUNT_MISMATCH")
+    context_key = ("CODEX", "codex/context-kernel")
+    if context_key not in assignments or context_key not in catalog_entries:
+        raise ContractError(
+            "REGISTRY_HISTORICAL_CONTEXT_KERNEL_REFERENCE_MISSING"
+        )
+    return {
+        "assignments": assignments,
+        "catalog_entries": catalog_entries,
+        "identities": identities,
+        "instances": instances,
+        "snapshot": snapshot,
+        "versions": versions,
+    }
+
+
 def _records_and_catalogs(
     source_material: Mapping[str, Sequence[Mapping[str, Any]]],
     source_policy_digest: str,
@@ -1517,6 +1648,7 @@ def _records_and_catalogs(
     Dict[str, Mapping[str, Any]],
     List[Mapping[str, Any]],
 ]:
+    historical = _historical_registry_records()
     identity_assignments = []
     identity_records = []
     instance_records = []
@@ -1572,12 +1704,49 @@ def _records_and_catalogs(
                 + "\0"
                 + permission_digest,
             )
+            key = (skill["source_class"], source_path)
+            historical_identity_uid = historical["assignments"].get(key)
+            historical_entry = historical["catalog_entries"].get(key)
+            if historical_identity_uid is None or historical_entry is None:
+                raise ContractError(
+                    "REGISTRY_CURRENT_ROOT_HISTORICAL_REFERENCE_MISSING:"
+                    + source_path
+                )
+            historical_identity_row = historical["identities"].get(
+                historical_identity_uid
+            )
+            historical_instance_uid = historical_entry["instance_ref"][
+                "skill_instance_uid"
+            ]
+            historical_instance_row = historical["instances"].get(
+                historical_instance_uid
+            )
+            historical_version_uid = historical_entry["version_ref"][
+                "skill_version_uid"
+            ]
+            historical_version_row = historical["versions"].get(
+                historical_version_uid
+            )
+            if (
+                historical_identity_uid != identity_uid
+                or historical_instance_uid != instance_uid
+                or historical_identity_row is None
+                or historical_instance_row is None
+                or historical_version_row is None
+            ):
+                raise ContractError(
+                    "REGISTRY_CURRENT_ROOT_HISTORICAL_LINEAGE_MISMATCH:"
+                    + source_path
+                )
+            historical_identity = historical_identity_row["record"]
+            historical_instance = historical_instance_row["record"]
+            historical_version = historical_version_row["record"]
             identity = {
                 "applicability_manifest_digest": unknown_contract_digest,
                 "bundle_digest": CANDIDATE_BUNDLE_DIGEST,
                 "canonical_name": skill["canonical_name"],
                 "capability_codes": [],
-                "created_at": SOURCE_OBSERVED_AT,
+                "created_at": historical_identity["created_at"],
                 "input_contract_digest": unknown_contract_digest,
                 "instance_uids": [instance_uid],
                 "lifecycle_status": "QUARANTINED",
@@ -1596,7 +1765,7 @@ def _records_and_catalogs(
             instance = {
                 "bundle_digest": CANDIDATE_BUNDLE_DIGEST,
                 "data_class_codes": [],
-                "first_seen_at": SOURCE_OBSERVED_AT,
+                "first_seen_at": historical_instance["first_seen_at"],
                 "forked_from_instance_uid": None,
                 "last_seen_at": SOURCE_OBSERVED_AT,
                 "lifecycle_status": "QUARANTINED",
@@ -1646,6 +1815,26 @@ def _records_and_catalogs(
                 "tree_digest": skill["tree_digest"],
                 "trust_tier": "UNVERIFIED",
             }
+            if version_uid == historical_version_uid:
+                if (
+                    version["content_digest"]
+                    != historical_version["content_digest"]
+                    or version["tree_digest"]
+                    != historical_version["tree_digest"]
+                    or version["metadata_digest"]
+                    != historical_version["metadata_digest"]
+                    or version["dependency_manifest_digest"]
+                    != historical_version["dependency_manifest_digest"]
+                    or version["permission_manifest_digest"]
+                    != historical_version["permission_manifest_digest"]
+                ):
+                    raise ContractError(
+                        "REGISTRY_IMMUTABLE_VERSION_UID_COLLISION:"
+                        + source_path
+                    )
+                version = dict(historical_version)
+            else:
+                version["supersedes_version_uid"] = historical_version_uid
             identity_digest = _object_digest(identity)
             instance_digest = _object_digest(instance)
             version_digest = _object_digest(version)
@@ -1755,6 +1944,7 @@ def _materialized_contracts(
 ) -> Tuple[
     Mapping[Path, bytes],
     Mapping[str, Any],
+    Mapping[str, Any],
 ]:
     candidate = load_trusted_bundle(
         REPO_ROOT,
@@ -1785,11 +1975,10 @@ def _materialized_contracts(
     }
     if invalid_paths != EXPECTED_INVALID_METADATA:
         raise ContractError("REGISTRY_METADATA_INVALID_SET_MISMATCH")
-    if tracked_alias_count != 0:
-        raise ContractError("REGISTRY_TRACKED_ALIAS_BASELINE_MISMATCH")
+    if tracked_alias_count != FROZEN_EXTERNAL_ALIAS_COUNT:
+        raise ContractError("REGISTRY_TRACKED_ALIAS_COUNT_MISMATCH")
 
-    catalogs: Dict[str, Mapping[str, Any]] = {}
-    outputs: Dict[Path, bytes] = {}
+    exclusions_by_source: Dict[str, List[Mapping[str, Any]]] = {}
     for source in SOURCE_NAMES:
         exclusions: Dict[str, List[int]] = {}
         for material in source_material[source]:
@@ -1799,134 +1988,191 @@ def _materialized_contracts(
                 )
                 aggregate[0] += row["file_count"]
                 aggregate[1] += row["byte_count"]
-        catalog = _with_self_digest(
+        exclusions_by_source[source] = [
             {
-                "bundle_digest": CANDIDATE_BUNDLE_DIGEST,
-                "entries": list(catalog_entries[source]),
-                "entry_count": len(catalog_entries[source]),
-                "exclusions": [
-                    {
-                        "byte_count": values[1],
-                        "file_count": values[0],
-                        "reason_code": reason,
-                    }
-                    for reason, values in sorted(exclusions.items())
-                ],
-                "metadata_invalid_count": sum(
-                    entry["material"]["metadata_state"] == "INVALID"
-                    for entry in catalog_entries[source]
+                "byte_count": values[1],
+                "file_count": values[0],
+                "reason_code": reason,
+            }
+            for reason, values in sorted(exclusions.items())
+        ]
+
+    def build_catalogs(status: str) -> Dict[str, Mapping[str, Any]]:
+        catalogs: Dict[str, Mapping[str, Any]] = {}
+        for source in SOURCE_NAMES:
+            catalogs[source] = _with_self_digest(
+                {
+                    "bundle_digest": CANDIDATE_BUNDLE_DIGEST,
+                    "entries": list(catalog_entries[source]),
+                    "entry_count": len(catalog_entries[source]),
+                    "exclusions": exclusions_by_source[source],
+                    "metadata_invalid_count": sum(
+                        entry["material"]["metadata_state"] == "INVALID"
+                        for entry in catalog_entries[source]
+                    ),
+                    "protocol_revision": PROTOCOL,
+                    "schema_version": CATALOG_ID,
+                    "source_class": SOURCE_CLASSES[source],
+                    "source_material_git_object_id": (
+                        SOURCE_MATERIAL_GIT_OBJECT_ID
+                    ),
+                    "source_material_policy_digest": policy_digest,
+                    "source_material_policy_id": SOURCE_POLICY_ID,
+                    "source_root_path": f"CodexSkills/registry/{source}",
+                    "status": status,
+                },
+                "artifact_digest",
+            )
+        return catalogs
+
+    draft_catalogs = build_catalogs("DRAFT_NON_ACTIVE")
+    registered_catalogs = build_catalogs("REGISTERED")
+
+    def build_snapshot(
+        status: str,
+        catalogs: Mapping[str, Mapping[str, Any]],
+    ) -> Mapping[str, Any]:
+        return _with_self_digest(
+            {
+                "baseline_policy": (
+                    "BASELINE_ESTABLISHED_NO_HISTORICAL_BACKFILL"
                 ),
+                "bundle_digest": CANDIDATE_BUNDLE_DIGEST,
+                "counts": {
+                    "binding_eligible_version_count": 0,
+                    "identity_count": len(identities),
+                    "instance_count": len(instances),
+                    "metadata_invalid_count": len(invalid_paths),
+                    "quarantined_version_count": len(versions),
+                    "source_catalog_count": len(catalogs),
+                    "source_skill_count": len(assignments),
+                    "tracked_symlink_alias_count": tracked_alias_count,
+                    "version_count": len(versions),
+                },
+                "identities": identities,
+                "identity_assignments": assignments,
+                "identity_merge_candidates": merge_candidates,
+                "instances": instances,
                 "protocol_revision": PROTOCOL,
-                "schema_version": CATALOG_ID,
-                "source_class": SOURCE_CLASSES[source],
+                "registry_compatibility_index_is_not_snapshot_truth": True,
+                "same_name_auto_merge_permitted": False,
+                "schema_version": SNAPSHOT_ID,
+                "snapshot_observed_at": SOURCE_OBSERVED_AT,
+                "source_catalogs": [
+                    {
+                        "artifact_digest": catalogs[source][
+                            "artifact_digest"
+                        ],
+                        "draft_relative_path": DRAFT_CATALOG_PATHS[
+                            source
+                        ].relative_to(REPO_ROOT).as_posix(),
+                        "entry_count": catalogs[source]["entry_count"],
+                        "proposed_final_relative_path": (
+                            FINAL_CATALOG_REPO_PATHS[source]
+                        ),
+                        "source_class": SOURCE_CLASSES[source],
+                    }
+                    for source in SOURCE_NAMES
+                ],
                 "source_material_git_object_id": (
                     SOURCE_MATERIAL_GIT_OBJECT_ID
                 ),
                 "source_material_policy_digest": policy_digest,
                 "source_material_policy_id": SOURCE_POLICY_ID,
-                "source_root_path": f"CodexSkills/registry/{source}",
-                "status": "DRAFT_NON_ACTIVE",
-            },
-            "artifact_digest",
-        )
-        catalogs[source] = catalog
-        outputs[DRAFT_CATALOG_PATHS[source]] = _pretty(catalog)
-
-    snapshot = _with_self_digest(
-        {
-            "baseline_policy": (
-                "BASELINE_ESTABLISHED_NO_HISTORICAL_BACKFILL"
-            ),
-            "bundle_digest": CANDIDATE_BUNDLE_DIGEST,
-            "counts": {
-                "binding_eligible_version_count": 0,
-                "identity_count": len(identities),
-                "instance_count": len(instances),
-                "metadata_invalid_count": len(invalid_paths),
-                "quarantined_version_count": len(versions),
-                "source_catalog_count": len(catalogs),
-                "source_skill_count": len(assignments),
-                "tracked_symlink_alias_count": tracked_alias_count,
-                "version_count": len(versions),
-            },
-            "identities": identities,
-            "identity_assignments": assignments,
-            "identity_merge_candidates": merge_candidates,
-            "instances": instances,
-            "protocol_revision": PROTOCOL,
-            "registry_compatibility_index_is_not_snapshot_truth": True,
-            "same_name_auto_merge_permitted": False,
-            "schema_version": SNAPSHOT_ID,
-            "snapshot_observed_at": SOURCE_OBSERVED_AT,
-            "source_catalogs": [
-                {
-                    "artifact_digest": catalogs[source][
-                        "artifact_digest"
-                    ],
-                    "draft_relative_path": DRAFT_CATALOG_PATHS[
-                        source
-                    ].relative_to(REPO_ROOT).as_posix(),
-                    "entry_count": catalogs[source]["entry_count"],
-                    "proposed_final_relative_path": (
-                        FINAL_CATALOG_REPO_PATHS[source]
+                "source_mirror_parity": {
+                    "binding_eligible": True,
+                    "expected_external_symlink_alias_count": (
+                        FROZEN_EXTERNAL_ALIAS_COUNT
                     ),
-                    "source_class": SOURCE_CLASSES[source],
-                }
-                for source in SOURCE_NAMES
-            ],
-            "source_material_git_object_id": (
-                SOURCE_MATERIAL_GIT_OBJECT_ID
-            ),
-            "source_material_policy_digest": policy_digest,
-            "source_material_policy_id": SOURCE_POLICY_ID,
-            "source_mirror_parity": {
-                "binding_eligible": False,
-                "expected_external_symlink_alias_count": (
-                    FROZEN_EXTERNAL_ALIAS_COUNT
-                ),
-                "reason_codes": [
-                    "SOURCE_MIRROR_SYMLINK_ALIAS_LOSS"
-                ],
-                "status": "INCOMPLETE",
-                "tracked_symlink_alias_count": tracked_alias_count,
+                    "reason_codes": [],
+                    "status": "COMPLETE",
+                    "tracked_symlink_alias_count": tracked_alias_count,
+                },
+                "srv_revision": SRV_REVISION,
+                "status": status,
+                "versions": versions,
             },
-            "srv_revision": SRV_REVISION,
-            "status": "DRAFT_NON_ACTIVE",
-            "versions": versions,
-        },
-        "registry_snapshot_digest",
+            "registry_snapshot_digest",
+        )
+
+    draft_snapshot = build_snapshot(
+        "DRAFT_NON_ACTIVE",
+        draft_catalogs,
     )
-    outputs[SNAPSHOT_PATH] = _pretty(snapshot)
+    registered_snapshot = build_snapshot(
+        "REGISTERED",
+        registered_catalogs,
+    )
+    outputs: Dict[Path, bytes] = {}
+    for source in SOURCE_NAMES:
+        outputs[DRAFT_CATALOG_PATHS[source]] = _pretty(
+            draft_catalogs[source]
+        )
+        outputs[REGISTERED_CANDIDATE_CATALOG_PATHS[source]] = _pretty(
+            registered_catalogs[source]
+        )
+        outputs[FINAL_CATALOG_PATHS[source]] = _pretty(
+            registered_catalogs[source]
+        )
+    outputs[SNAPSHOT_PATH] = _pretty(draft_snapshot)
+    outputs[REGISTERED_CANDIDATE_SNAPSHOT_PATH] = _pretty(
+        registered_snapshot
+    )
+    outputs[FINAL_SNAPSHOT_PATH] = _pretty(registered_snapshot)
+    if (
+        outputs[REGISTERED_CANDIDATE_SNAPSHOT_PATH]
+        != outputs[FINAL_SNAPSHOT_PATH]
+        or any(
+            outputs[REGISTERED_CANDIDATE_CATALOG_PATHS[source]]
+            != outputs[FINAL_CATALOG_PATHS[source]]
+            for source in SOURCE_NAMES
+        )
+    ):
+        raise ContractError("REGISTRY_EXACT_BYTE_PROMOTION_MISMATCH")
 
     all_schemas = {**candidate.schemas, **schemas}
     registry, checker = build_registry(all_schemas)
-    for source in SOURCE_NAMES:
+    for mode, catalogs in (
+        ("DRAFT_NON_ACTIVE", draft_catalogs),
+        ("REGISTERED", registered_catalogs),
+    ):
+        for source in SOURCE_NAMES:
+            errors = list(
+                Draft202012Validator(
+                    schemas[CATALOG_ID],
+                    registry=registry,
+                    format_checker=checker,
+                ).iter_errors(catalogs[source])
+            )
+            if errors:
+                raise ContractError(
+                    "REGISTRY_CATALOG_SCHEMA_INVALID:"
+                    + mode
+                    + ":"
+                    + source
+                    + ":"
+                    + errors[0].message
+                )
+            scan_public_value(catalogs[source], candidate.policies)
+    for mode, snapshot in (
+        ("DRAFT_NON_ACTIVE", draft_snapshot),
+        ("REGISTERED", registered_snapshot),
+    ):
         errors = list(
             Draft202012Validator(
-                schemas[CATALOG_ID],
+                schemas[SNAPSHOT_ID],
                 registry=registry,
                 format_checker=checker,
-            ).iter_errors(catalogs[source])
+            ).iter_errors(snapshot)
         )
         if errors:
             raise ContractError(
-                "REGISTRY_CATALOG_SCHEMA_INVALID:"
-                + source
+                "REGISTRY_SNAPSHOT_SCHEMA_INVALID:"
+                + mode
                 + ":"
                 + errors[0].message
             )
-        scan_public_value(catalogs[source], candidate.policies)
-    errors = list(
-        Draft202012Validator(
-            schemas[SNAPSHOT_ID],
-            registry=registry,
-            format_checker=checker,
-        ).iter_errors(snapshot)
-    )
-    if errors:
-        raise ContractError(
-            "REGISTRY_SNAPSHOT_SCHEMA_INVALID:" + errors[0].message
-        )
+        scan_public_value(snapshot, candidate.policies)
     for entry in identities:
         validate_instance(
             candidate,
@@ -1960,41 +2206,41 @@ def _materialized_contracts(
             != entry["version_record_digest"]
         ):
             raise ContractError("REGISTRY_VERSION_DIGEST_MISMATCH")
-    scan_public_value(snapshot, candidate.policies)
-    return outputs, snapshot
+    return outputs, registered_snapshot, draft_snapshot
 
 
-def _verified_auto_reservation() -> Mapping[str, Any]:
-    _tagged_commit_exists(AUTO_RESERVATION_GIT_OBJECT_ID)
+def _verified_auto_source_sync() -> Mapping[str, Any]:
+    """Verify immutable Auto source-sync evidence from its Git object.
+
+    The current checkout may contain a legitimate successor Auto interface.
+    Historical source-sync evidence therefore cannot be coupled to current
+    Auto bytes; current Auto runtime closure is verified separately by the
+    activation-control builder.
+    """
+
+    _tagged_commit_exists(AUTO_SOURCE_SYNC_GIT_OBJECT_ID)
     parent = _git(
-        ["rev-parse", f"{AUTO_RESERVATION_COMMIT}^"]
+        ["rev-parse", f"{AUTO_SOURCE_SYNC_COMMIT}^"]
     ).strip()
-    if parent != AUTO_RESERVATION_PARENT_COMMIT:
-        raise ContractError("REGISTRY_AUTO_RESERVATION_PARENT_MISMATCH")
+    if parent != AUTO_SOURCE_SYNC_PARENT_COMMIT:
+        raise ContractError("REGISTRY_AUTO_SOURCE_SYNC_PARENT_MISMATCH")
     raw = _git_blob(
-        AUTO_RESERVATION_COMMIT,
-        AUTO_RESERVATION_INTERFACE_PATH,
+        AUTO_SOURCE_SYNC_COMMIT,
+        AUTO_SOURCE_SYNC_INTERFACE_PATH,
     )
-    if _sha(raw) != AUTO_RESERVATION_INTERFACE_RAW_SHA256:
+    if _sha(raw) != AUTO_SOURCE_SYNC_INTERFACE_RAW_SHA256:
         raise ContractError(
-            "REGISTRY_AUTO_RESERVATION_INTERFACE_DIGEST_MISMATCH"
-        )
-    current_path = REPO_ROOT.joinpath(
-        *AUTO_RESERVATION_INTERFACE_PATH.split("/")
-    )
-    try:
-        current_raw = current_path.read_bytes()
-    except OSError as exc:
-        raise ContractError(
-            "REGISTRY_AUTO_RESERVATION_INTERFACE_READ_FAILED"
-        ) from exc
-    if current_raw != raw:
-        raise ContractError(
-            "REGISTRY_AUTO_RESERVATION_INTERFACE_CURRENT_DRIFT"
+            "REGISTRY_AUTO_SOURCE_SYNC_INTERFACE_DIGEST_MISMATCH"
         )
     interface = parse_json_bytes(raw)
     reservation = interface.get(
         "catalog_reservation_materialization_snapshot", {}
+    )
+    source_sync = interface.get(
+        "source_content_sync_materialization_snapshot", {}
+    )
+    predecessor = interface.get(
+        "source_content_sync_predecessor_observation", {}
     )
     if (
         not isinstance(interface, dict)
@@ -2004,10 +2250,16 @@ def _verified_auto_reservation() -> Mapping[str, Any]:
         != CANDIDATE_BUNDLE_DIGEST
         or interface.get("candidate_git_object_id")
         != CANDIDATE_GIT_OBJECT_ID
-        or interface.get("module_count")
-        != AUTO_RESERVATION_MODULE_COUNT
-        or interface.get("catalog_path_reservation_complete")
-        is not True
+        or interface.get("module_count") != AUTO_SOURCE_SYNC_MODULE_COUNT
+        or interface.get("catalog_path_reservation_complete") is not True
+        or interface.get("registry_source_content_sync_complete") is not True
+        or interface.get("registry_source_alias_parity_satisfied") is not True
+        or interface.get("registry_mirror_alias_parity_satisfied") is not True
+        or interface.get("registry_source_mirror_parity_satisfied") is not True
+        or interface.get("registry_source_root_parity_satisfied") is not False
+        or interface.get("registry_whole_source_parity_satisfied") is not False
+        or interface.get("registry_alias_set_digest")
+        != AUTO_SOURCE_SYNC_ALIAS_SET_DIGEST
         or interface.get(
             "bound_reference_resolver_implementation_complete"
         )
@@ -2016,85 +2268,156 @@ def _verified_auto_reservation() -> Mapping[str, Any]:
             "bound_reference_resolver_auto_integration_complete"
         )
         is not False
-        or interface.get("bound_reference_resolver_gate_satisfied")
-        is not False
+        or interface.get("bound_reference_resolver_gate_satisfied") is not False
         or interface.get("runtime_state_write_permitted") is not False
         or interface.get("repository_bound") is not False
         or interface.get("canonical_publication_permitted") is not False
-        or interface.get("registry_source_alias_parity_satisfied")
-        is not True
-        or interface.get("registry_mirror_alias_parity_satisfied")
-        is not True
-        or interface.get("registry_source_root_parity_satisfied")
-        is not False
-        or interface.get("registry_whole_source_parity_satisfied")
-        is not False
-        or interface.get("registry_alias_set_digest")
-        != AUTO_RESERVATION_ALIAS_SET_DIGEST
+        or interface.get("au_040_complete") is not False
+        or interface.get("au_040_daily_jsonl_shard_complete") is not False
+        or interface.get("external_gmail_ready_gate_satisfied") is not False
+        or interface.get("m0c_b_permitted") is not False
+        or interface.get("schedule_authority_resolved") is not False
+        or interface.get("schedule_complete") is not False
         or interface.get("au_040_authority_ruling_status")
-        != "REGISTRY_CATALOG_RESERVED_SOURCE_DRIFT_PENDING"
+        != "REGISTRY_SOURCE_CONTENT_SYNCED_CONTROL_PENDING"
         or interface.get("next_phase")
-        != "MECHANISM_REGISTRY_SOURCE_DRIFT_RECONCILIATION"
-        or not isinstance(reservation, dict)
-        or reservation.get("as_of_phase")
-        != "AUTO_REGISTRY_CATALOG_PATH_RESERVATION"
-        or reservation.get("semantic_scope")
+        != "MECHANISM_REGISTRY_PARITY_COMPLETE_MATERIALIZATION"
+    ):
+        raise ContractError(
+            "REGISTRY_AUTO_SOURCE_SYNC_INTERFACE_CONTRACT_MISMATCH"
+        )
+    if (
+        not isinstance(source_sync, dict)
+        or source_sync.get("as_of_phase")
+        != "AUTO_REGISTRY_SOURCE_CONTENT_SYNC"
+        or source_sync.get("semantic_scope")
         != "INTERFACE_MATERIALIZATION_ONLY"
-        or reservation.get("catalog_path_reservation_complete")
-        is not True
-        or reservation.get("catalog_or_snapshot_artifacts_generated")
-        is not False
-        or reservation.get("global_snapshot_namespace_reserved")
-        is not True
-        or reservation.get("reserved_registry_paths")
-        != list(AUTO_RESERVATION_RESERVED_PATHS)
-        or reservation.get(
-            "existing_incomplete_materialization_promotable"
+        or source_sync.get("predecessor_control_git_object_id")
+        != HISTORICAL_MATERIALIZATION_GIT_OBJECT_ID
+        or source_sync.get("source_content_sync_complete") is not True
+        or source_sync.get("source_mirror_parity_satisfied") is not True
+        or source_sync.get("source_root_parity_satisfied") is not False
+        or source_sync.get("whole_source_parity_satisfied") is not False
+        or source_sync.get("remaining_content_drift_paths") != []
+        or source_sync.get("exact_synchronized_paths")
+        != list(AUTO_SOURCE_SYNC_CLOSED_CONTENT_DRIFT)
+        or source_sync.get("missing_source_skill_roots")
+        != list(AUTO_SOURCE_SYNC_MISSING_ROOTS)
+        or source_sync.get("reserved_registry_namespaces_preserved") is not True
+        or source_sync.get("catalog_or_snapshot_artifacts_generated") is not False
+        or source_sync.get(
+            "bound_reference_resolver_auto_integration_complete"
         )
         is not False
+        or source_sync.get("bound_reference_resolver_gate_satisfied") is not False
+        or source_sync.get("runtime_state_write_permitted") is not False
+        or source_sync.get("repository_bound") is not False
+        or source_sync.get("canonical_publication_permitted") is not False
+        or source_sync.get("next_phase")
+        != "MECHANISM_REGISTRY_PARITY_COMPLETE_MATERIALIZATION"
+    ):
+        raise ContractError(
+            "REGISTRY_AUTO_SOURCE_SYNC_SNAPSHOT_CONTRACT_MISMATCH"
+        )
+    synchronized = source_sync.get("synchronized_entries")
+    expected_sync = {
+        "codex/graphify": (
+            695,
+            13_373_911,
+            "816bfb795d8998983a3df2b8786a2d1c691e9e2280dd7be2bdc07acd47775587",
+        ),
+        "codex/persona-distiller-group": (
+            35,
+            1_064_137,
+            "eaf8f8e32b1ade683387346adec8a21b241541567e910609247426ec3626b921",
+        ),
+        "codex/verifier": (
+            61,
+            525_884,
+            "7727bcfb4d03bcc97fafeedea1f8e773945e6be70f0351e8ca32525ff1e8d556",
+        ),
+    }
+    if (
+        not isinstance(synchronized, list)
+        or [row.get("source_relative_path") for row in synchronized]
+        != list(AUTO_SOURCE_SYNC_CLOSED_CONTENT_DRIFT)
+    ):
+        raise ContractError("REGISTRY_AUTO_SOURCE_SYNC_ENTRY_SET_MISMATCH")
+    for row in synchronized:
+        expected = expected_sync[row["source_relative_path"]]
+        if (
+            row.get("regular_file_count") != expected[0]
+            or row.get("byte_count") != expected[1]
+            or row.get("alias_count") != 0
+            or row.get("content_digest") != expected[2]
+            or row.get("source_content_digest") != expected[2]
+            or row.get("mirror_content_digest") != expected[2]
+            or row.get("exact_source_mirror_content_equal") is not True
+        ):
+            raise ContractError(
+                "REGISTRY_AUTO_SOURCE_SYNC_ENTRY_CONTRACT_MISMATCH:"
+                + row["source_relative_path"]
+            )
+    if (
+        not isinstance(predecessor, dict)
+        or predecessor.get("verified_git_object_id")
+        != HISTORICAL_MATERIALIZATION_GIT_OBJECT_ID
+        or predecessor.get("control_interface_raw_sha256")
+        != "a31751bf1258f646412aba84e0b5c46f84f09b77e33156caea372873b819ff36"
+        or predecessor.get("resolver_interface_raw_sha256")
+        != "38c7952ae712e6d4543bb4f4c1f3e5f8a98b00b36780c99bfce6944a722eabf0"
+        or predecessor.get("reconciliation_artifact_digest")
+        != "24d02db5182463912074c109f2b5be350126d62340f58e6463755edbad1b799c"
+        or predecessor.get("pending_content_drift_paths")
+        != list(AUTO_SOURCE_SYNC_CLOSED_CONTENT_DRIFT)
+        or predecessor.get("next_phase_at_observation")
+        != "AUTO_REGISTRY_SOURCE_CONTENT_SYNC"
+    ):
+        raise ContractError(
+            "REGISTRY_AUTO_SOURCE_SYNC_PREDECESSOR_MISMATCH"
+        )
+    if (
+        not isinstance(reservation, dict)
+        or reservation.get("as_of_phase")
+        != "AUTO_REGISTRY_CATALOG_PATH_RESERVATION"
+        or reservation.get("reserved_registry_paths")
+        != list(AUTO_SOURCE_SYNC_RESERVED_PATHS)
         or reservation.get("current_source_skill_count")
-        != AUTO_RESERVATION_CURRENT_SKILL_COUNT
+        != AUTO_SOURCE_SYNC_CURRENT_SKILL_COUNT
         or reservation.get("current_source_skill_counts")
-        != AUTO_RESERVATION_CURRENT_COUNTS
+        != AUTO_SOURCE_SYNC_CURRENT_COUNTS
         or reservation.get("mirror_skill_count")
-        != AUTO_RESERVATION_CURRENT_SKILL_COUNT
+        != AUTO_SOURCE_SYNC_CURRENT_SKILL_COUNT
         or reservation.get("mirror_skill_counts")
-        != AUTO_RESERVATION_CURRENT_COUNTS
-        or reservation.get("historical_source_skill_count")
-        != EXPECTED_TOTAL_SKILLS
-        or reservation.get("historical_source_skill_counts")
-        != EXPECTED_SOURCE_SKILL_COUNTS
+        != AUTO_SOURCE_SYNC_CURRENT_COUNTS
+        or reservation.get("historical_source_skill_count") != 89
         or reservation.get("source_skill_count_delta") != -1
-        or reservation.get("source_alias_count")
-        != FROZEN_EXTERNAL_ALIAS_COUNT
-        or reservation.get("mirror_alias_count")
-        != FROZEN_EXTERNAL_ALIAS_COUNT
+        or reservation.get("source_alias_count") != FROZEN_EXTERNAL_ALIAS_COUNT
+        or reservation.get("mirror_alias_count") != FROZEN_EXTERNAL_ALIAS_COUNT
         or reservation.get("source_alias_parity_satisfied") is not True
         or reservation.get("mirror_alias_parity_satisfied") is not True
         or reservation.get("source_root_parity_satisfied") is not False
         or reservation.get("whole_source_parity_satisfied") is not False
         or reservation.get("missing_source_skill_roots")
-        != list(AUTO_RESERVATION_MISSING_ROOTS)
+        != list(AUTO_SOURCE_SYNC_MISSING_ROOTS)
         or reservation.get("mirror_removed_skill_roots")
-        != list(AUTO_RESERVATION_MISSING_ROOTS)
+        != list(AUTO_SOURCE_SYNC_MISSING_ROOTS)
         or reservation.get("mirror_removal_performed") is not True
         or reservation.get("non_alias_content_drift_observed_paths")
-        != list(AUTO_RESERVATION_CONTENT_DRIFT)
+        != list(AUTO_SOURCE_SYNC_CLOSED_CONTENT_DRIFT)
         or reservation.get("alias_set_digest")
-        != AUTO_RESERVATION_ALIAS_SET_DIGEST
+        != AUTO_SOURCE_SYNC_ALIAS_SET_DIGEST
     ):
         raise ContractError(
-            "REGISTRY_AUTO_RESERVATION_INTERFACE_CONTRACT_MISMATCH"
+            "REGISTRY_AUTO_SOURCE_SYNC_RESERVATION_MISMATCH"
         )
 
     module_artifacts = interface.get("module_artifacts")
     if (
         not isinstance(module_artifacts, list)
-        or len(module_artifacts) != AUTO_RESERVATION_MODULE_COUNT
+        or len(module_artifacts) != AUTO_SOURCE_SYNC_MODULE_COUNT
     ):
-        raise ContractError(
-            "REGISTRY_AUTO_RESERVATION_MODULE_SET_MISMATCH"
-        )
+        raise ContractError("REGISTRY_AUTO_SOURCE_SYNC_MODULE_SET_MISMATCH")
     module_paths = []
     for artifact in module_artifacts:
         if (
@@ -2105,45 +2428,35 @@ def _verified_auto_reservation() -> Mapping[str, Any]:
                 "CodexSkills/registry/auto/"
             )
             or "\\" in artifact["relative_path"]
-            or ".." in PurePosixPath(
-                artifact["relative_path"]
-            ).parts
+            or ".." in PurePosixPath(artifact["relative_path"]).parts
             or not re.fullmatch(
                 r"[0-9a-f]{64}",
                 str(artifact.get("artifact_digest", "")),
             )
         ):
             raise ContractError(
-                "REGISTRY_AUTO_RESERVATION_MODULE_ENTRY_INVALID"
+                "REGISTRY_AUTO_SOURCE_SYNC_MODULE_ENTRY_INVALID"
             )
         module_paths.append(artifact["relative_path"])
-        if (
-            _sha(
-                _git_blob(
-                    AUTO_RESERVATION_COMMIT,
-                    artifact["relative_path"],
-                )
-            )
-            != artifact["artifact_digest"]
-        ):
+        pinned = _git_blob(
+            AUTO_SOURCE_SYNC_COMMIT,
+            artifact["relative_path"],
+        )
+        if _sha(pinned) != artifact["artifact_digest"]:
             raise ContractError(
-                "REGISTRY_AUTO_RESERVATION_MODULE_DIGEST_MISMATCH"
+                "REGISTRY_AUTO_SOURCE_SYNC_MODULE_DIGEST_MISMATCH"
             )
     if (
         module_paths != sorted(module_paths)
         or len(module_paths) != len(set(module_paths))
     ):
-        raise ContractError(
-            "REGISTRY_AUTO_RESERVATION_MODULE_SET_MISMATCH"
-        )
+        raise ContractError("REGISTRY_AUTO_SOURCE_SYNC_MODULE_SET_MISMATCH")
 
-    entries = _tree_entries(AUTO_RESERVATION_COMMIT)
-    tree = {path: (mode, object_id) for mode, object_id, path in entries}
+    entries = _tree_entries(AUTO_SOURCE_SYNC_COMMIT)
+    tree = {repo_path: (mode, object_id) for mode, object_id, repo_path in entries}
     aliases = reservation.get("alias_contract_entries")
-    if not isinstance(aliases, list) or len(aliases) != 20:
-        raise ContractError(
-            "REGISTRY_AUTO_RESERVATION_ALIAS_SET_MISMATCH"
-        )
+    if not isinstance(aliases, list) or len(aliases) != FROZEN_EXTERNAL_ALIAS_COUNT:
+        raise ContractError("REGISTRY_AUTO_SOURCE_SYNC_ALIAS_SET_MISMATCH")
     if _object_digest(
         {
             "aliases": [
@@ -2161,21 +2474,10 @@ def _verified_auto_reservation() -> Mapping[str, Any]:
             ],
             "domain": "SKILLOPS_REGISTRY_ALIAS_SET_V1",
         }
-    ) != AUTO_RESERVATION_ALIAS_SET_DIGEST:
-        raise ContractError(
-            "REGISTRY_AUTO_RESERVATION_ALIAS_DIGEST_MISMATCH"
-        )
+    ) != AUTO_SOURCE_SYNC_ALIAS_SET_DIGEST:
+        raise ContractError("REGISTRY_AUTO_SOURCE_SYNC_ALIAS_DIGEST_MISMATCH")
     observed_alias_paths = set()
     for alias in aliases:
-        if (
-            not isinstance(alias, dict)
-            or alias.get("source_namespace") not in SOURCE_NAMES
-            or not isinstance(alias.get("alias_path"), str)
-            or not isinstance(alias.get("raw_target"), str)
-        ):
-            raise ContractError(
-                "REGISTRY_AUTO_RESERVATION_ALIAS_ENTRY_INVALID"
-            )
         repo_path = (
             "CodexSkills/registry/"
             + alias["source_namespace"]
@@ -2183,29 +2485,22 @@ def _verified_auto_reservation() -> Mapping[str, Any]:
             + alias["alias_path"]
         )
         if repo_path in observed_alias_paths:
-            raise ContractError(
-                "REGISTRY_AUTO_RESERVATION_ALIAS_DUPLICATE"
-            )
+            raise ContractError("REGISTRY_AUTO_SOURCE_SYNC_ALIAS_DUPLICATE")
         observed_alias_paths.add(repo_path)
         if tree.get(repo_path, (None,))[0] != "120000":
+            raise ContractError("REGISTRY_AUTO_SOURCE_SYNC_ALIAS_MODE_MISMATCH")
+        if _git_blob(AUTO_SOURCE_SYNC_COMMIT, repo_path) != alias[
+            "raw_target"
+        ].encode("utf-8"):
             raise ContractError(
-                "REGISTRY_AUTO_RESERVATION_ALIAS_MODE_MISMATCH"
-            )
-        if (
-            _git_blob(AUTO_RESERVATION_COMMIT, repo_path)
-            != alias["raw_target"].encode("utf-8")
-        ):
-            raise ContractError(
-                "REGISTRY_AUTO_RESERVATION_ALIAS_TARGET_MISMATCH"
+                "REGISTRY_AUTO_SOURCE_SYNC_ALIAS_TARGET_MISMATCH"
             )
     if sum(mode == "120000" for mode, _, _ in entries) != 20:
-        raise ContractError(
-            "REGISTRY_AUTO_RESERVATION_ALIAS_COUNT_MISMATCH"
-        )
+        raise ContractError("REGISTRY_AUTO_SOURCE_SYNC_ALIAS_COUNT_MISMATCH")
 
     observed_roots = {source: set() for source in SOURCE_NAMES}
-    for path in tree:
-        parts = PurePosixPath(path).parts
+    for repo_path in tree:
+        parts = PurePosixPath(repo_path).parts
         if (
             len(parts) >= 4
             and parts[:2] == ("CodexSkills", "registry")
@@ -2217,238 +2512,89 @@ def _verified_auto_reservation() -> Mapping[str, Any]:
         source: len(observed_roots[source])
         for source in SOURCE_NAMES
     }
-    if observed_counts != AUTO_RESERVATION_CURRENT_COUNTS:
-        raise ContractError(
-            "REGISTRY_AUTO_RESERVATION_ROOT_COUNT_MISMATCH"
-        )
+    if observed_counts != AUTO_SOURCE_SYNC_CURRENT_COUNTS:
+        raise ContractError("REGISTRY_AUTO_SOURCE_SYNC_ROOT_COUNT_MISMATCH")
     if "context-kernel" in observed_roots["codex"]:
-        raise ContractError(
-            "REGISTRY_AUTO_RESERVATION_REMOVED_ROOT_PRESENT"
-        )
-
+        raise ContractError("REGISTRY_AUTO_SOURCE_SYNC_REMOVED_ROOT_PRESENT")
     if any(
-        path.startswith(prefix)
-        for path in tree
-        for prefix in AUTO_RESERVATION_RESERVED_PATHS
+        repo_path.startswith(prefix)
+        for repo_path in tree
+        for prefix in AUTO_SOURCE_SYNC_RESERVED_PATHS
     ):
         raise ContractError(
-            "REGISTRY_AUTO_RESERVATION_GENERATED_ARTIFACT_FORBIDDEN"
+            "REGISTRY_AUTO_SOURCE_SYNC_GENERATED_ARTIFACT_FORBIDDEN"
         )
-    if _git(
-        [
-            "ls-tree",
-            "-r",
-            "--name-only",
-            AUTO_RESERVATION_COMMIT,
-            "--",
-            "CodexSkills/registry/_global",
-        ]
-    ).strip():
-        raise ContractError(
-            "REGISTRY_AUTO_RESERVATION_GLOBAL_ARTIFACT_FORBIDDEN"
-        )
-
-    removals = reservation.get("mirror_removal_artifacts")
-    if (
-        not isinstance(removals, list)
-        or [row.get("relative_path") for row in removals]
-        != list(AUTO_RESERVATION_REMOVED_PATHS)
-    ):
-        raise ContractError(
-            "REGISTRY_AUTO_RESERVATION_REMOVAL_SET_MISMATCH"
-        )
-    for removal in removals:
-        path = removal["relative_path"]
-        if path in tree:
+    for removal_path in AUTO_SOURCE_SYNC_REMOVED_PATHS:
+        if removal_path in tree:
             raise ContractError(
-                "REGISTRY_AUTO_RESERVATION_REMOVAL_NOT_APPLIED"
+                "REGISTRY_AUTO_SOURCE_SYNC_REMOVAL_NOT_APPLIED"
             )
-        historical = _git_blob(AUTO_RESERVATION_PARENT_COMMIT, path)
-        if (
-            len(historical) != removal.get("historical_byte_count")
-            or _sha(historical)
-            != removal.get("historical_raw_sha256")
-        ):
-            raise ContractError(
-                "REGISTRY_AUTO_RESERVATION_REMOVAL_EVIDENCE_MISMATCH"
-            )
-
     sync_artifact = reservation.get("sync_executor_artifact", {})
     if (
-        not isinstance(sync_artifact, dict)
-        or sync_artifact.get("relative_path") != SYNC_EXECUTOR_PATH
+        sync_artifact.get("relative_path") != SYNC_EXECUTOR_PATH
         or sync_artifact.get("artifact_digest")
-        != AUTO_RESERVATION_SYNC_EXECUTOR_DIGEST
-        or _sha(
-            _git_blob(AUTO_RESERVATION_COMMIT, SYNC_EXECUTOR_PATH)
-        )
-        != AUTO_RESERVATION_SYNC_EXECUTOR_DIGEST
+        != AUTO_SOURCE_SYNC_EXECUTOR_DIGEST
+        or _sha(_git_blob(AUTO_SOURCE_SYNC_COMMIT, SYNC_EXECUTOR_PATH))
+        != AUTO_SOURCE_SYNC_EXECUTOR_DIGEST
     ):
-        raise ContractError(
-            "REGISTRY_AUTO_RESERVATION_SYNC_DIGEST_MISMATCH"
-        )
-    observations = reservation.get("source_scan_observations")
-    if (
-        not isinstance(observations, list)
-        or len(observations) != 4
-        or any(not isinstance(row, dict) for row in observations)
-        or sorted(row.get("source_namespace") for row in observations)
-        != sorted(SOURCE_NAMES)
-        or any(
-            row.get("completeness_status")
-            != "COMPLETE_AFTER_POLICY_EXCLUSIONS"
-            or not re.fullmatch(
-                r"[0-9a-f]{64}",
-                str(row.get("included_tree_digest", "")),
-            )
-            or not re.fullmatch(
-                r"[0-9a-f]{64}",
-                str(row.get("source_snapshot_digest", "")),
-            )
-            for row in observations
-        )
-    ):
-        raise ContractError(
-            "REGISTRY_AUTO_RESERVATION_SOURCE_OBSERVATION_INVALID"
-        )
+        raise ContractError("REGISTRY_AUTO_SOURCE_SYNC_EXECUTOR_MISMATCH")
     return interface
 
 
-def _source_drift_reconciliation(
-    *,
-    auto_interface: Mapping[str, Any],
-    outputs: Mapping[Path, bytes],
-    snapshot: Mapping[str, Any],
-) -> Mapping[str, Any]:
-    reservation = auto_interface[
-        "catalog_reservation_materialization_snapshot"
-    ]
-    codex_catalog = parse_json_bytes(outputs[DRAFT_CATALOG_PATHS["codex"]])
-    historical_entry = next(
-        (
-            entry
-            for entry in codex_catalog["entries"]
-            if entry["source_relative_path"] == "codex/context-kernel"
-        ),
-        None,
-    )
-    if historical_entry is None:
-        raise ContractError(
-            "REGISTRY_HISTORICAL_MISSING_ROOT_REFERENCE_NOT_FOUND"
+def _historical_source_drift_reconciliation() -> Tuple[bytes, Mapping[str, Any]]:
+    """Read the immutable context-kernel reconciliation from its Git object."""
+
+    relative_path = DRIFT_PATH.relative_to(REPO_ROOT).as_posix()
+    raw = _git_blob(HISTORICAL_MATERIALIZATION_COMMIT, relative_path)
+    reconciliation = parse_json_bytes(raw)
+    if (
+        not isinstance(reconciliation, dict)
+        or reconciliation.get("artifact_digest")
+        != canonical_digest(reconciliation, "/artifact_digest")
+        or reconciliation.get("artifact_digest")
+        != "24d02db5182463912074c109f2b5be350126d62340f58e6463755edbad1b799c"
+        or reconciliation.get("schema_version") != DRIFT_ID
+        or reconciliation.get("status")
+        != "DRAFT_NON_ACTIVE_SOURCE_DRIFT_RECONCILED"
+        or reconciliation.get("historical_registry", {}).get(
+            "registry_snapshot_digest"
         )
-    source_counts = [
-        {
-            "skill_count": AUTO_RESERVATION_CURRENT_COUNTS[source],
-            "source_class": SOURCE_CLASSES[source],
-        }
-        for source in SOURCE_NAMES
-    ]
-    observations_by_source = {
-        row["source_namespace"]: row
-        for row in reservation["source_scan_observations"]
-    }
-    source_observations = [
-        {
-            "alias_count": observations_by_source[source][
-                "alias_count"
-            ],
-            "completeness_status": observations_by_source[source][
-                "completeness_status"
-            ],
-            "included_file_count": observations_by_source[source][
-                "included_file_count"
-            ],
-            "included_tree_digest": observations_by_source[source][
-                "included_tree_digest"
-            ],
-            "source_class": SOURCE_CLASSES[source],
-            "source_snapshot_digest": observations_by_source[source][
-                "source_snapshot_digest"
-            ],
-        }
-        for source in SOURCE_NAMES
-    ]
-    result = _with_self_digest(
-        {
-            "auto_evidence": {
-                "artifact_digest": AUTO_RESERVATION_INTERFACE_RAW_SHA256,
-                "phase": "AUTO_REGISTRY_CATALOG_PATH_RESERVATION",
-                "relative_path": AUTO_RESERVATION_INTERFACE_PATH,
-                "verified_git_object_id": (
-                    AUTO_RESERVATION_GIT_OBJECT_ID
-                ),
-            },
-            "bundle_digest": CANDIDATE_BUNDLE_DIGEST,
-            "current_mirror": {
-                "evidence_digest": AUTO_RESERVATION_ALIAS_SET_DIGEST,
-                "mirror_alias_count": reservation[
-                    "mirror_alias_count"
-                ],
-                "mirror_alias_parity_satisfied": True,
-                "mirror_skill_count": reservation["mirror_skill_count"],
-                "source_alias_count": reservation[
-                    "source_alias_count"
-                ],
-                "source_alias_parity_satisfied": True,
-                "source_counts": source_counts,
-                "source_observations": source_observations,
-                "source_root_parity_satisfied": False,
-                "whole_source_parity_satisfied": False,
-            },
-            "disposition": {
-                "binding_eligible": False,
-                "current_catalog_entry_present": False,
-                "historical_registry_records_retained": True,
-                "lifecycle_transition_permitted": False,
-                "missing_root_observation_state": "UNOBSERVED",
-                "promotion_permitted": False,
-                "reason_codes": [
-                    "HISTORICAL_RECORD_RETENTION_REQUIRED",
-                    "SOURCE_CONTENT_DRIFT_PENDING_AUTO_SYNC",
-                    "SOURCE_ROOT_ABSENT_CURRENT_OBSERVATION",
-                ],
-            },
-            "historical_registry": {
-                "historical_catalog_entry": {
-                    "identity_ref": historical_entry["identity_ref"],
-                    "instance_ref": historical_entry["instance_ref"],
-                    "source_relative_path": (
-                        historical_entry["source_relative_path"]
-                    ),
-                    "version_ref": historical_entry["version_ref"],
-                },
-                "registry_snapshot_digest": snapshot[
-                    "registry_snapshot_digest"
-                ],
-                "source_material_git_object_id": (
-                    SOURCE_MATERIAL_GIT_OBJECT_ID
-                ),
-                "source_skill_count": EXPECTED_TOTAL_SKILLS,
-            },
-            "mirror_removal_artifacts": [
-                {
-                    "byte_count": row["historical_byte_count"],
-                    "content_digest": row["historical_raw_sha256"],
-                    "relative_path": row["relative_path"],
-                }
-                for row in reservation["mirror_removal_artifacts"]
-            ],
-            "next_phase": "AUTO_REGISTRY_SOURCE_CONTENT_SYNC",
-            "pending_content_drift": [
-                {
-                    "action_owner": "AUTO",
-                    "required_action": "EXACT_CONTENT_SYNC",
-                    "source_relative_path": path,
-                }
-                for path in AUTO_RESERVATION_CONTENT_DRIFT
-            ],
-            "protocol_revision": PROTOCOL,
-            "schema_version": DRIFT_ID,
-            "status": "DRAFT_NON_ACTIVE_SOURCE_DRIFT_RECONCILED",
-        },
-        "artifact_digest",
-    )
-    return result
+        != HISTORICAL_SNAPSHOT_DIGEST
+        or reconciliation.get("historical_registry", {}).get(
+            "source_material_git_object_id"
+        )
+        != HISTORICAL_SOURCE_MATERIAL_GIT_OBJECT_ID
+        or reconciliation.get("historical_registry", {}).get(
+            "source_skill_count"
+        )
+        != 89
+        or reconciliation.get("historical_registry", {}).get(
+            "historical_catalog_entry", {}
+        ).get("source_relative_path")
+        != "codex/context-kernel"
+        or reconciliation.get("disposition", {}).get(
+            "current_catalog_entry_present"
+        )
+        is not False
+        or reconciliation.get("disposition", {}).get(
+            "historical_registry_records_retained"
+        )
+        is not True
+        or reconciliation.get("disposition", {}).get(
+            "missing_root_observation_state"
+        )
+        != "UNOBSERVED"
+        or reconciliation.get("disposition", {}).get(
+            "lifecycle_transition_permitted"
+        )
+        is not False
+        or reconciliation.get("disposition", {}).get("promotion_permitted")
+        is not False
+    ):
+        raise ContractError(
+            "REGISTRY_HISTORICAL_RECONCILIATION_CONTRACT_MISMATCH"
+        )
+    return raw, reconciliation
 
 
 def _schema_entries(
@@ -2481,12 +2627,13 @@ def _schema_entries(
 
 def _interface(
     schemas: Mapping[str, Mapping[str, Any]],
-    snapshot: Mapping[str, Any],
+    registered_snapshot: Mapping[str, Any],
+    draft_snapshot: Mapping[str, Any],
     outputs: Mapping[Path, bytes],
     reconciliation: Mapping[str, Any],
 ) -> Mapping[str, Any]:
     sync_raw = _git_blob(
-        AUTO_RESERVATION_COMMIT,
+        AUTO_SOURCE_SYNC_COMMIT,
         SYNC_EXECUTOR_PATH,
     )
     runtime_raw = (REPO_ROOT / RESOLVER_RUNTIME_PATH).read_bytes()
@@ -2504,9 +2651,10 @@ def _interface(
             "catalog_path_reservation_complete": True,
             "catalog_path_reservation_required": False,
             "current_materialization_path": (
-                "CodexSkills/governance/registry/materialized"
+                REGISTERED_CANDIDATE_DIR.relative_to(REPO_ROOT).as_posix()
             ),
-            "current_materialization_promotable": False,
+            "current_materialization_promotable": True,
+            "current_materialization_structurally_promoted": True,
             "current_sync_executor_contract": {
                 "artifact_digest": _sha(sync_raw),
                 "deletes_unreserved_source_directories": True,
@@ -2517,9 +2665,10 @@ def _interface(
                     True
                 ),
                 "verified_git_object_id": (
-                    AUTO_RESERVATION_GIT_OBJECT_ID
+                    AUTO_SOURCE_SYNC_GIT_OBJECT_ID
                 ),
             },
+            "exact_byte_promotion_complete": True,
             "exact_byte_promotion_required": True,
             "exact_byte_promotion_scope": (
                 "POST_SOURCE_CONTENT_SYNC_PARITY_COMPLETE_"
@@ -2534,38 +2683,99 @@ def _interface(
             ],
             "final_catalog_entries": [
                 {
+                    "artifact_digest": parse_json_bytes(
+                        outputs[FINAL_CATALOG_PATHS[source]]
+                    )["artifact_digest"],
+                    "candidate_relative_path": (
+                        REGISTERED_CANDIDATE_CATALOG_PATHS[source]
+                        .relative_to(REPO_ROOT)
+                        .as_posix()
+                    ),
+                    "draft_relative_path": DRAFT_CATALOG_PATHS[source]
+                    .relative_to(REPO_ROOT)
+                    .as_posix(),
                     "relative_path": FINAL_CATALOG_REPO_PATHS[source],
                     "source_class": SOURCE_CLASSES[source],
+                    "status": "REGISTERED",
                 }
                 for source in SOURCE_NAMES
             ],
             "final_snapshot_path": FINAL_SNAPSHOT_REPO_PATH,
-            "next_phase": "AUTO_REGISTRY_SOURCE_CONTENT_SYNC",
+            "next_phase": "AUTO_BOUND_REFERENCE_RESOLVER_INTEGRATION",
             "production_trust_permitted": False,
-            "post_reservation_rebuild_required": True,
-            "post_source_content_sync_rebuild_required": True,
+            "post_reservation_rebuild_required": False,
+            "post_source_content_sync_rebuild_required": False,
             "protocol_revision": PROTOCOL,
             "registry_compatibility_index_is_not_snapshot_truth": True,
             "registry_snapshot": {
-                "binding_eligible_version_count": snapshot["counts"][
+                "binding_eligible_version_count": registered_snapshot[
+                    "counts"
+                ][
                     "binding_eligible_version_count"
                 ],
+                "current_identity_count": registered_snapshot["counts"][
+                    "identity_count"
+                ],
+                "current_instance_count": registered_snapshot["counts"][
+                    "instance_count"
+                ],
+                "current_source_skill_count": registered_snapshot["counts"][
+                    "source_skill_count"
+                ],
+                "current_version_count": registered_snapshot["counts"][
+                    "version_count"
+                ],
+                "draft_snapshot": {
+                    "artifact_digest": draft_snapshot[
+                        "registry_snapshot_digest"
+                    ],
+                    "relative_path": SNAPSHOT_PATH.relative_to(
+                        REPO_ROOT
+                    ).as_posix(),
+                    "status": "DRAFT_NON_ACTIVE",
+                },
+                "registered_candidate": {
+                    "artifact_digest": registered_snapshot[
+                        "registry_snapshot_digest"
+                    ],
+                    "relative_path": (
+                        REGISTERED_CANDIDATE_SNAPSHOT_PATH
+                        .relative_to(REPO_ROOT)
+                        .as_posix()
+                    ),
+                    "status": "REGISTERED",
+                },
                 "draft_relative_path": SNAPSHOT_PATH.relative_to(
                     REPO_ROOT
                 ).as_posix(),
                 "proposed_final_relative_path": (
                     FINAL_SNAPSHOT_REPO_PATH
                 ),
-                "registry_snapshot_digest": snapshot[
+                "registry_snapshot_digest": registered_snapshot[
                     "registry_snapshot_digest"
                 ],
                 "schema_id": SNAPSHOT_ID,
                 "source_material_git_object_id": (
                     SOURCE_MATERIAL_GIT_OBJECT_ID
                 ),
-                "source_mirror_parity_satisfied": False,
+                "source_mirror_parity_satisfied": True,
+                "status": "REGISTERED",
+                "tracked_symlink_alias_count": registered_snapshot[
+                    "counts"
+                ]["tracked_symlink_alias_count"],
             },
-            "source_content_sync_required": True,
+            "registered_snapshot_external_trust_contract": {
+                "registry_snapshot_digest": registered_snapshot[
+                    "registry_snapshot_digest"
+                ],
+                "canonical_snapshot_path": FINAL_SNAPSHOT_REPO_PATH,
+                "canonical_snapshot_schema_id": SNAPSHOT_ID,
+                "mode": "REGISTERED",
+                "verified_git_object_id_source": (
+                    "REPO_EXTERNAL_MECHANISM_SUCCESSOR_COMMIT"
+                ),
+            },
+            "source_content_sync_required": False,
             "resolver_contract": {
                 "approved_surfaces": [
                     "CODEX_AUTOMATION",
@@ -2584,7 +2794,7 @@ def _interface(
                 ),
                 "full_seven_field_skill_ref_required": True,
                 "implementation_status": (
-                    "DRAFT_NON_ACTIVE_IMPLEMENTED"
+                    "REGISTERED_NON_BINDING_MATERIALIZED"
                 ),
                 "request_schema_id": REQUEST_ID,
                 "source_path_name_match_is_not_identity_evidence": True,
@@ -2597,35 +2807,30 @@ def _interface(
                 "artifact_digest": reconciliation["artifact_digest"],
                 "auto_evidence": {
                     "artifact_digest": (
-                        AUTO_RESERVATION_INTERFACE_RAW_SHA256
+                        AUTO_SOURCE_SYNC_INTERFACE_RAW_SHA256
                     ),
                     "verified_git_object_id": (
-                        AUTO_RESERVATION_GIT_OBJECT_ID
+                        AUTO_SOURCE_SYNC_GIT_OBJECT_ID
                     ),
                 },
-                "current_source_alias_count": (
-                    reconciliation["current_mirror"][
-                        "source_alias_count"
-                    ]
-                ),
-                "current_source_skill_count": (
-                    reconciliation["current_mirror"][
-                        "mirror_skill_count"
-                    ]
+                "current_source_alias_count": FROZEN_EXTERNAL_ALIAS_COUNT,
+                "current_source_skill_count": EXPECTED_TOTAL_SKILLS,
+                "historical_reconciliation_verified_git_object_id": (
+                    HISTORICAL_MATERIALIZATION_GIT_OBJECT_ID
                 ),
                 "historical_registry_records_retained": True,
                 "missing_source_skill_roots": list(
-                    AUTO_RESERVATION_MISSING_ROOTS
+                    AUTO_SOURCE_SYNC_MISSING_ROOTS
                 ),
-                "pending_content_drift_paths": list(
-                    AUTO_RESERVATION_CONTENT_DRIFT
-                ),
+                "pending_content_drift_paths": [],
                 "relative_path": DRIFT_PATH.relative_to(
                     REPO_ROOT
                 ).as_posix(),
                 "schema_id": DRIFT_ID,
                 "source_alias_parity_satisfied": True,
+                "source_content_sync_complete": True,
                 "source_drift_reconciliation_complete": True,
+                "source_mirror_parity_satisfied": True,
                 "source_root_parity_satisfied": False,
                 "status": (
                     "DRAFT_NON_ACTIVE_SOURCE_DRIFT_RECONCILED"
@@ -2671,9 +2876,12 @@ def _interface(
             "schema_entries": _schema_entries(schemas),
             "schema_entry_count": len(schemas),
             "source_drift_reconciliation_complete": True,
+            "source_mirror_parity_satisfied": True,
+            "source_root_parity_satisfied": False,
             "status": (
-                "DRAFT_NON_ACTIVE_SOURCE_DRIFT_RECONCILED"
+                "DRAFT_NON_ACTIVE_PARITY_COMPLETE_MATERIALIZED"
             ),
+            "whole_source_parity_satisfied": False,
         },
         "artifact_digest",
     )
@@ -2682,15 +2890,18 @@ def _interface(
 def expected_outputs() -> Mapping[Path, bytes]:
     _tagged_commit_exists(CANDIDATE_GIT_OBJECT_ID)
     _tagged_commit_exists(SOURCE_MATERIAL_GIT_OBJECT_ID)
-    _tagged_commit_exists(AUTO_RESERVATION_GIT_OBJECT_ID)
+    _tagged_commit_exists(HISTORICAL_MATERIALIZATION_GIT_OBJECT_ID)
+    _tagged_commit_exists(AUTO_SOURCE_SYNC_GIT_OBJECT_ID)
     schemas = {
         CATALOG_ID: registry_source_catalog_schema(),
         DRIFT_ID: source_drift_reconciliation_schema(),
         SNAPSHOT_ID: registry_snapshot_schema(),
         REQUEST_ID: bound_reference_request_schema(),
     }
-    auto_interface = _verified_auto_reservation()
-    materialized, snapshot = _materialized_contracts(schemas)
+    _verified_auto_source_sync()
+    materialized, registered_snapshot, draft_snapshot = (
+        _materialized_contracts(schemas)
+    )
     outputs: Dict[Path, bytes] = {
         CATALOG_SCHEMA_PATH: _pretty(schemas[CATALOG_ID]),
         DRIFT_SCHEMA_PATH: _pretty(schemas[DRIFT_ID]),
@@ -2698,10 +2909,8 @@ def expected_outputs() -> Mapping[Path, bytes]:
         REQUEST_SCHEMA_PATH: _pretty(schemas[REQUEST_ID]),
         **materialized,
     }
-    reconciliation = _source_drift_reconciliation(
-        auto_interface=auto_interface,
-        outputs=outputs,
-        snapshot=snapshot,
+    reconciliation_raw, reconciliation = (
+        _historical_source_drift_reconciliation()
     )
     candidate = load_trusted_bundle(
         REPO_ROOT,
@@ -2728,10 +2937,11 @@ def expected_outputs() -> Mapping[Path, bytes]:
             + errors[0].message
         )
     scan_public_value(reconciliation, candidate.policies)
-    outputs[DRIFT_PATH] = _pretty(reconciliation)
+    outputs[DRIFT_PATH] = reconciliation_raw
     interface = _interface(
         schemas,
-        snapshot,
+        registered_snapshot,
+        draft_snapshot,
         outputs,
         reconciliation,
     )
@@ -2762,7 +2972,7 @@ def materialize(*, check: bool) -> int:
             path.write_bytes(payload)
         action = "BOUND_REFERENCE_RESOLVER_GENERATED_OK"
     interface = parse_json_bytes(outputs[INTERFACE_PATH])
-    snapshot = parse_json_bytes(outputs[SNAPSHOT_PATH])
+    snapshot = parse_json_bytes(outputs[FINAL_SNAPSHOT_PATH])
     print(
         f"{action} skills={snapshot['counts']['source_skill_count']} "
         f"catalogs={interface['catalog_count']} "

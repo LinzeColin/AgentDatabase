@@ -198,13 +198,18 @@ class BoundReferenceResolverTests(unittest.TestCase):
                 REPO_ROOT / resolver.REQUEST_SCHEMA_PATH
             ),
         }
-        cls.snapshot = strict_load(REPO_ROOT / resolver.DRAFT_SNAPSHOT_PATH)
+        cls.draft_snapshot = strict_load(
+            REPO_ROOT / resolver.DRAFT_SNAPSHOT_PATH
+        )
+        cls.snapshot = strict_load(
+            REPO_ROOT / resolver.REGISTERED_SNAPSHOT_PATH
+        )
         cls.catalogs = {
             source_class: strict_load(
                 REPO_ROOT
                 / resolver._expected_catalog_path(
                     source_class,
-                    "DRAFT_NON_ACTIVE",
+                    "REGISTERED",
                 )
             )
             for source_class in resolver.SOURCE_CLASSES
@@ -218,7 +223,7 @@ class BoundReferenceResolverTests(unittest.TestCase):
             expected_snapshot_digest=cls.snapshot[
                 "registry_snapshot_digest"
             ],
-            trust_mode="DRAFT_NON_ACTIVE",
+            trust_mode="REGISTERED",
         )
 
     def test_01_builder_is_byte_equivalent(self) -> None:
@@ -247,24 +252,24 @@ class BoundReferenceResolverTests(unittest.TestCase):
             counts,
             {
                 "binding_eligible_version_count": 0,
-                "identity_count": 89,
-                "instance_count": 89,
-                "metadata_invalid_count": 1,
-                "quarantined_version_count": 89,
+                "identity_count": 88,
+                "instance_count": 88,
+                "metadata_invalid_count": 0,
+                "quarantined_version_count": 88,
                 "source_catalog_count": 4,
-                "source_skill_count": 89,
-                "tracked_symlink_alias_count": 0,
-                "version_count": 89,
+                "source_skill_count": 88,
+                "tracked_symlink_alias_count": 20,
+                "version_count": 88,
             },
         )
         self.assertEqual(
             self.snapshot["source_mirror_parity"],
             {
-                "binding_eligible": False,
+                "binding_eligible": True,
                 "expected_external_symlink_alias_count": 20,
-                "reason_codes": ["SOURCE_MIRROR_SYMLINK_ALIAS_LOSS"],
-                "status": "INCOMPLETE",
-                "tracked_symlink_alias_count": 0,
+                "reason_codes": [],
+                "status": "COMPLETE",
+                "tracked_symlink_alias_count": 20,
             },
         )
         invalid = {
@@ -273,7 +278,11 @@ class BoundReferenceResolverTests(unittest.TestCase):
             for entry in catalog["entries"]
             if entry["material"]["metadata_state"] == "INVALID"
         }
-        self.assertEqual(invalid, {"codex/context-kernel"})
+        self.assertEqual(invalid, set())
+        self.assertNotIn(
+            ("CODEX", "codex/context-kernel"),
+            self.context.assignments,
+        )
         self.assertEqual(len(self.context.eligible_version_uids), 0)
 
     def test_03_source_counts_and_catalog_closure_are_exact(self) -> None:
@@ -288,12 +297,12 @@ class BoundReferenceResolverTests(unittest.TestCase):
         )
         self.assertEqual(
             sum(len(catalog["entries"]) for catalog in self.catalogs.values()),
-            89,
+            88,
         )
-        self.assertEqual(len(self.context.assignments), 89)
-        self.assertEqual(len(self.context.identities), 89)
-        self.assertEqual(len(self.context.instances), 89)
-        self.assertEqual(len(self.context.versions), 89)
+        self.assertEqual(len(self.context.assignments), 88)
+        self.assertEqual(len(self.context.identities), 88)
+        self.assertEqual(len(self.context.instances), 88)
+        self.assertEqual(len(self.context.versions), 88)
 
     def test_04_same_names_remain_distinct_owner_review_candidates(self) -> None:
         candidates = {
@@ -441,10 +450,10 @@ class BoundReferenceResolverTests(unittest.TestCase):
                 expected_snapshot_digest=self.snapshot[
                     "registry_snapshot_digest"
                 ],
-                trust_mode="DRAFT_NON_ACTIVE",
+                trust_mode="REGISTERED",
             )
         tampered = copy.deepcopy(self.snapshot)
-        tampered["counts"]["source_skill_count"] = 88
+        tampered["counts"]["source_skill_count"] = 87
         _with_digest(tampered, "registry_snapshot_digest")
         with self.assertRaisesRegex(
             ContractError,
@@ -459,7 +468,7 @@ class BoundReferenceResolverTests(unittest.TestCase):
                 expected_snapshot_digest=tampered[
                     "registry_snapshot_digest"
                 ],
-                trust_mode="DRAFT_NON_ACTIVE",
+                trust_mode="REGISTERED",
             )
         tampered_catalogs = copy.deepcopy(self.catalogs)
         tampered_catalogs["AGENTS"]["entries"][0]["canonical_name"] = (
@@ -478,7 +487,7 @@ class BoundReferenceResolverTests(unittest.TestCase):
                 expected_snapshot_digest=self.snapshot[
                     "registry_snapshot_digest"
                 ],
-                trust_mode="DRAFT_NON_ACTIVE",
+                trust_mode="REGISTERED",
             )
         tampered = copy.deepcopy(self.snapshot)
         tampered["versions"][0]["record"]["tree_digest"] = "f" * 64
@@ -496,10 +505,10 @@ class BoundReferenceResolverTests(unittest.TestCase):
                 expected_snapshot_digest=tampered[
                     "registry_snapshot_digest"
                 ],
-                trust_mode="DRAFT_NON_ACTIVE",
+                trust_mode="REGISTERED",
             )
 
-    def test_11_external_git_tuple_loads_exact_draft_and_rejects_drift(
+    def test_11_external_git_tuple_loads_registered_and_rejects_drift(
         self,
     ) -> None:
         manifest = strict_load(
@@ -525,6 +534,33 @@ class BoundReferenceResolverTests(unittest.TestCase):
                 GOVERNANCE_DIR / "registry",
                 repo / "CodexSkills/governance/registry",
             )
+            for source in builder.SOURCE_NAMES:
+                final_catalog = (
+                    REPO_ROOT
+                    / "CodexSkills/registry"
+                    / source
+                    / "_catalog/catalog.v1.json"
+                )
+                target = (
+                    repo
+                    / "CodexSkills/registry"
+                    / source
+                    / "_catalog/catalog.v1.json"
+                )
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(final_catalog, target)
+            final_snapshot = (
+                REPO_ROOT
+                / "CodexSkills/registry/_global/"
+                "registry-snapshot.v1.json"
+            )
+            target = (
+                repo
+                / "CodexSkills/registry/_global/"
+                "registry-snapshot.v1.json"
+            )
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(final_snapshot, target)
             for command in (
                 ["git", "init", "-q"],
                 ["git", "config", "user.name", "Mechanism Test"],
@@ -563,12 +599,12 @@ class BoundReferenceResolverTests(unittest.TestCase):
                 resolver.RegistrySnapshotTrustTuple(
                     tagged,
                     self.snapshot["registry_snapshot_digest"],
-                    resolver.DRAFT_SNAPSHOT_PATH,
+                    resolver.REGISTERED_SNAPSHOT_PATH,
                     resolver.SNAPSHOT_ID,
-                    "DRAFT_NON_ACTIVE",
+                    "REGISTERED",
                 ),
             )
-            self.assertEqual(len(context.versions), 89)
+            self.assertEqual(len(context.versions), 88)
             with self.assertRaisesRegex(
                 ContractError,
                 "REGISTRY_SNAPSHOT_EXTERNAL_DIGEST_MISMATCH",
@@ -584,9 +620,9 @@ class BoundReferenceResolverTests(unittest.TestCase):
                     resolver.RegistrySnapshotTrustTuple(
                         tagged,
                         "f" * 64,
-                        resolver.DRAFT_SNAPSHOT_PATH,
+                        resolver.REGISTERED_SNAPSHOT_PATH,
                         resolver.SNAPSHOT_ID,
-                        "DRAFT_NON_ACTIVE",
+                        "REGISTERED",
                     ),
                 )
             with self.assertRaisesRegex(
@@ -604,9 +640,9 @@ class BoundReferenceResolverTests(unittest.TestCase):
                     resolver.RegistrySnapshotTrustTuple(
                         tagged,
                         self.snapshot["registry_snapshot_digest"],
-                        resolver.DRAFT_SNAPSHOT_PATH,
+                        resolver.REGISTERED_SNAPSHOT_PATH,
                         resolver.SNAPSHOT_ID,
-                        "REGISTERED",
+                        "DRAFT_NON_ACTIVE",
                     ),
                 )
 
@@ -616,14 +652,18 @@ class BoundReferenceResolverTests(unittest.TestCase):
         )
         self.assertEqual(
             interface["next_phase"],
-            "AUTO_REGISTRY_SOURCE_CONTENT_SYNC",
+            "AUTO_BOUND_REFERENCE_RESOLVER_INTEGRATION",
         )
         self.assertFalse(interface["auto_integration_complete"])
         self.assertFalse(interface["production_trust_permitted"])
         self.assertFalse(interface["canonical_publication_permitted"])
-        self.assertFalse(interface["current_materialization_promotable"])
-        self.assertTrue(interface["post_reservation_rebuild_required"])
+        self.assertTrue(interface["current_materialization_promotable"])
         self.assertTrue(
+            interface["current_materialization_structurally_promoted"]
+        )
+        self.assertTrue(interface["exact_byte_promotion_complete"])
+        self.assertFalse(interface["post_reservation_rebuild_required"])
+        self.assertFalse(
             interface["post_source_content_sync_rebuild_required"]
         )
         self.assertEqual(
@@ -636,12 +676,33 @@ class BoundReferenceResolverTests(unittest.TestCase):
         self.assertTrue(interface["catalog_path_reservation_complete"])
         self.assertFalse(interface["catalog_path_reservation_required"])
         self.assertTrue(interface["source_drift_reconciliation_complete"])
-        self.assertTrue(interface["source_content_sync_required"])
+        self.assertFalse(interface["source_content_sync_required"])
+        self.assertTrue(interface["source_mirror_parity_satisfied"])
+        self.assertFalse(interface["source_root_parity_satisfied"])
+        self.assertFalse(interface["whole_source_parity_satisfied"])
         self.assertEqual(
             interface["registry_snapshot"][
                 "binding_eligible_version_count"
             ],
             0,
+        )
+        self.assertEqual(
+            interface["registry_snapshot"]["status"],
+            "REGISTERED",
+        )
+        self.assertEqual(
+            interface["registry_snapshot"]["current_source_skill_count"],
+            88,
+        )
+        self.assertEqual(
+            interface["registry_snapshot"]["tracked_symlink_alias_count"],
+            20,
+        )
+        self.assertEqual(
+            interface["source_drift_reconciliation"][
+                "pending_content_drift_paths"
+            ],
+            [],
         )
         self.assertTrue(
             interface["current_sync_executor_contract"][
@@ -699,22 +760,37 @@ class BoundReferenceResolverTests(unittest.TestCase):
             reconciliation["next_phase"],
             "AUTO_REGISTRY_SOURCE_CONTENT_SYNC",
         )
-        self.assertFalse(
+        self.assertEqual(
+            reconciliation["historical_registry"][
+                "historical_catalog_entry"
+            ]["source_relative_path"],
+            "codex/context-kernel",
+        )
+        self.assertTrue(
             (
                 REPO_ROOT
                 / "CodexSkills/registry/_global/"
                 "registry-snapshot.v1.json"
-            ).exists()
+            ).is_file()
         )
         for source in builder.SOURCE_NAMES:
-            self.assertFalse(
-                (
-                    REPO_ROOT
-                    / "CodexSkills/registry"
-                    / source
-                    / "_catalog/catalog.v1.json"
-                ).exists()
+            catalog = strict_load(
+                REPO_ROOT
+                / "CodexSkills/registry"
+                / source
+                / "_catalog/catalog.v1.json"
             )
+            self.assertEqual(catalog["status"], "REGISTERED")
+            self.assertEqual(
+                builder.REGISTERED_CANDIDATE_CATALOG_PATHS[
+                    source
+                ].read_bytes(),
+                builder.FINAL_CATALOG_PATHS[source].read_bytes(),
+            )
+        self.assertEqual(
+            builder.REGISTERED_CANDIDATE_SNAPSHOT_PATH.read_bytes(),
+            builder.FINAL_SNAPSHOT_PATH.read_bytes(),
+        )
         self.assertFalse((REPO_ROOT / "CodexSkills/VERSION").exists())
         manifest_schema_ids = {
             entry["id"]
@@ -733,14 +809,28 @@ class BoundReferenceResolverTests(unittest.TestCase):
             }.isdisjoint(manifest_schema_ids)
         )
 
-    def test_13_auto_reservation_tuple_tamper_fails_closed(self) -> None:
+    def test_13_auto_source_sync_tuple_tamper_fails_closed(self) -> None:
+        historical_raw = builder._git_blob(
+            builder.AUTO_SOURCE_SYNC_COMMIT,
+            builder.AUTO_SOURCE_SYNC_INTERFACE_PATH,
+        )
+        current_raw = (
+            REPO_ROOT
+            / builder.AUTO_SOURCE_SYNC_INTERFACE_PATH
+        ).read_bytes()
+        self.assertNotEqual(current_raw, historical_raw)
+        self.assertEqual(
+            builder._verified_auto_source_sync()["next_phase"],
+            "MECHANISM_REGISTRY_PARITY_COMPLETE_MATERIALIZATION",
+        )
+
         original = builder._git_blob
 
         def drift(commit: str, relative_path: str) -> bytes:
             if (
-                commit == builder.AUTO_RESERVATION_COMMIT
+                commit == builder.AUTO_SOURCE_SYNC_COMMIT
                 and relative_path
-                == builder.AUTO_RESERVATION_INTERFACE_PATH
+                == builder.AUTO_SOURCE_SYNC_INTERFACE_PATH
             ):
                 return b"{}"
             return original(commit, relative_path)
@@ -752,9 +842,71 @@ class BoundReferenceResolverTests(unittest.TestCase):
         ):
             with self.assertRaisesRegex(
                 ContractError,
-                "REGISTRY_AUTO_RESERVATION_INTERFACE_DIGEST_MISMATCH",
+                "REGISTRY_AUTO_SOURCE_SYNC_INTERFACE_DIGEST_MISMATCH",
             ):
-                builder._verified_auto_reservation()
+                builder._verified_auto_source_sync()
+
+    def test_14_immutable_versions_and_successor_lineage_are_exact(self) -> None:
+        historical = builder._historical_registry_records()
+        historical_versions = historical["versions"]
+        current_versions = {
+            row["record"]["skill_version_uid"]: row
+            for row in self.snapshot["versions"]
+        }
+        unchanged = set(historical_versions) & set(current_versions)
+        self.assertEqual(len(unchanged), 74)
+        self.assertTrue(
+            all(
+                historical_versions[uid] == current_versions[uid]
+                for uid in unchanged
+            )
+        )
+        changed_paths = set()
+        for source_class, source_path in self.context.assignments:
+            historical_identity_uid = historical["assignments"][
+                (source_class, source_path)
+            ]
+            historical_identity = historical["identities"][
+                historical_identity_uid
+            ]["record"]
+            historical_instance = historical["instances"][
+                historical_identity["instance_uids"][0]
+            ]["record"]
+            historical_version_uid = historical_instance["version_uids"][0]
+            current_identity = self.context.identities[
+                self.context.assignments[(source_class, source_path)]
+            ]
+            current_instance = self.context.instances[
+                current_identity["instance_uids"][0]
+            ]
+            current_version_uid = current_instance["version_uids"][0]
+            if current_version_uid != historical_version_uid:
+                changed_paths.add(source_path)
+                self.assertEqual(
+                    self.context.versions[current_version_uid][
+                        "supersedes_version_uid"
+                    ],
+                    historical_version_uid,
+                )
+        self.assertEqual(
+            changed_paths,
+            {
+                "codex/frontend-slides",
+                "codex/graphify",
+                "codex/gsap-core",
+                "codex/gsap-frameworks",
+                "codex/gsap-performance",
+                "codex/gsap-plugins",
+                "codex/gsap-react",
+                "codex/gsap-scrolltrigger",
+                "codex/gsap-skills",
+                "codex/gsap-timeline",
+                "codex/gsap-utils",
+                "codex/guizang-ppt-skill",
+                "codex/persona-distiller-group",
+                "codex/verifier",
+            },
+        )
 
 
 if __name__ == "__main__":
