@@ -38,6 +38,14 @@ does not resolve the `04:15`/`05:30` authority conflict, does not join the
 candidate, does not modify the activation control, and does not create
 `CodexSkills/VERSION`.
 
+Its Mechanism consumer-first readiness artifact uses two independent external
+trust tuples: the exact 31/5 v2 candidate and the exact bundle-external v3
+draft. The consumer requires an explicit `PREDECESSOR_READ_ONLY` or
+`SUCCESSOR_SHADOW` selection, never combines policy objects, and keeps schedule
+authority unresolved for both reads. The real Auto consumers remain
+v2/candidate-only; therefore cross-plane readiness and candidate
+materialization remain false until the Auto-owned dual-read Phase completes.
+
 Validate from the repository root:
 
 ```bash
@@ -53,4 +61,9 @@ Validate from the repository root:
   CodexSkills/governance/tools/build_version_policy_v3_draft.py --check
 /usr/bin/python3 -B -m unittest \
   CodexSkills.governance.tests.test_version_policy_v3_draft
+/usr/bin/python3 -B \
+  CodexSkills/governance/tools/build_version_policy_v3_consumer_readiness.py \
+  --check
+/usr/bin/python3 -B -m unittest \
+  CodexSkills.governance.tests.test_version_policy_v3_consumer_readiness
 ```

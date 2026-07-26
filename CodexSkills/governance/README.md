@@ -30,8 +30,12 @@ Key entrypoints:
 - `release/version_policy_v3/contract.py`: exact v2→v3 compatibility,
   locked-impact, SRV/daily-transaction separation, notification, and unresolved
   schedule gates.
+- `release/version_policy_v3/consumer.py`: externally trusted, explicit
+  v2/v3 dual-read selection with hybrid and schedule fail-closed gates.
 - `tools/build_version_policy_v3_draft.py`: deterministic bundle-external
   version-policy v3 draft and consumer-first handoff.
+- `tools/build_version_policy_v3_consumer_readiness.py`: deterministic
+  Mechanism dual-read readiness and actual cross-plane consumer inventory.
 - `tools/validate_au040_semantic_acceptance.py`: exact 365-day and
   shard/index/manifest/publication cross-artifact gates.
 - `tests/test_mechanism_contract.py`: positive, negative, and fault gates.
@@ -43,6 +47,9 @@ Key entrypoints:
 - `tests/test_version_policy_v3_draft.py`: v2 gap closure, impact
   non-downgrade, schedule-authority, notification, privacy, and
   candidate/control non-mutation regressions.
+- `tests/test_version_policy_v3_consumer_readiness.py`: immutable external
+  trust tuples, v2/v3 selection, schedule fail-closed, and actual Auto
+  v2-only transition evidence.
 - `draft-interface.json`: exact M0a interface for Auto A1a.
 - `bundles/schema-bundle-manifest.v1.json`: final non-active 31/5 candidate
   manifest.
@@ -67,6 +74,9 @@ Run from the repository root with the explicitly provisioned interpreter:
   CodexSkills/governance/tools/build_release_foundations.py --check
 /usr/bin/python3 -B \
   CodexSkills/governance/tools/build_version_policy_v3_draft.py --check
+/usr/bin/python3 -B \
+  CodexSkills/governance/tools/build_version_policy_v3_consumer_readiness.py \
+  --check
 /usr/bin/python3 -B CodexSkills/governance/tools/validate_mechanism.py lint-draft
 /usr/bin/python3 -B \
   CodexSkills/governance/tools/validate_activation.py lint-control
@@ -180,11 +190,12 @@ repo-external.
 This draft deliberately records both observed schedule candidates (`04:15`
 and `05:30`) without choosing between them. Its authority state is
 `UNRESOLVED`, `daily_schedule_local=null`, and
-`schedule_activation_permitted=false`. The v3 schema and policy are not
-members of the trusted 31/5 candidate, the activation control remains
-byte-identical, and `CodexSkills/VERSION` remains absent. A separate
-consumer-first readiness Phase and later coordinated candidate replacement
-are mandatory before this policy can affect release or runtime behavior.
+`schedule_activation_permitted=false`. The Mechanism dual-read consumer now
+accepts exact v2 as `PREDECESSOR_READ_ONLY` and exact v3 as
+`SUCCESSOR_SHADOW`; it rejects implicit or hybrid selection and keeps both
+schedule reads non-authorizing. The v3 schema and policy are not members of
+the trusted 31/5 candidate, the activation control remains byte-identical,
+and `CodexSkills/VERSION` remains absent.
 
 The bundle-outside Registry contract is under
 `CodexSkills/governance/registry/`. Its current materialization consumes
@@ -215,8 +226,11 @@ Two independent prerequisite lanes remain explicit:
   only the remotely verified Mechanism successor object, resolver-interface
   bytes, and registered snapshot digest.
 - Version policy:
-  `MECHANISM_VERSION_POLICY_V3_CONSUMER_FIRST_READINESS` may only prove
-  consumer compatibility; it may not add v3 to the candidate.
+  `MECHANISM_VERSION_POLICY_V3_CONSUMER_FIRST_READINESS` proves the Mechanism
+  consumer and inventories the real unchanged Auto consumers. Auto schedule
+  and notification remain v2-only and Auto bootstrap remains candidate-only,
+  so cross-plane readiness is false and v3 may not join the candidate. The
+  only handoff is `AUTO_VERSION_POLICY_V3_DUAL_READ_INTEGRATION`.
 
 Schedule authority, resolver production trust, external Gmail/state readiness,
 runtime state-instance creation, AU-040 completion, M0c-B, ACTIVE trust,

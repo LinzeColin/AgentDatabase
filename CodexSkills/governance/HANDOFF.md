@@ -1,7 +1,7 @@
-# Mechanism version-policy v3 draft handoff
+# Mechanism version-policy v3 consumer-readiness handoff
 
-- State: `DRAFT_NON_ACTIVE_CONSUMER_FIRST_REQUIRED`
-- Phase: `MECHANISM_VERSION_POLICY_V3_DRAFT`
+- State: `DRAFT_NON_ACTIVE_MECHANISM_CONSUMER_READY`
+- Phase: `MECHANISM_VERSION_POLICY_V3_CONSUMER_FIRST_READINESS`
 - Protocol:
   `urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1`
 - SRV candidate: `v0.0.0.3`
@@ -30,8 +30,14 @@
   `6b2772b30521da9ab3c513d7907448744bff90c1c650ae6ad8c35e5da1497d46`
 - Version-policy v3 canonical policy digest:
   `5ea6047446ef26ab39d0e284f37619859d57c8c419daa1cffefffdc12935cfe0`
+- Consumer-readiness raw SHA-256:
+  `6866a2ca9485d57d065c4954e8452b567c37b738bc32397d17316dfceb623632`
+- Consumer-readiness self digest:
+  `dec3be6196954320a24a5b9a87c39ac9c8a3ec530216a5b1650797f90046b532`
+- Consumer-readiness schema canonical SHA-256:
+  `888ad26980f01be14c72d55d7fc514225b3988d64c9034243604f2112c7dcc14`
 - Version-policy next Phase:
-  `MECHANISM_VERSION_POLICY_V3_CONSUMER_FIRST_READINESS`
+  `AUTO_VERSION_POLICY_V3_DUAL_READ_INTEGRATION`
 - Registry/control pending Phase:
   `AUTO_TELEIOSIS_REGISTRY_EXACT_TUPLE_INTEGRATION`
 
@@ -89,6 +95,45 @@ draft interface records `consumer_first_verified=false`,
 `candidate_materialization_permitted=false`,
 `promotion_to_candidate_performed=false`, and
 `release_write_permitted=false`.
+
+## Mechanism consumer-first readiness
+
+The dual-read consumer selects exactly one policy and one mode:
+
+```text
+version-policy:v2 -> PREDECESSOR_READ_ONLY
+version-policy:v3 -> SUCCESSOR_SHADOW
+```
+
+Implicit selection, policy-object merging, unknown policy IDs, duplicate
+triggers, and v2 attempts to classify one of the six v3-only MAJOR triggers
+all fail closed. Both policy reads expose the observed schedule value but
+normalize schedule authority to `UNRESOLVED`; neither may authorize activation.
+
+The loader verifies two independent repo-external trust roots:
+
+```text
+v2 candidate:
+  sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5
+  raw manifest=66ad125629cab71739ff2bc266219f995f7a45998936ca720c6db678ee77e65a
+  bundle=36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e
+v3 draft:
+  sha1:07f7925185f7e1486f808042a10c383ba52d572f
+  raw interface=0fa8303981a1b263c835e74cc864fb114c4e1d4eb1a5e8c317c140754b84b8f7
+```
+
+The actual Auto consumer inventory is pinned to `sha1:1c829553…`.
+`runtime/schedule.py` and `runtime/notification.py` remain v2-only, while
+bootstrap and shared-contract loading remain candidate-bundle-only. Tests
+execute those real consumer paths: v2 is accepted, v3 schedule and a v3-only
+MAJOR notification code are rejected. Therefore:
+
+```text
+mechanism_consumer_first_verified=true
+auto_consumer_first_verified=false
+cross_plane_consumer_first_complete=false
+candidate_materialization_permitted=false
+```
 
 ## 89-root materialization
 
@@ -183,7 +228,8 @@ production_trust_permitted
 bound_reference_resolver_gate_satisfied
 runtime_state_write_permitted
 runtime_state_instance_created
-version_policy_v3_consumer_first_verified
+version_policy_v3_auto_consumer_first_verified
+version_policy_v3_cross_plane_consumer_first_complete
 version_policy_v3_candidate_materialization_permitted
 release_write_permitted
 consumer_first_repository_shards_permitted
@@ -214,11 +260,14 @@ bound resolver builder:
 version-policy v3 builder:
   PASS / 13 MAJOR codes / schedule unresolved / candidate membership=false
 version-policy v3 targeted tests: 12/12 PASS
+version-policy consumer-readiness builder:
+  PASS / Mechanism dual-read / Auto v2-only / cross-plane incomplete
+version-policy consumer-readiness targeted tests: 8/8 PASS
 Registry sync tests: 10/10 PASS
-complete Mechanism suite: 103/103 PASS
+complete Mechanism suite: 111/111 PASS
 candidate trust: 31 schemas / 5 policies PASS
 Mechanism draft/candidate/resolver/release/AU-040 builders and lints: PASS
-v3 isolated / combined schema-set lint: 23 / 40 schemas PASS
+v3 isolated / combined schema-set lint: 24 / 41 schemas PASS
 OpenAIDatabase consumer + architecture: 23/23 PASS
 consumer CLI: PASS / errors=[] / canonical publication=false
 candidate/control/VERSION path non-mutation: PASS
@@ -235,8 +284,9 @@ fault/privacy seed 314159: 156/156 PASS
 Auto schema/transport/promotion/runtime builders and lints: PASS
 ```
 
-The same standard Auto command against the 89-root successor
-correctly does **not** pass: it ran 200 tests with four failures and 20 errors.
+The same standard Auto command against the 89-root successor plus this
+Mechanism-only readiness artifact correctly does **not** pass: it ran 200
+tests with four failures and 20 errors.
 All observed failures stop at the cross-owner transition boundary:
 
 ```text
@@ -258,7 +308,8 @@ The Registry Auto Phase may only bind the exact remotely verified Mechanism
 89-root tuple and update Auto-owned resolver expectations. A later, separate
 Mechanism control sync may restore the production resolver gate.
 
-The version-policy next Phase is independently limited to consumer-first
-readiness. It must not materialize a new candidate, change the control, resolve
-the schedule without direct Owner authority, create VERSION, or activate.
-Development still must not call the verifier.
+The only version-policy next Phase is the Auto-owned
+`AUTO_VERSION_POLICY_V3_DUAL_READ_INTEGRATION`. It may teach the actual Auto
+consumers to read v2 and v3 but must keep v3 shadow-only, candidate
+materialization false, schedule unresolved, VERSION absent, and activation
+forbidden. Development still must not call the verifier.

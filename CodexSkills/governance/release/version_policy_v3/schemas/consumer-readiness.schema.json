@@ -1,0 +1,458 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:version-policy-consumer-readiness:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "canonicalization": {
+      "additionalProperties": false,
+      "properties": {
+        "duplicate_keys": {
+          "const": "REJECT"
+        },
+        "encoding": {
+          "const": "UTF-8"
+        },
+        "input_profile": {
+          "const": "I_JSON"
+        },
+        "scheme": {
+          "const": "RFC8785_JCS"
+        },
+        "self_digest_exclusion": {
+          "const": "EXACT_DECLARED_JSON_POINTER_ONLY"
+        },
+        "unicode_normalization": {
+          "const": "NONE"
+        }
+      },
+      "required": [
+        "duplicate_keys",
+        "encoding",
+        "input_profile",
+        "scheme",
+        "self_digest_exclusion",
+        "unicode_normalization"
+      ],
+      "type": "object"
+    },
+    "compatibility": {
+      "additionalProperties": false,
+      "properties": {
+        "auto_consumer_first_verified": {
+          "const": false
+        },
+        "candidate_materialization_permitted": {
+          "const": false
+        },
+        "change_class": {
+          "const": "MAJOR"
+        },
+        "compatibility_mode": {
+          "const": "CONSUMER_FIRST_REPLACEMENT"
+        },
+        "cross_plane_consumer_first_complete": {
+          "const": false
+        },
+        "daily_srv_separation_explicit": {
+          "const": true
+        },
+        "existing_v2_major_trigger_codes_preserved": {
+          "const": true
+        },
+        "mechanism_consumer_first_verified": {
+          "const": true
+        },
+        "missing_major_trigger_codes_closed": {
+          "const": [
+            "AUTOMATIC_SIDE_EFFECT_CHANGE",
+            "EVALUATOR_OR_HOLDOUT_CHANGE",
+            "HARD_GATE_CHANGE",
+            "MIGRATION_OR_DELETE_SEMANTICS_CHANGE",
+            "NETWORK_OR_PERMISSION_CHANGE",
+            "PRIVACY_POLICY_CHANGE"
+          ]
+        },
+        "notification_semantics_preserved": {
+          "const": true
+        },
+        "predecessor_policy_accepted": {
+          "const": true
+        },
+        "schedule_authority_resolved": {
+          "const": false
+        }
+      },
+      "required": [
+        "auto_consumer_first_verified",
+        "candidate_materialization_permitted",
+        "change_class",
+        "compatibility_mode",
+        "cross_plane_consumer_first_complete",
+        "daily_srv_separation_explicit",
+        "existing_v2_major_trigger_codes_preserved",
+        "mechanism_consumer_first_verified",
+        "missing_major_trigger_codes_closed",
+        "notification_semantics_preserved",
+        "predecessor_policy_accepted",
+        "schedule_authority_resolved"
+      ],
+      "type": "object"
+    },
+    "consumer_contract": {
+      "additionalProperties": false,
+      "properties": {
+        "accepted_policy_ids": {
+          "const": [
+            "urn:linzecolin:agentdatabase:skillops:policy:version:v2",
+            "urn:linzecolin:agentdatabase:skillops:policy:version:v3"
+          ]
+        },
+        "auto_dual_read_verified": {
+          "const": false
+        },
+        "cross_plane_consumer_first_complete": {
+          "const": false
+        },
+        "hybrid_selection_forbidden": {
+          "const": true
+        },
+        "mechanism_dual_read_verified": {
+          "const": true
+        },
+        "mechanism_schedule_fail_closed_verified": {
+          "const": true
+        },
+        "predecessor_selection_mode": {
+          "const": "PREDECESSOR_READ_ONLY"
+        },
+        "selection_mode_required": {
+          "const": true
+        },
+        "stronger_impact_downgrade_allowed": {
+          "const": false
+        },
+        "successor_selection_mode": {
+          "const": "SUCCESSOR_SHADOW"
+        },
+        "unknown_or_duplicate_trigger_action": {
+          "const": "FAIL_CLOSED"
+        },
+        "unknown_policy_id_action": {
+          "const": "FAIL_CLOSED"
+        }
+      },
+      "required": [
+        "accepted_policy_ids",
+        "auto_dual_read_verified",
+        "cross_plane_consumer_first_complete",
+        "hybrid_selection_forbidden",
+        "mechanism_dual_read_verified",
+        "mechanism_schedule_fail_closed_verified",
+        "predecessor_selection_mode",
+        "selection_mode_required",
+        "stronger_impact_downgrade_allowed",
+        "successor_selection_mode",
+        "unknown_or_duplicate_trigger_action",
+        "unknown_policy_id_action"
+      ],
+      "type": "object"
+    },
+    "consumer_inventory": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "component_id": {
+            "enum": [
+              "MECHANISM_VERSION_POLICY_DUAL_READ_LOADER",
+              "MECHANISM_VERSION_POLICY_SEMANTIC_VALIDATOR",
+              "AUTO_SCHEDULE_POLICY_CONSUMER",
+              "AUTO_NOTIFICATION_POLICY_CONSUMER",
+              "AUTO_RUNTIME_TRUST_BOOTSTRAP",
+              "AUTO_SHARED_CONTRACT_LOADER"
+            ]
+          },
+          "content_digest": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+          },
+          "observed_support": {
+            "enum": [
+              "CANDIDATE_BUNDLE_ONLY",
+              "V2_ONLY",
+              "V2_V3_COMPATIBILITY",
+              "V2_V3_DUAL_READ"
+            ]
+          },
+          "owner_plane": {
+            "enum": [
+              "AUTO",
+              "MECHANISM"
+            ]
+          },
+          "relative_path": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/repo_relative_posix_path"
+          },
+          "required_action": {
+            "enum": [
+              "AUTO_DUAL_READ_INTEGRATION",
+              "NONE"
+            ]
+          },
+          "source_binding_mode": {
+            "enum": [
+              "IMMUTABLE_GIT_OBJECT",
+              "SUCCESSOR_EXTERNAL_TUPLE_REQUIRED"
+            ]
+          },
+          "source_git_object_id": {
+            "anyOf": [
+              {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/git_object_id"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "component_id",
+          "content_digest",
+          "observed_support",
+          "owner_plane",
+          "relative_path",
+          "required_action",
+          "source_binding_mode",
+          "source_git_object_id"
+        ],
+        "type": "object"
+      },
+      "maxItems": 6,
+      "minItems": 6,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "digest_algorithm": {
+      "const": "SHA-256"
+    },
+    "next_phase": {
+      "const": "AUTO_VERSION_POLICY_V3_DUAL_READ_INTEGRATION"
+    },
+    "nonmutation": {
+      "additionalProperties": false,
+      "properties": {
+        "activation_forbidden": {
+          "const": true
+        },
+        "candidate_bundle_unchanged": {
+          "const": true
+        },
+        "canonical_publication_permitted": {
+          "const": false
+        },
+        "control_interface": {
+          "additionalProperties": false,
+          "properties": {
+            "artifact_digest": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+            },
+            "canonical_path": {
+              "const": "CodexSkills/governance/activation/control-interface.json"
+            },
+            "digest_basis": {
+              "const": "RAW_BYTES"
+            },
+            "source_git_object_id": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/git_object_id"
+            },
+            "unchanged": {
+              "const": true
+            }
+          },
+          "required": [
+            "artifact_digest",
+            "canonical_path",
+            "digest_basis",
+            "source_git_object_id",
+            "unchanged"
+          ],
+          "type": "object"
+        },
+        "promotion_to_candidate_performed": {
+          "const": false
+        },
+        "release_write_permitted": {
+          "const": false
+        },
+        "version_file_created": {
+          "const": false
+        }
+      },
+      "required": [
+        "activation_forbidden",
+        "candidate_bundle_unchanged",
+        "canonical_publication_permitted",
+        "control_interface",
+        "promotion_to_candidate_performed",
+        "release_write_permitted",
+        "version_file_created"
+      ],
+      "type": "object"
+    },
+    "owner_plane": {
+      "const": "MECHANISM"
+    },
+    "protocol_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/protocol_revision"
+    },
+    "schedule": {
+      "additionalProperties": false,
+      "properties": {
+        "activation_permitted": {
+          "const": false
+        },
+        "authority_state": {
+          "const": "UNRESOLVED"
+        },
+        "candidate_local_times": {
+          "const": [
+            "04:15",
+            "05:30"
+          ]
+        },
+        "conflict_code": {
+          "const": "OWNER_AUTHORITY_0415_VS_GOAL_0530_UNRESOLVED"
+        },
+        "selected_local_time": {
+          "type": "null"
+        },
+        "timezone": {
+          "const": "Australia/Sydney"
+        }
+      },
+      "required": [
+        "activation_permitted",
+        "authority_state",
+        "candidate_local_times",
+        "conflict_code",
+        "selected_local_time",
+        "timezone"
+      ],
+      "type": "object"
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:version-policy-consumer-readiness:v1"
+    },
+    "self_digest_pointer": {
+      "const": "/artifact_digest"
+    },
+    "source_trust": {
+      "additionalProperties": false,
+      "properties": {
+        "predecessor_candidate": {
+          "additionalProperties": false,
+          "properties": {
+            "artifact_digest": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+            },
+            "bundle_digest": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+            },
+            "canonical_path": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/repo_relative_posix_path"
+            },
+            "expected_mode": {
+              "enum": [
+                "CANDIDATE",
+                "DRAFT_NON_ACTIVE_VERSION_POLICY"
+              ]
+            },
+            "policy_count": {
+              "const": 5
+            },
+            "schema_count": {
+              "const": 31
+            },
+            "verified_git_object_id": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/git_object_id"
+            }
+          },
+          "required": [
+            "artifact_digest",
+            "canonical_path",
+            "expected_mode",
+            "verified_git_object_id",
+            "bundle_digest",
+            "policy_count",
+            "schema_count"
+          ],
+          "type": "object"
+        },
+        "repository_self_report_is_not_trust_root": {
+          "const": true
+        },
+        "v3_draft": {
+          "additionalProperties": false,
+          "properties": {
+            "artifact_digest": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+            },
+            "canonical_path": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/repo_relative_posix_path"
+            },
+            "expected_mode": {
+              "enum": [
+                "CANDIDATE",
+                "DRAFT_NON_ACTIVE_VERSION_POLICY"
+              ]
+            },
+            "verified_git_object_id": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/git_object_id"
+            }
+          },
+          "required": [
+            "artifact_digest",
+            "canonical_path",
+            "expected_mode",
+            "verified_git_object_id"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "predecessor_candidate",
+        "repository_self_report_is_not_trust_root",
+        "v3_draft"
+      ],
+      "type": "object"
+    },
+    "status": {
+      "const": "DRAFT_NON_ACTIVE_MECHANISM_CONSUMER_READY"
+    },
+    "task_pack_revision": {
+      "const": "v0.0.0.2"
+    }
+  },
+  "required": [
+    "artifact_digest",
+    "canonicalization",
+    "compatibility",
+    "consumer_contract",
+    "consumer_inventory",
+    "digest_algorithm",
+    "next_phase",
+    "nonmutation",
+    "owner_plane",
+    "protocol_revision",
+    "schedule",
+    "schema_version",
+    "self_digest_pointer",
+    "source_trust",
+    "status",
+    "task_pack_revision"
+  ],
+  "title": "Mechanism version-policy v3 consumer-first readiness",
+  "type": "object"
+}
