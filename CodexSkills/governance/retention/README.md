@@ -98,3 +98,45 @@ The readiness artifact is
 entry, state, lock, watermark, Git worktree, publication, VERSION, activation,
 or canonical run artifact. Its only successor is M-063,
 `MECHANISM_GIT_ACTIVE_TREE_365D_POLICY`.
+
+## M-063 Git active-tree 365-day policy
+
+Status: **DRAFT_NON_ACTIVE**
+
+`git_active_tree_policy.py` validates the complete current daily ledger:
+gapless append-only `manifest-NNNN.json` history, immutable part descriptors,
+physical `part-NNNN.jsonl` bytes, retained `index-NNNN.jsonl` bytes, and every
+historical prune receipt required by the latest tree. A receipt remains bound
+to the exact predecessor manifest and transaction where its shard first
+changed from ACTIVE to PRUNED; later manifest revisions cannot rewrite that
+evidence.
+
+The retention clock is UTC elapsed time from `first_published_at`.
+`retention_not_before` is exactly 365 × 24 hours later. Day 364 and the exact
+day-365 boundary are `KEEP_FULL_FIDELITY`; only `now >
+retention_not_before` is `ELIGIBLE_FOR_CURRENT_TREE_PRUNE`. The retained index
+remains mandatory and may contain only the bounded index-entry contract, not a
+full-event rollup replacement.
+
+An eligible result is a deterministic plan, not delete authority. A valid
+transition deletes exactly the prior shard bytes and publishes the next daily
+manifest, `publication-manifest:v2`, and `retention-receipt:v3` as one closed
+artifact set. Equality at `retention_not_before + 24h` is on time; later
+execution requires the explicit prune-deadline breach reason. The guard has no
+filesystem, Git, state, lock, network, publisher, or Auto executor capability.
+It neither mutates the current tree nor claims removal from Git history.
+
+Deterministic materialization and tests:
+
+```bash
+/usr/bin/python3 -B \
+  CodexSkills/governance/tools/build_git_active_tree_365d_policy.py --check
+/usr/bin/python3 -B -m unittest \
+  CodexSkills.governance.tests.test_git_active_tree_365d_policy
+```
+
+The readiness artifact is
+`retention/git-active-tree-365d-readiness.json`. M-063 creates no shard,
+index, manifest, receipt, state, Git commit, VERSION, activation, or canonical
+publication. Real execution and Auto integration remain `NOT_BOUND`. Its only
+successor is M-064, `MECHANISM_GIT_HISTORY_PERSISTENCE_DISCLOSURE`.

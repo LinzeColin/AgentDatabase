@@ -80,6 +80,14 @@ Key entrypoints:
   observation/readback/plan/readiness schemas bound to the exact candidate,
   immutable M-061 predecessor, public-value:v2, public-run-event:v2, and
   private public-queue-envelope:v2 contracts.
+- `retention/git_active_tree_policy.py`: pure M-063 daily-ledger validator and
+  365 elapsed-day policy over complete manifest history, physical shards,
+  retained indexes, and prune receipts; it has no Git writer or delete
+  capability.
+- `tools/build_git_active_tree_365d_policy.py`: deterministic M-063
+  observation/plan/readiness schemas bound to the exact candidate, immutable
+  M-062 predecessor, retention-policy:v3, daily manifest, index, receipt, and
+  publication-manifest:v2 contracts.
 - `tools/validate_au040_semantic_acceptance.py`: exact 365-day and
   shard/index/manifest/publication cross-artifact gates.
 - `tests/test_mechanism_contract.py`: positive, negative, and fault gates.
@@ -138,6 +146,8 @@ Run from the repository root with the explicitly provisioned interpreter:
   CodexSkills/governance/tools/build_managed_raw_72h_policy.py --check
 /usr/bin/python3 -B \
   CodexSkills/governance/tools/build_public_safe_queue_lifecycle.py --check
+/usr/bin/python3 -B \
+  CodexSkills/governance/tools/build_git_active_tree_365d_policy.py --check
 /usr/bin/python3 -B CodexSkills/governance/tools/validate_mechanism.py lint-draft
 /usr/bin/python3 -B \
   CodexSkills/governance/tools/validate_activation.py lint-control
@@ -339,3 +349,27 @@ raw remains disabled by default, production certification is pending M-061,
 offline hard-guarantee claims remain false, and M-060 performs no clock
 evaluation, receipt generation, mutation, publication, state write, or
 activation.
+
+M-063 validates the full current daily ledger rather than a single manifest
+snapshot. Manifest revisions must start at one, remain gapless, chain by exact
+digest, preserve immutable part metadata, and record each ACTIVE-to-PRUNED
+transition exactly once. A historical retention receipt remains bound to the
+specific predecessor manifest and Auto transaction that first pruned its
+part; a later manifest revision cannot silently rebind it.
+
+The retention clock is UTC elapsed time from `first_published_at`.
+`retention_not_before` is exactly 365 × 24 hours later. Day 364 and the exact
+day-365 boundary keep the full shard; only a strictly later observation is
+eligible for current-tree pruning. The retained index remains mandatory and
+cannot contain a replacement full event payload. Eligibility produces only a
+deterministic plan. M-063 has no filesystem, Git, state, lock, network, or
+delete capability, does not rewrite Git history, and does not claim hard
+deletion from history.
+
+An eligible prune transaction must publish the new daily manifest,
+`publication-manifest:v2`, and `retention-receipt:v3` while deleting exactly
+the bound prior shard bytes. Equality at the +24-hour prune deadline is on
+time; a later execution requires the explicit deadline-breach receipt reason.
+Real Auto executor integration, current-tree mutation, canonical publication,
+VERSION, and activation remain false. M-064 separately documents persistence
+in Git history; it is not part of M-063.

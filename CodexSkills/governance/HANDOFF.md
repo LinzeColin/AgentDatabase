@@ -1,4 +1,117 @@
-# Mechanism public-safe queue lifecycle handoff
+# Mechanism Git active-tree 365-day policy handoff
+
+- State: `DRAFT_NON_ACTIVE_GIT_ACTIVE_TREE_365D_READY`
+- Phase: `MECHANISM_GIT_ACTIVE_TREE_365D_POLICY`
+- Task Pack task completed: `M-063`
+- M-063 dependency: `M-062`
+- Required output: `DAILY_SHARDS_INDEX_PRUNE_RECEIPTS`
+- Done gate: `DAY_364_AND_365_RETAINED_AFTER_365_ELIGIBLE`
+- M-063 policy guard:
+  `CodexSkills/governance/retention/git_active_tree_policy.py`
+- M-063 policy guard raw SHA-256:
+  `5789e1051c3060cfb1d221c710a51f47a631174708248a633e1e13c9becf8421`
+- M-063 readiness:
+  `CodexSkills/governance/retention/git-active-tree-365d-readiness.json`
+- M-063 readiness raw SHA-256:
+  `91592f339854fb205993e96a67698d7b6ce8fc54afd3b226f3090dfd49ab86f2`
+- M-063 readiness self digest:
+  `0bb6c1fb335115785495805ed001d6747a311dd1cbee335547beccaf8501df88`
+- Retention-observation schema canonical SHA-256:
+  `69858467989a55491ac8a8fe5654084fd94bc486a8d7c02ca732d2b62795af1a`
+- Prune-plan schema canonical SHA-256:
+  `d1487922673949f63b4701c1f8988b5acec8a2a13011f231f85c56a874767b0c`
+- Readiness schema canonical SHA-256:
+  `17699af2a0967df8b7160cb1f3e4fd1e452a8e69eadce0dbe56cf9c1e03aa168`
+- Immutable M-062 predecessor:
+  `sha1:72fd98353fa7065e520067c221e8689435dffd4c`
+- Immutable candidate:
+  `sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5`
+- Immutable candidate bundle digest:
+  `36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e`
+- Retention policy:
+  `urn:linzecolin:agentdatabase:skillops:policy:retention:v3`
+- Daily-manifest schema canonical SHA-256:
+  `e9214388da78376da47770934454d65a57659d1dde33fa0cb4e36b79e4665337`
+- Index-entry schema canonical SHA-256:
+  `27663e9da3d9511cf9a03d1fe6f4b3779b1bbdab8f2f8adb94a274b8653a1433`
+- Retention-receipt schema canonical SHA-256:
+  `81435881fbc5e1ced14975edbedee63ca6555674db36f906bdfdee20eb317c45`
+- Publication-manifest:v2 schema canonical SHA-256:
+  `e7f8c4dd623379052829a21e3fcae77a98f14b3da1d79bb8f1d416f828063346`
+- Clock basis: `UTC_WALL_CLOCK`
+- Active-tree scope: `GIT_CURRENT_TREE`
+- Real execution permitted: `false`
+- Git-history rewrite or hard-delete claim: `false`
+- Auto executor integration: `NOT_BOUND`
+- Pending Task Pack task: `M-064`
+- Exact next Phase: `MECHANISM_GIT_HISTORY_PERSISTENCE_DISCLOSURE`
+
+M-063 validates the complete current-tree daily ledger instead of trusting one
+manifest snapshot. Manifest history must begin at revision one, remain
+gapless, chain by exact prior digest, preserve immutable part descriptors, and
+contain each ACTIVE-to-PRUNED transition exactly once. Every pruned shard's
+receipt remains bound to the exact predecessor manifest and Auto transaction
+where that transition first occurred. Later revisions cannot rebind an old
+receipt or silently discard its evidence.
+
+The retention clock is recomputed from `first_published_at`.
+`retention_not_before` is exactly 365 elapsed 24-hour days later. Day 364 and
+the exact day-365 boundary both retain the full shard. Only a strictly later
+observation is eligible for current-tree pruning. The retained index remains
+mandatory and cannot embed a full event payload or substitute an aggregate
+for the original shard during the 365-day interval.
+
+An eligible observation produces only a deterministic plan. A valid execution
+claim must delete the exact prior shard bytes while publishing the successor
+daily manifest, `publication-manifest:v2`, and `retention-receipt:v3` as one
+closed transaction. Equality at the +24-hour prune deadline is on time; a
+later execution requires the fixed deadline-breach reason. M-063 has no
+filesystem, Git, state, lock, network, publisher, or delete capability and
+creates no real artifact instance. It makes no claim that pruning the current
+tree removes bytes from Git history; M-064 is the separate disclosure Phase.
+
+## M-063 validation
+
+```text
+M-063 targeted boundary/history/receipt tests: 16/16 PASS
+complete Mechanism suite: 205/205 PASS
+M-063 builder/schema/readiness: BYTE_EQUIVALENT
+day 364 KEEP / exact day 365 KEEP / after day 365 ELIGIBLE: PASS
+manifest history and original prune-receipt binding: PASS
+candidate trust: 31 schemas / 5 policies PASS
+schema-set lint:
+  base 21 / candidate-compatible 41 / version 24 /
+  M-063 full closure 73 PASS
+OpenAIDatabase consumer + architecture: 23/23 PASS
+consumer CLI: PASS / errors=[] / canonical publication=false
+```
+
+The pre-existing cross-owner transition remains fail-closed and is not
+modified or relabeled by M-063:
+
+```text
+complete Auto suite: 200 tests / 5 failures / 20 errors
+fault/privacy seed 271828: 149 tests / 5 failures / 25 errors
+fault/privacy seed 314159: 149 tests / 5 failures / 25 errors
+AUTO_REGISTRY_MIRROR_SKILL_COUNT_DRIFT
+BOUND_REFERENCE_RESOLVER_RUNTIME_LOCAL_DRIFT
+ACTIVATION_CONTROL_INTERFACE_SEMANTIC_MISMATCH
+activation builder/lint:
+  ACTIVATION_BOUND_RESOLVER_INTERFACE_CONTRACT_MISMATCH
+```
+
+The mirror count remains `90` while Auto is pinned to `89`. These failures are
+the exact M-062 baseline and occur outside the M-063 changed path set. Final
+acceptance additionally requires an ordinary commit, FF-safe push, and fresh
+detached GitHub object/raw-byte readback of every changed path.
+
+No Auto, candidate-bundle, policy, retention-receipt, OpenAIDatabase,
+automation, or VERSION path change belongs to M-063. No verifier call,
+historical Task Pack replay, real shard/index/manifest/receipt instance,
+current-tree mutation, Git-history rewrite, or canonical publication belongs
+to this development Phase.
+
+## Prior M-062 public-safe queue lifecycle handoff
 
 - State: `DRAFT_NON_ACTIVE_PUBLIC_SAFE_QUEUE_LIFECYCLE_READY`
 - Phase: `MECHANISM_PUBLIC_SAFE_QUEUE_LIFECYCLE`

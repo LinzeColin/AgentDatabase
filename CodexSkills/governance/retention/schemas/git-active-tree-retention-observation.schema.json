@@ -1,0 +1,255 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:git-active-tree-retention-observation:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "active_part_count": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "active_shard_bytes": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "clock_basis": {
+      "const": "UTC_WALL_CLOCK"
+    },
+    "eligible_part_count": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "evidence_bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "full_fidelity_aggregation_substitution_performed": {
+      "const": false
+    },
+    "hard_delete_claimed": {
+      "const": false
+    },
+    "history_rewrite_performed": {
+      "const": false
+    },
+    "keep_part_count": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "manifest_history_count": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/positive_count"
+    },
+    "observation_uid": {
+      "pattern": "^atr_[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+      "type": "string"
+    },
+    "observed_at": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+    },
+    "part_observations": {
+      "items": {
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "else": {
+              "not": {
+                "required": [
+                  "pruned_at"
+                ]
+              }
+            },
+            "if": {
+              "properties": {
+                "state": {
+                  "const": "PRUNED"
+                }
+              },
+              "required": [
+                "state"
+              ]
+            },
+            "then": {
+              "required": [
+                "pruned_at"
+              ]
+            }
+          }
+        ],
+        "properties": {
+          "active_shard_present": {
+            "type": "boolean"
+          },
+          "elapsed_microseconds": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+          },
+          "first_published_at": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+          },
+          "full_fidelity_verified": {
+            "type": "boolean"
+          },
+          "index_bytes": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/positive_count"
+          },
+          "index_digest": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+          },
+          "index_path": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/repo_relative_posix_path"
+          },
+          "index_record_count": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/positive_count"
+          },
+          "part_number": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/positive_count"
+          },
+          "pruned_at": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+          },
+          "record_count": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/positive_count"
+          },
+          "retained_index_present": {
+            "const": true
+          },
+          "retention_not_before": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+          },
+          "retention_state": {
+            "enum": [
+              "RETAIN_BEFORE_BOUNDARY",
+              "RETAIN_AT_BOUNDARY",
+              "ELIGIBLE_AFTER_BOUNDARY",
+              "ALREADY_PRUNED"
+            ]
+          },
+          "shard_bytes": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/positive_count"
+          },
+          "shard_digest": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+          },
+          "shard_path": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/repo_relative_posix_path"
+          },
+          "state": {
+            "enum": [
+              "ACTIVE",
+              "PRUNED"
+            ]
+          }
+        },
+        "required": [
+          "part_number",
+          "state",
+          "shard_path",
+          "index_path",
+          "shard_digest",
+          "shard_bytes",
+          "record_count",
+          "index_digest",
+          "index_bytes",
+          "index_record_count",
+          "first_published_at",
+          "retention_not_before",
+          "elapsed_microseconds",
+          "retention_state",
+          "active_shard_present",
+          "retained_index_present",
+          "full_fidelity_verified"
+        ],
+        "type": "object"
+      },
+      "minItems": 1,
+      "type": "array"
+    },
+    "policy_snapshot_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "protocol_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/protocol_revision"
+    },
+    "pruned_part_count": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "retained_index_bytes": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/positive_count"
+    },
+    "retention_policy_id": {
+      "const": "urn:linzecolin:agentdatabase:skillops:policy:retention:v3"
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:git-active-tree-retention-observation:v1"
+    },
+    "scope": {
+      "const": "GIT_CURRENT_TREE"
+    },
+    "source_manifest": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_repo_path": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/repo_relative_posix_path"
+        },
+        "local_date": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/calendar_date"
+        },
+        "manifest_digest": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+        },
+        "manifest_revision": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/positive_count"
+        },
+        "manifest_uid": {
+          "pattern": "^drm_[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+          "type": "string"
+        },
+        "previous_manifest_digest": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+            }
+          ]
+        }
+      },
+      "required": [
+        "artifact_repo_path",
+        "manifest_uid",
+        "manifest_digest",
+        "manifest_revision",
+        "local_date",
+        "previous_manifest_digest"
+      ],
+      "type": "object"
+    },
+    "state_mutation_performed": {
+      "const": false
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "bundle_digest",
+    "observation_uid",
+    "observed_at",
+    "scope",
+    "clock_basis",
+    "retention_policy_id",
+    "policy_snapshot_digest",
+    "source_manifest",
+    "manifest_history_count",
+    "part_observations",
+    "active_part_count",
+    "keep_part_count",
+    "eligible_part_count",
+    "pruned_part_count",
+    "active_shard_bytes",
+    "retained_index_bytes",
+    "full_fidelity_aggregation_substitution_performed",
+    "history_rewrite_performed",
+    "hard_delete_claimed",
+    "state_mutation_performed",
+    "evidence_bundle_digest"
+  ],
+  "title": "Mechanism M-063 Git active-tree retention observation",
+  "type": "object"
+}

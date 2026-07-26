@@ -1,0 +1,238 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:git-active-tree-prune-plan:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "action_order": {
+      "items": {
+        "enum": [
+          "BUILD_RETENTION_RECEIPT_BYTES",
+          "BUILD_SUCCESSOR_MANIFEST_BYTES",
+          "RETAIN_ALL_INDEXES",
+          "RETAIN_APPEND_ONLY_MANIFEST_HISTORY",
+          "RETAIN_FULL_ACTIVE_SHARDS",
+          "REVALIDATE_ELIGIBLE_SHARD_AND_RETAINED_INDEX_BYTES",
+          "REVALIDATE_MANIFEST_HISTORY",
+          "SETTLE_SINGLE_GIT_TRANSACTION",
+          "VERIFY_REMOTE_ACTIVE_TREE"
+        ]
+      },
+      "minItems": 1,
+      "type": "array"
+    },
+    "auto_executor_integration_status": {
+      "const": "NOT_BOUND"
+    },
+    "bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "candidates": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "artifact_repo_path": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/repo_relative_posix_path"
+          },
+          "deadline_status": {
+            "enum": [
+              "ON_TIME_WINDOW",
+              "DEADLINE_BREACHED"
+            ]
+          },
+          "first_published_at": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+          },
+          "part_number": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/positive_count"
+          },
+          "prior_artifact_bytes": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/positive_count"
+          },
+          "prior_artifact_digest": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+          },
+          "prior_daily_manifest_digest": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+          },
+          "prior_record_count": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/positive_count"
+          },
+          "prune_deadline_at": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+          },
+          "required_gap_code": {
+            "anyOf": [
+              {
+                "type": "null"
+              },
+              {
+                "const": "GIT_CURRENT_TREE_PRUNE_DEADLINE_BREACH"
+              }
+            ]
+          },
+          "retained_index_digest": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+          },
+          "retained_index_path": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/repo_relative_posix_path"
+          },
+          "retention_not_before": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+          }
+        },
+        "required": [
+          "part_number",
+          "artifact_repo_path",
+          "prior_artifact_digest",
+          "prior_artifact_bytes",
+          "prior_record_count",
+          "first_published_at",
+          "retention_not_before",
+          "prune_deadline_at",
+          "retained_index_path",
+          "retained_index_digest",
+          "prior_daily_manifest_digest",
+          "deadline_status",
+          "required_gap_code"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "current_tree_prune_only": {
+      "const": true
+    },
+    "decision": {
+      "enum": [
+        "KEEP_ACTIVE_TREE",
+        "PLAN_CURRENT_TREE_PRUNE"
+      ]
+    },
+    "delete_authority_granted": {
+      "const": false
+    },
+    "evidence_bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "full_fidelity_aggregation_substitution_permitted": {
+      "const": false
+    },
+    "generated_at": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+    },
+    "hard_delete_claimed": {
+      "const": false
+    },
+    "history_rewrite_performed": {
+      "const": false
+    },
+    "observation_ref": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence_bundle_digest": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+        },
+        "observation_uid": {
+          "pattern": "^atr_[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "observation_uid",
+        "evidence_bundle_digest"
+      ],
+      "type": "object"
+    },
+    "plan_uid": {
+      "pattern": "^atp_[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+      "type": "string"
+    },
+    "protocol_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/protocol_revision"
+    },
+    "real_execution_permitted": {
+      "const": false
+    },
+    "retained_index_required": {
+      "const": true
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:git-active-tree-prune-plan:v1"
+    },
+    "selected_bytes": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "selected_count": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "source_manifest_ref": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_repo_path": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/repo_relative_posix_path"
+        },
+        "local_date": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/calendar_date"
+        },
+        "manifest_digest": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+        },
+        "manifest_revision": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/positive_count"
+        },
+        "manifest_uid": {
+          "pattern": "^drm_[0-7][0-9A-HJKMNP-TV-Z]{25}$",
+          "type": "string"
+        },
+        "previous_manifest_digest": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+            }
+          ]
+        }
+      },
+      "required": [
+        "artifact_repo_path",
+        "manifest_uid",
+        "manifest_digest",
+        "manifest_revision",
+        "local_date",
+        "previous_manifest_digest"
+      ],
+      "type": "object"
+    },
+    "state_mutation_performed": {
+      "const": false
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "bundle_digest",
+    "plan_uid",
+    "generated_at",
+    "observation_ref",
+    "source_manifest_ref",
+    "decision",
+    "selected_count",
+    "selected_bytes",
+    "candidates",
+    "action_order",
+    "current_tree_prune_only",
+    "retained_index_required",
+    "full_fidelity_aggregation_substitution_permitted",
+    "history_rewrite_performed",
+    "hard_delete_claimed",
+    "delete_authority_granted",
+    "real_execution_permitted",
+    "auto_executor_integration_status",
+    "state_mutation_performed",
+    "evidence_bundle_digest"
+  ],
+  "title": "Mechanism M-063 non-mutating Git active-tree prune plan",
+  "type": "object"
+}
