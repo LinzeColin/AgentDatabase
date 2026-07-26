@@ -46,10 +46,12 @@ resolve schemas over the network, or install dependencies at runtime.
 - `runtime/binding_resolver.py` is the only Auto adapter for the
   Mechanism-owned resolver. It verifies the pinned resolver interface, four
   catalogs, four schemas, two Mechanism runtime modules, and registered
-  snapshot from Git. The current 88-version snapshot has zero binding-eligible
-  versions, so its exhaustive projection is
+  snapshot from Git. The registered 88-version snapshot has zero
+  binding-eligible versions, so its exhaustive historical projection is
   `UNKNOWN/MAPPING_NOT_PROVABLE`; it cannot invent a `skill_ref` or emit
-  `BOUND`.
+  `BOUND`. The exact Teleiosis source/mirror sync now makes the current source
+  set 89 roots, so that 88-version snapshot is explicitly stale and cannot
+  satisfy the current resolver gate until Mechanism rebuilds it.
 - `tools/bound_reference_resolver_cli.py` is the production read-only
   resolution entrypoint. It requires all three external tuples and a successor
   control with the resolver integration and gate enabled.
@@ -59,12 +61,16 @@ resolve schemas over the network, or install dependencies at runtime.
   exclusions, safe same-root aliases, deterministic tree digests, and public
   inventory/coverage projection.
 - `runtime/catalog_reservation.py` reserves every
-  `registry/<source>/_catalog/**` path plus `registry/_global/**` outside
-  Skill enumeration/deletion, and binds the exact 20-entry relative-symlink
-  alias set. `CodexSkills/sync_skills.py` consumes that contract with a
-  full-source lstat/containment/size/special-node preflight before any mirror
-  removal or replacement; registered aliases are preserved without
-  dereference and unregistered aliases fail closed.
+  `registry/<source>/_catalog/**` path, `registry/_global/**`, and the
+  Teleiosis `registry/codex/_delivery-backups/**` evidence outside Skill
+  enumeration/deletion, and binds the exact 20-entry relative-symlink alias
+  set. It also classifies `.wbi-install-transactions` and
+  `.wbi-install.lock` as explicit non-Skill operational nodes that remain
+  covered by source scanning rather than being silently skipped.
+  `CodexSkills/sync_skills.py` consumes that contract with a full-source
+  lstat/containment/size/special-node preflight before any mirror removal or
+  replacement; registered aliases are preserved without dereference and
+  unregistered aliases fail closed.
 - `runtime/privacy.py` and `runtime/queue.py` enforce serialized public-value
   scanning and an atomic public-safe-only queue.
 - `runtime/run_log_writer.py` validates an existing daily tree through
@@ -76,7 +82,7 @@ resolve schemas over the network, or install dependencies at runtime.
   e643/85ed historical Git-object closure and current repository-binding byte
   self-consistency without requiring current working-tree control/Mechanism
   bytes to equal e643. It returns
-  `UNBOUND_RESOLVER_INTEGRATED_CONTROL_SYNC_PENDING` and can never
+  `UNBOUND_TELEIOSIS_REGISTRY_REBUILD_PENDING` and can never
   return a production
   `BootstrapContext`.
 - `runtime/notification.py` keeps the actual recipient and provider payload in

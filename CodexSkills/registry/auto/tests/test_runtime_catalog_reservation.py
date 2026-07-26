@@ -44,6 +44,7 @@ class RuntimeCatalogReservationTests(unittest.TestCase):
                 "CodexSkills/registry/agents/_catalog/",
                 "CodexSkills/registry/claude/_catalog/",
                 "CodexSkills/registry/codex/_catalog/",
+                "CodexSkills/registry/codex/_delivery-backups/",
                 "CodexSkills/registry/codex-system/_catalog/",
                 "CodexSkills/registry/_global/",
             ),
@@ -53,6 +54,8 @@ class RuntimeCatalogReservationTests(unittest.TestCase):
             "agents/_catalog/catalog.v1.json",
             "claude/_catalog/catalog.v1.json",
             "codex/_catalog/catalog.v1.json",
+            "codex/_delivery-backups/teleiosis/v0.0.0.1/"
+            "registry-release-record.json",
             "codex-system/_catalog/catalog.v1.json",
             "_global",
             "_global/registry-snapshot.v1.json",
@@ -144,7 +147,7 @@ class RuntimeCatalogReservationTests(unittest.TestCase):
             self.assertIn('"reason":"SOURCE_ALIAS_SET_DRIFT"', message)
             self.assertNotIn(str(root), message)
 
-    def test_repository_mirror_records_88_and_context_kernel_absence(
+    def test_repository_mirror_records_89_with_teleiosis_and_no_context_kernel(
         self,
     ) -> None:
         index = json.loads(
@@ -152,7 +155,16 @@ class RuntimeCatalogReservationTests(unittest.TestCase):
                 encoding="utf-8"
             )
         )
-        self.assertEqual(index["skill_instance_count"], 88)
+        self.assertEqual(index["skill_instance_count"], 89)
+        self.assertEqual(
+            [
+                row["slug"]
+                for row in index["skills"]
+                if row["source"] == "codex"
+                and row["slug"] == "teleiosis"
+            ],
+            ["teleiosis"],
+        )
         self.assertEqual(
             [
                 row
@@ -246,6 +258,90 @@ class RuntimeCatalogReservationTests(unittest.TestCase):
                 "CodexSkills/registry/_global",
             },
         )
+        self.assertIn(
+            "CodexSkills/registry/codex/_delivery-backups",
+            {relative_root for _, relative_root in observations},
+        )
+
+    def test_teleiosis_source_evidence_is_pinned_and_rebuilds_registry(
+        self,
+    ) -> None:
+        evidence = (
+            build_runtime_interface
+            ._teleiosis_source_sync_materialization()
+        )
+        self.assertEqual(
+            evidence["source_material_git_object_id"],
+            "sha1:a8f1f6ff8003db43fad722a5afd3b19615dd325e",
+        )
+        self.assertEqual(
+            evidence["added_source_skill_roots"],
+            ["codex/teleiosis"],
+        )
+        self.assertEqual(evidence["source_skill_count"], 89)
+        self.assertEqual(
+            evidence["source_content_entry"],
+            {
+                "alias_count": 0,
+                "byte_count": 598392,
+                "content_digest": (
+                    "252e9cf65b991dd7bd7c36734257b0b5"
+                    "da47689cbf2d1c7d7bb4ca766aa93bcb"
+                ),
+                "regular_file_count": 104,
+                "source_relative_path": "codex/teleiosis",
+            },
+        )
+        self.assertTrue(evidence["exact_source_mirror_content_equal"])
+        self.assertTrue(evidence["registered_snapshot_rebuild_required"])
+        self.assertFalse(
+            evidence["registered_snapshot_current_source_compatible"]
+        )
+        self.assertFalse(evidence["runtime_state_write_permitted"])
+        self.assertFalse(evidence["canonical_publication_permitted"])
+
+    def test_teleiosis_source_git_or_index_drift_fails_closed(
+        self,
+    ) -> None:
+        with mock.patch.object(
+            build_runtime_interface,
+            "TELEIOSIS_SOURCE_MATERIAL_GIT_OBJECT",
+            "sha1:" + ("0" * 40),
+        ):
+            with self.assertRaisesRegex(
+                ValueError,
+                "AUTO_SOURCE_CONTENT_SYNC_HISTORICAL_TREE_READ_FAILED",
+            ):
+                (
+                    build_runtime_interface
+                    ._teleiosis_source_sync_materialization()
+                )
+
+        original = build_runtime_interface._git_blob
+
+        def missing_index_entry(object_id, relative_path):
+            if (
+                object_id
+                == build_runtime_interface
+                .TELEIOSIS_SOURCE_MATERIAL_GIT_OBJECT
+                and relative_path == "CodexSkills/index.json"
+            ):
+                return b'{"skill_instance_count":89,"skills":[]}\n'
+            return original(object_id, relative_path)
+
+        with mock.patch.object(
+            build_runtime_interface,
+            "_git_blob",
+            side_effect=missing_index_entry,
+        ):
+            with self.assertRaisesRegex(
+                ValueError,
+                "AUTO_TELEIOSIS_SOURCE_INDEX_CONTRACT_MISMATCH",
+            ):
+                (
+                    build_runtime_interface
+                    ._teleiosis_source_sync_materialization()
+                )
 
     def test_current_reserved_payload_is_not_historical_auto_evidence(
         self,
@@ -284,15 +380,25 @@ class RuntimeCatalogReservationTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             registry = Path(temporary) / "registry"
             catalog = registry / "codex/_catalog"
+            delivery = registry / "codex/_delivery-backups/teleiosis"
             global_snapshot = registry / "_global"
             obsolete = registry / "codex/obsolete"
-            for directory in (catalog, global_snapshot, obsolete):
+            for directory in (
+                catalog,
+                delivery,
+                global_snapshot,
+                obsolete,
+            ):
                 directory.mkdir(parents=True)
             (catalog / "catalog.v1.json").write_text(
                 "{}\n",
                 encoding="utf-8",
             )
             (global_snapshot / "registry-snapshot.v1.json").write_text(
+                "{}\n",
+                encoding="utf-8",
+            )
+            (delivery / "registry-release-record.json").write_text(
                 "{}\n",
                 encoding="utf-8",
             )
@@ -314,6 +420,9 @@ class RuntimeCatalogReservationTests(unittest.TestCase):
                 (
                     global_snapshot / "registry-snapshot.v1.json"
                 ).is_file()
+            )
+            self.assertTrue(
+                (delivery / "registry-release-record.json").is_file()
             )
             self.assertEqual(
                 list(sync_skills.iter_mirrored_skills(str(registry))),
@@ -431,6 +540,66 @@ class RuntimeCatalogReservationTests(unittest.TestCase):
             with self.assertRaisesRegex(
                 CatalogReservationError,
                 "SOURCE_ROOT_UNCLASSIFIED_DOT_ENTRY:codex/.unknown",
+            ):
+                inventory_source_roots(
+                    roots,
+                    enforce_exact_aliases=False,
+                )
+
+    def test_wbi_operational_entries_are_explicit_non_skills(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            roots = {}
+            for namespace in SOURCE_NAMESPACES:
+                source = root / namespace
+                (source / "demo").mkdir(parents=True)
+                roots[namespace] = source
+            (roots["codex"] / ".wbi-install-transactions").mkdir()
+            (roots["codex"] / ".wbi-install.lock").write_text(
+                "lock\n",
+                encoding="utf-8",
+            )
+
+            observed = inventory_source_roots(
+                roots,
+                enforce_exact_aliases=False,
+            )
+
+            self.assertEqual(
+                observed.skill_counts["codex"],
+                1,
+            )
+            self.assertEqual(
+                observed.explicit_non_skill_entries["codex"],
+                (
+                    {
+                        "entry_name": ".wbi-install-transactions",
+                        "entry_type": "DIRECTORY",
+                        "reason_code": (
+                            "NON_SKILL_OPERATIONAL_TRANSACTION_DIRECTORY_"
+                            "INCLUDED_IN_SOURCE_COVERAGE"
+                        ),
+                    },
+                    {
+                        "entry_name": ".wbi-install.lock",
+                        "entry_type": "REGULAR_FILE",
+                        "reason_code": (
+                            "NON_SKILL_OPERATIONAL_LOCK_FILE_"
+                            "INCLUDED_IN_SOURCE_COVERAGE"
+                        ),
+                    },
+                ),
+            )
+
+            (roots["codex"] / ".wbi-install-transactions").rmdir()
+            (roots["codex"] / ".wbi-install-transactions").write_text(
+                "wrong type\n",
+                encoding="utf-8",
+            )
+            with self.assertRaisesRegex(
+                CatalogReservationError,
+                "SOURCE_ROOT_NON_SKILL_TYPE_DRIFT:"
+                "codex/.wbi-install-transactions",
             ):
                 inventory_source_roots(
                     roots,

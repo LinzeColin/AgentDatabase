@@ -27,6 +27,7 @@ from CodexSkills.registry.auto.runtime.catalog_reservation import (
     SOURCE_NAMESPACES,
     alias_set_digest,
     assert_exact_alias_set,
+    is_reserved_source_child,
     reserved_registry_paths,
 )
 from CodexSkills.registry.auto.runtime.binding_resolver import (
@@ -160,6 +161,12 @@ SOURCE_CONTENT_SYNC_NEXT_PHASE = (
 SOURCE_CONTENT_SYNC_MATERIALIZATION_GIT_OBJECT = (
     "sha1:dc653654603f5bfee3bd41890b49cfad700cf541"
 )
+TELEIOSIS_SOURCE_MATERIAL_GIT_OBJECT = (
+    "sha1:a8f1f6ff8003db43fad722a5afd3b19615dd325e"
+)
+TELEIOSIS_SOURCE_SYNC_NEXT_PHASE = (
+    "MECHANISM_REGISTRY_TELEIOSIS_PARITY_MATERIALIZATION"
+)
 BOUND_REFERENCE_RESOLVER_CONTROL_GIT_OBJECT = (
     "sha1:df63339e1bb6106250ce169241477191744c254f"
 )
@@ -226,6 +233,16 @@ SOURCE_CONTENT_SYNC_ENTRIES = [
         "source_relative_path": "codex/verifier",
     },
 ]
+TELEIOSIS_SOURCE_CONTENT_ENTRY = {
+    "alias_count": 0,
+    "byte_count": 598392,
+    "content_digest": (
+        "252e9cf65b991dd7bd7c36734257b0b5"
+        "da47689cbf2d1c7d7bb4ca766aa93bcb"
+    ),
+    "regular_file_count": 104,
+    "source_relative_path": "codex/teleiosis",
+}
 INCOMPLETE_REGISTRY_SNAPSHOT_DIGEST = (
     "31f49c8ffa3bd2d268feec49b2869f40"
     "9d61a5bfbb0b03f382bc562996b7fa76"
@@ -241,10 +258,11 @@ CATALOG_RESERVATION_BOUND_AUTO_MODULE_COUNT = 26
 CURRENT_SOURCE_SKILL_COUNTS = {
     "agents": 24,
     "claude": 3,
-    "codex": 55,
+    "codex": 56,
     "codex-system": 6,
 }
-CURRENT_SOURCE_SKILL_COUNT = 88
+CURRENT_SOURCE_SKILL_COUNT = 89
+CURRENT_ADDED_SOURCE_SKILL_ROOTS = ["codex/teleiosis"]
 MISSING_SOURCE_SKILL_ROOTS = ["codex/context-kernel"]
 NON_ALIAS_CONTENT_DRIFT_OBSERVED_PATHS = [
     "codex/graphify",
@@ -283,15 +301,15 @@ SOURCE_SCAN_OBSERVATIONS = [
     {
         "alias_count": 20,
         "completeness_status": "COMPLETE_AFTER_POLICY_EXCLUSIONS",
-        "included_file_count": 3091,
+        "included_file_count": 3197,
         "included_tree_digest": (
-            "746b945b967502edd30872a69a713cd67"
-            "9432ef89059856cbe819fa74e06cab5"
+            "b0c44e59e7de122ad05211fee11d369a"
+            "cd83e0e9fae82fd50f20991bb2792ded"
         ),
         "source_namespace": "codex",
         "source_snapshot_digest": (
-            "1f41a69acd5de4a0017ae596bf80ce706"
-            "32369ddf2377eb4fe659fc00f7905b4"
+            "da9c487e95f1c7e5bbdf794c4c843a18"
+            "c01a106ff102e31bd0f44e514672e5ce"
         ),
     },
     {
@@ -580,9 +598,14 @@ def _git_blob_batch(object_ids):
     return payloads
 
 
-def _historical_skill_material(relative_root, sync_skills):
+def _historical_skill_material(
+    relative_root,
+    sync_skills,
+    *,
+    git_object_id=SOURCE_CONTENT_SYNC_MATERIALIZATION_GIT_OBJECT,
+):
     rows = _git_tree_entries(
-        SOURCE_CONTENT_SYNC_MATERIALIZATION_GIT_OBJECT,
+        git_object_id,
         relative_root,
     )
     included = []
@@ -1662,6 +1685,82 @@ def _source_content_sync_materialization():
     }
 
 
+def _teleiosis_source_sync_materialization():
+    from CodexSkills import sync_skills
+
+    expected = TELEIOSIS_SOURCE_CONTENT_ENTRY
+    observed = _historical_skill_material(
+        "CodexSkills/registry/codex/teleiosis",
+        sync_skills,
+        git_object_id=TELEIOSIS_SOURCE_MATERIAL_GIT_OBJECT,
+    )
+    if any(
+        observed[field] != expected[field]
+        for field in (
+            "regular_file_count",
+            "alias_count",
+            "byte_count",
+            "content_digest",
+        )
+    ):
+        raise ValueError(
+            "AUTO_TELEIOSIS_SOURCE_CONTENT_HISTORICAL_DRIFT"
+        )
+    try:
+        index = json.loads(
+            _git_blob(
+                TELEIOSIS_SOURCE_MATERIAL_GIT_OBJECT,
+                "CodexSkills/index.json",
+            ).decode("utf-8"),
+            object_pairs_hook=_strict_object,
+        )
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise ValueError(
+            "AUTO_TELEIOSIS_SOURCE_INDEX_INVALID"
+        ) from exc
+    teleiosis_rows = [
+        row
+        for row in index.get("skills", [])
+        if isinstance(row, dict)
+        and row.get("source") == "codex"
+        and row.get("slug") == "teleiosis"
+    ]
+    if (
+        index.get("skill_instance_count") != CURRENT_SOURCE_SKILL_COUNT
+        or len(teleiosis_rows) != 1
+        or teleiosis_rows[0].get("file_count")
+        != expected["regular_file_count"]
+        or teleiosis_rows[0].get("size_bytes") != expected["byte_count"]
+    ):
+        raise ValueError(
+            "AUTO_TELEIOSIS_SOURCE_INDEX_CONTRACT_MISMATCH"
+        )
+    return {
+        "added_source_skill_roots": list(
+            CURRENT_ADDED_SOURCE_SKILL_ROOTS
+        ),
+        "bound_reference_resolver_gate_satisfied": False,
+        "canonical_publication_permitted": False,
+        "catalog_or_snapshot_artifacts_generated": False,
+        "current_auto_runtime_control_bound": False,
+        "exact_source_mirror_content_equal": True,
+        "external_source_dry_run_required": True,
+        "next_phase": TELEIOSIS_SOURCE_SYNC_NEXT_PHASE,
+        "registered_snapshot_current_source_compatible": False,
+        "registered_snapshot_rebuild_required": True,
+        "registered_snapshot_source_skill_count": 88,
+        "repository_bound": False,
+        "runtime_state_write_permitted": False,
+        "source_content_entry": dict(expected),
+        "source_material_git_object_id": (
+            TELEIOSIS_SOURCE_MATERIAL_GIT_OBJECT
+        ),
+        "source_mirror_parity_satisfied": True,
+        "source_skill_count": CURRENT_SOURCE_SKILL_COUNT,
+        "source_skill_counts": dict(CURRENT_SOURCE_SKILL_COUNTS),
+    }
+
+
 def _catalog_reservation_materialization():
     mirror_roots = {
         namespace: REPO_ROOT / "CodexSkills" / "registry" / namespace
@@ -1706,7 +1805,7 @@ def _catalog_reservation_materialization():
                 raise ValueError(
                     "AUTO_REGISTRY_SOURCE_ROOT_LSTAT_FAILED"
                 ) from exc
-            if entry.name == "_catalog":
+            if is_reserved_source_child(namespace, entry.name):
                 if stat.S_ISLNK(info.st_mode) or not stat.S_ISDIR(
                     info.st_mode
                 ):
@@ -1772,6 +1871,9 @@ def _catalog_reservation_materialization():
         "alias_set_digest": EXPECTED_SOURCE_ALIAS_SET_DIGEST,
         "catalog_or_snapshot_artifacts_generated": False,
         "catalog_path_reservation_complete": True,
+        "current_added_source_skill_roots": list(
+            CURRENT_ADDED_SOURCE_SKILL_ROOTS
+        ),
         "current_source_skill_count": CURRENT_SOURCE_SKILL_COUNT,
         "current_source_skill_counts": dict(CURRENT_SOURCE_SKILL_COUNTS),
         "existing_incomplete_materialization_promotable": False,
@@ -2095,6 +2197,7 @@ def build():
     source_sync_control = _source_content_sync_predecessor_observation()
     catalog_reservation = _catalog_reservation_materialization()
     source_content_sync = _source_content_sync_materialization()
+    teleiosis_source_sync = _teleiosis_source_sync_materialization()
     bound_reference_resolver = (
         _bound_reference_resolver_materialization()
     )
@@ -2129,7 +2232,7 @@ def build():
         "activation_instance_created": False,
         "activation_settlement_recomputed_before_publish": True,
         "au_040_authority_ruling_status": (
-            "BOUND_REFERENCE_RESOLVER_INTEGRATED_CONTROL_SYNC_PENDING"
+            "TELEIOSIS_SOURCE_SYNC_REGISTRY_REBUILD_PENDING"
         ),
         "au_040_complete": False,
         "au_040_consumer_manifest_path_contract_present": True,
@@ -2244,6 +2347,10 @@ def build():
         "registry_source_mirror_parity_satisfied": True,
         "registry_source_root_parity_satisfied": False,
         "registry_whole_source_parity_satisfied": False,
+        "registered_registry_snapshot_current_source_compatible": False,
+        "registered_registry_snapshot_rebuild_required": True,
+        "registered_registry_snapshot_source_skill_count": 88,
+        "registry_current_source_skill_count": CURRENT_SOURCE_SKILL_COUNT,
         "catalog_reservation_materialization_snapshot": {
             "as_of_phase": "AUTO_REGISTRY_CATALOG_PATH_RESERVATION",
             "bound_reference_resolver_auto_integration_complete": False,
@@ -2307,6 +2414,11 @@ def build():
                 True
             ),
             "working_tree_resolver_is_not_historical_trust_evidence": True,
+        },
+        "teleiosis_source_sync_materialization_snapshot": {
+            "as_of_phase": "AUTO_TELEIOSIS_SOURCE_CONTENT_SYNC",
+            "semantic_scope": "INTERFACE_MATERIALIZATION_ONLY",
+            **teleiosis_source_sync,
         },
         "capability_gate_precedes_state_write": True,
         "current_auto_runtime_control_bound": False,
@@ -2384,7 +2496,7 @@ def build():
         "module_artifacts": artifacts,
         "module_count": len(artifacts),
         "m0c_b_permitted": False,
-        "next_phase": BOUND_REFERENCE_RESOLVER_NEXT_PHASE,
+        "next_phase": TELEIOSIS_SOURCE_SYNC_NEXT_PHASE,
         "notification_actual_recipient_repo_external": True,
         "notification_credentials_repo_external": True,
         "notification_external_path_contract": {
@@ -2554,6 +2666,9 @@ def build():
         "repository_binding_readonly_preflight_verified": False,
         "bound_reference_resolver_auto_integration_complete": True,
         "bound_reference_resolver_readonly_preflight_verified": True,
+        "current_source_bound_reference_resolver_readonly_preflight_verified": (
+            False
+        ),
         "bound_reference_resolver_implementation_complete": True,
         "bound_reference_resolver_materialization_snapshot": {
             "as_of_phase": "AUTO_BOUND_REFERENCE_RESOLVER_INTEGRATION",
@@ -2659,7 +2774,7 @@ def build():
         "runtime_writer_shadow_returns_bootstrap_context": False,
         "runtime_writer_shadow_state_access_permitted": False,
         "runtime_writer_shadow_status": (
-            "UNBOUND_RESOLVER_INTEGRATED_CONTROL_SYNC_PENDING"
+            "UNBOUND_TELEIOSIS_REGISTRY_REBUILD_PENDING"
         ),
         "runtime_writer_shadow_validator_kind": (
             "DEVELOPMENT_ONLY_UNBOUND"
@@ -2670,7 +2785,7 @@ def build():
         "runtime_publisher_shadow_returns_bootstrap_context": False,
         "runtime_publisher_shadow_state_access_permitted": False,
         "runtime_publisher_shadow_status": (
-            "UNBOUND_RESOLVER_INTEGRATED_CONTROL_SYNC_PENDING"
+            "UNBOUND_TELEIOSIS_REGISTRY_REBUILD_PENDING"
         ),
         "runtime_publisher_shadow_validator_kind": (
             "DEVELOPMENT_ONLY_UNBOUND"
@@ -2686,7 +2801,7 @@ def build():
             False
         ),
         "runtime_repository_binding_shadow_status": (
-            "UNBOUND_RESOLVER_INTEGRATED_CONTROL_SYNC_PENDING"
+            "UNBOUND_TELEIOSIS_REGISTRY_REBUILD_PENDING"
         ),
         "runtime_repository_binding_shadow_validator_kind": (
             "DEVELOPMENT_ONLY_UNBOUND"

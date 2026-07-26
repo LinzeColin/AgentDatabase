@@ -54,8 +54,8 @@ PUBLISHER_MATERIALIZATION_CONTROL_GIT_OBJECT = (
 SOURCE_CONTENT_SYNC_CONTROL_GIT_OBJECT = (
     "sha1:5db5beecf3de7ac916020ca988f6e875891e19b1"
 )
-BOUND_REFERENCE_RESOLVER_NEXT_PHASE = (
-    "MECHANISM_POST_BOUND_REFERENCE_RESOLVER_CONTROL_SYNC"
+TELEIOSIS_SOURCE_SYNC_NEXT_PHASE = (
+    "MECHANISM_REGISTRY_TELEIOSIS_PARITY_MATERIALIZATION"
 )
 RUNTIME_INTERFACE_PATH = (
     "CodexSkills/registry/auto/runtime-interface.json"
@@ -269,6 +269,9 @@ def validate_unbound_writer_candidate(
     source_content_sync = current.get(
         "source_content_sync_materialization_snapshot"
     )
+    teleiosis_source_sync = current.get(
+        "teleiosis_source_sync_materialization_snapshot"
+    )
     resolver_materialization = current.get(
         "bound_reference_resolver_materialization_snapshot"
     )
@@ -432,6 +435,38 @@ def validate_unbound_writer_candidate(
         is not False
         or source_content_sync.get("canonical_publication_permitted")
         is not False
+        or not isinstance(teleiosis_source_sync, dict)
+        or teleiosis_source_sync.get("as_of_phase")
+        != "AUTO_TELEIOSIS_SOURCE_CONTENT_SYNC"
+        or teleiosis_source_sync.get("semantic_scope")
+        != "INTERFACE_MATERIALIZATION_ONLY"
+        or teleiosis_source_sync.get("source_material_git_object_id")
+        != "sha1:a8f1f6ff8003db43fad722a5afd3b19615dd325e"
+        or teleiosis_source_sync.get("source_skill_count") != 89
+        or teleiosis_source_sync.get("added_source_skill_roots")
+        != ["codex/teleiosis"]
+        or teleiosis_source_sync.get(
+            "registered_snapshot_source_skill_count"
+        )
+        != 88
+        or teleiosis_source_sync.get(
+            "registered_snapshot_rebuild_required"
+        )
+        is not True
+        or teleiosis_source_sync.get(
+            "registered_snapshot_current_source_compatible"
+        )
+        is not False
+        or teleiosis_source_sync.get(
+            "bound_reference_resolver_gate_satisfied"
+        )
+        is not False
+        or teleiosis_source_sync.get("runtime_state_write_permitted")
+        is not False
+        or teleiosis_source_sync.get(
+            "canonical_publication_permitted"
+        )
+        is not False
         or not isinstance(historical_control, dict)
         or historical_control.get("verified_git_object_id")
         != CONTROL_GIT_OBJECT
@@ -457,6 +492,10 @@ def validate_unbound_writer_candidate(
             "bound_reference_resolver_readonly_preflight_verified"
         )
         is not True
+        or current.get(
+            "current_source_bound_reference_resolver_readonly_preflight_verified"
+        )
+        is not False
         or current.get(
             "bound_reference_resolver_implementation_complete"
         )
@@ -490,8 +529,21 @@ def validate_unbound_writer_candidate(
         is not False
         or current.get("registry_whole_source_parity_satisfied")
         is not False
+        or current.get("registry_current_source_skill_count") != 89
+        or current.get(
+            "registered_registry_snapshot_source_skill_count"
+        )
+        != 88
+        or current.get(
+            "registered_registry_snapshot_rebuild_required"
+        )
+        is not True
+        or current.get(
+            "registered_registry_snapshot_current_source_compatible"
+        )
+        is not False
         or current.get("next_phase")
-        != BOUND_REFERENCE_RESOLVER_NEXT_PHASE
+        != TELEIOSIS_SOURCE_SYNC_NEXT_PHASE
     ):
         raise AutoRuntimeError(
             "WRITER_SHADOW_CURRENT_INTERFACE_CONTRACT_MISMATCH"
@@ -511,7 +563,7 @@ def validate_unbound_writer_candidate(
                 "WRITER_SHADOW_CURRENT_MODULE_DIGEST_MISMATCH"
             )
     return UnboundWriterCandidateEvidence(
-        "UNBOUND_RESOLVER_INTEGRATED_CONTROL_SYNC_PENDING",
+        "UNBOUND_TELEIOSIS_REGISTRY_REBUILD_PENDING",
         31,
         5,
         CONTROL_GIT_OBJECT,

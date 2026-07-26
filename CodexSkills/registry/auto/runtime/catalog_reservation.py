@@ -24,6 +24,7 @@ SOURCE_CLASSES = {
 }
 SOURCE_CATALOG_COMPONENT = "_catalog"
 GLOBAL_REGISTRY_NAMESPACE = "_global"
+REGISTRY_DELIVERY_BACKUP_COMPONENT = "_delivery-backups"
 HISTORICAL_SOURCE_MATERIAL_GIT_OBJECT = (
     "sha1:44a38890ec38ceb24ccae1ec6f5b1fc8e93aefa1"
 )
@@ -55,6 +56,12 @@ EXPLICIT_SOURCE_ROOT_NON_SKILL_ENTRIES = {
         ".DS_Store": "OS_METADATA",
         ".system": "SOURCE_OVERLAP",
         ".verifier-backups": "NON_SKILL_DOT_DIRECTORY_INCLUDED_IN_SOURCE_COVERAGE",
+        ".wbi-install-transactions": (
+            "NON_SKILL_OPERATIONAL_TRANSACTION_DIRECTORY_INCLUDED_IN_SOURCE_COVERAGE"
+        ),
+        ".wbi-install.lock": (
+            "NON_SKILL_OPERATIONAL_LOCK_FILE_INCLUDED_IN_SOURCE_COVERAGE"
+        ),
     },
     "codex-system": {
         ".codex-system-skills.marker": "SOURCE_MARKER",
@@ -186,10 +193,16 @@ EXPECTED_SOURCE_ALIAS_SET_DIGEST = alias_set_digest(EXPECTED_SOURCE_ALIASES)
 
 
 def reserved_registry_paths() -> Tuple[str, ...]:
-    rows = [
-        f"CodexSkills/registry/{source}/{SOURCE_CATALOG_COMPONENT}/"
-        for source in SOURCE_NAMESPACES
-    ]
+    rows = []
+    for source in SOURCE_NAMESPACES:
+        rows.append(
+            f"CodexSkills/registry/{source}/{SOURCE_CATALOG_COMPONENT}/"
+        )
+        if source == "codex":
+            rows.append(
+                "CodexSkills/registry/codex/"
+                f"{REGISTRY_DELIVERY_BACKUP_COMPONENT}/"
+            )
     rows.append(f"CodexSkills/registry/{GLOBAL_REGISTRY_NAMESPACE}/")
     return tuple(rows)
 
@@ -211,14 +224,26 @@ def is_reserved_registry_relative_path(relative_path: str) -> bool:
     return (
         len(parts) >= 2
         and parts[0] in SOURCE_NAMESPACES
-        and parts[1] == SOURCE_CATALOG_COMPONENT
+        and (
+            parts[1] == SOURCE_CATALOG_COMPONENT
+            or (
+                parts[0] == "codex"
+                and parts[1] == REGISTRY_DELIVERY_BACKUP_COMPONENT
+            )
+        )
     )
 
 
 def is_reserved_source_child(source_namespace: str, child_name: str) -> bool:
     return (
         source_namespace in SOURCE_NAMESPACES
-        and child_name == SOURCE_CATALOG_COMPONENT
+        and (
+            child_name == SOURCE_CATALOG_COMPONENT
+            or (
+                source_namespace == "codex"
+                and child_name == REGISTRY_DELIVERY_BACKUP_COMPONENT
+            )
+        )
     )
 
 
@@ -516,7 +541,11 @@ def inventory_source_roots(
                 raise CatalogReservationError("SOURCE_ROOT_ENTRY_LSTAT_FAILED") from exc
             reason = allowed_non_skill.get(entry.name)
             if reason is not None:
-                if entry.name in {".system", ".verifier-backups"}:
+                if entry.name in {
+                    ".system",
+                    ".verifier-backups",
+                    ".wbi-install-transactions",
+                }:
                     if stat.S_ISLNK(info.st_mode) or not stat.S_ISDIR(info.st_mode):
                         raise CatalogReservationError(
                             "SOURCE_ROOT_NON_SKILL_TYPE_DRIFT",

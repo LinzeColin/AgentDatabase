@@ -64,7 +64,7 @@ class RuntimeBootstrapTests(unittest.TestCase):
         )
         self.assertEqual(
             evidence.status,
-            "UNBOUND_RESOLVER_INTEGRATED_CONTROL_SYNC_PENDING",
+            "UNBOUND_TELEIOSIS_REGISTRY_REBUILD_PENDING",
         )
         self.assertEqual(evidence.schema_count, 31)
         self.assertEqual(evidence.policy_count, 5)
@@ -373,7 +373,7 @@ class RuntimeBootstrapTests(unittest.TestCase):
         )
         self.assertEqual(
             interface["au_040_authority_ruling_status"],
-            "BOUND_REFERENCE_RESOLVER_INTEGRATED_CONTROL_SYNC_PENDING",
+            "TELEIOSIS_SOURCE_SYNC_REGISTRY_REBUILD_PENDING",
         )
         self.assertFalse(interface["au_040_complete"])
         self.assertTrue(interface["au_040_transport_schema_draft_complete"])
@@ -506,7 +506,7 @@ class RuntimeBootstrapTests(unittest.TestCase):
         )
         self.assertEqual(
             interface["next_phase"],
-            "MECHANISM_POST_BOUND_REFERENCE_RESOLVER_CONTROL_SYNC",
+            "MECHANISM_REGISTRY_TELEIOSIS_PARITY_MATERIALIZATION",
         )
         self.assertTrue(
             interface["auto_exact_bundle_integration_complete"]
@@ -667,8 +667,12 @@ class RuntimeBootstrapTests(unittest.TestCase):
             "AUTO_REGISTRY_CATALOG_PATH_RESERVATION",
         )
         self.assertEqual(reservation["historical_source_skill_count"], 89)
-        self.assertEqual(reservation["current_source_skill_count"], 88)
-        self.assertEqual(reservation["mirror_skill_count"], 88)
+        self.assertEqual(reservation["current_source_skill_count"], 89)
+        self.assertEqual(reservation["mirror_skill_count"], 89)
+        self.assertEqual(
+            reservation["current_added_source_skill_roots"],
+            ["codex/teleiosis"],
+        )
         self.assertEqual(
             reservation["missing_source_skill_roots"],
             ["codex/context-kernel"],
@@ -817,12 +821,71 @@ class RuntimeBootstrapTests(unittest.TestCase):
                 "codex/verifier",
             ],
         )
+        teleiosis_sync = interface[
+            "teleiosis_source_sync_materialization_snapshot"
+        ]
+        self.assertEqual(
+            teleiosis_sync["as_of_phase"],
+            "AUTO_TELEIOSIS_SOURCE_CONTENT_SYNC",
+        )
+        self.assertEqual(teleiosis_sync["source_skill_count"], 89)
+        self.assertEqual(
+            teleiosis_sync["source_skill_counts"],
+            {
+                "agents": 24,
+                "claude": 3,
+                "codex": 56,
+                "codex-system": 6,
+            },
+        )
+        self.assertEqual(
+            teleiosis_sync["added_source_skill_roots"],
+            ["codex/teleiosis"],
+        )
+        self.assertEqual(
+            teleiosis_sync["source_material_git_object_id"],
+            "sha1:a8f1f6ff8003db43fad722a5afd3b19615dd325e",
+        )
+        self.assertTrue(
+            teleiosis_sync["registered_snapshot_rebuild_required"]
+        )
+        self.assertFalse(
+            teleiosis_sync[
+                "registered_snapshot_current_source_compatible"
+            ]
+        )
+        self.assertEqual(
+            teleiosis_sync["registered_snapshot_source_skill_count"],
+            88,
+        )
         self.assertTrue(
             interface["bound_reference_resolver_auto_integration_complete"]
         )
         self.assertTrue(
             interface[
                 "bound_reference_resolver_readonly_preflight_verified"
+            ]
+        )
+        self.assertFalse(
+            interface[
+                "current_source_bound_reference_resolver_"
+                "readonly_preflight_verified"
+            ]
+        )
+        self.assertEqual(
+            interface["registry_current_source_skill_count"],
+            89,
+        )
+        self.assertEqual(
+            interface["registered_registry_snapshot_source_skill_count"],
+            88,
+        )
+        self.assertTrue(
+            interface["registered_registry_snapshot_rebuild_required"]
+        )
+        self.assertFalse(
+            interface[
+                "registered_registry_snapshot_current_source_compatible"
             ]
         )
         resolver_materialization = interface[
@@ -883,7 +946,7 @@ class RuntimeBootstrapTests(unittest.TestCase):
         self.assertFalse(interface["runtime_state_write_permitted"])
         self.assertEqual(
             interface["runtime_writer_shadow_status"],
-            "UNBOUND_RESOLVER_INTEGRATED_CONTROL_SYNC_PENDING",
+            "UNBOUND_TELEIOSIS_REGISTRY_REBUILD_PENDING",
         )
         self.assertEqual(
             interface["runtime_writer_shadow_validator_kind"],
@@ -1028,7 +1091,7 @@ class RuntimeBootstrapTests(unittest.TestCase):
             )
             self.assertEqual(
                 evidence.status,
-                "UNBOUND_RESOLVER_INTEGRATED_CONTROL_SYNC_PENDING",
+                "UNBOUND_TELEIOSIS_REGISTRY_REBUILD_PENDING",
             )
             self.assertEqual(
                 expected_repository_control_failure_pattern(),
@@ -1190,7 +1253,7 @@ class RuntimeBootstrapTests(unittest.TestCase):
             )
             self.assertEqual(
                 current_interface["next_phase"],
-                "MECHANISM_POST_BOUND_REFERENCE_RESOLVER_CONTROL_SYNC",
+                "MECHANISM_REGISTRY_TELEIOSIS_PARITY_MATERIALIZATION",
             )
             self.assertTrue(
                 observed["transition_contract"][

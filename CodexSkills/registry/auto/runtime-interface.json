@@ -12,7 +12,7 @@
   "activation_handshake_entrypoint": "CodexSkills/registry/auto/tools/activation_handshake_cli.py",
   "activation_instance_created": false,
   "activation_settlement_recomputed_before_publish": true,
-  "au_040_authority_ruling_status": "BOUND_REFERENCE_RESOLVER_INTEGRATED_CONTROL_SYNC_PENDING",
+  "au_040_authority_ruling_status": "TELEIOSIS_SOURCE_SYNC_REGISTRY_REBUILD_PENDING",
   "au_040_complete": false,
   "au_040_consumer_manifest_path_contract_present": true,
   "au_040_daily_jsonl_shard_complete": false,
@@ -428,12 +428,15 @@
     "canonical_publication_permitted": false,
     "catalog_or_snapshot_artifacts_generated": false,
     "catalog_path_reservation_complete": true,
+    "current_added_source_skill_roots": [
+      "codex/teleiosis"
+    ],
     "current_auto_runtime_control_bound": false,
-    "current_source_skill_count": 88,
+    "current_source_skill_count": 89,
     "current_source_skill_counts": {
       "agents": 24,
       "claude": 3,
-      "codex": 55,
+      "codex": 56,
       "codex-system": 6
     },
     "existing_incomplete_materialization_promotable": false,
@@ -469,11 +472,11 @@
     "mirror_removed_skill_roots": [
       "codex/context-kernel"
     ],
-    "mirror_skill_count": 88,
+    "mirror_skill_count": 89,
     "mirror_skill_counts": {
       "agents": 24,
       "claude": 3,
-      "codex": 55,
+      "codex": 56,
       "codex-system": 6
     },
     "missing_source_skill_roots": [
@@ -488,6 +491,7 @@
       "CodexSkills/registry/agents/_catalog/",
       "CodexSkills/registry/claude/_catalog/",
       "CodexSkills/registry/codex/_catalog/",
+      "CodexSkills/registry/codex/_delivery-backups/",
       "CodexSkills/registry/codex-system/_catalog/",
       "CodexSkills/registry/_global/"
     ],
@@ -516,10 +520,10 @@
       {
         "alias_count": 20,
         "completeness_status": "COMPLETE_AFTER_POLICY_EXCLUSIONS",
-        "included_file_count": 3091,
-        "included_tree_digest": "746b945b967502edd30872a69a713cd679432ef89059856cbe819fa74e06cab5",
+        "included_file_count": 3197,
+        "included_tree_digest": "b0c44e59e7de122ad05211fee11d369acd83e0e9fae82fd50f20991bb2792ded",
         "source_namespace": "codex",
-        "source_snapshot_digest": "1f41a69acd5de4a0017ae596bf80ce70632369ddf2377eb4fe659fc00f7905b4"
+        "source_snapshot_digest": "da9c487e95f1c7e5bbdf794c4c843a18c01a106ff102e31bd0f44e514672e5ce"
       },
       {
         "alias_count": 0,
@@ -530,9 +534,9 @@
         "source_snapshot_digest": "33163f9473ca2865e5bf159eff914010583a842842c1bcc8aa4d567db9b70a36"
       }
     ],
-    "source_skill_count_delta": -1,
+    "source_skill_count_delta": 0,
     "sync_executor_artifact": {
-      "artifact_digest": "1fd015a043dfe48034df03d8a821cda5793c90694191a8b629672efaf33283ac",
+      "artifact_digest": "919bcb95b8a8dd4034ec22f12dff75a9edba8ebf0a08abba973025a85d9f1eac",
       "relative_path": "CodexSkills/sync_skills.py"
     },
     "whole_source_parity_satisfied": false
@@ -573,6 +577,7 @@
   "consumer_first_verified_git_object_id": "sha1:91a12e48351be3ee05ec23ef61aec81056b02014",
   "control_sync_required_before_state_write": true,
   "current_auto_runtime_control_bound": false,
+  "current_source_bound_reference_resolver_readonly_preflight_verified": false,
   "dual_external_trust_tuples_required": true,
   "external_gmail_ready_gate_satisfied": false,
   "fault_test_rounds_required": 2,
@@ -631,7 +636,7 @@
       "relative_path": "CodexSkills/registry/auto/runtime/bootstrap.py"
     },
     {
-      "artifact_digest": "49ba6c0a294f61bf716e388517489f634c343a4b1f2747d91a1149297a2fc836",
+      "artifact_digest": "e7f7a795eb07a995a9a9044e2a6e11a4a17005d70e78f39988e5871c04b78703",
       "relative_path": "CodexSkills/registry/auto/runtime/catalog_reservation.py"
     },
     {
@@ -691,7 +696,7 @@
       "relative_path": "CodexSkills/registry/auto/runtime/state.py"
     },
     {
-      "artifact_digest": "6fd630825e15790b5b7e38877f2357b4a828e69a00fa9f4e26636385ebb10608",
+      "artifact_digest": "a5601f1703d132741cc4ff3ed6a53db601dc3941132304b4cc6c4339cba36355",
       "relative_path": "CodexSkills/registry/auto/runtime/writer_shadow.py"
     },
     {
@@ -703,7 +708,7 @@
       "relative_path": "CodexSkills/registry/auto/tools/bound_reference_resolver_cli.py"
     },
     {
-      "artifact_digest": "61ccc75e957fe38c35416723b07885424186d66cbc5939d377f62a7448b935d3",
+      "artifact_digest": "f606fbd4c565d291baa7129bf8cb06b3b8921ff3a4c1bfc06004cad2ff0041c3",
       "relative_path": "CodexSkills/registry/auto/tools/build_runtime_interface.py"
     },
     {
@@ -732,7 +737,7 @@
     }
   ],
   "module_count": 29,
-  "next_phase": "MECHANISM_POST_BOUND_REFERENCE_RESOLVER_CONTROL_SYNC",
+  "next_phase": "MECHANISM_REGISTRY_TELEIOSIS_PARITY_MATERIALIZATION",
   "notification_actual_recipient_repo_external": true,
   "notification_credentials_repo_external": true,
   "notification_external_path_contract": {
@@ -770,7 +775,11 @@
     "runtime_state_write_permitted": false,
     "semantic_scope": "INTERFACE_MATERIALIZATION_ONLY"
   },
+  "registered_registry_snapshot_current_source_compatible": false,
+  "registered_registry_snapshot_rebuild_required": true,
+  "registered_registry_snapshot_source_skill_count": 88,
   "registry_alias_set_digest": "75f6db86e5a18cc000985dc32a719ac7e0bc15b22b2e3f20c0d32d3138f27387",
+  "registry_current_source_skill_count": 89,
   "registry_mirror_alias_parity_satisfied": true,
   "registry_source_alias_parity_satisfied": true,
   "registry_source_content_sync_complete": true,
@@ -859,19 +868,19 @@
   "runtime_preflight_shadow_permitted": true,
   "runtime_publisher_shadow_returns_bootstrap_context": false,
   "runtime_publisher_shadow_state_access_permitted": false,
-  "runtime_publisher_shadow_status": "UNBOUND_RESOLVER_INTEGRATED_CONTROL_SYNC_PENDING",
+  "runtime_publisher_shadow_status": "UNBOUND_TELEIOSIS_REGISTRY_REBUILD_PENDING",
   "runtime_publisher_shadow_validator_kind": "DEVELOPMENT_ONLY_UNBOUND",
   "runtime_publisher_shadow_validator_path": "CodexSkills/registry/auto/tools/validate_au040_publisher.py",
   "runtime_repository_binding_shadow_returns_bootstrap_context": false,
   "runtime_repository_binding_shadow_state_access_permitted": false,
-  "runtime_repository_binding_shadow_status": "UNBOUND_RESOLVER_INTEGRATED_CONTROL_SYNC_PENDING",
+  "runtime_repository_binding_shadow_status": "UNBOUND_TELEIOSIS_REGISTRY_REBUILD_PENDING",
   "runtime_repository_binding_shadow_validator_kind": "DEVELOPMENT_ONLY_UNBOUND",
   "runtime_repository_binding_shadow_validator_path": "CodexSkills/registry/auto/tools/validate_au040_publisher.py",
   "runtime_shard_writer_integration_complete": true,
   "runtime_state_write_permitted": false,
   "runtime_writer_shadow_returns_bootstrap_context": false,
   "runtime_writer_shadow_state_access_permitted": false,
-  "runtime_writer_shadow_status": "UNBOUND_RESOLVER_INTEGRATED_CONTROL_SYNC_PENDING",
+  "runtime_writer_shadow_status": "UNBOUND_TELEIOSIS_REGISTRY_REBUILD_PENDING",
   "runtime_writer_shadow_validator_kind": "DEVELOPMENT_ONLY_UNBOUND",
   "runtime_writer_shadow_validator_path": "CodexSkills/registry/auto/tools/validate_au040_writer.py",
   "schedule": {
@@ -974,5 +983,40 @@
   },
   "state_root_repo_external": true,
   "status": "DRAFT_NON_ACTIVE",
+  "teleiosis_source_sync_materialization_snapshot": {
+    "added_source_skill_roots": [
+      "codex/teleiosis"
+    ],
+    "as_of_phase": "AUTO_TELEIOSIS_SOURCE_CONTENT_SYNC",
+    "bound_reference_resolver_gate_satisfied": false,
+    "canonical_publication_permitted": false,
+    "catalog_or_snapshot_artifacts_generated": false,
+    "current_auto_runtime_control_bound": false,
+    "exact_source_mirror_content_equal": true,
+    "external_source_dry_run_required": true,
+    "next_phase": "MECHANISM_REGISTRY_TELEIOSIS_PARITY_MATERIALIZATION",
+    "registered_snapshot_current_source_compatible": false,
+    "registered_snapshot_rebuild_required": true,
+    "registered_snapshot_source_skill_count": 88,
+    "repository_bound": false,
+    "runtime_state_write_permitted": false,
+    "semantic_scope": "INTERFACE_MATERIALIZATION_ONLY",
+    "source_content_entry": {
+      "alias_count": 0,
+      "byte_count": 598392,
+      "content_digest": "252e9cf65b991dd7bd7c36734257b0b5da47689cbf2d1c7d7bb4ca766aa93bcb",
+      "regular_file_count": 104,
+      "source_relative_path": "codex/teleiosis"
+    },
+    "source_material_git_object_id": "sha1:a8f1f6ff8003db43fad722a5afd3b19615dd325e",
+    "source_mirror_parity_satisfied": true,
+    "source_skill_count": 89,
+    "source_skill_counts": {
+      "agents": 24,
+      "claude": 3,
+      "codex": 56,
+      "codex-system": 6
+    }
+  },
   "trust_tuple_repo_external_only": true
 }
