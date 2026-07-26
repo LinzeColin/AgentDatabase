@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "target",
+    "observed_artifacts",
+    "commands",
+    "allow_third_party_execution"
+  ],
+  "properties": {
+    "allow_third_party_execution": {
+      "const": false
+    },
+    "allow_shell": {
+      "type": "boolean"
+    },
+    "allow_network": {
+      "type": "boolean"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "status",
+    "records"
+  ],
+  "properties": {
+    "status": {
+      "enum": [
+        "PASS",
+        "FAIL"
+      ]
+    },
+    "records": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "required": [
+          "source_url",
+          "source_type",
+          "license_status",
+          "mechanism",
+          "adopted_abstraction",
+          "copy_mode",
+          "verification"
+        ]
+      }
+    }
+  }
+}

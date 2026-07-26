@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Release Readiness Evidence",
+  "type": "object",
+  "required": ["status", "checks", "evidence_bindings", "check_evidence", "profile_evidence"],
+  "properties": {
+    "status": {"enum": ["PASS", "BLOCKED"]},
+    "checks": {"type": "object", "minProperties": 9, "additionalProperties": {"type": "boolean"}},
+    "evidence_bindings": {"type": "array", "minItems": 1},
+    "check_evidence": {"type": "object", "minProperties": 9},
+    "profile_evidence": {"type": "object", "required": ["profile"]}
+  },
+  "additionalProperties": true
+}

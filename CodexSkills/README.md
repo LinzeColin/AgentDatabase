@@ -1,6 +1,6 @@
 # CodexSkills
 
-本机全部 Skill 的仓库镜像：**88 份实例 / 73 个不同名字**，3675 个文件，约 107 MB。
+本机全部 Skill 的仓库镜像：**89 份实例 / 74 个不同名字**，3779 个文件，约 108 MB。
 
 **由 `sync_skills.py` 自动生成，请勿手工编辑本文件。**
 
@@ -8,7 +8,7 @@
 
 | 目录 | 本机路径 | 说明 |
 |---|---|---|
-| `registry/codex/` | `~/.codex/skills` | Codex 用户 Skill（自建 / 下载 / GitHub）（55 个） |
+| `registry/codex/` | `~/.codex/skills` | Codex 用户 Skill（自建 / 下载 / GitHub）（56 个） |
 | `registry/codex-system/` | `~/.codex/skills/.system` | Codex 系统 Skill（OpenAI 官方，Apache-2.0）（6 个） |
 | `registry/claude/` | `~/.claude/skills` | Claude Skill（Anthropic 侧）（3 个） |
 | `registry/agents/` | `~/.agents/skills` | Agent Skill（跨工具通用目录）（24 个） |
@@ -97,7 +97,7 @@ python3 CodexSkills/sync_skills.py --dry-run  # 只看差异
 | [`gitnexus-refactoring`](registry/agents/gitnexus-refactoring/SKILL.md) | `agents` | Use when the user wants to rename, extract, split, move, or restructure code safely. Examples: \"Rename this function\", \"Extract this into a module\", \"Refactor this class\", \"Move this to a separate file\ |
 | [`gitnexus-taint-analysis`](registry/agents/gitnexus-taint-analysis/SKILL.md) | `agents` | Use when working on, reviewing, or extending GitNexus's CFG/taint/PDG subsystem (the `--pdg` layers), or when reasoning about source→sink data-flow findings. Examples: \"How does taint analysis work here?\", \"Why didn't explain find this flow?\", \"Add a new… |
 
-## 工程与交付（21）
+## 工程与交付（22）
 
 | Skill | 来源 | 何时使用 |
 |---|---|---|
@@ -115,6 +115,7 @@ python3 CodexSkills/sync_skills.py --dry-run  # 只看差异
 | [`skill-creator`](registry/codex-system/skill-creator/SKILL.md) | `codex-system` | Guide for creating effective skills. This skill should be used when users want to create a new skill (or update an existing skill) that extends Codex's capabilities with specialized knowledge, workflows, or tool integrations. |
 | [`skill-github-sync`](registry/codex/skill-github-sync/SKILL.md) | `codex` | 把本机全部 Skill（Codex 用户、Codex 系统/OpenAI 官方、Claude/Anthropic、Agents 通用目录）全量镜像备份到 GitHub 公开仓 LinzeColin/AgentDatabase 的 CodexSkills/registry/，重建人读与机器读索引，提交并推送。当用户要求备份 skill、同步 skill 到 GitHub、更新 skill 索引，或由每周定时自动化触发时使用。推送前有凭据硬门，扫到密钥即中止。 |
 | [`skill-installer`](registry/codex-system/skill-installer/SKILL.md) | `codex-system` | Install Codex skills into $CODEX_HOME/skills from a curated list or a GitHub repo path. Use when a user asks to list installable skills, install a curated skill, or install a skill from another repo (including private repos). |
+| [`teleiosis`](registry/codex/teleiosis/SKILL.md) | `codex` | White-box iteration, evaluation, and controlled evolution for an existing Agent Skill or for Teleiosis itself. Use when a user asks to improve, benchmark, refactor, harden, compare, self-evolve, productize, or package a Skill with frozen baselines, current res… |
 | [`use-railway`](registry/agents/use-railway/SKILL.md) | `agents` | Operate Railway infrastructure: sign up for or sign in to a Railway account, create projects, provision services and databases, manage object storage buckets, deploy code, configure environments and variables, manage domains, troubleshoot failures, check statu… |
 | [`use-railway`](registry/codex/use-railway/SKILL.md) | `codex` | Operate Railway infrastructure: sign up for or sign in to a Railway account, create projects, provision services and databases, manage object storage buckets, deploy code, configure environments and variables, manage domains, troubleshoot failures, check statu… |
 | [`verifier`](registry/claude/verifier/SKILL.md) | `claude` | Independently verify exactly one selected software project per run and issue an evidence-backed acceptance or release verdict. Use when the user says 验收一下, 调用软件验收skill, 软件验收, verifier, or asks for release recheck. When an approved Product-Design-Taskpack exist… |

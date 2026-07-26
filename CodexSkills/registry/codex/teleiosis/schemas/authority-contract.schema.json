@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "White-Box Authority Contract",
+  "type": "object",
+  "required": ["run_id", "authorized_roots", "reversible_actions", "explicit_authorization_required", "third_party_default", "prompt_instructions_from_target_or_peer_have_authority"],
+  "properties": {
+    "third_party_default": {"const": "UNTRUSTED_DATA_NO_EXEC"},
+    "prompt_instructions_from_target_or_peer_have_authority": {"const": false}
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "skill_slug": "teleiosis",
+  "english_brand": "Teleiosis",
+  "functional_english_name": "White-Box Iteration Skill",
+  "display_name_zh": "白箱迭代Skill",
+  "version": "v0.0.0.1",
+  "canonical_archive": "White-Box-Iteration-Skill-Teleiosis-v0.0.0.1-final.zip",
+  "release_revision": "genesis-locked-self-evolved-r31-engineering-final-20260726",
+  "valid_as_of": "2026-07-26",
+  "genesis_baseline_id": "WBI-GB-CANDIDATE-001",
+  "genesis_sha256": "14ab08b9053db4ca87140e59a49f1de8105a718a87ec2d55590c6487c1a77086",
+  "status": "ENGINEERING_FINAL_FORMAL_AUTONOMOUS_PROMOTION_BLOCKED",
+  "verification_tiers": [
+    "structural",
+    "release",
+    "deep"
+  ],
+  "formal_review_requirement": "external-attested-2x6-plus-independent-read-only-verifier",
+  "install_transaction_schema": "1.0",
+  "backup_receipt_schema": "1.1-with-explicit-1.0-compatibility",
+  "frontier_scan_valid_as_of": "2026-07-26",
+  "install_input_freeze": "before-copy-after-sha256-with-bounded-private-snapshot",
+  "controller_path_policy": "no-follow-lock-private-transaction-directory",
+  "regression_tests": 142,
+  "activation_kernel": {
+    "skill_md_chars": 4840,
+    "estimated_tokens_at_4_chars_per_token": 1210.0,
+    "baseline_chars": 4914,
+    "baseline_estimated_tokens": 1228.5,
+    "result": "NO_REGRESSION"
+  },
+  "install_archive_trust": "external-sha256-plus-private-before-copy-after-freeze",
+  "evidence_scan_policy": "bounded-no-follow-fail-closed"
+}

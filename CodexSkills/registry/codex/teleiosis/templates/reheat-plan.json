@@ -1,0 +1,7 @@
+{
+  "monitoring": [],
+  "feedback": [],
+  "triggers": [],
+  "known_limits": [],
+  "validity_policy": {"valid_as_of": "", "expires_at": "", "on_expiry": "REHEAT_REQUIRED"}
+}

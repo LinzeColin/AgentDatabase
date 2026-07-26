@@ -1,0 +1,10 @@
+{
+  "selected_candidate_id": "",
+  "selected_candidate_tree_hash": "",
+  "optimizer_actor_id": "",
+  "verifier_actor_id": "",
+  "verifier_record": "verifier/final-verdict.json",
+  "selection_basis": ["all hard gates", "no protected regression", "passing Pareto frontier"],
+  "residual_risks": [],
+  "unknowns": []
+}

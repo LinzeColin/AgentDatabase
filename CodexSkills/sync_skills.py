@@ -99,7 +99,7 @@ CATEGORY = {
                    "goal-to-delivery-sop", "domain-dual-plane", "output-skill", "codex-dev-orchestrator",
                    "impeccable", "review-agent", "plugin-creator", "skill-creator", "skill-installer",
                    "skill-github-sync", "dynamic-personal-profile-update", "persona-distiller",
-                   "persona-distiller-group"],
+                   "persona-distiller-group", "teleiosis"],
     "学习与知识": ["study-project-orchestrator", "book-to-skill", "last30days", "chronicle",
                    "grill-me", "openai-docs"],
     "业务流程": ["km-bid-scout", "km-bid-discover", "km-bid-qualify", "km-bid-brief", "km-bid-evidence",

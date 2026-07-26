@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "White-Box Evaluation Result",
+  "type": "object",
+  "required": [
+    "result_id", "task_id", "task_family", "dataset_id", "dataset_hash", "split",
+    "system_id", "system_role", "system_tree_hash", "trial_id", "model", "runtime",
+    "metrics", "hard_gates", "raw_result_path", "raw_result_sha256",
+    "process_trace_path", "process_trace_sha256", "actor_id", "started_at", "finished_at"
+  ],
+  "properties": {
+    "result_id": {"type": "string", "minLength": 1},
+    "task_id": {"type": "string", "minLength": 1},
+    "task_family": {"type": "string", "minLength": 1},
+    "dataset_id": {"type": "string", "minLength": 1},
+    "dataset_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "split": {"enum": ["dev", "validation", "sealed-holdout", "adversarial"]},
+    "system_role": {"enum": ["no-skill", "baseline", "candidate"]},
+    "system_tree_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "metrics": {"type": "object", "minProperties": 11},
+    "hard_gates": {"type": "object", "minProperties": 1, "additionalProperties": {"type": "boolean"}},
+    "raw_result_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "process_trace_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  },
+  "additionalProperties": true
+}

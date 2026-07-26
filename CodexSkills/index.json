@@ -6,8 +6,8 @@
     "claude": "Claude Skill（Anthropic 侧）",
     "agents": "Agent Skill（跨工具通用目录）"
   },
-  "skill_instance_count": 88,
-  "unique_slug_count": 73,
+  "skill_instance_count": 89,
+  "unique_slug_count": 74,
   "skills": [
     {
       "slug": "agent-reach",
@@ -508,6 +508,16 @@
       "entry": "registry/codex/study-project-orchestrator/SKILL.md",
       "file_count": 3,
       "size_bytes": 43405
+    },
+    {
+      "slug": "teleiosis",
+      "source": "codex",
+      "name": "teleiosis",
+      "description": "White-box iteration, evaluation, and controlled evolution for an existing Agent Skill or for Teleiosis itself. Use when a user asks to improve, benchmark, refactor, harden, compare, self-evolve, productize, or package a Skill with frozen baselines, current research, real peers, ten evidence-led system reviews, rollback, genuinely independent review, and installable delivery. Do not use for ordinary code review or direct in-place edits to a production Skill.",
+      "category": "工程与交付",
+      "entry": "registry/codex/teleiosis/SKILL.md",
+      "file_count": 104,
+      "size_bytes": 598392
     },
     {
       "slug": "theme-factory",

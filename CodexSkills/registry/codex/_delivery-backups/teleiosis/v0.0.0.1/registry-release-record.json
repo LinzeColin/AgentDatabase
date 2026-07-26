@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "skill_slug": "teleiosis",
+  "version": "v0.0.0.1",
+  "canonical_install_archive_sha256": "1ebabb9f6be66032955d9f5b7f118fbc2b534241f69a398922aa112146e23257",
+  "outer_delivery_archive_sha256": "52131362170f4a2d47519853a90b8eca587e6e035af080be54ba84511cbb0e13",
+  "genesis_sha256": "14ab08b9053db4ca87140e59a49f1de8105a718a87ec2d55590c6487c1a77086",
+  "engineering_status": "ENGINEERING_FINAL_INSTALLABLE",
+  "formal_autonomous_promotion": "INDEPENDENT_REVIEW_UNAVAILABLE / BLOCKED",
+  "install": {
+    "status": "COMMITTED",
+    "transaction_id": "14a251a927064bdea470d929ab30e104",
+    "profile": "optimizer",
+    "verification_level": "release",
+    "tree_hash": "147dc032a1868f93a16d002e524e043d81785b8a7f97276177fa790feb0c3d0f",
+    "verify_self": "PASS",
+    "release_smoke": "PASS",
+    "post_install_verify_self": "PASS",
+    "post_install_release_smoke": "PASS"
+  },
+  "evidence": {
+    "regression_tests": 142,
+    "deterministic_build": true,
+    "archive_manifest": "PASS",
+    "credential_scan": "PASS"
+  },
+  "next_evolution_goal": "Obtain genuinely independent 2x6 review evidence plus a separate read-only verifier, then requalify formal autonomous promotion without weakening the locked Genesis or evidence boundaries."
+}
