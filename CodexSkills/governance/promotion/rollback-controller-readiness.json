@@ -1,0 +1,99 @@
+{
+  "artifact_digest": "3cf47b465f46a458b2c16b57599462ca6638076cb32ab0e57ab2c86d6c41a93b",
+  "controller_contract": {
+    "append_record_format": "RFC8785_JCS_UTF8_NO_BOM_NO_LF",
+    "component_path": "CodexSkills/governance/promotion/rollback_controller.py",
+    "component_source_binding_mode": "SUCCESSOR_EXTERNAL_TUPLE_REQUIRED",
+    "content_digest": "44bd788038cadc6dd89810fbaebf9cefdc5351af96871e982193769eb2ececd2",
+    "decision_actions": [
+      "PROMOTE",
+      "REJECT",
+      "ROLLBACK",
+      "REVOKE"
+    ],
+    "emergency_notification_order": "CONTAINMENT_THEN_POST_CONTAINMENT_SENT",
+    "external_predecessor_ledger_digest_required": true,
+    "history_rewrite_permitted": false,
+    "lifecycle_ledger_domain": "SKILLOPS_LIFECYCLE_LEDGER_V1",
+    "m056_promotion_step_delegation_required": true,
+    "planned_notification_order": "PRE_WRITE_SENT_THEN_EVENT",
+    "prior_champion_proof_source": "BASE_CHAMPION_PLUS_ORDERED_PRIOR_EVENTS",
+    "public_artifact_write_permitted": false,
+    "revoked_target_restore_permitted": false,
+    "rollback_drill_schema": {
+      "artifact_digest": "fb0741973e1889e3dc8ac73dd5f1cdcf7c8afc7a34419c669b35ae83b048f0d9",
+      "canonical_path": "CodexSkills/governance/promotion/schemas/rollback-drill-evidence.schema.json",
+      "schema_sha256": "05ccf4edce100c3ac1502d7dec3d64418a090a9d38ff5acb04282f488ac7edea",
+      "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:rollback-drill-evidence:v1",
+      "self_digest_pointer": "/evidence_bundle_digest"
+    },
+    "state_write_permitted": false
+  },
+  "digest_algorithm": "SHA-256",
+  "next_phase": "MECHANISM_FRESHNESS_DRIFT_MONITOR",
+  "nonmutation": {
+    "activation_forbidden": true,
+    "auto_plane_unchanged": true,
+    "candidate_bundle_unchanged": true,
+    "canonical_publication_permitted": false,
+    "registry_write_permitted": false,
+    "rollback_revocation_execution_permitted": false,
+    "version_file_created": false
+  },
+  "owner_plane": "MECHANISM",
+  "protocol_revision": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1",
+  "registry_observation": {
+    "base_champion_count": 0,
+    "challenger_version_count": 0,
+    "identity_count": 89,
+    "instance_count": 89,
+    "real_rollback_revocation_execution_permitted": false,
+    "reason_code": "NO_REGISTERED_CHAMPION_TO_ROLLBACK_OR_REVOKE",
+    "snapshot_status": "REGISTERED",
+    "version_count": 89
+  },
+  "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:rollback-controller-readiness:v1",
+  "self_digest_pointer": "/artifact_digest",
+  "source_trust": {
+    "candidate_bundle": {
+      "artifact_digest": "66ad125629cab71739ff2bc266219f995f7a45998936ca720c6db678ee77e65a",
+      "bundle_digest": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e",
+      "canonical_path": "CodexSkills/governance/bundles/schema-bundle-manifest.v1.json",
+      "expected_mode": "CANDIDATE",
+      "policy_count": 5,
+      "schema_count": 31,
+      "verified_git_object_id": "sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5"
+    },
+    "m056_controller": {
+      "artifact_digest": "bcc39aaa1e6c817fb321a8772996a05fffffe947cd8bbc218a5f7bad16db3e53",
+      "canonical_path": "CodexSkills/governance/promotion/controller.py",
+      "expected_mode": "M056_IMMUTABLE_PREDECESSOR",
+      "readiness_artifact": {
+        "artifact_digest": "d54d577bf53e155c1eb6215db388d9f7939f91e21d6af938242c49928b44d1ae",
+        "canonical_path": "CodexSkills/governance/promotion/controller-readiness.json"
+      },
+      "verified_git_object_id": "sha1:3cc02c15359d5204ad34fc9c20edbc02ec3802f0"
+    },
+    "registry_snapshot": {
+      "artifact_digest": "ed5fb74fa88a2f1115a716be5e63f683d206c10d3d0a2005230d4c33d4c12c98",
+      "canonical_path": "CodexSkills/registry/_global/registry-snapshot.v1.json",
+      "expected_mode": "REGISTERED_READ_ONLY",
+      "registry_snapshot_digest": "7b5a74bd459a4737299444b68439c1799ba8a2159032636a24a987113eee9d12",
+      "verified_git_object_id": "sha1:98e193e74991346d266bdd94ae720c32f25dfb47"
+    },
+    "repository_self_report_is_not_trust_root": true
+  },
+  "status": "DRAFT_NON_ACTIVE_ROLLBACK_REVOCATION_CONTROLLER_READY",
+  "task_contract": {
+    "completed_task_ids": [
+      "M-056",
+      "M-057"
+    ],
+    "done_gate": "NO_HISTORY_REWRITE_AND_PRIOR_CHAMPION_RESTORABLE",
+    "pending_task_ids": [
+      "M-058"
+    ],
+    "required_output": "NEW_EVENT_ROLLBACK_AND_DRILL_EVIDENCE"
+  },
+  "task_pack_revision": "v0.0.0.2"
+}

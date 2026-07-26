@@ -1,40 +1,96 @@
-# Mechanism promotion-controller handoff
+# Mechanism rollback/revocation-controller handoff
 
-- State: `DRAFT_NON_ACTIVE_PROMOTION_CONTROLLER_READY`
-- Phase: `MECHANISM_PROMOTION_CONTROLLER`
-- Task Pack task completed: `M-056`
-- Required output: `APPEND_ONLY_CHAMPION_REJECT_DECISION`
+- State: `DRAFT_NON_ACTIVE_ROLLBACK_REVOCATION_CONTROLLER_READY`
+- Phase: `MECHANISM_ROLLBACK_REVOCATION_CONTROLLER`
+- Task Pack tasks completed: `M-056`, `M-057`
+- Required output: `NEW_EVENT_ROLLBACK_AND_DRILL_EVIDENCE`
 - Done gate:
-  `NO_GATE_BYPASS_AND_ONE_CHAMPION_PER_SCOPE`
-- Controller:
-  `CodexSkills/governance/promotion/controller.py`
-- Controller content SHA-256:
+  `NO_HISTORY_REWRITE_AND_PRIOR_CHAMPION_RESTORABLE`
+- M-056 predecessor object:
+  `sha1:3cc02c15359d5204ad34fc9c20edbc02ec3802f0`
+- M-056 controller raw SHA-256:
   `bcc39aaa1e6c817fb321a8772996a05fffffe947cd8bbc218a5f7bad16db3e53`
-- Readiness raw SHA-256:
-  `d54d577bf53e155c1eb6215db388d9f7939f91e21d6af938242c49928b44d1ae`
-- Readiness self digest:
-  `152afb30ca521bdbf6fe954f0afd408cc238119183d55b782c1ffcfdbadff53b`
-- Readiness schema canonical SHA-256:
-  `51bbf66eb8f91e4b7243d2d68ab413d36ffa943d3f6baf00331efda51e943693`
+- M-057 controller:
+  `CodexSkills/governance/promotion/rollback_controller.py`
+- M-057 controller raw SHA-256:
+  `44bd788038cadc6dd89810fbaebf9cefdc5351af96871e982193769eb2ececd2`
+- M-057 readiness:
+  `CodexSkills/governance/promotion/rollback-controller-readiness.json`
+- M-057 readiness raw SHA-256:
+  `9ecdbc1f5cd103d6420cdd2d81b4ab14e94ce50668c6fabfe96ba05a9fd22494`
+- M-057 readiness self digest:
+  `3cf47b465f46a458b2c16b57599462ca6638076cb32ab0e57ab2c86d6c41a93b`
+- Bundle-external drill schema:
+  `urn:linzecolin:agentdatabase:skillops:schema:rollback-drill-evidence:v1`
+- Drill schema raw / canonical SHA-256:
+  `fb0741973e1889e3dc8ac73dd5f1cdcf7c8afc7a34419c669b35ae83b048f0d9` /
+  `05ccf4edce100c3ac1502d7dec3d64418a090a9d38ff5acb04282f488ac7edea`
+- Readiness schema raw / canonical SHA-256:
+  `ef95d965462bf67ee1af9d75951b3e41d1d47856ee206e63bc539e940eb3bb43` /
+  `e945d9df234aba24f38141000f5b26570862c275bf4c063c9ba216de18ea978c`
+- Lifecycle ledger domain: `SKILLOPS_LIFECYCLE_LEDGER_V1`
 - Real Registry observation:
   `89 identities / 89 instances / 89 versions / 0 CHALLENGER / 0 CHAMPION`
-- Real promotion execution permitted: `false`
-- Pending Task Pack task: `M-057`
-- Exact next Phase: `MECHANISM_ROLLBACK_REVOCATION_CONTROLLER`
+- Real rollback/revocation execution permitted: `false`
+- Pending Task Pack task: `M-058`
+- Exact next Phase: `MECHANISM_FRESHNESS_DRIFT_MONITOR`
 
-The M-056 controller is a pure function. It verifies the trusted 31/5
-candidate, externally pinned Registry snapshot, version-to-instance-to-identity
-scope, four-cell causal eval closure, scorecards, hard gates, notification
-receipt semantics, evidence self-digest, decision self-digest, strict ledger
-time order, unique decision/evidence use, an externally pinned predecessor
-ledger digest, and exactly one champion per Identity scope. The ledger digest
-binds the Registry snapshot plus the full ordered decision-digest history. The
-controller returns canonical JCS event bytes but never persists them.
+The M-057 controller is a pure function. It keeps M-056 immutable and delegates
+every `PROMOTE` / `REJECT` step to it against the current derived champion
+map. It adds deterministic `ROLLBACK` / `REVOKE` steps to the same ordered
+lifecycle ledger, so a promotion may still be validated after a restore.
 
-`ROLLBACK` and `REVOKE` fail closed with
-`PROMOTION_ROLLBACK_REVOCATION_PHASE_REQUIRED`. No Registry/state/Git/VERSION
-write, activation, canonical publication, Auto mutation, or verifier call is
-part of this Phase.
+Each rollback/revocation decision is a new `promotion-decision:v1` event. Its
+drill evidence binds the exact Registry snapshot, predecessor lifecycle-ledger
+digest, current champion, restore target, record/model/event provenance,
+notification receipt, and five-kind verification closure. The restore target
+must be derived from the base champion plus ordered prior events in the same
+Identity scope; caller-provided target claims are insufficient. Revoked
+versions are permanently ineligible as restore targets.
+
+Planned actions require `PRE_WRITE_SENT` before the event. Emergency
+containment requires observed containment evidence and
+`POST_CONTAINMENT_SENT`. A failed drill, incomplete reference set, altered
+history, stale predecessor digest, cross-scope target, notification-order
+swap, or post-decision drill fails closed.
+
+The drill and readiness schemas are bundle-external and require explicit
+canonical schema-digest trust. The controller only returns RFC 8785 JCS event
+and evidence bytes plus an immutable derived view. No Registry/state/Git/
+VERSION write, activation, canonical publication, Auto mutation, notifier
+call, or verifier call is part of this Phase.
+
+## M-057 validation
+
+```text
+M-057 targeted controller tests: 10/10 PASS
+complete Mechanism suite: 130/130 PASS
+M-057 builder/schema/readiness: BYTE_EQUIVALENT
+candidate trust: 31 schemas / 5 policies PASS
+Mechanism draft/candidate/resolver/release/v3/promotion/AU-040 builders: PASS
+schema-set lint: 21 / 38 / 24 schemas PASS
+OpenAIDatabase consumer + architecture: 23/23 PASS
+consumer CLI: PASS / errors=[] / canonical publication=false
+Auto draft/transport/promotion builders and lints: PASS
+```
+
+The unchanged cross-owner transition remains explicitly non-green:
+
+```text
+complete Auto suite: 200 tests / 4 failures / 20 errors
+fault/privacy seed 271828: 149 tests / 4 failures / 25 errors
+fault/privacy seed 314159: 149 tests / 4 failures / 25 errors
+root fail-closed codes:
+  BOUND_REFERENCE_RESOLVER_RUNTIME_LOCAL_DRIFT
+  AUTO_BOUND_REFERENCE_RESOLVER_INTERFACE_DRIFT
+  ACTIVATION_CONTROL_INTERFACE_SEMANTIC_MISMATCH
+activation builder/lint:
+  ACTIVATION_BOUND_RESOLVER_INTERFACE_CONTRACT_MISMATCH
+```
+
+M-057 changes no Auto path and does not hide or relabel those existing
+transition failures. The broad OpenAIDatabase command-ownership audit also
+retains its unrelated baseline mismatch (`expected 84, observed 90`).
 
 ## Prior version-policy v3 consumer-readiness handoff
 

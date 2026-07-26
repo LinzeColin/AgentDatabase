@@ -1,1 +1,1 @@
-"""Fail-closed, non-active SkillOps promotion governance."""
+"""Fail-closed, non-active SkillOps promotion and rollback governance."""
