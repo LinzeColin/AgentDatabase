@@ -18,8 +18,32 @@
   `e88ec8c711434619756ee8f91c451e941501764e30e4a7fff310d8685b02140a`
 - Control-bound Auto module count: `27`
 - Current Auto runtime-interface raw SHA-256:
-  `7f2e335b682ec98c15f2e21e74bc0c2af24768cda7e5ed1ddc1b5e341449ac84`
+  `8aa7a179ee7374de974c145017fd671c764a42e073b577ab4b0b4081ff5784b2`
 - Current Auto module count: `27`
+
+## Successor-safe historical evidence corrective
+
+The completed source-content materialization is now verified only from
+immutable Git object
+`sha1:dc653654603f5bfee3bd41890b49cfad700cf541`. The builder reads the
+complete tracked Git trees for the three synchronized paths, recomputes their
+file counts, byte counts, and content digests from Git blobs, and verifies
+that the five reserved namespaces and `codex/context-kernel` were absent at
+that exact materialization object.
+
+Current working-tree payload under `_catalog/**` or `_global/**` is not
+historical Auto evidence and cannot retroactively invalidate the completed
+phase. The sync executor continues to exclude those namespaces from Skill
+enumeration and deletion. This corrective does not parse, trust, or authorize
+current reserved payload: the next Auto resolver integration must consume
+final catalogs and the Registry snapshot only through the Mechanism-owned,
+repo-external immutable snapshot tuple.
+
+The runtime-interface materialization facts and module count remain
+unchanged. Its raw digest changes only because
+`tools/build_runtime_interface.py` is itself one of the 27 exact module
+artifacts and its current digest is recomputed rather than hidden behind the
+pre-corrective bytes.
 
 ## Exact source-content closure
 
@@ -129,10 +153,10 @@ or added time window occurred. The three PAUSED automations were untouched.
 Completion requires and records:
 
 ```text
-Auto full suite: 192/192 PASS
+Auto full suite: 194/194 PASS
 Registry sync + dynamic-profile integration: 15/15 PASS
-fault/privacy seed 271828: 141/141 PASS
-fault/privacy seed 314159: 141/141 PASS
+fault/privacy seed 271828: 143/143 PASS
+fault/privacy seed 314159: 143/143 PASS
 OpenAIDatabase consumer + architecture: 23/23 PASS
 consumer CLI: PASS; errors=[]; canonical publication=false
 Mechanism base 5db: 73/73 PASS

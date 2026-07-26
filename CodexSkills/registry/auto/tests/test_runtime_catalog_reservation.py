@@ -203,16 +203,80 @@ class RuntimeCatalogReservationTests(unittest.TestCase):
             ],
         )
 
-    def test_untracked_source_content_fails_closed(self) -> None:
-        empty = mock.Mock(stdout=b"")
+    def test_source_content_evidence_is_pinned_to_dc653_git_tree(
+        self,
+    ) -> None:
+        original = build_runtime_interface._git_tree_entries
+        observations = []
+
+        def observe(object_id, relative_root):
+            observations.append((object_id, relative_root))
+            return original(object_id, relative_root)
+
         with mock.patch.object(
-            build_runtime_interface.subprocess,
-            "run",
-            return_value=empty,
+            build_runtime_interface,
+            "_git_tree_entries",
+            side_effect=observe,
+        ):
+            evidence = (
+                build_runtime_interface
+                ._source_content_sync_materialization()
+            )
+
+        self.assertTrue(evidence["source_content_sync_complete"])
+        self.assertEqual(
+            {object_id for object_id, _ in observations},
+            {
+                "sha1:"
+                "dc653654603f5bfee3bd41890b49cfad700cf541"
+            },
+        )
+        self.assertEqual(
+            {
+                relative_root
+                for _, relative_root in observations
+                if relative_root.endswith("_catalog")
+                or relative_root.endswith("_global")
+            },
+            {
+                "CodexSkills/registry/agents/_catalog",
+                "CodexSkills/registry/claude/_catalog",
+                "CodexSkills/registry/codex/_catalog",
+                "CodexSkills/registry/codex-system/_catalog",
+                "CodexSkills/registry/_global",
+            },
+        )
+
+    def test_current_reserved_payload_is_not_historical_auto_evidence(
+        self,
+    ) -> None:
+        with mock.patch.object(
+            build_runtime_interface.os.path,
+            "lexists",
+            side_effect=AssertionError(
+                "current working-tree reserved payload was inspected"
+            ),
+        ):
+            evidence = (
+                build_runtime_interface
+                ._source_content_sync_materialization()
+            )
+        self.assertTrue(evidence["reserved_registry_namespaces_preserved"])
+        self.assertFalse(
+            evidence["catalog_or_snapshot_artifacts_generated"]
+        )
+
+    def test_historical_source_content_git_object_drift_fails_closed(
+        self,
+    ) -> None:
+        with mock.patch.object(
+            build_runtime_interface,
+            "SOURCE_CONTENT_SYNC_MATERIALIZATION_GIT_OBJECT",
+            "sha1:" + ("0" * 40),
         ):
             with self.assertRaisesRegex(
                 ValueError,
-                "AUTO_SOURCE_CONTENT_SYNC_GIT_TRACKED_CLOSURE_MISMATCH",
+                "AUTO_SOURCE_CONTENT_SYNC_HISTORICAL_TREE_READ_FAILED",
             ):
                 build_runtime_interface._source_content_sync_materialization()
 

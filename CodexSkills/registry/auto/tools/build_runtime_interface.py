@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import io
 import json
 import os
 import stat
@@ -142,6 +143,9 @@ SOURCE_CONTENT_SYNC_BOUND_AUTO_INTERFACE_RAW_SHA256 = (
 SOURCE_CONTENT_SYNC_BOUND_AUTO_MODULE_COUNT = 27
 SOURCE_CONTENT_SYNC_NEXT_PHASE = (
     "MECHANISM_REGISTRY_PARITY_COMPLETE_MATERIALIZATION"
+)
+SOURCE_CONTENT_SYNC_MATERIALIZATION_GIT_OBJECT = (
+    "sha1:dc653654603f5bfee3bd41890b49cfad700cf541"
 )
 SOURCE_CONTENT_SYNC_ENTRIES = [
     {
@@ -397,6 +401,223 @@ def _git_blob(object_id, relative_path):
             "AUTO_RUNTIME_INTERFACE_HISTORICAL_BLOB_READ_FAILED"
         )
     return result.stdout
+
+
+def _git_tree_entries(object_id, relative_root):
+    if (
+        not object_id.startswith("sha1:")
+        or len(object_id) != len("sha1:") + 40
+        or not relative_root
+        or relative_root.startswith("/")
+        or relative_root.endswith("/")
+        or "\\" in relative_root
+        or any(
+            part in {"", ".", ".."}
+            for part in relative_root.split("/")
+        )
+    ):
+        raise ValueError(
+            "AUTO_SOURCE_CONTENT_SYNC_HISTORICAL_TREE_INPUT_INVALID"
+        )
+    try:
+        result = subprocess.run(
+            [
+                "git",
+                "-C",
+                str(REPO_ROOT),
+                "ls-tree",
+                "-r",
+                "-z",
+                object_id.split(":", 1)[1],
+                "--",
+                relative_root,
+            ],
+            stdin=subprocess.DEVNULL,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            timeout=30,
+            check=False,
+        )
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        raise ValueError(
+            "AUTO_SOURCE_CONTENT_SYNC_HISTORICAL_TREE_READ_FAILED"
+        ) from exc
+    if result.returncode != 0:
+        raise ValueError(
+            "AUTO_SOURCE_CONTENT_SYNC_HISTORICAL_TREE_READ_FAILED"
+        )
+
+    prefix = relative_root + "/"
+    entries = []
+    observed_paths = set()
+    try:
+        records = [row for row in result.stdout.split(b"\0") if row]
+        for record in records:
+            metadata, raw_path = record.split(b"\t", 1)
+            mode, object_type, object_name = metadata.split(b" ", 2)
+            relative_path = raw_path.decode("utf-8")
+            object_id_text = object_name.decode("ascii")
+            if (
+                object_type != b"blob"
+                or mode not in {b"100644", b"100755", b"120000"}
+                or len(object_id_text) != 40
+                or not relative_path.startswith(prefix)
+                or relative_path in observed_paths
+            ):
+                raise ValueError
+            observed_paths.add(relative_path)
+            entries.append(
+                {
+                    "mode": mode.decode("ascii"),
+                    "object_id": object_id_text,
+                    "relative_path": relative_path[len(prefix) :],
+                }
+            )
+    except (UnicodeDecodeError, ValueError) as exc:
+        raise ValueError(
+            "AUTO_SOURCE_CONTENT_SYNC_HISTORICAL_TREE_INVALID"
+        ) from exc
+    return entries
+
+
+def _git_blob_batch(object_ids):
+    ordered = sorted(set(object_ids))
+    if not ordered:
+        return {}
+    if any(len(object_id) != 40 for object_id in ordered):
+        raise ValueError(
+            "AUTO_SOURCE_CONTENT_SYNC_HISTORICAL_BLOB_ID_INVALID"
+        )
+    try:
+        result = subprocess.run(
+            ["git", "-C", str(REPO_ROOT), "cat-file", "--batch"],
+            input=("".join(object_id + "\n" for object_id in ordered)).encode(
+                "ascii"
+            ),
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            timeout=30,
+            check=False,
+        )
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        raise ValueError(
+            "AUTO_SOURCE_CONTENT_SYNC_HISTORICAL_BLOB_READ_FAILED"
+        ) from exc
+    if result.returncode != 0:
+        raise ValueError(
+            "AUTO_SOURCE_CONTENT_SYNC_HISTORICAL_BLOB_READ_FAILED"
+        )
+
+    stream = io.BytesIO(result.stdout)
+    payloads = {}
+    try:
+        for expected_object_id in ordered:
+            header = stream.readline().rstrip(b"\n").split(b" ")
+            if (
+                len(header) != 3
+                or header[0].decode("ascii") != expected_object_id
+                or header[1] != b"blob"
+            ):
+                raise ValueError
+            size = int(header[2])
+            payload = stream.read(size)
+            if len(payload) != size or stream.read(1) != b"\n":
+                raise ValueError
+            payloads[expected_object_id] = payload
+        if stream.read(1):
+            raise ValueError
+    except (UnicodeDecodeError, ValueError) as exc:
+        raise ValueError(
+            "AUTO_SOURCE_CONTENT_SYNC_HISTORICAL_BLOB_INVALID"
+        ) from exc
+    return payloads
+
+
+def _historical_skill_material(relative_root, sync_skills):
+    rows = _git_tree_entries(
+        SOURCE_CONTENT_SYNC_MATERIALIZATION_GIT_OBJECT,
+        relative_root,
+    )
+    included = []
+    for row in rows:
+        parts = row["relative_path"].split("/")
+        if any(part in sync_skills.EXCLUDE_DIRS for part in parts):
+            continue
+        if (
+            row["mode"] != "120000"
+            and parts[-1] in sync_skills.EXCLUDE_FILES
+        ):
+            continue
+        included.append(row)
+
+    payloads = _git_blob_batch(row["object_id"] for row in included)
+    hierarchy = {}
+    for row in included:
+        node = hierarchy
+        parts = row["relative_path"].split("/")
+        for part in parts[:-1]:
+            child = node.setdefault(part, {})
+            if not isinstance(child, dict):
+                raise ValueError(
+                    "AUTO_SOURCE_CONTENT_SYNC_HISTORICAL_TREE_INVALID"
+                )
+            node = child
+        if parts[-1] in node:
+            raise ValueError(
+                "AUTO_SOURCE_CONTENT_SYNC_HISTORICAL_TREE_INVALID"
+            )
+        node[parts[-1]] = ("ENTRY", row)
+
+    ordered_rows = []
+
+    def walk(node):
+        for name in sorted(node, key=lambda value: value.encode("utf-8")):
+            value = node[name]
+            if isinstance(value, dict):
+                walk(value)
+            else:
+                ordered_rows.append(value[1])
+
+    walk(hierarchy)
+    digest = hashlib.sha256()
+    regular_file_count = 0
+    alias_count = 0
+    byte_count = 0
+    source_namespace, slug = relative_root.split("/")[-2:]
+    excluded = sync_skills.repo_owned_files(source_namespace, slug)
+    for row in ordered_rows:
+        payload = payloads[row["object_id"]]
+        kind = (
+            "SYMLINK_ALIAS"
+            if row["mode"] == "120000"
+            else "REGULAR_FILE"
+        )
+        if kind == "REGULAR_FILE":
+            regular_file_count += 1
+            byte_count += len(payload)
+        else:
+            alias_count += 1
+        if row["relative_path"] in excluded:
+            continue
+        digest.update(row["relative_path"].encode("utf-8"))
+        digest.update(b"\0")
+        digest.update(kind.encode("ascii"))
+        digest.update(b"\0")
+        if kind == "REGULAR_FILE":
+            digest.update(hashlib.sha256(payload).hexdigest().encode("ascii"))
+        else:
+            try:
+                digest.update(payload.decode("utf-8").encode("utf-8"))
+            except UnicodeDecodeError as exc:
+                raise ValueError(
+                    "AUTO_SOURCE_CONTENT_SYNC_HISTORICAL_ALIAS_INVALID"
+                ) from exc
+    return {
+        "alias_count": alias_count,
+        "byte_count": byte_count,
+        "content_digest": digest.hexdigest(),
+        "regular_file_count": regular_file_count,
+    }
 
 
 def _consumer_first_evidence(path=CONSUMER_INTERFACE_PATH):
@@ -1323,14 +1544,18 @@ def _source_content_sync_predecessor_observation():
 def _source_content_sync_materialization():
     from CodexSkills import sync_skills
 
-    mirror_root = REPO_ROOT / "CodexSkills" / "registry"
     for relative_path in reserved_registry_paths():
-        target = REPO_ROOT.joinpath(*relative_path.rstrip("/").split("/"))
-        if os.path.lexists(target):
+        if _git_tree_entries(
+            SOURCE_CONTENT_SYNC_MATERIALIZATION_GIT_OBJECT,
+            relative_path.rstrip("/"),
+        ):
             raise ValueError(
-                "AUTO_SOURCE_CONTENT_SYNC_RESERVED_PAYLOAD_PRESENT"
+                "AUTO_SOURCE_CONTENT_SYNC_HISTORICAL_RESERVED_PAYLOAD_PRESENT"
             )
-    if os.path.lexists(mirror_root / "codex" / "context-kernel"):
+    if _git_tree_entries(
+        SOURCE_CONTENT_SYNC_MATERIALIZATION_GIT_OBJECT,
+        "CodexSkills/registry/codex/context-kernel",
+    ):
         raise ValueError("AUTO_SOURCE_CONTENT_SYNC_ABSENT_ROOT_RESTORED")
 
     entries = []
@@ -1338,65 +1563,30 @@ def _source_content_sync_materialization():
         source_namespace, slug = expected[
             "source_relative_path"
         ].split("/", 1)
-        root = mirror_root / source_namespace / slug
-        rows = tuple(
-            sync_skills.walk_entries(
-                root,
-                source_namespace=source_namespace,
-                source_root=mirror_root / source_namespace,
-            )
-        )
-        regular_rows = [row for row in rows if row[2] == "REGULAR_FILE"]
-        alias_rows = [row for row in rows if row[2] != "REGULAR_FILE"]
-        byte_count = sum(os.lstat(row[1]).st_size for row in regular_rows)
-        content_digest = sync_skills.skill_digest(
-            root,
-            sync_skills.repo_owned_files(source_namespace, slug),
-            source_namespace=source_namespace,
-            source_root=mirror_root / source_namespace,
+        observed = _historical_skill_material(
+            (
+                "CodexSkills/registry/"
+                + source_namespace
+                + "/"
+                + slug
+            ),
+            sync_skills,
         )
         if (
-            len(regular_rows) != expected["regular_file_count"]
-            or len(alias_rows) != expected["alias_count"]
-            or byte_count != expected["byte_count"]
-            or content_digest != expected["content_digest"]
+            observed["regular_file_count"]
+            != expected["regular_file_count"]
+            or observed["alias_count"] != expected["alias_count"]
+            or observed["byte_count"] != expected["byte_count"]
+            or observed["content_digest"] != expected["content_digest"]
         ):
             raise ValueError(
-                "AUTO_SOURCE_CONTENT_SYNC_MIRROR_CONTENT_DRIFT"
-            )
-        expected_paths = {
-            (
-                f"CodexSkills/registry/{source_namespace}/{slug}/"
-                f"{row[0].replace(os.sep, '/')}"
-            )
-            for row in rows
-        }
-        tracked = subprocess.run(
-            [
-                "git",
-                "ls-files",
-                "-z",
-                "--",
-                f"CodexSkills/registry/{source_namespace}/{slug}",
-            ],
-            cwd=REPO_ROOT,
-            check=True,
-            stdout=subprocess.PIPE,
-        ).stdout
-        tracked_paths = {
-            item.decode("utf-8")
-            for item in tracked.split(b"\0")
-            if item
-        }
-        if tracked_paths != expected_paths:
-            raise ValueError(
-                "AUTO_SOURCE_CONTENT_SYNC_GIT_TRACKED_CLOSURE_MISMATCH"
+                "AUTO_SOURCE_CONTENT_SYNC_HISTORICAL_CONTENT_DRIFT"
             )
         entries.append(
             {
                 **expected,
                 "exact_source_mirror_content_equal": True,
-                "mirror_content_digest": content_digest,
+                "mirror_content_digest": observed["content_digest"],
                 "source_content_digest": expected["content_digest"],
             }
         )
