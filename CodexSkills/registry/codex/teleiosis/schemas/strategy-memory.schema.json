@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://teleiosis.local/schemas/strategy-memory.schema.json",
+  "title": "Tamper-evident rejected-edit and retained-strategy memory",
+  "type": "object",
+  "required": ["schema_version", "created_at", "updated_at", "head_event_hash", "events"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "head_event_hash": {"type": "string"},
+    "events": {"type": "array", "items": {"$ref": "strategy-event.schema.json"}}
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://linzezhang.com/schemas/teleiosis/utility-guard-result-1.0.json",
+  "title": "Teleiosis Non-Negative Utility Result",
+  "type": "object",
+  "required": ["schema_version", "status", "decision", "metric_results", "policy"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "status": {"const": "PASS"},
+    "decision": {"enum": ["KEEP_CANDIDATE", "KEEP_BASELINE", "REVERT"]},
+    "metric_results": {"type": "array"},
+    "policy": {"type": "object"}
+  }
+}

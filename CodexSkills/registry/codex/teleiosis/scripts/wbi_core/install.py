@@ -149,10 +149,15 @@ def _optimizer_timeout(arguments: List[str]) -> int:
     return value
 
 
-def _optimizer_check(root: Path, arguments: List[str], expected_genesis_hash: str) -> Dict[str, Any]:
+def _optimizer_check(
+    root: Path, arguments: List[str], expected_genesis_hash: str,
+    expected_effective_genesis_hash: str = "",
+) -> Dict[str, Any]:
     command = [sys.executable, str(root / "scripts/wbi.py")] + arguments
     env = {**os.environ, "PYTHONDONTWRITEBYTECODE": "1", "WBI_NESTED_SELF_TEST": "1"}
     env["WBI_EXPECTED_GENESIS_SHA256"] = expected_genesis_hash
+    if expected_effective_genesis_hash:
+        env["WBI_EXPECTED_EFFECTIVE_GENESIS_SHA256"] = expected_effective_genesis_hash
     timeout = _optimizer_timeout(arguments)
     completed = run_bounded(command, cwd=root, env=env, timeout_seconds=timeout)
     return {
@@ -200,6 +205,7 @@ def inspect_install_transaction(
     *,
     verify_installed: bool = False,
     expected_genesis_hash: str = "",
+    expected_effective_genesis_hash: str = "",
     profile: str = "auto",
 ) -> Dict[str, Any]:
     """Inspect one durable install receipt without mutating installation state."""
@@ -254,6 +260,7 @@ def inspect_install_transaction(
         return result
     transaction_profile = str(transaction.get("profile") or profile)
     expected = str(transaction.get("expected_genesis_hash") or expected_genesis_hash)
+    expected_effective = str(transaction.get("expected_effective_genesis_hash") or expected_effective_genesis_hash)
     if not destination.is_dir() or destination.is_symlink():
         result["status"] = "BLOCKED"
         result["installed_verification"] = {"status": "FAIL", "errors": ["committed destination missing or is a symlink"]}
@@ -261,6 +268,7 @@ def inspect_install_transaction(
     validation = validate_skill(
         destination, strict=True,
         expected_genesis_hash=expected if transaction_profile == "optimizer" else "",
+        expected_effective_genesis_hash=expected_effective if transaction_profile == "optimizer" else "",
         profile=transaction_profile,
     )
     expected_tree = str(transaction.get("destination_tree_hash") or transaction.get("staged_tree_hash") or "")
@@ -342,6 +350,7 @@ def _recover_install_transactions_unlocked(
     expected_genesis_hash: str = "",
     profile: str = "auto",
     destination_name: str = "teleiosis",
+    expected_effective_genesis_hash: str = "",
 ) -> Dict[str, Any]:
     """Reconcile interrupted installs from durable transaction receipts.
 
@@ -374,12 +383,14 @@ def _recover_install_transactions_unlocked(
             continue
         transaction_profile = str(transaction.get("profile") or profile)
         expected = str(transaction.get("expected_genesis_hash") or expected_genesis_hash)
+        expected_effective = str(transaction.get("expected_effective_genesis_hash") or expected_effective_genesis_hash)
         staged_tree = str(transaction.get("staged_tree_hash") or "")
         destination_valid = False
         if destination.is_dir():
             validation = validate_skill(
                 destination, strict=True,
                 expected_genesis_hash=expected if transaction_profile == "optimizer" else "",
+                expected_effective_genesis_hash=expected_effective if transaction_profile == "optimizer" else "",
                 profile=transaction_profile,
             )
             destination_valid = validation.get("status") == "PASS" and bool(staged_tree) and sha256_tree(destination, exclude={"MANIFEST.sha256"}) == staged_tree
@@ -429,6 +440,7 @@ def recover_install_transactions(
     expected_genesis_hash: str = "",
     profile: str = "auto",
     destination_name: str = "teleiosis",
+    expected_effective_genesis_hash: str = "",
 ) -> Dict[str, Any]:
     """Safely reconcile interrupted installs while excluding concurrent writers."""
     skills_root_input = Path(skills_root)
@@ -439,7 +451,7 @@ def recover_install_transactions(
     try:
         with _install_lock(skills_root):
             return _recover_install_transactions_unlocked(
-                skills_root, expected_genesis_hash, profile, destination_name
+                skills_root, expected_genesis_hash, profile, destination_name, expected_effective_genesis_hash
             )
     except (InstallBusy, ValueError, OSError) as exc:
         return {"status": "BLOCKED", "recovered": [], "unresolved": [{"error": str(exc)}]}
@@ -461,6 +473,7 @@ def install_archive(
     profile: str = "auto",
     verification_level: str = "structural",
     expected_archive_sha256: str = "",
+    expected_effective_genesis_hash: str = "",
 ) -> Dict[str, Any]:
     archive_input, skills_root_input = Path(archive), Path(skills_root)
     if archive_input.is_symlink():
@@ -504,15 +517,21 @@ def install_archive(
                 return {"status": "FAIL", "stage": "external-genesis-anchor", "errors": ["optimizer installation requires an external Genesis hash anchor"]}
             if resolved_profile == "optimizer" and verification_level in {"release", "deep"} and not normalized_archive_anchor:
                 return {"status": "FAIL", "stage": "external-archive-anchor", "errors": ["release/deep optimizer installation requires an external archive SHA-256 anchor"]}
+            effective_configured = (staged / "constitution/effective-genesis-lock.v0.0.0.2.json").is_file()
+            if resolved_profile == "optimizer" and effective_configured and verification_level in {"release", "deep"} and not expected_effective_genesis_hash:
+                return {"status": "FAIL", "stage": "external-effective-genesis-anchor", "errors": ["release/deep optimizer installation requires an external effective Genesis hash anchor"]}
             if normalized_archive_anchor and frozen["archive_sha256"] != normalized_archive_anchor:
                 return {"status": "FAIL", "stage": "external-archive-anchor", "errors": ["frozen archive SHA-256 differs from external trust anchor"], "archive_sha256": frozen["archive_sha256"]}
 
-            recovered = _recover_install_transactions_unlocked(skills_root, expected_genesis_hash, resolved_profile, staged.name)
+            recovered = _recover_install_transactions_unlocked(
+                skills_root, expected_genesis_hash, resolved_profile, staged.name, expected_effective_genesis_hash
+            )
             if recovered["status"] != "PASS":
                 return {"status": "BLOCKED", "stage": "recovery-required", "recovery": recovered}
 
             validation = validate_skill(
                 staged, strict=True, expected_genesis_hash=expected_genesis_hash if resolved_profile == "optimizer" else "",
+                expected_effective_genesis_hash=expected_effective_genesis_hash if resolved_profile == "optimizer" else "",
                 profile=resolved_profile,
             )
             if validation["status"] != "PASS":
@@ -520,18 +539,23 @@ def install_archive(
 
             checks: Dict[str, Any] = {"profile": resolved_profile, "verification_level": verification_level, "executed_target_code": False, "external_archive_anchor_verified": bool(normalized_archive_anchor)}
             if resolved_profile == "optimizer" and verification_level in {"release", "deep"}:
-                verify = _optimizer_check(staged, ["verify-self", "--strict", "--expected-genesis-hash", expected_genesis_hash], expected_genesis_hash)
+                verify = _optimizer_check(
+                    staged, ["verify-self", "--strict", "--expected-genesis-hash", expected_genesis_hash,
+                             "--expected-effective-genesis-hash", expected_effective_genesis_hash],
+                    expected_genesis_hash, expected_effective_genesis_hash,
+                )
                 checks["verify_self"] = verify
                 if verify["returncode"] != 0:
                     return {"status": "FAIL", "stage": "verify-self", "checks": checks}
-                smoke_args = ["release-smoke", "--expected-genesis-hash", expected_genesis_hash]
-                smoke = _optimizer_check(staged, smoke_args, expected_genesis_hash)
+                smoke_args = ["release-smoke", "--expected-genesis-hash", expected_genesis_hash,
+                              "--expected-effective-genesis-hash", expected_effective_genesis_hash]
+                smoke = _optimizer_check(staged, smoke_args, expected_genesis_hash, expected_effective_genesis_hash)
                 checks["release_smoke"] = smoke
                 checks["executed_target_code"] = True
                 if smoke["returncode"] != 0:
                     return {"status": "FAIL", "stage": "release-smoke", "checks": checks}
                 if verification_level == "deep" and not os.environ.get("WBI_NESTED_SELF_TEST"):
-                    self_test = _optimizer_check(staged, ["self-test"], expected_genesis_hash)
+                    self_test = _optimizer_check(staged, ["self-test"], expected_genesis_hash, expected_effective_genesis_hash)
                     checks["deep_self_test"] = self_test
                     if self_test["returncode"] != 0:
                         return {"status": "FAIL", "stage": "deep-self-test", "checks": checks}
@@ -556,6 +580,7 @@ def install_archive(
                 "archive_bytes": frozen["archive_bytes"], "archive_source_stable": frozen["source_stable"],
                 "profile": resolved_profile, "verification_level": verification_level,
                 "expected_genesis_hash": expected_genesis_hash if resolved_profile == "optimizer" else None,
+                "expected_effective_genesis_hash": expected_effective_genesis_hash if resolved_profile == "optimizer" else None,
                 "expected_archive_sha256": normalized_archive_anchor or None,
                 "external_archive_anchor_verified": bool(normalized_archive_anchor),
                 "destination_name": destination.name, "destination": str(destination),
@@ -611,6 +636,7 @@ def install_archive(
 
             post = validate_skill(
                 destination, strict=True, expected_genesis_hash=expected_genesis_hash if resolved_profile == "optimizer" else "",
+                expected_effective_genesis_hash=expected_effective_genesis_hash if resolved_profile == "optimizer" else "",
                 profile=resolved_profile,
             )
             if post["status"] != "PASS":
@@ -619,13 +645,21 @@ def install_archive(
                 return {"status": "FAIL", "stage": "post-install", "validation": post, "transaction_receipt": str(transaction_path), "rollback": rollback}
 
             if resolved_profile == "optimizer" and verification_level in {"release", "deep"}:
-                post_verify = _optimizer_check(destination, ["verify-self", "--strict", "--expected-genesis-hash", expected_genesis_hash], expected_genesis_hash)
+                post_verify = _optimizer_check(
+                    destination, ["verify-self", "--strict", "--expected-genesis-hash", expected_genesis_hash,
+                                  "--expected-effective-genesis-hash", expected_effective_genesis_hash],
+                    expected_genesis_hash, expected_effective_genesis_hash,
+                )
                 checks["post_install_verify_self"] = post_verify
                 if post_verify["returncode"] != 0:
                     rollback = _rollback_after_failure(destination, backup)
                     _update_transaction(transaction_path, transaction, "ROLLED_BACK" if rollback.get("status") == "PASS" else "FAILED", checks=checks, rollback=rollback)
                     return {"status": "FAIL", "stage": "post-install-verify-self", "checks": checks, "transaction_receipt": str(transaction_path), "rollback": rollback}
-                post_smoke = _optimizer_check(destination, ["release-smoke", "--expected-genesis-hash", expected_genesis_hash], expected_genesis_hash)
+                post_smoke = _optimizer_check(
+                    destination, ["release-smoke", "--expected-genesis-hash", expected_genesis_hash,
+                                  "--expected-effective-genesis-hash", expected_effective_genesis_hash],
+                    expected_genesis_hash, expected_effective_genesis_hash,
+                )
                 checks["post_install_release_smoke"] = post_smoke
                 if post_smoke["returncode"] != 0:
                     rollback = _rollback_after_failure(destination, backup)

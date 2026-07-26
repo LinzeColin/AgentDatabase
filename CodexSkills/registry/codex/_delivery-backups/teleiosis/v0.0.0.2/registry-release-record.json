@@ -1,0 +1,50 @@
+{
+  "schema_version": "1.0",
+  "skill_slug": "teleiosis",
+  "version": "v0.0.0.2",
+  "canonical_install_archive_sha256": "5a9d684bd083aaf9a244d1393e5a87d41864830a03658a6089755f874b583088",
+  "outer_delivery_archive_sha256": "f22b163138a7ee3ce1cbfdc1016955838a57710b4bb6119ece96edd04c33d28b",
+  "genesis_sha256": "14ab08b9053db4ca87140e59a49f1de8105a718a87ec2d55590c6487c1a77086",
+  "effective_genesis_sha256": "fe80c467f8ecbe8343ef0c09ef5e6f9fd9683803c8260c9188998c7e3dfca0a2",
+  "engineering_status": "ENGINEERING_FINAL_INSTALLABLE",
+  "formal_autonomous_promotion": "BLOCKED",
+  "source_control": {
+    "registry_base_commit": "36ce92ddaf2f5cde5b027317e1aaf21bc0f019db",
+    "canonical_tree_sha256": "ea0436951b88e4f1f93cc899162172cb2ff42f4972e27717be3cde66c15f78f2"
+  },
+  "install": {
+    "status": "NOT_PERFORMED_LOCALLY",
+    "reason": "user_requested_github_registry_update_only",
+    "package_reported_status": "PASS",
+    "package_reported_verify_self": "PASS",
+    "package_reported_release_smoke": "PASS",
+    "local_runtime_destination": null
+  },
+  "evidence": {
+    "regression_tests": 284,
+    "deterministic_build": true,
+    "archive_manifest": "PASS",
+    "credential_scan": "PASS",
+    "outcome_status": "NOT_PROVEN",
+    "independent_review_status": "UNAVAILABLE",
+    "current_environment_strength_status": "NOT_PROVEN"
+  },
+  "artifacts": {
+    "canonical_install_archive": "embedded_in_delivery/01_INSTALLABLE/White-Box-Iteration-Skill-Teleiosis-v0.0.0.2-final.zip",
+    "outer_delivery_archive": "CodexSkills/registry/codex/_delivery-backups/teleiosis/v0.0.0.2/White-Box-Iteration-Skill-Teleiosis-v0.0.0.2-FINAL-DELIVERY.zip",
+    "outer_delivery_archive_sha256": "f22b163138a7ee3ce1cbfdc1016955838a57710b4bb6119ece96edd04c33d28b"
+  },
+  "next_evolution_goal": "Obtain genuinely independent 2x6 review evidence plus a separate read-only verifier, then requalify formal autonomous promotion without weakening the locked Genesis or evidence boundaries.",
+  "local_verification": {
+    "install_performed": false,
+    "python": "3.9.6",
+    "verify_self": "PASS",
+    "targeted_tests": "53/53 PASS",
+    "full_self_test": "FAILED_ENVIRONMENT_SPECIFIC",
+    "full_self_test_summary": "284 tests: 4 failures and 7 errors under macOS Python 3.9.6; package evidence reports 284/284 PASS on Linux Python 3.13.5.",
+    "known_environment_findings": [
+      "Path.write_text(newline=...) is unsupported by Python 3.9.",
+      "macOS /var realpath behavior exposes temporary-path contract failures."
+    ]
+  }
+}

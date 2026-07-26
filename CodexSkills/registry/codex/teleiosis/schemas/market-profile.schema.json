@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Teleiosis Market Profile",
+  "type": "object",
+  "required": [
+    "profile_status",
+    "schema_version",
+    "target_class",
+    "adoption_lanes",
+    "next_required_evidence"
+  ],
+  "properties": {
+    "profile_status": {
+      "enum": [
+        "PASS",
+        "FAIL"
+      ]
+    },
+    "schema_version": {
+      "const": "1.0"
+    },
+    "valid_as_of": {
+      "type": "string"
+    },
+    "target": {
+      "type": "string"
+    },
+    "target_class": {
+      "type": "string"
+    },
+    "classification_reasons": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "markers": {
+      "type": "object"
+    },
+    "root_file_bindings": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "adoption_lanes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "lane_id",
+          "source_pattern",
+          "teleiosis_action",
+          "mandatory"
+        ]
+      }
+    },
+    "risk_flags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "next_required_evidence": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

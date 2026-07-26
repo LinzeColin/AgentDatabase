@@ -1,0 +1,54 @@
+{
+  "title": "Teleiosis Control Console",
+  "subtitle": "v0.0.0.2 machine states, evidence leases, decisions and next actions",
+  "version": "v0.0.0.2",
+  "status_domains": {
+    "control_plane": "PENDING_FINAL_SEAL",
+    "benchmark_integrity": "FIXTURE_VALID_REAL_RUNTIME_PENDING",
+    "outcome": "OUTCOME_NOT_PROVEN",
+    "cost_evidence": "PARTIAL",
+    "independent_review": "UNAVAILABLE",
+    "engineering_release": "PENDING_FINAL_SEAL",
+    "formal_promotion": "BLOCKED",
+    "current_environment_strength": "NOT_PROVEN"
+  },
+  "improvements": [
+    "Current-environment claims expire and reheat.",
+    "Behavior coverage and library shadowing are explicit gates.",
+    "Stochastic evidence remains inconclusive until predeclared rules pass.",
+    "Base, effective Genesis and archive hashes are externally anchored."
+  ],
+  "blockers": [
+    "No external 2x6+1 signed review is available in this runtime.",
+    "No equal-budget live-model benchmark proves whole-market outcome leadership.",
+    "Closed systems and inaccessible runtimes remain outside the observed set."
+  ],
+  "next_actions": [
+    "Run real Track A/B/C benchmarks.",
+    "Bind provider usage and human-minute receipts.",
+    "Run registry-scale shadowing tests.",
+    "Execute external verifier and persona panels."
+  ],
+  "metrics": [
+    {
+      "name": "Regression suite",
+      "value": "PENDING_FINAL_SEAL",
+      "evidence": "delivery/VERIFICATION_REPORT.md"
+    },
+    {
+      "name": "Base Genesis SHA-256",
+      "value": "14ab08b9053db4ca87140e59a49f1de8105a718a87ec2d55590c6487c1a77086",
+      "evidence": "constitution/genesis-lock.json"
+    },
+    {
+      "name": "Effective Genesis SHA-256",
+      "value": "fe80c467f8ecbe8343ef0c09ef5e6f9fd9683803c8260c9188998c7e3dfca0a2",
+      "evidence": "constitution/effective-genesis-lock.v0.0.0.2.json"
+    },
+    {
+      "name": "Canonical archive",
+      "value": "White-Box-Iteration-Skill-Teleiosis-v0.0.0.2-final.zip",
+      "evidence": "metadata/release.json"
+    }
+  ]
+}

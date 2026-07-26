@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "No Negative Optimization Guard",
+  "type": "object",
+  "required": [
+    "baseline_id",
+    "candidate_id",
+    "protected_domains",
+    "decision"
+  ],
+  "properties": {
+    "baseline_id": {
+      "type": "string"
+    },
+    "candidate_id": {
+      "type": "string"
+    },
+    "protected_domains": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "regressions": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "decision": {
+      "enum": [
+        "KEEP",
+        "REVERT",
+        "NO_CHANGE",
+        "BLOCKED"
+      ]
+    },
+    "reason": {
+      "type": "string"
+    }
+  }
+}

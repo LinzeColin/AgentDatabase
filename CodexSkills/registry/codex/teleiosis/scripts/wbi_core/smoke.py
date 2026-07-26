@@ -39,6 +39,7 @@ def _cli_surface(root: Path) -> Dict[str, Any]:
         "verify-self", "release-smoke", "self-test", "init-run", "competitors", "freshness-scan",
         "seal-research", "seal-eval", "evaluate", "review-plan", "review-gate", "gate", "package",
         "install", "install-status", "recover-install", "rollback-install", "release-receipt",
+        "peer-audit", "utility-gate", "doctor", "verifier-export", "expert-panel-export", "render-dashboard",
     }
     missing = sorted(item for item in required if item not in result["stdout"])
     return {
@@ -82,7 +83,9 @@ def _generic_release_primitives() -> Dict[str, Any]:
         }
 
 
-def run_release_smoke(root: Path, expected_genesis_hash: str) -> Dict[str, Any]:
+def run_release_smoke(
+    root: Path, expected_genesis_hash: str, expected_effective_genesis_hash: str = ""
+) -> Dict[str, Any]:
     """Run a bounded, non-recursive installation-safe verification profile.
 
     This deliberately does not execute the full unit suite. Full regression is a
@@ -90,7 +93,10 @@ def run_release_smoke(root: Path, expected_genesis_hash: str) -> Dict[str, Any]:
     switch so they cannot recursively test their own installer.
     """
     root = root.resolve()
-    validation = validate_skill(root, strict=True, expected_genesis_hash=expected_genesis_hash, profile="optimizer")
+    validation = validate_skill(
+        root, strict=True, expected_genesis_hash=expected_genesis_hash,
+        expected_effective_genesis_hash=expected_effective_genesis_hash, profile="optimizer"
+    )
     syntax = _parse_python_and_json(root)
     cli = _cli_surface(root)
     primitives = _generic_release_primitives()

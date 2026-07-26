@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://teleiosis.local/schemas/benchmark-contract.schema.json",
+  "title": "Equal-budget Track A/B/C benchmark contract",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "benchmark_id",
+    "valid_as_of",
+    "created_at",
+    "tracks",
+    "systems",
+    "targets",
+    "execution",
+    "budget",
+    "acceptance",
+    "candidate_can_read_holdout",
+    "evidence_class"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "candidate_can_read_holdout": {
+      "const": false
+    },
+    "tracks": {
+      "type": "array",
+      "uniqueItems": true,
+      "contains": {
+        "const": "A_OPTIMIZATION"
+      }
+    },
+    "evidence_class": {
+      "enum": [
+        "REAL_TASK",
+        "FIXTURE"
+      ]
+    }
+  },
+  "additionalProperties": true
+}

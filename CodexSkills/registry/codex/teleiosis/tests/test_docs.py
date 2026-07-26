@@ -41,13 +41,13 @@ class DocumentationTests(unittest.TestCase):
     def test_documented_cli_commands_exist(self):
         completed = subprocess.run([sys.executable, str(ROOT / "scripts/wbi.py"), "--help"], text=True, capture_output=True)
         self.assertEqual(completed.returncode, 0)
-        for command in ("verify-self", "init-run", "competitors", "freshness-scan", "seal-eval", "review-plan", "gate", "package", "install", "install-status", "recover-install"):
+        for command in ("verify-self", "init-run", "competitors", "freshness-scan", "seal-eval", "benchmark-seal", "benchmark-evaluate", "telemetry-aggregate", "status-validate", "review-adapter-check", "review-ablation", "portability-evaluate", "optimize", "run-status", "resume", "explain-block", "review-plan", "gate", "package", "install", "install-status", "recover-install", "peer-audit", "utility-gate", "doctor", "verifier-export", "expert-panel-export", "render-dashboard", "adaptive-plan", "strategy-update", "strategy-next", "showcase", "market-profile", "environment-snapshot", "environment-attest", "coverage-evaluate", "shadowing-evaluate", "stochastic-compare"):
             self.assertIn(command, completed.stdout)
 
     def test_research_registry_is_dated_and_current(self):
         research = (ROOT / "references/RESEARCH_SOURCES.md").read_text(encoding="utf-8")
         self.assertIn("2026-07-26", research)
-        for token in ("darwin-skill", "luban-skill", "SkillOpt", "SkillMOO", "CoEvoSkills", "SkillLens", "MetaSkill-Evolve", "SkillAudit", "SkillsVote", "SkillCoach", "FederatedSkill"):
+        for token in ("darwin-skill", "luban-skill", "SkillOpt", "SkillHone", "SkillRevise", "SkillMOO", "Skill Coverage", "Skill Shadowing", "SkillAxe", "SkillReducer", "AgentAssay", "AgentSkillOS"):
             self.assertIn(token, research)
         for stale in ("2607.16997", "2607.19063", "2607.13666", "2606.23844"):
             self.assertNotIn(stale, research)
@@ -62,9 +62,10 @@ class DocumentationTests(unittest.TestCase):
 
     def test_release_docs_distinguish_structural_and_deep_verification(self):
         install = (ROOT / "delivery/INSTALL.md").read_text(encoding="utf-8")
-        taskpack = (ROOT / "delivery/CODEX_TASK_PACK_v0.0.0.1.md").read_text(encoding="utf-8")
+        taskpack = (ROOT / "delivery/CODEX_TASK_PACK_v0.0.0.2.md").read_text(encoding="utf-8")
         self.assertIn("--verification-level release", install)
         self.assertIn("--expected-archive-sha256", install)
+        self.assertIn("--expected-effective-genesis-hash", install)
         self.assertIn("--result-file", install)
         self.assertIn("install-status", install)
         self.assertIn("recover-install", install)
@@ -77,14 +78,31 @@ class DocumentationTests(unittest.TestCase):
         documents = [
             ROOT / "README.md",
             ROOT / "delivery/INSTALL.md",
-            ROOT / "delivery/CODEX_TASK_PACK_v0.0.0.1.md",
+            ROOT / "delivery/CODEX_TASK_PACK_v0.0.0.2.md",
         ]
         observed = {}
-        archive_pattern = re.compile(r"[A-Za-z][A-Za-z0-9.-]*v0\.0\.0\.1-final\.zip")
+        archive_pattern = re.compile(r"[A-Za-z][A-Za-z0-9.-]*v0\.0\.0\.2-final\.zip")
         for path in documents:
             matches = sorted(set(archive_pattern.findall(path.read_text(encoding="utf-8"))))
             observed[str(path.relative_to(ROOT))] = matches
             self.assertEqual(matches, [canonical_archive], observed)
+
+    def test_exact_links_are_not_misrepresented_as_ai_skills(self):
+        comparison = (ROOT / "delivery/COMPETITIVE_COMPARISON.md").read_text(encoding="utf-8")
+        taxonomy = (ROOT / "references/PEER_TAXONOMY.md").read_text(encoding="utf-8")
+        for slug in ("Curzibn/Luban", "EasyDarwin/EasyDarwin"):
+            self.assertIn(slug, comparison)
+            self.assertIn(slug, taxonomy)
+        self.assertIn("Engineering analogy", comparison)
+        self.assertIn("cannot satisfy", taxonomy)
+
+    def test_outcome_claims_are_bounded(self):
+        corpus = "\n".join((ROOT / item).read_text(encoding="utf-8") for item in [
+            "SKILL.md", "README.md", "delivery/RELEASE_NOTES.md", "references/BENCHMARK_PROTOCOL.md"
+        ])
+        self.assertIn("OUTCOME_NOT_PROVEN", corpus)
+        self.assertNotIn("permanent world-best", corpus.lower())
+        self.assertNotIn("全市场第一，已证明", corpus)
 
 
 if __name__ == "__main__":

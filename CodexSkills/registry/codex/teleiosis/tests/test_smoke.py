@@ -10,11 +10,12 @@ sys.path.insert(0, str(ROOT / "scripts"))
 from wbi_core.smoke import run_release_smoke  # noqa: E402
 
 GENESIS = "14ab08b9053db4ca87140e59a49f1de8105a718a87ec2d55590c6487c1a77086"
+EFFECTIVE = "fe80c467f8ecbe8343ef0c09ef5e6f9fd9683803c8260c9188998c7e3dfca0a2"
 
 
 class ReleaseSmokeTests(unittest.TestCase):
     def test_release_smoke_is_non_recursive_and_covers_install_primitives(self):
-        result = run_release_smoke(ROOT, GENESIS)
+        result = run_release_smoke(ROOT, GENESIS, EFFECTIVE)
         self.assertEqual(result["status"], "PASS", result)
         self.assertFalse(result["recursive_full_suite"])
         self.assertEqual(result["profile"], "optimizer")

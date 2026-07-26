@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://linzezhang.com/schemas/teleiosis/dashboard-data-1.0.json",
+  "title": "Teleiosis Static Dashboard Data",
+  "type": "object",
+  "required": ["title", "version", "status_domains"],
+  "properties": {
+    "title": {"type": "string"},
+    "subtitle": {"type": "string"},
+    "version": {"type": "string"},
+    "status_domains": {"type": "object"},
+    "improvements": {"type": "array"},
+    "blockers": {"type": "array"},
+    "next_actions": {"type": "array"},
+    "metrics": {"type": "array"}
+  }
+}
