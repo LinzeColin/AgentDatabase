@@ -1,4 +1,95 @@
-# Mechanism rollback/revocation-controller handoff
+# Mechanism freshness/drift-monitor handoff
+
+- State: `DRAFT_NON_ACTIVE_FRESHNESS_DRIFT_MONITOR_READY`
+- Phase: `MECHANISM_FRESHNESS_DRIFT_MONITOR`
+- Task Pack tasks completed: `M-056`, `M-057`, `M-058`
+- Required output: `STALE_BEHAVIOR_LATENCY_ALERTS`
+- Done gate: `STALE_SCORE_CANNOT_INDEPENDENTLY_PROMOTE`
+- M-056 immutable predecessor:
+  `sha1:3cc02c15359d5204ad34fc9c20edbc02ec3802f0`
+- M-057 immutable predecessor:
+  `sha1:6d263e02ca6104abca5ae930b5eaa0944d8d5960`
+- M-058 monitor:
+  `CodexSkills/governance/monitoring/freshness_drift.py`
+- M-058 monitor raw SHA-256:
+  `ef703ede2b18c91f907ab6e9db1fedb2923b5fc2a9d456becae4b27a087af1a3`
+- M-058 readiness:
+  `CodexSkills/governance/monitoring/freshness-drift-readiness.json`
+- M-058 readiness raw SHA-256:
+  `416beacd6a72d3d5517211a3758452228bd445ab10fc887928b0575e2865d812`
+- M-058 readiness self digest:
+  `8864203d59f925f8f3110ff1e779ebdb19d26818a337de764596de2de1afa96d`
+- Observation schema canonical SHA-256:
+  `ebda03e6ad49a2fef25b14f5b587bdddbed1075f6fc3fe175b16366b227fca50`
+- Report schema canonical SHA-256:
+  `2b529885458798f070d089bdee8e3fbfa032072a3f74c0c43c8de236c7e57581`
+- Readiness schema canonical SHA-256:
+  `0a6dd000ba0fe23489061cb5332db03361e0714da83370024670a316bea744cc`
+- Real Registry observation:
+  `89 identities / 89 instances / 89 versions / 0 CHALLENGER / 0 CHAMPION`
+- Post-M-057 working-tree drift:
+  `sha1:dd338e19ce2e470863e14783c068f194f64c71c4` restored
+  `registry/codex/context-kernel` without adding it to the four catalogs,
+  assignments, or registered snapshot
+- Registered snapshot/current working-tree parity: `false`
+- Real monitor/promotion execution permitted: `false`
+- Pending Task Pack task: `M-059`
+- Exact next Phase: `MECHANISM_EVALUATOR_RELEASE_POLICY_PROTECTION`
+
+M-058 adds bundle-external, exact-digest-pinned observation and report
+contracts. It recomputes UTC age/date expiry, all seven behavior dimensions,
+p95 latency and sample sufficiency, Skill/model/tool/dependency/dataset/
+evaluator/policy/environment context, incidents, and EvalProfile trigger
+coverage. Any alert requires re-evaluation. An omitted retest trigger becomes
+its own blocking `PROFILE_RETEST_TRIGGER_GAP`; profile omissions cannot hide
+real drift.
+
+The canonical M-058 promotion wrapper requires one recomputed
+`PROMOTION_GATE/PASS` report per Scorecard, exact observation/Profile/
+Scorecard/decision digest closure, and an observation no later than the
+decision. It delegates to the immutable M-056 append function only after those
+checks pass. A stale Scorecard therefore cannot promote merely because its
+stored `freshness_state` still says `FRESH`.
+
+The monitor returns canonical evidence bytes and a deterministic authorization
+digest only. No Registry/state/Git/VERSION write, activation, canonical
+publication, Auto mutation, notification, or verifier call is part of this
+Phase. The real registered snapshot contains no evaluated champion or
+challenger, so execution remains false.
+
+## M-058 validation
+
+```text
+M-058 targeted monitor tests: 10/10 PASS
+complete Mechanism suite: 140/140 PASS
+M-058 builder/schema/readiness: BYTE_EQUIVALENT
+candidate trust: 31 schemas / 5 policies PASS
+Mechanism draft/candidate/resolver/release/v3/promotion/AU-040 builders: PASS
+schema-set lint: 21 / 38 / 24 schemas PASS
+OpenAIDatabase consumer + architecture: 23/23 PASS
+consumer CLI: PASS / errors=[] / canonical publication=false
+Auto draft/transport/promotion builders and lints: PASS
+```
+
+The unchanged cross-owner transition remains explicitly non-green:
+
+```text
+complete Auto suite: 200 tests / 5 failures / 20 errors
+fault/privacy seed 271828: 149 tests / 5 failures / 25 errors
+fault/privacy seed 314159: 149 tests / 5 failures / 25 errors
+root fail-closed codes:
+  AUTO_REGISTRY_MIRROR_SKILL_COUNT_DRIFT
+  BOUND_REFERENCE_RESOLVER_RUNTIME_LOCAL_DRIFT
+  AUTO_BOUND_REFERENCE_RESOLVER_INTERFACE_DRIFT
+  ACTIVATION_CONTROL_INTERFACE_SEMANTIC_MISMATCH
+activation builder/lint:
+  ACTIVATION_BOUND_RESOLVER_INTERFACE_CONTRACT_MISMATCH
+```
+
+M-058 changes no Auto, resolver, activation-control, or OpenAIDatabase path and
+does not hide or relabel those predecessor transition failures.
+
+## Prior M-057 rollback/revocation-controller handoff
 
 - State: `DRAFT_NON_ACTIVE_ROLLBACK_REVOCATION_CONTROLLER_READY`
 - Phase: `MECHANISM_ROLLBACK_REVOCATION_CONTROLLER`
@@ -300,15 +391,16 @@ or BOUND event can be emitted from the real snapshot.
 
 ## Historical missing-root lineage
 
-`codex/context-kernel` remains absent from the current source, mirror,
-catalogs, assignments, and snapshot. Its older 89-root record chain remains
-available only through immutable object `sha1:5db5beec…` and
-`source-drift-reconciliation.v1.json`. Its observation remains `UNOBSERVED`;
-no deletion, lifecycle transition, promotion, or binding is inferred.
+At the registered 89-root object, `codex/context-kernel` was absent from the
+source, mirror, catalogs, assignments, and snapshot. Its older record chain
+remains available through immutable object `sha1:5db5beec…` and
+`source-drift-reconciliation.v1.json`.
 
-Thus current source/mirror parity is complete for 89 roots, while historical
-whole-source/root parity remains false because the old missing root is not
-fabricated.
+The later external `dd338e1` commit restored a working-tree mirror path only;
+it still has no catalog assignment or registered record in the pinned
+snapshot. M-058 does not infer a deletion, registration, evaluation,
+promotion, or BOUND transition from that unreconciled path. Registered-
+snapshot/current-tree parity is therefore false.
 
 ## Closed gates
 

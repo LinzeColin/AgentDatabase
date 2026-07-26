@@ -1,0 +1,115 @@
+{
+  "artifact_digest": "8864203d59f925f8f3110ff1e779ebdb19d26818a337de764596de2de1afa96d",
+  "digest_algorithm": "SHA-256",
+  "monitor_contract": {
+    "alert_categories": [
+      "BEHAVIOR",
+      "CONTEXT",
+      "INCIDENT",
+      "LATENCY",
+      "POLICY_GAP",
+      "STALE"
+    ],
+    "component_path": "CodexSkills/governance/monitoring/freshness_drift.py",
+    "component_source_binding_mode": "SUCCESSOR_EXTERNAL_TUPLE_REQUIRED",
+    "content_digest": "ef703ede2b18c91f907ab6e9db1fedb2923b5fc2a9d456becae4b27a087af1a3",
+    "m056_delegation_after_monitor_gate_only": true,
+    "m056_m057_source_mutation_permitted": false,
+    "observation_schema": {
+      "artifact_digest": "e140387978df48e82e59fe02b236e2425f703f9cfaf1863b73910b1fa5b26963",
+      "canonical_path": "CodexSkills/governance/monitoring/schemas/freshness-drift-observation.schema.json",
+      "schema_sha256": "ebda03e6ad49a2fef25b14f5b587bdddbed1075f6fc3fe175b16366b227fca50",
+      "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:freshness-drift-observation:v1",
+      "self_digest_pointer": "/evidence_bundle_digest"
+    },
+    "promotion_gate_mode": "PROMOTION_GATE",
+    "public_artifact_write_permitted": false,
+    "report_recomputation_required": true,
+    "report_schema": {
+      "artifact_digest": "77e6b0962befe42a65f382ff0ac3aee2ff54c87be86efa73dba8a052cb93f232",
+      "canonical_path": "CodexSkills/governance/monitoring/schemas/freshness-drift-report.schema.json",
+      "schema_sha256": "2b529885458798f070d089bdee8e3fbfa032072a3f74c0c43c8de236c7e57581",
+      "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:freshness-drift-report:v1",
+      "self_digest_pointer": "/evidence_bundle_digest"
+    },
+    "stale_score_independent_promotion_permitted": false,
+    "state_write_permitted": false
+  },
+  "next_phase": "MECHANISM_EVALUATOR_RELEASE_POLICY_PROTECTION",
+  "nonmutation": {
+    "activation_forbidden": true,
+    "auto_plane_unchanged": true,
+    "candidate_bundle_unchanged": true,
+    "canonical_publication_permitted": false,
+    "monitor_execution_permitted": false,
+    "registry_write_permitted": false,
+    "version_file_created": false
+  },
+  "owner_plane": "MECHANISM",
+  "protocol_revision": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1",
+  "registry_observation": {
+    "base_champion_count": 0,
+    "challenger_version_count": 0,
+    "identity_count": 89,
+    "instance_count": 89,
+    "real_monitor_execution_permitted": false,
+    "reason_code": "NO_REGISTERED_EVALUATED_CHAMPION_OR_CHALLENGER",
+    "snapshot_status": "REGISTERED",
+    "version_count": 89
+  },
+  "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:freshness-drift-readiness:v1",
+  "self_digest_pointer": "/artifact_digest",
+  "source_trust": {
+    "candidate_bundle": {
+      "artifact_digest": "66ad125629cab71739ff2bc266219f995f7a45998936ca720c6db678ee77e65a",
+      "bundle_digest": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e",
+      "canonical_path": "CodexSkills/governance/bundles/schema-bundle-manifest.v1.json",
+      "expected_mode": "CANDIDATE",
+      "policy_count": 5,
+      "schema_count": 31,
+      "verified_git_object_id": "sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5"
+    },
+    "m056_controller": {
+      "artifact_digest": "bcc39aaa1e6c817fb321a8772996a05fffffe947cd8bbc218a5f7bad16db3e53",
+      "canonical_path": "CodexSkills/governance/promotion/controller.py",
+      "expected_mode": "M056_IMMUTABLE_PREDECESSOR",
+      "readiness_artifact": {
+        "artifact_digest": "d54d577bf53e155c1eb6215db388d9f7939f91e21d6af938242c49928b44d1ae",
+        "canonical_path": "CodexSkills/governance/promotion/controller-readiness.json"
+      },
+      "verified_git_object_id": "sha1:3cc02c15359d5204ad34fc9c20edbc02ec3802f0"
+    },
+    "m057_controller": {
+      "artifact_digest": "44bd788038cadc6dd89810fbaebf9cefdc5351af96871e982193769eb2ececd2",
+      "canonical_path": "CodexSkills/governance/promotion/rollback_controller.py",
+      "expected_mode": "M057_IMMUTABLE_PREDECESSOR",
+      "readiness_artifact": {
+        "artifact_digest": "9ecdbc1f5cd103d6420cdd2d81b4ab14e94ce50668c6fabfe96ba05a9fd22494",
+        "canonical_path": "CodexSkills/governance/promotion/rollback-controller-readiness.json"
+      },
+      "verified_git_object_id": "sha1:6d263e02ca6104abca5ae930b5eaa0944d8d5960"
+    },
+    "registry_snapshot": {
+      "artifact_digest": "ed5fb74fa88a2f1115a716be5e63f683d206c10d3d0a2005230d4c33d4c12c98",
+      "canonical_path": "CodexSkills/registry/_global/registry-snapshot.v1.json",
+      "expected_mode": "REGISTERED_READ_ONLY",
+      "registry_snapshot_digest": "7b5a74bd459a4737299444b68439c1799ba8a2159032636a24a987113eee9d12",
+      "verified_git_object_id": "sha1:98e193e74991346d266bdd94ae720c32f25dfb47"
+    },
+    "repository_self_report_is_not_trust_root": true
+  },
+  "status": "DRAFT_NON_ACTIVE_FRESHNESS_DRIFT_MONITOR_READY",
+  "task_contract": {
+    "completed_task_ids": [
+      "M-056",
+      "M-057",
+      "M-058"
+    ],
+    "done_gate": "STALE_SCORE_CANNOT_INDEPENDENTLY_PROMOTE",
+    "pending_task_ids": [
+      "M-059"
+    ],
+    "required_output": "STALE_BEHAVIOR_LATENCY_ALERTS"
+  },
+  "task_pack_revision": "v0.0.0.2"
+}

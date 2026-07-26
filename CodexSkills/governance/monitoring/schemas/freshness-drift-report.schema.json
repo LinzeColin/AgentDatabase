@@ -1,0 +1,299 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:freshness-drift-report:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "actor": {
+      "const": "SKILLOPS_FRESHNESS_DRIFT_MONITOR"
+    },
+    "alerts": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "action_code": {
+            "enum": [
+              "INVESTIGATE",
+              "REEVALUATE"
+            ]
+          },
+          "category": {
+            "enum": [
+              "BEHAVIOR",
+              "CONTEXT",
+              "INCIDENT",
+              "LATENCY",
+              "POLICY_GAP",
+              "STALE"
+            ]
+          },
+          "code": {
+            "enum": [
+              "BEHAVIOR_SCORE_CHANGE",
+              "DATASET_CHANGE",
+              "DEPENDENCY_CHANGE",
+              "ENVIRONMENT_CHANGE",
+              "EVALUATOR_CHANGE",
+              "INCIDENT_OBSERVED",
+              "LATENCY_P95_REGRESSION",
+              "LATENCY_SAMPLE_INSUFFICIENT",
+              "MODEL_CHANGE",
+              "POLICY_CHANGE",
+              "PROFILE_RETEST_TRIGGER_GAP",
+              "SCORECARD_MAX_AGE_EXCEEDED",
+              "SCORECARD_STATE_STALE",
+              "SCORECARD_STATE_UNKNOWN",
+              "SCORECARD_VALIDITY_EXPIRED",
+              "SKILL_CHANGE",
+              "TOOL_CHANGE"
+            ]
+          },
+          "evidence_digest": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+          },
+          "severity": {
+            "enum": [
+              "CRITICAL",
+              "WARNING"
+            ]
+          },
+          "subject_codes": {
+            "items": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/enum_code"
+            },
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "action_code",
+          "category",
+          "code",
+          "evidence_digest",
+          "severity",
+          "subject_codes"
+        ],
+        "type": "object"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "eval_profile_ref": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_digest": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+        },
+        "eval_profile_uid": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/eval_profile_uid"
+        }
+      },
+      "required": [
+        "eval_profile_uid",
+        "artifact_digest"
+      ],
+      "type": "object"
+    },
+    "evidence_bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "freshness": {
+      "additionalProperties": false,
+      "properties": {
+        "age_microseconds": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+        },
+        "deadline_at": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+        },
+        "evaluated_at": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+        },
+        "freshness_valid_until": {
+          "anyOf": [
+            {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/calendar_date"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "max_age_days": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/positive_count"
+        },
+        "state": {
+          "enum": [
+            "FRESH",
+            "STALE",
+            "UNKNOWN"
+          ]
+        }
+      },
+      "required": [
+        "state",
+        "evaluated_at",
+        "deadline_at",
+        "freshness_valid_until",
+        "age_microseconds",
+        "max_age_days"
+      ],
+      "type": "object"
+    },
+    "generated_at": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+    },
+    "missing_profile_trigger_codes": {
+      "items": {
+        "enum": [
+          "DATASET_CHANGE",
+          "DEPENDENCY_CHANGE",
+          "EVALUATOR_CHANGE",
+          "INCIDENT",
+          "MODEL_CHANGE",
+          "POLICY_CHANGE",
+          "SCORE_DRIFT",
+          "SKILL_CHANGE",
+          "TOOL_CHANGE"
+        ]
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "mode": {
+      "enum": [
+        "MONITOR_ONLY",
+        "PROMOTION_GATE"
+      ]
+    },
+    "observation_ref": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_digest": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+        }
+      },
+      "required": [
+        "artifact_digest"
+      ],
+      "type": "object"
+    },
+    "promotion_decision_ref": {
+      "anyOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "decision_digest": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+            }
+          },
+          "required": [
+            "decision_digest"
+          ],
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "promotion_gate": {
+      "additionalProperties": false,
+      "properties": {
+        "re_evaluation_required": {
+          "type": "boolean"
+        },
+        "scorecard_effective_promotion_eligible": {
+          "type": "boolean"
+        },
+        "stale_score_independent_promotion_permitted": {
+          "const": false
+        },
+        "status": {
+          "enum": [
+            "BLOCKED",
+            "NOT_EVALUATED",
+            "PASS"
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "scorecard_effective_promotion_eligible",
+        "stale_score_independent_promotion_permitted",
+        "re_evaluation_required"
+      ],
+      "type": "object"
+    },
+    "protocol_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/protocol_revision"
+    },
+    "report_uid": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/typed_uid"
+    },
+    "retest_trigger_codes": {
+      "items": {
+        "enum": [
+          "DATASET_CHANGE",
+          "DEPENDENCY_CHANGE",
+          "EVALUATOR_CHANGE",
+          "INCIDENT",
+          "MODEL_CHANGE",
+          "POLICY_CHANGE",
+          "SCORE_DRIFT",
+          "SKILL_CHANGE",
+          "TOOL_CHANGE"
+        ]
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:freshness-drift-report:v1"
+    },
+    "scorecard_ref": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_digest": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+        },
+        "scorecard_uid": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/scorecard_uid"
+        }
+      },
+      "required": [
+        "scorecard_uid",
+        "artifact_digest"
+      ],
+      "type": "object"
+    },
+    "skill_version_uid": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/skill_version_uid"
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "bundle_digest",
+    "report_uid",
+    "mode",
+    "skill_version_uid",
+    "scorecard_ref",
+    "eval_profile_ref",
+    "observation_ref",
+    "promotion_decision_ref",
+    "generated_at",
+    "freshness",
+    "alerts",
+    "retest_trigger_codes",
+    "missing_profile_trigger_codes",
+    "promotion_gate",
+    "actor",
+    "evidence_bundle_digest"
+  ],
+  "title": "Freshness and drift report",
+  "type": "object"
+}

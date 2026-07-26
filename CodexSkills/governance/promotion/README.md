@@ -52,3 +52,9 @@ The restore-drill and readiness schemas remain bundle-external. Callers must
 pin the drill schema's canonical digest explicitly; the repository copy cannot
 authorize itself. This Phase still performs no state write, notification,
 activation, or canonical publication.
+
+Task Pack M-058 adds a later canonical authorization boundary under
+`../monitoring/freshness_drift.py`. The M-056 append function remains immutable
+predecessor logic, but a current `PROMOTE` authorization must first carry a
+recomputed `PROMOTION_GATE/PASS` freshness/drift report for every referenced
+Scorecard. Calling M-056 directly does not prove that M-058 passed.

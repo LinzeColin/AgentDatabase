@@ -47,6 +47,11 @@ Key entrypoints:
 - `tools/build_rollback_revocation_controller.py`: deterministic M-057
   bundle-external drill schema and readiness bound to the immutable M-056
   predecessor, final candidate, and registered read-only Registry snapshot.
+- `monitoring/freshness_drift.py`: pure M-058 stale/behavior/latency/context
+  monitor and exact report-recomputation gate in front of M-056 promotion.
+- `tools/build_freshness_drift_monitor.py`: deterministic M-058
+  bundle-external observation/report schemas and non-active readiness bound to
+  the immutable M-056/M-057 predecessors.
 - `tools/validate_au040_semantic_acceptance.py`: exact 365-day and
   shard/index/manifest/publication cross-artifact gates.
 - `tests/test_mechanism_contract.py`: positive, negative, and fault gates.
@@ -93,6 +98,8 @@ Run from the repository root with the explicitly provisioned interpreter:
 /usr/bin/python3 -B \
   CodexSkills/governance/tools/build_rollback_revocation_controller.py \
   --check
+/usr/bin/python3 -B \
+  CodexSkills/governance/tools/build_freshness_drift_monitor.py --check
 /usr/bin/python3 -B CodexSkills/governance/tools/validate_mechanism.py lint-draft
 /usr/bin/python3 -B \
   CodexSkills/governance/tools/validate_activation.py lint-control
@@ -230,11 +237,12 @@ PromotionDecision, and cannot emit BOUND. Real resolution therefore remains
 proves the resolver's exact seven-field BOUND output, including
 controlled-invocation, content/tree, version-record, and snapshot digests.
 
-`codex/context-kernel` remains absent and `UNOBSERVED`. Its older records are
-retained only through the immutable historical reconciliation object; no
-current catalog entry, deletion transition, promotion, or binding is
-fabricated. Current 89-root source/mirror parity is complete, while historical
-whole-source/root parity remains false.
+At the registered 89-root object, `codex/context-kernel` is absent and
+`UNOBSERVED`; its older records remain only in immutable historical evidence.
+The later external `dd338e1` commit restored a working-tree mirror path without
+adding a catalog assignment or registered snapshot record. That unreconciled
+path does not create a deletion transition, registration, promotion, or
+binding. Registered-snapshot/current-tree parity is therefore false.
 
 Two independent prerequisite lanes remain explicit:
 
@@ -251,3 +259,12 @@ Two independent prerequisite lanes remain explicit:
 Schedule authority, resolver production trust, external Gmail/state readiness,
 runtime state-instance creation, AU-040 completion, M0c-B, ACTIVE trust,
 canonical shard creation, and canonical publication remain false.
+
+The M-058 monitor is also bundle-external and non-active. It never trusts a
+stored `freshness_state` alone: UTC age/date expiry, behavior scores, latency
+sample/p95 evidence, execution context, incidents, and EvalProfile trigger
+coverage are recomputed into one exact report. A `PROMOTE` append must enter
+through the monitored wrapper with one `PROMOTION_GATE/PASS` report per
+Scorecard; the immutable M-056 function is called only after that closure
+passes. Repository presence, a caller-supplied clear flag, or an omitted
+retest trigger cannot authorize promotion.

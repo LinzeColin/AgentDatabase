@@ -1,0 +1,272 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:freshness-drift-observation:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "actor": {
+      "const": "SKILLOPS_FRESHNESS_DRIFT_MONITOR"
+    },
+    "behavior_metrics": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "dimension_code": {
+            "enum": [
+              "EFFICIENCY",
+              "MAINTAINABILITY",
+              "NEGATIVE_CAPABILITY",
+              "OUTCOME",
+              "RELIABILITY",
+              "ROUTING",
+              "SAFETY_GOVERNANCE"
+            ]
+          },
+          "evidence_digest": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+          },
+          "score_bps": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/basis_points"
+          }
+        },
+        "required": [
+          "dimension_code",
+          "score_bps",
+          "evidence_digest"
+        ],
+        "type": "object"
+      },
+      "maxItems": 7,
+      "minItems": 7,
+      "type": "array"
+    },
+    "bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "context": {
+      "additionalProperties": false,
+      "properties": {
+        "dataset_manifest_digests": {
+          "items": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "environment_fingerprint_digest": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+        },
+        "evaluator_manifest_digests": {
+          "items": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "model_snapshot_digest": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+        },
+        "policy_snapshot_digest": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+        },
+        "tool_manifest_digest": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+        }
+      },
+      "required": [
+        "model_snapshot_digest",
+        "tool_manifest_digest",
+        "dataset_manifest_digests",
+        "evaluator_manifest_digests",
+        "policy_snapshot_digest",
+        "environment_fingerprint_digest"
+      ],
+      "type": "object"
+    },
+    "critical_incident_count": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "critical_incident_evidence_digests": {
+      "items": {
+        "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "dependency_context": {
+      "additionalProperties": false,
+      "properties": {
+        "baseline": {
+          "additionalProperties": false,
+          "properties": {
+            "dependency_manifest_digest": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+            }
+          },
+          "required": [
+            "dependency_manifest_digest"
+          ],
+          "type": "object"
+        },
+        "current": {
+          "additionalProperties": false,
+          "properties": {
+            "dependency_manifest_digest": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+            }
+          },
+          "required": [
+            "dependency_manifest_digest"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "baseline",
+        "current"
+      ],
+      "type": "object"
+    },
+    "eval_profile_ref": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_digest": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+        },
+        "eval_profile_uid": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/eval_profile_uid"
+        }
+      },
+      "required": [
+        "eval_profile_uid",
+        "artifact_digest"
+      ],
+      "type": "object"
+    },
+    "evidence_bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "latency": {
+      "additionalProperties": false,
+      "properties": {
+        "baseline": {
+          "additionalProperties": false,
+          "properties": {
+            "evidence_digest": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+            },
+            "max_milliseconds": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+            },
+            "p50_milliseconds": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+            },
+            "p95_milliseconds": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+            },
+            "sample_count": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+            }
+          },
+          "required": [
+            "sample_count",
+            "p50_milliseconds",
+            "p95_milliseconds",
+            "max_milliseconds",
+            "evidence_digest"
+          ],
+          "type": "object"
+        },
+        "current": {
+          "additionalProperties": false,
+          "properties": {
+            "evidence_digest": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+            },
+            "max_milliseconds": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+            },
+            "p50_milliseconds": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+            },
+            "p95_milliseconds": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+            },
+            "sample_count": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+            }
+          },
+          "required": [
+            "sample_count",
+            "p50_milliseconds",
+            "p95_milliseconds",
+            "max_milliseconds",
+            "evidence_digest"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "baseline",
+        "current"
+      ],
+      "type": "object"
+    },
+    "observation_uid": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/typed_uid"
+    },
+    "observed_at": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+    },
+    "protocol_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/protocol_revision"
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:freshness-drift-observation:v1"
+    },
+    "scorecard_ref": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_digest": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+        },
+        "scorecard_uid": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/scorecard_uid"
+        }
+      },
+      "required": [
+        "scorecard_uid",
+        "artifact_digest"
+      ],
+      "type": "object"
+    },
+    "skill_version_record_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "skill_version_uid": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/skill_version_uid"
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "bundle_digest",
+    "observation_uid",
+    "skill_version_uid",
+    "skill_version_record_digest",
+    "scorecard_ref",
+    "eval_profile_ref",
+    "context",
+    "dependency_context",
+    "behavior_metrics",
+    "latency",
+    "critical_incident_count",
+    "critical_incident_evidence_digests",
+    "observed_at",
+    "actor",
+    "evidence_bundle_digest"
+  ],
+  "title": "Freshness and drift observation",
+  "type": "object"
+}
