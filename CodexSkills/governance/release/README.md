@@ -46,6 +46,22 @@ authority unresolved for both reads. The real Auto consumers remain
 v2/candidate-only; therefore cross-plane readiness and candidate
 materialization remain false until the Auto-owned dual-read Phase completes.
 
+`policy_protection.py` is the non-active M-059 guard. It recomputes differences
+across EvalProfiles, evaluator/holdout/judge inputs, promotion-controller
+bytes, and five release-policy descriptors. Detected changes are classified
+only through the exact version-policy v3 MAJOR vocabulary. The Skill promotion
+lane never writes a protected change: optimizer-originated changes are
+blocked, while independent changes are sent to a separate MAJOR release lane.
+
+The same guard closes the M-051 dependency with an exact seven-operation
+access-denial audit. Optimizer attempts to read sealed labels or write the
+evaluator, EvalProfile, rubric, hard gates, promotion controller, or release
+policy must all be denied with distinct evidence. A caller flag, missing
+attempt, shared actor reference, reused evidence digest, or altered report
+fails closed. Only an unchanged protected snapshot can delegate through M-058
+and then M-056; none of these pure functions writes state, Git, VERSION,
+notification, or public artifacts.
+
 Validate from the repository root:
 
 ```bash
@@ -66,4 +82,9 @@ Validate from the repository root:
   --check
 /usr/bin/python3 -B -m unittest \
   CodexSkills.governance.tests.test_version_policy_v3_consumer_readiness
+/usr/bin/python3 -B \
+  CodexSkills/governance/tools/build_evaluator_release_protection.py \
+  --check
+/usr/bin/python3 -B -m unittest \
+  CodexSkills.governance.tests.test_evaluator_release_protection
 ```

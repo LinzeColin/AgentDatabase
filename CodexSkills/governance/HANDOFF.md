@@ -1,4 +1,105 @@
-# Mechanism freshness/drift-monitor handoff
+# Mechanism evaluator/release-policy protection handoff
+
+- State: `DRAFT_NON_ACTIVE_EVALUATOR_RELEASE_POLICY_PROTECTION_READY`
+- Phase: `MECHANISM_EVALUATOR_RELEASE_POLICY_PROTECTION`
+- Task Pack tasks completed: `M-056`, `M-057`, `M-058`, `M-059`
+- M-059 dependencies: `M-051`, `M-056`
+- Required output: `MAJOR_CLASSIFIER_AND_CHANGE_ISOLATION`
+- Done gate: `OPTIMIZER_SELF_JUDGE_BLOCKED`
+- M-056 immutable predecessor:
+  `sha1:3cc02c15359d5204ad34fc9c20edbc02ec3802f0`
+- M-058 immutable predecessor:
+  `sha1:3d3c202ee629d79eadfb027da131e1afcb88a1f2`
+- M-059 guard:
+  `CodexSkills/governance/release/policy_protection.py`
+- M-059 guard raw SHA-256:
+  `13728feaaed54fefe1e43d2c7edc4b2777917b5237bee266bc897aa06ef65743`
+- M-059 readiness:
+  `CodexSkills/governance/release/evaluator-release-protection-readiness.json`
+- M-059 readiness raw SHA-256:
+  `344eaace3906bc03ede4520512887939c10fb37cea073ddbac306dccfd364f5f`
+- M-059 readiness self digest:
+  `b77cc4f395f4247b43fbeceee88ab34ccc2bae4ef5d2899a9932856b0cbebbb8`
+- Observation schema canonical SHA-256:
+  `f080f5bbcad6f49b084a02e6f8abc91a2b7899da3c849a31d96ba546e76a99d9`
+- Report schema canonical SHA-256:
+  `c6ffeb9b74014dfc7b63dd0bd887d5c759213be18085d6a79097da9d24ddef28`
+- Readiness schema canonical SHA-256:
+  `c18b4ccf071684913a6a4e3cea291e56e67c6d77b6cc1834492389d197ea2c12`
+- Classifier policy:
+  `urn:linzecolin:agentdatabase:skillops:policy:version:v3`
+- Classifier policy canonical SHA-256:
+  `5ea6047446ef26ab39d0e284f37619859d57c8c419daa1cffefffdc12935cfe0`
+- Real Registry observation:
+  `89 identities / 89 instances / 89 versions / 0 CHALLENGER / 0 CHAMPION`
+- Registered snapshot/current working-tree parity: `false`
+- Real protection/promotion execution permitted: `false`
+- Pending Task Pack task: `M-060`
+- Exact next Phase:
+  `MECHANISM_PROTECTED_LOCAL_DATA_MANAGED_RAW_BOUNDARY`
+
+M-059 adds two bundle-external, exact-digest-pinned contracts and one pure
+guard. The observation contains complete baseline/proposed EvalProfiles,
+five release-policy descriptors, promotion-controller bytes, change-origin
+role binding, and an exact seven-operation access-denial audit. Optimizer
+attempts to read sealed labels or write evaluator, EvalProfile, rubric, hard
+gates, promotion controller, or release policy must all be `DENIED` with
+distinct evidence; missing, reordered, allowed, reused, late, or cross-role
+claims fail closed.
+
+The guard recomputes every protected difference. Evaluator/holdout/judge,
+weights/hard gates, promotion-controller, notification, privacy, retention,
+source-material, and version-policy changes map to the locked version-policy
+v3 MAJOR trigger vocabulary. Impact cannot be supplied or downgraded by the
+caller. An optimizer-originated change is blocked; an independently originated
+change is isolated to a separate MAJOR release and remains ineligible for the
+Skill promotion transaction.
+
+Only an unchanged protected snapshot with an exact audit may delegate through
+the immutable M-058 freshness gate, which then delegates to M-056. A forged
+PASS report is recomputed and rejected. The guard returns canonical report and
+authorization bytes only. It never writes Registry, state, Git, VERSION,
+notification, activation, or public artifacts.
+
+The real registered snapshot still has no evaluated champion or challenger.
+The later `dd338e1` context-kernel mirror remains absent from catalogs,
+assignments, and the pinned registered snapshot, so no real M-059 execution or
+BOUND attribution is inferred.
+
+## M-059 validation
+
+```text
+M-059 targeted protection tests: 10/10 PASS
+complete Mechanism suite: 150/150 PASS
+M-059 builder/schema/readiness: BYTE_EQUIVALENT
+candidate trust: 31 schemas / 5 policies PASS
+Mechanism draft/candidate/resolver/release/v3/promotion/rollback/
+  freshness/AU-040 builders and lints: PASS
+schema-set lint: 21 / 41 / 24 / 30 schemas PASS
+OpenAIDatabase consumer + architecture: 23/23 PASS
+consumer CLI: PASS / errors=[] / canonical publication=false
+```
+
+The pre-existing cross-owner transition remains fail-closed and is not
+modified or relabeled by M-059:
+
+```text
+complete Auto suite: 200 tests / 5 failures / 20 errors
+fault/privacy seed 271828: 149 tests / 5 failures / 25 errors
+fault/privacy seed 314159: 149 tests / 5 failures / 25 errors
+AUTO_REGISTRY_MIRROR_SKILL_COUNT_DRIFT
+BOUND_REFERENCE_RESOLVER_RUNTIME_LOCAL_DRIFT
+AUTO_BOUND_REFERENCE_RESOLVER_INTERFACE_DRIFT
+ACTIVATION_CONTROL_INTERFACE_SEMANTIC_MISMATCH
+activation builder/lint:
+  ACTIVATION_BOUND_RESOLVER_INTERFACE_CONTRACT_MISMATCH
+```
+
+No Auto, resolver, activation-control, candidate-bundle, policy,
+OpenAIDatabase, or VERSION path changes belong to M-059. No verifier call or
+historical Task Pack replay belongs to development.
+
+## Prior M-058 freshness/drift-monitor handoff
 
 - State: `DRAFT_NON_ACTIVE_FRESHNESS_DRIFT_MONITOR_READY`
 - Phase: `MECHANISM_FRESHNESS_DRIFT_MONITOR`

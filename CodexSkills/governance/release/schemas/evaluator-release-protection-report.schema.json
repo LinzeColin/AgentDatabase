@@ -1,0 +1,306 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:evaluator-release-protection-report:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "actor": {
+      "const": "SKILLOPS_EVALUATOR_RELEASE_GUARD"
+    },
+    "baseline_eval_profile_refs": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "artifact_digest": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+          },
+          "eval_profile_uid": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/eval_profile_uid"
+          },
+          "skill_identity_uid": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/skill_identity_uid"
+          }
+        },
+        "required": [
+          "skill_identity_uid",
+          "eval_profile_uid",
+          "artifact_digest"
+        ],
+        "type": "object"
+      },
+      "minItems": 1,
+      "type": "array"
+    },
+    "bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "classification": {
+      "additionalProperties": false,
+      "properties": {
+        "impact_downgrade_allowed": {
+          "const": false
+        },
+        "policy_id": {
+          "const": "urn:linzecolin:agentdatabase:skillops:policy:version:v3"
+        },
+        "policy_sha256": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+        },
+        "unknown_trigger_action": {
+          "const": "FAIL_CLOSED"
+        }
+      },
+      "required": [
+        "policy_id",
+        "policy_sha256",
+        "impact_downgrade_allowed",
+        "unknown_trigger_action"
+      ],
+      "type": "object"
+    },
+    "detected_changes": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "change_code": {
+            "enum": [
+              "EVALUATION_DATA_CHANGE",
+              "EVALUATION_POLICY_CHANGE",
+              "EVALUATOR_MANIFEST_CHANGE",
+              "EVAL_PROFILE_RECORD_CHANGE",
+              "EVAL_PROFILE_SET_CHANGE",
+              "HARD_GATE_SET_CHANGE",
+              "JUDGE_CALIBRATION_CHANGE",
+              "JUDGE_RUBRIC_CHANGE",
+              "JUDGE_WEIGHT_CHANGE",
+              "PROMOTION_CONTROLLER_CHANGE",
+              "RELEASE_NOTIFICATION_POLICY_CHANGE",
+              "RELEASE_POLICY_SNAPSHOT_CHANGE",
+              "RELEASE_PRIVACY_POLICY_CHANGE",
+              "RELEASE_RETENTION_POLICY_CHANGE",
+              "RELEASE_SOURCE_POLICY_CHANGE",
+              "RELEASE_VERSION_POLICY_CHANGE",
+              "SEALED_HOLDOUT_CHANGE"
+            ]
+          },
+          "evidence_digest": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+          },
+          "major_trigger_code": {
+            "enum": [
+              "EVALUATOR_OR_HOLDOUT_CHANGE",
+              "HARD_GATE_CHANGE",
+              "NOTIFICATION_POLICY_CHANGE",
+              "PRIVACY_POLICY_CHANGE",
+              "RETENTION_POLICY_CHANGE",
+              "SOURCE_LAYOUT_CHANGE"
+            ]
+          },
+          "subject_codes": {
+            "items": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/enum_code"
+            },
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "change_code",
+          "major_trigger_code",
+          "subject_codes",
+          "evidence_digest"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "evidence_bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "generated_at": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+    },
+    "impact": {
+      "enum": [
+        "MAJOR",
+        "NONE"
+      ]
+    },
+    "isolation_gate": {
+      "additionalProperties": false,
+      "properties": {
+        "all_forbidden_attempts_denied": {
+          "const": true
+        },
+        "denied_attempt_count": {
+          "const": 7
+        },
+        "forbidden_attempt_count": {
+          "const": 7
+        },
+        "optimizer_evaluator_isolation_digest": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+        },
+        "roles_distinct": {
+          "const": true
+        },
+        "status": {
+          "const": "PASS"
+        }
+      },
+      "required": [
+        "status",
+        "optimizer_evaluator_isolation_digest",
+        "roles_distinct",
+        "forbidden_attempt_count",
+        "denied_attempt_count",
+        "all_forbidden_attempts_denied"
+      ],
+      "type": "object"
+    },
+    "major_trigger_codes": {
+      "items": {
+        "enum": [
+          "EVALUATOR_OR_HOLDOUT_CHANGE",
+          "HARD_GATE_CHANGE",
+          "NOTIFICATION_POLICY_CHANGE",
+          "PRIVACY_POLICY_CHANGE",
+          "RETENTION_POLICY_CHANGE",
+          "SOURCE_LAYOUT_CHANGE"
+        ]
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "observation_ref": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_digest": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+        }
+      },
+      "required": [
+        "artifact_digest"
+      ],
+      "type": "object"
+    },
+    "promotion_decision_ref": {
+      "additionalProperties": false,
+      "properties": {
+        "decision_digest": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+        }
+      },
+      "required": [
+        "decision_digest"
+      ],
+      "type": "object"
+    },
+    "promotion_evidence_ref": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_digest": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+        }
+      },
+      "required": [
+        "artifact_digest"
+      ],
+      "type": "object"
+    },
+    "promotion_gate": {
+      "additionalProperties": false,
+      "properties": {
+        "m058_delegation_permitted": {
+          "type": "boolean"
+        },
+        "optimizer_self_improvement_permitted": {
+          "const": false
+        },
+        "protected_release_write_permitted": {
+          "const": false
+        },
+        "reason_code": {
+          "enum": [
+            "INDEPENDENT_MAJOR_RELEASE_REQUIRED",
+            "OPTIMIZER_PROTECTED_CHANGE_BLOCKED",
+            "PROTECTED_SURFACES_UNCHANGED"
+          ]
+        },
+        "separate_major_release_required": {
+          "type": "boolean"
+        },
+        "status": {
+          "enum": [
+            "BLOCKED",
+            "PASS"
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "reason_code",
+        "optimizer_self_improvement_permitted",
+        "protected_release_write_permitted",
+        "separate_major_release_required",
+        "m058_delegation_permitted"
+      ],
+      "type": "object"
+    },
+    "proposed_eval_profile_refs": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "artifact_digest": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+          },
+          "eval_profile_uid": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/eval_profile_uid"
+          },
+          "skill_identity_uid": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/skill_identity_uid"
+          }
+        },
+        "required": [
+          "skill_identity_uid",
+          "eval_profile_uid",
+          "artifact_digest"
+        ],
+        "type": "object"
+      },
+      "minItems": 1,
+      "type": "array"
+    },
+    "protocol_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/protocol_revision"
+    },
+    "report_uid": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/typed_uid"
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:evaluator-release-protection-report:v1"
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "bundle_digest",
+    "report_uid",
+    "promotion_decision_ref",
+    "promotion_evidence_ref",
+    "observation_ref",
+    "baseline_eval_profile_refs",
+    "proposed_eval_profile_refs",
+    "detected_changes",
+    "major_trigger_codes",
+    "impact",
+    "classification",
+    "isolation_gate",
+    "promotion_gate",
+    "generated_at",
+    "actor",
+    "evidence_bundle_digest"
+  ],
+  "title": "Evaluator and release-policy protection report",
+  "type": "object"
+}

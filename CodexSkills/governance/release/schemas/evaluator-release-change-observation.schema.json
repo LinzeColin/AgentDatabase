@@ -1,0 +1,328 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:evaluator-release-change-observation:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "actor": {
+      "const": "SKILLOPS_EVALUATOR_RELEASE_GUARD"
+    },
+    "baseline_eval_profiles": {
+      "items": {
+        "$ref": "urn:linzecolin:agentdatabase:skillops:schema:eval-profile:v1"
+      },
+      "minItems": 1,
+      "type": "array"
+    },
+    "baseline_release_snapshot": {
+      "additionalProperties": false,
+      "properties": {
+        "policy_descriptors": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "policy_code": {
+                "enum": [
+                  "NOTIFICATION",
+                  "PUBLIC_VALUE",
+                  "RETENTION",
+                  "SOURCE_MATERIAL",
+                  "VERSION"
+                ]
+              },
+              "policy_id": {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/urn_id"
+              },
+              "policy_sha256": {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+              }
+            },
+            "required": [
+              "policy_code",
+              "policy_id",
+              "policy_sha256"
+            ],
+            "type": "object"
+          },
+          "maxItems": 5,
+          "minItems": 5,
+          "type": "array"
+        },
+        "policy_snapshot_digest": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+        },
+        "promotion_controller": {
+          "additionalProperties": false,
+          "properties": {
+            "artifact_digest": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+            },
+            "canonical_path": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/repo_relative_posix_path"
+            }
+          },
+          "required": [
+            "canonical_path",
+            "artifact_digest"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "policy_snapshot_digest",
+        "policy_descriptors",
+        "promotion_controller"
+      ],
+      "type": "object"
+    },
+    "bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "change_origin": {
+      "additionalProperties": false,
+      "properties": {
+        "actor_ref": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/enum_code"
+        },
+        "source_role": {
+          "enum": [
+            "INDEPENDENT_EVALUATOR",
+            "OPTIMIZER",
+            "RELEASE_AUTHORIZER"
+          ]
+        }
+      },
+      "required": [
+        "source_role",
+        "actor_ref"
+      ],
+      "type": "object"
+    },
+    "evidence_bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "isolation_audit": {
+      "additionalProperties": false,
+      "properties": {
+        "allowed_forbidden_attempt_count": {
+          "const": 0
+        },
+        "attempts": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "attempt_code": {
+                "enum": [
+                  "OPTIMIZER_READ_SEALED_LABELS",
+                  "OPTIMIZER_WRITE_EVALUATOR",
+                  "OPTIMIZER_WRITE_EVAL_PROFILE",
+                  "OPTIMIZER_WRITE_HARD_GATES",
+                  "OPTIMIZER_WRITE_PROMOTION_CONTROLLER",
+                  "OPTIMIZER_WRITE_RELEASE_POLICY",
+                  "OPTIMIZER_WRITE_RUBRIC"
+                ]
+              },
+              "evidence_digest": {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+              },
+              "operation": {
+                "enum": [
+                  "READ",
+                  "WRITE"
+                ]
+              },
+              "outcome": {
+                "const": "DENIED"
+              },
+              "resource_code": {
+                "enum": [
+                  "EVALUATOR",
+                  "EVAL_PROFILE",
+                  "HARD_GATES",
+                  "PROMOTION_CONTROLLER",
+                  "RELEASE_POLICY",
+                  "RUBRIC",
+                  "SEALED_LABELS"
+                ]
+              }
+            },
+            "required": [
+              "attempt_code",
+              "resource_code",
+              "operation",
+              "outcome",
+              "evidence_digest"
+            ],
+            "type": "object"
+          },
+          "maxItems": 7,
+          "minItems": 7,
+          "type": "array"
+        },
+        "audit_uid": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/typed_uid"
+        },
+        "completed_at": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+        },
+        "denied_attempt_count": {
+          "const": 7
+        },
+        "evaluator_actor_ref": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/enum_code"
+        },
+        "forbidden_attempt_count": {
+          "const": 7
+        },
+        "optimizer_actor_ref": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/enum_code"
+        },
+        "release_actor_ref": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/enum_code"
+        },
+        "roles_distinct": {
+          "const": true
+        }
+      },
+      "required": [
+        "audit_uid",
+        "optimizer_actor_ref",
+        "evaluator_actor_ref",
+        "release_actor_ref",
+        "roles_distinct",
+        "attempts",
+        "forbidden_attempt_count",
+        "denied_attempt_count",
+        "allowed_forbidden_attempt_count",
+        "completed_at"
+      ],
+      "type": "object"
+    },
+    "observation_uid": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/typed_uid"
+    },
+    "observed_at": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+    },
+    "optimizer_evaluator_isolation_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "promotion_decision_ref": {
+      "additionalProperties": false,
+      "properties": {
+        "decision_digest": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+        }
+      },
+      "required": [
+        "decision_digest"
+      ],
+      "type": "object"
+    },
+    "promotion_evidence_ref": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_digest": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+        }
+      },
+      "required": [
+        "artifact_digest"
+      ],
+      "type": "object"
+    },
+    "proposed_eval_profiles": {
+      "items": {
+        "$ref": "urn:linzecolin:agentdatabase:skillops:schema:eval-profile:v1"
+      },
+      "minItems": 1,
+      "type": "array"
+    },
+    "proposed_release_snapshot": {
+      "additionalProperties": false,
+      "properties": {
+        "policy_descriptors": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "policy_code": {
+                "enum": [
+                  "NOTIFICATION",
+                  "PUBLIC_VALUE",
+                  "RETENTION",
+                  "SOURCE_MATERIAL",
+                  "VERSION"
+                ]
+              },
+              "policy_id": {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/urn_id"
+              },
+              "policy_sha256": {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+              }
+            },
+            "required": [
+              "policy_code",
+              "policy_id",
+              "policy_sha256"
+            ],
+            "type": "object"
+          },
+          "maxItems": 5,
+          "minItems": 5,
+          "type": "array"
+        },
+        "policy_snapshot_digest": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+        },
+        "promotion_controller": {
+          "additionalProperties": false,
+          "properties": {
+            "artifact_digest": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+            },
+            "canonical_path": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/repo_relative_posix_path"
+            }
+          },
+          "required": [
+            "canonical_path",
+            "artifact_digest"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "policy_snapshot_digest",
+        "policy_descriptors",
+        "promotion_controller"
+      ],
+      "type": "object"
+    },
+    "protocol_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/protocol_revision"
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:evaluator-release-change-observation:v1"
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "bundle_digest",
+    "observation_uid",
+    "promotion_decision_ref",
+    "promotion_evidence_ref",
+    "baseline_eval_profiles",
+    "proposed_eval_profiles",
+    "baseline_release_snapshot",
+    "proposed_release_snapshot",
+    "change_origin",
+    "isolation_audit",
+    "optimizer_evaluator_isolation_digest",
+    "observed_at",
+    "actor",
+    "evidence_bundle_digest"
+  ],
+  "title": "Evaluator and release-policy change observation",
+  "type": "object"
+}

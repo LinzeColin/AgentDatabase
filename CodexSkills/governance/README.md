@@ -52,6 +52,12 @@ Key entrypoints:
 - `tools/build_freshness_drift_monitor.py`: deterministic M-058
   bundle-external observation/report schemas and non-active readiness bound to
   the immutable M-056/M-057 predecessors.
+- `release/policy_protection.py`: pure M-059 protected-surface classifier,
+  seven-operation optimizer access-denial gate, and exact M-059 → M-058 →
+  M-056 promotion delegation.
+- `tools/build_evaluator_release_protection.py`: deterministic M-059
+  bundle-external observation/report schemas and non-active readiness bound to
+  the candidate, M-056, M-058, and version-policy v3 trust roots.
 - `tools/validate_au040_semantic_acceptance.py`: exact 365-day and
   shard/index/manifest/publication cross-artifact gates.
 - `tests/test_mechanism_contract.py`: positive, negative, and fault gates.
@@ -100,6 +106,9 @@ Run from the repository root with the explicitly provisioned interpreter:
   --check
 /usr/bin/python3 -B \
   CodexSkills/governance/tools/build_freshness_drift_monitor.py --check
+/usr/bin/python3 -B \
+  CodexSkills/governance/tools/build_evaluator_release_protection.py \
+  --check
 /usr/bin/python3 -B CodexSkills/governance/tools/validate_mechanism.py lint-draft
 /usr/bin/python3 -B \
   CodexSkills/governance/tools/validate_activation.py lint-control
@@ -268,3 +277,20 @@ through the monitored wrapper with one `PROMOTION_GATE/PASS` report per
 Scorecard; the immutable M-056 function is called only after that closure
 passes. Repository presence, a caller-supplied clear flag, or an omitted
 retest trigger cannot authorize promotion.
+
+M-059 adds a second bundle-external gate in front of that monitored promotion
+path. It validates exact denied attempts for optimizer reads of sealed labels
+and writes to evaluator, EvalProfile, rubric, hard gates, promotion controller,
+and release policy. Actor references must be distinct, the change-origin role
+must bind its exact actor, and the isolation digest is recomputed rather than
+trusted from a caller flag.
+
+EvalProfile, judge, holdout, promotion-controller, and all five release-policy
+descriptors are compared deterministically. Every detected protected change is
+classified through the exact version-policy v3 vocabulary and must resolve to
+`MAJOR`. An optimizer-originated change is blocked; an independently
+originated change is isolated to a separate MAJOR release and still cannot
+reuse the Skill promotion transaction. Only an unchanged protected snapshot
+with a complete access-denial audit may delegate to M-058. The guard returns
+canonical evidence only and does not authorize release writes, notification,
+Registry/state mutation, activation, or publication.
