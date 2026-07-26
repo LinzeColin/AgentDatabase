@@ -79,8 +79,16 @@ RESOLVER_REQUEST_ID = (
     "urn:linzecolin:agentdatabase:skillops:schema:"
     "bound-reference-request:v1"
 )
+RESOLVER_DRIFT_ID = (
+    "urn:linzecolin:agentdatabase:skillops:schema:"
+    "registry-source-drift-reconciliation:v1"
+)
 RESOLVER_BINDING_ID = (
     "urn:linzecolin:agentdatabase:skillops:schema:skill-binding:v1"
+)
+RESOLVER_DRIFT_REPO_PATH = (
+    "CodexSkills/governance/registry/"
+    "source-drift-reconciliation.v1.json"
 )
 
 PROTOCOL_REVISION = "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1"
@@ -91,12 +99,12 @@ CANDIDATE_BUNDLE_GIT_OBJECT_ID = (
     "sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5"
 )
 AUTO_RUNTIME_GIT_OBJECT_ID = (
-    "sha1:49ac09dbd9c8a2e18d5a199088a910dc77e7d365"
+    "sha1:b5a32c817e4016f595fa33caed6bce1d51199e63"
 )
 AUTO_RUNTIME_INTERFACE_RAW_SHA256 = (
-    "c7af9d1406fe2ed084d5a30fab6cded3897a83c1602e6c40587cf28c75a2c75c"
+    "e88ec8c711434619756ee8f91c451e941501764e30e4a7fff310d8685b02140a"
 )
-AUTO_RUNTIME_MODULE_COUNT = 26
+AUTO_RUNTIME_MODULE_COUNT = 27
 AUTO_SOURCE_CONTROL_GIT_OBJECT_ID = (
     "sha1:e6438db785c2f3f38da59be7ba9c1cd46651d7ea"
 )
@@ -702,8 +710,6 @@ def _verified_resolver_interface() -> tuple[bytes, Mapping[str, Any]]:
         not isinstance(interface, dict)
         or interface.get("artifact_digest")
         != canonical_digest(interface, "/artifact_digest")
-        or interface.get("status")
-        != "DRAFT_NON_ACTIVE_RESOLVER_IMPLEMENTED"
         or interface.get("protocol_revision") != PROTOCOL_REVISION
         or interface.get("bundle_digest") != CANDIDATE_BUNDLE_DIGEST
         or interface.get("candidate_git_object_id")
@@ -712,24 +718,39 @@ def _verified_resolver_interface() -> tuple[bytes, Mapping[str, Any]]:
         != CANDIDATE_MANIFEST_REPO_PATH
         or interface.get("candidate_trust_mode") != "CANDIDATE"
         or interface.get("catalog_count") != 4
-        or interface.get("catalog_path_reservation_required") is not True
+        or interface.get("catalog_path_reservation_complete") is not True
+        or interface.get("catalog_path_reservation_required") is not False
         or interface.get("current_materialization_promotable") is not False
         or interface.get("exact_byte_promotion_required") is not True
         or interface.get("exact_byte_promotion_scope")
-        != "POST_PARITY_COMPLETE_SUCCESSOR_MATERIALIZATION"
+        != (
+            "POST_SOURCE_CONTENT_SYNC_PARITY_COMPLETE_"
+            "SUCCESSOR_MATERIALIZATION"
+        )
         or interface.get("post_reservation_rebuild_required") is not True
+        or interface.get("post_source_content_sync_rebuild_required")
+        is not True
+        or interface.get("source_drift_reconciliation_complete")
+        is not True
+        or interface.get("source_content_sync_required") is not True
         or interface.get("auto_integration_complete") is not False
         or interface.get("production_trust_permitted") is not False
         or interface.get("canonical_publication_permitted") is not False
         or interface.get("activation_forbidden") is not True
         or interface.get("next_phase")
-        != "AUTO_REGISTRY_CATALOG_PATH_RESERVATION"
+        != "AUTO_REGISTRY_SOURCE_CONTENT_SYNC"
+        or interface.get("schema_entry_count") != 4
+        or interface.get("status")
+        != "DRAFT_NON_ACTIVE_SOURCE_DRIFT_RECONCILED"
     ):
         raise ContractError(
             "ACTIVATION_BOUND_RESOLVER_INTERFACE_CONTRACT_MISMATCH"
         )
     snapshot = interface.get("registry_snapshot", {})
     contract = interface.get("resolver_contract", {})
+    reconciliation = interface.get(
+        "source_drift_reconciliation", {}
+    )
     if (
         not isinstance(snapshot, dict)
         or snapshot.get("binding_eligible_version_count") != 0
@@ -751,9 +772,65 @@ def _verified_resolver_interface() -> tuple[bytes, Mapping[str, Any]]:
         != RESOLVER_REQUEST_ID
         or contract.get("fail_closed_unknown_reason_code")
         != "MAPPING_NOT_PROVABLE"
+        or not isinstance(reconciliation, dict)
+        or reconciliation.get("schema_id") != RESOLVER_DRIFT_ID
+        or reconciliation.get("relative_path")
+        != RESOLVER_DRIFT_REPO_PATH
+        or reconciliation.get("status")
+        != "DRAFT_NON_ACTIVE_SOURCE_DRIFT_RECONCILED"
+        or reconciliation.get(
+            "source_drift_reconciliation_complete"
+        )
+        is not True
+        or reconciliation.get("historical_registry_records_retained")
+        is not True
+        or reconciliation.get("current_source_skill_count") != 88
+        or reconciliation.get("current_source_alias_count") != 20
+        or reconciliation.get("source_alias_parity_satisfied") is not True
+        or reconciliation.get("source_root_parity_satisfied") is not False
+        or reconciliation.get("whole_source_parity_satisfied") is not False
+        or reconciliation.get("missing_source_skill_roots")
+        != ["codex/context-kernel"]
+        or reconciliation.get("pending_content_drift_paths")
+        != [
+            "codex/graphify",
+            "codex/persona-distiller-group",
+            "codex/verifier",
+        ]
+        or reconciliation.get("auto_evidence")
+        != {
+            "artifact_digest": AUTO_RUNTIME_INTERFACE_RAW_SHA256,
+            "verified_git_object_id": AUTO_RUNTIME_GIT_OBJECT_ID,
+        }
     ):
         raise ContractError(
             "ACTIVATION_BOUND_RESOLVER_INTERFACE_CONTRACT_MISMATCH"
+        )
+    try:
+        reconciliation_raw = REPO_ROOT.joinpath(
+            *RESOLVER_DRIFT_REPO_PATH.split("/")
+        ).read_bytes()
+    except OSError as exc:
+        raise ContractError(
+            "ACTIVATION_SOURCE_DRIFT_RECONCILIATION_READ_FAILED"
+        ) from exc
+    reconciliation_artifact = parse_json_bytes(reconciliation_raw)
+    if (
+        not isinstance(reconciliation_artifact, dict)
+        or reconciliation_artifact.get("schema_version")
+        != RESOLVER_DRIFT_ID
+        or reconciliation_artifact.get("status")
+        != "DRAFT_NON_ACTIVE_SOURCE_DRIFT_RECONCILED"
+        or reconciliation_artifact.get("artifact_digest")
+        != canonical_digest(
+            reconciliation_artifact,
+            "/artifact_digest",
+        )
+        or reconciliation_artifact.get("artifact_digest")
+        != reconciliation.get("artifact_digest")
+    ):
+        raise ContractError(
+            "ACTIVATION_SOURCE_DRIFT_RECONCILIATION_MISMATCH"
         )
     return current, interface
 
@@ -829,6 +906,9 @@ def _preflight_inputs(
     resolver_contract = auto_interface.get(
         "bound_reference_resolver_dependency_contract", {}
     )
+    reservation = auto_interface.get(
+        "catalog_reservation_materialization_snapshot", {}
+    )
     if (
         auto_interface.get("status") != "DRAFT_NON_ACTIVE"
         or auto_interface.get("auto_exact_bundle_integration_complete")
@@ -873,6 +953,21 @@ def _preflight_inputs(
         or auto_interface.get("repository_bound") is not False
         or auto_interface.get("bound_reference_resolver_gate_satisfied")
         is not False
+        or auto_interface.get("catalog_path_reservation_complete")
+        is not True
+        or auto_interface.get("registry_source_alias_parity_satisfied")
+        is not True
+        or auto_interface.get("registry_mirror_alias_parity_satisfied")
+        is not True
+        or auto_interface.get("registry_source_root_parity_satisfied")
+        is not False
+        or auto_interface.get("registry_whole_source_parity_satisfied")
+        is not False
+        or auto_interface.get("registry_alias_set_digest")
+        != (
+            "75f6db86e5a18cc000985dc32a719ac7e0bc15b22b2e3f20"
+            "c0d32d3138f27387"
+        )
         or auto_interface.get("au_040_complete") is not False
         or auto_interface.get("au_040_schema_promotion_complete") is not True
         or auto_interface.get(
@@ -934,14 +1029,14 @@ def _preflight_inputs(
         )
         != "CodexSkills/registry/auto/tools/validate_au040_publisher.py"
         or auto_interface.get("au_040_authority_ruling_status")
-        != "REPOSITORY_BINDING_INTEGRATED_CONTROL_SYNC_PENDING"
+        != "REGISTRY_CATALOG_RESERVED_SOURCE_DRIFT_PENDING"
         or auto_interface.get("notification_production_transport")
         != "GMAIL_API_V1"
         or auto_interface.get("notification_provider_readback_required") is not True
         or auto_interface.get("notification_test_transport_production_forbidden")
         is not True
         or auto_interface.get("next_phase")
-        != "MECHANISM_POST_AU040_REPOSITORY_BINDING_CONTROL_SYNC"
+        != "MECHANISM_REGISTRY_SOURCE_DRIFT_RECONCILIATION"
         or not isinstance(transport, dict)
         or transport.get("current_candidate_schema_count") != 31
         or transport.get("final_candidate_materialization_complete")
@@ -1023,8 +1118,30 @@ def _preflight_inputs(
         != [
             "FOUR_SOURCE_IDENTITY_INSTANCE_VERSION_CATALOGS",
             "GLOBAL_SKILL_IDENTITY_RECORDS",
-            "MECHANISM_RESOLVER_ARTIFACT",
-            "VERSIONED_REGISTRY_SNAPSHOT_CONTRACT",
+            "PROMOTABLE_VERSIONED_REGISTRY_SNAPSHOT",
+        ]
+        or not isinstance(reservation, dict)
+        or reservation.get("as_of_phase")
+        != "AUTO_REGISTRY_CATALOG_PATH_RESERVATION"
+        or reservation.get("catalog_path_reservation_complete")
+        is not True
+        or reservation.get("catalog_or_snapshot_artifacts_generated")
+        is not False
+        or reservation.get("current_source_skill_count") != 88
+        or reservation.get("historical_source_skill_count") != 89
+        or reservation.get("source_alias_count") != 20
+        or reservation.get("mirror_alias_count") != 20
+        or reservation.get("source_alias_parity_satisfied") is not True
+        or reservation.get("mirror_alias_parity_satisfied") is not True
+        or reservation.get("source_root_parity_satisfied") is not False
+        or reservation.get("whole_source_parity_satisfied") is not False
+        or reservation.get("missing_source_skill_roots")
+        != ["codex/context-kernel"]
+        or reservation.get("non_alias_content_drift_observed_paths")
+        != [
+            "codex/graphify",
+            "codex/persona-distiller-group",
+            "codex/verifier",
         ]
         or transport.get("schema_promotion_interface_raw_sha256")
         != AUTO_PROMOTION_INTERFACE_RAW_SHA256
@@ -1092,6 +1209,9 @@ def control_interface(schemas: Mapping[str, Mapping[str, Any]]) -> Dict[str, Any
     resolver_raw = RESOLVER_INTERFACE_PATH.read_bytes()
     resolver_interface = parse_json_bytes(resolver_raw)
     resolver_snapshot = resolver_interface["registry_snapshot"]
+    source_drift = resolver_interface[
+        "source_drift_reconciliation"
+    ]
     paths = {
         INTENT_ID: INTENT_SCHEMA_PATH,
         SETTLEMENT_ID: SETTLEMENT_SCHEMA_PATH,
@@ -1123,13 +1243,15 @@ def control_interface(schemas: Mapping[str, Mapping[str, Any]]) -> Dict[str, Any
             "binding_eligible_version_count": resolver_snapshot[
                 "binding_eligible_version_count"
             ],
-            "catalog_path_reservation_required": True,
+            "catalog_path_reservation_complete": True,
+            "catalog_path_reservation_required": False,
             "current_snapshot_can_emit_bound": False,
             "current_snapshot_promotable": False,
             "gate_satisfied": False,
             "implementation_complete": True,
             "production_trust_permitted": False,
             "post_reservation_rebuild_required": True,
+            "post_source_content_sync_rebuild_required": True,
             "registry_snapshot_digest": resolver_snapshot[
                 "registry_snapshot_digest"
             ],
@@ -1139,7 +1261,26 @@ def control_interface(schemas: Mapping[str, Mapping[str, Any]]) -> Dict[str, Any
             "registry_snapshot_schema_id": resolver_snapshot["schema_id"],
             "relative_path": RESOLVER_INTERFACE_REPO_PATH,
             "source_mirror_parity_satisfied": False,
-            "status": "DRAFT_NON_ACTIVE_RESOLVER_IMPLEMENTED",
+            "source_content_sync_required": True,
+            "source_drift_reconciliation": {
+                "artifact_digest": source_drift["artifact_digest"],
+                "historical_registry_records_retained": True,
+                "missing_source_skill_roots": source_drift[
+                    "missing_source_skill_roots"
+                ],
+                "pending_content_drift_paths": source_drift[
+                    "pending_content_drift_paths"
+                ],
+                "relative_path": source_drift["relative_path"],
+                "schema_id": source_drift["schema_id"],
+                "source_alias_parity_satisfied": True,
+                "source_drift_reconciliation_complete": True,
+                "source_root_parity_satisfied": False,
+                "whole_source_parity_satisfied": False,
+            },
+            "status": (
+                "DRAFT_NON_ACTIVE_SOURCE_DRIFT_RECONCILED"
+            ),
         },
         "candidate_bundle_git_object_id": CANDIDATE_BUNDLE_GIT_OBJECT_ID,
         "candidate_manifest_path": CANDIDATE_MANIFEST_REPO_PATH,
@@ -1172,7 +1313,7 @@ def control_interface(schemas: Mapping[str, Mapping[str, Any]]) -> Dict[str, Any
             "timing": "PRE_WRITE",
             "transport": "GMAIL_API_V1",
         },
-        "next_phase": "AUTO_REGISTRY_CATALOG_PATH_RESERVATION",
+        "next_phase": "AUTO_REGISTRY_SOURCE_CONTENT_SYNC",
         "protocol_revision": PROTOCOL_REVISION,
         "publication_contract": {
             "caller_boolean_is_not_trust_root": True,
@@ -1204,6 +1345,7 @@ def control_interface(schemas: Mapping[str, Mapping[str, Any]]) -> Dict[str, Any
             "auto_runtime_integration_complete": True,
             "bound_reference_resolver_auto_integration_complete": False,
             "bound_reference_resolver_implementation_complete": True,
+            "catalog_path_reservation_complete": True,
             "auto_runtime_source_candidate": {
                 "bundle_digest": SOURCE_AUTO_CANDIDATE_BUNDLE_DIGEST,
                 "policy_count": 5,
@@ -1229,15 +1371,19 @@ def control_interface(schemas: Mapping[str, Mapping[str, Any]]) -> Dict[str, Any
             "runtime_shard_writer_integration_complete": True,
             "runtime_state_instance_created": False,
             "runtime_state_write_gate_status": (
-                "BOUND_REFERENCE_RESOLVER_AUTO_INTEGRATION_PENDING"
+                "BOUND_REFERENCE_RESOLVER_SOURCE_CONTENT_SYNC_PENDING"
             ),
             "runtime_state_write_permitted": True,
             "schedule_authority_resolved": False,
             "schedule_complete": False,
+            "source_content_sync_required": True,
+            "source_drift_reconciliation_complete": True,
         },
         "transport_runtime_interface": {
             "artifact_digest": AUTO_RUNTIME_INTERFACE_RAW_SHA256,
-            "integration_state": "AU040_REPOSITORY_BINDING_SYNCED",
+            "integration_state": (
+                "REGISTRY_CATALOG_RESERVED_SOURCE_CONTENT_SYNC_PENDING"
+            ),
             "module_count": AUTO_RUNTIME_MODULE_COUNT,
             "relative_path": "CodexSkills/registry/auto/runtime-interface.json",
             "verified_git_object_id": AUTO_RUNTIME_GIT_OBJECT_ID,

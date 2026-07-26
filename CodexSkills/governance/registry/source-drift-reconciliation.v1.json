@@ -1,0 +1,143 @@
+{
+  "artifact_digest": "24d02db5182463912074c109f2b5be350126d62340f58e6463755edbad1b799c",
+  "auto_evidence": {
+    "artifact_digest": "e88ec8c711434619756ee8f91c451e941501764e30e4a7fff310d8685b02140a",
+    "phase": "AUTO_REGISTRY_CATALOG_PATH_RESERVATION",
+    "relative_path": "CodexSkills/registry/auto/runtime-interface.json",
+    "verified_git_object_id": "sha1:b5a32c817e4016f595fa33caed6bce1d51199e63"
+  },
+  "bundle_digest": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e",
+  "current_mirror": {
+    "evidence_digest": "75f6db86e5a18cc000985dc32a719ac7e0bc15b22b2e3f20c0d32d3138f27387",
+    "mirror_alias_count": 20,
+    "mirror_alias_parity_satisfied": true,
+    "mirror_skill_count": 88,
+    "source_alias_count": 20,
+    "source_alias_parity_satisfied": true,
+    "source_counts": [
+      {
+        "skill_count": 24,
+        "source_class": "AGENTS"
+      },
+      {
+        "skill_count": 3,
+        "source_class": "CLAUDE"
+      },
+      {
+        "skill_count": 55,
+        "source_class": "CODEX"
+      },
+      {
+        "skill_count": 6,
+        "source_class": "CODEX_SYSTEM"
+      }
+    ],
+    "source_observations": [
+      {
+        "alias_count": 0,
+        "completeness_status": "COMPLETE_AFTER_POLICY_EXCLUSIONS",
+        "included_file_count": 350,
+        "included_tree_digest": "93af33c94c38f910df35a08dfd294a955b137d74bec6eebb4e083825014c7a64",
+        "source_class": "AGENTS",
+        "source_snapshot_digest": "9cc710e9dc8d6bf011f19e4576d4e558dd6cdd72f0814e519b23d7aa08de47c5"
+      },
+      {
+        "alias_count": 0,
+        "completeness_status": "COMPLETE_AFTER_POLICY_EXCLUSIONS",
+        "included_file_count": 191,
+        "included_tree_digest": "03d37e741ace0feffc19a4dac1f3550b8ffccb0d6d66c95cb84fe6cf250e8e2b",
+        "source_class": "CLAUDE",
+        "source_snapshot_digest": "b7c44c9118f1385ffb82c7a4c32e6e5db00d74d5aab43e9066259bc375459dc4"
+      },
+      {
+        "alias_count": 20,
+        "completeness_status": "COMPLETE_AFTER_POLICY_EXCLUSIONS",
+        "included_file_count": 3091,
+        "included_tree_digest": "746b945b967502edd30872a69a713cd679432ef89059856cbe819fa74e06cab5",
+        "source_class": "CODEX",
+        "source_snapshot_digest": "1f41a69acd5de4a0017ae596bf80ce70632369ddf2377eb4fe659fc00f7905b4"
+      },
+      {
+        "alias_count": 0,
+        "completeness_status": "COMPLETE_AFTER_POLICY_EXCLUSIONS",
+        "included_file_count": 54,
+        "included_tree_digest": "cbd66243b0c52fabe69284386316350ee5ef6e7308bdd9e629c2abffefd9b378",
+        "source_class": "CODEX_SYSTEM",
+        "source_snapshot_digest": "33163f9473ca2865e5bf159eff914010583a842842c1bcc8aa4d567db9b70a36"
+      }
+    ],
+    "source_root_parity_satisfied": false,
+    "whole_source_parity_satisfied": false
+  },
+  "disposition": {
+    "binding_eligible": false,
+    "current_catalog_entry_present": false,
+    "historical_registry_records_retained": true,
+    "lifecycle_transition_permitted": false,
+    "missing_root_observation_state": "UNOBSERVED",
+    "promotion_permitted": false,
+    "reason_codes": [
+      "HISTORICAL_RECORD_RETENTION_REQUIRED",
+      "SOURCE_CONTENT_DRIFT_PENDING_AUTO_SYNC",
+      "SOURCE_ROOT_ABSENT_CURRENT_OBSERVATION"
+    ]
+  },
+  "historical_registry": {
+    "historical_catalog_entry": {
+      "identity_ref": {
+        "artifact_digest": "33c475ae027f191a709a0668779b566a0352a2f4e980cb76ae539ffe042a7eeb",
+        "skill_identity_uid": "ski_4KND2WTWF3JYMK12R283X0W00G"
+      },
+      "instance_ref": {
+        "artifact_digest": "e3e0b081193381e013afd9904121af58cb996320c291ab022b46b74837c4640d",
+        "skill_instance_uid": "skinst_1FTQ8SRB57QJWDK8RZWSVX3RTF"
+      },
+      "source_relative_path": "codex/context-kernel",
+      "version_ref": {
+        "skill_version_uid": "skv_5WCBT1AA644FA7HBSNND3HKCHX",
+        "version_record_digest": "5e6ba473c1354efc327d078ca3244000f7bab2d960c08b7925502cc05caafb53"
+      }
+    },
+    "registry_snapshot_digest": "31f49c8ffa3bd2d268feec49b2869f409d61a5bfbb0b03f382bc562996b7fa76",
+    "source_material_git_object_id": "sha1:44a38890ec38ceb24ccae1ec6f5b1fc8e93aefa1",
+    "source_skill_count": 89
+  },
+  "mirror_removal_artifacts": [
+    {
+      "byte_count": 464,
+      "content_digest": "d143b80b4a0834efd286449b253a80bef82238c3791c99cb4de0456eb0dba1c9",
+      "relative_path": "CodexSkills/registry/codex/context-kernel/MANIFEST.json"
+    },
+    {
+      "byte_count": 9407,
+      "content_digest": "558a67d4bc65e5451151821cb92ec882d3ab67e69705a17f7d9523803045d694",
+      "relative_path": "CodexSkills/registry/codex/context-kernel/SKILL.md"
+    },
+    {
+      "byte_count": 149370,
+      "content_digest": "eb730551bb4431da816fdacf8c02f8904d50b3c4031a9cbb055b6f28fcf412f0",
+      "relative_path": "CodexSkills/registry/codex/context-kernel/scripts/context_kernel.py"
+    }
+  ],
+  "next_phase": "AUTO_REGISTRY_SOURCE_CONTENT_SYNC",
+  "pending_content_drift": [
+    {
+      "action_owner": "AUTO",
+      "required_action": "EXACT_CONTENT_SYNC",
+      "source_relative_path": "codex/graphify"
+    },
+    {
+      "action_owner": "AUTO",
+      "required_action": "EXACT_CONTENT_SYNC",
+      "source_relative_path": "codex/persona-distiller-group"
+    },
+    {
+      "action_owner": "AUTO",
+      "required_action": "EXACT_CONTENT_SYNC",
+      "source_relative_path": "codex/verifier"
+    }
+  ],
+  "protocol_revision": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1",
+  "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:registry-source-drift-reconciliation:v1",
+  "status": "DRAFT_NON_ACTIVE_SOURCE_DRIFT_RECONCILED"
+}

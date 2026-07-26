@@ -1,6 +1,6 @@
 {
   "activation_forbidden": true,
-  "base_auto_git_object_id": "sha1:49ac09dbd9c8a2e18d5a199088a910dc77e7d365",
+  "base_auto_git_object_id": "sha1:b5a32c817e4016f595fa33caed6bce1d51199e63",
   "bootstrap_schema_count": 2,
   "bootstrap_schema_entries": [
     {
@@ -17,22 +17,43 @@
     }
   ],
   "bound_reference_resolver_contract": {
-    "artifact_digest": "0fe26ab55d92a1c6f5628e2a8d27becbdcc839ccfd73372150a2339ffe7eb4cb",
+    "artifact_digest": "38c7952ae712e6d4543bb4f4c1f3e5f8a98b00b36780c99bfce6944a722eabf0",
     "auto_integration_complete": false,
     "binding_eligible_version_count": 0,
-    "catalog_path_reservation_required": true,
+    "catalog_path_reservation_complete": true,
+    "catalog_path_reservation_required": false,
     "current_snapshot_can_emit_bound": false,
     "current_snapshot_promotable": false,
     "gate_satisfied": false,
     "implementation_complete": true,
     "post_reservation_rebuild_required": true,
+    "post_source_content_sync_rebuild_required": true,
     "production_trust_permitted": false,
     "registry_snapshot_digest": "31f49c8ffa3bd2d268feec49b2869f409d61a5bfbb0b03f382bc562996b7fa76",
     "registry_snapshot_draft_relative_path": "CodexSkills/governance/registry/materialized/_global/registry-snapshot.v1.json",
     "registry_snapshot_schema_id": "urn:linzecolin:agentdatabase:skillops:schema:registry-snapshot:v1",
     "relative_path": "CodexSkills/governance/registry/resolver-interface.json",
+    "source_content_sync_required": true,
+    "source_drift_reconciliation": {
+      "artifact_digest": "24d02db5182463912074c109f2b5be350126d62340f58e6463755edbad1b799c",
+      "historical_registry_records_retained": true,
+      "missing_source_skill_roots": [
+        "codex/context-kernel"
+      ],
+      "pending_content_drift_paths": [
+        "codex/graphify",
+        "codex/persona-distiller-group",
+        "codex/verifier"
+      ],
+      "relative_path": "CodexSkills/governance/registry/source-drift-reconciliation.v1.json",
+      "schema_id": "urn:linzecolin:agentdatabase:skillops:schema:registry-source-drift-reconciliation:v1",
+      "source_alias_parity_satisfied": true,
+      "source_drift_reconciliation_complete": true,
+      "source_root_parity_satisfied": false,
+      "whole_source_parity_satisfied": false
+    },
     "source_mirror_parity_satisfied": false,
-    "status": "DRAFT_NON_ACTIVE_RESOLVER_IMPLEMENTED"
+    "status": "DRAFT_NON_ACTIVE_SOURCE_DRIFT_RECONCILED"
   },
   "bundle_digest": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e",
   "candidate_bundle_git_object_id": "sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5",
@@ -55,7 +76,7 @@
     "external_verified_git_object_required": true,
     "repository_self_report_is_not_trust_root": true
   },
-  "next_phase": "AUTO_REGISTRY_CATALOG_PATH_RESERVATION",
+  "next_phase": "AUTO_REGISTRY_SOURCE_CONTENT_SYNC",
   "notification_contract": {
     "actual_recipient_repo_external": true,
     "affected_path_refs": [
@@ -109,6 +130,7 @@
     "bound_reference_resolver_gate_satisfied": false,
     "bound_reference_resolver_implementation_complete": true,
     "canonical_publication_permitted": false,
+    "catalog_path_reservation_complete": true,
     "effective_runtime_state_write_permitted": false,
     "external_gmail_ready": false,
     "external_state_ready": false,
@@ -125,17 +147,19 @@
     "runtime_preflight_shadow_permitted": true,
     "runtime_shard_writer_integration_complete": true,
     "runtime_state_instance_created": false,
-    "runtime_state_write_gate_status": "BOUND_REFERENCE_RESOLVER_AUTO_INTEGRATION_PENDING",
+    "runtime_state_write_gate_status": "BOUND_REFERENCE_RESOLVER_SOURCE_CONTENT_SYNC_PENDING",
     "runtime_state_write_permitted": true,
     "schedule_authority_resolved": false,
-    "schedule_complete": false
+    "schedule_complete": false,
+    "source_content_sync_required": true,
+    "source_drift_reconciliation_complete": true
   },
   "transport_runtime_interface": {
-    "artifact_digest": "c7af9d1406fe2ed084d5a30fab6cded3897a83c1602e6c40587cf28c75a2c75c",
-    "integration_state": "AU040_REPOSITORY_BINDING_SYNCED",
-    "module_count": 26,
+    "artifact_digest": "e88ec8c711434619756ee8f91c451e941501764e30e4a7fff310d8685b02140a",
+    "integration_state": "REGISTRY_CATALOG_RESERVED_SOURCE_CONTENT_SYNC_PENDING",
+    "module_count": 27,
     "relative_path": "CodexSkills/registry/auto/runtime-interface.json",
-    "verified_git_object_id": "sha1:49ac09dbd9c8a2e18d5a199088a910dc77e7d365"
+    "verified_git_object_id": "sha1:b5a32c817e4016f595fa33caed6bce1d51199e63"
   },
   "validator_contract": {
     "artifact_reads": "DESCRIPTOR_RELATIVE_O_NOFOLLOW",

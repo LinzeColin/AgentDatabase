@@ -1,6 +1,6 @@
 {
   "activation_forbidden": true,
-  "artifact_digest": "2b4c4a7f27f0942c17f57219332092ac6d14a5cb6694180f018df05d9240ee0a",
+  "artifact_digest": "2c57c770829324b52d13c0a1cef4cd024603d407180a8cb27573cd20bcf8d7f8",
   "auto_integration_complete": false,
   "bundle_digest": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e",
   "candidate_git_object_id": "sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5",
@@ -8,18 +8,21 @@
   "candidate_trust_mode": "CANDIDATE",
   "canonical_publication_permitted": false,
   "catalog_count": 4,
-  "catalog_path_reservation_required": true,
+  "catalog_path_reservation_complete": true,
+  "catalog_path_reservation_required": false,
   "current_materialization_path": "CodexSkills/governance/registry/materialized",
   "current_materialization_promotable": false,
   "current_sync_executor_contract": {
-    "artifact_digest": "d74ca2405ff12a3f9bd9421e0087d509f9483522af42b476292d5c56ccf4e431",
+    "artifact_digest": "1fd015a043dfe48034df03d8a821cda5793c90694191a8b629672efaf33283ac",
     "deletes_unreserved_source_directories": true,
     "enumerates_unreserved_source_directories_as_skills": true,
     "relative_path": "CodexSkills/sync_skills.py",
-    "verified_git_object_id": "sha1:44a38890ec38ceb24ccae1ec6f5b1fc8e93aefa1"
+    "reserved_registry_paths_excluded_from_deletion": true,
+    "reserved_registry_paths_excluded_from_skill_enumeration": true,
+    "verified_git_object_id": "sha1:b5a32c817e4016f595fa33caed6bce1d51199e63"
   },
   "exact_byte_promotion_required": true,
-  "exact_byte_promotion_scope": "POST_PARITY_COMPLETE_SUCCESSOR_MATERIALIZATION",
+  "exact_byte_promotion_scope": "POST_SOURCE_CONTENT_SYNC_PARITY_COMPLETE_SUCCESSOR_MATERIALIZATION",
   "external_trust_tuple_required_fields": [
     "canonical_snapshot_digest",
     "canonical_snapshot_path",
@@ -46,8 +49,9 @@
     }
   ],
   "final_snapshot_path": "CodexSkills/registry/_global/registry-snapshot.v1.json",
-  "next_phase": "AUTO_REGISTRY_CATALOG_PATH_RESERVATION",
+  "next_phase": "AUTO_REGISTRY_SOURCE_CONTENT_SYNC",
   "post_reservation_rebuild_required": true,
+  "post_source_content_sync_rebuild_required": true,
   "production_trust_permitted": false,
   "protocol_revision": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1",
   "registry_compatibility_index_is_not_snapshot_truth": true,
@@ -80,7 +84,7 @@
   },
   "runtime_artifacts": [
     {
-      "artifact_digest": "7b7aabcf1b226ad384205ba78101630e5d60179a624bf9b46cb4e3c29e7dd978",
+      "artifact_digest": "f76b04be120d2c209dd15f413c0f187414103eb23bd31bbfb506b8799b3cb10a",
       "relative_path": "CodexSkills/governance/tools/build_bound_reference_resolver.py"
     },
     {
@@ -106,9 +110,16 @@
       "relative_path": "CodexSkills/governance/registry/schemas/registry-source-catalog.schema.json",
       "schema_sha256": "20dac5971ff001af28d164b64f9c4d73f71c0a8765b89ed8e9d84390d263eb04",
       "self_digest_pointer": "/artifact_digest"
+    },
+    {
+      "id": "urn:linzecolin:agentdatabase:skillops:schema:registry-source-drift-reconciliation:v1",
+      "relative_path": "CodexSkills/governance/registry/schemas/registry-source-drift-reconciliation.schema.json",
+      "schema_sha256": "4ad70cba2d8a9c951e79016128b7462f063fb05373f1956df889db28777ddf36",
+      "self_digest_pointer": "/artifact_digest"
     }
   ],
-  "schema_entry_count": 3,
+  "schema_entry_count": 4,
+  "source_content_sync_required": true,
   "source_digest_contract": {
     "alias_metadata_fields": [
       "alias_path",
@@ -136,5 +147,31 @@
     ],
     "tree_paths_are_source_root_relative": true
   },
-  "status": "DRAFT_NON_ACTIVE_RESOLVER_IMPLEMENTED"
+  "source_drift_reconciliation": {
+    "artifact_digest": "24d02db5182463912074c109f2b5be350126d62340f58e6463755edbad1b799c",
+    "auto_evidence": {
+      "artifact_digest": "e88ec8c711434619756ee8f91c451e941501764e30e4a7fff310d8685b02140a",
+      "verified_git_object_id": "sha1:b5a32c817e4016f595fa33caed6bce1d51199e63"
+    },
+    "current_source_alias_count": 20,
+    "current_source_skill_count": 88,
+    "historical_registry_records_retained": true,
+    "missing_source_skill_roots": [
+      "codex/context-kernel"
+    ],
+    "pending_content_drift_paths": [
+      "codex/graphify",
+      "codex/persona-distiller-group",
+      "codex/verifier"
+    ],
+    "relative_path": "CodexSkills/governance/registry/source-drift-reconciliation.v1.json",
+    "schema_id": "urn:linzecolin:agentdatabase:skillops:schema:registry-source-drift-reconciliation:v1",
+    "source_alias_parity_satisfied": true,
+    "source_drift_reconciliation_complete": true,
+    "source_root_parity_satisfied": false,
+    "status": "DRAFT_NON_ACTIVE_SOURCE_DRIFT_RECONCILED",
+    "whole_source_parity_satisfied": false
+  },
+  "source_drift_reconciliation_complete": true,
+  "status": "DRAFT_NON_ACTIVE_SOURCE_DRIFT_RECONCILED"
 }

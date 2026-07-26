@@ -21,6 +21,8 @@ Key entrypoints:
   the Auto-owned `public-run-event:v2` schema.
 - `tools/build_au040_semantic_acceptance.py`: deterministic, loader-isolated
   AU-040 policy/schema acceptance materialization.
+- `tools/build_bound_reference_resolver.py`: immutable source-catalog,
+  Registry-snapshot, and source-drift reconciliation materialization.
 - `tools/validate_au040_semantic_acceptance.py`: exact 365-day and
   shard/index/manifest/publication cross-artifact gates.
 - `tests/test_mechanism_contract.py`: positive, negative, and fault gates.
@@ -47,6 +49,8 @@ Run from the repository root with the explicitly provisioned interpreter:
 /usr/bin/python3 -B CodexSkills/governance/tools/build_candidate_bundle.py --check
 /usr/bin/python3 -B \
   CodexSkills/governance/tools/build_activation_control.py --check
+/usr/bin/python3 -B \
+  CodexSkills/governance/tools/build_bound_reference_resolver.py --check
 /usr/bin/python3 -B CodexSkills/governance/tools/validate_mechanism.py lint-draft
 /usr/bin/python3 -B \
   CodexSkills/governance/tools/validate_activation.py lint-control
@@ -135,7 +139,7 @@ part-delete/retention-receipt/manifest publication. The Auto draft validator
 is useful draft evidence but is explicitly not a production trust root.
 
 The successor control binds the exact final candidate and V2 consumer plus the
-integrated Auto runtime Git object, runtime-interface bytes, and 26 declared
+integrated Auto runtime Git object, runtime-interface bytes, and 27 declared
 module digests. It independently validates the immutable predecessor control
 and Mechanism runtime blobs cited by Auto's historical observation, plus the
 separate writer, publisher, and repository-binding materialization snapshots;
@@ -149,33 +153,40 @@ clean reference root, and four-artifact path closure, while deliberately
 keeping `bound_reference_resolver_gate_satisfied=false`. Its control-level
 `runtime_state_write_permitted=true` is paired with
 `effective_runtime_state_write_permitted=false` and
-`runtime_state_write_gate_status=BOUND_REFERENCE_RESOLVER_AUTO_INTEGRATION_PENDING`;
+`runtime_state_write_gate_status=BOUND_REFERENCE_RESOLVER_SOURCE_CONTENT_SYNC_PENDING`;
 state, lock, worktree, mutable Git, Gmail, outbox, watermark, and publisher
 access must stop before side effects with
 `BOUND_REFERENCE_RESOLVER_NOT_SATISFIED`.
 Auto's writer, publisher, and repository-binding materialization snapshots
 remain historically `current_auto_runtime_control_bound=false`; none is
 rewritten into successor authorization. Activation remains forbidden. Its
-only next phase is `AUTO_REGISTRY_CATALOG_PATH_RESERVATION`.
+only next phase is `AUTO_REGISTRY_SOURCE_CONTENT_SYNC`.
 
 The bundle-outside Registry contract is under
 `CodexSkills/governance/registry/`. It materializes four draft source catalogs
 and one immutable snapshot from pinned Git object `sha1:44a38890…`, with 89
 separate Identity/Instance/Version records and explicit owner-review
-candidates for same-name cross-source identities. The current mirror has zero
-tracked symlink aliases versus 20 in frozen external inventory evidence, so
-all 89 versions remain quarantined, binding eligibility is zero, and real
+candidates for same-name cross-source identities. The successor Auto evidence
+at `sha1:b5a32c81…` proves the reserved `_catalog`/`_global` namespaces and
+20/20 source/mirror alias parity, but the current source set is 88 roots:
+`codex/context-kernel` is absent and `codex/graphify`,
+`codex/persona-distiller-group`, and `codex/verifier` have exact content drift
+pending Auto sync. The missing root is recorded as `UNOBSERVED`; its historical
+Identity/Instance/Version records are retained, with no inferred lifecycle
+transition. The new reconciliation artifact is non-promotable, all historical
+89 versions remain quarantined, binding eligibility is zero, and real
 resolution returns `UNKNOWN/MAPPING_NOT_PROVABLE`. A separate registered
 fixture proves the same resolver's exact seven-field BOUND output, including
 controlled-invocation, content/tree, version-record, and snapshot digests.
 
-The draft remains under the Mechanism governance root because the current
-Auto-owned sync executor would enumerate/delete unreserved `_catalog`
-directories. The incomplete 44a materialization is non-promotable. The next
-Auto phase must reserve final catalog paths and restore source parity, after
-which Mechanism must rebuild from the successor Git object; exact-byte
-promotion applies only to that complete successor. Implementation alone does
-not satisfy the resolver gate.
+The Auto sync executor now excludes the reserved Registry namespaces from
+Skill enumeration and deletion. No final catalog or snapshot artifact has
+been generated, and the incomplete 44a materialization remains historical,
+non-promotable evidence. The next Auto phase must exact-sync the three drifted
+source roots without fabricating the missing root. Mechanism must then rebuild
+from that successor Git object; exact-byte promotion applies only after full
+current-source closure. Implementation or path reservation alone does not
+satisfy the resolver gate.
 Schedule authority, resolver Auto integration and production trust, external
 Gmail/state readiness, runtime state-instance creation, AU-040 completion,
 M0c-B, ACTIVE trust, canonical shard creation, and canonical publication

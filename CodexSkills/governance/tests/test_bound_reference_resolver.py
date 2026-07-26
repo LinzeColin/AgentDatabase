@@ -13,6 +13,7 @@ import tempfile
 import unittest
 from pathlib import Path
 from typing import Any, Dict, Mapping, Optional, Tuple
+from unittest import mock
 
 
 GOVERNANCE_DIR = Path(__file__).resolve().parents[1]
@@ -615,18 +616,27 @@ class BoundReferenceResolverTests(unittest.TestCase):
         )
         self.assertEqual(
             interface["next_phase"],
-            "AUTO_REGISTRY_CATALOG_PATH_RESERVATION",
+            "AUTO_REGISTRY_SOURCE_CONTENT_SYNC",
         )
         self.assertFalse(interface["auto_integration_complete"])
         self.assertFalse(interface["production_trust_permitted"])
         self.assertFalse(interface["canonical_publication_permitted"])
         self.assertFalse(interface["current_materialization_promotable"])
         self.assertTrue(interface["post_reservation_rebuild_required"])
+        self.assertTrue(
+            interface["post_source_content_sync_rebuild_required"]
+        )
         self.assertEqual(
             interface["exact_byte_promotion_scope"],
-            "POST_PARITY_COMPLETE_SUCCESSOR_MATERIALIZATION",
+            (
+                "POST_SOURCE_CONTENT_SYNC_PARITY_COMPLETE_"
+                "SUCCESSOR_MATERIALIZATION"
+            ),
         )
-        self.assertTrue(interface["catalog_path_reservation_required"])
+        self.assertTrue(interface["catalog_path_reservation_complete"])
+        self.assertFalse(interface["catalog_path_reservation_required"])
+        self.assertTrue(interface["source_drift_reconciliation_complete"])
+        self.assertTrue(interface["source_content_sync_required"])
         self.assertEqual(
             interface["registry_snapshot"][
                 "binding_eligible_version_count"
@@ -642,6 +652,52 @@ class BoundReferenceResolverTests(unittest.TestCase):
             interface["current_sync_executor_contract"][
                 "enumerates_unreserved_source_directories_as_skills"
             ]
+        )
+        self.assertTrue(
+            interface["current_sync_executor_contract"][
+                "reserved_registry_paths_excluded_from_deletion"
+            ]
+        )
+        self.assertTrue(
+            interface["current_sync_executor_contract"][
+                "reserved_registry_paths_excluded_from_skill_enumeration"
+            ]
+        )
+        reconciliation = strict_load(builder.DRIFT_PATH)
+        self.assertEqual(
+            reconciliation["artifact_digest"],
+            canonical_digest(reconciliation, "/artifact_digest"),
+        )
+        self.assertEqual(
+            reconciliation["disposition"],
+            {
+                "binding_eligible": False,
+                "current_catalog_entry_present": False,
+                "historical_registry_records_retained": True,
+                "lifecycle_transition_permitted": False,
+                "missing_root_observation_state": "UNOBSERVED",
+                "promotion_permitted": False,
+                "reason_codes": [
+                    "HISTORICAL_RECORD_RETENTION_REQUIRED",
+                    "SOURCE_CONTENT_DRIFT_PENDING_AUTO_SYNC",
+                    "SOURCE_ROOT_ABSENT_CURRENT_OBSERVATION",
+                ],
+            },
+        )
+        self.assertEqual(
+            [
+                row["source_relative_path"]
+                for row in reconciliation["pending_content_drift"]
+            ],
+            [
+                "codex/graphify",
+                "codex/persona-distiller-group",
+                "codex/verifier",
+            ],
+        )
+        self.assertEqual(
+            reconciliation["next_phase"],
+            "AUTO_REGISTRY_SOURCE_CONTENT_SYNC",
         )
         self.assertFalse(
             (
@@ -673,8 +729,32 @@ class BoundReferenceResolverTests(unittest.TestCase):
                 resolver.CATALOG_ID,
                 resolver.SNAPSHOT_ID,
                 resolver.REQUEST_ID,
+                builder.DRIFT_ID,
             }.isdisjoint(manifest_schema_ids)
         )
+
+    def test_13_auto_reservation_tuple_tamper_fails_closed(self) -> None:
+        original = builder._git_blob
+
+        def drift(commit: str, relative_path: str) -> bytes:
+            if (
+                commit == builder.AUTO_RESERVATION_COMMIT
+                and relative_path
+                == builder.AUTO_RESERVATION_INTERFACE_PATH
+            ):
+                return b"{}"
+            return original(commit, relative_path)
+
+        with mock.patch.object(
+            builder,
+            "_git_blob",
+            side_effect=drift,
+        ):
+            with self.assertRaisesRegex(
+                ContractError,
+                "REGISTRY_AUTO_RESERVATION_INTERFACE_DIGEST_MISMATCH",
+            ):
+                builder._verified_auto_reservation()
 
 
 if __name__ == "__main__":

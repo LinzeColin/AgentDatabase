@@ -780,7 +780,7 @@ class MechanismContractTests(unittest.TestCase):
     def test_10_public_value_scans_values_not_only_keys(self) -> None:
         scan_public_value({"recipient_ref": "owner-primary", "status": "PASS"}, self.bundle.policies)
         scan_public_value(
-            {"next_phase": "AUTO_REGISTRY_CATALOG_PATH_RESERVATION"},
+            {"next_phase": "AUTO_REGISTRY_SOURCE_CONTENT_SYNC"},
             self.bundle.policies,
         )
         with self.assertRaisesRegex(
