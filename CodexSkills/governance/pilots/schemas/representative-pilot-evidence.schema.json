@@ -1,0 +1,415 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:representative-pilot-evidence:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "canonical_name": {
+      "maxLength": 128,
+      "minLength": 1,
+      "type": "string"
+    },
+    "cycles": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "cycle_index": {
+            "maximum": 3,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "evidence_digest": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+          },
+          "gate_results": {
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "critical": {
+                  "const": true
+                },
+                "evidence_digests": {
+                  "items": {
+                    "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+                  },
+                  "minItems": 1,
+                  "type": "array",
+                  "uniqueItems": true
+                },
+                "gate_code": {
+                  "type": "string"
+                },
+                "status": {
+                  "const": "PASS"
+                }
+              },
+              "required": [
+                "gate_code",
+                "critical",
+                "status",
+                "evidence_digests"
+              ],
+              "type": "object"
+            },
+            "minItems": 4,
+            "type": "array"
+          },
+          "member_version_uids": {
+            "items": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/skill_version_uid"
+            },
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": true
+          },
+          "mode": {
+            "const": "DETERMINISTIC_SHADOW_METADATA_ONLY"
+          },
+          "notification_count": {
+            "const": 0
+          },
+          "publication_count": {
+            "const": 0
+          },
+          "registry_write_count": {
+            "const": 0
+          },
+          "rollback_drill": {
+            "additionalProperties": false,
+            "properties": {
+              "evidence_bundle_digest": {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+              },
+              "history_rewrite_performed": {
+                "const": false
+              },
+              "mode": {
+                "const": "SYNTHETIC_PRE_WRITE_NO_STATE"
+              },
+              "notification_sent": {
+                "const": false
+              },
+              "production_drill": {
+                "const": false
+              },
+              "real_registry_champion_present": {
+                "const": false
+              },
+              "state_write_observed": {
+                "const": false
+              },
+              "status": {
+                "const": "SHADOW_PASS"
+              },
+              "synthetic_prior_champion_restorable": {
+                "const": true
+              },
+              "verification_evidence_refs": {
+                "items": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "artifact_digest": {
+                      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+                    },
+                    "kind": {
+                      "enum": [
+                        "REFERENCE_CLOSURE",
+                        "RESTORE_PLAN",
+                        "RESTORE_TEST",
+                        "STATE_SNAPSHOT",
+                        "TRIGGER"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "kind",
+                    "artifact_digest"
+                  ],
+                  "type": "object"
+                },
+                "maxItems": 5,
+                "minItems": 5,
+                "type": "array"
+              }
+            },
+            "required": [
+              "status",
+              "mode",
+              "verification_evidence_refs",
+              "synthetic_prior_champion_restorable",
+              "real_registry_champion_present",
+              "history_rewrite_performed",
+              "state_write_observed",
+              "notification_sent",
+              "production_drill",
+              "evidence_bundle_digest"
+            ],
+            "type": "object"
+          },
+          "shadow_evidence_digest": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+          },
+          "side_effect_count": {
+            "const": 0
+          },
+          "state_write_count": {
+            "const": 0
+          }
+        },
+        "required": [
+          "cycle_index",
+          "mode",
+          "member_version_uids",
+          "shadow_evidence_digest",
+          "gate_results",
+          "rollback_drill",
+          "side_effect_count",
+          "registry_write_count",
+          "state_write_count",
+          "notification_count",
+          "publication_count",
+          "evidence_digest"
+        ],
+        "type": "object"
+      },
+      "maxItems": 3,
+      "minItems": 3,
+      "type": "array"
+    },
+    "execution_mode": {
+      "const": "DETERMINISTIC_SHADOW_METADATA_ONLY"
+    },
+    "identity_resolution": {
+      "additionalProperties": false,
+      "properties": {
+        "owner_review_required": {
+          "type": "boolean"
+        },
+        "registry_identity_count": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/positive_count"
+        },
+        "registry_identity_uids": {
+          "items": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/skill_identity_uid"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "same_name_auto_merge_permitted": {
+          "const": false
+        },
+        "selected_identity_count": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/positive_count"
+        },
+        "selected_identity_uids": {
+          "items": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/skill_identity_uid"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "registry_identity_uids",
+        "selected_identity_uids",
+        "registry_identity_count",
+        "selected_identity_count",
+        "same_name_auto_merge_permitted",
+        "owner_review_required"
+      ],
+      "type": "object"
+    },
+    "members": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "binding_eligible": {
+            "const": false
+          },
+          "content_digest": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+          },
+          "eval_profile_present": {
+            "const": false
+          },
+          "identity_ref": {
+            "additionalProperties": false,
+            "properties": {
+              "artifact_digest": {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+              }
+            },
+            "required": [
+              "artifact_digest"
+            ],
+            "type": "object"
+          },
+          "instance_ref": {
+            "additionalProperties": false,
+            "properties": {
+              "artifact_digest": {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+              }
+            },
+            "required": [
+              "artifact_digest"
+            ],
+            "type": "object"
+          },
+          "lifecycle_status": {
+            "const": "QUARANTINED"
+          },
+          "permissions_resolved": {
+            "const": false
+          },
+          "skill_identity_uid": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/skill_identity_uid"
+          },
+          "skill_instance_uid": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/skill_instance_uid"
+          },
+          "skill_version_uid": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/skill_version_uid"
+          },
+          "source_class": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/source_class"
+          },
+          "source_fingerprint_digest": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+          },
+          "source_relative_path": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/repo_relative_posix_path"
+          },
+          "trust_tier": {
+            "const": "UNVERIFIED"
+          },
+          "version_ref": {
+            "additionalProperties": false,
+            "properties": {
+              "version_record_digest": {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+              }
+            },
+            "required": [
+              "version_record_digest"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "source_class",
+          "source_relative_path",
+          "skill_identity_uid",
+          "identity_ref",
+          "skill_instance_uid",
+          "instance_ref",
+          "skill_version_uid",
+          "version_ref",
+          "source_fingerprint_digest",
+          "content_digest",
+          "lifecycle_status",
+          "trust_tier",
+          "binding_eligible",
+          "eval_profile_present",
+          "permissions_resolved"
+        ],
+        "type": "object"
+      },
+      "maxItems": 2,
+      "minItems": 1,
+      "type": "array"
+    },
+    "pilot_class": {
+      "enum": [
+        "DETERMINISTIC_SYNC",
+        "SAME_NAME_MULTI_SOURCE",
+        "HIGH_RISK_ITERATIVE"
+      ]
+    },
+    "pilot_uid": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/typed_uid"
+    },
+    "protocol_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/protocol_revision"
+    },
+    "registry_snapshot_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:representative-pilot-evidence:v1"
+    },
+    "status": {
+      "const": "SHADOW_COMPLETE_PRODUCTION_BLOCKED"
+    },
+    "summary": {
+      "additionalProperties": false,
+      "properties": {
+        "all_shadow_critical_gates_passed": {
+          "const": true
+        },
+        "all_shadow_rollback_drills_passed": {
+          "const": true
+        },
+        "clean_cycle_count": {
+          "const": 3
+        },
+        "cycle_count": {
+          "const": 3
+        },
+        "production_blocker_codes": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "production_critical_gates_passed": {
+          "const": false
+        },
+        "production_pilot_executed": {
+          "const": false
+        },
+        "three_cycle_result_stable": {
+          "const": true
+        }
+      },
+      "required": [
+        "cycle_count",
+        "clean_cycle_count",
+        "all_shadow_critical_gates_passed",
+        "all_shadow_rollback_drills_passed",
+        "three_cycle_result_stable",
+        "production_critical_gates_passed",
+        "production_pilot_executed",
+        "production_blocker_codes"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "bundle_digest",
+    "pilot_uid",
+    "pilot_class",
+    "canonical_name",
+    "execution_mode",
+    "status",
+    "registry_snapshot_digest",
+    "members",
+    "identity_resolution",
+    "cycles",
+    "summary",
+    "artifact_digest"
+  ],
+  "title": "Mechanism M-068 representative Shadow pilot evidence",
+  "type": "object"
+}

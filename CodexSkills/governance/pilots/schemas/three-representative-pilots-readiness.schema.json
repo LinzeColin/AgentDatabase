@@ -1,0 +1,253 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:three-representative-pilots-readiness:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "bundle_digest": {
+      "const": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e"
+    },
+    "current_summary": {
+      "const": {
+        "all_shadow_critical_gates_passed": true,
+        "all_shadow_rollback_drills_passed": true,
+        "all_three_cycle_results_stable": true,
+        "clean_cycle_count": 9,
+        "cycle_count": 9,
+        "pilot_count": 3,
+        "production_blocker_codes": [
+          "BINDING_ELIGIBLE_VERSION_COUNT_ZERO",
+          "M065_CUTOVER_BLOCKED",
+          "REAL_CHAMPION_ABSENT",
+          "REAL_EVALUATION_PROFILE_ABSENT",
+          "REAL_PROVIDER_NOTIFICATION_ABSENT",
+          "REGISTRY_VERSIONS_QUARANTINED"
+        ],
+        "production_critical_gates_passed": false,
+        "production_pilots_ready": false,
+        "real_notification_sent": false,
+        "real_rollback_execution_performed": false,
+        "real_skill_execution_performed": false,
+        "same_name_auto_merge_performed": false,
+        "shadow_rollback_drill_count": 9
+      }
+    },
+    "implementation_contract": {
+      "const": {
+        "caller_gate_or_status_fields_accepted": false,
+        "capability_mode": "PURE_IMMUTABLE_OBJECTS_ONLY",
+        "component_path": "CodexSkills/governance/pilots/representative_pilots.py",
+        "content_digest": "f00d9d3db5200d312d590cbd399b945e41fcf19c545cada0641992c8e41c79d8",
+        "filesystem_capability_present": false,
+        "git_capability_present": false,
+        "network_capability_present": false,
+        "pilot_class_order": [
+          "DETERMINISTIC_SYNC",
+          "SAME_NAME_MULTI_SOURCE",
+          "HIGH_RISK_ITERATIVE"
+        ],
+        "pilot_outputs": [
+          {
+            "artifact_digest": "770a5493690fcf08ff4bb1c38862e5e877989c1528412b36d720cc2b4deaacd5",
+            "canonical_name": "skill-github-sync",
+            "canonical_path": "CodexSkills/governance/pilots/deterministic-sync-pilot.json",
+            "clean_cycle_count": 3,
+            "content_digest": "0ab6ab5ced35748c2e9eabb4d276dc3f5b2c576b02a971c85a77aa1c98645976",
+            "cycle_count": 3,
+            "pilot_class": "DETERMINISTIC_SYNC",
+            "production_pilot_executed": false,
+            "shadow_rollback_drill_count": 3
+          },
+          {
+            "artifact_digest": "d77a8b74c17f7102af45be58f5fd4a116b634d63b12e96ddb940f6f7592cb5ad",
+            "canonical_name": "agent-reach",
+            "canonical_path": "CodexSkills/governance/pilots/same-name-multi-source-pilot.json",
+            "clean_cycle_count": 3,
+            "content_digest": "e02ab4a7bb6554f8be0946d1b392d20090b27f998488635bf600c3499a761bd0",
+            "cycle_count": 3,
+            "pilot_class": "SAME_NAME_MULTI_SOURCE",
+            "production_pilot_executed": false,
+            "shadow_rollback_drill_count": 3
+          },
+          {
+            "artifact_digest": "5bb1f8663305f2ea07a6778f20b7258f49799db9446542cf8010435c7ffa2262",
+            "canonical_name": "km-bid-evolve",
+            "canonical_path": "CodexSkills/governance/pilots/high-risk-evolve-pilot.json",
+            "clean_cycle_count": 3,
+            "content_digest": "b706e61f03e07349df885964c7c534f751a4947817c290c519f969051d492e73",
+            "cycle_count": 3,
+            "pilot_class": "HIGH_RISK_ITERATIVE",
+            "production_pilot_executed": false,
+            "shadow_rollback_drill_count": 3
+          }
+        ],
+        "pilot_schema": {
+          "canonical_path": "CodexSkills/governance/pilots/schemas/representative-pilot-evidence.schema.json",
+          "content_digest": "f5c618caea96de45d112a29ec2c5c05d00ecd93ef142d66aa269b8b6b418b943",
+          "schema_sha256": "1a9e103aaeea5143dcbe0fb68fc0e2a6cfc0f8b92543d843e82823f22848b2db",
+          "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:representative-pilot-evidence:v1",
+          "self_digest_pointer": "/artifact_digest"
+        },
+        "publisher_capability_present": false,
+        "required_cycle_count_per_pilot": 3,
+        "required_rollback_verification_kinds": [
+          "REFERENCE_CLOSURE",
+          "RESTORE_PLAN",
+          "RESTORE_TEST",
+          "STATE_SNAPSHOT",
+          "TRIGGER"
+        ],
+        "sealed_holdout_read_capability_present": false,
+        "skill_execution_capability_present": false,
+        "source_content_read_capability_present": false,
+        "state_capability_present": false
+      }
+    },
+    "next_phase": {
+      "const": "MECHANISM_COLD_START_HANDOFF_RELEASE_REVIEW"
+    },
+    "nonmutation": {
+      "const": {
+        "activation_forbidden": true,
+        "auto_plane_unchanged": true,
+        "candidate_bundle_unchanged": true,
+        "canonical_publication_permitted": false,
+        "evaluation_profile_mutated": false,
+        "migration_cutover_permitted": false,
+        "notification_sent": false,
+        "openai_database_unchanged": true,
+        "real_rollback_executed": false,
+        "real_skill_executed": false,
+        "registry_write_permitted": false,
+        "source_write_permitted": false,
+        "state_write_permitted": false,
+        "version_file_created": false,
+        "watermark_advance_permitted": false
+      }
+    },
+    "owner_plane": {
+      "const": "MECHANISM"
+    },
+    "policy_count": {
+      "const": 5
+    },
+    "production_pilots_ready": {
+      "const": false
+    },
+    "protocol_revision": {
+      "const": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1"
+    },
+    "schema_closure_count": {
+      "const": 42
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:three-representative-pilots-readiness:v1"
+    },
+    "self_digest_pointer": {
+      "const": "/artifact_digest"
+    },
+    "source_trust": {
+      "const": {
+        "candidate_bundle": {
+          "artifact_digest": "66ad125629cab71739ff2bc266219f995f7a45998936ca720c6db678ee77e65a",
+          "bundle_digest": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e",
+          "canonical_path": "CodexSkills/governance/bundles/schema-bundle-manifest.v1.json",
+          "expected_mode": "CANDIDATE",
+          "policy_count": 5,
+          "schema_count": 31,
+          "verified_git_object_id": "sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5"
+        },
+        "dependency_sources": [
+          {
+            "artifact_digest": "0fd20eef7a9aad02fe5301f28a3bbd91ee352dc431f9832fd372601e1425c496",
+            "canonical_path": "CodexSkills/governance/evaluation/failure-to-test-readiness.json",
+            "content_digest": "ab243507d8384a849ea9488e1a6d717c87f12195b7397300658c83d2c6e3eaf6",
+            "dependency_code": "FAILURE_READINESS",
+            "verified_git_object_id": "sha1:6cf5beae7c50c3fb860926df670dcc5fc33890e3"
+          },
+          {
+            "artifact_digest": "aab2854eb272c63e2d0a1fac033f5d8aca6a371afb12e37eaf979a92028b037d",
+            "canonical_path": "CodexSkills/governance/evaluation/confirmed-regression-case.json",
+            "content_digest": "006e5e770688cce4d144b8d49271c09451b7216d97da7674bf39e01cf7956bf2",
+            "dependency_code": "REGRESSION_CASE",
+            "verified_git_object_id": "sha1:6cf5beae7c50c3fb860926df670dcc5fc33890e3"
+          },
+          {
+            "artifact_digest": "3cf47b465f46a458b2c16b57599462ca6638076cb32ab0e57ab2c86d6c41a93b",
+            "canonical_path": "CodexSkills/governance/promotion/rollback-controller-readiness.json",
+            "content_digest": "9ecdbc1f5cd103d6420cdd2d81b4ab14e94ce50668c6fabfe96ba05a9fd22494",
+            "dependency_code": "ROLLBACK_READINESS",
+            "verified_git_object_id": "sha1:6d263e02ca6104abca5ae930b5eaa0944d8d5960"
+          },
+          {
+            "artifact_digest": "049809b3292f5591fc63f899c2172e67da66bb0a152998e04a341bda401d1228",
+            "canonical_path": "CodexSkills/governance/migration/read-only-migration-cutover-readiness.json",
+            "content_digest": "839b363d904116d8657f78e10b53a1cd11c86f1d64f06064090e5a71b24ca02c",
+            "dependency_code": "MIGRATION_READINESS",
+            "verified_git_object_id": "sha1:0b59768ed3697a1cd3c93afda70d96b9034f99ef"
+          }
+        ],
+        "registry_snapshot": {
+          "binding_eligible_version_count": 0,
+          "canonical_path": "CodexSkills/registry/_global/registry-snapshot.v1.json",
+          "content_digest": "ed5fb74fa88a2f1115a716be5e63f683d206c10d3d0a2005230d4c33d4c12c98",
+          "expected_mode": "REGISTERED_READ_ONLY",
+          "identity_count": 89,
+          "instance_count": 89,
+          "registry_snapshot_digest": "7b5a74bd459a4737299444b68439c1799ba8a2159032636a24a987113eee9d12",
+          "verified_git_object_id": "sha1:98e193e74991346d266bdd94ae720c32f25dfb47",
+          "version_count": 89
+        },
+        "repository_self_report_is_not_trust_root": true
+      }
+    },
+    "status": {
+      "const": "DRAFT_NON_ACTIVE_THREE_REPRESENTATIVE_PILOTS_SHADOW_COMPLETE_PRODUCTION_BLOCKED"
+    },
+    "task_contract": {
+      "const": {
+        "dependency_task_ids": [
+          "M-046",
+          "M-057",
+          "M-065"
+        ],
+        "done_gate": "ALL_CRITICAL_GATES_AND_ROLLBACK_DRILLS_PASS",
+        "done_gate_scope": "DETERMINISTIC_SHADOW_ONLY",
+        "implemented_task_ids": [
+          "M-068"
+        ],
+        "pending_task_ids": [
+          "M-069"
+        ],
+        "production_done_gate_satisfied": false,
+        "required_output_code": "SYNC_DUPLICATE_IDENTITY_HIGH_RISK_EVOLVE_EVIDENCE"
+      }
+    },
+    "task_pack_revision": {
+      "const": "v0.0.0.2"
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "bundle_digest",
+    "status",
+    "owner_plane",
+    "source_trust",
+    "implementation_contract",
+    "current_summary",
+    "nonmutation",
+    "task_contract",
+    "schema_closure_count",
+    "policy_count",
+    "production_pilots_ready",
+    "next_phase",
+    "self_digest_pointer",
+    "task_pack_revision",
+    "artifact_digest"
+  ],
+  "title": "Mechanism M-068 representative pilots readiness",
+  "type": "object"
+}

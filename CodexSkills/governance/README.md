@@ -41,6 +41,13 @@ Key entrypoints:
   holdout isolation.
 - `tools/build_failure_to_test.py`: deterministic M-046 public-safe shadow
   fixture, three bundle-external schemas, and non-active readiness.
+- `pilots/representative_pilots.py`: pure M-068 deterministic sync,
+  same-name/multi-source identity, and high-risk iterative Shadow pilot
+  projection with three-cycle stability and synthetic pre-write rollback
+  drills.
+- `tools/build_representative_pilots.py`: deterministic M-068 pilot evidence,
+  two bundle-external schemas, and non-active readiness bound to the immutable
+  Registry snapshot and M-046/M-057/M-065 predecessors.
 - `promotion/controller.py`: pure append-only `PROMOTE` / `REJECT`
   controller with complete Registry, evaluation, evidence, and decision
   closure; no state writer or activation authority.
@@ -160,6 +167,8 @@ Run from the repository root with the explicitly provisioned interpreter:
   --check
 /usr/bin/python3 -B \
   CodexSkills/governance/tools/build_failure_to_test.py --check
+/usr/bin/python3 -B \
+  CodexSkills/governance/tools/build_representative_pilots.py --check
 /usr/bin/python3 -B \
   CodexSkills/governance/tools/build_promotion_controller.py --check
 /usr/bin/python3 -B \

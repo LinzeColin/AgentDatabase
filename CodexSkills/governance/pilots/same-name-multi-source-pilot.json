@@ -1,0 +1,362 @@
+{
+  "artifact_digest": "d77a8b74c17f7102af45be58f5fd4a116b634d63b12e96ddb940f6f7592cb5ad",
+  "bundle_digest": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e",
+  "canonical_name": "agent-reach",
+  "cycles": [
+    {
+      "cycle_index": 1,
+      "evidence_digest": "be56b8a4cb93905a9ecc98aa303a0736222498f1111607849bc73eaba7afc213",
+      "gate_results": [
+        {
+          "critical": true,
+          "evidence_digests": [
+            "7b5a74bd459a4737299444b68439c1799ba8a2159032636a24a987113eee9d12"
+          ],
+          "gate_code": "OWNER_REVIEW_REQUIRED_NO_AUTO_MERGE",
+          "status": "PASS"
+        },
+        {
+          "critical": true,
+          "evidence_digests": [
+            "7b5a74bd459a4737299444b68439c1799ba8a2159032636a24a987113eee9d12"
+          ],
+          "gate_code": "REGISTRY_REFERENCE_CLOSURE",
+          "status": "PASS"
+        },
+        {
+          "critical": true,
+          "evidence_digests": [
+            "af7d40693bb0346b5ff95050dd8dbd09b8b1bb41c89cbd01045dcc7b6fa074f4"
+          ],
+          "gate_code": "ROLLBACK_DRILL_CLOSURE",
+          "status": "PASS"
+        },
+        {
+          "critical": true,
+          "evidence_digests": [
+            "7b5a74bd459a4737299444b68439c1799ba8a2159032636a24a987113eee9d12"
+          ],
+          "gate_code": "SAME_NAME_DISTINCT_IDENTITY_PRESERVED",
+          "status": "PASS"
+        },
+        {
+          "critical": true,
+          "evidence_digests": [
+            "049809b3292f5591fc63f899c2172e67da66bb0a152998e04a341bda401d1228"
+          ],
+          "gate_code": "ZERO_SIDE_EFFECT_SHADOW",
+          "status": "PASS"
+        }
+      ],
+      "member_version_uids": [
+        "skv_1R35GFNVG5FHNMBJ5SSXY3ABG0",
+        "skv_23CRP30PG6HHYWZ8XFKF90KZGK"
+      ],
+      "mode": "DETERMINISTIC_SHADOW_METADATA_ONLY",
+      "notification_count": 0,
+      "publication_count": 0,
+      "registry_write_count": 0,
+      "rollback_drill": {
+        "evidence_bundle_digest": "af7d40693bb0346b5ff95050dd8dbd09b8b1bb41c89cbd01045dcc7b6fa074f4",
+        "history_rewrite_performed": false,
+        "mode": "SYNTHETIC_PRE_WRITE_NO_STATE",
+        "notification_sent": false,
+        "production_drill": false,
+        "real_registry_champion_present": false,
+        "state_write_observed": false,
+        "status": "SHADOW_PASS",
+        "synthetic_prior_champion_restorable": true,
+        "verification_evidence_refs": [
+          {
+            "artifact_digest": "8995f56962ba7f705d61f42142e7eae012f9e63a385704306acdb957f38c662e",
+            "kind": "REFERENCE_CLOSURE"
+          },
+          {
+            "artifact_digest": "a1a480c9fb704395f95c7cfdb72e93beee531520ddf7af619fc73100ab4f6331",
+            "kind": "RESTORE_PLAN"
+          },
+          {
+            "artifact_digest": "398eb15b822334b45213034326b9709ff33bda6265132b1bf2a7aca2da210381",
+            "kind": "RESTORE_TEST"
+          },
+          {
+            "artifact_digest": "b5c53b00eb6d54dd19f3c48a7fcca7ca7eb751a54784b6df0d35b61ee0eb2855",
+            "kind": "STATE_SNAPSHOT"
+          },
+          {
+            "artifact_digest": "03d9ec0ad61c84be59a98865b50acc9db8cda4810b36e1ffee57d803225317f7",
+            "kind": "TRIGGER"
+          }
+        ]
+      },
+      "shadow_evidence_digest": "4fe9e4925f595e4fc316a39eb74b64777e311fb9ddb3d8bcf7e64b5003da4755",
+      "side_effect_count": 0,
+      "state_write_count": 0
+    },
+    {
+      "cycle_index": 2,
+      "evidence_digest": "f212997250121e4a9b9ecad0dc445d38db889eba8803c72b39376be8b8726188",
+      "gate_results": [
+        {
+          "critical": true,
+          "evidence_digests": [
+            "7b5a74bd459a4737299444b68439c1799ba8a2159032636a24a987113eee9d12"
+          ],
+          "gate_code": "OWNER_REVIEW_REQUIRED_NO_AUTO_MERGE",
+          "status": "PASS"
+        },
+        {
+          "critical": true,
+          "evidence_digests": [
+            "7b5a74bd459a4737299444b68439c1799ba8a2159032636a24a987113eee9d12"
+          ],
+          "gate_code": "REGISTRY_REFERENCE_CLOSURE",
+          "status": "PASS"
+        },
+        {
+          "critical": true,
+          "evidence_digests": [
+            "471b2f9577cd1b85baba6f17dadde4d88c3b166a63ec7d26bca1c336a795347f"
+          ],
+          "gate_code": "ROLLBACK_DRILL_CLOSURE",
+          "status": "PASS"
+        },
+        {
+          "critical": true,
+          "evidence_digests": [
+            "7b5a74bd459a4737299444b68439c1799ba8a2159032636a24a987113eee9d12"
+          ],
+          "gate_code": "SAME_NAME_DISTINCT_IDENTITY_PRESERVED",
+          "status": "PASS"
+        },
+        {
+          "critical": true,
+          "evidence_digests": [
+            "049809b3292f5591fc63f899c2172e67da66bb0a152998e04a341bda401d1228"
+          ],
+          "gate_code": "ZERO_SIDE_EFFECT_SHADOW",
+          "status": "PASS"
+        }
+      ],
+      "member_version_uids": [
+        "skv_1R35GFNVG5FHNMBJ5SSXY3ABG0",
+        "skv_23CRP30PG6HHYWZ8XFKF90KZGK"
+      ],
+      "mode": "DETERMINISTIC_SHADOW_METADATA_ONLY",
+      "notification_count": 0,
+      "publication_count": 0,
+      "registry_write_count": 0,
+      "rollback_drill": {
+        "evidence_bundle_digest": "471b2f9577cd1b85baba6f17dadde4d88c3b166a63ec7d26bca1c336a795347f",
+        "history_rewrite_performed": false,
+        "mode": "SYNTHETIC_PRE_WRITE_NO_STATE",
+        "notification_sent": false,
+        "production_drill": false,
+        "real_registry_champion_present": false,
+        "state_write_observed": false,
+        "status": "SHADOW_PASS",
+        "synthetic_prior_champion_restorable": true,
+        "verification_evidence_refs": [
+          {
+            "artifact_digest": "57ae645fe755e1bd7bd7ae86b99a5ac28829fb7f0fabf7d683909ceab7b21133",
+            "kind": "REFERENCE_CLOSURE"
+          },
+          {
+            "artifact_digest": "32a08e3453968c511d2080399090e53fef4ec33f299dc2b538940e881c17b040",
+            "kind": "RESTORE_PLAN"
+          },
+          {
+            "artifact_digest": "6f293d932e205790fce6b7f836e25b40ffaa9653faa8cc5c72f7a1d3a4d098de",
+            "kind": "RESTORE_TEST"
+          },
+          {
+            "artifact_digest": "4c406605ebd069b7a49d091a31c39df7abcb41fdd43721559f0a006f600882cc",
+            "kind": "STATE_SNAPSHOT"
+          },
+          {
+            "artifact_digest": "9d6f14ac75aeb233452c06bf0ad84fc69a403031f8cc15a30941aa652ffeaed5",
+            "kind": "TRIGGER"
+          }
+        ]
+      },
+      "shadow_evidence_digest": "4fe9e4925f595e4fc316a39eb74b64777e311fb9ddb3d8bcf7e64b5003da4755",
+      "side_effect_count": 0,
+      "state_write_count": 0
+    },
+    {
+      "cycle_index": 3,
+      "evidence_digest": "9b6237620a4bc247472211ab23c6281483b3ccb413106227523d71391a8bea77",
+      "gate_results": [
+        {
+          "critical": true,
+          "evidence_digests": [
+            "7b5a74bd459a4737299444b68439c1799ba8a2159032636a24a987113eee9d12"
+          ],
+          "gate_code": "OWNER_REVIEW_REQUIRED_NO_AUTO_MERGE",
+          "status": "PASS"
+        },
+        {
+          "critical": true,
+          "evidence_digests": [
+            "7b5a74bd459a4737299444b68439c1799ba8a2159032636a24a987113eee9d12"
+          ],
+          "gate_code": "REGISTRY_REFERENCE_CLOSURE",
+          "status": "PASS"
+        },
+        {
+          "critical": true,
+          "evidence_digests": [
+            "c32c6ca81e4192705e527a4064aaf4010a42833ae44bf77559bf6fe9f4d33e69"
+          ],
+          "gate_code": "ROLLBACK_DRILL_CLOSURE",
+          "status": "PASS"
+        },
+        {
+          "critical": true,
+          "evidence_digests": [
+            "7b5a74bd459a4737299444b68439c1799ba8a2159032636a24a987113eee9d12"
+          ],
+          "gate_code": "SAME_NAME_DISTINCT_IDENTITY_PRESERVED",
+          "status": "PASS"
+        },
+        {
+          "critical": true,
+          "evidence_digests": [
+            "049809b3292f5591fc63f899c2172e67da66bb0a152998e04a341bda401d1228"
+          ],
+          "gate_code": "ZERO_SIDE_EFFECT_SHADOW",
+          "status": "PASS"
+        }
+      ],
+      "member_version_uids": [
+        "skv_1R35GFNVG5FHNMBJ5SSXY3ABG0",
+        "skv_23CRP30PG6HHYWZ8XFKF90KZGK"
+      ],
+      "mode": "DETERMINISTIC_SHADOW_METADATA_ONLY",
+      "notification_count": 0,
+      "publication_count": 0,
+      "registry_write_count": 0,
+      "rollback_drill": {
+        "evidence_bundle_digest": "c32c6ca81e4192705e527a4064aaf4010a42833ae44bf77559bf6fe9f4d33e69",
+        "history_rewrite_performed": false,
+        "mode": "SYNTHETIC_PRE_WRITE_NO_STATE",
+        "notification_sent": false,
+        "production_drill": false,
+        "real_registry_champion_present": false,
+        "state_write_observed": false,
+        "status": "SHADOW_PASS",
+        "synthetic_prior_champion_restorable": true,
+        "verification_evidence_refs": [
+          {
+            "artifact_digest": "71308b568ff2fac634f97ae21cc5d6745c10274d647f01e2587e70ca467aca70",
+            "kind": "REFERENCE_CLOSURE"
+          },
+          {
+            "artifact_digest": "e0a147c14a12d0237bf7a062ecb2975e6c09013f9d787df434e9f27103830f76",
+            "kind": "RESTORE_PLAN"
+          },
+          {
+            "artifact_digest": "36891965a9a7e476e1e9c41d55665127d2011fb777a2152571ec99d8baddc4c0",
+            "kind": "RESTORE_TEST"
+          },
+          {
+            "artifact_digest": "f29b2d4957f68c091d5fb2b46c727b8536e7d2c6c93c770399b8b28c28848868",
+            "kind": "STATE_SNAPSHOT"
+          },
+          {
+            "artifact_digest": "49b9ef6cc3386ad7a8171fda4496ebc917fce571e06fc81dfaa4e440649dfb36",
+            "kind": "TRIGGER"
+          }
+        ]
+      },
+      "shadow_evidence_digest": "4fe9e4925f595e4fc316a39eb74b64777e311fb9ddb3d8bcf7e64b5003da4755",
+      "side_effect_count": 0,
+      "state_write_count": 0
+    }
+  ],
+  "execution_mode": "DETERMINISTIC_SHADOW_METADATA_ONLY",
+  "identity_resolution": {
+    "owner_review_required": true,
+    "registry_identity_count": 2,
+    "registry_identity_uids": [
+      "ski_33XW2CSCBNAVP9T8CBFQKJAGBC",
+      "ski_7ZBGJSW7VGHF4EKW1NNX10PXNB"
+    ],
+    "same_name_auto_merge_permitted": false,
+    "selected_identity_count": 2,
+    "selected_identity_uids": [
+      "ski_33XW2CSCBNAVP9T8CBFQKJAGBC",
+      "ski_7ZBGJSW7VGHF4EKW1NNX10PXNB"
+    ]
+  },
+  "members": [
+    {
+      "binding_eligible": false,
+      "content_digest": "c58477e85a325fd01cc0fbbac50a5b13bf687a916919e656606414ae1e288ae2",
+      "eval_profile_present": false,
+      "identity_ref": {
+        "artifact_digest": "898ecaeeccc9438e4b53fef419f51ba1c717dac094ee78ca5362606021fef7bb"
+      },
+      "instance_ref": {
+        "artifact_digest": "5d5e68d8924ebbcd6905100b847f01739e4be892c645d412126a8a4cc10fe827"
+      },
+      "lifecycle_status": "QUARANTINED",
+      "permissions_resolved": false,
+      "skill_identity_uid": "ski_7ZBGJSW7VGHF4EKW1NNX10PXNB",
+      "skill_instance_uid": "skinst_7EG7VHF1DJT1J2F17A73EVES5A",
+      "skill_version_uid": "skv_23CRP30PG6HHYWZ8XFKF90KZGK",
+      "source_class": "AGENTS",
+      "source_fingerprint_digest": "1dad314382adabd4124d02e0f9d2e42ed32a4e3da1d0a32aba4aedeb1771c7eb",
+      "source_relative_path": "agents/agent-reach",
+      "trust_tier": "UNVERIFIED",
+      "version_ref": {
+        "version_record_digest": "ab0dd87c2c036574b1ec3a4961c84289295cb258cea16bccc534ff5e8ebb86ce"
+      }
+    },
+    {
+      "binding_eligible": false,
+      "content_digest": "fb05610eedb390be608ced2756e48c4c6b0c0f5bb0ef8495d2b9b60d8ec5dccb",
+      "eval_profile_present": false,
+      "identity_ref": {
+        "artifact_digest": "606fcbc2b139a6f74e5b14b30775e872b1010e03c627ecbffdb24b557638522f"
+      },
+      "instance_ref": {
+        "artifact_digest": "9265b6f2acab6329794338e33def70ab034e7c1453099648f59721d6d71d14f6"
+      },
+      "lifecycle_status": "QUARANTINED",
+      "permissions_resolved": false,
+      "skill_identity_uid": "ski_33XW2CSCBNAVP9T8CBFQKJAGBC",
+      "skill_instance_uid": "skinst_43PKTN0QFRQ9C9BVVT8JSG78ZK",
+      "skill_version_uid": "skv_1R35GFNVG5FHNMBJ5SSXY3ABG0",
+      "source_class": "CODEX",
+      "source_fingerprint_digest": "ad68660fa6bafc51b7fd24d9065db7065e410c057b38bada7f146d0b73b79b47",
+      "source_relative_path": "codex/agent-reach",
+      "trust_tier": "UNVERIFIED",
+      "version_ref": {
+        "version_record_digest": "cea94b795327d7e57d21da5d1b46529a503fc9a51d5d9355a81ad705d58aa4d5"
+      }
+    }
+  ],
+  "pilot_class": "SAME_NAME_MULTI_SOURCE",
+  "pilot_uid": "pil_01ARZ3NDEKTSV4RRFFQ69G5FA2",
+  "protocol_revision": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1",
+  "registry_snapshot_digest": "7b5a74bd459a4737299444b68439c1799ba8a2159032636a24a987113eee9d12",
+  "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:representative-pilot-evidence:v1",
+  "status": "SHADOW_COMPLETE_PRODUCTION_BLOCKED",
+  "summary": {
+    "all_shadow_critical_gates_passed": true,
+    "all_shadow_rollback_drills_passed": true,
+    "clean_cycle_count": 3,
+    "cycle_count": 3,
+    "production_blocker_codes": [
+      "BINDING_ELIGIBLE_VERSION_COUNT_ZERO",
+      "M065_CUTOVER_BLOCKED",
+      "REAL_CHAMPION_ABSENT",
+      "REAL_PROVIDER_NOTIFICATION_ABSENT",
+      "REGISTRY_VERSIONS_QUARANTINED"
+    ],
+    "production_critical_gates_passed": false,
+    "production_pilot_executed": false,
+    "three_cycle_result_stable": true
+  }
+}

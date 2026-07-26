@@ -1,0 +1,360 @@
+{
+  "artifact_digest": "5bb1f8663305f2ea07a6778f20b7258f49799db9446542cf8010435c7ffa2262",
+  "bundle_digest": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e",
+  "canonical_name": "km-bid-evolve",
+  "cycles": [
+    {
+      "cycle_index": 1,
+      "evidence_digest": "7c117f3a062e2bc66fd3aec4d4ab00c485fe5a69c2729d91cbbbb51f67c93161",
+      "gate_results": [
+        {
+          "critical": true,
+          "evidence_digests": [
+            "aab2854eb272c63e2d0a1fac033f5d8aca6a371afb12e37eaf979a92028b037d"
+          ],
+          "gate_code": "FAILURE_TO_TEST_LINEAGE",
+          "status": "PASS"
+        },
+        {
+          "critical": true,
+          "evidence_digests": [
+            "3cf47b465f46a458b2c16b57599462ca6638076cb32ab0e57ab2c86d6c41a93b"
+          ],
+          "gate_code": "NO_AUTONOMOUS_PROMOTION",
+          "status": "PASS"
+        },
+        {
+          "critical": true,
+          "evidence_digests": [
+            "7b5a74bd459a4737299444b68439c1799ba8a2159032636a24a987113eee9d12"
+          ],
+          "gate_code": "REGISTRY_REFERENCE_CLOSURE",
+          "status": "PASS"
+        },
+        {
+          "critical": true,
+          "evidence_digests": [
+            "a3c3de7da698ae437c7383311393892572daa0af95d0614e2f4fb12a8da116b6"
+          ],
+          "gate_code": "ROLLBACK_DRILL_CLOSURE",
+          "status": "PASS"
+        },
+        {
+          "critical": true,
+          "evidence_digests": [
+            "0fd20eef7a9aad02fe5301f28a3bbd91ee352dc431f9832fd372601e1425c496"
+          ],
+          "gate_code": "SEALED_HOLDOUT_ISOLATION",
+          "status": "PASS"
+        },
+        {
+          "critical": true,
+          "evidence_digests": [
+            "049809b3292f5591fc63f899c2172e67da66bb0a152998e04a341bda401d1228"
+          ],
+          "gate_code": "ZERO_SIDE_EFFECT_SHADOW",
+          "status": "PASS"
+        }
+      ],
+      "member_version_uids": [
+        "skv_2HAJG2J7C1R3FFX194NRARWNKG"
+      ],
+      "mode": "DETERMINISTIC_SHADOW_METADATA_ONLY",
+      "notification_count": 0,
+      "publication_count": 0,
+      "registry_write_count": 0,
+      "rollback_drill": {
+        "evidence_bundle_digest": "a3c3de7da698ae437c7383311393892572daa0af95d0614e2f4fb12a8da116b6",
+        "history_rewrite_performed": false,
+        "mode": "SYNTHETIC_PRE_WRITE_NO_STATE",
+        "notification_sent": false,
+        "production_drill": false,
+        "real_registry_champion_present": false,
+        "state_write_observed": false,
+        "status": "SHADOW_PASS",
+        "synthetic_prior_champion_restorable": true,
+        "verification_evidence_refs": [
+          {
+            "artifact_digest": "b76a981f72b5c8d24fc44ec39106b7bd541cdd5e577608460ffd254364ac498c",
+            "kind": "REFERENCE_CLOSURE"
+          },
+          {
+            "artifact_digest": "760b6720e52aa43fd609c7c94fe99a608d1a9df28e62c0cc38717f18dd61ba99",
+            "kind": "RESTORE_PLAN"
+          },
+          {
+            "artifact_digest": "a7bfb86a335d24f94cd02fb2833d12b49c94868a0c5be565f498a78a55ca17c0",
+            "kind": "RESTORE_TEST"
+          },
+          {
+            "artifact_digest": "efa0f3249366876f3fb516a5b5e87fa0cbcd3970635abdb3b2b249ad62de33f0",
+            "kind": "STATE_SNAPSHOT"
+          },
+          {
+            "artifact_digest": "f6ca8545919f75cd86f5fefac2e4b4893c6942f875ec20f23428e2fcecd90d68",
+            "kind": "TRIGGER"
+          }
+        ]
+      },
+      "shadow_evidence_digest": "f9d3adaf08b7f42baa56410ae3300461cf630bec2cc8df09b49baa956654f42c",
+      "side_effect_count": 0,
+      "state_write_count": 0
+    },
+    {
+      "cycle_index": 2,
+      "evidence_digest": "ccc02f3a38b73403a7c1e2d8599e69bebc6875d7889776d5778e0bf726ed3820",
+      "gate_results": [
+        {
+          "critical": true,
+          "evidence_digests": [
+            "aab2854eb272c63e2d0a1fac033f5d8aca6a371afb12e37eaf979a92028b037d"
+          ],
+          "gate_code": "FAILURE_TO_TEST_LINEAGE",
+          "status": "PASS"
+        },
+        {
+          "critical": true,
+          "evidence_digests": [
+            "3cf47b465f46a458b2c16b57599462ca6638076cb32ab0e57ab2c86d6c41a93b"
+          ],
+          "gate_code": "NO_AUTONOMOUS_PROMOTION",
+          "status": "PASS"
+        },
+        {
+          "critical": true,
+          "evidence_digests": [
+            "7b5a74bd459a4737299444b68439c1799ba8a2159032636a24a987113eee9d12"
+          ],
+          "gate_code": "REGISTRY_REFERENCE_CLOSURE",
+          "status": "PASS"
+        },
+        {
+          "critical": true,
+          "evidence_digests": [
+            "3190906d916bd01f4d8c94da316b554ec7e883f418c51c61e23df5fb9ea79f80"
+          ],
+          "gate_code": "ROLLBACK_DRILL_CLOSURE",
+          "status": "PASS"
+        },
+        {
+          "critical": true,
+          "evidence_digests": [
+            "0fd20eef7a9aad02fe5301f28a3bbd91ee352dc431f9832fd372601e1425c496"
+          ],
+          "gate_code": "SEALED_HOLDOUT_ISOLATION",
+          "status": "PASS"
+        },
+        {
+          "critical": true,
+          "evidence_digests": [
+            "049809b3292f5591fc63f899c2172e67da66bb0a152998e04a341bda401d1228"
+          ],
+          "gate_code": "ZERO_SIDE_EFFECT_SHADOW",
+          "status": "PASS"
+        }
+      ],
+      "member_version_uids": [
+        "skv_2HAJG2J7C1R3FFX194NRARWNKG"
+      ],
+      "mode": "DETERMINISTIC_SHADOW_METADATA_ONLY",
+      "notification_count": 0,
+      "publication_count": 0,
+      "registry_write_count": 0,
+      "rollback_drill": {
+        "evidence_bundle_digest": "3190906d916bd01f4d8c94da316b554ec7e883f418c51c61e23df5fb9ea79f80",
+        "history_rewrite_performed": false,
+        "mode": "SYNTHETIC_PRE_WRITE_NO_STATE",
+        "notification_sent": false,
+        "production_drill": false,
+        "real_registry_champion_present": false,
+        "state_write_observed": false,
+        "status": "SHADOW_PASS",
+        "synthetic_prior_champion_restorable": true,
+        "verification_evidence_refs": [
+          {
+            "artifact_digest": "16253e6aabc22f230d94d14cbc319cbd563389772cd068e9f048b7ca3939c539",
+            "kind": "REFERENCE_CLOSURE"
+          },
+          {
+            "artifact_digest": "9afb3beb326e6a03303489adf2f10dab80727d54a455ebda7f124e8cf0837b3b",
+            "kind": "RESTORE_PLAN"
+          },
+          {
+            "artifact_digest": "83864de335c3396ef3f9c03e864337c7c395bda28381c75bcc3187aa3fa7ecff",
+            "kind": "RESTORE_TEST"
+          },
+          {
+            "artifact_digest": "bdb62ff59855202f8d03863c5ced0468969f2f31406caaa9caf7789084221831",
+            "kind": "STATE_SNAPSHOT"
+          },
+          {
+            "artifact_digest": "e1696804a57fa1d166183eebc2ce86fc85ec103f8f85997579355baac8b1b1c0",
+            "kind": "TRIGGER"
+          }
+        ]
+      },
+      "shadow_evidence_digest": "f9d3adaf08b7f42baa56410ae3300461cf630bec2cc8df09b49baa956654f42c",
+      "side_effect_count": 0,
+      "state_write_count": 0
+    },
+    {
+      "cycle_index": 3,
+      "evidence_digest": "a77a2a825cb9623190c11ab430626d612a740729894274f25199dcd60a0c280e",
+      "gate_results": [
+        {
+          "critical": true,
+          "evidence_digests": [
+            "aab2854eb272c63e2d0a1fac033f5d8aca6a371afb12e37eaf979a92028b037d"
+          ],
+          "gate_code": "FAILURE_TO_TEST_LINEAGE",
+          "status": "PASS"
+        },
+        {
+          "critical": true,
+          "evidence_digests": [
+            "3cf47b465f46a458b2c16b57599462ca6638076cb32ab0e57ab2c86d6c41a93b"
+          ],
+          "gate_code": "NO_AUTONOMOUS_PROMOTION",
+          "status": "PASS"
+        },
+        {
+          "critical": true,
+          "evidence_digests": [
+            "7b5a74bd459a4737299444b68439c1799ba8a2159032636a24a987113eee9d12"
+          ],
+          "gate_code": "REGISTRY_REFERENCE_CLOSURE",
+          "status": "PASS"
+        },
+        {
+          "critical": true,
+          "evidence_digests": [
+            "a684cc531aa03719e21e199596306b0327ca4e6c3a95b08e0e1962faa42cab6d"
+          ],
+          "gate_code": "ROLLBACK_DRILL_CLOSURE",
+          "status": "PASS"
+        },
+        {
+          "critical": true,
+          "evidence_digests": [
+            "0fd20eef7a9aad02fe5301f28a3bbd91ee352dc431f9832fd372601e1425c496"
+          ],
+          "gate_code": "SEALED_HOLDOUT_ISOLATION",
+          "status": "PASS"
+        },
+        {
+          "critical": true,
+          "evidence_digests": [
+            "049809b3292f5591fc63f899c2172e67da66bb0a152998e04a341bda401d1228"
+          ],
+          "gate_code": "ZERO_SIDE_EFFECT_SHADOW",
+          "status": "PASS"
+        }
+      ],
+      "member_version_uids": [
+        "skv_2HAJG2J7C1R3FFX194NRARWNKG"
+      ],
+      "mode": "DETERMINISTIC_SHADOW_METADATA_ONLY",
+      "notification_count": 0,
+      "publication_count": 0,
+      "registry_write_count": 0,
+      "rollback_drill": {
+        "evidence_bundle_digest": "a684cc531aa03719e21e199596306b0327ca4e6c3a95b08e0e1962faa42cab6d",
+        "history_rewrite_performed": false,
+        "mode": "SYNTHETIC_PRE_WRITE_NO_STATE",
+        "notification_sent": false,
+        "production_drill": false,
+        "real_registry_champion_present": false,
+        "state_write_observed": false,
+        "status": "SHADOW_PASS",
+        "synthetic_prior_champion_restorable": true,
+        "verification_evidence_refs": [
+          {
+            "artifact_digest": "d5d8362b0f69ec66620063d2f4e168531849961d637180b8c0cf768de42ec630",
+            "kind": "REFERENCE_CLOSURE"
+          },
+          {
+            "artifact_digest": "e4019b916f99610ae108a265946a21ba4bd6c159bc8b635f8f883b72e9b9c71e",
+            "kind": "RESTORE_PLAN"
+          },
+          {
+            "artifact_digest": "3805048d8e5fc40525bb851ba6251f842231d8010ae68ec249534c7c2482682a",
+            "kind": "RESTORE_TEST"
+          },
+          {
+            "artifact_digest": "c5eb5259e417ed71554a0e5a60c155fcd86e3b9ef0f0bb204ff4afa327382056",
+            "kind": "STATE_SNAPSHOT"
+          },
+          {
+            "artifact_digest": "8f7553d1c8c73d1adbf5570106142f85bc951a7d8b0ed8a8e703c385dad76e4e",
+            "kind": "TRIGGER"
+          }
+        ]
+      },
+      "shadow_evidence_digest": "f9d3adaf08b7f42baa56410ae3300461cf630bec2cc8df09b49baa956654f42c",
+      "side_effect_count": 0,
+      "state_write_count": 0
+    }
+  ],
+  "execution_mode": "DETERMINISTIC_SHADOW_METADATA_ONLY",
+  "identity_resolution": {
+    "owner_review_required": true,
+    "registry_identity_count": 2,
+    "registry_identity_uids": [
+      "ski_1ZMP60QENV4786AN09MNK39X2F",
+      "ski_58AKTHBW3VQE0B7JM8WC6M1VPP"
+    ],
+    "same_name_auto_merge_permitted": false,
+    "selected_identity_count": 1,
+    "selected_identity_uids": [
+      "ski_58AKTHBW3VQE0B7JM8WC6M1VPP"
+    ]
+  },
+  "members": [
+    {
+      "binding_eligible": false,
+      "content_digest": "ac806c58f8e23001b16387a63dcabe40763a43fe745e4924fb58a8b2571cbe87",
+      "eval_profile_present": false,
+      "identity_ref": {
+        "artifact_digest": "80bad374c99ed077415da1da545adddd47d7d3f246084c4775995fc2f80abbb9"
+      },
+      "instance_ref": {
+        "artifact_digest": "158b77c2c59bf41d63553b0f289b3d7fdfc4f406d1e8183f12c3d3613fa96968"
+      },
+      "lifecycle_status": "QUARANTINED",
+      "permissions_resolved": false,
+      "skill_identity_uid": "ski_58AKTHBW3VQE0B7JM8WC6M1VPP",
+      "skill_instance_uid": "skinst_7DJPEH0R7E7BHQ5Q7GNTM72TMV",
+      "skill_version_uid": "skv_2HAJG2J7C1R3FFX194NRARWNKG",
+      "source_class": "CODEX",
+      "source_fingerprint_digest": "16a19fb4bf0ea607eaaf416baeb57266075f4a1a78ebde8523a8d6622cd7a2f2",
+      "source_relative_path": "codex/km-bid-evolve",
+      "trust_tier": "UNVERIFIED",
+      "version_ref": {
+        "version_record_digest": "b803ac74da95476fc37c77757fa3c1a1940fcc7ac4d3fd27f9d12f8966388593"
+      }
+    }
+  ],
+  "pilot_class": "HIGH_RISK_ITERATIVE",
+  "pilot_uid": "pil_01ARZ3NDEKTSV4RRFFQ69G5FA3",
+  "protocol_revision": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1",
+  "registry_snapshot_digest": "7b5a74bd459a4737299444b68439c1799ba8a2159032636a24a987113eee9d12",
+  "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:representative-pilot-evidence:v1",
+  "status": "SHADOW_COMPLETE_PRODUCTION_BLOCKED",
+  "summary": {
+    "all_shadow_critical_gates_passed": true,
+    "all_shadow_rollback_drills_passed": true,
+    "clean_cycle_count": 3,
+    "cycle_count": 3,
+    "production_blocker_codes": [
+      "BINDING_ELIGIBLE_VERSION_COUNT_ZERO",
+      "M065_CUTOVER_BLOCKED",
+      "REAL_CHAMPION_ABSENT",
+      "REAL_EVALUATION_PROFILE_ABSENT",
+      "REAL_PROVIDER_NOTIFICATION_ABSENT",
+      "REGISTRY_VERSIONS_QUARANTINED"
+    ],
+    "production_critical_gates_passed": false,
+    "production_pilot_executed": false,
+    "three_cycle_result_stable": true
+  }
+}

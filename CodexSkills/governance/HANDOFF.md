@@ -1,3 +1,135 @@
+# Mechanism three representative pilots handoff
+
+- State:
+  `DRAFT_NON_ACTIVE_THREE_REPRESENTATIVE_PILOTS_SHADOW_COMPLETE_PRODUCTION_BLOCKED`
+- Phase: `MECHANISM_THREE_REPRESENTATIVE_PILOTS`
+- Task Pack task implemented: `M-068`
+- M-068 dependencies: `M-046`, `M-057`, `M-065`
+- Required output:
+  `SYNC_DUPLICATE_IDENTITY_HIGH_RISK_EVOLVE_EVIDENCE`
+- Shadow done gate:
+  `ALL_CRITICAL_GATES_AND_ROLLBACK_DRILLS_PASS`
+- Production done gate satisfied: `false`
+- Pure pilot harness:
+  `CodexSkills/governance/pilots/representative_pilots.py`
+- Harness raw SHA-256:
+  `f00d9d3db5200d312d590cbd399b945e41fcf19c545cada0641992c8e41c79d8`
+- Deterministic builder:
+  `CodexSkills/governance/tools/build_representative_pilots.py`
+- Builder raw SHA-256:
+  `155773f11d7eb6085a2003e5404de0b94297a63121009c9717e32c6d04e91880`
+- Deterministic sync pilot:
+  `CodexSkills/governance/pilots/deterministic-sync-pilot.json`
+- Sync pilot raw / self SHA-256:
+  `0ab6ab5ced35748c2e9eabb4d276dc3f5b2c576b02a971c85a77aa1c98645976`
+  / `770a5493690fcf08ff4bb1c38862e5e877989c1528412b36d720cc2b4deaacd5`
+- Same-name/multi-source pilot:
+  `CodexSkills/governance/pilots/same-name-multi-source-pilot.json`
+- Duplicate-identity pilot raw / self SHA-256:
+  `e02ab4a7bb6554f8be0946d1b392d20090b27f998488635bf600c3499a761bd0`
+  / `d77a8b74c17f7102af45be58f5fd4a116b634d63b12e96ddb940f6f7592cb5ad`
+- High-risk iterative pilot:
+  `CodexSkills/governance/pilots/high-risk-evolve-pilot.json`
+- High-risk pilot raw / self SHA-256:
+  `b706e61f03e07349df885964c7c534f751a4947817c290c519f969051d492e73`
+  / `5bb1f8663305f2ea07a6778f20b7258f49799db9446542cf8010435c7ffa2262`
+- M-068 readiness:
+  `CodexSkills/governance/pilots/three-representative-pilots-readiness.json`
+- Readiness raw / self SHA-256:
+  `3cd985ca1d9a96aa36d63928db074e68c1af65c6240cdd4ecec675cb95b5f8a6`
+  / `19ce322a54343fc0640cdb58f023b51662530919f64c8a49c3cfc653de78df8e`
+- Pilot schema raw / canonical SHA-256:
+  `f5c618caea96de45d112a29ec2c5c05d00ecd93ef142d66aa269b8b6b418b943`
+  / `1a9e103aaeea5143dcbe0fb68fc0e2a6cfc0f8b92543d843e82823f22848b2db`
+- Readiness schema raw / canonical SHA-256:
+  `ee98d75b60f017f8c73e380092ea11c7db9af8384daa752f8d873af6d3b53d5a`
+  / `fd1feb556c65d6ffda5dfdf1e2b7ed9c9086eb905ed51c347b74bf35e7eb64fe`
+- Immutable Registry source:
+  `sha1:98e193e74991346d266bdd94ae720c32f25dfb47`
+- Registry snapshot raw / self SHA-256:
+  `ed5fb74fa88a2f1115a716be5e63f683d206c10d3d0a2005230d4c33d4c12c98`
+  / `7b5a74bd459a4737299444b68439c1799ba8a2159032636a24a987113eee9d12`
+- Registry identities / instances / versions / binding-eligible:
+  `89 / 89 / 89 / 0`
+- Pilot count / cycles / clean cycles / Shadow rollback drills:
+  `3 / 9 / 9 / 9`
+- All Shadow critical gates / rollback drills / cycle stability:
+  `true / true / true`
+- Real Skill execution / rollback / notification / publication:
+  `false / false / false / false`
+- Same-name automatic merge performed: `false`
+- Pending Task Pack task: `M-069`
+- Exact next Phase:
+  `MECHANISM_COLD_START_HANDOFF_RELEASE_REVIEW`
+
+M-068 selects the exact Task Pack representatives from the immutable
+registered snapshot:
+
+```text
+DETERMINISTIC_SYNC
+  CODEX codex/skill-github-sync
+SAME_NAME_MULTI_SOURCE
+  AGENTS agents/agent-reach
+  CODEX  codex/agent-reach
+HIGH_RISK_ITERATIVE
+  CODEX codex/km-bid-evolve
+```
+
+Each pilot is derived from closed public-safe metadata and contains exactly
+three byte-stable Shadow cycles. Every cycle has critical gate evidence, a
+synthetic pre-write rollback drill with all five M-057 verification kinds,
+and zero Skill execution, Registry/state write, notification, or publication
+side effects. The `agent-reach` records retain distinct Identity, Instance,
+and Version chains and require owner review; no same-name merge is inferred.
+The high-risk pilot is bound to the exact M-046 confirmed regression and
+sealed-holdout isolation evidence and cannot promote autonomously.
+
+The Shadow done gate is satisfied, but production readiness is deliberately
+false. All 89 Registry Versions remain `QUARANTINED/UNVERIFIED`, none is
+binding-eligible, M-057 has no real champion, M-065 cutover remains blocked,
+the high-risk Skill has no real EvalProfile, and no real provider notification
+was sent. A caller cannot upgrade those facts by changing and rehashing an
+artifact: the pure validator reconstructs the entire object from the pinned
+Registry and dependency evidence.
+
+## M-068 validation
+
+```text
+M-068 targeted selection/cycle/rollback/privacy/negative tests: 20/20 PASS
+complete Mechanism suite: 307/307 PASS
+M-068 builder/pilots/readiness/schemas: BYTE_EQUIVALENT
+public-value scan: 4/4 PASS
+Python 3.9 AST: 3/3 PASS
+candidate trust: 31 schemas / 5 policies PASS
+schema-set lint:
+  base 21 / candidate-compatible 41 / version 24 /
+  complete repository closure 85 PASS
+OpenAIDatabase consumer + architecture: 23/23 PASS
+consumer CLI: PASS / errors=[] / canonical publication=false
+```
+
+The pre-existing cross-owner transition remains fail-closed and is not
+modified or relabeled by M-068:
+
+```text
+complete Auto suite: 200 tests / 5 failures / 20 errors
+fault/privacy seed 271828: 149 tests / 5 failures / 25 errors
+fault/privacy seed 314159: 149 tests / 5 failures / 25 errors
+AUTO_REGISTRY_MIRROR_SKILL_COUNT_DRIFT
+BOUND_REFERENCE_RESOLVER_RUNTIME_LOCAL_DRIFT
+ACTIVATION_CONTROL_INTERFACE_SEMANTIC_MISMATCH
+```
+
+No Auto or OpenAIDatabase file change belongs to this Phase. Final acceptance
+additionally requires an ordinary commit, FF-safe `HEAD:main` push, and fresh
+detached GitHub object/raw-byte readback of every changed path. No verifier
+call, historical Task Pack replay, real Skill/evaluator run, Registry/source/
+state/watermark mutation, notification, migration, publication, activation,
+`CodexSkills/VERSION`, schedule, automation, App operation, or follow-on Phase
+belongs to this run.
+
+## Prior M-046 failure-to-test corrective handoff
+
 # Mechanism Failure-to-Test corrective handoff
 
 - State:
