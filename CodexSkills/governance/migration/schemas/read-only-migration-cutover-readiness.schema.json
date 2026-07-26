@@ -1,0 +1,237 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:read-only-migration-cutover-readiness:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "current_evidence": {
+      "const": {
+        "blocker_codes": [
+          "DUAL_READ_EVIDENCE_MISSING",
+          "HISTORICAL_TREE_PARITY_MISMATCH_CODEX",
+          "M014_SOURCE_MIGRATION_RECEIPT_MISSING",
+          "M015_COMPLETE_SOURCE_TARGET_PARITY_MISSING",
+          "RESOLVER_PRODUCTION_TRUST_NOT_PERMITTED",
+          "RESOLVER_SOURCE_ROOT_PARITY_NOT_PROVEN",
+          "RESOLVER_WHOLE_SOURCE_PARITY_NOT_PROVEN",
+          "SOURCE_MISSING_AGENTS",
+          "SOURCE_MISSING_CLAUDE",
+          "SOURCE_MISSING_CODEX",
+          "SOURCE_MISSING_CODEX_SYSTEM"
+        ],
+        "current_cutover_permitted": false,
+        "cutover_mode": "SHADOW_ONLY",
+        "decision": "BLOCKED",
+        "delete_budget": 0,
+        "local_data_mutation_performed": false,
+        "real_dual_read_executed": false,
+        "real_migration_executed": false,
+        "real_rollback_executed": false
+      }
+    },
+    "dependency_evidence": {
+      "const": {
+        "dependency_completion_claimed": false,
+        "incomplete_dependency_never_grandfathered": true,
+        "m014_status": "MISSING_DISTINCT_SOURCE_MIGRATION_RECEIPT",
+        "m015_status": "PARTIAL_HISTORICAL_REPO_PATH_PARITY_ONLY",
+        "m060_status": "VERIFIED_PROTECTED_LOCAL_ZERO_DELETE_BUDGET"
+      }
+    },
+    "implementation_contract": {
+      "const": {
+        "caller_cutover_boolean_is_not_trust_root": true,
+        "capability_mode": "PURE_IMMUTABLE_OBJECTS_ONLY",
+        "component_path": "CodexSkills/governance/migration/read_only_cutover.py",
+        "content_digest": "0fccde44c02f8d4ad76ae2aca9e428a8a1c64855e0660027449035861911b9a1",
+        "filesystem_capability_present": false,
+        "git_capability_present": false,
+        "mutation_capability_present": false,
+        "network_capability_present": false,
+        "observation": {
+          "canonical_path": "CodexSkills/governance/migration/schemas/read-only-migration-observation.schema.json",
+          "content_digest": "7507b62535395f52a8037ff5168c1b1e3019d04635b6a7015704c3b2bad8e304",
+          "instance": {
+            "canonical_path": "CodexSkills/governance/migration/read-only-migration-observation.json",
+            "content_digest": "333c6dd0cff6b891924601f8419d1ca659e5b097eaa26540c8a30b0e96508e4a",
+            "evidence_digest": "9c09dbed1e97c5d598d5f46eb9265d9270fe0119b5d21a3fac289ca4436b02c9"
+          },
+          "schema_sha256": "6d769bd378ee2526155fbfab29de89ec7754b41c026104a989a164a980505a97",
+          "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:read-only-migration-observation:v1",
+          "self_digest_pointer": "/evidence_bundle_digest"
+        },
+        "plan": {
+          "canonical_path": "CodexSkills/governance/migration/schemas/read-only-cutover-plan.schema.json",
+          "content_digest": "bbdba195fd3f40c47d31694d239b65d282b51cb8604f511014bfbc8732e55792",
+          "instance": {
+            "canonical_path": "CodexSkills/governance/migration/read-only-cutover-plan.json",
+            "content_digest": "20f177d523096f5333bb8210447fe0ace822c3e8e4deb4ea2fd86c8feae6c494",
+            "evidence_digest": "bf32c6c378d9f4d971a12dc26538ea23f9b90107bde7db2a0849de59ab8081f1"
+          },
+          "schema_sha256": "f800865090ce43f86ab78d69f306592a801f40faaad3bc2a167f20ecb3209d39",
+          "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:read-only-cutover-plan:v1",
+          "self_digest_pointer": "/evidence_bundle_digest"
+        },
+        "private_absolute_paths_serialized": false,
+        "required_evidence": [
+          "FOUR_SOURCE_PRE_POST_SNAPSHOT",
+          "FILE_TYPE_DIGEST_LINK_PARITY",
+          "DUAL_READ_RESULT_EQUIVALENCE",
+          "ZERO_MUTATION_COMMAND_SYSCALL_AUDIT",
+          "NEW_COMMIT_ONLY_ROLLBACK_CLOSURE"
+        ],
+        "source_classes": [
+          "AGENTS",
+          "CLAUDE",
+          "CODEX",
+          "CODEX_SYSTEM"
+        ],
+        "state_capability_present": false
+      }
+    },
+    "next_phase": {
+      "const": "MECHANISM_PERFORMANCE_CAPACITY_BUDGETS"
+    },
+    "nonmutation": {
+      "const": {
+        "activation_forbidden": true,
+        "auto_plane_unchanged": true,
+        "candidate_bundle_unchanged": true,
+        "canonical_publication_permitted": false,
+        "legacy_data_write_permitted": false,
+        "local_run_data_write_permitted": false,
+        "local_source_delete_permitted": false,
+        "local_source_write_permitted": false,
+        "openai_database_unchanged": true,
+        "state_write_permitted": false,
+        "version_file_created": false,
+        "watermark_advance_permitted": false
+      }
+    },
+    "owner_plane": {
+      "const": "MECHANISM"
+    },
+    "policy_count": {
+      "const": 5
+    },
+    "protocol_revision": {
+      "const": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1"
+    },
+    "real_execution_permitted": {
+      "const": false
+    },
+    "schema_closure_count": {
+      "const": 34
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:read-only-migration-cutover-readiness:v1"
+    },
+    "self_digest_pointer": {
+      "const": "/artifact_digest"
+    },
+    "source_trust": {
+      "const": {
+        "candidate_bundle": {
+          "artifact_digest": "66ad125629cab71739ff2bc266219f995f7a45998936ca720c6db678ee77e65a",
+          "bundle_digest": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e",
+          "canonical_path": "CodexSkills/governance/bundles/schema-bundle-manifest.v1.json",
+          "expected_mode": "CANDIDATE",
+          "policy_count": 5,
+          "schema_count": 31,
+          "verified_git_object_id": "sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5"
+        },
+        "historical_repo_path_consolidation": {
+          "local_source_mutation_proven": false,
+          "old_repo_paths_retained_after_commit": false,
+          "predecessor_git_object_id": "sha1:60c7311989e8931b0a701d7620260bb4d31313a1",
+          "tree_parity_complete": false,
+          "verified_git_object_id": "sha1:899a4374bc02f5e18444fea7404864df7b118adf"
+        },
+        "m060_protected_local_boundary": {
+          "artifact_digest": "b7c1ba479d0a47b97cb00b0556b2bf5db5b035bc156c9ae4e3bdc71337707080",
+          "canonical_path": "CodexSkills/governance/retention/protected-local-managed-raw-readiness.json",
+          "content_digest": "6376e6776b6f23cf45080f5d3a9191fcdf0238168032b14356da8b88dd45bef4",
+          "protected_delete_budget": 0,
+          "verified_git_object_id": "sha1:21235d49fca818b74677172711cfe279d2da68a6"
+        },
+        "m064_predecessor": {
+          "artifact_digest": "b94cfab93ad5383dda32b45506f267cf126c7400925fd4d371278bde392a007e",
+          "canonical_path": "CodexSkills/governance/retention/git-history-persistence-readiness.json",
+          "content_digest": "3cb7f9b6c5528f6c7415fa45c53da1fd38f2dbb7561f8d123b56769e96db567f",
+          "status": "DRAFT_NON_ACTIVE_GIT_HISTORY_PERSISTENCE_DISCLOSURE_READY",
+          "verified_git_object_id": "sha1:9b8f20f3ab97a7ec06aedfbe53670569ac036f9b"
+        },
+        "registered_snapshot": {
+          "canonical_path": "CodexSkills/registry/_global/registry-snapshot.v1.json",
+          "content_digest": "ed5fb74fa88a2f1115a716be5e63f683d206c10d3d0a2005230d4c33d4c12c98",
+          "registry_snapshot_digest": "7b5a74bd459a4737299444b68439c1799ba8a2159032636a24a987113eee9d12",
+          "status": "REGISTERED"
+        },
+        "repository_self_report_is_not_trust_root": true,
+        "resolver_interface": {
+          "artifact_digest": "d75e9b1d112b95d7ce0c5b9579140e78847ebc228b7347df7340e211522c0077",
+          "canonical_path": "CodexSkills/governance/registry/resolver-interface.json",
+          "content_digest": "f83032d5cb8c9dda9c6e903bb9dc5bf4f2a5de8bd687beeb010047f9e6b3ba2a",
+          "production_trust_permitted": false,
+          "source_mirror_parity_satisfied": true,
+          "source_root_parity_satisfied": false,
+          "verified_git_object_id": "sha1:98e193e74991346d266bdd94ae720c32f25dfb47",
+          "whole_source_parity_satisfied": false
+        }
+      }
+    },
+    "status": {
+      "const": "DRAFT_NON_ACTIVE_READ_ONLY_MIGRATION_CUTOVER_IMPLEMENTED_BLOCKED"
+    },
+    "task_contract": {
+      "const": {
+        "acceptance_criteria": [
+          "AC-07",
+          "AC-08",
+          "AC-09",
+          "AC-15"
+        ],
+        "dependency_task_ids": [
+          "M-014",
+          "M-015",
+          "M-060"
+        ],
+        "done_gate": "NO_LOCAL_DATA_MUTATION_DELETE_BUDGET_ZERO",
+        "implemented_task_ids": [
+          "M-065"
+        ],
+        "pending_task_ids": [
+          "M-066"
+        ],
+        "production_dependency_status": "BLOCKED_FAIL_CLOSED",
+        "required_output": "DUAL_READ_PARITY_CUTOVER_ROLLBACK"
+      }
+    },
+    "task_pack_revision": {
+      "const": "v0.0.0.2"
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "status",
+    "owner_plane",
+    "source_trust",
+    "implementation_contract",
+    "current_evidence",
+    "dependency_evidence",
+    "nonmutation",
+    "task_contract",
+    "schema_closure_count",
+    "policy_count",
+    "real_execution_permitted",
+    "next_phase",
+    "self_digest_pointer",
+    "task_pack_revision",
+    "artifact_digest"
+  ],
+  "title": "Mechanism M-065 read-only migration/cutover readiness",
+  "type": "object"
+}

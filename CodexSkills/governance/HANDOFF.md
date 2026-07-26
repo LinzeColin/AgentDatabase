@@ -1,4 +1,124 @@
-# Mechanism Git-history persistence disclosure handoff
+# Mechanism read-only migration/cutover handoff
+
+- State:
+  `DRAFT_NON_ACTIVE_READ_ONLY_MIGRATION_CUTOVER_IMPLEMENTED_BLOCKED`
+- Phase: `MECHANISM_READ_ONLY_MIGRATION_CUTOVER`
+- Task Pack task implemented: `M-065`
+- M-065 dependencies: `M-014`, `M-015`, `M-060`
+- Production dependency state: `BLOCKED_FAIL_CLOSED`
+- Required output: `DUAL_READ_PARITY_CUTOVER_ROLLBACK`
+- Done gate: `NO_LOCAL_DATA_MUTATION_DELETE_BUDGET_ZERO`
+- Acceptance criteria: `AC-07`, `AC-08`, `AC-09`, `AC-15`
+- Pure guard:
+  `CodexSkills/governance/migration/read_only_cutover.py`
+- Pure guard raw SHA-256:
+  `0fccde44c02f8d4ad76ae2aca9e428a8a1c64855e0660027449035861911b9a1`
+- Current observation:
+  `CodexSkills/governance/migration/read-only-migration-observation.json`
+- Observation raw SHA-256:
+  `333c6dd0cff6b891924601f8419d1ca659e5b097eaa26540c8a30b0e96508e4a`
+- Observation self digest:
+  `9c09dbed1e97c5d598d5f46eb9265d9270fe0119b5d21a3fac289ca4436b02c9`
+- Observation schema canonical SHA-256:
+  `6d769bd378ee2526155fbfab29de89ec7754b41c026104a989a164a980505a97`
+- Current plan:
+  `CodexSkills/governance/migration/read-only-cutover-plan.json`
+- Plan raw SHA-256:
+  `20f177d523096f5333bb8210447fe0ace822c3e8e4deb4ea2fd86c8feae6c494`
+- Plan self digest:
+  `bf32c6c378d9f4d971a12dc26538ea23f9b90107bde7db2a0849de59ab8081f1`
+- Plan schema canonical SHA-256:
+  `f800865090ce43f86ab78d69f306592a801f40faaad3bc2a167f20ecb3209d39`
+- M-065 readiness:
+  `CodexSkills/governance/migration/read-only-migration-cutover-readiness.json`
+- Readiness raw SHA-256:
+  `839b363d904116d8657f78e10b53a1cd11c86f1d64f06064090e5a71b24ca02c`
+- Readiness self digest:
+  `049809b3292f5591fc63f899c2172e67da66bb0a152998e04a341bda401d1228`
+- Readiness schema canonical SHA-256:
+  `60db683a5ed1f96d68ed382eaa763951ffed2ad357ae42138fa5a1098f5d8084`
+- Immutable M-064 predecessor:
+  `sha1:9b8f20f3ab97a7ec06aedfbe53670569ac036f9b`
+- Immutable M-060 protected-local boundary:
+  `sha1:21235d49fca818b74677172711cfe279d2da68a6`
+- Immutable candidate:
+  `sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5`
+- Immutable candidate bundle digest:
+  `36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e`
+- Current decision: `BLOCKED`
+- Current cutover mode: `SHADOW_ONLY`
+- Current cutover permitted: `false`
+- Delete budget: `0`
+- Local data mutation performed: `false`
+- Real migration / dual read / rollback executed: `false / false / false`
+- Pending Task Pack task: `M-066`
+- Exact next Phase: `MECHANISM_PERFORMANCE_CAPACITY_BUDGETS`
+
+M-065 implements the evidence contract without inventing completion evidence.
+Every `COMPLETE` source must close its pre, post, and target snapshots over
+file count, bytes, regular files, symlinks, tree digest, and link digest.
+Missing, empty, or errored sources, pre/post drift, any parity mismatch,
+missing or different dual-read results, an incomplete audit, a forbidden
+command, any mutating audit counter, or a nonzero delete budget blocks.
+
+The checked-in observation is intentionally blocked. There is no distinct
+M-014 source-migration receipt or complete M-015 external local-source parity
+proof. Immutable history also proves that the historical `CODEX` source and
+Registry target trees differ. The current resolver states source-root parity,
+whole-source parity, and production trust are false. The old repository paths
+were removed by the historical consolidation commit, so that commit is not
+grandfathered as proof that external local roots stayed unchanged.
+
+A complete synthetic evidence set produces `CUTOVER_ELIGIBLE`, proving the
+positive contract. Even then, the pure plan remains `SHADOW_ONLY` and
+`current_cutover_permitted=false`; it cannot execute a cutover. Rollback is a
+new ordinary commit only, retains the prior read route and evidence, forbids
+local source deletion, and forbids rebase, force-push, and history rewrite.
+
+M-065 has no filesystem, Git, network, state, lock, publisher, migration,
+copy, move, truncate, delete, or activation capability. It creates no
+VERSION, state, watermark, canonical artifact, or publication. Auto and
+OpenAIDatabase are unchanged.
+
+## M-065 validation
+
+```text
+M-065 targeted parity/mutation/rollback/negative tests: 16/16 PASS
+complete Mechanism suite: 236/236 PASS
+M-065 builder/schema/observation/plan/readiness: BYTE_EQUIVALENT
+complete synthetic parity + dual-read: CUTOVER_ELIGIBLE / execution false
+current evidence: BLOCKED / SHADOW_ONLY / delete budget 0
+candidate trust: 31 schemas / 5 policies PASS
+schema-set lint:
+  base 21 / candidate-compatible 41 / version 24 /
+  M-065 full closure 78 PASS
+OpenAIDatabase consumer + architecture: 23/23 PASS
+consumer CLI: PASS / errors=[] / canonical publication=false
+```
+
+The pre-existing cross-owner transition remains fail-closed and is not
+modified or relabeled by M-065:
+
+```text
+complete Auto suite: 200 tests / 5 failures / 20 errors
+fault/privacy seed 271828: 149 tests / 5 failures / 25 errors
+fault/privacy seed 314159: 149 tests / 5 failures / 25 errors
+AUTO_REGISTRY_MIRROR_SKILL_COUNT_DRIFT
+BOUND_REFERENCE_RESOLVER_RUNTIME_LOCAL_DRIFT
+ACTIVATION_CONTROL_INTERFACE_SEMANTIC_MISMATCH
+```
+
+The Registry compatibility index remains `90` while Auto is pinned to `89`.
+Those exact failures are the M-064 baseline and occur outside the M-065
+changed path set. No Auto file may be changed in this Mechanism Phase.
+
+Final acceptance additionally requires an ordinary commit, FF-safe
+`HEAD:main` push, and fresh detached GitHub object/raw-byte readback of every
+changed path. No verifier call, historical Task Pack replay, real local-source
+scan, migration, cutover, rollback, publication, activation, or follow-on
+Phase belongs to this run.
+
+## Prior M-064 Git-history persistence disclosure handoff
 
 - State: `DRAFT_NON_ACTIVE_GIT_HISTORY_PERSISTENCE_DISCLOSURE_READY`
 - Phase: `MECHANISM_GIT_HISTORY_PERSISTENCE_DISCLOSURE`

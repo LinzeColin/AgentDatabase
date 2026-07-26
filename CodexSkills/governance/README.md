@@ -94,6 +94,13 @@ Key entrypoints:
 - `tools/build_git_history_persistence_disclosure.py`: deterministic M-064
   disclosure/readiness schemas and evidence bound to the immutable M-063
   predecessor and exact 31/5 candidate.
+- `migration/read_only_cutover.py`: pure M-065 four-source completeness,
+  pre/post immutability, file/type/digest/link parity, dual-read, zero-mutation
+  audit, and new-commit-only rollback gate.
+- `tools/build_read_only_migration_cutover.py`: deterministic M-065
+  observation/plan/readiness schemas bound to the immutable M-060/M-064
+  predecessors, historical path evidence, registered snapshot, resolver, and
+  exact 31/5 candidate.
 - `tools/validate_au040_semantic_acceptance.py`: exact 365-day and
   shard/index/manifest/publication cross-artifact gates.
 - `tests/test_mechanism_contract.py`: positive, negative, and fault gates.
@@ -395,3 +402,20 @@ removal, history rewrite, repository rotation, private-storage rotation,
 state write, publication, activation, or VERSION creation. A future
 hard-erasure capability would require a separate Owner-authorized MAJOR
 design; it is not implied by this retention mechanism.
+
+M-065 makes migration authority evidence-driven. A `COMPLETE` source must
+close its pre, post, and target snapshots over file count, byte count, regular
+file count, symlink count, tree digest, and link digest. Missing, empty, or
+errored sources; any pre/post mutation; any target mismatch; absent or
+different dual-read results; a nonzero mutation audit counter; a forbidden
+command; or a nonzero delete budget blocks the plan. A stored caller decision
+or recomputed self digest cannot drop those blockers.
+
+The current repository evidence stays `BLOCKED/SHADOW_ONLY`: there is no
+distinct M-014 source-migration receipt, complete M-015 local parity is not
+available, the historical `CODEX` tree changed during path consolidation, and
+the resolver still reports source-root parity, whole-source parity, and
+production trust as false. This is not treated as a production cutover or
+retroactive proof that external local roots were unchanged. M-065 executes no
+real migration, dual read, rollback, state write, watermark advance,
+publication, activation, or VERSION creation.

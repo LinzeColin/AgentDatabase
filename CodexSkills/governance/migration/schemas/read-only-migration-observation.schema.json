@@ -1,0 +1,350 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:read-only-migration-observation:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "baseline_git_object_id": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/git_object_id"
+    },
+    "bundle_digest": {
+      "const": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e"
+    },
+    "delete_budget": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "derived_blocker_codes": {
+      "items": {
+        "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/enum_code"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "dual_read_queries": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "new_view": {
+            "additionalProperties": false,
+            "properties": {
+              "evidence_digest": {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+              },
+              "record_count": {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+              }
+            },
+            "required": [
+              "record_count",
+              "evidence_digest"
+            ],
+            "type": "object"
+          },
+          "old_view": {
+            "additionalProperties": false,
+            "properties": {
+              "evidence_digest": {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+              },
+              "record_count": {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+              }
+            },
+            "required": [
+              "record_count",
+              "evidence_digest"
+            ],
+            "type": "object"
+          },
+          "query_ref": {
+            "pattern": "^[a-z][a-z0-9-]{2,63}$",
+            "type": "string"
+          },
+          "reason_code": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/enum_code"
+          },
+          "state": {
+            "enum": [
+              "COMPLETE",
+              "ERROR",
+              "MISSING"
+            ]
+          }
+        },
+        "required": [
+          "query_ref",
+          "state"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "evidence_bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "historical_path_parity": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "predecessor_git_object_id": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/git_object_id"
+          },
+          "source_class": {
+            "enum": [
+              "AGENTS",
+              "CLAUDE",
+              "CODEX",
+              "CODEX_SYSTEM"
+            ]
+          },
+          "source_tree_git_object_id": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/git_object_id"
+          },
+          "target_path_present": {
+            "type": "boolean"
+          },
+          "target_tree_git_object_id": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/git_object_id"
+          },
+          "tree_object_equal": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "source_class",
+          "predecessor_git_object_id",
+          "source_tree_git_object_id",
+          "target_tree_git_object_id",
+          "target_path_present",
+          "tree_object_equal"
+        ],
+        "type": "object"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array"
+    },
+    "local_data_mutation_performed": {
+      "type": "boolean"
+    },
+    "mutation_audit": {
+      "additionalProperties": false,
+      "properties": {
+        "audit_complete": {
+          "type": "boolean"
+        },
+        "forbidden_command_observed": {
+          "type": "boolean"
+        },
+        "mode": {
+          "enum": [
+            "CONTROLLED_SYSCALL_AND_COMMAND_AUDIT",
+            "STATIC_CAPABILITY_AUDIT"
+          ]
+        },
+        "protected_chmod_count": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+        },
+        "protected_chown_count": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+        },
+        "protected_delete_count": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+        },
+        "protected_move_count": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+        },
+        "protected_truncate_count": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+        },
+        "protected_write_count": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+        },
+        "target_delete_count": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+        }
+      },
+      "required": [
+        "mode",
+        "forbidden_command_observed",
+        "audit_complete",
+        "protected_delete_count",
+        "protected_move_count",
+        "protected_truncate_count",
+        "protected_write_count",
+        "protected_chmod_count",
+        "protected_chown_count",
+        "target_delete_count"
+      ],
+      "type": "object"
+    },
+    "observation_uid": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/typed_uid"
+    },
+    "owner_plane": {
+      "const": "MECHANISM"
+    },
+    "protocol_revision": {
+      "const": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1"
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:read-only-migration-observation:v1"
+    },
+    "sources": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "post_snapshot": {
+            "additionalProperties": false,
+            "properties": {
+              "byte_count": {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+              },
+              "file_count": {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+              },
+              "link_digest": {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+              },
+              "regular_file_count": {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+              },
+              "symlink_count": {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+              },
+              "tree_digest": {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+              }
+            },
+            "required": [
+              "file_count",
+              "byte_count",
+              "regular_file_count",
+              "symlink_count",
+              "tree_digest",
+              "link_digest"
+            ],
+            "type": "object"
+          },
+          "pre_snapshot": {
+            "additionalProperties": false,
+            "properties": {
+              "byte_count": {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+              },
+              "file_count": {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+              },
+              "link_digest": {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+              },
+              "regular_file_count": {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+              },
+              "symlink_count": {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+              },
+              "tree_digest": {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+              }
+            },
+            "required": [
+              "file_count",
+              "byte_count",
+              "regular_file_count",
+              "symlink_count",
+              "tree_digest",
+              "link_digest"
+            ],
+            "type": "object"
+          },
+          "reason_code": {
+            "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/enum_code"
+          },
+          "source_class": {
+            "enum": [
+              "AGENTS",
+              "CLAUDE",
+              "CODEX",
+              "CODEX_SYSTEM"
+            ]
+          },
+          "source_ref": {
+            "pattern": "^[a-z][a-z0-9-]{2,63}$",
+            "type": "string"
+          },
+          "state": {
+            "enum": [
+              "COMPLETE",
+              "EMPTY",
+              "ERROR",
+              "MISSING"
+            ]
+          },
+          "target_snapshot": {
+            "additionalProperties": false,
+            "properties": {
+              "byte_count": {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+              },
+              "file_count": {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+              },
+              "link_digest": {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+              },
+              "regular_file_count": {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+              },
+              "symlink_count": {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+              },
+              "tree_digest": {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+              }
+            },
+            "required": [
+              "file_count",
+              "byte_count",
+              "regular_file_count",
+              "symlink_count",
+              "tree_digest",
+              "link_digest"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "source_class",
+          "source_ref",
+          "state"
+        ],
+        "type": "object"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array"
+    },
+    "status": {
+      "const": "DRAFT_NON_ACTIVE"
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "bundle_digest",
+    "observation_uid",
+    "owner_plane",
+    "status",
+    "baseline_git_object_id",
+    "sources",
+    "historical_path_parity",
+    "dual_read_queries",
+    "mutation_audit",
+    "delete_budget",
+    "local_data_mutation_performed",
+    "derived_blocker_codes",
+    "evidence_bundle_digest"
+  ],
+  "title": "Mechanism M-065 read-only migration observation",
+  "type": "object"
+}

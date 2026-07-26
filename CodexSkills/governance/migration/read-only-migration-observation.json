@@ -1,0 +1,93 @@
+{
+  "baseline_git_object_id": "sha1:9b8f20f3ab97a7ec06aedfbe53670569ac036f9b",
+  "bundle_digest": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e",
+  "delete_budget": 0,
+  "derived_blocker_codes": [
+    "DUAL_READ_EVIDENCE_MISSING",
+    "HISTORICAL_TREE_PARITY_MISMATCH_CODEX",
+    "SOURCE_MISSING_AGENTS",
+    "SOURCE_MISSING_CLAUDE",
+    "SOURCE_MISSING_CODEX",
+    "SOURCE_MISSING_CODEX_SYSTEM"
+  ],
+  "dual_read_queries": [],
+  "evidence_bundle_digest": "9c09dbed1e97c5d598d5f46eb9265d9270fe0119b5d21a3fac289ca4436b02c9",
+  "historical_path_parity": [
+    {
+      "predecessor_git_object_id": "sha1:60c7311989e8931b0a701d7620260bb4d31313a1",
+      "source_class": "AGENTS",
+      "source_tree_git_object_id": "sha1:012f7d3759bb4f54ebe8d029d50f45b4a0092e51",
+      "target_path_present": true,
+      "target_tree_git_object_id": "sha1:012f7d3759bb4f54ebe8d029d50f45b4a0092e51",
+      "tree_object_equal": true
+    },
+    {
+      "predecessor_git_object_id": "sha1:60c7311989e8931b0a701d7620260bb4d31313a1",
+      "source_class": "CLAUDE",
+      "source_tree_git_object_id": "sha1:5a01abd56c36c8a3fc682e35b866f8847327d3d2",
+      "target_path_present": true,
+      "target_tree_git_object_id": "sha1:5a01abd56c36c8a3fc682e35b866f8847327d3d2",
+      "tree_object_equal": true
+    },
+    {
+      "predecessor_git_object_id": "sha1:60c7311989e8931b0a701d7620260bb4d31313a1",
+      "source_class": "CODEX",
+      "source_tree_git_object_id": "sha1:3a9cbdd2b0b8dd353e90c466e6f6aee8df3fe7a7",
+      "target_path_present": true,
+      "target_tree_git_object_id": "sha1:2b4204d4a755f18ab910f3e3228291f76c67c00c",
+      "tree_object_equal": false
+    },
+    {
+      "predecessor_git_object_id": "sha1:60c7311989e8931b0a701d7620260bb4d31313a1",
+      "source_class": "CODEX_SYSTEM",
+      "source_tree_git_object_id": "sha1:2ce698d64a137a3319f314df0010d98d70cb9625",
+      "target_path_present": true,
+      "target_tree_git_object_id": "sha1:2ce698d64a137a3319f314df0010d98d70cb9625",
+      "tree_object_equal": true
+    }
+  ],
+  "local_data_mutation_performed": false,
+  "mutation_audit": {
+    "audit_complete": true,
+    "forbidden_command_observed": false,
+    "mode": "STATIC_CAPABILITY_AUDIT",
+    "protected_chmod_count": 0,
+    "protected_chown_count": 0,
+    "protected_delete_count": 0,
+    "protected_move_count": 0,
+    "protected_truncate_count": 0,
+    "protected_write_count": 0,
+    "target_delete_count": 0
+  },
+  "observation_uid": "mig_01ARZ3NDEKTSV4RRFFQ69G5FAV",
+  "owner_plane": "MECHANISM",
+  "protocol_revision": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1",
+  "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:read-only-migration-observation:v1",
+  "sources": [
+    {
+      "reason_code": "M014_SOURCE_SNAPSHOT_NOT_MATERIALIZED",
+      "source_class": "AGENTS",
+      "source_ref": "agents-source",
+      "state": "MISSING"
+    },
+    {
+      "reason_code": "M014_SOURCE_SNAPSHOT_NOT_MATERIALIZED",
+      "source_class": "CLAUDE",
+      "source_ref": "claude-source",
+      "state": "MISSING"
+    },
+    {
+      "reason_code": "M014_SOURCE_SNAPSHOT_NOT_MATERIALIZED",
+      "source_class": "CODEX",
+      "source_ref": "codex-source",
+      "state": "MISSING"
+    },
+    {
+      "reason_code": "M014_SOURCE_SNAPSHOT_NOT_MATERIALIZED",
+      "source_class": "CODEX_SYSTEM",
+      "source_ref": "codex-system-source",
+      "state": "MISSING"
+    }
+  ],
+  "status": "DRAFT_NON_ACTIVE"
+}

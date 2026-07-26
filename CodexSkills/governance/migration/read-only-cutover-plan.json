@@ -1,0 +1,46 @@
+{
+  "blocker_codes": [
+    "DUAL_READ_EVIDENCE_MISSING",
+    "HISTORICAL_TREE_PARITY_MISMATCH_CODEX",
+    "M014_SOURCE_MIGRATION_RECEIPT_MISSING",
+    "M015_COMPLETE_SOURCE_TARGET_PARITY_MISSING",
+    "RESOLVER_PRODUCTION_TRUST_NOT_PERMITTED",
+    "RESOLVER_SOURCE_ROOT_PARITY_NOT_PROVEN",
+    "RESOLVER_WHOLE_SOURCE_PARITY_NOT_PROVEN",
+    "SOURCE_MISSING_AGENTS",
+    "SOURCE_MISSING_CLAUDE",
+    "SOURCE_MISSING_CODEX",
+    "SOURCE_MISSING_CODEX_SYSTEM"
+  ],
+  "bundle_digest": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e",
+  "current_cutover_permitted": false,
+  "cutover_mode": "SHADOW_ONLY",
+  "decision": "BLOCKED",
+  "delete_budget": 0,
+  "dual_read_complete": false,
+  "evidence_bundle_digest": "bf32c6c378d9f4d971a12dc26538ea23f9b90107bde7db2a0849de59ab8081f1",
+  "observation_ref": {
+    "evidence_digest": "9c09dbed1e97c5d598d5f46eb9265d9270fe0119b5d21a3fac289ca4436b02c9",
+    "observation_uid": "mig_01ARZ3NDEKTSV4RRFFQ69G5FAV"
+  },
+  "owner_plane": "MECHANISM",
+  "parity_complete": false,
+  "plan_uid": "cut_01ARZ3NDEKTSV4RRFFQ69G5FAW",
+  "protocol_revision": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1",
+  "rollback_contract": {
+    "baseline_git_object_required": true,
+    "force_push_permitted": false,
+    "history_rewrite_permitted": false,
+    "local_source_deletion_permitted": false,
+    "mode": "NEW_COMMIT_ONLY",
+    "path_map_retained": true,
+    "previous_read_route_retained": true,
+    "rebase_permitted": false,
+    "receipt_evidence_retained": true,
+    "source_evidence_retained": true,
+    "watermark_state_backup_required": true
+  },
+  "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:read-only-cutover-plan:v1",
+  "status": "DRAFT_NON_ACTIVE",
+  "zero_local_mutation_verified": true
+}
