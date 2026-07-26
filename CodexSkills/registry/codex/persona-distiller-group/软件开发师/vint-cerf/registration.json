@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:vintcerf",
+  "canonical_name": "Vint Cerf",
+  "identity_family_id": "software-developer",
+  "identity_mode": "single",
+  "registration_category": "软件开发师",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "vint-cerf",
+  "subject_uid": "person-fb47a4c208abe8df",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/vint-cerf-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-26T15:46:53Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "dd01c1d133591cb3e1651a7c2b59ea6d3c8b52d2ccfdc1e26cc8b893bdd25356",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/vint-cerf-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "18f529344fc48335842c5545596259beb02c9ff250654a29bb3704590d0ac92b",
+      "runtime_size_bytes": 62198,
+      "size_bytes": 69910
+    }
+  ]
+}

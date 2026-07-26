@@ -1,6 +1,6 @@
 # CodexSkills
 
-本机全部 Skill 的仓库镜像：**90 份实例 / 75 个不同名字**，4153 个文件，约 119 MB。
+本机全部 Skill 的仓库镜像：**90 份实例 / 75 个不同名字**，4156 个文件，约 120 MB。
 
 **由 `sync_skills.py` 自动生成，请勿手工编辑本文件。**
 
@@ -34,7 +34,7 @@ curl -s https://raw.githubusercontent.com/LinzeColin/AgentDatabase/main/CodexSki
 目录（由 `team-index.json` 实时派生，不在本脚本里硬编码，避免分类改版后文档漂移）：[`农林牧渔师/`](registry/codex/persona-distiller-group/农林牧渔师/)、[`创业经营师/`](registry/codex/persona-distiller-group/创业经营师/)、[`医疗护理师/`](registry/codex/persona-distiller-group/医疗护理师/)、[`客户营销师/`](registry/codex/persona-distiller-group/客户营销师/)、[`建造采购师/`](registry/codex/persona-distiller-group/建造采购师/)、[`思想教育师/`](registry/codex/persona-distiller-group/思想教育师/)、[`投资资本师/`](registry/codex/persona-distiller-group/投资资本师/)、[`政治法律师/`](registry/codex/persona-distiller-group/政治法律师/)、[`材料建工师/`](registry/codex/persona-distiller-group/材料建工师/)、[`艺术设计师/`](registry/codex/persona-distiller-group/艺术设计师/)、[`财务合规师/`](registry/codex/persona-distiller-group/财务合规师/)、[`软件开发师/`](registry/codex/persona-distiller-group/软件开发师/)。
 身份分类由人物 Skill 内部使用，不是调用门槛；用户安装后直接调用对应人物 Skill，无需选择身份。人物产物按 canonical 人物分别从 `0.0.0.1` 连续编号到 `0.0.0.999`，只在成功登记时占号；人物 Skill 的单次运行不编号。团队调用会先按场景选择 5–20 个高相关角色，以正向解决者为主，并至少隔离一个复审、一个裁判和一个反证角色。
 
-当前登记：**79 个人物**。
+当前登记：**80 个人物**。
 
 | 人物 | 唯一分类 | 产物版本 | 完整 ZIP |
 |---|---|---|---|
@@ -117,6 +117,7 @@ curl -s https://raw.githubusercontent.com/LinzeColin/AgentDatabase/main/CodexSki
 | Simon Willison | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/simon-willison/versions/0.0.0.1/simon-willison-persona-distillation-delivery-v0.0.0.1.zip) |
 | Stephen E. Robertson | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/stephen-e-robertson/versions/0.0.0.1/stephen-e-robertson-persona-distillation-delivery-v0.0.0.1.zip) |
 | Tim Berners-Lee | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/tim-berners-lee/versions/0.0.0.1/tim-berners-lee-persona-distillation-delivery-v0.0.0.1.zip) |
+| Vint Cerf | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/vint-cerf/versions/0.0.0.1/vint-cerf-persona-distillation-delivery-v0.0.0.1.zip) |
 
 ## 治理规则：受保护资产（不可再生，丢了就没了）
 
