@@ -60,7 +60,7 @@
 ## 当前登记
 
 <!-- PERSONA-REGISTRY:START -->
-当前唯一登记：**87 个人物**。
+当前唯一登记：**88 个人物**。
 
 | 唯一目录 | 人物数 |
 |---|---:|
@@ -68,7 +68,7 @@
 | `软件开发师/` | 32 |
 | `艺术设计师/` | 0 |
 | `创业经营师/` | 7 |
-| `投资资本师/` | 13 |
+| `投资资本师/` | 14 |
 | `思想教育师/` | 2 |
 | `政治法律师/` | 5 |
 | `客户营销师/` | 0 |
@@ -76,7 +76,7 @@
 | `财务合规师/` | 1 |
 | `医疗护理师/` | 0 |
 | `农林牧渔师/` | 0 |
-| **总计** | **87** |
+| **总计** | **88** |
 
 | 人物 | 唯一身份 | 版本 | 选入原因 | 最值得蒸馏的特点 | 对用户的利益/帮助 | 应用场景 | 关键能力 | 完整 ZIP |
 |---|---|---|---|---|---|---|---|---|
@@ -109,6 +109,7 @@
 | Joel Greenblatt | `投资资本师` | `0.0.0.1` | 职业核心与主要公开作品长期聚焦价值投资、特殊情形、相对价值和资本配置。；监管披露显示其持续承担组合管理与共同首席投资官职责。 | 企业现金流价值先于价格叙事；结构性错价与低竞争机会场域 | 把模糊投资观点转为可证伪的企业价值与错价机制；按研究深度、容量和行为约束选择组合结构 | 公司研究与估值备忘录；特殊情形研究计划 | 现金流与资本回报驱动的企业估值；结构性错价诊断 | [ZIP](投资资本师/joel-greenblatt/versions/0.0.0.1/joel-greenblatt-persona-distillation-delivery-v0.0.0.1.zip) |
 | Michael J. Mauboussin | `投资资本师` | `0.0.0.1` | 适用于需要把估值、资本配置与决策科学放进同一分析框架的任务；在不确定性、概率、基准率和反馈方面拥有长期、跨来源一致的公开方法体系 | 从价格或现状反推隐含预期，而非先猜目标值；持续追问“与什么相比”并使用外部参考类 | 把模糊商业故事转换为可检验的价值驱动因素和情景；用基准率、贝叶斯更新和概率—赔率降低预测偏差 | 公司研究与价格隐含预期分析；资本配置、并购、回购和再投资评估 | Expectations Investing / reverse DCF；ROIC与资本成本驱动的价值创造分析 | [ZIP](投资资本师/michael-mauboussin/versions/0.0.0.1/michael-mauboussin-persona-distillation-delivery-v0.0.0.1.zip) |
 | Nick Sleep | `投资资本师` | `0.0.0.1` | 公开一手合伙人信跨越完整投资周期，可观察理念演化与压力期行为；投资、治理和慈善资本配置形成可比较的长期决策轨迹 | 从短期路径转向长期终点与到达概率；把规模效率回馈客户形成强化循环 | 审查企业是否具备可持续复利机制；把价格波动与业务事实、概率变化分开 | 公司与商业模型研究；长期投资决策与组合复盘 | 终点—机制—概率分析；规模经济共享与客户互惠飞轮识别 | [ZIP](投资资本师/nick-sleep/versions/0.0.0.1/nick-sleep-persona-distillation-delivery-v0.0.0.1.zip) |
+| Peter Lynch | `投资资本师` | `0.0.0.1` | 麦哲伦 1977–1990 年均约 29.2%，规模 1800 万→140 亿，当时全球表现最好的共同基金；**其最著名的口号是全项目最典型的「被误读成反面」案例**，纠正义务本身即高价值 | **凡提到「invest in what you know」必须把研究那一步补回去**——观察是线索不是买入理由；先分类再判断；周期股的低市盈率常是顶部信号而非便宜信号 | 拦下「熟悉就能买」这个最常见也最有害的误读，把调研那一步补回去；用六类分类避免把周期股当成长股拿——含「低市盈率常是顶部信号」这条反直觉判据 | 把生活中的观察转化为可验证的投资假设；按六类企业分类选择相应的分析标准与持有期限 | 把日常观察转化为可验证的投资假设并说明还需查什么；判定企业属于六类中的哪一类并套用该类的买入与卖出判据 | [ZIP](投资资本师/peter-lynch/versions/0.0.0.1/peter-lynch-persona-distillation-delivery-v0.0.0.1.zip) |
 | Philip Fisher | `投资资本师` | `0.0.0.1` | 成长股投资的奠基者之一；闲聊法与十五要点均出自其本人；与已入库的 Benjamin Graham（#86）构成前提相反的一组对照——「我会看错」vs「我能看透」 | 落点在「该问谁」而不是「该算什么」；把竞争对手列为最有信息量的来源——同行没理由夸你 | 把「怎么判断一家公司好不好」从看报表转成一份可执行的打听清单；给出管理层可信度的四条判据，其中一条是决定性的 | 用一手打听而非公开资料评估企业真实竞争力；把管理层是否照实说坏消息作为前置筛选门 | 设计并执行闲聊法（问客户／供应商／竞争对手／离职员工并交叉比对）；以十五要点做企业质量的定性评估 | [ZIP](投资资本师/philip-fisher/versions/0.0.0.1/philip-fisher-persona-distillation-delivery-v0.0.0.1.zip) |
 | Robert A. Kindler | `投资资本师` | `0.0.0.1` | Unique career spanning elite M&A legal practice and senior investment-banking leadership.；Public evidence supports a transferable interface between document precision, board strategy and transaction execution. | dual legal-and-banker lens；separates strategic need from execution feasibility | Review M&A and governance decisions without collapsing legal and commercial dimensions.；Build board-ready decision memos with explicit authorization, risk and stop conditions. | M&A strategy and transaction screening；board and corporate-governance decision support | legal-commercial dual-track analysis；transaction lifecycle and stage-gate design | [ZIP](投资资本师/robert-a-kindler/versions/0.0.0.1/robert-a-kindler-persona-distillation-delivery-v0.0.0.1.zip) |
 | Seth Klarman | `投资资本师` | `0.0.0.1` | 长期担任 Baupost CEO 与投资组合经理，职业事实与投资资本家身份直接匹配；公开材料对估值、组合、风险、现金、催化剂和组织流程提供了跨时期证据 | 下行优先而非波动恐惧；价格—价值—催化剂—时间四联模型 | 把模糊的“价值投资”转换为可执行承保清单；在买入前强制暴露永久损失和价值陷阱 | 公司与证券研究；投资委员会备忘录 | 基本面估值与下行分析；催化剂和时间路径设计 | [ZIP](投资资本师/seth-klarman/versions/0.0.0.1/seth-klarman-persona-distillation-delivery-v0.0.0.1.zip) |
