@@ -1,4 +1,42 @@
-# Mechanism version-policy v3 consumer-readiness handoff
+# Mechanism promotion-controller handoff
+
+- State: `DRAFT_NON_ACTIVE_PROMOTION_CONTROLLER_READY`
+- Phase: `MECHANISM_PROMOTION_CONTROLLER`
+- Task Pack task completed: `M-056`
+- Required output: `APPEND_ONLY_CHAMPION_REJECT_DECISION`
+- Done gate:
+  `NO_GATE_BYPASS_AND_ONE_CHAMPION_PER_SCOPE`
+- Controller:
+  `CodexSkills/governance/promotion/controller.py`
+- Controller content SHA-256:
+  `bcc39aaa1e6c817fb321a8772996a05fffffe947cd8bbc218a5f7bad16db3e53`
+- Readiness raw SHA-256:
+  `d54d577bf53e155c1eb6215db388d9f7939f91e21d6af938242c49928b44d1ae`
+- Readiness self digest:
+  `152afb30ca521bdbf6fe954f0afd408cc238119183d55b782c1ffcfdbadff53b`
+- Readiness schema canonical SHA-256:
+  `51bbf66eb8f91e4b7243d2d68ab413d36ffa943d3f6baf00331efda51e943693`
+- Real Registry observation:
+  `89 identities / 89 instances / 89 versions / 0 CHALLENGER / 0 CHAMPION`
+- Real promotion execution permitted: `false`
+- Pending Task Pack task: `M-057`
+- Exact next Phase: `MECHANISM_ROLLBACK_REVOCATION_CONTROLLER`
+
+The M-056 controller is a pure function. It verifies the trusted 31/5
+candidate, externally pinned Registry snapshot, version-to-instance-to-identity
+scope, four-cell causal eval closure, scorecards, hard gates, notification
+receipt semantics, evidence self-digest, decision self-digest, strict ledger
+time order, unique decision/evidence use, an externally pinned predecessor
+ledger digest, and exactly one champion per Identity scope. The ledger digest
+binds the Registry snapshot plus the full ordered decision-digest history. The
+controller returns canonical JCS event bytes but never persists them.
+
+`ROLLBACK` and `REVOKE` fail closed with
+`PROMOTION_ROLLBACK_REVOCATION_PHASE_REQUIRED`. No Registry/state/Git/VERSION
+write, activation, canonical publication, Auto mutation, or verifier call is
+part of this Phase.
+
+## Prior version-policy v3 consumer-readiness handoff
 
 - State: `DRAFT_NON_ACTIVE_MECHANISM_CONSUMER_READY`
 - Phase: `MECHANISM_VERSION_POLICY_V3_CONSUMER_FIRST_READINESS`

@@ -1,0 +1,88 @@
+{
+  "artifact_digest": "152afb30ca521bdbf6fe954f0afd408cc238119183d55b782c1ffcfdbadff53b",
+  "controller_contract": {
+    "append_record_format": "RFC8785_JCS_UTF8_NO_BOM_NO_LF",
+    "candidate_bundle_trust_required": true,
+    "complete_reference_closure_required": true,
+    "component_path": "CodexSkills/governance/promotion/controller.py",
+    "component_source_binding_mode": "SUCCESSOR_EXTERNAL_TUPLE_REQUIRED",
+    "content_digest": "bcc39aaa1e6c817fb321a8772996a05fffffe947cd8bbc218a5f7bad16db3e53",
+    "decision_actions": [
+      "PROMOTE",
+      "REJECT"
+    ],
+    "decision_uid_and_digest_unique": true,
+    "evidence_reuse_permitted": false,
+    "external_predecessor_ledger_digest_required": true,
+    "ledger_digest_domain": "SKILLOPS_PROMOTION_LEDGER_V1",
+    "m056_no_gate_bypass_verified": true,
+    "m056_one_champion_per_scope_verified": true,
+    "promotion_transition": "CHALLENGER_TO_CHAMPION",
+    "public_artifact_write_permitted": false,
+    "reject_transition": "CHALLENGER_TO_QUARANTINED_STAGE_REJECTED",
+    "rollback_revocation_actions": [
+      "ROLLBACK",
+      "REVOKE"
+    ],
+    "rollback_revocation_implemented": false,
+    "state_write_permitted": false,
+    "strict_time_order_required": true
+  },
+  "digest_algorithm": "SHA-256",
+  "next_phase": "MECHANISM_ROLLBACK_REVOCATION_CONTROLLER",
+  "nonmutation": {
+    "activation_forbidden": true,
+    "auto_plane_unchanged": true,
+    "candidate_bundle_unchanged": true,
+    "canonical_publication_permitted": false,
+    "registry_write_permitted": false,
+    "rollback_revocation_execution_permitted": false,
+    "version_file_created": false
+  },
+  "owner_plane": "MECHANISM",
+  "protocol_revision": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1",
+  "registry_observation": {
+    "base_champion_count": 0,
+    "challenger_version_count": 0,
+    "identity_count": 89,
+    "instance_count": 89,
+    "real_promotion_execution_permitted": false,
+    "reason_code": "NO_REGISTERED_CHALLENGER_OR_CHAMPION",
+    "snapshot_status": "REGISTERED",
+    "version_count": 89
+  },
+  "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:promotion-controller-readiness:v1",
+  "self_digest_pointer": "/artifact_digest",
+  "source_trust": {
+    "candidate_bundle": {
+      "artifact_digest": "66ad125629cab71739ff2bc266219f995f7a45998936ca720c6db678ee77e65a",
+      "bundle_digest": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e",
+      "canonical_path": "CodexSkills/governance/bundles/schema-bundle-manifest.v1.json",
+      "expected_mode": "CANDIDATE",
+      "policy_count": 5,
+      "schema_count": 31,
+      "verified_git_object_id": "sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5"
+    },
+    "registry_snapshot": {
+      "artifact_digest": "ed5fb74fa88a2f1115a716be5e63f683d206c10d3d0a2005230d4c33d4c12c98",
+      "canonical_path": "CodexSkills/registry/_global/registry-snapshot.v1.json",
+      "digest_basis": "RAW_BYTES",
+      "expected_mode": "REGISTERED_READ_ONLY",
+      "registry_snapshot_digest": "7b5a74bd459a4737299444b68439c1799ba8a2159032636a24a987113eee9d12",
+      "verified_git_object_id": "sha1:98e193e74991346d266bdd94ae720c32f25dfb47"
+    },
+    "repository_self_report_is_not_trust_root": true
+  },
+  "status": "DRAFT_NON_ACTIVE_PROMOTION_CONTROLLER_READY",
+  "task_contract": {
+    "completed_task_ids": [
+      "M-056"
+    ],
+    "done_gate": "NO_GATE_BYPASS_AND_ONE_CHAMPION_PER_SCOPE",
+    "pending_task_ids": [
+      "M-057"
+    ],
+    "required_output": "APPEND_ONLY_CHAMPION_REJECT_DECISION"
+  },
+  "task_pack_revision": "v0.0.0.2"
+}

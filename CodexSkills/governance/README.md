@@ -36,6 +36,11 @@ Key entrypoints:
   version-policy v3 draft and consumer-first handoff.
 - `tools/build_version_policy_v3_consumer_readiness.py`: deterministic
   Mechanism dual-read readiness and actual cross-plane consumer inventory.
+- `promotion/controller.py`: pure append-only `PROMOTE` / `REJECT`
+  controller with complete Registry, evaluation, evidence, and decision
+  closure; no state writer or activation authority.
+- `tools/build_promotion_controller.py`: deterministic M-056 readiness bound
+  to the final candidate and registered read-only Registry snapshot.
 - `tools/validate_au040_semantic_acceptance.py`: exact 365-day and
   shard/index/manifest/publication cross-artifact gates.
 - `tests/test_mechanism_contract.py`: positive, negative, and fault gates.
@@ -77,6 +82,8 @@ Run from the repository root with the explicitly provisioned interpreter:
 /usr/bin/python3 -B \
   CodexSkills/governance/tools/build_version_policy_v3_consumer_readiness.py \
   --check
+/usr/bin/python3 -B \
+  CodexSkills/governance/tools/build_promotion_controller.py --check
 /usr/bin/python3 -B CodexSkills/governance/tools/validate_mechanism.py lint-draft
 /usr/bin/python3 -B \
   CodexSkills/governance/tools/validate_activation.py lint-control

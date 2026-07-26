@@ -1,0 +1,332 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:promotion-controller-readiness:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "controller_contract": {
+      "additionalProperties": false,
+      "properties": {
+        "append_record_format": {
+          "const": "RFC8785_JCS_UTF8_NO_BOM_NO_LF"
+        },
+        "candidate_bundle_trust_required": {
+          "const": true
+        },
+        "complete_reference_closure_required": {
+          "const": true
+        },
+        "component_path": {
+          "const": "CodexSkills/governance/promotion/controller.py"
+        },
+        "component_source_binding_mode": {
+          "const": "SUCCESSOR_EXTERNAL_TUPLE_REQUIRED"
+        },
+        "content_digest": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+        },
+        "decision_actions": {
+          "const": [
+            "PROMOTE",
+            "REJECT"
+          ]
+        },
+        "decision_uid_and_digest_unique": {
+          "const": true
+        },
+        "evidence_reuse_permitted": {
+          "const": false
+        },
+        "external_predecessor_ledger_digest_required": {
+          "const": true
+        },
+        "ledger_digest_domain": {
+          "const": "SKILLOPS_PROMOTION_LEDGER_V1"
+        },
+        "m056_no_gate_bypass_verified": {
+          "const": true
+        },
+        "m056_one_champion_per_scope_verified": {
+          "const": true
+        },
+        "promotion_transition": {
+          "const": "CHALLENGER_TO_CHAMPION"
+        },
+        "public_artifact_write_permitted": {
+          "const": false
+        },
+        "reject_transition": {
+          "const": "CHALLENGER_TO_QUARANTINED_STAGE_REJECTED"
+        },
+        "rollback_revocation_actions": {
+          "const": [
+            "ROLLBACK",
+            "REVOKE"
+          ]
+        },
+        "rollback_revocation_implemented": {
+          "const": false
+        },
+        "state_write_permitted": {
+          "const": false
+        },
+        "strict_time_order_required": {
+          "const": true
+        }
+      },
+      "required": [
+        "append_record_format",
+        "candidate_bundle_trust_required",
+        "complete_reference_closure_required",
+        "component_source_binding_mode",
+        "content_digest",
+        "component_path",
+        "decision_actions",
+        "decision_uid_and_digest_unique",
+        "evidence_reuse_permitted",
+        "external_predecessor_ledger_digest_required",
+        "ledger_digest_domain",
+        "m056_no_gate_bypass_verified",
+        "m056_one_champion_per_scope_verified",
+        "public_artifact_write_permitted",
+        "promotion_transition",
+        "reject_transition",
+        "rollback_revocation_actions",
+        "rollback_revocation_implemented",
+        "state_write_permitted",
+        "strict_time_order_required"
+      ],
+      "type": "object"
+    },
+    "digest_algorithm": {
+      "const": "SHA-256"
+    },
+    "next_phase": {
+      "const": "MECHANISM_ROLLBACK_REVOCATION_CONTROLLER"
+    },
+    "nonmutation": {
+      "additionalProperties": false,
+      "properties": {
+        "activation_forbidden": {
+          "const": true
+        },
+        "auto_plane_unchanged": {
+          "const": true
+        },
+        "candidate_bundle_unchanged": {
+          "const": true
+        },
+        "canonical_publication_permitted": {
+          "const": false
+        },
+        "registry_write_permitted": {
+          "const": false
+        },
+        "rollback_revocation_execution_permitted": {
+          "const": false
+        },
+        "version_file_created": {
+          "const": false
+        }
+      },
+      "required": [
+        "activation_forbidden",
+        "auto_plane_unchanged",
+        "candidate_bundle_unchanged",
+        "canonical_publication_permitted",
+        "registry_write_permitted",
+        "rollback_revocation_execution_permitted",
+        "version_file_created"
+      ],
+      "type": "object"
+    },
+    "owner_plane": {
+      "const": "MECHANISM"
+    },
+    "protocol_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/protocol_revision"
+    },
+    "registry_observation": {
+      "additionalProperties": false,
+      "properties": {
+        "base_champion_count": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+        },
+        "challenger_version_count": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+        },
+        "identity_count": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+        },
+        "instance_count": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+        },
+        "real_promotion_execution_permitted": {
+          "const": false
+        },
+        "reason_code": {
+          "const": "NO_REGISTERED_CHALLENGER_OR_CHAMPION"
+        },
+        "snapshot_status": {
+          "const": "REGISTERED"
+        },
+        "version_count": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+        }
+      },
+      "required": [
+        "base_champion_count",
+        "challenger_version_count",
+        "identity_count",
+        "instance_count",
+        "real_promotion_execution_permitted",
+        "reason_code",
+        "snapshot_status",
+        "version_count"
+      ],
+      "type": "object"
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:promotion-controller-readiness:v1"
+    },
+    "self_digest_pointer": {
+      "const": "/artifact_digest"
+    },
+    "source_trust": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate_bundle": {
+          "additionalProperties": false,
+          "properties": {
+            "artifact_digest": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+            },
+            "bundle_digest": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+            },
+            "canonical_path": {
+              "const": "CodexSkills/governance/bundles/schema-bundle-manifest.v1.json"
+            },
+            "expected_mode": {
+              "const": "CANDIDATE"
+            },
+            "policy_count": {
+              "const": 5
+            },
+            "schema_count": {
+              "const": 31
+            },
+            "verified_git_object_id": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/git_object_id"
+            }
+          },
+          "required": [
+            "artifact_digest",
+            "bundle_digest",
+            "canonical_path",
+            "expected_mode",
+            "policy_count",
+            "schema_count",
+            "verified_git_object_id"
+          ],
+          "type": "object"
+        },
+        "registry_snapshot": {
+          "additionalProperties": false,
+          "properties": {
+            "artifact_digest": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+            },
+            "canonical_path": {
+              "const": "CodexSkills/registry/_global/registry-snapshot.v1.json"
+            },
+            "digest_basis": {
+              "const": "RAW_BYTES"
+            },
+            "expected_mode": {
+              "const": "REGISTERED_READ_ONLY"
+            },
+            "registry_snapshot_digest": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+            },
+            "verified_git_object_id": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/git_object_id"
+            }
+          },
+          "required": [
+            "artifact_digest",
+            "canonical_path",
+            "digest_basis",
+            "expected_mode",
+            "registry_snapshot_digest",
+            "verified_git_object_id"
+          ],
+          "type": "object"
+        },
+        "repository_self_report_is_not_trust_root": {
+          "const": true
+        }
+      },
+      "required": [
+        "candidate_bundle",
+        "registry_snapshot",
+        "repository_self_report_is_not_trust_root"
+      ],
+      "type": "object"
+    },
+    "status": {
+      "const": "DRAFT_NON_ACTIVE_PROMOTION_CONTROLLER_READY"
+    },
+    "task_contract": {
+      "additionalProperties": false,
+      "properties": {
+        "completed_task_ids": {
+          "const": [
+            "M-056"
+          ]
+        },
+        "done_gate": {
+          "const": "NO_GATE_BYPASS_AND_ONE_CHAMPION_PER_SCOPE"
+        },
+        "pending_task_ids": {
+          "const": [
+            "M-057"
+          ]
+        },
+        "required_output": {
+          "const": "APPEND_ONLY_CHAMPION_REJECT_DECISION"
+        }
+      },
+      "required": [
+        "completed_task_ids",
+        "done_gate",
+        "pending_task_ids",
+        "required_output"
+      ],
+      "type": "object"
+    },
+    "task_pack_revision": {
+      "const": "v0.0.0.2"
+    }
+  },
+  "required": [
+    "artifact_digest",
+    "controller_contract",
+    "digest_algorithm",
+    "next_phase",
+    "nonmutation",
+    "owner_plane",
+    "protocol_revision",
+    "registry_observation",
+    "schema_version",
+    "self_digest_pointer",
+    "source_trust",
+    "status",
+    "task_contract",
+    "task_pack_revision"
+  ],
+  "title": "Mechanism M-056 promotion-controller readiness",
+  "type": "object"
+}
