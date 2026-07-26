@@ -1,4 +1,113 @@
-# Mechanism managed-raw 72-hour policy handoff
+# Mechanism public-safe queue lifecycle handoff
+
+- State: `DRAFT_NON_ACTIVE_PUBLIC_SAFE_QUEUE_LIFECYCLE_READY`
+- Phase: `MECHANISM_PUBLIC_SAFE_QUEUE_LIFECYCLE`
+- Task Pack task completed: `M-062`
+- M-062 dependencies: `M-031`, `M-061`
+- Required output: `QUEUE_UNTIL_REMOTE_VERIFICATION`
+- Done gate: `CONTAINS_NO_RAW_OR_PRIVATE_FIELDS`
+- M-062 guard:
+  `CodexSkills/governance/retention/public_safe_queue.py`
+- M-062 guard raw SHA-256:
+  `920c086674753d3e3226e1cb1ff2a2c1317e0a8049ead1819daf6e6552e0e20f`
+- M-062 readiness:
+  `CodexSkills/governance/retention/public-safe-queue-lifecycle-readiness.json`
+- M-062 readiness raw SHA-256:
+  `cf7193aa6057647ad48dd7c74ce133faaa138a49311322d13599f8329525712f`
+- M-062 readiness self digest:
+  `96f9ba8496f3e6496924c5c7cfb2536c3aeb694eacef202758365046d2093373`
+- Queue-observation schema canonical SHA-256:
+  `62b2eaa0e8e977850f05b97c437f09a22436fa7b9aebf2d64c458ff6c2eb9fa2`
+- Remote-readback schema canonical SHA-256:
+  `0963016596308548aadfe69ffbc230521e05b3bcd7171dfb40693799dd6b86f8`
+- Lifecycle-plan schema canonical SHA-256:
+  `5643a4881b5dfb19967a7ade5b46f60c19b6d7f850c5051aefd1ea8a3adb6c34`
+- Readiness schema canonical SHA-256:
+  `7b301a22ce6095e3108aaabe955d17082f47c6cc29276315d2e971aed070f42c`
+- Immutable M-061 predecessor:
+  `sha1:b023ac71c5c7852a95f4b87a56981fe7a42c32d9`
+- Immutable candidate:
+  `sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5`
+- Immutable candidate bundle digest:
+  `36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e`
+- Trusted private queue schema:
+  `urn:linzecolin:agentdatabase:skillops:schema:public-queue-envelope:v2`
+- Trusted public payload schema:
+  `urn:linzecolin:agentdatabase:skillops:schema:public-run-event:v2`
+- Queue owner plane: `AUTO`
+- Lifecycle-policy owner plane: `MECHANISM`
+- Real remote reader integration: `NOT_BOUND`
+- Real queue settlement permitted: `false`
+- Queue delete authority: `false`
+- Watermark advance authority: `false`
+- Pending Task Pack task: `M-063`
+- Exact next Phase: `MECHANISM_GIT_ACTIVE_TREE_365D_POLICY`
+
+M-062 keeps the private physical queue and its implementation entirely
+Auto-owned. The Mechanism guard receives no queue root or physical path. It
+validates the exact private envelope with the public scanner and requires its
+payload to be one canonical `public-run-event:v2`; therefore a stored queue
+artifact cannot contain raw prompt/output/reasoning, credentials, absolute
+paths, unknown fields, or other private material. Envelope lane, bundle,
+schema, UID, digest, Sydney day, and final part path must all bind exactly.
+
+A READY entry without remote evidence returns `RETAIN_READY`. A SETTLED entry
+without evidence fails closed. The settlement path has no
+`remote_readback_verified` argument: a repository-external reader must first
+resolve `origin/main` to a valid advanced Git object, then read the queued
+path from that exact object. The complete bounded JSONL blob is checked for
+JCS-per-line/LF framing and every record passes the public schema and privacy
+consumer. The target event must occur exactly once and match UID, digest, and
+bytes; a duplicate, missing event, same-as-expected remote head, mixed Git
+algorithm, invalid sibling record, or caller-only digest claim fails closed.
+
+The output is immutable public-safe observation/readback/plan evidence only.
+It grants no deletion, state write, watermark advance, Git publication, or
+activation. Daily shard manifest/index closure and the 365-day active-tree
+boundary are deliberately deferred to M-063. No real remote call is made by
+this readiness Phase and the real reader/Auto executor binding remains
+`NOT_BOUND`.
+
+## M-062 validation
+
+```text
+M-062 targeted queue/privacy/readback tests: 16/16 PASS
+complete Mechanism suite: 189/189 PASS
+M-062 builder/schema/readiness: BYTE_EQUIVALENT
+candidate trust: 31 schemas / 5 policies PASS
+schema-set lint:
+  base 21 / candidate-compatible 41 / version 24 /
+  M-062 full closure 70 PASS
+OpenAIDatabase consumer + architecture: 23/23 PASS
+consumer CLI: PASS / errors=[] / canonical publication=false
+```
+
+The pre-existing cross-owner transition remains fail-closed and is not
+modified or relabeled by M-062:
+
+```text
+complete Auto suite: 200 tests / 5 failures / 20 errors
+fault/privacy seed 271828: 149 tests / 5 failures / 25 errors
+fault/privacy seed 314159: 149 tests / 5 failures / 25 errors
+AUTO_REGISTRY_MIRROR_SKILL_COUNT_DRIFT
+BOUND_REFERENCE_RESOLVER_RUNTIME_LOCAL_DRIFT
+ACTIVATION_CONTROL_INTERFACE_SEMANTIC_MISMATCH
+activation builder/lint:
+  ACTIVATION_BOUND_RESOLVER_INTERFACE_CONTRACT_MISMATCH
+```
+
+The mirror count remains `90` while Auto is pinned to `89`. These failures
+are identical to the M-061 baseline and occur outside the M-062 changed path
+set. Final acceptance additionally requires an FF-safe push and a fresh
+detached GitHub object/raw-byte readback of every changed path.
+
+No Auto, candidate-bundle, public-value-policy, public-run-event,
+queue-envelope, OpenAIDatabase, automation, or VERSION path change belongs to
+M-062. No verifier call, historical Task Pack replay, real queue entry, state
+write, remote network read, or canonical publication belongs to this
+development Phase.
+
+## Prior M-061 managed-raw 72-hour policy handoff
 
 - State: `DRAFT_NON_ACTIVE_MANAGED_RAW_72H_POLICY_READY`
 - Phase: `MECHANISM_MANAGED_RAW_72H_POLICY`

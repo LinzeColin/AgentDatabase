@@ -72,6 +72,14 @@ Key entrypoints:
   bundle-external observation/plan/readiness schemas bound to the exact
   candidate, immutable M-060 predecessor, retention-policy:v3,
   raw-segment:v2, and retention-receipt:v3 contracts.
+- `retention/public_safe_queue.py`: pure M-062 RUN_LOG queue policy that
+  revalidates the exact private envelope and public event, retains entries
+  without proof, and verifies event-level inclusion in an advanced remote
+  JSONL Git blob without accepting caller booleans.
+- `tools/build_public_safe_queue_lifecycle.py`: deterministic M-062
+  observation/readback/plan/readiness schemas bound to the exact candidate,
+  immutable M-061 predecessor, public-value:v2, public-run-event:v2, and
+  private public-queue-envelope:v2 contracts.
 - `tools/validate_au040_semantic_acceptance.py`: exact 365-day and
   shard/index/manifest/publication cross-artifact gates.
 - `tests/test_mechanism_contract.py`: positive, negative, and fault gates.
@@ -128,6 +136,8 @@ Run from the repository root with the explicitly provisioned interpreter:
   --check
 /usr/bin/python3 -B \
   CodexSkills/governance/tools/build_managed_raw_72h_policy.py --check
+/usr/bin/python3 -B \
+  CodexSkills/governance/tools/build_public_safe_queue_lifecycle.py --check
 /usr/bin/python3 -B CodexSkills/governance/tools/validate_mechanism.py lint-draft
 /usr/bin/python3 -B \
   CodexSkills/governance/tools/validate_activation.py lint-control

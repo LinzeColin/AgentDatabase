@@ -1,0 +1,300 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:public-safe-queue-lifecycle-plan:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "decision": {
+            "const": "RETAIN_QUARANTINED"
+          }
+        },
+        "required": [
+          "decision"
+        ]
+      },
+      "then": {
+        "properties": {
+          "action_order": {
+            "const": [
+              "RETAIN_QUEUE_ENTRY",
+              "RETRY_REMOTE_VERIFICATION"
+            ]
+          },
+          "next_queue_state": {
+            "const": "QUARANTINED"
+          },
+          "queue_retention_required": {
+            "const": true
+          },
+          "remote_readback_ref": {
+            "type": "null"
+          },
+          "settlement_eligible": {
+            "const": false
+          },
+          "source_queue_state": {
+            "const": "QUARANTINED"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "decision": {
+            "const": "RETAIN_READY"
+          }
+        },
+        "required": [
+          "decision"
+        ]
+      },
+      "then": {
+        "properties": {
+          "action_order": {
+            "const": [
+              "RETAIN_QUEUE_ENTRY",
+              "RETRY_REMOTE_VERIFICATION"
+            ]
+          },
+          "next_queue_state": {
+            "const": "READY"
+          },
+          "queue_retention_required": {
+            "const": true
+          },
+          "remote_readback_ref": {
+            "type": "null"
+          },
+          "settlement_eligible": {
+            "const": false
+          },
+          "source_queue_state": {
+            "const": "READY"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "decision": {
+            "const": "ELIGIBLE_TO_MARK_SETTLED"
+          }
+        },
+        "required": [
+          "decision"
+        ]
+      },
+      "then": {
+        "properties": {
+          "action_order": {
+            "const": [
+              "BIND_REMOTE_READBACK_EVIDENCE",
+              "MARK_QUEUE_ENTRY_SETTLED"
+            ]
+          },
+          "next_queue_state": {
+            "const": "SETTLED"
+          },
+          "queue_retention_required": {
+            "const": false
+          },
+          "remote_readback_ref": {
+            "additionalProperties": false,
+            "properties": {
+              "evidence_bundle_digest": {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+              }
+            },
+            "required": [
+              "evidence_bundle_digest"
+            ],
+            "type": "object"
+          },
+          "settlement_eligible": {
+            "const": true
+          },
+          "source_queue_state": {
+            "const": "READY"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "decision": {
+            "const": "CONFIRM_SETTLED"
+          }
+        },
+        "required": [
+          "decision"
+        ]
+      },
+      "then": {
+        "properties": {
+          "action_order": {
+            "const": [
+              "BIND_REMOTE_READBACK_EVIDENCE",
+              "MARK_QUEUE_ENTRY_SETTLED"
+            ]
+          },
+          "next_queue_state": {
+            "const": "SETTLED"
+          },
+          "queue_retention_required": {
+            "const": false
+          },
+          "remote_readback_ref": {
+            "additionalProperties": false,
+            "properties": {
+              "evidence_bundle_digest": {
+                "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+              }
+            },
+            "required": [
+              "evidence_bundle_digest"
+            ],
+            "type": "object"
+          },
+          "settlement_eligible": {
+            "const": true
+          },
+          "source_queue_state": {
+            "const": "SETTLED"
+          }
+        }
+      }
+    }
+  ],
+  "properties": {
+    "action_order": {
+      "items": {
+        "enum": [
+          "BIND_REMOTE_READBACK_EVIDENCE",
+          "MARK_QUEUE_ENTRY_SETTLED",
+          "RETAIN_QUEUE_ENTRY",
+          "RETRY_REMOTE_VERIFICATION"
+        ]
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "auto_executor_integration_status": {
+      "const": "NOT_BOUND"
+    },
+    "bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "decision": {
+      "enum": [
+        "CONFIRM_SETTLED",
+        "ELIGIBLE_TO_MARK_SETTLED",
+        "RETAIN_QUARANTINED",
+        "RETAIN_READY"
+      ]
+    },
+    "evidence_bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "generated_at": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+    },
+    "next_queue_state": {
+      "enum": [
+        "QUARANTINED",
+        "READY",
+        "SETTLED"
+      ]
+    },
+    "observation_ref": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence_bundle_digest": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+        }
+      },
+      "required": [
+        "evidence_bundle_digest"
+      ],
+      "type": "object"
+    },
+    "plan_uid": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/typed_uid"
+    },
+    "protocol_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/protocol_revision"
+    },
+    "queue_content_delete_authority_granted": {
+      "const": false
+    },
+    "queue_retention_required": {
+      "type": "boolean"
+    },
+    "remote_readback_ref": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "evidence_bundle_digest": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+            }
+          },
+          "required": [
+            "evidence_bundle_digest"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:public-safe-queue-lifecycle-plan:v1"
+    },
+    "settlement_eligible": {
+      "type": "boolean"
+    },
+    "source_queue_state": {
+      "enum": [
+        "QUARANTINED",
+        "READY",
+        "SETTLED"
+      ]
+    },
+    "state_mutation_performed": {
+      "const": false
+    },
+    "watermark_advance_authority_granted": {
+      "const": false
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "bundle_digest",
+    "plan_uid",
+    "generated_at",
+    "observation_ref",
+    "remote_readback_ref",
+    "source_queue_state",
+    "decision",
+    "next_queue_state",
+    "queue_retention_required",
+    "settlement_eligible",
+    "action_order",
+    "queue_content_delete_authority_granted",
+    "watermark_advance_authority_granted",
+    "state_mutation_performed",
+    "auto_executor_integration_status",
+    "evidence_bundle_digest"
+  ],
+  "title": "M-062 public-safe queue lifecycle plan",
+  "type": "object"
+}

@@ -1,0 +1,152 @@
+{
+  "artifact_digest": "96f9ba8496f3e6496924c5c7cfb2536c3aeb694eacef202758365046d2093373",
+  "next_phase": "MECHANISM_GIT_ACTIVE_TREE_365D_POLICY",
+  "nonmutation": {
+    "activation_forbidden": true,
+    "auto_plane_unchanged": true,
+    "candidate_bundle_unchanged": true,
+    "canonical_publication_permitted": false,
+    "git_worktree_created_by_policy": false,
+    "public_value_policy_unchanged": true,
+    "queue_content_delete_permitted": false,
+    "queue_envelope_mutation_permitted": false,
+    "queue_instance_created": false,
+    "remote_network_call_performed": false,
+    "state_write_permitted": false,
+    "version_file_created": false,
+    "watermark_advance_permitted": false
+  },
+  "owner_plane": "MECHANISM",
+  "protocol_revision": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1",
+  "public_safe_queue_contract": {
+    "artifact_path_contract": "SYDNEY_DAILY_PART_JSONL_V1",
+    "auto_executor_integration_status": "NOT_BOUND",
+    "caller_boolean_trusted": false,
+    "caller_digest_map_trusted": false,
+    "component_path": "CodexSkills/governance/retention/public_safe_queue.py",
+    "component_source_binding_mode": "SUCCESSOR_EXTERNAL_TUPLE_REQUIRED",
+    "content_digest": "920c086674753d3e3226e1cb1ff2a2c1317e0a8049ead1819daf6e6552e0e20f",
+    "lane": "RUN_LOG",
+    "lifecycle_plan_schema": {
+      "artifact_digest": "7f8b28588bb014d0e78d2866f2f8b76859bd0e92484cc6cd28175426df930e89",
+      "canonical_path": "CodexSkills/governance/retention/schemas/public-safe-queue-lifecycle-plan.schema.json",
+      "schema_sha256": "5643a4881b5dfb19967a7ade5b46f60c19b6d7f850c5051aefd1ea8a3adb6c34",
+      "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:public-safe-queue-lifecycle-plan:v1",
+      "self_digest_pointer": "/evidence_bundle_digest"
+    },
+    "m063_daily_manifest_index_contract_deferred": true,
+    "max_remote_shard_bytes": 20971520,
+    "observation_schema": {
+      "artifact_digest": "65aae782d197b2bfcf837194583ae4a57fbdf7d8272d48b99d3e0ea1536940bd",
+      "canonical_path": "CodexSkills/governance/retention/schemas/public-safe-queue-observation.schema.json",
+      "schema_sha256": "62b2eaa0e8e977850f05b97c437f09a22436fa7b9aebf2d64c458ff6c2eb9fa2",
+      "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:public-safe-queue-observation:v1",
+      "self_digest_pointer": "/evidence_bundle_digest"
+    },
+    "payload_contains_raw_or_private_fields": false,
+    "payload_schema_id": "urn:linzecolin:agentdatabase:skillops:schema:public-run-event:v2",
+    "policy_owner_plane": "MECHANISM",
+    "post_serialization_scan_required": true,
+    "quarantined_without_readback_action": "RETAIN",
+    "queue_content_delete_authority_granted": false,
+    "queue_envelope_schema_id": "urn:linzecolin:agentdatabase:skillops:schema:public-queue-envelope:v2",
+    "queue_owner_plane": "AUTO",
+    "queue_storage_class": "PRIVATE_LOCAL_PUBLIC_SAFE",
+    "ready_without_readback_action": "RETAIN",
+    "real_queue_settlement_permitted": false,
+    "remote_name": "origin",
+    "remote_readback_schema": {
+      "artifact_digest": "89d364bbf7119351570743e57ebd7c955975830f636e606c477358e3ae950364",
+      "canonical_path": "CodexSkills/governance/retention/schemas/public-safe-queue-remote-readback.schema.json",
+      "schema_sha256": "0963016596308548aadfe69ffbc230521e05b3bcd7171dfb40693799dd6b86f8",
+      "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:public-safe-queue-remote-readback:v1",
+      "self_digest_pointer": "/evidence_bundle_digest"
+    },
+    "remote_reader_integration_status": "NOT_BOUND",
+    "remote_ref": "refs/heads/main",
+    "remote_verification_sequence": [
+      "RESOLVE_REMOTE_REF",
+      "REQUIRE_ADVANCED_REMOTE_OBJECT",
+      "READ_EXACT_OBJECT_BLOB",
+      "VALIDATE_ALL_JSONL_RECORDS",
+      "REQUIRE_UNIQUE_UID_DIGEST_BYTES_MATCH",
+      "EMIT_READBACK_EVIDENCE"
+    ],
+    "run_log_root": {
+      "canonical_path": "OpenAIDatabase/data/run_logs/skills_runs"
+    },
+    "settled_after_exact_readback_action": "CONFIRM",
+    "settled_without_readback_action": "FAIL_CLOSED",
+    "sydney_local_date_required": true,
+    "watermark_advance_authority_granted": false
+  },
+  "real_execution_permitted": false,
+  "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:public-safe-queue-lifecycle-readiness:v1",
+  "self_digest_pointer": "/artifact_digest",
+  "source_trust": {
+    "candidate_bundle": {
+      "artifact_digest": "66ad125629cab71739ff2bc266219f995f7a45998936ca720c6db678ee77e65a",
+      "bundle_digest": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e",
+      "canonical_path": "CodexSkills/governance/bundles/schema-bundle-manifest.v1.json",
+      "expected_mode": "CANDIDATE",
+      "policy_count": 5,
+      "schema_count": 31,
+      "verified_git_object_id": "sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5"
+    },
+    "m061_predecessor": {
+      "component": {
+        "component_path": "CodexSkills/governance/retention/managed_raw_policy.py",
+        "content_digest": "d18da577b0530c319579ca95c77d6126cee0e56de9552a13965c2fbd2eadaf66"
+      },
+      "done_gate": "71_59_59_KEEP_AND_72_00_00_EXPIRE",
+      "readiness": {
+        "artifact_digest": "dad952d9df1523bb63765dc028a4f3609251834dcb52dfa06a085341f555f774",
+        "canonical_path": "CodexSkills/governance/retention/managed-raw-72h-readiness.json",
+        "content_digest": "d60a71554ffbe4bde30fbd639e723086598df22b69b4ceee04b070dd4ddb6e0f"
+      },
+      "status": "DRAFT_NON_ACTIVE_MANAGED_RAW_72H_POLICY_READY",
+      "verified_git_object_id": "sha1:b023ac71c5c7852a95f4b87a56981fe7a42c32d9"
+    },
+    "public_run_event_schema": {
+      "artifact_digest": "c11fa25cbc292869e788f0639361eef8dcfdadf4019a13e4d88e0eb301ae0557",
+      "bundle_member": true,
+      "canonical_path": "CodexSkills/registry/auto/schemas/public/public-run-event.schema.json",
+      "schema_sha256": "c2b494baf284ba53f6c0101e0ab29b228de68964e4ab823710bcc3461555e523",
+      "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:public-run-event:v2",
+      "self_digest_pointer": "/event_digest",
+      "verified_git_object_id": "sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5"
+    },
+    "public_value_policy": {
+      "bundle_member": true,
+      "policy_id": "urn:linzecolin:agentdatabase:skillops:policy:public-value:v2",
+      "policy_sha256": "cff871b00dec9d33ba6bd879e02b7039cef57d11e35bdc4c57a80d4d3ea519d4"
+    },
+    "queue_envelope_schema": {
+      "artifact_digest": "c802243b23641822eed6a708435c7df363b4c57a3b8a02dc73ce0c1ac16e29b1",
+      "bundle_member": false,
+      "canonical_path": "CodexSkills/registry/auto/schemas/private/public-queue-envelope.schema.json",
+      "private_schema": true,
+      "schema_sha256": "4bc05ac0b883a85e7efd1a1393772f0596714b9df76f8d9277fa62ebbd741d35",
+      "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:public-queue-envelope:v2",
+      "self_digest_pointer": "/envelope_digest",
+      "verified_git_object_id": "sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5"
+    },
+    "repository_self_report_is_not_trust_root": true
+  },
+  "status": "DRAFT_NON_ACTIVE_PUBLIC_SAFE_QUEUE_LIFECYCLE_READY",
+  "task_contract": {
+    "completed_task_ids": [
+      "M-062"
+    ],
+    "dependency_task_ids": [
+      "M-031",
+      "M-061"
+    ],
+    "done_gate": "CONTAINS_NO_RAW_OR_PRIVATE_FIELDS",
+    "pending_task_ids": [
+      "M-063"
+    ],
+    "required_output": "QUEUE_UNTIL_REMOTE_VERIFICATION"
+  },
+  "task_pack_revision": "v0.0.0.2"
+}

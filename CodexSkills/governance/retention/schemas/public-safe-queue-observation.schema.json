@@ -1,0 +1,125 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:public-safe-queue-observation:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "actor": {
+      "const": "SKILLOPS_PUBLIC_SAFE_QUEUE_GUARD"
+    },
+    "artifact_bytes": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/positive_count"
+    },
+    "artifact_ref": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_digest": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+        },
+        "artifact_schema_id": {
+          "const": "urn:linzecolin:agentdatabase:skillops:schema:public-run-event:v2"
+        },
+        "artifact_uid": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/event_uid"
+        }
+      },
+      "required": [
+        "artifact_schema_id",
+        "artifact_uid",
+        "artifact_digest"
+      ],
+      "type": "object"
+    },
+    "artifact_repo_path": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/repo_relative_posix_path"
+    },
+    "artifact_serialization": {
+      "const": "RFC8785_JCS_OBJECT"
+    },
+    "bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "evidence_bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "lane": {
+      "const": "RUN_LOG"
+    },
+    "observation_uid": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/typed_uid"
+    },
+    "observed_at": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+    },
+    "physical_queue_path_consumed": {
+      "const": false
+    },
+    "post_serialization_scan_passed": {
+      "const": true
+    },
+    "protocol_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/protocol_revision"
+    },
+    "public_schema_valid": {
+      "const": true
+    },
+    "queue_envelope_ref": {
+      "additionalProperties": false,
+      "properties": {
+        "envelope_digest": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+        },
+        "envelope_uid": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/envelope_uid"
+        }
+      },
+      "required": [
+        "envelope_uid",
+        "envelope_digest"
+      ],
+      "type": "object"
+    },
+    "raw_or_private_field_count": {
+      "const": 0
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:public-safe-queue-observation:v1"
+    },
+    "semantic_event_valid": {
+      "const": true
+    },
+    "source_queue_state": {
+      "enum": [
+        "QUARANTINED",
+        "READY",
+        "SETTLED"
+      ]
+    },
+    "state_mutation_performed": {
+      "const": false
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "bundle_digest",
+    "observation_uid",
+    "observed_at",
+    "queue_envelope_ref",
+    "artifact_ref",
+    "lane",
+    "source_queue_state",
+    "artifact_repo_path",
+    "artifact_serialization",
+    "artifact_bytes",
+    "public_schema_valid",
+    "semantic_event_valid",
+    "post_serialization_scan_passed",
+    "raw_or_private_field_count",
+    "physical_queue_path_consumed",
+    "state_mutation_performed",
+    "actor",
+    "evidence_bundle_digest"
+  ],
+  "title": "M-062 public-safe queue observation",
+  "type": "object"
+}
