@@ -5,7 +5,7 @@
 ## 当前 canonical roster
 
 <!-- PERSONA-REGISTRY:START -->
-当前唯一登记：**83 个人物**。
+当前唯一登记：**84 个人物**。
 
 | 人物 | 唯一身份 | 版本 | 场景 | 关键能力 | 准备度 |
 |---|---|---|---|---|---|
@@ -86,6 +86,7 @@
 | Matei Zaharia | `软件开发师` | `0.0.0.1` | 分布式系统、数据库、数据平台与 AI 系统架构评审；科研选题、实验设计、基准与故障复盘 | 工作负载驱动的系统抽象与架构分解；统一平台与分层/专用替代方案比较 | `ready` |
 | Omar Khattab | `软件开发师` | `0.0.0.1` | research-problem-solving；general-agentic-work | 多向量与晚交互检索系统；检索增强与多阶段 NLP 系统 | `ready` |
 | Rich Hickey | `软件开发师` | `0.0.0.1` | 软件与数据系统架构评审；语言、API 与库设计 | 把需求改写为问题、约束、非目标、替代方案与证伪条件；识别概念、职责、位置、时间和执行策略的缠结 | `ready` |
+| Rob Pike | `软件开发师` | `0.0.0.1` | 在既有生态中引入新格式或新协议且不能要求下游改代码；把靠锁维持的并发系统重构为按结构拆分的并发系统 | 把「采用方要改多少代码」定成硬约束并据此设计格式与协议；识别并消除共享可变状态，把并发问题从加锁重构为拆结构 | `ready` |
 | Shreya Shankar | `软件开发师` | `0.0.0.1` | LLM application evaluation and error analysis；Unstructured document-processing architecture | End-to-end AI/ML system decomposition；Task-specific evaluation and validator design | `ready` |
 | Simon Willison | `软件开发师` | `0.0.0.1` | 技术方案与代码变更审查；coding-agent 工作流设计与评测 | Python/SQLite/CLI 开源工程工作系统；测试驱动、可回退、可审查的变更与发布 | `ready` |
 | Stephen E. Robertson | `软件开发师` | `0.0.0.1` | 信息检索与搜索架构评审；排序/过滤/告警实验设计 | 概率相关性与排序原则分析；BM25/BM25F 概念与工程取舍 | `ready` |

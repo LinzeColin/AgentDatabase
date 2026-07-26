@@ -60,12 +60,12 @@
 ## 当前登记
 
 <!-- PERSONA-REGISTRY:START -->
-当前唯一登记：**83 个人物**。
+当前唯一登记：**84 个人物**。
 
 | 唯一目录 | 人物数 |
 |---|---:|
 | `材料建工师/` | 15 |
-| `软件开发师/` | 30 |
+| `软件开发师/` | 31 |
 | `艺术设计师/` | 0 |
 | `创业经营师/` | 7 |
 | `投资资本师/` | 11 |
@@ -76,7 +76,7 @@
 | `财务合规师/` | 1 |
 | `医疗护理师/` | 0 |
 | `农林牧渔师/` | 0 |
-| **总计** | **83** |
+| **总计** | **84** |
 
 | 人物 | 唯一身份 | 版本 | 选入原因 | 最值得蒸馏的特点 | 对用户的利益/帮助 | 应用场景 | 关键能力 | 完整 ZIP |
 |---|---|---|---|---|---|---|---|---|
@@ -157,6 +157,7 @@
 | Matei Zaharia | `软件开发师` | `0.0.0.1` | 跨 2008—2026 的高密度第一方论文、开源系统与公开讲述，可形成可证伪的系统决策模型。；学术研究、开源生态与 Databricks CTO 角色提供多场景交叉证据，适合技术工程、平台战略和教学任务。 | 从真实工作负载和用户摩擦提炼最小可复用抽象。；共享语义时构造统一底座，并用扩展点保留专用需求。 | 把模糊的数据/AI 系统问题转化为工作负载、抽象、实验和停止条件。；对平台统一、开放生态、迁移和可靠性做可执行的多方案评审。 | 分布式系统、数据库、数据平台与 AI 系统架构评审；科研选题、实验设计、基准与故障复盘 | 工作负载驱动的系统抽象与架构分解；统一平台与分层/专用替代方案比较 | [ZIP](软件开发师/matei-zaharia/versions/0.0.0.1/matei-zaharia-persona-distillation-delivery-v0.0.0.1.zip) |
 | Omar Khattab | `软件开发师` | `0.0.0.1` | 公开证据在信息检索、NLP、语言模型程序、系统优化和教学上形成长期连续轨迹。；论文、代码、文档、课程、访谈和机构记录可交叉验证其工作方法，而非仅依赖风格模仿。 | 把基础模型视为复合程序中的模糊模块，以端到端指标为优化单位；在质量、成本、延迟和透明度之间构造可测的系统前沿 | 将模糊的 AI 想法转成模块化、可优化、可验证的系统方案。；为检索增强、语言程序和智能体设计强基线、指标、失败集与资源预算。 | research-problem-solving；general-agentic-work | 多向量与晚交互检索系统；检索增强与多阶段 NLP 系统 | [ZIP](软件开发师/omar-khattab/versions/0.0.0.1/omar-khattab-persona-distillation-delivery-v0.0.0.1.zip) |
 | Rich Hickey | `软件开发师` | `0.0.0.1` | 其跨 Clojure、Datomic、core.async、transducers、spec 的公开材料呈现高度稳定的设计原则。；一手论文、官方文章、代码项目与演讲转录覆盖创建、演化、组织转型和商业退休/独立项目角色边界。 | 用精确定义先消除概念缠结；把不可变值、身份、状态与时间分开 | 在方案进入实现前发现结构性复杂度和不可逆契约。；把模糊争论转换为可比较、可反驳、可长期维护的决策记录。 | 软件与数据系统架构评审；语言、API 与库设计 | 把需求改写为问题、约束、非目标、替代方案与证伪条件；识别概念、职责、位置、时间和执行策略的缠结 | [ZIP](软件开发师/rich-hickey/versions/0.0.0.1/rich-hickey-persona-distillation-delivery-v0.0.0.1.zip) |
+| Rob Pike | `软件开发师` | `0.0.0.1` | UTF-8、Go、Plan 9、sam／acme／rio 的直接参与者，贝尔实验室 Unix 团队成员、Google 杰出工程师；Plan 9 论文集与 Go 官方博客提供充足可核的一手材料（本次逐篇按正文检测署名） | 极短句、结论前置、几乎不用修饰词、没有过渡段落；讲设计先讲不提供什么，再讲提供什么 | 把「下游不愿改代码」从障碍变成设计约束，给出可执行的兼容性手段；把偶发竞态从「换什么锁」重新框成「哪几处共享状态该消除」 | 在既有生态中引入新格式或新协议且不能要求下游改代码；把靠锁维持的并发系统重构为按结构拆分的并发系统 | 把「采用方要改多少代码」定成硬约束并据此设计格式与协议；识别并消除共享可变状态，把并发问题从加锁重构为拆结构 | [ZIP](软件开发师/rob-pike/versions/0.0.0.1/rob-pike-persona-distillation-delivery-v0.0.0.1.zip) |
 | Shreya Shankar | `软件开发师` | `0.0.0.1` | A rare cross-domain record connecting production ML failures, data systems, human–AI interaction, open-source system building, and industry-facing AI evaluation.；Public materials span nearly a decade and multiple evidence forms, enabling longitudinal rather than style-only distillation. | User workflow and data pipeline are treated as the real unit of AI product design.；Evaluation criteria are discovered from actual outputs and refined with human feedback. | Design more reliable LLM and data applications without over-centering model choice.；Build task-specific evals, monitoring, and continual-improvement loops. | LLM application evaluation and error analysis；Unstructured document-processing architecture | End-to-end AI/ML system decomposition；Task-specific evaluation and validator design | [ZIP](软件开发师/shreya-shankar/versions/0.0.0.1/shreya-shankar-persona-distillation-delivery-v0.0.0.1.zip) |
 | Simon Willison | `软件开发师` | `0.0.0.1` | 需要以可执行证据、测试和公开工作流审查软件与 AI 工程任务；需要把复杂技术解释为可运行示例、注释性报告和开放问题 | 测试、文档、issue、release notes 与 TIL 构成外部认知系统；从具体用户问题生长小而可组合的 CLI、SQLite 与插件工具 | 把模糊技术想法转成可验证的最小实现与发布闭环；为 AI 辅助编码建立测试、人工演练、provenance 和停止规则 | 技术方案与代码变更审查；coding-agent 工作流设计与评测 | Python/SQLite/CLI 开源工程工作系统；测试驱动、可回退、可审查的变更与发布 | [ZIP](软件开发师/simon-willison/versions/0.0.0.1/simon-willison-persona-distillation-delivery-v0.0.0.1.zip) |
 | Stephen E. Robertson | `软件开发师` | `0.0.0.1` | BM25 与概率相关性框架的核心奠基者之一；跨理论、操作系统与共享评测的长期研究轨迹 | 显式定义事件空间与假设；优先简单稳健且排序等价的近似 | 审查搜索/排序方案的目标函数、假设与评测泄漏；建立 BM25 或其他可解释强基线并设计升级实验 | 信息检索与搜索架构评审；排序/过滤/告警实验设计 | 概率相关性与排序原则分析；BM25/BM25F 概念与工程取舍 | [ZIP](软件开发师/stephen-e-robertson/versions/0.0.0.1/stephen-e-robertson-persona-distillation-delivery-v0.0.0.1.zip) |

@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:robpike",
+  "canonical_name": "Rob Pike",
+  "identity_family_id": "software-developer",
+  "identity_mode": "single",
+  "registration_category": "软件开发师",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "rob-pike",
+  "subject_uid": "person-030d30d43cfe5469",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/rob-pike-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-26T17:52:58Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "3aba2f1ea4ba55edad1ff2907809526ea69231af651c7123a2f21293fda735cf",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/rob-pike-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "743c1052ff99b08f3c56793e26c0e60f637917ae37ac607307d67d51eeffe9e1",
+      "runtime_size_bytes": 65699,
+      "size_bytes": 72577
+    }
+  ]
+}
