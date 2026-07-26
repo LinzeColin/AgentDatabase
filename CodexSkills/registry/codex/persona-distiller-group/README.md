@@ -60,12 +60,12 @@
 ## 当前登记
 
 <!-- PERSONA-REGISTRY:START -->
-当前唯一登记：**73 个人物**。
+当前唯一登记：**74 个人物**。
 
 | 唯一目录 | 人物数 |
 |---|---:|
 | `材料建工师/` | 15 |
-| `软件开发师/` | 20 |
+| `软件开发师/` | 21 |
 | `艺术设计师/` | 0 |
 | `创业经营师/` | 7 |
 | `投资资本师/` | 11 |
@@ -76,7 +76,7 @@
 | `财务合规师/` | 1 |
 | `医疗护理师/` | 0 |
 | `农林牧渔师/` | 0 |
-| **总计** | **73** |
+| **总计** | **74** |
 
 | 人物 | 唯一身份 | 版本 | 选入原因 | 最值得蒸馏的特点 | 对用户的利益/帮助 | 应用场景 | 关键能力 | 完整 ZIP |
 |---|---|---|---|---|---|---|---|---|
@@ -146,6 +146,7 @@
 | Ken Thompson | `软件开发师` | `0.0.0.1` | Unix 主要创造者之一与 B 语言设计者，其抽象选择构成现代操作系统的事实基线；《Reflections on Trusting Trust》是供应链安全与可复现构建领域的奠基性威胁模型，至今是编译器可信性讨论的起点 | 最小覆盖抽象：先找能覆盖所有情况的最小抽象，找到就不再为特例加机制；只认覆盖性不认票数：反对意见的数量不改变判断，只有举出覆盖不了的情况才改变判断 | 设计要被长期依赖的接口时，帮你判断哪个机制是多余的、抽象是否还需为特例开口子；面对“业内都这么做”的压力时，把争论从票数转回到“这个抽象覆盖不了什么” | 底层抽象设计：为要被长期依赖的系统找出能覆盖全部用例的最小概念集合；字符编码与协议设计：在多条不可协商的兼容约束下取最简方案 | 找出能覆盖全部用例的最小抽象，并判断某个机制是否多余；在一组不可协商的硬约束下设计编码与协议（UTF-8 为完整样本） | [ZIP](软件开发师/ken-thompson/versions/0.0.0.1/ken-thompson-persona-distillation-delivery-v0.0.0.1.zip) |
 | Kent Beck | `软件开发师` | `0.0.0.1` | Four decades of inspectable software artifacts connect ideas to executable practice.；Public failures and adaptations reveal update behavior, not only polished doctrine. | Shrinks uncertainty through rapid, specific feedback.；Separates structural change from behavioral change to preserve intent and reversibility. | Produces executable plans with tests, baselines, rollback, and stopping rules.；Improves code and design reviews without reducing them to style imitation. | TDD and test-strategy design；Refactoring and evolutionary architecture review | Software design and refactoring economics；Test-driven development and feedback-loop design | [ZIP](软件开发师/kent-beck/versions/0.0.0.1/kent-beck-persona-distillation-delivery-v0.0.0.1.zip) |
 | Leslie Lamport | `软件开发师` | `0.0.0.1` | 公开作品长期集中于并发/分布式系统与形式化方法；同时存在系统性的证明、写作和教学材料 | 状态机与动作优先；因果偏序先于物理时间 | 把模糊技术方案转成可验证规格；发现并发与故障模型中的隐藏假设 | 分布式协议和并发系统评审；TLA+/状态机规格设计 | 分布式因果、一致性、共识、互斥和快照推理；状态/动作规格与 safety/liveness 分解 | [ZIP](软件开发师/leslie-lamport/versions/0.0.0.1/leslie-lamport-persona-distillation-delivery-v0.0.0.1.zip) |
+| Linus Torvalds | `软件开发师` | `0.0.0.1` | 先后做出 Linux 内核与 git 两件都成为行业默认基础设施的东西，在软件史上极为罕见；Linux 内核是人类最大规模的协作软件工程之一，其维护者层级与合并窗口机制是可扩展到该规模的直接原因 | 决策即可撤销性：能回退的就是小决策；工作重点是把决策变小，而不是把大决策做对；代码结构是协作结构的投影：先想清楚人怎么并行工作，再决定代码怎么切 | 面对高风险不可逆上线时，给出把它拆成可回退小步骤的具体做法，而不是“做好备份和测试”；多团队在同一代码库上冲突不断时，指出边界画错了地方并给出按人划分的重切方案 | 多团队并行开发的边界划分：代码所有权、子系统切分、跨边界变更流程；高风险变更的可逆化改造：把不可逆上线拆成双写、影子读、开关灰度、确认期 | 把不可逆变更改造成可回退变更，并设计撤销单元与回退触发条件；按协作并行度划分代码所有权与子系统边界，使冲突可控 | [ZIP](软件开发师/linus-torvalds/versions/0.0.0.1/linus-torvalds-persona-distillation-delivery-v0.0.0.1.zip) |
 | Martin Fowler / 马丁·福勒 | `软件开发师` | `0.0.0.1` | 公开作品跨三十年持续覆盖重构、架构、敏捷技术实践与企业软件设计。；第一方资料对工作方法、编辑准则、证据局限和职业边界有明确自述。 | 以未来变化成本解释设计与内部质量。；用小步、快速反馈和安全网管理复杂改变。 | 把抽象架构争论转化为可执行、可验证、可回滚的演进路径。；识别敏捷仪式与真实工程能力之间的缺口。 | 软件架构与微服务/单体取舍评审；重构、技术债与遗留系统渐进迁移 | 小步保持行为的重构和迁移规划；架构收益、成本、前置条件和失败模式分析 | [ZIP](软件开发师/martin-fowler/versions/0.0.0.1/martin-fowler-persona-distillation-delivery-v0.0.0.1.zip) |
 | Matei Zaharia | `软件开发师` | `0.0.0.1` | 跨 2008—2026 的高密度第一方论文、开源系统与公开讲述，可形成可证伪的系统决策模型。；学术研究、开源生态与 Databricks CTO 角色提供多场景交叉证据，适合技术工程、平台战略和教学任务。 | 从真实工作负载和用户摩擦提炼最小可复用抽象。；共享语义时构造统一底座，并用扩展点保留专用需求。 | 把模糊的数据/AI 系统问题转化为工作负载、抽象、实验和停止条件。；对平台统一、开放生态、迁移和可靠性做可执行的多方案评审。 | 分布式系统、数据库、数据平台与 AI 系统架构评审；科研选题、实验设计、基准与故障复盘 | 工作负载驱动的系统抽象与架构分解；统一平台与分层/专用替代方案比较 | [ZIP](软件开发师/matei-zaharia/versions/0.0.0.1/matei-zaharia-persona-distillation-delivery-v0.0.0.1.zip) |
 | Omar Khattab | `软件开发师` | `0.0.0.1` | 公开证据在信息检索、NLP、语言模型程序、系统优化和教学上形成长期连续轨迹。；论文、代码、文档、课程、访谈和机构记录可交叉验证其工作方法，而非仅依赖风格模仿。 | 把基础模型视为复合程序中的模糊模块，以端到端指标为优化单位；在质量、成本、延迟和透明度之间构造可测的系统前沿 | 将模糊的 AI 想法转成模块化、可优化、可验证的系统方案。；为检索增强、语言程序和智能体设计强基线、指标、失败集与资源预算。 | research-problem-solving；general-agentic-work | 多向量与晚交互检索系统；检索增强与多阶段 NLP 系统 | [ZIP](软件开发师/omar-khattab/versions/0.0.0.1/omar-khattab-persona-distillation-delivery-v0.0.0.1.zip) |

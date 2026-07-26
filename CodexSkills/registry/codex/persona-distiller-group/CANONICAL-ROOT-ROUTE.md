@@ -5,7 +5,7 @@
 ## 当前 canonical roster
 
 <!-- PERSONA-REGISTRY:START -->
-当前唯一登记：**73 个人物**。
+当前唯一登记：**74 个人物**。
 
 | 人物 | 唯一身份 | 版本 | 场景 | 关键能力 | 准备度 |
 |---|---|---|---|---|---|
@@ -75,6 +75,7 @@
 | Ken Thompson | `软件开发师` | `0.0.0.1` | 底层抽象设计：为要被长期依赖的系统找出能覆盖全部用例的最小概念集合；字符编码与协议设计：在多条不可协商的兼容约束下取最简方案 | 找出能覆盖全部用例的最小抽象，并判断某个机制是否多余；在一组不可协商的硬约束下设计编码与协议（UTF-8 为完整样本） | `ready` |
 | Kent Beck | `软件开发师` | `0.0.0.1` | TDD and test-strategy design；Refactoring and evolutionary architecture review | Software design and refactoring economics；Test-driven development and feedback-loop design | `ready` |
 | Leslie Lamport | `软件开发师` | `0.0.0.1` | 分布式协议和并发系统评审；TLA+/状态机规格设计 | 分布式因果、一致性、共识、互斥和快照推理；状态/动作规格与 safety/liveness 分解 | `ready` |
+| Linus Torvalds | `软件开发师` | `0.0.0.1` | 多团队并行开发的边界划分：代码所有权、子系统切分、跨边界变更流程；高风险变更的可逆化改造：把不可逆上线拆成双写、影子读、开关灰度、确认期 | 把不可逆变更改造成可回退变更，并设计撤销单元与回退触发条件；按协作并行度划分代码所有权与子系统边界，使冲突可控 | `ready` |
 | Martin Fowler / 马丁·福勒 | `软件开发师` | `0.0.0.1` | 软件架构与微服务/单体取舍评审；重构、技术债与遗留系统渐进迁移 | 小步保持行为的重构和迁移规划；架构收益、成本、前置条件和失败模式分析 | `ready` |
 | Matei Zaharia | `软件开发师` | `0.0.0.1` | 分布式系统、数据库、数据平台与 AI 系统架构评审；科研选题、实验设计、基准与故障复盘 | 工作负载驱动的系统抽象与架构分解；统一平台与分层/专用替代方案比较 | `ready` |
 | Omar Khattab | `软件开发师` | `0.0.0.1` | research-problem-solving；general-agentic-work | 多向量与晚交互检索系统；检索增强与多阶段 NLP 系统 | `ready` |
