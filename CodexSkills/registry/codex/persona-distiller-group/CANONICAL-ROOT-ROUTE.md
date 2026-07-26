@@ -5,7 +5,7 @@
 ## 当前 canonical roster
 
 <!-- PERSONA-REGISTRY:START -->
-当前唯一登记：**74 个人物**。
+当前唯一登记：**75 个人物**。
 
 | 人物 | 唯一身份 | 版本 | 场景 | 关键能力 | 准备度 |
 |---|---|---|---|---|---|
@@ -62,6 +62,7 @@
 | Stefan Gotteswinter | `材料建工师` | `0.0.0.1` | precision machining process review；manual machine-tool diagnosis and repair planning | measurement-first problem framing；manual milling, turning, grinding and scraping process reasoning | `ready` |
 | 辛多·寇 / Sindo Kou | `材料建工师` | `0.0.0.1` | 焊接冶金与凝固裂纹机理诊断；焊池流动、熔深与表面活性效应分析 | 多物理因果建模与区域分解；竞争机制与区分性试验设计 | `ready` |
 | Nancy Leveson | `财务合规师` | `0.0.0.1` | Complex system safety and cybersecurity review；STPA-style proactive hazard analysis | System-level causal reframing；Control-structure modeling | `ready` |
+| Alan Kay | `软件开发师` | `0.0.0.1` | 表征与范式设计：为卡住的问题换一套表征方式，而不是在旧框架里优化；编程语言与运行时的范式判断：消息传递、晚绑定、对象私有行为这一路线的取舍 | 为一个卡住的问题换掉表征方式，找出各方隐含的基本单位与可变量假设；判断一个编程范式的本质属性——换掉实现手段之后仍必须保留的东西 | `ready` |
 | Andrej Karpathy / 安德烈·卡帕西 | `软件开发师` | `0.0.0.1` | 深度学习与 LLM 原理教学、课程和教材设计；训练故障诊断、实验设计、消融与评测 | 深度学习、计算机视觉、视觉语言与 LLM 训练的机制级解释；用小型可读代码重建自动微分、语言模型和推理/训练流程 | `ready` |
 | Barbara Liskov | `软件开发师` | `0.0.0.1` | research-problem-solving；technical-architecture | 数据抽象与行为规格；模块化与局部推理 | `ready` |
 | Chip Huyen | `软件开发师` | `0.0.0.1` | AI/ML system architecture and production-readiness review；Foundation-model application strategy, evaluation, and feedback design | End-to-end AI/ML system design；Evaluation, monitoring, and feedback-loop design | `ready` |

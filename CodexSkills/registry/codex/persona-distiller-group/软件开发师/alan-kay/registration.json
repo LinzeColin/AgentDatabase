@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:alankay",
+  "canonical_name": "Alan Kay",
+  "identity_family_id": "software-developer",
+  "identity_mode": "single",
+  "registration_category": "软件开发师",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "alan-kay",
+  "subject_uid": "person-5cbe3ce70b577093",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/alan-kay-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-26T13:26:11Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "84f50dd347c7c5988485d651758907bdb3b0612edc8d64e4c3a9d39dc4622cb3",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/alan-kay-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "74d54b4f250a6bfc8bf7cba89ddb7ead292f298699340876e56f4fdf5fef2b21",
+      "runtime_size_bytes": 64863,
+      "size_bytes": 73098
+    }
+  ]
+}
