@@ -1,6 +1,6 @@
 {
   "activation_forbidden": true,
-  "base_auto_git_object_id": "sha1:bea0f6c172362223325f9a8033c6c498bcdde6df",
+  "base_auto_git_object_id": "sha1:3feb5854b597abf98320c35b86edf8215294a313",
   "bootstrap_schema_count": 2,
   "bootstrap_schema_entries": [
     {
@@ -18,18 +18,18 @@
   ],
   "bound_reference_resolver_contract": {
     "artifact_digest": "9351465917c344269b37f470bd30d127afe764bae223ba0368e39d9d9a64af41",
-    "auto_integration_complete": false,
+    "auto_integration_complete": true,
     "binding_eligible_version_count": 0,
     "catalog_path_reservation_complete": true,
     "catalog_path_reservation_required": false,
     "current_snapshot_can_emit_bound": false,
     "current_snapshot_promotable": true,
     "current_snapshot_structurally_promoted": true,
-    "gate_satisfied": false,
+    "gate_satisfied": true,
     "implementation_complete": true,
     "post_reservation_rebuild_required": false,
     "post_source_content_sync_rebuild_required": false,
-    "production_trust_permitted": false,
+    "production_trust_permitted": true,
     "registered_snapshot_external_trust_contract": {
       "canonical_snapshot_path": "CodexSkills/registry/_global/registry-snapshot.v1.json",
       "canonical_snapshot_schema_id": "urn:linzecolin:agentdatabase:skillops:schema:registry-snapshot:v1",
@@ -83,7 +83,7 @@
     "external_verified_git_object_required": true,
     "repository_self_report_is_not_trust_root": true
   },
-  "next_phase": "AUTO_BOUND_REFERENCE_RESOLVER_INTEGRATION",
+  "next_phase": "MECHANISM_EXTERNAL_RUNTIME_READINESS_PREFLIGHT",
   "notification_contract": {
     "actual_recipient_repo_external": true,
     "affected_path_refs": [
@@ -133,12 +133,12 @@
       "schema_count": 29,
       "verified_git_object_id": "sha1:899a4374bc02f5e18444fea7404864df7b118adf"
     },
-    "bound_reference_resolver_auto_integration_complete": false,
-    "bound_reference_resolver_gate_satisfied": false,
+    "bound_reference_resolver_auto_integration_complete": true,
+    "bound_reference_resolver_gate_satisfied": true,
     "bound_reference_resolver_implementation_complete": true,
     "canonical_publication_permitted": false,
     "catalog_path_reservation_complete": true,
-    "effective_runtime_state_write_permitted": false,
+    "effective_runtime_state_write_permitted": true,
     "external_gmail_ready": false,
     "external_state_ready": false,
     "final_candidate_integration_required": false,
@@ -154,7 +154,7 @@
     "runtime_preflight_shadow_permitted": true,
     "runtime_shard_writer_integration_complete": true,
     "runtime_state_instance_created": false,
-    "runtime_state_write_gate_status": "BOUND_REFERENCE_RESOLVER_AUTO_INTEGRATION_PENDING",
+    "runtime_state_write_gate_status": "ENABLED_BY_CONTROL",
     "runtime_state_write_permitted": true,
     "schedule_authority_resolved": false,
     "schedule_complete": false,
@@ -165,11 +165,11 @@
     "whole_source_parity_satisfied": false
   },
   "transport_runtime_interface": {
-    "artifact_digest": "8aa7a179ee7374de974c145017fd671c764a42e073b577ab4b0b4081ff5784b2",
-    "integration_state": "REGISTRY_PARITY_COMPLETE_RESOLVER_INTEGRATION_PENDING",
-    "module_count": 27,
+    "artifact_digest": "3ca77e4670f1d891a280e3932d92ce1dfa17b3c95f2645174bf5ae72b8570173",
+    "integration_state": "BOUND_REFERENCE_RESOLVER_INTEGRATED_CONTROL_SYNCED",
+    "module_count": 29,
     "relative_path": "CodexSkills/registry/auto/runtime-interface.json",
-    "verified_git_object_id": "sha1:bea0f6c172362223325f9a8033c6c498bcdde6df"
+    "verified_git_object_id": "sha1:3feb5854b597abf98320c35b86edf8215294a313"
   },
   "validator_contract": {
     "artifact_reads": "DESCRIPTOR_RELATIVE_O_NOFOLLOW",

@@ -138,29 +138,30 @@ byte closure, paired part/index/manifest publication, and paired
 part-delete/retention-receipt/manifest publication. The Auto draft validator
 is useful draft evidence but is explicitly not a production trust root.
 
-The successor control binds the exact final candidate and V2 consumer plus the
-integrated Auto runtime Git object, runtime-interface bytes, and 27 declared
-module digests. It independently validates the immutable predecessor control
-and Mechanism runtime blobs cited by Auto's historical observation, plus the
-separate writer, publisher, and repository-binding materialization snapshots;
-the working tree is not substituted as historical evidence. It records
-`auto_runtime_integration_complete=true` and
-`runtime_shard_writer_integration_complete=true` together with
-`publisher_v2_runtime_integration_complete=true` and
-`repository_binding_integration_complete=true`. The successor establishes
-`repository_bound=true` for the exact logical repository, remote, refspec,
-clean reference root, and four-artifact path closure, while deliberately
-keeping `bound_reference_resolver_gate_satisfied=false`. Its control-level
-`runtime_state_write_permitted=true` is paired with
-`effective_runtime_state_write_permitted=false` and
-`runtime_state_write_gate_status=BOUND_REFERENCE_RESOLVER_SOURCE_CONTENT_SYNC_PENDING`;
-state, lock, worktree, mutable Git, Gmail, outbox, watermark, and publisher
-access must stop before side effects with
-`BOUND_REFERENCE_RESOLVER_NOT_SATISFIED`.
-Auto's writer, publisher, and repository-binding materialization snapshots
-remain historically `current_auto_runtime_control_bound=false`; none is
-rewritten into successor authorization. Activation remains forbidden. Its
-only next phase is `AUTO_REGISTRY_SOURCE_CONTENT_SYNC`.
+The successor control binds the exact final candidate and V2 consumer plus
+Auto corrective object `sha1:3feb585…`, runtime-interface digest `3ca77e…`,
+and 29 declared module digests. It independently verifies that the corrective
+preserved the exact interface materialized at `sha1:6fe7c09…`, as well as the
+immutable predecessor controls, Mechanism runtime blobs, and writer,
+publisher, repository-binding, Registry, and resolver snapshots. The working
+tree is never substituted as historical evidence.
+
+The control records writer, publisher-v2, repository binding, and BOUND
+resolver Auto integration as complete. It establishes
+`repository_bound=true`,
+`bound_reference_resolver_gate_satisfied=true`,
+`runtime_state_write_permitted=true`, and
+`effective_runtime_state_write_permitted=true`, with
+`runtime_state_write_gate_status=ENABLED_BY_CONTROL`. Resolver production
+trust still yields only `UNKNOWN/MAPPING_NOT_PROVABLE` for all 88 current
+Versions because `binding_eligible_version_count=0`;
+`current_snapshot_can_emit_bound=false` remains mandatory. Auto's historical
+materialization snapshots stay `current_auto_runtime_control_bound=false` and
+are not rewritten into successor authority. No state root, lock, worktree,
+mutable Git, Gmail, outbox, watermark, shard, publisher, activation, or
+VERSION instance is created here. Activation and canonical publication remain
+forbidden. The only next Phase is the read-only
+`MECHANISM_EXTERNAL_RUNTIME_READINESS_PREFLIGHT`.
 
 The bundle-outside Registry contract is under
 `CodexSkills/governance/registry/`. It materializes four draft source catalogs

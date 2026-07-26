@@ -22,6 +22,7 @@ sys.path.insert(0, str(TOOLS_DIR))
 from build_activation_control import (  # noqa: E402
     AUTO_RUNTIME_GIT_OBJECT_ID,
     AUTO_RUNTIME_INTERFACE_RAW_SHA256,
+    AUTO_RUNTIME_MATERIALIZATION_GIT_OBJECT_ID,
     AUTO_RUNTIME_MODULE_COUNT,
     AUTO_SOURCE_CONTROL_GIT_OBJECT_ID,
     CANDIDATE_BUNDLE_DIGEST,
@@ -300,7 +301,7 @@ class ActivationControlTests(unittest.TestCase):
         self.assertEqual(interface["candidate_policy_count"], 5)
         self.assertEqual(
             interface["next_phase"],
-            "AUTO_BOUND_REFERENCE_RESOLVER_INTEGRATION",
+            "MECHANISM_EXTERNAL_RUNTIME_READINESS_PREFLIGHT",
         )
         self.assertEqual(
             interface["base_auto_git_object_id"],
@@ -333,7 +334,7 @@ class ActivationControlTests(unittest.TestCase):
         self.assertTrue(
             interface["transition_contract"]["runtime_state_write_permitted"]
         )
-        self.assertFalse(
+        self.assertTrue(
             interface["transition_contract"][
                 "effective_runtime_state_write_permitted"
             ]
@@ -342,14 +343,14 @@ class ActivationControlTests(unittest.TestCase):
             interface["transition_contract"][
                 "runtime_state_write_gate_status"
             ],
-            "BOUND_REFERENCE_RESOLVER_AUTO_INTEGRATION_PENDING",
+            "ENABLED_BY_CONTROL",
         )
         self.assertTrue(
             interface["transition_contract"][
                 "bound_reference_resolver_implementation_complete"
             ]
         )
-        self.assertFalse(
+        self.assertTrue(
             interface["transition_contract"][
                 "bound_reference_resolver_auto_integration_complete"
             ]
@@ -373,9 +374,9 @@ class ActivationControlTests(unittest.TestCase):
             "bound_reference_resolver_contract"
         ]
         self.assertTrue(resolver_contract["implementation_complete"])
-        self.assertFalse(resolver_contract["auto_integration_complete"])
-        self.assertFalse(resolver_contract["gate_satisfied"])
-        self.assertFalse(resolver_contract["production_trust_permitted"])
+        self.assertTrue(resolver_contract["auto_integration_complete"])
+        self.assertTrue(resolver_contract["gate_satisfied"])
+        self.assertTrue(resolver_contract["production_trust_permitted"])
         self.assertFalse(resolver_contract["current_snapshot_can_emit_bound"])
         self.assertTrue(resolver_contract["current_snapshot_promotable"])
         self.assertTrue(
@@ -432,6 +433,41 @@ class ActivationControlTests(unittest.TestCase):
         self.assertFalse(
             auto_interface["bound_reference_resolver_gate_satisfied"]
         )
+        self.assertTrue(
+            auto_interface[
+                "bound_reference_resolver_auto_integration_complete"
+            ]
+        )
+        self.assertTrue(
+            auto_interface[
+                "bound_reference_resolver_readonly_preflight_verified"
+            ]
+        )
+        self.assertEqual(
+            auto_interface[
+                "bound_reference_resolver_dependency_contract"
+            ]["missing_current_artifacts"],
+            [],
+        )
+        self.assertEqual(
+            auto_interface[
+                "bound_reference_resolver_dependency_contract"
+            ]["all_current_versions_unknown_reason_code"],
+            "MAPPING_NOT_PROVABLE",
+        )
+        resolver_materialization = auto_interface[
+            "bound_reference_resolver_materialization_snapshot"
+        ]
+        self.assertTrue(
+            resolver_materialization[
+                "all_current_versions_unknown_verified"
+            ]
+        )
+        self.assertEqual(
+            resolver_materialization["binding_eligible_version_count"],
+            0,
+        )
+        self.assertEqual(resolver_materialization["source_skill_count"], 88)
         self.assertEqual(
             auto_interface["runtime_interface_materialization_snapshot"],
             {
@@ -519,7 +555,7 @@ class ActivationControlTests(unittest.TestCase):
         self.assertTrue(
             interface["transition_contract"]["repository_bound"]
         )
-        self.assertFalse(
+        self.assertTrue(
             interface["transition_contract"][
                 "bound_reference_resolver_gate_satisfied"
             ]
@@ -529,8 +565,8 @@ class ActivationControlTests(unittest.TestCase):
             {
                 "artifact_digest": AUTO_RUNTIME_INTERFACE_RAW_SHA256,
                 "integration_state": (
-                    "REGISTRY_PARITY_COMPLETE_"
-                    "RESOLVER_INTEGRATION_PENDING"
+                    "BOUND_REFERENCE_RESOLVER_"
+                    "INTEGRATED_CONTROL_SYNCED"
                 ),
                 "module_count": AUTO_RUNTIME_MODULE_COUNT,
                 "relative_path": (
@@ -614,6 +650,32 @@ class ActivationControlTests(unittest.TestCase):
             with self.assertRaisesRegex(
                 ContractError,
                 "ACTIVATION_AUTO_HISTORICAL_RUNTIME_DIGEST_MISMATCH",
+            ):
+                _preflight_inputs(
+                    require_non_active=False,
+                    require_current_auto=False,
+                )
+
+    def test_02d_auto_corrective_cannot_rewrite_runtime_interface(
+        self,
+    ) -> None:
+        target = "CodexSkills/registry/auto/runtime-interface.json"
+
+        def drift(object_id: str, relative_path: str) -> bytes:
+            if (
+                object_id == AUTO_RUNTIME_MATERIALIZATION_GIT_OBJECT_ID
+                and relative_path == target
+            ):
+                return b"historical materialization drift"
+            return _git_blob(object_id, relative_path)
+
+        with mock.patch(
+            "build_activation_control._git_blob",
+            side_effect=drift,
+        ):
+            with self.assertRaisesRegex(
+                ContractError,
+                "ACTIVATION_AUTO_CORRECTIVE_INTERFACE_DRIFT",
             ):
                 _preflight_inputs(
                     require_non_active=False,

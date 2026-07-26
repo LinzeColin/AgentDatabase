@@ -1,7 +1,7 @@
 # Mechanism handoff
 
-- State: `DRAFT_NON_ACTIVE_PARITY_COMPLETE_MATERIALIZED`
-- Phase: `MECHANISM_REGISTRY_PARITY_COMPLETE_MATERIALIZATION`
+- State: `DRAFT_NON_ACTIVE_BOUND_REFERENCE_RESOLVER_CONTROL_SYNCED`
+- Phase: `MECHANISM_POST_BOUND_REFERENCE_RESOLVER_CONTROL_SYNC`
 - Protocol:
   `urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1`
 - SRV candidate: `v0.0.0.3`
@@ -17,12 +17,14 @@
   `7f2e335b682ec98c15f2e21e74bc0c2af24768cda7e5ed1ddc1b5e341449ac84`
 - Source-content-sync Auto module count: `27`
 - Current Auto corrective Git object:
-  `sha1:bea0f6c172362223325f9a8033c6c498bcdde6df`
+  `sha1:3feb5854b597abf98320c35b86edf8215294a313`
+- Auto resolver materialization Git object:
+  `sha1:6fe7c09abb03abd42e476f20fd1388a24707b7a5`
 - Current Auto runtime-interface raw SHA-256:
-  `8aa7a179ee7374de974c145017fd671c764a42e073b577ab4b0b4081ff5784b2`
-- Current Auto module count: `27`
+  `3ca77e4670f1d891a280e3932d92ce1dfa17b3c95f2645174bf5ae72b8570173`
+- Current Auto module count: `29`
 - Control interface raw SHA-256:
-  `72a0c4c2ad6c810f2b0cd7eb0fb46bb168b7315c15807838f7a988d759f5cb6f`
+  `8caf7e5dbb922714c3afa39040e55b8a83015ea0f02de153e19cc3010b0e0e1a`
 - Resolver interface raw SHA-256:
   `9351465917c344269b37f470bd30d127afe764bae223ba0368e39d9d9a64af41`
 - Resolver interface self digest:
@@ -145,30 +147,34 @@ source/mirror parity is complete.
 The resolver lineage verifies source-sync evidence only from immutable Auto
 object `sha1:dc653654…`; it does not require the current checkout to equal that
 historical interface or module set. The successor control separately
-exact-binds the current Auto corrective object `sha1:bea0f6c…`, interface, and
-27 modules. It records:
+exact-binds current Auto corrective object `sha1:3feb585…`, interface
+`3ca77e…`, and all 29 modules. It also proves that the corrective did not
+rewrite the interface materialized at `sha1:6fe7c09…`. It records:
 
 ```text
 repository_bound=true
 runtime_state_write_permitted=true
-effective_runtime_state_write_permitted=false
+effective_runtime_state_write_permitted=true
 bound_reference_resolver_implementation_complete=true
-bound_reference_resolver_auto_integration_complete=false
-bound_reference_resolver_gate_satisfied=false
-runtime_state_write_gate_status=
-  BOUND_REFERENCE_RESOLVER_AUTO_INTEGRATION_PENDING
+bound_reference_resolver_auto_integration_complete=true
+bound_reference_resolver_gate_satisfied=true
+runtime_state_write_gate_status=ENABLED_BY_CONTROL
+production_trust_permitted=true
+current_snapshot_can_emit_bound=false
 ```
 
-The first two values are control-level prerequisites already reached; they do
-not authorize side effects. Until Auto consumes the exact registered snapshot
-and resolver contract, effective state, lock, worktree, mutable Git, Gmail,
-outbox, watermark, publisher, and canonical publication remain blocked before
-side effects.
+`production_trust_permitted=true` authorizes only the exact sealed resolver
+projection under the repo-external candidate/control/Registry tuples. The
+registered snapshot still has zero binding-eligible Versions, so all 88 real
+entries deterministically remain `UNKNOWN/MAPPING_NOT_PROVABLE` and no
+`skill_ref` or BOUND event can be produced. Control-level state-write gates
+are now closed, but no external state root, credential, recipient mapping,
+provider capability, runtime instance, lock, watermark, worktree, mutable Git,
+outbox, or publisher was opened or created in this Phase.
 
 The following also remain false or unperformed:
 
 ```text
-production_trust_permitted
 current_snapshot_can_emit_bound
 consumer_first_repository_shards_permitted
 au_040_daily_jsonl_shard_complete
@@ -190,21 +196,14 @@ call occurred.
 ## Next exact action
 
 After this Mechanism commit is FF-pushed and independently read back, the only
-next phase is `AUTO_BOUND_REFERENCE_RESOLVER_INTEGRATION`.
+next phase is `MECHANISM_EXTERNAL_RUNTIME_READINESS_PREFLIGHT`.
 
-That Auto-owned phase must consume:
-
-- the exact successor control tuple;
-- the exact candidate 31/5 tuple;
-- the registered snapshot tuple above, using the verified successor commit;
-- all four registered catalogs and the three Registry schemas from that same
-  Git object.
-
-It must prove deterministic `UNKNOWN/MAPPING_NOT_PROVABLE` for all real
-current versions because the binding-eligible set is empty, keep every
-state/mutable-Git/network side effect fail-closed until its successor control
-sync, and must not fabricate BOUND, activate, publish, create VERSION, resolve
-the schedule conflict, touch the three PAUSED automations, or call verifier.
+That Phase must remain read-only. It may verify repo-external state-root
+location/ownership/mode, recipient mapping presence without revealing the
+recipient, Gmail profile and query capability, and exact candidate/control/
+Registry tuples. UNKNOWN or absent external facts remain false/fail-closed. It
+must not create state, lock, watermark, outbox, Gmail message, shard,
+publication, activation, VERSION, schedule override, or automation change.
 
 Development still must not call verifier. After both planes are complete, the
 Owner designates the final task that may invoke a fresh verifier.
