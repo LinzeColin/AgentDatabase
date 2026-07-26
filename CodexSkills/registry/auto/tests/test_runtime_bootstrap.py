@@ -64,7 +64,7 @@ class RuntimeBootstrapTests(unittest.TestCase):
         )
         self.assertEqual(
             evidence.status,
-            "UNBOUND_REGISTRY_SOURCE_CONTENT_SYNCED_CONTROL_PENDING",
+            "UNBOUND_RESOLVER_INTEGRATED_CONTROL_SYNC_PENDING",
         )
         self.assertEqual(evidence.schema_count, 31)
         self.assertEqual(evidence.policy_count, 5)
@@ -373,7 +373,7 @@ class RuntimeBootstrapTests(unittest.TestCase):
         )
         self.assertEqual(
             interface["au_040_authority_ruling_status"],
-            "REGISTRY_SOURCE_CONTENT_SYNCED_CONTROL_PENDING",
+            "BOUND_REFERENCE_RESOLVER_INTEGRATED_CONTROL_SYNC_PENDING",
         )
         self.assertFalse(interface["au_040_complete"])
         self.assertTrue(interface["au_040_transport_schema_draft_complete"])
@@ -506,7 +506,7 @@ class RuntimeBootstrapTests(unittest.TestCase):
         )
         self.assertEqual(
             interface["next_phase"],
-            "MECHANISM_REGISTRY_PARITY_COMPLETE_MATERIALIZATION",
+            "MECHANISM_POST_BOUND_REFERENCE_RESOLVER_CONTROL_SYNC",
         )
         self.assertTrue(
             interface["auto_exact_bundle_integration_complete"]
@@ -639,7 +639,7 @@ class RuntimeBootstrapTests(unittest.TestCase):
         self.assertTrue(
             interface["repository_binding_integration_complete"]
         )
-        self.assertEqual(interface["module_count"], 27)
+        self.assertEqual(interface["module_count"], 29)
         self.assertTrue(interface["catalog_path_reservation_complete"])
         self.assertTrue(
             interface["registry_source_alias_parity_satisfied"]
@@ -817,8 +817,50 @@ class RuntimeBootstrapTests(unittest.TestCase):
                 "codex/verifier",
             ],
         )
-        self.assertFalse(
+        self.assertTrue(
             interface["bound_reference_resolver_auto_integration_complete"]
+        )
+        self.assertTrue(
+            interface[
+                "bound_reference_resolver_readonly_preflight_verified"
+            ]
+        )
+        resolver_materialization = interface[
+            "bound_reference_resolver_materialization_snapshot"
+        ]
+        self.assertEqual(
+            resolver_materialization["verified_git_object_id"],
+            "sha1:df63339e1bb6106250ce169241477191744c254f",
+        )
+        self.assertEqual(
+            resolver_materialization["registry_snapshot_digest"],
+            "10979826bf63b49fbde8da6ece51d6ea"
+            "d6909225b3c62af994e110dea31e1718",
+        )
+        self.assertEqual(
+            resolver_materialization["source_skill_count"],
+            88,
+        )
+        self.assertEqual(
+            resolver_materialization[
+                "binding_eligible_version_count"
+            ],
+            0,
+        )
+        self.assertTrue(
+            resolver_materialization[
+                "all_current_versions_unknown_verified"
+            ]
+        )
+        self.assertFalse(
+            resolver_materialization[
+                "current_auto_runtime_control_bound"
+            ]
+        )
+        self.assertFalse(
+            resolver_materialization[
+                "effective_runtime_state_write_permitted"
+            ]
         )
         self.assertTrue(
             interface["bound_reference_resolver_implementation_complete"]
@@ -841,7 +883,7 @@ class RuntimeBootstrapTests(unittest.TestCase):
         self.assertFalse(interface["runtime_state_write_permitted"])
         self.assertEqual(
             interface["runtime_writer_shadow_status"],
-            "UNBOUND_REGISTRY_SOURCE_CONTENT_SYNCED_CONTROL_PENDING",
+            "UNBOUND_RESOLVER_INTEGRATED_CONTROL_SYNC_PENDING",
         )
         self.assertEqual(
             interface["runtime_writer_shadow_validator_kind"],
@@ -986,7 +1028,7 @@ class RuntimeBootstrapTests(unittest.TestCase):
             )
             self.assertEqual(
                 evidence.status,
-                "UNBOUND_REGISTRY_SOURCE_CONTENT_SYNCED_CONTROL_PENDING",
+                "UNBOUND_RESOLVER_INTEGRATED_CONTROL_SYNC_PENDING",
             )
             self.assertEqual(
                 expected_repository_control_failure_pattern(),
@@ -1148,7 +1190,7 @@ class RuntimeBootstrapTests(unittest.TestCase):
             )
             self.assertEqual(
                 current_interface["next_phase"],
-                "MECHANISM_REGISTRY_PARITY_COMPLETE_MATERIALIZATION",
+                "MECHANISM_POST_BOUND_REFERENCE_RESOLVER_CONTROL_SYNC",
             )
             self.assertTrue(
                 observed["transition_contract"][

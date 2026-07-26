@@ -29,6 +29,19 @@ from CodexSkills.registry.auto.runtime.catalog_reservation import (
     assert_exact_alias_set,
     reserved_registry_paths,
 )
+from CodexSkills.registry.auto.runtime.binding_resolver import (
+    REGISTERED_SNAPSHOT_PATH,
+    REGISTERED_SNAPSHOT_SCHEMA_ID,
+    RegistrySnapshotTrustTuple,
+    load_verified_bound_reference_resolver,
+)
+from CodexSkills.registry.auto.runtime.bootstrap import (
+    CONTROL_INTERFACE_PATH as BOOTSTRAP_CONTROL_INTERFACE_PATH,
+    CONTROL_MODE,
+    ControlTrustTuple,
+)
+from CodexSkills.registry.auto.tools.validate_auto import TrustTuple
+from CodexSkills.governance.tools.canonical_json import canonical_digest
 
 
 AUTO_DIR = Path(__file__).resolve().parents[1]
@@ -146,6 +159,40 @@ SOURCE_CONTENT_SYNC_NEXT_PHASE = (
 )
 SOURCE_CONTENT_SYNC_MATERIALIZATION_GIT_OBJECT = (
     "sha1:dc653654603f5bfee3bd41890b49cfad700cf541"
+)
+BOUND_REFERENCE_RESOLVER_CONTROL_GIT_OBJECT = (
+    "sha1:df63339e1bb6106250ce169241477191744c254f"
+)
+BOUND_REFERENCE_RESOLVER_BOUND_AUTO_GIT_OBJECT = (
+    "sha1:bea0f6c172362223325f9a8033c6c498bcdde6df"
+)
+BOUND_REFERENCE_RESOLVER_BOUND_AUTO_INTERFACE_RAW_SHA256 = (
+    "8aa7a179ee7374de974c145017fd671c7"
+    "64a42e073b577ab4b0b4081ff5784b2"
+)
+BOUND_REFERENCE_RESOLVER_BOUND_AUTO_MODULE_COUNT = 27
+EXPECTED_BOUND_REFERENCE_RESOLVER_CONTROL_RAW_SHA256 = (
+    "72a0c4c2ad6c810f2b0cd7eb0fb46bb"
+    "168b7315c15807838f7a988d759f5cb6f"
+)
+EXPECTED_BOUND_REFERENCE_RESOLVER_INTERFACE_RAW_SHA256 = (
+    "9351465917c344269b37f470bd30d127a"
+    "fe764bae223ba0368e39d9d9a64af41"
+)
+EXPECTED_BOUND_REFERENCE_RESOLVER_INTERFACE_SELF_DIGEST = (
+    "e67799c396a49d42b49c2e1960f760fb"
+    "db23dd32496575b7bbd81bd388026ae8"
+)
+REGISTERED_REGISTRY_SNAPSHOT_DIGEST = (
+    "10979826bf63b49fbde8da6ece51d6ea"
+    "d6909225b3c62af994e110dea31e1718"
+)
+EXPECTED_REGISTERED_REGISTRY_SNAPSHOT_RAW_SHA256 = (
+    "217bcecc0057c271171cfd00169fe99c0"
+    "39dced478c2f1ef1c2cb2527f3c76f2"
+)
+BOUND_REFERENCE_RESOLVER_NEXT_PHASE = (
+    "MECHANISM_POST_BOUND_REFERENCE_RESOLVER_CONTROL_SYNC"
 )
 SOURCE_CONTENT_SYNC_ENTRIES = [
     {
@@ -1765,11 +1812,267 @@ def _catalog_reservation_materialization():
     }
 
 
+def _bound_reference_resolver_materialization():
+    if CONTROL_INTERFACE_REPO_PATH != BOOTSTRAP_CONTROL_INTERFACE_PATH:
+        raise ValueError(
+            "AUTO_BOUND_REFERENCE_CONTROL_PATH_CONSTANT_DRIFT"
+        )
+    control_raw = _git_blob(
+        BOUND_REFERENCE_RESOLVER_CONTROL_GIT_OBJECT,
+        CONTROL_INTERFACE_REPO_PATH,
+    )
+    if (
+        hashlib.sha256(control_raw).hexdigest()
+        != EXPECTED_BOUND_REFERENCE_RESOLVER_CONTROL_RAW_SHA256
+    ):
+        raise ValueError(
+            "AUTO_BOUND_REFERENCE_CONTROL_INTERFACE_DRIFT"
+        )
+    resolver_raw = _git_blob(
+        BOUND_REFERENCE_RESOLVER_CONTROL_GIT_OBJECT,
+        RESOLVER_INTERFACE_REPO_PATH,
+    )
+    resolver_path = REPO_ROOT.joinpath(
+        *RESOLVER_INTERFACE_REPO_PATH.split("/")
+    )
+    if (
+        hashlib.sha256(resolver_raw).hexdigest()
+        != EXPECTED_BOUND_REFERENCE_RESOLVER_INTERFACE_RAW_SHA256
+        or resolver_path.read_bytes() != resolver_raw
+    ):
+        raise ValueError(
+            "AUTO_BOUND_REFERENCE_RESOLVER_INTERFACE_DRIFT"
+        )
+    snapshot_raw = _git_blob(
+        BOUND_REFERENCE_RESOLVER_CONTROL_GIT_OBJECT,
+        REGISTERED_SNAPSHOT_PATH,
+    )
+    snapshot_path = REPO_ROOT.joinpath(
+        *REGISTERED_SNAPSHOT_PATH.split("/")
+    )
+    if (
+        hashlib.sha256(snapshot_raw).hexdigest()
+        != EXPECTED_REGISTERED_REGISTRY_SNAPSHOT_RAW_SHA256
+        or snapshot_path.read_bytes() != snapshot_raw
+    ):
+        raise ValueError(
+            "AUTO_BOUND_REFERENCE_REGISTRY_SNAPSHOT_DRIFT"
+        )
+    try:
+        control = json.loads(
+            control_raw.decode("utf-8"),
+            object_pairs_hook=_strict_object,
+        )
+        resolver = json.loads(
+            resolver_raw.decode("utf-8"),
+            object_pairs_hook=_strict_object,
+        )
+        snapshot = json.loads(
+            snapshot_raw.decode("utf-8"),
+            object_pairs_hook=_strict_object,
+        )
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise ValueError(
+            "AUTO_BOUND_REFERENCE_MATERIALIZATION_JSON_INVALID"
+        ) from exc
+    transition = control.get("transition_contract")
+    transport = control.get("transport_runtime_interface")
+    resolver_contract = control.get(
+        "bound_reference_resolver_contract"
+    )
+    registered = resolver.get(
+        "registered_snapshot_external_trust_contract"
+    )
+    resolver_snapshot = resolver.get("registry_snapshot")
+    if (
+        control.get("status") != "DRAFT_NON_ACTIVE"
+        or control.get("activation_forbidden") is not True
+        or control.get("base_auto_git_object_id")
+        != BOUND_REFERENCE_RESOLVER_BOUND_AUTO_GIT_OBJECT
+        or control.get("next_phase")
+        != "AUTO_BOUND_REFERENCE_RESOLVER_INTEGRATION"
+        or not isinstance(transport, dict)
+        or transport.get("verified_git_object_id")
+        != BOUND_REFERENCE_RESOLVER_BOUND_AUTO_GIT_OBJECT
+        or transport.get("artifact_digest")
+        != BOUND_REFERENCE_RESOLVER_BOUND_AUTO_INTERFACE_RAW_SHA256
+        or transport.get("module_count")
+        != BOUND_REFERENCE_RESOLVER_BOUND_AUTO_MODULE_COUNT
+        or not isinstance(transition, dict)
+        or transition.get("auto_runtime_integration_complete")
+        is not True
+        or transition.get(
+            "bound_reference_resolver_implementation_complete"
+        )
+        is not True
+        or transition.get(
+            "bound_reference_resolver_auto_integration_complete"
+        )
+        is not False
+        or transition.get("bound_reference_resolver_gate_satisfied")
+        is not False
+        or transition.get("repository_bound") is not True
+        or transition.get("runtime_state_write_permitted") is not True
+        or transition.get(
+            "effective_runtime_state_write_permitted"
+        )
+        is not False
+        or transition.get("runtime_state_instance_created") is not False
+        or transition.get("canonical_publication_permitted") is not False
+        or transition.get("external_gmail_ready") is not False
+        or transition.get("external_state_ready") is not False
+        or transition.get("m0c_b_permitted") is not False
+        or transition.get("schedule_authority_resolved") is not False
+        or transition.get("schedule_complete") is not False
+        or not isinstance(resolver_contract, dict)
+        or resolver_contract.get("artifact_digest")
+        != EXPECTED_BOUND_REFERENCE_RESOLVER_INTERFACE_RAW_SHA256
+        or resolver_contract.get("registry_snapshot_digest")
+        != REGISTERED_REGISTRY_SNAPSHOT_DIGEST
+        or resolver_contract.get("current_snapshot_structurally_promoted")
+        is not True
+        or resolver_contract.get("current_snapshot_can_emit_bound")
+        is not False
+        or resolver_contract.get("binding_eligible_version_count") != 0
+        or resolver_contract.get("auto_integration_complete") is not False
+        or resolver_contract.get("gate_satisfied") is not False
+        or resolver_contract.get("production_trust_permitted") is not False
+        or resolver.get("artifact_digest")
+        != EXPECTED_BOUND_REFERENCE_RESOLVER_INTERFACE_SELF_DIGEST
+        or resolver.get("artifact_digest")
+        != canonical_digest(resolver, "/artifact_digest")
+        or resolver.get("status")
+        != "DRAFT_NON_ACTIVE_PARITY_COMPLETE_MATERIALIZED"
+        or resolver.get("next_phase")
+        != "AUTO_BOUND_REFERENCE_RESOLVER_INTEGRATION"
+        or resolver.get("auto_integration_complete") is not False
+        or resolver.get("production_trust_permitted") is not False
+        or not isinstance(registered, dict)
+        or registered.get("canonical_snapshot_path")
+        != REGISTERED_SNAPSHOT_PATH
+        or registered.get("canonical_snapshot_schema_id")
+        != REGISTERED_SNAPSHOT_SCHEMA_ID
+        or registered.get("mode") != "REGISTERED"
+        or registered.get("registry_snapshot_digest")
+        != REGISTERED_REGISTRY_SNAPSHOT_DIGEST
+        or not isinstance(resolver_snapshot, dict)
+        or resolver_snapshot.get("current_source_skill_count") != 88
+        or resolver_snapshot.get("current_identity_count") != 88
+        or resolver_snapshot.get("current_instance_count") != 88
+        or resolver_snapshot.get("current_version_count") != 88
+        or resolver_snapshot.get("binding_eligible_version_count") != 0
+        or snapshot.get("registry_snapshot_digest")
+        != REGISTERED_REGISTRY_SNAPSHOT_DIGEST
+        or snapshot.get("registry_snapshot_digest")
+        != canonical_digest(snapshot, "/registry_snapshot_digest")
+        or snapshot.get("status") != "REGISTERED"
+    ):
+        raise ValueError(
+            "AUTO_BOUND_REFERENCE_MATERIALIZATION_CONTRACT_MISMATCH"
+        )
+    immutable_paths = {
+        RESOLVER_INTERFACE_REPO_PATH,
+        REGISTERED_SNAPSHOT_PATH,
+        *(
+            entry["relative_path"]
+            for entry in resolver["final_catalog_entries"]
+        ),
+        *(
+            entry["relative_path"]
+            for entry in resolver["schema_entries"]
+        ),
+        *(
+            entry["relative_path"]
+            for entry in resolver["runtime_artifacts"]
+        ),
+    }
+    for relative_path in sorted(immutable_paths):
+        git_raw = _git_blob(
+            BOUND_REFERENCE_RESOLVER_CONTROL_GIT_OBJECT,
+            relative_path,
+        )
+        local_raw = REPO_ROOT.joinpath(
+            *relative_path.split("/")
+        ).read_bytes()
+        if local_raw != git_raw:
+            raise ValueError(
+                "AUTO_BOUND_REFERENCE_LOCAL_GIT_CLOSURE_DRIFT"
+            )
+    candidate_trust = TrustTuple(
+        FINAL_CANDIDATE_GIT_OBJECT,
+        FINAL_CANDIDATE_BUNDLE_DIGEST,
+        CANDIDATE_MANIFEST_PATH,
+        "CANDIDATE",
+    )
+    control_trust = ControlTrustTuple(
+        BOUND_REFERENCE_RESOLVER_CONTROL_GIT_OBJECT,
+        EXPECTED_BOUND_REFERENCE_RESOLVER_CONTROL_RAW_SHA256,
+        CONTROL_INTERFACE_REPO_PATH,
+        CONTROL_MODE,
+    )
+    snapshot_trust = RegistrySnapshotTrustTuple(
+        BOUND_REFERENCE_RESOLVER_CONTROL_GIT_OBJECT,
+        REGISTERED_REGISTRY_SNAPSHOT_DIGEST,
+        REGISTERED_SNAPSHOT_PATH,
+        REGISTERED_SNAPSHOT_SCHEMA_ID,
+        "REGISTERED",
+    )
+    proof = load_verified_bound_reference_resolver(
+        REPO_ROOT,
+        candidate_trust,
+        control_trust,
+        control,
+        snapshot_trust,
+    )
+    if (
+        proof.source_skill_count != 88
+        or proof.binding_eligible_version_count != 0
+        or proof.all_current_versions_unknown_verified is not True
+    ):
+        raise ValueError(
+            "AUTO_BOUND_REFERENCE_UNKNOWN_PROJECTION_MISMATCH"
+        )
+    return {
+        "all_current_versions_unknown_verified": True,
+        "binding_eligible_version_count": 0,
+        "canonical_control_path": CONTROL_INTERFACE_REPO_PATH,
+        "control_interface_raw_sha256": (
+            EXPECTED_BOUND_REFERENCE_RESOLVER_CONTROL_RAW_SHA256
+        ),
+        "external_control_mode": CONTROL_MODE,
+        "external_registry_mode": "REGISTERED",
+        "registered_snapshot_path": REGISTERED_SNAPSHOT_PATH,
+        "registered_snapshot_raw_sha256": (
+            EXPECTED_REGISTERED_REGISTRY_SNAPSHOT_RAW_SHA256
+        ),
+        "registered_snapshot_schema_id": (
+            REGISTERED_SNAPSHOT_SCHEMA_ID
+        ),
+        "registry_snapshot_digest": (
+            REGISTERED_REGISTRY_SNAPSHOT_DIGEST
+        ),
+        "resolver_interface_path": RESOLVER_INTERFACE_REPO_PATH,
+        "resolver_interface_raw_sha256": (
+            EXPECTED_BOUND_REFERENCE_RESOLVER_INTERFACE_RAW_SHA256
+        ),
+        "resolver_interface_self_digest": (
+            EXPECTED_BOUND_REFERENCE_RESOLVER_INTERFACE_SELF_DIGEST
+        ),
+        "runtime_artifacts": resolver["runtime_artifacts"],
+        "source_catalogs": resolver["final_catalog_entries"],
+        "source_skill_count": 88,
+        "verified_git_object_id": (
+            BOUND_REFERENCE_RESOLVER_CONTROL_GIT_OBJECT
+        ),
+    }
+
+
 def _files():
     paths = sorted((AUTO_DIR / "runtime").glob("*.py"))
     paths.extend(
         [
             AUTO_DIR / "tools" / "activation_handshake_cli.py",
+            AUTO_DIR / "tools" / "bound_reference_resolver_cli.py",
             AUTO_DIR / "tools" / "build_runtime_interface.py",
             AUTO_DIR / "tools" / "notification_transport_cli.py",
             AUTO_DIR / "tools" / "run_fault_suite.py",
@@ -1792,6 +2095,9 @@ def build():
     source_sync_control = _source_content_sync_predecessor_observation()
     catalog_reservation = _catalog_reservation_materialization()
     source_content_sync = _source_content_sync_materialization()
+    bound_reference_resolver = (
+        _bound_reference_resolver_materialization()
+    )
     artifacts = []
     for path in _files():
         relative = path.relative_to(REPO_ROOT).as_posix()
@@ -1823,7 +2129,7 @@ def build():
         "activation_instance_created": False,
         "activation_settlement_recomputed_before_publish": True,
         "au_040_authority_ruling_status": (
-            "REGISTRY_SOURCE_CONTENT_SYNCED_CONTROL_PENDING"
+            "BOUND_REFERENCE_RESOLVER_INTEGRATED_CONTROL_SYNC_PENDING"
         ),
         "au_040_complete": False,
         "au_040_consumer_manifest_path_contract_present": True,
@@ -2078,7 +2384,7 @@ def build():
         "module_artifacts": artifacts,
         "module_count": len(artifacts),
         "m0c_b_permitted": False,
-        "next_phase": SOURCE_CONTENT_SYNC_NEXT_PHASE,
+        "next_phase": BOUND_REFERENCE_RESOLVER_NEXT_PHASE,
         "notification_actual_recipient_repo_external": True,
         "notification_credentials_repo_external": True,
         "notification_external_path_contract": {
@@ -2246,8 +2552,25 @@ def build():
             "semantic_scope": "INTERFACE_MATERIALIZATION_ONLY",
         },
         "repository_binding_readonly_preflight_verified": False,
-        "bound_reference_resolver_auto_integration_complete": False,
+        "bound_reference_resolver_auto_integration_complete": True,
+        "bound_reference_resolver_readonly_preflight_verified": True,
         "bound_reference_resolver_implementation_complete": True,
+        "bound_reference_resolver_materialization_snapshot": {
+            "as_of_phase": "AUTO_BOUND_REFERENCE_RESOLVER_INTEGRATION",
+            "canonical_publication_permitted": False,
+            "current_auto_runtime_control_bound": False,
+            "effective_runtime_state_write_permitted": False,
+            "predecessor_control_git_object_id": (
+                BOUND_REFERENCE_RESOLVER_CONTROL_GIT_OBJECT
+            ),
+            "production_trust_permitted": False,
+            "semantic_scope": "INTERFACE_MATERIALIZATION_ONLY",
+            **bound_reference_resolver,
+        },
+        "bound_reference_resolver_production_entrypoint": (
+            "CodexSkills/registry/auto/tools/"
+            "bound_reference_resolver_cli.py"
+        ),
         "bound_reference_resolver_dependency_contract": {
             "adapter_may_generate_or_authenticate_resolver": False,
             "approved_surfaces": [
@@ -2272,11 +2595,12 @@ def build():
                 "FULL_SEVEN_FIELD_SKILL_REF",
                 "MECHANISM_IMMUTABLE_REGISTRY_SNAPSHOT_TUPLE",
             ],
-            "missing_current_artifacts": [
-                "FOUR_SOURCE_IDENTITY_INSTANCE_VERSION_CATALOGS",
-                "GLOBAL_SKILL_IDENTITY_RECORDS",
-                "PROMOTABLE_VERSIONED_REGISTRY_SNAPSHOT",
-            ],
+            "all_current_versions_unknown_reason_code": (
+                "MAPPING_NOT_PROVABLE"
+            ),
+            "binding_eligible_version_count": 0,
+            "external_registered_snapshot_tuple_required": True,
+            "missing_current_artifacts": [],
             "must_precede": [
                 "GMAIL_CLIENT",
                 "GIT_LS_REMOTE",
@@ -2294,6 +2618,9 @@ def build():
                 "UNKNOWN_WITHOUT_EXPLICIT_PUBLISHABLE_STATUS",
             ],
             "pinned_git_object_reads_before_gate_permitted": True,
+            "resolver_interface_raw_sha256": (
+                EXPECTED_BOUND_REFERENCE_RESOLVER_INTERFACE_RAW_SHA256
+            ),
             "registry_snapshot_tuple_required_fields": [
                 "canonical_snapshot_digest",
                 "canonical_snapshot_path",
@@ -2315,6 +2642,7 @@ def build():
             "unprovable_binding_action": (
                 "PROJECT_UNKNOWN_AND_BLOCK_CANONICAL_PUBLICATION"
             ),
+            "verified_source_skill_count": 88,
             "unknown_reason_codes": [
                 "ADAPTER_NOT_APPROVED",
                 "BUNDLE_DIGEST_MISMATCH",
@@ -2331,7 +2659,7 @@ def build():
         "runtime_writer_shadow_returns_bootstrap_context": False,
         "runtime_writer_shadow_state_access_permitted": False,
         "runtime_writer_shadow_status": (
-            "UNBOUND_REGISTRY_SOURCE_CONTENT_SYNCED_CONTROL_PENDING"
+            "UNBOUND_RESOLVER_INTEGRATED_CONTROL_SYNC_PENDING"
         ),
         "runtime_writer_shadow_validator_kind": (
             "DEVELOPMENT_ONLY_UNBOUND"
@@ -2342,7 +2670,7 @@ def build():
         "runtime_publisher_shadow_returns_bootstrap_context": False,
         "runtime_publisher_shadow_state_access_permitted": False,
         "runtime_publisher_shadow_status": (
-            "UNBOUND_REGISTRY_SOURCE_CONTENT_SYNCED_CONTROL_PENDING"
+            "UNBOUND_RESOLVER_INTEGRATED_CONTROL_SYNC_PENDING"
         ),
         "runtime_publisher_shadow_validator_kind": (
             "DEVELOPMENT_ONLY_UNBOUND"
@@ -2358,7 +2686,7 @@ def build():
             False
         ),
         "runtime_repository_binding_shadow_status": (
-            "UNBOUND_REGISTRY_SOURCE_CONTENT_SYNCED_CONTROL_PENDING"
+            "UNBOUND_RESOLVER_INTEGRATED_CONTROL_SYNC_PENDING"
         ),
         "runtime_repository_binding_shadow_validator_kind": (
             "DEVELOPMENT_ONLY_UNBOUND"

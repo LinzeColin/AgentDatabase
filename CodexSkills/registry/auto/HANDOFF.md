@@ -1,136 +1,91 @@
-# Auto Registry source-content sync handoff
+# Auto BOUND reference resolver integration handoff
 
-- State: `DRAFT_NON_ACTIVE_REGISTRY_SOURCE_CONTENT_SYNCED_CONTROL_PENDING`
-- Phase: `AUTO_REGISTRY_SOURCE_CONTENT_SYNC`
+- State: `DRAFT_NON_ACTIVE_BOUND_REFERENCE_RESOLVER_INTEGRATED_CONTROL_SYNC_PENDING`
+- Phase: `AUTO_BOUND_REFERENCE_RESOLVER_INTEGRATION`
 - Phase base / predecessor control Git object:
-  `sha1:5db5beecf3de7ac916020ca988f6e875891e19b1`
+  `sha1:df63339e1bb6106250ce169241477191744c254f`
 - Predecessor control raw SHA-256:
-  `a31751bf1258f646412aba84e0b5c46f84f09b77e33156caea372873b819ff36`
-- Predecessor resolver raw SHA-256:
-  `38c7952ae712e6d4543bb4f4c1f3e5f8a98b00b36780c99bfce6944a722eabf0`
-- Predecessor reconciliation raw SHA-256:
-  `f36f20f8ee8551eae155c5b58ba0d776cc4fdd2b9f08d3186519ce052a297120`
-- Reconciliation self digest:
-  `24d02db5182463912074c109f2b5be350126d62340f58e6463755edbad1b799c`
+  `72a0c4c2ad6c810f2b0cd7eb0fb46bb168b7315c15807838f7a988d759f5cb6f`
 - Control-bound Auto Git object:
-  `sha1:b5a32c817e4016f595fa33caed6bce1d51199e63`
+  `sha1:bea0f6c172362223325f9a8033c6c498bcdde6df`
 - Control-bound Auto runtime-interface raw SHA-256:
-  `e88ec8c711434619756ee8f91c451e941501764e30e4a7fff310d8685b02140a`
+  `8aa7a179ee7374de974c145017fd671c764a42e073b577ab4b0b4081ff5784b2`
 - Control-bound Auto module count: `27`
 - Current Auto runtime-interface raw SHA-256:
-  `8aa7a179ee7374de974c145017fd671c764a42e073b577ab4b0b4081ff5784b2`
-- Current Auto module count: `27`
+  `3ca77e4670f1d891a280e3932d92ce1dfa17b3c95f2645174bf5ae72b8570173`
+- Current Auto module count: `29`
 
-## Successor-safe historical evidence corrective
+## Exact immutable Registry closure
 
-The completed source-content materialization is now verified only from
-immutable Git object
-`sha1:dc653654603f5bfee3bd41890b49cfad700cf541`. The builder reads the
-complete tracked Git trees for the three synchronized paths, recomputes their
-file counts, byte counts, and content digests from Git blobs, and verifies
-that the five reserved namespaces and `codex/context-kernel` were absent at
-that exact materialization object.
-
-Current working-tree payload under `_catalog/**` or `_global/**` is not
-historical Auto evidence and cannot retroactively invalidate the completed
-phase. The sync executor continues to exclude those namespaces from Skill
-enumeration and deletion. This corrective does not parse, trust, or authorize
-current reserved payload: the next Auto resolver integration must consume
-final catalogs and the Registry snapshot only through the Mechanism-owned,
-repo-external immutable snapshot tuple.
-
-The runtime-interface materialization facts and module count remain
-unchanged. Its raw digest changes only because
-`tools/build_runtime_interface.py` is itself one of the 27 exact module
-artifacts and its current digest is recomputed rather than hidden behind the
-pre-corrective bytes.
-
-## Exact source-content closure
-
-Only the three paths authorized by the predecessor control were synchronized:
+The Auto runtime consumes the Mechanism-owned resolver only through three
+repo-external trust tuples: final candidate, control, and registered Registry
+snapshot. The registered tuple is exact:
 
 ```text
-codex/graphify
-  regular files=695
-  aliases=0
-  bytes=13373911
-  content digest=
-    816bfb795d8998983a3df2b8786a2d1c691e9e2280dd7be2bdc07acd47775587
-
-codex/persona-distiller-group
-  regular files=35
-  aliases=0
-  bytes=1064137
-  content digest=
-    eaf8f8e32b1ade683387346adec8a21b241541567e910609247426ec3626b921
-
-codex/verifier
-  regular files=61
-  aliases=0
-  bytes=525884
-  content digest=
-    7727bcfb4d03bcc97fafeedea1f8e773945e6be70f0351e8ca32525ff1e8d556
+verified Git object:
+  sha1:df63339e1bb6106250ce169241477191744c254f
+snapshot path:
+  CodexSkills/registry/_global/registry-snapshot.v1.json
+snapshot schema:
+  urn:linzecolin:agentdatabase:skillops:schema:registry-snapshot:v1
+mode:
+  REGISTERED
+snapshot self digest:
+  10979826bf63b49fbde8da6ece51d6ead6909225b3c62af994e110dea31e1718
+snapshot raw SHA-256:
+  217bcecc0057c271171cfd00169fe99c039dced478c2f1ef1c2cb2527f3c76f2
+resolver interface path:
+  CodexSkills/governance/registry/resolver-interface.json
+resolver interface raw SHA-256:
+  9351465917c344269b37f470bd30d127afe764bae223ba0368e39d9d9a64af41
+resolver interface self digest:
+  e67799c396a49d42b49c2e1960f760fbdb23dd32496575b7bbd81bd388026ae8
 ```
 
-Each content digest is computed by the existing lstat-first sync contract over
-the complete source-relative path/kind/content set. Source and mirror digests
-are equal. The materialization builder additionally requires the complete
-physical mirror set for all three paths to be Git tracked; ignored fixture
-cache objects and distribution ZIP files therefore cannot silently disappear
-from the committed tree.
+The adapter verifies the pinned four catalogs, four resolver schemas, two
+Mechanism runtime modules, 88 Identity records, 88 Instance records, 88
+Version records, and the snapshot self digest entirely from Git. Unknown
+objects, tuple substitutions, local Mechanism runtime drift, malformed
+requests, or unbound successor controls fail closed.
 
-The final full-source dry-run reports no additions, updates, or removals:
+The registered snapshot has zero binding-eligible versions. A complete
+projection of all 88 current catalog entries therefore returns only:
 
-```text
-source roots=88
-source counts=agents:24,claude:3,codex:55,codex-system:6
-source aliases=20/20
-mirror aliases=20/20
-remaining source/mirror content drift=[]
-source_mirror_parity_satisfied=true
+```json
+{"binding_state":"UNKNOWN","unknown_reason_code":"MAPPING_NOT_PROVABLE"}
 ```
 
-## Historical-root and ownership truth
+No source path/name match is treated as identity evidence, no `skill_ref` is
+invented, and no current entry can emit `BOUND`.
 
-The missing `codex/context-kernel` root remains absent from both current source
-and mirror. It remains `UNOBSERVED` under the Mechanism reconciliation; Auto
-did not restore it, infer a lifecycle transition, or modify historical
-Identity/Instance/Version references.
+## Production ordering
 
-Historical 89-root parity is therefore deliberately still false:
+`runtime/binding_resolver.py` is the only Auto adapter for the Mechanism
+resolver. `tools/bound_reference_resolver_cli.py` is the production read-only
+entrypoint. Runtime preflight, the orchestrator, activation, notification,
+repository binding, and canonical-publication paths now require the external
+registered snapshot tuple. The resolver gate is checked before state root,
+lock, watermark, recipient mapping, Gmail client, outbox, worktree,
+`ls-remote`, mutable Git backend, or publisher access.
 
-```text
-historical source roots=89
-current source roots=88
-missing exact root=[codex/context-kernel]
-source_root_parity_satisfied=false
-whole_source_parity_satisfied=false
-```
-
-The five reserved namespaces remain protected and physically absent:
-
-```text
-CodexSkills/registry/agents/_catalog/**
-CodexSkills/registry/claude/_catalog/**
-CodexSkills/registry/codex/_catalog/**
-CodexSkills/registry/codex-system/_catalog/**
-CodexSkills/registry/_global/**
-```
-
-No catalog, global Identity record, Registry snapshot, resolver payload, or
-promotion artifact was generated. The historical incomplete materialization
-remains non-promotable.
+The current Auto bytes are intentionally not bound by the predecessor
+control. The predecessor still binds the 27-module `bea0f6c...` Auto object.
+Consequently production entrypoints fail with exact local Auto drift until a
+successor Mechanism control binds this Auto commit, its runtime-interface raw
+digest, and all 29 module digests.
 
 ## Closed gates
 
-This materialization is not a new production trust root:
+This phase is implementation evidence, not production authority:
 
 ```text
 current_auto_runtime_control_bound=false
+bound_reference_resolver_auto_integration_complete=true
+bound_reference_resolver_readonly_preflight_verified=true
+bound_reference_resolver_gate_satisfied=false
+effective_runtime_state_write_permitted=false
 runtime_state_write_permitted=false
 repository_bound=false
-bound_reference_resolver_auto_integration_complete=false
-bound_reference_resolver_gate_satisfied=false
 consumer_first_repository_shards_permitted=false
 canonical_publication_permitted=false
 au_040_daily_jsonl_shard_complete=false
@@ -143,49 +98,39 @@ schedule_authority_resolved=false
 schedule_complete=false
 ```
 
-No VERSION, state instance, lock, watermark, queue/outbox entry, shard, index
-shard, daily manifest, retention receipt, Gmail/network operation, activation,
-canonical publication, automation, App action, verifier call, history replay,
-or added time window occurred. The three PAUSED automations were untouched.
+No VERSION, state, lock, watermark, queue/outbox item, shard, index, daily
+manifest, retention receipt, Gmail/network operation, activation, canonical
+publication, automation, App action, verifier call, or history replay occurs
+in this phase. The three PAUSED automations remain untouched.
 
-## Validation
+## Validation and next exact action
 
-Completion requires and records:
+Pre-commit completion gates:
 
 ```text
-Auto full suite: 194/194 PASS
-Registry sync + dynamic-profile integration: 15/15 PASS
-fault/privacy seed 271828: 143/143 PASS
-fault/privacy seed 314159: 143/143 PASS
+Auto full suite: 204/204 PASS
+fault/privacy seed 271828: 153/153 PASS
+fault/privacy seed 314159: 153/153 PASS
 OpenAIDatabase consumer + architecture: 23/23 PASS
 consumer CLI: PASS; errors=[]; canonical publication=false
-Mechanism base 5db: 73/73 PASS
-Mechanism transition tree: exact expected cross-owner failures only
-  REGISTRY_AUTO_RESERVATION_INTERFACE_CURRENT_DRIFT
-  ACTIVATION_BOUND_RESOLVER_GENERATED_DRIFT:
-    REGISTRY_AUTO_RESERVATION_INTERFACE_CURRENT_DRIFT
-candidate builder/trust: 31 schemas / 5 policies PASS
-activation, resolver, AU-040 and Auto builders/lints: byte-equivalent
-external full-source dry-run: 88 roots / 20 aliases / no drift
-Git tracked closure: all three synchronized trees exact
-Registry credential scan: PASS; hits=0; aliases=20
-Python 3.9 AST: 19 changed Python files PASS
+Mechanism transition tree: 73 tests PASS plus the one exact expected
+  cross-owner transition error ACTIVATION_AUTO_INTERFACE_CURRENT_DRIFT
+candidate trust: 31 schemas / 5 policies PASS
+Auto, Mechanism, activation, resolver, AU-040 builders/lints:
+  byte-equivalent / PASS
+Python 3.9 AST and exact 17-path Auto ownership boundary: PASS
+stale predecessor production preflight/resolver CLI:
+  BOOTSTRAP_AUTO_RUNTIME_INTERFACE_LOCAL_DRIFT before side effects
 Broad command ownership retains the pre-existing external baseline failure:
   top-level script entrypoints: expected 84, observed 90
 ```
 
-Detached GitHub object/raw readback and owned cleanup are completion-time
-evidence and are reported externally after the FF-safe push.
-
-## Next exact action
+Ordinary FF-safe push, detached GitHub object/raw readback, and owned cleanup
+remain completion-time evidence and are reported externally.
 
 The only next phase is
-`MECHANISM_REGISTRY_PARITY_COMPLETE_MATERIALIZATION`. Mechanism must
-independently read back the verified Auto successor object and exact current
-interface, then rebuild the four source catalogs and global snapshot from the
-current 88-root content-closed tree. It must retain the reconciled historical
-`context-kernel` references without fabricating a current source root.
-
-This handoff does not authorize resolver Auto integration, BOUND, state,
-canonical run logs, AU-040 completion, Gmail, M0c-B, ACTIVE, schedule changes,
-VERSION, automation, verifier, or history replay.
+`MECHANISM_POST_BOUND_REFERENCE_RESOLVER_CONTROL_SYNC`. It must bind the new
+Auto object, runtime-interface raw digest, and all 29 modules while keeping
+canonical publication, AU-040 completion, Gmail/state readiness, M0c-B,
+ACTIVE, VERSION, and the unresolved schedule false. This handoff does not
+authorize that successor phase automatically.

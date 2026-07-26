@@ -6,7 +6,7 @@ from __future__ import annotations
 import argparse
 import sys
 from pathlib import Path
-from typing import Sequence
+from typing import Optional, Sequence
 
 
 AUTO_DIR = Path(__file__).resolve().parents[1]
@@ -17,6 +17,9 @@ from CodexSkills.registry.auto.runtime.bootstrap import (
     ControlTrustTuple,
     bootstrap_runtime,
     require_control_synced_runtime,
+)
+from CodexSkills.registry.auto.runtime.binding_resolver import (
+    RegistrySnapshotTrustTuple,
 )
 from CodexSkills.registry.auto.runtime.core import AutoRuntimeError, SystemClock
 from CodexSkills.registry.auto.runtime.gmail_api import (
@@ -58,6 +61,26 @@ def _control_trust(args: argparse.Namespace) -> ControlTrustTuple:
     )
 
 
+def _snapshot_trust(
+    args: argparse.Namespace,
+) -> Optional[RegistrySnapshotTrustTuple]:
+    names = (
+        "verified_registry_git_object_id",
+        "expected_registry_snapshot_digest",
+        "canonical_registry_snapshot_path",
+        "canonical_registry_snapshot_schema_id",
+        "registry_mode",
+    )
+    values = [getattr(args, name, None) for name in names]
+    if not any(value is not None for value in values):
+        return None
+    if any(not isinstance(value, str) or not value for value in values):
+        raise AutoRuntimeError(
+            "REGISTRY_SNAPSHOT_TRUST_TUPLE_INCOMPLETE"
+        )
+    return RegistrySnapshotTrustTuple(*values)
+
+
 def _private_public_metadata(path: Path):
     try:
         raw = path.read_bytes()
@@ -90,6 +113,7 @@ def _components(
         args.repo_root,
         _trust(args),
         _control_trust(args),
+        _snapshot_trust(args),
     )
     if state_write_requested:
         require_control_synced_runtime(context)
@@ -138,6 +162,27 @@ def _common(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
         "--control-mode",
         choices=("DRAFT_NON_ACTIVE_CONTROL",),
+        required=True,
+    )
+    parser.add_argument(
+        "--verified-registry-git-object-id",
+        required=True,
+    )
+    parser.add_argument(
+        "--expected-registry-snapshot-digest",
+        required=True,
+    )
+    parser.add_argument(
+        "--canonical-registry-snapshot-path",
+        required=True,
+    )
+    parser.add_argument(
+        "--canonical-registry-snapshot-schema-id",
+        required=True,
+    )
+    parser.add_argument(
+        "--registry-mode",
+        choices=("REGISTERED",),
         required=True,
     )
 

@@ -38,9 +38,21 @@ resolve schemas over the network, or install dependencies at runtime.
 
 ## Runtime entrypoints
 
-- `tools/runtime_preflight.py` requires two repo-external trust tuples: the
-  candidate content tuple and the Mechanism control tuple. It runs
-  capability/vendor/offline-Registry checks before any runtime-state write.
+- `tools/runtime_preflight.py` requires three repo-external trust tuples: the
+  candidate content tuple, the Mechanism control tuple, and the immutable
+  registered Registry snapshot tuple. It runs capability/vendor/offline
+  Registry and all-current-version resolver checks before any runtime-state
+  write.
+- `runtime/binding_resolver.py` is the only Auto adapter for the
+  Mechanism-owned resolver. It verifies the pinned resolver interface, four
+  catalogs, four schemas, two Mechanism runtime modules, and registered
+  snapshot from Git. The current 88-version snapshot has zero binding-eligible
+  versions, so its exhaustive projection is
+  `UNKNOWN/MAPPING_NOT_PROVABLE`; it cannot invent a `skill_ref` or emit
+  `BOUND`.
+- `tools/bound_reference_resolver_cli.py` is the production read-only
+  resolution entrypoint. It requires all three external tuples and a successor
+  control with the resolver integration and gate enabled.
 - `runtime/state.py` implements atomic writes, non-stealing single-flight
   leases, explicit stale reconciliation, and readback-gated lane watermarks.
 - `runtime/source.py` implements lstat-first source inventory, exact policy
@@ -64,7 +76,7 @@ resolve schemas over the network, or install dependencies at runtime.
   e643/85ed historical Git-object closure and current repository-binding byte
   self-consistency without requiring current working-tree control/Mechanism
   bytes to equal e643. It returns
-  `UNBOUND_REGISTRY_SOURCE_CONTENT_SYNCED_CONTROL_PENDING` and can never
+  `UNBOUND_RESOLVER_INTEGRATED_CONTROL_SYNC_PENDING` and can never
   return a production
   `BootstrapContext`.
 - `runtime/notification.py` keeps the actual recipient and provider payload in
@@ -139,25 +151,31 @@ provisioned interpreter:
   --expected-bundle-digest 36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e \
   --canonical-manifest-path CodexSkills/governance/bundles/schema-bundle-manifest.v1.json \
   --mode CANDIDATE \
-  --verified-control-git-object-id sha1:e6438db785c2f3f38da59be7ba9c1cd46651d7ea \
-  --expected-control-interface-raw-sha256 28a35148cc18362de4fc53b508754f263a015cf33e4cd187314cf48c767b6920 \
+  --verified-control-git-object-id sha1:df63339e1bb6106250ce169241477191744c254f \
+  --expected-control-interface-raw-sha256 72a0c4c2ad6c810f2b0cd7eb0fb46bb168b7315c15807838f7a988d759f5cb6f \
   --canonical-control-interface-path CodexSkills/governance/activation/control-interface.json \
-  --control-mode DRAFT_NON_ACTIVE_CONTROL
+  --control-mode DRAFT_NON_ACTIVE_CONTROL \
+  --verified-registry-git-object-id sha1:df63339e1bb6106250ce169241477191744c254f \
+  --expected-registry-snapshot-digest 10979826bf63b49fbde8da6ece51d6ead6909225b3c62af994e110dea31e1718 \
+  --canonical-registry-snapshot-path CodexSkills/registry/_global/registry-snapshot.v1.json \
+  --canonical-registry-snapshot-schema-id urn:linzecolin:agentdatabase:skillops:schema:registry-snapshot:v1 \
+  --registry-mode REGISTERED
 ```
 
 This command is read-only, but the predecessor control binds exact Auto object
-`85edc67d...`, runtime-interface raw `ce3aae7a...`, and 25 modules. The current
-repository-binding checkout is deliberately not that byte set, so production preflight
+`bea0f6c1...`, runtime-interface raw `8aa7a179...`, and 27 modules. The current
+checkout is deliberately not that byte set, so production preflight
 fails with `BOOTSTRAP_AUTO_RUNTIME_INTERFACE_LOCAL_DRIFT` before state, lock,
 watermark, recipient, Gmail, outbox, or publisher access. Development-only
 repository evidence is obtained with the existing bounded
 `validate_au040_publisher.py` shadow entrypoint; it must not be
 interpreted as `TRUSTED`, `READY`, or a production preflight PASS. Neither
-checkout self-reporting nor a caller boolean/digest map can replace either
+checkout self-reporting nor a caller boolean/digest map can replace any
 external tuple. Once a successor control changes the working-tree control
-bytes, the stale e643 tuple instead fails earlier with the exact
+bytes, the stale df633 tuple instead fails earlier with the exact
 `BOOTSTRAP_CONTROL_INTERFACE_LOCAL_DRIFT` code; the historical builder and
-shadow evidence remain stable because they read e643 exclusively from Git.
+shadow evidence remain stable because they read their named immutable objects
+exclusively from Git.
 
 ## M0c activation control
 
@@ -174,12 +192,13 @@ GitHub-read back at object
 `189a47300fc1aa6012e87feb6184833cb717cdbe2b9dc9be6db89197f579939c`.
 It binds candidate `5ee37d74...` / `36f0c66d...`, daily part/index/manifest
 and retention-receipt contracts, while keeping both publication gates false.
-Control object `e6438db7...`, raw SHA-256 `28a35148...`, binds the same
-candidate and consumer plus historical Auto object `85edc67d...`, interface
-raw `ce3aae7a...`, and 25 modules. The runtime-interface builder verifies all
-historical evidence from pinned Git blobs independently while reporting, in an
-`INTERFACE_MATERIALIZATION_ONLY` snapshot, the current 26-module repository
-candidate as unbound.
+Control object `df63339e...`, raw SHA-256 `72a0c4c2...`, binds the same
+candidate and consumer plus predecessor Auto object `bea0f6c1...`, interface
+raw `8aa7a179...`, and 27 modules. It also pins the registered 88-version
+Registry snapshot and Mechanism resolver. The runtime-interface builder
+verifies those exact Git blobs while reporting, in an
+`INTERFACE_MATERIALIZATION_ONLY` snapshot, the current 29-module Auto
+integration as unbound.
 
 That gate does not permit canonical publication. The consumer still declares
 `canonical_publication_permitted=false` and
@@ -222,10 +241,15 @@ The provider preflight is explicit and performs no send:
   --expected-bundle-digest 36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e \
   --canonical-manifest-path CodexSkills/governance/bundles/schema-bundle-manifest.v1.json \
   --mode CANDIDATE \
-  --verified-control-git-object-id sha1:e6438db785c2f3f38da59be7ba9c1cd46651d7ea \
-  --expected-control-interface-raw-sha256 28a35148cc18362de4fc53b508754f263a015cf33e4cd187314cf48c767b6920 \
+  --verified-control-git-object-id sha1:df63339e1bb6106250ce169241477191744c254f \
+  --expected-control-interface-raw-sha256 72a0c4c2ad6c810f2b0cd7eb0fb46bb168b7315c15807838f7a988d759f5cb6f \
   --canonical-control-interface-path CodexSkills/governance/activation/control-interface.json \
-  --control-mode DRAFT_NON_ACTIVE_CONTROL
+  --control-mode DRAFT_NON_ACTIVE_CONTROL \
+  --verified-registry-git-object-id sha1:df63339e1bb6106250ce169241477191744c254f \
+  --expected-registry-snapshot-digest 10979826bf63b49fbde8da6ece51d6ead6909225b3c62af994e110dea31e1718 \
+  --canonical-registry-snapshot-path CodexSkills/registry/_global/registry-snapshot.v1.json \
+  --canonical-registry-snapshot-schema-id urn:linzecolin:agentdatabase:skillops:schema:registry-snapshot:v1 \
+  --registry-mode REGISTERED
 ```
 
 After a future Mechanism control sync, the preflight first binds the

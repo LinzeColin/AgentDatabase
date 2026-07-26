@@ -32,11 +32,15 @@ from CodexSkills.registry.auto.runtime.run_log_writer import (
 
 from runtime_helpers import (
     CANDIDATE_DIGEST,
+    BOUND_REFERENCE_RESOLVER_INTERFACE_RAW_SHA256,
+    REGISTERED_REGISTRY_SNAPSHOT_DIGEST,
+    bound_reference_control_trust,
     final_contract,
     repository_control_trust,
     synthetic_repository_bound_context,
     trust,
     uid,
+    verified_binding_resolver,
 )
 from test_runtime_run_log_writer import event
 from CodexSkills.governance.tools.canonical_json import (
@@ -109,20 +113,32 @@ class RuntimeRepositoryBindingTests(unittest.TestCase):
     ) -> BootstrapContext:
         return BootstrapContext(
             trust(),
-            repository_control_trust(),
+            bound_reference_control_trust(),
             final_contract(),
             MappingProxyType({}),
             MappingProxyType(
                 {
+                    "bound_reference_resolver_contract": {
+                        "artifact_digest": (
+                            BOUND_REFERENCE_RESOLVER_INTERFACE_RAW_SHA256
+                        ),
+                        "registry_snapshot_digest": (
+                            REGISTERED_REGISTRY_SNAPSHOT_DIGEST
+                        ),
+                    },
                     "transition_contract": {
                         "auto_runtime_integration_complete": True,
                         "runtime_state_write_permitted": True,
+                        "effective_runtime_state_write_permitted": True,
                         "runtime_shard_writer_integration_complete": True,
                         "publisher_v2_runtime_integration_complete": True,
                         "repository_binding_integration_complete": (
                             integration
                         ),
                         "repository_bound": repository_bound,
+                        "bound_reference_resolver_auto_integration_complete": (
+                            resolver
+                        ),
                         "bound_reference_resolver_gate_satisfied": (
                             resolver
                         ),
@@ -130,6 +146,7 @@ class RuntimeRepositoryBindingTests(unittest.TestCase):
                     }
                 }
             ),
+            verified_binding_resolver() if resolver else None,
         )
 
     def test_readonly_probe_binds_exact_logical_repository(self) -> None:

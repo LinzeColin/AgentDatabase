@@ -12,7 +12,7 @@
   "activation_handshake_entrypoint": "CodexSkills/registry/auto/tools/activation_handshake_cli.py",
   "activation_instance_created": false,
   "activation_settlement_recomputed_before_publish": true,
-  "au_040_authority_ruling_status": "REGISTRY_SOURCE_CONTENT_SYNCED_CONTROL_PENDING",
+  "au_040_authority_ruling_status": "BOUND_REFERENCE_RESOLVER_INTEGRATED_CONTROL_SYNC_PENDING",
   "au_040_complete": false,
   "au_040_consumer_manifest_path_contract_present": true,
   "au_040_daily_jsonl_shard_complete": false,
@@ -85,13 +85,15 @@
   },
   "au_040_transport_schema_draft_complete": true,
   "auto_exact_bundle_integration_complete": true,
-  "bound_reference_resolver_auto_integration_complete": false,
+  "bound_reference_resolver_auto_integration_complete": true,
   "bound_reference_resolver_dependency_contract": {
     "adapter_may_generate_or_authenticate_resolver": false,
+    "all_current_versions_unknown_reason_code": "MAPPING_NOT_PROVABLE",
     "approved_surfaces": [
       "CODEX_AUTOMATION",
       "CODEX_CLI"
     ],
+    "binding_eligible_version_count": 0,
     "controlled_invocation_required_fields": [
       "evidence_type",
       "invocation_envelope_digest",
@@ -107,12 +109,9 @@
       "FULL_SEVEN_FIELD_SKILL_REF",
       "MECHANISM_IMMUTABLE_REGISTRY_SNAPSHOT_TUPLE"
     ],
+    "external_registered_snapshot_tuple_required": true,
     "gate_owner_plane": "MECHANISM",
-    "missing_current_artifacts": [
-      "FOUR_SOURCE_IDENTITY_INSTANCE_VERSION_CATALOGS",
-      "GLOBAL_SKILL_IDENTITY_RECORDS",
-      "PROMOTABLE_VERSIONED_REGISTRY_SNAPSHOT"
-    ],
+    "missing_current_artifacts": [],
     "must_precede": [
       "GMAIL_CLIENT",
       "GIT_LS_REMOTE",
@@ -136,6 +135,7 @@
       "canonical_snapshot_schema_id",
       "verified_git_object_id"
     ],
+    "resolver_interface_raw_sha256": "9351465917c344269b37f470bd30d127afe764bae223ba0368e39d9d9a64af41",
     "skill_ref_required_fields": [
       "content_digest",
       "registry_snapshot_digest",
@@ -156,10 +156,81 @@
       "VERSION_DIGEST_MISMATCH"
     ],
     "unprovable_binding_action": "PROJECT_UNKNOWN_AND_BLOCK_CANONICAL_PUBLICATION",
+    "verified_source_skill_count": 88,
     "version_closure_required": "IDENTITY_TO_INSTANCE_TO_VERSION_UNIQUE_AND_DIGEST_EXACT"
   },
   "bound_reference_resolver_gate_satisfied": false,
   "bound_reference_resolver_implementation_complete": true,
+  "bound_reference_resolver_materialization_snapshot": {
+    "all_current_versions_unknown_verified": true,
+    "as_of_phase": "AUTO_BOUND_REFERENCE_RESOLVER_INTEGRATION",
+    "binding_eligible_version_count": 0,
+    "canonical_control_path": "CodexSkills/governance/activation/control-interface.json",
+    "canonical_publication_permitted": false,
+    "control_interface_raw_sha256": "72a0c4c2ad6c810f2b0cd7eb0fb46bb168b7315c15807838f7a988d759f5cb6f",
+    "current_auto_runtime_control_bound": false,
+    "effective_runtime_state_write_permitted": false,
+    "external_control_mode": "DRAFT_NON_ACTIVE_CONTROL",
+    "external_registry_mode": "REGISTERED",
+    "predecessor_control_git_object_id": "sha1:df63339e1bb6106250ce169241477191744c254f",
+    "production_trust_permitted": false,
+    "registered_snapshot_path": "CodexSkills/registry/_global/registry-snapshot.v1.json",
+    "registered_snapshot_raw_sha256": "217bcecc0057c271171cfd00169fe99c039dced478c2f1ef1c2cb2527f3c76f2",
+    "registered_snapshot_schema_id": "urn:linzecolin:agentdatabase:skillops:schema:registry-snapshot:v1",
+    "registry_snapshot_digest": "10979826bf63b49fbde8da6ece51d6ead6909225b3c62af994e110dea31e1718",
+    "resolver_interface_path": "CodexSkills/governance/registry/resolver-interface.json",
+    "resolver_interface_raw_sha256": "9351465917c344269b37f470bd30d127afe764bae223ba0368e39d9d9a64af41",
+    "resolver_interface_self_digest": "e67799c396a49d42b49c2e1960f760fbdb23dd32496575b7bbd81bd388026ae8",
+    "runtime_artifacts": [
+      {
+        "artifact_digest": "4e19a4cd4eb612c29d2b4a604d0f0d335d2747770f81ddb48f8d28b6dfa76783",
+        "relative_path": "CodexSkills/governance/tools/build_bound_reference_resolver.py"
+      },
+      {
+        "artifact_digest": "a1389696e2758324b7e6d968ad7526053a5028b95d3aeb74731ac08c8a1530f2",
+        "relative_path": "CodexSkills/governance/tools/resolve_skill_binding.py"
+      }
+    ],
+    "semantic_scope": "INTERFACE_MATERIALIZATION_ONLY",
+    "source_catalogs": [
+      {
+        "artifact_digest": "e63dd7fc5fb71b0fbbb9c141cd3591d5d84ed6b6bdab69cd0345000b4b84b822",
+        "candidate_relative_path": "CodexSkills/governance/registry/materialized/registered/sources/agents/catalog.v1.json",
+        "draft_relative_path": "CodexSkills/governance/registry/materialized/sources/agents/catalog.v1.json",
+        "relative_path": "CodexSkills/registry/agents/_catalog/catalog.v1.json",
+        "source_class": "AGENTS",
+        "status": "REGISTERED"
+      },
+      {
+        "artifact_digest": "b56765774a5d9fcfa15c38c38b8280993ba792c80df4b658c4bbf71aeba6b95f",
+        "candidate_relative_path": "CodexSkills/governance/registry/materialized/registered/sources/claude/catalog.v1.json",
+        "draft_relative_path": "CodexSkills/governance/registry/materialized/sources/claude/catalog.v1.json",
+        "relative_path": "CodexSkills/registry/claude/_catalog/catalog.v1.json",
+        "source_class": "CLAUDE",
+        "status": "REGISTERED"
+      },
+      {
+        "artifact_digest": "50c26406329f594b531e29a3ca4c66f16371bc0d0ddfa0dcf103b4cf734fb8b3",
+        "candidate_relative_path": "CodexSkills/governance/registry/materialized/registered/sources/codex/catalog.v1.json",
+        "draft_relative_path": "CodexSkills/governance/registry/materialized/sources/codex/catalog.v1.json",
+        "relative_path": "CodexSkills/registry/codex/_catalog/catalog.v1.json",
+        "source_class": "CODEX",
+        "status": "REGISTERED"
+      },
+      {
+        "artifact_digest": "4a49b93ec8c94d2a801a485f29c721565985c53767115471ce7ccda70f53157a",
+        "candidate_relative_path": "CodexSkills/governance/registry/materialized/registered/sources/codex-system/catalog.v1.json",
+        "draft_relative_path": "CodexSkills/governance/registry/materialized/sources/codex-system/catalog.v1.json",
+        "relative_path": "CodexSkills/registry/codex-system/_catalog/catalog.v1.json",
+        "source_class": "CODEX_SYSTEM",
+        "status": "REGISTERED"
+      }
+    ],
+    "source_skill_count": 88,
+    "verified_git_object_id": "sha1:df63339e1bb6106250ce169241477191744c254f"
+  },
+  "bound_reference_resolver_production_entrypoint": "CodexSkills/registry/auto/tools/bound_reference_resolver_cli.py",
+  "bound_reference_resolver_readonly_preflight_verified": true,
   "candidate_bundle_digest": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e",
   "candidate_git_object_id": "sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5",
   "candidate_manifest_path": "CodexSkills/governance/bundles/schema-bundle-manifest.v1.json",
@@ -552,7 +623,11 @@
       "relative_path": "CodexSkills/registry/auto/runtime/activation.py"
     },
     {
-      "artifact_digest": "ee89afaabe01e3d62c2d27b5d0a816a5cf9714b52e093d1f66510aca35a53aa5",
+      "artifact_digest": "a06d38921c760d3b644dfa8eb330fa9dcf1db3ccfa25bd96b9366195b8602702",
+      "relative_path": "CodexSkills/registry/auto/runtime/binding_resolver.py"
+    },
+    {
+      "artifact_digest": "ac9e825769685bc26a59da0a7466dce57c9d2c4e1525c98b8b87717fb690eace",
       "relative_path": "CodexSkills/registry/auto/runtime/bootstrap.py"
     },
     {
@@ -572,7 +647,7 @@
       "relative_path": "CodexSkills/registry/auto/runtime/notification.py"
     },
     {
-      "artifact_digest": "379db9dd10ecf12a52863633b811fa52a27f9a674c63d6f09a02b52f5ff0e1a4",
+      "artifact_digest": "66f77b4dd10fbc5614a379295bee46caca88db8a28682623ddddb5cf0d10cfbf",
       "relative_path": "CodexSkills/registry/auto/runtime/orchestrator.py"
     },
     {
@@ -616,19 +691,23 @@
       "relative_path": "CodexSkills/registry/auto/runtime/state.py"
     },
     {
-      "artifact_digest": "fb032e30cd0d0678b185bf564dc36938db1d1a7e0dd0dbd30b6ad9ad6acd54e2",
+      "artifact_digest": "6fd630825e15790b5b7e38877f2357b4a828e69a00fa9f4e26636385ebb10608",
       "relative_path": "CodexSkills/registry/auto/runtime/writer_shadow.py"
     },
     {
-      "artifact_digest": "98abafb395372bc6139c1e039745eb0181e9cd2fe1fdf364d50d6026a401a8ee",
+      "artifact_digest": "053bd55e87d7d54adeb3a6592e1ca8240c1b51db8a9b97501d8c4390ba56dc39",
       "relative_path": "CodexSkills/registry/auto/tools/activation_handshake_cli.py"
     },
     {
-      "artifact_digest": "467950c79716f02cd864941d82618b25ff2aa7039160ced9878ebb134646a9af",
+      "artifact_digest": "b03e2e7c5da4ba5c5089dfb217fec64130156b9d1b616417a99ddbd5c3f9a445",
+      "relative_path": "CodexSkills/registry/auto/tools/bound_reference_resolver_cli.py"
+    },
+    {
+      "artifact_digest": "61ccc75e957fe38c35416723b07885424186d66cbc5939d377f62a7448b935d3",
       "relative_path": "CodexSkills/registry/auto/tools/build_runtime_interface.py"
     },
     {
-      "artifact_digest": "4425c2ed269ec7d6d5544b8985706c3a6dcbe0a71dced70c75d5e228f54fc157",
+      "artifact_digest": "c41740f0400e14e1c526aaaeb0ba257a5a97668c8fa1ed00023a24c221e601ea",
       "relative_path": "CodexSkills/registry/auto/tools/notification_transport_cli.py"
     },
     {
@@ -636,7 +715,7 @@
       "relative_path": "CodexSkills/registry/auto/tools/run_fault_suite.py"
     },
     {
-      "artifact_digest": "d8fce1036ecd24b73378d38b8ae45bf0c1504e1cd0d06c0d9cc137fc0bd68f87",
+      "artifact_digest": "667e5c8ee3f99053b22f9cbbcced977e84b1ab35a887fa2f490bfcd3df3e60aa",
       "relative_path": "CodexSkills/registry/auto/tools/runtime_preflight.py"
     },
     {
@@ -652,8 +731,8 @@
       "relative_path": "CodexSkills/registry/auto/tools/validate_auto.py"
     }
   ],
-  "module_count": 27,
-  "next_phase": "MECHANISM_REGISTRY_PARITY_COMPLETE_MATERIALIZATION",
+  "module_count": 29,
+  "next_phase": "MECHANISM_POST_BOUND_REFERENCE_RESOLVER_CONTROL_SYNC",
   "notification_actual_recipient_repo_external": true,
   "notification_credentials_repo_external": true,
   "notification_external_path_contract": {
@@ -780,19 +859,19 @@
   "runtime_preflight_shadow_permitted": true,
   "runtime_publisher_shadow_returns_bootstrap_context": false,
   "runtime_publisher_shadow_state_access_permitted": false,
-  "runtime_publisher_shadow_status": "UNBOUND_REGISTRY_SOURCE_CONTENT_SYNCED_CONTROL_PENDING",
+  "runtime_publisher_shadow_status": "UNBOUND_RESOLVER_INTEGRATED_CONTROL_SYNC_PENDING",
   "runtime_publisher_shadow_validator_kind": "DEVELOPMENT_ONLY_UNBOUND",
   "runtime_publisher_shadow_validator_path": "CodexSkills/registry/auto/tools/validate_au040_publisher.py",
   "runtime_repository_binding_shadow_returns_bootstrap_context": false,
   "runtime_repository_binding_shadow_state_access_permitted": false,
-  "runtime_repository_binding_shadow_status": "UNBOUND_REGISTRY_SOURCE_CONTENT_SYNCED_CONTROL_PENDING",
+  "runtime_repository_binding_shadow_status": "UNBOUND_RESOLVER_INTEGRATED_CONTROL_SYNC_PENDING",
   "runtime_repository_binding_shadow_validator_kind": "DEVELOPMENT_ONLY_UNBOUND",
   "runtime_repository_binding_shadow_validator_path": "CodexSkills/registry/auto/tools/validate_au040_publisher.py",
   "runtime_shard_writer_integration_complete": true,
   "runtime_state_write_permitted": false,
   "runtime_writer_shadow_returns_bootstrap_context": false,
   "runtime_writer_shadow_state_access_permitted": false,
-  "runtime_writer_shadow_status": "UNBOUND_REGISTRY_SOURCE_CONTENT_SYNCED_CONTROL_PENDING",
+  "runtime_writer_shadow_status": "UNBOUND_RESOLVER_INTEGRATED_CONTROL_SYNC_PENDING",
   "runtime_writer_shadow_validator_kind": "DEVELOPMENT_ONLY_UNBOUND",
   "runtime_writer_shadow_validator_path": "CodexSkills/registry/auto/tools/validate_au040_writer.py",
   "schedule": {

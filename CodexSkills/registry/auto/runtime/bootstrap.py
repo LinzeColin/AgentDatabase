@@ -10,7 +10,7 @@ import sys
 from dataclasses import dataclass
 from pathlib import Path
 from types import MappingProxyType
-from typing import Any, Mapping
+from typing import Any, Mapping, Optional
 
 from CodexSkills.registry.auto.tools.validate_auto import (
     AutoContract,
@@ -25,6 +25,12 @@ from CodexSkills.governance.tools.canonical_json import (
     verify_vendor,
 )
 from .core import AutoRuntimeError, CANDIDATE_MANIFEST_PATH
+from .binding_resolver import (
+    RegistrySnapshotTrustTuple,
+    VerifiedBoundReferenceResolver,
+    load_verified_bound_reference_resolver,
+    proof_is_sealed,
+)
 
 
 SUPPORTED_DEPENDENCIES = {
@@ -69,6 +75,7 @@ class BootstrapContext:
     contract: AutoContract
     capabilities: Mapping[str, str]
     control_interface: Mapping[str, Any]
+    binding_resolver: Optional[VerifiedBoundReferenceResolver] = None
 
 
 def _release(value: str) -> tuple:
@@ -506,6 +513,7 @@ def bootstrap_runtime(
     repo_root: Path,
     trust: TrustTuple,
     control_trust: ControlTrustTuple,
+    snapshot_trust: Optional[RegistrySnapshotTrustTuple] = None,
 ) -> BootstrapContext:
     """Validate all capabilities/trust before callers create runtime state."""
 
@@ -539,6 +547,29 @@ def bootstrap_runtime(
         raise AutoRuntimeError(
             "BOOTSTRAP_FINAL_BUNDLE_PROFILE_REQUIRED"
         )
+    resolver_contract = control_interface.get(
+        "bound_reference_resolver_contract"
+    )
+    resolver_required = bool(
+        isinstance(resolver_contract, dict)
+        and resolver_contract.get(
+            "current_snapshot_structurally_promoted"
+        )
+        is True
+    )
+    if resolver_required and snapshot_trust is None:
+        raise AutoRuntimeError(
+            "BOOTSTRAP_REGISTRY_SNAPSHOT_TRUST_REQUIRED"
+        )
+    binding_resolver = None
+    if snapshot_trust is not None:
+        binding_resolver = load_verified_bound_reference_resolver(
+            root,
+            trust,
+            control_trust,
+            control_interface,
+            snapshot_trust,
+        )
 
     version_exists = _git_path_exists(root, object_id, "CodexSkills/VERSION")
     if trust.mode == "CANDIDATE" and version_exists:
@@ -551,7 +582,54 @@ def bootstrap_runtime(
         contract,
         capabilities,
         control_interface,
+        binding_resolver,
     )
+
+
+def _require_verified_bound_reference_resolver(
+    context: BootstrapContext,
+) -> VerifiedBoundReferenceResolver:
+    proof = context.binding_resolver
+    resolver_contract = context.control_interface.get(
+        "bound_reference_resolver_contract"
+    )
+    if (
+        not proof_is_sealed(proof)
+        or not isinstance(resolver_contract, dict)
+        or proof.snapshot_trust.verified_git_object_id
+        != context.control_trust.verified_git_object_id
+        or proof.snapshot_trust.mode != "REGISTERED"
+        or proof.registry_snapshot_digest
+        != resolver_contract.get("registry_snapshot_digest")
+        or proof.resolver_interface_raw_sha256
+        != resolver_contract.get("artifact_digest")
+        or proof.source_skill_count != 88
+        or proof.binding_eligible_version_count != 0
+        or proof.all_current_versions_unknown_verified is not True
+    ):
+        raise AutoRuntimeError(
+            "RUNTIME_BOUND_REFERENCE_RESOLVER_NOT_VERIFIED"
+        )
+    return proof
+
+
+def require_bound_reference_resolver_authority(
+    context: BootstrapContext,
+) -> VerifiedBoundReferenceResolver:
+    transition = context.control_interface.get("transition_contract")
+    if (
+        not isinstance(transition, dict)
+        or transition.get(
+            "bound_reference_resolver_auto_integration_complete"
+        )
+        is not True
+        or transition.get("bound_reference_resolver_gate_satisfied")
+        is not True
+    ):
+        raise AutoRuntimeError(
+            "BOUND_REFERENCE_RESOLVER_NOT_SATISFIED"
+        )
+    return _require_verified_bound_reference_resolver(context)
 
 
 def require_control_synced_runtime(context: BootstrapContext) -> None:
@@ -560,10 +638,13 @@ def require_control_synced_runtime(context: BootstrapContext) -> None:
         not isinstance(transition, dict)
         or transition.get("auto_runtime_integration_complete") is not True
         or transition.get("runtime_state_write_permitted") is not True
+        or transition.get("effective_runtime_state_write_permitted")
+        is not True
     ):
         raise AutoRuntimeError(
             "RUNTIME_CONTROL_SYNC_REQUIRED_BEFORE_STATE_WRITE"
         )
+    require_bound_reference_resolver_authority(context)
 
 
 def require_control_synced_publisher_v2(
@@ -629,10 +710,4 @@ def require_repository_binding_authority(
         raise AutoRuntimeError(
             "REPOSITORY_BINDING_NOT_AUTHORIZED"
         )
-    if (
-        transition.get("bound_reference_resolver_gate_satisfied")
-        is not True
-    ):
-        raise AutoRuntimeError(
-            "BOUND_REFERENCE_RESOLVER_NOT_SATISFIED"
-        )
+    require_bound_reference_resolver_authority(context)

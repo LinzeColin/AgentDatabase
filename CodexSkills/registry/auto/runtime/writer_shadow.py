@@ -54,8 +54,8 @@ PUBLISHER_MATERIALIZATION_CONTROL_GIT_OBJECT = (
 SOURCE_CONTENT_SYNC_CONTROL_GIT_OBJECT = (
     "sha1:5db5beecf3de7ac916020ca988f6e875891e19b1"
 )
-SOURCE_CONTENT_SYNC_NEXT_PHASE = (
-    "MECHANISM_REGISTRY_PARITY_COMPLETE_MATERIALIZATION"
+BOUND_REFERENCE_RESOLVER_NEXT_PHASE = (
+    "MECHANISM_POST_BOUND_REFERENCE_RESOLVER_CONTROL_SYNC"
 )
 RUNTIME_INTERFACE_PATH = (
     "CodexSkills/registry/auto/runtime-interface.json"
@@ -269,6 +269,9 @@ def validate_unbound_writer_candidate(
     source_content_sync = current.get(
         "source_content_sync_materialization_snapshot"
     )
+    resolver_materialization = current.get(
+        "bound_reference_resolver_materialization_snapshot"
+    )
     historical_control = current.get(
         "historical_control_observation"
     )
@@ -449,11 +452,37 @@ def validate_unbound_writer_candidate(
         or current.get(
             "bound_reference_resolver_auto_integration_complete"
         )
-        is not False
+        is not True
+        or current.get(
+            "bound_reference_resolver_readonly_preflight_verified"
+        )
+        is not True
         or current.get(
             "bound_reference_resolver_implementation_complete"
         )
         is not True
+        or not isinstance(resolver_materialization, dict)
+        or resolver_materialization.get("source_skill_count") != 88
+        or resolver_materialization.get(
+            "binding_eligible_version_count"
+        )
+        != 0
+        or resolver_materialization.get(
+            "all_current_versions_unknown_verified"
+        )
+        is not True
+        or resolver_materialization.get(
+            "current_auto_runtime_control_bound"
+        )
+        is not False
+        or resolver_materialization.get(
+            "effective_runtime_state_write_permitted"
+        )
+        is not False
+        or resolver_materialization.get(
+            "canonical_publication_permitted"
+        )
+        is not False
         or current.get("registry_source_content_sync_complete") is not True
         or current.get("registry_source_mirror_parity_satisfied")
         is not True
@@ -462,7 +491,7 @@ def validate_unbound_writer_candidate(
         or current.get("registry_whole_source_parity_satisfied")
         is not False
         or current.get("next_phase")
-        != SOURCE_CONTENT_SYNC_NEXT_PHASE
+        != BOUND_REFERENCE_RESOLVER_NEXT_PHASE
     ):
         raise AutoRuntimeError(
             "WRITER_SHADOW_CURRENT_INTERFACE_CONTRACT_MISMATCH"
@@ -482,7 +511,7 @@ def validate_unbound_writer_candidate(
                 "WRITER_SHADOW_CURRENT_MODULE_DIGEST_MISMATCH"
             )
     return UnboundWriterCandidateEvidence(
-        "UNBOUND_REGISTRY_SOURCE_CONTENT_SYNCED_CONTROL_PENDING",
+        "UNBOUND_RESOLVER_INTEGRATED_CONTROL_SYNC_PENDING",
         31,
         5,
         CONTROL_GIT_OBJECT,

@@ -38,10 +38,14 @@ from CodexSkills.registry.auto.runtime.repository_binding import (
 
 from runtime_helpers import (
     CANDIDATE_DIGEST,
+    BOUND_REFERENCE_RESOLVER_INTERFACE_RAW_SHA256,
+    REGISTERED_REGISTRY_SNAPSHOT_DIGEST,
+    bound_reference_control_trust,
     control_trust,
     final_contract,
     trust,
     uid,
+    verified_binding_resolver,
 )
 from test_runtime_run_log_writer import event
 
@@ -243,14 +247,23 @@ class RuntimePublicationV2Tests(unittest.TestCase):
     ) -> BootstrapContext:
         return BootstrapContext(
             trust(mode="ACTIVE"),
-            control_trust(),
+            bound_reference_control_trust(),
             self.contract,
             MappingProxyType({}),
             MappingProxyType(
                 {
+                    "bound_reference_resolver_contract": {
+                        "artifact_digest": (
+                            BOUND_REFERENCE_RESOLVER_INTERFACE_RAW_SHA256
+                        ),
+                        "registry_snapshot_digest": (
+                            REGISTERED_REGISTRY_SNAPSHOT_DIGEST
+                        ),
+                    },
                     "transition_contract": {
                         "auto_runtime_integration_complete": True,
                         "runtime_state_write_permitted": True,
+                        "effective_runtime_state_write_permitted": True,
                         "runtime_shard_writer_integration_complete": True,
                         "publisher_v2_runtime_integration_complete": (
                             publisher
@@ -259,6 +272,9 @@ class RuntimePublicationV2Tests(unittest.TestCase):
                             repository_integration
                         ),
                         "repository_bound": repository_bound,
+                        "bound_reference_resolver_auto_integration_complete": (
+                            resolver
+                        ),
                         "bound_reference_resolver_gate_satisfied": (
                             resolver
                         ),
@@ -266,6 +282,7 @@ class RuntimePublicationV2Tests(unittest.TestCase):
                     }
                 }
             ),
+            verified_binding_resolver() if resolver else None,
         )
 
     def manifest(self, artifacts=None) -> bytes:

@@ -14,6 +14,7 @@ from .bootstrap import (
     bootstrap_runtime,
     require_control_synced_runtime,
 )
+from .binding_resolver import RegistrySnapshotTrustTuple
 from .core import AutoRuntimeError, Clock
 from .roots import RootEntry, RootRegistry, prepare_state_root
 from .repository_binding import (
@@ -54,10 +55,7 @@ class RunOutcome:
     reason_codes: Tuple[str, ...]
 
 
-BootstrapFunction = Callable[
-    [Path, TrustTuple, ControlTrustTuple],
-    BootstrapContext,
-]
+BootstrapFunction = Callable[..., BootstrapContext]
 LaneExecutor = Callable[
     [BootstrapContext, bool, RepositoryBindingPermit],
     LaneOutcome,
@@ -78,6 +76,7 @@ class SkillOpsOrchestrator:
         trust: TrustTuple,
         control_trust: ControlTrustTuple,
         clock: Clock,
+        snapshot_trust: Optional[RegistrySnapshotTrustTuple] = None,
         bootstrap: BootstrapFunction = bootstrap_runtime,
     ) -> None:
         self.repo_root = repo_root
@@ -87,6 +86,7 @@ class SkillOpsOrchestrator:
         self.protected_roots = tuple(protected_roots)
         self.trust = trust
         self.control_trust = control_trust
+        self.snapshot_trust = snapshot_trust
         self.clock = clock
         self.bootstrap = bootstrap
         self.schedule = SchedulePolicy()
@@ -102,11 +102,19 @@ class SkillOpsOrchestrator:
         lock_entropy: Optional[bytes] = None,
     ) -> RunOutcome:
         # P0 ordering: nothing under state_root exists before this returns.
-        context = self.bootstrap(
-            self.repo_root,
-            self.trust,
-            self.control_trust,
-        )
+        if self.snapshot_trust is None:
+            context = self.bootstrap(
+                self.repo_root,
+                self.trust,
+                self.control_trust,
+            )
+        else:
+            context = self.bootstrap(
+                self.repo_root,
+                self.trust,
+                self.control_trust,
+                self.snapshot_trust,
+            )
         require_control_synced_runtime(context)
         repository_binding = authorize_repository_binding(
             context,

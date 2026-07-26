@@ -19,6 +19,12 @@ from CodexSkills.registry.auto.runtime.bootstrap import (
     _run_git,
     _split_git_object,
 )
+from CodexSkills.registry.auto.runtime.binding_resolver import (
+    REGISTERED_SNAPSHOT_PATH,
+    REGISTERED_SNAPSHOT_SCHEMA_ID,
+    RegistrySnapshotTrustTuple,
+    load_verified_bound_reference_resolver,
+)
 from CodexSkills.registry.auto.runtime.core import (
     FakeClock,
     PROTOCOL,
@@ -57,6 +63,21 @@ REPOSITORY_CONTROL_GIT_OBJECT = (
 REPOSITORY_CONTROL_INTERFACE_RAW_SHA256 = (
     "28a35148cc18362de4fc53b508754f263"
     "a015cf33e4cd187314cf48c767b6920"
+)
+BOUND_REFERENCE_CONTROL_GIT_OBJECT = (
+    "sha1:df63339e1bb6106250ce169241477191744c254f"
+)
+BOUND_REFERENCE_CONTROL_INTERFACE_RAW_SHA256 = (
+    "72a0c4c2ad6c810f2b0cd7eb0fb46bb"
+    "168b7315c15807838f7a988d759f5cb6f"
+)
+REGISTERED_REGISTRY_SNAPSHOT_DIGEST = (
+    "10979826bf63b49fbde8da6ece51d6ea"
+    "d6909225b3c62af994e110dea31e1718"
+)
+BOUND_REFERENCE_RESOLVER_INTERFACE_RAW_SHA256 = (
+    "9351465917c344269b37f470bd30d127a"
+    "fe764bae223ba0368e39d9d9a64af41"
 )
 FIXED_NOW = dt.datetime(2026, 7, 23, 0, 0, 0, tzinfo=dt.timezone.utc)
 REPO_ROOT = Path(__file__).resolve().parents[4]
@@ -108,6 +129,49 @@ def repository_control_trust(
         raw_digest,
         CONTROL_INTERFACE_PATH,
         CONTROL_MODE,
+    )
+
+
+def bound_reference_control_trust() -> ControlTrustTuple:
+    return ControlTrustTuple(
+        BOUND_REFERENCE_CONTROL_GIT_OBJECT,
+        BOUND_REFERENCE_CONTROL_INTERFACE_RAW_SHA256,
+        CONTROL_INTERFACE_PATH,
+        CONTROL_MODE,
+    )
+
+
+def registered_snapshot_trust() -> RegistrySnapshotTrustTuple:
+    return RegistrySnapshotTrustTuple(
+        BOUND_REFERENCE_CONTROL_GIT_OBJECT,
+        REGISTERED_REGISTRY_SNAPSHOT_DIGEST,
+        REGISTERED_SNAPSHOT_PATH,
+        REGISTERED_SNAPSHOT_SCHEMA_ID,
+        "REGISTERED",
+    )
+
+
+@lru_cache(maxsize=1)
+def verified_binding_resolver():
+    object_id = _split_git_object(
+        REPO_ROOT,
+        BOUND_REFERENCE_CONTROL_GIT_OBJECT,
+        "TEST_BOUND_REFERENCE_CONTROL",
+    )
+    raw = _git_blob(REPO_ROOT, object_id, CONTROL_INTERFACE_PATH)
+    if (
+        hashlib.sha256(raw).hexdigest()
+        != BOUND_REFERENCE_CONTROL_INTERFACE_RAW_SHA256
+    ):
+        raise AssertionError(
+            "TEST_BOUND_REFERENCE_CONTROL_DIGEST_MISMATCH"
+        )
+    return load_verified_bound_reference_resolver(
+        REPO_ROOT,
+        trust(),
+        bound_reference_control_trust(),
+        parse_json_bytes(raw),
+        registered_snapshot_trust(),
     )
 
 
@@ -295,18 +359,30 @@ def synthetic_repository_bound_context(
 
     return BootstrapContext(
         trust(mode=mode),
-        repository_control_trust(),
+        bound_reference_control_trust(),
         final_contract(),
         MappingProxyType({}),
         MappingProxyType(
             {
+                "bound_reference_resolver_contract": {
+                    "artifact_digest": (
+                        BOUND_REFERENCE_RESOLVER_INTERFACE_RAW_SHA256
+                    ),
+                    "registry_snapshot_digest": (
+                        REGISTERED_REGISTRY_SNAPSHOT_DIGEST
+                    ),
+                },
                 "transition_contract": {
                     "auto_runtime_integration_complete": True,
                     "runtime_state_write_permitted": True,
+                    "effective_runtime_state_write_permitted": True,
                     "runtime_shard_writer_integration_complete": True,
                     "publisher_v2_runtime_integration_complete": True,
                     "repository_binding_integration_complete": True,
                     "repository_bound": True,
+                    "bound_reference_resolver_auto_integration_complete": (
+                        True
+                    ),
                     "bound_reference_resolver_gate_satisfied": True,
                     "canonical_publication_permitted": (
                         canonical_publication_permitted
@@ -314,6 +390,7 @@ def synthetic_repository_bound_context(
                 }
             }
         ),
+        verified_binding_resolver(),
     )
 
 
