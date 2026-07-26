@@ -1,0 +1,538 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:protected-local-managed-raw-readiness:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "digest_algorithm": {
+      "const": "SHA-256"
+    },
+    "m003_dependency_contract": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate_symlink_allowed": {
+          "const": false
+        },
+        "lstat_first": {
+          "const": true
+        },
+        "private_root_path_serialized": {
+          "const": false
+        },
+        "realpath_containment_required": {
+          "const": true
+        },
+        "root_overlap_allowed": {
+          "const": false
+        },
+        "root_symlink_allowed": {
+          "const": false
+        },
+        "sibling_prefix_match_allowed": {
+          "const": false
+        },
+        "special_file_allowed": {
+          "const": false
+        }
+      },
+      "required": [
+        "lstat_first",
+        "realpath_containment_required",
+        "root_symlink_allowed",
+        "candidate_symlink_allowed",
+        "sibling_prefix_match_allowed",
+        "root_overlap_allowed",
+        "special_file_allowed",
+        "private_root_path_serialized"
+      ],
+      "type": "object"
+    },
+    "m031_dependency_contract": {
+      "additionalProperties": false,
+      "properties": {
+        "private_raw_schema_id": {
+          "const": "urn:linzecolin:agentdatabase:skillops:schema:raw-segment:v2"
+        },
+        "private_schema_bundle_member": {
+          "const": false
+        },
+        "public_queue_contains_raw": {
+          "const": false
+        },
+        "public_run_event_schema_id": {
+          "const": "urn:linzecolin:agentdatabase:skillops:schema:public-run-event:v2"
+        },
+        "raw_private_fields_structurally_impossible": {
+          "const": true
+        }
+      },
+      "required": [
+        "public_run_event_schema_id",
+        "private_raw_schema_id",
+        "public_queue_contains_raw",
+        "raw_private_fields_structurally_impossible",
+        "private_schema_bundle_member"
+      ],
+      "type": "object"
+    },
+    "next_phase": {
+      "const": "MECHANISM_MANAGED_RAW_72H_POLICY"
+    },
+    "nonmutation": {
+      "additionalProperties": false,
+      "properties": {
+        "activation_forbidden": {
+          "const": true
+        },
+        "auto_plane_unchanged": {
+          "const": true
+        },
+        "candidate_bundle_unchanged": {
+          "const": true
+        },
+        "canonical_publication_permitted": {
+          "const": false
+        },
+        "raw_expiry_action_permitted": {
+          "const": false
+        },
+        "state_write_permitted": {
+          "const": false
+        },
+        "version_file_created": {
+          "const": false
+        }
+      },
+      "required": [
+        "activation_forbidden",
+        "auto_plane_unchanged",
+        "candidate_bundle_unchanged",
+        "canonical_publication_permitted",
+        "state_write_permitted",
+        "raw_expiry_action_permitted",
+        "version_file_created"
+      ],
+      "type": "object"
+    },
+    "offline_contract": {
+      "additionalProperties": false,
+      "properties": {
+        "clock_basis": {
+          "const": "UTC_WALL_CLOCK"
+        },
+        "offline_breach_code": {
+          "const": "OFFLINE_TTL_BREACH"
+        },
+        "offline_gap_receipt_required": {
+          "const": true
+        },
+        "offline_period_hard_guarantee_claimed": {
+          "const": false
+        },
+        "offline_resume_first_cycle_receipt_required": {
+          "const": true
+        },
+        "ttl_enforcement_availability": {
+          "const": "LOCAL_RUNTIME_AVAILABLE_ONLY"
+        }
+      },
+      "required": [
+        "clock_basis",
+        "ttl_enforcement_availability",
+        "offline_period_hard_guarantee_claimed",
+        "offline_resume_first_cycle_receipt_required",
+        "offline_gap_receipt_required",
+        "offline_breach_code"
+      ],
+      "type": "object"
+    },
+    "owner_plane": {
+      "const": "MECHANISM"
+    },
+    "protocol_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/protocol_revision"
+    },
+    "real_execution_permitted": {
+      "const": false
+    },
+    "root_lifecycle_contract": {
+      "additionalProperties": false,
+      "properties": {
+        "component_path": {
+          "const": "CodexSkills/governance/retention/root_lifecycle.py"
+        },
+        "component_source_binding_mode": {
+          "const": "SUCCESSOR_EXTERNAL_TUPLE_REQUIRED"
+        },
+        "content_digest": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+        },
+        "destructive_action_permitted": {
+          "const": false
+        },
+        "managed_raw_root_class": {
+          "const": "STAGING"
+        },
+        "observation_schema": {
+          "additionalProperties": false,
+          "properties": {
+            "artifact_digest": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+            },
+            "canonical_path": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/repo_relative_posix_path"
+            },
+            "schema_sha256": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+            },
+            "schema_version": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/urn_id"
+            },
+            "self_digest_pointer": {
+              "const": "/evidence_bundle_digest"
+            }
+          },
+          "required": [
+            "artifact_digest",
+            "canonical_path",
+            "schema_sha256",
+            "schema_version",
+            "self_digest_pointer"
+          ],
+          "type": "object"
+        },
+        "only_managed_raw_may_reach_m061": {
+          "const": true
+        },
+        "persistent_managed_raw_default_enabled": {
+          "const": false
+        },
+        "production_certification_status": {
+          "const": "PENDING_M061"
+        },
+        "protected_delete_budget": {
+          "const": 0
+        },
+        "protected_or_queue_selected_count": {
+          "const": 0
+        },
+        "protected_root_classes": {
+          "const": [
+            "LEGACY_DATA",
+            "RUN_SOURCE",
+            "SKILL_SOURCE"
+          ]
+        },
+        "public_queue_root_class": {
+          "const": "PUBLIC_QUEUE"
+        },
+        "raw_ownership_marker_recomputed": {
+          "const": true
+        },
+        "raw_payload_digest_recomputed": {
+          "const": true
+        },
+        "report_recomputation_required": {
+          "const": true
+        },
+        "report_schema": {
+          "additionalProperties": false,
+          "properties": {
+            "artifact_digest": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+            },
+            "canonical_path": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/repo_relative_posix_path"
+            },
+            "schema_sha256": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+            },
+            "schema_version": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/urn_id"
+            },
+            "self_digest_pointer": {
+              "const": "/evidence_bundle_digest"
+            }
+          },
+          "required": [
+            "artifact_digest",
+            "canonical_path",
+            "schema_sha256",
+            "schema_version",
+            "self_digest_pointer"
+          ],
+          "type": "object"
+        },
+        "root_class_mapping": {
+          "const": [
+            {
+              "lifecycle_action": "READ_ONLY_NO_DELETE_MOVE_TRUNCATE",
+              "lifecycle_class": "PROTECTED_LOCAL_DATA",
+              "root_class": "LEGACY_DATA",
+              "ttl_selection_allowed": false
+            },
+            {
+              "lifecycle_action": "RETAIN_UNTIL_REMOTE_VERIFIED",
+              "lifecycle_class": "PUBLIC_SAFE_PUBLICATION_QUEUE",
+              "root_class": "PUBLIC_QUEUE",
+              "ttl_selection_allowed": false
+            },
+            {
+              "lifecycle_action": "READ_ONLY_NO_DELETE_MOVE_TRUNCATE",
+              "lifecycle_class": "PROTECTED_LOCAL_DATA",
+              "root_class": "RUN_SOURCE",
+              "ttl_selection_allowed": false
+            },
+            {
+              "lifecycle_action": "READ_ONLY_NO_DELETE_MOVE_TRUNCATE",
+              "lifecycle_class": "PROTECTED_LOCAL_DATA",
+              "root_class": "SKILL_SOURCE",
+              "ttl_selection_allowed": false
+            },
+            {
+              "lifecycle_action": "M061_TIME_EVALUATION_ONLY",
+              "lifecycle_class": "MANAGED_RAW_SPOOL",
+              "root_class": "STAGING",
+              "ttl_selection_allowed": true
+            }
+          ]
+        },
+        "time_evaluation_performed": {
+          "const": false
+        }
+      },
+      "required": [
+        "component_path",
+        "component_source_binding_mode",
+        "content_digest",
+        "root_class_mapping",
+        "protected_root_classes",
+        "managed_raw_root_class",
+        "public_queue_root_class",
+        "only_managed_raw_may_reach_m061",
+        "protected_or_queue_selected_count",
+        "protected_delete_budget",
+        "raw_ownership_marker_recomputed",
+        "raw_payload_digest_recomputed",
+        "persistent_managed_raw_default_enabled",
+        "production_certification_status",
+        "time_evaluation_performed",
+        "destructive_action_permitted",
+        "observation_schema",
+        "report_schema",
+        "report_recomputation_required"
+      ],
+      "type": "object"
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:protected-local-managed-raw-readiness:v1"
+    },
+    "self_digest_pointer": {
+      "const": "/artifact_digest"
+    },
+    "source_trust": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate_bundle": {
+          "additionalProperties": false,
+          "properties": {
+            "artifact_digest": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+            },
+            "bundle_digest": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+            },
+            "canonical_path": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/repo_relative_posix_path"
+            },
+            "expected_mode": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/enum_code"
+            },
+            "policy_count": {
+              "const": 5
+            },
+            "schema_count": {
+              "const": 31
+            },
+            "verified_git_object_id": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/git_object_id"
+            }
+          },
+          "required": [
+            "artifact_digest",
+            "canonical_path",
+            "expected_mode",
+            "verified_git_object_id",
+            "bundle_digest",
+            "schema_count",
+            "policy_count"
+          ],
+          "type": "object"
+        },
+        "public_run_event_schema": {
+          "additionalProperties": false,
+          "properties": {
+            "bundle_member": {
+              "const": true
+            },
+            "schema_sha256": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+            },
+            "schema_version": {
+              "const": "urn:linzecolin:agentdatabase:skillops:schema:public-run-event:v2"
+            },
+            "self_digest_pointer": {
+              "const": "/event_digest"
+            }
+          },
+          "required": [
+            "schema_version",
+            "schema_sha256",
+            "self_digest_pointer",
+            "bundle_member"
+          ],
+          "type": "object"
+        },
+        "raw_segment_schema": {
+          "additionalProperties": false,
+          "properties": {
+            "artifact_digest": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+            },
+            "bundle_member": {
+              "const": false
+            },
+            "canonical_path": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/repo_relative_posix_path"
+            },
+            "expected_mode": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/enum_code"
+            },
+            "private_schema": {
+              "const": true
+            },
+            "schema_sha256": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+            },
+            "schema_version": {
+              "const": "urn:linzecolin:agentdatabase:skillops:schema:raw-segment:v2"
+            },
+            "self_digest_pointer": {
+              "const": "/segment_digest"
+            },
+            "verified_git_object_id": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/git_object_id"
+            }
+          },
+          "required": [
+            "artifact_digest",
+            "canonical_path",
+            "expected_mode",
+            "verified_git_object_id",
+            "schema_version",
+            "schema_sha256",
+            "self_digest_pointer",
+            "bundle_member",
+            "private_schema"
+          ],
+          "type": "object"
+        },
+        "repository_self_report_is_not_trust_root": {
+          "const": true
+        },
+        "retention_policy": {
+          "additionalProperties": false,
+          "properties": {
+            "bundle_member": {
+              "const": true
+            },
+            "policy_id": {
+              "const": "urn:linzecolin:agentdatabase:skillops:policy:retention:v3"
+            },
+            "policy_sha256": {
+              "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+            }
+          },
+          "required": [
+            "policy_id",
+            "policy_sha256",
+            "bundle_member"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "candidate_bundle",
+        "raw_segment_schema",
+        "retention_policy",
+        "public_run_event_schema",
+        "repository_self_report_is_not_trust_root"
+      ],
+      "type": "object"
+    },
+    "status": {
+      "const": "DRAFT_NON_ACTIVE_PROTECTED_LOCAL_MANAGED_RAW_BOUNDARY_READY"
+    },
+    "task_contract": {
+      "additionalProperties": false,
+      "properties": {
+        "completed_task_ids": {
+          "const": [
+            "M-060"
+          ]
+        },
+        "dependency_task_ids": {
+          "const": [
+            "M-003",
+            "M-031"
+          ]
+        },
+        "done_gate": {
+          "const": "LEGACY_LOCAL_SOURCE_NEVER_SELECTED_BY_72H_JOB"
+        },
+        "pending_task_ids": {
+          "const": [
+            "M-061"
+          ]
+        },
+        "required_output": {
+          "const": "ROOT_TYPING_AND_LIFECYCLE_CONTRACT"
+        }
+      },
+      "required": [
+        "dependency_task_ids",
+        "completed_task_ids",
+        "pending_task_ids",
+        "required_output",
+        "done_gate"
+      ],
+      "type": "object"
+    },
+    "task_pack_revision": {
+      "const": "v0.0.0.2"
+    }
+  },
+  "required": [
+    "artifact_digest",
+    "schema_version",
+    "protocol_revision",
+    "status",
+    "owner_plane",
+    "digest_algorithm",
+    "source_trust",
+    "m003_dependency_contract",
+    "m031_dependency_contract",
+    "root_lifecycle_contract",
+    "offline_contract",
+    "real_execution_permitted",
+    "nonmutation",
+    "task_contract",
+    "next_phase",
+    "self_digest_pointer",
+    "task_pack_revision"
+  ],
+  "title": "Mechanism M-060 protected-local managed-raw readiness",
+  "type": "object"
+}

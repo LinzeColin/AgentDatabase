@@ -1,0 +1,148 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:root-lifecycle-selection-report:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "actor": {
+      "const": "SKILLOPS_ROOT_LIFECYCLE_GUARD"
+    },
+    "bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "destructive_action_performed": {
+      "const": false
+    },
+    "evidence_bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "excluded_candidates": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "candidate_ref": {
+            "pattern": "^[a-z][a-z0-9-]{2,63}$",
+            "type": "string"
+          },
+          "reason_code": {
+            "enum": [
+              "PERSISTENCE_DISABLED",
+              "PROTECTED_LOCAL_TTL_FORBIDDEN",
+              "PUBLIC_SAFE_QUEUE_NOT_RAW_SPOOL",
+              "TEST_ONLY_NOT_AUTHORIZED"
+            ]
+          }
+        },
+        "required": [
+          "candidate_ref",
+          "reason_code"
+        ],
+        "type": "object"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "generated_at": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+    },
+    "input_count": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "legacy_input_count": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "legacy_selected_count": {
+      "const": 0
+    },
+    "observation_ref": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_digest": {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+        }
+      },
+      "required": [
+        "artifact_digest"
+      ],
+      "type": "object"
+    },
+    "protected_delete_budget": {
+      "const": 0
+    },
+    "protected_input_count": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "protected_selected_count": {
+      "const": 0
+    },
+    "protocol_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/protocol_revision"
+    },
+    "public_artifact_write_performed": {
+      "const": false
+    },
+    "public_queue_input_count": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "public_queue_selected_count": {
+      "const": 0
+    },
+    "report_uid": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/typed_uid"
+    },
+    "root_count": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/positive_count"
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:root-lifecycle-selection-report:v1"
+    },
+    "scope_authorization": {
+      "const": "M061_TIME_EVALUATION_ONLY"
+    },
+    "selected_candidate_refs": {
+      "items": {
+        "pattern": "^[a-z][a-z0-9-]{2,63}$",
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "selected_count": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/nonnegative_count"
+    },
+    "selection_state": {
+      "const": "PASS"
+    },
+    "time_evaluation_performed": {
+      "const": false
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "bundle_digest",
+    "report_uid",
+    "observation_ref",
+    "selection_state",
+    "scope_authorization",
+    "selected_candidate_refs",
+    "excluded_candidates",
+    "root_count",
+    "input_count",
+    "selected_count",
+    "protected_input_count",
+    "legacy_input_count",
+    "public_queue_input_count",
+    "protected_selected_count",
+    "legacy_selected_count",
+    "public_queue_selected_count",
+    "protected_delete_budget",
+    "time_evaluation_performed",
+    "destructive_action_performed",
+    "public_artifact_write_performed",
+    "generated_at",
+    "actor",
+    "evidence_bundle_digest"
+  ],
+  "title": "Protected-local and managed-raw selection report",
+  "type": "object"
+}

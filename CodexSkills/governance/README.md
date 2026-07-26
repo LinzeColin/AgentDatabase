@@ -58,6 +58,13 @@ Key entrypoints:
 - `tools/build_evaluator_release_protection.py`: deterministic M-059
   bundle-external observation/report schemas and non-active readiness bound to
   the candidate, M-056, M-058, and version-policy v3 trust roots.
+- `retention/root_lifecycle.py`: pure M-060 realpath-aware protected-local,
+  managed-raw, and public-queue scope classifier; private paths are never
+  serialized and its only positive result is later M-061 time evaluation.
+- `tools/build_protected_local_raw_boundary.py`: deterministic M-060
+  bundle-external observation/report schemas and non-active readiness bound to
+  the exact candidate, retention-policy:v3, raw-segment:v2, and
+  public-run-event:v2 contracts.
 - `tools/validate_au040_semantic_acceptance.py`: exact 365-day and
   shard/index/manifest/publication cross-artifact gates.
 - `tests/test_mechanism_contract.py`: positive, negative, and fault gates.
@@ -108,6 +115,9 @@ Run from the repository root with the explicitly provisioned interpreter:
   CodexSkills/governance/tools/build_freshness_drift_monitor.py --check
 /usr/bin/python3 -B \
   CodexSkills/governance/tools/build_evaluator_release_protection.py \
+  --check
+/usr/bin/python3 -B \
+  CodexSkills/governance/tools/build_protected_local_raw_boundary.py \
   --check
 /usr/bin/python3 -B CodexSkills/governance/tools/validate_mechanism.py lint-draft
 /usr/bin/python3 -B \
@@ -294,3 +304,19 @@ reuse the Skill promotion transaction. Only an unchanged protected snapshot
 with a complete access-denial audit may delegate to M-058. The guard returns
 canonical evidence only and does not authorize release writes, notification,
 Registry/state mutation, activation, or publication.
+
+The M-060 root-lifecycle guard is likewise bundle-external and non-active. Its
+physical `RootBinding.path` values stay in memory and are replaced in evidence
+by low-entropy refs. `SKILL_SOURCE`, `RUN_SOURCE`, and `LEGACY_DATA` always map
+to `PROTECTED_LOCAL_DATA`; their TTL selection and delete budget are both zero.
+`PUBLIC_QUEUE` remains a non-raw queue retained until remote verification.
+Only `STAGING` maps to `MANAGED_RAW_SPOOL`, and even there the guard requires
+the exact private `raw-segment:v2` schema, recomputed ownership marker, and
+payload byte/digest closure.
+
+An M-060 positive result is
+`ELIGIBLE_FOR_M061_TIME_EVALUATION`, not expiry or delete authority. Persistent
+raw remains disabled by default, production certification is pending M-061,
+offline hard-guarantee claims remain false, and M-060 performs no clock
+evaluation, receipt generation, mutation, publication, state write, or
+activation.

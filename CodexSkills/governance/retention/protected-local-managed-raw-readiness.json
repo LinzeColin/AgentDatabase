@@ -1,0 +1,162 @@
+{
+  "artifact_digest": "b7c1ba479d0a47b97cb00b0556b2bf5db5b035bc156c9ae4e3bdc71337707080",
+  "digest_algorithm": "SHA-256",
+  "m003_dependency_contract": {
+    "candidate_symlink_allowed": false,
+    "lstat_first": true,
+    "private_root_path_serialized": false,
+    "realpath_containment_required": true,
+    "root_overlap_allowed": false,
+    "root_symlink_allowed": false,
+    "sibling_prefix_match_allowed": false,
+    "special_file_allowed": false
+  },
+  "m031_dependency_contract": {
+    "private_raw_schema_id": "urn:linzecolin:agentdatabase:skillops:schema:raw-segment:v2",
+    "private_schema_bundle_member": false,
+    "public_queue_contains_raw": false,
+    "public_run_event_schema_id": "urn:linzecolin:agentdatabase:skillops:schema:public-run-event:v2",
+    "raw_private_fields_structurally_impossible": true
+  },
+  "next_phase": "MECHANISM_MANAGED_RAW_72H_POLICY",
+  "nonmutation": {
+    "activation_forbidden": true,
+    "auto_plane_unchanged": true,
+    "candidate_bundle_unchanged": true,
+    "canonical_publication_permitted": false,
+    "raw_expiry_action_permitted": false,
+    "state_write_permitted": false,
+    "version_file_created": false
+  },
+  "offline_contract": {
+    "clock_basis": "UTC_WALL_CLOCK",
+    "offline_breach_code": "OFFLINE_TTL_BREACH",
+    "offline_gap_receipt_required": true,
+    "offline_period_hard_guarantee_claimed": false,
+    "offline_resume_first_cycle_receipt_required": true,
+    "ttl_enforcement_availability": "LOCAL_RUNTIME_AVAILABLE_ONLY"
+  },
+  "owner_plane": "MECHANISM",
+  "protocol_revision": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1",
+  "real_execution_permitted": false,
+  "root_lifecycle_contract": {
+    "component_path": "CodexSkills/governance/retention/root_lifecycle.py",
+    "component_source_binding_mode": "SUCCESSOR_EXTERNAL_TUPLE_REQUIRED",
+    "content_digest": "0b2436b889c7ff386f0468c2bfb7012159706784c830daa0ef1c19df4c663bf2",
+    "destructive_action_permitted": false,
+    "managed_raw_root_class": "STAGING",
+    "observation_schema": {
+      "artifact_digest": "4fc70bca0530e2a584ad6261bc413397725221aca24c110decc7ec67c0c0a135",
+      "canonical_path": "CodexSkills/governance/retention/schemas/root-lifecycle-observation.schema.json",
+      "schema_sha256": "333c91ababd47048e809dd18b5589efabda7c44cc53a9827cc576be0d14959ca",
+      "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:root-lifecycle-observation:v1",
+      "self_digest_pointer": "/evidence_bundle_digest"
+    },
+    "only_managed_raw_may_reach_m061": true,
+    "persistent_managed_raw_default_enabled": false,
+    "production_certification_status": "PENDING_M061",
+    "protected_delete_budget": 0,
+    "protected_or_queue_selected_count": 0,
+    "protected_root_classes": [
+      "LEGACY_DATA",
+      "RUN_SOURCE",
+      "SKILL_SOURCE"
+    ],
+    "public_queue_root_class": "PUBLIC_QUEUE",
+    "raw_ownership_marker_recomputed": true,
+    "raw_payload_digest_recomputed": true,
+    "report_recomputation_required": true,
+    "report_schema": {
+      "artifact_digest": "1a5b19cf291de745bcf09c894652cf178fcf86887316b06ef2ff1644961434e7",
+      "canonical_path": "CodexSkills/governance/retention/schemas/root-lifecycle-selection-report.schema.json",
+      "schema_sha256": "45120d6472a3fd2bb2206fa6047cba53e0918beb6cd80acf139efa693e68081b",
+      "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:root-lifecycle-selection-report:v1",
+      "self_digest_pointer": "/evidence_bundle_digest"
+    },
+    "root_class_mapping": [
+      {
+        "lifecycle_action": "READ_ONLY_NO_DELETE_MOVE_TRUNCATE",
+        "lifecycle_class": "PROTECTED_LOCAL_DATA",
+        "root_class": "LEGACY_DATA",
+        "ttl_selection_allowed": false
+      },
+      {
+        "lifecycle_action": "RETAIN_UNTIL_REMOTE_VERIFIED",
+        "lifecycle_class": "PUBLIC_SAFE_PUBLICATION_QUEUE",
+        "root_class": "PUBLIC_QUEUE",
+        "ttl_selection_allowed": false
+      },
+      {
+        "lifecycle_action": "READ_ONLY_NO_DELETE_MOVE_TRUNCATE",
+        "lifecycle_class": "PROTECTED_LOCAL_DATA",
+        "root_class": "RUN_SOURCE",
+        "ttl_selection_allowed": false
+      },
+      {
+        "lifecycle_action": "READ_ONLY_NO_DELETE_MOVE_TRUNCATE",
+        "lifecycle_class": "PROTECTED_LOCAL_DATA",
+        "root_class": "SKILL_SOURCE",
+        "ttl_selection_allowed": false
+      },
+      {
+        "lifecycle_action": "M061_TIME_EVALUATION_ONLY",
+        "lifecycle_class": "MANAGED_RAW_SPOOL",
+        "root_class": "STAGING",
+        "ttl_selection_allowed": true
+      }
+    ],
+    "time_evaluation_performed": false
+  },
+  "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:protected-local-managed-raw-readiness:v1",
+  "self_digest_pointer": "/artifact_digest",
+  "source_trust": {
+    "candidate_bundle": {
+      "artifact_digest": "66ad125629cab71739ff2bc266219f995f7a45998936ca720c6db678ee77e65a",
+      "bundle_digest": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e",
+      "canonical_path": "CodexSkills/governance/bundles/schema-bundle-manifest.v1.json",
+      "expected_mode": "CANDIDATE",
+      "policy_count": 5,
+      "schema_count": 31,
+      "verified_git_object_id": "sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5"
+    },
+    "public_run_event_schema": {
+      "bundle_member": true,
+      "schema_sha256": "c2b494baf284ba53f6c0101e0ab29b228de68964e4ab823710bcc3461555e523",
+      "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:public-run-event:v2",
+      "self_digest_pointer": "/event_digest"
+    },
+    "raw_segment_schema": {
+      "artifact_digest": "238f3861bafd257c3ed0a5525383b357a17c65ef68049d8fbc519045982c584f",
+      "bundle_member": false,
+      "canonical_path": "CodexSkills/registry/auto/schemas/private/raw-segment.schema.json",
+      "expected_mode": "AUTO_PRIVATE_SCHEMA_EXTERNAL",
+      "private_schema": true,
+      "schema_sha256": "032bdfb38c704a031e6c6f9c2f84dfbc82c9cc13af89e01723d8f439dff47dd5",
+      "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:raw-segment:v2",
+      "self_digest_pointer": "/segment_digest",
+      "verified_git_object_id": "sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5"
+    },
+    "repository_self_report_is_not_trust_root": true,
+    "retention_policy": {
+      "bundle_member": true,
+      "policy_id": "urn:linzecolin:agentdatabase:skillops:policy:retention:v3",
+      "policy_sha256": "bcad1e50a847e040d1350ca2fd977503b4ae642deabd727266e9dbbd26acb7ce"
+    }
+  },
+  "status": "DRAFT_NON_ACTIVE_PROTECTED_LOCAL_MANAGED_RAW_BOUNDARY_READY",
+  "task_contract": {
+    "completed_task_ids": [
+      "M-060"
+    ],
+    "dependency_task_ids": [
+      "M-003",
+      "M-031"
+    ],
+    "done_gate": "LEGACY_LOCAL_SOURCE_NEVER_SELECTED_BY_72H_JOB",
+    "pending_task_ids": [
+      "M-061"
+    ],
+    "required_output": "ROOT_TYPING_AND_LIFECYCLE_CONTRACT"
+  },
+  "task_pack_revision": "v0.0.0.2"
+}

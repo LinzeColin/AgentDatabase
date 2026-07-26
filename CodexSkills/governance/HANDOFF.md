@@ -1,4 +1,102 @@
-# Mechanism evaluator/release-policy protection handoff
+# Mechanism protected-local / managed-raw boundary handoff
+
+- State: `DRAFT_NON_ACTIVE_PROTECTED_LOCAL_MANAGED_RAW_BOUNDARY_READY`
+- Phase: `MECHANISM_PROTECTED_LOCAL_DATA_MANAGED_RAW_BOUNDARY`
+- Task Pack task completed: `M-060`
+- M-060 dependencies: `M-003`, `M-031`
+- Required output: `ROOT_TYPING_AND_LIFECYCLE_CONTRACT`
+- Done gate: `LEGACY_LOCAL_SOURCE_NEVER_SELECTED_BY_72H_JOB`
+- M-060 guard:
+  `CodexSkills/governance/retention/root_lifecycle.py`
+- M-060 guard raw SHA-256:
+  `0b2436b889c7ff386f0468c2bfb7012159706784c830daa0ef1c19df4c663bf2`
+- M-060 readiness:
+  `CodexSkills/governance/retention/protected-local-managed-raw-readiness.json`
+- M-060 readiness raw SHA-256:
+  `6376e6776b6f23cf45080f5d3a9191fcdf0238168032b14356da8b88dd45bef4`
+- M-060 readiness self digest:
+  `b7c1ba479d0a47b97cb00b0556b2bf5db5b035bc156c9ae4e3bdc71337707080`
+- Observation schema canonical SHA-256:
+  `333c91ababd47048e809dd18b5589efabda7c44cc53a9827cc576be0d14959ca`
+- Selection-report schema canonical SHA-256:
+  `45120d6472a3fd2bb2206fa6047cba53e0918beb6cd80acf139efa693e68081b`
+- Readiness schema canonical SHA-256:
+  `a4bf03f6cf1c244952a5f99b33f37d61fe71d840b661f340db0b64dffeb8479b`
+- Immutable candidate:
+  `sha1:5ee37d7499c62ec19381dac7eb95cb12743ad2d5`
+- Immutable candidate bundle digest:
+  `36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e`
+- Trusted private raw schema:
+  `urn:linzecolin:agentdatabase:skillops:schema:raw-segment:v2`
+- Trusted private raw schema canonical SHA-256:
+  `032bdfb38c704a031e6c6f9c2f84dfbc82c9cc13af89e01723d8f439dff47dd5`
+- Protected lifecycle classes:
+  `SKILL_SOURCE`, `RUN_SOURCE`, `LEGACY_DATA`
+- Managed raw lifecycle class: `STAGING`
+- Public-safe non-raw queue class: `PUBLIC_QUEUE`
+- Protected selected count: `0`
+- Real retention execution permitted: `false`
+- Pending Task Pack task: `M-061`
+- Exact next Phase: `MECHANISM_MANAGED_RAW_72H_POLICY`
+
+M-060 introduces a pure, realpath-aware root and candidate classifier. Private
+physical paths remain in memory only. Symlinked roots or candidates, root
+overlap, sibling-prefix confusion, traversal, special files, incomplete
+payload closure, and time-of-check/time-of-use changes all fail closed.
+
+`SKILL_SOURCE`, `RUN_SOURCE`, and `LEGACY_DATA` are always
+`PROTECTED_LOCAL_DATA`: the guard does not parse them, select them for TTL, or
+grant any delete/move/truncate budget. `PUBLIC_QUEUE` is explicitly separate
+from raw retention. Only an exact `raw-segment:v2` in `STAGING`, with verified
+schema, bundle, ownership marker, payload size, and payload digest, may return
+`ELIGIBLE_FOR_M061_TIME_EVALUATION`.
+
+That positive result is not expiry or deletion authority. Persistent raw is
+disabled by default; production certification, 72-hour clock evaluation,
+offline breach/gap receipts, expiry ordering, and any destructive operation
+belong to M-061. The owner-locked offline contract remains truthful: the
+72-hour target is enforceable only while the Mac/App runtime is available,
+and the first recovery run must record any gap or
+`OFFLINE_TTL_BREACH`. M-060 writes no state, Registry, Git publication,
+VERSION, receipt, notification, activation, or canonical run artifact.
+
+## M-060 validation
+
+```text
+M-060 targeted boundary tests: 10/10 PASS
+complete Mechanism suite: 160/160 PASS
+M-060 builder/schema/readiness: BYTE_EQUIVALENT
+candidate trust: 31 schemas / 5 policies PASS
+Mechanism draft/candidate/resolver/release/v3/promotion/rollback/
+  freshness/evaluator-protection/AU-040 builders and lints: PASS
+schema-set lint:
+  base 21 / complete candidate 41 / version 24 / lifecycle 36 /
+  Registry 25 / Auto-schema closure 37 / M-060 full closure 40 PASS
+OpenAIDatabase consumer + architecture: 23/23 PASS
+consumer CLI: PASS / errors=[] / canonical publication=false
+```
+
+The pre-existing cross-owner transition remains fail-closed and is not
+modified or relabeled by M-060:
+
+```text
+complete Auto suite: 200 tests / 5 failures / 20 errors
+fault/privacy seed 271828: 149 tests / 5 failures / 25 errors
+fault/privacy seed 314159: 149 tests / 5 failures / 25 errors
+AUTO_REGISTRY_MIRROR_SKILL_COUNT_DRIFT
+BOUND_REFERENCE_RESOLVER_RUNTIME_LOCAL_DRIFT
+ACTIVATION_CONTROL_INTERFACE_SEMANTIC_MISMATCH
+activation builder/lint:
+  ACTIVATION_BOUND_RESOLVER_INTERFACE_CONTRACT_MISMATCH
+```
+
+The mirror-count drift is now `90` versus Auto's pinned `89` after the
+independent Teleiosis delivery on the M-060 base. No Auto, resolver,
+activation-control, candidate-bundle, policy, OpenAIDatabase, automation, or
+VERSION path change belongs to M-060. No verifier call or historical Task Pack
+replay belongs to development.
+
+## Prior M-059 evaluator/release-policy protection handoff
 
 - State: `DRAFT_NON_ACTIVE_EVALUATOR_RELEASE_POLICY_PROTECTION_READY`
 - Phase: `MECHANISM_EVALUATOR_RELEASE_POLICY_PROTECTION`

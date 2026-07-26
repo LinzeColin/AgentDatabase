@@ -1,0 +1,193 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:root-lifecycle-observation:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "actor": {
+      "const": "SKILLOPS_ROOT_LIFECYCLE_GUARD"
+    },
+    "bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "candidate_evaluations": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "candidate_ref": {
+            "pattern": "^[a-z][a-z0-9-]{2,63}$",
+            "type": "string"
+          },
+          "decision": {
+            "enum": [
+              "ELIGIBLE_FOR_M061_TIME_EVALUATION",
+              "EXCLUDED_FROM_72H_SCOPE"
+            ]
+          },
+          "lifecycle_class": {
+            "enum": [
+              "MANAGED_RAW_SPOOL",
+              "PROTECTED_LOCAL_DATA",
+              "PUBLIC_SAFE_PUBLICATION_QUEUE"
+            ]
+          },
+          "metadata_read": {
+            "type": "boolean"
+          },
+          "ownership_marker_verified": {
+            "type": "boolean"
+          },
+          "payload_integrity_verified": {
+            "type": "boolean"
+          },
+          "raw_schema_valid": {
+            "type": "boolean"
+          },
+          "reason_code": {
+            "enum": [
+              "ELIGIBLE_FOR_M061_TIME_EVALUATION",
+              "PERSISTENCE_DISABLED",
+              "PROTECTED_LOCAL_TTL_FORBIDDEN",
+              "PUBLIC_SAFE_QUEUE_NOT_RAW_SPOOL",
+              "TEST_ONLY_NOT_AUTHORIZED"
+            ]
+          },
+          "root_class": {
+            "enum": [
+              "LEGACY_DATA",
+              "PUBLIC_QUEUE",
+              "RUN_SOURCE",
+              "SKILL_SOURCE",
+              "STAGING"
+            ]
+          },
+          "root_ref": {
+            "pattern": "^[a-z][a-z0-9-]{2,63}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "candidate_ref",
+          "root_ref",
+          "root_class",
+          "lifecycle_class",
+          "decision",
+          "reason_code",
+          "metadata_read",
+          "raw_schema_valid",
+          "ownership_marker_verified",
+          "payload_integrity_verified"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "destructive_action_performed": {
+      "const": false
+    },
+    "evidence_bundle_digest": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/sha256"
+    },
+    "observation_uid": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/typed_uid"
+    },
+    "observed_at": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/utc_z_timestamp"
+    },
+    "offline_gap_receipt_required": {
+      "const": true
+    },
+    "offline_period_hard_guarantee_claimed": {
+      "const": false
+    },
+    "offline_resume_first_cycle_receipt_required": {
+      "const": true
+    },
+    "persistent_managed_raw_default_enabled": {
+      "const": false
+    },
+    "protocol_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/protocol_revision"
+    },
+    "root_bindings": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "lifecycle_action": {
+            "enum": [
+              "M061_TIME_EVALUATION_ONLY",
+              "READ_ONLY_NO_DELETE_MOVE_TRUNCATE",
+              "RETAIN_UNTIL_REMOTE_VERIFIED"
+            ]
+          },
+          "lifecycle_class": {
+            "enum": [
+              "MANAGED_RAW_SPOOL",
+              "PROTECTED_LOCAL_DATA",
+              "PUBLIC_SAFE_PUBLICATION_QUEUE"
+            ]
+          },
+          "private_path_serialized": {
+            "const": false
+          },
+          "root_class": {
+            "enum": [
+              "LEGACY_DATA",
+              "PUBLIC_QUEUE",
+              "RUN_SOURCE",
+              "SKILL_SOURCE",
+              "STAGING"
+            ]
+          },
+          "root_ref": {
+            "pattern": "^[a-z][a-z0-9-]{2,63}$",
+            "type": "string"
+          },
+          "ttl_selection_allowed": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "root_ref",
+          "root_class",
+          "lifecycle_class",
+          "private_path_serialized",
+          "ttl_selection_allowed",
+          "lifecycle_action"
+        ],
+        "type": "object"
+      },
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:root-lifecycle-observation:v1"
+    },
+    "time_evaluation_performed": {
+      "const": false
+    },
+    "ttl_enforcement_availability": {
+      "const": "LOCAL_RUNTIME_AVAILABLE_ONLY"
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "bundle_digest",
+    "observation_uid",
+    "observed_at",
+    "root_bindings",
+    "candidate_evaluations",
+    "persistent_managed_raw_default_enabled",
+    "ttl_enforcement_availability",
+    "offline_period_hard_guarantee_claimed",
+    "offline_resume_first_cycle_receipt_required",
+    "offline_gap_receipt_required",
+    "time_evaluation_performed",
+    "destructive_action_performed",
+    "actor",
+    "evidence_bundle_digest"
+  ],
+  "title": "Protected-local and managed-raw lifecycle observation",
+  "type": "object"
+}
