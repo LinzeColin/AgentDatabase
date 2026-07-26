@@ -30,6 +30,14 @@ sets `release_write_permitted=false`. The three schemas in this directory are
 not candidate-bundle members; adding them or a replacement version policy to a
 future bundle requires a separate consumer-first coordinated Phase.
 
+`version_policy_v3/` is the isolated non-active replacement draft. It closes
+the six missing MAJOR trigger codes without dropping the seven existing codes,
+separates global SRV allocation from daily Auto transaction sequencing, and
+retains the provider-`SENT`-before-planned-write notification contract. It
+does not resolve the `04:15`/`05:30` authority conflict, does not join the
+candidate, does not modify the activation control, and does not create
+`CodexSkills/VERSION`.
+
 Validate from the repository root:
 
 ```bash
@@ -41,4 +49,8 @@ Validate from the repository root:
   --schema-dir CodexSkills/governance/release/schemas
 /usr/bin/python3 -B -m unittest \
   CodexSkills.governance.tests.test_release_foundations
+/usr/bin/python3 -B \
+  CodexSkills/governance/tools/build_version_policy_v3_draft.py --check
+/usr/bin/python3 -B -m unittest \
+  CodexSkills.governance.tests.test_version_policy_v3_draft
 ```

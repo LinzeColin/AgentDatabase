@@ -1,7 +1,7 @@
-# Mechanism Teleiosis Registry handoff
+# Mechanism version-policy v3 draft handoff
 
-- State: `DRAFT_NON_ACTIVE_TELEIOSIS_PARITY_MATERIALIZED`
-- Phase: `MECHANISM_REGISTRY_TELEIOSIS_PARITY_MATERIALIZATION`
+- State: `DRAFT_NON_ACTIVE_CONSUMER_FIRST_REQUIRED`
+- Phase: `MECHANISM_VERSION_POLICY_V3_DRAFT`
 - Protocol:
   `urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1`
 - SRV candidate: `v0.0.0.3`
@@ -24,13 +24,71 @@
   `f83032d5cb8c9dda9c6e903bb9dc5bf4f2a5de8bd687beeb010047f9e6b3ba2a`
 - Resolver-interface self digest:
   `d75e9b1d112b95d7ce0c5b9579140e78847ebc228b7347df7340e211522c0077`
-- Exact next Phase:
+- Version-policy v3 draft interface raw SHA-256:
+  `0fa8303981a1b263c835e74cc864fb114c4e1d4eb1a5e8c317c140754b84b8f7`
+- Version-policy v3 draft interface self digest:
+  `6b2772b30521da9ab3c513d7907448744bff90c1c650ae6ad8c35e5da1497d46`
+- Version-policy v3 canonical policy digest:
+  `5ea6047446ef26ab39d0e284f37619859d57c8c419daa1cffefffdc12935cfe0`
+- Version-policy next Phase:
+  `MECHANISM_VERSION_POLICY_V3_CONSUMER_FIRST_READINESS`
+- Registry/control pending Phase:
   `AUTO_TELEIOSIS_REGISTRY_EXACT_TUPLE_INTEGRATION`
 
 All Git objects above are immutable evidence, not self-authorizing trust
 roots. A runtime consumer must receive the final Mechanism successor object,
 snapshot digest, canonical path, schema ID, and `REGISTERED` mode from
 repo-external trusted state.
+
+## Version-policy v3 draft
+
+The bundle-external v3 draft closes the six MAJOR codes omitted by the current
+v2 policy:
+
+```text
+AUTOMATIC_SIDE_EFFECT_CHANGE
+EVALUATOR_OR_HOLDOUT_CHANGE
+HARD_GATE_CHANGE
+MIGRATION_OR_DELETE_SEMANTICS_CHANGE
+NETWORK_OR_PERMISSION_CHANGE
+PRIVACY_POLICY_CHANGE
+```
+
+All seven predecessor MAJOR codes remain present, producing an exact
+13-code set. Unknown or duplicate trigger codes fail closed; a MAJOR trigger
+cannot be downgraded by combining it with a weaker trigger.
+
+Global SkillOps revision allocation and daily execution identity are now
+explicitly separate:
+
+```text
+transaction_semantics=ONE_SRV_PER_ACCEPTED_CANONICAL_TRANSACTION
+daily_run_increments_srv=false
+srv_revision_used_as_daily_sequence=false
+daily_transaction_uid_separate=true
+daily_transaction_uid_kind=AUTO_TRANSACTION_UID
+```
+
+Planned MAJOR writes still require provider `SENT` before the write. Owner
+approval and reply are not required, emergency containment may precede
+notification, and the actual recipient mapping remains repo-external.
+
+Schedule authority remains fail-closed:
+
+```text
+timezone=Australia/Sydney
+daily_schedule_authority_state=UNRESOLVED
+daily_schedule_candidate_local_times=[04:15,05:30]
+daily_schedule_local=null
+schedule_activation_permitted=false
+```
+
+The draft Schema and policy are not candidate members. Candidate 31/5,
+activation control raw bytes, and `CodexSkills/VERSION` are unchanged. The
+draft interface records `consumer_first_verified=false`,
+`candidate_materialization_permitted=false`,
+`promotion_to_candidate_performed=false`, and
+`release_write_permitted=false`.
 
 ## 89-root materialization
 
@@ -125,6 +183,9 @@ production_trust_permitted
 bound_reference_resolver_gate_satisfied
 runtime_state_write_permitted
 runtime_state_instance_created
+version_policy_v3_consumer_first_verified
+version_policy_v3_candidate_materialization_permitted
+release_write_permitted
 consumer_first_repository_shards_permitted
 au_040_daily_jsonl_shard_complete
 au_040_complete
@@ -150,16 +211,18 @@ bound resolver builder:
   PASS / 89 roots / 4 catalogs / 0 binding eligible
   snapshot=7b5a74bd459a4737299444b68439c1799ba8a2159032636a24a987113eee9d12
   interface_raw=f83032d5cb8c9dda9c6e903bb9dc5bf4f2a5de8bd687beeb010047f9e6b3ba2a
+version-policy v3 builder:
+  PASS / 13 MAJOR codes / schedule unresolved / candidate membership=false
+version-policy v3 targeted tests: 12/12 PASS
 Registry sync tests: 10/10 PASS
-complete Mechanism suite: 91/91 PASS
+complete Mechanism suite: 103/103 PASS
 candidate trust: 31 schemas / 5 policies PASS
 Mechanism draft/candidate/resolver/release/AU-040 builders and lints: PASS
-schema-set lint: 38 schemas PASS
+v3 isolated / combined schema-set lint: 23 / 40 schemas PASS
 OpenAIDatabase consumer + architecture: 23/23 PASS
 consumer CLI: PASS / errors=[] / canonical publication=false
-live source dry-run:
-  89 instances / 74 names / aliases 20/20 / mirror unchanged / no write
-diff-check, Python 3.9 compilation, public literal scan: PASS
+candidate/control/VERSION path non-mutation: PASS
+diff-check, Python 3.9 compilation, public scanner, URI rebinding: PASS
 ```
 
 The unchanged predecessor Auto checkout at
@@ -191,9 +254,11 @@ state, Git, Gmail, or publisher authority.
 Final acceptance additionally requires FF-safe push plus a fresh detached
 GitHub object/blob readback of every changed path.
 
-The next Auto Phase may only bind the exact remotely verified Mechanism
-successor tuple and update Auto-owned 89-root resolver expectations. A later,
-separate Mechanism control sync may restore the production resolver gate.
-The queued `MECHANISM_VERSION_POLICY_V3_DRAFT` must be re-landed only after
-that cross-owner tuple chain is coherent. Development still must not call the
-verifier.
+The Registry Auto Phase may only bind the exact remotely verified Mechanism
+89-root tuple and update Auto-owned resolver expectations. A later, separate
+Mechanism control sync may restore the production resolver gate.
+
+The version-policy next Phase is independently limited to consumer-first
+readiness. It must not materialize a new candidate, change the control, resolve
+the schedule without direct Owner authority, create VERSION, or activate.
+Development still must not call the verifier.

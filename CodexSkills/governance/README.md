@@ -27,6 +27,11 @@ Key entrypoints:
   policy-precedence, and machine-readable Handoff gates.
 - `tools/build_release_foundations.py`: deterministic non-active M0 foundation
   interface and policy-reconciliation evidence.
+- `release/version_policy_v3/contract.py`: exact v2→v3 compatibility,
+  locked-impact, SRV/daily-transaction separation, notification, and unresolved
+  schedule gates.
+- `tools/build_version_policy_v3_draft.py`: deterministic bundle-external
+  version-policy v3 draft and consumer-first handoff.
 - `tools/validate_au040_semantic_acceptance.py`: exact 365-day and
   shard/index/manifest/publication cross-artifact gates.
 - `tests/test_mechanism_contract.py`: positive, negative, and fault gates.
@@ -35,6 +40,9 @@ Key entrypoints:
 - `tests/test_au040_semantic_policy_acceptance.py`: policy-version,
   retention-boundary, manifest-chain, physical-byte, and transaction-closure
   regressions.
+- `tests/test_version_policy_v3_draft.py`: v2 gap closure, impact
+  non-downgrade, schedule-authority, notification, privacy, and
+  candidate/control non-mutation regressions.
 - `draft-interface.json`: exact M0a interface for Auto A1a.
 - `bundles/schema-bundle-manifest.v1.json`: final non-active 31/5 candidate
   manifest.
@@ -57,6 +65,8 @@ Run from the repository root with the explicitly provisioned interpreter:
   CodexSkills/governance/tools/build_bound_reference_resolver.py --check
 /usr/bin/python3 -B \
   CodexSkills/governance/tools/build_release_foundations.py --check
+/usr/bin/python3 -B \
+  CodexSkills/governance/tools/build_version_policy_v3_draft.py --check
 /usr/bin/python3 -B CodexSkills/governance/tools/validate_mechanism.py lint-draft
 /usr/bin/python3 -B \
   CodexSkills/governance/tools/validate_activation.py lint-control
@@ -73,6 +83,10 @@ Run from the repository root with the explicitly provisioned interpreter:
   --schema-dir CodexSkills/governance/release/schemas \
   --schema-dir CodexSkills/registry/auto/schemas/public \
   --schema-dir CodexSkills/registry/auto/schemas/public-v2
+/usr/bin/python3 -B CodexSkills/governance/tools/validate_mechanism.py \
+  lint-schema-set \
+  --schema-dir CodexSkills/governance/schemas \
+  --schema-dir CodexSkills/governance/release/version_policy_v3/schemas
 /usr/bin/python3 -B -m unittest discover \
   -s CodexSkills/governance/tests -p 'test_*.py'
 ```
@@ -154,6 +168,24 @@ control sync both finish, `bound_reference_resolver_gate_satisfied`,
 false. No state root, lock, worktree, mutable Git, Gmail, outbox, watermark,
 shard, publisher, activation, or VERSION instance is created here.
 
+The isolated version-policy v3 draft under
+`CodexSkills/governance/release/version_policy_v3/` closes the six MAJOR
+trigger codes omitted by v2, preserves all seven existing MAJOR codes, and
+makes the global SRV / daily `auto_transaction_uid` separation explicit.
+Unknown or duplicate trigger codes fail closed and impact cannot be
+downgraded. Planned MAJOR writes still require provider `SENT`; owner approval
+and reply remain false, while the actual recipient mapping remains
+repo-external.
+
+This draft deliberately records both observed schedule candidates (`04:15`
+and `05:30`) without choosing between them. Its authority state is
+`UNRESOLVED`, `daily_schedule_local=null`, and
+`schedule_activation_permitted=false`. The v3 schema and policy are not
+members of the trusted 31/5 candidate, the activation control remains
+byte-identical, and `CodexSkills/VERSION` remains absent. A separate
+consumer-first readiness Phase and later coordinated candidate replacement
+are mandatory before this policy can affect release or runtime behavior.
+
 The bundle-outside Registry contract is under
 `CodexSkills/governance/registry/`. Its current materialization consumes
 source object `sha1:a8f1f6ff…` and immutable Auto evidence
@@ -177,10 +209,15 @@ current catalog entry, deletion transition, promotion, or binding is
 fabricated. Current 89-root source/mirror parity is complete, while historical
 whole-source/root parity remains false.
 
-The next Phase is
-`AUTO_TELEIOSIS_REGISTRY_EXACT_TUPLE_INTEGRATION`, which may bind only the
-remotely verified Mechanism successor object, resolver-interface bytes, and
-registered snapshot digest. Schedule authority, resolver production trust,
-external Gmail/state readiness, runtime state-instance creation, AU-040
-completion, M0c-B, ACTIVE trust, canonical shard creation, and canonical
-publication remain false.
+Two independent prerequisite lanes remain explicit:
+
+- Registry/control: `AUTO_TELEIOSIS_REGISTRY_EXACT_TUPLE_INTEGRATION` may bind
+  only the remotely verified Mechanism successor object, resolver-interface
+  bytes, and registered snapshot digest.
+- Version policy:
+  `MECHANISM_VERSION_POLICY_V3_CONSUMER_FIRST_READINESS` may only prove
+  consumer compatibility; it may not add v3 to the candidate.
+
+Schedule authority, resolver production trust, external Gmail/state readiness,
+runtime state-instance creation, AU-040 completion, M0c-B, ACTIVE trust,
+canonical shard creation, and canonical publication remain false.

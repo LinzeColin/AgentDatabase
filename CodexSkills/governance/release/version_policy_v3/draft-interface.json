@@ -1,0 +1,94 @@
+{
+  "activation_forbidden": true,
+  "artifact_digest": "6b2772b30521da9ab3c513d7907448744bff90c1c650ae6ad8c35e5da1497d46",
+  "candidate_bundle": {
+    "bundle_digest": "36f0c66dd54d36365700a13f614a8c9bfa9619fb7c532af77566a858175b835e",
+    "policy_count": 5,
+    "schema_count": 31,
+    "unchanged": true,
+    "v3_policy_member": false,
+    "v3_schema_member": false
+  },
+  "canonical_publication_permitted": false,
+  "canonicalization": {
+    "duplicate_keys": "REJECT",
+    "encoding": "UTF-8",
+    "input_profile": "I_JSON",
+    "scheme": "RFC8785_JCS",
+    "self_digest_exclusion": "EXACT_DECLARED_JSON_POINTER_ONLY",
+    "unicode_normalization": "NONE"
+  },
+  "compatibility": {
+    "candidate_materialization_permitted": false,
+    "change_class": "MAJOR",
+    "compatibility_mode": "CONSUMER_FIRST_REPLACEMENT",
+    "consumer_first_verified": false,
+    "daily_srv_separation_explicit": true,
+    "existing_v2_major_trigger_codes_preserved": true,
+    "missing_major_trigger_codes_closed": [
+      "AUTOMATIC_SIDE_EFFECT_CHANGE",
+      "EVALUATOR_OR_HOLDOUT_CHANGE",
+      "HARD_GATE_CHANGE",
+      "MIGRATION_OR_DELETE_SEMANTICS_CHANGE",
+      "NETWORK_OR_PERMISSION_CHANGE",
+      "PRIVACY_POLICY_CHANGE"
+    ],
+    "notification_semantics_preserved": true,
+    "predecessor_policy_accepted": true,
+    "schedule_authority_resolved": false
+  },
+  "control_interface": {
+    "artifact_digest": "8caf7e5dbb922714c3afa39040e55b8a83015ea0f02de153e19cc3010b0e0e1a",
+    "digest_basis": "RAW_BYTES",
+    "relative_path": "CodexSkills/governance/activation/control-interface.json",
+    "unchanged": true
+  },
+  "digest_algorithm": "SHA-256",
+  "draft": {
+    "policy_id": "urn:linzecolin:agentdatabase:skillops:policy:version:v3",
+    "policy_path": "CodexSkills/governance/release/version_policy_v3/version-policy.v3.json",
+    "policy_sha256": "5ea6047446ef26ab39d0e284f37619859d57c8c419daa1cffefffdc12935cfe0",
+    "schema_id": "urn:linzecolin:agentdatabase:skillops:schema:version-policy:v3",
+    "schema_path": "CodexSkills/governance/release/version_policy_v3/schemas/version-policy.schema.json",
+    "schema_sha256": "12515e16149c840855d75a70da17f108996b53fbc7eb49d37a79142755b04edf"
+  },
+  "draft_trust_contract": {
+    "canonical_path": "CodexSkills/governance/release/version_policy_v3/draft-interface.json",
+    "expected_mode": "DRAFT_NON_ACTIVE_VERSION_POLICY",
+    "external_expected_raw_sha256_required": true,
+    "external_verified_git_object_required": true,
+    "repository_self_report_is_not_trust_root": true
+  },
+  "foundation_interface": {
+    "artifact_digest": "681ce19f993878d578b2d636dbede007cdf7acd7e73986e3253571b875f9e74b",
+    "relative_path": "CodexSkills/governance/release/foundation-interface.json"
+  },
+  "interface_schema": {
+    "relative_path": "CodexSkills/governance/release/version_policy_v3/schemas/draft-interface.schema.json",
+    "schema_id": "urn:linzecolin:agentdatabase:skillops:schema:version-policy-draft-interface:v1",
+    "schema_sha256": "427e5641d4e9b99edea0c4e8ca0eb378b980e22ae79262d3c7576876ce0abd53"
+  },
+  "next_phase": "MECHANISM_VERSION_POLICY_V3_CONSUMER_FIRST_READINESS",
+  "notification_policy": {
+    "policy_id": "urn:linzecolin:agentdatabase:skillops:policy:notification:v1",
+    "policy_sha256": "c7a02d5588bd97e2f23bc83b0c08dbdea5c7eb7a9f7bc1cf485f920ce20ab122",
+    "relative_path": "CodexSkills/governance/policies/notification-policy.v1.json"
+  },
+  "predecessor": {
+    "policy_id": "urn:linzecolin:agentdatabase:skillops:policy:version:v2",
+    "policy_path": "CodexSkills/governance/policies/version-policy.v2.json",
+    "policy_sha256": "d4e04d9e63b8005528b5d5d3db3daf645ea0ea60af4da91e217f73fb0196b6a9",
+    "schema_id": "urn:linzecolin:agentdatabase:skillops:schema:version-policy:v2",
+    "schema_path": "CodexSkills/governance/schemas/version-policy.schema.json",
+    "schema_sha256": "1d45422976f7a16a07cd6d91d83d37a26e7ac0dfcd3baeb1ca90b16cc11b87ff"
+  },
+  "promotion_to_candidate_performed": false,
+  "protocol_revision": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1",
+  "release_write_permitted": false,
+  "schedule_authority_resolved": false,
+  "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:version-policy-draft-interface:v1",
+  "self_digest_pointer": "/artifact_digest",
+  "status": "DRAFT_NON_ACTIVE_CONSUMER_FIRST_REQUIRED",
+  "task_pack_revision": "v0.0.0.2",
+  "version_file_created": false
+}

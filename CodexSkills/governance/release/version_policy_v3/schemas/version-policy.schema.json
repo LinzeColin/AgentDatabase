@@ -1,0 +1,322 @@
+{
+  "$id": "urn:linzecolin:agentdatabase:skillops:schema:version-policy:v3",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "daily_schedule_authority_state": {
+            "const": "UNRESOLVED"
+          }
+        },
+        "required": [
+          "daily_schedule_authority_state"
+        ]
+      },
+      "then": {
+        "properties": {
+          "daily_schedule_local": {
+            "type": "null"
+          },
+          "schedule_activation_permitted": {
+            "const": false
+          },
+          "schedule_conflict_code": {
+            "const": "OWNER_AUTHORITY_0415_VS_GOAL_0530_UNRESOLVED"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "daily_schedule_authority_state": {
+            "const": "RESOLVED"
+          }
+        },
+        "required": [
+          "daily_schedule_authority_state"
+        ]
+      },
+      "then": {
+        "properties": {
+          "daily_schedule_local": {
+            "enum": [
+              "04:15",
+              "05:30"
+            ]
+          },
+          "schedule_activation_permitted": {
+            "const": true
+          },
+          "schedule_conflict_code": {
+            "type": "null"
+          }
+        }
+      }
+    }
+  ],
+  "properties": {
+    "actual_recipient_mapping_repo_external": {
+      "const": true
+    },
+    "bootstrap_if_missing": {
+      "const": "v0.0.0.2"
+    },
+    "canonical_counter_path": {
+      "const": "CodexSkills/VERSION"
+    },
+    "daily_run_increments_srv": {
+      "const": false
+    },
+    "daily_schedule_authority_state": {
+      "enum": [
+        "UNRESOLVED",
+        "RESOLVED"
+      ]
+    },
+    "daily_schedule_candidate_local_times": {
+      "const": [
+        "04:15",
+        "05:30"
+      ]
+    },
+    "daily_schedule_local": {
+      "anyOf": [
+        {
+          "pattern": "^(?:[01][0-9]|2[0-3]):[0-5][0-9]$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "daily_transaction_uid_kind": {
+      "const": "AUTO_TRANSACTION_UID"
+    },
+    "daily_transaction_uid_separate": {
+      "const": true
+    },
+    "emergency_containment_precedes_notification": {
+      "const": true
+    },
+    "first_active_requires_exact_bundle_digest": {
+      "const": true
+    },
+    "impact_downgrade_allowed": {
+      "const": false
+    },
+    "impact_levels": {
+      "const": [
+        "PATCH",
+        "MINOR",
+        "MAJOR"
+      ]
+    },
+    "impact_translation": {
+      "additionalProperties": false,
+      "properties": {
+        "MAJOR": {
+          "const": "MAJOR"
+        },
+        "MATERIAL": {
+          "const": "MINOR"
+        },
+        "ROUTINE": {
+          "const": "PATCH"
+        }
+      },
+      "required": [
+        "ROUTINE",
+        "MATERIAL",
+        "MAJOR"
+      ],
+      "type": "object"
+    },
+    "independent_subsystem_counters": {
+      "const": false
+    },
+    "late_start_rejected": {
+      "const": false
+    },
+    "major_notification_required": {
+      "const": true
+    },
+    "major_trigger_codes": {
+      "const": [
+        "ACTIVE_BUNDLE_CHANGE",
+        "AUTOMATIC_SIDE_EFFECT_CHANGE",
+        "CHAMPION_TRANSITION",
+        "EVALUATOR_OR_HOLDOUT_CHANGE",
+        "HARD_GATE_CHANGE",
+        "MIGRATION_OR_DELETE_SEMANTICS_CHANGE",
+        "MODEL_PROVIDER_CHANGE",
+        "NETWORK_OR_PERMISSION_CHANGE",
+        "NOTIFICATION_POLICY_CHANGE",
+        "PRIVACY_POLICY_CHANGE",
+        "RETENTION_POLICY_CHANGE",
+        "SCHEMA_BREAKING_CHANGE",
+        "SOURCE_LAYOUT_CHANGE"
+      ]
+    },
+    "manual_uses_same_orchestrator": {
+      "const": true
+    },
+    "material_trigger_codes": {
+      "const": [
+        "COMPATIBLE_SCHEMA_ADDITION",
+        "DATASET_EXTENSION",
+        "EVALUATOR_EXTENSION"
+      ]
+    },
+    "notification_policy_id": {
+      "const": "urn:linzecolin:agentdatabase:skillops:policy:notification:v1"
+    },
+    "owner_approval_required": {
+      "const": false
+    },
+    "owner_reply_required": {
+      "const": false
+    },
+    "planned_major_provider_sent_before_write": {
+      "const": true
+    },
+    "planned_major_write_without_sent_allowed": {
+      "const": false
+    },
+    "policy_conflict_action": {
+      "const": "STOP_WRITE"
+    },
+    "policy_id": {
+      "const": "urn:linzecolin:agentdatabase:skillops:policy:version:v3"
+    },
+    "policy_repair_requires_srv_increment": {
+      "const": true
+    },
+    "protocol_revision": {
+      "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/protocol_revision"
+    },
+    "routine_trigger_codes": {
+      "const": [
+        "DERIVED_VIEW_REBUILD",
+        "NON_BEHAVIORAL_DOCUMENTATION"
+      ]
+    },
+    "schedule_activation_permitted": {
+      "type": "boolean"
+    },
+    "schedule_conflict_code": {
+      "anyOf": [
+        {
+          "$ref": "urn:linzecolin:agentdatabase:skillops:schema:common-definitions:v1#/$defs/enum_code"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "schema_version": {
+      "const": "urn:linzecolin:agentdatabase:skillops:schema:version-policy:v3"
+    },
+    "scheme_name": {
+      "const": "SKILLOPS_REVISION_VERSION"
+    },
+    "semver_compatible": {
+      "const": false
+    },
+    "sensitive_policy_repair_impact": {
+      "const": "MAJOR"
+    },
+    "srv_last_component_bounded": {
+      "const": false
+    },
+    "srv_pattern": {
+      "const": "^v0\\.0\\.0\\.[1-9][0-9]*$"
+    },
+    "srv_release_scopes": {
+      "const": [
+        "MECHANISM",
+        "SCHEMA",
+        "POLICY",
+        "REGISTRY"
+      ]
+    },
+    "srv_reuse_allowed": {
+      "const": false
+    },
+    "srv_revision_used_as_daily_sequence": {
+      "const": false
+    },
+    "srv_update_mode": {
+      "const": "GLOBAL_ATOMIC_INCREMENT"
+    },
+    "sunday_forced_full": {
+      "const": true
+    },
+    "task_pack_revision": {
+      "const": "v0.0.0.2"
+    },
+    "timezone": {
+      "const": "Australia/Sydney"
+    },
+    "transaction_semantics": {
+      "const": "ONE_SRV_PER_ACCEPTED_CANONICAL_TRANSACTION"
+    },
+    "unknown_trigger_action": {
+      "const": "FAIL_CLOSED"
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_revision",
+    "policy_id",
+    "task_pack_revision",
+    "scheme_name",
+    "semver_compatible",
+    "srv_pattern",
+    "canonical_counter_path",
+    "bootstrap_if_missing",
+    "srv_release_scopes",
+    "srv_update_mode",
+    "srv_reuse_allowed",
+    "srv_last_component_bounded",
+    "independent_subsystem_counters",
+    "transaction_semantics",
+    "daily_run_increments_srv",
+    "srv_revision_used_as_daily_sequence",
+    "daily_transaction_uid_separate",
+    "daily_transaction_uid_kind",
+    "impact_levels",
+    "impact_translation",
+    "routine_trigger_codes",
+    "material_trigger_codes",
+    "major_trigger_codes",
+    "unknown_trigger_action",
+    "impact_downgrade_allowed",
+    "policy_conflict_action",
+    "policy_repair_requires_srv_increment",
+    "sensitive_policy_repair_impact",
+    "notification_policy_id",
+    "major_notification_required",
+    "planned_major_provider_sent_before_write",
+    "planned_major_write_without_sent_allowed",
+    "owner_approval_required",
+    "owner_reply_required",
+    "emergency_containment_precedes_notification",
+    "actual_recipient_mapping_repo_external",
+    "timezone",
+    "daily_schedule_authority_state",
+    "daily_schedule_local",
+    "daily_schedule_candidate_local_times",
+    "schedule_conflict_code",
+    "schedule_activation_permitted",
+    "sunday_forced_full",
+    "late_start_rejected",
+    "manual_uses_same_orchestrator",
+    "first_active_requires_exact_bundle_digest"
+  ],
+  "title": "SkillOps version and impact policy v3",
+  "type": "object"
+}

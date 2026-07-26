@@ -1,0 +1,86 @@
+{
+  "actual_recipient_mapping_repo_external": true,
+  "bootstrap_if_missing": "v0.0.0.2",
+  "canonical_counter_path": "CodexSkills/VERSION",
+  "daily_run_increments_srv": false,
+  "daily_schedule_authority_state": "UNRESOLVED",
+  "daily_schedule_candidate_local_times": [
+    "04:15",
+    "05:30"
+  ],
+  "daily_schedule_local": null,
+  "daily_transaction_uid_kind": "AUTO_TRANSACTION_UID",
+  "daily_transaction_uid_separate": true,
+  "emergency_containment_precedes_notification": true,
+  "first_active_requires_exact_bundle_digest": true,
+  "impact_downgrade_allowed": false,
+  "impact_levels": [
+    "PATCH",
+    "MINOR",
+    "MAJOR"
+  ],
+  "impact_translation": {
+    "MAJOR": "MAJOR",
+    "MATERIAL": "MINOR",
+    "ROUTINE": "PATCH"
+  },
+  "independent_subsystem_counters": false,
+  "late_start_rejected": false,
+  "major_notification_required": true,
+  "major_trigger_codes": [
+    "ACTIVE_BUNDLE_CHANGE",
+    "AUTOMATIC_SIDE_EFFECT_CHANGE",
+    "CHAMPION_TRANSITION",
+    "EVALUATOR_OR_HOLDOUT_CHANGE",
+    "HARD_GATE_CHANGE",
+    "MIGRATION_OR_DELETE_SEMANTICS_CHANGE",
+    "MODEL_PROVIDER_CHANGE",
+    "NETWORK_OR_PERMISSION_CHANGE",
+    "NOTIFICATION_POLICY_CHANGE",
+    "PRIVACY_POLICY_CHANGE",
+    "RETENTION_POLICY_CHANGE",
+    "SCHEMA_BREAKING_CHANGE",
+    "SOURCE_LAYOUT_CHANGE"
+  ],
+  "manual_uses_same_orchestrator": true,
+  "material_trigger_codes": [
+    "COMPATIBLE_SCHEMA_ADDITION",
+    "DATASET_EXTENSION",
+    "EVALUATOR_EXTENSION"
+  ],
+  "notification_policy_id": "urn:linzecolin:agentdatabase:skillops:policy:notification:v1",
+  "owner_approval_required": false,
+  "owner_reply_required": false,
+  "planned_major_provider_sent_before_write": true,
+  "planned_major_write_without_sent_allowed": false,
+  "policy_conflict_action": "STOP_WRITE",
+  "policy_id": "urn:linzecolin:agentdatabase:skillops:policy:version:v3",
+  "policy_repair_requires_srv_increment": true,
+  "protocol_revision": "urn:linzecolin:agentdatabase:skillops:protocol:cross-pack:v1",
+  "routine_trigger_codes": [
+    "DERIVED_VIEW_REBUILD",
+    "NON_BEHAVIORAL_DOCUMENTATION"
+  ],
+  "schedule_activation_permitted": false,
+  "schedule_conflict_code": "OWNER_AUTHORITY_0415_VS_GOAL_0530_UNRESOLVED",
+  "schema_version": "urn:linzecolin:agentdatabase:skillops:schema:version-policy:v3",
+  "scheme_name": "SKILLOPS_REVISION_VERSION",
+  "semver_compatible": false,
+  "sensitive_policy_repair_impact": "MAJOR",
+  "srv_last_component_bounded": false,
+  "srv_pattern": "^v0\\.0\\.0\\.[1-9][0-9]*$",
+  "srv_release_scopes": [
+    "MECHANISM",
+    "SCHEMA",
+    "POLICY",
+    "REGISTRY"
+  ],
+  "srv_reuse_allowed": false,
+  "srv_revision_used_as_daily_sequence": false,
+  "srv_update_mode": "GLOBAL_ATOMIC_INCREMENT",
+  "sunday_forced_full": true,
+  "task_pack_revision": "v0.0.0.2",
+  "timezone": "Australia/Sydney",
+  "transaction_semantics": "ONE_SRV_PER_ACCEPTED_CANONICAL_TRANSACTION",
+  "unknown_trigger_action": "FAIL_CLOSED"
+}
