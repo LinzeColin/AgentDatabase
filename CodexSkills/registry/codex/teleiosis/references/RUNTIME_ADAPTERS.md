@@ -22,13 +22,9 @@ A formal 2×6 review requires an **external, frozen adapter contract** supplied 
   "adapter_path": "/trusted/runtime/review-attestor",
   "adapter_sha256": "<sha256>",
   "receipt_root": "/trusted/runtime/receipts/run-id",
-  "capabilities": ["independent-subagents", "read-only-verifier", "provider-identifiable-runs"],
+  "capabilities": ["independent-subagents", "read-only-verifier"],
   "provider": "<provider>",
-  "adapter_version": "<version>",
-  "deployment_identity": "<independent-deployment>",
-  "candidate_can_write_receipts": false,
-  "shell_execution": false,
-  "formal_attestation": true
+  "runtime": "<runtime>"
 }
 ```
 

@@ -32,7 +32,6 @@ def generate_release_receipt(
     gate_result: Optional[Dict[str, Any]] = None,
     install_result: Optional[Dict[str, Any]] = None,
     expected_genesis_hash: str = "",
-    expected_effective_genesis_hash: str = "",
 ) -> Dict[str, Any]:
     skill_root, archive, output = skill_root.resolve(), archive.resolve(), output.resolve()
     profile = detect_profile(skill_root, "auto")
@@ -51,17 +50,13 @@ def generate_release_receipt(
                 archive_validation = validate_skill(
                     top[0], strict=True,
                     expected_genesis_hash=expected_genesis_hash if profile == "optimizer" else "",
-                    expected_effective_genesis_hash=expected_effective_genesis_hash if profile == "optimizer" else "",
                     profile=profile,
                 )
             except Exception as exc:
                 errors.append(str(exc))
     with tempfile.TemporaryDirectory(prefix="wbi-repro-") as td:
         rebuilt = Path(td) / archive.name
-        reproduction = package_skill(
-            skill_root, rebuilt, expected_genesis_hash, profile=profile, verification_level="structural",
-            expected_effective_genesis_hash=expected_effective_genesis_hash,
-        )
+        reproduction = package_skill(skill_root, rebuilt, expected_genesis_hash, profile=profile, verification_level="structural")
         deterministic = reproduction.get("status") == "PASS" and archive.is_file() and sha256_file(rebuilt) == sha256_file(archive)
 
     if profile == "optimizer":
@@ -75,15 +70,9 @@ def generate_release_receipt(
             "version": release.get("version"), "release_revision": release.get("release_revision"),
             "valid_as_of": release.get("valid_as_of"),
         }
-        effective = load_json(skill_root / "constitution/effective-genesis-lock.v0.0.0.2.json")
         genesis_value: Optional[Dict[str, Any]] = {
             "baseline_id": genesis["baseline_id"], "locked_sha256": genesis["locked_genesis"]["sha256"],
-            "source_candidate_sha256": genesis["source_candidate"]["sha256"],
-            "effective_baseline_id": effective.get("effective_baseline_id"),
-            "effective_composite_sha256": effective.get("effective_composite_sha256"),
-            "external_base_anchor_verified": expected_genesis_hash == genesis["locked_genesis"]["sha256"],
-            "external_effective_anchor_verified": expected_effective_genesis_hash == effective.get("effective_composite_sha256"),
-            "external_anchor_required": True,
+            "source_candidate_sha256": genesis["source_candidate"]["sha256"], "external_anchor_required": True,
         }
     else:
         identity = {"slug": skill_root.name, "version": (skill_root / "VERSION").read_text(encoding="utf-8").strip() if (skill_root / "VERSION").is_file() else "UNVERSIONED"}

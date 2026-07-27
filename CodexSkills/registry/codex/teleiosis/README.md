@@ -1,106 +1,69 @@
-# 白箱迭代Skill（Teleiosis）v0.0.0.2
+# 白箱迭代Skill v0.0.0.1
 
-Teleiosis 是面向高风险 Agent Skill 演化的 **Skill Assurance & Evolution Control Plane**。它把“是否值得存在、向谁学习、改了什么、是否真的更好、成本多少、在当前环境是否仍有效、谁负责、如何恢复”转成可执行、可审计、可回滚的合同。
+**English brand:** Teleiosis  
+**Functional name:** White-Box Iteration Skill
 
-## 本版解决的根因
+白箱迭代Skill用于完善其他 Skill，也以同等或更严格的证据标准完善自身。它把 Darwin 的实验棘轮、Luban 的五道产品成熟化门、真实同行研究、冻结评测、开放候选搜索、双白箱、独立终审、确定性打包、原子安装和回滚整合为一个短内核控制面。
 
-过去每轮总能发现新漏洞，并非单纯“测试不够多”，而是优化范围只覆盖上一轮已知问题，缺少持续发现未知问题的统一闭环。本版把下列缺口变成机制：
+永久 Genesis 只约束真实性、安全、双白箱、责任、回滚和有限运行；版本、架构、模型、供应商、候选策略、预算、评分、发布 profile 和实现均可演化。详细规则按需位于 `references/`、`schemas/`、`scripts/` 和 `templates/`，不把整份 Genesis 重复塞进每次模型上下文。
 
-| 旧缺口 | v0.0.0.2 机制 |
-|---|---|
-| 新线程总能提出新的前沿项目 | 日期化 frontier scan、真实同行 Dataset、事件驱动 reheat、策略记忆 |
-| 任务成功但关键约束从未被测到 | `coverage-evaluate` 行为覆盖与硬约束覆盖 |
-| Skill 单独好用，装入大库后被误选/遮蔽 | `shadowing-evaluate` 检索、误触发、混淆和 outcome drop |
-| 少量随机胜利被当成确定改善 | `stochastic-compare` 预声明 trial/区间规则与 `INCONCLUSIVE` |
-| “当前最强”一生成就过时 | 双环境快照、`evidence_lease`、`environment_strength_attestation` |
-| 新 Amendment 可被协调重写 | 基础 Genesis + effective Genesis + archive 三重外部哈希锚点 |
-| 两条增强分支互相丢能力 | 机制级择优合并，保留 adaptive、market-frontier、utility、verifier/persona 与控制台能力 |
+## 快速验证
 
-## 状态必须分域
-
-```text
-CONTROL_PLANE: PASS（以最终封版证据为准）
-BENCHMARK_INTEGRITY: fixture VALID；真实同场 benchmark 仍需外部 runtime
-OUTCOME: NOT_PROVEN
-COST_EVIDENCE: PARTIAL/UNKNOWN（provider usage 不可得时不得写 0）
-INDEPENDENT_REVIEW: UNAVAILABLE（当前环境无真实外部 2×6+1）
-ENGINEERING_RELEASE: INSTALLABLE（以最终安装/升级/回滚证据为准）
-FORMAL_PROMOTION: BLOCKED
-CURRENT_ENVIRONMENT_STRENGTH: NOT_PROVEN，直到全部证据域通过
-```
-
-## 基线与 Amendment
-
-基础 Genesis `WBI-GB-001—027` 原文件逐字节不变：
-
-```text
-14ab08b9053db4ca87140e59a49f1de8105a718a87ec2d55590c6487c1a77086
-```
-
-用户明确授权的 append-only Amendment 新增 `WBI-GB-028`，有效 Genesis 外部锚点为：
-
-```text
-fe80c467f8ecbe8343ef0c09ef5e6f9fd9683803c8260c9188998c7e3dfca0a2
-```
-
-它不承诺永久世界第一，而是要求每个最终输出携带有效期、当前环境比较边界、证据、未知项与自动 reheat 语义。
-
-## 快速验证与安装
-
-唯一 canonical 安装包：
-
-```text
-White-Box-Iteration-Skill-Teleiosis-v0.0.0.2-final.zip
-```
+日常激活只执行快速完整性检查：
 
 ```bash
-BASE_GENESIS="14ab08b9053db4ca87140e59a49f1de8105a718a87ec2d55590c6487c1a77086"
-EFFECTIVE_GENESIS="fe80c467f8ecbe8343ef0c09ef5e6f9fd9683803c8260c9188998c7e3dfca0a2"
-ARCHIVE="/absolute/path/White-Box-Iteration-Skill-Teleiosis-v0.0.0.2-final.zip"
-ARCHIVE_SHA256="<从外部 SHA256SUMS 获取>"
-
 python3 scripts/wbi.py verify-self --strict \
-  --expected-genesis-hash "$BASE_GENESIS" \
-  --expected-effective-genesis-hash "$EFFECTIVE_GENESIS"
-
-python3 scripts/wbi.py self-test --timeout 900
-
-python3 scripts/wbi.py install "$ARCHIVE" \
-  --skills-root /absolute/path/to/CodexSkills/registry/codex \
-  --profile optimizer --verification-level release \
-  --expected-genesis-hash "$BASE_GENESIS" \
-  --expected-effective-genesis-hash "$EFFECTIVE_GENESIS" \
-  --expected-archive-sha256 "$ARCHIVE_SHA256" \
-  --result-file /absolute/external/install-result.json
+  --expected-genesis-hash 14ab08b9053db4ca87140e59a49f1de8105a718a87ec2d55590c6487c1a77086
 ```
 
-Formal mode additionally requires an external, pre-frozen review contract:
+源码、Gate、Schema、脚本、测试或依赖改变后，以及正式封包前，再运行一次完整回归：
 
 ```bash
-python3 scripts/wbi.py optimize /absolute/path/to/target-skill \
-  --workspace /absolute/external/formal-run \
-  --run-mode formal --valid-as-of 2026-07-26 \
-  --review-attestation-contract /absolute/external/review-contract.json
+python3 scripts/wbi.py self-test --timeout 600
 ```
 
-## 关键入口
+## 正式安装
 
 ```bash
-python3 scripts/wbi.py doctor /absolute/path/to/target --output /absolute/external/diagnostic.json
-python3 scripts/wbi.py adaptive-plan --diagnostic /absolute/external/diagnostic.json --output /absolute/external/plan.json
-python3 scripts/wbi.py competitors /absolute/path/to/target --workspace /absolute/external/peers --seed alchaincyf/darwin-skill --seed LearnPrompt/luban-skill
-python3 scripts/wbi.py coverage-evaluate --constraints templates/behavior-constraints.json --trajectories templates/behavior-trajectories.jsonl
-python3 scripts/wbi.py shadowing-evaluate --records templates/shadowing-records.jsonl
-python3 scripts/wbi.py stochastic-compare --results templates/stochastic-results.jsonl --baseline-id baseline --candidate-id candidate
-python3 scripts/wbi.py environment-snapshot --help
-python3 scripts/wbi.py environment-attest --help
+SKILLS_ROOT="/absolute/runtime-specific/skills-root"
+ARCHIVE_SHA256="<copy from SHA256SUMS.txt>"
+python3 scripts/wbi.py install \
+  /absolute/path/White-Box-Iteration-Skill-Teleiosis-v0.0.0.1-final.zip \
+  --skills-root "$SKILLS_ROOT" \
+  --profile optimizer \
+  --verification-level release \
+  --result-file /absolute/external/path/install-result.json \
+  --expected-genesis-hash 14ab08b9053db4ca87140e59a49f1de8105a718a87ec2d55590c6487c1a77086 \
+  --expected-archive-sha256 "$ARCHIVE_SHA256"
+python3 scripts/wbi.py install-status \
+  --skills-root "$SKILLS_ROOT" --verify-installed --profile optimizer \
+  --expected-genesis-hash 14ab08b9053db4ca87140e59a49f1de8105a718a87ec2d55590c6487c1a77086
 ```
 
-## 关键资料
+升级加 `--replace`，安装器会保留旧版并返回 rollback pointer。release/deep 安装先核对外部 SHA-256 信任锚，再把输入 ZIP 冻结到私有快照并核对源文件稳定性；内部锁和事务目录拒绝链接。`release` 使用严格结构、Genesis 校验和非递归 smoke；完整回归已在正式封包时运行。只有需要在切换前再次运行整套回归时才显式使用 `deep`。调用中断时通过 `install-status` 查看持久事务，证据不完整再运行 `recover-install`，不要猜测成功。完整说明见 `delivery/INSTALL.md`。
 
-- `delivery/BASELINE_CHANGE_DECISION.md`
-- `delivery/MARKET_LEADERSHIP_ANALYSIS.md`
-- `delivery/COMPETITIVE_COMPARISON.md`
-- `delivery/SELF_ITERATION_REPORT.md`
-- `delivery/VERIFICATION_REPORT.md`
-- `delivery/CODEX_TASK_PACK_v0.0.0.2.md`
+## 首次调用
+
+```text
+调用白箱迭代Skill，对 <目标Skill路径> 运行完整白箱完善：冻结只读 Baseline，只改外部 Candidate；先挑战是否值得存在，完成时效研究、至少五个真实同行、生态位、真实产物和冻结评测；执行十个系统视角、真实结果比较、独立复审、确定性打包与可回滚安装。不可用能力必须 BLOCKED，不得伪造 PASS。
+```
+
+## 关键命令
+
+```bash
+python3 scripts/wbi.py --help
+python3 scripts/wbi.py init-run --help
+python3 scripts/wbi.py competitors --help
+python3 scripts/wbi.py freshness-scan --help
+python3 scripts/wbi.py seal-eval --help
+python3 scripts/wbi.py review-plan --help
+python3 scripts/wbi.py gate --help
+python3 scripts/wbi.py package --help
+python3 scripts/wbi.py install --help
+python3 scripts/wbi.py install-status --help
+python3 scripts/wbi.py recover-install --help
+```
+
+正式 2×6 复审必须在 `init-run` 时通过 `--review-attestation-contract` 冻结外部可信 runtime adapter。安装目录内的自写 JSON、角色模拟或重复上下文不能证明独立性。
+
+所有运行事实写在安装目录外的 workspace；sealed holdout、私密运行数据、凭证和第三方动态执行环境不进入安装包。正式运行显式传入用户任务时区对应的 `--valid-as-of YYYY-MM-DD`。

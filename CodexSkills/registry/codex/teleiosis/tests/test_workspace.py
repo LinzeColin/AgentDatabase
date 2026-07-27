@@ -14,7 +14,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 from wbi_core.io import load_json, sha256_tree, verify_file_bindings, write_json
 from wbi_core.ledger import append_event, verify_event_chain
-from wbi_core.workspace import init_run, loop_status, record_change, record_round, transition, update_counters, verify_control_plane, verify_run_seal
+from wbi_core.workspace import init_run, loop_status, record_change, record_round, update_counters, verify_control_plane, verify_run_seal
 
 
 class WorkspaceTests(unittest.TestCase):
@@ -143,19 +143,6 @@ class WorkspaceTests(unittest.TestCase):
             self.assertEqual(result["status"], "STOP")
             self.assertIn("BUDGET_EXHAUSTED:network_requests", result["reasons"])
             self.assertTrue(result["reheat_allowed"])
-
-    def test_terminal_state_forces_loop_stop(self):
-        with tempfile.TemporaryDirectory() as temp:
-            base = Path(temp)
-            self.init(base, ["incremental"])
-            workspace = base / "run"
-            transition(workspace, "RESEARCHING", "research frozen", "tester")
-            transition(workspace, "ITERATING", "iteration complete", "tester")
-            transition(workspace, "SATURATED", "no further local engineering gain", "tester")
-            result = loop_status(workspace)
-            self.assertEqual(result["status"], "STOP")
-            self.assertIn("TERMINAL_STATE:SATURATED", result["reasons"])
-            self.assertEqual(result["state"], "SATURATED")
 
     def test_change_counter_is_explicit_for_pre_edit_gates(self):
         with tempfile.TemporaryDirectory() as temp:

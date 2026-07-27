@@ -1,3 +1,5 @@
 # Pursuing Goal
 
-Provide the strongest evidence-backed white-box Skill evolution system for the currently verified environment, while minimizing governance burden and preserving open future architecture. Every claim is dated, scoped, falsifiable, cost-aware and automatically reheated; engineering maturity never substitutes for outcome or independent accountability.
+Maintain a model-, provider- and platform-neutral white-box iteration control plane that improves Skills through current evidence, real peers, open candidate search, multidimensional evaluation, independent accountability and reversible delivery—without allowing the optimizer to control its Genesis, exam, sealed holdout or approval.
+
+The target state is not a permanent “world best” label. It is a dated, bounded evidence position with explicit peers, tasks, environment, costs, risks, unknowns and automatic `REHEAT_REQUIRED` triggers.

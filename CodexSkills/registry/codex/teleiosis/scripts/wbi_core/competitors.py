@@ -17,7 +17,6 @@ from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple
 
 from .io import canonical_json, load_json, read_frontmatter, sha256_bytes, sha256_file, utc_now, write_json
 from .process import run_bounded, run_bounded_to_file
-from .peer_taxonomy import classify_comparison_scope, market_peer_eligible, normalized_scope
 
 SLUG_RE = re.compile(r"^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$")
 COMMIT_RE = re.compile(r"^[a-f0-9]{40}$")
@@ -139,7 +138,7 @@ def github_search(query: str, token: str = "", per_page: int = 20, timeout: int 
     if isinstance(max_response_bytes, bool) or not isinstance(max_response_bytes, int) or not 1024 <= max_response_bytes <= 20 * 1024 * 1024:
         raise ValueError("max_response_bytes must be between 1 KiB and 20 MiB")
     url = "https://api.github.com/search/repositories?q=%s&sort=updated&order=desc&per_page=%d" % (urllib.parse.quote(query), per_page)
-    headers = {"Accept": "application/vnd.github+json", "User-Agent": "teleiosis-white-box-iteration-skill/0.0.0.3"}
+    headers = {"Accept": "application/vnd.github+json", "User-Agent": "teleiosis-white-box-iteration-skill/0.0.0.1"}
     if token:
         headers["Authorization"] = "Bearer %s" % token
     request = urllib.request.Request(url, headers=headers)
@@ -406,9 +405,6 @@ def qualify_peer(row: Dict[str, Any]) -> Tuple[bool, List[str]]:
     category = row.get("category")
     if category not in {"direct", "indirect", "craft"}:
         reasons.append("invalid category")
-    scope = normalized_scope(row)
-    if not market_peer_eligible(row):
-        reasons.append("comparison scope %s cannot satisfy the market-peer gate" % scope)
     mode = row.get("evidence_mode")
     if mode not in QUALIFYING_EVIDENCE:
         reasons.append("evidence mode is discovery-only")
@@ -458,7 +454,6 @@ def select_peers(rows: List[Dict[str, Any]], minimum: int = 5, min_remote_github
             selected.append(row)
             used.add(identity)
     counts = {category: sum(1 for row in selected if row.get("category") == category) for category in ("direct", "indirect", "craft")}
-    scope_counts = {scope: sum(1 for row in selected if normalized_scope(row) == scope) for scope in ("direct-competitor", "adjacent-competitor", "method-reference")}
     github_count = sum(1 for row in selected if row.get("evidence_mode") == "github-pulled-static")
     errors: List[str] = []
     if len(selected) < minimum:
@@ -470,7 +465,7 @@ def select_peers(rows: List[Dict[str, Any]], minimum: int = 5, min_remote_github
     return {
         "status": "PASS" if not errors else "BLOCKED",
         "selected_peer_ids": [str(row.get("peer_id") or row.get("slug") or row.get("source_url")) for row in selected],
-        "counts": counts, "scope_counts": scope_counts, "github_pulled_count": github_count,
+        "counts": counts, "github_pulled_count": github_count,
         "eligible_count": len(eligible), "excluded": excluded, "errors": errors,
     }
 
@@ -537,13 +532,10 @@ def build_competitor_dataset(
         if pull.get("status") == "PASS":
             inspection = inspect_repository(destination, source_slug=slug, resolved_commit=str(pull["resolved_commit"]))
             category, score, evidence = classify_peer(target_terms, metadata, inspection)
-            scope, scope_confidence, scope_evidence = classify_comparison_scope(metadata, inspection)
             row = {
-                "schema_version": "2.1", "peer_id": "github:%s@%s" % (slug, pull["resolved_commit"]),
+                "schema_version": "2.0", "peer_id": "github:%s@%s" % (slug, pull["resolved_commit"]),
                 "peer_kind": "open-source-repository", "slug": slug, "source_url": "https://github.com/%s" % slug,
-                "category": category, "comparison_scope": scope, "scope_confidence": scope_confidence,
-                "scope_evidence": scope_evidence, "market_peer_eligible": scope in {"direct-competitor", "adjacent-competitor", "method-reference"},
-                "relevance_score": score, "classification_evidence": evidence,
+                "category": category, "relevance_score": score, "classification_evidence": evidence,
                 "evidence_mode": "github-pulled-static", "resolved_commit": pull["resolved_commit"],
                 "captured_at": pull["captured_at"], "license_status": _license_status(inspection),
                 "inspection": inspection, "artifact_inventory": inspection["inventory"].get("artifact_files", []),
@@ -551,13 +543,10 @@ def build_competitor_dataset(
             }
         else:
             category, score, evidence = classify_peer(target_terms, metadata, None)
-            scope, scope_confidence, scope_evidence = classify_comparison_scope(metadata, None)
             row = {
-                "schema_version": "2.1", "peer_id": "github:%s@unresolved" % slug,
+                "schema_version": "2.0", "peer_id": "github:%s@unresolved" % slug,
                 "peer_kind": "open-source-repository", "slug": slug, "source_url": "https://github.com/%s" % slug,
-                "category": category, "comparison_scope": scope, "scope_confidence": scope_confidence,
-                "scope_evidence": scope_evidence, "market_peer_eligible": scope in {"direct-competitor", "adjacent-competitor", "method-reference"},
-                "relevance_score": score, "classification_evidence": evidence,
+                "category": category, "relevance_score": score, "classification_evidence": evidence,
                 "evidence_mode": "web-metadata", "resolved_commit": None, "captured_at": pull.get("captured_at", utc_now()),
                 "license_status": "unknown-not-pulled", "inspection": None, "artifact_inventory": [],
                 "third_party_code_executed": False, "pull_status": pull.get("status"), "pull_error": pull.get("error"),
@@ -569,19 +558,15 @@ def build_competitor_dataset(
         commit = completed.stdout.strip() if completed.returncode == 0 else ""
         inspection = inspect_repository(path, source_slug=slug, resolved_commit=commit)
         rows.append({
-            "schema_version": "2.1", "peer_id": "fixture:%s@%s" % (slug, commit or "unresolved"),
+            "schema_version": "2.0", "peer_id": "fixture:%s@%s" % (slug, commit or "unresolved"),
             "peer_kind": "local-test-fixture", "slug": slug, "source_url": "file://%s" % path.resolve(),
-            "category": category, "comparison_scope": {"direct": "direct-competitor", "craft": "adjacent-competitor", "indirect": "method-reference"}.get(category, "out-of-scope"),
-            "market_peer_eligible": False, "relevance_score": 0.5, "classification_evidence": ["caller supplied local repository"],
+            "category": category, "relevance_score": 0.5, "classification_evidence": ["caller supplied local repository"],
             "evidence_mode": "local-git-fixture", "resolved_commit": commit or None, "captured_at": utc_now(),
             "license_status": _license_status(inspection), "inspection": inspection,
             "artifact_inventory": inspection["inventory"].get("artifact_files", []), "third_party_code_executed": False,
             "production_eligible": False,
         })
     rows.extend(dict(item) for item in (supplementary_records or []))
-    for row in rows:
-        row.setdefault("comparison_scope", normalized_scope(row))
-        row["market_peer_eligible"] = market_peer_eligible(row) and row.get("production_eligible") is not False
     rows.sort(key=lambda item: str(item.get("peer_id") or item.get("source_url")))
     dataset = workspace / "competitor-dataset.jsonl"
     with dataset.open("w", encoding="utf-8", newline="\n") as handle:
@@ -590,25 +575,23 @@ def build_competitor_dataset(
     selection = select_peers(rows, minimum=5, min_remote_github=min_remote_github)
     write_json(workspace / "peer-selection.json", selection)
     manifest = {
-        "schema_version": "2.1", "generated_at": utc_now(), "target": str(target),
+        "schema_version": "2.0", "generated_at": utc_now(), "target": str(target),
         "queries": queries, "dataset_file": dataset.name, "dataset_sha256": sha256_file(dataset),
         "row_count": len(rows), "selection_status": selection["status"], "selection_file": "peer-selection.json",
         "source_events": source_events,
         "policy": {
             "minimum_peers": 5, "category_minimums": {"direct": 2, "indirect": 1, "craft": 1},
-            "market_eligible_scopes": ["direct-competitor", "adjacent-competitor", "method-reference"],
-            "engineering_analogies_do_not_count_as_market_peers": True,
             "minimum_remote_github_pulls": min_remote_github, "third_party_default": "static-no-exec",
             "local_fixtures_never_count_for_production": True,
         },
     }
     manifest["manifest_sha256"] = sha256_bytes(canonical_json(manifest))
     write_json(workspace / "dataset-manifest.json", manifest)
-    matrix_lines = ["# Competitor Matrix", "", "| Peer | Category | Comparison scope | Evidence | Commit | License | Artifacts | Qualifies |", "|---|---|---|---|---|---|---:|---:|"]
+    matrix_lines = ["# Competitor Matrix", "", "| Peer | Category | Evidence | Commit | License | Artifacts | Qualifies |", "|---|---|---|---|---|---:|---:|"]
     for row in rows:
         passed, _ = qualify_peer(row)
-        matrix_lines.append("| %s | %s | %s | %s | %s | %s | %d | %s |" % (
-            row.get("slug") or row.get("peer_id"), row.get("category"), normalized_scope(row), row.get("evidence_mode"),
+        matrix_lines.append("| %s | %s | %s | %s | %s | %d | %s |" % (
+            row.get("slug") or row.get("peer_id"), row.get("category"), row.get("evidence_mode"),
             str(row.get("resolved_commit") or "-")[:12], row.get("license_status"), len(row.get("artifact_inventory", [])),
             "yes" if passed else "no",
         ))

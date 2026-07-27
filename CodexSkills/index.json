@@ -6,8 +6,8 @@
     "claude": "Claude Skill（Anthropic 侧）",
     "agents": "Agent Skill（跨工具通用目录）"
   },
-  "skill_instance_count": 90,
-  "unique_slug_count": 75,
+  "skill_instance_count": 98,
+  "unique_slug_count": 83,
   "skills": [
     {
       "slug": "agent-reach",
@@ -40,6 +40,16 @@
       "size_bytes": 63800
     },
     {
+      "slug": "banner-design",
+      "source": "codex",
+      "name": "banner-design",
+      "description": "Design banners for social media, ads, website heroes, creative assets, and print. Multiple art direction options with AI-generated visuals. Actions: design, create, generate banner. Platforms: Facebook, Twitter/X, LinkedIn, YouTube, Instagram, Google Display, website hero, print. Styles: minimalist, gradient, bold typography, photo-based, illustrated, geometric, retro, glassmorphism, 3D, neon, duotone, editorial, collage. Uses ui-ux-pro-max, frontend-design, ai-artist, ai-multimodal skills.",
+      "category": "其他",
+      "entry": "registry/codex/banner-design/SKILL.md",
+      "file_count": 2,
+      "size_bytes": 13319
+    },
+    {
       "slug": "beautiful-html-templates",
       "source": "codex",
       "name": "beautiful-html-templates",
@@ -58,6 +68,16 @@
       "entry": "registry/codex/book-to-skill/SKILL.md",
       "file_count": 44,
       "size_bytes": 433818
+    },
+    {
+      "slug": "brand",
+      "source": "codex",
+      "name": "brand",
+      "description": "Brand voice, visual identity, messaging frameworks, asset management, brand consistency. Activate for branded content, tone of voice, marketing assets, brand compliance, style guides.",
+      "category": "其他",
+      "entry": "registry/codex/brand/SKILL.md",
+      "file_count": 18,
+      "size_bytes": 88892
     },
     {
       "slug": "canvas-design",
@@ -90,14 +110,24 @@
       "size_bytes": 6543
     },
     {
-      "slug": "context-kernel",
+      "slug": "design",
       "source": "codex",
-      "name": "context-kernel",
-      "description": "Use this skill when a long-running task or project needs durable, minimal context across chats, sessions, models, devices, or execution owners: resume from saved state, checkpoint material progress, create a handoff snapshot, transfer responsibility, or trim stale context. Do not use it for one-off questions, ordinary summaries, hidden reasoning, or as a chat transcript.",
+      "name": "design",
+      "description": "Comprehensive design skill: brand identity, design tokens, UI styling, logo generation (55 styles, Gemini AI), corporate identity program (50 deliverables, CIP mockups), HTML presentations (Chart.js), banner design (22 styles, social/ads/web/print), icon design (15 styles, SVG, Gemini 3.1 Pro), social photos (HTML→screenshot, multi-platform). Actions: design logo, create CIP, generate mockups, build slides, design banner, generate icon, create social photos, social media images, brand identity, design system. Platforms: Facebook, Twitter, LinkedIn, YouTube, Instagram, Pinterest, TikTok, Threads, Google Ads.",
       "category": "其他",
-      "entry": "registry/codex/context-kernel/SKILL.md",
-      "file_count": 3,
-      "size_bytes": 159241
+      "entry": "registry/codex/design/SKILL.md",
+      "file_count": 35,
+      "size_bytes": 241945
+    },
+    {
+      "slug": "design-system",
+      "source": "codex",
+      "name": "design-system",
+      "description": "Token architecture, component specifications, and slide generation. Three-layer tokens (primitive→semantic→component), CSS variables, spacing/typography scales, component specs, strategic slide creation. Use for design tokens, systematic design, brand-compliant presentations.",
+      "category": "其他",
+      "entry": "registry/codex/design-system/SKILL.md",
+      "file_count": 27,
+      "size_bytes": 179018
     },
     {
       "slug": "domain-dual-plane",
@@ -323,11 +353,11 @@
       "slug": "info-fee-update",
       "source": "codex",
       "name": "info-fee-update",
-      "description": "Fill and update Chinese 信息费申请表 and 2023-2025年信息费明细表 workbooks from contractor/payment notes, using Chrome 红圈 主合同 search to look up contract number and contract amount from 甲方/project keywords. Use when the user asks Codex to 信息费更新, 填信息费Excel, 开委外单/信息费单, 根据甲方去红圈查合同号/合同金额, or continue this recorded WPS/红圈 workflow.",
+      "description": "Fill and update the official current-month Chinese 信息费申请表 and 2023-2025年信息费明细表 workbooks from contractor/payment notes, using Chrome 红圈 主合同 search to look up contract number and contract amount from 甲方/project keywords. Use when the user asks Codex to 信息费更新, 填信息费Excel, 开委外单/信息费单, 根据甲方去红圈查合同号/合同金额, or continue this recorded WPS/红圈 workflow.",
       "category": "业务流程",
       "entry": "registry/codex/info-fee-update/SKILL.md",
       "file_count": 2,
-      "size_bytes": 10403
+      "size_bytes": 15926
     },
     {
       "slug": "internal-comms",
@@ -476,8 +506,8 @@
       "description": "Route a real task to a 5–20 member expert team drawn from uniquely registered Persona Distiller products. Use when a task benefits from several complementary person-model specialists plus isolated review, adjudication, and counterevidence roles; also use to inspect, verify, rebuild, or govern the canonical persona delivery registry. Infer identity and scenario internally, select only evidence-supported experts, and never ask the caller to choose an identity.",
       "category": "工程与交付",
       "entry": "registry/codex/persona-distiller-group/SKILL.md",
-      "file_count": 271,
-      "size_bytes": 12606706
+      "file_count": 305,
+      "size_bytes": 13593866
     },
     {
       "slug": "project-cost-table-skill",
@@ -510,6 +540,16 @@
       "size_bytes": 4295
     },
     {
+      "slug": "slides",
+      "source": "codex",
+      "name": "slides",
+      "description": "Create strategic HTML presentations with Chart.js, design tokens, responsive layouts, copywriting formulas, and contextual slide strategies.",
+      "category": "其他",
+      "entry": "registry/codex/slides/SKILL.md",
+      "file_count": 6,
+      "size_bytes": 19304
+    },
+    {
       "slug": "study-project-orchestrator",
       "source": "codex",
       "name": "study-project-orchestrator",
@@ -523,11 +563,11 @@
       "slug": "teleiosis",
       "source": "codex",
       "name": "teleiosis",
-      "description": "White-box iteration for an Agent Skill or Teleiosis itself. Use to challenge existence, research real peers, evolve and benchmark Candidates, prevent negative optimization, bind current-environment evidence, govern independent review, and deliver reversible packages; not for ordinary code review or in-place production edits.",
+      "description": "White-box iteration, evaluation, and controlled evolution for an existing Agent Skill or for Teleiosis itself. Use when a user asks to improve, benchmark, refactor, harden, compare, self-evolve, productize, or package a Skill with frozen baselines, current research, real peers, ten evidence-led system reviews, rollback, genuinely independent review, and installable delivery. Do not use for ordinary code review or direct in-place edits to a production Skill.",
       "category": "工程与交付",
       "entry": "registry/codex/teleiosis/SKILL.md",
-      "file_count": 234,
-      "size_bytes": 1068616
+      "file_count": 104,
+      "size_bytes": 598392
     },
     {
       "slug": "theme-factory",
@@ -538,6 +578,26 @@
       "entry": "registry/codex/theme-factory/SKILL.md",
       "file_count": 13,
       "size_bytes": 144106
+    },
+    {
+      "slug": "ui-styling",
+      "source": "codex",
+      "name": "ui-styling",
+      "description": "Create beautiful, accessible user interfaces with shadcn/ui components (built on Radix UI + Tailwind), Tailwind CSS utility-first styling, and canvas-based visual designs. Use when building user interfaces, implementing design systems, creating responsive layouts, adding accessible components (dialogs, dropdowns, forms, tables), customizing themes and colors, implementing dark mode, generating visual designs and posters, or establishing consistent styling patterns across applications.",
+      "category": "其他",
+      "entry": "registry/codex/ui-styling/SKILL.md",
+      "file_count": 98,
+      "size_bytes": 5754892
+    },
+    {
+      "slug": "ui-ux-pro-max",
+      "source": "codex",
+      "name": "ui-ux-pro-max",
+      "description": "UI/UX design intelligence for web and mobile. Searchable local database with 84 styles, 192 color palettes, 74 font pairings, 192 product types, 98 UX guidelines, 104 icon entries, 16 GSAP motion presets, and 25 chart types across 22 stacks (React, Next.js, Vue, Nuxt, Svelte, Astro, SwiftUI, React Native, Flutter, Tailwind, shadcn/ui, Jetpack Compose, Angular, Laravel, JavaFX, WPF, WinUI, Avalonia, Uno Platform, UWP, Three.js, and HTML/CSS). Use when designing, building, or reviewing UI: pages, components, color schemes, typography, layout, accessibility, animation, or data visualization.",
+      "category": "其他",
+      "entry": "registry/codex/ui-ux-pro-max/SKILL.md",
+      "file_count": 43,
+      "size_bytes": 1752765
     },
     {
       "slug": "use-railway",
@@ -578,6 +638,16 @@
       "entry": "registry/codex/webapp-testing/SKILL.md",
       "file_count": 6,
       "size_bytes": 22406
+    },
+    {
+      "slug": "weread-portable-notes",
+      "source": "codex",
+      "name": "weread-portable-notes",
+      "description": "通过全局中文的“微信读书笔记迁移”应用，使用腾讯官方微信读书 Agent Gateway 或浏览器本地文件，把用户本人有权使用的阅读笔记导出为四类 Markdown、规范化 JSON、离线搜索、可校验 ZIP 和可交给 ChatGPT 的中文阅读文件。不得索取、复制、持久化或回显真实用户密钥。",
+      "category": "其他",
+      "entry": "registry/codex/weread-portable-notes/SKILL.md",
+      "file_count": 5,
+      "size_bytes": 7722
     },
     {
       "slug": "imagegen",
@@ -638,6 +708,16 @@
       "entry": "registry/codex-system/skill-installer/SKILL.md",
       "file_count": 8,
       "size_bytes": 30677
+    },
+    {
+      "slug": "context-kernel",
+      "source": "claude",
+      "name": "context-kernel",
+      "description": "Use this skill when a long-running task or project needs durable, minimal context across chats, sessions, models, devices, or execution owners: resume from saved state, checkpoint material progress, create a handoff snapshot, transfer responsibility, or trim stale context. Do not use it for one-off questions, ordinary summaries, hidden reasoning, or as a chat transcript.",
+      "category": "其他",
+      "entry": "registry/claude/context-kernel/SKILL.md",
+      "file_count": 3,
+      "size_bytes": 159241
     },
     {
       "slug": "dws",

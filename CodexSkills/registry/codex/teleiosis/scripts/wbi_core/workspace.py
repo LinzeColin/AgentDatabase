@@ -1094,9 +1094,6 @@ def loop_status(workspace: Path) -> Dict[str, Any]:
         }
     audit = audit_budget(workspace)
     reasons = list(audit["violations"]) + list(audit["stop_reasons"])
-    terminal_state = str(state.get("status", ""))
-    if terminal_state in TERMINAL:
-        reasons.append("TERMINAL_STATE:%s" % terminal_state)
     patience = int(run["budget"]["saturation_patience"])
     if patience == 0:
         if int(state.get("consecutive_no_gain", 0)) > 0:
@@ -1108,7 +1105,7 @@ def loop_status(workspace: Path) -> Dict[str, Any]:
         "reasons": sorted(set(reasons)),
         "budget_status": audit["status"],
         "budget_violations": audit["violations"],
-        "mandatory_rounds_remaining": max(0, int(run["budget"]["mandatory_review_rounds"]) - int(state["rounds_completed"])),
+        "mandatory_rounds_remaining": max(0, 10 - int(state["rounds_completed"])),
         "rounds_remaining_in_run": max(0, int(run["budget"]["max_total_rounds"]) - int(state["rounds_completed"])),
         "reheat_allowed": True,
         "state": state["status"],

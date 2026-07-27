@@ -1,7 +1,7 @@
 interface:
   display_name: "信息费更新"
-  short_description: "红圈主合同查询并更新信息费Excel表"
-  default_prompt: "Use $info-fee-update to update 信息费 Excel rows from contractor, 业务经理, and 甲方 details."
+  short_description: "红圈查主合同并写入正式月份申请表和明细表"
+  default_prompt: "Use $info-fee-update to query 红圈主合同, then update the official current-month 信息费申请表 and the append-only 信息费明细表. Map the 信息费对象 to 收款人、联系方式、职务; use 其它说明 only for business remarks or opening requirements."
 
 policy:
   allow_implicit_invocation: true

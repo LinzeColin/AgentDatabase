@@ -11,16 +11,11 @@ from .process import run_bounded
 from .validation import detect_profile, validate_skill
 
 
-def _run_optimizer_command(
-    root: Path, arguments: List[str], expected_genesis_hash: str,
-    expected_effective_genesis_hash: str = "",
-) -> Dict[str, Any]:
+def _run_optimizer_command(root: Path, arguments: List[str], expected_genesis_hash: str) -> Dict[str, Any]:
     command = [sys.executable, str(root / "scripts/wbi.py")] + arguments
     env = {**os.environ, "PYTHONDONTWRITEBYTECODE": "1", "WBI_NESTED_SELF_TEST": "1"}
     if expected_genesis_hash:
         env["WBI_EXPECTED_GENESIS_SHA256"] = expected_genesis_hash
-    if expected_effective_genesis_hash:
-        env["WBI_EXPECTED_EFFECTIVE_GENESIS_SHA256"] = expected_effective_genesis_hash
     legacy = os.environ.get("WBI_COMMAND_TIMEOUT_SECONDS")
     if legacy:
         timeout = int(legacy)
@@ -45,11 +40,7 @@ def _run_optimizer_command(
     }
 
 
-def package_skill(
-    source: Path, output: Path, expected_genesis_hash: str = "",
-    profile: str = "auto", verification_level: str = "structural",
-    expected_effective_genesis_hash: str = "",
-) -> Dict[str, Any]:
+def package_skill(source: Path, output: Path, expected_genesis_hash: str = "", profile: str = "auto", verification_level: str = "structural") -> Dict[str, Any]:
     source = source.resolve()
     output = output.resolve()
     if verification_level not in {"structural", "release", "deep"}:
@@ -57,9 +48,6 @@ def package_skill(
     resolved_profile = detect_profile(source, profile)
     if resolved_profile == "optimizer" and not expected_genesis_hash:
         return {"status": "FAIL", "stage": "external-genesis-anchor", "errors": ["optimizer packaging requires an external Genesis hash anchor"]}
-    effective_configured = (source / "constitution/effective-genesis-lock.v0.0.0.2.json").is_file()
-    if resolved_profile == "optimizer" and effective_configured and verification_level in {"release", "deep"} and not expected_effective_genesis_hash:
-        return {"status": "FAIL", "stage": "external-effective-genesis-anchor", "errors": ["release/deep optimizer packaging requires an external effective Genesis hash anchor"]}
     with tempfile.TemporaryDirectory(prefix="wbi-package-") as temp:
         staging_parent = Path(temp)
         staging = staging_parent / source.name
@@ -70,7 +58,6 @@ def package_skill(
         generate_manifest(staging)
         validation = validate_skill(
             staging, strict=True, expected_genesis_hash=expected_genesis_hash if resolved_profile == "optimizer" else "",
-            expected_effective_genesis_hash=expected_effective_genesis_hash if resolved_profile == "optimizer" else "",
             profile=resolved_profile,
         )
         if validation["status"] != "PASS":
@@ -79,22 +66,14 @@ def package_skill(
         checks: Dict[str, Any] = {"profile": resolved_profile, "verification_level": verification_level, "prepackage_validation": validation["status"], "executed_target_code": False}
         if resolved_profile == "optimizer" and verification_level in {"release", "deep"}:
             try:
-                verify = _run_optimizer_command(
-                    staging, ["verify-self", "--strict", "--expected-genesis-hash", expected_genesis_hash,
-                              "--expected-effective-genesis-hash", expected_effective_genesis_hash],
-                    expected_genesis_hash, expected_effective_genesis_hash,
-                )
+                verify = _run_optimizer_command(staging, ["verify-self", "--strict", "--expected-genesis-hash", expected_genesis_hash], expected_genesis_hash)
             except ValueError as exc:
                 return {"status": "FAIL", "stage": "prepackage-command-policy", "errors": [str(exc)], "checks": checks}
             checks["prepackage_verify_self"] = verify
             if verify["returncode"] != 0:
                 return {"status": "FAIL", "stage": "prepackage-verify-self", "checks": checks}
             try:
-                smoke = _run_optimizer_command(
-                    staging, ["release-smoke", "--expected-genesis-hash", expected_genesis_hash,
-                              "--expected-effective-genesis-hash", expected_effective_genesis_hash],
-                    expected_genesis_hash, expected_effective_genesis_hash,
-                )
+                smoke = _run_optimizer_command(staging, ["release-smoke", "--expected-genesis-hash", expected_genesis_hash], expected_genesis_hash)
             except ValueError as exc:
                 return {"status": "FAIL", "stage": "prepackage-command-policy", "errors": [str(exc)], "checks": checks}
             checks["prepackage_release_smoke"] = smoke
@@ -113,7 +92,6 @@ def package_skill(
         extracted = extract_dir / source.name
         post = validate_skill(
             extracted, strict=True, expected_genesis_hash=expected_genesis_hash if resolved_profile == "optimizer" else "",
-            expected_effective_genesis_hash=expected_effective_genesis_hash if resolved_profile == "optimizer" else "",
             profile=resolved_profile,
         )
         if post["status"] != "PASS":
@@ -125,11 +103,7 @@ def package_skill(
         # regression suite because it is the trusted optimizer being packaged.
         if resolved_profile == "optimizer" and verification_level in {"release", "deep"}:
             try:
-                smoke = _run_optimizer_command(
-                    extracted, ["release-smoke", "--expected-genesis-hash", expected_genesis_hash,
-                                "--expected-effective-genesis-hash", expected_effective_genesis_hash],
-                    expected_genesis_hash, expected_effective_genesis_hash,
-                )
+                smoke = _run_optimizer_command(extracted, ["release-smoke", "--expected-genesis-hash", expected_genesis_hash], expected_genesis_hash)
             except ValueError as exc:
                 output.unlink(missing_ok=True)
                 return {"status": "FAIL", "stage": "postextract-command-policy", "errors": [str(exc)], "checks": checks}
@@ -140,9 +114,7 @@ def package_skill(
                 return {"status": "FAIL", "stage": "postextract-release-smoke", "checks": checks}
             if not os.environ.get("WBI_NESTED_SELF_TEST"):
                 try:
-                    self_test = _run_optimizer_command(
-                        extracted, ["self-test"], expected_genesis_hash, expected_effective_genesis_hash
-                    )
+                    self_test = _run_optimizer_command(extracted, ["self-test"], expected_genesis_hash)
                 except ValueError as exc:
                     output.unlink(missing_ok=True)
                     return {"status": "FAIL", "stage": "postextract-command-policy", "errors": [str(exc)], "checks": checks}

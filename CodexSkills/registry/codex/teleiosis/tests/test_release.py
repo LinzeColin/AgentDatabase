@@ -18,7 +18,6 @@ from wbi_core.package import package_skill  # noqa: E402
 from wbi_core.provenance import generate_release_receipt  # noqa: E402
 
 GENESIS = "14ab08b9053db4ca87140e59a49f1de8105a718a87ec2d55590c6487c1a77086"
-EFFECTIVE = "fe80c467f8ecbe8343ef0c09ef5e6f9fd9683803c8260c9188998c7e3dfca0a2"
 
 
 class ReleaseTests(unittest.TestCase):
@@ -40,18 +39,6 @@ class ReleaseTests(unittest.TestCase):
             )
             self.assertEqual(wrong["status"], "FAIL", wrong)
             self.assertEqual(wrong["stage"], "external-archive-anchor")
-            effective_missing = install_archive(
-                archive, base / "skills-effective-missing", GENESIS, verification_level="release",
-                expected_archive_sha256=sha256_file(archive),
-            )
-            self.assertEqual(effective_missing["status"], "FAIL", effective_missing)
-            self.assertEqual(effective_missing["stage"], "external-effective-genesis-anchor")
-            effective_wrong = install_archive(
-                archive, base / "skills-effective-wrong", GENESIS, verification_level="release",
-                expected_archive_sha256=sha256_file(archive), expected_effective_genesis_hash="0" * 64,
-            )
-            self.assertEqual(effective_wrong["status"], "FAIL", effective_wrong)
-            self.assertEqual(effective_wrong["stage"], "validation")
             anchored = install_archive(
                 archive, base / "skills-pass", GENESIS, verification_level="structural",
                 expected_archive_sha256=sha256_file(archive),
@@ -73,7 +60,6 @@ class ReleaseTests(unittest.TestCase):
                 sys.executable, str(ROOT / "scripts/wbi.py"), "install", str(archive),
                 "--skills-root", str(base / "skills"), "--profile", "optimizer",
                 "--verification-level", "release", "--expected-genesis-hash", GENESIS,
-                "--expected-effective-genesis-hash", EFFECTIVE,
                 "--expected-archive-sha256", sha256_file(archive),
             ], text=True, capture_output=True, env=env, timeout=25)
             self.assertEqual(completed.returncode, 0, completed.stdout + completed.stderr)
@@ -94,7 +80,7 @@ class ReleaseTests(unittest.TestCase):
             skills.mkdir()
             with _install_lock(skills):
                 result = install_archive(archive, skills, GENESIS, profile="optimizer")
-                recovery = recover_install_transactions(skills, GENESIS, "optimizer", "teleiosis", EFFECTIVE)
+                recovery = recover_install_transactions(skills, GENESIS, "optimizer", "teleiosis")
             self.assertEqual(result["status"], "BLOCKED")
             self.assertEqual(result["stage"], "install-lock")
             self.assertEqual(recovery["status"], "BLOCKED")
@@ -171,7 +157,7 @@ class ReleaseTests(unittest.TestCase):
                 "staged_tree_hash": sha256_tree(skills / "teleiosis", exclude={"MANIFEST.sha256"}),
                 "backup": None,
             })
-            recovered = recover_install_transactions(skills, GENESIS, "optimizer", "teleiosis", EFFECTIVE)
+            recovered = recover_install_transactions(skills, GENESIS, "optimizer", "teleiosis")
             self.assertEqual(recovered["status"], "PASS", recovered)
             self.assertEqual(load_json(fake)["status"], "RECOVERED_COMMITTED")
 
@@ -201,7 +187,7 @@ class ReleaseTests(unittest.TestCase):
             self.assertEqual(package_skill(source, archive, GENESIS, verification_level="structural")["status"], "PASS")
 
             calls = []
-            def fake_check(_root, arguments, _expected, _effective=""):
+            def fake_check(_root, arguments, _expected):
                 calls.append(list(arguments))
                 return {
                     "command": list(arguments), "returncode": 0, "timed_out": False,
@@ -211,11 +197,11 @@ class ReleaseTests(unittest.TestCase):
             with patch("wbi_core.install._optimizer_check", side_effect=fake_check):
                 result = install_archive(
                     archive, base / "skills", GENESIS, profile="optimizer", verification_level="release",
-                    expected_archive_sha256=sha256_file(archive), expected_effective_genesis_hash=EFFECTIVE,
+                    expected_archive_sha256=sha256_file(archive),
                 )
             self.assertEqual(result["status"], "PASS", result)
             self.assertNotIn(["self-test"], calls)
-            self.assertGreaterEqual(calls.count(["release-smoke", "--expected-genesis-hash", GENESIS, "--expected-effective-genesis-hash", EFFECTIVE]), 2)
+            self.assertGreaterEqual(calls.count(["release-smoke", "--expected-genesis-hash", GENESIS]), 2)
             receipt = Path(result["transaction_receipt"])
             self.assertTrue(receipt.is_file())
             payload = json.loads(receipt.read_text(encoding="utf-8"))
@@ -230,7 +216,7 @@ class ReleaseTests(unittest.TestCase):
             archive = base / "skill.zip"
             self.assertEqual(package_skill(source, archive, GENESIS, verification_level="structural")["status"], "PASS")
             calls = []
-            def fake_check(_root, arguments, _expected, _effective=""):
+            def fake_check(_root, arguments, _expected):
                 calls.append(list(arguments))
                 return {
                     "command": list(arguments), "returncode": 0, "timed_out": False,
@@ -239,11 +225,11 @@ class ReleaseTests(unittest.TestCase):
             with patch.dict(os.environ, {"WBI_NESTED_SELF_TEST": ""}), patch("wbi_core.install._optimizer_check", side_effect=fake_check):
                 result = install_archive(
                     archive, base / "skills", GENESIS, profile="optimizer", verification_level="deep",
-                    expected_archive_sha256=sha256_file(archive), expected_effective_genesis_hash=EFFECTIVE,
+                    expected_archive_sha256=sha256_file(archive),
                 )
             self.assertEqual(result["status"], "PASS", result)
             self.assertEqual(calls.count(["self-test"]), 1)
-            self.assertGreaterEqual(calls.count(["release-smoke", "--expected-genesis-hash", GENESIS, "--expected-effective-genesis-hash", EFFECTIVE]), 2)
+            self.assertGreaterEqual(calls.count(["release-smoke", "--expected-genesis-hash", GENESIS]), 2)
 
     def test_atomic_install_backup_and_rollback(self):
         with tempfile.TemporaryDirectory() as td:
@@ -596,7 +582,7 @@ class ReleaseTests(unittest.TestCase):
             copy_clean(ROOT, source)
             with patch.dict(os.environ, {"WBI_COMMAND_TIMEOUT_SECONDS": "0"}):
                 structural = package_skill(source, base / "structural.zip", GENESIS, verification_level="structural")
-                release = package_skill(source, base / "release.zip", GENESIS, verification_level="release", expected_effective_genesis_hash=EFFECTIVE)
+                release = package_skill(source, base / "release.zip", GENESIS, verification_level="release")
             self.assertEqual(structural["status"], "PASS", structural)
             self.assertEqual(release["status"], "FAIL", release)
             self.assertEqual(release["stage"], "prepackage-command-policy")

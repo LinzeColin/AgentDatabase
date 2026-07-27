@@ -1,6 +1,6 @@
 # CodexSkills
 
-本机全部 Skill 的仓库镜像：**90 份实例 / 75 个不同名字**，4156 个文件，约 120 MB。
+本机全部 Skill 的仓库镜像：**98 份实例 / 83 个不同名字**，4294 个文件，约 128 MB。
 
 **由 `sync_skills.py` 自动生成，请勿手工编辑本文件。**
 
@@ -8,9 +8,9 @@
 
 | 目录 | 本机路径 | 说明 |
 |---|---|---|
-| `registry/codex/` | `~/.codex/skills` | Codex 用户 Skill（自建 / 下载 / GitHub）（57 个） |
+| `registry/codex/` | `~/.codex/skills` | Codex 用户 Skill（自建 / 下载 / GitHub）（64 个） |
 | `registry/codex-system/` | `~/.codex/skills/.system` | Codex 系统 Skill（OpenAI 官方，Apache-2.0）（6 个） |
-| `registry/claude/` | `~/.claude/skills` | Claude Skill（Anthropic 侧）（3 个） |
+| `registry/claude/` | `~/.claude/skills` | Claude Skill（Anthropic 侧）（4 个） |
 | `registry/agents/` | `~/.agents/skills` | Agent Skill（跨工具通用目录）（24 个） |
 
 有多个 skill 在不同来源里重名（其中 `agent-reach` 两处内容还不同），所以镜像按来源分目录，**不拍平**。
@@ -34,7 +34,7 @@ curl -s https://raw.githubusercontent.com/LinzeColin/AgentDatabase/main/CodexSki
 目录（由 `team-index.json` 实时派生，不在本脚本里硬编码，避免分类改版后文档漂移）：[`农林牧渔师/`](registry/codex/persona-distiller-group/农林牧渔师/)、[`创业经营师/`](registry/codex/persona-distiller-group/创业经营师/)、[`医疗护理师/`](registry/codex/persona-distiller-group/医疗护理师/)、[`客户营销师/`](registry/codex/persona-distiller-group/客户营销师/)、[`建造采购师/`](registry/codex/persona-distiller-group/建造采购师/)、[`思想教育师/`](registry/codex/persona-distiller-group/思想教育师/)、[`投资资本师/`](registry/codex/persona-distiller-group/投资资本师/)、[`政治法律师/`](registry/codex/persona-distiller-group/政治法律师/)、[`材料建工师/`](registry/codex/persona-distiller-group/材料建工师/)、[`艺术设计师/`](registry/codex/persona-distiller-group/艺术设计师/)、[`财务合规师/`](registry/codex/persona-distiller-group/财务合规师/)、[`软件开发师/`](registry/codex/persona-distiller-group/软件开发师/)。
 身份分类由人物 Skill 内部使用，不是调用门槛；用户安装后直接调用对应人物 Skill，无需选择身份。人物产物按 canonical 人物分别从 `0.0.0.1` 连续编号到 `0.0.0.999`，只在成功登记时占号；人物 Skill 的单次运行不编号。团队调用会先按场景选择 5–20 个高相关角色，以正向解决者为主，并至少隔离一个复审、一个裁判和一个反证角色。
 
-当前登记：**80 个人物**。
+当前登记：**91 个人物**。
 
 | 人物 | 唯一分类 | 产物版本 | 完整 ZIP |
 |---|---|---|---|
@@ -60,12 +60,18 @@ curl -s https://raw.githubusercontent.com/LinzeColin/AgentDatabase/main/CodexSki
 | Charles Eastman | `思想教育师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/思想教育师/charles-eastman/versions/0.0.0.1/charles-eastman-persona-distillation-delivery-v0.0.0.1.zip) |
 | Thomas L. Saaty | `思想教育师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/思想教育师/thomas-saaty/versions/0.0.0.1/thomas-saaty-persona-distillation-delivery-v0.0.0.1.zip) |
 | Aswath Damodaran | `投资资本师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/投资资本师/aswath-damodaran/versions/0.0.0.1/aswath-damodaran-persona-distillation-delivery-v0.0.0.1.zip) |
+| Benjamin Graham | `投资资本师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/投资资本师/benjamin-graham/versions/0.0.0.1/benjamin-graham-persona-distillation-delivery-v0.0.0.1.zip) |
 | Charlie Munger | `投资资本师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/投资资本师/charlie-munger/versions/0.0.0.1/charlie-munger-persona-distillation-delivery-v0.0.0.1.zip) |
 | Edward O. Thorp（爱德华·索普） | `投资资本师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/投资资本师/edward-o-thorp/versions/0.0.0.1/edward-o-thorp-persona-distillation-delivery-v0.0.0.1.zip) |
+| George Soros | `投资资本师` | `0.0.0.2` | [ZIP](registry/codex/persona-distiller-group/投资资本师/george-soros/versions/0.0.0.2/george-soros-persona-distillation-delivery-v0.0.0.2.zip) |
 | Howard Marks | `投资资本师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/投资资本师/howard-marks/versions/0.0.0.1/howard-marks-persona-distillation-delivery-v0.0.0.1.zip) |
 | Joel Greenblatt | `投资资本师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/投资资本师/joel-greenblatt/versions/0.0.0.1/joel-greenblatt-persona-distillation-delivery-v0.0.0.1.zip) |
+| John Bogle | `投资资本师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/投资资本师/john-bogle/versions/0.0.0.1/john-bogle-persona-distillation-delivery-v0.0.0.1.zip) |
 | Michael J. Mauboussin | `投资资本师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/投资资本师/michael-mauboussin/versions/0.0.0.1/michael-mauboussin-persona-distillation-delivery-v0.0.0.1.zip) |
 | Nick Sleep | `投资资本师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/投资资本师/nick-sleep/versions/0.0.0.1/nick-sleep-persona-distillation-delivery-v0.0.0.1.zip) |
+| Peter Lynch | `投资资本师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/投资资本师/peter-lynch/versions/0.0.0.1/peter-lynch-persona-distillation-delivery-v0.0.0.1.zip) |
+| Philip Fisher | `投资资本师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/投资资本师/philip-fisher/versions/0.0.0.1/philip-fisher-persona-distillation-delivery-v0.0.0.1.zip) |
+| Ray Dalio | `投资资本师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/投资资本师/ray-dalio/versions/0.0.0.1/ray-dalio-persona-distillation-delivery-v0.0.0.1.zip) |
 | Robert A. Kindler | `投资资本师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/投资资本师/robert-a-kindler/versions/0.0.0.1/robert-a-kindler-persona-distillation-delivery-v0.0.0.1.zip) |
 | Seth Klarman | `投资资本师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/投资资本师/seth-klarman/versions/0.0.0.1/seth-klarman-persona-distillation-delivery-v0.0.0.1.zip) |
 | Warren Buffett | `投资资本师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/投资资本师/warren-buffett/versions/0.0.0.1/warren-buffett-persona-distillation-delivery-v0.0.0.1.zip) |
@@ -100,10 +106,13 @@ curl -s https://raw.githubusercontent.com/LinzeColin/AgentDatabase/main/CodexSki
 | Christopher Manning | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/christopher-manning/versions/0.0.0.1/christopher-manning-persona-distillation-delivery-v0.0.0.1.zip) |
 | Dennis Ritchie | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/dennis-ritchie/versions/0.0.0.1/dennis-ritchie-persona-distillation-delivery-v0.0.0.1.zip) |
 | Donald Knuth | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/donald-knuth/versions/0.0.0.1/donald-knuth-persona-distillation-delivery-v0.0.0.1.zip) |
+| Douglas Engelbart | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/douglas-engelbart/versions/0.0.0.1/douglas-engelbart-persona-distillation-delivery-v0.0.0.1.zip) |
+| Edsger Dijkstra | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/edsger-dijkstra/versions/0.0.0.1/edsger-dijkstra-persona-distillation-delivery-v0.0.0.1.zip) |
 | Guido van Rossum | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/guido-van-rossum/versions/0.0.0.1/guido-van-rossum-persona-distillation-delivery-v0.0.0.1.zip) |
 | Hamel Husain | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/hamel-husain/versions/0.0.0.1/hamel-husain-persona-distillation-delivery-v0.0.0.1.zip) |
 | Jerry Liu | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/jerry-liu-llamaindex/versions/0.0.0.1/jerry-liu-llamaindex-persona-distillation-delivery-v0.0.0.1.zip) |
 | John Carmack（约翰·卡马克） | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/john-carmack/versions/0.0.0.1/john-carmack-persona-distillation-delivery-v0.0.0.1.zip) |
+| John McCarthy | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/john-mccarthy/versions/0.0.0.1/john-mccarthy-persona-distillation-delivery-v0.0.0.1.zip) |
 | Karen Spärck Jones | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/karen-sparck-jones/versions/0.0.0.1/karen-sparck-jones-persona-distillation-delivery-v0.0.0.1.zip) |
 | Ken Thompson | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/ken-thompson/versions/0.0.0.1/ken-thompson-persona-distillation-delivery-v0.0.0.1.zip) |
 | Kent Beck | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/kent-beck/versions/0.0.0.1/kent-beck-persona-distillation-delivery-v0.0.0.1.zip) |
@@ -113,10 +122,12 @@ curl -s https://raw.githubusercontent.com/LinzeColin/AgentDatabase/main/CodexSki
 | Matei Zaharia | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/matei-zaharia/versions/0.0.0.1/matei-zaharia-persona-distillation-delivery-v0.0.0.1.zip) |
 | Omar Khattab | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/omar-khattab/versions/0.0.0.1/omar-khattab-persona-distillation-delivery-v0.0.0.1.zip) |
 | Rich Hickey | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/rich-hickey/versions/0.0.0.1/rich-hickey-persona-distillation-delivery-v0.0.0.1.zip) |
+| Rob Pike | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/rob-pike/versions/0.0.0.1/rob-pike-persona-distillation-delivery-v0.0.0.1.zip) |
 | Shreya Shankar | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/shreya-shankar/versions/0.0.0.1/shreya-shankar-persona-distillation-delivery-v0.0.0.1.zip) |
 | Simon Willison | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/simon-willison/versions/0.0.0.1/simon-willison-persona-distillation-delivery-v0.0.0.1.zip) |
 | Stephen E. Robertson | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/stephen-e-robertson/versions/0.0.0.1/stephen-e-robertson-persona-distillation-delivery-v0.0.0.1.zip) |
 | Tim Berners-Lee | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/tim-berners-lee/versions/0.0.0.1/tim-berners-lee-persona-distillation-delivery-v0.0.0.1.zip) |
+| Tony Hoare | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/tony-hoare/versions/0.0.0.1/tony-hoare-persona-distillation-delivery-v0.0.0.1.zip) |
 | Vint Cerf | `软件开发师` | `0.0.0.1` | [ZIP](registry/codex/persona-distiller-group/软件开发师/vint-cerf/versions/0.0.0.1/vint-cerf-persona-distillation-delivery-v0.0.0.1.zip) |
 
 ## 治理规则：受保护资产（不可再生，丢了就没了）
@@ -220,7 +231,7 @@ python3 CodexSkills/sync_skills.py --dry-run  # 只看差异
 | [`skill-creator`](registry/codex-system/skill-creator/SKILL.md) | `codex-system` | Guide for creating effective skills. This skill should be used when users want to create a new skill (or update an existing skill) that extends Codex's capabilities with specialized knowledge, workflows, or tool integrations. |
 | [`skill-github-sync`](registry/codex/skill-github-sync/SKILL.md) | `codex` | 把本机全部 Skill（Codex 用户、Codex 系统/OpenAI 官方、Claude/Anthropic、Agents 通用目录）全量镜像备份到 GitHub 公开仓 LinzeColin/AgentDatabase 的 CodexSkills/registry/，重建人读与机器读索引，提交并推送。当用户要求备份 skill、同步 skill 到 GitHub、更新 skill 索引，或由每周定时自动化触发时使用。推送前有凭据硬门，扫到密钥即中止。 |
 | [`skill-installer`](registry/codex-system/skill-installer/SKILL.md) | `codex-system` | Install Codex skills into $CODEX_HOME/skills from a curated list or a GitHub repo path. Use when a user asks to list installable skills, install a curated skill, or install a skill from another repo (including private repos). |
-| [`teleiosis`](registry/codex/teleiosis/SKILL.md) | `codex` | White-box iteration for an Agent Skill or Teleiosis itself. Use to challenge existence, research real peers, evolve and benchmark Candidates, prevent negative optimization, bind current-environment evidence, govern independent review, and deliver reversible pa… |
+| [`teleiosis`](registry/codex/teleiosis/SKILL.md) | `codex` | White-box iteration, evaluation, and controlled evolution for an existing Agent Skill or for Teleiosis itself. Use when a user asks to improve, benchmark, refactor, harden, compare, self-evolve, productize, or package a Skill with frozen baselines, current res… |
 | [`use-railway`](registry/agents/use-railway/SKILL.md) | `agents` | Operate Railway infrastructure: sign up for or sign in to a Railway account, create projects, provision services and databases, manage object storage buckets, deploy code, configure environments and variables, manage domains, troubleshoot failures, check statu… |
 | [`use-railway`](registry/codex/use-railway/SKILL.md) | `codex` | Operate Railway infrastructure: sign up for or sign in to a Railway account, create projects, provision services and databases, manage object storage buckets, deploy code, configure environments and variables, manage domains, troubleshoot failures, check statu… |
 | [`verifier`](registry/claude/verifier/SKILL.md) | `claude` | Independently verify exactly one selected software project per run and issue an evidence-backed acceptance or release verdict. Use when the user says 验收一下, 调用软件验收skill, 软件验收, verifier, or asks for release recheck. When an approved Product-Design-Taskpack exist… |
@@ -246,7 +257,7 @@ python3 CodexSkills/sync_skills.py --dry-run  # 只看差异
 |---|---|---|
 | [`gongzi-fafang-biaozhun`](registry/codex/gongzi-fafang-biaozhun/SKILL.md) | `codex` | Use when Codex is asked to整理、生成、校验或复核工资/薪资/发放表 Excel，尤其是当月原始发放文件按上月模板生成最终发放版、ABExcel 校验、差异报告、金额分校验、B公司/报销路由或密码 123 打开校验。 |
 | [`hongquan-main-contract-dws`](registry/codex/hongquan-main-contract-dws/SKILL.md) | `codex` | 从红圈 cloud.hecom.cn 导出、下载并归档主合同 DWS/Excel 原始数据。Use when the user asks for 红圈主合同DWS、红圈主合同导出、下载红圈主合同、更新红圈主合同原始数据，或需要把红圈主合同 Excel 按日期命名并移动到固定原始数据目录。 |
-| [`info-fee-update`](registry/codex/info-fee-update/SKILL.md) | `codex` | Fill and update Chinese 信息费申请表 and 2023-2025年信息费明细表 workbooks from contractor/payment notes, using Chrome 红圈 主合同 search to look up contract number and contract amount from 甲方/project keywords. Use when the user asks Codex to 信息费更新, 填信息费Excel, 开委外单/信息费单, 根据甲方去红… |
+| [`info-fee-update`](registry/codex/info-fee-update/SKILL.md) | `codex` | Fill and update the official current-month Chinese 信息费申请表 and 2023-2025年信息费明细表 workbooks from contractor/payment notes, using Chrome 红圈 主合同 search to look up contract number and contract amount from 甲方/project keywords. Use when the user asks Codex to 信息费更新, 填… |
 | [`km-bid-adjudicate`](registry/agents/km-bid-adjudicate/SKILL.md) | `agents` | 基于官方正文和附件构建采购事件图，识别货物、维修、工程、结果型运维、纯劳务、加工或混合主要义务，并映射A/B方向。用于复杂采购/维修交叉语义；未知不得排除。 |
 | [`km-bid-adjudicate`](registry/codex/km-bid-adjudicate/SKILL.md) | `codex` | 基于官方正文和附件构建采购事件图，识别货物、维修、工程、结果型运维、纯劳务、加工或混合主要义务，并映射A/B方向。用于复杂采购/维修交叉语义；未知不得排除。 |
 | [`km-bid-audit`](registry/agents/km-bid-audit/SKILL.md) | `agents` | 对P0/P1和高风险排除进行独立反对者审计，专门寻找维修机会被采购词误删、货物被工程词误推、地域/标包/资格/结果误判。审计冲突必须保留并升级，不得自动删除。 |
@@ -279,17 +290,33 @@ python3 CodexSkills/sync_skills.py --dry-run  # 只看差异
 | [`dws`](registry/codex/dws/SKILL.md) | `codex` | 管理钉钉产品能力(AI表格/AI搜问/日历/通讯录/群聊与机器人/待办/审批/考勤/日志/DING消息/开放平台文档/钉钉文档/钉钉云盘/AI听记/邮箱/在线电子表格/知识库等)。当用户需要操作表格数据、管理日程会议、模糊找人/查谁负责某事项、查询通讯录、管理群聊、机器人发消息、创建待办、提交审批、查看考勤、提交日报周报（钉钉日志模版）、读写钉钉文档、上传下载云盘文件、查询听记纪要、收发邮件、读写在线电子表格(axls)、管理钉钉知识库时使用。 |
 | [`internal-comms`](registry/codex/internal-comms/SKILL.md) | `codex` | A set of resources to help me write all kinds of internal communications, using the formats that my company likes to use. Claude should use this skill whenever asked to write some sort of internal communications (status reports, leadership updates, 3P updates,… |
 
-## 其他（4）
+## 其他（12）
 
 | Skill | 来源 | 何时使用 |
 |---|---|---|
+| [`banner-design`](registry/codex/banner-design/SKILL.md) | `codex` | Design banners for social media, ads, website heroes, creative assets, and print. Multiple art direction options with AI-generated visuals. Actions: design, create, generate banner. Platforms: Facebook, Twitter/X, LinkedIn, YouTube, Instagram, Google Display,… |
+| [`brand`](registry/codex/brand/SKILL.md) | `codex` | Brand voice, visual identity, messaging frameworks, asset management, brand consistency. Activate for branded content, tone of voice, marketing assets, brand compliance, style guides. |
 | [`codex-encrypted-backup`](registry/codex/codex-encrypted-backup/SKILL.md) | `codex` | 在不创建本地自动脚本或 launchd 的前提下，将本机 Codex 的 memories、全部 sessions（含 archived）及受管 attachments 加密备份到 LinzeColin/AgentDatabase 的 GitHub Release。用于创建、执行、核验、保留或恢复验证这一备份通道。 |
-| [`context-kernel`](registry/codex/context-kernel/SKILL.md) | `codex` | Use this skill when a long-running task or project needs durable, minimal context across chats, sessions, models, devices, or execution owners: resume from saved state, checkpoint material progress, create a handoff snapshot, transfer responsibility, or trim s… |
+| [`context-kernel`](registry/claude/context-kernel/SKILL.md) | `claude` | Use this skill when a long-running task or project needs durable, minimal context across chats, sessions, models, devices, or execution owners: resume from saved state, checkpoint material progress, create a handoff snapshot, transfer responsibility, or trim s… |
+| [`design`](registry/codex/design/SKILL.md) | `codex` | Comprehensive design skill: brand identity, design tokens, UI styling, logo generation (55 styles, Gemini AI), corporate identity program (50 deliverables, CIP mockups), HTML presentations (Chart.js), banner design (22 styles, social/ads/web/print), icon desig… |
+| [`design-system`](registry/codex/design-system/SKILL.md) | `codex` | Token architecture, component specifications, and slide generation. Three-layer tokens (primitive→semantic→component), CSS variables, spacing/typography scales, component specs, strategic slide creation. Use for design tokens, systematic design, brand-complian… |
 | [`gpt-tasteskill`](registry/codex/gpt-tasteskill/SKILL.md) | `codex` | Elite UX/UI & Advanced GSAP Motion Engineer. Enforces Python-driven true randomization for layout variance, strict AIDA page structure, wide editorial typography (bans 6-line wraps), gapless bento grids, strict GSAP ScrollTriggers (pinning, stacking, scrubbing… |
 | [`hatch-pet`](registry/codex/hatch-pet/SKILL.md) | `codex` | Create, repair, validate, visually QA, and package Codex-compatible v2 animated pets from character art, generated images, company or prospect brand cues, or visual references. Use for any new Codex pet, custom mascot, non-pixel pet style, brand-inspired pet,… |
+| [`slides`](registry/codex/slides/SKILL.md) | `codex` | Create strategic HTML presentations with Chart.js, design tokens, responsive layouts, copywriting formulas, and contextual slide strategies. |
+| [`ui-styling`](registry/codex/ui-styling/SKILL.md) | `codex` | Create beautiful, accessible user interfaces with shadcn/ui components (built on Radix UI + Tailwind), Tailwind CSS utility-first styling, and canvas-based visual designs. Use when building user interfaces, implementing design systems, creating responsive layo… |
+| [`ui-ux-pro-max`](registry/codex/ui-ux-pro-max/SKILL.md) | `codex` | UI/UX design intelligence for web and mobile. Searchable local database with 84 styles, 192 color palettes, 74 font pairings, 192 product types, 98 UX guidelines, 104 icon entries, 16 GSAP motion presets, and 25 chart types across 22 stacks (React, Next.js, Vu… |
+| [`weread-portable-notes`](registry/codex/weread-portable-notes/SKILL.md) | `codex` | 通过全局中文的“微信读书笔记迁移”应用，使用腾讯官方微信读书 Agent Gateway 或浏览器本地文件，把用户本人有权使用的阅读笔记导出为四类 Markdown、规范化 JSON、离线搜索、可校验 ZIP 和可交给 ChatGPT 的中文阅读文件。不得索取、复制、持久化或回显真实用户密钥。 |
 
 ## ⚠️ 未归类
 
 下列 skill 不在 `sync_skills.py` 的分类表里，已归入「其他」，请补分类：
 
+- `banner-design`
+- `brand`
 - `context-kernel`
+- `design`
+- `design-system`
+- `slides`
+- `ui-styling`
+- `ui-ux-pro-max`
+- `weread-portable-notes`

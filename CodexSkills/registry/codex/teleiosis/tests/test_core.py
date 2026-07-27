@@ -46,11 +46,11 @@ class CoreTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temp:
             copy = Path(temp) / "teleiosis"
             shutil.copytree(ROOT, copy, ignore=shutil.ignore_patterns(".git", "__pycache__", "MANIFEST.sha256"))
-            (copy / "VERSION").write_text("v0.0.0.4\n", encoding="utf-8")
-            skill = (copy / "SKILL.md").read_text(encoding="utf-8").replace('version: "v0.0.0.2"', 'version: "v0.0.0.4"')
+            (copy / "VERSION").write_text("v0.0.0.2\n", encoding="utf-8")
+            skill = (copy / "SKILL.md").read_text(encoding="utf-8").replace('version: "v0.0.0.1"', 'version: "v0.0.0.2"')
             (copy / "SKILL.md").write_text(skill, encoding="utf-8")
             release = json.loads((copy / "metadata/release.json").read_text(encoding="utf-8"))
-            release["version"] = "v0.0.0.4"
+            release["version"] = "v0.0.0.2"
             (copy / "metadata/release.json").write_text(json.dumps(release, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
             result = validate_skill(copy, check_manifest=False)
             self.assertEqual(result["status"], "PASS", result)

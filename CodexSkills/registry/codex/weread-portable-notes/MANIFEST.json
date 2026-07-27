@@ -1,0 +1,21 @@
+{
+  "name": "weread-portable-notes",
+  "version": "0.0.0.1",
+  "taskpackVersion": "v0.0.0.1.3",
+  "entrypoint": "SKILL.md",
+  "runtime": {
+    "python": ">=3.10",
+    "node": ">=22.13.0"
+  },
+  "application": "MetaDatabase/WeReadPort",
+  "language": "zh-CN",
+  "credentialPolicy": "仅当前浏览器会话或本地环境变量",
+  "networkPolicy": "仅由已审阅应用核心调用腾讯官方微信读书网关",
+  "capabilities": [
+    "官方微信读书个人笔记导出",
+    "浏览器本地 ZIP/JSON/Markdown/TXT 导入",
+    "主动迁移 ZIP 下载",
+    "中文 ChatGPT 阅读文件与安全跳转"
+  ],
+  "chatgptHandoffPolicy": "只打开 https://chatgpt.com/，由用户确认上传；禁止未公开深链、自动附件与 URL 传递笔记"
+}
