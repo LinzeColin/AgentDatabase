@@ -1,0 +1,168 @@
+# 业务流登记 —— OpenAIDatabase(记忆与个性化数据库)
+#
+# 阶段:「候选分类 → 脱敏 → 加权评分 → 回写提案 → 导出路由」五段。
+#
+# ★ current_status = `failed_delivery_readiness`,且 FEAT-OAIDB-002
+#   (Memory Atlas 权重 / ROI / 活动评分)本身状态就是 **blocked**。
+#   加权那一段是整条链的中枢,它断了,下游的回写与导出都只能拿到未加权的原始候选 ——
+#   耦合规则要求下游如实降级,不得因为「导出接口能调通」就自称健康。
+#
+# ★ 本项目**没有主机侧常驻单元**(不在 OVH / Cloudflare 的部署清单里),
+#   运行在 owner 的本机与 GitHub 仓库之间。所以这张表 status 一格也探不到,
+#   实测覆盖率会是 0% 并被整体标注为「仅自报」—— 这是如实,不是缺失。
+#
+# ★ 记忆内容含个人数据:探针即便将来接进来,也只允许看条数与时间戳等元信息,
+#   **绝不读记忆内容本身**。
+
+schema: linze.flow.v1
+project: OpenAIDatabase
+repo: AgentDatabase
+authority: OpenAIDatabase/docs/governance/(project.yaml / MIGRATION_MANDATE.md / legacy_disposition.json)
+stages: [classify, redact, weigh, writeback, export]
+stage_names:
+  classify: 候选分类
+  redact: 脱敏
+  weigh: 加权评分
+  writeback: 回写提案
+  export: 导出路由
+stage_meaning:
+  classify: 把记忆候选按类型归档,决定哪些值得留
+  redact: 去掉不该留的个人数据,主动记忆前先过这一关
+  weigh: 算权重、ROI 与活动评分,决定优先级
+  writeback: 生成带版本链的 writeback proposal
+  export: 个性化导出与资源路由
+
+coupling_rule: >-
+  上游任一 stage 为 blocked / blocked_by_input / blocked_by_policy / not_built 时,
+  下游依赖它的 stage 不得标 healthy —— 必须降级并具名上游原因,禁止静默出未加权的数。
+
+sources:
+  - id: SRC-OAIDB-CODEX
+    name: Codex 本地行为记录
+  - id: SRC-OAIDB-MACDATA
+    name: airM2 / proM2 每日 MacData 归档
+
+baselines:
+  - id: BL-OAIDB-MEMORY
+    name: 记忆候选主线
+    priority: P0
+    note: 这条是产品本体;加权段被上游 blocked 卡住,整条链只能出未加权结果。
+    cells:
+      classify:
+        state: healthy
+        evidence: 记忆候选分类、脱敏与主动记忆已实现(FEAT-OAIDB-001)
+      redact:
+        state: healthy
+        evidence: 脱敏与分类同属 FEAT-OAIDB-001,主动记忆前必过
+      weigh:
+        state: blocked_by_input
+        evidence: >-
+          **FEAT-OAIDB-002(Memory Atlas 权重 / ROI / 活动评分)状态为 blocked** ——
+          缺算分所需的输入,属于要催人的那种阻断,不是按规定不通。
+      writeback:
+        state: degraded
+        evidence: >-
+          Writeback proposal 版本链已实现(FEAT-OAIDB-004),但上游未加权,
+          提案只能按原始候选排序 —— 按耦合规则如实降级
+      export:
+        state: degraded
+        evidence: >-
+          Personalization export 与资源路由已实现(FEAT-OAIDB-005),
+          导出的是未经加权的结果,接口通 ≠ 业务通
+
+  - id: BL-OAIDB-ATLAS
+    name: Memory Atlas 权重与 ROI
+    priority: P0
+    note: ★ 本项目 `failed_delivery_readiness` 的主要落点。
+    cells:
+      classify:
+        state: healthy
+        evidence: 候选已能正确归类
+      redact:
+        state: healthy
+        evidence: 进入 Atlas 前已脱敏
+      weigh:
+        state: blocked_by_input
+        evidence: FEAT-OAIDB-002 为 blocked —— 权重、ROI 与活动评分算不出来
+      writeback:
+        state: not_built
+        evidence: 加权结果回写 Atlas 的通道尚未建立
+      export:
+        state: blocked_by_policy
+        evidence: >-
+          公开面只出 L2 脱敏派生数据(FEAT-OAIDB-CF-L2-001),
+          Atlas 原始权重按规定不出公开面 —— 不需要任何人去修
+
+  - id: BL-OAIDB-SYNC
+    name: Codex 本地行为同步
+    priority: P1
+    cells:
+      classify:
+        state: healthy
+        evidence: Codex 本地行为同步与数据源注册已实现(FEAT-OAIDB-003)
+      redact:
+        state: healthy
+        evidence: 同步进来的行为记录同样过脱敏
+      weigh:
+        state: degraded
+        evidence: 行为记录参与评分,但受上游加权阻断影响
+      writeback:
+        state: healthy
+        evidence: 数据源注册表随同步更新
+      export:
+        state: healthy
+        evidence: 同步结果可被导出链路读取
+
+  - id: BL-OAIDB-MACDATA
+    name: MacData 每日归档
+    priority: P1
+    note: airM2 / proM2 两台机器每日把 MacData 归档进主分支,并在上传后清理开发环境。
+    cells:
+      classify:
+        state: healthy
+        evidence: 归档内容按机器与日期归类(FEAT-MACDATA-PROM2-001)
+      redact:
+        state: healthy
+        evidence: 归档前过脱敏
+      weigh:
+        state: healthy
+        evidence: 归档不需要加权,按日期直接留存
+      writeback:
+        state: healthy
+        evidence: 每日归档进主分支
+      export:
+        state: healthy
+        evidence: 上传后受控清理开发环境(FEAT-MACDATA-PROM2-002)
+
+  - id: BL-OAIDB-QUALITY
+    name: 分层验证与可复现构建
+    priority: P2
+    cells:
+      classify:
+        state: healthy
+        evidence: 分层验证覆盖各类候选(FEAT-OAIDB-QUALITY-001)
+      redact:
+        state: healthy
+        evidence: 脱敏规则纳入验证
+      weigh:
+        state: degraded
+        evidence: 加权逻辑因上游 blocked 无法端到端验证
+      writeback:
+        state: healthy
+        evidence: CI 单一聚合,构建可复现
+      export:
+        state: healthy
+        evidence: canonical human-viewable 输出已就位(FEAT-OAIDB-RUN0A-001)
+
+known_defects:
+  - id: DEF-OAIDB-001
+    baseline: BL-OAIDB-ATLAS
+    stage: weigh
+    desc: >-
+      Memory Atlas 的权重 / ROI / 活动评分算不出来(FEAT-OAIDB-002 = blocked),
+      这是本项目交付就绪判定未通过的主因;下游拿到的是未加权结果。
+  - id: DEF-OAIDB-002
+    baseline: BL-OAIDB-MEMORY
+    stage: export
+    desc: >-
+      导出接口能调通容易被误读成业务通 —— 实际导出的是未经加权的原始候选排序。
