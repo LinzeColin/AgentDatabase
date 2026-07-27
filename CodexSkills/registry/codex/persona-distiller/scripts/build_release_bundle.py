@@ -12,7 +12,13 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 GROUP_ROOT = ROOT.parent / "persona-distiller-group"
 TEMPLATE_ROOT = ROOT / "templates" / "bundle"
-VERSION = "v0.0.0.6"
+# ★ 从 VERSION 文件读，不硬编码（原写死 v0.0.0.6，skill 升到 v0.0.0.7 后即失效）
+def _read_version() -> str:
+    p = Path(__file__).resolve().parent.parent / "VERSION"
+    return p.read_text(encoding="utf-8").strip() if p.is_file() else "v0.0.0.0"
+
+
+VERSION = _read_version()
 TOP_NAME = f"PersonaDistiller-Final-{VERSION}"
 FIXED_ZIP_TIME = (2026, 7, 23, 0, 0, 0)
 EXCLUDED_DIRS = {
@@ -80,7 +86,7 @@ def deterministic_zip(staging: Path, output: Path) -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Build the one-file Persona Distiller v0.0.0.6 release bundle."
+        description=f"Build the one-file Persona Distiller {VERSION} release bundle."
     )
     parser.add_argument(
         "--output",
@@ -101,6 +107,16 @@ def main() -> int:
         group_count = copy_skill(GROUP_ROOT, staging / "persona-distiller-group")
         for name in ("README.md", "install.py", "install.sh", "install.ps1"):
             shutil.copy2(TEMPLATE_ROOT / name, staging / name)
+        # ★ 版本号在打包时**注入**安装器，不留在模板里硬编码。
+        #   模板里原写死 BUNDLE_VERSION = "v0.0.0.6"，skill 升到 v0.0.0.7 之后
+        #   安装器就一直在拿旧版本比对，`bundled Skill version mismatch` 从那时起必然发生。
+        #   这是本次查出的**第五处**同名硬编码（另四处：self_check、build_release_bundle、
+        #   build_manifest、test_release_bundle）——**版本号必须有单一真源。**
+        installer = staging / "install.py"
+        installer.write_text(
+            installer.read_text(encoding="utf-8").replace(
+                'BUNDLE_VERSION = "v0.0.0.6"', f'BUNDLE_VERSION = "{VERSION}"'),
+            encoding="utf-8")
         (staging / "VERSION").write_text(VERSION + "\n", encoding="utf-8")
         payload_files = sorted(
             path

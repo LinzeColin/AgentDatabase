@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import pathlib
 import sys
 from pathlib import Path
 
@@ -20,6 +21,10 @@ EXCLUDED_DIRS = {
     "dist",
     "workspaces",
 }
+
+
+_VER = (pathlib.Path(__file__).resolve().parent.parent / 'VERSION')\
+       .read_text(encoding='utf-8').strip()
 
 
 def included(path: Path) -> bool:
@@ -51,7 +56,7 @@ def main() -> int:
     ]
     manifest["files"] = records
     manifest["distribution"] = {
-        "kind": "repository-customized-v0.0.0.6",
+        "kind": f"repository-customized-{_VER}",
         "lineage_base_archive_sha256": "e891912d98d14afb7677ac935a19be329d97d206f4ae74a644892f46b17f6748",
         "canonical_registry": "../persona-distiller-group",
     }

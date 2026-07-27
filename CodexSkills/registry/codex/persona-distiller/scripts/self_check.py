@@ -46,7 +46,11 @@ def main() -> int:
     version = (root / 'VERSION').read_text(encoding='utf-8').strip() if (root / 'VERSION').is_file() else None
     manifest = read_json(root / 'manifest.json', default={}) or {}
     checks['version'] = version
-    if version != 'v0.0.0.6' or manifest.get('version') != version:
+    # ★ 版本以 VERSION 文件为单一真源，不硬编码。
+    #   原来写死 'v0.0.0.6'，而 skill 早已升到 v0.0.0.7——
+    #   **这个校验从那次升版起就一直失败，且无人发现**，
+    #   因为它混在另外几个既有失败里。升版时漏改校验点，是典型的「单一真源没建立」。
+    if not version or manifest.get('version') != version:
         errors.append(f'version mismatch: VERSION={version!r}, manifest={manifest.get("version")!r}')
     if manifest.get('runtime_identity_routing') != 'automatic':
         errors.append('manifest must declare automatic runtime identity routing')

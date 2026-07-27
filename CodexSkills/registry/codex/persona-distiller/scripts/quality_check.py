@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import subprocess
 import sys
 from collections import Counter, defaultdict
 from pathlib import Path
@@ -441,10 +442,114 @@ def markdown_report(data: dict[str, Any]) -> str:
     return '\n'.join(lines).rstrip() + '\n'
 
 
+
+def run_content_checks(report, target: Path, cache_dirs: list[str]) -> None:
+    """把内容层检查接进发布门（v0.0.0.8 新增）。
+
+    ## 为什么要接进来
+
+    官方门原本只查**结构完整性**：文件在不在、字段全不全、数量对不对。
+    而 Icahn #92 到 Salatin #95 这五人暴露的严重缺陷**全部属于内容层**——
+    引了源但源里没这事实、伪造引文、订正换个措辞又活了、claim 标记错挂、
+    订正脚本留下的字段污染。**三个门当时全绿。**
+
+    结构完整的产物，完全可以每一句都错。
+
+    ## 硬门 vs 只列不判
+
+    - **硬门**（不过即拦）：装饰性引用、伪造引文、订正残留。
+      这三件都带负对照（`--self-test`），**负对照不过则其结论一律不作数**。
+    - **只列不判**（写进 `metrics['content_review']` 供人工看）：绝对化断言、
+      段内冗余、字段漂移、claim 标记锚点。它们有已知的合理误报形态，自动判定会误伤。
+
+      **★ 必须放 metrics 不能放 warnings**：`--strict` 下任何 warning 都会让门失败
+      （`passed = not errors and not (strict and warnings)`）。
+      第一版放进 warnings，直接让 skill 自带的 11 个测试全红——
+      **「只列不判」的语义就是不阻塞，放进一个会阻塞的通道等于自相矛盾。**
+
+    ## 没有 cache 时怎么办
+
+    `check_claim_coverage` 与 `check_quote_integrity` 需要原始语料。
+    取不到时**不静默跳过**——记一条 warning 说明「本次未做内容层核验」，
+    因为「没查」和「查过没问题」必须能被区分出来。
+    """
+    here = Path(__file__).resolve().parent
+    claims = target / 'evidence' / 'claims.jsonl'
+
+    def run(script: str, argv: list[str]) -> tuple[int, str]:
+        path = here / script
+        if not path.exists():
+            return -1, f'{script} 未安装'
+        proc = subprocess.run([sys.executable, str(path), *argv],
+                              capture_output=True, text=True)
+        return proc.returncode, (proc.stdout or '') + (proc.stderr or '')
+
+    # ── 先验检查器本身：负对照不过，它的「全绿」不构成任何证据 ──────────
+    for script, argv in (('check_claim_coverage.py', ['--self-test']),
+                         ('check_semantic_residue.py', ['--self-test'])):
+        code, out = run(script, argv)
+        if code == -1:
+            report.metrics.setdefault('content_review', {})['checker_missing'] = out
+        elif code != 0 or '负对照通过' not in out:
+            report.error('content.selftest-failed',
+                         f'{script} 负对照未过——其检查结论不作数')
+
+    review: dict[str, str] = {}
+    if not cache_dirs:
+        review['corpus'] = '未提供 --cache，装饰性引用与伪造引文两项**未做**（不是通过）'
+    else:
+        code, out = run('check_claim_coverage.py',
+                        ['--workspace', str(target), '--cache', *cache_dirs])
+        if code == -1:
+            review['checker_missing'] = out
+        elif code != 0:
+            # ★ 判据用**退出码**，不用输出串。
+            #   第一版写的是 `'结论: 通过' not in out`——而输出里的「不通过」
+            #   **包含「通过」这两个字**，于是判断整个反了：真有装饰性引用时反而放行。
+            #   接线当场做了负对照才发现（植入一条假断言，门没拦住）。
+            #   **中文子串匹配天然有这个坑：否定式包含肯定式。**
+            report.error('content.decorative-citation',
+                         '存在装饰性引用：断言挂的来源正文里找不到其关键实体')
+        for line in out.splitlines():
+            if line.startswith('实际检查'):
+                report.metrics['claim_coverage_checked'] = line.strip()
+
+        if claims.exists():
+            code, out = run('check_quote_integrity.py',
+                            ['--claims', str(claims), '--cache', *cache_dirs])
+            if code == -1:
+                review['checker_missing'] = out
+            elif '未命中 0 个' not in out:
+                review['quote_integrity'] = ('有引文未在语料中找到'
+                                             '——**未命中不等于伪造**，须人工核对')
+
+    # ── 只列不判：写进 warnings，不拦 ────────────────────────────────
+    for script, argv, key in (
+            ('check_absence_claims.py', ['--workspace', str(target)], 'absence_claims'),
+            ('check_redundancy.py', ['--workspace', str(target)], 'redundancy'),
+            ('check_schema_drift.py', ['--workspace', str(target),
+                                       '--expect', 'cases.jsonl:holdout_source_ids'],
+             'schema_drift'),
+            ('check_claim_anchors.py', ['--workspace', str(target)], 'claim_anchors')):
+        rc, out = run(script, argv)
+        if rc == -1:
+            continue
+        tail = [l.strip() for l in out.splitlines()
+                if l.strip().startswith(('✓', '⚠', '✗', '合计', 'claim 标记'))]
+        if tail:
+            review[key] = tail[-1][:160]
+
+    if review:
+        report.metrics['content_review'] = review
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description='Evidence-aware quality gate for Persona Distiller targets.')
     parser.add_argument('target', type=Path)
     parser.add_argument('--phase', choices=['research', 'synthesis', 'release'], default='release')
+    parser.add_argument('--cache', nargs='*', default=[],
+                        help='原始语料目录（可多个）。发布门的内容层核验需要它；'
+                             '不给则记 warning 说明「未做」，而不是当作通过。')
     parser.add_argument('--strict', action='store_true', help='Treat warnings as failures.')
     parser.add_argument('--allow-provisional', action='store_true', help='Downgrade quantitative minimum misses to warnings; never hides leakage or structural errors.')
     parser.add_argument('--write-report', action='store_true')
@@ -506,6 +611,7 @@ def main() -> int:
             cases = evaluate_cases(report, target, thresholds, {record.get('source_id') for record in holdout}, args.allow_provisional)
         if args.phase == 'release':
             evaluate_results(report, target, thresholds, cases)
+            run_content_checks(report, target, args.cache)
             findings = scan_secrets(target)
             report.metrics['secret_findings'] = len(findings)
             for finding in findings:
