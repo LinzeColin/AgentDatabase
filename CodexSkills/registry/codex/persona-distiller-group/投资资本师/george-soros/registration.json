@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:georgesoros",
+  "canonical_name": "George Soros",
+  "identity_family_id": "investor-capital-allocator",
+  "identity_mode": "single",
+  "registration_category": "投资资本师",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "george-soros",
+  "subject_uid": "person-032384f9285dd7b2",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/george-soros-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-27T03:14:22Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "1c0b2269b89762696e3c02ded988ad703c2e521de13b0a8742ff59c0bda5992c",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/george-soros-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "293b72b19285ec2c2f6b6b2608f6be940f0b32e11a5e1a8f9ea2e0c598c21ab7",
+      "runtime_size_bytes": 69887,
+      "size_bytes": 77260
+    }
+  ]
+}
