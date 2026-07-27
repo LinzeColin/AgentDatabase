@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:joelsalatin",
+  "canonical_name": "Joel Salatin",
+  "identity_family_id": "agriculture-fishery",
+  "identity_mode": "single",
+  "registration_category": "农林牧渔师",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "joel-salatin",
+  "subject_uid": "person-357fc0dabdf87e28",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/joel-salatin-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-27T18:45:22Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "c684277e0b3e1d7a53885fdeadcdb6985c0ccbe478bd84d91d323806fb72c570",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/joel-salatin-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "752a47286bdae54bfcc67edeb5785e65182a228e99626e9d902a67224e95463d",
+      "runtime_size_bytes": 90516,
+      "size_bytes": 97668
+    }
+  ]
+}
