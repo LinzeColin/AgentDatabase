@@ -60,7 +60,7 @@
 ## 当前登记
 
 <!-- PERSONA-REGISTRY:START -->
-当前唯一登记：**91 个人物**。
+当前唯一登记：**92 个人物**。
 
 | 唯一目录 | 人物数 |
 |---|---:|
@@ -68,7 +68,7 @@
 | `软件开发师/` | 32 |
 | `艺术设计师/` | 0 |
 | `创业经营师/` | 7 |
-| `投资资本师/` | 17 |
+| `投资资本师/` | 18 |
 | `思想教育师/` | 2 |
 | `政治法律师/` | 5 |
 | `客户营销师/` | 0 |
@@ -76,7 +76,7 @@
 | `财务合规师/` | 1 |
 | `医疗护理师/` | 0 |
 | `农林牧渔师/` | 0 |
-| **总计** | **91** |
+| **总计** | **92** |
 
 | 人物 | 唯一身份 | 版本 | 选入原因 | 最值得蒸馏的特点 | 对用户的利益/帮助 | 应用场景 | 关键能力 | 完整 ZIP |
 |---|---|---|---|---|---|---|---|---|
@@ -103,6 +103,7 @@
 | Thomas L. Saaty | `思想教育师` | `0.0.0.1` | His documented work is primarily mathematical decision engineering, with a substantial teaching corpus and a smaller method/tool-design dimension.；Historical-person governance requires multi-identity routing rather than pretending one occupational label captures the full record. | Hierarchy-first decomposition of complexity；Pairwise ratio judgment for intangible criteria | Turns ambiguous multi-criteria choices into inspectable decision models.；Shows which judgments drive a ranking and where the conclusion can reverse. | Complex multi-criteria selection and prioritization；Strategy and portfolio decisions using benefits, opportunities, costs, and risks | AHP hierarchy and pairwise-comparison design；ANP dependence, feedback, and supermatrix modeling | [ZIP](思想教育师/thomas-saaty/versions/0.0.0.1/thomas-saaty-persona-distillation-delivery-v0.0.0.1.zip) |
 | Aswath Damodaran | `投资资本师` | `0.0.0.1` | 公开身份明确以教学为先，并长期构建估值与公司金融课程体系；大量公司估值、风险数据与投资哲学材料支持资本配置分面 | 故事与数字双向约束；价值与价格严格区分 | 把模糊商业故事转换为可审计估值；识别市场价格已经隐含的预期 | 上市与非上市公司估值；高增长、亏损或复杂公司的情景分析 | 叙事到收入、利润、再投资、风险和终值的量化映射；透明 DCF、相对定价和风险溢价分析 | [ZIP](投资资本师/aswath-damodaran/versions/0.0.0.1/aswath-damodaran-persona-distillation-delivery-v0.0.0.1.zip) |
 | Benjamin Graham | `投资资本师` | `0.0.0.1` | 价值投资的奠基者；安全边际、市场先生、净流动资产估值法均出自其本人；其著作在 archive.org 有大量可核著录，一手材料充足 | 不承诺收益，只说明如何限制损失——句子落点在「最多会亏多少」；把「我会算错」当作方法的前提写进方案，不是当作谦辞 | 把「这家公司值不值这个价」拆成四步可执行动作；给出判断一个估值可不可靠的五条判据 | 用可核查的财务事实而非价格走势判断企业价值；把「自己会算错」转成可计算的安全边际差额 | 以净流动资产、账面价值、盈利记录等可核查项估值；把可能的判断误差量化为买入价与估值之间的差额 | [ZIP](投资资本师/benjamin-graham/versions/0.0.0.1/benjamin-graham-persona-distillation-delivery-v0.0.0.1.zip) |
+| Carl Icahn | `投资资本师` | `0.0.0.2` | **其一手语料形态在本库中独一无二**：不是著作，而是**近六十封随 SEC 13D 备案逐字公开的署名信**——同时是一手陈述、公开论证与带法律后果的正式表态；**一手比例 94%，为本库最高**，但 external 泳道仅 4 条，构成「自述充分而外部视角稀薄」的典型样本，其处置方式可复用 | **标签三层红线**：**「corporate raider」是外界所加**（1986 年同期报道显示来自被狙击公司的高管、律师与财经记者）；**「shareholder activist」是他自称**（其站点原话，全站无 raider 字样）；**但未查到他本人否认 raider 的逐字原话——不得写成他曾如此否认，替他做未经证实的否认与认领该称呼是同一类错误。**；**TWA 责任须分期，两个方向都不许倒**：1985–93 年的收购、杠杆私有化、出售希思罗航线，**经营决策责任明确归他**；**但 1992-01-31 首次破产时他仍是董事长（当日 UPI 称其为 TWA Chairman），1993-01-08 才协商辞任**。**最常见的一处错，是把《Karabu 机票折扣协议》算作他 1993 年离任时留下的安排。** 1993 年确立的是「**Karabu 贷款**」（约 2 亿美元退出融资）；**《Karabu 机票折扣协议》是 1995-06-14 为展期这笔已到期贷款而另行订立的**——两者都叫 Karabu，但不是同一份文件，相隔两年五个月。**他 1993 年离开的是管理层，不是这家公司的资本结构。** 此后多年，他通过 Karabu 等关联实体仍是 TWA 的主要债权人与缔约对手方——1995 年那两份协议他本人具名。因此两个方向都错：**「TWA 是他搞垮的」**把他离开管理层之后八年的经营结果算到他头上；**「1993 年之后跟他无关」**则抹掉了他以债权人身份持续影响该公司财务条件的事实，**而机票折扣协议正是这种影响的载体**。准确的说法是：**1985–93 年的经营决策归他；1993 年后他不再做经营决策，但仍以债权人身份影响其财务条件。**全盘认领与全盘推卸均为失真。 | 拦下「他自称企业掠夺者」与「他公开否认过这个称呼」这两个方向相反、同样无据的说法；拦下「TWA 是他搞垮的」，同时不滑向「跟他无关」的反向推卸 | 以持股取得对一家公司提出要求的资格；把「治理不善」具体化为哪个决定、多少钱、谁做的 | 设计并执行以持股为前提的维权路径；量化管理层决策对股东价值的具体损害 | [ZIP](投资资本师/carl-icahn/versions/0.0.0.2/carl-icahn-persona-distillation-delivery-v0.0.0.2.zip) |
 | Charlie Munger | `投资资本师` | `0.0.0.1` | Long, unusually well-documented record across speeches, shareholder letters, filings, and live Q&A.；Distinctive integration of capital allocation, multidisciplinary judgment, incentives, and institutional design. | Multidisciplinary latticework with inversion, incentives, opportunity cost, and combined psychological effects.；Low-frequency, high-threshold action with strong emphasis on survival, liquidity, and durable business quality. | Turns vague strategic or investment questions into a short causal model, downside test, and decision trigger set.；Improves learning plans by linking models to cases, counterexamples, and falsification exercises. | Company and acquisition analysis with current filings and valuation data.；Capital allocation, portfolio review, and downside stress testing. | Business-quality and opportunity-cost analysis.；Inversion-led risk identification and lollapalooza-effect red teaming. | [ZIP](投资资本师/charlie-munger/versions/0.0.0.1/charlie-munger-persona-distillation-delivery-v0.0.0.1.zip) |
 | Edward O. Thorp（爱德华·索普） | `投资资本师` | `0.0.0.1` | 跨赌场、工程和资本市场反复展示同一套可检验的概率—实验—风险闭环。；公开一手论文、长访谈与机构档案密度高，可区分事实、稳定模式和晚期修正。 | 机制优先：把叙事改写为状态变量、收益函数和可证伪预测。；优势与暴露分离：对冲已知因子后才评价残余收益。 | 为不确定问题提供可复算的实验与决策模板。；为投资或商业分析提供成本后优势、仓位、尾部和退出框架。 | 量化或基本面投资方案审查；研究假设、实验与原型设计 | 状态变量建模与判别实验；概率优势、Kelly仓位与破产风险 | [ZIP](投资资本师/edward-o-thorp/versions/0.0.0.1/edward-o-thorp-persona-distillation-delivery-v0.0.0.1.zip) |
 | George Soros | `投资资本师` | `0.0.0.2` | **本库第三个「概念或做法早于其著名应用者」的样本**，与 Bogle（#89）指数基金、Dalio（#90）风险平价构成可交叉验证的归属分层组；**其可错性主张同时是投资纪律与社会主张的前提**，是本族中罕见的「认识论贯通两端」样本 | **1992 年交易双向红线**：**Stanley Druckenmiller 时任首席基金经理、主导构想与建仓**，Soros 的贡献是**主张把头寸从约 15 亿放大到百亿级**，当日做空者不止一家。**不得压平成「他一人搞垮英格兰银行」，也不得完全否认他的作用。**；**「反身性」双向红线**：**概念不是他首创**（Thomas 1923／Mead 1934／Merton 1948 早数十年，Popper 的俄狄浦斯效应已触及，且 Popper 为其 LSE 导师）；**但他首次完整应用于金融市场是真实贡献**，两边都不能倒。 | 拦下「他一个人搞垮了英格兰银行」这一最强单人叙事，同时不滑向「跟他无关」的反向失真；拦下「反身性是他发明的」，同时保住「他首次完整应用于金融市场」这一真实贡献 | 用反身性框架判断认知与基本面是否在互相改写；判断自我强化的循环走到了哪一阶段而非预测拐点 | 以认知与基本面的双向因果解释价格与序列；判断繁荣—崩溃序列所处阶段 | [ZIP](投资资本师/george-soros/versions/0.0.0.2/george-soros-persona-distillation-delivery-v0.0.0.2.zip) |
