@@ -61,10 +61,10 @@
         "Public evidence spans direct retrospectives, authored work, company filings, SEC records, customer systems, operating results, and board governance.",
         "The operating model contains reusable mechanisms and explicit self-identified blind spots rather than only a recognizable speaking style."
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2026,
       "subject_origin": "public",
       "subject_slug": "anne-mulcahy",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-ccfd7af3701efdd8",
       "team_card": "创业经营师/anne-mulcahy/team-card.json",
       "user_value": [
@@ -125,10 +125,10 @@
         "模型在公司战略、组织管理、创始人判断和风险投资之间存在可验证的共享决策内核，同时保留角色差异。",
         "证据包含第一方著作、经营备忘录、监管文件、长访谈、当时报道、批评材料与密封 Holdout。"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2026,
       "subject_origin": "public",
       "subject_slug": "ben-horowitz",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-5923694696340ab4",
       "team_card": "创业经营师/ben-horowitz/team-card.json",
       "user_value": [
@@ -188,10 +188,10 @@
         "His decisions span company building, technical organization, public acquisition governance and long-horizon institutions, enabling cross-context validation.",
         "The record contains explicit constraints and counterexamples, allowing an executable model rather than hero-style voice imitation."
       ],
-      "subject_active_through": null,
+      "subject_active_through": 1996,
       "subject_origin": "historical",
       "subject_slug": "david-packard",
-      "subject_status": "unauthored",
+      "subject_status": "deceased",
       "subject_uid": "person-bf71eaacc853bbd1",
       "team_card": "创业经营师/david-packard/team-card.json",
       "user_value": [
@@ -250,10 +250,10 @@
         "Published an unusually explicit and repeatedly revised organizational operating system with observable decisions and counterexamples.",
         "Primary identity has deep first-party evidence; adjacent identities are separately bounded rather than inferred from fame."
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2026,
       "subject_origin": "public",
       "subject_slug": "reed-hastings",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-75835b9db1aadd99",
       "team_card": "创业经营师/reed-hastings/team-card.json",
       "user_value": [
@@ -313,10 +313,10 @@
         "Evidence-grounded strategy teaching that needs concrete operating mechanisms",
         "Red-team review of low-price, scale or frugality proposals"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 1992,
       "subject_origin": "historical",
       "subject_slug": "sam-walton",
-      "subject_status": "unauthored",
+      "subject_status": "deceased",
       "subject_uid": "person-9f318f968e420d53",
       "team_card": "创业经营师/sam-walton/team-card.json",
       "user_value": [
@@ -373,10 +373,10 @@
         "Career evidence is deepest in operations, supply chain, enterprise stewardship, functional organization, capital allocation, and succession.",
         "Public product, privacy, policy, and values evidence is material but should be routed as bounded facets rather than separate expert identities."
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2026,
       "subject_origin": "public",
       "subject_slug": "tim-cook",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-5d2b961b1c591949",
       "team_card": "创业经营师/tim-cook/team-card.json",
       "user_value": [
@@ -434,10 +434,10 @@
         "IBM 1993—2002 提供连续的决策、执行、财务结果和外部批评记录，可构建可反证模型。",
         "麦肯锡、美国运通、RJR Nabisco、教育改革与公益阶段提供跨情境对照，降低单案例过拟合。"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2025,
       "subject_origin": "public",
       "subject_slug": "lou-gerstner",
-      "subject_status": "unauthored",
+      "subject_status": "deceased",
       "subject_uid": "person-50b921c2baaf3979",
       "team_card": "创业经营师/lou-gerstner/team-card.json",
       "user_value": [
@@ -500,10 +500,10 @@
         "The target has a distinctive executable methodology: validate the base schedule, elicit candid risk data, model causal risk drivers, simulate jointly, prioritize mitigation, and report confidence.",
         "Multiple professional roles are evidenced, but technical project-risk expertise remains dominant and bounds the model."
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2026,
       "subject_origin": "public",
       "subject_slug": "david-t-hulett",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-ee85f7f45a3ff779",
       "team_card": "建造采购师/david-t-hulett/team-card.json",
       "user_value": [
@@ -562,10 +562,10 @@
         "其公开职业同时呈现原则化教学、定量系统工程与长期咨询经营，单一身份会丢失关键能力结构。",
         "思想教育家是主要表达与概念载体；技术工程师提供排队、批量和随机控制模型；创业经营家承载资源与组织应用。"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2025,
       "subject_origin": "public",
       "subject_slug": "donald-g-reinertsen",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-10c4cf2fcb38e04f",
       "team_card": "建造采购师/donald-g-reinertsen/team-card.json",
       "user_value": [
@@ -622,10 +622,10 @@
         "Use when estimate accuracy, systemic risk, historical benchmarking or AACE-style practice is central.",
         "Use when an organisation needs a repeatable method and training handoff, not only an expert opinion."
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2025,
       "subject_origin": "public",
       "subject_slug": "john-k-hollmann",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-b748f949cd31ac8e",
       "team_card": "建造采购师/john-k-hollmann/team-card.json",
       "user_value": [
@@ -683,10 +683,10 @@
         "Distinctive, evidence-rich framework for diagnosing transformation, flow and value in project systems.",
         "Strong public record connecting theory, teaching, industry implementation, digitalization and sustainability."
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2026,
       "subject_origin": "public",
       "subject_slug": "lauri-koskela",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-7cbaeae29d4e3136",
       "team_card": "建造采购师/lauri-koskela/team-card.json",
       "user_value": [
@@ -745,10 +745,10 @@
         "技术工程与教学两条身份均有跨年代一手来源支持",
         "产品—组织—流程联模形成区别于一般 BIM 顾问的决策内核"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2026,
       "subject_origin": "public",
       "subject_slug": "martin-fischer-stanford",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-d252cba93ec14799",
       "team_card": "建造采购师/martin-fischer-stanford/team-card.json",
       "user_value": [
@@ -812,10 +812,10 @@
         "Distinctive multi-stakeholder and lifecycle reasoning useful for complex built-environment systems",
         "Explicit counterevidence permits calibrated use rather than prestige imitation"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2018,
       "subject_origin": "historical",
       "subject_slug": "paul-teicholz",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-abe609b7406793cd",
       "team_card": "建造采购师/paul-teicholz/team-card.json",
       "user_value": [
@@ -873,10 +873,10 @@
         "既是公开思想教育者，也是把课程、咨询和跨国交付产品化的经营者，适合多身份执行建模。",
         "公开语料包含著作、直接访谈、连续专栏、机构档案与明确反方，能够做证据三角验证。"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2001,
       "subject_origin": "public",
       "subject_slug": "philip-crosby",
-      "subject_status": "unauthored",
+      "subject_status": "deceased",
       "subject_uid": "person-7b5f309c538fc0b9",
       "team_card": "建造采购师/philip-crosby/team-card.json",
       "user_value": [
@@ -937,10 +937,10 @@
         "公开证据跨越结构工程、CAD、BIM、Lean、语义建模、AI 与数字孪生施工，形成连续且可执行的工程系统轨迹。",
         "其论文、项目、课程、模拟游戏与行业案例同时覆盖理论、原型、测量、采用和教育，适合研究与实施型任务。"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2025,
       "subject_origin": "public",
       "subject_slug": "rafael-sacks",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-67d8feb542534853",
       "team_card": "建造采购师/rafael-sacks/team-card.json",
       "user_value": [
@@ -1000,10 +1000,10 @@
         "具备经营家分面，可把现场机制连接到低增长、资源配置、供应商与组织部署",
         "具备有边界的教育家分面，可用观察、问题和试验训练问题解决者"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 1990,
       "subject_origin": "historical",
       "subject_slug": "taiichi-ohno",
-      "subject_status": "unauthored",
+      "subject_status": "deceased",
       "subject_uid": "person-2f24e754468cccc1",
       "team_card": "建造采购师/taiichi-ohno/team-card.json",
       "user_value": [
@@ -1064,10 +1064,10 @@
         "多重身份能区分工程方法、教学传播与有限运营治理，避免把职业标签扩张为全能专家",
         "存在重要历史归属争议，适合通过证据化边界示范可靠人物建模"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 1990,
       "subject_origin": "historical",
       "subject_slug": "shigeo-shingo",
-      "subject_status": "unauthored",
+      "subject_status": "deceased",
       "subject_uid": "person-a4255a3abc58efed",
       "team_card": "建造采购师/shigeo-shingo/team-card.json",
       "user_value": [
@@ -1129,10 +1129,10 @@
         "兼具工程方法、经济决策和方法教学的可执行结构",
         "其统计争议可用于训练条件化工具选择与反例意识"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2012,
       "subject_origin": "historical",
       "subject_slug": "genichi-taguchi",
-      "subject_status": "unauthored",
+      "subject_status": "deceased",
       "subject_uid": "person-e57f090b624678b1",
       "team_card": "建造采购师/genichi-taguchi/team-card.json",
       "user_value": [
@@ -1196,10 +1196,10 @@
         "其成熟体系明确连接客户、管理、测量和组织改善",
         "多重身份路由能防止把管理权威误当成跨域技术权威"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2008,
       "subject_origin": "historical",
       "subject_slug": "joseph-juran",
-      "subject_status": "unauthored",
+      "subject_status": "deceased",
       "subject_uid": "person-1c0c33350429803e",
       "team_card": "建造采购师/joseph-juran/team-card.json",
       "user_value": [
@@ -1258,10 +1258,10 @@
         "其公开著作与行动横跨教育、宗教解释、保留地医疗、青年组织、公共政策和原住民权利倡议，足以构建跨身份但有明确边界的执行模型。",
         "一手文本数量充足，同时存在同化—批判、作者中介和采集伦理等可用于防止英雄化的反证。"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 1939,
       "subject_origin": "historical",
       "subject_slug": "charles-eastman",
-      "subject_status": "unauthored",
+      "subject_status": "deceased",
       "subject_uid": "person-7ebc47cec1b5b617",
       "team_card": "思想教育师/charles-eastman/team-card.json",
       "user_value": [
@@ -1321,10 +1321,10 @@
         "Historical-person governance requires multi-identity routing rather than pretending one occupational label captures the full record.",
         "The selected weights prioritize executable AHP/ANP modeling while preserving pedagogy and workflow design."
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2017,
       "subject_origin": "historical",
       "subject_slug": "thomas-saaty",
-      "subject_status": "unauthored",
+      "subject_status": "deceased",
       "subject_uid": "person-3f9e54d43c0ccff8",
       "team_card": "思想教育师/thomas-saaty/team-card.json",
       "user_value": [
@@ -1383,10 +1383,10 @@
         "大量公司估值、风险数据与投资哲学材料支持资本配置分面",
         "两种主身份在故事—数字桥接和可更新决策上形成互补"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2026,
       "subject_origin": "public",
       "subject_slug": "aswath-damodaran",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-44e9da7e6fbcb15e",
       "team_card": "投资资本师/aswath-damodaran/team-card.json",
       "user_value": [
@@ -1445,10 +1445,10 @@
         "**其最著名的学生公开指出过其局限（Buffett 1988 对 Carol Loomis 的表述），校准材料罕见地硬**",
         "本项目第一个投资资本师族人物，其硬性拒答规则可作为该族模板"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 1976,
       "subject_origin": "public",
       "subject_slug": "benjamin-graham",
-      "subject_status": "unauthored",
+      "subject_status": "deceased",
       "subject_uid": "person-9a530b4ac07aeaf9",
       "team_card": "投资资本师/benjamin-graham/team-card.json",
       "user_value": [
@@ -1507,7 +1507,7 @@
         "**TWA 是继 Soros 英格兰银行、Simons Medallion 之后又一个「单人叙事压缩多方多期事实」的样本**，且链条长达 16 年、责任分期最清晰",
         "与 Bogle（#89）在「股东该做什么」上给出直接对立的答案，前提相反而非程度不同，可构成干净对照"
       ],
-      "subject_active_through": 2024,
+      "subject_active_through": 2026,
       "subject_origin": "public",
       "subject_slug": "carl-icahn",
       "subject_status": "living",
@@ -1567,10 +1567,10 @@
         "Distinctive integration of capital allocation, multidisciplinary judgment, incentives, and institutional design.",
         "High user value for decision quality when paired with explicit counterevidence and current-data verification."
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2023,
       "subject_origin": "public",
       "subject_slug": "charlie-munger",
-      "subject_status": "unauthored",
+      "subject_status": "deceased",
       "subject_uid": "person-efb4000038a75aba",
       "team_card": "投资资本师/charlie-munger/team-card.json",
       "user_value": [
@@ -1631,10 +1631,10 @@
         "公开一手论文、长访谈与机构档案密度高，可区分事实、稳定模式和晚期修正。",
         "其方法对研究、投资、风险审计和教学具有明确可迁移接口，同时边界可清楚限定。"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2026,
       "subject_origin": "public",
       "subject_slug": "edward-o-thorp",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-5d7562e7f00cf9ef",
       "team_card": "投资资本师/edward-o-thorp/team-card.json",
       "user_value": [
@@ -1692,10 +1692,10 @@
         "与 Bogle 在「个人能否通过判断取胜」上给出相反答案，且两人成立条件不同，可构成干净对照",
         "**他是大规模政治性错误信息的目标**，本产物据此确立了「有出处才并陈、无出处不收」的处置规则，可复用于本族其他争议人物"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2026,
       "subject_origin": "public",
       "subject_slug": "george-soros",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-032384f9285dd7b2",
       "team_card": "投资资本师/george-soros/team-card.json",
       "user_value": [
@@ -1755,10 +1755,10 @@
         "公开职业轨迹、Oaktree 投资哲学与跨周期备忘录均以投资、风险和资本配置为核心",
         "思想教育能力作为次级分面有充分写作与访谈证据，但不取代主投资身份"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2026,
       "subject_origin": "public",
       "subject_slug": "howard-marks",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-267c782a1263587c",
       "team_card": "投资资本师/howard-marks/team-card.json",
       "user_value": [
@@ -1816,10 +1816,10 @@
         "职业核心与主要公开作品长期聚焦价值投资、特殊情形、相对价值和资本配置。",
         "监管披露显示其持续承担组合管理与共同首席投资官职责。"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2026,
       "subject_origin": "public",
       "subject_slug": "joel-greenblatt",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-2e28080444c656dc",
       "team_card": "投资资本师/joel-greenblatt/team-card.json",
       "user_value": [
@@ -1877,10 +1877,10 @@
         "与 Graham（#86）、Fisher（#87）分别在「给规则还是取消判断」「能否事先识别优质成长股」上分歧明确",
         "近百篇署名讲稿逐篇注明场合与日期，其立场的时间一致性可被外部检验——本族中罕见"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2019,
       "subject_origin": "public",
       "subject_slug": "john-bogle",
-      "subject_status": "unauthored",
+      "subject_status": "deceased",
       "subject_uid": "person-0e5a67ecd002d8b2",
       "team_card": "投资资本师/john-bogle/team-card.json",
       "user_value": [
@@ -1942,10 +1942,10 @@
         "在不确定性、概率、基准率和反馈方面拥有长期、跨来源一致的公开方法体系",
         "兼具研究写作与三十余年教学证据，能够把复杂模型转成可执行问题和清单"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2026,
       "subject_origin": "public",
       "subject_slug": "michael-mauboussin",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-9322333a7db7b397",
       "team_card": "投资资本师/michael-mauboussin/team-card.json",
       "user_value": [
@@ -2000,10 +2000,10 @@
         "投资、治理和慈善资本配置形成可比较的长期决策轨迹",
         "终点分析、规模经济共享与心理优势具有明确可执行接口"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2014,
       "subject_origin": "public",
       "subject_slug": "nick-sleep",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-960a8572c56f8a1f",
       "team_card": "投资资本师/nick-sleep/team-card.json",
       "user_value": [
@@ -2060,10 +2060,10 @@
         "与已入库的 Fisher（#87）在组合结构上方向相反（广覆盖容错 vs 集中长持），与 Graham（#86）在「普通人该攻还是该守」上取向不同",
         "他主动说明业绩依赖不可复制的条件，是投资族中罕见的自我校准样本"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2025,
       "subject_origin": "public",
       "subject_slug": "peter-lynch",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-cef3126c901b9ec0",
       "team_card": "投资资本师/peter-lynch/team-card.json",
       "user_value": [
@@ -2121,10 +2121,10 @@
         "其方法弱项被公开讨论且他本人未回避，是校准而非神化的好样本",
         "本人物含两类高价值归属陷阱：父子同姓、以及第三方刻画被误传为当事人自述"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2004,
       "subject_origin": "public",
       "subject_slug": "philip-fisher",
-      "subject_status": "unauthored",
+      "subject_status": "deceased",
       "subject_uid": "person-00da3b6328276e72",
       "team_card": "投资资本师/philip-fisher/team-card.json",
       "user_value": [
@@ -2183,10 +2183,10 @@
         "把个人经验成文为可执行原则并公开交付，这一做法在本族中罕见，可与其他人物的「只给结论不给方法」形成对照",
         "在世人物，语料截至 2026-07-27，产物须显式声明为基于证据的模型、非本人、非授权、不代表其当前观点"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2026,
       "subject_origin": "public",
       "subject_slug": "ray-dalio",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-c82d6e799dd1c0fa",
       "team_card": "投资资本师/ray-dalio/team-card.json",
       "user_value": [
@@ -2247,10 +2247,10 @@
         "Public evidence supports a transferable interface between document precision, board strategy and transaction execution.",
         "Repeated direct interviews expose decision conditions, not only biographical achievements."
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2026,
       "subject_origin": "public",
       "subject_slug": "robert-a-kindler",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-72b93943734eb8aa",
       "team_card": "投资资本师/robert-a-kindler/team-card.json",
       "user_value": [
@@ -2310,10 +2310,10 @@
         "长期担任 Baupost CEO 与投资组合经理，职业事实与投资资本家身份直接匹配",
         "公开材料对估值、组合、风险、现金、催化剂和组织流程提供了跨时期证据"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2026,
       "subject_origin": "public",
       "subject_slug": "seth-klarman",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-7f6b524aa85e5b7a",
       "team_card": "投资资本师/seth-klarman/team-card.json",
       "user_value": [
@@ -2373,10 +2373,10 @@
         "主身份可由年度信、监管文件、交易复盘和现场问答交叉验证",
         "投资分面能覆盖估值、并购、回购、保险、流动性和组合选择"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2026,
       "subject_origin": "public",
       "subject_slug": "warren-buffett",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-006a3697d70d2a8d",
       "team_card": "投资资本师/warren-buffett/team-card.json",
       "user_value": [
@@ -2436,10 +2436,10 @@
         "最密集、最可核的一手材料集中于价值投资、企业研究、仓位、风险与长期持有。",
         "其他身份只有筛查级证据，不足以与投资资本家并列为主身份。"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2026,
       "subject_origin": "public",
       "subject_slug": "li-lu",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-5803388189728a4f",
       "team_card": "投资资本师/li-lu/team-card.json",
       "user_value": [
@@ -2493,10 +2493,10 @@
         "其公开职业证据覆盖复杂诉讼、调查、监管与机构治理，可为高风险事实判断提供可执行结构。",
         "模型同时记录胜负、争议、能力禁区和当前性要求，适合担任正向法律问题解决者。"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2026,
       "subject_origin": "public",
       "subject_slug": "beth-wilkinson",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-473d8314576afc9c",
       "team_card": "政治法律师/beth-wilkinson/team-card.json",
       "user_value": [
@@ -2551,10 +2551,10 @@
         "其蒸馏模型把复杂诉讼、证人、可信度、团队和路径选择连成可执行系统。",
         "能力表明确区分高置信、有限迁移和不可用领域，便于安全组队。"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2026,
       "subject_origin": "public",
       "subject_slug": "evan-r-chesler",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-97977eeaceed1506",
       "team_card": "政治法律师/evan-r-chesler/team-card.json",
       "user_value": [
@@ -2608,10 +2608,10 @@
         "公开证据的主轴是银行监管、重大金融机构交易、系统性危机处置与制度设计。",
         "模型具有可证伪的系统因果、程序与执行规则，并明确大型金融机构视角偏差和能力禁区。"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2026,
       "subject_origin": "public",
       "subject_slug": "h-rodgin-cohen",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-8da4cba5393aa7e2",
       "team_card": "政治法律师/h-rodgin-cohen/team-card.json",
       "user_value": [
@@ -2669,10 +2669,10 @@
         "Public evidence is deepest in high-stakes M&A, activist defense, board governance and regulatory transaction strategy.",
         "Direct statements expose a repeatable decision system: listen, map constraints, prepare the endgame and then move quickly."
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2026,
       "subject_origin": "public",
       "subject_slug": "scott-a-barshay",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-8d0caa2dc971a2f8",
       "team_card": "政治法律师/scott-a-barshay/team-card.json",
       "user_value": [
@@ -2726,10 +2726,10 @@
         "现有交付包含六路来源覆盖、胜诉与败诉样本、32 个评测案例和明确的能力禁区。",
         "模型适合在高风险争议中担任证据、程序、叙事和团队协同的正向解决者。"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2026,
       "subject_origin": "public",
       "subject_slug": "theodore-v-wells-jr",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-1a4a76c0932b6aad",
       "team_card": "政治法律师/theodore-v-wells-jr/team-card.json",
       "user_value": [
@@ -2786,10 +2786,10 @@
         "公开第一人称文章、长访谈、项目视频和播客跨越手动加工、工业维修、CNC 学习、计量、设备迁移与产品开发，足以重建可执行技术工作系统。",
         "模型纳入机器限制、学习依赖、赞助关系、长格式成本和公开视频选择偏差，避免把名望或成品展示误写为完整过程能力。"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2026,
       "subject_origin": "public",
       "subject_slug": "adam-booth-abom79",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-7e22061fa2a0bb27",
       "team_card": "材料建工师/adam-booth-abom79/team-card.json",
       "user_value": [
@@ -2846,10 +2846,10 @@
         "公开成果长期集中于摩擦学、材料科学、表面工程、实验验证和专利转化。",
         "论文、专利、技术演讲和系统能耗研究共同支持技术工程师主身份。"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2024,
       "subject_origin": "public",
       "subject_slug": "ali-erdemir",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-7fbc8d856b754939",
       "team_card": "材料建工师/ali-erdemir/team-card.json",
       "user_value": [
@@ -2907,10 +2907,10 @@
         "Long record of translating research into ASME codes, standards and practical engineering methods.",
         "Public CEO decisions show an additional but bounded operator facet centered on expert teams and client success."
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2026,
       "subject_origin": "public",
       "subject_slug": "charles-becht-iv",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-b1330f1111935f58",
       "team_card": "材料建工师/charles-becht-iv/team-card.json",
       "user_value": [
@@ -2968,10 +2968,10 @@
         "Creo 与 Rapidia 的公开轨迹支持有界创业经营分面，但组织与资本细节保持限制。",
         "18 集原型课程、工坊视频和 UBC 教学记录支持开发设计与思想教育分面。"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2025,
       "subject_origin": "public",
       "subject_slug": "dan-gelbart",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-8780bb999e445f70",
       "team_card": "材料建工师/dan-gelbart/team-card.json",
       "user_value": [
@@ -3028,10 +3028,10 @@
         "Official records independently support both the tribology engineer and industrial educator roles.",
         "The model adds distinctive value in interface failure, wear testing and mechanism discrimination rather than generic expert style."
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2006,
       "subject_origin": "historical",
       "subject_slug": "ernest-rabinowicz",
-      "subject_status": "unauthored",
+      "subject_status": "deceased",
       "subject_uid": "person-5b85cfd6f411f3b5",
       "team_card": "材料建工师/ernest-rabinowicz/team-card.json",
       "user_value": [
@@ -3090,10 +3090,10 @@
         "技术文章、标准委员会记录、教材、课程和政府/监管资料形成跨时期、跨载体证据链，足以构建技术工程主身份。",
         "同名创业者等身份已隔离；当前雇佣/咨询关系按出版物时间处理，不把动态隶属当成稳定人格事实。"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2023,
       "subject_origin": "public",
       "subject_slug": "george-antaki",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-d22682d28b6acd4b",
       "team_card": "材料建工师/george-antaki/team-card.json",
       "user_value": [
@@ -3156,10 +3156,10 @@
         "Extensive books, courses, software archives and interviews support a distinct thinker-educator facet in addition to technical expertise.",
         "Public controversy, unresolved-question reviews and long-form oral history provide counterevidence and temporal depth rather than only honours profiles."
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2025,
       "subject_origin": "public",
       "subject_slug": "harry-bhadeshia",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-9099fb1a6a5d5994",
       "team_card": "材料建工师/harry-bhadeshia/team-card.json",
       "user_value": [
@@ -3218,10 +3218,10 @@
         "The corpus contains repeatable decision rules, failure-analysis methods and implementation boundaries rather than style alone.",
         "A secondary educator/mentor facet is supported by books, courses, reading assignments and troubleshooting-system transfer."
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2022,
       "subject_origin": "public",
       "subject_slug": "heinz-p-bloch",
-      "subject_status": "unauthored",
+      "subject_status": "deceased",
       "subject_uid": "person-f611b1d8ba66ea65",
       "team_card": "材料建工师/heinz-p-bloch/team-card.json",
       "user_value": [
@@ -3280,10 +3280,10 @@
         "Distinct evidence clusters cover tribology, measurement standards, inkjet manufacturing, teaching and technical history.",
         "Strong negative boundaries prevent unsupported transfer into investing, politics, law or private-person simulation."
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2024,
       "subject_origin": "public",
       "subject_slug": "ian-michael-hutchings",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-f50ab6506524d33e",
       "team_card": "材料建工师/ian-michael-hutchings/team-card.json",
       "user_value": [
@@ -3343,10 +3343,10 @@
         "著作、论文、试验方法、课程与研究中心形成可执行证据链",
         "公开来源足以分离技术能力、教育能力与明确负能力"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2024,
       "subject_origin": "public",
       "subject_slug": "john-c-lippold",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-338aa48155f5c293",
       "team_card": "材料建工师/john-c-lippold/team-card.json",
       "user_value": [
@@ -3405,10 +3405,10 @@
         "The strongest task-independent blend is technical-engineer 70% plus thinker-educator 30%; other identities lack sufficient direct evidence.",
         "The corpus supports an executable decision process, not merely biographical or stylistic imitation."
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2004,
       "subject_origin": "historical",
       "subject_slug": "john-moubray",
-      "subject_status": "unauthored",
+      "subject_status": "deceased",
       "subject_uid": "person-7dda156489e30721",
       "team_card": "材料建工师/john-moubray/team-card.json",
       "user_value": [
@@ -3526,10 +3526,10 @@
         "其模型聚焦维护计划与排程这一高价值、可验证、可实施的工程管理问题。",
         "公开材料同时包含明确原则、实施案例、数字主张与外部修订，适合做边界化蒸馏。"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2026,
       "subject_origin": "public",
       "subject_slug": "doc-palmer",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-d88481e533deec11",
       "team_card": "材料建工师/doc-palmer/team-card.json",
       "user_value": [
@@ -3589,10 +3589,10 @@
         "Use for reversible machine-tool upgrades, custom fixtures, tooling and inspection planning in one-off or small-run work.",
         "Use for practical machining instruction that exposes setup, failure modes and verification instead of only recipes."
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2025,
       "subject_origin": "public",
       "subject_slug": "stefan-gotteswinter",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-3189ae3e813aaea5",
       "team_card": "材料建工师/stefan-gotteswinter/team-card.json",
       "user_value": [
@@ -3647,10 +3647,10 @@
         "一手论文、专著、技术回顾和官方履历形成跨四十余年的连续证据链。",
         "技术工程师为主、思想教育家为辅可解释其机制研究与教材/教学产出的双重结构。"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2025,
       "subject_origin": "public",
       "subject_slug": "sindo-kou",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-bf55f8dae7410898",
       "team_card": "材料建工师/sindo-kou/team-card.json",
       "user_value": [
@@ -3709,10 +3709,10 @@
         "Stable cross-source problem-framing patterns can be operationalized without claiming private identity.",
         "High user value for engineering review, accident learning, complex-system risk, and teaching."
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2025,
       "subject_origin": "public",
       "subject_slug": "nancy-leveson",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-77558203545330f3",
       "team_card": "财务合规师/nancy-leveson/team-card.json",
       "user_value": [
@@ -3783,10 +3783,10 @@
         "他是团队中唯一以“先质疑框架本身”为起点的专家，与 Ritchie／Thompson／Torvalds 形成可对照的方向性视角",
         "其局限同样清晰可举证（对落地成本关注不足），便于运行时做能力校准"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2026,
       "subject_origin": "public",
       "subject_slug": "alan-kay",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-5cbe3ce70b577093",
       "team_card": "软件开发师/alan-kay/team-card.json",
       "user_value": [
@@ -3859,10 +3859,10 @@
         "同一人在 C#（健全名义类型）与 TypeScript（不健全结构类型）给出相反答案，是“判断依赖约束而非偏好”的清晰样本",
         "其局限（不健全的长期补偿成本）证据充分且可举证，便于运行时校准"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2026,
       "subject_origin": "public",
       "subject_slug": "anders-hejlsberg",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-d532d29f900939cc",
       "team_card": "软件开发师/anders-hejlsberg/team-card.json",
       "user_value": [
@@ -3921,10 +3921,10 @@
         "公开一手材料横跨论文、工业系统、课程、代码、访谈与近期 Agent 研究，适合构建可执行而非仅风格化的人物模型。",
         "技术工程与思想教育均有长期、可复现的作品证据；开发设计仅限技术系统，创业经营仅保留有证据的教育产品范围。"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2026,
       "subject_origin": "public",
       "subject_slug": "andrej-karpathy",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-007066b2d64b6110",
       "team_card": "软件开发师/andrej-karpathy/team-card.json",
       "user_value": [
@@ -3981,10 +3981,10 @@
         "其公开技术证据横跨数据抽象、编程语言、类型、复制、拜占庭容错、信息流与事务，足以形成跨五十年的可执行工程模型。",
         "原始论文、系统实现、基准、教材、直接访谈和外部反例能够同时约束能力、工作方法、表达与边界。"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2024,
       "subject_origin": "public",
       "subject_slug": "barbara-liskov",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-03e83080e5ddf901",
       "team_card": "软件开发师/barbara-liskov/team-card.json",
       "user_value": [
@@ -4054,10 +4054,10 @@
         "在“为兼容性付代价”这一点上与 Ritchie 结果相似但动机不同，是团队内少见的细粒度对照",
         "其局限（复杂度的人力成本）证据充分且他本人多数承认，便于运行时校准"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2026,
       "subject_origin": "public",
       "subject_slug": "bjarne-stroustrup",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-e4696e741f5ba56e",
       "team_card": "软件开发师/bjarne-stroustrup/team-card.json",
       "user_value": [
@@ -4115,10 +4115,10 @@
         "The same decision patterns recur across courses, books, essays, interviews, code, and institutional records, allowing cross-context adjudication rather than voice imitation.",
         "The public corpus is sufficiently broad for a deep profile while its private-behavior gaps can be stated explicitly."
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2026,
       "subject_origin": "public",
       "subject_slug": "chip-huyen",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-1b97ddd980284e8f",
       "team_card": "软件开发师/chip-huyen/team-card.json",
       "user_value": [
@@ -4173,10 +4173,10 @@
         "Multiple independent artifact classes support a stable representation-first, measurement-first research method.",
         "Public courses, books, tools and standards provide executable work patterns rather than voice-only imitation."
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2026,
       "subject_origin": "public",
       "subject_slug": "christopher-manning",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-96bb0442b3c17467",
       "team_card": "软件开发师/christopher-manning/team-card.json",
       "user_value": [
@@ -4243,10 +4243,10 @@
         "公开且具体地记录自身判断失误与其根因，为“可校准的专家模型”提供稀有样本",
         "1983 年图灵奖、1990 年 Hamming 奖章、1998 年美国国家技术奖章、2011 年日本国际奖，权威认定充分"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2011,
       "subject_origin": "public",
       "subject_slug": "dennis-ritchie",
-      "subject_status": "unauthored",
+      "subject_status": "deceased",
       "subject_uid": "person-be1d2b08b315a98f",
       "team_card": "软件开发师/dennis-ritchie/team-card.json",
       "user_value": [
@@ -4304,10 +4304,10 @@
         "以'算法分析'奠基者与 TeX 作者身份，提供可迁移的形式化与精确分析方法内核。",
         "公开语料同时包含正例与批评（如 MIX/MMIX 难读），支持能力校准而非造神。"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2026,
       "subject_origin": "public",
       "subject_slug": "donald-knuth",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-523f286547535154",
       "team_card": "软件开发师/donald-knuth/team-card.json",
       "user_value": [
@@ -4364,10 +4364,10 @@
         "他与 Alan Kay 在「新手学不会是谁的问题」上给出相反答案，是团队内极干净的一组对照",
         "其框架只有工具层被采纳、ARC 解体、NLS 商业化失败——是校准而非神化的好样本"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2013,
       "subject_origin": "public",
       "subject_slug": "douglas-engelbart",
-      "subject_status": "unauthored",
+      "subject_status": "deceased",
       "subject_uid": "person-a6460803d705cd4a",
       "team_card": "软件开发师/douglas-engelbart/team-card.json",
       "user_value": [
@@ -4425,10 +4425,10 @@
         "在「正确性从哪里来」这一问题上与团队内实践取向（Thompson／Torvalds）构成最尖锐的可对照分歧",
         "其形式化推导方法有明确且已被实测的适用边界，便于校准而非神化"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2002,
       "subject_origin": "public",
       "subject_slug": "edsger-dijkstra",
-      "subject_status": "unauthored",
+      "subject_status": "deceased",
       "subject_uid": "person-76fe8a6e2d65d889",
       "team_card": "软件开发师/edsger-dijkstra/team-card.json",
       "user_value": [
@@ -4500,10 +4500,10 @@
         "在“要不要破坏兼容”这一问题上与 Ritchie、Thompson、Torvalds 各不相同，构成第四种可对照的取向",
         "其最大争议（PEP 572 与 Python 2→3 迁移）证据充分且成败两面俱在，便于运行时做真实校准"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2025,
       "subject_origin": "public",
       "subject_slug": "guido-van-rossum",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-434af52cfe3c6ded",
       "team_card": "软件开发师/guido-van-rossum/team-card.json",
       "user_value": [
@@ -4562,10 +4562,10 @@
         "其公开作品从 CodeSearchNet、MLOps 与开发者工具延伸到数十个 AI 产品的评测实践，形成可追溯的测量与调试谱系。",
         "公开语料同时覆盖工程实现、教学表达、工具反转、商业化取舍与咨询能力转移，可构建执行模型而非只复制文风。"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2026,
       "subject_origin": "public",
       "subject_slug": "hamel-husain",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-a79fe1b977a75a32",
       "team_card": "软件开发师/hamel-husain/team-card.json",
       "user_value": [
@@ -4622,10 +4622,10 @@
         "Distinctive, transferable model for external context, RAG evolution, document processing, and developer-platform design.",
         "Material time-series divergence allows the Skill to model adaptation rather than freeze one historical label."
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2026,
       "subject_origin": "public",
       "subject_slug": "jerry-liu-llamaindex",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-e6b416cc83ed4f07",
       "team_card": "软件开发师/jerry-liu-llamaindex/team-card.json",
       "user_value": [
@@ -4685,10 +4685,10 @@
         "游戏引擎、移动设备、VR、火箭和 AI 研究构成多个 materially different contexts，可检验稳定方法而非单一时期风格",
         "公开材料包含失败、离职复盘、估计偏差和研究误步，能建立修正机制与真实边界"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2026,
       "subject_origin": "public",
       "subject_slug": "john-carmack",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-97a774a098859758",
       "team_card": "软件开发师/john-carmack/team-card.json",
       "user_value": [
@@ -4746,10 +4746,10 @@
         "他形式化的对象是世界与常识，与 Dijkstra／Hoare 形式化程序正确性构成团队内可对照的另一极",
         "其逻辑路线半个世纪未达成目标且被后续主流绕开，是校准而非神化的好样本"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2011,
       "subject_origin": "public",
       "subject_slug": "john-mccarthy",
-      "subject_status": "unauthored",
+      "subject_status": "deceased",
       "subject_uid": "person-6c7fe7e07e74ff03",
       "team_card": "软件开发师/john-mccarthy/team-card.json",
       "user_value": [
@@ -4807,10 +4807,10 @@
         "既有技术创造又有方法反思、教学和学术治理记录，支持技术工程师与思想教育家双分面。",
         "后期材料主动批评早期评测盲区，能够构建自我修正而非单一成功叙事。"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2007,
       "subject_origin": "historical",
       "subject_slug": "karen-sparck-jones",
-      "subject_status": "unauthored",
+      "subject_status": "deceased",
       "subject_uid": "person-f6dff6b8348b94fa",
       "team_card": "软件开发师/karen-sparck-jones/team-card.json",
       "user_value": [
@@ -4881,10 +4881,10 @@
         "与 Dennis Ritchie 在“渐进兼容 vs 另起炉灶”上取向相反，为专家团队提供可对照的第二种系统演进路线",
         "1983 年图灵奖（与 Ritchie 共获）、1998 年美国国家技术奖章、2011 年日本国际奖、2019 年入选美国发明家名人堂，权威认定充分"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2025,
       "subject_origin": "public",
       "subject_slug": "ken-thompson",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-e127309a5471b088",
       "team_card": "软件开发师/ken-thompson/team-card.json",
       "user_value": [
@@ -4946,10 +4946,10 @@
         "Public failures and adaptations reveal update behavior, not only polished doctrine.",
         "His work offers a coherent feedback-and-optionality system useful across code, teaching, and technical decisions."
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2026,
       "subject_origin": "public",
       "subject_slug": "kent-beck",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-ae3cd49e17815aaf",
       "team_card": "软件开发师/kent-beck/team-card.json",
       "user_value": [
@@ -5009,10 +5009,10 @@
         "同时存在系统性的证明、写作和教学材料",
         "直接访谈与口述史足以交叉验证问题选择和修正机制"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2025,
       "subject_origin": "public",
       "subject_slug": "leslie-lamport",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-f1e0ea8cc19ee684",
       "team_card": "软件开发师/leslie-lamport/team-card.json",
       "user_value": [
@@ -5086,10 +5086,10 @@
         "与 Ritchie（为存量让路）、Thompson（最小覆盖抽象）决策起点不同——他从协作并行度与可撤销性出发，为专家团队提供第三种系统演进路线",
         "2018 年公开修正自身沟通方式，为“可被校准的专家模型”提供了带自我修正记录的稀有样本"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2026,
       "subject_origin": "public",
       "subject_slug": "linus-torvalds",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-ef95e45174f440e8",
       "team_card": "软件开发师/linus-torvalds/team-card.json",
       "user_value": [
@@ -5149,10 +5149,10 @@
         "第一方资料对工作方法、编辑准则、证据局限和职业边界有明确自述。",
         "存在足够的访谈、历史记录和反方资料用于交叉验证与去教条化。"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2026,
       "subject_origin": "public",
       "subject_slug": "martin-fowler",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-6f454683ef86638b",
       "team_card": "软件开发师/martin-fowler/team-card.json",
       "user_value": [
@@ -5210,10 +5210,10 @@
         "学术研究、开源生态与 Databricks CTO 角色提供多场景交叉证据，适合技术工程、平台战略和教学任务。",
         "公开材料足以明确能力边界，并能把投资、法律政治和私人心理等弱证据领域隔离。"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2026,
       "subject_origin": "public",
       "subject_slug": "matei-zaharia",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-9b4517590a1fca74",
       "team_card": "软件开发师/matei-zaharia/team-card.json",
       "user_value": [
@@ -5272,10 +5272,10 @@
         "公开证据在信息检索、NLP、语言模型程序、系统优化和教学上形成长期连续轨迹。",
         "论文、代码、文档、课程、访谈和机构记录可交叉验证其工作方法，而非仅依赖风格模仿。"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2026,
       "subject_origin": "public",
       "subject_slug": "omar-khattab",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-d5c2c0a5f2e22091",
       "team_card": "软件开发师/omar-khattab/team-card.json",
       "user_value": [
@@ -5331,10 +5331,10 @@
         "一手论文、官方文章、代码项目与演讲转录覆盖创建、演化、组织转型和商业退休/独立项目角色边界。",
         "目标是提取可迁移的系统设计方法，而非复刻个人口吻。"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2025,
       "subject_origin": "public",
       "subject_slug": "rich-hickey",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-bdd847d2c241c92c",
       "team_card": "软件开发师/rich-hickey/team-card.json",
       "user_value": [
@@ -5391,10 +5391,10 @@
         "与已入库的 Ken Thompson 在 UTF-8、Plan 9、Go 上有交叉，可互相校验",
         "其成果几乎全为合著或共同设计，是检验归属纪律的高难度样本"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2025,
       "subject_origin": "public",
       "subject_slug": "rob-pike",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-030d30d43cfe5469",
       "team_card": "软件开发师/rob-pike/team-card.json",
       "user_value": [
@@ -5454,10 +5454,10 @@
         "Public materials span nearly a decade and multiple evidence forms, enabling longitudinal rather than style-only distillation.",
         "Her work supplies an executable methodology for converting ambiguous AI quality problems into user-centered, observable, testable systems."
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2026,
       "subject_origin": "public",
       "subject_slug": "shreya-shankar",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-b64aeaebae00fd21",
       "team_card": "软件开发师/shreya-shankar/team-card.json",
       "user_value": [
@@ -5485,7 +5485,7 @@
         "coding agents 提速，但必须由实际运行、测试、人工判断和安全边界验收",
         "把公开写作与注释性演讲纳入 definition of done"
       ],
-      "evidence_recency": null,
+      "evidence_recency": 2026,
       "hard_boundaries": [
         "模型不是本人、授权、背书、签名或实时观点",
         "研究截止日之后的事实与立场必须重新核验",
@@ -5515,10 +5515,10 @@
         "需要把复杂技术解释为可运行示例、注释性报告和开放问题",
         "需要同时保留 AI 工具高采用与 prompt-injection 高警惕的双重视角"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2026,
       "subject_origin": "public",
       "subject_slug": "simon-willison",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-4566a231fcbf32af",
       "team_card": "软件开发师/simon-willison/team-card.json",
       "user_value": [
@@ -5575,10 +5575,10 @@
         "跨理论、操作系统与共享评测的长期研究轨迹",
         "对搜索评测、参数化和技术史具有可执行的方法论价值"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2025,
       "subject_origin": "public",
       "subject_slug": "stephen-e-robertson",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-ca503314765392ac",
       "team_card": "软件开发师/stephen-e-robertson/team-card.json",
       "user_value": [
@@ -5649,10 +5649,10 @@
         "治理形态（多方共识、创始人不做裁决者）与 Guido 的 BDFL 形成镜像，为团队提供第三种标准治理样本",
         "他既辩护当初的取舍又批评今天的现状，是“把两个问题分开答”的清晰样本，其局限亦可举证"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2026,
       "subject_origin": "public",
       "subject_slug": "tim-berners-lee",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-ea4f6f1c217663e5",
       "team_card": "软件开发师/tim-berners-lee/team-card.json",
       "user_value": [
@@ -5712,10 +5712,10 @@
         "他是团队中唯一把「公开认领自己的重大设计错误」做成方法的人，可校准其余人物的自我评价倾向",
         "其形式化议程有明确且已被时间检验的落地边界，便于校准而非神化"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2026,
       "subject_origin": "public",
       "subject_slug": "tony-hoare",
-      "subject_status": "unauthored",
+      "subject_status": "deceased",
       "subject_uid": "person-843351440a0dfd7a",
       "team_card": "软件开发师/tony-hoare/team-card.json",
       "user_value": [
@@ -5785,10 +5785,10 @@
         "其归属处理方式（致谢写到具体想法、错误自领、始终写明共同作者）是团队中最强的可追溯性样本",
         "其架构缺口（协议层无安全）证据充分且可举证，便于运行时校准"
       ],
-      "subject_active_through": null,
+      "subject_active_through": 2026,
       "subject_origin": "public",
       "subject_slug": "vint-cerf",
-      "subject_status": "unauthored",
+      "subject_status": "living",
       "subject_uid": "person-fb47a4c208abe8df",
       "team_card": "软件开发师/vint-cerf/team-card.json",
       "user_value": [

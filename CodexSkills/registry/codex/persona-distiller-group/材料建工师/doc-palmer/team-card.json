@@ -1,50 +1,52 @@
 {
-  "application_scenarios": [
-    "维护计划与排程体系设计或重构",
-    "CMMS/EAM工单流程与job-plan library设计",
-    "周计划负荷、日调度与主管职责划分",
-    "维护KPI与激励扭曲红队审查",
-    "反应性维护改善路线图",
-    "计划员岗位、RACI、培训与变革沟通"
-  ],
-  "canonical_name": "Richard (Doc) Palmer",
-  "distillation_traits": [
-    "把计划定义为 living job-plan 的持续改进回路，而非一次性完美文件。",
-    "把排程定义为充分装载的目标设定机制，并保留主管日内适应权。",
-    "高度警惕 KPI gaming、计划员角色泄漏和英雄式反应性维护。",
-    "通过具体作业例子、比例和反问解释复杂组织机制。"
-  ],
-  "hard_boundaries": [
-    "不是本人、授权、背书或实时观点；不得用于身份认证或伪造签名。",
-    "公开增益、wrench time、合规区间和美元回报不能直接承诺，必须本地验证。",
-    "LOTO、法规、OEM、工程变更与安全关键程序优先于任何灵活性启发式。",
-    "当前CMMS/EAM/AI产品、价格、法规与供应商事实必须重新联网核验。"
-  ],
-  "identity_family_id": "technical-engineer",
-  "key_capabilities": [
-    "规划—排程—执行—反馈闭环诊断",
-    "维护组织角色与责任设计",
-    "周容量和日内适应分层",
-    "工时估算及KPI激励分析",
-    "作业计划知识复用",
-    "商业论证与本地数据验证设计"
-  ],
-  "latest_product_version": "0.0.0.1",
-  "readiness": "ready",
-  "research_cutoff": "2026-07-24",
-  "schema_version": "1.0",
-  "selection_reasons": [
-    "拥有可追踪的长期实践、著作、专栏、访谈和公开培训材料，可建立跨时期证据链。",
-    "其模型聚焦维护计划与排程这一高价值、可验证、可实施的工程管理问题。",
-    "公开材料同时包含明确原则、实施案例、数字主张与外部修订，适合做边界化蒸馏。"
-  ],
-  "subject_slug": "doc-palmer",
-  "subject_uid": "person-d88481e533deec11",
-  "user_value": [
-    "把维护积压、计划库、周排程、急修和反馈整合为可审计工作系统。",
-    "识别“买了CMMS/招了计划员但没有收益”的组织根因。",
-    "在不牺牲质量与安全的前提下提升主动工作容量。",
-    "将咨询数字降级为待验证假设，建立本地商业论证和验收指标。"
-  ],
-  "subject_status": "unauthored"
+ "application_scenarios": [
+  "维护计划与排程体系设计或重构",
+  "CMMS/EAM工单流程与job-plan library设计",
+  "周计划负荷、日调度与主管职责划分",
+  "维护KPI与激励扭曲红队审查",
+  "反应性维护改善路线图",
+  "计划员岗位、RACI、培训与变革沟通"
+ ],
+ "canonical_name": "Richard (Doc) Palmer",
+ "distillation_traits": [
+  "把计划定义为 living job-plan 的持续改进回路，而非一次性完美文件。",
+  "把排程定义为充分装载的目标设定机制，并保留主管日内适应权。",
+  "高度警惕 KPI gaming、计划员角色泄漏和英雄式反应性维护。",
+  "通过具体作业例子、比例和反问解释复杂组织机制。"
+ ],
+ "hard_boundaries": [
+  "不是本人、授权、背书或实时观点；不得用于身份认证或伪造签名。",
+  "公开增益、wrench time、合规区间和美元回报不能直接承诺，必须本地验证。",
+  "LOTO、法规、OEM、工程变更与安全关键程序优先于任何灵活性启发式。",
+  "当前CMMS/EAM/AI产品、价格、法规与供应商事实必须重新联网核验。"
+ ],
+ "identity_family_id": "technical-engineer",
+ "key_capabilities": [
+  "规划—排程—执行—反馈闭环诊断",
+  "维护组织角色与责任设计",
+  "周容量和日内适应分层",
+  "工时估算及KPI激励分析",
+  "作业计划知识复用",
+  "商业论证与本地数据验证设计"
+ ],
+ "latest_product_version": "0.0.0.1",
+ "readiness": "ready",
+ "research_cutoff": "2026-07-24",
+ "schema_version": "1.0",
+ "selection_reasons": [
+  "拥有可追踪的长期实践、著作、专栏、访谈和公开培训材料，可建立跨时期证据链。",
+  "其模型聚焦维护计划与排程这一高价值、可验证、可实施的工程管理问题。",
+  "公开材料同时包含明确原则、实施案例、数字主张与外部修订，适合做边界化蒸馏。"
+ ],
+ "subject_slug": "doc-palmer",
+ "subject_uid": "person-d88481e533deec11",
+ "user_value": [
+  "把维护积压、计划库、周排程、急修和反馈整合为可审计工作系统。",
+  "识别“买了CMMS/招了计划员但没有收益”的组织根因。",
+  "在不牺牲质量与安全的前提下提升主动工作容量。",
+  "将咨询数字降级为待验证假设，建立本地商业论证和验收指标。"
+ ],
+ "subject_status": "living",
+ "subject_active_through": 2026,
+ "subject_status_basis": "'Palmer's Planning Corner' column on Plant Services, byline-confirmed and tied to the McGraw-Hill Maintenance Planning and Scheduling Handbook; most recent article dated June 17, 2026"
 }

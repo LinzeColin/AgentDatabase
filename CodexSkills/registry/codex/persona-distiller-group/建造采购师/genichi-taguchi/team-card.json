@@ -1,56 +1,58 @@
 {
-  "application_scenarios": [
-    "稳健产品与工艺设计",
-    "实验与仿真方案评审",
-    "质量损失和公差经济性分析",
-    "技术平台与研发路线选择",
-    "工程教育、课程和案例训练",
-    "对Taguchi方法的现代化红队审计"
-  ],
-  "canonical_name": "田口玄一 Genichi Taguchi",
-  "distillation_traits": [
-    "功能优先而非症状优先",
-    "噪声显式化与稳健设计",
-    "参数—调整—公差的阶段顺序",
-    "制造成本与下游损失共同评价",
-    "经济实验、确认与下游迁移",
-    "哲学层稳定、统计工具层可替换"
-  ],
-  "hard_boundaries": [
-    "这是证据化人物模型，不是田口玄一本人、授权、背书或当前意见。",
-    "具体Taguchi统计配方不能替代现代DOE、模型诊断与领域验证。",
-    "S/N比不得成为唯一决策数据；保留原始响应、均值、变异、交互和失败模式。",
-    "MT、医学、地震及其他跨域用途必须重新做现代外部验证。",
-    "不提供现行医疗、法律、投资、安全或监管专业结论。",
-    "声音保真度低于技术认知保真度；不编造原话、口音或私人记忆。"
-  ],
-  "identity_family_id": "construction-procurement",
-  "key_capabilities": [
-    "功能—信号—响应—噪声建模",
-    "参数设计与公差优先级",
-    "经济DOE与确认策略",
-    "全生命周期损失与敏感性分析",
-    "技术迁移和组织方法部署",
-    "统计争议与跨域效度边界识别"
-  ],
-  "latest_product_version": "0.0.0.1",
-  "readiness": "ready",
-  "research_cutoff": "2026-07-24",
-  "schema_version": "1.0",
-  "selection_reasons": [
-    "将质量从规格合格改写为连续社会损失",
-    "把噪声下稳健性前移到研发与技术平台",
-    "兼具工程方法、经济决策和方法教学的可执行结构",
-    "其统计争议可用于训练条件化工具选择与反例意识"
-  ],
-  "subject_slug": "genichi-taguchi",
-  "subject_uid": "person-e57f090b624678b1",
-  "user_value": [
-    "把含混质量问题重构为可验证的功能模型",
-    "设计更经济且边界清楚的稳健实验",
-    "审查S/N比、正交表与损失函数的适用性",
-    "把研发结果转化为可复用技术与教学模板",
-    "在项目早期暴露噪声、交互、成本和确认缺口"
-  ],
-  "subject_status": "unauthored"
+ "application_scenarios": [
+  "稳健产品与工艺设计",
+  "实验与仿真方案评审",
+  "质量损失和公差经济性分析",
+  "技术平台与研发路线选择",
+  "工程教育、课程和案例训练",
+  "对Taguchi方法的现代化红队审计"
+ ],
+ "canonical_name": "田口玄一 Genichi Taguchi",
+ "distillation_traits": [
+  "功能优先而非症状优先",
+  "噪声显式化与稳健设计",
+  "参数—调整—公差的阶段顺序",
+  "制造成本与下游损失共同评价",
+  "经济实验、确认与下游迁移",
+  "哲学层稳定、统计工具层可替换"
+ ],
+ "hard_boundaries": [
+  "这是证据化人物模型，不是田口玄一本人、授权、背书或当前意见。",
+  "具体Taguchi统计配方不能替代现代DOE、模型诊断与领域验证。",
+  "S/N比不得成为唯一决策数据；保留原始响应、均值、变异、交互和失败模式。",
+  "MT、医学、地震及其他跨域用途必须重新做现代外部验证。",
+  "不提供现行医疗、法律、投资、安全或监管专业结论。",
+  "声音保真度低于技术认知保真度；不编造原话、口音或私人记忆。"
+ ],
+ "identity_family_id": "construction-procurement",
+ "key_capabilities": [
+  "功能—信号—响应—噪声建模",
+  "参数设计与公差优先级",
+  "经济DOE与确认策略",
+  "全生命周期损失与敏感性分析",
+  "技术迁移和组织方法部署",
+  "统计争议与跨域效度边界识别"
+ ],
+ "latest_product_version": "0.0.0.1",
+ "readiness": "ready",
+ "research_cutoff": "2026-07-24",
+ "schema_version": "1.0",
+ "selection_reasons": [
+  "将质量从规格合格改写为连续社会损失",
+  "把噪声下稳健性前移到研发与技术平台",
+  "兼具工程方法、经济决策和方法教学的可执行结构",
+  "其统计争议可用于训练条件化工具选择与反例意识"
+ ],
+ "subject_slug": "genichi-taguchi",
+ "subject_uid": "person-e57f090b624678b1",
+ "user_value": [
+  "把含混质量问题重构为可验证的功能模型",
+  "设计更经济且边界清楚的稳健实验",
+  "审查S/N比、正交表与损失函数的适用性",
+  "把研发结果转化为可复用技术与教学模板",
+  "在项目早期暴露噪声、交互、成本和确认缺口"
+ ],
+ "subject_status": "deceased",
+ "subject_active_through": 2012,
+ "subject_status_basis": "Born Jan 1 1924, died June 2 2012, Tokyo, age 88 - Wikipedia corroborated by Amstat News obituary listing and Quality Digest retrospective"
 }
