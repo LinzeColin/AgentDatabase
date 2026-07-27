@@ -32,6 +32,30 @@ jobs:
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         with:
           python-version: "3.12"
+
+      # ★ 这一步之前**根本不存在** —— 整个作业只跑 npm ci,一个 pip install 都没有。
+      #   后果:CodexSkills/governance/tools/validate_mechanism.py 的 capability_gate()
+      #   导入 jsonschema / referencing 失败,抛 DEPENDENCY_MISSING,
+      #   于是凡是走技能运行日志校验的测试在 CI 里**永远走不到真正的断言**,
+      #   只会拿到一句 skill_run_consumer_bootstrap_failed。
+      #
+      #   本机装了这两个包,所以本地全绿、CI 全红 —— 典型的「本地能跑」假象。
+      #   而这个差异一直没被发现,是因为作业更早的审计步骤先挂了,
+      #   **单元测试套件从来没被执行过**。
+      #
+      #   版本区间照抄 capability_gate() 自己的硬性约束,不自行放宽:
+      #     jsonschema  >= 4.25.1, < 5
+      #     referencing >= 0.36.2, < 1
+      #   capability_gate 的原则是「拒绝未预置的运行时,绝不在运行期安装」——
+      #   所以装在这里(预置阶段)是对的,装进被测代码里是错的。
+      - name: 预置 Python 依赖(capability_gate 的硬性约束)
+        run: |
+          set -euo pipefail
+          python3 -m pip install --upgrade pip
+          python3 -m pip install 'jsonschema>=4.25.1,<5' 'referencing>=0.36.2,<1'
+          # 装完立刻验一次:capability_gate 认的是 importlib.metadata 报的版本
+          python3 -c "import importlib.metadata as m; print('jsonschema', m.version('jsonschema'), '| referencing', m.version('referencing'))"
+
       - name: Build and verify Memory Atlas
         working-directory: OpenAIDatabase
         run: |
