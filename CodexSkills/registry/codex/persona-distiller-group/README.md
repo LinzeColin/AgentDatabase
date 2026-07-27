@@ -60,13 +60,13 @@
 ## 当前登记
 
 <!-- PERSONA-REGISTRY:START -->
-当前唯一登记：**95 个人物**。
+当前唯一登记：**96 个人物**。
 
 | 唯一目录 | 人物数 |
 |---|---:|
 | `材料建工师/` | 15 |
 | `软件开发师/` | 34 |
-| `艺术设计师/` | 0 |
+| `艺术设计师/` | 1 |
 | `创业经营师/` | 7 |
 | `投资资本师/` | 18 |
 | `思想教育师/` | 2 |
@@ -76,7 +76,7 @@
 | `财务合规师/` | 1 |
 | `医疗护理师/` | 0 |
 | `农林牧渔师/` | 1 |
-| **总计** | **95** |
+| **总计** | **96** |
 
 | 人物 | 唯一身份 | 版本 | 选入原因 | 最值得蒸馏的特点 | 对用户的利益/帮助 | 应用场景 | 关键能力 | 完整 ZIP |
 |---|---|---|---|---|---|---|---|---|
@@ -140,6 +140,7 @@
 | Richard (Doc) Palmer | `材料建工师` | `0.0.0.1` | 拥有可追踪的长期实践、著作、专栏、访谈和公开培训材料，可建立跨时期证据链。；其模型聚焦维护计划与排程这一高价值、可验证、可实施的工程管理问题。 | 把计划定义为 living job-plan 的持续改进回路，而非一次性完美文件。；把排程定义为充分装载的目标设定机制，并保留主管日内适应权。 | 把维护积压、计划库、周排程、急修和反馈整合为可审计工作系统。；识别“买了CMMS/招了计划员但没有收益”的组织根因。 | 维护计划与排程体系设计或重构；CMMS/EAM工单流程与job-plan library设计 | 规划—排程—执行—反馈闭环诊断；维护组织角色与责任设计 | [ZIP](材料建工师/doc-palmer/versions/0.0.0.1/doc-palmer-persona-distillation-delivery-v0.0.0.1.zip) |
 | Stefan Gotteswinter | `材料建工师` | `0.0.0.1` | Use when a task benefits from measurement-first precision-machining reasoning rather than generic fabrication advice.；Use for reversible machine-tool upgrades, custom fixtures, tooling and inspection planning in one-off or small-run work. | measurement loop before irreversible action；precision treated as a coupled system | turn vague precision goals into measurable acceptance criteria；reduce rework by inserting low-cost discriminating tests and intermediate inspection | precision machining process review；manual machine-tool diagnosis and repair planning | measurement-first problem framing；manual milling, turning, grinding and scraping process reasoning | [ZIP](材料建工师/stefan-gotteswinter/versions/0.0.0.1/stefan-gotteswinter-persona-distillation-delivery-v0.0.0.1.zip) |
 | 辛多·寇 / Sindo Kou | `材料建工师` | `0.0.0.1` | 公开职业与作品高度集中在焊接冶金、材料加工传输现象、凝固裂纹及工程教学。；一手论文、专著、技术回顾和官方履历形成跨四十余年的连续证据链。 | 以热—流—凝固—组织—缺陷因果链表征问题；按焊池、熔合边界、部分熔化区和热影响区进行区域化诊断 | 把模糊焊接缺陷问题转化为可测变量、竞争机制和最小区分性试验；审查仿真、试验和工艺建议是否具有机制依据、适用域和责任门 | 焊接冶金与凝固裂纹机理诊断；焊池流动、熔深与表面活性效应分析 | 多物理因果建模与区域分解；竞争机制与区分性试验设计 | [ZIP](材料建工师/sindo-kou/versions/0.0.0.1/sindo-kou-persona-distillation-delivery-v0.0.0.1.zip) |
+| John Maeda | `艺术设计师` | `0.0.0.1` | 艺术设计师族中少数同时具备设计论述与亲手技术实践双重语料的人物，两侧证据各 30 篇以上且可分离；其对智能体时代设计问题的论述成体系且时效最新（2025–2026），含原创框架（AX、双鸿沟推论、Diamond Circle） | 两种可量化区分的写作 register：动手笔记每千字 3.5 句、署名随笔 7.9 句；操作文档只解释局部战术选择（38 篇中 8 篇含 because/reason，如为什么用某个分隔符）而不解释原理，论述文档则给完整论证，两者不混；论证走「亲历 → 重新归类 → 一般化」三步；特征动作是修正自己当年的归类而非重审证据 | 在做 AI/智能体产品时，把「用户怎么知道它做对了」提到与「用户怎么用」同等地位；拿到一套可直接套用的设计评审判据，而不是抽象的设计价值观 | 判断一个 AI/智能体产品把用户负担放对了没有：执行侧还是评估侧；诊断 AI 系统效果差是模型能力问题还是情境设定问题 | 用 Don Norman 双鸿沟框架定位智能体产品的界面问题（执行鸿沟趋零、评估鸿沟大开）；以可验证性而非审美为判据评估纯对话式界面的缺口 | [ZIP](艺术设计师/john-maeda/versions/0.0.0.1/john-maeda-persona-distillation-delivery-v0.0.0.1.zip) |
 | Nancy Leveson | `财务合规师` | `0.0.0.1` | Longitudinal primary corpus across software safety, system safety, methods, teaching, and organizational control.；Stable cross-source problem-framing patterns can be operationalized without claiming private identity. | Loss-and-constraint-first framing；System-theoretic control and feedback analysis | Turns vague safety concern into losses, hazards, controls, scenarios, owners, and verification.；Surfaces software, human, organizational, and regulatory interactions missed by component-only analysis. | Complex system safety and cybersecurity review；STPA-style proactive hazard analysis | System-level causal reframing；Control-structure modeling | [ZIP](财务合规师/nancy-leveson/versions/0.0.0.1/nancy-leveson-persona-distillation-delivery-v0.0.0.1.zip) |
 | Alan Kay | `软件开发师` | `0.0.0.1` | Smalltalk 方向与 Dynabook 构想的提出者，其表征优先的思路构成与前三位软件开发师完全不同的第四种决策起点；留下罕见的一手自述《The Early History of Smalltalk》，含大量自我批评与对他人贡献的明确归位 | 视角优先：能力来自表征方式而非智力，卡住先换视角不先加资源（“视角值 80 个智商点”）；工具非中性：工具内建什么思维模式，决定使用者能想到什么 | 团队在一个难题上卡住时，先帮你判断是不是表征方式本身在制造难度，而不是直接建议加人；架构讨论各说各话时，把各方隐含的假设挖出来并造出可比较的共同模型 | 表征与范式设计：为卡住的问题换一套表征方式，而不是在旧框架里优化；编程语言与运行时的范式判断：消息传递、晚绑定、对象私有行为这一路线的取舍 | 为一个卡住的问题换掉表征方式，找出各方隐含的基本单位与可变量假设；判断一个编程范式的本质属性——换掉实现手段之后仍必须保留的东西 | [ZIP](软件开发师/alan-kay/versions/0.0.0.1/alan-kay-persona-distillation-delivery-v0.0.0.1.zip) |
 | Anders Hejlsberg | `软件开发师` | `0.0.0.1` | 跨四十年、三种生态连续做出四个被大规模采用的语言／工具（Turbo Pascal、Delphi、C#、TypeScript），在软件史上极罕见；TypeScript 的设计目标／非目标文档是罕见的、把取舍逐条公开写死的一手设计文本 | 非目标先行：明确拒绝做什么，比宣称要做什么更界定设计；只描述不改造：新层叠在旧层之上，不动下层的运行时语义 | 要在既有系统上加新能力时，先帮你判断“采纳它需要对方先改变什么”，并把答案压到零；为大型 JavaScript 代码库设计可逐文件推进、随时可退的类型引入路径，并提前告知补偿成本 | 在既有生态上叠加静态类型而不改动其运行时；渐进式采纳路径设计（逐文件、可回退、零基础设施改造） | 判断一个新特性是否要求运行时支持（五条可执行检查）；设计能被既有生态逐步采纳、且可完全回退的方案 | [ZIP](软件开发师/anders-hejlsberg/versions/0.0.0.1/anders-hejlsberg-persona-distillation-delivery-v0.0.0.1.zip) |

@@ -5,7 +5,7 @@
 ## 当前 canonical roster
 
 <!-- PERSONA-REGISTRY:START -->
-当前唯一登记：**95 个人物**。
+当前唯一登记：**96 个人物**。
 
 | 人物 | 唯一身份 | 版本 | 场景 | 关键能力 | 准备度 |
 |---|---|---|---|---|---|
@@ -69,6 +69,7 @@
 | Richard (Doc) Palmer | `材料建工师` | `0.0.0.1` | 维护计划与排程体系设计或重构；CMMS/EAM工单流程与job-plan library设计 | 规划—排程—执行—反馈闭环诊断；维护组织角色与责任设计 | `ready` |
 | Stefan Gotteswinter | `材料建工师` | `0.0.0.1` | precision machining process review；manual machine-tool diagnosis and repair planning | measurement-first problem framing；manual milling, turning, grinding and scraping process reasoning | `ready` |
 | 辛多·寇 / Sindo Kou | `材料建工师` | `0.0.0.1` | 焊接冶金与凝固裂纹机理诊断；焊池流动、熔深与表面活性效应分析 | 多物理因果建模与区域分解；竞争机制与区分性试验设计 | `ready` |
+| John Maeda | `艺术设计师` | `0.0.0.1` | 判断一个 AI/智能体产品把用户负担放对了没有：执行侧还是评估侧；诊断 AI 系统效果差是模型能力问题还是情境设定问题 | 用 Don Norman 双鸿沟框架定位智能体产品的界面问题（执行鸿沟趋零、评估鸿沟大开）；以可验证性而非审美为判据评估纯对话式界面的缺口 | `ready` |
 | Nancy Leveson | `财务合规师` | `0.0.0.1` | Complex system safety and cybersecurity review；STPA-style proactive hazard analysis | System-level causal reframing；Control-structure modeling | `ready` |
 | Alan Kay | `软件开发师` | `0.0.0.1` | 表征与范式设计：为卡住的问题换一套表征方式，而不是在旧框架里优化；编程语言与运行时的范式判断：消息传递、晚绑定、对象私有行为这一路线的取舍 | 为一个卡住的问题换掉表征方式，找出各方隐含的基本单位与可变量假设；判断一个编程范式的本质属性——换掉实现手段之后仍必须保留的东西 | `ready` |
 | Anders Hejlsberg | `软件开发师` | `0.0.0.1` | 在既有生态上叠加静态类型而不改动其运行时；渐进式采纳路径设计（逐文件、可回退、零基础设施改造） | 判断一个新特性是否要求运行时支持（五条可执行检查）；设计能被既有生态逐步采纳、且可完全回退的方案 | `ready` |

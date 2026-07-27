@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:johnmaeda",
+  "canonical_name": "John Maeda",
+  "identity_family_id": "art-designer",
+  "identity_mode": "single",
+  "registration_category": "艺术设计师",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "john-maeda",
+  "subject_uid": "person-4a8bb01646c684a4",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/john-maeda-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-27T21:18:38Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "4a2643c28c79fdf3f0f85b87ed906df14c053902ef586df82cd252d9ab3c1f7c",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/john-maeda-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "d2c1d70e758b1ed18d6cb3502c5f4c516b4b9c8c5ddd9e3f9ebedc37f50f561e",
+      "runtime_size_bytes": 83153,
+      "size_bytes": 91352
+    }
+  ]
+}
