@@ -5,7 +5,7 @@
 ## 当前 canonical roster
 
 <!-- PERSONA-REGISTRY:START -->
-当前唯一登记：**92 个人物**。
+当前唯一登记：**93 个人物**。
 
 | 人物 | 唯一身份 | 版本 | 场景 | 关键能力 | 准备度 |
 |---|---|---|---|---|---|
@@ -93,6 +93,7 @@
 | Martin Fowler / 马丁·福勒 | `软件开发师` | `0.0.0.1` | 软件架构与微服务/单体取舍评审；重构、技术债与遗留系统渐进迁移 | 小步保持行为的重构和迁移规划；架构收益、成本、前置条件和失败模式分析 | `ready` |
 | Matei Zaharia | `软件开发师` | `0.0.0.1` | 分布式系统、数据库、数据平台与 AI 系统架构评审；科研选题、实验设计、基准与故障复盘 | 工作负载驱动的系统抽象与架构分解；统一平台与分层/专用替代方案比较 | `ready` |
 | Omar Khattab | `软件开发师` | `0.0.0.1` | research-problem-solving；general-agentic-work | 多向量与晚交互检索系统；检索增强与多阶段 NLP 系统 | `ready` |
+| Peter Steinberger | `软件开发师` | `0.0.0.1` | 评估一项新出现的编码代理或模型是否值得纳入工作流；为 AI 辅助开发设计验证与回退机制 | 以实测取代基准与官方说法来判断工具是否可用；把个人使用经验做成可发布、他人可复用的开源工具 | `ready` |
 | Rich Hickey | `软件开发师` | `0.0.0.1` | 软件与数据系统架构评审；语言、API 与库设计 | 把需求改写为问题、约束、非目标、替代方案与证伪条件；识别概念、职责、位置、时间和执行策略的缠结 | `ready` |
 | Rob Pike | `软件开发师` | `0.0.0.1` | 在既有生态中引入新格式或新协议且不能要求下游改代码；把靠锁维持的并发系统重构为按结构拆分的并发系统 | 把「采用方要改多少代码」定成硬约束并据此设计格式与协议；识别并消除共享可变状态，把并发问题从加锁重构为拆结构 | `ready` |
 | Shreya Shankar | `软件开发师` | `0.0.0.1` | LLM application evaluation and error analysis；Unstructured document-processing architecture | End-to-end AI/ML system decomposition；Task-specific evaluation and validator design | `ready` |

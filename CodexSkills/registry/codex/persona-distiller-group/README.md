@@ -60,12 +60,12 @@
 ## 当前登记
 
 <!-- PERSONA-REGISTRY:START -->
-当前唯一登记：**92 个人物**。
+当前唯一登记：**93 个人物**。
 
 | 唯一目录 | 人物数 |
 |---|---:|
 | `材料建工师/` | 15 |
-| `软件开发师/` | 32 |
+| `软件开发师/` | 33 |
 | `艺术设计师/` | 0 |
 | `创业经营师/` | 7 |
 | `投资资本师/` | 18 |
@@ -76,7 +76,7 @@
 | `财务合规师/` | 1 |
 | `医疗护理师/` | 0 |
 | `农林牧渔师/` | 0 |
-| **总计** | **92** |
+| **总计** | **93** |
 
 | 人物 | 唯一身份 | 版本 | 选入原因 | 最值得蒸馏的特点 | 对用户的利益/帮助 | 应用场景 | 关键能力 | 完整 ZIP |
 |---|---|---|---|---|---|---|---|---|
@@ -164,6 +164,7 @@
 | Martin Fowler / 马丁·福勒 | `软件开发师` | `0.0.0.1` | 公开作品跨三十年持续覆盖重构、架构、敏捷技术实践与企业软件设计。；第一方资料对工作方法、编辑准则、证据局限和职业边界有明确自述。 | 以未来变化成本解释设计与内部质量。；用小步、快速反馈和安全网管理复杂改变。 | 把抽象架构争论转化为可执行、可验证、可回滚的演进路径。；识别敏捷仪式与真实工程能力之间的缺口。 | 软件架构与微服务/单体取舍评审；重构、技术债与遗留系统渐进迁移 | 小步保持行为的重构和迁移规划；架构收益、成本、前置条件和失败模式分析 | [ZIP](软件开发师/martin-fowler/versions/0.0.0.1/martin-fowler-persona-distillation-delivery-v0.0.0.1.zip) |
 | Matei Zaharia | `软件开发师` | `0.0.0.1` | 跨 2008—2026 的高密度第一方论文、开源系统与公开讲述，可形成可证伪的系统决策模型。；学术研究、开源生态与 Databricks CTO 角色提供多场景交叉证据，适合技术工程、平台战略和教学任务。 | 从真实工作负载和用户摩擦提炼最小可复用抽象。；共享语义时构造统一底座，并用扩展点保留专用需求。 | 把模糊的数据/AI 系统问题转化为工作负载、抽象、实验和停止条件。；对平台统一、开放生态、迁移和可靠性做可执行的多方案评审。 | 分布式系统、数据库、数据平台与 AI 系统架构评审；科研选题、实验设计、基准与故障复盘 | 工作负载驱动的系统抽象与架构分解；统一平台与分层/专用替代方案比较 | [ZIP](软件开发师/matei-zaharia/versions/0.0.0.1/matei-zaharia-persona-distillation-delivery-v0.0.0.1.zip) |
 | Omar Khattab | `软件开发师` | `0.0.0.1` | 公开证据在信息检索、NLP、语言模型程序、系统优化和教学上形成长期连续轨迹。；论文、代码、文档、课程、访谈和机构记录可交叉验证其工作方法，而非仅依赖风格模仿。 | 把基础模型视为复合程序中的模糊模块，以端到端指标为优化单位；在质量、成本、延迟和透明度之间构造可测的系统前沿 | 将模糊的 AI 想法转成模块化、可优化、可验证的系统方案。；为检索增强、语言程序和智能体设计强基线、指标、失败集与资源预算。 | research-problem-solving；general-agentic-work | 多向量与晚交互检索系统；检索增强与多阶段 NLP 系统 | [ZIP](软件开发师/omar-khattab/versions/0.0.0.1/omar-khattab-persona-distillation-delivery-v0.0.0.1.zip) |
+| Peter Steinberger | `软件开发师` | `0.0.0.1` | 需要在工具与模型高频变动的领域，参考一个把立场变化公开记录下来的实践者；需要区分「架构与依赖判断」与「实现执行」在人机之间如何划分 | **语体须分书面与口语两层**：书面脏话稀疏且指向自己或某种做法（my own bullshit／shit work），博文中并无 WTF；口语访谈密度高得多。**把口语脏话密度搬进书面是本人物最常见的失真**；另注意某篇博文中的 fucking 系引述同事，不属其语体。；**归属须分层**：其站点上的 essential-reading 系列虽为其署名，主体是转述他人文章，斜体拉引属被链接作者；另有第三人称叙述体文件仅 blockquote 为其原话——两者均不得整段作为其观点引用 | 给出可执行的代理协作约束及其成立前提，而非泛泛的最佳实践；提供一个把「改变主意」公开留痕的样本，便于判断某个结论的保质期 | 评估一项新出现的编码代理或模型是否值得纳入工作流；为 AI 辅助开发设计验证与回退机制 | 以实测取代基准与官方说法来判断工具是否可用；把个人使用经验做成可发布、他人可复用的开源工具 | [ZIP](软件开发师/peter-steinberger/versions/0.0.0.1/peter-steinberger-persona-distillation-delivery-v0.0.0.1.zip) |
 | Rich Hickey | `软件开发师` | `0.0.0.1` | 其跨 Clojure、Datomic、core.async、transducers、spec 的公开材料呈现高度稳定的设计原则。；一手论文、官方文章、代码项目与演讲转录覆盖创建、演化、组织转型和商业退休/独立项目角色边界。 | 用精确定义先消除概念缠结；把不可变值、身份、状态与时间分开 | 在方案进入实现前发现结构性复杂度和不可逆契约。；把模糊争论转换为可比较、可反驳、可长期维护的决策记录。 | 软件与数据系统架构评审；语言、API 与库设计 | 把需求改写为问题、约束、非目标、替代方案与证伪条件；识别概念、职责、位置、时间和执行策略的缠结 | [ZIP](软件开发师/rich-hickey/versions/0.0.0.1/rich-hickey-persona-distillation-delivery-v0.0.0.1.zip) |
 | Rob Pike | `软件开发师` | `0.0.0.1` | UTF-8、Go、Plan 9、sam／acme／rio 的直接参与者，贝尔实验室 Unix 团队成员、Google 杰出工程师；Plan 9 论文集与 Go 官方博客提供充足可核的一手材料（本次逐篇按正文检测署名） | 极短句、结论前置、几乎不用修饰词、没有过渡段落；讲设计先讲不提供什么，再讲提供什么 | 把「下游不愿改代码」从障碍变成设计约束，给出可执行的兼容性手段；把偶发竞态从「换什么锁」重新框成「哪几处共享状态该消除」 | 在既有生态中引入新格式或新协议且不能要求下游改代码；把靠锁维持的并发系统重构为按结构拆分的并发系统 | 把「采用方要改多少代码」定成硬约束并据此设计格式与协议；识别并消除共享可变状态，把并发问题从加锁重构为拆结构 | [ZIP](软件开发师/rob-pike/versions/0.0.0.1/rob-pike-persona-distillation-delivery-v0.0.0.1.zip) |
 | Shreya Shankar | `软件开发师` | `0.0.0.1` | A rare cross-domain record connecting production ML failures, data systems, human–AI interaction, open-source system building, and industry-facing AI evaluation.；Public materials span nearly a decade and multiple evidence forms, enabling longitudinal rather than style-only distillation. | User workflow and data pipeline are treated as the real unit of AI product design.；Evaluation criteria are discovered from actual outputs and refined with human feedback. | Design more reliable LLM and data applications without over-centering model choice.；Build task-specific evals, monitoring, and continual-improvement loops. | LLM application evaluation and error analysis；Unstructured document-processing architecture | End-to-end AI/ML system decomposition；Task-specific evaluation and validator design | [ZIP](软件开发师/shreya-shankar/versions/0.0.0.1/shreya-shankar-persona-distillation-delivery-v0.0.0.1.zip) |

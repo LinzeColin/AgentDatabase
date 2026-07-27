@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:petersteinberger",
+  "canonical_name": "Peter Steinberger",
+  "identity_family_id": "software-developer",
+  "identity_mode": "single",
+  "registration_category": "软件开发师",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "peter-steinberger",
+  "subject_uid": "person-32f1e332ebf0ca84",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/peter-steinberger-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-27T13:01:35Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "0d16a76d9d675f44285e8cd739203e1450172e9cb134d84e2a7ec368fbf5710a",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/peter-steinberger-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "db6ca756cda6abdcaee41cc49e8455f36d568be5577c2f261d5a2fd368a6ae5c",
+      "runtime_size_bytes": 71704,
+      "size_bytes": 78341
+    }
+  ]
+}
