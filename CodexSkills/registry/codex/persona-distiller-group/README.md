@@ -60,12 +60,12 @@
 ## 当前登记
 
 <!-- PERSONA-REGISTRY:START -->
-当前唯一登记：**93 个人物**。
+当前唯一登记：**94 个人物**。
 
 | 唯一目录 | 人物数 |
 |---|---:|
 | `材料建工师/` | 15 |
-| `软件开发师/` | 33 |
+| `软件开发师/` | 34 |
 | `艺术设计师/` | 0 |
 | `创业经营师/` | 7 |
 | `投资资本师/` | 18 |
@@ -76,7 +76,7 @@
 | `财务合规师/` | 1 |
 | `医疗护理师/` | 0 |
 | `农林牧渔师/` | 0 |
-| **总计** | **93** |
+| **总计** | **94** |
 
 | 人物 | 唯一身份 | 版本 | 选入原因 | 最值得蒸馏的特点 | 对用户的利益/帮助 | 应用场景 | 关键能力 | 完整 ZIP |
 |---|---|---|---|---|---|---|---|---|
@@ -154,6 +154,7 @@
 | Guido van Rossum | `软件开发师` | `0.0.0.1` | Python 创造者，其可读性优先的语法取向影响了数以千万计的开发者与几乎所有编程教学入口；留下罕见的完整决策留档：PEP 体系加上他本人的两个博客，可逐条追溯三十余年的设计理由 | 可读性来自目标：为让普通人能编程，可读性是硬约束不是审美偏好；合法性来自流程：变更走公开提案，理由与被否方案一起留档，自己也服从 | 判断一个 API 或语法是否自解释，给出具体判据而非主观评价；把团队规范写成真会被执行的样子：每条附理由、区分硬约束与偏好、写明例外、能自动检查的交给工具 | 编程语言与 API 的可读性设计；工程规范制定：把约定写成可执行、带理由的规定 | 判断一个 API 或语法对非专业读者是否自解释；把风格与约定写成带理由、可执行、可自动检查的规范 | [ZIP](软件开发师/guido-van-rossum/versions/0.0.0.1/guido-van-rossum-persona-distillation-delivery-v0.0.0.1.zip) |
 | Hamel Husain | `软件开发师` | `0.0.0.1` | 其公开作品从 CodeSearchNet、MLOps 与开发者工具延伸到数十个 AI 产品的评测实践，形成可追溯的测量与调试谱系。；公开语料同时覆盖工程实现、教学表达、工具反转、商业化取舍与咨询能力转移，可构建执行模型而非只复制文风。 | 先看真实数据和失败样本，再谈模型、指标与平台；把难评估重构为产品可验证性、provenance 与小判定单元 | 把模糊的“AI 质量不好”转成可观察、可排序、可修复的失败系统。；设计最小 data viewer、标注流程、rubric、LLM judge 验证和回归评测。 | AI 产品错误分析与评测体系设计；LLM-as-a-judge 验证与 failure taxonomy 建立 | 真实 trace 驱动的错误分析与评测闭环；领域专家标注、定性编码与窄判据设计 | [ZIP](软件开发师/hamel-husain/versions/0.0.0.1/hamel-husain-persona-distillation-delivery-v0.0.0.1.zip) |
 | Jerry Liu | `软件开发师` | `0.0.0.1` | Strong public record spanning code, technical essays, interviews, product launches, and company strategy from 2022 through 2026.；Distinctive, transferable model for external context, RAG evolution, document processing, and developer-platform design. | Find the current bottleneck and move the architecture toward it.；Treat LLMs as reasoning engines that need reliable external context. | Produces rigorous LLM/RAG/agent architecture reviews tied to data shape and failure cost.；Translates frontier-model changes into concrete product and platform decisions. | LLM, RAG, long-context, and agent architecture design；Document parsing, retrieval, extraction, and workflow automation | Context and data architecture for LLM applications；Parse–Retrieve–Reason–Act workflow decomposition | [ZIP](软件开发师/jerry-liu-llamaindex/versions/0.0.0.1/jerry-liu-llamaindex-persona-distillation-delivery-v0.0.0.1.zip) |
+| Jesse Vincent | `软件开发师` | `0.0.0.1` | 其一手语料跨 1996–2026 三十年、79 份本人署名文本可直取，能同时约束能力、工作方法、语体与边界四路。；他是极少数**公开实行代理署名代写政策**的实践者，因此本人物天然携带一个其他人物没有的能力：**如何在「账号发布 ≠ 本人所写」的语料上做归属分层**——这既是研究他的难点，也是他能给出的独特价值。 | 不接受任何单一来源的自我报告——不信代理说自己做完了、不信代理审自己的代码、不信单次复现。；把验证做成「要证明」而非「要报告」：要求端到端跑一遍并交出截图、录屏、transcript。 | 把「让代理做完一件事」拆成可验证的环节：规划落文件、上下文隔离、对抗复审、取证收尾。；在引用任何人的公开文字前，先做归属判断——他的语料本身就是这套判断的训练场。 | ai-agent-workflow-design；multi-session-orchestration | AI 编码代理工作流设计；多会话编排与上下文隔离 | [ZIP](软件开发师/jesse-vincent/versions/0.0.0.1/jesse-vincent-persona-distillation-delivery-v0.0.0.1.zip) |
 | John Carmack（约翰·卡马克） | `软件开发师` | `0.0.0.1` | 跨三十年的一手工作日志、公开代码、长篇演讲和研究工件提供了高密度可验证过程证据；游戏引擎、移动设备、VR、火箭和 AI 研究构成多个 materially different contexts，可检验稳定方法而非单一时期风格 | 让抽象主张尽快接触可测现实；从端到端路径和隐藏状态定位真正瓶颈 | 把模糊性能或可靠性问题改写为可观察指标、基线和停止条件；为复杂工程或研究任务建立最小端到端闭环并压缩反馈循环 | 系统架构、性能、延迟与可靠性诊断；受限平台、交互原型与技术产品定义 | 端到端瓶颈分析与可观察量设计；最小可运行路径、快速迭代和原型到生产边界 | [ZIP](软件开发师/john-carmack/versions/0.0.0.1/john-carmack-persona-distillation-delivery-v0.0.0.1.zip) |
 | John McCarthy | `软件开发师` | `0.0.0.1` | 1971 年 ACM 图灵奖得主；LISP 的定义与设计、垃圾回收、限定均属其本人；其斯坦福主页收录 80 余篇自撰论文与随笔，一手材料充足可核 | 先要求把关键词精确化，再判断命题真假；不给定义就不给答案；讲自己的成果时讲那个数学定义，不讲实现技巧 | 把「加规则要改一堆地方」的系统诊断为知识写进了过程，并给出可执行的分离检验；给出四条判据判断一个知识表示能否长期增补 | 把散落在过程里的业务知识改写为可增补的陈述式表示；需要在新信息到来时收回旧结论的推理系统设计 | 从形式定义推导出表示法与语言设计；把领域知识写成与推理过程分离的陈述式事实与规则 | [ZIP](软件开发师/john-mccarthy/versions/0.0.0.1/john-mccarthy-persona-distillation-delivery-v0.0.0.1.zip) |
 | Karen Spärck Jones | `软件开发师` | `0.0.0.1` | IR/NLP、系统评测与受控实验的一手证据覆盖深，适合研究和工程判断任务。；既有技术创造又有方法反思、教学和学术治理记录，支持技术工程师与思想教育家双分面。 | 从任务功能定义系统，而不是从“智能”标签出发。；以强简单基线、受控比较和失败机制约束复杂化。 | 设计可审计的 IR/NLP/RAG 实验与评测。；识别 benchmark 分数与实际用途之间的外推断层。 | 搜索、排序、RAG、NLP与自动摘要方案评审；benchmark、共享任务和离线/在线评测设计 | 任务—系统角色建模；信息检索与概率证据分析 | [ZIP](软件开发师/karen-sparck-jones/versions/0.0.0.1/karen-sparck-jones-persona-distillation-delivery-v0.0.0.1.zip) |

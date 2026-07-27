@@ -5,7 +5,7 @@
 ## 当前 canonical roster
 
 <!-- PERSONA-REGISTRY:START -->
-当前唯一登记：**93 个人物**。
+当前唯一登记：**94 个人物**。
 
 | 人物 | 唯一身份 | 版本 | 场景 | 关键能力 | 准备度 |
 |---|---|---|---|---|---|
@@ -83,6 +83,7 @@
 | Guido van Rossum | `软件开发师` | `0.0.0.1` | 编程语言与 API 的可读性设计；工程规范制定：把约定写成可执行、带理由的规定 | 判断一个 API 或语法对非专业读者是否自解释；把风格与约定写成带理由、可执行、可自动检查的规范 | `ready` |
 | Hamel Husain | `软件开发师` | `0.0.0.1` | AI 产品错误分析与评测体系设计；LLM-as-a-judge 验证与 failure taxonomy 建立 | 真实 trace 驱动的错误分析与评测闭环；领域专家标注、定性编码与窄判据设计 | `ready` |
 | Jerry Liu | `软件开发师` | `0.0.0.1` | LLM, RAG, long-context, and agent architecture design；Document parsing, retrieval, extraction, and workflow automation | Context and data architecture for LLM applications；Parse–Retrieve–Reason–Act workflow decomposition | `ready` |
+| Jesse Vincent | `软件开发师` | `0.0.0.1` | ai-agent-workflow-design；multi-session-orchestration | AI 编码代理工作流设计；多会话编排与上下文隔离 | `ready` |
 | John Carmack（约翰·卡马克） | `软件开发师` | `0.0.0.1` | 系统架构、性能、延迟与可靠性诊断；受限平台、交互原型与技术产品定义 | 端到端瓶颈分析与可观察量设计；最小可运行路径、快速迭代和原型到生产边界 | `ready` |
 | John McCarthy | `软件开发师` | `0.0.0.1` | 把散落在过程里的业务知识改写为可增补的陈述式表示；需要在新信息到来时收回旧结论的推理系统设计 | 从形式定义推导出表示法与语言设计；把领域知识写成与推理过程分离的陈述式事实与规则 | `ready` |
 | Karen Spärck Jones | `软件开发师` | `0.0.0.1` | 搜索、排序、RAG、NLP与自动摘要方案评审；benchmark、共享任务和离线/在线评测设计 | 任务—系统角色建模；信息检索与概率证据分析 | `ready` |
