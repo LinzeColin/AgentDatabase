@@ -60,7 +60,7 @@
 ## 当前登记
 
 <!-- PERSONA-REGISTRY:START -->
-当前唯一登记：**89 个人物**。
+当前唯一登记：**90 个人物**。
 
 | 唯一目录 | 人物数 |
 |---|---:|
@@ -68,7 +68,7 @@
 | `软件开发师/` | 32 |
 | `艺术设计师/` | 0 |
 | `创业经营师/` | 7 |
-| `投资资本师/` | 15 |
+| `投资资本师/` | 16 |
 | `思想教育师/` | 2 |
 | `政治法律师/` | 5 |
 | `客户营销师/` | 0 |
@@ -76,7 +76,7 @@
 | `财务合规师/` | 1 |
 | `医疗护理师/` | 0 |
 | `农林牧渔师/` | 0 |
-| **总计** | **89** |
+| **总计** | **90** |
 
 | 人物 | 唯一身份 | 版本 | 选入原因 | 最值得蒸馏的特点 | 对用户的利益/帮助 | 应用场景 | 关键能力 | 完整 ZIP |
 |---|---|---|---|---|---|---|---|---|
@@ -112,6 +112,7 @@
 | Nick Sleep | `投资资本师` | `0.0.0.1` | 公开一手合伙人信跨越完整投资周期，可观察理念演化与压力期行为；投资、治理和慈善资本配置形成可比较的长期决策轨迹 | 从短期路径转向长期终点与到达概率；把规模效率回馈客户形成强化循环 | 审查企业是否具备可持续复利机制；把价格波动与业务事实、概率变化分开 | 公司与商业模型研究；长期投资决策与组合复盘 | 终点—机制—概率分析；规模经济共享与客户互惠飞轮识别 | [ZIP](投资资本师/nick-sleep/versions/0.0.0.1/nick-sleep-persona-distillation-delivery-v0.0.0.1.zip) |
 | Peter Lynch | `投资资本师` | `0.0.0.1` | 麦哲伦 1977–1990 年均约 29.2%，规模 1800 万→140 亿，当时全球表现最好的共同基金；**其最著名的口号是全项目最典型的「被误读成反面」案例**，纠正义务本身即高价值 | **凡提到「invest in what you know」必须把研究那一步补回去**——观察是线索不是买入理由；先分类再判断；周期股的低市盈率常是顶部信号而非便宜信号 | 拦下「熟悉就能买」这个最常见也最有害的误读，把调研那一步补回去；用六类分类避免把周期股当成长股拿——含「低市盈率常是顶部信号」这条反直觉判据 | 把生活中的观察转化为可验证的投资假设；按六类企业分类选择相应的分析标准与持有期限 | 把日常观察转化为可验证的投资假设并说明还需查什么；判定企业属于六类中的哪一类并套用该类的买入与卖出判据 | [ZIP](投资资本师/peter-lynch/versions/0.0.0.1/peter-lynch-persona-distillation-delivery-v0.0.0.1.zip) |
 | Philip Fisher | `投资资本师` | `0.0.0.1` | 成长股投资的奠基者之一；闲聊法与十五要点均出自其本人；与已入库的 Benjamin Graham（#86）构成前提相反的一组对照——「我会看错」vs「我能看透」 | 落点在「该问谁」而不是「该算什么」；把竞争对手列为最有信息量的来源——同行没理由夸你 | 把「怎么判断一家公司好不好」从看报表转成一份可执行的打听清单；给出管理层可信度的四条判据，其中一条是决定性的 | 用一手打听而非公开资料评估企业真实竞争力；把管理层是否照实说坏消息作为前置筛选门 | 设计并执行闲聊法（问客户／供应商／竞争对手／离职员工并交叉比对）；以十五要点做企业质量的定性评估 | [ZIP](投资资本师/philip-fisher/versions/0.0.0.1/philip-fisher-persona-distillation-delivery-v0.0.0.1.zip) |
+| Ray Dalio | `投资资本师` | `0.0.0.1` | 其归属结构与已入库的 John Bogle（#89）同构——**都是做法早于名字／早于产品形态**，构成本库第二个可交叉验证的归属分层样本；**1982 年的公开误判是本族最完整的自陈失败样本**：有作证记录、有电视节目、有具体后果（裁到剩一人、借款 4000 美元）、有其本人原话（「自大的混蛋」） | **风险平价归属双向红线**：All Weather（1996）是已知第一只风险平价类基金，实践属他/Bridgewater；**但「risk parity」这一术语由 PanAgora 的 Edward Qian 于 2005 年提出**。不许说他发明了风险平价，也不许说风险平价与他无关——**做法早于名字**；**造词归属**：「radical transparency」**并非其首创**（此前已见于哲学与科技评论语境，他是引入并普及到商业管理语境的人）；**「idea meritocracy」是否为其首创未查到确证——两个方向都不得断言** | 拦下「风险平价是他发明的」与「风险平价与他无关」这两个方向相反、同样错误的说法；拦下「radical transparency 是他造的词」这一常见误归属，并在 idea meritocracy 上守住「未确证」不被逼出确定答案 | 用债务周期与「经济机器」的因果模型解释宏观现象，而不是靠预测方向；把反复出现的判断写成可复用、可被他人执行、可被证伪的原则 | 以债务周期为骨架给出跨国、跨年代的因果解释；把风险而非资金作为分散单位来构建组合 | [ZIP](投资资本师/ray-dalio/versions/0.0.0.1/ray-dalio-persona-distillation-delivery-v0.0.0.1.zip) |
 | Robert A. Kindler | `投资资本师` | `0.0.0.1` | Unique career spanning elite M&A legal practice and senior investment-banking leadership.；Public evidence supports a transferable interface between document precision, board strategy and transaction execution. | dual legal-and-banker lens；separates strategic need from execution feasibility | Review M&A and governance decisions without collapsing legal and commercial dimensions.；Build board-ready decision memos with explicit authorization, risk and stop conditions. | M&A strategy and transaction screening；board and corporate-governance decision support | legal-commercial dual-track analysis；transaction lifecycle and stage-gate design | [ZIP](投资资本师/robert-a-kindler/versions/0.0.0.1/robert-a-kindler-persona-distillation-delivery-v0.0.0.1.zip) |
 | Seth Klarman | `投资资本师` | `0.0.0.1` | 长期担任 Baupost CEO 与投资组合经理，职业事实与投资资本家身份直接匹配；公开材料对估值、组合、风险、现金、催化剂和组织流程提供了跨时期证据 | 下行优先而非波动恐惧；价格—价值—催化剂—时间四联模型 | 把模糊的“价值投资”转换为可执行承保清单；在买入前强制暴露永久损失和价值陷阱 | 公司与证券研究；投资委员会备忘录 | 基本面估值与下行分析；催化剂和时间路径设计 | [ZIP](投资资本师/seth-klarman/versions/0.0.0.1/seth-klarman-persona-distillation-delivery-v0.0.0.1.zip) |
 | Warren Buffett | `投资资本师` | `0.0.0.1` | 六十年Berkshire资本配置、股东信和公开决策构成最强证据域；主身份可由年度信、监管文件、交易复盘和现场问答交叉验证 | 企业所有权视角与价格—价值分离；机会成本驱动的跨用途资本配置 | 把“长期价值投资”转成可执行门槛、停止条件和证伪清单；区分可复制决策结构与Berkshire不可复制的融资、规模和交易优势 | 公司研究与价值—价格判断；企业资本配置和回购/并购决策 | 公开公司商业质量与长期经济性分析；内在价值区间、回购与整企收购初筛 | [ZIP](投资资本师/warren-buffett/versions/0.0.0.1/warren-buffett-persona-distillation-delivery-v0.0.0.1.zip) |
