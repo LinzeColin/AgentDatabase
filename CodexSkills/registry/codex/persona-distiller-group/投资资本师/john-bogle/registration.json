@@ -1,0 +1,26 @@
+{
+  "canonical_key": "public:johnbogle",
+  "canonical_name": "John Bogle",
+  "identity_family_id": "investor-capital-allocator",
+  "identity_mode": "single",
+  "registration_category": "投资资本师",
+  "schema_version": "3.0",
+  "subject_origin": "public",
+  "subject_slug": "john-bogle",
+  "subject_uid": "person-0e5a67ecd002d8b2",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/john-bogle-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-07-26T22:50:08Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "2364b2f457158128b4138d8e1c30e53ce5beace1f3e030658a4f9e9cf8981145",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/john-bogle-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "f57a2ee4569b7853cde0b49b4bfd62ce5b85dc9d2242b66752c317552230cd6d",
+      "runtime_size_bytes": 66474,
+      "size_bytes": 73949
+    }
+  ]
+}
