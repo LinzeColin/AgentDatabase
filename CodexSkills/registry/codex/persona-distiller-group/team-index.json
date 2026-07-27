@@ -1538,11 +1538,11 @@
         "公开承认误判并给出具体年份与具体判断",
         "区分有出处的分歧与无出处的指控并分别处置"
       ],
-      "latest_artifact": "投资资本师/george-soros/versions/0.0.0.1/george-soros-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_artifact": "投资资本师/george-soros/versions/0.0.0.2/george-soros-persona-distillation-delivery-v0.0.0.2.zip",
       "latest_model_snapshot": "0.1.0-draft",
-      "latest_outer_sha256": "1c0b2269b89762696e3c02ded988ad703c2e521de13b0a8742ff59c0bda5992c",
-      "latest_product_version": "0.0.0.1",
-      "latest_runtime_sha256": "293b72b19285ec2c2f6b6b2608f6be940f0b32e11a5e1a8f9ea2e0c598c21ab7",
+      "latest_outer_sha256": "4983dc653bc55dcd4d323ca87d52f556bf2ecce327417fcc10e474b107e7d8de",
+      "latest_product_version": "0.0.0.2",
+      "latest_runtime_sha256": "e34edc4e8969eaebe077183a6a759a0f00cc75ec7455ea57290054640a3ced67",
       "readiness": "ready",
       "registration": "投资资本师/george-soros/registration.json",
       "registration_category": "投资资本师",
@@ -1565,7 +1565,7 @@
         "面对未经证实的指控时拒绝复述与评价，并说明「复述本身就在传播」",
         "把「掌握反身性就能预测转折点」这类误读拉回——他 1998 年据此预测并公开承认错了"
       ],
-      "version_count": 1
+      "version_count": 2
     },
     {
       "application_scenarios": [

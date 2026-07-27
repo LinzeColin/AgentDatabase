@@ -21,6 +21,19 @@
       "runtime_sha256": "293b72b19285ec2c2f6b6b2608f6be940f0b32e11a5e1a8f9ea2e0c598c21ab7",
       "runtime_size_bytes": 69887,
       "size_bytes": 77260
+    },
+    {
+      "artifact": "versions/0.0.0.2/george-soros-persona-distillation-delivery-v0.0.0.2.zip",
+      "artifact_created_at": "2026-07-27T03:14:22Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "4983dc653bc55dcd4d323ca87d52f556bf2ecce327417fcc10e474b107e7d8de",
+      "product_version": "0.0.0.2",
+      "runtime_artifact": "runtime/george-soros-persona-skill-v0.0.0.2.zip",
+      "runtime_sha256": "e34edc4e8969eaebe077183a6a759a0f00cc75ec7455ea57290054640a3ced67",
+      "runtime_size_bytes": 70253,
+      "size_bytes": 77639
     }
   ]
 }

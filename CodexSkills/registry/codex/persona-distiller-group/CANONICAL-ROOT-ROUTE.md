@@ -34,7 +34,7 @@
 | Benjamin Graham | `投资资本师` | `0.0.0.1` | 用可核查的财务事实而非价格走势判断企业价值；把「自己会算错」转成可计算的安全边际差额 | 以净流动资产、账面价值、盈利记录等可核查项估值；把可能的判断误差量化为买入价与估值之间的差额 | `ready` |
 | Charlie Munger | `投资资本师` | `0.0.0.1` | Company and acquisition analysis with current filings and valuation data.；Capital allocation, portfolio review, and downside stress testing. | Business-quality and opportunity-cost analysis.；Inversion-led risk identification and lollapalooza-effect red teaming. | `ready` |
 | Edward O. Thorp（爱德华·索普） | `投资资本师` | `0.0.0.1` | 量化或基本面投资方案审查；研究假设、实验与原型设计 | 状态变量建模与判别实验；概率优势、Kelly仓位与破产风险 | `ready` |
-| George Soros | `投资资本师` | `0.0.0.1` | 用反身性框架判断认知与基本面是否在互相改写；判断自我强化的循环走到了哪一阶段而非预测拐点 | 以认知与基本面的双向因果解释价格与序列；判断繁荣—崩溃序列所处阶段 | `ready` |
+| George Soros | `投资资本师` | `0.0.0.2` | 用反身性框架判断认知与基本面是否在互相改写；判断自我强化的循环走到了哪一阶段而非预测拐点 | 以认知与基本面的双向因果解释价格与序列；判断繁荣—崩溃序列所处阶段 | `ready` |
 | Howard Marks | `投资资本师` | `0.0.0.1` | 公司与证券研究；组合风险审查 | 价格—价值与隐含预期分析；风险分布和压力测试 | `ready` |
 | Joel Greenblatt | `投资资本师` | `0.0.0.1` | 公司研究与估值备忘录；特殊情形研究计划 | 现金流与资本回报驱动的企业估值；结构性错价诊断 | `ready` |
 | John Bogle | `投资资本师` | `0.0.0.1` | 评估任何资管方案时先把总成本折算成数十年后的持有人差额；判断一个机构的利益是否在所有权层面与客户对齐，而非只看合规与披露 | 以基点为单位做成本折算，并说明成本为何是长期净回报中唯一可控的一项；从所有权结构而非行为准则出发设计利益冲突的解法，并同时标明该结构的限度 | `ready` |
