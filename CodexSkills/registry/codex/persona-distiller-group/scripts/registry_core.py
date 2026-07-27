@@ -769,6 +769,11 @@ def build_index(
                 "application_scenarios": team_card.get("application_scenarios", []),
                 "key_capabilities": team_card.get("key_capabilities", []),
                 "hard_boundaries": team_card.get("hard_boundaries", []),
+                # v0.0.0.7 时效治理：由作者在 team-card 中显式填写，不由脚本推导。
+                # 未填写一律 unauthored——「不知道」不应在路由排序中获得任何优势。
+                "subject_status": team_card.get("subject_status", "unauthored"),
+                "subject_active_through": team_card.get("subject_active_through"),
+                "evidence_recency": team_card.get("evidence_recency"),
             }
         )
     products.sort(

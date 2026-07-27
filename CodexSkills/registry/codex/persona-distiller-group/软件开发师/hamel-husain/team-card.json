@@ -45,5 +45,6 @@
     "设计最小 data viewer、标注流程、rubric、LLM judge 验证和回归评测。",
     "识别工具采购、模型升级和微调是否真正改善产品特定问题。",
     "把复杂技术方法教给团队并形成可独立运行的操作手册。"
-  ]
+  ],
+  "subject_status": "unauthored"
 }

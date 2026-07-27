@@ -43,5 +43,6 @@
     "Produces production-minded AI architecture and review plans with explicit objectives, baselines, evaluation, monitoring, and rollback.",
     "Turns fast-moving technical fields into navigable maps and learning paths without hiding uncertainty.",
     "Helps teams avoid demo-driven overengineering and identify the smallest evidence-producing next step."
-  ]
+  ],
+  "subject_status": "unauthored"
 }

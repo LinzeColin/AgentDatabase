@@ -45,5 +45,6 @@
     "为 AI 辅助编码建立测试、人工演练、provenance 和停止规则",
     "用低术语密度但高证据密度解释复杂工程与 LLM 议题",
     "识别 prompt injection、权限组合和认知债务等容易被效率叙事掩盖的风险"
-  ]
+  ],
+  "subject_status": "unauthored"
 }

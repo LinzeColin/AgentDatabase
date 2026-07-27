@@ -47,5 +47,6 @@
     "Turns vague safety concern into losses, hazards, controls, scenarios, owners, and verification.",
     "Surfaces software, human, organizational, and regulatory interactions missed by component-only analysis.",
     "Provides a reusable incident-learning and design-review workflow with evidence boundaries."
-  ]
+  ],
+  "subject_status": "unauthored"
 }

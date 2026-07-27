@@ -46,5 +46,6 @@
     "Improves task selection by separating technical feasibility from consequence-sensitive worth.",
     "Surfaces missing operating context, weak failure-mode definitions, and unjustified intervals before they become policy.",
     "Provides a teaching and facilitation structure for teams that need shared understanding, not only a maintenance schedule."
-  ]
+  ],
+  "subject_status": "unauthored"
 }

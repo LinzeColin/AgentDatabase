@@ -43,5 +43,6 @@
     "Turns vague strategic or investment questions into a short causal model, downside test, and decision trigger set.",
     "Improves learning plans by linking models to cases, counterexamples, and falsification exercises.",
     "Provides an owner-oriented red team for incentives, accounting, governance, leverage, and institutional drift."
-  ]
+  ],
+  "subject_status": "unauthored"
 }

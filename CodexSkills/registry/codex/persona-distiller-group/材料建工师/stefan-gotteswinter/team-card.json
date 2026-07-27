@@ -48,5 +48,6 @@
     "reduce rework by inserting low-cost discriminating tests and intermediate inspection",
     "design shop-made tools and fixtures with realistic access, rigidity and calibration constraints",
     "teach complex manual machining methods without hiding uncertainty or equipment assumptions"
-  ]
+  ],
+  "subject_status": "unauthored"
 }

@@ -136,6 +136,43 @@ POSITIVE_FILLERS = (
 )
 
 
+
+# ---------------------------------------------------------------------------
+# v0.0.0.7：概念扩展层
+#
+# 缺陷证据：任务「为一个长期指数化投资组合做治理评估，需要考虑成本、代理冲突
+# 与是否该主动干预」被切成四个词条（成本／投资／治理／组合）。
+# John Bogle 的能力条目写的是「识别资管机构中**委托代理**结构造成的利益冲突」，
+# 与任务词「治理／代理冲突」**语义相同、字面不同**，于是 capability 只拿到 4/20，
+# 他在这个几乎为他量身定制的任务上排到第 7 位，被五位价值投资者挤掉。
+#
+# 这不是权重问题——是**能力匹配根本没在匹配能力，它在匹配字面**。
+# 此处不引入嵌入模型（不可离线、不可检查），改为**人工可审的概念族**：
+# 同一概念族内的词互为扩展，扩展关系公开可读、可增补、可被质疑。
+# ---------------------------------------------------------------------------
+CONCEPT_CLUSTERS: tuple[tuple[str, ...], ...] = (
+    ("治理", "代理", "委托代理", "受托", "董事会", "股东", "利益冲突", "问责", "披露"),
+    ("成本", "费率", "基点", "费用", "开支", "净回报", "摩擦"),
+    ("组合", "配置", "仓位", "分散", "资产配置", "风险平价"),
+    ("指数", "被动", "宽基", "跟踪", "指数化"),
+    ("干预", "维权", "主动", "施压", "代理权", "改变管理层"),
+    ("风险", "回撤", "波动", "下行", "对冲"),
+    ("估值", "价格", "内在价值", "安全边际"),
+    ("周期", "宏观", "债务周期", "繁荣", "崩溃"),
+    ("证伪", "可错", "反证", "检验", "复盘", "认错"),
+    ("归属", "首创", "命名", "功劳", "自称"),
+)
+
+
+def expand_terms(terms: set[str]) -> set[str]:
+    """把任务词条扩展到同概念族。扩展关系人工可审，非黑箱。"""
+    out = set(terms)
+    for cluster in CONCEPT_CLUSTERS:
+        if any(t in cluster or any(c in t for c in cluster) for t in terms):
+            out.update(cluster)
+    return out
+
+
 def occurrences(text: str, signals: tuple[str, ...]) -> int:
     lowered = text.casefold()
     return sum(1 for signal in signals if signal.casefold() in lowered)
@@ -183,14 +220,69 @@ def semantic_matches(values: Any, terms: set[str]) -> int:
     return sum(1 for term in terms if term.casefold() in text)
 
 
-def freshness_score(cutoff: Any) -> int:
-    if not isinstance(cutoff, str):
+def freshness_score(candidate: dict[str, Any]) -> int:
+    """时效分。
+
+    v0.0.0.6 读的是 `research_cutoff`——**那是做研究的日期，不是人物活跃度**，
+    86/91 完全相同，形同虚设；且有条目把卒年误填其中，使信号反向工作。
+
+    v0.0.0.7 改读作者显式填写的 `subject_status` / `subject_active_through`。
+    **未填写（unauthored）一律记 0**——不猜测、也不给默认分，
+    因为「不知道」不应该在排序中获得任何优势。
+    """
+    status = candidate.get("subject_status")
+    if status == "unauthored" or not status:
         return 0
-    match = re.match(r"^(\d{4})", cutoff)
-    if not match:
-        return 1
-    age = max(0, date.today().year - int(match.group(1)))
-    return max(0, 5 - age)
+    if status == "deceased":
+        return 1  # 已故人物仍可有极高价值，但在时效维度上不加分
+    if status == "living":
+        through = candidate.get("subject_active_through")
+        if not isinstance(through, int):
+            return 3
+        age = max(0, date.today().year - through)
+        return max(1, 5 - age)
+    return 0
+
+
+def _prior_complementarity(candidate: dict[str, Any]) -> int:
+    """取回首轮打分时计入的 complementarity，便于贪心阶段替换为真实值。"""
+    for item in candidate.get("score_breakdown", []):
+        if str(item).startswith("complementarity="):
+            try:
+                return int(str(item).split("=")[1].split("/")[0])
+            except (ValueError, IndexError):
+                return 0
+    return 0
+
+
+def complementarity(candidate: dict[str, Any], selected: list[dict[str, Any]]) -> int:
+    """真实互补度（0–10）。
+
+    三个来源，按价值排序：
+      1. **与已选成员有据可查的分歧**（+6）——库中最高价值的资产，
+         组队的意义正在于呈现真实分歧，而不是凑一堆意见相同的人。
+      2. **身份族不同**（+2）——跨族视角。
+      3. **能力条目与已选成员重叠低**（+2）——避免同质。
+    首位候选无参照，给中位 5 分。
+    """
+    if not selected:
+        return 5
+    score = 0
+    name = str(candidate.get("canonical_name", ""))
+    surname = name.split()[-1] if name else ""
+    for other in selected:
+        traits = " ".join(str(x) for x in other.get("distillation_traits", []))
+        reasons = " ".join(str(x) for x in other.get("selection_reasons", []))
+        if surname and (surname in traits or surname in reasons):
+            score += 6
+            break
+    if all(candidate.get("identity_family_id") != o.get("identity_family_id") for o in selected):
+        score += 2
+    mine = {str(x).casefold() for x in candidate.get("key_capabilities", [])}
+    theirs = {str(x).casefold() for o in selected for x in o.get("key_capabilities", [])}
+    if mine and len(mine & theirs) / len(mine) < 0.34:
+        score += 2
+    return min(10, score)
 
 
 def score_candidate(
@@ -199,26 +291,31 @@ def score_candidate(
     identity: str,
     scenario: str,
     terms: set[str],
+    selected: list[dict[str, Any]] | None = None,
 ) -> tuple[int, list[str], str | None]:
     if candidate.get("readiness") != "ready":
         return 0, [], "readiness is not ready"
     identity_score = 0
     if candidate.get("registration_category") == identity:
         identity_score = 25
+    expanded = expand_terms(terms)
     scenarios = candidate.get("application_scenarios", [])
     scenario_text = " ".join(str(value).casefold() for value in scenarios)
     exact_scenario = scenario.casefold() in scenario_text
-    scenario_score = 25 if exact_scenario else min(20, semantic_matches(scenarios, terms) * 5)
-    capability_matches = semantic_matches(candidate.get("key_capabilities"), terms)
+    scenario_score = 25 if exact_scenario else min(20, semantic_matches(scenarios, expanded) * 5)
+    capability_matches = semantic_matches(candidate.get("key_capabilities"), expanded)
     capability_score = min(20, capability_matches * 4)
     if capability_score == 0 and identity_score:
         capability_score = 8
-    value_matches = semantic_matches(candidate.get("user_value"), terms)
+    value_matches = semantic_matches(candidate.get("user_value"), expanded)
     value_score = min(15, value_matches * 3)
     if value_score == 0 and scenario_score:
         value_score = 6
-    complementarity_score = 10
-    freshness = freshness_score(candidate.get("research_cutoff"))
+    # v0.0.0.6 这里是常数 10 —— 它不测量任何东西，等于把「互补性」这一维废掉了。
+    # v0.0.0.7 改为真实信号：与已选成员**有据可查的分歧**是最高价值的互补，
+    # 因为团队的意义正在于呈现真实分歧而非凑一堆同意见的人。
+    complementarity_score = complementarity(candidate, selected or [])
+    freshness = freshness_score(candidate)
     specific_terms = terms - GENERIC_MATCH_TERMS
     task_specific_matches = sum(
         semantic_matches(candidate.get(field), specific_terms)
@@ -291,7 +388,29 @@ def main() -> int:
             ranked.append(item)
     ranked.sort(key=lambda item: (-int(item["score"]), str(item["canonical_name"]).casefold()))
     persona_slots = max(1, args.size - len(CONTROL_ROLES))
-    chosen = ranked[:persona_slots]
+
+    # v0.0.0.6 是「一次性独立评分 → 取 top-N」，因此 complementarity 永远拿不到
+    # 已选集合，恒等于默认值——这一维实际上从未生效。
+    # v0.0.0.7 改为**贪心逐个选**：每选中一人，就用当前已选集合重算其余候选的互补度。
+    # 这样「与已选成员有据可查的分歧」才真正影响排序——而呈现真实分歧
+    # 正是组队相对于单人回答的核心增量。
+    pool = list(ranked)
+    chosen: list[dict[str, Any]] = []
+    while pool and len(chosen) < persona_slots:
+        best_index, best_total = 0, None
+        for i, cand in enumerate(pool):
+            comp = complementarity(cand, chosen)
+            base = int(cand["score"]) - _prior_complementarity(cand)
+            total = base + comp
+            if best_total is None or total > best_total:
+                best_index, best_total, best_comp = i, total, comp
+        pick = pool.pop(best_index)
+        pick = dict(pick)
+        pick["score"] = best_total
+        pick["score_breakdown"] = [
+            b for b in pick.get("score_breakdown", []) if not b.startswith("complementarity=")
+        ] + [f"complementarity={best_comp}/10 (贪心，对照已选 {len(chosen)} 人)"]
+        chosen.append(pick)
     selected_roles: list[dict[str, Any]] = [
         {
             **candidate,

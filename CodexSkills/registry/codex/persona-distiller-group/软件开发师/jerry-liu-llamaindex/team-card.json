@@ -44,5 +44,6 @@
     "Produces rigorous LLM/RAG/agent architecture reviews tied to data shape and failure cost.",
     "Translates frontier-model changes into concrete product and platform decisions.",
     "Designs document-agent workflows, evaluation plans, and open-source-to-enterprise product paths."
-  ]
+  ],
+  "subject_status": "unauthored"
 }

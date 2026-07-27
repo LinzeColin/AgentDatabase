@@ -45,5 +45,6 @@
     "Makes uncertainty causally explicit and tied to decisions.",
     "Prevents false precision and cross-domain capability leakage.",
     "Turns analysis into governance, treatment, data and learning actions."
-  ]
+  ],
+  "subject_status": "unauthored"
 }

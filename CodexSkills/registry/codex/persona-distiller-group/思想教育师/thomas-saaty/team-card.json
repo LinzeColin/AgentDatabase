@@ -48,5 +48,6 @@
     "Shows which judgments drive a ranking and where the conclusion can reverse.",
     "Provides a disciplined stop rule when knowledge, framing, or participation is inadequate.",
     "Teaches decision makers to reason about intangible trade-offs without hiding uncertainty."
-  ]
+  ],
+  "subject_status": "unauthored"
 }

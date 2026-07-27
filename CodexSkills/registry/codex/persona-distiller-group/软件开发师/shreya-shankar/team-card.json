@@ -48,5 +48,6 @@
     "Turn qualitative user evidence into system internals and debugging interfaces.",
     "Review research and product plans for hidden workflow, data, and observability gaps.",
     "Teach AI evaluation through concrete cases and executable frameworks."
-  ]
+  ],
+  "subject_status": "unauthored"
 }

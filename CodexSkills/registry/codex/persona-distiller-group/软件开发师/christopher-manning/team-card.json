@@ -43,5 +43,6 @@
     "Turns broad AI questions into cheap, discriminative experiments and explicit go/no-go gates.",
     "Prevents benchmark, fluency and scale from being misread as deployment readiness or full understanding.",
     "Produces reusable artifacts, validation plans and teaching structures with clear ownership and boundaries."
-  ]
+  ],
+  "subject_status": "unauthored"
 }
