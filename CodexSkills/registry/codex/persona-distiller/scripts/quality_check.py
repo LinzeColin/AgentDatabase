@@ -488,14 +488,35 @@ def run_content_checks(report, target: Path, cache_dirs: list[str]) -> None:
         return proc.returncode, (proc.stdout or '') + (proc.stderr or '')
 
     # ── 先验检查器本身：负对照不过，它的「全绿」不构成任何证据 ──────────
-    for script, argv in (('check_claim_coverage.py', ['--self-test']),
-                         ('check_semantic_residue.py', ['--self-test'])):
-        code, out = run(script, argv)
-        if code == -1:
-            report.metrics.setdefault('content_review', {})['checker_missing'] = out
-        elif code != 0 or '负对照通过' not in out:
+    # v0.0.0.12：此前这里**只点名先验两件**（claim_coverage / semantic_residue），
+    # 于是其余检查器有没有负对照从来没人问过。实测普查结果：
+    # **5 件根本没有负对照，1 件有但跑不起来**，其中 `check_verbatim_quotes`
+    # 还是硬门。改为交给元检查器普查全部，不再手工点名。
+    # ★ 判据用**退出码**，不再用 `'负对照通过' not in out` ——
+    #   各检查器的通过标记本就不统一（`自测 5/5`、`✓ 无关文本被放过`…），
+    #   按串匹配等于只认其中两件的写法。
+    code, out = run('check_checkers.py', [str(here), '--json'])
+    if code == -1:
+        report.metrics.setdefault('content_review', {})['checker_census'] = out
+    else:
+        try:
+            rows = json.loads(out)
+        except json.JSONDecodeError:
+            rows = []
+            report.metrics.setdefault('content_review', {})['checker_census'] = \
+                '元检查器输出无法解析，**本次未做检查器先验**（不是通过）'
+        tally: dict[str, list[str]] = defaultdict(list)
+        for row in rows:
+            tally[row['verdict']].append(row['checker'])
+        for name in tally.get('FAILED', []):
             report.error('content.selftest-failed',
-                         f'{script} 负对照未过——其检查结论不作数')
+                         f'{name} 负对照未过——其检查结论不作数')
+        census: dict[str, Any] = {'负对照可用': len(tally.get('OK', []))}
+        if tally.get('NO-SELFTEST'):
+            census['**无负对照**（其「全绿」不构成证据）'] = tally['NO-SELFTEST']
+        if tally.get('NOT-STANDALONE'):
+            census['**负对照不可独立验证**'] = tally['NOT-STANDALONE']
+        report.metrics['checker_census'] = census
 
     review: dict[str, str] = {}
     if not cache_dirs:

@@ -30,8 +30,8 @@
 
 | 处置 | 数量 | 含义 |
 |---|---|---|
-| **已落成** | **22** | 已由具名检查器／硬断言强制执行 |
-| **可落成** | **26** | 判据明确、能写成检查器 —— **这就是 26 次实质迭代的来源** |
+| **已落成** | **23** | 已由具名检查器／硬断言强制执行（v0.0.0.12 落成第 1 项） |
+| **可落成** | **25** | 判据明确、能写成检查器 —— **剩余可排期的实质迭代** |
 | **只能是散文** | **12** | 逐条写明理由 |
 
 **26 项可落成 ×「一件一版」= 26 次实质迭代**，加已有 11 次 = 37。
@@ -76,7 +76,7 @@
 
 | 优先 | # | 拟建检查器／断言 | 判据 |
 |---|---|---|---|
-| 1 | 第十八种 | `check_checkers.py`（元检查器） | 每个 `check_*.py` 必须有 `--self-test` 且退出码 0；没有的，其结论在门里不作数 |
+| ~~1~~ | ~~第十八种~~ | **✅ 已落成 v0.0.0.12** `check_checkers.py` | 首跑即查出：12 件里 **5 件根本没有负对照、1 件有但跑不起来**（含两个硬门）。**补齐这 6 件 = 6 次后续迭代**，见下方队列 |
 | 2 | 第五十四种 | `check_rubric_independence.py` | rubric 与 candidate 的 n-gram 重合率上限；超限即「rubric 照答案倒写」。**Icahn #92 记下的结构性缺陷，欠了 7 个人物** |
 | 3 | 第三十三种 | `check_review_disposition.py` | 「只列不判」的每条输出必须在 corrections／review 账本里有对应处置；未处置数 > 0 即拦 |
 | 4 | 第二十二＋五十七＋五十九种 | `corrections.jsonl` 增 `scan_pattern` 必填 | 每条订正必须附检索式，用它全库扫描残留必须归零 |
@@ -134,7 +134,9 @@
 
 前五件按上表优先级做，每件独立升版并留 `skill_log_evals/<version>.md`：
 
-1. **`check_checkers.py`** —— 元检查器优先，**它决定其余检查器的结论算不算数**
+1. ~~`check_checkers.py`~~ —— **✅ 已落成（v0.0.0.12）**。它查出的 6 件缺负对照的检查器，
+   已成为新的队列：`check_verbatim_quotes`（硬门）、`check_quote_integrity`（硬门，需解耦语料）、
+   `check_absence_claims`、`check_claim_anchors`、`check_redundancy`、`check_schema_drift`
 2. **`check_rubric_independence.py`** —— Icahn #92 记下的结构性缺陷，已欠 7 个人物
 3. **`check_review_disposition.py`** —— 「只列不判」现在等于「列了没人看」
 4. **`corrections.scan_pattern` 必填** —— 一次修掉第二十二／五十七／五十九三条

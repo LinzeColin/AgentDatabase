@@ -4,7 +4,7 @@
   "display_name": "人物蒸馏 Skill / Persona Distiller",
   "distribution": {
     "canonical_registry": "../persona-distiller-group",
-    "kind": "repository-customized-v0.0.0.11",
+    "kind": "repository-customized-v0.0.0.12",
     "lineage_base_archive_sha256": "e891912d98d14afb7677ac935a19be329d97d206f4ae74a644892f46b17f6748"
   },
   "evaluation_suites": 16,
@@ -61,7 +61,7 @@
     },
     {
       "path": "VERSION",
-      "sha256": "cf7ee959a2c5c258901c7934db0b78d3b3ac2718cac7f1bb98bfa52a7db0bd0b",
+      "sha256": "7842ecb906a906ab0490c67d9b7d213a67dfa27916efe417eeabb836b21617b3",
       "size_bytes": 10
     },
     {
@@ -141,7 +141,7 @@
     },
     {
       "path": "manifest.json",
-      "sha256": "5b25aea4bd2630e0145aa425a4d482f822ede25b157f73169af729b93b591f41",
+      "sha256": "83db842a845c03798aaae73451caa3f5c8db591ad5a82972996559455423110f",
       "size_bytes": 1191
     },
     {
@@ -458,6 +458,11 @@
       "path": "references/pipeline/checkers/check_authorship.py",
       "sha256": "580b1cc210dc7c6bd96ad925f1f285fd3a6283e39d0ed49ec1562151e1b4e82f",
       "size_bytes": 16522
+    },
+    {
+      "path": "references/pipeline/checkers/check_checkers.py",
+      "sha256": "227c0bdbd31e83c7a0b4eb995ac0a064d3165443b3c214aaa772db06b5b80c0a",
+      "size_bytes": 9210
     },
     {
       "path": "references/pipeline/checkers/check_claim_anchors.py",
@@ -2230,6 +2235,11 @@
       "size_bytes": 16522
     },
     {
+      "path": "scripts/check_checkers.py",
+      "sha256": "227c0bdbd31e83c7a0b4eb995ac0a064d3165443b3c214aaa772db06b5b80c0a",
+      "size_bytes": 9210
+    },
+    {
       "path": "scripts/check_claim_anchors.py",
       "sha256": "bad4c02ccd25569310e1271a1e30b7b889c38bdf035781090e8fdb46118078c5",
       "size_bytes": 2954
@@ -2346,8 +2356,8 @@
     },
     {
       "path": "scripts/quality_check.py",
-      "sha256": "f5bf92c2cd2fff0292a746e3df939a9b03a8ed8463249daf1ad6adafee757f98",
-      "size_bytes": 38577
+      "sha256": "6950d6df162d0dd40cb20a467d87301cd331300c94520d590dbaf901866f5ba5",
+      "size_bytes": 39867
     },
     {
       "path": "scripts/register_persona.py",
