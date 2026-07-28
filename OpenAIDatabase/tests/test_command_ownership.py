@@ -61,7 +61,10 @@ class CommandOwnershipTests(unittest.TestCase):
         self.assertEqual(payload["status"], "PASS")
         self.assertFalse(payload["writes_files"])
         self.assertEqual(payload["task_id"], "TSK.OpenAIDatabase.CLEAN1.0006")
-        self.assertEqual(len(payload["canonical_commands"]), 36)
+        # 2026-07-28:36 -> 41。2026-07-19 之后新增的 6 个脚本一直没登记归属,
+        # 其中 5 个入口本次补进 canonical_commands(第 6 个 recurring_prompt_core.py
+        # 无 __main__,是库模块,按契约惯例不登记为命令)。
+        self.assertEqual(len(payload["canonical_commands"]), 41)
         memory_rows = [
             row
             for row in payload["canonical_commands"]

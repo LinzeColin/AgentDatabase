@@ -9,7 +9,8 @@
   "inventory": {
     "top_level_script_entrypoints_before": 54,
     "top_level_script_entrypoints_after": 53,
-    "top_level_script_entrypoints_current": 84,
+    "top_level_script_entrypoints_current": 90,
+    "top_level_script_entrypoints_note": "2026-07-28:84 -> 90。2026-07-19(3ad3130b)记下 84 之后新增 6 个脚本,已逐个定性:build_recurring_prompt_analysis / update_human_readable_recurring / validate_human_readable_docs / validate_recurring_prompt_analysis / validate_skill_run_logs 共 5 个入口已登记进 canonical_commands;recurring_prompt_core.py 无 __main__,是被上述脚本 import 的库模块,按本契约惯例(memory_atlas_paths / privacy_guard 等同类)不登记为命令,仅计入总数。★ 这个计数只是漂移绊线:实测把它单独改成 90 而不登记任何归属,校验器照样 PASS —— 所以只改数字等于把守卫关掉,必须先逐个定性。",
     "referenced_entrypoints_preserved": 52,
     "dead_entrypoints_before": 2,
     "dead_entrypoints_after": 0,
@@ -58,7 +59,12 @@
     {"capability": "memory-fault-reliability", "invocation": "python3 scripts/evaluate_memory_fault_reliability.py --check|--write", "implementation": "scripts/evaluate_memory_fault_reliability.py", "mode": "write_explicit"},
     {"capability": "memory-automation-c-e2e", "invocation": "python3 scripts/evaluate_memory_automation_c_e2e.py --check|--write", "implementation": "scripts/evaluate_memory_automation_c_e2e.py", "mode": "write_explicit"},
     {"capability": "memory-snapshot-recovery", "invocation": "python3 scripts/evaluate_memory_snapshot_recovery.py --check|--write", "implementation": "scripts/evaluate_memory_snapshot_recovery.py", "mode": "write_explicit"},
-    {"capability": "memory-production-acceptance", "invocation": "python3 scripts/evaluate_memory_production_acceptance.py --phase candidate|published --check|--write", "implementation": "scripts/evaluate_memory_production_acceptance.py", "mode": "write_explicit"}
+    {"capability": "memory-production-acceptance", "invocation": "python3 scripts/evaluate_memory_production_acceptance.py --phase candidate|published --check|--write", "implementation": "scripts/evaluate_memory_production_acceptance.py", "mode": "write_explicit"},
+    {"capability": "recurring-prompt-build", "invocation": "python3 scripts/build_recurring_prompt_analysis.py --repo-root .. --config config/human_readable_merge.v1.json --output-dir <dir> --summary-output <md>", "implementation": "scripts/build_recurring_prompt_analysis.py", "mode": "write_ci_generated"},
+    {"capability": "human-readable-recurring-update", "invocation": "python3 scripts/update_human_readable_recurring.py --repo-root ..", "implementation": "scripts/update_human_readable_recurring.py", "mode": "write_ci_generated"},
+    {"capability": "human-readable-docs-validate", "invocation": "python3 scripts/validate_human_readable_docs.py --repo-root ..", "implementation": "scripts/validate_human_readable_docs.py", "mode": "read_only"},
+    {"capability": "recurring-prompt-validate", "invocation": "python3 scripts/validate_recurring_prompt_analysis.py --repo-root ..", "implementation": "scripts/validate_recurring_prompt_analysis.py", "mode": "read_only"},
+    {"capability": "skill-run-logs-validate", "invocation": "python3 scripts/validate_skill_run_logs.py --database-dir . --repo-root ..", "implementation": "scripts/validate_skill_run_logs.py", "mode": "read_only"}
   ],
   "write_commands": [
     {"subcommand": "sync", "required_modes": ["--dry-run", "--apply"]},
