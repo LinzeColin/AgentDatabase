@@ -2,6 +2,9 @@
 from __future__ import annotations
 
 import argparse
+import contextlib
+import importlib.util
+import io
 import json
 import re
 import subprocess
@@ -543,6 +546,113 @@ def run_content_checks(report, target: Path, cache_dirs: list[str]) -> None:
         report.metrics['content_review'] = review
 
 
+def run_authorship_gate(report, target: Path, meta: dict[str, Any],
+                        sources: list[dict[str, Any]]) -> None:
+    """语料层归属门（v0.0.0.10 新增）——**在 research 阶段就拦**。
+
+    ## 它补的是「假设层」缺口，不是实现层缺口
+
+    v0.0.0.8 的七件内容检查器**共享一个从未言明的假设：语料里的话就是他的话**。
+    Steinhardt #98 证明这个假设可以整体失效——抓源子代理把基金会季刊按页切片、
+    一律冠上人物前缀，十份里九份是别人写的，灌库命令再带 `--author "<人物名>"`，
+    两步就把别人的文章洗成了他的话。`check_quote_integrity` 甚至会给出肯定结论
+    （「这句在语料里」——它确实在，只是不是他说的）。
+
+    **把七件检查器各自加强都补不上**，因为它们都在下游。
+
+    ## 门开在哪个断言上
+
+    只查**账本自己声称的东西**：`tier == 'P1'` 且 `author` 指向本人物的源。
+    ——账本说「这是他写的」，门就要求它拿出证据。没声称作者的源不在射程内
+    （测试夹具、二手材料都属此类），因此本门对既有产物零误伤。
+
+    **这也是它唯一的射程边界**：`tier=P1` 但 `author` 留空的源，本门不判，
+    只在 metrics 里报数。这条缺口是有意留的——堵它会把所有历史产物一起拦下，
+    而那违反「不因为过不了门而卡住流程」。缺口大小随时可见，不会被误当成通过。
+
+    ## 为什么在 research 而不是 release
+
+    归属错了，后面**六路研究、断言、文档、用例全部要重做**。
+    v0.0.0.9 把它放在收口手动跑，等于把这笔返工的可能性一直背到最后。
+    现在它跟着 research 门跑，**在写第一个字之前**给出答案。
+    """
+    here = Path(__file__).resolve().parent
+    script = here / 'check_authorship.py'
+    info: dict[str, Any] = {}
+    name = str(meta.get('name') or '').strip()
+
+    if not script.exists():
+        report.metrics['authorship'] = {'状态': 'check_authorship.py 未安装，**未核验**（不是通过）'}
+        return
+    spec = importlib.util.spec_from_file_location('_pd_authorship', script)
+    module = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(module)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['authorship'] = {'状态': f'检查器加载失败，**未核验**：{exc}'}
+        return
+
+    # ★ 负对照不过 → 它的「全绿」不构成任何证据。与 v0.0.0.8 三件硬门同一条纪律。
+    buffer = io.StringIO()
+    with contextlib.redirect_stdout(buffer):
+        selftest_rc = module.self_test()
+    if selftest_rc != 0:
+        report.error('content.selftest-failed',
+                     'check_authorship.py 负对照未过——其检查结论不作数')
+        return
+
+    try:
+        patterns = module.build_patterns(name)
+    except ValueError:
+        report.metrics['authorship'] = {
+            '状态': f'meta.name={name!r} 不足以生成判据（需名与姓两段），**未核验**'}
+        return
+
+    claimed, proven, unverified, suspect, unproven, no_author = [], [], [], [], [], 0
+    for record in sources:
+        if record.get('tier') != 'P1':
+            continue
+        author = str(record.get('author') or '').strip()
+        if not author:
+            no_author += 1
+            continue
+        if not patterns['SURNAME'].search(author):
+            continue                       # 账本明说是别人写的，本门不管归属
+        claimed.append(record)
+        rel = record.get('local_path')
+        path = (target / rel) if rel else None
+        if not path or not path.exists():
+            unverified.append(f'{record.get("source_id")} ({rel or "无 local_path"})')
+            continue
+        try:
+            ok, code, _, counter = module.check(path, patterns)
+        except OSError as exc:
+            unverified.append(f'{record.get("source_id")} (读取失败 {exc})')
+            continue
+        label = f'{record.get("source_id")} {path.name}'
+        if ok and counter:
+            suspect.append(f'{label} [{code}] 另有他人署名：{counter[0][:60]}')
+        elif ok:
+            proven.append(label)
+        else:
+            unproven.append(f'{label}｜文中他人署名：{counter[0][:60] if counter else "无"}')
+
+    info['P1 声称为本人所著'] = len(claimed)
+    info['已证实归属'] = len(proven)
+    if no_author:
+        info['P1 未声称作者（本门射程外）'] = no_author
+    if unverified:
+        info['**未核验**（无落盘原文，不是通过）'] = unverified[:8]
+    if suspect:
+        info['存疑（有正面证据但另有他人署名）'] = suspect[:8]
+    report.metrics['authorship'] = info
+
+    for item in unproven:
+        report.error('research.authorship-unproven',
+                     f'{item} —— 账本声称本人所著，但文中查无归属证据'
+                     f'（署名／编者注／逐字稿轮次三者皆无）')
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description='Evidence-aware quality gate for Persona Distiller targets.')
     parser.add_argument('target', type=Path)
@@ -603,6 +713,7 @@ def main() -> int:
 
     try:
         sources, holdout = evaluate_sources(report, target, thresholds, args.allow_provisional)
+        run_authorship_gate(report, target, meta, sources)
         train_ids = {record.get('source_id') for record in sources if record.get('split') == 'train'}
         evaluate_research(report, target, thresholds, train_ids, args.allow_provisional)
         cases: list[dict[str, Any]] = []

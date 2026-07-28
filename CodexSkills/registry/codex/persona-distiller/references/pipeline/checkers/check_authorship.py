@@ -23,30 +23,77 @@ Steinhardt 一轮实测：抓源子代理按刊物整本抓 PDF、按页切片�
 
 P1 需要下列之一，且**把证据原文打印出来供复核**：
 
-- `A-byline`   —— 显式署名：`By Michael H. Steinhardt`
-- `A-editorial`—— 编者注：`[Remarks delivered by Michael Steinhardt ...]`
+- `A-byline`   —— 显式署名：`By <人物名>`
+- `A-editorial`—— 编者注：`[Remarks delivered by <人物名> ...]`
 - `A-turns`    —— 真·逐字稿：≥2 个说话人标签各出现 ≥3 次，
                   **且同一标签后面跟的文字每次都不同**
-                  （否则那是标题里的冒号——`Michael Steinhardt: 某某标题`
+                  （否则那是标题里的冒号——`<人物名>: 某某标题`
                    在导航/og:title/h1 里重复出现，旧判据把它当成了说话人标记）
 
 再做一次**反向检查**：文末若出现**别人**的身份署名
 （`X is Chair of…` / `X is Managing Director of…` / `By <他人名>`），
 一律降级并打印那一行。刊物型 PDF 的作者署名就在文末那一行。
 
-退出码：0 = 全部有据；2 = 有文件缺正面证据（列出）。
+## v0.0.0.10：按人物名参数化（本文件此前写死 Steinhardt）
+
+写死一个人名的检查器**只能给一个人用**，于是它注定停在「靠记性跑的独立脚本」，
+这正是 v0.0.0.9 记录里写下的已知缺口。现在名字由 `--name` 传入、
+或由 `quality_check.py` 从 `meta.json` 的 `name` 字段自动取，
+不再需要执行者记得改常量。
+
+**取名字时不要用 `\\s+` 连接**：`First\\s+(?:Middle\\s+)?Last` 里
+两个相邻量词会争抢同一段空白，在十几万字的文书上是灾难性回溯
+（实测卡死 120 秒）。可选中间名**自带尾随空格**才是无歧义写法。
+
+退出码：0 = 全部有据；2 = 有文件缺正面证据（列出）；3 = 用法错误。
 """
 import argparse
 import pathlib
 import re
 import sys
 
-NAME = r"Michael\s+(?:H\.?\s+)?Steinhardt"
 
-BYLINE = re.compile(rf"\bBy\s+{NAME}\b", re.I)
-EDITORIAL = re.compile(
-    rf"[\[\(][^\])]{{0,40}}\b(?:remarks|speech|address|excerpt|written|delivered|adapted)"
-    rf"[^\])]{{0,40}}\bby\s+{NAME}", re.I)
+def build_patterns(full_name: str) -> dict:
+    """由人物全名生成本检查器要用的全部正则。
+
+    `full_name` 取 `meta.json` 的 `name`，例如 `Michael H. Steinhardt`
+    或 `Julian Robertson`。判据只依赖**名 + 姓**，中间名一律当可选，
+    这样两种写法互相都能命中（语料里写全中间名、账本里没写，反之亦然）。
+    """
+    tokens = [t for t in re.split(r"\s+", full_name.strip()) if t]
+    if len(tokens) < 2:
+        raise ValueError(f"人物名至少要有名与姓两段：{full_name!r}")
+    first, last = re.escape(tokens[0]), re.escape(tokens[-1])
+    surname = tokens[-1]
+    # ★ 缩写标签要给**两种**：名姓首字母（`MS`）与全部首字母（`MHS`）。
+    #   只按全名段数算一种是实测抓到的回归——The Media Line 那份 44 轮逐字稿
+    #   用的是 `MS:`／`TML:`，而账本里他的名字是三段的 `Michael H. Steinhardt`，
+    #   只生成 `mhs` 就把一份真逐字稿判成了无据。
+    #   **人在语料里用的缩写取决于他惯用的名字形态，不取决于账本写了几段。**
+    letters = [t[0].lower() for t in tokens if t[:1].isalpha()]
+    initials = {letters[0] + letters[-1], "".join(letters)}
+
+    # ★ 可选中间名**自带尾随空格**，与 `first` 后那个必需空格不重叠。
+    #   写成 `first[ \t]+(?:mid[ \t]+)?{0,2}last` 才没有两个量词争同一段空白。
+    name_rx = rf"{first}[ \t]+(?:[A-Z][A-Za-z.'\-]{{0,15}}[ \t]+){{0,2}}{last}"
+    # 姓氏单独出现也算（`By Steinhardt` 式的短署名）——但只用于**标签归属**判定，
+    # 不用于署名判定，避免把「谈论他」的句子当成他的署名。
+    surname_rx = re.escape(surname)
+
+    return {
+        "name": full_name,
+        "surname": surname,
+        "name_rx": name_rx,
+        "BYLINE": re.compile(rf"\bBy\s+{name_rx}\b", re.I),
+        "EDITORIAL": re.compile(
+            rf"[\[\(][^\])]{{0,40}}\b(?:remarks|speech|address|excerpt|written|delivered|adapted)"
+            rf"[^\])]{{0,40}}\bby\s+{name_rx}", re.I),
+        "MINE": re.compile(
+            rf"{surname_rx}|^(?:{'|'.join(re.escape(i) for i in sorted(initials))})$", re.I),
+        "SURNAME": re.compile(surname_rx, re.I),
+    }
+
+
 # 说话人标签：行首「名字:」。**必须多次出现且后文每次不同**才算逐字稿。
 # ★ 名字部分不能写成含空格的字符类再跟 `[ \t]*`——两者可以互相吞空格，
 #   在十几万字的检方文书上会灾难性回溯直接卡死。改成「词(空格词){0,3}」的无歧义形式。
@@ -55,7 +102,7 @@ EDITORIAL = re.compile(
 #   只认同行会把 67 轮的真逐字稿判成 0 轮，只允许一个 \n 也还是 0 轮。
 # ★ 标签第二个词起允许小写连接词——Knowledge@Wharton 的主持人标签就是
 #   `Knowledge at Wharton:`，要求每词首字母大写会把它整条丢掉，
-#   于是只剩 `Steinhardt` 一个标签，「≥2 个说话人」的判据就假阴性了。
+#   于是只剩姓氏一个标签，「≥2 个说话人」的判据就假阴性了。
 TURN = re.compile(
     r"^[ \t]{0,4}([A-Z][A-Za-z.'\-]{0,20}(?: [A-Za-z.'\-]{1,20}){0,3})"
     r"[:：](?:[ \t]*\n){0,3}[ \t]{0,4}(\S.{0,80})", re.M)
@@ -79,14 +126,14 @@ TURN_CAPS = re.compile(
     r"[ \t]+(?=[A-Z][a-z])(.{4,80})", re.M)
 
 
-def turns_evidence(text: str):
+def turns_evidence(text: str, pat: dict):
     """真逐字稿：≥2 个标签各 ≥3 轮，且同一标签后文互不相同。"""
     seen: dict[str, set] = {}
     for rx in (TURN, TURN_CAPS):
         for label, rest in rx.findall(text):
             seen.setdefault(label.strip().lower(), set()).add(rest.strip()[:60])
     good = {k: v for k, v in seen.items() if len(v) >= 3}
-    mine = [k for k in good if re.search(r"steinhardt|^ms$", k, re.I)]
+    mine = [k for k in good if pat["MINE"].search(k)]
     if not mine:
         return None
     if len(good) < 2:
@@ -109,23 +156,21 @@ def turns_evidence(text: str):
     return f"说话人轮次 {labels}"
 
 
-def check(path: pathlib.Path):
+def check_text(text: str, pat: dict):
     """返回 (ok, 证据码, 证据原文, 反证列表)。"""
-    text = path.read_text(encoding="utf-8", errors="replace")
     counter = []
 
     for m in OTHER_ROLE.finditer(text):
-        who = m.group(1)
-        if re.search(r"steinhardt", who, re.I):
+        if pat["SURNAME"].search(m.group(1)):
             continue
         counter.append(m.group(0).strip())
     for rx in (OTHER_BY, OTHER_BY_CAPS):
         for m in rx.finditer(text):
-            if not re.search(r"steinhardt", m.group(1), re.I):
+            if not pat["SURNAME"].search(m.group(1)):
                 counter.append(m.group(0).strip())
 
-    for code, rx in (("A-byline", BYLINE), ("A-editorial", EDITORIAL)):
-        for m in rx.finditer(text):
+    for code, key in (("A-byline", "BYLINE"), ("A-editorial", "EDITORIAL")):
+        for m in pat[key].finditer(text):
             # ★ 真署名是**结构元素**：行首，或跟在分隔符后面。
             #   句子中间的「by X」是在**谈论**作者身份，不是署名——
             #   实测 `No Bull is the … autobiography by Michael Steinhardt who rose
@@ -139,7 +184,7 @@ def check(path: pathlib.Path):
             a, b = max(0, m.start() - 60), min(len(text), m.end() + 60)
             return True, code, " ".join(text[a:b].split()), counter
 
-    ev = turns_evidence(text)
+    ev = turns_evidence(text, pat)
     if ev:
         # ★ 轮次型证据不受他人署名影响，反证清空。
         #   访谈/逐字稿里出现**提问者**的署名是应有之义
@@ -151,12 +196,82 @@ def check(path: pathlib.Path):
     return False, "", "", counter
 
 
+def check(path: pathlib.Path, pat: dict):
+    return check_text(path.read_text(encoding="utf-8", errors="replace"), pat)
+
+
+# ── 负对照：判据改动后必须双向都跑 ──────────────────────────────────
+# v0.0.0.9 的过程教训是「判据改完只跑了一边」，三次都是修完假阳性就交付、
+# 或修完假阴性就交付。这里把最小双向集内置，任何人改本文件都能当场验。
+SELFTEST_NAME = "Jane Q. Public"
+SELFTEST_POSITIVE = [
+    ("行首署名", "By Jane Q. Public\n\nI have argued for years that the ratio matters.\n"),
+    ("编者注", "[Remarks delivered by Jane Public at the 1998 annual meeting.]\n\nThank you.\n"),
+    ("逐字稿双标签", "".join(
+        f"HOST: Question number {i} about the portfolio and its construction over time?\n"
+        f"PUBLIC: Answer number {i} explaining the reasoning in some detail here.\n"
+        for i in range(1, 6))),
+    # ★ 回归守卫（v0.0.0.10 实测抓到）：逐字稿常用**缩写标签**而不是姓氏。
+    #   人物名三段时若只生成「全首字母」缩写，`JP:` 这种标签就整条丢掉，
+    #   一份 44 轮的真逐字稿会被判成无据。名姓首字母与全首字母**两种都要认**。
+    ("逐字稿缩写标签", "".join(
+        f"TML: Question number {i} about communal priorities and their funding?\n"
+        f"JP: Answer number {i} setting out the reasoning at some length here.\n"
+        for i in range(1, 6))),
+]
+SELFTEST_NEGATIVE = [
+    ("他人署名的随笔", "By Richard Roe\n\nJane Public once told me the ratio matters.\n"
+                       "Richard Roe is Chairman of the Example Foundation.\n"),
+    ("散文里的 by X", "The autobiography by Jane Q. Public who rose from nothing is reviewed here.\n"),
+    ("标题里的冒号", "Jane Public: Background & bio\nJane Public: Investment philosophy\n"
+                     "Jane Public: Philanthropy\nJane Public: Background & bio\n"),
+    ("完全没提到她", "This quarterly essay is about communal institutions and their funding.\n" * 5),
+]
+
+
+def self_test() -> int:
+    pat = build_patterns(SELFTEST_NAME)
+    bad = []
+    for label, text in SELFTEST_POSITIVE:
+        ok, code, ev, _ = check_text(text, pat)
+        print(f"  {'✓' if ok else '✗'} 正例 {label}: {code or '——'} {ev[:60]}")
+        if not ok:
+            bad.append(f"正例 {label} 未通过")
+    for label, text in SELFTEST_NEGATIVE:
+        ok, code, _, _ = check_text(text, pat)
+        print(f"  {'✓' if not ok else '✗'} 反例 {label}: {'已拒' if not ok else '误放行 ' + code}")
+        if ok:
+            bad.append(f"反例 {label} 被误放行（{code}）")
+    if bad:
+        print("\n负对照未过：")
+        for b in bad:
+            print(f"  · {b}")
+        return 2
+    print(f"\n负对照通过（{len(SELFTEST_POSITIVE)} 正 + {len(SELFTEST_NEGATIVE)} 反）")
+    return 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
-    ap.add_argument("corpus", help="语料目录")
+    ap.add_argument("corpus", nargs="?", help="语料目录")
+    ap.add_argument("--name", help="人物全名（取 meta.json 的 name）")
     ap.add_argument("--claim-p1", nargs="*", default=None,
                     help="声称是 P1 的文件名；省略则检查目录里全部 .txt")
+    ap.add_argument("--self-test", action="store_true",
+                    help="只跑内置双向负对照，不读语料")
     a = ap.parse_args()
+
+    if a.self_test:
+        return self_test()
+    if not a.corpus or not a.name:
+        print("✗ 需要 corpus 与 --name（或只给 --self-test）", file=sys.stderr)
+        return 3
+
+    try:
+        pat = build_patterns(a.name)
+    except ValueError as exc:
+        print(f"✗ {exc}", file=sys.stderr)
+        return 3
 
     d = pathlib.Path(a.corpus)
     if not d.is_dir():
@@ -169,14 +284,14 @@ def main() -> int:
         return 3
 
     bad, sus = [], []
-    print(f"检查 {len(files)} 份是否够格当「他的话」（P1）\n")
+    print(f"检查 {len(files)} 份是否够格当「{a.name} 的话」（P1）\n")
     for f in files:
         p = d / f
         if not p.exists():
             print(f"  ✗ {f}: 文件不存在")
             bad.append(f)
             continue
-        ok, code, ev, counter = check(p)
+        ok, code, ev, counter = check(p, pat)
         if ok and counter:
             sus.append((f, code, counter))
             print(f"  ⚠ {f}\n      有正面证据 [{code}]，**但文中另有他人署名**：")
