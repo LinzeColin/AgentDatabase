@@ -1,6 +1,6 @@
 # CodexSkills
 
-本机全部 Skill 的仓库镜像：**98 份实例 / 83 个不同名字**，4294 个文件，约 128 MB。
+本机全部 Skill 的仓库镜像：**100 份实例 / 84 个不同名字**，4302 个文件，约 128 MB。
 
 **由 `sync_skills.py` 自动生成，请勿手工编辑本文件。**
 
@@ -8,7 +8,7 @@
 
 | 目录 | 本机路径 | 说明 |
 |---|---|---|
-| `registry/codex/` | `~/.codex/skills` | Codex 用户 Skill（自建 / 下载 / GitHub）（64 个） |
+| `registry/codex/` | `~/.codex/skills` | Codex 用户 Skill（自建 / 下载 / GitHub）（66 个） |
 | `registry/codex-system/` | `~/.codex/skills/.system` | Codex 系统 Skill（OpenAI 官方，Apache-2.0）（6 个） |
 | `registry/claude/` | `~/.claude/skills` | Claude Skill（Anthropic 侧）（4 个） |
 | `registry/agents/` | `~/.agents/skills` | Agent Skill（跨工具通用目录）（24 个） |
@@ -225,7 +225,7 @@ python3 CodexSkills/sync_skills.py --dry-run  # 只看差异
 | [`mcp-builder`](registry/codex/mcp-builder/SKILL.md) | `codex` | Guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools. Use when building MCP servers to integrate external APIs or services, whether in Python (FastMCP) or Node/Type… |
 | [`output-skill`](registry/codex/output-skill/SKILL.md) | `codex` | Overrides default LLM truncation behavior. Enforces complete code generation, bans placeholder patterns, and handles token-limit splits cleanly. Apply to any task requiring exhaustive, unabridged output. |
 | [`persona-distiller`](registry/codex/persona-distiller/SKILL.md) | `codex` | Build, audit, update, package, or uniquely register an evidence-grounded target-person Agent Skill through documented capabilities, strategies, cognition, decision policy, work system, temperament, and boundaries. Before identity parsing or research, resolve s… |
-| [`persona-distiller-group`](registry/codex/persona-distiller-group/SKILL.md) | `codex` | Route a real task to a 5–20 member expert team drawn from uniquely registered Persona Distiller products. Use when a task benefits from several complementary person-model specialists plus isolated review, adjudication, and counterevidence roles; also use to in… |
+| [`persona-distiller-group`](registry/codex/persona-distiller-group/SKILL.md) | `codex` | Assemble a working expert team from uniquely registered Persona Distiller products, load each member's actual reasoning payload (mental models, heuristics, hard boundaries, documented divergences), and produce a decision artifact whose every substantive line i… |
 | [`plugin-creator`](registry/codex-system/plugin-creator/SKILL.md) | `codex-system` | Create and scaffold plugin directories for Codex with a required `.codex-plugin/plugin.json`, optional plugin folders/files, valid manifest defaults, and personal-marketplace entries by default. Use when Codex needs to create a new personal plugin, add optiona… |
 | [`review-agent`](registry/codex-system/review-agent/SKILL.md) | `codex-system` | Perform a read-only, defect-first review of a specified code change and return every actionable finding. Use when another agent delegates review of uncommitted changes, a base-branch diff, a commit, or custom review instructions. |
 | [`skill-creator`](registry/codex-system/skill-creator/SKILL.md) | `codex-system` | Guide for creating effective skills. This skill should be used when users want to create a new skill (or update an existing skill) that extends Codex's capabilities with specialized knowledge, workflows, or tool integrations. |
@@ -290,7 +290,7 @@ python3 CodexSkills/sync_skills.py --dry-run  # 只看差异
 | [`dws`](registry/codex/dws/SKILL.md) | `codex` | 管理钉钉产品能力(AI表格/AI搜问/日历/通讯录/群聊与机器人/待办/审批/考勤/日志/DING消息/开放平台文档/钉钉文档/钉钉云盘/AI听记/邮箱/在线电子表格/知识库等)。当用户需要操作表格数据、管理日程会议、模糊找人/查谁负责某事项、查询通讯录、管理群聊、机器人发消息、创建待办、提交审批、查看考勤、提交日报周报（钉钉日志模版）、读写钉钉文档、上传下载云盘文件、查询听记纪要、收发邮件、读写在线电子表格(axls)、管理钉钉知识库时使用。 |
 | [`internal-comms`](registry/codex/internal-comms/SKILL.md) | `codex` | A set of resources to help me write all kinds of internal communications, using the formats that my company likes to use. Claude should use this skill whenever asked to write some sort of internal communications (status reports, leadership updates, 3P updates,… |
 
-## 其他（12）
+## 其他（14）
 
 | Skill | 来源 | 何时使用 |
 |---|---|---|
@@ -298,9 +298,11 @@ python3 CodexSkills/sync_skills.py --dry-run  # 只看差异
 | [`brand`](registry/codex/brand/SKILL.md) | `codex` | Brand voice, visual identity, messaging frameworks, asset management, brand consistency. Activate for branded content, tone of voice, marketing assets, brand compliance, style guides. |
 | [`codex-encrypted-backup`](registry/codex/codex-encrypted-backup/SKILL.md) | `codex` | 在不创建本地自动脚本或 launchd 的前提下，将本机 Codex 的 memories、全部 sessions（含 archived）及受管 attachments 加密备份到 LinzeColin/AgentDatabase 的 GitHub Release。用于创建、执行、核验、保留或恢复验证这一备份通道。 |
 | [`context-kernel`](registry/claude/context-kernel/SKILL.md) | `claude` | Use this skill when a long-running task or project needs durable, minimal context across chats, sessions, models, devices, or execution owners: resume from saved state, checkpoint material progress, create a handoff snapshot, transfer responsibility, or trim s… |
+| [`context-kernel`](registry/codex/context-kernel/SKILL.md) | `codex` | Use this skill when a long-running task or project needs durable, minimal context across chats, sessions, models, devices, or execution owners: resume from saved state, checkpoint material progress, create a handoff snapshot, transfer responsibility, or trim s… |
 | [`design`](registry/codex/design/SKILL.md) | `codex` | Comprehensive design skill: brand identity, design tokens, UI styling, logo generation (55 styles, Gemini AI), corporate identity program (50 deliverables, CIP mockups), HTML presentations (Chart.js), banner design (22 styles, social/ads/web/print), icon desig… |
 | [`design-system`](registry/codex/design-system/SKILL.md) | `codex` | Token architecture, component specifications, and slide generation. Three-layer tokens (primitive→semantic→component), CSS variables, spacing/typography scales, component specs, strategic slide creation. Use for design tokens, systematic design, brand-complian… |
 | [`gpt-tasteskill`](registry/codex/gpt-tasteskill/SKILL.md) | `codex` | Elite UX/UI & Advanced GSAP Motion Engineer. Enforces Python-driven true randomization for layout variance, strict AIDA page structure, wide editorial typography (bans 6-line wraps), gapless bento grids, strict GSAP ScrollTriggers (pinning, stacking, scrubbing… |
+| [`grilling`](registry/codex/grilling/SKILL.md) | `codex` | Grill the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, or uses any 'grill' trigger phrases. |
 | [`hatch-pet`](registry/codex/hatch-pet/SKILL.md) | `codex` | Create, repair, validate, visually QA, and package Codex-compatible v2 animated pets from character art, generated images, company or prospect brand cues, or visual references. Use for any new Codex pet, custom mascot, non-pixel pet style, brand-inspired pet,… |
 | [`slides`](registry/codex/slides/SKILL.md) | `codex` | Create strategic HTML presentations with Chart.js, design tokens, responsive layouts, copywriting formulas, and contextual slide strategies. |
 | [`ui-styling`](registry/codex/ui-styling/SKILL.md) | `codex` | Create beautiful, accessible user interfaces with shadcn/ui components (built on Radix UI + Tailwind), Tailwind CSS utility-first styling, and canvas-based visual designs. Use when building user interfaces, implementing design systems, creating responsive layo… |
@@ -316,6 +318,7 @@ python3 CodexSkills/sync_skills.py --dry-run  # 只看差异
 - `context-kernel`
 - `design`
 - `design-system`
+- `grilling`
 - `slides`
 - `ui-styling`
 - `ui-ux-pro-max`

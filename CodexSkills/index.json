@@ -6,8 +6,8 @@
     "claude": "Claude Skill（Anthropic 侧）",
     "agents": "Agent Skill（跨工具通用目录）"
   },
-  "skill_instance_count": 98,
-  "unique_slug_count": 83,
+  "skill_instance_count": 100,
+  "unique_slug_count": 84,
   "skills": [
     {
       "slug": "agent-reach",
@@ -110,6 +110,16 @@
       "size_bytes": 6543
     },
     {
+      "slug": "context-kernel",
+      "source": "codex",
+      "name": "context-kernel",
+      "description": "Use this skill when a long-running task or project needs durable, minimal context across chats, sessions, models, devices, or execution owners: resume from saved state, checkpoint material progress, create a handoff snapshot, transfer responsibility, or trim stale context. Do not use it for one-off questions, ordinary summaries, hidden reasoning, or as a chat transcript.",
+      "category": "其他",
+      "entry": "registry/codex/context-kernel/SKILL.md",
+      "file_count": 3,
+      "size_bytes": 159241
+    },
+    {
       "slug": "design",
       "source": "codex",
       "name": "design",
@@ -208,6 +218,16 @@
       "entry": "registry/codex/graphify/SKILL.md",
       "file_count": 695,
       "size_bytes": 13373911
+    },
+    {
+      "slug": "grilling",
+      "source": "codex",
+      "name": "grilling",
+      "description": "Grill the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, or uses any 'grill' trigger phrases.",
+      "category": "其他",
+      "entry": "registry/codex/grilling/SKILL.md",
+      "file_count": 2,
+      "size_bytes": 948
     },
     {
       "slug": "gsap-core",
@@ -497,17 +517,17 @@
       "category": "工程与交付",
       "entry": "registry/codex/persona-distiller/SKILL.md",
       "file_count": 219,
-      "size_bytes": 579201
+      "size_bytes": 580609
     },
     {
       "slug": "persona-distiller-group",
       "source": "codex",
       "name": "persona-distiller-group",
-      "description": "Route a real task to a 5–20 member expert team drawn from uniquely registered Persona Distiller products. Use when a task benefits from several complementary person-model specialists plus isolated review, adjudication, and counterevidence roles; also use to inspect, verify, rebuild, or govern the canonical persona delivery registry. Infer identity and scenario internally, select only evidence-supported experts, and never ask the caller to choose an identity.",
+      "description": "Assemble a working expert team from uniquely registered Persona Distiller products, load each member's actual reasoning payload (mental models, heuristics, hard boundaries, documented divergences), and produce a decision artifact whose every substantive line is traceable to a cited claim_id. Use when a task benefits from several complementary person-model specialists plus isolated review, adjudication, and counterevidence roles; also use to inspect, verify, rebuild, or govern the canonical persona delivery registry. Infer identity and scenario internally; never ask the caller to choose an identity.",
       "category": "工程与交付",
       "entry": "registry/codex/persona-distiller-group/SKILL.md",
-      "file_count": 305,
-      "size_bytes": 13593866
+      "file_count": 308,
+      "size_bytes": 13640481
     },
     {
       "slug": "project-cost-table-skill",
