@@ -18,6 +18,10 @@ from validate_public_encrypted_backup_policy import (
     BackupPolicyError,
     validate_policy as validate_public_encrypted_backup_policy,
 )
+from validate_private_encrypted_backup_policy import (
+    PrivateBackupPolicyError,
+    validate_policy as validate_private_encrypted_backup_policy,
+)
 
 
 DEFAULT_CONTRACT = Path("config/storage/raw_material_policy.json")
@@ -288,6 +292,76 @@ def validate_policy(
     if public_encrypted_exception_errors:
         errors.extend(public_encrypted_exception_errors)
 
+    private_encrypted_automation_errors: list[str] = []
+    private_encrypted_automation = private_policy.get("private_encrypted_release_automation")
+    private_encrypted_authorization = contract.get(
+        "private_encrypted_release_automation_authorization"
+    )
+    if not isinstance(private_encrypted_authorization, dict):
+        private_encrypted_automation_errors.append(
+            "private encrypted release automation authorization is missing"
+        )
+    elif (
+        private_encrypted_authorization.get("decision")
+        != "owner_authorized_private_ciphertext_only_codex_backup_automation_repair"
+        or not str(private_encrypted_authorization.get("authorized_at") or "")
+        or not str(private_encrypted_authorization.get("source") or "")
+        or not isinstance(private_encrypted_authorization.get("scope"), list)
+        or not isinstance(private_encrypted_authorization.get("does_not_authorize"), list)
+    ):
+        private_encrypted_automation_errors.append(
+            "private encrypted release automation authorization is invalid"
+        )
+    if not isinstance(private_encrypted_automation, dict):
+        private_encrypted_automation_errors.append("private encrypted release automation is missing")
+    else:
+        expected_private_automation = {
+            "enabled": True,
+            "repository": "LinzeColin/Private-Database",
+            "visibility": "private",
+            "transport": "github_release_asset_only",
+            "git_tracked_ciphertext_allowed": False,
+            "plaintext_or_key_material_allowed": False,
+            "shared_cwd_write_allowed": False,
+            "local_script_creation_allowed": False,
+        }
+        for key, expected in expected_private_automation.items():
+            if private_encrypted_automation.get(key) != expected:
+                private_encrypted_automation_errors.append(
+                    f"private encrypted release automation {key} is invalid"
+                )
+        policy_relative = str(private_encrypted_automation.get("policy") or "")
+        if (
+            not policy_relative
+            or Path(policy_relative).is_absolute()
+            or ".." in Path(policy_relative).parts
+        ):
+            private_encrypted_automation_errors.append(
+                "private encrypted release policy path is invalid"
+            )
+        else:
+            policy_path = database_dir / policy_relative
+            public_policy_path = database_dir / "config/storage/public_encrypted_backup_policy.json"
+            try:
+                private_encrypted_policy = json.loads(policy_path.read_text(encoding="utf-8"))
+                public_encrypted_policy = json.loads(
+                    public_policy_path.read_text(encoding="utf-8")
+                )
+                validate_private_encrypted_backup_policy(
+                    private_encrypted_policy, public_encrypted_policy, require_ready=True
+                )
+            except (
+                OSError,
+                json.JSONDecodeError,
+                BackupPolicyError,
+                PrivateBackupPolicyError,
+            ):
+                private_encrypted_automation_errors.append(
+                    "private encrypted release policy is invalid"
+                )
+    if private_encrypted_automation_errors:
+        errors.extend(private_encrypted_automation_errors)
+
     base_ref = str(contract.get("implementation_base_sha") or "")
     retired_remaining: list[str] = []
     retired_fingerprint_mismatches: list[str] = []
@@ -436,6 +510,9 @@ def validate_policy(
         "tracked_private_path_count": len(set(tracked_private_paths)),
         "public_encrypted_release_exception_mismatch_count": len(
             public_encrypted_exception_errors
+        ),
+        "private_encrypted_release_automation_mismatch_count": len(
+            private_encrypted_automation_errors
         ),
         "retired_path_remaining_count": len(retired_remaining),
         "retired_fingerprint_mismatch_count": len(retired_fingerprint_mismatches),

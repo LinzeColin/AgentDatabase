@@ -3,8 +3,8 @@
   "project_id": "OpenAIDatabase",
   "task_id": "TSK.OpenAIDatabase.CLEAN1.0008",
   "acceptance_id": "ACC.OpenAIDatabase.CLEAN1.0008",
-  "last_updated_task_id": "TSK.OpenAIDatabase.PEB1.0002",
-  "last_updated_acceptance_id": "ACC.OpenAIDatabase.PEB1.0002",
+  "last_updated_task_id": "TSK.OpenAIDatabase.PEB1.0003",
+  "last_updated_acceptance_id": "ACC.OpenAIDatabase.PEB1.0003",
   "implementation_base_sha": "91051a00ecdac72dc43ab8d0d2c0ecaeb1696fd0",
   "owner_authorization": {
     "decision": "emergency_public_history_remediation",
@@ -34,6 +34,26 @@
       "key material publication",
       "automatic source deletion",
       "bypass of encryption, unified-key, Release-only transport, or remote-verification controls"
+    ]
+  },
+  "private_encrypted_release_automation_authorization": {
+    "decision": "owner_authorized_private_ciphertext_only_codex_backup_automation_repair",
+    "authorized_at": "2026-07-28T09:21:09Z",
+    "source": "Codex task owner requested implementation after the automation diagnosis",
+    "scope": [
+      "Codex memories, session records, and session attachments only",
+      "private LinzeColin/Private-Database GitHub Release ciphertext assets only",
+      "one unified approved key identifier with a Keychain or owner-controlled secret-manager private identity",
+      "one fresh system temporary directory per run with no shared workspace writes",
+      "remote ciphertext hash verification and automatic-release-only retention"
+    ],
+    "does_not_authorize": [
+      "public Release payloads or Git-tracked ciphertext",
+      "plaintext, source paths, source file names, credentials, or key material",
+      "automatic source deletion",
+      "local scripts, launchd, login items, services, daemons, cron jobs, or persistent executor state",
+      "writes to another task, thread, workspace, or private repository Git tree",
+      "bypass of encryption, unified-key, Release-only transport, private identity, or remote-verification controls"
     ]
   },
   "tracked_raw_policy": {
@@ -87,6 +107,17 @@
       "plaintext_or_key_material_allowed": false,
       "r8_required_before_upload": false,
       "owner_authorized_historical_product_gate_override_required": true
+    },
+    "private_encrypted_release_automation": {
+      "enabled": true,
+      "policy": "config/storage/private_encrypted_backup_policy.json",
+      "repository": "LinzeColin/Private-Database",
+      "visibility": "private",
+      "transport": "github_release_asset_only",
+      "git_tracked_ciphertext_allowed": false,
+      "plaintext_or_key_material_allowed": false,
+      "shared_cwd_write_allowed": false,
+      "local_script_creation_allowed": false
     }
   },
   "credential_policy": {

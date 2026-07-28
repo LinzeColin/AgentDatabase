@@ -59,6 +59,7 @@ class RawMaterialPolicyTests(unittest.TestCase):
             "invalid_raw_extension_count",
             "tracked_private_path_count",
             "public_encrypted_release_exception_mismatch_count",
+            "private_encrypted_release_automation_mismatch_count",
             "retired_path_remaining_count",
             "retired_fingerprint_mismatch_count",
             "duplicate_archive_disposition_count",
@@ -92,6 +93,13 @@ class RawMaterialPolicyTests(unittest.TestCase):
         self.assertTrue(
             encrypted_exception["owner_authorized_historical_product_gate_override_required"]
         )
+        private_automation = self.policy["private_origin_policy"][
+            "private_encrypted_release_automation"
+        ]
+        self.assertTrue(private_automation["enabled"])
+        self.assertEqual(private_automation["repository"], "LinzeColin/Private-Database")
+        self.assertFalse(private_automation["shared_cwd_write_allowed"])
+        self.assertFalse(private_automation["local_script_creation_allowed"])
 
     def test_public_base_fingerprints_preserve_historical_evidence(self) -> None:
         for collection in self.policy["retired_tip_collections"]:

@@ -1,0 +1,86 @@
+{
+  "schema_version": "openai_database.private_encrypted_backup_policy.v1",
+  "task_id": "TSK.OpenAIDatabase.PEB1.0003",
+  "acceptance_id": "ACC.OpenAIDatabase.PEB1.0003",
+  "status": "READY",
+  "owner_authorization_ref": "config/storage/raw_material_policy.json#private_encrypted_release_automation_authorization",
+  "scope": {
+    "logical_sources": [
+      "codex_memories",
+      "codex_sessions",
+      "codex_attachments"
+    ],
+    "full_recovery_intended": true,
+    "plaintext_publication_allowed": false,
+    "git_tracked_ciphertext_allowed": false,
+    "automatic_source_deletion_allowed": false
+  },
+  "release": {
+    "repository": "LinzeColin/Private-Database",
+    "visibility": "private",
+    "transport": "github_release_asset_only",
+    "draft_release_required": true,
+    "remote_verification_required_before_local_ciphertext_cleanup": true,
+    "max_ciphertext_part_bytes": 1073741824,
+    "max_parts": 3,
+    "automatic_release_tag_prefix": "codex-auto-backup-",
+    "automatic_release_retention_count": 3,
+    "retention_scope": "automatic_releases_with_matching_tag_prefix_only",
+    "manual_or_nonmatching_release_mutation_allowed": false
+  },
+  "encryption": {
+    "algorithm": "age-x25519-v1",
+    "required_tool": "age",
+    "stream_plain_archive": true,
+    "plain_archive_persisted": false,
+    "ciphertext_suffix": ".age",
+    "compression": "gzip"
+  },
+  "unified_key": {
+    "public_policy_ref": "config/storage/public_encrypted_backup_policy.json#unified_key",
+    "key_id": "agentdatabase-public-backup-v1",
+    "private_identity_source": "macos_keychain_or_owner_secret_manager",
+    "identity_file_persisted": false,
+    "key_export_allowed": false,
+    "rotation_requires_new_key_id": true
+  },
+  "manifest": {
+    "allowed_fields": [
+      "backup_id",
+      "created_at",
+      "key_id",
+      "recipient_fingerprint",
+      "ciphertext_sha256",
+      "ciphertext_size_bytes",
+      "part_number",
+      "part_count",
+      "logical_source_set",
+      "schema_version"
+    ],
+    "source_absolute_path_allowed": false,
+    "source_file_name_allowed": false,
+    "plaintext_content_allowed": false,
+    "credential_or_key_material_allowed": false
+  },
+  "automation": {
+    "enabled": true,
+    "schedule_allowed": true,
+    "automatic_retry_allowed": false,
+    "automatic_follow_up_task_allowed": false,
+    "shared_cwd_write_allowed": false,
+    "system_temporary_directory_only": true,
+    "local_script_creation_allowed": false,
+    "local_persistent_state_allowed": false,
+    "release_creation_requires_all_preflight": true,
+    "private_identity_unavailable_action": "ESCALATE",
+    "source_snapshot_unstable_action": "STOP",
+    "post_upload_remote_hash_mismatch_action": "STOP",
+    "required_preflight": [
+      "age_binary_available",
+      "unified_recipient_provisioned",
+      "private_identity_accessible",
+      "source_integrity_verified",
+      "remote_release_upload_verified"
+    ]
+  }
+}
