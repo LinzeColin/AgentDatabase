@@ -1,0 +1,13 @@
+Algorithms give or they take | Seth's Blog 
+ Algorithms give or they take 
+ If there’s scarcity, we need to make choices.
+ Who gets hired, what website shows up at the top of the search results, who gets a loan.
+ And while we can make those choices on a case by case basis, at scale, we rely on algorithms instead. A series of coded steps, inferences and decision-making heuristics that ostensibly get better as they gather more data.
+ At this point, it’s clear that algorithms are remaking our culture. They drive how social media networks surface content, how search engines highlight websites, how AI makes decisions about who flies or doesn’t, who gets a loan or doesn’t, it’s everywhere, all the time.
+ And algorithms are not neutral. They can’t be. Every decision has consequences, and unlike the pythagorean theorem, there isn’t a right answer, simply a choice about now or later, all along a spectrum.
+ An algorithm takes when it finds a selfish or defective element of society and magnifies it for short-term profit. It finds habits or instincts that individuals might have and exploits them to do something that benefits the algorithm-maker without leaving the culture or the user better off in the long run.
+ And an algorithm gives when it amplifies the better angels of our nature, when it helps us do the things we’d like to do in the long run, for us and the people we care about.
+ A challenge for anyone programming at a monopoly, a public company, a well-funded startup or even a non-profit in search of donors is this: Do you have the guts to build an algorithm you can be proud of even if it doesn’t pay off as well in the short run?
+ Because if the answer is no, blaming the system isn’t going to help anyone. You are the system, we all are, and given the power of invisible and leveraged algorithms, it’s essential that they be created and maintained by people who understand that they’re responsible for the impact they make.
+ More on this here and here .
+ February 19, 2021

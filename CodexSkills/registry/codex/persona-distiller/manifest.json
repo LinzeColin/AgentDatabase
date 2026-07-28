@@ -33,5 +33,5 @@
   "canonical_registry": "../persona-distiller-group",
   "delivery_contract": "one-full-delivery-zip-v0.0.0.5",
   "subagent_review_disclosure": "Independent agents are preferred. When unavailable, serialized sealed contexts must be disclosed and may not be called independent models.",
-  "version": "v0.0.0.12"
+  "version": "v0.0.0.13"
 }
