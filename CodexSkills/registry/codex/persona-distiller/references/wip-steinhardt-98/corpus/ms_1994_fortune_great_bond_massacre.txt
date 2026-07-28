@@ -1,0 +1,185 @@
+SOURCE_URL: https://fortune.com/2013/02/03/the-great-bond-massacre-fortune-1994/
+
+The great bond massacre | Fortune
+Home
+Latest
+Fortune 500
+Finance
+Tech
+Leadership
+Lifestyle
+Rankings
+Multimedia
+Trending now
+1
+New York City women are making up to $30,000 per month by renting out their closets to strangers
+2
+Why did a $154 billion CEO just endorse stripping most Americans of voting rights—and taking us back to the 19th century?
+3
+The millennial generation is split in 2: an older crowd with boomer-style comfort, a younger set going 'back to the early 1900s'
+1
+New York City women are making up to $30,000 per month by renting out their closets to strangers
+2
+Why did a $154 billion CEO just endorse stripping most Americans of voting rights—and taking us back to the 19th century?
+3
+The millennial generation is split in 2: an older crowd with boomer-style comfort, a younger set going 'back to the early 1900s'
+Features
+The great bond massacre
+By
+Al Ehrbar
+Al Ehrbar
+By
+Al Ehrbar
+Al Ehrbar
+October 17, 1994, 12:00 AM ET
+Add Fortune on Google for similar content.
+Add us on Google
+Add us on Google
+Editor’s note: This article was originally published in the October 17, 1994 issue of Fortune .
+Recommended Video
+Wasn’t this supposed to be the year Alan Greenspan got to triumphantly parade down Wall Street to the cheers of bondholders big and small? In many ways the circumstances seemed right. In January 1994, the 34th month of economic expansion, bond yields were historically low and inflation seemed negligible: Wages were going nowhere, and companies dared not raise prices. But within seven short months of that promising start, something fairly unusual happened: 1994 became the year of the worst bond market loss in history.
+Since the Federal Reserve began nudging short-term interest rates higher in early February, the bond market has inflicted heavy damage on financial companies, hedge funds, and bond mutual funds. Fortune estimates that the rise in 30-year Treasury rates from 6.2% at the start of the year to 7.75% in mid- September has knocked more than $600 billion off the value of U.S. bonds (some of the losers are shown below). And with long-term rates rising in every major country, the worldwide decline in bond values this year figures to be on the order of $1.5 trillion. That’s assuming that rates rise no further from here, hardly a certainty.
+Part of the reason for such staggering losses is the sheer size of today’s bond market. As corporations and financial institutions “securitize” an increasingly larger share of the American financial pie, everything from home mortgages to credit card receivables and aircraft leases winds up as bondlike securities available to investors and speculators alike. In 1981, according to Securities Data Co., new public issues of bonds and notes (excluding Treasury securities) totaled $96 billion. Last year public offerings came to $1.27 trillion.
+The bond business isn’t just bigger. It has also become mystifyingly complex as Wall Street’s financial wizards use high-powered technology, even an occasional Cray supercomputer, to devise new ways to hedge risks or speculate on minute changes in interest rates. The growth of financial derivatives, which basically are side bets on the future course of interest rates, exchange rates, and commodities prices, has not only magnified the financial consequences of a market move but also thwarted traditional analysis of interest rate movements, which tends to focus more on economics than on internal market dynamics.
+Combine these recent developments with the new technological capability to hurl billions of investment dollars across oceans electronically, and you suddenly have a global bazaar where events in Chiapas, Mexico, can lead to huge gains or losses in New York, London, and Frankfurt. Not only do these markets react to one another, but they react faster than ever before. Says one veteran trader: “A move in the long bond that used to take six weeks now happens in six days.”
+But none of these changes can fully explain the surprising losses of recent months, a setback that has confounded virtually every major bond investor on Wall Street. To understand what happened, one has to take all these factors — a bigger, global market; derivatives; greater speed — and magnify them tenfold. That would begin to take account of the dramatic leverage that has been injected into the financial markets by traders, the professional speculators who run hedge funds, and others in recent years. Even that multiplier might not capture the full effect of forces at work on this market. Indeed, as recently as last fall, some hedge funds — and a few wealthy individuals — were buying bonds on margin for as little as 1 or 2 cents on the dollar (banks and securities dealers put up the rest). When the market cooperates, such leverage can greatly magnify the gains, as it did last year, when some hedge funds enjoyed total returns of 50% or more. When it doesn’t, losses can be staggering.
+Leverage not only has magnified the swing in bonds but also has given the fixed-income market some new personality twists. In recent years bonds have become less of a pure barometer of inflation expectations and more of a slave to the tactics of speculators looking to capitalize on short-term opportunities. Indeed, it was leveraged speculation that produced much of the great bond rally last year, a rally that brought long-term Treasury rates as low as 5.8% last October, and it played an equally important role in the market melee this year.
+That ugly chapter began in February, when the Federal Reserve began boosting short-term rates in response to signs of a strengthening economy, as well as rising prices in the commodity markets. In a normal, unleveraged environment, the rise might have calmed inflation worries and even brought long-term rates down a bit. But instead the initial increase of 25 basis points, from 3% to 3.25%, in the overnight federal funds rate triggered an immediate 40-basis- point increase in the 30-year Treasury rate as leveraged bondholders were forced to quickly liquidate their positions to curtail mounting losses on their bond portfolios.
+By early May of this year, when the Fed had raised the federal funds rate 75 basis points, bond prices had plummeted and bond rates had jumped 140 basis points, or nearly 1.5 percentage points.
+The $1.4 trillion mortgage market followed Treasuries into the tank, declining in value, and at the same time European bonds and those from emerging markets were falling too. Losses for hedge funds, insurance companies, securities houses, mutual funds, and everyone else with investments in the fixed-income markets began to mount.
+Among the hardest hit in the bond debacle have been the big hedge funds that gambled on a continuing decline in European bond rates. Steinhardt Partners, one of those buying on whisper-thin margin, reportedly had amassed a $30 billion position in Eurobonds before the market turned. Its holdings were so large and so leveraged that Steinhardt was losing $4 million for each basis- point rise in European rates. By May the fund’s losses amounted to about a third of the $4.6 billion it had under management. Steinhardt, which had blessed its investors with gains of better than 60% in each of the past three years, was still down more than 30% at the beginning of September.
+Omega Partners, a hedge fund started in January 1992 by Leon Cooperman, formerly the chairman of the investment policy committee at Goldman Sachs , took a similar drubbing. Omega returned better than 70% to its investors in 1993, largely with profits on leveraged Eurobond positions. But Cooperman’s firm stayed too long at the party, and his $3 billion fund quickly gave back a big chunk of those profits this year, seeing the value of its portfolios ! decline by 24% in the first half. The fund has recovered some of that loss but is still down sharply for the year. Tiger Management, a $6.5 billion fund run by Julian Robertson, also took heavy losses on European bonds, but sources say subsequent gains left it down only 7.5% by mid-September.
+Banks and securities firms also got hit hard. The vaunted trading department at Bankers Trust suffered its first quarterly loss in ten years. Salomon Brothers reported a pretax loss of $371 million for the first half, most of it a result of bond market losses. One firm, Askin Capital Management, could not absorb the losses it faced and went under, famously. Askin held some $600 million in assets under management, which it had largely put into highly leveraged mortgage derivatives. When the mortgage market turned against it in March, the firm received margin calls it couldn’t meet.
+But the biggest loser of all — and not so famously — has been the life insurance industry, which had just shy of $1 trillion in bond investments at the end of last year. Weston Hicks, an insurance analyst at Sanford Bernstein & Co., estimates that the value of those bond portfolios has fallen by around $50 billion since December 31. Some of the biggest insurers figure to have lost more than $1 billion each. Hicks calculates that property and casualty insurers saw their portfolios decline in value by around $20 billion, more than what they paid out in claims for Hurricane Andrew.
+Those losses won’t show up in income statements because insurers carry bonds on their books at what is called amortized cost, and do not deduct declines in market values from earnings unless they sell a bond. Indeed, some in the market argue that the declines aren’t losses at all. For one thing, bonds purchased before 1993 are still worth more than the insurers paid for them. But that’s like saying the 1987 stock market crash didn’t matter because prices were still above the level of 1985.
+Small investors have taken their hits as well. Morningstar, the mutual fund research company, calculates that the 2,567 fixed-income funds it tracks (excluding money market funds) have had a total return of 3.5% so far this year. Excluding interest payments, that translates to a dollar loss of more than $40 billion. As Merton Miller, a Nobel laureate at the University of Chicago, puts it, “I’ll never understand why they call bonds ‘fixed’ income.”
+One of the most remarkable aspects of the bond crash of 1994 is that there apparently were no professional money managers who cleaned up by shorting bonds or bond futures at the top of the market. Those who were making big leveraged bets on bonds seemingly all took the same, losing, side. Fortune did identify a handful of winners, but only one of those scored its gains by correctly calling the direction of interest rates (see box).
+Most bond fund managers aren’t supposed to make big bets, of course. Mutual fund managers, for example, are constrained by the investment objectives described in their prospectuses. A long-term corporate bond fund, say, is stuck in long-term corporates. Similarly, fixed-income managers who run portfolios for pension funds, endowments, and other institutional clients usually have specific instructions about the maturity structure the client wants. The manager’s job is not to call market turns but to outperform a benchmark bond index. About the only thing a fund manager can do if he is convinced rates are headed up is to shorten the maturity of the portfolio. But most managers apparently failed to do that this year. “Almost all fixed-income managers have been underperforming their benchmarks,” says Ray Dalio, president of Bridgewater Associates, an investment management company in Wilton, Connecticut.
+So how is it that professional bond investors who have spent years honing their skills could have been so wrong about the possible consequences of a tightening action by the Federal Reserve? Part of the explanation lies in the Fed’s late-1989 decision to push short-term rates down, not up. At the time, the federal funds rate was even higher than the long-term bond rate of 8%. But by the end of 1992 the federal funds rate had been brought all the way down to 3%, while long bonds were still yielding more than 7.5%. The wide spread effectively created an easy opportunity for banks, securities dealers, hedge funds, and wealthy individuals to profit by borrowing short-term funds and buying longer-term securities. This practice has come to be known as the carry trade. The term “carry” refers to the spread between what an investor pays for short-term borrowings and what he collects on longer-term assets.
+Consider this somewhat simplified example: An institution puts up $100,000 in cash to buy $10 million of Treasury bonds yielding 6.2% and — here’s the leverage — borrows the other $9.9 million at a rate of 3.5%. It collects $620,000 in interest on the bonds, pays $346,500 in interest on the loan, and winds up netting $273,500 a year on its $100,000 investment — unless long- term rates head up, that is. When that happens, the institution gets a margin call to put up another $100,000 for each 1% drop in bond prices, and it can quickly become a net loser, even if the carry remains rich.
+It was this relatively easy moneymaking strategy that prompted traders and speculators to load up on long-term bonds and to take on ever more leverage in the process. One stunning example of the degree of leverage in the market in recent years is the borrowing by the so-called primary dealers in Treasury securities. These dealers, who are the biggest market makers in Treasuries, include the major securities houses and money-center banks. Part of their business is to provide the financing — the $9.9 million in the example above — to institutions that want to play the carry trade. The dealers, in turn, must borrow more themselves to finance these loans. By late last year their borrowings to finance holdings of Treasuries were brushing up against the $200 billion mark — a record. Viewed another way, the bond dealers alone had financed roughly a year’s worth of the federal budget deficit with borrowed money.
+The investors who played the carry trade were not only reaping the benefits of a wide spread between long and short rates. They were also betting that bond rates would decline, be stable, or, if the market turned, rise more slowly than short-term rates while they unwound their leveraged holdings. And their continued buying of Treasuries helped to fulfill their hopes by pushing yields further down.
+What also helped to justify their expectation for stable or lower bond rates were Clinton’s plans to cut the deficit and Fed Chairman Alan Greenspan’s clear resolve to keep inflation in check. Meanwhile, the Feds stoked the bond rally by keeping short-term rates low enough to keep the carry trade profitable. Says Scott Pardee, chairman of Yamaichi International (America) and former head of the foreign exchange desk at the New York Federal Reserve Bank: “The Fed’s posture of providing ample liquidity created a bubble.”
+Special circumstances in several ancillary credit markets also helped push long rates down and bond prices up. The improving condition of many lesser- developed countries, for example, convinced investors that their bonds were appreciating in value. Bullishness on bonds was proving contagious.
+More important, the decline in long rates brought a wave of mortgage refinancings that was far larger than mortgage-bond investors had dreamed possible. The refinancings created an enormous problem for bondholders because they drastically shortened the duration of the bonds. (Duration, which has replaced average maturity as the measure of a bond portfolio’s time horizon, refers to the length of time it will take for interest and principal payments to equal 100% of the original investment.) That left many holders with shorter-lived securities than they wanted in a bullish bond market. Their response was to buy ten-year Treasuries and options on Treasuries to lengthen the duration of their mortgage portfolios. That buying, in turn, pushed down the yields on intermediate- and long-term Treasuries a few more notches. “The last move from 6.5% to 5.8% on the long bond was all mortgage investors and trend followers,” says Michael Sherman, a former partner of Cooperman at Omega. Bond rates began moving back up in the fourth quarter, but by January they were still only 6.2%.
+Then came the rout, which H. Erich Heinemann, chief economist at Ladenburg Thalmann, and others have dubbed “the great worldwide margin call.” Most market observers initially blamed the Fed’s first boost in short rates for the global bond-market collapse, but that explanation won’t hold up. As one member of the policy-setting Federal Open Market Committee puts it, “There’s no way that our 25-basis-point increase caused German bond rates to jump 200 basis points.” In fact, a confluence of forces caused rates everywhere to shoot back up.
+The uprising in Chiapas, Mexico, on New Year’s Day and the assassination of presidential candidate Luis Donaldo Colosio in March cast a pall over emerging-market bonds. European and Japanese interest rates jumped largely because investors began to look more rationally at what was happening there. In Europe long-term rates were at 30-year lows in virtually every major country. German and French bond rates, for example, were even lower than rates in the U.S. Even so, speculators had been assuming that further reductions in short-term rates in Europe would bring continuing declines in bond rates as well. But then they started to notice rising industrial production, especially in Germany, which was coming on stronger than economists had predicted. That brought on the specter of rising credit demands and higher inflation, so rates began to inch up.
+Just as in the U.S., European bond investors were operating on lots of leverage. That made them just as vulnerable as Cooperman and Steinhardt when the margin calls started to come. The result: “You had a snowballing liquidation completely out of proportion to the (economic) fundamentals,” says Gilbert de Botton, chairman of Global Asset Management in London. “Both the U.S. and Europe had been overexploited by investors on margin.”
+Back in New York, the report of extremely strong 6.3% real growth in the fourth quarter of last year, combined with Greenspan’s well-publicized fears about incipient inflation, struck new fear into bondholders. The Clinton Administration didn’t help matters. “The saber rattling over Japanese trade hurt a lot,” says de Botton. “(U.S. Trade Representative) Mickey Kantor’s allusions to the effect that the U.S. was not in favor of a strong dollar was an indirect source of forced selling (of U.S. bonds) by European investors.” Fearing currency losses and declining bond values, foreign holders of U.S. bonds began to pull out.
+Given all the leverage in the market, it shouldn’t have been surprising that long rates moved up sharply when the Fed finally began boosting short-term rates. Indeed, some members of the Open Market Committee voiced fears at the February 4 meeting that even a small increase in the federal funds rate could rattle the bond market. Rattle it did. The initial rise in long rates brought forth a flood of margin calls. Rather than put up more money, which many of them didn’t have anyway, speculators liquidated their holdings. With individuals bailing out of bond mutual funds as well, and little or no new money coming into the market, bond prices had nowhere to go but down.
+Mortgage bonds played a special role in the decline, just as they had in last year’s rally. As long-term rates moved up, homeowners suddenly stopped refinancing, which stretched out the duration of mortgage bonds. Since rates were going up and maturities were stretching out, mortgage bonds took a double blow. From the beginning of February to the end of June, the Salomon Brothers index of 30-year Ginnie Maes dropped 6.6%. Not knowing how far this trend might go, nobody wanted to buy the things, which left the owners of them with little choice but to hedge their positions by selling short the same Treasuries they had been buying six months before. If rates continued higher, the profits on the short sales would, they hoped, offset added losses on their mortgage bonds.
+The short-selling got truly frantic for a few days in late March when Askin went belly up. In addition to hedging their own $50 billion or so of mortgage- bond inventories, dealers suddenly had to cope with the highly leveraged mortgage derivatives they collected from Askin in lieu of money the firm owed them on margin loans. One securities firm that got $200 million of Askin’s paper calculated that the derivatives had built-in leverage of nearly five to one — that is, they would move five times as far as a conventional mortgage bond in response to a given change in interest rates. On the morning of March 31, the firm’s bond traders hedged their new exposure by selling short $900 million of Treasury notes in less than ten minutes. It doesn’t take a bond whiz to figure out what that amount of selling can do to prices. One big question is how high interest rates are likely to climb in the months ahead. Most people believe the Fed won’t raise short rates again until after the election, and some Wall Street economists have been saying it probably won’t act even then — that we’ve already seen the peak in rates. As Jim Grant, the editor of Grant’s Interest Rate Observer, puts it, the speculators are hoping that the bond market drives down the economy before the economy drives bonds down further. But if history is a reliable gauge, short- term rates could go considerably higher.
+Ray Dalio has examined ten interest rate cycles from 1954 and calculated the size of the moves from trough to peak. On average, short-term rates rose 5.7 percentage points. The smallest increase was 2.9 percentage points. Based on those numbers and a trend since 1981 to lower peaks and troughs, Dalio concludes that short-term rates will go to at least 5.5%, vs. 4.75% today, and possibly as high as 6.5%. Bond rates, in contrast, may have less distance to travel. Dalio’s reading is that the long bond will peak around 8.1% but could go as high as 9% in the next year or so. Either way, it would appear that now is not the time to rush into the carry trade.
+Unsurprisingly, critics of Wall Street have been searching for villains in the bond market turmoil, and the group they have seized on is the hedge funds. Henry B. Gonzalez, chairman of the House Banking Committee, held hearings in April on the dangers posed by hedge funds using large credit lines for speculative purposes. Gonzalez maintained that hedge funds now need extra scrutiny because of their ability to disrupt markets. So does Arthur Levitt Jr., the chairman of the Securities and Exchange Commission, though the SEC – doesn’t believe it needs added regulations just yet.
+The true villian, however, appears to be the wide spread between long- and short-term rates that fomented such incredibly high leverage by all manner of players on Wall Street. And as Greg Parseghian, director of fixed-income strategy at Salomon Brothers, observes, it would make just as much sense to chastise speculators for last year’s bull market as it would for this year’s bear. “But the run-up in bond prices was victimless,” he says, “so it didn’t seem aberrant.” Adds John Crowley of Fixed Plus Partners: “For ten years we simply forgot that leverage cuts both ways.”
+Whatever is to blame for the bond crash, it wasn’t the fault of all the changes in the market over the past decade. James Grant has pointed out that the bond market went through an almost identical leverage-induced rout back in 1958. Back then, the New York Times even editorialized about the immorality of speculating in government securities.
+Perhaps most important — and what the critics seem to forget — is that despite the losses, this big move in the credit markets has winners too, even though they may not be aware of it. The bond market differs from the stock market in one crucial aspect. Stocks always turn out to be what economists and mathematicians call a positive-sum or negative-sum game. When stock prices rise, investors get wealthier; when they fall, investors get poorer. The bond market, in contrast, is a zero-sum game. That’s because someone — namely, the borrower or issuer — is effectively short every bond that investors own. Thus, when bond prices fall, the losses born by bondholders are matched by equal gains on the part of the issuers, who have the choice of buying the bonds back for less than they sold them for or, alternatively, of sitting back and enjoying paying what now is a lower-than-market interest rate.
+The biggest winners of all this year are the folks who bought new homes last year or refinanced with new fixed-rate mortgages. While few homeowners think of things this way, they are the short side in the battered mortgage-bond market. Some $417 billion of those bonds were issued last year as millions of homeowners shrewdly locked in low rates. In effect, they were the brilliant timers who shorted the bond market at its peak. Maybe there should be a parade after all.
+The Fortune 500 Innovation Forum will convene Fortune 500 executives, U.S. policy officials, top founders, and thought leaders to help define what’s next for the American economy, Nov. 16-17 in Detroit. Apply here .
+About the Author
+By Al Ehrbar
+See full bio
+Add Fortune on Google for similar content.
+Add us on Google
+Latest in Features
+Finance
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+By Fortune Editors
+October 20, 2025
+Finance
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+By Fortune Editors
+October 20, 2025
+Finance
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+By Fortune Editors
+October 20, 2025
+Finance
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+By Fortune Editors
+October 20, 2025
+Finance
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+By Fortune Editors
+October 20, 2025
+Finance
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+By Fortune Editors
+October 20, 2025
+Most Popular
+Finance
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+By Fortune Editors
+October 20, 2025
+Finance
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+By Fortune Editors
+October 20, 2025
+Finance
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+By Fortune Editors
+October 20, 2025
+Finance
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+By Fortune Editors
+October 20, 2025
+Finance
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+By Fortune Editors
+October 20, 2025
+Finance
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+By Fortune Editors
+October 20, 2025
+Latest in Features
+Success How I made my first million
+A Gen Xer sold his company for $1.6 billion. He kept less than $100 million and gave the rest away because he doesn’t ‘believe in billionaires’
+By Orianna Rosa Royle July 26, 2026
+2 days ago
+Magazine Bill Ackman
+The American Dream according to Bill Ackman
+By Jeff John Roberts July 20, 2026
+8 days ago
+Big Tech Microsoft
+Exclusive: Xbox’s CEO on 3,200 layoffs, four studios cut, and her blunt warning that ‘we spread ourselves too thin’
+By Sebastian Herrera July 6, 2026
+22 days ago
+Startups & Venture Media
+How David Senra built the podcast the world’s most powerful CEOs can’t stop listening to
+By Lily Mae Lazarus July 5, 2026
+23 days ago
+Retail Nike
+Nike’s self-inflicted wounds are risking CEO Elliott Hill’s nascent comeback
+By Phil Wahba July 4, 2026
+24 days ago
+Magazine Kevin Warsh
+Inside the mind of Kevin Warsh: As told by his former boss Condoleezza Rice, his college friend, and his closest partner during the financial crisis
+By Eleanor Pringle July 3, 2026
+25 days ago
+Most Popular
+Retail
+New York City women are making up to $30,000 per month by renting out their closets to strangers
+By Sarah Glodek July 27, 2026
+1 day ago
+C-Suite
+Why did a $154 billion CEO just endorse stripping most Americans of voting rights—and taking us back to the 19th century?
+By Nick Lichtenberg July 27, 2026
+18 hours ago
+Real Estate
+The millennial generation is split in 2: an older crowd with boomer-style comfort, a younger set going 'back to the early 1900s'
+By Nick Lichtenberg July 25, 2026
+3 days ago
+Real Estate
+One-third of Seattle's downtown is empty: Here's how America's boomtown turned into one of the toughest places to find a job
+By Nick Lichtenberg July 27, 2026
+1 day ago
+Commentary
+I've been teaching college students for decades. Most of them can no longer finish a book
+By Austin Sarat July 26, 2026
+2 days ago
+Success
+An 11-year-old is cleaning his neighbors' trash cans for $10 each—he now has 100K followers as teens face the worst summer job market since 1948
+By Orianna Rosa Royle July 25, 2026
+3 days ago
+© 2026 Fortune Media IP Limited. All Rights Reserved. Use of this site constitutes acceptance of our Terms of Use and Privacy Policy | CA Notice at Collection and Privacy Notice | Do Not Sell/Share My Personal Information
+FORTUNE is a trademark of Fortune Media IP Limited, registered in the U.S. and other countries. FORTUNE may receive compensation for some links to products and services on this website. Offers may be subject to change without notice.

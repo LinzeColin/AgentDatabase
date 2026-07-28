@@ -1,0 +1,298 @@
+SOURCE_URL: https://www.justice.gov/atr/case-document/file/512176/dl
+
+UNITED STATES DISTRICT COURT
+SOUTHERN DISTRICT OF NEW YORK
+•X
+UNITED STATES OF AMERICA,
+Plaintiff,
+- v -
+STEINHARDT MANAGEMENT COMPANY,
+INC.; and CAXTON CORPORATION,
+Defendants,
+- and-
+$12,500,000 THAT IS THE PROPERTY
+OF STEINHARDT MANAGEMENT
+COMPANY, INC.;
+Steinhardt Management
+Company, Inc.,
+Real Party in Interest
+- and-
+$12,500,000 THAT TS THE PROPERTY
+OF CAXTON CORPORATION,
+Caxton Corporation,
+Real Party in Interest.
+94 Civ. 9044
+Filed: December 16, 1994
+COMPLAINT
+The United States of America, plaintiff, by its attorneys,
+acting under the direction of the Attorney General of the United
+States, brings this civil action to obtain equitable and other
+relief against the defendant entities and to obtain forfeiture of
+the defendant property and complains and alleges:
+
+I. JURISDICTION AND VENUE
+1. This action is brought under Sections 4 and 6 of the
+Sherman Act, 15 U.S.C. §§ 4, 6, as amended, to restrain violation
+of Section 1 of the Sherman Act, 15 U.S.C. § 1, as amended, and
+to obtain forfeiture of property owned pursuant to a contract,
+combination or conspiracy in violation of Section 1 of the
+Sherman Act. The Court has jurisdiction over this matter
+pursuant to Section 4 of the Sherman Act and 28 U.S.C. §§ 1345,
+1355.
+2. Venue is proper in this district under Section 12 of the
+Clayton Act, 15 U.S.C. § 22, as amended, and under 28 U.S.C.
+§1391(c) because the defendant entities transact business and are
+found in the Southern District of New York.
+3. This is an In rem proceeding against the defendant
+property. That property is in the defendant entities' bank
+accounts in the Southern District of New York.
+II. DESCRIPTION OF THE CONSPIRACY
+4 . This action arises from an unlawful combination and
+conspiracy among the defendant entities, Steinhardt Management
+Company ("SMC") and Caxton Corporation ("Caxton"), and other
+persons, to restrain interstate trade and foreign commerce in the
+7.00% United States Treasury notes auctioned on April 24, 1991
+("April notes") by withholding the notes from the markets for
+such securities in order to profit from the artificial shortage,
+or "squeeze," resulting from the withholding of supply.
+2
+
+5. Beginning in mid-April 1991, Caxton and SMC each bought
+large, leveraged long positions in the April notes. As of mid-
+May 1991, their combined position in the issue was almost
+$20 billion.. This combined position represented about 160% of
+the approximately $12 billion of April notes issued by the United
+States Treasury. Between early May 1991 and mid-September 1991,
+SMC and Caxton, in combination, owned ("held") from $12 billion
+to $19 billion April notes.
+6. The purchases of April notes by Caxton and SMC had the
+effect of concentrating ownership of the issue and,
+simultaneously, creating a substantial "short" position in it.
+Once created, this short position could be eliminated only if the
+defendant entities reduced the size of their positions in the
+April notes.
+7. Caxton and SMC effectively controlled the supply of
+April notes available to both the "cash market" (where purchases
+and sales occur) and the "financing market" (where persons with
+leveraged long positions, such as the defendant entities, borrow
+money in order to buy or to continue to hold an issue) . Short
+sellers in both markets were required, in effect, to buy or
+borrow April notes from Caxton or SMC.
+8. After accumulating their position in the April notes,
+the defendant entities and their coconspirators acted to restrict
+the supply of April notes to short sellers. The consequence of
+this action was to cause short sellers to bid up prices for April
+notes in the cash and financing markets. From the latter part of
+
+May 1991 through mid - September 1991, Caxton and SMC and their
+coconspirators withheld significant quantities of April notes
+from the cash and financing markets. Due to this constriction in
+supply, the price of April notes in the cash market was
+increased; likewise, interest rates charged to finance a position
+in the April notes were depressed.
+9. As a result of the actions taken by the defendant
+entities and their coconspirators, they and their coconspirators
+earned substantial profits from the low financing rates and high
+cash-prices of the April notes caused by their actions.
+III.. DEFENDANTS
+10. SMC is a New York corporation with its principal place
+of business in New York, New York. SMC manages several
+investment funds. As manager of those funds, SMC purchased and
+financed April notes. SMC is the-real party in interest related
+to the $12,500,000.00 of defendant property it owns and controls.
+11. Caxton is a Delaware corporation, with its principal
+place of business in New York, New York. Caxton manages several
+investment funds. As manager of those funds, Caxton purchased
+and financed April notes. Caxton is the'real party in interest
+related to the $12,500,000.00 of defendant property it owns and
+controls.
+12. The investment funds SMC and Caxton manage compete with
+numerous investors and traders in the sale, purchase, financing
+4
+
+and lending of specific issues of United States Treasury
+securities.
+13. Various persons not made defendants in this action have
+participated as co-conspirators in the violations alleged in this
+Complaint and have performed.acts and made statements in
+furtherance of the conspiracy.
+IV. THE MARKETS FOR APRIL NOTES
+14. When the owner of a specific Treasury security holds a
+position in that issue that exceeds the amount of the issue
+available for purchase by short sellers in the cash or financing
+markets, a "squeeze" can occur. A squeeze is especially likely
+to succeed if the size of the position held by the single owner,
+or the combined position of the coordinating holders, exceeds the
+amount of the issue available to cover short positions through
+repurchase or "repo" agreements in the financing market. When a
+squeeze occurs, short sellers are required to pay abnormally high
+prices or to incur abnormally high financing costs to buy or
+borrow the specific security they are short.
+15. Purchasers of Treasury securities that wish to leverage
+their investments, such as the defendant entities, usually
+finance their positions in the financing market. In a financing
+market transaction, the owner of a security sells the issue and
+simultaneously agrees to repurchase it on a specified dare for a
+specified price. The repurchase price is higher than the sale
+price, the difference between the two prices representing an
+5
+
+interest rate, called the "repo rate". A financing market
+transaction is the functional equivalent of a loan in which
+Treasury securities are used as collateral.
+16. Short sellers (traders who sell securities they do not
+own in the expectation that the price will fall) must purchase or
+borrow the specific security that they are obligated to deliver
+in order to fulfill their obligations. An investor who needs to
+borrow a specific Treasury security issue can do so in the
+financing market, through "special" repo transactions in which
+the investor (short seller), in effect, lends cash in exchange
+for collateral of a specific issue.
+17. There are separate product markets within the meaning
+of the antitrust laws for specific Treasury issues within both
+the cash and financing markets. Some traders speculate in the
+financing market for specific issues, lending cash and accepting
+securities as collateral, in the hope that they can re-lend the
+collateral to someone else at a profit. Interest rates for
+special repo transactions in the financing markets fluctuate
+widely because they reflect supply and demand for a particular
+security. If a security is in short supply, the repo rate for
+that issue will generally be low because owners will be able to
+negotiate lower repo rates from short sellers competing to borrow
+the scarce security.
+18. Prices in the cash and financing markets are related.
+When it is costly to borrow a specific security, demand for it in
+the cash market will increase if some traders buy, rather than
+6
+
+borrow, it. As a result, the issue may cost more than other
+securities of comparable maturity. Similarly, a high price in
+the cash market (compared to securities of like maturity) may
+cause short sellers to borrow a security through repurchase
+agreements rather than buy it. That increased demand may depress
+repo rates. The holder of a.specific issue can earn a premium
+when lending or selling that security when demand for it is great
+in either the cash or financing market.
+19. The owner of a large position in a specific issue, or
+two or more holders acting together, can limit the supply of that
+issue available to the specials market by financing all or part
+of their positions "off the street," that is, with parties who
+will not re-lend the securities. Such a restriction of supply
+can precipitate a squeeze when demand for the issue exceeds the
+supply made available. In that situation, investors who must
+borrow the issue must accept very low interest rates in the repo
+market (on the cash they lend to obtain the issue), enabling the
+owner or owners of the issue to earn a premium for making the
+security available.
+20. Sellers of Treasury securities transmit securities to
+buyers in interstate commerce through the Federal Reserve System.
+The business activities of the defendant entities and co­
+conspirators that are the subject of this complaint were within
+the flow of, and substantially affected, interstate trade and
+commerce.
+7
+
+V, THE CONSPIRACY
+21. Beginning in or about April 1991, Caxton and SMC agreed
+to acquire control of the supply of April notes and to limit the
+supply of April notes to the cash and financing markets in order
+to cause a squeeze and to profit thereby. To achieve the
+objectives of the conspiracy, the defendant entities did the
+things they agreed to do, including:
+a. purchasing and holding extremely large long positions
+in the April notes;
+b. exchanging information about their positions in the
+April notes;
+c. discussing ways to finance their positions in the April
+notes in a manner that would restrict the supply of the
+notes available to the cash and financing markets;
+d. restricting the supply of April notes available for
+specials transactions, beginning on May 23, 1991;
+e. instructing a primary dealer at which SMC concentrated
+the financing of its April note position to make the
+notes available for specials transactions only if the
+repo rate was below a specified level (and giving other
+directions to constrict supply availability); '
+f. placing a part of Caxton's position in the April notes
+with a primary dealer that Caxton understood would
+place the notes with investors who were not likely to
+lend them;
+8
+
+g. concentrating the financing.of their positions with a
+single dealer; and
+h. continuing to hold their positions in the April notes
+at times when they could have sold some or all of these
+positions at a substantial premium.
+22. As a result of the conspiracy, repo rates for the April
+notes in the financing market declined and cash market prices for
+the notes increased. Repo rates for April notes generally
+remained low and cash market prices high until September 1991,
+when the joint position of SMC and Caxton fell below the amount
+necessary to continue the squeeze.
+VI. ANTICOMPETITIVE EFFECTS OF THE CONSPIRACY
+23. The combination and conspiracy to restrain interstate
+trade and commerce in April notes had, among other things, the
+following effects:
+a. SMC and Caxton obtained market power over the
+April notes;
+b. Persons who sold April notes short were denied the
+benefits of free and open competition in the cash
+and financing markets for April notes, resulting
+in higher costs to finance and purchase April
+notes;
+c. Price competition for April notes was unreasonably
+res trained;
+9
+
+d. Liquidity in the markets for April notes was
+reduced; and
+e. The Treasury was denied the benefits of a free and
+competitive secondary market for April notes.
+24. The combination and conspiracy affected a- substantial
+amount of interstate commerce and is likely to recur unless it is
+enjoined by this Court.
+VII. PRAYER'FOR RELIEF
+WHEREFORE, PLAINTIFF PRAYS FOR RELIEF AS FOLLOWS:
+1. That the Court adjudge and decree that SMC and Caxton
+have combined and conspired in unreasonable restraint of
+interstate trade and commerce in April notes, in violation of
+Section 1 of the Sherman Act, 15 U.S.C. § 1.
+2. That SMC and Caxton and all persons acting on behalf of
+either of them or under their direction or control be permanently
+enjoined from engaging in, carrying out, renewing, or attempting
+to engage in, carry out, or renew, any contracts, agreements,
+practices, or understandings in violation of the Sherman Act.
+3. That the defendant property be forfeited to the United
+States.
+4. That plaintiff have such other relief as the Court may
+consider necessary or appropriate.
+10
+
+5. That plaintiff recover the costs of this action.
+Dated:
+ANNE K. BINGAMAN
+Assistant Attorney General
+ROBERT LITAN
+Deputy Assistant Attorney
+General
+./
+MARK C. SCHECHTER
+Deputy Director of Operations
+£9* IN F. GREANEY
+"Chief
+Computers and Fi e Section
+THAN M. RICH
+istant Chief
+inputers and Finance Section
+HAYS GOKEY, JR.
+HG1946
+KENNETH.W. GAUL ^
+KG28 5 8
+Attorneys
+Antitrust Division
+United States Department of
+Justice
+555 4th St., N.W.
+Washington, DC 20001
+11

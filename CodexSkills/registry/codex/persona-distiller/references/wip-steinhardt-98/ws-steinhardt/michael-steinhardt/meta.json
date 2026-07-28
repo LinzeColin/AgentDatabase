@@ -1,0 +1,50 @@
+{
+  "builder_version": "v0.0.0.5",
+  "chosen_subject_uid": null,
+  "consent_authority": null,
+  "created_at": "2026-07-28T11:09:30Z",
+  "current_version": null,
+  "existential_hypotheses_enabled": false,
+  "identity_selection": {
+    "canonical": "investor-capital-allocator",
+    "display": "投资资本师",
+    "mode": "single",
+    "primary": "investor-capital-allocator",
+    "weights": {
+      "investor-capital-allocator": 1.0
+    }
+  },
+  "language": "zh-CN",
+  "model_version": "0.1.0-draft",
+  "name": "Michael Steinhardt",
+  "namesake_gate": {
+    "candidate_count": 0,
+    "chosen_candidate": null,
+    "chosen_subject_uid": null,
+    "normalized_name": "michaelsteinhardt",
+    "resolution": "none",
+    "schema_version": "1.0"
+  },
+  "normalized_name": "michaelsteinhardt",
+  "origin_review_required": true,
+  "product_version": null,
+  "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+  "profile": "standard",
+  "prohibited_uses": [
+    "identity authentication or deceptive impersonation",
+    "invented endorsement, signature, consent, private memory or current opinion",
+    "unsupported psychological diagnosis",
+    "replacement of accountable high-stakes professional judgment"
+  ],
+  "retention_policy": null,
+  "runtime_invocation_versioning": false,
+  "scenario": null,
+  "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+  "schema_version": "2.0",
+  "slug": "michael-steinhardt",
+  "status": "draft",
+  "subject_origin": "public",
+  "target_id": "tgt-01711ed48178",
+  "time_scope": "all available periods, separated by role and material drift",
+  "updated_at": "2026-07-28T11:09:30Z"
+}

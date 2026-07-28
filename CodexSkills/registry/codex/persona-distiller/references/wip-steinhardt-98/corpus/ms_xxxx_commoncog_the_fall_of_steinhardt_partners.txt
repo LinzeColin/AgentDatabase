@@ -1,0 +1,100 @@
+SOURCE_URL: https://commoncog.com/c/cases/steinhardt-fall/
+
+The Fall of Steinhardt Partners - Commoncog Case Library 
+
+The world of hedge funds can be a world of extremes. In the good times, the winners appear god-like; untouchable. In the bad times, entire careers are undone. 
+Michael Steinhardt, a legendary Wall Street trader, had a meteoric rise to fame . After a decade leading a wildly successful fund — Steinhardt, Fine, Berkowitz — Steinhardt went on a sabbatical, citing a desire to pursue interests beyond the market. This lasted for a year. In the fall of 1979, Steinhardt was back on Wall Street; more ambitious and ill-tempered than ever. He started his own fund and went about the mundane business of making ridiculous amounts of money. It seemed like Steinhardt was untouchable. But not for long.
+Come 1993, Steinhardt Partners was running on $4.5 billion in capital, had a staff of more than a hundred employees, and reported returns of ~47% in the previous two years. One December day that year, Steinhardt was at his vacation home in the Caribbean, when he learned that his funds were up more than $100 million in just the last twenty four hours. Even he couldn’t believe how well he was doing. He said : “I can’t believe I’m making this much money and I’m sitting on the beach.” 
+So how was Steinhardt Partners’ earning such high returns? In addition to stock-picking and block trading, Steinhardt took to dabbling in the bond market in the early 1990s. The Federal Reserve was trying to stimulate the American economy out of a sluggish recession. They kept short-term interest rates low; making it profitable for banks to borrow short and lend long. The Fed’s well-meaning efforts to incentivize banks to pump money into the economy formed the heart of Steinhardt’s bond empire. He borrowed short-term money cheaply and then invested in long-term bonds which returned higher interest, profiting from the margin. He also had the advantage of overstepping the complex regulatory norms that traditional banks are forced to comply with. Steinhardt made a killing as a shadow bank. When long-term interest rates fell in the beginning of the 1990s, he also earned capital gains on his bond holdings.
+In 1993, Steinhardt Partners took this strategy across the Atlantic. As the European economies readied themselves to have the same currency, their interest rates converged with one another. Spain and Italy, which had a history of inflation and consequently high interest rates, would be forced to lower their interest rates. On the back of this analysis, Steinhardt Partners bought up huge quantities of Spanish and Italian bonds, pocketing a tidy sum as capital gains as rates fell.
+Steinhardt Partners wasn’t the only fund on Wall Street doing well. Between 1992 and 1993, the number of hedge funds tripled. Hordes of lawyers and investment bankers left their high-paying salaries behind to join the race. The historic Helmsley Building became a notoriously popular haven for hedge funds. Inside the hotel’s carpeted suites, traders took enormous bets, earning fortunes for themselves and their wealthy clientele. The good times were here, and riding high was undoubtedly electrifying. The crash, when it came, was all the more catastrophic.
+In More Money Than God , author Sebastian Mallaby traces the beginnings of the crash to the Federal Reserve’s decision to increase short-term interest rates by twenty-five basis points, from 3% to 3.25%, in 1994. Alan Greenspan, chairman of the Federal Reserve, was attempting to preempt a rise in inflation. He predicted that the gentle increase in the short-term interest rate would signal to the market that the Fed was monitoring inflationary price rises, thus lowering expectations of inflation and resulting in a drop in long-term interest rates, which would be beneficial for investors in the bond market; a win-win. Greenspan could not have been more wrong.
+The Federal Reserve’s first rate hike in half a decade alarmed hedge funds that were heavily invested in the bond market. The hike, although small, spelt uncertainty. A level of uncertainty that the leveraged-to-the-hilt hedge funds couldn’t afford to shoulder. The possibility of a fall in the bond market set into motion a domino effect — in a bid to reduce risk, hedge funds began selling part of their bond holdings; the selling pressure forced long-term interest rates up; and the higher the interest rates rose, the faster frantic hedge funds tried to dump their bonds.
+Then, trade talks between Japan and the Clinton government broke down. In the span of just a week, the yen jumped 7% against the dollar. This unexpected development left hedge funds reeling. Now, this shouldn’t have had an impact on inflation expectations or the bond market; but these hedge funds were so leveraged that the sudden loss forced them to liquidate. They sold bonds, pushing long-term interest rates up even higher. When the anxious brokers who had lent the hedge funds huge sums issued margin calls to them, the funds began selling their Italian and Spanish bonds, spreading the panic to Europe.
+The vicious cycle fed off itself, hurtling downward with increasing intensity in freefall. In Mallaby’s words : “...the stampede built on its own momentum . ” 
+Brokers issued margin calls to hedge funds to protect themselves from the downside of a trade gone wrong, hedge funds dumped bonds to fulfill these calls, the increased selling pressure driving the value of their remaining holdings down even further, prompting brokers to issue more margin calls; and so on. The panic in the air was palpable. For instance, scarcely a month after the bond market went into a downward spiral, a Mexican presidential candidate was assassinated. The markets responded by dumping Mexican bonds, and then dumping emerging market bonds, and finally dumping developed country bonds to rebalance their portfolios.
+Unsurprisingly, the effects of the crash spread far and wide. The insurance industry apparently lost as much money on its bond holdings as it had paid out in damages for the devastating Hurricane Andrew. Bankers Trust — one of America’s most reputed financial institutions — was driven to the edge of bankruptcy. Investment banking giant Goldman Sachs had its worst year in a decade. Hedge funds folded just as quickly as they had sprung up, Askin Capital Management being a notable casualty.
+Steinhardt returned from a vacation in China to find the house of cards collapsing. There was no liquidity left in the markets — as prices plummeted, the market seemed to be composed exclusively of sellers. By the end of the carnage, Steinhardt’s funds had bled through around $1.3 billion of capital and were down 30%. Steinhardt would later reveal in an interview:
+“We were losing money and I couldn’t quite catch my breath; things were happening and we had positions and it was as if I just didn’t quite have the ability to understand where we were and why we were where we were. It was as if we were playing yesterday’s or last year’s game.”
+
+In More Money Than God , author Sebastian Mallaby explains why Steinhardt’s empire came crashing down. One of Steinhardt’s biggest mistakes was his ignorance of the new rules of a leveraged world. In the aftermath of the crisis, President Clinton was quoted as saying:
+“...no one believes that there’s a serious problem with [an] underlying American economy. It is healthy and it is sound. Some of these corrective things will happen from time to time, but there’s no reason for people to overreact to it.”
+
+But what the President, Steinhardt, and all the other hedge funds failed to anticipate was that in the world of leverage, overreaction was inevitable. Leverage is the reason that a set of geopolitical events, that would not traditionally be expected to have such an outsized impact on the bond market, set into motion a downward spiral that brought some of the most powerful financial institutions to their knees. As Mallaby puts it:
+“The whole point of leverage, the very definition of the term, is that investors feel ripples from the economy in a magnified way. They are forced to keep their fingers on a hair trigger. Overreaction becomes mandatory.”
+
+In a connected misstep, Steinhardt also admitted that he did not realize that the markets he was playing in were concentrated with leveraged players. This becomes a big problem because margin calls from brokers can force funds into fire sales, bringing whole markets to their knees.
+Lastly, the all too familiar problems of scale. Steinhardt acknowledged that he knew little about the variety of new-fangled securities his funds were investing in Europe. In his old days of manning the block trading desk, Steinhardt knew the brokers personally; and they knew him. In the spirit of good business (at times bordering on collusion), they had each other's backs. Europe was a whole different ball game. Steinhardt had no personal relationship with the brokers to navigate through the crisis.
+The economic crash of 1994 changed Steinhardt, shattering his nerve. An employee of Steinhardt Partners in its aftermath recalls :
+“He would intellectually hedge himself. If you had a view on something and put a trade on, he would come in and say, ‘I was just talking to’—pick your famous guy—‘and he thinks it’s the dumbest idea he’s ever heard ever, and he has no idea why you’re doing this.’ Then he’d say, ‘But I don’t know anything about this, so do whatever you want…’ And he’d leave. So now you’re screwed because if it goes badly he can say, ‘I told you this was a bad idea.’ If it worked, he could say, ‘Why wasn’t it bigger? I told you that you could do whatever you want…” He would do this consistently.”
+
+This time, Steinhardt had really had enough . He hung on till the end of 1995 — recovering $700 million of his losses and turning in a return of 27% — and then shut down the fund and went into his long-rumored retirement. After a decade-long hiatus, he returned to Wall Street as chairman of Wisdom Tree Investments in 2004. Michael Steinhardt, dubbed Wall Street’s Greatest Trader, finally retired in 2019.
+Sources:
+More Money Than God: Hedge Funds and the Making of a New Elite by Sebastian Mallaby. Published in 2010.
+
+https://money.cnn.com/magazines/fortune/fortune_archive/1994/10/17/79850/index.htm 
+
+https://www.presidency.ucsb.edu/documents/exchange-with-reporters-san-diego 
+
+https://www.washingtonpost.com/archive/business/1995/10/12/wall-sts-michael-steinhardt-to-retire/f772d79b-d6f1-4cd0-8d0c-86da1a7c2c18/ 
+
+https://www.wisdomtree.com/ 
+
+https://www.globenewswire.com/news-release/2019/10/23/1934413/0/en/Michael-Steinhardt-Retires-from-WisdomTree-s-Board-of-Director.html 
+
+Finished reading this case? 
+
+Continue reading 
+Competitive Arbitrage 
+9 cases in this concept 
+
+Previous Case 
+The Story of Signature Plastics 
+
+Next Case 
+Henry Singleton: The Man Who Pioneered Share Buybacks 
+
+Navigating Disruptive Shifts 
+12 cases in this concept 
+
+Previous Case 
+A Fine Dining Restaurant in a Recession 
+
+Next Case 
+The Story of Signature Plastics 
+
+Member Comments
+
+Current series
+
+Competitive Arbitrage 
+
+How Charlie Munger Made His First Million 
+
+The First Hedge Fund 
+
+The Story of Signature Plastics 
+
+The Fall of Steinhardt Partners 
+
+Henry Singleton: The Man Who Pioneered Share Buybacks 
+
+Intel’s Near Death Moment: Switching from Memories to Microprocessors 
+
+The Rise and Fall of Data General 
+
+Estée Lauder: Surviving Retail Disruption 
+
+How Swatch Saved the Swiss Watch Industry, But Not From Quartz 
+
+Also part of...
+
+Navigating Disruptive Shifts
+
+0%
+
+How businesses and businesspeople deal with disruptive shifts — where something they believed to be true, or that they had built their business around, changes at a fundamental level. 
+
+Actions
+
+Notes

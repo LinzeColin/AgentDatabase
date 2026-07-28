@@ -1,0 +1,324 @@
+SOURCE_URL: https://www.justice.gov/atr/case-document/file/512171/dl
+
+UNITED STATES DISTRICT COURT
+SOUTHERN DISTRICT OF NEW YORK
+-----------------------------------X
+:
+UNITED STATES OF AMERICA, :
+:
+Plaintiff, :
+:
+- v - :
+:
+STEINHARDT MANAGEMENT COMPANY, : 94 Civ. 9044 (RPP)
+INC.; and CAXTON CORPORATION, :
+:
+Defendants, :
+:
+-and- :
+:
+$12,500,000 THAT IS THE PROPERTY :
+OF STEINHARDT MANAGEMENT :
+COMPANY, INC.; :
+:
+Steinhardt Management :
+Company, Inc., :
+Real Party in Interest :
+:
+-and- :
+:
+$12,500,000 THAT IS THE PROPERTY :
+OF CAXTON CORPORATION, :
+:
+Caxton Corporation, :
+Real Party in Interest. :
+-----------------------------------X
+FINAL JUDGMENT
+WHEREAS Plaintiff, United States of America, having filed
+its Complaint in this action on December 16, 1994, and plaintiff
+and defendant entities, by their respective attorneys, having
+consented to the entry of this Final Judgment without trial or
+adjudication of any issue of fact or law; and without this Final
+Judgment constituting any evidence or admission by any party with
+respect to any issue of fact or law;
+2
+AND WHEREAS defendant entities have agreed to be bound by
+Section IV of this Final Judgment pending its approval by the
+Court;
+NOW THEREFORE, before any testimony is taken, and without
+trial or adjudication of any issue of fact or law, and upon
+consent of the parties, it is hereby
+ORDERED, ADJUDGED AND DECREED:
+I.
+JURISDICTION
+This Court has jurisdiction of the subject matter of this
+action and of the person of the defendant entities and of the
+defendant property by virtue of 28 U.S.C. §§ 1345, 1355. Venue
+exists in this Court pursuant to 28 U.S.C. § 1395(b). The
+Complaint states a claim upon which relief may be granted under
+Sections 1 and 6 of the Sherman Act, 15 U.S.C. §§ 1, 6.
+II.
+DEFINITIONS
+As used in this Final Judgment:
+1. "Agree" means to enter into any contract, combination,
+conspiracy, concert of action, or mutual understanding, formal or
+informal, express or implied, with any other person.
+2. "Any" means one or more.
+3. "Cash market" means the market in which Treasury
+securities are bought and sold, and includes the when-issued
+market and the secondary market.
+4. "CUSIP number" means the alphanumeric description of a
+3
+Treasury security established by the American Bankers
+Association's Committee on Uniform Securities Identification
+Procedures.
+5. "Defendant entities" means Steinhardt Management
+Company, Inc. and Caxton Corporation.
+6. "Finance" or "financing transaction" means any
+transaction whereby a person who has a position in an issue
+obtains cash or credit from another person by using such position
+as collateral, including any transaction pursuant to which
+possession or ownership of a position in an issue is transferred
+by one party to another with a simultaneous agreement that the
+second party will later return such position to the first party,
+such as a repurchase agreement, a reverse repurchase agreement,
+or a borrow versus pledge agreement.
+7. "Financing market" means the market for financing
+positions in Treasury securities through which an issue may be
+made available to holders of short positions in that issue.
+8. "Includes" or "including" means includes, but is not
+limited to.
+9. "Issue" means a particular marketable United States
+Treasury security, as distinguished from all others by its CUSIP
+number.
+10. "Or" means either or both, and is used as a word of
+inclusion rather than exclusion.
+4
+11. "Other person" means a person other than: a defendant
+entity; any subsidiary, officer, director, employee, agent,
+successor, or assign of a defendant entity; any person who makes,
+or has authority to make, trading or investment decisions on
+behalf of a defendant entity in the cash or financing markets;
+any person in which any shareholder in a defendant entity as of
+the date of entry of this Final Judgment makes, or has authority
+to make, trading or investment decisions in the cash or financing
+markets; any account or assets managed on a discretionary basis
+by a defendant entity or, while acting in respect to such account
+or assets, by a defendant entity's designee.
+12. "Person" means any individual, partnership, firm,
+corporation, association, sole proprietorship, joint venture, or
+other business or legal entity, whether or not organized for
+profit.
+13. "Position" means the quantity of an issue held, whether
+outright or as the consequence of any financing transaction,
+except that a person shall not be deemed to have obtained a
+position in an issue as the result of having engaged in a
+financing transaction with a defendant entity.
+14. "Treasury auction" means any auction of Treasury
+securities conducted by or on behalf of the United States
+Department of the Treasury.
+15. "Treasury security" means any marketable United States
+Treasury bill, note, or bond.
+5
+16. "Withhold" means to decline to sell or finance for any
+period of time part or all of a position in any issue.
+Use of either the singular or plural should not be deemed a
+limitation and the use of the singular should be construed to
+include, where applicable, the plural and vice versa.
+III.
+APPLICABILITY
+This Final Judgment shall apply to the defendant entities
+and each of their subsidiaries, officers, directors, employees,
+agents, successors, and assigns; to any entity for or in which
+any person who is a shareholder in a defendant entity as of the
+date of entry of this Final Judgment, whether directly or
+indirectly, conducts or directs asset management or investment
+advisory activities that involve transactions in the cash market
+or in the financing market (hereinafter "related entity"); and to
+all persons acting in concert with any defendant entity and
+having actual notice of this Final Judgment; provided, however,
+that this Final Judgment shall not apply to any fund or other
+entity whose assets are managed or invested in whole or in part
+by a defendant entity or by a related entity.
+IV.
+PROHIBITED CONDUCT
+A. The defendant entities are enjoined and restrained from
+agreeing with each other or with any other person to restrain
+trade in the cash or financing markets in violation of the
+antitrust laws of the United States.
+6
+B. The defendant entities are enjoined and restrained from
+agreeing with each other or with any other person:
+1. to purchase or refrain from purchasing any issue
+from a particular person; or
+2. to sell or refrain from selling any issue to or
+through a particular person.
+C. The defendant entities are enjoined and restrained from
+agreeing with any other person:
+1. to withhold, directly or indirectly, all or any
+part of such other person's position from the cash market; or
+2. to withhold, directly or indirectly, all or any
+part of such other person's position from the financing market.
+D. The defendant entities are enjoined and restrained from
+agreeing with any other person:
+1. to withhold, directly or indirectly, all or part
+of a defendant entity's position from the cash market for the
+purpose of (a) maintaining the value of such other person's
+position or (b) causing the value of such other person's position
+to increase, for any period of time; or
+2. to withhold, directly or indirectly, all or part
+of a defendant entity's position from the financing market for
+the purpose of (a) maintaining the value of such other person's
+position or (b) causing the value of such other person's position
+to increase, for any period of time.
+E. Notwithstanding any provision of Section IV.B to the
+contrary, nothing in this Final Judgment shall prohibit a
+7
+defendant entity:
+1. from agreeing with its counterparty to enter into
+a transaction to purchase or sell an issue; or
+2. from agreeing with another person that such other
+person tender a bid on behalf of such defendant entity at a
+Treasury auction.
+F. Notwithstanding any provision of either Section IV.B or
+Section IV.C to the contrary, nothing in this Final Judgment
+shall prohibit any defendant entity from agreeing with another
+person that such other person not increase or decrease its
+position in an issue while such other person is endeavoring to
+transact the purchase, sale, or financing of a position in such
+issue with or on behalf of a defendant entity.
+V.
+COMPLIANCE PROVISIONS
+Each defendant entity is ordered to initiate and maintain an
+antitrust compliance program which shall include designating,
+within thirty (30) days of the entry of this Final Judgment, an
+Antitrust Compliance Officer, who shall monitor the activities of
+all persons responsible for trading or financing Treasury
+securities on behalf of the defendant entity and shall be
+responsible for establishing an antitrust compliance program
+designed to provide reasonable assurance of compliance with this
+Final Judgment and with the federal antitrust laws by the
+defendant entity. The Antitrust Compliance Officer shall also:
+1. Distribute, within thirty (30) days from the entry of
+8
+this Final Judgment, a copy of this Final Judgment to: (a) all
+members of the Board of Directors and Officers of the defendant
+entity; (b) all traders or other employees of the defendant
+entity whose duties include the trading or financing of Treasury
+securities; and (c) all agents of the defendant entity whose
+responsibilities include the trading or financing Treasury
+securities on behalf of such defendant entity (not including
+brokers or dealers who may occasionally act as agents of a
+defendant entity on a transaction-specific basis).
+2. Distribute within thirty (30) days a copy of this Final
+Judgment to (a) any person who becomes a member of the Board of
+Directors or officers of the defendant entity and (b) to any
+employee of the defendant entity who is, in the future, given any
+duties which include the trading or financing of Treasury
+securities.
+3. Brief annually those persons designated in Paragraphs 1
+and 2 of this Section on the meaning and requirements of the
+federal antitrust laws and this Final Judgment and inform them
+that the Antitrust Compliance Officer or a designee of the
+Antitrust Compliance Officer is available to confer with them
+regarding compliance with such laws and with this Final Judgment.
+4. Obtain from each person designated in Paragraphs 1 and
+2 of this Section an annual written certification that he or she:
+(a) has read, understands, and agrees to abide by the terms of
+this Final Judgment; (b) has been advised and understands that
+noncompliance with this Final Judgment may result in his or her
+9
+being found in civil or criminal contempt of court; and (c) is
+not aware of any violation of the federal antitrust laws or of
+this Final Judgment that he or she has not reported to the
+Antitrust Compliance Officer.
+5. Maintain a record of persons to whom this Final
+Judgment has been distributed and from whom the certification
+required by Paragraph 4 of this Section has been obtained.
+6. Certify to the Court and to the Assistant Attorney
+General in charge of the Antitrust Division, within forty-five
+(45) days after entry of this Final Judgment, that the defendant
+entity: (a) has designated an Antitrust Compliance Officer,
+specifying his or her name, business address, and telephone
+number; and (b) has distributed this Final Judgment, briefed the
+appropriate persons, and obtained certifications, as required by
+this Section V.
+VI.
+PLAINTIFF ACCESS
+For the purpose of determining or securing compliance with this
+Final Judgment, duly authorized representatives of the plaintiff
+shall, upon written request of the Assistant Attorney General in
+charge of the Antitrust Division, and on reasonable notice to the
+relevant defendant entity, subject to any lawful privilege, be
+permitted: access during such defendant entity's regular office
+hours to inspect and copy all records and documents in its
+possession or custody, or subject to its control, relating to any
+matters contained in this Final Judgment; and to depose or
+10
+interview such defendant entity's officers, employees, trustees,
+or agents, who may have counsel present, regarding any matters
+contained in this Final Judgment; such depositions or interviews
+to be subject to the reasonable convenience of and without
+restraint or interference from the defendant entity.
+ Upon the written request of the Assistant Attorney General
+in charge of the Antitrust Division, each of the defendant
+entities shall submit such written reports, under oath if
+requested, relating to any of the matters contained in this Final
+Judgment as may be reasonably requested.
+ No information or documents obtained by the means provided
+in this Section shall be divulged by the plaintiff to any person
+other than a duly authorized representative of the executive
+branch of the United States, except in the course of legal
+proceedings to which the United States is a party, or for the
+purpose of securing compliance with this Final Judgment, or as
+otherwise required by law.
+D. If at the time information or documents are furnished
+by a defendant entity to plaintiff, such defendant entity
+represents and identifies in writing the material in any such
+information or documents to which a claim of protection may be
+asserted under Rule 26(c)(7) of the Federal Rules of Civil
+Procedure, and said defendant marks each pertinent page of such
+materials, "Confidential: Subject to claim of protection under
+Rule 26(c)(7) of the Federal Rules of Civil Procedure," then ten
+(10) days' notice shall be given by plaintiff to such defendant
+11
+entity prior to divulging such material in any legal proceeding
+to which that defendant entity is not a party; provided, however,
+that nothing herein shall apply to any use of such information or
+documents in any grand jury proceeding.
+VII.
+FURTHER ELEMENTS OF DECREE
+A. Jurisdiction is retained by this Court for the purpose
+of enabling any of the parties to this Final Judgment to apply to
+this Court at any time for further orders and directions as may
+be necessary or appropriate to carry out or construe this Final
+Judgment, to modify or terminate any of its provisions, to
+enforce compliance, and to punish violations of its provisions.
+B. This Final Judgment shall terminate ten (10) years from
+the date of entry.
+C. The defendant property that is the property of
+Steinhardt Management Company, Inc. is hereby forfeited to the
+United States. Steinhardt Management Company, Inc. shall pay
+$12,500,000, plus the Additional Amount defined in the Civil
+Settlement Agreement between Steinhardt Management Company, Inc.
+and the United States Department of Justice dated December 16,
+1994, within five (5) business days after receipt of notice of
+this Final Judgment. Such amount represents that portion of the
+settlement amount forfeited to the Department of Justice pursuant
+to 15 U.S.C. § 6, and which is payable to the Department of
+Justice Asset Forfeiture Fund.
+D. The defendant property that is the property of Caxton
+12
+Corporation is hereby forfeited to the United States. Caxton
+Corporation shall pay $12,500.000 plus the Additional Amount
+defined in the Civil Settlement Agreement between Caxton
+Corporation and the United States Department of Justice dated
+December 16, 1994, within five (5) business days after receipt of
+notice of this Final Judgment. Such amount represents that
+portion of the settlement amount forfeited to the Department of
+Justice pursuant to 15 U.S.C. § 6, and which is payable to the
+Department of Justice Asset Forfeiture Fund.
+E. Entry of this Final Judgment is in the public interest.
+DATED:
+______________________________
+UNITED STATES DISTRICT JUDGE
