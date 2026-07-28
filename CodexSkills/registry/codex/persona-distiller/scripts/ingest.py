@@ -203,6 +203,20 @@ def main() -> int:
     parser.add_argument('--include-unsupported', action='store_true', help='Register otherwise unsupported extensions as opaque.')
     args = parser.parse_args()
 
+    # ★ P1 的语义是「**他自己的话**」——人工逐字稿、署名信件、印刷问答；
+    #   产物里引号内的原话只许来自 P1。所以 P1 必须记下**这是谁的话**。
+    #   留空 author 的 P1 是 v0.0.0.10 归属门唯一的射程外区域：
+    #   门查的是「账本声称本人所著的源有没有证据」，没声称就无从查起。
+    #   从源头堵掉比在门里补判据便宜——**没有作者字段的一手件本来就不成立**。
+    #   ★ 这一判在**碰文件系统之前**做：参数层的错就该在参数层报，
+    #     否则 target 不存在时先报「target 无效」，真正的原因反而看不见。
+    if args.tier == 'P1' and not (args.author or '').strip():
+        parser.error(
+            "--tier P1 requires --author: P1 means the subject's own words "
+            "(verbatim transcript, signed letter, printed Q&A). Record whose words "
+            "these are, or ingest at a lower tier. "
+            "（P1 必须写明作者；写了本人的名字就要过 quality_check 的归属门。）")
+
     target = args.target.expanduser().resolve()
     meta = ensure_target(target)
     if meta.get('status') == 'blocked':

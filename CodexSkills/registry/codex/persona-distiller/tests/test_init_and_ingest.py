@@ -48,7 +48,7 @@ class InitAndIngestTests(unittest.TestCase):
             msg.set_content('Email body with reasoning.')
             eml = root / 'mail.eml'
             eml.write_bytes(msg.as_bytes())
-            completed = run_script('ingest.py', target, text, srt, eml, '--tier', 'P1', '--dimension', 'conversations', '--redact-pii')
+            completed = run_script('ingest.py', target, text, srt, eml, '--tier', 'P1', '--author', 'Example Thinker', '--dimension', 'conversations', '--redact-pii')
             payload = json.loads(completed.stdout)
             self.assertEqual(payload['registered'], 3)
             ledger = [json.loads(line) for line in (target / 'evidence/source-ledger.jsonl').read_text(encoding='utf-8').splitlines()]
@@ -58,7 +58,7 @@ class InitAndIngestTests(unittest.TestCase):
             self.assertIn('[REDACTED:email]', normalized_email.read_text(encoding='utf-8'))
 
             # A byte-identical source cannot be moved into Holdout after being seen by builders.
-            duplicate = run_script('ingest.py', target, text, '--holdout', '--tier', 'P1', '--dimension', 'decisions', check=False)
+            duplicate = run_script('ingest.py', target, text, '--holdout', '--tier', 'P1', '--author', 'Example Thinker', '--dimension', 'decisions', check=False)
             self.assertNotEqual(duplicate.returncode, 0)
             self.assertIn('Cross-split duplicate', duplicate.stderr)
 

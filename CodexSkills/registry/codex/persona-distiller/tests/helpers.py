@@ -110,7 +110,11 @@ def populate_release_ready(target: Path, material_root: Path) -> dict[str, Any]:
     source_paths: list[Path] = []
     for index, lane in enumerate(lanes, 1):
         source = material_root / f'source-{index}-{lane}.md'
+        # P1 means the subject's own words, so the fixture carries a real byline.
+        # This also gives the v0.0.0.10 authorship gate end-to-end coverage in the suite:
+        # a P1 source claimed for the subject must show structural attribution evidence.
         source.write_text(
+            f'By Example Thinker\n\n' +
             (f'# Synthetic source {index}\n\nThis is licensed synthetic evidence for testing lane {lane}. '
              f'It records a distinct context, constraint, action, outcome, and decision trace {index}.\n\n') * 15,
             encoding='utf-8',
@@ -118,6 +122,7 @@ def populate_release_ready(target: Path, material_root: Path) -> dict[str, Any]:
         source_paths.append(source)
     ingest_args: list[object] = [
         target, *source_paths, '--tier', 'P1', '--source-type', 'interview',
+        '--author', 'Example Thinker',
         '--rights', 'synthetic-test-material; redistribution-permitted',
     ]
     # Every fixture source is cross-indexed to all six lanes so metadata coverage is explicit.
@@ -127,10 +132,14 @@ def populate_release_ready(target: Path, material_root: Path) -> dict[str, Any]:
     source_ids = [item['source_id'] for item in payload['results'] if item['status'] == 'normalized']
 
     holdout = material_root / 'holdout.md'
-    holdout.write_text(('Held-out synthetic decision record. It must never enter model Claims.\n') * 20, encoding='utf-8')
+    holdout.write_text(
+        'By Example Thinker\n\n'
+        + ('Held-out synthetic decision record. It must never enter model Claims.\n') * 20,
+        encoding='utf-8')
     completed = run_script(
         'ingest.py', target, holdout, '--holdout', '--tier', 'P1',
         '--source-type', 'decision-record', '--dimension', 'decisions',
+        '--author', 'Example Thinker',
         '--rights', 'synthetic-test-material; redistribution-permitted',
     )
     holdout_id = json.loads(completed.stdout)['results'][0]['source_id']

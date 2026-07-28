@@ -17,8 +17,8 @@ class LedgerAndCorrectionTests(unittest.TestCase):
             train.write_text('train evidence\n' * 20, encoding='utf-8')
             holdout = root / 'holdout.md'
             holdout.write_text('holdout evidence\n' * 20, encoding='utf-8')
-            train_id = json.loads(run_script('ingest.py', target, train, '--tier', 'P1', '--dimension', 'decisions').stdout)['results'][0]['source_id']
-            holdout_id = json.loads(run_script('ingest.py', target, holdout, '--holdout', '--tier', 'P1', '--dimension', 'decisions').stdout)['results'][0]['source_id']
+            train_id = json.loads(run_script('ingest.py', target, train, '--tier', 'P1', '--author', 'Example Thinker', '--dimension', 'decisions').stdout)['results'][0]['source_id']
+            holdout_id = json.loads(run_script('ingest.py', target, holdout, '--holdout', '--tier', 'P1', '--author', 'Example Thinker', '--dimension', 'decisions').stdout)['results'][0]['source_id']
             rejected = run_script(
                 'ledger.py', 'claim-add', target, '--claim', 'Bad leaked Claim', '--category', 'heuristic', '--status', 'pattern', '--source', holdout_id,
                 check=False,
