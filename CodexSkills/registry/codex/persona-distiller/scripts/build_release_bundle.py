@@ -5,6 +5,7 @@ import argparse
 import hashlib
 import json
 import shutil
+import sys
 import tempfile
 import zipfile
 from pathlib import Path
@@ -84,6 +85,31 @@ def deterministic_zip(staging: Path, output: Path) -> None:
             archive.writestr(info, path.read_bytes())
 
 
+def summarize_freshness() -> dict:
+    """把 check_distillation_freshness 的结论如实塞进 bundle manifest。
+
+    **复用检查器，不在这里另写一遍判据**——同一件事两把尺子，
+    迟早会分叉，而分叉的那天没有人会发现。
+    """
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    try:
+        from check_distillation_freshness import parse_version, survey
+        report = survey(GROUP_ROOT, parse_version(VERSION))
+    except Exception as exc:  # 读不到就如实说读不到，不填一个好看的默认值
+        return {"available": False, "why": f"{type(exc).__name__}: {exc}"}
+    return {
+        "available": True,
+        "distiller_version": report["current"],
+        "compatibility_floor": report["floor"],
+        "floor_rule": report["floor_rule"],
+        "at_or_above_floor": report["at_or_above_floor"],
+        "below_floor": report["below_floor"],
+        "unknown": report["unknown"],
+        "upper_bound_only": report["upper_bound_only"],
+        "policy": "低于下限不阻塞发行；统一重蒸安排在 600 人整体完成之后",
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(
         description=f"Build the one-file Persona Distiller {VERSION} release bundle."
@@ -98,8 +124,18 @@ def main() -> int:
     for source in (ROOT, GROUP_ROOT):
         if not (source / "SKILL.md").is_file():
             raise SystemExit(f"missing Skill root: {source}")
-        if (source / "VERSION").read_text(encoding="utf-8").strip() != VERSION:
-            raise SystemExit(f"version mismatch: {source}")
+        if not (source / "VERSION").is_file():
+            raise SystemExit(f"missing VERSION: {source}")
+    # ★ 原来这里要求两个 Skill 的 VERSION **完全相等**，意图是
+    #   「人物蒸馏到 v0.0.0.8 了，专家团队就不该是 v0.0.0.6/7 蒸出来的」。
+    #   意图对，判据测的不是那件事：它是包级的一个数字，不是每人一条记录，
+    #   而且把 group 的 VERSION 改一下就能满足——一个人也没重蒸，门却变绿。
+    #   实际后果是**自 v0.0.0.9 起本 bundle 一次也没能构建出来**，
+    #   因为两个 Skill 的改动节奏本来就不同步。
+    #   现在真正的判据是每人一条的 distilled_with + 滚动兼容下限
+    #   （见 scripts/check_distillation_freshness.py）；这里只记录事实。
+    group_version = (GROUP_ROOT / "VERSION").read_text(encoding="utf-8").strip()
+    freshness = summarize_freshness()
     with tempfile.TemporaryDirectory(prefix="persona-distiller-release-") as temporary:
         staging = Path(temporary) / TOP_NAME
         staging.mkdir()
@@ -143,10 +179,13 @@ def main() -> int:
                     "path": "persona-distiller-group",
                     "file_count": group_count,
                     "canonical_registry": True,
+                    # 两个 Skill 各自编号，bundle 如实记录两者，不再要求相等。
+                    "version": group_version,
                 },
             },
             "installer": "install.py",
             "checksums": "checksums.sha256",
+            "distillation_freshness": freshness,
             "registered_persona_deliveries_included": True,
             "person_name_constraints": False,
         }

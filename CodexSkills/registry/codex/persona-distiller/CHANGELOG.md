@@ -1,5 +1,53 @@
 # Changelog
 
+## v0.0.0.15 — 蒸馏版本新鲜度：从包级代理量改成每人一条记录（2026-07-29）
+
+**动因（用户澄清原始意图）**：`build_release_bundle.py` 里那条
+「两个 Skill 的 `VERSION` 必须相等」，本意是**保证专家团队里的人
+由正确的蒸馏版本产出**——人物蒸馏到 v0.0.0.8，团队就不该是 v0.0.0.6/7 蒸的。
+
+**意图对，判据测的是代理量**：它是包级的一个数字，不是每人一条记录；
+把 group 的 `VERSION` 从 8 改成 14 是一次文本编辑，一个人也没重蒸，门当场变绿。
+且它在打包时才触发，实际后果是**自 v0.0.0.9 起发行 bundle 一次也构建不出来**。
+（写进 RUNBOOK 第七十种：门测的是代理量，而代理量可以在属性不成立时被满足。）
+
+### 用户裁定的新机制
+
+- 每人一条 `distilled_with`，**下限 = 当前蒸馏版本号末位 − 10**
+  （`v0.0.0.98` → `0.0.0.88`）
+- **低于下限不重蒸、不阻塞**，只记台账
+- **600 人整体完成后统一重蒸所有人**，对齐到当时的最新版本
+
+### 变更
+
+- `delivery_builder.py` 打包时把 `DISTILLER_VERSION`（读自 `VERSION`）盖进交付
+  manifest——**随产物走**，不在登记时现取，因为登记可能比蒸馏晚很多天。
+- `registry_core.py`（group）把 `distilled_with` + `distilled_with_source`
+  写进 `registration.json`。第一手值永远优先，不被重建值覆盖。
+- 新增 `scripts/backfill_distilled_with.py`（group）：从 git 回填既有 97 人。
+  **回填是推断不是测量**，来源分四档；`a31cb12d` 的 70 人标为
+  `bulk-repackage`，其值是**上界**——那次只重打包没重蒸。
+  `artifact_created_at` 不能用作证据（99 条里 15 条恰好 `00:00:00Z`，
+  且已核实至少一例与 git 矛盾）。
+- 新增 `scripts/check_distillation_freshness.py`（带 `--self-test`），
+  **默认只报不拦**；接进 `self_check` 作 **warning 不是 error**。
+- **解绑两处相等判据**：`build_release_bundle.py` 与
+  `templates/bundle/install.py`（同一条判据的第二份拷贝，
+  只改一处会在另一处红——第二十二种复发）。bundle 改为如实记录两个
+  Skill 各自的版本号 + 新鲜度实况。
+- 新增 `scripts/bump_version.py`：一次盖 7 处声明位并自动跑漂移自查。
+- `test_release_bundle` 里断言「group 的 VERSION 也等于 distiller 的」
+  那一句是锁步假设的化身，已改为断言新契约。
+- 新增 5 条回归用例。
+
+### 实测
+
+- 回填：97 份，`products` 仍 97 / `artifacts` 仍 99（受保护资产未缩）
+- 新鲜度：99/99 ≥ 下限 `v0.0.0.4`，**其中 70 条是上界值**（只重打包未重蒸）
+- **发行 bundle 构建成功**——自 v0.0.0.9 以来第一次，
+  `PersonaDistiller-Final-v0.0.0.15.zip`
+- 全量测试 **64 passed, 0 failed**（v0.0.0.14 时是 2 failed）
+
 ## v0.0.0.14 — 对外声明的版本与输入合同进入硬门（2026-07-29）
 
 **动因（用户点名）**：公开树同时声明多个版本号，且 SKILL metadata 与正文的输入合同冲突。

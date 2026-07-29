@@ -78,12 +78,29 @@ class ReleaseBundleTests(unittest.TestCase):
             result = json.loads(completed.stdout)
             self.assertTrue(result["installed_validation"]["builder_passed"])
             self.assertTrue(result["installed_validation"]["group_passed"])
+            # 两个 Skill **各自编号**，不再要求相等。
+            # 原来这里断言 group 的 VERSION 也等于 distiller 的 _VER，
+            # 那正是让 bundle 自 v0.0.0.9 起一次也构建不出来的那条锁步假设。
             for name in ("persona-distiller", "persona-distiller-group"):
                 self.assertTrue((install_root / name / "SKILL.md").is_file())
-                self.assertEqual(
-                    (install_root / name / "VERSION").read_text().strip(),
-                    _VER,
-                )
+                self.assertTrue((install_root / name / "VERSION").read_text().strip())
+            self.assertEqual(
+                (install_root / "persona-distiller" / "VERSION").read_text().strip(), _VER
+            )
+            group_version = (
+                install_root / "persona-distiller-group" / "VERSION"
+            ).read_text().strip()
+            # bundle 必须**如实记录**两个版本号，而不是抹平成一个。
+            self.assertEqual(manifest["skills"]["persona-distiller-group"]["version"],
+                             group_version)
+            freshness = manifest["distillation_freshness"]
+            self.assertTrue(freshness["available"], freshness)
+            self.assertEqual(freshness["distiller_version"], _VER)
+            # 兼容下限 = 当前版本末位 − 10（用户裁定的滚动下限）
+            self.assertEqual(
+                int(freshness["compatibility_floor"].rsplit(".", 1)[1]),
+                max(1, int(_VER.rsplit(".", 1)[1]) - 10),
+            )
 
     def test_complete_release_installer_rejects_tampering(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

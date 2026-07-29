@@ -186,6 +186,32 @@ def main() -> int:
         for problem in drift_payload.get('problems') or ['contract drift check failed']:
             errors.append(f'contract drift: {problem}')
 
+    # 蒸馏版本新鲜度：**warning 不是 error**。
+    #   用户裁定「下限以下的不需要重新蒸馏，整体完成后再统一重蒸」，
+    #   所以它不能阻塞发行；但也不能不说——不说就等于没记账。
+    freshness = subprocess.run(
+        [sys.executable, str(root / 'scripts' / 'check_distillation_freshness.py'), '--json'],
+        cwd=str(root), text=True, capture_output=True,
+    )
+    try:
+        freshness_payload = json.loads(freshness.stdout or '{}')
+    except json.JSONDecodeError:
+        freshness_payload = {'error': (freshness.stderr or '').strip()[:200]}
+    checks['distillation_freshness'] = {
+        k: v for k, v in freshness_payload.items() if not k.endswith('_detail')
+    }
+    if freshness_payload.get('below_floor'):
+        warnings.append(
+            f"{freshness_payload['below_floor']} 人低于兼容下限 "
+            f"{freshness_payload.get('floor')}（按裁定不重蒸，进重蒸台账）")
+    if freshness_payload.get('unknown'):
+        warnings.append(
+            f"{freshness_payload['unknown']} 人的 distilled_with 归因不到，不计入达标")
+    if freshness_payload.get('upper_bound_only'):
+        warnings.append(
+            f"{freshness_payload['upper_bound_only']} 人的 distilled_with 是批量重打包的上界值，"
+            f"只重打包未重蒸，实际正文更旧")
+
     test_result = None
     if not args.skip_tests:
         completed = subprocess.run(

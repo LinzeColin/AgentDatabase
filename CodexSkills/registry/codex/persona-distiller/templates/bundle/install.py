@@ -82,8 +82,12 @@ def verify_bundle() -> dict[str, object]:
         skill_root = SOURCE / skill_name
         if not (skill_root / "SKILL.md").is_file():
             raise ValueError(f"missing bundled Skill: {skill_name}")
-        if (skill_root / "VERSION").read_text(encoding="utf-8").strip() != BUNDLE_VERSION:
-            raise ValueError(f"bundled Skill version mismatch: {skill_name}")
+        # ★ 原来这里要求**每个**被打包的 Skill 的 VERSION 都等于 BUNDLE_VERSION。
+        #   这是 build_release_bundle.py 里那条相等判据的**第二份拷贝**——
+        #   同一个病在两处活着，正是 RUNBOOK 第二十二种「修法只落在被抓到的那一处」。
+        #   两个 Skill 各自编号，bundle 只需确认每个都**有**版本号并如实记录。
+        if not (skill_root / "VERSION").read_text(encoding="utf-8").strip():
+            raise ValueError(f"bundled Skill has an empty VERSION: {skill_name}")
     return {"verified": True, "files": len(expected)}
 
 
@@ -229,6 +233,10 @@ def main() -> int:
             {
                 "installed": True,
                 "version": BUNDLE_VERSION,
+                "skill_versions": {
+                    name: (SOURCE / name / "VERSION").read_text(encoding="utf-8").strip()
+                    for name in SKILL_NAMES
+                },
                 "root": str(install_root),
                 "skills": list(SKILL_NAMES),
                 "removed_conflicts": sorted(conflicts),

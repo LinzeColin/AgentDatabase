@@ -64,6 +64,52 @@ class SkillContractTests(unittest.TestCase):
             self.assertNotIn(token, description)
         self.assertIn('多重身份已移除', text)
 
+    def test_every_registered_persona_records_its_distiller_version(self) -> None:
+        """原判据用一个包级数字冒充「每人一条记录」，改一个文件就能骗过。"""
+        registry = ROOT.parent / 'persona-distiller-group'
+        records = sorted(registry.glob('*/*/registration.json'))
+        self.assertTrue(records)
+        missing = []
+        for path in records:
+            for entry in json.loads(path.read_text(encoding='utf-8')).get('versions') or []:
+                if not entry.get('distilled_with') or not entry.get('distilled_with_source'):
+                    missing.append(path.parent.name)
+        self.assertEqual(missing, [], f'这些人没有 distilled_with 记录: {missing[:10]}')
+
+    def test_distillation_freshness_floor_is_current_minus_ten(self) -> None:
+        """用户裁定：下限 = 当前版本末位 − 10（v0.0.0.98 → 0.0.0.88）。"""
+        sys.path.insert(0, str(ROOT / 'scripts'))
+        from check_distillation_freshness import floor_for, parse_version
+        self.assertEqual(floor_for(parse_version('v0.0.0.98')), parse_version('v0.0.0.88'))
+        self.assertEqual(floor_for(parse_version('v0.0.0.15')), parse_version('v0.0.0.5'))
+        # 末位不足 10 时夹到 1，不得出现 0 或负数档
+        self.assertEqual(floor_for(parse_version('v0.0.0.3')), parse_version('v0.0.0.1'))
+
+    def test_freshness_gate_reports_but_does_not_block(self) -> None:
+        """裁定是「下限以下不重蒸」——所以默认必须只报不拦，否则发行会被自己堵死。"""
+        completed = subprocess.run(
+            [sys.executable, str(ROOT / 'scripts' / 'check_distillation_freshness.py'), '--json'],
+            cwd=str(ROOT), text=True, capture_output=True,
+        )
+        self.assertEqual(completed.returncode, 0, completed.stderr)
+        report = json.loads(completed.stdout)
+        self.assertEqual(report['total'],
+                         report['at_or_above_floor'] + report['below_floor'] + report['unknown'])
+
+    def test_freshness_gate_has_a_working_negative_control(self) -> None:
+        completed = subprocess.run(
+            [sys.executable, str(ROOT / 'scripts' / 'check_distillation_freshness.py'), '--self-test'],
+            cwd=str(ROOT), text=True, capture_output=True,
+        )
+        self.assertEqual(completed.returncode, 0, completed.stdout + completed.stderr)
+
+    def test_delivery_manifest_stamps_distiller_version_from_version_file(self) -> None:
+        """蒸馏版本必须**随产物走**——登记可能比蒸馏晚，那时的 VERSION 已经不是它。"""
+        sys.path.insert(0, str(ROOT / 'scripts'))
+        import delivery_builder
+        self.assertEqual(delivery_builder.DISTILLER_VERSION,
+                         (ROOT / 'VERSION').read_text(encoding='utf-8').strip())
+
     def test_six_reviewer_harness_passes_both_rounds(self) -> None:
         for round_number in [1, 2]:
             payload = json.loads(run_script('review_harness.py', '--round', round_number).stdout)

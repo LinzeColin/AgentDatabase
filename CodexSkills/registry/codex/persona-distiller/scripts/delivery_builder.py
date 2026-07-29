@@ -22,6 +22,12 @@ from registry_core import (  # noqa: E402
 )
 
 TEMPLATE_ROOT = Path(__file__).resolve().parents[1] / "templates" / "delivery"
+
+# ★ 工艺版本的唯一真源是 VERSION 文件，不硬编码——硬编码的版本号在这个仓里
+#   已经栽过五次（self_check、build_release_bundle、build_manifest、
+#   test_release_bundle、install 模板）。
+DISTILLER_VERSION = (Path(__file__).resolve().parents[1] / "VERSION")\
+    .read_text(encoding="utf-8").strip()
 FIXED_ZIP_TIME = (2026, 7, 23, 0, 0, 0)
 AUDIT_FILES = (
     "verification.json",
@@ -251,6 +257,10 @@ def build_full_delivery(
             "delivery_contract_status": delivery_contract_status,
             "builder": "persona-distiller",
             "builder_version": BUILDER_VERSION,
+            # ★ 蒸馏版本必须**随产物走**，不能在登记时现取。
+            #   登记可能比蒸馏晚很多天，那时的 VERSION 已经不是产出它的那个版本。
+            #   builder_version 是交付合同（长期钉住），distilled_with 是工艺版本，两者不同轴。
+            "distilled_with": DISTILLER_VERSION,
             "created_at": created_at,
             "single_archive_only": True,
             "top_level_count": 1,

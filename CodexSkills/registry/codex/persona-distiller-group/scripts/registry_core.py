@@ -20,6 +20,15 @@ REGISTRY_SCHEMA_VERSION = "3.0"
 DELIVERY_SCHEMA_VERSION = "1.0"
 DELIVERY_CONTRACT = "v0.0.0.5"
 BUILDER_VERSION = "v0.0.0.5"
+# 工艺版本（哪个 persona-distiller 版本蒸出了这个人）的来源，必须可区分：
+#   artifact-manifest —— 打包时由 distiller 盖进交付 manifest，是第一手
+#   git-*             —— 事后从 git 重建，是推断；重建值不得与第一手混为一谈
+DISTILLED_WITH_SOURCES = {
+    "artifact-manifest",
+    "git-first-commit",
+    "git-first-commit:bulk-repackage",
+    "unknown",
+}
 REGISTRY_INDEX_NAME = "team-index.json"
 PRIVATE_ORIGINS = {"private", "self"}
 SAFE_SLUG = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
@@ -670,6 +679,10 @@ def inspect_delivery_zip(zip_path: Path) -> dict[str, Any]:
         "product_version": product_version,
         "model_version": model_version,
         "builder_version": str(manifest.get("builder_version")),
+        # 交付 manifest 里没有 distilled_with 的，一律留 None——
+        # 由回填脚本另行标注来源，**不在这里猜一个当前版本填进去**。
+        "distilled_with": (str(manifest["distilled_with"])
+                           if manifest.get("distilled_with") else None),
         "artifact_created_at": str(manifest.get("created_at") or ""),
         "delivery_contract_status": str(delivery_contract_status),
         "runtime_artifact": runtime_path,
@@ -904,6 +917,10 @@ def _register_inspected_product(
         "runtime_sha256": product["runtime_sha256"],
         "runtime_size_bytes": product["runtime_size_bytes"],
         "builder_version": product["builder_version"],
+        "distilled_with": product.get("distilled_with"),
+        "distilled_with_source": (
+            "artifact-manifest" if product.get("distilled_with") else "unknown"
+        ),
         "artifact_created_at": product["artifact_created_at"],
         "delivery_contract_status": product["delivery_contract_status"],
     }
