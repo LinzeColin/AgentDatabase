@@ -474,6 +474,7 @@ def install_archive(
     verification_level: str = "structural",
     expected_archive_sha256: str = "",
     expected_effective_genesis_hash: str = "",
+    archive_anchor_source: str = "external",
 ) -> Dict[str, Any]:
     archive_input, skills_root_input = Path(archive), Path(skills_root)
     if archive_input.is_symlink():
@@ -485,6 +486,8 @@ def install_archive(
         return {"status": "FAIL", "stage": "verification-level", "errors": ["verification level must be structural, release or deep"]}
     if not archive.is_file():
         return {"status": "FAIL", "stage": "input", "errors": ["archive missing"]}
+    if archive_anchor_source not in {"external", "self-contained"}:
+        return {"status": "FAIL", "stage": "archive-anchor-source", "errors": ["archive anchor source must be external or self-contained"]}
     normalized_archive_anchor = str(expected_archive_sha256 or "").strip().lower()
     if normalized_archive_anchor and (len(normalized_archive_anchor) != 64 or any(ch not in "0123456789abcdef" for ch in normalized_archive_anchor)):
         return {"status": "FAIL", "stage": "external-archive-anchor", "errors": ["expected archive SHA-256 must be 64 lowercase hexadecimal characters"]}
@@ -537,7 +540,14 @@ def install_archive(
             if validation["status"] != "PASS":
                 return {"status": "FAIL", "stage": "validation", "validation": validation}
 
-            checks: Dict[str, Any] = {"profile": resolved_profile, "verification_level": verification_level, "executed_target_code": False, "external_archive_anchor_verified": bool(normalized_archive_anchor)}
+            checks: Dict[str, Any] = {
+                "profile": resolved_profile,
+                "verification_level": verification_level,
+                "executed_target_code": False,
+                "archive_anchor_source": archive_anchor_source,
+                "external_archive_anchor_verified": bool(normalized_archive_anchor and archive_anchor_source == "external"),
+                "self_contained_archive_digest_verified": bool(normalized_archive_anchor and archive_anchor_source == "self-contained"),
+            }
             if resolved_profile == "optimizer" and verification_level in {"release", "deep"}:
                 verify = _optimizer_check(
                     staged, ["verify-self", "--strict", "--expected-genesis-hash", expected_genesis_hash,
@@ -581,8 +591,11 @@ def install_archive(
                 "profile": resolved_profile, "verification_level": verification_level,
                 "expected_genesis_hash": expected_genesis_hash if resolved_profile == "optimizer" else None,
                 "expected_effective_genesis_hash": expected_effective_genesis_hash if resolved_profile == "optimizer" else None,
-                "expected_archive_sha256": normalized_archive_anchor or None,
-                "external_archive_anchor_verified": bool(normalized_archive_anchor),
+                "expected_archive_sha256": normalized_archive_anchor if archive_anchor_source == "external" else None,
+                "observed_archive_sha256": frozen["archive_sha256"],
+                "archive_anchor_source": archive_anchor_source,
+                "external_archive_anchor_verified": bool(normalized_archive_anchor and archive_anchor_source == "external"),
+                "self_contained_archive_digest_verified": bool(normalized_archive_anchor and archive_anchor_source == "self-contained"),
                 "destination_name": destination.name, "destination": str(destination),
                 "staged_tree_hash": sha256_tree(staged, exclude={"MANIFEST.sha256"}),
                 "predecessor_tree_hash": sha256_tree(destination) if destination.exists() else None,
@@ -677,7 +690,9 @@ def install_archive(
             )
             return {
                 "status": "PASS", "profile": resolved_profile, "archive": str(archive), "archive_sha256": frozen["archive_sha256"],
-                "external_archive_anchor_verified": bool(normalized_archive_anchor),
+                "archive_anchor_source": archive_anchor_source,
+                "external_archive_anchor_verified": bool(normalized_archive_anchor and archive_anchor_source == "external"),
+                "self_contained_archive_digest_verified": bool(normalized_archive_anchor and archive_anchor_source == "self-contained"),
                 "destination": str(destination), "backup": str(backup) if backup else None,
                 "rollback_command": ("wbi rollback-install --destination %r --backup %r" % (str(destination), str(backup))) if backup else None,
                 "transaction_id": transaction_id, "transaction_receipt": str(transaction_path),

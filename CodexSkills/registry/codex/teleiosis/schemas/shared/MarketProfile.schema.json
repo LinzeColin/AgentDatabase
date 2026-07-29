@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "teleiosis.market_profile.v3",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "subject_id",
+    "valid_as_of",
+    "peer_taxonomy",
+    "benchmark_tracks",
+    "utility_contract",
+    "decision"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "teleiosis.market_profile.v3"
+    },
+    "subject_id": {
+      "type": "string"
+    },
+    "valid_as_of": {
+      "type": "string",
+      "format": "date"
+    },
+    "peer_taxonomy": {
+      "type": "array"
+    },
+    "benchmark_tracks": {
+      "type": "object",
+      "required": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    "utility_contract": {
+      "type": "object"
+    },
+    "decision": {
+      "enum": [
+        "CONTINUE",
+        "REPOSITION",
+        "MERGE",
+        "SPLIT",
+        "RETIRE"
+      ]
+    }
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "allowed_results": [
+    "EXECUTED",
+    "NOT_APPLICABLE_WITH_REASON",
+    "NOT_RUN",
+    "BLOCKED"
+  ],
+  "capabilities": [
+    {
+      "id": "five_arm_causal_experiment",
+      "required_to_check": true
+    },
+    {
+      "id": "task_cluster_statistics",
+      "required_to_check": true
+    },
+    {
+      "id": "six_stress_classes",
+      "required_to_check": true
+    },
+    {
+      "id": "large_dataset_partitions",
+      "required_to_check": true
+    },
+    {
+      "id": "competitor_benchmark",
+      "required_to_check": true
+    },
+    {
+      "id": "judge_calibration",
+      "required_to_check": true
+    },
+    {
+      "id": "quality_and_contamination_gates",
+      "required_to_check": true
+    },
+    {
+      "id": "shadow_and_canary",
+      "required_to_check": true
+    },
+    {
+      "id": "real_task_cost_and_outcome",
+      "required_to_check": true
+    },
+    {
+      "id": "market_feedback_l0_l7",
+      "required_to_check": true
+    },
+    {
+      "id": "privacy_consent_and_withdrawal",
+      "required_to_check": true
+    },
+    {
+      "id": "incident_feedback_loop",
+      "required_to_check": true
+    }
+  ],
+  "execution_mode": "FULL_NO_ROUTING",
+  "module": "skill_market_lab",
+  "n_a_policy": "N/A is allowed only after explicit inspection and a concrete reason; it is not a routing skip.",
+  "public_registry_skill": false,
+  "schema_version": "teleiosis.internal_capabilities.v1"
+}

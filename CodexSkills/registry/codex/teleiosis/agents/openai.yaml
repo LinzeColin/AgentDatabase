@@ -1,0 +1,11 @@
+interface:
+  display_name: "白箱迭代Skill"
+  short_description: "全量非路由地迭代、市场实证并做产品现实试炼"
+  default_prompt: "对目标 Skill 运行 Teleiosis v0.0.0.3：以 T→C→S→C→P→C 为一轮，三轮一组、三组一次 Run；C 是持续演化的迭代对象本身，不是 SHA 检查点。"
+policy:
+  public_entry: teleiosis
+  internal_modules:
+    - raw_teleiosis
+    - skill_market_lab
+    - product_reality_lab
+  routing: disabled

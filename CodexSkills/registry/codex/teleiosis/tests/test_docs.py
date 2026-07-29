@@ -60,32 +60,25 @@ class DocumentationTests(unittest.TestCase):
         self.assertIn("INDEPENDENT_REVIEW_UNAVAILABLE", review)
         self.assertNotIn("provider logs or runtime attestations are the preferred", review)
 
-    def test_release_docs_distinguish_structural_and_deep_verification(self):
+    def test_release_docs_use_current_v3_contract(self):
         install = (ROOT / "delivery/INSTALL.md").read_text(encoding="utf-8")
-        taskpack = (ROOT / "delivery/CODEX_TASK_PACK_v0.0.0.2.md").read_text(encoding="utf-8")
+        github = (ROOT / "delivery/INSTALL_AND_GITHUB.md").read_text(encoding="utf-8")
+        release = json.loads((ROOT / "metadata/release.json").read_text(encoding="utf-8"))
+        self.assertIn("v0.0.0.3", install)
         self.assertIn("--verification-level release", install)
         self.assertIn("--expected-archive-sha256", install)
-        self.assertIn("--expected-effective-genesis-hash", install)
         self.assertIn("--result-file", install)
         self.assertIn("install-status", install)
         self.assertIn("recover-install", install)
-        self.assertIn("engineering", taskpack.lower())
-        self.assertIn("formal", taskpack.lower())
+        self.assertIn("START_HERE.py publish --yes --json", github)
+        self.assertEqual(release["canonical_archive"], "Teleiosis-v0.0.0.3-skill.zip")
 
-    def test_release_docs_use_one_canonical_archive_filename(self):
-        release = json.loads((ROOT / "metadata/release.json").read_text(encoding="utf-8"))
-        canonical_archive = release["canonical_archive"]
-        documents = [
-            ROOT / "README.md",
-            ROOT / "delivery/INSTALL.md",
-            ROOT / "delivery/CODEX_TASK_PACK_v0.0.0.2.md",
-        ]
-        observed = {}
-        archive_pattern = re.compile(r"[A-Za-z][A-Za-z0-9.-]*v0\.0\.0\.2-final\.zip")
-        for path in documents:
-            matches = sorted(set(archive_pattern.findall(path.read_text(encoding="utf-8"))))
-            observed[str(path.relative_to(ROOT))] = matches
-            self.assertEqual(matches, [canonical_archive], observed)
+    def test_no_superseded_execution_documents_remain(self):
+        self.assertFalse((ROOT / "delivery/CODEX_TASK_PACK_v0.0.0.2.md").exists())
+        self.assertFalse((ROOT / "delivery/UPGRADE_V0.0.0.2.md").exists())
+        for path in (ROOT / "delivery").glob("*.md"):
+            text = path.read_text(encoding="utf-8")
+            self.assertNotIn("White-Box-Iteration-Skill-Teleiosis-v0.0.0.2-final.zip", text, path)
 
     def test_exact_links_are_not_misrepresented_as_ai_skills(self):
         comparison = (ROOT / "delivery/COMPETITIVE_COMPARISON.md").read_text(encoding="utf-8")

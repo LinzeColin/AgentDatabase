@@ -1,0 +1,63 @@
+{
+  "allowed_results": [
+    "EXECUTED",
+    "NOT_APPLICABLE_WITH_REASON",
+    "NOT_RUN",
+    "BLOCKED"
+  ],
+  "capabilities": [
+    {
+      "id": "five_reference_classes",
+      "required_to_check": true
+    },
+    {
+      "id": "open_source_provenance",
+      "required_to_check": true
+    },
+    {
+      "id": "source_runtime_inventory_reconciliation",
+      "required_to_check": true
+    },
+    {
+      "id": "surface_state_transition_role_data_fault_oracle_evidence",
+      "required_to_check": true
+    },
+    {
+      "id": "frontend_experiments",
+      "required_to_check": true
+    },
+    {
+      "id": "backend_api_experiments",
+      "required_to_check": true
+    },
+    {
+      "id": "data_invariants_and_reconciliation",
+      "required_to_check": true
+    },
+    {
+      "id": "load_reliability_and_chaos",
+      "required_to_check": true
+    },
+    {
+      "id": "poka_yoke_and_abuse_paths",
+      "required_to_check": true
+    },
+    {
+      "id": "negative_control_and_mutation",
+      "required_to_check": true
+    },
+    {
+      "id": "field_evidence_classification",
+      "required_to_check": true
+    },
+    {
+      "id": "defect_convergence_and_verifier_handoff",
+      "required_to_check": true
+    }
+  ],
+  "execution_mode": "FULL_NO_ROUTING",
+  "module": "product_reality_lab",
+  "n_a_policy": "N/A is allowed only after explicit inspection and a concrete reason; it is not a routing skip.",
+  "public_registry_skill": false,
+  "schema_version": "teleiosis.internal_capabilities.v1"
+}

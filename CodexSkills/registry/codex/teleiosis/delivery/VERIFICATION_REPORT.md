@@ -1,3 +1,5 @@
+> **历史谱系材料（SUPERSEDED_FOR_EXECUTION）**：本文件保留 v0.0.0.2 的证据与设计历史，不是当前安装、发布或执行合同。当前版本请读取根目录 `README.md`、`SKILL.md` 与 `delivery/INSTALL_AND_GITHUB.md`。
+
 # Verification Report — Teleiosis v0.0.0.2
 
 Machine evidence in the outer final delivery package is authoritative. The installable Skill intentionally does not embed its own archive SHA-256 because that would be self-referential.

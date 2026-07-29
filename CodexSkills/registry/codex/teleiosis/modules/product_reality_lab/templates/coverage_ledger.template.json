@@ -1,0 +1,100 @@
+{
+  "schema_version": "0.1.0",
+  "run_id": "RUN-REPLACE",
+  "dimensions": {
+    "surface": {
+      "critical_total": 0,
+      "critical_covered": 0,
+      "noncritical_total": 0,
+      "noncritical_covered": 0,
+      "evidence_refs": [],
+      "waiver_ids": [],
+      "critical_waived": 0,
+      "items": []
+    },
+    "state": {
+      "critical_total": 0,
+      "critical_covered": 0,
+      "noncritical_total": 0,
+      "noncritical_covered": 0,
+      "evidence_refs": [],
+      "waiver_ids": [],
+      "critical_waived": 0,
+      "items": []
+    },
+    "transition": {
+      "critical_total": 0,
+      "critical_covered": 0,
+      "noncritical_total": 0,
+      "noncritical_covered": 0,
+      "evidence_refs": [],
+      "waiver_ids": [],
+      "critical_waived": 0,
+      "items": []
+    },
+    "role": {
+      "critical_total": 0,
+      "critical_covered": 0,
+      "noncritical_total": 0,
+      "noncritical_covered": 0,
+      "evidence_refs": [],
+      "waiver_ids": [],
+      "critical_waived": 0,
+      "items": []
+    },
+    "data": {
+      "critical_total": 0,
+      "critical_covered": 0,
+      "noncritical_total": 0,
+      "noncritical_covered": 0,
+      "evidence_refs": [],
+      "waiver_ids": [],
+      "critical_waived": 0,
+      "items": []
+    },
+    "fault": {
+      "critical_total": 0,
+      "critical_covered": 0,
+      "noncritical_total": 0,
+      "noncritical_covered": 0,
+      "evidence_refs": [],
+      "waiver_ids": [],
+      "critical_waived": 0,
+      "items": []
+    },
+    "oracle": {
+      "critical_total": 0,
+      "critical_covered": 0,
+      "noncritical_total": 0,
+      "noncritical_covered": 0,
+      "evidence_refs": [],
+      "waiver_ids": [],
+      "critical_waived": 0,
+      "items": []
+    },
+    "evidence": {
+      "critical_total": 0,
+      "critical_covered": 0,
+      "noncritical_total": 0,
+      "noncritical_covered": 0,
+      "evidence_refs": [],
+      "waiver_ids": [],
+      "critical_waived": 0,
+      "items": []
+    }
+  },
+  "gates": {
+    "open_p0": 0,
+    "open_p1": 0,
+    "unwaived_inventory_diff": 0,
+    "unresolved_contradictions": 0,
+    "consecutive_deep_runs_without_new_p0_p1": 0,
+    "field_validation_required": false,
+    "field_validation_complete": false,
+    "rollback_verified": true,
+    "subject_stable": true
+  },
+  "waivers": [],
+  "cost_metrics": {},
+  "discovery_curve": []
+}

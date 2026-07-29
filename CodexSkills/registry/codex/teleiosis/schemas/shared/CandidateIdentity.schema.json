@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "teleiosis://shared/CandidateIdentity/v1",
+  "title": "CandidateIdentity",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "subject_id",
+    "baseline_hash",
+    "candidate_hash",
+    "acceptance_hash",
+    "environment_hash"
+  ],
+  "properties": {
+    "subject_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "baseline_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "candidate_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "acceptance_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "environment_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}

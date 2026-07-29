@@ -1,3 +1,5 @@
+> **历史谱系材料（SUPERSEDED_FOR_EXECUTION）**：本文件保留 v0.0.0.2 的证据与设计历史，不是当前安装、发布或执行合同。当前版本请读取根目录 `README.md`、`SKILL.md` 与 `delivery/INSTALL_AND_GITHUB.md`。
+
 # Genesis/Baseline Change Benefit–Cost Decision — v0.0.0.2
 
 ## Decision

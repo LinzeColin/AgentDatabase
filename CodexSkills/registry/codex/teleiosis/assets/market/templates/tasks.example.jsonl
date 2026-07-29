@@ -1,0 +1,1 @@
+{"task_id": "task-001", "cluster_id": "cluster-001", "partition": "validation", "prompt": "完成一个可由确定性 Oracle 验证的真实任务。", "origin": "synthetic", "oracle": {"type": "deterministic", "expected": "success"}, "protected": false, "sensitivity": "public"}

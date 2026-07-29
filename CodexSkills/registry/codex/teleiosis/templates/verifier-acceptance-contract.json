@@ -1,13 +1,16 @@
 {
-  "schema_version": "1.0",
-  "subject": "Teleiosis v0.0.0.2",
   "critical_requirements": [
     "Genesis byte identity",
     "complete regression pass",
     "peer taxonomy category-error prevention",
     "non-negative utility fallback",
     "deterministic package and reversible install",
-    "no fabricated independent review"
+    "no fabricated independent review",
+    "full non-routed T-C-S-C-P-C contract",
+    "C is the evolving iteration object, not a SHA checkpoint",
+    "clean bounded subprocess and machine-output safety"
   ],
+  "schema_version": "1.0",
+  "subject": "Teleiosis v0.0.0.3",
   "verdict_policy": "Every critical requirement requires an independent positive verdict; missing evidence blocks."
 }

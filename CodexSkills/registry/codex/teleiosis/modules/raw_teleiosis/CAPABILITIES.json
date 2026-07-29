@@ -1,0 +1,63 @@
+{
+  "allowed_results": [
+    "EXECUTED",
+    "NOT_APPLICABLE_WITH_REASON",
+    "NOT_RUN",
+    "BLOCKED"
+  ],
+  "capabilities": [
+    {
+      "id": "genesis_and_identity",
+      "required_to_check": true
+    },
+    {
+      "id": "premise_challenge",
+      "required_to_check": true
+    },
+    {
+      "id": "current_environment_scan",
+      "required_to_check": true
+    },
+    {
+      "id": "competitor_research",
+      "required_to_check": true
+    },
+    {
+      "id": "baseline_candidate_isolation",
+      "required_to_check": true
+    },
+    {
+      "id": "evaluation_and_holdout",
+      "required_to_check": true
+    },
+    {
+      "id": "ten_lens_review",
+      "required_to_check": true
+    },
+    {
+      "id": "causal_change_attribution",
+      "required_to_check": true
+    },
+    {
+      "id": "hard_gates_and_utility",
+      "required_to_check": true
+    },
+    {
+      "id": "independent_review_boundary",
+      "required_to_check": true
+    },
+    {
+      "id": "packaging_install_rollback",
+      "required_to_check": true
+    },
+    {
+      "id": "reheat_and_evidence_lease",
+      "required_to_check": true
+    }
+  ],
+  "execution_mode": "FULL_NO_ROUTING",
+  "module": "raw_teleiosis",
+  "n_a_policy": "N/A is allowed only after explicit inspection and a concrete reason; it is not a routing skip.",
+  "public_registry_skill": false,
+  "schema_version": "teleiosis.internal_capabilities.v1"
+}

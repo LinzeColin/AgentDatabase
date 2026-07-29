@@ -1,0 +1,6 @@
+{
+  "predeclared": true,
+  "max_critical_incidents": 0,
+  "max_failure_rate": 0.2,
+  "min_observations": 20
+}

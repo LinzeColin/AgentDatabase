@@ -18,8 +18,6 @@ REQUIRED_DIMENSIONS = {
 SPLITS = {"dev", "validation", "sealed-holdout", "adversarial"}
 SYSTEM_ROLES = {"no-skill", "baseline", "candidate"}
 HASH_RE = re.compile(r"^[a-f0-9]{64}$")
-
-
 def _chmod_read_only(path: Path) -> None:
     try:
         path.chmod(0o444)
@@ -179,10 +177,6 @@ def result_cell(row: Dict[str, Any]) -> tuple:
 
 
 def validate_result(row: Dict[str, Any], contract: Dict[str, Any], workspace: Path) -> List[str]:
-    # Resolve the workspace once before comparing child paths.  On macOS,
-    # tempfile paths can be spelled through /var while resolved children use
-    # /private/var; comparing mixed spellings falsely rejects safe evidence.
-    workspace = workspace.resolve()
     errors: List[str] = []
     if not isinstance(row, dict):
         return ["evaluation result must be an object"]

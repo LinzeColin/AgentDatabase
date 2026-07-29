@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://linze.local/schemas/product-reality-lab/poka-yoke-audit.schema.json",
+  "title": "Poka-yoke Audit",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "run_id",
+    "actions"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "0.1.0"
+    },
+    "run_id": {
+      "type": "string"
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "action_id",
+          "name",
+          "loss_if_wrong",
+          "defenses",
+          "attack_cases",
+          "status",
+          "critical"
+        ],
+        "properties": {
+          "action_id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "loss_if_wrong": {
+            "type": "string"
+          },
+          "defenses": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "attack_cases": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "NOT_RUN",
+              "RUNNING",
+              "OBSERVED_EXPECTED",
+              "OBSERVED_DEVIATION",
+              "BLOCKED",
+              "WAIVED"
+            ]
+          },
+          "evidence_refs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "defect_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "critical": {
+            "type": "boolean"
+          },
+          "waiver_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

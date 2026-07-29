@@ -81,11 +81,7 @@ h1{{font-size:clamp(31px,5vw,58px);line-height:1.05;margin:6px 0 12px;letter-spa
         metrics="".join(metric_rows) or '<tr><td colspan="3" class="muted">No metrics recorded</td></tr>',
     )
     output.parent.mkdir(parents=True, exist_ok=True)
-    # pathlib.Path.write_text did not accept ``newline`` until Python 3.10.
-    # The skill supports Python 3.9, so use an explicit text handle while
-    # retaining deterministic LF output on every supported platform.
-    with output.open("w", encoding="utf-8", newline="\n") as handle:
-        handle.write(html)
+    output.write_text(html, encoding="utf-8", newline="\n")
     return {"status": "PASS", "output": str(output.resolve()), "bytes": output.stat().st_size, "sha256": sha256_file(output), "external_dependencies": 0}
 
 

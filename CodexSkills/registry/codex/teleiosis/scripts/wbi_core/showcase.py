@@ -124,9 +124,7 @@ h1{{margin:0 0 4px;font-size:34px}}h2{{margin:0 0 16px;font-size:20px}}.muted{{c
         rows=table_rows, comparison=comparison_html,
     )
     output.parent.mkdir(parents=True, exist_ok=True)
-    # Keep deterministic LF output while remaining compatible with Python 3.9.
-    with output.open("w", encoding="utf-8", newline="\n") as handle:
-        handle.write(document)
+    output.write_text(document, encoding="utf-8", newline="\n")
     result = {
         "status": "PASS",
         "output": str(output),

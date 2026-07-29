@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "teleiosis.environment_strength_attestation.v3",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "candidate_hash",
+    "environment_hash",
+    "comparison_set",
+    "domains",
+    "status",
+    "unknowns",
+    "evidence_refs"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "teleiosis.environment_strength_attestation.v3"
+    },
+    "candidate_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "environment_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "comparison_set": {
+      "type": "array"
+    },
+    "domains": {
+      "type": "object"
+    },
+    "status": {
+      "enum": [
+        "PARETO_UNDOMINATED_FOR_VERIFIED_CURRENT_ENVIRONMENT",
+        "NOT_PROVEN",
+        "BLOCKED",
+        "REGRESSED",
+        "REHEAT_REQUIRED"
+      ]
+    },
+    "unknowns": {
+      "type": "array"
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

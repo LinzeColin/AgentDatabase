@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "teleiosis.evidence_lease.v3",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "lease_id",
+    "candidate_hash",
+    "acceptance_hash",
+    "environment_hash",
+    "dataset_hash",
+    "toolchain_hash",
+    "issued_at",
+    "expires_at",
+    "reheat_triggers",
+    "status"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "teleiosis.evidence_lease.v3"
+    },
+    "lease_id": {
+      "type": "string"
+    },
+    "candidate_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "acceptance_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "environment_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "dataset_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "toolchain_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "issued_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "reheat_triggers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "status": {
+      "enum": [
+        "FRESH",
+        "STALE",
+        "REHEAT_REQUIRED",
+        "NOT_PROVEN"
+      ]
+    }
+  }
+}

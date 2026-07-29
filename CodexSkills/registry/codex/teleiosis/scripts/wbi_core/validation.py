@@ -3,7 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any, Dict, List
 
-from .genesis import verify_genesis
+from .genesis import discover_effective_paths, verify_genesis
 from .io import (
     JUNK_NAMES,
     NAME_RE,
@@ -17,30 +17,22 @@ from .io import (
 )
 
 GENERIC_REQUIRED = ["SKILL.md"]
-OPTIMIZER_REQUIRED = [
-    "SKILL.md",
-    "README.md",
-    "VERSION",
-    "LICENSE",
-    "CHANGELOG.md",
+OPTIMIZER_BASE_REQUIRED = [
+    "SKILL.md", "README.md", "VERSION", "LICENSE", "CHANGELOG.md",
     "constitution/GENESIS_SOURCE.v0.0.0.1.zh-CN.md",
     "constitution/GENESIS_LOCKED.v0.0.0.1.zh-CN.md",
-    "constitution/genesis-lock.json",
-    "constitution/requirements.json",
-    "constitution/effective-genesis-lock.v0.0.0.2.json",
-    "constitution/effective-requirements.v0.0.0.2.json",
-    "constitution/amendments/WBI-GB-AMENDMENT-001-v0.0.0.2.zh-CN.md",
-    "schemas/current-environment-snapshot.schema.json",
-    "schemas/environment-strength-attestation.schema.json",
-    "schemas/behavior-coverage.schema.json",
-    "schemas/shadowing-evaluation.schema.json",
-    "schemas/stochastic-comparison.schema.json",
-    "references/CURRENT_ENVIRONMENT_STRENGTH.md",
-    "references/BEHAVIOR_COVERAGE.md",
-    "references/SKILL_LIBRARY_SHADOWING.md",
-    "references/STOCHASTIC_EVIDENCE.md",
-    "metadata/release.json",
-    "scripts/wbi.py",
+    "constitution/genesis-lock.json", "constitution/requirements.json",
+    "metadata/release.json", "scripts/wbi.py",
+]
+V3_REQUIRED = [
+    "constitution/amendments/WBI-GB-AMENDMENT-002-v0.0.0.3.zh-CN.md",
+    "modules/raw_teleiosis/CAPABILITIES.json",
+    "modules/skill_market_lab/CAPABILITIES.json",
+    "modules/product_reality_lab/CAPABILITIES.json",
+    "scripts/teleiosis_run.py",
+    "scripts/wbi_run/core.py",
+    "references/FULL_RUN_CONTRACT.md",
+    "delivery/INSTALL_AND_GITHUB.md",
 ]
 VALID_PROFILES = {"auto", "generic", "optimizer"}
 
@@ -88,13 +80,6 @@ def validate_skill(
     expected_effective_genesis_hash: str = "",
     profile: str = "auto",
 ) -> Dict[str, Any]:
-    """Validate either a generic Agent Skill or Teleiosis itself.
-
-    Generic targets are intentionally not forced into Teleiosis' product files,
-    version scheme, display name, or Genesis layout. The optimizer profile is
-    stricter because WBI-GB-007 requires the iterator to meet equal or stronger
-    evidence requirements than ordinary targets.
-    """
     root = root.resolve()
     errors: List[str] = []
     warnings: List[str] = []
@@ -105,7 +90,16 @@ def validate_skill(
     except ValueError as exc:
         return {"status": "FAIL", "profile": profile, "errors": [str(exc)], "warnings": []}
 
-    required = OPTIMIZER_REQUIRED if resolved_profile == "optimizer" else GENERIC_REQUIRED
+    required = list(OPTIMIZER_BASE_REQUIRED if resolved_profile == "optimizer" else GENERIC_REQUIRED)
+    version = (root / "VERSION").read_text(encoding="utf-8").strip() if (root / "VERSION").is_file() else "UNKNOWN"
+    if resolved_profile == "optimizer":
+        lock_path, projection_path = discover_effective_paths(root)
+        if lock_path and projection_path:
+            required.extend([lock_path.relative_to(root).as_posix(), projection_path.relative_to(root).as_posix()])
+        else:
+            errors.append("missing effective Genesis lock/projection pair")
+        if version == "v0.0.0.3":
+            required.extend(V3_REQUIRED)
     for relative in required:
         if not (root / relative).is_file():
             errors.append("missing required file: %s" % relative)
@@ -135,10 +129,8 @@ def validate_skill(
     if not body.strip():
         errors.append("SKILL.md body is empty")
 
-    version = "UNKNOWN"
     genesis: Dict[str, Any] = {}
     if resolved_profile == "optimizer" and not any(item.startswith("missing required file") for item in errors):
-        version = (root / "VERSION").read_text(encoding="utf-8").strip()
         metadata = frontmatter.get("metadata")
         metadata_version = str(metadata.get("version", "")) if isinstance(metadata, dict) else ""
         try:
@@ -154,21 +146,18 @@ def validate_skill(
             errors.append("Chinese display name must be 白箱迭代Skill")
         if release.get("english_brand") != "Teleiosis":
             errors.append("English brand must remain Teleiosis")
-        genesis = verify_genesis(
-            root, expected_hash=expected_genesis_hash or None,
-            expected_effective_hash=expected_effective_genesis_hash or None,
-        )
+        if version == "v0.0.0.3":
+            if release.get("candidate_semantics") != "C_IS_ITERATION_OBJECT_REVISION_NOT_SHA_CHECKPOINT":
+                errors.append("v0.0.0.3 candidate semantics missing or regressed")
+            if release.get("scope_mode") != "FULL_NO_ROUTING":
+                errors.append("v0.0.0.3 must use FULL_NO_ROUTING")
+        genesis = verify_genesis(root, expected_hash=expected_genesis_hash or None, expected_effective_hash=expected_effective_genesis_hash or None)
         errors.extend(genesis.get("errors", []))
         warnings.extend(genesis.get("warnings", []))
-    elif resolved_profile == "generic":
-        optional_version = root / "VERSION"
-        if optional_version.is_file():
-            version = optional_version.read_text(encoding="utf-8").strip() or "UNKNOWN"
-        if expected_genesis_hash:
-            warnings.append("expected Genesis hash ignored for a generic target Skill")
+    elif resolved_profile == "generic" and expected_genesis_hash:
+        warnings.append("expected Genesis hash ignored for a generic target Skill")
 
     _scan_common_files(root, errors)
-
     if check_manifest:
         manifest = root / "MANIFEST.sha256"
         if manifest.exists():
@@ -186,6 +175,7 @@ def validate_skill(
         "genesis_sha256": genesis.get("locked_sha256") if genesis else None,
         "effective_genesis_sha256": genesis.get("effective_composite_sha256") if genesis else None,
         "effective_requirement_count": genesis.get("effective_requirement_count") if genesis else None,
+        "anchor_mode": genesis.get("anchor_mode") if genesis else None,
         "errors": sorted(set(errors)),
         "warnings": sorted(set(warnings)),
     }

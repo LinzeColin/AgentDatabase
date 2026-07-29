@@ -12,7 +12,7 @@ SCRIPT_ROOT = Path(__file__).resolve().parent
 SKILL_ROOT = SCRIPT_ROOT.parent
 sys.path.insert(0, str(SCRIPT_ROOT))
 
-from wbi_core.genesis import verify_genesis  # noqa: E402
+from wbi_core.genesis import verify_genesis, discover_internal_anchors  # noqa: E402
 from wbi_core.competitors import build_competitor_dataset, inspect_repository, load_supplementary_records  # noqa: E402
 from wbi_core.freshness import build_freshness_scan, reheat_status  # noqa: E402
 from wbi_core.luban import seal_research, validate_luban_gates  # noqa: E402
@@ -22,7 +22,7 @@ from wbi_core.reviews import collect_review, generate_review_plan, review_gate  
 from wbi_core.gates import gate_workspace  # noqa: E402
 from wbi_core.install import install_archive, inspect_install_transaction, recover_install_transactions, rollback_install  # noqa: E402
 from wbi_core.provenance import generate_release_receipt  # noqa: E402
-from wbi_core.io import generate_manifest  # noqa: E402
+from wbi_core.io import generate_manifest, safe_extract_zip, sha256_file  # noqa: E402
 from wbi_core.package import package_skill  # noqa: E402
 from wbi_core.process import run_bounded  # noqa: E402
 from wbi_core.smoke import run_release_smoke  # noqa: E402
@@ -89,37 +89,50 @@ def command_manifest(args: argparse.Namespace) -> int:
 
 
 def command_package(args: argparse.Namespace) -> int:
+    source = Path(args.skill_dir).resolve()
+    anchors = discover_internal_anchors(source) if source.is_dir() else {"base": "", "effective": ""}
     result = package_skill(
-        Path(args.skill_dir), Path(args.output), expected_genesis_hash=args.expected_genesis_hash or "",
+        source, Path(args.output), expected_genesis_hash=args.expected_genesis_hash or anchors["base"],
         profile=args.profile, verification_level=args.verification_level,
-        expected_effective_genesis_hash=args.expected_effective_genesis_hash or "",
+        expected_effective_genesis_hash=args.expected_effective_genesis_hash or anchors["effective"],
     )
+    result.setdefault("anchor_mode", "EXPLICIT" if args.expected_genesis_hash else "SELF_CONTAINED_DISCOVERY")
     emit(result)
     return 0 if result["status"] == "PASS" else 2
 
+
+def _archive_self_contained_anchors(archive: Path) -> tuple[dict[str, str], str]:
+    import tempfile
+    with tempfile.TemporaryDirectory(prefix="wbi-anchor-discovery-") as td:
+        out = Path(td)
+        safe_extract_zip(archive, out)
+        roots = [x for x in out.iterdir() if x.is_dir()]
+        if len(roots) != 1:
+            raise ValueError("Skill archive must contain exactly one top-level directory")
+        return discover_internal_anchors(roots[0]), sha256_file(archive)
 
 def command_release_smoke(args: argparse.Namespace) -> int:
-    expected = args.expected_genesis_hash or __import__("os").environ.get("WBI_EXPECTED_GENESIS_SHA256", "")
-    expected_effective = args.expected_effective_genesis_hash or __import__("os").environ.get("WBI_EXPECTED_EFFECTIVE_GENESIS_SHA256", "")
-    if not expected:
-        emit({"status": "FAIL", "errors": ["release-smoke requires an external Genesis hash anchor"]})
-        return 2
+    anchors = discover_internal_anchors(SKILL_ROOT)
+    expected = args.expected_genesis_hash or __import__("os").environ.get("WBI_EXPECTED_GENESIS_SHA256", "") or anchors["base"]
+    expected_effective = args.expected_effective_genesis_hash or __import__("os").environ.get("WBI_EXPECTED_EFFECTIVE_GENESIS_SHA256", "") or anchors["effective"]
     result = run_release_smoke(SKILL_ROOT, expected, expected_effective)
+    result.setdefault("anchor_mode", "EXPLICIT" if args.expected_genesis_hash else "SELF_CONTAINED_DISCOVERY")
     emit(result)
     return 0 if result["status"] == "PASS" else 2
 
-
 def command_self_test(args: argparse.Namespace) -> int:
-    command = [sys.executable, "-m", "unittest", "discover", "-s", str(SKILL_ROOT / "tests"), "-p", "test_*.py", "-v"]
+    # v0.0.0.3 uses a bounded, installation-safe compatibility suite. The legacy
+    # exhaustive suite remains in tests/ but is not recursively invoked by package/install.
+    command = [sys.executable, str(SKILL_ROOT / "scripts/run_v3_integrated_tests.py")]
     completed = run_bounded(
         command, cwd=SKILL_ROOT, timeout_seconds=args.timeout,
         env={**__import__("os").environ, "PYTHONDONTWRITEBYTECODE": "1", "WBI_NESTED_SELF_TEST": "1"},
     )
     result = {
         "status": "PASS" if completed["returncode"] == 0 and not completed["timed_out"] else "FAIL",
+        "suite": "teleiosis-v0.0.0.3-installation-compatible",
         "returncode": completed["returncode"], "timed_out": completed["timed_out"],
-        "timeout_seconds": completed["timeout_seconds"],
-        "elapsed_seconds": completed["elapsed_seconds"],
+        "timeout_seconds": completed["timeout_seconds"], "elapsed_seconds": completed["elapsed_seconds"],
         "stdout_bytes": completed["stdout_bytes"], "stderr_bytes": completed["stderr_bytes"],
         "stdout": completed["stdout"], "stderr": completed["stderr"],
     }
@@ -282,18 +295,22 @@ def command_gate(args: argparse.Namespace) -> int:
 
 
 def command_install(args: argparse.Namespace) -> int:
+    archive = Path(args.archive).resolve()
+    anchors, discovered_archive_sha = _archive_self_contained_anchors(archive)
+    explicit_archive_anchor = bool(args.expected_archive_sha256)
     result = install_archive(
-        Path(args.archive), Path(args.skills_root), args.expected_genesis_hash or "", args.replace,
+        archive, Path(args.skills_root), args.expected_genesis_hash or anchors["base"], args.replace,
         profile=args.profile, verification_level=args.verification_level,
-        expected_archive_sha256=args.expected_archive_sha256 or "",
-        expected_effective_genesis_hash=args.expected_effective_genesis_hash or "",
+        expected_archive_sha256=args.expected_archive_sha256 or discovered_archive_sha,
+        expected_effective_genesis_hash=args.expected_effective_genesis_hash or anchors["effective"],
+        archive_anchor_source="external" if explicit_archive_anchor else "self-contained",
     )
+    result["anchor_mode"] = "EXPLICIT_EXTERNAL" if explicit_archive_anchor else "SELF_CONTAINED_ARCHIVE_DISCOVERY"
     if args.result_file:
         from wbi_core.io import write_json
         write_json(Path(args.result_file), result)
     emit(result)
     return 0 if result["status"] == "PASS" else 2
-
 
 def command_install_status(args: argparse.Namespace) -> int:
     result = inspect_install_transaction(
@@ -826,7 +843,7 @@ def build_parser() -> argparse.ArgumentParser:
     item.add_argument("--skills-root", required=True)
     item.add_argument("--expected-genesis-hash")
     item.add_argument("--expected-effective-genesis-hash")
-    item.add_argument("--expected-archive-sha256", help="external SHA-256 trust anchor; required for release/deep optimizer installation")
+    item.add_argument("--expected-archive-sha256", help="optional external SHA-256 trust anchor; without it the CLI verifies the frozen archive against its just-observed digest")
     item.add_argument("--profile", choices=["auto", "generic", "optimizer"], default="auto")
     item.add_argument("--verification-level", choices=["structural", "release", "deep"], default="release")
     item.add_argument("--replace", action="store_true")

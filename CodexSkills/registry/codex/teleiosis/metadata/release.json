@@ -1,60 +1,79 @@
 {
-  "schema_version": "2.0",
-  "skill_slug": "teleiosis",
-  "english_brand": "Teleiosis",
-  "functional_english_name": "White-Box Iteration Skill",
+  "architecture": "single-registry-skill-three-built-in-full-run-modules",
+  "candidate_semantics": "C_IS_ITERATION_OBJECT_REVISION_NOT_SHA_CHECKPOINT",
+  "canonical_archive": "Teleiosis-v0.0.0.3-skill.zip",
   "display_name_zh": "白箱迭代Skill",
-  "version": "v0.0.0.2",
-  "canonical_archive": "White-Box-Iteration-Skill-Teleiosis-v0.0.0.2-final.zip",
-  "release_revision": "effective-genesis-frontier-convergence-self-audited-terminal-loop-fix-20260726",
-  "valid_as_of": "2026-07-26",
-  "genesis_baseline_id": "WBI-GB-CANDIDATE-001",
-  "genesis_sha256": "14ab08b9053db4ca87140e59a49f1de8105a718a87ec2d55590c6487c1a77086",
-  "effective_genesis_id": "WBI-GB-EFFECTIVE-v0.0.0.2",
-  "effective_genesis_sha256": "fe80c467f8ecbe8343ef0c09ef5e6f9fd9683803c8260c9188998c7e3dfca0a2",
-  "effective_requirement_count": 28,
-  "predecessor_version": "v0.0.0.1",
-  "status": "ENGINEERING_FINAL_INSTALLABLE_FORMAL_PROMOTION_BLOCKED",
-  "verification_tiers": [
-    "structural",
-    "release",
-    "deep"
-  ],
-  "formal_review_requirement": "external-attested-2x6-plus-independent-read-only-verifier",
-  "regression_tests": 284,
-  "activation_kernel": {
-    "skill_md_lines": 65,
-    "skill_md_chars": 2982,
-    "estimated_tokens_at_4_chars_per_token": 745.5,
-    "result": "PASS_PROGRESSIVE_DISCLOSURE"
+  "embedded_components": {
+    "market_evidence_kernel": {
+      "integrated_version": "v0.0.0.3",
+      "source_lineage": "v0.0.0.2"
+    },
+    "product_reality_lab": {
+      "implementation": "internal-full-module",
+      "integrated_version": "v0.0.0.3",
+      "source_lineage": "v0.0.0.1"
+    },
+    "raw_teleiosis": {
+      "implementation": "canonical-parent-skill",
+      "integrated_version": "v0.0.0.3",
+      "source_lineage": [
+        "v0.0.0.1",
+        "v0.0.0.2"
+      ]
+    },
+    "skill_market_lab": {
+      "implementation": "internal-full-module",
+      "integrated_version": "v0.0.0.3",
+      "source_lineage": "v0.0.0.1"
+    }
   },
-  "benchmark_tracks": [
-    "A_OPTIMIZATION",
-    "B_PRODUCTIZATION",
-    "C_ASSURANCE"
+  "english_brand": "Teleiosis",
+  "final_promotion_authority": "teleiosis_then_external_verifier",
+  "functional_name": "White-Box Iteration Skill",
+  "internal_revision": "v0.0.0.3-r5-foolproof-clean-final",
+  "lineage": [
+    "teleiosis-v0.0.0.1",
+    "owner-teleiosis-v0.0.0.2",
+    "market-integrated-teleiosis-v0.0.0.2",
+    "skill-market-lab-v0.0.0.1",
+    "product-reality-lab-v0.0.0.1"
   ],
-  "status_domains": [
-    "control_plane",
-    "benchmark_integrity",
-    "outcome",
-    "cost_evidence",
-    "independent_review",
-    "engineering_release",
-    "formal_promotion",
-    "current_environment_strength"
-  ],
-  "control_plane_status": "PASS",
-  "benchmark_integrity_status": "FIXTURE_VALID_REAL_TASK_INCOMPLETE",
-  "outcome_status": "NOT_PROVEN",
-  "cost_evidence_status": "PARTIAL",
-  "independent_review_status": "UNAVAILABLE",
-  "engineering_release_status": "PENDING_FINAL_PACKAGE_VALIDATION",
-  "formal_promotion_status": "BLOCKED",
-  "current_environment_strength_status": "NOT_PROVEN",
-  "base_and_effective_anchor_policy": "release/deep require external base Genesis, effective Genesis and archive SHA-256 anchors",
-  "environment_strength_policy": "bounded Pareto claim only with current snapshot, lease, frontier, outcome, cost, behavior coverage, shadowing and install evidence",
-  "stochastic_policy": "predeclared trials and interval rule; otherwise INCONCLUSIVE",
-  "coverage_policy": "all hard constraints exercised before strength claim",
-  "shadowing_policy": "library-scale selection and outcome-drop evidence required when a Skill library is in scope",
-  "formal_review_integrity": "external signed 2x6 plus one; bundled fixtures never satisfy formal promotion"
+  "name": "teleiosis",
+  "poka_yoke": {
+    "atomic_private_result_file": "OUTSIDE_TASKPACK_MODE_0600",
+    "bounded_memory_streaming": true,
+    "clean_machine_output": "ONE_JSON_DOCUMENT",
+    "explicit_publish_confirmation": "--yes",
+    "hard_combined_child_output_cap": true,
+    "install_state_outside_skills_root": true,
+    "json_help_without_usage_noise": true,
+    "one_click_entry": "START_HERE.py",
+    "process_group_timeout_cleanup": true,
+    "recursive_output_redaction": true,
+    "secret_rejection_and_redaction": true,
+    "single_canonical_raw_engine": true,
+    "strict_input_schema": true,
+    "transactional_stage_commit": true,
+    "workspace_root_allowlist": true
+  },
+  "real_market_evidence": "NOT_CLAIMED",
+  "repo_integration": "MOVING_MAIN_SEMANTIC_ADAPT_NO_FIXED_SHA_PRECONDITION",
+  "required_run": {
+    "candidate_revisions_per_run": 27,
+    "groups_per_run": 3,
+    "module_stages_per_run": 27,
+    "round_sequence": [
+      "T",
+      "C",
+      "S",
+      "C",
+      "P",
+      "C"
+    ],
+    "rounds_per_group": 3,
+    "routing": false
+  },
+  "scope_mode": "FULL_NO_ROUTING",
+  "standalone_internal_modules": "NOT_REGISTERED",
+  "version": "v0.0.0.3"
 }
