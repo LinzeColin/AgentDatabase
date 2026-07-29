@@ -1,5 +1,60 @@
 # Changelog
 
+## v0.0.0.14 — 对外声明的版本与输入合同进入硬门（2026-07-29）
+
+**动因（用户点名）**：公开树同时声明多个版本号，且 SKILL metadata 与正文的输入合同冲突。
+
+实测比点名更宽——**同一个 skill 对外声明了 7 个不同的版本号**，
+且衰减单调：`registry/index.json` = `0.0.0.4`、`registry.yaml` = `0.0.0.5`、
+`VERIFICATION.md` / `handoff.md` / `PACKAGE_MANIFEST.json:version` = `v0.0.0.5`、
+`README.md` = `v0.0.0.6`、`SKILL.md` 正文小节 = `v0.0.0.7`、
+`VERSION` / `manifest.json` = `v0.0.0.13`。**离发布脚本越远的位置越旧。**
+
+根因：`self_check.py` 的版本校验**只比 `VERSION` 与 `manifest.json` 两处**。
+v0.0.0.8 记的「版本已建立单一真源」，建立的其实是**两点之间的一致**；
+另外六处从来没有任何东西查过。**只覆盖 2/8 的单一真源，不是单一真源。**
+
+**比版本更严重的一类**：`SKILL.md` 的 metadata 写
+「one identity family **or weighted multi-identity selection**」，
+而正文写「单一主身份；多重身份已移除」，`test_weighted_selection_is_rejected` 长期为绿——
+**代码确实拒绝加权多身份，只有对外的输入合同还在提供它。**
+metadata 是调用方唯一会读的那份，冲突直接落到调用方头上。
+
+### 变更
+
+- 新增 `scripts/check_contract_drift.py`：查 skill_version 的 8 个对外声明位置、
+  builder_version 的钉住值、身份输入合同（族数 / metadata 多身份词族 /
+  `registry.yaml` 列出的目录是否真的存在）。带 5 类坏样本 + 1 项反向对照的 `--self-test`。
+- **接进 `self_check.py`**——独立脚本不是门（v0.0.0.10 的教训）。
+- `build_manifest.py` 现在用同一个真源同时盖 `version` 与 `distribution.kind`；
+  原先只盖后者，前者从 v0.0.0.5 起冻了 9 个版本，同一文件里两个版本号自相矛盾。
+- 修 18 处漂移：`index.json`、`registry.yaml`（含 6 个已删除/不存在的旧族目录）、
+  `PACKAGE_MANIFEST.json`、`README.md`、`VERIFICATION.md`、`handoff.md`、
+  `CONTRIBUTING.md` 的 `seven-family`、`SKILL.md` 的 metadata 与历史版本标记。
+- `README.md` 原来那行把 skill 轴与 builder 轴写进同一句，是读者混淆的来源，已拆分；
+  检查器把「一行同时出现两轴版本号」单列为 `[轴混写]` 判定。
+- `VERIFICATION.md` 重写为**当前发布号的复验记录**：每行都来自本次实跑，
+  没跑的标 `未复验`，不沿用 v0.0.0.5 的旧结论。结果为 **PARTIAL**，不是 PASS。
+- 新增 3 条回归用例（`tests/test_skill_contract.py`）。
+
+### 实测
+
+- `--self-test`：正对照 0 报，5 类坏样本全抓出，**故意钉住的 builder v0.0.0.5 未被误伤**
+- 真实树：**18 条 → 0 条**
+- 全量测试：`5 failed` → **`2 failed`, 54 passed**
+
+### 未解决：发行 bundle 自 v0.0.0.9 起构建不出来
+
+剩下 2 个失败用例同根：`build_release_bundle.py` 要求
+`persona-distiller`（`v0.0.0.14`）与 `persona-distiller-group`（`v0.0.0.8`）
+的 `VERSION` 完全相等，否则 `SystemExit: version mismatch`。
+**从 v0.0.0.9 起 `PersonaDistiller-Final-*.zip` 一次也没能构建出来**——
+此前未被发现，因为这 2 个失败一直藏在另外 3 个校验和失败后面。
+
+**未擅自修复。** 把 group 从 `v0.0.0.8` 直接抬到 `v0.0.0.14`
+等于凭空宣称 6 次没有发生过的 group 发布；
+而放宽相等判据会改变发行契约。两者都需要先裁定「bundle 版本是一个号还是两个号」。
+
 ## v0.0.0.13 — 给硬门 `check_verbatim_quotes` 补上负对照（2026-07-29）
 
 元检查器首跑点名的 6 件之一，且是最该先修的：**它是硬门，却根本没有负对照**。

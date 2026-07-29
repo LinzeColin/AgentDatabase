@@ -1,13 +1,13 @@
 ---
 name: persona-distiller
-description: Build, audit, update, package, or uniquely register an evidence-grounded target-person Agent Skill through documented capabilities, strategies, cognition, decision policy, work system, temperament, and boundaries. Before identity parsing or research, resolve same-name candidates from the canonical registry and authoritative sources; auto-bind one even with weak evidence, but stop for user selection when multiple remain. Required inputs are the target person's name and one identity family or weighted multi-identity selection; scenario is optional and inferred. Use for six-lane research, source-universe coverage, Work/Persona separation, automatic runtime identity routing, agentic execution without per-invocation versions, corrections, evaluation, refinement, rollback, one complete installable delivery ZIP, and per-person product releases 0.0.0.1 through 0.0.0.999 in the sibling canonical expert-team registry. 中文名称：人物蒸馏 Skill。
+description: Build, audit, update, package, or uniquely register an evidence-grounded target-person Agent Skill through documented capabilities, strategies, cognition, decision policy, work system, temperament, and boundaries. Before identity parsing or research, resolve same-name candidates from the canonical registry and authoritative sources; auto-bind one even with weak evidence, but stop for user selection when multiple remain. Required inputs are the target person's name and exactly one of the twelve single primary identity families — one family only, no weighting and no second family; scenario is optional and inferred. Use for six-lane research, source-universe coverage, Work/Persona separation, automatic runtime identity routing, agentic execution without per-invocation versions, corrections, evaluation, refinement, rollback, one complete installable delivery ZIP, and per-person product releases 0.0.0.1 through 0.0.0.999 in the sibling canonical expert-team registry. 中文名称：人物蒸馏 Skill。
 ---
 
 # 人物蒸馏 Skill / Persona Distiller
 
 把目标人物蒸馏为**能实际规划、调用工具、完成任务并接受校验**的人物执行模型，而不是只模仿口吻的角色提示词。
 
-## 【v0.0.0.7 新增硬门】rubric 本身必须被独立核查
+## 【自 v0.0.0.7 起的硬门】rubric 本身必须被独立核查
 
 **触发本条的实例**：Carl Icahn 一轮，我把「1992 年他被移出 TWA 管理层」写进了 rubric，
 实为 **1993-01-08 协商辞职**，且 Karabu 协议正是同次和解的产物——**两个我写成独立时点的事，其实是同一件事。**

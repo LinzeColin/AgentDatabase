@@ -168,6 +168,24 @@ def main() -> int:
     if registry_check.returncode != 0:
         errors.append('persona product registry validation failed')
 
+    # ★ 合同漂移门。上面那条 version 校验只比 VERSION 与 manifest.json **两处**，
+    #   而对外声明版本的地方有八处——v0.0.0.8 说「版本已建立单一真源」，
+    #   建立的其实是两点之间的一致，剩下六处一路漂到七个不同的版本号。
+    #   独立脚本不是门（v0.0.0.10 的教训），必须挂进 self_check 才会有人跑。
+    drift_check = subprocess.run(
+        [sys.executable, str(root / 'scripts' / 'check_contract_drift.py'), '--json'],
+        cwd=str(root), text=True, capture_output=True,
+    )
+    try:
+        drift_payload = json.loads(drift_check.stdout or '{}')
+    except json.JSONDecodeError:
+        drift_payload = {'problems': ['check_contract_drift.py 输出不是 JSON'],
+                         'stderr': drift_check.stderr}
+    checks['contract_drift'] = drift_payload
+    if drift_check.returncode != 0:
+        for problem in drift_payload.get('problems') or ['contract drift check failed']:
+            errors.append(f'contract drift: {problem}')
+
     test_result = None
     if not args.skip_tests:
         completed = subprocess.run(

@@ -33,6 +33,37 @@ class SkillContractTests(unittest.TestCase):
             '政治法律师', '客户营销师', '建造采购师', '财务合规师', '医疗护理师', '农林牧渔师',
         ])
 
+    def test_declared_version_has_exactly_one_source_of_truth(self) -> None:
+        """回归：v0.0.0.13 时公开树同时声明了 7 个不同的版本号。
+
+        根因是 self_check 的版本校验只比 VERSION 与 manifest.json 两处，
+        另外六处（registry.yaml、registry/index.json、PACKAGE_MANIFEST.json、
+        README、VERIFICATION、handoff）从来没人查，离发布脚本越远越旧。
+        """
+        completed = subprocess.run(
+            [sys.executable, str(ROOT / 'scripts' / 'check_contract_drift.py'), '--json'],
+            cwd=str(ROOT), text=True, capture_output=True,
+        )
+        payload = json.loads(completed.stdout)
+        self.assertEqual(payload['problems'], [], payload['problems'])
+        self.assertEqual(completed.returncode, 0)
+
+    def test_contract_drift_gate_has_a_working_negative_control(self) -> None:
+        """没有负对照的检查器，其「全绿」不构成任何证据（RUNBOOK 第十八种）。"""
+        completed = subprocess.run(
+            [sys.executable, str(ROOT / 'scripts' / 'check_contract_drift.py'), '--self-test'],
+            cwd=str(ROOT), text=True, capture_output=True,
+        )
+        self.assertEqual(completed.returncode, 0, completed.stdout + completed.stderr)
+
+    def test_skill_metadata_does_not_offer_removed_multi_identity_input(self) -> None:
+        """metadata 是调用方唯一会读的那份；它与正文冲突时，冲突落到调用方头上。"""
+        text = (ROOT / 'SKILL.md').read_text(encoding='utf-8')
+        description = text.split('\n---\n', 1)[0]
+        for token in ['multi-identity', 'multi identity', 'weighted multi', '多重身份']:
+            self.assertNotIn(token, description)
+        self.assertIn('多重身份已移除', text)
+
     def test_six_reviewer_harness_passes_both_rounds(self) -> None:
         for round_number in [1, 2]:
             payload = json.loads(run_script('review_harness.py', '--round', round_number).stdout)

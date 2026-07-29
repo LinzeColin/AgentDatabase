@@ -1,18 +1,20 @@
-# 人物蒸馏 Skill / Persona Distiller v0.0.0.6
+# 人物蒸馏 Skill / Persona Distiller v0.0.0.14
 
 Persona Distiller 把公开人物、经授权的私域人物、自己、历史或虚构人物构建为可安装的 Agent Skill。它蒸馏证据支持的能力、策略、认知、决策、工作方式和边界；不是只模仿口吻，也不是本人、授权、背书或实时观点。
 
-v0.0.0.6 将身份分类从「6+1」重组为 **12 个单一主身份**（删除「多重身份」），职业覆盖范围见下方「身份分类与职业覆盖」。交付合同（delivery contract / `builder_version`）格式不变，仍为 `v0.0.0.5`。
+身份分类为 **12 个单一主身份**（自 v0.0.0.6 起，由旧的 6 主身份 + 多重身份重组而来；**多重身份已移除**），职业覆盖范围见下方「身份分类与职业覆盖」。族的真源是 [`registries/identity-families.json`](registries/identity-families.json)。
+
+交付合同（delivery contract / `builder_version`）与 Skill 发布号是**两个独立的轴**：交付合同长期钉在 `v0.0.0.5`，不随 Skill 升版移动，人物交付 ZIP 结构因此保持不变。三个轴的完整定义见下方「版本边界」。
 
 人物 Skill 安装后直接调用。它会从当前任务内部推断身份分面和场景，不要求运行用户选择身份、编号或权重；运行本身不编号。
 
 ## 安装
 
-v0.0.0.6 最终交付只有一个 bundle：
+最终交付只有一个 bundle，文件名带当前 Skill 发布号（由 `scripts/build_release_bundle.py` 从 `VERSION` 读取，不硬编码）：
 
 ```bash
-unzip PersonaDistiller-Final-v0.0.0.6.zip
-cd PersonaDistiller-Final-v0.0.0.6
+unzip PersonaDistiller-Final-v0.0.0.14.zip
+cd PersonaDistiller-Final-v0.0.0.14
 python3 install.py
 ```
 
@@ -101,7 +103,7 @@ python3 scripts/validate_persona_registry.py
 
 ## 版本边界
 
-- `skill_version`（本 Skill 发布号）：当前 `v0.0.0.6`（7→12 身份重组）；
+- `skill_version`（本 Skill 发布号）：当前 `v0.0.0.14`；**唯一真源是 `VERSION` 文件**，其余任何位置都是它的副本，由 `scripts/check_contract_drift.py` 强制一致；
 - `builder_version`（交付合同格式）：仍为 `v0.0.0.5`，人物交付 ZIP 结构不变；
 - `model_version`：工作区内部语义快照；
 - `product_version`：每个 canonical 人物独立连续使用 `0.0.0.1..0.0.0.999`；

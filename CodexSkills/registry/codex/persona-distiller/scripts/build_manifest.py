@@ -55,6 +55,11 @@ def main() -> int:
         for path in files
     ]
     manifest["files"] = records
+    # ★ 版本必须由**同一个真源**盖两个字段。
+    #   原来只盖 distribution.kind，`version` 字段谁也不改——于是它从 v0.0.0.5 起
+    #   一路冻在原地，同一个文件里两个版本号自相矛盾了 9 个版本没人发现。
+    #   「生成器只覆盖它记得的那个字段」是漂移的常见来源。
+    manifest["version"] = _VER
     manifest["distribution"] = {
         "kind": f"repository-customized-{_VER}",
         "lineage_base_archive_sha256": "e891912d98d14afb7677ac935a19be329d97d206f4ae74a644892f46b17f6748",
