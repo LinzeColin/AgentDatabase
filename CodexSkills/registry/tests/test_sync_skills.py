@@ -284,6 +284,33 @@ class SyncSkillsFailClosedTests(unittest.TestCase):
             self.assertEqual(sync_skills.main(), 2)
         mirror.assert_not_called()
 
+    def test_main_only_scope_skips_unrelated_alias_parity(self) -> None:
+        selected = {("codex", "demo-skill"): str(self.local)}
+        with (
+            mock.patch.object(sync_skills, "inventory", return_value=selected) as inventory,
+            mock.patch.object(sync_skills, "persona_shrink_gate") as persona_shrink_gate,
+            mock.patch.object(
+                sync_skills,
+                "mirror",
+                return_value={"added": ["codex/demo-skill"], "updated": [], "removed": []},
+            ) as mirror,
+            mock.patch.object(
+                sys,
+                "argv",
+                ["sync_skills.py", "--only", "codex/demo-skill", "--dry-run"],
+            ),
+        ):
+            self.assertEqual(sync_skills.main(), 0)
+
+        inventory.assert_called_once_with(enforce_exact_aliases=False)
+        persona_shrink_gate.assert_not_called()
+        mirror.assert_called_once_with(
+            selected,
+            mock.ANY,
+            dry_run=True,
+            propagate_deletions=False,
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

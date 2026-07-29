@@ -1,0 +1,4 @@
+interface:
+  display_name: "Awesome Self-Hosted"
+  short_description: "Curated self-hosted software reference"
+  default_prompt: "Use $awesome-selfhosted to shortlist self-hosted software for my requirements."

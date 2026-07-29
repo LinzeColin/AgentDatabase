@@ -6,8 +6,8 @@
     "claude": "Claude Skill（Anthropic 侧）",
     "agents": "Agent Skill（跨工具通用目录）"
   },
-  "skill_instance_count": 100,
-  "unique_slug_count": 84,
+  "skill_instance_count": 101,
+  "unique_slug_count": 85,
   "skills": [
     {
       "slug": "agent-reach",
@@ -38,6 +38,16 @@
       "entry": "registry/codex/awesome-design-systems/SKILL.md",
       "file_count": 5,
       "size_bytes": 63800
+    },
+    {
+      "slug": "awesome-selfhosted",
+      "source": "codex",
+      "name": "awesome-selfhosted",
+      "description": "Use when Codex needs to discover, compare, or shortlist self-hosted Free/Libre software for deployment, replacement, or architecture work—such as analytics, backups, collaboration, databases, identity, notes, monitoring, AI, or web services—from the Awesome-Selfhosted catalog.",
+      "category": "工程与交付",
+      "entry": "registry/codex/awesome-selfhosted/SKILL.md",
+      "file_count": 4,
+      "size_bytes": 348835
     },
     {
       "slug": "banner-design",
@@ -513,11 +523,11 @@
       "slug": "persona-distiller",
       "source": "codex",
       "name": "persona-distiller",
-      "description": "Build, audit, update, package, or uniquely register an evidence-grounded target-person Agent Skill through documented capabilities, strategies, cognition, decision policy, work system, temperament, and boundaries. Before identity parsing or research, resolve same-name candidates from the canonical registry and authoritative sources; auto-bind one even with weak evidence, but stop for user selection when multiple remain. Required inputs are the target person's name and one identity family or weighted multi-identity selection; scenario is optional and inferred. Use for six-lane research, source-universe coverage, Work/Persona separation, automatic runtime identity routing, agentic execution without per-invocation versions, corrections, evaluation, refinement, rollback, one complete installable delivery ZIP, and per-person product releases 0.0.0.1 through 0.0.0.999 in the sibling canonical expert-team registry. 中文名称：人物蒸馏 Skill。",
+      "description": "Build, audit, update, package, or uniquely register an evidence-grounded target-person Agent Skill through documented capabilities, strategies, cognition, decision policy, work system, temperament, and boundaries. Before identity parsing or research, resolve same-name candidates from the canonical registry and authoritative sources; auto-bind one even with weak evidence, but stop for user selection when multiple remain. Required inputs are the target person's name and exactly one of the twelve single primary identity families — one family only, no weighting and no second family; scenario is optional and inferred. Use for six-lane research, source-universe coverage, Work/Persona separation, automatic runtime identity routing, agentic execution without per-invocation versions, corrections, evaluation, refinement, rollback, one complete installable delivery ZIP, and per-person product releases 0.0.0.1 through 0.0.0.999 in the sibling canonical expert-team registry. 中文名称：人物蒸馏 Skill。",
       "category": "工程与交付",
       "entry": "registry/codex/persona-distiller/SKILL.md",
-      "file_count": 219,
-      "size_bytes": 580609
+      "file_count": 276,
+      "size_bytes": 1365662
     },
     {
       "slug": "persona-distiller-group",
@@ -526,8 +536,8 @@
       "description": "Assemble a working expert team from uniquely registered Persona Distiller products, load each member's actual reasoning payload (mental models, heuristics, hard boundaries, documented divergences), and produce a decision artifact whose every substantive line is traceable to a cited claim_id. Use when a task benefits from several complementary person-model specialists plus isolated review, adjudication, and counterevidence roles; also use to inspect, verify, rebuild, or govern the canonical persona delivery registry. Infer identity and scenario internally; never ask the caller to choose an identity.",
       "category": "工程与交付",
       "entry": "registry/codex/persona-distiller-group/SKILL.md",
-      "file_count": 308,
-      "size_bytes": 13640481
+      "file_count": 328,
+      "size_bytes": 14348982
     },
     {
       "slug": "project-cost-table-skill",
@@ -583,7 +593,7 @@
       "slug": "teleiosis",
       "source": "codex",
       "name": "teleiosis",
-      "description": "White-box iteration, causal evaluation, market evidence, and controlled evolution for an existing Agent Skill or Teleiosis itself. Use when a user asks to improve, benchmark, stress-test, compare, self-evolve, validate with real tasks or users, productize, or package a Skill with frozen baselines, five-arm experiments, six stress classes, market feedback, rollback, independent review, and installable delivery. Do not use for ordinary code review or direct in-place edits to a production Skill.",
+      "description": "White-box iteration for an Agent Skill or Teleiosis itself. Use to challenge existence, research real peers, evolve and benchmark Candidates, prevent negative optimization, bind current-environment evidence, govern independent review, and deliver reversible packages; not for ordinary code review or in-place production edits.",
       "category": "工程与交付",
       "entry": "registry/codex/teleiosis/SKILL.md",
       "file_count": 234,

@@ -98,7 +98,7 @@ CATEGORY = {
     "工程与交付": ["verifier", "webapp-testing", "mcp-builder", "use-railway", "video-replica",
                    "goal-to-delivery-sop", "domain-dual-plane", "output-skill", "codex-dev-orchestrator",
                    "impeccable", "review-agent", "plugin-creator", "skill-creator", "skill-installer",
-                   "skill-github-sync", "dynamic-personal-profile-update", "persona-distiller",
+                   "skill-github-sync", "dynamic-personal-profile-update", "awesome-selfhosted", "persona-distiller",
                    "persona-distiller-group", "teleiosis"],
     "学习与知识": ["study-project-orchestrator", "book-to-skill", "last30days", "chronicle",
                    "grill-me", "openai-docs"],
@@ -1134,7 +1134,11 @@ def main():
     ap.add_argument("--dry-run", action="store_true", help="只报告差异，不写不提交不推送")
     ap.add_argument("--no-push", action="store_true", help="提交但不推送")
     ap.add_argument("--no-commit", action="store_true", help="完成镜像、凭据门和索引，但不暂存、不提交、不推送")
-    ap.add_argument("--only", metavar="SOURCE/SLUG", help="只同步一个 Skill；不传播其他 Skill 的删除")
+    ap.add_argument(
+        "--only",
+        metavar="SOURCE/SLUG",
+        help="只同步一个 Skill；不传播其他 Skill 的删除，且不因无关来源 alias 漂移中止",
+    )
     ap.add_argument(
         "--allow-persona-shrink",
         action="store_true",
@@ -1148,7 +1152,10 @@ def main():
 
     log("=== 1/6 盘点本机 skill ===")
     try:
-        inv = inventory(enforce_exact_aliases=True)
+        # 全量同步必须核验所有来源 alias，避免误删或复制漂移的来源树。
+        # 单项同步不复制或删除未选中的 Skill；目标自身仍在 mirror() 的
+        # walk_entries() 阶段按 EXPECTED_SOURCE_ALIASES 逐项验证。
+        inv = inventory(enforce_exact_aliases=not bool(args.only))
     except RuntimeError as exc:
         log(f"  ✗ {exc}")
         return 2
@@ -1165,26 +1172,30 @@ def main():
         log(f"  受控单项同步：{args.only} → registry/{mirror_relative_path(*key)}")
     log(f"  合计 {len(inv)} 份实例 / {len({s for _, s in inv})} 个不同名字")
 
-    repo_persona, local_persona, lost_persona = persona_shrink_gate(inv, mirror_root)
-    if repo_persona:
-        log(f"  · 人物登记只增不减门：仓库 {repo_persona} 人 / 本机 {local_persona} 人")
-    if lost_persona and not args.allow_persona_shrink:
-        log(
-            f"  ✗ 本次同步会抹掉 {len(lost_persona)} 个已登记人物"
-            f"（仓库 {repo_persona} → 本机 {local_persona}），**已中止，未写入任何内容**。"
-        )
-        for slug in sorted(lost_persona)[:20]:
-            log(f"    - {slug}")
-        if len(lost_persona) > 20:
-            log(f"    …… 另有 {len(lost_persona) - 20} 个")
-        log("    受保护资产的真相源是仓库，不是本机。正确动作是先从仓库更新本机副本：")
-        log("      git -C <仓库> pull")
-        log("      rsync -a --delete <仓库>/CodexSkills/registry/codex/persona-distiller-group/ \\")
-        log("            ~/.codex/skills/persona-distiller-group/")
-        log("    确认确实要下线这些人物时，才加 --allow-persona-shrink。")
-        return 2
-    if lost_persona:
-        log(f"  ⚠ --allow-persona-shrink：已放行，将抹掉 {len(lost_persona)} 个已登记人物。")
+    # 单项同步不会删除未选中的人物包；只有全量同步或直接覆盖人物包
+    # 本身时，才有可能改变其受保护的 products 集合。
+    needs_persona_shrink_gate = not args.only or args.only == "codex/persona-distiller-group"
+    if needs_persona_shrink_gate:
+        repo_persona, local_persona, lost_persona = persona_shrink_gate(inv, mirror_root)
+        if repo_persona:
+            log(f"  · 人物登记只增不减门：仓库 {repo_persona} 人 / 本机 {local_persona} 人")
+        if lost_persona and not args.allow_persona_shrink:
+            log(
+                f"  ✗ 本次同步会抹掉 {len(lost_persona)} 个已登记人物"
+                f"（仓库 {repo_persona} → 本机 {local_persona}），**已中止，未写入任何内容**。"
+            )
+            for slug in sorted(lost_persona)[:20]:
+                log(f"    - {slug}")
+            if len(lost_persona) > 20:
+                log(f"    …… 另有 {len(lost_persona) - 20} 个")
+            log("    受保护资产的真相源是仓库，不是本机。正确动作是先从仓库更新本机副本：")
+            log("      git -C <仓库> pull")
+            log("      rsync -a --delete <仓库>/CodexSkills/registry/codex/persona-distiller-group/ \\")
+            log("            ~/.codex/skills/persona-distiller-group/")
+            log("    确认确实要下线这些人物时，才加 --allow-persona-shrink。")
+            return 2
+        if lost_persona:
+            log(f"  ⚠ --allow-persona-shrink：已放行，将抹掉 {len(lost_persona)} 个已登记人物。")
 
     log("\n=== 2/6 镜像与删除传播 ===")
     ch = mirror(
