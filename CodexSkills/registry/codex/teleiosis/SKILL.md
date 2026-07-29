@@ -1,11 +1,11 @@
 ---
 name: teleiosis
-description: White-box iteration, evaluation, and controlled evolution for an existing Agent Skill or for Teleiosis itself. Use when a user asks to improve, benchmark, refactor, harden, compare, self-evolve, productize, or package a Skill with frozen baselines, current research, real peers, ten evidence-led system reviews, rollback, genuinely independent review, and installable delivery. Do not use for ordinary code review or direct in-place edits to a production Skill.
+description: White-box iteration, causal evaluation, market evidence, and controlled evolution for an existing Agent Skill or Teleiosis itself. Use when a user asks to improve, benchmark, stress-test, compare, self-evolve, validate with real tasks or users, productize, or package a Skill with frozen baselines, five-arm experiments, six stress classes, market feedback, rollback, independent review, and installable delivery. Do not use for ordinary code review or direct in-place edits to a production Skill.
 license: MIT
 compatibility: Python 3.9+ and Git. Live competitor pull requires network access. Formal independent-review PASS requires genuinely isolated SubAgents plus a separate read-only verifier.
 metadata:
   author: LinzeColin
-  version: "v0.0.0.1"
+  version: "v0.0.0.2"
   language: "zh-CN"
   display_name_zh: "白箱迭代Skill"
   english_brand: "Teleiosis"
@@ -18,7 +18,7 @@ metadata:
 
 **Teleiosis · White-Box Iteration Skill**
 
-对目标 Skill 或本 Skill 自身进行真实、可验证、可回退的完善。控制来自冻结证据、Gate、Schema、测试和外部审计，不来自不断变长的 Prompt。
+对目标 Skill 或本 Skill自身进行真实、可验证、可回退的完善。v0.0.0.2 将市场实证内核并入同一控制面：实验室模拟、因果实验、六类压力、大数据、真实任务与用户反馈都产生证据，但只有 Teleiosis 拥有正式晋级和发布裁决权。
 
 ## 0. 启动硬门
 
@@ -64,7 +64,54 @@ python3 scripts/wbi.py init-run /absolute/path/to/target-skill \
 
 详细路径见 `references/WORKFLOW.md`。
 
-## 4. 十轮与候选组合
+## 4. 固定宏循环：五次调用，每次连续三轮
+
+一轮正式运行必须严格执行：
+
+```text
+T1 raw Teleiosis × 3 → 提交已批准 Candidate C1
+M1 market evidence × 3 → 提交已批准 Candidate C2
+T2 raw Teleiosis × 3 → 提交已批准 Candidate C3
+M2 market evidence × 3 → 提交已批准 Candidate C4
+T3 raw Teleiosis × 3 → 提交已批准 Candidate C5
+```
+
+每个 `×3` 是一次不可拆分调用：R1 诊断，R2 对抗/实验，R3 裁决、稳定和绑定 staged Candidate 哈希。紧随其后的“修改”只能原子提交 R3 已批准的同一目录树哈希，不得再产生新内容；否则整个宏循环无效。禁止跳段、交错、把两轮拼成一次、在 mutation 前开始下一段，或让最后一次修改逃逸最终验证。
+
+```bash
+python3 scripts/teleiosis_cycle.py init --workspace /outside/run-cycle \
+  --subject-name <skill> --subject-version <version> --subject-digest <sha256>
+python3 scripts/teleiosis_cycle.py record-subrun ...
+python3 scripts/teleiosis_cycle.py commit-mutation ...
+python3 scripts/teleiosis_cycle.py validate --workspace /outside/run-cycle --require-complete
+```
+
+`raw_teleiosis` 是同一 v0.0.0.2 包内关闭市场内核的不可递归 profile，不是旧版本。迭代 Teleiosis 自身时，它只能写外部 Candidate，不能修改 Genesis、评测合同或运行中的控制面。
+
+## 5. 市场实证内核
+
+Market Lab 已废止为独立 Skill，作为 `wbi_market` 内嵌。它运行 `No Skill / Baseline / Candidate / Competitor / Ablation` 五臂因果实验，覆盖语义、上下文、工具、安全、版本、经济六类压力，并按 L0–L7 区分实验室、Shadow、真实 Canary、外部交付/PR/赏金与持续复用证据。
+
+市场内核的最高结论只能是 `EVIDENCE_READY_FOR_TELEIOSIS`；它不得直接 `PROMOTE`、修改正式 Candidate 或覆盖安全/真实性硬门。所有结果绑定任务簇、重复试验、模型/runtime、工具 trace、环境、产物、成本、时延、评委校准、Provider 版本和 sealed holdout 污染审计。
+
+```bash
+python3 scripts/wbi_market.py init-workspace --workspace /outside/market-run ...
+python3 scripts/wbi_market.py expand-stress --input tasks.jsonl --output stress.jsonl --categories all
+python3 scripts/wbi_market.py aggregate --spec experiment.json --results results.jsonl --output-dir evidence
+python3 scripts/wbi_market.py quality-audit --spec experiment.json --tasks tasks.jsonl \
+  --assignments assignments.jsonl --results results.jsonl --feedback feedback.jsonl \
+  --calibration judge-calibration.jsonl --blind-map controller/blind-map.json \
+  --output evidence/QUALITY_AUDIT.json
+python3 scripts/wbi_market.py assurance-check --input assurance.json --output assurance-result.json
+python3 scripts/wbi_market.py gate --spec experiment.json --summary evidence/SUMMARY.json \
+  --quality-audit evidence/QUALITY_AUDIT.json --output market-gate.json
+```
+
+实验规范使用 Schema 2.0。冻结 Gate 必须绑定污染审计、paired/exclusive assignment integrity、sample-ratio mismatch、环境一致性、统计功效、评委校准、市场时间窗与 task→run→feedback 引用完整性；缺失或失效时直接 `BLOCKED`。
+
+真实市场证据必须来自获授权且可撤回的用户/验收者、真实任务、真实结果与现实代价；模拟、LLM 评委和大规模合成数据永远不得冒充 L5–L7。
+
+## 6. 十轮与候选组合
 
 十个默认视角：需求；同行；触发；工作流；安全；架构；评测；运行发布；效率维护；真实产物与未来盲点。
 
@@ -77,14 +124,14 @@ python3 scripts/wbi.py init-run /absolute/path/to/target-skill \
 
 不为凑轮次制造修改。架构跃迁不必被拆成失去意义的单文件小补丁，但每项变更、命令、责任主体和结果仍须白箱记录。
 
-## 5. 评测与独立治理
+## 7. 评测与独立治理
 
 - 分开评测触发、任务效果、安全、真实性、成本、时延、安装、兼容、跨模型迁移、维护和未来适应。
 - 先过硬门，再检查保护任务负迁移，最后使用 Pareto frontier；任何总分不能补偿硬退化。
 - 两轮各六个真正独立 SubAgent 使用隔离上下文和 provider run ID；正式 PASS 还必须绑定运行开始前冻结的外部 review-attestation adapter。软性分歧可由第十三个独立只读 verifier 依据证据解决；未解决的硬域或高严重度问题必须阻断。
 - 本地自写 capability/receipt、角色模拟或重复上下文不能证明独立性；runtime 不支持可信独立实例时返回 `INDEPENDENT_REVIEW_UNAVAILABLE`。
 
-## 6. 发布、安装与回炉
+## 8. 发布、安装与回炉
 
 ```bash
 python3 scripts/wbi.py gate /path/to/wbi-run --output gate.json
@@ -102,7 +149,7 @@ python3 scripts/wbi.py install final.zip --skills-root /runtime-specific/skills-
 
 公开、内部、基础设施与方法类 Skill 使用不同的真实展示证据，不强迫所有 Skill 制作相同 UI。过期、真实失败、安全公告、依赖弃用、新模型/runtime 或更强同行会触发 `REHEAT_REQUIRED`，而不是在同一 run 中无限循环。
 
-## 7. 按需读取
+## 9. 按需读取
 
 - 架构与流程：`ARCHITECTURE.md`、`WORKFLOW.md`、`WHITEBOX_EVIDENCE.md`、`SELF_EVOLUTION.md`。
 - 研究与评测：`FRESHNESS_AND_FUTURE.md`、`COMPETITOR_INTELLIGENCE.md`、`LUBAN_GATES.md`、`EVALUATION.md`。
@@ -111,8 +158,12 @@ python3 scripts/wbi.py install final.zip --skills-root /runtime-specific/skills-
 
 以上文件均位于 `references/`，只读取当前阶段所需内容。
 
-## 8. 最短调用
+## 10. 最短调用
 
 ```text
-调用白箱迭代Skill（Teleiosis），在安装目录外为 <目标 Skill> 冻结 Baseline 并建立多候选白箱工作区；先完成存在性挑战、时效性研究、至少五个真实同行、生态位、真实产物和冻结评测，再执行十个系统视角的证据化完善、2×6 独立复审、第十三个只读终审、回滚和安装包交付。允许架构跃迁与新模型，不得原地覆盖正式版、读取 sealed holdout 或伪造不可用能力。
+调用 Teleiosis v0.0.0.2，在安装目录外冻结 <目标 Skill> 的 Baseline；严格执行 T1×3→C1→M1×3→C2→T2×3→C3→M2×3→C4→T3×3→C5，所有修改仅提交前一第三轮批准的哈希。完成真实同行、五臂因果、六类压力、任务簇统计、市场 L0–L7、十视角、独立复审、Gate、回滚和安装交付。Market 内核只提供证据，不拥有 PROMOTE 权；不得原地覆盖、读取 sealed holdout 或伪造真实市场/独立能力。
 ```
+
+## v0.0.0.2 质量与因果硬门
+
+市场实证内核在汇总前强制执行 holdout 污染、assignment、SRM、跨臂暴露、环境一致性、事前 power plan、可选 judge 校准、市场时间和引用完整性，并用 evidence chain 绑定全部制品。详见 `references/market/QUALITY_AND_CAUSALITY.md`。

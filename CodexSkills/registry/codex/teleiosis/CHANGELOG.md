@@ -1,5 +1,16 @@
 # Changelog
 
+## v0.0.0.2 / Integrated market-evidence control plane — 2026-07-29
+
+- Absorbed `skill-market-lab` into Teleiosis as the platform-neutral `wbi_market` evidence kernel; the standalone Skill is `SUPERSEDED` and no longer owns a separate version or release authority.
+- Froze the exact macro-cycle `T1×3 → C1 → M1×3 → C2 → T2×3 → C3 → M2×3 → C4 → T3×3 → C5`; each invocation is three consecutive subruns and every mutation must atomically commit the directory-tree digest approved by subrun 3.
+- Added a tamper-evident event hash chain and state projection that reject skipping, interleaving, digest drift, post-approval content changes, and unverified final mutations.
+- Added five-arm causal experiments, six stress classes, L0–L7 market evidence, trace-first identity contracts, cluster-level inference, judge calibration, provider lifecycle/freshness checks, holdout-contamination audits, predeclared sequential Canary stops, and budget-normalized utility.
+- Upgraded the experiment contract to Schema 2.0 and made the frozen quality audit mandatory at Gate time: contamination, paired/exclusive assignment integrity, sample-ratio mismatch, environment parity, statistical power, judge calibration, market temporal integrity and task→run→feedback referential integrity now fail closed.
+- Caught and repaired a self-iteration regression where the stricter Schema 2.0 validator landed before its default template and fixtures; the final integrated suite now proves the migrated contract rather than reusing the superseded 36-test PASS.
+- Removed duplicate promotion authority: the market kernel can only emit `EVIDENCE_READY_FOR_TELEIOSIS`; final promotion remains behind Teleiosis hard gates, protected-task checks, external-review requirements and rollback.
+- Preserved the immutable Genesis hash and the existing v0.0.0.1 runtime/release semantics; this delivery is a semantic overlay that must retain all pre-existing Teleiosis files and regression tests.
+
 ## v0.0.0.1 / Genesis-locked self-evolution r31 — 2026-07-26
 
 - Detected a release-document ambiguity only after the r30 archive passed package, install, upgrade and rollback validation: the Codex Task Pack named a different ZIP from README and installation guidance.
@@ -77,3 +88,5 @@
 - Replaced the prior implementation constitution with the user-provided Genesis Baseline.
 - Removed permanent version lock, fixed extension ceiling, one-architecture-reset ceiling, GitHub-only worldview, mandatory visual showcase and unanimous soft-opinion rule.
 - Integrated Darwin, Luban, current primary methods, progressive disclosure, release/reheat and dual white-box governance.
+
+- 新增 Schema 2.0 质量硬门：holdout 污染、SRM、assignment、环境一致性、功效、评委校准、市场时间、引用完整性和 evidence chain。

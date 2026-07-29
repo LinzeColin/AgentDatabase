@@ -1,0 +1,4 @@
+interface:
+  display_name: Teleiosis
+  short_description: 白箱迭代、市场实证、因果评测与可回滚发布控制面
+  default_prompt: 对目标 Skill 运行 Teleiosis v0.0.0.2；保持 raw Teleiosis 最终晋级权，并按固定 15-subrun 宏观轮次执行。
