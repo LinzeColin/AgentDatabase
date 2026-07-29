@@ -1,0 +1,12 @@
+name: "pacebin"
+website_url: "https://git.crueter.xyz/crueter/pacebin"
+source_code_url: "https://git.crueter.xyz/crueter/pacebin"
+description: "Super-minimal pastebin and file upload service focusing on small executable size, portability, and ease of configuration."
+licenses:
+  - AGPL-3.0
+platforms:
+  - C
+tags:
+  - Pastebins
+  - File Transfer - Single-click & Drag-n-drop Upload
+demo_url: "https://paste.crueter.xyz"

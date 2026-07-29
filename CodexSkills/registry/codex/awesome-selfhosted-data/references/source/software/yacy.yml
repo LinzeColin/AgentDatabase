@@ -1,0 +1,28 @@
+name: Yacy
+website_url: https://yacy.net/en/index.html
+description: Peer based, decentralized search engine server.
+licenses:
+  - GPL-2.0
+platforms:
+  - Java
+  - Docker
+  - K8S
+tags:
+  - Search Engines
+source_code_url: https://github.com/yacy/yacy_search_server
+stargazers_count: 3993
+updated_at: '2026-07-14'
+archived: false
+commit_history:
+  2025-08: 22
+  2025-09: 19
+  2025-10: 10
+  2025-11: 44
+  2025-12: 5
+  2026-01: 28
+  2026-02: 12
+  2026-03: 24
+  2026-04: 8
+  2026-05: 7
+  2026-06: 4
+  2026-07: 41

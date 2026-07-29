@@ -1,0 +1,32 @@
+name: Puter
+website_url: https://puter.com/
+description: Web-based operating system designed to be feature-rich, exceptionally fast, and highly extensible.
+licenses:
+  - AGPL-3.0
+platforms:
+  - Nodejs
+  - Docker
+tags:
+  - File Transfer & Synchronization
+  - Remote Access
+source_code_url: https://github.com/heyputer/puter
+demo_url: https://puter.com/
+stargazers_count: 42890
+updated_at: '2026-07-28'
+archived: false
+current_release:
+  tag: 26.07.2
+  published_at: '2026-07-28'
+commit_history:
+  2025-08: 178
+  2025-09: 260
+  2025-10: 238
+  2025-11: 172
+  2025-12: 201
+  2026-01: 149
+  2026-02: 233
+  2026-03: 174
+  2026-04: 125
+  2026-05: 324
+  2026-06: 120
+  2026-07: 184

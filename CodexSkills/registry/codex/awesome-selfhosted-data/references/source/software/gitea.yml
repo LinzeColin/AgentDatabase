@@ -1,0 +1,32 @@
+name: Gitea
+website_url: https://gitea.com
+description: Git with a cup of tea! Painless self-hosted all-in-one software development service, including Git hosting, code review, team collaboration, package registry and CI/CD.
+licenses:
+  - MIT
+platforms:
+  - Go
+  - Docker
+  - K8S
+tags:
+  - Software Development - Project Management
+source_code_url: https://github.com/go-gitea/gitea
+demo_url: https://demo.gitea.com
+stargazers_count: 57086
+updated_at: '2026-07-28'
+archived: false
+current_release:
+  tag: v1.27.1
+  published_at: '2026-07-27'
+commit_history:
+  2025-08: 74
+  2025-09: 73
+  2025-10: 89
+  2025-11: 68
+  2025-12: 102
+  2026-01: 95
+  2026-02: 134
+  2026-03: 132
+  2026-04: 185
+  2026-05: 201
+  2026-06: 171
+  2026-07: 193

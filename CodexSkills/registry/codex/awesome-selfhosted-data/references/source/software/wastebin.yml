@@ -1,0 +1,31 @@
+name: Wastebin
+website_url: https://github.com/matze/wastebin
+description: Lightweight, minimal and fast pastebin with an SQLite backend.
+licenses:
+  - MIT
+platforms:
+  - Rust
+  - Docker
+tags:
+  - Pastebins
+source_code_url: https://github.com/matze/wastebin
+demo_url: https://bin.bloerg.net
+stargazers_count: 829
+updated_at: '2026-07-26'
+archived: false
+current_release:
+  tag: 3.7.0
+  published_at: '2026-06-22'
+commit_history:
+  2025-08: 12
+  2025-09: 2
+  2025-10: 10
+  2025-11: 2
+  2025-12: 33
+  2026-01: 2
+  2026-02: 5
+  2026-03: 3
+  2026-04: 56
+  2026-05: 8
+  2026-06: 18
+  2026-07: 4

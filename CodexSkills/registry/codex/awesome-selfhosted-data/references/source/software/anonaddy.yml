@@ -1,0 +1,30 @@
+name: AnonAddy
+website_url: https://anonaddy.com
+description: Email forwarding service for creating aliases.
+licenses:
+  - MIT
+platforms:
+  - PHP
+  - Docker
+tags:
+  - Communication - Email - Complete Solutions
+source_code_url: https://github.com/anonaddy/anonaddy
+stargazers_count: 4775
+updated_at: '2026-07-15'
+archived: false
+current_release:
+  tag: v1.7.0
+  published_at: '2026-07-15'
+commit_history:
+  2025-08: 1
+  2025-09: 3
+  2025-10: 2
+  2025-11: 0
+  2025-12: 1
+  2026-01: 9
+  2026-02: 6
+  2026-03: 0
+  2026-04: 3
+  2026-05: 32
+  2026-06: 5
+  2026-07: 7

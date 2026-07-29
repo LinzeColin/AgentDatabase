@@ -1,0 +1,32 @@
+name: LubeLogger
+website_url: https://lubelogger.com
+source_code_url: https://github.com/hargata/lubelog
+description: Web-based vehicle maintenance and fuel mileage tracker.
+licenses:
+  - MIT
+platforms:
+  - Docker
+  - K8S
+  - C#
+tags:
+  - Miscellaneous
+demo_url: https://github.com/hargata/lubelog?tab=readme-ov-file#demo
+stargazers_count: 2718
+updated_at: '2026-07-13'
+archived: false
+current_release:
+  tag: v1.7.0
+  published_at: '2026-07-13'
+commit_history:
+  2025-08: 25
+  2025-09: 31
+  2025-10: 52
+  2025-11: 86
+  2025-12: 42
+  2026-01: 61
+  2026-02: 112
+  2026-03: 21
+  2026-04: 27
+  2026-05: 23
+  2026-06: 11
+  2026-07: 28

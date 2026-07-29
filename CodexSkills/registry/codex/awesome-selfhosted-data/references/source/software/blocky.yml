@@ -1,0 +1,30 @@
+name: blocky
+website_url: https://0xerr0r.github.io/blocky/latest/
+description: Fast and lightweight DNS proxy as ad-blocker for local network with many features (alternative to Pi-hole).
+licenses:
+  - Apache-2.0
+platforms:
+  - Go
+  - Docker
+tags:
+  - DNS
+source_code_url: https://github.com/0xERR0R/blocky
+stargazers_count: 6820
+updated_at: '2026-07-28'
+archived: false
+current_release:
+  tag: v0.34.0
+  published_at: '2026-07-27'
+commit_history:
+  2025-08: 22
+  2025-09: 11
+  2025-10: 44
+  2025-11: 31
+  2025-12: 10
+  2026-01: 15
+  2026-02: 10
+  2026-03: 27
+  2026-04: 11
+  2026-05: 28
+  2026-06: 65
+  2026-07: 31

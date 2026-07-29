@@ -1,0 +1,31 @@
+name: Erxes
+website_url: https://erxes.io/install/
+description: Marketing, sales, and customer service platform designed to help businesses attract more engaged customers.
+licenses:
+  - AGPL-3.0
+  - Commons-Clause
+platforms:
+  - Docker
+  - Nodejs
+tags:
+  - Ticketing
+source_code_url: https://github.com/erxes/erxes
+stargazers_count: 4049
+updated_at: '2026-07-28'
+archived: false
+current_release:
+  tag: 3.0.60
+  published_at: '2026-07-28'
+commit_history:
+  2025-08: 115
+  2025-09: 130
+  2025-10: 199
+  2025-11: 209
+  2025-12: 94
+  2026-01: 162
+  2026-02: 115
+  2026-03: 272
+  2026-04: 211
+  2026-05: 245
+  2026-06: 388
+  2026-07: 197

@@ -1,0 +1,13 @@
+name: Pagure
+website_url: https://pagure.io/pagure
+description: Lightweight, powerful, and flexible git-centric forge with features laying the foundation for federated and decentralized development.
+licenses:
+  - GPL-2.0
+platforms:
+  - Docker
+  - Python
+  - deb
+tags:
+  - Software Development - Project Management
+source_code_url: https://pagure.io/pagure
+demo_url: https://pagure.io/

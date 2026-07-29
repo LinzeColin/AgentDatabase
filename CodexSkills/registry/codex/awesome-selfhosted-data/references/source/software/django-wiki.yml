@@ -1,0 +1,30 @@
+name: django-wiki
+website_url: https://github.com/django-wiki/django-wiki
+description: 'Wiki system with complex functionality for simple integration and a superb interface. Store your knowledge with style: Use django models.'
+licenses:
+  - GPL-3.0
+platforms:
+  - Python
+tags:
+  - Wikis
+source_code_url: https://github.com/django-wiki/django-wiki
+demo_url: https://demo.django-wiki.org/
+stargazers_count: 1929
+updated_at: '2026-06-23'
+archived: false
+current_release:
+  tag: releases/0.12.2
+  published_at: '2025-10-13'
+commit_history:
+  2025-08: 4
+  2025-09: 9
+  2025-10: 4
+  2025-11: 0
+  2025-12: 0
+  2026-01: 0
+  2026-02: 0
+  2026-03: 0
+  2026-04: 0
+  2026-05: 0
+  2026-06: 4
+  2026-07: 0

@@ -1,0 +1,32 @@
+name: Nextcloud
+website_url: https://nextcloud.com/
+description: Access and share your files, calendars, contacts, mail and [more](https://apps.nextcloud.com/) from any device, on your terms.
+licenses:
+  - AGPL-3.0
+platforms:
+  - PHP
+  - deb
+tags:
+  - File Transfer & Synchronization
+  - Groupware
+source_code_url: https://github.com/nextcloud/server
+demo_url: https://try.nextcloud.com/
+stargazers_count: 36280
+updated_at: '2026-07-28'
+archived: false
+current_release:
+  tag: v34.0.2
+  published_at: '2026-07-23'
+commit_history:
+  2025-08: 712
+  2025-09: 558
+  2025-10: 587
+  2025-11: 569
+  2025-12: 418
+  2026-01: 723
+  2026-02: 576
+  2026-03: 448
+  2026-04: 610
+  2026-05: 638
+  2026-06: 797
+  2026-07: 613

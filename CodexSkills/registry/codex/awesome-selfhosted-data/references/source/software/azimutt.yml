@@ -1,0 +1,30 @@
+name: Azimutt
+website_url: https://azimutt.app
+source_code_url: https://github.com/azimuttapp/azimutt
+description: Visual database exploration made for real world databases (big and messy). Explore your database schema as well as data, document them, extend them and even get analysis and guidelines.
+licenses:
+  - MIT
+platforms:
+  - Elixir
+  - Nodejs
+  - Docker
+tags:
+  - Database Management
+  - Software Development - IDE & Tools
+demo_url: https://azimutt.app/gallery/gospeak
+stargazers_count: 2155
+updated_at: '2026-06-20'
+archived: false
+commit_history:
+  2025-08: 0
+  2025-09: 0
+  2025-10: 0
+  2025-11: 0
+  2025-12: 0
+  2026-01: 0
+  2026-02: 0
+  2026-03: 0
+  2026-04: 2
+  2026-05: 0
+  2026-06: 3
+  2026-07: 0

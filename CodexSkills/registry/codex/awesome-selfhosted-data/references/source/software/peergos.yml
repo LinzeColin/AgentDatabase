@@ -1,0 +1,26 @@
+name: Peergos
+website_url: https://peergos.org
+description: Secure and private space online where you can store, share and view your photos, videos, music and documents. Also includes a calendar, news feed, task lists, chat and email client.
+licenses:
+  - AGPL-3.0
+platforms:
+  - Java
+tags:
+  - File Transfer & Synchronization
+source_code_url: https://github.com/Peergos/Peergos
+stargazers_count: 2435
+updated_at: '2026-07-24'
+archived: false
+commit_history:
+  2025-08: 56
+  2025-09: 82
+  2025-10: 75
+  2025-11: 52
+  2025-12: 31
+  2026-01: 4
+  2026-02: 168
+  2026-03: 50
+  2026-04: 155
+  2026-05: 86
+  2026-06: 135
+  2026-07: 25

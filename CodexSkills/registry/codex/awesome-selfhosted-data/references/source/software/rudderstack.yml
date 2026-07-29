@@ -1,0 +1,32 @@
+name: RudderStack
+website_url: https://rudderstack.com/
+description: Collect, unify, transform, and store your customer data, and route it to a wide range of common, popular marketing, sales, and product tools (alternative to Segment).
+licenses:
+  - Elastic-2.0
+platforms:
+  - Docker
+  - K8S
+  - Go
+  - Nodejs
+tags:
+  - Analytics
+source_code_url: https://github.com/rudderlabs/rudder-server/
+stargazers_count: 4461
+updated_at: '2026-07-28'
+archived: false
+current_release:
+  tag: v1.81.4
+  published_at: '2026-07-28'
+commit_history:
+  2025-08: 37
+  2025-09: 45
+  2025-10: 45
+  2025-11: 21
+  2025-12: 18
+  2026-01: 29
+  2026-02: 42
+  2026-03: 36
+  2026-04: 47
+  2026-05: 45
+  2026-06: 63
+  2026-07: 41

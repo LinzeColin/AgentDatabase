@@ -1,0 +1,30 @@
+name: Mealie
+website_url: https://nightly.mealie.io/
+description: Material design inspired recipe manager with category and tag management, shopping-lists, meal-planner, and site customizations. Mealie is focused on simple user interactions to keep the whole family using the app.
+licenses:
+  - MIT
+platforms:
+  - Python
+tags:
+  - Recipe Management
+source_code_url: https://github.com/mealie-recipes/mealie
+demo_url: https://demo.mealie.io
+stargazers_count: 12828
+updated_at: '2026-07-28'
+archived: false
+current_release:
+  tag: v3.22.0
+  published_at: '2026-07-28'
+commit_history:
+  2025-08: 123
+  2025-09: 129
+  2025-10: 104
+  2025-11: 80
+  2025-12: 129
+  2026-01: 95
+  2026-02: 129
+  2026-03: 137
+  2026-04: 118
+  2026-05: 99
+  2026-06: 61
+  2026-07: 93

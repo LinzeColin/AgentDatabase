@@ -1,0 +1,28 @@
+name: SearXNG
+website_url: https://docs.searxng.org/
+description: Internet metasearch engine which aggregates results from various search services and databases (Fork of Searx).
+licenses:
+  - AGPL-3.0
+platforms:
+  - Python
+  - Docker
+tags:
+  - Search Engines
+source_code_url: https://github.com/searxng/searxng/
+depends_3rdparty: true
+stargazers_count: 34552
+updated_at: '2026-07-28'
+archived: false
+commit_history:
+  2025-08: 69
+  2025-09: 79
+  2025-10: 75
+  2025-11: 57
+  2025-12: 55
+  2026-01: 47
+  2026-02: 44
+  2026-03: 74
+  2026-04: 44
+  2026-05: 82
+  2026-06: 125
+  2026-07: 66

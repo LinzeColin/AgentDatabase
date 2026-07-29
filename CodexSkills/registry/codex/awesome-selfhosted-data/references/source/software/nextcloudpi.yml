@@ -1,0 +1,30 @@
+name: NextCloudPi
+website_url: https://github.com/nextcloud/nextcloudpi
+description: Nextcloud preinstalled and preconfigured, with a text and web management interface and all the tools needed to self host private data. With installation images for Raspberry Pi, Odroid, Rock64, Docker, and a curl installer for Armbian/Debian.
+licenses:
+  - GPL-2.0
+platforms:
+  - Shell
+  - PHP
+tags:
+  - Self-hosting Solutions
+source_code_url: https://github.com/nextcloud/nextcloudpi
+stargazers_count: 2924
+updated_at: '2026-06-29'
+archived: false
+current_release:
+  tag: v1.58.0-rc1
+  published_at: '2026-06-28'
+commit_history:
+  2025-08: 0
+  2025-09: 18
+  2025-10: 3
+  2025-11: 23
+  2025-12: 0
+  2026-01: 0
+  2026-02: 0
+  2026-03: 0
+  2026-04: 23
+  2026-05: 0
+  2026-06: 35
+  2026-07: 0

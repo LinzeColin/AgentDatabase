@@ -1,0 +1,12 @@
+name: BookStack
+website_url: https://www.bookstackapp.com/
+description: Organize and store information. Stores documentation in a book like fashion.
+licenses:
+  - MIT
+platforms:
+  - PHP
+  - Docker
+tags:
+  - Wikis
+source_code_url: https://codeberg.org/bookstack/bookstack
+demo_url: https://www.bookstackapp.com/#demo

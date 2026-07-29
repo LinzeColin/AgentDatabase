@@ -1,0 +1,30 @@
+name: copyparty
+website_url: https://github.com/9001/copyparty
+description: Portable file server with accelerated resumable uploads, deduplication, WebDAV, FTP, zeroconf, media indexer, video thumbnails, audio transcoding, and write-only folders, in a single file with no mandatory dependencies.
+licenses:
+  - MIT
+platforms:
+  - Python
+tags:
+  - File Transfer - Web-based File Managers
+source_code_url: https://github.com/9001/copyparty
+demo_url: https://a.ocv.me/pub/demo/
+stargazers_count: 45938
+updated_at: '2026-07-27'
+archived: false
+current_release:
+  tag: v1.20.19
+  published_at: '2026-07-27'
+commit_history:
+  2025-08: 209
+  2025-09: 124
+  2025-10: 111
+  2025-11: 33
+  2025-12: 82
+  2026-01: 117
+  2026-02: 68
+  2026-03: 56
+  2026-04: 41
+  2026-05: 36
+  2026-06: 16
+  2026-07: 60

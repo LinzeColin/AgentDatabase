@@ -1,0 +1,30 @@
+name: Documenso
+website_url: https://documenso.com
+source_code_url: https://github.com/documenso/documenso
+description: Digital document signing platform (alternative to DocuSign).
+licenses:
+  - AGPL-3.0
+platforms:
+  - Nodejs
+  - Docker
+tags:
+  - Document Management
+stargazers_count: 14163
+updated_at: '2026-07-27'
+archived: false
+current_release:
+  tag: v2.15.0
+  published_at: '2026-07-21'
+commit_history:
+  2025-08: 48
+  2025-09: 26
+  2025-10: 27
+  2025-11: 97
+  2025-12: 88
+  2026-01: 62
+  2026-02: 46
+  2026-03: 83
+  2026-04: 39
+  2026-05: 75
+  2026-06: 81
+  2026-07: 30

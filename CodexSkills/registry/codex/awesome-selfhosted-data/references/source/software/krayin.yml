@@ -1,0 +1,30 @@
+name: Krayin
+website_url: https://krayincrm.com/
+description: CRM solution for SMEs and Enterprises for complete customer lifecycle management.
+licenses:
+  - MIT
+platforms:
+  - PHP
+tags:
+  - Customer Relationship Management (CRM)
+source_code_url: https://github.com/krayin/laravel-crm
+demo_url: https://demo.krayincrm.com/
+stargazers_count: 23534
+updated_at: '2026-07-24'
+archived: false
+current_release:
+  tag: v2.2.4
+  published_at: '2026-07-23'
+commit_history:
+  2025-08: 6
+  2025-09: 31
+  2025-10: 6
+  2025-11: 6
+  2025-12: 18
+  2026-01: 14
+  2026-02: 11
+  2026-03: 73
+  2026-04: 49
+  2026-05: 45
+  2026-06: 30
+  2026-07: 67

@@ -1,0 +1,32 @@
+name: Navidrome Music Server
+website_url: https://www.navidrome.org
+description: Modern Music Server and Streamer, compatible with Subsonic/Airsonic.
+licenses:
+  - GPL-3.0
+platforms:
+  - Docker
+  - Go
+tags:
+  - Media Streaming - Audio Streaming
+source_code_url: https://github.com/navidrome/navidrome
+demo_url: https://www.navidrome.org/demo
+related_software_url: https://www.navidrome.org/docs/overview/#apps
+stargazers_count: 22556
+updated_at: '2026-07-28'
+archived: false
+current_release:
+  tag: v0.63.2
+  published_at: '2026-07-11'
+commit_history:
+  2025-08: 0
+  2025-09: 0
+  2025-10: 10
+  2025-11: 69
+  2025-12: 44
+  2026-01: 54
+  2026-02: 81
+  2026-03: 114
+  2026-04: 71
+  2026-05: 43
+  2026-06: 62
+  2026-07: 74

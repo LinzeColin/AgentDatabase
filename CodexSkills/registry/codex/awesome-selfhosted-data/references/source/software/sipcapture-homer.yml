@@ -1,0 +1,31 @@
+name: SIPCAPTURE Homer
+website_url: https://www.sipcapture.org/
+description: Troubleshooting and monitoring VoIP calls.
+licenses:
+  - AGPL-3.0
+platforms:
+  - Nodejs
+  - Go
+  - Docker
+tags:
+  - Communication - SIP
+source_code_url: https://github.com/sipcapture/homer
+stargazers_count: 1996
+updated_at: '2026-07-24'
+archived: false
+commit_history:
+  2025-08: 1
+  2025-09: 1
+  2025-10: 1
+  2025-11: 2
+  2025-12: 0
+  2026-01: 1
+  2026-02: 3
+  2026-03: 0
+  2026-04: 0
+  2026-05: 221
+  2026-06: 178
+  2026-07: 62
+current_release:
+  tag: 11.0.300
+  published_at: '2026-07-24'

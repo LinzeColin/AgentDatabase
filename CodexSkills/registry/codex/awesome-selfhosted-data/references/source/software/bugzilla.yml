@@ -1,0 +1,26 @@
+name: Bugzilla
+website_url: https://www.bugzilla.org/
+description: General-purpose bugtracker and testing tool originally developed and used by the Mozilla project.
+licenses:
+  - MPL-2.0
+platforms:
+  - Perl
+tags:
+  - Ticketing
+source_code_url: https://github.com/bugzilla/bugzilla
+stargazers_count: 847
+updated_at: '2026-07-27'
+archived: false
+commit_history:
+  2025-08: 0
+  2025-09: 1
+  2025-10: 0
+  2025-11: 0
+  2025-12: 0
+  2026-01: 0
+  2026-02: 1
+  2026-03: 0
+  2026-04: 0
+  2026-05: 0
+  2026-06: 3
+  2026-07: 12

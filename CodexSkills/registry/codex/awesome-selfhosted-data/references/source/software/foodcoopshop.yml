@@ -1,0 +1,30 @@
+name: FoodCoopShop
+website_url: https://www.foodcoopshop.com/
+description: User-friendly software for food-coops.
+licenses:
+  - AGPL-3.0
+platforms:
+  - PHP
+  - Docker
+tags:
+  - Community-Supported Agriculture (CSA)
+source_code_url: https://github.com/foodcoopshop/foodcoopshop
+stargazers_count: 122
+updated_at: '2026-07-27'
+archived: false
+current_release:
+  tag: v4.2.0
+  published_at: '2026-03-04'
+commit_history:
+  2025-08: 19
+  2025-09: 32
+  2025-10: 18
+  2025-11: 18
+  2025-12: 20
+  2026-01: 13
+  2026-02: 23
+  2026-03: 37
+  2026-04: 75
+  2026-05: 80
+  2026-06: 118
+  2026-07: 28

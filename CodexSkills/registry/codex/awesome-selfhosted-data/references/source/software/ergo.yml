@@ -1,0 +1,30 @@
+name: Ergo
+website_url: https://ergo.chat/
+description: Modern IRCv3 server written in Go, combining the features of an ircd, a services framework, and a bouncer.
+licenses:
+  - MIT
+platforms:
+  - Go
+  - Docker
+tags:
+  - Communication - IRC
+source_code_url: https://github.com/ergochat/ergo
+stargazers_count: 3282
+updated_at: '2026-07-28'
+archived: false
+current_release:
+  tag: v2.19.0
+  published_at: '2026-07-21'
+commit_history:
+  2025-08: 3
+  2025-09: 0
+  2025-10: 2
+  2025-11: 5
+  2025-12: 25
+  2026-01: 6
+  2026-02: 6
+  2026-03: 36
+  2026-04: 16
+  2026-05: 7
+  2026-06: 7
+  2026-07: 33

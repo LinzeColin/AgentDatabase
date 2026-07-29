@@ -1,0 +1,29 @@
+name: SourceBans++
+website_url: https://sbpp.github.io/
+description: Admin, ban, and communication management system for games running on the Source engine.
+licenses:
+  - CC-BY-SA-4.0
+platforms:
+  - PHP
+tags:
+  - Games - Administrative Utilities & Control Panels
+source_code_url: https://github.com/sbpp/sourcebans-pp
+stargazers_count: 377
+updated_at: '2026-07-28'
+archived: false
+current_release:
+  tag: 2.0.2
+  published_at: '2026-07-28'
+commit_history:
+  2025-08: 0
+  2025-09: 0
+  2025-10: 0
+  2025-11: 8
+  2025-12: 1
+  2026-01: 0
+  2026-02: 3
+  2026-03: 0
+  2026-04: 1
+  2026-05: 256
+  2026-06: 10
+  2026-07: 10

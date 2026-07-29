@@ -1,0 +1,10 @@
+name: RhodeCode
+website_url: https://rhodecode.com/
+description: Unify and simplify repository management for Git, Subversion, and Mercurial.
+licenses:
+  - AGPL-3.0
+platforms:
+  - Python
+tags:
+  - Software Development - Project Management
+source_code_url: https://code.rhodecode.com/

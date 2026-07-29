@@ -1,0 +1,31 @@
+name: Kavita
+website_url: https://www.kavitareader.com/
+description: Cross-platform e-book/manga/comic/pdf server and web reader with user management, ratings and reviews, and metadata support.
+licenses:
+  - GPL-3.0
+platforms:
+  - .NET
+  - Docker
+tags:
+  - Document Management - E-books
+source_code_url: https://github.com/Kareadita/Kavita
+demo_url: https://www.kavitareader.com/#demo
+stargazers_count: 11356
+updated_at: '2026-07-26'
+archived: false
+current_release:
+  tag: v0.9.0.2
+  published_at: '2026-05-14'
+commit_history:
+  2025-08: 26
+  2025-09: 18
+  2025-10: 38
+  2025-11: 9
+  2025-12: 31
+  2026-01: 55
+  2026-02: 7
+  2026-03: 79
+  2026-04: 62
+  2026-05: 17
+  2026-06: 19
+  2026-07: 10

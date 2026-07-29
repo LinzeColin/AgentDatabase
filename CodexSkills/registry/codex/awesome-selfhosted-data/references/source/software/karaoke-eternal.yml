@@ -1,0 +1,28 @@
+name: Karaoke Eternal
+website_url: https://www.karaoke-eternal.com
+description: Host awesome karaoke parties where everyone can easily find and queue songs from their phone's browser. The player is also fully browser-based with support for MP3+G, MP4 and WebGL visualizations.
+licenses:
+  - ISC
+platforms:
+  - Docker
+  - Nodejs
+tags:
+  - Media Streaming - Multimedia Streaming
+source_code_url: https://github.com/bhj/KaraokeEternal
+stargazers_count: 871
+updated_at: '2026-02-14'
+archived: false
+current_release:
+  tag: v2.0.2
+  published_at: '2026-02-15'
+commit_history:
+  2025-10: 4
+  2025-11: 5
+  2025-12: 50
+  2026-01: 16
+  2026-02: 13
+  2026-03: 0
+  2026-04: 0
+  2026-05: 0
+  2026-06: 0
+  2026-07: 0

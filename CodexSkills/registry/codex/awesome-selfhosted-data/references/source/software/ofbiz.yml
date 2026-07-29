@@ -1,0 +1,26 @@
+name: OFBiz
+website_url: https://ofbiz.apache.org/
+description: Enterprise Resource Planning system with a suite of business applications flexible enough to be used across any industry.
+licenses:
+  - Apache-2.0
+platforms:
+  - Java
+tags:
+  - Resource Planning
+source_code_url: https://github.com/apache/ofbiz-framework
+stargazers_count: 1095
+updated_at: '2026-07-28'
+archived: false
+commit_history:
+  2025-08: 4
+  2025-09: 12
+  2025-10: 18
+  2025-11: 17
+  2025-12: 16
+  2026-01: 24
+  2026-02: 18
+  2026-03: 62
+  2026-04: 100
+  2026-05: 130
+  2026-06: 140
+  2026-07: 69

@@ -1,0 +1,29 @@
+name: NewsBlur
+website_url: https://www.newsblur.com/
+description: Personal news reader that brings people together to talk about the world. A new sound of an old instrument.
+licenses:
+  - MIT
+platforms:
+  - Python
+tags:
+  - Feed Readers
+source_code_url: https://github.com/samuelclay/NewsBlur
+stargazers_count: 7560
+updated_at: '2026-07-28'
+archived: false
+current_release:
+  tag: v0.1.0
+  published_at: '2026-03-17'
+commit_history:
+  2025-08: 3
+  2025-09: 2
+  2025-10: 199
+  2025-11: 97
+  2025-12: 146
+  2026-01: 370
+  2026-02: 499
+  2026-03: 737
+  2026-04: 187
+  2026-05: 89
+  2026-06: 57
+  2026-07: 72

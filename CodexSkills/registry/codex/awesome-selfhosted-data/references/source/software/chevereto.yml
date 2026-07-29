@@ -1,0 +1,30 @@
+name: Chevereto
+website_url: https://chevereto.com/
+description: Ultimate image sharing software. Create your very own personal image hosting website in just minutes.
+licenses:
+  - AGPL-3.0
+platforms:
+  - PHP
+  - Docker
+tags:
+  - Photo Galleries
+source_code_url: https://github.com/chevereto/chevereto
+stargazers_count: 948
+updated_at: '2026-07-10'
+archived: false
+current_release:
+  tag: 4.5.5
+  published_at: '2026-07-10'
+commit_history:
+  2025-08: 0
+  2025-09: 0
+  2025-10: 1
+  2025-11: 0
+  2025-12: 2
+  2026-01: 1
+  2026-02: 0
+  2026-03: 0
+  2026-04: 3
+  2026-05: 1
+  2026-06: 1
+  2026-07: 1

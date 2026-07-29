@@ -1,0 +1,30 @@
+name: Hoppscotch Community Edition
+website_url: https://hoppscotch.io
+description: Fast and beautiful API request builder.
+licenses:
+  - MIT
+platforms:
+  - Nodejs
+  - Docker
+tags:
+  - Software Development - API Management
+source_code_url: https://github.com/hoppscotch/hoppscotch
+stargazers_count: 79916
+updated_at: '2026-07-15'
+archived: false
+current_release:
+  tag: 2026.6.1
+  published_at: '2026-07-15'
+commit_history:
+  2025-08: 31
+  2025-09: 27
+  2025-10: 40
+  2025-11: 33
+  2025-12: 35
+  2026-01: 32
+  2026-02: 34
+  2026-03: 34
+  2026-04: 38
+  2026-05: 22
+  2026-06: 23
+  2026-07: 6

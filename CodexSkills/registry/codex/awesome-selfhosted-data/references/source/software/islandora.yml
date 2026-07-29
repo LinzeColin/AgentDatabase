@@ -1,0 +1,25 @@
+name: Islandora
+website_url: https://www.islandora.ca/
+description: Drupal module for browsing and managing Fedora-based digital repositories.
+licenses:
+  - GPL-3.0
+platforms:
+  - PHP
+tags:
+  - Document Management - Institutional Repository and Digital Library Software
+source_code_url: https://github.com/Islandora/islandora
+demo_url: https://sandbox.islandora.ca/
+stargazers_count: 157
+updated_at: '2026-07-23'
+archived: false
+current_release:
+  tag: 2.18.5
+  published_at: '2026-07-23'
+commit_history:
+  2026-01: 2
+  2026-02: 2
+  2026-03: 1
+  2026-04: 0
+  2026-05: 4
+  2026-06: 3
+  2026-07: 1

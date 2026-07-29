@@ -1,0 +1,29 @@
+name: auto-mcs
+website_url: https://www.auto-mcs.com
+source_code_url: https://github.com/macarooni-man/auto-mcs
+description: Cross-platform Minecraft server manager.
+licenses:
+  - AGPL-3.0
+platforms:
+  - Python
+tags:
+  - Games - Administrative Utilities & Control Panels
+stargazers_count: 479
+updated_at: '2026-07-14'
+archived: false
+current_release:
+  tag: v2.3.9
+  published_at: '2026-07-14'
+commit_history:
+  2025-08: 37
+  2025-09: 81
+  2025-10: 168
+  2025-11: 0
+  2025-12: 21
+  2026-01: 59
+  2026-02: 78
+  2026-03: 37
+  2026-04: 6
+  2026-05: 11
+  2026-06: 10
+  2026-07: 8

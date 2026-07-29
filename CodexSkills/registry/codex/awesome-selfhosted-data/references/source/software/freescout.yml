@@ -1,0 +1,31 @@
+name: FreeScout
+website_url: https://freescout.net/
+description: Email-based customer support application, help desk and shared mailbox (alternative to Zendesk and Help Scout).
+licenses:
+  - AGPL-3.0
+platforms:
+  - PHP
+  - Docker
+tags:
+  - Ticketing
+source_code_url: https://github.com/freescout-help-desk/freescout
+demo_url: https://demo.freescout.net/login
+stargazers_count: 4441
+updated_at: '2026-07-25'
+archived: false
+current_release:
+  tag: 1.8.231
+  published_at: '2026-07-25'
+commit_history:
+  2025-08: 19
+  2025-09: 1
+  2025-10: 25
+  2025-11: 22
+  2025-12: 26
+  2026-01: 21
+  2026-02: 60
+  2026-03: 63
+  2026-04: 109
+  2026-05: 42
+  2026-06: 41
+  2026-07: 61

@@ -1,0 +1,17 @@
+name: Crafty Controller
+website_url: https://craftycontrol.com/
+description: Minecraft launcher and manager that allows users to start and administer Minecraft servers from a user-friendly interface.
+licenses:
+  - GPL-3.0
+platforms:
+  - Docker
+  - Python
+tags:
+  - Games - Administrative Utilities & Control Panels
+source_code_url: https://gitlab.com/crafty-controller/crafty-4
+stargazers_count: 242
+updated_at: '2026-06-16'
+archived: false
+current_release:
+  tag: v4.10.7
+  published_at: '2026-06-16'

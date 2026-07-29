@@ -1,0 +1,30 @@
+name: Mainsail
+website_url: https://docs.mainsail.xyz/
+description: Modern and responsive user interface for the Klipper 3D printer firmware. Control and monitor your printer from everywhere, from any device.
+licenses:
+  - GPL-3.0
+platforms:
+  - Docker
+  - Python
+tags:
+  - Manufacturing
+source_code_url: https://github.com/mainsail-crew/mainsail
+stargazers_count: 2182
+updated_at: '2026-07-28'
+archived: false
+current_release:
+  tag: v2.18.2
+  published_at: '2026-07-05'
+commit_history:
+  2025-08: 6
+  2025-09: 6
+  2025-10: 2
+  2025-11: 28
+  2025-12: 63
+  2026-01: 37
+  2026-02: 14
+  2026-03: 7
+  2026-04: 9
+  2026-05: 10
+  2026-06: 59
+  2026-07: 31

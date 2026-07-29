@@ -1,0 +1,31 @@
+name: WYGIWYH
+website_url: https://github.com/eitchtee/WYGIWYH
+source_code_url: https://github.com/eitchtee/WYGIWYH
+description: Simple and powerful finance tracker.
+demo_url: https://wygiwyh-demo.herculino.com/
+licenses:
+  - AGPL-3.0
+platforms:
+  - Docker
+  - Python
+tags:
+  - Money, Budgeting & Management
+stargazers_count: 889
+updated_at: '2026-07-18'
+archived: false
+current_release:
+  tag: 0.22.1
+  published_at: '2026-07-10'
+commit_history:
+  2025-08: 134
+  2025-09: 79
+  2025-10: 41
+  2025-11: 55
+  2025-12: 116
+  2026-01: 61
+  2026-02: 31
+  2026-03: 13
+  2026-04: 32
+  2026-05: 13
+  2026-06: 39
+  2026-07: 21

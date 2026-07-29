@@ -1,0 +1,30 @@
+name: OnionShare
+website_url: https://github.com/onionshare/onionshare
+description: Securely and anonymously share a file of any size.
+licenses:
+  - GPL-3.0
+platforms:
+  - Python
+  - deb
+tags:
+  - File Transfer - Single-click & Drag-n-drop Upload
+source_code_url: https://github.com/onionshare/onionshare
+stargazers_count: 7045
+updated_at: '2026-07-28'
+archived: false
+current_release:
+  tag: v2.6.5
+  published_at: '2026-07-28'
+commit_history:
+  2025-08: 0
+  2025-09: 0
+  2025-10: 0
+  2025-11: 5
+  2025-12: 0
+  2026-01: 0
+  2026-02: 0
+  2026-03: 35
+  2026-04: 0
+  2026-05: 18
+  2026-06: 61
+  2026-07: 15

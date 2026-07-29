@@ -1,0 +1,30 @@
+name: InvoiceShelf
+website_url: https://invoiceshelf.com/
+source_code_url: https://github.com/InvoiceShelf/InvoiceShelf
+description: Track expenses, payments & create professional invoices & estimates (fork of Crater).
+licenses:
+  - AGPL-3.0
+platforms:
+  - PHP
+  - Docker
+tags:
+  - Money, Budgeting & Management
+stargazers_count: 1769
+updated_at: '2026-07-28'
+archived: false
+current_release:
+  tag: 3.0.0-alpha.1
+  published_at: '2026-06-14'
+commit_history:
+  2025-08: 25
+  2025-09: 15
+  2025-10: 0
+  2025-11: 0
+  2025-12: 0
+  2026-01: 2
+  2026-02: 12
+  2026-03: 76
+  2026-04: 187
+  2026-05: 0
+  2026-06: 29
+  2026-07: 3

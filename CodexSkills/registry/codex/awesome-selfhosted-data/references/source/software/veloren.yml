@@ -1,0 +1,16 @@
+name: Veloren
+website_url: https://veloren.net/
+description: Multiplayer RPG. Open-source game inspired by Cube World, Legend of Zelda, Dwarf Fortress and Minecraft.
+licenses:
+  - GPL-3.0
+platforms:
+  - Rust
+tags:
+  - Games
+source_code_url: https://gitlab.com/veloren/veloren
+stargazers_count: 2382
+updated_at: '2026-07-27'
+archived: false
+current_release:
+  tag: v0.18.0
+  published_at: '2026-01-23'

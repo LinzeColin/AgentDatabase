@@ -1,0 +1,30 @@
+name: draw.io
+website_url: https://draw.io
+description: Diagram software for making flowcharts, process diagrams, org charts, UML, ER and network diagrams.
+licenses:
+  - Apache-2.0
+platforms:
+  - Javascript
+  - Docker
+tags:
+  - Note-taking & Editors
+source_code_url: https://github.com/jgraph/drawio
+stargazers_count: 7131
+updated_at: '2026-07-26'
+archived: false
+current_release:
+  tag: v31.1.2
+  published_at: '2026-07-26'
+commit_history:
+  2025-08: 3
+  2025-09: 3
+  2025-10: 2
+  2025-11: 3
+  2025-12: 8
+  2026-01: 6
+  2026-02: 2
+  2026-03: 6
+  2026-04: 2
+  2026-05: 7
+  2026-06: 5
+  2026-07: 11

@@ -1,0 +1,29 @@
+name: Pterodactyl
+website_url: https://pterodactyl.io/
+description: Management panel for game servers, with an intuitive UI for end users.
+licenses:
+  - MIT
+platforms:
+  - PHP
+tags:
+  - Games - Administrative Utilities & Control Panels
+source_code_url: https://github.com/pterodactyl/panel
+stargazers_count: 9064
+updated_at: '2026-07-27'
+archived: false
+current_release:
+  tag: v1.14.1
+  published_at: '2026-06-29'
+commit_history:
+  2025-08: 0
+  2025-09: 0
+  2025-10: 0
+  2025-11: 1
+  2025-12: 18
+  2026-01: 14
+  2026-02: 12
+  2026-03: 7
+  2026-04: 3
+  2026-05: 4
+  2026-06: 23
+  2026-07: 4

@@ -1,0 +1,32 @@
+name: Dolibarr
+website_url: https://www.dolibarr.org/
+description: Modern CRM software package to manage your company or foundation activity (contacts, suppliers, invoices, orders, stocks, agenda, accounting, ...).
+licenses:
+  - GPL-3.0
+platforms:
+  - PHP
+  - deb
+tags:
+  - Resource Planning
+  - Customer Relationship Management (CRM)
+source_code_url: https://github.com/Dolibarr/dolibarr
+demo_url: https://www.dolibarr.org/onlinedemo.php
+stargazers_count: 7456
+updated_at: '2026-07-28'
+archived: false
+current_release:
+  tag: 22.0.5
+  published_at: '2026-05-26'
+commit_history:
+  2025-08: 684
+  2025-09: 779
+  2025-10: 822
+  2025-11: 1004
+  2025-12: 206
+  2026-01: 105
+  2026-02: 281
+  2026-03: 723
+  2026-04: 690
+  2026-05: 558
+  2026-06: 816
+  2026-07: 386

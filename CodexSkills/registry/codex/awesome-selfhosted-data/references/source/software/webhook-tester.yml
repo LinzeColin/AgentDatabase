@@ -1,0 +1,32 @@
+name: WebHook Tester
+source_code_url: https://github.com/tarampampam/webhook-tester
+website_url: https://github.com/tarampampam/webhook-tester
+description: Powerful tool for testing WebHooks and more.
+licenses:
+  - MIT
+platforms:
+  - Docker
+  - Go
+  - deb
+  - K8S
+tags:
+  - Software Development - Testing
+stargazers_count: 519
+updated_at: '2026-05-14'
+archived: false
+current_release:
+  tag: v2.3.0
+  published_at: '2026-04-13'
+commit_history:
+  2025-08: 12
+  2025-09: 2
+  2025-10: 4
+  2025-11: 16
+  2025-12: 3
+  2026-01: 0
+  2026-02: 7
+  2026-03: 5
+  2026-04: 7
+  2026-05: 5
+  2026-06: 0
+  2026-07: 0

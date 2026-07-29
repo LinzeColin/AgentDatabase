@@ -1,0 +1,29 @@
+name: Bookwyrm
+website_url: https://joinbookwyrm.com/
+description: Social network for tracking your reading, talking about books, writing reviews, and discovering what to read next.
+licenses:
+  - ⊘ Proprietary
+platforms:
+  - Python
+tags:
+  - Document Management - E-books
+source_code_url: https://github.com/bookwyrm-social/bookwyrm
+stargazers_count: 2754
+updated_at: '2026-07-28'
+archived: false
+current_release:
+  tag: v0.9.1
+  published_at: '2026-07-20'
+commit_history:
+  2025-08: 74
+  2025-09: 89
+  2025-10: 22
+  2025-11: 109
+  2025-12: 44
+  2026-01: 125
+  2026-02: 222
+  2026-03: 43
+  2026-04: 40
+  2026-05: 154
+  2026-06: 221
+  2026-07: 120

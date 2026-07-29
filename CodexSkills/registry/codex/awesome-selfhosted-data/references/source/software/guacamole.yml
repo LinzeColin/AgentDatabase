@@ -1,0 +1,27 @@
+name: Guacamole
+website_url: https://guacamole.apache.org
+description: Clientless remote desktop gateway supporting standard protocols like VNC and RDP.
+licenses:
+  - Apache-2.0
+platforms:
+  - Java
+  - C
+tags:
+  - Remote Access
+source_code_url: https://github.com/apache/guacamole-server
+stargazers_count: 3925
+updated_at: '2026-07-28'
+archived: false
+commit_history:
+  2025-08: 12
+  2025-09: 16
+  2025-10: 8
+  2025-11: 24
+  2025-12: 15
+  2026-01: 8
+  2026-02: 9
+  2026-03: 46
+  2026-04: 26
+  2026-05: 25
+  2026-06: 5
+  2026-07: 30

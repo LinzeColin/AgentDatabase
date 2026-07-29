@@ -1,0 +1,30 @@
+name: Beaver Habit Tracker
+website_url: https://github.com/daya0576/beaverhabits
+source_code_url: https://github.com/daya0576/beaverhabits
+description: Habit tracking app to save your precious moments in your fleeting life.
+licenses:
+  - BSD-3-Clause
+platforms:
+  - Docker
+tags:
+  - Time Tracking
+demo_url: https://beaverhabits.com/demo
+stargazers_count: 1808
+updated_at: '2026-07-27'
+archived: false
+current_release:
+  tag: v0.10.0
+  published_at: '2026-07-26'
+commit_history:
+  2025-08: 21
+  2025-09: 0
+  2025-10: 6
+  2025-11: 9
+  2025-12: 28
+  2026-01: 24
+  2026-02: 13
+  2026-03: 2
+  2026-04: 2
+  2026-05: 3
+  2026-06: 1
+  2026-07: 6

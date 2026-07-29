@@ -1,0 +1,32 @@
+name: Homer
+website_url: https://github.com/bastienwirtz/homer
+description: Dead simple static homepage to expose your server services, with an easy yaml configuration and connectivity check.
+licenses:
+  - Apache-2.0
+platforms:
+  - Docker
+  - K8S
+  - Nodejs
+tags:
+  - Personal Dashboards
+source_code_url: https://github.com/bastienwirtz/homer
+demo_url: https://homer-demo.netlify.app
+stargazers_count: 11509
+updated_at: '2026-07-15'
+archived: false
+current_release:
+  tag: v26.4.2
+  published_at: '2026-04-18'
+commit_history:
+  2025-08: 4
+  2025-09: 26
+  2025-10: 17
+  2025-11: 6
+  2025-12: 1
+  2026-01: 1
+  2026-02: 0
+  2026-03: 0
+  2026-04: 27
+  2026-05: 0
+  2026-06: 0
+  2026-07: 11

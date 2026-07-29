@@ -1,0 +1,31 @@
+name: admidio
+website_url: https://www.admidio.org/
+description: User management system for websites of organizations and groups. The system has a flexible role model so that it’s possible to reflect the structure and permissions of your organization.
+licenses:
+  - GPL-2.0
+platforms:
+  - PHP
+  - Docker
+tags:
+  - Human Resources Management (HRM)
+source_code_url: https://github.com/Admidio/admidio
+demo_url: https://www.admidio.org/demo/
+stargazers_count: 470
+updated_at: '2026-07-27'
+archived: false
+current_release:
+  tag: v5.0.11
+  published_at: '2026-07-06'
+commit_history:
+  2025-08: 53
+  2025-09: 67
+  2025-10: 106
+  2025-11: 54
+  2025-12: 28
+  2026-01: 50
+  2026-02: 82
+  2026-03: 80
+  2026-04: 28
+  2026-05: 41
+  2026-06: 26
+  2026-07: 21

@@ -1,0 +1,29 @@
+name: Loomio
+website_url: https://www.loomio.org/
+description: Collaborative decision-making tool that makes it easy for anyone to participate in decisions which affect them.
+licenses:
+  - AGPL-3.0
+platforms:
+  - Docker
+tags:
+  - Communication - Social Networks and Forums
+source_code_url: https://github.com/loomio/loomio
+stargazers_count: 2584
+updated_at: '2026-07-28'
+archived: false
+current_release:
+  tag: v3.1.3
+  published_at: '2026-07-25'
+commit_history:
+  2025-08: 114
+  2025-09: 126
+  2025-10: 140
+  2025-11: 167
+  2025-12: 66
+  2026-01: 119
+  2026-02: 131
+  2026-03: 100
+  2026-04: 241
+  2026-05: 284
+  2026-06: 341
+  2026-07: 213

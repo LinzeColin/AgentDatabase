@@ -1,0 +1,30 @@
+name: WeTTY
+website_url: https://butlerx.github.io/wetty/#/
+description: Terminal in browser over http/https.
+licenses:
+  - MIT
+platforms:
+  - Docker
+  - Nodejs
+tags:
+  - Miscellaneous
+source_code_url: https://github.com/butlerx/wetty
+stargazers_count: 5357
+updated_at: '2026-07-24'
+archived: false
+current_release:
+  tag: v3.2.0
+  published_at: '2026-07-16'
+commit_history:
+  2025-08: 0
+  2025-09: 0
+  2025-10: 1
+  2025-11: 0
+  2025-12: 0
+  2026-01: 0
+  2026-02: 1
+  2026-03: 0
+  2026-04: 0
+  2026-05: 34
+  2026-06: 17
+  2026-07: 15

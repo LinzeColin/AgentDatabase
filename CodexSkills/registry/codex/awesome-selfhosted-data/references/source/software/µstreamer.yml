@@ -1,0 +1,27 @@
+name: µStreamer
+website_url: https://github.com/pikvm/ustreamer
+description: Lightweight and very quick server to stream MJPEG video from any V4L2 device to the net.
+licenses:
+  - GPL-3.0
+platforms:
+  - C
+  - deb
+tags:
+  - Media Streaming - Multimedia Streaming
+source_code_url: https://github.com/pikvm/ustreamer
+stargazers_count: 2017
+updated_at: '2026-07-18'
+archived: false
+commit_history:
+  2025-08: 0
+  2025-09: 0
+  2025-10: 4
+  2025-11: 2
+  2025-12: 0
+  2026-01: 32
+  2026-02: 15
+  2026-03: 2
+  2026-04: 5
+  2026-05: 25
+  2026-06: 9
+  2026-07: 20

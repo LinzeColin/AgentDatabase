@@ -1,0 +1,29 @@
+name: Tigase
+website_url: https://tigase.net/xmpp-server
+description: XMPP server implementation in Java.
+licenses:
+  - GPL-3.0
+platforms:
+  - Java
+tags:
+  - Communication - XMPP - Servers
+source_code_url: https://github.com/tigase/tigase-server
+stargazers_count: 358
+updated_at: '2026-06-28'
+archived: false
+current_release:
+  tag: tigase-server-8.4.2
+  published_at: '2026-07-22'
+commit_history:
+  2025-08: 2
+  2025-09: 5
+  2025-10: 6
+  2025-11: 6
+  2025-12: 3
+  2026-01: 3
+  2026-02: 2
+  2026-03: 0
+  2026-04: 3
+  2026-05: 9
+  2026-06: 3
+  2026-07: 0

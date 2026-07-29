@@ -1,0 +1,30 @@
+name: Pydio
+website_url: https://pydio.com/
+description: Turn any web server into a powerful file management system and an alternative to mainstream cloud storage providers.
+licenses:
+  - AGPL-3.0
+platforms:
+  - Go
+tags:
+  - File Transfer & Synchronization
+source_code_url: https://github.com/pydio/cells
+demo_url: https://pydio.com/en/demo
+stargazers_count: 2236
+updated_at: '2026-07-23'
+archived: false
+current_release:
+  tag: v5.0.2
+  published_at: '2026-06-30'
+commit_history:
+  2025-08: 19
+  2025-09: 54
+  2025-10: 87
+  2025-11: 33
+  2025-12: 35
+  2026-01: 21
+  2026-02: 37
+  2026-03: 45
+  2026-04: 52
+  2026-05: 24
+  2026-06: 24
+  2026-07: 17

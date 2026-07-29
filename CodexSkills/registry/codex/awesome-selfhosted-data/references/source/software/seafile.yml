@@ -1,0 +1,33 @@
+name: Seafile
+website_url: https://www.seafile.com/en/home/
+description: File hosting and sharing solution primary for teams and organizations.
+licenses:
+  - GPL-2.0
+  - GPL-3.0
+  - AGPL-3.0
+  - Apache-2.0
+platforms:
+  - C
+tags:
+  - File Transfer & Synchronization
+  - Groupware
+source_code_url: https://github.com/haiwen/seafile
+stargazers_count: 15046
+updated_at: '2026-07-21'
+archived: false
+current_release:
+  tag: v9.0.5
+  published_at: '2024-02-27'
+commit_history:
+  2025-08: 1
+  2025-09: 1
+  2025-10: 3
+  2025-11: 6
+  2025-12: 2
+  2026-01: 4
+  2026-02: 2
+  2026-03: 3
+  2026-04: 4
+  2026-05: 1
+  2026-06: 9
+  2026-07: 5

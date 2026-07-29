@@ -1,0 +1,31 @@
+name: Etherpad
+website_url: https://etherpad.org/
+description: Highly customizable online editor providing collaborative editing in real-time.
+licenses:
+  - Apache-2.0
+platforms:
+  - Nodejs
+  - Docker
+tags:
+  - Office Suites
+source_code_url: https://github.com/ether/etherpad
+demo_url: https://demo.sandstorm.io/appdemo/h37dm17aa89yrd8zuqpdn36p6zntumtv08fjpu8a8zrte7q1cn60
+stargazers_count: 18464
+updated_at: '2026-07-27'
+archived: false
+current_release:
+  tag: v3.3.2
+  published_at: '2026-06-21'
+commit_history:
+  2025-08: 88
+  2025-09: 36
+  2025-10: 47
+  2025-11: 28
+  2025-12: 32
+  2026-01: 25
+  2026-02: 23
+  2026-03: 56
+  2026-04: 180
+  2026-05: 192
+  2026-06: 128
+  2026-07: 56

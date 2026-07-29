@@ -1,0 +1,31 @@
+name: GameVault
+website_url: https://gamevau.lt
+source_code_url: https://github.com/Phalcode/gamevault-backend
+description: Organize, download, and play DRM-free games from your own server, complete with metadata enrichment and user-friendly interface.
+licenses:
+  - CC-BY-NC-SA-4.0
+platforms:
+  - Nodejs
+  - Docker
+tags:
+  - Games - Administrative Utilities & Control Panels
+demo_url: https://demo.gamevau.lt
+stargazers_count: 320
+updated_at: '2026-02-15'
+archived: false
+current_release:
+  tag: 16.3.0
+  published_at: '2026-02-15'
+commit_history:
+  2025-08: 19
+  2025-09: 31
+  2025-10: 16
+  2025-11: 5
+  2025-12: 19
+  2026-01: 2
+  2026-02: 49
+  2026-03: 0
+  2026-04: 0
+  2026-05: 0
+  2026-06: 0
+  2026-07: 0

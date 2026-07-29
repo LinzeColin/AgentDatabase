@@ -1,0 +1,13 @@
+name: Noosfero
+website_url: https://gitlab.com/noosfero/noosfero
+description: Platform for social and solidarity economy networks with blog, e-Portfolios, CMS, RSS, thematic discussion, events agenda and collective intelligence for solidarity economy in the same system.
+licenses:
+  - AGPL-3.0
+platforms:
+  - Ruby
+tags:
+  - Content Management Systems (CMS)
+source_code_url: https://gitlab.com/noosfero/noosfero
+stargazers_count: 65
+updated_at: '2026-06-21'
+archived: false

@@ -1,0 +1,31 @@
+name: Tamari
+website_url: https://tamariapp.com
+source_code_url: https://github.com/alexbates/Tamari
+description: Recipe manager web app with a built-in collection of recipes. Organize by favorites and categories, create shopping lists, and plan meals.
+licenses:
+  - GPL-3.0
+platforms:
+  - Docker
+  - Python
+tags:
+  - Recipe Management
+demo_url: https://app.tamariapp.com
+stargazers_count: 135
+updated_at: '2026-07-12'
+archived: false
+current_release:
+  tag: v1.6
+  published_at: '2026-05-24'
+commit_history:
+  2025-08: 13
+  2025-09: 0
+  2025-10: 44
+  2025-11: 38
+  2025-12: 0
+  2026-01: 7
+  2026-02: 0
+  2026-03: 0
+  2026-04: 0
+  2026-05: 59
+  2026-06: 0
+  2026-07: 9

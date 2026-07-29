@@ -1,0 +1,31 @@
+name: Bracket
+website_url: https://docs.bracketapp.nl/
+source_code_url: https://github.com/evroon/bracket
+demo_url: https://www.bracketapp.nl/demo
+description: Flexible tournament system to build a tournament setup, add teams, schedule matches, keep track of scores and present ranking live to the public.
+licenses:
+  - AGPL-3.0
+platforms:
+  - Docker
+  - Nodejs
+tags:
+  - Polls and Events
+stargazers_count: 1704
+updated_at: '2026-07-28'
+archived: false
+current_release:
+  tag: v3.0.0-rc1
+  published_at: '2025-12-29'
+commit_history:
+  2025-08: 22
+  2025-09: 17
+  2025-10: 23
+  2025-11: 53
+  2025-12: 57
+  2026-01: 24
+  2026-02: 39
+  2026-03: 44
+  2026-04: 41
+  2026-05: 14
+  2026-06: 18
+  2026-07: 28

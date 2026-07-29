@@ -1,0 +1,30 @@
+name: RSS-Bridge
+website_url: https://github.com/RSS-Bridge/rss-bridge
+description: Generate RSS/ATOM feeds for websites which don't have one.
+licenses:
+  - Unlicense
+platforms:
+  - PHP
+  - Docker
+tags:
+  - Feed Readers
+source_code_url: https://github.com/RSS-Bridge/rss-bridge
+stargazers_count: 9121
+updated_at: '2026-07-24'
+archived: false
+current_release:
+  tag: '2025-08-05'
+  published_at: '2025-08-05'
+commit_history:
+  2025-08: 64
+  2025-09: 34
+  2025-10: 33
+  2025-11: 33
+  2025-12: 3
+  2026-01: 24
+  2026-02: 17
+  2026-03: 22
+  2026-04: 10
+  2026-05: 19
+  2026-06: 3
+  2026-07: 5

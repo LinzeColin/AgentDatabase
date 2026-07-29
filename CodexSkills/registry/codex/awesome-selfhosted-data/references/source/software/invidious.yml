@@ -1,0 +1,32 @@
+name: Invidious
+website_url: https://github.com/iv-org/invidious
+description: Alternative YouTube front-end.
+licenses:
+  - AGPL-3.0
+platforms:
+  - Docker
+  - Crystal
+tags:
+  - Media Streaming - Video Streaming
+source_code_url: https://github.com/iv-org/invidious
+demo_url: https://docs.invidious.io/instances/
+depends_3rdparty: true
+stargazers_count: 20840
+updated_at: '2026-07-28'
+archived: false
+current_release:
+  tag: v2.20260723.0
+  published_at: '2026-07-23'
+commit_history:
+  2025-08: 18
+  2025-09: 71
+  2025-10: 4
+  2025-11: 3
+  2025-12: 27
+  2026-01: 8
+  2026-02: 21
+  2026-03: 4
+  2026-04: 10
+  2026-05: 19
+  2026-06: 16
+  2026-07: 13

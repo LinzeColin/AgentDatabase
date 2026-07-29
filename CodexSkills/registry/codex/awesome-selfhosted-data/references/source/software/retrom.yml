@@ -1,0 +1,30 @@
+name: Retrom
+website_url: https://github.com/JMBeresford/retrom
+source_code_url: https://github.com/JMBeresford/retrom
+description: Private cloud game library distribution server + frontend/launcher.
+licenses:
+  - GPL-3.0
+platforms:
+  - Docker
+  - Rust
+tags:
+  - Games - Administrative Utilities & Control Panels
+stargazers_count: 2021
+updated_at: '2026-07-02'
+archived: false
+current_release:
+  tag: v0.8.4
+  published_at: '2026-06-14'
+commit_history:
+  2025-08: 51
+  2025-09: 21
+  2025-10: 17
+  2025-11: 41
+  2025-12: 25
+  2026-01: 34
+  2026-02: 38
+  2026-03: 50
+  2026-04: 6
+  2026-05: 11
+  2026-06: 12
+  2026-07: 3

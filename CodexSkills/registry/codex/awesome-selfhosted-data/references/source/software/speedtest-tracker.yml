@@ -1,0 +1,30 @@
+name: Speedtest Tracker
+website_url: https://docs.speedtest-tracker.dev/
+source_code_url: https://github.com/alexjustesen/speedtest-tracker
+description: Monitor the performance and uptime of your internet connection.
+licenses:
+  - MIT
+platforms:
+  - Docker
+  - K8S
+tags:
+  - Network Utilities
+stargazers_count: 5851
+updated_at: '2026-07-24'
+archived: false
+current_release:
+  tag: v1.14.6
+  published_at: '2026-07-23'
+commit_history:
+  2025-08: 3
+  2025-09: 8
+  2025-10: 8
+  2025-11: 54
+  2025-12: 54
+  2026-01: 13
+  2026-02: 19
+  2026-03: 7
+  2026-04: 9
+  2026-05: 10
+  2026-06: 7
+  2026-07: 8

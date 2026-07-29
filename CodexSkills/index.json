@@ -6,8 +6,8 @@
     "claude": "Claude Skill（Anthropic 侧）",
     "agents": "Agent Skill（跨工具通用目录）"
   },
-  "skill_instance_count": 101,
-  "unique_slug_count": 85,
+  "skill_instance_count": 102,
+  "unique_slug_count": 86,
   "skills": [
     {
       "slug": "agent-reach",
@@ -48,6 +48,16 @@
       "entry": "registry/codex/awesome-selfhosted/SKILL.md",
       "file_count": 4,
       "size_bytes": 348835
+    },
+    {
+      "slug": "awesome-selfhosted-data",
+      "source": "codex",
+      "name": "awesome-selfhosted-data",
+      "description": "Use when Codex needs to search, filter, compare, or shortlist self-hosted Free/Libre software from structured Awesome-Selfhosted data—by category, license, platform, project status, release freshness, or source repository—before architecture, deployment, or replacement decisions.",
+      "category": "工程与交付",
+      "entry": "registry/codex/awesome-selfhosted-data/SKILL.md",
+      "file_count": 1474,
+      "size_bytes": 833233
     },
     {
       "slug": "banner-design",

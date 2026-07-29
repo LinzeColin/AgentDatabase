@@ -1,0 +1,29 @@
+name: Blinko
+website_url: https://blinko.space/
+description: A personal note tool with AI features.
+licenses:
+  - AGPL-3.0
+platforms:
+  - Docker
+tags:
+  - Note-taking & Editors
+source_code_url: https://github.com/blinkospace/blinko
+stargazers_count: 10798
+updated_at: '2026-07-06'
+archived: false
+current_release:
+  tag: 1.8.8
+  published_at: '2026-06-20'
+commit_history:
+  2025-08: 41
+  2025-09: 117
+  2025-10: 20
+  2025-11: 13
+  2025-12: 45
+  2026-01: 41
+  2026-02: 10
+  2026-03: 29
+  2026-04: 15
+  2026-05: 15
+  2026-06: 10
+  2026-07: 4

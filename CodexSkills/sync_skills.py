@@ -98,7 +98,7 @@ CATEGORY = {
     "工程与交付": ["verifier", "webapp-testing", "mcp-builder", "use-railway", "video-replica",
                    "goal-to-delivery-sop", "domain-dual-plane", "output-skill", "codex-dev-orchestrator",
                    "impeccable", "review-agent", "plugin-creator", "skill-creator", "skill-installer",
-                   "skill-github-sync", "dynamic-personal-profile-update", "awesome-selfhosted", "persona-distiller",
+                   "skill-github-sync", "dynamic-personal-profile-update", "awesome-selfhosted", "awesome-selfhosted-data", "persona-distiller",
                    "persona-distiller-group", "teleiosis"],
     "学习与知识": ["study-project-orchestrator", "book-to-skill", "last30days", "chronicle",
                    "grill-me", "openai-docs"],

@@ -1,0 +1,57 @@
+# non-Free (https://en.wikipedia.org/wiki/Free_software) licenses
+# any time a new license is added here, exclude/include_licenses must be updated in .hecat/export-*.yml
+- identifier: BSD-3-Clause-No-Military-License
+  name: BSD 3-Clause No Military License
+  url: https://spdx.org/licenses/BSD-3-Clause-No-Military-License.html
+  
+- identifier: BUSL-1.1
+  name: Business Source License 1.1
+  url: https://spdx.org/licenses/BUSL-1.1.html
+
+- identifier: CC-BY-NC-SA-3.0
+  name: Creative Commons Attribution-NonCommercial-ShareAlike License 3.0
+  url: https://creativecommons.org/licenses/by-nc-sa/3.0/
+
+- identifier: CC-BY-NC-SA-4.0
+  name: Creative Commons Attribution-NonCommercial-ShareAlike License 4.0
+  url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+
+- identifier: CC-BY-ND-3.0
+  name: Creative Commons Attribution-NoDerivs Unported License 3.0
+  url: https://creativecommons.org/licenses/by-nd/3.0/
+
+- identifier: CC-BY-NC-4.0
+  name: Creative Commons Attribution-NonCommercial License 4.0
+  url: https://creativecommons.org/licenses/by-nc/4.0/
+
+- identifier: Commons-Clause
+  name: Commons Clause License
+  url: https://commonsclause.com/
+
+- identifier: DPL
+  name: Devblocks Public License 1.0
+  url: https://cerb.ai/license/
+
+- identifier: Elastic-2.0
+  name: Elastic License 2.0
+  url: https://spdx.org/licenses/Elastic-2.0.html
+
+- identifier: FSL-1.1-MIT
+  name: Functional Source License, Version 1.1, MIT Future License
+  url: https://spdx.org/licenses/FSL-1.1-MIT.html
+
+- identifier: NPOSL-3.0
+  name: Non-Profit Open Software License 3.0
+  url: https://spdx.org/licenses/NPOSL-3.0.html
+
+- identifier: SSPL-1.0
+  name: Server Side Public License
+  url: https://spdx.org/licenses/SSPL-1.0.html
+
+- identifier: SUL-1.0
+  name: Sustainable Use License v1.0
+  url: https://spdx.org/licenses/SUL-1.0.html
+
+- identifier: ⊘ Proprietary
+  name: Proprietary software
+  url: https://en.wikipedia.org/wiki/Proprietary_software
