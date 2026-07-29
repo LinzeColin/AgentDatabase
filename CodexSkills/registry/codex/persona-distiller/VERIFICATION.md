@@ -20,7 +20,7 @@ Date: 2026-07-29
 
 | Gate | 本次结果 | 证据来源 |
 |---|---:|---|
-| Offline unit / integration / concurrency tests | **54 / 56 passed，2 failed** | `python3 -m pytest tests/ -q` |
+| Offline unit / integration / concurrency tests | **57 / 59 passed，2 failed** | `python3 -m pytest tests/ -q` |
 | 合同漂移门（版本三轴 + 身份输入合同） | **0 条**（修复前 18 条） | `scripts/check_contract_drift.py` |
 | 合同漂移门的负对照 | passed | `check_contract_drift.py --self-test` |
 | Release checksum 全量校验 | passed，272 files | `self_check.py` |
@@ -59,7 +59,7 @@ bundle 版本号是「一个号盖两个 Skill」还是「两个 Skill 各自独
 
 ## v0.0.0.5 交付合同
 
-- 最终 Persona Distiller 发行只产生 `PersonaDistiller-Final-v0.0.0.5.zip`。
+- 最终 Persona Distiller 发行只产生**一个** bundle。**文件名跟的是 skill 发布号，不是本节的交付合同号**：`PersonaDistiller-Final-<VERSION>.zip`，由 `scripts/build_release_bundle.py` 从 `VERSION` 读取。
 - ZIP 只有一个顶层目录，完整包含 `persona-distiller/` 与 `persona-distiller-group/`、原子安装器、manifest 和全文件 SHA-256。
 - 默认只安装到 `~/.codex/skills`；不会同时在 `~/.agents/skills` 保留第二来源。
 - 每个人物发布只产生一个外层完整交付 ZIP；其中恰好嵌入一个不可变运行时 Skill ZIP，并包含安装、登记、team card、来源覆盖、评测、验证、provenance、review 和 handoff。
