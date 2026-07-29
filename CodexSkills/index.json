@@ -586,8 +586,8 @@
       "description": "White-box iteration, causal evaluation, market evidence, and controlled evolution for an existing Agent Skill or Teleiosis itself. Use when a user asks to improve, benchmark, stress-test, compare, self-evolve, validate with real tasks or users, productize, or package a Skill with frozen baselines, five-arm experiments, six stress classes, market feedback, rollback, independent review, and installable delivery. Do not use for ordinary code review or direct in-place edits to a production Skill.",
       "category": "工程与交付",
       "entry": "registry/codex/teleiosis/SKILL.md",
-      "file_count": 150,
-      "size_bytes": 938779
+      "file_count": 234,
+      "size_bytes": 1069632
     },
     {
       "slug": "theme-factory",

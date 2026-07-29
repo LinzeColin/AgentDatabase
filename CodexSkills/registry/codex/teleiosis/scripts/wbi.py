@@ -28,6 +28,28 @@ from wbi_core.process import run_bounded  # noqa: E402
 from wbi_core.smoke import run_release_smoke  # noqa: E402
 from wbi_core.validation import validate_skill  # noqa: E402
 from wbi_core.workspace import init_run, loop_status, record_change, record_round, transition, update_counters  # noqa: E402
+from wbi_core.status import validate_status_file  # noqa: E402
+from wbi_core.telemetry import aggregate_file  # noqa: E402
+from wbi_core.benchmark import evaluate_benchmark, seal_benchmark_contract  # noqa: E402
+from wbi_core.review_adapter import inspect_review_adapter  # noqa: E402
+from wbi_core.orchestrator import attach_preflight, explain_block, init_orchestration, inspect_orchestration, mark_step  # noqa: E402
+from wbi_core.review_ablation import evaluate_review_ablation_file  # noqa: E402
+from wbi_core.portability import evaluate_portability_file  # noqa: E402
+from wbi_core.peer_taxonomy import audit_file as audit_peer_file  # noqa: E402
+from wbi_core.utility_guard import evaluate_utility_file  # noqa: E402
+from wbi_core.environment_doctor import run_environment_doctor  # noqa: E402
+from wbi_core.verifier_bridge import export_verifier_packet  # noqa: E402
+from wbi_core.expert_panel import export_expert_panel_request  # noqa: E402
+from wbi_core.dashboard import render_dashboard_file  # noqa: E402
+from wbi_core.diagnostics import diagnose_target  # noqa: E402
+from wbi_core.adaptive import build_adaptive_plan, build_adaptive_plan_file  # noqa: E402
+from wbi_core.strategy import inspect_strategy_memory, update_strategy_memory  # noqa: E402
+from wbi_core.showcase import generate_showcase  # noqa: E402
+from wbi_core.market_profile import build_market_profile  # noqa: E402
+from wbi_core.environment_strength import capture_environment_snapshot, attest_environment_strength  # noqa: E402
+from wbi_core.coverage import evaluate_skill_coverage  # noqa: E402
+from wbi_core.shadowing import evaluate_skill_shadowing  # noqa: E402
+from wbi_core.stochastic import compare_stochastic_results  # noqa: E402
 
 
 def emit(value: Any) -> None:
@@ -36,13 +58,20 @@ def emit(value: Any) -> None:
 
 def command_verify_self(args: argparse.Namespace) -> int:
     root = Path(args.skill_root).resolve() if args.skill_root else SKILL_ROOT
-    validation = validate_skill(root, strict=args.strict, expected_genesis_hash=args.expected_genesis_hash or "", profile="optimizer")
+    validation = validate_skill(
+        root, strict=args.strict, expected_genesis_hash=args.expected_genesis_hash or "",
+        expected_effective_genesis_hash=args.expected_effective_genesis_hash or "", profile="optimizer"
+    )
     emit(validation)
     return 0 if validation["status"] == "PASS" else 2
 
 
 def command_validate(args: argparse.Namespace) -> int:
-    result = validate_skill(Path(args.skill_dir), strict=args.strict, check_manifest=not args.ignore_manifest, expected_genesis_hash=args.expected_genesis_hash or "", profile=args.profile)
+    result = validate_skill(
+        Path(args.skill_dir), strict=args.strict, check_manifest=not args.ignore_manifest,
+        expected_genesis_hash=args.expected_genesis_hash or "",
+        expected_effective_genesis_hash=args.expected_effective_genesis_hash or "", profile=args.profile
+    )
     emit(result)
     return 0 if result["status"] == "PASS" else 2
 
@@ -50,7 +79,10 @@ def command_validate(args: argparse.Namespace) -> int:
 def command_manifest(args: argparse.Namespace) -> int:
     root = Path(args.skill_dir).resolve()
     count = generate_manifest(root)
-    result = validate_skill(root, strict=True, expected_genesis_hash=args.expected_genesis_hash or "", profile=args.profile)
+    result = validate_skill(
+        root, strict=True, expected_genesis_hash=args.expected_genesis_hash or "",
+        expected_effective_genesis_hash=args.expected_effective_genesis_hash or "", profile=args.profile
+    )
     result["manifest_entries"] = count
     emit(result)
     return 0 if result["status"] == "PASS" else 2
@@ -60,6 +92,7 @@ def command_package(args: argparse.Namespace) -> int:
     result = package_skill(
         Path(args.skill_dir), Path(args.output), expected_genesis_hash=args.expected_genesis_hash or "",
         profile=args.profile, verification_level=args.verification_level,
+        expected_effective_genesis_hash=args.expected_effective_genesis_hash or "",
     )
     emit(result)
     return 0 if result["status"] == "PASS" else 2
@@ -67,10 +100,11 @@ def command_package(args: argparse.Namespace) -> int:
 
 def command_release_smoke(args: argparse.Namespace) -> int:
     expected = args.expected_genesis_hash or __import__("os").environ.get("WBI_EXPECTED_GENESIS_SHA256", "")
+    expected_effective = args.expected_effective_genesis_hash or __import__("os").environ.get("WBI_EXPECTED_EFFECTIVE_GENESIS_SHA256", "")
     if not expected:
         emit({"status": "FAIL", "errors": ["release-smoke requires an external Genesis hash anchor"]})
         return 2
-    result = run_release_smoke(SKILL_ROOT, expected)
+    result = run_release_smoke(SKILL_ROOT, expected, expected_effective)
     emit(result)
     return 0 if result["status"] == "PASS" else 2
 
@@ -252,6 +286,7 @@ def command_install(args: argparse.Namespace) -> int:
         Path(args.archive), Path(args.skills_root), args.expected_genesis_hash or "", args.replace,
         profile=args.profile, verification_level=args.verification_level,
         expected_archive_sha256=args.expected_archive_sha256 or "",
+        expected_effective_genesis_hash=args.expected_effective_genesis_hash or "",
     )
     if args.result_file:
         from wbi_core.io import write_json
@@ -263,7 +298,8 @@ def command_install(args: argparse.Namespace) -> int:
 def command_install_status(args: argparse.Namespace) -> int:
     result = inspect_install_transaction(
         Path(args.skills_root), args.transaction_id or "", verify_installed=args.verify_installed,
-        expected_genesis_hash=args.expected_genesis_hash or "", profile=args.profile,
+        expected_genesis_hash=args.expected_genesis_hash or "",
+        expected_effective_genesis_hash=args.expected_effective_genesis_hash or "", profile=args.profile,
     )
     emit(result)
     return 0 if result["status"] == "PASS" else 2
@@ -271,7 +307,8 @@ def command_install_status(args: argparse.Namespace) -> int:
 
 def command_recover_install(args: argparse.Namespace) -> int:
     result = recover_install_transactions(
-        Path(args.skills_root), args.expected_genesis_hash or "", args.profile, args.destination_name
+        Path(args.skills_root), args.expected_genesis_hash or "", args.profile, args.destination_name,
+        expected_effective_genesis_hash=args.expected_effective_genesis_hash or "",
     )
     emit(result)
     return 0 if result["status"] == "PASS" else 2
@@ -289,10 +326,278 @@ def command_receipt(args: argparse.Namespace) -> int:
     result = generate_release_receipt(
         Path(args.skill_dir), Path(args.archive), Path(args.output), Path(args.workspace) if args.workspace else None,
         gate_result, install_result, args.expected_genesis_hash or "",
+        args.expected_effective_genesis_hash or "",
     )
     status = result.get("receipt_status", "FAIL")
     emit({"status": status, "receipt": result})
     return 0 if status == "PASS" else 2
+
+
+def command_status_validate(args: argparse.Namespace) -> int:
+    result = validate_status_file(Path(args.summary), Path(args.output) if args.output else None)
+    emit(result)
+    return 0 if result["validation_status"] == "PASS" else 2
+
+
+def command_telemetry_aggregate(args: argparse.Namespace) -> int:
+    result = aggregate_file(Path(args.input), Path(args.output) if args.output else None)
+    emit(result)
+    return 0 if result.get("aggregation_status") == "PASS" else 2
+
+
+def command_benchmark_seal(args: argparse.Namespace) -> int:
+    result = seal_benchmark_contract(Path(args.workspace), Path(args.contract), args.actor_id, optimizer_root=SKILL_ROOT)
+    emit(result)
+    return 0 if result.get("seal_status") == "SEALED" else 2
+
+
+def command_benchmark_evaluate(args: argparse.Namespace) -> int:
+    result = evaluate_benchmark(Path(args.workspace), Path(args.results))
+    emit(result)
+    return 0 if result.get("benchmark_integrity_status") == "VALID" else 2
+
+
+def command_review_adapter_check(args: argparse.Namespace) -> int:
+    result = inspect_review_adapter(
+        Path(args.contract), workspace=Path(args.workspace), target=Path(args.target), optimizer_root=SKILL_ROOT,
+        bundled_root=SKILL_ROOT,
+        attestation_path=Path(args.attestation) if args.attestation else None,
+        packet_index_path=Path(args.packet_index) if args.packet_index else None,
+        output=Path(args.output) if args.output else None,
+    )
+    emit(result)
+    return 0 if result.get("adapter_contract_status") == "PASS" else 2
+
+
+
+def command_doctor(args: argparse.Namespace) -> int:
+    """Compatibility doctor: target diagnosis when target is supplied, otherwise environment readiness."""
+    if getattr(args, "target", None):
+        result = diagnose_target(
+            Path(args.target), valid_as_of=args.valid_as_of,
+            output=Path(args.output) if args.output else None,
+            max_files=args.max_files, max_text_bytes=args.max_text_bytes,
+        )
+        emit(result)
+        return 0 if result.get("diagnostic_status") != "BLOCKED" else 2
+    if not getattr(args, "workspace", None):
+        raise ValueError("doctor requires either a target or --workspace")
+    result = run_environment_doctor(
+        Path(args.workspace), Path(args.output) if args.output else None,
+        Path(args.review_contract) if args.review_contract else None,
+        Path(args.persona_index) if args.persona_index else None,
+    )
+    emit(result)
+    return 0 if result.get("status") == "PASS" else 2
+
+
+def command_adaptive_plan(args: argparse.Namespace) -> int:
+    result = build_adaptive_plan_file(
+        Path(args.diagnostic), run_mode=args.run_mode,
+        output=Path(args.output) if args.output else None,
+    )
+    emit(result)
+    return 0 if result.get("plan_status") == "READY" else 2
+
+
+def command_strategy_update(args: argparse.Namespace) -> int:
+    result = update_strategy_memory(Path(args.workspace), Path(args.record))
+    emit(result)
+    return 0 if result.get("status") == "PASS" else 2
+
+
+def command_strategy_next(args: argparse.Namespace) -> int:
+    result = inspect_strategy_memory(Path(args.workspace))
+    emit(result)
+    return 0 if result.get("status") in {"PASS", "NOT_INITIALIZED"} else 2
+
+
+def command_showcase(args: argparse.Namespace) -> int:
+    result = generate_showcase(
+        Path(args.status), Path(args.output),
+        comparison_path=Path(args.comparison) if args.comparison else None,
+        title=args.title,
+    )
+    emit(result)
+    return 0 if result.get("status") == "PASS" else 2
+
+
+def command_market_profile(args: argparse.Namespace) -> int:
+    result = build_market_profile(Path(args.target), valid_as_of=args.valid_as_of or "")
+    if args.output:
+        from wbi_core.io import write_json
+        write_json(Path(args.output), result)
+    emit(result)
+    return 0 if result.get("profile_status") == "PASS" else 2
+
+
+def command_environment_snapshot(args: argparse.Namespace) -> int:
+    result = capture_environment_snapshot(
+        Path(args.target), Path(args.optimizer), valid_as_of=args.valid_as_of,
+        timezone_name=args.timezone, validity_days=args.validity_days,
+        frontier_scan=Path(args.frontier_scan) if args.frontier_scan else None,
+        benchmark_summary=Path(args.benchmark_summary) if args.benchmark_summary else None,
+        coverage_summary=Path(args.coverage_summary) if args.coverage_summary else None,
+        shadowing_summary=Path(args.shadowing_summary) if args.shadowing_summary else None,
+        runtime_capabilities=Path(args.runtime_capabilities) if args.runtime_capabilities else None,
+        output=Path(args.output) if args.output else None,
+    )
+    emit(result)
+    return 0 if result.get("snapshot_status") == "PASS" else 2
+
+
+def command_environment_attest(args: argparse.Namespace) -> int:
+    result = attest_environment_strength(
+        Path(args.snapshot), Path(args.candidate_set),
+        output=Path(args.output) if args.output else None,
+        checked_at=args.checked_at or "",
+    )
+    emit(result)
+    return 0 if result.get("environment_strength_status") == "PARETO_UNDOMINATED_FOR_VERIFIED_CURRENT_ENVIRONMENT" else 3
+
+
+def command_coverage_evaluate(args: argparse.Namespace) -> int:
+    result = evaluate_skill_coverage(
+        Path(args.constraints), Path(args.trajectories),
+        output=Path(args.output) if args.output else None,
+        minimum_overall_coverage=args.minimum_overall_coverage,
+        minimum_hard_coverage=args.minimum_hard_coverage,
+    )
+    emit(result)
+    return 0 if result.get("coverage_status") == "PASS" else 3
+
+
+def command_shadowing_evaluate(args: argparse.Namespace) -> int:
+    result = evaluate_skill_shadowing(
+        Path(args.records), output=Path(args.output) if args.output else None,
+        minimum_top1_accuracy=args.minimum_top1_accuracy,
+        maximum_false_activation_rate=args.maximum_false_activation_rate,
+        maximum_outcome_drop=args.maximum_outcome_drop,
+    )
+    emit(result)
+    return 0 if result.get("shadowing_status") == "PASS" else 3
+
+
+def command_stochastic_compare(args: argparse.Namespace) -> int:
+    result = compare_stochastic_results(
+        Path(args.results), baseline_id=args.baseline_id, candidate_id=args.candidate_id,
+        minimum_trials=args.minimum_trials, minimum_effect=args.minimum_effect,
+        output=Path(args.output) if args.output else None,
+    )
+    emit(result)
+    return 0 if result.get("stochastic_decision") == "SUPPORTED" else 3
+
+def command_optimize(args: argparse.Namespace) -> int:
+    target = Path(args.target)
+    workspace = Path(args.workspace)
+    result = init_orchestration(
+        target, workspace, SKILL_ROOT,
+        run_mode=args.run_mode, package_profile=args.package_profile,
+        verification_level=args.verification_level, valid_as_of=args.valid_as_of,
+        review_contract=Path(args.review_attestation_contract) if args.review_attestation_contract else None,
+    )
+    if result.get("preflight_artifacts"):
+        result = inspect_orchestration(workspace)
+        emit(result)
+        return 0 if result.get("orchestration_status") != "BLOCKED" else 2
+    control = workspace.resolve() / "control"
+    diagnostic_path = control / "target-diagnostic.json"
+    plan_path = control / "adaptive-plan.json"
+    diagnostic = diagnose_target(
+        target, valid_as_of=args.valid_as_of, output=diagnostic_path,
+        max_files=args.max_files, max_text_bytes=args.max_text_bytes,
+    )
+    build_adaptive_plan(diagnostic, run_mode=args.run_mode, output=plan_path)
+    result = attach_preflight(workspace, diagnostic_path, plan_path)
+    result["diagnostic_status"] = diagnostic.get("diagnostic_status")
+    result["target_class"] = diagnostic.get("classification", {}).get("target_class")
+    emit(result)
+    return 0 if result.get("orchestration_status") != "BLOCKED" else 2
+
+def command_run_status(args: argparse.Namespace) -> int:
+    result = inspect_orchestration(Path(args.workspace))
+    emit(result)
+    return 0 if result.get("orchestration_status") not in {"BLOCKED", "NOT_INITIALIZED"} else 2
+
+
+def command_resume(args: argparse.Namespace) -> int:
+    result = inspect_orchestration(Path(args.workspace))
+    emit(result)
+    return 0 if result.get("orchestration_status") not in {"BLOCKED", "NOT_INITIALIZED"} else 2
+
+
+def command_explain_block(args: argparse.Namespace) -> int:
+    result = explain_block(Path(args.workspace))
+    emit(result)
+    return 0
+
+
+def command_mark_step(args: argparse.Namespace) -> int:
+    result = mark_step(Path(args.workspace), args.step, Path(args.receipt))
+    emit(result)
+    return 0 if result.get("orchestration_status") != "BLOCKED" else 2
+
+
+def command_review_ablation(args: argparse.Namespace) -> int:
+    result = evaluate_review_ablation_file(Path(args.study), Path(args.output) if args.output else None)
+    emit(result)
+    return 0 if result.get("ablation_integrity_status") == "VALID" else 2
+
+
+def command_portability_evaluate(args: argparse.Namespace) -> int:
+    result = evaluate_portability_file(
+        Path(args.workspace), Path(args.contract), Path(args.results),
+        Path(args.output) if args.output else None,
+    )
+    emit(result)
+    return 0 if result.get("portability_integrity_status") == "VALID" else 2
+
+
+def command_peer_audit(args: argparse.Namespace) -> int:
+    result = audit_peer_file(Path(args.input), Path(args.output) if args.output else None)
+    emit(result)
+    return 0 if result.get("status") == "PASS" else 2
+
+
+def command_utility_gate(args: argparse.Namespace) -> int:
+    result = evaluate_utility_file(Path(args.contract), Path(args.output) if args.output else None)
+    emit(result)
+    return 0 if result.get("status") == "PASS" else 2
+
+
+def command_environment_doctor(args: argparse.Namespace) -> int:
+    result = run_environment_doctor(
+        Path(args.workspace), Path(args.output) if args.output else None,
+        Path(args.review_contract) if args.review_contract else None,
+        Path(args.persona_index) if args.persona_index else None,
+    )
+    emit(result)
+    return 0 if result.get("status") == "PASS" else 2
+
+
+def command_verifier_export(args: argparse.Namespace) -> int:
+    result = export_verifier_packet(
+        Path(args.subject), Path(args.output), args.valid_as_of,
+        Path(args.acceptance_contract) if args.acceptance_contract else None,
+    )
+    emit(result)
+    return 0 if result.get("status") == "PASS" else 2
+
+
+def command_expert_panel_export(args: argparse.Namespace) -> int:
+    result = export_expert_panel_request(
+        Path(args.output), args.task, args.valid_as_of,
+        Path(args.persona_index) if args.persona_index else None,
+    )
+    emit(result)
+    return 0 if result.get("status") == "PASS" else 2
+
+
+def command_render_dashboard(args: argparse.Namespace) -> int:
+    result = render_dashboard_file(Path(args.input), Path(args.output))
+    emit(result)
+    return 0 if result.get("status") == "PASS" else 2
+
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="wbi", description="Teleiosis / 白箱迭代Skill")
@@ -301,6 +606,7 @@ def build_parser() -> argparse.ArgumentParser:
     item = sub.add_parser("verify-self", help="verify Genesis, package structure, version consistency and manifest")
     item.add_argument("--skill-root")
     item.add_argument("--expected-genesis-hash")
+    item.add_argument("--expected-effective-genesis-hash")
     item.add_argument("--strict", action="store_true")
     item.set_defaults(func=command_verify_self)
 
@@ -309,12 +615,14 @@ def build_parser() -> argparse.ArgumentParser:
     item.add_argument("--strict", action="store_true")
     item.add_argument("--ignore-manifest", action="store_true")
     item.add_argument("--expected-genesis-hash")
+    item.add_argument("--expected-effective-genesis-hash")
     item.add_argument("--profile", choices=["auto", "generic", "optimizer"], default="auto")
     item.set_defaults(func=command_validate)
 
     item = sub.add_parser("manifest", help="generate MANIFEST.sha256 and validate")
     item.add_argument("skill_dir")
     item.add_argument("--expected-genesis-hash")
+    item.add_argument("--expected-effective-genesis-hash")
     item.add_argument("--profile", choices=["auto", "generic", "optimizer"], default="auto")
     item.set_defaults(func=command_manifest)
 
@@ -322,6 +630,7 @@ def build_parser() -> argparse.ArgumentParser:
     item.add_argument("skill_dir")
     item.add_argument("--output", required=True)
     item.add_argument("--expected-genesis-hash")
+    item.add_argument("--expected-effective-genesis-hash")
     item.add_argument("--profile", choices=["auto", "generic", "optimizer"], default="auto")
     item.add_argument("--verification-level", choices=["structural", "release", "deep"], default="release")
     item.set_defaults(func=command_package)
@@ -385,6 +694,65 @@ def build_parser() -> argparse.ArgumentParser:
     item.add_argument("--commit")
     item.add_argument("--output")
     item.set_defaults(func=command_inspect_repo)
+
+    item = sub.add_parser("market-profile", help="classify target and emit market/adoption mechanism lanes")
+    item.add_argument("target")
+    item.add_argument("--valid-as-of")
+    item.add_argument("--output")
+    item.set_defaults(func=command_market_profile)
+
+    item = sub.add_parser("peer-audit", help="separate real market peers from method references and engineering analogies")
+    item.add_argument("--input", required=True, help="JSON, records JSON, or JSONL peer evidence")
+    item.add_argument("--output")
+    item.set_defaults(func=command_peer_audit)
+
+    item = sub.add_parser("utility-gate", help="keep, revert, or fall back to baseline using non-compensatory utility evidence")
+    item.add_argument("--contract", required=True)
+    item.add_argument("--output")
+    item.set_defaults(func=command_utility_gate)
+
+    item = sub.add_parser("doctor", help="run target diagnosis or environment readiness without executing target code")
+    item.add_argument("target", nargs="?")
+    item.add_argument("--workspace")
+    item.add_argument("--valid-as-of")
+    item.add_argument("--review-contract")
+    item.add_argument("--persona-index")
+    item.add_argument("--output")
+    item.add_argument("--max-files", type=int, default=5000)
+    item.add_argument("--max-text-bytes", type=int, default=8 * 1024 * 1024)
+    item.set_defaults(func=command_doctor)
+
+    item = sub.add_parser("environment-doctor", help="diagnose engineering and formal runtime capabilities without exposing secrets")
+    item.add_argument("--workspace", required=True)
+    item.add_argument("--review-contract")
+    item.add_argument("--persona-index")
+    item.add_argument("--output")
+    item.set_defaults(func=command_environment_doctor)
+
+    item = sub.add_parser("adaptive-plan", help="derive a bounded candidate portfolio, gates and budget from a target diagnosis")
+    item.add_argument("--diagnostic", required=True)
+    item.add_argument("--run-mode", choices=["diagnostic", "engineering", "formal"], default="engineering")
+    item.add_argument("--output")
+    item.set_defaults(func=command_adaptive_plan)
+
+    item = sub.add_parser("verifier-export", help="export a sealed read-only acceptance packet for the external verifier Skill")
+    item.add_argument("--subject", required=True)
+    item.add_argument("--output", required=True)
+    item.add_argument("--valid-as-of", required=True)
+    item.add_argument("--acceptance-contract")
+    item.set_defaults(func=command_verifier_export)
+
+    item = sub.add_parser("expert-panel-export", help="export isolated role requirements for persona-distiller-group routing")
+    item.add_argument("--output", required=True)
+    item.add_argument("--task", required=True)
+    item.add_argument("--valid-as-of", required=True)
+    item.add_argument("--persona-index")
+    item.set_defaults(func=command_expert_panel_export)
+
+    item = sub.add_parser("render-dashboard", help="render a static dependency-free cyan-blue evidence console")
+    item.add_argument("--input", required=True)
+    item.add_argument("--output", required=True)
+    item.set_defaults(func=command_render_dashboard)
 
     item = sub.add_parser("freshness-scan", help="freeze a dated, categorized current-technology source scan")
     item.add_argument("--records", required=True)
@@ -457,6 +825,7 @@ def build_parser() -> argparse.ArgumentParser:
     item.add_argument("archive")
     item.add_argument("--skills-root", required=True)
     item.add_argument("--expected-genesis-hash")
+    item.add_argument("--expected-effective-genesis-hash")
     item.add_argument("--expected-archive-sha256", help="external SHA-256 trust anchor; required for release/deep optimizer installation")
     item.add_argument("--profile", choices=["auto", "generic", "optimizer"], default="auto")
     item.add_argument("--verification-level", choices=["structural", "release", "deep"], default="release")
@@ -469,12 +838,14 @@ def build_parser() -> argparse.ArgumentParser:
     item.add_argument("--transaction-id")
     item.add_argument("--verify-installed", action="store_true")
     item.add_argument("--expected-genesis-hash")
+    item.add_argument("--expected-effective-genesis-hash")
     item.add_argument("--profile", choices=["auto", "generic", "optimizer"], default="auto")
     item.set_defaults(func=command_install_status)
 
     item = sub.add_parser("recover-install", help="reconcile interrupted installs from durable transaction receipts")
     item.add_argument("--skills-root", required=True)
     item.add_argument("--expected-genesis-hash")
+    item.add_argument("--expected-effective-genesis-hash")
     item.add_argument("--profile", choices=["auto", "generic", "optimizer"], default="auto")
     item.add_argument("--destination-name", default="teleiosis")
     item.set_defaults(func=command_recover_install)
@@ -492,15 +863,153 @@ def build_parser() -> argparse.ArgumentParser:
     item.add_argument("--gate-result")
     item.add_argument("--install-result")
     item.add_argument("--expected-genesis-hash")
+    item.add_argument("--expected-effective-genesis-hash")
     item.set_defaults(func=command_receipt)
 
     item = sub.add_parser("release-smoke", help="run the bounded non-recursive installation-safe verification profile")
     item.add_argument("--expected-genesis-hash")
+    item.add_argument("--expected-effective-genesis-hash")
     item.set_defaults(func=command_release_smoke)
 
     item = sub.add_parser("self-test", help="run the bundled regression suite with a hard timeout")
     item.add_argument("--timeout", type=int, default=300)
     item.set_defaults(func=command_self_test)
+
+
+    item = sub.add_parser("status-validate", help="validate the eight-domain status model and semantic transitions")
+    item.add_argument("--summary", required=True)
+    item.add_argument("--output")
+    item.set_defaults(func=command_status_validate)
+
+    item = sub.add_parser("telemetry-aggregate", help="aggregate invocation-level token, cost, latency and human burden evidence")
+    item.add_argument("--input", required=True)
+    item.add_argument("--output")
+    item.set_defaults(func=command_telemetry_aggregate)
+
+    item = sub.add_parser("benchmark-seal", help="freeze the Track A/B/C equal-budget benchmark contract before mutation")
+    item.add_argument("workspace")
+    item.add_argument("--contract", required=True)
+    item.add_argument("--actor-id", required=True)
+    item.set_defaults(func=command_benchmark_seal)
+
+    item = sub.add_parser("benchmark-evaluate", help="validate benchmark results, budgets, negative transfer and outcome claims")
+    item.add_argument("workspace")
+    item.add_argument("--results", required=True)
+    item.set_defaults(func=command_benchmark_evaluate)
+
+    item = sub.add_parser("review-adapter-check", help="validate an external 2x6+1 attestation contract without trusting bundled examples")
+    item.add_argument("--contract", required=True)
+    item.add_argument("--workspace", required=True)
+    item.add_argument("--target", required=True)
+    item.add_argument("--attestation")
+    item.add_argument("--packet-index")
+    item.add_argument("--output")
+    item.set_defaults(func=command_review_adapter_check)
+
+    item = sub.add_parser("optimize", help="initialize a durable diagnostic, engineering or formal orchestration run")
+    item.add_argument("target")
+    item.add_argument("--workspace", required=True)
+    item.add_argument("--run-mode", choices=["diagnostic", "engineering", "formal"], default="engineering")
+    item.add_argument("--package-profile", default="optimizer")
+    item.add_argument("--verification-level", choices=["fast", "release", "deep"], default="release")
+    item.add_argument("--valid-as-of", required=True)
+    item.add_argument("--review-attestation-contract")
+    item.add_argument("--max-files", type=int, default=5000)
+    item.add_argument("--max-text-bytes", type=int, default=8 * 1024 * 1024)
+    item.set_defaults(func=command_optimize)
+
+    item = sub.add_parser("run-status", help="inspect durable orchestration state and frozen receipt bindings")
+    item.add_argument("workspace")
+    item.set_defaults(func=command_run_status)
+
+    item = sub.add_parser("resume", help="report the next immutable step without changing run identity")
+    item.add_argument("workspace")
+    item.set_defaults(func=command_resume)
+
+    item = sub.add_parser("explain-block", help="explain blocked capabilities and safe resolution")
+    item.add_argument("workspace")
+    item.set_defaults(func=command_explain_block)
+
+
+    item = sub.add_parser("strategy-update", help="append one evidence-bound KEEP/REVERT/NO_CHANGE event to tamper-evident strategy memory")
+    item.add_argument("workspace")
+    item.add_argument("--record", required=True)
+    item.set_defaults(func=command_strategy_update)
+
+    item = sub.add_parser("strategy-next", help="inspect rejected edits, oscillation and the next bounded strategy")
+    item.add_argument("workspace")
+    item.set_defaults(func=command_strategy_next)
+
+    item = sub.add_parser("showcase", help="generate a truthful self-contained HTML evidence card from frozen status data")
+    item.add_argument("--status", required=True)
+    item.add_argument("--comparison")
+    item.add_argument("--output", required=True)
+    item.add_argument("--title", default="Teleiosis Evidence Card")
+    item.set_defaults(func=command_showcase)
+
+    item = sub.add_parser("environment-snapshot", help="freeze the current authorized environment and frontier evidence lease")
+    item.add_argument("--target", required=True)
+    item.add_argument("--optimizer", required=True)
+    item.add_argument("--valid-as-of", required=True)
+    item.add_argument("--timezone", default="Australia/Sydney")
+    item.add_argument("--validity-days", type=int, default=30)
+    item.add_argument("--frontier-scan")
+    item.add_argument("--benchmark-summary")
+    item.add_argument("--coverage-summary")
+    item.add_argument("--shadowing-summary")
+    item.add_argument("--runtime-capabilities")
+    item.add_argument("--output")
+    item.set_defaults(func=command_environment_snapshot)
+
+    item = sub.add_parser("environment-attest", help="issue a bounded current-environment Pareto attestation or truthful non-proof status")
+    item.add_argument("--snapshot", required=True)
+    item.add_argument("--candidate-set", required=True)
+    item.add_argument("--checked-at")
+    item.add_argument("--output")
+    item.set_defaults(func=command_environment_attest)
+
+    item = sub.add_parser("coverage-evaluate", help="measure declared Skill behavior coverage from recorded trajectories")
+    item.add_argument("--constraints", required=True)
+    item.add_argument("--trajectories", required=True)
+    item.add_argument("--minimum-overall-coverage", type=float, default=0.80)
+    item.add_argument("--minimum-hard-coverage", type=float, default=1.0)
+    item.add_argument("--output")
+    item.set_defaults(func=command_coverage_evaluate)
+
+    item = sub.add_parser("shadowing-evaluate", help="measure Skill selection, false activation and library-scale shadowing risk")
+    item.add_argument("--records", required=True)
+    item.add_argument("--minimum-top1-accuracy", type=float, default=0.90)
+    item.add_argument("--maximum-false-activation-rate", type=float, default=0.05)
+    item.add_argument("--maximum-outcome-drop", type=float, default=0.02)
+    item.add_argument("--output")
+    item.set_defaults(func=command_shadowing_evaluate)
+
+    item = sub.add_parser("stochastic-compare", help="apply a predeclared interval rule instead of cherry-picking stochastic trials")
+    item.add_argument("--results", required=True)
+    item.add_argument("--baseline-id", required=True)
+    item.add_argument("--candidate-id", required=True)
+    item.add_argument("--minimum-trials", type=int, default=20)
+    item.add_argument("--minimum-effect", type=float, default=0.0)
+    item.add_argument("--output")
+    item.set_defaults(func=command_stochastic_compare)
+
+    item = sub.add_parser("review-ablation", help="measure the marginal findings, correlation and cost of 2/6/12 reviewers")
+    item.add_argument("--study", required=True)
+    item.add_argument("--output")
+    item.set_defaults(func=command_review_ablation)
+
+    item = sub.add_parser("portability-evaluate", help="evaluate a frozen runtime by model-family transfer matrix")
+    item.add_argument("workspace")
+    item.add_argument("--contract", required=True)
+    item.add_argument("--results", required=True)
+    item.add_argument("--output")
+    item.set_defaults(func=command_portability_evaluate)
+
+    item = sub.add_parser("mark-step", help="advance orchestration only after binding an immutable step receipt")
+    item.add_argument("workspace")
+    item.add_argument("--step", required=True)
+    item.add_argument("--receipt", required=True)
+    item.set_defaults(func=command_mark_step)
     return parser
 
 

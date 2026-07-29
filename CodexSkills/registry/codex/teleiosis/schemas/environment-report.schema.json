@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://linzezhang.com/schemas/teleiosis/environment-report-1.0.json",
+  "title": "Teleiosis Environment Doctor Report",
+  "type": "object",
+  "required": ["schema_version", "status", "platform", "filesystem", "readiness", "formal_blockers"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "status": {"enum": ["PASS", "BLOCKED"]},
+    "platform": {"type": "object"},
+    "filesystem": {"type": "object"},
+    "readiness": {"type": "object"},
+    "formal_blockers": {"type": "array"}
+  }
+}

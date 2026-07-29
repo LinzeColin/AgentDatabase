@@ -332,7 +332,12 @@ def _custom_release_contract(workspace: Path, profile: str, errors: List[str]) -
     if run_path.is_file():
         run = load_json(run_path)
         binding = run.get("release_profile_contract") or {}
-        if binding.get("profile") != profile or binding.get("path") != str(path) or binding.get("sha256") != sha256_file(path):
+        bound_path = binding.get("path")
+        try:
+            same_path = isinstance(bound_path, str) and Path(bound_path).resolve() == path.resolve()
+        except (OSError, RuntimeError):
+            same_path = False
+        if binding.get("profile") != profile or not same_path or binding.get("sha256") != sha256_file(path):
             errors.append("custom release profile contract is not bound to immutable run contract")
     return value
 

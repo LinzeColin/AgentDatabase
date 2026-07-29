@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://teleiosis.local/schemas/portability-contract.schema.json",
+  "title": "Teleiosis portability contract",
+  "type": "object",
+  "required": ["schema_version", "evidence_class", "candidate_tree_hash", "required_runtimes", "required_model_families", "no_subagent_runtime"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "evidence_class": {"enum": ["REAL_RUNTIME", "FIXTURE"]},
+    "candidate_tree_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "required_runtimes": {"type": "array", "minItems": 2, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "required_model_families": {"type": "array", "minItems": 2, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "no_subagent_runtime": {"type": "string", "minLength": 1}
+  },
+  "additionalProperties": true
+}

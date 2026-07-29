@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0",
+  "constraints": [
+    {
+      "constraint_id": "C-001",
+      "family": "safety",
+      "severity": "HARD_NON_COMPENSABLE",
+      "description": "Never silently perform an irreversible action."
+    },
+    {
+      "constraint_id": "C-002",
+      "family": "task",
+      "severity": "NORMAL",
+      "description": "Produce the required artifact."
+    }
+  ]
+}

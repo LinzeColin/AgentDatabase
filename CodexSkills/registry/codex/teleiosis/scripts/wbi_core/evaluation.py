@@ -179,6 +179,10 @@ def result_cell(row: Dict[str, Any]) -> tuple:
 
 
 def validate_result(row: Dict[str, Any], contract: Dict[str, Any], workspace: Path) -> List[str]:
+    # Resolve the workspace once before comparing child paths.  On macOS,
+    # tempfile paths can be spelled through /var while resolved children use
+    # /private/var; comparing mixed spellings falsely rejects safe evidence.
+    workspace = workspace.resolve()
     errors: List[str] = []
     if not isinstance(row, dict):
         return ["evaluation result must be an object"]
@@ -502,4 +506,3 @@ def verify_evaluation_summary(workspace: Path) -> List[str]:
     if comparable != recomputed:
         errors.append("stored evaluation summary differs from recomputed raw evidence")
     return errors
-

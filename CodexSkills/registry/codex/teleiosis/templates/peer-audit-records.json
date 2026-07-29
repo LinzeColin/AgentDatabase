@@ -1,0 +1,51 @@
+[
+  {
+    "peer_id": "github:LearnPrompt/luban-skill",
+    "slug": "LearnPrompt/luban-skill",
+    "source_url": "https://github.com/LearnPrompt/luban-skill",
+    "description": "Agent Skill craftsmanship and productization workflow",
+    "comparison_scope": "direct-competitor"
+  },
+  {
+    "peer_id": "github:alchaincyf/darwin-skill",
+    "slug": "alchaincyf/darwin-skill",
+    "source_url": "https://github.com/alchaincyf/darwin-skill",
+    "description": "AI Skill optimizer with evaluate improve test keep or revert ratchet",
+    "comparison_scope": "direct-competitor"
+  },
+  {
+    "peer_id": "github:anthropics/skills",
+    "slug": "anthropics/skills",
+    "source_url": "https://github.com/anthropics/skills",
+    "description": "Agent Skill creation and packaging references",
+    "comparison_scope": "adjacent-competitor"
+  },
+  {
+    "peer_id": "github:microsoft/SkillOpt",
+    "slug": "microsoft/SkillOpt",
+    "source_url": "https://github.com/microsoft/SkillOpt",
+    "description": "LLM Skill optimization research method",
+    "comparison_scope": "method-reference"
+  },
+  {
+    "peer_id": "github:karpathy/autoresearch",
+    "slug": "karpathy/autoresearch",
+    "source_url": "https://github.com/karpathy/autoresearch",
+    "description": "Automated bounded research and evaluation loop",
+    "comparison_scope": "method-reference"
+  },
+  {
+    "peer_id": "github:Curzibn/Luban",
+    "slug": "Curzibn/Luban",
+    "source_url": "https://github.com/Curzibn/Luban",
+    "description": "Android image compression library",
+    "comparison_scope": "engineering-analogy"
+  },
+  {
+    "peer_id": "github:EasyDarwin/EasyDarwin",
+    "slug": "EasyDarwin/EasyDarwin",
+    "source_url": "https://github.com/EasyDarwin/EasyDarwin",
+    "description": "Cross-platform streaming media server",
+    "comparison_scope": "engineering-analogy"
+  }
+]

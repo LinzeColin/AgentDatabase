@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://linzezhang.com/schemas/teleiosis/utility-guard-contract-1.0.json",
+  "title": "Teleiosis Non-Negative Utility Contract",
+  "type": "object",
+  "required": ["schema_version", "metrics", "protected_checks"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "minimum_material_gain": {"type": "number", "minimum": 0},
+    "metrics": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["metric_id", "direction", "baseline", "candidate"],
+        "properties": {
+          "metric_id": {"type": "string", "minLength": 1},
+          "direction": {"enum": ["higher", "lower", "equal"]},
+          "baseline": {"type": "number"},
+          "candidate": {"type": "number"},
+          "hard": {"type": "boolean"},
+          "regression_tolerance": {"type": "number", "minimum": 0},
+          "evidence_ref": {"type": ["string", "null"]}
+        }
+      }
+    },
+    "protected_checks": {"type": "array"}
+  }
+}

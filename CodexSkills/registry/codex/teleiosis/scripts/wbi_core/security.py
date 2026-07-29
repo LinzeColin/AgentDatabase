@@ -105,6 +105,9 @@ def validate_sandbox_record(record: Dict[str, Any]) -> List[str]:
 
 
 def scan_secrets(root: Path) -> List[str]:
+    # Normalize once so macOS /var -> /private/var aliases do not turn an
+    # in-tree finding into a ValueError while producing the relative report.
+    root = root.resolve()
     findings: List[str] = []
     for path in iter_files(root):
         if path.is_symlink() or path.suffix.lower() not in {".md", ".txt", ".json", ".jsonl", ".py", ".sh", ".yaml", ".yml", ".toml", ".ini", ".cfg", ".env"}:

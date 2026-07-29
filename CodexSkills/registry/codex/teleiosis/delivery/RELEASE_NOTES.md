@@ -1,32 +1,21 @@
-# Release Notes — v0.0.0.1
+# Release Notes — v0.0.0.2
 
-This is the Genesis-locked engineering release of **白箱迭代Skill / Teleiosis**.
+## Release intent
 
-## Delivered
+Advance Teleiosis from a strong assurance control plane into a frontier-aware, self-diagnosing and time-bounded evolution system without weakening the locked Genesis or manufacturing outcome/review evidence.
 
-- dual white-box iteration for target Skills and Teleiosis itself;
-- Luban five-gate research and product-maturity workflow;
-- Darwin-style real experiment and keep/revert ratchet;
-- real-peer competitor dataset with safe commit-pinned static inspection;
-- open candidate strategies and custom release profiles;
-- frozen research, evaluation, holdout pointer and external-review contracts;
-- ten mandatory system perspectives without forcing ten edits;
-- multidimensional hard-gated/Pareto evaluation;
-- deterministic archive, external receipt, atomic install, backup and rollback;
-- three verification tiers: structural, non-recursive release smoke and explicit deep requalification;
-- durable install transactions, external result file, status query and fail-closed recovery after caller interruption;
-- pre-extraction archive snapshotting with source-change and size detection;
-- no-follow/private internal lock and transaction control paths;
-- crash-window recovery for predecessor rename and abandoned incoming copies;
-- process-scoped install/recovery lock and symlink boundary checks;
-- backup receipt schema 1.1 covering the manifest, with explicit legacy compatibility;
-- execution elapsed-time evidence and separate fast/deep timeout budgets;
-- July 2026 frontier adapters for diagnostic quality dimensions, trajectory faithfulness, counterfactual probe utility and cross-model candidate transfer.
-- self-hosted activation-cost correction: the thin kernel is now smaller than its frozen Baseline while full installation/recovery detail remains available through progressive disclosure.
-- baseline-repair semantics: a defective stable version may fail a hard gate, while the Candidate must fix it without any Candidate hard-gate regression; baseline identity still requires one exact tree hash.
-- review evidence preflight that reports the complete stale/unsafe path set before writing any immutable 2×6 packet.
-- one canonical release archive filename across README, installation guidance and the Codex Task Pack, enforced by regression test.
+## Material changes
 
-## Truth boundary
+- append-only WBI-GB-028 with external effective-Genesis anchor;
+- current-environment snapshot, evidence lease and strength attestation;
+- behavior-coverage, Skill-library shadowing and stochastic-evidence gates;
+- adaptive target diagnosis, multi-lane candidate portfolios and persistent decision history;
+- market-profile/evidence gateway plus non-negative utility selection;
+- peer taxonomy separating Agent Skill competitors, method references and engineering analogies;
+- equal-budget benchmark tracks, telemetry and seven/eight-domain state separation;
+- external reviewer/verifier adapters, reviewer ablation and portability diagnostics;
+- deterministic package, transaction install, interruption recovery and rollback.
 
-The package can pass engineering validation and installation independently of formal autonomous promotion. Formal 2×6 review requires a trusted external runtime attestation adapter and twelve genuinely independent reviewer runs plus a distinct thirteenth read-only verifier. When that capability is unavailable, the correct status is `INDEPENDENT_REVIEW_UNAVAILABLE / BLOCKED`, not simulated approval.
+## Truthful status
+
+Engineering release can be installable while outcome, current-environment strength, external review and formal promotion remain unproven or blocked. This is intentional, not a release defect.

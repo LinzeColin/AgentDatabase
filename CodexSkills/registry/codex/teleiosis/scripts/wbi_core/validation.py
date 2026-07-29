@@ -27,6 +27,18 @@ OPTIMIZER_REQUIRED = [
     "constitution/GENESIS_LOCKED.v0.0.0.1.zh-CN.md",
     "constitution/genesis-lock.json",
     "constitution/requirements.json",
+    "constitution/effective-genesis-lock.v0.0.0.2.json",
+    "constitution/effective-requirements.v0.0.0.2.json",
+    "constitution/amendments/WBI-GB-AMENDMENT-001-v0.0.0.2.zh-CN.md",
+    "schemas/current-environment-snapshot.schema.json",
+    "schemas/environment-strength-attestation.schema.json",
+    "schemas/behavior-coverage.schema.json",
+    "schemas/shadowing-evaluation.schema.json",
+    "schemas/stochastic-comparison.schema.json",
+    "references/CURRENT_ENVIRONMENT_STRENGTH.md",
+    "references/BEHAVIOR_COVERAGE.md",
+    "references/SKILL_LIBRARY_SHADOWING.md",
+    "references/STOCHASTIC_EVIDENCE.md",
     "metadata/release.json",
     "scripts/wbi.py",
 ]
@@ -73,6 +85,7 @@ def validate_skill(
     strict: bool = False,
     check_manifest: bool = True,
     expected_genesis_hash: str = "",
+    expected_effective_genesis_hash: str = "",
     profile: str = "auto",
 ) -> Dict[str, Any]:
     """Validate either a generic Agent Skill or Teleiosis itself.
@@ -141,7 +154,10 @@ def validate_skill(
             errors.append("Chinese display name must be 白箱迭代Skill")
         if release.get("english_brand") != "Teleiosis":
             errors.append("English brand must remain Teleiosis")
-        genesis = verify_genesis(root, expected_hash=expected_genesis_hash or None)
+        genesis = verify_genesis(
+            root, expected_hash=expected_genesis_hash or None,
+            expected_effective_hash=expected_effective_genesis_hash or None,
+        )
         errors.extend(genesis.get("errors", []))
         warnings.extend(genesis.get("warnings", []))
     elif resolved_profile == "generic":
@@ -168,6 +184,8 @@ def validate_skill(
         "skill": name,
         "version": version,
         "genesis_sha256": genesis.get("locked_sha256") if genesis else None,
+        "effective_genesis_sha256": genesis.get("effective_composite_sha256") if genesis else None,
+        "effective_requirement_count": genesis.get("effective_requirement_count") if genesis else None,
         "errors": sorted(set(errors)),
         "warnings": sorted(set(warnings)),
     }
