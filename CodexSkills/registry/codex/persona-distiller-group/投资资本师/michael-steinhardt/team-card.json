@@ -39,7 +39,7 @@
     "判断被提前兑现时按兑现速度重估，而非按剩余持有期",
     "把「大家都在测量的那个量是不是要害」用作跨领域的问题定义动作"
   ],
-  "latest_product_version": null,
+  "latest_product_version": "0.0.0.1",
   "readiness": "ready",
   "research_cutoff": "2023",
   "schema_version": "1.0",

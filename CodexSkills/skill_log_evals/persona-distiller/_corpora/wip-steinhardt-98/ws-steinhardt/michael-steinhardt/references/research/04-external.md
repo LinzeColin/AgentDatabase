@@ -27,8 +27,7 @@ DOJ／SEC 联合新闻稿 [src-3d3f876de6bc]：
 
 合计 $76M（$40M + $36M = $76M；各项分拆亦自洽：12.5+6.5+21=40，12.5+9.5+14=36）。
 
-标的：1991 年 4 月发行的两年期国债。两家合计持仓「almost $20 billion … or
-**160 percent** of the $12 billion issue」，被指控协同「withhold it from the market」
+标的：1991 年 4 月发行的两年期国债。两家合计持仓「almost $20 billion in the April Two-Year Note, or 160 percent of the $12 billion issue」，被指控协同「withhold it from the market」
 [src-3d3f876de6bc] [src-7163770c2f47]。持续时间「several months in the spring and
 summer of 1991」，调查历时三年。
 
