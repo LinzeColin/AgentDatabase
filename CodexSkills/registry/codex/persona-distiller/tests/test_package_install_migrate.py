@@ -44,6 +44,11 @@ class PackageInstallMigrateTests(unittest.TestCase):
             for category in ('材料建工师', '软件开发师', '艺术设计师', '创业经营师', '投资资本师', '思想教育师', '政治法律师', '客户营销师', '建造采购师', '财务合规师', '医疗护理师', '农林牧渔师'):
                 shutil.copytree(group_root / category, registry / category, ignore=shutil.ignore_patterns('registration.json', 'team-card.json', 'versions'))
             shutil.copy2(group_root / 'team-index.json', registry / 'team-index.json')
+            # registry 根目录**就是** group 这个 skill 的根目录：VERSION 与 manifest.json
+            # 是它的一部分，不是可选装饰。group v0.0.0.9 给索引盖 generator_version 之后，
+            # 少复制这两个文件的夹具会造出真实世界里不存在的形态。
+            for name in ('VERSION', 'manifest.json'):
+                shutil.copy2(group_root / name, registry / name)
             first = root / 'first.zip'
             run_script('package_target.py', target, '--output', first, '--registry-root', registry)
             with zipfile.ZipFile(first) as archive:

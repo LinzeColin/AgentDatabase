@@ -23,7 +23,22 @@ from persona_registry import (
 from delivery_builder import build_full_delivery
 
 
+GROUP_VERSION = 'v0.0.0.9'
+
+
 def initialize_registry(root: Path) -> None:
+    # ★ registry 根目录**就是** persona-distiller-group 这个 skill 的根目录，
+    #   因此它必然带 VERSION 与 manifest.json。此前这个夹具只造分类目录，
+    #   造出来的是一个真实世界里不存在的形态——group v0.0.0.9 给索引盖
+    #   `generator_version` 后，9 个用例同时红掉，红的正是夹具的不忠实之处。
+    #   **修夹具，不是放宽判据**：让 read_group_version 在读不到时返回 unknown，
+    #   会使三处比对恒等成立，那才是把门变成摆设。
+    root.mkdir(parents=True, exist_ok=True)   # 半数用例传的是尚不存在的 <tmp>/registry
+    (root / 'VERSION').write_text(GROUP_VERSION + '\n', encoding='utf-8')
+    (root / 'manifest.json').write_text(json.dumps({
+        'name': 'persona-distiller-group',
+        'version': GROUP_VERSION,
+    }, ensure_ascii=False, indent=2, sort_keys=True) + '\n', encoding='utf-8')
     for category in CATEGORIES:
         folder = root / category['folder']
         folder.mkdir(parents=True)

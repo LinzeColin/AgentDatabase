@@ -1336,13 +1336,13 @@
     },
     {
       "path": "tests/test_package_install_migrate.py",
-      "sha256": "cbe358c34c99feada03d595aa72d459efe2e9d68a4a76990a47209cea874d077",
-      "size_bytes": 7088
+      "sha256": "6359473e75a175d45421edb493811e16370c461262000fb9b9e3963bc3727c98",
+      "size_bytes": 7515
     },
     {
       "path": "tests/test_persona_registry.py",
-      "sha256": "9a36e697026f524546d34e7366dad25d963fc93bb68a93be62bbe9faeca55e54",
-      "size_bytes": 10792
+      "sha256": "1d51d0a8358d8103bd60c0dc059ceaba2869b60cfbd9ba7c5cc5fb460e013240",
+      "size_bytes": 11760
     },
     {
       "path": "tests/test_quality_and_eval.py",

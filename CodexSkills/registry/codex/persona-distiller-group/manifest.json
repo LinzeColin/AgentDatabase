@@ -1,0 +1,21 @@
+{
+  "canonical_registry_root": ".",
+  "chinese_name": "人物蒸馏专家团队 Skill",
+  "delivery_contract": "one-full-delivery-zip-v0.0.0.5",
+  "display_name": "Persona Distiller Group",
+  "identity_categories": 12,
+  "index_file": "team-index.json",
+  "index_schema_version": "3.0",
+  "license": "MIT",
+  "name": "persona-distiller-group",
+  "network_required_at_runtime": false,
+  "network_required_for_build": false,
+  "producer_skill": "../persona-distiller",
+  "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; owned by the producer skill, never minted here",
+  "python": ">=3.9",
+  "released_at": "2026-08-01",
+  "roster_target": 600,
+  "roster_target_note": "12 identity categories x 50; team-index.json products is the only truth source for the current count",
+  "version_binding": "VERSION == manifest.json:version == team-index.json:generator_version; enforced by scripts/check_group_version_binding.py and by validate_group.py",
+  "version": "v0.0.0.9"
+}

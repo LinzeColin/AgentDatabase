@@ -1,0 +1,156 @@
+# CHANGELOG — persona-distiller-group
+
+> **这份记录是 2026-08-01 事后从 git 重建的，不是逐版当时写的。**
+> 凡从 git 重建的条目都在末尾标 `[git 重建]`；从本版起当版写当版。
+> 重建依据一律给出可自行复现的命令，**不写"大概改了什么"**。
+>
+> 版本轴只有一条：`VERSION`（`v0.0.0.N`）。人物产物的版本（裸写 `0.0.0.1`，不带 `v`）
+> 由 `persona-distiller` 拥有，本 skill 只登记、从不铸造。
+
+---
+
+## v0.0.0.9 — 2026-08-01
+
+**版本号从「一个躺在文件里的字符串」变成「盖在产物上的字段」。**
+
+### 触发缺陷（可自行复现）
+
+```bash
+git show --stat --name-only --format="" 024b9a9e -- \
+    CodexSkills/registry/codex/persona-distiller-group/
+```
+
+输出**只有一个文件**，就是 `VERSION`。
+
+> **本 skill 的整个 v0.0.0.8，就是那一行字符串从 `v0.0.0.7` 改成 `v0.0.0.8`。**
+
+那次提交的标题讲的是人物侧的改进，团队侧的版本号是被顺手带上去的。
+更根本的是：团队侧此前**只有 1 处版本声明位**（`VERSION` 文件），
+因此「各处一致」从来不是被检查出来的结论，而是**无处可比**。
+`team-index.json`——99 人的那份产物——带 `schema_version`，
+**不带生成它的 skill 版本**：拿到一份有问题的索引，无从判断它出自哪个版本。
+
+### 交付物
+
+| 文件 | 变化 |
+|---|---|
+| `manifest.json` | **新建**。机读版本声明位，此前不存在 |
+| `CHANGELOG.md` | **新建**（本文件）。此前不存在，v0.0.0.1–v0.0.0.8 无任何逐版记录 |
+| `scripts/registry_core.py` | 新增 `read_group_version()` / `check_version_binding()`；`build_index()` 盖 `generator_version`；`validate_registry()` 接入版本绑定检查 |
+| `scripts/check_group_version_binding.py` | **新建**，带 `--self-test` 负对照 |
+| `team-index.json` | 新增 `generator_version` 字段（`products` 仍 99，未减少） |
+
+### 判据
+
+| # | 判据 |
+|---|---|
+| 1 | `VERSION` 存在且非空——**读不到就抛，不返回 `unknown`** |
+| 2 | `manifest.json:version` == `VERSION` |
+| 3 | `team-index.json:generator_version` == `VERSION` |
+
+第 1 条不是形式主义：返回 `unknown` 会让下游三处比对**恒等成立**，
+于是「版本号读不到」与「版本号一致」在机器眼里长得一模一样。
+
+### ★ 与那条被推翻的判据的区别（写下来是为了不再犯同一个错）
+
+`build_release_bundle.py` 曾要求两个 skill 的 `VERSION` **完全相等**，
+意图是「人物蒸馏升到 vN，团队就不该是旧版蒸出来的」。**意图对，判据测的是代理量**——
+把 group 的 `VERSION` 改一下就满足，一个人也没重蒸，门却变绿
+（RUNBOOK 第七十种；实际后果是自 v0.0.0.9 起发行 bundle 一次也构建不出来，
+用户 2026-07-29 裁定改为每人一条 `distilled_with` + 滚动下限）。
+
+本版第 3 条判据宣称的只是「这份 `team-index` 是 vX 生成的」。
+**让它变绿的唯一方式就是真的用 vX 重新生成一次，而重新生成恰好就是该断言的全部内容。**
+断言与使其为真的动作重合，才不是代理量。
+
+### 实测输出
+
+```
+$ python3 scripts/check_group_version_binding.py --self-test
+负对照通过：正对照 0 报，坏样本 6 类全部抓出，且 VERSION 缺失不会退化成 unknown
+
+$ python3 scripts/check_group_version_binding.py     # 重建前，真实树的活体负对照
+✗ 版本绑定 1 条不一致：
+  - team-index.json: 缺 generator_version——产物没带生成它的版本号，出了问题无从归因是哪个版本
+
+$ python3 scripts/rebuild_team_views.py
+products: 99          # 重建前 99 → 重建后 99，未减少
+validation.passed: True
+
+$ python3 scripts/check_group_version_binding.py     # 重建后
+✓ 版本绑定完好：VERSION / manifest.json / team-index.json 三处同为 v0.0.0.9
+```
+
+### 已知缺口（本版**没有**解决，不要以为解决了）
+
+1. **判据只管三处一不一致，不管取值对不对。** 三处同时写错成同一个值，本门全绿。
+   要防这个得有外部锚点（如仓库 registry 索引），而
+   `CodexSkills/registry/index.json` 目前**根本没有本 skill 的条目**（只有 2 条，均非本 skill）——
+   在补上那条之前，外部锚点不存在。
+2. **`README.md` / `SKILL.md` 里的版本号一律不查**：那些是历史小节标题
+   （`## v0.0.0.7 为什么重写`），是**事实记录不是当前声明**。
+   给记录换个新标题比留着旧标题更坏——人物侧 `bump_version.py` 曾把
+   `VERIFICATION.md` 的标题刷成新版本而正文还是上一轮的，等于让旧正文冒充当前复验。
+3. **本门不管「99 个人是用哪个 distiller 版本蒸的」**——那是人物侧的
+   `distilled_with`，由 `persona-distiller/scripts/check_distillation_freshness.py` 管，
+   **默认只报不拦**，且当前 99 条里有 70 条是重打包推断出的**上界值**。
+
+---
+
+## v0.0.0.8 — 2026-07-28 `[git 重建]`
+
+**只改了 `VERSION` 一行，团队侧无任何其它变化。** 见上方复现命令。
+该版本号是随人物侧 `024b9a9e` 一起升的，人物侧那次的内容是
+「内容层检查进入发布门 + 版本号建立单一真源」。
+
+---
+
+## v0.0.0.7 — 2026-07-27 `[git 重建]`
+
+`d554c082`，团队侧触及 **99 个文件**：七个身份目录下的人物登记文件、
+`scripts/`（4 个）、`references/`（1 个）、`team-index.json`。
+
+`SKILL.md` 当版写下的重写理由（原文仍在正文中）：团队此前**拿不到推理内容**——
+`team-index.json` 每人只有约 24 条一行式元数据，claim、心智模型、启发式、
+分歧图谱全部不在其中；交付包是嵌套的（产物本体在 `runtime/` 内层 ZIP），
+**v0.0.0.6 没有任何脚本读过内层**。同版引入 `references/team-output-contract.md`
+与时效治理（`subject_status` / `subject_active_through` / `evidence_recency`，
+未填写一律 `unauthored`）。
+
+```bash
+git show --stat --format="" d554c082 -- CodexSkills/registry/codex/persona-distiller-group/
+```
+
+---
+
+## v0.0.0.6 — 2026-07-25 / 2026-07-26 `[git 重建]`
+
+`886bcc15`（289 个文件）把身份分类从七族重组为**十二个单一主身份**族。
+
+**同一版本号下有第二次落盘**：`a31cb12d`（237 个文件），标题为
+`restore(persona-distiller): recover v0.0.0.6 twelve-family roster`。
+那是 2026-07-26 事故的恢复提交——一次例行同步用本机陈旧副本反向覆盖了仓库，
+`team-index.json` 的 `products` 从 70 掉到 3。
+
+> ⚠ **这次恢复是批量重打包，不是重蒸。**
+> 当前 99 条登记中的 70 条 `distilled_with` 来自这次提交，
+> 其 `distilled_with_source` 为 `git-first-commit:bulk-repackage`，
+> **该值是上界**——正文实际来自 ≤`v0.0.0.5`。报「全部达标」时必须同时报这 70 条。
+
+---
+
+## v0.0.0.5 — 2026-07-23 `[git 重建]`
+
+`3e49193c`，本目录在 git 中的**最早提交**，团队侧 35 个文件：
+`SKILL.md` / `README.md` / `CANONICAL-ROOT-ROUTE.md` / `VERSION` /
+`schemas/`（4）/ `scripts/`（6）/ `references/`（2）/ `agents/`（1）/
+`team-index.json`，以及首批人物登记。
+
+---
+
+## v0.0.0.1 – v0.0.0.4 — **无记录**
+
+本目录在 git 中的第一个提交就已经是 `v0.0.0.5`
+（`git log --reverse -- CodexSkills/registry/codex/persona-distiller-group/`
+首条为 `3e49193c`）。这四个版本**不在版本控制里，无法重建**。
+不猜、不补写——**没有依据的版本记录比没有记录更坏**。

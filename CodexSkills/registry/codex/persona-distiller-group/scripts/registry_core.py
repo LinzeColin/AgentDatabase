@@ -111,6 +111,85 @@ def registry_index_path(registry_root: Path) -> Path:
     return registry_root / REGISTRY_INDEX_NAME
 
 
+def group_version_path(registry_root: Path) -> Path:
+    return registry_root / "VERSION"
+
+
+def read_group_version(registry_root: Path) -> str:
+    """本 skill 的版本真源。**读不到就抛**，不返回 `unknown`。
+
+    返回 `unknown` 会让下游的一致性比对恒等成立，于是「版本号读不到」
+    与「版本号一致」在机器眼里长得一模一样——这正是 v0.0.0.13 那次
+    「只覆盖 2/8 处的单一真源」能长期活着的机制。
+    """
+    path = group_version_path(registry_root)
+    try:
+        value = path.read_text(encoding="utf-8").strip()
+    except OSError as exc:
+        raise ValueError(f"缺 VERSION 文件（版本真源不存在）：{path}：{exc}") from exc
+    if not value:
+        raise ValueError(f"VERSION 文件为空（版本真源不存在）：{path}")
+    return value
+
+
+def check_version_binding(registry_root: Path) -> list[str]:
+    """本 skill 对外声明的版本号，处处必须是同一个。
+
+    人物侧（`persona-distiller`）在 v0.0.0.14 查出过同一个 skill 同时对外声明
+    **7 个不同版本号**，衰减单调——离发布脚本越远的地方越旧。根因是当时的自查
+    只比对了 8 处声明位中的 2 处。团队侧此前更彻底：**只有 1 处声明位**，
+    因而「一致」这件事从来不是被检查出来的，而是无处可比。
+
+    ★ 与人物侧那条被推翻的判据（要求两个 skill 的 VERSION 完全相等）的区别，
+      必须写清楚，否则很容易再犯一次同样的错：
+
+      - 那条判据宣称的是「这些人是用 vX 蒸出来的」，而把 group 的 VERSION 改一下
+        就能满足——**一个人也没重蒸，门却变绿**。它测的是代理量（RUNBOOK 第七十种）。
+      - 本判据宣称的只是「这份 team-index 是 vX 生成的」。
+        让它变绿的唯一方式就是**真的用 vX 重新生成一次**，
+        而重新生成恰好就是该断言的全部内容。**断言与使其为真的动作重合，才不是代理量。**
+    """
+    errors: list[str] = []
+    try:
+        version = read_group_version(registry_root)
+    except ValueError as exc:
+        return [str(exc)]
+
+    manifest_path = registry_root / "manifest.json"
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except OSError:
+        errors.append(f"{manifest_path}: 缺机读版本声明（manifest.json）")
+        manifest = None
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        errors.append(f"invalid manifest {manifest_path}: {exc}")
+        manifest = None
+    if isinstance(manifest, dict) and manifest.get("version") != version:
+        errors.append(
+            f"{manifest_path}: version {manifest.get('version')!r} "
+            f"≠ VERSION {version!r}（版本真源）"
+        )
+
+    index_path = registry_index_path(registry_root)
+    try:
+        index = json.loads(index_path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError):
+        index = None  # 索引本身的可读性由下游那条陈旧性检查负责报错，此处不重复
+    if isinstance(index, dict):
+        stamped = index.get("generator_version")
+        if stamped is None:
+            errors.append(
+                f"{index_path}: 缺 generator_version——"
+                f"产物没带生成它的版本号，出了问题无从归因是哪个版本"
+            )
+        elif stamped != version:
+            errors.append(
+                f"{index_path}: generator_version {stamped!r} ≠ VERSION {version!r}"
+                f"——索引是旧版本生成的，请重跑 rebuild_team_views.py"
+            )
+    return errors
+
+
 def sha256_bytes(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
@@ -798,6 +877,20 @@ def build_index(
     )
     return {
         "schema_version": REGISTRY_SCHEMA_VERSION,
+        # ★ v0.0.0.9：**版本号要随产物走**，不能只躺在 VERSION 文件里。
+        #
+        # 触发实例（可复现）：`git show --stat --name-only --format="" 024b9a9e --
+        # CodexSkills/registry/codex/persona-distiller-group/` 只列出一个文件，
+        # 就是 VERSION 本身。**本 skill 的整个 v0.0.0.8 就是那一行字符串。**
+        # 在此之前，团队侧的版本号没有盖在它产出的任何东西上：
+        # 拿到一份有问题的 team-index，无从判断它是哪个版本生成的。
+        #
+        # 这与用户 2026-07-29 就人物侧裁定的方案 B 是同一条原则
+        # （每人一条 distilled_with，打包时盖，随产物走），只是上了一层。
+        #
+        # 注意**不要**在这里加时间戳：`validate_registry` 用「重新构建后逐字段比对」
+        # 判断索引是否陈旧，任何每次都变的字段都会让它恒为陈旧。
+        "generator_version": read_group_version(registry_root),
         "generated": True,
         "uniqueness_scope": "all-twelve-categories",
         "category_counts": counts,
@@ -1134,14 +1227,20 @@ def validate_registry(registry_root: Path | None = None) -> dict[str, Any]:
                 errors.append(f"{path}: invalid artifact {relative}: {exc}")
         if serials and sorted(serials) != list(range(1, max(serials) + 1)):
             errors.append(f"{path}: product versions must be contiguous from 0.0.0.1")
-    expected_index = build_index(registry_root, records)
-    index_path = registry_index_path(registry_root)
+    errors.extend(check_version_binding(registry_root))
     try:
-        actual_index = json.loads(index_path.read_text(encoding="utf-8"))
-        if actual_index != expected_index:
-            errors.append(f"{index_path}: generated index is stale or inconsistent")
-    except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
-        errors.append(f"invalid registry index {index_path}: {exc}")
+        expected_index = build_index(registry_root, records)
+    except ValueError as exc:
+        expected_index = None
+        errors.append(str(exc))
+    index_path = registry_index_path(registry_root)
+    if expected_index is not None:
+        try:
+            actual_index = json.loads(index_path.read_text(encoding="utf-8"))
+            if actual_index != expected_index:
+                errors.append(f"{index_path}: generated index is stale or inconsistent")
+        except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
+            errors.append(f"invalid registry index {index_path}: {exc}")
     return {
         "passed": not errors,
         "registry_root": str(registry_root),
