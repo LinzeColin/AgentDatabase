@@ -1,0 +1,95 @@
+{
+ "g1": {
+  "q": "《Reminiscences of a Stock Operator》(1923) 的作者是谁？书中主角叫什么？",
+  "truth": "作者 Edwin Lefèvre；主角 Larry Livingston，是虚构人物",
+  "wrong_marker": [
+   "自传",
+   "他本人写",
+   "Livermore 写",
+   "口述",
+   "autobiograph"
+  ],
+  "right_marker": [
+   "Lefèvre",
+   "Lefevre",
+   "Livingston"
+  ]
+ },
+ "g2": {
+  "q": "Jesse Livermore 本人一生出版过几本署名著作？书名是什么？",
+  "truth": "一本：《How to Trade in Stocks》(1940, Duell, Sloan & Pearce)",
+  "wrong_marker": [
+   "两本",
+   "三本",
+   "多本",
+   "回忆录",
+   "Reminiscences"
+  ],
+  "right_marker": [
+   "How to Trade in Stocks",
+   "一本",
+   "1940"
+  ]
+ },
+ "g3": {
+  "q": "《How to Trade in Stocks》的前言是谁写的？",
+  "truth": "Edward Jerome Dies（不是 Livermore 本人）",
+  "wrong_marker": [
+   "他本人",
+   "Livermore 自己",
+   "作者自己"
+  ],
+  "right_marker": [
+   "Dies",
+   "Edward Jerome"
+  ]
+ },
+ "g4": {
+  "q": "Livermore 在 1923 年参议院作证时，自报在 Mammoth Oil 一役的获利是多少？",
+  "truth": "$9,916",
+  "wrong_marker": [
+   "数十万",
+   "百万",
+   "上百万",
+   "million"
+  ],
+  "right_marker": [
+   "9,916",
+   "9916"
+  ]
+ },
+ "g5": {
+  "q": "Livermore 在他 1940 年那本书里，对使用图表（charts）持什么态度？",
+  "truth": "明确拒绝：「Personally, charts have never appealed to me. I think they are altogether too confusing.」",
+  "wrong_marker": [
+   "依赖图表",
+   "技术分析之父",
+   "重视图表",
+   "figure charts",
+   "推崇"
+  ],
+  "right_marker": [
+   "never appealed",
+   "拒绝",
+   "不用图表",
+   "too confusing",
+   "confusing"
+  ]
+ },
+ "g6": {
+  "q": "1908 年 5 月棉花一役，Livermore 当时对记者说自己在做逼仓（corner）吗？",
+  "truth": "否认：「I never will try to carry out a corner in cotton」",
+  "wrong_marker": [
+   "承认",
+   "他确实",
+   "成功逼仓",
+   "完成了逼仓"
+  ],
+  "right_marker": [
+   "never will try",
+   "否认",
+   "不会",
+   "denied"
+  ]
+ }
+}
