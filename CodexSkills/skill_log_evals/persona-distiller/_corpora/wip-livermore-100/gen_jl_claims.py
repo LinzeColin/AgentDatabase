@@ -12,6 +12,7 @@
    「书 + 同期报道／直引」交叉支撑**，不许拿同一本书的两章冒充两个来源。
 3. **Lefèvre 小说的任何一句都不得进来。** 它是虚构作品，主角是 Larry Livingston。
 """
+import hashlib
 import json
 import pathlib
 import sys
@@ -39,8 +40,24 @@ SCOPE = "1898–1940（语料覆盖区间；1911–1921 与 1925–1931 共 17 �
 C = []
 
 
-def add(cid, claim, category, status, sources, contexts, clusters,
+SLUGS = {}
+
+
+def cid_of(slug: str) -> str:
+    """claim_id 必须是 `clm-` + 12 位十六进制——`markdown_claim_markers()` 的
+    正则写死了 `clm-[a-f0-9]{12}`，人读的 `clm-jl-mm-01` 一个也匹配不上，
+    渲染文档里的标记会被判成「未知 Claim」。
+    由稳定的语义 slug 派生，**同一条断言在任何一次重生成里 id 都不变**。"""
+    h = hashlib.sha256(("livermore-100/" + slug).encode("utf-8")).hexdigest()[:12]
+    out = "clm-" + h
+    assert slug not in SLUGS, f"slug 重复：{slug}"
+    SLUGS[slug] = out
+    return out
+
+
+def add(slug, claim, category, status, sources, contexts, clusters,
         confidence, falsifiers=None, alts=None, applicability=None):
+    cid = cid_of(slug)
     rec = {
         "claim_id": cid, "claim": claim, "category": category, "status": status,
         "source_ids": sources, "counter_source_ids": [], "contexts": contexts,
@@ -398,6 +415,9 @@ def main() -> int:
     import collections
     print(f"写出 {len(C)} 条断言 → {out}")
     print("按类别:", dict(collections.Counter(c["category"] for c in C)))
+    (out.parent / "claim-slug-map.json").write_text(
+        json.dumps(SLUGS, ensure_ascii=False, indent=1), encoding="utf-8")
+    print("slug → claim_id 映射已写出（人读名与机读 id 的对照，供渲染与复核用）")
     print("pattern 态的 mental-model:",
           sum(1 for c in C if c["category"] == "mental-model" and c["status"] == "pattern"),
           "| heuristic:",
