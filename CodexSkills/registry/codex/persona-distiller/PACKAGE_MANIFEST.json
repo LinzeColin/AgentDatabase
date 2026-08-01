@@ -4,7 +4,7 @@
   "display_name": "人物蒸馏 Skill / Persona Distiller",
   "distribution": {
     "canonical_registry": "../persona-distiller-group",
-    "kind": "repository-customized-v0.0.0.22",
+    "kind": "repository-customized-v0.0.0.23",
     "lineage_base_archive_sha256": "e891912d98d14afb7677ac935a19be329d97d206f4ae74a644892f46b17f6748"
   },
   "evaluation_suites": 16,
@@ -16,8 +16,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "751f9d60f37148595bfa9dea4c61445c8c23e0e42a95ba4ab8968cd12cd4a58d",
-      "size_bytes": 48960
+      "sha256": "0b118b69106be93c5d443a573bc65c2a007d79a2dfb39cc7f6c282da0851b20e",
+      "size_bytes": 51517
     },
     {
       "path": "CONTRIBUTING.md",
@@ -31,7 +31,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "728e948d73c450d8111732fc500f3a0c1093211c3cfc44a91d9ab4331686249d",
+      "sha256": "ecccaa675b2c4b442f418e842abc0d9133185b41be534a6495cf58836e8b4f9e",
       "size_bytes": 8802
     },
     {
@@ -56,12 +56,12 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "144cedb6cd7077dd6c35a9f95f16f1d5890f7e4049e67b269ea27effacff7417",
-      "size_bytes": 11764
+      "sha256": "5135f613f3db6dc795c64fb97bbbbaa461a6a67b99208a45f3bd2f7775fc6820",
+      "size_bytes": 14018
     },
     {
       "path": "VERSION",
-      "sha256": "5f060991817cd7a30266dd97e82a1aa8748821173f96bbb2f5305a151c279ce4",
+      "sha256": "10843fdc4b983ee56381901d559d8693e52e6488ae2c29bf29be77698c1a44a5",
       "size_bytes": 10
     },
     {
@@ -121,7 +121,7 @@
     },
     {
       "path": "handoff.md",
-      "sha256": "7bb9f2271d5c4fe617ce40fb531d6b26b65e2c35043b46158d127acf39edefda",
+      "sha256": "22111149bb823dda53d8191bbb8098bd24032c31388b6a212427bfdff1c9de65",
       "size_bytes": 3702
     },
     {
@@ -141,7 +141,7 @@
     },
     {
       "path": "manifest.json",
-      "sha256": "9497abe6576b1fe39a66ab4fa6a50ecd66a79a156cc9be0fa86abdda603b64df",
+      "sha256": "8ba8c60f7df0cd6b797e72f111a6de9a776592d431636253456031142e21d0bb",
       "size_bytes": 1191
     },
     {
@@ -601,8 +601,8 @@
     },
     {
       "path": "references/pipeline/next_person.py",
-      "sha256": "abe714c39d65661ed40a32b7aa27f8aaa2cb76598541fc8a075d3eeee6354a6b",
-      "size_bytes": 3370
+      "sha256": "bea69ff2d052919f59e918e3670c084afafd19bd34e40beae43711398362a170",
+      "size_bytes": 10858
     },
     {
       "path": "references/pipeline/scaffold/README.md",
@@ -1451,5 +1451,5 @@
     },
     "secret_findings": 0
   },
-  "version": "v0.0.0.22"
+  "version": "v0.0.0.23"
 }

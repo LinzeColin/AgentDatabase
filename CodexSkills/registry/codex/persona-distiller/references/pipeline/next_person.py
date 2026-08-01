@@ -4,8 +4,32 @@ so it can never drift from memory. Run at the start of every work session.
 
 Usage:
   python3 next_person.py --registry-root <current-worktree>/CodexSkills/registry/codex/persona-distiller-group
-(Defaults point at the worktree used for the calibration; pass --registry-root for a fresh worktree.)"""
-import argparse, json, os, re, glob
+(Defaults point at the worktree used for the calibration; pass --registry-root for a fresh worktree.)
+
+## 分族配重（counterweight）——**默认开，不是选项**
+
+队列的 `priority` 是**按语料可取得性**排的，不是按名册需要排的。
+照它取，名册会单向漂移。实测（100 人时）：
+
+    软件开发师 34 ｜ 投资资本师 21 ｜ 材料建工师 15 ｜ 建造采购师 12
+    ...
+    **医疗护理师 0** ｜ 农林牧渔师 1 ｜ 客户营销师 1 ｜ 艺术设计师 1 ｜ 财务合规师 1
+
+而此时 `NEXT` 与 `upcoming` **前六名全是材料建工师**（已 15 人，第三大族）。
+医疗护理师有 21 个候选，**全部 priority 11（最末）**——按原顺序永远轮不到，
+名册会稳定停在「11 族 + 一个空族」。
+
+判据：**每 `--round` 人一轮，轮首那一格留给「最少的族」。**
+
+    slot = registry_products % round
+    slot == 0 且最少族有待办 → 从最少族取（该族 order 最小者）
+    否则                    → 按队列原顺序取
+
+轮首而不是轮尾：**轮被打断也已经补过了。** 轮尾会让「这轮没做完」等价于「这轮没配重」。
+
+`--no-counterweight` 复现漂移行为，仅供负对照；**日常不要用它。**
+"""
+import argparse, json, os, re, glob, sys
 
 DEF_REG = "/Users/linzezhang/Documents/Codex/AgentDatabase/character-distillation-skill-reorganize-d57595/CodexSkills/registry/codex/persona-distiller-group"
 DEF_DL = "/Users/linzezhang/Downloads/蒸馏"
@@ -20,6 +44,105 @@ def slugify(s):
     s = re.sub(r'[^a-z0-9]+', '-', s).strip('-')
     return s
 
+
+def pick(pending, category_counts, products_done, round_size=5, counterweight=True):
+    """选出 NEXT，并说明**为什么是它**。
+
+    返回 `(item, why)`。`why` 一律写进输出——**看不见理由的排期等于没有排期。**
+    """
+    if not pending:
+        return None, {"mode": "empty", "reason": "队列无待办"}
+    slot = products_done % round_size if round_size else 1
+    if not counterweight:
+        return pending[0], {"mode": "queue-order",
+                            "reason": "**配重被关掉**（--no-counterweight），按队列原顺序"}
+    if slot != 0:
+        return pending[0], {"mode": "queue-order", "slot": slot,
+                            "reason": f"本轮第 {slot + 1} 格，配重只占轮首那一格"}
+    if not category_counts:
+        return pending[0], {"mode": "queue-order",
+                            "reason": "读不到 category_counts，**无法配重**——按原顺序，且此处已报告"}
+
+    # 最少的族优先；同数按族名排，保证确定性。**只挑真有待办的族**，
+    # 否则一个已凑满 50 人的空队列族会把配重永久卡死在它身上。
+    have = {i["family_zh"] for i in pending}
+    ranked = sorted((c, f) for f, c in category_counts.items() if f in have)
+    if not ranked:
+        return pending[0], {"mode": "queue-order",
+                            "reason": "最少族在队列里已无待办，按原顺序"}
+    least_n, least_f = ranked[0]
+    if least_n >= category_counts.get(pending[0]["family_zh"], 10**9):
+        return pending[0], {"mode": "queue-order", "slot": 0,
+                            "reason": f"队首族「{pending[0]['family_zh']}」已是最少之一，无需配重"}
+    cand = min((i for i in pending if i["family_zh"] == least_f),
+               key=lambda i: (i.get("priority", 99), i.get("order", 99)))
+    return cand, {
+        "mode": "counterweight", "slot": 0,
+        "least_family": least_f, "least_count": least_n,
+        "displaced": pending[0]["name"],
+        "displaced_family": pending[0]["family_zh"],
+        "displaced_family_count": category_counts.get(pending[0]["family_zh"]),
+        "reason": (f"轮首配重：名册里「{least_f}」只有 {least_n} 人，"
+                   f"而队列原本要给「{pending[0]['family_zh']}」（已 "
+                   f"{category_counts.get(pending[0]['family_zh'])} 人）再加一个"),
+    }
+
+
+# ── 负对照 ────────────────────────────────────────────────────────────
+def self_test():
+    fails = []
+    counts = {"软件开发师": 34, "材料建工师": 15, "医疗护理师": 0, "农林牧渔师": 1}
+    q = [{"name": "Slavyanov", "family_zh": "材料建工师", "priority": 3, "order": 1},
+         {"name": "Benardos", "family_zh": "材料建工师", "priority": 3, "order": 2},
+         {"name": "Hippocrates", "family_zh": "医疗护理师", "priority": 11, "order": 1},
+         {"name": "Galen", "family_zh": "医疗护理师", "priority": 11, "order": 2},
+         {"name": "Salatin2", "family_zh": "农林牧渔师", "priority": 9, "order": 1}]
+
+    # 负对照 1：轮首必须把 0 人族提上来
+    it, why = pick(q, counts, 100)
+    if it["name"] != "Hippocrates" or why["mode"] != "counterweight":
+        fails.append(f"负对照 1 失败：轮首未配重，选了 {it['name']}（{why['mode']}）")
+
+    # ★ 反向对照：关掉配重必须复现漂移——否则这个开关什么也没做
+    it2, why2 = pick(q, counts, 100, counterweight=False)
+    if it2["name"] != "Slavyanov":
+        fails.append(f"反向对照失败：关掉配重后没有复现漂移，选了 {it2['name']}")
+    if it["name"] == it2["name"]:
+        fails.append("反向对照失败：开与关选出同一个人，**配重是装饰**")
+
+    # 正对照：非轮首不许配重（它是 1/5，不是每次）
+    for slot in (1, 2, 3, 4):
+        it3, why3 = pick(q, counts, 100 + slot)
+        if it3["name"] != "Slavyanov" or why3["mode"] != "queue-order":
+            fails.append(f"正对照失败：slot {slot} 不该配重，却选了 {it3['name']}")
+
+    # 边界：最少族在队列里已无待办 → 退到次少的族，不许崩、不许空转
+    q_no_med = [i for i in q if i["family_zh"] != "医疗护理师"]
+    it4, why4 = pick(q_no_med, counts, 100)
+    if it4["name"] != "Salatin2" or why4["mode"] != "counterweight":
+        fails.append(f"边界失败：最少族无待办时未退到次少族，选了 {it4['name']}")
+
+    # 边界：队首本身就是最少族 → 不重复配重，按原顺序
+    it5, why5 = pick([q[2], q[0]], counts, 100)
+    if it5["name"] != "Hippocrates":
+        fails.append(f"边界失败：队首已是最少族时选了 {it5['name']}")
+
+    # 边界：读不到 category_counts → 报告并退回原顺序，**不许静默**
+    it6, why6 = pick(q, {}, 100)
+    if it6["name"] != "Slavyanov" or "无法配重" not in why6["reason"]:
+        fails.append("边界失败：缺 category_counts 时未显式报告")
+
+    for f in fails:
+        print(f"✗ {f}")
+    if fails:
+        print(f"负对照未通过：{len(fails)} 项")
+        return 1
+    print("负对照通过：轮首把 0 人族提上来；**关掉配重确实复现漂移**（证明它不是装饰）；"
+          "非轮首 4 格均不配重；最少族无待办时退到次少族；队首已是最少族时不重复；"
+          "缺 category_counts 时显式报告而非静默")
+    return 0
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--registry-root", default=DEF_REG)
@@ -27,7 +150,14 @@ def main():
     ap.add_argument("--queue", default=DEF_Q)
     ap.add_argument("--deferred", default=DEF_DEFER)
     ap.add_argument("--show", type=int, default=6)
+    ap.add_argument("--round", type=int, default=5, help="每轮人数；轮首那一格留给配重")
+    ap.add_argument("--no-counterweight", action="store_true",
+                    help="复现分族漂移，**仅供负对照**")
+    ap.add_argument("--self-test", action="store_true")
     a = ap.parse_args()
+
+    if a.self_test:
+        return self_test()
 
     done_norm, done_slug = set(), set()
     # 1) registry (authoritative once pushed to main; on a fresh worktree run `git pull` first)
@@ -65,16 +195,25 @@ def main():
         else:
             pending.append(item)
 
+    n_products = len(idx.get("products", [])) if os.path.isfile(ti) else 0
+    counts = idx.get("category_counts", {}) if os.path.isfile(ti) else {}
+    nxt, why = pick(pending, counts, n_products,
+                    round_size=a.round, counterweight=not a.no_counterweight)
+
     print(json.dumps({
-        "registry_products": len(idx.get("products", [])) if os.path.isfile(ti) else 0,
+        "registry_products": n_products,
         "downloads_zips": len(glob.glob(os.path.join(a.downloads, "*.zip"))),
         "queue_total": len(q),
         "queue_done": done_in_q,
         "queue_pending": len(pending),
         "queue_deferred": deferred_in_q,
-        "NEXT": pending[0] if pending else None,
+        "NEXT": nxt,
+        "why": why,
+        "family_counts_ascending": dict(sorted(counts.items(), key=lambda kv: kv[1])),
+        "queue_order_next": pending[0] if pending else None,
         "upcoming": pending[:a.show],
     }, ensure_ascii=False, indent=1))
+    return 0
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
