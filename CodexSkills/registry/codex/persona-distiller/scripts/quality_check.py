@@ -624,9 +624,19 @@ def run_authorship_gate(report, target: Path, meta: dict[str, Any],
 
     try:
         patterns = module.build_patterns(name)
-    except ValueError:
+        # ★ 单作者站点报头（如 seths.blog 的 `| Seth's Blog`）作为第四类归属证据。
+        #   声明放在 meta.json 的 `single_author_masthead`，**不是命令行开关**——
+        #   它必须随工作区走、可审计、且事后能被复核。
+        #   检查器自己会拒绝不含人物名的报头（多作者刊物的形态）。
+        masthead = str(meta.get('single_author_masthead') or '').strip()
+        if masthead and hasattr(module, 'attach_masthead'):
+            patterns = module.attach_masthead(patterns, masthead)
+        elif masthead:
+            report.warn('research.masthead-unsupported',
+                           'meta 声明了 single_author_masthead，但检查器版本不支持——该声明被忽略')
+    except ValueError as exc:
         report.metrics['authorship'] = {
-            '状态': f'meta.name={name!r} 不足以生成判据（需名与姓两段），**未核验**'}
+            '状态': f'判据生成失败，**未核验**：{exc}'}
         return
 
     claimed, proven, unverified, suspect, unproven, no_author = [], [], [], [], [], 0

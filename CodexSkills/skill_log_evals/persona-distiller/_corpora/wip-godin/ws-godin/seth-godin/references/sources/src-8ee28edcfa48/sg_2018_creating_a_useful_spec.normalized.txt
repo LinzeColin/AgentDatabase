@@ -1,0 +1,10 @@
+Creating a useful spec | Seth's Blog
+ Creating a useful spec
+ If you want someone to help, you’ll do better with a spec. It lists just four things:
+ What is the problem to be solved?
+ How are we going to solve it?
+ How can we test that the thing we built matches what we set out to build?
+ How will we know if it’s working?
+ While there are only four steps, the specificity of each step is essential. The spec for a 787 jet, for example, leaves very little room for argument about what’s being created. On the other hand, “I’ll know it when I see it,” isn’t at all helpful.
+ If you’re not spending at least 5% of your project budget on the spec, you might be doing it wrong.
+ December 30, 2018

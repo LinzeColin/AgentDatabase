@@ -1,0 +1,7 @@
+Eureka? | Seth's Blog
+ Eureka?
+ In 1995, I didn’t believe in the Web. Didn’t think it would beat the paid online services. Beginning in 1996, I started to come around.
+ Soon thereafter, I invented the term “landing page” to describe the page you went to after clicking on a banner or a link (give me long enough and I’ll take credit for inventing HTML too!). Anyway, at Yoyodyne my peers and I spent years pitching people on how to improve their landing pages. I still believe it is the single biggest flaw in web design.
+ Back then, we sketched out a device called the Yoyodyne Engine for Sales. The idea was an automated system that would test landing pages on the fly.
+ Today, I heard about Offermatica – Landing Page Optimization . I have no idea if it does what it appears to, but if it does, hooray. It only took seven years.
+ May 25, 2004

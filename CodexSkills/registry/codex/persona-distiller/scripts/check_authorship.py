@@ -83,6 +83,8 @@ def build_patterns(full_name: str) -> dict:
     return {
         "name": full_name,
         "surname": surname,
+        "masthead": None,          # 由 --masthead 注入；见 attach_masthead
+        "MASTHEAD": None,
         "name_rx": name_rx,
         "BYLINE": re.compile(rf"\bBy\s+{name_rx}\b", re.I),
         "EDITORIAL": re.compile(
@@ -92,6 +94,42 @@ def build_patterns(full_name: str) -> dict:
             rf"{surname_rx}|^(?:{'|'.join(re.escape(i) for i in sorted(initials))})$", re.I),
         "SURNAME": re.compile(surname_rx, re.I),
     }
+
+
+def attach_masthead(pat, masthead):   # masthead: str | None（本机 3.9，注解不写联合类型）
+    """把「单作者站点报头」注册成第四类归属证据。
+
+    ## 为什么需要它
+
+    Godin #99 实测：193 篇 seths.blog 正文**全部判为无据**。
+    它们的署名是站点报头 `<标题> | Seth's Blog`，既不是 `By X`、
+    不是编者注、也不是逐字稿轮次——**证据在文里，是判据看不见这个形态**。
+
+    ## 为什么它不会把这道门变松
+
+    三重约束，缺一不可：
+
+    1. **必须显式声明**（`--masthead`），检查器绝不自己推断站点名；
+    2. **报头必须含人物的名或姓**——`Seth's Blog` 含 `Seth` 才配声明。
+       Steinhardt 那轮的 `CONTACT` 刊头不含 `Steinhardt`，**声明不了**，
+       于是那四份别人写的随笔照旧拦得住；
+    3. **反向检查照常生效**——文末出现别人的身份署名一样降级。
+
+    换句话说：这一类放行的是「以他本人命名的单作者站点」，
+    不是「任何有刊头的出版物」。
+    """
+    if not masthead or not masthead.strip():
+        return pat
+    head = masthead.strip()
+    if not pat["SURNAME"].search(head) and not re.search(
+            re.escape(pat["name"].split()[0]), head, re.I):
+        raise ValueError(
+            f"报头 {head!r} 里没有 {pat['name']!r} 的名或姓——"
+            f"不含人物名的刊头不得当作归属证据（这正是多作者刊物的形态）")
+    pat = dict(pat)
+    pat["masthead"] = head
+    pat["MASTHEAD"] = re.compile(re.escape(head), re.I)
+    return pat
 
 
 # 说话人标签：行首「名字:」。**必须多次出现且后文每次不同**才算逐字稿。
@@ -184,6 +222,17 @@ def check_text(text: str, pat: dict):
             a, b = max(0, m.start() - 60), min(len(text), m.end() + 60)
             return True, code, " ".join(text[a:b].split()), counter
 
+    if pat.get("MASTHEAD"):
+        for m in pat["MASTHEAD"].finditer(text):
+            # 与署名同样要求**结构位置**：行首，或跟在 `|`／`·` 这类分隔符后面。
+            before = text[max(0, m.start() - 14):m.start()]
+            if not (m.start() == 0 or "\n" in before or re.search(r"[|·—–]\s*$", before)):
+                continue
+            if counter:      # 文末有别人的身份署名 → 报头不足以归属
+                break
+            a, b = max(0, m.start() - 60), min(len(text), m.end() + 60)
+            return True, "A-masthead", " ".join(text[a:b].split()), counter
+
     ev = turns_evidence(text, pat)
     if ev:
         # ★ 轮次型证据不受他人署名影响，反证清空。
@@ -229,6 +278,20 @@ SELFTEST_NEGATIVE = [
 ]
 
 
+SELFTEST_MASTHEAD = "Public's Blog"
+SELFTEST_MASTHEAD_POSITIVE = [
+    ("单作者站点报头", "Ratios matter | Public's Blog\n Ratios matter\n"
+                       "I have argued for years that the ratio matters.\n"),
+]
+SELFTEST_MASTHEAD_NEGATIVE = [
+    ("报头在，但文末是别人的署名",
+     "Ratios matter | Public's Blog\n Ratios matter\nThe ratio matters.\n"
+     "Richard Roe is Chairman of the Example Foundation.\n"),
+    ("报头只出现在句子中间，不是结构位置",
+     "She once wrote on Public's Blog that ratios matter, or so the story goes.\n"),
+]
+
+
 def self_test() -> int:
     pat = build_patterns(SELFTEST_NAME)
     bad = []
@@ -242,12 +305,35 @@ def self_test() -> int:
         print(f"  {'✓' if not ok else '✗'} 反例 {label}: {'已拒' if not ok else '误放行 ' + code}")
         if ok:
             bad.append(f"反例 {label} 被误放行（{code}）")
+    # ── A-masthead 的双向对照 ──
+    mp = attach_masthead(pat, SELFTEST_MASTHEAD)
+    for label, text in SELFTEST_MASTHEAD_POSITIVE:
+        ok, code, ev, _ = check_text(text, mp)
+        print(f"  {'✓' if ok and code == 'A-masthead' else '✗'} 正例 {label}: {code or '——'} {ev[:50]}")
+        if not (ok and code == "A-masthead"):
+            bad.append(f"正例 {label} 未通过（得 {code or '无据'}）")
+    for label, text in SELFTEST_MASTHEAD_NEGATIVE:
+        ok, code, _, _ = check_text(text, mp)
+        print(f"  {'✓' if not ok else '✗'} 反例 {label}: {'已拒' if not ok else '误放行 ' + code}")
+        if ok:
+            bad.append(f"反例 {label} 被误放行（{code}）")
+    # ★ 最要命的一条：**不含人物名的刊头必须声明不了**。
+    #   这一条守的是 Steinhardt 那轮的 CONTACT 形态——多作者季刊，
+    #   刊头里没有他的名字，因此永远拿不到 masthead 豁免。
+    try:
+        attach_masthead(pat, "CONTACT Quarterly")
+        bad.append("反例 不含人物名的刊头 被接受了声明（这会让多作者刊物全部洗白）")
+        print("  ✗ 反例 不含人物名的刊头: 误接受")
+    except ValueError:
+        print("  ✓ 反例 不含人物名的刊头: 已拒绝声明")
+
     if bad:
         print("\n负对照未过：")
         for b in bad:
             print(f"  · {b}")
         return 2
-    print(f"\n负对照通过（{len(SELFTEST_POSITIVE)} 正 + {len(SELFTEST_NEGATIVE)} 反）")
+    print(f"\n负对照通过（{len(SELFTEST_POSITIVE) + len(SELFTEST_MASTHEAD_POSITIVE)} 正 + "
+          f"{len(SELFTEST_NEGATIVE) + len(SELFTEST_MASTHEAD_NEGATIVE) + 1} 反）")
     return 0
 
 
@@ -257,6 +343,9 @@ def main() -> int:
     ap.add_argument("--name", help="人物全名（取 meta.json 的 name）")
     ap.add_argument("--claim-p1", nargs="*", default=None,
                     help="声称是 P1 的文件名；省略则检查目录里全部 .txt")
+    ap.add_argument("--masthead", default=None,
+                    help="单作者站点的报头（如 \"Seth's Blog\"）。**必须含人物的名或姓**，"
+                         "否则拒绝声明——不含人物名的刊头正是多作者刊物的形态。")
     ap.add_argument("--self-test", action="store_true",
                     help="只跑内置双向负对照，不读语料")
     a = ap.parse_args()
@@ -268,7 +357,7 @@ def main() -> int:
         return 3
 
     try:
-        pat = build_patterns(a.name)
+        pat = attach_masthead(build_patterns(a.name), a.masthead)
     except ValueError as exc:
         print(f"✗ {exc}", file=sys.stderr)
         return 3

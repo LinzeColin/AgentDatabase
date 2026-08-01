@@ -108,7 +108,18 @@ def main() -> int:
                               encoding="utf-8")
         touched.append("registry/index.json")
 
-    for name in ("README.md", "VERIFICATION.md", "handoff.md"):
+    # ★ **VERIFICATION.md 不在这里**，这是本工具的一条硬边界。
+    #
+    #   它是**验证记录**，不是标签：正文写的是某一次实跑的逐项结果。
+    #   把它的标题改成新版本号而正文还是上一次的，比标题陈旧**更糟**——
+    #   陈旧标题一眼看得出，改过标题的旧正文会冒充当前复验。
+    #   v0.0.0.16 升版时本工具就这么干过一次（正文仍写着 PARTIAL、
+    #   bundle 构不出来、97 人、59 用例，而那三件当时都已不成立）。
+    #
+    #   正确的压力来自另一头：`check_contract_drift.py` 仍然要求
+    #   它的标题等于 VERSION——**于是你必须真的重跑验证并重写正文**，
+    #   而不是让一个改名工具替你把它变绿。
+    for name in ("README.md", "handoff.md"):
         if rewrite_title(root / name, new):
             touched.append(f"{name}（首行标题）")
 
@@ -124,7 +135,10 @@ def main() -> int:
         return 1
     print("  · PACKAGE_MANIFEST.json / checksums.sha256（由 build_manifest.py 重建）")
 
-    print("\n自查（判据归 check_contract_drift.py，本脚本只做替换）：")
+    print("\n⚠ VERIFICATION.md **未改**——它是验证记录不是标签。\n"
+          "  请真的重跑一遍验证并重写正文，然后自己把标题改成新版本号。\n"
+          "  下面的自查会因此报它漂移，那是有意的。\n")
+    print("自查（判据归 check_contract_drift.py，本脚本只做替换）：")
     drift = subprocess.run([sys.executable, str(root / "scripts" / "check_contract_drift.py")],
                            cwd=str(root), capture_output=True, text=True)
     print((drift.stdout or "").rstrip())

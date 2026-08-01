@@ -1,0 +1,50 @@
+{
+  "candidate_cards": [
+    "A. 人物与身份：Seth Godin；客户营销师；营销作家、博客作者、创业者。\n   专业背景：1960 年生于美国。1995 年创办 Yoyodyne，1998 年售予 Yahoo! 并短暂任其直销副总裁。著有 Permission Marketing、Purple Cow、Linchpin、This Is Marketing 等。altMBA 与 akimbo 创办人。自 2002 年起在 seths.blog 近乎每日更新。。\n   应用价值：场景：marketing-strategy；permission-and-trust-design；creative-shipping-discipline；positioning-and-audience-choice；关键能力：把营销问题重述成「你为谁做、他们想成为谁」；许可式营销与信任设计；把创作纪律讲成可执行的出货节奏。\n   区分依据：seths.blog 的唯一作者；Purple Cow 与 Permission Marketing 的作者；Yoyodyne 创办人。本轮语料 193 篇正文全部取自该博客 2003–2026 年，署名唯一。。"
+  ],
+  "candidate_count": 1,
+  "candidates": [
+    {
+      "application_scenarios": [
+        "marketing-strategy",
+        "permission-and-trust-design",
+        "creative-shipping-discipline",
+        "positioning-and-audience-choice"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://seths.blog",
+          "note": "本人博客，2003–2026 共 193 篇正文构成本轮语料"
+        },
+        {
+          "locator": "corpus/wip-godin",
+          "note": "已抓取并隔离 3 篇 holdout 的本地语料"
+        }
+      ],
+      "canonical_name": "Seth Godin",
+      "distinguishing_basis": "seths.blog 的唯一作者；Purple Cow 与 Permission Marketing 的作者；Yoyodyne 创办人。本轮语料 193 篇正文全部取自该博客 2003–2026 年，署名唯一。",
+      "evidence_level": "high",
+      "identity_category": "客户营销师",
+      "key_capabilities": [
+        "把营销问题重述成「你为谁做、他们想成为谁」",
+        "许可式营销与信任设计",
+        "把创作纪律讲成可执行的出货节奏"
+      ],
+      "label": "A",
+      "occupation_or_role": "营销作家、博客作者、创业者",
+      "professional_background": "1960 年生于美国。1995 年创办 Yoyodyne，1998 年售予 Yahoo! 并短暂任其直销副总裁。著有 Permission Marketing、Purple Cow、Linchpin、This Is Marketing 等。altMBA 与 akimbo 创办人。自 2002 年起在 seths.blog 近乎每日更新。",
+      "subject_uid": null
+    }
+  ],
+  "generated_at": "2026-08-01T11:20:15Z",
+  "normalized_name": "sethgodin",
+  "resolution": "single",
+  "schema_version": "1.0",
+  "search_scope": [
+    "sibling canonical registry",
+    "authoritative public sources supplied by orchestration"
+  ],
+  "selected_subject_uid": null,
+  "status": "ready",
+  "target_name": "Seth Godin"
+}

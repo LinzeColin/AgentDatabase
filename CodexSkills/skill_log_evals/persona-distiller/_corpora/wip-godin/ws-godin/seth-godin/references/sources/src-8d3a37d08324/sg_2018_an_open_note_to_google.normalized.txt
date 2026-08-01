@@ -1,0 +1,22 @@
+Please don’t kill the blogs | Seth's Blog
+ Please don’t kill the blogs
+ An open note to Google
+ To the gmail team,
+ You've built a tool for a billion people. Most of my blog readers use it every day, and so do I. Thanks for creating an effective way for people to connect to the people and ideas they care about.
+ That comes with responsibility. The same responsibility that the postal service has… to deliver the mail.
+ I'm aware that you don't charge the people who use gmail for the privilege. In fact, we're the product, not the customer. Your goal is to keep people within the Google ecosystem and to get the writers and marketers who use email as a permission asset to instead shift to paying money (to Google) to inform and reach their audience.
+ So you invented the 'promotions' folder.
+ It seems like a great idea. That spam-like promo mail, all that stuff I don't want to read now (and probably ever) will end up there. Discounts on shoes. The latest urgent note from someone I don't even remember buying from. The last time I checked, you've moved more than 100,000 messages to my promotions folder. Without asking.
+ Alas, you've now become a choke point. You take the posts from this blog and dump them into my promo folder–and the promo folder of more than a hundred thousand people who never asked you to hide it.
+ Emails from my favorite charities end up in my promo folder. The Domino Project blog goes there as well. Emails from Medium, from courses I've signed up for, from services I confirmed just a day earlier. Items sent with full permission, emails that by most definitions aren't "promotions."
+ Here's a simple way to visualize it: Imagine that your mailman takes all the magazines you subscribe to, mixes them in with the junk mail you never asked for, and dumps all of it in a second mailbox, one that you don't see on your way into the house every day. And when you subscribe to new magazines, they instantly get mixed in as well.
+ It's simple: blogs aren't promotions. Blogs subscribed to shouldn't be messed with. The flow of information by email is an extraordinary opportunity, and when a choke point messes with that to make a profit, things break.
+ The irony of having a middleman steal permission is not lost on me. That's what you're doing. You're not serving your customers because you're stealing the permission that they've given to providers they care about it. And when publishers switch to SMS or Facebook Messenger, that hardly helps your cause.
+ The solution is simple: Create a whitelist. Include the top 10,000 blogs (you probably still have the list from when you shut down Google Reader). Make the algorithm smarter, and make it easier for your users to let you know about the emails that are important enough to be in their inbox. When an email sender shows up regularly, it's probably a smart idea to ask before unilaterally shifting it to the promo folder.
+ Of course, users are free to choose a different email client. Alas, senders aren't. And as a publisher, it hurts me that I can't keep the promise I've made to my readers.
+ And, while you're upgrading the system, what's up with all the weird sex spam we've been getting the last four months? It doesn't seem that difficult to distinguish it from actual human emails…
+ Google and Facebook are now the dominant middlemen for more than 85% of all online advertising. Along the way, Google has also dominated much of the email communication on the planet.  You get all the money but I think you need to up your game in return.
+ Thanks in advance for fixing this.
+ My readers want to get the stuff they asked to get. You probably do too.
+ [UPDATE: Thanks to everyone who contacted me after this post went live. I heard from hundreds of bloggers, writers, readers and others that were concerned about deliverability and the viability of email as a reliable communications tool. I also heard from a few folks on the Gmail team at Google. I'm pleased to let you know that we had a really productive conversation, and they're more aware than ever of the importance of effectively sorting the mail to serve their users. Along the way, they shared a bit about the new work they're doing in revamping the Promotions tab, a project that they're optimistic and enthusiastic about to make the tab more valuable to users and marketers alike. I'll keep you posted.]
+ January 16, 2018

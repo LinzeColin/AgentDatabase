@@ -4,7 +4,7 @@
   "display_name": "人物蒸馏 Skill / Persona Distiller",
   "distribution": {
     "canonical_registry": "../persona-distiller-group",
-    "kind": "repository-customized-v0.0.0.15",
+    "kind": "repository-customized-v0.0.0.16",
     "lineage_base_archive_sha256": "e891912d98d14afb7677ac935a19be329d97d206f4ae74a644892f46b17f6748"
   },
   "evaluation_suites": 16,
@@ -16,8 +16,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "962d1bb97a6cb8886fc80149a2ab9625ae3e6f4684301256262abd90f1a56dc2",
-      "size_bytes": 26975
+      "sha256": "841271ac8ae1695599d8f30f25dc3df1187e5c7e2fefc4613415a4e132918d33",
+      "size_bytes": 29178
     },
     {
       "path": "CONTRIBUTING.md",
@@ -31,7 +31,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "35bf9ea78b42f700bc7a100e29127baf7e09f373467ca4693166e9d6e7e8c89e",
+      "sha256": "2d9717e93d892c0ec6e991a9e344e1d4a61cfd1519556edfaab14df95cab85f3",
       "size_bytes": 8802
     },
     {
@@ -56,12 +56,12 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "9c63e9a39931df33a3bafca452c0e9e3f203add17c9a47d09bd723119f458bd7",
-      "size_bytes": 7006
+      "sha256": "6cecc71e003130291ad2141a5b9fdec46d42001d4430faeb4ca7df05b7e8a060",
+      "size_bytes": 6646
     },
     {
       "path": "VERSION",
-      "sha256": "c4256d5172ce2a578c8d17441f68924324acf8ad7a00d1f341ffc08712aba38f",
+      "sha256": "4323fb2968458b8470797a83c2909ea96e3a1d1ac96ab460bd041e6f00cf9876",
       "size_bytes": 10
     },
     {
@@ -121,7 +121,7 @@
     },
     {
       "path": "handoff.md",
-      "sha256": "3b0f2baab9fb1fcd52b6cd07f1385427848f1bdce32b7bfae0e39cca8cb0cf02",
+      "sha256": "13e2de596f55148fed54d6e4c11f620c557c96fb3029541eccafbdf70a29a4e4",
       "size_bytes": 3702
     },
     {
@@ -141,7 +141,7 @@
     },
     {
       "path": "manifest.json",
-      "sha256": "7735562c22495c53aeeeba6f985b90a69e5deb7ab3b37c2079b6744f5d198e68",
+      "sha256": "aa3629b3a03c0e55306a1063ad7d1514360840413a658e1788ab90228e41b5d7",
       "size_bytes": 1191
     },
     {
@@ -456,8 +456,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_authorship.py",
-      "sha256": "580b1cc210dc7c6bd96ad925f1f285fd3a6283e39d0ed49ec1562151e1b4e82f",
-      "size_bytes": 16522
+      "sha256": "f0295ae23d875e8d19b861677f139895ffbb2cc38ec15536cce497ce9dc40e94",
+      "size_bytes": 21184
     },
     {
       "path": "references/pipeline/checkers/check_checkers.py",
@@ -711,8 +711,8 @@
     },
     {
       "path": "scripts/bump_version.py",
-      "sha256": "dacb7ddea5d15ed8fa2dafe7d1df18e515328fe73e4f4969e2e9e4645cc6eccc",
-      "size_bytes": 5789
+      "sha256": "22d9039752d6ab2c3e13aa2ad03c404f712c9e21c84aa4a2d8a23861e6f81977",
+      "size_bytes": 6828
     },
     {
       "path": "scripts/check_absence_claims.py",
@@ -721,8 +721,8 @@
     },
     {
       "path": "scripts/check_authorship.py",
-      "sha256": "580b1cc210dc7c6bd96ad925f1f285fd3a6283e39d0ed49ec1562151e1b4e82f",
-      "size_bytes": 16522
+      "sha256": "f0295ae23d875e8d19b861677f139895ffbb2cc38ec15536cce497ce9dc40e94",
+      "size_bytes": 21184
     },
     {
       "path": "scripts/check_checkers.py",
@@ -741,8 +741,8 @@
     },
     {
       "path": "scripts/check_contract_drift.py",
-      "sha256": "30e5e5fdf6c8207abcc86a6c71c99d0b21bdb638bb14b94d1ffb7dd9a04ec874",
-      "size_bytes": 17665
+      "sha256": "54a9db943110222c02b998a9e2cfe0345f66b556774088b226932ce006e15869",
+      "size_bytes": 19405
     },
     {
       "path": "scripts/check_distillation_freshness.py",
@@ -766,8 +766,8 @@
     },
     {
       "path": "scripts/check_semantic_residue.py",
-      "sha256": "f3b24f8eaab7865c99839f569730c232b95942da2d875c5c0b15c57ae6b98181",
-      "size_bytes": 8461
+      "sha256": "afd0218a9d790fb9f90f925e9e2e5665434b7cc2f0de603ccdeb2cdf5b168b1a",
+      "size_bytes": 10202
     },
     {
       "path": "scripts/common.py",
@@ -856,8 +856,8 @@
     },
     {
       "path": "scripts/quality_check.py",
-      "sha256": "6950d6df162d0dd40cb20a467d87301cd331300c94520d590dbaf901866f5ba5",
-      "size_bytes": 39867
+      "sha256": "55412dc636dc89f69e605d7b808ec876391de7897d79693b6344cee524a35501",
+      "size_bytes": 40611
     },
     {
       "path": "scripts/register_persona.py",
@@ -1411,5 +1411,5 @@
     },
     "secret_findings": 0
   },
-  "version": "v0.0.0.15"
+  "version": "v0.0.0.16"
 }

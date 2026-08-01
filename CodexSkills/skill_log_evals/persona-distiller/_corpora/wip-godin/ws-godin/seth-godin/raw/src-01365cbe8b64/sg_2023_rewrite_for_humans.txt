@@ -1,0 +1,18 @@
+Rewrite for humans | Seth's Blog 
+ Rewrite for humans 
+ My building had an elevator problem. The management company sent everyone this note:
+ Please be advised we have been experiencing intermittent issues with the elevator. Our priority is your safety, and we are taking immediate action to address the situation. 
+ After a thorough investigation by our electrician, it has been identified that there may be an issue with low voltage affecting the elevator’s performance. The electrician has reported this matter directly to Con Edison and is working collaboratively with them to rectify the situation promptly. Con Edison will not be able to address this issue until sometime next week. 
+ Until this matter is resolved, the elevator will be taken out of service. 
+ We understand that any disruption in elevator service can be inconvenient, and we sincerely apologize for any inconvenience this may cause. Your safety is our top priority, and we assure you that we are taking every necessary step to resolve this matter as quickly as possible. 
+ We appreciate your understanding and cooperation during this time. 
+ I asked ChatGPT to rewrite it for humans. It responded with:
+ We’re fixing the intermittent elevator issues to ensure your safety. 
+ Our electrician found a potential low voltage problem affecting the elevator. They’ve informed Con Edison and are working together to solve it quickly. However, Con Edison can only start repairs next week. 
+ For safety, we’re shutting down the elevator until it’s fixed. 
+ We apologize for the inconvenience this causes and are working fast to resolve it. Thank you for your patience and cooperation. 
+ I took it one step further:
+ You have probably noticed that the elevator is broken. The electrician is working with ConEd but they don’t expect it to be fixed until next week. 
+ We know it’s a hassle, and thank you for being patient. 
+ People don’t write like bureaucrats because it’s easy or fun. They do it because of the mistaken belief that it lets them off the hook.
+ December 28, 2023

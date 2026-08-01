@@ -261,6 +261,25 @@ def check(root: pathlib.Path) -> tuple[list[str], list[str]]:
                 f"[轴混写] {name}:{lineno} 同一行同时出现 skill_version 与 "
                 f"builder_version，读者必然搞混｜{line[:70]}")
 
+    # --- B2. 检查器镜像：scripts/ 与 references/pipeline/checkers/ 必须逐字节相同 ---
+    #
+    # 这两处各有一份同名检查器，**而真正把门的是 `scripts/` 那份**
+    #   （`quality_check.py` 用 `Path(__file__).parent / 'check_authorship.py'` 加载）。
+    # 实测（Godin #99 当场撞到）：`check_semantic_residue.py` 早已分叉——
+    # Robertson #97 补的「祈使禁止族」只落在 `references/` 那份，
+    # **门跑的一直是没修过的旧版**。改进做了，门没拿到，而两边各自 `--self-test` 全绿。
+    #
+    # 这是第二十二种的又一形态：同一件东西两份拷贝，改一处另一处继续活着。
+    mirrors = sorted((root / "references/pipeline/checkers").glob("check_*.py"))
+    for mirror in mirrors:
+        twin = root / "scripts" / mirror.name
+        if not twin.is_file():
+            continue
+        if mirror.read_bytes() != twin.read_bytes():
+            problems.append(
+                f"[检查器镜像] {mirror.name} 在 scripts/ 与 references/pipeline/checkers/ "
+                f"两处不一致——**把门的是 scripts/ 那份**，改了 references/ 不会生效")
+
     # --- C. 身份输入合同 ---
     fam_file = root / "registries" / "identity-families.json"
     fam = _json(fam_file) or {}
@@ -358,6 +377,16 @@ def self_test() -> int:
         dirty = _fixture(tmp / "b", drift=True)
         problems, _ = check(dirty)
         blob = " ".join(problems)
+        # 镜像分叉的负对照
+        (dirty / "scripts").mkdir(exist_ok=True)
+        (dirty / "references/pipeline/checkers").mkdir(parents=True, exist_ok=True)
+        (dirty / "scripts" / "check_x.py").write_text("A\n", encoding="utf-8")
+        (dirty / "references/pipeline/checkers" / "check_x.py").write_text("B\n", encoding="utf-8")
+        problems, _ = check(dirty)
+        blob = " ".join(problems)
+        if "[检查器镜像]" not in blob:
+            failures.append("负对照未被抓出：B2·检查器两处镜像分叉")
+
         for want, label in (
             ("manifest.json:version", "A·机读版本漂移"),
             ("README.md:首行标题", "A·人读标题漂移"),
