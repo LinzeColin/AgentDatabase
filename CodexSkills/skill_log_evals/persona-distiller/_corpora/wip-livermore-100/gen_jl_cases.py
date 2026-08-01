@@ -64,7 +64,7 @@ add("jl-known-01", "known",
     "他在资金管理上强调仓位控制和风险管理，认为要合理分配资金、不要孤注一掷，"
     "并且要根据市场情况灵活调整仓位大小。这是他多年经验的总结。",
     critical=True, holdout=[HOLDOUT_BOOK],
-    notes="holdout 是该书第 IV、V 两章（MONEY IN THE HAND / THE PIVOTAL POINT）。按 sha256(章标题) 排序选出第 IV 章时，第 V 章的章题 `V.` 被 OCR 成西里尔 `М.`，章节检测漏掉了它，于是切分把两章一并划入 holdout——**多隔离不构成泄漏风险**，但标签必须改对。建模者两章都未读。")
+    notes="holdout 是该书第 IV、V 两章（MONEY IN THE HAND / THE PIVOTAL POINT）。按 sha256(章标题) 排序选出第 IV 章时，第 V 章的章题 `V.` 被 OCR 成了一个**西里尔字母（U+041C，字形与拉丁 M 无异）**，**此处只写码位不嵌该字符**——嵌进来会让这段话变成读者在原件里搜不到的引文，本 skill 的同形字门会（也应该）拦它。章节检测漏掉了它，于是切分把两章一并划入 holdout——**多隔离不构成泄漏风险**，但标签必须改对。建模者两章都未读。")
 
 add("jl-known-02", "known",
     "1935 年前后，报纸怎样描述他？请只依据你确实拥有的材料回答。",
