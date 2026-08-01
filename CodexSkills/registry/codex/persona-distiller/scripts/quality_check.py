@@ -932,6 +932,62 @@ def run_authorship_gate(report, target: Path, meta: dict[str, Any],
                      f'（署名／编者注／逐字稿轮次三者皆无）')
 
 
+def run_attribution_basis(report, target: Path, meta: dict[str, Any],
+                          sources: list[dict[str, Any]]) -> None:
+    """归属依据门（v0.0.0.24 新增）——**印刷时代之前的人物，靠什么证明是他写的**。
+
+    ## 它补的是 `check_authorship.py` 结构上够不到的地方
+
+    归属门认五种证据：`A-byline`／`A-editorial`／`A-turns`／`A-masthead`／`A-copyright`。
+    **五种全部是印刷出版机器的产物。** 公元前五世纪的希腊一样都没有。
+
+    更糟的是它**可能会通过**：现代译本扉页印着人物名，`A-byline` 照样命中；
+    而 Kühn 版 22 卷里今天已知为伪托的篇目，**扉页署名与真作一模一样**。
+    于是那条判据在最需要它的地方分辨力为零。
+
+    起因是 2026-08-02 的 Hippocrates：一手源随手可取（Perseus／Gutenberg 实测均 200），
+    而学界公认无一篇能归到他名下——**抓 45 条源毫无难度，抓完 `own_voice_ratio` 真值是 0。**
+
+    ## 只在 research 阶段、只对 historical 人物硬拦
+
+    归属错了，六路研究、断言、文档、用例全部要重做——和归属门同一个理由。
+    非 historical 人物只记指标不判错：印刷时代的署名证据由归属门负责，本门不重复。
+
+    既有 13 份 historical 产物**不受影响**：它们已打包登记，research 门不会重跑。
+    """
+    here = Path(__file__).resolve().parent
+    script = here / 'check_attribution_basis.py'
+    if not script.exists():
+        report.metrics['attribution_basis'] = {
+            '状态': 'check_attribution_basis.py 未安装，**未核验**（不是通过）'}
+        return
+    spec = importlib.util.spec_from_file_location('_pd_attribution', script)
+    module = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(module)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['attribution_basis'] = {'状态': f'检查器加载失败，**未核验**：{exc}'}
+        return
+
+    # ★ 负对照不过 → 它的「全绿」不构成任何证据。与其余硬门同一条纪律。
+    buffer = io.StringIO()
+    with contextlib.redirect_stdout(buffer):
+        if module.self_test() != 0:
+            report.error('content.selftest-failed',
+                         'check_attribution_basis.py 负对照未过——其检查结论不作数')
+            return
+
+    problems, info = module.check_meta(meta)
+    surname = str(meta.get('name') or '').split()[0] if meta.get('name') else ''
+    if str(meta.get('subject_origin') or '') == 'historical':
+        sp, si = module.check_sources(sources, surname)
+        problems += sp
+        info.update(si)
+    report.metrics['attribution_basis'] = info
+    for item in problems:
+        report.error('research.attribution-basis', item)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description='Evidence-aware quality gate for Persona Distiller targets.')
     parser.add_argument('target', type=Path)
@@ -993,6 +1049,7 @@ def main() -> int:
     try:
         sources, holdout = evaluate_sources(report, target, thresholds, args.allow_provisional)
         run_authorship_gate(report, target, meta, sources)
+        run_attribution_basis(report, target, meta, sources)
         run_ocr_gate(report, target, sources)
         report_own_voice(report, target, meta, sources)
         report_refusal_overflow(report, target)

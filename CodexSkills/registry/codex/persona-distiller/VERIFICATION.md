@@ -1,4 +1,4 @@
-# Release verification — Persona Distiller v0.0.0.23
+# Release verification — Persona Distiller v0.0.0.24
 
 Date: 2026-08-02
 
@@ -10,7 +10,7 @@ Date: 2026-08-02
 > bundle 构不出来、97 人、59 用例），**三件当时都已不成立**。
 > 改过标题的旧正文会冒充当前复验，比标题陈旧更糟。已从工具中移除该行为。
 >
-> 本次（v0.0.0.23）**是真的重跑了一遍**，下表每一行都是本次实跑输出。
+> 本次（v0.0.0.24）**是真的重跑了一遍**，下表每一行都是本次实跑输出。
 
 ## Result
 
@@ -34,14 +34,15 @@ Date: 2026-08-02
 | 有效激活率 `check_activation_yield` | passed（纯人物内容 0 误报；**塞 claim 标记会让 `payload_ratio` 下降而不是上升**） | `check_activation_yield.py --self-test` |
 | 新鲜度门的负对照 | passed（下限算式 3 例、分档 5 例、边界 1 例、上界值 1 例） | `check_distillation_freshness.py --self-test` |
 | **★ 分族配重（v0.0.0.23 新增，见下节）** | **passed**；实测 NEXT 由「材料建工师（已 15 人）」改为「医疗护理师（0 人）」 | `references/pipeline/next_person.py --self-test` + 真队列实跑 |
-| 检查器元普查（负对照有没有） | **14 件中 9 OK / 4 无负对照 / 1 不可独立验证**（上版 11 件 6 OK） | `check_checkers.py scripts/ --json` |
-| 蒸馏版本新鲜度 | 下限 `v0.0.0.13`；**102 条中 3 达标 / 99 低于下限 / 0 未知**；见下方说明 | `check_distillation_freshness.py` |
-| Release checksum 全量校验 | passed，**282 files** | `self_check.py` |
+| **★★ 归属依据门（v0.0.0.24 新增，硬拦，见下节）** | **passed**（负对照 10 项，含「争议为空」与「没查过」必须分开）；**真工作区实测**：Galen 工作区未声明依据时 exit 1 | `check_attribution_basis.py --self-test`、对 `ws-galen` 实跑 |
+| 检查器元普查（负对照有没有） | **15 件中 10 OK / 4 无负对照 / 1 不可独立验证**（v0.0.0.22 时为 11 件 6 OK） | `check_checkers.py scripts/ --json` |
+| 蒸馏版本新鲜度 | 下限 `v0.0.0.14`；**102 条中 3 达标 / 99 低于下限 / 0 未知**；见下方说明 | `check_distillation_freshness.py` |
+| Release checksum 全量校验 | passed，**284 files** | `self_check.py` |
 | Canonical group validation | **12 categories, 100 products, 102 artifacts**; passed | `validate_persona_registry.py` |
 | 团队侧版本绑定 | **passed**，三处同为 `v0.0.0.12`；负对照 6 类全抓出 | `persona-distiller-group/scripts/check_group_version_binding.py` |
 | Identity family registry | 12 families；加权多身份输入被拒 | `test_identity_routing`、`test_skill_contract` |
 | Builder JSON Schema | **14 documents** | `self_check.py` |
-| Python script 覆盖 | **54 scripts** | `self_check.py` |
+| Python script 覆盖 | **56 scripts** | `self_check.py` |
 | Root `SKILL.md` 行数 | 206 行；self_check 未报越界 | `self_check.py` |
 | Secret-pattern scan | **0 findings** | `self_check.py` |
 | Reviewer harness 两轮 | passed | `test_six_reviewer_harness_passes_both_rounds` |
@@ -85,6 +86,44 @@ Date: 2026-08-02
 改为 `Hippocrates（医疗护理师，0 人）`，且输出里带 `why` 字段说明原因——
 **看不见理由的排期等于没有排期。**
 
+## ★★ v0.0.0.24 新增：归属依据门——**印刷时代之前的人物，靠什么证明是他写的**
+
+配重把 `NEXT` 指向医疗护理师队首 **Hippocrates**，探源结论出乎意料：
+
+> **一手源随手可取，而归属不成立。**
+> 文集约 60 篇全文在 Perseus 与 Gutenberg 上公开（本次实测两站均 HTTP 200），
+> 但学界公认**没有任何一篇能确定归到历史上的希波克拉底名下**；
+> 唯一归属相对确定的《Nature of Man》**确定的是「不是他」**——出自其女婿 Polybus。
+
+### `check_authorship.py` 结构上够不到这里
+
+它认五种证据：`A-byline`／`A-editorial`／`A-turns`／`A-masthead`／`A-copyright`。
+**五种全部是印刷出版机器的产物。** 公元前五世纪的希腊一样都没有。
+
+更糟的是**它可能会「通过」**：现代译本扉页印着人物名，`A-byline` 照样命中；
+而 Kühn 版 22 卷里今天已知为伪托的篇目，**扉页署名与真作一模一样**。
+**这条判据在最需要它的地方分辨力为零。**
+
+> 「扉页上印着他的名字」证明的是**编者认为**这是他写的，
+> 不是**证据表明**这是他写的。对古代人物，这两件事经常不是同一件事。
+
+### 判据与射程
+
+`subject_origin == "historical"` 时，`meta.json` 必须声明 `attribution_basis`
+四字段：`authority`／`citation`／`disputed_policy`／`disputed_works`，**缺一即错**。
+`disputed_works` 可以是空数组，**但 `disputed_policy` 必须写明为何为空**——
+「没有争议篇目」与「我没查过争议篇目」在机器眼里长得一样，必须由人写下来区分。
+
+**射程必须一起说**：它检查的是「有没有写下依据」，**不是「依据成不成立」**。
+填一段假的 authority 就能骗过它。**它挡的是沉默，不是说谎**——
+而沉默正是 Hippocrates 那一类的失败形态：没有人撒谎，只是没有人问过这个问题。
+
+**在 research 阶段硬拦**，理由与归属门相同：归属错了，六路研究、断言、文档、用例全部要重做。
+**既有 13 份 historical 产物不受影响**——它们已打包登记，research 门不会重跑。
+
+实测：负对照 10 项全过（含上面那条「争议为空 vs 没查过」）；
+**真工作区实测**：`ws-galen` 在未声明依据时 exit 1，报「必须另行写明靠什么证明这是他写的」。
+
 ## ⚠ 必须与「PASS」一起说的三件事
 
 ### 一、新鲜度达标率 3/102，**掉的是尺子不是产物**
@@ -95,9 +134,9 @@ Date: 2026-08-02
 | v0.0.0.17 | `v0.0.0.7` | 9 / 101 |
 | v0.0.0.18 | `v0.0.0.8` | 4 / 101 |
 | v0.0.0.19 | `v0.0.0.9` | 2 / 101 |
-| **v0.0.0.23（本版）** | **`v0.0.0.13`** | **3 / 102** |
+| **v0.0.0.24（本版）** | **`v0.0.0.14`** | **3 / 102** |
 
-产物一份没变，七版之内达标率从 100% 掉到 3%。
+产物一份没变，八版之内达标率从 100% 掉到 3%。
 原因是绝大多数条目的 `distilled_with` 挤在 `v0.0.0.6`–`v0.0.0.7` 一小段上，
 整批贴着旧下限站着——它们来自 `a31cb12d` 的十二族重组，那次**只重打包没重蒸**。
 **下限每往前推一格，就有一大批一起掉下去。**
@@ -135,7 +174,7 @@ v0.0.0.22 把它落成判据，**门刚立起来就在已发布产物里抓到 6
 **8 次是「答不出」、只有 3 次是「答错」**——那两道的答案只存在于产物自己的语料里。
 **产物有语料、裸模型没有，比准确率接近同义反复。**
 
-### 三、14 件检查器里有 4 件没有负对照
+### 三、15 件检查器里有 4 件没有负对照
 
 `check_absence_claims` / `check_claim_anchors` / `check_redundancy` /
 `check_schema_drift` **没有 `--self-test`**，`check_quote_integrity` 有但不可独立验证。
