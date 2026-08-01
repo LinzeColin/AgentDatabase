@@ -1,0 +1,42 @@
+{
+ "t1": {
+  "X": "bare",
+  "Y": "solo",
+  "Z": "team"
+ },
+ "t2": {
+  "X": "team",
+  "Y": "solo",
+  "Z": "bare"
+ },
+ "t3": {
+  "X": "bare",
+  "Y": "team",
+  "Z": "solo"
+ },
+ "t4": {
+  "X": "solo",
+  "Y": "team",
+  "Z": "bare"
+ },
+ "t5": {
+  "X": "team",
+  "Y": "bare",
+  "Z": "solo"
+ },
+ "t6": {
+  "X": "bare",
+  "Y": "team",
+  "Z": "solo"
+ },
+ "t7": {
+  "X": "solo",
+  "Y": "team",
+  "Z": "bare"
+ },
+ "t8": {
+  "X": "bare",
+  "Y": "team",
+  "Z": "solo"
+ }
+}

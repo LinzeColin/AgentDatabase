@@ -1,0 +1,48 @@
+{
+ "persona_intra_mean": 0.0669,
+ "bare_intra_mean": 0.1129,
+ "diff": -0.0461,
+ "per_task": [
+  {
+   "task": "t1",
+   "persona": 0.0652,
+   "bare": 0.0965
+  },
+  {
+   "task": "t2",
+   "persona": 0.0552,
+   "bare": 0.1332
+  },
+  {
+   "task": "t3",
+   "persona": 0.0551,
+   "bare": 0.1075
+  },
+  {
+   "task": "t4",
+   "persona": 0.0722,
+   "bare": 0.1089
+  },
+  {
+   "task": "t5",
+   "persona": 0.0695,
+   "bare": 0.1218
+  },
+  {
+   "task": "t6",
+   "persona": 0.0622,
+   "bare": 0.1158
+  },
+  {
+   "task": "t7",
+   "persona": 0.0895,
+   "bare": 0.1055
+  },
+  {
+   "task": "t8",
+   "persona": 0.0662,
+   "bare": 0.1142
+  }
+ ],
+ "口径": "中文双字词 + 英文词的 Jaccard；**测词汇重叠不测语义一致**"
+}

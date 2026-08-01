@@ -1,0 +1,13 @@
+{
+ "bare": 0.85,
+ "solo": 0.7456,
+ "team": 0.8281,
+ "team_minus_bare": -0.0219,
+ "team_minus_solo": 0.0825,
+ "solo_minus_bare": -0.1044,
+ "length_chars": {
+  "bare": 808,
+  "solo": 470,
+  "team": 1233
+ }
+}
