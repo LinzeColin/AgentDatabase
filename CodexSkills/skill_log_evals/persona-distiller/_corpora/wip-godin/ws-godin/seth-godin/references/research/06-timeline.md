@@ -1,29 +1,30 @@
-# Timeline, stages, and drift
+# 泳道六 · 时间线（timeline）
 
-## Scope and assigned sources
+**样本**：13 篇。本泳道只能建立**「他在某年公开写过什么」**，
+不能建立他的生平年表——**语料里没有任何传记性材料**。
 
-Pending. Use train-split source IDs only.
+## 可确证的时间跨度
 
-## Source-linked observations
+- 最早：`sg_2003_gasp [src-dccf2d8521a0]`、`sg_2003_breathtaking [src-46d40dbb65fa]`（2003 年 9 月 / 8 月）
+- 最晚：`sg_2026_courage_vs_excuses [src-f377c2a5bd55]`（2026 年）、`sg_2026_cheaper_not_to_care [src-b1594202f46a]`（2026 年 3 月 22 日）
+- **跨度 23 年，每年均有正文**（取样每年约 9 篇）
 
-Pending.
+## 关注对象随年份移动，方法不移动
 
-## Candidate Claims
+| 时期 | 他写的对象 |
+|---|---|
+| 2003–2006 | 网站、Web 2.0、iPod 配件、Yahoo! Buzz 榜 |
+| 2007–2010 | 唱片业、报业收费墙、注意力经济、房地产经纪 |
+| 2011–2015 | 出货与「good enough」、现场 vs 录制、patron 模式的过时 |
+| 2016–2020 | if/then 承诺、自我判断的不可靠、选择的成对呈现 |
+| 2021–2026 | 状态定价、AI 作为借口、`cheaper not to care` 的长期不成立 |
 
-Pending.
+**这张表是我按取样篇目归纳的，不是他给的分期。**
 
-## Contradictions and alternative explanations
+## 一条可核的时间断言
 
-Pending.
-
-## Unknowns and source gaps
-
-Pending.
-
-## Proposed Holdout cases
-
-IDs only; research Agents must not inspect Holdout bodies.
-
-## Handoff to adjudication
-
-Pending.
+`sg_2026_cheaper_not_to_care [src-b1594202f46a]`（2026-03-22）与
+`sg_2008_may_i_have_your [src-b589afc7811e]`（2008）相隔十八年，
+而两篇的结构完全一致：**引一句流行说法 → 指出它在长期不成立 → 给出机制**。
+2026 那篇甚至把引号本身当成论据：
+`It's in quotation marks for a reason: it's not true.`
