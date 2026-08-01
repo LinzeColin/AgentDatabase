@@ -1,4 +1,4 @@
-# Release verification — Persona Distiller v0.0.0.21
+# Release verification — Persona Distiller v0.0.0.22
 
 Date: 2026-08-01
 
@@ -10,7 +10,7 @@ Date: 2026-08-01
 > bundle 构不出来、97 人、59 用例），**三件当时都已不成立**。
 > 改过标题的旧正文会冒充当前复验，比标题陈旧更糟。已从工具中移除该行为。
 >
-> 本次（v0.0.0.21）**是真的重跑了一遍**，下表每一行都是本次实跑输出。
+> 本次（v0.0.0.22）**是真的重跑了一遍**，下表每一行都是本次实跑输出。
 
 ## Result
 
@@ -32,6 +32,7 @@ Date: 2026-08-01
 | **扫描件版权页归属 `A-copyright`（v0.0.0.18 新增）** | **passed**；实测他 1940 年那本亲笔著作由「无据」变为 `A-copyright` 有据，Dies 前言仍判无据 | `check_authorship.py --self-test`、真件三向实测 |
 | **`own_voice_ratio`（v0.0.0.19 新增，只报不拦）** | Livermore #100 实测 **0.0076**，而同一份语料 `primary_ratio = 0.9887`——**两个数差 130 倍**；回归用例钉死「把 tier 全改成 P1 也抬不高它」 | `test_own_voice_ratio_is_not_satisfied_by_reclassifying_tiers` |
 | **基线来源门 `check_baseline_provenance`（v0.0.0.20 新增）** | **负对照 4 类全抓出**（含「缺字段沉默通过」）；**对已入库产物实测：64/64 条基线为 `unknown`，判为不可作能力证据** | `--self-test`、真实产物实测 |
+| **拒答溢出门（v0.0.0.22 新增，只报不拦）** | 负对照 5 类通过；**扫 Livermore 已发布产物抓到 6/32 处** | `check_refusal_overflow.py --self-test` |
 | 新鲜度门的负对照 | passed | `check_distillation_freshness.py --self-test` |
 | 检查器元普查（负对照有没有） | 11 件中 **6 OK / 4 无负对照 / 1 不可独立验证** | `check_checkers.py scripts/ --json` |
 | 蒸馏版本新鲜度 | 下限 `v0.0.0.10`；见下方说明 | `check_distillation_freshness.py` |

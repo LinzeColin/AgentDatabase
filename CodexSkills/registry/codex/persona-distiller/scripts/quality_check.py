@@ -512,6 +512,63 @@ def report_own_voice(report, target: Path, meta: dict[str, Any],
     }
 
 
+def report_refusal_overflow(report, target: Path) -> None:
+    """**拒答溢出**（v0.0.0.22，只报不拦）：该拒的拒了，能答的也一起推掉了。
+
+    三次独立盲判指向同一处（「拿边界当答案」／「用单一框架碾过题面」／「拒答溢出」），
+    实测代价是单人物臂 **-0.1044**——本项目已测得的最大单项负收益。
+    **前三次都被当成风格批评记下，没有一次被当成缺陷修过。**
+
+    ## 为什么只报不拦，不设成 error
+
+    判据数的是**句式**：`你应当`／`不要`／编号步骤会被计为可执行判断，
+    而**用陈述句给出的判断（「这题的关键在 X」）会被漏掉**。
+    以一个已知有假阴性的判据去硬拦发布，会误杀正当答案，
+    而误杀会让人把这个门关掉。
+
+    ## 也不放 warnings
+
+    `--strict` 下任何 warning 都会让门失败（`passed = not errors and not (strict and warnings)`）。
+    v0.0.0.8 的教训：「只列不判」放进一个会阻塞的通道，等于自相矛盾。
+    **放 metrics，让数字大到无法忽略，但不替执行者做发布决定。**
+    """
+    here = Path(__file__).resolve().parent
+    script = here / 'check_refusal_overflow.py'
+    if not script.exists():
+        report.metrics['refusal_overflow'] = {'状态': '检查器未安装，**未核验**（不是通过）'}
+        return
+    spec = importlib.util.spec_from_file_location('_pd_refusal', script)
+    module = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(module)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['refusal_overflow'] = {'状态': f'加载失败，**未核验**：{exc}'}
+        return
+    buffer = io.StringIO()
+    with contextlib.redirect_stdout(buffer):
+        if module.self_test() != 0:
+            report.metrics['refusal_overflow'] = {'状态': '**负对照未过，其结论不作数**'}
+            return
+
+    hits, scanned = [], 0
+    for rel in ('evals/judge_payload.v1.json',):
+        p = target / rel
+        if not p.is_file():
+            continue
+        try:
+            for cid, res in module.check_payload(p, 'candidate'):
+                hits.append(cid)
+        except Exception:                                        # noqa: BLE001
+            continue
+        scanned += 1
+    info: dict[str, Any] = {'已扫载荷': scanned, '拒答溢出条数': len(hits)}
+    if hits:
+        info['**这些答案拒了答且什么也没留下**'] = hits[:12]
+        info['口径'] = ('有拒答标记且可执行判断为 0。**数的是句式不是语义**——'
+                        '陈述句形式的判断会被漏掉，故只报不拦。')
+    report.metrics['refusal_overflow'] = info
+
+
 def run_ocr_gate(report, target: Path, sources: list[dict[str, Any]]) -> None:
     """OCR 同形字门（v0.0.0.17 新增）。
 
@@ -938,6 +995,7 @@ def main() -> int:
         run_authorship_gate(report, target, meta, sources)
         run_ocr_gate(report, target, sources)
         report_own_voice(report, target, meta, sources)
+        report_refusal_overflow(report, target)
         train_ids = {record.get('source_id') for record in sources if record.get('split') == 'train'}
         evaluate_research(report, target, thresholds, train_ids, args.allow_provisional)
         cases: list[dict[str, Any]] = []
