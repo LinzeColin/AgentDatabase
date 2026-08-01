@@ -1,6 +1,6 @@
 # Jesse Livermore #100 — 可续检查点（2026-08-01）
 
-**状态：语料与同名门完成，尚未 ingest。** 从下面第四节接着做。
+**状态：语料 + 同名门 + 分层入库全部完成，研究门只差六路正文。** 从第五节接着做。
 
 ## 一、这里有什么
 
@@ -83,3 +83,76 @@ Project Gutenberg 全库：Lefèvre 在册，**Livermore 本人 0 条**。
    `expression` 按第 822 行只能靠书 + 16 条直引、`external`／`decisions`／`timeline` 充裕。
    **`conversations` 若过不了，走「降 profile 但内容评分门自加」的既定退路**（Steinhardt #98 先例），
    并把限制写进 team-card 硬边界，**不许灌次级源凑数**。
+
+
+---
+
+# 五、【2026-08-01 续】入库已完成，研究门只剩一项
+
+## 实测
+
+```
+$ python3 prep_livermore.py --raw <raw> --clean <clean> --target <t> --skill <s>
+去重：149 份，压掉重复段 509 处
+holdout（报纸，按 sha256(文件名) 取前 2）：
+  ['jl_1935_thewashingtontim_065.txt', 'jl_1937_thewashingtontim_071.txt']
+ingest：成功 149，失败 0
+
+$ python3 scripts/quality_check.py <t> --phase research --strict
+passed: False
+  primary_ratio: 0.9799   usable train: 149   holdout: 3
+  lanes: {'writings': 1, 'conversations': 8, 'expression': 1,
+          'external': 148, 'decisions': 148, 'timeline': 148}
+  authorship: {"P1 声称为本人所著": 2, "已证实归属": 2}
+ERRORS: ['research.lane-completion']
+   - completed source-linked lanes 0 < profile minimum 6: []
+```
+
+**唯一未过的是六路正文没写。** 来源侧全部达标：deep 要 45 源 / 0.65 一手，
+实得 **149 源 / 0.980**，六路来源全覆盖，归属 2/2 证实。
+`source-ledger.jsonl` 已随本目录提交，可直接比对。
+
+## 分层结果
+
+| 层 | 数 | 是什么 |
+|---|---:|---|
+| `P1` | 2 | 那本书的 train 卷（17,444 词）与 holdout 章（4,508 词），**两条都由 `A-copyright` 证实** |
+| `P2` | 147 | 1907–1940 同期报道 |
+| `S1` | 3 | Dies 的前言 + 1942 / 1949 两份身后回顾 |
+
+## 三个必须随分数一起说的限制
+
+### 1. `writings` 与 `expression` 各只有 **1 个来源**
+
+就是那本书。deep 只要求每路 ≥1 源，形式上过得去，
+**但语体与写作模型实际建立在单一文本上**。必须写进 team-card 硬边界。
+
+### 2. `conversations` 只有 8 份——**这里我抓到过自己一次**
+
+`dims_for()` 第一版写成 `if quotes > 0 or name in QUOTE_FILES`，
+该路立刻涨到 **40**。而抓源报告第四节白纸黑字写着：自动检测器的候选
+大量是**他太太、他的律师、国会议员、同版面无关报道**在说话。
+
+> **拿一个自己都声明不可靠的信号去填车道计数，就是把门喂饱。**
+
+已改为只认人工核过的那 8 份，该路回落到 8。
+
+### 3. ★ holdout 章的归属证据是**本流程抄进去的**
+
+章节页本身没有扉页，`A-copyright` 判它「无据」——**这是对的**。
+处置是把该卷版权页的逐字原文（`COPYRIGHT, 1040, BY / JESSE 1. LIVERMORE`）
+抄进文件头部并标 `[provenance]`。
+
+**这一步必须留在明面上**：它让一份文件「自带」了原本不在其中的证据。
+陈述本身为真（这一章确实出自那一卷），与报纸语料带 `SOURCE-URL:` 头同性质。
+**但要知道这条路是开着的**——归属门防的是「别人的文章被顺手冠上人物名」这类疏忽，
+**防不住有意粘贴**。
+
+## 六、下一步
+
+1. **写六路正文**（`references/research/*.md`，每路 ≥500 字、逐句挂 source_id）。
+   这是唯一挡住研究门的一项。**判断密集，不外包。**
+2. 断言 → 文档 → 32 用例 → 2 席评委（≤3 轮，指令按人物冻结）。
+3. 取引文前先跑 `check_ocr_homoglyphs.py`：那本书 train 卷含
+   **1284 个西里尔同形字 / 280 个全同形字词**，holdout 章另有 97 / 29。
+   **报纸语料基本干净**（149 份里只有 1 份含 9 个字符）。
