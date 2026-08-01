@@ -156,3 +156,75 @@ ERRORS: ['research.lane-completion']
 3. 取引文前先跑 `check_ocr_homoglyphs.py`：那本书 train 卷含
    **1284 个西里尔同形字 / 280 个全同形字词**，holdout 章另有 97 / 29。
    **报纸语料基本干净**（149 份里只有 1 份含 9 个字符）。
+
+
+---
+
+# 七、【2026-08-01 再续】抓源子代理最终收口于 **542 份**，已按全量重灌
+
+## ⚠ 先看这条：第一版的数字是**中间态**
+
+我第一次读报告时它抓到 **150 份**，写下「8 份带直引 / 16 条」并据此建了库。
+子代理后来继续抓到 **542 份**，终值是 **14 份带直引 / 28 条**。
+
+> **中间态的清单不要留着当终版用。** 已按终版全量重灌。
+
+## 语料存放位置（**不在 git 里**）
+
+```
+~/Downloads/蒸馏/_corpora/livermore-100/
+    corpus_newspapers_541.tar.gz          541 份报纸（LoC，公共领域）
+    jl_1940_HowToTradeInStocks_01.txt     那本书的原始 OCR
+    jl_1940_book_TRAIN.txt                切好的 train 卷
+    jl_1940_book_HOLDOUT_chapter.txt      切好的 holdout 章（含 [provenance] 头）
+    jl_1940_HowToTradeInStocks_preface_dies.txt
+```
+
+**放 D 档而不是 git 的理由**：7.9 MB 一个人物，600 人就是 4.7 GB，
+**这个量级不能进仓库**。D 档按用户 2026-07-29 的裁定**留到 600 人全部完成后才清**，
+且 `HARVEST_REPORT.md` 里每一条都带可复现 URL（重抓约 73 分钟）。
+本目录只留报告、脚本与账本。
+
+## 全量实测
+
+```
+去重：541 份，压掉重复段 1645 处
+holdout（报纸，sha256(文件名) 前 3）：
+  jl_1922_thebuffalovoice_419 / jl_1926_eveningstar_462 / jl_1935_thewashingtontim_065
+ingest：成功 541，失败 0
+
+$ quality_check --phase research --strict
+  primary_ratio  : 0.9887   usable train: 532   holdout: 4
+  own_voice_ratio: 0.0076   ← v0.0.0.19 新增
+  lanes: {'writings': 1, 'conversations': 14, 'expression': 1,
+          'external': 531, 'decisions': 531, 'timeline': 531}
+  authorship: {"P1 声称为本人所著": 2, "已证实归属": 2}
+ERRORS: ['research.lane-completion']       ← 仍然只差六路正文
+```
+
+## ★ 这一版最重要的一个数
+
+| 量 | 值 |
+|---|---|
+| `primary_ratio` | **0.9887**（deep 要 0.65） |
+| `own_voice_ratio` | **0.0076** |
+
+**两个都是对的，差 130 倍。** 532 份可用 train 里 530 份是同期报纸**对他的报道**，
+按 RUNBOOK 第 822 行它们是 `P2`，而 `primary_ratio` 的分子是 `P1 ∪ P2`。
+
+他一生可公开抓取的原话约 **22,500 词**，**97% 压在那一本书上**；
+去掉那本书只剩约 **600 词**。Lefèvre 那本小说 **112,180 词**，
+是他全部存世文字的 **5 倍**——**这就是「Livermore 语录」绝大多数出自小说的结构性原因。**
+
+**这两个数必须一起写进 team-card 硬边界。**
+
+## 抓源子代理指出的两件事
+
+1. **1923-12-21 参议院公共土地委员会宣誓证词的印本全文**
+   （*Leases upon Naval Oil Reserves* hearings）确认存在但取不到
+   （archive.org 无此卷、HathiTrust 被 Cloudflare 挡）。
+   **这是唯一可能提供数千词逐字问答的一手材料，值得人工补。**
+   补到了，`conversations` 与 `expression` 两路的单点风险会实质缓解。
+2. 高价值实得项：**1908-05-15 棉花逼仓当日访谈**、
+   **1923-12-21 参议院证词摘要**、**1940-09-22 死前两月最后一次市场评论**、
+   **1940-11-29 遗书**。

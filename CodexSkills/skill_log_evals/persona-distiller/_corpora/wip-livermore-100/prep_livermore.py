@@ -51,17 +51,34 @@ HEADER_RE = {
     "paper": re.compile(r"^PAPER:\s*(.+)$", re.M),
     "quotes": re.compile(r"^DIRECT-QUOTES-DETECTED:\s*(\d+)", re.M),
 }
-# 抓源报告第三节列明、且逐条人工核过的 8 份带本人直引的文件。
+# 抓源报告第三节列明、且逐条人工核过的 14 份带本人直引的文件（542 份全量抓完后的终版）。
 # 它们一律进 train——我已经读过这些引语。
+# ⚠ 第一版只有 8 份，那是抓源子代理跑到 150 份时的中间态；
+#   它后来继续抓到 542 份，直引从 16 条涨到 28 条。**中间态的清单不要留着当终版用。**
 QUOTE_FILES = {
-    "jl_1940_eveningstar_009.txt",
-    "jl_1923_thewashingtontim_122.txt",
-    "jl_1932_theindianapolist_052.txt",
-    "jl_1934_thewashingtontim_034.txt",
-    "jl_1934_sanantoniolight_086.txt",
+    "jl_1908_thenewsdemocrat_282.txt",
+    "jl_1910_thedetroittimes_023.txt",
+    "jl_1922_theindianapolist_247.txt",
+    "jl_1923_americustimesrec_390.txt",
     "jl_1923_eldoradodailynew_080.txt",
     "jl_1923_thewashingtontim_016.txt",
-    "jl_1910_thedetroittimes_023.txt",
+    "jl_1923_thewashingtontim_122.txt",
+    "jl_1924_casperdailytribu_505.txt",
+    "jl_1932_theindianapolist_052.txt",
+    "jl_1934_sanantoniolight_086.txt",
+    "jl_1934_thewashingtontim_034.txt",
+    "jl_1940_eveningstar_009.txt",
+    "jl_1940_eveningstar_431.txt",
+    "jl_1940_thewaterburydemo_409.txt",
+}
+# 抓源报告第四节：自动检测器初筛出、人工核后说话人**不是他**的文件。
+# 它们同样一律进 train——我读过那些被剔除的句子，知道说话人是谁。
+REJECTED_FILES = {
+    "jl_1917_newyorktribune_135.txt", "jl_1922_thethermopolisin_010.txt",
+    "jl_1924_thewashingtondai_491.txt", "jl_1925_thewashingtontim_054.txt",
+    "jl_1933_theindianapolist_064.txt", "jl_1933_thewashingtontim_134.txt",
+    "jl_1934_eveningstar_056.txt", "jl_1935_sanantoniolight_027.txt",
+    "jl_1940_thewilmingtonmor_563.txt",
 }
 POSTHUMOUS = {"jl_1942_", "jl_1949_"}
 
@@ -134,7 +151,8 @@ def main() -> int:
     print(f"去重：{len(files)} 份，压掉重复段 {total_removed} 处")
 
     # holdout：与内容无关的选法（文件名 sha256 排序），且排除 8 份已读的带引语文件
-    pool = [n for n in sorted(meta) if n not in QUOTE_FILES
+    pool = [n for n in sorted(meta)
+            if n not in QUOTE_FILES and n not in REJECTED_FILES
             and not any(n.startswith(p) for p in POSTHUMOUS)]
     pool.sort(key=lambda n: hashlib.sha256(n.encode()).hexdigest())
     holdout = set(pool[:a.holdout_news])

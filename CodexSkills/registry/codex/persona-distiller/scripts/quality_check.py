@@ -446,6 +446,72 @@ def markdown_report(data: dict[str, Any]) -> str:
 
 
 
+def report_own_voice(report, target: Path, meta: dict[str, Any],
+                     sources: list[dict[str, Any]]) -> None:
+    """**语料里有多少字真是他自己写／说的**（v0.0.0.19 新增，只报不拦）。
+
+    ## 为什么 `primary_ratio` 不够用
+
+    RUNBOOK 第 822 行定：**第三人称叙述体（含"关于他"的报道）→ 降 P2**，
+    而 `primary_ratio` 的分子是 `P1 ∪ P2`。于是——
+
+    Livermore #100 实测：532 份可用 train 里 530 份是同期报纸对他的报道，
+    `primary_ratio = 0.9887`，**deep 的 0.65 轻松通过**。
+    而他本人的话总共只有约 **22,500 词**，其中 **97% 压在一本书上**；
+    去掉那本书，一生可公开抓取的原话**只剩约 600 词**（散在 33 年 14 份报纸里）。
+    对照：Lefèvre 那本小说 112,180 词，是他全部存世文字的 **5 倍**。
+
+    **`primary_ratio = 0.99` 与「他的话只有 2 万字」同时为真**，
+    因为那两个数量的是两件事：前者量「材料是不是同时代一手文献」，
+    后者量「材料里有多少是他本人的表达」。
+    **人物蒸馏要建的是后者的模型。**
+
+    ## 判据
+
+    `own_voice_ratio = 账本 author 命中人物姓氏的 train 源字节 ÷ 全部 train 源字节`
+
+    **它不是代理量**：改 tier、改 dimension、再多抓一万份报道，这个数都不动；
+    唯一能抬高它的是**真的拿到更多他本人的文字**。
+
+    ## 为什么只报不拦
+
+    对历史人物设阈值会直接判死一整类人物——他只出过一本书、没写过专栏、
+    无公开书信集，**瓶颈是史料本身不存在，不是抓取力度**。
+    按既定裁定「门达不到时选诚实退路继续，绝不为凑数放宽判据」，
+    正确动作是**把这个数报出来并写进硬边界**，不是拦住流程，也不是假装没这回事。
+    """
+    name = str(meta.get('name') or '').strip()
+    surname = name.split()[-1] if name.split() else ''
+    if not surname:
+        report.metrics['own_voice'] = {'状态': 'meta 无 name，**未核验**'}
+        return
+    rx = re.compile(re.escape(surname), re.I)
+
+    own_bytes = all_bytes = 0
+    own_ids: list[str] = []
+    for record in sources:
+        rel = record.get('local_path')
+        path = (target / rel) if rel else None
+        if not path or not path.is_file():
+            continue
+        size = path.stat().st_size
+        all_bytes += size
+        if rx.search(str(record.get('author') or '')):
+            own_bytes += size
+            own_ids.append(str(record.get('source_id')))
+    ratio = (own_bytes / all_bytes) if all_bytes else 0.0
+    report.metrics['own_voice'] = {
+        '本人所著的 train 源数': len(own_ids),
+        'train 源总数': len(sources),
+        '本人所著字节': own_bytes,
+        'train 总字节': all_bytes,
+        'own_voice_ratio': round(ratio, 4),
+        '口径': ('账本 author 命中人物姓氏的 train 源字节占比。'
+                 '**与 primary_ratio 量的不是一回事**：后者含「关于他的同期报道」（P2），'
+                 '前者只含他本人的表达。改 tier／再多抓报道都不会让这个数变大。'),
+    }
+
+
 def run_ocr_gate(report, target: Path, sources: list[dict[str, Any]]) -> None:
     """OCR 同形字门（v0.0.0.17 新增）。
 
@@ -825,6 +891,7 @@ def main() -> int:
         sources, holdout = evaluate_sources(report, target, thresholds, args.allow_provisional)
         run_authorship_gate(report, target, meta, sources)
         run_ocr_gate(report, target, sources)
+        report_own_voice(report, target, meta, sources)
         train_ids = {record.get('source_id') for record in sources if record.get('split') == 'train'}
         evaluate_research(report, target, thresholds, train_ids, args.allow_provisional)
         cases: list[dict[str, Any]] = []

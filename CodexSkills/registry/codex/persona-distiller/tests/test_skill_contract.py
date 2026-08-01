@@ -88,6 +88,47 @@ class SkillContractTests(unittest.TestCase):
         self.assertFalse(gate.scan_text(clean)['all_homoglyph'],
                          '同一句的干净版本不许被误报')
 
+    def test_own_voice_ratio_is_not_satisfied_by_reclassifying_tiers(self) -> None:
+        """回归：`primary_ratio` 与「他的话有多少」量的不是一回事。
+
+        Livermore #100 实测：532 份可用 train 里 530 份是同期报纸对他的报道，
+        `primary_ratio = 0.9887`（deep 要 0.65，轻松通过），
+        而 `own_voice_ratio = 0.0076`——**同一份语料，两个数差 130 倍**。
+
+        本用例钉死一件事：**把 tier 全改成 P1 也不会让 own_voice_ratio 变大**。
+        它只认账本 `author` 是不是这个人，不认 tier。
+        """
+        import tempfile
+        sys.path.insert(0, str(ROOT / 'scripts'))
+        try:
+            import quality_check as qc
+        finally:
+            sys.path.pop(0)
+
+        with tempfile.TemporaryDirectory() as td:
+            target = Path(td)
+            (target / 'raw').mkdir()
+            (target / 'raw' / 'own.txt').write_text('x' * 100, encoding='utf-8')
+            (target / 'raw' / 'about.txt').write_text('y' * 900, encoding='utf-8')
+            meta = {'name': 'Jesse Lauriston Livermore'}
+
+            def measure(tier_for_about: str) -> float:
+                sources = [
+                    {'source_id': 'src-a', 'local_path': 'raw/own.txt',
+                     'author': 'Jesse L. Livermore', 'tier': 'P1', 'split': 'train'},
+                    {'source_id': 'src-b', 'local_path': 'raw/about.txt',
+                     'author': 'third-party newspaper report',
+                     'tier': tier_for_about, 'split': 'train'},
+                ]
+                report = qc.Report(target, 'research', 'deep')
+                qc.report_own_voice(report, target, meta, sources)
+                return report.metrics['own_voice']['own_voice_ratio']
+
+            self.assertAlmostEqual(measure('P2'), 0.1, places=4)
+            self.assertAlmostEqual(measure('P1'), 0.1, places=4,
+                                   msg='把第三方报道的 tier 改成 P1，own_voice_ratio 就变大了'
+                                       '——那它又成了一个改标签就能满足的代理量')
+
     def test_skill_metadata_does_not_offer_removed_multi_identity_input(self) -> None:
         """metadata 是调用方唯一会读的那份；它与正文冲突时，冲突落到调用方头上。"""
         text = (ROOT / 'SKILL.md').read_text(encoding='utf-8')
