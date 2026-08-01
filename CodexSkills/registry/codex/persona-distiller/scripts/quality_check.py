@@ -446,6 +446,85 @@ def markdown_report(data: dict[str, Any]) -> str:
 
 
 
+def run_ocr_gate(report, target: Path, sources: list[dict[str, Any]]) -> None:
+    """OCR 同形字门（v0.0.0.17 新增）。
+
+    ## 触发实例
+
+    Jesse Livermore #100 是本项目第一个**只有扫描件**的人物（1877–1940）。
+    他唯一的亲笔著作《How to Trade in Stocks》(1940) 只有 OCR 文本可得，
+    实测 12.5 万字里含 **1405 个西里尔字符**、**314 个「全同形字词」**：
+    `HOW ТО TRADE` 的 `ТО`、`РКЕҒАСЕ`（PREFACE 七个字母全是西里尔同形字）。
+
+    ## 为什么已有的门一件也拦不住
+
+    `check_verbatim_quotes.py` 拿引文回语料里比对——**从语料里复制一段带同形字的话，
+    它会说「找到了」**。逐字引文检查回答的是「语料里有没有这句」，
+    不是「这句里的字符是不是真的」。于是门全绿，而交付出去的「他的原话」
+    含有他绝不可能写下的字符，读者拿去原书里搜一个字也搜不到。
+
+    ## 两级严重度
+
+    - **语料层：只报不拦**（写进 metrics）。扫描件的 OCR 质量不是执行者能修的，
+      而扫描件常常是历史人物**唯一**的一手件。把它判成 error 只会逼人不用扫描件。
+    - **引文层：release 阶段 error**。引文必须能被读者拿回原件核对。
+
+    在 research 阶段就报语料层，是为了**在写第一个字之前**知道哪些源是脏的。
+    """
+    here = Path(__file__).resolve().parent
+    script = here / 'check_ocr_homoglyphs.py'
+    if not script.exists():
+        report.metrics['ocr_homoglyphs'] = {
+            '状态': 'check_ocr_homoglyphs.py 未安装，**未核验**（不是通过）'}
+        return
+    spec = importlib.util.spec_from_file_location('_pd_ocr', script)
+    module = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(module)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['ocr_homoglyphs'] = {'状态': f'检查器加载失败，**未核验**：{exc}'}
+        return
+
+    buffer = io.StringIO()
+    with contextlib.redirect_stdout(buffer):
+        if module.self_test() != 0:
+            report.error('content.selftest-failed',
+                         'check_ocr_homoglyphs.py 负对照未过——其检查结论不作数')
+            return
+
+    # ── 语料层：只报不拦 ──────────────────────────────────────────────
+    corpus_paths = []
+    for record in sources:
+        rel = record.get('local_path')
+        if not rel:
+            continue
+        path = target / rel
+        if path.is_file():
+            corpus_paths.append(path)
+    dirty = module.check_corpus(corpus_paths) if corpus_paths else []
+    info: dict[str, Any] = {'已查语料件': len(corpus_paths), '含同形字的源': len(dirty)}
+    if dirty:
+        info['**这些是 OCR 件，取引文时避开脏位置**'] = [
+            {'源': Path(rep['file']).name,
+             '非拉丁字符': rep.get('counts', {}).get('non_latin_chars'),
+             '全同形字词': rep.get('counts', {}).get('all_homoglyph_words'),
+             '样例': [f"{s['as_scanned']} 读作 {s['reads_as']}" for s in rep.get('samples', [])[:3]]}
+            for rep in dirty[:6]
+        ]
+    report.metrics['ocr_homoglyphs'] = info
+
+    # ── 引文层：release 阶段是硬门 ────────────────────────────────────
+    if report.phase != 'release':
+        return
+    quote_files = [p for p in (
+        list((target / 'evidence').glob('*.jsonl'))
+        + list((target / 'references').rglob('*.md'))
+        + list((target / 'evals').rglob('*.json*'))
+    ) if p.is_file()]
+    for problem in module.check_quotes(quote_files):
+        report.error('content.ocr-homoglyph', problem)
+
+
 def run_content_checks(report, target: Path, cache_dirs: list[str]) -> None:
     """把内容层检查接进发布门（v0.0.0.8 新增）。
 
@@ -745,6 +824,7 @@ def main() -> int:
     try:
         sources, holdout = evaluate_sources(report, target, thresholds, args.allow_provisional)
         run_authorship_gate(report, target, meta, sources)
+        run_ocr_gate(report, target, sources)
         train_ids = {record.get('source_id') for record in sources if record.get('split') == 'train'}
         evaluate_research(report, target, thresholds, train_ids, args.allow_provisional)
         cases: list[dict[str, Any]] = []

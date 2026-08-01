@@ -56,6 +56,38 @@ class SkillContractTests(unittest.TestCase):
         )
         self.assertEqual(completed.returncode, 0, completed.stdout + completed.stderr)
 
+    def test_ocr_homoglyph_gate_has_a_working_negative_control(self) -> None:
+        """没有负对照的检查器，其「全绿」不构成任何证据（RUNBOOK 第十八种）。"""
+        completed = subprocess.run(
+            [sys.executable, str(ROOT / 'scripts' / 'check_ocr_homoglyphs.py'), '--self-test'],
+            cwd=str(ROOT), text=True, capture_output=True,
+        )
+        self.assertEqual(completed.returncode, 0, completed.stdout + completed.stderr)
+
+    def test_verbatim_quote_check_cannot_see_ocr_homoglyphs(self) -> None:
+        """回归：**逐字引文检查会说「找到了」**，因为脏字符在语料里确实存在。
+
+        这正是 v0.0.0.17 立同形字门的理由——两件门查的是两回事：
+        `check_verbatim_quotes` 回答「语料里有没有这句」，
+        `check_ocr_homoglyphs` 回答「这句里的字符是不是真的」。
+        本用例把这条分工钉死：**同形字门必须在引文层报错，且必须是它报的。**
+        """
+        sys.path.insert(0, str(ROOT / 'scripts'))
+        try:
+            import check_ocr_homoglyphs as gate
+        finally:
+            sys.path.pop(0)
+        # `ТНЕ` 三个字母全是西里尔同形字——肉眼与 `THE` 无异
+        dirty = 'It was never my thinking that made ТНЕ big money for me'
+        self.assertIn(dirty, f'corpus … {dirty} … corpus',
+                      '前提：这句在语料里逐字存在，所以逐字引文检查会放行')
+        found = gate.scan_text(dirty)
+        self.assertTrue(found['all_homoglyph'],
+                        '同形字门必须抓出这句里的西里尔冒充字')
+        clean = 'It was never my thinking that made the big money for me'
+        self.assertFalse(gate.scan_text(clean)['all_homoglyph'],
+                         '同一句的干净版本不许被误报')
+
     def test_skill_metadata_does_not_offer_removed_multi_identity_input(self) -> None:
         """metadata 是调用方唯一会读的那份；它与正文冲突时，冲突落到调用方头上。"""
         text = (ROOT / 'SKILL.md').read_text(encoding='utf-8')
