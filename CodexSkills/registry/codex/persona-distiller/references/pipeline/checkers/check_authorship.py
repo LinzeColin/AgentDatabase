@@ -29,6 +29,29 @@ P1 需要下列之一，且**把证据原文打印出来供复核**：
                   **且同一标签后面跟的文字每次都不同**
                   （否则那是标题里的冒号——`<人物名>: 某某标题`
                    在导航/og:title/h1 里重复出现，旧判据把它当成了说话人标记）
+- `A-masthead` —— 以他本人命名的**单作者站点报头**（v0.0.0.16，须显式声明且含其名）
+- `A-copyright`—— **版权页**：行首 `COPYRIGHT … BY` 后跟其名（v0.0.0.18，专为扫描件）
+
+## v0.0.0.18：扫描件的署名页，以及本门看不见的那一类
+
+Livermore #100 的 1940 年亲笔著作只有 OCR 文本可得，署名页成了
+
+    BY
+    JESSE 1. LIVERMORE          ← `L.` 认成 `1.`，且 BY 与名字分行
+
+`BYLINE` 一条也匹配不上，**一份货真价实的亲笔著作被判成「无据」**。
+新增 `A-copyright` 认版权页。写第一版时我给年份写了校验
+（`1[5-9]\\d\\d|20\\d\\d`），在真件上仍然一条不中——那页印的是
+`COPYRIGHT, 1040, BY`，**`1940` 也被 OCR 认错了**。
+**定则：本判据不需要的字段就不要校验**，尤其当它来自最不可靠的那一层。
+
+⚠ **本门按整份文件判归属，因此看不见「卷内换作者」。**
+同一本书的前言署 `EDWARD JEROME DIES`，正文才是 Livermore 的；
+整本以 `--tier P1 --author "Jesse L. Livermore"` 灌进去，
+Dies 那句「Each move was touched with singular genius」就变成了他的自述。
+`suspect_signature_lines()` 会把疑似他人署名行**列出来**，
+但**精度不足以当反证**（同一本书上它也会命中 `NEW YORK`）。
+**正确解法是按作者把文件切开再入库**，切法要留成可复核的脚本。
 
 再做一次**反向检查**：文末若出现**别人**的身份署名
 （`X is Chair of…` / `X is Managing Director of…` / `By <他人名>`），
@@ -90,10 +113,66 @@ def build_patterns(full_name: str) -> dict:
         "EDITORIAL": re.compile(
             rf"[\[\(][^\])]{{0,40}}\b(?:remarks|speech|address|excerpt|written|delivered|adapted)"
             rf"[^\])]{{0,40}}\bby\s+{name_rx}", re.I),
+        # ★ v0.0.0.18 `A-copyright`：扫描件的版权页。
+        #
+        #   Livermore #100 实测：他 1940 年那本亲笔著作的署名页 OCR 成
+        #       BY
+        #       JESSE 1. LIVERMORE          ← `L.` 被认成 `1.`，且 BY 与名字分行
+        #   于是 `BYLINE`（`\bBy\s+名姓\b`，同一行、中间名须以大写字母开头）
+        #   **一条也匹配不上**，一份货真价实的亲笔著作被判成「无据」。
+        #
+        #   版权声明是**结构元素**且由出版社出具，作为归属证据比正文里的 by 更硬。
+        #   两条收窄，防止散文里的「the copyright by X was disputed」被误收：
+        #     ① `COPYRIGHT` 必须在**行首**（MULTILINE `^`）；
+        #     ② 名字允许跨行、允许中间名首字符是数字（专治 OCR 把 `L.` 认成 `1.`），
+        #        **但名与姓本身必须逐字对上**。
+        #   ★ 相邻量词不许吞同一段字符（第六十八种）：`[ \t\r\n]+` 之后接
+        #     `[A-Z0-9]`，两者字符集不相交。
+        #   ③ **年份一律不校验**。第一版写成 `(?:1[5-9]\d\d|20\d\d)?`，
+        #      在真语料上一条也匹配不上——那一页印的是 `COPYRIGHT, 1040, BY`，
+        #      **`1940` 被 OCR 认成了 `1040`**。
+        #      我给一个「本判据根本不需要的字段」写了校验，
+        #      而那个字段恰恰来自最不可靠的一层。**不需要的字段就不要校验。**
+        "COPYRIGHT": re.compile(
+            rf"^[ \t]*(?:COPYRIGHT|©)[^A-Za-z\r\n]{{0,12}}BY"
+            rf"[ \t\r\n]+{first}[ \t\r\n]+"
+            rf"(?:[A-Z0-9][A-Za-z0-9.'\-]{{0,15}}[ \t\r\n]+){{0,2}}{last}\b",
+            re.I | re.M),
         "MINE": re.compile(
             rf"{surname_rx}|^(?:{'|'.join(re.escape(i) for i in sorted(initials))})$", re.I),
         "SURNAME": re.compile(surname_rx, re.I),
     }
+
+
+# 「疑似他人署名行」：全大写、2–4 个词、无常见虚词、独占一行。
+# 书籍前言／序的署名就是这个形态（`EDWARD JEROME DIES`）。
+#
+# ⚠ **只报不判**，绝不当作反证。实测在同一本书上会命中 `NEW YORK`、
+# `EXPLANATORY RULES` 这类地名与小节标题——**精度不够，当反证会误杀整类书籍**。
+# 要防的那件事（卷内换作者）正确的解法是**按作者切开再入库**，
+# 本清单的用处是让人一眼看见「这份文件里还有别人的名字」。
+CAPS_LINE = re.compile(r"^[ \t]*([A-Z][A-Z'\-]{2,}(?:[ \t]+[A-Z][A-Z'\-]{2,}){1,3})[ \t]*$", re.M)
+CAPS_STOPWORDS = {
+    "THE", "AND", "OF", "IN", "TO", "A", "AN", "FOR", "ON", "BY", "WITH", "AT",
+    "FROM", "OR", "AS", "IS", "ARE", "WAS", "HOW", "WHAT", "WHEN", "WHY", "NOT",
+    "ALL", "NEW", "YOU", "YOUR", "THIS", "THAT", "INC", "CO", "COMPANY", "PRESS",
+    "CHAPTER", "CONTENTS", "PREFACE", "INDEX", "PART", "RULES", "STOCKS", "MARKET",
+}
+
+
+def suspect_signature_lines(text: str, pat: dict) -> list:
+    """→ 疑似他人署名行清单（**只报不判**）。"""
+    out = []
+    for m in CAPS_LINE.finditer(text):
+        line = m.group(1)
+        tokens = line.split()
+        if any(t in CAPS_STOPWORDS for t in tokens):
+            continue
+        if pat["SURNAME"].search(line):
+            continue                      # 是本人
+        if line not in out:
+            out.append(line)
+    return out
 
 
 def attach_masthead(pat, masthead):   # masthead: str | None（本机 3.9，注解不写联合类型）
@@ -222,6 +301,14 @@ def check_text(text: str, pat: dict):
             a, b = max(0, m.start() - 60), min(len(text), m.end() + 60)
             return True, code, " ".join(text[a:b].split()), counter
 
+    # A-copyright：版权页。与上面两类同样受反证约束——
+    # 文中出现别人的身份署名时不放行。
+    if not counter:
+        m = pat["COPYRIGHT"].search(text)
+        if m:
+            a, b = max(0, m.start() - 40), min(len(text), m.end() + 40)
+            return True, "A-copyright", " ".join(text[a:b].split()), counter
+
     if pat.get("MASTHEAD"):
         for m in pat["MASTHEAD"].finditer(text):
             # 与署名同样要求**结构位置**：行首，或跟在 `|`／`·` 这类分隔符后面。
@@ -267,6 +354,26 @@ SELFTEST_POSITIVE = [
         f"TML: Question number {i} about communal priorities and their funding?\n"
         f"JP: Answer number {i} setting out the reasoning at some length here.\n"
         for i in range(1, 6))),
+]
+SELFTEST_POSITIVE_COPYRIGHT = [
+    # ★ 实测形态（Livermore 1940 年那本书的版权页 OCR 结果）：
+    #   BY 与名字分行，且中间名 `L.` 被 OCR 认成 `1.`。
+    ("扫描件版权页·跨行 + 中间名被 OCR 成数字",
+     "HOW TO TRADE\nIN STOCKS\n\nBY\nJANE 1. PUBLIC\n\n"
+     "COPYRIGHT, 1940, BY\nJANE 1. PUBLIC\n\nAll rights reserved.\n"),
+    ("© 记号 + 同行", "© 1998 by Jane Q. Public\n\nThe ratio matters.\n"),
+    # ★ 真语料形态：年份本身也被 OCR 认错（1940 → 1040）。
+    #   第一版判据校验了年份，在真件上一条也匹配不上。**不需要的字段不要校验。**
+    ("年份被 OCR 认错（1940→1040）",
+     "COPYRIGHT, 1040, BY\nJANE 1. PUBLIC\n\nAll rights reserved.\n"),
+]
+SELFTEST_NEGATIVE_COPYRIGHT = [
+    ("散文里谈论版权归属，不是版权页",
+     "The dispute over the copyright by Jane Q. Public dragged on for years.\n"),
+    ("版权归别人", "COPYRIGHT, 1940, BY\nRICHARD ROE\n\nJane Public is discussed here.\n"),
+    ("版权页在，但文末是别人的身份署名",
+     "COPYRIGHT, 1940, BY\nJANE Q. PUBLIC\n\nText.\n"
+     "Richard Roe is Chairman of the Example Foundation.\n"),
 ]
 SELFTEST_NEGATIVE = [
     ("他人署名的随笔", "By Richard Roe\n\nJane Public once told me the ratio matters.\n"
@@ -317,6 +424,26 @@ def self_test() -> int:
         print(f"  {'✓' if not ok else '✗'} 反例 {label}: {'已拒' if not ok else '误放行 ' + code}")
         if ok:
             bad.append(f"反例 {label} 被误放行（{code}）")
+    # ── A-copyright 的双向对照（v0.0.0.18）──
+    for label, text in SELFTEST_POSITIVE_COPYRIGHT:
+        ok, code, ev, _ = check_text(text, pat)
+        print(f"  {'✓' if ok and code == 'A-copyright' else '✗'} 正例 {label}: {code or '——'} {ev[:50]}")
+        if not (ok and code == "A-copyright"):
+            bad.append(f"正例 {label} 未通过（得 {code or '无据'}）")
+    for label, text in SELFTEST_NEGATIVE_COPYRIGHT:
+        ok, code, _, _ = check_text(text, pat)
+        print(f"  {'✓' if not ok else '✗'} 反例 {label}: {'已拒' if not ok else '误放行 ' + code}")
+        if ok:
+            bad.append(f"反例 {label} 被误放行（{code}）")
+
+    # ── 疑似他人署名行：**只报不判**，此处只验它确实报得出来 ──
+    lines = suspect_signature_lines(
+        "COPYRIGHT, 1940, BY\nJANE Q. PUBLIC\n\nPREFACE\n\nText here.\n\n"
+        "EDWARD JEROME DIES\n\nI. THE CHALLENGE OF SPECULATION\n", pat)
+    if "EDWARD JEROME DIES" not in lines:
+        bad.append(f"疑似他人署名行未报出：得 {lines}")
+    print(f"  {'✓' if 'EDWARD JEROME DIES' in lines else '✗'} 只报不判 疑似他人署名行: {lines}")
+
     # ★ 最要命的一条：**不含人物名的刊头必须声明不了**。
     #   这一条守的是 Steinhardt 那轮的 CONTACT 形态——多作者季刊，
     #   刊头里没有他的名字，因此永远拿不到 masthead 豁免。
@@ -332,8 +459,11 @@ def self_test() -> int:
         for b in bad:
             print(f"  · {b}")
         return 2
-    print(f"\n负对照通过（{len(SELFTEST_POSITIVE) + len(SELFTEST_MASTHEAD_POSITIVE)} 正 + "
-          f"{len(SELFTEST_NEGATIVE) + len(SELFTEST_MASTHEAD_NEGATIVE) + 1} 反）")
+    npos = (len(SELFTEST_POSITIVE) + len(SELFTEST_MASTHEAD_POSITIVE)
+            + len(SELFTEST_POSITIVE_COPYRIGHT))
+    nneg = (len(SELFTEST_NEGATIVE) + len(SELFTEST_MASTHEAD_NEGATIVE)
+            + len(SELFTEST_NEGATIVE_COPYRIGHT) + 1)
+    print(f"\n负对照通过（{npos} 正 + {nneg} 反，另含 1 条只报不判）")
     return 0
 
 

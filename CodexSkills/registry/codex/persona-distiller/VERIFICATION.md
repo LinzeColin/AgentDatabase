@@ -1,4 +1,4 @@
-# Release verification — Persona Distiller v0.0.0.17
+# Release verification — Persona Distiller v0.0.0.18
 
 Date: 2026-08-01
 
@@ -10,7 +10,7 @@ Date: 2026-08-01
 > bundle 构不出来、97 人、59 用例），**三件当时都已不成立**。
 > 改过标题的旧正文会冒充当前复验，比标题陈旧更糟。已从工具中移除该行为。
 >
-> 本次（v0.0.0.17）**是真的重跑了一遍**，下表每一行都是本次实跑输出。
+> 本次（v0.0.0.18）**是真的重跑了一遍**，下表每一行都是本次实跑输出。
 
 ## Result
 
@@ -27,11 +27,12 @@ Date: 2026-08-01
 | Offline unit / integration / concurrency tests | **66 / 66 passed** | `python3 -m pytest tests/ -q` |
 | 合同漂移门（版本三轴 + 身份合同 + 检查器镜像） | **0 条** | `scripts/check_contract_drift.py` |
 | 合同漂移门的负对照 | passed（坏样本 6 类全抓出） | `check_contract_drift.py --self-test` |
-| 归属门的负对照 | passed（**5 正 + 7 反**） | `check_authorship.py --self-test` |
-| **OCR 同形字门的负对照（v0.0.0.17 新增）** | **passed**（干净英文／真俄语／中文 3 条正对照 0 报；混文种、全同形字词、引文层 3 类坏样本全抓出） | `check_ocr_homoglyphs.py --self-test` |
+| 归属门的负对照 | passed（**8 正 + 10 反**，另含 1 条只报不判） | `check_authorship.py --self-test` |
+| OCR 同形字门的负对照（v0.0.0.17 新增） | **passed**（干净英文／真俄语／中文 3 条正对照 0 报；混文种、全同形字词、引文层 3 类坏样本全抓出） | `check_ocr_homoglyphs.py --self-test` |
+| **扫描件版权页归属 `A-copyright`（v0.0.0.18 新增）** | **passed**；实测他 1940 年那本亲笔著作由「无据」变为 `A-copyright` 有据，Dies 前言仍判无据 | `check_authorship.py --self-test`、真件三向实测 |
 | 新鲜度门的负对照 | passed | `check_distillation_freshness.py --self-test` |
 | 检查器元普查（负对照有没有） | 11 件中 **6 OK / 4 无负对照 / 1 不可独立验证** | `check_checkers.py scripts/ --json` |
-| 蒸馏版本新鲜度 | 下限 `v0.0.0.7`；**101 条中仅 9 条达标、92 条低于下限** | `check_distillation_freshness.py` |
+| 蒸馏版本新鲜度 | 下限 `v0.0.0.8`；**101 条中仅 4 条达标、97 条低于下限** | `check_distillation_freshness.py` |
 | Release checksum 全量校验 | passed，**276 files** | `self_check.py` |
 | Canonical group validation | **12 categories, 99 products, 101 artifacts**; passed | `validate_persona_registry.py` |
 | **团队侧版本绑定（group v0.0.0.9 新增）** | **passed**，三处同为 `v0.0.0.9`；负对照 6 类全抓出 | `persona-distiller-group/scripts/check_group_version_binding.py` |
@@ -53,14 +54,18 @@ Date: 2026-08-01
 
 ## ⚠ 必须与「PASS」一起说的两件事
 
-### 一、新鲜度这一版从 100/100 掉到 9/101，**掉的是尺子不是产物**
+### 一、新鲜度两版之内从 100/100 掉到 4/101，**掉的是尺子不是产物**
 
-v0.0.0.16 时下限是 `v0.0.0.6`，101 条**全部达标**；
-v0.0.0.17 把下限推到 `v0.0.0.7`，于是 **92 条一次性跌到线下**。
+| 版本 | 下限 | 达标 / 总数 |
+|---|---|---|
+| v0.0.0.16 | `v0.0.0.6` | **101 / 101** |
+| v0.0.0.17 | `v0.0.0.7` | 9 / 101 |
+| **v0.0.0.18（本版）** | **`v0.0.0.8`** | **4 / 101** |
 
-原因是那 92 条的 `distilled_with` **恰好都等于 `v0.0.0.6`**，整批贴着旧下限站着——
-它们来自 `a31cb12d` 的十二族重组，那次**只重打包没重蒸**。
-**下限每往前推一格，这一整批就一起掉下去。**
+产物一份没变，两版之内达标率从 100% 掉到 4%。
+原因是绝大多数条目的 `distilled_with` 挤在 `v0.0.0.6`–`v0.0.0.7` 一小段上，
+整批贴着旧下限站着——它们来自 `a31cb12d` 的十二族重组，那次**只重打包没重蒸**。
+**下限每往前推一格，就有一大批一起掉下去。**
 
 按用户 2026-07-29 的裁定：**下限以下不重蒸、只记台账、不阻塞任何流程**
 （`check_distillation_freshness.py` 默认只报不拦，`--strict` 存在但发行流程不用）。
