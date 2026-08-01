@@ -84,10 +84,37 @@ def build_patterns(full_name: str) -> dict:
     这样两种写法互相都能命中（语料里写全中间名、账本里没写，反之亦然）。
     """
     tokens = [t for t in re.split(r"\s+", full_name.strip()) if t]
-    if len(tokens) < 2:
-        raise ValueError(f"人物名至少要有名与姓两段：{full_name!r}")
-    first, last = re.escape(tokens[0]), re.escape(tokens[-1])
-    surname = tokens[-1]
+
+    # ★ v0.0.0.26：**「名 + 姓」是一个西方近代假设，名册里有大量人物不满足它。**
+    #
+    #   Galen #101 实测撞出两处：
+    #     ① `build_patterns("Galen")` **直接抛**——「人物名至少要有名与姓两段」。
+    #     ② `build_patterns("Galen of Pergamon")` 把 **`Pergamon`（一个地名）当姓**，
+    #        于是 `--author "Galen"` 一条也匹配不上，
+    #        `own_voice_ratio` 报 **0.0**——**而真值接近 1.0**。
+    #        没有报错，没有警告：**一份 240 万词的亲笔语料被静默判成「他一个字也没写」。**
+    #
+    #   两类必须分开处理：
+    #     · **单名（mononym）**：Galen、Hippocrates、Avicenna、Paracelsus、Rembrandt、孔子…
+    #       识别标记就是那一个词本身。
+    #     · **地名式后缀**：`X of Y` / `X von Y` / `X de Y` / `X da Y` / `X van Y`…
+    #       **识别的是 X，不是 Y。** 「帕加马的盖伦」姓不是「帕加马」。
+    #
+    #   这不是为了 Galen 一个人开的口子：600 人名册跨 12 族与整部人类史，
+    #   古典、中世纪、东亚人物普遍不是「名+姓」形态。
+    EPITHET = {"of", "von", "van", "de", "da", "del", "della", "di", "du", "al", "ibn", "bin", "ben"}
+    if len(tokens) >= 3 and tokens[1].lower() in EPITHET:
+        # 「X of Y」：识别 X，Y 是地名／族名，**不是姓**
+        first = last = re.escape(tokens[0])
+        surname = tokens[0]
+        tokens = [tokens[0]]
+    elif len(tokens) == 1:
+        # 单名：那一个词既是「名」也是识别标记
+        first = last = re.escape(tokens[0])
+        surname = tokens[0]
+    else:
+        first, last = re.escape(tokens[0]), re.escape(tokens[-1])
+        surname = tokens[-1]
     # ★ 缩写标签要给**两种**：名姓首字母（`MS`）与全部首字母（`MHS`）。
     #   只按全名段数算一种是实测抓到的回归——The Media Line 那份 44 轮逐字稿
     #   用的是 `MS:`／`TML:`，而账本里他的名字是三段的 `Michael H. Steinhardt`，
@@ -98,7 +125,12 @@ def build_patterns(full_name: str) -> dict:
 
     # ★ 可选中间名**自带尾随空格**，与 `first` 后那个必需空格不重叠。
     #   写成 `first[ \t]+(?:mid[ \t]+)?{0,2}last` 才没有两个量词争同一段空白。
-    name_rx = rf"{first}[ \t]+(?:[A-Z][A-Za-z.'\-]{{0,15}}[ \t]+){{0,2}}{last}"
+    # ★ 单名／地名式后缀时 first == last，**不能再要求「名 空格 姓」**——
+    #   那会变成要求同一个词出现两次，`By Galen` 一条也匹配不上。
+    if first == last:
+        name_rx = first
+    else:
+        name_rx = rf"{first}[ \t]+(?:[A-Z][A-Za-z.'\-]{{0,15}}[ \t]+){{0,2}}{last}"
     # 姓氏单独出现也算（`By Steinhardt` 式的短署名）——但只用于**标签归属**判定，
     # 不用于署名判定，避免把「谈论他」的句子当成他的署名。
     surname_rx = re.escape(surname)
@@ -435,6 +467,32 @@ def self_test() -> int:
         print(f"  {'✓' if not ok else '✗'} 反例 {label}: {'已拒' if not ok else '误放行 ' + code}")
         if ok:
             bad.append(f"反例 {label} 被误放行（{code}）")
+
+    # ★ v0.0.0.26 非西方姓名形态（Galen #101 实测撞出）：
+    #   ① 单名必须能建判据且 `By Galen` 命中；② `X of Y` 的识别标记是 X 不是 Y。
+    #   改动前：build_patterns("Galen") 直接抛；
+    #           build_patterns("Galen of Pergamon") 把地名 Pergamon 当姓，
+    #           于是 own_voice_ratio 静默报 0.0——而真值接近 1.0。
+    for nm, want, line, should in [
+        ("Galen", "Galen", "By Galen", True),
+        ("Galen of Pergamon", "Galen", "By Galen", True),
+        ("Leonardo da Vinci", "Leonardo", "By Leonardo", True),
+        ("Jesse Lauriston Livermore", "Livermore", "By Jesse Lauriston Livermore", True),
+        ("Galen of Pergamon", "Galen", "By Pergamon", False),   # 地名不得当成他
+    ]:
+        try:
+            np_ = build_patterns(nm)
+        except ValueError as exc:
+            bad.append(f"姓名形态：{nm!r} 建判据失败——{exc}")
+            print(f"  ✗ 姓名形态 {nm}: 建判据失败")
+            continue
+        okname = np_["surname"] == want
+        okby = bool(np_["BYLINE"].search(line)) is should
+        if not okname:
+            bad.append(f"姓名形态：{nm!r} 识别标记应为 {want!r}，实得 {np_['surname']!r}")
+        if not okby:
+            bad.append(f"姓名形态：{nm!r} 对 {line!r} 的 BYLINE 判定应为 {should}")
+        print(f"  {'✓' if okname and okby else '✗'} 姓名形态 {nm} → {np_['surname']}｜{line!r}={should}")
 
     # ── 疑似他人署名行：**只报不判**，此处只验它确实报得出来 ──
     lines = suspect_signature_lines(

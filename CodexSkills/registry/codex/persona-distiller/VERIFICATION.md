@@ -1,4 +1,4 @@
-# Release verification — Persona Distiller v0.0.0.25
+# Release verification — Persona Distiller v0.0.0.26
 
 Date: 2026-08-02
 
@@ -10,7 +10,7 @@ Date: 2026-08-02
 > bundle 构不出来、97 人、59 用例），**三件当时都已不成立**。
 > 改过标题的旧正文会冒充当前复验，比标题陈旧更糟。已从工具中移除该行为。
 >
-> 本次（v0.0.0.25）**是真的重跑了一遍**，下表每一行都是本次实跑输出。
+> 本次（v0.0.0.26）**是真的重跑了一遍**，下表每一行都是本次实跑输出。
 
 ## Result
 
@@ -27,17 +27,17 @@ Date: 2026-08-02
 | Offline unit / integration / concurrency tests | **70 / 70 passed** | `python3 -m pytest tests/ -q` |
 | 合同漂移门（版本三轴 + 身份合同 + 检查器镜像） | **0 条** | `scripts/check_contract_drift.py` |
 | 合同漂移门的负对照 | passed（坏样本 5 类全抓出，钉住的 builder 版本未被误伤） | `check_contract_drift.py --self-test` |
-| 归属门的负对照 | passed（**8 正 + 10 反**，另含 1 条只报不判） | `check_authorship.py --self-test` |
+| 归属门的负对照 | passed（**8 正 + 10 反**，另含 1 条只报不判，**外加 5 例非西方姓名形态**） | `check_authorship.py --self-test` |
 | OCR 同形字门的负对照 | passed（干净英文／真俄语／中文 3 条正对照 0 报；词内混文种、全同形字词、引文层 3 类坏样本全抓出） | `check_ocr_homoglyphs.py --self-test` |
 | 基线来源门 `check_baseline_provenance` | passed（坏样本 4 类全抓出，含「缺字段沉默通过」；prior-version 未被误杀） | `check_baseline_provenance.py --self-test` |
 | 拒答溢出门（v0.0.0.22 新增，只报不拦） | passed（3 条正对照未误杀，2 类溢出全抓出，带限定的正常回答未被误判） | `check_refusal_overflow.py --self-test` |
 | 有效激活率 `check_activation_yield` | passed（纯人物内容 0 误报；**塞 claim 标记会让 `payload_ratio` 下降而不是上升**） | `check_activation_yield.py --self-test` |
 | 新鲜度门的负对照 | passed（下限算式 3 例、分档 5 例、边界 1 例、上界值 1 例） | `check_distillation_freshness.py --self-test` |
 | **★ 分族配重（v0.0.0.23 新增，见下节）** | **passed**；实测 NEXT 由「材料建工师（已 15 人）」改为「医疗护理师（0 人）」 | `references/pipeline/next_person.py --self-test` + 真队列实跑 |
-| **★★ 归属依据门（v0.0.0.25 新增，硬拦，见下节）** | **passed**（负对照 10 项，含「争议为空」与「没查过」必须分开）；**真工作区实测**：Galen 工作区未声明依据时 exit 1 | `check_attribution_basis.py --self-test`、对 `ws-galen` 实跑 |
+| **★★ 归属依据门（v0.0.0.26 新增，硬拦，见下节）** | **passed**（负对照 10 项，含「争议为空」与「没查过」必须分开）；**真工作区实测**：Galen 工作区未声明依据时 exit 1 | `check_attribution_basis.py --self-test`、对 `ws-galen` 实跑 |
 | 检查器元普查（负对照有没有） | **15 件中 10 OK / 4 无负对照 / 1 不可独立验证**（v0.0.0.22 时为 11 件 6 OK） | `check_checkers.py scripts/ --json` |
-| **★★ 真实夹具普查（v0.0.0.25 新增，只报不拦）** | **0 / 15 件的负对照里含真实样本夹具**——见下节 | `check_checkers.py scripts/` |
-| 蒸馏版本新鲜度 | 下限 `v0.0.0.15`；**102 条中 3 达标 / 99 低于下限 / 0 未知**；见下方说明 | `check_distillation_freshness.py` |
+| **★★ 真实夹具普查（v0.0.0.26 新增，只报不拦）** | **0 / 15 件的负对照里含真实样本夹具**——见下节 | `check_checkers.py scripts/` |
+| 蒸馏版本新鲜度 | 下限 `v0.0.0.16`；**102 条中 3 达标 / 99 低于下限 / 0 未知**；见下方说明 | `check_distillation_freshness.py` |
 | Release checksum 全量校验 | passed，**284 files** | `self_check.py` |
 | Canonical group validation | **12 categories, 100 products, 102 artifacts**; passed | `validate_persona_registry.py` |
 | 团队侧版本绑定 | **passed**，三处同为 `v0.0.0.12`；负对照 6 类全抓出 | `persona-distiller-group/scripts/check_group_version_binding.py` |
@@ -87,7 +87,7 @@ Date: 2026-08-02
 改为 `Hippocrates（医疗护理师，0 人）`，且输出里带 `why` 字段说明原因——
 **看不见理由的排期等于没有排期。**
 
-## ★★ v0.0.0.25 新增：归属依据门——**印刷时代之前的人物，靠什么证明是他写的**
+## ★★ v0.0.0.26 新增：归属依据门——**印刷时代之前的人物，靠什么证明是他写的**
 
 配重把 `NEXT` 指向医疗护理师队首 **Hippocrates**，探源结论出乎意料：
 
@@ -125,6 +125,29 @@ Date: 2026-08-02
 实测：负对照 10 项全过（含上面那条「争议为空 vs 没查过」）；
 **真工作区实测**：`ws-galen` 在未声明依据时 exit 1，报「必须另行写明靠什么证明这是他写的」。
 
+## ★★ v0.0.0.26：**「名 + 姓」是一个西方近代假设，名册里大量人物不满足它**
+
+Galen #101 是名册里第一个非西方近代姓名形态的人物，一上来就撞出两处：
+
+| | 改动前 | 后果 |
+|---|---|---|
+| `build_patterns("Galen")` | **直接抛** `人物名至少要有名与姓两段` | 单名人物根本进不了归属门 |
+| `build_patterns("Galen of Pergamon")` | 把 **`Pergamon`（地名）当姓** | `--author "Galen"` 一条都匹配不上，**`own_voice_ratio` 报 0.0——而真值接近 1.0** |
+
+第二条最危险：**没有报错，没有警告。**
+一份 244 万词的亲笔希腊文语料，被静默判成「他一个字也没写」。
+
+判据改为分三类：**单名**（Galen、Hippocrates、Avicenna、Paracelsus、Rembrandt…）识别标记就是那一个词；
+**地名式后缀**（`X of/von/van/de/da/di/al/ibn/bin/ben Y`）**识别 X 不识别 Y**；其余仍按名+姓。
+且 `first == last` 时 `name_rx` 不再要求「名 空格 姓」——否则 `By Galen` 变成要求同一个词出现两次。
+
+负对照新增 5 例，**含一条反向**：`Galen of Pergamon` 对 `By Pergamon` 必须判 **False**——
+地名不得被当成他本人。原有 18 例全部未回归。
+
+> **这不是为 Galen 一个人开的口子。** 600 人名册跨 12 族与整部人类史，
+> 古典、中世纪、东亚人物普遍不是「名 + 姓」形态。
+> **这个假设一直在那里，只是前 100 个人恰好都满足它。**
+
 ## ⚠ 必须与「PASS」一起说的三件事
 
 ### 一、新鲜度达标率 3/102，**掉的是尺子不是产物**
@@ -135,7 +158,7 @@ Date: 2026-08-02
 | v0.0.0.17 | `v0.0.0.7` | 9 / 101 |
 | v0.0.0.18 | `v0.0.0.8` | 4 / 101 |
 | v0.0.0.19 | `v0.0.0.9` | 2 / 101 |
-| **v0.0.0.25（本版）** | **`v0.0.0.15`** | **3 / 102** |
+| **v0.0.0.26（本版）** | **`v0.0.0.16`** | **3 / 102** |
 
 产物一份没变，八版之内达标率从 100% 掉到 3%。
 原因是绝大多数条目的 `distilled_with` 挤在 `v0.0.0.6`–`v0.0.0.7` 一小段上，
@@ -175,7 +198,7 @@ v0.0.0.22 把它落成判据，**门刚立起来就在已发布产物里抓到 6
 **8 次是「答不出」、只有 3 次是「答错」**——那两道的答案只存在于产物自己的语料里。
 **产物有语料、裸模型没有，比准确率接近同义反复。**
 
-### 三之前：**15 件检查器里，0 件的负对照含真实样本**（v0.0.0.25 新增普查）
+### 三之前：**15 件检查器里，0 件的负对照含真实样本**（v0.0.0.26 新增普查）
 
 2026-08-02 一天之内，我写的两件评分判据**都是合成负对照全绿、真实数据一跑就错**：
 
