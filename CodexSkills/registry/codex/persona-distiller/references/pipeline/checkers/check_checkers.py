@@ -88,13 +88,44 @@ def _has_flag(path: pathlib.Path, flag: str) -> bool:
     return flag in (proc.stdout or "")
 
 
+# ★ 真实样本夹具的标记（v0.0.0.25 新增，只报不拦）
+#
+# 2026-08-02 同一天里，我写的两件评分判据都**合成负对照全绿、真实数据一跑就错**：
+#   ① 相关性错误评分器把三次「反驳『技术分析之父』」判成三次「主张」；
+#   ② 未覆盖事实评分器把四条干净拒答判成「编造」
+#      （拒答句在前、说明句在后，说明句里的 1940 被当成了婚期）。
+# 两次都是**读原文**才发现的，不是判据自己发现的。
+#
+# 结论：**合成负对照挡不住真实数据。** 它只能证明判据在我想得到的形态上成立，
+# 而判据出错的地方恰好是我想不到的形态。
+#
+# 因此本项普查「这件检查器的负对照里有没有至少一条来自真实产出的夹具」。
+# **只报不拦**：既有检查器多数没有，硬拦会把它们一起拦下（与 NO-SELFTEST 同一条纪律）。
+REAL_FIXTURE_MARKS = ("真实样本", "真实产出", "REAL_", "真实数据", "实测样本")
+
+
+def _has_real_fixture(path: pathlib.Path) -> bool:
+    """源码里有没有真实样本夹具的标记。
+
+    **这一项只能判源码文本**——它问的是「有没有写下真实夹具」，
+    没有别的可观测量。与 `_has_flag` 问 `--help` 不同，这里没有运行期证据可问。
+    **射程必须一起说：贴个标记就能骗过它。** 它挡的是「压根没想过」，不是说谎。
+    """
+    try:
+        src = path.read_text(encoding="utf-8", errors="ignore")
+    except OSError:
+        return False
+    return any(m in src for m in REAL_FIXTURE_MARKS)
+
+
 def census(directory: pathlib.Path, exclude: set[str]) -> list[dict]:
     rows = []
     for path in sorted(directory.glob("check_*.py")):
         if path.name in exclude:
             continue
         verdict, detail = classify(path)
-        rows.append({"checker": path.name, "verdict": verdict, "detail": detail})
+        rows.append({"checker": path.name, "verdict": verdict, "detail": detail,
+                     "real_fixture": _has_real_fixture(path)})
     return rows
 
 
@@ -141,19 +172,32 @@ def self_test() -> int:
         d = pathlib.Path(tmp)
         for name, (src, _) in FIXTURES.items():
             (d / name).write_text(src, encoding="utf-8")
-        got = {r["checker"]: r["verdict"] for r in census(d, exclude=set())}
+        rows = census(d, exclude=set())
+        got = {r["checker"]: r["verdict"] for r in rows}
         for name, (_, want) in FIXTURES.items():
             actual = got.get(name)
             ok = actual == want
             print(f"  {'✓' if ok else '✗'} {name}: 期望 {want}，实得 {actual}")
             if not ok:
                 bad.append(f"{name}: 期望 {want}，实得 {actual}")
+
+        # 真实夹具探测的两向对照：上面五个假检查器都没有标记 → 必须全判 False
+        if any(r["real_fixture"] for r in rows):
+            bad.append("真实夹具探测误报：夹具源码里没有任何标记，却报有")
+        (d / "check_meta_realfx.py").write_text(
+            "# 真实样本：下面这条来自 2026-08-02 的实测产出\n"
+            "import argparse,sys\n"
+            "p=argparse.ArgumentParser();p.add_argument('--self-test',action='store_true')\n"
+            "p.parse_args();print('ok');sys.exit(0)\n", encoding="utf-8")
+        rows2 = {r["checker"]: r["real_fixture"] for r in census(d, exclude=set())}
+        if not rows2.get("check_meta_realfx.py"):
+            bad.append("真实夹具探测漏报：源码里有「真实样本」标记却报无")
     if bad:
         print("\n负对照未过：")
         for b in bad:
             print(f"  · {b}")
         return 2
-    print(f"\n负对照通过（{len(FIXTURES)} 档各一例）")
+    print(f"\n负对照通过（{len(FIXTURES)} 档各一例；真实夹具探测两向对照均过）")
     return 0
 
 
@@ -181,16 +225,27 @@ def main() -> int:
         print(f"检查 {len(rows)} 件检查器有没有可用的负对照\n")
         for r in rows:
             mark = {OK: "✓", FAILED: "✗", NO_SELFTEST: "⚠", NOT_STANDALONE: "⚠"}[r["verdict"]]
-            print(f"  {mark} {r['checker']:<32} {r['verdict']:<15} {r['detail']}")
+            fx = "真实夹具" if r["real_fixture"] else "仅合成  "
+            print(f"  {mark} {r['checker']:<32} {r['verdict']:<15} [{fx}] {r['detail']}")
         tally = {v: sum(1 for r in rows if r["verdict"] == v) for v in
                  (OK, FAILED, NOT_STANDALONE, NO_SELFTEST)}
+        n_real = sum(1 for r in rows if r["real_fixture"])
         print(f"\n可用 {tally[OK]} / 未过 {tally[FAILED]}"
               f" / 不可独立验证 {tally[NOT_STANDALONE]} / 无负对照 {tally[NO_SELFTEST]}")
+        print(f"负对照里含**真实样本**夹具的：{n_real} / {len(rows)}")
         if tally[NO_SELFTEST] or tally[NOT_STANDALONE]:
             print("\n**下面这些检查器的「全绿」不构成任何证据**（RUNBOOK 第十八种）：")
             for r in rows:
                 if r["verdict"] in (NO_SELFTEST, NOT_STANDALONE):
                     print(f"  {r['checker']}  —— {r['detail']}")
+        if n_real < len(rows):
+            print("\n**下面这些检查器只有合成负对照**——只报不拦，但要知道它意味着什么：")
+            print("  2026-08-02 一天之内，两件评分判据都是合成负对照全绿、真实数据一跑就错，")
+            print("  且两次都是**读原文**才发现的。**合成负对照只证明判据在我想得到的形态上成立**，")
+            print("  而它出错的地方恰好是我想不到的形态。")
+            for r in rows:
+                if not r["real_fixture"]:
+                    print(f"  · {r['checker']}")
     return 2 if any(r["verdict"] == FAILED for r in rows) else 0
 
 
