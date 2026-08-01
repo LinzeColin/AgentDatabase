@@ -129,6 +129,38 @@ class SkillContractTests(unittest.TestCase):
                                    msg='把第三方报道的 tier 改成 P1，own_voice_ratio 就变大了'
                                        '——那它又成了一个改标签就能满足的代理量')
 
+    def test_self_authored_baseline_cannot_count_as_capability_evidence(self) -> None:
+        """用户 2026-08-02 评分的机检对应物。
+
+        本项目给每一件检查器都做了负对照，**唯独没有给产品本身做**。
+        每个人物 eval 里的 `baseline` 是作者手写的稻草人——
+        Livermore #100 第 2 轮 E 席原话：「候选/对照的分差被显著放大，
+        不能当作能力证据」。本用例钉死：**缺字段与自撰稻草人一律不算能力证据**，
+        而 `bare-model-run` 与 `prior-version` 算。
+        """
+        sys.path.insert(0, str(ROOT / 'scripts'))
+        try:
+            import check_baseline_provenance as gate
+        finally:
+            sys.path.pop(0)
+        def ev(*sources):
+            rows = [{'system': 'baseline', 'overall_score': 0.1,
+                     **({'baseline_source': s} if s else {})} for s in sources]
+            return gate.summarize(rows)['capability_evidence']
+        self.assertTrue(ev('bare-model-run', 'bare-model-run'))
+        self.assertTrue(ev('prior-version', 'prior-version'))
+        self.assertFalse(ev('self-authored-strawman', 'self-authored-strawman'))
+        self.assertFalse(ev(None, None), '缺 baseline_source 时不许沉默通过')
+        self.assertFalse(ev('bare-model-run', 'self-authored-strawman'),
+                         '混着来也不算——一条不可用就不能当能力证据')
+
+    def test_baseline_provenance_gate_has_a_working_negative_control(self) -> None:
+        completed = subprocess.run(
+            [sys.executable, str(ROOT / 'scripts' / 'check_baseline_provenance.py'), '--self-test'],
+            cwd=str(ROOT), text=True, capture_output=True,
+        )
+        self.assertEqual(completed.returncode, 0, completed.stdout + completed.stderr)
+
     def test_skill_metadata_does_not_offer_removed_multi_identity_input(self) -> None:
         """metadata 是调用方唯一会读的那份；它与正文冲突时，冲突落到调用方头上。"""
         text = (ROOT / 'SKILL.md').read_text(encoding='utf-8')

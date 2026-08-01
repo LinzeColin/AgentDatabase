@@ -1,4 +1,4 @@
-# Release verification — Persona Distiller v0.0.0.19
+# Release verification — Persona Distiller v0.0.0.20
 
 Date: 2026-08-01
 
@@ -10,7 +10,7 @@ Date: 2026-08-01
 > bundle 构不出来、97 人、59 用例），**三件当时都已不成立**。
 > 改过标题的旧正文会冒充当前复验，比标题陈旧更糟。已从工具中移除该行为。
 >
-> 本次（v0.0.0.19）**是真的重跑了一遍**，下表每一行都是本次实跑输出。
+> 本次（v0.0.0.20）**是真的重跑了一遍**，下表每一行都是本次实跑输出。
 
 ## Result
 
@@ -24,16 +24,17 @@ Date: 2026-08-01
 
 | Gate | 本次结果 | 证据来源 |
 |---|---:|---|
-| Offline unit / integration / concurrency tests | **67 / 67 passed** | `python3 -m pytest tests/ -q` |
+| Offline unit / integration / concurrency tests | **69 / 69 passed** | `python3 -m pytest tests/ -q` |
 | 合同漂移门（版本三轴 + 身份合同 + 检查器镜像） | **0 条** | `scripts/check_contract_drift.py` |
 | 合同漂移门的负对照 | passed（坏样本 6 类全抓出） | `check_contract_drift.py --self-test` |
 | 归属门的负对照 | passed（**8 正 + 10 反**，另含 1 条只报不判） | `check_authorship.py --self-test` |
 | OCR 同形字门的负对照（v0.0.0.17 新增） | **passed**（干净英文／真俄语／中文 3 条正对照 0 报；混文种、全同形字词、引文层 3 类坏样本全抓出） | `check_ocr_homoglyphs.py --self-test` |
 | **扫描件版权页归属 `A-copyright`（v0.0.0.18 新增）** | **passed**；实测他 1940 年那本亲笔著作由「无据」变为 `A-copyright` 有据，Dies 前言仍判无据 | `check_authorship.py --self-test`、真件三向实测 |
 | **`own_voice_ratio`（v0.0.0.19 新增，只报不拦）** | Livermore #100 实测 **0.0076**，而同一份语料 `primary_ratio = 0.9887`——**两个数差 130 倍**；回归用例钉死「把 tier 全改成 P1 也抬不高它」 | `test_own_voice_ratio_is_not_satisfied_by_reclassifying_tiers` |
+| **基线来源门 `check_baseline_provenance`（v0.0.0.20 新增）** | **负对照 4 类全抓出**（含「缺字段沉默通过」）；**对已入库产物实测：64/64 条基线为 `unknown`，判为不可作能力证据** | `--self-test`、真实产物实测 |
 | 新鲜度门的负对照 | passed | `check_distillation_freshness.py --self-test` |
 | 检查器元普查（负对照有没有） | 11 件中 **6 OK / 4 无负对照 / 1 不可独立验证** | `check_checkers.py scripts/ --json` |
-| 蒸馏版本新鲜度 | 下限 `v0.0.0.9`；**101 条中仅 2 条达标、99 条低于下限** | `check_distillation_freshness.py` |
+| 蒸馏版本新鲜度 | 下限 `v0.0.0.10`；见下方说明 | `check_distillation_freshness.py` |
 | Release checksum 全量校验 | passed，**276 files** | `self_check.py` |
 | Canonical group validation | **12 categories, 99 products, 101 artifacts**; passed | `validate_persona_registry.py` |
 | **团队侧版本绑定（group v0.0.0.9 新增）** | **passed**，三处同为 `v0.0.0.9`；负对照 6 类全抓出 | `persona-distiller-group/scripts/check_group_version_binding.py` |
@@ -73,6 +74,21 @@ Date: 2026-08-01
 （`check_distillation_freshness.py` 默认只报不拦，`--strict` 存在但发行流程不用）。
 收窄的唯一途径是**600 人完成后统一重蒸**（任务 #29）。
 **单说「PASS」而不说这 92 条，就是拿绿灯掩盖一件已知的事。**
+
+### ★ 零、最重要的一条：**产品本身从未做过负对照**
+
+用户 2026-08-02 评分指出：没有任何「专家团队相对裸模型在真实盲测任务上提高多少正确率」的结果。
+
+**诊断**：本 skill 给每一件检查器都做了负对照（第十八种执行了三十多个版本），
+**唯独没有给产品本身做过**。每个人物 eval 里的 `baseline` 是**作者手写的稻草人**——
+Livermore #100 第 2 轮 E 席原话：「候选/对照的分差被显著放大，**不能当作能力证据**」。
+
+**因此：本文件与任何产物报出的 `delta`，在「比裸模型强」这个问题上等于零信息。**
+v0.0.0.20 落成 `check_baseline_provenance.py` 把这件事变成机器可见的：
+`self-authored-strawman` 与缺字段一律判为不可作能力证据，
+**已入库产物实测 64/64 条命中**。
+
+**该门在 `--strict` 下会让发布失败——这是有意的**：唯一的解法是拿真实的裸模型基线来跑。
 
 ### 二、11 件检查器里有 4 件没有负对照
 

@@ -591,6 +591,52 @@ def run_ocr_gate(report, target: Path, sources: list[dict[str, Any]]) -> None:
         report.error('content.ocr-homoglyph', problem)
 
 
+def run_baseline_provenance(report, target: Path) -> None:
+    """delta 到底是跟什么比出来的（v0.0.0.20 新增，**只报不拦**）。
+
+    ## 为什么要有它
+
+    用户 2026-08-02 评分：「没有提供『专家团队相对裸模型，在真实盲测任务上
+    提高多少正确率』的公开结果……实际能力非常差，接近 0 分甚至负收益。」
+
+    而最硬的证据来自本项目自己的评委——Livermore #100 第 2 轮 E 席：
+    「17 条 baseline 全是零对冲零出处的稻草人，**候选/对照的分差被显著放大，
+    不能当作能力证据**。」这句话被抄进提交信息，然后 delta 0.8012 继续被当成绩报。
+
+    **每一件检查器都有负对照，唯独产品本身没有。** 第十八种执行了三十多个版本，
+    从未对整个工程执行过；「团队比裸模型强多少」就是这个工程的负对照。
+
+    ## 为什么只报不拦
+
+    100 人已入库、基线全是自撰稻草人。判成 error 会让既有产物集体不可发布，
+    而按既定裁定应「选诚实退路继续，绝不为凑数放宽判据」。
+    **门要拦的是「拿这个 delta 说自己比裸模型强」，不是拦住发布。**
+    """
+    here = Path(__file__).resolve().parent
+    script = here / 'check_baseline_provenance.py'
+    if not script.exists():
+        report.metrics['baseline_provenance'] = {
+            '状态': 'check_baseline_provenance.py 未安装，**未核验**（不是通过）'}
+        return
+    spec = importlib.util.spec_from_file_location('_pd_baseprov', script)
+    module = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(module)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['baseline_provenance'] = {'状态': f'加载失败，**未核验**：{exc}'}
+        return
+    buffer = io.StringIO()
+    with contextlib.redirect_stdout(buffer):
+        if module.self_test() != 0:
+            report.error('content.selftest-failed',
+                         'check_baseline_provenance.py 负对照未过——其结论不作数')
+            return
+    problems, summary = module.check(target)
+    report.metrics['baseline_provenance'] = summary
+    for message in problems:
+        report.warn('eval.baseline-not-capability-evidence', message)
+
+
 def run_content_checks(report, target: Path, cache_dirs: list[str]) -> None:
     """把内容层检查接进发布门（v0.0.0.8 新增）。
 
@@ -901,6 +947,7 @@ def main() -> int:
         if args.phase == 'release':
             evaluate_results(report, target, thresholds, cases)
             run_content_checks(report, target, args.cache)
+            run_baseline_provenance(report, target)
             findings = scan_secrets(target)
             report.metrics['secret_findings'] = len(findings)
             for finding in findings:

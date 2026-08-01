@@ -4,7 +4,7 @@
   "display_name": "人物蒸馏 Skill / Persona Distiller",
   "distribution": {
     "canonical_registry": "../persona-distiller-group",
-    "kind": "repository-customized-v0.0.0.19",
+    "kind": "repository-customized-v0.0.0.20",
     "lineage_base_archive_sha256": "e891912d98d14afb7677ac935a19be329d97d206f4ae74a644892f46b17f6748"
   },
   "evaluation_suites": 16,
@@ -16,8 +16,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "c14f72f6db54fa2beb6705ccd01a4acb4abd205f0b4f1306657ba3311fa1c35b",
-      "size_bytes": 41987
+      "sha256": "fe16a02c4bfd393843f587e2e2986ec11413891a4b069eb773cf7a663dfba44d",
+      "size_bytes": 46184
     },
     {
       "path": "CONTRIBUTING.md",
@@ -31,7 +31,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "83a16a0b52a0f7f8cf96a1380b4bb11ed3910020a79ff00a27b9fc5780212bb6",
+      "sha256": "dfc1de25a5700aa525bb62dc9b36a6d0c7a3c586a874f927a813012901aab4ac",
       "size_bytes": 8802
     },
     {
@@ -56,12 +56,12 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "8155d63a103de78027fb6817c688ca2122450618b1bbc91b4fb8ac95f7968dab",
-      "size_bytes": 9088
+      "sha256": "6006175cf51a35d3fb4c7ad4b90d4ea470ea7e143afe738154e7c260be4e4dda",
+      "size_bytes": 10324
     },
     {
       "path": "VERSION",
-      "sha256": "b1fb75cf7c7f3fbbace5ef6c25a16c2bfb2b0f220a89d515675e57092c386139",
+      "sha256": "10a9933a593b987452b760954f37d0fdac98138966bbc80103b61f9c0f76f651",
       "size_bytes": 10
     },
     {
@@ -121,7 +121,7 @@
     },
     {
       "path": "handoff.md",
-      "sha256": "a8f53f70f99937be9d32add5ca85ea15c7ecaad83e55d9472a5164b3a2b25076",
+      "sha256": "d396077dfa8b36215cc96e3501386db63bbd1633e1d0b28fd0266cc7c499fb7c",
       "size_bytes": 3702
     },
     {
@@ -141,7 +141,7 @@
     },
     {
       "path": "manifest.json",
-      "sha256": "7eeb6a5bcc01ea438310038062a7721761204434a1aed579c18c40a2f54441ce",
+      "sha256": "2658c7ee17da722905cc54ce84e1cb16a156e654aa7859ed4b6b32d75e790627",
       "size_bytes": 1191
     },
     {
@@ -371,8 +371,8 @@
     },
     {
       "path": "references/ledgers/_决策台账.md",
-      "sha256": "52c1bf33b83a6d8c4aa74827050fbe601b950febc61cf655af4d130786e713d4",
-      "size_bytes": 84040
+      "sha256": "4dded8709b78948b82a6c4513714b9fbc5bc264739baef695ed3075ba2f70dc5",
+      "size_bytes": 91527
     },
     {
       "path": "references/ledgers/_每次开工必读.md",
@@ -458,6 +458,11 @@
       "path": "references/pipeline/checkers/check_authorship.py",
       "sha256": "ea8265dab2db7baa69a5363ede674e0f67ca9797a2571aa10cd1227c9d26b76a",
       "size_bytes": 28782
+    },
+    {
+      "path": "references/pipeline/checkers/check_baseline_provenance.py",
+      "sha256": "d55e1afab3c7050712b7a98b36443d8d8e3da852001732aba115a6c3f8ec2b2f",
+      "size_bytes": 7995
     },
     {
       "path": "references/pipeline/checkers/check_checkers.py",
@@ -730,6 +735,11 @@
       "size_bytes": 28782
     },
     {
+      "path": "scripts/check_baseline_provenance.py",
+      "sha256": "d55e1afab3c7050712b7a98b36443d8d8e3da852001732aba115a6c3f8ec2b2f",
+      "size_bytes": 7995
+    },
+    {
       "path": "scripts/check_checkers.py",
       "sha256": "227c0bdbd31e83c7a0b4eb995ac0a064d3165443b3c214aaa772db06b5b80c0a",
       "size_bytes": 9210
@@ -866,8 +876,8 @@
     },
     {
       "path": "scripts/quality_check.py",
-      "sha256": "2f8a6a3d8bae729e53e9752cc2195ce5bb26d852519b4e78d36c131af6c682a8",
-      "size_bytes": 47903
+      "sha256": "a6c89009ca56222e7a4c32e445d87bcfc3630e75bb896525a745aa7918e07a44",
+      "size_bytes": 50325
     },
     {
       "path": "scripts/register_persona.py",
@@ -1316,8 +1326,8 @@
     },
     {
       "path": "tests/helpers.py",
-      "sha256": "9fc043df1b0b3cf5074de098187237670cb5d0fbf1eb3c4979ebc4ea914819b8",
-      "size_bytes": 13206
+      "sha256": "c439af88eb7583cb77d8ea2b1e0c626ad62e20e2783ddfe223e878189c917a23",
+      "size_bytes": 13609
     },
     {
       "path": "tests/test_group_contract.py",
@@ -1371,8 +1381,8 @@
     },
     {
       "path": "tests/test_skill_contract.py",
-      "sha256": "60b0398771011b0c20c0449aa1bb1effa1bdb6db2233290516a8c0ebd90bd4b6",
-      "size_bytes": 15532
+      "sha256": "2fb8602947c1b798731ddc8845d1566e3e04e2c6fc192d66e29897015dd79f14",
+      "size_bytes": 17358
     },
     {
       "path": "tests/test_versioning.py",
@@ -1421,5 +1431,5 @@
     },
     "secret_findings": 0
   },
-  "version": "v0.0.0.19"
+  "version": "v0.0.0.20"
 }

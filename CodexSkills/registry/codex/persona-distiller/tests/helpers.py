@@ -278,6 +278,10 @@ def populate_release_ready(target: Path, material_root: Path) -> dict[str, Any]:
                 'case_id': case['case_id'],
                 'suite': suite,
                 'system': system,
+                # ★ v0.0.0.20：baseline 必须声明来源。夹具模拟的是「形态正确的产物」，
+                #   故填 bare-model-run；「自撰稻草人不算能力证据」那条路径由
+                #   test_self_authored_baseline_cannot_count_as_capability_evidence 专门覆盖。
+                **({'baseline_source': 'bare-model-run'} if system == 'baseline' else {}),
                 'blind_label': 'A' if system == 'baseline' else 'B',
                 'judge_id': 'judge-1',
                 'overall_score': score,
