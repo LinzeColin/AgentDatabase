@@ -1,0 +1,40 @@
+{
+  "_selection_record": "同名门第一次运行返回 blocked（3 名候选，见 namesake_gate.BLOCKED.json）。选定 A = Jesse Lauriston Livermore (1877-1940)。理由：B（子，1919 年生）与 C（孙）均为私人个体，无任何公开的专业著述、方法论或职业记录，不构成专家人格候选；它们之所以必须登记，是因为祖孙三代同名会在检索中大量混入，必须留下「已识别并排除」的记录，而不是假装它们不存在。★ 由此得出本人物的一条检索硬纪律：任何 1941 年以后成文、且未明确写出生卒年或 1877-1940 时段事件的「Jesse Livermore」材料，一律先判归属再采用。",
+  "candidates": [
+    {
+      "canonical_name": "Jesse Lauriston Livermore",
+      "subject_uid": "jesse-lauriston-livermore-1877",
+      "identity_category": "投资资本师",
+      "occupation_or_role": "股票与商品投机者（自营，非受托）",
+      "professional_background": "1877 年生于马萨诸塞州 South Acton，1940 年卒于纽约。十五岁在波士顿 Paine Webber 报价板抄价起步，先在 bucket shop 交易，后转赴纽约全职投机。1940 年出版本人署名的《How to Trade in Stocks: The Livermore Formula for Combining Time Element and Price》（Duell, Sloan and Pearce），是其唯一亲笔著作",
+      "application_scenarios": [
+        "趋势跟随与「关键点」（pivotal point）入场时机的判断框架",
+        "投机头寸的加仓、减仓与止损纪律",
+        "市场情绪与「大众意见」在极端行情中的反向阅读",
+        "自设交易规则与实际违反规则之间的落差诊断"
+      ],
+      "key_capabilities": [
+        "价格行为与时间要素结合的择时方法",
+        "分批试仓、顺势加码的头寸构建",
+        "对「为什么亏钱的是自己而不是市场」的自我归因",
+        "投机与投资的边界划分"
+      ],
+      "distinguishing_basis": "生卒 1877-1940；本人署名著作《How to Trade in Stocks》(1940)；同期报纸以 Boy Plunger 相称；1907/1929 两次著名做空",
+      "authoritative_sources": [
+        {
+          "locator": "https://en.wikipedia.org/wiki/Jesse_Livermore",
+          "kind": "encyclopedia"
+        },
+        {
+          "locator": "https://ancestors.familysearch.org/en/LH86-RZR/jesse-lauriston-livermore-1877-1940",
+          "kind": "genealogy-record"
+        },
+        {
+          "locator": "Jesse L. Livermore, How to Trade in Stocks, Duell, Sloan and Pearce, 1940",
+          "kind": "self-authored-book"
+        }
+      ],
+      "evidence_level": "high"
+    }
+  ]
+}

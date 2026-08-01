@@ -1,0 +1,60 @@
+{
+  "_note": "三名同名候选。祖孙三代同名是本人物同名门的真实风险：1975/1976 与其后的报道会大量混入检索结果。此文件用于**留下阻断记录**，选定后另存 livermore_namesake_selected.json 再跑一次。",
+  "candidates": [
+    {
+      "canonical_name": "Jesse Lauriston Livermore",
+      "subject_uid": "jesse-lauriston-livermore-1877",
+      "identity_category": "投资资本师",
+      "occupation_or_role": "股票与商品投机者（自营，非受托）",
+      "professional_background": "1877 年生于马萨诸塞州 South Acton，1940 年卒于纽约。十五岁在波士顿 Paine Webber 报价板抄价起步，先在 bucket shop 交易，后转赴纽约全职投机。1940 年出版本人署名的《How to Trade in Stocks: The Livermore Formula for Combining Time Element and Price》（Duell, Sloan and Pearce），是其唯一亲笔著作",
+      "application_scenarios": [
+        "趋势跟随与「关键点」（pivotal point）入场时机的判断框架",
+        "投机头寸的加仓、减仓与止损纪律",
+        "市场情绪与「大众意见」在极端行情中的反向阅读",
+        "自设交易规则与实际违反规则之间的落差诊断"
+      ],
+      "key_capabilities": [
+        "价格行为与时间要素结合的择时方法",
+        "分批试仓、顺势加码的头寸构建",
+        "对「为什么亏钱的是自己而不是市场」的自我归因",
+        "投机与投资的边界划分"
+      ],
+      "distinguishing_basis": "生卒 1877-1940；本人署名著作《How to Trade in Stocks》(1940)；同期报纸以 Boy Plunger 相称；1907/1929 两次著名做空",
+      "authoritative_sources": [
+        {"locator": "https://en.wikipedia.org/wiki/Jesse_Livermore", "kind": "encyclopedia"},
+        {"locator": "https://ancestors.familysearch.org/en/LH86-RZR/jesse-lauriston-livermore-1877-1940", "kind": "genealogy-record"},
+        {"locator": "Jesse L. Livermore, How to Trade in Stocks, Duell, Sloan and Pearce, 1940", "kind": "self-authored-book"}
+      ],
+      "evidence_level": "high"
+    },
+    {
+      "canonical_name": "Jesse Livermore Jr.",
+      "subject_uid": "jesse-livermore-jr-1919",
+      "identity_category": "非专业人物（同名家属）",
+      "occupation_or_role": "私人个体，无公开专业身份",
+      "professional_background": "上者之子，生于 1919 年，1976 年前后去世。检索「Jesse Livermore」时其纪念页与家谱条目会大量混入，但无任何公开的专业著述或方法论",
+      "application_scenarios": ["不适用——非专业人物，不构成专家人格候选"],
+      "key_capabilities": ["不适用"],
+      "distinguishing_basis": "生年 1919（父为 1877），无署名著作，检索仅得家谱与墓志类条目",
+      "authoritative_sources": [
+        {"locator": "https://www.findagrave.com/memorial/186363100/jesse-livermore", "kind": "memorial-record", "caveat": "用户生成内容，仅用于证明同名者存在，不作事实来源"},
+        {"locator": "https://www.geni.com/people/Jesse-Livermore/6000000004116945405", "kind": "genealogy", "caveat": "同上"}
+      ],
+      "evidence_level": "low"
+    },
+    {
+      "canonical_name": "Jesse Livermore III",
+      "subject_uid": "jesse-livermore-iii",
+      "identity_category": "非专业人物（同名家属）",
+      "occupation_or_role": "私人个体，无公开专业身份",
+      "professional_background": "上者之子、Jesse Lauriston Livermore 之孙。仅在关于其祖父的通俗报道中被提及，无独立的公开专业记录",
+      "application_scenarios": ["不适用——非专业人物，不构成专家人格候选"],
+      "key_capabilities": ["不适用"],
+      "distinguishing_basis": "第三代同名，仅见于家族叙述，无一手署名材料",
+      "authoritative_sources": [
+        {"locator": "https://en.wikipedia.org/wiki/Jesse_Livermore", "kind": "encyclopedia", "caveat": "仅在其祖父条目中被提及"}
+      ],
+      "evidence_level": "low"
+    }
+  ]
+}
