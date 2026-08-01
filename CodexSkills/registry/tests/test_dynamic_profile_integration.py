@@ -8,7 +8,7 @@ import unittest
 from pathlib import Path
 
 from CodexSkills.registry.auto.runtime.catalog_reservation import (
-    SOURCE_CATALOG_COMPONENT,
+    is_reserved_source_child,
 )
 
 
@@ -28,11 +28,15 @@ class DynamicProfileIntegrationTests(unittest.TestCase):
         index = json.loads((CATALOG / "index.json").read_text(encoding="utf-8"))
         self.assertEqual(index["skill_instance_count"], len(index["skills"]))
         indexed = {(skill["source"], skill["slug"]) for skill in index["skills"]}
+        # 保留组件不是 skill，永远不会进 index。**问权威，不要把其中一个名字抄进来**：
+        # 这里原本硬写 `path.name != SOURCE_CATALOG_COMPONENT`，于是 `_catalog` 被放过、
+        # 同为保留组件的 `_delivery-backups` 被当成「未登记的 skill」——
+        # 判据抄了权威的一个特例，就在权威新增第二个特例时判错。
         actual = {
             (source, path.name)
             for source in ("agents", "claude", "codex-system", "codex")
             for path in (REGISTRY / source).iterdir()
-            if path.name != SOURCE_CATALOG_COMPONENT
+            if not is_reserved_source_child(source, path.name)
             and stat.S_ISDIR(os.lstat(path).st_mode)
             and not stat.S_ISLNK(os.lstat(path).st_mode)
         }

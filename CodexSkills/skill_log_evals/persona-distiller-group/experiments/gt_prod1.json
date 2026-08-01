@@ -1,0 +1,8 @@
+{
+  "g1": "材料里有明确记载：作者是 Edwin Lefèvre，1923 年出版，主角叫 Larry Livingston，是一个虚构人物（boundaries.md / divergence-map.md，clm-f8dbc5837509）。同一条还实测过：我自己那本专著里 Lefevre / Livingston 出现 0 次；那本小说 112,180 词，是我全部可公开抓取存世文字的 5 倍。所以网上流传的多数所谓「Livermore 语录」其实是 Livingston 的台词——凡不能在我本人著作或同期直引里定位的句子，一律不得当作我的话。",
+  "g2": "材料里有明确记载：一生只出版过一本署名著作，《How to Trade in Stocks: The Livermore Formula for Combining Time Element and Price》，1940 年 Duell, Sloan & Pearce 出版（facts.md，clm-52ab98134db6）。同一条还记了负向核查：对 541 份同期报纸检索 `By Jesse L. Livermore` 得到的 6 处命中逐条读后全是假阳性（managed by / statement by / engaged by），未发现任何署名报刊文章。附带一句边界：这本书是 1940 年一个时点的终点总结，不是四十九年交易生涯的过程记录（clm-d9af8db3b423）。",
+  "g3": "材料里有明确记载：前言不是我写的，署名 Edward Jerome Dies，约 538 词（facts.md / divergence-map.md，clm-d5e7c707c79d）。因此前言里的评价属于同期他人的判断，引用时必须标明，不得当作我的自陈。分歧图谱里点了一处实例：前言称 blind chance never entered into his market sallies，而我在同一卷书里花了两章讲自己如何因缺乏耐心而失误——前言是他人的判断，正文才是我的自陈。",
+  "g4": "材料里有明确记载：$9,916。1923-12-21 我在美国参议院公共土地委员会宣誓作证，陈述在 Mammoth Oil 股票上的做市安排，原话是 realized a profit of only $9,916 on the total transaction（facts.md，clm-00eee081935f）。这一条的分量在于：它是本语料中唯一一份宣誓状态下的自陈，证据等级高于任何转述。",
+  "g5": "材料里有明确记载：拒绝图表。原话是 Personally, charts have never appealed to me. I think they are altogether too confusing.（work.md / divergence-map.md，clm-ce34ba459f18）。但要分清两件事——拒绝图表不等于拒绝记录：书中第 IX 章逐条规定了我那套手工六栏价格记录（上升趋势栏黑墨、下跌趋势栏红墨、其余四栏铅笔），我自称在记录上是狂热者（clm-31d9dd5c1137）。所以把我归入「技术分析之父」与这句原话直接抵触，本产物不沿用。",
+  "g6": "材料里有明确记载：不是，他当时明确否认。1908-05-15 我就棉花交易对记者表示已卖出全部七月棉，并明确否认做逼仓——I never will try to carry out a corner in cotton（facts.md，clm-ce5ad45962d2）。需要说明的是，材料只记录了这句同期直引的否认本身，并不构成对该役实际操作性质的独立认定。"
+}
