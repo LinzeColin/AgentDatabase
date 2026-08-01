@@ -7,7 +7,7 @@
 
 - 最早：`sg_2003_gasp [src-dccf2d8521a0]`、`sg_2003_breathtaking [src-46d40dbb65fa]`（2003 年 9 月 / 8 月）
 - 最晚：`sg_2026_courage_vs_excuses [src-f377c2a5bd55]`（2026 年）、`sg_2026_cheaper_not_to_care [src-b1594202f46a]`（2026 年 3 月 22 日）
-- **跨度 23 年，每年均有正文**（取样每年约 9 篇）
+- **跨度 23 年，每年均有正文**（取样每年约 8 篇）
 
 ## 关注对象随年份移动，方法不移动
 

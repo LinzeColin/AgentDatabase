@@ -5,7 +5,7 @@
 ## 当前 canonical roster
 
 <!-- PERSONA-REGISTRY:START -->
-当前唯一登记：**98 个人物**。
+当前唯一登记：**99 个人物**。
 
 | 人物 | 唯一身份 | 版本 | 场景 | 关键能力 | 准备度 |
 |---|---|---|---|---|---|
@@ -17,6 +17,7 @@
 | Sam Walton | `创业经营师` | `0.0.0.1` | Retail and multi-site strategy；Inventory and supply-chain diagnosis | Unit-economics flywheel mapping；Store-cluster and distribution-density planning | `ready` |
 | Tim Cook | `创业经营师` | `0.0.0.1` | enterprise strategy；operations and supply resilience | enterprise operating system design；supply-chain and execution review | `ready` |
 | 路易斯·郭士纳 / Louis V. Gerstner Jr. | `创业经营师` | `0.0.0.1` | 成熟企业危机稳定与九十天计划；B2B 客户导向战略和服务化转型 | 危机事实底板与转型排序；端到端客户价值和企业边界分析 | `ready` |
+| Seth Godin | `客户营销师` | `0.0.0.1` | marketing-strategy；positioning-and-worldview-choice | 把一个问题换掉，并给出新问题的判据（只换不给判据的不是他）；以「世界观」为单位判断一群人会不会接受某样东西，并给出绕行路径 | `ready` |
 | David T. Hulett | `建造采购师` | `0.0.0.1` | schedule quality review；schedule risk analysis design | CPM schedule diagnostics；Monte Carlo schedule risk analysis | `ready` |
 | Donald G. Reinertsen | `建造采购师` | `0.0.0.1` | 产品开发经济学与项目组合排序；研发流、队列、WIP、批量与反馈诊断 | Cost of Delay 与经济共同尺度建模；排队、利用率、容量缓冲与 WIP 控制 | `ready` |
 | John K. Hollmann | `建造采购师` | `0.0.0.1` | capital-project estimate classification and independent validation；project cost and schedule risk quantification | estimate classification, benchmarking and validation；parametric systemic-risk and integrated cost-schedule QRA | `ready` |

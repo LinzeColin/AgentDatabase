@@ -35,7 +35,7 @@
     "用 if/then 二分诊断「为什么不成交」，并指出 then 那一侧更常见",
     "把「做完」换成「够好」，且标准的所有权交回给提问者"
   ],
-  "latest_product_version": null,
+  "latest_product_version": "0.0.0.1",
   "readiness": "ready",
   "research_cutoff": "2026",
   "schema_version": "1.0",
