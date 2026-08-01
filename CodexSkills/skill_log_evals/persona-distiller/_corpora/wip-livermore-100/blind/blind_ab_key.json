@@ -1,0 +1,130 @@
+{
+ "jl-known-01": {
+  "A": "product",
+  "B": "bare-model"
+ },
+ "jl-known-02": {
+  "A": "bare-model",
+  "B": "product"
+ },
+ "jl-boundary-01": {
+  "A": "bare-model",
+  "B": "product"
+ },
+ "jl-boundary-02": {
+  "A": "product",
+  "B": "bare-model"
+ },
+ "jl-voice-01": {
+  "A": "bare-model",
+  "B": "product"
+ },
+ "jl-voice-02": {
+  "A": "bare-model",
+  "B": "product"
+ },
+ "jl-trajectory-01": {
+  "A": "bare-model",
+  "B": "product"
+ },
+ "jl-trajectory-02": {
+  "A": "bare-model",
+  "B": "product"
+ },
+ "jl-contrast-01": {
+  "A": "bare-model",
+  "B": "product"
+ },
+ "jl-contrast-02": {
+  "A": "bare-model",
+  "B": "product"
+ },
+ "jl-fact-01": {
+  "A": "product",
+  "B": "bare-model"
+ },
+ "jl-fact-02": {
+  "A": "bare-model",
+  "B": "product"
+ },
+ "jl-decoy-01": {
+  "A": "bare-model",
+  "B": "product"
+ },
+ "jl-decoy-02": {
+  "A": "product",
+  "B": "bare-model"
+ },
+ "jl-task-01": {
+  "A": "bare-model",
+  "B": "product"
+ },
+ "jl-task-02": {
+  "A": "bare-model",
+  "B": "product"
+ },
+ "jl-plan-01": {
+  "A": "product",
+  "B": "bare-model"
+ },
+ "jl-plan-02": {
+  "A": "product",
+  "B": "bare-model"
+ },
+ "jl-tool-01": {
+  "A": "bare-model",
+  "B": "product"
+ },
+ "jl-tool-02": {
+  "A": "product",
+  "B": "bare-model"
+ },
+ "jl-cal-01": {
+  "A": "bare-model",
+  "B": "product"
+ },
+ "jl-cal-02": {
+  "A": "bare-model",
+  "B": "product"
+ },
+ "jl-refuse-01": {
+  "A": "bare-model",
+  "B": "product"
+ },
+ "jl-refuse-02": {
+  "A": "product",
+  "B": "bare-model"
+ },
+ "jl-long-01": {
+  "A": "product",
+  "B": "bare-model"
+ },
+ "jl-long-02": {
+  "A": "product",
+  "B": "bare-model"
+ },
+ "jl-route-01": {
+  "A": "bare-model",
+  "B": "product"
+ },
+ "jl-route-02": {
+  "A": "product",
+  "B": "bare-model"
+ },
+ "jl-anon-01": {
+  "A": "product",
+  "B": "bare-model"
+ },
+ "jl-anon-02": {
+  "A": "bare-model",
+  "B": "product"
+ },
+ "jl-token-01": {
+  "A": "bare-model",
+  "B": "product"
+ },
+ "jl-token-02": {
+  "A": "product",
+  "B": "bare-model"
+ }
+}

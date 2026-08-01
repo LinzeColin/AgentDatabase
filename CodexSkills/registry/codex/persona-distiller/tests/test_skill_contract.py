@@ -161,6 +161,25 @@ class SkillContractTests(unittest.TestCase):
         )
         self.assertEqual(completed.returncode, 0, completed.stdout + completed.stderr)
 
+    def test_activation_yield_cannot_be_gamed_by_adding_claim_markers(self) -> None:
+        """回归：多挂几个 claim id 不能让「有效激活率」变好。
+
+        Livermore #100 盲测实测：产物 payload_ratio 0.8351、裸模型 0.9868——
+        产物每 6 行里有 1 行在谈自己的语料。若该指标能靠塞标记刷高，
+        它就又成了一个改标签就能满足的代理量（第七十种）。
+        """
+        sys.path.insert(0, str(ROOT / 'scripts'))
+        try:
+            import check_activation_yield as gate
+        finally:
+            sys.path.pop(0)
+        plain = '他在书中写道，买 500 股要先买 100 股。\n后面每一笔都必须比上一笔贵。\n'
+        gamed = plain + ''.join(f'<!-- claim:clm-{i:012x} -->\n' for i in range(20))
+        self.assertEqual(gate.analyse(plain)['payload_ratio'], 1.0)
+        self.assertLess(gate.analyse(gamed)['payload_ratio'],
+                        gate.analyse(plain)['payload_ratio'],
+                        '塞入 claim 标记后 payload_ratio 必须下降')
+
     def test_skill_metadata_does_not_offer_removed_multi_identity_input(self) -> None:
         """metadata 是调用方唯一会读的那份；它与正文冲突时，冲突落到调用方头上。"""
         text = (ROOT / 'SKILL.md').read_text(encoding='utf-8')

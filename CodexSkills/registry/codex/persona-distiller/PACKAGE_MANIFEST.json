@@ -4,7 +4,7 @@
   "display_name": "人物蒸馏 Skill / Persona Distiller",
   "distribution": {
     "canonical_registry": "../persona-distiller-group",
-    "kind": "repository-customized-v0.0.0.20",
+    "kind": "repository-customized-v0.0.0.21",
     "lineage_base_archive_sha256": "e891912d98d14afb7677ac935a19be329d97d206f4ae74a644892f46b17f6748"
   },
   "evaluation_suites": 16,
@@ -31,7 +31,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "dfc1de25a5700aa525bb62dc9b36a6d0c7a3c586a874f927a813012901aab4ac",
+      "sha256": "7906e1e4a505387094217a79e4a0207922ad73a4b6c3a07e0cc7001070b2dfbc",
       "size_bytes": 8802
     },
     {
@@ -56,12 +56,12 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "6006175cf51a35d3fb4c7ad4b90d4ea470ea7e143afe738154e7c260be4e4dda",
-      "size_bytes": 10324
+      "sha256": "7743560418dc55d326bcda7e04aadc8b84813d88195a6a84beea41d1b20974ce",
+      "size_bytes": 11586
     },
     {
       "path": "VERSION",
-      "sha256": "10a9933a593b987452b760954f37d0fdac98138966bbc80103b61f9c0f76f651",
+      "sha256": "27cbf75efc6d18ea3b45ad7fb80f4eebc0e928c172ecb5fad572dbd07f43b8e3",
       "size_bytes": 10
     },
     {
@@ -121,7 +121,7 @@
     },
     {
       "path": "handoff.md",
-      "sha256": "d396077dfa8b36215cc96e3501386db63bbd1633e1d0b28fd0266cc7c499fb7c",
+      "sha256": "70848cebf8f32499ce348007587edc0cc51e039b0f1c1a0842e526e4439feb05",
       "size_bytes": 3702
     },
     {
@@ -141,7 +141,7 @@
     },
     {
       "path": "manifest.json",
-      "sha256": "2658c7ee17da722905cc54ce84e1cb16a156e654aa7859ed4b6b32d75e790627",
+      "sha256": "33f4d306f3cce79925d02bc42f3564d6490ead778eadc145ce315aad0c12876f",
       "size_bytes": 1191
     },
     {
@@ -450,6 +450,11 @@
       "size_bytes": 2517
     },
     {
+      "path": "references/pipeline/checkers/check_activation_yield.py",
+      "sha256": "ba6a9b77f1190faca0b2bcff5b7a95bd2dd59a2e87ddc5fbb618767c59c11b63",
+      "size_bytes": 7577
+    },
+    {
       "path": "references/pipeline/checkers/check_anchor_coherence.py",
       "sha256": "42645c1699430fcca7a69a093aa75431bf3678214b1b0c1e7443aca257e322aa",
       "size_bytes": 5014
@@ -728,6 +733,11 @@
       "path": "scripts/check_absence_claims.py",
       "sha256": "efbfcbe6d1d05c1b3379f585ad18177fb86486faefe313f3021d098f91c72751",
       "size_bytes": 2517
+    },
+    {
+      "path": "scripts/check_activation_yield.py",
+      "sha256": "ba6a9b77f1190faca0b2bcff5b7a95bd2dd59a2e87ddc5fbb618767c59c11b63",
+      "size_bytes": 7577
     },
     {
       "path": "scripts/check_authorship.py",
@@ -1381,8 +1391,8 @@
     },
     {
       "path": "tests/test_skill_contract.py",
-      "sha256": "2fb8602947c1b798731ddc8845d1566e3e04e2c6fc192d66e29897015dd79f14",
-      "size_bytes": 17358
+      "sha256": "fa925aa4b7e7f0928f35208c120fd4b5cba13d18f0568a9f8f1106dda8c8e91e",
+      "size_bytes": 18439
     },
     {
       "path": "tests/test_versioning.py",
@@ -1431,5 +1441,5 @@
     },
     "secret_findings": 0
   },
-  "version": "v0.0.0.20"
+  "version": "v0.0.0.21"
 }

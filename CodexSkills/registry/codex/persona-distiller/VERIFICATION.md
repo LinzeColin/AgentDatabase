@@ -1,4 +1,4 @@
-# Release verification — Persona Distiller v0.0.0.20
+# Release verification — Persona Distiller v0.0.0.21
 
 Date: 2026-08-01
 
@@ -10,7 +10,7 @@ Date: 2026-08-01
 > bundle 构不出来、97 人、59 用例），**三件当时都已不成立**。
 > 改过标题的旧正文会冒充当前复验，比标题陈旧更糟。已从工具中移除该行为。
 >
-> 本次（v0.0.0.20）**是真的重跑了一遍**，下表每一行都是本次实跑输出。
+> 本次（v0.0.0.21）**是真的重跑了一遍**，下表每一行都是本次实跑输出。
 
 ## Result
 
@@ -24,7 +24,7 @@ Date: 2026-08-01
 
 | Gate | 本次结果 | 证据来源 |
 |---|---:|---|
-| Offline unit / integration / concurrency tests | **69 / 69 passed** | `python3 -m pytest tests/ -q` |
+| Offline unit / integration / concurrency tests | **70 / 70 passed** | `python3 -m pytest tests/ -q` |
 | 合同漂移门（版本三轴 + 身份合同 + 检查器镜像） | **0 条** | `scripts/check_contract_drift.py` |
 | 合同漂移门的负对照 | passed（坏样本 6 类全抓出） | `check_contract_drift.py --self-test` |
 | 归属门的负对照 | passed（**8 正 + 10 反**，另含 1 条只报不判） | `check_authorship.py --self-test` |
@@ -74,6 +74,31 @@ Date: 2026-08-01
 （`check_distillation_freshness.py` 默认只报不拦，`--strict` 存在但发行流程不用）。
 收窄的唯一途径是**600 人完成后统一重蒸**（任务 #29）。
 **单说「PASS」而不说这 92 条，就是拿绿灯掩盖一件已知的事。**
+
+### ★★ 零之前：**负对照跑出来了，结果是负的**
+
+2026-08-02，Livermore #100 首次盲态 A/B（32 条同一提问 × 2 席独立评委 = 64 对，
+A/B 归属按 `case_id` 哈希逐条翻转，**不给评委任何 rubric**）：
+
+| | 值 |
+|---|---:|
+| 产物 | **0.7369** |
+| 裸模型 | **0.8444** |
+| **真 delta** | **−0.1075** |
+| 逐对胜负 | 产物 10 胜 / **裸模型 54 胜** |
+| 对照：自撰稻草人算出的 delta | +0.8012（**虚高 0.9087**） |
+
+**十六个套组里，产物只在 `fact-preservation` 一处胜出（+0.247）**，其余十五处全负；
+最差的是 `known` −0.275、`capability-calibration` −0.268、`long-horizon` −0.230。
+
+两席盲判**各自独立**指出同一机制：**拿边界当答案**——
+自称手握 16 份材料却只报计数、被问「发生了什么」却用「不能推断想法」挡回去、
+被要求给判断却以「语料里没有前瞻检验」拒绝。
+以及：`own_voice_ratio`、份数、词频这类**内部遥测，用户拿不走**。
+
+**结论必须写死**：本产物集是**引文核查器，不是决策助手**。
+在归属类问题（这句是不是他说的）上有真实优势，
+在判断、规划、执行类问题上**目前是净负担**。
 
 ### ★ 零、最重要的一条：**产品本身从未做过负对照**
 
