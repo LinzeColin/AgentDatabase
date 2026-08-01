@@ -16,6 +16,6 @@
   "released_at": "2026-08-01",
   "roster_target": 600,
   "roster_target_note": "12 identity categories x 50; team-index.json products is the only truth source for the current count",
-  "version": "v0.0.0.12",
+  "version": "v0.0.0.13",
   "version_binding": "VERSION == manifest.json:version == team-index.json:generator_version; enforced by scripts/check_group_version_binding.py and by validate_group.py"
 }
