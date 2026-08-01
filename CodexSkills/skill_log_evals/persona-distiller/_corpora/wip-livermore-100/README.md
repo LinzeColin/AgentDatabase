@@ -228,3 +228,48 @@ ERRORS: ['research.lane-completion']       ← 仍然只差六路正文
 2. 高价值实得项：**1908-05-15 棉花逼仓当日访谈**、
    **1923-12-21 参议院证词摘要**、**1940-09-22 死前两月最后一次市场评论**、
    **1940-11-29 遗书**。
+
+---
+
+# 八、【2026-08-01 三续】研究门与合成门均全绿，评委已派
+
+## 现状一览
+
+| 阶段 | 状态 |
+|---|---|
+| 语料 | 542 份（541 报纸 + 1 本书），train 536 / holdout 4 |
+| 研究门 | **passed，0 错 0 警**（profile = deep） |
+| 断言 | **30 条**（心智模型 5 / 启发式 7，门槛 4 与 6），全部双源双语境双证据簇带证伪条件 |
+| 文档 | 10 份，30 个标记，无孤儿无幽灵，soul-hypothesis 未逃逸 |
+| 用例 | **32 条**（16 套组 × 2），critical 12 条 |
+| 合成门 | **passed，0 错 0 警** |
+| team-card | 已填，`readiness = ready` |
+| 评审 | 两席已派（冻结指令 v1），**上限 3 轮** |
+
+## 本目录新增的四件工具
+
+| 文件 | 作用 |
+|---|---|
+| `gen_jl_claims.py` | 30 条断言。`claim_id` 由语义 slug 派生 sha256 前 12 位——**门写死了 `clm-[a-f0-9]{12}`，人读 id 一个也匹配不上** |
+| `gen_jl_docs.py` | 10 份文档，自带「无孤儿/无幽灵/soul 未逃逸」三项自检 |
+| `gen_jl_cases.py` | 32 条用例 + 判分载荷（每条带 `case_hash`） |
+| `verify_quotes.py` | **逐条核验英文引文是否逐字在语料中**。本轮抓出 13 个我无声修好的 OCR 片段 |
+| `assemble_results.py` | 拼装两席分数 → `results.jsonl`，按 `case_hash` 单条拒收 |
+| `publish_jl.sh` | 发布门 → 打包 → 入库 → 重建视图 → 校验（含 products 只增不减断言） |
+
+## 接手时的顺序
+
+1. 评委回分 → 存成 `seatD.json` / `seatE.json`（原样 `{"case-id": [候选分, 对照分]}`）
+2. `python3 assemble_results.py <target> 1 seatD.json seatE.json`
+   —— 它会直接打印两个一票否决维度是否过线（boundary ≥0.85、fact-preservation ≥0.93）
+3. 过门 → `bash publish_jl.sh`
+4. 未过门 → **只重判实际改动过的用例**（由 `case_hash` 判定），**总轮数上限 3**
+
+## ⚠ 接手前必读的一条
+
+**这份语料是 OCR 扫描件，抄引文时「顺手改对错字」是最省力的动作。**
+第一版 30 条断言里有 **13 个片段**是这样被我无声修好的——
+`cach`→`each`、`prcvious onc`→`previous one`——
+**那样写出来的「原话」在语料里根本不存在。**
+
+**改任何一句英文引文之后，必须重跑 `verify_quotes.py`。**
