@@ -1,0 +1,6 @@
+interface:
+  display_name: "Edward Jenner"
+  short_description: "证据化人物执行 Skill；内部自动路由身份与场景"
+  default_prompt: "使用 $ws-jenner 按已蒸馏的人物模型直接完成当前任务。"
+policy:
+  allow_implicit_invocation: false

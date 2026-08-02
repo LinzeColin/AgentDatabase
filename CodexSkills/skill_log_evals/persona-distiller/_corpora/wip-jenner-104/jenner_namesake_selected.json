@@ -1,0 +1,58 @@
+{
+  "candidate_cards": [
+    "A. 人物与身份：Edward Jenner；医疗护理师；英国乡村医师、博物学家；牛痘接种（vaccination）的确立者。\n   专业背景：1749-05-17 生于格洛斯特郡伯克利，1823-01-26 卒于伯克利（脑出血）。1770 年赴伦敦师从 John Hunter，1773 年返回伯克利开业行医，此后除数次赴伦敦外一生留在伯克利。1798 年自费出版《An Inquiry into the Causes and Effects of the Variolae Vaccinae; a Disease Discovered in some of the Western Counties of England, Particularly Gloucestershire, and Known by the Name of The Cow Pox》。`vaccine`／`vaccination` 二词即由他所造的 Variolae vaccinae（「牛的痘」）而来。。\n   应用价值：场景：以极小的样本量（个位数病例）提出一个要求全社会改变行为的主张；把乡野流传的说法（挤奶女工不出天花）当作可检验的假说而非民间迷信；**主张被皇家学会退稿之后自费出版**——如何在没有机构背书时推进一件事；面对具名同行的公开反对与失败的复现报告如何回应；关键能力：把一条地方性口传观察转成可复现的操作程序；长期随访与再攻毒（接种后再种人痘验证保护力）；**博物学家的观察训练用在临床上**（他同期做杜鹃雏鸟的研究，1788 年因此入皇家学会）；自费出版与直接向读者说话的写作。\n   区分依据：1749-05-17–1823-01-26；伯克利；John Hunter 的学生；1798《Inquiry》作者；`vaccination` 一词的来源。**与其子 Edward Jenner Jr. 的分辨靠年代**：凡 1798 年之前的行医与出版记录均属本人。。"
+  ],
+  "candidate_count": 1,
+  "candidates": [
+    {
+      "application_scenarios": [
+        "以极小的样本量（个位数病例）提出一个要求全社会改变行为的主张",
+        "把乡野流传的说法（挤奶女工不出天花）当作可检验的假说而非民间迷信",
+        "**主张被皇家学会退稿之后自费出版**——如何在没有机构背书时推进一件事",
+        "面对具名同行的公开反对与失败的复现报告如何回应"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://archive.org/details/b24759247"
+        },
+        {
+          "locator": "https://en.wikipedia.org/wiki/Edward_Jenner"
+        },
+        {
+          "locator": "https://www.britannica.com/biography/Edward-Jenner"
+        },
+        {
+          "locator": "https://www.jenner.ac.uk/about/edward-jenner"
+        },
+        {
+          "locator": "https://biotech.law.lsu.edu/cphl/history/articles/jenner.htm"
+        }
+      ],
+      "canonical_name": "Edward Jenner",
+      "distinguishing_basis": "1749-05-17–1823-01-26；伯克利；John Hunter 的学生；1798《Inquiry》作者；`vaccination` 一词的来源。**与其子 Edward Jenner Jr. 的分辨靠年代**：凡 1798 年之前的行医与出版记录均属本人。",
+      "evidence_level": "low",
+      "identity_category": "医疗护理师",
+      "key_capabilities": [
+        "把一条地方性口传观察转成可复现的操作程序",
+        "长期随访与再攻毒（接种后再种人痘验证保护力）",
+        "**博物学家的观察训练用在临床上**（他同期做杜鹃雏鸟的研究，1788 年因此入皇家学会）",
+        "自费出版与直接向读者说话的写作"
+      ],
+      "label": "A",
+      "occupation_or_role": "英国乡村医师、博物学家；牛痘接种（vaccination）的确立者",
+      "professional_background": "1749-05-17 生于格洛斯特郡伯克利，1823-01-26 卒于伯克利（脑出血）。1770 年赴伦敦师从 John Hunter，1773 年返回伯克利开业行医，此后除数次赴伦敦外一生留在伯克利。1798 年自费出版《An Inquiry into the Causes and Effects of the Variolae Vaccinae; a Disease Discovered in some of the Western Counties of England, Particularly Gloucestershire, and Known by the Name of The Cow Pox》。`vaccine`／`vaccination` 二词即由他所造的 Variolae vaccinae（「牛的痘」）而来。",
+      "subject_uid": "edward-jenner-1749"
+    }
+  ],
+  "generated_at": "2026-08-02T04:24:21Z",
+  "normalized_name": "edwardjenner",
+  "resolution": "single",
+  "schema_version": "1.0",
+  "search_scope": [
+    "sibling canonical registry",
+    "authoritative public sources supplied by orchestration"
+  ],
+  "selected_subject_uid": "edward-jenner-1749",
+  "status": "ready",
+  "target_name": "Edward Jenner"
+}
