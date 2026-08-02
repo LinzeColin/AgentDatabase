@@ -46,5 +46,266 @@
   "subject_origin": "historical",
   "target_id": "tgt-7f8895db0ade",
   "time_scope": "1822-1895",
-  "updated_at": "2026-08-02T21:15:19Z"
+  "updated_at": "2026-08-02T21:15:19Z",
+  "attribution_basis": {
+    "authority": "**印刷时代人物，但其权威文本无本人署名——这是本人物的特殊点，必须写清。**\n《Œuvres de Pasteur》(Masson, 1922–1939, 7 卷) 扉页逐字为「OEUVRES DE PASTEUR ... RÉUNIES PAR PASTEUR VALLERY-RADOT」——全页唯一的 PAR 结构指向**辑录者**（其外孙、巴黎医院医师），Pasteur 本人只出现在属格中。**书中没有他的署名，`check_authorship` 报「查无归属证据」是正确的，不是判据缺陷。**\n归属依据不取扉页，取三条可独立复核的证据：\n① **各卷正文即其在《Comptes Rendus de l'Académie des Sciences》等处原刊论文的重排**，原刊处有其署名，可逐篇回原刊核对（本工作区已另抓 CR 署名通报 11 份作对照）；\n② 该辑本由巴黎医学科学院书局（Masson，Libraires de l'Académie de Médecine）出版，为学界公认之权威全集，百年来被广泛引用；\n③ **时间判据最硬**：Pasteur 卒于 1895-09-28，辑录者 Pasteur Vallery-Radot 生于 1886，凡 1896 年后写成的文字一律不是他的。各卷编者按位置已逐卷实测（见 NAMESAKE_HAZARD.md）。",
+    "citation": "Pasteur, Louis. *Œuvres de Pasteur*, réunies par Pasteur Vallery-Radot. 7 vol. Paris: Masson et Cie, 1922–1939. 并对照 *Comptes Rendus hebdomadaires des séances de l'Académie des sciences*, t.45(1857)、50–58(1860–64)、84(1877)、90(1880)、92(1881)、98(1884)、101(1885) 各卷署名通报。",
+    "disputed_policy": "**争议篇目为空，但不是「没查过」——是查过之后为空，理由如下。**\nPasteur 属印刷时代且身处科学院公开发表制度之下，其论文经院会宣读、登记、刊于 CR，有日期与卷页可查，**不存在古代人物那种伪托问题**。\n本人物真正的归属风险是另一种：**辑录者与他同名**（Pasteur Vallery-Radot 名字里字面含 Louis Pasteur），编者按、序、脚注、卷末 Table/Index 均出自辑录者之手。这一类**不记为「争议著作」，而是逐卷标出并排除**——处理办法见下 exclusions。\n另有 **William Pasteur（1855–1943，瑞士裔英籍医生）**，同姓同职业，19 世纪末英文医学期刊中的 \"Dr. Pasteur\" 须按地点（巴黎 vs 伦敦）分辨；本工作区语料为法文一手，未触发。",
+    "disputed_works": [],
+    "exclusions": [
+      {
+        "what": "各卷 INTRODUCTION DU TOME N（末尾署 PASTEUR VALLERY-RADOT.）与扉页、Copyright 页",
+        "why": "辑录者 1922–1939 年写的，作者 1895 年已卒",
+        "measured_share": {
+          "t.I": "0.62%",
+          "t.II": "0.58%",
+          "t.III": "0.47%",
+          "t.IV": "0.43%",
+          "t.V": "0.86%",
+          "t.VI": "0.95%",
+          "t.VII": "0.36%"
+        }
+      },
+      {
+        "what": "t.VI 在 73.5% 与 73.9% 处的编者脚注",
+        "why": "同上"
+      },
+      {
+        "what": "t.VII 散布 6 处编者按及卷末 Table/Index",
+        "why": "同上；**t.VII 最脏**"
+      },
+      {
+        "what": "CR 各卷中「présentée par M. Pasteur」的通报",
+        "why": "他仅代呈他人，非其著述；抽取时已弃 27 个候选"
+      }
+    ],
+    "counting_convention": "covered_sources 逐份点名全部 45 条 P1 源，不使用整批声明（v0.0.0.24 曾因整批声明导致逐源检查整个关闭，v0.0.0.34 已堵）。",
+    "covered_sources": [
+      {
+        "source_id": "src-6a5e62970456",
+        "original_name": "oeuvresdepasteur01past.txt",
+        "locator": "https://archive.org/details/oeuvresdepasteur01past"
+      },
+      {
+        "source_id": "src-3051e571404a",
+        "original_name": "oeuvresdepasteur02past.txt",
+        "locator": "https://archive.org/details/oeuvresdepasteur02past"
+      },
+      {
+        "source_id": "src-2f7a86e8efd8",
+        "original_name": "oeuvresdepasteur03past.txt",
+        "locator": "https://archive.org/details/oeuvresdepasteur03past"
+      },
+      {
+        "source_id": "src-03548870310e",
+        "original_name": "oeuvresdepasteur04past.txt",
+        "locator": "https://archive.org/details/oeuvresdepasteur04past"
+      },
+      {
+        "source_id": "src-9c44a72e50bb",
+        "original_name": "uvresdepasteur0005past.txt",
+        "locator": "https://archive.org/details/uvresdepasteur0005past"
+      },
+      {
+        "source_id": "src-091606128d67",
+        "original_name": "uvresdepasteur0006past.txt",
+        "locator": "https://archive.org/details/uvresdepasteur0006past"
+      },
+      {
+        "source_id": "src-d9de2ef992b9",
+        "original_name": "uvresdepasteur0007past.txt",
+        "locator": "https://archive.org/details/uvresdepasteur0007past"
+      },
+      {
+        "source_id": "src-a7e954a0839a",
+        "original_name": "b30379696.txt",
+        "locator": "https://archive.org/details/b30379696"
+      },
+      {
+        "source_id": "src-fa2f1cee7e66",
+        "original_name": "b30379672.txt",
+        "locator": "https://archive.org/details/b30379672"
+      },
+      {
+        "source_id": "src-384b0672629b",
+        "original_name": "b30478200.txt",
+        "locator": "https://archive.org/details/b30478200"
+      },
+      {
+        "source_id": "src-bab734ff8d01",
+        "original_name": "b30478194.txt",
+        "locator": "https://archive.org/details/b30478194"
+      },
+      {
+        "source_id": "src-3ed8a797fcc5",
+        "original_name": "papers00past.txt",
+        "locator": "https://archive.org/details/papers00past"
+      },
+      {
+        "source_id": "src-700825650dc0",
+        "original_name": "101646755.nlm.nih.gov.txt",
+        "locator": "https://archive.org/details/101646755.nlm.nih.gov"
+      },
+      {
+        "source_id": "src-9c4ac225d2fe",
+        "original_name": "mmoiresurlafer00past.txt",
+        "locator": "https://archive.org/details/mmoiresurlafer00past"
+      },
+      {
+        "source_id": "src-6e6449b77a6d",
+        "original_name": "b30478248.txt",
+        "locator": "https://archive.org/details/b30478248"
+      },
+      {
+        "source_id": "src-b9a1f0542382",
+        "original_name": "101205420.nlm.nih.gov.txt",
+        "locator": "https://archive.org/details/101205420.nlm.nih.gov"
+      },
+      {
+        "source_id": "src-be4f8d083223",
+        "original_name": "oeuvresdepasteur00past.txt",
+        "locator": "https://archive.org/details/oeuvresdepasteur00past"
+      },
+      {
+        "source_id": "src-42f0a7572499",
+        "original_name": "bub_gb_87UvAQAAMAAJ.txt",
+        "locator": "https://archive.org/details/bub_gb_87UvAQAAMAAJ"
+      },
+      {
+        "source_id": "src-65f24689df3a",
+        "original_name": "b28113032.txt",
+        "locator": "https://archive.org/details/b28113032"
+      },
+      {
+        "source_id": "src-356b85cc3ee5",
+        "original_name": "b28113056.txt",
+        "locator": "https://archive.org/details/b28113056"
+      },
+      {
+        "source_id": "src-36d8c147c923",
+        "original_name": "b30478212.txt",
+        "locator": "https://archive.org/details/b30478212"
+      },
+      {
+        "source_id": "src-5d72f980d9f9",
+        "original_name": "etudessurlamalad00past.txt",
+        "locator": "https://archive.org/details/etudessurlamalad00past"
+      },
+      {
+        "source_id": "src-219c3f5be860",
+        "original_name": "b28124583_0001.txt",
+        "locator": "https://archive.org/details/b28124583_0001"
+      },
+      {
+        "source_id": "src-c2d2e320902a",
+        "original_name": "b30478224.txt",
+        "locator": "https://archive.org/details/b30478224"
+      },
+      {
+        "source_id": "src-385fcae92d5c",
+        "original_name": "bub_gb_68mdjN3ZohEC.txt",
+        "locator": "https://archive.org/details/bub_gb_68mdjN3ZohEC"
+      },
+      {
+        "source_id": "src-a1d4288e79b0",
+        "original_name": "b21357407.txt",
+        "locator": "https://archive.org/details/b21357407"
+      },
+      {
+        "source_id": "src-c6a33f6c3e88",
+        "original_name": "b30478236.txt",
+        "locator": "https://archive.org/details/b30478236"
+      },
+      {
+        "source_id": "src-791f73aca309",
+        "original_name": "examencritiquedu00past.txt",
+        "locator": "https://archive.org/details/examencritiquedu00past"
+      },
+      {
+        "source_id": "src-d950bf5e165f",
+        "original_name": "studiesonferment00past.txt",
+        "locator": "https://archive.org/details/studiesonferment00past"
+      },
+      {
+        "source_id": "src-27422f26a6cd",
+        "original_name": "b29316832.txt",
+        "locator": "https://archive.org/details/b29316832"
+      },
+      {
+        "source_id": "src-2c67b92e9ca8",
+        "original_name": "b28124571.txt",
+        "locator": "https://archive.org/details/b28124571"
+      },
+      {
+        "source_id": "src-e9ff4667a0a8",
+        "original_name": "collectiondartic00past.txt",
+        "locator": "https://archive.org/details/collectiondartic00past"
+      },
+      {
+        "source_id": "src-9bc9eeab514f",
+        "original_name": "researchesonmole00past.txt",
+        "locator": "https://archive.org/details/researchesonmole00past"
+      },
+      {
+        "source_id": "src-0f10b12e4b96",
+        "original_name": "b30478145.txt",
+        "locator": "https://archive.org/details/b30478145"
+      },
+      {
+        "source_id": "src-3a547f10eee0",
+        "original_name": "cr-t45-1857-pasteur.txt",
+        "locator": "https://archive.org/details/comptesrendusheb45acad"
+      },
+      {
+        "source_id": "src-1b9dc51a1cbe",
+        "original_name": "cr-t50-1860-pasteur.txt",
+        "locator": "https://archive.org/details/comptesrendusheb50acad"
+      },
+      {
+        "source_id": "src-a9ba9e2a19e7",
+        "original_name": "cr-t51-1860-pasteur.txt",
+        "locator": "https://archive.org/details/comptesrendusheb51acad"
+      },
+      {
+        "source_id": "src-f2a71b2eb12c",
+        "original_name": "cr-t52-1861-pasteur.txt",
+        "locator": "https://archive.org/details/comptesrendusheb52acad"
+      },
+      {
+        "source_id": "src-8de6bbec7d5a",
+        "original_name": "cr-t56-1863-pasteur.txt",
+        "locator": "https://archive.org/details/comptesrendusheb56acad"
+      },
+      {
+        "source_id": "src-4b5cdc51ba84",
+        "original_name": "cr-t58-1864-pasteur.txt",
+        "locator": "https://archive.org/details/comptesrendusheb58acad"
+      },
+      {
+        "source_id": "src-840f04457829",
+        "original_name": "cr-t84-1877-pasteur.txt",
+        "locator": "https://archive.org/details/comptesrendusheb84acad"
+      },
+      {
+        "source_id": "src-cbfcd3f7719d",
+        "original_name": "cr-t90-1880-pasteur.txt",
+        "locator": "https://archive.org/details/comptesrendusheb90acad"
+      },
+      {
+        "source_id": "src-4d783fdbfc30",
+        "original_name": "cr-t92-1881-pasteur.txt",
+        "locator": "https://archive.org/details/ComptesRendusAcademieDesSciences092"
+      },
+      {
+        "source_id": "src-4201d31fdb35",
+        "original_name": "cr-t98-1884-pasteur.txt",
+        "locator": "https://archive.org/details/ComptesRendusAcademieDesSciences098"
+      },
+      {
+        "source_id": "src-7f65be720c23",
+        "original_name": "cr-t101-1885-pasteur.txt",
+        "locator": "https://archive.org/details/ComptesRendusAcademieDesSciences0101"
+      }
+    ]
+  }
 }
