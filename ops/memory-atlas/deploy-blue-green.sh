@@ -141,11 +141,11 @@ printf '%s
 ' "$release_id" > "$APP_ROOT/shared/LAST_PROMOTED_RELEASE"
 printf '{"schema_version":"memory_atlas.promotion.v1","release_id":"%s","git_commit":"%s","promoted_at":"%s"}
 ' "$release_id" "$(git rev-parse HEAD)" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > "$APP_ROOT/shared/promotion.json"
+trap - ERR
 set +e
 "$agent_release/ops/memory-atlas/post-promote-probe.sh" "$release_id"
 probe_rc=$?
 set -e
-trap - ERR
 case "$probe_rc" in
   0) printf '%s
 ' 'MEMORY_ATLAS_DEPLOYED_AND_AUTHENTICATED_PATH_VERIFIED' ;;
