@@ -536,6 +536,7 @@ def test_isolated_restore_verifies_every_hash(tmp_path: Path) -> None:
     private = LocalPrivateDatabase(tmp_path / "private")
     private.put_json("memory-atlas/runs/manifest.json", {"objects": [asdict(receipt)]}, "manifest")
     result = isolated_restore(manifest_path="memory-atlas/runs/manifest.json", destination=tmp_path / "restore", object_store=store, private_db=private)
+    assert result["state"] == "PASS"
     assert result["restored_objects"] == 1 and result["all_hashes_match"] is True
 
 

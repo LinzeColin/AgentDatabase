@@ -49,6 +49,7 @@ def isolated_restore(
         restored.append({"object_key": key, "sha256": digest, "path": str(target)})
     receipt = {
         "schema_version": "memory_atlas.restore_receipt.v1",
+        "state": "PASS",
         "manifest_path": manifest_path,
         "restored_objects": len(restored),
         "all_hashes_match": True,
