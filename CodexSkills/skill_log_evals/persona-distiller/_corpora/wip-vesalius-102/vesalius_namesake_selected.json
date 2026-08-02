@@ -1,0 +1,39 @@
+{
+ "_note": "从 4 名同姓候选中选定。**四人全部落在医疗护理师族**——这是本项目迄今唯一一次「同族同名」，队列的 family_zh 切不开。选择依据改为**队列条目的名字本身**：队列写的是「Andreas Vesalius」，四人中只有他叫 Andreas。阻断记录见 vesalius_gate.BLOCKED.json，四份卡片全文未删。",
+ "selected_from": 4,
+ "selection_rule": "queue.name == candidate.canonical_name（family_zh 在本例不可用，四人同族）",
+ "blocked_record": "vesalius_gate.BLOCKED.json",
+ "candidates": [
+  {
+   "canonical_name": "Andreas Vesalius",
+   "subject_uid": "andreas-vesalius-1514",
+   "identity_category": "医疗护理师",
+   "occupation_or_role": "解剖学家、外科医生；查理五世与腓力二世的御医",
+   "professional_background": "本名 Andries van Wesel，1514-12-31 生于布鲁塞尔，1564-10-15 卒于扎金索斯岛（自耶路撒冷朝圣返程途中船难），终年 49 岁。1538 年与画师 Jan van Calcar 合作出版《Tabulae anatomicae sex》；**1543 年 28 岁时由巴塞尔印工 Johannes Oporinus 出版《De humani corporis fabrica libri septem》**；1546 年出版《China Root Epistle》(Epistola rationem modumque propinandi radicis Chynae decocti)。先后任查理五世御医、1555 年起任腓力二世御医。",
+   "application_scenarios": [
+    "以亲手解剖推翻沿袭千年的权威结论——**他推翻的正是 Galen**",
+    "把观察与插图绑定：文字与图版互为证据而非装饰",
+    "解剖示范的教学组织：亲自操刀而非由仆役代劳",
+    "面对同行围攻时的应对（Sylvius 一派的公开攻击）"
+   ],
+   "key_capabilities": [
+    "人体解剖的系统操作与记录",
+    "**指认并逐条列出前人（Galen）解剖学结论中的具体错误**",
+    "文字—图版—印制三者的协同（与 Calcar、Oporinus 的合作）",
+    "在权威压力下坚持以亲验为准"
+   ],
+   "distinguishing_basis": "1514-12-31 生 / 1564-10-15 卒；《Fabrica》1543 年由 Oporinus 在巴塞尔印；查理五世与腓力二世御医；**其著作是本人物唯一可核的一手主体**",
+   "authoritative_sources": [
+    {
+     "locator": "https://en.wikipedia.org/wiki/Andreas_Vesalius",
+     "kind": "encyclopedia"
+    },
+    {
+     "locator": "Andreas Vesalius, De humani corporis fabrica libri septem, Basel: Johannes Oporinus, 1543",
+     "kind": "self-authored-book"
+    }
+   ],
+   "evidence_level": "high"
+  }
+ ]
+}

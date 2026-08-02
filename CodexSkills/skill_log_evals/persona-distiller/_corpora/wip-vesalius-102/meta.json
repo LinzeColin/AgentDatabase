@@ -1,0 +1,87 @@
+{
+  "attribution_basis": {
+    "authority": "**印刷时代的实物证据**，与前印刷时代人物不同：《De humani corporis fabrica libri septem》1543 年由 Johannes Oporinus 在巴塞尔印制，扉页署名、印工具名、印制地与年份俱在，且有 1555 年第二版可作版次比对。另有 1538 年《Tabulae anatomicae sex》（与画师 Jan van Calcar 合作）与 1546 年《China Root Epistle》(Epistola rationem modumque propinandi radicis Chynae decocti)。**归属的锚是「哪一版、谁印的」，不是「传统上算他的」。**",
+    "citation": "https://en.wikipedia.org/wiki/Andreas_Vesalius ｜ 1543 年 Basel: Johannes Oporinus 版扉页与印记（待探源交回可取数字化件后补具体 locator）",
+    "disputed_policy": "三步：① 只收能定到**具体版次与印工**的件（1543 / 1555 Fabrica、1538 Tabulae、1546 China Root、1539 静脉切开书信）；② 后世编订的选集、译本单独记 tier，**不与原版混记**；③ 托名件与归属存疑件逐条列入 disputed_works。★ **当前 disputed_works 为空是「尚未探源」，不是「已查明无争议」**——探源报告交回前不得据此声称无托名件。这一条是 Galen #101 的直接教训：那次我把探源报告里的一句话照抄成断言而没有核，两席盲判各自抓出，回查文献确认我错。",
+    "disputed_works": []
+  },
+  "builder_version": "v0.0.0.5",
+  "chosen_subject_uid": "andreas-vesalius-1514",
+  "consent_authority": null,
+  "created_at": "2026-08-02T01:10:56Z",
+  "current_version": null,
+  "existential_hypotheses_enabled": false,
+  "identity_selection": {
+    "canonical": "healthcare-nursing",
+    "display": "医疗护理师",
+    "mode": "single",
+    "primary": "healthcare-nursing",
+    "weights": {
+      "healthcare-nursing": 1.0
+    }
+  },
+  "language": "la",
+  "model_version": "0.1.0-draft",
+  "name": "Andreas Vesalius",
+  "namesake_gate": {
+    "candidate_count": 1,
+    "chosen_candidate": {
+      "application_scenarios": [
+        "以亲手解剖推翻沿袭千年的权威结论——**他推翻的正是 Galen**",
+        "把观察与插图绑定：文字与图版互为证据而非装饰",
+        "解剖示范的教学组织：亲自操刀而非由仆役代劳",
+        "面对同行围攻时的应对（Sylvius 一派的公开攻击）"
+      ],
+      "authoritative_sources": [
+        {
+          "kind": "encyclopedia",
+          "locator": "https://en.wikipedia.org/wiki/Andreas_Vesalius"
+        },
+        {
+          "kind": "self-authored-book",
+          "locator": "Andreas Vesalius, De humani corporis fabrica libri septem, Basel: Johannes Oporinus, 1543"
+        }
+      ],
+      "canonical_name": "Andreas Vesalius",
+      "distinguishing_basis": "1514-12-31 生 / 1564-10-15 卒；《Fabrica》1543 年由 Oporinus 在巴塞尔印；查理五世与腓力二世御医；**其著作是本人物唯一可核的一手主体**",
+      "evidence_level": "high",
+      "identity_category": "医疗护理师",
+      "key_capabilities": [
+        "人体解剖的系统操作与记录",
+        "**指认并逐条列出前人（Galen）解剖学结论中的具体错误**",
+        "文字—图版—印制三者的协同（与 Calcar、Oporinus 的合作）",
+        "在权威压力下坚持以亲验为准"
+      ],
+      "label": "A",
+      "occupation_or_role": "解剖学家、外科医生；查理五世与腓力二世的御医",
+      "professional_background": "本名 Andries van Wesel，1514-12-31 生于布鲁塞尔，1564-10-15 卒于扎金索斯岛（自耶路撒冷朝圣返程途中船难），终年 49 岁。1538 年与画师 Jan van Calcar 合作出版《Tabulae anatomicae sex》；**1543 年 28 岁时由巴塞尔印工 Johannes Oporinus 出版《De humani corporis fabrica libri septem》**；1546 年出版《China Root Epistle》(Epistola rationem modumque propinandi radicis Chynae decocti)。先后任查理五世御医、1555 年起任腓力二世御医。",
+      "subject_uid": "andreas-vesalius-1514"
+    },
+    "chosen_subject_uid": "andreas-vesalius-1514",
+    "normalized_name": "andreasvesalius",
+    "resolution": "single",
+    "schema_version": "1.0"
+  },
+  "normalized_name": "andreasvesalius",
+  "origin_review_required": false,
+  "product_version": null,
+  "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+  "profile": "deep",
+  "prohibited_uses": [
+    "identity authentication or deceptive impersonation",
+    "invented endorsement, signature, consent, private memory or current opinion",
+    "unsupported psychological diagnosis",
+    "replacement of accountable high-stakes professional judgment"
+  ],
+  "retention_policy": null,
+  "runtime_invocation_versioning": false,
+  "scenario": null,
+  "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+  "schema_version": "2.0",
+  "slug": "andreas-vesalius",
+  "status": "draft",
+  "subject_origin": "historical",
+  "target_id": "tgt-f975a2c87a50",
+  "time_scope": "1514-12-31 – 1564-10-15",
+  "updated_at": "2026-08-02T01:10:56Z"
+}

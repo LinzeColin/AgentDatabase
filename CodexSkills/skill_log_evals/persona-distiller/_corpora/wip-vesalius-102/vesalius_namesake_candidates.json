@@ -1,0 +1,66 @@
+{
+  "_note": "「Vesalius」同名门。风险形态与 Galen 不同：这里是**世袭医学家族**——祖上四代都用 van Wesel／Vesalius 这个名字，且**全部是医生或药剂师、全部服务于同一批哈布斯堡君主**。领域完全重叠、时代相邻，是本项目迄今最难切的一类同名。另有现代机构名（Vesalius College 等）借用其名，属非人物干扰。选定后另存 selected 再跑一次。",
+  "candidates": [
+    {
+      "canonical_name": "Andreas Vesalius",
+      "subject_uid": "andreas-vesalius-1514",
+      "identity_category": "医疗护理师",
+      "occupation_or_role": "解剖学家、外科医生；查理五世与腓力二世的御医",
+      "professional_background": "本名 Andries van Wesel，1514-12-31 生于布鲁塞尔，1564-10-15 卒于扎金索斯岛（自耶路撒冷朝圣返程途中船难），终年 49 岁。1538 年与画师 Jan van Calcar 合作出版《Tabulae anatomicae sex》；**1543 年 28 岁时由巴塞尔印工 Johannes Oporinus 出版《De humani corporis fabrica libri septem》**；1546 年出版《China Root Epistle》(Epistola rationem modumque propinandi radicis Chynae decocti)。先后任查理五世御医、1555 年起任腓力二世御医。",
+      "application_scenarios": [
+        "以亲手解剖推翻沿袭千年的权威结论——**他推翻的正是 Galen**",
+        "把观察与插图绑定：文字与图版互为证据而非装饰",
+        "解剖示范的教学组织：亲自操刀而非由仆役代劳",
+        "面对同行围攻时的应对（Sylvius 一派的公开攻击）"
+      ],
+      "key_capabilities": [
+        "人体解剖的系统操作与记录",
+        "**指认并逐条列出前人（Galen）解剖学结论中的具体错误**",
+        "文字—图版—印制三者的协同（与 Calcar、Oporinus 的合作）",
+        "在权威压力下坚持以亲验为准"
+      ],
+      "distinguishing_basis": "1514-12-31 生 / 1564-10-15 卒；《Fabrica》1543 年由 Oporinus 在巴塞尔印；查理五世与腓力二世御医；**其著作是本人物唯一可核的一手主体**",
+      "authoritative_sources": [
+        { "locator": "https://en.wikipedia.org/wiki/Andreas_Vesalius", "kind": "encyclopedia" },
+        { "locator": "Andreas Vesalius, De humani corporis fabrica libri septem, Basel: Johannes Oporinus, 1543", "kind": "self-authored-book" }
+      ],
+      "evidence_level": "high"
+    },
+    {
+      "canonical_name": "Anders van Wesel（其父）",
+      "subject_uid": "anders-van-wesel-father",
+      "identity_category": "医疗护理师",
+      "occupation_or_role": "药剂师；马克西米连一世的药剂师，后为查理五世的侍从",
+      "professional_background": "**领域重叠且服务同一批君主**——检索「Vesalius + 御医／哈布斯堡」会同时命中父子二人。无独立可核著述。",
+      "application_scenarios": ["不适用——无独立著述，不构成专家人格候选"],
+      "key_capabilities": ["不适用"],
+      "distinguishing_basis": "药剂师而非解剖学家；无署名著作",
+      "authoritative_sources": [{ "locator": "https://en.wikipedia.org/wiki/Andreas_Vesalius", "kind": "encyclopedia" }],
+      "evidence_level": "medium"
+    },
+    {
+      "canonical_name": "Everard van Wesel（其祖父）",
+      "subject_uid": "everard-van-wesel-grandfather",
+      "identity_category": "医疗护理师",
+      "occupation_or_role": "马克西米连一世的御医",
+      "professional_background": "**同姓、同为御医、同侍马克西米连一世**——与其父构成第二层混淆。无独立可核著述。",
+      "application_scenarios": ["不适用"],
+      "key_capabilities": ["不适用"],
+      "distinguishing_basis": "早一代；御医而非解剖学家；无署名著作",
+      "authoritative_sources": [{ "locator": "https://en.wikipedia.org/wiki/Andreas_Vesalius", "kind": "encyclopedia" }],
+      "evidence_level": "medium"
+    },
+    {
+      "canonical_name": "Jan van Wesel（其曾祖父）",
+      "subject_uid": "jan-van-wesel-great-grandfather",
+      "identity_category": "医疗护理师",
+      "occupation_or_role": "医师、教授；帕维亚大学医学学位，任教于鲁汶大学",
+      "professional_background": "**第三层同姓混淆，且同样是医学教授**。检索十六世纪前的「Vesalius + 鲁汶」会命中他。",
+      "application_scenarios": ["不适用"],
+      "key_capabilities": ["不适用"],
+      "distinguishing_basis": "早三代；帕维亚学位、鲁汶任教；与《Fabrica》无关",
+      "authoritative_sources": [{ "locator": "https://en.wikipedia.org/wiki/Andreas_Vesalius", "kind": "encyclopedia" }],
+      "evidence_level": "medium"
+    }
+  ]
+}

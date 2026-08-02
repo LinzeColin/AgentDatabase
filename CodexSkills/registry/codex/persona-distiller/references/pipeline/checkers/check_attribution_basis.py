@@ -81,9 +81,16 @@ def check_meta(meta: dict[str, Any]) -> tuple[list[str], dict[str, Any]]:
 
     basis = meta.get("attribution_basis")
     if not isinstance(basis, dict):
+        # ★ v0.0.0.30：措辞按时代分开。原文一律说「印刷时代的署名证据对他不适用」——
+        #   那是照着 Hippocrates／Galen 写的，**对 1543 年的 Vesalius 是错的**：
+        #   他有扉页、有具名印工、有版次。**门该拦他（historical 都要声明依据），
+        #   但拦的理由不一样**：他要写的是「哪些版次算真、哪些托名件不算」，
+        #   不是「在没有署名的时代靠什么认定」。
+        #   一条对某一类人成立的说明文字，套到另一类人身上就是错的。
         return ([
-            "historical 人物未声明 attribution_basis —— "
-            "印刷时代的署名证据（A-byline 等）对他不适用，**必须另行写明靠什么证明这是他写的**"
+            "historical 人物未声明 attribution_basis —— **必须写明靠什么证明这是他写的**。"
+            "前印刷时代人物：A-byline 等五种署名证据结构上不存在，须另找权威（如作者自著目录）；"
+            "印刷时代人物：扉页与印工可用，但**须写明哪些版次／托名件不算**"
         ], info)
 
     problems: list[str] = []
@@ -161,9 +168,14 @@ def self_test() -> int:
         fails.append("正对照 2 失败：非 historical 人物不该被本门判错")
 
     # ★ 负对照 1（Hippocrates 那一类）：historical 而完全没声明
+    #   断言只查**实质**（有没有报错、报的是不是「没声明依据」），不钉死措辞——
+    #   v0.0.0.30 改措辞时这条曾因钉死短语而误红，那是判据脆而不是产物错。
     p, _ = check_meta({"subject_origin": "historical"})
-    if not p or "必须另行写明" not in p[0]:
+    if not p or "attribution_basis" not in p[0]:
         fails.append("负对照 1 未抓出：historical 人物完全没声明归属依据")
+    # 且措辞必须**同时覆盖两类时代**——这是 v0.0.0.30 的实质改动
+    if p and not ("前印刷时代" in p[0] and "印刷时代人物" in p[0]):
+        fails.append("负对照 1 措辞失职：未同时说明前印刷时代与印刷时代两类该写什么")
 
     # 负对照 2：四字段各缺其一，都要抓出
     for key in REQUIRED:
