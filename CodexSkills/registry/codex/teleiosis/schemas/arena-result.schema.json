@@ -1,0 +1,64 @@
+{
+  "$id": "teleiosis://schemas/arena-result.v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "arena_id": {
+      "type": "string"
+    },
+    "budget_ledger": {
+      "type": "array"
+    },
+    "effective_evidence_level": {
+      "enum": [
+        "L1",
+        "L2",
+        "L3",
+        "L4"
+      ]
+    },
+    "empirical_leaderboard": {
+      "type": "array"
+    },
+    "governance_board": {
+      "type": "array"
+    },
+    "hard_gate_failures": {
+      "type": "array"
+    },
+    "pairwise": {
+      "type": "array"
+    },
+    "pareto_front": {
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "teleiosis.arena_result.v1"
+    },
+    "status": {
+      "enum": [
+        "IMPROVED",
+        "DEGRADED",
+        "REHEAT_REQUIRED",
+        "INSUFFICIENT_EVIDENCE",
+        "ARENA_EVIDENCE_READY",
+        "BLOCKED",
+        "INVALID_RUN"
+      ]
+    },
+    "truth_boundary": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "arena_id",
+    "status",
+    "effective_evidence_level",
+    "empirical_leaderboard",
+    "governance_board",
+    "pareto_front",
+    "budget_ledger"
+  ],
+  "type": "object"
+}

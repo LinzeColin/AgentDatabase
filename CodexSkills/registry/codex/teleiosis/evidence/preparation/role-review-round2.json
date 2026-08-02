@@ -1,0 +1,113 @@
+{
+  "formal_independent_pass": "UNAVAILABLE",
+  "mode": "role_separated_same_model",
+  "result": "NO_OPEN_P0_P1_LOCAL_ENGINEERING",
+  "roles": [
+    {
+      "changed_artifacts": [
+        "README.md",
+        "delivery/HANDOFF.md"
+      ],
+      "decision": "KEEP",
+      "developer_burden_delta": {
+        "actual_delta_verified": true,
+        "builder_rework_prevented": 1,
+        "confirmed_closed_findings": [
+          "R1-01"
+        ]
+      },
+      "findings": [],
+      "input_capsule_hash": "e3ac28c0fa0b838df3e1df0db8af1b2fb76d6b1d751151a4af5cb27d1023d594",
+      "role": "产品与用户价值"
+    },
+    {
+      "changed_artifacts": [
+        "scripts/validate_release.py",
+        "scripts/teleiosis_core/doctor.py"
+      ],
+      "decision": "KEEP",
+      "developer_burden_delta": {
+        "actual_delta_verified": true,
+        "builder_rework_prevented": 1,
+        "confirmed_closed_findings": [
+          "R1-02"
+        ]
+      },
+      "findings": [],
+      "input_capsule_hash": "e7ae1ef89e7eb09520088e9a59835f57888ef19f3a2a4fe288a01a3a9e6fc7f0",
+      "role": "软件架构与实现"
+    },
+    {
+      "changed_artifacts": [
+        "scripts/teleiosis_core/integrity.py",
+        "MANIFEST.sha256"
+      ],
+      "decision": "KEEP",
+      "developer_burden_delta": {
+        "actual_delta_verified": true,
+        "builder_rework_prevented": 1,
+        "confirmed_closed_findings": [
+          "R1-03"
+        ]
+      },
+      "findings": [],
+      "input_capsule_hash": "e46d95b07de462ca62a1702e8551eb0ece9de0bf258de85ab7a9b25cc459d4bd",
+      "role": "数据安全与隐私"
+    },
+    {
+      "changed_artifacts": [
+        "scripts/teleiosis_core/installer.py",
+        "evidence/validation/raw/install-upgrade.stdout.log"
+      ],
+      "decision": "KEEP",
+      "developer_burden_delta": {
+        "actual_delta_verified": true,
+        "builder_rework_prevented": 1,
+        "confirmed_closed_findings": [
+          "R1-04"
+        ]
+      },
+      "findings": [],
+      "input_capsule_hash": "28e5cba48c299b48d8aff7dc81d858542d15511ca3e36c22eebda9a75bea1234",
+      "role": "SRE部署与恢复"
+    },
+    {
+      "changed_artifacts": [
+        "tests/test_v5_full.py",
+        "evidence/validation/RAW_EVIDENCE_INDEX.json"
+      ],
+      "decision": "KEEP",
+      "developer_burden_delta": {
+        "actual_delta_verified": true,
+        "builder_rework_prevented": 1,
+        "confirmed_closed_findings": [
+          "R1-05"
+        ]
+      },
+      "findings": [],
+      "input_capsule_hash": "a3b944027ae81a73db4a51f14e4c3edd931e0939c0e9f69b447c55ae6eb97fa5",
+      "role": "测试验收与证据"
+    },
+    {
+      "changed_artifacts": [
+        "legacy/v0.0.0.3/SEMANTIC_INHERITANCE.json",
+        "metadata/evidence-boundaries.json"
+      ],
+      "decision": "KEEP",
+      "developer_burden_delta": {
+        "actual_delta_verified": true,
+        "builder_rework_prevented": 1,
+        "confirmed_closed_findings": [
+          "R1-06"
+        ]
+      },
+      "findings": [],
+      "input_capsule_hash": "d6d2fdf0f62a39fb0d0e46f60b225e0c26be3e3008dd6d0d9f87d3ddfac91205",
+      "role": "反证范围与阻塞"
+    }
+  ],
+  "round": 2,
+  "schema_version": "teleiosis.role_review.v5",
+  "scope": "只复审变更 Candidate、未关闭 Finding 和回归影响。",
+  "subject_hash": "166a2284ab0749353ea9b898db55c3750347c9cfeca6321581779858519dce89"
+}

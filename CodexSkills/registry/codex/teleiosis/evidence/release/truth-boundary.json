@@ -1,0 +1,13 @@
+{
+  "artifact_status": "INSTALL_READY_FROZEN_CANDIDATE",
+  "candidate_hash": "17363d6bdda2ce2413bc68fe3112c454ff332391585ae8c6fc671516b8282d86",
+  "field_validation": "PENDING",
+  "formal_independent_review": "UNAVAILABLE",
+  "formal_pass_authority": "external independent verifier",
+  "install_ready": true,
+  "local_engineering": "PASS",
+  "native_competitor_evidence": "NOT_CLAIMED",
+  "review_mode": "role_separated_same_model",
+  "schema_version": "teleiosis.release_truth_boundary.v1",
+  "target_registry_install": "NOT_RUN"
+}

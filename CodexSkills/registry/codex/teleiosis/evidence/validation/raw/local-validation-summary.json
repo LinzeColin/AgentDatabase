@@ -1,0 +1,223 @@
+{
+  "candidate_core_hash": "166a2284ab0749353ea9b898db55c3750347c9cfeca6321581779858519dce89",
+  "cold_extract": "PASS",
+  "deterministic_package": {
+    "byte_identical": true,
+    "bytes": 2613615,
+    "files": 187,
+    "schema_version": "teleiosis.deterministic_package.v5",
+    "sha256": "3e2ae7b10e571d4f6558b4c5ee1c920b323846755fee9ee3479b0c0487301e24",
+    "status": "PASS",
+    "uncompressed_bytes": 10109558,
+    "zip_a": "candidate-a.zip",
+    "zip_b": "candidate-b.zip"
+  },
+  "doctor_runs": 3,
+  "exact_rollback": "PASS",
+  "formal_pass": "NOT_ISSUED",
+  "formal_pass_authority": "external independent verifier",
+  "fresh_install": "PASS",
+  "idempotent_install": "PASS",
+  "records": [
+    {
+      "check_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "check_stdout_sha256": "dce87e1e4dc32988fa00d3f163c01c18161f4832caa1e40c114b71a153b892d6",
+      "label": "cold-extract",
+      "returncode": 0,
+      "seconds": 27.122,
+      "tests_stderr_sha256": "ef88ea9e347f4dfa628f83fc01cf55f36355d8463a225e2d804a94bf7233e952",
+      "tests_stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/opt/pyvenv/bin/python3",
+        "scripts/teleiosis.py",
+        "doctor"
+      ],
+      "label": "doctor-1",
+      "returncode": 0,
+      "seconds": 1.0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "811040beda43b957a2e6909d56578e5691aee319939e948e7013252f5085a2ec"
+    },
+    {
+      "command": [
+        "/opt/pyvenv/bin/python3",
+        "scripts/teleiosis.py",
+        "doctor"
+      ],
+      "label": "doctor-2",
+      "returncode": 0,
+      "seconds": 0.939,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "811040beda43b957a2e6909d56578e5691aee319939e948e7013252f5085a2ec"
+    },
+    {
+      "command": [
+        "/opt/pyvenv/bin/python3",
+        "scripts/teleiosis.py",
+        "doctor"
+      ],
+      "label": "doctor-3",
+      "returncode": 0,
+      "seconds": 0.942,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "811040beda43b957a2e6909d56578e5691aee319939e948e7013252f5085a2ec"
+    },
+    {
+      "command": [
+        "/opt/pyvenv/bin/python3",
+        "scripts/teleiosis.py",
+        "taskpack",
+        "fresh-builder"
+      ],
+      "label": "fresh-builder",
+      "returncode": 0,
+      "seconds": 0.527,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "075218e8e940ad4b76cd13a68723a8f7a7e64d8e94c72f5e3587eaf8a9a4fcdd"
+    },
+    {
+      "label": "full-tests-1",
+      "returncode": 0,
+      "seconds": 26.816,
+      "stderr_sha256": "91eff7264d80f93cc5499e0e8d987ac046c7dd396cd4a624c5750461f440df44",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "full-tests-2",
+      "returncode": 0,
+      "seconds": 26.905,
+      "stderr_sha256": "0aacb7caebf17aa6c651c81d99fd6e5b912a7e9c63fcc3fe5c7875fc95a1781f",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "full-tests-3",
+      "returncode": 0,
+      "seconds": 27.015,
+      "stderr_sha256": "ca4df889886f3f4c1955e5842addcbc4da437285498bfdc61e71d0cf2ab59d9f",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "install-dry-run",
+      "result_status": "DRY_RUN_READY",
+      "returncode": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "0b2e1e688991cf8e15fe5f2730b2c2aa5b0240a6f88a7be1579980ed097dafb1"
+    },
+    {
+      "label": "install-fresh",
+      "result_status": "INSTALLED",
+      "returncode": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "f990f48e5ebc05296cef08d4d37ef34abe39153b7b3363ac7f06314cf3b0024e"
+    },
+    {
+      "label": "install-idempotent",
+      "result_status": "ALREADY_INSTALLED",
+      "returncode": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "8e30dcf0383bdb1bba787bdd6d7c3d048fe0d06983d997133478a7b1bf4091a5"
+    },
+    {
+      "label": "install-rollback",
+      "result_status": "ROLLED_BACK",
+      "returncode": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "bd7c1c93f304e65072e8f5d739467cf5b9c67485d7b1356b9d27dee6d149171b"
+    },
+    {
+      "label": "install-upgrade",
+      "result_status": "INSTALLED",
+      "returncode": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "52cb9fe68a2b9b687e4f71c250ee02127c2992405ffc7b13641b6470d407df35"
+    },
+    {
+      "command": [
+        "/opt/pyvenv/bin/python3",
+        "scripts/teleiosis.py",
+        "regression"
+      ],
+      "label": "regression",
+      "returncode": 0,
+      "seconds": 0.675,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "94bf1afdf3f4d71e4c4e4bb30ab847a34c257958584e996c736a0378094a78d6"
+    },
+    {
+      "command": [
+        "/opt/pyvenv/bin/python3",
+        "scripts/teleiosis.py",
+        "review"
+      ],
+      "label": "review",
+      "returncode": 0,
+      "seconds": 0.548,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "be90e474c85b3450ddbd6fae6bb5ecc7701edcd867cf2a1c6f5bb93b41818e76"
+    },
+    {
+      "label": "semantic-reconcile",
+      "returncode": 0,
+      "seconds": 1.058,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "75d233cf6b4f656856ecd3c7778814ed3916da5a6f79c659d4f8342a4200248a"
+    },
+    {
+      "command": [
+        "/opt/pyvenv/bin/python3",
+        "scripts/teleiosis.py",
+        "skill-audit"
+      ],
+      "label": "skill-audit",
+      "returncode": 0,
+      "seconds": 0.528,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "e92f745c99d2de610e35427ffbc1560c86af39195c7582e4e798ca4bde4ae66a"
+    },
+    {
+      "command": [
+        "/opt/pyvenv/bin/python3",
+        "scripts/teleiosis.py",
+        "check"
+      ],
+      "label": "strict-check",
+      "returncode": 0,
+      "seconds": 0.773,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "ad135d1a551e5684ce3f9bebb4b381f706c5b2732ce9cb21e08b0366b81e5e52"
+    },
+    {
+      "command": [
+        "/opt/pyvenv/bin/python3",
+        "scripts/teleiosis.py",
+        "taskpack",
+        "validate"
+      ],
+      "label": "taskpack",
+      "returncode": 0,
+      "seconds": 0.539,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "30403482302825a833789f86b763585e846de477a5e1f6decb2e805df385ade8"
+    },
+    {
+      "label": "verifier-handoff-build",
+      "returncode": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "9d1bdf7995ba93e6833f67b1a52ed336673d096870933ccc3216db76fb7cc96c"
+    },
+    {
+      "label": "verifier-handoff-validate",
+      "returncode": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "84082d2350ba8f45f96e8fea154d88ccc96077bdaec9a4a9a8e8e98f0dadc017"
+    }
+  ],
+  "schema_version": "teleiosis.local_validation_run.v5",
+  "status": "LOCAL_ENGINEERING_PASS",
+  "test_runs": 3,
+  "tests_per_run": 164,
+  "v4_upgrade": "PASS",
+  "version": "v0.0.0.5"
+}

@@ -1,0 +1,21 @@
+{
+  "build": {
+    "formal_pass": "NOT_ISSUED",
+    "path": "/mnt/data/_v5_validation_preseal/verifier-handoff.zip",
+    "schema_version": "teleiosis.verifier_handoff_result.v5",
+    "sha256": "2297a698145fd1f6fc84caa9873617da93a01d4eac90788990784b6c76f71c4d",
+    "status": "READY_FOR_EXTERNAL_VERIFIER",
+    "subject_hash": "66ba594ad35908a7f7fc0e7959a016d1bbfa8c470832f8bd14bbc23ca17bdec3"
+  },
+  "candidate_core_hash": "166a2284ab0749353ea9b898db55c3750347c9cfeca6321581779858519dce89",
+  "formal_independent_review": "UNAVAILABLE",
+  "formal_pass": "NOT_ISSUED",
+  "schema_version": "teleiosis.verifier_handoff_smoke.v5",
+  "status": "PASS",
+  "validation": {
+    "files": 11,
+    "sha256": "2297a698145fd1f6fc84caa9873617da93a01d4eac90788990784b6c76f71c4d",
+    "status": "PASS",
+    "subject_hash": "66ba594ad35908a7f7fc0e7959a016d1bbfa8c470832f8bd14bbc23ca17bdec3"
+  }
+}

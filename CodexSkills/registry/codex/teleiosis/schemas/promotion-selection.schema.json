@@ -1,7 +1,0 @@
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "White-Box Promotion Selection",
-  "type": "object",
-  "required": ["selected_candidate_id", "selected_candidate_tree_hash", "optimizer_actor_id", "verifier_actor_id", "verifier_record", "selection_basis"],
-  "additionalProperties": true
-}

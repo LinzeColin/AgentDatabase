@@ -1,8 +1,0 @@
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://teleiosis.local/schemas/orchestration-state.schema.json",
-  "title": "Durable visible orchestration state",
-  "type": "object",
-  "required": ["schema_version", "run_id", "run_mode", "current_step", "orchestration_status", "identity", "step_receipts"],
-  "additionalProperties": true
-}

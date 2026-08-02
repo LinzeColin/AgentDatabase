@@ -1,0 +1,21 @@
+{
+  "$id": "https://teleiosis.local/schemas/project-input.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "current_phase": {},
+    "product_version": {},
+    "project_name": {},
+    "target_repository": {},
+    "taskpack_version": {}
+  },
+  "required": [
+    "project_name",
+    "target_repository",
+    "current_phase",
+    "product_version",
+    "taskpack_version"
+  ],
+  "title": "teleiosis.project_input.v5",
+  "type": "object"
+}

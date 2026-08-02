@@ -1,0 +1,33 @@
+{
+  "modules": [
+    {
+      "capability_count": 26,
+      "path": "modules/raw_teleiosis/CAPABILITIES.json",
+      "slug": "raw_teleiosis",
+      "symbol": "T"
+    },
+    {
+      "capability_count": 20,
+      "path": "modules/skill_market_lab/CAPABILITIES.json",
+      "slug": "skill_market_lab",
+      "symbol": "S"
+    },
+    {
+      "capability_count": 21,
+      "path": "modules/product_reality_lab/CAPABILITIES.json",
+      "slug": "product_reality_lab",
+      "symbol": "P"
+    },
+    {
+      "capability_count": 23,
+      "path": "modules/arena_lab/CAPABILITIES.json",
+      "slug": "arena_lab",
+      "symbol": "A"
+    }
+  ],
+  "schema_version": "teleiosis.capability_suite.v5",
+  "scope_mode": "FULL_NO_ROUTING",
+  "stages_per_run": 36,
+  "total_capabilities_per_round": 90,
+  "version": "v0.0.0.5"
+}

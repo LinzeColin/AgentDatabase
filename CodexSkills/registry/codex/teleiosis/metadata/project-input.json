@@ -1,0 +1,28 @@
+{
+  "cost_ceiling": "本地验证零 API 成本；原生 L3/L4 外部实验另行授权",
+  "current_phase": "FROZEN_CANDIDATE",
+  "forbidden_dependencies": [
+    "静默路由",
+    "固定 repository SHA 阻塞",
+    "真实时间等待节点",
+    "未授权生产副作用",
+    "内部 formal PASS",
+    "强制云 API"
+  ],
+  "owner_approved_scope": "一个 Teleiosis Skill，T/S/P/A 四个逻辑引擎，外部 Verifier 唯一正式 PASS，最终只交付一个 ZIP",
+  "product_version": "v0.0.0.5",
+  "production_side_effect_authorization": "NOT_AUTHORIZED_IN_PACKAGE",
+  "project_name": "Teleiosis",
+  "required_integrations": [
+    "Agent Skills 目录约定",
+    "Python 标准库",
+    "外部 Verifier handoff 合同"
+  ],
+  "resource_ceiling": "本地标准库；单次自测 15 分钟以内；无 GPU/API 强依赖",
+  "runtime_node": "本地 Python 3.9+；目标 Registry 写入属于最后一公里",
+  "schema_version": "teleiosis.project_input.v5",
+  "target_area": "CodexSkills/registry/codex/teleiosis",
+  "target_domain": "Agent Skill 白箱迭代、市场证据、产品现实试炼、同场竞技与验收交接",
+  "target_repository": "LinzeColin/AgentDatabase",
+  "taskpack_version": "v0.0.0.5"
+}

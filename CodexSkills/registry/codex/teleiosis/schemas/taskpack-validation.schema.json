@@ -1,0 +1,19 @@
+{
+  "$id": "https://teleiosis.local/schemas/taskpack-validation.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "constraints": {},
+    "project_input_hash": {},
+    "status": {},
+    "traceability": {}
+  },
+  "required": [
+    "status",
+    "project_input_hash",
+    "traceability",
+    "constraints"
+  ],
+  "title": "teleiosis.taskpack_validation.v5",
+  "type": "object"
+}

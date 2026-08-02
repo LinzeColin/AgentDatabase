@@ -1,0 +1,9 @@
+{
+  "label": "cold-extract",
+  "returncode": 0,
+  "seconds": 27.122,
+  "check_stdout_sha256": "dce87e1e4dc32988fa00d3f163c01c18161f4832caa1e40c114b71a153b892d6",
+  "check_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "tests_stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "tests_stderr_sha256": "ef88ea9e347f4dfa628f83fc01cf55f36355d8463a225e2d804a94bf7233e952"
+}

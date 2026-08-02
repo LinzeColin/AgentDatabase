@@ -1,0 +1,12 @@
+{
+  "label": "strict-check",
+  "command": [
+    "/opt/pyvenv/bin/python3",
+    "scripts/teleiosis.py",
+    "check"
+  ],
+  "returncode": 0,
+  "seconds": 0.773,
+  "stdout_sha256": "ad135d1a551e5684ce3f9bebb4b381f706c5b2732ce9cb21e08b0366b81e5e52",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

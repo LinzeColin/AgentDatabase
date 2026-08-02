@@ -1,0 +1,166 @@
+{
+  "calls": [
+    {
+      "closed_risks": [
+        "DAG 指向不存在测试制品",
+        "bytecode cache 污染发布树",
+        "摘要代替原始证据",
+        "多份不一致 ZIP"
+      ],
+      "developer_burden_delta": {
+        "builder_tasks_removed": [
+          "封包前复审",
+          "三遍全量测试",
+          "冷解压复验",
+          "安装/升级/回滚复验",
+          "证据索引整理"
+        ],
+        "closed_p0_p1": [
+          "missing test artifact",
+          "release tree junk contamination",
+          "final packaging ambiguity"
+        ],
+        "generated_executable_artifacts": [
+          "scripts/validate_release.py",
+          "tests/test_v5_full.py",
+          "6 个 v5 专项测试文件"
+        ]
+      },
+      "findings": [
+        "首次冻结复审发现 T-028 引用的 tests/test_v5_full.py 缺失，已补充七组 v5 测试并将总数从 130 提升到 164",
+        "首次封包发现 validate_release.py 会因 bytecode cache 污染触发 JUNK_FOUND，已在入口禁用 bytecode 并验证 fail-closed",
+        "三次完整测试、三次 Doctor、事务安装、v4→v5 升级回滚、冷解压与双构建已真实执行通过"
+      ],
+      "input_hash": "166a2284ab0749353ea9b898db55c3750347c9cfeca6321581779858519dce89",
+      "input_subject": "frozen v5 subject",
+      "new_mechanisms": [
+        "164 项三遍回归",
+        "raw evidence index",
+        "cold extract replay",
+        "deterministic package equality",
+        "release tree junk hard gate"
+      ],
+      "output_artifacts": [
+        "evidence/validation/raw/",
+        "evidence/validation/RAW_EVIDENCE_INDEX.json",
+        "evidence/validation/final-validation-summary.json"
+      ],
+      "purpose": "对冻结代码/合同/语料执行封包前全门复审",
+      "rerun_trigger": "冻结 Subject、Acceptance 或证据索引变化",
+      "skill": "teleiosis",
+      "status": "EXECUTED",
+      "version": "v0.0.0.5"
+    },
+    {
+      "closed_risks": [
+        "最终文案虚构专家参与",
+        "同模型角色分离冒充独立 SubAgent"
+      ],
+      "developer_burden_delta": {
+        "closed_unknowns": [
+          "persona final status"
+        ],
+        "generated_executable_artifacts": [
+          "frozen persona receipt"
+        ]
+      },
+      "findings": [
+        "真实 persona runtime dossier 仍未取得；复审没有伪造人物贡献，继续中立功能角色回退"
+      ],
+      "input_hash": "166a2284ab0749353ea9b898db55c3750347c9cfeca6321581779858519dce89",
+      "input_subject": "frozen review artifacts",
+      "new_mechanisms": [
+        "frozen persona evidence boundary"
+      ],
+      "output_artifacts": [
+        "evidence/preparation/persona-team-evidence.json",
+        "evidence/preparation/role-review-round2.json"
+      ],
+      "purpose": "最终检查人物专家真实性、分歧和控制角色边界",
+      "rerun_trigger": "取得可验证 dossier 或 review artifacts 变化",
+      "skill": "persona-distiller-group",
+      "status": "EXECUTED",
+      "version": "v0.0.0.7"
+    },
+    {
+      "closed_risks": [
+        "把本地工程 PASS 冒充正式 release PASS",
+        "handoff 未绑定精确 Subject"
+      ],
+      "developer_burden_delta": {
+        "builder_tasks_removed": [
+          "Verifier 输入打包"
+        ],
+        "closed_p0_p1": [
+          "internal formal pass claim"
+        ],
+        "generated_executable_artifacts": [
+          "sealed handoff smoke"
+        ]
+      },
+      "findings": [
+        "冻结 handoff 已生成并校验；正式独立 Verifier 仍未在隔离环境执行，因此 formal PASS 保持 NOT_ISSUED"
+      ],
+      "input_hash": "166a2284ab0749353ea9b898db55c3750347c9cfeca6321581779858519dce89",
+      "input_subject": "frozen v5 subject and acceptance",
+      "new_mechanisms": [
+        "formal pass remains NOT_ISSUED",
+        "exact frozen handoff"
+      ],
+      "output_artifacts": [
+        "scripts/teleiosis_core/verifier_handoff.py",
+        "evidence/validation/verifier-handoff-smoke.json"
+      ],
+      "purpose": "对冻结 Subject 生成只读外部验收输入并确认内部不发 PASS",
+      "rerun_trigger": "外部独立 Verifier 环境可用或 Subject 改变",
+      "skill": "verifier",
+      "status": "EXECUTED",
+      "version": "v0.0.2.2"
+    }
+  ],
+  "catalog_routing": {
+    "persona-distiller-group": {
+      "status": "ROUTED_METHOD_APPLIED_NOT_FULL_NATIVE_EXECUTION",
+      "version": "v0.0.0.7"
+    },
+    "teleiosis": {
+      "status": "NATIVE_CONTRACT_EXECUTED_LOCAL_V5",
+      "version": "v0.0.0.3 baseline + v0.0.0.5 candidate"
+    },
+    "verifier": {
+      "status": "CONTRACT_APPLIED_FORMAL_EXECUTION_NOT_RUN",
+      "version": "v0.0.2.2"
+    }
+  },
+  "decision": "KEEP",
+  "developer_burden_delta": {
+    "builder_tasks_removed": [
+      "重新验收",
+      "重新整理 Verifier 输入",
+      "重复研究 v3/persona/verifier 边界"
+    ],
+    "closed_p0_p1": [
+      "DAG missing artifact",
+      "evidence and packaging ambiguity",
+      "release tree junk contamination"
+    ],
+    "closed_unknowns": [
+      "冻结制品身份",
+      "最终 persona 状态",
+      "本地安装/回滚可用性"
+    ],
+    "generated_executable_artifacts": [
+      "raw evidence set",
+      "validation runner",
+      "deterministic candidate ZIP proof"
+    ]
+  },
+  "formal_independent_review": "UNAVAILABLE",
+  "input_hash": "166a2284ab0749353ea9b898db55c3750347c9cfeca6321581779858519dce89",
+  "pass": "C",
+  "phase": "Frozen Final",
+  "review_mode": "role_separated_same_model",
+  "schema_version": "teleiosis.skill_pass.v5",
+  "skill": "teleiosis",
+  "version": "v0.0.0.5"
+}

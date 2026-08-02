@@ -1,0 +1,19 @@
+{
+  "$id": "https://teleiosis.local/schemas/review-validation.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "persona": {},
+    "role_rounds": {},
+    "status": {},
+    "ten_lens": {}
+  },
+  "required": [
+    "status",
+    "ten_lens",
+    "role_rounds",
+    "persona"
+  ],
+  "title": "teleiosis.review_validation.v5",
+  "type": "object"
+}

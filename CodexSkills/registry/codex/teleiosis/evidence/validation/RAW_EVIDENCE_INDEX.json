@@ -1,0 +1,350 @@
+{
+  "candidate_core_hash": "166a2284ab0749353ea9b898db55c3750347c9cfeca6321581779858519dce89",
+  "entries": [
+    {
+      "path": "evidence/validation/raw/cold-extract-check.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    {
+      "path": "evidence/validation/raw/cold-extract-check.stdout.log",
+      "sha256": "dce87e1e4dc32988fa00d3f163c01c18161f4832caa1e40c114b71a153b892d6",
+      "size": 4808
+    },
+    {
+      "path": "evidence/validation/raw/cold-extract-tests.stderr.log",
+      "sha256": "ef88ea9e347f4dfa628f83fc01cf55f36355d8463a225e2d804a94bf7233e952",
+      "size": 100
+    },
+    {
+      "path": "evidence/validation/raw/cold-extract-tests.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    {
+      "path": "evidence/validation/raw/cold-extract.meta.json",
+      "sha256": "f9f596066b2564436b9be1d82a315d496b38f74bc7c8e1d4c6ff8907ef903b7c",
+      "size": 442
+    },
+    {
+      "path": "evidence/validation/raw/deterministic-package.json",
+      "sha256": "890b06ff9b0972eb43e1da5cfbc8792c9137188fe72958186d97563d65b78f80",
+      "size": 317
+    },
+    {
+      "path": "evidence/validation/raw/doctor-1.meta.json",
+      "sha256": "e058506226c71089233561dba1e9dd8a57653542da99b823624d96f07f45e312",
+      "size": 329
+    },
+    {
+      "path": "evidence/validation/raw/doctor-1.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    {
+      "path": "evidence/validation/raw/doctor-1.stdout.log",
+      "sha256": "811040beda43b957a2e6909d56578e5691aee319939e948e7013252f5085a2ec",
+      "size": 8249
+    },
+    {
+      "path": "evidence/validation/raw/doctor-2.meta.json",
+      "sha256": "477a8eccaf51a7eaccd2ca8469291ead237f1a35bf089cbb56414bb76b44d262",
+      "size": 331
+    },
+    {
+      "path": "evidence/validation/raw/doctor-2.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    {
+      "path": "evidence/validation/raw/doctor-2.stdout.log",
+      "sha256": "811040beda43b957a2e6909d56578e5691aee319939e948e7013252f5085a2ec",
+      "size": 8249
+    },
+    {
+      "path": "evidence/validation/raw/doctor-3.meta.json",
+      "sha256": "0bddf4ec35db9384d1c0fa023374428010ae37c048466c678c20b771c242cbe8",
+      "size": 331
+    },
+    {
+      "path": "evidence/validation/raw/doctor-3.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    {
+      "path": "evidence/validation/raw/doctor-3.stdout.log",
+      "sha256": "811040beda43b957a2e6909d56578e5691aee319939e948e7013252f5085a2ec",
+      "size": 8249
+    },
+    {
+      "path": "evidence/validation/raw/fresh-builder.meta.json",
+      "sha256": "bbdbe5832b902110f78166f687f63777226283dab720db4c3b94e2f3fa62f188",
+      "size": 359
+    },
+    {
+      "path": "evidence/validation/raw/fresh-builder.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    {
+      "path": "evidence/validation/raw/fresh-builder.stdout.log",
+      "sha256": "075218e8e940ad4b76cd13a68723a8f7a7e64d8e94c72f5e3587eaf8a9a4fcdd",
+      "size": 425
+    },
+    {
+      "path": "evidence/validation/raw/full-tests-1.meta.json",
+      "sha256": "19e88a2518563418d4354d76bf0a1afb52a8c4cfc9f575f614fde4ccbbe742ce",
+      "size": 244
+    },
+    {
+      "path": "evidence/validation/raw/full-tests-1.stderr.log",
+      "sha256": "91eff7264d80f93cc5499e0e8d987ac046c7dd396cd4a624c5750461f440df44",
+      "size": 18425
+    },
+    {
+      "path": "evidence/validation/raw/full-tests-1.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    {
+      "path": "evidence/validation/raw/full-tests-2.meta.json",
+      "sha256": "29694168a395869d814b4020fc6362884ed80aebbfcbe2c134acc3778f6ad499",
+      "size": 244
+    },
+    {
+      "path": "evidence/validation/raw/full-tests-2.stderr.log",
+      "sha256": "0aacb7caebf17aa6c651c81d99fd6e5b912a7e9c63fcc3fe5c7875fc95a1781f",
+      "size": 18425
+    },
+    {
+      "path": "evidence/validation/raw/full-tests-2.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    {
+      "path": "evidence/validation/raw/full-tests-3.meta.json",
+      "sha256": "bedf1f5ab57a78d0c829bedaf116398cb2a0e1db78ca3e6fe2150f726e10f3d1",
+      "size": 244
+    },
+    {
+      "path": "evidence/validation/raw/full-tests-3.stderr.log",
+      "sha256": "ca4df889886f3f4c1955e5842addcbc4da437285498bfdc61e71d0cf2ab59d9f",
+      "size": 18425
+    },
+    {
+      "path": "evidence/validation/raw/full-tests-3.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    {
+      "path": "evidence/validation/raw/install-dry-run.meta.json",
+      "sha256": "8b2596b3fe9db214fbda58e65ee8cf89315895374e166b69096d8c34b3d99805",
+      "size": 262
+    },
+    {
+      "path": "evidence/validation/raw/install-dry-run.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    {
+      "path": "evidence/validation/raw/install-dry-run.stdout.log",
+      "sha256": "0b2e1e688991cf8e15fe5f2730b2c2aa5b0240a6f88a7be1579980ed097dafb1",
+      "size": 272
+    },
+    {
+      "path": "evidence/validation/raw/install-fresh.meta.json",
+      "sha256": "75c10f6e9f799e9f4b97e15ae930bef93176fca0f2a8d1d6c107ffb075efad5e",
+      "size": 256
+    },
+    {
+      "path": "evidence/validation/raw/install-fresh.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    {
+      "path": "evidence/validation/raw/install-fresh.stdout.log",
+      "sha256": "f990f48e5ebc05296cef08d4d37ef34abe39153b7b3363ac7f06314cf3b0024e",
+      "size": 323
+    },
+    {
+      "path": "evidence/validation/raw/install-idempotent.meta.json",
+      "sha256": "4d622ea167218e61ce17a7f16b2ede1806c57b1ffd70a3bde42d053c503906a0",
+      "size": 269
+    },
+    {
+      "path": "evidence/validation/raw/install-idempotent.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    {
+      "path": "evidence/validation/raw/install-idempotent.stdout.log",
+      "sha256": "8e30dcf0383bdb1bba787bdd6d7c3d048fe0d06983d997133478a7b1bf4091a5",
+      "size": 288
+    },
+    {
+      "path": "evidence/validation/raw/install-rollback.meta.json",
+      "sha256": "acd8e1f8122fff3ab7c82725450ec0599a463e01b48e1086be292380d391e370",
+      "size": 261
+    },
+    {
+      "path": "evidence/validation/raw/install-rollback.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    {
+      "path": "evidence/validation/raw/install-rollback.stdout.log",
+      "sha256": "bd7c1c93f304e65072e8f5d739467cf5b9c67485d7b1356b9d27dee6d149171b",
+      "size": 144
+    },
+    {
+      "path": "evidence/validation/raw/install-upgrade.meta.json",
+      "sha256": "582c70c5e0c72cdf21808c6a2a8ec0d70578a51ebb57e9b9a9df8aacd5f2379b",
+      "size": 258
+    },
+    {
+      "path": "evidence/validation/raw/install-upgrade.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    {
+      "path": "evidence/validation/raw/install-upgrade.stdout.log",
+      "sha256": "52cb9fe68a2b9b687e4f71c250ee02127c2992405ffc7b13641b6470d407df35",
+      "size": 433
+    },
+    {
+      "path": "evidence/validation/raw/local-validation-summary.json",
+      "sha256": "a2242955af93f5ebd574d2cfbfff746dda8a506ca15e521ff9deae146779b94c",
+      "size": 7923
+    },
+    {
+      "path": "evidence/validation/raw/regression.meta.json",
+      "sha256": "367d364c51045bf837727ebf8d0614d95171c40371b1ffb742e1969d67bfc25c",
+      "size": 337
+    },
+    {
+      "path": "evidence/validation/raw/regression.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    {
+      "path": "evidence/validation/raw/regression.stdout.log",
+      "sha256": "94bf1afdf3f4d71e4c4e4bb30ab847a34c257958584e996c736a0378094a78d6",
+      "size": 522
+    },
+    {
+      "path": "evidence/validation/raw/review.meta.json",
+      "sha256": "fdf4660e09f48749b41be7a3c9adf495e19923642bcd57ab2774b0c8451c440c",
+      "size": 329
+    },
+    {
+      "path": "evidence/validation/raw/review.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    {
+      "path": "evidence/validation/raw/review.stdout.log",
+      "sha256": "be90e474c85b3450ddbd6fae6bb5ecc7701edcd867cf2a1c6f5bb93b41818e76",
+      "size": 779
+    },
+    {
+      "path": "evidence/validation/raw/semantic-reconcile-report.json",
+      "sha256": "d5f256a6adc3d3b5fafd007aad8984874c6dd0d53225d8b7a306fde9ad49b0a2",
+      "size": 916
+    },
+    {
+      "path": "evidence/validation/raw/semantic-reconcile.meta.json",
+      "sha256": "50def0ed40027078d62f703175ccb15898eb809af4121d0d44cf6f5549925a92",
+      "size": 249
+    },
+    {
+      "path": "evidence/validation/raw/semantic-reconcile.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    {
+      "path": "evidence/validation/raw/semantic-reconcile.stdout.log",
+      "sha256": "75d233cf6b4f656856ecd3c7778814ed3916da5a6f79c659d4f8342a4200248a",
+      "size": 841
+    },
+    {
+      "path": "evidence/validation/raw/skill-audit.meta.json",
+      "sha256": "186445a18e597275f6652764c027273ac859f83e59d1acbc4a8e3847b3d75984",
+      "size": 339
+    },
+    {
+      "path": "evidence/validation/raw/skill-audit.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    {
+      "path": "evidence/validation/raw/skill-audit.stdout.log",
+      "sha256": "e92f745c99d2de610e35427ffbc1560c86af39195c7582e4e798ca4bde4ae66a",
+      "size": 1082
+    },
+    {
+      "path": "evidence/validation/raw/strict-check.meta.json",
+      "sha256": "2846ddc5d8c2b3c3a73cdabd49e8745ef8ac21108515f7213b8d231cf5dc392d",
+      "size": 334
+    },
+    {
+      "path": "evidence/validation/raw/strict-check.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    {
+      "path": "evidence/validation/raw/strict-check.stdout.log",
+      "sha256": "ad135d1a551e5684ce3f9bebb4b381f706c5b2732ce9cb21e08b0366b81e5e52",
+      "size": 4803
+    },
+    {
+      "path": "evidence/validation/raw/taskpack.meta.json",
+      "sha256": "575f3439e2c22679bd3a1801dc3a6cfa5d9c7b1ddb4db570ff83560d908b6468",
+      "size": 349
+    },
+    {
+      "path": "evidence/validation/raw/taskpack.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    {
+      "path": "evidence/validation/raw/taskpack.stdout.log",
+      "sha256": "30403482302825a833789f86b763585e846de477a5e1f6decb2e805df385ade8",
+      "size": 477
+    },
+    {
+      "path": "evidence/validation/raw/verifier-handoff-build.meta.json",
+      "sha256": "952805685e103f34ef2fbf94b068e493a9e472ad5b841441e110ad9bf0be888f",
+      "size": 233
+    },
+    {
+      "path": "evidence/validation/raw/verifier-handoff-build.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    {
+      "path": "evidence/validation/raw/verifier-handoff-build.stdout.log",
+      "sha256": "9d1bdf7995ba93e6833f67b1a52ed336673d096870933ccc3216db76fb7cc96c",
+      "size": 403
+    },
+    {
+      "path": "evidence/validation/raw/verifier-handoff-validate.meta.json",
+      "sha256": "72b0ac2c5a6f0cd62b1bdfdc1e27359d6a69357c603e571210aea11794e498be",
+      "size": 236
+    },
+    {
+      "path": "evidence/validation/raw/verifier-handoff-validate.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    {
+      "path": "evidence/validation/raw/verifier-handoff-validate.stdout.log",
+      "sha256": "84082d2350ba8f45f96e8fea154d88ccc96077bdaec9a4a9a8e8e98f0dadc017",
+      "size": 241
+    }
+  ],
+  "evidence_kind": "PRESEAL_EXECUTION_LOGS",
+  "formal_pass": "NOT_ISSUED",
+  "schema_version": "teleiosis.raw_evidence_index.v5",
+  "self_reference_boundary": "The final post-seal replay is executed outside the package after MANIFEST regeneration; embedding that log would change the subject.",
+  "status": "PASS"
+}

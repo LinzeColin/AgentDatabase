@@ -1,0 +1,42 @@
+{
+  "$id": "teleiosis://schemas/external-verifier-handoff.v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "acceptance_contract": {
+      "type": "string"
+    },
+    "arena_result": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "builder_self_assessment_accepted": {
+      "const": false
+    },
+    "candidate_identity": {
+      "$ref": "candidate-identity.schema.json"
+    },
+    "evidence_manifest": {
+      "type": "array"
+    },
+    "formal_decision_requested": {
+      "enum": [
+        "FORMAL_PASS_OR_FAIL"
+      ]
+    },
+    "schema_version": {
+      "const": "teleiosis.external_verifier_handoff.v1"
+    }
+  },
+  "required": [
+    "schema_version",
+    "candidate_identity",
+    "acceptance_contract",
+    "evidence_manifest",
+    "arena_result",
+    "formal_decision_requested"
+  ],
+  "type": "object"
+}

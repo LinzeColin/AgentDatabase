@@ -1,0 +1,36 @@
+{
+  "archetypes": [
+    "线性提示词",
+    "执行框架主导",
+    "机制协同陷阱",
+    "硬约束密集",
+    "分布漂移",
+    "模型噪声",
+    "上下文成本",
+    "红队高压",
+    "版本漂移",
+    "证据污染",
+    "安装回滚",
+    "真实边界"
+  ],
+  "bytes": 9423294,
+  "engines": [
+    "T",
+    "S",
+    "P",
+    "A"
+  ],
+  "generator_seed": 20260803,
+  "records": 8192,
+  "schema_version": "teleiosis.regression_corpus_meta.v5",
+  "sha256": "82d0b0f8cdae2c95077ecf928e51426f092ec0c1d55172560ea2fddec15c85df",
+  "splits": [
+    "development",
+    "selection",
+    "hidden_iid",
+    "hidden_ood",
+    "redteam",
+    "regression"
+  ],
+  "truth_boundary": "synthetic deterministic regression evidence; not real market or L3/L4 evidence"
+}

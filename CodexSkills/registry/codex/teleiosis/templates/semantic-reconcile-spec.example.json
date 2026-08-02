@@ -1,0 +1,17 @@
+{
+  "schema_version": "teleiosis.semantic_reconcile_spec.v5",
+  "tasks": [
+    {
+      "id": "STAGE0-EXAMPLE-001",
+      "semantic_goal": "安装 Teleiosis v0.0.0.5 时保留目标仓更新、更好的上游实现",
+      "impact_boundary": "CodexSkills/registry/codex/teleiosis only",
+      "paths": ["VERSION", "SKILL.md"],
+      "required_paths": ["SKILL.md"],
+      "expected_hashes": {},
+      "equivalence_markers": {
+        "SKILL.md": ["name: teleiosis", "FULL_NO_ROUTING"]
+      },
+      "conflict_markers": ["GENESIS_REWRITTEN", "FORMAL_PASS_INTERNAL"]
+    }
+  ]
+}

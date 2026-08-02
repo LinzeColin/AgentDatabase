@@ -51,6 +51,16 @@
       "prefix": "CodexSkills/registry/codex/_delivery-backups/teleiosis/v0.0.0.2/",
       "max_bytes": 2924117,
       "reason": "pre-existing tracked delivery backup; exact version directory and current byte ceiling"
+    },
+    {
+      "prefix": "CodexSkills/registry/codex/_delivery-backups/teleiosis/v0.0.0.5/",
+      "max_bytes": 2667205,
+      "reason": "tracked Teleiosis v0.0.0.5 delivery backup; exact version directory and current byte ceiling"
+    },
+    {
+      "prefix": "CodexSkills/registry/codex/teleiosis/fixtures/regression/",
+      "max_bytes": 9423294,
+      "reason": "tracked Teleiosis v0.0.0.5 regression corpus; exact current byte ceiling"
     }
   ],
   "allowed_archive_prefixes": [
@@ -66,6 +76,7 @@
     "CodexSkills/registry/codex/persona-distiller-group/政治法律家/scott-a-barshay/versions/0.0.0.1/scott-a-barshay-persona-distillation-delivery-v0.0.0.1.zip",
     "CodexSkills/registry/codex/_delivery-backups/teleiosis/v0.0.0.1/White-Box-Iteration-Skill-Teleiosis-v0.0.0.1-FINAL-DELIVERY.zip",
     "CodexSkills/registry/codex/_delivery-backups/teleiosis/v0.0.0.2/White-Box-Iteration-Skill-Teleiosis-v0.0.0.2-FINAL-DELIVERY.zip",
+    "CodexSkills/registry/codex/_delivery-backups/teleiosis/v0.0.0.5/Teleiosis-v0.0.0.5-FINAL-DELIVERY.zip",
     "CodexSkills/registry/codex/persona-distiller-group/农林牧渔师/joel-salatin/versions/0.0.0.1/joel-salatin-persona-distillation-delivery-v0.0.0.1.zip",
     "CodexSkills/registry/codex/persona-distiller-group/创业经营师/anne-mulcahy/versions/0.0.0.1/anne-mulcahy-persona-distillation-delivery-v0.0.0.1.zip",
     "CodexSkills/registry/codex/persona-distiller-group/创业经营师/ben-horowitz/versions/0.0.0.1/ben-horowitz-persona-distillation-delivery-v0.0.0.1.zip",

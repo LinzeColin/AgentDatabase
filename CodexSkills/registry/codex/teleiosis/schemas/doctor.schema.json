@@ -1,0 +1,21 @@
+{
+  "$id": "https://teleiosis.local/schemas/doctor.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "checks": {},
+    "doctor_hash": {},
+    "next_command": {},
+    "status": {},
+    "version": {}
+  },
+  "required": [
+    "status",
+    "version",
+    "checks",
+    "next_command",
+    "doctor_hash"
+  ],
+  "title": "teleiosis.doctor.v5",
+  "type": "object"
+}

@@ -1,0 +1,18 @@
+{
+  "architecture_files": [
+    "architecture/teleiosis-v5.mmd",
+    "architecture/data-coupling-v5.mmd",
+    "architecture/stage-phase-task-v5.mmd"
+  ],
+  "human_docs_language": "zh-CN",
+  "root_docs": [
+    "README.md",
+    "INSTALL.md",
+    "ROADMAP.md",
+    "PURSUING_GOAL.txt",
+    "delivery/HANDOFF.md"
+  ],
+  "schema_version": "teleiosis.documentation_validation.v5",
+  "status": "PASS",
+  "version": "v0.0.0.5"
+}

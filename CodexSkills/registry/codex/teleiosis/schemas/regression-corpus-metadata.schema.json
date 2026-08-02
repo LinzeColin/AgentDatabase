@@ -1,0 +1,21 @@
+{
+  "$id": "https://teleiosis.local/schemas/regression-corpus-metadata.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "engines": {},
+    "generator_seed": {},
+    "records": {},
+    "sha256": {},
+    "splits": {}
+  },
+  "required": [
+    "records",
+    "generator_seed",
+    "engines",
+    "splits",
+    "sha256"
+  ],
+  "title": "teleiosis.regression_corpus_meta.v5",
+  "type": "object"
+}

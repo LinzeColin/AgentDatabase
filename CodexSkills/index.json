@@ -616,8 +616,8 @@
       "description": "Full non-routed white-box Skill iteration that always runs Raw Teleiosis, Skill Market Lab, and Product Reality Lab over the same evolving Candidate. Use to improve, compare, stress-test, market-test, reality-test, self-evolve, validate, package, install, or release an Agent Skill. One run is three groups of three T-C-S-C-P-C rounds; C is the iteration object itself, not a fixed SHA checkpoint. Do not use for ordinary code review or direct unapproved production edits.",
       "category": "工程与交付",
       "entry": "registry/codex/teleiosis/SKILL.md",
-      "file_count": 445,
-      "size_bytes": 2027542
+      "file_count": 254,
+      "size_bytes": 10246865
     },
     {
       "slug": "theme-factory",

@@ -1,0 +1,163 @@
+{
+  "calls": [
+    {
+      "closed_risks": [
+        "v4 summary-only evidence",
+        "Build Agent 开放研究负担",
+        "固定 SHA 漂移阻断风险"
+      ],
+      "developer_burden_delta": {
+        "builder_tasks_removed": [
+          "Stage0/taskpack/review/test design"
+        ],
+        "closed_p0_p1": [
+          "thin package functional gap"
+        ],
+        "closed_unknowns": [
+          "v5 executable scope"
+        ],
+        "generated_executable_artifacts": [
+          "7 Python runtime modules",
+          "8192-case corpus"
+        ]
+      },
+      "findings": [
+        "缺少可执行 Stage0、Taskpack、三次 Skill 验证、Doctor、Verifier handoff 和大样本回归"
+      ],
+      "input_hash": "76da7f13867f48f6ca53567445fc6e8eda07eb8ef988087a604ff482ff7b56de",
+      "input_subject": "v5 mid candidate",
+      "new_mechanisms": [
+        "七类 semantic reconcile",
+        "可执行 Taskpack",
+        "8192 记录 regression corpus",
+        "one-command doctor"
+      ],
+      "output_artifacts": [
+        "scripts/teleiosis_core/semantic.py",
+        "scripts/teleiosis_core/taskpack.py",
+        "scripts/teleiosis_core/skill_audit.py",
+        "scripts/teleiosis_core/review.py",
+        "scripts/teleiosis_core/regression.py",
+        "scripts/teleiosis_core/verifier_handoff.py",
+        "scripts/teleiosis_core/doctor.py"
+      ],
+      "purpose": "对白箱 Candidate 执行代码级整改与非降级回归",
+      "rerun_trigger": "代码、能力表或 Acceptance 再次改变",
+      "skill": "teleiosis",
+      "status": "EXECUTED",
+      "version": "v0.0.0.5-candidate"
+    },
+    {
+      "closed_risks": [
+        "把专家姓名当实质参与",
+        "抹平分歧或捏造 claim_id"
+      ],
+      "developer_burden_delta": {
+        "builder_tasks_removed": [
+          "专家真实性重新判定"
+        ],
+        "closed_p0_p1": [
+          "persona false attribution"
+        ],
+        "generated_executable_artifacts": [
+          "review validator"
+        ]
+      },
+      "findings": [
+        "无 dossier 仍不满足有效人物团队调用"
+      ],
+      "input_hash": "76da7f13867f48f6ca53567445fc6e8eda07eb8ef988087a604ff482ff7b56de",
+      "input_subject": "v5 review evidence",
+      "new_mechanisms": [
+        "机器化 persona fail-closed gate",
+        "2×6 neutral role review"
+      ],
+      "output_artifacts": [
+        "scripts/teleiosis_core/review.py",
+        "evidence/preparation/role-review-round1.json",
+        "evidence/preparation/role-review-round2.json"
+      ],
+      "purpose": "在 Candidate 上执行 persona 真实性复审和六角色中立整改",
+      "rerun_trigger": "真实 dossier 被载入或 Candidate review surface 变化",
+      "skill": "persona-distiller-group",
+      "status": "EXECUTED",
+      "version": "v0.0.0.7"
+    },
+    {
+      "closed_risks": [
+        "NOT_RUN 被折算 PASS",
+        "证据不绑定制品"
+      ],
+      "developer_burden_delta": {
+        "builder_tasks_removed": [
+          "外部验收输入整理"
+        ],
+        "closed_p0_p1": [
+          "traceability gap"
+        ],
+        "generated_executable_artifacts": [
+          "verifier handoff ZIP generator"
+        ]
+      },
+      "findings": [
+        "Acceptance 已扩展但原始验证证据尚未生成"
+      ],
+      "input_hash": "76da7f13867f48f6ca53567445fc6e8eda07eb8ef988087a604ff482ff7b56de",
+      "input_subject": "v5 acceptance candidate",
+      "new_mechanisms": [
+        "30 条 Acceptance 一一追踪",
+        "subject identity hash",
+        "handoff ZIP validation"
+      ],
+      "output_artifacts": [
+        "scripts/teleiosis_core/verifier_handoff.py",
+        "ACCEPTANCE_CONTRACT.json",
+        "TRACEABILITY_MATRIX.json"
+      ],
+      "purpose": "按冻结 Acceptance 检查追踪、原始证据与 Subject 绑定",
+      "rerun_trigger": "Candidate/Acceptance/Manifest 任一变化",
+      "skill": "verifier",
+      "status": "EXECUTED",
+      "version": "v0.0.2.2"
+    }
+  ],
+  "catalog_routing": {
+    "persona-distiller-group": {
+      "status": "ROUTED_METHOD_APPLIED_NOT_FULL_NATIVE_EXECUTION",
+      "version": "v0.0.0.7"
+    },
+    "teleiosis": {
+      "status": "NATIVE_CONTRACT_EXECUTED_LOCAL_V5",
+      "version": "v0.0.0.3 baseline + v0.0.0.5 candidate"
+    },
+    "verifier": {
+      "status": "CONTRACT_APPLIED_FORMAL_EXECUTION_NOT_RUN",
+      "version": "v0.0.2.2"
+    }
+  },
+  "decision": "KEEP",
+  "developer_burden_delta": {
+    "builder_tasks_removed": [
+      "研究、架构、Schema、测试与回滚设计"
+    ],
+    "closed_p0_p1": [
+      "Stage0/taskpack/persona/verifier/回归缺口"
+    ],
+    "closed_unknowns": [
+      "v5 runtime implementation"
+    ],
+    "generated_executable_artifacts": [
+      "7 modules",
+      "new tests",
+      "large corpus"
+    ]
+  },
+  "formal_independent_review": "UNAVAILABLE",
+  "input_hash": "76da7f13867f48f6ca53567445fc6e8eda07eb8ef988087a604ff482ff7b56de",
+  "pass": "B",
+  "phase": "Candidate / Remediation",
+  "review_mode": "role_separated_same_model",
+  "schema_version": "teleiosis.skill_pass.v5",
+  "skill": "teleiosis",
+  "version": "v0.0.0.5-candidate"
+}

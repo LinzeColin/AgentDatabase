@@ -1,0 +1,576 @@
+{
+  "branch": "main",
+  "coverage_domains": [
+    "产品",
+    "前端",
+    "后端",
+    "架构",
+    "数据",
+    "安全",
+    "可靠性",
+    "运维",
+    "测试",
+    "部署",
+    "治理",
+    "验收"
+  ],
+  "entries": [
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/agent-reach",
+      "name": "agent-reach",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/awesome-design-md",
+      "name": "awesome-design-md",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/awesome-design-systems",
+      "name": "awesome-design-systems",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/awesome-selfhosted-data",
+      "name": "awesome-selfhosted-data",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/awesome-selfhosted",
+      "name": "awesome-selfhosted",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/banner-design",
+      "name": "banner-design",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/beautiful-html-templates",
+      "name": "beautiful-html-templates",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/book-to-skill",
+      "name": "book-to-skill",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/brand",
+      "name": "brand",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/canvas-design",
+      "name": "canvas-design",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/chronicle",
+      "name": "chronicle",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "加密备份与恢复参考",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/codex-encrypted-backup",
+      "name": "codex-encrypted-backup",
+      "scope": "安全/运维",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "上下文校准、权威与冲突治理",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/context-kernel",
+      "name": "context-kernel",
+      "scope": "治理",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/design-system",
+      "name": "design-system",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/design",
+      "name": "design",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "人类可读与机器可读双平面治理",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/domain-dual-plane",
+      "name": "domain-dual-plane",
+      "scope": "架构/治理",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/dws",
+      "name": "dws",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/dynamic-personal-profile-update",
+      "name": "dynamic-personal-profile-update",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/frontend-slides",
+      "name": "frontend-slides",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "目标到交付的执行流程参考",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/goal-to-delivery-sop",
+      "name": "goal-to-delivery-sop",
+      "scope": "产品/交付",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/gongzi-fafang-biaozhun",
+      "name": "gongzi-fafang-biaozhun",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "视觉与设计质量参考",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/gpt-tasteskill",
+      "name": "gpt-tasteskill",
+      "scope": "前端/设计",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/graphify",
+      "name": "graphify",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/grilling",
+      "name": "grilling",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/gsap-core",
+      "name": "gsap-core",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/gsap-frameworks",
+      "name": "gsap-frameworks",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/gsap-performance",
+      "name": "gsap-performance",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/gsap-plugins",
+      "name": "gsap-plugins",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/gsap-react",
+      "name": "gsap-react",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/gsap-scrolltrigger",
+      "name": "gsap-scrolltrigger",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/gsap-skills",
+      "name": "gsap-skills",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/gsap-timeline",
+      "name": "gsap-timeline",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/gsap-utils",
+      "name": "gsap-utils",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/guizang-ppt-skill",
+      "name": "guizang-ppt-skill",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/hatch-pet",
+      "name": "hatch-pet",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/hongquan-main-contract-dws",
+      "name": "hongquan-main-contract-dws",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/html-anything",
+      "name": "html-anything",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/image-enhancer",
+      "name": "image-enhancer",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/info-fee-update",
+      "name": "info-fee-update",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/internal-comms",
+      "name": "internal-comms",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/km-bid-adjudicate",
+      "name": "km-bid-adjudicate",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/km-bid-audit",
+      "name": "km-bid-audit",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/km-bid-brief",
+      "name": "km-bid-brief",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/km-bid-discover",
+      "name": "km-bid-discover",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/km-bid-evidence",
+      "name": "km-bid-evidence",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/km-bid-evolve",
+      "name": "km-bid-evolve",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/km-bid-lifecycle",
+      "name": "km-bid-lifecycle",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/km-bid-qualify",
+      "name": "km-bid-qualify",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/km-bid-scout",
+      "name": "km-bid-scout",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "近期变化与时效研究参考",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/last30days",
+      "name": "last30days",
+      "scope": "研究",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "MCP 构建与接口集成参考",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/mcp-builder",
+      "name": "mcp-builder",
+      "scope": "后端/集成",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/output-skill",
+      "name": "output-skill",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": true,
+      "description": "载入人物 dossier、claim_id、分歧与隔离控制角色",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/persona-distiller-group",
+      "name": "persona-distiller-group",
+      "scope": "复审/反证",
+      "version": "v0.0.0.7"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/persona-distiller",
+      "name": "persona-distiller",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/project-cost-table-skill",
+      "name": "project-cost-table-skill",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "Prompt 与 Agent 优化编排参考",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/prompt-compiler",
+      "name": "prompt-compiler",
+      "scope": "优化",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/serenity-skill",
+      "name": "serenity-skill",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "Skill Registry 同步与发布参考",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/skill-github-sync",
+      "name": "skill-github-sync",
+      "scope": "部署",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/slides",
+      "name": "slides",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/study-project-orchestrator",
+      "name": "study-project-orchestrator",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": true,
+      "description": "完整非路由白箱迭代与 Candidate 治理",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/teleiosis",
+      "name": "teleiosis",
+      "scope": "治理/验收",
+      "version": "v0.0.0.3"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/theme-factory",
+      "name": "theme-factory",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/ui-styling",
+      "name": "ui-styling",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "UI/UX 设计审查参考",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/ui-ux-pro-max",
+      "name": "ui-ux-pro-max",
+      "scope": "前端/产品",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "部署平台与运行参考",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/use-railway",
+      "name": "use-railway",
+      "scope": "部署/运维",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": true,
+      "description": "冻结 Subject 的独立软件验收与证据放行",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/verifier",
+      "name": "verifier",
+      "scope": "验收",
+      "version": "v0.0.2.2"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/video-replica",
+      "name": "video-replica",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "Web 应用真实交互测试参考",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/webapp-testing",
+      "name": "webapp-testing",
+      "scope": "测试",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    },
+    {
+      "content_loaded": false,
+      "description": "目录级路由元数据；未命中当前任务时不加载正文",
+      "entrypoint": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/weread-portable-notes",
+      "name": "weread-portable-notes",
+      "scope": "catalog-observed-not-routed",
+      "version": "UNVERIFIED_MOVING_MAIN"
+    }
+  ],
+  "limitation": "完整目录名已扫描；只对命中当前任务的 Teleiosis、persona-distiller-group、verifier 加载正文，其他条目版本和正文保持 UNVERIFIED_MOVING_MAIN。",
+  "moving_main_frozen": false,
+  "observed_at": "2026-08-03",
+  "schema_version": "teleiosis.skill_catalog_snapshot.v5",
+  "source": "https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/"
+}

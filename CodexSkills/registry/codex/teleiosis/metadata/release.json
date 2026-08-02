@@ -1,79 +1,23 @@
 {
-  "architecture": "single-registry-skill-three-built-in-full-run-modules",
-  "candidate_semantics": "C_IS_ITERATION_OBJECT_REVISION_NOT_SHA_CHECKPOINT",
-  "canonical_archive": "Teleiosis-v0.0.0.3-skill.zip",
-  "display_name_zh": "白箱迭代Skill",
-  "embedded_components": {
-    "market_evidence_kernel": {
-      "integrated_version": "v0.0.0.3",
-      "source_lineage": "v0.0.0.2"
-    },
-    "product_reality_lab": {
-      "implementation": "internal-full-module",
-      "integrated_version": "v0.0.0.3",
-      "source_lineage": "v0.0.0.1"
-    },
-    "raw_teleiosis": {
-      "implementation": "canonical-parent-skill",
-      "integrated_version": "v0.0.0.3",
-      "source_lineage": [
-        "v0.0.0.1",
-        "v0.0.0.2"
-      ]
-    },
-    "skill_market_lab": {
-      "implementation": "internal-full-module",
-      "integrated_version": "v0.0.0.3",
-      "source_lineage": "v0.0.0.1"
-    }
-  },
-  "english_brand": "Teleiosis",
-  "final_promotion_authority": "teleiosis_then_external_verifier",
-  "functional_name": "White-Box Iteration Skill",
-  "internal_revision": "v0.0.0.3-r5-foolproof-clean-final",
+  "architecture": "single-skill-four-built-in-full-run-engines",
+  "artifact_status": "INSTALL_READY_FROZEN_CANDIDATE",
+  "display_name": "Teleiosis v0.0.0.5",
+  "effective_genesis_composite_sha256": "d7349b951034ba2b5335c94ff7cfbc5bb472524c39010af66877c21c9e4f5b96",
+  "formal_pass": "EXTERNAL_VERIFIER_REQUIRED",
+  "genesis_locked_sha256": "14ab08b9053db4ca87140e59a49f1de8105a718a87ec2d55590c6487c1a77086",
   "lineage": [
-    "teleiosis-v0.0.0.1",
-    "owner-teleiosis-v0.0.0.2",
-    "market-integrated-teleiosis-v0.0.0.2",
-    "skill-market-lab-v0.0.0.1",
-    "product-reality-lab-v0.0.0.1"
+    "v0.0.0.1",
+    "v0.0.0.2",
+    "v0.0.0.3",
+    "v0.0.0.4",
+    "v0.0.0.5"
   ],
   "name": "teleiosis",
-  "poka_yoke": {
-    "atomic_private_result_file": "OUTSIDE_TASKPACK_MODE_0600",
-    "bounded_memory_streaming": true,
-    "clean_machine_output": "ONE_JSON_DOCUMENT",
-    "explicit_publish_confirmation": "--yes",
-    "hard_combined_child_output_cap": true,
-    "install_state_outside_skills_root": true,
-    "json_help_without_usage_noise": true,
-    "one_click_entry": "START_HERE.py",
-    "process_group_timeout_cleanup": true,
-    "recursive_output_redaction": true,
-    "secret_rejection_and_redaction": true,
-    "single_canonical_raw_engine": true,
-    "strict_input_schema": true,
-    "transactional_stage_commit": true,
-    "workspace_root_allowlist": true
-  },
-  "real_market_evidence": "NOT_CLAIMED",
-  "repo_integration": "MOVING_MAIN_SEMANTIC_ADAPT_NO_FIXED_SHA_PRECONDITION",
-  "required_run": {
-    "candidate_revisions_per_run": 27,
-    "groups_per_run": 3,
-    "module_stages_per_run": 27,
-    "round_sequence": [
-      "T",
-      "C",
-      "S",
-      "C",
-      "P",
-      "C"
-    ],
-    "rounds_per_group": 3,
-    "routing": false
-  },
+  "one_click": "python3 START_HERE.py doctor && python3 START_HERE.py install",
+  "release_date": "2026-08-03",
+  "run_contract": "T-C-S-C-P-C-A-C x 3 rounds x 3 groups",
+  "schema_version": "teleiosis.release.v5",
   "scope_mode": "FULL_NO_ROUTING",
-  "standalone_internal_modules": "NOT_REGISTERED",
-  "version": "v0.0.0.3"
+  "v3_inheritance": "FUNCTIONAL_SUPERSET_WITH_SOURCE_BOUNDARY",
+  "version": "v0.0.0.5"
 }

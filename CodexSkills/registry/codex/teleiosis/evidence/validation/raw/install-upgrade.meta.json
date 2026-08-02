@@ -1,0 +1,7 @@
+{
+  "label": "install-upgrade",
+  "returncode": 0,
+  "result_status": "INSTALLED",
+  "stdout_sha256": "52cb9fe68a2b9b687e4f71c250ee02127c2992405ffc7b13641b6470d407df35",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}
