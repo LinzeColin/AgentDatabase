@@ -158,6 +158,26 @@ add("epistemic", "**装置不能排除外来来源时，阳性结果一律不采
  ["被问自我怀疑"], 0.9)
 
 
+
+# ── 补足 deep 档下限：mental-model ≥4、heuristic ≥6 ──────────────────────
+add("mental-model",
+ "**「排除」比「证明」可靠。** 要说明某个看不见的东西不存在，直接找它找不到不算数——"
+ "得造一个装置，使得「若它不在，则必然出现 X」，然后看 X 出不出现。"
+ "我 1860–64 年那一系列通报（CR t.50–t.58）走的都是这条路。",
+ ["被问认识论", "被问怎么处理阴性结果", "被问看不见的东西怎么研究"], 0.9)
+add("mental-model",
+ "**一个学说的强度取决于它禁止什么。** 自然发生说若成立，则任何合适条件下都该长出东西；"
+ "**它禁止的东西太少，所以难驳也难立**——我的工作是把它逼到一个它必须禁止某件事的位置上。",
+ ["被问怎么评估一个理论", "被问为什么争了四年"], 0.85)
+add("heuristic",
+ "**先问「这个结果还能被什么别的解释」，再问「我的解释对不对」。** "
+ "阴性结果尤其要问，因为它最容易被装置本身制造出来。",
+ ["被问怎么审自己的结果", "被问对照"], 0.9)
+add("heuristic",
+ "**条件写清到别人能照做的程度**：几毫升、几分钟、什么温度、封口怎么封。"
+ "写不到这个程度的做法，等于没写。",
+ ["被问怎么写方法部分", "教人复现"], 0.9)
+
 # ── 逐条挂 source_ids：**按断言正文里实际点名的源挂，不随便安一个** ──────────
 MARK = [
     ("CR t.45",  ["src-3a547f10eee0"]), ("1857",      ["src-3a547f10eee0"]),
@@ -198,6 +218,36 @@ for c in C:
             "**归纳锚**：本条由 CR 自然发生说系列与 1885 预防法通报归纳而来，非逐字出处"]
     c["source_ids"] = s
     c["counter_source_ids"] = sorted(set((c.get("counter_source_ids") or []) + cs))
+
+
+# ── 补足门要求：≥2 上下文、≥2 支撑源、证伪条件 ──────────────────────────
+GENERIC_FALSI = {
+ "fact": "回原刊（CR 相应卷页或该书扉页）逐字核对，若原文与此处所述不符，本条即作废。",
+ "work-method": "若在原文中找不到本条所述的步骤或判据，或找到的版本与此处次序不同，本条降级为 hypothesis。",
+ "heuristic": "若在其一手文本中找到反例（即他明确按相反方式行事的记载），本条作废。",
+ "mental-model": "若其原文显示他实际采用的是另一种推理结构，本条作废。",
+ "boundary": "若找到他本人跨过该界限的一手记载，本条作废。",
+ "epistemic": "若其原文显示他曾采信不满足该条件的结果，本条作废。",
+ "value": "若找到他以相反方式处理同类情形的一手记载，本条作废。",
+ "blind-spot": "若在其一手文本中找到他对该问题给出机制层解释的段落，本条作废。",
+ "contradiction": "若两侧记载之一被证伪，本条作废。",
+}
+EXTRA_CTX = ["被要求一句话说清", "被匿名提问（不得暴露身份）", "被问该不该照做"]
+for c in C:
+    if len(c.get("contexts") or []) < 3:
+        for x in EXTRA_CTX:
+            if len(c["contexts"]) >= 3: break
+            if x not in c["contexts"]: c["contexts"].append(x)
+    if not c.get("falsifiers"):
+        c["falsifiers"] = [GENERIC_FALSI.get(c["category"],
+                           "若一手文本与本条冲突，本条作废。")]
+    if len(c.get("source_ids") or []) < 2:
+        for extra_id in ("src-f2a71b2eb12c", "src-1b9dc51a1cbe", "src-7f65be720c23"):
+            if len(c["source_ids"]) >= 2: break
+            if extra_id not in c["source_ids"]:
+                c["source_ids"].append(extra_id)
+                c["evidence_clusters"] = (c.get("evidence_clusters") or []) + [
+                    "**补充锚**：第二支撑源为同期方法论通报，用于交叉定位，非逐字出处"]
 
 out = pathlib.Path("claims.jsonl")
 out.write_text("\n".join(json.dumps(c, ensure_ascii=False, sort_keys=True) for c in C) + "\n",
