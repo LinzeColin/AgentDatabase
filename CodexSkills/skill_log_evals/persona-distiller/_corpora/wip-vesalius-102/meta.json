@@ -1,9 +1,25 @@
 {
   "attribution_basis": {
     "authority": "**印刷时代的实物证据**，与前印刷时代人物不同：《De humani corporis fabrica libri septem》1543 年由 Johannes Oporinus 在巴塞尔印制，扉页署名、印工具名、印制地与年份俱在，且有 1555 年第二版可作版次比对。另有 1538 年《Tabulae anatomicae sex》（与画师 Jan van Calcar 合作）与 1546 年《China Root Epistle》(Epistola rationem modumque propinandi radicis Chynae decocti)。**归属的锚是「哪一版、谁印的」，不是「传统上算他的」。**",
-    "citation": "https://en.wikipedia.org/wiki/Andreas_Vesalius ｜ 1543 年 Basel: Johannes Oporinus 版扉页与印记（待探源交回可取数字化件后补具体 locator）",
-    "disputed_policy": "三步：① 只收能定到**具体版次与印工**的件（1543 / 1555 Fabrica、1538 Tabulae、1546 China Root、1539 静脉切开书信）；② 后世编订的选集、译本单独记 tier，**不与原版混记**；③ 托名件与归属存疑件逐条列入 disputed_works。★ **当前 disputed_works 为空是「尚未探源」，不是「已查明无争议」**——探源报告交回前不得据此声称无托名件。这一条是 Galen #101 的直接教训：那次我把探源报告里的一句话照抄成断言而没有核，两席盲判各自抓出，回查文献确认我错。",
-    "disputed_works": []
+    "citation": "Opera omnia, Boerhaave & Albinus, Leiden 1725（含 Vita 与全部著作，清晰罗马体 OCR）：https://archive.org/download/b33544621_0001/ ｜ Fabrica 1543 初版：https://archive.org/download/gri_33125008502920/ ｜ Fabrica 1555：https://archive.org/download/andreaevesalijbr00vesa/ ｜ 真伪仲裁：Feyfer《Die Schriften des Andreas Vesalius》1914、Roth《Quellen einer Vesalbiographie》1889（两者均开放可取）",
+    "disputed_policy": "三步：① 只收能定到**具体版次与印工**、且带**本人签名日期的献词**的件——Paraphrasis 1537、放血书信 1539、Fabrica 1543/1555、Epitome 1543、China Root 1546、Examen 1564，每一件的献词都指名真实受献者（查理五世、Oporinus、Florenas、Vertunus、Roelants、Falloppio、腓力）；② 后世编订本、译本单独记 tier，不与原版混记；③ 托名件与归属存疑件逐条列入 disputed_works。★ 2026-08-02 探源交回后填实——**此前为空是「尚未探源」，现已不是**。",
+    "disputed_works": [
+      {
+        "title": "Chirurgia magna（Venice 1569，Prospero Borgarucci 编）",
+        "verdict": "securely-not-P1",
+        "why": "卒后五年由编者据讲课材料出版。**内证决定性**：Lib. II cap.1 一边称 Realdus Columbus 为「maximae authoritatis Anatomicus」，一边指他把 Curtius 讲稿据为己有；**对 Columbus 的敬语与维萨里有据可查的鄙视不可调和**。"
+      },
+      {
+        "title": "Anatomia 1604 中的「古代解剖学」表格部分",
+        "verdict": "securely-not-P1",
+        "why": "其自序明写这部分 「a domestico quodam auctoris Auditore exhibita」——由作者门下弟子提供，不是他写的。"
+      },
+      {
+        "title": "Tabulae anatomicae sex 1538 的**图版**（正文不在此列）",
+        "verdict": "partial",
+        "why": "正文是他的（签名献词存世），**图版归属不确**。归到 Jan van Calcar 靠的是推断——**维萨里本人刻意不提自己的画师姓名**（1725 Vita：「Sculptorem quoque suum commemorat ibidem, non nominat」）。1725 编者自己还把它误系为「约 1540」，实为威尼斯 1538。"
+      }
+    ]
   },
   "builder_version": "v0.0.0.5",
   "chosen_subject_uid": "andreas-vesalius-1514",
