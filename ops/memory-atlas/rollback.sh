@@ -8,8 +8,9 @@ current_app=$(readlink -f "$APP_ROOT/current"); current_agent=$(readlink -f "$AG
 previous_app=$(readlink -f "$APP_ROOT/previous"); previous_agent=$(readlink -f "$AGENT_ROOT/previous")
 ln -sfn "$previous_app" "$APP_ROOT/current"; ln -sfn "$previous_agent" "$AGENT_ROOT/current"
 ln -sfn "$current_app" "$APP_ROOT/previous"; ln -sfn "$current_agent" "$AGENT_ROOT/previous"
+sudo systemctl stop memory-atlas-api-proxy.socket memory-atlas-api-proxy.service
 sudo systemctl restart memory-atlas-api.service
-sudo systemctl restart memory-atlas-api-proxy.socket
+sudo systemctl start memory-atlas-api-proxy.socket
 docker compose -f "$AGENT_ROOT/current/ops/memory-atlas/docker-compose.yml" up -d --remove-orphans
 curl --fail --silent --max-time 8 http://127.0.0.1:8766/healthz >/dev/null
 curl --fail --silent --max-time 8 http://10.0.0.1:18766/healthz >/dev/null

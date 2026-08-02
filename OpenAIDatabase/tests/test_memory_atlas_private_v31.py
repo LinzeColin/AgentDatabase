@@ -932,6 +932,10 @@ def test_systemd_units_use_bounded_runtime_identities() -> None:
     assert "NoNewPrivileges=true" in selfheal and "ProtectSystem=strict" in selfheal
     assert "ExecStart=/usr/local/bin/memory-atlas-selfheal" in selfheal
 
+    reconcile = (unit_dir / "memory-atlas-reconcile.service").read_text(encoding="utf-8")
+    assert "/srv/linze/apps/status/data" in reconcile
+    assert "ProtectSystem=strict" in reconcile
+
 
 def test_hardened_systemd_units_bind_gh_config_outside_protected_home() -> None:
     repo = Path(__file__).resolve().parents[2]
@@ -1004,6 +1008,10 @@ def test_memory_atlas_loopback_api_has_bounded_docker_bridge_proxy() -> None:
     assert "internal_proxy_private" in probe
     assert "INTERNAL_PROXY_PRIVATE_API_NOT_FAIL_CLOSED" in probe
 
+    assert "sudo systemctl stop memory-atlas-api-proxy.socket memory-atlas-api-proxy.service" in rollback
+    assert "sudo systemctl start memory-atlas-api-proxy.socket" in rollback
+    assert "sudo systemctl restart memory-atlas-api-proxy.socket" not in rollback
+
 
 def test_restore_drill_uses_agentdatabase_runtime_not_frontend_release() -> None:
     repo = Path(__file__).resolve().parents[2]
@@ -1022,7 +1030,11 @@ def test_deploy_preflights_candidate_and_rolls_back_blocking_probe() -> None:
     assert 'MEMORY_ATLAS_SOURCE_REGISTRY="$agent_release/ops/memory-atlas/source-registry.json"' in text
     assert 'install-systemd.sh" "$agent_release"' in text
     assert 'POST_PROMOTE_BLOCKED_AND_ROLLED_BACK' in text
-    assert 'rollback.sh" || true' in text
+    assert 'rollback_promoted_release "$probe_rc" || true' in text
+    assert "trap post_promotion_error ERR" in text
+    assert text.index("trap post_promotion_error ERR") < text.index("sudo systemctl restart memory-atlas-api.service")
+    assert text.index("trap - ERR") < text.index('case "$probe_rc" in')
+    assert "POST_PROMOTION_STEP_FAILED_AND_ROLLED_BACK" in text
 
 
 def test_deploy_first_release_rolls_back_to_absent_state() -> None:
@@ -1036,7 +1048,7 @@ def test_deploy_first_release_rolls_back_to_absent_state() -> None:
     assert 'remove_symlink_if_target "$AGENT_ROOT/current" "$agent_release"' in text
     assert 'remove_symlink_if_target "$APP_ROOT/candidate" "$release"' in text
     assert 'remove_symlink_if_target "$AGENT_ROOT/candidate" "$agent_release"' in text
-    assert 'rollback_first_deploy_to_absent "$probe_rc"' in text
+    assert 'rollback_first_deploy_to_absent "$failed_rc"' in text
 
 
 def test_deploy_validates_with_locked_memory_atlas_venv() -> None:

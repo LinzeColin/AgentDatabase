@@ -55,6 +55,30 @@ rollback_first_deploy_to_absent() {
   printf '%s\n' 'FIRST_DEPLOY_ABSENCE_RESTORED'
 }
 
+rollback_promoted_release() {
+  local failed_rc=${1:?failure rc required}
+  if [[ -n "$old_app" && -n "$old_agent" ]]; then
+    "$agent_release/ops/memory-atlas/rollback.sh"
+  else
+    rollback_first_deploy_to_absent "$failed_rc"
+  fi
+}
+
+post_promotion_error() {
+  local failed_rc=$?
+  local rollback_rc=0
+  trap - ERR
+  set +e
+  rollback_promoted_release "$failed_rc" || rollback_rc=$?
+  set -e
+  if [[ "$rollback_rc" -ne 0 ]]; then
+    echo "POST_PROMOTION_STEP_FAILED_ROLLBACK_FAILED:$failed_rc:$rollback_rc"
+  else
+    echo "POST_PROMOTION_STEP_FAILED_AND_ROLLED_BACK:$failed_rc"
+  fi
+  exit "$failed_rc"
+}
+
 [[ -f "$ENV_FILE" ]] || { echo "缺少受保护环境文件: $ENV_FILE"; exit 65; }
 [[ -f "$REPO_ROOT/AGENTS.md" && -d "$REPO_ROOT/MemoryAtlas" ]] || { echo '目标不是 AgentDatabase 根目录'; exit 66; }
 cd "$REPO_ROOT"
@@ -108,6 +132,7 @@ if [[ -L "$APP_ROOT/current" ]]; then old_app=$(readlink -f "$APP_ROOT/current")
 if [[ -L "$AGENT_ROOT/current" ]]; then old_agent=$(readlink -f "$AGENT_ROOT/current"); ln -sfn "$old_agent" "$AGENT_ROOT/previous"; fi
 ln -sfn "$release" "$APP_ROOT/current"
 ln -sfn "$agent_release" "$AGENT_ROOT/current"
+trap post_promotion_error ERR
 sudo systemctl restart memory-atlas-api.service
 sudo systemctl enable --now memory-atlas-api-proxy.socket memory-atlas-reconcile.timer memory-atlas-selfheal.timer memory-atlas-action-worker.timer
 docker compose -f "$AGENT_ROOT/current/ops/memory-atlas/docker-compose.yml" up -d --remove-orphans
@@ -120,16 +145,13 @@ set +e
 "$agent_release/ops/memory-atlas/post-promote-probe.sh" "$release_id"
 probe_rc=$?
 set -e
+trap - ERR
 case "$probe_rc" in
   0) printf '%s
 ' 'MEMORY_ATLAS_DEPLOYED_AND_AUTHENTICATED_PATH_VERIFIED' ;;
   5) printf '%s
 ' 'MEMORY_ATLAS_DEPLOYED_INTERNAL_VERIFIED_OWNER_ACCESS_CONFIRMATION_PENDING'; exit 5 ;;
   *)
-    if [[ -n "$old_app" && -n "$old_agent" ]]; then
-      "$agent_release/ops/memory-atlas/rollback.sh" || true
-    else
-      rollback_first_deploy_to_absent "$probe_rc"
-    fi
+    rollback_promoted_release "$probe_rc" || true
     echo "POST_PROMOTE_BLOCKED_AND_ROLLED_BACK:$probe_rc"; exit "$probe_rc" ;;
 esac
