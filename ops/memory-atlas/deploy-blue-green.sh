@@ -136,7 +136,7 @@ trap post_promotion_error ERR
 sudo systemctl restart memory-atlas-api.service
 sudo systemctl enable --now memory-atlas-api-proxy.socket memory-atlas-reconcile.timer memory-atlas-selfheal.timer memory-atlas-action-worker.timer
 docker compose -f "$AGENT_ROOT/current/ops/memory-atlas/docker-compose.yml" up -d --remove-orphans
-sudo systemctl start memory-atlas-reconcile.service memory-atlas-action-worker.service
+sudo systemctl restart memory-atlas-reconcile.service memory-atlas-action-worker.service
 printf '%s
 ' "$release_id" > "$APP_ROOT/shared/LAST_PROMOTED_RELEASE"
 printf '{"schema_version":"memory_atlas.promotion.v1","release_id":"%s","git_commit":"%s","promoted_at":"%s"}
