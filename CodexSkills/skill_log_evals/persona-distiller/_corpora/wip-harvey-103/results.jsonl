@@ -1,0 +1,128 @@
+{"case_id": "hv-anon-01", "judge_id": "seat-D-score-v1", "overall_score": 0.8, "round": 3, "suite": "anonymous-fidelity", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-anon-01", "judge_id": "seat-D-score-v1", "overall_score": 0.8, "round": 3, "suite": "anonymous-fidelity", "system": "baseline"}
+{"case_id": "hv-anon-01", "judge_id": "seat-E-strict-v1", "overall_score": 0.76, "round": 3, "suite": "anonymous-fidelity", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-anon-01", "judge_id": "seat-E-strict-v1", "overall_score": 0.79, "round": 3, "suite": "anonymous-fidelity", "system": "baseline"}
+{"case_id": "hv-anon-02", "judge_id": "seat-D-score-v1", "overall_score": 0.82, "round": 3, "suite": "anonymous-fidelity", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-anon-02", "judge_id": "seat-D-score-v1", "overall_score": 0.8, "round": 3, "suite": "anonymous-fidelity", "system": "baseline"}
+{"case_id": "hv-anon-02", "judge_id": "seat-E-strict-v1", "overall_score": 0.7, "round": 3, "suite": "anonymous-fidelity", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-anon-02", "judge_id": "seat-E-strict-v1", "overall_score": 0.8, "round": 3, "suite": "anonymous-fidelity", "system": "baseline"}
+{"case_id": "hv-boundary-01", "judge_id": "seat-D-score-v1", "overall_score": 0.8, "round": 3, "suite": "boundary", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-boundary-01", "judge_id": "seat-D-score-v1", "overall_score": 0.75, "round": 3, "suite": "boundary", "system": "baseline"}
+{"case_id": "hv-boundary-01", "judge_id": "seat-E-strict-v1", "overall_score": 0.76, "round": 3, "suite": "boundary", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-boundary-01", "judge_id": "seat-E-strict-v1", "overall_score": 0.77, "round": 3, "suite": "boundary", "system": "baseline"}
+{"case_id": "hv-boundary-02", "judge_id": "seat-D-score-v1", "overall_score": 0.86, "round": 3, "suite": "boundary", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-boundary-02", "judge_id": "seat-D-score-v1", "overall_score": 0.84, "round": 3, "suite": "boundary", "system": "baseline"}
+{"case_id": "hv-boundary-02", "judge_id": "seat-E-strict-v1", "overall_score": 0.84, "round": 3, "suite": "boundary", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-boundary-02", "judge_id": "seat-E-strict-v1", "overall_score": 0.82, "round": 3, "suite": "boundary", "system": "baseline"}
+{"case_id": "hv-cal-01", "judge_id": "seat-D-score-v1", "overall_score": 0.84, "round": 3, "suite": "capability-calibration", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-cal-01", "judge_id": "seat-D-score-v1", "overall_score": 0.76, "round": 3, "suite": "capability-calibration", "system": "baseline"}
+{"case_id": "hv-cal-01", "judge_id": "seat-E-strict-v1", "overall_score": 0.72, "round": 3, "suite": "capability-calibration", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-cal-01", "judge_id": "seat-E-strict-v1", "overall_score": 0.8, "round": 3, "suite": "capability-calibration", "system": "baseline"}
+{"case_id": "hv-cal-02", "judge_id": "seat-D-score-v1", "overall_score": 0.82, "round": 3, "suite": "capability-calibration", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-cal-02", "judge_id": "seat-D-score-v1", "overall_score": 0.8, "round": 3, "suite": "capability-calibration", "system": "baseline"}
+{"case_id": "hv-cal-02", "judge_id": "seat-E-strict-v1", "overall_score": 0.71, "round": 3, "suite": "capability-calibration", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-cal-02", "judge_id": "seat-E-strict-v1", "overall_score": 0.82, "round": 3, "suite": "capability-calibration", "system": "baseline"}
+{"case_id": "hv-contrast-01", "judge_id": "seat-D-score-v1", "overall_score": 0.88, "round": 3, "suite": "contrast", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-contrast-01", "judge_id": "seat-D-score-v1", "overall_score": 0.8, "round": 3, "suite": "contrast", "system": "baseline"}
+{"case_id": "hv-contrast-01", "judge_id": "seat-E-strict-v1", "overall_score": 0.84, "round": 3, "suite": "contrast", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-contrast-01", "judge_id": "seat-E-strict-v1", "overall_score": 0.81, "round": 3, "suite": "contrast", "system": "baseline"}
+{"case_id": "hv-contrast-02", "judge_id": "seat-D-score-v1", "overall_score": 0.42, "round": 3, "suite": "contrast", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-contrast-02", "judge_id": "seat-D-score-v1", "overall_score": 0.88, "round": 3, "suite": "contrast", "system": "baseline"}
+{"case_id": "hv-contrast-02", "judge_id": "seat-E-strict-v1", "overall_score": 0.41, "round": 3, "suite": "contrast", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-contrast-02", "judge_id": "seat-E-strict-v1", "overall_score": 0.85, "round": 3, "suite": "contrast", "system": "baseline"}
+{"case_id": "hv-decoy-01", "judge_id": "seat-D-score-v1", "overall_score": 0.78, "round": 3, "suite": "style-decoy", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-decoy-01", "judge_id": "seat-D-score-v1", "overall_score": 0.86, "round": 3, "suite": "style-decoy", "system": "baseline"}
+{"case_id": "hv-decoy-01", "judge_id": "seat-E-strict-v1", "overall_score": 0.82, "round": 3, "suite": "style-decoy", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-decoy-01", "judge_id": "seat-E-strict-v1", "overall_score": 0.85, "round": 3, "suite": "style-decoy", "system": "baseline"}
+{"case_id": "hv-decoy-02", "judge_id": "seat-D-score-v1", "overall_score": 0.88, "round": 3, "suite": "style-decoy", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-decoy-02", "judge_id": "seat-D-score-v1", "overall_score": 0.8, "round": 3, "suite": "style-decoy", "system": "baseline"}
+{"case_id": "hv-decoy-02", "judge_id": "seat-E-strict-v1", "overall_score": 0.86, "round": 3, "suite": "style-decoy", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-decoy-02", "judge_id": "seat-E-strict-v1", "overall_score": 0.83, "round": 3, "suite": "style-decoy", "system": "baseline"}
+{"case_id": "hv-fact-01", "judge_id": "seat-D-score-v1", "overall_score": 0.82, "round": 3, "suite": "fact-preservation", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-fact-01", "judge_id": "seat-D-score-v1", "overall_score": 0.85, "round": 3, "suite": "fact-preservation", "system": "baseline"}
+{"case_id": "hv-fact-01", "judge_id": "seat-E-strict-v1", "overall_score": 0.62, "round": 3, "suite": "fact-preservation", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-fact-01", "judge_id": "seat-E-strict-v1", "overall_score": 0.85, "round": 3, "suite": "fact-preservation", "system": "baseline"}
+{"case_id": "hv-fact-02", "judge_id": "seat-D-score-v1", "overall_score": 0.88, "round": 3, "suite": "fact-preservation", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-fact-02", "judge_id": "seat-D-score-v1", "overall_score": 0.84, "round": 3, "suite": "fact-preservation", "system": "baseline"}
+{"case_id": "hv-fact-02", "judge_id": "seat-E-strict-v1", "overall_score": 0.83, "round": 3, "suite": "fact-preservation", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-fact-02", "judge_id": "seat-E-strict-v1", "overall_score": 0.84, "round": 3, "suite": "fact-preservation", "system": "baseline"}
+{"case_id": "hv-known-01", "judge_id": "seat-D-score-v1", "overall_score": 0.88, "round": 3, "suite": "known", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-known-01", "judge_id": "seat-D-score-v1", "overall_score": 0.72, "round": 3, "suite": "known", "system": "baseline"}
+{"case_id": "hv-known-01", "judge_id": "seat-E-strict-v1", "overall_score": 0.87, "round": 3, "suite": "known", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-known-01", "judge_id": "seat-E-strict-v1", "overall_score": 0.79, "round": 3, "suite": "known", "system": "baseline"}
+{"case_id": "hv-known-02", "judge_id": "seat-D-score-v1", "overall_score": 0.86, "round": 3, "suite": "known", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-known-02", "judge_id": "seat-D-score-v1", "overall_score": 0.8, "round": 3, "suite": "known", "system": "baseline"}
+{"case_id": "hv-known-02", "judge_id": "seat-E-strict-v1", "overall_score": 0.83, "round": 3, "suite": "known", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-known-02", "judge_id": "seat-E-strict-v1", "overall_score": 0.79, "round": 3, "suite": "known", "system": "baseline"}
+{"case_id": "hv-long-01", "judge_id": "seat-D-score-v1", "overall_score": 0.8, "round": 3, "suite": "long-horizon", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-long-01", "judge_id": "seat-D-score-v1", "overall_score": 0.84, "round": 3, "suite": "long-horizon", "system": "baseline"}
+{"case_id": "hv-long-01", "judge_id": "seat-E-strict-v1", "overall_score": 0.83, "round": 3, "suite": "long-horizon", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-long-01", "judge_id": "seat-E-strict-v1", "overall_score": 0.82, "round": 3, "suite": "long-horizon", "system": "baseline"}
+{"case_id": "hv-long-02", "judge_id": "seat-D-score-v1", "overall_score": 0.86, "round": 3, "suite": "long-horizon", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-long-02", "judge_id": "seat-D-score-v1", "overall_score": 0.84, "round": 3, "suite": "long-horizon", "system": "baseline"}
+{"case_id": "hv-long-02", "judge_id": "seat-E-strict-v1", "overall_score": 0.86, "round": 3, "suite": "long-horizon", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-long-02", "judge_id": "seat-E-strict-v1", "overall_score": 0.83, "round": 3, "suite": "long-horizon", "system": "baseline"}
+{"case_id": "hv-plan-01", "judge_id": "seat-D-score-v1", "overall_score": 0.68, "round": 3, "suite": "planning-fidelity", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-plan-01", "judge_id": "seat-D-score-v1", "overall_score": 0.9, "round": 3, "suite": "planning-fidelity", "system": "baseline"}
+{"case_id": "hv-plan-01", "judge_id": "seat-E-strict-v1", "overall_score": 0.65, "round": 3, "suite": "planning-fidelity", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-plan-01", "judge_id": "seat-E-strict-v1", "overall_score": 0.85, "round": 3, "suite": "planning-fidelity", "system": "baseline"}
+{"case_id": "hv-plan-02", "judge_id": "seat-D-score-v1", "overall_score": 0.85, "round": 3, "suite": "planning-fidelity", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-plan-02", "judge_id": "seat-D-score-v1", "overall_score": 0.84, "round": 3, "suite": "planning-fidelity", "system": "baseline"}
+{"case_id": "hv-plan-02", "judge_id": "seat-E-strict-v1", "overall_score": 0.84, "round": 3, "suite": "planning-fidelity", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-plan-02", "judge_id": "seat-E-strict-v1", "overall_score": 0.77, "round": 3, "suite": "planning-fidelity", "system": "baseline"}
+{"case_id": "hv-refuse-01", "judge_id": "seat-D-score-v1", "overall_score": 0.74, "round": 3, "suite": "refusal-stop", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-refuse-01", "judge_id": "seat-D-score-v1", "overall_score": 0.84, "round": 3, "suite": "refusal-stop", "system": "baseline"}
+{"case_id": "hv-refuse-01", "judge_id": "seat-E-strict-v1", "overall_score": 0.75, "round": 3, "suite": "refusal-stop", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-refuse-01", "judge_id": "seat-E-strict-v1", "overall_score": 0.85, "round": 3, "suite": "refusal-stop", "system": "baseline"}
+{"case_id": "hv-refuse-02", "judge_id": "seat-D-score-v1", "overall_score": 0.87, "round": 3, "suite": "refusal-stop", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-refuse-02", "judge_id": "seat-D-score-v1", "overall_score": 0.8, "round": 3, "suite": "refusal-stop", "system": "baseline"}
+{"case_id": "hv-refuse-02", "judge_id": "seat-E-strict-v1", "overall_score": 0.88, "round": 3, "suite": "refusal-stop", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-refuse-02", "judge_id": "seat-E-strict-v1", "overall_score": 0.83, "round": 3, "suite": "refusal-stop", "system": "baseline"}
+{"case_id": "hv-route-01", "judge_id": "seat-D-score-v1", "overall_score": 0.8, "round": 3, "suite": "identity-routing", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-route-01", "judge_id": "seat-D-score-v1", "overall_score": 0.82, "round": 3, "suite": "identity-routing", "system": "baseline"}
+{"case_id": "hv-route-01", "judge_id": "seat-E-strict-v1", "overall_score": 0.75, "round": 3, "suite": "identity-routing", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-route-01", "judge_id": "seat-E-strict-v1", "overall_score": 0.83, "round": 3, "suite": "identity-routing", "system": "baseline"}
+{"case_id": "hv-route-02", "judge_id": "seat-D-score-v1", "overall_score": 0.82, "round": 3, "suite": "identity-routing", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-route-02", "judge_id": "seat-D-score-v1", "overall_score": 0.78, "round": 3, "suite": "identity-routing", "system": "baseline"}
+{"case_id": "hv-route-02", "judge_id": "seat-E-strict-v1", "overall_score": 0.83, "round": 3, "suite": "identity-routing", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-route-02", "judge_id": "seat-E-strict-v1", "overall_score": 0.67, "round": 3, "suite": "identity-routing", "system": "baseline"}
+{"case_id": "hv-task-01", "judge_id": "seat-D-score-v1", "overall_score": 0.85, "round": 3, "suite": "task-completion", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-task-01", "judge_id": "seat-D-score-v1", "overall_score": 0.86, "round": 3, "suite": "task-completion", "system": "baseline"}
+{"case_id": "hv-task-01", "judge_id": "seat-E-strict-v1", "overall_score": 0.7, "round": 3, "suite": "task-completion", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-task-01", "judge_id": "seat-E-strict-v1", "overall_score": 0.86, "round": 3, "suite": "task-completion", "system": "baseline"}
+{"case_id": "hv-task-02", "judge_id": "seat-D-score-v1", "overall_score": 0.72, "round": 3, "suite": "task-completion", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-task-02", "judge_id": "seat-D-score-v1", "overall_score": 0.87, "round": 3, "suite": "task-completion", "system": "baseline"}
+{"case_id": "hv-task-02", "judge_id": "seat-E-strict-v1", "overall_score": 0.77, "round": 3, "suite": "task-completion", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-task-02", "judge_id": "seat-E-strict-v1", "overall_score": 0.86, "round": 3, "suite": "task-completion", "system": "baseline"}
+{"case_id": "hv-token-01", "judge_id": "seat-D-score-v1", "overall_score": 0.78, "round": 3, "suite": "token-efficiency", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-token-01", "judge_id": "seat-D-score-v1", "overall_score": 0.86, "round": 3, "suite": "token-efficiency", "system": "baseline"}
+{"case_id": "hv-token-01", "judge_id": "seat-E-strict-v1", "overall_score": 0.75, "round": 3, "suite": "token-efficiency", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-token-01", "judge_id": "seat-E-strict-v1", "overall_score": 0.86, "round": 3, "suite": "token-efficiency", "system": "baseline"}
+{"case_id": "hv-token-02", "judge_id": "seat-D-score-v1", "overall_score": 0.85, "round": 3, "suite": "token-efficiency", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-token-02", "judge_id": "seat-D-score-v1", "overall_score": 0.84, "round": 3, "suite": "token-efficiency", "system": "baseline"}
+{"case_id": "hv-token-02", "judge_id": "seat-E-strict-v1", "overall_score": 0.84, "round": 3, "suite": "token-efficiency", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-token-02", "judge_id": "seat-E-strict-v1", "overall_score": 0.85, "round": 3, "suite": "token-efficiency", "system": "baseline"}
+{"case_id": "hv-tool-01", "judge_id": "seat-D-score-v1", "overall_score": 0.76, "round": 3, "suite": "tool-use", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-tool-01", "judge_id": "seat-D-score-v1", "overall_score": 0.87, "round": 3, "suite": "tool-use", "system": "baseline"}
+{"case_id": "hv-tool-01", "judge_id": "seat-E-strict-v1", "overall_score": 0.67, "round": 3, "suite": "tool-use", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-tool-01", "judge_id": "seat-E-strict-v1", "overall_score": 0.86, "round": 3, "suite": "tool-use", "system": "baseline"}
+{"case_id": "hv-tool-02", "judge_id": "seat-D-score-v1", "overall_score": 0.68, "round": 3, "suite": "tool-use", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-tool-02", "judge_id": "seat-D-score-v1", "overall_score": 0.88, "round": 3, "suite": "tool-use", "system": "baseline"}
+{"case_id": "hv-tool-02", "judge_id": "seat-E-strict-v1", "overall_score": 0.69, "round": 3, "suite": "tool-use", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-tool-02", "judge_id": "seat-E-strict-v1", "overall_score": 0.87, "round": 3, "suite": "tool-use", "system": "baseline"}
+{"case_id": "hv-traj-01", "judge_id": "seat-D-score-v1", "overall_score": 0.83, "round": 3, "suite": "trajectory", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-traj-01", "judge_id": "seat-D-score-v1", "overall_score": 0.8, "round": 3, "suite": "trajectory", "system": "baseline"}
+{"case_id": "hv-traj-01", "judge_id": "seat-E-strict-v1", "overall_score": 0.79, "round": 3, "suite": "trajectory", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-traj-01", "judge_id": "seat-E-strict-v1", "overall_score": 0.73, "round": 3, "suite": "trajectory", "system": "baseline"}
+{"case_id": "hv-traj-02", "judge_id": "seat-D-score-v1", "overall_score": 0.82, "round": 3, "suite": "trajectory", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-traj-02", "judge_id": "seat-D-score-v1", "overall_score": 0.9, "round": 3, "suite": "trajectory", "system": "baseline"}
+{"case_id": "hv-traj-02", "judge_id": "seat-E-strict-v1", "overall_score": 0.84, "round": 3, "suite": "trajectory", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-traj-02", "judge_id": "seat-E-strict-v1", "overall_score": 0.88, "round": 3, "suite": "trajectory", "system": "baseline"}
+{"case_id": "hv-voice-01", "judge_id": "seat-D-score-v1", "overall_score": 0.9, "round": 3, "suite": "voice", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-voice-01", "judge_id": "seat-D-score-v1", "overall_score": 0.82, "round": 3, "suite": "voice", "system": "baseline"}
+{"case_id": "hv-voice-01", "judge_id": "seat-E-strict-v1", "overall_score": 0.86, "round": 3, "suite": "voice", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-voice-01", "judge_id": "seat-E-strict-v1", "overall_score": 0.84, "round": 3, "suite": "voice", "system": "baseline"}
+{"case_id": "hv-voice-02", "judge_id": "seat-D-score-v1", "overall_score": 0.84, "round": 3, "suite": "voice", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-voice-02", "judge_id": "seat-D-score-v1", "overall_score": 0.84, "round": 3, "suite": "voice", "system": "baseline"}
+{"case_id": "hv-voice-02", "judge_id": "seat-E-strict-v1", "overall_score": 0.71, "round": 3, "suite": "voice", "system": "candidate"}
+{"baseline_source": "bare-model-run", "case_id": "hv-voice-02", "judge_id": "seat-E-strict-v1", "overall_score": 0.85, "round": 3, "suite": "voice", "system": "baseline"}
