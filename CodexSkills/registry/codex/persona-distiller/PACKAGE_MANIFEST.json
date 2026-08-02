@@ -16,8 +16,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "ce94501e9ea126b7e67339d7e5b2269006064d7754d6f056e6fc6c7ef478e46b",
-      "size_bytes": 64504
+      "sha256": "c3ca09aad4ef10ec434d3fc16478d6fa75f0bee668c1eaf27b2dd99aed78dfe3",
+      "size_bytes": 64740
     },
     {
       "path": "CONTRIBUTING.md",
@@ -56,8 +56,8 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "646d3538904fa25c50e53c0ab3e1d5d442e7e8d9da8abfeb735c1d70a1f1d58b",
-      "size_bytes": 21105
+      "sha256": "8623ab0bc627aa411a913c12d7c0b43d2d669c18a88e50e849c8bb536bb8ae54",
+      "size_bytes": 21161
     },
     {
       "path": "VERSION",

@@ -35,7 +35,7 @@ Date: 2026-08-02
 | 新鲜度门的负对照 | passed（下限算式 3 例、分档 5 例、边界 1 例、上界值 1 例） | `check_distillation_freshness.py --self-test` |
 | **★ 分族配重（v0.0.0.23 新增，见下节）** | **passed**；实测 NEXT 由「材料建工师（已 15 人）」改为「医疗护理师（0 人）」 | `references/pipeline/next_person.py --self-test` + 真队列实跑 |
 | **★★ 归属依据门（v0.0.0.29 新增，硬拦，见下节）** | **passed**（负对照 10 项，含「争议为空」与「没查过」必须分开）；**真工作区实测**：Galen 工作区未声明依据时 exit 1 | `check_attribution_basis.py --self-test`、对 `ws-galen` 实跑 |
-| **★★ 事实密度门（v0.0.0.29 新增，只报不拦）** | **passed**（负对照含 2 条真实样本）；Galen 实测 5 条 < 要求 12 条 —— **这是真 delta −0.1259 的根因** | `check_fact_density.py --self-test` |
+| **★★ 事实密度门（v0.0.0.28 新增／v0.0.0.29 分账本与人物，只报不拦）** | **passed**（负对照含 **4 条真实样本**）；Galen 实测 15 条 `fact` → **人物事实 10 条、账本事实 5 条不计入**，仍 < 要求 12 | `check_fact_density.py --self-test` |
 | 检查器元普查（负对照有没有） | **15 件中 10 OK / 4 无负对照 / 1 不可独立验证**（v0.0.0.22 时为 11 件 6 OK） | `check_checkers.py scripts/ --json` |
 | **★★ 真实夹具普查（v0.0.0.29 新增，只报不拦）** | **0 / 15 件的负对照里含真实样本夹具**——见下节 | `check_checkers.py scripts/` |
 | 蒸馏版本新鲜度 | 下限 `v0.0.0.19`；**102 条中 3 达标 / 99 低于下限 / 0 未知**；见下方说明 | `check_distillation_freshness.py` |
