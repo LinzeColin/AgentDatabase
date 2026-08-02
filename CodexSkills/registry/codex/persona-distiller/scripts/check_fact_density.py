@@ -89,6 +89,11 @@ import sys
 
 FACTS_PER_SOURCES = 5
 MIN_FLOOR = 5
+# v0.0.0.36：**暂定值，无实测支持。** 有实据的只是「四个人恒为 1 条」这个事实，
+# 以及那四个恒负套组每人 8 道题。取 3 是因为它明确高于 1、又远低于 8——
+# 不至于逼人为凑数编方法（Galen 那 5 条账本事实就是被凑数逼出来的）。
+# **只报不拦**：已入库 100 人没回扫过，硬拦会把整个名册一起拦下。
+METHOD_FLOOR = 3
 
 # ★ v0.0.0.29 账本计量词：只描述「我这份材料有多大」的表述
 LEDGER_UNIT = re.compile(
@@ -120,6 +125,45 @@ PROPER = re.compile(
     r"|[Ͱ-Ͽ]{3,}"                # 希腊文
 )
 NUMERIC = re.compile(r"\d")
+
+# ── v0.0.0.36：`work-method` 密度 ───────────────────────────────────────
+# 四人合并实测（Galen/Vesalius/Harvey/Jenner，各自末轮，共 260 逐对）：
+# **四个套组在四个人身上无一例外为负**——planning-fidelity −0.0508、
+# task-completion −0.0675、tool-use −0.0783、token-efficiency −0.0867（均 0/4 人为正）。
+# 这四组问的都是「给我一套做法／从哪开始／你怎么做到的／一句话说清方法」。
+# 而稳定为正的三组问的是「你写过什么／那件事的细节／你不知道的东西」。
+#
+# ★ 根因不在答案，在断言层：**四个人的 `work-method` 断言恰好都是 1 条**
+#   （fact 则是 15/23/24/16）。因为密度门只数 `fact`，我每轮补的就都是 `fact`。
+#   **判据把我推向了 fact，而输掉的四组要的是 work-method。**
+#
+# 与 v0.0.0.29（账本事实 ≠ 人物事实）同一形态：类别没分开，力气就流错方向。
+METHOD_STEPS = re.compile(
+    r"→|->|—[^—]{2,20}—"                       # 箭头或破折号串起的步骤
+    r"|先[^，。]{2,30}[，。]?\s*(?:再|然后|接着)"   # 先…再…
+    r"|第\s*[一二三四五六七八九1-9]\s*步")
+# 验证／弃置判据——**这是可复用与复述的分界**：
+# 一套做法若没有「怎么知道这步做对了／什么时候丢掉」，用户照着做也不知道自己做错没有。
+METHOD_CRITERION = re.compile(
+    r"对不上|不算数|就丢|丢掉|排除|再验|复核|反证|归谬|证伪|判据|标准是"
+    r"|才(?:下结论|算|能说)|否则|若[^，。]{1,20}则|压到二值|交叉比|两三张嘴|缺口写在")
+
+
+def classify_method(claim: str) -> tuple[str, str]:
+    """→ (`reusable` / `retrospective`, 理由)。**只有 `reusable` 计入方法密度。**
+
+    分界不是「有没有步骤」——四条真实断言全都有步骤。
+    分界是**有没有判据**：怎么知道这一步做对了、什么时候把结果丢掉。
+    裸模型在 tool-use 上赢的那一段给了判据（「同一件事让两三张嘴说，对不上就丢」），
+    我的产物给的是处境（「我住在这儿，我知道谁在哪」）——**处境不可复用。**
+    """
+    has_step = bool(METHOD_STEPS.search(claim))
+    has_crit = bool(METHOD_CRITERION.search(claim))
+    if has_step and has_crit:
+        return "reusable", "有步骤且有验证/弃置判据"
+    if has_step:
+        return "retrospective", "**只有步骤没有判据**：照着做的人不知道自己做错没有"
+    return "retrospective", "**连步骤都没有**：是一句概括不是一套做法"
 
 
 def classify(claim: str) -> tuple[str, str]:
@@ -178,6 +222,36 @@ def evaluate(claims: list[dict], usable_train: int,
             f"（{usable_train} 条可用源 ÷ {per}）"
             f" —— **语料里可核的具体事实没有进入断言层**；"
             f"这正是 Galen #101 真 delta −0.1259 的根因")
+
+    # ── v0.0.0.36：方法密度（**只报不拦**，见下）────────────────────────
+    # ★ 射程边界：只在断言层**成型**时才判。判据是「类别数 ≥ 3」——
+    #   真实工作区有 9–10 个类别（fact / heuristic / mental-model / boundary / …），
+    #   而只有 fact 的输入是事实密度的夹具，不是方法密度的判对象。
+    #   接线当场撞出来的：不设边界会把本门自己的两条正对照误杀。
+    #   **判据拦下了不该拦的东西时，默认是射程写错了**（v0.0.0.34 同一条）。
+    if len({c.get("category") for c in active}) < 3:
+        info["方法密度"] = "**未判**（断言层类别 < 3，不像成型的断言层）——不是通过"
+        return problems, info
+    methods = [c for c in active if c.get("category") == "work-method"]
+    reusable, retro = [], []
+    for c in methods:
+        kind, why = classify_method(str(c.get("claim", "")))
+        (reusable if kind == "reusable" else retro).append(f'{c.get("claim_id")} {why}')
+    info["work-method 条数"] = len(methods)
+    info["**可复用做法**（计入）"] = len(reusable)
+    info["复述式（不计入）"] = len(retro)
+    info["方法口径"] = (f"至少 {METHOD_FLOOR} 条**可复用做法**；"
+                        f"可复用 = 有步骤**且**有验证/弃置判据。"
+                        f"**这个数是暂定的，尚无实测支持**——有实据的只是「四人恒为 1」这个事实")
+    if retro:
+        info["**复述式 work-method**"] = retro[:6]
+    if len(reusable) < METHOD_FLOOR:
+        problems.append(
+            f"可复用 `work-method` 断言 {len(reusable)} 条 < 暂定 {METHOD_FLOOR} 条"
+            f"（另有 {len(retro)} 条是复述式）—— "
+            f"**四人合并实测：planning-fidelity / task-completion / tool-use / token-efficiency "
+            f"四组在四个人身上无一例外为负（0/4），而这四人的 `work-method` 恰好都只有 1 条**；"
+            f"密度门只数 `fact`，力气就全流去了 `fact`（15/23/24/16）")
     return problems, info
 
 
@@ -265,6 +339,64 @@ def self_test() -> int:
     if i["fact 类条数"] != 11:
         fails.append(f"边界失败：superseded 未被排除，实得 {i['fact 类条数']}")
 
+    # ── v0.0.0.36：方法密度 ──────────────────────────────────────────
+    # ★ 真实夹具：下面四条**逐字取自四个人实际的 `work-method` 断言**（各自唯一的那一条）。
+    #   两条有验证判据、两条没有——真实数据自带双侧夹具，不必构造。
+    M = lambda i, t: {"claim_id": f"clm-m{i:011x}", "category": "work-method", "claim": t}
+    REAL_M_GALEN = "工作方式是**写—编号—互引—编目**：先写成篇，再在正文中互相指引，最后为全部作品编目并规定阅读次序。"
+    REAL_M_VESALIUS = "**做法是：亲手切 → 与旧文本逐条比 → 记下分歧积成大卷 → 换物种再验（有尾与无尾的猿）→ 才下结论。**"
+    REAL_M_HARVEY = ("**做法是：先在活体与尸体上反复演示 → 把判据压到二值 → "
+                     "直接观察不到的那一环用量级归谬补 → 缺口写在结论旁边 → 发表后不与骂你的人辩。**")
+    REAL_M_JENNER = "**先攒既往观察，再做一次前瞻接种，最后自费把两者一起发出去。**"
+    print("\n── 方法密度（v0.0.0.36）：四条真实 work-method 断言 ──")
+    for text, want, who in ((REAL_M_VESALIUS, "reusable", "Vesalius"),
+                            (REAL_M_HARVEY, "reusable", "Harvey"),
+                            (REAL_M_GALEN, "retrospective", "Galen"),
+                            (REAL_M_JENNER, "retrospective", "Jenner")):
+        got, why = classify_method(text)
+        mark = "✓" if got == want else "✗"
+        print(f"  {mark} {who:<9} 判为 {got:<14}（应为 {want}）—— {why}")
+        if got != want:
+            fails.append(f"方法夹具失败：{who} 判为 {got}，应为 {want}")
+
+    # 成型断言层的骨架：凑够 3 个类别，否则射程边界会跳过方法判定
+    SHAPE = [{"claim_id": "clm-h1", "category": "heuristic", "claim": "凡事先看证据"},
+             {"claim_id": "clm-b1", "category": "boundary", "claim": "机理我给不出"}]
+
+    # 坏样本：四条全是复述式 → 必须报出
+    p, i = evaluate([F(n, REAL_SOLID) for n in range(12)] + SHAPE
+                    + [M(n, REAL_M_JENNER) for n in range(4)], usable_train=59)
+    if not any("work-method" in x for x in p):
+        fails.append("方法失败：4 条全复述式未被报出")
+    if i["**可复用做法**（计入）"] != 0:
+        fails.append(f"方法失败：复述式被计入，实得 {i['**可复用做法**（计入）']}")
+
+    # 正对照：三条可复用 → 不得报出
+    p, i = evaluate([F(n, REAL_SOLID) for n in range(12)] + SHAPE
+                    + [M(n, REAL_M_HARVEY) for n in range(3)], usable_train=59)
+    if any("work-method" in x for x in p):
+        fails.append("方法失败：3 条可复用被误报")
+
+    # ★ 射程边界：只有 fact 的输入（本门自己的事实密度夹具）**一条方法问题都不许报**
+    p, i = evaluate([F(n, REAL_SOLID) for n in range(12)], usable_train=59)
+    if any("work-method" in x for x in p):
+        fails.append("方法射程失败：纯 fact 输入被判方法密度")
+    if "未判" not in str(i.get("方法密度", "")):
+        fails.append("方法射程失败：纯 fact 输入未标为「未判」")
+    else:
+        print("  ✓ 射程边界：纯 fact 输入标为「未判（不是通过）」，不报方法问题")
+
+    # ★ 反向对照：关掉「判据」这一条，可复用的两条必须转为复述式
+    #   ——证明放行靠的是判据判据本身，不是步骤箭头
+    _saved = globals()["METHOD_CRITERION"]
+    globals()["METHOD_CRITERION"] = re.compile(r"___IMPOSSIBLE_SENTINEL___")
+    rev = [classify_method(t)[0] for t in (REAL_M_VESALIUS, REAL_M_HARVEY)]
+    globals()["METHOD_CRITERION"] = _saved
+    if any(k == "reusable" for k in rev):
+        fails.append("方法反向对照失败：关掉判据后仍判为可复用——放行靠的不是判据")
+    else:
+        print("  ✓ 反向对照：关掉验证判据后，两条可复用样本全部转为复述式")
+
     for f in fails:
         print(f"✗ {f}")
     if fails:
@@ -275,7 +407,8 @@ def self_test() -> int:
           "**只有小写拉丁引文的人物事实**）；"
           "条数不足／全是格言／**全是账本事实**三类坏样本全抓出；"
           "足量可核、小语料走下限、账本与人物混合三类正对照未误杀；"
-          "纯数字与纯专名均算可核；superseded 不计入")
+          "纯数字与纯专名均算可核；superseded 不计入；"
+          "**方法密度另有 4 条真实 work-method 夹具（两侧各二）+ 1 条反向对照**")
     return 0
 
 

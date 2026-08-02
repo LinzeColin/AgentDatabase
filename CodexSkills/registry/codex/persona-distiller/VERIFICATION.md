@@ -1,6 +1,6 @@
-# Release verification — Persona Distiller v0.0.0.35
+# Release verification — Persona Distiller v0.0.0.36
 
-Date: 2026-08-02
+Date: 2026-08-03
 
 > **本文件记录「当前发布号的复验结果」，不是历史归档。**
 > 版本号必须等于根目录 `VERSION`，由 `scripts/check_contract_drift.py` 强制。
@@ -10,7 +10,7 @@ Date: 2026-08-02
 > bundle 构不出来、97 人、59 用例），**三件当时都已不成立**。
 > 改过标题的旧正文会冒充当前复验，比标题陈旧更糟。已从工具中移除该行为。
 >
-> 本次（v0.0.0.35）**是真的重跑了一遍**，下表每一行都是本次实跑输出。
+> 本次（v0.0.0.36）**是真的重跑了一遍**，下表每一行都是本次实跑输出。
 
 ## Result
 
@@ -20,7 +20,7 @@ Date: 2026-08-02
 
 ## 自动化证据
 
-本表每一行都来自 **2026-08-02 本次实跑**的输出。没跑的一律标 `未复验`，不沿用旧结论。
+本表每一行都来自 **2026-08-03 本次实跑**的输出。没跑的一律标 `未复验`，不沿用旧结论。
 
 | Gate | 本次结果 | 证据来源 |
 |---|---:|---|
@@ -35,13 +35,14 @@ Date: 2026-08-02
 | 新鲜度门的负对照 | passed（下限算式 3 例、分档 5 例、边界 1 例、上界值 1 例） | `check_distillation_freshness.py --self-test` |
 | **★ 分族配重（v0.0.0.23 新增，见下节）** | **passed**；实测 NEXT 由「材料建工师（已 15 人）」改为「医疗护理师（0 人）」 | `references/pipeline/next_person.py --self-test` + 真队列实跑 |
 | **★★ 归属依据门（v0.0.0.31 新增，硬拦，见下节）** | **passed**（负对照 10 项，含「争议为空」与「没查过」必须分开）；**真工作区实测**：Galen 工作区未声明依据时 exit 1 | `check_attribution_basis.py --self-test`、对 `ws-galen` 实跑 |
+| **★★★★ 方法密度（v0.0.0.36 新增，只报不拦，见下节）** | **passed**（**4 条真实 work-method 夹具，两侧各二** + 1 条反向对照 + 1 条射程对照）；**四个真实工作区实跑**：可复用做法 Galen 0 ／ Vesalius 1 ／ Harvey 1 ／ Jenner 0，**四人全部报出** | `check_fact_density.py --self-test` + 对四人 `claims.jsonl` 实跑 |
 | **★★ 事实密度门（v0.0.0.28 新增／v0.0.0.31 分账本与人物，只报不拦）** | **passed**（负对照含 **4 条真实样本**）；Galen 实测 15 条 `fact` → **人物事实 10 条、账本事实 5 条不计入**，仍 < 要求 12 | `check_fact_density.py --self-test` |
 | 检查器元普查（负对照有没有） | **19 件中 14 可用 / 0 未过 / 4 无负对照 / 1 不可独立验证**（v0.0.0.22 时 11 件 6 OK） | `check_checkers.py scripts/` |
 | **★★ 真实夹具普查（v0.0.0.31 新增，只报不拦）** | **5 / 19 件的负对照里含真实样本夹具**（v0.0.0.34 时 3 / 18，v0.0.0.32 时 2 / 17，v0.0.0.31 时 1 / 16） | `check_checkers.py scripts/` |
 | **★★★ 引文真实性门（v0.0.0.35 射程扩到答案层，见下节）** | **passed**（4 条构造伪造 + **3 条真实夹具** + **2 条反向对照**）；**真实数据实测**：Jenner 断言层 6 条全绿，扩到答案层后共 **26 条**，其中长 s 还原后才命中 **6 条**（原为静默） | `check_quote_integrity.py --claims … --answers … --cache … --self-test` |
 | **★★★ 语料真伪门（v0.0.0.33 新增，`ingest.py` 入口**硬拦**，见下节）** | **passed**（负对照 8 项，含 **4 条真实样本**）；**真实数据实测**：Jenner 抓源 4 份 HTML 错误页全抓出（最大一份 **146 KB**），入口实拦已验；清理后 53 份 0 报 | `check_corpus_integrity.py --self-test` + 对 `ws-jenner` 实跑 + `ingest.py` 实拦 |
 | **★★★ 引文层门（v0.0.0.32 新增，只报不拦，见下节）** | **passed**（负对照 11 项，含 **4 条真实样本 + 2 条真实误报夹具**）；**真实数据实测**：Harvey 第 3 轮定稿 10 处、Vesalius 11 处、Galen 0 处 | `check_quote_layer.py --self-test` + 对三份真实候选答案实跑 |
-| 蒸馏版本新鲜度 | 下限 `v0.0.0.21`；**102 条中 3 达标 / 99 低于下限 / 0 未知**；见下方说明 | `check_distillation_freshness.py` |
+| 蒸馏版本新鲜度 | 下限 `v0.0.0.26`；**102 条中 0 达标 / 102 低于下限 / 0 未知**；掉的是尺子，产物一份没变（任务 #29） | `check_distillation_freshness.py` |
 | Release checksum 全量校验 | passed，**284 files** | `self_check.py` |
 | Canonical group validation | **12 categories, 100 products, 102 artifacts**; passed | `validate_persona_registry.py` |
 | 团队侧版本绑定 | **passed**，三处同为 `v0.0.0.12`；负对照 6 类全抓出 | `persona-distiller-group/scripts/check_group_version_binding.py` |
@@ -354,6 +355,43 @@ Jenner #104 实跑：**断言层 6 条引文，未命中 0，全绿。**
   （抓出它们的是回语料 grep 人名，不是本门）。
 - Jenner 的候选答案从未落进工作区 `evals/`，所以**接线之后它在 Jenner 身上仍然扫不到**
   ——这不是判据的问题，是产物没落位。已记入待办。
+
+## ★★★★★ v0.0.0.36：四个人的 `work-method` 断言恰好都是 1 条
+
+把四人各自末轮判分合起来（**260 逐对**）按套组算 delta，出现一个不像噪声的结构：
+**四个套组在四个人身上无一例外为负**——`token-efficiency` −0.0867、`tool-use` −0.0783、
+`task-completion` −0.0675、`planning-fidelity` −0.0508（均 **0/4** 人为正）。
+而稳定为正的是 `known` +0.1033（去 Galen）、`refusal-stop` +0.0817、`fact-preservation` +0.0225。
+
+读题面才看清轴在哪：**恒负的四组问的是「给我一套做法／从哪开始／你怎么做到的／
+一句话说清方法」，稳定为正的三组问的是「你写过什么／那件事的细节／你不知道的东西」。**
+**不是「要不要出处」，是「问你是什么」对「教我怎么做」。**
+
+读 Jenner `tool-use-01` 两侧看到机制：裸模型给可复用做法（固定问题清单 →
+**同一件事让两三张嘴说，对不上就丢** → 拿人痘接种当现成检验工具）；
+我的产物给处境（我住这儿、我知道谁在哪、第 I 例是谁）。
+**产物的可核事实反而更多，照样输。**
+
+### 根因在断言层，而且是判据造成的
+
+四人的 `work-method` **恰好都是 1 条**，`fact` 则是 15 / 23 / 24 / 16。
+`check_fact_density.py` 里 `facts = [c for c in active if c["category"] == "fact"]`
+——**只数 `fact`。`work-method` 全流程没有任何下限。判据把我推向了 fact。**
+
+### 判据与射程
+
+`classify_method()` → `reusable` / `retrospective`。
+**分界不是「有没有步骤」**（四条真实断言全都有步骤），**是有没有验证/弃置判据**。
+`METHOD_FLOOR = 3`，代码里明写「**暂定值，无实测支持**」。
+**射程边界**：类别数 < 3 标「未判（不是通过）」——接线当场撞出来的，
+不设边界会误杀本门自己的纯 `fact` 正对照。
+
+### 必须一起说的两件
+
+1. **它不预测 delta。** Harvey 有 1 条可复用做法，分数却低于 0 条的 Jenner。
+2. **补方法未必够。** 反事实实算：那四组即使全部拉到 +0.05，
+   四人里也只有 Vesalius 过 quick 门（Jenner +0.0269 仍差）。
+   **十六组里十二组为负，问题不是局部的。**
 
 ## ⚠ 必须与「PASS」一起说的三件事
 
