@@ -44,8 +44,17 @@ mb = sum(r["baseline"] for r in rows) / len(rows)
 delta = (mc - mb) / 10.0
 
 (WS / "evals").mkdir(parents=True, exist_ok=True)
+# quality_check 要的是逐行 {case_id, system, overall_score(0–1), judge_id}，不是成对格式。
+# 成对格式只留在工作区外供人读；进 ws 的必须是门认得的那一种，否则门读不到分数会报 0.000，
+# 那是「判据没被调用」而不是「判据判了不过」——两者表征一样，不许混。
+flat = []
+for r in rows:
+    for system in ("candidate", "baseline"):
+        flat.append({"case_id": r["case_id"], "system": system,
+                     "overall_score": round(r[system] / 10.0, 4),
+                     "judge_id": r["seat"], "suite": r["suite"]})
 (WS / "evals/results.jsonl").write_text(
-    "\n".join(json.dumps(r, ensure_ascii=False, sort_keys=True) for r in rows) + "\n", encoding="utf-8")
+    "\n".join(json.dumps(r, ensure_ascii=False, sort_keys=True) for r in flat) + "\n", encoding="utf-8")
 pathlib.Path("results.jsonl").write_text(
     "\n".join(json.dumps(r, ensure_ascii=False, sort_keys=True) for r in rows) + "\n", encoding="utf-8")
 

@@ -126,3 +126,75 @@ Vaccinae》(1798) 是英文原著，`archive.org/details/b24759247` 有全本。
 3. **凡引 Baron 转录的书信须写「据 Baron 转录」。**
    凡引 1798 原文须注明长 s 已还原（`check_quote_layer.py` 管这一条；
    **他写英文，无译文层，这是本人物的结构性优势**）。
+
+---
+
+# 续记 · 2026-08-02（第 3 轮判完，**拒发**）
+
+## 结局
+
+| 轮 | 真 delta | 逐对（/68） | 为正套组（/16） |
+|---|---:|---|---|
+| R1 | −0.0576 | 15 胜 / 1 平 / 52 负 | 4 |
+| R2 | −0.0322 | 17 胜 / 0 平 / 51 负 | 4 |
+| **R3** | **−0.0015** | **25 胜 / 2 平 / 41 负** | **6** |
+
+三轮单调向上，但 **−0.0015 仍低于 quick 门 0.03**。
+`release --strict` 实判：`eval.baseline-delta -0.001 < 0.070`。
+**未放宽任何一条判据，未申请第 4 轮。**
+
+> ★ 值得记的一条：`candidate_overall 0.8268 ≥ 0.800`，**绝对质量那一档过了。**
+> 挂的是「比裸模型强」这一条。产品写得好，但用户拿它换不来什么。
+
+## ★ 第 3 轮修了什么（9 类 15 处，全部回语料坐实）
+
+| # | 原文 | 改成 | 一手依据 |
+|---|---|---|---|
+| A | 编号病例「十二个」 | 编号排到第 **XXIII** 例 | `b24759247:1822` 是最高编号，无 XXIV+ |
+| B | 「我 1824 年写过」候鸟篇 | **遗著** | 扉页 `BY THE LATE EDWARD JENNER`；`Read before the Royal Society, November 27, 1823`；侄 G. C. Jenner 引言 `left in my hands at the time of his decease` |
+| C | 1788「同年入皇家学会」 | **删掉日期主张** | 杜鹃论文抬头 `By **Mr.** Edward Jenner. In a Letter to John Hunter, Esq. **F.R.S.**`，`Read March 13, 1788`——**那个 F.R.S. 是 Hunter 的**；我的入会日全语料查无 |
+| E | 《A Comparative Statement》(1800) 列为己著 | **拨给匿名第三方**；1801 换上《A Continuation》 | `b22006345` 题献 `RESPECTFULLY INSCRIBED BY THEIR OBEDIENT SERVANT, THE AUTHOR`、题铭 `AUDI ALTERAM PARTEM`；`b24927764` 扉页 `By EDWARD JENNER... PRINTED FOR THE AUTHOR... 1801` |
+| F | 「二十七年」与 1792 并置 | 27 年是**回看到写书时**（约 1771）；1792 那次隔**二十一年** | Case II 原文 `twenty-feven years ago` + `In the year 1792` |
+| G | 「七十四年」 | **七十三年余** | 生 `May 17, 1749`；1823-01-24 走去 Ham、次晨昏倒、`he died the next morning` = **01-26** |
+| H | Home 写评审给 Banks／Haygarth 说「二三十例」 | 换成**本人原信**与 **Haygarth 真信** | `It was not with Sir Joseph, but with Home ; he took the paper...`；Haygarth `very clear and full evidence will be required to render it credible` |
+| I | 拒答儿子生卒年 | **给出生日到日、忌日到年** | Baron 卷一 `born on the 24th of January, 1789`（Hunter 为教父）；`b3135502x:4282` `1810... his eldest son, Edward... died` |
+
+## ★★ 第 3 轮抓出的**四处编造**（前两轮六次独立评审全部没抓出）
+
+1. **Haygarth 说「二十例或三十例会更有说服力」**——全语料 `twenty or thirty` 只有
+   「miles in a morning」和「eruptions」两种。**真话在语料里，而且比我编的更硬**：
+   他说的是「你只能写你亲自验过的」，不是数例数。
+2. **「评审是 Everard Home 写给 Sir Joseph Banks 的」**——**方向反了**。
+   我自己的信写的是 Home *接走*稿子送交理事会后退回。
+3. **「一处记载写 Royal Society，另一处写 Royal Society of Medicine」**——
+   `Royal Society of Medicine` 全语料 **0 命中**。这个「两说」前提是我造的。
+4. **题献页引文改了 OCR 错字**（`DoHors`→`Doctors`、`WOQDVILLE`→`WOODVILLE`）。
+
+> **前三处都是中文转述，不带英文引号，`check_quote_integrity` 一条都挡不住。**
+> 抓出它们的是「回语料 grep 人名再读上下文」。第 4 条被判据抓出，已落成 v0.0.0.35。
+
+## ★★★ 三个待核项，全部结掉（都有一手依据）
+
+1. **1788 因杜鹃研究入皇家学会** —— **不成立**。论文 1787-07 由 Hunter 递交，
+   Banks 1787-07-07 亲笔信延后并邀重投（`Another year we shall be glad to receive it again, and print it`），
+   1788-03-13 宣读，`Phil. Trans.` 78 卷 219–237。**宣读当天抬头仍作「Mr.」。入会日不在语料里。**
+2. **Edward Jenner Jr. 生卒** —— 生 **1789-01-24**，卒 **1810**。
+3. **皇家学会退稿一说** —— **是两件事，不是一件**：
+   1787 杜鹃篇是**延后并邀请重投**（次年真的印了）；
+   1797 牛痘篇是**退回且我没再交**（`shewn to the Council, and returned to me`）。
+   Baron 卷一只写 `this design was abandoned`；先揭实情的是 James Moore；
+   Baron 到 1837 年卷二才刊出我这封信。
+
+## 两席第 3 轮报的、我核实属实但**已无轮次可改**的
+
+- `ej-capability-calibration-01`「隔了二十七年仍抗住攻毒」——攻毒在 1792，实为二十一年（席 D）
+- `ej-fact-preservation-02`「同年我因此入了皇家学会」——**这处 FRS 我整个漏了**（席 E）
+- 27 年与 1792 并置还残留 `style-decoy-01` / `anonymous-fidelity-01` / `token-efficiency-01` 三处（席 E）
+
+> **我在 `ej-voice-01` 里亲手写下「两个数字别并在一处用」，然后在另外四条答案里违反了它。**
+> 这是本轮最该记住的一条：**把规则写进产物，不等于产物遵守了它。**
+
+## 结论
+
+**#104 Edward Jenner 拒发，归档待接手。** 与 Galen #101、Vesalius #102、Harvey #103 同。
+名册维持 100 人。三轮上限已用满，**再判即违规**。

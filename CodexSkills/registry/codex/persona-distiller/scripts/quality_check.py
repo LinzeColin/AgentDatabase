@@ -804,13 +804,25 @@ def run_content_checks(report, target: Path, cache_dirs: list[str]) -> None:
                 report.metrics['claim_coverage_checked'] = line.strip()
 
         if claims.exists():
-            code, out = run('check_quote_integrity.py',
-                            ['--claims', str(claims), '--cache', *cache_dirs])
+            # v0.0.0.35：射程从断言层扩到**答案层**。
+            # Jenner #104 实测：断言层 6 条引文全绿，而答案层 20 条里有 1 条是
+            # 「把 OCR 错字（DoHors→Doctors、WOQDVILLE→WOODVILLE）顺手改正了再当逐字引文用」。
+            # **断言层绿不代表答案层绿——被判、被发布的是答案层。**
+            argv = ['--claims', str(claims), '--cache', *cache_dirs]
+            payload = target / 'evals/judge_payload.v1.json'
+            if payload.exists():
+                argv += ['--answers', str(payload)]
+            else:
+                review['quote_integrity_scope'] = (
+                    'evals/judge_payload.v1.json 不在——**答案层未核验（不是通过）**；'
+                    '候选答案没落进工作区时，任何门都看不见它')
+            code, out = run('check_quote_integrity.py', argv)
             if code == -1:
                 review['checker_missing'] = out
             elif '未命中 0 个' not in out:
                 review['quote_integrity'] = ('有引文未在语料中找到'
-                                             '——**未命中不等于伪造**，须人工核对')
+                                             '——**未命中不等于伪造**，须人工核对；'
+                                             '但「改了 OCR 错字再当逐字引文」也落在这里')
 
     # ── 只列不判：写进 warnings，不拦 ────────────────────────────────
     for script, argv, key in (

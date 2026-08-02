@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """盲判载荷：A/B 由 sha256(case_id) % 2 定，**评委不给判据**。"""
-import hashlib, json, pathlib
+import hashlib, json, pathlib, sys
+OUT = pathlib.Path(sys.argv[1] if len(sys.argv) > 1 else "round1")
+OUT.mkdir(parents=True, exist_ok=True)
 cand = json.loads(pathlib.Path("ej_candidate.json").read_text(encoding="utf-8"))
 base = json.loads(pathlib.Path("round1/ej_baseline_bare.json").read_text(encoding="utf-8"))
 cases = {json.loads(l)["case_id"]: json.loads(l)["prompt"]
@@ -15,10 +17,16 @@ for cid in sorted(cases):
     key[cid] = {"A": "candidate" if flip == 0 else "baseline",
                 "B": "baseline" if flip == 0 else "candidate"}
     payload.append({"case_id": cid, "question": cases[cid], "A": A, "B": B})
-pathlib.Path("round1/ej_blind_payload.json").write_text(
+(OUT / "ej_blind_payload.json").write_text(
     json.dumps(payload, ensure_ascii=False, indent=1), encoding="utf-8")
-pathlib.Path("round1/ej_blind_key.json").write_text(
+(OUT / "ej_blind_key.json").write_text(
     json.dumps(key, ensure_ascii=False, indent=1), encoding="utf-8")
+# 判据文件必须逐轮一致（映射只由 case_id 定）。第 1 轮已有则比对，不一致即中止。
+r1key = pathlib.Path("round1/ej_blind_key.json")
+if OUT.name != "round1" and r1key.is_file():
+    if json.loads(r1key.read_text(encoding="utf-8")) != key:
+        raise SystemExit("★ A/B 映射与第 1 轮不一致——中止，不许在轮次之间换判据")
+    print("A/B 映射与第 1 轮逐条一致 ✅")
 la=[len(p["A"]) for p in payload]; lb=[len(p["B"]) for p in payload]
 print(f"{len(payload)} 对；A 均长 {sum(la)//len(la)}，B 均长 {sum(lb)//len(lb)}"
       f"（差 {abs(sum(la)-sum(lb))*100//max(sum(la),sum(lb))}%）")
