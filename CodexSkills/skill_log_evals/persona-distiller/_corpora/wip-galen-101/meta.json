@@ -2,7 +2,7 @@
   "attribution_basis": {
     "authority": "Galen, De libris propriis（《论我自己的书》, TLG tlg0057.tlg104）与 De ordine librorum suorum（《论我自己著作的次序》, tlg105）——**由主体本人编纂、明确为对抗市面冒名伪托本而写的真作目录**。该书开篇即记 Sandalarium 书肆一幕：路人读了两行题为「医师盖伦」的书便扔下，说「οὐκ ἔστι λέξις αὕτη Γαληνοῦ」（这不是盖伦的文风）。二次权威：Gerhard Fichtner, CORPUS GALENICUM: Bibliographie der galenischen und pseudogalenischen Werke（CMG/BBAW, 2019-12 版, 225 页），按 Kühn 次序与 TLG ID 逐条标注真伪。",
     "citation": "https://raw.githubusercontent.com/galenus-verbatim/galenus_cts/master/data/tlg0057/tlg104/tlg0057.tlg104.verbatim-grc1.xml ｜ https://cmg.bbaw.de/fileadmin/Webdateien/Dateien/Galen-Bibliographie_2019-12y.pdf ｜ https://bmcr.brynmawr.edu/2014/2014.08.17/",
-    "disputed_policy": "四步裁定，且**默认怀疑**：① 从 tlg104/tlg105 解析出他本人开列的书名；② 逐条对照 Fichtner 目录；③ 不在①且在②中标为伪/疑者 → 一律 tier P1-D，**永不计入 P1**；④ **必须写明①是必要不充分条件**——他中年写成该目录并多次修订，确凿为真的晚期作品（如 2005 年才重见天日的 De indolentia）不在其列。**不在目录里是证据，不是证明。**另：galenus_cts 与 First1KGreek **都没有机读的真伪标记**（105 部里只有 1 个加星，是噪声不是体系），**照单全收会让伪作以 P1 身份进账本而无人拦截**——本条政策存在的直接原因。Kühn 第 XIX 卷是伪作集散地（过半为伪托），**不得整卷灌入**。",
+    "disputed_policy": "四步裁定，且**默认怀疑**：① 从 tlg104/tlg105 解析出他本人开列的书名；② 逐条对照 Fichtner 目录；③ 不在①且在②中标为伪/疑者 → 一律 tier P1-D，**永不计入 P1**；④ **必须写明①是必要不充分条件**——他中年写成该目录并多次修订，晚出的作品它照不到。★ 2026-08-02 订正：此处原举《De indolentia》为例，**举错了**——该书的书名**恰恰在《De libris propriis》的伦理类里**，学界正是据此知道它曾经存在；2005 年 Vlatadon 14 重现的是**文本**，不是这条书目记载。**这个错误是我从探源报告照抄的，没有核。** 正确的例子须另找，在找到之前本条只保留原则表述，不举例。另：galenus_cts 与 First1KGreek **都没有机读的真伪标记**（105 部里只有 1 个加星，是噪声不是体系），**照单全收会让伪作以 P1 身份进账本而无人拦截**——本条政策存在的直接原因。Kühn 第 XIX 卷是伪作集散地（过半为伪托），**不得整卷灌入**。",
     "disputed_works": [
       {
         "grc_words": 1591,
