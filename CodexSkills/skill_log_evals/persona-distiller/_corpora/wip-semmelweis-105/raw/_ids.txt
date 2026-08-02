@@ -1,0 +1,60 @@
+b33628907|biography|1923|Semmelweis und Lister|https://archive.org/details/b33628907
+b21912944|biography|1882|Ignaz Philipp Semmelweiss : sein Leben und seine Lehre, zugleich ein Beitrag zur Lehre der fieberhaften Wundkrankheiten|https://archive.org/details/b21912944
+pathfindersinmed00robiiala|biography|1912|Pathfinders in medicine|https://archive.org/details/pathfindersinmed00robiiala
+b30631178|biography|1938|Semmelweis : le sauveur des mères|https://archive.org/details/b30631178
+ignazphilippsemm00schuoft|biography|1905|Ignaz Philipp Semmelweis; sein Leben und Wirken. Urteile der Mit- und Nachwelt|https://archive.org/details/ignazphilippsemm00schuoft
+ignazphilippsem00semmgoog|biography|1905|Ignaz Philipp Semmelweis: Sein Leben und wirken|https://archive.org/details/ignazphilippsem00semmgoog
+IA40153705_0040|biography|1934|Semmelweis: Sa vie tragique et ses œuvres (1818-1865)|https://archive.org/details/IA40153705_0040
+semmelweishislif00sinc|biography|1909|Semmelweis, his life and his doctrine, a chapter in the history of medicine|https://archive.org/details/semmelweishislif00sinc
+b21471502|biography|1909|Semmelweis his life and doctrine [electronic resource] : a chapter in the history of medicine|https://archive.org/details/b21471502
+b3339037x|biography|1909|Semmelweis: his life and doctrine : a chapter in the history of medicine|https://archive.org/details/b3339037x
+lavieluvredephil0013vari|biography|1924|La Vie & L'Œuvre De Philippe Ignace Semmelweis (1818-1865)|https://archive.org/details/lavieluvredephil0013vari
+ignazphilippsem00waldgoog|biography|1905|Ignaz Philipp Semmelweis, sein Leben und Wirken: Urteile der Mit- und Nachwelt|https://archive.org/details/ignazphilippsem00waldgoog
+b24875788|biography|1905|Ignaz Philipp Semmelweis : sein Leben und Wirken|https://archive.org/details/b24875788
+b33396929|biography|1905|Ignaz Philipp Semmelweis, sein Leben und Wirken : Urteile der Mit- und Nachwelt|https://archive.org/details/b33396929
+sim_british-medical-journal_january-7-july-1-1865_1|external|Janu|British Medical Journal  January 7-July 1, 1865: Vol 1|https://archive.org/details/sim_british-medical-journal_january-7-july-1-1865_1
+b24990565|external|1861|Klinik der Geburtskunde Beobachtungen und Untersuchungen aus der Gebäranstalt zu München|https://archive.org/details/b24990565
+b21917681_0001|external|1864|Klinik der Geburtskunde : Beobachtungen und Untersuchungen aus der Gebäranstalt zu München|https://archive.org/details/b21917681_0001
+paper-doi-10_1097_00000441-185507000-00093|external|1855|Epidemic Puerperal Fever which recently prevailed in the Dublin Lying-in Hospital|https://archive.org/details/paper-doi-10_1097_00000441-185507000-00093
+daspuerperalfieb0000unse|external|1862|Das Puerperalfieber im St. Petersburger Hebammen-Institute von 1845-1859|https://archive.org/details/daspuerperalfieb0000unse
+b22298769|external|1848|Zur Gynäkologie : Beitrag|https://archive.org/details/b22298769
+b30562077|external|1855|An account of the recent epidemic of puerperal fever as it appeared in the Dublin Lying-in Hospital|https://archive.org/details/b30562077
+medicochirurgic00pategoog|external|1849|medico chirurgical transactions|https://archive.org/details/medicochirurgic00pategoog
+newenglandquart00parkgoog|external|1843|The New England quarterly journal of medicine and surgery. Volume I|https://archive.org/details/newenglandquart00parkgoog
+obstetricmemoirs01simp|external|1855|The obstetric memoirs and contributions of James Y. Simpson;|https://archive.org/details/obstetricmemoirs01simp
+obstetricmemoirs02simp|external|1855|The obstetric memoirs and contributions of James Y. Simpson|https://archive.org/details/obstetricmemoirs02simp
+paper-doi-10_1097_00000441-186504000-00089|external|1865|63. Mortality in the Vienna Lying-in Hospital|https://archive.org/details/paper-doi-10_1097_00000441-186504000-00089
+transactions-of-the-obstetrical-society-of-london_1863_4|external|1863|Transactions of the Obstetrical Society of London  1863: Vol 4|https://archive.org/details/transactions-of-the-obstetrical-society-of-london_1863_4
+transactionsobs11londgoog|external|1904|Transactions|https://archive.org/details/transactionsobs11londgoog
+dta:semmelweis_kindbettfieber_1861|writings|1861|Die Aetiologie, der Begriff und die Prophylaxis des Kindbettfiebers|https://www.deutschestextarchiv.de/book/download_txt/semmelweis_kindbettfieber_1861
+bub_gb_oVDSUzGAU1cC|writings|1905|Semmelweis' gesammelte Werke|https://archive.org/details/bub_gb_oVDSUzGAU1cC
+semmelweisgesamm00semm|writings|1905|Semmelweis' gesammelte Werke|https://archive.org/details/semmelweisgesamm00semm
+semmelweisgesam00semmgoog|writings|1905|Semmelweis' gesammelte Werke|https://archive.org/details/semmelweisgesam00semmgoog
+semmelweisgesam01semmgoog|writings|1905|Semmelweis' gesammelte Werke|https://archive.org/details/semmelweisgesam01semmgoog
+offenerbriefsm00semm|writings|1862|Offener Brief an sämmtliche Professoren der Geburtshilfe|https://archive.org/details/offenerbriefsm00semm
+b33674164|writings|1861|Zwei offene Briefe an Hofrath Dr. Eduard Casp. Jac. v. Siebold und an Hofrath Dr. F.W. Scanzoni|https://archive.org/details/b33674164
+zweioffenebriefe40261gut|writings|n.d.|Zwei offene Briefe an Dr. J. Spaeth, Professor der Geburtshilfe an der k. k. Josefs-Akademie in Wien, und an Hofrath Dr. F. W. Scanzoni, Professor der Geburtshilfe zu Würzburg|https://archive.org/details/zweioffenebriefe40261gut
+b33674176|writings|1861|Zwei offene Briefe an Dr. J. Spaeth und an Hofrath Dr. F.W. Scanzoni|https://archive.org/details/b33674176
+essaysonpuerpera00chur|external|1849|Essays on the puerperal fever and other diseases peculiar to women : elected from the writings of British authors previous to the close of the eighteenth century|https://archive.org/details/essaysonpuerpera00chur
+b31363507|external|1906|Oliver Wendell Holmes and the contagiousness of puerperal fever|https://archive.org/details/b31363507
+dasscheidensekre00dd|external|1892|Das Scheidensekret und seine Bedeutung für das Puerperalfieber|https://archive.org/details/dasscheidensekre00dd
+diekindbettfiebe00eise|external|1834|Die Kindbettfieber : ein naturhistorischer Versuch|https://archive.org/details/diekindbettfiebe00eise
+b33287454|external|1834|Die Kindbettfieber. Ein naturhistorischer Versuch|https://archive.org/details/b33287454
+10471618bsb|external|1837|Die Wundfieber und die Kindbettfieber|https://archive.org/details/10471618bsb
+bub_gb_dHI_AAAAcAAJ|external|1837|Die Wundfieber und Kindbettfieber|https://archive.org/details/bub_gb_dHI_AAAAcAAJ
+epidemischepuerp0000wilh|external|1867|epidemische Puerperalfieber|https://archive.org/details/epidemischepuerp0000wilh
+daskindbettfiebe00ferg|external|1840|Das Kindbettfieber|https://archive.org/details/daskindbettfiebe00ferg
+b2231720x|external|1847|Beiträge zum Puerperalfieber : im Winter 1846/47 in Würzburg gesammelt und als Inaugural-Abhandlung der medicinischen Facultät der Julius-Maximilians-Universität vorgelegt|https://archive.org/details/b2231720x
+medicalessays1895holm|external|1895|Medical essays, 1842-1882|https://archive.org/details/medicalessays1895holm
+b21705641|external|1862|Das Puerperalfieber im St. Petersburger Hebammen-Institute von 1845 bis 1859 mit Bezugnahme auf gleichzeitige Verhältnisse in den übrigen Gebärhäusern und dem Weichbilde der Stadt St. Petersburg|https://archive.org/details/b21705641
+IA41553622_0074|external|1865|Das Puerperalfieber: Eine pathologisch-aetiologische Betrachtung.|https://archive.org/details/IA41553622_0074
+daskindbettfiebe00litz|external|1844|Das Kindbettfieber in nosologischer, geschichtlicher und therapeutischer Beziehung|https://archive.org/details/daskindbettfiebe00litz
+b21460553|external|1849|Obstetrics, the science and the art [electronic resource]|https://archive.org/details/b21460553
+b21714290|external|1878|Die Arbeiten der Puerperalfieber-Commission der Gesellschaft für Geburtshülfe und Gynäkologie in Berlin|https://archive.org/details/b21714290
+10248453bsb|external|1861|Compendium der Geburtshilfe: mit 102 Holzschnitten|https://archive.org/details/10248453bsb
+b21701507|external|1861|Compendium der Geburtshilfe|https://archive.org/details/b21701507
+lehrbuchdergebu01scangoog|external|1853|Lehrbuch der Geburtshilfe|https://archive.org/details/lehrbuchdergebu01scangoog
+lehrbuchdergebu03scangoog|external|1867|Lehrbuch der Geburtshilfe v. 3|https://archive.org/details/lehrbuchdergebu03scangoog
+dieanzeigepflic00veitgoog|external|1908|Die Anzeigepflicht beim Kindbettfieber|https://archive.org/details/dieanzeigepflic00veitgoog
+gesammelteabhand00virc|external|1862|Gesammelte Abhandlungen zur wissenschaftlichen Medicin|https://archive.org/details/gesammelteabhand00virc
+IA40153718_0028|external|1864|Etwas über Puerperalfieber|https://archive.org/details/IA40153718_0028

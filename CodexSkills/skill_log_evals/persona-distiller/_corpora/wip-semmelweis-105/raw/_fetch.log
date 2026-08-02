@@ -1,0 +1,116 @@
+OK      semmelweisgesam00semmgoog -> w_gesammelte_werke_v1_1905.txt [semmelweisgesam00semmgoog_djvu.txt] OK size=2135679
+OK      semmelweisgesam01semmgoog -> w_gesammelte_werke_v2_1905.txt [semmelweisgesam01semmgoog_djvu.txt] OK size=2151502
+OK      zweioffenebriefe40261gut -> w_zwei_offene_briefe_spaeth_scanzoni_1861.txt [40261-8.txt] OK size=51947
+OK      offenerbriefsm00semm -> w_offener_brief_saemmtliche_professoren_1862.txt [offenerbriefsm00semm_djvu.txt] OK size=173871
+OK      ignazphilippsemm00schuoft -> b_schuerer_waldheim_leben_wirken_1905.txt [ignazphilippsemm00schuoft_djvu.txt] OK size=934512
+OK      ignazphilippsem00waldgoog -> b_waldheim_leben_wirken_alt_1905.txt [ignazphilippsem00waldgoog_djvu.txt] OK size=834941
+OK      b33396929 -> b_wellcome_leben_wirken_1905.txt [b33396929_djvu.txt] OK size=822653
+OK      ignazphilippsem00semmgoog -> b_semmelweis_leben_wirken_g_1905.txt [ignazphilippsem00semmgoog_djvu.txt] OK size=772613
+OK      b24875788 -> b_wellcome_b24875788_1905.txt [b24875788_djvu.txt] OK size=920565
+OK      semmelweishislif00sinc -> b_sinclair_life_doctrine_1909.txt [semmelweishislif00sinc_djvu.txt] OK size=939483
+--- batch done: 10 ok, 0 failed ---
+OK      zeitschriftderk00unkngoog -> x_zeitschrift_gesellschaft_aerzte_wien_v0.txt [zeitschriftderk00unkngoog_djvu.txt] OK size=1412248
+OK      zeitschriftderk01unkngoog -> x_zeitschrift_gesellschaft_aerzte_wien_v1.txt [zeitschriftderk01unkngoog_djvu.txt] OK size=3023286
+OK      zeitschriftderk02unkngoog -> x_zeitschrift_gesellschaft_aerzte_wien_v2.txt [zeitschriftderk02unkngoog_djvu.txt] OK size=3236459
+OK      zeitschriftderk03unkngoog -> x_zeitschrift_gesellschaft_aerzte_wien_v3.txt [zeitschriftderk03unkngoog_djvu.txt] OK size=3417229
+OK      zeitschriftderk04unkngoog -> x_zeitschrift_gesellschaft_aerzte_wien_v4.txt [zeitschriftderk04unkngoog_djvu.txt] OK size=1999696
+OK      medizinischejah00wiengoog -> x_medizinische_jahrbuecher_v0.txt [medizinischejah00wiengoog_djvu.txt] OK size=1706636
+OK      b33674164 -> w_zwei_offene_briefe_siebold_scanzoni_1861.txt [b33674164_djvu.txt] OK size=66177
+OK      b33674176 -> w_zwei_offene_briefe_spaeth_scanzoni_wellcome_1861.txt [b33674176_djvu.txt] OK size=32045
+OK      medizinischejah01wiengoog -> x_medizinische_jahrbuecher_v1.txt [medizinischejah01wiengoog_djvu.txt] OK size=1552031
+OK      medizinischejah02wiengoog -> x_medizinische_jahrbuecher_v2.txt [medizinischejah02wiengoog_djvu.txt] OK size=1588371
+OK      bub_gb_oVDSUzGAU1cC -> w_gesammelte_werke_gb_1905.txt [bub_gb_oVDSUzGAU1cC_djvu.txt] OK size=2142957
+OK      medizinischejah03wiengoog -> x_medizinische_jahrbuecher_v3.txt [medizinischejah03wiengoog_djvu.txt] OK size=1730308
+OK      semmelweisgesamm00semm -> w_gesammelte_werke_ia_1905.txt [semmelweisgesamm00semm_djvu.txt] OK size=2119777
+OK      medizinischejah04wiengoog -> x_medizinische_jahrbuecher_v4.txt [medizinischejah04wiengoog_djvu.txt] OK size=2775665
+FAIL    etiologyconcepta0000unse -> download error [etiologyconcepta0000unse_djvu.txt]: HTTP Error 401: Unauthorized
+OK      medizinischejah05wiengoog -> x_medizinische_jahrbuecher_v5.txt [medizinischejah05wiengoog_djvu.txt] OK size=1378446
+--- batch done: 11 ok, 0 failed ---
+OK      b21912944 -> b_hegar_semmelweis_leben_lehre_1882.txt [b21912944_djvu.txt] OK size=111530
+OK      b30631178 -> b_sauveur_des_meres_1938.txt [b30631178_djvu.txt] OK size=33908
+OK      IA40153705_0040 -> b_semmelweis_vie_tragique_1934.txt [IA40153705_0040_djvu.txt] OK size=186935
+OK      lavieluvredephil0013vari -> b_vie_oeuvre_semmelweis_1924.txt [lavieluvredephil0013vari_djvu.txt] OK size=130860
+FAIL    meaculpalifework0000loui -> download error [meaculpalifework0000loui_djvu.txt]: HTTP Error 401: Unauthorized
+DELETED x_zeitschrift_gesellschaft_aerzte_wien_v0.txt -> IRRELEVANT-VOLUME (valid text but ~0 Semmelweis/puerperal content; wrong year-volume) size=1412248
+DELETED x_zeitschrift_gesellschaft_aerzte_wien_v1.txt -> IRRELEVANT-VOLUME (valid text but ~0 Semmelweis/puerperal content; wrong year-volume) size=3023286
+DELETED x_zeitschrift_gesellschaft_aerzte_wien_v2.txt -> IRRELEVANT-VOLUME (valid text but ~0 Semmelweis/puerperal content; wrong year-volume) size=3236459
+DELETED x_zeitschrift_gesellschaft_aerzte_wien_v3.txt -> IRRELEVANT-VOLUME (valid text but ~0 Semmelweis/puerperal content; wrong year-volume) size=3417229
+DELETED x_zeitschrift_gesellschaft_aerzte_wien_v4.txt -> IRRELEVANT-VOLUME (valid text but ~0 Semmelweis/puerperal content; wrong year-volume) size=1999696
+DELETED x_medizinische_jahrbuecher_v0.txt -> IRRELEVANT-VOLUME (valid text but ~0 Semmelweis/puerperal content; wrong year-volume) size=1706636
+DELETED x_medizinische_jahrbuecher_v1.txt -> IRRELEVANT-VOLUME (valid text but ~0 Semmelweis/puerperal content; wrong year-volume) size=1552031
+OK      pathfindersinmed00robiiala -> b_pathfinders_in_medicine_1912.txt [pathfindersinmed00robiiala_djvu.txt] OK size=640113
+FAIL    semmelweiseskora0000bene -> download error [semmelweiseskora0000bene_djvu.txt]: HTTP Error 401: Unauthorized
+--- batch done: 9 ok, 3 failed ---
+OK      b21705641 -> x_hugenberger_puerperalfieber_petersburg_1862.txt [b21705641_djvu.txt] OK size=191137
+OK      daskindbettfiebe00litz -> x_litzmann_das_kindbettfieber_1844.txt [daskindbettfiebe00litz_djvu.txt] OK size=884032
+OK      diekindbettfiebe00eise -> x_eisenmann_die_kindbettfieber_1834.txt [diekindbettfiebe00eise_djvu.txt] OK size=348910
+OK      bub_gb_dHI_AAAAcAAJ -> x_eisenmann_wundfieber_kindbettfieber_1837.txt [bub_gb_dHI_AAAAcAAJ_djvu.txt] OK size=1435021
+OK      essaysonpuerpera00chur -> x_churchill_essays_puerperal_fever_1849.txt [essaysonpuerpera00chur_djvu.txt] OK size=1560473
+OK      b21460553 -> x_meigs_obstetrics_science_art_1849.txt [b21460553_djvu.txt] OK size=1991883
+OK      daskindbettfiebe00ferg -> x_ferguson_das_kindbettfieber_1840.txt [daskindbettfiebe00ferg_djvu.txt] OK size=604860
+OK      b2231720x -> x_heymer_beitraege_puerperalfieber_wuerzburg_1847.txt [b2231720x_djvu.txt] OK size=87088
+OK      b31363507 -> x_cullingworth_holmes_contagiousness_1906.txt [b31363507_djvu.txt] OK size=160232
+OK      medicalessays1895holm -> x_holmes_medical_essays_1842_1882.txt [medicalessays1895holm_djvu.txt] OK size=944050
+OK      lehrbuchdergebu01scangoog -> x_scanzoni_lehrbuch_geburtshilfe_1853.txt [lehrbuchdergebu01scangoog_djvu.txt] OK size=2689485
+OK      b21701507 -> x_scanzoni_compendium_geburtshilfe_1861.txt [b21701507_djvu.txt] OK size=1274979
+OK      gesammelteabhand00virc -> x_virchow_gesammelte_abhandlungen_1862.txt [gesammelteabhand00virc_djvu.txt] OK size=3754339
+OK      b21714290 -> x_puerperalfieber_commission_berlin_1878.txt [b21714290_djvu.txt] OK size=422446
+OK      IA41553622_0074 -> x_kopseel_das_puerperalfieber_1865.txt [IA41553622_0074_djvu.txt] OK size=53626
+OK      IA40153718_0028 -> x_zwick_etwas_ueber_puerperalfieber_1864.txt [IA40153718_0028_djvu.txt] OK size=50719
+OK      epidemischepuerp0000wilh -> x_epidemische_puerperalfieber_1867.txt [epidemischepuerp0000wilh_djvu.txt] OK size=53890
+OK      10248453bsb -> x_scanzoni_compendium_bsb_1861.txt [10248453bsb_djvu.txt] OK size=1107040
+OK      lehrbuchdergebu03scangoog -> x_scanzoni_lehrbuch_geburtshilfe_v3_1867.txt [lehrbuchdergebu03scangoog_djvu.txt] OK size=1668518
+OK      dasscheidensekre00dd -> x_doederlein_scheidensekret_puerperalfieber_1892.txt [dasscheidensekre00dd_djvu.txt] OK size=169661
+--- batch done: 20 ok, 0 failed ---
+OK      medicochirurgic00pategoog -> p_medico_chirurgical_transactions_1849_routh.txt [medicochirurgic00pategoog_djvu.txt] OK size=371588
+OK      transactionsobs11londgoog -> p_transactions_obstetrical_society_london.txt [transactionsobs11londgoog_djvu.txt] OK size=1440907
+OK      transactions-of-the-obstetrical-society-of-london_1863_4 -> p_transactions_obstetrical_society_1863_v4.txt [transactions-of-the-obstetrical-society-of-london_1863_4_djvu.txt] OK size=742409
+OK      sim_british-medical-journal_january-7-july-1-1865_1 -> p_bmj_1865_v1.txt [sim_british-medical-journal_january-7-july-1-1865_1_djvu.txt] OK size=5004193
+OK      newenglandquart00parkgoog -> p_new_england_quarterly_1843_holmes.txt [newenglandquart00parkgoog_djvu.txt] OK size=1865017
+FAIL    b31364159 -> metadata has no files (item dark/restricted?)
+OK      b3339037x -> b_sinclair_life_doctrine_wellcome.txt [b3339037x_djvu.txt] OK size=841194
+OK      b21471502 -> b_sinclair_life_doctrine_glasgow.txt [b21471502_djvu.txt] OK size=941113
+FAIL    b33390150 -> download error [b33390150_djvu.txt]: HTTP Error 401: Unauthorized
+FAIL    b33394465 -> download error [b33394465_djvu.txt]: HTTP Error 401: Unauthorized
+OK      b33628907 -> b_brunn_semmelweis_und_lister.txt [b33628907_djvu.txt] OK size=13853
+--- batch done: 8 ok, 3 failed ---
+DELETED x_medizinische_jahrbuecher_v2.txt -> IRRELEVANT-VOLUME (fuzzy re-check: Semmelweis=0; wrong year-volume) size=1588371
+DELETED x_medizinische_jahrbuecher_v3.txt -> IRRELEVANT-VOLUME (fuzzy re-check: Semmelweis=0; wrong year-volume) size=1730308
+DELETED x_medizinische_jahrbuecher_v4.txt -> IRRELEVANT-VOLUME (fuzzy re-check: Semmelweis=0; wrong year-volume) size=2775665
+DELETED x_medizinische_jahrbuecher_v5.txt -> IRRELEVANT-VOLUME (fuzzy re-check: Semmelweis=0; wrong year-volume) size=1378446
+OK      paper-doi-10_1097_00000441-186504000-00089 -> p_spaeth_mortality_vienna_lying_in_1865.txt [paper-doi-10_1097_00000441-186504000-00089_djvu.txt] OK size=18268
+FAIL    paper-doi-10_1097_00000441-186204000-00093 -> download error [paper-doi-10_1097_00000441-186204000-00093_djvu.txt]: HTTP Error 500: Internal Server Error
+OK      paper-doi-10_1097_00000441-185507000-00093 -> p_epidemic_puerperal_dublin_1855.txt [paper-doi-10_1097_00000441-185507000-00093_djvu.txt] OK size=35610
+OK      b30562077 -> p_mcclintock_epidemic_puerperal_dublin_1855.txt [b30562077_djvu.txt] OK size=54327
+OK      b22298769 -> p_martin_zur_gynaekologie_1848.txt [b22298769_djvu.txt] OK size=524010
+OK      bub_gb_WIlCAAAAcAAJ -> p_anselm_martin_gebaeranstalt_muenchen_1854.txt [bub_gb_WIlCAAAAcAAJ_djvu.txt] OK size=65974
+OK      b21917681_0001 -> p_buhl_klinik_geburtskunde_1864_v1.txt [b21917681_0001_djvu.txt] OK size=906069
+OK      b24990565 -> p_buhl_klinik_geburtskunde_1861.txt [b24990565_djvu.txt] OK size=1606921
+OK      obstetricmemoirs02simp -> p_simpson_obstetric_memoirs_v2.txt [obstetricmemoirs02simp_djvu.txt] OK size=2528203
+OK      obstetricmemoirs01simp -> p_simpson_obstetric_memoirs_v1.txt [obstetricmemoirs01simp_djvu.txt] OK size=2426966
+OK      daspuerperalfieb0000unse -> p_hugenberger_puerperalfieber_alt_1862.txt [daspuerperalfieb0000unse_djvu.txt] OK size=187761
+OK      b33287454 -> x_eisenmann_kindbettfieber_wellcome_1834.txt [b33287454_djvu.txt] OK size=306121
+OK      10471618bsb -> x_eisenmann_wundfieber_bsb_1837.txt [10471618bsb_djvu.txt] OK size=1304512
+OK      dieanzeigepflic00veitgoog -> x_veit_anzeigepflicht_kindbettfieber_1908.txt [dieanzeigepflic00veitgoog_djvu.txt] OK size=61563
+--- batch done: 13 ok, 1 failed ---
+DELETED p_anselm_martin_gebaeranstalt_muenchen_1854.txt -> IRRELEVANT (Semmelweis=0, puerperal=3; Munich annual report, off-topic) size=65974
+
+===== RUN SUMMARY =====
+corpus files kept: 60 | total bytes: 56,825,794 (54.2 MB)
+categories: writings=9  external=37  biography=14
+attempts: 71 OK / 7 FAIL / 12 DELETED
+DELETED breakdown: 0 HTML/error pages ; 12 valid-text-but-irrelevant (wrong journal year-volumes, Semmelweis=0 under OCR-tolerant matching)
+files < 2000 bytes: NONE
+final validation: all 60 files re-opened and head-inspected; 0 error pages present.
+
+QUALITY NOTES (not deletions, but the reader must know):
+- w_offener_brief_saemmtliche_professoren_1862.txt : authentic 1862 pamphlet BUT printed in Fraktur;
+  OCR is badly mangled (German-stopword rate 0.9% vs ~17% for clean German scans). Clean text of the
+  same letter IS present inside the Gesammelte Werke files.
+- The 4 w_gesammelte_werke_*.txt files are FOUR OCR SCANS OF THE SAME single-volume book
+  (Gyoery ed., 1905) - verified by marker-phrase profiling, not four different volumes.
+- Further near-duplicate scan clusters: Sinclair biography x3, Schuerer v. Waldheim biography x4,
+  Eisenmann 1834 x2, Scanzoni Compendium 1861 x2, Hugenberger 1862 x2, Dublin-1855 x2.
+- DISTINCT primary WORKS held = 5 (Aetiologie 1861; Gesammelte Werke 1905; Zwei offene Briefe
+  Spaeth+Scanzoni 1861; Zwei offene Briefe Siebold+Scanzoni 1861; Offener Brief an saemmtliche
+  Professoren 1862). Semmelweis published only one book and four open-letter pamphlets in his life.
