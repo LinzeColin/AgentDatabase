@@ -107,3 +107,83 @@ v0.0.0.36 实测：四个已拒发人物的 `work-method` 断言**恰好都是 1
 Gallica 只数字化了 vol.1（`ark:/12148/bpt6k6473241n`，公有领域、OCR 99.96%），取文被 altcha 拦死；
 vol.2–4 全网无数字化（BnF 著录 `cb32510650x` 记 4 vol.）。archive.org 该题名 0 命中。
 部分补偿：全集 t.VII 与 `collectiondartic00past`(1883，**生前自编**，3.8 MB 含大量书信)。
+
+---
+
+# 续记 · 2026-08-03（第 1 轮判完：**真 delta +0.0836，过 deep 门**）
+
+## 结果
+
+| 项 | 值 | 门 | |
+|---|---:|---:|---|
+| `candidate_overall` | **0.8247** | 0.80 | ✅ |
+| **真 delta** | **+0.0836** | **0.07（deep）** | **✅** |
+| `boundary` | 0.8825 | 0.85 | ✅ |
+| `fact-preservation` | 0.885 | **0.93** | ❌ |
+
+逐对 **52 胜 / 0 平 / 12 负**（64 对）；**14/16 套组为正**。
+两侧标签均长差 4%（逐题随机化后长度不携带信号）。
+
+## ★★★ v0.0.0.36 的判断被实测证实
+
+四个套组在前四个人身上 **0/4 恒负**，在本人物身上**全部转正**：
+
+| 套组 | 前四人合并 | Pasteur |
+|---|---:|---:|
+| `planning-fidelity` | −0.0508 | **+0.0925** |
+| `task-completion` | −0.0675 | **+0.0775** |
+| `tool-use` | −0.0783 | **+0.0500** |
+| `token-efficiency` | −0.0867 | **+0.0225** |
+
+差别在断言层：前四人 `work-method` 各只有 1 条（Galen/Jenner 0 条可复用），
+**本人物 4 条且全部判为可复用**（有步骤且有验证/弃置判据）。
+
+**但不要把这条当成因果定论**：本人物换了语料、换了语言、换了出题，
+可断言的是「补上可复用做法之后那四组不再恒负」，**不是「补方法必然转正」**。
+
+## ★ 两席各自独立抓出的错（**两个为负的套组正好对应它们**）
+
+### 一、`contrast −0.1500`：**我把 Pouchet 的立场挂到了一本不谈这件事的书上**
+
+我引《Théorie positive de l'ovulation spontanée》(1847) 作为其自然发生说主张的出处。
+**核实：该书扉页是「THÉORIE POSITIVE DE L'OVULATION SPONTANÉE ET DE LA FÉCONDATION」——
+讲自发排卵与受精，生殖生理学，与自然发生说无关，且早于争论十二年。**
+自然发生说那份是 `htrognieou00pouc.txt`（Hétérogénie 相关）。
+
+> **`ovulation spontanée` 与 `génération spontanée` 只差一个词，我按共同的 `spontanée` 匹配了。**
+> 这是 Harvey #103「编造对手立场」的变体——**这次立场没编，书挂错了**。
+> `check_quote_integrity` 挡不住（不涉引文）；**两席都是从书名本身看出来的。**
+
+**须改的地方有三处**：`04-external.md`、断言的 `counter_source_ids`、`lp-contrast-02` 答案。
+
+### 二、`known −0.0375`：**我把英文传记的句子标成「原文」**
+
+`lp-known-01` 引 `He took up the trade of a tanner` 并称「原文作」——
+**那是英译传记，而同一批答案的 `lp-boundary-02` 刚立下「英文是译文不是我的话」。**
+
+### 三、其余四条（席 D／席 E 各自报，我核实属实）
+
+1. **「灼烧空气」自相矛盾**：`tool-use-02` 斥前人 calciner l'air 为致命错，
+   而 `tool-use-01`/`voice-02`/`task-completion-02` 的核心装置正是烧红的铂管。
+   **区别（灼烧进气路径 vs 改造受测空气本身）是真的，但我从没说出来。**
+2. **波普尔框架的时代错置**：「这个学说禁止什么」以第一人称当成他当年的自觉方法，**三处**，
+   从未标明是后人的分析轴。——这是「把后人加的东西说成当时就有」的一种。
+3. **12 月 10 日系年错**：CR t.92 是 1881 上半年卷，而文中说「le 10 décembre **dernier**」，
+   **指的是 1880 年 12 月 10 日**，不是 1881。（席 D 由卷次—年份映射算出。）
+4. **「二十条担保十五六条」口径不一**：`capability-calibration-01` 明说那是「担保」不是结果统计，
+   而 `fact-preservation-01`／`planning-fidelity-02` 把它当「失败率」用。
+   ——**与 Jenner 那次「27 年」同型：我在一处立了规矩，又在别处违反它。**
+5. `token-efficiency-02` 两侧自报字数都不对（我报 29，实为 28／含标点 31，**含标点即超题目的三十字硬限**）。
+
+## 下一步（第 2 轮，上限 3 轮）
+
+```bash
+# 1. 改上列 6 处（Pouchet 换书、known 引文标译文、灼烧区别写明、
+#    波普尔框架标为后人分析轴、12月10日改 1880、二十条口径统一、字数改对）
+# 2. 3 份文档加厚：decision-policy.md / strategy.md / capabilities.md（门报 placeholder）
+# 3. 32 条断言落进核心产物（claim.orphan）
+# 4. python3 build_lp_blind.py round2 && 两席重判 && python3 assemble_lp_results.py round2
+# 5. quality_check --phase release --strict —— 目标是 fact-preservation 从 0.885 抬过 0.93
+```
+
+**fact-preservation 是唯一未过的一项，而它恰好是被上述错误直接拉低的那一项。**
