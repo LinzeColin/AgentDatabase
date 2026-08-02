@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import re
 import sqlite3
+import stat
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -55,6 +56,7 @@ class FailureCompoundStore:
                     signature TEXT NOT NULL UNIQUE,
                     component TEXT NOT NULL,
                     category TEXT NOT NULL,
+                    error_code TEXT NOT NULL DEFAULT '',
                     severity TEXT NOT NULL,
                     title TEXT NOT NULL,
                     root_cause TEXT NOT NULL DEFAULT '',
@@ -98,6 +100,13 @@ class FailureCompoundStore:
                 );
                 """
             )
+            incident_columns = {
+                str(row[1]) for row in db.execute("PRAGMA table_info(incidents)")
+            }
+            if "error_code" not in incident_columns:
+                db.execute(
+                    "ALTER TABLE incidents ADD COLUMN error_code TEXT NOT NULL DEFAULT ''"
+                )
 
     def _connect(self) -> sqlite3.Connection:
         db = sqlite3.connect(self.path)
@@ -128,13 +137,27 @@ class FailureCompoundStore:
                 db.execute(
                     """
                     INSERT INTO incidents
-                    (incident_id, signature, component, category, severity, title, first_seen, last_seen)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                    (incident_id, signature, component, category, error_code, severity, title, first_seen, last_seen)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
                     """,
-                    (incident_id, signature, component, category, severity, title, occurred_at, occurred_at),
+                    (
+                        incident_id,
+                        signature,
+                        component,
+                        category,
+                        error_code,
+                        severity,
+                        title,
+                        occurred_at,
+                        occurred_at,
+                    ),
                 )
             else:
                 incident_id = str(existing["incident_id"])
+                db.execute(
+                    "UPDATE incidents SET error_code=CASE WHEN error_code='' THEN ? ELSE error_code END WHERE incident_id=?",
+                    (error_code, incident_id),
+                )
                 if db.execute("SELECT 1 FROM occurrences WHERE occurrence_id=?", (occurrence_id,)).fetchone() is None:
                     db.execute(
                         "UPDATE incidents SET last_seen=?, recurrence_count=recurrence_count+1, status='REOPENED' WHERE incident_id=?",
@@ -171,11 +194,12 @@ class FailureCompoundStore:
         red_evidence_ref: str,
         green_evidence_ref: str,
         fixed_by: str,
+        root_cause: str = "",
     ) -> str:
         required = [fixture_path, oracle, test_path, red_evidence_ref, green_evidence_ref, fixed_by]
         if any(not value.strip() for value in required):
             raise FailureCompoundError("回归资产必须同时绑定 Fixture、Oracle、测试、红灯、绿灯和修复身份")
-        asset_id = stable_id(incident_id, fixture_path, oracle, test_path, prefix="reg")
+        asset_id = stable_id(incident_id, prefix="reg")
         with self._connect() as db:
             if db.execute("SELECT 1 FROM incidents WHERE incident_id=?", (incident_id,)).fetchone() is None:
                 raise FailureCompoundError(f"Incident 不存在：{incident_id}")
@@ -198,9 +222,17 @@ class FailureCompoundStore:
             db.execute(
                 """
                 UPDATE incidents SET regression_asset_id=?, fixed_by=?, status='CLOSED',
+                    root_cause=CASE WHEN ?='' THEN root_cause ELSE ? END,
                     closure_evidence_json=? WHERE incident_id=?
                 """,
-                (asset_id, fixed_by, json.dumps([red_evidence_ref, green_evidence_ref]), incident_id),
+                (
+                    asset_id,
+                    fixed_by,
+                    root_cause,
+                    root_cause,
+                    json.dumps([red_evidence_ref, green_evidence_ref]),
+                    incident_id,
+                ),
             )
             db.commit()
         return asset_id
@@ -229,11 +261,151 @@ class FailureCompoundStore:
                 (injection_id, asset_id, injected_at, expected, observed, result, evidence_ref),
             )
             db.execute(
-                "UPDATE regression_assets SET last_result=?, last_run_at=?, blocked_recurrences=blocked_recurrences+? WHERE asset_id=?",
-                (result, injected_at, 1 if result == "PASS" else 0, asset_id),
+                """
+                UPDATE regression_assets
+                SET last_result=?, last_run_at=?, blocked_recurrences=(
+                    SELECT COUNT(*) FROM fault_injections
+                    WHERE fault_injections.asset_id=? AND result='PASS'
+                )
+                WHERE asset_id=?
+                """,
+                (result, injected_at, asset_id, asset_id),
             )
             db.commit()
         return result
+
+    def import_asset_registry(self, registry_path: Path) -> dict[str, Any]:
+        """Import evidence-bound regression assets from one protected registry.
+
+        The registry contains environment execution receipts, so it is deliberately
+        kept outside Git. Re-importing the same file is idempotent at occurrence,
+        asset and fault-injection level.
+        """
+        expanded = registry_path.expanduser()
+        if expanded.is_symlink():
+            raise FailureCompoundError("Failure Compound 资产注册表不能是符号链接")
+        resolved = expanded.resolve(strict=True)
+        if not resolved.is_file():
+            raise FailureCompoundError("Failure Compound 资产注册表必须是普通文件")
+        if stat.S_IMODE(resolved.stat().st_mode) != 0o600:
+            raise FailureCompoundError("Failure Compound 资产注册表权限必须精确为 0600")
+        try:
+            payload = json.loads(resolved.read_text(encoding="utf-8", errors="strict"))
+        except (OSError, json.JSONDecodeError) as exc:
+            raise FailureCompoundError(f"Failure Compound 资产注册表不可解析：{exc}") from exc
+        if not isinstance(payload, dict) or payload.get("schema_version") != "memory_atlas.failure_asset_registry.v1":
+            raise FailureCompoundError("Failure Compound 资产注册表 schema_version 不匹配")
+        entries = payload.get("assets")
+        if not isinstance(entries, list) or not entries:
+            raise FailureCompoundError("Failure Compound 资产注册表必须包含非空 assets")
+
+        required_text = (
+            "id",
+            "component",
+            "category",
+            "severity",
+            "error_code",
+            "title",
+            "root_cause",
+            "occurred_at",
+            "evidence_ref",
+            "environment",
+            "fixture_path",
+            "oracle",
+            "test_path",
+            "red_evidence_ref",
+            "green_evidence_ref",
+            "fixed_by",
+        )
+        seen_ids: set[str] = set()
+        normalized_entries: list[tuple[dict[str, str], dict[str, Any], dict[str, str]]] = []
+        for index, raw in enumerate(entries):
+            if not isinstance(raw, dict):
+                raise FailureCompoundError(f"assets[{index}] 必须是 JSON object")
+            values: dict[str, str] = {}
+            for key in required_text:
+                value = raw.get(key)
+                if not isinstance(value, str) or not value.strip():
+                    raise FailureCompoundError(f"assets[{index}].{key} 必须是非空字符串")
+                values[key] = value.strip()
+            if values["id"] in seen_ids:
+                raise FailureCompoundError(f"Failure Compound 资产 id 重复：{values['id']}")
+            seen_ids.add(values["id"])
+            if values["severity"] not in {"P0", "P1", "P2"}:
+                raise FailureCompoundError(f"assets[{index}].severity 不受支持")
+            details = raw.get("details", {})
+            if not isinstance(details, dict):
+                raise FailureCompoundError(f"assets[{index}].details 必须是 JSON object")
+            injection = raw.get("fault_injection")
+            if not isinstance(injection, dict):
+                raise FailureCompoundError(f"assets[{index}].fault_injection 必须存在")
+            injection_values: dict[str, str] = {}
+            for key in ("injected_at", "expected", "observed", "evidence_ref"):
+                value = injection.get(key)
+                if not isinstance(value, str) or not value.strip():
+                    raise FailureCompoundError(
+                        f"assets[{index}].fault_injection.{key} 必须是非空字符串"
+                    )
+                injection_values[key] = value.strip()
+            if injection_values["expected"] != injection_values["observed"]:
+                raise FailureCompoundError(
+                    f"Failure Compound 资产绿灯 Oracle 未通过：{values['id']}"
+                )
+            normalized_entries.append((values, details, injection_values))
+
+        imported: list[dict[str, Any]] = []
+        created_count = 0
+        for values, details, injection_values in normalized_entries:
+            incident = self.record_failure(
+                component=values["component"],
+                category=values["category"],
+                severity=values["severity"],
+                error_code=values["error_code"],
+                title=values["title"],
+                occurred_at=values["occurred_at"],
+                evidence_ref=values["evidence_ref"],
+                environment=values["environment"],
+                details={"registry_asset_id": values["id"], **details},
+            )
+            created_count += int(incident.created)
+            asset_id = self.promote_regression_asset(
+                incident_id=incident.incident_id,
+                fixture_path=values["fixture_path"],
+                oracle=values["oracle"],
+                test_path=values["test_path"],
+                red_evidence_ref=values["red_evidence_ref"],
+                green_evidence_ref=values["green_evidence_ref"],
+                fixed_by=values["fixed_by"],
+                root_cause=values["root_cause"],
+            )
+            result = self.record_fault_injection(
+                asset_id=asset_id,
+                injected_at=injection_values["injected_at"],
+                expected=injection_values["expected"],
+                observed=injection_values["observed"],
+                evidence_ref=injection_values["evidence_ref"],
+            )
+            if result != "PASS":  # all entries were validated before the first write
+                raise AssertionError("validated fault injection changed result")
+            imported.append({
+                "registry_asset_id": values["id"],
+                "incident_id": incident.incident_id,
+                "regression_asset_id": asset_id,
+                "created": incident.created,
+                "fault_injection": result,
+            })
+        snapshot = self.export_snapshot(str(payload.get("generated_at", "registry-import")))
+        return {
+            "schema_version": "memory_atlas.failure_asset_import.v1",
+            "state": "PASS",
+            "registry": str(resolved),
+            "assets_imported": len(imported),
+            "incidents_created": created_count,
+            "incident_count": snapshot["metrics"]["incident_count"],
+            "active_regression_assets": snapshot["metrics"]["active_regression_assets"],
+            "blocked_recurrences": snapshot["metrics"]["blocked_recurrences"],
+            "results": imported,
+        }
 
     def export_snapshot(self, generated_at: str) -> dict[str, Any]:
         with self._connect() as db:

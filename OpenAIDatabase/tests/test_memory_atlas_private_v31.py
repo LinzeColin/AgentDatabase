@@ -8,7 +8,7 @@ import threading
 import urllib.error
 import urllib.request
 import weakref
-from dataclasses import asdict
+from dataclasses import asdict, replace
 from datetime import datetime, timedelta, timezone
 from http.server import ThreadingHTTPServer
 from pathlib import Path
@@ -80,6 +80,41 @@ def make_config(tmp_path: Path, registry: Path) -> RuntimeConfig:
         external_origin="https://memoryatlas.example.test",
         source_host_id="fixture-mac",
     )
+
+
+def write_failure_registry(path: Path, *, generated_at: str = FIXED_TIME) -> Path:
+    payload = {
+        "schema_version": "memory_atlas.failure_asset_registry.v1",
+        "generated_at": generated_at,
+        "assets": [{
+            "id": "FIXTURE-ONE",
+            "component": "memory-atlas-fixture",
+            "category": "regression",
+            "severity": "P0",
+            "error_code": "FIXTURE_ONE",
+            "title": "fixture failure",
+            "root_cause": "fixture root cause",
+            "occurred_at": "2026-08-01T00:00:00Z",
+            "evidence_ref": "sha256://red-source",
+            "environment": "sealed-taskpack",
+            "details": {"source": "frozen"},
+            "fixture_path": "taskpack://fixtures/failure_compound_cases.json#FIXTURE-ONE",
+            "oracle": "fixture must remain blocked",
+            "test_path": "test_fixture_one",
+            "red_evidence_ref": "sha256://red",
+            "green_evidence_ref": "sha256://green",
+            "fixed_by": "git:fixture",
+            "fault_injection": {
+                "injected_at": generated_at,
+                "expected": "PASS",
+                "observed": "PASS",
+                "evidence_ref": "sha256://green",
+            },
+        }],
+    }
+    path.write_text(json.dumps(payload), encoding="utf-8")
+    path.chmod(0o600)
+    return path
 
 
 def env_for_config(tmp_path: Path, registry: Path) -> dict[str, str]:
@@ -329,6 +364,43 @@ def test_incident_deduplicates_and_counts_recurrence(tmp_path: Path) -> None:
     assert recurrence.incident_id == one.incident_id and recurrence.recurrence_count == 2
 
 
+def test_failure_store_migrates_live_v1_schema_without_losing_incidents(tmp_path: Path) -> None:
+    database = tmp_path / "failure.sqlite3"
+    with sqlite3.connect(database) as db:
+        db.execute(
+            """
+            CREATE TABLE incidents (
+                incident_id TEXT PRIMARY KEY,
+                signature TEXT NOT NULL UNIQUE,
+                component TEXT NOT NULL,
+                category TEXT NOT NULL,
+                severity TEXT NOT NULL,
+                title TEXT NOT NULL,
+                root_cause TEXT NOT NULL DEFAULT '',
+                status TEXT NOT NULL DEFAULT 'OPEN',
+                first_seen TEXT NOT NULL,
+                last_seen TEXT NOT NULL,
+                recurrence_count INTEGER NOT NULL DEFAULT 1,
+                regression_asset_id TEXT,
+                fixed_by TEXT NOT NULL DEFAULT '',
+                closure_evidence_json TEXT NOT NULL DEFAULT '[]'
+            )
+            """
+        )
+        db.execute(
+            """
+            INSERT INTO incidents
+            (incident_id, signature, component, category, severity, title, first_seen, last_seen)
+            VALUES ('inc_old', 'sig_old', 'legacy', 'runtime', 'P0', 'preserve me', ?, ?)
+            """,
+            (FIXED_TIME, FIXED_TIME),
+        )
+    snapshot = FailureCompoundStore(database).export_snapshot(FIXED_TIME)
+    assert snapshot["metrics"]["incident_count"] == 1
+    assert snapshot["incidents"][0]["incident_id"] == "inc_old"
+    assert snapshot["incidents"][0]["error_code"] == ""
+
+
 def test_regression_asset_requires_red_and_green_evidence(tmp_path: Path) -> None:
     store = FailureCompoundStore(tmp_path / "failure.sqlite3")
     incident = store.record_failure(component="x", category="y", severity="P1", error_code="E", title="z", occurred_at=FIXED_TIME, evidence_ref="e://1", environment="test")
@@ -344,6 +416,50 @@ def test_fault_injection_updates_compound_score(tmp_path: Path) -> None:
     snapshot = store.export_snapshot(FIXED_TIME)
     assert snapshot["compound_score"] == 100
     assert snapshot["metrics"]["blocked_recurrences"] == 1
+
+
+def test_fault_injection_and_registry_import_are_idempotent(tmp_path: Path) -> None:
+    store = FailureCompoundStore(tmp_path / "failure.sqlite3")
+    registry = write_failure_registry(tmp_path / "failure-assets.json")
+    first = store.import_asset_registry(registry)
+    second = store.import_asset_registry(registry)
+    snapshot = store.export_snapshot(FIXED_TIME)
+    assert first["state"] == "PASS" and first["incidents_created"] == 1
+    assert second["state"] == "PASS" and second["incidents_created"] == 0
+    assert snapshot["metrics"] == {
+        "incident_count": 1,
+        "active_regression_assets": 1,
+        "passing_regression_assets": 1,
+        "historical_recurrences": 0,
+        "blocked_recurrences": 1,
+        "asset_coverage": 1.0,
+        "last_pass_rate": 1.0,
+        "nonrecurrence_ratio": 1.0,
+    }
+    assert snapshot["incidents"][0]["error_code"] == "FIXTURE_ONE"
+    assert snapshot["incidents"][0]["root_cause"] == "fixture root cause"
+
+
+def test_failure_registry_requires_protected_regular_file(tmp_path: Path) -> None:
+    registry = write_failure_registry(tmp_path / "failure-assets.json")
+    registry.chmod(0o644)
+    with pytest.raises(FailureCompoundError, match="0600"):
+        FailureCompoundStore(tmp_path / "failure.sqlite3").import_asset_registry(registry)
+
+
+def test_failure_registry_validates_every_asset_before_first_write(tmp_path: Path) -> None:
+    registry = write_failure_registry(tmp_path / "failure-assets.json")
+    payload = json.loads(registry.read_text(encoding="utf-8"))
+    bad = dict(payload["assets"][0])
+    bad["id"] = "FIXTURE-TWO"
+    bad["oracle"] = ""
+    payload["assets"].append(bad)
+    registry.write_text(json.dumps(payload), encoding="utf-8")
+    registry.chmod(0o600)
+    store = FailureCompoundStore(tmp_path / "failure.sqlite3")
+    with pytest.raises(FailureCompoundError, match="oracle"):
+        store.import_asset_registry(registry)
+    assert store.export_snapshot(FIXED_TIME)["metrics"]["incident_count"] == 0
 
 
 def test_raw_success_claim_does_not_enter_verified_outcome_numerator(tmp_path: Path) -> None:
@@ -581,6 +697,53 @@ def test_capture_and_remote_reconcile_end_to_end(tmp_path: Path, monkeypatch: py
     assert status["state"] == "PASS"
     assert status["authority"]["this_document"] == "read_only_projection_not_authority"
     assert status["private_content_included"] is False
+
+
+def test_remote_reconcile_registers_status_and_persists_failure_assets(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    source = tmp_path / "source"
+    source.mkdir()
+    (source / "event.json").write_text(json.dumps(verified_payload()), encoding="utf-8")
+    source_registry = write_registry(
+        tmp_path / "registry.json",
+        [{
+            "source_id": "source",
+            "label_zh": "来源",
+            "kind": "evidence_adapter",
+            "required": True,
+            "env_var": "SOURCE_PATH",
+            "include_globs": ["*"],
+        }],
+    )
+    monkeypatch.setenv("SOURCE_PATH", str(source))
+    base_config = make_config(tmp_path, source_registry)
+    store = LocalObjectStore(tmp_path / "objects")
+    private = LocalPrivateDatabase(tmp_path / "private")
+    CapturePipeline(base_config, store, private, clock=lambda: FIXED_TIME).run()
+    status_dir = tmp_path / "status-data"
+    status_dir.mkdir()
+    failure_registry = write_failure_registry(tmp_path / "failure-assets.json")
+    config = replace(
+        base_config,
+        failure_asset_registry=failure_registry,
+        status_projection_target=status_dir / "memory_atlas_status_projection.json",
+    )
+    result = RemoteReconcilePipeline(config, store, private, clock=lambda: FIXED_TIME).run()
+    assert result["state"] == "PASS"
+    assert result["failure_asset_import"]["assets_imported"] == 1
+    assert result["failure_outbox"]["failed"] == 0
+    assert result["status_registration"]["state"] == "PASS"
+    assert result["status_registration"]["readback_verified"] is True
+    assert result["status_registration"]["mode"] == "0644"
+    assert config.status_projection_target.read_bytes() == (
+        config.web_data_dir / "memory_atlas_status_projection.json"
+    ).read_bytes()
+    persisted = private.get_json("memory-atlas/failure-compound/latest.json")
+    assert persisted["metrics"]["incident_count"] == 1
+    assert persisted["metrics"]["active_regression_assets"] == 1
+    assert persisted["metrics"]["blocked_recurrences"] == 1
 
 
 def test_status_projection_excludes_raw_private_content() -> None:
@@ -910,6 +1073,18 @@ def test_deploy_prepares_first_release_directories_for_deploy_user() -> None:
     assert deploy.index(ownership_gate) < deploy.index('release_id="$(date -u')
 
 
+def test_deploy_uses_current_frozen_candidate_oracles_not_retired_codexproject_validator() -> None:
+    repo = Path(__file__).resolve().parents[2]
+    deploy = (repo / "ops/memory-atlas/deploy-blue-green.sh").read_text(encoding="utf-8")
+    assert "npm --prefix MemoryAtlas run validate:v31" in deploy
+    assert "OpenAIDatabase/tests/test_memory_atlas_private_v31.py" in deploy
+    executable_lines = [
+        line.strip() for line in deploy.splitlines()
+        if line.strip() and not line.lstrip().startswith("#")
+    ]
+    assert all("validate:whole-project" not in line for line in executable_lines)
+
+
 def test_post_promote_probe_never_claims_full_pass_without_authenticated_path() -> None:
     repo = Path(__file__).resolve().parents[2]
     text = (repo / "ops/memory-atlas/post-promote-probe.sh").read_text(encoding="utf-8")
@@ -1229,5 +1404,7 @@ def test_bootstrap_env_contains_complete_ovh_runtime_defaults() -> None:
         "MEMORY_ATLAS_WORK_DIR=/srv/linze/work/memory-atlas",
         "MEMORY_ATLAS_WEB_DATA_DIR=/srv/linze/apps/memory-atlas/shared/data",
         "MEMORY_ATLAS_PUBLIC_SNAPSHOT=/srv/linze/apps/memory-atlas/shared/public-baseline/memory_atlas.json",
+        "MEMORY_ATLAS_FAILURE_ASSET_REGISTRY=/srv/linze/secrets/memory-atlas-failure-assets.json",
+        "MEMORY_ATLAS_STATUS_PROJECTION_TARGET=/srv/linze/apps/status/data/memory_atlas_status_projection.json",
     ):
         assert token in text

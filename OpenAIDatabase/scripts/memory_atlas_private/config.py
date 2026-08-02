@@ -51,6 +51,8 @@ class RuntimeConfig:
     public_atlas_snapshot: Path | None
     external_origin: str
     source_host_id: str
+    failure_asset_registry: Path | None = None
+    status_projection_target: Path | None = None
     github_repo: str = "LinzeColin/Private-Database"
     private_area: str = "Private-AgentDatabase"
 
@@ -95,6 +97,26 @@ class RuntimeConfig:
             raise ConfigurationError("MEMORY_ATLAS_EXTERNAL_ORIGIN 必须是生产 HTTPS origin")
         public_snapshot_raw = values.get("MEMORY_ATLAS_PUBLIC_SNAPSHOT", "").strip()
         public_snapshot = Path(public_snapshot_raw).expanduser() if public_snapshot_raw else None
+        failure_registry_raw = values.get("MEMORY_ATLAS_FAILURE_ASSET_REGISTRY", "").strip()
+        failure_registry = Path(failure_registry_raw).expanduser() if failure_registry_raw else None
+        if failure_registry is not None:
+            if failure_registry.is_symlink() or not failure_registry.is_file():
+                raise ConfigurationError(
+                    "MEMORY_ATLAS_FAILURE_ASSET_REGISTRY 必须是既有受保护普通文件"
+                )
+        status_target_raw = values.get("MEMORY_ATLAS_STATUS_PROJECTION_TARGET", "").strip()
+        status_target = Path(status_target_raw).expanduser() if status_target_raw else None
+        if status_target is not None:
+            if not status_target.is_absolute():
+                raise ConfigurationError("MEMORY_ATLAS_STATUS_PROJECTION_TARGET 必须是绝对路径")
+            if (
+                status_target.is_symlink()
+                or status_target.parent.is_symlink()
+                or not status_target.parent.is_dir()
+            ):
+                raise ConfigurationError(
+                    "MEMORY_ATLAS_STATUS_PROJECTION_TARGET 必须位于既有非符号链接目录"
+                )
         return cls(
             r2_endpoint=_https_endpoint(_required(values, "MEMORY_ATLAS_R2_ENDPOINT")),
             r2_access_key_id=_required(values, "MEMORY_ATLAS_R2_ACCESS_KEY_ID"),
@@ -110,6 +132,8 @@ class RuntimeConfig:
             public_atlas_snapshot=public_snapshot.resolve() if public_snapshot else None,
             external_origin=origin,
             source_host_id=_required(values, "MEMORY_ATLAS_SOURCE_HOST_ID"),
+            failure_asset_registry=failure_registry.resolve() if failure_registry else None,
+            status_projection_target=status_target.resolve() if status_target else None,
         )
 
     def ensure_runtime_dirs(self) -> None:

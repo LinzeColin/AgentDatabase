@@ -150,6 +150,8 @@ def write_output(
         "MEMORY_ATLAS_WEB_DATA_DIR=/srv/linze/apps/memory-atlas/shared/data\n"
         "MEMORY_ATLAS_PUBLIC_SNAPSHOT=/srv/linze/apps/memory-atlas/shared/public-baseline/memory_atlas.json\n"
         "MEMORY_ATLAS_VERIFIED_EVIDENCE_ROOTS=/srv/linze/state/memory-atlas/evidence-adapters\n"
+        "MEMORY_ATLAS_FAILURE_ASSET_REGISTRY=/srv/linze/secrets/memory-atlas-failure-assets.json\n"
+        "MEMORY_ATLAS_STATUS_PROJECTION_TARGET=/srv/linze/apps/status/data/memory_atlas_status_projection.json\n"
         f"MEMORY_ATLAS_EXTERNAL_ORIGIN={external_origin.rstrip('/')}\n"
         "MEMORY_ATLAS_SOURCE_HOST_ID=mac-codex-source\n"
     )

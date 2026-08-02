@@ -19,7 +19,7 @@ from .models import NormalizedEvent, RunManifest, RunState, SourceState
 from .normalization import normalize_record
 from .object_store import ObjectStore, R2ObjectStore
 from .private_db import FactOutbox, GhPrivateDatabase, PrivateDatabase
-from .status_projection import build_status_projection
+from .status_projection import build_status_projection, publish_status_projection
 
 
 class PipelineError(RuntimeError):
@@ -323,6 +323,19 @@ class RemoteReconcilePipeline:
         self.private_db = private_db or GhPrivateDatabase(config.private_db_client)
         self.clock = clock
         self.failures = FailureCompoundStore(config.runtime_dir / "failure-compound.sqlite3")
+        self.outbox = FactOutbox(config.runtime_dir / "remote-fact-outbox.sqlite3")
+
+    def _publish_failure_snapshot(self, snapshot: dict[str, Any], now: str) -> dict[str, int]:
+        self.outbox.enqueue(
+            "memory-atlas/failure-compound/latest.json",
+            snapshot,
+            "memory-atlas: update remote failure compound",
+            now,
+        )
+        flush = self.outbox.flush(self.private_db, now)
+        if flush["failed"] or flush["remaining"]:
+            raise PipelineError("Failure Compound 事实未完整进入 Private-Database")
+        return flush
 
     def run(self) -> dict[str, Any]:
         latest = self.private_db.get_json("memory-atlas/runs/latest.json")
@@ -357,6 +370,9 @@ class RemoteReconcilePipeline:
                 environment=socket.gethostname(),
                 details={"missing": missing[:100]},
             )
+            now = self.clock()
+            failure_snapshot = self.failures.export_snapshot(now)
+            self._publish_failure_snapshot(failure_snapshot, now)
             return {
                 "schema_version": "memory_atlas.remote_reconcile.v1",
                 "state": "FAILED",
@@ -376,7 +392,12 @@ class RemoteReconcilePipeline:
             temporary.unlink(missing_ok=True)
         event_count = int(analytics["event_count"])
         analytics["normalized_event_batch"] = _normalized_batch_fact(normalized_key, objects)
-        failure_snapshot = self.failures.export_snapshot(self.clock())
+        registry_import: dict[str, Any] | None = None
+        if self.config.failure_asset_registry is not None:
+            registry_import = self.failures.import_asset_registry(self.config.failure_asset_registry)
+        failure_generated_at = self.clock()
+        failure_snapshot = self.failures.export_snapshot(failure_generated_at)
+        failure_outbox = self._publish_failure_snapshot(failure_snapshot, failure_generated_at)
         analytics["recommendations"] = build_habit_recommendations(analytics, failure_snapshot)
         private_snapshot = {
             "schema_version": "memory_atlas.private_analytics.v1",
@@ -398,7 +419,18 @@ class RemoteReconcilePipeline:
         }
         write_json_atomic(self.config.web_data_dir / "memory_atlas_private_analytics.json", private_snapshot)
         status_path = self.config.web_data_dir / "memory_atlas_status_projection.json"
-        write_json_atomic(status_path, build_status_projection(private_snapshot))
+        status_projection = build_status_projection(private_snapshot)
+        write_json_atomic(status_path, status_projection)
+        status_registration: dict[str, Any] = {
+            "schema_version": "memory_atlas.status_registration.v1",
+            "state": "NOT_CONFIGURED",
+            "authority": "read_only_projection_not_authority",
+        }
+        if self.config.status_projection_target is not None:
+            status_registration = publish_status_projection(
+                self.config.status_projection_target,
+                status_projection,
+            )
         return {
             "schema_version": "memory_atlas.remote_reconcile.v1",
             "state": "PASS",
@@ -407,4 +439,7 @@ class RemoteReconcilePipeline:
             "events": event_count,
             "snapshot": str(self.config.web_data_dir / "memory_atlas_private_analytics.json"),
             "status_projection": str(status_path),
+            "status_registration": status_registration,
+            "failure_asset_import": registry_import,
+            "failure_outbox": failure_outbox,
         }

@@ -70,7 +70,9 @@ PYTHONDONTWRITEBYTECODE=1 "$VENV/bin/python" -B -m pytest -q -p no:cacheprovider
 npm --prefix MemoryAtlas ci
 npm --prefix MemoryAtlas run lint
 npm --prefix MemoryAtlas run validate:v31
-npm --prefix MemoryAtlas run validate:whole-project
+# The retired CodexProject whole-project validator asserts the pre-split remote
+# and layout. The frozen v0.0.0.31 validator plus focused backend suite above are
+# the current AgentDatabase release Oracle.
 npm --prefix MemoryAtlas run build
 deploy_user=$(id -un)
 deploy_group=$(id -gn)
