@@ -1003,6 +1003,69 @@ def run_fact_density(report, target: Path, sources: list[dict[str, Any]]) -> Non
     report.metrics['fact_density'] = info
 
 
+def run_quote_layer(report, target: Path) -> None:
+    """引文层门（v0.0.0.32 新增，**只报不拦**）——这句外语是他写的，还是译者写的？
+
+    三个人物、六轮盲判，同一条错反复出现（Livermore 把 Dies 的前言当自陈、
+    Vesalius 把第三人称的 `suum` 写成「我自己称它」、Harvey 把译者的英文修辞
+    分析成「我有意堆的」）。**而人工修不干净**：Harvey 第 3 轮我做的正是
+    「把这个错一次改到位」，改完席 E 复核仍点出四处零标注 + 两处贴反。
+
+    落成后回跑 Harvey 第 3 轮定稿：**席 E 手工点名的 7 处全中，另多抓 3 处**
+    （`known-01`／`decoy-01`／`anon-02`）。
+
+    **只报不拦**：它数的是形态不判真伪，标了「译文」的伪造引文照样过；
+    已入库 100 人未回扫，硬拦会把整个名册一起拦下（与 `NO-SELFTEST`、新鲜度门同一条纪律）。
+    """
+    here = Path(__file__).resolve().parent
+    script = here / 'check_quote_layer.py'
+    if not script.exists():
+        report.metrics['quote_layer'] = {'状态': 'check_quote_layer.py 未安装，**未核验**（不是通过）'}
+        return
+    spec = importlib.util.spec_from_file_location('_pd_quotelayer', script)
+    module = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(module)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['quote_layer'] = {'状态': f'检查器加载失败，**未核验**：{exc}'}
+        return
+    buffer = io.StringIO()
+    with contextlib.redirect_stdout(buffer):
+        if module.self_test() != 0:
+            report.metrics['quote_layer'] = {'状态': '**负对照未过，其结论不作数**'}
+            return
+
+    hits, scanned = [], 0
+    payload = target / 'evals/judge_payload.v1.json'
+    if payload.is_file():
+        try:
+            data = json.loads(payload.read_text(encoding='utf-8'))
+            rows = (data if isinstance(data, list)
+                    else [{'case_id': k, 'candidate': v} for k, v in data.items()])
+            for r in rows:
+                if not isinstance(r, dict):
+                    continue
+                for x in module.check_text(str(r.get('candidate', ''))):
+                    hits.append((r.get('case_id') or '?', x))
+            scanned += 1
+        except Exception:                                        # noqa: BLE001
+            pass
+    for md in sorted((target / 'docs').glob('*.md')):
+        try:
+            for x in module.check_text(md.read_text(encoding='utf-8')):
+                hits.append((f'docs/{md.name}', x))
+            scanned += 1
+        except Exception:                                        # noqa: BLE001
+            continue
+
+    info: dict[str, Any] = {'已扫文件': scanned, '引文层问题': len(hits)}
+    if hits:
+        info['**这些地方分不清原文与译文**'] = [f'{c}　{x}' for c, x in hits[:12]]
+        info['口径'] = ('**数的是形态，不判真伪**——标了「译文」的伪造引文照样过；'
+                        '它挡的是「忘了标」与「标反了」，不挡「编的」。故只报不拦。')
+    report.metrics['quote_layer'] = info
+
+
 def run_attribution_basis(report, target: Path, meta: dict[str, Any],
                           sources: list[dict[str, Any]]) -> None:
     """归属依据门（v0.0.0.24 新增）——**印刷时代之前的人物，靠什么证明是他写的**。
@@ -1122,6 +1185,7 @@ def main() -> int:
         run_authorship_gate(report, target, meta, sources)
         run_attribution_basis(report, target, meta, sources)
         run_fact_density(report, target, sources)
+        run_quote_layer(report, target)
         run_ocr_gate(report, target, sources)
         report_own_voice(report, target, meta, sources)
         report_refusal_overflow(report, target)
