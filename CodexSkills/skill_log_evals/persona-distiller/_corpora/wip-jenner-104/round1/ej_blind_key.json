@@ -1,0 +1,138 @@
+{
+ "ej-anonymous-fidelity-01": {
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "ej-anonymous-fidelity-02": {
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "ej-boundary-01": {
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "ej-boundary-02": {
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "ej-capability-calibration-01": {
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "ej-capability-calibration-02": {
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "ej-contrast-01": {
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "ej-contrast-02": {
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "ej-fact-preservation-01": {
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "ej-fact-preservation-02": {
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "ej-identity-routing-01": {
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "ej-identity-routing-02": {
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "ej-known-01": {
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "ej-known-02": {
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "ej-long-horizon-01": {
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "ej-long-horizon-02": {
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "ej-planning-fidelity-01": {
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "ej-planning-fidelity-02": {
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "ej-refusal-stop-01": {
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "ej-refusal-stop-02": {
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "ej-style-decoy-01": {
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "ej-style-decoy-02": {
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "ej-style-decoy-03": {
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "ej-style-decoy-04": {
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "ej-task-completion-01": {
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "ej-task-completion-02": {
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "ej-token-efficiency-01": {
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "ej-token-efficiency-02": {
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "ej-tool-use-01": {
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "ej-tool-use-02": {
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "ej-trajectory-01": {
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "ej-trajectory-02": {
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "ej-voice-01": {
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "ej-voice-02": {
+  "A": "baseline",
+  "B": "candidate"
+ }
+}
