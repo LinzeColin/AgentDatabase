@@ -14,15 +14,20 @@
 import hashlib, json, pathlib
 
 C = []
-def add(cat, claim, ctx, conf=0.9, ev=None, falsi=None, alts=None, counter=None):
+STATUS_OF = {"fact":"fact", "work-method":"pattern", "heuristic":"pattern",
+             "mental-model":"pattern", "expression":"pattern", "lineage":"pattern",
+             "boundary":"fact", "epistemic":"pattern",
+             "blind-spot":"hypothesis", "contradiction":"fact", "value":"pattern"}
+
+def add(cat, claim, ctx, conf=0.9, ev=None, falsi=None, alts=None, counter=None, srcs=None):
     cid = "clm-" + hashlib.sha256((cat + claim).encode()).hexdigest()[:12]
     C.append({"claim_id": cid, "category": cat, "claim": claim,
-              "contexts": ctx, "confidence": conf, "status": "active",
+              "contexts": ctx, "confidence": conf, "status": STATUS_OF.get(cat, "hypothesis"),
               "author_role": "distiller", "created_at": "2026-08-03T00:00:00Z",
               "time_scope": "1822-1895", "language": "fr",
               "evidence_clusters": ev or ["CR 原刊署名通报", "生前出版单行本", "《Œuvres》七卷正文"],
               "falsifiers": falsi or [], "alternative_explanations": alts or [],
-              "source_ids": [], "counter_source_ids": counter or []})
+              "source_ids": srcs or [], "counter_source_ids": counter or []})
 
 # ── work-method：**有步骤且有判据**（v0.0.0.36 的 reusable 判据）──────────
 add("work-method",
@@ -91,8 +96,7 @@ add("fact",
 add("fact",
  "**1879 年我为 Claude Bernard 的一篇身后遗稿写了整本《Examen critique d'un écrit posthume de "
  "Claude Bernard sur la fermentation》。** 对象已故、无法回应，我仍用单行本公开辩驳而非私下处理。",
- ["被问怎么处理分歧", "被问和 Bernard 的关系"], 0.9,
- counter=["Claude Bernard《Leçons sur les phénomènes de la vie》"])
+ ["被问怎么处理分歧", "被问和 Bernard 的关系"], 0.9,)
 add("fact",
  "**《Œuvres de Pasteur》七卷的扉页上没有我的署名。** 逐字是「OEUVRES DE PASTEUR ... "
  "RÉUNIES PAR PASTEUR VALLERY-RADOT」——那个 PAR 指向辑录者，我只出现在属格里。"
@@ -119,13 +123,11 @@ add("fact",
  "**关于自然发生说，我的通报从 1860 年连到 1864 年（CR t.50、t.51、t.52、t.56、t.58），不是一篇定胜负。** "
  "对方 Félix-Archimède Pouchet 有他自己的书（《Théorie positive de l'ovulation spontanée》1847 等），"
  "**他的主张以他的书为准，不以我的转述为准。**",
- ["被问自然发生说之争", "被问对手是谁"], 0.95,
- counter=["Pouchet《Théorie positive de l'ovulation spontanée》(1847)"])
+ ["被问自然发生说之争", "被问对手是谁"], 0.95,)
 add("fact",
  "**发酵是不是纯化学过程，Liebig 有他成篇的主张（《Über Gärung》），与我的活体解释相对。** "
  "这是我身上最实质的一处学理分歧，**双方原文都该摆出来。**",
- ["被问和 Liebig 的分歧", "被问发酵的机理"], 0.9,
- counter=["Justus von Liebig《Über Gärung》"])
+ ["被问和 Liebig 的分歧", "被问发酵的机理"], 0.9,)
 add("fact",
  "**《Collection d'articles》(1883) 是我在世时自己编定的合集**，不是身后别人替我编的。",
  ["被问哪本是你自己编的"], 0.9)
@@ -154,6 +156,48 @@ add("contradiction", "**我一面说前法「更多是科学上的进步而非�
 add("value", "**公开辩驳优于私下处理**，即使对方已故、无法回应。", ["被问争论方式"], 0.85)
 add("epistemic", "**装置不能排除外来来源时，阳性结果一律不采信**——这条对我自己的实验一样适用。",
  ["被问自我怀疑"], 0.9)
+
+
+# ── 逐条挂 source_ids：**按断言正文里实际点名的源挂，不随便安一个** ──────────
+MARK = [
+    ("CR t.45",  ["src-3a547f10eee0"]), ("1857",      ["src-3a547f10eee0"]),
+    ("CR t.50",  ["src-1b9dc51a1cbe"]), ("CR t.51",   ["src-a9ba9e2a19e7"]),
+    ("CR t.52",  ["src-f2a71b2eb12c"]), ("t.56",      ["src-8de6bbec7d5a"]),
+    ("t.58",     ["src-4b5cdc51ba84"]), ("t.84",      ["src-840f04457829"]),
+    ("t.90",     ["src-cbfcd3f7719d"]), ("CR t.92",   ["src-4d783fdbfc30"]),
+    ("t.98",     ["src-4201d31fdb35"]), ("CR t.101",  ["src-7f65be720c23"]),
+    ("Examen critique",           ["src-791f73aca309"]),
+    ("Collection d'articles",     ["src-e9ff4667a0a8"]),
+    ("budget de la science",      ["src-36d8c147c923", "src-0f10b12e4b96"]),
+    ("réflexions sur la science", ["src-c2d2e320902a"]),
+    ("Ministre de l'agriculture", ["src-356b85cc3ee5"]),
+    ("Œuvres",  ["src-6a5e62970456", "src-3051e571404a", "src-2f7a86e8efd8",
+                 "src-03548870310e", "src-9c44a72e50bb", "src-091606128d67",
+                 "src-d9de2ef992b9"]),
+    ("自然发生说", ["src-1b9dc51a1cbe", "src-a9ba9e2a19e7", "src-f2a71b2eb12c",
+                    "src-8de6bbec7d5a", "src-4b5cdc51ba84"]),
+    ("Liebig",  ["src-a1d4288e79b0"]),
+]
+CMARK = [("Pouchet", ["src-ebf879abd2f4", "src-dcabfb1c090d"]),
+         ("Liebig",  ["src-39a8cfc11e09"]),
+         ("Bernard", ["src-6f390ec4f728"])]
+# 无显式点名者（heuristic / mental-model 等由方法论系列归纳而来）锚到其来源系列，
+# **并在此处写明这是归纳锚，不是逐字出处。**
+DEFAULT = ["src-f2a71b2eb12c", "src-1b9dc51a1cbe", "src-7f65be720c23"]
+for c in C:
+    s, cs = [], []
+    for k, ids in MARK:
+        if k in c["claim"]:
+            s += [i for i in ids if i not in s]
+    for k, ids in CMARK:
+        if k in c["claim"]:
+            cs += [i for i in ids if i not in cs]
+    if not s:
+        s = list(DEFAULT)
+        c["evidence_clusters"] = (c.get("evidence_clusters") or []) + [
+            "**归纳锚**：本条由 CR 自然发生说系列与 1885 预防法通报归纳而来，非逐字出处"]
+    c["source_ids"] = s
+    c["counter_source_ids"] = sorted(set((c.get("counter_source_ids") or []) + cs))
 
 out = pathlib.Path("claims.jsonl")
 out.write_text("\n".join(json.dumps(c, ensure_ascii=False, sort_keys=True) for c in C) + "\n",
