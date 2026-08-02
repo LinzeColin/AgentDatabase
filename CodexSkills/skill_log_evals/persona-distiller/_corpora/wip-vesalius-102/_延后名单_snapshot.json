@@ -1,0 +1,358 @@
+{
+ "note": "因证据不足暂时延后的人物。next_person.py 会跳过这里的人，但他们仍留在队列原位，补足来源后删掉本条即可恢复。绝不因为难做就删人。",
+ "deferred": [
+  {
+   "name": "Grace Hopper",
+   "family_zh": "软件开发师",
+   "deferred_at": "2026-07-26",
+   "reason": "deep 档要求 ≥45 条可用训练源且一手占比 ≥65%（即需约 30 条一手）。三轮探源后可取的一手/权威源仅约 21 条，比例最高只能到约 47%，不达标。",
+   "probed_and_failed": [
+    "dl.acm.org 的《The Education of a Computer》(1952) 直链 403（Wayback 副本可取）",
+    "history.navy.mil 现行传记页 404（Wayback 2019 副本可取）",
+    "americanhistory.si.edu / si.edu 藏品页 403",
+    "amturing.acm.org 与 awards.acm.org 直链 403（awards Wayback 副本可取）",
+    "nps.gov、energy.gov 相关页 404",
+    "ethw.org 多数条目页不存在（仅 Grace_Murray_Hopper / UNIVAC / Harvard_Mark_I / ENIAC / Eckert / Aiken / Bartik / Holberton / Oral-History:Jean_Bartik 可取）"
+   ],
+   "already_confirmed_fetchable": [
+    "archive.computerhistory.org CHM 口述史 PDF（一手，157KB）",
+    "Wayback 副本：dl.acm.org 1952 论文、britannica、awards.acm.org/hopper、history.navy.mil 传记、cs.yale.edu hopper-story",
+    "ethw.org/Grace_Murray_Hopper、computerhistory.org profile、computer.org profile、womenshistory.org、nationalmedals.org、UNT 学位论文 PDF"
+   ],
+   "unblock_todo": [
+    "找耶鲁 Manuscripts & Archives 的 Grace Murray Hopper 文件集是否有可抓取的数字化件",
+    "找她 1980 年代的公开演讲/国会作证的文字记录",
+    "找 CHM 口述史是否还有其他分卷（本次只探到 .05.01）",
+    "找 Smithsonian / 海军的可抓取镜像或 Wayback 副本补足机构类一手",
+    "凑够约 30 条一手后删除本条，next_person 会自动把她排回原位"
+   ]
+  },
+  {
+   "name": "Margaret Hamilton",
+   "family_zh": "软件开发师",
+   "deferred_at": "2026-07-27",
+   "reason": "deep 档要求 ≥45 条可用训练源且一手占比 ≥65%（即约需 30 条一手）。三轮探源后可取的可用训练源 31 条、一手 14 条，比例仅 45.2%。缺口不是抓取技术问题，而是她的公开一手语料本身稀薄：130+ 篇论文不开放、公司官网论文 PDF 全为死链、AGC 档案里的文档绝大多数由实验室其他人撰写。再往上凑只能把他人所写文档或二手报道算作她的一手，属造假，故不放行。",
+   "current_state": {
+    "usable_train": 31,
+    "primary": 14,
+    "primary_ratio": 0.452,
+    "lanes": {
+     "external": 27,
+     "timeline": 12,
+     "decisions": 7,
+     "expression": 7,
+     "writings": 7,
+     "conversations": 5
+    },
+    "note": "6 路已全覆盖，唯一卡点是一手数量与比例。"
+   },
+   "probed_and_failed": [
+    "http://www.htius.com/Articles/*.pdf —— 她本人公司的论文 PDF 全部返回 355 字节错误页（Inside_DBP、USL 等）",
+    "https://www.htius.com/Articles/r12ham.pdf —— 0 字节",
+    "Virtual AGC 文档库 70 份 PDF 中，正文能检出 Hamilton／Software Engineering Division 的极少",
+    "阿波罗 11 号 1201/1202 的原始飞行记录未找到可直接抓取的一手文本"
+   ],
+   "already_confirmed_fetchable": [
+    "★ https://www.ibiblio.org/apollo/Documents/Memo-Hamilton-A12-test-failure.pdf —— 她本人署名备忘录（233KB，唯一确认的直接一手文本）",
+    "https://www.ibiblio.org/apollo/links.html —— Virtual AGC 文档库索引（625 份文档链接，172KB）",
+    "http://www.htius.com/ 与 /Articles/articles.htm —— 公司官网与文章索引页（页面可取，链接的 PDF 不可取）",
+    "https://www.nasa.gov/people/margaret-hamilton/（195KB）、Smithsonian NASM 专文（70KB）",
+    "Guardian 2019 专访（485KB）、Wired 2015（1.4MB）、MIT News 2016（114KB）",
+    "白宫 2016 授勋存档、history.nasa.gov/computers/Ch2-5.html、NASA JSC 口述史参与者索引",
+    "GitHub chrislgarry/Apollo-11 源码档案"
+   ],
+   "unblock_todo": [
+    "找 MIT Museum / MIT Libraries 是否有 Instrumentation Lab 时期她署名文档的数字化件",
+    "找 Draper Laboratory 官方档案中她署名的技术报告（R- 与 E- 系列编号）",
+    "找 htius.com 论文 PDF 的 Wayback 副本（页面存在但当前 PDF 死链，存档可能有）",
+    "找 IEEE/ACM 数字图书馆中她的论文是否有开放获取版本",
+    "找 NASA JSC 口述史项目里是否有她本人的访谈记录全文",
+    "补足到 ≥30 条一手后删掉本条即可恢复"
+   ],
+   "already_verified_facts": {
+    "note": "这些已核实，恢复时不必重查",
+    "identity": "Margaret Elaine Hamilton（née Heafield），1936-08-17 生；密歇根大学与 Earlham College（BA）",
+    "role": "MIT Instrumentation Laboratory 的 Software Engineering Division 主任，领导 AGC 机载飞行软件开发",
+    "companies": "1976 Higher Order Software、1986 Hamilton Technologies（均在马萨诸塞州剑桥）；发表 130+ 篇",
+    "award": "2016-11-22 总统自由勋章",
+    "★归属红线": "AGC 的异步执行体由 J. Halcombe Laning 设计，Hamilton 团队在其之上开发飞行软件；1201/1202 时起作用的是其团队飞行软件中的错误检测与恢复。不得把执行体／优先级调度算作她的设计。",
+    "★术语归属": "「software engineering」须标为她本人的说法（附其原话），并与 1968 年 NATO 会议的记载并陈，不得单方面断言。",
+    "同名干扰": "女演员 Margaret Hamilton（1902–1985，《绿野仙踪》西方女巫），领域无重叠，其材料一律不得作为事实来源。"
+   }
+  },
+  {
+   "name": "Jim Simons",
+   "family_zh": "投资资本师",
+   "deferred_at": "2026-07-27",
+   "order_when_deferred": 92,
+   "reason": "一手源不足且差距大：usable_train 43（门槛 45）、一手比例 27.9%（门槛 65%）、严格 P1 仅 9.3%。其人以极度低调著称，Renaissance Technologies 长期不披露。抓源子代理主动排除了数条重复/近重复页面，未注水。",
+   "probe_record": {
+    "explored_and_dry": [
+     "renaissancetechnologies.com —— 实为被抢注的停放域名，非 RenTec 真站",
+     "rentec.com —— RenTec 实际站点，仅一段法律免责声明，无传记内容",
+     "mathforamerica.org —— CDX 全域 3,710 URL，与 Simons 相关仅 4 页（机构简介／讣告博文／About Us／Forbes 转载指针）"
+    ],
+    "blocked": [
+     "AIP 尼尔斯·玻尔图书馆的 Simons 口述史（3 场，极可能是最富的 P1 文本）—— 位于机器人验证门之后。**按政策未尝试绕过。** AIP 条款另注明引用需受访者许可。**这是首要解封路径。**",
+     "IAS.edu 三个页面 Cloudflare JS 挑战；1974 年 Chern–Simons 的 Annals of Mathematics 原文付费墙（仅取到著录记录）",
+     "alphaarchitect.com 转录稿 403 且无 Wayback 快照（内容实为 Journal of Investment Consulting 访谈转载，已从 SSRN 另行取得）"
+    ],
+    "exists_but_video_only_no_transcript": [
+     "2012 Jeff Cheeger 访谈（Simons Foundation「Science Lives」，约 2 小时）",
+     "2015 美国科学院入选演讲《My Peregrinations through Mathematics》",
+     "2014 ICM 首尔演讲《My Life in Mathematics》",
+     "2009 石溪「Masters Series」与杨振宁对谈",
+     "2020 首次播客亮相（Into the Impossible）",
+     "2022 阿贝尔奖奥斯陆对谈"
+    ]
+   },
+   "already_verified_facts": {
+    "生卒": "1938-04-25 生，2024-05-10 卒，享年 86，未公布死因",
+    "出生地未决": "SIAM 称生于马萨诸塞州 Brookline、在 Newton 长大；Simons Foundation 2024 讣告与 CNN 称生于 Newton；Wikipedia 称在 Brookline 长大。**三源两处矛盾，无权威一手可裁，须并陈。**",
+    "Chern–Simons": "1974 年与陈省身合作发表于 Annals of Mathematics；**确为其本人的数学贡献**（其 TED 自述亦确认）。**Veblen 几何奖为 1976 年**——见下「机构自述错误」。",
+    "IDA": "1964 年入职，1968 年因公开反对越战被解雇（《纽约时报》投书＋Newsweek 言论）；其本人在 TED 上讲述，并由其第一任妻子 Barbara Bluestein Simons 在 AMS 纪念文中独立佐证。",
+    "Medallion 归属分层（最高价值发现）": "**所有来源——包括 Simons 本人最坦率的 TED 访谈——都把他的角色描述为招募者／出资者／最终决策者，而非模型构建者。** 量化模型由多人接力构建：Lenny Baum → James Ax → **Elwyn Berlekamp（1989 年买入、重建系统，1990 年以约 6 倍价格卖回给 Simons）** → Henry Laufer（数十年任首席科学家）→ **Peter Brown 与 Robert Mercer（1993 年起，来自 IBM 语音识别组）**。**最硬的证据是 AMS Notices 纪念文中由 Brown、Laufer、Mercer 本人共同撰写的章节。** 置信度 medium（Ax 的争议与离开、Medallion 命名故事仅有二手/三手来源）。",
+    "「solved the market」的出处": "**是 Zuckerman／出版方的书名，不是 Simons 的话**——在所收全部 P1 源中完全不存在。**另捕获一处高频误归属：广为流传的「我们有 50.75% 的时候是对的……而且是 100% 地对 50.75% 的时候」出自 Robert Mercer**（见 Zuckerman 书），**不是 Simons 说的**，网上长期当作他的话转载。",
+    "Zuckerman 关系的实情": "不是「授权」与「完全不合作」的二分。据 Zuckerman 自述：Simons 拒绝受访、并主动要求同事乃至竞争对手不要配合；但报道后期 Zuckerman「终于让 Simons 开口」作了一次直接对话；直到 2019 年年中 Simons 仍在问这本书是否非写不可。",
+    "机构自述错误（第三例）": "**Math for America 自家的 Simons 简介页（约 2006 年快照与今日实时页）均称其 1975 年获 Veblen 奖；而 AMS 自己的奖项记录、SIAM 独立讣告、以及由其同事撰写的 AMS Notices 纪念文均为 1976 年。** 他亲手创立的机构，在自家页面上把创办人自己的奖项年份写错了约二十年。",
+    "职务与慈善": "石溪数学系主任 1968–1978；Simons Foundation 1994 年（由 Marilyn Simons 本人书面记述确认）；Math for America 2004 年（MfA 自家 About Us 页确认）。",
+    "公开认错": "**未找到其本人第一人称的「我错了」原话。** 最接近的是同事（非本人）关于 2000 年互联网泡沫亏损的记述（「我们意识到自己搞砸了」），以及 2007 年危机中一段务实而非自省的引语。广为流传的 2007 年致投资人信中「没什么好道歉的」一句**未能追到可信一手出处，标为未证实，未采纳**。"
+   },
+   "unblock_todos": [
+    "1. 取得 AIP 尼尔斯·玻尔图书馆口述史三场转录稿（需通过验证门，且引用可能需许可）—— 单此一项即可能补足 P1 缺口",
+    "2. 为上列六份纯视频一手材料获取文字稿（ICM 2014、NAS 2015、Cheeger 2012、杨振宁 2009、Abel 2022、2020 播客）",
+    "3. 取得 1974 年 Chern–Simons 的 Annals of Mathematics 原文（现付费墙）",
+    "4. 补 conversations 与 expression 两路（现各仅 4 条）——问答体材料是本人物最稀缺的一路",
+    "5. 若解封后重启：**Medallion 归属分层与 Soros/Druckenmiller 同构，须双向设障**——既不许写成他一人以数学「解决了市场」，也不许否认其招募、出资与最终决策的真实作用",
+    "6. **「solved the market」与那句 50.75% 引语均不得作为其自述使用**",
+    "7. **Veblen 奖年份以 AMS 官方记录 1976 为准**，并在产物中记录 MfA 自家页面长期误载 1975 这一「机构自述错误」实例"
+   ]
+  },
+  {
+   "name": "David Swensen",
+   "family_zh": "投资资本师",
+   "deferred_at": "2026-07-27",
+   "order_when_deferred": 92,
+   "reason": "一手源结构性不足：usable_train 44（门槛 45）、一手比例 27.3%（门槛 65%）。**瓶颈不在条数而在一手比例**——其在耶鲁 36 年间几乎不公开写作或受访，公开材料以耶鲁机构通稿、讣告、第三方财经报道为主。与 Jim Simons 同类结局、同一成因。",
+   "already_verified_facts": {
+    "生卒": "1954-01-26 生于爱荷华州 Ames（长于威斯康星州 River Falls）；2021-05-05 卒于康涅狄格州 New Haven，享年 67。生卒日期多源交叉高置信；**出生地与生日仅 Wikipedia 一处独立信源，未获耶鲁官方原始记载佐证。**",
+    "师承": "**博士导师为 James Tobin 与 William Brainard 联合指导，非 Tobin 单独**——有其本人 2011 年耶鲁演讲原话自证。1980 年获博士，论文题为《A Model for the Valuation of Corporate Bonds》。",
+    "任职与规模": "1985-04-01 到任（其本人原话精确到日）至 2021-05-05 去世，约 36 年。规模 13 亿(1985) → 312.017 亿(FY2020，一手 PDF 核验) → 423 亿(2021-06-30)。",
+    "年化回报须并陈口径": "**至少 6 组互不相同但各自正确的数字**：13.1% / 13.7% / 13.9% / 13.4% / 16.3% / 12.6%，窗口从 10 年到 36 年不等。**网络文章常压平成单一数字——须给口径与窗口，不得简化。**",
+    "「耶鲁模式」归属（最高价值发现，直接推翻 Wikipedia）": "**Wikipedia 明确写他「coined his investment philosophy 'The Yale Model'」——但这与他本人的说法相反。** 其 2011 年耶鲁演讲原话中，他把「Yale Model」与「Swensen Approach」**都描述为外部贴的标签**（他点名 2008 年 11 月《巴伦周刊》「Crash Course」一文），并明确说 **「which I really don't like」**，还**主动提议改称「Takahashi Approach」以把功劳让给同事**。耶鲁官方通稿用的也是被动语态「became known as」，不支持「他本人命名」。**该词最早由谁、哪年首次使用，未查到。**",
+    "Dean Takahashi 的角色": "1986 年入职（晚 Swensen 一年），投资办公室全职任期「超过 33 年」（2019 年离职），二人共同授课 35 年。",
+    "对个人投资者的建议（证据密度全场最高）": "**属实**：其机构组合重仓另类资产，**但他公开建议个人投资者使用低成本指数基金，并点名推荐 Vanguard**。7 个独立信源、5 处一手原话、跨 2005–2017 年十二年一致。**与 John Bogle（#89）构成直接呼应，解封后须建立交叉引用。**",
+    "著作": "两本书**均为独著**；但部分《纽约时报》专栏为联名（分别与 Michael Schmidt、Jonathan Macey 合署）。2009 修订版 364→432 页，具体内容差异仅二手书目支持，未做一手正文比对，中等置信度。",
+    "公开认错（须分层）": "「This is one of my biggest mistakes in the past 30 years」（指 Lubert-Adler 地产基金投资）——**出自 2016 年《纽约时报》人物特稿中记者引用的直接引语（S1）**，**不是**其本人自撰文章或访谈实录中的第一人称认错；已抓取的六份一手讲稿／访谈实录中均无此类表态。**引用时须标明这一层级差异。**"
+   },
+   "blocked_or_dry": [
+    "investments.yale.edu 新版站点（Netlify 重建）已下线全部历史年报 PDF；旧版 01–15 号系列可用（FY2001/2005/2009/2013/2015），FY2016–2019 在 Wayback 中只留 302 跳转、字节内容从未被存档",
+    "Charlie Rose 2009-01-21 访谈确认存在（主题正是新版《Pioneering Portfolio Management》），但「Full Transcript」需前端交互/注册加载，**按政策未尝试绕过**",
+    "yale.edu 领导层页 403；communications.yale.edu 官方 PDF 镜像 404（link rot）——已用 CFR、Salovey 声明、yale64.org 镜像等效替代",
+    "Yale Daily News 关于 Takahashi 离职的报道 HTTP 429，重试一次后放弃（同一事实已由 ai-cio.com 独立覆盖）"
+   ],
+   "unblock_todos": [
+    "1. 取得 Charlie Rose 2009 访谈完整文字稿——**这是已确认存在的最富 P1 材料**",
+    "2. 补 FY2016–2019 耶鲁年报 PDF（Wayback 无字节，需另寻镜像或机构渠道）",
+    "3. 寻找其耶鲁课程（ECON 252 等）的**演讲文字稿**——注意此前有一份 `ECON252_06_020211_MC.pdf` 经核实实为选择题作业，**不是讲稿，不可误收**",
+    "4. 补 conversations 与 expression 两路（现为 6 条与 **1 条**，expression 几乎为空）",
+    "5. 若解封后重启：**「耶鲁模式」归属须双向设障**——不许写成他命名了它（他本人明确否认且不喜欢这个名字），**也不许因此否认他是该方法的实际构建者**；并须写入他主动提议改称「Takahashi Approach」这一让功事实",
+    "6. **年化回报必须给口径与窗口**，不得压平成单一数字",
+    "7. **与 Bogle（#89）建立交叉引用**：一个管理另类资产重仓组合的人，公开建议个人买低成本指数基金并点名 Vanguard"
+   ]
+  },
+  {
+   "name": "Stanley Druckenmiller",
+   "family_zh": "投资资本师",
+   "deferred_at": "2026-07-27",
+   "order_when_deferred": 92,
+   "reason": "**条数不足但一手比例过线**——usable_train 37（门槛 45），**一手比例 67.6% 已过 65% 门槛**。与 Simons／Swensen 的「结构性缺一手」不同，他只缺条数，**解封难度显著更低**。",
+   "prescreen_lesson": "预筛估计可获取 P1 约 40–50 条，实抓仅 25 条。**差距来自「材料存在」与「文字稿抓得到」的区别**：Yahoo Finance 全部 5 条为 JS 壳、Goldman 官方 PDF 失效、Scribd 的 Sohn「逐字稿」实为 AI 生成预览、Charlie Rose 2013 访谈逐字稿在付费墙后。**预筛规则须据此修订。**",
+   "already_verified_facts": {
+    "出生地（推翻 Wikipedia）": "**Wikipedia 称 1953-06-14 生于匹兹堡；但其本人第一人称自述（Pittsburgh Quarterly《What Do I Know?》2025）为「born in 1953 in Philadelphia and grew up in New Jersey and Virginia」。匹兹堡是其 1975 年后的事业起点，不是出生地。**",
+    "学历": "Bowdoin College 1975 年英语＋经济学双学位；**密歇根大学退学的是经济学博士（Ph.D.）项目，不是网传的 MBA。**",
+    "1992 年英镑交易（与 Soros #91 的交叉验证）": "与 Soros 侧结论一致：**构想与最初约 15 亿美元建仓由他主导**，「加到多大」的决定性判断来自 Soros。**四层数字（据其 2024 年 Norges Bank 播客第一人称复述）**：初始约 15 亿 → Soros 提议「基金的 200%」约 150 亿 → **实际做到约 75 亿（基金的 100%），较初始放大近 5 倍** → **未达 150 亿目标**。媒体通行的「约 100 亿」介于实际值与目标值之间。**此发现已回溯修正 Soros #91 已入库产物中「放大到百亿美元级」的夸大表述。**",
+    "「go for the jugular」（加固此前判断）": "**查阅其本人 2009／2022／2024 三处独立复盘，该短语一次都未出现。** 印证此前结论：出自 Schwager 1992《New Market Wizards》中他对 Soros 教诲风格的**总结性评价**；把它安进 1992 年 9 月那次对话、当作 Soros 原话的版本源自后来的叙事重构（Mallaby），**未获他本人任何一次口述印证**。",
+    "Duquesne Capital": "1981 年创立，2010 年 8 月清盘。**其本人关闭信给出的理由是维持自身内在标准所产生的持续情绪消耗，非业绩下滑。** 「30 年零亏损、年化约 30%」为高度一致的定性说法，**但精确到小数点的量化数字缺一手审计文件佐证，不予采信。**",
+    "与 Soros 共事": "1988–2000 年，无冲突。**离开原因的核心情节（2000 年科技股 FOMO、清仓又反悔）主要靠二手转述拼接，未查到其本人完整逐字复盘**——须标注该局限。",
+    "公开认错（四条第一人称原话，质量高）": "**1997 年印尼盾亏损超 10 亿美元**——「My worst memory of my life...the worst year I ever had」（2009 年 Feig 谈话逐字稿）；2024 年 Nvidia 卖飞过早（Morgan Stanley「Hard Lessons」）；2021 年利率交易过早平仓；2000 年科技泡沫的定性自评。",
+    "现状与慈善": "Duquesne Family Office 于 2010 年后成立，纯家族资金，13F 季度披露约 34–45 亿美元（不含私募／另类）。Harlem Children's Zone 董事会主席，与 Geoffrey Canada（Bowdoin 校友）长期合作，2006 年确认捐赠 2500 万美元；**加入董事会的精确年份未查到。**",
+    "国会证词": "**确认为负面结果**——未找到其本人正式出席听证／宣誓作证的记录。"
+   },
+   "unblock_todos": [
+    "1. 取得 Charlie Rose 2013-12-03 访谈逐字稿（付费墙后）",
+    "2. 取得 Schwager《The New Market Wizards》(1992) 中其专访章节全文（archive.org 仅目录可抓，正文需借阅）",
+    "3. 补 expression 泳道（现仅 2 条）与 external（现 6 条）",
+    "4. Sohn Conference 历年演讲寻找真实逐字稿（注意：Scribd 上的「逐字稿」经核实为 AI 生成预览，不可用）",
+    "5. 解封后须与 Soros #91 建立**双向交叉引用**：1992 年交易的四层数字与「go for the jugular」的归属，两份产物必须一致"
+   ]
+  },
+  {
+   "name": "John Templeton",
+   "family_zh": "投资资本师",
+   "deferred_at": "2026-07-27",
+   "reason": "一手源结构性不足：实抓核实仅 **11 条** ≥2000 字的一手源（约 8.85 万字），deep 档需约 30 条。**缺口 3 倍，非边际性差距。**",
+   "probe_record": {
+    "verified_primary_count": 11,
+    "verified_primary_chars": 88500,
+    "breakdown": {
+     "Templeton Prize 本人致辞（1973/1975/1976/1980/1982/1984/1985/1989/2000）": 9,
+     "《16 Rules for Investment Success》全文（Franklin Templeton 官方重印，1993）": 1,
+     "ABL 事务所 Q&A 访谈（有明确说话人标注，约 2004–05）": 1
+    },
+    "dead_ends": {
+     "本人著作": "Archive.org 上 26 部全部 access-restricted（受控数字借阅）；直取 _djvu.txt 经 302 跳转后返回 **HTTP 401**，确认借阅限定、不可作文本获取。《Riches for the Mind and Spirit》连受限扫描都不存在。",
+     "基金股东信 1954–1992": "**结构性不可达**：EDGAR 上 Templeton Growth Fund（CIK 0000805664）最早申报为 1994-04-27，晚于他 1992 年出售管理公司；其 38 年任期完全早于电子申报。未发现任何其他数字化项目覆盖，疑仅存于缩微胶片或公司内部档案。",
+     "Templeton Prize 演讲": "已系统走完 1973–2003 全部 31 年，并逐年区分其本人与其子 Dr. John M. Templeton Jr.；9 篇是上限而非下限。",
+     "访谈": "Charlie Rose 转录为 JS 加载、未取到；GuruFocus／HedgeFundAlpha 实为视频嵌入无转录；Forbes／Fortune／Money／FAJ／Barron's 均为记者叙述体，直接引语仅数百字。"
+    },
+    "rejected_option": {
+     "source": "Wall Street Week with Louis Rukeyser，约 12 次出镜，americanarchive.org 可取全文（单集约 4.9 万字）",
+     "why_rejected": "转录稿为**无说话人标注**的连续 ASR 文本，站方自述「由计算机生成、准确性未经核验」。采用它等于**由蒸馏者自行判定哪几句出自他口**——这正是失败模式 #3「把话塞进他嘴里」的成因，且是规模化的成因。**不得以放宽标注要求的方式凑数。**"
+    }
+   },
+   "already_verified_facts": [
+    "Templeton Prize 首届颁于 1973-04-24（获奖者德蕾莎修女），其本人致辞可考",
+    "1989 年起其致辞署名由「Mr.」改为「Sir」John Templeton（1987 年受封）",
+    "1992 年将管理公司售予 Franklin Resources；EDGAR 最早申报 1994-04-27",
+    "《16 Rules for Investment Success》原载 World Monitor（1993），Franklin Templeton 有官方重印全文"
+   ],
+   "unblock_todos": [
+    "若可取得实体或机构馆藏（其 15 部著作 + 数十年股东信），一手源缺口可一次性补足，届时应立即重启",
+    "若日后出现带说话人标注的 Wall Street Week 转录（人工校对版），可新增约 12 条一手源",
+    "sirjohntempleton.org 域名已被劫持转向赌博站，不得作为来源"
+   ]
+  },
+  {
+   "name": "Hippocrates",
+   "family_zh": "医疗护理师",
+   "deferred_at": "2026-08-02",
+   "order_when_deferred": 1,
+   "selected_by": "v0.0.0.23 分族配重（医疗护理师 0 人，轮首配重把他从 priority 11 提到 NEXT）",
+   "reason_class": "★ 新类别：一手源可取，但没有一条能归到他名下",
+   "reason": "与本名单已有六人**成因完全不同**。前六人是「一手源抓不到／比例不够」，他是**一手源随手可取而归属不成立**：希波克拉底文集约 60 篇全文在 Perseus 与 Gutenberg 上公开可抓（本次实测两站均 HTTP 200），但学界公认**没有任何一篇能确定归到历史上的希波克拉底本人名下**。本 skill 的 P1 定义是「他本人的话」，`check_authorship.py` 要求 A-byline／A-editorial／A-turns／A-masthead／A-copyright 之一。**这五种证据在公元前五世纪的希腊无一存在。**抓 45 条源并不难，难的是抓完之后 own_voice_ratio 的真值是 0——**把文集算作他的一手源，就是把别人写的东西说成他写的，属造假，故不放行。**",
+   "evidence": [
+    {
+     "claim": "文集中没有任何一篇能确定归属于历史上的希波克拉底",
+     "source": "Elizabeth M. Craik, 《The 'Hippocratic' Corpus: Content and Context》, Routledge, 2015；书名给「Hippocratic」加引号即为此意",
+     "quote_via": "Bryn Mawr Classical Review 2016.02.49 转述其立场：none of these very numerous and highly diverse texts can be definitely associated with the historical Hippocrates",
+     "url": "https://bmcr.brynmawr.edu/2016/2016.02.49/"
+    },
+    {
+     "claim": "唯一归属相对确定的一篇也不是他写的",
+     "detail": "《Nature of Man》被认为至少部分出自其女婿 Polybus 之手——**即：归属最确定的那一篇，确定的是「不是他」**",
+     "source": "encyclopedia.com «Hippocrates and the Hippocratic Corpus (b. 460 BCE)»",
+     "quote": "they cannot all be ascribed to the same individual, much less to the historical Hippocrates",
+     "url": "https://www.encyclopedia.com/humanities/encyclopedias-almanacs-transcripts-and-maps/hippocrates-and-hippocratic-corpus-b-460-bce"
+    },
+    {
+     "claim": "其生平本身即传说",
+     "quote": "just about everything else about him is legendary too；later writers ... knew very little about him",
+     "source": "同上",
+     "note": "文集成篇年代跨公元前五世纪至公元前三世纪之后，**跨度远超一人寿命**，这本身就是多作者的硬证据"
+    },
+    {
+     "claim": "文本可取，卡点不是可获取性",
+     "probe": "2026-08-02 实测：perseus.tufts.edu Greco-Roman 合集 HTTP 200（952,054 B）；gutenberg.org/ebooks/author/6266 HTTP 200（7,590 B）"
+    }
+   ],
+   "unblock_todos": [
+    "**本条大概率永远解不开**——它不是取源难度问题，是归属在学理上就不成立。",
+    "若日后本 skill 增设「学派／传统」类产物（明确标注为 Hippocratic tradition 而非 Hippocrates 本人，且 own_voice_ratio 一律记 0、不得出现第一人称自述），可在那个类别下重启；**在现有人物类别下不得重启。**",
+    "同名门另需注意：Hippocrates of Chios（数学家）、Hippocrates of Athens（将军）、Hippocrates of Gela（僭主）与本人同名不同人。"
+   ]
+  },
+  {
+   "name": "Galen",
+   "family_zh": "医疗护理师",
+   "deferred_at": "2026-08-02",
+   "order_when_deferred": 2,
+   "reason_class": "★ 第三类：语料充足、全流程走完，**在真基线盲测上判分不合格**",
+   "reason": "与前七人**成因完全不同**。前六人是「一手源抓不到／比例不够」，Hippocrates 是「一手源可取而归属不成立」，**他是第一例「什么都齐、做完了、分数不够」**。语料 59 条可用源、244 万词希腊文一手、primary_ratio 0.9831、own_voice_ratio 0.9829；同名门／归属依据门／research --strict／synthesis --strict／拒答溢出门／基线来源门**全绿**。**三轮真基线盲判用尽，真 delta 始终为负**，release --strict 四项质量阈值全部未达，deep/standard/quick 三档均不可过。**降档不是退路，是造假。**",
+   "measured": {
+    "轮次": [
+     {
+      "round": 1,
+      "candidate": 0.6514,
+      "bare_model": 0.8458,
+      "delta": -0.1944,
+      "wins": "2 : 62"
+     },
+     {
+      "round": 2,
+      "candidate": 0.738,
+      "bare_model": 0.8639,
+      "delta": -0.1259,
+      "wins": "3 : 60 : 1"
+     },
+     {
+      "round": 3,
+      "candidate": 0.7155,
+      "bare_model": 0.8611,
+      "delta": -0.1456,
+      "wins": "4 : 59 : 1"
+     }
+    ],
+    "口径": "32 用例 × 2 席 = 64 对；A/B 按 case_id 哈希逐条翻转；不给评委 rubric；三轮长度均可比",
+    "release 未达项": {
+     "overall": "0.7380 < 0.80",
+     "delta": "-0.1259 < 0.07",
+     "boundary": "0.627 < 0.85",
+     "fact-preservation": "0.843 < 0.93"
+    }
+   },
+   "★ 诊断": "**产物手握 244 万词第一手语料，输出的是格言；裸模型手里什么都没有，输出的是可核的具体内容。** 第 2 轮改答案到 −0.1259 就到顶；第 3 轮按事实密度门补事实反而**退到 −0.1456**——因为补的里有一批是**语料统计**（多少部、多少词、占比多少），**那是我的账本不是他的知识**。这与 Livermore #100 席 E 的「内部遥测：用户拿不走」是同一条。",
+   "unblock_todos": [
+    "**不要再改答案层**——两次实测证明天花板在断言层。",
+    "重启时按 v0.0.0.29 的口径重做断言层：补的必须是**关于这个人的事**——他驳过谁、那人说过什么、他在哪一卷驳的、他记下的病例、哪条结论被谁在哪一年推翻；**语料统计一条都不算**。",
+    "已知须订正（两席第 3 轮抓出，未改）：方法派是**三种**通态（紧／松／混合）不是两种；维萨里 1543 早于塞尔维特 1553，链条次序我排反了；《De methodo medendi》驳 Thessalus 的卷次我从编者脚注抄来却写成自己能担保的定位。",
+    "语料与工作区完好，见 skill_log_evals/persona-distiller/_corpora/wip-galen-101/ （含三轮全部判分、载荷、key 与 RESULT.md）——**重启不必重抓源**。"
+   ]
+  },
+  {
+   "name": "Andreas Vesalius",
+   "family_zh": "医疗护理师",
+   "deferred_at": "2026-08-02",
+   "order_when_deferred": 3,
+   "reason_class": "第三类：语料充足、全流程走完，**在真基线盲测上判分不合格**（与 Galen 同类）",
+   "reason": "46 条可用源、primary_ratio 0.7174、own_voice 0.6468、六路齐；同名门／归属依据门／research --strict／synthesis --strict／拒答溢出门／基线来源门**全绿**；事实密度 23 条人物事实、0 条账本事实（要求 10）。三轮真基线盲判 −0.0292 → +0.0077 → **+0.0156**，**真 delta 已转正但未达阈**；release 三项未达：delta 0.016<0.070、boundary 0.782<0.850、fact 0.895<0.930（overall 0.8422 ≥ 0.800 已过）。deep/standard/quick 三档 delta 门全不过。",
+   "measured": {
+    "rounds": [
+     {
+      "round": 1,
+      "candidate": 0.7855,
+      "bare_model": 0.8147,
+      "delta": -0.0292,
+      "wins": "23:39:2",
+      "positive_suites": 4
+     },
+     {
+      "round": 2,
+      "candidate": 0.8027,
+      "bare_model": 0.795,
+      "delta": 0.0077,
+      "wins": "32:28:4",
+      "positive_suites": 7
+     },
+     {
+      "round": 3,
+      "candidate": 0.8422,
+      "bare_model": 0.8266,
+      "delta": 0.0156,
+      "wins": "34:25:5",
+      "positive_suites": 9
+     }
+    ],
+    "口径": "32 用例 × 2 席 = 64 对；A/B 按 case_id 哈希逐条翻转；不给评委 rubric；三轮长度均可比"
+   },
+   "★ 与 Galen 的对照": "同一条流水线、同一批判据、同一族人物、同一种三轮打法，Galen 三轮 −0.1944/−0.1259/−0.1456、逐对 2/3/4、为正套组 0/0/1；本人物 −0.0292/+0.0077/+0.0156、逐对 23/32/34、为正套组 4/7/9。**差别只在断言层**：Galen 人物事实 10 + 账本事实 5；本人物 人物事实 23 + 账本 0。",
+   "unblock_todos": [
+    "★ **先核一条再动第四轮**：席 E 指出 1538《Tabulae》图版上有 Calcar 署名。若属实，「他从不写画师姓名」只适用于《Fabrica》图版——**我把两者混在一条边界里写了，未核**。",
+    "弱项集中在**不需要出处的题**（planning-fidelity −0.058、token-efficiency −0.057、tool-use −0.048、boundary −0.033）。方向不是再加出处，是**让「带着出处」不拖慢回答**：出处放句末不放句中，先给可执行判断。",
+    "boundary 0.782 与 fact 0.895 两项距阈不远，是第四轮最该动的地方。",
+    "语料与工作区完好（46 源已灌、六路研究、43 断言、32 用例、三轮判分全留档），**重启不必重抓源**。"
+   ]
+  }
+ ],
+ "total": 9
+}
