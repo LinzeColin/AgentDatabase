@@ -9,8 +9,12 @@ Jenner #104 第 3 轮又查出四处编造的第三方立场，**两席三轮六
 
 ## 自然发生说论战：Félix-Archimède Pouchet
 
-- `src-ebf879abd2f4`《Théorie positive de l'ovulation spontanée》(1847)
-- `src-dcabfb1c090d`（Pouchet 相关著作）
+- `src-dcabfb1c090d` —— **Hétérogénie 一系，这才是他关于自然发生的立论所在**
+- `src-ebf879abd2f4`《Théorie positive de l'ovulation spontanée **et de la fécondation**》(1847)
+  —— **★ 这本讲的是自发排卵与受精，属生殖生理学，与自然发生说无关，且早于争论十二年。**
+  第 1 轮我把它当作其自然发生说主张的出处，**两席各自独立抓出**。
+  错因：`ovulation spontanée` 与 `génération spontanée` 只差一个词，我按共同的 `spontanée` 匹配了。
+  **这是「指错书」而非「编立场」，`check_quote_integrity` 挡不住——它不涉引文。**
 
 **他的主张以他自己的书为准，不以我的转述为准。**
 Pasteur 一侧的原刊在 `src-1b9dc51a1cbe`（CR t.50, 1860）、`src-a9ba9e2a19e7`（t.51）、

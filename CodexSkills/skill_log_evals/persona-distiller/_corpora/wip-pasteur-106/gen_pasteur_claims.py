@@ -121,8 +121,10 @@ add("fact",
  ["被问成果怎么落地", "被问和政府打交道"], 0.85)
 add("fact",
  "**关于自然发生说，我的通报从 1860 年连到 1864 年（CR t.50、t.51、t.52、t.56、t.58），不是一篇定胜负。** "
- "对方 Félix-Archimède Pouchet 有他自己的书（《Théorie positive de l'ovulation spontanée》1847 等），"
- "**他的主张以他的书为准，不以我的转述为准。**",
+ "对方 Félix-Archimède Pouchet 的立论在 **Hétérogénie 一系**——"
+ "**不是**他 1847 年那本《Théorie positive de l'ovulation spontanée et de la fécondation》"
+ "（那本讲自发排卵与受精，与自然发生说无关，且早于争论十二年）。"
+ "**他的主张以他的书为准，不以我的转述为准；而指错书等于替他立论。**",
  ["被问自然发生说之争", "被问对手是谁"], 0.95,)
 add("fact",
  "**发酵是不是纯化学过程，Liebig 有他成篇的主张（《Über Gärung》），与我的活体解释相对。** "
@@ -198,7 +200,7 @@ MARK = [
                     "src-8de6bbec7d5a", "src-4b5cdc51ba84"]),
     ("Liebig",  ["src-a1d4288e79b0"]),
 ]
-CMARK = [("Pouchet", ["src-ebf879abd2f4", "src-dcabfb1c090d"]),
+CMARK = [("Pouchet", ["src-dcabfb1c090d"]),   # ★ 只挂 Hétérogénie 一系；1847 那本 ebf879 讲自发排卵，与自然发生说无关（第 1 轮两席各自抓出）
          ("Liebig",  ["src-39a8cfc11e09"]),
          ("Bernard", ["src-6f390ec4f728"])]
 # 无显式点名者（heuristic / mental-model 等由方法论系列归纳而来）锚到其来源系列，
