@@ -17,7 +17,7 @@ def main() -> int:
     cases = {json.loads(l)["case_id"]: json.loads(l)
              for l in (WS / "evals/cases.jsonl").read_text(encoding="utf-8").splitlines() if l.strip()}
     seats = {}
-    for seat, f in (("seat-D-score-v1", "galen_judge_D.json"), ("seat-E-strict-v1", "galen_judge_E.json")):
+    for seat, f in (("seat-D-score-v1", "galen_judge_D2.json"), ("seat-E-strict-v1", "galen_judge_E2.json")):
         p = SP / f
         if not p.is_file():
             print(f"缺 {f} —— **两席不齐不出结论**", file=sys.stderr)
@@ -42,7 +42,7 @@ def main() -> int:
             for sys_name, sc in (("candidate", c), ("baseline", d)):
                 rows.append({"case_id": cid, "system": sys_name, "judge_id": seat,
                              "overall_score": round(float(sc), 2), "suite": spec["suite"],
-                             "round": 1,
+                             "round": 2,
                              "baseline_source": "bare-model-run" if sys_name == "baseline" else None})
     (WS / "evals/results.jsonl").write_text(
         "\n".join(json.dumps({k: v for k, v in r.items() if v is not None},
@@ -61,7 +61,7 @@ def main() -> int:
     json.dump({"candidate": round(C, 4), "bare_model": round(B, 4), "delta": round(C - B, 4),
                "pairs": len(cand_s), "wins_candidate": wins[0], "wins_bare": wins[1], "ties": wins[2],
                "baseline_source": "bare-model-run"},
-              open(SP / "galen_blind_result.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+              open(SP / "galen_blind_result_r2.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     return 0
 
 

@@ -1,0 +1,10 @@
+{
+ "candidate": 0.738,
+ "bare_model": 0.8639,
+ "delta": -0.1259,
+ "pairs": 64,
+ "wins_candidate": 3,
+ "wins_bare": 60,
+ "ties": 1,
+ "baseline_source": "bare-model-run"
+}
