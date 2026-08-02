@@ -80,3 +80,49 @@ Vaccinae》(1798) 是英文原著，`archive.org/details/b24759247` 有全本。
 1. **1788 年因杜鹃雏鸟研究入皇家学会**——生平叙述里常见，**我未单独核**。
 2. **其子 Edward Jenner Jr. 的生卒年**——同名门靠年代分辨，这个数必须坐实。
 3. **皇家学会退稿一说**——广泛流传，**须找到一手依据或降级为 hypothesis**。
+
+---
+
+# 续记 · 2026-08-02（研究门 + 断言层全绿）
+
+## 已完成
+
+| 步 | 结果 |
+|---|---|
+| 抓源 | **53 份真语料**（原 47 份里 4 份是 HTML 错误页，已由 v0.0.0.33 入口硬拦剔除；另补取 8 份） |
+| ingest | 53 成功 / 0 失败，1 份 holdout |
+| `attribution_basis` | 四字段齐，`disputed_works: []` 且写明为何为空 |
+| 归属 | 30 条 P1 源逐条挂 attribution |
+| 研究六路 | **六路全 complete**，`errors 0` |
+| 断言层 | **29 条，其中 fact 16 条全部是人物事实、账本事实 0 条**（要求 11） |
+| `corpus_integrity` | 已扫 53，不是语料 0，可疑 0 |
+
+## ★ 断言层里最硬的三条（都可回语料 grep）
+
+1. **1798 初版里没有「Phipps」**——第 XVII 例原文只写 `a healthy boy, about eight years old`。
+   实测初版 0 次、1800 三版 3 次。**名字是后来版次加的。**
+2. **「Blossom」三个版次一处都没有**（实测各 0 次）。而 Sarah Nelmes 在初版里有 2 处并配图版。
+   **他给了那个女人名字，没给那个男孩名字。**
+3. **扉页印着 `PRINTED, FOR THE AUTHOR`**，题词是卢克莱修
+   `QUID NOBIS CERTIUS IPSIS SENSIBUS ESSE POTEST, QUO VERA AC FALSA NOTEMUS`。
+   **自费出版是扉页上的字，不是转述。**
+
+## 下一步（按顺序）
+
+```bash
+# 1. 合成阶段文档（docs/*.md）+ quality_check --phase synthesis --strict
+# 2. 32 个评测用例（16 套组 × 2），A/B 由 sha256(case_id)%2 定
+# 3. 生成候选答案与裸模型基线
+# 4. 两席独立子代理盲判，**上限 3 轮**（judge_prompts v1 按人物冻结）
+# 5. quality_check --phase release --strict
+```
+
+## 三条硬约束（跑答案时不许破）
+
+1. **账本事实一条不写。**（Galen 10:5 → −0.15）
+2. **每条「对手主张 X」必须指到对手的书。**（Harvey 编造 Riolan 立场 → −0.038）
+   Moseley／Birch／Lipscomb 的书目已在 `04-external.md` 列全。
+   **Woodville 是复现者不是反对者**，不许混为一谈。
+3. **凡引 Baron 转录的书信须写「据 Baron 转录」。**
+   凡引 1798 原文须注明长 s 已还原（`check_quote_layer.py` 管这一条；
+   **他写英文，无译文层，这是本人物的结构性优势**）。
