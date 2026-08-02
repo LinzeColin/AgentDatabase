@@ -1,9 +1,16 @@
+import re
 from pathlib import Path
 
 
-ROOT = Path(__file__).resolve().parents[1]
-APP = ROOT / "apps" / "memory-atlas"
-APP_SOURCE = APP / "src" / "App.tsx"
+REPOSITORY_ROOT = Path(__file__).resolve().parents[2]
+APP = REPOSITORY_ROOT / "MemoryAtlas"
+APP_SOURCE_FILES = (
+    APP / "src" / "shared" / "atlas" / "constants.tsx",
+    APP / "src" / "app" / "MemoryAtlasShell.tsx",
+    APP / "src" / "features" / "settings" / "InteractionLens.tsx",
+    APP / "src" / "features" / "sync" / "CommandPalettePanel.tsx",
+    APP / "src" / "components" / "VisualWorkflowWorkbench.tsx",
+)
 CHINESE_COPY = APP / "src" / "i18n" / "zh-CN.ts"
 BROWSER_VALIDATOR = (
     APP / "scripts" / "validate_memory_atlas_v1_2_home_multiviewport.cjs"
@@ -36,7 +43,7 @@ def test_v1_2_release_identity_and_question_navigation_copy() -> None:
 
 
 def test_product_shell_exposes_r2_identity_groups_and_folded_machine_details() -> None:
-    source = APP_SOURCE.read_text(encoding="utf-8")
+    source = "\n".join(path.read_text(encoding="utf-8") for path in APP_SOURCE_FILES)
 
     for required in (
         'const PRODUCT_IDENTITY_VERSION = "memory_atlas_product_identity.v1_2_r2"',
@@ -46,10 +53,14 @@ def test_product_shell_exposes_r2_identity_groups_and_folded_machine_details() -
         'className="sidebar-data-status"',
         'className="lens-technical-details"',
         'className="command-technical-details"',
-        'className="formula-technical-details"',
         'scrollIntoView({ block: "nearest", inline: "nearest" })',
     ):
         assert required in source
+
+    assert re.search(
+        r'className="[^"]*\bformula-technical-details\b[^"]*"',
+        source,
+    )
 
 
 def test_browser_gate_covers_r2_identity_copy_disclosure_and_focus() -> None:

@@ -106,7 +106,10 @@ export function isMemoryAtlas(value: unknown): value is MemoryAtlas {
 function isValidWritebackPolicy(value: unknown): boolean {
   if (!isRecord(value) || !isRecord(value.writeback_policy)) return false;
   return (
-    value.mode === "public_redacted_read_only_visualization" &&
+    [
+      "public_redacted_read_only_visualization",
+      "private_full_fidelity_read_only_analytics",
+    ].includes(String(value.mode)) &&
     value.writeback_policy.frontend_can_request_writeback === true &&
     value.writeback_policy.writeback_must_use_proposals === true &&
     value.writeback_policy.direct_frontend_mutation_of_active_memory === false

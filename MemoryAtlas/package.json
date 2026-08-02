@@ -185,7 +185,8 @@
     "validate:stage9": "node scripts/validate_memory_atlas_stage9.cjs",
     "validate:memory-starfield-interaction": "node scripts/validate_memory_starfield_interaction.mjs",
     "validate:memory-starfield-mapping": "node scripts/validate_memory_starfield_mapping.mjs",
-    "validate:universe-state-spike": "node --experimental-strip-types scripts/validate_universe_state_spike.mjs"
+    "validate:universe-state-spike": "node --experimental-strip-types scripts/validate_universe_state_spike.mjs",
+    "validate:v31": "node scripts/validate_memory_atlas_v31.cjs"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.1.1",

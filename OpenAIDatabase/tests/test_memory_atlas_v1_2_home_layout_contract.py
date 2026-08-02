@@ -2,8 +2,8 @@ import json
 from pathlib import Path
 
 
-ROOT = Path(__file__).resolve().parents[1]
-APP = ROOT / "apps" / "memory-atlas"
+REPOSITORY_ROOT = Path(__file__).resolve().parents[2]
+APP = REPOSITORY_ROOT / "MemoryAtlas"
 STYLES = APP / "src" / "styles.css"
 PACKAGE = APP / "package.json"
 BROWSER_VALIDATOR = (

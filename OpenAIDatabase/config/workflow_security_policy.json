@@ -4,6 +4,7 @@
     ".github/workflows/dual-plane.yml",
     ".github/workflows/dynamic-profile-update.yml",
     ".github/workflows/memory-atlas-acceptance.yml",
+    ".github/workflows/memory-atlas-v31.yml",
     ".github/workflows/openai-database-ci.yml",
     ".github/workflows/recurring-prompt-analysis.yml"
   ],
@@ -42,6 +43,11 @@
       "source": "https://api.github.com/repos/actions/setup-python/git/ref/tags/v5"
     },
     {
+      "action": "actions/setup-node",
+      "commit_sha": "49933ea5288caeca8642d1e84afbd3f7d6820020",
+      "source": "https://api.github.com/repos/actions/setup-node/git/ref/tags/v4"
+    },
+    {
       "action": "actions/upload-artifact",
       "commit_sha": "ea165f8d65b6e75b540449e92b4886f43607fa02",
       "source": "https://api.github.com/repos/actions/upload-artifact/git/ref/tags/v4"
@@ -70,6 +76,11 @@
     {
       "path": ".github/workflows/memory-atlas-acceptance.yml",
       "role": "memory_atlas_acceptance_ci",
+      "trust_boundary": "trusted_repository_ci_read_only"
+    },
+    {
+      "path": ".github/workflows/memory-atlas-v31.yml",
+      "role": "memory_atlas_v31_acceptance_ci",
       "trust_boundary": "trusted_repository_ci_read_only"
     },
     {

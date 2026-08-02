@@ -18,6 +18,7 @@ OpenAIDatabase、MetaDatabase 各项目）都用本客户端跨仓读写数据�
 """
 import argparse, base64, hashlib, json, os, re, subprocess, sys, tempfile
 from datetime import date
+from urllib.parse import quote, urlparse
 
 REPO = "LinzeColin/Private-Database"
 BRANCH = "main"
@@ -91,6 +92,48 @@ def _get_meta(path):
         if "Not Found" in str(e) or "404" in str(e):
             return None
         raise
+
+
+def _release_asset_meta(reference):
+    """Resolve a governed github-release://owner/repo/tag/asset manifest reference."""
+    parsed = urlparse(reference)
+    parts = [parsed.netloc, *parsed.path.strip("/").split("/")]
+    if parsed.scheme != "github-release" or len(parts) != 4:
+        return None
+    owner, repository, tag, asset_name = parts
+    if f"{owner}/{repository}" != REPO or not tag or not asset_name:
+        return None
+    out = _gh([f"repos/{REPO}/releases/tags/{quote(tag, safe='')}"])
+    release = json.loads(out)
+    matches = [asset for asset in release.get("assets", []) if asset.get("name") == asset_name]
+    return matches[0] if len(matches) == 1 else None
+
+
+def _manifest_object_exists(area, record):
+    object_path = str(record.get("object_path", ""))
+    if object_path.startswith("github-release://"):
+        asset = _release_asset_meta(object_path)
+        if not asset or asset.get("state") != "uploaded":
+            return False
+        expected_size = record.get("size_bytes")
+        expected_sha256 = str(record.get("sha256", ""))
+        return (
+            isinstance(expected_size, int)
+            and asset.get("size") == expected_size
+            and len(expected_sha256) == 64
+            and asset.get("digest") == f"sha256:{expected_sha256}"
+        )
+    if "://" in object_path:
+        return False
+    if object_path.startswith(f"{area}/"):
+        content_path = object_path
+    elif any(object_path.startswith(f"{candidate}/") for candidate in AREAS):
+        return False
+    else:
+        content_path = f"{area}/{object_path}"
+    meta = _get_meta(content_path)
+    expected_size = record.get("size_bytes")
+    return bool(meta) and (not isinstance(expected_size, int) or meta.get("size") == expected_size)
 
 
 def put(area, relpath, local, message=None, _data=None):
@@ -220,12 +263,14 @@ def verify(area):
         if not line:
             continue
         r = json.loads(line)
-        if _get_meta(f"{area}/{r['object_path']}"):
+        if _manifest_object_exists(area, r):
             ok += 1
         else:
             miss += 1; print(f"  ✗ 缺对象：{r['object_path']}")
     os.unlink(tmp)
     print(f"{area}: 账本 {ok+miss} 条，对象在仓 {ok}，缺 {miss}")
+    if miss:
+        raise SystemExit(2)
 
 
 def main():
