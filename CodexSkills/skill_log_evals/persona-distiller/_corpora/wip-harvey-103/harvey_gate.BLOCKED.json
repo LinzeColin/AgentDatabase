@@ -1,0 +1,97 @@
+{
+  "candidate_cards": [
+    "A. 人物与身份：William Harvey；医疗护理师；英国医师、解剖学家；血液循环的发现者。\n   专业背景：1578-04-01 生于肯特郡福克斯通，1657-06-03 卒于伦敦罗汉普顿。父 Thomas Harvey，福克斯通市政官，1600 年任市长；他是九个孩子里的长子。坎特伯雷国王学校五年；1593 年入剑桥冈维尔与凯斯学院，1597 年学士；**1602-04-25 于帕多瓦获医学博士，师从 Hieronymus Fabricius**（法布里修斯，静脉瓣的描述者）。1604-10-05 入皇家内科医学院，随后娶 Lancelot Browne 之女 Elizabeth Browne，**无子女**。1609-10-14 接任圣巴塞洛缪医院主治医师。1615-08-04 受任 Lumleian 讲席，**1616 年 4 月开讲**。1618-02-03 任詹姆斯一世的「特命御医」，1632 年后任查理一世的「常任御医」。**1628 年在法兰克福出版《Exercitatio Anatomica de Motu Cordis et Sanguinis in Animalibus》（72 页）**；1651 年出版《Exercitationes de generatione animalium》。1642 年内战中一伙反王党士兵闯入其寓所劫掠、**散失其手稿**——其中有大量尸检记录、昆虫发育观察与比较解剖笔记。。\n   应用价值：场景：用定量论证推翻定性传统：**算出心脏一小时泵出的血量，证明它不可能是新生的**；把老师教过的结构（静脉瓣）重新解释成与老师不同的功能；在整个学界站在对面时坚持一条可测的判据；面对具名同行的公开攻击（Primrose、Parisano、Hofmann、Riolan）如何回应；关键能力：定量估算与由此产生的归谬论证；活体动物实验与结扎、压迫一类可当场复现的演示；把「老师是对的」与「老师的解释是对的」分开；长期扣住不发表——Lumleian 讲席 1616 年开讲，**1628 年才出书**。\n   区分依据：1578–1657；帕多瓦 1602 师从 Fabricius；1628 法兰克福《De Motu Cordis》；圣巴塞洛缪医院与两代英王御医——**这些锚点与任何同名者都不重合**。",
+    "B. 人物与身份：William Harvey Hospital / William Harvey Research Institute（机构，非人物）；非人物（机构）；以其命名的医院与研究所。\n   专业背景：**检索污染的首要来源**：英语检索「William Harvey」+ 医学，机构结果量级远高于人物本身。非人物，不构成候选。。\n   应用价值：场景：不适用；关键能力：不适用。\n   区分依据：机构而非人物；成立于二十世纪。",
+    "C. 人物与身份：Thomas Harvey（其父）；政治法律师；福克斯通市政官，1600 年任市长。\n   专业背景：同姓、同地、同期。检索肯特郡十七世纪地方档案时会与其子混淆。无医学著述。。\n   应用价值：场景：不适用；关键能力：不适用。\n   区分依据：市政官而非医师；无著述。"
+  ],
+  "candidate_count": 3,
+  "candidates": [
+    {
+      "application_scenarios": [
+        "用定量论证推翻定性传统：**算出心脏一小时泵出的血量，证明它不可能是新生的**",
+        "把老师教过的结构（静脉瓣）重新解释成与老师不同的功能",
+        "在整个学界站在对面时坚持一条可测的判据",
+        "面对具名同行的公开攻击（Primrose、Parisano、Hofmann、Riolan）如何回应"
+      ],
+      "authoritative_sources": [
+        {
+          "kind": "encyclopedia",
+          "locator": "https://en.wikipedia.org/wiki/William_Harvey"
+        },
+        {
+          "kind": "self-authored-book",
+          "locator": "William Harvey, Exercitatio Anatomica de Motu Cordis et Sanguinis in Animalibus, Frankfurt, 1628"
+        }
+      ],
+      "canonical_name": "William Harvey",
+      "distinguishing_basis": "1578–1657；帕多瓦 1602 师从 Fabricius；1628 法兰克福《De Motu Cordis》；圣巴塞洛缪医院与两代英王御医——**这些锚点与任何同名者都不重合**",
+      "evidence_level": "high",
+      "identity_category": "医疗护理师",
+      "key_capabilities": [
+        "定量估算与由此产生的归谬论证",
+        "活体动物实验与结扎、压迫一类可当场复现的演示",
+        "把「老师是对的」与「老师的解释是对的」分开",
+        "长期扣住不发表——Lumleian 讲席 1616 年开讲，**1628 年才出书**"
+      ],
+      "label": "A",
+      "occupation_or_role": "英国医师、解剖学家；血液循环的发现者",
+      "professional_background": "1578-04-01 生于肯特郡福克斯通，1657-06-03 卒于伦敦罗汉普顿。父 Thomas Harvey，福克斯通市政官，1600 年任市长；他是九个孩子里的长子。坎特伯雷国王学校五年；1593 年入剑桥冈维尔与凯斯学院，1597 年学士；**1602-04-25 于帕多瓦获医学博士，师从 Hieronymus Fabricius**（法布里修斯，静脉瓣的描述者）。1604-10-05 入皇家内科医学院，随后娶 Lancelot Browne 之女 Elizabeth Browne，**无子女**。1609-10-14 接任圣巴塞洛缪医院主治医师。1615-08-04 受任 Lumleian 讲席，**1616 年 4 月开讲**。1618-02-03 任詹姆斯一世的「特命御医」，1632 年后任查理一世的「常任御医」。**1628 年在法兰克福出版《Exercitatio Anatomica de Motu Cordis et Sanguinis in Animalibus》（72 页）**；1651 年出版《Exercitationes de generatione animalium》。1642 年内战中一伙反王党士兵闯入其寓所劫掠、**散失其手稿**——其中有大量尸检记录、昆虫发育观察与比较解剖笔记。",
+      "subject_uid": "william-harvey-1578"
+    },
+    {
+      "application_scenarios": [
+        "不适用"
+      ],
+      "authoritative_sources": [
+        {
+          "kind": "encyclopedia",
+          "locator": "https://en.wikipedia.org/wiki/William_Harvey"
+        }
+      ],
+      "canonical_name": "William Harvey Hospital / William Harvey Research Institute（机构，非人物）",
+      "distinguishing_basis": "机构而非人物；成立于二十世纪",
+      "evidence_level": "high",
+      "identity_category": "非人物（机构）",
+      "key_capabilities": [
+        "不适用"
+      ],
+      "label": "B",
+      "occupation_or_role": "以其命名的医院与研究所",
+      "professional_background": "**检索污染的首要来源**：英语检索「William Harvey」+ 医学，机构结果量级远高于人物本身。非人物，不构成候选。",
+      "subject_uid": "institution-named-after-harvey"
+    },
+    {
+      "application_scenarios": [
+        "不适用"
+      ],
+      "authoritative_sources": [
+        {
+          "kind": "encyclopedia",
+          "locator": "https://en.wikipedia.org/wiki/William_Harvey"
+        }
+      ],
+      "canonical_name": "Thomas Harvey（其父）",
+      "distinguishing_basis": "市政官而非医师；无著述",
+      "evidence_level": "medium",
+      "identity_category": "政治法律师",
+      "key_capabilities": [
+        "不适用"
+      ],
+      "label": "C",
+      "occupation_or_role": "福克斯通市政官，1600 年任市长",
+      "professional_background": "同姓、同地、同期。检索肯特郡十七世纪地方档案时会与其子混淆。无医学著述。",
+      "subject_uid": "thomas-harvey-father"
+    }
+  ],
+  "generated_at": "2026-08-02T02:42:27Z",
+  "normalized_name": "williamharvey",
+  "resolution": "multiple",
+  "schema_version": "1.0",
+  "search_scope": [
+    "sibling canonical registry",
+    "authoritative public sources supplied by orchestration"
+  ],
+  "selected_subject_uid": null,
+  "status": "blocked",
+  "target_name": "William Harvey"
+}

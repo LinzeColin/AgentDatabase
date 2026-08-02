@@ -1,9 +1,31 @@
 {
   "attribution_basis": {
     "authority": "**印刷时代的实物证据**：《Exercitatio Anatomica de Motu Cordis et Sanguinis in Animalibus》1628 年法兰克福出版（72 页），扉页署名、印制地与年份俱在；《Exercitationes de generatione animalium》1651 年伦敦出版。1653 年另有英译本，**译本单独记 tier，不与原版混记**。二次权威：Robert Willis 编《The Works of William Harvey》（Sydenham Society, 1847）与 Geoffrey Keynes 的 Harvey 书目——两者用于版次与真伪仲裁。",
-    "citation": "https://en.wikipedia.org/wiki/William_Harvey ｜ 1628 Frankfurt 版扉页（待探源交回可取数字化件后补 locator）",
-    "disputed_policy": "三步：① 只收能定到具体版次与印制地的件（1628 De Motu Cordis、1651 De Generatione、1649 致 Riolan 二书简）；② 译本与后世编本单独记 tier；③ 托名与归属存疑件逐条列入 disputed_works。★ **本人物有一个前两位都没有的特殊情况**：**1642 年内战中他的手稿被劫掠散失**（尸检记录、昆虫发育观察、比较解剖笔记）。**因此「他没写过 X」这类否定断言在他身上格外不可靠**——不在存世著作里，可能只是毁于那一次。这一条必须写进产物的边界。★ 另：Lumleian 讲席笔记（Prelectiones anatomiae universalis, BL MS Sloane 230）是**手稿不是出版物**，其归属与整理状况待探源交回后逐条填；**在填实之前，disputed_works 为空是「尚未探源」不是「已查明无争议」**。",
-    "disputed_works": []
+    "citation": "Willis 编《The Works of William Harvey》Sydenham Society, London MDCCCXLVII，C. and J. Adlard 印：https://archive.org/download/worksofwilliamha01harv ｜ 1653 首个英译本（Printed by Francis Leach for Richard Lowndes）：https://archive.org/download/b3033620x_0002 ｜ 1766 医学院版 Opera Omnia（Lawrence 与 Akenside 校订） ｜ De Generatione 1651 初版拉丁文（EEBO 衍生件）",
+    "counting_convention": "探源实测：**54 件可取，但去重后只有约 32 部不同著作**——其中 15 件是《De Motu Cordis》1639→1908 的不同版次与译本。**把 15 件算成 15 条源，正是拖垮前两位的语料注水。** 本工作区口径：**版次算源**（各有自己的扉页、印工、译者，且版次差异本身是证据），**但任何断言都不得建立在「本语料含 N 个版次」之上**——那是账本事实，按 check_fact_density v0.0.0.29 不计入密度。",
+    "disputed_policy": "三步：① 只收能定到具体版次与印制地的件（1628 De Motu Cordis、1651 De Generatione、1649 致 Riolan 二书简）；② 译本与后世编本单独记 tier；③ 托名与归属存疑件逐条列入 disputed_works。★ **本人物有一个前两位都没有的特殊情况**：**1642 年内战中他的手稿被劫掠散失**（尸检记录、昆虫发育观察、比较解剖笔记）。**因此「他没写过 X」这类否定断言在他身上格外不可靠**——不在存世著作里，可能只是毁于那一次。这一条必须写进产物的边界。★ 2026-08-02 探源交回，三条已填实，见 disputed_works。**其中 Prelectiones 一条须特别注意**：1886 年皇家内科医学院版的**自序里自己承认**「A few, for the most part illegible, additions in red ink … have been omitted in the transcript」——**通行印本静默删掉了后加的红笔批注**，而同一篇序又断言这份笔记是他 1616 年首次提出循环之处。**用一份自承有删节的版本去支撑一个年份断言，这条链是断的。**因此「他 1616 年已有循环说」**必须溯源到他自己 1628 年致 Argent 的献词**（「nine years and more」，即约 1619 年起），**不得溯源到 Sloane 230**。",
+    "disputed_works": [
+      {
+        "title": "Prelectiones anatomiae universalis（BL MS Sloane 230，1886 RCP 影印本）",
+        "verdict": "P1-DISPUTED",
+        "why": "手稿非出版物；1886 通行印本自序承认删去红笔批注，而 Whitteridge 1964 的现代校订本在版权内、无法取得，**故循环说的年份问题在本工作区无法从一手证据裁定**。**不得用它承载任何年份类断言。**"
+      },
+      {
+        "title": "De Motu Locali Animalium（BL MS Sloane 486, 1627）",
+        "verdict": "P1 但不可得",
+        "why": "归属无争议（其亲笔），但 1959 年 Whitteridge 首次刊行、在版权内、无开放文本。**本工作区无法核对其中任何一句，一切断言禁止建于其上。**"
+      },
+      {
+        "title": "1653 年首个英译本",
+        "verdict": "非本人授权",
+        "why": "Francis Leach 为 Richard Lowndes 印，**译者匿名、非哈维授权**，且与 Zachariah Wood 的序、James de Back 的《心论》装订在一起。**须单独记 tier，不得与原版混记。**"
+      },
+      {
+        "title": "Aubrey 关于 George Ent 代译拉丁文的说法",
+        "verdict": "已证伪",
+        "why": "Willis 1847 按年代驳倒：Ent 生于 1603，《De Motu Cordis》写于 1619 时他 16 岁、1628 年付印时 25 岁；且 Ent 自己的献词只说他校了印，原话是「As our author writes a bad hand … I have taken some pains to prevent the printer committing any very grave blunders」。★ **由此得一条用源规则：Aubrey 论其为人一流，论其书目不可靠。**"
+      }
+    ]
   },
   "builder_version": "v0.0.0.5",
   "chosen_subject_uid": "william-harvey-1578",
