@@ -1,29 +1,20 @@
-# Expression DNA and micro-behavior
+# 03 · 表达路：一个乡村医师怎么让全国人听懂
 
-## Scope and assigned sources
+## 通俗传播形态
 
-Pending. Use train-split source IDs only.
+`src-5d25bdcb4a4b` —— *A Cottage Dialogue on Vaccination; between Dan and Ned*（1820）。
 
-## Source-linked observations
+**这不是 Jenner 写的**，但它是他那套主张被改写成什么形态才能进农舍的证据：
+两个农人对话体，没有病例编号，没有罗马数字。
 
-Pending.
+## 本人的文体
 
-## Candidate Claims
+对照 `src-f38076294dd1`（1798 初版）：全书 **11,828 词**，主体是编号病例（I–XXIII 之间的 12 个编号），
+每例写清姓名／职业／年份／症状／结果。**他的默认表达单位是「一个具体的人加一段可核的经过」**，
+不是原则、不是格言。
 
-Pending.
+而 1801 年的 `src-2e162bb3987a`（*Instructions for Vaccine Inoculation*）只有 **10,372 字节**——
+**是一份操作说明，不是论证**。同一个人，对不同读者换了完全不同的形态。
 
-## Contradictions and alternative explanations
-
-Pending.
-
-## Unknowns and source gaps
-
-Pending.
-
-## Proposed Holdout cases
-
-IDs only; research Agents must not inspect Holdout bodies.
-
-## Handoff to adjudication
-
-Pending.
+> **要拿他的表达做断言，必须分清是哪一种：病例记述、操作说明，还是论战回信。**
+> 1822 年 `src-c90a0c4ad3b1`（致 Parry 的信）是第三种。
