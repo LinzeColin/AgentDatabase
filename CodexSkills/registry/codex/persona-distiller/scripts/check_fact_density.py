@@ -102,6 +102,17 @@ SUBJECT_ANCHOR = re.compile(
     r"|第\s*[一二三四五六七八九十百\d]+\s*(?:卷|节|号)"   # 卷次编号
     r"|[A-Z][A-Za-zÀ-ɏ.'\-]{2,}\s*[0-9.]+")      # Athenaeus 1.1e 式定位
 
+# ★ v0.0.0.31：**逐字引文本身就是可核标记**。
+#   Vesalius #102 实测暴露：四条带拉丁原文引文的人物事实被判 thin——
+#   「per tres et ultra septimanas」「quantumvis interim haec nobis sit obscurissima」
+#   「quos ter jam praelegerat studiosis」，全是小写起首、无数字，
+#   于是 PROPER（要求首字母大写）与 NUMERIC 都不命中。
+#   **而逐字引文是所有可核形态里最硬的一种**——可以直接回语料 grep。
+#   要求它首字母大写是纯粹的形态偶然。
+QUOTED = re.compile(
+    r"[「\"“]\s*[A-Za-zÀ-ɏ]{2,}(?:[\s,;.\-]+[A-Za-zÀ-ɏ]{2,}){2,}"   # 引号内 ≥3 个拉丁词
+    r"|[「\"“]\s*[Ͱ-Ͽ]{2,}(?:[\s,;.\-]+[Ͱ-Ͽ]{2,}){2,}")            # 或 ≥3 个希腊词
+
 # 可核标记：专名或数字
 PROPER = re.compile(
     r"《[^》]{2,}》"                       # 书名号
@@ -113,6 +124,8 @@ NUMERIC = re.compile(r"\d")
 
 def classify(claim: str) -> tuple[str, str]:
     """→ (`subject` / `ledger` / `thin`, 理由)。**只有 `subject` 计入密度。**"""
+    if QUOTED.search(claim):
+        return "subject", "逐字引文（最硬的可核形态：可直接回语料 grep）"
     if not (PROPER.search(claim) or NUMERIC.search(claim)):
         return "thin", "**只有形容词与动词**"
     if LEDGER_UNIT.search(claim) and not SUBJECT_ANCHOR.search(claim):
@@ -178,6 +191,10 @@ REAL_LEDGER = ("他为希波克拉底文本写过 **11 部注疏，合计 578,73
                "注疏量约占其存世希腊文著作的四分之一。")
 REAL_SUBJECT = ("1923-12-21 他在美国参议院公共土地委员会宣誓作证，"
                 "亲口报出该役「realized a profit of only $9,916 on the total transaction」。")
+# ★ 真实样本：Vesalius #102 实写的四条之一——**小写起首的拉丁引文，无数字无大写专名**。
+#   v0.0.0.30 判它 thin，那是判据错不是断言错。
+REAL_QUOTE_ONLY = ("他把绞刑犯或掘出的尸体带回自己房间，留在那里"
+                   "「per tres et ultra septimanas」——三周以上。")
 
 
 def self_test() -> int:
@@ -188,7 +205,8 @@ def self_test() -> int:
     for text, want, label in ((REAL_SOLID, "subject", "带书名的人物事实"),
                               (REAL_THIN, "thin", "纯格言"),
                               (REAL_LEDGER, "ledger", "账本事实（Galen 第 3 轮实写）"),
-                              (REAL_SUBJECT, "subject", "带日期与金额的人物事实")):
+                              (REAL_SUBJECT, "subject", "带日期与金额的人物事实"),
+                              (REAL_QUOTE_ONLY, "subject", "**只有小写拉丁引文**的人物事实（v0.0.0.31 修）")):
         kind, why = classify(text)
         if kind != want:
             fails.append(f"真实样本判错：{label} 应为 {want}，实得 {kind}（{why}）")
@@ -253,7 +271,8 @@ def self_test() -> int:
         print(f"负对照未通过：{len(fails)} 项")
         return 1
     print("负对照通过：**四条真实样本各自判对**"
-          "（带书名的人物事实、纯格言、**账本事实**、带日期与金额的人物事实）；"
+          "（带书名的人物事实、纯格言、**账本事实**、带日期与金额的人物事实、"
+          "**只有小写拉丁引文的人物事实**）；"
           "条数不足／全是格言／**全是账本事实**三类坏样本全抓出；"
           "足量可核、小语料走下限、账本与人物混合三类正对照未误杀；"
           "纯数字与纯专名均算可核；superseded 不计入")
