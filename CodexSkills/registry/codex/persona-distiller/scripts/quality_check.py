@@ -1055,6 +1055,41 @@ def run_corpus_integrity(report, target: Path) -> None:
     report.metrics['corpus_integrity'] = info
 
 
+def run_source_attribution(report, target: Path, meta: dict[str, Any],
+                           sources: list[dict[str, Any]]) -> None:
+    """逐源归属门（v0.0.0.34 新增，**硬拦**）——`attribution_basis` 不是每本书的免检。
+
+    v0.0.0.24 给 historical 人物开的那条路，实际把逐源归属检查整个关掉了：
+    一份声明放行全部 P1。Jenner #104 实测，**两本不是他写的书**因此坐进了 P1——
+    `b22006345`（第三方对照 Jenner 与 Woodville 已发表事实的小册子，题献给他们两个）
+    与 `b21439114`（扉页 BY THOMAS BEDDOES）。
+
+    **`check_authorship` 的 BYLINE 一处都没命中——它没被骗，它压根没被问。**
+    """
+    here = Path(__file__).resolve().parent
+    script = here / 'check_source_attribution.py'
+    if not script.exists():
+        report.metrics['source_attribution'] = {'状态': 'check_source_attribution.py 未安装，**未核验**（不是通过）'}
+        return
+    spec = importlib.util.spec_from_file_location('_pd_srcattr', script)
+    module = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(module)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['source_attribution'] = {'状态': f'检查器加载失败，**未核验**：{exc}'}
+        return
+    buffer = io.StringIO()
+    with contextlib.redirect_stdout(buffer):
+        if module.self_test() != 0:
+            report.error('content.selftest-failed',
+                         'check_source_attribution.py 负对照未过——其检查结论不作数')
+            return
+    problems, info = module.evaluate(meta, sources, root=target)
+    report.metrics['source_attribution'] = info
+    for pb in problems:
+        report.error('research.source-unclaimed', pb.split('\n')[0])
+
+
 def run_quote_layer(report, target: Path) -> None:
     """引文层门（v0.0.0.32 新增，**只报不拦**）——这句外语是他写的，还是译者写的？
 
@@ -1237,6 +1272,7 @@ def main() -> int:
         run_authorship_gate(report, target, meta, sources)
         run_corpus_integrity(report, target)
         run_attribution_basis(report, target, meta, sources)
+        run_source_attribution(report, target, meta, sources)
         run_corpus_integrity(report, target)
         run_fact_density(report, target, sources)
         run_quote_layer(report, target)
