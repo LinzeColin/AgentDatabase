@@ -1,0 +1,122 @@
+{
+  "artifact": {
+    "kind": "prompt",
+    "language": "zh-CN"
+  },
+  "optimization": {
+    "engines": [
+      "gepa",
+      "autoresearch",
+      "meta_harness",
+      "promptfoo",
+      "omni"
+    ],
+    "external_engines": {
+      "anthropic_generator": {
+        "command": [],
+        "enabled": false,
+        "identity": "anthropic_generator",
+        "timeout_seconds": 1800
+      },
+      "dspy_mipro": {
+        "command": [],
+        "enabled": false,
+        "identity": "dspy_mipro",
+        "timeout_seconds": 1800
+      },
+      "google_optimizer": {
+        "command": [],
+        "enabled": false,
+        "identity": "google_optimizer",
+        "timeout_seconds": 1800
+      },
+      "mlflow": {
+        "command": [],
+        "enabled": false,
+        "identity": "mlflow",
+        "timeout_seconds": 1800
+      },
+      "openai_optimizer": {
+        "command": [],
+        "enabled": false,
+        "identity": "openai_optimizer",
+        "timeout_seconds": 1800
+      },
+      "opik": {
+        "command": [],
+        "enabled": false,
+        "identity": "opik",
+        "timeout_seconds": 1800
+      },
+      "prompthub": {
+        "command": [],
+        "enabled": false,
+        "identity": "prompthub",
+        "timeout_seconds": 1800
+      },
+      "promptlayer": {
+        "command": [],
+        "enabled": false,
+        "identity": "promptlayer",
+        "timeout_seconds": 1800
+      }
+    },
+    "matched_budget": {
+      "formal": 60,
+      "quick": 24,
+      "smoke": 8
+    },
+    "max_candidates_per_engine": 4,
+    "preset": "quick",
+    "repeat_count": 3
+  },
+  "release_gate": {
+    "maximum_hard_failures": 0,
+    "maximum_length_increase_ratio": 0.3,
+    "maximum_variance_increase": 0.02,
+    "minimum_final_improvement": 0.05,
+    "require_distinct_final_judge": true,
+    "require_external_evidence_for_release": true,
+    "require_non_synthetic_final_for_pass": true,
+    "require_promptfoo_comparison": true,
+    "require_redteam_pass": true,
+    "require_regression_pass": true,
+    "require_three_repeats": true
+  },
+  "runtime": {
+    "roles": {
+      "compiler": {
+        "command": [],
+        "identity": "",
+        "mode": "inherit",
+        "model": ""
+      },
+      "evaluator": {
+        "command": [],
+        "identity": "",
+        "mode": "inherit",
+        "model": ""
+      },
+      "final_judge": {
+        "command": [],
+        "identity": "",
+        "mode": "required_distinct",
+        "model": ""
+      },
+      "reflection": {
+        "command": [],
+        "identity": "",
+        "mode": "inherit",
+        "model": ""
+      },
+      "task": {
+        "command": [],
+        "identity": "",
+        "mode": "inherit",
+        "model": ""
+      }
+    },
+    "timeout_seconds": 900
+  },
+  "schema_version": "1.0"
+}

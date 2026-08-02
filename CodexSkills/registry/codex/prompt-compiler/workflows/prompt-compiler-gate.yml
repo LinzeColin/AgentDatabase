@@ -1,0 +1,85 @@
+name: Prompt Compiler 独立门禁
+
+on:
+  workflow_dispatch:
+    inputs:
+      project_path:
+        description: "已封印的 Prompt Compiler 项目路径"
+        required: true
+        default: ".prompt-compiler-project"
+      preset:
+        description: "优化强度：smoke、quick、formal"
+        required: true
+        default: "quick"
+      engines:
+        description: "优化引擎，逗号分隔"
+        required: true
+        default: "gepa,autoresearch,meta_harness,promptfoo,omni"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: prompt-compiler-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  offline-qa:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: 连续三轮离线 QA
+        env:
+          PYTHONDONTWRITEBYTECODE: "1"
+        run: python3 -B QA/run_all.py
+
+  external-and-release:
+    # 该 Runner 必须预先安装并登录 Codex；使用受保护 Environment 承担费用和凭据授权。
+    runs-on: [self-hosted, prompt-compiler-acceptance]
+    environment: prompt-compiler-release
+    needs: offline-qa
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: 安装固定运行环境
+        env:
+          PYTHONDONTWRITEBYTECODE: "1"
+        run: python3 -B prompt-compiler/scripts/prompt_compiler.py bootstrap
+      - name: 真实 GEPA、Codex、Promptfoo 验收
+        env:
+          PYTHONDONTWRITEBYTECODE: "1"
+        run: |
+          python3 -B prompt-compiler/scripts/prompt_compiler.py external-acceptance \
+            --output "${{ inputs.project_path }}/reports/external_acceptance.json"
+      - name: 多引擎优化与独立验收
+        env:
+          PYTHONDONTWRITEBYTECODE: "1"
+        run: |
+          python3 -B prompt-compiler/scripts/prompt_compiler.py optimize \
+            --project "${{ inputs.project_path }}" \
+            --preset "${{ inputs.preset }}" \
+            --engines "${{ inputs.engines }}"
+      - name: 唯一发布硬门
+        env:
+          PYTHONDONTWRITEBYTECODE: "1"
+        run: python3 -B prompt-compiler/scripts/prompt_compiler.py ci-gate --project "${{ inputs.project_path }}"
+      - name: 保存证据
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: prompt-compiler-evidence-${{ github.run_id }}
+          path: |
+            ${{ inputs.project_path }}/reports/
+            ${{ inputs.project_path }}/runs/
+          if-no-files-found: error
