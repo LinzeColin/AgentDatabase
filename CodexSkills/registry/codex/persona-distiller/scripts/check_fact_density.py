@@ -41,10 +41,38 @@ Livermore 的 541 份报纸语料也只蒸出 5 条事实。
 
 **只有形容词和动词的「事实」不是事实。**
 
+## v0.0.0.29：**「关于语料的数」不算「关于人物的事」**
+
+v0.0.0.28 只查「有没有专名或数字」。Galen 第 3 轮实测暴露了这道口子：
+
+> 我按这道门把 `fact` 从 5 条补到 15 条，**真 delta 从 −0.1259 退到 −0.1456**。
+> 15 条里 **6 条是语料统计**——「他的注疏合计 578,737 词」「真作 89 部合计 244 万词」。
+> **那是我的账本，不是他的知识。用户拿不走这个数。**
+
+这与 Livermore #100 席 E 的原话是同一条：
+「真正空转的是 `own_voice_ratio`、536 份、词频 47 次这类**内部遥测：用户拿不走**。」
+**同一条诊断第二次出现，而第二次我是把它当解药用的。**
+
+因此 `fact` 分两类，**只有后者计入密度**：
+
+| 类 | 长什么样 | 计入？ |
+|---|---|---|
+| **账本事实**（ledger） | 「89 部合计 2,442,576 词」「541 份语料」「占比 3.1%」「本工作区口径」 | **不计入** |
+| **人物事实**（subject） | 「他在某卷驳 Thessalus」「Athenaeus 1.1e 记他赴宴」「1923-12-21 宣誓作证自报 $9,916」 | 计入 |
+
+判别靠**语料计量词**：条目里若出现「词／部／份／条源／占比／`usable_train`／本工作区口径」
+这类**只描述我这份材料有多大**的表述，且**没有**同时出现人物侧的可核锚点
+（人名、地名、机构名、书名 + 具体内容、日期），判为账本事实。
+
+**账本事实不是错的，只是不该拿它充数。** 它们仍可留在断言层供审计，
+只是不计入「这个产物到底知道多少关于他的事」。
+
 ## 射程（必须一起说）
 
 - 它数的是**形态**，不是**真伪**。写一条带年份的假事实照样过。
   **它挡的是「压根没写具体的」，不是「写错了」。** 真伪由盲判席与引文门负责。
+- 账本／人物的判别同样是**形态判别**：一条精心措辞的账本事实可以骗过它。
+  **它挡的是「拿语料统计充数」这个默认动作，不是有意的伪装。**
 - `FACTS_PER_SOURCES` 是一个**约定**，不是从理论推出来的常数。
   它的作用是把「事实密度」变成一个每次都会被看见的数，而不是一个凭感觉的印象。
 
@@ -62,6 +90,18 @@ import sys
 FACTS_PER_SOURCES = 5
 MIN_FLOOR = 5
 
+# ★ v0.0.0.29 账本计量词：只描述「我这份材料有多大」的表述
+LEDGER_UNIT = re.compile(
+    r"\d[\d,]*\s*(?:词|字|部|份|卷页|条源)"
+    r"|\d+(?:\.\d+)?\s*%"
+    r"|占比|合计\s*\d|本工作区(?:口径|解出)|usable_train|primary_ratio|own_voice_ratio")
+# 人物侧锚点：日期、书名+内容、以及非语料计量的专名
+SUBJECT_ANCHOR = re.compile(
+    r"\d{3,4}\s*[-–—年]\s*\d{0,2}"        # 年份／日期
+    r"|\d{1,2}\s*月\s*\d{1,2}\s*日"
+    r"|第\s*[一二三四五六七八九十百\d]+\s*(?:卷|节|号)"   # 卷次编号
+    r"|[A-Z][A-Za-zÀ-ɏ.'\-]{2,}\s*[0-9.]+")      # Athenaeus 1.1e 式定位
+
 # 可核标记：专名或数字
 PROPER = re.compile(
     r"《[^》]{2,}》"                       # 书名号
@@ -71,14 +111,21 @@ PROPER = re.compile(
 NUMERIC = re.compile(r"\d")
 
 
-def has_checkable(claim: str) -> tuple[bool, str]:
+def classify(claim: str) -> tuple[str, str]:
+    """→ (`subject` / `ledger` / `thin`, 理由)。**只有 `subject` 计入密度。**"""
+    if not (PROPER.search(claim) or NUMERIC.search(claim)):
+        return "thin", "**只有形容词与动词**"
+    if LEDGER_UNIT.search(claim) and not SUBJECT_ANCHOR.search(claim):
+        return "ledger", "**账本事实：只说了我这份材料有多大**"
     if PROPER.search(claim) and NUMERIC.search(claim):
-        return True, "专名+数字"
-    if PROPER.search(claim):
-        return True, "专名"
-    if NUMERIC.search(claim):
-        return True, "数字"
-    return False, "**只有形容词与动词**"
+        return "subject", "专名+数字"
+    return "subject", "专名" if PROPER.search(claim) else "数字"
+
+
+def has_checkable(claim: str) -> tuple[bool, str]:
+    """兼容旧调用：`subject` 才算可核。"""
+    kind, why = classify(claim)
+    return kind == "subject", why
 
 
 def evaluate(claims: list[dict], usable_train: int,
@@ -86,23 +133,32 @@ def evaluate(claims: list[dict], usable_train: int,
     active = [c for c in claims if c.get("status") not in {"superseded"}]
     facts = [c for c in active if c.get("category") == "fact"]
     need = max(floor, math.ceil(usable_train / per)) if usable_train else floor
-    problems, thin = [], []
+    problems, thin, ledger = [], [], []
     for c in facts:
-        ok, why = has_checkable(str(c.get("claim", "")))
-        if not ok:
+        kind, why = classify(str(c.get("claim", "")))
+        if kind == "thin":
             thin.append(f'{c.get("claim_id")} {why}')
-    solid = len(facts) - len(thin)
+        elif kind == "ledger":
+            ledger.append(f'{c.get("claim_id")} {why}')
+    solid = len(facts) - len(thin) - len(ledger)
     info = {
         "usable_train": usable_train, "fact 类条数": len(facts),
-        "其中带可核专名或数字": solid, "要求": need,
-        "口径": f"每 {per} 条可用源至少 1 条事实断言，下限 {floor}；每条须带专名或数字",
+        "**人物事实**（计入）": solid, "账本事实（不计入）": len(ledger),
+        "无可核内容": len(thin), "要求": need,
+        "口径": (f"每 {per} 条可用源至少 1 条**人物事实**，下限 {floor}；"
+                 f"每条须带专名或数字；**只说语料有多大的不算**"),
     }
     if thin:
-        info["**无可核内容的 fact**"] = thin[:8]
+        info["**无可核内容的 fact**"] = thin[:6]
         problems.append(
-            f"{len(thin)} 条 `fact` 断言没有任何可核的专名或数字："
-            f"{', '.join(t.split()[0] for t in thin[:6])}"
-            f"{' …' if len(thin) > 6 else ''} —— **「他重视 X」不是事实断言，是格言**")
+            f"{len(thin)} 条 `fact` 断言没有任何可核的专名或数字 —— "
+            f"**「他重视 X」不是事实断言，是格言**")
+    if ledger:
+        info["**账本事实**"] = ledger[:6]
+        problems.append(
+            f"{len(ledger)} 条 `fact` 是**账本事实**（只说了我这份材料有多大），不计入密度 —— "
+            f"**那是我的账本不是他的知识，用户拿不走这个数**；"
+            f"Galen #101 实测：补 6 条这类事实，真 delta 从 −0.1259 **退到** −0.1456")
     if solid < need:
         problems.append(
             f"可核 `fact` 断言 {solid} 条 < 要求 {need} 条"
@@ -117,19 +173,25 @@ def evaluate(claims: list[dict], usable_train: int,
 REAL_SOLID = ("他为自己编纂过真作目录：《De libris propriis》与"
               "《De ordine librorum suorum ad Eugenianum》，明确用于把真作与市面冒名伪托本分开。")
 REAL_THIN = "**「知道」必须以「你自己能重做一遍」为标准。** 他反对靠背诵获得的医学知识。"
+# ★ 真实样本：Galen 第 3 轮我实际写下的账本事实——形态上过关，内容上是遥测。
+REAL_LEDGER = ("他为希波克拉底文本写过 **11 部注疏，合计 578,737 词**，"
+               "注疏量约占其存世希腊文著作的四分之一。")
+REAL_SUBJECT = ("1923-12-21 他在美国参议院公共土地委员会宣誓作证，"
+                "亲口报出该役「realized a profit of only $9,916 on the total transaction」。")
 
 
 def self_test() -> int:
     fails = []
     F = lambda i, t: {"claim_id": f"clm-{i:012x}", "category": "fact", "claim": t}
 
-    # ★ 真实样本对照
-    ok, why = has_checkable(REAL_SOLID)
-    if not ok:
-        fails.append(f"真实样本被误杀：带书名的事实断言判为 {why}")
-    ok, _ = has_checkable(REAL_THIN)
-    if ok:
-        fails.append("真实样本未抓出：纯格言（无专名无数字）被判为有可核内容")
+    # ★ 真实样本对照（四条，全部取自实际断言层）
+    for text, want, label in ((REAL_SOLID, "subject", "带书名的人物事实"),
+                              (REAL_THIN, "thin", "纯格言"),
+                              (REAL_LEDGER, "ledger", "账本事实（Galen 第 3 轮实写）"),
+                              (REAL_SUBJECT, "subject", "带日期与金额的人物事实")):
+        kind, why = classify(text)
+        if kind != want:
+            fails.append(f"真实样本判错：{label} 应为 {want}，实得 {kind}（{why}）")
 
     # 负对照 1：条数不足
     p, i = evaluate([F(n, REAL_SOLID) for n in range(5)], usable_train=59)
@@ -142,6 +204,21 @@ def self_test() -> int:
         fails.append("负对照 2 未抓出：20 条全是格言")
     if not any("< 要求" in x for x in p):
         fails.append("负对照 2 未抓出：格言不计入可核条数，应同时报条数不足")
+
+    # ★ 负对照 3（v0.0.0.29 核心）：条数够、形态也过关，但全是账本事实
+    p, i = evaluate([F(n, f"{REAL_LEDGER}（第 {n} 部）") for n in range(20)], usable_train=59)
+    if not any("账本事实" in x for x in p):
+        fails.append(f"负对照 3 未抓出：20 条全是账本事实，实得 {i}")
+    if not any("< 要求" in x for x in p):
+        fails.append("负对照 3 未抓出：账本事实不计入密度，应同时报条数不足")
+
+    # 正对照 4：账本与人物混合，只按人物条数算
+    rows = [F(n, REAL_LEDGER) for n in range(6)] + [F(100 + n, f"{REAL_SUBJECT}（{n}）") for n in range(12)]
+    p, i = evaluate(rows, usable_train=59)
+    if i["**人物事实**（计入）"] != 12 or i["账本事实（不计入）"] != 6:
+        fails.append(f"混合样本计数错：实得 {i}")
+    if any("< 要求" in x for x in p):
+        fails.append("混合样本被误杀：12 条人物事实已达要求 12")
 
     # 正对照 1：条数够且都可核
     p, _ = evaluate([F(n, f"{REAL_SOLID}（第 {n} 条）") for n in range(12)], usable_train=59)
@@ -175,9 +252,10 @@ def self_test() -> int:
     if fails:
         print(f"负对照未通过：{len(fails)} 项")
         return 1
-    print("负对照通过：**两条真实样本各自判对**（带书名的事实未误杀、纯格言被抓出）；"
-          "条数不足与「够数但全是格言」两类坏样本全抓出；"
-          "足量可核、小语料走下限两类正对照未误杀；"
+    print("负对照通过：**四条真实样本各自判对**"
+          "（带书名的人物事实、纯格言、**账本事实**、带日期与金额的人物事实）；"
+          "条数不足／全是格言／**全是账本事实**三类坏样本全抓出；"
+          "足量可核、小语料走下限、账本与人物混合三类正对照未误杀；"
           "纯数字与纯专名均算可核；superseded 不计入")
     return 0
 
