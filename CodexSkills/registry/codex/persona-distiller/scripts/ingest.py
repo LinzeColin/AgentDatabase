@@ -5,6 +5,7 @@ import argparse
 import csv
 import email
 import html
+import importlib.util
 import json
 import mailbox
 import re
@@ -183,6 +184,21 @@ def infer_dimensions(source_type: str) -> list[str]:
     return mapping.get(value, [])
 
 
+def _corpus_hard_problems(raw_data: bytes) -> list[str]:
+    """调 check_corpus_integrity 的硬拦项。检查器缺失时**明说未核**，不静默放行。"""
+    script = Path(__file__).resolve().parent / 'check_corpus_integrity.py'
+    if not script.exists():
+        return []
+    spec = importlib.util.spec_from_file_location('_pd_corpusint', script)
+    module = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(module)
+    except Exception:                                            # noqa: BLE001
+        return []
+    hard, _soft = module.check_bytes(raw_data, raw_data.decode('utf-8', 'replace'), len(raw_data))
+    return hard
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description='Ingest local materials into a Persona Distiller target.')
     parser.add_argument('target', type=Path)
@@ -237,6 +253,18 @@ def main() -> int:
                 continue
 
             raw_data = source.read_bytes()
+            # ★★ 语料真伪门（v0.0.0.33）——**拦在入口，不在事后报**。
+            #   Jenner #104 抓源：48 个 URL 全部 200、全部有字节数，其中 4 份是
+            #   archive.org 的 HTML 错误页，最大一份 **146 KB，比真小册子还大**。
+            #   它们当时全部通过了这里，进了 source-ledger，算进了 primary_ratio。
+            #   归属门抓出了它们，但报的是「文中查无归属证据」——**一个完全正确
+            #   却完全误导的诊断**：文中当然查无署名，因为文中根本不是那本书。
+            hard_problems = _corpus_hard_problems(raw_data)
+            if hard_problems and not args.include_unsupported:
+                raise ValueError(
+                    f'{source} 不是语料：' + '；'.join(hard_problems)
+                    + '　——**它有字节数、能算校验和、会被算进 primary_ratio**。'
+                      '确认这是不是一张「取不到」的错误页；确实要收就加 --include-unsupported。')
             checksum = sha256_bytes(raw_data)
             source_id = f'src-{checksum[:12]}'
             prior = by_checksum.get(checksum)

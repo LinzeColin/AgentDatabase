@@ -1003,6 +1003,58 @@ def run_fact_density(report, target: Path, sources: list[dict[str, Any]]) -> Non
     report.metrics['fact_density'] = info
 
 
+def run_corpus_integrity(report, target: Path) -> None:
+    """语料真伪门（v0.0.0.33 新增，**只报不拦**）——已入库的这些文件，是语料吗？
+
+    硬拦点在 `ingest.py` 入口（错误页根本进不来）。这里再扫一遍，是为了
+    **已经建好的工作区**——已入库 100 人从未被扫过，谁也不知道里面有没有错误页。
+    """
+    here = Path(__file__).resolve().parent
+    script = here / 'check_corpus_integrity.py'
+    if not script.exists():
+        report.metrics['corpus_integrity'] = {'状态': 'check_corpus_integrity.py 未安装，**未核验**（不是通过）'}
+        return
+    spec = importlib.util.spec_from_file_location('_pd_corpusint', script)
+    module = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(module)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['corpus_integrity'] = {'状态': f'检查器加载失败，**未核验**：{exc}'}
+        return
+    buffer = io.StringIO()
+    with contextlib.redirect_stdout(buffer):
+        if module.self_test() != 0:
+            report.metrics['corpus_integrity'] = {'状态': '**负对照未过，其结论不作数**'}
+            return
+
+    hard, soft, missing, scanned = [], [], [], 0
+    for rec in read_jsonl(target / 'evidence/source-ledger.jsonl'):
+        lp = rec.get('local_path')
+        if not lp:
+            continue
+        f = target / lp
+        if not f.is_file():
+            missing.append(lp)
+            continue
+        scanned += 1
+        h, sf = module.check_file(f)
+        hard += [f'{lp}　{x}' for x in h]
+        soft += [f'{lp}　{x}' for x in sf]
+    info: dict[str, Any] = {'已扫': scanned, '不是语料': len(hard), '可疑': len(soft)}
+    if missing:
+        info['**账本有记录但文件不在**'] = missing[:8]
+    if hard:
+        info['**这些不是语料**'] = hard[:10]
+        report.error('research.corpus-not-a-document',
+                     f'{len(hard)} 份已入库的「语料」其实不是文档'
+                     f'——**它们有字节数、有校验和、算进了 primary_ratio**')
+    if soft:
+        info['可疑（只报不拦）'] = soft[:8]
+    info['口径'] = ('**只判「这是不是一份文档」，不判「这是不是这个人的文档」**——'
+                    '抓错了书、抓了译本当原本，本门一概看不见。')
+    report.metrics['corpus_integrity'] = info
+
+
 def run_quote_layer(report, target: Path) -> None:
     """引文层门（v0.0.0.32 新增，**只报不拦**）——这句外语是他写的，还是译者写的？
 
@@ -1183,7 +1235,9 @@ def main() -> int:
     try:
         sources, holdout = evaluate_sources(report, target, thresholds, args.allow_provisional)
         run_authorship_gate(report, target, meta, sources)
+        run_corpus_integrity(report, target)
         run_attribution_basis(report, target, meta, sources)
+        run_corpus_integrity(report, target)
         run_fact_density(report, target, sources)
         run_quote_layer(report, target)
         run_ocr_gate(report, target, sources)

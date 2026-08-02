@@ -1,0 +1,18 @@
+b24759247|writings|1798|An Inquiry into the Causes and Effects of the Variolae Vaccinae (1st ed)
+inquiryintocause00jenn|writings|1800|An Inquiry ... (3rd ed)
+b21354273|writings|1799|Further Observations on the Variolae Vaccinae, or Cow Pox
+b22006345|writings|1800|A Continuation of Facts and Observations / comparative statement
+b22010440|writings|1801|Instructions for Vaccine Inoculation
+b22010452_0001|writings|1801|The Origin of the Vaccine Inoculation
+b2200953x|writings|1806|On the Varieties and Modifications of the Vaccine Pustule
+b22012916_0001|writings|1809|Facts, for the most part unobserved, or not duly noticed
+b22007179_0001|writings|1822|A Letter to Charles Henry Parry, M.D.
+b30796581|writings|1824|A Letter to Dr. Waterhouse
+b2201231x_0002|writings|1824|Some Observations on the Migration of Birds
+jstor-106657|writings|1788|Observations on the Natural History of the Cuckoo
+McGillLibrary-osl_report-two-letters-edwar|conversations|1790|A Report and Two Letters of Edward Jenner
+b21308603|external|1857|Papers Relating to the History and Practice of Vaccination
+b21463475_0001|external|1889|Crookshank, History and Pathology of Vaccination
+39002086340867.med.yale.edu|external|1800|Reflections on the Cow-pox (同时代评论)
+lifeofedwardjenn01barouoft|conversations|1838|Baron, The Life of Edward Jenner, vol. 1（含大量原始书信转录）
+lifeofedwardjenn02barouoft|conversations|1838|Baron, The Life of Edward Jenner, vol. 2（含大量原始书信转录）

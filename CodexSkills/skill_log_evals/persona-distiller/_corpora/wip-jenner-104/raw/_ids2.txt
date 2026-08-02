@@ -1,0 +1,30 @@
+b22041862|external|1806|Moseley, An Oliver for a Rowland; or, a Cow Pox Epistle（**反对者**）
+b31910890|external|1805|Moseley, A Treatise on the Lues Bovilla, or Cow Pox（**反对者**）
+b21364060|external|1800|Moseley, Medical Tracts（**反对者**）
+b22037615_0002|external|1807|Birch, A Copy of the Answer to the Queries of the London...（**反对者**）
+b22037913|external|1806|Moore, Remarks on Mr. Birch's 'Serious Reasons'（**驳反对者**）
+b21510775|external|1799|Woodville, Reports on a Series of Inoculations for the Variolae Vaccinae（**污染争议**）
+39002011127140.med.yale.edu|external|1801|Aikin, A Concise View of All the Most Important Facts
+b21970518|decisions|1804|Royal College of Physicians, Report of a Medical Committee
+b22470979|decisions|1803|Royal College of Surgeons, A Comparative View of the Natural Small-pox
+b22281770|external|1805|Lipscomb, Inoculation for the Small-pox Vindicated（**反对者**）
+b31914226_0002|external|1804|Dunning, Minutes of Some Experiments
+b33284246|external|1811|Christie, An Account of the Ravages Committed in Ceylon
+39002011127934.med.yale.edu|external|1815|Goolden, Vaccine Papers
+b30378035|expression|1820|A Cottage Dialogue on Vaccination（**通俗传播形态**）
+b33519420_0002|writings|1800|An Inquiry ... (另一版次)
+b33519420_0003|writings|1800|An Inquiry ... (另一版次)
+b28748657|writings|1799|Disquisitio de Caussis et Effectibus Variolarum Vaccinarum（拉丁译本）
+b24927764|writings|1801|An Enquiry into the Causes and Effects of the Variolae Vaccinae
+pam-3803|writings|1806|On the Varieties and Modifications of the Vaccine Pustule（另一版次）
+b22013490_0002|writings|1819|On the Varieties and Modifications of the Vaccine Pustule
+b22007179_0003|writings|1822|A Letter to Charles Henry Parry, M.D.（另一版次）
+b22007179_0006|writings|1822|A Letter to Charles Henry Parry, M.D.（另一版次）
+b22010440_0002|writings|1801|Instructions for Vaccine Inoculation（另一版次）
+b22010452_0002|writings|1801|The Origin of the Vaccine Inoculation（另一版次）
+b21439114|writings|1799|Contributions to Physical and Medical Knowledge
+b33279986_0001|conversations|1838|Baron, Life of Edward Jenner（另一套，含书信）
+b33279974_0001|conversations|1827|Baron, Life of Edward Jenner 1827 初版
+b3135502x|timeline|1933|Drewitt, The Life of Edward Jenner: Naturalist
+india.history.resource.35308|timeline|1827|Baron, The Life of Edward Jenner, LL.D. F.R.S.
+39002011212074.med.yale.edu|writings|1807|Instructions for Vaccine Inoculation, Commonly Called Vaccination
