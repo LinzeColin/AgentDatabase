@@ -1,0 +1,206 @@
+{
+  "attribution_basis": {
+    "authority": "Galen, De libris propriis（《论我自己的书》, TLG tlg0057.tlg104）与 De ordine librorum suorum（《论我自己著作的次序》, tlg105）——**由主体本人编纂、明确为对抗市面冒名伪托本而写的真作目录**。该书开篇即记 Sandalarium 书肆一幕：路人读了两行题为「医师盖伦」的书便扔下，说「οὐκ ἔστι λέξις αὕτη Γαληνοῦ」（这不是盖伦的文风）。二次权威：Gerhard Fichtner, CORPUS GALENICUM: Bibliographie der galenischen und pseudogalenischen Werke（CMG/BBAW, 2019-12 版, 225 页），按 Kühn 次序与 TLG ID 逐条标注真伪。",
+    "citation": "https://raw.githubusercontent.com/galenus-verbatim/galenus_cts/master/data/tlg0057/tlg104/tlg0057.tlg104.verbatim-grc1.xml ｜ https://cmg.bbaw.de/fileadmin/Webdateien/Dateien/Galen-Bibliographie_2019-12y.pdf ｜ https://bmcr.brynmawr.edu/2014/2014.08.17/",
+    "disputed_policy": "四步裁定，且**默认怀疑**：① 从 tlg104/tlg105 解析出他本人开列的书名；② 逐条对照 Fichtner 目录；③ 不在①且在②中标为伪/疑者 → 一律 tier P1-D，**永不计入 P1**；④ **必须写明①是必要不充分条件**——他中年写成该目录并多次修订，确凿为真的晚期作品（如 2005 年才重见天日的 De indolentia）不在其列。**不在目录里是证据，不是证明。**另：galenus_cts 与 First1KGreek **都没有机读的真伪标记**（105 部里只有 1 个加星，是噪声不是体系），**照单全收会让伪作以 P1 身份进账本而无人拦截**——本条政策存在的直接原因。Kühn 第 XIX 卷是伪作集散地（过半为伪托），**不得整卷灌入**。",
+    "disputed_works": [
+      {
+        "grc_words": 1591,
+        "title": "De typis",
+        "tlg": "tlg048",
+        "verdict": "securely-spurious"
+      },
+      {
+        "grc_words": 5627,
+        "title": "Adversus eos qui de typis scripserunt",
+        "tlg": "tlg049",
+        "verdict": "securely-spurious"
+      },
+      {
+        "grc_words": 712,
+        "title": "De hirudinibus, revulsione, cucurbitula…",
+        "tlg": "tlg071",
+        "verdict": "securely-spurious"
+      },
+      {
+        "grc_words": 6644,
+        "title": "In Hipp. vel Polybi De salubri victus ratione",
+        "tlg": "tlg086",
+        "verdict": "securely-spurious"
+      },
+      {
+        "grc_words": 9831,
+        "title": "De humero iis modis prolapso quos Hippocrates non vidit",
+        "tlg": "tlg096",
+        "verdict": "securely-spurious"
+      },
+      {
+        "grc_words": 3238,
+        "title": "Quod qualitates incorporeae sint",
+        "tlg": "tlg111",
+        "verdict": "securely-spurious"
+      },
+      {
+        "grc_words": 858,
+        "title": "Quomodo morbum simulantes sint deprehendendi",
+        "tlg": "tlg115",
+        "verdict": "securely-spurious"
+      },
+      {
+        "grc_words": 13072,
+        "title": "De theriaca ad Pisonem",
+        "tlg": "tlg079",
+        "verdict": "contested"
+      },
+      {
+        "grc_words": 2955,
+        "title": "Quos quibus catharticis medicamentis",
+        "tlg": "tlg073",
+        "verdict": "contested"
+      },
+      {
+        "grc_words": 503,
+        "title": "De dignotione ex insomniis",
+        "tlg": "tlg040",
+        "verdict": "contested"
+      },
+      {
+        "grc_words": 914,
+        "title": "De venereis（Oribasius 摘录）",
+        "tlg": "tlg035",
+        "verdict": "contested"
+      },
+      {
+        "grc_words": 675,
+        "title": "De causis respirationis（节本）",
+        "tlg": "tlg114",
+        "verdict": "contested"
+      },
+      {
+        "grc_words": 3265,
+        "title": "De comate secundum Hippocratem",
+        "tlg": "tlg052",
+        "verdict": "contested"
+      },
+      {
+        "grc_words": 1723,
+        "title": "De parvae pilae exercitio",
+        "tlg": "tlg034",
+        "verdict": "contested"
+      },
+      {
+        "grc_words": 9596,
+        "title": "Vocum Hippocratis Glossarium",
+        "tlg": "tlg106",
+        "verdict": "contested"
+      },
+      {
+        "grc_words": 15802,
+        "title": "Synopsis librorum suorum de pulsibus",
+        "tlg": "tlg063",
+        "verdict": "contested"
+      },
+      {
+        "title": "[Galeni] Definitiones medicae（Kühn XIX 346 ff.，CMG 自加方括号）",
+        "tlg": "—",
+        "verdict": "securely-spurious"
+      },
+      {
+        "title": "Pseudogaleni In Hippocratis De septimanis",
+        "tlg": "—",
+        "verdict": "securely-spurious"
+      }
+    ]
+  },
+  "builder_version": "v0.0.0.5",
+  "chosen_subject_uid": "galen-of-pergamon-129",
+  "consent_authority": null,
+  "created_at": "2026-08-01T23:14:07Z",
+  "current_version": null,
+  "existential_hypotheses_enabled": false,
+  "identity_selection": {
+    "canonical": "healthcare-nursing",
+    "display": "医疗护理师",
+    "mode": "single",
+    "primary": "healthcare-nursing",
+    "weights": {
+      "healthcare-nursing": 1.0
+    }
+  },
+  "language": "en",
+  "model_version": "0.1.0-draft",
+  "name": "Galen of Pergamon",
+  "namesake_gate": {
+    "candidate_count": 1,
+    "chosen_candidate": {
+      "application_scenarios": [
+        "以解剖与生理观察为据的临床推理，而非纯经验方或纯教条",
+        "医师与哲学家两种身份的合一：诊断中的逻辑与证明要求",
+        "对同行与前人（尤其希波克拉底派）文本的批判性阅读与再解释",
+        "自身著作的真伪辨别与目录学——他为对抗市面上的伪托本而亲自编目"
+      ],
+      "authoritative_sources": [
+        {
+          "kind": "encyclopedia",
+          "locator": "https://en.wikipedia.org/wiki/Galen"
+        },
+        {
+          "kind": "scholarly-introduction",
+          "locator": "https://www.ncbi.nlm.nih.gov/books/NBK613949/",
+          "note": "NCBI Bookshelf：Galen《On Avoiding Distress》与《On My Own Opinions》导论；记「twenty-two massive volumes in Karl Gottlob Kühn's nineteenth-century edition ... around 20,000 pages」"
+        },
+        {
+          "kind": "self-authored-catalogue",
+          "locator": "Galen, De Libris Propriis (On My Own Books) 与 De Ordine Librorum Suorum (On the Order of My Own Books)",
+          "note": "**由他本人编纂、用以对抗市面伪托本的真作目录**——本项目判定 P1 归属的第一权威"
+        },
+        {
+          "kind": "scholarly-review",
+          "locator": "https://bmcr.brynmawr.edu/2014/2014.08.17/",
+          "note": "BMCR 评 Galen: Three Treatises（'On My Own Books'、'On the Order of My Own Books'、'That the Best Physician is Also a Philosopher'）"
+        }
+      ],
+      "canonical_name": "Galen of Pergamon",
+      "distinguishing_basis": "生约 129 / 卒约 216；帕加马人；父名 Aelius Nicon；角斗士医师与四位皇帝的宫廷医师；**存世著作规模与自著目录（De Libris Propriis）是最硬的区分依据**——这一条使他与所有现代同名者不可能混淆",
+      "evidence_level": "high",
+      "identity_category": "医疗护理师",
+      "key_capabilities": [
+        "活体与尸体解剖的实证方法（以猪、猴等替代人体）",
+        "脉诊与预后判断的系统化",
+        "药物学与复方配制（Galenic preparation 一词即源出于此）",
+        "**为自己的著作做真伪甄别与编目**（《论我自己的书》《论我自己著作的次序》）",
+        "第一人称的临床叙事与自我复盘（《论预后》《论避免悲伤》）"
+      ],
+      "label": "A",
+      "occupation_or_role": "古罗马帝国时期的希腊裔医师、外科医生与哲学家",
+      "professional_background": "约公元 129 年 9 月生于帕加马（今土耳其贝尔加马），约 216 年卒（卒年有争议：《苏达辞书》记约 199 年，阿拉伯文献记 216 年，现代学界渐倾向后者）。父为 Aelius Nicon，富有的贵族建筑师。157 年任亚细亚大祭司角斗士的医师；后为马可·奥勒留与卢基乌斯·维鲁斯朝的宫廷医师，并先后为康茂德、塞普蒂米乌斯·塞维鲁与卡拉卡拉服务。拉丁名作 Aelius Galenus 或 Claudius Galenus，两者并存于文献；该拉丁名表明他拥有罗马公民权。**其存世著作以希腊文写成，在 Kühn 版《Claudii Galeni Opera Omnia》中占 22 卷、约两万页，据称约相当于全部存世古希腊文献的十分之一。**",
+      "subject_uid": "galen-of-pergamon-129"
+    },
+    "chosen_subject_uid": "galen-of-pergamon-129",
+    "normalized_name": "galenofpergamon",
+    "resolution": "single",
+    "schema_version": "1.0"
+  },
+  "normalized_name": "galenofpergamon",
+  "origin_review_required": false,
+  "product_version": null,
+  "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+  "profile": "deep",
+  "prohibited_uses": [
+    "identity authentication or deceptive impersonation",
+    "invented endorsement, signature, consent, private memory or current opinion",
+    "unsupported psychological diagnosis",
+    "replacement of accountable high-stakes professional judgment"
+  ],
+  "retention_policy": null,
+  "runtime_invocation_versioning": false,
+  "scenario": null,
+  "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+  "schema_version": "2.0",
+  "slug": "galen-of-pergamon",
+  "status": "draft",
+  "subject_origin": "historical",
+  "target_id": "tgt-190dfa742fb3",
+  "time_scope": "c.129-c.216 CE",
+  "updated_at": "2026-08-01T23:14:07Z"
+}

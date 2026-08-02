@@ -480,10 +480,27 @@ def report_own_voice(report, target: Path, meta: dict[str, Any],
     按既定裁定「门达不到时选诚实退路继续，绝不为凑数放宽判据」，
     正确动作是**把这个数报出来并写进硬边界**，不是拦住流程，也不是假装没这回事。
     """
+    # ★ v0.0.0.27：识别标记**向归属门要**，不再自己 `split()[-1]`。
+    #   `name.split()[-1]` 对 `Galen of Pergamon` 取出的是 `Pergamon`（一个地名），
+    #   于是 244 万词的亲笔语料被静默算成 `own_voice_ratio = 0.0`。
+    #   v0.0.0.26 修了 `check_authorship.build_patterns`，**却漏了这里的第二份实现**——
+    #   同一个西方姓名假设写在两个地方，只改一个等于没改。
+    #   **「什么算他的名字」只许有一个真源。**
     name = str(meta.get('name') or '').strip()
-    surname = name.split()[-1] if name.split() else ''
+    surname = ''
+    if name:
+        here = Path(__file__).resolve().parent
+        script = here / 'check_authorship.py'
+        if script.exists():
+            spec = importlib.util.spec_from_file_location('_pd_auth_name', script)
+            mod = importlib.util.module_from_spec(spec)
+            try:
+                spec.loader.exec_module(mod)
+                surname = mod.build_patterns(name)['surname']
+            except Exception:                                   # noqa: BLE001
+                surname = ''
     if not surname:
-        report.metrics['own_voice'] = {'状态': 'meta 无 name，**未核验**'}
+        report.metrics['own_voice'] = {'状态': 'meta 无 name 或识别标记取不到，**未核验**（不是通过）'}
         return
     rx = re.compile(re.escape(surname), re.I)
 
@@ -926,6 +943,24 @@ def run_authorship_gate(report, target: Path, meta: dict[str, Any],
         info['存疑（有正面证据但另有他人署名）'] = suspect[:8]
     report.metrics['authorship'] = info
 
+    # ★ v0.0.0.27：**historical + 已声明 attribution_basis 时降为报告，不硬拦。**
+    #
+    #   两道门原本互相矛盾：`check_attribution_basis` 说「印刷时代的署名证据对你不适用，
+    #   请另行写明依据」，写明了；本门转头仍要求 `By <名>`——**而那是它永远拿不出的东西**。
+    #   Galen #101 实测：55 部希腊文校勘本正文，A-* 五种证据一条也不可能有，
+    #   `research.authorship-unproven` 报了 55 次。
+    #
+    #   **这不是放宽。** historical 路的要求更硬：要一个具名外部权威（他本人的真作目录 +
+    #   Fichtner 目录）、要可查证出处、要逐条列出伪托篇目并写明裁定政策。
+    #   **换的是证据种类，不是证据强度。**
+    hist = (str(meta.get('subject_origin') or '') == 'historical'
+            and isinstance(meta.get('attribution_basis'), dict))
+    if hist and unproven:
+        info['**historical 路**：A-* 五种证据结构上不存在，归属改由 attribution_basis 认定'] = (
+            f'{len(unproven)} 条无 A-* 证据，**已按已声明的归属依据放行**'
+            f'（依据本身由 check_attribution_basis 硬拦）')
+        report.metrics['authorship'] = info
+        return
     for item in unproven:
         report.error('research.authorship-unproven',
                      f'{item} —— 账本声称本人所著，但文中查无归属证据'

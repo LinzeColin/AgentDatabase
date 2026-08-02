@@ -1,5 +1,29 @@
 # Changelog
 
+## v0.0.0.27 — 同一个假设写在两处，只改一处等于没改（2026-08-02）
+
+v0.0.0.26 修了 `check_authorship.build_patterns` 的姓名形态，**漏了第二份实现**：
+`quality_check.report_own_voice` 自己写着 `name.split()[-1]`，
+于是 Galen 的 `own_voice_ratio` 仍然静默报 **0.0**。
+
+改为向归属门要识别标记后：**0.0 → 0.9829**（58 条本人所著源，244 万词希腊文）。
+**「什么算他的名字」只许有一个真源。**
+
+### 两道门原本互相矛盾
+
+`check_attribution_basis`（v24）说「印刷时代的署名证据对你不适用，请另行写明依据」——写明了；
+归属门（v9–v18）转头仍要求 `By <名>`，**而那是它永远拿不出的东西**。
+Galen 实测：55 部希腊文校勘本正文，`research.authorship-unproven` 报了 55 次。
+
+改为：`subject_origin == historical` **且已声明 `attribution_basis`** 时，归属门降为报告，
+并在 metrics 里写明「已按已声明的归属依据放行（依据本身由 check_attribution_basis 硬拦）」。
+
+**这不是放宽。** historical 路要一个具名外部权威、可查证出处、逐条伪托清单与裁定政策。
+**换的是证据种类，不是证据强度。**
+
+实测：Galen 研究门残留错误只剩 `research.lane-completion`（六路研究文档尚未写，属流程下一步）；
+70 passed；contract_drift 0。
+
 ## v0.0.0.26 — 「名 + 姓」是一个西方近代假设（2026-08-02）
 
 Galen #101 是名册里**第一个非西方近代姓名形态**的人物，一上来撞出两处：

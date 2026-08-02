@@ -1,0 +1,51 @@
+{
+ "_note": "从 6 名同名候选中选定。**选择依据不是我的偏好，是队列条目本身**：_蒸馏队列.json 里这一条的 family_zh 是「医疗护理师」，6 名候选中落在该族的**有且只有一名**。阻断记录见 galen_gate.BLOCKED.json，六名候选卡片全文在其中，未删。",
+ "selected_from": 6,
+ "selection_rule": "queue.family_zh == candidate.identity_category，唯一命中",
+ "blocked_record": "galen_gate.BLOCKED.json",
+ "candidates": [
+  {
+   "canonical_name": "Galen of Pergamon",
+   "subject_uid": "galen-of-pergamon-129",
+   "identity_category": "医疗护理师",
+   "occupation_or_role": "古罗马帝国时期的希腊裔医师、外科医生与哲学家",
+   "professional_background": "约公元 129 年 9 月生于帕加马（今土耳其贝尔加马），约 216 年卒（卒年有争议：《苏达辞书》记约 199 年，阿拉伯文献记 216 年，现代学界渐倾向后者）。父为 Aelius Nicon，富有的贵族建筑师。157 年任亚细亚大祭司角斗士的医师；后为马可·奥勒留与卢基乌斯·维鲁斯朝的宫廷医师，并先后为康茂德、塞普蒂米乌斯·塞维鲁与卡拉卡拉服务。拉丁名作 Aelius Galenus 或 Claudius Galenus，两者并存于文献；该拉丁名表明他拥有罗马公民权。**其存世著作以希腊文写成，在 Kühn 版《Claudii Galeni Opera Omnia》中占 22 卷、约两万页，据称约相当于全部存世古希腊文献的十分之一。**",
+   "application_scenarios": [
+    "以解剖与生理观察为据的临床推理，而非纯经验方或纯教条",
+    "医师与哲学家两种身份的合一：诊断中的逻辑与证明要求",
+    "对同行与前人（尤其希波克拉底派）文本的批判性阅读与再解释",
+    "自身著作的真伪辨别与目录学——他为对抗市面上的伪托本而亲自编目"
+   ],
+   "key_capabilities": [
+    "活体与尸体解剖的实证方法（以猪、猴等替代人体）",
+    "脉诊与预后判断的系统化",
+    "药物学与复方配制（Galenic preparation 一词即源出于此）",
+    "**为自己的著作做真伪甄别与编目**（《论我自己的书》《论我自己著作的次序》）",
+    "第一人称的临床叙事与自我复盘（《论预后》《论避免悲伤》）"
+   ],
+   "distinguishing_basis": "生约 129 / 卒约 216；帕加马人；父名 Aelius Nicon；角斗士医师与四位皇帝的宫廷医师；**存世著作规模与自著目录（De Libris Propriis）是最硬的区分依据**——这一条使他与所有现代同名者不可能混淆",
+   "authoritative_sources": [
+    {
+     "locator": "https://en.wikipedia.org/wiki/Galen",
+     "kind": "encyclopedia"
+    },
+    {
+     "locator": "https://www.ncbi.nlm.nih.gov/books/NBK613949/",
+     "kind": "scholarly-introduction",
+     "note": "NCBI Bookshelf：Galen《On Avoiding Distress》与《On My Own Opinions》导论；记「twenty-two massive volumes in Karl Gottlob Kühn's nineteenth-century edition ... around 20,000 pages」"
+    },
+    {
+     "locator": "Galen, De Libris Propriis (On My Own Books) 与 De Ordine Librorum Suorum (On the Order of My Own Books)",
+     "kind": "self-authored-catalogue",
+     "note": "**由他本人编纂、用以对抗市面伪托本的真作目录**——本项目判定 P1 归属的第一权威"
+    },
+    {
+     "locator": "https://bmcr.brynmawr.edu/2014/2014.08.17/",
+     "kind": "scholarly-review",
+     "note": "BMCR 评 Galen: Three Treatises（'On My Own Books'、'On the Order of My Own Books'、'That the Best Physician is Also a Philosopher'）"
+    }
+   ],
+   "evidence_level": "high"
+  }
+ ]
+}

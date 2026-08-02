@@ -1,0 +1,119 @@
+{
+  "_note": "「Galen」同名门。风险与 Livermore 的祖孙同名不同：这里是**一个古代单名 + 一批现代人名/化名**。检索「Galen」时，Weston（食品零售亿万富翁）与 Rowell（山野摄影师）的现代结果量级远超古代医师。另有两处**化名**风险：苏联军事顾问 Vasily Blyukher 在华期间用「Galen」为化名；德国小说家 Ernst Philipp Karl Lange 用笔名「Phillip Galen」。本文件用于留下阻断记录，选定后另存 galen_namesake_selected.json 再跑一次。",
+  "candidates": [
+    {
+      "canonical_name": "Galen of Pergamon",
+      "subject_uid": "galen-of-pergamon-129",
+      "identity_category": "医疗护理师",
+      "occupation_or_role": "古罗马帝国时期的希腊裔医师、外科医生与哲学家",
+      "professional_background": "约公元 129 年 9 月生于帕加马（今土耳其贝尔加马），约 216 年卒（卒年有争议：《苏达辞书》记约 199 年，阿拉伯文献记 216 年，现代学界渐倾向后者）。父为 Aelius Nicon，富有的贵族建筑师。157 年任亚细亚大祭司角斗士的医师；后为马可·奥勒留与卢基乌斯·维鲁斯朝的宫廷医师，并先后为康茂德、塞普蒂米乌斯·塞维鲁与卡拉卡拉服务。拉丁名作 Aelius Galenus 或 Claudius Galenus，两者并存于文献；该拉丁名表明他拥有罗马公民权。**其存世著作以希腊文写成，在 Kühn 版《Claudii Galeni Opera Omnia》中占 22 卷、约两万页，据称约相当于全部存世古希腊文献的十分之一。**",
+      "application_scenarios": [
+        "以解剖与生理观察为据的临床推理，而非纯经验方或纯教条",
+        "医师与哲学家两种身份的合一：诊断中的逻辑与证明要求",
+        "对同行与前人（尤其希波克拉底派）文本的批判性阅读与再解释",
+        "自身著作的真伪辨别与目录学——他为对抗市面上的伪托本而亲自编目"
+      ],
+      "key_capabilities": [
+        "活体与尸体解剖的实证方法（以猪、猴等替代人体）",
+        "脉诊与预后判断的系统化",
+        "药物学与复方配制（Galenic preparation 一词即源出于此）",
+        "**为自己的著作做真伪甄别与编目**（《论我自己的书》《论我自己著作的次序》）",
+        "第一人称的临床叙事与自我复盘（《论预后》《论避免悲伤》）"
+      ],
+      "distinguishing_basis": "生约 129 / 卒约 216；帕加马人；父名 Aelius Nicon；角斗士医师与四位皇帝的宫廷医师；**存世著作规模与自著目录（De Libris Propriis）是最硬的区分依据**——这一条使他与所有现代同名者不可能混淆",
+      "authoritative_sources": [
+        {
+          "locator": "https://en.wikipedia.org/wiki/Galen",
+          "kind": "encyclopedia"
+        },
+        {
+          "locator": "https://www.ncbi.nlm.nih.gov/books/NBK613949/",
+          "kind": "scholarly-introduction",
+          "note": "NCBI Bookshelf：Galen《On Avoiding Distress》与《On My Own Opinions》导论；记「twenty-two massive volumes in Karl Gottlob Kühn's nineteenth-century edition ... around 20,000 pages」"
+        },
+        {
+          "locator": "Galen, De Libris Propriis (On My Own Books) 与 De Ordine Librorum Suorum (On the Order of My Own Books)",
+          "kind": "self-authored-catalogue",
+          "note": "**由他本人编纂、用以对抗市面伪托本的真作目录**——本项目判定 P1 归属的第一权威"
+        },
+        {
+          "locator": "https://bmcr.brynmawr.edu/2014/2014.08.17/",
+          "kind": "scholarly-review",
+          "note": "BMCR 评 Galen: Three Treatises（'On My Own Books'、'On the Order of My Own Books'、'That the Best Physician is Also a Philosopher'）"
+        }
+      ],
+      "evidence_level": "high"
+    },
+    {
+      "canonical_name": "Willard Gordon Galen Weston",
+      "subject_uid": "galen-weston-1940",
+      "identity_category": "创业经营师",
+      "occupation_or_role": "英裔加拿大商人，George Weston Limited 荣誉主席",
+      "professional_background": "1940-10-29 生，2021-04-12 卒。加拿大食品加工与分销集团 George Weston Limited 的董事长。与古代医师无任何领域重叠，但其名在英语网络检索中的结果量级远高于古代医师，是**检索污染的首要来源**。另有同名之子 Galen G. Weston（Galen Weston Jr.），构成第二层同名风险。",
+      "application_scenarios": ["不适用——领域无重叠，不构成本次候选"],
+      "key_capabilities": ["不适用"],
+      "distinguishing_basis": "1940–2021；加拿大零售与食品业；与医学、古典学无交集",
+      "authoritative_sources": [
+        { "locator": "https://en.wikipedia.org/wiki/Galen_Weston", "kind": "encyclopedia" },
+        { "locator": "https://en.wikipedia.org/wiki/Galen_Weston_Jr.", "kind": "encyclopedia" }
+      ],
+      "evidence_level": "high"
+    },
+    {
+      "canonical_name": "Galen Avery Rowell",
+      "subject_uid": "galen-rowell-1940",
+      "identity_category": "艺术设计师",
+      "occupation_or_role": "美国山野摄影师、探险摄影记者与登山者",
+      "professional_background": "1940-08-23 生，2002-08-11 卒。与古代医师无任何领域重叠；因其作品在图片检索中占比高，是图像类检索污染源。",
+      "application_scenarios": ["不适用——领域无重叠，不构成本次候选"],
+      "key_capabilities": ["不适用"],
+      "distinguishing_basis": "1940–2002；摄影与登山；与医学无交集",
+      "authoritative_sources": [
+        { "locator": "https://en.wikipedia.org/wiki/Galen_Rowell", "kind": "encyclopedia" }
+      ],
+      "evidence_level": "high"
+    },
+    {
+      "canonical_name": "Galen John Strawson",
+      "subject_uid": "galen-strawson-1952",
+      "identity_category": "思想教育师",
+      "occupation_or_role": "英国分析哲学家、文学批评家，德州大学奥斯汀分校哲学教授",
+      "professional_background": "1952 年生。研究心灵哲学与形而上学（自由意志、泛心论、身心问题、自我），并研究洛克、休谟、康德、尼采。**风险特殊**：古代医师本人也被视为哲学家（著有《最好的医生也是哲学家》），因此「Galen + philosophy」这一检索组合会同时命中两人，是本门中最需要显式区分的一对。",
+      "application_scenarios": ["不适用——虽同为哲学，但年代与学派毫无交集，不构成本次候选"],
+      "key_capabilities": ["不适用"],
+      "distinguishing_basis": "1952 年生，在世；分析哲学；**与古代医师的重叠仅在「哲学」这一标签上，须以年代与著作显式切开**",
+      "authoritative_sources": [
+        { "locator": "https://en.wikipedia.org/wiki/Galen_Strawson", "kind": "encyclopedia" }
+      ],
+      "evidence_level": "high"
+    },
+    {
+      "canonical_name": "Vasily Konstantinovich Blyukher（化名 \"Galen\"）",
+      "subject_uid": "vasily-blyukher-1889",
+      "identity_category": "政治法律师",
+      "occupation_or_role": "苏联军事指挥官；在华任军事顾问期间使用化名「Galen」",
+      "professional_background": "1889–1938。**化名类风险**：中文与俄文史料中「加伦」「Galen」指的是他而非古代医师，涉及 1920 年代国民革命军顾问团的记载。与医学无交集。",
+      "application_scenarios": ["不适用——化名重合，不构成本次候选"],
+      "key_capabilities": ["不适用"],
+      "distinguishing_basis": "1889–1938；苏联军事；「Galen」是化名不是本名",
+      "authoritative_sources": [
+        { "locator": "https://en.wikipedia.org/wiki/Galen_(disambiguation)", "kind": "encyclopedia-disambiguation" }
+      ],
+      "evidence_level": "medium"
+    },
+    {
+      "canonical_name": "Ernst Philipp Karl Lange（笔名 \"Phillip Galen\"）",
+      "subject_uid": "philipp-galen-1813",
+      "identity_category": "艺术设计师",
+      "occupation_or_role": "德国小说家，笔名 Phillip Galen",
+      "professional_background": "1813–1899。**笔名类风险**：十九世纪德文书目中「Galen」条目可能指向他。与古代医师无交集。",
+      "application_scenarios": ["不适用——笔名重合，不构成本次候选"],
+      "key_capabilities": ["不适用"],
+      "distinguishing_basis": "1813–1899；德语小说；「Galen」是笔名不是本名",
+      "authoritative_sources": [
+        { "locator": "https://en.wikipedia.org/wiki/Galen_(disambiguation)", "kind": "encyclopedia-disambiguation" }
+      ],
+      "evidence_level": "medium"
+    }
+  ]
+}
