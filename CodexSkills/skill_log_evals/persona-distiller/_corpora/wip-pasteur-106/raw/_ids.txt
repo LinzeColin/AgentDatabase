@@ -1,0 +1,65 @@
+# 标识符|类别|年份|标题|URL|正文还是编者按
+# ★ 同名风险：Louis Pasteur Vallery-Radot（1886-1970）是外孙、医生、《Œuvres》与《Correspondance》编者，
+#   其名印在全集每卷扉页。硬判据＝时间：Pasteur 卒于 1895-09-28，外孙 1886 年生，
+#   凡 1896 年之后写成的文字（编者前言、注、copyright 行）一律不是他的。
+#   另有 William Pasteur（1855-1943，伦敦医生）；本语料无英文期刊 "Dr. Pasteur" 条目，未触发。
+oeuvresdepasteur01past|writings|1922|Œuvres de Pasteur, t.I — Dissymétrie moléculaire|https://archive.org/details/oeuvresdepasteur01past|正文+编者按：前 8338 字节(0.62%)为扉页+编者前言，署名 PASTEUR VALLERY-RADOT.；copyright 1922 by Pasteur Vallery-Radot
+oeuvresdepasteur02past|writings|1922|Œuvres de Pasteur, t.II — Fermentations et générations dites spontanées|https://archive.org/details/oeuvresdepasteur02past|正文+编者按：前 11044 字节(0.58%)为扉页+INTRODUCTION DU TOME II，署名 PASTEUR VALLERY-RADOT.
+oeuvresdepasteur03past|writings|1924|Œuvres de Pasteur, t.III — Études sur le vinaigre et sur le vin|https://archive.org/details/oeuvresdepasteur03past|正文+编者按：前 6997 字节(0.47%)为扉页+INTRODUCTION DU TOME III；copyright 1924 by Pasteur Vallery-Radot
+oeuvresdepasteur04past|writings|1926|Œuvres de Pasteur, t.IV — Études sur la maladie des vers à soie|https://archive.org/details/oeuvresdepasteur04past|正文+编者按：前 10769 字节(0.43%)为扉页+编者前言，署名 PASTEUR VALLERY-RADOT.
+uvresdepasteur0005past|writings|1928|Œuvres de Pasteur, t.V — Études sur la bière|https://archive.org/details/uvresdepasteur0005past|正文+编者按：前 9156 字节(0.86%)为扉页+编者前言；其后紧接编者体例说明「Ce tome V ... est divisé en trois parties」再入正文
+uvresdepasteur0006past|writings|1933|Œuvres de Pasteur, t.VI — Maladies virulentes, virus-vaccins et prophylaxie de la rage|https://archive.org/details/uvresdepasteur0006past|正文+编者按：前 25231 字节(0.95%)为扉页+INTRODUCTION DU TOME VI；另在 73.5%/73.9% 处有编者脚注（引 René Vallery-Radot《La Vie de Pasteur》并交叉引用他卷）
+uvresdepasteur0007past|writings|1930|Œuvres de Pasteur, t.VII — Mélanges scientifiques et littéraires（全集末卷，印 copyright 1930；全套 1922-1939）|https://archive.org/details/uvresdepasteur0007past|正文+编者按：前 7105 字节(0.36%)为扉页+INTRODUCTION DU TOME VII；编者注最多，另见 3.7%/23.5%/56.8%/58.9%/64.9%/71.8% 六处，且卷末 Table/Index 全为编者编制
+b30379696|writings|1848|Recherches sur les relations qui peuvent exister entre la forme cristalline, la composition chimique et le sens de la polarisation rotatoire|https://archive.org/details/b30379696|正文
+b30379672|writings|1848|Recherches sur le dimorphisme|https://archive.org/details/b30379672|正文
+b30478200|writings|1852|Mémoire sur les acides aspartique et malique|https://archive.org/details/b30478200|正文
+b30478194|writings|1853|Nouvelles recherches sur les relations entre la forme cristalline, la composition chimique et le phénomène rotatoire|https://archive.org/details/b30478194|正文
+papers00past|writings|1854|Papers（早期论文合订）|https://archive.org/details/papers00past|正文
+101646755.nlm.nih.gov|writings|1856|Études sur les modes d'accroissement des cristaux et sur les causes des variations de leurs formes secondaires|https://archive.org/details/101646755.nlm.nih.gov|正文
+mmoiresurlafer00past|writings|1860|Mémoire sur la fermentation alcoolique|https://archive.org/details/mmoiresurlafer00past|正文
+b30478248|writings|1861|Sur les corpuscules organisés qui existent dans l'atmosphère : examen de la doctrine des générations spontanées|https://archive.org/details/b30478248|正文
+101205420.nlm.nih.gov|writings|1862|Researches on the molecular dissymmetry of natural organic products（1860 年两讲的英译）|https://archive.org/details/101205420.nlm.nih.gov|正文
+oeuvresdepasteur00past|writings|1866|Études sur le vin, ses maladies…（初版，Victor Masson）★ id 带 oeuvresdepasteur 前缀但并非全集卷，实为 1866 年单行本|https://archive.org/details/oeuvresdepasteur00past|正文
+bub_gb_87UvAQAAMAAJ|writings|1866|Études sur le vin, ses maladies…（另一扫描本）|https://archive.org/details/bub_gb_87UvAQAAMAAJ|正文
+b28113032|writings|1868|Études sur le vinaigre : sa fabrication, ses maladies, moyens de les prévenir|https://archive.org/details/b28113032|正文
+b28113056|writings|1868|Rapport à S. Exc. M. le Ministre de l'agriculture sur la mission relative à la maladie des vers à soie|https://archive.org/details/b28113056|正文
+b30478212|writings|1868|Le budget de la science|https://archive.org/details/b30478212|正文
+etudessurlamalad00past|writings|1870|Études sur la maladie des vers à soie|https://archive.org/details/etudessurlamalad00past|正文
+b28124583_0001|writings|1870|Études sur la maladie des vers à soie（另一扫描本）|https://archive.org/details/b28124583_0001|正文
+b30478224|writings|1871|Quelques réflexions sur la science en France|https://archive.org/details/b30478224|正文
+bub_gb_68mdjN3ZohEC|writings|1873|Études sur le vin（增订本）|https://archive.org/details/bub_gb_68mdjN3ZohEC|正文
+b21357407|writings|1876|Études sur la bière, ses maladies, causes qui les provoquent…|https://archive.org/details/b21357407|正文
+b30478236|writings|1878|La théorie des germes et ses applications à la médecine et à la chirurgie|https://archive.org/details/b30478236|正文
+examencritiquedu00past|writings|1879|Examen critique d'un écrit posthume de Claude Bernard sur la fermentation|https://archive.org/details/examencritiquedu00past|正文
+studiesonferment00past|writings|1879|Studies on fermentation: the diseases of beer（《Études sur la bière》英译）|https://archive.org/details/studiesonferment00past|正文
+b29316832|writings|1879|Studies on fermentation（另一扫描本）|https://archive.org/details/b29316832|正文
+b28124571|writings|1883|La vaccination charbonneuse : réponse de M. Pasteur à un mémoire de M. Koch|https://archive.org/details/b28124571|正文
+collectiondartic00past|writings|1883|Collection d'articles, de rapports et de lettres（生前自编文集，含大量书信）|https://archive.org/details/collectiondartic00past|正文
+researchesonmole00past|writings|1906|Researches on the molecular asymmetry of natural organic products（1860 年讲稿英译，Alembic Club 重印）|https://archive.org/details/researchesonmole00past|正文（Pasteur 讲稿），另有后人所加编者序/书目页
+b30478145|writings|1882|Discours de réception de Louis Pasteur à l'Académie française. Réponse de Ernest Renan|https://archive.org/details/b30478145|混合：前半为 Pasteur 受任演说（正文），后半为 Renan 的答辞（他人）
+b22301720|external|1888|Inauguration de l'Institut Pasteur, 14 novembre 1888 : compte rendu|https://archive.org/details/b22301720|混合：典礼记录，多人发言（Pasteur 本人演说仅其中一段）。文中 « son gendre, M. Vallery-Radot » 指女婿 René Vallery-Radot（非外孙）
+foundationsofste00richrich|external|1901|The foundations of stereochemistry : memoirs by Pasteur, van't Hoff, Le Bel and Wislicenus|https://archive.org/details/foundationsofste00richrich|混合：四人回忆录合集，Pasteur 部分为英译；编者 G. M. Richardson 加序与注
+cr-t45-1857-pasteur|writings|1857|Comptes Rendus t.45 (1857) — Mémoire sur la fermentation appelée lactique ★ 仅抽取署名 Pasteur 的通报|https://archive.org/details/comptesrendusheb45acad|正文（无编者按：生前刊出，外孙 1886 年才出生）
+cr-t50-1860-pasteur|writings|1860|Comptes Rendus t.50 (1860) — Expériences relatives aux générations dites spontanées ★ 仅抽取署名 Pasteur 的通报|https://archive.org/details/comptesrendusheb50acad|正文（无编者按：生前刊出，外孙 1886 年才出生）
+cr-t51-1860-pasteur|writings|1860|Comptes Rendus t.51 (1860) — Générations dites spontanées (2 notes) + Recherches sur le mode de nutrition des Mucédinées ★ 仅抽取署名 Pasteur 的通报|https://archive.org/details/comptesrendusheb51acad|正文（无编者按：生前刊出，外孙 1886 年才出生）
+cr-t52-1861-pasteur|writings|1861|Comptes Rendus t.52 (1861) — Mémoire sur les corpuscules organisés + Expériences et vues nouvelles sur la nature des fermentations ★ 仅抽取署名 Pasteur 的通报|https://archive.org/details/comptesrendusheb52acad|正文（无编者按：生前刊出，外孙 1886 年才出生）
+cr-t56-1863-pasteur|writings|1863|Comptes Rendus t.56 (1863) — Acide acétique dans la fermentation alcoolique + Note contre M. Béchamp ★ 仅抽取署名 Pasteur 的通报|https://archive.org/details/comptesrendusheb56acad|正文（无编者按：生前刊出，外孙 1886 年才出生）
+cr-t58-1864-pasteur|writings|1864|Comptes Rendus t.58 (1864) — Note sur les générations spontanées ★ 仅抽取署名 Pasteur 的通报|https://archive.org/details/comptesrendusheb58acad|正文（无编者按：生前刊出，外孙 1886 年才出生）
+cr-t84-1877-pasteur|writings|1877|Comptes Rendus t.84 (1877) — Étude sur la maladie charbonneuse (avec Joubert) ★ 仅抽取署名 Pasteur 的通报|https://archive.org/details/comptesrendusheb84acad|正文（无编者按：生前刊出，外孙 1886 年才出生）
+cr-t90-1880-pasteur|writings|1880|Comptes Rendus t.90 (1880) — Sur le choléra des poules + De l'extension de la théorie des germes ★ 仅抽取署名 Pasteur 的通报|https://archive.org/details/comptesrendusheb90acad|正文（无编者按：生前刊出，外孙 1886 年才出生）
+cr-t92-1881-pasteur|writings|1881|Comptes Rendus t.92 (1881) — Atténuation des virus + vaccination charbonneuse de Pouilly-le-Fort + Sur la rage ★ 仅抽取署名 Pasteur 的通报|https://archive.org/details/ComptesRendusAcademieDesSciences092|正文（无编者按：生前刊出，外孙 1886 年才出生）
+cr-t98-1884-pasteur|writings|1884|Comptes Rendus t.98 (1884) — Sur la rage (avec Chamberland et Roux) ★ 仅抽取署名 Pasteur 的通报|https://archive.org/details/ComptesRendusAcademieDesSciences098|正文（无编者按：生前刊出，外孙 1886 年才出生）
+cr-t101-1885-pasteur|writings|1885|Comptes Rendus t.101 (1885) — Méthode pour prévenir la rage après morsure（Joseph Meister） ★ 仅抽取署名 Pasteur 的通报|https://archive.org/details/ComptesRendusAcademieDesSciences0101|正文（无编者按：生前刊出，外孙 1886 年才出生）
+thoriepositive1847pouc|external|1847|Pouchet, Théorie positive de l'ovulation spontanée et de la fécondation|https://archive.org/details/thoriepositive1847pouc|正文
+htrognieou00pouc|external|1859|Pouchet, Hétérogénie, ou Traité de la génération spontanée（自然发生说论战对手）|https://archive.org/details/htrognieou00pouc|正文
+bub_gb_iP51THgthNAC|external|1864|Pouchet, Nouvelles expériences sur la génération spontanée et la résistance vitale|https://archive.org/details/bub_gb_iP51THgthNAC|正文
+ueberghrungberq00liebgoog|external|1870|Liebig, Ueber Gährung, über Quelle der Muskelkraft und Ernährung（发酵化学论战对手，德文）|https://archive.org/details/ueberghrungberq00liebgoog|正文
+leonssurlesp01bern|external|1878|Claude Bernard, Leçons sur les phénomènes de la vie communs aux animaux et aux végétaux|https://archive.org/details/leonssurlesp01bern|正文
+essaysonfloating00tynduoft|external|1881|Tyndall, Essays on the floating-matter of the air in relation to putrefaction and infection（同盟者）|https://archive.org/details/essaysonfloating00tynduoft|正文
+b22332595|external|1883|Koch, L'inoculation préventive du charbon : réplique au discours prononcé à Genève par M. Pasteur（★ Koch 对 Pasteur 的正面反驳）|https://archive.org/details/b22332595|正文
+b28063016|external|1883|Béchamp, Les microzymas dans leurs rapports avec l'hétérogénie…（微酵母说，长期论敌）|https://archive.org/details/b28063016|正文
+lathoriedumicr00bc|external|1888|Béchamp, La théorie du microzyma et le système microbien|https://archive.org/details/lathoriedumicr00bc|正文
+b21912117|external|1887|Suzor, Hydrophobia: an account of M. Pasteur's system（含其狂犬病通报英译，框架为他人）|https://archive.org/details/b21912117|正文
+louispasteurhisl00vall|biography|1886|René Vallery-Radot, Louis Pasteur: his life and labours（女婿所撰，非外孙）|https://archive.org/details/louispasteurhisl00vall|正文
+pasteurhistoire00ducl|biography|1896|Duclaux, Pasteur : histoire d'un esprit（弟子所撰）|https://archive.org/details/pasteurhistoire00ducl|正文
+laviedepasteu00vall|biography|1900|René Vallery-Radot, La vie de Pasteur（女婿所撰，含大量书信转录）|https://archive.org/details/laviedepasteu00vall|正文

@@ -1,0 +1,16 @@
+{
+  "candidate_cards": [],
+  "candidate_count": 0,
+  "candidates": [],
+  "generated_at": "2026-08-02T21:14:32Z",
+  "normalized_name": "louispasteur",
+  "resolution": "none",
+  "schema_version": "1.0",
+  "search_scope": [
+    "sibling canonical registry",
+    "authoritative public sources supplied by orchestration"
+  ],
+  "selected_subject_uid": null,
+  "status": "ready",
+  "target_name": "Louis Pasteur"
+}
