@@ -33,6 +33,25 @@ NONWORD = re.compile(r"[^0-9A-Za-z]+")
 MIN = 20        # 投影后的最小长度；再短就不足以判定
 LONGS = re.compile(r"[fs]")
 
+# v0.0.0.37：引号形态原本只认「」与 " —— **法文 «» 一律扫不到。**
+# Pasteur #106 实测：答案里 11 条外语引文，只有 4 条被看见，**7 条法文 «» 从未被扫过**（64%）。
+# 与 v0.0.0.26（非西方姓名形态）、v0.0.0.35（射程停在断言层）同一族：
+# **判据的覆盖面比数据窄，而它照样报绿。**
+# 一并加德文 „…"、单书名号‹›、英文弯引号，并允许引号后紧跟 markdown 粗体与重音字母。
+Q = re.compile(
+    r"[「\"\u201c]\s*\*{0,2}([A-Za-zÀ-ÿ\u0370-\u03ff][^」\"\u201d]{18,300})[」\"\u201d]"
+    r"|\u00ab\s*\*{0,2}([A-Za-zÀ-ÿ\u0370-\u03ff][^\u00bb]{18,400})\u00bb"
+    r"|\u201e\s*\*{0,2}([A-Za-zÀ-ÿ][^\u201c\u201d]{18,300})[\u201c\u201d]"
+    r"|\u2039\s*\*{0,2}([A-Za-zÀ-ÿ][^\u203a]{18,300})\u203a")
+
+def _q(m):
+    """取第一个非空捕获组——四种引号形态共用一个 finditer。"""
+    for g in m.groups():
+        if g:
+            return g
+    return ""
+
+
 
 def proj(s: str) -> str:
     """投影成只保留字母数字的小写串——标点／空白／markdown／引号形态全部抹平。"""
@@ -78,6 +97,11 @@ REAL_LONGS_OK = ("长 s 还原—须放行",
 REAL_VERBATIM_OK = ("逐字命中—须放行",
                     "It was not with Sir Joseph, but with Home ; he took the paper. "
                     "It was shewn to the Council, and returned to me")
+# ★ v0.0.0.37 真实夹具：取自 Pasteur #106 的实际答案，用法文书名号 «» 包裹。
+#   扩形态之前，这一条**根本不会被扫到**（判据只认「」与 "），
+#   Pasteur 答案里 11 条外语引文有 7 条属这种情形——**64% 从未被核过，而判据照样报绿。**
+REAL_FRENCH_GUILLEMET = ("法文 «» 引号—须被扫到并命中",
+    "\u00abSur vingt chiens trait\u00e9s, je n'aurais pu r\u00e9pondre d'en rendre r\u00e9fractaires \u00e0 la rage plus de quinze ou seize.\u00bb")
 REAL_OCR_FIXED = ("改了 OCR 错字—须抓出",
                   "To Doctors JENNER and WOODVILLE")   # 语料作 "To DoHors JENNER and WOQDVILLE"
 
@@ -100,6 +124,12 @@ def self_test(projected, folded) -> int:
     hit = find(REAL_OCR_FIXED[1], projected, folded)
     print(f"  {'✓ 抓到' if not hit else '✗ 漏掉'}  {REAL_OCR_FIXED[0]}: 「{REAL_OCR_FIXED[1]}」")
     missed += bool(hit)
+
+    # v0.0.0.37：法文引号必须被 Q 认出来（形态覆盖），而不只是内容能匹配
+    m = Q.search(REAL_FRENCH_GUILLEMET[1])
+    seen = bool(m and _q(m))
+    print(f"  {'✓' if seen else '✗ 扫不到'}  {REAL_FRENCH_GUILLEMET[0]}：Q 正则{'认出' if seen else '**没认出**'}法文 «» 形态")
+    missed += not seen
 
     print("\n══ 反向对照 ══")
     # ① 抽掉语料：真实引文必须转红——证明放行来自语料，不是来自匹配太松
@@ -135,12 +165,11 @@ def main() -> int:
             folded.append(fold_s(p))
     print(f"语料 {len(texts)} 份（已投影为字母数字串）")
 
-    Q = re.compile(r"[「\"]([A-Za-z][^」\"]{18,300})[」\"]")
 
     def scan(label: str, unit_id: str, text: str, acc):
         for m in Q.finditer(text):
             acc["quotes"] += 1
-            for seg in SPLIT.split(m.group(1)):
+            for seg in SPLIT.split(_q(m)):
                 if len(proj(seg)) < MIN:
                     continue
                 acc["segs"] += 1
