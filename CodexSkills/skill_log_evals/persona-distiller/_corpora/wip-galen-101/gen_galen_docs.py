@@ -179,7 +179,28 @@ DOCS["divergence-map.md"] = f"""# 分歧图谱 · Galen of Pergamon
 
 DOCS["facts.md"] = f"""# 事实底册 · Galen of Pergamon
 
-{bullets(fa)}
+本册只收**能回原件核对**的条目。每一条都带可核的专名或数字——
+「他重视 X」不进本册，那是格言不是事实。
+
+## 一、语料规模与真伪分层
+
+{bullets([fa[2], fa[5], fa[7], fa[13]])}
+
+## 二、著作篇幅与结构
+
+{bullets([fa[6], fa[11], fa[12]])}
+
+## 三、生平与时序
+
+{bullets([fa[3], fa[8], fa[9], fa[14]])}
+
+## 四、归属与外部证据
+
+{bullets([fa[0], fa[1], fa[10]])}
+
+## 五、被推翻的结论
+
+{bullets([fa[4]])}
 
 ## 归属链
 

@@ -967,6 +967,42 @@ def run_authorship_gate(report, target: Path, meta: dict[str, Any],
                      f'（署名／编者注／逐字稿轮次三者皆无）')
 
 
+def run_fact_density(report, target: Path, sources: list[dict[str, Any]]) -> None:
+    """事实密度门（v0.0.0.28 新增，**只报不拦**）。
+
+    Galen #101 被拒发之后倒推出来的：59 条可用源、244 万词一手语料，
+    `fact` 类断言只有 **5** 条。第 2 轮改答案把真 delta 从 −0.1944 拉到 −0.1259 就到顶——
+    **天花板在断言层，不在答案层。**
+
+    **只报不拦**：已入库 100 人普遍是 5 条上下，硬拦会把整个名册一起拦下
+    （与 `NO-SELFTEST`、新鲜度门同一条纪律）。数字大到无法忽略，但不替执行者做发布决定。
+    """
+    here = Path(__file__).resolve().parent
+    script = here / 'check_fact_density.py'
+    if not script.exists():
+        report.metrics['fact_density'] = {'状态': 'check_fact_density.py 未安装，**未核验**（不是通过）'}
+        return
+    spec = importlib.util.spec_from_file_location('_pd_factdens', script)
+    module = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(module)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['fact_density'] = {'状态': f'检查器加载失败，**未核验**：{exc}'}
+        return
+    buffer = io.StringIO()
+    with contextlib.redirect_stdout(buffer):
+        if module.self_test() != 0:
+            report.error('content.selftest-failed',
+                         'check_fact_density.py 负对照未过——其检查结论不作数')
+            return
+    claims = read_jsonl(target / 'evidence/claims.jsonl')
+    usable = [r for r in sources if r.get('split') == 'train' and r.get('tier') != 'U']
+    problems, info = module.evaluate(claims, len(usable))
+    if problems:
+        info['**未达**'] = problems
+    report.metrics['fact_density'] = info
+
+
 def run_attribution_basis(report, target: Path, meta: dict[str, Any],
                           sources: list[dict[str, Any]]) -> None:
     """归属依据门（v0.0.0.24 新增）——**印刷时代之前的人物，靠什么证明是他写的**。
@@ -1085,6 +1121,7 @@ def main() -> int:
         sources, holdout = evaluate_sources(report, target, thresholds, args.allow_provisional)
         run_authorship_gate(report, target, meta, sources)
         run_attribution_basis(report, target, meta, sources)
+        run_fact_density(report, target, sources)
         run_ocr_gate(report, target, sources)
         report_own_voice(report, target, meta, sources)
         report_refusal_overflow(report, target)
