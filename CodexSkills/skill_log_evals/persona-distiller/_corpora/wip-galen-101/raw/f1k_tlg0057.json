@@ -1,0 +1,1570 @@
+[
+  {
+    "name": "__cts__.xml",
+    "path": "data/tlg0057/__cts__.xml",
+    "sha": "8bf8076332b96fd8e1b390276ed1fde67e7a7989",
+    "size": 212,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/__cts__.xml?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/blob/master/data/tlg0057/__cts__.xml",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/blobs/8bf8076332b96fd8e1b390276ed1fde67e7a7989",
+    "download_url": "https://raw.githubusercontent.com/OpenGreekAndLatin/First1KGreek/master/data/tlg0057/__cts__.xml",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/__cts__.xml?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/blobs/8bf8076332b96fd8e1b390276ed1fde67e7a7989",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/blob/master/data/tlg0057/__cts__.xml"
+    }
+  },
+  {
+    "name": "tlg001",
+    "path": "data/tlg0057/tlg001",
+    "sha": "3e6f66d3c8391fabdf468dc0cbdfc40daa61398b",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg001?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg001",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/3e6f66d3c8391fabdf468dc0cbdfc40daa61398b",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg001?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/3e6f66d3c8391fabdf468dc0cbdfc40daa61398b",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg001"
+    }
+  },
+  {
+    "name": "tlg002",
+    "path": "data/tlg0057/tlg002",
+    "sha": "d573389a901f4e3073249d90acfec44a46ed4134",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg002?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg002",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/d573389a901f4e3073249d90acfec44a46ed4134",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg002?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/d573389a901f4e3073249d90acfec44a46ed4134",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg002"
+    }
+  },
+  {
+    "name": "tlg003",
+    "path": "data/tlg0057/tlg003",
+    "sha": "e1a309f5960ecdd7b7695e8f0d962d091a3a85a9",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg003?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg003",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/e1a309f5960ecdd7b7695e8f0d962d091a3a85a9",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg003?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/e1a309f5960ecdd7b7695e8f0d962d091a3a85a9",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg003"
+    }
+  },
+  {
+    "name": "tlg004",
+    "path": "data/tlg0057/tlg004",
+    "sha": "13f5529abbe21823a8afa9dc59a9d38d123a50b4",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg004?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg004",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/13f5529abbe21823a8afa9dc59a9d38d123a50b4",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg004?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/13f5529abbe21823a8afa9dc59a9d38d123a50b4",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg004"
+    }
+  },
+  {
+    "name": "tlg006",
+    "path": "data/tlg0057/tlg006",
+    "sha": "3bcc4325d63ed9cf5ce856d70ed962ee442e8361",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg006?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg006",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/3bcc4325d63ed9cf5ce856d70ed962ee442e8361",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg006?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/3bcc4325d63ed9cf5ce856d70ed962ee442e8361",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg006"
+    }
+  },
+  {
+    "name": "tlg007",
+    "path": "data/tlg0057/tlg007",
+    "sha": "d57621e60fb0d6884802ad339c11cfd2086a4c77",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg007?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg007",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/d57621e60fb0d6884802ad339c11cfd2086a4c77",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg007?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/d57621e60fb0d6884802ad339c11cfd2086a4c77",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg007"
+    }
+  },
+  {
+    "name": "tlg008",
+    "path": "data/tlg0057/tlg008",
+    "sha": "c9cb98944ec5a24d742a60eb451f9af928555667",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg008?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg008",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/c9cb98944ec5a24d742a60eb451f9af928555667",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg008?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/c9cb98944ec5a24d742a60eb451f9af928555667",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg008"
+    }
+  },
+  {
+    "name": "tlg009",
+    "path": "data/tlg0057/tlg009",
+    "sha": "4a016beadff165dc1e2e8cb0af2a5c023d9a6aa1",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg009?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg009",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/4a016beadff165dc1e2e8cb0af2a5c023d9a6aa1",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg009?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/4a016beadff165dc1e2e8cb0af2a5c023d9a6aa1",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg009"
+    }
+  },
+  {
+    "name": "tlg010",
+    "path": "data/tlg0057/tlg010",
+    "sha": "f44046b86af5e3356997245aa434bcabdd0d8074",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg010?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg010",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/f44046b86af5e3356997245aa434bcabdd0d8074",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg010?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/f44046b86af5e3356997245aa434bcabdd0d8074",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg010"
+    }
+  },
+  {
+    "name": "tlg011",
+    "path": "data/tlg0057/tlg011",
+    "sha": "179667f6168fa29cf7df7605f8cbbde32dacbc63",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg011?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg011",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/179667f6168fa29cf7df7605f8cbbde32dacbc63",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg011?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/179667f6168fa29cf7df7605f8cbbde32dacbc63",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg011"
+    }
+  },
+  {
+    "name": "tlg012",
+    "path": "data/tlg0057/tlg012",
+    "sha": "dce9a5a7e49e3a43b0b6801f1d52f63097ab45f9",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg012?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg012",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/dce9a5a7e49e3a43b0b6801f1d52f63097ab45f9",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg012?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/dce9a5a7e49e3a43b0b6801f1d52f63097ab45f9",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg012"
+    }
+  },
+  {
+    "name": "tlg013",
+    "path": "data/tlg0057/tlg013",
+    "sha": "1c7856939f905772a60349f98edfec0f636e559d",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg013?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg013",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/1c7856939f905772a60349f98edfec0f636e559d",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg013?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/1c7856939f905772a60349f98edfec0f636e559d",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg013"
+    }
+  },
+  {
+    "name": "tlg014",
+    "path": "data/tlg0057/tlg014",
+    "sha": "842db16c70ddeb2a9f39a53bc5fc23c7c18e3747",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg014?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg014",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/842db16c70ddeb2a9f39a53bc5fc23c7c18e3747",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg014?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/842db16c70ddeb2a9f39a53bc5fc23c7c18e3747",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg014"
+    }
+  },
+  {
+    "name": "tlg015",
+    "path": "data/tlg0057/tlg015",
+    "sha": "c33ff3d6417c4889aa9c150514813fccbfc740c9",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg015?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg015",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/c33ff3d6417c4889aa9c150514813fccbfc740c9",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg015?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/c33ff3d6417c4889aa9c150514813fccbfc740c9",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg015"
+    }
+  },
+  {
+    "name": "tlg016",
+    "path": "data/tlg0057/tlg016",
+    "sha": "659ed8421df1c1651aa35c6eddcc3a572551d891",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg016?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg016",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/659ed8421df1c1651aa35c6eddcc3a572551d891",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg016?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/659ed8421df1c1651aa35c6eddcc3a572551d891",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg016"
+    }
+  },
+  {
+    "name": "tlg017",
+    "path": "data/tlg0057/tlg017",
+    "sha": "92e74c1ee63d2841b4b7c1b2c5b19bea1e6ea506",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg017?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg017",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/92e74c1ee63d2841b4b7c1b2c5b19bea1e6ea506",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg017?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/92e74c1ee63d2841b4b7c1b2c5b19bea1e6ea506",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg017"
+    }
+  },
+  {
+    "name": "tlg018",
+    "path": "data/tlg0057/tlg018",
+    "sha": "a409303f65e6dc86d8ab8c69de8c6908b6d9804a",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg018?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg018",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/a409303f65e6dc86d8ab8c69de8c6908b6d9804a",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg018?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/a409303f65e6dc86d8ab8c69de8c6908b6d9804a",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg018"
+    }
+  },
+  {
+    "name": "tlg019",
+    "path": "data/tlg0057/tlg019",
+    "sha": "0235feaf3e2f61be6b1db338e53f61544926dbb9",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg019?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg019",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/0235feaf3e2f61be6b1db338e53f61544926dbb9",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg019?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/0235feaf3e2f61be6b1db338e53f61544926dbb9",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg019"
+    }
+  },
+  {
+    "name": "tlg020",
+    "path": "data/tlg0057/tlg020",
+    "sha": "eb9246de9b1d002ab251b25477c3a06822400aa6",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg020?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg020",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/eb9246de9b1d002ab251b25477c3a06822400aa6",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg020?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/eb9246de9b1d002ab251b25477c3a06822400aa6",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg020"
+    }
+  },
+  {
+    "name": "tlg021",
+    "path": "data/tlg0057/tlg021",
+    "sha": "bd8fc513c4abee4b05909dccc34102b4aa1268a4",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg021?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg021",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/bd8fc513c4abee4b05909dccc34102b4aa1268a4",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg021?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/bd8fc513c4abee4b05909dccc34102b4aa1268a4",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg021"
+    }
+  },
+  {
+    "name": "tlg022",
+    "path": "data/tlg0057/tlg022",
+    "sha": "44a5d819453bb624a09b32cff1bcc2dffd797bc2",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg022?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg022",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/44a5d819453bb624a09b32cff1bcc2dffd797bc2",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg022?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/44a5d819453bb624a09b32cff1bcc2dffd797bc2",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg022"
+    }
+  },
+  {
+    "name": "tlg023",
+    "path": "data/tlg0057/tlg023",
+    "sha": "abd89aeee7bf2a90b1499ab0c497327b4957fe30",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg023?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg023",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/abd89aeee7bf2a90b1499ab0c497327b4957fe30",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg023?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/abd89aeee7bf2a90b1499ab0c497327b4957fe30",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg023"
+    }
+  },
+  {
+    "name": "tlg024",
+    "path": "data/tlg0057/tlg024",
+    "sha": "b80b783f08cd74a58ba3808694b989d0b2d56a76",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg024?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg024",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/b80b783f08cd74a58ba3808694b989d0b2d56a76",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg024?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/b80b783f08cd74a58ba3808694b989d0b2d56a76",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg024"
+    }
+  },
+  {
+    "name": "tlg025",
+    "path": "data/tlg0057/tlg025",
+    "sha": "4954b664e6c7443ec7e9e21df60f98125d0016a6",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg025?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg025",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/4954b664e6c7443ec7e9e21df60f98125d0016a6",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg025?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/4954b664e6c7443ec7e9e21df60f98125d0016a6",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg025"
+    }
+  },
+  {
+    "name": "tlg027",
+    "path": "data/tlg0057/tlg027",
+    "sha": "dee00c979f21f8d8317398e039ddebfef70eed05",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg027?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg027",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/dee00c979f21f8d8317398e039ddebfef70eed05",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg027?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/dee00c979f21f8d8317398e039ddebfef70eed05",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg027"
+    }
+  },
+  {
+    "name": "tlg028",
+    "path": "data/tlg0057/tlg028",
+    "sha": "d6fa25fef240028170bfcd6d23733e287e808784",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg028?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg028",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/d6fa25fef240028170bfcd6d23733e287e808784",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg028?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/d6fa25fef240028170bfcd6d23733e287e808784",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg028"
+    }
+  },
+  {
+    "name": "tlg029",
+    "path": "data/tlg0057/tlg029",
+    "sha": "19f64bff33c0615630b60e2f25147fc086b009ed",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg029?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg029",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/19f64bff33c0615630b60e2f25147fc086b009ed",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg029?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/19f64bff33c0615630b60e2f25147fc086b009ed",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg029"
+    }
+  },
+  {
+    "name": "tlg030",
+    "path": "data/tlg0057/tlg030",
+    "sha": "10897e061bd876b76c2f1a57b4b8671928c00f0a",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg030?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg030",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/10897e061bd876b76c2f1a57b4b8671928c00f0a",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg030?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/10897e061bd876b76c2f1a57b4b8671928c00f0a",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg030"
+    }
+  },
+  {
+    "name": "tlg031",
+    "path": "data/tlg0057/tlg031",
+    "sha": "08c6d8d6c648b94f8dd75f47a6de22e85b264ec8",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg031?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg031",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/08c6d8d6c648b94f8dd75f47a6de22e85b264ec8",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg031?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/08c6d8d6c648b94f8dd75f47a6de22e85b264ec8",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg031"
+    }
+  },
+  {
+    "name": "tlg032",
+    "path": "data/tlg0057/tlg032",
+    "sha": "c837d32d0774259ef6e9c826be477e44fb0aaa3e",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg032?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg032",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/c837d32d0774259ef6e9c826be477e44fb0aaa3e",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg032?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/c837d32d0774259ef6e9c826be477e44fb0aaa3e",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg032"
+    }
+  },
+  {
+    "name": "tlg033",
+    "path": "data/tlg0057/tlg033",
+    "sha": "fb7bd9380878fe225d135b191bc42caebab186ec",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg033?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg033",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/fb7bd9380878fe225d135b191bc42caebab186ec",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg033?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/fb7bd9380878fe225d135b191bc42caebab186ec",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg033"
+    }
+  },
+  {
+    "name": "tlg034",
+    "path": "data/tlg0057/tlg034",
+    "sha": "dc6473b774edbe41b517f1396df8d217762d913b",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg034?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg034",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/dc6473b774edbe41b517f1396df8d217762d913b",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg034?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/dc6473b774edbe41b517f1396df8d217762d913b",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg034"
+    }
+  },
+  {
+    "name": "tlg035",
+    "path": "data/tlg0057/tlg035",
+    "sha": "0c1e7b68aeeaf832afaeb887c821ebfe496b6718",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg035?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg035",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/0c1e7b68aeeaf832afaeb887c821ebfe496b6718",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg035?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/0c1e7b68aeeaf832afaeb887c821ebfe496b6718",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg035"
+    }
+  },
+  {
+    "name": "tlg036",
+    "path": "data/tlg0057/tlg036",
+    "sha": "bfcad8dee991e210e3cdebd150a60138a422f4ef",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg036?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg036",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/bfcad8dee991e210e3cdebd150a60138a422f4ef",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg036?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/bfcad8dee991e210e3cdebd150a60138a422f4ef",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg036"
+    }
+  },
+  {
+    "name": "tlg037",
+    "path": "data/tlg0057/tlg037",
+    "sha": "75b2c952ec35c5ccfec33c602992ad2029c431ad",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg037?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg037",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/75b2c952ec35c5ccfec33c602992ad2029c431ad",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg037?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/75b2c952ec35c5ccfec33c602992ad2029c431ad",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg037"
+    }
+  },
+  {
+    "name": "tlg038",
+    "path": "data/tlg0057/tlg038",
+    "sha": "1b5cc983f444b0294052ab23162ac28059fa9980",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg038?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg038",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/1b5cc983f444b0294052ab23162ac28059fa9980",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg038?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/1b5cc983f444b0294052ab23162ac28059fa9980",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg038"
+    }
+  },
+  {
+    "name": "tlg039",
+    "path": "data/tlg0057/tlg039",
+    "sha": "db2309b87ecc148fc54d9f56f2ac5bd8dd312407",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg039?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg039",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/db2309b87ecc148fc54d9f56f2ac5bd8dd312407",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg039?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/db2309b87ecc148fc54d9f56f2ac5bd8dd312407",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg039"
+    }
+  },
+  {
+    "name": "tlg040",
+    "path": "data/tlg0057/tlg040",
+    "sha": "3ed21a31179d26ab7750ebd55b41ae4d477b0d21",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg040?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg040",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/3ed21a31179d26ab7750ebd55b41ae4d477b0d21",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg040?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/3ed21a31179d26ab7750ebd55b41ae4d477b0d21",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg040"
+    }
+  },
+  {
+    "name": "tlg041",
+    "path": "data/tlg0057/tlg041",
+    "sha": "93282d36710f43d5018e30544318ba667978af0f",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg041?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg041",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/93282d36710f43d5018e30544318ba667978af0f",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg041?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/93282d36710f43d5018e30544318ba667978af0f",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg041"
+    }
+  },
+  {
+    "name": "tlg042",
+    "path": "data/tlg0057/tlg042",
+    "sha": "0c7d053a99a68f08b90b24f57cc464fd74936133",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg042?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg042",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/0c7d053a99a68f08b90b24f57cc464fd74936133",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg042?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/0c7d053a99a68f08b90b24f57cc464fd74936133",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg042"
+    }
+  },
+  {
+    "name": "tlg043",
+    "path": "data/tlg0057/tlg043",
+    "sha": "781b63cb546d63b6ce4073a5df2b19c6be383c56",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg043?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg043",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/781b63cb546d63b6ce4073a5df2b19c6be383c56",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg043?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/781b63cb546d63b6ce4073a5df2b19c6be383c56",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg043"
+    }
+  },
+  {
+    "name": "tlg044",
+    "path": "data/tlg0057/tlg044",
+    "sha": "861e0afc38a33565f84ab13f0d41d6b592f27b45",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg044?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg044",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/861e0afc38a33565f84ab13f0d41d6b592f27b45",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg044?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/861e0afc38a33565f84ab13f0d41d6b592f27b45",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg044"
+    }
+  },
+  {
+    "name": "tlg045",
+    "path": "data/tlg0057/tlg045",
+    "sha": "15783a0632c08a940a6a9438a53f0d972c06bebc",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg045?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg045",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/15783a0632c08a940a6a9438a53f0d972c06bebc",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg045?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/15783a0632c08a940a6a9438a53f0d972c06bebc",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg045"
+    }
+  },
+  {
+    "name": "tlg046",
+    "path": "data/tlg0057/tlg046",
+    "sha": "c1e4e334b595d6a5e0cca460299132d4bacbb89f",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg046?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg046",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/c1e4e334b595d6a5e0cca460299132d4bacbb89f",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg046?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/c1e4e334b595d6a5e0cca460299132d4bacbb89f",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg046"
+    }
+  },
+  {
+    "name": "tlg047",
+    "path": "data/tlg0057/tlg047",
+    "sha": "1ca593896d6cf7cc2b27020d9a529c35fdffd54c",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg047?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg047",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/1ca593896d6cf7cc2b27020d9a529c35fdffd54c",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg047?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/1ca593896d6cf7cc2b27020d9a529c35fdffd54c",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg047"
+    }
+  },
+  {
+    "name": "tlg048",
+    "path": "data/tlg0057/tlg048",
+    "sha": "7c07330f43456e687bdf96b20ac727108f558a98",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg048?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg048",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/7c07330f43456e687bdf96b20ac727108f558a98",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg048?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/7c07330f43456e687bdf96b20ac727108f558a98",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg048"
+    }
+  },
+  {
+    "name": "tlg049",
+    "path": "data/tlg0057/tlg049",
+    "sha": "40812b766a7945999a8e649e68f927a9da63cc9d",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg049?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg049",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/40812b766a7945999a8e649e68f927a9da63cc9d",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg049?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/40812b766a7945999a8e649e68f927a9da63cc9d",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg049"
+    }
+  },
+  {
+    "name": "tlg050",
+    "path": "data/tlg0057/tlg050",
+    "sha": "14988bea4909f363d008a7a5a1e10f617d8e0226",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg050?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg050",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/14988bea4909f363d008a7a5a1e10f617d8e0226",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg050?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/14988bea4909f363d008a7a5a1e10f617d8e0226",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg050"
+    }
+  },
+  {
+    "name": "tlg051",
+    "path": "data/tlg0057/tlg051",
+    "sha": "c14385ede78a74850c385ac4fb08d58836bb1a72",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg051?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg051",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/c14385ede78a74850c385ac4fb08d58836bb1a72",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg051?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/c14385ede78a74850c385ac4fb08d58836bb1a72",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg051"
+    }
+  },
+  {
+    "name": "tlg052",
+    "path": "data/tlg0057/tlg052",
+    "sha": "efbbec8d33fb9a86bff56aea7287ab0d7e920333",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg052?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg052",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/efbbec8d33fb9a86bff56aea7287ab0d7e920333",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg052?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/efbbec8d33fb9a86bff56aea7287ab0d7e920333",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg052"
+    }
+  },
+  {
+    "name": "tlg053",
+    "path": "data/tlg0057/tlg053",
+    "sha": "4446883b822e08ae2b7707ba1a9464aa88c0a023",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg053?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg053",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/4446883b822e08ae2b7707ba1a9464aa88c0a023",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg053?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/4446883b822e08ae2b7707ba1a9464aa88c0a023",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg053"
+    }
+  },
+  {
+    "name": "tlg054",
+    "path": "data/tlg0057/tlg054",
+    "sha": "e4e86e275cc57558b5bbc7afa1522128ec3577d4",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg054?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg054",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/e4e86e275cc57558b5bbc7afa1522128ec3577d4",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg054?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/e4e86e275cc57558b5bbc7afa1522128ec3577d4",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg054"
+    }
+  },
+  {
+    "name": "tlg055",
+    "path": "data/tlg0057/tlg055",
+    "sha": "0be7c29b8dff0b4d7dd82a711c2c7db8855b0596",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg055?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg055",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/0be7c29b8dff0b4d7dd82a711c2c7db8855b0596",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg055?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/0be7c29b8dff0b4d7dd82a711c2c7db8855b0596",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg055"
+    }
+  },
+  {
+    "name": "tlg056",
+    "path": "data/tlg0057/tlg056",
+    "sha": "36db25f867703f93814c635bca3168da2f182c69",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg056?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg056",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/36db25f867703f93814c635bca3168da2f182c69",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg056?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/36db25f867703f93814c635bca3168da2f182c69",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg056"
+    }
+  },
+  {
+    "name": "tlg057",
+    "path": "data/tlg0057/tlg057",
+    "sha": "323fd2924008d428685f5bd39ce1c67b36f64f90",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg057?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg057",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/323fd2924008d428685f5bd39ce1c67b36f64f90",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg057?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/323fd2924008d428685f5bd39ce1c67b36f64f90",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg057"
+    }
+  },
+  {
+    "name": "tlg058",
+    "path": "data/tlg0057/tlg058",
+    "sha": "27b9ec4a0266182ec53ef8b59a9ea9710cca0d49",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg058?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg058",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/27b9ec4a0266182ec53ef8b59a9ea9710cca0d49",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg058?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/27b9ec4a0266182ec53ef8b59a9ea9710cca0d49",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg058"
+    }
+  },
+  {
+    "name": "tlg059",
+    "path": "data/tlg0057/tlg059",
+    "sha": "cb38d4319cf3f9df951bd6868cbe2d564da28dee",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg059?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg059",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/cb38d4319cf3f9df951bd6868cbe2d564da28dee",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg059?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/cb38d4319cf3f9df951bd6868cbe2d564da28dee",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg059"
+    }
+  },
+  {
+    "name": "tlg060",
+    "path": "data/tlg0057/tlg060",
+    "sha": "7dd410ee7df8294150fa5c0454d857e15b96a406",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg060?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg060",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/7dd410ee7df8294150fa5c0454d857e15b96a406",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg060?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/7dd410ee7df8294150fa5c0454d857e15b96a406",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg060"
+    }
+  },
+  {
+    "name": "tlg061",
+    "path": "data/tlg0057/tlg061",
+    "sha": "782c0f5f9e73ccc6b05b60bd056d7541ca9cff79",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg061?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg061",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/782c0f5f9e73ccc6b05b60bd056d7541ca9cff79",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg061?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/782c0f5f9e73ccc6b05b60bd056d7541ca9cff79",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg061"
+    }
+  },
+  {
+    "name": "tlg062",
+    "path": "data/tlg0057/tlg062",
+    "sha": "6b2c96cb8a9e5b1eaf58e0538122492b3d86e651",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg062?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg062",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/6b2c96cb8a9e5b1eaf58e0538122492b3d86e651",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg062?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/6b2c96cb8a9e5b1eaf58e0538122492b3d86e651",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg062"
+    }
+  },
+  {
+    "name": "tlg063",
+    "path": "data/tlg0057/tlg063",
+    "sha": "827b641f1c7dea737a6cd5870a913b13b910a520",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg063?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg063",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/827b641f1c7dea737a6cd5870a913b13b910a520",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg063?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/827b641f1c7dea737a6cd5870a913b13b910a520",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg063"
+    }
+  },
+  {
+    "name": "tlg064",
+    "path": "data/tlg0057/tlg064",
+    "sha": "25d954bc1940ec7dc2b5c775b75d283681d3b8c2",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg064?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg064",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/25d954bc1940ec7dc2b5c775b75d283681d3b8c2",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg064?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/25d954bc1940ec7dc2b5c775b75d283681d3b8c2",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg064"
+    }
+  },
+  {
+    "name": "tlg065",
+    "path": "data/tlg0057/tlg065",
+    "sha": "65997b45c6eef9f7d85feaad9e0ef3c867338ef6",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg065?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg065",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/65997b45c6eef9f7d85feaad9e0ef3c867338ef6",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg065?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/65997b45c6eef9f7d85feaad9e0ef3c867338ef6",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg065"
+    }
+  },
+  {
+    "name": "tlg066",
+    "path": "data/tlg0057/tlg066",
+    "sha": "58696cde1a9aa10aca016be9d537f3f8765834b5",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg066?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg066",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/58696cde1a9aa10aca016be9d537f3f8765834b5",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg066?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/58696cde1a9aa10aca016be9d537f3f8765834b5",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg066"
+    }
+  },
+  {
+    "name": "tlg067",
+    "path": "data/tlg0057/tlg067",
+    "sha": "4ae0506f6c1554966d9773a80771402910cdf560",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg067?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg067",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/4ae0506f6c1554966d9773a80771402910cdf560",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg067?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/4ae0506f6c1554966d9773a80771402910cdf560",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg067"
+    }
+  },
+  {
+    "name": "tlg068",
+    "path": "data/tlg0057/tlg068",
+    "sha": "4c5bef88c679db7483136ab6dafc5622b381e029",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg068?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg068",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/4c5bef88c679db7483136ab6dafc5622b381e029",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg068?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/4c5bef88c679db7483136ab6dafc5622b381e029",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg068"
+    }
+  },
+  {
+    "name": "tlg069",
+    "path": "data/tlg0057/tlg069",
+    "sha": "2f8e5f119d47203019fc751eb31bb5898d097170",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg069?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg069",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/2f8e5f119d47203019fc751eb31bb5898d097170",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg069?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/2f8e5f119d47203019fc751eb31bb5898d097170",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg069"
+    }
+  },
+  {
+    "name": "tlg070",
+    "path": "data/tlg0057/tlg070",
+    "sha": "c2609795d53ae5af3b7efd68a7f0850695f42b6d",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg070?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg070",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/c2609795d53ae5af3b7efd68a7f0850695f42b6d",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg070?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/c2609795d53ae5af3b7efd68a7f0850695f42b6d",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg070"
+    }
+  },
+  {
+    "name": "tlg071",
+    "path": "data/tlg0057/tlg071",
+    "sha": "83a9199d1cb7733eaffa7f9c302aec23fd2dac8e",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg071?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg071",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/83a9199d1cb7733eaffa7f9c302aec23fd2dac8e",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg071?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/83a9199d1cb7733eaffa7f9c302aec23fd2dac8e",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg071"
+    }
+  },
+  {
+    "name": "tlg072",
+    "path": "data/tlg0057/tlg072",
+    "sha": "83aaf63df53aded068d38e935082feda3b53b202",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg072?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg072",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/83aaf63df53aded068d38e935082feda3b53b202",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg072?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/83aaf63df53aded068d38e935082feda3b53b202",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg072"
+    }
+  },
+  {
+    "name": "tlg073",
+    "path": "data/tlg0057/tlg073",
+    "sha": "bcc717365926c4ca1b048e2010d91848ddd687f7",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg073?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg073",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/bcc717365926c4ca1b048e2010d91848ddd687f7",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg073?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/bcc717365926c4ca1b048e2010d91848ddd687f7",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg073"
+    }
+  },
+  {
+    "name": "tlg074",
+    "path": "data/tlg0057/tlg074",
+    "sha": "621d39e589dfedfc29b2a546de8e552832cd21ec",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg074?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg074",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/621d39e589dfedfc29b2a546de8e552832cd21ec",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg074?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/621d39e589dfedfc29b2a546de8e552832cd21ec",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg074"
+    }
+  },
+  {
+    "name": "tlg075",
+    "path": "data/tlg0057/tlg075",
+    "sha": "24f789fab42423e564c07b0e861759dda4d1eebe",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg075?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg075",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/24f789fab42423e564c07b0e861759dda4d1eebe",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg075?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/24f789fab42423e564c07b0e861759dda4d1eebe",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg075"
+    }
+  },
+  {
+    "name": "tlg076",
+    "path": "data/tlg0057/tlg076",
+    "sha": "06272346e11e65e79dd0964e1742fd5466a1a572",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg076?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg076",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/06272346e11e65e79dd0964e1742fd5466a1a572",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg076?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/06272346e11e65e79dd0964e1742fd5466a1a572",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg076"
+    }
+  },
+  {
+    "name": "tlg077",
+    "path": "data/tlg0057/tlg077",
+    "sha": "12bb1d3ff8042625bb2bb3c88b23816e9045a5ca",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg077?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg077",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/12bb1d3ff8042625bb2bb3c88b23816e9045a5ca",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg077?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/12bb1d3ff8042625bb2bb3c88b23816e9045a5ca",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg077"
+    }
+  },
+  {
+    "name": "tlg078",
+    "path": "data/tlg0057/tlg078",
+    "sha": "6a683918478f0208441131fd726d1a4a03d6bb45",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg078?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg078",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/6a683918478f0208441131fd726d1a4a03d6bb45",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg078?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/6a683918478f0208441131fd726d1a4a03d6bb45",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg078"
+    }
+  },
+  {
+    "name": "tlg079",
+    "path": "data/tlg0057/tlg079",
+    "sha": "449d5447c39c20de2ac60619cf5f626a8f0bc450",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg079?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg079",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/449d5447c39c20de2ac60619cf5f626a8f0bc450",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg079?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/449d5447c39c20de2ac60619cf5f626a8f0bc450",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg079"
+    }
+  },
+  {
+    "name": "tlg081",
+    "path": "data/tlg0057/tlg081",
+    "sha": "9826f13fd926866ba1a79f8babc713d45a38c962",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg081?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg081",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/9826f13fd926866ba1a79f8babc713d45a38c962",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg081?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/9826f13fd926866ba1a79f8babc713d45a38c962",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg081"
+    }
+  },
+  {
+    "name": "tlg082",
+    "path": "data/tlg0057/tlg082",
+    "sha": "78c4773d59f883af130907202625e05572f1db8a",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg082?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg082",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/78c4773d59f883af130907202625e05572f1db8a",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg082?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/78c4773d59f883af130907202625e05572f1db8a",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg082"
+    }
+  },
+  {
+    "name": "tlg083",
+    "path": "data/tlg0057/tlg083",
+    "sha": "1e9a3293a60bcafd631d887f45485f26b000c18d",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg083?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg083",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/1e9a3293a60bcafd631d887f45485f26b000c18d",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg083?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/1e9a3293a60bcafd631d887f45485f26b000c18d",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg083"
+    }
+  },
+  {
+    "name": "tlg084",
+    "path": "data/tlg0057/tlg084",
+    "sha": "27b265b304c7bfafb5bd5b1baa7e34112018d24d",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg084?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg084",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/27b265b304c7bfafb5bd5b1baa7e34112018d24d",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg084?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/27b265b304c7bfafb5bd5b1baa7e34112018d24d",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg084"
+    }
+  },
+  {
+    "name": "tlg085",
+    "path": "data/tlg0057/tlg085",
+    "sha": "6fb704b0ca768747d952a2b45fe0a7f94da20ac4",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg085?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg085",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/6fb704b0ca768747d952a2b45fe0a7f94da20ac4",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg085?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/6fb704b0ca768747d952a2b45fe0a7f94da20ac4",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg085"
+    }
+  },
+  {
+    "name": "tlg086",
+    "path": "data/tlg0057/tlg086",
+    "sha": "80c50c4c934f636eeae948bfba1941a90c6c5e8a",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg086?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg086",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/80c50c4c934f636eeae948bfba1941a90c6c5e8a",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg086?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/80c50c4c934f636eeae948bfba1941a90c6c5e8a",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg086"
+    }
+  },
+  {
+    "name": "tlg087",
+    "path": "data/tlg0057/tlg087",
+    "sha": "41af832aa3c573fb3e6a58bdf9f442a66d84415d",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg087?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg087",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/41af832aa3c573fb3e6a58bdf9f442a66d84415d",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg087?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/41af832aa3c573fb3e6a58bdf9f442a66d84415d",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg087"
+    }
+  },
+  {
+    "name": "tlg089",
+    "path": "data/tlg0057/tlg089",
+    "sha": "f7704a80a3663580b9b9b8e0b299b7465e902b14",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg089?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg089",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/f7704a80a3663580b9b9b8e0b299b7465e902b14",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg089?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/f7704a80a3663580b9b9b8e0b299b7465e902b14",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg089"
+    }
+  },
+  {
+    "name": "tlg092",
+    "path": "data/tlg0057/tlg092",
+    "sha": "b4b85386b3ce0b931a221d82b7d48522f7195062",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg092?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg092",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/b4b85386b3ce0b931a221d82b7d48522f7195062",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg092?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/b4b85386b3ce0b931a221d82b7d48522f7195062",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg092"
+    }
+  },
+  {
+    "name": "tlg093",
+    "path": "data/tlg0057/tlg093",
+    "sha": "bc713c9725647b580b691cb6305fda79a7673261",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg093?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg093",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/bc713c9725647b580b691cb6305fda79a7673261",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg093?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/bc713c9725647b580b691cb6305fda79a7673261",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg093"
+    }
+  },
+  {
+    "name": "tlg094",
+    "path": "data/tlg0057/tlg094",
+    "sha": "9b08387ed7a5de97a52748981356c1ffc2222464",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg094?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg094",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/9b08387ed7a5de97a52748981356c1ffc2222464",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg094?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/9b08387ed7a5de97a52748981356c1ffc2222464",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg094"
+    }
+  },
+  {
+    "name": "tlg095",
+    "path": "data/tlg0057/tlg095",
+    "sha": "9a5bac82a9287929cada444d503b44b3aeb77189",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg095?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg095",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/9a5bac82a9287929cada444d503b44b3aeb77189",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg095?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/9a5bac82a9287929cada444d503b44b3aeb77189",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg095"
+    }
+  },
+  {
+    "name": "tlg096",
+    "path": "data/tlg0057/tlg096",
+    "sha": "c051b2e665bb6b716e63a8a1fad19fc27c6517ef",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg096?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg096",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/c051b2e665bb6b716e63a8a1fad19fc27c6517ef",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg096?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/c051b2e665bb6b716e63a8a1fad19fc27c6517ef",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg096"
+    }
+  },
+  {
+    "name": "tlg099",
+    "path": "data/tlg0057/tlg099",
+    "sha": "fd7b8c86d68ee56d02a44b1487016a059fc80388",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg099?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg099",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/fd7b8c86d68ee56d02a44b1487016a059fc80388",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg099?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/fd7b8c86d68ee56d02a44b1487016a059fc80388",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg099"
+    }
+  },
+  {
+    "name": "tlg100",
+    "path": "data/tlg0057/tlg100",
+    "sha": "1ceaa78a7b55f3a4233fece1e801fb2aa69eb519",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg100?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg100",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/1ceaa78a7b55f3a4233fece1e801fb2aa69eb519",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg100?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/1ceaa78a7b55f3a4233fece1e801fb2aa69eb519",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg100"
+    }
+  },
+  {
+    "name": "tlg101",
+    "path": "data/tlg0057/tlg101",
+    "sha": "1cbdeff63ad1b59b0ad69d0463a9fecc5e842a26",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg101?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg101",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/1cbdeff63ad1b59b0ad69d0463a9fecc5e842a26",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg101?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/1cbdeff63ad1b59b0ad69d0463a9fecc5e842a26",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg101"
+    }
+  },
+  {
+    "name": "tlg102",
+    "path": "data/tlg0057/tlg102",
+    "sha": "c59c2d10b8cbfe2aa0ca057667ce8f897596c810",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg102?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg102",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/c59c2d10b8cbfe2aa0ca057667ce8f897596c810",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg102?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/c59c2d10b8cbfe2aa0ca057667ce8f897596c810",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg102"
+    }
+  },
+  {
+    "name": "tlg103",
+    "path": "data/tlg0057/tlg103",
+    "sha": "5eeb9c968ab68f436f9478e1e1d9b86e27bfc7af",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg103?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg103",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/5eeb9c968ab68f436f9478e1e1d9b86e27bfc7af",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg103?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/5eeb9c968ab68f436f9478e1e1d9b86e27bfc7af",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg103"
+    }
+  },
+  {
+    "name": "tlg107",
+    "path": "data/tlg0057/tlg107",
+    "sha": "1489b76137d43d6982c92a36d5ccf76d5eb5df1b",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg107?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg107",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/1489b76137d43d6982c92a36d5ccf76d5eb5df1b",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg107?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/1489b76137d43d6982c92a36d5ccf76d5eb5df1b",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg107"
+    }
+  },
+  {
+    "name": "tlg114",
+    "path": "data/tlg0057/tlg114",
+    "sha": "8b161a5f6dafe2cf90de3a26db1da14ce4a4c95c",
+    "size": 0,
+    "url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg114?ref=master",
+    "html_url": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg114",
+    "git_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/8b161a5f6dafe2cf90de3a26db1da14ce4a4c95c",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/contents/data/tlg0057/tlg114?ref=master",
+      "git": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/git/trees/8b161a5f6dafe2cf90de3a26db1da14ce4a4c95c",
+      "html": "https://github.com/OpenGreekAndLatin/First1KGreek/tree/master/data/tlg0057/tlg114"
+    }
+  }
+]

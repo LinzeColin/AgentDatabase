@@ -1,0 +1,4197 @@
+{
+  "sha": "ce50a8dad6f639ec100e68d03442504ae475d0ec",
+  "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/ce50a8dad6f639ec100e68d03442504ae475d0ec",
+  "tree": [
+    {
+      "path": ".gitattributes",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8ec054dca90924e03fb9df0ce44802aece3f60de",
+      "size": 135,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/8ec054dca90924e03fb9df0ce44802aece3f60de"
+    },
+    {
+      "path": ".gitignore",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d41ff4ae715fabf2585e375a29923b0e9fa56bac",
+      "size": 49,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/d41ff4ae715fabf2585e375a29923b0e9fa56bac"
+    },
+    {
+      "path": ".python-version",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "24ee5b1be9961e38a503c8e764b7385dbb6ba124",
+      "size": 5,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/24ee5b1be9961e38a503c8e764b7385dbb6ba124"
+    },
+    {
+      "path": "README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "98a5611e45d79c08998235430a32e212e695d2c2",
+      "size": 38994,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/98a5611e45d79c08998235430a32e212e695d2c2"
+    },
+    {
+      "path": "build.php",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b6a015a1963b43700b1f20bb250fab62f380fc22",
+      "size": 948,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/b6a015a1963b43700b1f20bb250fab62f380fc22"
+    },
+    {
+      "path": "data",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "c9a412ed0a38ddf5bacd9d54f29267fd36f7b49c",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/c9a412ed0a38ddf5bacd9d54f29267fd36f7b49c"
+    },
+    {
+      "path": "data/tlg0057",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "9aed878b8ee92f633197e96002fd0d3d0f9268f5",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/9aed878b8ee92f633197e96002fd0d3d0f9268f5"
+    },
+    {
+      "path": "data/tlg0057/.DS_Store",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b1a9d02f68db002d36113395b51008e7fe668998",
+      "size": 8196,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/b1a9d02f68db002d36113395b51008e7fe668998"
+    },
+    {
+      "path": "data/tlg0057/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8bf8076332b96fd8e1b390276ed1fde67e7a7989",
+      "size": 212,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/8bf8076332b96fd8e1b390276ed1fde67e7a7989"
+    },
+    {
+      "path": "data/tlg0057/tlg001",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "7fee0a0d2b9cdaa84fc34222e81414c494b1f4f5",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/7fee0a0d2b9cdaa84fc34222e81414c494b1f4f5"
+    },
+    {
+      "path": "data/tlg0057/tlg001/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2b6e3b1221bbb844d7d67f32898767cd03d9b08c",
+      "size": 893,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/2b6e3b1221bbb844d7d67f32898767cd03d9b08c"
+    },
+    {
+      "path": "data/tlg0057/tlg001/tlg0057.tlg001.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "61ef0759642ba90068b25806bb77cd7d3996e017",
+      "size": 91956,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/61ef0759642ba90068b25806bb77cd7d3996e017"
+    },
+    {
+      "path": "data/tlg0057/tlg001/tlg0057.tlg001.1st1K-grc2.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6b828f0a49dc9bc5855d2e0073816f32005f342e",
+      "size": 90657,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/6b828f0a49dc9bc5855d2e0073816f32005f342e"
+    },
+    {
+      "path": "data/tlg0057/tlg001/tlg0057.tlg001.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f638a22d44e929c3f940160ae5ec0b526dacbabc",
+      "size": 54744,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/f638a22d44e929c3f940160ae5ec0b526dacbabc"
+    },
+    {
+      "path": "data/tlg0057/tlg002",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "e8c5ea9a5feca1af31ce2a0d306abf74ebd728e1",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/e8c5ea9a5feca1af31ce2a0d306abf74ebd728e1"
+    },
+    {
+      "path": "data/tlg0057/tlg002/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0976671f0f6a7ce7b7d9a856609ee4ee0625e1a5",
+      "size": 543,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/0976671f0f6a7ce7b7d9a856609ee4ee0625e1a5"
+    },
+    {
+      "path": "data/tlg0057/tlg002/tlg0057.tlg002.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "dd023ef0165e5cdbb31252058d89fbfbd3a104a1",
+      "size": 42722,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/dd023ef0165e5cdbb31252058d89fbfbd3a104a1"
+    },
+    {
+      "path": "data/tlg0057/tlg002/tlg0057.tlg002.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8f3e1753eab2e8140e6d405598cc7a16fe1b92c6",
+      "size": 24461,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/8f3e1753eab2e8140e6d405598cc7a16fe1b92c6"
+    },
+    {
+      "path": "data/tlg0057/tlg003",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "e30801b9ee9863fd273aab532310eefd9c7f0d7f",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/e30801b9ee9863fd273aab532310eefd9c7f0d7f"
+    },
+    {
+      "path": "data/tlg0057/tlg003/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5e20c6b504646d1e087443139cd8cdbbe00c14d3",
+      "size": 593,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/5e20c6b504646d1e087443139cd8cdbbe00c14d3"
+    },
+    {
+      "path": "data/tlg0057/tlg003/tlg0057.tlg003.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "70523e87aefa2b2a2fdd025f17bf79341bd8b361",
+      "size": 34558,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/70523e87aefa2b2a2fdd025f17bf79341bd8b361"
+    },
+    {
+      "path": "data/tlg0057/tlg003/tlg0057.tlg003.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "91916d0ca01aa6c7a2dd0eeb0525afac62db8334",
+      "size": 21273,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/91916d0ca01aa6c7a2dd0eeb0525afac62db8334"
+    },
+    {
+      "path": "data/tlg0057/tlg004",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "af93016ab475a7b8d5ee712a38c26e3ee13de52c",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/af93016ab475a7b8d5ee712a38c26e3ee13de52c"
+    },
+    {
+      "path": "data/tlg0057/tlg004/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d60c92189116ecdffc88c0ce83859efbc0f1dd75",
+      "size": 575,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/d60c92189116ecdffc88c0ce83859efbc0f1dd75"
+    },
+    {
+      "path": "data/tlg0057/tlg004/tlg0057.tlg004.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "46a34065152d5fffdee3dc1776f88f1e81089861",
+      "size": 104048,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/46a34065152d5fffdee3dc1776f88f1e81089861"
+    },
+    {
+      "path": "data/tlg0057/tlg004/tlg0057.tlg004.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "807a43dc54ba0726622e6393b6963be4a3b1b454",
+      "size": 55941,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/807a43dc54ba0726622e6393b6963be4a3b1b454"
+    },
+    {
+      "path": "data/tlg0057/tlg006",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "39d9d33bcdfef084aaa6673ccd0a37f4f8fef8ec",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/39d9d33bcdfef084aaa6673ccd0a37f4f8fef8ec"
+    },
+    {
+      "path": "data/tlg0057/tlg006/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8720cf53ae0a67213ed0dfb59ca78ecf651e7134",
+      "size": 603,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/8720cf53ae0a67213ed0dfb59ca78ecf651e7134"
+    },
+    {
+      "path": "data/tlg0057/tlg006/tlg0057.tlg006.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "915fab817f3104612a5f1a9ccf07082a34adaef0",
+      "size": 186844,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/915fab817f3104612a5f1a9ccf07082a34adaef0"
+    },
+    {
+      "path": "data/tlg0057/tlg006/tlg0057.tlg006.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "337ded57d2309f2aa7b20d315441a30eb07185c0",
+      "size": 97049,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/337ded57d2309f2aa7b20d315441a30eb07185c0"
+    },
+    {
+      "path": "data/tlg0057/tlg007",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "c53cf391b5d7369a6f2aaab72520d0af931fb9d0",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/c53cf391b5d7369a6f2aaab72520d0af931fb9d0"
+    },
+    {
+      "path": "data/tlg0057/tlg007/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9b66baca3236966c5896ba7fc503c23c31e237e3",
+      "size": 533,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/9b66baca3236966c5896ba7fc503c23c31e237e3"
+    },
+    {
+      "path": "data/tlg0057/tlg007/tlg0057.tlg007.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "48dd724e0626333f23cd526c07bca12ab57d9eed",
+      "size": 246950,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/48dd724e0626333f23cd526c07bca12ab57d9eed"
+    },
+    {
+      "path": "data/tlg0057/tlg007/tlg0057.tlg007.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "561b24d25b1b691c8e605a3ca2b92115a2e51156",
+      "size": 127458,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/561b24d25b1b691c8e605a3ca2b92115a2e51156"
+    },
+    {
+      "path": "data/tlg0057/tlg008",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "914625959458cf67798bc69e071ff4101327c347",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/914625959458cf67798bc69e071ff4101327c347"
+    },
+    {
+      "path": "data/tlg0057/tlg008/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e87e9b5551a6c44213922b9ec6309130670f0407",
+      "size": 564,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/e87e9b5551a6c44213922b9ec6309130670f0407"
+    },
+    {
+      "path": "data/tlg0057/tlg008/tlg0057.tlg008.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a1ee70f4d34024b6a328304844e3f50bcbde5a5e",
+      "size": 201282,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/a1ee70f4d34024b6a328304844e3f50bcbde5a5e"
+    },
+    {
+      "path": "data/tlg0057/tlg008/tlg0057.tlg008.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9f2ffdc9e7b7069aaca316c65d7c696c5a139e99",
+      "size": 117858,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/9f2ffdc9e7b7069aaca316c65d7c696c5a139e99"
+    },
+    {
+      "path": "data/tlg0057/tlg009",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "e1957c0d419035581ca08e752e2d6fdd21d44fc5",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/e1957c0d419035581ca08e752e2d6fdd21d44fc5"
+    },
+    {
+      "path": "data/tlg0057/tlg009/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6935340f5d3ec11bd825f2730b62b325f37df506",
+      "size": 858,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/6935340f5d3ec11bd825f2730b62b325f37df506"
+    },
+    {
+      "path": "data/tlg0057/tlg009/tlg0057.tlg009.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9d37e1e876f6ba6761b4d31f618de572e0f82c87",
+      "size": 400120,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/9d37e1e876f6ba6761b4d31f618de572e0f82c87"
+    },
+    {
+      "path": "data/tlg0057/tlg009/tlg0057.tlg009.1st1K-grc2.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c0ca670711ae9997c9cc697dbb381058dc36c47f",
+      "size": 400061,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/c0ca670711ae9997c9cc697dbb381058dc36c47f"
+    },
+    {
+      "path": "data/tlg0057/tlg009/tlg0057.tlg009.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "94c9c102c8841fc066abb28d77617bf6a85ad9ee",
+      "size": 210317,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/94c9c102c8841fc066abb28d77617bf6a85ad9ee"
+    },
+    {
+      "path": "data/tlg0057/tlg010",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "043169fe9d0842c9b5582d22fe4fd643ce49c64d",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/043169fe9d0842c9b5582d22fe4fd643ce49c64d"
+    },
+    {
+      "path": "data/tlg0057/tlg010/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d08bed26da8e4ea6672273e17c283f8c0d24635a",
+      "size": 561,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/d08bed26da8e4ea6672273e17c283f8c0d24635a"
+    },
+    {
+      "path": "data/tlg0057/tlg010/tlg0057.tlg010.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "72ae1fdda5abc319b6c4251eeaace29509448af0",
+      "size": 473228,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/72ae1fdda5abc319b6c4251eeaace29509448af0"
+    },
+    {
+      "path": "data/tlg0057/tlg010/tlg0057.tlg010.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ec793d07cbdad83fb983a2be54c9107b614da551",
+      "size": 242174,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/ec793d07cbdad83fb983a2be54c9107b614da551"
+    },
+    {
+      "path": "data/tlg0057/tlg011",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "ebaa82dcf32dd593c24b652ee4a732df845821df",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/ebaa82dcf32dd593c24b652ee4a732df845821df"
+    },
+    {
+      "path": "data/tlg0057/tlg011/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0398910654b985ec63b53e7e468f149dbecf8a07",
+      "size": 571,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/0398910654b985ec63b53e7e468f149dbecf8a07"
+    },
+    {
+      "path": "data/tlg0057/tlg011/tlg0057.tlg011.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a5ee82c0c9cf8b1c5e2d6b1ee782bbc3fdbb0ccc",
+      "size": 1136611,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/a5ee82c0c9cf8b1c5e2d6b1ee782bbc3fdbb0ccc"
+    },
+    {
+      "path": "data/tlg0057/tlg011/tlg0057.tlg011.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6d56da692c70ed2f144c4c6290e7d7b67a261c4b",
+      "size": 554402,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/6d56da692c70ed2f144c4c6290e7d7b67a261c4b"
+    },
+    {
+      "path": "data/tlg0057/tlg012",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "ab4c4f38f64176c1e779ab7d6ecfc72d71c6d242",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/ab4c4f38f64176c1e779ab7d6ecfc72d71c6d242"
+    },
+    {
+      "path": "data/tlg0057/tlg012/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d8c2d5b8cbe2b7b5c52a04594ac5c9c6cfc124af",
+      "size": 530,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/d8c2d5b8cbe2b7b5c52a04594ac5c9c6cfc124af"
+    },
+    {
+      "path": "data/tlg0057/tlg012/tlg0057.tlg012.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "19364cab50cb8fc739f88fa12a3e0dab05a8ec1b",
+      "size": 115071,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/19364cab50cb8fc739f88fa12a3e0dab05a8ec1b"
+    },
+    {
+      "path": "data/tlg0057/tlg012/tlg0057.tlg012.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3178fa042ba9d83d3c53124f964888aee40fae72",
+      "size": 63181,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/3178fa042ba9d83d3c53124f964888aee40fae72"
+    },
+    {
+      "path": "data/tlg0057/tlg013",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "21fadfb810c1826ca9fc1e8bc1cde52a41d2c2a4",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/21fadfb810c1826ca9fc1e8bc1cde52a41d2c2a4"
+    },
+    {
+      "path": "data/tlg0057/tlg013/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2fb25e1b7c131e30ff41e33f6691102a362e4ddf",
+      "size": 575,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/2fb25e1b7c131e30ff41e33f6691102a362e4ddf"
+    },
+    {
+      "path": "data/tlg0057/tlg013/tlg0057.tlg013.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c4782dc67b340426daafec2ab7b0981ddc805a3a",
+      "size": 121974,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/c4782dc67b340426daafec2ab7b0981ddc805a3a"
+    },
+    {
+      "path": "data/tlg0057/tlg013/tlg0057.tlg013.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4edc6e5ebcba34ace0ebf56926dab08a826cc53e",
+      "size": 66877,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/4edc6e5ebcba34ace0ebf56926dab08a826cc53e"
+    },
+    {
+      "path": "data/tlg0057/tlg014",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "12f73bf91e1b5f18d83c75497938feaebee5e07c",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/12f73bf91e1b5f18d83c75497938feaebee5e07c"
+    },
+    {
+      "path": "data/tlg0057/tlg014/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8a6d9ea04edaa7094e629ae9d9dbd1c0f9a910ce",
+      "size": 536,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/8a6d9ea04edaa7094e629ae9d9dbd1c0f9a910ce"
+    },
+    {
+      "path": "data/tlg0057/tlg014/tlg0057.tlg014.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "df7e8de9ba2d1c13a9649b1fffac26404051a937",
+      "size": 67936,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/df7e8de9ba2d1c13a9649b1fffac26404051a937"
+    },
+    {
+      "path": "data/tlg0057/tlg014/tlg0057.tlg014.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "84c66b00645b913c2602aa66873aec95f58a86ad",
+      "size": 38884,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/84c66b00645b913c2602aa66873aec95f58a86ad"
+    },
+    {
+      "path": "data/tlg0057/tlg015",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "3549de1b036da6f0ea1dc9e96014604f8eea7900",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/3549de1b036da6f0ea1dc9e96014604f8eea7900"
+    },
+    {
+      "path": "data/tlg0057/tlg015/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ea3a7036c654536ddd9c0fc2af4085b3f5345f97",
+      "size": 536,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/ea3a7036c654536ddd9c0fc2af4085b3f5345f97"
+    },
+    {
+      "path": "data/tlg0057/tlg015/tlg0057.tlg015.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f0fd60640fb17388f09a8e09be9614f35d737396",
+      "size": 76194,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/f0fd60640fb17388f09a8e09be9614f35d737396"
+    },
+    {
+      "path": "data/tlg0057/tlg015/tlg0057.tlg015.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "91475248dc9e19f026e1f1a9914a16de01061377",
+      "size": 41823,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/91475248dc9e19f026e1f1a9914a16de01061377"
+    },
+    {
+      "path": "data/tlg0057/tlg016",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "4e66c442a9a474751c78e7cf6af785ed96a9ab9d",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/4e66c442a9a474751c78e7cf6af785ed96a9ab9d"
+    },
+    {
+      "path": "data/tlg0057/tlg016/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5d7823983021d603395dcf95800863640c822dfc",
+      "size": 527,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/5d7823983021d603395dcf95800863640c822dfc"
+    },
+    {
+      "path": "data/tlg0057/tlg016/tlg0057.tlg016.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "bfb71d46546d1b886cee70bc2ebb274601d494eb",
+      "size": 60825,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/bfb71d46546d1b886cee70bc2ebb274601d494eb"
+    },
+    {
+      "path": "data/tlg0057/tlg016/tlg0057.tlg016.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d6bc91055455ac7c1a5247fca1f9377de718dcd4",
+      "size": 33569,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/d6bc91055455ac7c1a5247fca1f9377de718dcd4"
+    },
+    {
+      "path": "data/tlg0057/tlg017",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "577af48d0ba800fb9a8ac70898c0165e9e14cf63",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/577af48d0ba800fb9a8ac70898c0165e9e14cf63"
+    },
+    {
+      "path": "data/tlg0057/tlg017/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8bc9b1a0e7bdf666538ca8fdd77b8953e2ac6618",
+      "size": 574,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/8bc9b1a0e7bdf666538ca8fdd77b8953e2ac6618"
+    },
+    {
+      "path": "data/tlg0057/tlg017/tlg0057.tlg017.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "28f3886ae6099722ebbca46e12ee1ea066577917",
+      "size": 2789418,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/28f3886ae6099722ebbca46e12ee1ea066577917"
+    },
+    {
+      "path": "data/tlg0057/tlg017/tlg0057.tlg017.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "599584669ae7b847f2e3f1ec0a6704a9ccb53afe",
+      "size": 1418619,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/599584669ae7b847f2e3f1ec0a6704a9ccb53afe"
+    },
+    {
+      "path": "data/tlg0057/tlg018",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "c945f022979d1aed749787ff668b0d7773eaa940",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/c945f022979d1aed749787ff668b0d7773eaa940"
+    },
+    {
+      "path": "data/tlg0057/tlg018/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9d978572f555aeea57d03372566a439bb620e73b",
+      "size": 521,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/9d978572f555aeea57d03372566a439bb620e73b"
+    },
+    {
+      "path": "data/tlg0057/tlg018/tlg0057.tlg018.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cd7f2d6f166b9227b34ddad382db5d04b880f269",
+      "size": 224480,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/cd7f2d6f166b9227b34ddad382db5d04b880f269"
+    },
+    {
+      "path": "data/tlg0057/tlg018/tlg0057.tlg018.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ceadb93db51184a93c6c119347271c035136015a",
+      "size": 114818,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/ceadb93db51184a93c6c119347271c035136015a"
+    },
+    {
+      "path": "data/tlg0057/tlg019",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "2b117dcd7e9c31ccc6c119cd5318823850f1876f",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/2b117dcd7e9c31ccc6c119cd5318823850f1876f"
+    },
+    {
+      "path": "data/tlg0057/tlg019/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d4b72cb54b34d9f14422d3f32ccd53f029feca88",
+      "size": 877,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/d4b72cb54b34d9f14422d3f32ccd53f029feca88"
+    },
+    {
+      "path": "data/tlg0057/tlg019/tlg0057.tlg019.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4826f2faba6281b227c65c2731a1bee42f8b8ac0",
+      "size": 108780,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/4826f2faba6281b227c65c2731a1bee42f8b8ac0"
+    },
+    {
+      "path": "data/tlg0057/tlg019/tlg0057.tlg019.opp-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "29c2f807121ee1e7eba7f333790303f10471f771",
+      "size": 129256,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/29c2f807121ee1e7eba7f333790303f10471f771"
+    },
+    {
+      "path": "data/tlg0057/tlg020",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "f9469cf4ad0242a131df29fe06ae434984783f5d",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/f9469cf4ad0242a131df29fe06ae434984783f5d"
+    },
+    {
+      "path": "data/tlg0057/tlg020/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "81e51c66e6e95cfa6dc277d5b70e6a39ae2230de",
+      "size": 545,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/81e51c66e6e95cfa6dc277d5b70e6a39ae2230de"
+    },
+    {
+      "path": "data/tlg0057/tlg020/tlg0057.tlg020.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2c8bc52074bde3e8b31ab25d5ce67b30e7b5e627",
+      "size": 102601,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/2c8bc52074bde3e8b31ab25d5ce67b30e7b5e627"
+    },
+    {
+      "path": "data/tlg0057/tlg020/tlg0057.tlg020.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "02cada966118d1d6143858bc84281174b84909f8",
+      "size": 57408,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/02cada966118d1d6143858bc84281174b84909f8"
+    },
+    {
+      "path": "data/tlg0057/tlg021",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "84f6cbe0e60b291d691313aca1d652a5ca775531",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/84f6cbe0e60b291d691313aca1d652a5ca775531"
+    },
+    {
+      "path": "data/tlg0057/tlg021/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e95340b16dacf59ffc398cdb867a3fe917fab1f6",
+      "size": 494,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/e95340b16dacf59ffc398cdb867a3fe917fab1f6"
+    },
+    {
+      "path": "data/tlg0057/tlg021/tlg0057.tlg021.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f462209ec829d9e0a7fd6106294a3b82fbc96d11",
+      "size": 310830,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/f462209ec829d9e0a7fd6106294a3b82fbc96d11"
+    },
+    {
+      "path": "data/tlg0057/tlg021/tlg0057.tlg021.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "42520bf61fa0ab888fdfb2aea7172bf91589eb5c",
+      "size": 163911,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/42520bf61fa0ab888fdfb2aea7172bf91589eb5c"
+    },
+    {
+      "path": "data/tlg0057/tlg022",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "34e50346074c03eddebacfd5d4d21e4b735fda1b",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/34e50346074c03eddebacfd5d4d21e4b735fda1b"
+    },
+    {
+      "path": "data/tlg0057/tlg022/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5df8948a71fbabb7e14b75d2aa62d90cf10daa01",
+      "size": 530,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/5df8948a71fbabb7e14b75d2aa62d90cf10daa01"
+    },
+    {
+      "path": "data/tlg0057/tlg022/tlg0057.tlg022.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3d37259ae92e15b2786c517015b99070fe97ffef",
+      "size": 124878,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/3d37259ae92e15b2786c517015b99070fe97ffef"
+    },
+    {
+      "path": "data/tlg0057/tlg022/tlg0057.tlg022.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5b3babd04414a15ade991792ad21eaee15cd9f54",
+      "size": 64592,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/5b3babd04414a15ade991792ad21eaee15cd9f54"
+    },
+    {
+      "path": "data/tlg0057/tlg023",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "e2703ed7d02c506b7469f8bba93878648b9607c7",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/e2703ed7d02c506b7469f8bba93878648b9607c7"
+    },
+    {
+      "path": "data/tlg0057/tlg023/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "da4b16214584fadce8865a61011b43521101e602",
+      "size": 569,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/da4b16214584fadce8865a61011b43521101e602"
+    },
+    {
+      "path": "data/tlg0057/tlg023/tlg0057.tlg023.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "16db86f720c72548447547f38b1360ea3a8ac394",
+      "size": 85303,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/16db86f720c72548447547f38b1360ea3a8ac394"
+    },
+    {
+      "path": "data/tlg0057/tlg023/tlg0057.tlg023.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8400d51c0173b26fd39a2d289e3e09c5b1f06ed5",
+      "size": 47533,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/8400d51c0173b26fd39a2d289e3e09c5b1f06ed5"
+    },
+    {
+      "path": "data/tlg0057/tlg024",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "c6c6bdde96791190e8255a3ef0ba8155d269c2b9",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/c6c6bdde96791190e8255a3ef0ba8155d269c2b9"
+    },
+    {
+      "path": "data/tlg0057/tlg024/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "98c2f46808b9ec528fd520496953c7e582348b97",
+      "size": 584,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/98c2f46808b9ec528fd520496953c7e582348b97"
+    },
+    {
+      "path": "data/tlg0057/tlg024/tlg0057.tlg024.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "23fdd488e28862a12d35d24db94f1d6a208c8725",
+      "size": 40643,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/23fdd488e28862a12d35d24db94f1d6a208c8725"
+    },
+    {
+      "path": "data/tlg0057/tlg024/tlg0057.tlg024.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ffda2d9c2f19ae0ac14a35edd8e062461fd85909",
+      "size": 23401,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/ffda2d9c2f19ae0ac14a35edd8e062461fd85909"
+    },
+    {
+      "path": "data/tlg0057/tlg025",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "2a05fa5dc69885288d9a900a741d8702410b5d08",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/2a05fa5dc69885288d9a900a741d8702410b5d08"
+    },
+    {
+      "path": "data/tlg0057/tlg025/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4bc8cf2777bb1cf85da15914afc209775dde99a5",
+      "size": 509,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/4bc8cf2777bb1cf85da15914afc209775dde99a5"
+    },
+    {
+      "path": "data/tlg0057/tlg025/tlg0057.tlg025.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "450a83fbac4e47ae1324d00c6274b18e61879e8e",
+      "size": 26587,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/450a83fbac4e47ae1324d00c6274b18e61879e8e"
+    },
+    {
+      "path": "data/tlg0057/tlg025/tlg0057.tlg025.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "770cc57be482e3adb62bdd06adb4ba85b1aba853",
+      "size": 16215,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/770cc57be482e3adb62bdd06adb4ba85b1aba853"
+    },
+    {
+      "path": "data/tlg0057/tlg027",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "4aaccb803c6d56e6c8b04c850a962a4daeaede48",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/4aaccb803c6d56e6c8b04c850a962a4daeaede48"
+    },
+    {
+      "path": "data/tlg0057/tlg027/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f1e54a497f1175de6b1b12d87e65975af814d457",
+      "size": 611,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/f1e54a497f1175de6b1b12d87e65975af814d457"
+    },
+    {
+      "path": "data/tlg0057/tlg027/tlg0057.tlg027.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "265435362459b60ea9029c5bb142cad0aed9b031",
+      "size": 134296,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/265435362459b60ea9029c5bb142cad0aed9b031"
+    },
+    {
+      "path": "data/tlg0057/tlg027/tlg0057.tlg027.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "476fc22be0154581a44984ac78aa3d39a52209ff",
+      "size": 71536,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/476fc22be0154581a44984ac78aa3d39a52209ff"
+    },
+    {
+      "path": "data/tlg0057/tlg028",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "fe60783f0a00d9a47a41c41e21a58bad2fc5158a",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/fe60783f0a00d9a47a41c41e21a58bad2fc5158a"
+    },
+    {
+      "path": "data/tlg0057/tlg028/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1051fe9cc338fa0a2c6245fd6603a2b99c9eb84c",
+      "size": 659,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/1051fe9cc338fa0a2c6245fd6603a2b99c9eb84c"
+    },
+    {
+      "path": "data/tlg0057/tlg028/tlg0057.tlg028.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1a19e98c10422dad79e6c74c52216e8b2bbc5865",
+      "size": 134569,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/1a19e98c10422dad79e6c74c52216e8b2bbc5865"
+    },
+    {
+      "path": "data/tlg0057/tlg028/tlg0057.tlg028.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8f2beaf0491e59fd4171bcf011a322dc9dc990db",
+      "size": 70992,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/8f2beaf0491e59fd4171bcf011a322dc9dc990db"
+    },
+    {
+      "path": "data/tlg0057/tlg029",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "becaa8e1362b815821e5d0455b9bf1a1404da316",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/becaa8e1362b815821e5d0455b9bf1a1404da316"
+    },
+    {
+      "path": "data/tlg0057/tlg029/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b85b677cd3a317845ecc57e78f14e7529327dbec",
+      "size": 629,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/b85b677cd3a317845ecc57e78f14e7529327dbec"
+    },
+    {
+      "path": "data/tlg0057/tlg029/tlg0057.tlg029.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "800f84c0657655296b026c2c9233ac1471f59671",
+      "size": 110492,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/800f84c0657655296b026c2c9233ac1471f59671"
+    },
+    {
+      "path": "data/tlg0057/tlg029/tlg0057.tlg029.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6d136afae8827a2b29f747db7115ea2814ae6a76",
+      "size": 60978,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/6d136afae8827a2b29f747db7115ea2814ae6a76"
+    },
+    {
+      "path": "data/tlg0057/tlg030",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "e7a32ef1e9cd5075496654b43e4437fa21427c79",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/e7a32ef1e9cd5075496654b43e4437fa21427c79"
+    },
+    {
+      "path": "data/tlg0057/tlg030/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3499e66c584f3c50ce0a03ca5fd0ff3944d648be",
+      "size": 503,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/3499e66c584f3c50ce0a03ca5fd0ff3944d648be"
+    },
+    {
+      "path": "data/tlg0057/tlg030/tlg0057.tlg030.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4614cbffe54e14f23ec5dfe54117dff354ffbf2c",
+      "size": 106354,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/4614cbffe54e14f23ec5dfe54117dff354ffbf2c"
+    },
+    {
+      "path": "data/tlg0057/tlg030/tlg0057.tlg030.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ac11743226b31f0bdc8882dc41506e8542e27f20",
+      "size": 60552,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/ac11743226b31f0bdc8882dc41506e8542e27f20"
+    },
+    {
+      "path": "data/tlg0057/tlg031",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "d9cadc9d34de9a3b5744d8c973f131dc6e6ffc2f",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/d9cadc9d34de9a3b5744d8c973f131dc6e6ffc2f"
+    },
+    {
+      "path": "data/tlg0057/tlg031/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e8b4d5ef06cf6eaf99bb7f9062b8057003f984e4",
+      "size": 509,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/e8b4d5ef06cf6eaf99bb7f9062b8057003f984e4"
+    },
+    {
+      "path": "data/tlg0057/tlg031/tlg0057.tlg031.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "165971342a1b118c5c61590d5a152638daa11fdc",
+      "size": 80189,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/165971342a1b118c5c61590d5a152638daa11fdc"
+    },
+    {
+      "path": "data/tlg0057/tlg031/tlg0057.tlg031.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "37be11ff15f3d3acbab13b584b7f8197f97acb70",
+      "size": 43062,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/37be11ff15f3d3acbab13b584b7f8197f97acb70"
+    },
+    {
+      "path": "data/tlg0057/tlg032",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "422ac50245fbc6279cf0bf5ea6451c3ee172021a",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/422ac50245fbc6279cf0bf5ea6451c3ee172021a"
+    },
+    {
+      "path": "data/tlg0057/tlg032/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4725ba59d7d7b60517a3311c8424bc6251145af9",
+      "size": 572,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/4725ba59d7d7b60517a3311c8424bc6251145af9"
+    },
+    {
+      "path": "data/tlg0057/tlg032/tlg0057.tlg032.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b167b07c02350a837ba2e7e56824f4b831b3d720",
+      "size": 1362192,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/b167b07c02350a837ba2e7e56824f4b831b3d720"
+    },
+    {
+      "path": "data/tlg0057/tlg032/tlg0057.tlg032.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fe785cbdaad0580724dfed1c025e49f306be3516",
+      "size": 675166,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/fe785cbdaad0580724dfed1c025e49f306be3516"
+    },
+    {
+      "path": "data/tlg0057/tlg033",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "d4d8d377ee18adeac2121c5f0fce49b57f6b4e9e",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/d4d8d377ee18adeac2121c5f0fce49b57f6b4e9e"
+    },
+    {
+      "path": "data/tlg0057/tlg033/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0646fc7c1d2f449baf207c631fdeadb6bdf71e75",
+      "size": 1046,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/0646fc7c1d2f449baf207c631fdeadb6bdf71e75"
+    },
+    {
+      "path": "data/tlg0057/tlg033/tlg0057.tlg033.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "db355d69520ed2e42f1df5309dfec86fdd2a3f3c",
+      "size": 220799,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/db355d69520ed2e42f1df5309dfec86fdd2a3f3c"
+    },
+    {
+      "path": "data/tlg0057/tlg033/tlg0057.tlg033.verbatim-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "674305cc0b14e2f8ef41a19625a36b34032c0fbb",
+      "size": 212170,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/674305cc0b14e2f8ef41a19625a36b34032c0fbb"
+    },
+    {
+      "path": "data/tlg0057/tlg033/tlg0057.tlg033.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fe02d477566ed8c6fabe7156bf8d9ecb75d214f3",
+      "size": 117074,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/fe02d477566ed8c6fabe7156bf8d9ecb75d214f3"
+    },
+    {
+      "path": "data/tlg0057/tlg034",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "ce132085d84915e51c8325cca89c34a55022b684",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/ce132085d84915e51c8325cca89c34a55022b684"
+    },
+    {
+      "path": "data/tlg0057/tlg034/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e1632de17c2efe57a57b13004012e4e87e12002e",
+      "size": 831,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/e1632de17c2efe57a57b13004012e4e87e12002e"
+    },
+    {
+      "path": "data/tlg0057/tlg034/tlg0057.tlg034.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cf7da4496326b89751f1f35954d1c4210cad124b",
+      "size": 34540,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/cf7da4496326b89751f1f35954d1c4210cad124b"
+    },
+    {
+      "path": "data/tlg0057/tlg034/tlg0057.tlg034.1st1K-grc2.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "65215bbb0e2b5ff96b2e921c1c636ad737dec7c2",
+      "size": 40136,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/65215bbb0e2b5ff96b2e921c1c636ad737dec7c2"
+    },
+    {
+      "path": "data/tlg0057/tlg034/tlg0057.tlg034.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1df49e204c4e6adc5874e71c2b88a135337701d7",
+      "size": 23587,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/1df49e204c4e6adc5874e71c2b88a135337701d7"
+    },
+    {
+      "path": "data/tlg0057/tlg035",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "b082cb97ec6477449e9c78c9602fc1ca5f023b19",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/b082cb97ec6477449e9c78c9602fc1ca5f023b19"
+    },
+    {
+      "path": "data/tlg0057/tlg035/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "76b4e544e0a721e6425c6e50e15fe6a8cd7820a6",
+      "size": 818,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/76b4e544e0a721e6425c6e50e15fe6a8cd7820a6"
+    },
+    {
+      "path": "data/tlg0057/tlg035/tlg0057.tlg035.1st1K-grc2.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5689061638d5978f8980b25fa2876de5d6ce3a02",
+      "size": 21026,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/5689061638d5978f8980b25fa2876de5d6ce3a02"
+    },
+    {
+      "path": "data/tlg0057/tlg035/tlg0057.tlg035.1st1K-grc3.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8e7cafe1fcfdc34a5c4fb1f4092f7aaa6a8f800e",
+      "size": 27306,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/8e7cafe1fcfdc34a5c4fb1f4092f7aaa6a8f800e"
+    },
+    {
+      "path": "data/tlg0057/tlg035/tlg0057.tlg035.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9fce27f44b82b68fbcdb64c2235005ecf9bd1edd",
+      "size": 13075,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/9fce27f44b82b68fbcdb64c2235005ecf9bd1edd"
+    },
+    {
+      "path": "data/tlg0057/tlg036",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "b7dc0a8fe2782cb0dc047af1e8450e4a3045966e",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/b7dc0a8fe2782cb0dc047af1e8450e4a3045966e"
+    },
+    {
+      "path": "data/tlg0057/tlg036/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "12a2ab0026008dd7994c892c5195afbaea0ec1a7",
+      "size": 521,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/12a2ab0026008dd7994c892c5195afbaea0ec1a7"
+    },
+    {
+      "path": "data/tlg0057/tlg036/tlg0057.tlg036.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b054c6fcfeaa6fc8be6e0a18e2bdb23d36491c06",
+      "size": 982604,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/b054c6fcfeaa6fc8be6e0a18e2bdb23d36491c06"
+    },
+    {
+      "path": "data/tlg0057/tlg036/tlg0057.tlg036.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "27c04ed6ba6ff0a7175755c1fd7dc6a022015b43",
+      "size": 502454,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/27c04ed6ba6ff0a7175755c1fd7dc6a022015b43"
+    },
+    {
+      "path": "data/tlg0057/tlg037",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "a2bbc744650d1088d62c805fd92aab0a69b7a2af",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/a2bbc744650d1088d62c805fd92aab0a69b7a2af"
+    },
+    {
+      "path": "data/tlg0057/tlg037/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ce215d1252dec6e754ce5304cfe3dfb1f02beda8",
+      "size": 1002,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/ce215d1252dec6e754ce5304cfe3dfb1f02beda8"
+    },
+    {
+      "path": "data/tlg0057/tlg037/tlg0057.tlg037.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3619358f5af023059a7a2089a8753be41b92b99b",
+      "size": 786473,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/3619358f5af023059a7a2089a8753be41b92b99b"
+    },
+    {
+      "path": "data/tlg0057/tlg037/tlg0057.tlg037.verbatim-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "707cf176b380b4979766c32e726aed911ec8cdfb",
+      "size": 669529,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/707cf176b380b4979766c32e726aed911ec8cdfb"
+    },
+    {
+      "path": "data/tlg0057/tlg037/tlg0057.tlg037.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fb287c61266e397d59997bb30907de384cb941b9",
+      "size": 356526,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/fb287c61266e397d59997bb30907de384cb941b9"
+    },
+    {
+      "path": "data/tlg0057/tlg038",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "794738ee38862f448bc0237a26a683967b1885ac",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/794738ee38862f448bc0237a26a683967b1885ac"
+    },
+    {
+      "path": "data/tlg0057/tlg038/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b57ccfcafabf087f464c7e3a864aea1fec7605c7",
+      "size": 542,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/b57ccfcafabf087f464c7e3a864aea1fec7605c7"
+    },
+    {
+      "path": "data/tlg0057/tlg038/tlg0057.tlg038.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9ee502bf54b1ba28bb87b0ba96c1a44ffeabb626",
+      "size": 161222,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/9ee502bf54b1ba28bb87b0ba96c1a44ffeabb626"
+    },
+    {
+      "path": "data/tlg0057/tlg038/tlg0057.tlg038.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3b96e194c3e601d9a019617394e3cb6d682fa510",
+      "size": 85259,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/3b96e194c3e601d9a019617394e3cb6d682fa510"
+    },
+    {
+      "path": "data/tlg0057/tlg039",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "6449f90c7a2f7908693bce361b9d7ff4c991c23b",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/6449f90c7a2f7908693bce361b9d7ff4c991c23b"
+    },
+    {
+      "path": "data/tlg0057/tlg039/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3077f8ae9c8c12f5d17cf5a5bac98e81cf0b3975",
+      "size": 497,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/3077f8ae9c8c12f5d17cf5a5bac98e81cf0b3975"
+    },
+    {
+      "path": "data/tlg0057/tlg039/tlg0057.tlg039.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6d8de571daf337a1b4b5b06732341c7c6010fcbd",
+      "size": 47132,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/6d8de571daf337a1b4b5b06732341c7c6010fcbd"
+    },
+    {
+      "path": "data/tlg0057/tlg039/tlg0057.tlg039.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4f0532007dc8c5431a618684c878ce17673713f7",
+      "size": 27649,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/4f0532007dc8c5431a618684c878ce17673713f7"
+    },
+    {
+      "path": "data/tlg0057/tlg040",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "2fcaee2209dcc184ef1b87547a9f62244bfe3dba",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/2fcaee2209dcc184ef1b87547a9f62244bfe3dba"
+    },
+    {
+      "path": "data/tlg0057/tlg040/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "949cdad1193c606af3965f227b4983f68ae663a1",
+      "size": 545,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/949cdad1193c606af3965f227b4983f68ae663a1"
+    },
+    {
+      "path": "data/tlg0057/tlg040/tlg0057.tlg040.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "755a6b25b0cf4ed62889ee0530a3ebb0bfda3e6d",
+      "size": 22303,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/755a6b25b0cf4ed62889ee0530a3ebb0bfda3e6d"
+    },
+    {
+      "path": "data/tlg0057/tlg040/tlg0057.tlg040.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4afb98c736e6c1b4c5f4a59886ef6a3120c8212a",
+      "size": 13782,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/4afb98c736e6c1b4c5f4a59886ef6a3120c8212a"
+    },
+    {
+      "path": "data/tlg0057/tlg041",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "ba28daba27ae33862fdb55a764a3cfda6f19995f",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/ba28daba27ae33862fdb55a764a3cfda6f19995f"
+    },
+    {
+      "path": "data/tlg0057/tlg041/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "66f9f5759958b96a5c1fccfc20f321eedbf85e0e",
+      "size": 539,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/66f9f5759958b96a5c1fccfc20f321eedbf85e0e"
+    },
+    {
+      "path": "data/tlg0057/tlg041/tlg0057.tlg041.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7429837af200083659d841e69a7d55394b5560db",
+      "size": 109810,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/7429837af200083659d841e69a7d55394b5560db"
+    },
+    {
+      "path": "data/tlg0057/tlg041/tlg0057.tlg041.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "42d944ba0392a6af207e4c3401ba5795917044ef",
+      "size": 59064,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/42d944ba0392a6af207e4c3401ba5795917044ef"
+    },
+    {
+      "path": "data/tlg0057/tlg042",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "9b8111c42c1466e642168d067a008c0ea55ebbb2",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/9b8111c42c1466e642168d067a008c0ea55ebbb2"
+    },
+    {
+      "path": "data/tlg0057/tlg042/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "990ff65af3fc8dcd1ea6c8eb5369fc4223403703",
+      "size": 521,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/990ff65af3fc8dcd1ea6c8eb5369fc4223403703"
+    },
+    {
+      "path": "data/tlg0057/tlg042/tlg0057.tlg042.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0de20d9e8ddad0122f4310ea6c9abc14a315891e",
+      "size": 102490,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/0de20d9e8ddad0122f4310ea6c9abc14a315891e"
+    },
+    {
+      "path": "data/tlg0057/tlg042/tlg0057.tlg042.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "82dbc8f6d3e819a1a10fa7750c918f5d38c2ed23",
+      "size": 55113,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/82dbc8f6d3e819a1a10fa7750c918f5d38c2ed23"
+    },
+    {
+      "path": "data/tlg0057/tlg043",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "a4ace593ae12ef7e4e608744ad1304317b831ca0",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/a4ace593ae12ef7e4e608744ad1304317b831ca0"
+    },
+    {
+      "path": "data/tlg0057/tlg043/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "215d697cb9d0e8f871ebf789fb462b7aeaa1445f",
+      "size": 497,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/215d697cb9d0e8f871ebf789fb462b7aeaa1445f"
+    },
+    {
+      "path": "data/tlg0057/tlg043/tlg0057.tlg043.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "68130c24d650c599a4a60c229bca55ea81e72e65",
+      "size": 108084,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/68130c24d650c599a4a60c229bca55ea81e72e65"
+    },
+    {
+      "path": "data/tlg0057/tlg043/tlg0057.tlg043.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "87e34af21eb88ade43ce3fa1a0471940bf613c7d",
+      "size": 56744,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/87e34af21eb88ade43ce3fa1a0471940bf613c7d"
+    },
+    {
+      "path": "data/tlg0057/tlg044",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "6816a412d2cdbca073e566902c8d4c40a2b26a6d",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/6816a412d2cdbca073e566902c8d4c40a2b26a6d"
+    },
+    {
+      "path": "data/tlg0057/tlg044/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0e239d3345134d627ddc928ae370b4e8815dc626",
+      "size": 479,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/0e239d3345134d627ddc928ae370b4e8815dc626"
+    },
+    {
+      "path": "data/tlg0057/tlg044/tlg0057.tlg044.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7e66bd81b48e3b76fc13b99228541f2413a7b78a",
+      "size": 434077,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/7e66bd81b48e3b76fc13b99228541f2413a7b78a"
+    },
+    {
+      "path": "data/tlg0057/tlg044/tlg0057.tlg044.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "907ab3673aa0bf8170b2a86e3b9924317c91fcda",
+      "size": 215088,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/907ab3673aa0bf8170b2a86e3b9924317c91fcda"
+    },
+    {
+      "path": "data/tlg0057/tlg045",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "25762579e3ac828f46bc27ec4bccf7bee00cdb53",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/25762579e3ac828f46bc27ec4bccf7bee00cdb53"
+    },
+    {
+      "path": "data/tlg0057/tlg045/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4bfbb43af9c009224adeadaa10197c23b0248b28",
+      "size": 485,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/4bfbb43af9c009224adeadaa10197c23b0248b28"
+    },
+    {
+      "path": "data/tlg0057/tlg045/tlg0057.tlg045.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "dd187c803d5f537453046ad3f84d8d2d120c7b50",
+      "size": 319265,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/dd187c803d5f537453046ad3f84d8d2d120c7b50"
+    },
+    {
+      "path": "data/tlg0057/tlg045/tlg0057.tlg045.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ada0c50cf631ff1540c0cce70678be844e400660",
+      "size": 157381,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/ada0c50cf631ff1540c0cce70678be844e400660"
+    },
+    {
+      "path": "data/tlg0057/tlg046",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "5fcf2c8dcacd83ae2203e80932234e5b01a72f87",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/5fcf2c8dcacd83ae2203e80932234e5b01a72f87"
+    },
+    {
+      "path": "data/tlg0057/tlg046/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0f6dd3f25535be63dfe352ef85209c62aca3bc2c",
+      "size": 482,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/0f6dd3f25535be63dfe352ef85209c62aca3bc2c"
+    },
+    {
+      "path": "data/tlg0057/tlg046/tlg0057.tlg046.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7e2aa9ecc5529d4cdd59a947ad04549c00ef441b",
+      "size": 91717,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/7e2aa9ecc5529d4cdd59a947ad04549c00ef441b"
+    },
+    {
+      "path": "data/tlg0057/tlg046/tlg0057.tlg046.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9018e6d9d39b69b69d9527ea104cb797be2669ef",
+      "size": 46815,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/9018e6d9d39b69b69d9527ea104cb797be2669ef"
+    },
+    {
+      "path": "data/tlg0057/tlg047",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "d364326a36c1d5a54184fb740f6594636c981c42",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/d364326a36c1d5a54184fb740f6594636c981c42"
+    },
+    {
+      "path": "data/tlg0057/tlg047/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c3d201f29714db61617118f2dee8fa1f61aa574d",
+      "size": 494,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/c3d201f29714db61617118f2dee8fa1f61aa574d"
+    },
+    {
+      "path": "data/tlg0057/tlg047/tlg0057.tlg047.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5c15ef6695f4143930b99cf6f120706b262b34ab",
+      "size": 65513,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/5c15ef6695f4143930b99cf6f120706b262b34ab"
+    },
+    {
+      "path": "data/tlg0057/tlg047/tlg0057.tlg047.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5303c69e3567996e704eb033e5b9820d2fefa7ec",
+      "size": 34695,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/5303c69e3567996e704eb033e5b9820d2fefa7ec"
+    },
+    {
+      "path": "data/tlg0057/tlg048",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "e56aa511ed35a0d194a51386794e1b0eb919080c",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/e56aa511ed35a0d194a51386794e1b0eb919080c"
+    },
+    {
+      "path": "data/tlg0057/tlg048/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fbbc7ca7a1e152f423dac644d1a0cdcd638044cb",
+      "size": 440,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/fbbc7ca7a1e152f423dac644d1a0cdcd638044cb"
+    },
+    {
+      "path": "data/tlg0057/tlg048/tlg0057.tlg048.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "273f225158ce9b5d22eb10b2fb6510d50885c036",
+      "size": 38996,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/273f225158ce9b5d22eb10b2fb6510d50885c036"
+    },
+    {
+      "path": "data/tlg0057/tlg048/tlg0057.tlg048.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a15fd0461ea186c8596ca28d1f449f0e8767f7c3",
+      "size": 21964,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/a15fd0461ea186c8596ca28d1f449f0e8767f7c3"
+    },
+    {
+      "path": "data/tlg0057/tlg049",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "745bd5efd4dd1a09ed92005d3d2c21108890570f",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/745bd5efd4dd1a09ed92005d3d2c21108890570f"
+    },
+    {
+      "path": "data/tlg0057/tlg049/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "48cdfbb37b9c2d2c609aabf57ad0f0962bbf75bb",
+      "size": 584,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/48cdfbb37b9c2d2c609aabf57ad0f0962bbf75bb"
+    },
+    {
+      "path": "data/tlg0057/tlg049/tlg0057.tlg049.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4a75269f3c337433927bc47d53c9c1347c45bcff",
+      "size": 103880,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/4a75269f3c337433927bc47d53c9c1347c45bcff"
+    },
+    {
+      "path": "data/tlg0057/tlg049/tlg0057.tlg049.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "84e2aeaabfff32358051bebe023ebba5d9dd283a",
+      "size": 53177,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/84e2aeaabfff32358051bebe023ebba5d9dd283a"
+    },
+    {
+      "path": "data/tlg0057/tlg050",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "b233f3f8b755c5b649bcaa0de51ae298b2e7d1d1",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/b233f3f8b755c5b649bcaa0de51ae298b2e7d1d1"
+    },
+    {
+      "path": "data/tlg0057/tlg050/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3bc88dc60bb6410593fea194d771c1d48a2c2bc6",
+      "size": 458,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/3bc88dc60bb6410593fea194d771c1d48a2c2bc6"
+    },
+    {
+      "path": "data/tlg0057/tlg050/tlg0057.tlg050.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6f1fa5837e52dbd8220366ddebdb5a77fdf5f5fa",
+      "size": 173519,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/6f1fa5837e52dbd8220366ddebdb5a77fdf5f5fa"
+    },
+    {
+      "path": "data/tlg0057/tlg050/tlg0057.tlg050.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9b5a5428d2c7f5c47162acb4c6bc074fe87d03b8",
+      "size": 88987,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/9b5a5428d2c7f5c47162acb4c6bc074fe87d03b8"
+    },
+    {
+      "path": "data/tlg0057/tlg051",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "41331b3f7f43e31922fb29ced2e1229e39fe2063",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/41331b3f7f43e31922fb29ced2e1229e39fe2063"
+    },
+    {
+      "path": "data/tlg0057/tlg051/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f8295a331eb277860ca43625e91610f2287e4f8c",
+      "size": 557,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/f8295a331eb277860ca43625e91610f2287e4f8c"
+    },
+    {
+      "path": "data/tlg0057/tlg051/tlg0057.tlg051.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "635b4ae7ff94a9165948d56aa7776429188b3d19",
+      "size": 143675,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/635b4ae7ff94a9165948d56aa7776429188b3d19"
+    },
+    {
+      "path": "data/tlg0057/tlg051/tlg0057.tlg051.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "71d107e1af8eba256ac8f341503f11e905062574",
+      "size": 75552,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/71d107e1af8eba256ac8f341503f11e905062574"
+    },
+    {
+      "path": "data/tlg0057/tlg052",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "bfd8502af0c05bc6efd45dd8693a1d2cc76ac8b8",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/bfd8502af0c05bc6efd45dd8693a1d2cc76ac8b8"
+    },
+    {
+      "path": "data/tlg0057/tlg052/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fe92f1bdf0b7ab0942a30b79f67676d26edf91d1",
+      "size": 506,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/fe92f1bdf0b7ab0942a30b79f67676d26edf91d1"
+    },
+    {
+      "path": "data/tlg0057/tlg052/tlg0057.tlg052.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "02a071c310b10ebd3370ecddf358ceb3256d17ad",
+      "size": 63261,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/02a071c310b10ebd3370ecddf358ceb3256d17ad"
+    },
+    {
+      "path": "data/tlg0057/tlg052/tlg0057.tlg052.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "600aecc90d450d66732971eb20aa1a882b3cdc4e",
+      "size": 36264,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/600aecc90d450d66732971eb20aa1a882b3cdc4e"
+    },
+    {
+      "path": "data/tlg0057/tlg053",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "4a50d49e6e326d5ffc99be4e96152b01d302f869",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/4a50d49e6e326d5ffc99be4e96152b01d302f869"
+    },
+    {
+      "path": "data/tlg0057/tlg053/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5bf8e1ead8b6f9280c314202cb322e5baa64e1d6",
+      "size": 446,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/5bf8e1ead8b6f9280c314202cb322e5baa64e1d6"
+    },
+    {
+      "path": "data/tlg0057/tlg053/tlg0057.tlg053.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6f4ac0985e228cd7630ee004ef35b219545baf27",
+      "size": 98322,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/6f4ac0985e228cd7630ee004ef35b219545baf27"
+    },
+    {
+      "path": "data/tlg0057/tlg053/tlg0057.tlg053.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9c6c46422de13d9c77238d6055cb90abb0633302",
+      "size": 53740,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/9c6c46422de13d9c77238d6055cb90abb0633302"
+    },
+    {
+      "path": "data/tlg0057/tlg054",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "6f5443795db87f87ae729ae05d25c3a7bc38ed78",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/6f5443795db87f87ae729ae05d25c3a7bc38ed78"
+    },
+    {
+      "path": "data/tlg0057/tlg054/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "93af9df9045199dfe6815ffa760fb1c04c446eed",
+      "size": 500,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/93af9df9045199dfe6815ffa760fb1c04c446eed"
+    },
+    {
+      "path": "data/tlg0057/tlg054/tlg0057.tlg054.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "447b9d9b9c444080b256476d273ecff396fef34d",
+      "size": 77661,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/447b9d9b9c444080b256476d273ecff396fef34d"
+    },
+    {
+      "path": "data/tlg0057/tlg054/tlg0057.tlg054.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ac92c26ba914a853b0d8e5b5f82714f2ebe9e495",
+      "size": 41838,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/ac92c26ba914a853b0d8e5b5f82714f2ebe9e495"
+    },
+    {
+      "path": "data/tlg0057/tlg055",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "f56a817f421873279558c517b552bcdc452d399e",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/f56a817f421873279558c517b552bcdc452d399e"
+    },
+    {
+      "path": "data/tlg0057/tlg055/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9e822189dac3ed3cf75eb965522e4f3a52ff68e5",
+      "size": 485,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/9e822189dac3ed3cf75eb965522e4f3a52ff68e5"
+    },
+    {
+      "path": "data/tlg0057/tlg055/tlg0057.tlg055.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5dd57f951b48ebf7a086b1d410aec16b16426a61",
+      "size": 60600,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/5dd57f951b48ebf7a086b1d410aec16b16426a61"
+    },
+    {
+      "path": "data/tlg0057/tlg055/tlg0057.tlg055.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e6ac0ef9ce1e4fd3520d1d927f1eb1f9e5f146b0",
+      "size": 33311,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/e6ac0ef9ce1e4fd3520d1d927f1eb1f9e5f146b0"
+    },
+    {
+      "path": "data/tlg0057/tlg056",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "c107fa59c7a9bf4f08e372ab74efa08e5101aa08",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/c107fa59c7a9bf4f08e372ab74efa08e5101aa08"
+    },
+    {
+      "path": "data/tlg0057/tlg056/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b811510fb2f169ce2d46f0e54920e9af96c40c30",
+      "size": 503,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/b811510fb2f169ce2d46f0e54920e9af96c40c30"
+    },
+    {
+      "path": "data/tlg0057/tlg056/tlg0057.tlg056.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b828b6ecf212ff713e6e3f02dadf6e40abedbf39",
+      "size": 477831,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/b828b6ecf212ff713e6e3f02dadf6e40abedbf39"
+    },
+    {
+      "path": "data/tlg0057/tlg056/tlg0057.tlg056.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d866ec5e6d71b64c9ec81162dcadc17b740e6f59",
+      "size": 250908,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/d866ec5e6d71b64c9ec81162dcadc17b740e6f59"
+    },
+    {
+      "path": "data/tlg0057/tlg057",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "b9343429a37214303fb03acb4771edd4364d6195",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/b9343429a37214303fb03acb4771edd4364d6195"
+    },
+    {
+      "path": "data/tlg0057/tlg057/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9758aa1d9c3b4e494f9a69fc5980f23f975d5fcc",
+      "size": 467,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/9758aa1d9c3b4e494f9a69fc5980f23f975d5fcc"
+    },
+    {
+      "path": "data/tlg0057/tlg057/tlg0057.tlg057.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "92dd1073970ae3e95d41baa3f432a677201868fe",
+      "size": 1027806,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/92dd1073970ae3e95d41baa3f432a677201868fe"
+    },
+    {
+      "path": "data/tlg0057/tlg057/tlg0057.tlg057.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d47c539ca066ae0f8fb5ba0e69a6e2562e99c012",
+      "size": 508956,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/d47c539ca066ae0f8fb5ba0e69a6e2562e99c012"
+    },
+    {
+      "path": "data/tlg0057/tlg058",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "e5e58fa03da6c14d875aaf86e166d9bedccf8620",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/e5e58fa03da6c14d875aaf86e166d9bedccf8620"
+    },
+    {
+      "path": "data/tlg0057/tlg058/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5a5a1eb90540ae5769cfdcc681799f8a3f151fb2",
+      "size": 482,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/5a5a1eb90540ae5769cfdcc681799f8a3f151fb2"
+    },
+    {
+      "path": "data/tlg0057/tlg058/tlg0057.tlg058.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4fef79d336f0edd0888584a22ba7ca3fae482e51",
+      "size": 102655,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/4fef79d336f0edd0888584a22ba7ca3fae482e51"
+    },
+    {
+      "path": "data/tlg0057/tlg058/tlg0057.tlg058.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "dccd1180fe1b08c7afb7a796e268c1eac75b1761",
+      "size": 52783,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/dccd1180fe1b08c7afb7a796e268c1eac75b1761"
+    },
+    {
+      "path": "data/tlg0057/tlg059",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "74e8c6abb9af1e1046725676ef5b8f53f623aff3",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/74e8c6abb9af1e1046725676ef5b8f53f623aff3"
+    },
+    {
+      "path": "data/tlg0057/tlg059/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4739cd82071ca31078bcd0d90a825bb63339996c",
+      "size": 485,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/4739cd82071ca31078bcd0d90a825bb63339996c"
+    },
+    {
+      "path": "data/tlg0057/tlg059/tlg0057.tlg059.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fe5412f5320f74056964e187b4d8e1c630c59f16",
+      "size": 650277,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/fe5412f5320f74056964e187b4d8e1c630c59f16"
+    },
+    {
+      "path": "data/tlg0057/tlg059/tlg0057.tlg059.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e9a96f7a8896f63dbaab5a41181d2db40ab8cc79",
+      "size": 311649,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/e9a96f7a8896f63dbaab5a41181d2db40ab8cc79"
+    },
+    {
+      "path": "data/tlg0057/tlg060",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "37bc3463ae549e7bc84ce07ec0503a994a937409",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/37bc3463ae549e7bc84ce07ec0503a994a937409"
+    },
+    {
+      "path": "data/tlg0057/tlg060/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c661ceb4203f75d69b77aa9052f9640fb5f2819a",
+      "size": 488,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/c661ceb4203f75d69b77aa9052f9640fb5f2819a"
+    },
+    {
+      "path": "data/tlg0057/tlg060/tlg0057.tlg060.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "64e1c9bd077ff928f914e35253ff32557d507e6e",
+      "size": 457899,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/64e1c9bd077ff928f914e35253ff32557d507e6e"
+    },
+    {
+      "path": "data/tlg0057/tlg060/tlg0057.tlg060.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f69ef1579d80c088b0412206f49ce773b22660eb",
+      "size": 221480,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/f69ef1579d80c088b0412206f49ce773b22660eb"
+    },
+    {
+      "path": "data/tlg0057/tlg061",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "cef88e4414c2dde3191d8ce671e2c83763b1a94c",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/cef88e4414c2dde3191d8ce671e2c83763b1a94c"
+    },
+    {
+      "path": "data/tlg0057/tlg061/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fbb5afa7c22204478fd15f1f8a33b739eb7cede0",
+      "size": 467,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/fbb5afa7c22204478fd15f1f8a33b739eb7cede0"
+    },
+    {
+      "path": "data/tlg0057/tlg061/tlg0057.tlg061.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2aedfe77ae839fe2600e579d3afbfeb2a5b2119c",
+      "size": 482610,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/2aedfe77ae839fe2600e579d3afbfeb2a5b2119c"
+    },
+    {
+      "path": "data/tlg0057/tlg061/tlg0057.tlg061.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "36fd302b810033fb49a07fbf4a0af7ca142e3e6c",
+      "size": 229451,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/36fd302b810033fb49a07fbf4a0af7ca142e3e6c"
+    },
+    {
+      "path": "data/tlg0057/tlg062",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "ce3bdf5d0b8a6b09ab5d9fc274ee17a7fef20185",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/ce3bdf5d0b8a6b09ab5d9fc274ee17a7fef20185"
+    },
+    {
+      "path": "data/tlg0057/tlg062/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "97a69bf5f272a7fab88d885f5850310a17e0fd8e",
+      "size": 500,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/97a69bf5f272a7fab88d885f5850310a17e0fd8e"
+    },
+    {
+      "path": "data/tlg0057/tlg062/tlg0057.tlg062.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "04193d7a48515eba68cfde8d2e43c80efb84fb20",
+      "size": 535525,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/04193d7a48515eba68cfde8d2e43c80efb84fb20"
+    },
+    {
+      "path": "data/tlg0057/tlg062/tlg0057.tlg062.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f20702fda4c05006f2399f30aeb30000df850120",
+      "size": 247529,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/f20702fda4c05006f2399f30aeb30000df850120"
+    },
+    {
+      "path": "data/tlg0057/tlg063",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "d39f050c13522ad8c6567c434a68e17e6fb86903",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/d39f050c13522ad8c6567c434a68e17e6fb86903"
+    },
+    {
+      "path": "data/tlg0057/tlg063/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "88980fe478c137d27991013bbc03833d662e15fd",
+      "size": 524,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/88980fe478c137d27991013bbc03833d662e15fd"
+    },
+    {
+      "path": "data/tlg0057/tlg063/tlg0057.tlg063.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f554a270574b07f612427ca93be88c5333e44a51",
+      "size": 246345,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/f554a270574b07f612427ca93be88c5333e44a51"
+    },
+    {
+      "path": "data/tlg0057/tlg063/tlg0057.tlg063.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "754f884360eff11cf502cfccc35954161d8d49b9",
+      "size": 169609,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/754f884360eff11cf502cfccc35954161d8d49b9"
+    },
+    {
+      "path": "data/tlg0057/tlg064",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "0ef186bae2197ddd13652de0ebc9191a36fda235",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/0ef186bae2197ddd13652de0ebc9191a36fda235"
+    },
+    {
+      "path": "data/tlg0057/tlg064/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4c2cf7c073040e02cfad4bce72cdb029331f6962",
+      "size": 449,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/4c2cf7c073040e02cfad4bce72cdb029331f6962"
+    },
+    {
+      "path": "data/tlg0057/tlg064/tlg0057.tlg064.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b1ca0363733cfe674d59acc90275c412b727bd20",
+      "size": 499391,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/b1ca0363733cfe674d59acc90275c412b727bd20"
+    },
+    {
+      "path": "data/tlg0057/tlg064/tlg0057.tlg064.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1fd978ed2cde6e336daf4ae8026908f57b5bb94a",
+      "size": 258612,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/1fd978ed2cde6e336daf4ae8026908f57b5bb94a"
+    },
+    {
+      "path": "data/tlg0057/tlg065",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "70c61cf042d499cd13ad0ad9f93108e48486ab0e",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/70c61cf042d499cd13ad0ad9f93108e48486ab0e"
+    },
+    {
+      "path": "data/tlg0057/tlg065/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "73841ab4625be6c0c01e32a1e5f60e5d666b409c",
+      "size": 479,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/73841ab4625be6c0c01e32a1e5f60e5d666b409c"
+    },
+    {
+      "path": "data/tlg0057/tlg065/tlg0057.tlg065.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e95622ae268018c36532e7bb9bd337e1b4e9637f",
+      "size": 405753,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/e95622ae268018c36532e7bb9bd337e1b4e9637f"
+    },
+    {
+      "path": "data/tlg0057/tlg065/tlg0057.tlg065.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e284f42cc8923da4f26b677e9f6b9e2e6cbcec7f",
+      "size": 203061,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/e284f42cc8923da4f26b677e9f6b9e2e6cbcec7f"
+    },
+    {
+      "path": "data/tlg0057/tlg066",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "6d6609ac22e337926f19e96f64c400047159f611",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/6d6609ac22e337926f19e96f64c400047159f611"
+    },
+    {
+      "path": "data/tlg0057/tlg066/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "be99ad62dbb61608c5ff20ef3baf40baeb84e01b",
+      "size": 470,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/be99ad62dbb61608c5ff20ef3baf40baeb84e01b"
+    },
+    {
+      "path": "data/tlg0057/tlg066/tlg0057.tlg066.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1d7b29c1d068ae81c92ced3c9823417dccb97aa2",
+      "size": 2277777,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/1d7b29c1d068ae81c92ced3c9823417dccb97aa2"
+    },
+    {
+      "path": "data/tlg0057/tlg066/tlg0057.tlg066.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "03ff7f4bb39ea127a9fd7b8ff645d440d7e698c9",
+      "size": 1172523,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/03ff7f4bb39ea127a9fd7b8ff645d440d7e698c9"
+    },
+    {
+      "path": "data/tlg0057/tlg067",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "2ea503f6417be3cc038e25c0ce49b21c332c3bf8",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/2ea503f6417be3cc038e25c0ce49b21c332c3bf8"
+    },
+    {
+      "path": "data/tlg0057/tlg067/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "782ca91372d03782c87b2c8de5c5e0caec890229",
+      "size": 509,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/782ca91372d03782c87b2c8de5c5e0caec890229"
+    },
+    {
+      "path": "data/tlg0057/tlg067/tlg0057.tlg067.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5ac574c452035dd3e49762d5e3043e4c2681d3ab",
+      "size": 342857,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/5ac574c452035dd3e49762d5e3043e4c2681d3ab"
+    },
+    {
+      "path": "data/tlg0057/tlg067/tlg0057.tlg067.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6e5188576a1acd8ad01f64d510e841f8c19e4e20",
+      "size": 171466,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/6e5188576a1acd8ad01f64d510e841f8c19e4e20"
+    },
+    {
+      "path": "data/tlg0057/tlg068",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "139978aec9a72ba0d4b6daaa97bf67ed73c0a262",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/139978aec9a72ba0d4b6daaa97bf67ed73c0a262"
+    },
+    {
+      "path": "data/tlg0057/tlg068/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f2882f559c1da9a3fe61bf2bad8d798ed2af8833",
+      "size": 533,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/f2882f559c1da9a3fe61bf2bad8d798ed2af8833"
+    },
+    {
+      "path": "data/tlg0057/tlg068/tlg0057.tlg068.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3ee2479eedd9f1c5046f57d8aaa176aac9ff911e",
+      "size": 101926,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/3ee2479eedd9f1c5046f57d8aaa176aac9ff911e"
+    },
+    {
+      "path": "data/tlg0057/tlg068/tlg0057.tlg068.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "288da076b5adbf3eb2feef631abdc29a7ea4d373",
+      "size": 55234,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/288da076b5adbf3eb2feef631abdc29a7ea4d373"
+    },
+    {
+      "path": "data/tlg0057/tlg069",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "b30ecdfdd85d3e8348a017fcb637238235e7eefb",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/b30ecdfdd85d3e8348a017fcb637238235e7eefb"
+    },
+    {
+      "path": "data/tlg0057/tlg069/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8e3013a0969774b7935420943d4b722b6f3227d5",
+      "size": 581,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/8e3013a0969774b7935420943d4b722b6f3227d5"
+    },
+    {
+      "path": "data/tlg0057/tlg069/tlg0057.tlg069.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "94a3fda0bb9157b6135a4247e537765babef23b0",
+      "size": 149278,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/94a3fda0bb9157b6135a4247e537765babef23b0"
+    },
+    {
+      "path": "data/tlg0057/tlg069/tlg0057.tlg069.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8b3ee1c8b3f979936810a5858ef952d96d71fd14",
+      "size": 83736,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/8b3ee1c8b3f979936810a5858ef952d96d71fd14"
+    },
+    {
+      "path": "data/tlg0057/tlg070",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "d8190a3bcc2db6ed0f8ae2e1f6dbe6f65f51d9f2",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/d8190a3bcc2db6ed0f8ae2e1f6dbe6f65f51d9f2"
+    },
+    {
+      "path": "data/tlg0057/tlg070/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e9948e53c9985a045b297eba4b9d5a14e79c88f1",
+      "size": 530,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/e9948e53c9985a045b297eba4b9d5a14e79c88f1"
+    },
+    {
+      "path": "data/tlg0057/tlg070/tlg0057.tlg070.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "834d0a24bef68b7ef07262e38284afdfe83ef689",
+      "size": 164197,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/834d0a24bef68b7ef07262e38284afdfe83ef689"
+    },
+    {
+      "path": "data/tlg0057/tlg070/tlg0057.tlg070.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e1e2ee984cb766ec9fe813f825a0d5fad1cd9231",
+      "size": 87088,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/e1e2ee984cb766ec9fe813f825a0d5fad1cd9231"
+    },
+    {
+      "path": "data/tlg0057/tlg071",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "f976c590b2ef99e9a8d69767a7dcd23a5a10ba79",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/f976c590b2ef99e9a8d69767a7dcd23a5a10ba79"
+    },
+    {
+      "path": "data/tlg0057/tlg071/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2b519801dcde3b3889b28ff9cb94ddc8f21673bb",
+      "size": 620,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/2b519801dcde3b3889b28ff9cb94ddc8f21673bb"
+    },
+    {
+      "path": "data/tlg0057/tlg071/tlg0057.tlg071.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "20a2e96ca59aab079d0003c3fbd50489dc84eb4e",
+      "size": 26317,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/20a2e96ca59aab079d0003c3fbd50489dc84eb4e"
+    },
+    {
+      "path": "data/tlg0057/tlg071/tlg0057.tlg071.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "892f5c5f8ebfe11fc7a2ce245f8594d3fe8d2d9e",
+      "size": 15989,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/892f5c5f8ebfe11fc7a2ce245f8594d3fe8d2d9e"
+    },
+    {
+      "path": "data/tlg0057/tlg072",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "d3c13431553dc14f93290ce6df138c305e830cd5",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/d3c13431553dc14f93290ce6df138c305e830cd5"
+    },
+    {
+      "path": "data/tlg0057/tlg072/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ee358c63fd03d69ec058a562db0e84560442e4bb",
+      "size": 530,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/ee358c63fd03d69ec058a562db0e84560442e4bb"
+    },
+    {
+      "path": "data/tlg0057/tlg072/tlg0057.tlg072.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "19116b37c775234c2e5ec2e24959bc333cd04f1e",
+      "size": 58612,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/19116b37c775234c2e5ec2e24959bc333cd04f1e"
+    },
+    {
+      "path": "data/tlg0057/tlg072/tlg0057.tlg072.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d4cb303d38a2c997a5b0ae009698ac770081bc0d",
+      "size": 32208,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/d4cb303d38a2c997a5b0ae009698ac770081bc0d"
+    },
+    {
+      "path": "data/tlg0057/tlg073",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "c561aaa10913801a83c2e6ad228551afb6b2fbf7",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/c561aaa10913801a83c2e6ad228551afb6b2fbf7"
+    },
+    {
+      "path": "data/tlg0057/tlg073/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "59f495031f99e9a85088a0133be0a9ca377fd42f",
+      "size": 1080,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/59f495031f99e9a85088a0133be0a9ca377fd42f"
+    },
+    {
+      "path": "data/tlg0057/tlg073/tlg0057.tlg073.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8c03f36dd7f9f7db9435f5f5d87832e6b5281e73",
+      "size": 44047,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/8c03f36dd7f9f7db9435f5f5d87832e6b5281e73"
+    },
+    {
+      "path": "data/tlg0057/tlg073/tlg0057.tlg073.1st1K-grc2.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f235c44ced7b9817c877c1597cea8bd099e6cd4f",
+      "size": 60509,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/f235c44ced7b9817c877c1597cea8bd099e6cd4f"
+    },
+    {
+      "path": "data/tlg0057/tlg073/tlg0057.tlg073.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "91b7b1fb7d333cc34c0e49b3b3d542c4f49cb148",
+      "size": 23251,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/91b7b1fb7d333cc34c0e49b3b3d542c4f49cb148"
+    },
+    {
+      "path": "data/tlg0057/tlg074",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "8f3c6c242d93ade057063735ed6aee529c9bad0b",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/8f3c6c242d93ade057063735ed6aee529c9bad0b"
+    },
+    {
+      "path": "data/tlg0057/tlg074/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e24f961e3873db2f3636a7758dce827d26b23628",
+      "size": 506,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/e24f961e3873db2f3636a7758dce827d26b23628"
+    },
+    {
+      "path": "data/tlg0057/tlg074/tlg0057.tlg074.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d8ee216da4a8545cc0556dd5443ae14a5e8f7102",
+      "size": 61017,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/d8ee216da4a8545cc0556dd5443ae14a5e8f7102"
+    },
+    {
+      "path": "data/tlg0057/tlg074/tlg0057.tlg074.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9d09aa7be44280a17a78814cb62c8e4df487c7ed",
+      "size": 34594,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/9d09aa7be44280a17a78814cb62c8e4df487c7ed"
+    },
+    {
+      "path": "data/tlg0057/tlg075",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "bd2a384cf0e7214585216ec7a3b2b4eed66a03fa",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/bd2a384cf0e7214585216ec7a3b2b4eed66a03fa"
+    },
+    {
+      "path": "data/tlg0057/tlg075/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e6817410f975d008960d937b9fa647bfdef6cfa6",
+      "size": 605,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/e6817410f975d008960d937b9fa647bfdef6cfa6"
+    },
+    {
+      "path": "data/tlg0057/tlg075/tlg0057.tlg075.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "35a251da0399496f83ed3fe4e074e39f737da666",
+      "size": 2054155,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/35a251da0399496f83ed3fe4e074e39f737da666"
+    },
+    {
+      "path": "data/tlg0057/tlg075/tlg0057.tlg075.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9889c791c63a19c8b103943f7ccca837f2edc0c5",
+      "size": 1090713,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/9889c791c63a19c8b103943f7ccca837f2edc0c5"
+    },
+    {
+      "path": "data/tlg0057/tlg076",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "224f58de13df3cfdd585bc0ea6d696cfe50593d6",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/224f58de13df3cfdd585bc0ea6d696cfe50593d6"
+    },
+    {
+      "path": "data/tlg0057/tlg076/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cb9a1521bfc2e6bedcff387f420906d138a88f6b",
+      "size": 566,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/cb9a1521bfc2e6bedcff387f420906d138a88f6b"
+    },
+    {
+      "path": "data/tlg0057/tlg076/tlg0057.tlg076.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4a7351496aea5b3b1e83883bff5c38e60723ff2c",
+      "size": 2188306,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/4a7351496aea5b3b1e83883bff5c38e60723ff2c"
+    },
+    {
+      "path": "data/tlg0057/tlg076/tlg0057.tlg076.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "47c146812c9d3f08934273aaade48ad44cb18e9f",
+      "size": 1213315,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/47c146812c9d3f08934273aaade48ad44cb18e9f"
+    },
+    {
+      "path": "data/tlg0057/tlg077",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "f574cfe5c23eb8ced8ee735e40618f0d3a42c3ef",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/f574cfe5c23eb8ced8ee735e40618f0d3a42c3ef"
+    },
+    {
+      "path": "data/tlg0057/tlg077/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "69356ac8506ca2062bfc9a557a30254ca4a71fee",
+      "size": 539,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/69356ac8506ca2062bfc9a557a30254ca4a71fee"
+    },
+    {
+      "path": "data/tlg0057/tlg077/tlg0057.tlg077.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "89e2842267988d45e86a941f77f3f2412753f87b",
+      "size": 1538590,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/89e2842267988d45e86a941f77f3f2412753f87b"
+    },
+    {
+      "path": "data/tlg0057/tlg077/tlg0057.tlg077.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e57599c959f0fc08a61363b686ea37d2a18ba4ce",
+      "size": 800121,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/e57599c959f0fc08a61363b686ea37d2a18ba4ce"
+    },
+    {
+      "path": "data/tlg0057/tlg078",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "a6ddb09bef35d77e0d1735eb68f6a8c412b3fd8a",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/a6ddb09bef35d77e0d1735eb68f6a8c412b3fd8a"
+    },
+    {
+      "path": "data/tlg0057/tlg078/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "943c718931aea15dbb96b44ed4fccecf5715bde9",
+      "size": 452,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/943c718931aea15dbb96b44ed4fccecf5715bde9"
+    },
+    {
+      "path": "data/tlg0057/tlg078/tlg0057.tlg078.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2d93ce1e53f57c7f33464065a35980be9287c042",
+      "size": 453202,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/2d93ce1e53f57c7f33464065a35980be9287c042"
+    },
+    {
+      "path": "data/tlg0057/tlg078/tlg0057.tlg078.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b05f08506d8dd4aa40f73e5a4e1e0441dca73f16",
+      "size": 240352,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/b05f08506d8dd4aa40f73e5a4e1e0441dca73f16"
+    },
+    {
+      "path": "data/tlg0057/tlg079",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "4a05ae371ba0905fce278f52eac9ffc5de06f36f",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/4a05ae371ba0905fce278f52eac9ffc5de06f36f"
+    },
+    {
+      "path": "data/tlg0057/tlg079/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c94ac3a0106bc7f1194675eb5a567167a402aca0",
+      "size": 482,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/c94ac3a0106bc7f1194675eb5a567167a402aca0"
+    },
+    {
+      "path": "data/tlg0057/tlg079/tlg0057.tlg079.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8e4c3a39ee466ac73cf973a9e1af0722275b1f7e",
+      "size": 200875,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/8e4c3a39ee466ac73cf973a9e1af0722275b1f7e"
+    },
+    {
+      "path": "data/tlg0057/tlg079/tlg0057.tlg079.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d887900b486b07a8e8434663a5dc57e7b4e42fcd",
+      "size": 100902,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/d887900b486b07a8e8434663a5dc57e7b4e42fcd"
+    },
+    {
+      "path": "data/tlg0057/tlg081",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "64593ec5d69fc317b32d295646829ffa6fbcfbc7",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/64593ec5d69fc317b32d295646829ffa6fbcfbc7"
+    },
+    {
+      "path": "data/tlg0057/tlg081/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ea73b2e4895f6c2a2761b9aaa2bc208dc88ce2ca",
+      "size": 467,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/ea73b2e4895f6c2a2761b9aaa2bc208dc88ce2ca"
+    },
+    {
+      "path": "data/tlg0057/tlg081/tlg0057.tlg081.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cf793377a33b8ef85ad3d896094c9bfb26d3bfab",
+      "size": 146745,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/cf793377a33b8ef85ad3d896094c9bfb26d3bfab"
+    },
+    {
+      "path": "data/tlg0057/tlg082",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "2178c7c7eb5cf3ea155385daf01f403d9216137f",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/2178c7c7eb5cf3ea155385daf01f403d9216137f"
+    },
+    {
+      "path": "data/tlg0057/tlg082/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "83c2a8d3dca72654b78bab1a3e5765e48f7b23fe",
+      "size": 554,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/83c2a8d3dca72654b78bab1a3e5765e48f7b23fe"
+    },
+    {
+      "path": "data/tlg0057/tlg082/tlg0057.tlg082.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d5d9c65dc5aadf194595cd7bc6d0cae5bdcda9b6",
+      "size": 48754,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/d5d9c65dc5aadf194595cd7bc6d0cae5bdcda9b6"
+    },
+    {
+      "path": "data/tlg0057/tlg082/tlg0057.tlg082.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "222444350b52c14bc788f0e7d770adad50e30639",
+      "size": 29494,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/222444350b52c14bc788f0e7d770adad50e30639"
+    },
+    {
+      "path": "data/tlg0057/tlg083",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "39986f768523e79ecaa45d7f6ce14dc14b420301",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/39986f768523e79ecaa45d7f6ce14dc14b420301"
+    },
+    {
+      "path": "data/tlg0057/tlg083/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "35ceb321464b80e17ba8b7aeb1abdf3f7857096c",
+      "size": 494,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/35ceb321464b80e17ba8b7aeb1abdf3f7857096c"
+    },
+    {
+      "path": "data/tlg0057/tlg083/tlg0057.tlg083.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2fd1dc6952bcfb09ffd6e481719ddf836333c009",
+      "size": 176587,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/2fd1dc6952bcfb09ffd6e481719ddf836333c009"
+    },
+    {
+      "path": "data/tlg0057/tlg083/tlg0057.tlg083.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "475ed6e9bf0ab4ff61b228ac242aac58fef401ae",
+      "size": 91421,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/475ed6e9bf0ab4ff61b228ac242aac58fef401ae"
+    },
+    {
+      "path": "data/tlg0057/tlg084",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "110e54f744357f7b701c01c9111cb8d329ff4c06",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/110e54f744357f7b701c01c9111cb8d329ff4c06"
+    },
+    {
+      "path": "data/tlg0057/tlg084/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a5ae4c419d2753f41dc5a6a4f6cabec737761d18",
+      "size": 554,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/a5ae4c419d2753f41dc5a6a4f6cabec737761d18"
+    },
+    {
+      "path": "data/tlg0057/tlg084/tlg0057.tlg084.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "59581623aaa4610130d1253aca30e4fd91925e7d",
+      "size": 34802,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/59581623aaa4610130d1253aca30e4fd91925e7d"
+    },
+    {
+      "path": "data/tlg0057/tlg084/tlg0057.tlg084.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8b0cbe83c05aff2cfddfff2787f287360c7395af",
+      "size": 20106,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/8b0cbe83c05aff2cfddfff2787f287360c7395af"
+    },
+    {
+      "path": "data/tlg0057/tlg085",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "62f726907f2a760be2636ae64800acac031489d5",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/62f726907f2a760be2636ae64800acac031489d5"
+    },
+    {
+      "path": "data/tlg0057/tlg085/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5eb62212e5342ae919eb9e391044076d4d01ad29",
+      "size": 512,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/5eb62212e5342ae919eb9e391044076d4d01ad29"
+    },
+    {
+      "path": "data/tlg0057/tlg085/tlg0057.tlg085.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6bee41b541364f97c785c7c560aa50475497d7f7",
+      "size": 367010,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/6bee41b541364f97c785c7c560aa50475497d7f7"
+    },
+    {
+      "path": "data/tlg0057/tlg085/tlg0057.tlg085.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "19ee2ec77364d716e3f5df1d409809d250b50d97",
+      "size": 200332,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/19ee2ec77364d716e3f5df1d409809d250b50d97"
+    },
+    {
+      "path": "data/tlg0057/tlg086",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "ae1ab2ec894894fa77cc951723599a1f7877e1c0",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/ae1ab2ec894894fa77cc951723599a1f7877e1c0"
+    },
+    {
+      "path": "data/tlg0057/tlg086/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "dae7e589212f43657b5d479278f636f493bc51c3",
+      "size": 678,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/dae7e589212f43657b5d479278f636f493bc51c3"
+    },
+    {
+      "path": "data/tlg0057/tlg086/tlg0057.tlg086.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "207f5b027dab0549a3db80cb9207b43fe893a90b",
+      "size": 119138,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/207f5b027dab0549a3db80cb9207b43fe893a90b"
+    },
+    {
+      "path": "data/tlg0057/tlg086/tlg0057.tlg086.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "21b46734d36643d91abc549200c421a4eb600aa0",
+      "size": 63381,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/21b46734d36643d91abc549200c421a4eb600aa0"
+    },
+    {
+      "path": "data/tlg0057/tlg087",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "ed204cd14619fbbb1bad69f8ec5dafc5bd6c5d65",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/ed204cd14619fbbb1bad69f8ec5dafc5bd6c5d65"
+    },
+    {
+      "path": "data/tlg0057/tlg087/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c96cb06a3c5226e7b354f9cc2dd3671991a67fcf",
+      "size": 512,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/c96cb06a3c5226e7b354f9cc2dd3671991a67fcf"
+    },
+    {
+      "path": "data/tlg0057/tlg087/tlg0057.tlg087.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5c92e1be2f66765b697a367c4421286b77175491",
+      "size": 1031042,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/5c92e1be2f66765b697a367c4421286b77175491"
+    },
+    {
+      "path": "data/tlg0057/tlg087/tlg0057.tlg087.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2369bb38c6d6320b8f3dbe776f08d19452c421d5",
+      "size": 562710,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/2369bb38c6d6320b8f3dbe776f08d19452c421d5"
+    },
+    {
+      "path": "data/tlg0057/tlg088",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "a354face7bce59745367d75fc56aef8ac0d7c274",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/a354face7bce59745367d75fc56aef8ac0d7c274"
+    },
+    {
+      "path": "data/tlg0057/tlg088/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a4465936cb53c3650f66a8fa0f2fd15618d64f6f",
+      "size": 552,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/a4465936cb53c3650f66a8fa0f2fd15618d64f6f"
+    },
+    {
+      "path": "data/tlg0057/tlg088/tlg0057.tlg088.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7f9bd0b47717147c1b448c5ded2d8d1e8b41f272",
+      "size": 736907,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/7f9bd0b47717147c1b448c5ded2d8d1e8b41f272"
+    },
+    {
+      "path": "data/tlg0057/tlg088/tlg0057.tlg088.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b2ea77b0964e344b8d3fc96abd02773da564e6ff",
+      "size": 415336,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/b2ea77b0964e344b8d3fc96abd02773da564e6ff"
+    },
+    {
+      "path": "data/tlg0057/tlg089",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "c548f3852685c059d75f7e9df2314fe7dfdfbd85",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/c548f3852685c059d75f7e9df2314fe7dfdfbd85"
+    },
+    {
+      "path": "data/tlg0057/tlg089/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b4b5c0824d52beb746cfa3e6ba15d93fd2bf42a2",
+      "size": 500,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/b4b5c0824d52beb746cfa3e6ba15d93fd2bf42a2"
+    },
+    {
+      "path": "data/tlg0057/tlg089/tlg0057.tlg089.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0732658c30326e299a1321b09a6a0ec5b6c6fe78",
+      "size": 627800,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/0732658c30326e299a1321b09a6a0ec5b6c6fe78"
+    },
+    {
+      "path": "data/tlg0057/tlg089/tlg0057.tlg089.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cf082a10bb38ba3e39f653e480ee629fe9d6668f",
+      "size": 333358,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/cf082a10bb38ba3e39f653e480ee629fe9d6668f"
+    },
+    {
+      "path": "data/tlg0057/tlg090",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "ea91b5583ff49c06d8a045e42c9a60981806537e",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/ea91b5583ff49c06d8a045e42c9a60981806537e"
+    },
+    {
+      "path": "data/tlg0057/tlg090/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9af1c183397bada714364ea8d1e746c1d98e9169",
+      "size": 504,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/9af1c183397bada714364ea8d1e746c1d98e9169"
+    },
+    {
+      "path": "data/tlg0057/tlg090/tlg0057.tlg090.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e088c7a987cd1dde54c2a0529fa7955ac0fffb2e",
+      "size": 665786,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/e088c7a987cd1dde54c2a0529fa7955ac0fffb2e"
+    },
+    {
+      "path": "data/tlg0057/tlg090/tlg0057.tlg090.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "95ee966e5aa9a807022352c2b7c26e22360a5fba",
+      "size": 353118,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/95ee966e5aa9a807022352c2b7c26e22360a5fba"
+    },
+    {
+      "path": "data/tlg0057/tlg091",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "6cdffdecaa793739714a9d7943b91a842f7d8808",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/6cdffdecaa793739714a9d7943b91a842f7d8808"
+    },
+    {
+      "path": "data/tlg0057/tlg091/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8e682dad5f42022d8620b8033abc1601d799ad72",
+      "size": 502,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/8e682dad5f42022d8620b8033abc1601d799ad72"
+    },
+    {
+      "path": "data/tlg0057/tlg091/tlg0057.tlg091.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3365d2b83e1db3d8c5387ff28bc17dac0b7d04c6",
+      "size": 1164580,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/3365d2b83e1db3d8c5387ff28bc17dac0b7d04c6"
+    },
+    {
+      "path": "data/tlg0057/tlg091/tlg0057.tlg091.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0686eb93121a47537d78370dd15723f93085aa77",
+      "size": 624326,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/0686eb93121a47537d78370dd15723f93085aa77"
+    },
+    {
+      "path": "data/tlg0057/tlg092",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "e8da47765080c09aad7dc1d65a2cfa02b506559a",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/e8da47765080c09aad7dc1d65a2cfa02b506559a"
+    },
+    {
+      "path": "data/tlg0057/tlg092/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0953a893940363f1f0ad12a31e2b07397f95a658",
+      "size": 540,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/0953a893940363f1f0ad12a31e2b07397f95a658"
+    },
+    {
+      "path": "data/tlg0057/tlg092/tlg0057.tlg092.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "063babc463648e94afd75b58cda79620b88f91fe",
+      "size": 1517161,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/063babc463648e94afd75b58cda79620b88f91fe"
+    },
+    {
+      "path": "data/tlg0057/tlg092/tlg0057.tlg092.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5b9b232b54f29feee903d9f7c484cd250a4c4180",
+      "size": 807169,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/5b9b232b54f29feee903d9f7c484cd250a4c4180"
+    },
+    {
+      "path": "data/tlg0057/tlg093",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "d380008c33cfa97097796a6bee2ff310b46a5055",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/d380008c33cfa97097796a6bee2ff310b46a5055"
+    },
+    {
+      "path": "data/tlg0057/tlg093/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7e96e9e0669abff73e9dc14eda6a8de537449ba9",
+      "size": 458,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/7e96e9e0669abff73e9dc14eda6a8de537449ba9"
+    },
+    {
+      "path": "data/tlg0057/tlg093/tlg0057.tlg093.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "09661452a1b48788c8c7e360a24fa8a8a97c0c87",
+      "size": 119610,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/09661452a1b48788c8c7e360a24fa8a8a97c0c87"
+    },
+    {
+      "path": "data/tlg0057/tlg093/tlg0057.tlg093.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "98f7f6af840221804c42cc663a373117873ae405",
+      "size": 64547,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/98f7f6af840221804c42cc663a373117873ae405"
+    },
+    {
+      "path": "data/tlg0057/tlg094",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "1d72373edd384d879c9df9d67b367c30aef769c7",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/1d72373edd384d879c9df9d67b367c30aef769c7"
+    },
+    {
+      "path": "data/tlg0057/tlg094/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0debc92b0ee5824bf7d1f9bc4e5dbe4642d64199",
+      "size": 611,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/0debc92b0ee5824bf7d1f9bc4e5dbe4642d64199"
+    },
+    {
+      "path": "data/tlg0057/tlg094/tlg0057.tlg094.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cfe5a4be7d63c7e85bdcf70c50c840d8100bdd43",
+      "size": 126962,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/cfe5a4be7d63c7e85bdcf70c50c840d8100bdd43"
+    },
+    {
+      "path": "data/tlg0057/tlg094/tlg0057.tlg094.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9c8a3f4f7e1273f673d9c26cd07dcba5e87bd477",
+      "size": 68627,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/9c8a3f4f7e1273f673d9c26cd07dcba5e87bd477"
+    },
+    {
+      "path": "data/tlg0057/tlg095",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "aedda51bd245196efb88b41c5ad518d0fd8558ce",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/aedda51bd245196efb88b41c5ad518d0fd8558ce"
+    },
+    {
+      "path": "data/tlg0057/tlg095/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f7310647abcb7f6a0686d79ea3fb517e2d1dfde5",
+      "size": 519,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/f7310647abcb7f6a0686d79ea3fb517e2d1dfde5"
+    },
+    {
+      "path": "data/tlg0057/tlg095/tlg0057.tlg095.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c82cb10ab1ad13d8036f2608e2d4ddd228d24f28",
+      "size": 993689,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/c82cb10ab1ad13d8036f2608e2d4ddd228d24f28"
+    },
+    {
+      "path": "data/tlg0057/tlg095/tlg0057.tlg095.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "bf7407d41e702edec7b507e076685cf9014cad48",
+      "size": 523208,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/bf7407d41e702edec7b507e076685cf9014cad48"
+    },
+    {
+      "path": "data/tlg0057/tlg096",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "99ce638c3dfa718b7da47e01ed8971e8c35fcfcc",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/99ce638c3dfa718b7da47e01ed8971e8c35fcfcc"
+    },
+    {
+      "path": "data/tlg0057/tlg096/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "94de8000d0836086f217072dde0e4868dd710a06",
+      "size": 603,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/94de8000d0836086f217072dde0e4868dd710a06"
+    },
+    {
+      "path": "data/tlg0057/tlg096/tlg0057.tlg096.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4e4cee0701f35ec116c3ca0623accff98cb18fc5",
+      "size": 167735,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/4e4cee0701f35ec116c3ca0623accff98cb18fc5"
+    },
+    {
+      "path": "data/tlg0057/tlg096/tlg0057.tlg096.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "67d6b48e7fcbf8d1568c94c613fbc11e72980cea",
+      "size": 87450,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/67d6b48e7fcbf8d1568c94c613fbc11e72980cea"
+    },
+    {
+      "path": "data/tlg0057/tlg099",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "47ca8886fb4ac1471137b3d604b1ee088e408708",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/47ca8886fb4ac1471137b3d604b1ee088e408708"
+    },
+    {
+      "path": "data/tlg0057/tlg099/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a10b1a458ff178b06d3758032af792e21e14fb77",
+      "size": 497,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/a10b1a458ff178b06d3758032af792e21e14fb77"
+    },
+    {
+      "path": "data/tlg0057/tlg099/tlg0057.tlg099.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7f33641de62dad92d19b210be29355b98f87190d",
+      "size": 673155,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/7f33641de62dad92d19b210be29355b98f87190d"
+    },
+    {
+      "path": "data/tlg0057/tlg099/tlg0057.tlg099.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b598193f6d36e8cbcf02b5dfde46c520daa28572",
+      "size": 357355,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/b598193f6d36e8cbcf02b5dfde46c520daa28572"
+    },
+    {
+      "path": "data/tlg0057/tlg100",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "61695abc5c24ed928f73bbc3fa8ac86f9b880a3b",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/61695abc5c24ed928f73bbc3fa8ac86f9b880a3b"
+    },
+    {
+      "path": "data/tlg0057/tlg100/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b03f9d928aaabd6da9100d239eb6447c849a78eb",
+      "size": 497,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/b03f9d928aaabd6da9100d239eb6447c849a78eb"
+    },
+    {
+      "path": "data/tlg0057/tlg100/tlg0057.tlg100.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cabdcbb25d19b9d68ccd823553113c838d40d7fc",
+      "size": 664974,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/cabdcbb25d19b9d68ccd823553113c838d40d7fc"
+    },
+    {
+      "path": "data/tlg0057/tlg100/tlg0057.tlg100.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "085fb3353109ee406711f8747a65d1ba5efa358c",
+      "size": 351073,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/085fb3353109ee406711f8747a65d1ba5efa358c"
+    },
+    {
+      "path": "data/tlg0057/tlg101",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "318d4bc7824344eab262bd17beae34e661c46ece",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/318d4bc7824344eab262bd17beae34e661c46ece"
+    },
+    {
+      "path": "data/tlg0057/tlg101/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "bbebac210ccf4d99885ece6e8ea78f6f3b5568b1",
+      "size": 515,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/bbebac210ccf4d99885ece6e8ea78f6f3b5568b1"
+    },
+    {
+      "path": "data/tlg0057/tlg101/tlg0057.tlg101.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "76bc5778ccda61f9d82d0091990c7815fb80848d",
+      "size": 629626,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/76bc5778ccda61f9d82d0091990c7815fb80848d"
+    },
+    {
+      "path": "data/tlg0057/tlg101/tlg0057.tlg101.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8a1e86c121123ee108583e35233a86729cc0ec5d",
+      "size": 339934,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/8a1e86c121123ee108583e35233a86729cc0ec5d"
+    },
+    {
+      "path": "data/tlg0057/tlg102",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "a433c4bb052917e776bd9adf8ebad33ffd81b069",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/a433c4bb052917e776bd9adf8ebad33ffd81b069"
+    },
+    {
+      "path": "data/tlg0057/tlg102/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e18331cb3b1687a8173155b8eab6381f535c32b1",
+      "size": 524,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/e18331cb3b1687a8173155b8eab6381f535c32b1"
+    },
+    {
+      "path": "data/tlg0057/tlg102/tlg0057.tlg102.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9df4505b17683287e58fe1268864c22500a8f834",
+      "size": 220309,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/9df4505b17683287e58fe1268864c22500a8f834"
+    },
+    {
+      "path": "data/tlg0057/tlg102/tlg0057.tlg102.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7539675ef235c5f2f56210ae80cdb73c66c651b6",
+      "size": 117120,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/7539675ef235c5f2f56210ae80cdb73c66c651b6"
+    },
+    {
+      "path": "data/tlg0057/tlg103",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "c40021297cb945c81c14edd29268320d12d4c8db",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/c40021297cb945c81c14edd29268320d12d4c8db"
+    },
+    {
+      "path": "data/tlg0057/tlg103/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "83d5c6e363838c5c76944c6e51676eab9dff70ec",
+      "size": 470,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/83d5c6e363838c5c76944c6e51676eab9dff70ec"
+    },
+    {
+      "path": "data/tlg0057/tlg103/tlg0057.tlg103.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "603fb0f95132aef99b9636be4e1f5d1282959627",
+      "size": 67005,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/603fb0f95132aef99b9636be4e1f5d1282959627"
+    },
+    {
+      "path": "data/tlg0057/tlg104",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "b59dd046628c5dee67c3bf36eaf29bbadf17a23d",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/b59dd046628c5dee67c3bf36eaf29bbadf17a23d"
+    },
+    {
+      "path": "data/tlg0057/tlg104/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a768dd345e671fe2d41198a7eb43a77b70250f38",
+      "size": 522,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/a768dd345e671fe2d41198a7eb43a77b70250f38"
+    },
+    {
+      "path": "data/tlg0057/tlg104/tlg0057.tlg104.verbatim-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "653fa1208eb4c0bb0752efdb5d8fbd3a1d160f5d",
+      "size": 100083,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/653fa1208eb4c0bb0752efdb5d8fbd3a1d160f5d"
+    },
+    {
+      "path": "data/tlg0057/tlg104/tlg0057.tlg104.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d37644105e617f3f406bea6da34c0807405f3122",
+      "size": 54467,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/d37644105e617f3f406bea6da34c0807405f3122"
+    },
+    {
+      "path": "data/tlg0057/tlg105",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "9f0fe4387af77f0d3760c28c900ef99a59113b0e",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/9f0fe4387af77f0d3760c28c900ef99a59113b0e"
+    },
+    {
+      "path": "data/tlg0057/tlg105/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f89a3d736f7a79bc20d12849f7fa29e5186116e0",
+      "size": 564,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/f89a3d736f7a79bc20d12849f7fa29e5186116e0"
+    },
+    {
+      "path": "data/tlg0057/tlg105/tlg0057.tlg105.verbatim-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4b8c85660aec03ac535eb6282b72e1eb914047e8",
+      "size": 37471,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/4b8c85660aec03ac535eb6282b72e1eb914047e8"
+    },
+    {
+      "path": "data/tlg0057/tlg105/tlg0057.tlg105.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8c82174da489a0b4114f61a131f51fb2a55f35ea",
+      "size": 23520,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/8c82174da489a0b4114f61a131f51fb2a55f35ea"
+    },
+    {
+      "path": "data/tlg0057/tlg106",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "1782adf8fb78a8f688a6a2fbded97a13440b01e6",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/1782adf8fb78a8f688a6a2fbded97a13440b01e6"
+    },
+    {
+      "path": "data/tlg0057/tlg106/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7a460d3ae63b59f6cc7146ac925569e72a3105ff",
+      "size": 542,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/7a460d3ae63b59f6cc7146ac925569e72a3105ff"
+    },
+    {
+      "path": "data/tlg0057/tlg106/tlg0057.tlg106.verbatim-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d2068892edf525831389fadb986a98d4d8a31399",
+      "size": 185263,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/d2068892edf525831389fadb986a98d4d8a31399"
+    },
+    {
+      "path": "data/tlg0057/tlg106/tlg0057.tlg106.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8e7ce752dc43e7bbe0004c1e7ab426d4d551c074",
+      "size": 166604,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/8e7ce752dc43e7bbe0004c1e7ab426d4d551c074"
+    },
+    {
+      "path": "data/tlg0057/tlg107",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "8601534f5947b3c7d0d6a48f7c0260c2f4cb37ac",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/8601534f5947b3c7d0d6a48f7c0260c2f4cb37ac"
+    },
+    {
+      "path": "data/tlg0057/tlg107/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9b06c385cbc2848e651126e4bf07bbc2e2c54659",
+      "size": 479,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/9b06c385cbc2848e651126e4bf07bbc2e2c54659"
+    },
+    {
+      "path": "data/tlg0057/tlg107/tlg0057.tlg107.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0599ce301070209eba583e295b2dcd40c5c94a0c",
+      "size": 25138,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/0599ce301070209eba583e295b2dcd40c5c94a0c"
+    },
+    {
+      "path": "data/tlg0057/tlg111",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "be406675fe9c91e0ee02defd2cc2d87a25b088df",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/be406675fe9c91e0ee02defd2cc2d87a25b088df"
+    },
+    {
+      "path": "data/tlg0057/tlg111/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "353df596337a1be479dfd0753f0d730c4a0a29cb",
+      "size": 550,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/353df596337a1be479dfd0753f0d730c4a0a29cb"
+    },
+    {
+      "path": "data/tlg0057/tlg111/tlg0057.tlg111.verbatim-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c44a184989bb3f6f1f279a16a87fcbe7e2f27ab3",
+      "size": 56271,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/c44a184989bb3f6f1f279a16a87fcbe7e2f27ab3"
+    },
+    {
+      "path": "data/tlg0057/tlg111/tlg0057.tlg111.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "52f9589574454539f7ae9e442b6f89bb766761b3",
+      "size": 34063,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/52f9589574454539f7ae9e442b6f89bb766761b3"
+    },
+    {
+      "path": "data/tlg0057/tlg114",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "dc0b037f9ffd59f3920201f17b4e0d758b5fd658",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/dc0b037f9ffd59f3920201f17b4e0d758b5fd658"
+    },
+    {
+      "path": "data/tlg0057/tlg114/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "deafb61705c76cfe8ce843d81eff1a9aba48152c",
+      "size": 485,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/deafb61705c76cfe8ce843d81eff1a9aba48152c"
+    },
+    {
+      "path": "data/tlg0057/tlg114/tlg0057.tlg114.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "647d0ed6bbbe05f21cfca9608c473854db8e276f",
+      "size": 24333,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/647d0ed6bbbe05f21cfca9608c473854db8e276f"
+    },
+    {
+      "path": "data/tlg0057/tlg114/tlg0057.tlg114.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6c894b565d8a2c763074b245f31fac96d5c5a3f5",
+      "size": 14714,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/6c894b565d8a2c763074b245f31fac96d5c5a3f5"
+    },
+    {
+      "path": "data/tlg0057/tlg115",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "fe3dccd90488795f40993da40e52b5b2e05b090b",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/fe3dccd90488795f40993da40e52b5b2e05b090b"
+    },
+    {
+      "path": "data/tlg0057/tlg115/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "78ee664363d074790c26bed8e951d71f1a636dcf",
+      "size": 578,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/78ee664363d074790c26bed8e951d71f1a636dcf"
+    },
+    {
+      "path": "data/tlg0057/tlg115/tlg0057.tlg115.verbatim-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "750c93a76bdcfacfc4c2ff870044233216840ece",
+      "size": 24161,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/750c93a76bdcfacfc4c2ff870044233216840ece"
+    },
+    {
+      "path": "data/tlg0057/tlg115/tlg0057.tlg115.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "297848e7d8cf9075da0ebf53f6f2532a6d348dcb",
+      "size": 16945,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/297848e7d8cf9075da0ebf53f6f2532a6d348dcb"
+    },
+    {
+      "path": "data/tlg0530",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "b48058109d13cee47c697589daf6d7c5642e270a",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/b48058109d13cee47c697589daf6d7c5642e270a"
+    },
+    {
+      "path": "data/tlg0530/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ba58afcf88a7759c38f151af6ef4a0b2c6594fb9",
+      "size": 165,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/ba58afcf88a7759c38f151af6ef4a0b2c6594fb9"
+    },
+    {
+      "path": "data/tlg0530/tlg002",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "af835eddacb8c92f350848f8ce33a369ec7ef5c5",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/af835eddacb8c92f350848f8ce33a369ec7ef5c5"
+    },
+    {
+      "path": "data/tlg0530/tlg002/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1c78a4f6d5e8525d113c564015607993fcef5faf",
+      "size": 563,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/1c78a4f6d5e8525d113c564015607993fcef5faf"
+    },
+    {
+      "path": "data/tlg0530/tlg002/tlg0530.tlg002.verbatim-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "35e761955a2f0e2c7b33490208f179cb7de2d633",
+      "size": 61107,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/35e761955a2f0e2c7b33490208f179cb7de2d633"
+    },
+    {
+      "path": "data/tlg0530/tlg002/tlg0530.tlg002.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "62478cc3b0f98b3f6b23fa52d81327bce15ace67",
+      "size": 35368,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/62478cc3b0f98b3f6b23fa52d81327bce15ace67"
+    },
+    {
+      "path": "data/tlg0530/tlg005",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "d28d5e4e35c746aa36f43c0f0e36a58adcf08cf8",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/d28d5e4e35c746aa36f43c0f0e36a58adcf08cf8"
+    },
+    {
+      "path": "data/tlg0530/tlg005/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c4fa3bd73f2a357e03440b62b80e3e0df5f76bb0",
+      "size": 523,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/c4fa3bd73f2a357e03440b62b80e3e0df5f76bb0"
+    },
+    {
+      "path": "data/tlg0530/tlg005/tlg0530.tlg005.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "351d2bfaef81224a145ff7de3b5198c8d0798363",
+      "size": 151539,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/351d2bfaef81224a145ff7de3b5198c8d0798363"
+    },
+    {
+      "path": "data/tlg0530/tlg005/tlg0530.tlg005.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "877e0080d336569a6bccff54ec22b3d81ba32823",
+      "size": 86726,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/877e0080d336569a6bccff54ec22b3d81ba32823"
+    },
+    {
+      "path": "data/tlg0530/tlg006",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "e61b35068594d1cca481603d7931217329527bb6",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/e61b35068594d1cca481603d7931217329527bb6"
+    },
+    {
+      "path": "data/tlg0530/tlg006/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8d1cb10bea51647ca7d647f63e1db4d5a133896d",
+      "size": 704,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/8d1cb10bea51647ca7d647f63e1db4d5a133896d"
+    },
+    {
+      "path": "data/tlg0530/tlg006/tlg0530.tlg006.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "eadf562ccd983395e9256b0a403a26a05ad837a4",
+      "size": 147597,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/eadf562ccd983395e9256b0a403a26a05ad837a4"
+    },
+    {
+      "path": "data/tlg0530/tlg009",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "96ba62fbd5709461349573bb085e7336c10f217b",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/96ba62fbd5709461349573bb085e7336c10f217b"
+    },
+    {
+      "path": "data/tlg0530/tlg009/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ae3e7a0923cbed45cd8290a56a29478f103dd525",
+      "size": 525,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/ae3e7a0923cbed45cd8290a56a29478f103dd525"
+    },
+    {
+      "path": "data/tlg0530/tlg009/tlg0530.tlg009.verbatim-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "96573b97c8d11d14ac15ae47f5f005ec92c087db",
+      "size": 33034,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/96573b97c8d11d14ac15ae47f5f005ec92c087db"
+    },
+    {
+      "path": "data/tlg0530/tlg009/tlg0530.tlg009.verbatim-grc2.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ab4c95969d4198a639834eea3ee557256d94e1b3",
+      "size": 41975,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/ab4c95969d4198a639834eea3ee557256d94e1b3"
+    },
+    {
+      "path": "data/tlg0530/tlg009/tlg0530.tlg009.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b2849cc52e443d115f10deb2252f2b963ac96209",
+      "size": 21987,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/b2849cc52e443d115f10deb2252f2b963ac96209"
+    },
+    {
+      "path": "data/tlg0530/tlg009/tlg0530.tlg009.verbatim-lat2.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "14fccd04d22f8f768aa8e0d439cede8271b49079",
+      "size": 21915,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/14fccd04d22f8f768aa8e0d439cede8271b49079"
+    },
+    {
+      "path": "data/tlg0530/tlg012",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "7c8f1f38d7beb52b001cac5c9f78de643d255f15",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/7c8f1f38d7beb52b001cac5c9f78de643d255f15"
+    },
+    {
+      "path": "data/tlg0530/tlg012/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "61dcd5d988b98c23514ffe708a05f5d60ec2e908",
+      "size": 562,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/61dcd5d988b98c23514ffe708a05f5d60ec2e908"
+    },
+    {
+      "path": "data/tlg0530/tlg012/tlg0530.tlg012.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d1ba28e0dff8c968ca288de659cf6bd907dd6dfc",
+      "size": 283028,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/d1ba28e0dff8c968ca288de659cf6bd907dd6dfc"
+    },
+    {
+      "path": "data/tlg0530/tlg012/tlg0530.tlg012.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b29ba735bae1ed1c9564790b774fea06316a0479",
+      "size": 147233,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/b29ba735bae1ed1c9564790b774fea06316a0479"
+    },
+    {
+      "path": "data/tlg0530/tlg022",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "55e18d022e693e1ca9c5e1fbca48e2ce6b1a3339",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/55e18d022e693e1ca9c5e1fbca48e2ce6b1a3339"
+    },
+    {
+      "path": "data/tlg0530/tlg022/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "978e916a66b8b0ce04adb3ec8f79c2d0dc90f678",
+      "size": 551,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/978e916a66b8b0ce04adb3ec8f79c2d0dc90f678"
+    },
+    {
+      "path": "data/tlg0530/tlg022/tlg0530.tlg022.verbatim-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ff502be2501d4b704ad2d1a19090314b70f14816",
+      "size": 69751,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/ff502be2501d4b704ad2d1a19090314b70f14816"
+    },
+    {
+      "path": "data/tlg0530/tlg022/tlg0530.tlg022.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c4a01ea1dbe7d6f732464ccb3909c732f9731b53",
+      "size": 52066,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/c4a01ea1dbe7d6f732464ccb3909c732f9731b53"
+    },
+    {
+      "path": "data/tlg0530/tlg023",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "382c686ed8151cd39c4c965644be9aedec83ef78",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/382c686ed8151cd39c4c965644be9aedec83ef78"
+    },
+    {
+      "path": "data/tlg0530/tlg023/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "10feca1f51568f990d26f2be9999b37816d402bf",
+      "size": 569,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/10feca1f51568f990d26f2be9999b37816d402bf"
+    },
+    {
+      "path": "data/tlg0530/tlg023/tlg0530.tlg023.verbatim-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0667b79da431cf8addb639d2d642f80eba0ba646",
+      "size": 22836,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/0667b79da431cf8addb639d2d642f80eba0ba646"
+    },
+    {
+      "path": "data/tlg0530/tlg023/tlg0530.tlg023.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cf0be527376b32df5a79f49ec2a6ff62dab2acc8",
+      "size": 15877,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/cf0be527376b32df5a79f49ec2a6ff62dab2acc8"
+    },
+    {
+      "path": "data/tlg0530/tlg024",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "4eeba84eed3c14234d67491f8efba1ce7c82020d",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/4eeba84eed3c14234d67491f8efba1ce7c82020d"
+    },
+    {
+      "path": "data/tlg0530/tlg024/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b7d16c348da5d86e5ca22715d79fa3c5a5d9b2e3",
+      "size": 595,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/b7d16c348da5d86e5ca22715d79fa3c5a5d9b2e3"
+    },
+    {
+      "path": "data/tlg0530/tlg024/tlg0530.tlg024.verbatim-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d9109d62e39f5d81722d2110561c37a1772a8744",
+      "size": 102249,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/d9109d62e39f5d81722d2110561c37a1772a8744"
+    },
+    {
+      "path": "data/tlg0530/tlg024/tlg0530.tlg024.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6379b2601a2ccc29610ed7306aeaaf6d5adc68aa",
+      "size": 59125,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/6379b2601a2ccc29610ed7306aeaaf6d5adc68aa"
+    },
+    {
+      "path": "data/tlg0530/tlg026",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "764200f3f5b25eda8f72925380321e4e80160de4",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/764200f3f5b25eda8f72925380321e4e80160de4"
+    },
+    {
+      "path": "data/tlg0530/tlg026/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5ed04a5b9044f1c22b350148e13cd9a6dd9fc3b0",
+      "size": 621,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/5ed04a5b9044f1c22b350148e13cd9a6dd9fc3b0"
+    },
+    {
+      "path": "data/tlg0530/tlg026/tlg0530.tlg026.verbatim-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3422a4f467d4eaf5012fd7c5b062231175b76a5f",
+      "size": 38334,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/3422a4f467d4eaf5012fd7c5b062231175b76a5f"
+    },
+    {
+      "path": "data/tlg0530/tlg026/tlg0530.tlg026.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d7ce321381c99b5534fb64f86329e5564711a8f3",
+      "size": 23326,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/d7ce321381c99b5534fb64f86329e5564711a8f3"
+    },
+    {
+      "path": "data/tlg0530/tlg029",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "0b3910f81827da86874680b533b6429ee445885b",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/0b3910f81827da86874680b533b6429ee445885b"
+    },
+    {
+      "path": "data/tlg0530/tlg029/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ec26c0750f593592f7885b64fddf12e5e494f8ac",
+      "size": 562,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/ec26c0750f593592f7885b64fddf12e5e494f8ac"
+    },
+    {
+      "path": "data/tlg0530/tlg029/tlg0530.tlg029.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "97409047cc27de4aade02ea0e7396b3882c82c4c",
+      "size": 654244,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/97409047cc27de4aade02ea0e7396b3882c82c4c"
+    },
+    {
+      "path": "data/tlg0530/tlg029/tlg0530.tlg029.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c82ee0f97742f6f566da5777219b6402268dd229",
+      "size": 393016,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/c82ee0f97742f6f566da5777219b6402268dd229"
+    },
+    {
+      "path": "data/tlg0530/tlg031",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "64aa8e29dc739d458e6aa27b1024cc29b01d75b2",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/64aa8e29dc739d458e6aa27b1024cc29b01d75b2"
+    },
+    {
+      "path": "data/tlg0530/tlg031/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "746ddbf6d14f4f0f09165367b4bdeba405bccf6c",
+      "size": 529,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/746ddbf6d14f4f0f09165367b4bdeba405bccf6c"
+    },
+    {
+      "path": "data/tlg0530/tlg031/tlg0530.tlg031.verbatim-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e03f6347dd2a850180b62d15fc8879a9b886c264",
+      "size": 58820,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/e03f6347dd2a850180b62d15fc8879a9b886c264"
+    },
+    {
+      "path": "data/tlg0530/tlg031/tlg0530.tlg031.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b1fd2ffe6c1f2b853d01efb902748bdd07e089ad",
+      "size": 40040,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/b1fd2ffe6c1f2b853d01efb902748bdd07e089ad"
+    },
+    {
+      "path": "data/tlg0530/tlg032",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "45bfac0ef48429f4c00a929890e792feddfdbd72",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/45bfac0ef48429f4c00a929890e792feddfdbd72"
+    },
+    {
+      "path": "data/tlg0530/tlg032/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "13897a1c0f4a5649223429b5a3f621b7a44c4777",
+      "size": 570,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/13897a1c0f4a5649223429b5a3f621b7a44c4777"
+    },
+    {
+      "path": "data/tlg0530/tlg032/tlg0530.tlg032.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9bd1933f27e4083e090fc89d9003696619f1042b",
+      "size": 46313,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/9bd1933f27e4083e090fc89d9003696619f1042b"
+    },
+    {
+      "path": "data/tlg0530/tlg032/tlg0530.tlg032.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0c346179a583904fc083b8d71cf5816048a1daba",
+      "size": 26296,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/0c346179a583904fc083b8d71cf5816048a1daba"
+    },
+    {
+      "path": "data/tlg0530/tlg033",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "fc80bd67059a9894d24cf722c14bcb903a713255",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/fc80bd67059a9894d24cf722c14bcb903a713255"
+    },
+    {
+      "path": "data/tlg0530/tlg033/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "40cea0fbc79efb597e781c1992a00dbbf4aacd62",
+      "size": 519,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/40cea0fbc79efb597e781c1992a00dbbf4aacd62"
+    },
+    {
+      "path": "data/tlg0530/tlg033/tlg0530.tlg033.verbatim-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "771a9e51371207776661b30a611e1a4b88557aac",
+      "size": 70218,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/771a9e51371207776661b30a611e1a4b88557aac"
+    },
+    {
+      "path": "data/tlg0530/tlg033/tlg0530.tlg033.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f9d66358d67b06c856b9abef4263d75dd83db212",
+      "size": 44545,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/f9d66358d67b06c856b9abef4263d75dd83db212"
+    },
+    {
+      "path": "data/tlg0530/tlg034",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "45367a69c5cbb63e47032977e9f98ae2ba1d548b",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/45367a69c5cbb63e47032977e9f98ae2ba1d548b"
+    },
+    {
+      "path": "data/tlg0530/tlg034/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2bf8f8dc252567ee53db0704e4dd4e3d205fea2f",
+      "size": 541,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/2bf8f8dc252567ee53db0704e4dd4e3d205fea2f"
+    },
+    {
+      "path": "data/tlg0530/tlg034/tlg0530.tlg034.verbatim-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fbf009fdfdf52b492516ab6f31a01b94d6f9da90",
+      "size": 22949,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/fbf009fdfdf52b492516ab6f31a01b94d6f9da90"
+    },
+    {
+      "path": "data/tlg0530/tlg034/tlg0530.tlg034.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fb33f0bfcc7e5416aa7b38ee916afbb232779da3",
+      "size": 15821,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/fb33f0bfcc7e5416aa7b38ee916afbb232779da3"
+    },
+    {
+      "path": "data/tlg0530/tlg035",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "4e6d478129f9bbdb0b304395339bb83596dcccde",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/4e6d478129f9bbdb0b304395339bb83596dcccde"
+    },
+    {
+      "path": "data/tlg0530/tlg035/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "dc09d95ad8fbbd10d1f8ffb4a1c394a3208d2006",
+      "size": 601,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/dc09d95ad8fbbd10d1f8ffb4a1c394a3208d2006"
+    },
+    {
+      "path": "data/tlg0530/tlg035/tlg0530.tlg035.verbatim-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "56d8e777303c676398d799a8c62061fe385707b9",
+      "size": 52677,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/56d8e777303c676398d799a8c62061fe385707b9"
+    },
+    {
+      "path": "data/tlg0530/tlg035/tlg0530.tlg035.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6e3a621585b844dca63a28f194e3b5b85f33008a",
+      "size": 31257,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/6e3a621585b844dca63a28f194e3b5b85f33008a"
+    },
+    {
+      "path": "data/tlg0530/tlg036",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "4991fad946bcab35d97564b3554bc7143b5f8bd8",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/4991fad946bcab35d97564b3554bc7143b5f8bd8"
+    },
+    {
+      "path": "data/tlg0530/tlg036/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a862959ee0f762af072f2dd14fb57d031c15e912",
+      "size": 535,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/a862959ee0f762af072f2dd14fb57d031c15e912"
+    },
+    {
+      "path": "data/tlg0530/tlg036/tlg0530.tlg036.verbatim-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c6017959c594e9442fd0f0f8f6e4e912ab001587",
+      "size": 28871,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/c6017959c594e9442fd0f0f8f6e4e912ab001587"
+    },
+    {
+      "path": "data/tlg0530/tlg036/tlg0530.tlg036.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6ed8228fd0e9fa75ed79bf354f9f47adc62e9289",
+      "size": 18939,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/6ed8228fd0e9fa75ed79bf354f9f47adc62e9289"
+    },
+    {
+      "path": "data/tlg0530/tlg037",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "085a7b9e2d319c7c1858d1744ed92b1da8acd2d4",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/085a7b9e2d319c7c1858d1744ed92b1da8acd2d4"
+    },
+    {
+      "path": "data/tlg0530/tlg037/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "831a890cd357679bb5599f811b5ba62a08a2828c",
+      "size": 577,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/831a890cd357679bb5599f811b5ba62a08a2828c"
+    },
+    {
+      "path": "data/tlg0530/tlg037/tlg0530.tlg037.verbatim-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7b782b8249c0e5566dc6e8101ddf3b88e67b3260",
+      "size": 91824,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/7b782b8249c0e5566dc6e8101ddf3b88e67b3260"
+    },
+    {
+      "path": "data/tlg0530/tlg037/tlg0530.tlg037.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "74d6d1f023ef91149ef4e84a1fa75aca5c46c978",
+      "size": 55170,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/74d6d1f023ef91149ef4e84a1fa75aca5c46c978"
+    },
+    {
+      "path": "data/tlg0530/tlg041",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "a9f3cc074fb06592b1b1a930b53fd0d6bd836a09",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/a9f3cc074fb06592b1b1a930b53fd0d6bd836a09"
+    },
+    {
+      "path": "data/tlg0530/tlg041/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c5a4c3e06a1098660925a5bf6b13f49b23ecf17b",
+      "size": 541,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/c5a4c3e06a1098660925a5bf6b13f49b23ecf17b"
+    },
+    {
+      "path": "data/tlg0530/tlg041/tlg0530.tlg041.verbatim-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "714956c6a51c6a5b9aa6d7f5f0b104a1b5bfd084",
+      "size": 290740,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/714956c6a51c6a5b9aa6d7f5f0b104a1b5bfd084"
+    },
+    {
+      "path": "data/tlg0530/tlg041/tlg0530.tlg041.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "62850d59d37ae743f6b2cdd41b425e3de1d50e37",
+      "size": 187540,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/62850d59d37ae743f6b2cdd41b425e3de1d50e37"
+    },
+    {
+      "path": "data/tlg0530/tlg042",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "1d22adc21c0df8c33dd9e3ea752eba25cdb7ac49",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/1d22adc21c0df8c33dd9e3ea752eba25cdb7ac49"
+    },
+    {
+      "path": "data/tlg0530/tlg042/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7dac32df6fd4a63cdb0f46a413748da54670567a",
+      "size": 545,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/7dac32df6fd4a63cdb0f46a413748da54670567a"
+    },
+    {
+      "path": "data/tlg0530/tlg042/tlg0530.tlg042.verbatim-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9998613d9cfdd962fedfe5f74a4e85af2f52cf4a",
+      "size": 256758,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/9998613d9cfdd962fedfe5f74a4e85af2f52cf4a"
+    },
+    {
+      "path": "data/tlg0530/tlg042/tlg0530.tlg042.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d1ad37f345545c22f14ea40dcac1184d34898496",
+      "size": 147785,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/d1ad37f345545c22f14ea40dcac1184d34898496"
+    },
+    {
+      "path": "data/tlg0530/tlg043",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "d2f0d139fcf5fff71aecbdfb801ac18f37e16474",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/d2f0d139fcf5fff71aecbdfb801ac18f37e16474"
+    },
+    {
+      "path": "data/tlg0530/tlg043/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b8e033828b03321216a62674cd1bba8949244980",
+      "size": 575,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/b8e033828b03321216a62674cd1bba8949244980"
+    },
+    {
+      "path": "data/tlg0530/tlg043/tlg0530.tlg043.1st1K-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3858e00232cc158bd89bf6041ff265322a08a919",
+      "size": 275193,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/3858e00232cc158bd89bf6041ff265322a08a919"
+    },
+    {
+      "path": "data/tlg0530/tlg043/tlg0530.tlg043.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "dd58c6b0695e4182fe4012d62d293a17e702b148",
+      "size": 140399,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/dd58c6b0695e4182fe4012d62d293a17e702b148"
+    },
+    {
+      "path": "data/tlg0530/tlg045",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "66a8f9e2a126fa82f97b14fbad2798a2303a6674",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/66a8f9e2a126fa82f97b14fbad2798a2303a6674"
+    },
+    {
+      "path": "data/tlg0530/tlg045/__cts__.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3bd0205f3012ce7cf2393d727cc4aa1400f8198c",
+      "size": 613,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/3bd0205f3012ce7cf2393d727cc4aa1400f8198c"
+    },
+    {
+      "path": "data/tlg0530/tlg045/tlg0530.tlg045.verbatim-grc1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1527beab97280e654bd316a2fbc399aa63b8ed67",
+      "size": 126774,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/1527beab97280e654bd316a2fbc399aa63b8ed67"
+    },
+    {
+      "path": "data/tlg0530/tlg045/tlg0530.tlg045.verbatim-lat1.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c39d1acd394f780d74b5806e6711d01a5e632d32",
+      "size": 70357,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/c39d1acd394f780d74b5806e6711d01a5e632d32"
+    },
+    {
+      "path": "editions.exs",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f7ef820435bb01e5e5021b0655ff8f8be6ecebb9",
+      "size": 8294,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/f7ef820435bb01e5e5021b0655ff8f8be6ecebb9"
+    },
+    {
+      "path": "main.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "bbbbf4b1d945cb79c80faf474b7449ffb35513f5",
+      "size": 2356,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/bbbbf4b1d945cb79c80faf474b7449ffb35513f5"
+    },
+    {
+      "path": "pyproject.toml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "60c27d6f47755871f4188c4daae62c35eb6bc941",
+      "size": 297,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/60c27d6f47755871f4188c4daae62c35eb6bc941"
+    },
+    {
+      "path": "toc.html",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0b9b82c804d1b50cb5f93054de3bce0b560a1244",
+      "size": 1897380,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/0b9b82c804d1b50cb5f93054de3bce0b560a1244"
+    },
+    {
+      "path": "tools",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "8ac264e45650cce22642bb816b1684f5819c14d7",
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/trees/8ac264e45650cce22642bb816b1684f5819c14d7"
+    },
+    {
+      "path": "tools/Build.php",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d0117557a4b45e14b6ae15f236bcc08adae2da3a",
+      "size": 1985,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/d0117557a4b45e14b6ae15f236bcc08adae2da3a"
+    },
+    {
+      "path": "tools/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "tools/cts_divid.xsl",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ff405fcc2d30c567945b9936b1607268d95adf74",
+      "size": 1633,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/ff405fcc2d30c567945b9936b1607268d95adf74"
+    },
+    {
+      "path": "tools/galenus_lb.xsl",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "dcf92b40c7befef38bed546f14fcf24c63f58ef2",
+      "size": 8190,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/dcf92b40c7befef38bed546f14fcf24c63f58ef2"
+    },
+    {
+      "path": "tools/galenus_lbno.xsl",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f718b11466a983535fc24420cac2e82936a270cc",
+      "size": 1972,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/f718b11466a983535fc24420cac2e82936a270cc"
+    },
+    {
+      "path": "tools/galenus_lining.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "dcd4854ac834e13e292e50a35cf9e908d8d00e66",
+      "size": 4457,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/dcd4854ac834e13e292e50a35cf9e908d8d00e66"
+    },
+    {
+      "path": "tools/galenus_miles.xsl",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "03b50df5e0559e102643e43d53a5aa7488e84299",
+      "size": 1801,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/03b50df5e0559e102643e43d53a5aa7488e84299"
+    },
+    {
+      "path": "tools/galenus_numsect.xsl",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a65f135adf45490ca1bead93da850452a68fdaa0",
+      "size": 1054,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/a65f135adf45490ca1bead93da850452a68fdaa0"
+    },
+    {
+      "path": "tools/galenus_toc.xsl",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "def62714a55a73470c3aa751d89558dfb862eae2",
+      "size": 5267,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/def62714a55a73470c3aa751d89558dfb862eae2"
+    },
+    {
+      "path": "tools/galenus_verbatim.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "75e1571af90dc1adbecdfd7b6abee9adfa960627",
+      "size": 2559,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/75e1571af90dc1adbecdfd7b6abee9adfa960627"
+    },
+    {
+      "path": "tools/gv_document.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3c2c9098f8bcc1e5e28b135d0a8de953d2943063",
+      "size": 12476,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/3c2c9098f8bcc1e5e28b135d0a8de953d2943063"
+    },
+    {
+      "path": "tools/gv_lemmatizer.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ebe292f7c325749cf3c4562c59b5c374eaa8ceb9",
+      "size": 402,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/ebe292f7c325749cf3c4562c59b5c374eaa8ceb9"
+    },
+    {
+      "path": "tools/gv_sax_parser.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6b4c516d37071eac6302fda0b7be2d669db9a309",
+      "size": 6653,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/6b4c516d37071eac6302fda0b7be2d669db9a309"
+    },
+    {
+      "path": "unhandled_elements.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "15ee52f397c80bce7f73170c75ebe44ba8450a12",
+      "size": 130,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/15ee52f397c80bce7f73170c75ebe44ba8450a12"
+    },
+    {
+      "path": "uv.lock",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "af0cc6797ce9c1f39e6b452757eddb48b5793fe7",
+      "size": 23287,
+      "url": "https://api.github.com/repos/galenus-verbatim/galenus_cts/git/blobs/af0cc6797ce9c1f39e6b452757eddb48b5793fe7"
+    }
+  ],
+  "truncated": false
+}
