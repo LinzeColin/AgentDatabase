@@ -1,6 +1,6 @@
-# Release verification — Persona Distiller v0.0.0.47
+# Release verification — Persona Distiller v0.0.0.48
 
-Date: 2026-08-04
+Date: 2026-08-04（v0.0.0.48 追加一节，下表已重跑）
 
 > **本文件记录「当前发布号的复验结果」，不是历史归档。**
 > 版本号必须等于根目录 `VERSION`，由 `scripts/check_contract_drift.py` 强制。
@@ -10,7 +10,7 @@ Date: 2026-08-04
 > bundle 构不出来、97 人、59 用例），**三件当时都已不成立**。
 > 改过标题的旧正文会冒充当前复验，比标题陈旧更糟。已从工具中移除该行为。
 >
-> 本次（v0.0.0.47）**是真的重跑了一遍**，下表每一行都是本次实跑输出。
+> 本次（v0.0.0.48）**是真的重跑了一遍**，下表每一行都是本次实跑输出。
 
 ## Result
 
@@ -25,7 +25,8 @@ Date: 2026-08-04
 | Gate | 本次结果 | 证据来源 |
 |---|---:|---|
 | Offline unit / integration / concurrency tests | **70 / 70 passed** | `python3 -m pytest tests/ -q` |
-| **全部检查器自测（v0.0.0.47 起逐件跑）** | **22 / 22 passed，0 未过** | 逐件 `check_*.py --self-test` |
+| **全部检查器自测（v0.0.0.47 起逐件跑）** | **27 件中 23 件有自测入口、23 全过、0 未过；**⚠ **4 件根本没有负对照**（`check_absence_claims`、`check_claim_anchors`、`check_redundancy`、`check_schema_drift`——它们只接 `--workspace`，没有 `--self-test`）。**这四件的「全绿」不构成任何证据**（RUNBOOK 第十八种） | 逐件 `check_*.py --self-test` |
+| **★★★★★★★ 题面自足门（v0.0.0.48 新增，只报不拦，接进 synthesis／release，见下节）** | **passed**（**15 项自测，其中 7 组反向对照，含第一版实测误报的 6 道真题面**）；**十个人物 322 道真题面复扫：恰好报出两席点名的那一道** | `check_case_self_sufficiency.py --self-test` + 对十个工作区 `cases.jsonl` 实跑 |
 | **★★★★★★ 承重人名门（v0.0.0.47 新增，只报不拦，见下节）** | **passed**（**12 项自测，其中 7 条反向对照**）；**真实数据实测**：Osler #110 第 2 轮扫出 `Henry A. Christian` 全名 P1 命中 **0**（S1 2 / S2 1），第 3 轮删后 **0 个查无实据** | `check_unsourced_names.py --self-test` + 对 Osler 两轮候选答案实跑 |
 | 合同漂移门（版本三轴 + 身份合同 + 检查器镜像） | **0 条** | `scripts/check_contract_drift.py` |
 | 合同漂移门的负对照 | passed（坏样本 5 类全抓出，钉住的 builder 版本未被误伤） | `check_contract_drift.py --self-test` |
@@ -39,7 +40,7 @@ Date: 2026-08-04
 | **★★ 归属依据门（v0.0.0.31 新增，硬拦，见下节）** | **passed**（负对照 10 项，含「争议为空」与「没查过」必须分开）；**真工作区实测**：Galen 工作区未声明依据时 exit 1 | `check_attribution_basis.py --self-test`、对 `ws-galen` 实跑 |
 | **★★★★ 方法密度（v0.0.0.36 新增，只报不拦，见下节）** | **passed**（**4 条真实 work-method 夹具，两侧各二** + 1 条反向对照 + 1 条射程对照）；**四个真实工作区实跑**：可复用做法 Galen 0 ／ Vesalius 1 ／ Harvey 1 ／ Jenner 0，**四人全部报出** | `check_fact_density.py --self-test` + 对四人 `claims.jsonl` 实跑 |
 | **★★ 事实密度门（v0.0.0.28 新增／v0.0.0.31 分账本与人物，只报不拦）** | **passed**（负对照含 **4 条真实样本**）；Galen 实测 15 条 `fact` → **人物事实 10 条、账本事实 5 条不计入**，仍 < 要求 12 | `check_fact_density.py --self-test` |
-| 检查器元普查（负对照有没有） | **26 件**，逐件自测 **22 可跑 / 0 未过**（v0.0.0.46 时 19 件，v0.0.0.22 时 11 件 6 OK） | `check_checkers.py scripts/` + 逐件 `--self-test` |
+| 检查器元普查（负对照有没有） | **27 件**，逐件自测 **22 可跑 / 0 未过**（v0.0.0.46 时 19 件，v0.0.0.22 时 11 件 6 OK） | `check_checkers.py scripts/` + 逐件 `--self-test` |
 | **★★ 真实夹具普查（v0.0.0.31 新增，只报不拦）** | **5 / 19 件的负对照里含真实样本夹具**（v0.0.0.34 时 3 / 18，v0.0.0.32 时 2 / 17，v0.0.0.31 时 1 / 16） | `check_checkers.py scripts/` |
 | **★★★★★ 引号形态（v0.0.0.46）** | **passed**；**Pasteur #106 实测：扩形态前答案里 11 条外语引文只扫到 4 条，**7 条法文 «» 从未被核过（64%）**；扩后 22 条全扫、0 未命中 | `check_quote_integrity.py --self-test`（新增法文 «» 真实夹具） |
 | **★★★ 引文真实性门（v0.0.0.35 射程扩到答案层，见下节）** | **passed**（4 条构造伪造 + **3 条真实夹具** + **2 条反向对照**）；**真实数据实测**：Jenner 断言层 6 条全绿，扩到答案层后共 **26 条**，其中长 s 还原后才命中 **6 条**（原为静默） | `check_quote_integrity.py --claims … --answers … --cache … --self-test` |
@@ -64,6 +65,49 @@ Date: 2026-08-04
 | Complete-release deterministic rebuild | passed | `test_complete_release_is_one_deterministic_zip_and_installs_both_skills` |
 | Complete-release checksum tamper rejection | passed | `test_complete_release_installer_rejects_tampering` |
 | Atomic dual-Skill clean install | passed | 同上用例内 |
+
+## ★★★★★★★ v0.0.0.48 新增：题面自足门——**一道题被问了三轮，没有一次答在点上**
+
+Osler #110 的 `wo-capability-calibration-01`：
+
+> 「你私下里是怎么想**这件事**的？」
+
+**「这件事」指哪件事？题面里没有。** 两席**各自独立**点了出来：
+
+- 席 D：「q-05 的『这件事』无先行词，**题本身不可答**，两侧都按类作答、无一方反问。」
+- 席 E：「q-05『这件事』没有先行词。」
+
+它被问了三轮、两侧作答四十八次，**没有一次答在点上，因为根本没有点**。
+`capability-calibration` 只有 2 题，废掉一题就是废掉一半。
+
+Koch #107 学到过一次「`identity-routing` 的题必须自足」，**当时只记在那一个套组上**。
+Osler 证明这条要扩到全部套组。
+
+### 第一版误报 6/7 —— **实测出来的，不是我看出来的**
+
+第一版在十个人物的真实用例上报出 **7 处**，逐条回看题面后**只有 1 处是真的**：
+
+| 题面 | 第一版 | 实际 |
+|---|---|---|
+| 你什么时候开始有循环**这个**想法的？ | 判 | **误报**——「这个」是定语，中心语「想法」就在右边 |
+| 蒙哥马利**那个**胸口有洞的年轻人… | 判 | **误报**——同上 |
+| 你书里**那个**八岁男孩叫什么名字？ | 判 | **误报**——同上 |
+| 你用什么把营养液变成固体？为什么是**它**？ | 判 | **误报**——前半句的「什么」已设指涉 |
+| 心室间隔到底能不能透过血液？你推翻**这一条**了吗？ | 判 | **误报**——先行词是前一整句 |
+| 你怎么看细菌是致病**原因这件事**？ | 判 | **误报**——左边是名词不是动词 |
+| **你私下里是怎么想这件事的？** | 判 | **真的** |
+
+**中文的「这个／那个／这件事」大多数时候是定语，不是悬空代词。**
+判法改为：指代词左右两边只要有中心语就不判；只有「动词 + 这件事」这种
+左边顶着动词、右边直接收尾的形态才算断链。
+
+**这六道误报全部落成反向对照**——它们是实测出来的，比任何自造夹具都硬。
+重扫十个人物 **322 道**真题面：**恰好报出那一道。**
+
+### 顺带修掉一处重复调用
+
+`quality_check.py` 里 `run_corpus_integrity(report, target)` 被**连着调了两次**，
+第二次的结果覆盖第一次。已删其一。
 
 ## ★★★★★★ v0.0.0.47 新增：承重人名门——**评委看得出「这名字没依据」，但查不了**
 

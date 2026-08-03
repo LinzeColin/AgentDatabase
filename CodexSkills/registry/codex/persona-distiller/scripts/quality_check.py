@@ -1166,6 +1166,55 @@ def run_fact_density(report, target: Path, sources: list[dict[str, Any]]) -> Non
     report.metrics['fact_density'] = info
 
 
+def run_case_self_sufficiency(report, cases: list[dict[str, Any]]) -> None:
+    """题面自足门（v0.0.0.48 新增，**只报不拦**）——题面里的指代，在题面里找得到吗？
+
+    Osler #110 的 `wo-capability-calibration-01`：「你私下里是怎么想**这件事**的？」
+    ——「这件事」指哪件事，题面里没有。两席**各自独立**点出来，
+    而它已经被问了三轮、两侧作答四十八次，**没有一次答在点上，因为根本没有点。**
+
+    这种题白占一个套组名额：`capability-calibration` 只有 2 题，废掉一题就是废掉一半。
+
+    **只报不拦**：已入库 100 人的用例集从未按这条扫过，硬拦会把发布一起拦下。
+    但出题阶段（`synthesis`）看到它就该改——**那时候改还来得及，判分之后就晚了。**
+    """
+    here = Path(__file__).resolve().parent
+    script = here / 'check_case_self_sufficiency.py'
+    if not script.exists():
+        report.metrics['case_self_sufficiency'] = {
+            '状态': 'check_case_self_sufficiency.py 未安装，**未核验**（不是通过）'}
+        return
+    spec = importlib.util.spec_from_file_location('_pd_selfsuff', script)
+    module = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(module)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['case_self_sufficiency'] = {
+            '状态': f'检查器加载失败，**未核验**：{exc}'}
+        return
+    buffer = io.StringIO()
+    with contextlib.redirect_stdout(buffer):
+        if module.selftest() != 0:
+            report.error('content.selftest-failed',
+                         'check_case_self_sufficiency.py 负对照未过——其检查结论不作数')
+            return
+    if not cases:
+        report.metrics['case_self_sufficiency'] = {
+            '状态': '**没有用例可扫**——这不是通过'}
+        return
+    bad = module.run(cases)
+    info: dict[str, Any] = {'用例数': len(cases), '断链的题': len(bad)}
+    if bad:
+        info['**逐条**'] = [
+            f'{cid}：{"、".join(w for w, _ in hits)}　题面「{prompt}」'
+            for cid, prompt, hits in bad]
+        report.warn('cases.dangling-reference',
+                    f'**{len(bad)} 道题的指代在题面里找不到先行词**——'
+                    '这种题两侧都答不到点上，**白占一个套组名额**。'
+                    '出题阶段改还来得及。')
+    report.metrics['case_self_sufficiency'] = info
+
+
 def run_corpus_integrity(report, target: Path) -> None:
     """语料真伪门（v0.0.0.33 新增，**只报不拦**）——已入库的这些文件，是语料吗？
 
@@ -1449,7 +1498,6 @@ def main() -> int:
         run_corpus_integrity(report, target)
         run_attribution_basis(report, target, meta, sources)
         run_source_attribution(report, target, meta, sources)
-        run_corpus_integrity(report, target)
         run_fact_density(report, target, sources)
         run_quote_layer(report, target)
         run_ocr_gate(report, target, sources)
@@ -1461,6 +1509,7 @@ def main() -> int:
         if args.phase in {'synthesis', 'release'}:
             evaluate_claims(report, target, thresholds, sources, args.allow_provisional)
             cases = evaluate_cases(report, target, thresholds, {record.get('source_id') for record in holdout}, args.allow_provisional)
+            run_case_self_sufficiency(report, cases)
         if args.phase == 'release':
             evaluate_results(report, target, thresholds, cases)
             run_content_checks(report, target, args.cache)
