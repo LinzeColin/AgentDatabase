@@ -23,6 +23,12 @@ jobs:
   deterministic-acceptance:
     runs-on: ubuntu-24.04
     timeout-minutes: 35
+    env:
+      # compileall and pytest both write bytecode caches into the tree they
+      # touch, which the fail-closed step below rejects. Redirect every cache
+      # out of the working tree so the syntax check stays real and the
+      # no-cache-in-source rule stays enforceable.
+      PYTHONPYCACHEPREFIX: /tmp/memory-atlas-pycache
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
         with:
