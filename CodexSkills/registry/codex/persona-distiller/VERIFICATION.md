@@ -1,6 +1,6 @@
-# Release verification — Persona Distiller v0.0.0.56
+# Release verification — Persona Distiller v0.0.0.57
 
-Date: 2026-08-04（v0.0.0.56，下表已重跑）
+Date: 2026-08-04（v0.0.0.57，下表已重跑）
 
 > **本文件记录「当前发布号的复验结果」，不是历史归档。**
 > 版本号必须等于根目录 `VERSION`，由 `scripts/check_contract_drift.py` 强制。
@@ -10,7 +10,7 @@ Date: 2026-08-04（v0.0.0.56，下表已重跑）
 > bundle 构不出来、97 人、59 用例），**三件当时都已不成立**。
 > 改过标题的旧正文会冒充当前复验，比标题陈旧更糟。已从工具中移除该行为。
 >
-> 本次（v0.0.0.56）**是真的重跑了一遍**，下表每一行都是本次实跑输出。
+> 本次（v0.0.0.57）**是真的重跑了一遍**，下表每一行都是本次实跑输出。
 
 ## Result
 
@@ -32,7 +32,7 @@ Date: 2026-08-04（v0.0.0.56，下表已重跑）
 | **★★★★★★ 承重人名门（v0.0.0.47 新增／v0.0.0.50 接进发布门，见下节）** | **passed**（**12 项自测，其中 7 条反向对照**）；**真实数据实测**：Osler #110 第 2 轮扫出 `Henry A. Christian` 全名 P1 命中 **0**（S1 2 / S2 1），第 3 轮删后 **0 个查无实据**；**接线负对照**：往真载荷里植入 `Reginald Fitzhugh`，发布门 `content.unsourced-name` **实拦** | `check_unsourced_names.py --self-test` + 对 Osler 两轮候选答案实跑 |
 | 合同漂移门（版本三轴 + 身份合同 + 检查器镜像） | **0 条** | `scripts/check_contract_drift.py` |
 | 合同漂移门的负对照 | passed（坏样本 5 类全抓出，钉住的 builder 版本未被误伤） | `check_contract_drift.py --self-test` |
-| 归属门的负对照 | passed（**23 正 + 21 反**，另含 1 条只报不判，含 5 例非西方姓名形态）；**v0.0.0.54–56 新增 3+2+2 类署名形态**，Fleming #111 真工作区实测 **35 → 2**（见下节） | `check_authorship.py --self-test` |
+| 归属门的负对照 | passed（**24 正 + 22 反**，另含 1 条只报不判，含 5 例非西方姓名形态）；**v0.0.0.54–57 逐轮补形态**，Fleming #111 真工作区实测 **35 → 0，合成门 passed**（见下节） | `check_authorship.py --self-test` |
 | OCR 同形字门的负对照 | passed（干净英文／真俄语／中文 3 条正对照 0 报；词内混文种、全同形字词、引文层 3 类坏样本全抓出） | `check_ocr_homoglyphs.py --self-test` |
 | 基线来源门 `check_baseline_provenance` | passed（坏样本 4 类全抓出，含「缺字段沉默通过」；prior-version 未被误杀） | `check_baseline_provenance.py --self-test` |
 | 拒答溢出门（v0.0.0.22 新增，只报不拦） | passed（3 条正对照未误杀，2 类溢出全抓出，带限定的正常回答未被误判） | `check_refusal_overflow.py --self-test` |

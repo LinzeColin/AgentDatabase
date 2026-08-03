@@ -411,6 +411,20 @@ ADDRESS_BLOCK = re.compile(
     r"|\b[A-Z]{1,2}\.?\s?\d{1,2}[.,]?\s*$",          # 伦敦邮区 `W.1.`
     re.I | re.M)
 
+# ★ v0.0.0.57：**书评里被评那本书的署名不是竞争署名。**
+#   Fleming #111 的 `freelance-science-1952` 是他写的书评，开头印着：
+#       Louis Pasteur. Free Lance of Science. By Rend J. Dubos. (Pp. 418. 18s.)
+#       London: Victor Gollancz. 1951.
+#   反向检查把 `By Rend J. Dubos.` 当成别人的署名，于是**一篇他写的书评被判无据**。
+#   **书评必然引被评书的作者**——这是整类文体的固有形态，不是这一份的特例。
+#   判法：`By <他人名>` 之后 120 字符内出现**书目要素**
+#   （页数 `Pp. 418`、定价 `18s.`／`$`／`£`、出版社行、四位年份）→ 判为**被引之作**。
+CITED_WORK = re.compile(
+    r"\(?\s*Pp?\.\s*\d{2,4}|\b\d{1,3}s\.\s*\d{0,2}d?\.|[$£]\s?\d"
+    r"|\b(?:London|New York|Edinburgh|Oxford|Cambridge|Philadelphia|Boston)\s*:"
+    r"|\b(?:Gollancz|Macmillan|Longmans|Churchill|Saunders|Blackwell|Heinemann)\b",
+    re.I)
+
 CAPS_LINE = re.compile(r"^[ \t]*([A-Z][A-Z'\-]{2,}(?:[ \t]+[A-Z][A-Z'\-]{2,}){1,3})[ \t]*$", re.M)
 CAPS_STOPWORDS = {
     "THE", "AND", "OF", "IN", "TO", "A", "AN", "FOR", "ON", "BY", "WITH", "AT",
@@ -573,8 +587,12 @@ def _check_one(text, pat):
         counter.append(m.group(0).strip())
     for rx in (OTHER_BY, OTHER_BY_CAPS):
         for m in rx.finditer(text):
-            if not pat["SURNAME"].search(m.group(1)):
-                counter.append(m.group(0).strip())
+            if pat["SURNAME"].search(m.group(1)):
+                continue
+            # ★ v0.0.0.57：书评里被评那本书的署名，不算竞争署名。
+            if CITED_WORK.search(text[m.end():m.end() + 120]):
+                continue
+            counter.append(m.group(0).strip())
 
     for code, key in (("A-byline", "BYLINE"), ("A-editorial", "EDITORIAL")):
         for m in pat[key].finditer(text):
@@ -741,6 +759,13 @@ SELFTEST_POSITIVE = [
     ("OCR 打坏的署名·多插一个字母",
      "A long letter to the editor runs on for a while about the subject.\n" * 30
      + "JANE Q. PUBLIIC.\nInoculation Department,\nSt. Mary's Hospital, Jan. 5.\n"),
+    # ★ v0.0.0.57（Fleming #111 `freelance-science-1952` 实测）：
+    #   书评必然引被评书的作者，那不是竞争署名。
+    ("书评：被评书的署名在开头",
+     "Reviews\nFREELANCE OF SCIENCE\nLouis Pasteur. Free Lance of Science.\n"
+     "By Richard Q. Roebuck. (Pp. 418. 18s.) London: Victor Gollancz. 1951.\n"
+     + "The book is more than a mere biography of the great master here.\n" * 25
+     + "JANE Q. PUBLIC.\nLondon, W.1.\n"),
     ("书评签名块·文中（同页还有下一篇）",
      "A review of somebody else's book runs on for several paragraphs here.\n" * 30
      + "JANE Q. PUBLIC.\nLondon, W.1.\n"
@@ -813,6 +838,11 @@ SELFTEST_NEGATIVE = [
     ("首字母+别的中名+同姓",
      "ON PUBLIC HEALTH\n\nA. Grant Public, M.D.\n\n"
      "The survey was conducted in Montreal over several years running.\n"),
+    # ★ v0.0.0.57：**书目豁免不许放宽过头**——没有书目要素的他人署名仍是反证。
+    ("他人署名后面没有书目要素",
+     "SOME TITLE\nBy Richard Q. Roebuck.\n"
+     + "The argument proceeds over several paragraphs in the usual way.\n" * 25
+     + "JANE Q. PUBLIC.\nLondon, W.1.\n"),
     ("并短行不许把散文并成署名",
      "The work\nwas done\nat a\nhospital\nin London\nover time.\n"
      "Jane Q. Public is mentioned in the body of this text somewhere later.\n"),
