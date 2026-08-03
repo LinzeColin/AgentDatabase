@@ -135,3 +135,45 @@ Nightingale 那三处最重：
 > **判据存在、自测全绿、文档里被反复引用——而它从来没有被任何代码调用过。**
 
 前八种都是「跑了但没跑对」。这一种是**根本没跑**。
+
+
+---
+
+## 八、另外两件从未跑过的判据，也各有发现
+
+同一批四件里，`check_anchor_coherence` 与 `check_material_split`
+接进 `scripts/` 后也扫了一遍全量。
+
+### `check_anchor_coherence`（断言改了、渲染它的段落没跟着改）
+
+| 工作区 | 结果 |
+|---|---|
+| **Jenner #104** | **✗ 没有找到任何锚点** |
+| **Semmelweis #105** | **✗ 没有找到任何锚点** |
+| **Godin** | 锚点 45 处，中文三元组覆盖率**中位数 34.1%**，**6 处为 0.0%** |
+| Osler #110 | 低于 10% 的 **1 处** |
+| Fleming / Nightingale / Virchow / Lister / Koch | 0 处 ✓ |
+
+**「没有找到任何锚点」意味着断言从未渲染进核心产物**——
+`claim.orphan` 本该报这件事，而 Jenner 与 Semmelweis 都是拒发人物，
+没有走完发布门。
+
+**Godin 那 6 处需要逐条看，不能自动判定为缺陷**：
+判据自己写着合法情形包括「断言几乎全是英文引文而正文用中文转述」，
+而 Godin 的断言正是大量英文原话配中文框架。
+**这一条只列不判，等人看过再定。**
+
+### `check_material_split`（账本的 split 与磁盘物料是否一致）
+
+跑得动的六个工作区（Lister / Koch / Pasteur / Jenner / Semmelweis / Steinhardt / Godin）
+**全部 `缺 0 | holdout 泄漏 0`**——这一件没有发现问题。
+Fleming / Nightingale / Osler / Virchow 因目录结构不同没跑出来。
+
+### 合起来说明
+
+四件从未跑过的判据里：
+- **两件有实质发现**（`check_holdout_overlap` 5/10 人中招、`check_anchor_coherence` 4 处）
+- **一件干净**（`check_material_split`）
+- **一件在 Nightingale 上跑过且干净**（`check_verbatim_quotes`，3 条引文全命中）
+
+**「从未跑过」不等于「跑了会没事」——一半的判据一跑就有东西。**
