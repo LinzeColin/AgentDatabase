@@ -1205,7 +1205,20 @@ def run_corpus_integrity(report, target: Path) -> None:
         soft += [f'{lp}　{x}' for x in sf]
     info: dict[str, Any] = {'已扫': scanned, '不是语料': len(hard), '可疑': len(soft)}
     if missing:
+        # ★ v0.0.0.46：**改成硬错**。此前这里只写进 metrics、不拦，
+        #   于是「账本指着不存在的文件」这件事从来没有拦下过任何人。
+        #   回验实测：
+        #     Galen #101      账本 60 条，盘上 **9** 份 —— 缺 51
+        #     Vesalius #102   账本 47 条，盘上 **0** 份 —— 缺 47
+        #     Livermore #100  账本 536 条，盘上 **0** 份 —— 缺 536
+        #   **文件不在，则 primary_ratio、引文核查、覆盖率全都是对着虚空算的。**
+        #   （Lister #108 与 Virchow #109 的账本零缺失，所以不存在「合法缺失」这一类。
+        #    将来若真有只存图像的源，应当在账本里显式声明，而不是让它静默缺失。）
         info['**账本有记录但文件不在**'] = missing[:8]
+        report.error('research.ledger-file-missing',
+                     f'**{len(missing)} 条账本记录指着不存在的文件**——'
+                     f'primary_ratio、引文核查与覆盖率都会对着虚空算。'
+                     f'　示例：{"、".join(missing[:3])}')
     if hard:
         info['**这些不是语料**'] = hard[:10]
         report.error('research.corpus-not-a-document',
