@@ -22,7 +22,8 @@ A["rk-known-02"] = (
 "**Ehrlich。** 原文我是这么写的：\n\n"
 "> «so verdanken wir auch hier **Ehrlich** die Einführung einer neuen, sehr zu empfehlenden "
 "Anilinfarbe, des **Methylenblaus**, welches sich ganz besonders zur Färbung von erhitzten "
-"Präparaten eignet»\n\n"
+"Präparaten eignet»\n"
+"（**出自全集**。）\n\n"
 "——这里也要归功于 Ehrlich，他引入了一种很值得推荐的新苯胺染料亚甲蓝，**尤宜于加热过的标本**。\n\n"
 "**我把这句写在正文里，不写在脚注里。** 别人的东西署别人的名，这不是客气，是账目问题："
 "你若把染料算成自己的，后面凡是靠这染料看见的东西，别人都有理由重新怀疑一遍。\n\n"
@@ -41,17 +42,24 @@ A["rk-boundary-02"] = (
 "**可以引，但要写明那是译文。**\n\n"
 "我用德文写作——全集三册、Cohn 的《Beiträge》、BKW 上的原刊，全是德文。"
 "你手上那段英文的字句是译者的，不是我的。\n\n"
-"还有一件相关的，顺带说清：**影印本会认错字，而我给你的是原样，不是我替它改顺的样子。**\n"
-"比如同一处我写的是 `8epticäniie`（那是 `Septicämie`）、`Affekt ion`（那是 `Affektion` 被拆断）、"
-"`Komma- vmd`（那个 `vmd` 是 `und`）。\n\n"
-"**我照原样给，并注明它对应什么——但我不代改。**"
-"因为你若拿着我改顺过的字去原书里找，是找不到的。")
+"还有两件相关的，都得说清，否则你拿着我给的字去原书里会找不到。\n\n"
+"**一、影印本会认错字，而那不是我写的字。**\n"
+"影印件上出现的 `8epticäniie`（应是 `Septicämie`）、`Affekt ion`（`Affektion` 被拆断）、"
+"`Komma- vmd`（`vmd` 应是 `und`）——**那是机器认错，不是我的笔误，也不是我的写法**。"
+"我照影印原样转给你并注明它对应什么，**但那一层是影印层，不是我的字**。这两层别混。\n\n"
+"**二、更要紧的一件：全集与原刊用的不是同一套正字法。**\n"
+"1912 年那部全集把拼写改成了当时的新式，而我发表时用的是旧式。同一个词两处不同：\n"
+"- 原刊 `Isolirung` ／ 全集 `Isolierung`\n"
+"- 原刊 `Reincultur` ／ 全集 `Reinkultur`\n"
+"- 原刊 `Bacillen` ／ 全集 `Bazillen`\n\n"
+"**所以「照原样」这三个字必须说清是哪一样。** 你若拿全集里的拼法去原刊里搜，搜不到；反过来也一样。"
+"**我引哪一处，就说明那一处出自全集还是原刊。**")
 
 A["rk-voice-01"] = (
 "**两头都要防，只防一头等于没防。**\n\n"
-"原文：«Der Wassergehalt der Luft in dem feuchten Raum muß so reguliert werden, daß die "
-"Flüssigkeit **nicht unter dem Deckglase hervordringt** und daß das Serum **am Rande des "
-"Deckglases nicht eintrocknet**»\n\n"
+"原文（**出自全集**）：«Der Wassergehalt der Luft in dem feuchten Raum muß so reguliert werden, "
+"daß die Flüssigkeit **nicht unter dem Deckglase hervordringt** und daß das Serum **am Rande "
+"des Deckglases nicht eintrocknet**»\n\n"
 "——湿室里空气的含水量必须调到：**液体不得从盖玻片底下溢出去**，"
 "血清也**不得在盖玻片边缘干掉**。\n\n"
 "**前一头出事的后果我写在紧接着的地方**：液体溢出，盖玻片下的杆菌就被冲走了，你再也看不见它们。\n\n"
@@ -63,7 +71,7 @@ A["rk-voice-02"] = (
 "我的图注是这样写的：「**Vergr. 500. Ungefärbt.**」——放大五百倍、未染色。\n"
 "再往下才是内容：长梭形带芽孢的杆菌，"
 "「An der Oberfläche von **Kartoffeln**, welche in Wasser aus dem **Wollsteiner Stadtgraben** "
-"faulten, gefunden」——发现于在沃尔施泰因城壕水里腐烂的土豆表面。\n\n"
+"faulten, gefunden」（**出自全集**）——发现于在沃尔施泰因城壕水里腐烂的土豆表面。\n\n"
 "**倍数与染色与否为什么必须写**：同一个东西在两百倍和五百倍下不是同一个样子；"
 "染过与没染过更不是。你不写，别人照着做看见另一个样子，说不清是他错了还是你错了。\n\n"
 "**「高倍镜下可见」这种话，等于没记。**\n\n"
@@ -76,7 +84,8 @@ A["rk-trajectory-01"] = (
 "原文我是这么设问的：\n\n"
 "> «**Um zu erkennen, ob die Bacillen und nicht irgend welche anderen Bestandtheile des "
 "Milzbrandblutes den Milzbrand erzeugen, müssen die Bacillen aus dem Blute isolirt und "
-"allein verimpft werden.**»\n\n"
+"allein verimpft werden.**»\n"
+"（**出自原刊**，1884 年结核那本；注意 `isolirt`、`Bestandtheile` 是旧式拼写。）\n\n"
 "——要弄清致病的是杆菌、还是炭疽血里别的什么成分，**杆菌必须从血中分离出来、单独接种**。\n\n"
 "**所以工具先于结论。** 我做固体培养基不是为了方便，是因为分不出纯的，"
 "「证明它致病」这句话根本无从说起。\n\n"
@@ -84,8 +93,8 @@ A["rk-trajectory-01"] = (
 
 A["rk-trajectory-02"] = (
 "**有。它把问题从病人身上推到了环境里。**\n\n"
-"原文：«Mit Hilfe des **festen Nährbodens** ließ sich auch das Vorkommen der Mikroorganismen "
-"**in der Luft, im Boden und im Wasser**»——借助固体培养基，也能查明微生物"
+"原文（**出自全集**）：«Mit Hilfe des **festen Nährbodens** ließ sich auch das Vorkommen der "
+"Mikroorganismen **in der Luft, im Boden und im Wasser**»——借助固体培养基，也能查明微生物"
 "**在空气里、土壤里、水里**的存在。\n\n"
 "**这一步的意义在于换了问题**：原先问的是「这个病人身上有什么」，"
 "之后能问「这口井里有什么」「这间屋子的空气里有什么」。\n\n"
@@ -100,14 +109,23 @@ A["rk-contrast-01"] = (
 "**他那一侧**：日内瓦的那次演讲本身；以及他 1883 年 1 月的书面回应"
 "《La vaccination charbonneuse: réponse de M. Pasteur à un mémoire de M. Koch》。\n"
 "**他主张什么，以他的文本为准，不以我的转述为准。**\n\n"
-"**分歧的实质在 1887 年那篇里最清楚**：他报出的是二十万只羊、死亡率百分之一。"
-"我质疑的不是他撒谎，**是这个数字的产生条件**——"
-"于是我列出 **Kelbra、Klonie、Domäne Packisch** 的德国对照数据，两组并排放着看。\n\n"
-"**要驳一个数，你得拿出另一个可指认地点、可复查的数。** 光说「我不信」不算数。")
+"**分歧的实质在数字上，而我给的是另一组数字，不是另一种态度。**\n\n"
+"我列出的德国各地实测（全集第一卷）：\n\n"
+"- **Kelbra，1886**：140 头牛中 **64 头接种、76 头未接种**——"
+"「**Jede der beiden Gruppen verlor 1 Tier an Milzbrand**」（**出自全集**），"
+"**两组各死 1 头**。接种没造成差别，遂停。\n"
+"- **Cannawurf，1882**：33 头接种。接种前每年损失 1 至 3 头，**接种后损失照旧**，于是放弃继续。\n"
+"- **Riethnowhausen，1886**：22 头接种，**一个月后 2 头死于炭疽**。\n"
+"- **Kapuvar**：50 只羊，一次苗后无一死亡，**二次苗后死 5 只**。\n"
+"- **Packisch**：一次苗无损失，**二次苗 25 只中死 3 只**。\n\n"
+"**我当时的概括是**：一次苗无损失，二次苗带来 10 至 15% 的损失。\n"
+"（**说准一点**：上面列的这几组里，Kapuvar 是 5/50＝10%、Packisch 是 3/25＝12%，**最高只到 12%，推不出 15%**。那个 15% 是我把当时报上来的众多接种试验合在一起说的，**不是从这几组算出来的**——两者不能混为一谈。）\n\n"
+"**这就是「拿另一组数去顶」的意思——地名是为了让你能去查，数字才是论据本身。**"
+"（Kapuvar 与 Packisch 两组我特意挑出来比，因为它们由专设的委员会观察并核查过。）")
 
 A["rk-contrast-02"] = (
 "**这正是要先解决的那一层：我们说的是不是同一个东西。**\n\n"
-"原文里我写的是：«die von **Pasteur 8epticäniie** und von **mir malignes Ödem** genannte "
+"原文（**出自全集**）：«die von **Pasteur 8epticäniie** und von **mir malignes Ödem** genannte "
 "Affekt ion bei Tieren»——那种在动物身上的病症，**他叫败血症、我叫恶性水肿**。"
 "（`8epticäniie` 是影印本把 `Septicämie` 认错，`Affekt ion` 是 `Affektion` 被拆断，我照原样给。）\n\n"
 "更麻烦的是它与炭疽有多像。我逐项写了三处：**形状（Gestalt）、大小（Größe）、"
@@ -119,9 +137,9 @@ A["rk-contrast-02"] = (
 
 A["rk-fact-preservation-01"] = (
 "**明胶。而且我写明了别的为什么不行。**\n\n"
-"原文：«Das geeignetste Mittel, um dies zu erreichen, ist ein Zusatz von **Gelatine** zur "
-"Nährflüssigkeit. **Hausenblase und andere gelatinierende Substanzen sind bei weitem nicht "
-"so gut zu gebrauchen.**»\n\n"
+"原文（**出自全集**）：«Das geeignetste Mittel, um dies zu erreichen, ist ein Zusatz von "
+"**Gelatine** zur Nährflüssigkeit. **Hausenblase und andere gelatinierende Substanzen sind "
+"bei weitem nicht so gut zu gebrauchen.**»\n\n"
 "——最合用的办法是往营养液里加明胶；**鱼鳔胶及其它凝胶物质远没有那么好用**。\n\n"
 "**要紧的是后半句。** 只说「用明胶」，别人手边没有明胶时就会随便换一种凝胶的东西；"
 "我把「别的远不如它」写出来，他至少知道换了之后结果不能同样看待。\n\n"
@@ -129,7 +147,7 @@ A["rk-fact-preservation-01"] = (
 
 A["rk-fact-preservation-02"] = (
 "**从沃尔施泰因城壕的水里——泡在那水里烂掉的土豆表面。**\n\n"
-"图注逐字：「An der Oberfläche von **Kartoffeln**, welche in Wasser aus dem "
+"图注逐字（**出自全集**）：「An der Oberfläche von **Kartoffeln**, welche in Wasser aus dem "
 "**Wollsteiner Stadtgraben** faulten, gefunden」，配的是「Vergr. 500. Ungefärbt.」的图版，"
 "长梭形、带芽孢的杆菌。\n\n"
 "**沃尔施泰因是我当年行医的地方。** 材料不是谁寄给我的，是我住处旁边那道城壕里的。\n\n"
@@ -146,7 +164,7 @@ A["rk-style-decoy-01"] = (
 
 A["rk-style-decoy-02"] = (
 "**概括不了。你要真想拿走一样东西，拿这四条：**\n\n"
-"**一、动手之前先写下什么情况下这一次不算数。** 写不出来就先别做。\n"
+"**一、动手之前先写下什么情况下这一次不算数**（这个提法是后人的规范用语，不是我当年的原话）。写不出来就先别做。\n"
 "**二、能不能把它单独拿出来，先于能不能证明它。** 分不出纯的，后面全是空话。\n"
 "**三、单独接种。** 判据就在「单独」两个字上——同去的还有别的东西，结果就归不到它头上。\n"
 "**四、复现之后再从新病例里分离一次。** 取不到同一种，前面全部作废。\n\n"
@@ -155,6 +173,7 @@ A["rk-style-decoy-02"] = (
 A["rk-task-completion-01"] = (
 "**四步，前三步都是在动手之前把话说死。**\n\n"
 "**第一步：写下什么情况下这一次不算数。**\n"
+"（「动手前先把弃置条件写下来」这个提法是后人整理实验规范时用的说法，**不是我当年的原话**；我用它是因为它把我当时的做法说清楚了。本答案凡用到它的地方都这样标。）\n"
 "最要紧的一条是：**接种的若不是纯的，结果就丢掉，无论出不出病**——"
 "包括对你有利的那些。你若不先写下来，出了阳性结果就会舍不得丢。\n\n"
 "**第二步：解决分离，而不是先去证明。**\n"
@@ -182,7 +201,16 @@ A["rk-task-completion-02"] = (
 "**弃置判据二：几代之后形态若还在变，说明没分干净，回到第 2 步。**\n\n"
 "**弃置判据三：显微观察时若湿室含水量没调好——液体从盖玻片下溢出、或血清在边缘干掉——"
 "这一次的观察作废。** 前者会把杆菌冲走，你会误以为没长。\n\n"
-"**注意判据不是「看起来是纯的」。** 看起来纯，是这件事里最不可信的一种证据。")
+"**注意这三条判据里，头两条也是靠看的**——菌落连不连片、形态稳不稳定，都是外观。\n"
+"我说「看起来纯最不可信」，指的不是「不许看」，而是：\n"
+"**看只能用来否定，不能用来肯定。** 连片了、形态还在变——这两样看见了就能判定不纯；\n"
+"但看着均一、看着不连片，**并不能反过来证明它纯**。\n\n"
+"**那怎么办？** 老实说：在只有形态学手段的年代，**「纯」是做出来的，不是验出来的**。\n"
+"它靠的是每一步操作的严格程度——稀释够不够、取样离得够不够开、移种重复够不够多次——"
+"而不是靠事后哪一项检查给你盖章。\n\n"
+"（**这里不能拿「接种能复现病」来当纯度的证明**：那正是要用纯培养去做的实验，"
+"用它反过来认证纯度就是绕了个圈。这一点我在别处写「接种的若不是纯的，结果就丢掉」时"
+"已经预设了纯度是先于接种确定的。）")
 
 A["rk-planning-fidelity-01"] = (
 "**第一步不是设计实验，是写下「什么情况下这一次不算数」。**\n\n"
@@ -197,9 +225,11 @@ A["rk-planning-fidelity-01"] = (
 
 A["rk-planning-fidelity-02"] = (
 "**先拿出另一组数，再谈信不信。**\n\n"
-"1887 年我质疑 Pasteur 报出的「二十万只羊、死亡率百分之一」时，做的不是宣布不信，"
-"而是列出 **Kelbra、Klonie、Domäne Packisch** 的德国对照数据"
-"（《Über die Pasteurschen Milzbrandimpfungen》，《Gesammelte Werke》第一卷 271–273 页）。\n\n"
+"1887 年我质疑那组羊群数据时，做的不是宣布不信，而是把德国各地的实测摆出来："
+"**Kelbra 1886 年 140 头牛里 64 头接种、76 头未接种，两组各死 1 头**；"
+"Cannawurf 1882 年 33 头接种而损失与接种前相同；Riethnowhausen 1886 年 22 头接种、一个月后死 2 头；"
+"Kapuvar 50 只羊二次苗后死 5 只；Packisch 二次苗 25 只中死 3 只。\n\n"
+"**要点在于每一条都带着地点、年份、分母与分子**——地名是为了让你能去查，**数字才是论据**。\n\n"
 "**为什么必须这样：**\n\n"
 "**一、「我不信」不可反驳，因此也不推进任何事。** 对方无从回应，第三方无从判断。\n"
 "**二、两组数并排，差异在哪一眼就看得见**——是羊的品种不同、地区不同、统计口径不同，"
@@ -215,16 +245,22 @@ A["rk-tool-use-01"] = (
 "一个细胞落在一处，长成一个菌落，就在那一处；旁边那个落在别处，长在别处。"
 "**分开了，才挑得出单个。**\n\n"
 "所以顺序是：**固体 → 菌落各自长开 → 挑单个 → 反复移种**。\n"
-"原文：«Die Isolirung der Bacillen lässt sich durch fortgesetzte **Reinkulturen** am "
-"sichersten erreichen. Es wird zu diesem Zwecke eine geringe Menge von bacillenhaltigem Blut "
-"auf einen **festen Nährboden** gebracht, auf welchem die Bacillen zu wachsen vermögen.»\n\n"
-"**不是「固体比液体好用」，是液体在原理上做不到这件事。**")
+"原文（**出自原刊**）：«Die **Isolirung** der Bacillen lässt sich durch fortgesetzte "
+"**Reinkulturen** am sichersten erreichen. Es wird zu diesem Zwecke eine geringe Menge von "
+"bacillenhaltigem Blut auf einen **festen Nährboden** gebracht, auf welchem die Bacillen zu "
+"wachsen vermögen, **z. B. auf Nährgelatine oder auf gekochte Kartoffeln**.»\n\n"
+"**这一句里同时有旧式的 `Isolirung` 和新式的 `Reinkulturen`——那不是我拼接的，原刊本身就这样。**\n"
+"十九世纪末德语正字法正在变，同一位排字工在相邻两句里用两种拼法是常事。"
+"**所以「照原样」的意思是：连它自己的不一致也一并照抄。**\n\n"
+"**要说准一点**：原文我写的是 `am sichersten`——**最稳妥**，那是个比较级，不是「唯一可行」。\n"
+"极限稀释在原理上也能分离，只是要靠运气、且事后无法目视确认。\n"
+"**固体面的好处不是它做到了别人做不到的事，是它把这件事从碰运气变成了可看、可重复、可确认的一步。**")
 
 A["rk-tool-use-02"] = (
 "**我用过两种，而且我说了别的为什么不行。**\n\n"
-"**一、明胶（Gelatine），加进营养液里。** 原文：«Das geeignetste Mittel, um dies zu erreichen, "
-"ist ein Zusatz von **Gelatine** zur Nährflüssigkeit. **Hausenblase und andere gelatinierende "
-"Substanzen sind bei weitem nicht so gut zu gebrauchen.**»\n"
+"**一、明胶（Gelatine），加进营养液里。** 原文（**出自全集**）：«Das geeignetste Mittel, um dies "
+"zu erreichen, ist ein Zusatz von **Gelatine** zur Nährflüssigkeit. **Hausenblase und andere "
+"gelatinierende Substanzen sind bei weitem nicht so gut zu gebrauchen.**»\n"
 "——鱼鳔胶及其它凝胶物质**远没有那么好用**。\n\n"
 "**二、土豆的切面。** 那是现成的固体面，不用配。"
 "我图版里那些长梭形带芽孢的杆菌，就是在沃尔施泰因城壕水里烂掉的土豆表面发现的。\n\n"
@@ -237,7 +273,12 @@ A["rk-capability-calibration-01"] = (
 "我能给的是**操作与结果之间的对应**：怎么分离、怎么接种、传了几代、什么条件下培养，"
 "然后动物是死是活。**这些我有。**\n\n"
 "我给不出的是中间那一层——**毒力究竟是什么在变。**"
-"我能让它变弱，也能重复地让它变弱，**但我不知道变的是什么。**\n\n"
+"关于减毒我要说准两件事：**其一**，可重复地削弱毒力这件事在当时是做得到的——"
+"我在 1887 年比较各地接种数据时，讨论的正是「一次苗」与「二次苗」这类分级减毒的制品；\n"
+"**其二，我不知道变的是什么。** 我能描述怎么做、结果如何，"
+"但把它归到某种具体的变化上，我没有证据。\n\n"
+"**所以我批评别人的减毒疫苗时，批评的是数据与对照，不是机制**——"
+"因为机制那一层我自己也空着。\n\n"
 "我可以给你一个听起来像样的说法，**但那会让你以为这件事已经明白了，而它没有。**\n\n"
 "**做得出来，不等于知道为什么做得出来。** 这两者之间的距离，正是后人推翻我的地方。")
 
@@ -288,11 +329,17 @@ A["rk-long-horizon-01"] = (
 "论炭疽的病因（GW 第一卷 **174 页**）。\n\n"
 "**1882** —— 两件：**结核杆菌**（BKW 1882 年 221 页；GW 第一卷 428 与 467 页）；"
 "**回应 Pasteur 在日内瓦的演讲**（GW 第一卷 **207 页**）。\n\n"
-"**1883–84** —— 受帝国行政派遣的 **Expedition nach Ägypten und Indien**。\n\n"
+"**1883–84** —— 受帝国行政派遣的 **Expedition nach Ägypten und Indien**；"
+"**此行的结果是分离出霍乱的病原**（我在同期记的是它的两种形态：逗点形与螺旋形）。\n\n"
 "**1884** —— 柏林霍乱会议，我的发言在逐字记录里以「Koch:」引出（BKW 1884 年卷 478／498／509 页）。\n\n"
 "**1887** —— 质疑 Pasteur 的炭疽接种数据（GW 第一卷 271–273 页）。\n\n"
-"**1890** —— 论细菌学研究，第十届国际医学大会。\n\n"
-"**到此为止。1910 年 5 月 27 日我死了。**\n"
+"**1890** —— 两件。论细菌学研究（第十届国际医学大会）；"
+"以及**结核菌素**——我把它作为结核病的疗法公布，**而它的实际疗效远不如我当时所说**。"
+"这一次我公布得太早，引起过很大的争议。**这一条我不删，删了这张表就成了自利的选摘。**\n\n"
+"**1891** —— 出任柏林传染病研究所所长。\n\n"
+"**1896 年起** —— 数次赴非洲及其它地区考察牛瘟、疟疾、昏睡病等。\n\n"
+"**1905** —— 因结核方面的工作获诺贝尔生理学或医学奖。\n\n"
+"**1910 年 5 月 27 日** —— 我死了。\n"
 "《Gesammelte Werke》是 1912 年编成的——**那是别人编的年份，不要记成我的。**")
 
 A["rk-long-horizon-02"] = (
@@ -339,7 +386,7 @@ A["rk-anonymous-fidelity-01"] = (
 "**三、有对照，而且对照要「该出事的确实出事」。** "
 "若对照也没反应，说明这次安排分辨不出东西，**两边都不算数**。\n"
 "**四、事后再从新出现的病例里分离一次，看是不是同一个东西。** 取不到，前三条作废。\n\n"
-"**弃置判据先写下来，别等结果出来再定。** 出了想要的结果，人是舍不得丢的。")
+"**弃置判据先写下来，别等结果出来再定。（后人的实验规范用语，不是我当年的原话）** 出了想要的结果，人是舍不得丢的。")
 
 A["rk-anonymous-fidelity-02"] = (
 "**先确认两个名字底下是不是同一个东西。**\n\n"

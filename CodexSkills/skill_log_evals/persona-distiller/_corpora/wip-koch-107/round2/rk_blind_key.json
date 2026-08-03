@@ -1,0 +1,130 @@
+{
+ "rk-anonymous-fidelity-01": {
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "rk-anonymous-fidelity-02": {
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "rk-boundary-01": {
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "rk-boundary-02": {
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "rk-capability-calibration-01": {
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "rk-capability-calibration-02": {
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "rk-contrast-01": {
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "rk-contrast-02": {
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "rk-fact-preservation-01": {
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "rk-fact-preservation-02": {
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "rk-identity-routing-01": {
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "rk-identity-routing-02": {
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "rk-known-01": {
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "rk-known-02": {
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "rk-long-horizon-01": {
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "rk-long-horizon-02": {
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "rk-planning-fidelity-01": {
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "rk-planning-fidelity-02": {
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "rk-refusal-stop-01": {
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "rk-refusal-stop-02": {
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "rk-style-decoy-01": {
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "rk-style-decoy-02": {
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "rk-task-completion-01": {
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "rk-task-completion-02": {
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "rk-token-efficiency-01": {
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "rk-token-efficiency-02": {
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "rk-tool-use-01": {
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "rk-tool-use-02": {
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "rk-trajectory-01": {
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "rk-trajectory-02": {
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "rk-voice-01": {
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "rk-voice-02": {
+  "A": "candidate",
+  "B": "baseline"
+ }
+}
