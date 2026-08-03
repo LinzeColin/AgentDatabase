@@ -1,6 +1,6 @@
-# Release verification — Persona Distiller v0.0.0.67
+# Release verification — Persona Distiller v0.0.0.68
 
-Date: 2026-08-04（v0.0.0.67，下表已重跑）
+Date: 2026-08-04（v0.0.0.68，下表已重跑）
 
 > **本文件记录「当前发布号的复验结果」，不是历史归档。**
 > 版本号必须等于根目录 `VERSION`，由 `scripts/check_contract_drift.py` 强制。
@@ -10,7 +10,7 @@ Date: 2026-08-04（v0.0.0.67，下表已重跑）
 > bundle 构不出来、97 人、59 用例），**三件当时都已不成立**。
 > 改过标题的旧正文会冒充当前复验，比标题陈旧更糟。已从工具中移除该行为。
 >
-> 本次（v0.0.0.67）**是真的重跑了一遍**，下表每一行都是本次实跑输出。
+> 本次（v0.0.0.68）**是真的重跑了一遍**，下表每一行都是本次实跑输出。
 
 ## Result
 
@@ -26,7 +26,7 @@ Date: 2026-08-04（v0.0.0.67，下表已重跑）
 |---|---:|---|
 | **★★★★★★★★★★ 答案母版（v0.0.0.53 新增）** | **passed**；三支用 Osler 真数据实跑：真候选**过并落盘 32 条**；每条 ×3 → **中止且候选文件被删**；占位没删 → **点名 `XX-known-01` 并中止** | `scaffold/answers_template.py` 三支实跑 |
 | Offline unit / integration / concurrency tests | **70 / 70 passed** | `python3 -m pytest tests/ -q` |
-| **全部检查器自测（v0.0.0.47 起逐件跑）** | **33 / 33 passed，0 未过、0 缺负对照**（本次实跑：`通过 33　未过 0`）（v0.0.0.48 时 4 件根本没有 `--self-test`，见下节） | 逐件 `check_*.py --self-test` |
+| **全部检查器自测（v0.0.0.47 起逐件跑）** | **37 / 37 passed，0 未过、0 缺负对照**（本次实跑：`通过 37　未过 0`）（v0.0.0.48 时 4 件根本没有 `--self-test`，见下节） | 逐件 `check_*.py --self-test` |
 | **★★★★★★★★★ 长度泄题门（v0.0.0.51 新增，**硬门**，见下节）** | **passed**（**10 项自测，其中 5 组反向对照，正/反夹具都取自实测形状**）；**Osler #110 两轮回验与当时手工结论逐位吻合**（R2 1.30／9 更短、R3 1.30／14 更短）；**接线三支退出码实测** 0／1／3；**v0.0.0.52 在 Osler 真工作区上从「未核」转为实测通过**（`✓ 总体均长比 1.30　候选更短 14/32 = 44%`）| `check_answer_length_leak.py --self-test` + 对 Osler 两轮实跑 |
 | **★★★★★★★ 题面自足门（v0.0.0.48 新增，只报不拦，接进 synthesis／release，见下节）** | **passed**（**15 项自测，其中 7 组反向对照，含第一版实测误报的 6 道真题面**）；**十个人物 322 道真题面复扫：恰好报出两席点名的那一道** | `check_case_self_sufficiency.py --self-test` + 对十个工作区 `cases.jsonl` 实跑 |
 | **★★★★★★ 承重人名门（v0.0.0.47 新增／v0.0.0.50 接进发布门／**v0.0.0.62 去噪**，见下节）** | **passed**（**19 项自测，其中 11 条反向对照**）；**v0.0.0.62 实测去噪**：Fleming #111 第 3 轮一次报出 `Br Med`／`Exp Path`／`Soc Med`／`Biochem`／`Studies`／`Wound Infections` **六个刊名缩写当人名**，改按「著录壳」剥除后 **6 → 0**，而 `**A. Grant Fleming**` 这类**加粗人名仍抽得到**（反向对照 ⑨ 守）；**真实数据实测**：Osler #110 第 2 轮扫出 `Henry A. Christian` 全名 P1 命中 **0**（S1 2 / S2 1），第 3 轮删后 **0 个查无实据**；**接线负对照**：往真载荷里植入 `Reginald Fitzhugh`，发布门 `content.unsourced-name` **实拦** | `check_unsourced_names.py --self-test` + 对 Osler 两轮候选答案实跑 |
@@ -264,6 +264,69 @@ Osler 证明这条要扩到全部套组。
 
 `quality_check.py` 里 `run_corpus_integrity(report, target)` 被**连着调了两次**，
 第二次的结果覆盖第一次。已删其一。
+
+## ★★★ v0.0.0.68：**四件判据从来没有跑过**——漏洞在合同漂移门自己的代码里
+
+### 怎么发现的
+
+做一次全量健康核查，`diff -rq scripts references/pipeline/checkers` 报出
+镜像里多四个文件，而 `check_contract_drift` 说「无合同漂移」。
+
+看它的代码：
+
+```python
+for mirror in mirrors:
+    twin = root / "scripts" / mirror.name
+    if not twin.is_file():
+        continue          # ← **只存在于一侧的文件，静默跳过**
+```
+
+而这一段的注释上面就写着：
+
+> 同一件东西两份拷贝，改一处另一处继续活着。
+
+**还有一种它没写：「只存在一处」，而把门的恰好是没有它的那一处。**
+
+### 四件判据，其中一件自称硬门
+
+| 判据 | 自测 | 此前状态 |
+|---|---|---|
+| `check_anchor_coherence` | ✓ | 只在镜像里 |
+| **`check_holdout_overlap`** | ✓ | 只在镜像里——**它自己的文件头写着「硬门」** |
+| `check_material_split` | ✓ | 只在镜像里 |
+| `check_verbatim_quotes` | ✓ | 只在镜像里 |
+
+**四件自测全绿**——它们是能用的判据，只是住在不把门的那一侧。
+全仓搜索：这四个名字**只出现在注释与文档字符串里，没有一处代码调用**。
+
+反方向也有两件：`check_contract_drift`（它自己）与 `check_distillation_freshness`
+**只在 `scripts/` 里，镜像缺件**——装出去的包会少这两件。
+
+### ★ 接进门第一次跑就抓到 Nightingale #112 的一处方法学缺陷
+
+`check_holdout_overlap` 原本按 `locator` 的最后一段当文件名定位正文，
+而本流水线的 locator 是「篇名｜出处｜URL」，切出来是 URL 尾巴——
+Nightingale 117 条**一条也定位不到**，判据只会说「无法判定」。
+**这就是它从未跑通、也没人发现的原因。** 改用 `local_path` 后：
+
+```
+✗ src-a472a1cc729f  notes-on-nursing-1906.txt
+      与 src-97758a5d908b 覆盖 **53.1%**
+✗ src-224fa30c68bd  notes-on-nursing-1888.txt
+      与 src-36968f4debea 覆盖 **32.6%**
+```
+
+**我把同一本书的不同版次一半放 train、一半放 holdout。**
+用它出的 `known` 题不测泛化，且一定得高分。
+**这本该在第 1 轮之前就拦下**——而 Nightingale 已经三轮跑完。
+
+### 已做
+
+- 合同漂移门改成**两个方向都报**「只存在于一侧」。
+- 四件复制进 `scripts/`，两件补进镜像；现在两侧逐字节一致。
+- `check_holdout_overlap` 改用 `local_path` 定位，接进 `synthesis` / `release`
+  （**只报不拦**：已入库 100 人的 holdout 从未按这条扫过）。
+- 检查器 33 → **37**。
 
 ## v0.0.0.67：自报字数门把「101,610 字符」读成了「610 字」
 

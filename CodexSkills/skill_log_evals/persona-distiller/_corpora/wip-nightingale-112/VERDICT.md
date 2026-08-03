@@ -81,3 +81,32 @@
 清 C 档前逐目录核校验和，在 scratchpad 里找回了**四个工作区**的全部语料
 （Vesalius 47/47、Harvey 46/46、Galen 60/60、Livermore 536/536）——
 **差一步就随 scratchpad 一起清掉了。**
+
+
+---
+
+## ★★ 补记（2026-08-04，三轮跑完之后才发现）：**这一轮的 holdout 是废的**
+
+v0.0.0.68 把一件**从未跑过**的硬门（`check_holdout_overlap`）接进质检门后，
+第一次跑就报出：
+
+```
+✗ src-a472a1cc729f  notes-on-nursing-1906.txt　与 src-97758a5d908b 覆盖 **53.1%**
+✗ src-224fa30c68bd  notes-on-nursing-1888.txt　与 src-36968f4debea 覆盖 **32.6%**
+✗ src-b69bdc27e4f0  surgical-operations-stats-1863.txt
+```
+
+**我把《Notes on Nursing》同一本书的不同版次，一半放 train、一半放 holdout。**
+它们本来就是同一段文字的不同印次——覆盖率高是必然的。
+
+**后果**：`known` 套组那两道题的保留集**不测泛化**。
+本轮 `known` 的 delta（R1 +0.0500 / R3 未单列）**要打折扣**，
+它可能只是「产物见过这段文字」。
+
+**为什么直到现在才发现**：这件判据只存在于 `references/pipeline/checkers/`，
+而把门的是 `scripts/`；合同漂移门的镜像比对里有一行
+`if not twin.is_file(): continue`，**把「只存在于一侧」静默跳过了**。
+
+**这不改变拒发结论**（boundary 与 fact 都没过，与 holdout 无关），
+**但它改变了 `known` 那一组数字的可信度**——重蒸时必须重划 holdout：
+**同一著作的不同版次不能拆到两侧。**

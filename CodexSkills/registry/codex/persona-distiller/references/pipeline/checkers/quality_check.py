@@ -1529,6 +1529,64 @@ def run_sole_authorship(report, target: Path) -> None:
     report.metrics['sole_authorship'] = info
 
 
+def run_holdout_overlap(report, target: Path, cache_dirs: list[str]) -> None:
+    """holdout ↔ train 内容重合（v0.0.0.68 接进门，**此前从未跑过**）。
+
+    ## 它为什么此前从未跑过
+
+    这件判据**只存在于 `references/pipeline/checkers/`**，而 `scripts/` 里没有。
+    `check_contract_drift` 的镜像比对写着 `if not twin.is_file(): continue`——
+    **只存在于一侧的文件被静默跳过**，于是四件判据（含这一件自称硬门的）
+    从来没有被任何调用点加载过。
+
+    ## 接进来第一次跑就抓到
+
+    Nightingale #112 实测：`notes-on-nursing-1906` 与 train 里的 1908 版
+    **覆盖 53.1%**，1888 版与 1883 版覆盖 32.6%——
+    **我把同一本书的不同版次一半放 train、一半放 holdout**。
+    用它出的 `known` 题不测泛化，且一定得高分。
+
+    **这本该在第 1 轮之前就拦下。**
+
+    ## 只报不拦
+
+    已入库 100 人的 holdout 从未按这条扫过，硬拦会把发布一起拦下。
+    但**划 holdout 的时候看到它就该换源**——那时候换还来得及。
+    """
+    here = Path(__file__).resolve().parent
+    script = here / 'check_holdout_overlap.py'
+    if not script.exists():
+        report.metrics['holdout_overlap'] = {'状态': '检查器未安装，**未核验**（不是通过）'}
+        return
+    spec = importlib.util.spec_from_file_location('_pd_holdout', script)
+    module = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(module)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['holdout_overlap'] = {'状态': f'加载失败，**未核验**：{exc}'}
+        return
+    caches = [Path(c) for c in (cache_dirs or [])] or [target / 'raw']
+    caches = [c for c in caches if c.is_dir()]
+    if not caches:
+        report.metrics['holdout_overlap'] = {'状态': '**找不到语料目录，未核验**'}
+        return
+    buffer = io.StringIO()
+    try:
+        with contextlib.redirect_stdout(buffer):
+            rc = module.check(target, caches)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['holdout_overlap'] = {'状态': f'运行失败，**未核验**：{exc}'}
+        return
+    out = buffer.getvalue()
+    hard = [ln.strip() for ln in out.splitlines() if ln.strip().startswith('✗')]
+    info: dict[str, Any] = {'返回码': rc, '**硬失败**': len(hard)}
+    if hard:
+        info['**逐条**'] = hard[:8]
+        info['口径'] = ('holdout 的内容已在 train 中出现——**用它出的 known 题不测泛化，'
+                        '且一定得高分**。正解是换源，不是调阈值。')
+    report.metrics['holdout_overlap'] = info
+
+
 def run_corpus_integrity(report, target: Path) -> None:
     """语料真伪门（v0.0.0.33 新增，**只报不拦**）——已入库的这些文件，是语料吗？
 
@@ -1826,6 +1884,7 @@ def main() -> int:
             run_case_self_sufficiency(report, cases)
             run_measurement_claims(report, target)
             run_sole_authorship(report, target)
+            run_holdout_overlap(report, target, args.cache)
         if args.phase == 'release':
             evaluate_results(report, target, thresholds, cases)
             run_content_checks(report, target, args.cache)
