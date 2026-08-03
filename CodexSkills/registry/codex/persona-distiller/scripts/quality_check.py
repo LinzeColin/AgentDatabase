@@ -1529,6 +1529,76 @@ def run_sole_authorship(report, target: Path) -> None:
     report.metrics['sole_authorship'] = info
 
 
+def run_suite_single_drag(report, target: Path, thresholds: dict) -> None:
+    """套组诊断（v0.0.0.69，**只写 metrics，不改任何分数**）。
+
+    每个套组只有 2 题——**一道答坏的题，套组均分立刻掉一半的量**，
+    而套组均分会把它摊薄成「整组偏弱」，让人去改整组。**修法完全不同。**
+
+    实测：`boundary` 有三人是**被单独一道题拖住**
+    （Nightingale `ni-boundary-01` 0.705、Osler `wo-boundary-02` 0.815、
+    Jenner `ej-boundary-02` 0.820）；
+    而 `fact-preservation` 在十个人身上**无一例外是「整组偏弱」**——
+    **不是一道坏答案沉了它，是整组稳定坐在 0.88–0.90。**
+
+    **它不改任何分数。** 「去掉最低那道能过」是关于**修哪里**的话，
+    不是关于**该不该过**的话。**门还是门。**
+    """
+    here = Path(__file__).resolve().parent
+    script = here / 'check_suite_single_drag.py'
+    if not script.exists():
+        report.metrics['suite_single_drag'] = {'状态': '检查器未安装，**未核验**（不是通过）'}
+        return
+    results = target / 'evals' / 'results.jsonl'
+    if not results.is_file():
+        report.metrics['suite_single_drag'] = {'状态': '**没有判分记录，未核验**'}
+        return
+    spec = importlib.util.spec_from_file_location('_pd_drag', script)
+    module = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(module)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['suite_single_drag'] = {'状态': f'加载失败，**未核验**：{exc}'}
+        return
+    buffer = io.StringIO()
+    with contextlib.redirect_stdout(buffer):
+        if module.selftest() != 0:
+            report.metrics['suite_single_drag'] = {'状态': '**负对照未过，其结论不作数**'}
+            return
+    try:
+        rows = [json.loads(l) for l in results.read_text(encoding='utf-8').splitlines()
+                if l.strip()]
+        thr = {'boundary': float(thresholds.get('min_boundary_score', 0.85)),
+               'fact-preservation': float(thresholds.get('min_fact_preservation_score', 0.93))}
+        by = module.suite_cases(rows)
+        diag = module.diagnose(by, thr)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['suite_single_drag'] = {'状态': f'运行失败，**未核验**：{exc}'}
+        return
+
+    single, whole = [], []
+    for suite, mean, t0, worst, wval, rmean, can in diag:
+        if worst is None:
+            continue
+        (single if can else whole).append(
+            f'{suite}　均分 {mean:.4f} < {t0:.2f}　'
+            + (f'**被 {worst}（{wval:.3f}）一道拖住——去掉它 {rmean:.4f} ≥ {t0:.2f}**'
+               if can else f'整组偏弱（去掉最低仍 {rmean:.4f}）'))
+    info: dict[str, Any] = {'未过阈值的套组': len(diag)}
+    if single:
+        info['**被单独一道题拖住**'] = single
+    if whole:
+        info['整组偏弱'] = whole
+    if diag and not single and not whole:
+        info['状态'] = '未过的套组都只有 1 题，**没有「其余」可比，不诊断**'
+    if not diag:
+        info['状态'] = '有阈值的套组都过了——无需诊断'
+    info['口径'] = ('这只是「修哪里」，不是「该不该过」。**门还是门。**'
+                    '另：**「知道该改哪一道」与「知道该怎么改」是两件事**——'
+                    'Nightingale #112 那一道改完从 0.760 掉到 0.705。')
+    report.metrics['suite_single_drag'] = info
+
+
 def run_holdout_overlap(report, target: Path, cache_dirs: list[str]) -> None:
     """holdout ↔ train 内容重合（v0.0.0.68 接进门，**此前从未跑过**）。
 
@@ -1887,6 +1957,7 @@ def main() -> int:
             run_holdout_overlap(report, target, args.cache)
         if args.phase == 'release':
             evaluate_results(report, target, thresholds, cases)
+            run_suite_single_drag(report, target, thresholds)
             run_content_checks(report, target, args.cache)
             run_baseline_provenance(report, target)
             findings = scan_secrets(target)
