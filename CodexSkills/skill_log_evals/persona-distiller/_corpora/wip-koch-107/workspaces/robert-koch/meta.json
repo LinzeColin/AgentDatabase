@@ -1,0 +1,50 @@
+{
+  "builder_version": "v0.0.0.5",
+  "chosen_subject_uid": null,
+  "consent_authority": null,
+  "created_at": "2026-08-03T00:57:40Z",
+  "current_version": null,
+  "existential_hypotheses_enabled": false,
+  "identity_selection": {
+    "canonical": "healthcare-nursing",
+    "display": "医疗护理师",
+    "mode": "single",
+    "primary": "healthcare-nursing",
+    "weights": {
+      "healthcare-nursing": 1.0
+    }
+  },
+  "language": "de",
+  "model_version": "0.1.0-draft",
+  "name": "Robert Koch",
+  "namesake_gate": {
+    "candidate_count": 0,
+    "chosen_candidate": null,
+    "chosen_subject_uid": null,
+    "normalized_name": "robertkoch",
+    "resolution": "none",
+    "schema_version": "1.0"
+  },
+  "normalized_name": "robertkoch",
+  "origin_review_required": false,
+  "product_version": null,
+  "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+  "profile": "deep",
+  "prohibited_uses": [
+    "identity authentication or deceptive impersonation",
+    "invented endorsement, signature, consent, private memory or current opinion",
+    "unsupported psychological diagnosis",
+    "replacement of accountable high-stakes professional judgment"
+  ],
+  "retention_policy": null,
+  "runtime_invocation_versioning": false,
+  "scenario": null,
+  "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+  "schema_version": "2.0",
+  "slug": "robert-koch",
+  "status": "draft",
+  "subject_origin": "historical",
+  "target_id": "tgt-03e2be0bc06d",
+  "time_scope": "1843-1910",
+  "updated_at": "2026-08-03T00:57:40Z"
+}

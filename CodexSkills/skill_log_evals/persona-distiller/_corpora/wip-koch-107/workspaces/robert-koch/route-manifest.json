@@ -1,0 +1,107 @@
+{
+  "build_depth": {
+    "art-designer": "screening",
+    "entrepreneur-operator": "screening",
+    "investor-capital-allocator": "screening",
+    "software-developer": "screening",
+    "technical-engineer": "screening",
+    "thinker-educator": "screening"
+  },
+  "generated_at": "2026-08-03T00:57:40Z",
+  "identity_selection": {
+    "canonical": "healthcare-nursing",
+    "display": "医疗护理师",
+    "mode": "single",
+    "primary": "healthcare-nursing",
+    "weights": {
+      "healthcare-nursing": 1.0
+    }
+  },
+  "product_release_versioning": {
+    "consumed_on": "successful-registration",
+    "format": "0.0.0.N",
+    "maximum": "0.0.0.999",
+    "minimum": "0.0.0.1",
+    "scope": "per-canonical-person"
+  },
+  "provided_scenario": null,
+  "research": {
+    "base_lanes": [
+      "writings",
+      "conversations",
+      "expression",
+      "external",
+      "decisions",
+      "timeline"
+    ],
+    "completeness_method": [
+      "source-universe",
+      "coverage-cube",
+      "origin-clustering",
+      "gap-expansion",
+      "two-round-saturation"
+    ],
+    "primary_identity_focus": [
+      "诊断与鉴别",
+      "治疗与循证",
+      "护理与照护",
+      "用药与安全",
+      "公共卫生",
+      "医患沟通"
+    ],
+    "scenario_priors": [
+      "临床诊断",
+      "治疗方案",
+      "护理照护",
+      "用药安全",
+      "公共卫生",
+      "健康教育"
+    ],
+    "source_priorities": [
+      "clinical-guidelines",
+      "trials",
+      "case-records",
+      "pharmacopoeia",
+      "public-health-data",
+      "medical-literature"
+    ]
+  },
+  "runtime_identity_routing": {
+    "mode": "automatic",
+    "source": "distilled-identity-selection",
+    "task_reweighting": true,
+    "user_selection_required": false
+  },
+  "runtime_invocation_versioning": {
+    "audit_records": "optional-unnumbered",
+    "enabled": false,
+    "user_visible_version": false,
+    "versioned_output_names": false
+  },
+  "runtime_model_load_order": [
+    "boundaries.md",
+    "corrections/ACTIVE.md",
+    "facts.md",
+    "identity-facets/<selection>.md",
+    "cognitive-os.md",
+    "decision-policy.md",
+    "strategy.md",
+    "capabilities.md",
+    "work.md",
+    "persona.md",
+    "scenario-adapters/<inferred>.md",
+    "divergence-map.md"
+  ],
+  "runtime_readiness": {
+    "art-designer": "provisional-until-evidenced",
+    "entrepreneur-operator": "provisional-until-evidenced",
+    "investor-capital-allocator": "provisional-until-evidenced",
+    "software-developer": "provisional-until-evidenced",
+    "technical-engineer": "provisional-until-evidenced",
+    "thinker-educator": "provisional-until-evidenced"
+  },
+  "scenario_policy": "infer-per-task",
+  "schema_version": "1.0",
+  "subject_origin": "historical",
+  "target_name": "Robert Koch"
+}
