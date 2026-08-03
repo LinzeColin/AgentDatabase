@@ -14,3 +14,134 @@ OK privilegiya-1891-uplotnenie-otlivok chars=9608 url=https://web.archive.org/we
    cyr-stats privilegiya-1891-uplotnenie-otlivok {'cyrillic': 7649, 'latin': 42, 'mixed_script_words': 0}
 OK doklad-irto-1895-uplotnenie-bolvanok chars=28209 url=https://web.archive.org/web/20040711223430id_/http://weld.pfo-perm.ru/Date/Svarka4.htm
    cyr-stats doklad-irto-1895-uplotnenie-bolvanok {'cyrillic': 22500, 'latin': 3, 'mixed_script_words': 0}
+OK elektrichestvo-1891-05-irto-perm-installation chars=1645 url=https://archive.org/details/18915
+   cyr-stats elektrichestvo-1891-05-irto-perm-installation {'cyrillic': 1158, 'latin': 0, 'mixed_script_words': 0}
+OK elektrichestvo-1891-17-review-1891-brochure chars=4262 url=https://archive.org/details/189117
+   cyr-stats elektrichestvo-1891-17-review-1891-brochure {'cyrillic': 3070, 'latin': 0, 'mixed_script_words': 0}
+OK elektrichestvo-1891-24-annual-index-entry chars=450 url=https://archive.org/details/189124
+   cyr-stats elektrichestvo-1891-24-annual-index-entry {'cyrillic': 272, 'latin': 3, 'mixed_script_words': 0}
+OK elektrichestvo-1892-08-vystavka-otlivka chars=30530 url=https://archive.org/details/18928
+   cyr-stats elektrichestvo-1892-08-vystavka-otlivka {'cyrillic': 21780, 'latin': 12, 'mixed_script_words': 0}
+OK elektrichestvo-1892-0910-benardos-vs-slavyanov chars=24820 url=https://archive.org/details/1892910
+   cyr-stats elektrichestvo-1892-0910-benardos-vs-slavyanov {'cyrillic': 17409, 'latin': 19, 'mixed_script_words': 0}
+OK elektrichestvo-1892-1112-vystavka-awards chars=779 url=https://archive.org/details/18921112
+   cyr-stats elektrichestvo-1892-1112-vystavka-awards {'cyrillic': 554, 'latin': 5, 'mixed_script_words': 0}
+OK elektrichestvo-1892-21-footnote-perm-dynamo chars=1209 url=https://archive.org/details/189221
+   cyr-stats elektrichestvo-1892-21-footnote-perm-dynamo {'cyrillic': 877, 'latin': 0, 'mixed_script_words': 0}
+OK elektrichestvo-1892-56-vystavka-plan-benardos chars=1190 url=https://archive.org/details/189256
+   cyr-stats elektrichestvo-1892-56-vystavka-plan-benardos {'cyrillic': 837, 'latin': 0, 'mixed_script_words': 0}
+OK elektrichestvo-1890-03-benardos-vs-thomson chars=1124 url=https://archive.org/details/18903
+   cyr-stats elektrichestvo-1890-03-benardos-vs-thomson {'cyrillic': 833, 'latin': 0, 'mixed_script_words': 0}
+OK elektrichestvo-1892-02-benardos-in-england chars=1537 url=https://archive.org/details/18922
+   cyr-stats elektrichestvo-1892-02-benardos-in-england {'cyrillic': 1109, 'latin': 1, 'mixed_script_words': 0}
+OK etz-1895-lohmann-slavianoff-giessverfahren chars=36668 url=https://archive.org/details/bub_gb_F4gxAQAAMAAJ
+OK stahl-eisen-1895-vdmi-lohmann-vortrag chars=9496 url=https://archive.org/details/bub_gb_o63mAAAAMAAJ
+OK stahl-eisen-1895-vdmi-lohmann-vortrag-DUPSCAN chars=9128 url=https://archive.org/details/bub_gb_gIA3AQAAMAAJ
+OK stahl-eisen-1892-patentanmeldung-slawianoff chars=1071 url=https://archive.org/details/bub_gb_JyvOAAAAMAAJ
+OK stahl-eisen-1892-patentanmeldung-slawianoff-DUPSCAN chars=999 url=https://archive.org/details/bub_gb_SC1OAAAAYAAJ
+OK stahl-eisen-1896-perm-kanonenwerk chars=1664 url=https://archive.org/details/bub_gb_Uq7mAAAAMAAJ
+OK zvdi-1897-zeitschriftenschau-slavianoff chars=810 url=https://archive.org/details/bub_gb_Xgo-AQAAMAAJ
+OK stahl-eisen-1903-anzeige-patent-slavianoff chars=500 url=https://archive.org/details/bub_gb_LrTmAAAAMAAJ
+OK stahl-eisen-1904-schweissverfahren-uebersicht chars=1403 url=https://archive.org/details/bub_gb_3sfmAAAAMAAJ
+OK stahl-eisen-1908-schweissverfahren-liste chars=1469 url=https://archive.org/details/bub_gb_PZ7mAAAAMAAJ
+OK nypl-1913-list-works-electric-welding chars=94767 url=https://archive.org/details/listworksrelati00deptgoog
+OK applied-electrochem-welding-1917-craver chars=4960 url=https://archive.org/details/appliedelectroc00cravgoog
+OK applied-electrochem-welding-1917-craver-history chars=8592 url=https://archive.org/details/appliedelectroc00cravgoog
+OK spot-and-arc-welding-1920-bare-electrode chars=2077 url=https://archive.org/details/SpotAndArcWelding
+OK viall-electric-welding-1921-arc-processes chars=3722 url=https://archive.org/details/electricwelding00vialrich
+OK us-shipping-board-1918-slavianoff-system chars=6984 url=https://archive.org/details/reporttouniteds00corpgoog
+OK hamilton-electric-welding-1918 chars=9458 url=https://archive.org/details/electricweldingc00hamiuoft
+OK wanamaker-electric-arc-welding-1921 chars=4042 url=https://archive.org/details/electricarcweldi00wanarich
+OK carpenter-electric-welding-1920 chars=3975 url=https://archive.org/details/electricwelding00carpgoog
+OK bennett-electric-welding-1914 chars=2492 url=https://archive.org/details/electricwelding00bennrich
+OK railway-electrical-engineer-slavianoff chars=4630 url=https://archive.org/details/railwayelectrica05unse
+OK esbe-motovilikhinskii-zavod chars=1694 url=https://ru.wikisource.org/wiki/%D0%AD%D0%A1%D0%91%D0%95/%D0%9C%D0%BE%D1%82%D0%BE%D0%B2%D0%B8%D0%BB%D0%B8%D1%85%D0%B8%D0%BD%D1%81%D0%BA%D0%B8%D0%B9%20%D0%BA%D0%B0%D0%B7%D0%B5%D0%BD%D0%BD%D1%8B%D0%B9%20%D0%B7%D0%B0%D0%B2%D0%BE%D0%B4
+OK esbe-payanie chars=21927 url=https://ru.wikisource.org/wiki/%D0%AD%D0%A1%D0%91%D0%95/%D0%9F%D0%B0%D1%8F%D0%BD%D0%B8%D0%B5
+OK stahl-eisen-1894-muehlhaeuser-benardos-verfahren chars=9932 url=https://archive.org/details/bub_gb_fC9OAAAAYAAJ
+OK stahl-eisen-1888-de-patent-43194-benardos chars=1002 url=https://archive.org/details/bub_gb_bXw3AQAAMAAJ
+OK stahl-eisen-1908-schweissverfahren-liste-DUPSCAN chars=1540 url=https://archive.org/details/bub_gb_RztOAAAAYAAJ
+OK hamilton-oberg-1918-processes-overview chars=11657 url=https://archive.org/details/electricwelding00obergoog
+OK hamilton-electric-welding-1918-DUPSCAN chars=9692 url=https://archive.org/details/electricweldingc00hamirich
+OK viall-electric-welding-1921-DUPSCAN chars=3967 url=https://archive.org/details/gri_33125000707469
+OK viall-electric-welding-1921-DUPSCAN2 chars=3000 url=https://archive.org/details/bwb_S0-BGD-555
+OK viall-electric-welding-1921-contents chars=1043 url=https://archive.org/details/electricwelding019468mbp
+OK wanamaker-pennington-1921-DUPSCAN chars=4117 url=https://archive.org/details/electricarcweld01penngoog
+OK railway-electrical-engineer-v6-1914-slavianoff chars=3538 url=https://archive.org/details/railwayelectrica06unse
+OK etz-1927-din-schweiss-terminologie chars=667 url=https://archive.org/details/elektrotechnisch4816unse
+
+# ══════════════════════════════════════════════════════════════════════════
+# FAILURES AND REFUSALS — every attempt below was actually made on 2026-08-04.
+# Nothing was worked around; where a service returned a bot-check or an
+# access-control page the attempt was abandoned, not retried harder.
+# ══════════════════════════════════════════════════════════════════════════
+
+# ── his own patents that were IDENTIFIED but whose full text was NOT obtained ──
+FAIL DE57417C  https://patents.google.com/patent/DE57417C/en  HTTP 503 "We're sorry ... but your computer or network may be sending automated queries."  BOT-CHECK NOT BYPASSED.
+FAIL DE57417C  https://patentimages.storage.googleapis.com/pdfs/DE57417C.pdf  HTTP 403 (Google Patents holds OCR text for this DE patent but publishes no PDF: the xhr/query record returns "pdf": "")
+FAIL DE57417C  https://depatisnet.dpma.de/DepatisNet/depatisnet?action=pdf&docid=DE000000057417C  HTTP 200 but the body is a viewer frame ("DEPATISnet | Dokument DE000000057417C") that loads the PDF through a server-side session; no document retrieved, session flow NOT forced.
+FAIL DE65892C  https://patents.google.com/patent/DE65892C/en  HTTP 503, same bot-check.
+FAIL DE65892C  https://patentimages.storage.googleapis.com/pdfs/DE65892C.pdf  HTTP 403.
+FAIL GB189016279A  https://patentimages.storage.googleapis.com/pdfs/GB189016279A.pdf  HTTP 403.
+FAIL espacenet  https://worldwide.espacenet.com/patent/search?q=pn%3DDE57417  HTTP 403 (curl) and HTTP 403 (WebFetch) — Cloudflare-style block, NOT BYPASSED.
+FAIL ops.epo.org  https://ops.epo.org/3.2/rest-services/published-data/publication/docdb/DE.57417.C/biblio  HTTP 403 (needs an API key).
+NOTE  What IS documented, from sources that are in the corpus:
+NOTE    - US 577,329 states on its own face: "Patented in Germany October 11, 1890, No. 57,417, and in England October 13, 1890, No. 16,279."
+NOTE    - Google Patents' xhr/query endpoint (a public JSON endpoint, not blocked) returns
+NOTE      DE57417C  title "Process for compacting metal castings by means of electricity", assignee "N. SLAwianoff in St. Petersburg, Grofse Morskaia Str. 15"
+NOTE      DE65892C  title "Method and device for melting by means of electricity",        assignee "N. SLAWIANOFF in St. Petersburg, Grofse Morskaiastr. 15"
+NOTE    - Stahl und Eisen 1892 carries the German filing notice (in the corpus, two scans).
+NOTE  These are recorded as EVIDENCE OF EXISTENCE ONLY. No text of DE 57417, DE 65892 or GB 16279 is in this corpus.
+
+# ── the Russian privilege scan ──
+FAIL prlib-837493  https://www.prlib.ru/item/837493  page fetched OK; the record reads "Доступно только в Электронных читальных залах" (electronic-reading-room only). ACCESS CONTROL RESPECTED, NOT BYPASSED.
+NOTE  Its catalogue record is still useful and is quoted here verbatim: "Привилегия, выданная из Департамента Торговли и Мануфактур в 1891 г. горному инженеру надворному советнику Николаю Славянову, на способ и аппараты для электрической отливки металлов : № 4694/87 : Заявл. 17.03.1890 : Выдача привилегии 13.08.1891 / Николай Славянов. - Санкт-Петербург : Тип. эксп. загот. гос. бумаг, 1891. - 9 с., 1 л. черт. ... Место хранения оригинала: ФИПС"
+NOTE  The privilege TEXT that IS in the corpus (privilegiya-1891-otlivka-metallov) comes from the Perm transcription, not from this scan; the filing date 17 March 1890 agrees between the two.
+
+# ── the 1892 first printing ──
+FAIL 1892-first-printing  no accessible scan found.  Searched: archive.org metadata (97 «Электричество» items, 30 «Горный журнал» items, language:rus 1885–1902), prlib.ru, search.rsl.ru, elib.shpl.ru, vivaldi.nlr.ru, elib.uraic.ru, elib.biblioatom.ru, geokniga.org, Google Books API.
+NOTE  What was reached instead is the Perm transcription of the Машгиз (Moscow, 1954) re-setting, chapters I–IV. Orthography is modernised. Verbatim quotation therefore traces to the 1954 edition, NOT to the 1892 print. Flagged in every affected ledger row.
+FAIL weld.pfo-perm.ru (live)  http://weld.pfo-perm.ru/Date/Otlivka1.htm  HTTP 301 -> https://weld.pfo-perm.ru:443/... whose certificate does not match the host name. Certificate verification NOT disabled; the Wayback Machine capture of 2004-05-11 was used instead and is what every URL in the ledger points to.
+
+# ── services that refused ──
+FAIL hathitrust  https://babel.hathitrust.org/cgi/ls?q1=Slavianoff;a=srchls;...  HTTP 403.
+FAIL loc-chronam  https://www.loc.gov/collections/chronicling-america/?q=Slavianoff&fo=json  HTTP 403; the old https://chroniclingamerica.loc.gov/search/pages/results/ endpoint returns HTTP 308 to a Cloudflare page.
+FAIL rusneb  https://rusneb.ru/  HTTP 403.
+FAIL google-books-api  https://www.googleapis.com/books/v1/volumes?q=...  HTTP 429 "Quota exceeded ... Queries per day". Retried with three different queries, same result; abandoned.
+FAIL dingler  https://dingler.culture.hu-berlin.de/search?q=Slawianoff  connection refused/timeout.
+FAIL archive.perm.ru, permgani.ru  connection timed out (35 s) — Perm regional archives unreachable from here.
+FAIL archive.org sim_* items  e.g. https://archive.org/download/sim_electrical-world_1892-10-22_20_17/..._djvu.txt  HTTP 302 (lending-restricted). Their "search inside" index WAS queried (that is a public endpoint) and returned no Slavianoff/Slawianoff/Benardos hits for the volumes swept.
+FAIL ia-fts.archive.org  DNS does not resolve; per-item .../fulltext/inside.php was used instead.
+
+# ── deliberately NOT ingested: still in copyright ──
+SKIP-COPYRIGHT  Otlivka5.htm / Otlivka6.htm  — К. К. Хренов, С. Т. Назаров, «Биография Н. Г. Славянова» and «Комментарии к книге Н. Г. Славянова», Москва 1954. Khrenov died 1984; the editorial apparatus of the 1954 Mashgiz edition is not public domain. Fetched to read (that is how the copy-text of Otlivka1–4 was identified), NOT written into the corpus.
+SKIP-COPYRIGHT  Slavjanov1–4.htm  — А. К. Шарц, «Николай Гаврилович Славянов», Пермь 1965. In copyright.
+SKIP-COPYRIGHT  Ubiley.htm  — Р. А. Мусин (ПермГТУ), 2004. In copyright.
+SKIP-COPYRIGHT  Malukov.htm  — biography of A. F. Malyukov, 2004, and irrelevant to this person.
+NOTE  Consequence to be honest about: the `timeline` lane loses its best material (a full biography) to copyright, exactly as happened with #113 Henderson.
+
+# ── scope of the sweeps that produced the corpus ──
+SWEEP  archive.org metadata search built 1341 Latin-script candidate volumes (welding / Stahl und Eisen / ETZ / ZVDI / Dingler / Scientific American Suppl. / Franklin Inst. / AIEE / Iron Age / Electrical World / Electrician). Each was queried through its own item's /fulltext/inside.php for "Benardos", "Slavianoff", "Slawianoff". 58 items came back positive; 36 of those actually contain a Slavianoff spelling in the downloaded DjVuTXT.
+SWEEP  A second pool of 326 Russian-language items (97 «Электричество», 30 «Горный журнал», plus language:rus 1885–1902) was downloaded as DjVuTXT and grepped locally for Славянов / Бенардос / «электрическая отливка» in pre-1918 orthography. Only the 1890–1893 «Электричество» run produced hits; «Горный журнал» on archive.org stops at 1882 and contains nothing.
+SWEEP  Google Patents' public xhr/query endpoint was searched for slavianoff / slawianoff / slavjanoff / slawjanoff / slavianov / slavyanov / benardos / olszewski / elektrogefest before it began returning 503.
+
+# ══════════════════════════════════════════════════════════════════════════
+# LANE COVERAGE — measured, not estimated (counted off raw/_ids.txt)
+# ══════════════════════════════════════════════════════════════════════════
+LANE  writings      4   MEETS the ≥4 target (the four surviving chapters of the 1892 book)
+LANE  decisions    10   MEETS
+LANE  timeline      6   MEETS
+LANE  external     32   MEETS
+LANE  expression    1   SHORT of ≥4.  The only public address obtainable is the IRTO
+                        report of 15 April 1895.  No other speech, no exhibition
+                        address, no discussion transcript was found in any reachable
+                        repository.  NOT padded by relabelling third-party exhibition
+                        reports as his own speech.
+LANE  conversations 0   EMPTY.  No letters were found anywhere fetchable.  See
+                        _EXCLUDED.txt Part 3.  NOT padded.
+TIER  P1 8 / S1 22 / S2 23 = 53 files.  Primary share 8/53 = 15.1%, far under the
+      70% target and under the 65% floor.  The reason is structural, not effort:
+      Slavyanov left a small published body (one book, two Russian privileges, a
+      handful of foreign patents, one recorded address), the 1892 first printing is
+      not digitised anywhere reachable, and three of his foreign patents are behind
+      bot-checks.  The corpus is honest about this rather than promoting S1 to P1.
+COUNT 53 files, target ≥50 / floor 45 — MEETS on count.

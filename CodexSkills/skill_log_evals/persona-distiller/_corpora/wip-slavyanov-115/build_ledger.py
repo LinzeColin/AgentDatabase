@@ -1,0 +1,349 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""Write raw/_ids.txt for #115 Nikolai Slavyanov."""
+import os, sys
+
+BASE = '/Users/linzezhang/Documents/Codex/AgentDatabase/character-distillation-skill-reorganize-d57595/CodexSkills/skill_log_evals/persona-distiller/_corpora/wip-slavyanov-115'
+RAW = os.path.join(BASE, 'raw')
+
+HEADER = """# ── #115 Nikolai Slavyanov (1854-05-05 – 1897-10-17, Russian engineer, metal-electrode arc welding; wrote in RUSSIAN) corpus ledger ──
+#
+# columns (TAB separated, 9 of them):
+#   short-id <TAB> URL <TAB> title <TAB> year <TAB> where-it-sits <TAB> language <TAB> tier <TAB> flags <TAB> note
+#
+# ══ HOW THE YEAR COLUMN WAS PRODUCED ══
+#   Nothing here was filled from memory.  Every year is one of:
+#     (a) read off the document itself (US patent leaf "Patented Feb. 16, 1897";
+#         «Электричество» issue mastheads; the Perm transcription's own title lines);
+#     (b) taken from the archive.org item's own `year`/`date` field, in which case
+#         the note says so;
+#     (c) derived from a legible dated line inside the same volume, in which case
+#         the note quotes that line (Railway Electrical Engineer v.5 / v.6).
+#   Where a running head was too damaged to read a page number, NO page number is
+#   given — see stahl-eisen-1895-vdmi-lohmann-vortrag and
+#   stahl-eisen-1894-muehlhaeuser-benardos-verfahren.
+#
+# ══ ATTRIBUTION FLAG (column 8) — one of these is always present ══
+#   HIS-OWN / CO-AUTHORED / THIRD-PARTY / ATTRIBUTION-UNCLEAR / OTHER-INVENTOR
+#   OTHER-INVENTOR marks material whose subject is NIKOLAI BENARDOS (1842–1905,
+#   CARBON electrode).  Benardos is a separate person and a separate future
+#   product in this queue.  Those files are kept because the boundary questions
+#   need them, but NOTHING in them may be voiced as Slavyanov.
+#
+# ══ ELECTRODE= (column 9, mandatory) ══
+#   carbon = the material talks about a carbon (non-consumable) electrode
+#   metal  = the material talks about the consumable metal electrode
+#   both   = the material talks about both, or contrasts them
+#   NOTE the non-obvious case: Slavyanov's OWN documents are frequently
+#   ELECTRODE=both, not ELECTRODE=metal.  His 1891 privilege for уплотнение and
+#   his 1895 IRTO report both describe him using a CARBON rod as the electrode for
+#   the consolidation (уплотнение) work — «с помощью угольного электрода мною были
+#   уплотнены три болванки тигельной стали по 320 пд. каждая».  His claim to the
+#   melting metal electrode is about отливка/сварка, not about everything he did
+#   with an arc.  Do not flatten this.
+#
+# ══ TIERS ══
+#   P1 = written or signed by Slavyanov himself
+#   P2 = a degraded copy of the same material (worse scan, worse OCR, translation)
+#   S1 = contemporary third party (1888–1900)
+#   S2 = later study / textbook (1903 onwards)
+#   A patent by Benardos is S1 here, not P1 — P1 is defined relative to Slavyanov.
+#
+# ══ WHAT IS *NOT* HERE ══  see raw/_fetch.log and raw/_EXCLUDED.txt
+#   - the 1892 first printing itself (only the 1954 Mashgiz re-setting could be reached)
+#   - DE 57417, DE 65892, GB 16279/1890 (identified, full text not obtained)
+#   - the Russian privilege scan at prlib.ru (reading-room only)
+#   - no letters at all: the `conversations` lane is EMPTY.
+"""
+
+# (short, url, title, year, where, lang, tier, flags, note)
+ROWS = [
+# ─────────────────────────── P1 — his own hand ───────────────────────────
+("otlivka-1892-ch1-elektroliteinaya-fabrika",
+ "https://web.archive.org/web/20040511192317id_/http://weld.pfo-perm.ru/Date/Otlivka1.htm",
+ "Электрическая отливка металлов. Руководство к установке и практическому применению её — ГЛАВА I. Устройство электролитейной фабрики",
+ "1892", "копия-текст по переизданию Машгиз (М., 1954) на сайте к 150-летию Славянова (Пермский ЦНТИ, 2004); взято через Wayback", "ru", "P1", "HIS-OWN",
+ "lane=writings. ELECTRODE=metal. Глава открывается требованиями к фабрике и списком оборудования: «а) электрический плавильник Славянова с приспособлением для удобного перемещения его по всем...». Уголь встречается только как топливо печи и как «угольный мусор» для засыпки формы — не как электрод. ВНИМАНИЕ: копия-текст снят с издания 1954 г., орфография осовременена; дословная цитата прослеживается до Машгиз-1954, НЕ до набора 1892 г."),
+("otlivka-1892-ch2-prakticheskie-podrobnosti",
+ "https://web.archive.org/web/20040511192358id_/http://weld.pfo-perm.ru/Date/Otlivka2.htm",
+ "Электрическая отливка металлов — ГЛАВА II. Практические подробности работы с помощью электрической отливки",
+ "1892", "то же издание; самая длинная глава книги (≈72 тыс. знаков)", "ru", "P1", "HIS-OWN",
+ "lane=writings. ELECTRODE=both. Рабочий электрод — плавящийся стержень из наплавляемого металла; но прессованный угольный стержень применяется как шишка для получения отверстий, а «пропаривание» ведётся угольным электродом. Здесь же его шихты, режимы тока и приёмы формовки. Та же оговорка о копии-тексте 1954 г."),
+("otlivka-1892-ch3-osobye-primeneniya",
+ "https://web.archive.org/web/20040511192504id_/http://weld.pfo-perm.ru/Date/Otlivka3.htm",
+ "Электрическая отливка металлов — ГЛАВА III. Особые применения электрической отливки",
+ "1892", "то же издание", "ru", "P1", "HIS-OWN",
+ "lane=writings. ELECTRODE=both. Прямо предписывает «обработать жидкий чугун угольным электродом более или менее продолжительное время» для размягчения чугуна — то есть он сам штатно работает углём там, где нужен нагрев, а не наплавка. Та же оговорка о копии-тексте 1954 г."),
+("otlivka-1892-ch4-koksovye-kvartsevye-plitki",
+ "https://web.archive.org/web/20040511192539id_/http://weld.pfo-perm.ru/Date/Otlivka4.htm",
+ "Электрическая отливка металлов — ГЛАВА IV. Приготовление коксовых и кварцевых плиток и стержней",
+ "1892", "то же издание; самая короткая глава", "ru", "P1", "HIS-OWN",
+ "lane=writings. ELECTRODE=metal. Про материалы формовки, а не про электроды: коксовые и кварцевые плитки, цемент из смолы газопроводных труб печей Сименса и жидкое (фуксово) стекло. Та же оговорка о копии-тексте 1954 г."),
+("privilegiya-1891-otlivka-metallov",
+ "https://web.archive.org/web/20040710215628id_/http://weld.pfo-perm.ru/Date/Svarka2.htm",
+ "Привилегия, выданная из Департамента торговли и мануфактур в 1891 г. горному инженеру надворному советнику Николаю Славянову, на способ и аппараты для электрической отливки металлов",
+ "1891", "прошение подано 17 марта 1890 г. (в тексте привилегии); тот же пермский сайт, через Wayback", "ru", "P1", "HIS-OWN",
+ "lane=decisions. ELECTRODE=both. Формула: «одним или обоими электродами служат при этом способе стержни из самого материала, предназначенного к отливке» — это и есть заявка на плавящийся металлический электрод; и тут же он объясняет, что понижение температуры «устраняет излишний перегрев металла, замечаемый при употреблении угольного электрода», т. е. угольный электрод назван прямо как то, от чего он уходит. Прошение подал не он сам, а горный инженер А. Износков — см. первую строку."),
+("privilegiya-1891-uplotnenie-otlivok",
+ "https://web.archive.org/web/20040711114743id_/http://weld.pfo-perm.ru/Date/Svarka3.htm",
+ "Привилегия, выданная из Департамента торговли и мануфактур в 1891 г. горному инженеру надворному советнику Николаю Славянову, на способ электрического уплотнения металлических отливок",
+ "1891", "прошение подано 8 августа 1890 г. (в тексте привилегии); тот же пермский сайт, через Wayback", "ru", "P1", "HIS-OWN",
+ "lane=decisions. ELECTRODE=both. Вторая, отдельная привилегия — не сварка, а уплотнение. В описании прибора прямо: «Металлический или угольный стержень ss, служащий электродом вольтовой дуги» — то есть в этом изобретении уголь допущен наравне с металлом."),
+("doklad-irto-1895-uplotnenie-bolvanok",
+ "https://web.archive.org/web/20040711223430id_/http://weld.pfo-perm.ru/Date/Svarka4.htm",
+ "Об электрическом уплотнении металлических отливок, установленном практически в применении к стальным болванкам. Доклад в Общем собрании членов Императорского Русского технического общества 15 апреля 1895 г.",
+ "1895", "дата и место чтения стоят в заголовке самого текста; тот же пермский сайт, через Wayback", "ru", "P1", "HIS-OWN",
+ "lane=expression. ELECTRODE=both. Единственная в корпусе публичная речь от первого лица: «Предметом моего настоящего доклада будет...». И самое важное для границы: «с помощью угольного электрода мною были уплотнены три болванки тигельной стали по 320 пд. каждая» — он САМ работает углём. Кончается расчётом экономии и честной оговоркой: об уплотнении фигурных отливок «подробно доложить не могу, потому что практически в большом виде его не испытывал»."),
+("us-patent-577329-1897",
+ "https://patentimages.storage.googleapis.com/pdfs/US577329.pdf",
+ "Nicholas Slawianoff, «Electrical Casting of Metals», United States Letters Patent No. 577,329",
+ "1897", "лист патента: «dated February 16, 1897. Application filed January 29, 1891. Serial No. 379,555»; 7 стр. PDF (4 листа чертежей + 3 стр. текста)", "en", "P1", "HIS-OWN",
+ "lane=decisions. ELECTRODE=both. Его собственный патент, но по-английски и в чужой редакции (US Patent Office). На листе сам указан приоритет: «Patented in Germany October 11, 1890, No. 57,417, and in England October 13, 1890, No. 16,279» — это и есть источник номеров DE и GB в _fetch.log. По электроду: «the melting metal rod», и явное «thus is avoided the overheating of the metal resulting from the use of a carbon electrode»; но угольный стержень у него же служит вспомогательным электродом в форме и при отжиге. Свидетели подписи: N. TSCHEKALOFF, J. FLIERLING."),
+# ───────────────────── S1 — Russian contemporaries ─────────────────────
+("elektrichestvo-1891-05-irto-perm-installation",
+ "https://archive.org/details/18915",
+ "«Электричество» № 5, 1891 — протокол заседания VI Отдела ИРТО: электрическая установка на Пермском пушечном заводе",
+ "1891", "строки 73–108 из 3634 (archive.org item 18915); номер выпуска и год — с обложки выпуска", "ru", "S1", "THIRD-PARTY",
+ "lane=decisions. ELECTRODE=metal. Заводское решение, а не изобретение: установка на ~1000 ламп, «работами руководил помощник начальника завода г. Славянов», всё из заводских материалов, из Петербурга только лампы и изолированная проволока; «вся установка на 900 ламп обошлась заводу всего лишь в 10.000 рублей». Конец: «Постановлено просить г. Славянова прислать для журнала «Электричество» подробное описание сделанной им установки» — единственный след эпистолярного обращения к нему во всём корпусе."),
+("elektrichestvo-1891-17-review-1891-brochure",
+ "https://archive.org/details/189117",
+ "«Электричество» № 17, 1891 — рецензия на брошюру «Электрическая отливка металлов, горного инженера Николая Славянова. С.-Петербург, 1891 г.»",
+ "1891", "строки 2498–2580 из 2694 (archive.org item 189117), раздел «Библиография»", "ru", "S1", "THIRD-PARTY",
+ "lane=timeline. ELECTRODE=metal. Доказывает существование ОТДЕЛЬНОЙ брошюры 1891 г. в 35 стр. — до книги 1892 г. Рецензент описывает суть: «Одним из электродов вольтовой дуги служит предмет, на который металл наливается, другим — плавящийся стержень из наливаемого металла». И анонсирует выставку: «сама отливка и образцы работ будут, вероятно, показаны на предстоящей электрической выставке»."),
+("elektrichestvo-1891-24-annual-index-entry",
+ "https://archive.org/details/189124",
+ "«Электричество» № 24, 1891 — годовой указатель, раздел «Библиография»",
+ "1891", "строки 4780–4796 из 4881 (archive.org item 189124)", "ru", "S1", "THIRD-PARTY",
+ "lane=timeline. ELECTRODE=metal. Очень короткий фрагмент, взят только как второе, независимое библиографическое подтверждение брошюры 1891 г. с указанием страницы 239 в том же годовом комплекте."),
+("elektrichestvo-1892-08-vystavka-otlivka",
+ "https://archive.org/details/18928",
+ "«Электричество» № 8, 1892 — «IV Электрическая выставка. Электрическое паяние и электрическая отливка металлов»",
+ "1892", "строки 375–1086 из 2144 (archive.org item 18928); статья без подписи", "ru", "S1", "THIRD-PARTY;CYRILLIC-OCR-SUSPECT",
+ "lane=external. ELECTRODE=both. Самый подробный современный русский разбор его способа: устройство плавильника, шихты, 9 перечисленных видов работ, ток 300–400 А при 66 В, сумма выполненных работ 8 21… руб. Прямо: «Только теперь ... это электрическое плавление металлов получило наконец применение в способе электрической отливки горного инженера Н. Г. Славянова». Заканчивается: «Способ ... уже получил привилегии, как в России, так и заграницей». OCR старой орфографии с затёками колонок — ставлю CYRILLIC-OCR-SUSPECT."),
+("elektrichestvo-1892-0910-benardos-vs-slavyanov",
+ "https://archive.org/details/1892910",
+ "«Электричество» № 9-10, 1892 — «IV Электрическая выставка ... (Окончание)»: экспонаты Н. Н. Бенардоса и прямое сравнение двух способов",
+ "1892", "строки 20–675 из 3478 (archive.org item 1892910); статья без подписи", "ru", "S1", "OTHER-INVENTOR;CYRILLIC-OCR-SUSPECT",
+ "lane=external. ELECTRODE=both. САМЫЙ ВАЖНЫЙ ФАЙЛ ДЛЯ ГРАНИЦЫ. О Бенардосе: изобретение 1882 г., привилегия позже, «Электрогефест»; «все эти заводы работают главным образом угольными стержнями»; «едва ли употребление этих стержней в способе «электрогефест» разовьётся». Вывод редакции: «Работы, требующие употребления металлических стержней, гораздо удобнее производить по способу Славянова»; «Насколько способ Славянова непреминим для спаивания и сварки, настолько же способ Бенардоса трудно применим для отливок». Материал О БЕНАРДОСЕ — вниз по конвейеру не озвучивать как Славянова."),
+("elektrichestvo-1892-1112-vystavka-awards",
+ "https://archive.org/details/18921112",
+ "«Электричество» № 11-12, 1892 — «Распределение наград между экспонентами IV Электрической Выставки»",
+ "1892", "строки 12–33 из 3773 (archive.org item 18921112), начало номера", "ru", "S1", "THIRD-PARTY",
+ "lane=timeline. ELECTRODE=both. Два ОТДЕЛЬНЫХ высших награждения с разными формулировками: Бенардосу «за удачное применение вольтовой дуги к спаиванию металлов и наплавлению одного металла на другой»; Славянову «за удачное применение вольтовой дуги к производству металлических отливок и к последующей их обработке — с целью изменения химического состава металла и улучшения его механических свойств». Это документальная развязка спора о том, кому что приписано."),
+("elektrichestvo-1892-21-footnote-perm-dynamo",
+ "https://archive.org/details/189221",
+ "«Электричество» № 21, 1892 — подстрочное примечание о Славянове как строителе собственной динамомашины",
+ "1892", "строки 2430–2455 из 2621 (archive.org item 189221)", "ru", "S1", "THIRD-PARTY",
+ "lane=timeline. ELECTRODE=metal. Короткая сноска, но фиксирует должность на 1892 г. — «главного инженера Пермских пушечных заводов» — и что он «сам при самых неблагоприятных условиях построил машину, прекрасно служащую для электрического сливания и освещения завода»."),
+("elektrichestvo-1892-56-vystavka-plan-benardos",
+ "https://archive.org/details/189256",
+ "«Электричество» № 5-6, 1892 — план IV Электрической выставки: место 127 отведено Н. Н. Бенардосу",
+ "1892", "строки 285–312 из 4821 (archive.org item 189256)", "ru", "S1", "OTHER-INVENTOR",
+ "lane=external. ELECTRODE=carbon. Только о Бенардосе: его изделия, аккумуляторы, реостаты. Нужен, чтобы отличать экспозиции двух людей на одной и той же выставке."),
+("elektrichestvo-1890-03-benardos-vs-thomson",
+ "https://archive.org/details/18903",
+ "«Электричество» № 3, 1890 — редакционное разъяснение о разнице способов Э. Томсона и Н. Н. Бенардоса",
+ "1890", "строки 82–105 из 3176 (archive.org item 18903)", "ru", "S1", "OTHER-INVENTOR",
+ "lane=external. ELECTRODE=carbon. «По способу Бенардоса употребляется вольтова дуга; при способе Томсона — накаливание металлов». Славянов здесь ещё не упомянут вовсе — полезная негативная датировка: к началу 1890 г. русская печать называет Бенардоса, но не его."),
+("elektrichestvo-1892-02-benardos-in-england",
+ "https://archive.org/details/18922",
+ "«Электричество» № 2, 1892 — «Обзор новостей»: способ Бенардоса в Англии",
+ "1892", "строки 1660–1700 из 2451 (archive.org item 18922)", "ru", "S1", "OTHER-INVENTOR",
+ "lane=external. ELECTRODE=carbon. Материал о Бенардосе, не о Славянове."),
+("esbe-motovilikhinskii-zavod",
+ "https://ru.wikisource.org/wiki/%D0%AD%D0%A1%D0%91%D0%95/%D0%9C%D0%BE%D1%82%D0%BE%D0%B2%D0%B8%D0%BB%D0%B8%D1%85%D0%B8%D0%BD%D1%81%D0%BA%D0%B8%D0%B9_%D0%BA%D0%B0%D0%B7%D0%B5%D0%BD%D0%BD%D1%8B%D0%B9_%D0%B7%D0%B0%D0%B2%D0%BE%D0%B4",
+ "ЭСБЕ, статья «Мотовилихинский казенный завод» (подпись «Л. В.»)",
+ "1896", "полутом ЭСБЕ с буквой «М»; статья приводит данные за 1894–1895 гг.; текст — ручная транскрипция в Русском Викитеке, не OCR", "ru", "S1", "THIRD-PARTY",
+ "lane=decisions. ELECTRODE=metal. Заводская хронология из независимого справочника: «В 1890 г. начато электрическое плавление металлов по способу Н. Г. Славянова; в 1895 г., с окончанием постройки на заводах громадной динамо-машины, введено электрическое уплотнение металлов при отливке орудийных болванок и других массивных предметов, по его же способу». Два его изобретения разнесены по годам — 1890 и 1895."),
+("esbe-payanie",
+ "https://ru.wikisource.org/wiki/%D0%AD%D0%A1%D0%91%D0%95/%D0%9F%D0%B0%D1%8F%D0%BD%D0%B8%D0%B5",
+ "ЭСБЕ, статья «Паяние»",
+ "1897", "полутом ЭСБЕ с буквой «П»; ручная транскрипция в Русском Викитеке", "ru", "S1", "THIRD-PARTY",
+ "lane=external. ELECTRODE=both. Обзорная энциклопедическая статья, ставящая электрическую пайку/сварку в ряд обычных способов; нужна как современный контекст того, чем его метод НЕ был."),
+("us-patent-363320-benardos-1887",
+ "https://patentimages.storage.googleapis.com/pdfs/US363320.pdf",
+ "N. de Benardos & S. Olszewski, «Process of and Apparatus for Working Metals by the Direct Application of the Electric Current», US Letters Patent No. 363,320",
+ "1887", "лист патента: «Patented May 17, 1887»; 7 стр. PDF", "en", "S1", "OTHER-INVENTOR",
+ "lane=decisions. ELECTRODE=carbon. Патент ДРУГОГО человека, взят намеренно как отрицательный образец. Текст: «The conductor preferably consists of a stick or cylindrical rod of carbon» — угольный стержень; слово «metal rod» в этом патенте не встречается ни разу. Соавтор — Stanisław Olszewski. НИЧТО отсюда не может быть озвучено как Славянов."),
+# ─────────────────── S1 — German trade press ───────────────────
+("stahl-eisen-1892-patentanmeldung-slawianoff",
+ "https://archive.org/details/bub_gb_JyvOAAAAMAAJ",
+ "Stahl und Eisen 1892, Patentbericht: «30. Juni 1892: … Kl. 31, S 5591. Verfahren und Vorrichtung zum Schmelzen mittels Elektricität. Nicolaus Slawianoff in St. Petersburg»",
+ "1892", "строки 14805–14840 из 93016 (archive.org item bub_gb_JyvOAAAAMAAJ); год тома — из карточки archive.org", "de", "S1", "THIRD-PARTY;OCR-POOR",
+ "lane=decisions. ELECTRODE=metal. Одна строка объявления о выкладке германской заявки; текста формулы НЕТ — это только объявление. Совпадает по названию с DE 65892C, который Google Patents числит за «N. SLAWIANOFF in St. Petersburg, Grofse Morskaiastr. 15», но полный текст DE 65892 достать не удалось (см. _fetch.log)."),
+("stahl-eisen-1892-patentanmeldung-slawianoff-DUPSCAN",
+ "https://archive.org/details/bub_gb_SC1OAAAAYAAJ",
+ "Stahl und Eisen 1892, тот же Patentbericht — второй, независимый скан того же тома",
+ "1892", "строки 14860–14895 из 90427 (archive.org item bub_gb_SC1OAAAAYAAJ)", "de", "S1", "THIRD-PARTY;DUPLICATE-SCAN;OCR-POOR",
+ "lane=decisions. ELECTRODE=metal. Второй скан нужен именно потому, что OCR первого искажает номер: в одном скане «Kl. 81, S HOL», в другом «Kl. .31, S 5.VJ1». Сопоставление двух сканов и есть способ прочитать «Kl. 31, S 5591»."),
+("stahl-eisen-1895-vdmi-lohmann-vortrag",
+ "https://archive.org/details/bub_gb_o63mAAAAMAAJ",
+ "«Verein deutscher Maschinen-Ingenieure» — отчёт о докладе инженера А. Лоhmann (фирма Julius Pintsch, Берлин) об «elektrische Giefsverfahren» Николая Славянова, Stahl und Eisen",
+ "1895", "строки 8480–8672 из 121427 (archive.org item bub_gb_o63mAAAAMAAJ); год тома — из карточки archive.org. Колонтитул (строка 8436) разбит до «Ai Stahl und Eisen.» — НОМЕР СТРАНИЦЫ ПРОЧЕСТЬ НЕ УДАЛОСЬ и потому не проставлен", "de", "S1", "THIRD-PARTY;OCR-POOR",
+ "lane=external. ELECTRODE=both. Самая чёткая формулировка различия во всём корпусе: «Benardos wendet als eine Elektrode einen mit einer Handhabe versehenen Kohlenstab an ... Im Gegensatz hierzu bestehen bei Slavianoff beide Elektroden aus Metall». Плюс эксплуатационные факты: работы у Pintsch в Fürstenwalde, ремонты для прусской казённой железной дороги, «ein Schiff auf hoher See» как показательный случай."),
+("stahl-eisen-1895-vdmi-lohmann-vortrag-DUPSCAN",
+ "https://archive.org/details/bub_gb_gIA3AQAAMAAJ",
+ "Тот же отчёт о докладе Лоhmann, Stahl und Eisen 1895 — второй, независимый скан того же тома",
+ "1895", "строки 8582–8775 из 112906 (archive.org item bub_gb_gIA3AQAAMAAJ)", "de", "S1", "THIRD-PARTY;DUPLICATE-SCAN;OCR-POOR",
+ "lane=external. ELECTRODE=both. Второй скан заметно хуже первого («Nicolai Slavianoff oiTimdene»), но подтверждает и заголовок, и фамилию докладчика, и фирму."),
+("stahl-eisen-1896-perm-kanonenwerk",
+ "https://archive.org/details/bub_gb_Uq7mAAAAMAAJ",
+ "Stahl und Eisen 1896 — описание Пермского пушечного завода, включая применение способа Славянова",
+ "1896", "строки 59690–59730 из 105751 (archive.org item bub_gb_Uq7mAAAAMAAJ); год тома — из карточки archive.org", "de", "S1", "THIRD-PARTY;OCR-POOR",
+ "lane=decisions. ELECTRODE=metal. Немецкое подтверждение промышленного масштаба: «Das bekannte Löth- und Schweifsverfahren, welches von dem ehemaligen Inspector der Hütte Slawianoff erfunden worden ist, wird hier in grofsem Mafsstabe zur Anwendung gebracht», с двумя динамомашинами (100 В/160 А и 60 В/300 А, вместе свыше 200 л. с.). ОСТОРОЖНО: назван «ehemaliger Inspector» — бывший, хотя он был жив и был горным начальником; расхождение с русскими источниками не сглаживать."),
+("stahl-eisen-1894-muehlhaeuser-benardos-verfahren",
+ "https://archive.org/details/bub_gb_fC9OAAAAYAAJ",
+ "F. C. Mühlhäuser, «Das Benardossche elektrische Schmelzverfahren», Stahl und Eisen",
+ "1894", "строки 37530–37800 из 166603 (archive.org item bub_gb_fC9OAAAAYAAJ); год тома — из карточки archive.org; номер страницы в колонтитуле не читается и не проставлен", "de", "S1", "OTHER-INVENTOR;OCR-POOR",
+ "lane=external. ELECTRODE=carbon. Целая статья О БЕНАРДОСЕ за подписью инженера F. C. Mühlhäuser из Ремшайда. Нужна как парная величина к отчёту Лоhmann 1895 г. о Славянове. Вниз по конвейеру не озвучивать как Славянова."),
+("stahl-eisen-1888-de-patent-43194-benardos",
+ "https://archive.org/details/bub_gb_bXw3AQAAMAAJ",
+ "Stahl und Eisen 1888, Patentbericht: «Kl. 48, Nr. 43194, vom 23. September 1887. Nicolas de Benardos in St. Petersburg. Löthen von Gusseisen mittels des elektrischen Lichtbogens»",
+ "1888", "строки 71145–71185 из 82504 (archive.org item bub_gb_bXw3AQAAMAAJ); год тома — из карточки archive.org", "de", "S1", "OTHER-INVENTOR;OCR-POOR",
+ "lane=decisions. ELECTRODE=carbon. Германский патент БЕНАРДОСА с датой приоритета 23 сентября 1887 г. — то есть до всех дат Славянова. Взят как жёсткая нижняя граница по времени: кто бы что ни утверждал, дуговое соединение металлов было запатентовано в Германии на имя Бенардоса за три года до русской привилегии Славянова."),
+("zvdi-1897-zeitschriftenschau-slavianoff",
+ "https://archive.org/details/bub_gb_Xgo-AQAAMAAJ",
+ "Zeitschrift des Vereines Deutscher Ingenieure 1897, Zeitschriftenschau «Metallurgie»: ссылка на «Schmelzvorrichtungen von Slavianoff»",
+ "1897", "строки 31763–31776 из 307215 (archive.org item bub_gb_Xgo-AQAAMAAJ); год тома — из карточки archive.org", "de", "S1", "THIRD-PARTY;OCR-POOR",
+ "lane=timeline. ELECTRODE=metal. Очень короткая заметка; ценна только как отметка о том, что в год его смерти его аппараты ещё числились в текущем реферативном обзоре, а не в исторической рубрике."),
+# ─────────────────── S2 — later literature ───────────────────
+("stahl-eisen-1903-anzeige-patent-slavianoff",
+ "https://archive.org/details/bub_gb_LrTmAAAAMAAJ",
+ "Stahl und Eisen 1903, коммерческое объявление: ремонт деталей «mittels des elektrischen Giefsverfahrens Patent Slavianoff»",
+ "1903", "строки 140135–140165 из 143735 (archive.org item bub_gb_LrTmAAAAMAAJ); год тома — из карточки archive.org", "de", "S2", "THIRD-PARTY;OCR-POOR",
+ "lane=timeline. ELECTRODE=metal. Через шесть лет после его смерти его имя работает как торговая марка в объявлении: Schieberkästen, Pleuelstangen, Schiffsschrauben, Ventilgehäuse. Свидетельство о посмертном хождении метода, не о нём самом."),
+("stahl-eisen-1904-schweissverfahren-uebersicht",
+ "https://archive.org/details/bub_gb_3sfmAAAAMAAJ",
+ "Stahl und Eisen 1904, обзор способов сварки: «Es folgten Benardos, Slavianoff, Coffin, Bettini, Lagrange-Hoho ... Zerener ... Thomson»",
+ "1904", "строки 121205–121245 из 133150 (archive.org item bub_gb_3sfmAAAAMAAJ); год тома — из карточки archive.org", "de", "S2", "THIRD-PARTY;OCR-POOR",
+ "lane=external. ELECTRODE=both. Показывает канонический порядок имён, в который его поместили уже к 1904 г. — сразу после Бенардоса."),
+("stahl-eisen-1908-schweissverfahren-liste",
+ "https://archive.org/details/bub_gb_PZ7mAAAAMAAJ",
+ "Stahl und Eisen 1908, перечень важнейших способов сварки: «b) das elektrische Gießverfahren nach Slavianoff» отдельным пунктом",
+ "1908", "строки 173100–173140 из 189123 (archive.org item bub_gb_PZ7mAAAAMAAJ); год тома — из карточки archive.org", "de", "S2", "THIRD-PARTY;OCR-POOR",
+ "lane=external. ELECTRODE=both. Существенно: в 1908 г. немцы всё ещё держат «Gießverfahren nach Slavianoff» ОТДЕЛЬНО от «Schweißung mittels des elektrischen Lichtbogens», т. е. не считают его просто разновидностью дуговой сварки."),
+("stahl-eisen-1908-schweissverfahren-liste-DUPSCAN",
+ "https://archive.org/details/bub_gb_RztOAAAAYAAJ",
+ "Тот же перечень, Stahl und Eisen 1908 — второй, независимый скан того же тома",
+ "1908", "строки 171180–171220 из 179294 (archive.org item bub_gb_RztOAAAAYAAJ)", "de", "S2", "THIRD-PARTY;DUPLICATE-SCAN;OCR-POOR",
+ "lane=external. ELECTRODE=both. Второй скан того же места; нужен, потому что OCR обоих сильно разрушен и пункты списка читаются только при сличении."),
+("etz-1895-lohmann-slavianoff-giessverfahren",
+ "https://archive.org/details/bub_gb_F4gxAQAAMAAJ",
+ "A. Lohmann, «Das Slavianoff'sche elektrische Giessverfahren», Elektrotechnische Zeitschrift",
+ "1895", "Bd. 16, Heft 22, 30. Mai 1895, S. 325–330. Строки 113361–114383 из 265556 (archive.org item bub_gb_F4gxAQAAMAAJ). Страница 330 читается на разрыве (строка 114360); диапазон 325–330 независимо подтверждён библиографией NYPL 1913 г., которая тоже лежит в этом корпусе", "de", "S1", "THIRD-PARTY;OCR-POOR",
+ "lane=external. ELECTRODE=both. Самое подробное иностранное описание (11 иллюстраций по данным NYPL): десять пронумерованных применений, стоимость, ремонт паровозного цилиндра с трещиной длиной ок. 730 мм в мастерской Pintsch, маховик 2000 мм — ремонт за 24 часа и 15 марок. Прямо ставит его в один ряд с Сименсом и Бенардосом по способу превращения энергии в тепло."),
+("etz-1927-din-schweiss-terminologie",
+ "https://archive.org/details/elektrotechnisch4816unse",
+ "Elektrotechnische Zeitschrift Bd. 48 (1927) — воспроизведение DIN-обозначений способов сварки, где «Slavianoff» стоит отдельным термином",
+ "1927", "строки 164875–164925 из 227285 (archive.org item elektrotechnisch4816unse; карточка тома: v.48:1-6 (1927))", "de", "S2", "THIRD-PARTY;OCR-POOR",
+ "lane=external. ELECTRODE=both. Через 30 лет после смерти фамилия закреплена в немецком стандарте наравне с «Bernardos» и «Zerener». OCR фрактуры разрушен настолько, что годится только для факта наличия термина, не для цитирования."),
+("nypl-1913-list-works-electric-welding",
+ "https://archive.org/details/listworksrelati00deptgoog",
+ "New York Public Library (сост. W. B. Gamble), «List of Works Relating to Electric Welding»",
+ "1913", "весь выпуск, 4641 строка (archive.org item listworksrelati00deptgoog); год — с титульной карточки archive.org", "en", "S2", "THIRD-PARTY",
+ "lane=external. ELECTRODE=both. Служит ПРОВЕРОЧНЫМ инструментом, а не голосом: именно отсюда взяты выходные данные обоих текстов Лоhmann (Stahl und Eisen v.15, 1 Jan 1895, p. 42–43; Elektrot. Z. v.16, 30 May 1895, p. 325–330) и указание, что автор служил инженером у Julius Pintsch. Здесь же: Hefter, «Die elektrische Schweissung in Russland», Z. Elektrochem. v.6, 16 Nov 1899, p. 286–292 с пометой «Comparison of Slavianoff and Benardos processes as applied to railroad repairs»."),
+("applied-electrochem-welding-1917-craver",
+ "https://archive.org/details/appliedelectroc00cravgoog",
+ "C. F. Burgess & G. W. Cravens, «Applied Electrochemistry and Welding» — перечень дуговых систем",
+ "1917", "строки 5430–5520 из 16137 (archive.org item appliedelectroc00cravgoog); год — с карточки archive.org", "en", "S2", "THIRD-PARTY",
+ "lane=external. ELECTRODE=both. «The Slavianoff system also consists in drawing an arc between the work and an electrode, but a piece of the filling material is used as one of the electrodes and melts directly into place on the job. This is the most important of the electric welding processes...»"),
+("applied-electrochem-welding-1917-craver-history",
+ "https://archive.org/details/appliedelectroc00cravgoog",
+ "C. F. Burgess & G. W. Cravens, «Applied Electrochemistry and Welding» — исторический раздел",
+ "1917", "строки 6720–6900 из 16137 (тот же item, другой раздел книги)", "en", "S2", "THIRD-PARTY",
+ "lane=external. ELECTRODE=both. Список «отцов»: De Meritens, Bernardos, Olszewsky, Coffin, Zerener, Slavianoff, Howard. Обратите внимание: Olszewski назван самостоятельно, отдельно от Бенардоса."),
+("hamilton-electric-welding-1918",
+ "https://archive.org/details/electricweldingc00hamiuoft",
+ "D. T. Hamilton & E. Oberg, «Electric Welding: a comprehensive treatise on the practice of the various resistance, arc and thermit processes»",
+ "1918", "строки 8500–8650 (archive.org item electricweldingc00hamiuoft); год — с карточки archive.org", "en", "S2", "THIRD-PARTY",
+ "lane=external. ELECTRODE=both. Наиболее аккуратная английская формулировка различия: «(1) between the work itself and a carbon electrode, as in the Bernardos process; (2) between the work itself and a metallic electrode, as in the Slavianoff process; or (3) between two carbon electrodes, as in the Zerener process»."),
+("hamilton-electric-welding-1918-DUPSCAN",
+ "https://archive.org/details/electricweldingc00hamirich",
+ "D. T. Hamilton & E. Oberg, «Electric Welding» (1918) — второй, независимый скан той же книги",
+ "1918", "строки 8110–8260 из 12490 (archive.org item electricweldingc00hamirich)", "en", "S2", "THIRD-PARTY;DUPLICATE-SCAN",
+ "lane=external. ELECTRODE=both. Второй скан того же места."),
+("hamilton-oberg-1918-processes-overview",
+ "https://archive.org/details/electricwelding00obergoog",
+ "D. T. Hamilton & E. Oberg, «Electric Welding» (1918) — вводная глава о классификации способов",
+ "1918", "строки 400–640 из 14732 (archive.org item electricwelding00obergoog) — ДРУГОЙ раздел той же книги, не дубль", "en", "S2", "THIRD-PARTY",
+ "lane=external. ELECTRODE=both. Содержит ровно тот тезис, против которого продукт должен уметь возразить: «The Slavianoff process is sometimes not considered as a distinct method, but merely as a development of the Bernardos process»."),
+("viall-electric-welding-1921-arc-processes",
+ "https://archive.org/details/electricwelding00vialrich",
+ "Ethan Viall, «Electric Welding» (McGraw-Hill) — перечисление способов Zerner / Bernardos / Slavianoff / Strohmenger-Slaughter",
+ "1921", "строки 405–500 из 22709 (archive.org item electricwelding00vialrich); год — с карточки archive.org", "en", "S2", "THIRD-PARTY",
+ "lane=external. ELECTRODE=both. Здесь же — приоритет de Meritens (1881) с угольным стержнем, то есть ещё один претендент ДО Бенардоса."),
+("viall-electric-welding-1921-DUPSCAN",
+ "https://archive.org/details/gri_33125000707469",
+ "Ethan Viall, «Electric Welding» — экземпляр библиотеки Franklin Institute, второй независимый скан",
+ "1921", "строки 425–520 из 21837 (archive.org item gri_33125000707469); титульный лист (строки 12–38) читается: «First Edition / Third Impression / McGRAW-HILL ... 1921»", "en", "S2", "THIRD-PARTY;DUPLICATE-SCAN",
+ "lane=external. ELECTRODE=both. Именно этот скан позволил прочесть выходные данные издания — в остальных сканах титул нечитаем."),
+("viall-electric-welding-1921-DUPSCAN2",
+ "https://archive.org/details/bwb_S0-BGD-555",
+ "Ethan Viall, «Electric Welding» — третий независимый скан",
+ "1921", "строки 510–600 из 19143 (archive.org item bwb_S0-BGD-555); титульный лист на строках 38–50", "en", "S2", "THIRD-PARTY;DUPLICATE-SCAN",
+ "lane=external. ELECTRODE=both. Третий скан той же книги."),
+("viall-electric-welding-1921-contents",
+ "https://archive.org/details/electricwelding019468mbp",
+ "Ethan Viall, «Electric Welding» — лист оглавления главы",
+ "1921", "строки 110–140 из 30106 (archive.org item electricwelding019468mbp)", "en", "S2", "THIRD-PARTY;DUPLICATE-SCAN",
+ "lane=external. ELECTRODE=both. Оглавление ставит его в один перечень с Zerner, Bernardos, Strohmenger-Slaughter и LaGrange-Hoho."),
+("wanamaker-electric-arc-welding-1921",
+ "https://archive.org/details/electricarcweldi00wanarich",
+ "E. Wanamaker & H. R. Pennington, «Electric Arc Welding»",
+ "1921", "строки 735–800 (archive.org item electricarcweldi00wanarich); дата на карточке archive.org — «[c1921]»", "en", "S2", "THIRD-PARTY",
+ "lane=external. ELECTRODE=both. «Benardos and Slavianoff are generally credited with the discovery of the possibilities of the carbon arc and metallic arc, respectively» — самая короткая корректная формулировка разделения."),
+("wanamaker-pennington-1921-DUPSCAN",
+ "https://archive.org/details/electricarcweld01penngoog",
+ "E. Wanamaker & H. R. Pennington, «Electric Arc Welding» — второй независимый скан",
+ "1921", "строки 885–960 из 18996 (archive.org item electricarcweld01penngoog)", "en", "S2", "THIRD-PARTY;DUPLICATE-SCAN",
+ "lane=external. ELECTRODE=both. Второй скан того же места."),
+("carpenter-electric-welding-1920",
+ "https://archive.org/details/electricwelding00carpgoog",
+ "Herbert Carpmael, «Electric Welding and Welding Appliances» (Constable & Co.)",
+ "1920", "строки 905–960 (archive.org item electricwelding00carpgoog); год — с карточки archive.org", "en", "S2", "THIRD-PARTY",
+ "lane=external. ELECTRODE=both. Даёт мотив изобретения: «Some ten years after this introduction of the Benardos process the idea occurred to another Russian — Slavianoff — to employ a metal electrode instead of a stick of carbon, his idea being to fill up blowholes in defective castings». Цель — раковины в отливках, а не сварка швов; это согласуется с его собственным названием «электрическая отливка»."),
+("bennett-electric-welding-1914",
+ "https://archive.org/details/electricwelding00bennrich",
+ "A. M. Bennett & W. E. Thompson, «Electric Welding» (The Industrial Press)",
+ "1914", "строки 225–265 (archive.org item electricwelding00bennrich); дата на карточке archive.org — «c1914»", "en", "S2", "THIRD-PARTY",
+ "lane=external. ELECTRODE=both. Самое раннее английское книжное упоминание в корпусе и содержательный технический довод: «the Slavianoff system, in which a very small arc is used ... prevents, to a large extent, the introduction of carbon into the work»."),
+("spot-and-arc-welding-1920-bare-electrode",
+ "https://archive.org/details/SpotAndArcWelding",
+ "H. A. Hornor, «Spot and Arc Welding» (J. B. Lippincott) — раздел «Covered Versus Bare Electrodes»",
+ "1920", "строки 8440–8490 из 17463 (archive.org item SpotAndArcWelding); год — с карточки archive.org", "en", "S2", "THIRD-PARTY",
+ "lane=external. ELECTRODE=metal. ВЗЯТ НАМЕРЕННО КАК ПРОТИВОРЕЧИЕ: датирует «bare-metal electrode process» «about 1895», тогда как русские источники дают 1888 (первая сварка вала) и 17 марта 1890 (подача прошения). Расхождение сохранено, а не сглажено."),
+("us-shipping-board-1918-slavianoff-system",
+ "https://archive.org/details/reporttouniteds00corpgoog",
+ "James Caldwell, «Report to the United States Shipping Board, Emergency Fleet Corporation, on electric welding and its application in United States of America to ship construction»",
+ "1918", "строки 26185–26320 из 29537 (archive.org item reporttouniteds00corpgoog); год — с карточки archive.org", "en", "S2", "THIRD-PARTY",
+ "lane=external. ELECTRODE=metal. Через 21 год после его смерти правительственный отчёт США выбирает его способ: «Of the various radically different systems of electric arc welding, it is believed that the Slavianoff system alone merits serious consideration for general work. This system is based upon the use of a metallic pencil as the negative electrode ... and the use of continuous current at low voltage». ОБРАТИТЕ ВНИМАНИЕ на полярность: здесь металлический электрод — КАТОД, а в его собственном патенте для чугуна стержень должен быть на положительном полюсе; это расхождение не сглаживать."),
+("railway-electrical-engineer-slavianoff",
+ "https://archive.org/details/railwayelectrica05unse",
+ "Railway Electrical Engineer (Chicago), vol. 5, no. 6 — электрическая сварка в железнодорожных мастерских",
+ "1914", "строки 41055–41145 из 76228 (archive.org item railwayelectrica05unse). Колонтитул на строке 40991 читается «Vol. 5, No. 6»; месяц/год на этом колонтитуле не читаются, но тот же том несёт строку «May, 1914», отсюда год тома 1914", "en", "S2", "THIRD-PARTY",
+ "lane=external. ELECTRODE=both. «one being known as the Bernardos and the other as the Slavianoff process, being named after the men who have done most to perfect them» — обратите внимание на осторожную формулировку «perfect», а не «invent»."),
+("railway-electrical-engineer-v6-1914-slavianoff",
+ "https://archive.org/details/railwayelectrica06unse",
+ "Railway Electrical Engineer (Chicago), vol. 6 — тот же журнал, следующий том",
+ "1914", "строки 13160–13240 из 67328 (archive.org item railwayelectrica06unse); ближайшая читаемая датированная строка — «August, 1914.» на строке 13148", "en", "S2", "THIRD-PARTY",
+ "lane=external. ELECTRODE=both. «The other is known as the Slavianoff process and consists in drawing the arc between the job and a piece of the filling material» — практическое, цеховое изложение."),
+]
+
+lines = [HEADER.rstrip(), '#']
+for r in ROWS:
+    assert len(r) == 9, r[0]
+    assert r[8].startswith('lane='), r[0]
+    assert 'ELECTRODE=' in r[8], r[0]
+    ATTR = {'HIS-OWN','CO-AUTHORED','THIRD-PARTY','ATTRIBUTION-UNCLEAR','OTHER-INVENTOR'}
+    assert len(ATTR & set(r[7].split(';'))) == 1, ('attribution flag count', r[0], r[7])
+    lines.append('\t'.join(x.replace('\t', ' ') for x in r))
+
+out = os.path.join(RAW, '_ids.txt')
+open(out, 'w', encoding='utf-8').write('\n'.join(lines) + '\n')
+
+have = {d for d in os.listdir(RAW) if os.path.isdir(os.path.join(RAW, d))}
+listed = {r[0] for r in ROWS}
+print('ledger rows :', len(ROWS))
+print('dirs on disk:', len(have))
+print('in ledger but no dir:', sorted(listed - have))
+print('on disk but not in ledger:', sorted(have - listed))

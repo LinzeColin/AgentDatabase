@@ -1,0 +1,418 @@
+{
+ "_README": {
+  "what": "Cut points for every corpus file that was carved out of a FULL-VOLUME scan. Line numbers are 1-based and refer to the archive.org DjVuTXT of the whole volume named in `archive_item`, NOT to the corpus file (the corpus file additionally carries a 7-line provenance header: 5 comment lines, a blank line, and a ====== rule).",
+  "generated_at": "2026-08-04",
+  "not_listed_here": "The 7 files taken from the Perm transcription (otlivka-1892-ch1..ch4, privilegiya-1891-*, doklad-irto-1895-*), the 2 patent PDFs, and the 2 ЭСБЕ wikisource articles are NOT full-volume scans — each of those URLs already resolves to exactly one document, so there is nothing to cut and no boundary to record.",
+  "cross_cutting_finding": "The single most fragile thing in this corpus is not the cut points but the OCR of the man's own name. Across the German volumes the same word comes out as `Slavianoff`, `Slawianoff`, `Slavianoff'sche`, `SlavianofF`, `Nicolai Slavianoff oiTimdene` and `SlavianofVche`; in Russian pre-reform type `Славяновъ` survives, but the surrounding column bleed splices neighbouring columns into the middle of sentences (see elektrichestvo-1892-0910, where two columns interleave from line ~532 onward). Every quotation pulled from these files must be re-read against the line range given here, not trusted from a grep."
+ },
+ "applied-electrochem-welding-1917-craver": {
+  "archive_item": "appliedelectroc00cravgoog",
+  "full_text_url": "https://archive.org/details/appliedelectroc00cravgoog",
+  "start_line": 5430,
+  "end_line": 5520,
+  "total_lines": 16137,
+  "start_evidence": "useful arts. It is the most common of all of the welding processes",
+  "end_evidence": "importance commercially at this time, they will not be described",
+  "name_hits_in_window": 4
+ },
+ "applied-electrochem-welding-1917-craver-history": {
+  "archive_item": "appliedelectroc00cravgoog",
+  "full_text_url": "https://archive.org/details/appliedelectroc00cravgoog",
+  "start_line": 6720,
+  "end_line": 6900,
+  "total_lines": 16137,
+  "start_evidence": "",
+  "end_evidence": "for holding and feeding the carbon pencils is so bulky and compli-",
+  "name_hits_in_window": 9
+ },
+ "bennett-electric-welding-1914": {
+  "archive_item": "electricwelding00bennrich",
+  "full_text_url": "https://archive.org/details/electricwelding00bennrich",
+  "start_line": 225,
+  "end_line": 265,
+  "total_lines": 2732,
+  "start_evidence": "from  the  electrode  is  more  liable  to  enter  the  weld,  thereby  hard-",
+  "end_evidence": "The  Strohmenger-Slaughter  system,  also  an  arc-welding  system,  may",
+  "name_hits_in_window": 2
+ },
+ "carpenter-electric-welding-1920": {
+  "archive_item": "electricwelding00carpgoog",
+  "full_text_url": "https://archive.org/details/electricwelding00carpgoog",
+  "start_line": 905,
+  "end_line": 960,
+  "total_lines": 8578,
+  "start_evidence": "I",
+  "end_evidence": "different tappings in the primary, so that different voltages and currents to suit",
+  "name_hits_in_window": 5
+ },
+ "elektrichestvo-1890-03-benardos-vs-thomson": {
+  "archive_item": "18903",
+  "full_text_url": "https://archive.org/details/18903",
+  "start_line": 82,
+  "end_line": 105,
+  "total_lines": 3176,
+  "start_evidence": "выхъ  пробъ;  это  впрочемъ  еще  не  служитъ  рѣши¬",
+  "end_evidence": "или  даже  и  оба  вмѣстѣ,  слѣдуетъ  назвать  электри¬"
+ },
+ "elektrichestvo-1891-05-irto-perm-installation": {
+  "archive_item": "18915",
+  "full_text_url": "https://archive.org/details/18915",
+  "start_line": 73,
+  "end_line": 108,
+  "total_lines": 3634,
+  "start_evidence": "7.  Г  К.  Войводъ  демонстрировалъ  сумку,  заключающую",
+  "end_evidence": "За  симъ  засѣданіе  было  закрыто."
+ },
+ "elektrichestvo-1891-17-review-1891-brochure": {
+  "archive_item": "189117",
+  "full_text_url": "https://archive.org/details/189117",
+  "start_line": 2498,
+  "end_line": 2580,
+  "total_lines": 2694,
+  "start_evidence": "Электрическая  отливка  металловъ,  горнаго  ин¬",
+  "end_evidence": "ческой  выставкѣ."
+ },
+ "elektrichestvo-1891-24-annual-index-entry": {
+  "archive_item": "189124",
+  "full_text_url": "https://archive.org/details/189124",
+  "start_line": 4780,
+  "end_line": 4796,
+  "total_lines": 4881,
+  "start_evidence": "",
+  "end_evidence": "1а§  ѵоп  Л.  8ргіп§ег.  1891  .  255"
+ },
+ "elektrichestvo-1892-02-benardos-in-england": {
+  "archive_item": "18922",
+  "full_text_url": "https://archive.org/details/18922",
+  "start_line": 1660,
+  "end_line": 1700,
+  "total_lines": 2451,
+  "start_evidence": "установкамъ  и  средствамъ  Института.  Здѣсь  мы  не  касаемся",
+  "end_evidence": "леній  различныхъ  поддѣлокъ,  какихъ  нельзя  было  бы  сдѣ¬"
+ },
+ "elektrichestvo-1892-08-vystavka-otlivka": {
+  "archive_item": "18928",
+  "full_text_url": "https://archive.org/details/18928",
+  "start_line": 375,
+  "end_line": 1086,
+  "total_lines": 2144,
+  "start_evidence": "1?  ЭЛЕКТРИЧЕСКАЯ  ВЫСТАВКА.",
+  "end_evidence": "ныхъ  мастерскихъ  на  судахъ  во  время  плаванія."
+ },
+ "elektrichestvo-1892-0910-benardos-vs-slavyanov": {
+  "archive_item": "1892910",
+  "full_text_url": "https://archive.org/details/1892910",
+  "start_line": 20,
+  "end_line": 675,
+  "total_lines": 3478,
+  "start_evidence": "№  ЭЛЕКТРИЧЕСКАЯ  ВЫСТАВКА.",
+  "end_evidence": ""
+ },
+ "elektrichestvo-1892-1112-vystavka-awards": {
+  "archive_item": "18921112",
+  "full_text_url": "https://archive.org/details/18921112",
+  "start_line": 12,
+  "end_line": 33,
+  "total_lines": 3773,
+  "start_evidence": "Распредѣленіе  наградъ  между  экспонентами",
+  "end_evidence": ""
+ },
+ "elektrichestvo-1892-21-footnote-perm-dynamo": {
+  "archive_item": "189221",
+  "full_text_url": "https://archive.org/details/189221",
+  "start_line": 2430,
+  "end_line": 2455,
+  "total_lines": 2621,
+  "start_evidence": "главы,  оканчивающейся  изложеніемъ  способовъ  уничтоженія",
+  "end_evidence": "296  ЭЛЕКТРИЧЕСТВО.  №  21."
+ },
+ "elektrichestvo-1892-56-vystavka-plan-benardos": {
+  "archive_item": "189256",
+  "full_text_url": "https://archive.org/details/189256",
+  "start_line": 285,
+  "end_line": 312,
+  "total_lines": 4821,
+  "start_evidence": "«имущество  передъ  родственнымъ  ему  молотомъ",
+  "end_evidence": "вольтовой  дуги.  Большое  количество  выставленныхъ"
+ },
+ "etz-1895-lohmann-slavianoff-giessverfahren": {
+  "archive_item": "bub_gb_F4gxAQAAMAAJ",
+  "full_text_url": "https://archive.org/details/bub_gb_F4gxAQAAMAAJ",
+  "start_line": 113361,
+  "end_line": 114383,
+  "total_lines": 265556,
+  "start_evidence": "Dn  Slivlanorsrhe  bisktfiaelit",
+  "end_evidence": "",
+  "name_hits_in_window": 5
+ },
+ "etz-1927-din-schweiss-terminologie": {
+  "archive_item": "elektrotechnisch4816unse",
+  "full_text_url": "https://archive.org/details/elektrotechnisch4816unse",
+  "start_line": 164875,
+  "end_line": 164925,
+  "total_lines": 227285,
+  "start_evidence": "‘er zu verbindenden Enden nur bis zum teigigen Zu-",
+  "end_evidence": "",
+  "name_hits_in_window": 2
+ },
+ "hamilton-electric-welding-1918": {
+  "archive_item": "electricweldingc00hamiuoft",
+  "full_text_url": "https://archive.org/details/electricweldingc00hamiuoft",
+  "start_line": 8500,
+  "end_line": 8650,
+  "total_lines": 13285,
+  "start_evidence": "",
+  "end_evidence": "facture of  steel  cars,  and  in  the  welding  of  automobile  bodies,",
+  "name_hits_in_window": 4
+ },
+ "hamilton-electric-welding-1918-DUPSCAN": {
+  "archive_item": "electricweldingc00hamirich",
+  "full_text_url": "https://archive.org/details/electricweldingc00hamirich",
+  "start_line": 8110,
+  "end_line": 8260,
+  "total_lines": 12490,
+  "start_evidence": "CHAPTER  VII",
+  "end_evidence": "electrodes.",
+  "name_hits_in_window": 4
+ },
+ "hamilton-oberg-1918-processes-overview": {
+  "archive_item": "electricwelding00obergoog",
+  "full_text_url": "https://archive.org/details/electricwelding00obergoog",
+  "start_line": 400,
+  "end_line": 640,
+  "total_lines": 14732,
+  "start_evidence": "electric arc-welding processes. These methods are named after",
+  "end_evidence": "8 ELECTRIC WELDING",
+  "name_hits_in_window": 5
+ },
+ "nypl-1913-list-works-electric-welding": {
+  "archive_item": "listworksrelati00deptgoog",
+  "full_text_url": "https://archive.org/details/listworksrelati00deptgoog",
+  "start_line": 1,
+  "end_line": 4641,
+  "total_lines": 4641,
+  "start_evidence": "Google",
+  "end_evidence": "",
+  "name_hits_in_window": 39
+ },
+ "railway-electrical-engineer-slavianoff": {
+  "archive_item": "railwayelectrica05unse",
+  "full_text_url": "https://archive.org/details/railwayelectrica05unse",
+  "start_line": 41055,
+  "end_line": 41145,
+  "total_lines": 76228,
+  "start_evidence": "to end by a similar process; and arc welding, or the join-",
+  "end_evidence": "welding in flues, side seams, mud rings, fire door frames, at-",
+  "name_hits_in_window": 6
+ },
+ "railway-electrical-engineer-v6-1914-slavianoff": {
+  "archive_item": "railwayelectrica06unse",
+  "full_text_url": "https://archive.org/details/railwayelectrica06unse",
+  "start_line": 13160,
+  "end_line": 13240,
+  "total_lines": 67328,
+  "start_evidence": "",
+  "end_evidence": "cheaper, but good work demands the use of a low-",
+  "name_hits_in_window": 2
+ },
+ "spot-and-arc-welding-1920-bare-electrode": {
+  "archive_item": "SpotAndArcWelding",
+  "full_text_url": "https://archive.org/details/SpotAndArcWelding",
+  "start_line": 8440,
+  "end_line": 8490,
+  "total_lines": 17463,
+  "start_evidence": "",
+  "end_evidence": "35. Very few manufacturers of arc- welding apparatus",
+  "name_hits_in_window": 2
+ },
+ "stahl-eisen-1888-de-patent-43194-benardos": {
+  "archive_item": "bub_gb_bXw3AQAAMAAJ",
+  "full_text_url": "https://archive.org/details/bub_gb_bXw3AQAAMAAJ",
+  "start_line": 71145,
+  "end_line": 71185,
+  "total_lines": 82504,
+  "start_evidence": "gakgl und vollgegossen.",
+  "end_evidence": "i",
+  "name_hits_in_window": 1
+ },
+ "stahl-eisen-1892-patentanmeldung-slawianoff": {
+  "archive_item": "bub_gb_JyvOAAAAMAAJ",
+  "full_text_url": "https://archive.org/details/bub_gb_JyvOAAAAMAAJ",
+  "start_line": 14805,
+  "end_line": 14840,
+  "total_lines": 93016,
+  "start_evidence": "",
+  "end_evidence": "4.  Juli  1892:  KL  24,  6  702«i  Du  ocle  liasrcueruiig",
+  "name_hits_in_window": 1
+ },
+ "stahl-eisen-1892-patentanmeldung-slawianoff-DUPSCAN": {
+  "archive_item": "bub_gb_SC1OAAAAYAAJ",
+  "full_text_url": "https://archive.org/details/bub_gb_SC1OAAAAYAAJ",
+  "start_line": 14860,
+  "end_line": 14895,
+  "total_lines": 90427,
+  "start_evidence": "",
+  "end_evidence": "mit  FlammenwechMlstrom.  Eduard  Goedicke  in",
+  "name_hits_in_window": 1
+ },
+ "stahl-eisen-1894-muehlhaeuser-benardos-verfahren": {
+  "archive_item": "bub_gb_fC9OAAAAYAAJ",
+  "full_text_url": "https://archive.org/details/bub_gb_fC9OAAAAYAAJ",
+  "start_line": 37530,
+  "end_line": 37800,
+  "total_lines": 166603,
+  "start_evidence": "der  HH.  Prof.  Martens  und  Dr.  Wedding  Tiber  die",
+  "end_evidence": "Drei  der  Arbeilspirdze   veranschaulichen  das",
+  "name_hits_in_window": 4
+ },
+ "stahl-eisen-1895-vdmi-lohmann-vortrag": {
+  "archive_item": "bub_gb_o63mAAAAMAAJ",
+  "full_text_url": "https://archive.org/details/bub_gb_o63mAAAAMAAJ",
+  "start_line": 8480,
+  "end_line": 8672,
+  "total_lines": 121427,
+  "start_evidence": "Verein  deutscher  Maschinen-Ingenieure.",
+  "end_evidence": "",
+  "name_hits_in_window": 10
+ },
+ "stahl-eisen-1895-vdmi-lohmann-vortrag-DUPSCAN": {
+  "archive_item": "bub_gb_gIA3AQAAMAAJ",
+  "full_text_url": "https://archive.org/details/bub_gb_gIA3AQAAMAAJ",
+  "start_line": 8582,
+  "end_line": 8775,
+  "total_lines": 112906,
+  "start_evidence": "",
+  "end_evidence": "",
+  "name_hits_in_window": 4
+ },
+ "stahl-eisen-1896-perm-kanonenwerk": {
+  "archive_item": "bub_gb_Uq7mAAAAMAAJ",
+  "full_text_url": "https://archive.org/details/bub_gb_Uq7mAAAAMAAJ",
+  "start_line": 59690,
+  "end_line": 59730,
+  "total_lines": 105751,
+  "start_evidence": "",
+  "end_evidence": "asiatischen  Gegenden  mit  grofser  Nachsicht  zu",
+  "name_hits_in_window": 1
+ },
+ "stahl-eisen-1903-anzeige-patent-slavianoff": {
+  "archive_item": "bub_gb_LrTmAAAAMAAJ",
+  "full_text_url": "https://archive.org/details/bub_gb_LrTmAAAAMAAJ",
+  "start_line": 140135,
+  "end_line": 140165,
+  "total_lines": 143735,
+  "start_evidence": "",
+  "end_evidence": "",
+  "name_hits_in_window": 1
+ },
+ "stahl-eisen-1904-schweissverfahren-uebersicht": {
+  "archive_item": "bub_gb_3sfmAAAAMAAJ",
+  "full_text_url": "https://archive.org/details/bub_gb_3sfmAAAAMAAJ",
+  "start_line": 121205,
+  "end_line": 121245,
+  "total_lines": 133150,
+  "start_evidence": "",
+  "end_evidence": "",
+  "name_hits_in_window": 2
+ },
+ "stahl-eisen-1908-schweissverfahren-liste": {
+  "archive_item": "bub_gb_PZ7mAAAAMAAJ",
+  "full_text_url": "https://archive.org/details/bub_gb_PZ7mAAAAMAAJ",
+  "start_line": 173100,
+  "end_line": 173140,
+  "total_lines": 189123,
+  "start_evidence": "Unter-  und  Obergesenk.  Das  Material  der  Ge-",
+  "end_evidence": "",
+  "name_hits_in_window": 1
+ },
+ "stahl-eisen-1908-schweissverfahren-liste-DUPSCAN": {
+  "archive_item": "bub_gb_RztOAAAAYAAJ",
+  "full_text_url": "https://archive.org/details/bub_gb_RztOAAAAYAAJ",
+  "start_line": 171180,
+  "end_line": 171220,
+  "total_lines": 179294,
+  "start_evidence": "senke.  B'isi'iflr  von  Gesenkschmiedearbeiten.",
+  "end_evidence": "",
+  "name_hits_in_window": 1
+ },
+ "us-shipping-board-1918-slavianoff-system": {
+  "archive_item": "reporttouniteds00corpgoog",
+  "full_text_url": "https://archive.org/details/reporttouniteds00corpgoog",
+  "start_line": 26185,
+  "end_line": 26320,
+  "total_lines": 29537,
+  "start_evidence": "",
+  "end_evidence": "weld by forming a gas around the material, which prevents",
+  "name_hits_in_window": 4
+ },
+ "viall-electric-welding-1921-DUPSCAN": {
+  "archive_item": "gri_33125000707469",
+  "full_text_url": "https://archive.org/details/gri_33125000707469",
+  "start_line": 425,
+  "end_line": 520,
+  "total_lines": 21837,
+  "start_evidence": "All  electric  welding  may  be  divided  into  two  general  classes",
+  "end_evidence": "When  the  piece  has  reached  a  welding  temperature  it  is  removed",
+  "name_hits_in_window": 4
+ },
+ "viall-electric-welding-1921-DUPSCAN2": {
+  "archive_item": "bwb_S0-BGD-555",
+  "full_text_url": "https://archive.org/details/bwb_S0-BGD-555",
+  "start_line": 510,
+  "end_line": 600,
+  "total_lines": 19143,
+  "start_evidence": "",
+  "end_evidence": "Fig, 3.—Are Welding Circuits as First Used,",
+  "name_hits_in_window": 6
+ },
+ "viall-electric-welding-1921-arc-processes": {
+  "archive_item": "electricwelding00vialrich",
+  "full_text_url": "https://archive.org/details/electricwelding00vialrich",
+  "start_line": 405,
+  "end_line": 500,
+  "total_lines": 22709,
+  "start_evidence": "",
+  "end_evidence": "trode  is  used.  In  this  process  either  direct  or  alternating  cur-",
+  "name_hits_in_window": 6
+ },
+ "viall-electric-welding-1921-contents": {
+  "archive_item": "electricwelding019468mbp",
+  "full_text_url": "https://archive.org/details/electricwelding019468mbp",
+  "start_line": 110,
+  "end_line": 140,
+  "total_lines": 30106,
+  "start_evidence": "",
+  "end_evidence": "Eye Protection in Iron Welding Operations The Dangerous",
+  "name_hits_in_window": 1
+ },
+ "wanamaker-electric-arc-welding-1921": {
+  "archive_item": "electricarcweldi00wanarich",
+  "full_text_url": "https://archive.org/details/electricarcweldi00wanarich",
+  "start_line": 735,
+  "end_line": 800,
+  "total_lines": 16038,
+  "start_evidence": "the  fusion  of  platinum.  In  the  latter  part  of  the  nineteenth  cen-",
+  "end_evidence": "The  Electric  Arc. — If  two  carbons  which  are  connected  to",
+  "name_hits_in_window": 5
+ },
+ "wanamaker-pennington-1921-DUPSCAN": {
+  "archive_item": "electricarcweld01penngoog",
+  "full_text_url": "https://archive.org/details/electricarcweld01penngoog",
+  "start_line": 885,
+  "end_line": 960,
+  "total_lines": 18996,
+  "start_evidence": "used in some important industrial applications, one of which was",
+  "end_evidence": "7,500 deg. Fahr. If an arc is formed between two metallic elec-",
+  "name_hits_in_window": 5
+ },
+ "zvdi-1897-zeitschriftenschau-slavianoff": {
+  "archive_item": "bub_gb_Xgo-AQAAMAAJ",
+  "full_text_url": "https://archive.org/details/bub_gb_Xgo-AQAAMAAJ",
+  "start_line": 31763,
+  "end_line": 31776,
+  "total_lines": 307215,
+  "start_evidence": "—  Betrieh»ergrbni»»e  xwcicylindrigcr  Verbnndlokoni»-",
+  "end_evidence": "S.  2IÜ  mit  -1  Fig.)  Dar-tolliiiig  einer  Knittervorrichtuug,  die  im",
+  "name_hits_in_window": 1
+ }
+}
