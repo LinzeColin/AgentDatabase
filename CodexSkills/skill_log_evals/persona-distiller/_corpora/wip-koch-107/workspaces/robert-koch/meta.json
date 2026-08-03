@@ -46,5 +46,307 @@
   "subject_origin": "historical",
   "target_id": "tgt-03e2be0bc06d",
   "time_scope": "1843-1910",
-  "updated_at": "2026-08-03T00:57:40Z"
+  "updated_at": "2026-08-03T00:57:40Z",
+  "attribution_basis": {
+    "authority": "印刷时代人物，署名证据充分，但有两处须写明。\n① **《Gesammelte Werke》(Schwalbe 编, 1912) 出版于其身后**（卒 1910-05-27），集内编者导言与注释不是他的文字；**最硬的判据是时间**。\n② 本工作区对核心篇目**同时握有原刊与 GW 两套文本**，并对 GW 握有 Glasgow 与 LSHTM 两套独立扫描——**以原刊为准，GW 为校本，两套扫描互核**。\n核心三篇的双份到位：1876 炭疽（Cohns Beiträge Bd.II S.277 ／ GW Bd.I S.5）、1882 结核即科赫法则首刊（BKW 1882 S.221 ／ 1884 全本 ／ GW Bd.I S.428/467）、1881 纯培养法（抽印 b21303095 ／ 原刊 ／ GW Bd.I S.112）。",
+    "citation": "Koch, Robert. *Gesammelte Werke von Robert Koch*, hrsg. von J. Schwalbe. 3 Bde. Leipzig: Georg Thieme, 1912。并对照原刊：*Beiträge zur Biologie der Pflanzen* Bd.II (1876)、*Berliner Klinische Wochenschrift* 1882/1884 年卷、*Mittheilungen aus dem Kaiserlichen Gesundheitsamte* 等。",
+    "disputed_policy": "**争议著作为空，但不是「没查过」**。他身处德意志帝国卫生署与柏林学界的公开发表制度下，论文有期刊卷期与日期可查，不存在古代人物那类伪托问题。\n本人物真正的归属风险是**同名**：抓源阶段已按扉页署名剔除一份 `diecholeraaufih00kochgoog`（扉页署 **Sanitätsrath Dr. A. Koch**，非 Robert Koch），另剔除 `waswissenundknne00koch`（自然疗法论战，同名者）与一份实为 1847 年童话集的误挂件。\n另有 **Robert Koch Institute**（1891 年设立，至今存在）造成的机构名淹没——全文检索 \"Koch\" 不可用，须用 `Robert Koch` 或配年份。",
+    "disputed_works": [],
+    "exclusions": [
+      {
+        "what": "《Gesammelte Werke》三册中 Schwalbe 所撰导言、注释、编排说明与索引",
+        "why": "编者 1912 年所写，作者 1910 年已卒"
+      },
+      {
+        "what": "各期刊卷中他人所撰文章",
+        "why": "同卷不等于同一作者；其发言在会议记录中以「Koch:」引出"
+      },
+      {
+        "what": "8 份 Fraktur OCR 报废件（德文虚词率 0–2.3%，干净件 10–13%）",
+        "why": "**文本不可信，不得据以引文**；其中 Koch 本人的 2 份已用 GW 干净版顶替",
+        "list": [
+          "ueberdiemilzbra00kochgoog（0.5%，1882 驳 Pasteur 单行本）",
+          "b21365647（0.1%，1887 霍乱报告）"
+        ]
+      }
+    ],
+    "counting_convention": "covered_sources 逐份点名全部 55 条 P1 源，不使用整批声明（v0.0.0.24 曾因整批声明导致逐源检查整个关闭，v0.0.0.34 已堵）。",
+    "covered_sources": [
+      {
+        "source_id": "src-9115214f10fd",
+        "original_name": "b21463608_0001.txt",
+        "locator": "https://archive.org/details/b21463608_0001"
+      },
+      {
+        "source_id": "src-f57d6aa31f12",
+        "original_name": "b21463608_0002.txt",
+        "locator": "https://archive.org/details/b21463608_0002"
+      },
+      {
+        "source_id": "src-26899dbc257f",
+        "original_name": "b21463608_0003.txt",
+        "locator": "https://archive.org/details/b21463608_0003"
+      },
+      {
+        "source_id": "src-94dc006b6b8a",
+        "original_name": "b21353207_0001_0.txt",
+        "locator": "https://archive.org/details/b21353207_0001_0"
+      },
+      {
+        "source_id": "src-ddf69e953ec7",
+        "original_name": "b21353207_0001.txt",
+        "locator": "https://archive.org/details/b21353207_0001"
+      },
+      {
+        "source_id": "src-a05afa57c493",
+        "original_name": "b21353207_0002.txt",
+        "locator": "https://archive.org/details/b21353207_0002"
+      },
+      {
+        "source_id": "src-6d84e491d83c",
+        "original_name": "beitrgezurbiolo00cohngoog.txt",
+        "locator": "https://archive.org/details/beitrgezurbiolo00cohngoog"
+      },
+      {
+        "source_id": "src-b48c55e7fd4c",
+        "original_name": "b21303095.txt",
+        "locator": "https://archive.org/details/b21303095"
+      },
+      {
+        "source_id": "src-3d315228cef6",
+        "original_name": "BIUSante_08502x01.txt",
+        "locator": "https://archive.org/details/BIUSante_08502x01"
+      },
+      {
+        "source_id": "src-b0e46b539a15",
+        "original_name": "s3728id1338102.txt",
+        "locator": "https://archive.org/details/s3728id1338102"
+      },
+      {
+        "source_id": "src-c8bca1856b9e",
+        "original_name": "s3728id1397087.txt",
+        "locator": "https://archive.org/details/s3728id1397087"
+      },
+      {
+        "source_id": "src-14e4c7fc9735",
+        "original_name": "b21993476.txt",
+        "locator": "https://archive.org/details/b21993476"
+      },
+      {
+        "source_id": "src-116f2a7e0e52",
+        "original_name": "b22353963.txt",
+        "locator": "https://archive.org/details/b22353963"
+      },
+      {
+        "source_id": "src-f5ffa493195a",
+        "original_name": "b20394329.txt",
+        "locator": "https://archive.org/details/b20394329"
+      },
+      {
+        "source_id": "src-8febdd688a0a",
+        "original_name": "ueberdiemilzbra00kochgoog.txt",
+        "locator": "https://archive.org/details/ueberdiemilzbra00kochgoog"
+      },
+      {
+        "source_id": "src-575cfbf74b39",
+        "original_name": "b22332595.txt",
+        "locator": "https://archive.org/details/b22332595"
+      },
+      {
+        "source_id": "src-25ec7ee8f5db",
+        "original_name": "b22305270.txt",
+        "locator": "https://archive.org/details/b22305270"
+      },
+      {
+        "source_id": "src-9c9197baa813",
+        "original_name": "diebekmpfungder00westgoog.txt",
+        "locator": "https://archive.org/details/diebekmpfungder00westgoog"
+      },
+      {
+        "source_id": "src-9be4105974ab",
+        "original_name": "b21365647.txt",
+        "locator": "https://archive.org/details/b21365647"
+      },
+      {
+        "source_id": "src-fbf9ab881793",
+        "original_name": "b21356191.txt",
+        "locator": "https://archive.org/details/b21356191"
+      },
+      {
+        "source_id": "src-dc5b70c203f3",
+        "original_name": "b24749394.txt",
+        "locator": "https://archive.org/details/b24749394"
+      },
+      {
+        "source_id": "src-3123fc95f7d4",
+        "original_name": "b3047842x.txt",
+        "locator": "https://archive.org/details/b3047842x"
+      },
+      {
+        "source_id": "src-d919a9484d70",
+        "original_name": "b21973040_0001.txt",
+        "locator": "https://archive.org/details/b21973040_0001"
+      },
+      {
+        "source_id": "src-232b6fcc9d5f",
+        "original_name": "b21973040_0002.txt",
+        "locator": "https://archive.org/details/b21973040_0002"
+      },
+      {
+        "source_id": "src-38af0858c039",
+        "original_name": "robertkochsheil00kochgoog.txt",
+        "locator": "https://archive.org/details/robertkochsheil00kochgoog"
+      },
+      {
+        "source_id": "src-df8461e439ce",
+        "original_name": "robertkochsheil01kochgoog.txt",
+        "locator": "https://archive.org/details/robertkochsheil01kochgoog"
+      },
+      {
+        "source_id": "src-e77b3bb1e939",
+        "original_name": "robertkochsheil02kochgoog.txt",
+        "locator": "https://archive.org/details/robertkochsheil02kochgoog"
+      },
+      {
+        "source_id": "src-9c9ca5a3144b",
+        "original_name": "bub_gb_9g81AQAAMAAJ.txt",
+        "locator": "https://archive.org/details/bub_gb_9g81AQAAMAAJ"
+      },
+      {
+        "source_id": "src-e2c7e11936da",
+        "original_name": "11872846bsb.txt",
+        "locator": "https://archive.org/details/11872846bsb"
+      },
+      {
+        "source_id": "src-d6622d949bd6",
+        "original_name": "b2233936x.txt",
+        "locator": "https://archive.org/details/b2233936x"
+      },
+      {
+        "source_id": "src-2fdb31e51d06",
+        "original_name": "b30473652.txt",
+        "locator": "https://archive.org/details/b30473652"
+      },
+      {
+        "source_id": "src-f57607aec80a",
+        "original_name": "11452075bsb.txt",
+        "locator": "https://archive.org/details/11452075bsb"
+      },
+      {
+        "source_id": "src-efb168070db8",
+        "original_name": "letter00koch.txt",
+        "locator": "https://archive.org/details/letter00koch"
+      },
+      {
+        "source_id": "src-0e5599c7d71e",
+        "original_name": "robertkochlette00koch.txt",
+        "locator": "https://archive.org/details/robertkochlette00koch"
+      },
+      {
+        "source_id": "src-3c8867f23c3b",
+        "original_name": "BerlinerKlinischeWochenschrift188219.txt",
+        "locator": "https://archive.org/details/BerlinerKlinischeWochenschrift188219"
+      },
+      {
+        "source_id": "src-90e3d789382e",
+        "original_name": "BerlinerKlinischeWochenschrift188421.txt",
+        "locator": "https://archive.org/details/BerlinerKlinischeWochenschrift188421"
+      },
+      {
+        "source_id": "src-7d61725614d7",
+        "original_name": "DeutscheMedizinischeWochenschrift188309.txt",
+        "locator": "https://archive.org/details/DeutscheMedizinischeWochenschrift188309"
+      },
+      {
+        "source_id": "src-e7b4e9e000a3",
+        "original_name": "DeutscheMedizinischeWochenschrift189117.txt",
+        "locator": "https://archive.org/details/DeutscheMedizinischeWochenschrift189117"
+      },
+      {
+        "source_id": "src-452ad6726147",
+        "original_name": "DeutscheMedizinischeWochenschrift1901272.HalbjahrAbS.421.txt",
+        "locator": "https://archive.org/details/DeutscheMedizinischeWochenschrift1901272.HalbjahrAbS.421"
+      },
+      {
+        "source_id": "src-b7ebe2c15050",
+        "original_name": "DeutscheMedizinischeWochenschrift187804.txt",
+        "locator": "https://archive.org/details/DeutscheMedizinischeWochenschrift187804"
+      },
+      {
+        "source_id": "src-db69fda7ffcb",
+        "original_name": "BerlinerKlinischeWochenschrift190845Teil2Ab1258.txt",
+        "locator": "https://archive.org/details/BerlinerKlinischeWochenschrift190845Teil2Ab1258"
+      },
+      {
+        "source_id": "src-2f1190694fd1",
+        "original_name": "DeutscheMedizinischeWochenschrift1909352.HalbjahrAb1129.txt",
+        "locator": "https://archive.org/details/DeutscheMedizinischeWochenschrift1909352.HalbjahrAb1129"
+      },
+      {
+        "source_id": "src-a3aa8788e18d",
+        "original_name": "b24914708.txt",
+        "locator": "https://archive.org/details/b24914708"
+      },
+      {
+        "source_id": "src-f1744d5d97e7",
+        "original_name": "investigationsin00kochrich.txt",
+        "locator": "https://archive.org/details/investigationsin00kochrich"
+      },
+      {
+        "source_id": "src-b75e4270151a",
+        "original_name": "b21303058.txt",
+        "locator": "https://archive.org/details/b21303058"
+      },
+      {
+        "source_id": "src-b33b83bfcc64",
+        "original_name": "investigationsi01kochgoog.txt",
+        "locator": "https://archive.org/details/investigationsi01kochgoog"
+      },
+      {
+        "source_id": "src-858a32fb9314",
+        "original_name": "investigationsi00kochgoog.txt",
+        "locator": "https://archive.org/details/investigationsi00kochgoog"
+      },
+      {
+        "source_id": "src-3c57f2764ff2",
+        "original_name": "cu31924000247027.txt",
+        "locator": "https://archive.org/details/cu31924000247027"
+      },
+      {
+        "source_id": "src-f482dfd1d21d",
+        "original_name": "9439547.nlm.nih.gov.txt",
+        "locator": "https://archive.org/details/9439547.nlm.nih.gov"
+      },
+      {
+        "source_id": "src-496df806ac8e",
+        "original_name": "b21456173.txt",
+        "locator": "https://archive.org/details/b21456173"
+      },
+      {
+        "source_id": "src-a7e51969e3cb",
+        "original_name": "b20420390.txt",
+        "locator": "https://archive.org/details/b20420390"
+      },
+      {
+        "source_id": "src-d09c1aad5909",
+        "original_name": "professorkochonb00koch.txt",
+        "locator": "https://archive.org/details/professorkochonb00koch"
+      },
+      {
+        "source_id": "src-69267968264a",
+        "original_name": "b21704739.txt",
+        "locator": "https://archive.org/details/b21704739"
+      },
+      {
+        "source_id": "src-231685453bc5",
+        "original_name": "b22275976.txt",
+        "locator": "https://archive.org/details/b22275976"
+      },
+      {
+        "source_id": "src-2bcf6bce0372",
+        "original_name": "epidemiologyoftu00koch.txt",
+        "locator": "https://archive.org/details/epidemiologyoftu00koch"
+      }
+    ]
+  }
 }

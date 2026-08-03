@@ -1,29 +1,48 @@
-# Decisions and actions
+# 05 · 决策记录
 
-## Scope and assigned sources
+## 一、**先解决「怎么把它单独拿出来」，再谈它致不致病**
 
-Pending. Use train-split source IDs only.
+`src-b48c55e7fd4c`／`src-3d315228cef6`／`src-b0e46b539a15`
+《Zur Untersuchung von pathogenen Organismen》(1881，GW Bd.I **S.112**)。
 
-## Source-linked observations
+这一篇不是发现某种病原，是**换了一种工具**：把培养基做成固体，
+让单个菌落各自长开，从而能挑出**纯培养**。
 
-Pending.
+**决策形态**：在能不能分离之前，谈不上能不能证明。
+**工具先于结论**——这是他与只做观察的路数分开的地方。
 
-## Candidate Claims
+## 二、**判据写成成套的条件，而不是一次实验的结论**
 
-Pending.
+`src-c8bca1856b9e`《Die Aetiologie der Tuberculose》(1884 全本；
+1882 首刊见 BKW S.221；GW Bd.I **S.428/467**)。
 
-## Contradictions and alternative explanations
+**科赫法则的意义在于它是「弃置判据」而不是「支持证据」**：
+它规定的是**什么情况下你必须承认自己错了**——
+病原在健康个体身上也普遍存在、分不出纯培养、纯培养接种不复现病、
+或从新病例里再分离不到同一种——**任一条不满足，因果主张就不成立**。
 
-Pending.
+**这正是本项目 v0.0.0.36 所谓「有步骤且有验证/弃置判据的可复用做法」的原型。**
 
-## Unknowns and source gaps
+## 三、**对方报的数，要用自己的对照数据去顶**
 
-Pending.
+GW Bd.I **S.271–273**（《Über die Pasteurschen Milzbrandimpfungen》1887）：
+他逐条质疑 Pasteur 报出的「20 万只羊、死亡率 1%」，
+**并列出 Kelbra、Klonie、Domäne Packisch 的德国对照数据**。
 
-## Proposed Holdout cases
+**不是说「我不信」，是拿另一组可指认地点的数字去对。**
 
-IDs only; research Agents must not inspect Holdout bodies.
+## 四、面向国家机构的技术判断
 
-## Handoff to adjudication
+多篇报告刊于《Mitteilungen aus dem Kaiserlichen Gesundheitsamte》——
+**技术结论进入帝国卫生行政的一手记录**。1884 年柏林霍乱会议的逐字记录同属此类：
+**他的判断是在被当面质疑的场合给出的。**
 
-Pending.
+## ★ 待写进断言层（v0.0.0.36 要求「可复用做法」）
+
+Pasteur #106 实测：断言层补了 4 条**可复用**做法之后，
+`planning-fidelity`／`task-completion`／`tool-use`／`token-efficiency`
+四组从前四人的 **0/4 恒负全部转正**。
+
+本人物的候选（**须逐条回原文坐实后才写进断言层，此处只列线索**）：
+科赫法则四条（GW Bd.I S.428/467）、固体培养基与纯培养（S.112）、
+染色与显微观察的操作、以及「用己方可指认地点的对照数据去顶对方报数」（S.271–273）。

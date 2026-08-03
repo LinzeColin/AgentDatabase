@@ -1,29 +1,38 @@
-# Timeline, stages, and drift
+# 06 · 年表与生平记述
 
-## Scope and assigned sources
+## ★ 同名分辨（抓源阶段已按扉页署名剔除三份）
 
-Pending. Use train-split source IDs only.
+| 人／物 | 可分依据 |
+|---|---|
+| **Robert Koch**（1843-12-11 – **1910-05-27**） | 本人 |
+| **Sanitätsrath Dr. A. Koch** | `diecholeraaufih00kochgoog` 扉页署名——**不是他，已剔除** |
+| `waswissenundknne00koch`（自然疗法论战） | 同姓他人——**已剔除** |
+| `micro_IA40243207_0245` | 实为 1847 年童话集——**误挂，已剔除** |
+| Robert Koch（足球运动员，1986–）／Robot Koch（电子音乐人，1977–）／Bobby Koch（政治人物，1960–） | 年代与领域 |
+| **《Robert Koch》(1939) 德国传记电影** | **是关于他的作品，不是他的作品** |
+| **Robert Koch Institute**（1891 起，至今存在） | 机构名——**全文搜 "Koch" 会被淹没，须用 `Robert Koch` 或配年份** |
 
-## Source-linked observations
+**最硬的判据是时间：卒于 1910-05-27。**
+《Gesammelte Werke》1912 年出版，集内编者文字一律不是他的。
 
-Pending.
+## 有卷页可钉的节点（皆出自一手原刊或 GW，双份互核）
 
-## Candidate Claims
+| 年 | 事 | 出处 |
+|---|---|---|
+| 1876 | 炭疽的病因 | Cohns *Beiträge* Bd.II S.277 ／ GW Bd.I S.5 |
+| 1878 | 创伤感染病的病因研究 | GW Bd.I |
+| 1881 | **固体培养基与纯培养法** | *Mitteilungen* Bd.I ／ GW Bd.I **S.112** |
+| 1881 | 驳 Grawitz 的霉菌适应说 | BKW 1881 Nr.52 ／ GW Bd.I S.164 |
+| 1881 | 论炭疽的病因 | GW Bd.I **S.174** |
+| 1882 | **结核杆菌；科赫法则首刊** | BKW 1882 S.221 ／ GW Bd.I **S.428/467** |
+| 1882 | **回应 Pasteur 在日内瓦的演讲** | GW Bd.I **S.207** |
+| 1884 | 柏林霍乱会议逐字记录（发言以「Koch:」引出） | BKW 1884 年卷 S.478／498／509 |
+| 1887 | 质疑 Pasteur 的炭疽接种数据 | DMW Nr.32 ／ GW Bd.I **S.271–273** |
+| 1890 | 论细菌学研究（第十届国际医学大会） | Sonderabdruck 在库 |
 
-Pending.
+**每一行都有卷期与页码，可逐条回原刊核对。**
 
-## Contradictions and alternative explanations
+## 传记（皆 S2，其中一份 holdout）
 
-Pending.
-
-## Unknowns and source gaps
-
-Pending.
-
-## Proposed Holdout cases
-
-IDs only; research Agents must not inspect Holdout bodies.
-
-## Handoff to adjudication
-
-Pending.
+`src-b58f8581c014`（Cohn 回忆录，**Fraktur OCR 报废 2.3%**）等 7 份。
+**报废件不得据以引文。**
