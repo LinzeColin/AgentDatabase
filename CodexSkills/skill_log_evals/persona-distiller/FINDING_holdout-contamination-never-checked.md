@@ -71,18 +71,31 @@ Nightingale #112 实测：**117 条一条也定位不到**，判据只会打印
 
 ## 四、接进门第一次跑，就在三个人身上抓到硬失败
 
-```
-Nightingale #112
-  ✗ notes-on-nursing-1906.txt　与 train 里的 1908 版覆盖 **53.1%**
-  ✗ notes-on-nursing-1888.txt　与 1883 版覆盖 **32.6%**
-  ✗ surgical-operations-stats-1863.txt
-Jenner #104     硬失败 1
-Koch  #107      硬失败 1
-Godin           硬失败 0 ✓
-```
+**全量扫描已跑完**（10 个可扫工作区；Galen / Harvey / Vesalius / Livermore
+是旧布局或语料在 D 档，跑不了）：
 
-（全量扫描尚未跑完——大语料的 shingle 计算很慢，其余人物在后台跑。
-**这里只写已确证的三个，不推断其余。**）
+| 工作区 | 硬失败 | |
+|---|---:|---|
+| **Nightingale #112** | **3** | 另 2 处待人工核 |
+| **Jenner #104** | **1** | |
+| **Koch #107** | **1** | |
+| **Osler #110** | **1** | |
+| **Semmelweis #105** | **1** | |
+| Fleming #111 | 0 | ✓ |
+| Lister #108 | 0 | ✓ |
+| Pasteur #106 | 0 | ✓ |
+| Godin | 0 | ✓ |
+| Steinhardt #98 | 0 | 1 处待人工核 |
+
+**十个人里五个有 holdout 污染。**
+
+Nightingale 那三处最重：
+
+```
+✗ notes-on-nursing-1906.txt　与 train 里的 1908 版覆盖 **53.1%**
+✗ notes-on-nursing-1888.txt　与 1883 版覆盖 **32.6%**
+✗ surgical-operations-stats-1863.txt
+```
 
 ### Nightingale 那三处的成因是同一个
 
@@ -95,8 +108,9 @@ Godin           硬失败 0 ✓
 ## 五、这件事的分量
 
 - **不改变 Nightingale 的拒发结论**：boundary 与 fact 都没过，与 holdout 无关。
-- **但它改变了 `known` 那一组数字的可信度**——不止 Nightingale，
-  至少还有 Jenner 与 Koch。
+- **但它改变了五个人的 `known` 数字的可信度**：
+  Nightingale、Jenner、Koch、Osler、Semmelweis。
+  **十个里五个**——这不是个别失误，是**没有判据在管这件事**的必然结果。
 - **已入库 100 人的 holdout 从未按这条扫过。** 判据接进门时设为**只报不拦**，
   否则会追溯性地拦住已发布的东西。
 
