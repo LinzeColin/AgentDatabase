@@ -1,0 +1,16 @@
+{
+  "candidate_cards": [],
+  "candidate_count": 0,
+  "candidates": [],
+  "generated_at": "2026-08-03T14:59:52Z",
+  "normalized_name": "alexanderfleming",
+  "resolution": "none",
+  "schema_version": "1.0",
+  "search_scope": [
+    "sibling canonical registry",
+    "authoritative public sources supplied by orchestration"
+  ],
+  "selected_subject_uid": null,
+  "status": "ready",
+  "target_name": "Alexander Fleming"
+}
