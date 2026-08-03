@@ -847,6 +847,36 @@ def run_content_checks(report, target: Path, cache_dirs: list[str]) -> None:
                                              '——**未命中不等于伪造**，须人工核对；'
                                              '但「改了 OCR 错字再当逐字引文」也落在这里')
 
+    # ── v0.0.0.39：引文坐标（**不需要 cache**，判的是文本自身可不可回查）────
+    #   `check_quote_integrity` 管「这句在不在语料里」，管不了另一半：
+    #   **读者拿什么去回查。** 一句真引文若不写清出自哪篇哪年哪页，
+    #   读者只能选择信或不信——而这套产物的全部主张正是「你可以不信我，去核」。
+    #   Lister #108 席 E 在四处 note 与 _overall 里点了同一件事，判据数出范围：
+    #   17 条长引文，**9 条同段内无任何坐标线索**（评委的印象是「无一处」，实为 8 条有）。
+    loc_argv: list[str] = []
+    if claims.exists():
+        loc_argv += ['--claims', str(claims)]
+    payload = target / 'evals/judge_payload.v1.json'
+    if payload.exists():
+        loc_argv += ['--answers', str(payload)]
+    if not loc_argv:
+        review['quote_locator'] = '断言与答案都取不到，**引文坐标未核（不是通过）**'
+    else:
+        code, out = run('check_quote_locator.py', loc_argv)
+        if code == -1:
+            review['checker_missing'] = out
+        elif code == 3:
+            review['quote_locator'] = '一条长逐字引文都没扫到——**本次未检查（不是通过）**'
+        elif code == 2:
+            report.error('content.selftest-failed',
+                         'check_quote_locator 负对照未过——其检查结论不作数')
+        elif code != 0:
+            n = next((l for l in out.splitlines() if l.startswith('长逐字引文')), '')
+            report.error('content.quote-no-locator',
+                         f'有逐字引文无从回查：同段内既无年份也无卷页刊名。{n}')
+        else:
+            review['quote_locator'] = '✓ 每条长引文同段内都能找到坐标线索'
+
     # ── 只列不判：写进 warnings，不拦 ────────────────────────────────
     for script, argv, key in (
             ('check_absence_claims.py', ['--workspace', str(target)], 'absence_claims'),

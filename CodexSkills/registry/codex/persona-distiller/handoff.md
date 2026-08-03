@@ -1,4 +1,4 @@
-# Handoff — 人物蒸馏 Skill v0.0.0.38
+# Handoff — 人物蒸馏 Skill v0.0.0.39
 
 ## 当前架构
 
