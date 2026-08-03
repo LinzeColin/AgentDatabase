@@ -109,3 +109,16 @@ OK s2-langworth-fleming-myth chars 4147
 OK s1-obit-jclinpath-1955 PMC1023893 pages 2 chars 7418 bylineFLEMING True
 OK s1-obit-rcs-1955 PMC2377887 pages 3 chars 6952 bylineFLEMING True
 OK s1-obit-bjvd-1955 PMC1054019 pages 1 chars 4283 bylineFLEMING True
+OK s1-obit-bmj-1955 PMC2061445 pages 6 chars 42529 bylineFLEMING True
+OK s1-memorial-rcs-1956 PMC2377988 pages 3 chars 8799 bylineFLEMING True
+OK s1-oxford-purification-1942 PMC2065494 pages 17 chars 41097 bylineFLEMING True
+OK s1-oxford-florey-biolprops-1942 PMC2065495 pages 4 chars 10248 bylineFLEMING False
+OK s1-oxford-heatley-assay-1944 PMC1258024 pages 5 chars 24415 bylineFLEMING False
+OK s1-oxford-florey-survey-1944 PMC2285960 pages 3 chars 23636 bylineFLEMING True
+OK s1-oxford-florey-microorg-1945 PMC2060276 pages 8 chars 61760 bylineFLEMING False
+OK s1-oxford-florey-microorg-1946-YALE PMC2602034 pages 18 chars 43427 bylineFLEMING False
+OK s1-mb693-pneumonia-1939 PMC5151490 pages 4 chars 15601 bylineFLEMING True
+OK s1-mb693-sulphapyridine-1940 PMC5942745 pages 6 chars 11795 bylineFLEMING False
+OK s1-sulphapyridine-fate-1940 PMC5306572 pages 9 chars 19834 bylineFLEMING False
+SKIP-exists penicillin-1929-REPRINT-bjep1979
+OK acne-vaccines-1909-DUPSCAN chars 32190
