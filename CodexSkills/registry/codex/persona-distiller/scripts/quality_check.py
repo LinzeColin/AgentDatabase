@@ -1599,6 +1599,59 @@ def run_suite_single_drag(report, target: Path, thresholds: dict) -> None:
     report.metrics['suite_single_drag'] = info
 
 
+def run_evidence_per_claim(report, target: Path) -> None:
+    """证据字段是逐条的还是填一次抄 N 遍（v0.0.0.78，**只写 metrics**）。
+
+    `check_claim_anchors` 核的是「断言有没有挂上源」。
+    **Koch #107 的 46 条断言全部挂上了源——挂的是同一对文件。**
+    十个工作区实测：七个逐条各异，**三个不是**
+    （Koch `source_ids` 1 种／46 条，Lister 两个字段各 1 种／35 条，
+    Jenner `evidence_clusters` 1 种／35 条）。
+
+    **它说的不是「这些断言是编的」，只说这个字段不再有信息量**——
+    读它的判据于是在核一个常量。
+    同型第二例：v0.0.0.24 一句 `attribution_basis` 让整批免检，逐源检查十版没跑过。
+    """
+    here = Path(__file__).resolve().parent
+    script = here / 'check_evidence_is_per_claim.py'
+    if not script.exists():
+        report.metrics['evidence_per_claim'] = {'状态': '检查器未安装，**未核验**（不是通过）'}
+        return
+    spec = importlib.util.spec_from_file_location('_pd_evperclaim', script)
+    module = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(module)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['evidence_per_claim'] = {'状态': f'加载失败，**未核验**：{exc}'}
+        return
+    buffer = io.StringIO()
+    with contextlib.redirect_stdout(buffer):
+        if module.selftest() != 0:
+            report.metrics['evidence_per_claim'] = {'状态': '**负对照未过，其结论不作数**'}
+            return
+
+    path = target / 'evidence' / 'claims.jsonl'
+    if not path.is_file():
+        report.metrics['evidence_per_claim'] = {'状态': '找不到 claims.jsonl，**未核验**（不是通过）'}
+        return
+    claims = [json.loads(line) for line in path.read_text(encoding='utf-8').splitlines()
+              if line.strip()]
+    if not claims:
+        report.metrics['evidence_per_claim'] = {'状态': '**断言文件是空的——未核验（不是通过）**'}
+        return
+
+    res = module.audit(claims)
+    entry = {'断言条数': len(claims)}
+    flagged = []
+    for field, (state, _n, nonempty, distinct) in res.items():
+        entry[field] = f'{state}（非空 {nonempty}/{len(claims)}，不同取值 {distinct}）'
+        if state in ('表头', '几乎是表头'):
+            flagged.append(f'{field}：{len(claims)} 条只有 {distinct} 种取值')
+    if flagged:
+        entry['**表头冒充证据**'] = flagged
+    report.metrics['evidence_per_claim'] = entry
+
+
 def run_corpus_ceiling(report, target: Path, profile: str) -> None:
     """抓源台账的一手上限够得着哪一档（v0.0.0.76，**只写 metrics**）。
 
@@ -2102,6 +2155,7 @@ def main() -> int:
             cases = evaluate_cases(report, target, thresholds, {record.get('source_id') for record in holdout}, args.allow_provisional)
             run_case_self_sufficiency(report, cases)
             run_measurement_claims(report, target)
+            run_evidence_per_claim(report, target)
             run_unqualified_priority(report, target)
             run_sole_authorship(report, target)
             run_holdout_overlap(report, target, args.cache)
