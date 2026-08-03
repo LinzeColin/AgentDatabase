@@ -36,8 +36,43 @@ def _object_key(sha256: str) -> str:
     return f"private-agentdatabase/sha256/{sha256[:2]}/{sha256}"
 
 
-def _normalized_key(run_id: str) -> str:
-    return f"private-agentdatabase/normalized/{run_id}/events.jsonl"
+# The normalized rollup used to be one whole ~350 MB events.jsonl per run under
+# private-agentdatabase/normalized/<run_id>/. Because each run captures whatever
+# the source currently holds, consecutive runs overlap heavily but are never
+# byte-identical, so content addressing could not dedupe them: ten runs in two
+# days cost 3.579 GB for a 122,080-event union. Measured new events per run were
+# 4 to 7,748 — under 7% of each upload was actually new.
+#
+# The rollup is now a base plus per-run deltas. The base carries the union to
+# date; each run uploads only events whose id it has not published before. Union
+# = base + every delta, so nothing is superseded and nothing is re-uploaded.
+CANONICAL_BASE_KEY = "private-agentdatabase/normalized/canonical/events.jsonl"
+
+
+def _normalized_delta_key(run_id: str) -> str:
+    return f"private-agentdatabase/normalized/canonical/delta/{run_id}.jsonl"
+
+
+def _published_index_path(runtime_dir: Path) -> Path:
+    return runtime_dir / "published-event-ids.txt"
+
+
+def _load_published_ids(runtime_dir: Path) -> set[str]:
+    path = _published_index_path(runtime_dir)
+    if not path.is_file():
+        return set()
+    return {line.strip() for line in path.read_text(encoding="utf-8").splitlines() if line.strip()}
+
+
+def _extend_published_ids(runtime_dir: Path, new_ids: Iterable[str]) -> int:
+    path = _published_index_path(runtime_dir)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    added = 0
+    with path.open("a", encoding="utf-8", newline="\n") as handle:
+        for value in new_ids:
+            handle.write(f"{value}\n")
+            added += 1
+    return added
 
 
 def _write_jsonl(path: Path, events: Iterable[NormalizedEvent]) -> int:
@@ -153,12 +188,24 @@ class CapturePipeline:
                 manifest.objects_repaired += 1 if receipt.operation == "repaired" else 0
                 manifest.objects_unchanged += 1 if receipt.operation == "unchanged" else 0
                 all_events.extend(normalize_record(record))
+            # Publish only events this host has not published before. The union
+            # stays complete because the base object plus every delta is the
+            # union; re-uploading the whole rollup each run is what produced
+            # 3.579 GB of overlapping snapshots for a 122,080-event union.
+            published_ids = _load_published_ids(self.config.runtime_dir)
+            delta_events = [event for event in all_events if event.event_id not in published_ids]
             normalized_path = work / "events.jsonl"
-            event_count = _write_jsonl(normalized_path, all_events)
+            # event_count keeps its meaning: everything normalized this run.
+            # published_event_count is what actually left the host.
+            published_event_count = _write_jsonl(normalized_path, delta_events)
+            event_count = len(all_events)
             normalized_sha = sha256_file(normalized_path)
-            normalized_receipt = self.object_store.put_file(_normalized_key(run_id), normalized_path, normalized_sha)
+            normalized_receipt = self.object_store.put_file(
+                _normalized_delta_key(run_id), normalized_path, normalized_sha
+            )
             manifest.objects.append(normalized_receipt)
             manifest.normalized_batch_key = normalized_receipt.object_key
+            _extend_published_ids(self.config.runtime_dir, (event.event_id for event in delta_events))
             manifest.state = RunState.VERIFYING_OBJECTS
             if not all(item.readback_verified and item.readback_sha256 == item.sha256 for item in manifest.objects):
                 raise PipelineError("至少一个对象缺少完整读回证明")
@@ -195,6 +242,13 @@ class CapturePipeline:
                 result["private_fact_backup"] = fact_backup
                 result["github_private_release_backup"] = manifest.github_private_release_backup
             result["event_count"] = event_count
+            result["published_event_count"] = published_event_count
+            result["incremental_upload"] = {
+                "mode": "base_plus_delta",
+                "base_object": CANONICAL_BASE_KEY,
+                "delta_object": manifest.normalized_batch_key,
+                "skipped_already_published": event_count - published_event_count,
+            }
             return result
         except Exception as exc:
             manifest.state = RunState.FAILED

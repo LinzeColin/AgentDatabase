@@ -1738,3 +1738,46 @@ def test_bootstrap_env_contains_complete_ovh_runtime_defaults() -> None:
         "MEMORY_ATLAS_STATUS_PROJECTION_TARGET=/srv/linze/apps/status/data/memory_atlas_status_projection.json",
     ):
         assert token in text
+
+
+def test_incremental_upload_publishes_only_unseen_events(tmp_path: Path) -> None:
+    """R2 held ten whole-history rollups (3.579 GB) for a 122,080-event union
+    because every run re-uploaded everything it could see. Measured new events
+    per run were 4 to 7,748, so under 7% of each upload was new. These are the
+    primitives that make a run publish only what it has not published before."""
+    from OpenAIDatabase.scripts.memory_atlas_private.pipeline import (
+        CANONICAL_BASE_KEY,
+        _extend_published_ids,
+        _load_published_ids,
+        _normalized_delta_key,
+        _published_index_path,
+    )
+
+    runtime = tmp_path / "runtime"
+    runtime.mkdir()
+    assert _load_published_ids(runtime) == set(), "a fresh host has published nothing"
+
+    first = ["evt_a", "evt_b", "evt_c"]
+    assert _extend_published_ids(runtime, first) == 3
+    assert _load_published_ids(runtime) == set(first)
+
+    # Second run sees the same three plus two new ones; only the two are new.
+    seen = _load_published_ids(runtime)
+    second_batch = ["evt_b", "evt_c", "evt_d", "evt_e"]
+    delta = [e for e in second_batch if e not in seen]
+    assert delta == ["evt_d", "evt_e"], "already-published events must not be re-uploaded"
+    _extend_published_ids(runtime, delta)
+    assert _load_published_ids(runtime) == {"evt_a", "evt_b", "evt_c", "evt_d", "evt_e"}
+
+    # Union is preserved: nothing that was ever published is dropped from the index.
+    assert {"evt_a"} <= _load_published_ids(runtime), "base events survive later runs"
+
+    # Delta keys are per-run and live beside the base, so base + deltas = union.
+    assert _normalized_delta_key("marun_x") != _normalized_delta_key("marun_y")
+    assert _normalized_delta_key("marun_x").startswith("private-agentdatabase/normalized/canonical/delta/")
+    assert CANONICAL_BASE_KEY == "private-agentdatabase/normalized/canonical/events.jsonl"
+    assert "/normalized/marun_" not in _normalized_delta_key("marun_x"), "no more per-run whole-history rollups"
+
+    # The index is durable across processes.
+    assert _published_index_path(runtime).is_file()
+    assert _load_published_ids(runtime) == set(_published_index_path(runtime).read_text(encoding="utf-8").split())
