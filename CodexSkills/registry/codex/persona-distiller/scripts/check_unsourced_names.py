@@ -43,6 +43,21 @@ import sys
 # 引文只会出现在这四种壳里：`「…」` / 反引号 / `> ` 行 / `《…》`。
 QUOTED = re.compile(r"「[^」]*」|`[^`]*`|《[^》]*》|^>.*$", re.M)
 
+# ★ v0.0.0.62：**刊名缩写不是人名，而刊名是开放集合，停用词表堵不住。**
+#   Fleming #111 第 3 轮实测，一次输出里同时报出
+#   `Br Med`、`Exp Path`、`Soc Med`、`Biochem`、`Studies`、`Wound Infections`
+#   六个「查无实据的人名」——全部来自 `*Br Med J* 2(4210):386` 这类著录。
+#   **假阳性堆到这个密度，判据就等于没有**：作者会学会跳过它的输出，
+#   于是真正混进来的一个人名也跟着被跳过。
+#
+#   结构性的修法是**把著录当成又一种壳剥掉**，而不是往 `NOT_A_NAME` 里加词。
+#   本流水线的写法是：单星号 `*…*` 是刊名／篇名，双星号 `**…**` 是加粗。
+#
+# ★★ 这一条**必须**只吃单星号。加粗恰恰用在人名上（`**A. Grant Fleming**`）——
+#    若正则把 `**…**` 也吃掉，判据就对着它最该抓的那一类名字失明，
+#    而且会**安静地**失明（打印「✓ 没有查无实据的人名」）。自测反向对照 ⑦ 守这一条。
+CITED = re.compile(r"(?<!\*)\*(?!\*)([^*\n]{2,120})\*(?!\*)")
+
 # 词内大写是人名的常态（`McCrae`、`MacLeod`、`O'Brien`），
 # 第一版写成 `[A-Z][a-z]{1,15}` 结果 `Thomas McCrae` 一个都抓不到——自测抓出来的。
 _TOK = r"[A-Z][a-zA-Z'’]{1,15}"
@@ -136,15 +151,26 @@ def read_ledger(led: pathlib.Path) -> dict:
 def extract_names(answers: dict) -> dict:
     """{人名: [出现的 case_id]}。同一答案里重复出现只记一次。
 
-    **先把引文区整段挖空**，只在中文行文里抽名——
-    否则 `no quality takes rank with imperturbability` 会被拆成一串「人名」。
+    **先把引文区与著录区整段挖空**，只在中文行文里抽名——
+    否则 `no quality takes rank with imperturbability` 会被拆成一串「人名」，
+    而 `*Br Med J*` 会被报成一位查无实据的「Br Med」先生。
     """
     found = collections.defaultdict(list)
     for cid, text in answers.items():
-        prose = QUOTED.sub(" ", text)
+        prose = CITED.sub(" ", QUOTED.sub(" ", text))
         for m in NAME.finditer(prose):
             name = re.sub(r"\s+", " ", m.group(1)).strip().rstrip(".")
+            # ★ v0.0.0.62：**逐词判，不只判整串。**
+            #   v0.0.0.60 为「书名里的拉丁词不是人名」把 `Aconitum`、`Napellus`
+            #   加进了 `NOT_A_NAME`，但抽名器产出的是**词组** `Aconitum Napellus`，
+            #   整串不在集合里，于是那次的修法**没盖住它自己的用例**——
+            #   Fleming #111 第 3 轮照样把它报成「无依据的人名」。
+            #   规则：**每一个词都在排除集里才丢**；只中一个词的照抽
+            #   （反向对照 ⑪ 守这一条，否则「某某 Oxford」这种真名会被吃掉）。
+            toks = [w.rstrip(".") for w in name.split()]
             if name in NOT_A_NAME or len(name) < 5:
+                continue
+            if len(toks) > 1 and all(w in NOT_A_NAME for w in toks):
                 continue
             # 单个词的，得像姓：至少 5 个字母，且不是常见英文实词
             if " " not in name and name.lower() in _COMMON_WORDS:
@@ -317,6 +343,44 @@ def selftest() -> int:
     chk("账本查不到、文件名也认不出 → 归「未定档」，落 ⚠ 不落 ✓",
         any("Christian" in r[0] for r in soft)
         and not any("Christian" in r[0] for r in ok))
+
+    print("── 正向 ②：**刊名缩写不是人名**（Fleming #111 第 3 轮，一次报出六个）──")
+    got = extract_names({"a": "论文见 *Br Med J* 2(4210):386，1941；"
+                              "另见 *Proc R Soc Med* 26:71-84 与 *Biochem J* 38(1):61-65。"})
+    chk("`*Br Med J*` 等著录 → 一个「人名」都不抽",
+        not any(k in got for k in ("Br Med", "Soc Med", "Biochem", "Proc R Soc Med")))
+
+    print("── 反向对照 ⑧：**同样的字串不在著录壳里，照报不误** ──")
+    # 剥的是壳不是词——若改成往 NOT_A_NAME 里塞词，这一条就会跟着哑掉。
+    got = extract_names({"a": "后来我请 Br Med 先生看过这一段。"})
+    chk("`Br Med` 出现在行文里（没有星号）→ 仍抽得到", "Br Med" in got)
+
+    print("── 反向对照 ⑨：**加粗不是著录，人名不许被剥掉** ──")
+    # ★ 这一条是本次改动最该守的：加粗恰恰用在人名上。
+    #   若正则误吃 `**…**`，判据会**安静地**放过它最该抓的那一类名字。
+    got = extract_names({"a": "**A. Grant Fleming（蒙特利尔公共卫生）**在检索结果里排第一。"})
+    chk("`**A. Grant Fleming**` → 仍抽得到",
+        any("Grant Fleming" in k for k in got))
+    got = extract_names({"a": "**Howard Florey** 与 **Ernst Chain** 在牛津。"})
+    chk("一行里两处加粗人名 → 两个都抽得到",
+        any("Florey" in k for k in got) and any("Chain" in k for k in got))
+
+    print("── 反向对照 ⑩：加粗与著录相邻时，只剥著录那一段 ──")
+    got = extract_names({"a": "**Heatley** 的测定法见 *Biochem J* 38(1):61-65，1944。"})
+    chk("`**Heatley**` 抽得到，而 `Biochem` 不抽",
+        any("Heatley" in k for k in got) and not any(k.startswith("Biochem") for k in got))
+
+    print("── 正向 ③：**排除集要逐词判**（v0.0.0.60 的修法没盖住自己的用例）──")
+    got = extract_names({"a": "archive.org 把 1845 年那本 Aconitum Napellus 著录在别人名下。"})
+    chk("`Aconitum Napellus` 两词都在排除集 → 不抽",
+        not any("Aconitum" in k or "Napellus" in k for k in got))
+
+    print("── 反向对照 ⑪：**只中一个词的不许丢** ──")
+    # 若写成「任一词命中即丢」，`Fleming Oxford`、`某某 Hospital` 这类真名会被吃掉，
+    # 而判据会安静地少报——这比多报坏得多。
+    got = extract_names({"a": "后来是 Napellus Fleming 经手的。"})
+    chk("`Napellus Fleming` 只中一个词 → 仍抽得到",
+        any("Fleming" in k for k in got))
 
     print(f"\n{'✓ 自测全过' if not fails else f'✗ **{len(fails)} 项未过**'}")
     return 0 if not fails else 2

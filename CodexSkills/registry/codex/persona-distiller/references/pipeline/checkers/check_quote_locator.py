@@ -70,7 +70,16 @@ LOCATOR = re.compile(
     r"|\bPhilosophical\s+Transactions\b|\bPhil\.\s*Trans\b"
     r"|\bBritish\s+Medical\s+Journal\b|\bBMJ\b"
     r"|\bCollected\s+Papers\b"
-    r"|\bProceedings\b",
+    r"|\bProceedings\b"
+    # ★ v0.0.0.62：**卷(期):页 是与刊名无关的坐标形式，按形状认，不按刊名认。**
+    #   上面那串刊名是 Osler 一批人物留下的硬编码清单（Lancet／BMJ／Phil Trans）。
+    #   Fleming #111 第 3 轮实测：`*Br J Exp Path* 10(3):226-236` 明明就在段内，
+    #   判据却报「缺坐标」——**清单里没有这本刊**。
+    #   每换一个人物就要往清单里加刊名，等于这道判据对新人物默认失灵，
+    #   而失灵的方向是**误报**：作者会学会忽略它。
+    #   `10(3):226-236` / `93:306-317` 这种形状本身就够读者回查，与刊名叫什么无关。
+    r"|\b\d{1,3}\s*\(\d{1,4}\)\s*:\s*\d{1,4}"   # 10(3):226-236
+    r"|\b\d{1,3}\s*:\s*\d{1,4}\s*[-–]\s*\d{1,4}",  # 93:306-317
     re.I)
 
 
@@ -139,7 +148,33 @@ def self_test() -> int:
     print(f"  {'✓' if ok4 else '✗'} 无引文 → total=0（调用方须据此报「未检查」而非「通过」）")
     fail += not ok4
 
-    print("\n  ✓ 负对照通过（5/5）" if not fail
+    # ⑥ **卷(期):页 按形状认，不按刊名认**（v0.0.0.62，Fleming #111 第 3 轮实测）
+    f6 = {"total": 0, "ok": 0, "bad": []}
+    scan("卷期页", "**题名后半截**（同上，*Br J Exp Path* 10(3):226-236）" + QUOTE, f6)
+    ok6 = f6["total"] == 1 and not f6["bad"]
+    print(f"  {'✓' if ok6 else '✗'} `10(3):226-236` 认得出（刊名不在硬编码清单里也算）")
+    fail += not ok6
+
+    f6b = {"total": 0, "ok": 0, "bad": []}
+    scan("卷页", "见 *Proc R Soc B* 93:306-317。" + QUOTE, f6b)
+    ok6b = f6b["total"] == 1 and not f6b["bad"]
+    print(f"  {'✓' if ok6b else '✗'} `93:306-317` 也认得出")
+    fail += not ok6b
+
+    # ⑦ 反向对照：**光有数字不算坐标**——否则这条通用式会把判据整个架空。
+    f7 = {"total": 0, "ok": 0, "bad": []}
+    scan("裸数字", "我做过 10 次，成功 3 次。" + QUOTE, f7)
+    ok7 = len(f7["bad"]) == 1
+    print(f"  {'✓' if ok7 else '✗'} 段里只有散落数字（无卷期页形状）→ 仍报缺坐标")
+    fail += not ok7
+
+    f7b = {"total": 0, "ok": 0, "bad": []}
+    scan("纯引文", QUOTE, f7b)
+    ok7b = len(f7b["bad"]) == 1
+    print(f"  {'✓' if ok7b else '✗'} 段里只有引文本身 → 仍报缺坐标")
+    fail += not ok7b
+
+    print("\n  ✓ 负对照通过（9/9）" if not fail
           else f"\n  ✗ {fail} 项未过——本检查器已失效，其「通过」不构成证据")
     return fail
 
