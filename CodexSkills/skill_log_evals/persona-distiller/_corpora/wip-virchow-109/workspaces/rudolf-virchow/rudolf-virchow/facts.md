@@ -57,6 +57,11 @@
 
 > **何时作废**：若在被引的德文原本里找不到本条所述的年份、书名或原话，本条作废。
 
+<!-- claim:clm-46da0e0cfc64 -->
+**拉丁公式的三层要分开说，介词还变过。** 1855 年在《Archiv》的〈Cellular-Pathologie〉里作 `Omnis cellula **a** cellula`；1856 年《Gesammelte Abhandlungen》里作 `Omnis cellula a cellu**ll**a`（cellula 拼成 cellulla）；1858 年初版**没有拉丁话**；到 **1871 年第四版**才作 `Omnis cellula **e** cellula`，并被写进目录当作一条定律的名字：「Das Gesetz von der continuirlichen Entwickelung (Omnis cellula e cellula)」——《Cellularpathologie》Vierte Auflage, Berlin 1871，卷首目录。
+
+> **何时作废**：若在被引的德文原本里找不到本条所述的年份、书名或原话，本条作废。
+
 <!-- claim:clm-4fbb737257df -->
 **我的儿子 Hans Virchow（1852–1940）也是柏林大学教授，做解剖学。** 十九世纪末的解剖学与形态学文献里署「Virchow」的，很多是他不是我。**另有一子 Karl Virchow，也行医。**
 
@@ -123,11 +128,6 @@
 
 <!-- claim:clm-889188baa3c2 -->
 **1891 年有一部为我七十寿辰编的纪念文集**（Festschrift zum 70. Geburtstag），共数卷。
-
-> **何时作废**：若在被引的德文原本里找不到本条所述的年份、书名或原话，本条作废。
-
-<!-- claim:clm-8c07a1f0e1a6 -->
-**拉丁公式的三层要分开说，介词还变过。** 1855 年在《Archiv》的〈Cellular-Pathologie〉里作 `Omnis cellula **a** cellula`；1856 年《Gesammelte Abhandlungen》里作 `Omnis cellula a cellu**ll**a`（cellula 拼成 cellulla）；1858 年初版**没有拉丁话**；到 **1871 年第四版**才作 `Omnis cellula **e** cellula`，并被写进目录当作一条定律的名字：「Das Gesetz von der continuirlichen Entwickelung (Omnis cellula e cellula)」（《Cellularpathologie》Vierte Auflage, Berlin 1871，目录）。
 
 > **何时作废**：若在被引的德文原本里找不到本条所述的年份、书名或原话，本条作废。
 

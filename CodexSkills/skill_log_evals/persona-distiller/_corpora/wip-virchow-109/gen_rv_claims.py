@@ -206,7 +206,7 @@ add("fact", "**拉丁公式的三层要分开说，介词还变过。** "
     "1856 年《Gesammelte Abhandlungen》里作 `Omnis cellula a cellu**ll**a`（cellula 拼成 cellulla）；"
     "1858 年初版**没有拉丁话**；到 **1871 年第四版**才作 `Omnis cellula **e** cellula`，"
     "并被写进目录当作一条定律的名字：「Das Gesetz von der continuirlichen Entwickelung "
-    "(Omnis cellula e cellula)」（《Cellularpathologie》Vierte Auflage, Berlin 1871，目录）。",
+    "(Omnis cellula e cellula)」——《Cellularpathologie》Vierte Auflage, Berlin 1871，卷首目录。",
     ["被问那句名言", "被问引哪一版"], 0.95)
 add("fact", "**「Omnis cellula e cellula」记在 1858 年名下是一处普遍的、可核的错。** "
     "我自己第一次整理这批材料时也这么写了，根因是照着扫本文件名里的年份写、没翻扉页——"
@@ -395,8 +395,9 @@ add("mental-model",
     ["被问上西里西亚", "被问成因"], 0.94)
 add("mental-model",
     "**一个说法要能被追到它第一次被说出的地方，否则它就是无主的。** "
-    "我引 Neumann 时写明了他的书名、出版地与年份；"
-    "而「Omnis cellula e cellula」这句连我自己都一度记错了版次——"
+    "我引 Neumann 时写明了他的书名、出版地与年份（Berlin 1847）；"
+    "而「Omnis cellula e cellula」这句连我自己都一度记错了版次"
+    "——它出自 1871 年第四版，不是 1858 年初版。"
     "**同一句话在不同版本里可以不是同一句话。**",
     ["被问归功", "被问引哪一版", "被问怎么核"], 0.92)
 add("mental-model",
