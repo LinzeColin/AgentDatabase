@@ -76,5 +76,423 @@
   "subject_origin": "historical",
   "target_id": "tgt-6c713225fdaa",
   "time_scope": "all available periods, separated by role and material drift",
-  "updated_at": "2026-08-03T08:05:38Z"
+  "updated_at": "2026-08-03T08:05:38Z",
+  "attribution_basis": {
+    "authority": "印刷时代人物，署名证据充分。四处须写明：\n① **核心著作有非 OCR 的双录入转写本**：《Die Cellularpathologie》(1858) 在 Deutsches Textarchiv 有双录入转写，与扫本可逐句互核。**这比任何 OCR 都可靠**，逐字引文优先取它。\n② **他创办并主编的期刊，卷次本身不算他的著作**。《Archiv für pathologische Anatomie und Physiologie》(1847 起) 卷内多人合著，**44 个卷次一律记 U**；他本人的文章按正文署名「Von R. Virchow」切出，成 22 个 `art-*` 单元记 P1，每份记母卷与字符偏移可回卷复核。\n③ **他用德文写作，本工作区有 30 份译本（英/法）**。译本是**译者的字**，一律记 P2，**逐字引文只能取德文 P1**。（Pasteur #106 因外语引文形态未被判据覆盖出过事，v0.0.0.37 才补上。）\n④ **17 份 Fraktur OCR 已毁的扫本保留在库、一律不记 P1**。文件不删——删了就没人知道那份扫本坏过；`check_ocr_language_death --ledger` 硬拦「已毁的被记作 P1」。",
+    "citation": "Virchow, Rudolf. *Die Cellularpathologie in ihrer Begründung auf physiologische und pathologische Gewebelehre*. Berlin: Hirschwald, 1858（并用 Deutsches Textarchiv 双录入转写本互核）。并对照：*Archiv für pathologische Anatomie und Physiologie* 各卷内其署名文章；*Gesammelte Abhandlungen zur wissenschaftlichen Medicin* (1856)；*Die krankhaften Geschwülste* (1863–67)；1848 年上西里西亚斑疹伤寒报告。",
+    "disputed_policy": "**争议著作为空，但不是「没查过」。** 他身处德国医学期刊的公开发表制度下，论文有卷期与年份可查，不存在伪托问题。\n**本人物真正的归属风险是血亲同名，而且危险的那个是他儿子：**\n**Hans Virchow（1852–1940）**，柏林大学**解剖学**教授，与父同姓、领域紧邻、著作年代重叠（1880s–1930s）。另有 **Karl Virchow**（另一子，医师）。\n抓源阶段已据三条机器可复核的判法排除 Hans 的 3 条与 Karl 的 1 条。\n**★ 一处必须写明的例外**：《Archiv》Bd. 64 (1875) 内有一篇 「Beobachtungen am Hühnerei über das dritte Keimblatt…, Von Hans Virchow, Cand. med. in Berlin」——**父主编的刊物上登了子的文章**。它单列在 `raw/_EXCLUDED.txt` 里，**没有归入任何类别**，因为它既不是父的著作，也不是「排除掉的子的著作」——它是父刊登子。\n另有 **《Virchows Archiv》**（1847 起以他命名、沿用至今）造成的刊名淹没：实测该刊 Bd. I 里 `Virchow` 命中约 90 处，其中约 2 处是他本人。**全文搜 `Virchow` 不可用，须按 creator 字段取。**",
+    "disputed_works": [],
+    "exclusions": [
+      {
+        "what": "其子 Hans Virchow（1852–1940）的著作",
+        "why": "同姓且领域紧邻；判法：creator 字段 / 1880 年前必非子 / 解剖学与形态学属子",
+        "excluded_ids": [
+          "b22288338",
+          "derdottersackdes00virc",
+          "ueberbauundnerva00virc"
+        ]
+      },
+      {
+        "what": "另一子 Karl Virchow 的著作",
+        "why": "同姓；同法排除",
+        "excluded_ids": [
+          "analytischemeth00vircgoog"
+        ]
+      },
+      {
+        "what": "《Archiv》各卷内他人所撰文章",
+        "why": "他是主编不是唯一作者；卷次记 U，其本人文章另切为 art-* 记 P1"
+      },
+      {
+        "what": "英译本与法译本（30 份）",
+        "why": "**译者的字，不是他的字**；记 P2，逐字引文不得取"
+      },
+      {
+        "what": "《Archiv》Bd. 64 (1875) 内 Hans Virchow 署名的一篇",
+        "why": "**父主编的刊物上登了子的文章**——单列不归类，见 raw/_EXCLUDED.txt"
+      },
+      {
+        "what": "17 份 Fraktur OCR 已毁的扫本",
+        "why": "文本读不出字，逐字引文不可取；**保留在库不删**，一律不记 P1"
+      }
+    ],
+    "counting_convention": "covered_sources 逐份点名全部 75 条 P1 源，不使用整批声明（v0.0.0.24 曾因整批声明导致逐源检查整个关闭，v0.0.0.34 已堵）。\n**注意**：75 条 P1 含 22 个从期刊卷内切出的 `art-*` 单篇与若干同文异扫，**算独立著作数时不得重复计**。",
+    "covered_sources": [
+      {
+        "source_id": "src-db4190807c07",
+        "original_name": "aegypter-ethnolog-1898-de.txt",
+        "locator": "Über die ethnologische Stellung der prähistorischen und protohistorischen Ägypter nebst Bemerkungen über Entfärbung und Verfärbung der Haare｜https://archive.org/details/bub_gb_s1E3AQAAMAAJ"
+      },
+      {
+        "source_id": "src-0f84fd47f3c0",
+        "original_name": "art-cellular-pathologie.txt",
+        "locator": "[signed article in Virchows Archiv] Cellular-Pathologie.｜https://archive.org/details/184755virchowpublicationsarchivpathol"
+      },
+      {
+        "source_id": "src-547c30f1df4e",
+        "original_name": "art-deber-bpitbelialdesqnamatlon-im-darm.txt",
+        "locator": "[signed article in Virchows Archiv] Deber Bpitbelialdesqnamatlon Im Darm.｜https://archive.org/details/archivfrpatholo08vircgoog"
+      },
+      {
+        "source_id": "src-9e865907810d",
+        "original_name": "art-der-krieg-und-die-wissenschaft.txt",
+        "locator": "[signed article in Virchows Archiv] Der Krieg und die Wissenschaft｜https://archive.org/details/bub_gb_KopBAAAAcAAJ"
+      },
+      {
+        "source_id": "src-05057e87c590",
+        "original_name": "art-descendenz-und-pathologie-1886-teil1.txt",
+        "locator": "[signed article in Virchows Archiv] Descendenz und Pathologie (Archiv Bd. 103, 1886) — installment 1 of 3｜https://archive.org/details/archivfrpatholo09vircgoog"
+      },
+      {
+        "source_id": "src-5739b05f1cf3",
+        "original_name": "art-descendenz-und-pathologie-1886-teil2.txt",
+        "locator": "[signed article in Virchows Archiv] Descendenz und Pathologie (Archiv Bd. 103, 1886) — installment 2 of 3｜https://archive.org/details/archivfrpatholo09vircgoog"
+      },
+      {
+        "source_id": "src-8d125d1ef54a",
+        "original_name": "art-descendenz-und-pathologie-1886-teil3.txt",
+        "locator": "[signed article in Virchows Archiv] Descendenz und Pathologie (Archiv Bd. 103, 1886) — installment 3 of 3｜https://archive.org/details/archivfrpatholo09vircgoog"
+      },
+      {
+        "source_id": "src-0ee7ec2a2b8a",
+        "original_name": "art-die-endogene-zellenbildung-beim-krebs-hierzu-tab-ii.txt",
+        "locator": "[signed article in Virchows Archiv] Die endogene Zellenbildung beim Krebs. (Hierzu Tab. II.)｜https://archive.org/details/184755virchowpublicationsarchivpathol"
+      },
+      {
+        "source_id": "src-51df3ba90ac1",
+        "original_name": "art-die-naturwissenschaftliche-methode-und-die-standpunk.txt",
+        "locator": "[signed article in Virchows Archiv] Die naturwissenschaftliche Methode und die Standpunkte in der Therapie.｜https://archive.org/details/184755virchowpublicationsarchivpathol"
+      },
+      {
+        "source_id": "src-abd7e3e157ba",
+        "original_name": "art-ein-neuer-fall-von-halskiemenflstel.txt",
+        "locator": "[signed article in Virchows Archiv] Ein neuer Fall von Halskiemenflstel.｜https://archive.org/details/archivfrpatholo59unkngoog"
+      },
+      {
+        "source_id": "src-1e129dc1a0cd",
+        "original_name": "art-empirie-und-transscendenz.txt",
+        "locator": "[signed article in Virchows Archiv] Empirie und Transscendenz.｜https://archive.org/details/184755virchowpublicationsarchivpathol"
+      },
+      {
+        "source_id": "src-f84281080199",
+        "original_name": "art-erna-hrungseinheiten-und-krankheitsheerde.txt",
+        "locator": "[signed article in Virchows Archiv] Ernährungseinheiten und Krankheitsheerde.｜https://archive.org/details/184755virchowpublicationsarchivpathol"
+      },
+      {
+        "source_id": "src-dacef445f1b5",
+        "original_name": "art-fig-6-a-b-7-8-entwickelungsstofen-von-psorospermien.txt",
+        "locator": "[signed article in Virchows Archiv] Fig. 6 a, b; 7; 8. Entwickelungsstofen von Psorospermien, welche 8 Wochen in einer verdünnten Cbromsäurelösong gelegen hatten. fflstoriscbe Noti｜https://archive.org"
+      },
+      {
+        "source_id": "src-7643386c6763",
+        "original_name": "art-fo-tale-rachitis-cretinismns-und-zwergwuchs.txt",
+        "locator": "[signed article in Virchows Archiv] Fötale Rachitis^ Cretinismns und Zwergwuchs.｜https://archive.org/details/archivfurpathol01vircgoog"
+      },
+      {
+        "source_id": "src-2033c395e6e7",
+        "original_name": "art-gesundheitsregeln-lu-r-die-soldaten-im-felde.txt",
+        "locator": "[signed article in Virchows Archiv] Gesundheitsregeln lür die Soldaten im Felde.｜https://archive.org/details/bub_gb_KopBAAAAcAAJ"
+      },
+      {
+        "source_id": "src-de40aa385015",
+        "original_name": "art-himpartie-im-zusunde-der-weissen-erweichung-in-brust.txt",
+        "locator": "[signed article in Virchows Archiv] Himpartie im ZusUnde der weissen Erweichung; in Brust- und Unterleibshöhle km erheblicher abnormer Befund* Zttr äes^iebte der Qnecksilberbehaiid｜https://archive.org"
+      },
+      {
+        "source_id": "src-adc3aa63120d",
+        "original_name": "art-kleinere-hittlieilongen-wirkung-kalter-b-der-und-w-r.txt",
+        "locator": "[signed article in Virchows Archiv] Kleinere Hittlieilongen. Wirkung kalter B&der und W&rmeregaliniDg.｜https://archive.org/details/archivfurpathol08vircgoog"
+      },
+      {
+        "source_id": "src-bae295fca3a4",
+        "original_name": "art-kleinere-mittheoangen-lieber-das-yorkommea-ton-apfel.txt",
+        "locator": "[signed article in Virchows Archiv] Kleinere MittheOangen. lieber das Yorkommea Ton Apfelsloenschläachen in den Darmabgängen.｜https://archive.org/details/archivfurpathol08vircgoog"
+      },
+      {
+        "source_id": "src-6a93554a299e",
+        "original_name": "art-kriegstyphus-und-ruhr.txt",
+        "locator": "[signed article in Virchows Archiv] Kriegstyphus und Ruhr.｜https://archive.org/details/archivfurpathol08vircgoog"
+      },
+      {
+        "source_id": "src-a9eb83d289ae",
+        "original_name": "art-ueber-blut-zellen-und-fasern-hierzn-tab-i-fig-6-8-ei.txt",
+        "locator": "[signed article in Virchows Archiv] Ueber Blut, Zellen und Fasern. (Hierzn Tab. I, fig. 6 — 8.) Eine Anlwoit an Herrn He nie.｜https://archive.org/details/184755virchowpublicationsarchivpathol"
+      },
+      {
+        "source_id": "src-33afc83b80dd",
+        "original_name": "art-ueber-die-standpunkte-in-der-wissenschaftlichen-medi.txt",
+        "locator": "[signed article in Virchows Archiv] Ueber die Standpunkte in der wissenschaftlichen . Medicin.｜https://archive.org/details/184755virchowpublicationsarchivpathol"
+      },
+      {
+        "source_id": "src-f722ff3e56fa",
+        "original_name": "art-zur-gesdu-cbte-des-aussatzes-wd-der-8-htiuer-besmder.txt",
+        "locator": "[signed article in Virchows Archiv] Zur Gesdücbte des Aussatzes wd der 8|HtiUer, besMders in Deatsehbiiid.｜https://archive.org/details/archivfrpatholo15vircgoog"
+      },
+      {
+        "source_id": "src-451ad0649ccb",
+        "original_name": "art-zur-trichinen-lehre.txt",
+        "locator": "[signed article in Virchows Archiv] Zur Trichinen-Lehre.｜https://archive.org/details/archivfrpatholo59unkngoog"
+      },
+      {
+        "source_id": "src-fb1a2a211a95",
+        "original_name": "briefe-an-eltern-1907-de.txt",
+        "locator": "Briefe an seine Eltern, 1839 bis 1864｜https://archive.org/details/b24865357_0002"
+      },
+      {
+        "source_id": "src-70b23b71ffbf",
+        "original_name": "canalisation-abfuhr-1869-de.txt",
+        "locator": "Canalisation oder Abfuhr? : eine hygienische Studie｜https://archive.org/details/b22286378"
+      },
+      {
+        "source_id": "src-63ac5a56f924",
+        "original_name": "cellularpath-1858-de-gutenberg.txt",
+        "locator": "Die Cellularpathologie in ihrer Begründung auf physiologische und pathologische Gewebelehre｜https://archive.org/details/diecellularpatho44921gut"
+      },
+      {
+        "source_id": "src-6ae54a6f0acf",
+        "original_name": "chlorose-1872-de.txt",
+        "locator": "Ueber die Chlorose und die damit zusammenhängenden Anomalien im Gefässapparate : insbesondere über Endocarditis puerperalis｜https://archive.org/details/b33674280"
+      },
+      {
+        "source_id": "src-27158dbde0be",
+        "original_name": "einheitsbestrebungen-1849-mdz.txt",
+        "locator": "Die Einheitsbestrebungen in der wissenschaftlichen Medicin｜https://www.digitale-sammlungen.de/en/view/bsb10087121"
+      },
+      {
+        "source_id": "src-49823ac8f787",
+        "original_name": "erziehung-des-weibes-1865-mdz.txt",
+        "locator": "Ueber die Erziehung des Weibes fuer seinen Beruf｜https://www.digitale-sammlungen.de/en/view/bsb10446050"
+      },
+      {
+        "source_id": "src-99a961542fe3",
+        "original_name": "freiheit-wissenschaft-1877-de.txt",
+        "locator": "Die Freiheit der Wissenschaft im modernen Staat : Rede gehalten in der dritten allgemeinen Sitzung der fünfzigsten Versammlung deutscher Naturforscher und Aerzte zu München am 22. ｜https://archive.org"
+      },
+      {
+        "source_id": "src-e210c849f392",
+        "original_name": "gesabh-oeffmed-1879-de-bd2.txt",
+        "locator": "Gesammelte Abhandlungen aus dem Gebiete der öffentlichen Medicin und der Seuchenlehre｜https://archive.org/details/b2190392x_0002"
+      },
+      {
+        "source_id": "src-9161865ee0ff",
+        "original_name": "gesabh-wissmed-1856-de.txt",
+        "locator": "Gesammelte Abhandlungen zur wissenschaftlichen Medicin [electronic resource]｜https://archive.org/details/b20419089"
+      },
+      {
+        "source_id": "src-f746c5e8237d",
+        "original_name": "gesabh-wissmed-1862-de.txt",
+        "locator": "Gesammelte Abhandlungen zur wissenschaftlichen Medicin｜https://archive.org/details/gesammelteabhand00virc"
+      },
+      {
+        "source_id": "src-fa6f78da2930",
+        "original_name": "geschwuelste-1863-de-bd1.txt",
+        "locator": "Die krankhaften Geschwülste : dreissig Vorlesungen, gehalten während des Wintersemesters 1862-1863 an der Universität zu Berlin｜https://archive.org/details/diekrankhafteng03vircgoog"
+      },
+      {
+        "source_id": "src-d82862576099",
+        "original_name": "geschwuelste-1865-de-bd2.txt",
+        "locator": "Die krankhaften Geschwülste : dreissig Vorlesungen, gehalten während des Wintersemesters 1862-1863 an der Universität zu Berlin｜https://archive.org/details/diekrankhafteng04vircgoog"
+      },
+      {
+        "source_id": "src-78453523edd3",
+        "original_name": "geschwuelste-1867-de-bd3.txt",
+        "locator": "Die krankhaften Geschwülste : dreissig Vorlesungen, gehalten während des Wintersemesters 1862-1863 an der Universität zu Berlin｜https://archive.org/details/diekrankhafteng05vircgoog"
+      },
+      {
+        "source_id": "src-2dc674a7628e",
+        "original_name": "goethe-naturforscher-1861-de.txt",
+        "locator": "Göthe als Naturforscher und in besonderer Beziehung auf Schiller : eine Rede nebst Erläuterungen｜https://archive.org/details/b21904534"
+      },
+      {
+        "source_id": "src-91abb868d345",
+        "original_name": "holbein-aussatzbild-1861-mdz.txt",
+        "locator": "Das Holbeinsche Aussatzbild｜https://www.digitale-sammlungen.de/en/view/bsb10258843"
+      },
+      {
+        "source_id": "src-db48b345ca75",
+        "original_name": "huenengraeber-pfahlbauten-1866-mdz.txt",
+        "locator": "Ueber Huenengraeber und Pfahlbauten｜https://www.digitale-sammlungen.de/en/view/bsb10135728"
+      },
+      {
+        "source_id": "src-49e58763aa1f",
+        "original_name": "hundert-jahre-path-1895-de.txt",
+        "locator": "Hundert Jahre allgemeiner Pathologie｜https://archive.org/details/39002086310290.med.yale.edu"
+      },
+      {
+        "source_id": "src-df84b315372b",
+        "original_name": "hungertyphus-1868-mdz.txt",
+        "locator": "Ueber den Hungertyphus und einige verwandte Krankheitsformen｜https://www.digitale-sammlungen.de/en/view/bsb10475281"
+      },
+      {
+        "source_id": "src-76fdd1f8eff0",
+        "original_name": "johannes-mueller-1858-de.txt",
+        "locator": "Johannes Müller. Eine gedächtnissrede gehalten bei der todtenfeier am 24. juli 1858 in der aula der Universität zu Berlin｜https://archive.org/details/bub_gb_VCI6AAAAcAAJ"
+      },
+      {
+        "source_id": "src-c3af13c32c72",
+        "original_name": "kanalisation-berlin-1868-de.txt",
+        "locator": "Ueber die Kanalisation von Berlin : Gutachen der Königl. wissenschaftlichen Deputation für das Medicinalwesen nebst einem Nachtrage mit zusätzlichen Bemerkungen｜https://archive.org/details/ueberdiekan"
+      },
+      {
+        "source_id": "src-21d14be5c930",
+        "original_name": "kaukasische-alterth-1890-de.txt",
+        "locator": "Ueber kaukasische Alterthümer und die trojanische Frage｜https://archive.org/details/ueberkaukasische00virc"
+      },
+      {
+        "source_id": "src-610179260b37",
+        "original_name": "koban-graeberfeld-1883-de.txt",
+        "locator": "Das Gräberfeld von Koban im Lande der Osseten, Kaukasus. Mit einem Atlas｜https://archive.org/details/dasgrberfeldvon00vircgoog"
+      },
+      {
+        "source_id": "src-511753cce3d7",
+        "original_name": "kriegsheilkunde-1874-de.txt",
+        "locator": "Die Fortschritte der Kriegsheilkunde : besonders im Gebiete der Infectionskrankheiten : Rede, gehalten zur Feier des Stiftungstages de militär-ärztlichen Bildungs-Ansalten am 2. Au｜https://archive.org"
+      },
+      {
+        "source_id": "src-bc162e3e86c4",
+        "original_name": "lazarette-baracken-1871-de.txt",
+        "locator": "Ueber Lazarette und Baracken : Vortrag, gehalten vor der Berliner medicinischen Gesellschaft am 8. February 1871｜https://archive.org/details/b2234570x"
+      },
+      {
+        "source_id": "src-bf564520e161",
+        "original_name": "materialismus-rede-1863-mdz.txt",
+        "locator": "Ueber den vermeintlichen Materialismus in der heutigen Naturwissenschaft (Amtl. Bericht 38. Vers. S.35-42)｜https://www.digitale-sammlungen.de/en/view/bsb10479304"
+      },
+      {
+        "source_id": "src-ef6a988d2811",
+        "original_name": "menschen-affenschaedel-1870-ws.txt",
+        "locator": "Menschen- und Affenschaedel. Vortrag 18.2.1869 [Wikisource proofread]｜https://de.wikisource.org/wiki/Menschen-_und_Affensch%C3%A4del"
+      },
+      {
+        "source_id": "src-835f0544fa8b",
+        "original_name": "morgagni-1894-de.txt",
+        "locator": "Morgagni und der anatomische Gedanke : Rede gehalten am 30 Marz 1894 auf dem XI, internationalen medicinischen Congress zu Rom｜https://archive.org/details/b21940253"
+      },
+      {
+        "source_id": "src-5f785d3f977a",
+        "original_name": "myxoedema-1887-de.txt",
+        "locator": "Ueber Myxoedema : Vortrag, gehalten in der Sitzung der Berliner medicinischen Gesellschaft vom 2. Februar 1886｜https://archive.org/details/b2229515x"
+      },
+      {
+        "source_id": "src-aebff88102f9",
+        "original_name": "nahrungs-genussmittel-1868-mdz.txt",
+        "locator": "Ueber Nahrungs- und Genussmittel｜https://www.digitale-sammlungen.de/en/view/bsb10135737"
+      },
+      {
+        "source_id": "src-7632133c1b0d",
+        "original_name": "nationale-entw-bericht-1865-mdz.txt",
+        "locator": "Ueber die nationale Entwickelung ... (Amtl. Bericht 40. Vers. S.56-64)｜https://www.digitale-sammlungen.de/en/view/bsb10479306"
+      },
+      {
+        "source_id": "src-fae15f02fbba",
+        "original_name": "neuere-fortschritte-1898-de.txt",
+        "locator": "Die neueren Fortschritte in der Wissenschaft und ihr Einfluss auf Medicin und Chirurgie : gelesen in der Charing Cross Hospital Medical School zu London am 3. October 1898｜https://archive.org/details/"
+      },
+      {
+        "source_id": "src-ace6038037a8",
+        "original_name": "noth-im-spessart-1852-mdz.txt",
+        "locator": "Die Noth im Spessart. Eine medicinisch-geographisch-historische Skizze｜https://www.digitale-sammlungen.de/en/view/bsb10380209"
+      },
+      {
+        "source_id": "src-2b544cb633c5",
+        "original_name": "oberschlesien-typhus-1848-de.txt",
+        "locator": "Mittheilungen über die in Oberschlesien herrschende Typhus-Epidemie｜https://archive.org/details/bub_gb_HmEXAQAAMAAJ"
+      },
+      {
+        "source_id": "src-21d4016d252f",
+        "original_name": "peruaner-knochen-1885-de.txt",
+        "locator": "Über krankhaft veränderte Knochen alter Peruaner｜https://archive.org/details/berkrankhaftver00vircgoog"
+      },
+      {
+        "source_id": "src-c38e261393b2",
+        "original_name": "portraetmuenzen-1902-de.txt",
+        "locator": "Porträt-Münzen und Graf's hellenistische porträt-gallerie. Vortrag, gehalten am 18. Mai 1901 in der Anthropologischen gesellschaft zu Berlin ..｜https://archive.org/details/bub_gb_2BwoAAAAYAAJ"
+      },
+      {
+        "source_id": "src-436e416ed564",
+        "original_name": "reinigung-entwaesserung-1873-de.txt",
+        "locator": "Reinigung und Entwässerung Berlins GeneralBericht über die Arbeiten der städtischen gemischten Deputation für die Untersuchung der auf die Kanalisation und Abfuhr bezüglichen Frage｜https://archive.org"
+      },
+      {
+        "source_id": "src-accf788eb893",
+        "original_name": "rueckenmark-1870-mdz.txt",
+        "locator": "Ueber das Rueckenmark. Vortrag Stettin 20.2.1870｜https://www.digitale-sammlungen.de/en/view/bsb10997199"
+      },
+      {
+        "source_id": "src-be0d95be2a93",
+        "original_name": "sanitaetszug-1870-mdz.txt",
+        "locator": "Der erste Sanitaetszug des Berliner Huelfs-Vereins. Bericht｜https://www.digitale-sammlungen.de/en/view/bsb10618449"
+      },
+      {
+        "source_id": "src-a8270f8ca4f5",
+        "original_name": "schaedelgrund-1857-de.txt",
+        "locator": "Untersuchungen über die Entwickelung des Schädelgrundes im gesunden und krankhaften Zustande : und über den Einfluss derselben auf Schädelform, Gesichtsbildung und Gehirnbau｜https://archive.org/detail"
+      },
+      {
+        "source_id": "src-87ae3582a8ff",
+        "original_name": "schoenlein-gedaechtnis-1865-de.txt",
+        "locator": "Gedächtnissrede auf Joh. Lucas Schönlein : gehalten am 23. Januar 1865, dem ersten Jahrestage seines Todes in der Aula der Berliner Universität｜https://archive.org/details/b22345395"
+      },
+      {
+        "source_id": "src-3a2e13f6e860",
+        "original_name": "schulen-gesundheit-1869-mdz.txt",
+        "locator": "Ueber gewisse die Gesundheit benachtheiligende Einfluesse der Schulen. Bericht｜https://www.digitale-sammlungen.de/en/view/bsb10764500"
+      },
+      {
+        "source_id": "src-169978d3d254",
+        "original_name": "sectionstechnik-1877-de.txt",
+        "locator": "Die Sections-Technik im Leichenhause des Charite-Krankenhauses, mit besonderer Rucksicht auf gerichtsarztliche Praxis (2nd auflage)｜https://archive.org/details/diesectionstechn00virc"
+      },
+      {
+        "source_id": "src-06cdc68df224",
+        "original_name": "siamesische-zwillinge-1870-ws.txt",
+        "locator": "Die siamesischen Zwillinge. Vortrag 14.3.1870 [Wikisource proofread]｜https://de.wikisource.org/wiki/Die_siamesischen_Zwillinge"
+      },
+      {
+        "source_id": "src-0e9287072008",
+        "original_name": "syphilis-affect-1859-de.txt",
+        "locator": "Ueber die Natur der constitutionell-syphilitischen Affectionen｜https://archive.org/details/ueberdienaturder00virc"
+      },
+      {
+        "source_id": "src-26553c25116e",
+        "original_name": "traumaticismus-infection-1900-de.txt",
+        "locator": "Traumaticismus und Infection : nach einer Rede, gehalten in der ersten allgemeinen Sitzung des XIII. internationalen medicinischen Congresses zu Paris am 2. August 1900｜https://archive.org/details/b22"
+      },
+      {
+        "source_id": "src-8200ecc60542",
+        "original_name": "trichinen-1864-mdz.txt",
+        "locator": "Darstellung der Lehre von den Trichinen (1. Aufl.)｜https://www.digitale-sammlungen.de/en/view/bsb10470825"
+      },
+      {
+        "source_id": "src-ec587076d802",
+        "original_name": "troas-landeskunde-1879-de.txt",
+        "locator": "Beiträge zur Landeskunde der Troas｜https://archive.org/details/bub_gb_soXUAAAAMAAJ"
+      },
+      {
+        "source_id": "src-2a8e12b0c9b9",
+        "original_name": "ueber-wunder-1874-mdz.txt",
+        "locator": "Ueber Wunder. Rede, Breslau 18.9.1874｜https://www.digitale-sammlungen.de/en/view/bsb11189834"
+      },
+      {
+        "source_id": "src-3b3726ddd5aa",
+        "original_name": "urbevoelkerung-europa-1874-mdz.txt",
+        "locator": "Die Urbevoelkerung Europa's｜https://www.digitale-sammlungen.de/en/view/bsb11190683"
+      },
+      {
+        "source_id": "src-f18334ebb932",
+        "original_name": "weddas-ceylon-1881-de.txt",
+        "locator": "Ueber die Weddas von Ceylon und ihre Beziehungen zu den Nachbarstämmen: mit 3 Tafeln｜https://archive.org/details/11747982bsb"
+      },
+      {
+        "source_id": "src-b28846db4bae",
+        "original_name": "werth-path-experiment-1899-de.txt",
+        "locator": "Ueber den Werth des pathologischen Experiments : Vortrag, gehalten in der 2. allgemeinen Sitzung des 7. internationalen medicinischen Congresses zu London 1881｜https://archive.org/details/b22333563"
+      },
+      {
+        "source_id": "src-c219d2d3c1ba",
+        "original_name": "zur-erinnerung-1902-de.txt",
+        "locator": "Zur Erinnerung : Blätter des Dankes für meine Freunde｜https://archive.org/details/b22394539"
+      }
+    ]
+  }
 }

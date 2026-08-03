@@ -1,29 +1,44 @@
-# Conversations and interviews
+# 02 对话与书信
 
-## Scope and assigned sources
+**这一路本人物极薄，只有 1 条。写明它薄在哪里，比补足它更要紧。**
 
-Pending. Use train-split source IDs only.
+## 唯一的一条 —— src-fb1a2a211a95
 
-## Source-linked observations
+《Rudolf Virchow: Briefe an seine Eltern 1839 bis 1864》，
+**herausgegeben von Marie Rabl geb. Virchow**（其女编印），第二版。
+43.7 万字符，含 1839–1864 年间致父母的家书，年份出现 346 处、
+Würzburg／Berlin／Charité 等地名 215 处，可据以定位其求学与任职时期。
 
-Pending.
+信件开头是这样的语气：
 
-## Candidate Claims
+> «Lieber Vater, Nach einer etwas langweiligen Fahrt kamen wir gestern um 11 1/2 Uhr
+> nach Naugard, blieben dort über Nacht und reisten heut Morgen um 6 Uhr weiter…
+> **Ich habe bis dato ausgegeben**…»
 
-Pending.
+——报行程、报花销。**这是十八九岁学生写给父亲的信，不是学者的通信。**
 
-## Contradictions and alternative explanations
+## 三处必须写明的限制
 
-Pending.
+**一、它是身后编印的，编者是其女。**
+他 1902 年卒，此书 1907 年出版。
+**与 Lister #108 的《Collected Papers》(1909) 性质不同**——那一份出版于其生前、
+序言明写篇目是「他本人认为有长久价值」的那些；这一份他没有参与，
+**选了哪些信、略了哪些，全是编者的判断，而编者是他女儿。**
 
-## Unknowns and source gaps
+**二、家书不是学术对话。**
+可用于看他早年的自述、语气、经济处境与求学轨迹；
+**不足以支撑「他与人如何辩论」「他怎样回应质疑」这一类断言**。
+那类断言若要有据，得去 04 的 Haeckel 之争与 05 的下水道之争里找，
+那两处是公开的、双方文本俱在的。
 
-Pending.
+**三、时间只到 1864 年。**
+他 1858 年出《Cellularpathologie》、1868 年起卷入柏林下水道之争、
+1878 年与 Haeckel 交锋、1880 年赴特洛伊——**这些全在本路的时间范围之外。**
+用这一路去讲他中晚年，是拿一个二十几岁人的书信去说一个七十岁人的事。
 
-## Proposed Holdout cases
+## 本路的缺口
 
-IDs only; research Agents must not inspect Holdout bodies.
-
-## Handoff to adjudication
-
-Pending.
+**议会速记录未取得**（帝国议会／普鲁士下议院）。
+他做了几十年议员，而本工作区**一条议会记录都没有**。
+他的政治活动只能从已刊演说与公共卫生报告（见 05）侧面看，
+**不能从议会记录直接引**。这是缺口，不是「已覆盖」。
