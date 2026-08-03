@@ -936,6 +936,11 @@ def test_systemd_units_use_bounded_runtime_identities() -> None:
     assert "/srv/linze/apps/status/data" in reconcile
     assert "ProtectSystem=strict" in reconcile
 
+    action_worker = (unit_dir / "memory-atlas-action-worker.service").read_text(encoding="utf-8")
+    assert "/srv/linze/apps/status/data" in action_worker
+    assert "ProtectSystem=strict" in action_worker
+    assert "TimeoutStartSec=3600" in action_worker
+
 
 def test_hardened_systemd_units_bind_gh_config_outside_protected_home() -> None:
     repo = Path(__file__).resolve().parents[2]
@@ -1020,6 +1025,18 @@ def test_restore_drill_uses_agentdatabase_runtime_not_frontend_release() -> None
     assert "/srv/linze/apps/agentdatabase/current" in text
     assert 'export PYTHONPATH="$AGENT_CURRENT"' in text
     assert 'PYTHONPATH="$CURRENT/AgentDatabase"' not in text
+
+
+def test_action_worker_calls_keyword_only_restore_contract() -> None:
+    repo = Path(__file__).resolve().parents[2]
+    text = (
+        repo / "OpenAIDatabase/scripts/memory_atlas_private/action_worker.py"
+    ).read_text(encoding="utf-8")
+    restore_call = text.split("receipt = isolated_restore(", maxsplit=1)[1].split(")", maxsplit=1)[0]
+    assert "manifest_path=manifest_path" in restore_call
+    assert "destination=destination" in restore_call
+    assert "object_store=object_store" in restore_call
+    assert "private_db=private_db" in restore_call
 
 
 def test_deploy_preflights_candidate_and_rolls_back_blocking_probe() -> None:

@@ -91,7 +91,12 @@ def process_actions(config: RuntimeConfig, limit: int = 20) -> dict[str, Any]:
                 destination = config.runtime_dir / "restore-drills" / request_id
                 if destination.exists():
                     shutil.rmtree(destination)
-                receipt = isolated_restore(manifest_path, destination, object_store, private_db)
+                receipt = isolated_restore(
+                    manifest_path=manifest_path,
+                    destination=destination,
+                    object_store=object_store,
+                    private_db=private_db,
+                )
                 receipt_path = config.runtime_dir / "restore-receipts" / f"{request_id}.json"
                 receipt_path.parent.mkdir(parents=True, exist_ok=True)
                 receipt_path.write_text(json.dumps(receipt, ensure_ascii=False, sort_keys=True, indent=2) + "\n", encoding="utf-8")
