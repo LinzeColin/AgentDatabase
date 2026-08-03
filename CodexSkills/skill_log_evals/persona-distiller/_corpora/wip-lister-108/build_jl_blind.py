@@ -27,3 +27,15 @@ la=[len(p["A"]) for p in payload]; lb=[len(p["B"]) for p in payload]
 print(f"{len(payload)} 对；A 均长 {sum(la)//len(la)}，B 均长 {sum(lb)//len(lb)}"
       f"（差 {abs(sum(la)-sum(lb))*100//max(sum(la),sum(lb))}%）")
 print("A 侧是候选的题数：", sum(1 for v in key.values() if v['A']=='candidate'))
+
+# ★ A/B 均长**不是**该看的那个数。
+#   候选被均分到两侧，于是 A/B 两侧的均长必然接近——那是分配方式的产物，
+#   不是「两个系统长度对等」。此前三轮我一直报的是 A/B 差（5.5% / 0.8% / 8.7%），
+#   而真正的混杂是**候选比基线长 73% / 109% / 144%**，且逐轮变大。
+#   逐题 delta 与长度比的相关：第 1 轮 r=+0.193、第 2 轮 r=+0.391。
+#   **64 道题里候选没有一道不比基线长**——数据内部没有任何长度对照，
+#   因此长度与质量在这批数据里分不开。下面这一行是必须报的那个数。
+lc = sum(len(cand[c]) for c in cases); lbz = sum(len(base[c]) for c in cases)
+n = len(cases)
+print(f"★ **候选均长 {lc//n}，基线均长 {lbz//n}——候选比基线长 "
+      f"{(lc-lbz)*100//max(lbz,1)}%**（这才是长度混杂的量；A/B 差不是）")
