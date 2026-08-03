@@ -2,3 +2,8 @@ boto3==1.43.52
 botocore==1.43.52
 PyJWT[crypto]==2.13.0
 pytest==9.0.2
+# v0.0.0.32: live_snapshot_store validates every snapshot before it may be
+# promoted to current, and api_server imports it at module load. Without
+# these the private API does not start at all.
+jsonschema==4.25.1
+referencing==0.36.2

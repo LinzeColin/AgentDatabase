@@ -136,3 +136,78 @@ def test_deploy_refuses_an_unidentified_tree() -> None:
     assert '[[ "$release_commit" =~ ^[0-9a-f]{40}$ ]]' in text
     assert 'release_id="$(date -u +%Y%m%dT%H%M%SZ)-${release_commit:0:12}"' in text
     assert "git rev-parse HEAD" in text, "a real checkout must still be the default source of identity"
+
+
+# Import name -> distribution name, for the cases where they differ. Kept
+# explicit and tiny: a wrong entry here would silently excuse a real gap.
+IMPORT_TO_DISTRIBUTION = {"jwt": "pyjwt"}
+
+
+def _undeclared_third_party_imports(declared: set[str]) -> set[str]:
+    import ast
+    import importlib.util
+    import sysconfig
+
+    stdlib = Path(sysconfig.get_paths()["stdlib"]).resolve()
+
+    def is_stdlib(root: str) -> bool:
+        try:
+            spec = importlib.util.find_spec(root)
+        except (ImportError, ValueError):
+            return False
+        if spec is None:
+            return False
+        if spec.origin in (None, "built-in", "frozen"):
+            return True
+        try:
+            return stdlib in Path(spec.origin).resolve().parents
+        except OSError:
+            return False
+
+    package_dir = REPO / "OpenAIDatabase" / "scripts" / "memory_atlas_private"
+    local = {path.stem for path in package_dir.glob("*.py")}
+    undeclared: set[str] = set()
+    for path in sorted(package_dir.glob("*.py")):
+        if path.name.startswith("test_"):
+            continue
+        for node in ast.walk(ast.parse(path.read_text(encoding="utf-8"))):
+            names: list[str] = []
+            if isinstance(node, ast.Import):
+                names = [alias.name for alias in node.names]
+            elif isinstance(node, ast.ImportFrom) and node.level == 0 and node.module:
+                names = [node.module]
+            for name in names:
+                root = name.split(".")[0]
+                if root in local or is_stdlib(root):
+                    continue
+                distribution = IMPORT_TO_DISTRIBUTION.get(root.lower(), root.lower())
+                if distribution not in declared:
+                    undeclared.add(f"{path.name}: {root}")
+    return undeclared
+
+
+def _declared_requirements() -> set[str]:
+    text = (
+        REPO / "OpenAIDatabase" / "scripts" / "memory_atlas_private" / "requirements-memory-atlas-private.txt"
+    ).read_text(encoding="utf-8")
+    return {
+        line.split("==")[0].split("[")[0].strip().lower()
+        for line in text.splitlines()
+        if line.strip() and not line.startswith("#")
+    }
+
+
+def test_every_third_party_import_in_the_serving_path_is_declared() -> None:
+    """The production deploy died on `ModuleNotFoundError: jsonschema`.
+
+    `live_snapshot_store` imports it at module load and `api_server` imports
+    that, so the private API could not start — and nothing before the deploy
+    noticed, because CI installed jsonschema in a separate step that the
+    requirements file never mentioned.
+    """
+    assert _undeclared_third_party_imports(_declared_requirements()) == set()
+
+
+def test_the_dependency_checker_catches_the_dependency_that_broke_the_deploy() -> None:
+    without = _declared_requirements() - {"jsonschema"}
+    assert any("jsonschema" in row for row in _undeclared_third_party_imports(without))
