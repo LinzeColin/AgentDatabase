@@ -6,7 +6,6 @@
 ## 一、写给受训护士的年度信（她唯一持续多年的对人说话形式）
 
 - src-dcd3a10dd561 **《To the Probationer-Nurses》**，1884
-- src-eff0a7cede36 **同题**，1886
 
 这两份与 `02-conversations.md` 的 src-fffe2d6c675a《Letters to Nurses》互证：
 **同一种体例、同一种口吻**，都是写给具体一届学员的。

@@ -9,7 +9,6 @@
 - src-fffe2d6c675a **《Letters to Nurses》**，1913（P2，身后编集）——
   她历年写给护士训练学校学员的年度信。
 - src-fa7770af917b **《Florence Nightingale and Her Nurses》**，1914（P2）。
-- src-f073a312e053 **致 Bellevue 的信**，1911（P2）。
 - src-6b3fd67dcb0c **Bucks County 报告里所载的信**，1911（P2）。
 - src-ae875f56cb6b **《Indian Letters》**，1937（P2，身后编集）。
 - src-ccf0839d715e **Workhouse Nursing**，1867（S1）——同时代第三方所编，含往还材料。

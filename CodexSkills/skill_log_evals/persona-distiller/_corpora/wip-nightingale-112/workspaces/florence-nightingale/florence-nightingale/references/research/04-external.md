@@ -10,7 +10,6 @@
   **她生前刊行**，故不属身后追记。
 - src-d78f03fad0fb **Choate《What Florence Nightingale Did》**，1911
 - src-51c19695dea5 **Nutting 纪念文**，1911
-- src-69935ccbd4b1 **Loane 论地段护理**，1911
 
 ## 二、身后研究（S2）
 
@@ -19,7 +18,7 @@
   与一次重复扫描 src-5173b7c38f72。
 - src-da717e64e815 **Kopf《Florence Nightingale as Statistician》**，1916——
   **专论她的统计工作**，是本条道上与 `01-writings.md` 三份数表源最相关的一份。
-- src-8c8bf79b3942 / src-ca627454e918 **Scovil 两篇**，1913 / 1920
+- src-8c8bf79b3942 / （scovil-later-activities-1920，**保留集，未在研究阶段引用**） **Scovil 两篇**，1913 / 1920
 - src-a35e92177109 **Aikens《Lessons from the Life》**，1915（说教体）
 - src-42a370b257d7 **Cook 书的书评**，1913
 

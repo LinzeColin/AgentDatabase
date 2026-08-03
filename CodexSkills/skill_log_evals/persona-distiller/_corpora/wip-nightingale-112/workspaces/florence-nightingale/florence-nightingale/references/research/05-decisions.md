@@ -36,7 +36,6 @@ Guy's、St. Thomas'、Small Pox、Fever、Consumption）。
 ## 三、两份「像统计而其实是空白表格」的
 
 - src-2f9f9a69c749 **《Hospital Statistics and Hospital Plans》**，1862
-- src-b69bdc27e4f0 **《Statistics of Surgical Operations》**，1863
 
 **抓源方特意没给这两份打 `HAS-OWN-STATS`**：正文只有 4 行与 2 行数字，
 它们是**她提出的表格式样与方法**，不是算出来的数。

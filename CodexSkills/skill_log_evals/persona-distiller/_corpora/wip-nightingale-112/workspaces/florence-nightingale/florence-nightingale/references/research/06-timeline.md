@@ -8,7 +8,6 @@
 - src-cbd3d467747d **Tooley《The Life of Florence Nightingale》**，1904（**她尚在世**）
 - src-d97a626612f6 **生平小传**，1910
 - src-6b97c2e7e2cc **格拉斯哥讣告**，1910
-- src-5f01e610a824 **布法罗讣告**，1910
 
 **BMJ 与 California 两份讣告没取到**（Europe PMC 仅存扫描 PDF、无文本层），
 缺口由上面两份补。**这一点要如实说，不要装作年表是完整的。**
@@ -25,7 +24,6 @@
 - src-1025d52d0f2a / src-3638ee460598 **Cook 两卷本**，1913——年表的主要依据；
   清本 src-686b8ef37aca / src-99d272a71424，另有 src-5173b7c38f72 重复扫描。
 - src-9649082c9017 **Cook 缩编本**，1925
-- src-fa8a2627f9af **Matheson**，1913
 - src-23560f4f55a7 **Abbott《Portraits》**，1916
 
 ## 四、这条道能撑到哪一步

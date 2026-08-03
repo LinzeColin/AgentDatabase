@@ -10,8 +10,8 @@
   另有 1860 四种（src-c0c1f592565d、src-b78169ea852d、src-ab76dfdd0458、src-0512abeb9946）、
   1861/1868 劳工版（src-917b8345b6dd、src-c4f3771a80ad）、
   1865 Appleton（src-ef1518c98383）及 1883–1909 七种后印本
-  （src-36968f4debea、src-d1a9ed302f7d、src-224fa30c68bd、src-70fad16dc37a、
-  src-05881bf301d9、src-a472a1cc729f、src-97758a5d908b、src-61aca4001447）。
+  （src-36968f4debea、src-d1a9ed302f7d、src-70fad16dc37a、
+  src-05881bf301d9、src-97758a5d908b、src-61aca4001447）。
   **十余个版本同在库里，取逐字引文必须说清是哪一版。**
 
 **这本书里最像方法的一段**（src-a693c3d3d81e，`Observation of the Sick` 章）：
