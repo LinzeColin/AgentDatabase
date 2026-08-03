@@ -1,0 +1,99 @@
+{
+  "_README": {
+    "what": "Line ranges of Florence Nightingale's OWN text inside .txt files that also contain other people's text (flag FULL-PAGE-SCAN in _ids.txt). Line numbers are 1-based and count the 7-line '# SOURCE:' header that every file in this corpus carries, so they index the file as it sits on disk.",
+    "generated_at": "2026-08-04",
+    "how": "Each range was located by anchoring on a heading or signature actually present in the file; the anchor text is reproduced verbatim in start_evidence / end_evidence so a human can re-check without re-running anything.",
+    "caution": "These ranges are the SIGNED SECTION only. Where she also contributed scattered notes to a volume (organization-of-nursing-1865), those notes fall outside the range and are not marked."
+  },
+  "infection-jervoise-1882": {
+    "start_line": 2888,
+    "end_line": 2965,
+    "start_evidence": "REMARKS",
+    "end_evidence": "they  have  entered.",
+    "note": "Her 'Remarks ... on a Pamphlet entitled Infection' (dated 1867), reprinted complete at the back of Jervoise's 1882 pamphlet. Everything before the start line is Jervoise."
+  },
+  "work-in-brighton-1878": {
+    "start_line": 58,
+    "end_line": 90,
+    "start_evidence": "PREFACE  TO  NINTH  EDITION.",
+    "end_evidence": "London,  Oct.  1877.",
+    "note": "Her signed Preface to the ninth edition. The 'PREFACE TO FIRST EDITION' that follows is Ellice Hopkins's, not hers."
+  },
+  "malabari-sketch-1892": {
+    "start_line": 106,
+    "end_line": 213,
+    "start_evidence": "INTRODUCTION.",
+    "end_evidence": "effectually to carry out this perhaps the",
+    "note": "Her signed Introduction. 'PREFACE TO THE ENGLISH EDITION' immediately after is not hers."
+  },
+  "una-and-her-paupers-1872": {
+    "start_line": 339,
+    "end_line": 1282,
+    "start_evidence": "INTRODUCTION.",
+    "end_evidence": "answer  ?",
+    "note": "Her signed Introduction to the American issue; longer than the London issue in memorials-agnes-jones-1871."
+  },
+  "memorials-agnes-jones-1871": {
+    "start_line": 137,
+    "end_line": 1164,
+    "start_evidence": "INTRODUCTION.",
+    "end_evidence": "answer  ?",
+    "note": "Her signed Introduction. Line 71 is only a contents entry ('INTRODUCTION vii'), not the Introduction itself."
+  },
+  "organization-of-nursing-1865": {
+    "start_line": 241,
+    "end_line": 562,
+    "start_evidence": "INTRODUCTION",
+    "end_evidence": "1865.",
+    "note": "Her signed Introduction only. She also supplied NOTES scattered through the compiler's body text, which this range does NOT cover."
+  },
+  "workhouse-nursing-1867": {
+    "start_line": 221,
+    "end_line": 320,
+    "start_evidence": "Letter  from  Miss  Nightingale.",
+    "end_evidence": "(Signed)  FLOEENCE  NIGHTINGALE.",
+    "note": "Her letter, printed inside William Rathbone's account. Closing signature is OCR-mangled to '(Signed) FLOEENCE NIGHTINGALE.'"
+  },
+  "district-nursing-sketch-1890": {
+    "start_line": 161,
+    "end_line": 551,
+    "start_evidence": "By  FLORENCE  NIGHTINGALE",
+    "end_evidence": "much  good  from  theirs.",
+    "note": "Her signed Introduction to the 'History of Nursing in the Homes of the Poor'. End anchor is the divisional title page of Rathbone's own text."
+  },
+  "strachey-eminent-victorians-1918": {
+    "start_line": 4905,
+    "end_line": 7352,
+    "start_evidence": "FLORENCE  NIGHTINGALE",
+    "end_evidence": "A.  H.  Clough.  Poems  ana  HAemoir.",
+    "note": "The Nightingale essay, second of four, including its own bibliography. Ends where the Dr Arnold essay begins."
+  },
+  "royal-commission-report-1858": {
+    "start_line": 83679,
+    "end_line": 89649,
+    "start_evidence": "Answers  to  written  Questions  addressed  to  Miss  Nightingale  by  the  Commissioners.",
+    "end_evidence": "395",
+    "note": "Her written evidence, printed page 361, questions 9982-10,070. She is the LAST witness in the volume; the range ends where the volume's APPENDIX begins."
+  },
+  "organization-of-nursing-1865-DUPSCAN": {
+    "start_line": 263,
+    "end_line": 549,
+    "start_evidence": "INTRODUCTION",
+    "end_evidence": "FLORENCE    NIGHTINGALE.",
+    "note": "Independently located in this scan; line numbers differ from organization-of-nursing-1865 because the OCR differs."
+  },
+  "organization-of-nursing-1865-DUPSCAN2": {
+    "start_line": 248,
+    "end_line": 554,
+    "start_evidence": "INTRODUCTION",
+    "end_evidence": "1865.",
+    "note": "Independently located in this scan; line numbers differ from organization-of-nursing-1865 because the OCR differs."
+  },
+  "royal-commission-report-1858-DUPSCAN": {
+    "start_line": 81207,
+    "end_line": 86508,
+    "start_evidence": "Answers  to  written  Questions  addressed  to  Miss  Nightingale  hy  the  Commissioners.",
+    "end_evidence": "395",
+    "note": "Independently located in this scan; line numbers differ from royal-commission-report-1858 because the OCR differs."
+  }
+}

@@ -1,0 +1,92 @@
+[
+  {
+    "canonical_name": "Florence Nightingale",
+    "subject_uid": "florence-nightingale-1820",
+    "identity_category": "historical",
+    "occupation_or_role": "护理改革者与卫生统计学家",
+    "professional_background": "1820-05-12 – 1910-08-13，英国。克里米亚战争军队卫生调查、皇家陆军卫生委员会（1857–58）、护理制度与医院设计、军队与殖民地卫生统计。",
+    "application_scenarios": [
+      "医院与病房制度设计",
+      "卫生统计的可比性与分母口径",
+      "护理训练与记录制度"
+    ],
+    "key_capabilities": [
+      "把死亡率算到可比",
+      "把制度缺陷落成可核的表",
+      "指出统计不准确的具体成因"
+    ],
+    "distinguishing_basis": "本工作区 117 份语料的署名主体；72 份 HER-OWN 标记逐份核过印刷页署名。",
+    "authoritative_sources": [
+      {
+        "locator": "Notes on Matters Affecting the Health, Efficiency, and Hospital Administration of the British Army (1858, 853pp, 私人印行)"
+      },
+      {
+        "locator": "Mortality of the British Army (1858)"
+      },
+      {
+        "locator": "Notes on Hospitals (1859 / 1863)"
+      }
+    ],
+    "evidence_level": "high"
+  },
+  {
+    "canonical_name": "Florence Nightingale David",
+    "subject_uid": "florence-nightingale-david-1909",
+    "identity_category": "historical",
+    "occupation_or_role": "统计学家",
+    "professional_background": "1909 – 1993。对称函数、概率史。**她也是统计学家、且以本人物命名**——本批最危险的混淆源。",
+    "application_scenarios": [
+      "概率论史"
+    ],
+    "key_capabilities": [
+      "对称函数"
+    ],
+    "distinguishing_basis": "archive.org creator 字段原文「David, F. N. (Florence Nightingale), 1909-1993」；**生卒年 1909-1993 与 1820-1910 不容，题材为概率论**。检得 3 条记录。",
+    "authoritative_sources": [
+      {
+        "locator": "archive.org advancedsearch creator:(\"David, F. N.\")，numFound 2；全文检索 numFound 3"
+      }
+    ],
+    "evidence_level": "high"
+  },
+  {
+    "canonical_name": "Florence Nightingale Graham（以商号 Elizabeth Arden 著录）",
+    "subject_uid": "elizabeth-arden-1878",
+    "identity_category": "historical",
+    "occupation_or_role": "化妆品实业家",
+    "professional_background": "1878 – 1966。",
+    "application_scenarios": [
+      "化妆品"
+    ],
+    "key_capabilities": [
+      "—"
+    ],
+    "distinguishing_basis": "**archive.org 的 creator 索引里查不到「Florence Nightingale Graham」这个名目**，如实记为未检得。人以商号著录：`questofbeautiful00arde`，creator「Arden, Elizabeth, 1878-1966.」，题材「Beauty, Personal; Cosmetics」。**「Arden 即 Graham」这一身份不是本次检索证实的，未作判据使用**；排除依据只用生卒年与题材。",
+    "authoritative_sources": [
+      {
+        "locator": "archive.org `questofbeautiful00arde` 著录页"
+      }
+    ],
+    "evidence_level": "medium"
+  },
+  {
+    "canonical_name": "Florence Nightingale Boyd, M.D.",
+    "subject_uid": "florence-nightingale-boyd",
+    "identity_category": "historical",
+    "occupation_or_role": "医师",
+    "professional_background": "卒 1910。检索本人物讣告时撞上的第三个同名人。",
+    "application_scenarios": [
+      "—"
+    ],
+    "key_capabilities": [
+      "—"
+    ],
+    "distinguishing_basis": "其讣告在 BMJ 1910 **vol.1** pp.1582-3，本人物讣告在同刊 **vol.2** pp.437-9——**同年同刊，卷次即可分**。",
+    "authoritative_sources": [
+      {
+        "locator": "BMJ 1910 vol.1 pp.1582-3"
+      }
+    ],
+    "evidence_level": "high"
+  }
+]

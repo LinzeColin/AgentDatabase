@@ -1,0 +1,552 @@
+{
+  "attribution_basis": {
+    "authority": "十九世纪人物，**署名证据不能靠正文里的 byline 找**——她的著作多为私人印行的单行本，署名在**扉页**，而扫本转文常把扉页排在正文之外或整页丢失。故本人物的归属依据是**抓源阶段逐份翻到印刷页核对**，结论写在 `raw/_ids.txt` 第 9 列，逐条抄进本条目的 `covered_sources`。\n\n① **有扉页署名的**：`notes-british-army-1858` 扉页印 `FLORENCE NIGHTINGALE.`，`notes-on-nursing`、`notes-on-hospitals`、`lying-in-institutions-1871` 等同类。\n② **无扉页署名、归 `U` 的三份**：见 `unattributed`。\n③ **委员会公文**：5 份标 `COMMISSION-COLLECTIVE`，`author` 留空——**她主导了那场调查是一回事，「这份文件是我写的」是另一回事。**",
+    "citation": "Nightingale, Florence. *Notes on Matters Affecting the Health, Efficiency, and Hospital Administration of the British Army*. London, 1858（853 页，私人印行，扉页署名）；同氏 *Notes on Hospitals*, 1859 / 1863；*Notes on Nursing: What It Is, and What It Is Not*, 1859；*Introductory Notes on Lying-in Institutions*, 1871。",
+    "counting_convention": "covered_sources 逐份点名 72 条署她名的源，不使用整批声明（v0.0.0.24 曾因整批声明导致逐源检查整个关闭，v0.0.0.34 已堵）。\n**`author` 只在 `HER-OWN` 时填**；`COMMISSION-COLLECTIVE` 与 `THIRD-PARTY` 一律留空——留空是下游「不得以第一人称引用」的机器可读依据。\n**分档**：P1 35 + P2 44 + S1 20 + S2 15 + U 3 = 117；一手占比 79/117 = **0.6752**（deep 门 0.65）。",
+    "covered_sources": [
+      {
+        "basis": "★ **本份含她自己算出的数表**（表目见下方逐份记录）。v0.0.0.63 的实测声明门要求「说我量过的地方必须有数」——**这里就是那些数的来源。**　**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=writings. Her largest work and the statistical centrepiece of the corpus. Contents leaf read off the file lists Section XI 'Notes on the Inaccuracy of Hospital Statistics and the necessity of a Statistical Department' pp.288-332, its Appendix I 'Actual and Proposed Forms for Medica",
+        "locator": "Notes on Matters Affecting the Health, Efficiency, and Hospital Administration of the British Army｜London: Harrison and Sons; Wellcome scan b20387118｜https://archive.org/download/b20387118/b20387118_d",
+        "original_name": "notes-british-army-1858.txt",
+        "source_id": "src-f4e797fb87be"
+      },
+      {
+        "basis": "★ **本份含她自己算出的数表**（表目见下方逐份记录）。v0.0.0.63 的实测声明门要求「说我量过的地方必须有数」——**这里就是那些数的来源。**　**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=writings. Carries Table I (numbers and ages of matrons, sisters and nurses in fifteen London hospitals) and Table II, caption verbatim from the file: 'Table of the Mortality of Matrons, Sisters, and Nurses, at different Ages, in Fifteen London Hospitals, compared with the Mortality",
+        "locator": "Notes on Hospitals: being two papers read before the National Association for the Promotion of Social Science, at Liverpool, in October 1858｜London: John W. Parker and Son｜https://archive.org/download",
+        "original_name": "notes-on-hospitals-1859.txt",
+        "source_id": "src-3b9a552f2dd4"
+      },
+      {
+        "basis": "同一材料的另一次扫描（**降 P2**）。　**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=writings. Second scan of the 1859 edition.",
+        "locator": "Notes on Hospitals (two papers read at Liverpool, October 1858)｜Wellcome scan b33780717｜https://archive.org/download/b33780717/b33780717_djvu.txt",
+        "original_name": "notes-on-hospitals-1859-DUPSCAN.txt",
+        "source_id": "src-51d884f69f3d"
+      },
+      {
+        "basis": "★ **本份含她自己算出的数表**（表目见下方逐份记录）。v0.0.0.63 的实测声明门要求「说我量过的地方必须有数」——**这里就是那些数的来源。**　**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=writings. The bed-density edition. Verified in the file: section '3. Deficiency of Space per bed' reports cubic space per bed varying between 600 and 2000 cubic feet, under 300 in some military hospitals, an 800 cubic feet per bed floor for army hospitals, and 1500 / Paris 1700 / L",
+        "locator": "Notes on Hospitals｜3rd edition, enlarged and for the most part re-written; London: Longman, Green; Cornell University Library scan｜https://archive.org/download/cu31924012356485/cu31924012356485_djvu.t",
+        "original_name": "notes-on-hospitals-1863.txt",
+        "source_id": "src-e73ce39bae8e"
+      },
+      {
+        "basis": "同一材料的另一次扫描（**降 P2**）。　**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=writings. Second scan of the 1863 third edition.",
+        "locator": "Notes on Hospitals, 3rd ed.｜Wellcome scan b21297721｜https://archive.org/download/b21297721/b21297721_djvu.txt",
+        "original_name": "notes-on-hospitals-1863-DUPSCAN.txt",
+        "source_id": "src-90a3a236e7b7"
+      },
+      {
+        "basis": "同一材料的另一次扫描（**降 P2**）。　**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=writings. Third scan of the 1863 third edition, from a French medical library copy.",
+        "locator": "Notes on Hospitals, 3rd ed.｜BIU Sante (Paris) scan BIUSante_06827｜https://archive.org/download/BIUSante_06827/BIUSante_06827_djvu.txt",
+        "original_name": "notes-on-hospitals-1863-DUPSCAN2.txt",
+        "source_id": "src-6225c9df83bf"
+      },
+      {
+        "basis": "★ **本份含她自己算出的数表**（表目见下方逐份记录）。v0.0.0.63 的实测声明门要求「说我量过的地方必须有数」——**这里就是那些数的来源。**　**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=writings. The puerperal-fever mortality book. Table list read off the file: I mortality after childbirth in England 1867; II mortality per 1,000 after delivery from puerperal diseases; III death-rate from all causes among women delivered; IV admissions and deaths in childbirth in e",
+        "locator": "Introductory Notes on Lying-in Institutions. Together with a Proposal for Organising an Institution for Training Midwives and Midwifery Nurses｜London: Longmans, Green, and Co.｜https://archive.org/down",
+        "original_name": "lying-in-institutions-1871.txt",
+        "source_id": "src-5f9a88d74a4f"
+      },
+      {
+        "basis": "★ **本份含她自己算出的数表**（表目见下方逐份记录）。v0.0.0.63 的实测声明门要求「说我量过的地方必须有数」——**这里就是那些数的来源。**　**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=writings. Densest table file after the 1858 Notes: 237 numeric rows, 76 rate-phrase lines. Lettered tables keyed to individual colonial institutions, e.g. Table L on mortality to admissions at Free Town Hospital, Table L' on mortality from scrofula and phthisis at Mauritius, Table ",
+        "locator": "Sanitary Statistics of Native Colonial Schools and Hospitals｜London, 1863｜https://archive.org/download/sanitarystatisti00nigh/sanitarystatisti00nigh_djvu.txt",
+        "original_name": "sanitary-statistics-colonial-1863.txt",
+        "source_id": "src-755b3f0f83f8"
+      },
+      {
+        "basis": "同一材料的另一次扫描（**降 P2**）。　**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=writings. Second scan.",
+        "locator": "Sanitary Statistics of Native Colonial Schools and Hospitals｜Brigham Young University copy｜https://archive.org/download/sanitarystatisti00byunigh/sanitarystatisti00byunigh_djvu.txt",
+        "original_name": "sanitary-statistics-colonial-1863-DUPSCAN.txt",
+        "source_id": "src-e77a43c613ba"
+      },
+      {
+        "basis": "后人转录，非原扫本（**降 P2**）。　**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=writings. Hand-keyed transcription rather than OCR, so the prose is clean where the scans are not. Use it as the reading text and the scans as the table source.",
+        "locator": "Sanitary Statistics of Native Colonial Schools and Hospitals｜Project Gutenberg ebook 52653｜https://archive.org/download/sanitarystatisti52653gut/52653-0.txt",
+        "original_name": "sanitary-statistics-colonial-GUT.txt",
+        "source_id": "src-a1a631500c1e"
+      },
+      {
+        "basis": "**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=writings. DELIBERATELY NOT FLAGGED HAS-OWN-STATS, on the same test that excluded hospital-statistics-plans-1862: the file yields about 7 numeric rows and NO per-1000 / rate-of-mortality / per-cent phrasing at all, and its two other scans yield 11 and 14 numeric rows. It is her prose commentary, not a table source. Her written commentary on the Indian station",
+        "locator": "Observations on the Evidence contained in the Stational Reports submitted to her by the Royal Commission on the Sanitary State of the Army in India｜London: Edward Stanford｜https://archive.org/download",
+        "original_name": "observations-stational-reports-1863.txt",
+        "source_id": "src-b084d84191c9"
+      },
+      {
+        "basis": "同一材料的另一次扫描（**降 P2**）。　**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=writings. Second scan.",
+        "locator": "Observations on the Evidence contained in the Stational Reports｜second scan｜https://archive.org/download/india.history.resource.92428/92428_djvu.txt",
+        "original_name": "observations-stational-reports-1863-DUPSCAN.txt",
+        "source_id": "src-2bfad918ec9b"
+      },
+      {
+        "basis": "同一材料的另一次扫描（**降 P2**）。　**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=writings. Third scan. The holding library filed the text file itself as 'Observations on the Sanitary State of the army in India', which is why the download filename does not match the title.",
+        "locator": "Observations on the Evidence contained in the Stational Reports｜third scan｜https://archive.org/download/dli.ministry.29700/11072.E15580_Observations_on_the_Sanitary_State_of_the_army_in_India_djvu.txt",
+        "original_name": "observations-stational-reports-1863-DUPSCAN2.txt",
+        "source_id": "src-63baee106444"
+      },
+      {
+        "basis": "**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=writings. First edition, the text before she revised and enlarged it.",
+        "locator": "Notes on Nursing: What It Is, and What It Is Not｜first edition; London: Harrison, 59 Pall Mall｜https://archive.org/download/notesonnursingnigh00nigh/notesonnursingnigh00nigh_djvu.txt",
+        "original_name": "notes-on-nursing-1859.txt",
+        "source_id": "src-a693c3d3d81e"
+      },
+      {
+        "basis": "同一材料的另一次扫描（**降 P2**）。　**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=writings. Second scan of the first edition.",
+        "locator": "Notes on Nursing: What It Is, and What It Is Not｜Wellcome electronic resource b21366172, file 1｜https://archive.org/download/b21366172_001/b21366172_001_djvu.txt",
+        "original_name": "notes-on-nursing-1859-DUPSCAN.txt",
+        "source_id": "src-0a898afcaafd"
+      },
+      {
+        "basis": "同一材料的另一次扫描（**降 P2**）。　**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=writings. Third scan of the first edition.",
+        "locator": "Notes on Nursing: What It Is, and What It Is Not｜Wellcome electronic resource b21366172, file 2｜https://archive.org/download/b21366172_002/b21366172_002_djvu.txt",
+        "original_name": "notes-on-nursing-1859-DUPSCAN2.txt",
+        "source_id": "src-ac4ef8dc571f"
+      },
+      {
+        "basis": "**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=writings. The revised and enlarged edition - a different text from 1859, not a reprint.",
+        "locator": "Notes on Nursing: What It Is, and What It Is Not｜new edition, revised and enlarged; London: Harrison｜https://archive.org/download/b3395205x/b3395205x_djvu.txt",
+        "original_name": "notes-on-nursing-1860.txt",
+        "source_id": "src-c0c1f592565d"
+      },
+      {
+        "basis": "同一材料的另一次扫描（**降 P2**）。　**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=writings. Second scan of the 1860 London edition.",
+        "locator": "Notes on Nursing: What It Is, and What It Is Not｜Brigham Young University copy｜https://archive.org/download/notesonnursingwh00byunigh/notesonnursingwh00byunigh_djvu.txt",
+        "original_name": "notes-on-nursing-1860-DUPSCAN.txt",
+        "source_id": "src-41fde0b1a38b"
+      },
+      {
+        "basis": "同一材料的另一次扫描（**降 P2**）。　**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=writings. Third scan of the 1860 London edition.",
+        "locator": "Notes on Nursing: What It Is, and What It Is Not｜Brigham Young University second copy｜https://archive.org/download/notesonnursingwh00byu2nigh/notesonnursingwh00byu2nigh_djvu.txt",
+        "original_name": "notes-on-nursing-1860-DUPSCAN2.txt",
+        "source_id": "src-0c4a85d72c39"
+      },
+      {
+        "basis": "同一材料的另一次扫描（**降 P2**）。　**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=writings. Fourth scan of the 1860 London edition.",
+        "locator": "Notes on Nursing: What It Is, and What It Is Not｜London, Harrison; archive.org dates this copy '[1860]'｜https://archive.org/download/notesonnursingwh00nighrich/notesonnursingwh00nighrich_djvu.txt",
+        "original_name": "notes-on-nursing-1860-DUPSCAN3.txt",
+        "source_id": "src-93bb582668a5"
+      },
+      {
+        "basis": "同一材料的另一次扫描（**降 P2**）。　**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=writings. Fifth scan of the 1860 London edition.",
+        "locator": "Notes on Nursing: What It Is, and What It Is Not｜McGill University Rare Books copy｜https://archive.org/download/McGillLibrary-rbsc_nightingale-notes-on-nursing_OCTAV0-6516-16908/rbsc_nightingale-notes",
+        "original_name": "notes-on-nursing-1860-DUPSCAN4.txt",
+        "source_id": "src-1a416167d3b1"
+      },
+      {
+        "basis": "同一材料的另一次扫描（**降 P2**）。　同一材料的降质 OCR（**降 P2**）。　**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=writings. Sixth scan of the 1860 London edition. YEAR NOT TAKEN FROM THE CATALOGUE: archive.org carries a placeholder date of 1969 for this item, so the year was read off the title leaf inside the file, which prints 'NEW EDITION, REVISED AND ENLARGED / LONDON: HARRISON, 59, PALL MALL, / 1860.' Title-leaf OCR is po",
+        "locator": "Notes on Nursing: What It Is, and What It Is Not｜Google-digitised copy; London: Harrison, 59 Pall Mall｜https://archive.org/download/notesonnursingw01nighgoog/notesonnursingw01nighgoog_djvu.txt",
+        "original_name": "notes-on-nursing-1860-DUPSCAN5.txt",
+        "source_id": "src-f87973064e53"
+      },
+      {
+        "basis": "**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=writings. First American edition; the American issues differ in setting from the London ones.",
+        "locator": "Notes on Nursing: What It Is, and What It Is Not｜first American edition; New York: D. Appleton and Company｜https://archive.org/download/notesonnursing00nigh/notesonnursing00nigh_djvu.txt",
+        "original_name": "notes-on-nursing-appleton-1860.txt",
+        "source_id": "src-b78169ea852d"
+      },
+      {
+        "basis": "同一材料的另一次扫描（**降 P2**）。　**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=writings. Second scan of the first American edition.",
+        "locator": "Notes on Nursing: What It Is, and What It Is Not｜Wellcome copy of the Appleton edition｜https://archive.org/download/b20412095/b20412095_djvu.txt",
+        "original_name": "notes-on-nursing-appleton-1860-DUPSCAN.txt",
+        "source_id": "src-bdd58f686681"
+      },
+      {
+        "basis": "同一材料的另一次扫描（**降 P2**）。　**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=writings. Third scan of the first American edition.",
+        "locator": "Notes on Nursing: What It Is, and What It Is Not｜US National Library of Medicine copy｜https://archive.org/download/68161120R.nlm.nih.gov/68161120R_djvu.txt",
+        "original_name": "notes-on-nursing-appleton-1860-DUPSCAN2.txt",
+        "source_id": "src-d543d5885244"
+      },
+      {
+        "basis": "**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=writings. Later American printing.",
+        "locator": "Notes on Nursing: What It Is, and What It Is Not｜New York: D. Appleton｜https://archive.org/download/ocm02708545.5783.emory.edu/ocm02708545_5783_djvu.txt",
+        "original_name": "notes-on-nursing-appleton-1865.txt",
+        "source_id": "src-ef1518c98383"
+      },
+      {
+        "basis": "**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=writings. Boston issue, printed with an added account of her life not in the London text.",
+        "locator": "Notes on Nursing: What It Is, and What It Is Not｜Boston: William Carter｜https://archive.org/download/notesonnursingwh00nigh/notesonnursingwh00nigh_djvu.txt",
+        "original_name": "notes-on-nursing-boston-1860.txt",
+        "source_id": "src-ab76dfdd0458"
+      },
+      {
+        "basis": "同一材料的另一次扫描（**降 P2**）。　**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=writings. Second scan of the Boston issue.",
+        "locator": "Notes on Nursing... with some account of her life｜Boston: Carter; US National Library of Medicine copy｜https://archive.org/download/68161130R.nlm.nih.gov/68161130R_djvu.txt",
+        "original_name": "notes-on-nursing-boston-1860-DUPSCAN.txt",
+        "source_id": "src-0b4025a3c2de"
+      },
+      {
+        "basis": "**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=writings. A separately set 1860 issue with a different printer imprint. BYLINE NOT RECOVERABLE FROM THIS SCAN; body text is verbatim Notes on Nursing.",
+        "locator": "Notes on Nursing: What It Is, and What It Is Not｜London: Harrison, printed by James Burn & Co.｜https://archive.org/download/nightingalenotes00york/nightingalenotes00york_djvu.txt",
+        "original_name": "notes-on-nursing-york-1860.txt",
+        "source_id": "src-0512abeb9946"
+      },
+      {
+        "basis": "**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=writings. Her rewrite of Notes on Nursing for a working-class readership. Kept as a distinct work, not a reprint: the same author deliberately re-pitching the same argument to a different audience is exactly the kind of contrast this corpus exists to support.",
+        "locator": "Notes on Nursing for the Labouring Classes｜London: Harrison｜https://archive.org/download/b33951548/b33951548_djvu.txt",
+        "original_name": "notes-on-nursing-labouring-1861.txt",
+        "source_id": "src-917b8345b6dd"
+      },
+      {
+        "basis": "**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=writings. Later issue of the labouring-classes text.",
+        "locator": "Notes on Nursing for the Labouring Classes｜London: Harrison｜https://archive.org/download/b21779727/b21779727_djvu.txt",
+        "original_name": "notes-on-nursing-labouring-1868.txt",
+        "source_id": "src-c4f3771a80ad"
+      },
+      {
+        "basis": "**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=writings. London issue of 1883, distinct from the New York Appleton issue of the same year.",
+        "locator": "Notes on Nursing: What It Is, and What It Is Not｜London: Harrison, 59 Pall Mall｜https://archive.org/download/notesnursingnigh00nigh/notesnursingnigh00nigh_djvu.txt",
+        "original_name": "notes-on-nursing-london-1883.txt",
+        "source_id": "src-36968f4debea"
+      },
+      {
+        "basis": "**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=writings. New York issue of 1883. BYLINE NOT RECOVERABLE FROM THIS SCAN (title leaf absent/garbled), but the body text is verbatim Notes on Nursing and other printings of the same work are signed; attribution is not in doubt, only this scan's front matter.",
+        "locator": "Notes on Nursing: What It Is, and What It Is Not｜New York: D. Appleton and Company｜https://archive.org/download/notesnursing00nigh/notesnursing00nigh_djvu.txt",
+        "original_name": "notes-on-nursing-1883.txt",
+        "source_id": "src-d1a9ed302f7d"
+      },
+      {
+        "basis": "**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=writings. Issued in her lifetime.",
+        "locator": "Notes on Nursing: What It Is, and What It Is Not｜London: Harrison & Sons, 59 Pall Mall｜https://archive.org/download/notesnursingnighting00nigh/notesnursingnighting00nigh_djvu.txt",
+        "original_name": "notes-on-nursing-1888.txt",
+        "source_id": "src-224fa30c68bd"
+      },
+      {
+        "basis": "**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=writings. YEAR NOT TAKEN FROM THE CATALOGUE: archive.org carries a placeholder date of 1969 for this item, so the year was read off the title leaf inside the file, which prints 'NEW YORK: D. APPLETON AND COMPANY, 1902.' BYLINE NOT RECOVERABLE FROM THIS SCAN (Google front matter replaces the title leaf); body text is verbatim Notes on Nursing.",
+        "locator": "Notes on Nursing: What It Is, and What It Is Not｜New York: D. Appleton and Company; Google-digitised copy｜https://archive.org/download/notesonnursingw02nighgoog/notesonnursingw02nighgoog_djvu.txt",
+        "original_name": "notes-on-nursing-1902.txt",
+        "source_id": "src-05881bf301d9"
+      },
+      {
+        "basis": "**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=writings. YEAR NOT TAKEN FROM THE CATALOGUE: archive.org carries a placeholder date of 1969, so the year was read off the title leaf inside the file, which prints 'NEW YORK: / D. APPLETON AND COMPANY, / 1898.' Issued in her lifetime.",
+        "locator": "Notes on Nursing: What It Is, and What It Is Not｜New York: D. Appleton and Company; Google-digitised copy｜https://archive.org/download/notesonnursingw00nighgoog/notesonnursingw00nighgoog_djvu.txt",
+        "original_name": "notes-on-nursing-1898.txt",
+        "source_id": "src-70fad16dc37a"
+      },
+      {
+        "basis": "同一材料的另一次扫描（**降 P2**）。　**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=writings. Fourth scan of the first American edition. YEAR NOT TAKEN FROM THE CATALOGUE: archive.org carries a placeholder date of 1969; the title leaf inside prints 'NEW YORK : / D. APPLETON AND COMPANY, / 1860.'",
+        "locator": "Notes on Nursing: What It Is, and What It Is Not｜New York: D. Appleton and Company; Google-digitised copy｜https://archive.org/download/notesonnursingw03nighgoog/notesonnursingw03nighgoog_djvu.txt",
+        "original_name": "notes-on-nursing-appleton-1860-DUPSCAN3.txt",
+        "source_id": "src-21dcccc0dbe1"
+      },
+      {
+        "basis": "身后出版，非其生前定稿（**降 P2**）。她 1910-08-13 卒。　**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=writings. Posthumous reprint issued two years after her death. YEAR NOT TAKEN FROM THE CATALOGUE: archive.org carries a placeholder date of 1969; the title leaf inside prints 'NEW YORK AND LONDON / D. APPLETON AND COMPANY / 1912'.",
+        "locator": "Notes on Nursing: What It Is, and What It Is Not｜New York and London: D. Appleton and Company; Google-digitised copy｜https://archive.org/download/notesonnursingw04nighgoog/notesonnursingw04nighgoog_dj",
+        "original_name": "notes-on-nursing-1912.txt",
+        "source_id": "src-76d8ca6dee62"
+      },
+      {
+        "basis": "**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=writings. Issued in her lifetime.",
+        "locator": "Notes on Nursing: What It Is, and What It Is Not｜New York: D. Appleton｜https://archive.org/download/notesonnursingwh1906nigh/notesonnursingwh1906nigh_djvu.txt",
+        "original_name": "notes-on-nursing-1906.txt",
+        "source_id": "src-a472a1cc729f"
+      },
+      {
+        "basis": "**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=writings. Issued in her lifetime.",
+        "locator": "Notes on Nursing: What It Is, and What It Is Not｜New York: D. Appleton｜https://archive.org/download/notesonnursingwh1908nigh/notesonnursingwh1908nigh_djvu.txt",
+        "original_name": "notes-on-nursing-1908.txt",
+        "source_id": "src-97758a5d908b"
+      },
+      {
+        "basis": "**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=writings. The last issue traced in her lifetime; she died 1910-08-13.",
+        "locator": "Notes on Nursing｜London: Harrison｜https://archive.org/download/b2871121x/b2871121x_djvu.txt",
+        "original_name": "notes-on-nursing-1909.txt",
+        "source_id": "src-61aca4001447"
+      },
+      {
+        "basis": "身后出版，非其生前定稿（**降 P2**）。她 1910-08-13 卒。　**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=writings. Posthumous reprint of the public-domain text; useful as a clean-text control on the OCR of the early editions.",
+        "locator": "Notes on Nursing: What It Is, and What It Is Not｜New York: D. Appleton-Century Company｜https://archive.org/download/notesnursingnightingale00nigh/notesnursingnightingale00nigh_djvu.txt",
+        "original_name": "notes-on-nursing-1946.txt",
+        "source_id": "src-6c9c6324b481"
+      },
+      {
+        "basis": "身后出版，非其生前定稿（**降 P2**）。她 1910-08-13 卒。　同一材料的另一次扫描（**降 P2**）。　**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=writings. Second scan of the 1946 reprint.",
+        "locator": "Notes on Nursing: What It Is, and What It Is Not｜Digital Library of India copy｜https://archive.org/download/in.ernet.dli.2015.64025/2015.64025.Notes-On-Nursing-What-It-Is-And-What-It-Is-Not_djvu.txt",
+        "original_name": "notes-on-nursing-1946-DUPSCAN.txt",
+        "source_id": "src-aa23b5f2f622"
+      },
+      {
+        "basis": "后人转录，非原扫本（**降 P2**）。　**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=writings. Hand-keyed transcription; the cleanest running text of Notes on Nursing in this corpus.",
+        "locator": "Notes on Nursing: What It Is, and What It Is Not｜Project Gutenberg ebook 17366｜https://archive.org/download/notesonnursing17366gut/17366-8.txt",
+        "original_name": "notes-on-nursing-GUT.txt",
+        "source_id": "src-713039c49342"
+      },
+      {
+        "basis": "后人转录，非原扫本（**降 P2**）。　同一材料的另一次扫描（**降 P2**）。　**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=writings. Second Gutenberg transcription, set from a different copy.",
+        "locator": "Notes on Nursing: What It Is, and What It Is Not｜Project Gutenberg ebook 12439｜https://archive.org/download/notesonnursing12439gut/12439-8.txt",
+        "original_name": "notes-on-nursing-GUT2.txt",
+        "source_id": "src-29aec0c9a1e6"
+      },
+      {
+        "basis": "译本；她用英文写作（**降 P2**）。　**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=writings. French translation of Notes on Nursing. Value is as a check on which passages a contemporary continental editor thought worth keeping or cutting.",
+        "locator": "Des soins a donner aux malades: ce qu'il faut faire, ce qu'il faut eviter｜Paris: librairie academique Didier; trans./ed. Charles Daremberg｜https://archive.org/download/dessoinsdonnerau00nigh/dessoinsd",
+        "original_name": "notes-on-nursing-fr-1862.txt",
+        "source_id": "src-1983403c0e79"
+      },
+      {
+        "basis": "译本；她用英文写作（**降 P2**）。　同一材料的另一次扫描（**降 P2**）。　**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=writings. Second scan of the French translation.",
+        "locator": "Des soins a donner aux malades｜Paris: Didier et Cie; BIU Sante scan｜https://archive.org/download/BIUSante_75175/BIUSante_75175_djvu.txt",
+        "original_name": "notes-on-nursing-fr-1862-DUPSCAN.txt",
+        "source_id": "src-96a842951dd6"
+      },
+      {
+        "basis": "译本；她用英文写作（**降 P2**）。　**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=writings. German translation of Notes on Nursing, out within two years of the original.",
+        "locator": "Die Pflege bei Kranken und Gesunden: Kurze Winke, den Frauen aller Stande gewidmet｜Bayerische Staatsbibliothek copy｜https://archive.org/download/10473781bsb/10473781bsb_djvu.txt",
+        "original_name": "notes-on-nursing-de-1861.txt",
+        "source_id": "src-a0db23018edd"
+      },
+      {
+        "basis": "**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=writings. Late work; the sanitary argument applied to villages rather than armies or hospitals.",
+        "locator": "Rural Hygiene: Health Teaching in Towns and Villages｜London: Spottiswoode and Co.｜https://archive.org/download/b30476744/b30476744_djvu.txt",
+        "original_name": "rural-hygiene-1894.txt",
+        "source_id": "src-ced71b2caaf7"
+      },
+      {
+        "basis": "**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=writings. Confederate reprint, title leaf reading 'BY FLORENCE NIGHTINGALE'. Kept because it documents how far and how fast her practical texts travelled, including to a belligerent she had no connection with and no say over.",
+        "locator": "Directions for Cooking by Troops, in Camp and Hospital｜Richmond: J. W. Randolph - a Confederate States reprint｜https://archive.org/download/directionsforcoo00nigh/directionsforcoo00nigh_djvu.txt",
+        "original_name": "directions-cooking-troops-1861.txt",
+        "source_id": "src-0878f118470a"
+      },
+      {
+        "basis": "**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=writings. Published version of a read paper.",
+        "locator": "How People May Live and Not Die in India｜London: Longman, Green; paper read at the National Association for the Promotion of Social Science, Edinburgh, October 1863｜https://archive.org/download/b30473",
+        "original_name": "how-people-live-india-1864.txt",
+        "source_id": "src-b75d1b49f4b5"
+      },
+      {
+        "basis": "**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=expression. A read paper, and her public assessment of a dead colleague's administrative record - the nearest thing in this corpus to her judging a named official in public.",
+        "locator": "Army Sanitary Administration, and its Reform under the late Lord Herbert｜London: McCorquodale & Co.; read at the London meeting of the National Association for the Promotion of Social Science｜https://",
+        "original_name": "army-sanitary-admin-1862.txt",
+        "source_id": "src-442646558427"
+      },
+      {
+        "basis": "同一材料的另一次扫描（**降 P2**）。　**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=expression. Second scan.",
+        "locator": "Army Sanitary Administration, and its Reform under the late Lord Herbert｜Brigham Young University copy｜https://archive.org/download/armysanitaryadmi00byunigh/armysanitaryadmi00byunigh_djvu.txt",
+        "original_name": "army-sanitary-admin-1862-DUPSCAN.txt",
+        "source_id": "src-fd779e97d74e"
+      },
+      {
+        "basis": "★ **本份含她自己算出的数表**（表目见下方逐份记录）。v0.0.0.63 的实测声明门要求「说我量过的地方必须有数」——**这里就是那些数的来源。**　**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=expression. A read paper with numbers attached: 36 numeric rows and 39 rate-phrase lines, arguing Indian mortality from sanitary and irrigation data.",
+        "locator": "Life or Death in India. A paper read at the meeting of the National Association for the Promotion of Social Science, Norwich, 1873. With an appendix o｜London: Spottiswoode & Co.｜https://archive.org/do",
+        "original_name": "life-or-death-india-1874.txt",
+        "source_id": "src-95d5b14e999a"
+      },
+      {
+        "basis": "同一材料的另一次扫描（**降 P2**）。　**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=expression. Second scan.",
+        "locator": "Life or Death in India｜Wellcome copy｜https://archive.org/download/b33674292/b33674292_djvu.txt",
+        "original_name": "life-or-death-india-1874-DUPSCAN.txt",
+        "source_id": "src-90a9e3e965b5"
+      },
+      {
+        "basis": "同一材料的另一次扫描（**降 P2**）。　**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=expression. Third scan.",
+        "locator": "Life or Death in India｜third scan｜https://archive.org/download/dli.ministry.03917/21867.130%2520B%252051_djvu.txt",
+        "original_name": "life-or-death-india-1874-DUPSCAN2.txt",
+        "source_id": "src-82fa4593ff76"
+      },
+      {
+        "basis": "**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=expression. Short read paper. Printed by Emily Faithfull's Victoria Press, as hospital-statistics-plans-1862 also was - a repeated and deliberate choice of a women's-employment printer.",
+        "locator": "Note on the Aboriginal Races of Australia. A paper read at the annual meeting of the National Association for the Promotion of Social Science, York, S｜London: Emily Faithfull, printer and publisher｜ht",
+        "original_name": "aboriginal-races-australia-1865.txt",
+        "source_id": "src-b45044fd254b"
+      },
+      {
+        "basis": "**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=expression. Very short late piece (5.6 KB); her position on where sanitary authority ought to sit.",
+        "locator": "Health and Local Government｜Aylesbury: Poulton, printers｜https://archive.org/download/b30468401/b30468401_djvu.txt",
+        "original_name": "health-local-government-1894.txt",
+        "source_id": "src-19deb37886cb"
+      },
+      {
+        "basis": "**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=expression. One of her annual addresses to the probationers, printed as issued.",
+        "locator": "From Florence Nightingale to the Probationer-Nurses in the 'Nightingale Fund' Training School at St Thomas's Hospital｜privately printed address｜https://archive.org/download/b33780936/b33780936_djvu.tx",
+        "original_name": "to-probationer-nurses-1884.txt",
+        "source_id": "src-dcd3a10dd561"
+      },
+      {
+        "basis": "**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=expression. Annual address, printed as issued.",
+        "locator": "To the Probationer-Nurses of the Nightingale Fund School at St Thomas's Hospital｜[London]: Blades, East & Blades｜https://archive.org/download/b30468395/b30468395_djvu.txt",
+        "original_name": "to-probationer-nurses-1886.txt",
+        "source_id": "src-eff0a7cede36"
+      },
+      {
+        "basis": "身后出版，非其生前定稿（**降 P2**）。她 1910-08-13 卒。　**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=expression. Her own addresses, collected and published four years after her death. The words are hers; the SELECTION is Nash's, so absence of a topic here is an editorial fact, not a fact about her.",
+        "locator": "Florence Nightingale to her Nurses: a selection from Miss Nightingale's addresses to probationers and nurses of the Nightingale School at St Thomas's ｜ed. Rosalind Nash; London: Macmillan｜https://arch",
+        "original_name": "addresses-to-nurses-1914.txt",
+        "source_id": "src-cee2b0b0a0a3"
+      },
+      {
+        "basis": "身后出版，非其生前定稿（**降 P2**）。她 1910-08-13 卒。　同一材料的另一次扫描（**降 P2**）。　**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=expression. Second scan.",
+        "locator": "Florence Nightingale to her Nurses｜Wellcome copy｜https://archive.org/download/b21274101/b21274101_djvu.txt",
+        "original_name": "addresses-to-nurses-1914-DUPSCAN.txt",
+        "source_id": "src-b6e8490bd112"
+      },
+      {
+        "basis": "身后出版，非其生前定稿（**降 P2**）。她 1910-08-13 卒。　同一材料的另一次扫描（**降 P2**）。　**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=expression. Third scan.",
+        "locator": "Florence Nightingale to her Nurses｜Digital Library of India copy｜https://archive.org/download/in.ernet.dli.2015.502473/2015.502473.Florence-Nightingale_djvu.txt",
+        "original_name": "addresses-to-nurses-1914-DUPSCAN2.txt",
+        "source_id": "src-46f21b53177d"
+      },
+      {
+        "basis": "⚠ **整版扫图转文，同页可能混着别人的文章。** 取逐字引文前先确认落在哪一段（`raw/_BOUNDARIES.json`）。　**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=expression. IMPORTANT AND EASY TO MISS. The volume is Jervoise's pamphlet, but the title leaf announces 'REMARKS BY MISS NIGHTINGALE' as a named part and her Remarks are printed complete from line 2888 to the end of the file. This is where she rejects germ theory outright: 'The disease-germ-fe",
+        "locator": "'Infection' [J. C. Jervoise's pamphlet], with Remarks by Miss Nightingale｜London: Vacher & Sons, 2nd edition; her Remarks are dated 1867 in the text｜https://archive.org/download/infection00jerv/infect",
+        "original_name": "infection-jervoise-1882.txt",
+        "source_id": "src-1e922ceb1eb4"
+      },
+      {
+        "basis": "身后出版，非其生前定稿（**降 P2**）。她 1910-08-13 卒。　**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=conversations. Two of her letters printed in full, twenty-nine years apart, so the pair doubles as a check on how her manner changed with age.",
+        "locator": "Letters to Nurses from Florence Nightingale: June 1897, and February 1868｜[Liverpool]: E. A. Rathbone｜https://archive.org/download/letterstonursesf00nigh/letterstonursesf00nigh_djvu.txt",
+        "original_name": "letters-to-nurses-1913.txt",
+        "source_id": "src-fffe2d6c675a"
+      },
+      {
+        "basis": "身后出版，非其生前定稿（**降 P2**）。她 1910-08-13 卒。　**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=conversations. Her 1872 letter to the Bellevue Training School, printed after her death.",
+        "locator": "Florence Nightingale's Letter of Advice to Bellevue｜American Journal of Nursing 11(5), Feb 1911; text of her 1872 letter｜https://archive.org/download/jstor-3404989/3404989_djvu.txt",
+        "original_name": "letter-bellevue-1911.txt",
+        "source_id": "src-f073a312e053"
+      },
+      {
+        "basis": "身后出版，非其生前定稿（**降 P2**）。她 1910-08-13 卒。　**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=conversations. Prints extracts from her own letters and addresses to her nurses.",
+        "locator": "Florence Nightingale and Her Nurses｜American Journal of Nursing 15(1), Oct 1914｜https://archive.org/download/jstor-3404123/3404123_djvu.txt",
+        "original_name": "fn-and-her-nurses-1914.txt",
+        "source_id": "src-fa7770af917b"
+      },
+      {
+        "basis": "身后出版，非其生前定稿（**降 P2**）。她 1910-08-13 卒。　**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=conversations. Her correspondence on Bengal tenancy reform, edited long after her death. The subject is land tenure, not nursing, which is why it is worth keeping despite the late editing.",
+        "locator": "Florence Nightingale's Indian Letters: a glimpse into the agitation for tenancy reform, Bengal, 1878-82｜ed. Priyaranjan Sen; Calcutta｜https://archive.org/download/florencenighting00nigh/florencenighti",
+        "original_name": "indian-letters-1937.txt",
+        "source_id": "src-ae875f56cb6b"
+      },
+      {
+        "basis": "身后出版，非其生前定稿（**降 P2**）。她 1910-08-13 卒。　**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=conversations. Catalogued under a title that hides what it is - archive.org calls it only 'Reproduction of a printed report originally submitted to the Bucks County Council'. The title leaf inside reads 'LETTERS FROM MISS FLORENCE NIGHTINGALE / HEALTH VISITING IN RURAL DISTRICTS'. Her 1892 letters to a county council, re",
+        "locator": "Letters from Miss Florence Nightingale on Health Visiting in Rural Districts (reproduction of a printed report originally submitted to the Bucks Count｜London: King & Son, Orchard House, Westminster｜ht",
+        "original_name": "bucks-county-report-1911.txt",
+        "source_id": "src-6b3fd67dcb0c"
+      },
+      {
+        "basis": "**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=decisions. Her design for an Indian hospital nursing system, written for government.",
+        "locator": "Suggestions on a System of Nursing for Hospitals in India｜[London]: George E. Eyre and William Spottiswoode｜https://archive.org/download/b30556636/b30556636_djvu.txt",
+        "original_name": "suggestions-nursing-india-1865.txt",
+        "source_id": "src-73e415c2e757"
+      },
+      {
+        "basis": "**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=decisions. DELIBERATELY NOT FLAGGED HAS-OWN-STATS despite the title, and the distinction matters: the file holds only 4 numeric rows. This is her account of designing the model forms and driving a common disease nomenclature through the International Statistical Congress in London in 1861 - her statistical METHOD and her committee tactics, not her computed n",
+        "locator": "Hospital Statistics and Hospital Plans｜London: Emily Faithfull, Victoria Press; reprinted from the Transactions of the National Association for the Promotion of Social Science｜https://archive.org/down",
+        "original_name": "hospital-statistics-plans-1862.txt",
+        "source_id": "src-2f9f9a69c749"
+      },
+      {
+        "basis": "**她本人署名。** 扉页或正文署名经抓源方逐份核过。　抓源逐份记录：lane=decisions. Also NOT flagged HAS-OWN-STATS (2 numeric rows): it is the proposal plus a blank model form, not filled data. Pair it with notes-on-hospitals-1863, which prints the same forms as Table I and Table II.",
+        "locator": "Proposal for Improved Statistics of Surgical Operations｜London: Savill and Edwards, printers｜https://archive.org/download/b21309188/b21309188_djvu.txt",
+        "original_name": "surgical-operations-stats-1863.txt",
+        "source_id": "src-b69bdc27e4f0"
+      }
+    ],
+    "disputed_policy": "**争议著作不为空——这是本人物与 Fleming #111 最大的不同。**\n十九世纪私人印行物大量匿名或以「Presented by request」体例刊行，**目录 creator 字段与印刷页经常不一致**。处置三条：\n**一、扉页无署名的一律归 `U`**，留作证据、不得作她的声音（三份，见 `disputed_works`）。\n**二、目录 creator 里有她的名字不等于署名**——`travelsinslavoni01mack` 的角色限定词是 `inscriber`（题赠者），序是格莱斯顿写的、签 `W.E.G.`；该份已下载核对后删除。\n**三、同名四类**逐条记在 `raw/_EXCLUDED.txt`，每条附著录原文。**最险的一条是 Florence Nightingale David（1909–1993）**——她也是统计学家、且以本人物命名，唯一可靠判别式是 creator 字段里的生卒年。",
+    "disputed_works": [
+      {
+        "what": "Mortality of the British Army（1858，玫瑰图背后的表）",
+        "why": "扉页无署名，全文里 `Nightingale` 一次都不出现；扉页写着「[Reprinted from the Report of the Royal Commission…]」。**两条 archive.org 记录彼此打架**：`mortalityofbriti00lond` 无 creator 字段，`mortality-of-the-british-army` 写 `Florence Nightingale`。**表是她的乃是公认，但文件本身没这么说。** 归 `U`。"
+      },
+      {
+        "what": "The Institution of Kaiserswerth on the Rhine（1851）",
+        "why": "1851 年匿名刊行，全文无其姓；唯一依据是 archive.org/Wellcome 的 creator 字段 `Nightingale, Florence, 1820-1910`。归 `U`。"
+      },
+      {
+        "what": "Subsidiary Notes as to the Introduction of Female Nursing（1858）",
+        "why": "扉页无署名（已对 Project Gutenberg 清本核过），**正文用第三人称称她**（`Miss Nightingale is recognized by Her Majesty's Government…`）。**同年、同印厂、同「Presented by request」体例的 `notes-british-army-1858` 扉页印着 `FLORENCE NIGHTINGALE.`——这一本没有。** 归 `U`。"
+      }
+    ],
+    "exclusions": [
+      {
+        "what": "Florence Nightingale David（1909–1993）的著作",
+        "why": "同名不同人。creator 字段原文 `David, F. N. (Florence Nightingale), 1909-1993`；题材为对称函数与概率史。**她也是统计学家且以本人物命名，本批最危险的混淆源。**"
+      },
+      {
+        "what": "以商号 Elizabeth Arden 著录者（1878–1966）的著作",
+        "why": "生卒年与题材（Beauty, Personal; Cosmetics）皆不容。**「Arden 即 Florence Nightingale Graham」这一身份不是本次检索证实的，未作判据使用。**"
+      },
+      {
+        "what": "Florence Nightingale Boyd, M.D. 的讣告",
+        "why": "其讣告在 BMJ 1910 **vol.1** pp.1582-3，本人物讣告在同刊 **vol.2** pp.437-9——同年同刊，**卷次即可分**。"
+      },
+      {
+        "what": "`travelsinslavoni01mack`（角色误认，非同名）",
+        "why": "creator 字段里确有她，但角色限定词是 **inscriber**（她在书上写了赠言）；序是格莱斯顿写的、签 `W.E.G.`。**名字在 creator 字段里不等于署名。** 已下载核对后删除。"
+      }
+    ]
+  },
+  "builder_version": "v0.0.0.5",
+  "chosen_subject_uid": "florence-nightingale-1820",
+  "consent_authority": null,
+  "created_at": "2026-08-03T18:32:16Z",
+  "current_version": null,
+  "existential_hypotheses_enabled": false,
+  "identity_selection": {
+    "canonical": "healthcare-nursing",
+    "display": "医疗护理师",
+    "mode": "single",
+    "primary": "healthcare-nursing",
+    "weights": {
+      "healthcare-nursing": 1.0
+    }
+  },
+  "language": "en",
+  "model_version": "0.1.0-draft",
+  "name": "Florence Nightingale",
+  "namesake_gate": {
+    "candidate_count": 1,
+    "chosen_candidate": {
+      "application_scenarios": [
+        "医院与病房制度设计",
+        "卫生统计的可比性与分母口径",
+        "护理训练与记录制度"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "Notes on Matters Affecting the Health, Efficiency, and Hospital Administration of the British Army (1858, 853pp, 私人印行)"
+        },
+        {
+          "locator": "Mortality of the British Army (1858)"
+        },
+        {
+          "locator": "Notes on Hospitals (1859 / 1863)"
+        }
+      ],
+      "canonical_name": "Florence Nightingale",
+      "distinguishing_basis": "本工作区 117 份语料的署名主体；72 份 HER-OWN 标记逐份核过印刷页署名。　**三位同名者已按证据排除**（全文见 `raw/_EXCLUDED.txt`、四方分析见 `nightingale_namesake_analysis.json`）：① Florence Nightingale **David**（1909–1993，概率史）——**她也是统计学家且以本人物命名，本批最危险的混淆源**，creator 字段原文「David, F. N. (Florence Nightingale), 1909-1993」；② Florence Nightingale **Graham**（以商号 Elizabeth Arden 著录，1878–1966，化妆品）——**「Arden 即 Graham」这一身份不是本次检索证实的，未作判据使用**，只用生卒年与题材排除；③ Florence Nightingale **Boyd, M.D.**（讣告在 BMJ 1910 **vol.1** pp.1582-3，本人物讣告在同刊 **vol.2** pp.437-9——同年同刊，卷次即可分）。　另有**第四类「角色误认」**：`travelsinslavoni01mack` 的 creator 里确有她，但角色限定词是 **inscriber**（题赠者），序是格莱斯顿写的——**名字在 creator 字段里不等于署名**，该份已下载核对后删除。",
+      "evidence_level": "high",
+      "identity_category": "historical",
+      "key_capabilities": [
+        "把死亡率算到可比",
+        "把制度缺陷落成可核的表",
+        "指出统计不准确的具体成因"
+      ],
+      "label": "A",
+      "occupation_or_role": "护理改革者与卫生统计学家",
+      "professional_background": "1820-05-12 – 1910-08-13，英国。克里米亚战争军队卫生调查、皇家陆军卫生委员会（1857–58）、护理制度与医院设计、军队与殖民地卫生统计。",
+      "subject_uid": "florence-nightingale-1820"
+    },
+    "chosen_subject_uid": "florence-nightingale-1820",
+    "normalized_name": "florencenightingale",
+    "resolution": "single",
+    "schema_version": "1.0"
+  },
+  "normalized_name": "florencenightingale",
+  "origin_review_required": false,
+  "product_version": null,
+  "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+  "profile": "deep",
+  "prohibited_uses": [
+    "identity authentication or deceptive impersonation",
+    "invented endorsement, signature, consent, private memory or current opinion",
+    "unsupported psychological diagnosis",
+    "replacement of accountable high-stakes professional judgment"
+  ],
+  "retention_policy": null,
+  "runtime_invocation_versioning": false,
+  "scenario": null,
+  "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+  "schema_version": "2.0",
+  "slug": "florence-nightingale",
+  "status": "draft",
+  "subject_origin": "historical",
+  "target_id": "tgt-31df4866c34f",
+  "time_scope": "all available periods, separated by role and material drift",
+  "updated_at": "2026-08-03T18:32:16Z"
+}

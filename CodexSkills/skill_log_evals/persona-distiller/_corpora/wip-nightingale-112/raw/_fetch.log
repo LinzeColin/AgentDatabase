@@ -1,0 +1,77 @@
+# ── #112 Florence Nightingale — FETCH LOG ──
+# retrieved 2026-08-04. Sources used: archive.org full-text derivatives (_djvu.txt and
+# Project Gutenberg plain-text items mirrored there) and Europe PMC fullTextXML.
+# No paywall was approached and no access control was circumvented.
+#
+# ══ OUTCOME ══
+#   attempted            : 132 fetches
+#   succeeded and kept   : 117  (these are the rows in _ids.txt)
+#   succeeded, discarded : 12   (fetched fine, then removed for cause — see DISCARDED)
+#   failed               :  4   (see FAILED)
+#   probed, not fetched  :  4   (image-only items with no text derivative — see NO-TEXT)
+#
+# ══════════════════════════════════════════════════════════════════════════════════
+# FAILED
+# ══════════════════════════════════════════════════════════════════════════════════
+FAIL	wardroper-sick-nursing-1892	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC2421674/fullTextXML	HTTP 404 — no XML full text. Europe PMC search AUTH:"Nightingale F" returns this as "The Reform of Sick Nursing and the late Mrs. Wardroper", BMJ 1892, i.e. a signed contribution by her to the BMJ. Europe PMC holds it as a scanned PDF only, so no machine-readable text could be obtained. THIS IS THE MOST REGRETTABLE LOSS IN THE BATCH: it is a signed periodical article by her that no other source in this corpus duplicates.
+FAIL	manuscript-notes-bmj-1920	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC2337637/fullTextXML	HTTP 404 — no XML full text. "Some Manuscript Notes by Florence Nightingale", BMJ 1920 Jun 12;1(3102):798-799 — prints previously unpublished notes in her own hand. Scanned-PDF-only on Europe PMC.
+FAIL	obit-bmj-1910	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC2335760/fullTextXML	HTTP 404 — no XML full text. Her principal British obituary, BMJ 1910 Aug 20;2(2590):437-439. Scanned-PDF-only. Partly compensated: the Glasgow Medical Journal and Buffalo Medical Journal obituaries of the same weeks WERE obtained (obit-glasgow-1910, obit-buffalo-1910).
+FAIL	obit-california-1910	https://www.ebi.ac.uk/europepmc/webservices/rest/PMC1893331/fullTextXML	HTTP 404 — no XML full text. California State Journal of Medicine 1910;8(10):337. Scanned-PDF-only.
+#
+#   PATTERN: all four failures are the same failure. Europe PMC's `isOpenAccess` flag was
+#   "N" for each of them, and for pre-1923 scanned material an "N" means the article exists
+#   only as page images. No amount of retrying changes this; a different route (OCR of the
+#   PDF) was not attempted because it would have produced text of unknown fidelity that
+#   could not be distinguished downstream from a clean transcription.
+#
+# ══════════════════════════════════════════════════════════════════════════════════
+# DISCARDED — fetched successfully, then deleted. Recorded so the count reconciles.
+# ══════════════════════════════════════════════════════════════════════════════════
+DROP	obit-hospital-1910	PMC5221328	200 OK but body was metadata only (575 chars: journal name, PMCID, title, date — no article text). "The Hospital" is indexed in Europe PMC but its 1910 volumes carry no full text.
+DROP	miss-nightingale-hospital-1910	PMC5221324	200 OK, metadata-only stub (565 chars). Leading article on her death.
+DROP	pension-fund-letters-1916	PMC5227406	200 OK, metadata-only stub (661 chars). PAINFUL LOSS: the title is "Florence Nightingale and the Royal National Pension Fund for Nurses: Letters and Correspondence of Historic Value" — i.e. it prints her own letters. Only the title survives.
+DROP	fn-memorial-service-1916	PMC5229653	200 OK, metadata-only stub (621 chars).
+DROP	nightingale-school-hist-1915	PMC5229225	200 OK, metadata-only stub (758 chars).
+DROP	miss-nightingale-city-london-1908	PMC5335203	200 OK, metadata-only stub (579 chars).
+DROP	new-light-on-fn-1921	PMC5247847	200 OK, metadata-only stub (571 chars).
+DROP	travels-slavonic-1877	https://archive.org/download/travelsinslavoni01mack/travelsinslavoni01mack_djvu.txt	200 OK, 686309 chars — a complete and perfectly good file, deleted because it is NOT HERS. Taken on the strength of the archive.org creator field, which lists her; the field's role qualifier is "inscriber" and the book's preface is Gladstone's. Full evidence in _EXCLUDED.txt section 4. This was a real error, caught by checking the printed page instead of trusting the catalogue.
+DROP	letter-armitage-1878	https://archive.org/download/letter00nigh/letter00nigh_djvu.txt	200 OK, 400 chars — deleted because the "text" is OCR noise off a handwritten autograph letter and contains no legible words ("~e / REE eet geet OTS Nat 6g ty ag clr eng RR A ae ence Aaa..."). The item is a genuine Nightingale autograph letter but there is no machine-readable text in it, so it would have contributed a row to the ledger and nothing to the corpus.
+DROP	nn-goog-a / nn-goog-c / nn-goog-d	(3 items)	200 OK — NOT really discarded, renamed. Downloaded under placeholder short names because archive.org gives all five Google-digitised Notes on Nursing scans a bogus date of 1969 ("update forthcoming"). Each title leaf was read to get the true year, then each was renamed: 1898, 1860 (a fourth scan of the first American edition), 1912. Kept, and in the ledger under those names.
+#
+# ══════════════════════════════════════════════════════════════════════════════════
+# NO-TEXT — probed via archive.org/metadata, never downloaded: no text derivative exists
+# ══════════════════════════════════════════════════════════════════════════════════
+NOTEXT	dr_diagram-of-the-causes-of-mortality-in-the-army-in-the-east-10563002	Diagram of the Causes of Mortality in the Army in the East (Smith Elder & Co., 1859). Metadata lists no .txt file of any kind (size 0).
+NOTEXT	dr_diagrams-representing-the-relative-mortality-from-zymotic-diseases-blue-10564004	Diagrams Representing the Relative Mortality from Zymotic Diseases (Blue), from Wounds (red) (Eyre and Spottiswoode, 1858). No text derivative.
+NOTEXT	dr_army-in-the-east-10564003	Army in the East (Eyre and Spottiswoode, 1858). No text derivative.
+NOTEXT	dr_diagrams-constructed-on-the-data-furnished-by-the-quarter-master-generals-p-10564005	Diagrams Constructed on the Data Furnished by the Quarter Master General's Plans for Encampment (Eyre and Spottiswoode, 1858). No text derivative.
+#
+#   THIS MATTERS FOR THE STATED PRIORITY OF THIS BATCH. These four items are the coxcomb /
+#   polar-area diagram plates themselves — the single most famous artefact she produced.
+#   They survive as IMAGES ONLY and cannot enter a text corpus. What CAN be had, and was,
+#   is the underlying arithmetic: mortality-british-army-1858 prints the tables the
+#   diagrams were drawn from, including "Table K. fig. 1. Estimated Average, Monthly
+#   Strength of the Army in the East, and the Deaths and Annual Rate of Mortality per 1000
+#   in each month, from April 1854 to March 1856, from Zymotic Diseases, Wounds, and
+#   Injuries; and all other Causes" — which is the coxcomb's data, month by month.
+#   So the diagrams are absent but their numbers are present. Downstream should not expect
+#   to find a description of the diagram; it should expect to find the table.
+#
+# ══════════════════════════════════════════════════════════════════════════════════
+# SUCCEEDED AND KEPT — 117 files. Full detail (URL, year, tier, flags, note) is in
+# _ids.txt, one row each; not duplicated here. Summary by source:
+# ══════════════════════════════════════════════════════════════════════════════════
+#   archive.org _djvu.txt OCR derivatives                     95
+#   JSTOR Early Journal Content scans (via archive.org)        9
+#   Europe PMC fullTextXML                                     7
+#   Project Gutenberg plain text (mirrored on archive.org)     6   — Notes on Nursing x2,
+#                                                                    Subsidiary Notes,
+#                                                                    Sanitary Statistics,
+#                                                                    Cook Life vols 1 and 2
+#                                                            ----
+#                                                             117
+#
+#   All 117 kept files were written with a 7-line "# SOURCE:" header recording the exact
+#   URL fetched and the retrieval date. _ids.txt was then generated by reading those
+#   headers back out of the files, so a URL cannot appear in the ledger unless the file
+#   carrying it is on disk.

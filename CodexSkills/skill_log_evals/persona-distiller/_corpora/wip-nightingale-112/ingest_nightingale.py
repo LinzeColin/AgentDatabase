@@ -53,9 +53,9 @@ import subprocess
 import sys
 
 WS = "workspaces/florence-nightingale/florence-nightingale"
-INGEST = "../../../../registry/codex/persona-distiller/scripts/ingest.py"
+ING = "../../../../registry/codex/persona-distiller/scripts/ingest.py"
 
-# 降档标记 → 理由（写进 attribution）
+# 降档标记 → 理由（由 `_attr.py` 写进 attribution）
 DEMOTE = {
     "POSTHUMOUS": "身后出版，非其生前定稿",
     "POSTHUMOUS-EDITION": "身后重排本",
@@ -63,25 +63,7 @@ DEMOTE = {
     "DUPLICATE-SCAN": "同一材料的另一次扫描",
     "OCR-POOR": "同一材料的降质 OCR",
     "EDITION-LATER": "同一著作的后出版本，不是首版那份文本",
-}
-
-# 归属标记 → 必须写进 attribution 的那句话
-ATTRIB_NOTE = {
-    "COMMISSION-COLLECTIVE":
-        "**这是委员会／部门集体署名的公文，不是她本人的文章。**"
-        "她主导了那场调查是一回事，「这份文件是我写的」是另一回事——"
-        "取逐字引文时不得以第一人称转述。",
-    "CO-AUTHORED":
-        "**合著。** 合著不等于不是她写的，但「哪一部分是她的」要写清。",
-    "HER-OWN":
-        "她本人署名的著作／书信／备忘录。",
-    "THIRD-PARTY":
-        "**第三方所写**，不属她的署名范畴——**不得以第一人称引用。**",
-    "ATTRIBUTION-UNCLEAR":
-        "⚠ **抓源方查不准署名。** 可作旁证，**不得拿它撑承重句**。",
-    "HAS-OWN-STATS":
-        "**本份含她自己算出的数表**——实测声明门要求「说我量过的地方必须有数」，"
-        "这里就是那些数的来源。",
+    "TRANSCRIPTION": "后人转录，非原扫本",
 }
 
 # 归属那一列：每行至少要中一个，否则下游无从判断能不能第一人称引用
@@ -103,10 +85,8 @@ def lane(name: str, note: str) -> str:
         return "timeline"
     if any(k in n for k in ("commission", "evidence", "report", "recommend")):
         return "decisions"
-    if any(k in n for k in ("address", "speech", "letter-to-nurses")):
+    if any(k in n for k in ("address", "speech")):
         return "expression"
-    if any(k in n for k in ("review", "about", "on-miss")):
-        return "external"
     return "writings"
 
 
@@ -123,53 +103,84 @@ def main() -> int:
         cols = line.split("\t")
         if len(cols) != 9:
             print(f"✗ 第 {i} 行 {len(cols)} 列，应为 9 列——**不猜，请抓源方修**")
-            print(f"    {line[:120]}")
             return 3
         rows.append(cols)
-
     if not rows:
         print("✗ **台账里一条数据行都没有**——不是「没问题」")
         return 3
 
-    ok, fail, lanes_seen = 0, [], {}
+    ok, fail, demoted, lanes_seen = 0, [], 0, {}
     for short, url, title, year, locator, langu, tier, flags, note in rows:
         marks = [m for m in flags.split(";") if m]
-        t = tier
-        reasons = []
-        for m in marks:
-            if m in DEMOTE and t == "P1":
-                t = "P2"
-                reasons.append(DEMOTE[m])
-        notes = [ATTRIB_NOTE[m] for m in marks if m in ATTRIB_NOTE]
 
-        # ★ 归属那一列必须至少中一条，否则不知道这份能不能第一人称引用
         if not (ATTRIB_REQUIRED & set(marks)):
             print(f"✗ {short}：**归属标记缺失**——"
                   f"{'／'.join(sorted(ATTRIB_REQUIRED))} 至少要有一个。"
-                  "\n    没有它，下游无从判断这份能不能以第一人称引用。"
                   "\n    **查不准就标 `ATTRIBUTION-UNCLEAR` 并写清署名字段原文，不要猜。**")
+            fail.append(short)
+            continue
+
+        t = tier
+        if t == "P1" and any(m in DEMOTE for m in marks):
+            t, demoted = "P2", demoted + 1
+
+        # ★★ **P1 的定义是「本人的话」。没有 `HER-OWN` 就不是 P1。**
+        #
+        #   流水线自己也这么说：`ingest.py` 对 `--tier P1` 强制要求 `--author`，
+        #   而这几份**恰恰给不出作者**。三份实测形态（抓源方逐份核过印刷页）：
+        #
+        #   · `mortality-british-army-1858`（玫瑰图背后的表）——扉页无署名，
+        #     全文里 `Nightingale` 一次都不出现，扉页写着
+        #     「[Reprinted from the Report of the Royal Commission…]」；
+        #     两条 archive.org 记录**彼此打架**（一条无 creator，一条写 Florence Nightingale）。
+        #     **表是她的乃是公认，但文件本身没这么说。**
+        #   · `kaiserswerth-1851`——1851 年匿名刊行，全文无其姓；唯一依据是目录 creator 字段。
+        #   · `subsidiary-notes-1858`——扉页无署名（已对 Gutenberg 清本核过），
+        #     **正文用第三人称称她**（`Miss Nightingale is recognized by…`）。
+        #     **同年、同印厂、同「Presented by request」体例的 `notes-british-army-1858`
+        #     扉页印着 `FLORENCE NIGHTINGALE.`——这一本没有。**
+        #
+        #   归 `U`（流水线自带的「未定档」）：**留在库里作证据，但不得作她的声音。**
+        #   降成 P2 是错的——P2 是「同一材料的降质版本」，与归属不确定不是一回事。
+        if t == "P1" and "HER-OWN" not in marks:
+            t = "U"
+
+        cand = sorted((pathlib.Path("raw") / short).glob("*.txt"))
+        if not cand:
+            print(f"✗ 文件不在：raw/{short}/")
             fail.append(short)
             continue
 
         ln = lane(short, note)
         lanes_seen[ln] = lanes_seen.get(ln, 0) + 1
-        attribution = "　".join([note] + notes
-                                + ([f"**降 {t}**：" + "；".join(reasons)] if reasons else []))
-        cmd = [sys.executable, INGEST,
-               "--workspace", WS, "--path", f"raw/{short}/{short}.txt",
-               "--title", title, "--published-at", year, "--locator", locator,
-               "--language", langu, "--tier", t, "--dimension", ln,
-               "--attribution", attribution]
-        if url:
-            cmd += ["--url", url]
-        r = subprocess.run(cmd, capture_output=True, text=True)
-        if r.returncode == 0:
-            ok += 1
-        else:
-            fail.append(short)
-            print(f"✗ {short}: {(r.stderr or r.stdout).strip().splitlines()[-1][:150]}")
 
-    print(f"\n入库 {ok} 份，失败 {len(fail)} 份")
+        # **文件名的年份不是版次年份**（Virchow #109 的教训）——只认台账那一格
+        yr = year if re.fullmatch(r"1[6-9]\d{2}|20\d{2}", year.strip()) else ""
+        loc = title[:150] + (f"｜{locator}" if locator else "") + (f"｜{url}" if url else "")
+
+        # ★ **`author` 只在她本人署名时填。** `COMMISSION-COLLECTIVE` 与
+        #   `THIRD-PARTY` 一律留空——留空是下游「不得以第一人称引用」的机器可读依据。
+        #   Fleming #111 的 MRC 报告 57 就是这么处理的（author 留空、tier 保持 P1）。
+        author = "Florence Nightingale" if "HER-OWN" in marks else ""
+
+        argv = [sys.executable, ING, WS, str(cand[0]),
+                "--tier", t, "--language", langu or "en",
+                "--dimension", ln, "--source-type", "document",
+                "--author", author, "--locator", loc,
+                "--rights", "public-domain"]
+        if yr:
+            argv += ["--published-at", yr]
+        proc = subprocess.run(argv, capture_output=True, text=True)
+        if proc.returncode == 0:
+            ok += 1
+            if ok % 25 == 0:
+                print(f"  … 已入 {ok}")
+        else:
+            tail = (proc.stderr or proc.stdout).strip().splitlines()
+            print(f"✗ {short}: {tail[-1][:140] if tail else '?'}")
+            fail.append(short)
+
+    print(f"\n入库 {ok} 份，失败 {len(fail)} 份，**按 flag 降级 {demoted} 条**")
     print("六条道分布：" + "　".join(f"{k} {v}" for k, v in sorted(lanes_seen.items())))
     missing = LANES - set(lanes_seen)
     if missing:

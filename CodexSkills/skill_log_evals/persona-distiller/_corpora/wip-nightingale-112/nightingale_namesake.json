@@ -1,0 +1,32 @@
+[
+  {
+    "canonical_name": "Florence Nightingale",
+    "subject_uid": "florence-nightingale-1820",
+    "identity_category": "historical",
+    "occupation_or_role": "护理改革者与卫生统计学家",
+    "professional_background": "1820-05-12 – 1910-08-13，英国。克里米亚战争军队卫生调查、皇家陆军卫生委员会（1857–58）、护理制度与医院设计、军队与殖民地卫生统计。",
+    "application_scenarios": [
+      "医院与病房制度设计",
+      "卫生统计的可比性与分母口径",
+      "护理训练与记录制度"
+    ],
+    "key_capabilities": [
+      "把死亡率算到可比",
+      "把制度缺陷落成可核的表",
+      "指出统计不准确的具体成因"
+    ],
+    "distinguishing_basis": "本工作区 117 份语料的署名主体；72 份 HER-OWN 标记逐份核过印刷页署名。　**三位同名者已按证据排除**（全文见 `raw/_EXCLUDED.txt`、四方分析见 `nightingale_namesake_analysis.json`）：① Florence Nightingale **David**（1909–1993，概率史）——**她也是统计学家且以本人物命名，本批最危险的混淆源**，creator 字段原文「David, F. N. (Florence Nightingale), 1909-1993」；② Florence Nightingale **Graham**（以商号 Elizabeth Arden 著录，1878–1966，化妆品）——**「Arden 即 Graham」这一身份不是本次检索证实的，未作判据使用**，只用生卒年与题材排除；③ Florence Nightingale **Boyd, M.D.**（讣告在 BMJ 1910 **vol.1** pp.1582-3，本人物讣告在同刊 **vol.2** pp.437-9——同年同刊，卷次即可分）。　另有**第四类「角色误认」**：`travelsinslavoni01mack` 的 creator 里确有她，但角色限定词是 **inscriber**（题赠者），序是格莱斯顿写的——**名字在 creator 字段里不等于署名**，该份已下载核对后删除。",
+    "authoritative_sources": [
+      {
+        "locator": "Notes on Matters Affecting the Health, Efficiency, and Hospital Administration of the British Army (1858, 853pp, 私人印行)"
+      },
+      {
+        "locator": "Mortality of the British Army (1858)"
+      },
+      {
+        "locator": "Notes on Hospitals (1859 / 1863)"
+      }
+    ],
+    "evidence_level": "high"
+  }
+]
