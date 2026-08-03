@@ -67,8 +67,9 @@ jobs:
         env:
           PYTHONPATH: ${{ github.workspace }}
         run: |
-          python -m compileall -q OpenAIDatabase/scripts/memory_atlas_private OpenAIDatabase/scripts/memory_atlas_source_capture_entry.py ops/memory-atlas
-          pytest -q OpenAIDatabase/tests/test_memory_atlas_private_v31.py OpenAIDatabase/tests/test_memory_atlas_source_runner_v31.py
+          python -m compileall -q OpenAIDatabase/scripts/memory_atlas_private OpenAIDatabase/scripts/memory_atlas_acceptance OpenAIDatabase/scripts/memory_atlas_source_capture_entry.py ops/memory-atlas
+          pytest -q OpenAIDatabase/tests/test_memory_atlas_private_v31.py OpenAIDatabase/tests/test_memory_atlas_source_runner_v31.py OpenAIDatabase/tests/test_memory_atlas_live_snapshot_api_v32.py
+          python -m unittest discover -s OpenAIDatabase/scripts/memory_atlas_acceptance -t OpenAIDatabase/scripts/memory_atlas_acceptance
       - name: Shell syntax
         run: |
           find ops/memory-atlas -type f \( -name '*.sh' -o -name 'memory-atlas-selfheal' \) -print0 | xargs -0 -n1 bash -n
@@ -94,6 +95,10 @@ jobs:
           trap 'kill "$PREVIEW_PID" 2>/dev/null || true' EXIT
           for _ in $(seq 1 60); do curl -fsS http://127.0.0.1:4173 >/dev/null && break; sleep 1; done
           MEMORY_ATLAS_BASE_URL=http://127.0.0.1:4173 npm run validate:v31:browser
+          # Rollback path: with the live-snapshot flag off the panel must vanish
+          # and the original ten views must still render. This preview has no
+          # private API, so it is exactly the flag-off shape being asserted.
+          npm run validate:v32:rollback -- http://127.0.0.1:4173/ "$RUNNER_TEMP/rollback-runtime.json" runtime
       - name: Fail closed on markers, caches, parallel shells and credential material
         run: |
           python - <<'PY'

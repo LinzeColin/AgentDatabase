@@ -17,8 +17,14 @@ const path = require("path");
     const navCount=await page.locator('[data-nav-view]').count();
     rows.push({id:"BROWSER-default-home",pass:defaultHome,evidence:{defaultHome}});
     rows.push({id:"BROWSER-no-v31-wrapper",pass:outerV31===0,evidence:{outerV31}});
-    rows.push({id:"BROWSER-ten-nav",pass:navCount===10,evidence:{navCount}});
     const keys=["home","galaxy","notion","roi","obsidian","timeline","contribution","wordcloud","search","summary"];
+    // Written before the Owner-approved v0.0.0.31 integration added three views
+    // to this same nav, this asserted navCount===10 and would now fail on a
+    // correct product. What preservation actually guarantees is that every one
+    // of the original ten is still mounted and reachable — proven per key just
+    // below — so the count is a floor, not an equality.
+    const originalNavCount=await page.locator(keys.map((key)=>`[data-nav-view="${key}"]`).join(",")).count();
+    rows.push({id:"BROWSER-ten-nav",pass:originalNavCount===10&&navCount>=10,evidence:{originalNavCount,navCount}});
     for(const key of keys){
       await page.locator(`[data-nav-view="${key}"]`).click();
       await page.locator(`[data-view="${key}"]`).waitFor({state:"visible",timeout:20000});

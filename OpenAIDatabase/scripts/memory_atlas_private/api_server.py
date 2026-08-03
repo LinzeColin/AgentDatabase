@@ -10,8 +10,13 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlparse
 
+from . import api_live_snapshot
 from .action_queue import ActionQueue
 from .access_auth import AccessVerificationError, CloudflareAccessVerifier
+
+LIVE_SNAPSHOT_SCHEMA = (
+    Path(__file__).resolve().parents[2] / "schema" / "memory_atlas.live_snapshot.v1.schema.json"
+)
 
 
 class ApiState:
@@ -21,12 +26,18 @@ class ApiState:
         web_data_dir: Path,
         external_origin: str,
         access_verifier: CloudflareAccessVerifier | object | None = None,
+        live_snapshot_root: Path | None = None,
+        live_snapshot_schema: Path | None = None,
     ):
         self.runtime_dir = runtime_dir
         self.web_data_dir = web_data_dir
         self.external_origin = external_origin.rstrip("/")
         self.access_verifier = access_verifier or CloudflareAccessVerifier.from_env()
         self.queue = ActionQueue(runtime_dir / "action-queue.sqlite3")
+        # The pipeline publishes the same-run snapshot next to the other web data,
+        # so the API reads exactly what the terminal run promoted to current.
+        self.live_snapshot_root = live_snapshot_root or (web_data_dir / "live-snapshot")
+        self.live_snapshot_schema = live_snapshot_schema or LIVE_SNAPSHOT_SCHEMA
 
     def load_json(self, filename: str) -> dict[str, object]:
         path = self.web_data_dir / filename
@@ -55,6 +66,19 @@ class Handler(BaseHTTPRequestHandler):
         self.send_header("Content-Type", "application/json; charset=utf-8")
         self.send_header("Content-Length", str(len(payload)))
         self.send_header("Cache-Control", "no-store")
+        self.send_header("X-Content-Type-Options", "nosniff")
+        self.send_header("Referrer-Policy", "no-referrer")
+        self.end_headers()
+        self.wfile.write(payload)
+
+    def _raw(self, status: int, headers: dict[str, str], payload: bytes) -> None:
+        # The live-snapshot helper owns its own headers (no-store, ETag and the
+        # four identity headers the browser cross-checks against the body), so
+        # they are written verbatim instead of being rebuilt by _json.
+        self.send_response(status)
+        for name, value in headers.items():
+            self.send_header(name, value)
+        self.send_header("Content-Length", str(len(payload)))
         self.send_header("X-Content-Type-Options", "nosniff")
         self.send_header("Referrer-Policy", "no-referrer")
         self.end_headers()
@@ -99,6 +123,16 @@ class Handler(BaseHTTPRequestHandler):
                 "state": "DENIED",
                 "message_zh": "私有分析读取必须通过已验证的 Cloudflare Access 身份。",
             })
+            return
+        if parsed.path == "/api/v31/live-snapshot":
+            # Reuses the Access gate above; `authorized` is only ever True here
+            # because an unauthenticated request already returned 403.
+            status, headers, payload = api_live_snapshot.response(
+                self.state.live_snapshot_root,
+                self.state.live_snapshot_schema,
+                authorized=True,
+            )
+            self._raw(status, headers, payload)
             return
         if parsed.path == "/api/v31/status":
             self._json(HTTPStatus.OK, self.state.load_json("memory_atlas_private_analytics.json"))

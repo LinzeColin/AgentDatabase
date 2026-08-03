@@ -1,0 +1,179 @@
+{
+  "schema_version": "memory_atlas.api_to_chart_oracle.v1",
+  "verdict": "PASS",
+  "run_id": "synthetic-run-20260803T101500Z",
+  "trace_id": "synthetic-trace-20260803T101500Z",
+  "release_id": "20260803T101000Z-d8e343c7590e",
+  "deployment_revision": "memory-atlas-blue-synthetic",
+  "mismatch_count": 0,
+  "checks": [
+    {
+      "field": "run_id",
+      "expected": "synthetic-run-20260803T101500Z",
+      "actual": "synthetic-run-20260803T101500Z",
+      "pass": true
+    },
+    {
+      "field": "panel_identity.run_id",
+      "expected": "synthetic-run-20260803T101500Z",
+      "actual": "synthetic-run-20260803T101500Z",
+      "pass": true
+    },
+    {
+      "field": "api_identity.run_id",
+      "expected": "synthetic-run-20260803T101500Z",
+      "actual": "synthetic-run-20260803T101500Z",
+      "pass": true
+    },
+    {
+      "field": "trace_id",
+      "expected": "synthetic-trace-20260803T101500Z",
+      "actual": "synthetic-trace-20260803T101500Z",
+      "pass": true
+    },
+    {
+      "field": "panel_identity.trace_id",
+      "expected": "synthetic-trace-20260803T101500Z",
+      "actual": "synthetic-trace-20260803T101500Z",
+      "pass": true
+    },
+    {
+      "field": "api_identity.trace_id",
+      "expected": "synthetic-trace-20260803T101500Z",
+      "actual": "synthetic-trace-20260803T101500Z",
+      "pass": true
+    },
+    {
+      "field": "release_id",
+      "expected": "20260803T101000Z-d8e343c7590e",
+      "actual": "20260803T101000Z-d8e343c7590e",
+      "pass": true
+    },
+    {
+      "field": "panel_identity.release_id",
+      "expected": "20260803T101000Z-d8e343c7590e",
+      "actual": "20260803T101000Z-d8e343c7590e",
+      "pass": true
+    },
+    {
+      "field": "api_identity.release_id",
+      "expected": "20260803T101000Z-d8e343c7590e",
+      "actual": "20260803T101000Z-d8e343c7590e",
+      "pass": true
+    },
+    {
+      "field": "deployment_revision",
+      "expected": "memory-atlas-blue-synthetic",
+      "actual": "memory-atlas-blue-synthetic",
+      "pass": true
+    },
+    {
+      "field": "panel_identity.deployment_revision",
+      "expected": "memory-atlas-blue-synthetic",
+      "actual": "memory-atlas-blue-synthetic",
+      "pass": true
+    },
+    {
+      "field": "api_identity.deployment_revision",
+      "expected": "memory-atlas-blue-synthetic",
+      "actual": "memory-atlas-blue-synthetic",
+      "pass": true
+    },
+    {
+      "field": "event_count",
+      "expected": 9,
+      "actual": 9,
+      "pass": true
+    },
+    {
+      "field": "verified_outcome_rate_event",
+      "expected": 0.555556,
+      "actual": 0.555556,
+      "pass": true
+    },
+    {
+      "field": "verified_outcome_rate_work_time",
+      "expected": 0.642857,
+      "actual": 0.642857,
+      "pass": true
+    },
+    {
+      "field": "work_time_coverage_rate",
+      "expected": 0.888889,
+      "actual": 0.888889,
+      "pass": true
+    },
+    {
+      "field": "outcome_evidence_coverage_rate",
+      "expected": 0.666667,
+      "actual": 0.666667,
+      "pass": true
+    },
+    {
+      "field": "verification_debt_proxy_event",
+      "expected": 0.444444,
+      "actual": 0.444444,
+      "pass": true
+    },
+    {
+      "field": "top_action_recommendation_id",
+      "expected": "rec-verification-first",
+      "actual": "rec-verification-first",
+      "pass": true
+    },
+    {
+      "field": "freshness_state",
+      "expected": "DEGRADED",
+      "actual": "DEGRADED",
+      "pass": true
+    },
+    {
+      "field": "benchmark_state",
+      "expected": "DIRECTION_ONLY",
+      "actual": "DIRECTION_ONLY",
+      "pass": true
+    },
+    {
+      "field": "source_completed_at",
+      "expected": "2026-08-03T10:15:00Z",
+      "actual": "2026-08-03T10:15:00Z",
+      "pass": true
+    },
+    {
+      "field": "deployment_revision",
+      "expected": "memory-atlas-blue-synthetic",
+      "actual": "memory-atlas-blue-synthetic",
+      "pass": true
+    },
+    {
+      "field": "visual_count",
+      "expected": 3,
+      "actual": 3,
+      "pass": true
+    },
+    {
+      "field": "api_status",
+      "expected": 200,
+      "actual": 200,
+      "pass": true
+    },
+    {
+      "field": "console_error_count",
+      "expected": 0,
+      "actual": 0,
+      "pass": true
+    },
+    {
+      "field": "network_error_count",
+      "expected": 0,
+      "actual": 0,
+      "pass": true
+    },
+    {
+      "field": "api_cache_control",
+      "expected": "contains no-store",
+      "actual": "private, no-store, max-age=0",
+      "pass": true
+    }
+  ]
+}

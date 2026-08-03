@@ -1,0 +1,86 @@
+{
+  "schema_version": "memory_atlas.live_snapshot_rollback.v1",
+  "captured_at": "2026-08-03T22:48:59.863Z",
+  "page_url": "http://127.0.0.1:4174/",
+  "mode": "build",
+  "verdict": "PASS",
+  "failure_count": 0,
+  "checks": [
+    {
+      "id": "panel_is_absent",
+      "pass": true,
+      "evidence": {
+        "count": 0
+      }
+    },
+    {
+      "id": "no_live_snapshot_request",
+      "pass": true,
+      "evidence": {
+        "requests": 0
+      }
+    },
+    {
+      "id": "default_entry_is_home",
+      "pass": true,
+      "evidence": {}
+    },
+    {
+      "id": "view_home_still_renders",
+      "pass": true,
+      "evidence": {}
+    },
+    {
+      "id": "view_galaxy_still_renders",
+      "pass": true,
+      "evidence": {}
+    },
+    {
+      "id": "view_notion_still_renders",
+      "pass": true,
+      "evidence": {}
+    },
+    {
+      "id": "view_roi_still_renders",
+      "pass": true,
+      "evidence": {}
+    },
+    {
+      "id": "view_obsidian_still_renders",
+      "pass": true,
+      "evidence": {}
+    },
+    {
+      "id": "view_timeline_still_renders",
+      "pass": true,
+      "evidence": {}
+    },
+    {
+      "id": "view_contribution_still_renders",
+      "pass": true,
+      "evidence": {}
+    },
+    {
+      "id": "view_wordcloud_still_renders",
+      "pass": true,
+      "evidence": {}
+    },
+    {
+      "id": "view_search_still_renders",
+      "pass": true,
+      "evidence": {}
+    },
+    {
+      "id": "view_summary_still_renders",
+      "pass": true,
+      "evidence": {}
+    },
+    {
+      "id": "no_console_errors",
+      "pass": true,
+      "evidence": {
+        "errors": []
+      }
+    }
+  ]
+}

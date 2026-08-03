@@ -1,0 +1,112 @@
+{
+  "schema_version": "memory_atlas.preservation_browser.v1",
+  "base": "http://127.0.0.1:4173",
+  "pass": true,
+  "rows": [
+    {
+      "id": "BROWSER-default-home",
+      "pass": true,
+      "evidence": {
+        "defaultHome": true
+      }
+    },
+    {
+      "id": "BROWSER-no-v31-wrapper",
+      "pass": true,
+      "evidence": {
+        "outerV31": 0
+      }
+    },
+    {
+      "id": "BROWSER-ten-nav",
+      "pass": true,
+      "evidence": {
+        "originalNavCount": 10,
+        "navCount": 13
+      }
+    },
+    {
+      "id": "BROWSER-route-home",
+      "pass": true,
+      "evidence": {
+        "visible": true
+      }
+    },
+    {
+      "id": "BROWSER-route-galaxy",
+      "pass": true,
+      "evidence": {
+        "visible": true
+      }
+    },
+    {
+      "id": "BROWSER-route-notion",
+      "pass": true,
+      "evidence": {
+        "visible": true
+      }
+    },
+    {
+      "id": "BROWSER-route-roi",
+      "pass": true,
+      "evidence": {
+        "visible": true
+      }
+    },
+    {
+      "id": "BROWSER-route-obsidian",
+      "pass": true,
+      "evidence": {
+        "visible": true
+      }
+    },
+    {
+      "id": "BROWSER-route-timeline",
+      "pass": true,
+      "evidence": {
+        "visible": true
+      }
+    },
+    {
+      "id": "BROWSER-route-contribution",
+      "pass": true,
+      "evidence": {
+        "visible": true
+      }
+    },
+    {
+      "id": "BROWSER-route-wordcloud",
+      "pass": true,
+      "evidence": {
+        "visible": true
+      }
+    },
+    {
+      "id": "BROWSER-route-search",
+      "pass": true,
+      "evidence": {
+        "visible": true
+      }
+    },
+    {
+      "id": "BROWSER-route-summary",
+      "pass": true,
+      "evidence": {
+        "visible": true
+      }
+    },
+    {
+      "id": "BROWSER-controls",
+      "pass": true,
+      "evidence": "filters"
+    },
+    {
+      "id": "BROWSER-command-contract",
+      "pass": true,
+      "evidence": {
+        "commandPaletteCount": 1
+      }
+    }
+  ],
+  "failed": []
+}

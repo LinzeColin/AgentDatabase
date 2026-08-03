@@ -478,3 +478,22 @@ html[data-memory-atlas-mode="light"] body { background: transparent; }
 @media (prefers-reduced-motion: reduce) {
   .ma31-action-grid button { transition: none; }
 }
+
+/* ---------------------------------------------------------------------------
+   v0.0.0.32 T05 — regression fix carried over from v0.0.0.31.
+
+   At <=720px the existing topbar declares
+     .topbar-actions { display: grid; grid-template-columns: minmax(0,1fr) 32px }
+   which was written for exactly two children. v0.0.0.31 inserted ThemeControls
+   as a third child, so .stat-strip fell into the 32px column and the four
+   counters were measured at 32px wide by 116px tall — the vertical, clipped
+   text the Owner reported. The controls take their own row instead.
+   --------------------------------------------------------------------------- */
+@media (max-width: 720px) {
+  .app-shell .topbar-actions > .ma31-theme-controls {
+    grid-column: 1 / -1;
+    justify-self: start;
+    flex-wrap: wrap;
+  }
+  .app-shell .topbar-actions > .stat-strip { grid-column: 1; }
+}

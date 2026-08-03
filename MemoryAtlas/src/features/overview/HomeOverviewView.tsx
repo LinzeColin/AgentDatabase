@@ -7,6 +7,7 @@ import { ActionDetailDrawer } from "../../components/ActionDetailDrawer";
 import { AssetDetailPanel } from "../../components/AssetDetailPanel";
 import { ThemeDetailPanel } from "../../components/ThemeDetailPanel";
 import { VisualWorkflowWorkbench } from "../../components/VisualWorkflowWorkbench";
+import { RealityCalibrationSection } from "../v31";
 import { BehaviorIntelligencePanel } from "./BehaviorIntelligencePanel";
 import { buildHomeActionStatusChips, buildLevelAssetGroupChips, buildThemeCategoryChips, humanActionStatusLabel, humanEffortLabel, humanPriorityLabel, humanUrgencyLabel } from "./homePresentation";
 import { HOME_ACTION_SECTION_VERSION, HOME_ARRIVAL_BRIEFING_VERSION, HOME_LEVEL_ASSET_SECTION_VERSION, HOME_THEME_CATEGORY_SECTION_VERSION, MEMORY_OVERVIEW_OPERATION_VERSION, MEMORY_OVERVIEW_SECTION_ORDER, MEMORY_OVERVIEW_STRUCTURE_VERSION, uiCopy } from "../../shared/atlas/constants";
@@ -128,6 +129,9 @@ export function HomeOverviewView({
         </div>
         <span>{timelineRangeSummary(timelineTimeRange) ?? `${nodes.length.toLocaleString()} 条筛选记忆 · ${uiCopy.overview.defaultEntry}`}</span>
       </div>
+      {/* v0.0.0.32 T05: the live, same-run reading sits first. Everything below it
+          is the historical graph the ten original views have always rendered. */}
+      <RealityCalibrationSection />
       <section
         className="home-arrival-briefing"
         aria-labelledby="home-arrival-briefing-title"
