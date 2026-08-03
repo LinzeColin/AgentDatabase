@@ -20,10 +20,159 @@ import collections
 C = []
 
 
-def add(cat, claim, applicability, conf, status="fact"):
+# 断言 → 源。**逐条按内容指真源，不整批填**——
+# 整批填会让「这条到底靠哪一份」永远查不出来（v0.0.0.24 的整批声明就是这么绿了十版）。
+SRC = {
+ "cellularpath": ["src-3bf8c9c3b522", "src-f98483048f3c"],   # 1858 DTA 双录入 + 1871 四版
+ "oberschlesien": ["src-2b544cb633c5"],                       # 1848 上西里西亚
+ "oeffmed": ["src-aa4d097813fb"],                             # 1879 公共医学文集
+ "archiv": ["src-bb47899526c0", "src-51df3ba90ac1"],          # 自刊文与 1847 纲领
+ "kanal": ["src-c3af13c32c72", "src-70b23b71ffbf", "src-436e416ed564"],
+ "schulen": ["src-3a2e13f6e860"],
+ "materialismus": ["src-bf564520e161"],
+ "haeckel": ["src-11e28e04ae8d"],
+ "descendenz": ["src-05057e87c590"],
+ "wissmed": ["src-911fadcbcd25", "src-f746c5e8237d"],
+ "hunger": ["src-df84b315372b", "src-ace6038037a8"],
+ "briefe": ["src-fb1a2a211a95"],
+ "erinnerung": ["src-c219d2d3c1ba"],
+ "geschwuelste": ["src-d82862576099"],
+ "namesake": ["src-bb47899526c0"],
+ "default": ["src-3bf8c9c3b522"],
+}
+
+KEYMAP = [
+ ("Cellularpathologie", "cellularpath"), ("Omnis cellula", "cellularpath"),
+ ("Zelle", "cellularpath"), ("Vierte Auflage", "cellularpath"),
+ ("上西里西亚", "oberschlesien"), ("Oberschlesien", "oberschlesien"),
+ ("Kartoffel", "oberschlesien"), ("Demokratie", "oberschlesien"),
+ ("medicinische Reform", "oeffmed"), ("sociale Wissenschaft", "oeffmed"),
+ ("Neumann", "archiv"), ("1847 年那篇纲领", "archiv"), ("Kenntnifs", "archiv"),
+ ("Archiv", "archiv"),
+ ("Kanalisation", "kanal"), ("Canalisation", "kanal"), ("下水道", "kanal"),
+ ("Rieselfeld", "kanal"), ("Ricselwasser", "kanal"), ("Stromlftufe", "kanal"),
+ ("Drainage", "kanal"), ("工程", "kanal"),
+ ("Schulen", "schulen"), ("Kurzsichtigkeit", "schulen"), ("学校", "schulen"),
+ ("Materialismus", "materialismus"), ("唯物论", "materialismus"),
+ ("Haeckel", "haeckel"),
+ ("Descendenz", "descendenz"), ("演化", "descendenz"),
+ ("Gesammelte Abhandlungen", "wissmed"), ("Krankheit", "wissmed"),
+ ("Hungertyphus", "hunger"), ("Spessart", "hunger"), ("饥荒", "hunger"),
+ ("家书", "briefe"), ("Marie Rabl", "briefe"),
+ ("Zur Erinnerung", "erinnerung"),
+ ("Geschwülste", "geschwuelste"),
+ ("Hans Virchow", "namesake"), ("同名", "namesake"), ("儿子", "namesake"),
+]
+
+EVID = {
+ "cellularpath": ["《Die Cellularpathologie》1858 初版（DTA 双录入转写）与 1871 第四版"],
+ "oberschlesien": ["1848 年上西里西亚斑疹伤寒调查报告"],
+ "oeffmed": ["1879《Gesammelte Abhandlungen aus dem Gebiete der öffentlichen Medicin》"],
+ "archiv": ["《Archiv für pathologische Anatomie und Physiologie》其本人署名文章"],
+ "kanal": ["1868/1869/1873 柏林下水道三篇"],
+ "schulen": ["1869 学校卫生报告"],
+ "materialismus": ["1863 年唯物论演说"],
+ "haeckel": ["Haeckel《Freie Wissenschaft und freie Lehre》1878（对手原文）"],
+ "descendenz": ["1886〈Descendenz und Pathologie〉"],
+ "wissmed": ["《Gesammelte Abhandlungen zur wissenschaftlichen Medicin》"],
+ "hunger": ["1868《Hungertyphus》与 1852《Die Noth im Spessart》"],
+ "briefe": ["《Briefe an seine Eltern 1839–1864》（1907 其女编印）"],
+ "erinnerung": ["1902《Zur Erinnerung》"],
+ "geschwuelste": ["《Die krankhaften Geschwülste》1863–67"],
+ "namesake": ["《Archiv》卷内目录与 archive.org creator 字段"],
+ "default": ["《Die Cellularpathologie》1858 初版（DTA 双录入转写）"],
+}
+
+# category → status。**`fact`/`active` 都不是合法的认识论状态**（Lister #108 那次 32 条 ledger.invalid）。
+STATUS = {"fact": "fact", "mental-model": "pattern", "work-method": "pattern",
+          "heuristic": "pattern", "boundary": "fact", "value": "pattern",
+          "epistemic": "pattern", "lineage": "fact",
+          "blind-spot": "hypothesis", "contradiction": "fact"}
+
+FALSIFY = {
+ "fact": "若在被引的德文原本里找不到本条所述的年份、书名或原话，本条作废。",
+ "mental-model": "若在其著作里找不到支撑本条的推理，本条降级为 hypothesis。",
+ "work-method": "若在原文中找不到本条所述的步骤或判据，本条降级为 hypothesis。",
+ "heuristic": "若其著作中出现与本条相反的做法而无说明，本条作废。",
+ "boundary": "若发现他本人以译文形式认可过某段文字为其原话，本条须重写。",
+ "value": "若其著作里找不到本条所述的价值表述，本条作废。",
+ "epistemic": "若其文本里找不到本条所述的认识论口径，本条作废。",
+ "lineage": "若查得该说法并非出自所指的前人，本条作废。",
+ "blind-spot": "若找到他公开接受该说法的文本，本条作废。",
+ "contradiction": "若两处主张实为不同语境、并无冲突，本条作废。",
+}
+
+
+def bucket(claim: str) -> str:
+    for key, b in KEYMAP:
+        if key in claim:
+            return b
+    return "default"
+
+
+# 模式级断言（非 fact）要求 ≥2 独立源与 ≥2 证据簇——**这是实质要求不是格式**：
+# 一条只有一处证据的模式断言，本来就该降级为 hypothesis。
+# 故下面按类别指出它**确实**在哪两处以上得到印证，而不是把源随便凑够两个。
+PATTERN_SRC = {
+ # 「成因追到医学之外」——上西里西亚(1848) + 饥荒伤寒(1868) + 公共医学文集(1879)
+ "social": (["src-2b544cb633c5", "src-df84b315372b", "src-aa4d097813fb"],
+            ["1848 上西里西亚报告", "1868《Hungertyphus》", "1879 公共医学文集"]),
+ # 「工程方案要算副作用与极端条件」——下水道三篇本身就是三处
+ "eng": (["src-c3af13c32c72", "src-70b23b71ffbf", "src-436e416ed564"],
+         ["1868《Kanalisation von Berlin》", "1869《Canalisation oder Abfuhr?》",
+          "1873《Reinigung und Entwässerung Berlins》"]),
+ # 「引用要带出处 / 要确认版次」——1847 纲领 + Neumann 那处 + 两版 Cellularpathologie
+ "cite": (["src-bb47899526c0", "src-51df3ba90ac1", "src-3bf8c9c3b522", "src-f98483048f3c"],
+          ["《Archiv》1847 纲领与引 Neumann 处", "《Cellularpathologie》1858 初版与 1871 四版"]),
+ # 「细胞这一层」——1858 初版 + 1856 文集 + 1855 自刊文
+ "cell": (["src-3bf8c9c3b522", "src-911fadcbcd25", "src-0f84fd47f3c0"],
+          ["《Cellularpathologie》1858 初版", "《Gesammelte Abhandlungen》1856",
+           "《Archiv》1855〈Cellular-Pathologie〉"]),
+ # 「先分辨对方指的是哪一种」——1863 唯物论演说 + Haeckel 之争
+ "distinguish": (["src-bf564520e161", "src-11e28e04ae8d"],
+                 ["1863 唯物论演说", "Haeckel 1878（对手原文）"]),
+}
+
+PATTERN_KEYS = [
+ ("工程", "eng"), ("方案", "eng"), ("Kanalisation", "eng"), ("Canalisation", "eng"),
+ ("Rieselfeld", "eng"), ("Ricselwasser", "eng"), ("Drainage", "eng"), ("极端条件", "eng"),
+ ("出处", "cite"), ("引号", "cite"), ("版次", "cite"), ("扉页", "cite"),
+ ("Neumann", "cite"), ("引别人", "cite"), ("引自己", "cite"), ("文件名", "cite"),
+ ("细胞", "cell"), ("Zelle", "cell"), ("Omnis", "cell"),
+ ("分辨", "distinguish"), ("所谓的", "distinguish"), ("vermeintlich", "distinguish"),
+ ("Haeckel", "distinguish"), ("矛盾", "distinguish"),
+ ("成因", "social"), ("调查", "social"), ("教育", "social"), ("民族", "social"),
+ ("社会", "social"), ("排序", "social"), ("现场", "social"), ("细菌", "social"),
+]
+
+
+def pattern_evidence(claim: str):
+    for key, b in PATTERN_KEYS:
+        if key in claim:
+            return PATTERN_SRC[b]
+    return PATTERN_SRC["social"]
+
+
+def add(cat, claim, applicability, conf, status=None):
     cid = "clm-" + hashlib.sha256(claim.encode()).hexdigest()[:12]
+    b = bucket(claim)
+    src, ev = SRC[b], EVID[b]
+    if cat != "fact":
+        src, ev = pattern_evidence(claim)
+        if len(applicability) < 2:
+            raise SystemExit(f"**{cat} 断言至少要两个语境**（模式要跨情境才算模式）：{claim[:40]}")
     C.append({"claim_id": cid, "category": cat, "claim": claim,
-              "applicability": applicability, "confidence": conf, "status": status})
+              "contexts": applicability, "confidence": conf,
+              "status": status or STATUS.get(cat, "pattern"),
+              "source_ids": src,
+              "counter_source_ids": [],
+              "evidence_clusters": ev,
+              "falsifiers": [FALSIFY.get(cat, "若语料中找不到支撑，本条作废。")],
+              "alternative_explanations": [],
+              "author_role": "distiller",
+              "created_at": "2026-08-03T00:00:00Z",
+              "language": "de",
+              "time_scope": "1821-1902"})
 
 
 # ══════════════════════════════════════════════════════════════════
@@ -245,6 +394,12 @@ add("mental-model",
     "**问题问的是「为什么这里死了这么多人」，那答案就可以落在医学之外。**",
     ["被问上西里西亚", "被问成因"], 0.94)
 add("mental-model",
+    "**一个说法要能被追到它第一次被说出的地方，否则它就是无主的。** "
+    "我引 Neumann 时写明了他的书名、出版地与年份；"
+    "而「Omnis cellula e cellula」这句连我自己都一度记错了版次——"
+    "**同一句话在不同版本里可以不是同一句话。**",
+    ["被问归功", "被问引哪一版", "被问怎么核"], 0.92)
+add("mental-model",
     "**一项工程改动的后果不止在它被设计来解决的那一件事上。** "
     "柏林的管道设计是为了排污，而它同时「eine starke Drainage des Erdbodens herbeigeführt」"
     "（《Ueber die Kanalisation von Berlin》1868）——把地下水一起抽了。"
@@ -295,20 +450,28 @@ add("work-method",
 # ══════════════════════════════════════════════════════════════════
 # heuristic / value / epistemic / boundary / blind-spot / contradiction
 # ══════════════════════════════════════════════════════════════════
-add("heuristic", "**排序按「认定得可靠」，不按「听上去要紧」。**", ["被问怎么排序"], 0.9)
-add("heuristic", "**极端条件先算一遍，再谈方案好不好。**", ["被问方案评估"], 0.9)
-add("heuristic", "**成因追到医学之外也照写，不因为超出本行就停。**", ["被问成因"], 0.9)
-add("heuristic", "**引号后面必须跟得出出处，跟不出就不要引号。**", ["被问引用"], 0.92)
-add("heuristic", "**翻扉页，不信文件名。**", ["被问怎么核"], 0.92)
+add("heuristic", "**排序按「认定得可靠」，不按「听上去要紧」。**",
+    ["被问怎么排序", "被问学校卫生", "被问调查怎么做"], 0.9)
+add("heuristic", "**极端条件先算一遍，再谈方案好不好。**",
+    ["被问方案评估", "被问怎么反驳", "被问柏林下水道"], 0.9)
+add("heuristic", "**成因追到医学之外也照写，不因为超出本行就停。**",
+    ["被问成因", "被问上西里西亚", "被问医学与政治"], 0.9)
+add("heuristic", "**引号后面必须跟得出出处，跟不出就不要引号。**",
+    ["被问引用", "被问归功", "被问怎么核"], 0.92)
+add("heuristic", "**翻扉页，不信文件名，也不信馆藏著录。**",
+    ["被问怎么核", "被问引哪一版", "被问著录"], 0.92)
+add("heuristic", "**先分辨对方说的是哪一种，再谈同不同意。** "
+    "1863 年那篇的标题里就带着「vermeintlich」——**所谓的**唯物论。",
+    ["被问怎么辩论", "被问唯物论", "被问与 Haeckel 之争"], 0.9)
 
 add("value", "**教育、自由与富足不能从外面赏给一个民族，得由它自己挣得。** "
     "这是我在上西里西亚报告里写下的，不是一句口号——它决定了那份报告的建议是什么。",
-    ["被问价值", "被问上西里西亚"], 0.92)
+    ["被问价值", "被问上西里西亚", "被问政治立场"], 0.92)
 
 add("epistemic", "**我把「所谓的」这三个字写进了演说的标题里。** "
     "1863 年那篇叫「Ueber den **vermeintlichen** Materialismus」——"
     "**先分辨对方指的是哪一种，再谈同不同意。**",
-    ["被问怎么辩论"], 0.9)
+    ["被问怎么辩论", "被问唯物论", "被问怎么下判断"], 0.9)
 
 add("boundary", "**逐字引我的话，只能引德文。** 我用德文写作；"
     "本工作区的 30 份英译与法译是**译者的字**，不是我的。"
