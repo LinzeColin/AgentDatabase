@@ -4,7 +4,7 @@
   "display_name": "人物蒸馏 Skill / Persona Distiller",
   "distribution": {
     "canonical_registry": "../persona-distiller-group",
-    "kind": "repository-customized-v0.0.0.68",
+    "kind": "repository-customized-v0.0.0.69",
     "lineage_base_archive_sha256": "e891912d98d14afb7677ac935a19be329d97d206f4ae74a644892f46b17f6748"
   },
   "evaluation_suites": 16,
@@ -31,7 +31,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "d2c6c6d200079ab296becfbe6d007685fcd4031a04c2c9b4802fc9a7e78f1882",
+      "sha256": "48795dbd9cb02e26d5eee578e4ed9d9e9f4b5abea9dbc754ee9afc2e4683c611",
       "size_bytes": 8802
     },
     {
@@ -56,12 +56,12 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "4654a9956893141cde140561e5096326dee17e2fed4e65c33ac8fb4e3de5386b",
-      "size_bytes": 72729
+      "sha256": "f7e11d84f4165523423e58e15aa86042783eeeb0f53a4bf396208313abaacc28",
+      "size_bytes": 74272
     },
     {
       "path": "VERSION",
-      "sha256": "1470ccccb858541a6a974ac5812d3ab0fb755f41c067c4d2bc39b8aae7b090d6",
+      "sha256": "b33b2f8e04483718c6202bfc99e66cb34aae4cc79adb2246c465fcc154200ff8",
       "size_bytes": 10
     },
     {
@@ -121,7 +121,7 @@
     },
     {
       "path": "handoff.md",
-      "sha256": "6211de2a7e57afcf45b3e9e339c03e1c979bfb8cf0a01fec030c92172c343ca3",
+      "sha256": "c08259a72ce685977519d7613edeaf93fd45df0f74def0fdb691749a3ce7cafa",
       "size_bytes": 3702
     },
     {
@@ -141,7 +141,7 @@
     },
     {
       "path": "manifest.json",
-      "sha256": "0be7e4768ef163ac17fa31fe4c5781cf2c2b56b6513fcf1f519bc2166b3286ad",
+      "sha256": "82ce7bd836f5b68041e739047aa7b9c2596035e06b4ee9ee7560b3824fc3f600",
       "size_bytes": 1191
     },
     {
@@ -620,6 +620,11 @@
       "size_bytes": 12699
     },
     {
+      "path": "references/pipeline/checkers/check_suite_single_drag.py",
+      "sha256": "1e0d551080c450e790949fa737eb174b55608740508550f964a6b8c110f05200",
+      "size_bytes": 8208
+    },
+    {
       "path": "references/pipeline/checkers/check_unsourced_names.py",
       "sha256": "a8ccd72a087161e5a1ce52ec49a95633e54f83ee00a912ee366bbd0236ae4474",
       "size_bytes": 23171
@@ -1023,6 +1028,11 @@
       "path": "scripts/check_source_attribution.py",
       "sha256": "29dfe1f80fa28cf09077605e098361b4f82600d750e00741857ccb2eb1e2b730",
       "size_bytes": 12699
+    },
+    {
+      "path": "scripts/check_suite_single_drag.py",
+      "sha256": "1e0d551080c450e790949fa737eb174b55608740508550f964a6b8c110f05200",
+      "size_bytes": 8208
     },
     {
       "path": "scripts/check_unsourced_names.py",
@@ -1676,5 +1686,5 @@
     },
     "secret_findings": 0
   },
-  "version": "v0.0.0.68"
+  "version": "v0.0.0.69"
 }
