@@ -368,6 +368,58 @@ def test_incident_deduplicates_and_counts_recurrence(tmp_path: Path) -> None:
     assert recurrence.incident_id == one.incident_id and recurrence.recurrence_count == 2
 
 
+def test_closed_incident_carries_rollback_reference(tmp_path: Path) -> None:
+    """AC-015 lists rollback among the elements a closed incident must carry.
+
+    The live ledger had 29/29 closed incidents with evidence, signature, fixture,
+    oracle, red proof, green proof, fix reference and monitoring, but 0/29 with a
+    rollback reference, because the column did not exist. It is additive with an
+    empty default, so this pins both halves: a rollback survives closure, and the
+    snapshot counts the ones that still lack one instead of reading as satisfied.
+    """
+    store = FailureCompoundStore(tmp_path / "failure.sqlite3")
+    with_rb = store.record_failure(component="deploy", category="release", severity="P0", error_code="E9", title="promotion left origin stale", occurred_at=FIXED_TIME, evidence_ref="e://rb", environment="ovh")
+    store.promote_regression_asset(
+        incident_id=with_rb.incident_id, fixture_path="fixtures/deploy.json", oracle="origin must serve the promoted release",
+        test_path="tests/deploy.py", red_evidence_ref="red://rb", green_evidence_ref="green://rb",
+        fixed_by="sha:deadbeef", rollback_ref="ops/memory-atlas/rollback.sh#previous-symlink",
+    )
+    without_rb = store.record_failure(component="ui", category="frontend", severity="P1", error_code="E8", title="theme lost on reload", occurred_at=FIXED_TIME, evidence_ref="e://no", environment="test")
+    store.promote_regression_asset(
+        incident_id=without_rb.incident_id, fixture_path="fixtures/theme.json", oracle="theme persists",
+        test_path="tests/theme.py", red_evidence_ref="red://no", green_evidence_ref="green://no", fixed_by="sha:cafe",
+    )
+
+    snapshot = store.export_snapshot(FIXED_TIME)
+    rows = {row["incident_id"]: row for row in snapshot["incidents"]}
+    assert rows[with_rb.incident_id]["rollback_ref"] == "ops/memory-atlas/rollback.sh#previous-symlink"
+    assert rows[without_rb.incident_id]["rollback_ref"] == ""
+    metrics = snapshot["metrics"]
+    assert metrics["closed_incident_count"] == 2
+    assert metrics["closed_incidents_with_rollback"] == 1
+    assert metrics["closed_incidents_missing_rollback"] == 1
+
+
+def test_recurrence_of_a_closed_signature_reopens_and_increments(tmp_path: Path) -> None:
+    """The increment path exists in code but has never fired in production: all 29
+    live incidents sit at recurrence_count 1. Pin it so a real recurrence cannot
+    silently fail to reopen the incident."""
+    store = FailureCompoundStore(tmp_path / "failure.sqlite3")
+    first = store.record_failure(component="capture", category="source", severity="P0", error_code="E7", title="upload timed out after 30 seconds", occurred_at="2026-08-01T00:00:00Z", evidence_ref="e://1", environment="mac")
+    store.promote_regression_asset(
+        incident_id=first.incident_id, fixture_path="fixtures/capture.json", oracle="upload retries",
+        test_path="tests/capture.py", red_evidence_ref="red://1", green_evidence_ref="green://1",
+        fixed_by="sha:1", rollback_ref="revert sha:1",
+    )
+    again = store.record_failure(component="capture", category="source", severity="P0", error_code="E7", title="upload timed out after 90 seconds", occurred_at="2026-08-05T00:00:00Z", evidence_ref="e://2", environment="mac")
+
+    assert again.incident_id == first.incident_id, "same normalized signature must reuse the incident"
+    assert again.recurrence_count == 2
+    row = next(r for r in store.export_snapshot(FIXED_TIME)["incidents"] if r["incident_id"] == first.incident_id)
+    assert row["status"] == "REOPENED"
+    assert row["rollback_ref"] == "revert sha:1", "reopening must not discard the rollback reference"
+
+
 def test_failure_store_migrates_live_v1_schema_without_losing_incidents(tmp_path: Path) -> None:
     database = tmp_path / "failure.sqlite3"
     with sqlite3.connect(database) as db:
@@ -439,6 +491,11 @@ def test_fault_injection_and_registry_import_are_idempotent(tmp_path: Path) -> N
         "asset_coverage": 1.0,
         "last_pass_rate": 1.0,
         "nonrecurrence_ratio": 1.0,
+        # AC-015 rollback coverage: this fixture registry carries no rollback_ref,
+        # so the shortfall has to be visible rather than absent.
+        "closed_incident_count": 1,
+        "closed_incidents_with_rollback": 0,
+        "closed_incidents_missing_rollback": 1,
     }
     assert snapshot["incidents"][0]["error_code"] == "FIXTURE_ONE"
     assert snapshot["incidents"][0]["root_cause"] == "fixture root cause"
