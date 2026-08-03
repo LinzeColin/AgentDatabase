@@ -897,6 +897,34 @@ def run_content_checks(report, target: Path, cache_dirs: list[str]) -> None:
     else:
         review['shared_anchor'] = 'evals/judge_payload.v1.json 不在——**同源引用未比对（不是通过）**'
 
+    # ── v0.0.0.41：这道门在当前评委分布下够不够得着 ──────────────────
+    #   Pasteur / Koch / Lister 连续三人死在 min_fact 0.93。
+    #   到第三人第三轮才去数两席的分数分布：席 E 在 130 次候选打分里
+    #   **给出 ≥9.0 的次数是 0**，实测可达上限 0.885–0.920，全都低于 0.93。
+    #   三个人、九轮评审之后才想到数这一下——本条把那一下变成每次都做。
+    #   **它不判「门槛该不该改」**（那是人的决定，三条化解路径各带一个
+    #   作者能自己滥用的旋钮），只回答纯算术：以这批实测分为据，够不够得着。
+    res = target / 'evals/results.jsonl'
+    if not res.exists():
+        review['gate_reachability'] = 'evals/results.jsonl 不在——**门槛可达性未检查（不是通过）**'
+    else:
+        code, out = run('check_gate_reachability.py',
+                        ['--results', str(res), '--profile', str(report.profile)])
+        if code == -1:
+            review['checker_missing'] = out
+        elif code == 2:
+            report.error('content.selftest-failed',
+                         'check_gate_reachability 负对照未过——其检查结论不作数')
+        elif code != 0:
+            hit = [l.strip() for l in out.splitlines() if '够不着' in l and 'min_' in l]
+            report.warn('eval.gate-above-judge-ceiling',
+                           '**有绝对分门高于两席的实测可达上限**——'
+                           '产物再好也过不去，故「未过」不构成「产物不够好」的证据；'
+                           '**不要因此自行放宽阈值，这是人的决定**。'
+                           + ('　' + '；'.join(hit) if hit else ''))
+        else:
+            review['gate_reachability'] = '✓ 各绝对分门都在两席实测可达范围内'
+
     # ── 只列不判：写进 warnings，不拦 ────────────────────────────────
     for script, argv, key in (
             ('check_absence_claims.py', ['--workspace', str(target)], 'absence_claims'),
