@@ -563,11 +563,11 @@
       "slug": "prompt-compiler",
       "source": "codex",
       "name": "prompt-compiler",
-      "description": "将用户原始提示词、代码、智能体架构、配置或其他文本工件，编译成 ChatGPT、Codex、Claude、Gemini 四个可追溯版本；统一编排 GEPA、自动研究式循环、元执行框架式循环、Promptfoo、多目标帕累托搜索、预言机、训练/验证/最终测试、三次重复、回归、红队和独立终审。用户要求优化提示词、比较优化方法、建立版本记忆或防退化发布门禁时使用。普通文字润色、未授权模型调用或无法接受测试成本时不要使用。",
+      "description": "将原始 Prompt、代码、Agent 架构、配置或其他文本工件编译为可追溯、可回滚、可独立验收的冠军候选。GEPA、AutoResearch、Meta-Harness、Promptfoo 同时作为同层竞品和可路由下层执行器；Prompt Compiler 只有在全部必选竞品实际运行、全部冻结维度逐项排名第一、总体第一、独立最终测试、回归、红队、Promptfoo 与外部证据均通过时才允许发布。适用于提示词优化、Agent Skill 优化、竞品同场评测、版本记忆和防退化发布门禁。",
       "category": "其他",
       "entry": "registry/codex/prompt-compiler/SKILL.md",
-      "file_count": 33,
-      "size_bytes": 282861
+      "file_count": 42,
+      "size_bytes": 420404
     },
     {
       "slug": "serenity-skill",

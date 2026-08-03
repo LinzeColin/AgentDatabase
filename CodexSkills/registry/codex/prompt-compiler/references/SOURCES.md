@@ -1,27 +1,43 @@
-# 来源与核验边界
+# 一手来源、版本与访问边界
 
 核验日期：2026-08-02。
 
-## 一手来源
+## 核心竞品
 
-- GEPA 官方仓库与文档：https://github.com/gepa-ai/gepa
-- GEPA PyPI 0.1.4：https://pypi.org/project/gepa/0.1.4/
-- GEPA `optimize_anything` 与 Omni 文档：https://gepa-ai.github.io/gepa/
-- Promptfoo 官方文档：https://www.promptfoo.dev/docs/
+- GEPA 官方仓库：https://github.com/gepa-ai/gepa
+- GEPA v0.1.4 发布页：https://github.com/gepa-ai/gepa/releases/tag/v0.1.4
+- GEPA 文档：https://gepa-ai.github.io/gepa/
+- AutoResearch 官方仓库：https://github.com/karpathy/autoresearch
+- Meta-Harness 官方仓库：https://github.com/stanford-iris-lab/meta-harness
+- Meta-Harness 论文：https://arxiv.org/abs/2603.28052
 - Promptfoo 官方仓库：https://github.com/promptfoo/promptfoo
-- OpenAI Codex Skills 文档：https://developers.openai.com/codex/skills/
-- OpenAI Codex 非交互调用文档：https://developers.openai.com/codex/noninteractive/
-- DSPy/MIPROv2 官方文档：https://dspy.ai/
-- Opik Agent Optimizer 官方文档：https://www.comet.com/docs/opik/
-- MLflow Prompt Registry/Optimization 官方文档：https://mlflow.org/docs/latest/genai/prompt-registry/
-- LinzeColin AgentDatabase Skill 清单：https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/
-- 白箱迭代 Skill：https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/teleiosis
-- 人物蒸馏专家团队：https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/persona-distiller-group
+- Promptfoo v0.121.20 发布页：https://github.com/promptfoo/promptfoo/releases/tag/0.121.20
+- Promptfoo 文档：https://www.promptfoo.dev/docs/
+- Promptfoo npm：https://www.npmjs.com/package/promptfoo
+
+版本事实：GEPA v0.1.4 于 2026-07-15 发布；Promptfoo v0.121.20 发布说明日期为 2026-07-30、GitHub 页面显示于 2026-07-31 发布。npm 搜索摘要曾短暂仍显示 0.121.19，因此本包以官方 GitHub 最新 Release 0.121.20 为冻结依据。
+
+## 扩展竞品
+
+- DSPy：https://github.com/stanfordnlp/dspy
+- TextGrad：https://github.com/zou-group/textgrad
+- OPRO：https://github.com/google-deepmind/opro
+- PromptWizard：https://github.com/microsoft/PromptWizard
+- PromptAgent：https://github.com/XinyuanWangCS/PromptAgent
+- SAMMO：https://github.com/microsoft/sammo
+- Opik：https://github.com/comet-ml/opik
+- MLflow：https://github.com/mlflow/mlflow
+
+## 治理 Skill
+
+- Skill 清单：https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/
+- Teleiosis：https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/teleiosis
+- Persona Distiller Group：https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/persona-distiller-group
 - Verifier：https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/verifier
-- 文脉中枢：https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/context-kernel
+- Context Kernel：https://github.com/LinzeColin/AgentDatabase/tree/main/CodexSkills/registry/codex/context-kernel
 - i-have-adhd：https://github.com/ayghri/i-have-adhd
-- grilling：https://github.com/mattpocock/skills/tree/main/skills/productivity/grilling
+- Grilling：https://github.com/mattpocock/skills/tree/main/skills/productivity/grilling
 
 ## 访问边界
 
-公开仓库可核验；未获得登录权限的私有仓库不可访问，不能声称已读取。外部服务的账户数据、付费计划、私有 Prompt 和生产 Trace 只有在用户授权并配置后才能参与评测。
+本轮核验了可访问的公开仓库与用户上传的 v0.0.0.2。未获得登录授权的 GitHub Private 仓库无法访问，包内不声称已读取。人物蒸馏缺少 dossier，故采用角色分离同模型复审，不冒充原生专家团队执行。AutoResearch 与 Meta-Harness 的默认执行器是公开机制兼容适配，不冒充其官方原生实验。

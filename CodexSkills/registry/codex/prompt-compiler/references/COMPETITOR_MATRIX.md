@@ -1,18 +1,24 @@
-# 竞品能力吸收与证据边界
+# 竞品同层对抗与能力吸收矩阵
 
-| 方案 | 强项 | 提示词编译器的处理 |
-|---|---|---|
-| GEPA | 失败轨迹反思、变异、帕累托演化、多工件优化 | 固定版本官方接口作为候选引擎；最终测试和发布权不交给 GEPA |
-| AutoResearch | 自动提出假设、运行实验、记录结果、继续研究 | 内置“单假设、单变化”兼容执行器；相同预算比较；保留失败路径避免循环 |
-| MetaHarness | 元级执行框架、智能体结构与配置搜索 | 内置结构、步骤、工具、恢复和验收接口联合搜索兼容执行器 |
-| Promptfoo | 断言、数据集、模型比较、自定义函数、回归、红队、报告和优化 | 固定版本官方优化与独立双版对照；种子和候选必须同时出现；持续集成重新核验其真实结果 |
-| DSPy/MIPROv2 | 程序化提示词、指令与示例联合优化 | 通过 `dspy_mipro` 通用竞品桥加入候选；主控统一复评 |
-| Opik Agent Optimizer | 多算法、轨迹与可视化优化 | 通过 `opik` 桥接；平台自报分数不能替代独立最终测试 |
-| MLflow Prompt Registry/Optimization | 版本、别名、审计、优化和生产治理 | 本地历史账本提供真值；可通过 `mlflow` 桥接或导出；发布仍由本地门禁决定 |
-| OpenAI Prompt Optimizer/Playground | OpenAI 定向生成与优化 | 通过 `openai_optimizer` 桥接；不硬编码供应商，不以生成结果替代测试 |
-| Anthropic Prompt Generator | Claude 定向生成、测试用例和比较 | 通过 `anthropic_generator` 桥接；同时保留 Claude 目标版本 |
-| Google Prompt Optimizer | 零样本、少样本、数据驱动和模型迁移 | 通过 `google_optimizer` 桥接；最终仍使用统一预言机 |
-| PromptHub | 提示词版本、对比、协作和分发 | 本地 SQLite/Git 作为真值；通过 `prompthub` 桥接候选与导入导出 |
-| PromptLayer | 注册表、日志、成本、轨迹和评测 | 本地证据链为默认；通过 `promptlayer` 桥接生产反馈 |
+核验日期：2026-08-03。
 
-“吸收”仅指能力合同、内置兼容循环或可选桥接，不表示把第三方源代码、云服务、账户或商标打包进本技能。未配置的第三方桥不算已运行，也不能用于“比竞品好”的结论。
+| 竞品 | 同层必须击败的能力 | 下层可路由能力 | 本 Skill 执行方式 | 证据限制 |
+|---|---|---|---|---|
+| GEPA 0.1.4 | 全轨迹反思、变异、Pareto、多工件优化、并行 Proposal | 失败诊断、定向变异、Pareto 候选 | 只运行官方 `gepa.optimize_anything` | API 缺失、执行失败或无候选即阻塞；无本地回退 |
+| AutoResearch | 固定预算实验、一次一个变化、保留或丢弃、实验日志 | 单变更归因、失败记忆、稳定迭代 | 可验证官方/受控 Git 工作区的隔离副本 + 真实外部命令 | 只允许声明候选路径变化；无本地同名模拟 |
+| Meta-Harness | 固定模型外围的存储、检索、展示、工具和恢复路径搜索 | Harness 结构、上下文和工具边界 | 官方参考入口发现 + 隔离工作区真实命令 | 未发现入口、候选未变化或越界修改即阻塞；无本地同名模拟 |
+| Promptfoo 0.121.20 | Eval、断言、优化、回归、红队、CI | 失败样本、断言、红队和发布证据 | 官方 CLI；只从精确 `Best prompt` 区段提取候选 | 目标模型与建议模型分角色记录；无兼容候选回退 |
+| DSPy MIPROv2 | 指令、示例和程序化 Pipeline 优化 | Few-shot 与程序结构搜索 | 通用 JSON Bridge | 默认关闭；启用后自动成为本轮必选对手 |
+| TextGrad | 文本梯度与反向反馈 | 细粒度自然语言梯度 | 通用 JSON Bridge | 同上 |
+| OPRO | 分数条件 Proposal | 以 Prompt 执行优化 | 通用 JSON Bridge | 同上 |
+| PromptWizard | Prompt 与示例联合优化 | 合成示例、反馈迭代 | 通用 JSON Bridge | 同上 |
+| PromptAgent | Agentic/MCTS 搜索 | 搜索树与回溯 | 通用 JSON Bridge | 同上 |
+| SAMMO | Prompt Program 搜索 | 结构化变异与搜索 | 通用 JSON Bridge | 同上 |
+| Opik Optimizer | 多算法、轨迹和可视化 | 实验编排和追踪 | 通用 JSON Bridge | 平台自报分必须独立复评 |
+| MLflow | Prompt 注册、优化和生产治理 | 版本、别名和审计 | 通用 JSON Bridge/导出 | 本地证据仍是当前运行真值 |
+| OpenAI/Anthropic/Google 优化器 | 供应商模型定向生成与优化 | Provider 专属候选 | 通用 JSON Bridge | 不硬编码供应商，不隐式花费 |
+| PromptHub/PromptLayer | 注册、协作、日志和生产反馈 | 版本和线上 Trace | 通用 JSON Bridge | 外部数据需授权和脱敏 |
+
+## 统一公平合同
+
+所有启用竞品只能看到种子、训练、验证、目标、要求和预算；最终测试不发送给竞品。所有候选由 Prompt Compiler 使用同一任务模型、同一最终评委和同一 Oracle 复测。启用的外部竞品若缺候选，冠军状态自动阻塞，不能通过关闭证据字段规避。

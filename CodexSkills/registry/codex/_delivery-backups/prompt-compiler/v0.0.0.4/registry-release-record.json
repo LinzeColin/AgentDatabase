@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "skill_slug": "prompt-compiler",
+  "version": "v0.0.0.4",
+  "outer_delivery_archive_sha256": "d41aab05d79850772e3e4bcf66042520caf3e104ba63865fb246e206ddb76efd",
+  "package_manifest_sha256": "544c89a097564e6904517a2cebf4c4bc543ed59d1611fcf1848e821a627ccfad",
+  "skill_manifest_sha256": "ec0fb971266b6859e7c452c3e082e8f1f528796061519fd1b4bf70f41fb9041d",
+  "source_control": {
+    "canonical_source_path": "CodexSkills/registry/codex/prompt-compiler",
+    "replaced_version": "v0.0.0.2",
+    "installed_version": "v0.0.0.4",
+    "canonical_source_regular_file_count": 42,
+    "canonical_source_bytes": 420404
+  },
+  "install": {
+    "status": "REGISTRY_SOURCE_REPLACED",
+    "runtime_environment": "NOT_INSTALLED",
+    "external_acceptance": "NOT_RUN"
+  },
+  "evidence": {
+    "archive_integrity": "PASS",
+    "credential_scan": "PASS",
+    "frozen_verify_only": "PASS",
+    "unit_tests": 58,
+    "runtime_self_test": "PASS",
+    "manifest_verification": "PASS",
+    "formal_champion_status": "NOT_PROVEN_ENVIRONMENT_BOUND"
+  }
+}

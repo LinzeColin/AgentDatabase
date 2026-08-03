@@ -1,4 +1,4 @@
-name: Prompt Compiler 独立门禁
+name: Prompt Compiler 全维冠军独立门禁
 
 on:
   workflow_dispatch:
@@ -12,9 +12,9 @@ on:
         required: true
         default: "quick"
       engines:
-        description: "优化引擎，逗号分隔"
+        description: "同层竞品与 Prompt Compiler，逗号分隔"
         required: true
-        default: "gepa,autoresearch,meta_harness,promptfoo,omni"
+        default: "gepa,autoresearch,meta_harness,promptfoo,prompt_compiler"
 
 permissions:
   contents: read
@@ -34,13 +34,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "24"
-      - name: 连续三轮离线 QA
+      - name: 冻结包离线 QA
         env:
           PYTHONDONTWRITEBYTECODE: "1"
         run: python3 -B QA/run_all.py
 
   external-and-release:
-    # 该 Runner 必须预先安装并登录 Codex；使用受保护 Environment 承担费用和凭据授权。
     runs-on: [self-hosted, prompt-compiler-acceptance]
     environment: prompt-compiler-release
     needs: offline-qa
@@ -52,27 +51,19 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "24"
-      - name: 安装固定运行环境
-        env:
-          PYTHONDONTWRITEBYTECODE: "1"
+      - name: 安装固定依赖
         run: python3 -B prompt-compiler/scripts/prompt_compiler.py bootstrap
-      - name: 真实 GEPA、Codex、Promptfoo 验收
-        env:
-          PYTHONDONTWRITEBYTECODE: "1"
-        run: |
-          python3 -B prompt-compiler/scripts/prompt_compiler.py external-acceptance \
-            --output "${{ inputs.project_path }}/reports/external_acceptance.json"
-      - name: 多引擎优化与独立验收
-        env:
-          PYTHONDONTWRITEBYTECODE: "1"
-        run: |
-          python3 -B prompt-compiler/scripts/prompt_compiler.py optimize \
-            --project "${{ inputs.project_path }}" \
-            --preset "${{ inputs.preset }}" \
-            --engines "${{ inputs.engines }}"
-      - name: 唯一发布硬门
-        env:
-          PYTHONDONTWRITEBYTECODE: "1"
+      - name: 真实外部验收
+        run: >-
+          python3 -B prompt-compiler/scripts/prompt_compiler.py external-acceptance
+          --output "${{ inputs.project_path }}/reports/external_acceptance.json"
+      - name: 双角色同场竞技
+        run: >-
+          python3 -B prompt-compiler/scripts/prompt_compiler.py optimize
+          --project "${{ inputs.project_path }}"
+          --preset "${{ inputs.preset }}"
+          --engines "${{ inputs.engines }}"
+      - name: 逐竞品逐维唯一发布硬门
         run: python3 -B prompt-compiler/scripts/prompt_compiler.py ci-gate --project "${{ inputs.project_path }}"
       - name: 保存证据
         if: always()
