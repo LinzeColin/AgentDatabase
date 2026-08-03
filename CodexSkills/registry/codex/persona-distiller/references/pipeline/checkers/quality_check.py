@@ -1599,6 +1599,69 @@ def run_suite_single_drag(report, target: Path, thresholds: dict) -> None:
     report.metrics['suite_single_drag'] = info
 
 
+def run_unqualified_priority(report, target: Path) -> None:
+    """无限定的首创声明（v0.0.0.73，**只写 metrics**）。
+
+    评委没有语料——**「电弧焊是我发明的」读起来和真的一模一样。**
+    直接风险：#115 Slavyanov 与 Benardos 都在队列里（金属电极 vs 碳电极，
+    长期被互相混记），**两份产物将来同时在册**。
+
+    **它绝不惩罚诚实的分层**：只要句子里有让渡（「不是我一个人」
+    「只是其中一段」「在此之前已有人」），就算限定，直接放行。
+    """
+    here = Path(__file__).resolve().parent
+    script = here / 'check_unqualified_priority_claim.py'
+    if not script.exists():
+        report.metrics['unqualified_priority'] = {'状态': '检查器未安装，**未核验**（不是通过）'}
+        return
+    spec = importlib.util.spec_from_file_location('_pd_priority', script)
+    module = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(module)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['unqualified_priority'] = {'状态': f'加载失败，**未核验**：{exc}'}
+        return
+    buffer = io.StringIO()
+    with contextlib.redirect_stdout(buffer):
+        if module.selftest() != 0:
+            report.metrics['unqualified_priority'] = {'状态': '**负对照未过，其结论不作数**'}
+            return
+
+    paths = [p for p in (target / 'evidence' / 'claims.jsonl',) if p.is_file()]
+    # ★ 答案文件常在工作区上面**两三层**（`wip-<人>-<编号>/xx_candidate.json`）。
+    #   只上一层就只扫得到 claims.jsonl——**射程写错和判据出错，表征一样是绿的。**
+    seen = set()
+    base = target
+    for _ in range(4):
+        for c in sorted(base.glob('*_candidate.json')):
+            if c not in seen:
+                seen.add(c)
+                paths.append(c)
+        if base.parent == base:
+            break
+        base = base.parent
+    if not paths:
+        report.metrics['unqualified_priority'] = {'状态': '**没有断言也没有答案，未核验**'}
+        return
+    try:
+        acc = module.scan(paths)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['unqualified_priority'] = {'状态': f'运行失败，**未核验**：{exc}'}
+        return
+
+    info: dict[str, Any] = {'第一人称首创声明': acc['claims'],
+                            '其中带限定': acc['qualified'],
+                            '扫了几个文件': len(paths)}
+    if acc['bad']:
+        info['**无限定**'] = [f'{u}：{s}' for u, s in acc['bad'][:8]]
+        info['口径'] = ('限定要么是年份，要么是材料／方法／范围，**要么是分层让渡**。'
+                        '评委没有语料——**「这是我发明的」读起来和真的一模一样。**')
+    elif acc['claims'] == 0:
+        info['状态'] = ('一处首创声明都没扫到。**这可能是产物干净，也可能是判据窄**——'
+                        'v0.0.0.73 第一版就在真数据上报过一次假的 0。')
+    report.metrics['unqualified_priority'] = info
+
+
 def run_holdout_overlap(report, target: Path, cache_dirs: list[str]) -> None:
     """holdout ↔ train 内容重合（v0.0.0.68 接进门，**此前从未跑过**）。
 
@@ -1953,6 +2016,7 @@ def main() -> int:
             cases = evaluate_cases(report, target, thresholds, {record.get('source_id') for record in holdout}, args.allow_provisional)
             run_case_self_sufficiency(report, cases)
             run_measurement_claims(report, target)
+            run_unqualified_priority(report, target)
             run_sole_authorship(report, target)
             run_holdout_overlap(report, target, args.cache)
         if args.phase == 'release':
