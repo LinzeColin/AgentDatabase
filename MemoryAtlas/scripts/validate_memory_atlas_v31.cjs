@@ -46,7 +46,7 @@ add("UI-007-existing-atlas-preserved", exists("src/v31/V31App.tsx") && !/V31App|
 add("UI-008-app-wraps-existing-atlas", app.includes("<AppProviders>") && app.includes("<MemoryAtlasShell>") && app.includes("<FeatureRouter />") && routes.includes('from "../features/v31"') && shell.includes("useMemoryAtlasTheme"), "App composition");
 add("UI-009-private-contract", provider.includes("private_full_fidelity_read_only_analytics") && provider.includes("direct_stable_memory_mutation === false"), "runtime validation");
 add("UI-010-public-private-coexist", atlas.includes("public_redacted_read_only_visualization") && atlas.includes("private_full_fidelity_read_only_analytics"), "both source modes accepted");
-add("UI-011-failure-front-end", failureView.includes("Failure-to-Regression Compound Engine") && failureView.includes("Incident → Regression Asset"), "failure compound surface");
+add("UI-011-failure-front-end", failureView.includes("失败沉淀为回归资产") && failureView.includes("错误 → 回归资产 台账"), "failure compound surface");
 add("UI-012-zero-tech-actions", ["立即备份", "诊断并修复", "恢复演练"].every((label) => runtimeView.includes(label)), "three owner actions");
 add("UI-013-no-false-capture-success", runtimeView.includes("只创建源端请求") && runtimeView.includes("不会把排队误报为成功"), "capture request semantics");
 add("UI-014-global-comparison-gate", economyView.includes("没有同口径总体时禁止生成全球百分位"), "benchmark caveat");

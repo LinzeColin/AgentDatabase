@@ -15,6 +15,46 @@
   --ma31-shadow: 0 20px 58px rgba(52, 73, 112, .12);
 }
 
+/* ---------------------------------------------------------------------------
+   Scrolling. The original stylesheet pins body, .app-shell, .workspace and
+   .content-grid to 100dvh with overflow:hidden, because the first ten views are
+   fixed-viewport visualisations. Anything taller is not scrolled, it is clipped
+   and unreachable — measured at 1440x900 the default home view hid 3552px, and
+   the three v31 views hid 82-146px.
+
+   Making the two content columns scrollable is additive: a view that already
+   fits shows no scrollbar and is untouched, a view that overflows becomes
+   reachable. The 100dvh shell is deliberately kept so the sidebar and topbar
+   stay fixed while only the content scrolls.
+   --------------------------------------------------------------------------- */
+.app-shell .content-grid { overflow: visible; }
+.app-shell .content-grid > .view-surface,
+.app-shell .content-grid > .inspector {
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+}
+.app-shell .content-grid > .view-surface { scrollbar-gutter: stable; }
+/* Themes A and C move navigation into a top bar, so the workspace itself is the
+   scroll container rather than a fixed-height grid cell. */
+.app-shell[data-memory-atlas-theme="A"] > .workspace,
+.app-shell[data-memory-atlas-theme="C"] > .workspace {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* Horizontal overflow. .lens-state-strip is overflow:hidden inside a fixed
+   grid track, so its content was silently cut off by 38-101px on every view.
+   Let it scroll on its own axis instead of truncating. */
+.app-shell .interaction-lens { grid-template-columns: minmax(160px, 1fr) auto auto minmax(96px, .4fr) minmax(160px, .9fr); }
+.app-shell .lens-state-strip {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: thin;
+}
+.app-shell .lens-state-strip::-webkit-scrollbar { height: 4px; }
+
 /* The document root is authored dark (:root { background: #101014 }). The theme
    provider mirrors the mode onto <html>, so the page behind the shell follows
    the selected mode instead of showing a black gutter under the light layout. */

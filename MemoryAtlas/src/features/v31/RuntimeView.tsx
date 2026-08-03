@@ -17,15 +17,15 @@ export function RuntimeView() {
     } finally { setBusy(null); }
   };
   const chain = useMemo(() => [
-    { label: "本机采集", state: snapshot?.run.state ?? "UNKNOWN", icon: HardDrive },
-    { label: "R2 对象", state: snapshot?.run.objects?.length ? `${snapshot.run.objects.length} 个已登记` : "UNKNOWN", icon: Database },
-    { label: "Private-Database", state: snapshot ? "事实投影可读" : "UNKNOWN", icon: ShieldCheck },
+    { label: "本机采集", state: snapshot?.run.state ?? "未知", icon: HardDrive },
+    { label: "R2 对象", state: snapshot?.run.objects?.length ? `${snapshot.run.objects.length} 个已登记` : "未知", icon: Database },
+    { label: "Private-Database", state: snapshot ? "事实投影可读" : "未知", icon: ShieldCheck },
     { label: "OVH 处理", state: snapshot?.run.state === "REBUILT_FROM_AUTHORITIES" ? "已重建" : "等待运行证据", icon: RefreshCw },
   ], [snapshot]);
   return (
     <div className="ma31-view ma31-runtime" data-v31-view="runtime">
       <StateBanner />
-      <header className="ma31-view-heading"><div><p className="ma31-kicker">Runtime · Recovery · Self-heal</p><h1>系统运行</h1>
+      <header className="ma31-view-heading"><div><p className="ma31-kicker">运行 · 恢复 · 自愈</p><h1>系统运行</h1>
         <p>每一段都显示真实状态、时间、责任边界和失败恢复。点击“立即备份”只创建源端请求，不会把排队误报为成功。</p></div></header>
       <section className="ma31-runtime-chain">{chain.map(({ label, state, icon: Icon }) => <article key={label}>
         <Icon aria-hidden="true" size={22} /><b>{label}</b><span>{state}</span></article>)}</section>
