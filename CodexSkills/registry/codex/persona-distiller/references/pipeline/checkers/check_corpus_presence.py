@@ -119,14 +119,24 @@ def scan(root):
     for d in sorted(pathlib.Path(root).glob("*")):
         if not d.is_dir():
             continue
-        leds = list(d.rglob("source-ledger.jsonl"))
+        leds = sorted(d.rglob("source-ledger.jsonl"))
         if not leds:
             rows.append((d.name, None, None, True, 0, 0))
             continue
-        n = sum(1 for line in leds[0].read_text(encoding="utf-8", errors="replace").splitlines()
+        # ★★ 一个目录里有**多份账本**，说明它是**容器不是工作区**。
+        #    2026-08-04 实测：`--root` 传成 persona-distiller 时，`_corpora`（17 个工作区）
+        #    被**collapse 成一行**——取 leds[0] 的 55 条账本、数全部 2222 个 .txt，
+        #    然后**报绿**。判据绿了，但它扫的根本不是这些人。
+        #    **这是「判据绿了却指错了文件」的第四次**，所以这里必须下沉而不是猜。
+        if len(leds) > 1:
+            for row in scan(d):
+                rows.append((f"{d.name}/{row[0]}",) + tuple(row[1:]))
+            continue
+        led = leds[0]
+        n = sum(1 for line in led.read_text(encoding="utf-8", errors="replace").splitlines()
                 if line.strip())
         t = len([p for p in d.rglob("*.txt") if "raw" in p.parts])
-        resolved, bad = verify_checksums(leds[0])
+        resolved, bad = verify_checksums(led)
         rows.append((d.name, n, t, t < n * RATIO, len(bad), resolved))
     return rows
 
@@ -247,6 +257,25 @@ def selftest() -> int:
         mk("wip-l", "evidence", 30, 30, corrupt=0)
         r = {x[0]: x for x in scan(root)}
         chk("30 条全部指得到 → 解析条数 30", r["wip-l"][5] == 30)
+
+    print("── ★★ 反向对照 ⑨：**容器目录不许被 collapse 成一行** ──")
+    with tempfile.TemporaryDirectory() as td:
+        root = pathlib.Path(td)
+        # root/容器/{甲,乙}/ ——两个工作区，各一份账本
+        for who, cnt in (("jia", 2), ("yi", 3)):
+            w = root / "container" / who
+            (w / "raw").mkdir(parents=True)
+            lines = []
+            for i in range(cnt):
+                f = w / "raw" / f"s{i}.txt"
+                f.write_text(f"x{i}", encoding="utf-8")
+                lines.append(json.dumps({
+                    "local_path": f"raw/s{i}.txt",
+                    "checksum": hashlib.sha256(f.read_bytes()).hexdigest()}))
+            (w / "source-ledger.jsonl").write_text("\n".join(lines) + "\n", encoding="utf-8")
+        got = {r[0] for r in scan(root)}
+        chk("下沉出两行（container/jia、container/yi），而不是合成一行",
+            got == {"container/jia", "container/yi"})
 
     print(f"\n{'✓ 自测全过' if not fails else f'✗ **{len(fails)} 项未过**'}")
     return 0 if not fails else 2
