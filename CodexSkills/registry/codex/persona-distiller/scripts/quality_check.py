@@ -877,6 +877,26 @@ def run_content_checks(report, target: Path, cache_dirs: list[str]) -> None:
         else:
             review['quote_locator'] = '✓ 每条长引文同段内都能找到坐标线索'
 
+    # ── v0.0.0.40：同一段语料被多处引用时并排列出（**只列不判**）────────
+    #   Lister #108 第 2 轮，两席各自独立报出同一处：boundary-01 据 PREFACE 说
+    #   「选目是我自己定的」，refusal-stop-02 引同样两句却说「这样讲就说过头了」。
+    #   代价实测：boundary 套组 0.8875 → 0.8300，把一道**本来已经过了**的 deep 门
+    #   （0.85）打回不过。根因是同一说法我改了两处、漏了第三处。
+    #   本件不判两处结论是否互相否定（那要读懂中文语义），
+    #   它把 32 题压成几组并排，让人在几行内看完。**不阻塞。**
+    if payload.exists():
+        code, out = run('check_shared_anchor.py', ['--answers', str(payload)])
+        if code == -1:
+            review['checker_missing'] = out
+        elif code == 2:
+            report.error('content.selftest-failed',
+                         'check_shared_anchor 负对照未过——其检查结论不作数')
+        else:
+            head = next((l for l in out.splitlines() if l.strip()), '')
+            review['shared_anchor'] = f'⚠ 只列不判，须逐组人工读：{head.strip()[:120]}'
+    else:
+        review['shared_anchor'] = 'evals/judge_payload.v1.json 不在——**同源引用未比对（不是通过）**'
+
     # ── 只列不判：写进 warnings，不拦 ────────────────────────────────
     for script, argv, key in (
             ('check_absence_claims.py', ['--workspace', str(target)], 'absence_claims'),
