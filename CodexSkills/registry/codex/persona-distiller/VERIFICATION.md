@@ -1,6 +1,6 @@
-# Release verification — Persona Distiller v0.0.0.49
+# Release verification — Persona Distiller v0.0.0.50
 
-Date: 2026-08-04（v0.0.0.49，下表已重跑）
+Date: 2026-08-04（v0.0.0.50，下表已重跑）
 
 > **本文件记录「当前发布号的复验结果」，不是历史归档。**
 > 版本号必须等于根目录 `VERSION`，由 `scripts/check_contract_drift.py` 强制。
@@ -10,7 +10,7 @@ Date: 2026-08-04（v0.0.0.49，下表已重跑）
 > bundle 构不出来、97 人、59 用例），**三件当时都已不成立**。
 > 改过标题的旧正文会冒充当前复验，比标题陈旧更糟。已从工具中移除该行为。
 >
-> 本次（v0.0.0.49）**是真的重跑了一遍**，下表每一行都是本次实跑输出。
+> 本次（v0.0.0.50）**是真的重跑了一遍**，下表每一行都是本次实跑输出。
 
 ## Result
 
@@ -27,7 +27,7 @@ Date: 2026-08-04（v0.0.0.49，下表已重跑）
 | Offline unit / integration / concurrency tests | **70 / 70 passed** | `python3 -m pytest tests/ -q` |
 | **全部检查器自测（v0.0.0.47 起逐件跑）** | **27 / 27 passed，0 未过、0 缺负对照**（v0.0.0.48 时 4 件根本没有 `--self-test`，见下节） | 逐件 `check_*.py --self-test` |
 | **★★★★★★★ 题面自足门（v0.0.0.48 新增，只报不拦，接进 synthesis／release，见下节）** | **passed**（**15 项自测，其中 7 组反向对照，含第一版实测误报的 6 道真题面**）；**十个人物 322 道真题面复扫：恰好报出两席点名的那一道** | `check_case_self_sufficiency.py --self-test` + 对十个工作区 `cases.jsonl` 实跑 |
-| **★★★★★★ 承重人名门（v0.0.0.47 新增，只报不拦，见下节）** | **passed**（**12 项自测，其中 7 条反向对照**）；**真实数据实测**：Osler #110 第 2 轮扫出 `Henry A. Christian` 全名 P1 命中 **0**（S1 2 / S2 1），第 3 轮删后 **0 个查无实据** | `check_unsourced_names.py --self-test` + 对 Osler 两轮候选答案实跑 |
+| **★★★★★★ 承重人名门（v0.0.0.47 新增／v0.0.0.50 接进发布门，见下节）** | **passed**（**12 项自测，其中 7 条反向对照**）；**真实数据实测**：Osler #110 第 2 轮扫出 `Henry A. Christian` 全名 P1 命中 **0**（S1 2 / S2 1），第 3 轮删后 **0 个查无实据**；**接线负对照**：往真载荷里植入 `Reginald Fitzhugh`，发布门 `content.unsourced-name` **实拦** | `check_unsourced_names.py --self-test` + 对 Osler 两轮候选答案实跑 |
 | 合同漂移门（版本三轴 + 身份合同 + 检查器镜像） | **0 条** | `scripts/check_contract_drift.py` |
 | 合同漂移门的负对照 | passed（坏样本 5 类全抓出，钉住的 builder 版本未被误伤） | `check_contract_drift.py --self-test` |
 | 归属门的负对照 | passed（**8 正 + 10 反**，另含 1 条只报不判，**外加 5 例非西方姓名形态**） | `check_authorship.py --self-test` |

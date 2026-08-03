@@ -87,3 +87,25 @@ OK penicillin-1929-REPRINT-who2001 PMC2566493 pages 11 chars 10 bylineFLEMING Fa
 OK penicillin-1929-REPRINT-who2001 PMC2566493 pages 11 chars 10 bylineFLEMING False
 OK penicillin-1929-REPRINT-bjep1979 PMC2041430 pages 13 chars 29338 bylineFLEMING True
 FAIL-http penicillin-1929-REPRINT-bjep1979 PMC2041430 <HTTPError 429: 'Too Many Requests'>
+OK nobel-lecture-fleming-1945 chars 17047
+OK nobel-lecture-florey-1945 chars 23655
+OK nobel-lecture-chain-1945 chars 69586
+OK nobel-ceremony-speech-1945 chars 16433
+OK nobel-banquet-fleming-1945 chars 6237
+OK nobel-bio-fleming chars 4489
+OK nobel-bio-florey chars 4200
+OK nobel-bio-chain chars 4453
+OK nobel-summary-1945 chars 652
+OK lysozyme-1922-prsb philtrans00877782 chars 30546 | FLEMING in head: True
+OK lysozyme-further-1922-prsb-CO philtrans09874656 chars 28312 | FLEMING in head: True
+OK acne-vaccines-1909 b33429583_0001 chars 32126 | FLEMING in head: True
+OK salvarsan-1911 b33440645 chars 21509 | FLEMING in head: True
+OK wound-infections-1920-CO cu31924000312599 chars 467866 | FLEMING in head: True
+OK anaerobic-report-1919-CO cu31924000323687 chars 522136 | FLEMING in head: False
+FAIL-badpage fleming-letter-1945 58
+OK s2-ics-fleming-churchill-myth chars 3198
+OK s2-hillsdale-fleming-churchill-myth chars 12430
+OK s2-langworth-fleming-myth chars 4147
+OK s1-obit-jclinpath-1955 PMC1023893 pages 2 chars 7418 bylineFLEMING True
+OK s1-obit-rcs-1955 PMC2377887 pages 3 chars 6952 bylineFLEMING True
+OK s1-obit-bjvd-1955 PMC1054019 pages 1 chars 4283 bylineFLEMING True

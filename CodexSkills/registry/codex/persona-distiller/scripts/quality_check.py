@@ -897,6 +897,39 @@ def run_content_checks(report, target: Path, cache_dirs: list[str]) -> None:
     else:
         review['shared_anchor'] = 'evals/judge_payload.v1.json 不在——**同源引用未比对（不是通过）**'
 
+    # ── v0.0.0.49：答案里的人名，回语料查它有没有依据（**只列不判**）────────
+    #   Osler #110 第 2 轮我写「第 9 版起是 McCrae 续修，**后来是 Henry A. Christian**」。
+    #   McCrae 有扉页依据，Christian 没有——**那半句是我编的。**
+    #   席位 E 在盲判里说中了，但**它证实不了**：评委手上没有语料。
+    #   两席三轮共六次评审，对这半句只能停在「起疑」。
+    #   与 `check_quote_integrity` 同一道理：**评委验不了引文，一行 grep 全抓得出。**
+    #   **必须接进来**——没人调用的判据等于不存在，而这条正是零编造那条铁律的机检对应物。
+    if cache_dirs and payload.exists():
+        argv = ['--answers', str(payload), '--cache', cache_dirs[0]]
+        led = target / 'evidence' / 'source-ledger.jsonl'
+        if led.exists():
+            argv += ['--ledger', str(led)]
+        code, out = run('check_unsourced_names.py', argv)
+        if code == -1:
+            review['checker_missing'] = out
+        elif code == 3:
+            report.error('content.names-unresolved',
+                         '承重人名**未核成**（不是通过）：一份语料都没读到')
+        elif code == 2:
+            report.error('content.selftest-failed',
+                         'check_unsourced_names 负对照未过——其检查结论不作数')
+        elif code != 0:
+            # 硬错：语料与项目记录里都查不到这个名字，**那是编造的形状**
+            bad = next((l for l in out.splitlines() if l.startswith('✗')), '')
+            report.error('content.unsourced-name',
+                         f'答案里有查无实据的人名——{bad.strip()[:120]}')
+        else:
+            soft = next((l for l in out.splitlines() if l.startswith('⚠')), '')
+            review['unsourced_names'] = soft.strip()[:140] or '✓ 没有查无实据的人名'
+    else:
+        review['unsourced_names'] = (
+            '缺 --cache 或 judge_payload，**承重人名未核（不是通过）**')
+
     # ── v0.0.0.41：这道门在当前评委分布下够不够得着 ──────────────────
     #   Pasteur / Koch / Lister 连续三人死在 min_fact 0.93。
     #   到第三人第三轮才去数两席的分数分布：席 E 在 130 次候选打分里
