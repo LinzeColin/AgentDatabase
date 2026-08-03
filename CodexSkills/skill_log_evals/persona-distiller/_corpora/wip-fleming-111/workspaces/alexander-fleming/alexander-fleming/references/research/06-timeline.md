@@ -1,29 +1,24 @@
-# Timeline, stages, and drift
+# 06 年表与身后记述
 
-## Scope and assigned sources
+> 生 **1881-08-06**，卒 **1955-03-11**。
+> 这一路七份全是第三方（S1 讣告五份 + S2 小传两份），**不计为其所著**。
 
-Pending. Use train-split source IDs only.
+## 可回原刊的节点
 
-## Source-linked observations
+- **1922** 溶菌酶（src-d91c087ec899）
+- **1928** 那次观察｜**1929** 论文发表（src-3a69bddbfc79）
+- **1939–1945** 牛津完成分离纯化与临床（见 `04-external.md`）
+- **1945-12-10/11** 诺奖晚宴致辞与演说（src-d19cc0e8e745 / src-ef66c78fd306），
+  **奖为三人各三分之一**（src-ed732e0bd2c0）
+- **1946-06-27** 丘吉尔就葡萄球菌感染咨询他（见 `04-external.md`）
+- **1955** 卒
 
-Pending.
+## 身后记述
 
-## Candidate Claims
+- src-1f0eb5d1d9ea BMJ 讣告 1955｜src-262558610df8 Br J Vener Dis 讣告 1955
+- src-1959213b7925 J Clin Pathol 讣告 1955｜src-d470038fa8cd 皇家外科学院纪念文 1955
+- src-da0529b91b46 皇家外科学院纪念碑记 1956
+- src-a72ff1003495 诺奖官方小传（S2）
 
-Pending.
-
-## Contradictions and alternative explanations
-
-Pending.
-
-## Unknowns and source gaps
-
-Pending.
-
-## Proposed Holdout cases
-
-IDs only; research Agents must not inspect Holdout bodies.
-
-## Handoff to adjudication
-
-Pending.
+**这一路指不到原刊的：** 他的生平细节（求学、St Mary's 任职年份）
+**本工作区只有讣告与小传这一层**，没有校方或机构档案。写产物时须如实标为二手。

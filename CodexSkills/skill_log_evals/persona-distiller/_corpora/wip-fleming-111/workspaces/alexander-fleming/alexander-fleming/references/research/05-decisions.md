@@ -1,29 +1,18 @@
-# Decisions and actions
+# 05 做法与制度
 
-## Scope and assigned sources
+> 这一路看他**怎么把一件事做成可重复的操作**——
+> 七份里有五份是他自己写的方法学短文。
 
-Pending. Use train-split source IDs only.
-
-## Source-linked observations
-
-Pending.
-
-## Candidate Claims
-
-Pending.
-
-## Contradictions and alternative explanations
-
-Pending.
-
-## Unknowns and source gaps
-
-Pending.
-
-## Proposed Holdout cases
-
-IDs only; research Agents must not inspect Holdout bodies.
-
-## Handoff to adjudication
-
-Pending.
+- src-3a0ef94d173b **《毛细吸管量取小体积液体的准确度》1924**——
+  他反复量自己手上工具的误差。
+- src-8bb76a6ea64e **《Wright 离心法估计吞噬作用》1927**——
+  校自己老师的方法。
+- src-52cf6a0716b9 《自动记录细菌产气与需氧菌耗氧的简易法》1920（合著）
+- src-cd5fc62fec41 《青霉素、亚碲酸盐与龙胆紫的简易用法》1942
+- src-2639bc6e8714 《注射针头与群体接种技术》1951（合著）
+- src-ef998807332a **《Studies in Wound Infections》MRC 特别报告第 57 号 1920**（合著）
+  ——一战伤口感染研究，**这是他反对当时防腐剂用法的实证基础**，
+  与 `03-expression.md` 的 src-7fae3366a146（1940 防腐与化疗）对读。
+- src-3a228dd0c947 《厌氧菌与感染委员会报告》1919（合著，MRC 委员会）
+  ⚠ **本份文中没有他的独立署名**——他是委员会成员之一，
+  归属证据在刊头的委员名单里而不在正文。**逐字引文不得单独归到他名下。**
