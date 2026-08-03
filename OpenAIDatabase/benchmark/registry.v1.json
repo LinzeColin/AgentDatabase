@@ -1,0 +1,61 @@
+{
+  "schema_version": "memory_atlas.benchmark_registry.v1",
+  "published_for_product_version": "v0.0.0.32",
+  "rule": "Only exact taxonomy/unit/window/population/inclusion/sample matches may emit a direct delta; never a personal percentile.",
+  "benchmarks": [
+    {
+      "benchmark_id": "openai_2025_doing_share",
+      "label_zh": "ChatGPT 执行型消息占比",
+      "metric_key": "doing_share",
+      "value": 0.4,
+      "taxonomy_id": "openai_asking_doing_expressing_v1",
+      "unit": "share_of_messages",
+      "window_definition": "publisher_study_period_2025",
+      "population_scope": "consumer_chatgpt_privacy_preserving_sample",
+      "inclusion_rule": "classified_consumer_messages",
+      "minimum_sample": 100,
+      "source": {
+        "publisher": "OpenAI",
+        "title": "How people are using ChatGPT",
+        "source_url": "https://openai.com/index/how-people-are-using-chatgpt/",
+        "published_at": "2025-09-15"
+      }
+    },
+    {
+      "benchmark_id": "openai_2026_task_breadth_ratio",
+      "label_zh": "注册六个月后的任务广度倍数",
+      "metric_key": "task_breadth_ratio",
+      "value": 2.0,
+      "taxonomy_id": "openai_53_category_classifier_2026",
+      "unit": "ratio_to_initial_month",
+      "window_definition": "six_month_user_tenure",
+      "population_scope": "sampled_consumer_chatgpt_cohorts",
+      "inclusion_rule": "eligible_active_users",
+      "minimum_sample": 100,
+      "source": {
+        "publisher": "OpenAI",
+        "title": "How ChatGPT adoption has expanded",
+        "source_url": "https://openai.com/index/how-chatgpt-adoption-has-expanded/",
+        "published_at": "2026-06-30"
+      }
+    },
+    {
+      "benchmark_id": "anthropic_2026_success_association",
+      "label_zh": "高使用经验与任务成功率的关联",
+      "metric_key": "success_rate_association",
+      "value": 0.04,
+      "taxonomy_id": "anthropic_learning_curve_full_controls_2026",
+      "unit": "percentage_point_share_as_decimal",
+      "window_definition": "publisher_cross_section_2026",
+      "population_scope": "claude_ai_conversation_sample",
+      "inclusion_rule": "research_classified_conversations",
+      "minimum_sample": 100,
+      "source": {
+        "publisher": "Anthropic",
+        "title": "Economic Index: Learning curves",
+        "source_url": "https://www.anthropic.com/research/anthropic-economic-index-march-2026-report",
+        "published_at": "2026-03-24"
+      }
+    }
+  ]
+}

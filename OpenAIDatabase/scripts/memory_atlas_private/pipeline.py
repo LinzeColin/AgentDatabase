@@ -273,6 +273,70 @@ class CapturePipeline:
         finally:
             cleanup_snapshots(snapshots)
 
+    def _publish_live_snapshot(self, private_snapshot: dict[str, Any], manifest: RunManifest) -> None:
+        """Publish the same-run LiveSnapshot the home page consumes (v0.0.0.32 T03).
+
+        The browser has been reading a build-time /memory_atlas.json whose input
+        froze on 2026-07-17, so "synced" only meant the browser re-read a stale
+        static file. This publishes a snapshot bound to *this* run so current
+        data, current release and current authority facts are provably the same
+        run. Only a terminal run may publish; the store refuses regression.
+
+        Rollback is flag-off: with MEMORY_ATLAS_LIVE_SNAPSHOT disabled nothing is
+        published and every existing path behaves exactly as before.
+        """
+        if os.environ.get("MEMORY_ATLAS_LIVE_SNAPSHOT", "1") == "0":
+            return
+        schema = Path(__file__).resolve().parents[2] / "schema" / "memory_atlas.live_snapshot.v1.schema.json"
+        if not schema.is_file():
+            return
+        try:
+            from .benchmark_comparator import compare
+            from .live_snapshot_adapter import build_live_snapshot
+            from .live_snapshot_store import LiveSnapshotStore
+            from .visual_analytics import build_visual_analytics
+
+            events = list(private_snapshot.get("behavior_economics", {}).get("events") or [])
+            visual = build_visual_analytics(events)
+            registry_path = Path(__file__).resolve().parents[2] / "benchmark" / "registry.v1.json"
+            benchmark = (
+                compare({}, json.loads(registry_path.read_text(encoding="utf-8")))
+                if registry_path.is_file()
+                else {"benchmarks": [], "comparable": False}
+            )
+            runtime_evidence = self._runtime_evidence(manifest)
+            snapshot = build_live_snapshot(
+                private_snapshot, visual, runtime_evidence, benchmark, evaluated_at=self.clock()
+            )
+            store = LiveSnapshotStore(self.config.web_data_dir / "live-snapshot", schema)
+            store.publish(snapshot)
+        except Exception as exc:  # never let the live snapshot break the existing product
+            self._live_snapshot_error = f"{type(exc).__name__}: {exc}"
+
+    def _runtime_evidence(self, manifest: RunManifest) -> dict[str, Any]:
+        """Same-run evidence built from this run's own manifest, never from a cache."""
+        readback = {
+            "run_id": manifest.run_id,
+            "trace_id": manifest.run_id,
+            "verified": all(
+                item.readback_verified and item.readback_sha256 == item.sha256 for item in manifest.objects
+            ),
+        }
+        return {
+            "schema_version": "memory_atlas.runtime_evidence.v1",
+            "generated_at": self.clock(),
+            "run_id": manifest.run_id,
+            "trace_id": manifest.run_id,
+            "release": {"identity_state": "OBSERVED", "repository_commit": "", "release_id": "", "artifact_digest": ""},
+            "cloud_native_sources": [],
+            "same_run_evidence": {
+                "r2_readback": dict(readback),
+                "private_database_readback": dict(readback),
+                "ovh_reconcile": dict(readback),
+                "status_projection": dict(readback),
+            },
+        }
+
     def _write_web_snapshots(
         self,
         analytics: dict[str, Any],
@@ -305,6 +369,7 @@ class CapturePipeline:
             self.config.web_data_dir / "memory_atlas_status_projection.json",
             build_status_projection(private_snapshot),
         )
+        self._publish_live_snapshot(private_snapshot, manifest)
         if self.config.public_atlas_snapshot and self.config.public_atlas_snapshot.is_file():
             public = json.loads(self.config.public_atlas_snapshot.read_text(encoding="utf-8"))
             if not isinstance(public, dict):

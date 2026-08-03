@@ -1,0 +1,49 @@
+{
+ "schema_version": "memory_atlas.static_bypass_reproduction.v1",
+ "generated_at": "2026-08-04T00:00:00Z",
+ "acceptance_ids": [
+  "MA-LIVE-AC-003",
+  "MA-LIVE-AC-004"
+ ],
+ "classification": "apply",
+ "browser_atlas_source": {
+  "request": "GET /memory_atlas.json",
+  "served_by": "nginx static file from /srv/linze/apps/memory-atlas/current/dist",
+  "not_an_api": true,
+  "bytes": 1035746,
+  "overview": {
+   "generated_at": "2026-07-16T02:20:09.000Z",
+   "active_memory_count": 6,
+   "node_count": 156,
+   "edge_count": 720,
+   "conversation_count": 379
+  }
+ },
+ "live_plane": {
+  "request": "GET /api/v31/status",
+  "served_by": "nginx proxy -> host.docker.internal:18766 -> memory-atlas-api",
+  "observed_at": "2026-08-03T21:35:15Z",
+  "run_state": "REBUILT_FROM_AUTHORITIES",
+  "event_count": 112290,
+  "source_coverages": 10,
+  "failure_compound_incidents": 29,
+  "refresh_interval": "~15min via memory-atlas-reconcile.timer"
+ },
+ "first_broken_link_confirmed": true,
+ "root_cause": "the two planes use different data models and are never joined; rebuilding memory_atlas.json from current OpenAIDatabase/data emits byte-identical output because that input froze on 2026-07-17",
+ "builder_rerun_proof": {
+  "command": "build_memory_atlas_data.py --database-dir OpenAIDatabase",
+  "output_bytes": 1035746,
+  "identical_to_shipped": true,
+  "only_field_changed": "generated_at"
+ },
+ "frozen_input": {
+  "OpenAIDatabase/data/memory": {
+   "files_changed_since_2026-07-20": 0
+  },
+  "OpenAIDatabase/data/processed": {
+   "files_changed_since_2026-07-20": 0
+  }
+ },
+ "no_stitched_screenshots": true
+}

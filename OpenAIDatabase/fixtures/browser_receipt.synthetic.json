@@ -1,0 +1,40 @@
+{
+  "schema_version": "memory_atlas.browser_receipt.v1",
+  "fixture_kind": "SYNTHETIC_NO_PRODUCTION_CLAIM",
+  "captured_at": "2026-08-03T10:18:30Z",
+  "page_url": "https://memoryatlas.linzezhang.com/",
+  "run_id": "synthetic-run-20260803T101500Z",
+  "trace_id": "synthetic-trace-20260803T101500Z",
+  "release_id": "20260803T101000Z-d8e343c7590e",
+  "values": {
+    "event_count": 9,
+    "verified_outcome_rate_event": 0.555556,
+    "verified_outcome_rate_work_time": 0.642857,
+    "work_time_coverage_rate": 0.888889,
+    "outcome_evidence_coverage_rate": 0.666667,
+    "verification_debt_proxy_event": 0.444444,
+    "top_action_recommendation_id": "rec-verification-first",
+    "freshness_state": "DEGRADED",
+    "benchmark_state": "DIRECTION_ONLY",
+    "source_completed_at": "2026-08-03T10:15:00Z",
+    "deployment_revision": "memory-atlas-blue-synthetic",
+    "visual_count": 3
+  },
+  "console_error_count": 0,
+  "network_error_count": 0,
+  "deployment_revision": "memory-atlas-blue-synthetic",
+  "panel_identity": {
+    "run_id": "synthetic-run-20260803T101500Z",
+    "trace_id": "synthetic-trace-20260803T101500Z",
+    "release_id": "20260803T101000Z-d8e343c7590e",
+    "deployment_revision": "memory-atlas-blue-synthetic"
+  },
+  "api_status": 200,
+  "api_cache_control": "private, no-store, max-age=0",
+  "api_identity": {
+    "run_id": "synthetic-run-20260803T101500Z",
+    "trace_id": "synthetic-trace-20260803T101500Z",
+    "release_id": "20260803T101000Z-d8e343c7590e",
+    "deployment_revision": "memory-atlas-blue-synthetic"
+  }
+}

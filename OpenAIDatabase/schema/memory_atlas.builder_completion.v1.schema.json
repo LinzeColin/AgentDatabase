@@ -1,0 +1,133 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://memoryatlas.linzezhang.com/schema/memory_atlas.builder_completion.v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "subject",
+    "usability",
+    "evidence_maturity",
+    "acceptance_results",
+    "product_verdict",
+    "independent_verifier"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "memory_atlas.builder_completion.v1"
+    },
+    "subject": {
+      "type": "object",
+      "required": [
+        "repository_commit",
+        "artifact_digest",
+        "release_id",
+        "deployment_revision",
+        "run_id",
+        "trace_id"
+      ],
+      "properties": {
+        "repository_commit": {
+          "type": "string",
+          "minLength": 1
+        },
+        "artifact_digest": {
+          "type": "string",
+          "minLength": 1
+        },
+        "release_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "deployment_revision": {
+          "type": "string",
+          "minLength": 1
+        },
+        "run_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "trace_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "usability": {
+      "enum": [
+        "U0",
+        "U1",
+        "U2",
+        "U3",
+        "U4",
+        "U5",
+        "U6"
+      ]
+    },
+    "evidence_maturity": {
+      "enum": [
+        "E0",
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ]
+    },
+    "acceptance_results": {
+      "type": "array",
+      "minItems": 16,
+      "items": {
+        "type": "object",
+        "required": [
+          "acceptance_id",
+          "verdict",
+          "evidence_refs"
+        ],
+        "properties": {
+          "acceptance_id": {
+            "type": "string"
+          },
+          "verdict": {
+            "enum": [
+              "PASS",
+              "FAIL",
+              "BLOCKED"
+            ]
+          },
+          "evidence_refs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "product_verdict": {
+      "enum": [
+        "PASS",
+        "CONDITIONAL_PASS",
+        "FAIL",
+        "BLOCKED"
+      ]
+    },
+    "independent_verifier": {
+      "type": "object",
+      "required": [
+        "independent",
+        "report_ref"
+      ],
+      "properties": {
+        "independent": {
+          "const": true
+        },
+        "report_ref": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

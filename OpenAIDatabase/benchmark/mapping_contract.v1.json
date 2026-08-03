@@ -1,0 +1,17 @@
+{
+  "schema_version": "memory_atlas.benchmark_mapping_contract.v1",
+  "default": "NOT_COMPARABLE",
+  "allowed_states": [
+    "DIRECTLY_COMPARABLE",
+    "DIRECTION_ONLY",
+    "NOT_COMPARABLE",
+    "INSUFFICIENT_DATA"
+  ],
+  "hard_rules": [
+    "no personal percentile",
+    "no taxonomy coercion",
+    "no unit conversion without explicit versioned mapping",
+    "sample minimum required",
+    "source URL and publication date required"
+  ]
+}
