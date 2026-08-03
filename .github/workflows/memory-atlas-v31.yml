@@ -1,4 +1,4 @@
-name: Memory Atlas v0.0.0.31 acceptance
+name: Memory Atlas P0 recovery acceptance
 
 on:
   push:
@@ -16,7 +16,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: memory-atlas-v31-${{ github.ref }}
+  group: memory-atlas-p0-recovery-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
@@ -56,7 +56,7 @@ jobs:
         working-directory: MemoryAtlas
         run: |
           npm run lint
-          npm run validate:v31
+          npm run validate:preservation
           npm run validate:whole-project
           npm run build
       - name: Fail closed on unresolved merge or placeholder markers
