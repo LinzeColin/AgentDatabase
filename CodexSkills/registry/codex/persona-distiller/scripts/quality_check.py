@@ -1599,6 +1599,80 @@ def run_suite_single_drag(report, target: Path, thresholds: dict) -> None:
     report.metrics['suite_single_drag'] = info
 
 
+def run_corpus_ceiling(report, target: Path, profile: str) -> None:
+    """抓源台账的一手上限够得着哪一档（v0.0.0.76，**只写 metrics**）。
+
+    #115 Slavyanov 抓了 65 分钟、落 53 份（`min_sources` 45 是够的），
+    才发现一手只有 8 份、占比 **0.1509**——deep 要的一手是 `ceil(45×0.65)` = **30 份**。
+    **「45 份源」一直挂在嘴边，「30 份一手」从来没被说出来过。**
+
+    **只写 metrics，不设门**：真正拦人的是 `min_primary_ratio` / `min_lanes` 本身，
+    本件的用处是**在抓之前**（或至少在判分之前）把那个绝对数说出来。
+
+    **老台账（竖线格式、无分档列）必须报「判不了」**——
+    十份台账实测只有 5 份是本件认得的格式，
+    **把「没有分档列」读成「零份一手」会给另外五个人伪造一条硬失败。**
+    """
+    here = Path(__file__).resolve().parent
+    script = here / 'check_corpus_ceiling.py'
+    if not script.exists():
+        report.metrics['corpus_ceiling'] = {'状态': '检查器未安装，**未核验**（不是通过）'}
+        return
+    spec = importlib.util.spec_from_file_location('_pd_ceiling', script)
+    module = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(module)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['corpus_ceiling'] = {'状态': f'加载失败，**未核验**：{exc}'}
+        return
+    buffer = io.StringIO()
+    with contextlib.redirect_stdout(buffer):
+        if module.selftest() != 0:
+            report.metrics['corpus_ceiling'] = {'状态': '**负对照未过，其结论不作数**'}
+            return
+
+    # 抓源台账在 `<wip-…>/raw/_ids.txt`，工作区在 `<wip-…>/workspaces/<slug>/<slug>`——
+    # **要往上走三层才够得到**（射程写窄和判据出错，表征一样是「没报错」）。
+    ledger = None
+    base = target
+    for _ in range(5):
+        cand = base / 'raw' / '_ids.txt'
+        if cand.is_file():
+            ledger = cand
+            break
+        if base.parent == base:
+            break
+        base = base.parent
+    if ledger is None:
+        report.metrics['corpus_ceiling'] = {'状态': '找不到抓源台账 raw/_ids.txt，**未核验**（不是通过）'}
+        return
+
+    rows, note = module.parse_ledger(ledger)
+    if rows is None:
+        report.metrics['corpus_ceiling'] = {
+            '台账': str(ledger), '状态': f'**未核验**（不是通过）：{note}'}
+        return
+
+    total = len(rows)
+    primary = sum(1 for tier, _ in rows if tier in module.PRIMARY_TIERS)
+    lanes = len({lane for _, lane in rows if lane})
+    need = module.required_primary(profile) if profile in module.PROFILES else None
+    entry = {
+        '台账': str(ledger),
+        '一手份数': primary,
+        '台账总份数': total,
+        '一手占比': round(primary / total, 4) if total else None,
+        '有材料的道数': lanes,
+    }
+    if need is not None:
+        ok, shrink, bad = module.verdict(primary, total, lanes, profile)
+        entry[f'{profile} 要的一手份数'] = need
+        entry['够得着吗'] = ('够不着：' + '；'.join(bad) if not ok
+                             else ('**只有丢掉已取到的材料才够得着——那是缩分母，不是达标**'
+                                   if shrink else '吃全部材料就够得着'))
+    report.metrics['corpus_ceiling'] = entry
+
+
 def run_unqualified_priority(report, target: Path) -> None:
     """无限定的首创声明（v0.0.0.73，**只写 metrics**）。
 
@@ -2008,6 +2082,7 @@ def main() -> int:
         run_ocr_gate(report, target, sources)
         report_own_voice(report, target, meta, sources)
         report_refusal_overflow(report, target)
+        run_corpus_ceiling(report, target, report.profile)
         train_ids = {record.get('source_id') for record in sources if record.get('split') == 'train'}
         evaluate_research(report, target, thresholds, train_ids, args.allow_provisional)
         cases: list[dict[str, Any]] = []

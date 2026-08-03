@@ -1,6 +1,6 @@
-# Release verification — Persona Distiller v0.0.0.75
+# Release verification — Persona Distiller v0.0.0.76
 
-Date: 2026-08-04（v0.0.0.75，下表已重跑）
+Date: 2026-08-04（v0.0.0.76，下表已重跑）
 
 > **本文件记录「当前发布号的复验结果」，不是历史归档。**
 > 版本号必须等于根目录 `VERSION`，由 `scripts/check_contract_drift.py` 强制。
@@ -11,6 +11,16 @@ Date: 2026-08-04（v0.0.0.75，下表已重跑）
 > 改过标题的旧正文会冒充当前复验，比标题陈旧更糟。已从工具中移除该行为。
 >
 > 本次（v0.0.0.69）**是真的重跑了一遍**，下表每一行都是本次实跑输出。
+>
+> ⚠⚠ **v0.0.0.76 复跑时发现：上面这句话在 v0.0.0.70–75 之间不再成立。**
+> 五行数字停在两到四个版本以前——检查器元普查 **30 件**（真值 43）、
+> 真实夹具 **5/19**（真值 6/43）、新鲜度下限 **v0.0.0.37**（真值 v0.0.0.66）、
+> checksum **305 files**（真值 341）、Python 脚本 **66**（真值 84）。
+> 五行全部朝**偏小**的方向错，也就是**每一行都在低报本项目自己的规模**。
+> 没有任何门会说话：`check_contract_drift` 只核首行标题里的版本号，
+> **表格正文不在任何判据的射程里**。
+> **「本表每一行都来自本次实跑」是一句自述**——
+> 而自述不是证据（见 `self-report-is-not-evidence`）。
 
 ## Result
 
@@ -26,7 +36,8 @@ Date: 2026-08-04（v0.0.0.75，下表已重跑）
 |---|---:|---|
 | **★★★★★★★★★★ 答案母版（v0.0.0.53 新增）** | **passed**；三支用 Osler 真数据实跑：真候选**过并落盘 32 条**；每条 ×3 → **中止且候选文件被删**；占位没删 → **点名 `XX-known-01` 并中止** | `scaffold/answers_template.py` 三支实跑 |
 | Offline unit / integration / concurrency tests | **70 / 70 passed** | `python3 -m pytest tests/ -q` |
-| **全部检查器自测（v0.0.0.47 起逐件跑）** | **38 / 38 passed，0 未过、0 缺负对照**（本次实跑：`通过 38　未过 0`）（v0.0.0.48 时 4 件根本没有 `--self-test`，见下节） | 逐件 `check_*.py --self-test` |
+| **全部检查器自测（v0.0.0.47 起逐件跑）** | **44 / 44 passed，0 未过、0 缺负对照**（本次实跑：`通过 44　未过 0`；`check_checkers.py` 审另外 43 件：`可用 43 / 未过 0 / 无负对照 0`）（v0.0.0.48 时 4 件根本没有 `--self-test`，见下节） | 逐件 `check_*.py --self-test` |
+| **★ 语料一手上限（v0.0.0.76 新增，只写 metrics，接进 research）** | **passed**（**11 项自测，其中 6 条反向对照**）；把两条门联立成绝对数：**deep 要 30 份一手**（`ceil(45×0.65)`）、standard 12、quick 4；**十份真台账实跑**：Fleming 45/69=0.6522 ✓、Osler 93/104、Virchow 169/227、Nightingale 82/117 全过，**#115 Slavyanov 8/53=0.1509 退出 1**；**射程如实：只有 5/10 份台账是本件认得的格式**，另外 5 份（#107 Koch 等竖线格式、无分档列）**退出 3 报「未核验（不是通过）」而不是报 0 份一手**；接线两支已在真工作区实跑验证（Fleming 出全数、Koch 出「未核验」） | `check_corpus_ceiling.py --self-test` + 对十份 `raw/_ids.txt` 实跑 + 两个真工作区过 research 门 |
 | **★★★★★★★★★ 长度泄题门（v0.0.0.51 新增，**硬门**，见下节）** | **passed**（**10 项自测，其中 5 组反向对照，正/反夹具都取自实测形状**）；**Osler #110 两轮回验与当时手工结论逐位吻合**（R2 1.30／9 更短、R3 1.30／14 更短）；**接线三支退出码实测** 0／1／3；**v0.0.0.52 在 Osler 真工作区上从「未核」转为实测通过**（`✓ 总体均长比 1.30　候选更短 14/32 = 44%`）| `check_answer_length_leak.py --self-test` + 对 Osler 两轮实跑 |
 | **★★★★★★★ 题面自足门（v0.0.0.48 新增，只报不拦，接进 synthesis／release，见下节）** | **passed**（**15 项自测，其中 7 组反向对照，含第一版实测误报的 6 道真题面**）；**十个人物 322 道真题面复扫：恰好报出两席点名的那一道** | `check_case_self_sufficiency.py --self-test` + 对十个工作区 `cases.jsonl` 实跑 |
 | **★★★★★★ 承重人名门（v0.0.0.47 新增／v0.0.0.50 接进发布门／**v0.0.0.62 去噪**，见下节）** | **passed**（**19 项自测，其中 11 条反向对照**）；**v0.0.0.62 实测去噪**：Fleming #111 第 3 轮一次报出 `Br Med`／`Exp Path`／`Soc Med`／`Biochem`／`Studies`／`Wound Infections` **六个刊名缩写当人名**，改按「著录壳」剥除后 **6 → 0**，而 `**A. Grant Fleming**` 这类**加粗人名仍抽得到**（反向对照 ⑨ 守）；**真实数据实测**：Osler #110 第 2 轮扫出 `Henry A. Christian` 全名 P1 命中 **0**（S1 2 / S2 1），第 3 轮删后 **0 个查无实据**；**接线负对照**：往真载荷里植入 `Reginald Fitzhugh`，发布门 `content.unsourced-name` **实拦** | `check_unsourced_names.py --self-test` + 对 Osler 两轮候选答案实跑 |
@@ -43,19 +54,19 @@ Date: 2026-08-04（v0.0.0.75，下表已重跑）
 | **★★ 归属依据门（v0.0.0.31 新增，硬拦，见下节）** | **passed**（负对照 10 项，含「争议为空」与「没查过」必须分开）；**真工作区实测**：Galen 工作区未声明依据时 exit 1 | `check_attribution_basis.py --self-test`、对 `ws-galen` 实跑 |
 | **★★★★ 方法密度（v0.0.0.36 新增，只报不拦，见下节）** | **passed**（**4 条真实 work-method 夹具，两侧各二** + 1 条反向对照 + 1 条射程对照）；**四个真实工作区实跑**：可复用做法 Galen 0 ／ Vesalius 1 ／ Harvey 1 ／ Jenner 0，**四人全部报出** | `check_fact_density.py --self-test` + 对四人 `claims.jsonl` 实跑 |
 | **★★ 事实密度门（v0.0.0.28 新增／v0.0.0.31 分账本与人物，只报不拦）** | **passed**（负对照含 **4 条真实样本**）；Galen 实测 15 条 `fact` → **人物事实 10 条、账本事实 5 条不计入**，仍 < 要求 12 | `check_fact_density.py --self-test` |
-| 检查器元普查（负对照有没有） | **30 件全部有负对照**（v0.0.0.48 时 23/27，v0.0.0.46 时 19 件，v0.0.0.22 时 11 件 6 OK） | `check_checkers.py scripts/` + 逐件 `--self-test` |
-| **★★ 真实夹具普查（v0.0.0.31 新增，只报不拦）** | **5 / 19 件的负对照里含真实样本夹具**（v0.0.0.34 时 3 / 18，v0.0.0.32 时 2 / 17，v0.0.0.31 时 1 / 16） | `check_checkers.py scripts/` |
+| 检查器元普查（负对照有没有） | **43 件全部有负对照**（`可用 43 / 未过 0 / 不可独立验证 0 / 无负对照 0`；v0.0.0.75 记录里写的 30 件是 v0.0.0.61 那轮的数，**本次实跑纠正**）（v0.0.0.48 时 23/27，v0.0.0.46 时 19 件，v0.0.0.22 时 11 件 6 OK） | `check_checkers.py scripts/` + 逐件 `--self-test` |
+| **★★ 真实夹具普查（v0.0.0.31 新增，只报不拦）** | **6 / 43 件的负对照里含真实样本夹具**（v0.0.0.75 记录里写的 5/19 是旧数，**本次实跑纠正**）（v0.0.0.34 时 3 / 18，v0.0.0.32 时 2 / 17，v0.0.0.31 时 1 / 16） | `check_checkers.py scripts/` |
 | **★★★★★ 引号形态（v0.0.0.46）** | **passed**；**Pasteur #106 实测：扩形态前答案里 11 条外语引文只扫到 4 条，**7 条法文 «» 从未被核过（64%）**；扩后 22 条全扫、0 未命中 | `check_quote_integrity.py --self-test`（新增法文 «» 真实夹具） |
 | **★★★ 引文真实性门（v0.0.0.35 射程扩到答案层，见下节）** | **passed**（4 条构造伪造 + **3 条真实夹具** + **2 条反向对照**）；**真实数据实测**：Jenner 断言层 6 条全绿，扩到答案层后共 **26 条**，其中长 s 还原后才命中 **6 条**（原为静默） | `check_quote_integrity.py --claims … --answers … --cache … --self-test` |
 | **★★★ 语料真伪门（v0.0.0.33 新增，`ingest.py` 入口**硬拦**，见下节）** | **passed**（负对照 8 项，含 **4 条真实样本**）；**真实数据实测**：Jenner 抓源 4 份 HTML 错误页全抓出（最大一份 **146 KB**），入口实拦已验；清理后 53 份 0 报 | `check_corpus_integrity.py --self-test` + 对 `ws-jenner` 实跑 + `ingest.py` 实拦 |
 | **★★★ 引文层门（v0.0.0.32 新增，只报不拦，见下节）** | **passed**（负对照 11 项，含 **4 条真实样本 + 2 条真实误报夹具**）；**真实数据实测**：Harvey 第 3 轮定稿 10 处、Vesalius 11 处、Galen 0 处 | `check_quote_layer.py --self-test` + 对三份真实候选答案实跑 |
-| 蒸馏版本新鲜度 | 下限 `v0.0.0.37`；**102 条中 0 达标 / 102 低于下限 / 0 未知**；掉的是尺子，产物一份没变（任务 #29） | `check_distillation_freshness.py` |
-| Release checksum 全量校验 | passed，**305 files** | `self_check.py` |
+| 蒸馏版本新鲜度 | 下限 `v0.0.0.66`（当前版本末位 − 10）；**102 条中 0 达标 / 102 低于下限 / 0 未知**；掉的是尺子，产物一份没变（任务 #29）（v0.0.0.75 记录里写的下限 `v0.0.0.37` 是旧数，**本次实跑纠正**） | `check_distillation_freshness.py` |
+| Release checksum 全量校验 | passed，**341 files**（v0.0.0.75 记录里写的 305 是旧数，**本次实跑纠正**） | `self_check.py` |
 | Canonical group validation | **12 categories, 100 products, 102 artifacts**; passed | `validate_persona_registry.py` |
 | 团队侧版本绑定 | **passed**，三处同为 `v0.0.0.13`；负对照 6 类全抓出 | `persona-distiller-group/scripts/check_group_version_binding.py` |
 | Identity family registry | 12 families；加权多身份输入被拒 | `test_identity_routing`、`test_skill_contract` |
 | Builder JSON Schema | **14 documents** | `self_check.py` |
-| Python script 覆盖 | **66 scripts** | `self_check.py` |
+| Python script 覆盖 | **84 scripts**（v0.0.0.75 记录里写的 66 是旧数，**本次实跑纠正**） | `self_check.py` |
 | Root `SKILL.md` 行数 | 206 行；self_check 未报越界 | `self_check.py` |
 | Secret-pattern scan | **0 findings** | `self_check.py` |
 | Reviewer harness 两轮 | passed | `test_six_reviewer_harness_passes_both_rounds` |
