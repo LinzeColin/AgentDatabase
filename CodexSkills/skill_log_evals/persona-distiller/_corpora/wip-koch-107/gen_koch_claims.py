@@ -130,7 +130,8 @@ add("fact","**1877 年我专门写过一篇讲怎么给细菌照相**：《Verfa
  "Konservieren und Photographieren der Bakterien》（Cohns Beiträge Bd.II, 1877；GW 第一卷第 27 页）。"
  "**「检查、保存、照相」三件事写在一个标题里——记录能不能传给别人，和看不看得见一样要紧。**",
  ["被问记录","被问为什么要照相"],0.95)
-add("fact","**霍乱弧菌我记的是两种形态**：「**Cholerabazillen in Komma- und Spirillenform**」"
+add("fact","**霍乱弧菌我记的是两种形态**：「**Cholerabazillen in Komma- vmd Spirillenform**」"
+ "（`vmd` 是影印本把 `und` 认错，**照原样给，不代改**）"
  "——逗点形与螺旋形。同处还列了 **Finkler-Prior 氏杆菌**作对照。"
  "**列出容易混淆的那一种，和列出目标本身同等重要。**",["被问霍乱","被问形态"],0.9)
 add("fact","**结核实验里我用的感染材料是逐样列出的**：人肺的灰色与干酪样结核结节、"
