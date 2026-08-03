@@ -4,7 +4,7 @@
   "display_name": "人物蒸馏 Skill / Persona Distiller",
   "distribution": {
     "canonical_registry": "../persona-distiller-group",
-    "kind": "repository-customized-v0.0.0.72",
+    "kind": "repository-customized-v0.0.0.73",
     "lineage_base_archive_sha256": "e891912d98d14afb7677ac935a19be329d97d206f4ae74a644892f46b17f6748"
   },
   "evaluation_suites": 16,
@@ -31,7 +31,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "20b34dbf8d5ac6a025e4288fc5f26599e9476a898dc1128468edc725070a5a07",
+      "sha256": "2822801b42a905729175174842133a1c04e8bf61ee6dae8f706b41cb6239176d",
       "size_bytes": 8802
     },
     {
@@ -56,12 +56,12 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "73bcf0d9f141e576854112dbb99a8d4350ecf933878d6dc60cbc4ecb9b0fc516",
-      "size_bytes": 81486
+      "sha256": "dcf7974eb496856da12d18dec3b06176a66dfee990cf0f30fc026d173fd2d883",
+      "size_bytes": 84113
     },
     {
       "path": "VERSION",
-      "sha256": "0c03c6d2ab175d29e0e59de73595d3676319f0f9c3a1ed4f2125c2f7e86daa6f",
+      "sha256": "a6b71594057cab6aadbdcc3f4b0163c7af921f9ba017ba5e31438000cc90b8b5",
       "size_bytes": 10
     },
     {
@@ -121,7 +121,7 @@
     },
     {
       "path": "handoff.md",
-      "sha256": "a5f246e96effa905a2079a390435b44dcf8aa7982e55447bf893a9e1725fdd81",
+      "sha256": "0beb3d963b5a4d1150e0a6dd7668cee81c0e453a59a027e873ff7ecaf99f6275",
       "size_bytes": 3702
     },
     {
@@ -141,7 +141,7 @@
     },
     {
       "path": "manifest.json",
-      "sha256": "e524ed3b24cdbf1c4fff4c30f64cebc7b74e63665f8b6efda270c8e0dd8380f7",
+      "sha256": "1b087852430fa3d63743936cad568d1c84716736ebcbea6f898a8af9c03bff82",
       "size_bytes": 1191
     },
     {
@@ -635,6 +635,11 @@
       "size_bytes": 8208
     },
     {
+      "path": "references/pipeline/checkers/check_unqualified_priority_claim.py",
+      "sha256": "0d467453400e992fc641ede62bb9b3309b86b89b67c3ba35c4df4905454ca07b",
+      "size_bytes": 8357
+    },
+    {
       "path": "references/pipeline/checkers/check_unsourced_names.py",
       "sha256": "a8ccd72a087161e5a1ce52ec49a95633e54f83ee00a912ee366bbd0236ae4474",
       "size_bytes": 23171
@@ -1053,6 +1058,11 @@
       "path": "scripts/check_suite_single_drag.py",
       "sha256": "1e0d551080c450e790949fa737eb174b55608740508550f964a6b8c110f05200",
       "size_bytes": 8208
+    },
+    {
+      "path": "scripts/check_unqualified_priority_claim.py",
+      "sha256": "0d467453400e992fc641ede62bb9b3309b86b89b67c3ba35c4df4905454ca07b",
+      "size_bytes": 8357
     },
     {
       "path": "scripts/check_unsourced_names.py",
@@ -1706,5 +1716,5 @@
     },
     "secret_findings": 0
   },
-  "version": "v0.0.0.72"
+  "version": "v0.0.0.73"
 }
