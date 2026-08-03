@@ -4,7 +4,7 @@
   "display_name": "人物蒸馏 Skill / Persona Distiller",
   "distribution": {
     "canonical_registry": "../persona-distiller-group",
-    "kind": "repository-customized-v0.0.0.70",
+    "kind": "repository-customized-v0.0.0.71",
     "lineage_base_archive_sha256": "e891912d98d14afb7677ac935a19be329d97d206f4ae74a644892f46b17f6748"
   },
   "evaluation_suites": 16,
@@ -31,7 +31,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "eaea00e7461b14a58dbb25adccdb363bace3536b5d574797303c023a4055dc26",
+      "sha256": "0bc62ec2fe22c77745548bd9506cbc46f2bdd34843034f4f1b39ed4bb9128b36",
       "size_bytes": 8802
     },
     {
@@ -56,12 +56,12 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "fbb47a597b5ae4ee01b24327e13cfdb0c2221e2878bf386036a8a4d75c47821b",
-      "size_bytes": 76955
+      "sha256": "638593a68f3b9ddd39ee770adef4c37c0ac1e8da636d5f4b2f4b2c32bde5cfe5",
+      "size_bytes": 79221
     },
     {
       "path": "VERSION",
-      "sha256": "239b221963a155275659c9f15c8b1401ac5d4e05e890a5e7046c905dc57a4e78",
+      "sha256": "b038556f7a14dc439aff2a6c33eb45ce5c21791e8fd944cf4f3aaa8b6f1cd36f",
       "size_bytes": 10
     },
     {
@@ -121,7 +121,7 @@
     },
     {
       "path": "handoff.md",
-      "sha256": "2fd9d85505366ba32f097647210e7c7a489c6d9457d2961ea34bd03aa65cc176",
+      "sha256": "cee57ab7769bdb6dc580545be32759dd201d9e5e73349f1edd569868737b751a",
       "size_bytes": 3702
     },
     {
@@ -141,7 +141,7 @@
     },
     {
       "path": "manifest.json",
-      "sha256": "180c30257d6e9750b9f460539e1584dc6dc2f9c307ce145b88e8fdb0df30d9fb",
+      "sha256": "b118b9c2e90575465619b3a175f1ce94e3172e078378fefaf780e893b6a14ae2",
       "size_bytes": 1191
     },
     {
@@ -590,6 +590,11 @@
       "size_bytes": 8737
     },
     {
+      "path": "references/pipeline/checkers/check_scan_reach.py",
+      "sha256": "ef68d26091a885fa394f9534929d488c176f24720e641bb3d504c96b5891936d",
+      "size_bytes": 8822
+    },
+    {
       "path": "references/pipeline/checkers/check_schema_drift.py",
       "sha256": "49ce8293b13df9b9efdad7cd2f7d434ccf76b6305f893fec2fcc7271d7aa0451",
       "size_bytes": 5976
@@ -998,6 +1003,11 @@
       "path": "scripts/check_refusal_overflow.py",
       "sha256": "53175f962d78baf661230660091e66fedc39b9206265dec1fbd713934f388708",
       "size_bytes": 8737
+    },
+    {
+      "path": "scripts/check_scan_reach.py",
+      "sha256": "ef68d26091a885fa394f9534929d488c176f24720e641bb3d504c96b5891936d",
+      "size_bytes": 8822
     },
     {
       "path": "scripts/check_schema_drift.py",
@@ -1686,5 +1696,5 @@
     },
     "secret_findings": 0
   },
-  "version": "v0.0.0.70"
+  "version": "v0.0.0.71"
 }
