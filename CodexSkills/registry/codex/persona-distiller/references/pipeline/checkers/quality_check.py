@@ -1599,6 +1599,63 @@ def run_suite_single_drag(report, target: Path, thresholds: dict) -> None:
     report.metrics['suite_single_drag'] = info
 
 
+def run_rights_basis(report, target: Path) -> None:
+    """公有领域的依据在不在（v0.0.0.79，**只写 metrics**）。
+
+    #116 Watson 探测撞到一条**已发生、可复现**的误判：
+    Unpaywall 对 `10.1111/j.1365-2702.2005.01256.x` 返回 `license = "public-domain"`，
+    而同一 DOI 的 Crossref 写的是 Wiley 标准条款——**作者 1940 年生且在世**。
+    **照抄聚合器的 `license` 字段 = 把受保护作品当公有领域入库。**
+
+    十一个账本实测：**872 条声称公有领域，0 条依据取自聚合器**（本件是预防），
+    **230 条有可核依据、642 条只有结论没有依据**。
+
+    **它不说那 642 条判断错了**——八位历史人物的结论都站得住。
+    但公有领域**随时间与法域变化**：Fleming 卒于 1955，
+    「终身+70」法域里是 **2025 年**才进入公有领域的——**同一句话 2024 年写就是错的**。
+    """
+    here = Path(__file__).resolve().parent
+    script = here / 'check_rights_basis.py'
+    if not script.exists():
+        report.metrics['rights_basis'] = {'状态': '检查器未安装，**未核验**（不是通过）'}
+        return
+    spec = importlib.util.spec_from_file_location('_pd_rightsbasis', script)
+    module = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(module)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['rights_basis'] = {'状态': f'加载失败，**未核验**：{exc}'}
+        return
+    buffer = io.StringIO()
+    with contextlib.redirect_stdout(buffer):
+        if module.selftest() != 0:
+            report.metrics['rights_basis'] = {'状态': '**负对照未过，其结论不作数**'}
+            return
+
+    path = target / 'evidence' / 'source-ledger.jsonl'
+    if not path.is_file():
+        report.metrics['rights_basis'] = {'状态': '找不到 source-ledger.jsonl，**未核验**（不是通过）'}
+        return
+    records = [json.loads(line) for line in path.read_text(encoding='utf-8').splitlines()
+               if line.strip()]
+    if not records:
+        report.metrics['rights_basis'] = {'状态': '**账本是空的——未核验（不是通过）**'}
+        return
+
+    agg, nb, ok, npd = module.audit(records)
+    entry = {
+        '源条数': len(records),
+        '声称公有领域': len(agg) + len(nb) + len(ok),
+        '不声称（不判）': len(npd),
+        '有据可查': len(ok),
+        '有结论无依据': len(nb),
+        '依据取自聚合器': len(agg),
+    }
+    if agg:
+        entry['**依据不作数**'] = [f'{sid}：{txt}' for sid, txt in agg[:5]]
+    report.metrics['rights_basis'] = entry
+
+
 def run_evidence_per_claim(report, target: Path) -> None:
     """证据字段是逐条的还是填一次抄 N 遍（v0.0.0.78，**只写 metrics**）。
 
@@ -2147,6 +2204,7 @@ def main() -> int:
         report_own_voice(report, target, meta, sources)
         report_refusal_overflow(report, target)
         run_corpus_ceiling(report, target, report.profile)
+        run_rights_basis(report, target)
         train_ids = {record.get('source_id') for record in sources if record.get('split') == 'train'}
         evaluate_research(report, target, thresholds, train_ids, args.allow_provisional)
         cases: list[dict[str, Any]] = []
