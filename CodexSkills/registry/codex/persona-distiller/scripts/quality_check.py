@@ -897,6 +897,48 @@ def run_content_checks(report, target: Path, cache_dirs: list[str]) -> None:
     else:
         review['shared_anchor'] = 'evals/judge_payload.v1.json 不在——**同源引用未比对（不是通过）**'
 
+    # ── v0.0.0.59：引文有没有落在别人那一段（**硬门**）────────────────
+    #   `check_quote_integrity` 只问「这句在不在语料里」。
+    #   **整版扫图的语料里，「在」是不够的**——同一个 .txt 常常还装着同页别人的文章。
+    #   Fleming #111：`penicillin-letter-1941` 的下半版是新西兰医院财政的另一篇，
+    #   `freelance-science-1952` 同版还有 P. A. Gorer 的两篇书评。
+    #   **从这些文件取引文而不确认落在哪一段，会把别人的文字挂到本人物名下，
+    #   而引文核查会说「在」。**
+    #   需要一份由读过原文的人写的边界清单；**没有清单就明说没查，不猜边界。**
+    bounds = None
+    for cd in (cache_dirs or []):
+        cand = Path(cd) / '_BOUNDARIES.json'
+        if cand.is_file():
+            bounds = cand
+            break
+    if not bounds:
+        review['quote_in_span'] = (
+            '没有 `_BOUNDARIES.json` 作者边界清单——**引文落段未核（不是通过）**；'
+            '语料若含整版扫图，须由读过原文的人写出每篇的起止行')
+    elif not payload.exists():
+        review['quote_in_span'] = 'judge_payload 不在——**引文落段未核（不是通过）**'
+    else:
+        argv = ['--answers', str(payload), '--boundaries', str(bounds),
+                '--cache', str(bounds.parent)]
+        if claims.exists():
+            argv += ['--claims', str(claims)]
+        code, out = run('check_quote_in_span.py', argv)
+        if code == -1:
+            review['checker_missing'] = out
+        elif code == 3:
+            review['quote_in_span'] = '边界清单读不到——**未核（不是通过）**'
+        elif code == 2:
+            report.error('content.selftest-failed',
+                         'check_quote_in_span 负对照未过——其检查结论不作数')
+        elif code != 0:
+            hit = next((l for l in out.splitlines() if l.startswith('✗')), '')
+            report.error('content.quote-out-of-span',
+                         '**有引文落在别人那一段里**——整版扫图同页有别的文章：'
+                         + hit.lstrip('✗ ')[:160])
+        else:
+            line = next((l for l in out.splitlines() if l.startswith('逐字引文')), '')
+            review['quote_in_span'] = '✓ ' + line[:120]
+
     # ── v0.0.0.51：长度不许成为指认候选侧的信号（**硬门**）──────────────
     #   盲判的前提是评委看不出哪一侧是候选。Lister #108 第 3 轮实测：
     #   候选比基线长 **+144%**，**64 题里候选没有一道不比基线长**——
