@@ -1,0 +1,32 @@
+[
+ {
+  "canonical_name": "Rudolf Ludwig Karl Virchow",
+  "subject_uid": "wikidata:Q57070",
+  "identity_category": "医疗护理师",
+  "occupation_or_role": "病理学家、医师、人类学家、政治家",
+  "professional_background": "柏林大学病理学教授（1856–1902）；细胞病理学奠基者，1858 年《Die Cellularpathologie》提出「omnis cellula e cellula」；1847 年创办并长期主编《Archiv für pathologische Anatomie und Physiologie》（后世称 Virchows Archiv）；1848 年上西里西亚斑疹伤寒调查报告开公共卫生流行病学之先；帝国议会与普鲁士议会议员",
+  "application_scenarios": [
+   "被问细胞病理学的基本命题与它推翻了什么",
+   "被问 1848 年上西里西亚调查是怎么做的、结论为什么是政治的",
+   "被问他与 Koch／Pasteur 在细菌致病说上的分歧",
+   "被问怎么分辨署名 Virchow 的著作是他还是他儿子"
+  ],
+  "key_capabilities": [
+   "从组织切片推到疾病机制的显微病理方法",
+   "把疾病成因追到社会条件的调查方法",
+   "对未经证实之说的持久怀疑（含他对细菌致病说的抵抗）"
+  ],
+  "distinguishing_basis": "archive.org creator 字段作 `Virchow, Rudolf, 1821-1902`；生卒 1821-10-13 / 1902-09-05；著作年代 1845–1902",
+  "authoritative_sources": [
+   {
+    "locator": "https://www.wikidata.org/wiki/Q57070",
+    "what": "Wikidata 主条目"
+   },
+   {
+    "locator": "archive.org creator:\"Virchow, Rudolf, 1821-1902\"",
+    "what": "馆藏著录字段"
+   }
+  ],
+  "evidence_level": "high"
+ }
+]

@@ -1,0 +1,106 @@
+# Rudolf Virchow — signed article extracted from a Virchows-Archiv volume
+# title (OCR): Pasteur hat sich überzeugt, dass alle die Circumpolarisation bewirkenden Stoilb heiniedrisch kiystallisiren ; die Cholalsäure krystallisirt bekanntlich auch hemiedrisek. Zar Chemie der Neben
+# byline (OCR): Von Rud.  Virchow
+# parent volume file: raw/archiv-1857-de/archiv-1857-de.txt   (char offset 1320451)
+# extraction: byline-anchored, cut at next author byline.
+# Verify against the parent volume before verbatim quoting.
+
+
+
+In  verschiedenen  Mittheilungen  an  die  französische  Akademie  und  die  Socidtd 
+de  Biologie  zu  Paris  hat  Vulpian  (Gaz.  m^d.  1856.  Oct.  No.  42.  p.656.  1857. 
+Janv.  No.5.  p.  84.  Gaz.  bebdom.  1857.  Sept.  No.  38.  p.  665.)^eine  Reihe  inteiv 
+essanter  Punkte  über  die  chemische  Beschaffenheit  der  Nebennicyren  publicirt.  Die- 
+selben beziehen  sich  wesentlich  auf  die  Marksubstanz.  Zerreibt  man  dieselbe  und 
+vertheilt  die  Masse  in  Wasser,  so  wird  darin  durch  eine  wässerige  Jodlösung,  in 
+geringerem  Grade  durch  alle  ozydirenden  Substanzen  (z.  B.  den  Luflsauerstoff  im 
+Sonnenlichte),  eine  schön  rosige  Färbung  erzeugt;  Eisenchiorid  und  die  Eiseaoi^- 
+
+Arehiv  f.  pathol.  Anat.  Bd.  XII.  Hit  4  u.  5.  31 
+
+
+mIm,  lafigMmer  and  nnsichtrer  ehie  Reibe  anderer  Saite  bedlogett  «hie  elgttttMiD- 
+neh  gHibe  oder  gratrgrflne  Färbe,  die  im  Ueberschtt»  des  ReafettS  ^encfawlttdet 
+Welche  Sobstanz  es  ist,  die  diese  Reactionen  gibt,  kbnme  Volpiad  nocb  tiicfat 
+efittittelii,  docb  fand  er  in  Gemeinacbaft  mit  Cloez  ift  dem  Safte  der  Nebcnoiere 
+Hifiparafittre  und  TaorocholsaQre. 
+
+Ich  habe  bei  Gelegenheit  von  Untefsttchangen  fiber  die  Ncftennieren,  auf  weiche 
+ich  s^ter  turflekkommen  werde,  die  früheren  Angaben  von  Vnlpi an  geprüft  ttitd  aie 
+tolfkeittmen  richtig  gefunden.  Am  acbSnaten  kann  man  sich  davon  an  den  Neben- 
+nieren grosser  Thiere,  z.  ß.  des  Pferdes,  Qberzengen,  wo  die  Trennnng  der  Riode 
+von  der  Marksabstanz  leichter  und  sicherer  vorgenommen  werden  kann.  Hier  zeigt 
+sieh  in  der  That  die  iod-  nnd  ILisenreaction  scharf  an  die  Marksabstanz  gebondea 
+und  sie  ist  so  energisch,  dass  man  an  ganz  kleinen  Stöcken,  z.  R.  an  mikrosko- 
+ptseben  Schnitten,  dieselbe  noch  sehr  dentlich  wahrnehmen  kann,  unter  dem  Mi- 
+ktoikope  kann  man  anch  wahrnehmen,  dass  die  morphologischen  Elemente  nicht 
+die  Mger  der  Farbe  sind,  sondern  dass  sie  dem  Safte,  der  Interceflahirftussigkeit 
+flftkommt.  Die  rosige  Farbe,  welche  das  lod  erzengt,  erlnnm  etwas  an  das  M- 
+Heu  britt&ntere  Violett,  welches  lod  in  SchwefelkOhlenstolf  hervoiiiringt,  nnd  attth 
+die  intensiv  grüne  Farbe  der  Eisensalze  konnte  auf  eine  Schwefelverbindong  hitt- 
+dtnten.  indess  deuteten  andere  Reactionen  weder  Schwefelkohlenstoff,  ttoch  Schwe- 
+fslwasserstoff  als  solche  in  dem  Safte  an  und  obwohl  sich  die  Substanz  ziemüch  laog« 
+erhalt,  so  ist  doch  die  Reaction  um  so  zuverllssiger,  je  ftischer  die  Organe  sind. 
+leh  lasse  es  daher  dahingestellt,  ob  diese  Reactionen  irgend  etwas  mit  dem  taurtn 
+ao  thon  haben. 
+
+Die  Anwesenheit  von  Gallenstoffen  in  der  Nebenniere  mnss  Insofern'  mit  einiger 
+Vonieht  anfgenommen  werden,  als  die  unmittelbare  Nähe  der  Leber  nnd  Galleo- 
+Uaee  Ür  die  rechte  Nebenniere  wenigstens  die  Imbibition  sehr  begünstigt.  Indess 
+war  es  auch  mir  schon  aufgefallen,  dass  ich  durch  Digestion  menschlicher,  mit 
+aller  Vorsicht  gesammelter  und  prSparirter  Nebennieren  eine  Flüssigkeit  erfaielt,  die 
+nach  dem  Filtriren  eine  eigenthumliche,  bald  gelbe,  bald  rothlich  branne  Farbe 
+zeigte  und  bei  dem  Abdampfen  sich  mit  dunkelviolettbraunen  Häuten  fiberzog.  Die- 
+selbe gab,  nachdem  sie  etwas  eingeengt  war,  die  Pettenkofer'sche  Probe  sehr 
+schön  uDd  nahm  mit  MinwalsMiratt,  besonders  Salpefeerstai«,  eine  grünliche  Fär- 
+bung an. 
+
+Die  Jodreaction  könnte  weiterhin  die  Vermuthang  erwecken^  dass  ein  stärke- 
+artiger Körper  vorhanden  sei.  Allein  dagegen  spricht  nicht  nur  der  Hangel  morpho- 
+logischer Elemente,  welche  dieseo  Körper  tragen  könnten,  sondern  noch  mehr  das 
+itihon  von  Vulpian  angemericte  Verhalten  zn  Scbwefelsfture.  Wenn  man  ein  ver- 
+dfinntes  und  durch  Jod  schön  rosig  gefärbtes  Extract  des  Nebennieren -Markes  mit 
+Scbwefelsäure  verlbtzt,  so  verschwindet  die  Farbe  gänzlich ;  sie  erscheint  aber  sofort 
+wieder,  sobald  man  die  Säure  durch  Ammoniak  neutralisirt. 
+
+Vulpian  erwähnt  ausserdem  einer  ähnlichen  rosigen  Fftrbung,  welche  durch 
+knusllsehe  Alkalien  und  Erden  hervorgebracht  werde.  Diese  scheint  mir  vreniger 
+^ntfaamlleh  zu  sein.  Wenigstens  finde  ich  sehr  häufig  an  dem  Pareneli^m  der 
+Nlerafr,  der  Milz,  der  Leber  n.s. «r.,  das»  nach  dar  Einwirkung  von  kaaatlsdiem 
+
+
+18» 
+
+fVMrOft  ^ef  Kftif  eioe  brilfent  fodfge  l^ärbting  Mtst^ht,  di«  sich  irt  tMAits  vott  d«t 
+iriit^  gleicher  Einwirkung  an  der  Nebenniere  hervortretenden  unterscheidet. 
+
+Als  nea  mass  ich  das  Vorkommen  sehr  reichlicher  Leucin-Mengen  in  dem 
+M&rke  der  Nebennieren  erwähnen.  Schon  di«  schön  violette  Losang,  die  man  in 
+d^m  ausgezogenen  Safte  durch  Kali  nnd  Kupfertuiphat  erhSIt,  deutet  darauf  hin; 
+diekt  man  den  Saft  etwas  ein,  so  sieht  man  in  jedem  Tropfen  unter  dem  Mikro- 
+skope zahlreiche  Leucinkugeln  sich  ausscheiden  und  mit  grosser  Leichtigkeit  Issst 
+8!th  dasselbe  im  Grossen  trennen.  Tyrosin  habe  ich  nicht  bemerkt;  ebensowenig 
+Zacker.  « 
+
+Endlich  gibt  es  in  der  Nebenniere  grosse  Massen  fettiger  Korper.  Digerirt 
+mau  das  durch  Zerreibung  ganzer  (menschlicher)  Nebennieren  gewonnene  Magma 
+bei  fa6herer  Temperatur,  so  sieht  man  nachher  auf  der  Flüssigkeit  sich  grosse, 
+itttensiv  gelbe,  öfters  fast  citronenfarbene  Tropfen  abscheiden,  die  bei  gewöhnlicher 
+Temperatur  steif  werden  und  Margarinkrystallc  zeigen.  Der  flussigblerbende  Tbeil 
+hat,  wie  ich  schon  früher  erwähnte  (S.  104),  zu  einem  grossen  Theile  die  Eigen- 
+schaft, durch  Schwefelsäure  nach  und  nach  Farbenveranderungen  anzunehmen  und 
+twar  hellgelb,  orange,  roth,  violett  etc.  zu  werden.  Ausserdem  findet  sich,  und 
+zwar  sehr  reichlich  auch  in  der  Marksubstanz,  der  von  mir  als  Markstoff  oder 
+Myelin  (von  Goblcy  als  Lecithin)  bezeichnete  Korper,  wobei  ich  besonders  be- 
+merke, dass  die  Menge  desselben  In  gar  keinem  Verhältnisse  zu  den  vorhandenen 
+dunkelrandigen  Nervenfasern  steht.  Ueberhaupt  scheint  es  mir,  dass  Alles,  was 
+wir  bisher  über  die  chemische  Constitution  der  Nebennieren  wissen,  mehr  für  die 
+drüsige,  als  für  die  nervöse  Natur  dieses  Organes  spricht,  wie  ich  denn  schon  hier 
+bemerken  will,  dass  ich  allerdings  sympathische  Ganglien  in  demselben  aufgefunden 
+bähe,  dass  aber  diese  von  den  gewöhnlichen  zelligen  Elementen  der  Marksubstanz 
+dorehaus  verschieden  sind. 
+
+
+8. 
+
+Zar  Blatanal^se. 

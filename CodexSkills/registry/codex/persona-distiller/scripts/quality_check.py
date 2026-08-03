@@ -904,6 +904,30 @@ def run_content_checks(report, target: Path, cache_dirs: list[str]) -> None:
     #   三个人、九轮评审之后才想到数这一下——本条把那一下变成每次都做。
     #   **它不判「门槛该不该改」**（那是人的决定，三条化解路径各带一个
     #   作者能自己滥用的旋钮），只回答纯算术：以这批实测分为据，够不够得着。
+    # ── v0.0.0.42：OCR 把整份文本毁掉了，而它仍是一份「真文档」──────────
+    #   Virchow #109（德文）撞出：227 份语料里 18 份被 Fraktur OCR 毁掉，
+    #   `check_corpus_integrity` 扫同一批报 0 可疑（它只判「是不是错误页」），
+    #   `check_ocr_homoglyphs` 也报不出（它查的是西里尔／希腊同形字）。
+    #   本件按虚词占比判，阈值 0.15 是从 227 份真实分布里**读出来的**
+    #   （0.117–0.239 之间一份都没有）。已在 Jenner/Lister/Pasteur 三人 289 份上零误报。
+    cache_arg = list(cache_dirs) if cache_dirs else [str(target / 'raw')]
+    ledger = target / 'evidence/source-ledger.jsonl'
+    argv = list(cache_arg) + (['--ledger', str(ledger)] if ledger.exists() else [])
+    code, out = run('check_ocr_language_death.py', argv)
+    if code == -1:
+        review['checker_missing'] = out
+    elif code == 2:
+        report.error('content.selftest-failed',
+                     'check_ocr_language_death 负对照未过——其检查结论不作数')
+    elif code == 1:
+        report.error('corpus.ocr-dead-as-primary',
+                     '**有被 OCR 整份毁掉的文件被记作 P1**——'
+                     '你正打算从一份读不出字的文件里取逐字引文；换干净扫本或降级')
+    else:
+        n = next((l for l in out.splitlines() if '低于下限' in l), '')
+        review['ocr_language_death'] = (n.strip()[:150] if n
+                                        else '✓ 没有被 OCR 整份毁掉的语料')
+
     res = target / 'evals/results.jsonl'
     if not res.exists():
         review['gate_reachability'] = 'evals/results.jsonl 不在——**门槛可达性未检查（不是通过）**'
