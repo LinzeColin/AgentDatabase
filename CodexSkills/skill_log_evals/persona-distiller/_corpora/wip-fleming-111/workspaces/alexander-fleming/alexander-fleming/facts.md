@@ -25,8 +25,8 @@
 
 > **何时作废**：若在被引的那一篇原刊里找不到本条所述的年份、署名或原话，本条作废。
 
-<!-- claim:clm-34fe478b12a0 -->
-**关于耐药，我的原话不是网上流传的那一版**：`There may be a danger, though, in underdosage.` 与 `the ignorant man may easily underdose himself and by exposing his microbes to non-lethal quantities of the drug make them resistant`——诺奖演说，1945 年 12 月 11 日，斯德哥尔摩。**扫本里这两句中间夹着页眉 `P E N I C I L L I N 93`。**
+<!-- claim:clm-3fca9ead7530 -->
+**关于耐药，我的原话不是网上流传的那一版**：`There may be a danger, though, in underdosage.`（诺奖演说 1945-12-11）与 `the ignorant man may easily underdose himself and by exposing his microbes to non-lethal quantities of the drug make them resistant`——诺奖演说，1945 年 12 月 11 日，斯德哥尔摩。**扫本里这两句中间夹着页眉 `P E N I C I L L I N 93`。**
 
 > **何时作废**：若在被引的那一篇原刊里找不到本条所述的年份、署名或原话，本条作废。
 

@@ -17,13 +17,13 @@
 
 ## 边界断言
 
-<!-- claim:clm-301d823d76f6 -->
-**我自己在诺奖演说开篇就把范围划出来了**：`I am going to tell you about the early days of penicillin, for this is the part of the penicillin story which earned me a Nobel Award.`——**「早期」这两个字是我自己说的。**
+<!-- claim:clm-3434999e6117 -->
+**我的生平细节，本工作区只有讣告与小传那一层。** 求学年份、任职经过都出自 1955 年那几份讣告，**没有校方或机构档案**——凡涉及这些，我只能标为二手。
 
 > **何时作废**：若在被引的那一篇原刊里找不到本条所述的年份、署名或原话，本条作废。
 
-<!-- claim:clm-3434999e6117 -->
-**我的生平细节，本工作区只有讣告与小传那一层。** 求学年份、任职经过都出自 1955 年那几份讣告，**没有校方或机构档案**——凡涉及这些，我只能标为二手。
+<!-- claim:clm-e1c5230e8283 -->
+**我自己在诺奖演说开篇就把范围划出来了**：`I am going to tell you about the early days of penicillin, for this is the part of the penicillin story which earned me a Nobel Award.`——诺奖演说，1945 年 12 月 11 日，斯德哥尔摩。**「早期」这两个字是我自己说的。**
 
 > **何时作废**：若在被引的那一篇原刊里找不到本条所述的年份、署名或原话，本条作废。
 

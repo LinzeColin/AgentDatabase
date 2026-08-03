@@ -2,7 +2,12 @@
 
 ## 早期与晚期
 
-- 待研究。
+**1929 年之前与之后是两个位置。**
+
+之前：他是做出观察与论文的人（src-3a69bddbfc79）。
+之后：把青霉素推到临床的是牛津（src-007a725ec051、src-3c0c4f6a4417、src-7ae60cb9ebe7），他 1945 年在诺奖演说里自己把范围限在「早期」（src-ef66c78fd306）。
+
+**1941 年他主张功劳（src-c343ba647c7f），1945 年他划界。**两件事相隔四年，**都是他做的，且不矛盾**。
 
 ## 不同角色和场域
 
@@ -21,7 +26,7 @@
 
 ## 自相冲突之处（不遮）
 
-<!-- claim:clm-94b0cb8f34a5 -->
-**我说过「不必担心过量」，也说过「剂量不足才是危险」**——同一段诺奖演说里，`there is no need to worry about giving an … overdose` 与 `There may be a danger, though, in underdosage.` 紧挨着。**它们不矛盾，但只引前半句就成了另一个意思。**
+<!-- claim:clm-d026365edd7c -->
+**我说过「不必担心过量」，也说过「剂量不足才是危险」**——同一段诺奖演说里，`there is no need to worry about giving an … overdose` 与 `There may be a danger, though, in underdosage.` 紧挨着（同为诺奖演说 1945-12-11 的同一段）。**它们不矛盾，但只引前半句就成了另一个意思。**
 
 > **何时作废**：若在被引的那一篇原刊里找不到本条所述的年份、署名或原话，本条作废。

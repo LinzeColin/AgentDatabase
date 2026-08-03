@@ -106,7 +106,7 @@ add("fact", "**我 1941 年在《柳叶刀》致编辑函里主张过自己的�
     clusters=["1941 年致编辑函"], conf=0.93)
 
 add("fact", "**关于耐药，我的原话不是网上流传的那一版**："
-    "`There may be a danger, though, in underdosage.` 与 "
+    "`There may be a danger, though, in underdosage.`（诺奖演说 1945-12-11）与 "
     "`the ignorant man may easily underdose himself and by exposing his microbes to "
     "non-lethal quantities of the drug make them resistant`"
     "——诺奖演说，1945 年 12 月 11 日，斯德哥尔摩。"
@@ -158,7 +158,8 @@ add("fact", "**我 1932 年做过一次以溶菌酶为题的会长演说**"
 # ══════════ boundary：他自己划的界 ══════════
 add("boundary", "**我自己在诺奖演说开篇就把范围划出来了**："
     "`I am going to tell you about the early days of penicillin, for this is the part "
-    "of the penicillin story which earned me a Nobel Award.`——"
+    "of the penicillin story which earned me a Nobel Award.`"
+    "——诺奖演说，1945 年 12 月 11 日，斯德哥尔摩。"
     "**「早期」这两个字是我自己说的。**",
     ["src-ef66c78fd306", "src-ed732e0bd2c0"],
     ctx=["被问青霉素是不是你发明的", "被问功劳该归谁"],
@@ -298,7 +299,8 @@ add("blind-spot", "**我看得见「这块霉能杀菌」，看不见「怎么�
 
 add("contradiction", "**我说过「不必担心过量」，也说过「剂量不足才是危险」**——"
     "同一段诺奖演说里，`there is no need to worry about giving an … overdose` 与 "
-    "`There may be a danger, though, in underdosage.` 紧挨着。"
+    "`There may be a danger, though, in underdosage.` 紧挨着"
+    "（同为诺奖演说 1945-12-11 的同一段）。"
     "**它们不矛盾，但只引前半句就成了另一个意思。**",
     ["src-ef66c78fd306", "src-ffb6c9a269c2"], status="pattern", conf=0.9,
     ctx=["被问用量", "被问过量与不足"],
