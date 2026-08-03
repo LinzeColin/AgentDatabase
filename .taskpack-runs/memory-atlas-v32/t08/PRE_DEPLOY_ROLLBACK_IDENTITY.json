@@ -1,0 +1,10 @@
+{
+  "captured_at": "2026-08-03T23:37:01Z",
+  "host": "vps-83b882b4",
+  "app_current": "/srv/linze/apps/memory-atlas/releases/20260803T201517Z-895a7c28affc",
+  "app_previous": "/srv/linze/apps/memory-atlas/releases/20260803T194556Z-c80ab0d89012",
+  "agent_current": "/srv/linze/apps/agentdatabase/releases/20260803T201614Z-895a7c28affc",
+  "agent_previous": "/srv/linze/apps/agentdatabase/releases/20260803T033928Z-56802eea4bc2",
+  "last_promoted_release": "20260803T075705Z-50ccc6e1ccef",
+  "promotion": {"schema_version":"memory_atlas.promotion.v1","release_id":"20260803T075705Z-50ccc6e1ccef","git_commit":"50ccc6e1ccef9bce3fa034a6222fb26c385b68a3","promoted_at":"2026-08-03T08:06:35Z","deployment_scope":"frontend-only-p0-recovery","active_agent_release":"/srv/linze/apps/agentdatabase/releases/20260803T033928Z-56802eea4bc2","rollback_app_release":"/srv/linze/apps/memory-atlas/releases/20260803T033928Z-56802eea4bc2"}
+}

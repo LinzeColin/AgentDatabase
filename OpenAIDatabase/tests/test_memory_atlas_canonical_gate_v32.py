@@ -126,3 +126,13 @@ def test_live_probe_refuses_to_pass_without_an_access_token(tmp_path: Path) -> N
 )
 def test_live_probe_checks_every_identity_and_contract_field(needle: str) -> None:
     assert needle in LIVE_PROBE.read_text(encoding="utf-8")
+
+
+def test_deploy_refuses_an_unidentified_tree() -> None:
+    # A release whose id does not name a real commit cannot be rolled back to,
+    # audited, or matched against the running artifact.
+    text = (REPO / "ops" / "memory-atlas" / "deploy-blue-green.sh").read_text(encoding="utf-8")
+    assert "refusing to deploy an unidentified tree" in text
+    assert '[[ "$release_commit" =~ ^[0-9a-f]{40}$ ]]' in text
+    assert 'release_id="$(date -u +%Y%m%dT%H%M%SZ)-${release_commit:0:12}"' in text
+    assert "git rev-parse HEAD" in text, "a real checkout must still be the default source of identity"

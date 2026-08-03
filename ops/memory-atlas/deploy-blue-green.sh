@@ -108,7 +108,22 @@ sudo install -d -m 0750 -o "$deploy_user" -g "$deploy_group" \
   "$APP_ROOT/shared/public-baseline" \
   "$AGENT_ROOT" \
   "$AGENT_ROOT/releases"
-release_id="$(date -u +%Y%m%dT%H%M%SZ)-$(git rev-parse --short=12 HEAD)"
+# The release must name the exact commit it was built from. A full git
+# checkout on the production host is one way to know that, but not the only
+# one: a tree staged from a verified commit has no history to ask. In that case
+# the caller states the commit explicitly and it is validated here, rather than
+# the deploy inventing an identity or the host carrying 765 MB of history it
+# never reads.
+if [[ -n "${MEMORY_ATLAS_RELEASE_COMMIT:-}" ]]; then
+  release_commit="$MEMORY_ATLAS_RELEASE_COMMIT"
+  [[ "$release_commit" =~ ^[0-9a-f]{40}$ ]] || { echo "MEMORY_ATLAS_RELEASE_COMMIT must be a full 40-hex commit sha"; exit 64; }
+elif git rev-parse HEAD >/dev/null 2>&1; then
+  release_commit="$(git rev-parse HEAD)"
+else
+  echo "no git HEAD and no MEMORY_ATLAS_RELEASE_COMMIT: refusing to deploy an unidentified tree"
+  exit 64
+fi
+release_id="$(date -u +%Y%m%dT%H%M%SZ)-${release_commit:0:12}"
 release="$APP_ROOT/releases/$release_id"
 agent_release="$AGENT_ROOT/releases/$release_id"
 mkdir -p "$release" "$APP_ROOT/shared/data" "$APP_ROOT/shared/public-baseline" "$agent_release"
@@ -140,7 +155,7 @@ sudo systemctl restart memory-atlas-reconcile.service memory-atlas-action-worker
 printf '%s
 ' "$release_id" > "$APP_ROOT/shared/LAST_PROMOTED_RELEASE"
 printf '{"schema_version":"memory_atlas.promotion.v1","release_id":"%s","git_commit":"%s","promoted_at":"%s"}
-' "$release_id" "$(git rev-parse HEAD)" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > "$APP_ROOT/shared/promotion.json"
+' "$release_id" "$release_commit" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > "$APP_ROOT/shared/promotion.json"
 trap - ERR
 set +e
 "$agent_release/ops/memory-atlas/post-promote-probe.sh" "$release_id"
