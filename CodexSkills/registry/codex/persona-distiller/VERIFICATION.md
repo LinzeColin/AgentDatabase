@@ -1,6 +1,6 @@
-# Release verification — Persona Distiller v0.0.0.55
+# Release verification — Persona Distiller v0.0.0.56
 
-Date: 2026-08-04（v0.0.0.55，下表已重跑）
+Date: 2026-08-04（v0.0.0.56，下表已重跑）
 
 > **本文件记录「当前发布号的复验结果」，不是历史归档。**
 > 版本号必须等于根目录 `VERSION`，由 `scripts/check_contract_drift.py` 强制。
@@ -10,7 +10,7 @@ Date: 2026-08-04（v0.0.0.55，下表已重跑）
 > bundle 构不出来、97 人、59 用例），**三件当时都已不成立**。
 > 改过标题的旧正文会冒充当前复验，比标题陈旧更糟。已从工具中移除该行为。
 >
-> 本次（v0.0.0.55）**是真的重跑了一遍**，下表每一行都是本次实跑输出。
+> 本次（v0.0.0.56）**是真的重跑了一遍**，下表每一行都是本次实跑输出。
 
 ## Result
 
@@ -32,7 +32,7 @@ Date: 2026-08-04（v0.0.0.55，下表已重跑）
 | **★★★★★★ 承重人名门（v0.0.0.47 新增／v0.0.0.50 接进发布门，见下节）** | **passed**（**12 项自测，其中 7 条反向对照**）；**真实数据实测**：Osler #110 第 2 轮扫出 `Henry A. Christian` 全名 P1 命中 **0**（S1 2 / S2 1），第 3 轮删后 **0 个查无实据**；**接线负对照**：往真载荷里植入 `Reginald Fitzhugh`，发布门 `content.unsourced-name` **实拦** | `check_unsourced_names.py --self-test` + 对 Osler 两轮候选答案实跑 |
 | 合同漂移门（版本三轴 + 身份合同 + 检查器镜像） | **0 条** | `scripts/check_contract_drift.py` |
 | 合同漂移门的负对照 | passed（坏样本 5 类全抓出，钉住的 builder 版本未被误伤） | `check_contract_drift.py --self-test` |
-| 归属门的负对照 | passed（**17 正 + 17 反**，另含 1 条只报不判，含 5 例非西方姓名形态）；**v0.0.0.54–55 新增四类署名形态**，Fleming #111 真工作区实测 **35 → 30 → 17 → 14 → 13**（见下节） | `check_authorship.py --self-test` |
+| 归属门的负对照 | passed（**23 正 + 21 反**，另含 1 条只报不判，含 5 例非西方姓名形态）；**v0.0.0.54–56 新增 3+2+2 类署名形态**，Fleming #111 真工作区实测 **35 → 2**（见下节） | `check_authorship.py --self-test` |
 | OCR 同形字门的负对照 | passed（干净英文／真俄语／中文 3 条正对照 0 报；词内混文种、全同形字词、引文层 3 类坏样本全抓出） | `check_ocr_homoglyphs.py --self-test` |
 | 基线来源门 `check_baseline_provenance` | passed（坏样本 4 类全抓出，含「缺字段沉默通过」；prior-version 未被误杀） | `check_baseline_provenance.py --self-test` |
 | 拒答溢出门（v0.0.0.22 新增，只报不拦） | passed（3 条正对照未误杀，2 类溢出全抓出，带限定的正常回答未被误判） | `check_refusal_overflow.py --self-test` |
@@ -98,11 +98,30 @@ v0.0.0.55 又加两类：**末尾签名块**（名字邻接机构地址或日期
 - **7 份 `PAGE-SPILL`**——PMC 整版扫图，同一页上还有别人的文章。
   `freelance-science-1952` 的反证是 `By Rend J. Dubos.`（René Dubos 的另一篇）。
   **反证正确触发，这是判据在干活。**
-- **`lysozyme-1922-prsb` 的署名在书眉里，形态是 `Mr. A. Fleming.`**——首字母 + 姓。
-  **认它等于认下同名陷阱**：这个人物恰有 `A. Grant Fleming`，
-  裸检索 `Fleming A` 时排第一。**不加。**
+- **首字母 + 姓（`A. Fleming`）永远不认**——这个人物恰有 `A. Grant Fleming`，
+  裸检索 `Fleming A` 时排第一。`wound-infections-1920-CO` 全卷唯一署名就是这一形态。
+
+  ⚠ **这一段我写错过一次，已更正**：v0.0.0.55 时我把 `lysozyme-1922-prsb` 归进这一类，
+  说它「署名只在书眉、形态是 `Mr. A. Fleming.`」。**逐行核过之后发现是错的**——
+  该份**第 43 行有正规署名** `By Alexandee Fleming, M.B., F.B.G.S.`，
+  **`r` 被 OCR 认成了 `e`**。结论没变，**但我当时给的理由是错的**。
 - 4 份合著、5 份其它，须逐份人工确认或按作者切开再入库
   （这正是本判据文档里早就写明的「正确解法」）。
+
+### v0.0.0.56 的实测把病根换了
+
+逐份读完 12 份原文之后，**「串栏」不是主因**：
+
+| 文件 | 实际情况 |
+|---|---|
+| `penicillin-letter-1941` | 第 196 行 **`ALEXANDER FLENMING.`**——OCR 多插一个 `N`，而且是标准签名块。**台账那条「署名落在下一页」的注记是错的。** |
+| `lysozyme-1922-prsb` | 第 43 行 `By Alexandee Fleming`——**`r` 认成 `e`** |
+| `antiseptics-chemo-1940` | `By Professor ALEXANDElA 1XFLEMING`——**整段被打坏** |
+| `vaccine-therapy-disc-1910` | 说话人标记被拆成三行：`Dr.` / `ALEXANDER` / `FLEMING:` |
+| `wound-infections-1920-CO` | 三人从头合著到尾、无分节署名，唯一署名是 `A. Fleming` |
+
+**12 份里 11 份在切出来的范围内都有真实的归属行，过不了门是因为名字被 OCR 打坏了。**
+切分解决串栏，解决不了这个。
 
 ## ★★★★★★★★★ v0.0.0.51 新增：长度泄题门——**32/32 全长，评委数字数就能猜中**
 

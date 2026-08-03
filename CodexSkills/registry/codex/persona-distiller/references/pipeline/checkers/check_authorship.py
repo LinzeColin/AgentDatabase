@@ -58,9 +58,15 @@ Fleming #111 的诺奖演说，标题页印的是
 
 **剩下 12 份不再往下放宽，理由逐类写明：**
 
-- **`lysozyme-1922-prsb` 的署名在书眉里，形态是 `Mr. A. Fleming.`**——首字母 + 姓。
-  **认它等于认下同名陷阱**：这个人物恰有 `A. Grant Fleming`，
-  裸检索 `Fleming A` 时排第一。**这一条永远不加。**
+- **首字母 + 姓（`A. Fleming`）永远不认。** 这个人物恰有 `A. Grant Fleming`，
+  裸检索 `Fleming A` 时排第一。`wound-infections-1920-CO` 全卷唯一的署名就是
+  `A. Fleming, M.B.jB.S. Lond.`——三人从头合著到尾、无分节署名，**认它等于认下陷阱**。
+
+  ⚠ **v0.0.0.55 我在这里写错过一次**：当时写「`lysozyme-1922-prsb` 的署名只在书眉、
+  形态是 `Mr. A. Fleming.`」。**实际那份第 43 行有正规署名**
+  `By Alexandee Fleming, M.B., F.B.G.S.`——**`r` 被 OCR 认成了 `e`**。
+  结论（不认首字母+姓）没变，但**我当时给的理由是错的**：
+  那一份过不了门不是因为署名形态，是因为**名字被 OCR 打坏了**。
 - **`freelance-science-1952` 是他写的书评**，而被评那本书的署名 `By René J. Dubos`
   就印在开头。反证正确触发——**判据在干活，不是误报**。
 - 合著与整版串栏那几份，**正确解法是按作者把文件切开再入库**（见上文），
@@ -174,6 +180,9 @@ def build_patterns(full_name: str) -> dict:
     return {
         "name": full_name,
         "surname": surname,
+        # ★ v0.0.0.56：OCR 容错要拿**未转义**的名与姓做编辑距离，
+        #   `first`/`last` 是 re.escape 过的，不能直接用。
+        "first_word": tokens[0] if tokens else "",
         "masthead": None,          # 由 --masthead 注入；见 attach_masthead
         "MASTHEAD": None,
         "name_rx": name_rx,
@@ -195,11 +204,30 @@ def build_patterns(full_name: str) -> dict:
         # ★ v0.0.0.54 `A-byline-standalone`：期刊署名不带 `By`，独占一行。
         #   行尾允许**逗号**——合著论文把下一位作者接在下一行，就是这个形态。
         #   学位后缀（`M.B.`、`B.S. Lond.`、`F.R.C.S.`）允许出现，但**只能在名字之后**。
+        # ★ v0.0.0.56：行尾允许 `AND <另一位作者>`——**合著论文把作者列在同一行**。
+        #   Fleming #111 实测两份：`ALEXANDER FLEMING AND IAN H. MACLEAN.`、
+        #   `ALEXANDER FLEMING, F.R.C.S., AND V. D. ALLISON, M.D.`
+        #   旧式要求他的学位后缀之后就收行，**两份货真价实的合著论文全判「无据」**。
+        #   **合著者在场不是反证，是共同署名。**
         "STANDALONE": re.compile(
             rf"^[ \t]*(?:(?:Sir|Dame|Prof(?:essor)?|Dr|Mr|Mrs|Ms|Rev|Lord|Lady)\.?[ \t]+)*"
             rf"{name_rx}"
             rf"(?:[ \t]*,[ \t]*[A-Za-z][A-Za-z.]{{0,10}}(?:[ \t]+[A-Za-z][A-Za-z.]{{0,10}}){{0,2}})*"
+            rf"(?:[ \t]*(?:,|\bAND\b)[ \t]*[A-Za-z][A-Za-z.]{{0,14}}"
+            rf"(?:[ \t]+[A-Za-z][A-Za-z.]{{0,14}}){{0,3}})*"
             rf"[ \t]*[.,]?[ \t]*$", re.M | re.I),
+        # ★ v0.0.0.56 `A-discussion-turn`：**学会讨论记录里的发言归属**。
+        #   `Mr. ALEXANDER FLEMING said that when salvarsan was first in-`
+        #   `Dr. ALEXANDER FLEMING said that his contribution to the discussion`
+        #   这是 Proc R Soc Med 一类会议记录的标准形态——
+        #   **敬称 + 全名 + 报道动词**，归属比正文里的 by 更硬（是记录者写的）。
+        #   **必须要求全名**：`Mr. A. Fleming said` 一律不认（见下文同名陷阱）。
+        "DISCUSSION": re.compile(
+            rf"\b(?:Sir|Dame|Prof(?:essor)?|Dr|Mr|Mrs|Ms|Lord|Lady)\.?[ \t]+{name_rx}"
+            rf"(?:[ \t]+(?:said|remarked|observed|replied|added|asked|stated|"
+            rf"pointed[ \t]+out|thought|agreed)\b|[ \t]*:)", re.I),
+        # ↑ 冒号形 `Dr. ALEXANDER FLEMING:` 也是发言标记。
+        #   **敬称是必需的**，所以「标题里的冒号」（`Jane Public: 某标题`）不会被误收。
         # ↑ `re.I` 是自测抓出来的：期刊署名印的是**全大写** `ALEXANDER FLEMING`，
         #   而 `name_rx` 是混合大小写的 `Alexander…Fleming`，不加 `re.I` 一条也不中。
         # ★ v0.0.0.18 `A-copyright`：扫描件的版权页。
@@ -240,6 +268,109 @@ def build_patterns(full_name: str) -> dict:
 # `EXPLANATORY RULES` 这类地名与小节标题——**精度不够，当反证会误杀整类书籍**。
 # 要防的那件事（卷内换作者）正确的解法是**按作者切开再入库**，
 # 本清单的用处是让人一眼看见「这份文件里还有别人的名字」。
+def _edits_within(a: str, b: str, k: int) -> bool:
+    """两串的编辑距离是否 ≤ k。只用于 OCR 容错，串都很短。"""
+    la, lb = len(a), len(b)
+    if abs(la - lb) > k:
+        return False
+    prev = list(range(lb + 1))
+    for i in range(1, la + 1):
+        cur = [i] + [0] * lb
+        for j in range(1, lb + 1):
+            cur[j] = min(prev[j] + 1, cur[j - 1] + 1,
+                         prev[j - 1] + (a[i - 1] != b[j - 1]))
+        prev = cur
+    return prev[lb] <= k
+
+
+def ocr_byline_evidence(text, first, last):
+    """**名字被 OCR 打坏的署名行。** 命中返回那一行，否则 None。
+
+    Fleming #111 逐份读完 12 份未过的文件，真正的病根不是串栏而是**名字被打坏**：
+
+        By Alexandbb Fleming, F.R.C.S., Estg.      ← er → bb
+        By Alexandee Fleming, M.B., F.B.G.S.       ← r  → e
+        ALEXANDER FLENMING.                        ← 多插一个 N
+        ALEXANDER FLEMIING, F.R.C.S.,              ← 多插一个 I
+        By Professor ALEXANDElA 1XFLEMING, F.R.C.S. ← 整段被打坏
+
+    **放宽到编辑距离是危险方向**——它同样会把同姓的另一个人放进来。
+    三条设防，缺一不可：
+
+    1. **必须名与姓都在，且都是完整词。**
+       `A. Fleming` 一律不认——同名陷阱恰恰是「首字母 + 别的中名 + 同姓」
+       （本人物有 `A. Grant Fleming`，裸检索 `Fleming A` 时排第一）。
+       **要求完整的名，就把这一整类挡在外面。**
+    2. **名与姓各自的编辑距离 ≤2**，且**长度必须相近**（±2）。
+    3. **必须落在署名结构里**：行首、或 `By` 之后；且该行不长于 80 字符。
+       散文中间碰巧出现的近似词不算。
+    """
+    first_l, last_l = first.lower(), last.lower()
+    for line in text.split("\n"):
+        s = line.strip()
+        if not s or len(s) > 80:
+            continue
+        # ★ **必须像署名行**：`By …` 打头 / 整行大写 / 不以句读收尾的短行。
+        #   散文中间碰巧出现的近似词不算——这一条是自测抓出来的
+        #   （不加时「标题里的冒号」与「版权归别人」两条反例都被误放行）。
+        starts_by = bool(re.match(r"^by[ \t]+", s, re.I))
+        allcaps = s == s.upper() and any(c.isalpha() for c in s)
+        if not (starts_by or allcaps):
+            continue
+        body = re.sub(r"^(?:by[ \t]+)?", "", s, flags=re.I)
+        body = re.sub(r"^(?:(?:Sir|Dame|Prof(?:essor)?|Dr|Mr|Mrs|Ms|Rev|Lord|Lady)\.?[ \t]+)*",
+                      "", body, flags=re.I)
+        toks = [t for t in re.split(r"[^A-Za-z]+", body) if t][:5]
+        if len(toks) < 2:
+            continue
+        a = toks[0].lower()
+        # ★ **名必须是完整词**——`A. Fleming` 这一整类在这里被挡住。
+        #   同名陷阱恰是「首字母 + 别的中名 + 同姓」。
+        if len(a) < 4 or not _edits_within(a, first_l, 2):
+            continue
+        # 姓在其后几个词里挑（中间可能夹中名或缩写），**同样必须是完整词**
+        for b_raw in toks[1:]:
+            b = b_raw.lower()
+            if len(b) < 4:
+                continue
+            if _edits_within(b, last_l, 2):
+                return s
+            # `1XFLEMING`：姓被前缀污染，允许姓作为尾部出现
+            if b.endswith(last_l) and len(b) - len(last_l) <= 3:
+                return s
+    return None
+
+
+def join_short_lines(text, max_len=14, run=2):
+    """把连续的**极短行**并成一行，供比对用（不写回语料）。
+
+    扫描件里被拆开的说话人标记就是这个形态：
+
+        Dr.
+        ALEXANDER
+        FLEMING:
+
+    三行没有任何一行同时含名与姓。并行之后成为 `Dr. ALEXANDER FLEMING:`，
+    `DISCUSSION` 与 `STANDALONE` 才认得出。
+
+    只并**连续 ≥2 行、每行都不超过 `max_len` 字符**的段落——
+    正常散文行远长于此，不会被误并。
+    """
+    out, buf = [], []
+    for line in text.split("\n"):
+        s = line.strip()
+        if s and len(s) <= max_len:
+            buf.append(s)
+            continue
+        if len(buf) >= run:
+            out.append(" ".join(buf))
+        buf = []
+        out.append(line)
+    if len(buf) >= run:
+        out.append(" ".join(buf))
+    return "\n".join(out)
+
+
 def despace_display(text: str) -> str:
     """把**字母间隔的展示排版**折回正常词形，供匹配用（不改存盘文本）。
 
@@ -402,7 +533,33 @@ def turns_evidence(text: str, pat: dict):
     return f"说话人轮次 {labels}"
 
 
-def check_text(text: str, pat: dict):
+def check_text(text, pat):
+    """先按原文判；全不中时，再用「连续短行并起来」的副本重判一次。
+
+    ★ v0.0.0.56：**说话人标记会被 OCR 拆成连续几行。**
+    Fleming #111 的 `vaccine-therapy-disc-1910` 里是 `Dr.` / `ALEXANDER` / `FLEMING:`
+    三行，没有任何一行同时含名与姓，所有名字正则都匹配不上。
+
+    **不能把两份文本拼起来一起判**——第一版那么写，位置一错乱，
+    版权页那两条老对照当场被误判（`© 1998 by …` 变成了 A-byline，
+    「版权归别人」被误放行）。**归一是重试，不是拼接。**
+    """
+    ok, code, ev, counter = _check_one(text, pat)
+    if ok:
+        return ok, code, ev, counter
+    joined = join_short_lines(text)
+    if joined != text:
+        ok2, code2, ev2, counter2 = _check_one(joined, pat)
+        # ★ **并短行只用来救「说话人标记」，不救别的档。**
+        #   自测抓到：并行会把版权页上下两行的名字并到一起，
+        #   于是「版权归 Richard Roe」那条反例被误放行成 A-copyright。
+        #   **归一放宽了文本，就必须收窄它能证明的东西。**
+        if ok2 and code2 in ("A-discussion-turn", "A-turns"):
+            return ok2, code2 + "(并短行后)", ev2, counter2
+    return ok, code, ev, counter
+
+
+def _check_one(text, pat):
     """返回 (ok, 证据码, 证据原文, 反证列表)。"""
     # ★ v0.0.0.55：先把字母间隔的展示排版折回词形。
     #   **归一只用于比对，不写回语料**——与长 s 折叠同一条纪律。
@@ -476,6 +633,17 @@ def check_text(text: str, pat: dict):
             a, b = max(0, m.start() - 60), min(len(text), m.end() + 60)
             return True, code, " ".join(text[a:b].split()), counter
 
+    # ★ v0.0.0.56 `A-discussion-turn`：学会讨论记录里的发言归属。
+    #   `Mr. ALEXANDER FLEMING said that…` —— 记录者写的，比正文里的 by 更硬。
+    #   与显式 `By` 同级，**可以顶着反证走**：同场讨论里本来就有别人发言，
+    #   把「别人也发了言」当反证会把整类会议记录判死。
+    if pat.get("DISCUSSION"):
+        m = pat["DISCUSSION"].search(text)
+        if m:
+            a, b = max(0, m.start() - 40), min(len(text), m.end() + 80)
+            return True, "A-discussion-turn", " ".join(text[a:b].split()), counter
+
+
     # A-copyright：版权页。与上面两类同样受反证约束——
     # 文中出现别人的身份署名时不放行。
     if not counter:
@@ -503,6 +671,13 @@ def check_text(text: str, pat: dict):
         #   而他的话是**逐轮标注**的，归属不靠整篇署名建立。
         #   署名型证据（随笔）则相反：文中出现别人的署名就说明切歪了。
         return True, "A-turns", ev, []
+
+    # ★ v0.0.0.56 `A-byline-ocr`：名字被 OCR 打坏的署名行。
+    #   **最弱的一档，受反证约束**——它靠编辑距离，本来就比逐字命中松。
+    if not counter:
+        hit = ocr_byline_evidence(text, pat.get("first_word") or "", pat.get("surname") or "")
+        if hit:
+            return True, "A-byline-ocr", hit, counter
 
     return False, "", "", counter
 
@@ -547,6 +722,25 @@ SELFTEST_POSITIVE = [
     ("字母间隔的标题署名",
      "\n J AN E  Q.  P U B L I C\nPenicillin\nNobel Lecture, December 11, 1945\n"
      "I am going to tell you about the early days of the work described here.\n"),
+    # ★ v0.0.0.56（Fleming #111 逐份读完 12 份未过文件后的实测形态）
+    ("合著者与他同行",
+     "ON THE OCCURRENCE\n\nJANE Q. PUBLIC AND IAN H. MACLEAN.\n\n"
+     "The occurrence was examined in a series of normal subjects here.\n"),
+    ("合著者同行·带学位后缀",
+     "ON THE DEVELOPMENT\n\nJANE Q. PUBLIC, F.R.C.S., AND V. D. ALLISON, M.D.\n\n"
+     "The development of resistant strains was followed over some weeks.\n"),
+    ("说话人标记被拆成三行",
+     "DISCUSSION ON VACCINE THERAPY\n\nDr.\nJANE\nPUBLIC:\n"
+     "I have used the method in a considerable number of cases over the years.\n"),
+    ("学会讨论发言",
+     "DISCUSSION ON THE USE\n\nMr. JANE Q. PUBLIC said that when the drug was first "
+     "introduced there was much confusion about the dosage to be used.\n"),
+    ("OCR 打坏的署名·姓少一个字母",
+     "ON A REMARKABLE ELEMENT\n\nBy Jane Q. Publie, M.B., F.B.G.S.\n\n"
+     "The substance was first noticed during some investigations here.\n"),
+    ("OCR 打坏的署名·多插一个字母",
+     "A long letter to the editor runs on for a while about the subject.\n" * 30
+     + "JANE Q. PUBLIIC.\nInoculation Department,\nSt. Mary's Hospital, Jan. 5.\n"),
     ("书评签名块·文中（同页还有下一篇）",
      "A review of somebody else's book runs on for several paragraphs here.\n" * 30
      + "JANE Q. PUBLIC.\nLondon, W.1.\n"
@@ -611,6 +805,20 @@ SELFTEST_NEGATIVE = [
     ("普通句子不许被折成一团",
      "I a m n o t a d i s p l a y l i n e b u t t h i s i s p r o s e.\n"
      "Jane Q. Public appears nowhere as an author of this particular text.\n"),
+    # ★ v0.0.0.56：OCR 容错**必须挡住「首字母 + 别的中名 + 同姓」这一整类**——
+    #   本人物的同名陷阱恰是 `A. Grant Fleming`，裸检索 `Fleming A` 时排第一。
+    ("首字母+姓（同名陷阱的形态）",
+     "STUDIES IN SOMETHING\n\nQ. Public, M.B. B.S. Lond., Director, Department\n"
+     "of Systematic Bacteriology, Some Hospital, London.\n"),
+    ("首字母+别的中名+同姓",
+     "ON PUBLIC HEALTH\n\nA. Grant Public, M.D.\n\n"
+     "The survey was conducted in Montreal over several years running.\n"),
+    ("并短行不许把散文并成署名",
+     "The work\nwas done\nat a\nhospital\nin London\nover time.\n"
+     "Jane Q. Public is mentioned in the body of this text somewhere later.\n"),
+    ("OCR 容错不许把别人的名字放进来",
+     "ON SOMETHING ELSE\n\nBy Richard Q. Roebuck, M.D.\n\n"
+     "The matter was investigated at some length in the following pages.\n"),
     ("正文里提到医院，名字在句子中间",
      "The work was done at St. Mary's Hospital in London during that period.\n" * 30
      + "Later the results were confirmed by Jane Q. Public and her colleagues there.\n"

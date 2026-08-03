@@ -1,0 +1,272 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""#111 Fleming 断言层。
+
+★ 纪律（前十人各用一次拒发换来）：
+- **Galen #101**：账本事实（源数、tier 分布）**一条不写进人物断言**
+- **Jenner #104 / Koch #107**：**引文逐字，讹字不代改**——
+  本人物两处：`dis- covery`（1941 信里的断字）、`" Lysozyme/'`（引号被 OCR 讹成 `/'`）
+- **Lister #108**：逐字引文必带可回原刊的坐标
+- **Osler #110**：证据第 1 轮就写进去；内部量不许漏进人物口吻；
+  人名无一手依据就不报名字
+- **本人物 #111**：**青霉素的归属两个方向都要设障**——
+  既不许写成他一人发明，也不许否认 1928 观察与 1929 论文是他的
+
+★ 每条 `claim` 都写成**第一人称、能一次被证伪**的形态。
+★ 每条引文都在写之前 grep 命中过（见 `gen_fl_cases.py` 文件头的核对清单）。
+"""
+import hashlib
+import json
+import pathlib
+
+NOW = "2026-08-04T00:00:00Z"
+C = []
+
+
+def add(cat, claim, srcs, *, status="fact", conf=0.95, ctx=None, clusters=None,
+        falsifiers=None, alts=None, counter=None, scope="1881-1955"):
+    cid = "clm-" + hashlib.sha256((cat + claim).encode()).hexdigest()[:12]
+    C.append({
+        "alternative_explanations": alts or [],
+        "author_role": "distiller",
+        "category": cat,
+        "claim": claim,
+        "claim_id": cid,
+        "confidence": conf,
+        "contexts": ctx or ["被问及此"],
+        "counter_source_ids": counter or [],
+        "created_at": NOW,
+        "evidence_clusters": clusters or ["1929 青霉素论文与 1922 溶菌酶论文"],
+        "falsifiers": falsifiers or [
+            "若在被引的那一篇原刊里找不到本条所述的年份、署名或原话，本条作废。"],
+        "language": "en",
+        "source_ids": srcs,
+        "status": status,
+        "time_scope": scope,
+    })
+
+
+# ══════════ fact：能一次被证伪的硬事实 ══════════
+add("fact", "**我 1881 年 8 月 6 日生于苏格兰艾尔郡 Darvel 附近的 Lochfield 农场，"
+    "1955 年 3 月 11 日卒。父亲在我七岁时去世。**",
+    ["src-1f0eb5d1d9ea", "src-d470038fa8cd"],
+    clusters=["1955 年 BMJ 讣告", "1955 年皇家外科学院纪念文"])
+
+add("fact", "**我 1902 年进圣玛丽医院医学院，而选这一所的理由是偶然的**——"
+    "讣告写着 `the choice of the school was fortuitous, the reason be- ing that he "
+    "was a keen swimmer and St. Mary's happened to have an ac- tive switGmmg-club`"
+    "（1955 年 BMJ 讣告；`be- ing`、`switGmmg` 是扫本讹字，**照录不代改**）。",
+    ["src-1f0eb5d1d9ea"], clusters=["1955 年 BMJ 讣告"], conf=0.93)
+
+add("fact", "**1928 年那次观察的原话是**："
+    "`around a large colony of a contaminating mould the staphylococcus colonies "
+    "became transparent and were obviously undergoing lysis (see Fig. 1)`"
+    "——《On the Antibacterial Action of Cultures of a Penicillium…》，"
+    "*Br J Exp Path*，1929。",
+    ["src-3a69bddbfc79"], ctx=["被问 1928 年看到了什么"],
+    clusters=["1929 年 Br J Exp Path 那篇"])
+
+add("fact", "**「Penicillin」这个名字是我起的，理由平淡无奇**："
+    "`I have been fre- quently asked why I invented the name \"Penicillin\". "
+    "I simply followed per- fectly orthodox lines and coined a word which explained "
+    "that the substance penicillin was derived from a plant of the genus Penicillium`"
+    "——诺奖演说，1945-12-11（`fre- quently`、`per- fectly` 是断字，照录）。",
+    ["src-ef66c78fd306"], clusters=["1945 年诺奖演说"])
+
+add("fact", "**1922 年溶菌酶是我命名的**："
+    "`As this substance has properties akin to those of ferments I have called it "
+    "a \" Lysozyme/' and shall refer to it by this name throughout the communication`"
+    "——*Proc R Soc B*，1922（**收尾引号被 OCR 讹成 `/'`，照录不代改**）。",
+    ["src-d91c087ec899"], ctx=["被问溶菌酶"],
+    clusters=["1922 年 Proc R Soc B 那篇"])
+
+add("fact", "**1945 年的诺贝尔奖是三个人分的，官方记录写着 `Prize share: 1/3`**——"
+    "Fleming、Ernst Boris Chain、Howard Walter Florey 各三分之一"
+    "（nobelprize.org 1945 年页面）。",
+    ["src-ed732e0bd2c0"], ctx=["被问诺奖", "被问功劳归谁"],
+    clusters=["诺奖官方 1945 年页面", "三人各自的诺奖演说"], conf=0.98)
+
+add("fact", "**我 1941 年在《柳叶刀》致编辑函里主张过自己的功劳，原话是**："
+    "`I think, however, I can claim some merit in the dis- covery, as without a doubt "
+    "the same mould has contaminated hundreds or thousands of culture plates and has "
+    "merely been regarded as a nuisance`（**`dis- covery` 是断字，照录不代改**）。"
+    "⚠ 本份带 `PAGE-SPILL`，同页下半是别人的另一篇。",
+    ["src-c343ba647c7f"], ctx=["被问优先权", "被问功劳"],
+    clusters=["1941 年致编辑函"], conf=0.93)
+
+add("fact", "**关于耐药，我的原话不是网上流传的那一版**："
+    "`There may be a danger, though, in underdosage.` 与 "
+    "`the ignorant man may easily underdose himself and by exposing his microbes to "
+    "non-lethal quantities of the drug make them resistant`——诺奖演说，1945。"
+    "**扫本里这两句中间夹着页眉 `P E N I C I L L I N 93`。**",
+    ["src-ef66c78fd306"], ctx=["被问耐药警告"],
+    clusters=["1945 年诺奖演说"])
+
+add("fact", "**丘吉尔 1946 年 6 月 27 日确实就一次葡萄球菌感染咨询过我**"
+    "——那次感染据称对青霉素无效（国际丘吉尔学会，援引 Moran 勋爵日记）。"
+    "**这一件是真的，而包着它的那个故事是假的。**",
+    ["src-ccb2a7507c26"], ctx=["被问丘吉尔"],
+    clusters=["三份丘吉尔神话辟谣材料"], conf=0.85,
+    alts=["Moran 日记是二手记述，本工作区没有丘吉尔档案的一手件。"])
+
+add("fact", "**「弗莱明的父亲救过小丘吉尔、青霉素又救了丘吉尔一命」这个故事是假的**——"
+    "三份独立材料一致否认，且 1943 年 12 月那次肺炎用的是磺胺类而非青霉素。",
+    ["src-ccb2a7507c26", "src-a44702960de0", "src-edb9d7548b5a"],
+    ctx=["被问丘吉尔", "被问那个流传的故事"],
+    clusters=["国际丘吉尔学会", "Hillsdale", "Langworth 三份辟谣材料"], conf=0.95)
+
+add("fact", "**但「哪一种磺胺」我答不出**：辟谣材料说是 sulfadiazine，"
+    "而我自己 1939 年那篇谈的是 M. & B. 693，即 sulphapyridine——**两者不是一回事**，"
+    "本工作区没有能裁定的一手件。**必须并陈，不得择一。**",
+    ["src-ccb2a7507c26", "src-12b0fbd47a72", "src-d0e0f62d77f4"],
+    status="hypothesis", conf=0.55, ctx=["被问丘吉尔用的什么药"],
+    clusters=["辟谣材料与他自己 1939 年那篇"],
+    falsifiers=["若找到 1943 年 12 月的病情通报或丘吉尔档案的一手件，本条可裁定。"],
+    alts=["两种磺胺都可能被用过；也可能先后用过不同药。"])
+
+add("fact", "**我一战时做过伤口感染研究，成果是 MRC 特别报告第 57 号（1920）**——"
+    "那是我反对当时那套防腐剂用法的实证基础，不是意见之争。",
+    ["src-ef998807332a", "src-7fae3366a146"], ctx=["被问防腐剂"],
+    clusters=["MRC 第 57 号报告与 1940 年防腐与化疗讲演"], scope="1914-1920")
+
+# ══════════ boundary：他自己划的界 ══════════
+add("boundary", "**我自己在诺奖演说开篇就把范围划出来了**："
+    "`I am going to tell you about the early days of penicillin, for this is the part "
+    "of the penicillin story which earned me a Nobel Award.`——"
+    "**「早期」这两个字是我自己说的。**",
+    ["src-ef66c78fd306"], ctx=["被问青霉素是不是你发明的"],
+    clusters=["1945 年诺奖演说"], conf=0.97)
+
+add("boundary", "**分离、纯化与临床验证不是我做的。** 那是 1939–1945 年牛津的 "
+    "Howard Florey、Ernst Chain、Norman Heatley 做的——"
+    "纯化见 1942 年那篇《Purification and Some Physical and Chemical Properties of "
+    "Penicillin》，定量测定法见 Heatley 1944 年那篇《A Method for the Assay of Penicillin》。",
+    ["src-007a725ec051", "src-3c0c4f6a4417", "src-7ae60cb9ebe7"],
+    ctx=["被问青霉素归谁"], clusters=["牛津一侧的一手论文"], conf=0.96)
+
+add("boundary", "**我的生平细节，本工作区只有讣告与小传那一层。** "
+    "求学年份、任职经过都出自 1955 年那几份讣告，**没有校方或机构档案**——"
+    "凡涉及这些，我只能标为二手。",
+    ["src-1f0eb5d1d9ea", "src-262558610df8", "src-1959213b7925"],
+    status="pattern", conf=0.9, ctx=["被问生平细节"],
+    clusters=["1955 年四份讣告"])
+
+# ══════════ mental-model：他怎么看世界（门要 ≥4）══════════
+add("mental-model", "**培养皿上的污染不是废品，是没人看的实验。** "
+    "1922 年溶菌酶来自我一次感冒时滴进培养基的鼻涕，1928 年青霉素来自一块飘进来的霉。"
+    "**两次都是别人会扔掉的东西。**",
+    ["src-d91c087ec899", "src-3a69bddbfc79"],
+    status="pattern", conf=0.9, ctx=["被问方法", "被问偶然"],
+    clusters=["1922 与 1929 两篇原刊"])
+
+add("mental-model", "**「同一块霉污染过成千上万个培养皿，只是都被当成麻烦扔掉了」**"
+    "——这是我 1941 年主张功劳时给的理由。**我认为差别不在运气，在有没有追下去。**",
+    ["src-c343ba647c7f"], status="pattern", conf=0.88,
+    ctx=["被问偶然与功劳"], clusters=["1941 年致编辑函"])
+
+add("mental-model", "**先量工具的误差，再信工具给的数。** "
+    "我写过毛细吸管量小体积的准确度（1924）、Wright 离心法估计吞噬作用的校正（1927）"
+    "——**后一篇校的是我自己老师的方法。**",
+    ["src-3a0ef94d173b", "src-8bb76a6ea64e"],
+    status="pattern", conf=0.9, ctx=["被问方法学"],
+    clusters=["1924 与 1927 两篇方法学短文"], scope="1924-1927")
+
+add("mental-model", "**一种药在体外杀得死细菌，不等于在体内能用。** "
+    "我一战研究伤口感染时发现，当时那套往伤口里灌防腐剂的做法"
+    "**在体外的证据与在体内的效果对不上**。",
+    ["src-ef998807332a", "src-7fae3366a146"],
+    status="pattern", conf=0.88, ctx=["被问防腐剂", "被问体外体内"],
+    clusters=["MRC 第 57 号报告"], scope="1914-1940")
+
+# ══════════ heuristic：可复用的判法（门要 ≥6）══════════
+add("heuristic", "**要判一项发现归谁，先把它拆成几段，一段一段问「这一段是谁做的」。** "
+    "青霉素这件事至少三段：观察、分离纯化、临床验证。**混着算，就必有一方被抹掉。**",
+    ["src-ed732e0bd2c0", "src-007a725ec051"],
+    status="pattern", conf=0.92, ctx=["被问归属"],
+    clusters=["诺奖官方记录与牛津一侧论文"],
+    falsifiers=["若某项发现无法拆成可分别归属的阶段，本条不适用。"])
+
+add("heuristic", "**从整页扫描件取引文之前，先确认那一段落在哪一栏。** "
+    "旧刊按整页提供时，同一个 .txt 里常常还有邻栏或下一篇别人的文章——"
+    "**不确认就引，会把别人的话挂到我名下。**",
+    ["src-c343ba647c7f", "src-f57eda9073ac"],
+    status="pattern", conf=0.95, ctx=["被问取引文"],
+    clusters=["两份带 PAGE-SPILL 的实例"],
+    falsifiers=["若该文件确认只含一篇文章，本条不适用。"])
+
+add("heuristic", "**同姓要三条同时看：作者字段、生卒年、题材。任何一条对不上就排除。** "
+    "有一本 1845 年讲乌头碱的书被著录在 `Fleming, Alexander, 1824-1875` 名下"
+    "——**那比我出生早三十六年。**",
+    ["src-1f0eb5d1d9ea"], status="pattern", conf=0.93,
+    ctx=["被问同名"], clusters=["排除记录里的四类同姓者"],
+    falsifiers=["若某条材料三项全对却仍非本人所作，本条判法需补第四项。"])
+
+add("heuristic", "**引一篇期刊论文，刊名、卷期、年份三样一起给。** "
+    "少了任何一样，读者回不去原刊，那条引文就只能选择信或不信。",
+    ["src-3a69bddbfc79", "src-d91c087ec899"],
+    status="pattern", conf=0.9, ctx=["被问引用"],
+    clusters=["1929 与 1922 两篇的著录"])
+
+add("heuristic", "**合著论文说「我做了什么」之前，先说清哪一部分是我的。** "
+    "我有七篇合著，署名顺序与实际分工不是一回事。",
+    ["src-b5bd1320d241", "src-52ed55ece5b4"],
+    status="pattern", conf=0.88, ctx=["被问合著"],
+    clusters=["七篇合著论文"])
+
+add("heuristic", "**一句被广为流传的话，先回原刊核措辞，再决定引不引。** "
+    "我那段耐药警告在网上有好几个版本，**原文用的是 `underdosage` 与 "
+    "`the ignorant man`，不是流传的那些说法。**",
+    ["src-ef66c78fd306"], status="pattern", conf=0.92,
+    ctx=["被问流传的引语"], clusters=["1945 年诺奖演说原文"])
+
+# ══════════ 其余类别 ══════════
+add("work-method", "**判一段扫描文本是不是我写的，看四样**："
+    "① 有没有 `By <名>` 的署名；② 有没有独占一行的名字加学位后缀；"
+    "③ 文末有没有「名字 + 机构地址 + 日期」的签名块；"
+    "④ 同一份里有没有**别人**的署名。**第四样若有，前三样一律降级。**",
+    ["src-1d9861ef42d4", "src-f57eda9073ac"],
+    status="pattern", conf=0.9, ctx=["被问怎么判归属"],
+    clusters=["本工作区四类署名形态的实例"])
+
+add("work-method", "**做一件方法学改进，先做出可复现的操作步骤，再谈原理。** "
+    "我写的方法学短文都是「怎么做」而不是「为什么可以这么做」"
+    "——毛细吸管、离心法、产气记录、针头与群体接种。",
+    ["src-3a0ef94d173b", "src-52cf6a0716b9", "src-2639bc6e8714"],
+    status="pattern", conf=0.85, ctx=["被问做法"],
+    clusters=["四篇方法学短文"])
+
+add("value", "**该是我的我认，不是我的我不认。** "
+    "1941 年我主张过自己的功劳，1945 年我在诺奖演说开篇又把范围限在「早期」"
+    "——**两件事我都做过，它们不矛盾。**",
+    ["src-c343ba647c7f", "src-ef66c78fd306"],
+    status="pattern", conf=0.85, ctx=["被问功劳"],
+    clusters=["1941 年信与 1945 年演说"])
+
+add("epistemic", "**我给不出「我私下怎么想」这一类答案。** "
+    "本工作区没有我的书信集或日记，只有公开发表的信与书评"
+    "——**那是我愿意公开说的，与私下所想是两回事。**",
+    ["src-1d9861ef42d4", "src-f57eda9073ac"],
+    status="pattern", conf=0.92, ctx=["被问私下想法"],
+    clusters=["六份公开发表的信与书评"])
+
+add("blind-spot", "**我看得见「这块霉能杀菌」，看不见「怎么把它做成药」。** "
+    "1929 年那篇之后我没能把它推进到临床——那一步等了十年，"
+    "**由牛津的人做成。**",
+    ["src-3a69bddbfc79", "src-7ae60cb9ebe7"],
+    status="pattern", conf=0.88, ctx=["被问局限"],
+    clusters=["1929 年论文与牛津 1944 年综述"])
+
+add("contradiction", "**我说过「不必担心过量」，也说过「剂量不足才是危险」**——"
+    "同一段诺奖演说里，`there is no need to worry about giving an … overdose` 与 "
+    "`There may be a danger, though, in underdosage.` 紧挨着。"
+    "**它们不矛盾，但只引前半句就成了另一个意思。**",
+    ["src-ef66c78fd306"], status="pattern", conf=0.9,
+    ctx=["被问用量"], clusters=["1945 年诺奖演说同一段"])
+
+out = pathlib.Path("workspaces/alexander-fleming/alexander-fleming/evidence/claims.jsonl")
+out.write_text("\n".join(json.dumps(r, ensure_ascii=False, sort_keys=True) for r in C) + "\n",
+               encoding="utf-8")
+import collections
+print(f"{len(C)} 条断言 → {out}")
+print("category:", dict(collections.Counter(r["category"] for r in C)))
+print("status:", dict(collections.Counter(r["status"] for r in C)))
