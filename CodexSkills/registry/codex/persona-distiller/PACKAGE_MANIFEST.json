@@ -511,8 +511,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_corpus_presence.py",
-      "sha256": "1917318bcf5f969f0f97add64e9073c1bd737e5869040489cd58a6a589732429",
-      "size_bytes": 17987
+      "sha256": "26ed896ca0739c6e06b9c9f91fb25ce6c6925a223ee3450a72a8d60ee9b3bd7d",
+      "size_bytes": 19275
     },
     {
       "path": "references/pipeline/checkers/check_distillation_freshness.py",
@@ -941,8 +941,8 @@
     },
     {
       "path": "scripts/check_corpus_presence.py",
-      "sha256": "1917318bcf5f969f0f97add64e9073c1bd737e5869040489cd58a6a589732429",
-      "size_bytes": 17987
+      "sha256": "26ed896ca0739c6e06b9c9f91fb25ce6c6925a223ee3450a72a8d60ee9b3bd7d",
+      "size_bytes": 19275
     },
     {
       "path": "scripts/check_distillation_freshness.py",

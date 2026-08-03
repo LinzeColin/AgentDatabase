@@ -281,6 +281,29 @@ def selftest() -> int:
     return 0 if not fails else 2
 
 
+
+def _extreme_note(rows) -> None:
+    """**极端值先核工具**（v0.0.0.74）。只提示，不改任何判定。"""
+    here = pathlib.Path(__file__).resolve().parent
+    script = here / "check_extreme_result_is_suspect.py"
+    if not script.is_file():
+        return
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("_pd_extreme", script)
+    mod = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(mod)
+    except Exception:                                        # noqa: BLE001
+        return
+    units = len(rows)
+    # 「内部命中为 0」= 账本一条都指不到文件，或压根没账本
+    zero = sum(1 for _, n, _t, _m, _b, resolved in rows if not n or not resolved)
+    green = sum(1 for _, n, t, miss, nbad, resolved in rows
+                if n is not None and not miss and not nbad and resolved)
+    for name, why in mod.suspect(green, units, zero_units=zero, units=units):
+        print(f"⚠ **{name}**\n    {why}\n")
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -297,6 +320,11 @@ def main() -> int:
     if not rows:
         print(f"✗ **{a.root} 下一个工作区都没扫到——结果不可信，不是「没问题」**")
         return 3
+
+    # ★★ v0.0.0.74：极端值先核工具。这道判据自己栽过两次——
+    #   一次把 17 个工作区 collapse 成一行报绿，一次账本与文件是两批
+    #   互不相干的东西相减。**两次的表征都是「一片绿」。**
+    _extreme_note(rows)
 
     print(f"{'工作区':24} {'账本':>6} {'语料':>6} {'指得到':>6}  状态")
     bad, mismatched, dangling = [], [], []
