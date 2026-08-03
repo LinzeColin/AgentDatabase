@@ -1,0 +1,503 @@
+{
+  "builder_version": "v0.0.0.5",
+  "chosen_subject_uid": "wikidata:Q317797",
+  "consent_authority": null,
+  "created_at": "2026-08-03T12:15:17Z",
+  "current_version": null,
+  "existential_hypotheses_enabled": false,
+  "identity_selection": {
+    "canonical": "healthcare-nursing",
+    "display": "医疗护理师",
+    "mode": "single",
+    "primary": "healthcare-nursing",
+    "weights": {
+      "healthcare-nursing": 1.0
+    }
+  },
+  "language": "en",
+  "model_version": "0.1.0-draft",
+  "name": "William Osler",
+  "namesake_gate": {
+    "candidate_count": 1,
+    "chosen_candidate": {
+      "application_scenarios": [
+        "被问床边教学与住院医师制度是怎么立起来的",
+        "被问《Principles and Practice》哪一版才是他写的",
+        "被问 Aequanimitas 那篇讲的是什么",
+        "被问怎么分辨署名 Osler 的著作是他还是他兄长"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://www.wikidata.org/wiki/Q317797",
+          "what": "Wikidata 主条目"
+        },
+        {
+          "locator": "archive.org creator:\"Osler, William, Sir, 1849-1919\"",
+          "what": "馆藏著录字段"
+        }
+      ],
+      "canonical_name": "William Osler",
+      "distinguishing_basis": "archive.org creator 字段作 `Osler, William, Sir, 1849-1919`；著作年 1870–1919",
+      "evidence_level": "high",
+      "identity_category": "医疗护理师",
+      "key_capabilities": [
+        "把教学从讲堂搬到病床边的制度设计",
+        "以尸检所见校正临床判断的对照方法",
+        "对治疗虚无与过度用药两端的克制"
+      ],
+      "label": "A",
+      "occupation_or_role": "医师、医学教育家、医史学者",
+      "professional_background": "加拿大裔医师（1849-07-12 – 1919-12-29）。麦吉尔、宾夕法尼亚、约翰斯·霍普金斯、牛津四校任教；霍普金斯医学院四位创院教授之一，把临床教学搬到病床边（bedside teaching）与住院医师制度立起来；1892 年《The Principles and Practice of Medicine》为英语世界通行教科书；1889 年告别演说《Aequanimitas》；1905 年《Science and Immortality》等；藏书后成 Bibliotheca Osleriana",
+      "subject_uid": "wikidata:Q317797"
+    },
+    "chosen_subject_uid": "wikidata:Q317797",
+    "normalized_name": "williamosler",
+    "resolution": "single",
+    "schema_version": "1.0"
+  },
+  "normalized_name": "williamosler",
+  "origin_review_required": false,
+  "product_version": null,
+  "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+  "profile": "deep",
+  "prohibited_uses": [
+    "identity authentication or deceptive impersonation",
+    "invented endorsement, signature, consent, private memory or current opinion",
+    "unsupported psychological diagnosis",
+    "replacement of accountable high-stakes professional judgment"
+  ],
+  "retention_policy": null,
+  "runtime_invocation_versioning": false,
+  "scenario": null,
+  "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+  "schema_version": "2.0",
+  "slug": "william-osler",
+  "status": "draft",
+  "subject_origin": "historical",
+  "target_id": "tgt-ff044c0976c7",
+  "time_scope": "all available periods, separated by role and material drift",
+  "updated_at": "2026-08-03T12:15:17Z",
+  "attribution_basis": {
+    "authority": "印刷时代人物，署名证据充分。**本人物的头号风险不是同名，是同一本书的后期版次不是他写的。**\n\n① **《The Principles and Practice of Medicine》跨越他的生死。** 初版 1892，他 1919-12-29 卒，而该书继续出到 1940 年代。逐版次翻扉页确认：\n　　**第 1–7 版（1892–1909）**：「BY WILLIAM OSLER, M.D.」——**他独著**；\n　　**第 8 版（1912–1919）**：「…EIGHTH EDITION — WITH THE ASSISTANCE OF THOMAS McCRAE」——**署名仍是他**，McCrae 为助手；\n　　**第 9 版（1920/1921）**：「BY **THE LATE** SIR WILLIAM OSLER … **AND** THOMAS McCRAE / NINTH THOROUGHLY REVISED EDITION」——**身后续修，不计 P1**；\n　　第 9 版之后（Christian 续修）**一份未取**。\n本工作区握有**八个生前版次**（第 1–8 版）与 1919 年最后一次生前印次，可逐版互核。\n\n② **三处著录与扉页不符，一律以扉页为准**（v0.0.0.43 就是为这一类落的判据）：\n　　`principlesandpr00mccrgoog` 著录 1920、**扉页 1921**；\n　　`in.ernet.dli.2015.149801` 著录 1906，**扉页无年、署「Late Regius Professor」、印次表到 1930**——他死后十年；\n　　`principlesandpr09oslegoog` 著录 1892 而扉页作「SIXTH EDITION」，**不可能**，年份判为不可辨并如实记录。\n\n③ **他用英文写作，无译文层**——与 Lister #108 同，**不存在「译者的字被当成本人原话」这一整类问题**。抓到的两份译本已降 P2。\n\n④ **有七份合著**，其中两份的第一作者不是他：1886 年胃萎缩那篇 **Frederick P. Henry 为第一作者**；1877 年恶性贫血那篇**只有病理报告是他的，临床报告是 John Bell 的**。**合著不等于不是他写的，但哪一部分是他的要单独说。**",
+    "citation": "Osler, William. *The Principles and Practice of Medicine*. New York: D. Appleton / Edinburgh: Young J. Pentland, 1892（初版）——并对照其第 2–8 版逐版扉页。并及：*Aequanimitas, with Other Addresses*（1904）；*An Alabama Student and Other Biographical Essays*（1908）；*Science and Immortality*（1904）；*Collected Reprints* Series 2–6（1882–1920）。",
+    "disputed_policy": "**争议著作为空，但不是「没查过」。** 他身处英语医学期刊与教科书出版的公开制度下，版次、印次与扉页署名逐一可查。\n\n**真正的风险是三层，都不是「有人冒他的名」：**\n**一、身后续修**——《Principles and Practice》第 9 版起由 McCrae、后由 Christian 续修。**扉页写着「THE LATE」，但文件名与馆藏著录不写。**\n**二、他任编者而非作者的书**——*Typhoid Fever and Typhus Fever* 实为 **Curschmann** 的正文、他只任编者；*Modern Medicine* 与 *A System of Medicine* 同理。**这三部若按 creator 字段收，会变成假的 P1**，抓源阶段已按归属排除。\n**三、同姓**——其兄 **Sir Edmund Boyd Osler（1845–1924）**（金融／议会，已排除 4 条）；其子 **Edward Revere Osler（1895–1917）**（在 creator 字段里一次都没出现，只作两本书的旧藏批注，**已记录以使这次检查可见**）；**以及 William Roscoe Osler**——《Tintoretto》(1879) 的作者，**archive.org 的 creator 字段就写着这个名字，任何 `william AND osler` 的检索都会把他捞进来**，已排除 6 条。另有 Edward Osler（1798–1863）12 条、其父 Featherstone Lake Osler 1 条等。",
+    "disputed_works": [],
+    "exclusions": [
+      {
+        "what": "《Principles and Practice》第 9 版及其后（1920 起）",
+        "why": "他 1919-12-29 卒；扉页作「BY THE LATE SIR WILLIAM OSLER … AND THOMAS McCRAE」——身后续修",
+        "excluded_ids": [
+          "ppm-ed9-1920-POSTHUMOUS",
+          "ppm-ed9-1921-POSTHUMOUS"
+        ]
+      },
+      {
+        "what": "他任编者而非作者的书",
+        "why": "*Typhoid Fever and Typhus Fever* 实为 Curschmann 正文；*Modern Medicine*、*A System of Medicine* 同理。**按 creator 字段收会变成假的 P1。**"
+      },
+      {
+        "what": "William Roscoe Osler（《Tintoretto》1879 作者）的著作",
+        "why": "**creator 字段就写着 `William Roscoe Osler`**，任何 william AND osler 检索都会捞到；已排除 6 条"
+      },
+      {
+        "what": "其兄 Sir Edmund Boyd Osler（1845–1924）的材料",
+        "why": "同姓同代；题材为金融／铁路／议会，非医学；已排除 4 条"
+      },
+      {
+        "what": "Edward Osler（1798–1863）等其他同姓者",
+        "why": "同姓不同人；已排除 12 条"
+      },
+      {
+        "what": "两份译本",
+        "why": "译者的字，不是他的字；已降 P2"
+      },
+      {
+        "what": "手稿（只有影像、OCR 读不出字）",
+        "why": "留作来源旁证，**已降 P2，逐字引文不得取**"
+      }
+    ],
+    "counting_convention": "covered_sources 逐份点名全部 76 条 P1 源，不使用整批声明（v0.0.0.24 曾因整批声明导致逐源检查整个关闭，v0.0.0.34 已堵）。\n**注意**：76 条 P1 含《Principles and Practice》的**八个版次**与若干同版异印，**算独立著作数时不得重复计**。",
+    "covered_sources": [
+      {
+        "source_id": "src-17a22c891578",
+        "original_name": "abdominal-tumors-1894.txt",
+        "locator": "Lectures on the Diagnosis of Abdominal Tumors, delivered to the post-graduate class Johns Hopkins University, 1893｜https://archive.org/details/65741150R.nlm.nih.gov"
+      },
+      {
+        "source_id": "src-f753c1f1d151",
+        "original_name": "acute-pneumonic-tb-1919.txt",
+        "locator": "Acute Pneumonic Tuberculosis｜https://archive.org/details/McGillLibrary-osl_acute-pneumonic-tuberculosis_folioBibOsl7657-35090"
+      },
+      {
+        "source_id": "src-834429cb789d",
+        "original_name": "address-1909.txt",
+        "locator": "Address [delivered Tuesday, October 26, 1909]｜https://archive.org/details/b21465666"
+      },
+      {
+        "source_id": "src-3df1b9a58e3f",
+        "original_name": "aequanimitas-1904-ed1.txt",
+        "locator": "Aequanimitas, with Other Addresses to Medical Students, Nurses and Practitioners of Medicine｜https://archive.org/details/aequanimitaswit00oslegoog"
+      },
+      {
+        "source_id": "src-060a73d2fba5",
+        "original_name": "aequanimitas-1906-ed2.txt",
+        "locator": "Aequanimitas, with Other Addresses ...｜SECOND EDITION, WITH THREE [new addresses]｜https://archive.org/details/b24757779"
+      },
+      {
+        "source_id": "src-18d735a1e959",
+        "original_name": "aequanimitas-1914-ed2-impr3.txt",
+        "locator": "Aequanimitas, with Other Addresses ...｜SECOND EDITION, THIRD IMPRESSION｜https://archive.org/details/2aequanimitaswit00osleuoft"
+      },
+      {
+        "source_id": "src-432b35a7b007",
+        "original_name": "alabama-book-1908.txt",
+        "locator": "An Alabama Student and Other Biographical Essays｜https://archive.org/details/alabamastudentot00osleuoft"
+      },
+      {
+        "source_id": "src-356bab0c6c51",
+        "original_name": "alabama-book-1909-impr2.txt",
+        "locator": "An Alabama Student and Other Biographical Essays｜SECOND IMPRESSION｜https://archive.org/details/cu31924011944620"
+      },
+      {
+        "source_id": "src-b210b578fc0c",
+        "original_name": "alabama-paper-1896.txt",
+        "locator": "An Alabama Student [the 1895 address, offprint]｜https://archive.org/details/101318443.nlm.nih.gov"
+      },
+      {
+        "source_id": "src-91ed81ff698c",
+        "original_name": "anemia-splenica-2nd-paper.txt",
+        "locator": "Anaemia Splenica (Second Paper)｜https://archive.org/details/b28141763"
+      },
+      {
+        "source_id": "src-3b974ff5614f",
+        "original_name": "angina-pectoris-1897.txt",
+        "locator": "Lectures on Angina Pectoris and Allied States｜https://archive.org/details/lecturesonangina1897osle"
+      },
+      {
+        "source_id": "src-6ff1bc8b9a14",
+        "original_name": "arterio-venous-aneurism-1889.txt",
+        "locator": "Case of Arterio-Venous Aneurism of the Axillary Artery and Vein of Fourteen Years' Duration｜https://archive.org/details/101499823.nlm.nih.gov"
+      },
+      {
+        "source_id": "src-8375089d5781",
+        "original_name": "atrophy-of-stomach-1886-CO.txt",
+        "locator": "Atrophy of the Stomach, with the Clinical Features of Progressive Pernicious Anaemia｜https://archive.org/details/101312623.nlm.nih.gov"
+      },
+      {
+        "source_id": "src-3c5447197ffe",
+        "original_name": "bacilli-and-bullets-1914.txt",
+        "locator": "Bacilli and Bullets: An Address to the Officers and Men in the Camps at Churn [Oxford Pamphlets 1914]｜https://archive.org/details/bacillibullets00oslerich"
+      },
+      {
+        "source_id": "src-af6a3ae4f540",
+        "original_name": "brains-of-criminals-1882.txt",
+        "locator": "On the Brains of Criminals, with a Description of the Brains of Two Murderers｜https://archive.org/details/cihm_48695"
+      },
+      {
+        "source_id": "src-504b2989b27d",
+        "original_name": "burtons-anatomy-1914.txt",
+        "locator": "Burton's Anatomy of Melancholy [The Yale Review, New Series, January 1914]｜https://archive.org/details/b2247285x"
+      },
+      {
+        "source_id": "src-e7e7357a428d",
+        "original_name": "cancer-of-stomach-1900-CO.txt",
+        "locator": "Cancer of the Stomach: A Clinical Study｜https://archive.org/details/cancerofstomachc00osle"
+      },
+      {
+        "source_id": "src-c33a7b8564aa",
+        "original_name": "cerebral-palsies-1889.txt",
+        "locator": "The Cerebral Palsies of Children: A Clinical Study from the Infirmary for Nervous Diseases, Philadelphia｜https://archive.org/details/cerebralpalsieso00osleuoft"
+      },
+      {
+        "source_id": "src-e7efd17b4ea9",
+        "original_name": "cerebro-spinal-fever-1898.txt",
+        "locator": "Cerebro-Spinal Fever [clinical lecture on seven cases, JHH, 15 June 1898]｜https://archive.org/details/101204601.nlm.nih.gov"
+      },
+      {
+        "source_id": "src-81913ad96846",
+        "original_name": "cerebro-spinal-fever-1899.txt",
+        "locator": "On the Etiology and Diagnosis of Cerebro-Spinal Fever [Cavendish Lecture, West London Medico-Chirurgical Society, 16 June 1899]｜https://archive.org/details/cihm_14730"
+      },
+      {
+        "source_id": "src-fceb99c55737",
+        "original_name": "chorea-1894.txt",
+        "locator": "On Chorea and Choreiform Affections｜https://archive.org/details/onchoreachoreifo00osle"
+      },
+      {
+        "source_id": "src-244c0a2d7e77",
+        "original_name": "chronic-chorea-1893.txt",
+        "locator": "Remarks on the Varieties of Chronic Chorea, and a Report upon Two Families of the Hereditary Form｜https://archive.org/details/101499811.nlm.nih.gov"
+      },
+      {
+        "source_id": "src-0be1559dfc2d",
+        "original_name": "collected-reprints-s2.txt",
+        "locator": "Collected Reprints, Second Series (January 1st, 1882 - January 1st, 1892)｜SECOND SERIES｜https://archive.org/details/collectedreprint02osle"
+      },
+      {
+        "source_id": "src-690072dbc929",
+        "original_name": "collected-reprints-s3.txt",
+        "locator": "Collected Reprints, Third Series (January 1st, 1892 - January 1st, 1897)｜THIRD SERIES｜https://archive.org/details/collectedreprint03osle"
+      },
+      {
+        "source_id": "src-c1cff9e6c413",
+        "original_name": "collected-reprints-s4.txt",
+        "locator": "Collected Reprints, Fourth Series (January 1st, 1897 - January 1st, 1902)｜FOURTH SERIES｜https://archive.org/details/collectedreprint04osle"
+      },
+      {
+        "source_id": "src-dbe8374eaf11",
+        "original_name": "collected-reprints-s5.txt",
+        "locator": "Collected Reprints, Fifth Series (January 1, 1902 - January 1, 1907)｜FIFTH SERIES｜https://archive.org/details/collectedreprint05osle"
+      },
+      {
+        "source_id": "src-d27184c1577b",
+        "original_name": "collected-reprints-s6p1.txt",
+        "locator": "Collected Reprints, Sixth Series (1907-1920), Part 1｜SIXTH SERIES, PART 1｜https://archive.org/details/collectedreprint61osle"
+      },
+      {
+        "source_id": "src-cbef9834c53f",
+        "original_name": "collected-reprints-s6p2.txt",
+        "locator": "Collected Reprints, Sixth Series (1907-1920), Part 2｜SIXTH SERIES, PART 2｜https://archive.org/details/collectedreprint62osle"
+      },
+      {
+        "source_id": "src-2da4a8100fe6",
+        "original_name": "concise-history-1919.txt",
+        "locator": "A Concise History of Medicine｜https://archive.org/details/54910450R.nlm.nih.gov"
+      },
+      {
+        "source_id": "src-62b06c3ec939",
+        "original_name": "counsels-1905-houghton.txt",
+        "locator": "Counsels and Ideals from the Writings of William Osler｜https://archive.org/details/counselsidealsfr00osleuoft"
+      },
+      {
+        "source_id": "src-db4c4d8fd5c1",
+        "original_name": "counsels-1906-impr2.txt",
+        "locator": "Counsels and Ideals from the Writings of William Osler｜SECOND IMPRESSION｜https://archive.org/details/counselsidealsfr00osle"
+      },
+      {
+        "source_id": "src-2b858b225f3a",
+        "original_name": "counsels-1908-impr4.txt",
+        "locator": "Counsels and Ideals from the Writings of William Osler｜FOURTH IMPRESSION｜https://archive.org/details/counselsidealsfr0000osle"
+      },
+      {
+        "source_id": "src-a030545b23e9",
+        "original_name": "creators-transmuters.txt",
+        "locator": "Creators, Transmuters and Transmitters as Illustrated by Shakespeare, Bacon and Burton｜https://archive.org/details/creatorstransmut00osle"
+      },
+      {
+        "source_id": "src-45cfa93ffd4f",
+        "original_name": "echinococcus-1882.txt",
+        "locator": "On Echinococcus Disease in America｜https://archive.org/details/b22399756"
+      },
+      {
+        "source_id": "src-346385d129ae",
+        "original_name": "elisha-bartlett-1900.txt",
+        "locator": "Elisha Bartlett, A Rhode Island Philosopher: An Address delivered before the Rhode Island Medical Society, Dec. 7th 1899｜https://archive.org/details/cihm_52036"
+      },
+      {
+        "source_id": "src-50157b3528a9",
+        "original_name": "erythema-multiforme-1895.txt",
+        "locator": "On the Visceral Complications of Erythema Exudativum Multiforme｜https://archive.org/details/1930476"
+      },
+      {
+        "source_id": "src-a01a6c58d161",
+        "original_name": "growth-of-truth-1906.txt",
+        "locator": "The Growth of Truth, as Illustrated in the Discovery of the Circulation of the Blood [Harveian Oration, 18 Oct 1906]｜https://archive.org/details/growthoftruthasi00osleuoft"
+      },
+      {
+        "source_id": "src-fe658126e513",
+        "original_name": "hemiplegia-typhoid-1900.txt",
+        "locator": "Hemiplegia in Typhoid Fever｜https://archive.org/details/b28119149"
+      },
+      {
+        "source_id": "src-f92f81d24558",
+        "original_name": "hepatic-artery-aneurism-1877.txt",
+        "locator": "Case of Aneurism of the Hepatic Artery with Multiple Abscesses of the Liver｜https://archive.org/details/b22457720"
+      },
+      {
+        "source_id": "src-e225cb6a4fe5",
+        "original_name": "hepatic-complications-typhoid.txt",
+        "locator": "Hepatic Complications of Typhoid Fever｜https://archive.org/details/b28119150"
+      },
+      {
+        "source_id": "src-9f41e292023b",
+        "original_name": "intensive-work-science-1916.txt",
+        "locator": "Intensive Work in Science at the Public Schools in Relation to the Medical Curriculum｜https://archive.org/details/cihm_85180"
+      },
+      {
+        "source_id": "src-0c562a3e3fac",
+        "original_name": "internal-medicine-vocation-1897.txt",
+        "locator": "Internal Medicine as a Vocation: An Address before the Section on General Medicine, New York Academy of Medicine, October 19th 1897｜https://archive.org/details/cihm_52037"
+      },
+      {
+        "source_id": "src-df688475655a",
+        "original_name": "john-keats-1896.txt",
+        "locator": "John Keats: The Apothecary Poet｜https://archive.org/details/101499813.nlm.nih.gov"
+      },
+      {
+        "source_id": "src-21c446ebed92",
+        "original_name": "latent-cancer-stomach-1900-CO.txt",
+        "locator": "Latent Cancer of the Stomach｜https://archive.org/details/cihm_40834"
+      },
+      {
+        "source_id": "src-47b75448c8d7",
+        "original_name": "library-school-1917.txt",
+        "locator": "The Library School in the College｜https://archive.org/details/cihm_97029"
+      },
+      {
+        "source_id": "src-ea3d99233706",
+        "original_name": "mans-redemption-1910.txt",
+        "locator": "Man's Redemption of Man: A Lay Sermon, McEwan Hall, Edinburgh, Sunday July 2nd 1910｜https://archive.org/details/b31347563"
+      },
+      {
+        "source_id": "src-ba743ce64c14",
+        "original_name": "mgh-path-report-1878.txt",
+        "locator": "Montreal General Hospital: Pathological Report for the Year Ending May 1st, 1877｜https://archive.org/details/montrealgeneral00oslegoog"
+      },
+      {
+        "source_id": "src-452feb707a25",
+        "original_name": "pernicious-anaemia-1877-CO.txt",
+        "locator": "Case of Progressive Pernicious Anaemia｜https://archive.org/details/cihm_00098"
+      },
+      {
+        "source_id": "src-83095e816e26",
+        "original_name": "physic-physicians-plato-1893.txt",
+        "locator": "Physic and Physicians as Depicted in Plato｜https://archive.org/details/101314112.nlm.nih.gov"
+      },
+      {
+        "source_id": "src-ddba75091e0a",
+        "original_name": "pork-parasites-1883-CO.txt",
+        "locator": "An Investigation into the Parasites in the Pork Supply of Montreal｜https://archive.org/details/cihm_52171"
+      },
+      {
+        "source_id": "src-8a693dfe9f3d",
+        "original_name": "ppm-ed1-1892-appleton.txt",
+        "locator": "The Principles and Practice of Medicine｜https://archive.org/details/principlespracti1892osle"
+      },
+      {
+        "source_id": "src-9e20b9907373",
+        "original_name": "ppm-ed2-1895-pentland.txt",
+        "locator": "The Principles and Practice of Medicine｜SECOND EDITION, THOROUGHLY REVISED｜https://archive.org/details/b21508628"
+      },
+      {
+        "source_id": "src-b8bf75b0f441",
+        "original_name": "ppm-ed3-1898-appleton.txt",
+        "locator": "The Principles and Practice of Medicine｜THIRD EDITION｜https://archive.org/details/cihm_01622"
+      },
+      {
+        "source_id": "src-4bd5a5a88bf5",
+        "original_name": "ppm-ed4-1901.txt",
+        "locator": "The Principles and Practice of Medicine｜FOURTH EDITION｜https://archive.org/details/cu31924012509893"
+      },
+      {
+        "source_id": "src-7d42c0ec9645",
+        "original_name": "ppm-ed5-1902.txt",
+        "locator": "The Principles and Practice of Medicine｜FIFTH EDITION｜https://archive.org/details/principlespracti00osle_0"
+      },
+      {
+        "source_id": "src-cf205ea2d8df",
+        "original_name": "ppm-ed6-1905.txt",
+        "locator": "The Principles and Practice of Medicine｜SIXTH EDITION｜https://archive.org/details/b21686671"
+      },
+      {
+        "source_id": "src-5a61a30b8245",
+        "original_name": "ppm-ed7-1909.txt",
+        "locator": "The Principles and Practice of Medicine｜SEVENTH EDITION, THOROUGHLY REVISED｜https://archive.org/details/principlespracti00osle"
+      },
+      {
+        "source_id": "src-e15e2d6ea612",
+        "original_name": "ppm-ed8-1912.txt",
+        "locator": "The Principles and Practice of Medicine｜EIGHTH EDITION - LARGELY RE-WRITTEN AND THOROUGHLY REVISED, WITH THE ASSISTANCE OF THOMAS McCRAE, M.D.｜https://archive.org/details/b21508641"
+      },
+      {
+        "source_id": "src-a3df78dbfc57",
+        "original_name": "pulsating-pleurisy-1889.txt",
+        "locator": "Pulsating Pleurisy｜https://archive.org/details/cihm_29902"
+      },
+      {
+        "source_id": "src-5ab672ec60f4",
+        "original_name": "religio-medici-1906.txt",
+        "locator": "Religio Medici: An Address delivered at Guy's Hospital, October 1905｜https://archive.org/details/cihm_75696"
+      },
+      {
+        "source_id": "src-abd349d4eb24",
+        "original_name": "science-immortality-1904.txt",
+        "locator": "Science and Immortality [Ingersoll Lecture, Harvard, 1904]｜https://archive.org/details/scienceandimmort00osleuoft"
+      },
+      {
+        "source_id": "src-d7cc0f492797",
+        "original_name": "science-immortality-constable.txt",
+        "locator": "Science and Immortality｜https://archive.org/details/scienceandimmort00osleiala"
+      },
+      {
+        "source_id": "src-ef2b7bd61a6c",
+        "original_name": "smallpox-notes.txt",
+        "locator": "Clinical Notes on Small-pox: I. The Initial Rashes; II. Haemorrhagic Small-pox; III. A Form of ...｜https://archive.org/details/cihm_52035"
+      },
+      {
+        "source_id": "src-30e398a3528a",
+        "original_name": "splenic-anaemia-1900.txt",
+        "locator": "On Splenic Anaemia｜https://archive.org/details/b28094220"
+      },
+      {
+        "source_id": "src-dfbc72795a6a",
+        "original_name": "sporadic-cretinism-1893.txt",
+        "locator": "On Sporadic Cretinism in America｜https://archive.org/details/b24761795"
+      },
+      {
+        "source_id": "src-dfda79abd03f",
+        "original_name": "students-notes-1882.txt",
+        "locator": "Students' Notes: I. Normal Histology for Laboratory and Class Use｜https://archive.org/details/studentsnotesino00osle"
+      },
+      {
+        "source_id": "src-523021decdf8",
+        "original_name": "systolic-brain-murmur-1880.txt",
+        "locator": "On the Systolic Brain Murmur of Children｜https://archive.org/details/cihm_11551"
+      },
+      {
+        "source_id": "src-92f6489716c9",
+        "original_name": "teacher-and-student-1892.txt",
+        "locator": "Teacher and Student: An Address delivered at the opening of the new building of the College of Medicine and Surgery, University of Minnesota, October ｜https://archive.org/details/cihm_52039"
+      },
+      {
+        "source_id": "src-48e8cfe4a4bd",
+        "original_name": "thomas-dover-1896.txt",
+        "locator": "Thomas Dover (of Dover's Powder): Physician and Buccaneer｜https://archive.org/details/101502208.nlm.nih.gov"
+      },
+      {
+        "source_id": "src-451d8324b40c",
+        "original_name": "thomas-linacre-1908.txt",
+        "locator": "Thomas Linacre [Linacre Lecture, St John's College, Cambridge, 1908]｜https://archive.org/details/thomaslinacre00osleuoft"
+      },
+      {
+        "source_id": "src-e992f1382cb9",
+        "original_name": "typhoid-1889-1899-summary.txt",
+        "locator": "Analysis and General Summary of the Cases from 1889-1899 [typhoid fever at the Johns Hopkins Hospital]｜https://archive.org/details/b28141799"
+      },
+      {
+        "source_id": "src-5915e592d59e",
+        "original_name": "typhoid-spine-1894.txt",
+        "locator": "On the Neurosis following Enteric Fever, known as 'the Typhoid Spine'｜https://archive.org/details/onneurosisfollow00osle"
+      },
+      {
+        "source_id": "src-b456b664755d",
+        "original_name": "vienna-34-years.txt",
+        "locator": "Vienna after Thirty-four Years｜https://archive.org/details/viennaafterthirt00osleuoft"
+      },
+      {
+        "source_id": "src-fe24e019ec7a",
+        "original_name": "walt-whitman-1919.txt",
+        "locator": "Walt Whitman: An Anniversary Address with Personal Reminiscences｜https://archive.org/details/McGillLibrary-osl_walt-whitman-anniversary-address-personal-reminiscences_BibOsl7660-25546"
+      },
+      {
+        "source_id": "src-762aede40fb5",
+        "original_name": "way-of-life-1913.txt",
+        "locator": "A Way of Life: An Address to Yale Students, Sunday evening, April 20th, 1913｜https://archive.org/details/awayoflifeanaddr00osleuoft"
+      },
+      {
+        "source_id": "src-bf39c4929886",
+        "original_name": "william-pepper-1899.txt",
+        "locator": "In Memoriam William Pepper｜https://archive.org/details/101499814.nlm.nih.gov"
+      }
+    ]
+  }
+}

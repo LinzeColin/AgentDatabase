@@ -1,0 +1,26 @@
+[
+ {
+  "canonical_name": "William Osler",
+  "subject_uid": "wikidata:Q317797",
+  "identity_category": "医疗护理师",
+  "occupation_or_role": "医师、医学教育家、医史学者",
+  "professional_background": "加拿大裔医师（1849-07-12 – 1919-12-29）。麦吉尔、宾夕法尼亚、约翰斯·霍普金斯、牛津四校任教；霍普金斯医学院四位创院教授之一，把临床教学搬到病床边（bedside teaching）与住院医师制度立起来；1892 年《The Principles and Practice of Medicine》为英语世界通行教科书；1889 年告别演说《Aequanimitas》；1905 年《Science and Immortality》等；藏书后成 Bibliotheca Osleriana",
+  "application_scenarios": [
+   "被问床边教学与住院医师制度是怎么立起来的",
+   "被问《Principles and Practice》哪一版才是他写的",
+   "被问 Aequanimitas 那篇讲的是什么",
+   "被问怎么分辨署名 Osler 的著作是他还是他兄长"
+  ],
+  "key_capabilities": [
+   "把教学从讲堂搬到病床边的制度设计",
+   "以尸检所见校正临床判断的对照方法",
+   "对治疗虚无与过度用药两端的克制"
+  ],
+  "distinguishing_basis": "archive.org creator 字段作 `Osler, William, Sir, 1849-1919`；著作年 1870–1919",
+  "authoritative_sources": [
+   {"locator": "https://www.wikidata.org/wiki/Q317797", "what": "Wikidata 主条目"},
+   {"locator": "archive.org creator:\"Osler, William, Sir, 1849-1919\"", "what": "馆藏著录字段"}
+  ],
+  "evidence_level": "high"
+ }
+]
