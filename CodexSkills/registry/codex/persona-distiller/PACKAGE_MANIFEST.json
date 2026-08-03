@@ -4,7 +4,7 @@
   "display_name": "人物蒸馏 Skill / Persona Distiller",
   "distribution": {
     "canonical_registry": "../persona-distiller-group",
-    "kind": "repository-customized-v0.0.0.64",
+    "kind": "repository-customized-v0.0.0.65",
     "lineage_base_archive_sha256": "e891912d98d14afb7677ac935a19be329d97d206f4ae74a644892f46b17f6748"
   },
   "evaluation_suites": 16,
@@ -31,7 +31,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "988acc24a0540193522713ea3b72e11ce55a3436ab205e00cce6608bcc855f89",
+      "sha256": "c1f79d739a5846213e49771ecc5aa9b5355dea3e75be0dfe3cc44d5dddf4d1b4",
       "size_bytes": 8802
     },
     {
@@ -56,12 +56,12 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "bfaa3ec6bbe080a5eb3908cdcc36144f1850a001ce9d5905e4725b75ed54002a",
-      "size_bytes": 62361
+      "sha256": "01fc3f2f08b477a58c73babd1f14afa8d5aef219336dbd378fdd65b3e4c9956f",
+      "size_bytes": 65803
     },
     {
       "path": "VERSION",
-      "sha256": "bae713c5be1496796d16339abda32ac28333fe4f7c391e0e2704ffc1d66c446c",
+      "sha256": "e208a5c62e4b9b87206398e7d960d16f1ea8cf87bf2c481cd39e19a174336964",
       "size_bytes": 10
     },
     {
@@ -121,7 +121,7 @@
     },
     {
       "path": "handoff.md",
-      "sha256": "240180473715cb0e0c14e9b37af61ee1cb2b2df6af508551c3b93bac59c2c605",
+      "sha256": "0eadf21a7bec03091e4ec2e089db9857531daf7945da902bfcce623055555fe8",
       "size_bytes": 3702
     },
     {
@@ -141,7 +141,7 @@
     },
     {
       "path": "manifest.json",
-      "sha256": "13e46fc5d0ec162f7e3cac4bd8695d089811925440131e60e229743702a1b202",
+      "sha256": "8673edaaff46d6ef01b0a3c7e72916d35a255c71be7d527d623a95867d50a334",
       "size_bytes": 1191
     },
     {
@@ -595,6 +595,11 @@
       "size_bytes": 7609
     },
     {
+      "path": "references/pipeline/checkers/check_sole_authorship_overreach.py",
+      "sha256": "0740a0c477e475a71d7c25cc540ae950fb426275460db6fd4550a31c90c84a3e",
+      "size_bytes": 20828
+    },
+    {
       "path": "references/pipeline/checkers/check_source_attribution.py",
       "sha256": "29dfe1f80fa28cf09077605e098361b4f82600d750e00741857ccb2eb1e2b730",
       "size_bytes": 12699
@@ -973,6 +978,11 @@
       "path": "scripts/check_shared_anchor.py",
       "sha256": "82a0f2cef991c992c0e52891e4b1bb7f852b48e6fb3fa46cb71f7e555406bd01",
       "size_bytes": 7609
+    },
+    {
+      "path": "scripts/check_sole_authorship_overreach.py",
+      "sha256": "0740a0c477e475a71d7c25cc540ae950fb426275460db6fd4550a31c90c84a3e",
+      "size_bytes": 20828
     },
     {
       "path": "scripts/check_source_attribution.py",
@@ -1626,5 +1636,5 @@
     },
     "secret_findings": 0
   },
-  "version": "v0.0.0.64"
+  "version": "v0.0.0.65"
 }
