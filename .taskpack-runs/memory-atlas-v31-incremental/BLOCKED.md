@@ -30,18 +30,23 @@ locally, pointed at the production origin —
 `MEMORY_ATLAS_BASE_URL=https://memoryatlas.linzezhang.com npm run validate:v31:browser`
 from an authenticated browser profile.
 
-## BLOCKED-2 — source runner is SOURCE_RUNNER_UNBOUND (AC-013, P0)
+## BLOCKED-2 — source runner is SOURCE_RUNNER_UNBOUND, by owner decision (AC-013)
 
 `crontab -l` → `no crontab for linzezhang`. The bounded 30-minute wake-up is
 **not installed**, which by AC-013's own oracle is `SOURCE_RUNNER_UNBOUND`, not
 a pass.
 
-`ops/memory-atlas/source-runner/manage_crontab.py install` would bind it, backing
-the current crontab up to `~/.memory-atlas/cron-backups/crontab-before-<stamp>.txt`
-first. Installing it changes persistent user configuration, so it was not run
-without the owner asking for it. The runner logic itself is proven by seven
-regression tests (`OpenAIDatabase/tests/test_memory_atlas_source_runner_v31.py`),
-including the local-calendar-day semantics.
+The taskpack assumed `codex_enabled: false` and treated the generic runner as the
+replacement daily path. That assumption does not hold: the owner states the Codex
+automation is running normally and instructed that no local scripts be run on the
+machine. `manage_crontab.py install` was therefore **not** executed — binding it
+would have added a second daily-capture scheduler beside a working one.
+
+So this is a deliberate configuration choice, not an unmet gate: the live daily
+path is the existing Codex automation, and the generic runner ships as a proven
+but unbound alternative. Its logic is covered by seven regression tests
+(`OpenAIDatabase/tests/test_memory_atlas_source_runner_v31.py`), including the
+local-calendar-day semantics that the upstream taskpack suite got wrong.
 
 No launchd agent was created; `~/Library/LaunchAgents` contains no Memory Atlas
 entry, as required.
@@ -59,13 +64,27 @@ Consequently there was **no** real source capture, **no** R2 upload/read-back,
 session. Those four remain unproven on live infrastructure. The code paths are
 covered by the 81 existing spine tests, which is a different and weaker claim.
 
-## BLOCKED-4 — legacy Codex Automation retirement (AC-014, P0)
+## BLOCKED-4 — legacy Codex Automation retirement: withdrawn (AC-014)
 
 `~/.codex/automations/memory-atlas-daily-source-capture/` exists
-(`automation.toml`, `memory.md`; last modified 2026-08-03 18:56). AC-014 permits
-its removal only after archive → hash-verify → pause → six replacement gates
-pass. Those gates depend on BLOCKED-2 and BLOCKED-3, so the sequence cannot even
-start. **Nothing was archived, paused, moved or deleted.**
+(`automation.toml`, `memory.md`; last modified 2026-08-03 18:56).
+
+AC-014 assumed this automation had failed and should be retired. The owner
+states it is running normally and instructed that it be left alone, so the
+retirement objective is withdrawn rather than blocked. **Nothing was archived,
+paused, moved or deleted**, and no local script was run against it.
+
+Independently of that instruction the sequence could not have started: AC-014
+permits removal only after archive → hash-verify → pause → six replacement gates,
+and those gates depend on BLOCKED-2 and BLOCKED-3.
+
+## Owner instructions honoured during this run
+
+- Claude Code session memory was **not** uploaded, committed, or added to
+  `ops/memory-atlas/source-registry.json`. The registry's source list is
+  unchanged; only the additive `source_runner` policy line was added to it.
+- No local script was run against the machine's configuration: no crontab
+  install, no automation lifecycle command, no launchd, no deployment.
 
 ## Divergences found in the taskpack itself
 
