@@ -1,6 +1,6 @@
-# Release verification — Persona Distiller v0.0.0.53
+# Release verification — Persona Distiller v0.0.0.54
 
-Date: 2026-08-04（v0.0.0.53，下表已重跑）
+Date: 2026-08-04（v0.0.0.54，下表已重跑）
 
 > **本文件记录「当前发布号的复验结果」，不是历史归档。**
 > 版本号必须等于根目录 `VERSION`，由 `scripts/check_contract_drift.py` 强制。
@@ -10,7 +10,7 @@ Date: 2026-08-04（v0.0.0.53，下表已重跑）
 > bundle 构不出来、97 人、59 用例），**三件当时都已不成立**。
 > 改过标题的旧正文会冒充当前复验，比标题陈旧更糟。已从工具中移除该行为。
 >
-> 本次（v0.0.0.53）**是真的重跑了一遍**，下表每一行都是本次实跑输出。
+> 本次（v0.0.0.54）**是真的重跑了一遍**，下表每一行都是本次实跑输出。
 
 ## Result
 
@@ -32,7 +32,7 @@ Date: 2026-08-04（v0.0.0.53，下表已重跑）
 | **★★★★★★ 承重人名门（v0.0.0.47 新增／v0.0.0.50 接进发布门，见下节）** | **passed**（**12 项自测，其中 7 条反向对照**）；**真实数据实测**：Osler #110 第 2 轮扫出 `Henry A. Christian` 全名 P1 命中 **0**（S1 2 / S2 1），第 3 轮删后 **0 个查无实据**；**接线负对照**：往真载荷里植入 `Reginald Fitzhugh`，发布门 `content.unsourced-name` **实拦** | `check_unsourced_names.py --self-test` + 对 Osler 两轮候选答案实跑 |
 | 合同漂移门（版本三轴 + 身份合同 + 检查器镜像） | **0 条** | `scripts/check_contract_drift.py` |
 | 合同漂移门的负对照 | passed（坏样本 5 类全抓出，钉住的 builder 版本未被误伤） | `check_contract_drift.py --self-test` |
-| 归属门的负对照 | passed（**8 正 + 10 反**，另含 1 条只报不判，**外加 5 例非西方姓名形态**） | `check_authorship.py --self-test` |
+| 归属门的负对照 | passed（**14 正 + 14 反**，另含 1 条只报不判，含 5 例非西方姓名形态）；**v0.0.0.54 新增两类署名形态**，Fleming #111 真工作区实测 **35 → 17**（见下节） | `check_authorship.py --self-test` |
 | OCR 同形字门的负对照 | passed（干净英文／真俄语／中文 3 条正对照 0 报；词内混文种、全同形字词、引文层 3 类坏样本全抓出） | `check_ocr_homoglyphs.py --self-test` |
 | 基线来源门 `check_baseline_provenance` | passed（坏样本 4 类全抓出，含「缺字段沉默通过」；prior-version 未被误杀） | `check_baseline_provenance.py --self-test` |
 | 拒答溢出门（v0.0.0.22 新增，只报不拦） | passed（3 条正对照未误杀，2 类溢出全抓出，带限定的正常回答未被误判） | `check_refusal_overflow.py --self-test` |
@@ -67,6 +67,40 @@ Date: 2026-08-04（v0.0.0.53，下表已重跑）
 | Complete-release deterministic rebuild | passed | `test_complete_release_is_one_deterministic_zip_and_installs_both_skills` |
 | Complete-release checksum tamper rejection | passed | `test_complete_release_installer_rejects_tampering` |
 | Atomic dual-Skill clean install | passed | 同上用例内 |
+
+## ★★★★★★★★★★★ v0.0.0.54：**期刊署名根本不带 `By`**——42 份 P1 里 29 份被判「无据」
+
+Fleming #111 是本名册第一个语料主体为**期刊论文**的人物。研究门第一次跑：
+**35 条 `research.authorship-unproven`**，而那些文件全是货真价实的期刊论文。
+
+逐份看署名，三种形态旧判据一条也认不出：
+
+| 语料里的实际形态 | 旧 `BYLINE` |
+|---|---|
+| `By SIR ALEXANDER FLEMING` | ✗ 要求 `By` 后紧跟名字，**敬称把它挡住了** |
+| `ALEXANDER FLEMING, M.B., B.S. Lonp.` | ✗ **期刊署名不带 `By`** |
+| `ALEXANDER FLEMING, F.R.C.S.,` | ✗ 同上，且**行尾是逗号**——下一行还有合著者 |
+
+两项改动：`BYLINE` 允许 `By` 与名字之间夹敬称；
+新增 `A-byline-standalone` 认独占一行的署名，**四条收窄**——
+独占一行 / 落在文件前 30% / 行尾只许学位后缀与逗号句点 /
+**有反证时一律不放行**（它比显式 `By` 弱）。
+
+**最后那一条是自测当场抓出来的**：加进去之后，
+「版权页在、但文末是别人的身份署名」那条老反例被误放行了。
+
+### 停在哪里，为什么不再往下放宽
+
+真工作区 **35 → 30 → 17**。剩下的 16 份**不该靠放宽判据解决**：
+
+- **7 份 `PAGE-SPILL`**——PMC 整版扫图，同一页上还有别人的文章。
+  `freelance-science-1952` 的反证是 `By Rend J. Dubos.`（René Dubos 的另一篇）。
+  **反证正确触发，这是判据在干活。**
+- **`lysozyme-1922-prsb` 的署名在书眉里，形态是 `Mr. A. Fleming.`**——首字母 + 姓。
+  **认它等于认下同名陷阱**：这个人物恰有 `A. Grant Fleming`，
+  裸检索 `Fleming A` 时排第一。**不加。**
+- 4 份合著、5 份其它，须逐份人工确认或按作者切开再入库
+  （这正是本判据文档里早就写明的「正确解法」）。
 
 ## ★★★★★★★★★ v0.0.0.51 新增：长度泄题门——**32/32 全长，评委数字数就能猜中**
 

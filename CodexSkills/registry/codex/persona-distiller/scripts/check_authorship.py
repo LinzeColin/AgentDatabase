@@ -23,7 +23,12 @@ Steinhardt 一轮实测：抓源子代理按刊物整本抓 PDF、按页切片�
 
 P1 需要下列之一，且**把证据原文打印出来供复核**：
 
-- `A-byline`   —— 显式署名：`By <人物名>`
+- `A-byline`   —— 显式署名：`By <人物名>`，**`By` 与名字之间允许敬称**
+                  （`By SIR ALEXANDER FLEMING`——v0.0.0.54，Fleming #111 实测 7 份）
+- `A-byline-standalone` —— **期刊署名不带 `By`**，名字独占一行、可带学位后缀、
+                  行尾可以是逗号（合著者接在下一行）。v0.0.0.54 新增，四条收窄：
+                  独占一行 / 落在文件前 30% / 行尾只许学位后缀与逗号句点 /
+                  **有反证时一律不放行**（它比显式 `By` 弱）
 - `A-editorial`—— 编者注：`[Remarks delivered by <人物名> ...]`
 - `A-turns`    —— 真·逐字稿：≥2 个说话人标签各出现 ≥3 次，
                   **且同一标签后面跟的文字每次都不同**
@@ -141,10 +146,31 @@ def build_patterns(full_name: str) -> dict:
         "masthead": None,          # 由 --masthead 注入；见 attach_masthead
         "MASTHEAD": None,
         "name_rx": name_rx,
-        "BYLINE": re.compile(rf"\bBy\s+{name_rx}\b", re.I),
+        # ★ v0.0.0.54：`By` 与名字之间允许**敬称／学位头衔**。
+        #   Fleming #111 实测：`campbell-oration-1944` 等 **7 份**署的是
+        #       `By SIR ALEXANDER FLEMING`
+        #   而旧式 `\bBy\s+名姓\b` 要求 `By` 后面紧跟名字，**七份亲笔著作全判「无据」**。
+        #   这与 Livermore #100 那次（`BY` 与名字分行）是同一类：
+        #   **判据认得出名字，认不出名字前面那一小截。**
+        #   敬称列表收窄到常见几个，且都要求后跟空白——
+        #   不许写成 `\w*\s+` 那种什么都吞的形态，否则
+        #   `By his colleague Alexander Fleming` 会被当成他的署名。
+        "BYLINE": re.compile(
+            rf"\bBy\s+(?:(?:Sir|Dame|Prof(?:essor)?|Dr|Mr|Mrs|Ms|Rev|Lord|Lady)\.?\s+)*"
+            rf"{name_rx}\b", re.I),
         "EDITORIAL": re.compile(
             rf"[\[\(][^\])]{{0,40}}\b(?:remarks|speech|address|excerpt|written|delivered|adapted)"
             rf"[^\])]{{0,40}}\bby\s+{name_rx}", re.I),
+        # ★ v0.0.0.54 `A-byline-standalone`：期刊署名不带 `By`，独占一行。
+        #   行尾允许**逗号**——合著论文把下一位作者接在下一行，就是这个形态。
+        #   学位后缀（`M.B.`、`B.S. Lond.`、`F.R.C.S.`）允许出现，但**只能在名字之后**。
+        "STANDALONE": re.compile(
+            rf"^[ \t]*(?:(?:Sir|Dame|Prof(?:essor)?|Dr|Mr|Mrs|Ms|Rev|Lord|Lady)\.?[ \t]+)*"
+            rf"{name_rx}"
+            rf"(?:[ \t]*,[ \t]*[A-Za-z][A-Za-z.]{{0,10}}(?:[ \t]+[A-Za-z][A-Za-z.]{{0,10}}){{0,2}})*"
+            rf"[ \t]*[.,]?[ \t]*$", re.M | re.I),
+        # ↑ `re.I` 是自测抓出来的：期刊署名印的是**全大写** `ALEXANDER FLEMING`，
+        #   而 `name_rx` 是混合大小写的 `Alexander…Fleming`，不加 `re.I` 一条也不中。
         # ★ v0.0.0.18 `A-copyright`：扫描件的版权页。
         #
         #   Livermore #100 实测：他 1940 年那本亲笔著作的署名页 OCR 成
@@ -333,6 +359,34 @@ def check_text(text: str, pat: dict):
             a, b = max(0, m.start() - 60), min(len(text), m.end() + 60)
             return True, code, " ".join(text[a:b].split()), counter
 
+    # ★ v0.0.0.54 `A-byline-standalone`：**期刊署名根本不带 `By`。**
+    #
+    #   Fleming #111 实测，同一批语料里三种形态：
+    #       ALEXANDER FLEMING, M.B., B.S. Lonp.      ← 独占一行 + 学位后缀
+    #       ALEXANDER FLEMING, F.R.C.S.,             ← **行尾是逗号**，下一行还有合著者
+    #       ALEXANDER FLEMING.                       ← 光名字
+    #   `BYLINE` 要求 `By` 打头，**三种一条也匹配不上**——
+    #   四十二份 P1 里二十九份被判「无据」，而它们全是货真价实的期刊论文。
+    #
+    #   这不是给 Fleming 一个人开的口子：**十九至二十世纪的期刊论文普遍这样署名**，
+    #   名册里凡是科学家，语料主体都是期刊论文。
+    #
+    #   三条收窄，防止把「关于他的书」里的章节标题当成署名：
+    #     ① 必须**独占一行**（前后都是行边界），不许是句子的一部分；
+    #     ② 必须落在**文件前 30%**——署名在文首，正文深处那个是索引或参考文献；
+    #     ③ 行尾只许跟学位后缀、逗号或句点。**逗号必须放行**——
+    #        那正是合著论文把下一位作者接在下一行的写法。
+    #     ④ **有反证时一律不放行。** 独占一行的名字比显式 `By` 弱——
+    #        它可能是标题、可能是被引用的人。**自测当场抓到**：
+    #        「版权页在、但文末是别人的身份署名」那条反例被它误放行了。
+    #        显式 `By` 可以顶着反证走，独占署名不行。
+    if pat.get("STANDALONE") and not counter:
+        for m in pat["STANDALONE"].finditer(text):
+            if m.start() > len(text) * 0.30:
+                continue                    # 正文深处的那个不是署名
+            a, b = max(0, m.start() - 60), min(len(text), m.end() + 60)
+            return True, "A-byline-standalone", " ".join(text[a:b].split()), counter
+
     # A-copyright：版权页。与上面两类同样受反证约束——
     # 文中出现别人的身份署名时不放行。
     if not counter:
@@ -374,6 +428,25 @@ def check(path: pathlib.Path, pat: dict):
 SELFTEST_NAME = "Jane Q. Public"
 SELFTEST_POSITIVE = [
     ("行首署名", "By Jane Q. Public\n\nI have argued for years that the ratio matters.\n"),
+    # ★ v0.0.0.54 回归守卫（Fleming #111 实测抓到）：署名里夹着敬称。
+    #   `campbell-oration-1944` 等 **7 份**署的是 `By SIR ALEXANDER FLEMING`，
+    #   而旧式 `\bBy\s+名姓\b` 要求 By 后面紧跟名字——**七份亲笔著作全判「无据」**。
+    #   与 Livermore #100 那次（`BY` 与名字分行）同类：认得出名字，认不出前面那一小截。
+    ("署名夹敬称 Sir", "By SIR JANE Q. PUBLIC\n\nThe ratio is what matters here.\n"),
+    ("署名夹敬称 Dr.", "By Dr. Jane Q. Public\n\nThe ratio is what matters here.\n"),
+    ("署名夹两级头衔", "By Professor Dame Jane Q. Public\n\nThe ratio matters.\n"),
+    # ★ v0.0.0.54 `A-byline-standalone`（Fleming #111 实测抓到）：
+    #   期刊署名**不带 `By`**，独占一行，行尾可能是逗号（下一行还有合著者）。
+    #   42 份 P1 里 29 份因此被判「无据」，而它们全是货真价实的期刊论文。
+    ("期刊署名·学位后缀",
+     "ON THE ETIOLOGY OF ACNE VULGARIS\n\nJANE Q. PUBLIC, M.B., B.S. Lond.\n\n"
+     "The organism was isolated from the lesions in every case examined here.\n"),
+    ("期刊署名·行尾逗号（合著接下一行）",
+     "ON THE ANTIGENIC PROPERTIES\n\nJANE Q. PUBLIC, F.R.C.S.,\nAND R. ROE, M.D.\n\n"
+     "The antigenic properties were examined in a series of cultures.\n"),
+    ("期刊署名·光名字",
+     "ON THE INFLUENCE OF TEMPERATURE\n\nJANE Q. PUBLIC.\n\n"
+     "The influence of temperature upon agglutination was measured.\n"),
     ("编者注", "[Remarks delivered by Jane Public at the 1998 annual meeting.]\n\nThank you.\n"),
     ("逐字稿双标签", "".join(
         f"HOST: Question number {i} about the portfolio and its construction over time?\n"
@@ -414,6 +487,16 @@ SELFTEST_NEGATIVE = [
     ("标题里的冒号", "Jane Public: Background & bio\nJane Public: Investment philosophy\n"
                      "Jane Public: Philanthropy\nJane Public: Background & bio\n"),
     ("完全没提到她", "This quarterly essay is about communal institutions and their funding.\n" * 5),
+    # ★ v0.0.0.54：放宽敬称之后**必须验它没放宽过头**。
+    #   若写成 `By\s+\w*\s+名姓`，下面两条都会被误当成她的署名。
+    ("By 后面是别人再提到她", "By her colleague Jane Q. Public was often quoted.\n"),
+    ("By 后面是机构名", "By the Public Health Board of Jane Q. Public County.\n"),
+    # ★ v0.0.0.54：独占一行的署名放宽之后，**必须验它没放宽过头**。
+    ("正文深处独占一行的名字（索引／参考文献）",
+     "A long article about something else entirely.\n" * 120
+     + "Jane Q. Public\n" + "More body text follows here after it.\n" * 40),
+    ("独占一行的是别人的名字",
+     "ON SOMETHING\n\nRICHARD ROE, M.D.\n\nJane Q. Public is cited below in passing.\n"),
 ]
 
 

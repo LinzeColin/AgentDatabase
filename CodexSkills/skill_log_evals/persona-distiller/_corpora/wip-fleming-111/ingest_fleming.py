@@ -45,7 +45,22 @@ LANE = [
 ]
 
 
-def lane(name: str, tier: str) -> str:
+SIX = ("writings", "expression", "conversations", "decisions", "timeline", "external")
+
+
+def lane(name: str, tier: str, note: str = "") -> str:
+    """**先读台账里的 `lane=`，猜文件名只是兜底。**
+
+    第一版只按文件名的正则猜，实测把 69 份归成
+    `writings 38 / external 24 / expression 4 / decisions 2 / conversations 1 / timeline 0`
+    ——**六路缺一路，deep 门直接过不去**。
+    而台账 69 行**每一行都带 `lane=`**，是抓源方逐份看过文档写下的：
+    `writings 17 / external 17 / expression 15 / timeline 7 / decisions 7 / conversations 6`。
+    **抓源方看过内容，我只看得到文件名。谁看过谁说了算。**
+    """
+    m = re.search(r"lane=([a-z]+)", note)
+    if m and m.group(1) in SIX:
+        return m.group(1)
     if tier in ("S1", "S2"):
         return "external"
     for pat, ln in LANE:
@@ -100,7 +115,7 @@ def main() -> int:
         argv = [sys.executable, ING, WS, str(p),
                 "--tier", tier,
                 "--language", r["lang"] or "en",
-                "--dimension", lane(r["sub"], tier),
+                "--dimension", lane(r["sub"], tier, r["note"]),
                 "--source-type", "document",
                 "--author", "Alexander Fleming" if tier == "P1" else "",
                 "--locator", loc,
