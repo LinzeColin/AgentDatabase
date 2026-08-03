@@ -1,5 +1,53 @@
 # Changelog
 
+## v0.0.0.43 — **文件名的年份不是版次年份**（2026-08-03）
+
+`check_corpus_integrity` 的文件头一直写着自己看不见「抓错了书、抓了译本当原本」。
+本版补上其中最便宜的一角。
+
+Virchow #109 实测撞出，而且**是我自己踩的**：
+
+```
+raw/cellularpath-1858-de-gutenberg  ← 文件名写 1858
+  扉页：«Vierte Auflage. Berlin, 1871. Verlag von August Hirschwald»
+```
+
+**它是第四版，不是初版。** 我照文件名把它当 1858 初版写进了研究笔记，
+于是把一句 1871 年才出现的拉丁公式记到了 1858 年名下。
+
+### 顺带更正一条被广泛引用的说法
+
+真 1858 初版（Deutsches Textarchiv 双录入转写，全书 91.4 万字符，
+扉页可核「Zwanzig Vorlesungen… BERLIN, 1858」）里，
+**`Omnis cellula`、`cellula` 各 0 处。**
+
+| 出处 | 拉丁公式 |
+|---|---|
+| 1855《Archiv》〈Cellular-Pathologie〉 | `Omnis cellula **a** cellula` |
+| 1856《Gesammelte Abhandlungen》 | `Omnis cellula a cellu**ll**a` |
+| **1858《Cellularpathologie》初版** | **全书 0 处** |
+| 1871 第四版 | `Omnis cellula **e** cellula`，且列入目录作定律名 |
+
+1858 初版是用德文说这件事的：
+
+> «so wenig lassen wir in der physiologischen oder pathologischen Gewebelehre es zu, dass
+> sich aus irgend einer unzelligen Substanz eine neue Zelle aufbauen könne.
+> Wo eine Zelle entsteht, da muss eine Zelle vorausgegangen sein»
+
+**把「Omnis cellula e cellula」记在 1858 年名下，是一处普遍的、可核的错。**
+
+### 判据形状：只列不判
+
+227 份里报出 **15 处不符，其中 1 处是真错**。噪声不低（扫本里常混入其他年份、
+译本扉页会印原著年份），故**只列不判**，进 soft 通道不阻塞。
+
+### 负对照（4 条，含三条反向）
+
+- 文件名 1858 而扉页 1871 → 抓到
+- **文件名与扉页一致 → 不报**
+- **文件名无年份 → 不判**
+- **扉页无年份 → 不判**（没有这一条，56 份期刊卷次会被误报——实测数）
+
 ## v0.0.0.42 — **OCR 把整份文本毁掉了，而它仍然是一份「真文档」**（2026-08-03）
 
 Virchow #109 是第一位德文人物。抓源回来 227 份，两道现有的门都说干净：

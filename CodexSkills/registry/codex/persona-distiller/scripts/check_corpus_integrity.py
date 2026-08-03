@@ -121,6 +121,37 @@ REAL_BAD_OCR = ('ie ie + t: 4 FROM BOUND BY MALTHY.O-%F ORD THE LIBRARY — a '
                 'the inoculation of the same, transcribed for the Osler Library. ') * 12
 
 
+YEAR = re.compile(r"\b(1[5-9]\d{2}|20[0-2]\d)\b")
+
+
+def year_mismatch(path: pathlib.Path) -> str:
+    """文件名里的年份与扉页年份对不上 —— **只列不判**。
+
+    ★ v0.0.0.43：本门的文件头一直写着自己看不见「抓错了书、抓了译本当原本」。
+    这一条补上其中最便宜的一角：**文件名的年份不是版次年份。**
+
+    Virchow #109 实测撞出：`cellularpath-1858-de-gutenberg` 的文件名写 1858，
+    扉页写「**Vierte Auflage. Berlin, 1871**」——是第四版不是初版。
+    我照文件名把它当初版写进了研究笔记，**从而把一句 1871 年才出现的拉丁公式
+    （Omnis cellula e cellula）记到了 1858 年名下**；
+    而 1858 初版（DTA 双录入全书 91.4 万字符）里那句拉丁话**一处都没有**。
+
+    227 份里报出 15 处不符，其中 1 处是这种真错。**噪声不低，故只列不判。**
+    """
+    fn = set(YEAR.findall(path.parent.name)) or set(YEAR.findall(path.stem))
+    if not fn:
+        return ""
+    try:
+        head = path.read_text(encoding="utf-8", errors="replace")[:2500]
+    except Exception:
+        return ""
+    tp = set(YEAR.findall(head))
+    if not tp or (fn & tp):
+        return ""
+    return (f"文件名年份 {sorted(fn)} 与扉页年份 {sorted(tp)[:5]} 无交集"
+            f"——**翻扉页核一次版次**")
+
+
 def self_test() -> int:
     fails = []
 
@@ -194,6 +225,45 @@ def self_test() -> int:
     return 0
 
 
+def _year_self_test() -> int:
+    """年份比对的负对照 + 三条反向对照。"""
+    import tempfile
+    print("\n══ 年份比对（v0.0.0.43）══")
+    fail = 0
+    with tempfile.TemporaryDirectory() as td:
+        root = pathlib.Path(td)
+
+        d1 = root / "cellularpath-1858-de-gutenberg"; d1.mkdir()
+        f1 = d1 / "x.txt"
+        f1.write_text("Vierte Auflage. Berlin, 1871. Verlag von August Hirschwald." * 3,
+                      encoding="utf-8")
+        got = bool(year_mismatch(f1))
+        print(f"  {'✓ 抓到' if got else '✗ 漏掉'} 文件名 1858 而扉页 1871")
+        fail += not got
+
+        # 反向①：一致 → 不得报
+        d2 = root / "oberschlesien-typhus-1848-de"; d2.mkdir()
+        f2 = d2 / "x.txt"; f2.write_text("Berlin 1848. Druckerei." * 5, encoding="utf-8")
+        print(f"  {'✓' if not year_mismatch(f2) else '✗'} 文件名与扉页同为 1848 → 不报")
+        fail += bool(year_mismatch(f2))
+
+        # 反向②：文件名无年份 → 不判
+        d3 = root / "sectionstechnik-de"; d3.mkdir()
+        f3 = d3 / "x.txt"; f3.write_text("Berlin 1877." * 5, encoding="utf-8")
+        print(f"  {'✓' if not year_mismatch(f3) else '✗'} 文件名无年份 → 不判")
+        fail += bool(year_mismatch(f3))
+
+        # 反向③：扉页无年份 → 不判（否则大批期刊卷次会被误报）
+        d4 = root / "archiv-bd01-1847-de"; d4.mkdir()
+        f4 = d4 / "x.txt"; f4.write_text("ARCHIV fuer pathologische Anatomie." * 5,
+                                         encoding="utf-8")
+        print(f"  {'✓' if not year_mismatch(f4) else '✗'} 扉页无年份 → 不判"
+              f"（否则 56 份期刊卷次会被误报）")
+        fail += bool(year_mismatch(f4))
+    print("  ✓ 年份比对负对照通过（4/4）" if not fail else f"  ✗ {fail} 项未过")
+    return fail
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description="语料真伪门：这是语料，还是一张取不到的错误页")
     ap.add_argument("paths", nargs="*", type=pathlib.Path,
@@ -207,7 +277,7 @@ def main() -> int:
     a = ap.parse_args()
 
     if a.self_test:
-        return self_test()
+        return self_test() + _year_self_test()
 
     targets: list[pathlib.Path] = []
     if a.ledger:
@@ -234,6 +304,7 @@ def main() -> int:
         return 3
 
     hard_hits, soft_hits, missing = [], [], []
+    year_hits = []
     for p in targets:
         if not p.is_file():
             missing.append(str(p))
@@ -241,6 +312,9 @@ def main() -> int:
         h, s = check_file(p)
         hard_hits += [(p.name, x) for x in h]
         soft_hits += [(p.name, x) for x in s]
+        ym = year_mismatch(p)
+        if ym:
+            year_hits.append((p.name, ym))
 
     if a.json:
         print(json.dumps({"hard": [{"file": f, "problem": x} for f, x in hard_hits],
@@ -264,6 +338,16 @@ def main() -> int:
         print(f"\n⚠ {len(soft_hits)} 份可疑（只报不拦）：\n")
         for f, x in soft_hits:
             print(f"  - {f}　{x}")
+    if year_hits:
+        print(f"\n⚠ {len(year_hits)} 份**文件名年份与扉页对不上**（只列不判，逐条翻扉页核）：\n")
+        for f, x in year_hits[:20]:
+            print(f"  - {f}　{x}")
+        if len(year_hits) > 20:
+            print(f"  …（另有 {len(year_hits) - 20} 份）")
+        print("\n  ↑ **噪声不低**（扫本里常混入其他年份），但真错就藏在里面。"
+              "\n  Virchow #109：`cellularpath-1858-de-gutenberg` 文件名写 1858、"
+              "扉页写「Vierte Auflage. Berlin, 1871」，"
+              "\n  照文件名写进研究笔记后，把一句 1871 年才出现的拉丁公式记到了 1858 年名下。")
     if not hard_hits and not soft_hits and not missing:
         print("✓ 每一份都是真文档（本门只判这一件事——**不判它是不是这个人的文档**）")
         return 0

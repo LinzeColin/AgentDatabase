@@ -17,14 +17,14 @@
 | 1852 | 《Die Noth im Spessart》 | src-ace6038037a8（05） |
 | 1855 | 〈Cellular-Pathologie〉，作 `Omnis cellula **a** cellula` | src-0f84fd47f3c0（01） |
 | 1856 | 《Gesammelte Abhandlungen》，作 `Omnis cellula a cellulla` | src-911fadcbcd25（01） |
-| 1858 | 《Die Cellularpathologie》，改作 `Omnis cellula **e** cellula` | src-63ac5a56f924 / src-3bf8c9c3b522（01） |
+| 1858 | 《Die Cellularpathologie》初版——**只有德文表述，无拉丁公式** | src-3bf8c9c3b522（01） |
 | 1862 | 《Vier Reden über Leben und Kranksein》 | src-5d35637306ca（03） |
 | 1863 | 唯物论演说 | src-bf564520e161（03） |
 | 1863–67 | 《Die krankhaften Geschwülste》 | src-d82862576099（01） |
 | 1868 | 《Ueber die Kanalisation von Berlin》 | src-c3af13c32c72（05） |
 | 1869 | 《Canalisation oder Abfuhr?》 | src-70b23b71ffbf（05） |
 | 1870 | 战地卫生列车 | src-be0d95be2a93（05） |
-| 1871 | 《Cellularpathologie》第四版，仍作 `e cellula` | src-f98483048f3c（01） |
+| 1871 | 第四版**首次作 `Omnis cellula e cellula`**，并列为定律名 | src-f98483048f3c / src-63ac5a56f924（01） |
 | 1873 | 《Reinigung und Entwässerung Berlins》 | src-436e416ed564（05） |
 | 1877 | 《Sectionstechnik》 | **故意留作 holdout，本表不给源 id** |
 | 1878 | Haeckel《Freie Wissenschaft und freie Lehre》驳其反演化论教学之说 | src-11e28e04ae8d（04） |
@@ -37,6 +37,12 @@
 **★ 1877 那一行为什么不给源 id**：该源被留作 holdout。
 年表里写出年份与书名不算泄露（那是公开著录），
 **但只要写上它的 source_id，研究门就会拦**——实测拦住过一次。
+
+**★ 第二条著录陷阱，这一条是我自己踩的**：`cellularpath-1858-de-gutenberg` 的
+**文件名写 1858，扉页写「Vierte Auflage. Berlin, 1871」**。
+我照文件名把它当成初版写进了年表与著作路，**从而把一句 1871 年才出现的拉丁公式
+记到了 1858 年名下**。改正依据是扉页，不是文件名。
+**文件名的年份不是版次年份——每一份都要翻扉页核一次。**
 
 ## ★ 一条抓源阶段实测的著录陷阱
 

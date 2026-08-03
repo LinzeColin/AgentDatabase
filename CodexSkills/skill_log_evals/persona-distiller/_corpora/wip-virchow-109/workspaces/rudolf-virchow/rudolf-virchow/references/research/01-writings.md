@@ -5,20 +5,44 @@
 
 ## 核心著作：《Die Cellularpathologie》(Berlin: Hirschwald, 1858)
 
-- src-3bf8c9c3b522 —— **Deutsches Textarchiv 双录入转写本，非 OCR**。本人物最可靠的一份，逐字引文优先取它。
-- src-63ac5a56f924 —— 1858 年扫本，与转写本可逐句互核。
-- src-f98483048f3c —— 1871 年第四版。
+- src-3bf8c9c3b522 —— **Deutsches Textarchiv 双录入转写本，非 OCR，1858 初版**。
+  扉页可核：「Zwanzig Vorlesungen, gehalten während der Monate Februar, März und April
+  1858… BERLIN, 1858. Verlag von August Hirschwald」，全书 91.4 万字符至
+  「Druck von Trowitzsch und Sohn in Berlin」。**逐字引文以这一份为准。**
+- src-63ac5a56f924 —— **不是 1858，是 1871 年第四版**（Project Gutenberg #44921）。
+  扉页作「Vierte Auflage. Berlin, 1871」。抓源时的文件名年份有误，已按扉页更正。
+- src-f98483048f3c —— 1871 年第四版（Bayerische Staatsbibliothek 扫本）。
 
-**★ 一处必须写明的实测：那句公式他改过口径。**
+**★ 一处必须写明的实测：那句拉丁公式根本不在 1858 初版里。**
 
-| 出处 | 原样 |
-|---|---|
-| src-911fadcbcd25《Gesammelte Abhandlungen》1856 | «Omnis cellula a cellulla (Archiv…» |
-| src-63ac5a56f924《Cellularpathologie》1858 | «Omnis cellula **e** cellula=), ebenso wie» |
-| src-f98483048f3c 同书 1871 | «Omnis cellula **e** cellula)» |
+| 出处 | 拉丁公式 | 实测 |
+|---|---|---|
+| src-0f84fd47f3c0〈Cellular-Pathologie〉1855 | `Omnis cellula **a** cellula` | ✅ |
+| src-911fadcbcd25《Gesammelte Abhandlungen》1856 | `Omnis cellula a cellu**ll**a` | ✅（且 cellula 拼成 cellulla） |
+| **src-3bf8c9c3b522《Cellularpathologie》1858 初版** | — | **全书 0 处** |
+| src-63ac5a56f924 / src-f98483048f3c 同书 1871 第四版 | `Omnis cellula **e** cellula` | ✅ |
 
-介词从 `a` 变成 `e`，且 1856 那处还把 `cellula` 拼成了 `cellulla`。
-**引这句话时必须说清引的是哪一版**——两个介词不是同一个说法。
+**1858 初版是用德文说这件事的，没有那句拉丁话。** 原样（含换行连字符）：
+
+> «so wenig lassen wir in
+> der physiologischen oder pathologischen Gewebelehre es zu, dass
+> sich aus irgend einer unzelligen Substanz eine neue Zelle auf-
+> bauen könne. Wo eine Zelle entsteht, da muss eine Zelle
+> vorausgegangen sein»
+> ——src-3bf8c9c3b522，《Die Cellularpathologie》Berlin 1858
+
+而 1871 第四版把它提升成了一条**有名字的定律**，写进目录：
+
+> «Das Gesetz von der continuirlichen Entwickelung (Omnis cellula e cellula)»
+> ——src-f98483048f3c，1871 年第四版目录
+
+**所以这句话的三层要分开说：**
+1. **1855 年在《Archiv》里首次用拉丁文，作 `a cellula`**；
+2. **1858 年成书时只有德文表述，没有拉丁公式**；
+3. **1871 年第四版改作 `e cellula`，并被列为一条定律的名称。**
+
+**把「Omnis cellula e cellula」记在 1858 年名下，是一处普遍的、可核的错**——
+我自己在本文件的第一版里就是这么写的，根因是照着文件名里的年份写，没看扉页。
 
 ## 期刊：《Archiv für pathologische Anatomie und Physiologie》(1847 起)
 
