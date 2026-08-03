@@ -1,0 +1,121 @@
+{
+  "schema_version": "memory_atlas.semantic_reconciliation.v1",
+  "generated_at": "2026-08-03T20:32:04.361508Z",
+  "side_effects": "NONE_READ_ONLY",
+  "git": {
+    "head": "895a7c28affcf6001b541bcac6c129e739cdb59e",
+    "origin_main": "895a7c28affcf6001b541bcac6c129e739cdb59e",
+    "branch": "main",
+    "dirty_entry_count": 5,
+    "atomic_observation": true,
+    "main_only_candidate": true
+  },
+  "governance_files": [
+    "AGENTS.md",
+    "CodexSkills/governance/AGENTS.md",
+    "CodexSkills/registry/auto/AGENTS.md",
+    "CodexSkills/registry/codex/beautiful-html-templates/references/beautiful-html-templates/AGENTS.md",
+    "CodexSkills/registry/codex/graphify/references/graphify-repo/AGENTS.md",
+    "CodexSkills/registry/codex/gsap-core/references/gsap-skills/AGENTS.md",
+    "CodexSkills/registry/codex/gsap-frameworks/references/gsap-skills/AGENTS.md",
+    "CodexSkills/registry/codex/gsap-performance/references/gsap-skills/AGENTS.md",
+    "CodexSkills/registry/codex/gsap-plugins/references/gsap-skills/AGENTS.md",
+    "CodexSkills/registry/codex/gsap-react/references/gsap-skills/AGENTS.md",
+    "CodexSkills/registry/codex/gsap-scrolltrigger/references/gsap-skills/AGENTS.md",
+    "CodexSkills/registry/codex/gsap-skills/references/gsap-skills/AGENTS.md",
+    "CodexSkills/registry/codex/gsap-timeline/references/gsap-skills/AGENTS.md",
+    "CodexSkills/registry/codex/gsap-utils/references/gsap-skills/AGENTS.md",
+    "CodexSkills/registry/codex/html-anything/references/html-anything/AGENTS.md",
+    "CodexSkills/registry/codex/html-anything/references/html-anything/e2e/AGENTS.md",
+    "OpenAIDatabase/AGENTS.md",
+    "OpenAIDatabase/macdata/airM2/AGENTS.md",
+    "OpenAIDatabase/macdata/proM2/AGENTS.md",
+    "CodexSkills/registry/codex/awesome-design-md/references/source/CONTRIBUTING.md",
+    "CodexSkills/registry/codex/book-to-skill/CONTRIBUTING.md",
+    "CodexSkills/registry/codex/guizang-ppt-skill/CONTRIBUTING.md",
+    "CodexSkills/registry/codex/html-anything/references/html-anything/CONTRIBUTING.md",
+    "CodexSkills/registry/codex/persona-distiller/CONTRIBUTING.md",
+    "CodexSkills/registry/codex/serenity-skill/CONTRIBUTING.md"
+  ],
+  "checks": [
+    {
+      "objective": "terminal_live_snapshot",
+      "state": "apply",
+      "evidence_paths": [
+        "OpenAIDatabase/scripts/memory_atlas_private/pipeline.py"
+      ]
+    },
+    {
+      "objective": "protected_live_snapshot_api",
+      "state": "apply",
+      "evidence_paths": [
+        "OpenAIDatabase/scripts/memory_atlas_private/api_server.py"
+      ]
+    },
+    {
+      "objective": "frontend_live_provider",
+      "state": "apply",
+      "evidence_paths": [
+        "MemoryAtlas/src/app/AppProviders.tsx"
+      ]
+    },
+    {
+      "objective": "reality_panel",
+      "state": "apply",
+      "evidence_paths": [
+        "MemoryAtlas/src/features/overview/HomeOverviewView.tsx"
+      ]
+    },
+    {
+      "objective": "parallel_v31_shell_unmounted",
+      "state": "conflict",
+      "evidence_paths": [
+        "MemoryAtlas/src/app/AppProviders.tsx",
+        "MemoryAtlas/src/v31/PrivateAnalyticsProvider.tsx",
+        "MemoryAtlas/src/v31/V31App.tsx"
+      ]
+    },
+    {
+      "objective": "metric_basis_split",
+      "state": "apply",
+      "evidence_paths": [
+        "OpenAIDatabase/scripts/memory_atlas_private/pipeline.py",
+        "OpenAIDatabase/scripts/memory_atlas_private/analytics.py",
+        "OpenAIDatabase/scripts/memory_atlas_private/api_server.py"
+      ]
+    },
+    {
+      "objective": "source_tiers",
+      "state": "adapt",
+      "evidence_paths": [
+        "ops/memory-atlas/source-registry.json",
+        "OpenAIDatabase/scripts/memory_atlas_private/inventory.py"
+      ]
+    },
+    {
+      "objective": "api_to_chart_gate",
+      "state": "apply",
+      "evidence_paths": [
+        ".github/workflows/memory-atlas-v31.yml",
+        "ops/memory-atlas/post-promote-probe.sh"
+      ]
+    },
+    {
+      "objective": "static_snapshot_truthful_label",
+      "state": "adapt",
+      "evidence_paths": [
+        "MemoryAtlas/src/providers/AtlasDataProvider.tsx"
+      ]
+    }
+  ],
+  "summary": {
+    "satisfied": 0,
+    "apply": 6,
+    "adapt": 2,
+    "equivalent": 0,
+    "conflict": 1,
+    "blocked": 0,
+    "obsolete": 0
+  },
+  "rule": "Preserve satisfied/equivalent upstream implementation; only apply/adapt unresolved semantics. SHA is evidence, not freeze. V31App must remain unmounted."
+}
