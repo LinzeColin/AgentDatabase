@@ -1,9 +1,13 @@
 from __future__ import annotations
 
 import importlib.util
+import hashlib
 import json
 import os
+import re
+import shutil
 import sqlite3
+import subprocess
 import threading
 import urllib.error
 import urllib.request
@@ -1166,7 +1170,217 @@ def test_private_fact_backup_requires_successful_source_and_readback(tmp_path: P
     result = backup_private_facts(config, private, store, generated_at="2026-08-01T00:00:00+00:00")
     assert result["state"] == "PASS"
     assert result["receipt"]["readback_verified"] is True
+    assert result["github_private_database"]["readback_verified"] is True
+    assert private.get_json(result["github_private_database"]["relpath"])["source_run_id"] == "run-1"
     assert private.get_json("memory-atlas/backups/latest.json")["state"] == "PASS"
+
+
+def test_private_release_archive_is_split_and_restores_exact_bytes(tmp_path: Path) -> None:
+    from OpenAIDatabase.scripts.memory_atlas_private.private_release import (
+        _archive_manifest,
+        _encrypt_archive,
+        _restore_archive,
+    )
+
+    age = shutil.which("age") or str(Path.home() / ".local/bin/age")
+    age_keygen = shutil.which("age-keygen") or str(Path.home() / ".local/bin/age-keygen")
+    assert Path(age).is_file() and Path(age_keygen).is_file(), "age toolchain unavailable"
+    generated = subprocess.run(
+        [age_keygen], stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True
+    )
+    identity_match = re.search(rb"AGE-SECRET-KEY-[A-Z0-9]+", generated.stdout)
+    recipient_match = re.search(rb"age1[0-9a-z]+", generated.stderr)
+    assert identity_match and recipient_match
+    identity = bytearray(identity_match.group(0))
+    source = tmp_path / "source.bin"
+    source.write_bytes(os.urandom(4096))
+    record = InventoryRecord(
+        source_id="codex_sessions",
+        source_root=str(tmp_path),
+        relative_path="fixture/source.bin",
+        materialized_path=str(source),
+        kind="files",
+        size_bytes=source.stat().st_size,
+        mtime_ns=source.stat().st_mtime_ns,
+        sha256=sha256_file(source),
+        original_sha256=sha256_file(source),
+        snapshot_created=True,
+    )
+    manifest = _archive_manifest([record], backup_id="fixture-run", created_at=FIXED_TIME)
+    encrypted = tmp_path / "encrypted"
+    encrypted.mkdir()
+    parts = _encrypt_archive(
+        records=[record],
+        manifest=manifest,
+        recipient=recipient_match.group(0).decode("ascii"),
+        age=age,
+        directory=encrypted,
+        max_part_bytes=512,
+        max_parts=64,
+    )
+    assert len(parts) >= 2
+    assert all(part.size_bytes <= 512 for part in parts)
+    restored = _restore_archive(
+        parts=[part.path for part in parts],
+        destination=tmp_path / "restore",
+        age=age,
+        identity=identity,
+    )
+    assert restored == {
+        "state": "PASS",
+        "restored_files": 1,
+        "restored_bytes": source.stat().st_size,
+        "all_hashes_match": True,
+    }
+    for index in range(len(identity)):
+        identity[index] = 0
+
+
+def test_private_release_workflow_verifies_remote_restore_and_cleans_local_payload(
+    tmp_path: Path,
+) -> None:
+    from OpenAIDatabase.scripts.memory_atlas_private.private_release import PrivateReleaseBackup
+
+    age_keygen = shutil.which("age-keygen") or str(Path.home() / ".local/bin/age-keygen")
+    assert Path(age_keygen).is_file(), "age toolchain unavailable"
+    generated = subprocess.run(
+        [age_keygen], stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True
+    )
+    identity_match = re.search(rb"AGE-SECRET-KEY-[A-Z0-9]+", generated.stdout)
+    recipient_match = re.search(rb"age1[0-9a-z]+", generated.stderr)
+    assert identity_match and recipient_match
+    identity_bytes = identity_match.group(0)
+    recipient = recipient_match.group(0).decode("ascii")
+
+    database_dir = Path(__file__).resolve().parents[1]
+    private_policy = json.loads(
+        (database_dir / "config/storage/private_encrypted_backup_policy.json").read_text()
+    )
+    public_policy = json.loads(
+        (database_dir / "config/storage/public_encrypted_backup_policy.json").read_text()
+    )
+    public_policy["unified_key"]["public_recipient"] = recipient
+    public_policy["unified_key"]["recipient_fingerprint"] = hashlib.sha256(
+        recipient.encode("ascii")
+    ).hexdigest()
+    private_policy_path = tmp_path / "private-policy.json"
+    public_policy_path = tmp_path / "public-policy.json"
+    private_policy_path.write_text(json.dumps(private_policy), encoding="utf-8")
+    public_policy_path.write_text(json.dumps(public_policy), encoding="utf-8")
+
+    class FakeReleaseClient:
+        def __init__(self) -> None:
+            self.assets: dict[str, bytes] = {}
+            self.tag = ""
+            self.draft = True
+
+        def assert_private_repository(self) -> None:
+            return None
+
+        def create_draft(self, tag: str, title: str) -> None:
+            assert title.startswith("Memory Atlas")
+            self.tag = tag
+            self.draft = True
+
+        def upload(self, tag: str, paths: list[Path]) -> None:
+            assert tag == self.tag and self.draft
+            self.assets = {path.name: path.read_bytes() for path in paths}
+
+        def download(self, tag: str, destination: Path) -> None:
+            assert tag == self.tag
+            for name, payload in self.assets.items():
+                (destination / name).write_bytes(payload)
+
+        def view(self, tag: str) -> dict[str, object]:
+            assert tag == self.tag
+            return {
+                "tagName": tag,
+                "isDraft": self.draft,
+                "url": "https://github.example.test/private/release",
+                "assets": [
+                    {"name": name, "size": len(payload)}
+                    for name, payload in self.assets.items()
+                ],
+            }
+
+        def publish(self, tag: str) -> None:
+            assert tag == self.tag
+            self.draft = False
+
+        def enforce_retention(self, prefix: str, keep: int) -> list[str]:
+            assert prefix == "memory-atlas-auto-backup-" and keep == 3
+            return []
+
+    source = tmp_path / "source.jsonl"
+    source.write_bytes(os.urandom(8192))
+    record = InventoryRecord(
+        source_id="codex_sessions",
+        source_root=str(tmp_path),
+        relative_path="fixture/source.jsonl",
+        materialized_path=str(source),
+        kind="files",
+        size_bytes=source.stat().st_size,
+        mtime_ns=source.stat().st_mtime_ns,
+        sha256=sha256_file(source),
+        original_sha256=sha256_file(source),
+        snapshot_created=True,
+    )
+    fake = FakeReleaseClient()
+    backup = PrivateReleaseBackup(
+        private_policy_path=private_policy_path,
+        public_policy_path=public_policy_path,
+        identity_loader=lambda: bytearray(identity_bytes),
+        release_client=fake,  # type: ignore[arg-type]
+    )
+    result = backup.run(
+        records=[record],
+        logical_source_set=list(private_policy["scope"]["logical_sources"]),
+        backup_id="marun_fixture_1234567890",
+        created_at=FIXED_TIME,
+        work_root=tmp_path,
+    )
+    assert result["state"] == "PASS"
+    assert result["remote_readback_verified"] is True
+    assert result["isolated_restore"]["all_hashes_match"] is True
+    assert result["local_payload_cleanup"] == {"state": "PASS", "remaining_paths": 0}
+    assert not (tmp_path / "private-github-release").exists()
+
+
+def test_source_capture_entry_only_sweeps_owned_stale_temp_dirs(tmp_path: Path) -> None:
+    import OpenAIDatabase.scripts.memory_atlas_source_capture_entry as entry
+
+    old = tmp_path / f"{entry.TEMP_PREFIX}old"
+    young = tmp_path / f"{entry.TEMP_PREFIX}young"
+    unrelated = tmp_path / "other-task"
+    for path in (old, young, unrelated):
+        path.mkdir()
+        (path / "payload").write_bytes(b"fixture")
+    now = 2_000_000.0
+    os.utime(old, (now - entry.STALE_SECONDS - 1, now - entry.STALE_SECONDS - 1))
+    os.utime(young, (now, now))
+    assert entry.cleanup_stale_run_dirs(tmp_path, now=now) == 1
+    assert not old.exists()
+    assert young.is_dir()
+    assert unrelated.is_dir()
+
+
+def test_source_capture_entry_redacts_unreadable_source_filename() -> None:
+    import OpenAIDatabase.scripts.memory_atlas_source_capture_entry as entry
+
+    coverage = entry._public_safe_source_coverage(
+        [{
+            "source_id": "codex_memories",
+            "label_zh": "Codex 记忆",
+            "required": False,
+            "state": "UNREADABLE",
+            "object_count": 3,
+            "size_bytes": 10,
+            "message_zh": "refused: private-secret-name.json",
+        }]
+    )
+    encoded = json.dumps(coverage, ensure_ascii=False)
+    assert "private-secret-name.json" not in encoded
+    assert coverage and coverage[0]["reason_code"] == "STANDALONE_CREDENTIAL_LIKE_FILE_EXCLUDED"
 
 
 def test_private_snapshot_is_only_exposed_through_signed_api() -> None:
@@ -1192,7 +1406,7 @@ def test_manual_backup_sources_protected_env_and_current_runtime() -> None:
     assert "private_db_client.py" in text and "source-registry.json" in text
 
 
-def test_source_capture_entry_honors_explicit_protected_local_paths(
+def test_source_capture_entry_forces_ephemeral_local_paths(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -1226,16 +1440,36 @@ def test_source_capture_entry_honors_explicit_protected_local_paths(
         assert command[-1] == "capture"
         assert cwd == tmp_path / "repo"
         observed.update(env)
-        return type("Completed", (), {"returncode": 0})()
+        return subprocess.CompletedProcess(
+            command,
+            0,
+            json.dumps({"state": "SUCCEEDED", "run_id": "fixture-run"}),
+            "",
+        )
 
-    monkeypatch.setattr(entry.subprocess, "run", fake_run)
+    monkeypatch.setattr(entry, "_run_capture", fake_run)
     with pytest.raises(SystemExit) as exit_info:
         entry.main()
     assert exit_info.value.code == 0
-    assert {key: observed[key] for key in expected} == expected
+    for key in (
+        "MEMORY_ATLAS_PRIVATE_DB_CLIENT",
+        "MEMORY_ATLAS_SOURCE_REGISTRY",
+        "MEMORY_ATLAS_PUBLIC_SNAPSHOT",
+        "MEMORY_ATLAS_OPENAI_DATABASE_DATA_ROOTS",
+        "MEMORY_ATLAS_VERIFIED_EVIDENCE_ROOTS",
+        "MEMORY_ATLAS_SOURCE_HOST_ID",
+    ):
+        assert observed[key] == expected[key]
+    ephemeral = Path(observed["MEMORY_ATLAS_RUNTIME_DIR"]).parent
+    assert ephemeral.name.startswith(entry.TEMP_PREFIX)
+    assert Path(observed["MEMORY_ATLAS_WORK_DIR"]).parent == ephemeral
+    assert Path(observed["MEMORY_ATLAS_WEB_DATA_DIR"]).parent == ephemeral
+    assert Path(observed["TMPDIR"]).parent == ephemeral
+    assert not ephemeral.exists()
+    assert observed["MEMORY_ATLAS_PRIVATE_RELEASE_BACKUP_ENABLED"] == "1"
 
 
-def test_source_capture_entry_default_env_symlink_binds_protected_runtime(
+def test_source_capture_entry_symlink_keeps_evidence_binding_but_uses_ephemeral_runtime(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -1271,15 +1505,22 @@ def test_source_capture_entry_default_env_symlink_binds_protected_runtime(
     def fake_run(command: list[str], *, cwd: Path, env: dict[str, str]):
         assert command[0] == str(protected_python)
         observed.update(env)
-        return type("Completed", (), {"returncode": 0})()
+        return subprocess.CompletedProcess(
+            command,
+            0,
+            json.dumps({"state": "SUCCEEDED", "run_id": "fixture-run"}),
+            "",
+        )
 
-    monkeypatch.setattr(entry.subprocess, "run", fake_run)
+    monkeypatch.setattr(entry, "_run_capture", fake_run)
     with pytest.raises(SystemExit) as exit_info:
         entry.main()
     assert exit_info.value.code == 0
-    assert observed["MEMORY_ATLAS_RUNTIME_DIR"] == str(protected / "memory-atlas-runtime")
-    assert observed["MEMORY_ATLAS_WORK_DIR"] == str(protected / "memory-atlas-work")
-    assert observed["MEMORY_ATLAS_WEB_DATA_DIR"] == str(protected / "memory-atlas-preview")
+    ephemeral = Path(observed["MEMORY_ATLAS_RUNTIME_DIR"]).parent
+    assert ephemeral.name.startswith(entry.TEMP_PREFIX)
+    assert Path(observed["MEMORY_ATLAS_WORK_DIR"]).parent == ephemeral
+    assert Path(observed["MEMORY_ATLAS_WEB_DATA_DIR"]).parent == ephemeral
+    assert not ephemeral.exists()
     assert observed["MEMORY_ATLAS_VERIFIED_EVIDENCE_ROOTS"] == str(protected / "memory-atlas-evidence-adapters")
 
 

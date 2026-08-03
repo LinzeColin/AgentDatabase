@@ -99,6 +99,14 @@ def backup_private_facts(
         run_id = str(latest.get("run_id", "unknown"))
         key = f"{day}/{run_id}/private-facts-{digest[:16]}.json"
         receipt = _put_backup(object_store, config, key, path, digest)
+        github_relpath = f"memory-atlas/backups/{key}"
+        private_db.put_json(
+            github_relpath,
+            bundle,
+            f"memory-atlas: mirror fact bundle {run_id}",
+        )
+        if private_db.get_json(github_relpath) != bundle:
+            raise ValueError("Private-Database fact bundle GitHub 读回不一致")
     finally:
         path.unlink(missing_ok=True)
     result = {
@@ -109,6 +117,12 @@ def backup_private_facts(
         "fact_count": len(facts),
         "missing_optional": missing,
         "receipt": receipt,
+        "github_private_database": {
+            "relpath": github_relpath,
+            "sha256": digest,
+            "readback_sha256": digest,
+            "readback_verified": True,
+        },
     }
     private_db.put_json("memory-atlas/backups/latest.json", result, "memory-atlas: record private fact backup")
     return result

@@ -12,6 +12,7 @@ from typing import Any, Iterable
 from .analytics import build_behavior_analytics, build_habit_recommendations
 from .config import RuntimeConfig
 from .failure_compound import FailureCompoundStore
+from .fact_backup import backup_private_facts
 from .hashing import sha256_file, stable_id
 from .inventory import cleanup_snapshots, discover_inventory, load_source_registry
 from .manifest import manifest_digest, run_fact_paths, utc_now, write_json_atomic
@@ -19,6 +20,7 @@ from .models import NormalizedEvent, RunManifest, RunState, SourceState
 from .normalization import normalize_record
 from .object_store import ObjectStore, R2ObjectStore
 from .private_db import FactOutbox, GhPrivateDatabase, PrivateDatabase
+from .private_release import PrivateReleaseBackup
 from .status_projection import build_status_projection, publish_status_projection
 
 
@@ -90,6 +92,7 @@ class CapturePipeline:
         object_store: ObjectStore | None = None,
         private_db: PrivateDatabase | None = None,
         clock=utc_now,
+        private_release_backup: PrivateReleaseBackup | None = None,
     ):
         self.config = config
         self.config.ensure_runtime_dirs()
@@ -98,6 +101,17 @@ class CapturePipeline:
         self.clock = clock
         self.outbox = FactOutbox(config.runtime_dir / "fact-outbox.sqlite3")
         self.failures = FailureCompoundStore(config.runtime_dir / "failure-compound.sqlite3")
+        if private_release_backup is not None:
+            self.private_release_backup = private_release_backup
+        elif config.private_release_backup_enabled:
+            if config.private_release_policy is None or config.public_release_policy is None:
+                raise PipelineError("GitHub 私有 Release 策略未绑定")
+            self.private_release_backup = PrivateReleaseBackup(
+                private_policy_path=config.private_release_policy,
+                public_policy_path=config.public_release_policy,
+            )
+        else:
+            self.private_release_backup = None
 
     def run(self) -> dict[str, Any]:
         started_at = self.clock()
@@ -148,6 +162,14 @@ class CapturePipeline:
             manifest.state = RunState.VERIFYING_OBJECTS
             if not all(item.readback_verified and item.readback_sha256 == item.sha256 for item in manifest.objects):
                 raise PipelineError("至少一个对象缺少完整读回证明")
+            if self.private_release_backup is not None:
+                manifest.github_private_release_backup = self.private_release_backup.run(
+                    records=records,
+                    logical_source_set=[item.spec.source_id for item in registry],
+                    backup_id=run_id,
+                    created_at=started_at,
+                    work_root=work,
+                )
             manifest.state = RunState.PUBLISHING_FACTS
             analytics = build_behavior_analytics(all_events, generated_at=self.clock())
             analytics["normalized_event_batch"] = _normalized_batch_fact(
@@ -161,6 +183,17 @@ class CapturePipeline:
             manifest.state = RunState.SUCCEEDED
             manifest.completed_at = self.clock()
             result = self._publish_terminal(manifest, events=all_events, message="源端全量对账完成")
+            if self.private_release_backup is not None:
+                fact_backup = backup_private_facts(
+                    self.config,
+                    self.private_db,
+                    self.object_store,
+                    generated_at=self.clock(),
+                )
+                if fact_backup.get("state") != "PASS":
+                    raise PipelineError("事实备份包未完成 R2 与 Private-Database 双读回")
+                result["private_fact_backup"] = fact_backup
+                result["github_private_release_backup"] = manifest.github_private_release_backup
             result["event_count"] = event_count
             return result
         except Exception as exc:

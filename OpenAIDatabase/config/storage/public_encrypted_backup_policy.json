@@ -46,10 +46,11 @@
     "compression": "gzip"
   },
   "unified_key": {
-    "key_id": "agentdatabase-public-backup-v1",
+    "key_id": "agentdatabase-public-backup-v2",
+    "supersedes_key_id": "agentdatabase-public-backup-v1",
     "recipient_provisioning_status": "READY",
-    "public_recipient": "age1r0dxp7w0x0mx2tnleup5jad7ju7lrsyuewm2h9y4hss6le8f0pdslc0w50",
-    "recipient_fingerprint": "e92633e20b74672ff9e6d8a27db657e7fb770a4e47c12d107bcd9ab213e03be9",
+    "public_recipient": "age1use3mem7w4l8qs3j6434urz4p2sv04zerksev4r759z06ukfnfnq0aza9n",
+    "recipient_fingerprint": "096d22f56e1b079669a11360164bc14e1dcb1f96793aa12e757fa0c2b742a695",
     "private_identity_source": "macos_keychain_or_owner_secret_manager",
     "identity_file_persisted": false,
     "key_export_allowed": false,

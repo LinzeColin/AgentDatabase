@@ -3,6 +3,8 @@
   "policy": {
     "discovery": "explicit_roots_only",
     "raw_bytes": "lossless_no_redaction_no_encryption",
+    "github_private_mirror": "lossless_age_encrypted_release_full_snapshot",
+    "local_payload_retention": "zero_after_each_run",
     "standalone_credentials": "excluded_as_configuration_not_product_memory",
     "symlinks": "never_follow",
     "missing_required": "WAITING_SOURCE",

@@ -94,6 +94,7 @@ class RunManifest:
     source_capture_host: str = ""
     product_version: str = "0.0.0.31"
     taskpack_version: str = "0.0.0.2"
+    github_private_release_backup: dict[str, Any] | None = None
 
     def to_dict(self) -> dict[str, Any]:
         value = asdict(self)

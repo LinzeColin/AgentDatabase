@@ -38,14 +38,15 @@
   },
   "private_encrypted_release_automation_authorization": {
     "decision": "owner_authorized_private_ciphertext_only_codex_backup_automation_repair",
-    "authorized_at": "2026-07-28T09:21:09Z",
-    "source": "Codex task owner requested implementation after the automation diagnosis",
+    "authorized_at": "2026-08-03T07:08:09Z",
+    "source": "Owner approved the frozen Memory Atlas daily lossless backup contract in Codex",
     "scope": [
-      "Codex memories, session records, and session attachments only",
+      "all explicit Memory Atlas source-registry logical sources, with standalone credentials still excluded",
       "private LinzeColin/Private-Database GitHub Release ciphertext assets only",
       "one unified approved key identifier with a Keychain or owner-controlled secret-manager private identity",
       "one fresh system temporary directory per run with no shared workspace writes",
-      "remote ciphertext hash verification and automatic-release-only retention"
+      "remote ciphertext hash verification, isolated restore verification, and automatic-release-only retention",
+      "fact bundle mirrored to the private Git tree after exact readback verification"
     ],
     "does_not_authorize": [
       "public Release payloads or Git-tracked ciphertext",

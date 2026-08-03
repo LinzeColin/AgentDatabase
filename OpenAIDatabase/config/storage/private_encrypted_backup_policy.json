@@ -6,9 +6,16 @@
   "owner_authorization_ref": "config/storage/raw_material_policy.json#private_encrypted_release_automation_authorization",
   "scope": {
     "logical_sources": [
+      "codex_state",
       "codex_memories",
       "codex_sessions",
-      "codex_attachments"
+      "codex_archived_sessions",
+      "codex_attachments",
+      "codex_automations",
+      "codex_tasks",
+      "chatgpt_exports",
+      "openaidatabase_live_data",
+      "verified_evidence_adapters"
     ],
     "full_recovery_intended": true,
     "plaintext_publication_allowed": false,
@@ -21,9 +28,9 @@
     "transport": "github_release_asset_only",
     "draft_release_required": true,
     "remote_verification_required_before_local_ciphertext_cleanup": true,
-    "max_ciphertext_part_bytes": 1073741824,
-    "max_parts": 3,
-    "automatic_release_tag_prefix": "codex-auto-backup-",
+    "max_ciphertext_part_bytes": 94371840,
+    "max_parts": 64,
+    "automatic_release_tag_prefix": "memory-atlas-auto-backup-",
     "automatic_release_retention_count": 3,
     "retention_scope": "automatic_releases_with_matching_tag_prefix_only",
     "manual_or_nonmatching_release_mutation_allowed": false
@@ -38,7 +45,8 @@
   },
   "unified_key": {
     "public_policy_ref": "config/storage/public_encrypted_backup_policy.json#unified_key",
-    "key_id": "agentdatabase-public-backup-v1",
+    "key_id": "agentdatabase-public-backup-v2",
+    "keychain_account": "memory-atlas",
     "private_identity_source": "macos_keychain_or_owner_secret_manager",
     "identity_file_persisted": false,
     "key_export_allowed": false,

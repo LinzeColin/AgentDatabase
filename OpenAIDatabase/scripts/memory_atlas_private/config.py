@@ -55,6 +55,9 @@ class RuntimeConfig:
     status_projection_target: Path | None = None
     github_repo: str = "LinzeColin/Private-Database"
     private_area: str = "Private-AgentDatabase"
+    private_release_backup_enabled: bool = False
+    private_release_policy: Path | None = None
+    public_release_policy: Path | None = None
 
     @classmethod
     def from_env(cls, env: dict[str, str] | None = None) -> "RuntimeConfig":
@@ -117,6 +120,32 @@ class RuntimeConfig:
                 raise ConfigurationError(
                     "MEMORY_ATLAS_STATUS_PROJECTION_TARGET 必须位于既有非符号链接目录"
                 )
+        private_release_enabled = values.get(
+            "MEMORY_ATLAS_PRIVATE_RELEASE_BACKUP_ENABLED", ""
+        ).strip().lower() in {"1", "true", "yes"}
+        private_release_policy_raw = values.get(
+            "MEMORY_ATLAS_PRIVATE_RELEASE_POLICY", ""
+        ).strip()
+        public_release_policy_raw = values.get(
+            "MEMORY_ATLAS_PUBLIC_RELEASE_POLICY", ""
+        ).strip()
+        private_release_policy = (
+            Path(private_release_policy_raw).expanduser().resolve()
+            if private_release_policy_raw
+            else None
+        )
+        public_release_policy = (
+            Path(public_release_policy_raw).expanduser().resolve()
+            if public_release_policy_raw
+            else None
+        )
+        if private_release_enabled and (
+            private_release_policy is None
+            or public_release_policy is None
+            or not private_release_policy.is_file()
+            or not public_release_policy.is_file()
+        ):
+            raise ConfigurationError("GitHub 私有 Release 备份策略文件缺失")
         return cls(
             r2_endpoint=_https_endpoint(_required(values, "MEMORY_ATLAS_R2_ENDPOINT")),
             r2_access_key_id=_required(values, "MEMORY_ATLAS_R2_ACCESS_KEY_ID"),
@@ -134,6 +163,9 @@ class RuntimeConfig:
             source_host_id=_required(values, "MEMORY_ATLAS_SOURCE_HOST_ID"),
             failure_asset_registry=failure_registry.resolve() if failure_registry else None,
             status_projection_target=status_target.resolve() if status_target else None,
+            private_release_backup_enabled=private_release_enabled,
+            private_release_policy=private_release_policy,
+            public_release_policy=public_release_policy,
         )
 
     def ensure_runtime_dirs(self) -> None:
