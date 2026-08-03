@@ -904,6 +904,32 @@ def run_content_checks(report, target: Path, cache_dirs: list[str]) -> None:
     #   三个人、九轮评审之后才想到数这一下——本条把那一下变成每次都做。
     #   **它不判「门槛该不该改」**（那是人的决定，三条化解路径各带一个
     #   作者能自己滥用的旋钮），只回答纯算术：以这批实测分为据，够不够得着。
+    # ── v0.0.0.45：自报字数必须数得对 ────────────────────────────────
+    #   一个主动邀请读者核对的数字，**如果它自己是错的，伤害比不给还大**。
+    #   Virchow #109 第 1 轮：两席各自独立抓到同一处（自称十七字、实为 14），
+    #   token-efficiency 套组因此 −0.0700，是那一轮唯一为负的套组。
+    #   同类此前已发生多次（Koch、Lister 各一轮），每次都是「下次注意」，
+    #   **没有一次落成判据**。这一次落成，且回验三人：
+    #   Virchow 1 处错、Lister 2 处全对、Koch 2 处全对——不是「凡自报皆报」。
+    if payload.exists():
+        code, out = run('check_self_reported_counts.py', ['--answers', str(payload)])
+        if code == -1:
+            review['checker_missing'] = out
+        elif code == 2:
+            report.error('content.selftest-failed',
+                         'check_self_reported_counts 负对照未过——其检查结论不作数')
+        elif code != 0:
+            bad = [l.strip() for l in out.splitlines() if l.strip().startswith('⚠')]
+            report.error('content.self-count-wrong',
+                         '**自报字数与实数对不上**——主动邀请核对的数字自己错了，'
+                         '比不给更伤。' + ('　' + '；'.join(bad[:3]) if bad else ''))
+        else:
+            review['self_counts'] = next(
+                (l for l in out.splitlines() if l.startswith(('自报字数', '没有自报'))),
+                '✓ 自报字数已核')
+    else:
+        review['self_counts'] = 'evals/judge_payload.v1.json 不在——**自报字数未核（不是通过）**'
+
     # ── v0.0.0.42：OCR 把整份文本毁掉了，而它仍是一份「真文档」──────────
     #   Virchow #109（德文）撞出：227 份语料里 18 份被 Fraktur OCR 毁掉，
     #   `check_corpus_integrity` 扫同一批报 0 可疑（它只判「是不是错误页」），
