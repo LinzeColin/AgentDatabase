@@ -1,6 +1,6 @@
-# Release verification — Persona Distiller v0.0.0.46
+# Release verification — Persona Distiller v0.0.0.47
 
-Date: 2026-08-03
+Date: 2026-08-04
 
 > **本文件记录「当前发布号的复验结果」，不是历史归档。**
 > 版本号必须等于根目录 `VERSION`，由 `scripts/check_contract_drift.py` 强制。
@@ -10,7 +10,7 @@ Date: 2026-08-03
 > bundle 构不出来、97 人、59 用例），**三件当时都已不成立**。
 > 改过标题的旧正文会冒充当前复验，比标题陈旧更糟。已从工具中移除该行为。
 >
-> 本次（v0.0.0.46）**是真的重跑了一遍**，下表每一行都是本次实跑输出。
+> 本次（v0.0.0.47）**是真的重跑了一遍**，下表每一行都是本次实跑输出。
 
 ## Result
 
@@ -20,11 +20,13 @@ Date: 2026-08-03
 
 ## 自动化证据
 
-本表每一行都来自 **2026-08-03 本次实跑**的输出。没跑的一律标 `未复验`，不沿用旧结论。
+本表每一行都来自 **2026-08-04 本次实跑**的输出。没跑的一律标 `未复验`，不沿用旧结论。
 
 | Gate | 本次结果 | 证据来源 |
 |---|---:|---|
 | Offline unit / integration / concurrency tests | **70 / 70 passed** | `python3 -m pytest tests/ -q` |
+| **全部检查器自测（v0.0.0.47 起逐件跑）** | **22 / 22 passed，0 未过** | 逐件 `check_*.py --self-test` |
+| **★★★★★★ 承重人名门（v0.0.0.47 新增，只报不拦，见下节）** | **passed**（**12 项自测，其中 7 条反向对照**）；**真实数据实测**：Osler #110 第 2 轮扫出 `Henry A. Christian` 全名 P1 命中 **0**（S1 2 / S2 1），第 3 轮删后 **0 个查无实据** | `check_unsourced_names.py --self-test` + 对 Osler 两轮候选答案实跑 |
 | 合同漂移门（版本三轴 + 身份合同 + 检查器镜像） | **0 条** | `scripts/check_contract_drift.py` |
 | 合同漂移门的负对照 | passed（坏样本 5 类全抓出，钉住的 builder 版本未被误伤） | `check_contract_drift.py --self-test` |
 | 归属门的负对照 | passed（**8 正 + 10 反**，另含 1 条只报不判，**外加 5 例非西方姓名形态**） | `check_authorship.py --self-test` |
@@ -37,19 +39,19 @@ Date: 2026-08-03
 | **★★ 归属依据门（v0.0.0.31 新增，硬拦，见下节）** | **passed**（负对照 10 项，含「争议为空」与「没查过」必须分开）；**真工作区实测**：Galen 工作区未声明依据时 exit 1 | `check_attribution_basis.py --self-test`、对 `ws-galen` 实跑 |
 | **★★★★ 方法密度（v0.0.0.36 新增，只报不拦，见下节）** | **passed**（**4 条真实 work-method 夹具，两侧各二** + 1 条反向对照 + 1 条射程对照）；**四个真实工作区实跑**：可复用做法 Galen 0 ／ Vesalius 1 ／ Harvey 1 ／ Jenner 0，**四人全部报出** | `check_fact_density.py --self-test` + 对四人 `claims.jsonl` 实跑 |
 | **★★ 事实密度门（v0.0.0.28 新增／v0.0.0.31 分账本与人物，只报不拦）** | **passed**（负对照含 **4 条真实样本**）；Galen 实测 15 条 `fact` → **人物事实 10 条、账本事实 5 条不计入**，仍 < 要求 12 | `check_fact_density.py --self-test` |
-| 检查器元普查（负对照有没有） | **19 件中 14 可用 / 0 未过 / 4 无负对照 / 1 不可独立验证**（v0.0.0.22 时 11 件 6 OK） | `check_checkers.py scripts/` |
+| 检查器元普查（负对照有没有） | **26 件**，逐件自测 **22 可跑 / 0 未过**（v0.0.0.46 时 19 件，v0.0.0.22 时 11 件 6 OK） | `check_checkers.py scripts/` + 逐件 `--self-test` |
 | **★★ 真实夹具普查（v0.0.0.31 新增，只报不拦）** | **5 / 19 件的负对照里含真实样本夹具**（v0.0.0.34 时 3 / 18，v0.0.0.32 时 2 / 17，v0.0.0.31 时 1 / 16） | `check_checkers.py scripts/` |
 | **★★★★★ 引号形态（v0.0.0.46）** | **passed**；**Pasteur #106 实测：扩形态前答案里 11 条外语引文只扫到 4 条，**7 条法文 «» 从未被核过（64%）**；扩后 22 条全扫、0 未命中 | `check_quote_integrity.py --self-test`（新增法文 «» 真实夹具） |
 | **★★★ 引文真实性门（v0.0.0.35 射程扩到答案层，见下节）** | **passed**（4 条构造伪造 + **3 条真实夹具** + **2 条反向对照**）；**真实数据实测**：Jenner 断言层 6 条全绿，扩到答案层后共 **26 条**，其中长 s 还原后才命中 **6 条**（原为静默） | `check_quote_integrity.py --claims … --answers … --cache … --self-test` |
 | **★★★ 语料真伪门（v0.0.0.33 新增，`ingest.py` 入口**硬拦**，见下节）** | **passed**（负对照 8 项，含 **4 条真实样本**）；**真实数据实测**：Jenner 抓源 4 份 HTML 错误页全抓出（最大一份 **146 KB**），入口实拦已验；清理后 53 份 0 报 | `check_corpus_integrity.py --self-test` + 对 `ws-jenner` 实跑 + `ingest.py` 实拦 |
 | **★★★ 引文层门（v0.0.0.32 新增，只报不拦，见下节）** | **passed**（负对照 11 项，含 **4 条真实样本 + 2 条真实误报夹具**）；**真实数据实测**：Harvey 第 3 轮定稿 10 处、Vesalius 11 处、Galen 0 处 | `check_quote_layer.py --self-test` + 对三份真实候选答案实跑 |
-| 蒸馏版本新鲜度 | 下限 `v0.0.0.26`；**102 条中 0 达标 / 102 低于下限 / 0 未知**；掉的是尺子，产物一份没变（任务 #29） | `check_distillation_freshness.py` |
-| Release checksum 全量校验 | passed，**284 files** | `self_check.py` |
+| 蒸馏版本新鲜度 | 下限 `v0.0.0.37`；**102 条中 0 达标 / 102 低于下限 / 0 未知**；掉的是尺子，产物一份没变（任务 #29） | `check_distillation_freshness.py` |
+| Release checksum 全量校验 | passed，**305 files** | `self_check.py` |
 | Canonical group validation | **12 categories, 100 products, 102 artifacts**; passed | `validate_persona_registry.py` |
-| 团队侧版本绑定 | **passed**，三处同为 `v0.0.0.12`；负对照 6 类全抓出 | `persona-distiller-group/scripts/check_group_version_binding.py` |
+| 团队侧版本绑定 | **passed**，三处同为 `v0.0.0.13`；负对照 6 类全抓出 | `persona-distiller-group/scripts/check_group_version_binding.py` |
 | Identity family registry | 12 families；加权多身份输入被拒 | `test_identity_routing`、`test_skill_contract` |
 | Builder JSON Schema | **14 documents** | `self_check.py` |
-| Python script 覆盖 | **56 scripts** | `self_check.py` |
+| Python script 覆盖 | **66 scripts** | `self_check.py` |
 | Root `SKILL.md` 行数 | 206 行；self_check 未报越界 | `self_check.py` |
 | Secret-pattern scan | **0 findings** | `self_check.py` |
 | Reviewer harness 两轮 | passed | `test_six_reviewer_harness_passes_both_rounds` |
@@ -62,6 +64,45 @@ Date: 2026-08-03
 | Complete-release deterministic rebuild | passed | `test_complete_release_is_one_deterministic_zip_and_installs_both_skills` |
 | Complete-release checksum tamper rejection | passed | `test_complete_release_installer_rejects_tampering` |
 | Atomic dual-Skill clean install | passed | 同上用例内 |
+
+## ★★★★★★ v0.0.0.47 新增：承重人名门——**评委看得出「这名字没依据」，但查不了**
+
+Osler #110 第 2 轮，我在一条答案里写：「第 9 版起是 Thomas McCrae 续修，
+**后来是 Henry A. Christian**」。McCrae 有依据——第 8、9 版扉页印着他。**Christian 没有。**
+
+席位 E 在盲判里说中了：「1930 年代版的实际责任人 Henry A. Christian
+**是全题唯一无扉页依据的名字**」。但它靠的是同题内的对比，**不是核查**——
+评委手上没有语料。两席三轮共六次评审，**没有一次能证实这件事**。
+这与 `check_quote_integrity` 同一道理：**评委验不了引文，一行 grep 全抓得出。**
+
+判据回语料查全名，按档分开报 **P1 / P2 / S1 / S2 / 项目记录** 命中数：
+
+| 名字 | 全名 P1 | 全名其他 | 结论 |
+|---|---:|---|---|
+| Thomas McCrae | ✓ | — | 过（第 8 版扉页） |
+| **Henry A. Christian** | **0** | S1 2、S2 1 | ⚠ 只有二手依据 |
+| William Roscoe Osler | 0 | 项目记录 19 | ⚠ 依据在排除记录里 |
+| Sir Edmund Boyd Osler | 0 | S2 1 | ⚠ 只在 Cushing 传记里 |
+
+**三个缺陷是自测抓出来的，不是我看出来的**（本会话第三次）：
+
+1. **只数姓氏 → 全绿。** 第一版拿 `Christian` 单独去数，它在 P1 里撞 **128** 次
+   （维多利亚时代的书里满地都是 `Christian era` / `Christian name`），
+   于是编造的名字报成「有 P1 依据」。**判据绿了，指的却是别的东西——本会话第七次同型。**
+   改：**全名优先，姓氏只作弱证据，两列分开报。**
+2. **把我自己的台账当语料。** 第一版递归读 `raw/**/*.txt`，
+   把 `raw/_EXCLUDED.txt`、`raw/_ids.txt` 一并读了——
+   **「我在笔记里写过这名字」被算成「语料里有这名字」。**
+   改：`_` 开头的文件归「项目记录」档，不计一手。
+3. **兜底档写成 `P1?`，而分档判的是 `startswith("P1")`**——
+   **「我不知道这是什么」被当成了「这是一手材料」。** 改：兜底写 `未定档`。
+
+**射程（写在判据文档里，免得下次拿它当挡箭牌）**：
+它查的是「这个名字有没有依据」，**不是「你挂在这名字上的那句话有没有依据」**。
+Christian 若被写成「他当过哈佛医学院院长」，这道判据会放行——语料里确实有这句。
+**后者只有人能判。** 这一点当场就应验了：判据修好之后我才发现，
+`Henry A. Christian` 其实在 1919 年祝寿文集（S1）里出现两次——他是撰稿人。
+**名字是真的，我挂在它上面的那句话仍然是编的。**
 
 ## ★ v0.0.0.23 新增：分族配重——**排期口径原本会让名册停在 11 族**
 
