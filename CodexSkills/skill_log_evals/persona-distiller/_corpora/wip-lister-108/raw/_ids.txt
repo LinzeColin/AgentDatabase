@@ -1,0 +1,99 @@
+# 标识符|类别|年份|标题|URL|备注
+# ── #108 Joseph Lister（1827-04-05 – 1912-02-10，英国外科医生，防腐外科，英文写作）语料台账 ──
+#
+# ★★★ 同名风险 —— 危险的那个是他父亲，已实查并全部排除：
+#   Joseph Jackson Lister (1786-1869, 父, 业余光学家)。archive.org creator 字段写作 'Lister, Joseph Jackson'，
+#   与子的 'Lister, Joseph' 可机器区分。以下父之作在与子的论文同一批 JSTOR EJC 检索中命中，**已识别并主动不取**：
+#     jstor-107900 (1830) On Some Properties in Achromatic Object-Glasses Applicable to the Improvement of the Microscope ← 著名的 1830 消色差物镜论文
+#     jstor-110225 (记年 1815) 同题另条
+#     jstor-110397 (1830) On the Structure and Functions of Tubular and Cellular Polypi, and of Ascidiae [Abstract]
+#     jstor-108069 (1834) Some Observations on the Structure and Functions of Tubular and Cellular Polypi...
+#   判据三条：(1) creator 全名含 'Jackson'；(2) 年份 —— 子生于 1827、1853 才首发论文，凡 1850 年前之作必非子；
+#            (3) 题材 —— 显微镜光学 / 水螅与海鞘解剖属父，子无此类著作。
+#   反向确证：philtrans09346010 扉页署 "Joseph Lister, Esq., F.R.C.S., Assistant Surgeon to the Royal Infirmary,
+#            Edinburgh, communicated by Dr. Sharpey" —— 身份、职务、年份三重锁定为子。
+#
+#   Joseph Jackson Lister (1857-1927, 博物学家, 与父完全同名) —— 已识别并不取：
+#     biostor-107556 (1911 Megapodius)、biostor-59906 (1889 Christmas Island)、biostor-108083 (1891 Phaenix Is. birds)、
+#     paper-doi-10_1098_rspl_1894_0093 (Foraminifera)、studentstextbook02sedgrich / astudentstextbo00shipgoog (动物学教科书合著)。
+#
+#   ★ 全语料内「父」仅在一处出现且属正当：collectedpaperso02listuoft 收有 **Lister 本人所撰**
+#     《Obituary Notice of the late Joseph Jackson Lister, F.R.S.》(悼父文)，及其对父 1830 Phil.Trans. 论文的引用。
+#     这是子写父，不是父的作品，故保留并记 writings。
+#
+#   机构/商品名淹没：已删 b24930015（1895 Lister Institute 年会报告，全文仅 1 处 'Lister' 且为机构名）。
+#     Listerine（1879 商品名，非其所为、未经其同意）未命中任何已收文本。
+#
+# ★★《Collected Papers》(Oxford, Clarendon, 1909, 2 卷) 编者按已核（原文见 collectedpaperso01listuoft.txt 第 125 行起 PREFACE）：
+#   有编者层，但性质与 Koch 全集相反 —— 是他生前亲自过目的：
+#     · 缘起：1907-04-05 八十岁生日，各方倡议为其编纂科学论文全集作纪念。
+#     · 编纂主体：一个 Committee，"has had the inestimable advantage of his guidance and advice"。
+#     · 选目权在他本人："The two volumes contain all the papers and addresses which **he himself considers**
+#       to possess permanent interest and importance"；略去者极少，几乎只是若干官方场合致辞。
+#   编者层的具体位置：卷 I 的 PREFACE(委员会撰，p.v) 与 INTRODUCTION(Hector Charles Cameron 撰传略，p.xi)。
+#   → 引用时凡落在 PREFACE / INTRODUCTION 内的文字不得记为 Lister 本人之言；两卷正文（论文与致辞本体）为本人。
+#
+# ★ 重复扫本已在备注标出（同文异扫 / 同题异刊）。下游统计「独立著作数」时勿重复计：
+#   44 份 writings 对应约 26 种独立著作。
+#
+collectedpaperso01listuoft|writings|1909|The Collected Papers of Joseph, Baron Lister, Vol. I (Oxford: Clarendon Press)|https://archive.org/details/collectedpaperso01listuoft|核心;生前出版(1909,卒1912);含编者前言与 Cameron 传略,正文为本人;与 b31363088_0001 同书异扫
+collectedpaperso02listuoft|writings|1909|The Collected Papers of Joseph, Baron Lister, Vol. II (Oxford: Clarendon Press)|https://archive.org/details/collectedpaperso02listuoft|核心;含本人所撰悼父文 Obituary Notice of Joseph Jackson Lister(是子写父,非父之作);与 b31363088_0002 同书异扫
+b31363088_0001|writings|1909|The Collected Papers of Joseph, Baron Lister, Vol. I|https://archive.org/details/b31363088_0001|Wellcome 扫本;同卷 I
+b31363088_0002|writings|1909|The Collected Papers of Joseph, Baron Lister, Vol. II|https://archive.org/details/b31363088_0002|Wellcome 扫本;同卷 II
+sim_the-lancet_1867-03-16_2272|writings|1867|On a New Method of Treating Compound Fracture, Abscess, etc. [Pt.1] (The Lancet, Iss.2272)|https://archive.org/details/sim_the-lancet_1867-03-16_2272|原刊;署 JOSEPH LISTER
+sim_the-lancet_1867-03-23_2273|writings|1867|On a New Method of Treating Compound Fracture, Abscess, etc. [Pt.2] (The Lancet, Iss.2273)|https://archive.org/details/sim_the-lancet_1867-03-23_2273|原刊
+sim_the-lancet_1867-03-30_2274|writings|1867|On a New Method of Treating Compound Fracture, Abscess, etc. [Pt.3] (The Lancet, Iss.2274)|https://archive.org/details/sim_the-lancet_1867-03-30_2274|原刊
+sim_the-lancet_1867-04-27_2278|writings|1867|On a New Method of Treating Compound Fracture, Abscess, etc. [Pt.4] (The Lancet, Iss.2278)|https://archive.org/details/sim_the-lancet_1867-04-27_2278|原刊;注:第4篇在 04-27,不在 04-20
+sim_the-lancet_1867-07-27_2291|writings|1867|On a New Method of Treating Compound Fracture, Abscess, etc. [Pt.5] (The Lancet, Iss.2291)|https://archive.org/details/sim_the-lancet_1867-07-27_2291|原刊
+sim_the-lancet_1867-09-21_2299|writings|1867|On the Antiseptic Principle in the Practice of Surgery (The Lancet, Iss.2299)|https://archive.org/details/sim_the-lancet_1867-09-21_2299|原刊 Lancet 版;都柏林 BMA 演讲;Simpson 的优先权反驳正针对此篇
+sim_the-lancet_1867-11-30_2309|writings|1867|On the Antiseptic System of Treatment in Surgery (The Lancet, Iss.2309)|https://archive.org/details/sim_the-lancet_1867-11-30_2309|原刊
+sim_british-medical-journal_july-6-december-28-1867_2|writings|1867|British Medical Journal 1867 Vol.2 — 含 On the Antiseptic Principle in the Practice of Surgery|https://archive.org/details/sim_british-medical-journal_july-6-december-28-1867_2|原刊 BMJ 版;半年合订卷
+b21946474|writings|1869|Observations on Ligature of Arteries on the Antiseptic System|https://archive.org/details/b21946474|单行本
+b30570529|writings|1870|On the Effects of the Antiseptic System of Treatment upon the Salubrity of a Surgical Hospital|https://archive.org/details/b30570529|单行本
+b22329699|writings|1870|On the Effects of the Antiseptic System of Treatment upon the Salubrity of a Single Hospital|https://archive.org/details/b22329699|同题异刊本
+b22329687|writings|1870|Remarks on a Case of Compound Dislocation of the Ankle with Other Injuries|https://archive.org/details/b22329687|与 b3057013x 同文异扫
+b3057013x|writings|1870|Remarks on a Case of Compound Dislocation of the Ankle with Other Injuries|https://archive.org/details/b3057013x|同上异扫
+b22378418|writings|1873|A Further Contribution to the Natural History of Bacteria and the Germ Theory of Fermentative Changes|https://archive.org/details/b22378418|发酵/细菌学
+b21464054|writings|1869|Introductory Lecture Delivered in the University of Edinburgh, November 8, 1869|https://archive.org/details/b21464054|
+b30556727|writings|1858|On the Early Stages of Inflammation|https://archive.org/details/b30556727|Wellcome 单行本;与 philtrans09346010 / jstor-108678 同文
+philtrans09346010|writings|1858|On the Early Stages of Inflammation (Phil. Trans. R. Soc. Lond. 148)|https://archive.org/details/philtrans09346010|原刊;扉页署 Joseph Lister, Assistant Surgeon, Royal Infirmary Edinburgh, communicated by Dr Sharpey —— 确证为子非父
+jstor-108678|writings|1858|On the Early Stages of Inflammation (Phil. Trans.)|https://archive.org/details/jstor-108678|JSTOR EJC;creator='Lister, Joseph'(非 Joseph Jackson)
+jstor-111423|writings|1856|On the Early Stages of Inflammation [Abstract] (Proc. R. Soc.)|https://archive.org/details/jstor-111423|摘要
+jstor-111523|writings|1857|Preliminary Account of an Inquiry into the Functions of the Visceral Nerves|https://archive.org/details/jstor-111523|JSTOR EJC
+b21478843|writings|1858|Preliminary Account of an Inquiry into the Functions of the Visceral Nerves|https://archive.org/details/b21478843|单行本,同上
+jstor-108676|writings|1858|An Inquiry Regarding the Parts of the Nervous System Which Regulate the Contractions of the Arteries|https://archive.org/details/jstor-108676|JSTOR EJC
+b30556739|writings|1858|An Inquiry into the Parts of the Nervous System Which Regulate the Contractions of the Arteries|https://archive.org/details/b30556739|单行本,同上
+jstor-108677|writings|1858|On the Cutaneous Pigmentary System of the Frog|https://archive.org/details/jstor-108677|JSTOR EJC
+jstor-112320|writings|1862|The Croonian Lecture: On the Coagulation of the Blood|https://archive.org/details/jstor-112320|JSTOR EJC
+oncoagulationofb00list|writings|1863|On the Coagulation of the Blood (Croonian Lecture, R. Soc.)|https://archive.org/details/oncoagulationofb00list|单行本,同上
+b21952784|writings|1858|On Spontaneous Gangrene from Arteritis and the Causes of Coagulation of the Blood in Diseases of the Blood-vessels|https://archive.org/details/b21952784|与 b21479136 同文异扫
+b21479136|writings|1858|On Spontaneous Gangrene from Arteritis...|https://archive.org/details/b21479136|同上异扫
+b21479045|writings|1859|Observations on the Structure of Nerve-fibres|https://archive.org/details/b21479045|
+b30561450|writings|1853|Observations on the Muscular Tissue of the Skin|https://archive.org/details/b30561450|与 b2146490x 同文异扫
+b2146490x|writings|1853|Observations on the Muscular Tissue of the Skin|https://archive.org/details/b2146490x|同上异扫
+b21464893|writings|1853|Observations on the Contractile Tissue of the Iris|https://archive.org/details/b21464893|
+b21456938|writings|1896|Address [BAAS Liverpool, Presidential Address]|https://archive.org/details/b21456938|与 jstor-1623649 同文
+jstor-1623649|writings|1896|Address by the President (BAAS)|https://archive.org/details/jstor-1623649|JSTOR EJC,同上
+thirdhuxleylectu00listuoft|writings|1907|The Third Huxley Lecture, Charing Cross Hospital Medical School|https://archive.org/details/thirdhuxleylectu00listuoft|与 b31354373 同文异扫
+b31354373|writings|1907|The Third Huxley Lecture|https://archive.org/details/b31354373|同上异扫
+b31363179|writings|1921|Six Papers by Lord Lister|https://archive.org/details/b31363179|身后汇编,正文为本人
+b30629408|writings|1933|Eight Letters of Joseph (Lord) Lister to William Sharpey|https://archive.org/details/b30629408|本人书信;身后刊布
+listeronuseofani00list|writings|1917|Lister on the Use of Animals in Research|https://archive.org/details/listeronuseofani00list|本人亲笔信全文(Godlee 于其遗稿中发现后刊布);外层为编者引言
+mercifuladvantag00list|writings|1917|Merciful Advantages Due to Animal Experimentation — Hitherto Unpublished Letter From Lord Lister to Dr. W. W. Keen|https://archive.org/details/mercifuladvantag00list|本人书信全文;载 Public Ledger 1917-01-07
+b22349431|external|1867|Note on the History of Carbolic Acid and Its Compounds in Surgery prior to 1867 — Sir J. Y. Simpson|https://archive.org/details/b22349431|★核心反方:Simpson 优先权反驳,直指 Lister 1867-09-21 Lancet 篇
+b22268261|external|1869|Hospitalism: Its Effects on the Results of Surgical Operations — J. Y. Simpson|https://archive.org/details/b22268261|与防腐路线竞争的解释
+acupressurenewme00simp|external|1864|Acupressure: A New Method of Arresting Surgical Haemorrhage — J. Y. Simpson|https://archive.org/details/acupressurenewme00simp|Simpson 的替代方案(与 Lister 结扎线之争)
+anaesthesiahospi00simp|external|1872|Anaesthesia, Hospitalism, Hermaphroditism, and a Proposal to Stamp Out Small-pox — J. Y. Simpson|https://archive.org/details/anaesthesiahospi00simp|Simpson 文集
+onhospitalismcau00eric|external|1874|On Hospitalism and the Causes of Death after Operations — John Eric Erichsen|https://archive.org/details/onhospitalismcau00eric|同时代反方
+anessayonhospit00taitgoog|external|1877|An Essay on Hospital Mortality — Robert Lawson Tait|https://archive.org/details/anessayonhospit00taitgoog|★Lawson Tait,反 Lister 一方;续 Simpson 的统计路线
+b22350445|external|1875|Professor Volkmann on Antiseptic Osteotomy (Edinburgh Medical Journal)|https://archive.org/details/b22350445|正文为 Volkmann,Lister 仅撰 Introductory Note,故记 external;与 b21472452 / b30573002 三扫同文
+b21472452|external|1875|Professor Volkmann on Antiseptic Osteotomy|https://archive.org/details/b21472452|同上异扫
+b30573002|external|1875|Professor Volkmann on Antiseptic Osteotomy|https://archive.org/details/b30573002|同上异扫
+antisepticsyste00sansgoog|external|1871|The Antiseptic System: A Treatise on Carbolic Acid and Its Compounds — A. E. Sansom|https://archive.org/details/antisepticsyste00sansgoog|同时代石炭酸文献(竞争性叙述)
+antisepticsurger00luca|external|1881|Antiseptic Surgery: The Principles, Modes of Application, and Results of the Lister Dressing — Lucas-Championnière|https://archive.org/details/antisepticsurger00luca|法国拥护方
+b21303162|external|1882|Antiseptic Surgery: Its Principles, Practice, History and Results — W. Watson Cheyne|https://archive.org/details/b21303162|Lister 门生的系统阐述
+b2493074x|external|1859|Testimonials in Favour of Joseph Lister, Esq., F.R.C.S. (Glasgow 外科教席候选材料)|https://archive.org/details/b2493074x|首页为本人申请函,主体为他人推荐信 —— 保守记 external
+cu31924000265201|biography|1918|Lord Lister — Sir Rickman John Godlee|https://archive.org/details/cu31924000265201|权威官修传(外甥所撰)
+cu31924012168948|biography|1913|Lord Lister: His Life and Work — G. T. Wrench|https://archive.org/details/cu31924012168948|
+b21453597|biography|1914|Lord Lister, 1827-1912: An Oration — Hector Charles Cameron|https://archive.org/details/b21453597|
+b30618708|biography|1912|Lord Lister — John Stewart|https://archive.org/details/b30618708|讣闻式小传

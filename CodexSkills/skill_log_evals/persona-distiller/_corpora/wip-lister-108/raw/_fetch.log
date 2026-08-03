@@ -1,0 +1,89 @@
+# ── #108 Joseph Lister 抓取日志 ──
+# 每行：状态 标识符 字节数 校验 URL
+#   OK      = 已落盘并通过校验（sw=英文虚词 the/of/and/to/in/is 占比；干净扫描约 0.20-0.25，报废会掉到个位数）
+#   FAIL    = 未落盘（HTTP 错误 / 无 txt / 超时）
+#   REJECT  = 曾落盘、开头核验后判为不可用并删除（理由见行尾）
+#
+# 【HTTP 200 != 拿到语料】本轮所有 61 份均已打开核验开头。
+#   本轮无一份命中 <!DOCTYPE html / <html / 404 / 401 / 500 / Internet Archive: Error / Item not available。
+#   校验器在落盘前拦截这些标记，命中即删除并记 FAIL —— 本轮拦截数 = 0。
+#   实际删除的 6 份均为「内容不可用」而非「错误页」，见下方 REJECT 行。
+#   （尝试 67 次，全部 HTTP 层成功，FAIL = 0；67 - 6 REJECT = 61 份留存。）
+#
+# 【OCR】61 份英文虚词占比区间 0.178 – 0.274，无一份低于 0.10，故无 OCR 报废件。
+#   最低者 anessayonhospit00taitgoog = 0.178（Lawson Tait 医院死亡率统计专著，通篇数字表格稀释虚词，
+#   已抽读正文确认字迹清晰可读，非报废）。
+#
+OK     collectedpaperso01listuoft                       1431322  sw=0.230             https://ia803104.us.archive.org/5/items/collectedpaperso01listuoft/collectedpaperso01listuoft_djvu.txt
+OK     collectedpaperso02listuoft                       1816208  sw=0.218             https://ia902905.us.archive.org/16/items/collectedpaperso02listuoft/collectedpaperso02listuoft_djvu.txt
+OK     b31363088_0001                                   1649212  sw=0.231             https://ia800700.us.archive.org/22/items/b31363088_0001/b31363088_0001_djvu.txt
+OK     b31363088_0002                                   2096272  sw=0.219             https://ia600906.us.archive.org/18/items/b31363088_0002/b31363088_0002_djvu.txt
+OK     b21946474                                          42217  sw=0.220             https://ia803208.us.archive.org/34/items/b21946474/b21946474_djvu.txt
+OK     b30570529                                          45364  sw=0.216             https://ia601507.us.archive.org/6/items/b30570529/b30570529_djvu.txt
+OK     b30556727                                         241774  sw=0.243             https://ia801502.us.archive.org/35/items/b30556727/b30556727_djvu.txt
+OK     b31363179                                         520094  sw=0.217             https://ia601508.us.archive.org/19/items/b31363179/b31363179_djvu.txt
+OK     b30629408                                         104629  sw=0.221             https://ia601505.us.archive.org/22/items/b30629408/b30629408_djvu.txt
+OK     josephlisterlet00list                                432  sw=n/a               TINY<2000B  https://ia802902.us.archive.org/35/items/josephlisterlet00list/josephlisterlet00list_djvu.txt
+OK     oncoagulationofb00list                             85124  sw=0.221             https://ia801400.us.archive.org/1/items/oncoagulationofb00list/oncoagulationofb00list_djvu.txt
+OK     thirdhuxleylectu00listuoft                         98732  sw=0.227             https://ia800506.us.archive.org/21/items/thirdhuxleylectu00listuoft/thirdhuxleylectu00listuoft_djvu.txt
+OK     b31354373                                          98657  sw=0.227             https://ia801404.us.archive.org/29/items/b31354373/b31354373_djvu.txt
+OK     b21952784                                          57028  sw=0.228             https://ia800609.us.archive.org/13/items/b21952784/b21952784_djvu.txt
+OK     b21479136                                          57299  sw=0.228             https://ia600401.us.archive.org/18/items/b21479136/b21479136_djvu.txt
+OK     b21479045                                          20704  sw=0.221             https://ia802902.us.archive.org/22/items/b21479045/b21479045_djvu.txt
+OK     b30561450                                          20312  sw=0.223             https://ia601605.us.archive.org/8/items/b30561450/b30561450_djvu.txt
+OK     b2146490x                                          26840  sw=0.225             https://ia800101.us.archive.org/32/items/b2146490x/b2146490x_djvu.txt
+OK     b21464054                                          40043  sw=0.228             https://ia600704.us.archive.org/18/items/b21464054/b21464054_djvu.txt
+OK     b21478843                                          38044  sw=0.246             https://ia800502.us.archive.org/1/items/b21478843/b21478843_djvu.txt
+OK     b30556739                                          74149  sw=0.254             https://ia600808.us.archive.org/27/items/b30556739/b30556739_djvu.txt
+OK     b21464893                                          28329  sw=0.237             https://ia800501.us.archive.org/3/items/b21464893/b21464893_djvu.txt
+OK     b22350445                                          18509  sw=0.247             https://ia902809.us.archive.org/30/items/b22350445/b22350445_djvu.txt
+OK     b21472452                                          18470  sw=0.248             https://ia800609.us.archive.org/0/items/b21472452/b21472452_djvu.txt
+OK     b22329699                                          46988  sw=0.209             https://ia801907.us.archive.org/9/items/b22329699/b22329699_djvu.txt
+OK     b22329687                                          66840  sw=0.224             https://ia601604.us.archive.org/3/items/b22329687/b22329687_djvu.txt
+OK     b3057013x                                          65883  sw=0.225             https://ia801905.us.archive.org/18/items/b3057013x/b3057013x_djvu.txt
+OK     b22378418                                          91275  sw=0.214             https://ia800906.us.archive.org/21/items/b22378418/b22378418_djvu.txt
+OK     b21456938                                          90182  sw=0.202             https://ia801601.us.archive.org/2/items/b21456938/b21456938_djvu.txt
+OK     letters00list                                        368  sw=n/a               TINY<2000B  https://ia802800.us.archive.org/3/items/letters00list/letters00list_djvu.txt
+OK     listeronuseofani00list                              8403  sw=0.199             https://ia802908.us.archive.org/26/items/listeronuseofani00list/listeronuseofani00list_djvu.txt
+OK     mercifuladvantag00list                              8271  sw=0.195             https://ia600107.us.archive.org/29/items/mercifuladvantag00list/mercifuladvantag00list_djvu.txt
+OK     b2493074x                                          43583  sw=0.232             https://ia601505.us.archive.org/23/items/b2493074x/b2493074x_djvu.txt
+OK     b24930015                                          58735  sw=0.214             https://ia903205.us.archive.org/17/items/b24930015/b24930015_djvu.txt
+REJECT josephlisterlet00list                          432  handwritten-MS scan, OCR = pure noise, no readable words  [DELETED]
+REJECT letters00list                                  368  handwritten-MS scan, OCR = pure noise, no readable words  [DELETED]
+OK     ontheantisepticp23968gut                           22763  sw=0.179             https://ia903103.us.archive.org/4/items/ontheantisepticp23968gut/23968-readme.txt
+REJECT ontheantisepticp23968gut                     22763  IA item is a LibriVox AUDIObook; only file was a LibriVox readme, not Lister's text  [DELETED]
+OK     sim_british-medical-journal_july-6-december-28-1867_2   6158913  sw=0.213             https://ia803203.us.archive.org/10/items/sim_british-medical-journal_july-6-december-28-1867_2/sim_british-medical-journal_july-6-december-28-1867_2_djvu.txt
+OK     sim_british-medical-journal_january-5-june-29-1867_1   5565748  sw=0.212             https://ia601602.us.archive.org/1/items/sim_british-medical-journal_january-5-june-29-1867_1/sim_british-medical-journal_january-5-june-29-1867_1_djvu.txt
+OK     sim_the-lancet_1867-03-30_2274                    223415  sw=0.216             https://ia600806.us.archive.org/2/items/sim_the-lancet_1867-03-30_2274/sim_the-lancet_1867-03-30_2274_djvu.txt
+OK     sim_the-lancet_1867-03-16_2272                    191037  sw=0.212             https://ia600903.us.archive.org/11/items/sim_the-lancet_1867-03-16_2272/sim_the-lancet_1867-03-16_2272_djvu.txt
+OK     sim_the-lancet_1867-03-23_2273                    215655  sw=0.219             https://ia801400.us.archive.org/2/items/sim_the-lancet_1867-03-23_2273/sim_the-lancet_1867-03-23_2273_djvu.txt
+OK     sim_the-lancet_1867-04-20_2277                    195324  sw=0.210             https://ia800509.us.archive.org/0/items/sim_the-lancet_1867-04-20_2277/sim_the-lancet_1867-04-20_2277_djvu.txt
+OK     sim_the-lancet_1867-04-27_2278                    184997  sw=0.211             https://ia801006.us.archive.org/29/items/sim_the-lancet_1867-04-27_2278/sim_the-lancet_1867-04-27_2278_djvu.txt
+OK     sim_the-lancet_1867-07-27_2291                    205758  sw=0.215             https://ia600607.us.archive.org/35/items/sim_the-lancet_1867-07-27_2291/sim_the-lancet_1867-07-27_2291_djvu.txt
+OK     sim_the-lancet_1867-09-21_2299                    260033  sw=0.219             https://ia800701.us.archive.org/6/items/sim_the-lancet_1867-09-21_2299/sim_the-lancet_1867-09-21_2299_djvu.txt
+OK     sim_the-lancet_1867-11-30_2309                    275155  sw=0.221             https://ia802806.us.archive.org/14/items/sim_the-lancet_1867-11-30_2309/sim_the-lancet_1867-11-30_2309_djvu.txt
+REJECT sim_the-lancet_1867-04-20_2277               195324  fetched clean but contains NO Lister article (series part 4 is 04-27, not 04-20)  [DELETED]
+REJECT sim_british-medical-journal_january-5-june-29-1867_1  5565748  clean OCR but only 1 passing "Mr. Lister" mention; his BMJ paper is in vol 2  [DELETED]
+OK     philtrans09346010                                 212383  sw=0.245             https://ia801606.us.archive.org/5/items/philtrans09346010/09346010_djvu.txt
+OK     jstor-111523                                       34391  sw=0.244             https://ia802905.us.archive.org/23/items/jstor-111523/111523_djvu.txt
+OK     jstor-108677                                       59789  sw=0.250             https://ia801903.us.archive.org/15/items/jstor-108677/108677_djvu.txt
+OK     jstor-112320                                       76816  sw=0.220             https://ia903201.us.archive.org/35/items/jstor-112320/112320_djvu.txt
+OK     jstor-1623649                                      84096  sw=0.198             https://ia601906.us.archive.org/22/items/jstor-1623649/1623649_djvu.txt
+OK     jstor-108678                                      210851  sw=0.244             https://ia903204.us.archive.org/18/items/jstor-108678/108678_djvu.txt
+OK     jstor-111423                                       18043  sw=0.274             https://ia803206.us.archive.org/1/items/jstor-111423/111423_djvu.txt
+OK     jstor-108676                                       64944  sw=0.255             https://ia801900.us.archive.org/24/items/jstor-108676/108676_djvu.txt
+OK     b22349431                                          29795  sw=0.223             https://ia803107.us.archive.org/10/items/b22349431/b22349431_djvu.txt
+OK     b22268261                                          99716  sw=0.237             https://ia800702.us.archive.org/35/items/b22268261/b22268261_djvu.txt
+OK     acupressurenewme00simp                            906122  sw=0.226             https://ia902902.us.archive.org/26/items/acupressurenewme00simp/acupressurenewme00simp_djvu.txt
+OK     anaesthesiahospi00simp                           1700674  sw=0.224             https://ia601607.us.archive.org/24/items/anaesthesiahospi00simp/anaesthesiahospi00simp_djvu.txt
+OK     onhospitalismcau00eric                            217522  sw=0.225             https://ia801607.us.archive.org/31/items/onhospitalismcau00eric/onhospitalismcau00eric_djvu.txt
+OK     anessayonhospit00taitgoog                         268002  sw=0.178             https://ia801605.us.archive.org/11/items/anessayonhospit00taitgoog/anessayonhospit00taitgoog_djvu.txt
+OK     b30573002                                          18646  sw=0.247             https://ia801801.us.archive.org/1/items/b30573002/b30573002_djvu.txt
+OK     antisepticsyste00sansgoog                         770627  sw=0.215             https://ia902808.us.archive.org/21/items/antisepticsyste00sansgoog/antisepticsyste00sansgoog_djvu.txt
+OK     antisepticsurger00luca                            440022  sw=0.225             https://ia902806.us.archive.org/30/items/antisepticsurger00luca/antisepticsurger00luca_djvu.txt
+OK     b21303162                                        1562140  sw=0.203             https://ia800607.us.archive.org/22/items/b21303162/b21303162_djvu.txt
+OK     cu31924000265201                                 1809097  sw=0.196             https://ia902900.us.archive.org/14/items/cu31924000265201/cu31924000265201_djvu.txt
+OK     cu31924012168948                                  548532  sw=0.213             https://ia601605.us.archive.org/25/items/cu31924012168948/cu31924012168948_djvu.txt
+OK     b21453597                                          60109  sw=0.210             https://ia601603.us.archive.org/15/items/b21453597/b21453597_djvu.txt
+OK     b30618708                                          21942  sw=0.190             https://ia600501.us.archive.org/21/items/b30618708/b30618708_djvu.txt
+REJECT b24930015                                    58735  Lister INSTITUTE admin report (1895 AGM); exactly 1 "Lister" hit = the institute's name, no Lister text  [DELETED]
