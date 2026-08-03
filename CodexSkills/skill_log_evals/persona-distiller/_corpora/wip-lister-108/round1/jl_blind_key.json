@@ -1,0 +1,130 @@
+{
+ "jl-anonymous-fidelity-01": {
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "jl-anonymous-fidelity-02": {
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "jl-boundary-01": {
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "jl-boundary-02": {
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "jl-capability-calibration-01": {
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "jl-capability-calibration-02": {
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "jl-contrast-01": {
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "jl-contrast-02": {
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "jl-fact-preservation-01": {
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "jl-fact-preservation-02": {
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "jl-identity-routing-01": {
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "jl-identity-routing-02": {
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "jl-known-01": {
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "jl-known-02": {
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "jl-long-horizon-01": {
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "jl-long-horizon-02": {
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "jl-planning-fidelity-01": {
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "jl-planning-fidelity-02": {
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "jl-refusal-stop-01": {
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "jl-refusal-stop-02": {
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "jl-style-decoy-01": {
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "jl-style-decoy-02": {
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "jl-task-completion-01": {
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "jl-task-completion-02": {
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "jl-token-efficiency-01": {
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "jl-token-efficiency-02": {
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "jl-tool-use-01": {
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "jl-tool-use-02": {
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "jl-trajectory-01": {
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "jl-trajectory-02": {
+  "A": "candidate",
+  "B": "baseline"
+ },
+ "jl-voice-01": {
+  "A": "baseline",
+  "B": "candidate"
+ },
+ "jl-voice-02": {
+  "A": "baseline",
+  "B": "candidate"
+ }
+}
