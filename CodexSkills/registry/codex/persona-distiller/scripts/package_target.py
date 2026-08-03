@@ -287,6 +287,13 @@ def audit_payloads(
             "lane_source_counts": lane_counts,
             "primary_ratio": metrics.get("primary_ratio"),
             "sources_total": metrics.get("sources_total", len(source_records)),
+            # ★★ 2026-08-04：`usable_train` 一直没被交付，于是**事实密度债从产物侧量不出来**。
+            #   `min_facts = max(MIN_FLOOR, ceil(usable_train / 5))`——分母不在产物里，
+            #   回算只能拿 `sources_total` 代入，那把 holdout 也算了进去：
+            #   Livermore #100 的 536 份 → 门槛 108，荒谬。
+            #   **交付里缺一个分母，一整类债就只能给上界。**
+            "sources_usable_train": metrics.get("sources_usable_train"),
+            "sources_holdout": metrics.get("sources_holdout"),
             "remaining_gaps": coverage_details.get("remaining_gaps", []),
             "bias_controls": coverage_details.get("anti_selection_bias_controls", []),
             "details": coverage_details,

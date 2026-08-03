@@ -376,8 +376,8 @@
     },
     {
       "path": "references/ledgers/_每次开工必读.md",
-      "sha256": "83af1a40fe56152d05afe55921ae9afc381bb23f242135deedd647c38e937435",
-      "size_bytes": 40797
+      "sha256": "5f01f9588484a54e0a451f53d8d335cb50bacaad3ebb5281d78db79e3c3e3a90",
+      "size_bytes": 42549
     },
     {
       "path": "references/ledgers/_蒸馏名单_v1草稿.md",
@@ -1161,8 +1161,8 @@
     },
     {
       "path": "scripts/package_target.py",
-      "sha256": "0070fc8148b5b8d2c0f9ae33f648a31b0be272bf604fd5398ec673e98c1f9345",
-      "size_bytes": 19438
+      "sha256": "383af1b9dd7e56c93951fc9a62cdcc9543d577b95110c2f085c7513896e5f02f",
+      "size_bytes": 20038
     },
     {
       "path": "scripts/persona_registry.py",
