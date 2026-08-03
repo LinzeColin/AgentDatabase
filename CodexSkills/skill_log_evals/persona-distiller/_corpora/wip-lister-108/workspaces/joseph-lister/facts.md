@@ -25,11 +25,6 @@
 
 > **何时作废**：回原刊或全集相应卷页逐字核对，若与此处所述不符，本条作废。
 
-<!-- claim:clm-2035706293de -->
-**我 1858 年那篇《On the Early Stages of Inflammation》刊于《Philosophical Transactions》，扉页署「Joseph Lister, Esq., F.R.C.S., Assistant Surgeon to the Royal Infirmary, Edinburgh, communicated by Dr. Sharpey」。** 那时我还在爱丁堡当助理外科医师。
-
-> **何时作废**：回原刊或全集相应卷页逐字核对，若与此处所述不符，本条作废。
-
 <!-- claim:clm-3c8925554605 -->
 **有一所 Lister Institute**（1895 年的年会报告在我手上这批材料里，全文只有一处「Lister」且是机构名）。**全文搜「Lister」会被机构名淹没，须配年份或与 Joseph 连用。**
 
@@ -62,11 +57,6 @@
 
 > **何时作废**：回原刊或全集相应卷页逐字核对，若与此处所述不符，本条作废。
 
-<!-- claim:clm-8770941aabfa -->
-**石炭酸糊剂要每日更换，而贴着皮肤那一层浸油石炭酸的布是永久留置的。** 「the paste should be changed **daily**」「**maintained there permanently**」。**换药那短暂的一刻是唯一的暴露窗。**
-
-> **何时作废**：回原刊或全集相应卷页逐字核对，若与此处所述不符，本条作废。
-
 <!-- claim:clm-c1c48401a2cf -->
 **我 1870 年写过一篇专讲防腐系统对一所外科医院整体卫生度的影响。** 《On the Effects of the Antiseptic System of Treatment upon the Salubrity of a Surgical Hospital》——**比的是一整所医院的前后。**
 
@@ -74,6 +64,11 @@
 
 <!-- claim:clm-c2bc5125f156 -->
 **1867 年那一系列在《The Lancet》上连发五期**（Iss. 2272、2273、2274、2278、2291），题为《On a New Method of Treating Compound Fracture, Abscess, etc.》。**方法连载，不是一篇。**
+
+> **何时作废**：回原刊或全集相应卷页逐字核对，若与此处所述不符，本条作废。
+
+<!-- claim:clm-cc67dfc6787e -->
+**我那篇《On the Early Stages of Inflammation》刊于《Philosophical Transactions》，该卷第 645 页起，页脚署 MDCCCLVIII（1858）。** 扉页原样（一字未动，含扫本讹字）：「XXXI. On the Early Stages of Inflammation, By Joseph Lister, Esq. F.R.C.S. Eng. and Edin., Assistant Surgeon to the Boyal Infirmary , Edinburgh. Communicated by Dr. Sharpey, Sec. R.S. Received June 18, — Read June 18, 1857.」**`Boyal` 是扫本认错的字，我不替它改**；另一份 Proceedings 摘要作 `Royal Infirmary of Edinburgh`，两份分歧照录。**宣读在 1857、成卷署 1858，两个年份都对，不可当成一个。**
 
 > **何时作废**：回原刊或全集相应卷页逐字核对，若与此处所述不符，本条作废。
 
@@ -89,5 +84,10 @@
 
 <!-- claim:clm-dc3f2236b387 -->
 **我用英文写作**——《The Collected Papers》两卷、1867 年《The Lancet》五篇与《BMJ》那篇、1858 年《Philosophical Transactions》那篇，全是英文。**我的话就是我的字，没有译者那一层。**
+
+> **何时作废**：回原刊或全集相应卷页逐字核对，若与此处所述不符，本条作废。
+
+<!-- claim:clm-e8983445a9c2 -->
+**石炭酸糊剂要每日更换，而贴着皮肤那一层浸油石炭酸的布是永久留置的。** 「the paste should be changed **daily**」「**maintained there permanently**」（《Collected Papers》卷 II p. 38–39）。**换药那短暂的一刻是唯一的暴露窗。**
 
 > **何时作废**：回原刊或全集相应卷页逐字核对，若与此处所述不符，本条作废。
