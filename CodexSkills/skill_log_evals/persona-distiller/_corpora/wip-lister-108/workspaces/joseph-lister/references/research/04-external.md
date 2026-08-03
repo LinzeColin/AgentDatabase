@@ -1,29 +1,43 @@
-# External views, criticism, and counterexamples
+# 04 · 外部视角与论敌
 
-## Scope and assigned sources
+## ★ 纪律：每一条「对手主张 X」必须指到对手的书
 
-Pending. Use train-split source IDs only.
+Harvey #103 因**编造 Riolan 的立场**拒发；Pasteur #106 第 1 轮把 Pouchet 的自然发生说主张
+**挂到一本讲自发排卵的书上**（两席各自抓出）。
+**摆不出书的立场不许写。**
 
-## Source-linked observations
+## 一、医院主义之争 —— James Young Simpson
 
-Pending.
+`src-3e6b2499c405`《Acupressure: A New Method...》等 4 份在库。
 
-## Candidate Claims
+Simpson 主张的核心是「**hospitalism**」——大医院本身即是危险的来源，
+其推论是**拆小医院**，而不是消毒。**这与防腐路线是两种不同的解法，不是同一件事的两说。**
+**他的主张以他自己的书为准。**
 
-Pending.
+`src-...`（Lawson Tait《An Essay on Hospitalism》）承接同一路线，
+以死亡率统计立论。**该书虚词占比 0.178（全批最低），是表格稀释所致，抽读确认字迹清晰，可用。**
 
-## Contradictions and alternative explanations
+## 二、其余在库的同时代方
 
-Pending.
+Erichsen、Volkmann（3 份，德国方面对防腐法的接受）、Sansom、
+Lucas-Championnière（法国方面）、Cheyne（其学生与助手）。
 
-## Unknowns and source gaps
+**★ 引证严格度要一致**（Pasteur #106 席 E 点过：
+「Pouchet 给了年份并排掉同形近的书，Liebig 只给了无年份的书名」）。
+**本人物凡列对手，一律给年份与出处。**
 
-Pending.
+## 三、★ 与 Pasteur 的关系不是论敌，是承接——但须指到文本
 
-## Proposed Holdout cases
+他公开承认自己的原理建立在 Pasteur 的发酵与腐败研究之上。
+**这条不许凭印象写**：本工作区握有 Pasteur 的 60 份语料
+（`../wip-pasteur-106/raw/`），**要写这条就去两边各指一处**。
 
-IDs only; research Agents must not inspect Holdout bodies.
+**真实缺口**：**1874 年他致 Pasteur 的信** archive.org 只有图像扫描，
+**OCR 出不来文字**——所以那封信的内容**不许引**，只能说「有这封信，我没有文本」。
 
-## Handoff to adjudication
+## 四、机构与商品名的干扰
 
-Pending.
+**Listerine**（1879 年以他命名的漱口水，**不是他做的、也未经他同意**）、
+**Lister Institute**（1891 起）、Lister Hospital。
+**全文搜 "Lister" 会被淹没**——须配年份或与 "Joseph" 连用。
+抓源时已因此剔除一份 `b24930015`（Lister Institute 年会行政报告，全文仅 1 处 "Lister" 且是机构名）。

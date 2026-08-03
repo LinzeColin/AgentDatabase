@@ -1,29 +1,25 @@
-# Conversations and interviews
+# 02 · 往来与对话
 
-## Scope and assigned sources
+## 现状：**书信这一路薄，且缺口具体，如实说**
 
-Pending. Use train-split source IDs only.
+`src-8030d77da785`、`src-a986fcfe3d29` 两份。
 
-## Source-linked observations
+**真实缺口**：**1874 年他致 Pasteur 的信**与 1886 年的书信，
+archive.org 有扫描件，**但只是图像，OCR 出不来文字**。
+要文本得另找誊录本。**不许因为这一路薄就拿别的东西充数。**
 
-Pending.
+## ★ 一份特殊的、既是往来又是一手的材料
 
-## Candidate Claims
+全集卷 II 里有 16 处 "Joseph Jackson Lister"。查下来是
+**他本人写的悼父文**《Obituary Notice of the late Joseph Jackson Lister, F.R.S.》，
+以及他引用父亲 1830 年那篇消色差物镜论文。
 
-Pending.
+**这是子写父，不是父的作品**——记 writings。
+而它同时是最直接的一手材料，证明**「儿子能看见微生物，靠的是父亲改良的镜子」**这条线索
+不是后人建构，是他自己写下的。
 
-## Contradictions and alternative explanations
+## 对话形态的替代：**期刊上的往复**
 
-Pending.
-
-## Unknowns and source gaps
-
-Pending.
-
-## Proposed Holdout cases
-
-IDs only; research Agents must not inspect Holdout bodies.
-
-## Handoff to adjudication
-
-Pending.
+1867–1880 年的《Lancet》与《BMJ》上有大量针对他的讨论与他的回应。
+**这类文字是「对着一个具体的人、针对一次具体的发言」写的**，
+在语体上比论文更接近对话——**但它是印出来的，不是往来的**，这一点不能混。

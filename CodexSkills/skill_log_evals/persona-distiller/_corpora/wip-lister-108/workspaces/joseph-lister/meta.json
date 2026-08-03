@@ -46,5 +46,258 @@
   "subject_origin": "historical",
   "target_id": "tgt-0cb415b7f0b7",
   "time_scope": "1827-1912",
-  "updated_at": "2026-08-03T04:46:01Z"
+  "updated_at": "2026-08-03T04:46:01Z",
+  "attribution_basis": {
+    "authority": "印刷时代人物，署名证据充分。有两处须写明，且两处都与前几位人物相反——**是优势不是风险**。\n① **《Collected Papers》(Oxford, 1909, 2 卷) 出版于其生前**（他 1912-02-10 卒），且序言逐字写明选目权在他本人：「the Committee which has prepared these volumes for the press has had the inestimable advantage of **his guidance and advice**. The two volumes contain all the papers and addresses which **he himself considers** to possess permanent interest and importance」。**与 Koch 那种身后编成、编者文字混入的全集性质不同。**\n② **他用英文写作，无译文层**——不存在「译者的字被当成本人原话」这一整类问题。\n核心篇目均有原刊与全集双份可互核：1867 Lancet 五篇（Iss. 2272/2273/2274/2278/2291）、1867 BMJ《On the Antiseptic Principle in the Practice of Surgery》、1858《On the Early Stages of Inflammation》(Phil. Trans.)。",
+    "citation": "Lister, Joseph. *The Collected Papers of Joseph, Baron Lister*. 2 vols. Oxford: Clarendon Press, 1909。并对照原刊：*The Lancet* 1867 年各期、*British Medical Journal* 1867、*Philosophical Transactions of the Royal Society* 1858 等。",
+    "disputed_policy": "**争议著作为空，但不是「没查过」。** 他身处英国医学期刊的公开发表制度下，论文有期号与日期可查，不存在伪托问题。\n**本人物真正的归属风险是血亲同名，而且危险的那个是他父亲：**\n**Joseph Jackson Lister（1786–1869）**，业余光学家、消色差显微镜物镜的关键改进者，署名常作 **J. J. Lister**，与子的 **J. Lister** 只差一个字母；**领域紧邻**——子能看见微生物，靠的正是父改良的镜子。**十九世纪显微镜光学文献里的「Lister」默认是父，不是他。**\n另有 **Joseph Jackson Lister（1857–1927）博物学家**，与父完全同名——三人共用两个名字。\n抓源阶段已据三条机器可复核的判法排除父的 4 条（含 1830 年那篇消色差物镜）与博物学家的 6 条。\n**★ 一处必须写明的例外**：全集卷 II 里有 16 处 「Joseph Jackson Lister」，查下来是**他本人写的悼父文**《Obituary Notice of the late Joseph Jackson Lister, F.R.S.》及其引用父亲 1830 年那篇。**那是子写父，不是父的作品**，记 writings。\n另有 **Listerine**（1879 年以他命名的商品，**不是他做的、也未经他同意**）与 **Lister Institute**（1891 起）造成的机构与商品名淹没——全文搜 \"Lister\" 不可用。",
+    "disputed_works": [],
+    "exclusions": [
+      {
+        "what": "《Collected Papers》卷 I 的 PREFACE 与 Cameron 所撰 INTRODUCTION",
+        "why": "编者文字，非其本人之言；位置已定，其余卷内正文为其自选篇目"
+      },
+      {
+        "what": "其父 Joseph Jackson Lister（1786–1869）的著作",
+        "why": "同姓且领域紧邻；判法：creator 字段 / 1850 年前必非子 / 显微镜光学与水螅海鞘解剖属父",
+        "excluded_ids": [
+          "jstor-107900（1830 消色差物镜）",
+          "jstor-110225",
+          "jstor-110397",
+          "jstor-108069"
+        ]
+      },
+      {
+        "what": "博物学家 Joseph Jackson Lister（1857–1927）的著作",
+        "why": "与父完全同名；已排除 6 条（Foraminifera 等）"
+      },
+      {
+        "what": "各期刊卷中他人所撰文章",
+        "why": "同卷不等于同一作者"
+      }
+    ],
+    "counting_convention": "covered_sources 逐份点名全部 44 条 P1 源，不使用整批声明（v0.0.0.24 曾因整批声明导致逐源检查整个关闭，v0.0.0.34 已堵）。**注意**：44 份 writings 含同文异扫（全集 2 卷各 2 扫、炎症早期 3 扫等），**对应约 26 种独立著作**——算独立著作数时不得重复计。",
+    "covered_sources": [
+      {
+        "source_id": "src-ff629e73e618",
+        "original_name": "collectedpaperso01listuoft.txt",
+        "locator": "https://archive.org/details/collectedpaperso01listuoft"
+      },
+      {
+        "source_id": "src-6b32767c9b60",
+        "original_name": "collectedpaperso02listuoft.txt",
+        "locator": "https://archive.org/details/collectedpaperso02listuoft"
+      },
+      {
+        "source_id": "src-9b290d6dd8a4",
+        "original_name": "b31363088_0001.txt",
+        "locator": "https://archive.org/details/b31363088_0001"
+      },
+      {
+        "source_id": "src-db239abfef25",
+        "original_name": "b31363088_0002.txt",
+        "locator": "https://archive.org/details/b31363088_0002"
+      },
+      {
+        "source_id": "src-ddea101baf8f",
+        "original_name": "sim_the-lancet_1867-03-16_2272.txt",
+        "locator": "https://archive.org/details/sim_the-lancet_1867-03-16_2272"
+      },
+      {
+        "source_id": "src-ffcc65250bab",
+        "original_name": "sim_the-lancet_1867-03-23_2273.txt",
+        "locator": "https://archive.org/details/sim_the-lancet_1867-03-23_2273"
+      },
+      {
+        "source_id": "src-e1a3a5f87604",
+        "original_name": "sim_the-lancet_1867-03-30_2274.txt",
+        "locator": "https://archive.org/details/sim_the-lancet_1867-03-30_2274"
+      },
+      {
+        "source_id": "src-82eed7cd5266",
+        "original_name": "sim_the-lancet_1867-04-27_2278.txt",
+        "locator": "https://archive.org/details/sim_the-lancet_1867-04-27_2278"
+      },
+      {
+        "source_id": "src-224c2c5ef493",
+        "original_name": "sim_the-lancet_1867-07-27_2291.txt",
+        "locator": "https://archive.org/details/sim_the-lancet_1867-07-27_2291"
+      },
+      {
+        "source_id": "src-d464a21bbf5c",
+        "original_name": "sim_the-lancet_1867-09-21_2299.txt",
+        "locator": "https://archive.org/details/sim_the-lancet_1867-09-21_2299"
+      },
+      {
+        "source_id": "src-86c5c67bc5f1",
+        "original_name": "sim_the-lancet_1867-11-30_2309.txt",
+        "locator": "https://archive.org/details/sim_the-lancet_1867-11-30_2309"
+      },
+      {
+        "source_id": "src-aab583bbf435",
+        "original_name": "sim_british-medical-journal_july-6-december-28-1867_2.txt",
+        "locator": "https://archive.org/details/sim_british-medical-journal_july-6-december-28-1867_2"
+      },
+      {
+        "source_id": "src-443f19f12fc4",
+        "original_name": "b21946474.txt",
+        "locator": "https://archive.org/details/b21946474"
+      },
+      {
+        "source_id": "src-7c21d967f93e",
+        "original_name": "b30570529.txt",
+        "locator": "https://archive.org/details/b30570529"
+      },
+      {
+        "source_id": "src-eda04008abce",
+        "original_name": "b22329699.txt",
+        "locator": "https://archive.org/details/b22329699"
+      },
+      {
+        "source_id": "src-ef6ac1785774",
+        "original_name": "b22329687.txt",
+        "locator": "https://archive.org/details/b22329687"
+      },
+      {
+        "source_id": "src-96290a829b0d",
+        "original_name": "b3057013x.txt",
+        "locator": "https://archive.org/details/b3057013x"
+      },
+      {
+        "source_id": "src-006012a6b117",
+        "original_name": "b22378418.txt",
+        "locator": "https://archive.org/details/b22378418"
+      },
+      {
+        "source_id": "src-2c686008f175",
+        "original_name": "b21464054.txt",
+        "locator": "https://archive.org/details/b21464054"
+      },
+      {
+        "source_id": "src-00072e256447",
+        "original_name": "b30556727.txt",
+        "locator": "https://archive.org/details/b30556727"
+      },
+      {
+        "source_id": "src-247ed7b2d3b8",
+        "original_name": "philtrans09346010.txt",
+        "locator": "https://archive.org/details/philtrans09346010"
+      },
+      {
+        "source_id": "src-d87d785f9abf",
+        "original_name": "jstor-108678.txt",
+        "locator": "https://archive.org/details/jstor-108678"
+      },
+      {
+        "source_id": "src-3170a84631b1",
+        "original_name": "jstor-111423.txt",
+        "locator": "https://archive.org/details/jstor-111423"
+      },
+      {
+        "source_id": "src-c2de35642738",
+        "original_name": "jstor-111523.txt",
+        "locator": "https://archive.org/details/jstor-111523"
+      },
+      {
+        "source_id": "src-f7cc425ba269",
+        "original_name": "b21478843.txt",
+        "locator": "https://archive.org/details/b21478843"
+      },
+      {
+        "source_id": "src-8cfcf843b463",
+        "original_name": "jstor-108676.txt",
+        "locator": "https://archive.org/details/jstor-108676"
+      },
+      {
+        "source_id": "src-620dc6438b19",
+        "original_name": "b30556739.txt",
+        "locator": "https://archive.org/details/b30556739"
+      },
+      {
+        "source_id": "src-51fe4cb553e6",
+        "original_name": "jstor-108677.txt",
+        "locator": "https://archive.org/details/jstor-108677"
+      },
+      {
+        "source_id": "src-de8ab0a13521",
+        "original_name": "jstor-112320.txt",
+        "locator": "https://archive.org/details/jstor-112320"
+      },
+      {
+        "source_id": "src-05b175644238",
+        "original_name": "oncoagulationofb00list.txt",
+        "locator": "https://archive.org/details/oncoagulationofb00list"
+      },
+      {
+        "source_id": "src-697e1ea2a58b",
+        "original_name": "b21952784.txt",
+        "locator": "https://archive.org/details/b21952784"
+      },
+      {
+        "source_id": "src-6cda55423ff7",
+        "original_name": "b21479136.txt",
+        "locator": "https://archive.org/details/b21479136"
+      },
+      {
+        "source_id": "src-ed8d208a6e46",
+        "original_name": "b21479045.txt",
+        "locator": "https://archive.org/details/b21479045"
+      },
+      {
+        "source_id": "src-0e8d37ece177",
+        "original_name": "b30561450.txt",
+        "locator": "https://archive.org/details/b30561450"
+      },
+      {
+        "source_id": "src-d7319e5b0a9f",
+        "original_name": "b2146490x.txt",
+        "locator": "https://archive.org/details/b2146490x"
+      },
+      {
+        "source_id": "src-f0754bc58cbd",
+        "original_name": "b21464893.txt",
+        "locator": "https://archive.org/details/b21464893"
+      },
+      {
+        "source_id": "src-1dc693690f88",
+        "original_name": "b21456938.txt",
+        "locator": "https://archive.org/details/b21456938"
+      },
+      {
+        "source_id": "src-883dc00789e5",
+        "original_name": "jstor-1623649.txt",
+        "locator": "https://archive.org/details/jstor-1623649"
+      },
+      {
+        "source_id": "src-c722a2ecc92f",
+        "original_name": "thirdhuxleylectu00listuoft.txt",
+        "locator": "https://archive.org/details/thirdhuxleylectu00listuoft"
+      },
+      {
+        "source_id": "src-e5a7ac498ac6",
+        "original_name": "b31354373.txt",
+        "locator": "https://archive.org/details/b31354373"
+      },
+      {
+        "source_id": "src-35c61e669548",
+        "original_name": "b31363179.txt",
+        "locator": "https://archive.org/details/b31363179"
+      },
+      {
+        "source_id": "src-8030d77da785",
+        "original_name": "b30629408.txt",
+        "locator": "https://archive.org/details/b30629408"
+      },
+      {
+        "source_id": "src-4e6696a08119",
+        "original_name": "listeronuseofani00list.txt",
+        "locator": "https://archive.org/details/listeronuseofani00list"
+      },
+      {
+        "source_id": "src-a986fcfe3d29",
+        "original_name": "mercifuladvantag00list.txt",
+        "locator": "https://archive.org/details/mercifuladvantag00list"
+      }
+    ]
+  }
 }
