@@ -791,6 +791,18 @@ def run_content_checks(report, target: Path, cache_dirs: list[str]) -> None:
                         ['--workspace', str(target), '--cache', *cache_dirs])
         if code == -1:
             review['checker_missing'] = out
+        elif code == 2:
+            # ★ v0.0.0.38：退出码 2 是**「语料回连不上，本次结论不可信」**，
+            #   不是「查出了装饰性引用」。此前这里写的是 `elif code != 0`，
+            #   把 2 和 1 收成同一个错——于是「没查成」被报成了「查出问题」。
+            #   Lister #108 实测撞出：`--cache` 指到 `raw/` 时 60 份语料一份没读到，
+            #   门照样报「存在装饰性引用」，而真实情况是**一条都还没核过**。
+            #   检查器自己是设了防的（它 return 2 并打印「结果不可信」），
+            #   **防线设在检查器里、在调用点被抹掉了。**
+            #   这仍是硬错——不可信的结论不能当通过——但错要报对。
+            report.error('content.coverage-unresolved',
+                         '装饰性引用**未核成**（不是通过）：过半来源回连不上缓存正文，'
+                         '先确认 --cache 是否指到工作区根（本流水线语料在 raw/<source_id>/ 下）')
         elif code != 0:
             # ★ 判据用**退出码**，不用输出串。
             #   第一版写的是 `'结论: 通过' not in out`——而输出里的「不通过」
@@ -817,9 +829,20 @@ def run_content_checks(report, target: Path, cache_dirs: list[str]) -> None:
                     'evals/judge_payload.v1.json 不在——**答案层未核验（不是通过）**；'
                     '候选答案没落进工作区时，任何门都看不见它')
             code, out = run('check_quote_integrity.py', argv)
+            # ★ v0.0.0.38：改用**退出码**。此前是 `'未命中 0 个' not in out`——
+            #   串匹配在语料读到 0 份时同样成立，于是「没核成」被印成
+            #   「有引文未在语料中找到」，与真发现长得一模一样。
+            #   0=干净　1=查出未命中　2=自测未过　3=语料读不到
             if code == -1:
                 review['checker_missing'] = out
-            elif '未命中 0 个' not in out:
+            elif code == 3:
+                report.error('content.quote-unresolved',
+                             '引文核验**未做成**（不是通过）：一份语料都没读到，'
+                             '确认 --cache 指到含 .txt 的目录（本流水线在 <工作区>/raw/ 下）')
+            elif code == 2:
+                report.error('content.selftest-failed',
+                             'check_quote_integrity 负对照未过——其检查结论不作数')
+            elif code != 0:
                 review['quote_integrity'] = ('有引文未在语料中找到'
                                              '——**未命中不等于伪造**，须人工核对；'
                                              '但「改了 OCR 错字再当逐字引文」也落在这里')

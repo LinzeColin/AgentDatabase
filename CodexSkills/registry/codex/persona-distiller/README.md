@@ -1,4 +1,4 @@
-# 人物蒸馏 Skill / Persona Distiller v0.0.0.37
+# 人物蒸馏 Skill / Persona Distiller v0.0.0.38
 
 Persona Distiller 把公开人物、经授权的私域人物、自己、历史或虚构人物构建为可安装的 Agent Skill。它蒸馏证据支持的能力、策略、认知、决策、工作方式和边界；不是只模仿口吻，也不是本人、授权、背书或实时观点。
 

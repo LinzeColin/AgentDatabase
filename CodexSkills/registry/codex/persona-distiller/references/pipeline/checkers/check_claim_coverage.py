@@ -83,9 +83,17 @@ def key_terms(claim: str) -> set[str]:
 
 
 def load_cache(cache: pathlib.Path) -> dict[str, str]:
-    """checksum -> 正文。产物只存校验和，靠它回连缓存正文。"""
+    """checksum -> 正文。产物只存校验和，靠它回连缓存正文。
+
+    ★ v0.0.0.38：`glob` 改 `rglob`。
+    本流水线自己产出的语料布局是 `raw/<source_id>/<file>.txt`——**深一层**，
+    非递归的 `glob("*.txt")` 对着 `raw/` 读到的永远是 0 份。
+    Lister #108 实测：`glob` 0 份、`rglob` 60 份、校验和命中 60/61。
+    也就是说这件检查器**从来没有在标准工作区上真正跑起来过**，
+    除非调用方手工把 61 个子目录一个个传进来。
+    """
     out: dict[str, str] = {}
-    for f in cache.glob("*.txt"):
+    for f in cache.rglob("*.txt"):
         try:
             t = f.read_text(encoding="utf-8", errors="replace")
         except Exception:
@@ -135,7 +143,40 @@ def self_test() -> int:
     print(f"  {'✓' if not bad_q else '✗'} 引文判据：不误命中不相干的源")
     fail += (not ok_q) + bad_q
 
-    print("  ✓ 负对照通过（5/5）" if not fail
+    # ── v0.0.0.38 新增：语料回连本身的负对照 ────────────────────────
+    # 此前 5 项全在「拿到正文之后判得对不对」这一层，
+    # **没有一项管「有没有拿到正文」**——于是 rglob 缺陷躲过了历次自测。
+    # 判据自测全绿而射程根本没覆盖到被判的东西，这是第四次。
+    import tempfile
+    with tempfile.TemporaryDirectory() as td:
+        root = pathlib.Path(td)
+        body = "Lister applied carbolic acid to compound fracture in 1867."
+        want = hashlib.sha256(body.encode("utf-8")).hexdigest()
+
+        nest = root / "raw" / "src-deadbeef"
+        nest.mkdir(parents=True)
+        (nest / "a.txt").write_text(body, encoding="utf-8")
+        got_nested = want in load_cache(root / "raw")
+        print(f"  {'✓' if got_nested else '✗'} 嵌套布局 raw/<src>/x.txt **能**读到"
+              f"——这是流水线自己产出的布局")
+        fail += not got_nested
+
+        # 反向对照：平铺布局不得因为改成递归就退化
+        flat = root / "flat"
+        flat.mkdir()
+        (flat / "b.txt").write_text(body, encoding="utf-8")
+        got_flat = want in load_cache(flat)
+        print(f"  {'✓' if got_flat else '✗'} 平铺布局 dir/x.txt 仍能读到（反向对照）")
+        fail += not got_flat
+
+        # 反向对照之二：目录里没有任何 .txt 时必须是空，不得凭空命中
+        empty = root / "empty"
+        empty.mkdir()
+        got_empty = load_cache(empty)
+        print(f"  {'✓' if not got_empty else '✗'} 空目录读到 0 份，不凭空命中（反向对照）")
+        fail += bool(got_empty)
+
+    print("  ✓ 负对照通过（8/8）" if not fail
           else f"  ✗ {fail} 项未过——本检查器已失效，其「通过」不构成证据")
     return fail
 

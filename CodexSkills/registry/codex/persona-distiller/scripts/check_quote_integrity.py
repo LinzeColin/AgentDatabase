@@ -105,9 +105,64 @@ REAL_FRENCH_GUILLEMET = ("法文 «» 引号—须被扫到并命中",
 REAL_OCR_FIXED = ("改了 OCR 错字—须抓出",
                   "To Doctors JENNER and WOODVILLE")   # 语料作 "To DoHors JENNER and WOQDVILLE"
 
+# ★ v0.0.0.38：自测**自带夹具语料**，不再借用调用方传进来的 --cache。
+#
+# 此前自测直接拿 main() 装好的那份语料判，于是：
+#   · 只有跑 Jenner 时才过；跑别人时前两条真实夹具必然「误杀」，
+#     自测报「本检查器已失效」——而检查器本身好好的。
+#   · 元检查器普查因此把它记作「负对照不可独立验证」。
+#   · v0.0.0.38 把「自测未过」接成了硬错，若不修，除 Jenner 外**每个人都会被挡**。
+#
+# 下面三段是从 Jenner #104 真实语料里**逐字符取出的原样**（含其 OCR 讹形），
+# 文件名附在各段后面，可回查。**这是自测夹具，不是任何人的语料。**
+_FIX_LONGS = (   # src-ec9e81d982c3/inquiryintocause00jenn.normalized.txt
+    "it  was  inferted,  on  the  14th\nof  May,  1796,  into  the  arm  of  the  boy  "
+    "by  means  of  two\nfuperficial  incifions")
+_FIX_VERBATIM = (  # src-d29ec9348b71/b21463475_0001.normalized.txt
+    "It  was  not  with  Sir  Joseph,  but  with  Home  ;  he  took\nthe  paper.  "
+    "It  was  shewn  to  the  Council,  and  returned  to  me")
+_FIX_OCR = (  # src-6d5211d60581/b22006345.txt —— 原样含讹形，**不得改正**
+    "To  DoHors  JENNER  and  WOQDVILLE")
+_FIX_FRENCH = (  # Pasteur #106 语料原样
+    "Sur vingt chiens traités, je n'aurais pu répondre d'en rendre "
+    "réfractaires à la rage plus de quinze ou seize.")
 
-def self_test(projected, folded) -> int:
-    """负对照 + 真实夹具 + 两条反向对照。任何一条不合即判本检查器失效。"""
+
+def fixture_corpus() -> tuple[list, list]:
+    """自测专用夹具语料 → (投影, 长 s 折叠)。与真实语料同一套装载后处理。"""
+    texts, folded = [], []
+    for raw in (_FIX_LONGS, _FIX_VERBATIM, _FIX_OCR, _FIX_FRENCH):
+        p = proj(raw)
+        texts.append(p)
+        folded.append(fold_s(p))
+    return texts, folded
+
+
+def load_corpus(cache_dirs) -> tuple[list, list]:
+    """cache 目录 → (投影正文, 长 s 折叠后正文)。
+
+    ★ v0.0.0.38 抽成函数，为的是**让装载这一步也能被负对照**。
+    此前它内联在 main() 里，自测只能拿到「已经装好的语料」，
+    于是「一份都没装到」这个失败模式，自测在结构上就看不见。
+    """
+    texts, folded = [], []
+    for d in cache_dirs:
+        # `{d}/*.txt` 不递归；本流水线语料在 `raw/<source_id>/<file>.txt`，深一层。
+        for f in glob.glob(f"{d}/**/*.txt", recursive=True):
+            p = proj(pathlib.Path(f).read_text(encoding="utf-8", errors="replace"))
+            texts.append(p)
+            folded.append(fold_s(p))
+    return texts, folded
+
+
+def self_test(projected=None, folded=None) -> int:
+    """负对照 + 真实夹具 + 反向对照。任何一条不合即判本检查器失效。
+
+    ★ v0.0.0.38：改用**自带夹具语料**，不再吃调用方的 --cache。
+    自测判的是「这件检查器还灵不灵」，那就不能取决于此刻在跑谁的语料。
+    参数保留但忽略，只为不破坏既有调用签名。
+    """
+    projected, folded = fixture_corpus()
     missed = 0
     print("\n══ 负对照（伪造引文必须全部抓到）══")
     for label, q in SELF_TEST:
@@ -141,6 +196,34 @@ def self_test(projected, folded) -> int:
     print(f"  {'✓' if not b else '✗'} 关掉长 s 折叠后，长 s 样本转为未命中")
     missed += bool(b)
 
+    # ③ v0.0.0.38：**装载这一步**的对照。
+    #    此前全部对照都建立在「语料已经装好」之上，于是「一份都没装到」
+    #    这个失败模式在结构上就测不到——而它恰恰会把每条引文都报成未命中，
+    #    看起来与「查出一片伪造引文」完全一样。
+    print("\n══ 装载对照（v0.0.0.38）══")
+    import tempfile
+    with tempfile.TemporaryDirectory() as td:
+        root = pathlib.Path(td)
+        nest = root / "raw" / "src-deadbeef"
+        nest.mkdir(parents=True)
+        (nest / "a.txt").write_text(
+            "antiseptic principle in the practice of surgery", encoding="utf-8")
+        t_n, f_n = load_corpus([str(root / "raw")])
+        print(f"  {'✓' if len(t_n) == 1 else '✗'} 嵌套布局 raw/<src>/x.txt 读到 "
+              f"{len(t_n)} 份（流水线自己产出的布局）")
+        missed += len(t_n) != 1
+
+        flat = root / "flat"; flat.mkdir()
+        (flat / "b.txt").write_text("carbolic acid", encoding="utf-8")
+        t_f, _ = load_corpus([str(flat)])
+        print(f"  {'✓' if len(t_f) == 1 else '✗'} 平铺布局仍读到 1 份（反向对照）")
+        missed += len(t_f) != 1
+
+        empty = root / "empty"; empty.mkdir()
+        t_e, _ = load_corpus([str(empty)])
+        print(f"  {'✓' if not t_e else '✗'} 空目录读到 0 份，不凭空命中（反向对照）")
+        missed += bool(t_e)
+
     print("\n  ✓ 负对照通过" if not missed else f"\n  ✗ {missed} 条不合——本检查器已失效，不得依赖其结论")
     return missed
 
@@ -152,18 +235,33 @@ def main() -> int:
     ap.add_argument("--answers", type=pathlib.Path, nargs="*", default=[],
                     help="**答案层**：候选答案 JSON（id→文本）或盲判载荷（[{case_id,A,B}]）。"
                          "断言层绿不代表答案层绿——被判、被发布的是答案层。")
-    ap.add_argument("--cache", required=True, nargs="+")
+    # ★ v0.0.0.38：`--cache` 由 required=True 改为按需必填。
+    #   自测现在自带夹具语料，**必须能独立跑起来**——
+    #   元检查器普查此前把本件记作「负对照不可独立验证」，根因就在这一行。
+    ap.add_argument("--cache", nargs="+", default=[])
     ap.add_argument("--self-test", action="store_true",
-                    help="同时跑负对照；改动本脚本后必须跑一次")
+                    help="跑负对照（自带夹具语料，可不带 --cache 独立运行）")
     a = ap.parse_args()
 
-    texts, folded = [], []
-    for d in a.cache:
-        for f in glob.glob(f"{d}/*.txt"):
-            p = proj(pathlib.Path(f).read_text(encoding="utf-8", errors="replace"))
-            texts.append(p)
-            folded.append(fold_s(p))
+    # 只跑自测：不碰任何人的语料，退出码 0=灵 / 2=已失效
+    if a.self_test and not a.cache:
+        return 2 if self_test() else 0
+    if not a.cache:
+        ap.error("--cache 必填（除非只跑 --self-test）")
+
+    # ★ v0.0.0.38：装载走 load_corpus()，与自测**同一份代码**——
+    #   否则对照测的是另一条路径，绿了也不构成证据。
+    #   该函数把 `{d}/*.txt` 改成了递归：本流水线语料在 `raw/<source_id>/<file>.txt`，
+    #   非递归写法对着工作区或 raw/ 永远读到 0 份，于是每条引文都「找不到」，
+    #   门报出一片**假红**。check_claim_coverage.py 同一天撞出同一个坑。
+    texts, folded = load_corpus(a.cache)
     print(f"语料 {len(texts)} 份（已投影为字母数字串）")
+    if not texts:
+        # ★ 0 份语料时**不许往下判**：那样每条引文都会被报成「未命中」，
+        #   把「没核成」印成「核出了问题」。退出码 2 与「查出未命中」的 1 区分开。
+        print("⚠️  一份语料都没读到，本次检查结果不可信"
+              "——确认 --cache 指到含 .txt 的目录（本流水线在 <工作区>/raw/ 下）")
+        return 3
 
 
     def scan(label: str, unit_id: str, text: str, acc):
@@ -211,9 +309,14 @@ def main() -> int:
     print("  ✓ 全部可在语料中找到" if not acc["bad"]
           else "\n  ⚠ 未命中不等于伪造——须人工看一眼原文再定（见文件头）。"
                "\n    但**「改了 OCR 错字再当逐字引文用」也会落在这里**，那一类是真问题。")
+    # ★ v0.0.0.38：退出码分三种，此前三种情形都返回 2，调用方无从分辨，
+    #   于是它退回去做串匹配（`'未命中 0 个' not in out`）——
+    #   而这个代码库自己在 check_claim_coverage 的接线处写过
+    #   「★ 判据用**退出码**，不用输出串」。在一处立的规矩，在另一处没执行。
+    #   0=干净　1=查出未命中（真发现）　2=自测未过　3=语料读不到（结论不可信）
     if a.self_test and self_test(texts, folded):
         return 2
-    return 2 if acc["bad"] else 0
+    return 1 if acc["bad"] else 0
 
 
 if __name__ == "__main__":

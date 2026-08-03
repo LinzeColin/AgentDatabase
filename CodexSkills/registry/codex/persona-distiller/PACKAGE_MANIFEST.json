@@ -4,7 +4,7 @@
   "display_name": "人物蒸馏 Skill / Persona Distiller",
   "distribution": {
     "canonical_registry": "../persona-distiller-group",
-    "kind": "repository-customized-v0.0.0.37",
+    "kind": "repository-customized-v0.0.0.38",
     "lineage_base_archive_sha256": "e891912d98d14afb7677ac935a19be329d97d206f4ae74a644892f46b17f6748"
   },
   "evaluation_suites": 16,
@@ -16,8 +16,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "55604735881412604775609fcf96677b46b8891b988727f428f81e41ac444978",
-      "size_bytes": 80259
+      "sha256": "51ed4f67a9d3cec23c18c8eb2c0af309ca0188d90646cf458fc45b4aeef1c43d",
+      "size_bytes": 85490
     },
     {
       "path": "CONTRIBUTING.md",
@@ -31,7 +31,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "809ff57ead3b06b306516539625180879d3f6840b6d0f496be838f078151bbef",
+      "sha256": "9da71e0d0723c39de2e6c3586644ecf5f29997722abfef7b838730dffa8a3660",
       "size_bytes": 8802
     },
     {
@@ -56,12 +56,12 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "fcc78da7b742b7c32b117d54161ccf4ad20ce6a7061d5e5ba1a24b6fd1d23348",
+      "sha256": "90c69b6725f62812425cbe413cb36ead8602fc9c0f5e7eea5c1aed7c621a1f2c",
       "size_bytes": 36273
     },
     {
       "path": "VERSION",
-      "sha256": "e544d6c81b3b29ba4f14121d5a439d3521898c9d8617b5fc4567f8547ab194b7",
+      "sha256": "f310c4ba47d6f8f9120cd0ec71360143a5480c0795a305e2b91f93cd9c787dcd",
       "size_bytes": 10
     },
     {
@@ -121,7 +121,7 @@
     },
     {
       "path": "handoff.md",
-      "sha256": "4f194e50821128fe340e661aa95359e86f0aa83567e7f9e433a90255b11f5ab6",
+      "sha256": "73382c0fe359c38cf01665418c9e0bb9a16eaddd6092f977674f8663b608e76d",
       "size_bytes": 3702
     },
     {
@@ -141,7 +141,7 @@
     },
     {
       "path": "manifest.json",
-      "sha256": "319cb72bad15ea20f8c6d792082b958bc74f732181a302b568a46a27ba221595",
+      "sha256": "0a41f5a26bacebf94ec055bfd87f186444ef4c19312b9b199127f6c203ca175a",
       "size_bytes": 1191
     },
     {
@@ -486,8 +486,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_claim_coverage.py",
-      "sha256": "090fcae51e539c3a4c979b7a82e8a3d2b4248313e2a1e543880f9231ab006bed",
-      "size_bytes": 12001
+      "sha256": "40736f07af14128931966a689cfacc2f652137db2a879df1efeff5984377ab59",
+      "size_bytes": 14175
     },
     {
       "path": "references/pipeline/checkers/check_corpus_integrity.py",
@@ -516,8 +516,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_quote_integrity.py",
-      "sha256": "d46f75227ba2ce3c56c988eaf121d37096e701985cd9d01d7c3fe221a197c0c4",
-      "size_bytes": 11225
+      "sha256": "27db50e360122b7df798bb3e1175041961c773399705a106099d63228ff93704",
+      "size_bytes": 17242
     },
     {
       "path": "references/pipeline/checkers/check_quote_layer.py",
@@ -796,8 +796,8 @@
     },
     {
       "path": "scripts/check_claim_coverage.py",
-      "sha256": "090fcae51e539c3a4c979b7a82e8a3d2b4248313e2a1e543880f9231ab006bed",
-      "size_bytes": 12001
+      "sha256": "40736f07af14128931966a689cfacc2f652137db2a879df1efeff5984377ab59",
+      "size_bytes": 14175
     },
     {
       "path": "scripts/check_contract_drift.py",
@@ -826,8 +826,8 @@
     },
     {
       "path": "scripts/check_quote_integrity.py",
-      "sha256": "d46f75227ba2ce3c56c988eaf121d37096e701985cd9d01d7c3fe221a197c0c4",
-      "size_bytes": 11225
+      "sha256": "27db50e360122b7df798bb3e1175041961c773399705a106099d63228ff93704",
+      "size_bytes": 17242
     },
     {
       "path": "scripts/check_quote_layer.py",
@@ -946,8 +946,8 @@
     },
     {
       "path": "scripts/quality_check.py",
-      "sha256": "e9bb0328e380ba86eba94b1473f69acd4455afda28a0aaf1e4443e06c0eb9ec8",
-      "size_bytes": 69058
+      "sha256": "03e3aed9e12aa3f2784c8097a55439618eab720751e0b500301df719339d2dc7",
+      "size_bytes": 70988
     },
     {
       "path": "scripts/register_persona.py",
@@ -1501,5 +1501,5 @@
     },
     "secret_findings": 0
   },
-  "version": "v0.0.0.37"
+  "version": "v0.0.0.38"
 }
