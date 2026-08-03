@@ -143,11 +143,14 @@ add("fact", "**那张表的十五家医院我逐家列了名**：St. Mary's；St
     [S["nh1859"]], clusters=["1859 版 Table I"])
 
 add("fact", "**产褥期死亡率我按成因分开算。** 1867 年英格兰，每千次分娩："
-    "`Accidents of childbirth . . . ,3 per 1,000　Puerperal diseases ..... 1-4　"
+    "**意外 3、产褥病 1.4、其他热病 0.7，合计 5.1**。\n"
+    "扫本原样是 `Accidents of childbirth . . . ,3 per 1,000　Puerperal diseases ..... 1-4　"
     "Others, including non-puerperal fevers . . \"7　Total . . . . . 5-1`"
-    "（`Introductory Notes on Lying-in Institutions`，1871；"
-    "`,3`、`1-4`、`\"7`、`5-1` 是扫本把小数点认成别的符号，照录）。",
-    [S["lying1871"]], clusters=["1871 年那本的表"])
+    "（`Introductory Notes on Lying-in Institutions`，1871）。\n"
+    "**还原依据在同页下方的十三年表**：`3-22` + `1-61` = `4'83`——"
+    "**`-` 与 `'` 都是小数点**。据此 `,3` 是 3 而不是 0.3，"
+    "**三项相加 3+1.4+0.7 恰是 5.1**。",
+    [S["lying1871"]], clusters=["1871 年 1867 那组", "同书十三年表"])
 
 add("fact", "**殖民地学校与医院那份里，我把高死亡率拆成四个互斥成因，并明说没法给每个定权重**："
     "`These high death rates can be attributed only to one or more of the following "

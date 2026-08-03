@@ -1439,6 +1439,96 @@ def run_measurement_claims(report, target: Path) -> None:
     report.metrics['measurement_claims'] = info
 
 
+def run_sole_authorship(report, target: Path) -> None:
+    """独揽门（v0.0.0.65 新增，**只写 metrics，连 warning 都不发**）。
+
+    ## 为什么连 warning 都不发
+
+    这道判据第一次跑真数据时**精确率 1/5**（Virchow 三处「合著形容母卷」、
+    Fleming 一处「引了这条源 ≠ 这段在讲它」）。修完在三个人物上是 5/5，
+    但**三个人物不足以把它放进会阻塞的通道**。
+
+    接进来是为了**攒样本**：每个人物自动跑一遍，
+    等它在更多人身上稳住了再谈提级。
+    （`--strict` 下任何 warning 都会让门失败，所以只能进 `metrics`。）
+    """
+    here = Path(__file__).resolve().parent
+    script = here / 'check_sole_authorship_overreach.py'
+    if not script.exists():
+        report.metrics['sole_authorship'] = {'状态': '检查器未安装，**未核验**（不是通过）'}
+        return
+    spec = importlib.util.spec_from_file_location('_pd_sole', script)
+    module = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(module)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['sole_authorship'] = {'状态': f'加载失败，**未核验**：{exc}'}
+        return
+    buffer = io.StringIO()
+    with contextlib.redirect_stdout(buffer):
+        if module.selftest() != 0:
+            report.metrics['sole_authorship'] = {'状态': '**负对照未过，其结论不作数**'}
+            return
+
+    ledger = target / 'evidence' / 'source-ledger.jsonl'
+    if not ledger.is_file():
+        report.metrics['sole_authorship'] = {'状态': '**账本不在，未核验**'}
+        return
+    shared = module.shared_sources(ledger)
+    if not shared:
+        report.metrics['sole_authorship'] = {
+            '合著／集体署名的源': 0,
+            '状态': '**账本里一条合著／集体署名的源都没有——本次什么也没查，不构成通过。**'
+                    '十一个人物里只有三个的账本记了这一层，'
+                    '**多半是抓源阶段没记，不是真的没有合著。**'}
+        return
+
+    idx = module.title_index(ledger, shared)
+    acc = {'total': 0, 'ok': 0, 'bad': []}
+    claims = target / 'evidence' / 'claims.jsonl'
+    if claims.is_file():
+        for line in claims.read_text(encoding='utf-8').splitlines():
+            if not line.strip():
+                continue
+            r = json.loads(line)
+            cited = (set(r.get('source_ids') or [])
+                     | set(module.SRCID.findall(json.dumps(r, ensure_ascii=False))))
+            for para in module.paragraphs(r.get('claim', '')):
+                module.scan(f'断言/{r.get("claim_id", "?")}', para,
+                            cited & module.cited_by_title(para, idx), shared, acc)
+    for rel in ('evals/judge_payload.v1.json', 'evals/baseline.v1.json'):
+        p = target / rel
+        if not p.is_file():
+            continue
+        try:
+            data = json.loads(p.read_text(encoding='utf-8'))
+        except Exception:                                        # noqa: BLE001
+            continue
+        items = (data.items() if isinstance(data, dict) else
+                 [(f'{r.get("case_id", "?")}/{s}', r[s]) for r in data
+                  for s in ('A', 'B') if s in r])
+        for uid, text in items:
+            if not isinstance(text, str):
+                continue
+            for para in module.paragraphs(text):
+                module.scan(f'{p.name}/{uid}', para,
+                            module.cited_by_title(para, idx), shared, acc)
+
+    info: dict[str, Any] = {
+        '合著／集体署名的源': len(shared),
+        '引用它们又用第一人称的段落': acc['total'],
+        '已划界': acc['ok'],
+        '**独揽**': len(acc['bad']),
+    }
+    if acc['bad']:
+        info['**逐条**'] = [f'{u}　@{s}（账本记「{m}」）「{k}」：{sn}'
+                            for u, s, m, k, sn in acc['bad'][:10]]
+        info['口径'] = ('**修法是划界不是删第一人称**——写「我与 X 合著」'
+                        '「我那一部分是……」即可，本判据不报这类；'
+                        '否定式的划界（「我不把它称作我的报告」）也不报。')
+    report.metrics['sole_authorship'] = info
+
+
 def run_corpus_integrity(report, target: Path) -> None:
     """语料真伪门（v0.0.0.33 新增，**只报不拦**）——已入库的这些文件，是语料吗？
 
@@ -1735,6 +1825,7 @@ def main() -> int:
             cases = evaluate_cases(report, target, thresholds, {record.get('source_id') for record in holdout}, args.allow_provisional)
             run_case_self_sufficiency(report, cases)
             run_measurement_claims(report, target)
+            run_sole_authorship(report, target)
         if args.phase == 'release':
             evaluate_results(report, target, thresholds, cases)
             run_content_checks(report, target, args.cache)
