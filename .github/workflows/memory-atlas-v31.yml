@@ -41,6 +41,8 @@ jobs:
           python -m pip install --disable-pip-version-check --requirement OpenAIDatabase/scripts/memory_atlas_private/requirements-memory-atlas-private.txt
           python -m pip install --disable-pip-version-check pytest==9.0.2
       - name: Python syntax and Memory Atlas private spine tests
+        env:
+          PYTHONPATH: ${{ github.workspace }}
         run: |
           python -m compileall -q OpenAIDatabase/scripts/memory_atlas_private OpenAIDatabase/scripts/memory_atlas_source_capture_entry.py
           pytest -q OpenAIDatabase/tests/test_memory_atlas_private_v31.py

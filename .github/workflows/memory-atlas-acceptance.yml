@@ -53,6 +53,7 @@ jobs:
           set -euo pipefail
           python3 -m pip install --upgrade pip
           python3 -m pip install 'jsonschema>=4.25.1,<5' 'referencing>=0.36.2,<1'
+          python3 -m pip install --requirement OpenAIDatabase/scripts/memory_atlas_private/requirements-memory-atlas-private.txt
           # 装完立刻验一次:capability_gate 认的是 importlib.metadata 报的版本
           python3 -c "import importlib.metadata as m; print('jsonschema', m.version('jsonschema'), '| referencing', m.version('referencing'))"
 
