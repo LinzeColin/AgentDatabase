@@ -1,0 +1,162 @@
+{
+ "q-01": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "ni-anonymous-fidelity-01"
+ },
+ "q-02": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ni-anonymous-fidelity-02"
+ },
+ "q-03": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "ni-boundary-01"
+ },
+ "q-04": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ni-boundary-02"
+ },
+ "q-05": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ni-capability-calibration-01"
+ },
+ "q-06": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "ni-capability-calibration-02"
+ },
+ "q-07": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "ni-contrast-01"
+ },
+ "q-08": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ni-contrast-02"
+ },
+ "q-09": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ni-fact-preservation-01"
+ },
+ "q-10": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "ni-fact-preservation-02"
+ },
+ "q-11": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ni-identity-routing-01"
+ },
+ "q-12": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "ni-identity-routing-02"
+ },
+ "q-13": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ni-known-01"
+ },
+ "q-14": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ni-known-02"
+ },
+ "q-15": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "ni-long-horizon-01"
+ },
+ "q-16": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ni-long-horizon-02"
+ },
+ "q-17": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "ni-planning-fidelity-01"
+ },
+ "q-18": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ni-planning-fidelity-02"
+ },
+ "q-19": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ni-refusal-stop-01"
+ },
+ "q-20": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "ni-refusal-stop-02"
+ },
+ "q-21": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "ni-style-decoy-01"
+ },
+ "q-22": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ni-style-decoy-02"
+ },
+ "q-23": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "ni-task-completion-01"
+ },
+ "q-24": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "ni-task-completion-02"
+ },
+ "q-25": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "ni-token-efficiency-01"
+ },
+ "q-26": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ni-token-efficiency-02"
+ },
+ "q-27": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "ni-tool-use-01"
+ },
+ "q-28": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ni-tool-use-02"
+ },
+ "q-29": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ni-trajectory-01"
+ },
+ "q-30": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ni-trajectory-02"
+ },
+ "q-31": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "ni-voice-01"
+ },
+ "q-32": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "ni-voice-02"
+ }
+}
