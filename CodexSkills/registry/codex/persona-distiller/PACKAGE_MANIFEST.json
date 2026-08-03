@@ -4,7 +4,7 @@
   "display_name": "人物蒸馏 Skill / Persona Distiller",
   "distribution": {
     "canonical_registry": "../persona-distiller-group",
-    "kind": "repository-customized-v0.0.0.71",
+    "kind": "repository-customized-v0.0.0.72",
     "lineage_base_archive_sha256": "e891912d98d14afb7677ac935a19be329d97d206f4ae74a644892f46b17f6748"
   },
   "evaluation_suites": 16,
@@ -31,7 +31,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "0bc62ec2fe22c77745548bd9506cbc46f2bdd34843034f4f1b39ed4bb9128b36",
+      "sha256": "20b34dbf8d5ac6a025e4288fc5f26599e9476a898dc1128468edc725070a5a07",
       "size_bytes": 8802
     },
     {
@@ -56,12 +56,12 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "638593a68f3b9ddd39ee770adef4c37c0ac1e8da636d5f4b2f4b2c32bde5cfe5",
-      "size_bytes": 79221
+      "sha256": "73bcf0d9f141e576854112dbb99a8d4350ecf933878d6dc60cbc4ecb9b0fc516",
+      "size_bytes": 81486
     },
     {
       "path": "VERSION",
-      "sha256": "b038556f7a14dc439aff2a6c33eb45ce5c21791e8fd944cf4f3aaa8b6f1cd36f",
+      "sha256": "0c03c6d2ab175d29e0e59de73595d3676319f0f9c3a1ed4f2125c2f7e86daa6f",
       "size_bytes": 10
     },
     {
@@ -121,7 +121,7 @@
     },
     {
       "path": "handoff.md",
-      "sha256": "cee57ab7769bdb6dc580545be32759dd201d9e5e73349f1edd569868737b751a",
+      "sha256": "a5f246e96effa905a2079a390435b44dcf8aa7982e55447bf893a9e1725fdd81",
       "size_bytes": 3702
     },
     {
@@ -141,7 +141,7 @@
     },
     {
       "path": "manifest.json",
-      "sha256": "b118b9c2e90575465619b3a175f1ce94e3172e078378fefaf780e893b6a14ae2",
+      "sha256": "e524ed3b24cdbf1c4fff4c30f64cebc7b74e63665f8b6efda270c8e0dd8380f7",
       "size_bytes": 1191
     },
     {
@@ -376,8 +376,8 @@
     },
     {
       "path": "references/ledgers/_每次开工必读.md",
-      "sha256": "c76a7e332c903b261a0dc3c507e7e446fa4b6727c9ad9b98169be1fa78605544",
-      "size_bytes": 39589
+      "sha256": "83af1a40fe56152d05afe55921ae9afc381bb23f242135deedd647c38e937435",
+      "size_bytes": 40797
     },
     {
       "path": "references/ledgers/_蒸馏名单_v1草稿.md",
@@ -553,6 +553,11 @@
       "path": "references/pipeline/checkers/check_ocr_language_death.py",
       "sha256": "cca8709a4629bd1f3938f3a8f11c983872ff27bd71b795bb9d407a9b7c29cbd6",
       "size_bytes": 14945
+    },
+    {
+      "path": "references/pipeline/checkers/check_probe_precondition.py",
+      "sha256": "5fb1f64d04e18f020248b43d02cc6f98c3d61d78c77d40ca62af13a2e4fe3ce5",
+      "size_bytes": 9803
     },
     {
       "path": "references/pipeline/checkers/check_quote_in_span.py",
@@ -968,6 +973,11 @@
       "path": "scripts/check_ocr_language_death.py",
       "sha256": "cca8709a4629bd1f3938f3a8f11c983872ff27bd71b795bb9d407a9b7c29cbd6",
       "size_bytes": 14945
+    },
+    {
+      "path": "scripts/check_probe_precondition.py",
+      "sha256": "5fb1f64d04e18f020248b43d02cc6f98c3d61d78c77d40ca62af13a2e4fe3ce5",
+      "size_bytes": 9803
     },
     {
       "path": "scripts/check_quote_in_span.py",
@@ -1696,5 +1706,5 @@
     },
     "secret_findings": 0
   },
-  "version": "v0.0.0.71"
+  "version": "v0.0.0.72"
 }
