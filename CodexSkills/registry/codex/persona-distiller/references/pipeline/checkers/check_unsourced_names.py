@@ -62,6 +62,12 @@ NOT_A_NAME = {
     "Blakiston Company", "The Blakiston Company", "Oxford University",
     "University Press", "McGill", "Yale", "Harvard", "London", "Philadelphia",
     "Montreal", "Baltimore", "Edinburgh",
+    # ★ v0.0.0.60：**书名里的拉丁词不是人名。**
+    #   Fleming #111 实测：`Aconitum Napellus`（乌头，1845 年那本书的书名）
+    #   被当成人名报为「查无实据」。属名与种加词都是拉丁文单词，
+    #   形态与姓氏无法区分，**只能列表排除**。
+    "Aconitum", "Napellus", "Penicillium", "Lysozyme", "Salvarsan",
+    "Staphylococcus", "Streptococcus", "Bacillus", "Influenzae", "Influenzæ",
 }
 
 
@@ -248,6 +254,10 @@ def selftest() -> int:
     chk("Curschmann 依据在排除记录里 → ⚠ 而非 ✗",
         any("Curschmann" in r[0] for r in soft)
         and not any("Curschmann" in r[0] for r in bad))
+
+    print("── 反向对照 ②b：**书名里的拉丁属名不是人名**（Fleming #111 实测）──")
+    b_, s_, o_ = run({"a": "那本 1845 年的《Aconitum Napellus》不是我写的。"}, corpus, _FIX_LEDGER, "")
+    chk("`Aconitum` / `Napellus` 一个都不报", not (b_ + s_ + o_))
 
     print("── 反向对照 ②：机构名、书名不许当人名抓 ──")
     bad, soft, ok = run(

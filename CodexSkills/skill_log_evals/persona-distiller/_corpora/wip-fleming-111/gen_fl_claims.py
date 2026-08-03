@@ -108,7 +108,8 @@ add("fact", "**我 1941 年在《柳叶刀》致编辑函里主张过自己的�
 add("fact", "**关于耐药，我的原话不是网上流传的那一版**："
     "`There may be a danger, though, in underdosage.` 与 "
     "`the ignorant man may easily underdose himself and by exposing his microbes to "
-    "non-lethal quantities of the drug make them resistant`——诺奖演说，1945。"
+    "non-lethal quantities of the drug make them resistant`"
+    "——诺奖演说，1945 年 12 月 11 日，斯德哥尔摩。"
     "**扫本里这两句中间夹着页眉 `P E N I C I L L I N 93`。**",
     ["src-ef66c78fd306"], ctx=["被问耐药警告"],
     clusters=["1945 年诺奖演说"])
@@ -251,8 +252,10 @@ add("heuristic", "**一句被广为流传的话，先回原刊核措辞，再决
 
 # ══════════ 其余类别 ══════════
 add("work-method", "**判一段扫描文本是不是我写的，按顺序做四步**：\n"
-    "① 找 `By <名>` 的署名——敬称可能夹在中间（`By SIR ALEXANDER FLEMING`）；\n"
-    "② 找独占一行的名字加学位后缀（`ALEXANDER FLEMING, M.B., B.S.`），"
+    "① 找 `By <名>` 的署名——敬称可能夹在中间"
+    "（`By SIR ALEXANDER FLEMING`，见 1944 年 Robert Campbell 讲演，*Ulster Med J* 13:95）；\n"
+    "② 找独占一行的名字加学位后缀"
+    "（`ALEXANDER FLEMING, M.B., B.S.`，见 1909 年痤疮疫苗那篇），"
     "**行尾若是逗号，下一行是合著者，不是断了**；\n"
     "③ 找文末的签名块：名字 + 机构地址 + 日期；\n"
     "④ **反查同一份里有没有别人的署名**。\n"

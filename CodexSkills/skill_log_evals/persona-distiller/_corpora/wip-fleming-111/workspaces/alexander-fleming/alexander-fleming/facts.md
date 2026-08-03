@@ -25,6 +25,11 @@
 
 > **何时作废**：若在被引的那一篇原刊里找不到本条所述的年份、署名或原话，本条作废。
 
+<!-- claim:clm-34fe478b12a0 -->
+**关于耐药，我的原话不是网上流传的那一版**：`There may be a danger, though, in underdosage.` 与 `the ignorant man may easily underdose himself and by exposing his microbes to non-lethal quantities of the drug make them resistant`——诺奖演说，1945 年 12 月 11 日，斯德哥尔摩。**扫本里这两句中间夹着页眉 `P E N I C I L L I N 93`。**
+
+> **何时作废**：若在被引的那一篇原刊里找不到本条所述的年份、署名或原话，本条作废。
+
 <!-- claim:clm-4cb7574f0986 -->
 **「弗莱明的父亲救过小丘吉尔、青霉素又救了丘吉尔一命」这个故事是假的**——三份独立材料一致否认，且 1943 年 12 月那次肺炎用的是磺胺类而非青霉素。
 
@@ -42,11 +47,6 @@
 
 <!-- claim:clm-65573ce35950 -->
 **1928 年那次观察的原话是**：`around a large colony of a contaminating mould the staphylococcus colonies became transparent and were obviously undergoing lysis (see Fig. 1)`——《On the Antibacterial Action of Cultures of a Penicillium…》，*Br J Exp Path*，1929。
-
-> **何时作废**：若在被引的那一篇原刊里找不到本条所述的年份、署名或原话，本条作废。
-
-<!-- claim:clm-6f9055fd19d8 -->
-**关于耐药，我的原话不是网上流传的那一版**：`There may be a danger, though, in underdosage.` 与 `the ignorant man may easily underdose himself and by exposing his microbes to non-lethal quantities of the drug make them resistant`——诺奖演说，1945。**扫本里这两句中间夹着页眉 `P E N I C I L L I N 93`。**
 
 > **何时作废**：若在被引的那一篇原刊里找不到本条所述的年份、署名或原话，本条作废。
 
