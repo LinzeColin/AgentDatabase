@@ -9,7 +9,8 @@
     "symlinks": "never_follow",
     "missing_required": "WAITING_SOURCE",
     "missing_optional": "visible_gap_not_success",
-    "source_runner": "generic_one_shot; scheduler binding must be separately evidenced"
+    "source_runner": "generic_one_shot; scheduler binding must be separately evidenced",
+    "availability_tiers": "A_CLOUD_NATIVE 决定产品可用性；B_LOCAL_OPTIONAL 只影响采集完整性，缺失时降级不判失败"
   },
   "sources": [
     {
@@ -19,7 +20,11 @@
       "kind": "sqlite",
       "required": true,
       "recursive": false,
-      "include_globs": ["*"]
+      "include_globs": [
+        "*"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
     },
     {
       "source_id": "codex_sessions",
@@ -28,7 +33,11 @@
       "kind": "files",
       "required": true,
       "recursive": true,
-      "include_globs": ["**/*"]
+      "include_globs": [
+        "**/*"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
     },
     {
       "source_id": "codex_archived_sessions",
@@ -37,7 +46,11 @@
       "kind": "files",
       "required": false,
       "recursive": true,
-      "include_globs": ["**/*"]
+      "include_globs": [
+        "**/*"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
     },
     {
       "source_id": "codex_memories",
@@ -46,7 +59,11 @@
       "kind": "files",
       "required": false,
       "recursive": true,
-      "include_globs": ["**/*"]
+      "include_globs": [
+        "**/*"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
     },
     {
       "source_id": "codex_attachments",
@@ -55,7 +72,11 @@
       "kind": "files",
       "required": false,
       "recursive": true,
-      "include_globs": ["**/*"]
+      "include_globs": [
+        "**/*"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
     },
     {
       "source_id": "codex_automations",
@@ -64,7 +85,14 @@
       "kind": "files",
       "required": true,
       "recursive": true,
-      "include_globs": ["**/*.toml", "**/*.md", "**/*.json", "**/*.jsonl"]
+      "include_globs": [
+        "**/*.toml",
+        "**/*.md",
+        "**/*.json",
+        "**/*.jsonl"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
     },
     {
       "source_id": "codex_tasks",
@@ -73,7 +101,11 @@
       "kind": "files",
       "required": false,
       "recursive": true,
-      "include_globs": ["**/*"]
+      "include_globs": [
+        "**/*"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
     },
     {
       "source_id": "chatgpt_exports",
@@ -83,7 +115,11 @@
       "kind": "files",
       "required": false,
       "recursive": true,
-      "include_globs": ["**/*"]
+      "include_globs": [
+        "**/*"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
     },
     {
       "source_id": "openaidatabase_live_data",
@@ -93,8 +129,15 @@
       "kind": "files",
       "required": false,
       "recursive": true,
-      "include_globs": ["**/*"],
-      "exclude_globs": ["**/__pycache__/**", "**/*.pyc"]
+      "include_globs": [
+        "**/*"
+      ],
+      "exclude_globs": [
+        "**/__pycache__/**",
+        "**/*.pyc"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
     },
     {
       "source_id": "verified_evidence_adapters",
@@ -104,8 +147,51 @@
       "kind": "evidence_adapter",
       "required": false,
       "recursive": true,
-      "include_globs": ["**/*.json", "**/*.jsonl", "**/*.ndjson"],
-      "exclude_globs": ["**/__pycache__/**", "**/*.pyc"]
+      "include_globs": [
+        "**/*.json",
+        "**/*.jsonl",
+        "**/*.ndjson"
+      ],
+      "exclude_globs": [
+        "**/__pycache__/**",
+        "**/*.pyc"
+      ],
+      "availability_tier": "B_LOCAL_OPTIONAL",
+      "required_for_product": false
+    }
+  ],
+  "cloud_native_authorities": [
+    {
+      "source_id": "r2_primary_objects",
+      "label_zh": "R2 主对象字节",
+      "availability_tier": "A_CLOUD_NATIVE",
+      "required_for_capture": true,
+      "required_for_product": true,
+      "purpose_zh": "对象字节权威；读回校验失败即不得宣称当前数据可信。"
+    },
+    {
+      "source_id": "r2_normalized_events",
+      "label_zh": "R2 归一化事件流",
+      "availability_tier": "A_CLOUD_NATIVE",
+      "required_for_capture": true,
+      "required_for_product": true,
+      "purpose_zh": "本次运行的事件增量；缺失时页面没有可分析的事实。"
+    },
+    {
+      "source_id": "private_database_facts",
+      "label_zh": "Private-Database 结构化事实",
+      "availability_tier": "A_CLOUD_NATIVE",
+      "required_for_capture": true,
+      "required_for_product": true,
+      "purpose_zh": "长期结构化事实权威；缺失时运行身份无法核对。"
+    },
+    {
+      "source_id": "github_private_release",
+      "label_zh": "GitHub 私有仓全量备份",
+      "availability_tier": "A_CLOUD_NATIVE",
+      "required_for_capture": false,
+      "required_for_product": false,
+      "purpose_zh": "全量全时冷备；缺失是真实缺口，但今天的事实仍可呈现，只降级不判失败。"
     }
   ]
 }

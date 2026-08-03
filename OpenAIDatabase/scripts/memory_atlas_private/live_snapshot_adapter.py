@@ -80,18 +80,31 @@ def build_live_snapshot(private_snapshot: Mapping[str,Any], visual_analytics: Ma
     if not isinstance(raw_a,list) or not raw_a: raise LiveSnapshotError('cloud_native_sources must be non-empty')
     for item in raw_a:
         if not isinstance(item,Mapping): raise LiveSnapshotError('cloud source must be object')
-        tier_a.append({'source_id':str(item.get('source_id','unknown')),'label_zh':str(item.get('label_zh',item.get('source_id','云端来源'))),'tier':'A_CLOUD_NATIVE','required_for_capture':bool(item.get('required_for_capture',True)),'required_for_product':True,'state':_state(item.get('state')),'object_count':int(item.get('object_count',0) or 0),'size_bytes':int(item.get('size_bytes',0) or 0),'last_observed_at':item.get('last_observed_at') if isinstance(item.get('last_observed_at'),str) else None})
+        # required_for_product is read, not assumed: a cloud authority may be a
+        # real gap when missing without being something the product cannot render
+        # without (the GitHub full-history backup is exactly that).
+        tier_a.append({'source_id':str(item.get('source_id','unknown')),'label_zh':str(item.get('label_zh',item.get('source_id','云端来源'))),'tier':'A_CLOUD_NATIVE','required_for_capture':bool(item.get('required_for_capture',True)),'required_for_product':bool(item.get('required_for_product',True)),'state':_state(item.get('state')),'object_count':int(item.get('object_count',0) or 0),'size_bytes':int(item.get('size_bytes',0) or 0),'last_observed_at':item.get('last_observed_at') if isinstance(item.get('last_observed_at'),str) else None})
     tier_b=[]
     for item in run.get('source_coverages',[]) if isinstance(run.get('source_coverages'),list) else []:
         if not isinstance(item,Mapping): continue
-        tier_b.append({'source_id':str(item.get('source_id','unknown')),'label_zh':str(item.get('label_zh',item.get('source_id','本机来源'))),'tier':'B_LOCAL_OPTIONAL','required_for_capture':bool(item.get('required',False)),'required_for_product':False,'state':_state(item.get('state')),'object_count':int(item.get('object_count',0) or 0),'size_bytes':int(item.get('size_bytes',0) or 0),'last_observed_at':completed_at})
-    ac=_counts(tier_a); bc=_counts(tier_b); a_bad=sum(ac[k] for k in ('stale','missing','failed','unknown')); b_bad=sum(bc[k] for k in ('stale','missing','failed','unknown'))
-    if a_bad:
-        product_state='FAILED' if ac['failed'] else 'DEGRADED'; fresh_state='DEGRADED'; reason='至少一个云端权威或运行来源不可用；系统不能宣称最新。'
+        tier=str(item.get('availability_tier','B_LOCAL_OPTIONAL'))
+        tier_b.append({'source_id':str(item.get('source_id','unknown')),'label_zh':str(item.get('label_zh',item.get('source_id','本机来源'))),'tier':tier if tier in {'A_CLOUD_NATIVE','B_LOCAL_OPTIONAL'} else 'B_LOCAL_OPTIONAL','required_for_capture':bool(item.get('required',False)),'required_for_product':bool(item.get('required_for_product',False)),'state':_state(item.get('state')),'object_count':int(item.get('object_count',0) or 0),'size_bytes':int(item.get('size_bytes',0) or 0),'last_observed_at':completed_at})
+    ac=_counts(tier_a); bc=_counts(tier_b)
+    # Availability is decided by required_for_product, not by which tier a row
+    # happens to sit in. Everything else is a coverage gap that degrades.
+    required=[row for row in tier_a+tier_b if row['required_for_product']]
+    optional=[row for row in tier_a+tier_b if not row['required_for_product']]
+    required_failed=[row for row in required if row['state']=='FAILED']
+    required_bad=[row for row in required if row['state']!='READY']
+    optional_bad=[row for row in optional if row['state']!='READY']
+    if required_bad:
+        product_state='FAILED' if required_failed else 'DEGRADED'; fresh_state='DEGRADED'
+        reason='至少一个产品必需的云端权威不可用：'+'、'.join(sorted(row['label_zh'] for row in required_bad))+'；系统不能宣称最新。'
     elif age>freshness_target_seconds:
         product_state='DEGRADED'; fresh_state='STALE'; reason=f'最近成功源运行已超过 {freshness_target_seconds} 秒新鲜度目标。'
-    elif b_bad:
-        product_state='DEGRADED'; fresh_state='DEGRADED'; reason='云端链可用，但一个或多个本机独有来源未更新。'
+    elif optional_bad:
+        product_state='DEGRADED'; fresh_state='DEGRADED'
+        reason='云端必需权威可用，但以下来源未更新：'+'、'.join(sorted(row['label_zh'] for row in optional_bad))+'；相关指标按陈旧处理。'
     else:
         product_state='PASS'; fresh_state='FRESH'; reason='云端权威和本批来源均在新鲜度目标内。'
 

@@ -627,7 +627,7 @@ def test_remote_reconcile_streams_normalized_event_batch() -> None:
     assert "def _iter_events(path: Path)" in pipeline
     assert 'with path.open("r", encoding="utf-8") as handle:' in pipeline
     assert "build_behavior_analytics(_iter_events(temporary)" in pipeline
-    remote_section = pipeline.split("class RemoteReconcilePipeline:", maxsplit=1)[1]
+    remote_section = pipeline.split("class RemoteReconcilePipeline", maxsplit=1)[1]
     assert "_load_events(temporary)" not in remote_section
 
 

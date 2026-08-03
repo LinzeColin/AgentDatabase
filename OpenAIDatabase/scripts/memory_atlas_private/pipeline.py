@@ -7,7 +7,7 @@ import tempfile
 from dataclasses import asdict
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Any, Iterable, Mapping
 
 from .analytics import build_behavior_analytics, build_habit_recommendations
 from .config import RuntimeConfig
@@ -114,7 +114,212 @@ def _normalized_batch_fact(normalized_key: str | None, objects: Iterable[object]
     raise PipelineError("manifest 对象清单中缺少规范化事件批次")
 
 
-class CapturePipeline:
+def _repo_file(*parts: str) -> Path:
+    return Path(__file__).resolve().parents[2].joinpath(*parts)
+
+
+DEFAULT_SOURCE_REGISTRY = (
+    Path(__file__).resolve().parents[3] / "ops" / "memory-atlas" / "source-registry.json"
+)
+
+
+def _as_row(item: object) -> dict[str, Any]:
+    return item if isinstance(item, dict) else asdict(item)  # type: ignore[arg-type]
+
+
+def _object_readback_ok(objects: Iterable[object]) -> bool:
+    rows = [_as_row(item) for item in objects]
+    return bool(rows) and all(
+        row.get("readback_verified") is True and row.get("readback_sha256") == row.get("sha256")
+        for row in rows
+    )
+
+
+def _authority_tiers(registry_path: Path | None) -> dict[str, dict[str, Any]]:
+    """Tier facts live in the registry so availability is data, not a hard-coded guess."""
+    path = registry_path or DEFAULT_SOURCE_REGISTRY
+    if not Path(path).is_file():
+        return {}
+    payload = json.loads(Path(path).read_text(encoding="utf-8"))
+    return {
+        str(row["source_id"]): row
+        for row in payload.get("cloud_native_authorities", [])
+        if isinstance(row, dict) and row.get("source_id")
+    }
+
+
+def cloud_native_authorities(
+    *,
+    objects: Iterable[object],
+    normalized_batch_key: str | None,
+    private_database_paths: Iterable[str],
+    github_release: Mapping[str, Any] | None,
+    observed_at: str,
+    registry_path: Path | None = None,
+) -> list[dict[str, Any]]:
+    """Tier A rows, every state derived from something this run actually read.
+
+    `required_for_product` comes from the registry: the GitHub private release is
+    a real cloud authority and a real gap when it is missing, but the product can
+    still render today's facts without it, so it degrades instead of failing.
+    """
+    rows = [_as_row(item) for item in objects]
+    tiers = _authority_tiers(registry_path)
+    paths = list(private_database_paths)
+    delta = [row for row in rows if row.get("object_key") == normalized_batch_key] if normalized_batch_key else []
+
+    measured = {
+        "r2_primary_objects": (bool(rows), _object_readback_ok(rows), len(rows), sum(int(row.get("size_bytes", 0) or 0) for row in rows)),
+        "r2_normalized_events": (bool(delta), _object_readback_ok(delta), len(delta), sum(int(row.get("size_bytes", 0) or 0) for row in delta)),
+        "private_database_facts": (bool(paths), bool(paths), len(paths), 0),
+        "github_private_release": (
+            github_release is not None,
+            bool(github_release and github_release.get("files")),
+            len((github_release or {}).get("files") or []),
+            0,
+        ),
+    }
+
+    out: list[dict[str, Any]] = []
+    for source_id, (present, healthy, count, size) in measured.items():
+        spec = tiers.get(source_id, {})
+        out.append(
+            {
+                "source_id": source_id,
+                "label_zh": str(spec.get("label_zh", source_id)),
+                "tier": "A_CLOUD_NATIVE",
+                "required_for_capture": bool(spec.get("required_for_capture", True)),
+                "required_for_product": bool(spec.get("required_for_product", True)),
+                "state": "READY" if present and healthy else ("FAILED" if present else "MISSING"),
+                "object_count": count,
+                "size_bytes": size,
+                "last_observed_at": observed_at,
+            }
+        )
+    return out
+
+
+def same_run_evidence_rows(
+    *,
+    run_id: str,
+    trace_id: str,
+    r2_readback: bool | None,
+    private_database_readback: bool | None,
+    ovh_reconcile: bool | None,
+    status_projection: bool | None,
+    ref: str | None = None,
+) -> dict[str, dict[str, Any]]:
+    """None means the caller never ran that check — NOT_RUN, never a silent PASS."""
+
+    def row(value: bool | None) -> dict[str, Any]:
+        if value is None:
+            return {"state": "NOT_RUN", "run_id": None, "trace_id": None, "ref": None}
+        return {
+            "state": "PASS" if value else "FAIL",
+            "run_id": run_id if value else None,
+            "trace_id": trace_id if value else None,
+            "ref": ref if value else None,
+        }
+
+    return {
+        "r2_readback": row(r2_readback),
+        "private_database_readback": row(private_database_readback),
+        "ovh_reconcile": row(ovh_reconcile),
+        "status_projection": row(status_projection),
+    }
+
+
+def _release_identity() -> dict[str, Any]:
+    """What the running process can actually observe about its own release.
+
+    Blank environment means UNVERIFIED, never a fabricated identity: the browser
+    cross-checks these against the API headers and would rather show 未验证 than
+    a value nobody proved.
+    """
+    commit = os.environ.get("MEMORY_ATLAS_REPOSITORY_COMMIT", "").strip() or None
+    release_id = os.environ.get("MEMORY_ATLAS_RELEASE_ID", "").strip() or None
+    digest = os.environ.get("MEMORY_ATLAS_ARTIFACT_DIGEST", "").strip() or None
+    revision = os.environ.get("MEMORY_ATLAS_DEPLOYMENT_REVISION", "").strip() or None
+    observed = any((commit, release_id, digest, revision))
+    return {
+        "identity_state": "OBSERVED" if observed else "UNVERIFIED",
+        "repository_commit": commit,
+        "release_id": release_id,
+        "artifact_digest": digest,
+        "deployment_revision": revision,
+    }
+
+
+def normalize_live_run_block(
+    run: Mapping[str, Any],
+    *,
+    run_id: str,
+    trace_id: str,
+    state: str,
+    started_at: str | None,
+    completed_at: str | None,
+    reconciled_at: str | None = None,
+) -> dict[str, Any]:
+    """The private analytics run block predates LiveSnapshot and lacks its identity fields."""
+    block = dict(run)
+    block["run_id"] = run_id
+    block["trace_id"] = trace_id
+    block["state"] = state
+    block["source_started_at"] = started_at
+    block["source_completed_at"] = completed_at
+    block["reconciled_at"] = reconciled_at
+    return block
+
+
+class LiveSnapshotPublisherMixin:
+    """Both hosts publish through exactly one adapter and one store.
+
+    The caller supplies the evidence because only the caller knows what it
+    actually read. The capture host has no OVH reconcile read-back, so it
+    declines here rather than claiming an authority it never touched; the
+    reconcile host verified all four and publishes.
+
+    Rollback is flag-off: with MEMORY_ATLAS_LIVE_SNAPSHOT disabled nothing is
+    published and every existing path behaves exactly as before.
+    """
+
+    def _publish_live_snapshot(
+        self, private_snapshot: dict[str, Any], runtime_evidence: dict[str, Any]
+    ) -> dict[str, Any] | None:
+        if os.environ.get("MEMORY_ATLAS_LIVE_SNAPSHOT", "1") == "0":
+            self._live_snapshot_error = "feature flag off"
+            return None
+        schema = _repo_file("schema", "memory_atlas.live_snapshot.v1.schema.json")
+        if not schema.is_file():
+            self._live_snapshot_error = f"schema not found: {schema}"
+            return None
+        try:
+            from .benchmark_comparator import compare
+            from .live_snapshot_adapter import build_live_snapshot
+            from .live_snapshot_store import LiveSnapshotStore
+            from .visual_analytics import build_visual_analytics
+
+            events = list(private_snapshot.get("behavior_economics", {}).get("events") or [])
+            visual = build_visual_analytics(events)
+            registry_path = _repo_file("benchmark", "registry.v1.json")
+            benchmark = (
+                compare({}, json.loads(registry_path.read_text(encoding="utf-8")))
+                if registry_path.is_file()
+                else {"benchmarks": [], "comparable": False}
+            )
+            snapshot = build_live_snapshot(
+                private_snapshot, visual, runtime_evidence, benchmark, evaluated_at=self.clock()
+            )
+            store = LiveSnapshotStore(self.config.web_data_dir / "live-snapshot", schema)
+            published = store.publish(snapshot)
+            self._live_snapshot_error = ""
+            return published
+        except Exception as exc:  # never let the live snapshot break the existing product
+            self._live_snapshot_error = f"{type(exc).__name__}: {exc}"
+            return None
+
+
+class CapturePipeline(LiveSnapshotPublisherMixin):
     """Source-side lossless capture.
 
     This component is designed for the Mac/Codex Automation because the sources
@@ -136,6 +341,7 @@ class CapturePipeline:
         self.clock = clock
         self.outbox = FactOutbox(config.runtime_dir / "fact-outbox.sqlite3")
         self.failures = FailureCompoundStore(config.runtime_dir / "failure-compound.sqlite3")
+        self._live_snapshot_error = ""
         if private_release_backup is not None:
             self.private_release_backup = private_release_backup
         elif config.private_release_backup_enabled:
@@ -226,10 +432,54 @@ class CapturePipeline:
             failure_snapshot = self.failures.export_snapshot(self.clock())
             analytics["recommendations"] = build_habit_recommendations(analytics, failure_snapshot)
             manifest.state = RunState.REFRESHING_ATLAS
-            self._write_web_snapshots(analytics, failure_snapshot, manifest)
+            private_snapshot = self._write_web_snapshots(analytics, failure_snapshot, manifest)
             manifest.state = RunState.SUCCEEDED
             manifest.completed_at = self.clock()
+            # Same adapter as the OVH reconcile path, with this host's own
+            # evidence. The capture host never runs the OVH reconcile, so that
+            # row is NOT_RUN and the adapter declines rather than inventing an
+            # authority read-back. What is published on OVH is published there.
+            live_snapshot = self._publish_live_snapshot(
+                {
+                    **private_snapshot,
+                    "run": normalize_live_run_block(
+                        private_snapshot["run"],
+                        run_id=manifest.run_id,
+                        trace_id=manifest.run_id,
+                        state=manifest.state.value,
+                        started_at=manifest.started_at,
+                        completed_at=manifest.completed_at,
+                    ),
+                },
+                {
+                    "schema_version": "memory_atlas.runtime_evidence.v1",
+                    "generated_at": self.clock(),
+                    "run_id": manifest.run_id,
+                    "trace_id": manifest.run_id,
+                    "release": _release_identity(),
+                    "cloud_native_sources": cloud_native_authorities(
+                        objects=manifest.objects,
+                        normalized_batch_key=manifest.normalized_batch_key,
+                        private_database_paths=manifest.private_database_paths,
+                        github_release=manifest.github_private_release_backup,
+                        observed_at=manifest.completed_at,
+                        registry_path=self.config.source_registry,
+                    ),
+                    "same_run_evidence": same_run_evidence_rows(
+                        run_id=manifest.run_id,
+                        trace_id=manifest.run_id,
+                        r2_readback=_object_readback_ok(manifest.objects),
+                        private_database_readback=None,
+                        ovh_reconcile=None,
+                        status_projection=None,
+                    ),
+                },
+            )
             result = self._publish_terminal(manifest, events=all_events, message="源端全量对账完成")
+            result["live_snapshot"] = live_snapshot or {
+                "state": "NOT_PUBLISHED",
+                "reason": self._live_snapshot_error or "capture host has no OVH reconcile evidence",
+            }
             if self.private_release_backup is not None:
                 fact_backup = backup_private_facts(
                     self.config,
@@ -273,76 +523,12 @@ class CapturePipeline:
         finally:
             cleanup_snapshots(snapshots)
 
-    def _publish_live_snapshot(self, private_snapshot: dict[str, Any], manifest: RunManifest) -> None:
-        """Publish the same-run LiveSnapshot the home page consumes (v0.0.0.32 T03).
-
-        The browser has been reading a build-time /memory_atlas.json whose input
-        froze on 2026-07-17, so "synced" only meant the browser re-read a stale
-        static file. This publishes a snapshot bound to *this* run so current
-        data, current release and current authority facts are provably the same
-        run. Only a terminal run may publish; the store refuses regression.
-
-        Rollback is flag-off: with MEMORY_ATLAS_LIVE_SNAPSHOT disabled nothing is
-        published and every existing path behaves exactly as before.
-        """
-        if os.environ.get("MEMORY_ATLAS_LIVE_SNAPSHOT", "1") == "0":
-            return
-        schema = Path(__file__).resolve().parents[2] / "schema" / "memory_atlas.live_snapshot.v1.schema.json"
-        if not schema.is_file():
-            return
-        try:
-            from .benchmark_comparator import compare
-            from .live_snapshot_adapter import build_live_snapshot
-            from .live_snapshot_store import LiveSnapshotStore
-            from .visual_analytics import build_visual_analytics
-
-            events = list(private_snapshot.get("behavior_economics", {}).get("events") or [])
-            visual = build_visual_analytics(events)
-            registry_path = Path(__file__).resolve().parents[2] / "benchmark" / "registry.v1.json"
-            benchmark = (
-                compare({}, json.loads(registry_path.read_text(encoding="utf-8")))
-                if registry_path.is_file()
-                else {"benchmarks": [], "comparable": False}
-            )
-            runtime_evidence = self._runtime_evidence(manifest)
-            snapshot = build_live_snapshot(
-                private_snapshot, visual, runtime_evidence, benchmark, evaluated_at=self.clock()
-            )
-            store = LiveSnapshotStore(self.config.web_data_dir / "live-snapshot", schema)
-            store.publish(snapshot)
-        except Exception as exc:  # never let the live snapshot break the existing product
-            self._live_snapshot_error = f"{type(exc).__name__}: {exc}"
-
-    def _runtime_evidence(self, manifest: RunManifest) -> dict[str, Any]:
-        """Same-run evidence built from this run's own manifest, never from a cache."""
-        readback = {
-            "run_id": manifest.run_id,
-            "trace_id": manifest.run_id,
-            "verified": all(
-                item.readback_verified and item.readback_sha256 == item.sha256 for item in manifest.objects
-            ),
-        }
-        return {
-            "schema_version": "memory_atlas.runtime_evidence.v1",
-            "generated_at": self.clock(),
-            "run_id": manifest.run_id,
-            "trace_id": manifest.run_id,
-            "release": {"identity_state": "OBSERVED", "repository_commit": "", "release_id": "", "artifact_digest": ""},
-            "cloud_native_sources": [],
-            "same_run_evidence": {
-                "r2_readback": dict(readback),
-                "private_database_readback": dict(readback),
-                "ovh_reconcile": dict(readback),
-                "status_projection": dict(readback),
-            },
-        }
-
     def _write_web_snapshots(
         self,
         analytics: dict[str, Any],
         failure_snapshot: dict[str, Any],
         manifest: RunManifest,
-    ) -> None:
+    ) -> dict[str, Any]:
         private_snapshot = {
             "schema_version": "memory_atlas.private_analytics.v1",
             "generated_at": self.clock(),
@@ -369,7 +555,6 @@ class CapturePipeline:
             self.config.web_data_dir / "memory_atlas_status_projection.json",
             build_status_projection(private_snapshot),
         )
-        self._publish_live_snapshot(private_snapshot, manifest)
         if self.config.public_atlas_snapshot and self.config.public_atlas_snapshot.is_file():
             public = json.loads(self.config.public_atlas_snapshot.read_text(encoding="utf-8"))
             if not isinstance(public, dict):
@@ -380,6 +565,7 @@ class CapturePipeline:
             source_contract["private_analytics_snapshot"] = "/memory_atlas_private_analytics.json"
             private_atlas["source_contract"] = source_contract
             write_json_atomic(self.config.web_data_dir / "memory_atlas.json", private_atlas)
+        return private_snapshot
 
     def _publish_terminal(
         self,
@@ -459,7 +645,7 @@ class CapturePipeline:
         }
 
 
-class RemoteReconcilePipeline:
+class RemoteReconcilePipeline(LiveSnapshotPublisherMixin):
     """OVH-side rebuild and verification. It never scans Mac source paths."""
 
     def __init__(
@@ -476,6 +662,7 @@ class RemoteReconcilePipeline:
         self.clock = clock
         self.failures = FailureCompoundStore(config.runtime_dir / "failure-compound.sqlite3")
         self.outbox = FactOutbox(config.runtime_dir / "remote-fact-outbox.sqlite3")
+        self._live_snapshot_error = ""
 
     def _publish_failure_snapshot(self, snapshot: dict[str, Any], now: str) -> dict[str, int]:
         self.outbox.enqueue(
@@ -583,6 +770,51 @@ class RemoteReconcilePipeline:
                 self.config.status_projection_target,
                 status_projection,
             )
+        # This host is the one the browser reads from, and it is the only host
+        # that can honestly claim all four authority read-backs: it verified
+        # every object against R2 above, read the run facts back out of
+        # Private-Database, is itself the OVH reconcile, and just wrote the
+        # status projection. Same adapter as the capture path.
+        run_id = str(latest.get("run_id") or "")
+        reconciled_at = self.clock()
+        live_snapshot = self._publish_live_snapshot(
+            {
+                **private_snapshot,
+                "run": normalize_live_run_block(
+                    private_snapshot["run"],
+                    run_id=run_id,
+                    trace_id=run_id,
+                    state="REBUILT_FROM_AUTHORITIES",
+                    started_at=latest.get("started_at"),
+                    completed_at=latest.get("completed_at"),
+                    reconciled_at=reconciled_at,
+                ),
+            },
+            {
+                "schema_version": "memory_atlas.runtime_evidence.v1",
+                "generated_at": reconciled_at,
+                "run_id": run_id,
+                "trace_id": run_id,
+                "release": _release_identity(),
+                "cloud_native_sources": cloud_native_authorities(
+                    objects=objects,
+                    normalized_batch_key=normalized_key,
+                    private_database_paths=[manifest_path],
+                    github_release=manifest.get("github_private_release_backup"),
+                    observed_at=str(latest.get("completed_at") or reconciled_at),
+                    registry_path=self.config.source_registry,
+                ),
+                "same_run_evidence": same_run_evidence_rows(
+                    run_id=run_id,
+                    trace_id=run_id,
+                    r2_readback=True,
+                    private_database_readback=True,
+                    ovh_reconcile=True,
+                    status_projection=True,
+                    ref=f"private-db://{manifest_path}",
+                ),
+            },
+        )
         return {
             "schema_version": "memory_atlas.remote_reconcile.v1",
             "state": "PASS",
@@ -594,4 +826,6 @@ class RemoteReconcilePipeline:
             "status_registration": status_registration,
             "failure_asset_import": registry_import,
             "failure_outbox": failure_outbox,
+            "live_snapshot": live_snapshot
+            or {"state": "NOT_PUBLISHED", "reason": self._live_snapshot_error or "live snapshot disabled"},
         }
