@@ -4,7 +4,7 @@
   "display_name": "人物蒸馏 Skill / Persona Distiller",
   "distribution": {
     "canonical_registry": "../persona-distiller-group",
-    "kind": "repository-customized-v0.0.0.48",
+    "kind": "repository-customized-v0.0.0.49",
     "lineage_base_archive_sha256": "e891912d98d14afb7677ac935a19be329d97d206f4ae74a644892f46b17f6748"
   },
   "evaluation_suites": 16,
@@ -16,8 +16,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "6e1325ec511312b39938090c2980bb52a95cca7ba375f9155cae5c49705a6899",
-      "size_bytes": 111067
+      "sha256": "c9b0a4d7395164c87824aea91fd584c4ce384868d8c8dbd9fffef4f9b8fb562f",
+      "size_bytes": 113229
     },
     {
       "path": "CONTRIBUTING.md",
@@ -31,7 +31,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "3be584101cbf066ed6c7092d1a08caa65c695fb837de8331973db73189e87108",
+      "sha256": "313074c5f7e791e3717690a76e08e316a611a793f6fb68b792b770724401a055",
       "size_bytes": 8802
     },
     {
@@ -56,12 +56,12 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "878d557e5526e1b92f53e3f9a0c6f18424bd4bbf460e44e2a154a64830c24477",
-      "size_bytes": 42662
+      "sha256": "a8a22ea14a240d777abcdc3ac35515b7cffaac48e30943622c0240de7770915a",
+      "size_bytes": 45486
     },
     {
       "path": "VERSION",
-      "sha256": "9d4b1ec2a318618379a8f01880764ed5e93e986ab5066a3fc6831c8ff41788e4",
+      "sha256": "bd29f6e09b88d3a0ed73de72db9f9be14bdb12328e274acda90a3b0836e7e995",
       "size_bytes": 10
     },
     {
@@ -121,7 +121,7 @@
     },
     {
       "path": "handoff.md",
-      "sha256": "1bd576ab4e02d7a5db2668d27f3aedd5d688950473932f562dab33b2e478008e",
+      "sha256": "064d886150a70cf36a708b7d9da165cc4256812db24d54d83dbb39cc606cf423",
       "size_bytes": 3702
     },
     {
@@ -141,7 +141,7 @@
     },
     {
       "path": "manifest.json",
-      "sha256": "bc281b600380c242335ed0ab2862934b95927ca2d677463c4dde5d4237aaafab",
+      "sha256": "ed1837aac4af415a350cdf52d41c23f0854e7f94a89b67c10b883991a3ce6a67",
       "size_bytes": 1191
     },
     {
@@ -446,8 +446,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_absence_claims.py",
-      "sha256": "efbfcbe6d1d05c1b3379f585ad18177fb86486faefe313f3021d098f91c72751",
-      "size_bytes": 2517
+      "sha256": "0234a6be91881666601d4ba0be1fedb7505ef48ad9d4eac7f5a619f0cacb6777",
+      "size_bytes": 6502
     },
     {
       "path": "references/pipeline/checkers/check_activation_yield.py",
@@ -486,8 +486,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_claim_anchors.py",
-      "sha256": "bad4c02ccd25569310e1271a1e30b7b889c38bdf035781090e8fdb46118078c5",
-      "size_bytes": 2954
+      "sha256": "f618d2ad708808698525d1a7e5b9fef51d6b041d48a90d1937b931363805154e",
+      "size_bytes": 12378
     },
     {
       "path": "references/pipeline/checkers/check_claim_coverage.py",
@@ -546,8 +546,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_redundancy.py",
-      "sha256": "4564819736eb87236f43b228539993474b48c719de93621bdf1d8782d44057f5",
-      "size_bytes": 3023
+      "sha256": "da76eca26453c58679f918046dd9a812331c4fd8cd3eaec6bc918727bcb50a4f",
+      "size_bytes": 8422
     },
     {
       "path": "references/pipeline/checkers/check_refusal_overflow.py",
@@ -556,8 +556,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_schema_drift.py",
-      "sha256": "e64d8c7e43c72a93e82950a56f9ecea1545d6552f246c0a0a025c89ad187bfad",
-      "size_bytes": 2571
+      "sha256": "49ce8293b13df9b9efdad7cd2f7d434ccf76b6305f893fec2fcc7271d7aa0451",
+      "size_bytes": 5976
     },
     {
       "path": "references/pipeline/checkers/check_self_reported_counts.py",
@@ -801,8 +801,8 @@
     },
     {
       "path": "scripts/check_absence_claims.py",
-      "sha256": "efbfcbe6d1d05c1b3379f585ad18177fb86486faefe313f3021d098f91c72751",
-      "size_bytes": 2517
+      "sha256": "0234a6be91881666601d4ba0be1fedb7505ef48ad9d4eac7f5a619f0cacb6777",
+      "size_bytes": 6502
     },
     {
       "path": "scripts/check_activation_yield.py",
@@ -836,8 +836,8 @@
     },
     {
       "path": "scripts/check_claim_anchors.py",
-      "sha256": "bad4c02ccd25569310e1271a1e30b7b889c38bdf035781090e8fdb46118078c5",
-      "size_bytes": 2954
+      "sha256": "f618d2ad708808698525d1a7e5b9fef51d6b041d48a90d1937b931363805154e",
+      "size_bytes": 12378
     },
     {
       "path": "scripts/check_claim_coverage.py",
@@ -896,8 +896,8 @@
     },
     {
       "path": "scripts/check_redundancy.py",
-      "sha256": "4564819736eb87236f43b228539993474b48c719de93621bdf1d8782d44057f5",
-      "size_bytes": 3023
+      "sha256": "da76eca26453c58679f918046dd9a812331c4fd8cd3eaec6bc918727bcb50a4f",
+      "size_bytes": 8422
     },
     {
       "path": "scripts/check_refusal_overflow.py",
@@ -906,8 +906,8 @@
     },
     {
       "path": "scripts/check_schema_drift.py",
-      "sha256": "e64d8c7e43c72a93e82950a56f9ecea1545d6552f246c0a0a025c89ad187bfad",
-      "size_bytes": 2571
+      "sha256": "49ce8293b13df9b9efdad7cd2f7d434ccf76b6305f893fec2fcc7271d7aa0451",
+      "size_bytes": 5976
     },
     {
       "path": "scripts/check_self_reported_counts.py",
@@ -1576,5 +1576,5 @@
     },
     "secret_findings": 0
   },
-  "version": "v0.0.0.48"
+  "version": "v0.0.0.49"
 }

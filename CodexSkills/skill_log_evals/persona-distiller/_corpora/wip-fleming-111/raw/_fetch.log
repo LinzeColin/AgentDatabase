@@ -1,0 +1,89 @@
+OK syphilis-serodx-1909 PMC2047107 pages 6 chars 13168 bylineFLEMING True
+OK syphilis-position-1910 PMC1961054 pages 4 chars 10875 bylineFLEMING True
+OK vaccine-therapy-disc-1910 PMC1961082 pages 3 chars 8007 bylineFLEMING True
+OK salvarsan-ophthalmic-1914 PMC2002864 pages 2 chars 5359 bylineFLEMING True
+OK gas-recorder-1920-CO PMC2047671 pages 4 chars 8727 bylineFLEMING True
+OK acetone-bacteria-1921-CO PMC2047682 pages 10 chars 25595 bylineFLEMING True
+OK vaccine-therapy-bma-1921 PMC2414597 pages 5 chars 42593 bylineFLEMING False
+OK lysozyme-bjep-1922-CO PMC2047739 pages 10 chars 25503 bylineFLEMING True
+OK capillary-pipette-1924 PMC2047900 pages 11 chars 31000 bylineFLEMING True
+OK tears-protein-1925-CO PMC2047808 pages 4 chars 10809 bylineFLEMING True
+OK salt-bactericidal-1926 PMC2047867 pages 9 chars 18726 bylineFLEMING True
+OK leucocyte-removal-1926 PMC2047866 pages 6 chars 14536 bylineFLEMING True
+OK wright-centrifuge-1927 PMC2047976 pages 8 chars 20218 bylineFLEMING True
+OK lysozyme-resistance-1927-CO PMC2048150 pages 5 chars 11927 bylineFLEMING True
+OK agglutination-temp-1928 PMC2048040 pages 5 chars 11090 bylineFLEMING True
+SKIP-exists syphilis-serodx-1909
+SKIP-exists syphilis-position-1910
+SKIP-exists vaccine-therapy-disc-1910
+SKIP-exists salvarsan-ophthalmic-1914
+SKIP-exists gas-recorder-1920-CO
+SKIP-exists acetone-bacteria-1921-CO
+SKIP-exists vaccine-therapy-bma-1921
+SKIP-exists lysozyme-bjep-1922-CO
+SKIP-exists capillary-pipette-1924
+SKIP-exists tears-protein-1925-CO
+SKIP-exists salt-bactericidal-1926
+SKIP-exists leucocyte-removal-1926
+SKIP-exists wright-centrifuge-1927
+SKIP-exists lysozyme-resistance-1927-CO
+SKIP-exists agglutination-temp-1928
+OK bactericidal-blood-1928 PMC2103103 pages 10 chars 34221 bylineFLEMING True
+OK penicillin-1929-bjep PMC2048009 pages 13 chars 29641 bylineFLEMING True
+OK influenza-bacilli-1930-CO PMC2048086 pages 8 chars 21008 bylineFLEMING True
+SKIP-exists syphilis-serodx-1909
+SKIP-exists syphilis-position-1910
+SKIP-exists vaccine-therapy-disc-1910
+SKIP-exists salvarsan-ophthalmic-1914
+SKIP-exists gas-recorder-1920-CO
+SKIP-exists acetone-bacteria-1921-CO
+SKIP-exists vaccine-therapy-bma-1921
+SKIP-exists lysozyme-bjep-1922-CO
+SKIP-exists capillary-pipette-1924
+SKIP-exists tears-protein-1925-CO
+SKIP-exists salt-bactericidal-1926
+SKIP-exists leucocyte-removal-1926
+SKIP-exists wright-centrifuge-1927
+SKIP-exists lysozyme-resistance-1927-CO
+SKIP-exists agglutination-temp-1928
+SKIP-exists bactericidal-blood-1928
+SKIP-exists penicillin-1929-bjep
+SKIP-exists influenza-bacilli-1930-CO
+OK lysozyme-address-1932 PMC2204285 pages 14 chars 44994 bylineFLEMING True
+OK lysozyme-address-1932 PMC2204285 pages 14 chars 44994 bylineFLEMING True
+OK pneumonia-treatment-1938 PMC2209960 pages 2 chars 14006 bylineFLEMING False
+OK pneumonia-treatment-1938 PMC2209960 pages 2 chars 14006 bylineFLEMING False
+OK antiseptics-useabuse-1938 PMC2085566 pages 2 chars 14785 bylineFLEMING False
+OK antiseptics-useabuse-1938 PMC2085566 pages 2 chars 14785 bylineFLEMING False
+OK vaccine-advances-1939 PMC2178536 pages 6 chars 38418 bylineFLEMING True
+OK mandb693-1939 PMC1997664 pages 10 chars 25965 bylineFLEMING True
+OK antiseptics-chemo-1940 PMC1997414 pages 10 chars 29321 bylineFLEMING True
+FAIL-http vaccine-advances-1939 PMC2178536 <HTTPError 429: 'Too Many Requests'>
+SKIP-exists mandb693-1939
+SKIP-exists antiseptics-chemo-1940
+OK penicillin-letter-1941 PMC2162878 pages 1 chars 8639 bylineFLEMING False
+OK differential-culture-1942 PMC2160812 pages 2 chars 14776 bylineFLEMING True
+OK penicillin-letter-1941 PMC2162878 pages 1 chars 8639 bylineFLEMING False
+SKIP-exists differential-culture-1942
+OK campbell-oration-1944 PMC2479220 pages 16 chars 41243 bylineFLEMING True
+OK campbell-oration-1944 PMC2479220 pages 16 chars 41243 bylineFLEMING True
+OK penicillin-vd-1944 PMC1053380 pages 4 chars 15724 bylineFLEMING True
+OK penicillin-vd-1944 PMC1053380 pages 4 chars 15724 bylineFLEMING True
+OK penicillin-coagulation-1947-CO PMC2055477 pages 2 chars 13756 bylineFLEMING True
+OK streptomycin-titration-1947-CO PMC2053187 pages 4 chars 24961 bylineFLEMING True
+OK louis-pasteur-1947 PMC2053016 pages 6 chars 43485 bylineFLEMING True
+FAIL-http penicillin-coagulation-1947-CO PMC2055477 <HTTPError 429: 'Too Many Requests'>
+SKIP-exists streptomycin-titration-1947-CO
+SKIP-exists louis-pasteur-1947
+OK syringe-infection-1950 PMC2038374 pages 2 chars 16667 bylineFLEMING False
+OK syringe-infection-1950 PMC2038374 pages 2 chars 16667 bylineFLEMING False
+OK syringe-needles-1951-CO PMC2068621 pages 4 chars 23665 bylineFLEMING True
+OK freelance-science-1952 PMC2020971 pages 1 chars 7841 bylineFLEMING True
+OK syringe-needles-1951-CO PMC2068621 pages 4 chars 23665 bylineFLEMING True
+SKIP-exists freelance-science-1952
+OK almroth-wright-1955 PMC2061517 pages 1 chars 7973 bylineFLEMING True
+OK almroth-wright-1955 PMC2061517 pages 1 chars 7973 bylineFLEMING True
+OK penicillin-1929-REPRINT-who2001 PMC2566493 pages 11 chars 10 bylineFLEMING False
+OK penicillin-1929-REPRINT-who2001 PMC2566493 pages 11 chars 10 bylineFLEMING False
+OK penicillin-1929-REPRINT-bjep1979 PMC2041430 pages 13 chars 29338 bylineFLEMING True
+FAIL-http penicillin-1929-REPRINT-bjep1979 PMC2041430 <HTTPError 429: 'Too Many Requests'>

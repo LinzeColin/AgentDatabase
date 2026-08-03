@@ -1,6 +1,6 @@
-# Release verification — Persona Distiller v0.0.0.48
+# Release verification — Persona Distiller v0.0.0.49
 
-Date: 2026-08-04（v0.0.0.48 追加一节，下表已重跑）
+Date: 2026-08-04（v0.0.0.49，下表已重跑）
 
 > **本文件记录「当前发布号的复验结果」，不是历史归档。**
 > 版本号必须等于根目录 `VERSION`，由 `scripts/check_contract_drift.py` 强制。
@@ -10,7 +10,7 @@ Date: 2026-08-04（v0.0.0.48 追加一节，下表已重跑）
 > bundle 构不出来、97 人、59 用例），**三件当时都已不成立**。
 > 改过标题的旧正文会冒充当前复验，比标题陈旧更糟。已从工具中移除该行为。
 >
-> 本次（v0.0.0.48）**是真的重跑了一遍**，下表每一行都是本次实跑输出。
+> 本次（v0.0.0.49）**是真的重跑了一遍**，下表每一行都是本次实跑输出。
 
 ## Result
 
@@ -25,7 +25,7 @@ Date: 2026-08-04（v0.0.0.48 追加一节，下表已重跑）
 | Gate | 本次结果 | 证据来源 |
 |---|---:|---|
 | Offline unit / integration / concurrency tests | **70 / 70 passed** | `python3 -m pytest tests/ -q` |
-| **全部检查器自测（v0.0.0.47 起逐件跑）** | **27 件中 23 件有自测入口、23 全过、0 未过；**⚠ **4 件根本没有负对照**（`check_absence_claims`、`check_claim_anchors`、`check_redundancy`、`check_schema_drift`——它们只接 `--workspace`，没有 `--self-test`）。**这四件的「全绿」不构成任何证据**（RUNBOOK 第十八种） | 逐件 `check_*.py --self-test` |
+| **全部检查器自测（v0.0.0.47 起逐件跑）** | **27 / 27 passed，0 未过、0 缺负对照**（v0.0.0.48 时 4 件根本没有 `--self-test`，见下节） | 逐件 `check_*.py --self-test` |
 | **★★★★★★★ 题面自足门（v0.0.0.48 新增，只报不拦，接进 synthesis／release，见下节）** | **passed**（**15 项自测，其中 7 组反向对照，含第一版实测误报的 6 道真题面**）；**十个人物 322 道真题面复扫：恰好报出两席点名的那一道** | `check_case_self_sufficiency.py --self-test` + 对十个工作区 `cases.jsonl` 实跑 |
 | **★★★★★★ 承重人名门（v0.0.0.47 新增，只报不拦，见下节）** | **passed**（**12 项自测，其中 7 条反向对照**）；**真实数据实测**：Osler #110 第 2 轮扫出 `Henry A. Christian` 全名 P1 命中 **0**（S1 2 / S2 1），第 3 轮删后 **0 个查无实据** | `check_unsourced_names.py --self-test` + 对 Osler 两轮候选答案实跑 |
 | 合同漂移门（版本三轴 + 身份合同 + 检查器镜像） | **0 条** | `scripts/check_contract_drift.py` |
@@ -40,7 +40,7 @@ Date: 2026-08-04（v0.0.0.48 追加一节，下表已重跑）
 | **★★ 归属依据门（v0.0.0.31 新增，硬拦，见下节）** | **passed**（负对照 10 项，含「争议为空」与「没查过」必须分开）；**真工作区实测**：Galen 工作区未声明依据时 exit 1 | `check_attribution_basis.py --self-test`、对 `ws-galen` 实跑 |
 | **★★★★ 方法密度（v0.0.0.36 新增，只报不拦，见下节）** | **passed**（**4 条真实 work-method 夹具，两侧各二** + 1 条反向对照 + 1 条射程对照）；**四个真实工作区实跑**：可复用做法 Galen 0 ／ Vesalius 1 ／ Harvey 1 ／ Jenner 0，**四人全部报出** | `check_fact_density.py --self-test` + 对四人 `claims.jsonl` 实跑 |
 | **★★ 事实密度门（v0.0.0.28 新增／v0.0.0.31 分账本与人物，只报不拦）** | **passed**（负对照含 **4 条真实样本**）；Galen 实测 15 条 `fact` → **人物事实 10 条、账本事实 5 条不计入**，仍 < 要求 12 | `check_fact_density.py --self-test` |
-| 检查器元普查（负对照有没有） | **27 件**，逐件自测 **22 可跑 / 0 未过**（v0.0.0.46 时 19 件，v0.0.0.22 时 11 件 6 OK） | `check_checkers.py scripts/` + 逐件 `--self-test` |
+| 检查器元普查（负对照有没有） | **27 件全部有负对照**（v0.0.0.48 时 23/27，v0.0.0.46 时 19 件，v0.0.0.22 时 11 件 6 OK） | `check_checkers.py scripts/` + 逐件 `--self-test` |
 | **★★ 真实夹具普查（v0.0.0.31 新增，只报不拦）** | **5 / 19 件的负对照里含真实样本夹具**（v0.0.0.34 时 3 / 18，v0.0.0.32 时 2 / 17，v0.0.0.31 时 1 / 16） | `check_checkers.py scripts/` |
 | **★★★★★ 引号形态（v0.0.0.46）** | **passed**；**Pasteur #106 实测：扩形态前答案里 11 条外语引文只扫到 4 条，**7 条法文 «» 从未被核过（64%）**；扩后 22 条全扫、0 未命中 | `check_quote_integrity.py --self-test`（新增法文 «» 真实夹具） |
 | **★★★ 引文真实性门（v0.0.0.35 射程扩到答案层，见下节）** | **passed**（4 条构造伪造 + **3 条真实夹具** + **2 条反向对照**）；**真实数据实测**：Jenner 断言层 6 条全绿，扩到答案层后共 **26 条**，其中长 s 还原后才命中 **6 条**（原为静默） | `check_quote_integrity.py --claims … --answers … --cache … --self-test` |
@@ -65,6 +65,59 @@ Date: 2026-08-04（v0.0.0.48 追加一节，下表已重跑）
 | Complete-release deterministic rebuild | passed | `test_complete_release_is_one_deterministic_zip_and_installs_both_skills` |
 | Complete-release checksum tamper rejection | passed | `test_complete_release_installer_rejects_tampering` |
 | Atomic dual-Skill clean install | passed | 同上用例内 |
+
+## ★★★★★★★★ v0.0.0.49：补上最后 4 件负对照——**其中一件一直在看错边**
+
+v0.0.0.48 逐件跑自测时查出：27 件判据里有 **4 件根本没有 `--self-test`**。
+它们只接 `--workspace`，跑出来的「✓」不构成任何证据（RUNBOOK 第十八种）。
+四件全部补齐，**每一件都在补的过程中查出真缺陷**：
+
+| 判据 | 补负对照时查出的缺陷 |
+|---|---|
+| `check_schema_drift` | 无缺陷（5 条反向对照全过；含「字段值为 None 也算有这个字段」） |
+| `check_redundancy` | **贪婪吃前文**——`[一-鿿]{2,4}` 把「构成**是技术** 9…」与「仍**是技术** 9…」当成两串不同的计数，重复漏掉 |
+| `check_absence_claims` | **一句里的多条断言被吞成一条**——两侧 `{0,60}` 贪婪上下文 + finditer 不重叠 |
+| `check_claim_anchors` | **两处，见下** |
+
+### `check_claim_anchors` 一直在看错边
+
+**① 只看标记之前的 450 字，而渲染器把标记写在文段前面。**
+
+```
+<!-- claim:clm-xxx -->
+**断言正文……**
+```
+
+判据取 `text[m.start()-450 : m.start()]`——**看的是上一段。**
+Osler #110 真工作区实测：**44 个标记报出 41 个**。改成两侧各 450 字后 **41 → 1**。
+
+**② 中文取极大连续块，转述一改就全对不上。**
+`[一-鿿]{4,8}` 下，文段「他 1928 年在培养皿上**看到**青霉菌抑制了葡萄球菌」
+与断言「1928 年他在培养皿上**观察到**青霉菌抑制葡萄球菌生长」**重合 0**——
+说的分明是同一件事。**中文侧几乎恒报，等于这一路没在工作。** 改滑动 4-gram。
+
+### 十个工作区复测（修完之后）
+
+| 工作区 | 断言 | 标记 | 须人工看 |
+|---|---:|---:|---:|
+| Koch / Lister / Pasteur / Virchow | 46 / 35 / 33 / 60 | 同数 | **0** |
+| Osler | 44 | 44 | 1（断言只有「先看病人，再看书。」十字，n-gram 天然少） |
+| Godin | 31 | 45 | 3 |
+| Steinhardt | 39 | 50 | 1 |
+| **Jenner** | **35** | **0** | 新加的兜底拦下：**一个标记都没扫到，这不是「全部对上」** |
+| **Semmelweis** | **0** | — | 新加的兜底拦下：**claims.jsonl 是空的** |
+
+**Jenner 那一格是这次补负对照最实在的收获**：它的产物文档里
+**一个 claim 标记都没有**，而旧版会打印「claim 标记 0 个，须人工看 0 个」然后 `return 0`——
+**「没扫到」被印成了「全对上」。**
+
+### 夹具本身也验了两次
+
+- `check_redundancy` 的正/反夹具第一版都短于 60 字的长度门，**两条控制一起空过**。
+  已把长度断言写进自测：`chk(f"夹具本身够长（正 {len(a)} 字 / 反 {len(b)} 字，门 60）", …)`。
+- `check_claim_anchors` 的夹具第一版每段 35 字，三段全落进同一个 450 字窗口，
+  正向控制只报出 2/3；把补白垫在标记前又把主题句挤出窗口，正确挂号的全被报出。
+  **两条控制互相顶住，说明夹具形状不对，不是判据不对。** 已按真文档形状重排。
 
 ## ★★★★★★★ v0.0.0.48 新增：题面自足门——**一道题被问了三轮，没有一次答在点上**
 
