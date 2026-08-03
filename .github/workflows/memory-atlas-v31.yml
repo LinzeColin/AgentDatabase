@@ -82,6 +82,7 @@ jobs:
       - name: Shell syntax
         run: |
           find ops/memory-atlas -type f \( -name '*.sh' -o -name 'memory-atlas-selfheal' \) -print0 | xargs -0 -n1 bash -n
+          bash -n .githooks/pre-push
       - name: Install frontend dependencies
         working-directory: MemoryAtlas
         run: npm ci
@@ -95,6 +96,12 @@ jobs:
           npm run validate:v31:typescript
           npm run build
           npm run validate:whole-project
+      # The authoritative gate. The git hook may only run `quick`; nothing but
+      # this and the deployment path may certify a release.
+      - name: Canonical gate (full)
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+        run: ./ops/memory-atlas/canonical_gate.sh . full "$RUNNER_TEMP/canonical-gate-full.json"
       - name: Thirteen-route browser acceptance with A/B/C and light/dark
         working-directory: MemoryAtlas
         run: |

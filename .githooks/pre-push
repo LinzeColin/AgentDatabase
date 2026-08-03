@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# v0.0.0.32 T07 — the hook calls the fast gate and nothing else.
+#
+# It is deliberately NOT authoritative: `quick` skips the build, the full
+# backend suite and the browser checks. CI and the deployment path run
+# `canonical_gate.sh <repo> full`, and only that may certify a release. A hook
+# that could certify would be a second source of truth on a machine nobody
+# audits.
+#
+# Enable:  git config core.hooksPath .githooks
+# Disable: git config --unset core.hooksPath
+# Skip once: MEMORY_ATLAS_SKIP_GATE=1 git push   (or git push --no-verify)
+set -euo pipefail
+
+if [[ "${MEMORY_ATLAS_SKIP_GATE:-0}" == "1" ]]; then
+  echo "pre-push: quick gate skipped by MEMORY_ATLAS_SKIP_GATE=1" >&2
+  exit 0
+fi
+
+repo=$(git rev-parse --show-toplevel)
+exec "$repo/ops/memory-atlas/canonical_gate.sh" "$repo" quick >/dev/null

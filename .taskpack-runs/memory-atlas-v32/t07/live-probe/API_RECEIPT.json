@@ -1,0 +1,14 @@
+{
+  "schema_version": "memory_atlas.api_receipt.v1",
+  "captured_at": "2026-08-03T23:26:19.515674Z",
+  "state": "PASS",
+  "run_id": "marun-20260803T101500Z-scenario",
+  "trace_id": "marun-20260803T101500Z-scenario",
+  "release_id": "20260803T101000Z-scenario",
+  "deployment_revision": "memory-atlas-blue-scenario",
+  "cache_control": "private, no-store, max-age=0",
+  "etag": "\"0d6ed5abdfe9e3f27afcca5e9e64224bfe6e68bca683d49a076d76f228a76d25\"",
+  "freshness_state": "FRESH",
+  "product_state": "PASS",
+  "errors": []
+}
