@@ -1376,6 +1376,28 @@ def run_measurement_claims(report, target: Path) -> None:
 
     acc = {'total': 0, 'ok': 0, 'bad': [], 'abstain': 0}
     scanned = 0
+
+    # ★ **合成阶段还没有载荷，但断言层已经有了。**
+    #   第一版只读 `evals/judge_payload.v1.json`，于是接在 synthesis 上等于没接——
+    #   那时那份文件根本不存在，判据只会说「没有载荷可扫」。
+    #   而这道判据的全部意义就是「**合成阶段看到就该改，判分之后就晚了**」。
+    #   （在 Fleming 身上试跑看不出来：他早已跑完发布，载荷一直在。
+    #   **拿一个已完成的人物去验「早期阶段的门」，验不出这类缺陷。**）
+    for rel in ('evidence/claims.jsonl', 'claims.jsonl'):
+        p = target / rel
+        if not p.is_file():
+            continue
+        for line in p.read_text(encoding='utf-8').splitlines():
+            if not line.strip():
+                continue
+            try:
+                r = json.loads(line)
+            except ValueError:
+                continue
+            module.scan(f'断言/{r.get("claim_id", "?")}', r.get('claim', ''), acc)
+        scanned += 1
+        break
+
     for rel in ('evals/judge_payload.v1.json', 'evals/baseline.v1.json'):
         p = target / rel
         if not p.is_file():
@@ -1396,14 +1418,19 @@ def run_measurement_claims(report, target: Path) -> None:
         scanned += 1
 
     info: dict[str, Any] = {
-        '已扫载荷': scanned,
+        '已扫单元': scanned,
         '实测声明': acc['total'],
         '同段带数': acc['ok'],
         '**光说不给数**': len(acc['bad']),
         '诚实弃权（不计问题）': acc['abstain'],
     }
     if not scanned:
-        info['状态'] = '**没有载荷可扫——这不是通过**'
+        info['状态'] = '**没有可扫的单元（断言层与载荷都不在）——这不是通过**'
+    elif not acc['total'] and not acc['abstain']:
+        # 检查器自己的口径里有这一条，接线时漏了：**扫到 0 处不等于通过。**
+        info['状态'] = ('**一处实测声明都没扫到——本次什么也没检查，不构成通过。**'
+                        '合成阶段常态如此（断言层通常不写「我量过」），'
+                        '**但发布阶段若仍是 0，要去看是不是扫错了单元。**')
     elif acc['bad']:
         info['**逐条**'] = [f'{uid}　「{kw}」：{snip}' for uid, kw, snip in acc['bad'][:12]]
         info['口径'] = ('借了实测的权威却没交出实测的内容。'
