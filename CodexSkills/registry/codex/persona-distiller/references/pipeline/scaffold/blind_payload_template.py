@@ -44,15 +44,28 @@
   **有语料的一侧必胜**。这部分是出题设计带来的差，不宜完全记作人物质量差。
   出题时留意配比。
 
+## 缺陷三（v0.0.0.52 补）：**基线从来没落进工作区，所以任何门都看不见它**
+
+`evals/` 里一直只有候选侧的 `judge_payload.v1.json`，**基线只存在于人物工作目录**。
+于是 v0.0.0.51 新加的长度泄题门在真工作区上只能报「未核（不是通过）」——
+**判据造好了、接线好了，却没有数据可判。**
+
+这与「候选答案没落进工作区时，任何门都看不见它」是同一类缺陷，
+而那一条当时是**逐人手工把 payload 拷进去**解决的——手工的东西会漏。
+
+本母版现在**两侧一起落进工作区**：`evals/judge_payload.v1.json` 与
+`evals/baseline.v1.json`，由 `--workspace` 指定；不给就跳过并明说跳过了。
+
 用法（把 `XX` 换成人物缩写）：
 
     python3 build_XX_blind.py round1
     python3 build_XX_blind.py round2      # 会强制校验 A/B 映射与第 1 轮一致
+    python3 build_XX_blind.py round3 --workspace workspaces/<人>/<人>
 """
+import argparse
 import hashlib
 import json
 import pathlib
-import sys
 
 # ── 改这三行即可 ──────────────────────────────────────────────
 CAND = "XX_candidate.json"        # {case_id: 候选答案}
@@ -60,7 +73,13 @@ BASE = "XX_baseline_bare.json"    # {case_id: 基线答案}
 PREFIX = "XX"                     # 落盘文件名前缀
 # ────────────────────────────────────────────────────────────
 
-OUT = pathlib.Path(sys.argv[1] if len(sys.argv) > 1 else "round1")
+_ap = argparse.ArgumentParser()
+_ap.add_argument("round", nargs="?", default="round1")
+_ap.add_argument("--workspace", type=pathlib.Path,
+                 help="把候选与基线两侧一起落进 <工作区>/evals/，让发布门看得见")
+_a = _ap.parse_args()
+
+OUT = pathlib.Path(_a.round)
 OUT.mkdir(parents=True, exist_ok=True)
 
 cand = json.loads(pathlib.Path(CAND).read_text(encoding="utf-8"))
@@ -86,6 +105,24 @@ for i, cid in enumerate(sorted(cases), 1):
     json.dumps(payload, ensure_ascii=False, indent=1), encoding="utf-8")
 (OUT / f"{PREFIX}_blind_key.json").write_text(
     json.dumps(key, ensure_ascii=False, indent=1), encoding="utf-8")
+
+# ★ 两侧一起落进工作区——**门看不见的东西，等于没做。**
+#   v0.0.0.51 的长度泄题门在真工作区上只能报「未核（不是通过）」，
+#   因为 evals/ 里从来只有候选侧。
+if _a.workspace:
+    ev = _a.workspace / "evals"
+    if not ev.is_dir():
+        raise SystemExit(f"★ {ev} 不在——工作区路径给错了，**没落盘**")
+    (ev / "judge_payload.v1.json").write_text(
+        json.dumps({c: cand[c] for c in cases}, ensure_ascii=False, indent=1),
+        encoding="utf-8")
+    (ev / "baseline.v1.json").write_text(
+        json.dumps({c: base[c] for c in cases}, ensure_ascii=False, indent=1),
+        encoding="utf-8")
+    print(f"★ 候选与基线两侧已落进 {ev}/——发布门现在看得见它们")
+else:
+    print("⚠ **未给 --workspace，两侧没落进工作区**——"
+          "长度泄题门与承重人名门这一轮都会报「未核（不是通过）」")
 
 r1 = pathlib.Path("round1") / f"{PREFIX}_blind_key.json"
 if OUT.name != "round1" and r1.is_file():

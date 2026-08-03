@@ -1,0 +1,167 @@
+# ── #111 Alexander Fleming (1881-08-06 – 1955-03-11, Scottish bacteriologist, St Mary's Hospital London; wrote in ENGLISH) corpus ledger ──
+#
+# columns (TAB separated, 9 of them):
+#   short-id <TAB> source URL <TAB> title <TAB> TITLE-LEAF YEAR <TAB> edition/printing <TAB> language <TAB> tier <TAB> flags <TAB> note
+#
+# ══ HOW THE YEAR COLUMN WAS PRODUCED ══
+#   Every year below was READ OFF THE SCANNED LEAF ITSELF — the journal masthead
+#   ("LONDON SATURDAY APRIL 19 1947"), the session bracket ("[October 18, 1932.]"),
+#   the "Received for publication ..." line, the offprint line ("Reprinted from THE
+#   LANCET, April 10, 1909"), or the title-page imprint ("...STATIONERY OFFICE 1920").
+#   NOTHING was back-filled from the short-id, the filename, the PMCID or the catalogue.
+#   Where the leaf carries no legible year the cell says [扉页年份不清] and the flag
+#   LEAF-YEAR-ILLEGIBLE is set; the catalogue year is then mentioned in the note ONLY as
+#   context, never promoted into the year column.
+#
+#   Rows where the LEAF and the CATALOGUE/VOLUME year DISAGREE, and the leaf won:
+#     gas-recorder-1920-CO             leaf "December 29th, 1919"     vs volume 1920
+#     wright-centrifuge-1927           leaf "December 30th, 1926"     vs volume 1927
+#     antiseptics-chemo-1940           leaf "[November 27, 1939]"     vs volume 1940
+#     s1-oxford-heatley-assay-1944     leaf "Received 18 December 1943" vs volume 1944
+#     nobel-lecture-chain-1945         leaf "March 20, 1946"          vs prize year 1945
+#     penicillin-1929-REPRINT-bjep1979 leaf "Br. J. exp. Path. (1929)" vs imprint 1979
+#   Rows whose leaf gives no usable year at all: 11 (all flagged, none guessed).
+#
+# ══ TIERS (verbatim from the task brief, not re-interpreted) ══
+#   P1 = his own hand / signed
+#   P2 = a DEGRADED version of the SAME material (duplicate scan, facsimile reprint)
+#   S1 = contemporary third party
+#   S2 = later scholarship
+#
+# COUNTS: 69 sources — P1 43 / P2 2 / S1 18 / S2 6
+#         primary (P1+P2) share = 0.6522   (deep tier needs >= 0.65)
+#         lanes: writings 22, expression 15, conversations 6, decisions 2, timeline 7, external 17
+#
+# ══ ★ HAZARD 1 — PENICILLIN ATTRIBUTION MUST STAY LAYERED ★ ══
+#   The danger with this man is NOT a namesake, it is that the popular story deletes an
+#   entire Oxford team. Both sides are in this corpus as PRIMARY material:
+#     HIS half  — the 1928 observation and the 1929 paper really are his:
+#         penicillin-1929-bjep        Br J Exp Pathol 10(3):226-236, full 13-page text
+#         penicillin-letter-1941      he claims that merit himself, in his own words
+#         nobel-lecture-fleming-1945  his own account of the early days
+#     NOT his half — isolation, purification, clinical proof, 1939-1945, Oxford:
+#         s1-oxford-purification-1942     Abraham, Chain, Holiday — the purification itself
+#         s1-oxford-heatley-assay-1944    Heatley — the assay that made it measurable
+#         s1-oxford-florey-survey-1944    Florey's own survey
+#         nobel-lecture-florey-1945 / nobel-lecture-chain-1945
+#     The adjudication, from the 1945 Nobel record itself:
+#         nobel-summary-1945          prize share 1/3 EACH — Fleming / Chain / Florey
+#         nobel-ceremony-speech-1945  Liljestrand states who did which part
+#         nobel-banquet-fleming-1945  Fleming himself calls Florey and Chain "my partners"
+#   So: neither "he alone invented penicillin" NOR any denial that 1928/1929 were his.
+#
+# ══ ★ HAZARD 2 — THE CHURCHILL STORY IS FABRICATED, EVERY LINK OF IT ★ ══
+#   The tale (Fleming's father pulls young Churchill from a bog; Lord Randolph pays for
+#   Fleming's schooling; penicillin later saves Churchill) is false in every part.
+#   Counter-evidence held here:
+#     s2-ics-fleming-churchill-myth   International Churchill Society: quotes official
+#         biographer Sir Martin Gilbert (ages do not work — Fleming was seven years
+#         YOUNGER than Churchill; no drowning on record; no record of Lord Randolph
+#         paying any fees; Lord Moran's diaries mention M&B and never penicillin)
+#     s2-hillsdale-fleming-churchill-myth / s2-langworth-fleming-myth
+#     mandb693-1939                   ★ FLEMING'S OWN 1939 PAPER ON M&B 693
+#     s1-mb693-sulphapyridine-1940    ★ title equates "Sulphapyridine" with "M. & B. 693"
+#     s1-mb693-pneumonia-1939         contemporary clinical use of M&B 693 in pneumonia
+#     s1-sulphapyridine-fate-1940     its pharmacology, as understood at the time
+#   NOT FOUND, and NOT faked: no Churchill-archive document and no 1943 clinical bulletin
+#   could be obtained free. The two peer-reviewed accounts of the December 1943 Carthage
+#   illness (Vale & Scadding, J R Coll Physicians Edinb 2017) sit behind a Cloudflare
+#   challenge — recorded in _EXCLUDED.txt as blocked, NOT circumvented. One caution the
+#   secondary sources disagree on, left un-flattened here: the ICS page says the December
+#   1943 drug was "M&B ... sulfadiazine", while the popular debunking (and the task brief)
+#   says Sulphapyridine / M&B 693. Both agree it was A SULPHONAMIDE AND NOT PENICILLIN;
+#   which sulphonamide is not settled by anything in this corpus. Do not assert either.
+#   One TRUE fragment that must not be swept away with the myth: Churchill did consult
+#   Fleming on 27 June 1946 about a staphylococcal infection (Moran diaries p.335).
+#
+# ══ ★ HAZARD 3 — LYSOZYME IS 100%% HIS, AND THE POPULAR STORY OMITS IT ★ ══
+#     lysozyme-1922-prsb            Proc R Soc B 93:306-317 — the task-required paper
+#     lysozyme-bjep-1922-CO         the BJEP companion, with V. D. Allison
+#     lysozyme-further-1922-prsb-CO Proc R Soc B 94:142-151
+#     lysozyme-resistance-1927-CO   resistance developing to lysozyme — in 1927
+#     lysozyme-address-1932         his Presidential Address, entirely on lysozyme
+#
+# ══ ★ SCAN HAZARD — PAGE SPILL ★ ══
+#   13 rows are flagged PAGE-SPILL. PMC serves these old BMJ / PRSM / Proc R Soc pages as
+#   WHOLE SCANNED PAGES, so the .txt also contains the neighbouring column — other
+#   people's articles and letters. Quoting from such a file without checking WHICH column
+#   the sentence sits in will attribute a stranger's words to Fleming. Worst cases:
+#   penicillin-letter-1941 (page opens with New Zealand hospital finance), pneumonia-
+#   treatment-1938 (opens with oestradiol for senile vaginitis), penicillin-coagulation-
+#   1947-CO (opens with "The Problem of Fertilization").
+#   Three rows carry NO literal string "FLEMING" although they ARE his, for mechanical
+#   reasons, all verified by reading the text: nobel-lecture-fleming-1945 (name set
+#   letter-spaced as "AL E X A N D E R  F L E M I N G"), vaccine-therapy-bma-1921 (OCR
+#   produced "ALEXANDER FLEMIING"), penicillin-letter-1941 (signature falls on the next
+#   page, which PMC did not include in the article PDF).
+#
+
+acetone-bacteria-1921-CO	https://europepmc.org/articles/PMC2047682?pdf=render	On the Antigenic Properties of Acetone-Extracted Bacteria	1921	Br J Exp Pathol 2:131-140	en	P1	CO-AUTHORED;SECOND-AUTHOR	lane=writings. 叶上 'Received for publication May 3rd, 1921'。S. R. Douglas 是第一作者，Fleming 第二。
+acne-vaccines-1909	https://archive.org/download/b33429583_0001/b33429583_0001_djvu.txt	On the Etiology of Acne Vulgaris and its Treatment by Vaccines	1909	Lancet offprint (separately paginated reprint)	en	P1	LANCET-OFFPRINT	lane=writings. 扉页印 'Reprinted from THE LANCET, April 10, 1909'；即《柳叶刀》抽印本，正刊本身付费墙，抽印本在 Wellcome/UKMHL 公开。
+acne-vaccines-1909-DUPSCAN	https://archive.org/download/b33429583_0002/b33429583_0002_djvu.txt	On the Etiology of Acne Vulgaris and its Treatment by Vaccines	1909	Lancet offprint — SECOND scan of the same offprint	en	P2	DUPLICATE-SCAN;OCR-WORSE	lane=writings. 与 acne-vaccines-1909 同一份材料的另一次扫描（archive.org b33429583_0002）；OCR 明显更差（标题被拆成 'ETIOLOGY OF ACNE VULGARIS -, a S TREATMENT'）。按「同一材料的降质版本」记 P2。
+agglutination-temp-1928	https://europepmc.org/articles/PMC2048040?pdf=render	On the Influence of Temperature on the Rate of Agglutination of Bacteria	1928	Br J Exp Pathol 9:231-235	en	P1	PAGE-SPILL	lane=writings. 叶上 'Received for publication July 10th, 1928'。扫描首页是本文末页（致谢段），正文在后。
+almroth-wright-1955	https://europepmc.org/articles/PMC2061517?pdf=render	Almroth Wright — review of Leonard Colebrook, 'Almroth Wright: Provocative Doctor and Thinker'	1955	Br Med J 1:773	en	P1	BOOK-REVIEW;POSTHUMOUS-PUBLICATION	lane=conversations. ★刊头 'MARCH 26, 1955'——**他 1955-03-11 已故**，编者按明记 'This review was written shortly before Sir Alexander Fleming's death.—ED., B.M.J.'。文字是他的（P1），但见刊在身后，故标 POSTHUMOUS-PUBLICATION。他自述 'worked in Wright's laboratory from 1906 till he died'。
+anaerobic-report-1919-CO	https://archive.org/download/cu31924000323687/cu31924000323687_djvu.txt	Reports of the Committee upon Anaerobic Bacteria and Infections (MRC Special Report Series No. 39)	1919	Medical Research Committee Special Report Series No. 39	en	P1	CO-AUTHORED;MULTI-AUTHOR-VOLUME;PARTIAL	lane=decisions. 扉页 '1919'。**注意：扫描首页有 Cornell 条码 '3 1924 000 323 687'，那不是年份**，未拿它顶替。多人合编卷，Fleming 只写其中一份报告，引用须指明是哪一节。
+antiseptics-chemo-1940	https://europepmc.org/articles/PMC1997414?pdf=render	Antiseptics and Chemotherapy (Section of Odontology)	1939	Proc R Soc Med 33:127-136	en	P1	LEAF-YEAR-VS-VOLUME	lane=expression. 叶上会期 '[November 27, 1939]'；卷年份 1940。**记叶上的 1939**。
+antiseptics-useabuse-1938	https://europepmc.org/articles/PMC2085566?pdf=render	Use and Abuse of Antiseptics (letter to the Editor)	1938	Br Med J 1:141-142	en	P1	LETTER;PAGE-SPILL	lane=conversations. 刊头 'JAN. 15, 1938'。署名 'Inoculation Department, ALEXANDER FLEMING. St. Mary's Hospital, Jan. 5.'。扫描页含牙科史等无关栏目。
+bactericidal-blood-1928	https://europepmc.org/articles/PMC2103103?pdf=render	The Bactericidal Power of Human Blood and some Methods of Altering It	1928	Proc R Soc Med 21:859-868	en	P1		lane=expression. 叶上会期 '[February 4, 1928.]'。
+campbell-oration-1944	https://europepmc.org/articles/PMC2479220?pdf=render	Penicillin — The Robert Campbell Oration	[扉页年份不清]	Ulster Med J 13:95-122	en	P1	LEAF-YEAR-ILLEGIBLE;PENICILLIN-CORE	lane=expression. ★16 页的青霉素长篇讲演，他自己叙述发现经过。**扫描叶上无刊印年份**（正文提到 1922/1929/1930/1938/1942 都是内容年份，不是刊年）；馆藏著录 1944，按规则记不清。
+capillary-pipette-1924	https://europepmc.org/articles/PMC2047900?pdf=render	On the Accuracy of Measurement of Small Volumes of Fluid with a Capillary Pipette	1924	Br J Exp Pathol 5:148-158	en	P1		lane=writings. 叶上 'Received for publication April 30th, 1924'。
+differential-culture-1942	https://europepmc.org/articles/PMC2160812?pdf=render	A Simple Method of Using Penicillin, Tellurite, and Gentian Violet for Differential Culture	1942	Br Med J 1:547-548	en	P1		lane=writings. 刊头 'MAY 2, 1942'。青霉素当选择性培养基用——这正是 1929-1938 年间他对青霉素的主要用法。
+freelance-science-1952	https://europepmc.org/articles/PMC2020971?pdf=render	Freelance of Science — review of René Dubos, 'Louis Pasteur: Free Lance of Science'	1952	Br Med J 2:269	en	P1	BOOK-REVIEW	lane=conversations. 刊头 'AUG. 2, 1952'，署名 'ALEXANDER FLEMING.'。
+gas-recorder-1920-CO	https://europepmc.org/articles/PMC2047671?pdf=render	A Simple Method of Recording Automatically the Gas Produced by Bacteria in Culture...	1919	Br J Exp Pathol 1:66-69	en	P1	CO-AUTHORED;LEAF-YEAR-VS-VOLUME	lane=writings. 叶上印 'Received for publication December 29th, 1919'；卷年份是 1920。**记叶上的 1919**，两者差一年。合著者 F. J. Clemenger。
+influenza-bacilli-1930-CO	https://europepmc.org/articles/PMC2048086?pdf=render	On the Occurrence of Influenza Bacilli in the Mouths of Normal People	1930	Br J Exp Pathol 11:127-134	en	P1	CO-AUTHORED	lane=writings. 叶上 'Received for publication March 7th, 1930'。合著 Ian H. Maclean。
+leucocyte-removal-1926	https://europepmc.org/articles/PMC2047866?pdf=render	A Simple Method of Removing Leucocytes from Blood	1926	Br J Exp Pathol 7:281-286	en	P1	PAGE-SPILL	lane=writings. 叶上 'Received for publication July 15th, 1926'。与上一篇共用 281 页，扫描页首是上一篇的尾巴。
+louis-pasteur-1947	https://europepmc.org/articles/PMC2053016?pdf=render	Louis Pasteur (lecture)	1947	Br Med J 1:517-522	en	P1		lane=expression. 刊头 'LONDON SATURDAY APRIL 19 1947'。他讲 Pasteur——对「机遇偏爱有准备的头脑」这条的自述最好的对照材料。
+lysozyme-1922-prsb	https://archive.org/download/philtrans00877782/00877782_djvu.txt	On a Remarkable Bacteriolytic Element Found in Tissues and Secretions	1922	Proc R Soc Lond B 93(653):306-317	en	P1	LYSOZYME-CORE;TASK-REQUIRED;PAGE-SPILL	lane=writings. ★任务点名必取的 1922 溶菌酶论文。叶上 'Received February 13, 1922'。DOI 10.1098/rspb.1922.0023。扫描页首带前一篇文章的尾部（血管弹性），引文须核对页码。
+lysozyme-address-1932	https://europepmc.org/articles/PMC2204285?pdf=render	Lysozyme — President's Address	1932	Proc R Soc Med 26:71-84	en	P1	LYSOZYME-CORE;PRESIDENTIAL-ADDRESS	lane=expression. ★叶上会期 '[October 18, 1932.]'，他任病理学分会主席的就职演说，通篇讲溶菌酶——通俗叙事几乎不提的那一半。
+lysozyme-bjep-1922-CO	https://europepmc.org/articles/PMC2047739?pdf=render	Observations on a Bacteriolytic Substance ("Lysozyme") Found in Secretions and Tissues	1922	Br J Exp Pathol 3:252-260	en	P1	CO-AUTHORED;LYSOZYME-CORE	lane=writings. ★溶菌酶核心论文之一（BJEP 版）。叶上 'Received for publication 22nd July, 1922'。合著 V. D. Allison。
+lysozyme-further-1922-prsb-CO	https://archive.org/download/philtrans09874656/09874656_djvu.txt	Further Observations on a Bacteriolytic Element Found in Tissues and Secretions	1922	Proc R Soc Lond B 94(658):142-151	en	P1	CO-AUTHORED;LYSOZYME-CORE	lane=writings. 叶上 'Received June 16, 1922'，由 Almroth Wright 代为提交。DOI 10.1098/rspb.1922.0051。合著 V. D. Allison。
+lysozyme-resistance-1927-CO	https://europepmc.org/articles/PMC2048150?pdf=render	On the Development of Strains of Bacteria Resistant to Lysozyme Action and the Relation of Lysozyme Action to Intracellular Digestion	1927	Br J Exp Pathol 8:214-218	en	P1	CO-AUTHORED;LYSOZYME-CORE	lane=writings. 叶上 'Received for publication April 15th, 1927'。合著 V. D. Allison。
+mandb693-1939	https://europepmc.org/articles/PMC1997664?pdf=render	Serum and Vaccine Therapy in Combination with Sulphanilamide or M and B 693	1939	Proc R Soc Med 32:911-920	en	P1	CHURCHILL-BOUNDARY;SULPHONAMIDE	lane=expression. ★★叶上会期 '[March 17, 1939]'。**Fleming 本人 1939 年写 M&B 693 的一手材料**——丘吉尔 1943 年用的正是磺胺类而非青霉素，这份是钉死该判据的最强一手证据。
+nobel-banquet-fleming-1945	https://www.nobelprize.org/prizes/medicine/1945/fleming/speech/	Banquet speech, Nobel Banquet, Stockholm, December 10, 1945	1945	NobelPrize.org transcript	en	P1	TASK-CRITICAL	lane=expression. ★他本人说 '我因青霉素而在此'，并**主动提到 Florey 与 Chain 是他的 partners in this Nobel Award**——归属分层的自证材料。
+nobel-bio-chain	https://www.nobelprize.org/prizes/medicine/1945/chain/biographical/	Ernst B. Chain — Biographical	[扉页年份不清]	Nobel Lectures, Physiology or Medicine 1942-1962, Elsevier 1964	en	S2	EDITORIAL-COMPILATION	lane=external. 网页无刊印年份；1964 年编纂卷。
+nobel-bio-fleming	https://www.nobelprize.org/prizes/medicine/1945/fleming/biographical/	Alexander Fleming — Biographical	[扉页年份不清]	Nobel Lectures, Physiology or Medicine 1942-1962, Elsevier 1964	en	S2	EDITORIAL-COMPILATION;POSTHUMOUS	lane=timeline. 网页无刊印年份。1964 年 Elsevier 编纂卷的传略，**成文于他 1955 年身故之后**，不是他亲笔，故记 S2 而非 P1。用作年表骨架。
+nobel-bio-florey	https://www.nobelprize.org/prizes/medicine/1945/florey/biographical/	Howard Florey — Biographical	[扉页年份不清]	Nobel Lectures, Physiology or Medicine 1942-1962, Elsevier 1964	en	S2	EDITORIAL-COMPILATION	lane=external. 网页无刊印年份；1964 年编纂卷。
+nobel-ceremony-speech-1945	https://www.nobelprize.org/prizes/medicine/1945/ceremony-speech/	Award Ceremony Speech by Prof. G. Liljestrand, December 10, 1945	1945	NobelPrize.org / Nobel Foundation	en	S1	TASK-CRITICAL;ATTRIBUTION-KEY	lane=external. ★★颁奖词，**同时代官方对三人分工的权威表述**：Fleming 1928 观察与 1929 论文；Florey 与 Chain 自 1938 起在牛津做纯化与临床。归属分层最直接的判据来源。
+nobel-lecture-chain-1945	https://www.nobelprize.org/uploads/2018/06/chain-lecture.pdf	The Chemical Structure of the Penicillins — Ernst Chain's Nobel Lecture, March 20, 1946	1946	Nobel Lectures, Physiology or Medicine 1942-1962, Elsevier 1964	en	S1	TASK-REQUIRED;OXFORD-SIDE;LEAF-YEAR-VS-PRIZE-YEAR	lane=external. ★★任务要求的「Chain 一侧一手材料」。**叶上讲演日期是 1946-03-20，奖年是 1945**，两者差一年，按规则记叶上的 1946。全篇讲化学结构——即 Fleming 做不到的那一半。
+nobel-lecture-fleming-1945	https://www.nobelprize.org/uploads/2018/06/fleming-lecture.pdf	Penicillin — Nobel Lecture, December 11, 1945	1945	Nobel Lectures, Physiology or Medicine 1942-1962, Elsevier 1964	en	P1	TASK-CRITICAL;PENICILLIN-CORE;NAME-LETTERSPACED	lane=expression. ★★诺奖演说全文。PDF 中他的名字排成字距拉开的 'AL E X A N D E R F L E M I N G'，检索 'FLEMING' 会漏，已注明。他在此**自己**把牛津那一段说清楚。
+nobel-lecture-florey-1945	https://www.nobelprize.org/uploads/2018/06/florey-lecture.pdf	Penicillin — Howard Florey's Nobel Lecture, December 11, 1945	1945	Nobel Lectures, Physiology or Medicine 1942-1962, Elsevier 1964	en	S1	TASK-REQUIRED;OXFORD-SIDE;NAME-LETTERSPACED	lane=external. ★★任务要求的「Florey 一侧一手材料」。同日与 Fleming 各讲一场，可逐句对照两人怎么说同一件事。PDF 名字字距拉开。
+nobel-summary-1945	https://www.nobelprize.org/prizes/medicine/1945/summary/	The Nobel Prize in Physiology or Medicine 1945 — official award record (prize share 1/3 each)	1945	NobelPrize.org	en	S1	PRIZE-CITATION;ATTRIBUTION-KEY	lane=timeline. ★页上印 'Nobel Prize in Physiology or Medicine 1945'、'Prize share: 1/3'。**官方记录：奖是 Fleming / Chain / Florey 三人各三分之一**，归属分层的硬事实。篇幅很短（652 字符），只当事实锚点用，不供长引文。
+penicillin-1929-REPRINT-bjep1979	https://europepmc.org/articles/PMC2041430?pdf=render	On the Antibacterial Action of Cultures of a Penicillium... (1979 facsimile reprint)	1929	Br J Exp Pathol 60(1):3-13, 1979 facsimile of the 1929 original	en	P2	REPRINT-OF-1929;FACSIMILE	lane=writings. 1979 年 BJEP 六十周年影印重刊。影印页眉仍印 'Br. J. exp. Path. (1929) X, 3'——**叶上年份是 1929，出版年份是 1979**，两者差 50 年，按规则记叶上的 1929 并在此注明。同一材料的降质/再版版本，记 P2。
+penicillin-1929-bjep	https://europepmc.org/articles/PMC2048009?pdf=render	On the Antibacterial Action of Cultures of a Penicillium, with Special Reference to their Use in the Isolation of B. influenzae	1929	Br J Exp Pathol 10(3):226-236	en	P1	TASK-REQUIRED;PENICILLIN-CORE	lane=writings. ★★任务点名必取的 1929 青霉素论文全文，13 页全。叶上 'Received for publicatioii May 10th, 1929'（OCR 把 publication 拼错）。这是归属分层里**确实属于他**的那一半。
+penicillin-coagulation-1947-CO	https://europepmc.org/articles/PMC2055477?pdf=render	Influence of Penicillin on the Coagulation of Blood, with Especial Reference to Certain Dental Operations	1947	Br Med J 2:242-243	en	P1	CO-AUTHORED;PAGE-SPILL	lane=writings. 刊头 'AUG. 16, 1947'。合著 E. W. Fish。扫描页首是另一篇文章（THE PROBLEM OF FERTILIZATION）的正文。
+penicillin-letter-1941	https://europepmc.org/articles/PMC2162878?pdf=render	Penicillin (letter to the Editor, claiming priority for the 1928-29 work)	1941	Br Med J 2:386	en	P1	LETTER;SIGNATURE-OFF-PAGE;PAGE-SPILL;TASK-CRITICAL	lane=conversations. ★★刊头 'SEPT. 13, 1941'。**他亲笔为 1929 年那篇争功**：'I think, however, I can claim some merit in the discovery...'，并指出 1924 年白细胞毒性对照实验。署名落在下一页故本文件内无 'FLEMING' 字样，已核内容确为其人。同页另有新西兰医院财政等无关文章。
+penicillin-vd-1944	https://europepmc.org/articles/PMC1053380?pdf=render	Penicillin in Venereal Diseases	1944	Br J Vener Dis 20:133-136	en	P1	PENICILLIN-CORE	lane=expression. 叶上印 '...Society for the Study of Venereal Diseases, 20th May, 1944'，年份从叶上宣读日期读出。
+pneumonia-treatment-1938	https://europepmc.org/articles/PMC2209960?pdf=render	Treatment of Pneumonia (letter to the Editor)	1938	Br Med J 2:37-38	en	P1	LETTER;PAGE-SPILL	lane=conversations. 刊头 'JULY 2, 1938'。署名 'Inoculation Department, St. Mary's ALEXANDER FLEMING. Hospital, London, June 27.'。同页另有雌二醇、胎盘前置等无关文章。
+s1-mb693-pneumonia-1939	https://europepmc.org/articles/PMC5151490?pdf=render	The Treatment of Pneumonia by May and Baker's 693: Report on 50 Cases with Controls	1939	Indian Med Gaz 74(5):257	en	S1	CHURCHILL-BOUNDARY;SULPHONAMIDE	lane=external. ★叶上刊头 'ay, 1939]'（May 1939，OCR 缺首字母）。**同时代一手临床材料：肺炎当时是用 M&B 693 治的**——丘吉尔 1943 年那次正是磺胺类。
+s1-mb693-sulphapyridine-1940	https://europepmc.org/articles/PMC5942745?pdf=render	Fatal Agranulocytosis after Sulphapyridine (M. & B. 693) Therapy	1940	Glasgow Med J 134(4):172	en	S1	CHURCHILL-BOUNDARY;SULPHONAMIDE;LEAF-YEAR-FROM-CASE-DATES	lane=external. ★★**标题本身就把 'Sulphapyridine' 与 'M. & B. 693' 划等号**——这正是伪故事需要的那条对应关系的一手出处。叶上无刊印年份，年份取自叶上病历日期 '27th February, 1940'，已标 flag。
+s1-memorial-rcs-1956	https://europepmc.org/articles/PMC2377988?pdf=render	Memorial to the Late Sir Alexander Fleming, F.R.C.S.	1956	Ann R Coll Surg Engl 18(4):272	en	S1	MEMORIAL-EVENT	lane=timeline. 叶上 'took place at Chelsea Town Hall on Monday, 12th March 1956'，年份自叶上事件日期读出。1956 年切尔西胸像揭幕记事。
+s1-obit-bjvd-1955	https://europepmc.org/articles/PMC1054019?pdf=render	Obituary — Alexander Fleming, Kt., M.B. Lond., F.R.C.P., F.R.C.S., F.R.S.	1955	Br J Vener Dis 31(2):124	en	S1	OBITUARY	lane=timeline. 叶上 'died suddenly on March 11, 1955'，年份自叶上读出。
+s1-obit-bmj-1955	https://europepmc.org/articles/PMC2061445?pdf=render	Obituary — Sir Alexander Fleming, M.D., D.Sc., F.R.C.P., F.R.C.S., F.R.S.	1955	Br Med J 1(4917):732	en	S1	OBITUARY;PAGE-SPILL	lane=timeline. 刊头 'MARCH 19, 1955'。6 页，最长的一篇同时代讣告，含同僚署名追忆。
+s1-obit-jclinpath-1955	https://europepmc.org/articles/PMC1023893?pdf=render	Obituary — Sir Alexander Fleming	1955	J Clin Pathol 8(4):355	en	S1	OBITUARY	lane=timeline. 叶上 'J. clin. Path. (1955), 8, 355.'。撰者 Robert Cruickshank。给出生卒与任职年表（1881-08-06 生）。
+s1-obit-rcs-1955	https://europepmc.org/articles/PMC2377887?pdf=render	In Memoriam: Sir Alexander Fleming (1881-1955)	[扉页年份不清]	Ann R Coll Surg Engl 16(5):343	en	S1	OBITUARY;LEAF-YEAR-ILLEGIBLE	lane=timeline. 叶上只有生卒年 '(1881-1955)'，**没有刊印年份**；馆藏著录 1955。开篇即点破问题：'So much has been written of Fleming and the discovery of penicillin that the two words... have almost become...'。
+s1-oxford-florey-biolprops-1942	https://europepmc.org/articles/PMC2065495?pdf=render	Some Biological Properties of Highly Purified Penicillin	1942	Br J Exp Pathol 23(3):120-123	en	S1	OXFORD-SIDE;CO-AUTHORED	lane=external. H. W. Florey 与 M. A. Jennings，Sir William Dunn School of Pathology, Oxford。叶上 'Received for publication March 27, 1942'。
+s1-oxford-florey-microorg-1945	https://europepmc.org/articles/PMC2060276?pdf=render	The Use of Micro-organisms for Therapeutic Purposes	1945	Br Med J 2(4427):635-642	en	S1	OXFORD-SIDE	lane=external. Florey，刊头 'LONDON SATURDAY NOVEMBER 10 1945'。
+s1-oxford-florey-microorg-1946-YALE	https://europepmc.org/articles/PMC2602034?pdf=render	The Use of Micro-organisms for Therapeutic Purposes (Yale re-publication)	1946	Yale J Biol Med 19(1):101-118	en	S1	OXFORD-SIDE;REPUBLICATION	lane=external. 与上一条**同名同源**的另一次发表。叶上 'Yale University, New Haven, Connecticut, 17 September, 1946'，年份自叶上读出。相对 Fleming 仍是第三方，故留 S1 而非 P2。
+s1-oxford-florey-survey-1944	https://europepmc.org/articles/PMC2285960?pdf=render	Penicillin: A Survey	1944	Br Med J 2(4361):169-171	en	S1	OXFORD-SIDE;ATTRIBUTION-KEY	lane=external. ★Florey 本人 1944 年的综述。刊头 'LONDON SATURDAY AUGUST 5 1944'。开篇即 'The chemotherapeutic properties of penicillin were discovered in 19..'——可与 Fleming 的自述逐句对照。
+s1-oxford-heatley-assay-1944	https://europepmc.org/articles/PMC1258024?pdf=render	A Method for the Assay of Penicillin	1943	Biochem J 38(1):61-65	en	S1	OXFORD-SIDE;LEAF-YEAR-VS-VOLUME	lane=external. ★N. G. Heatley（牛津三人中最少被提到的一个）。叶上 'Received 18 December 1943'；卷年份 1944。**记叶上的 1943**。杯碟法测定——把青霉素从现象变成可计量的东西。
+s1-oxford-purification-1942	https://europepmc.org/articles/PMC2065494?pdf=render	Purification and Some Physical and Chemical Properties of Penicillin	1942	Br J Exp Pathol 23(3):103-119	en	S1	OXFORD-SIDE;ATTRIBUTION-KEY;CO-AUTHORED	lane=external. ★★E. P. Abraham、E. Chain、E. R. Holiday，Sir William Dunn School of Pathology, Oxford。叶上 'VOL. XXIII JUNE, 1942' 与 'Received for publication March 27, 1942'。**这就是「纯化不是 Fleming 做的」的一手证据本身。**
+s1-sulphapyridine-fate-1940	https://europepmc.org/articles/PMC5306572?pdf=render	The Fate in the Body of Sulphapyridine	[扉页年份不清]	Edinburgh Med J 47(4):241	en	S1	CHURCHILL-BOUNDARY;SULPHONAMIDE;LEAF-YEAR-ILLEGIBLE	lane=external. A. J. Clark，爱丁堡药理学系。叶上**无刊印年份**（只有参考文献年 1939）；馆藏著录 1940，按规则记不清。磺胺吡啶的体内代谢——当时的药理共识。
+s2-hillsdale-fleming-churchill-myth	https://winstonchurchill.hillsdale.edu/alexander-fleming-saved-churchill/	Charming but Fanciful: The Fleming-Churchill Myth	[扉页年份不清]	Hillsdale College Churchill Project, web article (undated on page)	en	S2	TASK-CRITICAL;CHURCHILL-BOUNDARY;WEB-UNDATED	lane=external. ★★★页面无刊印日期。Hillsdale College 丘吉尔项目（官方传记文献的学术承接机构）。12.4k 字符，最长的一份，逐节拆解传说的每一环。
+s2-ics-fleming-churchill-myth	https://winstonchurchill.org/resources/myths/sir-alexander-fleming-twice-saved-churchills-life/	Leading Churchill Myths: "Sir Alexander Fleming Twice Saved Churchill's Life"	[扉页年份不清]	International Churchill Society, web article (undated on page)	en	S2	TASK-CRITICAL;CHURCHILL-BOUNDARY;WEB-UNDATED	lane=external. ★★★页面**无刊印日期**。国际丘吉尔学会（1968 年创立的丘吉尔研究主体机构）的辟谣页。引 Dr John Mather：丘吉尔用的是 'M&B' 不是青霉素；引官方传记作者 Sir Martin Gilbert：年龄对不上（Fleming 比丘吉尔小七岁）、无落水记录、无 Lord Randolph 资助学费的记录、Moran 日记只提 M&B 从未提青霉素。并载丘吉尔 1946-06-27 确曾就一次葡萄球菌感染**咨询过** Fleming（Moran 日记 p.335）——这条是真的，须与伪故事分开。
+s2-langworth-fleming-myth	https://richardlangworth.com/fleming	Urban Myths: "Alexander Fleming Twice Saved Churchill's Life"	2020	richardlangworth.com, 11 January 2020 (updated from a 1998 article)	en	S2	TASK-CRITICAL;CHURCHILL-BOUNDARY	lane=external. ★★页上印 '11 January 2020'，并注明改写自 1998 年旧文。作者 Richard M. Langworth 为 Hillsdale 丘吉尔项目 Senior Fellow。
+salt-bactericidal-1926	https://europepmc.org/articles/PMC2047867?pdf=render	On the Effect of Variations of the Salt Content of Blood on its Bactericidal Power in vitro and in vivo	1926	Br J Exp Pathol 7:274-281	en	P1		lane=writings. 叶上 'Received for publication July 15th, 1926'。
+salvarsan-1911	https://archive.org/download/b33440645/b33440645_djvu.txt	On the Use of Salvarsan in the Treatment of Syphilis	1911	Lancet offprint	en	P1	LANCET-OFFPRINT;CO-AUTHORED	lane=writings. 扉页印 'Reprinted from THE LANCET, June 17, 1911'。合著者 L. Colebrook。
+salvarsan-ophthalmic-1914	https://europepmc.org/articles/PMC2002864?pdf=render	Discussion on the Use of Salvarsan in Ophthalmic Practice	[扉页年份不清]	Proc R Soc Med 7:103-104	en	P1	LEAF-YEAR-ILLEGIBLE;DISCUSSION-REMARKS	lane=expression. 全篇**一个四位数年份都没有**；馆藏著录 1914。内容为 'Mr. ALEXANDER FLEMING said...' 的发言记录。
+streptomycin-titration-1947-CO	https://europepmc.org/articles/PMC2053187?pdf=render	Some Problems in the Titration of Streptomycin	1947	Br Med J 1:627-630	en	P1	CO-AUTHORED;THIRD-AUTHOR	lane=writings. 刊头 'LONDON SATURDAY MAY 10 1947'。J. R. May 与 A. E. Voureka 在前，Fleming 列第三。
+syphilis-position-1910	https://europepmc.org/articles/PMC1961054?pdf=render	The Present Position and Treatment of Syphilis	[扉页年份不清]	Proc R Soc Med 3:219-222	en	P1	LEAF-YEAR-ILLEGIBLE;PAGE-SPILL	lane=expression. 叶上无刊印年份；馆藏著录 1910。扫描首页是前一篇的尾部。
+syphilis-serodx-1909	https://europepmc.org/articles/PMC2047107?pdf=render	Demonstration of a Simple Method of Serum Diagnosis of Syphilis by the "Complement Deviation" Method	[扉页年份不清]	Proc R Soc Med 2:220-225	en	P1	LEAF-YEAR-ILLEGIBLE;PAGE-SPILL	lane=expression. 叶上无刊印年份（只有参考文献年 1907/1908）；馆藏著录 1909。页眉 '220 Fleming: Serum Diagnosis of Syphilis' 可证归属。
+syringe-infection-1950	https://europepmc.org/articles/PMC2038374?pdf=render	Infection by Syringes (letter to the Editor)	1950	Br Med J 2:365-366	en	P1	LETTER;PAGE-SPILL	lane=conversations. 刊头 'AUG. 5, 1950'。署名 'London, W.1. ALEXANDER FLEMING.'。同页含耳聋筛查等无关内容。
+syringe-needles-1951-CO	https://europepmc.org/articles/PMC2068621?pdf=render	Syringe Needles and Mass Inoculation Technique	1951	Br Med J 1:543-546	en	P1	CO-AUTHORED	lane=writings. 刊头 'LONDON SATURDAY MARCH 17 1951'。合著 A. C. Ogilvie。
+tears-protein-1925-CO	https://europepmc.org/articles/PMC2047808?pdf=render	On the Specificity of the Protein of Human Tears	1925	Br J Exp Pathol 6:87-90	en	P1	CO-AUTHORED;PAGE-SPILL	lane=writings. 叶上 'Received for publication March 25th, 1925'。合著 V. D. Allison。扫描起始页含前文尾部。
+vaccine-advances-1939	https://europepmc.org/articles/PMC2178536?pdf=render	Recent Advances in Vaccine Therapy	1939	Br Med J 2:99-104	en	P1		lane=expression. 刊头 'LONDON SATURDAY JULY 15 1939'。
+vaccine-therapy-bma-1921	https://europepmc.org/articles/PMC2414597?pdf=render	A British Medical Association Lecture on Vaccine Therapy in Regard to General Practice	1921	Br Med J 1:255-259	en	P1	OCR-NAME-GARBLED;OCR-DATE-GARBLED	lane=expression. 刊头 OCR 成 'FEB. I9,19211'——实为 1921-02-19；署名 OCR 成 'ALEXANDER FLEMIING'。年份按叶上判读为 1921，但 OCR 已残，标此 flag。
+vaccine-therapy-disc-1910	https://europepmc.org/articles/PMC1961082?pdf=render	Discussion on Vaccine Therapy: its Treatment, Value, and Limitations	[扉页年份不清]	Proc R Soc Med 3:137-139	en	P1	LEAF-YEAR-ILLEGIBLE;PAGE-SPILL;DISCUSSION-REMARKS	lane=expression. 扫描叶上**没有任何可读年份**（全篇无四位数年）；馆藏著录 1910。按规则记不清，不拿文件名年份顶替。内容是他在讨论中的发言记录。
+wound-infections-1920-CO	https://archive.org/download/cu31924000312599/cu31924000312599_djvu.txt	Studies in Wound Infections (MRC Special Report Series No. 57)	1920	Medical Research Council Special Report Series No. 57	en	P1	CO-AUTHORED;MULTI-AUTHOR-VOLUME	lane=decisions. 扉页 'PUBLISHED BY HIS MAJESTY'S STATIONERY OFFICE 1920'。与 S. R. Douglas、L. Colebrook 合著；扉页列 'A. Fleming, M.B., B.S. Lond., F.R.C.S. Eng., Director, Department...'。一战伤口感染研究——他反对强防腐剂的立场就是在这里成形的。
+wright-centrifuge-1927	https://europepmc.org/articles/PMC2047976?pdf=render	On Wright's Centrifuge Method of Estimating Phagocytosis and the Rate of Opsonization of Bacteria by Normal Serum	1926	Br J Exp Pathol 8:50-57	en	P1	LEAF-YEAR-VS-VOLUME	lane=writings. 叶上 'Received for publication December 30th, 1926'；卷年份 1927。**记叶上的 1926**。

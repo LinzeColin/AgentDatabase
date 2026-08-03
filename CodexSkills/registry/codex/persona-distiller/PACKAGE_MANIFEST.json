@@ -4,7 +4,7 @@
   "display_name": "人物蒸馏 Skill / Persona Distiller",
   "distribution": {
     "canonical_registry": "../persona-distiller-group",
-    "kind": "repository-customized-v0.0.0.51",
+    "kind": "repository-customized-v0.0.0.52",
     "lineage_base_archive_sha256": "e891912d98d14afb7677ac935a19be329d97d206f4ae74a644892f46b17f6748"
   },
   "evaluation_suites": 16,
@@ -16,8 +16,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "907babb2b5eeedd6b3ff3018fa2172cd56e57b130c6795133f4fcbc616bbfbd3",
-      "size_bytes": 115727
+      "sha256": "b2d52e1abbf1bc56a1773e3966ef18eac87aebad9424eea663287ef2f4be6bcb",
+      "size_bytes": 116822
     },
     {
       "path": "CONTRIBUTING.md",
@@ -31,7 +31,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "bdecb9c88357040976b1d44715a03e1970c5ed439c05f6e1d9e41fd7ba8eaf68",
+      "sha256": "4321897b85edae7467716b7b8c6beb1aee5ae2c045886cad25bc7d303b04e554",
       "size_bytes": 8802
     },
     {
@@ -56,12 +56,12 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "fa54157df0829881ad2e6e7d4c5c07369e6ade5625991011ff8fc071228afcfb",
-      "size_bytes": 47999
+      "sha256": "19a8ccb3bad0295b373c2c8446719f74ac482d83c966c8e5a25917b18ba7df3a",
+      "size_bytes": 48731
     },
     {
       "path": "VERSION",
-      "sha256": "98e88a731d88d7045b35120cf1016bb8be6c39cd595ff265773a8c10ca886909",
+      "sha256": "06e56952b6416b1a0123fbd6a002cbea314ddf1f2feeaa054cbf6cda6220642d",
       "size_bytes": 10
     },
     {
@@ -121,7 +121,7 @@
     },
     {
       "path": "handoff.md",
-      "sha256": "56109aa6e327dd394ad13327e01680c09af70a2d729a5914b55ac5d81f09e3ed",
+      "sha256": "def6cc7f7f8a6e87e3d9c0a1865d1603d4f21bef3a842c20f9ef625bad83e363",
       "size_bytes": 3702
     },
     {
@@ -141,7 +141,7 @@
     },
     {
       "path": "manifest.json",
-      "sha256": "2a8f258b2977f4ea59fe0e47530108820abed939c4f6fb6bc0143202a125feaa",
+      "sha256": "2a1d342b7eb762174e1497f536c810faca79a69828c7e82e79eef92fcce34477",
       "size_bytes": 1191
     },
     {
@@ -676,8 +676,8 @@
     },
     {
       "path": "references/pipeline/scaffold/blind_payload_template.py",
-      "sha256": "b885d6dd8c7e248d706fb414331f6eef3519a4f43cc9d8bf951afb89779c8399",
-      "size_bytes": 5684
+      "sha256": "353cbae7e50a80c883ab2efe655265f8f52c4e3f71c88480b5dc7a8632b64a3d",
+      "size_bytes": 7685
     },
     {
       "path": "references/pipeline/scaffold/cases_template.py",
@@ -1586,5 +1586,5 @@
     },
     "secret_findings": 0
   },
-  "version": "v0.0.0.51"
+  "version": "v0.0.0.52"
 }
