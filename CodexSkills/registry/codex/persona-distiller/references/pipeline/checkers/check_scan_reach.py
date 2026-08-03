@@ -166,6 +166,29 @@ def selftest() -> int:
     return 0 if not fails else 2
 
 
+
+def _extreme_note(covered: int, total: int) -> None:
+    """**极端值先核工具**（v0.0.0.74）。只提示，不改任何判定。"""
+    script = pathlib.Path(__file__).resolve().parent / "check_extreme_result_is_suspect.py"
+    if not script.is_file():
+        return
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("_pd_extreme", script)
+    mod = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(mod)
+    except Exception:                                        # noqa: BLE001
+        return
+    # ★★ **这道判据的成功状态本来就是 100%**——「全中」在它身上不是异常，
+    #    否则每次全绿都要报一次，判据就成了噪音。
+    #    真正可疑的是**反方向**：一条都没盖住，说明两边的标识符空间压根对不齐
+    #    ——第一版就是这么错的（该扫 15／实扫 15，名字一个都不匹配）。
+    for name, why in mod.suspect(covered, total):
+        if "全体" in name:
+            continue
+        print(f"⚠ **{name}**\n    {why}\n")
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -190,6 +213,12 @@ def main() -> int:
     print(f"该扫 **{len(want)}** 个工作区，实际扫了 **{len(got)}** 个\n")
     missing = {w for w in want if not any(covers(g, w) for g in got)}
     extra = {g for g in got if not any(covers(g, w) for w in want)}
+
+    # ★★ v0.0.0.74：极端值先核工具。
+    #   **这道判据的输出恰恰最容易在射程错时显得整齐**——
+    #   第一版就报过「该扫 15 / 实扫 15，少扫 11 个」，
+    #   两个数对得上，名字一个都不匹配。
+    _extreme_note(len(want) - len(missing), len(want))
     if not missing and not extra:
         print("  ✓ 射程与名册一致")
         return 0

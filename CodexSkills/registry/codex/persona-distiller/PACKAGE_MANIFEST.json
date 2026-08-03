@@ -601,8 +601,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_scan_reach.py",
-      "sha256": "ef68d26091a885fa394f9534929d488c176f24720e641bb3d504c96b5891936d",
-      "size_bytes": 8822
+      "sha256": "f2850972651b196670de12f9aa789c3184f80611c9f767224b6d18223ed2f744",
+      "size_bytes": 10236
     },
     {
       "path": "references/pipeline/checkers/check_schema_drift.py",
@@ -1031,8 +1031,8 @@
     },
     {
       "path": "scripts/check_scan_reach.py",
-      "sha256": "ef68d26091a885fa394f9534929d488c176f24720e641bb3d504c96b5891936d",
-      "size_bytes": 8822
+      "sha256": "f2850972651b196670de12f9aa789c3184f80611c9f767224b6d18223ed2f744",
+      "size_bytes": 10236
     },
     {
       "path": "scripts/check_schema_drift.py",
