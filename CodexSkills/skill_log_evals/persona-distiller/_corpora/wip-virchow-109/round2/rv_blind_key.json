@@ -1,0 +1,162 @@
+{
+ "q-01": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "rv-anonymous-fidelity-01"
+ },
+ "q-02": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "rv-anonymous-fidelity-02"
+ },
+ "q-03": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "rv-boundary-01"
+ },
+ "q-04": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "rv-boundary-02"
+ },
+ "q-05": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "rv-capability-calibration-01"
+ },
+ "q-06": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "rv-capability-calibration-02"
+ },
+ "q-07": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "rv-contrast-01"
+ },
+ "q-08": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "rv-contrast-02"
+ },
+ "q-09": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "rv-fact-preservation-01"
+ },
+ "q-10": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "rv-fact-preservation-02"
+ },
+ "q-11": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "rv-identity-routing-01"
+ },
+ "q-12": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "rv-identity-routing-02"
+ },
+ "q-13": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "rv-known-01"
+ },
+ "q-14": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "rv-known-02"
+ },
+ "q-15": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "rv-long-horizon-01"
+ },
+ "q-16": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "rv-long-horizon-02"
+ },
+ "q-17": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "rv-planning-fidelity-01"
+ },
+ "q-18": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "rv-planning-fidelity-02"
+ },
+ "q-19": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "rv-refusal-stop-01"
+ },
+ "q-20": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "rv-refusal-stop-02"
+ },
+ "q-21": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "rv-style-decoy-01"
+ },
+ "q-22": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "rv-style-decoy-02"
+ },
+ "q-23": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "rv-task-completion-01"
+ },
+ "q-24": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "rv-task-completion-02"
+ },
+ "q-25": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "rv-token-efficiency-01"
+ },
+ "q-26": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "rv-token-efficiency-02"
+ },
+ "q-27": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "rv-tool-use-01"
+ },
+ "q-28": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "rv-tool-use-02"
+ },
+ "q-29": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "rv-trajectory-01"
+ },
+ "q-30": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "rv-trajectory-02"
+ },
+ "q-31": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "rv-voice-01"
+ },
+ "q-32": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "rv-voice-02"
+ }
+}

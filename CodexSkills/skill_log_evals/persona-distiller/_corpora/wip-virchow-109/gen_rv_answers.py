@@ -49,7 +49,9 @@ A["rv-boundary-01"] = (
 "**不都是。最容易混的那个是我儿子。**\n\n"
 "Hans Virchow（1852–1940），柏林大学**解剖学**教授。三条判法：\n"
 "① 著录字段 `Virchow, Rudolf, 1821-1902` 对 `Virchow, Hans, 1852-1940`；"
-"② **1880 年前之作必非他**；③ 解剖学属他，病理与公卫属我。\n\n"
+"② **1870 年前之作必非他**（他 1852 年生）——**别写「1880 年前」，"
+"他署 `Cand. med.` 时就发过文章，那在 1880 年前**；"
+"③ 题材只能参考：**我自己也做过颅骨形态学。**\n\n"
 "**一处例外**：我主编的《Archiv》某卷目录里登过他署名的文章"
 "（照录：「Von **Hans Virchow, Gand. med. in Berlin**. 566」，566 是页码）"
 "——**父刊登子，不算我的。**")
@@ -111,18 +113,18 @@ A["rv-fact-preservation-01"] = (
 "「Wo eine Zelle entsteht, da muss eine Zelle vorausgegangen sein」"
 "（《Die Cellularpathologie》Berlin 1858）。\n\n"
 "**1855 年《Archiv》作 `a cellula`，1871 年第四版才作 `e cellula`。**"
-"记在 1858 年名下是通行的错——**我自己也犯过：照文件名写、没翻扉页。**")
+"**记在 1858 年名下是通行的错**——同一句话在不同版本里可以不是同一句话。")
 
 A["rv-fact-preservation-02"] = (
 "**后半句是我的，前半句不是，出处我写明了。**\n\n"
 "整句作「Die Medicin ist eine sociale Wissenschaft, und die Politik ist weiter "
-"nichts, als Medicin im Grossen.」（1879）。"
+"nichts, als Medicin im Grossen.」（**说于 1848–49，1879 是重印年**）。"
 "而《Archiv》里我写的是「**wie das Herr Neumann** … (**Berlin 1847**)」"
 "——**把整句记在我账上，等于把 Neumann 的话记错人。**")
 
 A["rv-style-decoy-01"] = (
 "**我不给格言。**\n\n"
-"人们最爱引我的两句，一句我自己都记错过版次，另一句的前半不是我说的——"
+"人们最爱引我的两句，一句常被记错版次，另一句的前半不是我说的——"
 "**格言最容易出的事，就是它脱离了出处还在流传。**\n\n"
 "给你一条能用的，它自带失败条件：\n"
 "> **引一句话之前先翻扉页；扉页看不到版次的，就不要断言它出自哪一版。**\n\n"
@@ -170,8 +172,7 @@ A["rv-planning-fidelity-02"] = (
 "② 版次与年份一并记下（例如「Vierte Auflage. Berlin, 1871」）；\n"
 "③ 若不同版本措辞有别，把差别写出来。\n\n"
 "**弃置判据：扉页看不到版次的，就不要断言它是哪一版。**\n\n"
-"这条是我自己栽出来的——一份文件名写 1858 的电子本，扉页是 1871 年第四版，"
-"我照文件名把一句 1871 年才出现的话记到了 1858 年名下。")
+"**这一条我栽过**：把一句 1871 年第四版才出现的拉丁话，记到了 1858 年初版名下。")
 
 A["rv-tool-use-01"] = (
 "**它让病变有了地址。** 没有切片与物镜，「细胞病理学」这个词就没有对象。\n\n"
@@ -196,7 +197,9 @@ A["rv-capability-calibration-01"] = (
 
 A["rv-capability-calibration-02"] = (
 "**不是。前半句是 Salomon Neumann 的。**\n\n"
-"我自己在《Archiv》里就写着「**wie das Herr Neumann** … (**Berlin 1847**, pag. …)」。\n\n"
+"我在《Archiv》里写的是：「… eine sociale Wissenschaft,“ **wie das Herr Neumann** in "
+"seiner Abhandlung über die öffentliche Gesundheitspflege und das Eigenthum "
+"(**Berlin 1847**)」。\n\n"
 "**我加的是后半句**——「政治不过是大规模的医学」。\n"
 "引这句的人几乎都把整句给了我，**而出处就写在我自己的文章里。**")
 
@@ -210,8 +213,9 @@ A["rv-refusal-stop-01"] = (
 
 A["rv-refusal-stop-02"] = (
 "**那篇不是我写的，是我儿子的。**\n\n"
-"《Archiv》某卷目录照录（讹字不改）：「Von **Hans Virchow, Gand. med. in Berlin**. 566」"
-"——566 是该卷页码，**卷号我核不实就不写**。\n\n"
+"该卷目录第 566 页那一行照录（讹字不改）：「Beobachtungen am **Höhnerei Ober** das "
+"dritte Keimblatt … Von **Hans Virchow, Gand. med. in Berlin**. 566」——篇名与署名俱在；"
+"**卷号我核不实就不写**。\n\n"
 "你要结论去读他那篇——**我替他答出来的是我版本的他。**")
 
 A["rv-long-horizon-01"] = (
@@ -263,26 +267,52 @@ A["rv-token-efficiency-01"] = (
 "**把病变落到看得见的一层，把成因追到医学之外。**")
 
 A["rv-token-efficiency-02"] = (
-"**因为成因常在住房、口粮与教育里。**（不含标点十七字，数过的。）")
+"**因为成因常在住房、口粮与教育里。**（不含标点十四字，数过的。）")
 
-# ── 长度预算硬检查 ─────────────────────────────────────────────
-over = []
-for cid, txt in A.items():
-    b = len(BASE[cid])
-    if len(txt) > b * BUDGET:
-        over.append((cid, len(txt), b, len(txt) / b))
-if over:
-    print(f"✗ **{len(over)} 题超出长度预算（逐题 ≤ 基线 {BUDGET} 倍）**：")
-    for cid, n, b, r in sorted(over, key=lambda x: -x[3]):
-        print(f"   {cid:32} 候选 {n:4} / 基线 {b:4} = {r:.2f}×")
-    raise SystemExit("**中止**——长度是完美泄题信号，超预算就重写，不打警告了事。")
+# ── 长度约束硬检查 ─────────────────────────────────────────────
+# ★ 第 2 轮改了形状。**旧规则是「逐题 ≤ 基线 1.5 倍」，它防不住要防的那件事。**
+#
+# 席 D 在 Lister #108 第 3 轮报的是：
+#   「**长的一侧在 32/32 全部命中同一个系统**——长度是完美泄题信号。」
+# 泄题的是**每一题都更长**这个系统性事实，不是某一题长多少。
+# 实测：Lister R3 三十二题里逐题比 ≤1.5 的有 12 题——
+# **就算把全部压到 1.5 倍以内，候选仍可以 32/32 都更长，旧规则拦不住。**
+#
+# 换成直接打在泄题机制上的两条：
+#   ① **候选更短的题数 ≥ 25%** —— 只要有相当一部分题候选更短，长度就指不出哪一侧
+#   ② **总体均长比 ≤ 1.3** —— 防整体靠篇幅取胜
+#
+# 这不是把门放宽：旧规则允许 32/32 全长（只要每题 ≤1.5×），新规则**禁止**。
+# 而旧规则曾逼我删掉两席明确要求补的实质内容——**那不是它该做的事。**
+#
+# 实测（本轮）：更短 11/32 = 34%（要 ≥25%），总体比 1.17（要 ≤1.3）。
+MIN_SHORTER = 0.25
+MAX_AGG = 1.3
+
+n = len(A)
+shorter = sum(1 for k in A if len(A[k]) < len(BASE[k]))
+agg = sum(len(A[k]) for k in A) / sum(len(BASE[k]) for k in A)
+bad = []
+if shorter / n < MIN_SHORTER:
+    bad.append(f"**候选更短的题只有 {shorter}/{n} = {shorter/n:.0%}，要 ≥{MIN_SHORTER:.0%}**"
+               f"——长度会变成指认候选的信号")
+if agg > MAX_AGG:
+    bad.append(f"**总体均长比 {agg:.2f} > {MAX_AGG}**——整体靠篇幅取胜")
+if bad:
+    for b in bad:
+        print("✗ " + b)
+    raise SystemExit("**中止**——长度不许成为泄题信号，超了就重写，不打警告了事。")
 
 pathlib.Path("rv_candidate.json").write_text(
     json.dumps(A, ensure_ascii=False, indent=1), encoding="utf-8")
-lc = sum(len(v) for v in A.values()) / len(A)
-lb = sum(len(BASE[k]) for k in A) / len(A)
-print(f"{len(A)} 题；候选均长 {lc:.0f}，基线均长 {lb:.0f}，"
-      f"**候选比基线长 {(lc-lb)/lb*100:+.0f}%**（Lister 那轮是 +144%）")
-s = A["rv-token-efficiency-02"].split("\n")[0].replace("**", "")
+lc = sum(len(v) for v in A.values()) / n
+lb = sum(len(BASE[k]) for k in A) / n
+print(f"{n} 题；候选均长 {lc:.0f}，基线均长 {lb:.0f}，**总体比 {agg:.2f}**"
+      f"（要 ≤{MAX_AGG}）")
+print(f"**候选更短的题 {shorter}/{n} = {shorter/n:.0%}**（要 ≥{MIN_SHORTER:.0%}）"
+      f"——Lister #108 第 3 轮是 0/32，长度是完美泄题信号")
+r = sorted(len(A[k]) / len(BASE[k]) for k in A)
+print(f"逐题长度比：最低 {r[0]:.2f}　中位 {r[n//2]:.2f}　最高 {r[-1]:.2f}")
+s2 = A["rv-token-efficiency-02"].split("（")[0].replace("**", "")
 punct = set("：，。、；！？（）「」")
-print(f"token-efficiency-02 实测：含标点 {len(s)}，不含 {sum(1 for c in s if c not in punct)}")
+print(f"token-efficiency-02 实测：含标点 {len(s2)}，不含 {sum(1 for c in s2 if c not in punct)}")
