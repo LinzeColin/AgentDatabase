@@ -1,0 +1,164 @@
+{
+  "assumption": "Build Agent 直接获得本 ZIP，并仅执行目标仓和真实环境最后一公里。",
+  "change_over_30_percent_triggers": [
+    "目标仓架构或 Registry 格式发生实质变化",
+    "永久 Genesis 不匹配",
+    "目标仓原生测试超过 20 分钟",
+    "当前版本新增官方原生 Adapter 实现",
+    "当前版本新增生产部署或真实用户实验"
+  ],
+  "confidence": "medium",
+  "key_unknowns": [
+    {
+      "item": "目标 AgentDatabase 最新 main",
+      "resolution": "Stage 0 fetch 后七态 semantic plan"
+    },
+    {
+      "item": "目标仓原生 CI/测试时间",
+      "resolution": "即时触发并记录，不等待真实 soak"
+    },
+    {
+      "item": "写权限和 main-only push",
+      "resolution": "无授权则停止，不创建分支或 PR"
+    }
+  ],
+  "largest_cost_drivers": [
+    "目标 main 的未知可执行冲突或语义漂移",
+    "目标仓原生测试与依赖安装时长",
+    "Catalog 当前格式和生成器差异",
+    "远端 main 在推送前前进或权限不足",
+    "真实 Adapter、凭证或生产授权被新增到当前范围"
+  ],
+  "schema_version": "teleiosis.build_estimate.v5",
+  "scope": "将冻结的 Teleiosis v0.0.0.5 语义合并或安装到目标 Skill Registry；不含真实 L3/L4 实验。",
+  "stages": [
+    {
+      "active_minutes_p80": 9,
+      "active_minutes_p95": 17,
+      "active_ratio": 0.75,
+      "active_ratio_p80": 0.75,
+      "active_ratio_p95": 0.68,
+      "categories": [
+        "research",
+        "review"
+      ],
+      "p80_tokens": 12000,
+      "p95_tokens": 22000,
+      "retry_factor_p80": 1.05,
+      "retry_factor_p95": 1.3,
+      "stage": "Stage 0 语义对账",
+      "task_count": 4,
+      "tokens_per_turn_p80": 4000,
+      "tokens_per_turn_p95": 4400,
+      "tool_wait_sources": [
+        "git fetch",
+        "读取目标 AGENTS/CI/Catalog"
+      ],
+      "turns_p80": 3,
+      "turns_p95": 5,
+      "wait_minutes_p80": 3,
+      "wait_minutes_p95": 8,
+      "wall_minutes_p80": 12,
+      "wall_minutes_p95": 25
+    },
+    {
+      "active_minutes_p80": 11,
+      "active_minutes_p95": 24,
+      "active_ratio": 0.6111,
+      "active_ratio_p80": 0.6111,
+      "active_ratio_p95": 0.6,
+      "categories": [
+        "implementation",
+        "remediation"
+      ],
+      "p80_tokens": 16000,
+      "p95_tokens": 30000,
+      "retry_factor_p80": 1.1,
+      "retry_factor_p95": 1.35,
+      "stage": "安装、适配与原子应用",
+      "task_count": 5,
+      "tokens_per_turn_p80": 4000,
+      "tokens_per_turn_p95": 5000,
+      "tool_wait_sources": [
+        "文件复制与 staging 校验",
+        "仓库原生依赖安装"
+      ],
+      "turns_p80": 4,
+      "turns_p95": 6,
+      "wait_minutes_p80": 7,
+      "wait_minutes_p95": 16,
+      "wall_minutes_p80": 18,
+      "wall_minutes_p95": 40
+    },
+    {
+      "active_minutes_p80": 6,
+      "active_minutes_p95": 14,
+      "active_ratio": 0.4,
+      "active_ratio_p80": 0.4,
+      "active_ratio_p95": 0.4,
+      "categories": [
+        "testing"
+      ],
+      "p80_tokens": 10000,
+      "p95_tokens": 18000,
+      "retry_factor_p80": 1.05,
+      "retry_factor_p95": 1.25,
+      "stage": "测试、Catalog 与回滚证明",
+      "task_count": 5,
+      "tokens_per_turn_p80": 3334,
+      "tokens_per_turn_p95": 3600,
+      "tool_wait_sources": [
+        "完整测试",
+        "ZIP 冷解压",
+        "回滚与重放"
+      ],
+      "turns_p80": 3,
+      "turns_p95": 5,
+      "wait_minutes_p80": 9,
+      "wait_minutes_p95": 21,
+      "wall_minutes_p80": 15,
+      "wall_minutes_p95": 35
+    },
+    {
+      "active_minutes_p80": 3,
+      "active_minutes_p95": 7,
+      "active_ratio": 0.375,
+      "active_ratio_p80": 0.375,
+      "active_ratio_p95": 0.35,
+      "categories": [
+        "release"
+      ],
+      "p80_tokens": 5000,
+      "p95_tokens": 9000,
+      "retry_factor_p80": 1.0,
+      "retry_factor_p95": 1.2,
+      "stage": "授权后的提交、推送与远端回读",
+      "task_count": 4,
+      "tokens_per_turn_p80": 2500,
+      "tokens_per_turn_p95": 3000,
+      "tool_wait_sources": [
+        "git push",
+        "远端 readback 与 CI"
+      ],
+      "turns_p80": 2,
+      "turns_p95": 3,
+      "wait_minutes_p80": 5,
+      "wait_minutes_p95": 13,
+      "wall_minutes_p80": 8,
+      "wall_minutes_p95": 20
+    }
+  ],
+  "total": {
+    "active_minutes_p80": 29,
+    "active_minutes_p95": 62,
+    "p80_tokens": 43000,
+    "p80_wall_minutes": 53,
+    "p95_tokens": 79000,
+    "p95_wall_minutes": 120,
+    "task_count": 18,
+    "turns_p80": 12,
+    "turns_p95": 19,
+    "wait_minutes_p80": 24,
+    "wait_minutes_p95": 58
+  }
+}

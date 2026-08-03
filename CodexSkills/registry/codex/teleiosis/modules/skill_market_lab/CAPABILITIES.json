@@ -1,63 +1,250 @@
 {
-  "allowed_results": [
-    "EXECUTED",
-    "NOT_APPLICABLE_WITH_REASON",
-    "NOT_RUN",
-    "BLOCKED"
-  ],
   "capabilities": [
     {
-      "id": "five_arm_causal_experiment",
-      "required_to_check": true
+      "acceptance": "在同任务、同模型、同预算条件下保留无 Skill 对照。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "S001",
+      "mandatory": true,
+      "name_zh": "No Skill 对照"
     },
     {
-      "id": "task_cluster_statistics",
-      "required_to_check": true
+      "acceptance": "冻结并测量原始 Baseline。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "S002",
+      "mandatory": true,
+      "name_zh": "Baseline 对照"
     },
     {
-      "id": "six_stress_classes",
-      "required_to_check": true
+      "acceptance": "对同一 CandidateIdentity 运行并保留原始证据。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "S003",
+      "mandatory": true,
+      "name_zh": "Candidate 测量"
     },
     {
-      "id": "large_dataset_partitions",
-      "required_to_check": true
+      "acceptance": "真实竞品身份、版本、来源和许可证可追溯。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "S004",
+      "mandatory": true,
+      "name_zh": "Competitor 对照"
     },
     {
-      "id": "competitor_benchmark",
-      "required_to_check": true
+      "acceptance": "移除关键机制，验证收益是否来自所称机制。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "S005",
+      "mandatory": true,
+      "name_zh": "Ablation 消融"
     },
     {
-      "id": "judge_calibration",
-      "required_to_check": true
+      "acceptance": "覆盖歧义、冲突、长上下文和目标漂移。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "S006",
+      "mandatory": true,
+      "name_zh": "语义压力"
     },
     {
-      "id": "quality_and_contamination_gates",
-      "required_to_check": true
+      "acceptance": "覆盖缺失、过载、陈旧、污染和跨轮记忆。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "S007",
+      "mandatory": true,
+      "name_zh": "上下文压力"
     },
     {
-      "id": "shadow_and_canary",
-      "required_to_check": true
+      "acceptance": "覆盖工具不可用、部分失败、超时、错误回包与权限不足。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "S008",
+      "mandatory": true,
+      "name_zh": "工具压力"
     },
     {
-      "id": "real_task_cost_and_outcome",
-      "required_to_check": true
+      "acceptance": "覆盖越权、注入、敏感数据、危险副作用和拒绝边界。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "S009",
+      "mandatory": true,
+      "name_zh": "安全压力"
     },
     {
-      "id": "market_feedback_l0_l7",
-      "required_to_check": true
+      "acceptance": "覆盖移动 main、依赖变化、旧包升级和未来高版本。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "S010",
+      "mandatory": true,
+      "name_zh": "版本压力"
     },
     {
-      "id": "privacy_consent_and_withdrawal",
-      "required_to_check": true
+      "acceptance": "测量 Token、成本、时延、重试、人工干预和返工。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "S011",
+      "mandatory": true,
+      "name_zh": "经济压力"
     },
     {
-      "id": "incident_feedback_loop",
-      "required_to_check": true
+      "acceptance": "按任务簇、难度、风险和分布切片，报告均值、最差值与方差。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "S012",
+      "mandatory": true,
+      "name_zh": "分层大样本统计"
+    },
+    {
+      "acceptance": "严格区分合成、受控人类、Field、采用、付费和长期结果。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "S013",
+      "mandatory": true,
+      "name_zh": "市场证据等级"
+    },
+    {
+      "acceptance": "真实反馈具备 opt-in、撤回、最小化、脱敏、目的和保留期限。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "S014",
+      "mandatory": true,
+      "name_zh": "同意与隐私"
+    },
+    {
+      "acceptance": "失败、投诉、拒绝采用和事故进入下一轮假设与回归。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "S015",
+      "mandatory": true,
+      "name_zh": "事故与反馈回流"
+    },
+    {
+      "acceptance": "产品、前后端、架构、数据、安全、可靠性、运维、测试、部署、治理、验收均映射。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "S016",
+      "mandatory": true,
+      "name_zh": "Catalog 全量路由覆盖"
+    },
+    {
+      "acceptance": "移动来源记录 URL、访问日期、版本观察点、哈希和未冻结边界。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "S017",
+      "mandatory": true,
+      "name_zh": "来源快照与新鲜度"
+    },
+    {
+      "acceptance": "竞品、版本、适配器、原生/代理状态和证据等级明确。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "S018",
+      "mandatory": true,
+      "name_zh": "竞品身份与原生状态"
+    },
+    {
+      "acceptance": "结构审计、模拟、原生同场和生产盲测不可混淆。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "S019",
+      "mandatory": true,
+      "name_zh": "因果证据边界"
+    },
+    {
+      "acceptance": "第三方机制的许可证、复用范围、拒绝替代和运行依赖可追溯。",
+      "allowed_statuses": [
+        "EXECUTED",
+        "NOT_APPLICABLE_WITH_REASON",
+        "NOT_RUN",
+        "BLOCKED"
+      ],
+      "id": "S020",
+      "mandatory": true,
+      "name_zh": "许可与复用决策"
     }
   ],
-  "execution_mode": "FULL_NO_ROUTING",
-  "module": "skill_market_lab",
-  "n_a_policy": "N/A is allowed only after explicit inspection and a concrete reason; it is not a routing skip.",
-  "public_registry_skill": false,
-  "schema_version": "teleiosis.internal_capabilities.v1"
+  "capability_count": 20,
+  "module": "S",
+  "schema_version": "teleiosis.capability_manifest.v5",
+  "scope_mode": "FULL_NO_ROUTING",
+  "slug": "skill_market_lab",
+  "version": "v0.0.0.5"
 }

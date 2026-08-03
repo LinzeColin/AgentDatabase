@@ -1,0 +1,13 @@
+[Unit]
+Description=Run Memory Atlas reconciliation every 15 minutes
+
+[Timer]
+OnBootSec=3min
+OnUnitActiveSec=15min
+AccuracySec=1min
+Persistent=true
+RandomizedDelaySec=30
+Unit=memory-atlas-reconcile.service
+
+[Install]
+WantedBy=timers.target

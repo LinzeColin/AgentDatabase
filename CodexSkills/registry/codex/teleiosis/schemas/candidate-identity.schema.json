@@ -1,0 +1,57 @@
+{
+  "$id": "teleiosis://schemas/candidate-identity.v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "acceptance_hash": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "baseline_hash": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "candidate_hash": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "candidate_id": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "environment_hash": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "parent_revision_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "revision_id": {
+      "pattern": "^C[0-9]{4}$",
+      "type": "string"
+    },
+    "run_id": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "subject_id": {
+      "minLength": 1,
+      "type": "string"
+    }
+  },
+  "required": [
+    "subject_id",
+    "run_id",
+    "candidate_id",
+    "revision_id",
+    "baseline_hash",
+    "candidate_hash",
+    "acceptance_hash",
+    "environment_hash"
+  ],
+  "title": "CandidateIdentity v1",
+  "type": "object"
+}

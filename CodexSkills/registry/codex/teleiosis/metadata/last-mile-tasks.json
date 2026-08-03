@@ -1,0 +1,41 @@
+{
+  "schema_version": "teleiosis.last_mile_tasks.v5",
+  "tasks": [
+    {
+      "command": "python3 START_HERE.py install --project",
+      "environment_bound_reason": "需要目标 AgentDatabase 的真实写权限与最新 main",
+      "evidence": "安装收据、Stage0 报告、verify-self JSON、git diff",
+      "expected": "Stage 0 无 conflict/blocked，目标 teleiosis 为 v0.0.0.5 且 verify-self PASS",
+      "failure_branch": "发现冲突时停止并输出 semantic reconcile report",
+      "goal": "将冻结候选语义协调后安装到目标 Registry",
+      "id": "LM-001",
+      "input": "目标仓最新 main 与适用 AGENTS/governance",
+      "rollback": "使用安装收据执行 rollback-install",
+      "stop_condition": "任何 Genesis、身份、高版本或未知可执行冲突"
+    },
+    {
+      "command": "python3 scripts/teleiosis.py verifier-handoff build --output /outside/acceptance-review.zip",
+      "environment_bound_reason": "正式独立 Verifier 需要隔离执行环境",
+      "evidence": "外部 acceptance-review ZIP 与签名/哈希",
+      "expected": "外部 Verifier 输出正式裁决；内部 handoff 仍为 NOT_ISSUED",
+      "failure_branch": "身份、Acceptance、证据或独立性不足则 BLOCKED",
+      "goal": "对冻结 Candidate 执行只读终审",
+      "id": "LM-002",
+      "input": "冻结候选 ZIP 与外部验收环境",
+      "rollback": "丢弃裁决并对新 Candidate 重建 handoff",
+      "stop_condition": "Subject 变化或证据不绑定精确制品"
+    },
+    {
+      "command": "按 references/NATIVE_ARENA_EXECUTION.md 的冻结命令执行",
+      "environment_bound_reason": "L3 原生竞品同场需要模型/API/GPU和工具版本",
+      "evidence": "命令、版本、原始日志、成本账本、环境快照、结果哈希",
+      "expected": "产生 L3 原生 evidence，不将方法适配器冒充官方运行",
+      "failure_branch": "任一参赛者原生运行失败则标记不可比或 BLOCKED",
+      "goal": "在相同模型、任务与货币预算下运行官方原生 Adapter",
+      "id": "LM-003",
+      "input": "授权凭证、锁定版本、密封数据和预算",
+      "rollback": "撤销本轮排名并恢复上一有效 evidence lease",
+      "stop_condition": "预算、授权、数据隔离或版本锁不成立"
+    }
+  ]
+}

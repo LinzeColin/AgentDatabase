@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "skill_slug": "teleiosis",
+  "version": "v0.0.0.5",
+  "outer_delivery_archive_sha256": "ec5457c523077be764e6e5f389c307a6f4a20e70b00c8b312978499fb2956a",
+  "genesis_sha256": "14ab08b9053db4ca87140e59a49f1de8105a718a87ec2d55590c6487c1a77086",
+  "effective_genesis_sha256": "d7349b951034ba2b5335c94ff7cfbc5bb472524c39010af66877c21c9e4f5b96",
+  "engineering_status": "INSTALL_READY_FROZEN_CANDIDATE",
+  "formal_autonomous_promotion": "EXTERNAL_VERIFIER_REQUIRED",
+  "source_control": {
+    "canonical_source_path": "CodexSkills/registry/codex/teleiosis",
+    "replaced_version": "v0.0.0.3",
+    "installed_version": "v0.0.0.5",
+    "canonical_source_regular_file_count": 254,
+    "canonical_source_bytes": 10246865
+  },
+  "install": {
+    "status": "NOT_PERFORMED_LOCALLY",
+    "reason": "user_requested_registry_backup_upload_only"
+  },
+  "evidence": {
+    "archive_integrity": "PASS",
+    "credential_scan": "PASS",
+    "doctor": "PASS",
+    "regression_records": 8192,
+    "regression_status": "PASS",
+    "taskpack_status": "PASS",
+    "formal_independent_verifier": "NOT_ISSUED"
+  }
+}

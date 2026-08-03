@@ -1,9 +1,0 @@
-{
-  "vertical": {"origin": "", "current_form": "", "next_horizon": "", "replacement_risks": []},
-  "horizontal": {
-    "problem_fit": "", "distinctive_mechanism": "", "installability": "", "evidence": "",
-    "safety": "", "portability": "", "efficiency": "", "maintainability": ""
-  },
-  "strategy": {"avoid_niche": "", "target_niche": "", "falsifiable_advantage": "", "disconfirming_test": ""},
-  "unknowns": []
-}

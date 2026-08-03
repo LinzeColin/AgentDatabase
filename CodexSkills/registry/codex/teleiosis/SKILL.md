@@ -1,105 +1,137 @@
 ---
 name: teleiosis
-description: Full non-routed white-box Skill iteration that always runs Raw Teleiosis, Skill Market Lab, and Product Reality Lab over the same evolving Candidate. Use to improve, compare, stress-test, market-test, reality-test, self-evolve, validate, package, install, or release an Agent Skill. One run is three groups of three T-C-S-C-P-C rounds; C is the iteration object itself, not a fixed SHA checkpoint. Do not use for ordinary code review or direct unapproved production edits.
+description: Full non-routed white-box Skill iteration that always runs Raw Teleiosis, Skill Market Lab, Product Reality Lab, and Arena Lab over one evolving Candidate, then prepares a read-only handoff for an external Verifier. Use to improve, compare, stress-test, market-test, reality-test, benchmark, package, install, upgrade, rollback, or release an Agent Skill. One run is three groups of three T-C-S-C-P-C-A-C rounds. Do not use for ordinary code review or unapproved production edits.
 license: MIT
-compatibility: Python 3.9+ and Git. Live competitors, field users, browser/API/load/security adapters, GitHub push, and formal independent review require their own authorized environments.
+compatibility: Python 3.9+; standard library only. Native competitor runs, field users, production side effects, registry push, and formal independent review require separately authorized environments.
 metadata:
   author: LinzeColin
-  version: "v0.0.0.3"
+  version: "v0.0.0.5"
   language: "zh-CN"
   display_name_zh: "白箱迭代Skill"
   english_brand: "Teleiosis"
   functional_name: "White-Box Iteration Skill"
-  architecture: "single-skill-three-built-in-full-run-modules"
+  architecture: "single-skill-four-built-in-full-run-engines"
   scope_mode: "FULL_NO_ROUTING"
-  genesis: "LOCKED_GENESIS"
+  genesis: "LOCKED_GENESIS_PLUS_APPEND_ONLY_AMENDMENTS"
 ---
 
-# 白箱迭代Skill
+# Teleiosis v0.0.0.5
 
-**Teleiosis v0.0.0.3**
+一个安装项，四个逻辑引擎，一个连续 Candidate，一条完整 Run，一个外部终审者。
 
-对目标 Skill 或 Teleiosis 自身进行真实、可验证、可回退的持续优化。正式运行始终使用同一个外部 Candidate 工作副本，并全量执行 T、S、P 三个内置模块；S/P 不注册为独立 Skill，外部 Verifier 保持独立。
-
-## 0. 启动
+## 0. 第一条命令
 
 ```bash
-python3 scripts/wbi.py verify-self --strict
-python3 scripts/teleiosis_run.py contract
+python3 START_HERE.py doctor
+python3 START_HERE.py install
 ```
 
-验证失败即停止；不得自动修改或重签 Genesis。自包含锚用于安装可用性，显式外部锚仍可作为更强防协同篡改证据。
+Doctor 失败即停止；不得重签 Genesis、忽略 Manifest 或把本地自检冒充正式 PASS。
 
-## 1. 固定非路由 Run
+## 1. 固定非路由执行
 
 ```text
-一轮：T1 -> C1 -> S1 -> C2 -> P1 -> C3
+一轮：T1 → C1 → S1 → C2 → P1 → C3 → A1 → C4
 一组：连续三轮
-一次 Run：连续三组
+一次 Run：连续三组，共 36 个 T/S/P/A 阶段
 ```
 
-`T`、`S`、`P` 每次读取完整 Capability Manifest，不经 router 选择。单一路径重复轮跑：相邻模块交叉验证、每组复审 lineage 与回归影响、Run 末执行最终反证复审。每个能力必须记录 `EXECUTED / NOT_APPLICABLE_WITH_REASON / NOT_RUN / BLOCKED`；N/A 必须先检查并解释，NOT_RUN 不能折算完成。
+- T：白箱控制、Genesis、Candidate、硬门、回滚、Taskpack、Skill Audit。
+- S：同行、因果、市场、成本、许可证与证据等级。
+- P：真实流程、全栈、故障、恢复、防呆、Field 边界。
+- A：开发/密封竞技、同预算、Bootstrap、Pareto、失败轨迹。
+- External Verifier：冻结 Subject 的唯一正式 PASS 权限。
 
-`C` 是迭代对象本身的 Candidate revision。T/S/P 可以基于各自证据修改当前 Candidate，然后形成下一个 C；也可 `NO_CHANGE`。revision 必须记录 parent、变更文件、diff、测试、理由和回滚。动态 content fingerprint 是事后证据，不是预设 SHA，不得锁死移动 main、普通上游漂移或下一阶段修改。
+四个引擎每次读取完整 Capability Manifest；不得用 router 缩减。每项能力只能记录 `EXECUTED / NOT_APPLICABLE_WITH_REASON / NOT_RUN / BLOCKED`，其中 NOT_RUN 不算完成。
 
-## 2. T - Raw Teleiosis
+## 2. Candidate 与回滚
 
-完整执行 Genesis、需求与存在性挑战、当前环境、至少五个真实同行、生态位、真实产物、只读 Baseline/独立 Candidate、冻结 Acceptance 与 sealed holdout、十视角、因果 change set、硬门、保护任务、复审边界、打包、安装、回滚和 reheat。只有 T 能形成内部 DecisionReceipt。
+所有阶段操作同一 Candidate lineage。真实内容变化必须产生新 revision、parent、tree digest、变更清单、证据与回滚指针。动态 hash 是事后证据，不是移动仓库的固定前置门。`KEEP / REVERT / NO_CHANGE / BLOCKED` 均保留记录；失败 Candidate 不删除。
 
-## 3. S - Skill Market Lab
+## 3. v0.0.0.3 非降级继承
 
-完整执行 No Skill/Baseline/Candidate/Competitor/Ablation 五臂因果实验，语义/上下文/工具/安全/版本/经济六类压力，大数据分层与任务簇统计，竞品、Shadow、Canary/A-B、真实任务/结果/代价、市场 L0-L7、隐私同意和事故回流。S 只供证，最高为 `EVIDENCE_READY_FOR_TELEIOSIS`。
+`legacy/v0.0.0.3/` 保存当前 v3 的原始 SKILL、README 和 444 条 Manifest 快照。v5 保留 v3 的 T/S/P 全量非路由、连续 Candidate、三轮×三组、移动 main 适配、证据、安装和回滚语义，并增加 A、Stage 0、Taskpack、三次 Skill Audit、8192 条回归语料、Doctor 与 Verifier handoff。
 
-## 4. P - Product Reality Lab
+本包不伪称取得 v3 全部 444 个文件字节；以可执行功能、原始快照、继承矩阵和回归门证明非降级。
 
-完整执行五类参照、开源 provenance、源码/运行时 Census 对账，Surface/State/Transition/Role/Data/Fault/Oracle/Evidence 八维覆盖，前端、API、数据、性能、可靠性、安全、Chaos、恢复、防呆、Negative Control/Mutation、Field 分级和缺陷收敛。P 只输出 `READY_FOR_VERIFIER / MORE_EVIDENCE_REQUIRED / FIELD_VALIDATION_PENDING / BLOCKED`。
-
-## 5. Candidate 与证据
-
-所有模块操作同一 Candidate lineage。每次真实内容变化产生新 revision；旧证据不能冒充新 revision 证据。候选身份由稳定 `candidate_id + revision_number + parent_revision_id + workspace path` 表示；hash 只作为可选动态指纹。不得使用固定 repo HEAD、目标文件 SHA 或 overlay SHA 作为安装/合并前提。
-
-## 6. 完整运行控制器
+## 4. Stage 0 Semantic Reconcile
 
 ```bash
+python3 scripts/teleiosis.py semantic-reconcile \
+  --repository /path/to/latest-main \
+  --spec templates/semantic-reconcile-spec.example.json \
+  --output /outside/stage0-report.json
+```
+
+每项任务分类为 `satisfied / apply / adapt / equivalent / conflict / blocked / obsolete`。保留更新、更好的上游实现；普通字节漂移走 adapt；身份、Genesis、未来高版本或安全边界冲突才阻断。
+
+## 5. 三次 Skill Audit
+
+Pass A 在 Baseline 后；Pass B 在重大 Candidate 变化后；Pass C 在冻结封包前。每次调用记录 Skill/version、目的、输入 hash、制品、Finding、新机制、关闭风险、Developer Burden Delta 与重跑触发条件。输入没变化不得重复凑数。
+
+人物专家只有实际载入 dossier、claim_id 与分歧才计入。当前包没有这些字节，因此明确使用 `INSUFFICIENT_ROSTER_FALLBACK` 和中立六角色，不冒充人物专家或独立模型。
+
+## 6. Taskpack 与 Fresh Builder
+
+```bash
+python3 scripts/teleiosis.py taskpack validate
+python3 scripts/teleiosis.py taskpack fresh-builder
+```
+
+Project Input、唯一状态机、六类无环 Task DAG、Acceptance→Task→Test→Oracle→Evidence→Artifact、最后一公里和回滚全部机器验证。Build Agent 只处理目标仓写权限、真实凭证、供应商控制台、生产环境和兼容性反馈。
+
+## 7. Arena Lab
+
+```bash
+python3 scripts/arena_lab.py freeze --spec INPUT.json --output FROZEN.json
+python3 scripts/arena_lab.py score --spec FROZEN.json --observations RESULTS.jsonl --output RESULT.json
+```
+
+开发竞技场可反复诊断；密封竞技场不能让 Candidate 读取隐藏集或修改评分器。效果榜、治理榜和 Pareto 前沿分开。L1 结构、L2 模拟、L3 原生同场、L4 生产盲测不得混写。
+
+## 8. 大样本回归
+
+```bash
+python3 scripts/teleiosis.py regression
+python3 scripts/validate_release.py --output-dir /outside/teleiosis-v5-validation --runs 3
+```
+
+`fixtures/regression/teleiosis-v5-regression.jsonl` 含 8192 条确定性案例，覆盖 T/S/P/A 与 development、selection、hidden_iid、hidden_ood、redteam、regression 六分区。它是离线回归证据，不是真实市场证据。
+
+## 9. 外部 Verifier 交接
+
+```bash
+python3 scripts/teleiosis.py verifier-handoff build --output /outside/acceptance-review.zip
+python3 scripts/teleiosis.py verifier-handoff validate --zip /outside/acceptance-review.zip
+```
+
+handoff 绑定精确 Candidate tree、Acceptance 与 Manifest，内部状态始终 `NOT_ISSUED`。正式 PASS 只能由外部独立 Verifier 产生。
+
+## 10. 运行控制器
+
+```bash
+python3 scripts/teleiosis_run.py contract
 python3 scripts/teleiosis_run.py init --subject /path/to/skill --workspace /outside/run
-python3 scripts/teleiosis_run.py next --workspace /outside/run --module T --result AUTO --evidence /path/to/evidence.json --decision KEEP
+python3 scripts/teleiosis_run.py next --workspace /outside/run --result /outside/result.json
 python3 scripts/teleiosis_run.py status --workspace /outside/run
-python3 scripts/teleiosis_run.py validate --workspace /outside/run --require-complete
+python3 scripts/teleiosis_run.py validate-run --workspace /outside/run --require-complete
 ```
 
-控制器拒绝错序、漏 T/S/P、路由缩减、缺 parent revision、无回滚指针、NOT_RUN 被当完成和嵌套外层 Run。它不要求 Candidate 保持固定 hash。
+Workspace 根目录只保留 Candidate、隐藏控制面和稳定结果文件。未知字段、错序、漏能力、缺证据、凭证、符号链接、路径穿越、超限输入全部 fail-closed。
 
-## 7. 防呆与低熵输入输出
+## 11. 按需读取
 
-- 初始化前校验 Subject/Workspace 不嵌套、无符号链接、容量在上限内；失败时不创建半成品；
-- Capability Result 采用严格白名单 Schema、固定顺序和完整能力表，未知字段、错模块、错阶段、缺证据、凭证或超限输入全部 fail-closed；
-- Workspace 根目录仅保留 Candidate、隐藏控制面和 5 个稳定的人机结果文件；阶段输入被消费后自动清理；
-- `NO_CHANGE` 与真实 Delta 冲突时阻断并保留修改，`KEEP` 无 Delta 自动归一化，`REVERT` 保存 rejected archive 并恢复父 Candidate；
-- 每个阶段先完成 Evidence/Manifest/Revision，再原子更新 State；任何失败恢复 Candidate、revision-store 和公开状态；
-- CLI 正常与错误均只输出一个 JSON 文档，不打印 traceback/usage 噪声，敏感值递归脱敏；
-- 外部子进程按固定尾缓冲流式读取，超过硬总输出上限或 timeout 时终止整个进程组，防止内存爆炸和孤儿进程；
-- 任务包结果文件只能原子写入包外普通路径，权限为 `0600`，拒绝包内路径和符号链接；
-- revision-store 的动态 ref 只用于精确回滚，不是仓库合并、安装或下一阶段的 SHA 前置门。
+- 完整运行：`references/FULL_RUN_CONTRACT.md`
+- v3 继承：`references/V3_INHERITANCE.md`
+- Stage 0：`references/STAGE0_SEMANTIC_RECONCILE.md`
+- Skill 调用：`references/SKILL_CATALOG_CALLS.md`
+- 人物边界：`references/PERSONA_TEAM_BOUNDARY.md`
+- Arena：`references/ARENA_LAB_CONTRACT.md`
+- 原生同场：`references/NATIVE_ARENA_EXECUTION.md`
+- Verifier：`references/EXTERNAL_VERIFIER_HANDOFF.md`
+- 安装：`INSTALL.md`
+- 架构：`architecture/`
 
-## 8. 安装与移动 main
+## 12. 证据边界
 
-任务包根目录的 `install.py` 可直接安装或升级。AgentDatabase 使用 `scripts/integrate_repo.py` 做语义适配，使用 `scripts/publish_main.py` 从最新远端 main 临时 clone 并在推送竞争时重新基于最新 main 重试。普通字节差异属于 `adapt`，不是自动 `conflict`；只有身份、Genesis、未来高版本、仓库规则或安全边界冲突才阻断。
-
-## 9. 真实结论
-
-模拟、合成大数据、压力流量和 LLM judge 不等于真实市场。真实用户、真实任务、结果/代价、授权和可审计轨迹缺一时写 `NOT_CLAIMED`。正式 PASS 归外部独立 Verifier。
-
-## 10. 按需读取
-
-- 流程：`references/FULL_RUN_CONTRACT.md`
-- 五源：`references/FIVE_SOURCE_INTEGRATION.md`
-- 安装：`delivery/INSTALL_AND_GITHUB.md`
-- 内置模块：`modules/*/CAPABILITIES.json` 与 `MODULE.md`
-- 市场：`references/market/`
-- 产品：`references/product/`
-
-## 11. 最短调用
-
-```text
-调用 Teleiosis v0.0.0.3，以 T1→C1→S1→C2→P1→C3 为一轮，连续三轮为一组、连续三组为一次完整 Run。禁止路由，T/S/P 各自全量运行；C 是同一迭代对象的连续 Candidate revision，不是 SHA 检查点。依据竞品、因果、大数据、六类压力、产品八维、真实任务/市场/Field、交叉验证与复审持续优化，保留精确 diff、测试和回滚，最后交给独立 Verifier。
-```
+本地工程、测试、回归、安装、回滚、封包与冷解压可以在包内证明。目标 Registry 写入、官方原生竞品胜负、真实市场、生产盲测与正式独立验收没有运行时必须保持 `NOT_RUN / NOT_CLAIMED / PENDING / UNAVAILABLE`。

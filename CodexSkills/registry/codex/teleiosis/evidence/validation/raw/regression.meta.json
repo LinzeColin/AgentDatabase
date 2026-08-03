@@ -1,0 +1,12 @@
+{
+  "label": "regression",
+  "command": [
+    "/opt/pyvenv/bin/python3",
+    "scripts/teleiosis.py",
+    "regression"
+  ],
+  "returncode": 0,
+  "seconds": 0.675,
+  "stdout_sha256": "94bf1afdf3f4d71e4c4e4bb30ab847a34c257958584e996c736a0378094a78d6",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

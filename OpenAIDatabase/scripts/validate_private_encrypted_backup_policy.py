@@ -8,10 +8,16 @@ import json
 from pathlib import Path
 from typing import Any, Mapping
 
-from validate_public_encrypted_backup_policy import (
-    BackupPolicyError,
-    validate_policy as validate_public_encrypted_backup_policy,
-)
+try:
+    from .validate_public_encrypted_backup_policy import (
+        BackupPolicyError,
+        validate_policy as validate_public_encrypted_backup_policy,
+    )
+except ImportError:  # direct script execution
+    from validate_public_encrypted_backup_policy import (
+        BackupPolicyError,
+        validate_policy as validate_public_encrypted_backup_policy,
+    )
 
 
 POLICY_SCHEMA = "openai_database.private_encrypted_backup_policy.v1"
@@ -19,7 +25,18 @@ TASK_ID = "TSK.OpenAIDatabase.PEB1.0003"
 ACCEPTANCE_ID = "ACC.OpenAIDatabase.PEB1.0003"
 DEFAULT_POLICY = Path("config/storage/private_encrypted_backup_policy.json")
 DEFAULT_PUBLIC_POLICY = Path("config/storage/public_encrypted_backup_policy.json")
-EXPECTED_LOGICAL_SOURCES = ["codex_memories", "codex_sessions", "codex_attachments"]
+EXPECTED_LOGICAL_SOURCES = [
+    "codex_state",
+    "codex_memories",
+    "codex_sessions",
+    "codex_archived_sessions",
+    "codex_attachments",
+    "codex_automations",
+    "codex_tasks",
+    "chatgpt_exports",
+    "openaidatabase_live_data",
+    "verified_evidence_adapters",
+]
 EXPECTED_PREFLIGHT = [
     "age_binary_available",
     "unified_recipient_provisioned",
@@ -98,10 +115,10 @@ def validate_policy(
         or release.get("draft_release_required") is not True
         or release.get("remote_verification_required_before_local_ciphertext_cleanup") is not True
         or not isinstance(release.get("max_ciphertext_part_bytes"), int)
-        or not 0 < int(release["max_ciphertext_part_bytes"]) <= 1073741824
+        or int(release["max_ciphertext_part_bytes"]) != 94371840
         or not isinstance(release.get("max_parts"), int)
-        or not 0 < int(release["max_parts"]) <= 3
-        or release.get("automatic_release_tag_prefix") != "codex-auto-backup-"
+        or int(release["max_parts"]) != 64
+        or release.get("automatic_release_tag_prefix") != "memory-atlas-auto-backup-"
         or release.get("automatic_release_retention_count") != 3
         or release.get("retention_scope")
         != "automatic_releases_with_matching_tag_prefix_only"
@@ -120,6 +137,7 @@ def validate_policy(
     if (
         unified_key.get("public_policy_ref")
         != "config/storage/public_encrypted_backup_policy.json#unified_key"
+        or unified_key.get("keychain_account") != "memory-atlas"
         or unified_key.get("private_identity_source")
         != "macos_keychain_or_owner_secret_manager"
         or unified_key.get("identity_file_persisted") is not False

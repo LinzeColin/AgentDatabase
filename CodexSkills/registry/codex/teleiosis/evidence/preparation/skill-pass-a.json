@@ -1,0 +1,138 @@
+{
+  "calls": [
+    {
+      "closed_risks": [
+        "解释 03/04 体积差异",
+        "冻结 v5 不得伪称字节级 v3 复制"
+      ],
+      "developer_burden_delta": {
+        "builder_tasks_removed": [
+          "重新判断 v3 需求"
+        ],
+        "closed_unknowns": [
+          "v4 变小原因"
+        ],
+        "generated_executable_artifacts": [
+          "v3 semantic inheritance contract"
+        ]
+      },
+      "findings": [
+        "v4 只保留薄型证据，缺少 Stage0、Taskpack、完整原始日志和 v3 来源边界"
+      ],
+      "input_hash": "82803ae28d960227efd98c7d76627727ec643e30ac0652e7fd008176de5ed7d5",
+      "input_subject": "v4 extracted package + v3 snapshots",
+      "new_mechanisms": [
+        "v3 三快照与 444 条 Manifest 继承合同"
+      ],
+      "output_artifacts": [
+        "legacy/v0.0.0.3/SEMANTIC_INHERITANCE.json",
+        "evidence/preparation/pass-a-findings.json"
+      ],
+      "purpose": "复审 v3 语义与 v4 可执行基座的非降级缺口",
+      "rerun_trigger": "Candidate 发生重大代码或 Acceptance 变化",
+      "skill": "teleiosis",
+      "status": "EXECUTED",
+      "version": "v0.0.0.3"
+    },
+    {
+      "closed_risks": [
+        "杜绝虚构专家和伪独立模型"
+      ],
+      "developer_burden_delta": {
+        "closed_p0_p1": [
+          "persona authenticity risk"
+        ],
+        "generated_executable_artifacts": [
+          "review.py persona gate"
+        ]
+      },
+      "findings": [
+        "当前环境没有实际内层 runtime dossier，不能计人物专家贡献"
+      ],
+      "input_hash": "82803ae28d960227efd98c7d76627727ec643e30ac0652e7fd008176de5ed7d5",
+      "input_subject": "v5 review design",
+      "new_mechanisms": [
+        "dossier/claim_id/分歧硬门",
+        "neutral functional roles fallback"
+      ],
+      "output_artifacts": [
+        "evidence/preparation/persona-team-evidence.json"
+      ],
+      "purpose": "验证专家团队调用真实性并确定回退边界",
+      "rerun_trigger": "取得真实 dossier bytes 和 route-plan 后",
+      "skill": "persona-distiller-group",
+      "status": "EXECUTED",
+      "version": "v0.0.0.7"
+    },
+    {
+      "closed_risks": [
+        "内部自签 PASS 风险"
+      ],
+      "developer_burden_delta": {
+        "closed_p0_p1": [
+          "builder self-attestation risk"
+        ],
+        "generated_executable_artifacts": [
+          "verifier handoff builder"
+        ]
+      },
+      "findings": [
+        "v4 只有 handoff schema，缺少可执行冻结 ZIP builder"
+      ],
+      "input_hash": "82803ae28d960227efd98c7d76627727ec643e30ac0652e7fd008176de5ed7d5",
+      "input_subject": "v4 acceptance and evidence boundary",
+      "new_mechanisms": [
+        "immutable SubjectIdentity",
+        "read-only handoff manifest"
+      ],
+      "output_artifacts": [
+        "references/EXTERNAL_VERIFIER_HANDOFF.md",
+        "scripts/teleiosis_core/verifier_handoff.py"
+      ],
+      "purpose": "把正式 PASS 权限从内部实现中隔离",
+      "rerun_trigger": "冻结 Candidate 或 Acceptance 发生变化",
+      "skill": "verifier",
+      "status": "EXECUTED",
+      "version": "v0.0.2.2"
+    }
+  ],
+  "catalog_routing": {
+    "persona-distiller-group": {
+      "status": "ROUTED_METHOD_APPLIED_NOT_FULL_NATIVE_EXECUTION",
+      "version": "v0.0.0.7"
+    },
+    "teleiosis": {
+      "status": "NATIVE_CONTRACT_EXECUTED_LOCAL_V5",
+      "version": "v0.0.0.3 baseline + v0.0.0.5 candidate"
+    },
+    "verifier": {
+      "status": "CONTRACT_APPLIED_FORMAL_EXECUTION_NOT_RUN",
+      "version": "v0.0.2.2"
+    }
+  },
+  "decision": "KEEP",
+  "developer_burden_delta": {
+    "builder_tasks_removed": [
+      "重复研究 v3/Persona/Verifier 合同"
+    ],
+    "closed_p0_p1": [
+      "薄型重构风险"
+    ],
+    "closed_unknowns": [
+      "v3→v5 继承边界",
+      "persona 有效调用边界",
+      "formal PASS 权限"
+    ],
+    "generated_executable_artifacts": [
+      "semantic inheritance matrix"
+    ]
+  },
+  "formal_independent_review": "UNAVAILABLE",
+  "input_hash": "82803ae28d960227efd98c7d76627727ec643e30ac0652e7fd008176de5ed7d5",
+  "pass": "A",
+  "phase": "Baseline / Discovery",
+  "review_mode": "role_separated_same_model",
+  "schema_version": "teleiosis.skill_pass.v5",
+  "skill": "teleiosis",
+  "version": "v0.0.0.5-prebuild"
+}

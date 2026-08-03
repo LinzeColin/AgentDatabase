@@ -65,6 +65,15 @@ ALLOWED_TRACKED_FILES = {
     "data/processed/codex/codex_activity_snapshot.json",
     "data/derived/codex/codex_agent_recommendations.json",
     "data/derived/codex/codex_behavior_report.md",
+    "tests/fixtures/recurring_prompt/session-a.part-0001.jsonl",
+    "tests/fixtures/recurring_prompt/session-b.part-0001.jsonl",
+    "tests/fixtures/recurring_prompt/session-c.part-0001.jsonl",
+    "tests/fixtures/recurring_prompt/session-d.part-0001.jsonl",
+    "tests/fixtures/recurring_prompt/session-e-production-injection.part-0001.jsonl",
+    "tests/fixtures/recurring_prompt/session-f-single-marker.part-0001.jsonl",
+    "tests/fixtures/recurring_prompt/session-g-mixed-blocks.part-0001.jsonl",
+    "tests/fixtures/recurring_prompt/session-h-mixed-boundary.part-0001.jsonl",
+    "tests/fixtures/recurring_prompt/session-i-genuine-marker-mention.part-0001.jsonl",
 }
 SOURCE_SCAN_EXCLUDED_DIRS = {".git", ".local_keys", "node_modules", "dist", "__pycache__", ".pytest_cache", ".mypy_cache"}
 PUBLIC_RAW_PREFIX = "data/public_raw/"

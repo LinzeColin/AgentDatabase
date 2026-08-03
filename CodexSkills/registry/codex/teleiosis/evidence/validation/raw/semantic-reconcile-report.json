@@ -1,0 +1,32 @@
+{
+  "counts": {
+    "adapt": 1,
+    "apply": 0,
+    "blocked": 0,
+    "conflict": 0,
+    "equivalent": 0,
+    "obsolete": 0,
+    "satisfied": 0
+  },
+  "report_hash": "418ac850d34425d0b151de8259c9bf5f1f4ec416be2d79274ad72137acda8515",
+  "repository": "/tmp/tmp.LnV78ZeGeW/moving-main",
+  "repository_observation": "moving-main-observation-not-freeze-point",
+  "rules": {
+    "fixed_repository_sha_gate": false,
+    "preserve_newer_or_better_upstream": true,
+    "whole_tree_overwrite": false
+  },
+  "schema_version": "teleiosis.semantic_reconcile_report.v5",
+  "spec_hash": "e29aed467cda64cde4c3bcfaf66425973bae084acea873009c4db6ee6c3cdf36",
+  "status": "READY",
+  "tasks": [
+    {
+      "classification": "adapt",
+      "evidence": [
+        "SKILL.md"
+      ],
+      "reason": "目标已有相关实现但非等价，应在保留上游优点的前提下适配。",
+      "task_id": "STAGE0-EXAMPLE-001"
+    }
+  ]
+}

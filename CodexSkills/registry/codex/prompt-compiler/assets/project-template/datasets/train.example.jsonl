@@ -1,0 +1,1 @@
+{"id": "train-001", "task_id": "default", "input": "示例输入", "must_include": ["结论"], "must_not_include": ["伪造"], "assertions": [{"type": "contains", "value": "结论", "hard": true}], "reference": "", "rubric": "", "synthetic": false, "metadata": {}}

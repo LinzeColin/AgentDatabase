@@ -1,0 +1,23 @@
+{
+  "$id": "https://teleiosis.local/schemas/verifier-subject-identity.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "acceptance_sha256": {},
+    "candidate_tree_digest": {},
+    "formal_pass": {},
+    "name": {},
+    "subject_hash": {},
+    "version": {}
+  },
+  "required": [
+    "name",
+    "version",
+    "candidate_tree_digest",
+    "acceptance_sha256",
+    "formal_pass",
+    "subject_hash"
+  ],
+  "title": "teleiosis.verifier_subject_identity.v5",
+  "type": "object"
+}

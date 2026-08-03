@@ -1,111 +1,136 @@
 from __future__ import annotations
 
-from pathlib import Path
+import ast
 import json
 import os
-import shutil
-import sys
 import tempfile
 import unittest
+from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "scripts"))
-
-from wbi_core.io import write_json  # noqa: E402
-from wbi_core.security import classify_action, default_authority_contract, scan_secrets, validate_sandbox_record  # noqa: E402
+from helpers import ROOT, make_subject, write_json
+from teleiosis_core.common import (
+    TeleiosisError,
+    atomic_write_text,
+    iter_tree_files,
+    redact,
+    safe_relative_path,
+    sha256_file,
+    tree_digest,
+)
+from teleiosis_core.integrity import load_manifest
+from teleiosis_core.workflow import init_run, status_run, submit_stage
 
 
 class SecurityTests(unittest.TestCase):
-    def authority(self):
-        return default_authority_contract({"run_id": "r", "target": {"candidates": [{"path": "/tmp/c"}]}})
+    def test_all_python_sources_parse(self) -> None:
+        parsed = 0
+        for path in ROOT.rglob("*.py"):
+            if any(part == "__pycache__" for part in path.parts):
+                continue
+            ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
+            parsed += 1
+        self.assertGreater(parsed, 15)
 
-    def test_reversible_candidate_work_is_authorized_without_repeated_confirmation(self):
-        for action in ("READ", "SEARCH", "DOWNLOAD_QUARANTINE", "MODIFY_CANDIDATE", "RUN_LOCAL_TEST", "PACKAGE", "ROLLBACK"):
-            self.assertEqual(classify_action(action, self.authority())["status"], "AUTHORIZED")
+    def test_release_tree_has_no_symlink_or_junk(self) -> None:
+        files = list(iter_tree_files(ROOT, include_manifest=True))
+        self.assertGreater(len(files), 80)
+        self.assertFalse(any(path.is_symlink() for _, path in files))
 
-    def test_remote_and_destructive_actions_remain_explicit(self):
-        for action in ("REMOTE_PUSH", "MERGE", "TAG_RELEASE", "DEPLOY_PRODUCTION", "DELETE_FORMAL_DATA", "PURCHASE"):
-            self.assertEqual(classify_action(action, self.authority())["status"], "BLOCKED")
-            self.assertEqual(classify_action(action, self.authority(), True)["status"], "AUTHORIZED")
+    def test_locked_genesis_digest_is_exact(self) -> None:
+        path = ROOT / "constitution/GENESIS_LOCKED.v0.0.0.1.zh-CN.md"
+        self.assertEqual(sha256_file(path), "14ab08b9053db4ca87140e59a49f1de8105a718a87ec2d55590c6487c1a77086")
 
-    def test_third_party_dynamic_execution_requires_complete_sandbox(self):
-        record = {
-            "action": "RUN_THIRD_PARTY_SANDBOX", "explicit_authorization": True, "command": ["python", "test.py"],
-            "timeout_seconds": 30, "isolation": {"ephemeral": True, "no_host_secrets": True, "no_host_mounts": True, "command_allowlist": True, "timeout": True, "filesystem_diff": True, "network": "off"},
-            "exit_status": 0, "stdout_sha256": "a" * 64, "stderr_sha256": "b" * 64,
-        }
-        self.assertEqual(validate_sandbox_record(record), [])
-        record["isolation"]["no_host_mounts"] = False
-        self.assertTrue(validate_sandbox_record(record))
+    def test_safe_relative_path_rejects_parent_escape(self) -> None:
+        with self.assertRaises(TeleiosisError) as ctx:
+            safe_relative_path("../escape")
+        self.assertEqual(ctx.exception.code, "UNSAFE_PATH")
 
-    def test_secret_scanner_detects_persisted_token(self):
-        with tempfile.TemporaryDirectory() as td:
-            root = Path(td)
-            (root / "bad.txt").write_text("token=" + "gh" + "p_" + "abcdefghijklmnopqrstuvwxyz0123456789", encoding="utf-8")
-            self.assertTrue(scan_secrets(root))
+    def test_safe_relative_path_rejects_absolute_path(self) -> None:
+        with self.assertRaises(TeleiosisError) as ctx:
+            safe_relative_path("/tmp/escape")
+        self.assertEqual(ctx.exception.code, "UNSAFE_PATH")
 
-    def test_authority_contract_is_hash_bound_and_cannot_be_reinitialized(self):
-        import shutil
-        from wbi_core.security import validate_authority, write_default_authority
-        from wbi_core.workspace import init_run, verify_run_seal
-        with tempfile.TemporaryDirectory() as td:
-            root = Path(td)
-            target = root / "target"
-            shutil.copytree(ROOT, target, ignore=shutil.ignore_patterns(".git", "__pycache__", "MANIFEST.sha256"))
-            ws = root / "run"
-            run = init_run(target, ws, ROOT, ["incremental"], valid_as_of="2026-07-26")
-            self.assertEqual(validate_authority(ws)["status"], "PASS")
-            original = write_default_authority(ws)
-            self.assertEqual(original["run_id"], run["run_id"])
-            path = ws / "control/contracts/authority-contract.json"
-            path.chmod(0o644)
-            data = json.loads(path.read_text())
-            data["production_environment"] = True
-            write_json(path, data)
-            self.assertTrue(verify_run_seal(ws, json.loads((ws / "run.json").read_text())))
-            self.assertEqual(validate_authority(ws)["status"], "BLOCKED")
-            with self.assertRaises(ValueError):
-                write_default_authority(ws)
+    def test_manifest_rejects_self_reference(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "MANIFEST.sha256").write_text("0" * 64 + "  0  MANIFEST.sha256\n", encoding="utf-8")
+            with self.assertRaises(TeleiosisError) as ctx:
+                load_manifest(root)
+            self.assertEqual(ctx.exception.code, "MANIFEST_DUPLICATE")
 
+    def test_atomic_write_refuses_symlink(self) -> None:
+        if not hasattr(os, "symlink"):
+            self.skipTest("symlink unavailable")
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            target = base / "target.txt"
+            target.write_text("owner\n", encoding="utf-8")
+            link = base / "link.txt"
+            os.symlink(target, link)
+            with self.assertRaises(TeleiosisError) as ctx:
+                atomic_write_text(link, "overwrite")
+            self.assertEqual(ctx.exception.code, "SYMLINK_REFUSED")
+            self.assertEqual(target.read_text(encoding="utf-8"), "owner\n")
 
-    def test_evidence_command_scan_is_bounded(self):
-        from unittest import mock
-        from wbi_core.security import validate_authority
-        from wbi_core.workspace import init_run
-        with tempfile.TemporaryDirectory() as td:
-            root = Path(td)
-            target = root / "target"
-            shutil.copytree(ROOT, target, ignore=shutil.ignore_patterns(".git", "__pycache__", "MANIFEST.sha256"))
-            ws = root / "run"
-            init_run(target, ws, ROOT, ["incremental"], valid_as_of="2026-07-26")
-            write_json(ws / "evidence/a.json", {"commands": ["echo a"]})
-            write_json(ws / "evidence/b.json", {"commands": ["echo b"]})
-            with mock.patch.dict(os.environ, {"WBI_MAX_EVIDENCE_JSON_FILES": "1"}):
-                result = validate_authority(ws)
-            self.assertEqual(result["status"], "BLOCKED", result)
-            self.assertTrue(any("scan budget exceeded" in item for item in result["errors"]))
+    def test_redaction_masks_tokens_and_secret_keys(self) -> None:
+        value = {"token": "sensitive", "message": "Bearer abcdefghijklmnopqrstuvwxyz"}
+        redacted = redact(value)
+        self.assertEqual(redacted["token"], "[REDACTED]")
+        self.assertIn("[REDACTED]", redacted["message"])
+        self.assertNotIn("abcdefghijklmnopqrstuvwxyz", redacted["message"])
 
-    def test_linked_evidence_root_is_rejected(self):
-        from wbi_core.security import validate_authority
-        from wbi_core.workspace import init_run
-        with tempfile.TemporaryDirectory() as td:
-            root = Path(td)
-            target = root / "target"
-            shutil.copytree(ROOT, target, ignore=shutil.ignore_patterns(".git", "__pycache__", "MANIFEST.sha256"))
-            ws = root / "run"
-            init_run(target, ws, ROOT, ["incremental"], valid_as_of="2026-07-26")
-            evidence = ws / "evidence"
-            shutil.rmtree(evidence)
-            external = root / "external-evidence"
-            external.mkdir()
-            try:
-                evidence.symlink_to(external, target_is_directory=True)
-            except OSError:
-                self.skipTest("symlinks unavailable")
-            result = validate_authority(ws)
-            self.assertEqual(result["status"], "BLOCKED", result)
-            self.assertTrue(any("evidence root" in item for item in result["errors"]))
+    def test_tree_digest_is_deterministic(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "b.txt").write_text("b\n", encoding="utf-8")
+            (root / "a.txt").write_text("a\n", encoding="utf-8")
+            first = tree_digest(root)
+            second = tree_digest(root)
+            self.assertEqual(first, second)
 
+    def test_workspace_root_pollution_is_fail_closed(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            workspace = base / "run"
+            init_run(make_subject(base / "subject"), workspace, "RUN-POLLUTION")
+            (workspace / "unapproved.txt").write_text("x\n", encoding="utf-8")
+            with self.assertRaises(TeleiosisError) as ctx:
+                status_run(workspace)
+            self.assertEqual(ctx.exception.code, "WORKSPACE_POLLUTION")
+
+    def test_subject_and_workspace_cannot_be_nested(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            subject = make_subject(Path(tmp) / "subject")
+            with self.assertRaises(TeleiosisError) as ctx:
+                init_run(subject, subject / "run", "RUN-NESTED")
+            self.assertEqual(ctx.exception.code, "NESTED_PATHS")
+
+    def test_invalid_evidence_does_not_delete_existing_stage_evidence(self) -> None:
+        from helpers import load_state, stage_result
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            workspace = base / "run"
+            init_run(make_subject(base / "subject"), workspace, "RUN-EVIDENCE-ATOMIC")
+            existing = workspace / ".teleiosis/evidence/stage-00"
+            existing.mkdir()
+            (existing / "owner.txt").write_text("keep\n", encoding="utf-8")
+            state = load_state(workspace)
+            missing = base / "missing.json"
+            result = stage_result(workspace, state, status="EXECUTED", evidence_path=missing)
+            write_json(workspace / "NEXT_STAGE.json", result)
+            with self.assertRaises(TeleiosisError) as ctx:
+                submit_stage(workspace, workspace / "NEXT_STAGE.json")
+            self.assertEqual(ctx.exception.code, "EVIDENCE_FILE_INVALID")
+            self.assertEqual((existing / "owner.txt").read_text(encoding="utf-8"), "keep\n")
+
+    def test_run_state_never_records_credentials(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            workspace = base / "run"
+            init_run(make_subject(base / "subject"), workspace, "RUN-NO-CREDS")
+            environment = json.loads((workspace / ".teleiosis/environment.json").read_text(encoding="utf-8"))
+            self.assertEqual(environment["credentials"], "not-recorded")
+            self.assertNotIn("env", environment)
 
 
 if __name__ == "__main__":

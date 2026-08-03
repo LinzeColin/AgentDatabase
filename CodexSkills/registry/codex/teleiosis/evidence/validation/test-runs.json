@@ -1,0 +1,46 @@
+{
+  "all_pass": true,
+  "candidate_core_hash": "166a2284ab0749353ea9b898db55c3750347c9cfeca6321581779858519dce89",
+  "cold_extract": {
+    "evidence": "evidence/validation/raw/cold-extract-tests.stderr.log",
+    "status": "PASS",
+    "tests": 164
+  },
+  "complete_runs": 3,
+  "formal_pass": "NOT_ISSUED",
+  "runs": [
+    {
+      "label": "full-tests-1",
+      "returncode": 0,
+      "run": 1,
+      "seconds": 26.816,
+      "status": "PASS",
+      "stderr_sha256": "91eff7264d80f93cc5499e0e8d987ac046c7dd396cd4a624c5750461f440df44",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tests": 164
+    },
+    {
+      "label": "full-tests-2",
+      "returncode": 0,
+      "run": 2,
+      "seconds": 26.905,
+      "status": "PASS",
+      "stderr_sha256": "0aacb7caebf17aa6c651c81d99fd6e5b912a7e9c63fcc3fe5c7875fc95a1781f",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tests": 164
+    },
+    {
+      "label": "full-tests-3",
+      "returncode": 0,
+      "run": 3,
+      "seconds": 27.015,
+      "status": "PASS",
+      "stderr_sha256": "ca4df889886f3f4c1955e5842addcbc4da437285498bfdc61e71d0cf2ab59d9f",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tests": 164
+    }
+  ],
+  "schema_version": "teleiosis.test_runs.v5",
+  "status": "PASS",
+  "tests_per_run": 164
+}

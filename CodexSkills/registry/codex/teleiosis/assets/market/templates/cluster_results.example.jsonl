@@ -1,2 +1,0 @@
-{"cluster_id":"cluster-001","task_id":"task-001","trial_id":"1","arm_id":"candidate","success":true,"score":0.90,"cost_usd":0.02,"latency_ms":1000}
-{"cluster_id":"cluster-001","task_id":"task-001","trial_id":"1","arm_id":"baseline","success":true,"score":0.80,"cost_usd":0.01,"latency_ms":900}

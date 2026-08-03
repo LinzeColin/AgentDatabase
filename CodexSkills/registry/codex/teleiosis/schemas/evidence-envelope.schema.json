@@ -1,0 +1,58 @@
+{
+  "$id": "teleiosis://schemas/evidence-envelope.v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "actor": {
+      "type": "object"
+    },
+    "artifact_path": {
+      "type": "string"
+    },
+    "artifact_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "candidate_identity": {
+      "$ref": "candidate-identity.schema.json"
+    },
+    "cost": {
+      "type": "object"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "evidence_level": {
+      "enum": [
+        "L1",
+        "L2",
+        "L3",
+        "L4"
+      ]
+    },
+    "latency_seconds": {
+      "minimum": 0,
+      "type": "number"
+    },
+    "oracle": {
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "teleiosis.evidence_envelope.v1"
+    },
+    "source_type": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "candidate_identity",
+    "source_type",
+    "evidence_level",
+    "oracle",
+    "artifact_sha256",
+    "actor",
+    "created_at"
+  ],
+  "type": "object"
+}

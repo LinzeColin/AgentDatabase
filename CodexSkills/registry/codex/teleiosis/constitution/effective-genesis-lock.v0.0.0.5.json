@@ -1,0 +1,61 @@
+{
+  "amendments": [
+    {
+      "amendment_id": "WBI-GB-AMENDMENT-001",
+      "authorization": "explicit-user-instruction-2026-07-26",
+      "path": "constitution/amendments/WBI-GB-AMENDMENT-001-v0.0.0.2.zh-CN.md",
+      "requirements": [
+        "WBI-GB-028"
+      ],
+      "sha256": "57d13f47d3a15c72a268d62d00987b5d2cfb763d5133fb8284ec47a93036bedb",
+      "version": "v0.0.0.2"
+    },
+    {
+      "amendment_id": "WBI-GB-AMENDMENT-002",
+      "authorization": "explicit-user-instruction-2026-07-29",
+      "path": "constitution/amendments/WBI-GB-AMENDMENT-002-v0.0.0.3.zh-CN.md",
+      "requirements": [
+        "WBI-GB-029"
+      ],
+      "sha256": "26698a59ec401512add59e8b12b9111fd7d149cd1c787746d9b7017b2aa6fde8",
+      "version": "v0.0.0.3"
+    },
+    {
+      "amendment_id": "WBI-GB-AMENDMENT-003",
+      "authorization": "explicit-owner-approval-2026-08-02",
+      "path": "constitution/amendments/WBI-GB-AMENDMENT-003-v0.0.0.4.zh-CN.md",
+      "requirements": [
+        "WBI-GB-030",
+        "WBI-GB-031",
+        "WBI-GB-032"
+      ],
+      "sha256": "5eb3c318e9bea4fcd3bcf3d07cafa5dc2005d77b3d14f90e5cb5ea5d69dcbcca",
+      "version": "v0.0.0.4"
+    },
+    {
+      "amendment_id": "WBI-GB-AMENDMENT-004",
+      "authorization": "explicit-owner-instruction-2026-08-03",
+      "path": "constitution/amendments/WBI-GB-AMENDMENT-004-v0.0.0.5.zh-CN.md",
+      "requirements": [
+        "WBI-GB-033",
+        "WBI-GB-034",
+        "WBI-GB-035",
+        "WBI-GB-036",
+        "WBI-GB-037",
+        "WBI-GB-038",
+        "WBI-GB-039",
+        "WBI-GB-040",
+        "WBI-GB-041",
+        "WBI-GB-042"
+      ],
+      "sha256": "34f14297cbfc88bc9fc17797dd51f5856cf56ddb1a1bd248aa9c783ba799cb56",
+      "version": "v0.0.0.5"
+    }
+  ],
+  "base_locked_sha256": "14ab08b9053db4ca87140e59a49f1de8105a718a87ec2d55590c6487c1a77086",
+  "effective_baseline_id": "WBI-GB-CANDIDATE-001+A001+A002+A003+A004",
+  "effective_composite_sha256": "d7349b951034ba2b5335c94ff7cfbc5bb472524c39010af66877c21c9e4f5b96",
+  "effective_version": "v0.0.0.5",
+  "schema_version": "teleiosis.effective_genesis_lock.v5",
+  "status": "LOCKED_APPEND_ONLY_COMPOSITE"
+}

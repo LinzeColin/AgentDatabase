@@ -1,0 +1,26 @@
+[Unit]
+Description=Memory Atlas remote authority reconciliation
+After=network-online.target docker.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=ubuntu
+Group=ubuntu
+EnvironmentFile=/srv/linze/secrets/memory-atlas.env
+Environment=GH_CONFIG_DIR=/srv/linze/state/memory-atlas/gh-config
+WorkingDirectory=/srv/linze/apps/agentdatabase/current
+ExecStart=/srv/linze/venvs/memory-atlas/bin/python -B -m OpenAIDatabase.scripts.memory_atlas_private reconcile
+Nice=10
+IOSchedulingClass=best-effort
+IOSchedulingPriority=6
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/srv/linze/state/memory-atlas /srv/linze/work/memory-atlas /srv/linze/apps/memory-atlas/shared/data /srv/linze/apps/status/data
+UMask=0077
+TimeoutStartSec=30min
+
+[Install]
+WantedBy=multi-user.target

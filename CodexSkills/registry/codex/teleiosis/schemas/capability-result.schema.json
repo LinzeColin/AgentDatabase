@@ -1,0 +1,56 @@
+{
+  "$id": "teleiosis://schemas/capability-result.v5",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "candidate_revision_id": {
+      "type": "string"
+    },
+    "capabilities": {
+      "type": "array"
+    },
+    "decision": {
+      "enum": [
+        "KEEP",
+        "REVERT",
+        "NO_CHANGE",
+        "BLOCKED"
+      ]
+    },
+    "evidence_files": {
+      "type": "array"
+    },
+    "module": {
+      "enum": [
+        "T",
+        "S",
+        "P",
+        "A"
+      ]
+    },
+    "run_id": {
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "teleiosis.capability_result.v5"
+    },
+    "stage_index": {
+      "maximum": 35,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "summary": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "run_id",
+    "stage_index",
+    "module",
+    "candidate_revision_id",
+    "decision",
+    "capabilities"
+  ],
+  "type": "object"
+}

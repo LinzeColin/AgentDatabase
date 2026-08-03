@@ -1,4 +1,4 @@
-import { Activity, Blocks, CalendarDays, Cloud, Home, LayoutDashboard, Network, Orbit, RefreshCw, Search } from "lucide-react";
+import { Activity, Blocks, CalendarDays, Cloud, HardDrive, Home, LayoutDashboard, Network, Orbit, RefreshCw, Scale, Search, ShieldCheck } from "lucide-react";
 import type { ComponentType } from "react";
 import type { AtlasFilters, AtlasNode, ViewKey } from "../../types";
 import { zhCNCopy } from "../../i18n/zh-CN";
@@ -441,12 +441,15 @@ export const views: Array<{ key: ViewKey; label: string; icon: ComponentType<{ s
   { key: "wordcloud", label: uiCopy.navigation.views.wordcloud, icon: Cloud },
   { key: "search", label: uiCopy.navigation.views.search, icon: Search },
   { key: "summary", label: uiCopy.navigation.views.summary, icon: RefreshCw },
+  { key: "failureCompound", label: uiCopy.navigation.views.failureCompound, icon: ShieldCheck },
+  { key: "behaviorEconomy", label: uiCopy.navigation.views.behaviorEconomy, icon: Scale },
+  { key: "runtime", label: uiCopy.navigation.views.runtime, icon: HardDrive },
 ];
 
 
 
 export const navigationGroups: Array<{
-  id: "judgment" | "exploration" | "reflection";
+  id: "judgment" | "exploration" | "reflection" | "compound" | "operations";
   label: string;
   question: string;
   viewKeys: ViewKey[];
@@ -454,11 +457,13 @@ export const navigationGroups: Array<{
   { id: "judgment", label: "判断", question: "我现在应该先判断什么", viewKeys: ["home", "summary"] },
   { id: "exploration", label: "探索", question: "我需要从哪里找证据", viewKeys: ["galaxy", "notion", "timeline", "search"] },
   { id: "reflection", label: "复盘", question: "哪里值得投入或降噪", viewKeys: ["roi", "obsidian", "contribution", "wordcloud"] },
+  { id: "compound", label: "复利", question: "哪些错误已经变成长期资产", viewKeys: ["failureCompound", "behaviorEconomy"] },
+  { id: "operations", label: "运行", question: "数据、备份与恢复是否可信", viewKeys: ["runtime"] },
 ];
 
 
 
-export const visualFocusViews: ViewKey[] = ["home", "galaxy", "notion", "roi", "obsidian", "timeline", "contribution", "wordcloud", "summary"];
+export const visualFocusViews: ViewKey[] = ["home", "galaxy", "notion", "roi", "obsidian", "timeline", "contribution", "wordcloud", "summary", "failureCompound", "behaviorEconomy", "runtime"];
 
 
 

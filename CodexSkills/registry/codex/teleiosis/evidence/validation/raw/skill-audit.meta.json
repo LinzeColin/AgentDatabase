@@ -1,0 +1,12 @@
+{
+  "label": "skill-audit",
+  "command": [
+    "/opt/pyvenv/bin/python3",
+    "scripts/teleiosis.py",
+    "skill-audit"
+  ],
+  "returncode": 0,
+  "seconds": 0.528,
+  "stdout_sha256": "e92f745c99d2de610e35427ffbc1560c86af39195c7582e4e798ca4bde4ae66a",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

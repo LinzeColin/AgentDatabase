@@ -1,0 +1,111 @@
+{
+  "schema_version": "memory_atlas.source_registry.v1",
+  "policy": {
+    "discovery": "explicit_roots_only",
+    "raw_bytes": "lossless_no_redaction_no_encryption",
+    "github_private_mirror": "lossless_age_encrypted_release_full_snapshot",
+    "local_payload_retention": "zero_after_each_run",
+    "standalone_credentials": "excluded_as_configuration_not_product_memory",
+    "symlinks": "never_follow",
+    "missing_required": "WAITING_SOURCE",
+    "missing_optional": "visible_gap_not_success",
+    "source_runner": "generic_one_shot; scheduler binding must be separately evidenced"
+  },
+  "sources": [
+    {
+      "source_id": "codex_state",
+      "label_zh": "Codex 状态数据库",
+      "path_template": "$HOME/.codex/state_5.sqlite",
+      "kind": "sqlite",
+      "required": true,
+      "recursive": false,
+      "include_globs": ["*"]
+    },
+    {
+      "source_id": "codex_sessions",
+      "label_zh": "Codex 活跃会话",
+      "path_template": "$HOME/.codex/sessions",
+      "kind": "files",
+      "required": true,
+      "recursive": true,
+      "include_globs": ["**/*"]
+    },
+    {
+      "source_id": "codex_archived_sessions",
+      "label_zh": "Codex 归档会话",
+      "path_template": "$HOME/.codex/archived_sessions",
+      "kind": "files",
+      "required": false,
+      "recursive": true,
+      "include_globs": ["**/*"]
+    },
+    {
+      "source_id": "codex_memories",
+      "label_zh": "Codex 记忆",
+      "path_template": "$HOME/.codex/memories",
+      "kind": "files",
+      "required": false,
+      "recursive": true,
+      "include_globs": ["**/*"]
+    },
+    {
+      "source_id": "codex_attachments",
+      "label_zh": "Codex 附件",
+      "path_template": "$HOME/.codex/attachments",
+      "kind": "files",
+      "required": false,
+      "recursive": true,
+      "include_globs": ["**/*"]
+    },
+    {
+      "source_id": "codex_automations",
+      "label_zh": "Codex Automation 配置与运行记忆",
+      "path_template": "$HOME/.codex/automations",
+      "kind": "files",
+      "required": true,
+      "recursive": true,
+      "include_globs": ["**/*.toml", "**/*.md", "**/*.json", "**/*.jsonl"]
+    },
+    {
+      "source_id": "codex_tasks",
+      "label_zh": "Codex 本机任务",
+      "path_template": "$HOME/.codex/tasks",
+      "kind": "files",
+      "required": false,
+      "recursive": true,
+      "include_globs": ["**/*"]
+    },
+    {
+      "source_id": "chatgpt_exports",
+      "label_zh": "ChatGPT 官方导出",
+      "env_var": "MEMORY_ATLAS_CHATGPT_EXPORT_ROOTS",
+      "path_template": "",
+      "kind": "files",
+      "required": false,
+      "recursive": true,
+      "include_globs": ["**/*"]
+    },
+    {
+      "source_id": "openaidatabase_live_data",
+      "label_zh": "OpenAIDatabase 迁移期活数据",
+      "env_var": "MEMORY_ATLAS_OPENAI_DATABASE_DATA_ROOTS",
+      "path_template": "",
+      "kind": "files",
+      "required": false,
+      "recursive": true,
+      "include_globs": ["**/*"],
+      "exclude_globs": ["**/__pycache__/**", "**/*.pyc"]
+    },
+    {
+      "source_id": "verified_evidence_adapters",
+      "label_zh": "可信结果证据适配器输出",
+      "env_var": "MEMORY_ATLAS_VERIFIED_EVIDENCE_ROOTS",
+      "path_template": "",
+      "kind": "evidence_adapter",
+      "required": false,
+      "recursive": true,
+      "include_globs": ["**/*.json", "**/*.jsonl", "**/*.ndjson"],
+      "exclude_globs": ["**/__pycache__/**", "**/*.pyc"]
+    }
+  ]
+}

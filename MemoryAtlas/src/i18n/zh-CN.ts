@@ -23,6 +23,9 @@ export const zhCNCopy: ChineseUiCopy = {
       wordcloud: "反复出现什么",
       search: "查找与核对",
       summary: "决定下一步",
+      failureCompound: "错误是否已成资产",
+      behaviorEconomy: "投入换来什么结果",
+      runtime: "数据是否可信可恢复",
     },
   },
   metrics: {

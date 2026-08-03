@@ -1,0 +1,65 @@
+{
+  "schema_version": "memory_atlas.protected_inventory.v1",
+  "before_subject": "pristine clone of origin/main d8e343c7590ed41344522abb4f63a9bf32c67f62",
+  "after_subject": "integration worktree",
+  "before": {
+    "MemoryAtlas/public": {
+      "exists": false,
+      "file_count": 0,
+      "total_bytes": 0,
+      "inventory_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "MemoryAtlas/src/data": {
+      "exists": true,
+      "file_count": 1,
+      "total_bytes": 6457,
+      "inventory_sha256": "e0bbdb76bf7ff99d4df395ce94cd30f651a8a52cbd1d11de8ad9ebfc7342c602"
+    },
+    "MemoryAtlas/src/fixtures": {
+      "exists": true,
+      "file_count": 3,
+      "total_bytes": 20568,
+      "inventory_sha256": "3694e9cae899ee6777fe1b679bd11e80d3a00db2aff2b94f5957d94b9250dc4d"
+    },
+    "OpenAIDatabase/data": {
+      "exists": true,
+      "file_count": 702,
+      "total_bytes": 560167029,
+      "inventory_sha256": "fd1fac83575b792aa6741024beaad2403189eeb76e235456ea9f504327cf7da7"
+    }
+  },
+  "after": {
+    "MemoryAtlas/public": {
+      "exists": false,
+      "file_count": 0,
+      "total_bytes": 0,
+      "inventory_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "MemoryAtlas/src/data": {
+      "exists": true,
+      "file_count": 1,
+      "total_bytes": 6457,
+      "inventory_sha256": "e0bbdb76bf7ff99d4df395ce94cd30f651a8a52cbd1d11de8ad9ebfc7342c602"
+    },
+    "MemoryAtlas/src/fixtures": {
+      "exists": true,
+      "file_count": 3,
+      "total_bytes": 20568,
+      "inventory_sha256": "3694e9cae899ee6777fe1b679bd11e80d3a00db2aff2b94f5957d94b9250dc4d"
+    },
+    "OpenAIDatabase/data": {
+      "exists": true,
+      "file_count": 702,
+      "total_bytes": 560167029,
+      "inventory_sha256": "fd1fac83575b792aa6741024beaad2403189eeb76e235456ea9f504327cf7da7"
+    }
+  },
+  "unchanged": [
+    "MemoryAtlas/public",
+    "MemoryAtlas/src/data",
+    "MemoryAtlas/src/fixtures",
+    "OpenAIDatabase/data"
+  ],
+  "changed": [],
+  "note": "MemoryAtlas/public does not exist in this repository; recorded as absent in both states rather than created."
+}

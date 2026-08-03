@@ -1,0 +1,301 @@
+{
+  "schema_version": "1.2",
+  "policy": {
+    "champion_scope": "每次运行必须覆盖全部 required=true 的竞品；任何缺跑均为 CHAMPION_NOT_PROVEN",
+    "dual_role_required": true,
+    "same_total_budget": true,
+    "final_test_isolation": true,
+    "external_self_scores_are_untrusted": true,
+    "core_required_scope": [
+      "gepa",
+      "autoresearch",
+      "meta_harness",
+      "promptfoo"
+    ],
+    "enabled_external_becomes_required": true,
+    "dynamic_dimension_freeze": true,
+    "ceiling_tie_only": true,
+    "claim_boundary": "sealed dataset + identities + versions + total budget + dimensions + repeats",
+    "native_only_core_paths": true,
+    "local_same_name_simulation_forbidden": true,
+    "omni_two_stage_required": true
+  },
+  "competitors": [
+    {
+      "name": "gepa",
+      "display_name": "GEPA",
+      "required": true,
+      "roles": [
+        "same_layer_competitor",
+        "routable_executor"
+      ],
+      "native_mode": "official gepa.optimize_anything only",
+      "fallback_mode": "none; missing API or candidate blocks",
+      "strengths": [
+        "full-trace reflection",
+        "mutation",
+        "Pareto search",
+        "component optimization"
+      ],
+      "source": "https://github.com/gepa-ai/gepa",
+      "version_basis": "0.1.4",
+      "evidence_rule": "candidate must be independently rescored; missing finalist blocks when required"
+    },
+    {
+      "name": "autoresearch",
+      "display_name": "AutoResearch",
+      "required": true,
+      "roles": [
+        "same_layer_competitor",
+        "routable_executor"
+      ],
+      "native_mode": "verified official/controlled Git workspace + isolated real external command",
+      "fallback_mode": "none; local same-name simulation forbidden",
+      "strengths": [
+        "one attributable change",
+        "fixed budget",
+        "keep/discard",
+        "experiment memory"
+      ],
+      "source": "https://github.com/karpathy/autoresearch",
+      "version_basis": "official karpathy/autoresearch workspace observed at runtime",
+      "evidence_rule": "candidate must be independently rescored; missing finalist blocks when required"
+    },
+    {
+      "name": "meta_harness",
+      "display_name": "MetaHarness",
+      "required": true,
+      "roles": [
+        "same_layer_competitor",
+        "routable_executor"
+      ],
+      "native_mode": "verified official/controlled Git workspace + official reference entrypoint + isolated real command",
+      "fallback_mode": "none; local same-name simulation forbidden",
+      "strengths": [
+        "memory",
+        "retrieval",
+        "context",
+        "tools",
+        "recovery paths"
+      ],
+      "source": "https://github.com/stanford-iris-lab/meta-harness",
+      "version_basis": "official stanford-iris-lab/meta-harness workspace observed at runtime",
+      "evidence_rule": "candidate must be independently rescored; missing finalist blocks when required"
+    },
+    {
+      "name": "promptfoo",
+      "display_name": "Promptfoo",
+      "required": true,
+      "roles": [
+        "same_layer_competitor",
+        "routable_executor"
+      ],
+      "native_mode": "official promptfoo optimize/eval/redteam; winner extracted from exact Best prompt section",
+      "fallback_mode": "none; generic fenced output and local candidate fallback forbidden",
+      "strengths": [
+        "assertions",
+        "evaluation",
+        "regression",
+        "red team",
+        "CI gate"
+      ],
+      "source": "https://github.com/promptfoo/promptfoo",
+      "version_basis": "0.121.20",
+      "evidence_rule": "candidate must be independently rescored; missing finalist blocks when required",
+      "role_contract": "target provider and default suggestionsProvider are separate logical roles"
+    },
+    {
+      "name": "dspy_mipro",
+      "display_name": "DSPy MIPROv2",
+      "required": false,
+      "roles": [
+        "same_layer_competitor",
+        "routable_executor"
+      ],
+      "native_mode": "provider-neutral external JSON bridge",
+      "strengths": [
+        "programmatic prompt optimization",
+        "few-shot search"
+      ],
+      "source": "https://github.com/stanfordnlp/dspy",
+      "fallback_mode": "external bridge required; no implicit imitation",
+      "evidence_rule": "candidate must be independently rescored; missing finalist blocks when required"
+    },
+    {
+      "name": "textgrad",
+      "display_name": "TextGrad",
+      "required": false,
+      "roles": [
+        "same_layer_competitor",
+        "routable_executor"
+      ],
+      "native_mode": "provider-neutral external JSON bridge",
+      "strengths": [
+        "textual gradients",
+        "iterative optimization"
+      ],
+      "source": "https://github.com/zou-group/textgrad",
+      "fallback_mode": "external bridge required; no implicit imitation",
+      "evidence_rule": "candidate must be independently rescored; missing finalist blocks when required"
+    },
+    {
+      "name": "opro",
+      "display_name": "OPRO",
+      "required": false,
+      "roles": [
+        "same_layer_competitor",
+        "routable_executor"
+      ],
+      "native_mode": "provider-neutral external JSON bridge",
+      "strengths": [
+        "optimization by prompting",
+        "score-conditioned proposal"
+      ],
+      "source": "https://github.com/google-deepmind/opro",
+      "fallback_mode": "external bridge required; no implicit imitation",
+      "evidence_rule": "candidate must be independently rescored; missing finalist blocks when required"
+    },
+    {
+      "name": "promptwizard",
+      "display_name": "PromptWizard",
+      "required": false,
+      "roles": [
+        "same_layer_competitor",
+        "routable_executor"
+      ],
+      "native_mode": "provider-neutral external JSON bridge",
+      "strengths": [
+        "prompt and example optimization"
+      ],
+      "source": "https://github.com/microsoft/PromptWizard",
+      "fallback_mode": "external bridge required; no implicit imitation",
+      "evidence_rule": "candidate must be independently rescored; missing finalist blocks when required"
+    },
+    {
+      "name": "promptagent",
+      "display_name": "PromptAgent",
+      "required": false,
+      "roles": [
+        "same_layer_competitor",
+        "routable_executor"
+      ],
+      "native_mode": "provider-neutral external JSON bridge",
+      "strengths": [
+        "agentic search",
+        "Monte Carlo tree search"
+      ],
+      "source": "https://github.com/XinyuanWangCS/PromptAgent",
+      "fallback_mode": "external bridge required; no implicit imitation",
+      "evidence_rule": "candidate must be independently rescored; missing finalist blocks when required"
+    },
+    {
+      "name": "sammo",
+      "display_name": "SAMMO",
+      "required": false,
+      "roles": [
+        "same_layer_competitor",
+        "routable_executor"
+      ],
+      "native_mode": "provider-neutral external JSON bridge",
+      "strengths": [
+        "prompt programs",
+        "search and mutation"
+      ],
+      "source": "https://github.com/microsoft/sammo",
+      "fallback_mode": "external bridge required; no implicit imitation",
+      "evidence_rule": "candidate must be independently rescored; missing finalist blocks when required"
+    },
+    {
+      "name": "opik",
+      "display_name": "Opik Optimizer",
+      "required": false,
+      "roles": [
+        "same_layer_competitor",
+        "routable_executor"
+      ],
+      "native_mode": "provider-neutral external JSON bridge",
+      "source": "https://github.com/comet-ml/opik",
+      "fallback_mode": "external bridge required; no implicit imitation",
+      "evidence_rule": "candidate must be independently rescored; missing finalist blocks when required"
+    },
+    {
+      "name": "mlflow",
+      "display_name": "MLflow Prompt Optimization",
+      "required": false,
+      "roles": [
+        "same_layer_competitor",
+        "routable_executor"
+      ],
+      "native_mode": "provider-neutral external JSON bridge",
+      "source": "https://github.com/mlflow/mlflow",
+      "fallback_mode": "external bridge required; no implicit imitation",
+      "evidence_rule": "candidate must be independently rescored; missing finalist blocks when required"
+    },
+    {
+      "name": "openai_optimizer",
+      "display_name": "OpenAI Prompt Optimizer",
+      "required": false,
+      "roles": [
+        "same_layer_competitor",
+        "routable_executor"
+      ],
+      "native_mode": "provider-neutral external JSON bridge",
+      "source": "https://platform.openai.com/docs/guides/prompt-optimization",
+      "fallback_mode": "external bridge required; no implicit imitation",
+      "evidence_rule": "candidate must be independently rescored; missing finalist blocks when required"
+    },
+    {
+      "name": "anthropic_generator",
+      "display_name": "Anthropic Prompt Generator",
+      "required": false,
+      "roles": [
+        "same_layer_competitor",
+        "routable_executor"
+      ],
+      "native_mode": "provider-neutral external JSON bridge",
+      "source": "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/prompt-generator",
+      "fallback_mode": "external bridge required; no implicit imitation",
+      "evidence_rule": "candidate must be independently rescored; missing finalist blocks when required"
+    },
+    {
+      "name": "google_optimizer",
+      "display_name": "Google Prompt Optimizer",
+      "required": false,
+      "roles": [
+        "same_layer_competitor",
+        "routable_executor"
+      ],
+      "native_mode": "provider-neutral external JSON bridge",
+      "source": "https://cloud.google.com/vertex-ai/generative-ai/docs/learn/prompts/prompt-optimizer",
+      "fallback_mode": "external bridge required; no implicit imitation",
+      "evidence_rule": "candidate must be independently rescored; missing finalist blocks when required"
+    },
+    {
+      "name": "prompthub",
+      "display_name": "PromptHub",
+      "required": false,
+      "roles": [
+        "same_layer_competitor",
+        "routable_executor"
+      ],
+      "native_mode": "provider-neutral external JSON bridge",
+      "source": "https://www.prompthub.us/",
+      "fallback_mode": "external bridge required; no implicit imitation",
+      "evidence_rule": "candidate must be independently rescored; missing finalist blocks when required"
+    },
+    {
+      "name": "promptlayer",
+      "display_name": "PromptLayer",
+      "required": false,
+      "roles": [
+        "same_layer_competitor",
+        "routable_executor"
+      ],
+      "native_mode": "provider-neutral external JSON bridge",
+      "source": "https://docs.promptlayer.com/",
+      "fallback_mode": "external bridge required; no implicit imitation",
+      "evidence_rule": "candidate must be independently rescored; missing finalist blocks when required"
+    }
+  ],
+  "accessed_at": "2026-08-03"
+}

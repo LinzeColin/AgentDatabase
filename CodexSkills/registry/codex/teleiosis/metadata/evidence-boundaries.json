@@ -1,0 +1,19 @@
+{
+  "field_validation": "PENDING",
+  "formal_independent_review": "UNAVAILABLE",
+  "formal_pass_authority": "external independent verifier",
+  "internal_engines_cannot_issue_formal_pass": [
+    "T",
+    "S",
+    "P",
+    "A"
+  ],
+  "local_deterministic_engineering": "PASS_AFTER_EMBEDDED_VALIDATION",
+  "native_competitor_evidence": "NOT_CLAIMED",
+  "persona_reason": "未取得并载入实际内层 runtime dossier，因此不计人物专家贡献；使用中立六角色复审。",
+  "persona_team_execution": "INSUFFICIENT_ROSTER_FALLBACK",
+  "production_blind_test": "NOT_RUN",
+  "review_mode_in_this_package": "role_separated_same_model",
+  "schema_version": "teleiosis.evidence_boundaries.v5",
+  "target_registry_install": "NOT_RUN"
+}

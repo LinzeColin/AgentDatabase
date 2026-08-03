@@ -1,0 +1,12 @@
+[Unit]
+Description=Memory Atlas Docker bridge to loopback API socket
+After=network-online.target docker.service
+Wants=network-online.target docker.service
+
+[Socket]
+ListenStream=10.0.0.1:18766
+Accept=no
+NoDelay=true
+
+[Install]
+WantedBy=sockets.target

@@ -1,0 +1,141 @@
+{
+  "formal_independent_pass": "UNAVAILABLE",
+  "mode": "role_separated_same_model",
+  "remediation": "所有六类 Finding 已进入 v5 代码、测试、证据和边界。",
+  "roles": [
+    {
+      "changed_artifacts": [
+        "scripts/teleiosis_core/",
+        "evidence/validation/"
+      ],
+      "decision": "KEEP",
+      "developer_burden_delta": {
+        "builder_tasks_removed": 1,
+        "closed_findings": [
+          "R1-01"
+        ]
+      },
+      "findings": [
+        {
+          "id": "R1-01",
+          "severity": "P1",
+          "text": "需明确 v5 用户可见收益与一个 ZIP"
+        }
+      ],
+      "input_capsule_hash": "e7f9ca033cd87037e21bc910b08d2fbd1a23b3b0074c48224ec153bd61068f65",
+      "role": "产品与用户价值"
+    },
+    {
+      "changed_artifacts": [
+        "scripts/teleiosis_core/",
+        "evidence/validation/"
+      ],
+      "decision": "KEEP",
+      "developer_burden_delta": {
+        "builder_tasks_removed": 1,
+        "closed_findings": [
+          "R1-02"
+        ]
+      },
+      "findings": [
+        {
+          "id": "R1-02",
+          "severity": "P1",
+          "text": "需用执行模块取代摘要合同"
+        }
+      ],
+      "input_capsule_hash": "ddf76a70665ccf3e0ff31c50bbd664029aadaff0d9a9f068c470fa91e7f08f94",
+      "role": "软件架构与实现"
+    },
+    {
+      "changed_artifacts": [
+        "scripts/teleiosis_core/",
+        "evidence/validation/"
+      ],
+      "decision": "KEEP",
+      "developer_burden_delta": {
+        "builder_tasks_removed": 1,
+        "closed_findings": [
+          "R1-03"
+        ]
+      },
+      "findings": [
+        {
+          "id": "R1-03",
+          "severity": "P1",
+          "text": "需保护 Genesis/路径/凭证并记录来源边界"
+        }
+      ],
+      "input_capsule_hash": "ac903ca2e38ee62f24ed5c90f770c7953420fe3b384be8eb2ad9812e0fd06567",
+      "role": "数据安全与隐私"
+    },
+    {
+      "changed_artifacts": [
+        "scripts/teleiosis_core/",
+        "evidence/validation/"
+      ],
+      "decision": "KEEP",
+      "developer_burden_delta": {
+        "builder_tasks_removed": 1,
+        "closed_findings": [
+          "R1-04"
+        ]
+      },
+      "findings": [
+        {
+          "id": "R1-04",
+          "severity": "P1",
+          "text": "需验证升级回滚和冷解压"
+        }
+      ],
+      "input_capsule_hash": "cebd856cccb8752472421cc5574ff7ea1781d5df551fd6f1a4db4b321ea723c9",
+      "role": "SRE部署与恢复"
+    },
+    {
+      "changed_artifacts": [
+        "scripts/teleiosis_core/",
+        "evidence/validation/"
+      ],
+      "decision": "KEEP",
+      "developer_burden_delta": {
+        "builder_tasks_removed": 1,
+        "closed_findings": [
+          "R1-05"
+        ]
+      },
+      "findings": [
+        {
+          "id": "R1-05",
+          "severity": "P1",
+          "text": "需保存三遍原始日志和完整追踪"
+        }
+      ],
+      "input_capsule_hash": "6a268e65678eaadfd9ec4d3954fed7dfd1cfc2356451b80f48c829dfd5450033",
+      "role": "测试验收与证据"
+    },
+    {
+      "changed_artifacts": [
+        "scripts/teleiosis_core/",
+        "evidence/validation/"
+      ],
+      "decision": "KEEP",
+      "developer_burden_delta": {
+        "builder_tasks_removed": 1,
+        "closed_findings": [
+          "R1-06"
+        ]
+      },
+      "findings": [
+        {
+          "id": "R1-06",
+          "severity": "P1",
+          "text": "需证明不冒充 v3 字节复制、persona 或 formal PASS"
+        }
+      ],
+      "input_capsule_hash": "e2ede99106c6608ea0ac1ab31e6f07c83d1253d42390729e5f3399c49b7f4144",
+      "role": "反证范围与阻塞"
+    }
+  ],
+  "round": 1,
+  "schema_version": "teleiosis.role_review.v5"
+}

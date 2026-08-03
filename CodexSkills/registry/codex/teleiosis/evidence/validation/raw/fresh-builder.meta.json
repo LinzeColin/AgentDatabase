@@ -1,0 +1,13 @@
+{
+  "label": "fresh-builder",
+  "command": [
+    "/opt/pyvenv/bin/python3",
+    "scripts/teleiosis.py",
+    "taskpack",
+    "fresh-builder"
+  ],
+  "returncode": 0,
+  "seconds": 0.527,
+  "stdout_sha256": "075218e8e940ad4b76cd13a68723a8f7a7e64d8e94c72f5e3587eaf8a9a4fcdd",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

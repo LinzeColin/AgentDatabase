@@ -6,6 +6,7 @@ import { MemoryAtlasHelpPanel } from "../components/help/MemoryAtlasHelpPanel";
 import { ProposalWorkspace, WritebackProposalPanel } from "../features/actions";
 import { ContributionPeriodInspector, InteractionLens, NodeInspector } from "../features/settings";
 import { CommandPalettePanel, OwnerDailyEntry, OwnerDailyWorkspace } from "../features/sync";
+import { ThemeControls, useMemoryAtlasTheme } from "../features/v31";
 import { useAtlasData } from "../providers/AtlasDataProvider";
 import { useAtlasRuntime } from "../providers/AtlasRuntimeProvider";
 import { useAtlasWorkspace } from "../providers/AtlasWorkspaceProvider";
@@ -34,6 +35,7 @@ import { MachineFieldDetails } from "../shared/ui/display";
 import { Metric, SelectFilter } from "../shared/ui/primitives";
 
 export function MemoryAtlasShell({ children }: PropsWithChildren) {
+  const { theme, mode } = useMemoryAtlasTheme();
   const { atlas, loadError, loadState } = useAtlasData();
   const {
     activeView,
@@ -144,6 +146,8 @@ export function MemoryAtlasShell({ children }: PropsWithChildren) {
   return (
     <div
       className="app-shell"
+      data-memory-atlas-theme={theme}
+      data-memory-atlas-mode={mode}
       data-default-route-view={DEFAULT_MEMORY_ATLAS_VIEW}
       data-memory-overview-default-route="true"
       data-r2-release-identity={PRODUCT_IDENTITY_VERSION}
@@ -225,6 +229,7 @@ export function MemoryAtlasShell({ children }: PropsWithChildren) {
             <h1>{selectedTitle}</h1>
           </div>
           <div className="topbar-actions">
+            <ThemeControls />
             <div className="stat-strip" aria-label="星图总览">
               <Metric label={uiCopy.metrics.memory} value={scopedAtlas.overview.active_memory_count} />
               <Metric label={uiCopy.metrics.nodes} value={scopedAtlas.overview.node_count} />

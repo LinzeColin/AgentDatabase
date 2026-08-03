@@ -1,0 +1,729 @@
+{
+  "constraints": {
+    "acyclic": true,
+    "canonical_source": "CANONICAL_STATE.json",
+    "duplicate_approval_nodes": 0,
+    "real_time_wait_nodes": 0
+  },
+  "schema_version": "teleiosis.task_dag.v5",
+  "tasks": [
+    {
+      "acceptance": "Task-specific deterministic oracle passes and no new P0/P1 remains.",
+      "category": "research",
+      "dependencies": [],
+      "evidence": "evidence/preparation/skill-pass-a.json",
+      "id": "T-001",
+      "implementation_steps": [
+        "读取永久 Genesis、v3 语义基线与 Owner v5 授权",
+        "按 ACTIVE/SUPERSEDED/CONFLICT/UNVERIFIED 冻结当前事实",
+        "禁止把目标仓观察 SHA 作为冻结点"
+      ],
+      "input": "frozen prior artifacts and current Candidate",
+      "name": "冻结 v3 Baseline 与 Owner v5 授权",
+      "oracle": "oracle_t_001",
+      "output": "CANONICAL_STATE.json",
+      "risk": "错误权威顺序会造成范围漂移或覆盖移动 main 的更新实现",
+      "rollback": "restore previous staged tree or Candidate revision",
+      "stop_condition": "hard gate failure, scope expansion, unavailable authority, or evidence boundary",
+      "test": "tests/test_integrity.py::IntegrityTests::test_no_formal_pass_claim_in_state",
+      "threshold": "current_phase=FROZEN_CANDIDATE；冲突列表为空；四类未验证边界均保留"
+    },
+    {
+      "acceptance": "Task-specific deterministic oracle passes and no new P0/P1 remains.",
+      "category": "implementation",
+      "dependencies": [
+        "T-001"
+      ],
+      "evidence": "evidence/validation/ac-003.json",
+      "id": "T-002",
+      "implementation_steps": [
+        "只追加 Amendment 003，不改写永久 Genesis",
+        "新增 WBI-GB-030/031/032",
+        "重新生成 effective requirements 与 lock"
+      ],
+      "input": "frozen prior artifacts and current Candidate",
+      "name": "追加 Amendment 003 并生成有效需求",
+      "oracle": "oracle_t_002",
+      "output": "constitution/amendments/WBI-GB-AMENDMENT-004-v0.0.0.5.zh-CN.md",
+      "risk": "修改 Genesis 或重编号历史要求会破坏宪法谱系",
+      "rollback": "restore previous staged tree or Candidate revision",
+      "stop_condition": "hard gate failure, scope expansion, unavailable authority, or evidence boundary",
+      "test": "tests/test_integrity.py::IntegrityTests::test_amendment_three_exists",
+      "threshold": "Genesis SHA-256 精确不变；有效要求总数为 32"
+    },
+    {
+      "acceptance": "Task-specific deterministic oracle passes and no new P0/P1 remains.",
+      "category": "implementation",
+      "dependencies": [
+        "T-002"
+      ],
+      "evidence": "evidence/validation/ac-004.json",
+      "id": "T-003",
+      "implementation_steps": [
+        "定义 T/S/P/A 四个正交引擎职责",
+        "冻结共享 Candidate 与 Evidence Schema",
+        "禁止新增独立 Lab Registry Skill"
+      ],
+      "input": "frozen prior artifacts and current Candidate",
+      "name": "建立 T/S/P/A 能力合同和共享 Schema",
+      "oracle": "oracle_t_003",
+      "output": "metadata/capability-manifest.json",
+      "risk": "能力重叠或 ID 冲突会导致证据重复、遗漏或静默路由",
+      "rollback": "restore previous staged tree or Candidate revision",
+      "stop_condition": "hard gate failure, scope expansion, unavailable authority, or evidence boundary",
+      "test": "tests/test_integrity.py::IntegrityTests::test_capability_manifests",
+      "threshold": "T/S/P/A 均非空且 capability_id 全局唯一；总能力不少于 60"
+    },
+    {
+      "acceptance": "Task-specific deterministic oracle passes and no new P0/P1 remains.",
+      "category": "implementation",
+      "dependencies": [
+        "T-003"
+      ],
+      "evidence": "evidence/validation/ac-005.json",
+      "id": "T-004",
+      "implementation_steps": [
+        "实现 3 组×3 轮的 T-C-S-C-P-C-A-C 序列",
+        "每阶段绑定 Candidate tree hash 与前序 hash-chain",
+        "禁止跳段、嵌套公共 Run 和跨 Candidate 拼证"
+      ],
+      "input": "frozen prior artifacts and current Candidate",
+      "name": "实现全量非路由 Candidate 控制器",
+      "oracle": "oracle_t_004",
+      "output": "scripts/teleiosis_core/workflow.py",
+      "risk": "顺序或身份漂移会使不同 Candidate 的证据被错误拼接",
+      "rollback": "restore previous staged tree or Candidate revision",
+      "stop_condition": "hard gate failure, scope expansion, unavailable authority, or evidence boundary",
+      "test": "tests/test_workflow.py::WorkflowTests::test_full_run_and_handoff",
+      "threshold": "一次完整 Run 恰为 36 个引擎阶段和 36 个 Candidate checkpoint"
+    },
+    {
+      "acceptance": "Task-specific deterministic oracle passes and no new P0/P1 remains.",
+      "category": "implementation",
+      "dependencies": [
+        "T-003"
+      ],
+      "evidence": "evidence/validation/ac-007.json",
+      "id": "T-005",
+      "implementation_steps": [
+        "校验参赛对象、任务集、预算、数据分区与权重",
+        "冻结 ArenaSpec 并计算协议哈希",
+        "任何冻结字段变化均 fail-closed"
+      ],
+      "input": "frozen prior artifacts and current Candidate",
+      "name": "实现 Arena 协议冻结与公平预检",
+      "oracle": "oracle_t_005",
+      "output": "scripts/teleiosis_core/arena.py",
+      "risk": "赛后改权重、预算不等或隐藏集泄漏会让排行榜无效",
+      "rollback": "restore previous staged tree or Candidate revision",
+      "stop_condition": "hard gate failure, scope expansion, unavailable authority, or evidence boundary",
+      "test": "tests/test_arena.py::ArenaTests::test_protocol_tampering_is_detected",
+      "threshold": "冻结后篡改必被拒绝；等预算与任务集必须完全一致"
+    },
+    {
+      "acceptance": "Task-specific deterministic oracle passes and no new P0/P1 remains.",
+      "category": "implementation",
+      "dependencies": [
+        "T-005"
+      ],
+      "evidence": "evidence/validation/ac-010.json",
+      "id": "T-006",
+      "implementation_steps": [
+        "独立计算经验效果榜",
+        "独立输出治理范围榜",
+        "生成 Pareto 前沿与配对差值，不以治理分覆盖效果分"
+      ],
+      "input": "frozen prior artifacts and current Candidate",
+      "name": "实现效果榜、治理榜、Pareto 与配对统计",
+      "oracle": "oracle_t_006",
+      "output": "schemas/arena-result.schema.json",
+      "risk": "单一总分可能掩盖安全、最弱切片、成本或泛化退化",
+      "rollback": "restore previous staged tree or Candidate revision",
+      "stop_condition": "hard gate failure, scope expansion, unavailable authority, or evidence boundary",
+      "test": "tests/test_arena.py::ArenaTests::test_governance_board_does_not_change_empirical_score",
+      "threshold": "三类输出字段分离；任一硬门失败时密封场状态为 BLOCKED"
+    },
+    {
+      "acceptance": "Task-specific deterministic oracle passes and no new P0/P1 remains.",
+      "category": "implementation",
+      "dependencies": [
+        "T-005"
+      ],
+      "evidence": "evidence/validation/ac-012.json",
+      "id": "T-007",
+      "implementation_steps": [
+        "定义 L1 结构审计、L2 受控模拟、L3 原生同场、L4 生产盲测",
+        "依据 adapter/native/production 授权自动封顶证据等级",
+        "未运行证据保持 NOT_CLAIMED"
+      ],
+      "input": "frozen prior artifacts and current Candidate",
+      "name": "实现 L1—L4 和外部 Adapter 边界",
+      "oracle": "oracle_t_007",
+      "output": "references/REALITY_AND_EVIDENCE_LEVELS.md",
+      "risk": "把模拟适配器写成官方原生胜负会产生虚假市场结论",
+      "rollback": "restore previous staged tree or Candidate revision",
+      "stop_condition": "hard gate failure, scope expansion, unavailable authority, or evidence boundary",
+      "test": "tests/test_arena.py::ArenaTests::test_non_native_declared_l3_is_capped_at_l2",
+      "threshold": "非官方或 adapter 运行最高 L2；无授权生产最高 L3"
+    },
+    {
+      "acceptance": "Task-specific deterministic oracle passes and no new P0/P1 remains.",
+      "category": "implementation",
+      "dependencies": [
+        "T-004",
+        "T-006",
+        "T-007"
+      ],
+      "evidence": "evidence/validation/ac-013.json",
+      "id": "T-008",
+      "implementation_steps": [
+        "只读汇总 Candidate、Acceptance、Evidence 和 world-state hash",
+        "内部引擎仅产生证据与 KEEP/REVERT/REHEAT",
+        "Formal PASS 权限仅交给外部独立 Verifier"
+      ],
+      "input": "frozen prior artifacts and current Candidate",
+      "name": "实现外部 Verifier 只读交接",
+      "oracle": "oracle_t_008",
+      "output": "schemas/external-verifier-handoff.schema.json",
+      "risk": "修改者自签 PASS 会破坏独立验收和反作弊边界",
+      "rollback": "restore previous staged tree or Candidate revision",
+      "stop_condition": "hard gate failure, scope expansion, unavailable authority, or evidence boundary",
+      "test": "tests/test_cli.py::CliTests::test_contract_never_issues_formal_pass",
+      "threshold": "任何内部命令均不得返回 FORMAL_PASS"
+    },
+    {
+      "acceptance": "Task-specific deterministic oracle passes and no new P0/P1 remains.",
+      "category": "implementation",
+      "dependencies": [
+        "T-003"
+      ],
+      "evidence": "evidence/validation/ac-014.json",
+      "id": "T-009",
+      "implementation_steps": [
+        "先严格验证来源与永久 Genesis",
+        "对旧版本做七态兼容判断并在仓外备份",
+        "在 staging 树验证后原子 swap，失败精确回滚"
+      ],
+      "input": "frozen prior artifacts and current Candidate",
+      "name": "实现事务安装、升级、备份和回滚",
+      "oracle": "oracle_t_009",
+      "output": "scripts/teleiosis_core/installer.py",
+      "risk": "整树覆盖、未知可执行冲突或非原子替换会损坏用户现有 Skill",
+      "rollback": "restore previous staged tree or Candidate revision",
+      "stop_condition": "hard gate failure, scope expansion, unavailable authority, or evidence boundary",
+      "test": "tests/test_installer.py::InstallerTests::test_upgrade_can_be_rolled_back_exactly",
+      "threshold": "全新、幂等、v3 升级、高版本拒绝、Genesis 冲突和回滚均确定性通过"
+    },
+    {
+      "acceptance": "Task-specific deterministic oracle passes and no new P0/P1 remains.",
+      "category": "testing",
+      "dependencies": [
+        "T-003",
+        "T-009"
+      ],
+      "evidence": "evidence/validation/ac-015.json",
+      "id": "T-010",
+      "implementation_steps": [
+        "拒绝 symlink、路径穿越、重复 ZIP 条目和多根目录",
+        "扫描秘密、缓存、构建垃圾与未解决标记",
+        "使用规范时间戳和排序生成确定性 ZIP"
+      ],
+      "input": "frozen prior artifacts and current Candidate",
+      "name": "实现结构、秘密、路径和 ZIP 安全验证",
+      "oracle": "oracle_t_010",
+      "output": "scripts/teleiosis_core/packaging.py",
+      "risk": "不安全 ZIP 可能覆盖目标路径、携带凭证或产生不可重现交付",
+      "rollback": "restore previous staged tree or Candidate revision",
+      "stop_condition": "hard gate failure, scope expansion, unavailable authority, or evidence boundary",
+      "test": "tests/test_packaging.py::PackagingTests::test_cold_extract_passes_strict_release_verification",
+      "threshold": "ZIP 恰有 teleiosis/ 单根；冷解压严格验证通过"
+    },
+    {
+      "acceptance": "Task-specific deterministic oracle passes and no new P0/P1 remains.",
+      "category": "review",
+      "dependencies": [
+        "T-004",
+        "T-006",
+        "T-009"
+      ],
+      "evidence": "evidence/preparation/role-review-round1.json",
+      "id": "T-011",
+      "implementation_steps": [
+        "覆盖十个正交视角",
+        "以六个隔离职责角色只读检查 Baseline/Candidate",
+        "去重 Finding 并明确独立性边界"
+      ],
+      "input": "frozen prior artifacts and current Candidate",
+      "name": "完成十视角与六角色第一轮复审",
+      "oracle": "oracle_t_011",
+      "output": "evidence/preparation/role-review-round1.json",
+      "risk": "同义复审或伪装独立 SubAgent 会制造虚假置信度",
+      "rollback": "restore previous staged tree or Candidate revision",
+      "stop_condition": "hard gate failure, scope expansion, unavailable authority, or evidence boundary",
+      "test": "tests/test_docs.py::DocumentationTests::test_two_role_review_rounds_exist_and_are_not_misrepresented",
+      "threshold": "十视角齐全；六角色齐全；mode=role_separated_same_model"
+    },
+    {
+      "acceptance": "Task-specific deterministic oracle passes and no new P0/P1 remains.",
+      "category": "remediation",
+      "dependencies": [
+        "T-011"
+      ],
+      "evidence": "evidence/preparation/skill-pass-b.json",
+      "id": "T-012",
+      "implementation_steps": [
+        "把首轮 Finding 映射到代码或合同",
+        "逐项修复并做邻域回归",
+        "记录 Developer Burden Delta 和 KEEP/REVERT"
+      ],
+      "input": "frozen prior artifacts and current Candidate",
+      "name": "整改第一轮 Finding 与回归",
+      "oracle": "oracle_t_012",
+      "output": "evidence/preparation/skill-pass-b.json",
+      "risk": "只改文案不改机制会让 Finding 假关闭并转嫁给 Builder",
+      "rollback": "restore previous staged tree or Candidate revision",
+      "stop_condition": "hard gate failure, scope expansion, unavailable authority, or evidence boundary",
+      "test": "tests/test_docs.py::DocumentationTests::test_three_skill_catalog_passes_are_evidenced",
+      "threshold": "F-001 至 F-004 的 P1 全部关闭；无新 P0/P1"
+    },
+    {
+      "acceptance": "Task-specific deterministic oracle passes and no new P0/P1 remains.",
+      "category": "review",
+      "dependencies": [
+        "T-012"
+      ],
+      "evidence": "evidence/preparation/role-review-round2.json",
+      "id": "T-013",
+      "implementation_steps": [
+        "只复审变化 Candidate、未关闭 Finding 和邻域回归",
+        "执行 final blind set",
+        "达到停止条件后禁止继续扩范围"
+      ],
+      "input": "frozen prior artifacts and current Candidate",
+      "name": "完成六角色 Delta 复审和 final blind set",
+      "oracle": "oracle_t_013",
+      "output": "evidence/preparation/role-review-round2.json",
+      "risk": "从头重复研究会污染冻结 Acceptance 并形成无限迭代",
+      "rollback": "restore previous staged tree or Candidate revision",
+      "stop_condition": "hard gate failure, scope expansion, unavailable authority, or evidence boundary",
+      "test": "tests/test_docs.py::DocumentationTests::test_two_role_review_rounds_exist_and_are_not_misrepresented",
+      "threshold": "remaining_findings 为空；new_p0_p1 为空；formal independent 仍为 UNAVAILABLE"
+    },
+    {
+      "acceptance": "Task-specific deterministic oracle passes and no new P0/P1 remains.",
+      "category": "research",
+      "dependencies": [
+        "T-001",
+        "T-012",
+        "T-013"
+      ],
+      "evidence": "evidence/preparation/skill-pass-c.json",
+      "id": "T-014",
+      "implementation_steps": [
+        "Pass A 扫描名称、description、版本、适用范围和入口",
+        "Pass B 仅对 Candidate Delta 与 Finding 重跑",
+        "Pass C 仅验证冻结 Subject/Acceptance/制品并如实记录非原生调用边界"
+      ],
+      "input": "frozen prior artifacts and current Candidate",
+      "name": "执行三次 Skill Catalog 证据扫描",
+      "oracle": "oracle_t_014",
+      "output": "references/SKILL_CATALOG_CALLS.md",
+      "risk": "为凑次数重复调用或把方法应用写成原生执行会污染审计证据",
+      "rollback": "restore previous staged tree or Candidate revision",
+      "stop_condition": "hard gate failure, scope expansion, unavailable authority, or evidence boundary",
+      "test": "tests/test_docs.py::DocumentationTests::test_three_skill_catalog_passes_are_evidenced",
+      "threshold": "A/B/C 三份证据均有不同 input hash、实质制品和 Developer Burden Delta"
+    },
+    {
+      "acceptance": "Task-specific deterministic oracle passes and no new P0/P1 remains.",
+      "category": "testing",
+      "dependencies": [
+        "T-008",
+        "T-010",
+        "T-012"
+      ],
+      "evidence": "evidence/validation/test-runs.json",
+      "id": "T-015",
+      "implementation_steps": [
+        "运行全部单元、集成、安全、故障注入和文档合同测试",
+        "连续三遍清洁执行",
+        "记录测试数量、耗时、返回码和日志哈希"
+      ],
+      "input": "frozen prior artifacts and current Candidate",
+      "name": "执行完整单元、集成、故障注入测试",
+      "oracle": "oracle_t_015",
+      "output": "tests/test_integrity.py",
+      "risk": "单次偶然通过、缓存污染或只测 HTTP/字符串不能证明可用",
+      "rollback": "restore previous staged tree or Candidate revision",
+      "stop_condition": "hard gate failure, scope expansion, unavailable authority, or evidence boundary",
+      "test": "python3 -B -m unittest discover -s tests -v",
+      "threshold": "每遍 100% PASS；测试数不少于 127；无跳过硬门"
+    },
+    {
+      "acceptance": "Task-specific deterministic oracle passes and no new P0/P1 remains.",
+      "category": "testing",
+      "dependencies": [
+        "T-009",
+        "T-015"
+      ],
+      "evidence": "evidence/preparation/fresh-builder-simulation.json",
+      "id": "T-016",
+      "implementation_steps": [
+        "仅向新上下文提供冻结候选布局",
+        "验证无需重新研究、架构、Schema、测试或回滚设计",
+        "把剩余未知压缩为真实环境绑定事项"
+      ],
+      "input": "frozen prior artifacts and current Candidate",
+      "name": "执行 Fresh Builder 安装模拟",
+      "oracle": "oracle_t_016",
+      "output": "evidence/preparation/fresh-builder-simulation.json",
+      "risk": "开放式任务会让 Build Agent 重新设计并导致版本漂移",
+      "rollback": "restore previous staged tree or Candidate revision",
+      "stop_condition": "hard gate failure, scope expansion, unavailable authority, or evidence boundary",
+      "test": "tests/test_docs.py::DocumentationTests::test_fresh_builder_simulation_is_present",
+      "threshold": "open_design_decisions=0；research_tasks_left_for_builder=0"
+    },
+    {
+      "acceptance": "Task-specific deterministic oracle passes and no new P0/P1 remains.",
+      "category": "release",
+      "dependencies": [
+        "T-013",
+        "T-016"
+      ],
+      "evidence": "evidence/validation/documentation-validation.json",
+      "id": "T-017",
+      "implementation_steps": [
+        "生成当前版本 Roadmap 与一句话 Pursuing Goal",
+        "提供数据合同和软件耦合架构 Mermaid",
+        "给出 P80/P95 tokens、active/wait 和触发条件"
+      ],
+      "input": "frozen prior artifacts and current Candidate",
+      "name": "生成 Roadmap、架构图、交接和成本估算",
+      "oracle": "oracle_t_017",
+      "output": "ROADMAP.md",
+      "risk": "未来范围混入当前版本会扩大 Build Agent 负担和验收终点",
+      "rollback": "restore previous staged tree or Candidate revision",
+      "stop_condition": "hard gate failure, scope expansion, unavailable authority, or evidence boundary",
+      "test": "tests/test_docs.py::DocumentationTests::test_build_estimate_has_p80_p95_and_active_wait_split",
+      "threshold": "人类文档为中文；未来 L3/L4 不进入当前 DAG；active+wait=wall"
+    },
+    {
+      "acceptance": "Task-specific deterministic oracle passes and no new P0/P1 remains.",
+      "category": "release",
+      "dependencies": [
+        "T-014",
+        "T-016",
+        "T-017"
+      ],
+      "evidence": "evidence/validation/final-validation-summary.json",
+      "id": "T-018",
+      "implementation_steps": [
+        "清除缓存并生成最终 Manifest",
+        "执行双构建字节一致性和 ZIP 安全审计",
+        "冷解压后再跑 strict verify、完整测试和安装回放"
+      ],
+      "input": "frozen prior artifacts and current Candidate",
+      "name": "确定性封包、冷解压、最终自检",
+      "oracle": "oracle_t_018",
+      "output": "metadata/release.json",
+      "risk": "封包后字节变化或未冷解压重放会使最终 ZIP 与测试对象不一致",
+      "rollback": "restore previous staged tree or Candidate revision",
+      "stop_condition": "hard gate failure, scope expansion, unavailable authority, or evidence boundary",
+      "test": "tests/test_packaging.py::PackagingTests::test_deterministic_zip_is_byte_identical",
+      "threshold": "双 ZIP SHA-256 一致；冷解压严格验证和完整测试 100% PASS"
+    },
+    {
+      "acceptance": "444 条 Manifest 与已知快照哈希一致，继承状态为 FUNCTIONAL_SUPERSET_WITH_SOURCE_BOUNDARY。",
+      "category": "research",
+      "dependencies": [
+        "T-001"
+      ],
+      "evidence": "evidence/validation/ac-019.json",
+      "id": "T-019",
+      "implementation_steps": [
+        "固定三份原始快照和哈希",
+        "提取不可降级语义",
+        "记录未取得全部上游字节的边界"
+      ],
+      "input": "v3 current SKILL/README/Manifest snapshots",
+      "oracle": "test_v3_lineage",
+      "output": "legacy/v0.0.0.3/SEMANTIC_INHERITANCE.json",
+      "risk": "错误宣称字节级完整继承",
+      "rollback": "恢复 v3 为正式基线并阻断 v5",
+      "stop_condition": "任何关键 v3 语义未覆盖",
+      "test": "tests/test_v5_lineage.py::test_v3_lineage",
+      "threshold": "3/3 快照哈希一致且 444 条路径"
+    },
+    {
+      "acceptance": "七类可达且固定 SHA 不阻断普通 adapt。",
+      "category": "implementation",
+      "dependencies": [
+        "T-019"
+      ],
+      "evidence": "evidence/validation/ac-020.json",
+      "id": "T-020",
+      "implementation_steps": [
+        "实现七类分类",
+        "实现上游等价保留",
+        "实现 conflict/blocked 硬停止",
+        "提供 CLI 输出"
+      ],
+      "input": "移动仓库合同与 semantic spec",
+      "oracle": "test_semantic_reconcile",
+      "output": "scripts/teleiosis_core/semantic.py",
+      "risk": "旧整树覆盖新 main",
+      "rollback": "禁用自动安装并只输出报告",
+      "stop_condition": "身份、Genesis 或未知可执行冲突",
+      "test": "tests/test_v5_semantic.py",
+      "threshold": "全部分类、冲突和非法 spec 测试通过"
+    },
+    {
+      "acceptance": "三次 pass 绑定不同 input hash 且每次有实质收益。",
+      "category": "research",
+      "dependencies": [
+        "T-019",
+        "T-020"
+      ],
+      "evidence": "evidence/validation/ac-021.json",
+      "id": "T-021",
+      "implementation_steps": [
+        "建立目录级全量快照",
+        "加载命中 Skill 正文",
+        "执行 A/B/C 三次差量扫描",
+        "验证 Developer Burden Delta"
+      ],
+      "input": "Skill Catalog 与冻结 Candidate Delta",
+      "oracle": "test_skill_audit",
+      "output": "scripts/teleiosis_core/skill_audit.py",
+      "risk": "重复运行凑次数",
+      "rollback": "将无 Delta pass 标记无效并重跑",
+      "stop_condition": "输入未变化或 Catalog 无法建立最小真实索引",
+      "test": "tests/test_v5_governance.py::test_skill_audit",
+      "threshold": "A/B/C 全部 PASS，70 个目录条目覆盖 12 域"
+    },
+    {
+      "acceptance": "不虚构人物专家或独立模型，十视角与六角色完整。",
+      "category": "review",
+      "dependencies": [
+        "T-021"
+      ],
+      "evidence": "evidence/validation/ac-022.json",
+      "id": "T-022",
+      "implementation_steps": [
+        "执行 dossier/claim_id 硬门",
+        "无法载入时中立回退",
+        "验证十视角",
+        "验证两轮六角色"
+      ],
+      "input": "persona-distiller-group 合同与六角色复审",
+      "oracle": "test_review_contract",
+      "output": "scripts/teleiosis_core/review.py",
+      "risk": "把角色扮演当独立专家",
+      "rollback": "撤销人物结论，只保留中立功能审查",
+      "stop_condition": "dossier 或 claim_id 真实性不足",
+      "test": "tests/test_v5_governance.py::test_reviews",
+      "threshold": "10 视角、2×6 角色、0 虚假 persona claim"
+    },
+    {
+      "acceptance": "开放研究和非环境任务不留给 Build Agent。",
+      "category": "implementation",
+      "dependencies": [
+        "T-020",
+        "T-022"
+      ],
+      "evidence": "evidence/validation/ac-024.json",
+      "id": "T-023",
+      "implementation_steps": [
+        "冻结 Project Input",
+        "验证唯一状态机",
+        "验证六类无环 DAG",
+        "验证追踪",
+        "模拟 Fresh Builder"
+      ],
+      "input": "Owner Preparation/Build 合同",
+      "oracle": "test_taskpack_validation",
+      "output": "scripts/teleiosis_core/taskpack.py",
+      "risk": "任务包纸面完整但不可执行",
+      "rollback": "阻断 Owner Gate 并返回缺口",
+      "stop_condition": "存在缺失依赖、等待节点、空 Oracle 或缺失制品",
+      "test": "tests/test_v5_governance.py::test_taskpack",
+      "threshold": "30/30 Acceptance 映射，DAG 无环且六类齐全"
+    },
+    {
+      "acceptance": "8192 条记录全部可解析、唯一、checksum 正确并覆盖四引擎六分区。",
+      "category": "testing",
+      "dependencies": [
+        "T-003",
+        "T-005",
+        "T-023"
+      ],
+      "evidence": "evidence/validation/ac-027.json",
+      "id": "T-024",
+      "implementation_steps": [
+        "生成固定种子 8192 条语料",
+        "写入记录 checksum",
+        "验证引擎/分区覆盖",
+        "保存总哈希和重放报告"
+      ],
+      "input": "T/S/P/A 冻结能力与六分区规则",
+      "oracle": "test_regression_corpus",
+      "output": "fixtures/regression/teleiosis-v5-regression.jsonl",
+      "risk": "用小样本或重复数据伪装大数据",
+      "rollback": "废弃语料并阻断发布",
+      "stop_condition": "任何重复 ID、checksum 错误或覆盖缺口",
+      "test": "tests/test_v5_regression.py",
+      "threshold": "8192/8192 PASS"
+    },
+    {
+      "acceptance": "零技术用户一条命令获得可安装结论，失败 fail-closed。",
+      "category": "implementation",
+      "dependencies": [
+        "T-023",
+        "T-024"
+      ],
+      "evidence": "evidence/validation/ac-028.json",
+      "id": "T-025",
+      "implementation_steps": [
+        "聚合 release/taskpack/skill/review/fresh-builder/regression 检查",
+        "输出唯一 JSON",
+        "提供明确下一步"
+      ],
+      "input": "完整本地验证门",
+      "oracle": "test_doctor_and_install_v5",
+      "output": "scripts/teleiosis_core/doctor.py",
+      "risk": "自检只验证文件存在",
+      "rollback": "安装入口只允许 check 模式",
+      "stop_condition": "任何硬门失败",
+      "test": "tests/test_v5_cli.py::test_doctor",
+      "threshold": "Doctor PASS 且错误无 traceback/凭证"
+    },
+    {
+      "acceptance": "handoff 绑定精确制品且内部状态始终 NOT_ISSUED。",
+      "category": "implementation",
+      "dependencies": [
+        "T-008",
+        "T-023",
+        "T-025"
+      ],
+      "evidence": "evidence/validation/ac-026.json",
+      "id": "T-026",
+      "implementation_steps": [
+        "计算 Subject identity",
+        "封装冻结文件",
+        "生成 handoff manifest",
+        "验证 ZIP",
+        "禁止 formal PASS"
+      ],
+      "input": "冻结 Candidate、Acceptance、Manifest 与 evidence",
+      "oracle": "test_verifier_handoff_v5",
+      "output": "scripts/teleiosis_core/verifier_handoff.py",
+      "risk": "builder 自签通过",
+      "rollback": "删除无效 handoff 并对新 Subject 重建",
+      "stop_condition": "Subject、Acceptance 或证据身份不一致",
+      "test": "tests/test_v5_verifier.py",
+      "threshold": "构建/验证/篡改/包内路径测试通过"
+    },
+    {
+      "acceptance": "关键缺口均有代码、测试或明确外部边界。",
+      "category": "remediation",
+      "dependencies": [
+        "T-020",
+        "T-021",
+        "T-022",
+        "T-023",
+        "T-024",
+        "T-025",
+        "T-026"
+      ],
+      "evidence": "evidence/preparation/skill-pass-b.json",
+      "id": "T-027",
+      "implementation_steps": [
+        "关闭 thin package 缺口",
+        "新增运行代码和测试",
+        "补齐原始证据与来源边界"
+      ],
+      "input": "Pass A 与第一轮 Finding",
+      "oracle": "test_skill_pass_b",
+      "output": "evidence/preparation/skill-pass-b.json",
+      "risk": "只改文档不改运行机制",
+      "rollback": "回退无收益 change set",
+      "stop_condition": "新变更导致硬门退化",
+      "test": "tests/test_v5_governance.py::test_skill_audit",
+      "threshold": "0 个开放本地 P0/P1"
+    },
+    {
+      "acceptance": "旧测试与 v5 新测试全部通过，非墙钟结果可复现。",
+      "category": "testing",
+      "dependencies": [
+        "T-024",
+        "T-025",
+        "T-026",
+        "T-027"
+      ],
+      "evidence": "evidence/validation/ac-029.json",
+      "id": "T-028",
+      "implementation_steps": [
+        "新增功能测试",
+        "运行旧 130 项回归",
+        "运行全量三遍",
+        "冷解压重跑"
+      ],
+      "input": "完整 v5 Candidate",
+      "oracle": "test_raw_validation_evidence",
+      "output": "tests/test_v5_full.py",
+      "risk": "新能力破坏 v4/v3 基线",
+      "rollback": "回退到最后通过的 Candidate",
+      "stop_condition": "任何回归或不稳定测试",
+      "test": "python3 -m unittest discover -s tests -p test_*.py -v",
+      "threshold": "三遍 100% PASS"
+    },
+    {
+      "acceptance": "所有本地可保存证据均随包存在并可追溯。",
+      "category": "release",
+      "dependencies": [
+        "T-028"
+      ],
+      "evidence": "evidence/validation/ac-029.json",
+      "id": "T-029",
+      "implementation_steps": [
+        "保存原始 stdout/stderr",
+        "记录退出码与哈希",
+        "建立证据索引",
+        "验证无摘要替代原始证据"
+      ],
+      "input": "三遍测试、Doctor、安装与冷解压日志",
+      "oracle": "test_raw_validation_evidence",
+      "output": "evidence/validation/RAW_EVIDENCE_INDEX.json",
+      "risk": "摘要宣称替代原始日志",
+      "rollback": "阻断封包并重跑缺失门",
+      "stop_condition": "任一证据缺失、哈希不匹配或时间线矛盾",
+      "test": "tests/test_v5_full.py::test_raw_evidence",
+      "threshold": "索引引用文件 100% 存在且哈希一致"
+    },
+    {
+      "acceptance": "两次 ZIP 字节一致、冷解压全门 PASS、无旧候选副本和缓存。",
+      "category": "release",
+      "dependencies": [
+        "T-014",
+        "T-018",
+        "T-029"
+      ],
+      "evidence": "evidence/validation/ac-030.json",
+      "id": "T-030",
+      "implementation_steps": [
+        "执行 Pass C",
+        "两次确定性构建",
+        "ZIP 审计与冷解压",
+        "仅保留一个正式制品"
+      ],
+      "input": "冻结 Candidate 与完整证据",
+      "oracle": "test_final_zip_v5",
+      "output": "metadata/release.json",
+      "risk": "多份同名制品或未验证 ZIP",
+      "rollback": "删除候选 ZIP，恢复冻结源树",
+      "stop_condition": "任何封包、Manifest、冷解压或唯一性门失败",
+      "test": "tests/test_v5_full.py::test_final_package_contract",
+      "threshold": "2/2 构建哈希一致且冷解压 PASS"
+    }
+  ]
+}

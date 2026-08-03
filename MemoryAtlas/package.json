@@ -18,7 +18,8 @@
     "validate:part8-stage7": "node scripts/validate_memory_atlas_part8_stage7.cjs",
     "validate:part9-stage8": "node scripts/validate_memory_atlas_part9_stage8.cjs",
     "validate:part10-stage9": "node scripts/validate_memory_atlas_part10_stage9.cjs",
-    "validate:whole-project": "node scripts/validate_memory_atlas_whole_project.cjs",
+    "validate:whole-project": "python3 ../OpenAIDatabase/scripts/run_verification.py --tier full --database-dir ../OpenAIDatabase",
+    "validate:whole-project:legacy": "node scripts/validate_memory_atlas_whole_project.cjs",
     "validate:v1.1.6-stage0": "node scripts/validate_memory_atlas_v1_1_6_stage0.cjs",
     "validate:v1.1.6-stage1-phase1": "node scripts/validate_memory_atlas_v1_1_6_stage1_phase1.cjs",
     "validate:v1.1.6-stage1-phase2": "node scripts/validate_memory_atlas_v1_1_6_stage1_phase2.cjs",
@@ -185,7 +186,13 @@
     "validate:stage9": "node scripts/validate_memory_atlas_stage9.cjs",
     "validate:memory-starfield-interaction": "node scripts/validate_memory_starfield_interaction.mjs",
     "validate:memory-starfield-mapping": "node scripts/validate_memory_starfield_mapping.mjs",
-    "validate:universe-state-spike": "node --experimental-strip-types scripts/validate_universe_state_spike.mjs"
+    "validate:universe-state-spike": "node --experimental-strip-types scripts/validate_universe_state_spike.mjs",
+    "validate:v31": "node scripts/validate_memory_atlas_v31.cjs",
+    "validate:v31:incremental": "node scripts/validate_memory_atlas_v31_incremental.cjs",
+    "validate:v31:typescript": "node scripts/validate_memory_atlas_v31_typescript.cjs",
+    "validate:v31:browser": "node scripts/validate_memory_atlas_v31_incremental_browser.cjs",
+    "validate:preservation": "node scripts/validate_existing_memory_atlas_preservation.cjs",
+    "validate:preservation:browser": "node scripts/validate_existing_memory_atlas_preservation_browser.cjs"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.1.1",

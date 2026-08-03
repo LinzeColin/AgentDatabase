@@ -1,0 +1,7 @@
+{
+  "label": "install-dry-run",
+  "returncode": 0,
+  "result_status": "DRY_RUN_READY",
+  "stdout_sha256": "0b2e1e688991cf8e15fe5f2730b2c2aa5b0240a6f88a7be1579980ed097dafb1",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

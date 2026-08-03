@@ -1,0 +1,19 @@
+{
+  "schema_version": "memory_atlas.p0_recovery_apply.v1",
+  "generated_at": "2026-08-03T06:35:52.693681+00:00",
+  "remote": "git@github.com:LinzeColin/AgentDatabase.git",
+  "head_before": "56802eea4bc2d8d057ed4afd29394c279bae8ae9",
+  "baseline_source": "frozen-canonical",
+  "before_sha256": "b2fc19167fa6489aabac504ad71659709b65daa61cdc3c75b67375a03891313a",
+  "after_sha256": "b348930f3ec8e9353340125e7b3babb39b968b05c114b3112dea09a1d0137920",
+  "changed_paths": [
+    ".taskpack-runs/memory-atlas-recovery/App.after.tsx",
+    ".taskpack-runs/memory-atlas-recovery/App.before.tsx",
+    "MemoryAtlas/package.json",
+    "MemoryAtlas/scripts/validate_existing_memory_atlas_preservation.cjs",
+    "MemoryAtlas/scripts/validate_existing_memory_atlas_preservation_browser.cjs",
+    "MemoryAtlas/src/App.tsx"
+  ],
+  "forbidden_data_paths": [],
+  "state": "APPLIED"
+}

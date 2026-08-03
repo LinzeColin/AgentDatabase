@@ -1,8 +1,3 @@
-# Genesis Constitution
+# Genesis 与 Amendment
 
-- `GENESIS_SOURCE...` is the exact uploaded candidate baseline.
-- `GENESIS_LOCKED...` differs only by the user-authorized status transition to `LOCKED_GENESIS`.
-- `genesis-lock.json` binds source, locked baseline, requirement order and hashes.
-- `requirements.json` is a machine-readable projection; the locked Markdown remains authoritative.
-- No script may auto-resign or silently rewrite Genesis.
-- Strong tamper detection requires the external release receipt or registry anchor supplied with the release.
+`GENESIS_LOCKED.v0.0.0.1.zh-CN.md` 保持逐字节不变。后续要求只能通过 `amendments/` 追加。当前有效版本为 v0.0.0.5，机器真源是 `effective-requirements.v0.0.0.5.json`；v0.0.0.3 三引擎语义继续有效，WBI-GB-030 将序列扩展为 T/S/P/A，WBI-GB-033—042 增加非降级继承、Stage 0、三次 Skill 扫描、复审、Taskpack、Verifier handoff、回归语料、事务安装和完整证据要求。

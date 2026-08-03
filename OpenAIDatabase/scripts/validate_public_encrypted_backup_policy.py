@@ -119,7 +119,8 @@ def validate_policy(policy: Mapping[str, Any], *, require_ready: bool = False) -
     ):
         raise BackupPolicyError("encryption_policy_invalid")
     if (
-        unified_key.get("key_id") != "agentdatabase-public-backup-v1"
+        unified_key.get("key_id") != "agentdatabase-public-backup-v2"
+        or unified_key.get("supersedes_key_id") != "agentdatabase-public-backup-v1"
         or unified_key.get("private_identity_source")
         != "macos_keychain_or_owner_secret_manager"
         or unified_key.get("identity_file_persisted") is not False
