@@ -130,6 +130,40 @@ def verdict(primary, total, lanes, prof):
     return True, shrink, []
 
 
+def parse_source_ledger(path):
+    """→ (rows, note)。读**已入库的 attest**，用 `evaluate_sources` 的原样口径。
+
+    `raw/_ids.txt` 是抓源台账，格式因人而异；
+    `evidence/source-ledger.jsonl` 是**入库后的 attest**，schema 统一，
+    而且**门就是按它算的**——用同一口径才不会出现「我算的和门算的不是一个数」。
+
+    口径逐字对齐 `quality_check.evaluate_sources`：
+      usable  = split == 'train' 且 tier != 'U' 且 extraction_status != 'failed'
+      primary = usable 里 tier ∈ {P1, P2}
+      lanes   = usable 的 `dimensions` 并集
+    """
+    rows = []
+    for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
+        if not line.strip():
+            continue
+        try:
+            rec = json.loads(line)
+        except ValueError:
+            continue
+        if rec.get("split") != "train":
+            continue
+        if rec.get("tier") == "U" or rec.get("extraction_status") == "failed":
+            continue
+        # ★ 与 parse_ledger 返回**同一种形状**：(分档, 道列表)。
+        #   两个解析器返回不同形状，就是又一次「两套标识符空间相减」。
+        rows.append((rec.get("tier"), list(rec.get("dimensions") or [])))
+    if not rows:
+        return None, "入库台账里没有可用的 train 源——**判不了**"
+    if not any(t for t, _ in rows):
+        return None, "入库台账里一条都没有 tier 字段——**判不了一手占比**"
+    return rows, ""
+
+
 def parse_ledger(path):
     """→ (rows, note)。**解析不出分档时 rows 为 None**，note 说清为什么。"""
     text = path.read_text(encoding="utf-8", errors="replace")
@@ -142,7 +176,8 @@ def parse_ledger(path):
         cols = line.split("\t")
         tier = next((c.strip() for c in cols if TIER_RE.match(c.strip())), None)
         lane = LANE_RE.search(line)
-        rows.append((tier, lane.group(1) if lane else None))
+        # 形状与 parse_source_ledger 一致：(分档, **道列表**)
+        rows.append((tier, [lane.group(1)] if lane else []))
 
     if not rows:
         return None, "台账里没有制表符分隔的数据行——**这份台账不是本件认得的格式**"
@@ -230,7 +265,31 @@ def selftest() -> int:
         rows, note = parse_ledger(p3)
         chk("9 列制表符台账 → 2 行，分档与道都解析出来",
             rows is not None and len(rows) == 2
-            and rows[0] == ("P1", "writings") and rows[1] == ("S2", "external"))
+            and rows[0] == ("P1", ["writings"]) and rows[1] == ("S2", ["external"]))
+
+        print("── ★★ 反向对照 ⑦：**入库 attest 要与发布门同口径** ──")
+        p4 = pathlib.Path(td) / "source-ledger.jsonl"
+        p4.write_text("\n".join(json.dumps(r, ensure_ascii=False) for r in [
+            {"tier": "P1", "split": "train", "dimensions": ["writings"]},
+            {"tier": "S1", "split": "train", "dimensions": ["external", "timeline"]},
+            {"tier": "P1", "split": "holdout", "dimensions": ["writings"]},   # holdout 不算
+            {"tier": "U",  "split": "train", "dimensions": ["external"]},     # U 档不算
+            {"tier": "P2", "split": "train", "dimensions": ["expression"],
+             "extraction_status": "failed"},                                  # 抽取失败不算
+        ]) + "\n", encoding="utf-8")
+        rows, note = parse_source_ledger(p4)
+        print(f"    5 条里只有 2 条进 usable → {rows}")
+        chk("holdout／U 档／抽取失败三类各自被排除（与 evaluate_sources 逐字一致）",
+            rows is not None and len(rows) == 2
+            and rows[0] == ("P1", ["writings"]) and rows[1] == ("S1", ["external", "timeline"]))
+        chk("**两个解析器返回同一种形状**（分档, 道列表）——不许一个给字符串一个给列表",
+            isinstance(rows[0][1], list))
+
+        print("── 反向对照 ⑧：入库 attest 一条 train 都没有 → 判不了 ──")
+        p5 = pathlib.Path(td) / "empty-ledger.jsonl"
+        p5.write_text(json.dumps({"tier": "P1", "split": "holdout"}) + "\n", encoding="utf-8")
+        rows, note = parse_source_ledger(p5)
+        chk("全是 holdout → rows 为 None（不是 0 份一手）", rows is None)
 
     print(f"\n{'✓ 自测全过' if not fails else f'✗ **{len(fails)} 项未过**'}")
     return 0 if not fails else 2
@@ -254,15 +313,23 @@ def main() -> int:
         if not a.ledger.is_file():
             print(f"✗ **{a.ledger} 不在——本次未检查（不是通过）**")
             return 3
-        rows, note = parse_ledger(a.ledger)
+        # ★ 已入库的 attest 优先——schema 统一，而且**门就是按它算的**。
+        #   `raw/_ids.txt` 只在还没入库时用（那才是本件真正的用武之地：抓之前）。
+        which = "抓源台账 raw/_ids.txt"
+        if a.ledger.name == "source-ledger.jsonl":
+            rows, note = parse_source_ledger(a.ledger)
+            which = "入库 attest evidence/source-ledger.jsonl（口径同发布门）"
+        else:
+            rows, note = parse_ledger(a.ledger)
         if rows is None:
             print(f"✗ **{note}——本次未检查（不是通过）**")
             return 3
+        print(f"读的是：{which}\n")
         total = len(rows)
         primary = sum(1 for t, _ in rows if t in PRIMARY_TIERS)
-        lanes = len({l for _, l in rows if l})
+        lanes = len({l for _, ls in rows for l in ls if l})
         if not lanes:
-            print("！ 台账里没有 `lane=` 标注——**道数按 0 算会误判，改为不判这一条**")
+            print("！ 台账里没有道标注——**道数按 0 算会误判，改为不判这一条**")
             lanes = PROFILES[a.profile]["min_lanes"]
     elif a.primary is not None and a.total is not None and a.lanes is not None:
         primary, total, lanes = a.primary, a.total, a.lanes

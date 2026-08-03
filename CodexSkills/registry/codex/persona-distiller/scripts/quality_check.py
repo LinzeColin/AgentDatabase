@@ -1631,23 +1631,33 @@ def run_corpus_ceiling(report, target: Path, profile: str) -> None:
             report.metrics['corpus_ceiling'] = {'状态': '**负对照未过，其结论不作数**'}
             return
 
-    # 抓源台账在 `<wip-…>/raw/_ids.txt`，工作区在 `<wip-…>/workspaces/<slug>/<slug>`——
-    # **要往上走三层才够得到**（射程写窄和判据出错，表征一样是「没报错」）。
+    # ★ 已入库的 attest 优先：`evidence/source-ledger.jsonl` schema 统一，
+    #   且**发布门就是按它算的**——同口径才不会出现「我算的和门算的不是一个数」。
+    #   抓源台账 `raw/_ids.txt` 只在还没入库时用（那才是本件真正的用武之地：抓之前），
+    #   而它的格式因人而异：十份实测只有 5 份带分档列。
     ledger = None
-    base = target
-    for _ in range(5):
-        cand = base / 'raw' / '_ids.txt'
-        if cand.is_file():
-            ledger = cand
-            break
-        if base.parent == base:
-            break
-        base = base.parent
+    parse = module.parse_ledger
+    which = '抓源台账'
+    attest = target / 'evidence' / 'source-ledger.jsonl'
+    if attest.is_file():
+        ledger, parse, which = attest, module.parse_source_ledger, '入库 attest（口径同发布门）'
+    else:
+        # 抓源台账在 `<wip-…>/raw/_ids.txt`，工作区在 `<wip-…>/workspaces/<slug>/<slug>`——
+        # **要往上走三层才够得到**（射程写窄和判据出错，表征一样是「没报错」）。
+        base = target
+        for _ in range(5):
+            cand = base / 'raw' / '_ids.txt'
+            if cand.is_file():
+                ledger = cand
+                break
+            if base.parent == base:
+                break
+            base = base.parent
     if ledger is None:
-        report.metrics['corpus_ceiling'] = {'状态': '找不到抓源台账 raw/_ids.txt，**未核验**（不是通过）'}
+        report.metrics['corpus_ceiling'] = {'状态': '既无入库 attest 也无抓源台账，**未核验**（不是通过）'}
         return
 
-    rows, note = module.parse_ledger(ledger)
+    rows, note = parse(ledger)
     if rows is None:
         report.metrics['corpus_ceiling'] = {
             '台账': str(ledger), '状态': f'**未核验**（不是通过）：{note}'}
@@ -1655,9 +1665,10 @@ def run_corpus_ceiling(report, target: Path, profile: str) -> None:
 
     total = len(rows)
     primary = sum(1 for tier, _ in rows if tier in module.PRIMARY_TIERS)
-    lanes = len({lane for _, lane in rows if lane})
+    lanes = len({lane for _, lanes_ in rows for lane in lanes_ if lane})
     need = module.required_primary(profile) if profile in module.PROFILES else None
     entry = {
+        '读的是': which,
         '台账': str(ledger),
         '一手份数': primary,
         '台账总份数': total,
