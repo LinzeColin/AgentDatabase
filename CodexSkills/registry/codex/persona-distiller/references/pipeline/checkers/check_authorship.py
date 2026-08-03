@@ -36,6 +36,37 @@ P1 需要下列之一，且**把证据原文打印出来供复核**：
                    在导航/og:title/h1 里重复出现，旧判据把它当成了说话人标记）
 - `A-masthead` —— 以他本人命名的**单作者站点报头**（v0.0.0.16，须显式声明且含其名）
 - `A-copyright`—— **版权页**：行首 `COPYRIGHT … BY` 后跟其名（v0.0.0.18，专为扫描件）
+- `A-signature-block` —— **来信／书评／讨论发言的末尾签名**：
+                  名字独占一行且邻接机构地址或日期（v0.0.0.55，Fleming #111 实测 4 份）。
+                  **位置不是判据，邻接的地址块才是**——这四份的署名落在 37%–75%。
+
+## v0.0.0.55：字母间隔的展示排版
+
+Fleming #111 的诺奖演说，标题页印的是
+
+    AL E X A N D E R  F L E M I N G
+
+排版为求视觉分量把字母拉开，OCR 忠实地把字母之间的空格也抄了下来，
+**任何名字正则都匹配不上**。`despace_display()` 在比对前把这种行折回词形——
+**归一只用于比对，不写回语料**，与 `check_quote_integrity` 的长 s 折叠同一条纪律。
+反证也走归一后的文本，否则「把别人的名字拉开字母」就能绕过反向检查。
+
+## Fleming #111 实测：35 → 13，以及**为什么停在 13**
+
+他是本名册第一个语料主体为**期刊论文**的人物，四轮泛化每一轮都是真形态：
+敬称（35→30）、独占署名（30→17）、末尾签名块（17→14）、字母间隔（14→13）。
+
+**剩下 12 份不再往下放宽，理由逐类写明：**
+
+- **`lysozyme-1922-prsb` 的署名在书眉里，形态是 `Mr. A. Fleming.`**——首字母 + 姓。
+  **认它等于认下同名陷阱**：这个人物恰有 `A. Grant Fleming`，
+  裸检索 `Fleming A` 时排第一。**这一条永远不加。**
+- **`freelance-science-1952` 是他写的书评**，而被评那本书的署名 `By René J. Dubos`
+  就印在开头。反证正确触发——**判据在干活，不是误报**。
+- 合著与整版串栏那几份，**正确解法是按作者把文件切开再入库**（见上文），
+  不是让判据认得更宽。
+
+**判据的用处正是把这 12 份列出来交给人**，不是把它们变绿。
 
 ## v0.0.0.18：扫描件的署名页，以及本门看不见的那一类
 
@@ -209,6 +240,46 @@ def build_patterns(full_name: str) -> dict:
 # `EXPLANATORY RULES` 这类地名与小节标题——**精度不够，当反证会误杀整类书籍**。
 # 要防的那件事（卷内换作者）正确的解法是**按作者切开再入库**，
 # 本清单的用处是让人一眼看见「这份文件里还有别人的名字」。
+def despace_display(text: str) -> str:
+    """把**字母间隔的展示排版**折回正常词形，供匹配用（不改存盘文本）。
+
+    Fleming #111 的诺奖演说，标题页印的是：
+
+        AL E X A N D E R  F L E M I N G
+
+    这是扫描件标题页与刊头的通例——排版为求视觉分量把字母拉开，
+    OCR 忠实地把每个字母之间的空格也抄下来。
+    **任何名字正则都匹配不上**，于是一份货真价实的诺奖演说被判「无据」。
+
+    与 `check_quote_integrity` 里的长 s 折叠同类：
+    **归一是为了比对，不是为了改语料。**
+
+    判法：一行里**单字母词占多数且总数 ≥5** 时，
+    去掉单字母之间的单个空格，把 2 个以上的空格收成一个词界。
+    只动这种行——普通句子里没有这个形态。
+    """
+    out = []
+    for line in text.split("\n"):
+        toks = line.split()
+        if len(toks) >= 5 and sum(1 for t in toks if len(t) == 1) / len(toks) >= 0.6:
+            # 先把词界（≥2 空格）标出来，再删单空格，最后还原词界
+            marked = re.sub(r"[ \t]{2,}", "\x00", line.strip())
+            joined = re.sub(r"(?<=[A-Za-z])[ \t](?=[A-Za-z])", "", marked)
+            out.append(joined.replace("\x00", " "))
+        else:
+            out.append(line)
+    return "\n".join(out)
+
+
+# 签名块的邻接特征：机构、地址、或日期。
+# **不含人名**——判「是不是签名块」，不判「是谁的签名」；后者由 `STANDALONE` 判。
+ADDRESS_BLOCK = re.compile(
+    r"\b(?:Department|Hospital|Institute|Infirmary|Laborator(?:y|ies)|College|"
+    r"University|School of Medicine|Royal Society|Clinic)\b"
+    r"|\b(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?\s+\d{1,2}\b"
+    r"|\b[A-Z]{1,2}\.?\s?\d{1,2}[.,]?\s*$",          # 伦敦邮区 `W.1.`
+    re.I | re.M)
+
 CAPS_LINE = re.compile(r"^[ \t]*([A-Z][A-Z'\-]{2,}(?:[ \t]+[A-Z][A-Z'\-]{2,}){1,3})[ \t]*$", re.M)
 CAPS_STOPWORDS = {
     "THE", "AND", "OF", "IN", "TO", "A", "AN", "FOR", "ON", "BY", "WITH", "AT",
@@ -333,6 +404,10 @@ def turns_evidence(text: str, pat: dict):
 
 def check_text(text: str, pat: dict):
     """返回 (ok, 证据码, 证据原文, 反证列表)。"""
+    # ★ v0.0.0.55：先把字母间隔的展示排版折回词形。
+    #   **归一只用于比对，不写回语料**——与长 s 折叠同一条纪律。
+    #   反证也走归一后的文本：否则「别人的名字被拉开字母」就绕过了反向检查。
+    text = despace_display(text)
     counter = []
 
     for m in OTHER_ROLE.finditer(text):
@@ -382,10 +457,24 @@ def check_text(text: str, pat: dict):
     #        显式 `By` 可以顶着反证走，独占署名不行。
     if pat.get("STANDALONE") and not counter:
         for m in pat["STANDALONE"].finditer(text):
-            if m.start() > len(text) * 0.30:
-                continue                    # 正文深处的那个不是署名
+            # ★ v0.0.0.55 `A-signature-block`：**来信与书评的署名在末尾，不在文首。**
+            #
+            #   Fleming #111 实测四份，独占署名分别落在 37%／52%／57%／75%——
+            #   全被「前 30%」这条位置规则挡住。而它们的形态是明白无误的签名块：
+            #       ALEXANDER FLEMING.
+            #       Inoculation Department,
+            #       St. Mary's Hospital, Jan. 5.
+            #   **名字 + 机构地址 + 日期**，这是医学期刊来信／讨论／书评的标准签名。
+            #
+            #   **位置不是对的判据，邻接的地址块才是。**
+            #   位置规则留给「没有地址块」的那一类（期刊论文的文首署名）。
+            near = text[max(0, m.start() - 160):m.end() + 160]
+            signed = bool(ADDRESS_BLOCK.search(near))
+            if not signed and m.start() > len(text) * 0.30:
+                continue                    # 正文深处、又没有地址块的那个不是署名
+            code = "A-signature-block" if signed else "A-byline-standalone"
             a, b = max(0, m.start() - 60), min(len(text), m.end() + 60)
-            return True, "A-byline-standalone", " ".join(text[a:b].split()), counter
+            return True, code, " ".join(text[a:b].split()), counter
 
     # A-copyright：版权页。与上面两类同样受反证约束——
     # 文中出现别人的身份署名时不放行。
@@ -447,6 +536,21 @@ SELFTEST_POSITIVE = [
     ("期刊署名·光名字",
      "ON THE INFLUENCE OF TEMPERATURE\n\nJANE Q. PUBLIC.\n\n"
      "The influence of temperature upon agglutination was measured.\n"),
+    # ★ v0.0.0.55 `A-signature-block`（Fleming #111 实测四份）：
+    #   来信／书评／讨论发言的署名在**末尾**，形态是「名字 + 机构地址 + 日期」。
+    #   四份的独占署名落在 37%／52%／57%／75%，全被「前 30%」的位置规则挡住。
+    ("来信签名块·文末",
+     "A long discussion of the subject at hand goes on for a while here.\n" * 40
+     + "JANE Q. PUBLIC.\nInoculation Department,\nSt. Mary's Hospital, Jan. 5.\n"),
+    # ★ v0.0.0.55 字母间隔展示排版（Fleming #111 诺奖演说实测）：
+    #   标题页印的是 `AL E X A N D E R  F L E M I N G`——任何名字正则都匹配不上。
+    ("字母间隔的标题署名",
+     "\n J AN E  Q.  P U B L I C\nPenicillin\nNobel Lecture, December 11, 1945\n"
+     "I am going to tell you about the early days of the work described here.\n"),
+    ("书评签名块·文中（同页还有下一篇）",
+     "A review of somebody else's book runs on for several paragraphs here.\n" * 30
+     + "JANE Q. PUBLIC.\nLondon, W.1.\n"
+     + "GALTON AND EUGENICS\nThe next review begins here and is by someone else.\n" * 20),
     ("编者注", "[Remarks delivered by Jane Public at the 1998 annual meeting.]\n\nThank you.\n"),
     ("逐字稿双标签", "".join(
         f"HOST: Question number {i} about the portfolio and its construction over time?\n"
@@ -497,6 +601,20 @@ SELFTEST_NEGATIVE = [
      + "Jane Q. Public\n" + "More body text follows here after it.\n" * 40),
     ("独占一行的是别人的名字",
      "ON SOMETHING\n\nRICHARD ROE, M.D.\n\nJane Q. Public is cited below in passing.\n"),
+    # ★ v0.0.0.55：签名块放宽之后**必须验它没放宽过头**——
+    #   正文里提到某医院，不能把同段里出现的名字认成签名。
+    # ★ v0.0.0.55：字母间隔归一之后，**反证也要走归一后的文本**——
+    #   否则把别人的名字拉开字母就能绕过反向检查。
+    ("别人的署名被拉开字母",
+     "\n R I C H A R D  R O E,  M. D.\nSome Title Here\n"
+     "Jane Q. Public is mentioned somewhere in the body of this piece.\n"),
+    ("普通句子不许被折成一团",
+     "I a m n o t a d i s p l a y l i n e b u t t h i s i s p r o s e.\n"
+     "Jane Q. Public appears nowhere as an author of this particular text.\n"),
+    ("正文里提到医院，名字在句子中间",
+     "The work was done at St. Mary's Hospital in London during that period.\n" * 30
+     + "Later the results were confirmed by Jane Q. Public and her colleagues there.\n"
+     + "Further discussion of the method follows in the next section below.\n" * 20),
 ]
 
 
