@@ -38,6 +38,13 @@ SRC = {
  "erinnerung": ["src-c219d2d3c1ba"],
  "geschwuelste": ["src-d82862576099"],
  "namesake": ["src-bb47899526c0"],
+ # ★ 下面三个桶是**为具体断言开的**，不是通用兜底。
+ #   发布门实测抓出三条装饰性引用——它们本来落进 default 桶，
+ #   而 default 指的是《Cellularpathologie》，里面没有 Schivelbein、Schliemann、Festschrift。
+ #   **关键词映射匹配不上时静默落 default，那等于按构造制造装饰性引用。**
+ "vita": ["src-c8cc4a3bfc5f", "src-72e13ab33245"],       # 含 Schivelbein
+ "troja": ["src-c905abc47c88", "src-220e227652f5"],      # 含 Schliemann
+ "fest": ["src-8f8bf387ec4a", "src-506f311f9345"],       # 含 Festschrift/Geburtstag
  "default": ["src-3bf8c9c3b522"],
 }
 
@@ -62,6 +69,9 @@ KEYMAP = [
  ("Zur Erinnerung", "erinnerung"),
  ("Geschwülste", "geschwuelste"),
  ("Hans Virchow", "namesake"), ("同名", "namesake"), ("儿子", "namesake"),
+ ("Schivelbein", "vita"), ("生于", "vita"), ("卒于", "vita"),
+ ("Schliemann", "troja"), ("特洛伊", "troja"), ("Ilios", "troja"), ("Ancon", "troja"),
+ ("Festschrift", "fest"), ("寿辰", "fest"),
 ]
 
 EVID = {
@@ -80,6 +90,9 @@ EVID = {
  "erinnerung": ["1902《Zur Erinnerung》"],
  "geschwuelste": ["《Die krankhaften Geschwülste》1863–67"],
  "namesake": ["《Archiv》卷内目录与 archive.org creator 字段"],
+ "vita": ["《Zur Erinnerung》1902 与《Archiv》1902 年纪念卷"],
+ "troja": ["《Archiv》卷内涉 Schliemann 的篇目与 1895 年卷"],
+ "fest": ["《Die Anstalten der Stadt Berlin》1886 两份扫本"],
  "default": ["《Die Cellularpathologie》1858 初版（DTA 双录入转写）"],
 }
 

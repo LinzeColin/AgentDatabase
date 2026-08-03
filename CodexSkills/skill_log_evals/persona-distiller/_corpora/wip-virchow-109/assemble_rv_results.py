@@ -31,8 +31,17 @@ if not rows: raise SystemExit("没有任何一席落盘")
 mc = sum(r["candidate"] for r in rows)/len(rows); mb = sum(r["baseline"] for r in rows)/len(rows)
 delta = (mc - mb)/10.0
 (WS/"evals").mkdir(parents=True, exist_ok=True)
-flat=[{"case_id":r["case_id"],"system":s,"overall_score":round(r[s]/10.0,4),
+# ★ 写进工作区的那份**必须用真 case_id**，不是载荷里的不透明编号。
+#   第一版直接把 q-01… 写了进去，发布门拿它去 cases.jsonl 查一条都对不上，
+#   于是 **overall / delta / boundary / fact 四项全部报 0.000**——
+#   看上去像产物彻底失败，实际是判据在跟一份对不上号的文件说话。
+#   「判据指错了文件」第六次，也是后果最重的一次。
+REAL = {q: v["case_id"] for q, v in KEY.items()}
+flat=[{"case_id":REAL[r["case_id"]],"system":s,"overall_score":round(r[s]/10.0,4),
        "judge_id":r["seat"],"suite":r["suite"]} for r in rows for s in ("candidate","baseline")]
+_want = {json.loads(l)["case_id"] for l in pathlib.Path("cases.jsonl").read_text(encoding="utf-8").splitlines() if l.strip()}
+_got = {x["case_id"] for x in flat}
+assert _got <= _want, f"**写出的 case_id 有 {len(_got - _want)} 个不在 cases.jsonl 里**：{sorted(_got - _want)[:3]}"
 (WS/"evals/results.jsonl").write_text("\n".join(json.dumps(r,ensure_ascii=False,sort_keys=True) for r in flat)+"\n",encoding="utf-8")
 pathlib.Path("results.jsonl").write_text("\n".join(json.dumps(r,ensure_ascii=False,sort_keys=True) for r in rows)+"\n",encoding="utf-8")
 pos = sum(1 for s,v in by.items() if v[2] and (v[0]-v[1])>0)
