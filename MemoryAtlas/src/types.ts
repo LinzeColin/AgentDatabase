@@ -8,7 +8,10 @@ export type ViewKey =
   | "contribution"
   | "wordcloud"
   | "search"
-  | "summary";
+  | "summary"
+  | "failureCompound"
+  | "behaviorEconomy"
+  | "runtime";
 
 export interface AtlasNode {
   id: string;

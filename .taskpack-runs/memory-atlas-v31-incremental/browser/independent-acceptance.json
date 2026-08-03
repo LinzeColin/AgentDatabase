@@ -1,0 +1,307 @@
+{
+  "schema_version": "memory_atlas.independent_acceptance.v1",
+  "base": "http://127.0.0.1:4173",
+  "pass": true,
+  "row_count": 38,
+  "failed": [],
+  "rows": [
+    {
+      "id": "AC-003-default-route-home",
+      "pass": true,
+      "evidence": "home"
+    },
+    {
+      "id": "AC-003-default-route-declared",
+      "pass": true,
+      "evidence": "data-default-route-view"
+    },
+    {
+      "id": "AC-008-first-use-theme-A",
+      "pass": true,
+      "evidence": {
+        "attr": "A",
+        "storageBeforeAnyClick": {
+          "theme": null,
+          "mode": null
+        }
+      }
+    },
+    {
+      "id": "AC-008-first-use-mode-light",
+      "pass": true,
+      "evidence": "light"
+    },
+    {
+      "id": "AC-001-single-shell-in-dom",
+      "pass": true,
+      "evidence": {
+        "appShell": 1,
+        "parallel": 0
+      }
+    },
+    {
+      "id": "AC-008-explicit-selection-persists",
+      "pass": true,
+      "evidence": {
+        "theme": "C",
+        "mode": "dark"
+      }
+    },
+    {
+      "id": "AC-000-no-console-errors-on-default-load",
+      "pass": true,
+      "evidence": []
+    },
+    {
+      "id": "AC-002-route-home",
+      "pass": true,
+      "evidence": {
+        "chars": 9845,
+        "head": "变化结论 / 证据 / 下一步 先判断哪些变化值得关注，再选择证据和行动 124 条筛选记忆 · 默认入口 上次来以后"
+      }
+    },
+    {
+      "id": "AC-002-route-galaxy",
+      "pass": true,
+      "evidence": {
+        "chars": 182,
+        "head": "语义银河 / 记忆关系 / 增量观察 按主题关系探索记忆密度、局部邻域和近期增量 124 条记忆 / 146 个节点 "
+      }
+    },
+    {
+      "id": "AC-002-route-notion",
+      "pass": true,
+      "evidence": {
+        "chars": 3381,
+        "head": "数据导图 / 框架关系 / 行动入口 把当前数据切片整理成来源、画像、项目决策和下一步行动的框架导图 43 个可见节点"
+      }
+    },
+    {
+      "id": "AC-002-route-roi",
+      "pass": true,
+      "evidence": {
+        "chars": 962,
+        "head": "当前切片密度 124 全库 6 条中的筛选结果 长期资产密度 123 当前筛选中的核心画像 + 一般 临时信息池"
+      }
+    },
+    {
+      "id": "AC-002-route-obsidian",
+      "pass": true,
+      "evidence": {
+        "chars": 21,
+        "head": "正在载入 Obsidian 动态图谱..."
+      }
+    },
+    {
+      "id": "AC-002-route-timeline",
+      "pass": true,
+      "evidence": {
+        "chars": 883,
+        "head": "记忆时间河 / UTC TIME SCALE / THEME LANES 按 Macro / Meso / Micro"
+      }
+    },
+    {
+      "id": "AC-002-route-contribution",
+      "pass": true,
+      "evidence": {
+        "chars": 4453,
+        "head": "使用强度 / 记忆增量 / 时间尺度对比 按日、周、月、年观察交互强度和记忆增量 2026 年 / 数据 2025-1"
+      }
+    },
+    {
+      "id": "AC-002-route-wordcloud",
+      "pass": true,
+      "evidence": {
+        "chars": 650,
+        "head": "词云 / 语义热力 / 主题气泡 把当前筛选切片转成可点击的主题密度、关键词和机会信号 124 条记忆 / 5 个主题"
+      }
+    },
+    {
+      "id": "AC-002-route-search",
+      "pass": true,
+      "evidence": {
+        "chars": 13489,
+        "head": "当前切片 124 近 30 天 111 较前 30 天 +105 新增决策/核心 0/0 热点分类 codex_deve"
+      }
+    },
+    {
+      "id": "AC-002-route-summary",
+      "pass": true,
+      "evidence": {
+        "chars": 4800,
+        "head": "总结与迭代 把当前记忆切片转成可更新的 Personalization、Agents.md 和 Memory 建议 更"
+      }
+    },
+    {
+      "id": "AC-002-route-failureCompound",
+      "pass": true,
+      "evidence": {
+        "chars": 415,
+        "head": "新增私有分析读取失败：Unexpected token '<', \"<!doctype \"... is not vali"
+      }
+    },
+    {
+      "id": "AC-002-route-behaviorEconomy",
+      "pass": true,
+      "evidence": {
+        "chars": 331,
+        "head": "新增私有分析读取失败：Unexpected token '<', \"<!doctype \"... is not vali"
+      }
+    },
+    {
+      "id": "AC-002-route-runtime",
+      "pass": true,
+      "evidence": {
+        "chars": 488,
+        "head": "新增私有分析读取失败：Unexpected token '<', \"<!doctype \"... is not vali"
+      }
+    },
+    {
+      "id": "AC-004-filters",
+      "pass": true,
+      "evidence": 4
+    },
+    {
+      "id": "AC-004-interaction-lens",
+      "pass": true,
+      "evidence": "interaction lens"
+    },
+    {
+      "id": "AC-004-command-palette",
+      "pass": true,
+      "evidence": "command palette"
+    },
+    {
+      "id": "AC-004-owner-daily-entry",
+      "pass": true,
+      "evidence": 1
+    },
+    {
+      "id": "AC-004-node-inspector-region",
+      "pass": true,
+      "evidence": 1
+    },
+    {
+      "id": "AC-004-contribution-inspector-region",
+      "pass": true,
+      "evidence": "contribution workspace"
+    },
+    {
+      "id": "AC-004-help-panel",
+      "pass": true,
+      "evidence": "help panel opened"
+    },
+    {
+      "id": "AC-004-help-panel-closes",
+      "pass": true,
+      "evidence": "help panel closed"
+    },
+    {
+      "id": "AC-004-writeback-proposal-panel",
+      "pass": true,
+      "evidence": 6
+    },
+    {
+      "id": "AC-009-404-original-ten-usable",
+      "pass": true,
+      "evidence": []
+    },
+    {
+      "id": "AC-009-404-new-views-chinese-degraded",
+      "pass": true,
+      "evidence": [
+        {
+          "key": "failureCompound",
+          "visible": true,
+          "chinese": true,
+          "text": "新增私有分析尚未接通；系统不会用演示数据冒充生产事实，原 Memory Atlas 不受影响。\n重新读取"
+        },
+        {
+          "key": "behaviorEconomy",
+          "visible": true,
+          "chinese": true,
+          "text": "新增私有分析尚未接通；系统不会用演示数据冒充生产事实，原 Memory Atlas 不受影响。\n重新读取"
+        },
+        {
+          "key": "runtime",
+          "visible": true,
+          "chinese": true,
+          "text": "新增私有分析尚未接通；系统不会用演示数据冒充生产事实，原 Memory Atlas 不受影响。\n重新读取"
+        }
+      ]
+    },
+    {
+      "id": "AC-009-404-no-page-error",
+      "pass": true,
+      "evidence": []
+    },
+    {
+      "id": "AC-009-403-original-ten-usable",
+      "pass": true,
+      "evidence": []
+    },
+    {
+      "id": "AC-009-403-new-views-chinese-degraded",
+      "pass": true,
+      "evidence": [
+        {
+          "key": "failureCompound",
+          "visible": true,
+          "chinese": true,
+          "text": "新增私有分析读取失败：私有分析读取未通过 Owner 身份验证。原 Memory Atlas 不受影响。\n重新读取"
+        },
+        {
+          "key": "behaviorEconomy",
+          "visible": true,
+          "chinese": true,
+          "text": "新增私有分析读取失败：私有分析读取未通过 Owner 身份验证。原 Memory Atlas 不受影响。\n重新读取"
+        },
+        {
+          "key": "runtime",
+          "visible": true,
+          "chinese": true,
+          "text": "新增私有分析读取失败：私有分析读取未通过 Owner 身份验证。原 Memory Atlas 不受影响。\n重新读取"
+        }
+      ]
+    },
+    {
+      "id": "AC-009-403-no-page-error",
+      "pass": true,
+      "evidence": []
+    },
+    {
+      "id": "AC-009-500-original-ten-usable",
+      "pass": true,
+      "evidence": []
+    },
+    {
+      "id": "AC-009-500-new-views-chinese-degraded",
+      "pass": true,
+      "evidence": [
+        {
+          "key": "failureCompound",
+          "visible": true,
+          "chinese": true,
+          "text": "新增私有分析读取失败：私有分析快照读取失败（500）。原 Memory Atlas 不受影响。\n重新读取"
+        },
+        {
+          "key": "behaviorEconomy",
+          "visible": true,
+          "chinese": true,
+          "text": "新增私有分析读取失败：私有分析快照读取失败（500）。原 Memory Atlas 不受影响。\n重新读取"
+        },
+        {
+          "key": "runtime",
+          "visible": true,
+          "chinese": true,
+          "text": "新增私有分析读取失败：私有分析快照读取失败（500）。原 Memory Atlas 不受影响。\n重新读取"
+        }
+      ]
+    },
+    {
+      "id": "AC-009-500-no-page-error",
+      "pass": true,
+      "evidence": []
+    }
+  ]
+}

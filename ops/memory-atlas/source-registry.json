@@ -8,7 +8,8 @@
     "standalone_credentials": "excluded_as_configuration_not_product_memory",
     "symlinks": "never_follow",
     "missing_required": "WAITING_SOURCE",
-    "missing_optional": "visible_gap_not_success"
+    "missing_optional": "visible_gap_not_success",
+    "source_runner": "generic_one_shot; scheduler binding must be separately evidenced"
   },
   "sources": [
     {

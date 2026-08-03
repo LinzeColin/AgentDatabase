@@ -7,6 +7,7 @@ import { GalaxyView, ObsidianGraph, TimelineView } from "../features/assets";
 import { DataGuideMap } from "../features/topics";
 import { SearchReview } from "../features/search-review";
 import { SummaryIterationView } from "../features/summary-iteration";
+import { BehaviorEconomyView, FailureCompoundView, RuntimeView } from "../features/v31";
 import type {
   ContributionPeriodDetail,
   FilteredAtlasSlice,
@@ -125,4 +126,7 @@ export const ROUTE_REGISTRY = {
   summary: (props) => (
     <SummaryIterationView atlas={props.atlas} nodes={props.slice.memoryNodes} deltaStats={props.slice.deltaStats} />
   ),
+  failureCompound: () => <FailureCompoundView />,
+  behaviorEconomy: () => <BehaviorEconomyView />,
+  runtime: () => <RuntimeView />,
 } satisfies Record<ViewKey, RouteComponent>;

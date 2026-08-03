@@ -188,6 +188,9 @@
     "validate:memory-starfield-mapping": "node scripts/validate_memory_starfield_mapping.mjs",
     "validate:universe-state-spike": "node --experimental-strip-types scripts/validate_universe_state_spike.mjs",
     "validate:v31": "node scripts/validate_memory_atlas_v31.cjs",
+    "validate:v31:incremental": "node scripts/validate_memory_atlas_v31_incremental.cjs",
+    "validate:v31:typescript": "node scripts/validate_memory_atlas_v31_typescript.cjs",
+    "validate:v31:browser": "node scripts/validate_memory_atlas_v31_incremental_browser.cjs",
     "validate:preservation": "node scripts/validate_existing_memory_atlas_preservation.cjs",
     "validate:preservation:browser": "node scripts/validate_existing_memory_atlas_preservation_browser.cjs"
   },

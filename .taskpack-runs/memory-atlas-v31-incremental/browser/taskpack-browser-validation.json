@@ -1,0 +1,698 @@
+{
+  "schema_version": "memory_atlas.incremental_browser_validation.v2",
+  "base": "http://127.0.0.1:4173",
+  "pass": true,
+  "row_count": 116,
+  "rows": [
+    {
+      "id": "BROWSER-default-home",
+      "pass": true,
+      "evidence": "home visible"
+    },
+    {
+      "id": "BROWSER-no-parallel-root",
+      "pass": true,
+      "evidence": "no wrapper"
+    },
+    {
+      "id": "BROWSER-13-nav",
+      "pass": true,
+      "evidence": 13
+    },
+    {
+      "id": "BROWSER-original-surface-.controls",
+      "pass": true,
+      "evidence": ".controls"
+    },
+    {
+      "id": "BROWSER-original-surface-.interaction-lens",
+      "pass": true,
+      "evidence": ".interaction-lens"
+    },
+    {
+      "id": "BROWSER-original-surface-.command-palette",
+      "pass": true,
+      "evidence": ".command-palette"
+    },
+    {
+      "id": "BROWSER-original-surface-.help-launch-button",
+      "pass": true,
+      "evidence": ".help-launch-button"
+    },
+    {
+      "id": "BROWSER-theme-A",
+      "pass": true,
+      "evidence": "A"
+    },
+    {
+      "id": "BROWSER-A-mode-light",
+      "pass": true,
+      "evidence": "light"
+    },
+    {
+      "id": "BROWSER-A-light-palette-resolved",
+      "pass": true,
+      "evidence": {
+        "background": "rgba(248, 250, 255, 0.94)",
+        "foreground": "rgb(16, 32, 56)",
+        "colorScheme": "light"
+      }
+    },
+    {
+      "id": "BROWSER-A-light-contrast",
+      "pass": true,
+      "evidence": {
+        "background": "rgba(248, 250, 255, 0.94)",
+        "foreground": "rgb(16, 32, 56)",
+        "colorScheme": "light",
+        "contrast": 15.64042034080491
+      }
+    },
+    {
+      "id": "BROWSER-A-light-luminance-direction",
+      "pass": true,
+      "evidence": {
+        "background": "rgba(248, 250, 255, 0.94)",
+        "luminance": 0.9554767281140365
+      }
+    },
+    {
+      "id": "BROWSER-A-light-route-home",
+      "pass": true,
+      "evidence": "home"
+    },
+    {
+      "id": "BROWSER-A-light-route-galaxy",
+      "pass": true,
+      "evidence": "galaxy"
+    },
+    {
+      "id": "BROWSER-A-light-route-notion",
+      "pass": true,
+      "evidence": "notion"
+    },
+    {
+      "id": "BROWSER-A-light-route-roi",
+      "pass": true,
+      "evidence": "roi"
+    },
+    {
+      "id": "BROWSER-A-light-route-obsidian",
+      "pass": true,
+      "evidence": "obsidian"
+    },
+    {
+      "id": "BROWSER-A-light-route-timeline",
+      "pass": true,
+      "evidence": "timeline"
+    },
+    {
+      "id": "BROWSER-A-light-route-contribution",
+      "pass": true,
+      "evidence": "contribution"
+    },
+    {
+      "id": "BROWSER-A-light-route-wordcloud",
+      "pass": true,
+      "evidence": "wordcloud"
+    },
+    {
+      "id": "BROWSER-A-light-route-search",
+      "pass": true,
+      "evidence": "search"
+    },
+    {
+      "id": "BROWSER-A-light-route-summary",
+      "pass": true,
+      "evidence": "summary"
+    },
+    {
+      "id": "BROWSER-A-light-route-failureCompound",
+      "pass": true,
+      "evidence": "failureCompound"
+    },
+    {
+      "id": "BROWSER-A-light-route-behaviorEconomy",
+      "pass": true,
+      "evidence": "behaviorEconomy"
+    },
+    {
+      "id": "BROWSER-A-light-route-runtime",
+      "pass": true,
+      "evidence": "runtime"
+    },
+    {
+      "id": "BROWSER-A-mode-dark",
+      "pass": true,
+      "evidence": "dark"
+    },
+    {
+      "id": "BROWSER-A-dark-palette-resolved",
+      "pass": true,
+      "evidence": {
+        "background": "rgba(15, 15, 18, 0.9)",
+        "foreground": "rgb(242, 246, 255)",
+        "colorScheme": "dark"
+      }
+    },
+    {
+      "id": "BROWSER-A-dark-contrast",
+      "pass": true,
+      "evidence": {
+        "background": "rgba(15, 15, 18, 0.9)",
+        "foreground": "rgb(242, 246, 255)",
+        "colorScheme": "dark",
+        "contrast": 17.680140549581406
+      }
+    },
+    {
+      "id": "BROWSER-A-dark-luminance-direction",
+      "pass": true,
+      "evidence": {
+        "background": "rgba(15, 15, 18, 0.9)",
+        "luminance": 0.004868783183637921
+      }
+    },
+    {
+      "id": "BROWSER-A-dark-route-home",
+      "pass": true,
+      "evidence": "home"
+    },
+    {
+      "id": "BROWSER-A-dark-route-galaxy",
+      "pass": true,
+      "evidence": "galaxy"
+    },
+    {
+      "id": "BROWSER-A-dark-route-notion",
+      "pass": true,
+      "evidence": "notion"
+    },
+    {
+      "id": "BROWSER-A-dark-route-roi",
+      "pass": true,
+      "evidence": "roi"
+    },
+    {
+      "id": "BROWSER-A-dark-route-obsidian",
+      "pass": true,
+      "evidence": "obsidian"
+    },
+    {
+      "id": "BROWSER-A-dark-route-timeline",
+      "pass": true,
+      "evidence": "timeline"
+    },
+    {
+      "id": "BROWSER-A-dark-route-contribution",
+      "pass": true,
+      "evidence": "contribution"
+    },
+    {
+      "id": "BROWSER-A-dark-route-wordcloud",
+      "pass": true,
+      "evidence": "wordcloud"
+    },
+    {
+      "id": "BROWSER-A-dark-route-search",
+      "pass": true,
+      "evidence": "search"
+    },
+    {
+      "id": "BROWSER-A-dark-route-summary",
+      "pass": true,
+      "evidence": "summary"
+    },
+    {
+      "id": "BROWSER-A-dark-route-failureCompound",
+      "pass": true,
+      "evidence": "failureCompound"
+    },
+    {
+      "id": "BROWSER-A-dark-route-behaviorEconomy",
+      "pass": true,
+      "evidence": "behaviorEconomy"
+    },
+    {
+      "id": "BROWSER-A-dark-route-runtime",
+      "pass": true,
+      "evidence": "runtime"
+    },
+    {
+      "id": "BROWSER-theme-B",
+      "pass": true,
+      "evidence": "B"
+    },
+    {
+      "id": "BROWSER-B-mode-light",
+      "pass": true,
+      "evidence": "light"
+    },
+    {
+      "id": "BROWSER-B-light-palette-resolved",
+      "pass": true,
+      "evidence": {
+        "background": "rgba(248, 250, 255, 0.94)",
+        "foreground": "rgb(16, 32, 56)",
+        "colorScheme": "light"
+      }
+    },
+    {
+      "id": "BROWSER-B-light-contrast",
+      "pass": true,
+      "evidence": {
+        "background": "rgba(248, 250, 255, 0.94)",
+        "foreground": "rgb(16, 32, 56)",
+        "colorScheme": "light",
+        "contrast": 15.64042034080491
+      }
+    },
+    {
+      "id": "BROWSER-B-light-luminance-direction",
+      "pass": true,
+      "evidence": {
+        "background": "rgba(248, 250, 255, 0.94)",
+        "luminance": 0.9554767281140365
+      }
+    },
+    {
+      "id": "BROWSER-B-light-route-home",
+      "pass": true,
+      "evidence": "home"
+    },
+    {
+      "id": "BROWSER-B-light-route-galaxy",
+      "pass": true,
+      "evidence": "galaxy"
+    },
+    {
+      "id": "BROWSER-B-light-route-notion",
+      "pass": true,
+      "evidence": "notion"
+    },
+    {
+      "id": "BROWSER-B-light-route-roi",
+      "pass": true,
+      "evidence": "roi"
+    },
+    {
+      "id": "BROWSER-B-light-route-obsidian",
+      "pass": true,
+      "evidence": "obsidian"
+    },
+    {
+      "id": "BROWSER-B-light-route-timeline",
+      "pass": true,
+      "evidence": "timeline"
+    },
+    {
+      "id": "BROWSER-B-light-route-contribution",
+      "pass": true,
+      "evidence": "contribution"
+    },
+    {
+      "id": "BROWSER-B-light-route-wordcloud",
+      "pass": true,
+      "evidence": "wordcloud"
+    },
+    {
+      "id": "BROWSER-B-light-route-search",
+      "pass": true,
+      "evidence": "search"
+    },
+    {
+      "id": "BROWSER-B-light-route-summary",
+      "pass": true,
+      "evidence": "summary"
+    },
+    {
+      "id": "BROWSER-B-light-route-failureCompound",
+      "pass": true,
+      "evidence": "failureCompound"
+    },
+    {
+      "id": "BROWSER-B-light-route-behaviorEconomy",
+      "pass": true,
+      "evidence": "behaviorEconomy"
+    },
+    {
+      "id": "BROWSER-B-light-route-runtime",
+      "pass": true,
+      "evidence": "runtime"
+    },
+    {
+      "id": "BROWSER-B-mode-dark",
+      "pass": true,
+      "evidence": "dark"
+    },
+    {
+      "id": "BROWSER-B-dark-palette-resolved",
+      "pass": true,
+      "evidence": {
+        "background": "rgba(15, 15, 18, 0.9)",
+        "foreground": "rgb(242, 246, 255)",
+        "colorScheme": "dark"
+      }
+    },
+    {
+      "id": "BROWSER-B-dark-contrast",
+      "pass": true,
+      "evidence": {
+        "background": "rgba(15, 15, 18, 0.9)",
+        "foreground": "rgb(242, 246, 255)",
+        "colorScheme": "dark",
+        "contrast": 17.680140549581406
+      }
+    },
+    {
+      "id": "BROWSER-B-dark-luminance-direction",
+      "pass": true,
+      "evidence": {
+        "background": "rgba(15, 15, 18, 0.9)",
+        "luminance": 0.004868783183637921
+      }
+    },
+    {
+      "id": "BROWSER-B-dark-route-home",
+      "pass": true,
+      "evidence": "home"
+    },
+    {
+      "id": "BROWSER-B-dark-route-galaxy",
+      "pass": true,
+      "evidence": "galaxy"
+    },
+    {
+      "id": "BROWSER-B-dark-route-notion",
+      "pass": true,
+      "evidence": "notion"
+    },
+    {
+      "id": "BROWSER-B-dark-route-roi",
+      "pass": true,
+      "evidence": "roi"
+    },
+    {
+      "id": "BROWSER-B-dark-route-obsidian",
+      "pass": true,
+      "evidence": "obsidian"
+    },
+    {
+      "id": "BROWSER-B-dark-route-timeline",
+      "pass": true,
+      "evidence": "timeline"
+    },
+    {
+      "id": "BROWSER-B-dark-route-contribution",
+      "pass": true,
+      "evidence": "contribution"
+    },
+    {
+      "id": "BROWSER-B-dark-route-wordcloud",
+      "pass": true,
+      "evidence": "wordcloud"
+    },
+    {
+      "id": "BROWSER-B-dark-route-search",
+      "pass": true,
+      "evidence": "search"
+    },
+    {
+      "id": "BROWSER-B-dark-route-summary",
+      "pass": true,
+      "evidence": "summary"
+    },
+    {
+      "id": "BROWSER-B-dark-route-failureCompound",
+      "pass": true,
+      "evidence": "failureCompound"
+    },
+    {
+      "id": "BROWSER-B-dark-route-behaviorEconomy",
+      "pass": true,
+      "evidence": "behaviorEconomy"
+    },
+    {
+      "id": "BROWSER-B-dark-route-runtime",
+      "pass": true,
+      "evidence": "runtime"
+    },
+    {
+      "id": "BROWSER-theme-C",
+      "pass": true,
+      "evidence": "C"
+    },
+    {
+      "id": "BROWSER-C-mode-light",
+      "pass": true,
+      "evidence": "light"
+    },
+    {
+      "id": "BROWSER-C-light-palette-resolved",
+      "pass": true,
+      "evidence": {
+        "background": "rgba(248, 250, 255, 0.94)",
+        "foreground": "rgb(16, 32, 56)",
+        "colorScheme": "light"
+      }
+    },
+    {
+      "id": "BROWSER-C-light-contrast",
+      "pass": true,
+      "evidence": {
+        "background": "rgba(248, 250, 255, 0.94)",
+        "foreground": "rgb(16, 32, 56)",
+        "colorScheme": "light",
+        "contrast": 15.64042034080491
+      }
+    },
+    {
+      "id": "BROWSER-C-light-luminance-direction",
+      "pass": true,
+      "evidence": {
+        "background": "rgba(248, 250, 255, 0.94)",
+        "luminance": 0.9554767281140365
+      }
+    },
+    {
+      "id": "BROWSER-C-light-route-home",
+      "pass": true,
+      "evidence": "home"
+    },
+    {
+      "id": "BROWSER-C-light-route-galaxy",
+      "pass": true,
+      "evidence": "galaxy"
+    },
+    {
+      "id": "BROWSER-C-light-route-notion",
+      "pass": true,
+      "evidence": "notion"
+    },
+    {
+      "id": "BROWSER-C-light-route-roi",
+      "pass": true,
+      "evidence": "roi"
+    },
+    {
+      "id": "BROWSER-C-light-route-obsidian",
+      "pass": true,
+      "evidence": "obsidian"
+    },
+    {
+      "id": "BROWSER-C-light-route-timeline",
+      "pass": true,
+      "evidence": "timeline"
+    },
+    {
+      "id": "BROWSER-C-light-route-contribution",
+      "pass": true,
+      "evidence": "contribution"
+    },
+    {
+      "id": "BROWSER-C-light-route-wordcloud",
+      "pass": true,
+      "evidence": "wordcloud"
+    },
+    {
+      "id": "BROWSER-C-light-route-search",
+      "pass": true,
+      "evidence": "search"
+    },
+    {
+      "id": "BROWSER-C-light-route-summary",
+      "pass": true,
+      "evidence": "summary"
+    },
+    {
+      "id": "BROWSER-C-light-route-failureCompound",
+      "pass": true,
+      "evidence": "failureCompound"
+    },
+    {
+      "id": "BROWSER-C-light-route-behaviorEconomy",
+      "pass": true,
+      "evidence": "behaviorEconomy"
+    },
+    {
+      "id": "BROWSER-C-light-route-runtime",
+      "pass": true,
+      "evidence": "runtime"
+    },
+    {
+      "id": "BROWSER-C-mode-dark",
+      "pass": true,
+      "evidence": "dark"
+    },
+    {
+      "id": "BROWSER-C-dark-palette-resolved",
+      "pass": true,
+      "evidence": {
+        "background": "rgba(15, 15, 18, 0.9)",
+        "foreground": "rgb(242, 246, 255)",
+        "colorScheme": "dark"
+      }
+    },
+    {
+      "id": "BROWSER-C-dark-contrast",
+      "pass": true,
+      "evidence": {
+        "background": "rgba(15, 15, 18, 0.9)",
+        "foreground": "rgb(242, 246, 255)",
+        "colorScheme": "dark",
+        "contrast": 17.680140549581406
+      }
+    },
+    {
+      "id": "BROWSER-C-dark-luminance-direction",
+      "pass": true,
+      "evidence": {
+        "background": "rgba(15, 15, 18, 0.9)",
+        "luminance": 0.004868783183637921
+      }
+    },
+    {
+      "id": "BROWSER-C-dark-route-home",
+      "pass": true,
+      "evidence": "home"
+    },
+    {
+      "id": "BROWSER-C-dark-route-galaxy",
+      "pass": true,
+      "evidence": "galaxy"
+    },
+    {
+      "id": "BROWSER-C-dark-route-notion",
+      "pass": true,
+      "evidence": "notion"
+    },
+    {
+      "id": "BROWSER-C-dark-route-roi",
+      "pass": true,
+      "evidence": "roi"
+    },
+    {
+      "id": "BROWSER-C-dark-route-obsidian",
+      "pass": true,
+      "evidence": "obsidian"
+    },
+    {
+      "id": "BROWSER-C-dark-route-timeline",
+      "pass": true,
+      "evidence": "timeline"
+    },
+    {
+      "id": "BROWSER-C-dark-route-contribution",
+      "pass": true,
+      "evidence": "contribution"
+    },
+    {
+      "id": "BROWSER-C-dark-route-wordcloud",
+      "pass": true,
+      "evidence": "wordcloud"
+    },
+    {
+      "id": "BROWSER-C-dark-route-search",
+      "pass": true,
+      "evidence": "search"
+    },
+    {
+      "id": "BROWSER-C-dark-route-summary",
+      "pass": true,
+      "evidence": "summary"
+    },
+    {
+      "id": "BROWSER-C-dark-route-failureCompound",
+      "pass": true,
+      "evidence": "failureCompound"
+    },
+    {
+      "id": "BROWSER-C-dark-route-behaviorEconomy",
+      "pass": true,
+      "evidence": "behaviorEconomy"
+    },
+    {
+      "id": "BROWSER-C-dark-route-runtime",
+      "pass": true,
+      "evidence": "runtime"
+    },
+    {
+      "id": "BROWSER-three-distinct-layouts",
+      "pass": true,
+      "evidence": {
+        "A": {
+          "shellColumns": "1440px",
+          "shellRows": "100px 900px",
+          "sidebarDisplay": "grid",
+          "sidebarPosition": "sticky",
+          "navDisplay": "flex",
+          "headingFont": "Inter, \"PingFang SC\", \"Hiragino Sans GB\", \"Heiti SC\", \"Noto Sans CJK SC\", \"Microsoft YaHei\", ui-sans-serif, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif"
+        },
+        "B": {
+          "shellColumns": "276px 1164px",
+          "shellRows": "1000px",
+          "sidebarDisplay": "flex",
+          "sidebarPosition": "static",
+          "navDisplay": "grid",
+          "headingFont": "\"Songti SC\", STSong, \"Noto Serif CJK SC\", Georgia, serif"
+        },
+        "C": {
+          "shellColumns": "1440px",
+          "shellRows": "98px 902px",
+          "sidebarDisplay": "grid",
+          "sidebarPosition": "sticky",
+          "navDisplay": "grid",
+          "headingFont": "Inter, -apple-system, \"system-ui\", \"Segoe UI\", \"PingFang SC\", sans-serif"
+        }
+      }
+    },
+    {
+      "id": "BROWSER-mobile-A-no-horizontal-overflow",
+      "pass": true,
+      "evidence": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "scrollHeight": 844
+      }
+    },
+    {
+      "id": "BROWSER-mobile-B-no-horizontal-overflow",
+      "pass": true,
+      "evidence": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "scrollHeight": 844
+      }
+    },
+    {
+      "id": "BROWSER-mobile-C-no-horizontal-overflow",
+      "pass": true,
+      "evidence": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "scrollHeight": 844
+      }
+    }
+  ],
+  "failed": []
+}

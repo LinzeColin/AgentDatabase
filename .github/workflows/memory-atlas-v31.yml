@@ -61,8 +61,8 @@ jobs:
         env:
           PYTHONPATH: ${{ github.workspace }}
         run: |
-          python -m compileall -q OpenAIDatabase/scripts/memory_atlas_private OpenAIDatabase/scripts/memory_atlas_source_capture_entry.py
-          pytest -q OpenAIDatabase/tests/test_memory_atlas_private_v31.py
+          python -m compileall -q OpenAIDatabase/scripts/memory_atlas_private OpenAIDatabase/scripts/memory_atlas_source_capture_entry.py ops/memory-atlas
+          pytest -q OpenAIDatabase/tests/test_memory_atlas_private_v31.py OpenAIDatabase/tests/test_memory_atlas_source_runner_v31.py
       - name: Shell syntax
         run: |
           find ops/memory-atlas -type f \( -name '*.sh' -o -name 'memory-atlas-selfheal' \) -print0 | xargs -0 -n1 bash -n
@@ -74,20 +74,38 @@ jobs:
         run: |
           npm run lint
           npm run validate:preservation
+          npm run validate:v31
+          npm run validate:v31:incremental
+          npm run validate:v31:typescript
           npm run build
           npm run validate:whole-project
-      - name: Fail closed on unresolved merge or placeholder markers
+      - name: Thirteen-route browser acceptance with A/B/C and light/dark
+        working-directory: MemoryAtlas
+        run: |
+          npx playwright install --with-deps chromium
+          npm run preview -- --host 127.0.0.1 --port 4173 > "$RUNNER_TEMP/memory-atlas-preview.log" 2>&1 &
+          PREVIEW_PID=$!
+          trap 'kill "$PREVIEW_PID" 2>/dev/null || true' EXIT
+          for _ in $(seq 1 60); do curl -fsS http://127.0.0.1:4173 >/dev/null && break; sleep 1; done
+          MEMORY_ATLAS_BASE_URL=http://127.0.0.1:4173 npm run validate:v31:browser
+      - name: Fail closed on markers, caches, parallel shells and credential material
         run: |
           python - <<'PY'
           from pathlib import Path
-          roots=[Path('MemoryAtlas/src/v31'),Path('OpenAIDatabase/scripts/memory_atlas_private'),Path('ops/memory-atlas')]
-          merge_tokens=('<<<<<<<','=======','>>>>>>>')
+          import re
+          roots=[Path('MemoryAtlas/src/v31'),Path('MemoryAtlas/src/features/v31'),Path('OpenAIDatabase/scripts/memory_atlas_private'),Path('ops/memory-atlas')]
+          merge_tokens=('<'*7,'='*7,'>'*7)
           placeholder_tokens=('T'+'ODO','T'+'BD','FIX'+'ME')
+          secret=[re.compile(r'ghp_[A-Za-z0-9]{20,}'),re.compile(r'BEGIN [A-Z ]*PRIVATE KEY'),re.compile(r'password\s*=\s*[^\s"\']+',re.I)]
           bad=[]
           for root in roots:
               for path in root.rglob('*'):
                   if not path.is_file(): continue
+                  if '__pycache__' in path.parts or path.suffix=='.pyc': bad.append(f'{path}:cache'); continue
                   text=path.read_text(encoding='utf-8',errors='ignore')
-                  if any(token in text for token in merge_tokens + placeholder_tokens): bad.append(str(path))
-          if bad: raise SystemExit('unresolved markers: '+', '.join(bad))
+                  if any(token in text for token in merge_tokens + placeholder_tokens): bad.append(f'{path}:marker')
+                  if any(pattern.search(text) for pattern in secret): bad.append(f'{path}:secret')
+          app=Path('MemoryAtlas/src/App.tsx').read_text(encoding='utf-8')
+          if re.search(r'V31App|legacy\s*=|ma31-legacy-boundary|ma31-root',app): bad.append('MemoryAtlas/src/App.tsx:parallel-shell')
+          if bad: raise SystemExit('acceptance violations: '+', '.join(sorted(set(bad))))
           PY

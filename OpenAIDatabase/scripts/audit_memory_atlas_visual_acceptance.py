@@ -153,7 +153,15 @@ def audit_visual_acceptance(repo_root: Path) -> dict[str, Any]:
 
     require(
         checks,
-        'const visualFocusViews: ViewKey[] = ["home", "galaxy", "notion", "roi", "obsidian", "timeline", "contribution", "wordcloud", "summary"]' in app_source
+        # The nine original visual-first views must all keep the full-scene
+        # layout. The list is checked by membership rather than as one frozen
+        # literal so additive v31 views can join it without weakening the
+        # contribution contract this check exists to protect.
+        "const visualFocusViews: ViewKey[] = [" in app_source
+        and all(
+            f'"{view}"' in app_source.split("const visualFocusViews: ViewKey[] = [", 1)[1].split("]", 1)[0]
+            for view in ("home", "galaxy", "notion", "roi", "obsidian", "timeline", "contribution", "wordcloud", "summary")
+        )
         and "const wideView = visualFocusViews.includes(activeView)" in app_source
         and "const workspaceClassName = wideView ? `workspace visual-focus-workspace ${activeView}-workspace` : \"workspace\"" in app_source
         and "const showSideInspector = activeView === \"contribution\" || !wideView" in app_source
