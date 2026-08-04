@@ -1,0 +1,82 @@
+{
+ "q-01": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "gm-anonymous-fidelity-01"
+ },
+ "q-02": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "gm-boundary-01"
+ },
+ "q-03": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "gm-capability-calibration-01"
+ },
+ "q-04": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "gm-contrast-01"
+ },
+ "q-05": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "gm-fact-preservation-01"
+ },
+ "q-06": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "gm-identity-routing-01"
+ },
+ "q-07": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "gm-known-01"
+ },
+ "q-08": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "gm-long-horizon-01"
+ },
+ "q-09": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "gm-planning-fidelity-01"
+ },
+ "q-10": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "gm-refusal-stop-01"
+ },
+ "q-11": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "gm-style-decoy-01"
+ },
+ "q-12": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "gm-task-completion-01"
+ },
+ "q-13": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "gm-token-efficiency-01"
+ },
+ "q-14": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "gm-tool-use-01"
+ },
+ "q-15": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "gm-trajectory-01"
+ },
+ "q-16": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "gm-voice-01"
+ }
+}
