@@ -1,4 +1,4 @@
-# Release verification — Persona Distiller v0.0.0.94
+# Release verification — Persona Distiller v0.0.0.95
 
 Date: 2026-08-04（v0.0.0.83，下表已重跑）
 

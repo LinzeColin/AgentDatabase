@@ -54,7 +54,14 @@ KINDS = {
     "pre1929": "1929 年前出版，版权已过期",
     "congressional": "国会记录/听证，GPO 印无标记",
     "unpublished_303": "17 U.S.C. §303 未刊作品：卒年 +70，且 2003-01-01 下限已过",
+    # ★★ v0.0.0.95：与 build_source_ledger 的词汇表对齐。
+    #   我在同一天先后写了两套取值表，`publicly-accessible` 与 `other` 台账认、本件不认
+    #   ——新人物的台账若用了它们，本件会误报「不具名」。**两套词汇表就是漂移。**
+    "publicly-accessible": "公开可读、无付费墙、未绕过访问控制 —— **这不是公有领域**",
+    "other": "以上都不是，须在 rights_note 里写清",
 }
+# ★ 真正进入「公有领域」统计的只有这五条；后两条**不算 PD**。
+PD_KINDS = {"sec105", "notice1909", "pre1929", "congressional", "unpublished_303"}
 
 # ★ 见到这些词，「在职」这个前提就不成立 —— DeBakey 三卷的实况
 EX_OFFICE = re.compile(r"formerly|ex-|retired|前任|卸任|退役|离任|脱离军职|已是平民", re.I)
@@ -118,6 +125,16 @@ def check(claims: list) -> list:
             elif y >= 1929:
                 bad.append(f"{w}：**year={y} 不早于 1929**")
 
+        if kind == "publicly-accessible":
+            # ★ 它不是公有领域，所以不核 PD 依据；核的是「取用方式合规」有没有写出来
+            if not re.search(r"付费墙|paywall|公开|open|无需登录|未绕过|访问控制", ev, re.I):
+                bad.append(f"{w}：`publicly-accessible` 的证据要写清**取用方式**"
+                           f"（公开可读、无付费墙、未绕过访问控制），"
+                           f"**而且它不是公有领域**——不要拿它去凑 PD 的数")
+
+        if kind == "other" and not str(c.get("rights_note") or "").strip():
+            bad.append(f"{w}：`other` 必须在 `rights_note` 里写清是什么")
+
         if kind == "unpublished_303":
             dy = c.get("death_year")
             if not isinstance(dy, int):
@@ -138,14 +155,23 @@ def check(claims: list) -> list:
 
 
 def summarize(claims: list) -> dict:
-    """→ 分依据计数，并**单列 §105 且本人署名的那一档**（排期口径就看这个数）。"""
+    """→ 分依据计数。**「真公有领域」与「公开可分析」必须分开报**——
+
+    这两件事结论完全不同，而全量实测里后者是主导（102 个交付包 7,629 条来源，
+    明说公有领域的只有 7.7%）。**混在一起报，就等于把待裁定 ⑧ 的第 ① 问悄悄答了。**
+    """
     by, sec105_own, words = {}, 0, 0
     for c in claims:
         by[c.get("kind")] = by.get(c.get("kind"), 0) + 1
         if c.get("kind") == "sec105" and c.get("byline") != "institution":
             sec105_own += 1
             words += int(c.get("words") or 0)
-    return {"分依据": by, "**§105 且本人署名**": sec105_own, "其字数": words,
+    pd_n = sum(n for k, n in by.items() if k in PD_KINDS)
+    return {"分依据": by,
+            "**真公有领域**": pd_n,
+            "**公开可分析（不是 PD）**": by.get("publicly-accessible", 0),
+            "其它": by.get("other", 0),
+            "**§105 且本人署名**": sec105_own, "其字数": words,
             "总条数": len(claims)}
 
 
@@ -267,6 +293,29 @@ def selftest() -> int:
     cov = coverage([dict(u, source_id=f"x{i}") for i in range(95)], {f"s{i}" for i in range(89)})
     chk(f"覆盖率 {cov['覆盖率']}，**不可能超过 100%**", cov["覆盖率"] == "0%")
     chk("并且**明说主张指向台账里没有的来源**", "★★ 主张指向台账里没有的来源" in cov)
+
+    print("── ★★★ 反向对照 ⑫：与 build_source_ledger 的词汇表必须一致（v0.0.0.95）──")
+    import importlib.util as _iu, pathlib as _pl
+    _b = _pl.Path(__file__).resolve().parent / "build_source_ledger.py"
+    if _b.is_file():
+        _s = _iu.spec_from_file_location("_bsl", _b); _m = _iu.module_from_spec(_s); _s.loader.exec_module(_m)
+        chk(f"两套取值表一致（各 {len(KINDS)} 条）", set(KINDS) == set(_m.RIGHTS_GROUNDS))
+    else:
+        chk("build_source_ledger.py 不在——**词汇表一致性未核（不是通过）**", False)
+
+    print("── ★★ 反向对照 ⑬：`publicly-accessible` **不算进公有领域** ──")
+    s = summarize([{"kind": "pre1929"}, {"kind": "publicly-accessible"},
+                   {"kind": "publicly-accessible"}, {"kind": "other"}])
+    chk(f"真 PD {s['**真公有领域**']}、公开可分析 {s['**公开可分析（不是 PD）**']}、其它 {s['其它']}",
+        s["**真公有领域**"] == 1 and s["**公开可分析（不是 PD）**"] == 2 and s["其它"] == 1)
+    chk("publicly-accessible 的证据不写取用方式 → 报出",
+        any("取用方式" in x for x in check([{"work": "x", "kind": "publicly-accessible",
+                                            "evidence": "网上有"}])))
+    chk("写了取用方式 → 不报",
+        not check([{"work": "x", "kind": "publicly-accessible",
+                    "evidence": "作者官网公开可读，无付费墙，未绕过访问控制"}]))
+    chk("other 无 rights_note → 报出",
+        any("rights_note" in x for x in check([{"work": "x", "kind": "other", "evidence": "馆方授权"}])))
 
     print("── ★ 反向对照 ⑪：空表不报错，也不许被读成「通过」──")
     chk("空表返回空问题列表", check([]) == [])
