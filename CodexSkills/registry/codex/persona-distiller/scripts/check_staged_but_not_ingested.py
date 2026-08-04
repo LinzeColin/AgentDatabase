@@ -51,9 +51,11 @@ Barton 三轮用尽记拒发、Blackwell 卡在裁定 ⑤——**产物是按当
 import argparse
 import json
 import pathlib
+import re
 import sys
 
 WS_PATTERNS = ("workspaces/*/raw", "workspaces/*/*/raw", "ws-*/*/raw", "eval/raw")
+_TIER_RE = re.compile(r"^(P[123]|S[12]|U)$")   # 与 check_corpus_ceiling 同口径
 META = {"_ids", "_EXCLUDED"}
 
 
@@ -82,8 +84,17 @@ def tiers_of(person: pathlib.Path, names: set) -> dict:
         return out
     for line in ids.read_text(encoding="utf-8", errors="ignore").splitlines():
         c = line.split("\t")
-        if len(c) > 6 and c[0] in names:
-            out[c[0]] = c[6]
+        # ★★ 2026-08-05：**不许按固定列位取分档。**
+        #   全库 14 份 `_ids.txt` 有四种格式，其中 **virchow 是 8 列、少了 `locator` 那一列**：
+        #     现行 9 列  [0]short [1]url [2]title [3]year [4]locator [5]lang [6]tier [7]mark [8]note
+        #     virchow 8  [0]short [1]url [2]title [3]year [4]**lang** [5]**tier** [6]- [7]-
+        #   照 `c[6]` 取，virchow 拿到的是 `-`，不是 `P1`。
+        #   `check_corpus_ceiling` 早就不按列位取了（它在所有列里找匹配分档正则的那一个），
+        #   **同一个仓里两种做法，一个稳一个脆**——这里改成和它一样。
+        if len(c) > 2 and c[0] in names:
+            tier = next((x.strip() for x in c if _TIER_RE.match(x.strip())), None)
+            if tier:
+                out[c[0]] = tier
     return out
 
 

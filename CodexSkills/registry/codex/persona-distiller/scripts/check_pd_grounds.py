@@ -94,6 +94,7 @@ KINDS = {
     "other": "以上都不是，须在 rights_note 里写清",
 }
 # ★ 真正进入「公有领域」统计的只有这五条；后两条**不算 PD**。
+TIERS = {"P1", "P2", "S1", "S2", "U"}   # 与 build_source_ledger.TIERS 同源
 PD_KINDS = {"sec105", "notice1909", "pre1929", "congressional", "unpublished_303"}
 
 # ★ 见到这些词，「在职」这个前提就不成立 —— DeBakey 三卷的实况
@@ -180,6 +181,17 @@ def check(claims: list) -> list:
             if not UNPUBLISHED.search(ev):
                 bad.append(f"{w}：§303 只管**从未出版**的——证据里没有未刊/手稿/档案的表述。"
                            f"若它其实出版过，依据应是 1909 年法或 1929 年前那条")
+
+        # ★★ 2026-08-05：**分档词表本件此前根本不校验。**
+        #   我给 Carver 那四份机构署名的公报写了 `P3`——**P3 不是本项目的分档**
+        #   （真词表 `build_source_ledger.TIERS = {P1,P2,S1,S2,U}`，
+        #    全库台账实测出现 907 次，**P3 零次**）。
+        #   而本件只问「是不是 P1/P2」，于是 `P3` 作为「不是 P1/P2」**静默通过**。
+        #   ★ 又一次「空默认值吞掉不知道」：**一个不存在的值被读成了「合规」。**
+        tier = c.get("tier")
+        if tier is not None and tier not in TIERS:
+            bad.append(f"{w}：分档 `{tier}` **不在词表里**——只许 {sorted(TIERS)}。"
+                       f"（机构或同事署名的记 **S1**，他人所写的传记记 **S2**）")
 
         if c.get("byline") == "institution" and c.get("tier") in ("P1", "P2"):
             bad.append(f"{w}：★ **机构署名却标成个人一手（{c['tier']}）**——"
@@ -365,6 +377,18 @@ def selftest() -> int:
     chk(f"year=1931 → 报出（分界 {PD_PUBLISHED_BEFORE}）",
         any(f"不早于 {PD_PUBLISHED_BEFORE}" in x for x in check([{"work": "x", "kind": "pre1929",
                                                "year": 1931, "evidence": "版权页"}])))
+
+    print("── ★★★ 反向对照 ⑦·补：**分档不在词表里 → 必须报**（P3 曾静默通过） ──")
+    chk("tier=P3 被报出",
+        any("不在词表里" in x for x in check([{"work": "x", "kind": "pre1929", "year": 1900,
+                                              "evidence": "扉页", "tier": "P3"}])))
+    chk("★ 而 S1 / S2 是合法的，**不许误报**",
+        not any("不在词表里" in x for x in check([
+            {"work": "a", "kind": "pre1929", "year": 1900, "evidence": "扉页", "tier": "S1"},
+            {"work": "b", "kind": "pre1929", "year": 1900, "evidence": "扉页", "tier": "S2"}])))
+    chk("★ 没写 tier 的**不报**（本件不强制每条都有分档）",
+        not any("不在词表里" in x for x in check([{"work": "c", "kind": "pre1929",
+                                                  "year": 1900, "evidence": "扉页"}])))
 
     print("── ★★ 反向对照 ⑦：机构署名却标成个人一手 → 报出（归属不成立）──")
     p = check([{"work": "总统委员会报告", "kind": "congressional", "byline": "institution",
