@@ -134,7 +134,7 @@ def measure(cand: dict, base: dict) -> dict:
             "surface": surface}
 
 
-def verdict(m: dict) -> list:
+def verdict(m: dict, baseline_source: str = "self-authored-strawman") -> list:
     """→ 未过的条目列表；空表示都过。
 
     ★★ 2026-08-04 加入格式通道。此前只检长度，
@@ -148,18 +148,42 @@ def verdict(m: dict) -> list:
     两条都过、并打印「✓ 长度指不出哪一侧是哪个系统」——**那句话是错的**，
     97% 一边倒和 97% 倒向另一边一样能指认。
     """
-    bad = []
+    # ★★★ 2026-08-05 用户裁定（待裁定 ⑭）：**长度两条对 `bare-model-run` 基线只报不拦。**
+    #
+    #   撞出它的是 Carver #127 第 3 轮：按 `check_baseline_provenance` 的要求跑了真裸模型基线，
+    #   实测均长比 **0.46**、候选更短 **14/16 = 88%**，两条同时超门。
+    #   而那三条「修法」没有一条是诚实的：给候选注水＝为尺子损坏产物；
+    #   叫裸模型写短＝它不再是裸模型；改门＝为凑数放宽判据。
+    #
+    #   → **两道门结构性互斥**：`provenance` 要求基线必须是裸模型实答，
+    #     而真裸模型必然在篇幅上系统性不同。二者只能取其一，用户裁定取「能力证据」。
+    #
+    #   ★ 放宽的**射程被死死钉住**：
+    #     - 只对 `bare-model-run`（与 `prior-version`）放；
+    #     - `self-authored-strawman` / `unknown` **照旧硬拦**——
+    #       那是历史上 100+ 人用的类型，**若一并放宽，等于把这道门废掉**；
+    #     - **只放长度两条**，格式/项目符号/标题行/空行分段照旧硬拦；
+    #     - 放的是「拦」，不是「报」：数字照印，并注明盲性受限。
+    LENGTH_EXEMPT = {"bare-model-run", "prior-version"}
+    exempt = baseline_source in LENGTH_EXEMPT
+
+    bad: list = []
+    soft: list = []
     if m["agg"] > MAX_AGG:
-        bad.append(f"**总体均长比 {m['agg']:.2f} > {MAX_AGG}**——整体靠篇幅取胜")
+        (soft if exempt else bad).append(
+            f"**总体均长比 {m['agg']:.2f} > {MAX_AGG}**——整体靠篇幅取胜")
     elif m["agg"] < MIN_AGG:
-        bad.append(f"**总体均长比 {m['agg']:.2f} < {MIN_AGG:.2f}**"
-                   "——候选整体过短，长度同样会变成指认信号（**反方向的同一个问题**）")
+        (soft if exempt else bad).append(
+            f"**总体均长比 {m['agg']:.2f} < {MIN_AGG:.2f}**"
+            "——候选整体过短，长度同样会变成指认信号（**反方向的同一个问题**）")
     if m["shorter_frac"] < MIN_SHORTER:
-        bad.append(f"**候选更短的题只有 {m['shorter']}/{m['n']} = "
+        (soft if exempt else bad).append(
+            f"**候选更短的题只有 {m['shorter']}/{m['n']} = "
                    f"{m['shorter_frac']:.0%}，要 ≥{MIN_SHORTER:.0%}**"
                    "——长度会变成指认候选的信号")
     elif m["shorter_frac"] > MAX_SHORTER:
-        bad.append(f"**候选更短的题多达 {m['shorter']}/{m['n']} = "
+        (soft if exempt else bad).append(
+            f"**候选更短的题多达 {m['shorter']}/{m['n']} = "
                    f"{m['shorter_frac']:.0%}，要 ≤{MAX_SHORTER:.0%}**"
                    "——一边倒同样能指认，只是倒的方向反了")
 
@@ -169,6 +193,7 @@ def verdict(m: dict) -> list:
                        f"{s['exploit']:.0%} 的题（要 ≤{MAX_EXPLOIT:.0%}）**"
                        f"——「带此特征的是{s['side']}」这条规则不读内容就能稳赢"
                        f"（候选 {s['cand_n']}/{m['n']} 带，基线 {s['base_n']}/{m['n']} 带）")
+    m["_soft_length"] = soft          # 供调用方原样印出——**免拦不等于免报**
     return bad
 
 
@@ -312,6 +337,31 @@ def selftest() -> int:
     m5 = measure({"q": "候候候"}, {"q": "基"})
     chk(f"单题 3:1 → agg {m5['agg']:.1f}，更短 0/1", m5["n"] == 1 and m5["agg"] == 3.0)
 
+    # ★★★ 2026-08-05 用户裁定（待裁定 ⑭）的**射程对照**——
+    #   放宽只许对裸模型基线，且只许放长度两条。
+    #   若哪天有人把 LENGTH_EXEMPT 扩到 self-authored，这道门就等于废了
+    #   （历史 100+ 人全是那个类型），下面五条会当场拦住。
+    print("\n══ 基线来源豁免的射程（⑭ 裁定）══")
+    _m = {"agg": 0.46, "shorter": 14, "n": 16, "shorter_frac": 0.875, "surface": {}}
+    for src, want in (("self-authored-strawman", 2), ("unknown", 2), ("bare-model-run", 0)):
+        got = len(verdict(dict(_m), src))
+        okk = got == want
+        print(f"  {'✓' if okk else '✗'} {src:<24} 拦 {got} 条（应 {want}）")
+        if not okk:
+            fails.append(f"基线来源豁免射程：{src} 拦 {got} 应 {want}")
+    _f = {"agg": 1.0, "shorter": 8, "n": 16, "shorter_frac": 0.5,
+          "surface": {"粗体/反引号": {"exploit": 0.88, "cand_only": 14, "base_only": 0,
+                                     "side": "候选", "cand_n": 14, "base_n": 0}}}
+    got = len(verdict(_f, "bare-model-run"))
+    print(f"  {'✓' if got == 1 else '✗'} 格式通道：裸模型基线**照旧硬拦**（拦 {got}，应 1）")
+    if got != 1:
+        fails.append("格式通道对裸模型基线也必须硬拦")
+    _s = dict(_m); verdict(_s, "bare-model-run")
+    n_soft = len(_s.get("_soft_length", []))
+    print(f"  {'✓' if n_soft == 2 else '✗'} 免拦但**仍然报出**（{n_soft} 条，应 2）")
+    if n_soft != 2:
+        fails.append("免拦不等于免报：_soft_length 必须仍带 2 条")
+
     print(f"\n{'✓ 自测全过' if not fails else f'✗ **{len(fails)} 项未过**'}")
     return 0 if not fails else 2
 
@@ -321,6 +371,11 @@ def main() -> int:
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--candidate", help="{case_id: 答案} 的 JSON")
     ap.add_argument("--baseline", help="{case_id: 答案} 的 JSON")
+    ap.add_argument("--baseline-source", default="self-authored-strawman",
+                    choices=["bare-model-run", "prior-version",
+                             "self-authored-strawman", "unknown"],
+                    help="基线来源。★ 仅 bare-model-run / prior-version 免长度两条的**拦**"
+                         "（仍照报）；self-authored/unknown 照旧硬拦——见待裁定 ⑭")
     ap.add_argument("--self-test", action="store_true")
     a = ap.parse_args()
 
@@ -358,7 +413,13 @@ def main() -> int:
             print("    ★★ 改法只有两条：让基线也有据可引，或**接受并记为残余泄题**。"
                   "**绝不是把候选的引号删掉**——那会同时弄瞎三道引文判据。")
 
-    bad = verdict(m)
+    bad = verdict(m, a.baseline_source)
+    for s in m.get("_soft_length", []):
+        print("  ⚠（裸模型基线：**只报不拦**，见待裁定 ⑭） " + s)
+    if m.get("_soft_length"):
+        print("    ★ 盲性因此受限：**这一轮的 delta 有能力证据，但不是干净的盲判。**"
+              "\n    ★★ 免拦的理由是「真裸模型必然篇幅不同」，"
+              "**不是「长度无所谓」**——报数时必须带上这句话。")
     if not bad:
         print("\n  ✓ 已检的表面特征都指不出哪一侧是哪个系统"
               "（**只说明已知通道堵上了，不代表没有别的通道**）")

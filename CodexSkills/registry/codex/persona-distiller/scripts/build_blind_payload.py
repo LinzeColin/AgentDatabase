@@ -187,6 +187,9 @@ def main() -> int:
     ap.add_argument("--candidate", help="{case_id: 候选答案} 的 JSON")
     ap.add_argument("--baseline", help="{case_id: 基线答案} 的 JSON")
     ap.add_argument("--prefix", default="blind", help="落盘文件名前缀")
+    ap.add_argument("--baseline-source", default="self-authored-strawman",
+                    help="基线来源，透传给泄题门。★ bare-model-run 免长度两条的**拦**"
+                         "（仍照报），其余照旧硬拦——见待裁定 ⑭")
     ap.add_argument("--skip-leak-check", action="store_true",
                     help="★ 只在判据本身出问题时用；跳过就等于把泄题拖到判完之后才发现")
     ap.add_argument("--self-test", action="store_true")
@@ -361,7 +364,8 @@ def main() -> int:
         return 0
     print("\n── 表面特征泄题门（**派发之前必须过**）──")
     p = subprocess.run([sys.executable, str(LEAK_CHECKER),
-                        "--candidate", str(cand_path), "--baseline", str(base_path)],
+                        "--candidate", str(cand_path), "--baseline", str(base_path),
+                        "--baseline-source", a.baseline_source],
                        capture_output=True, text=True)
     print(p.stdout.rstrip())
     if p.returncode != 0:
