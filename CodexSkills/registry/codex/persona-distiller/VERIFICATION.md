@@ -1,6 +1,6 @@
-# Release verification — Persona Distiller v0.0.0.103
+# Release verification — Persona Distiller v0.0.0.104
 
-Date: 2026-08-04（**v0.0.0.103**）
+Date: 2026-08-04（**v0.0.0.104**）
 
 > **本文件记录「当前发布号的复验结果」，不是历史归档。**
 > 版本号必须等于根目录 `VERSION`，由 `scripts/check_contract_drift.py` 强制。
@@ -21,6 +21,16 @@ Date: 2026-08-04（**v0.0.0.103**）
 > **表格正文不在任何判据的射程里**。
 > **「本表每一行都来自本次实跑」是一句自述**——
 > 而自述不是证据（见 `self-report-is-not-evidence`）。
+
+> ### v0.0.0.104 这一版重跑了什么
+>
+> **相对 103 只加了一个函数**：`ocr_variant_pairs()`（**只报不拦**）。
+> **本次重跑**：`build_source_ledger --self-test`（含 **4 条新对照**，
+> 其中一条**重现了失效本身**——同一段德文过两条 OCR 管线，`near_duplicates` 判 `[]`）、
+> `build_manifest.py` 重建（**362 / 363 files**）、
+> pytest、`check_contract_drift`。**其余各行沿用 v0.0.0.96 那一次。**
+>
+> ★ 本条修正了 v0.0.0.102 自己的射程声明：**shingle 只在同一条 OCR 管线内有效**。
 
 > ### v0.0.0.103 这一版重跑了什么
 >

@@ -116,6 +116,47 @@ def near_duplicates(paths: dict, thr: float = 0.50) -> list:
     return sorted(out, reverse=True)
 
 
+_LONG_S = "ſ"          # ſ —— Fraktur 长 s
+_LS_RATE = 1e-4             # 出现率高于此视为「保留长 s 的那一版 OCR」
+
+
+def ocr_variant_pairs(paths: dict, min_rate: float = _LS_RATE) -> list:
+    """★★ **`near_duplicates` 的射程边界**（v0.0.0.104）——它在这类配对上会**整体归零**。
+
+    起因：Liebig #124 清点时实测，**同一本书**（Liebig–Reuning 书信集）的两份独立扫描件
+    containment = **0.0000，交集 0 个 shingle**；Kohut 传记两扫描件 0.0003。
+
+    机理已定位到字符级：Google 扫描件里 `ſ` 出现 **0** 次（OCR 把它归一成 s），
+    Toronto 扫描件出现 **14,367** 次（保留原字形）。而 `_WORD` 是 `[a-z0-9…]+`，
+    **`ſ` 不在字符类里，它被当成分隔符**——于是 `waſſer` 切成 `wa`+`er`，
+    `wasser` 是一个词。德文 8 词窗口几乎必含至少一个长 s，**逐窗全灭**。
+
+    ★ 所以既有那条记忆「同源 OCR 精确匹配零命中、shingle 给 0.77」**只覆盖 Antiqua**。
+    **Fraktur + 跨供应商时 shingle 自己也归零**，必须叠一层书目判重。
+    Liebig 补上 6 对书目重复后，来源数 68 → 62。
+
+    本件**不修**那个失效（改分词会动到已量过的所有人物），只**把失效说出来**：
+    报出「这两份的长 s 出现率差一个量级以上」的配对，
+    **在这些配对上 `near_duplicates` 的 0 分不可采信**。
+    """
+    rate = {}
+    for short, path in paths.items():
+        try:
+            text = path.read_text(encoding="utf-8", errors="ignore")
+        except OSError:
+            continue
+        if text:
+            rate[short] = text.count(_LONG_S) / len(text)
+    names = sorted(rate)
+    out = []
+    for i, a in enumerate(names):
+        for b in names[i + 1:]:
+            hi, lo = max(rate[a], rate[b]), min(rate[a], rate[b])
+            if hi >= min_rate and lo < min_rate / 10:
+                out.append((round(hi, 6), round(lo, 6), a, b))
+    return sorted(out, reverse=True)
+
+
 def independent_count(paths: dict, thr: float = 0.70) -> dict:
     """★ **「几份来源」与「几份独立来源」不是同一个数**（v0.0.0.103）。
 
@@ -243,6 +284,15 @@ def build(rows: list, src_dir: pathlib.Path, raw_dir: pathlib.Path, header: str)
             print(f"      阈值 {_thr:.2f} → 独立来源 **{_ic['**独立来源**']}** / "
                   f"{_ic['落盘份数']}（合并掉 {_ic['被合并的份数']} 份）")
         print("      ★ 门数的是**份数**（deep ≥45）。**贴着门槛的人身上，这个差会决定过不过。**")
+    ov = ocr_variant_pairs(landed)
+    if ov:
+        print(f"  ⚠⚠ **{len(ov)} 对文件的长 s（ſ）出现率差一个量级以上**——"
+              "这是两条不同的 OCR 管线（一条归一成 s，一条保留原字形）：")
+        for hi, lo, a, b in ov[:6]:
+            print(f"      {hi:.5f} vs {lo:.5f}   {a} ↔ {b}")
+        print("      ★★ **在这些配对上，上面那个 containment 分数不可采信**——"
+              "`ſ` 不在分词字符类里，被当成分隔符，德文 8 词窗口逐窗全灭，"
+              "**同一本书也会得 0.0000**（Liebig #124 实测）。**这类重复只能靠书目判**。")
     body = lines[1:]
     tiers, lanes = {}, {}
     for l in body:
@@ -329,6 +379,25 @@ def selftest() -> int:
         chk(f"最大的一组 {_ic['最大的一组']}", set(_ic["最大的一组"]) == {"x", "y"})
     _ic2 = independent_count({})
     chk("空输入不崩，独立来源 0", _ic2["**独立来源**"] == 0)
+
+    print("── ★★ 反向对照 ⑫：shingle 在跨 OCR 管线的长 s 上**自己归零**（v0.0.0.104）──")
+    with _tf.TemporaryDirectory() as _d:
+        _r = pathlib.Path(_d)
+        # 同一段德文，两条 OCR 管线：一条保留 ſ，一条归一成 s。**内容完全一样**。
+        _de = " ".join(f"waſſer{i:03d} und daſ feld beſteht aus ſtoff{i:03d}" for i in range(120))
+        (_r / "keep.txt").write_text(_de, encoding="utf-8")
+        (_r / "norm.txt").write_text(_de.replace("ſ", "s"), encoding="utf-8")
+        _pair = {"keep": _r / "keep.txt", "norm": _r / "norm.txt"}
+        _nd = near_duplicates(_pair, thr=0.01)
+        chk(f"**同一段文字，shingle 判为不重复**（这正是那个失效）：{_nd}", not _nd)
+        _ov = ocr_variant_pairs(_pair)
+        chk(f"★ 而本件把这一对**报了出来**：{_ov}", len(_ov) == 1)
+        # ★ 非空对照：同管线的两份不许被误报
+        (_r / "keep2.txt").write_text(_de.replace("feld", "fe1d"), encoding="utf-8")
+        chk("★ 同管线的两份（都保留 ſ）**不报**",
+            not ocr_variant_pairs({"keep": _r / "keep.txt", "keep2": _r / "keep2.txt"}))
+        chk("★★ 而同管线那一对 shingle **抓得到**——证明失效只出在跨管线",
+            near_duplicates({"keep": _r / "keep.txt", "keep2": _r / "keep2.txt"}, thr=0.01))
 
     print("── ★★ 反向对照 ⑨：权利依据必须具名（v0.0.0.94）──")
     chk("不写 rights_ground → 报出",
