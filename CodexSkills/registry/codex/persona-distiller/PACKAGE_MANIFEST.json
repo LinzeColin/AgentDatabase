@@ -376,8 +376,8 @@
     },
     {
       "path": "references/ledgers/_待用户裁定.md",
-      "sha256": "98698372d0c203a78e514a5d78a2e32afb7a553347be5edda3d2851968b78023",
-      "size_bytes": 6457
+      "sha256": "556d916517b1a948dd4b3bd01d15d937c190e3333773b0ef8200e86696efb180",
+      "size_bytes": 6802
     },
     {
       "path": "references/ledgers/_每次开工必读.md",
@@ -475,6 +475,11 @@
       "size_bytes": 5014
     },
     {
+      "path": "references/pipeline/checkers/check_answer_honors_constraints.py",
+      "sha256": "63f4b3d60183408055df4d436fb9d5c4c1e56f152443037f315840cb1372bb1f",
+      "size_bytes": 10295
+    },
+    {
       "path": "references/pipeline/checkers/check_answer_surface_leak.py",
       "sha256": "ad34a1d9a2707091f75f270f33820c323d5ab9e18ea3ca9fc80b2069752cd1a4",
       "size_bytes": 17681
@@ -516,8 +521,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_claim_source_independence.py",
-      "sha256": "7daa7d24345828932da57656fccdf892b8b267c9d60a4d1019b01581af92e334",
-      "size_bytes": 10535
+      "sha256": "8d9908dba8afcb4aef6655aea202d6af2d17d7cd9c5fc73dd933425d5a0c603f",
+      "size_bytes": 11560
     },
     {
       "path": "references/pipeline/checkers/check_contract_drift.py",
@@ -701,8 +706,8 @@
     },
     {
       "path": "references/pipeline/checkers/quality_check.py",
-      "sha256": "61d7d1c1ed6b12aa88e0f26cbb98da9264459d855963b85818389d520e0636f0",
-      "size_bytes": 123019
+      "sha256": "2c42e3b41244ca4ecbbfca547877c95a90a6f86e8c5bc2742323d8a947634137",
+      "size_bytes": 125472
     },
     {
       "path": "references/pipeline/checkers/verify_product.py",
@@ -940,6 +945,11 @@
       "size_bytes": 5014
     },
     {
+      "path": "scripts/check_answer_honors_constraints.py",
+      "sha256": "63f4b3d60183408055df4d436fb9d5c4c1e56f152443037f315840cb1372bb1f",
+      "size_bytes": 10295
+    },
+    {
       "path": "scripts/check_answer_surface_leak.py",
       "sha256": "ad34a1d9a2707091f75f270f33820c323d5ab9e18ea3ca9fc80b2069752cd1a4",
       "size_bytes": 17681
@@ -981,8 +991,8 @@
     },
     {
       "path": "scripts/check_claim_source_independence.py",
-      "sha256": "7daa7d24345828932da57656fccdf892b8b267c9d60a4d1019b01581af92e334",
-      "size_bytes": 10535
+      "sha256": "8d9908dba8afcb4aef6655aea202d6af2d17d7cd9c5fc73dd933425d5a0c603f",
+      "size_bytes": 11560
     },
     {
       "path": "scripts/check_contract_drift.py",
@@ -1246,8 +1256,8 @@
     },
     {
       "path": "scripts/quality_check.py",
-      "sha256": "61d7d1c1ed6b12aa88e0f26cbb98da9264459d855963b85818389d520e0636f0",
-      "size_bytes": 123019
+      "sha256": "2c42e3b41244ca4ecbbfca547877c95a90a6f86e8c5bc2742323d8a947634137",
+      "size_bytes": 125472
     },
     {
       "path": "scripts/register_persona.py",

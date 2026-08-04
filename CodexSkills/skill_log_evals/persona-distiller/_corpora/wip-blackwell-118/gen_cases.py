@@ -42,6 +42,25 @@ for line in (TARGET / "evidence/source-ledger.jsonl").read_text(encoding="utf-8"
         if r.get("split") == "holdout":
             HOLD[stem] = r["source_id"]
 
+
+# ★ 可机检的约束（`check_answer_honors_constraints` 读它）。
+#   **只加元数据，题面一字不动**——加约束不改变被测的东西。
+#   题面里的自然语言约束提取不了（已试过并否掉），所以出题人必须在这里显式写下来；
+#   **没写的，判据明说「未声明」，不当成通过**。
+CONSTRAINTS = {
+ "decoy-01": [{"kind": "exact_sentences", "value": 1}],
+ "decoy-02": [{"kind": "must_contain", "value": "美国第一位女医生"}],
+ "task-01":  [{"kind": "must_contain",
+               "value": ["解剖", "生理", "卫生", "化学", "临床", "伦理"]}],
+ "task-02":  [{"kind": "min_items", "value": 3}],
+ "plan-01":  [{"kind": "must_contain", "value": ["第一个月", "第二到第六个月"]}],
+ "token-01": [{"kind": "max_lines", "value": 3}],
+ "token-02": [{"kind": "exact_sentences", "value": 1}],
+ "anon-01":  [{"kind": "must_not_match", "value": r"Blackwell|1[78]\d\d"}],
+ "anon-02":  [{"kind": "must_not_match", "value": r"Blackwell|《"}],
+ "cal-02":   [{"kind": "must_contain", "value": "1910"}],
+}
+
 CASES = [
  # ── known（用 holdout 出题）──────────────────────────────────
  ("known-01", "known",
@@ -227,8 +246,11 @@ def main() -> int:
             if h not in HOLD:
                 raise SystemExit(f"✗ **`{h}` 不是 holdout**——known 类必须用 holdout 出题")
             hs.append(HOLD[h])
-        rows.append({"case_id": f"eb-{cid}", "suite": suite, "prompt": prompt,
-                     "rubric": rubric, "holdout_source_ids": hs})
+        row = {"case_id": f"eb-{cid}", "suite": suite, "prompt": prompt,
+               "rubric": rubric, "holdout_source_ids": hs}
+        if cid in CONSTRAINTS:
+            row["constraints"] = CONSTRAINTS[cid]
+        rows.append(row)
     out = TARGET / "evals/cases.jsonl"
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text("\n".join(json.dumps(r, ensure_ascii=False, sort_keys=True) for r in rows) + "\n",
@@ -242,6 +264,7 @@ def main() -> int:
         print(f"  ✗ **不足 2 题的套组：{short}**")
         return 1
     print(f"  用 holdout 出的题：{sum(1 for r in rows if r['holdout_source_ids'])}")
+    print(f"  声明了可机检约束的题：{sum(1 for r in rows if r.get('constraints'))}")
     return 0
 
 

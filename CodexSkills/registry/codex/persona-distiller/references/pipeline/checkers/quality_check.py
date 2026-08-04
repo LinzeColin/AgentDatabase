@@ -1661,6 +1661,49 @@ def run_rights_basis(report, target: Path) -> None:
     report.metrics['rights_basis'] = entry
 
 
+def run_answer_constraints(report, target: Path) -> None:
+    """题面写死的约束，答案接住了吗（v0.0.0.83，**只写 metrics**）。
+
+    Barton #117 第 3 轮两席点名的候选缺陷里**三处不是知识缺口**：
+    题目要「用这个称号写自我介绍」答成了否认＋履历、题面已写「不用管史实」仍拒写、
+    题设「三天后才能进场」而头一条仍讲「能早到一刻就早到一刻」。
+    **当时没有任何判据在看这件事**——`check_case_self_sufficiency` 管题面自不自足，
+    不管答案有没有照题面答。
+
+    **只检 `cases.jsonl` 里显式声明的 `constraints`**：题面里的自然语言约束提取不了
+    （拿「题面数字答案碰没碰」做过探针，32 题只覆盖 9 题且抓不到动因用例——
+    题面写的是「五万」，汉字数词）。
+    **「0 处未过」不等于「全部接住了」，要连「声明了几条」一起读。**
+    """
+    here = Path(__file__).resolve().parent
+    script = here / 'check_answer_honors_constraints.py'
+    if not script.exists():
+        report.metrics['answer_constraints'] = {'状态': '检查器未安装，**未核验**（不是通过）'}
+        return
+    spec = importlib.util.spec_from_file_location('_pd_answercons', script)
+    module = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(module)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['answer_constraints'] = {'状态': f'加载失败，**未核验**：{exc}'}
+        return
+    cf = target / 'evals/cases.jsonl'
+    pf = target / 'evals/judge_payload.v1.json'
+    if not (cf.is_file() and pf.is_file()):
+        report.metrics['answer_constraints'] = {
+            '状态': 'cases.jsonl 或 judge_payload 不在，**未核验**（不是通过）'}
+        return
+    try:
+        cases = [json.loads(l) for l in cf.read_text(encoding='utf-8').splitlines() if l.strip()]
+        answers = json.loads(pf.read_text(encoding='utf-8'))
+        problems, info = module.evaluate(cases, answers)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['answer_constraints'] = {'状态': f'运行失败，**未核验**：{exc}'}
+        return
+    info['未接住的'] = problems[:8]
+    report.metrics['answer_constraints'] = info
+
+
 def run_claim_source_independence(report, target: Path) -> None:
     """一条断言引的两份源，是不是同一部作品的两个见证（v0.0.0.82，**只写 metrics**）。
 
@@ -2276,6 +2319,7 @@ def main() -> int:
             run_measurement_claims(report, target)
             run_evidence_per_claim(report, target)
             run_claim_source_independence(report, target)
+            run_answer_constraints(report, target)
             run_unqualified_priority(report, target)
             run_sole_authorship(report, target)
             run_holdout_overlap(report, target, args.cache)
