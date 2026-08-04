@@ -371,7 +371,7 @@
     },
     {
       "path": "references/ledgers/_决策台账.md",
-      "sha256": "83e11621ecf488cf181e061f6f3fa6ba52e99f8bc9e2062c56ab52425f875452",
+      "sha256": "6a103fba06500bcca45ba0dc2efd75b269645a81190ebd3bb8eb1896efa05dc5",
       "size_bytes": 94714
     },
     {
@@ -443,6 +443,11 @@
       "path": "references/pipeline/checkers/README.md",
       "sha256": "100358609cccc075698fc7e56f6194bf219cda89154be10cad4a3a7740193192",
       "size_bytes": 5276
+    },
+    {
+      "path": "references/pipeline/checkers/assemble_judge_results.py",
+      "sha256": "b33c6a1eb4876d19df8c624824d9a885a362bfb4e064f568039b15f53b1dac3c",
+      "size_bytes": 13480
     },
     {
       "path": "references/pipeline/checkers/check_absence_claims.py",
@@ -878,6 +883,11 @@
       "path": "schemas/version-manifest.schema.json",
       "sha256": "9c03901fdadbf3bce74c96be09227825eceb0e611950c870118067c7011bb712",
       "size_bytes": 1398
+    },
+    {
+      "path": "scripts/assemble_judge_results.py",
+      "sha256": "b33c6a1eb4876d19df8c624824d9a885a362bfb4e064f568039b15f53b1dac3c",
+      "size_bytes": 13480
     },
     {
       "path": "scripts/build_manifest.py",

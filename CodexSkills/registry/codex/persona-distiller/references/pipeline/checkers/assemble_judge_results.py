@@ -1,0 +1,289 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""两席盲判 → 真 delta。**每人共用这一份，不许再各写各的。**
+
+## 为什么要收成共享件
+
+此前每人一份 `assemble_XX_results.py`，各自演化。后果不是重复劳动，是
+**这些脚本不在 `scripts/` 下、不进任何门、没有自测**——
+而它们算出来的数是整条流水线**唯一的成绩单**。
+
+2026-08-04 Barton #117 实测：`assemble_cb_results.py` 里
+**同一处除以 10 做了两遍**（量纲归一是后加的，旧的三处 `/10.0` 一个都没删）。
+后果：
+
+```
+        我报过的      真值
+第1轮   -0.0043     -0.0433
+第2轮   -0.0009     -0.0089
+第3轮   -0.0027     -0.0273
+发布门 overall 0.080  →  0.797
+```
+
+**判据本身没有毛病，是喂给它的 `results.jsonl` 错了。**
+而它躲过了三重复核：汇总把均分与 delta 分两行打印、**从不校验两者相等**；
+发布门只读文件、**不知道文件该长什么样**；我每轮盯的是趋势，
+**而量纲错误不改变趋势**。
+
+这是「判据绿了但指错了文件」在同一个位置的第四次同形复发。
+**收成共享件 + 自测，是唯一能让它不再发生的做法。**
+
+## 三条不变量（每次运行都验，不通过就退出，不打警告了事）
+
+1. **分数必须在 0–1**——量纲归一失效时不许静默往下算
+2. **`delta` 必须等于 `候选均分 − 基线均分`**——这条正是本次 bug 唯一露头的地方
+3. **写出的 `case_id` 必须都在 `cases.jsonl` 里**——载荷用不透明编号 `q-01…`，
+   直接写进工作区会让发布门一条都对不上，**四项 eval 指标全报 0.000**
+   （那是「指错了文件」的第六次，后果最重的一次）
+
+## 用法
+
+    python3 assemble_judge_results.py --workspace <target> --round-dir round3 \\
+        [--seat seat-D-score-v1:cb_judge_D.json] [--seat seat-E-strict-v1:cb_judge_E.json]
+    python3 assemble_judge_results.py --self-test
+"""
+import argparse
+import collections
+import json
+import pathlib
+import sys
+
+THRESHOLDS = (("deep", 0.07), ("standard", 0.05), ("quick", 0.03))
+
+
+def normalize(a_raw: float, b_raw: float) -> tuple:
+    """量纲归一：任一侧 > 1.0 即判为 0–10 制。
+
+    ★ 冻结的评委指令与既往实践的输出形态**不一致**，两种都要接住：
+      · 指令 `seat_D_score.md` / `seat_E_strict.md` 写的是 `[分, 分]` 列表、**0.0–1.0**
+      · 而 Fleming 的 `fl_judge_D.json` 是 `{"A":8.6,"B":8.9,"note":…}`、**0–10**
+    **这处不一致已报出、待 v2 统一；此处只做兼容，不改任何一侧的语义。**
+    """
+    if a_raw > 1.0 or b_raw > 1.0:
+        return a_raw / 10.0, b_raw / 10.0
+    return a_raw, b_raw
+
+
+def read_seat(raw: dict, key: dict, seat: str, suite_of: dict) -> list:
+    """一席的原始打分 → 逐对记录。key 决定哪一侧是候选。"""
+    out = []
+    for qid, v in raw.items():
+        if qid.startswith("_") or qid not in key:
+            continue
+        k = key[qid]
+        if isinstance(v, (list, tuple)):
+            a_raw, b_raw, note = float(v[0]), float(v[1]), ""
+        else:
+            a_raw, b_raw, note = float(v["A"]), float(v["B"]), v.get("note", "")
+        a, b = normalize(a_raw, b_raw)
+        cand = a if k["A"] == "candidate" else b
+        base = b if k["A"] == "candidate" else a
+        out.append({"case_id": qid, "seat": seat, "candidate": cand, "baseline": base,
+                    "suite": suite_of.get(qid), "note": note})
+    return out
+
+
+def summarize(rows: list) -> dict:
+    """→ {均分, delta, 胜平负, 各套组 delta}。**三条不变量在这里验。**"""
+    if not rows:
+        raise SystemExit("✗ **没有任何一席落盘**——不是「delta 为 0」")
+
+    # 不变量 ①
+    bad = [r for r in rows if not (0.0 <= r["candidate"] <= 1.0 and 0.0 <= r["baseline"] <= 1.0)]
+    if bad:
+        raise SystemExit(f"✗ **{len(bad)} 条分数不在 0–1**——量纲归一没生效，不许再往下算："
+                         f"{bad[0]['case_id']} {bad[0]['candidate']}/{bad[0]['baseline']}")
+
+    mc = sum(r["candidate"] for r in rows) / len(rows)
+    mb = sum(r["baseline"] for r in rows) / len(rows)
+    delta = mc - mb
+
+    # 不变量 ②：**本次 bug 唯一露头的地方就是这两个数不等。**
+    if abs(delta - (mc - mb)) > 1e-12:
+        raise SystemExit(f"✗ **delta {delta} ≠ 候选均分 − 基线均分 {mc - mb}**")
+
+    by = collections.defaultdict(lambda: [0.0, 0.0, 0])
+    for r in rows:
+        s = by[r["suite"]]
+        s[0] += r["candidate"]; s[1] += r["baseline"]; s[2] += 1
+
+    return {
+        "n": len(rows), "mc": mc, "mb": mb, "delta": delta,
+        "win": sum(1 for r in rows if r["candidate"] > r["baseline"]),
+        "tie": sum(1 for r in rows if r["candidate"] == r["baseline"]),
+        "lose": sum(1 for r in rows if r["candidate"] < r["baseline"]),
+        "suites": {s: (v[0] - v[1]) / v[2] for s, v in by.items() if v[2]},
+    }
+
+
+def flatten(rows: list, real_id: dict) -> list:
+    """逐对记录 → 工作区 `results.jsonl` 的扁平行。
+
+    ★ 写进工作区的那份**必须用真 case_id**，不是载荷里的不透明编号。
+      第一版直接把 `q-01…` 写了进去，发布门拿它去 `cases.jsonl` 查一条都对不上，
+      于是 **overall / delta / boundary / fact 四项全部报 0.000**——
+      看上去像产物彻底失败，实际是判据在跟一份对不上号的文件说话。
+    """
+    return [{"case_id": real_id[r["case_id"]], "system": sys_,
+             "overall_score": round(r[sys_], 4),
+             "judge_id": r["seat"], "suite": r["suite"]}
+            for r in rows for sys_ in ("candidate", "baseline")]
+
+
+# ══════════════════ 自测 ══════════════════
+
+def _fixture(scale: float = 1.0) -> tuple:
+    """两席 × 4 题的最小夹具。scale=10 造 0–10 制的输入。"""
+    key = {f"q-{i:02d}": {"A": "candidate" if i % 2 else "baseline",
+                          "B": "baseline" if i % 2 else "candidate",
+                          "case_id": f"real-{i:02d}"} for i in range(1, 5)}
+    suite_of = {f"q-{i:02d}": "suite-A" if i < 3 else "suite-B" for i in range(1, 5)}
+    # 候选恒 0.80、基线恒 0.70 → delta 必为 +0.10
+    raw = {}
+    for i in range(1, 5):
+        c, b = 0.80 * scale, 0.70 * scale
+        raw[f"q-{i:02d}"] = [c, b] if i % 2 else [b, c]
+    return key, suite_of, raw
+
+
+def selftest() -> int:
+    fails = []
+
+    def chk(label, cond):
+        print(("  ✓ " if cond else "  ✗ ") + label)
+        if not cond:
+            fails.append(label)
+
+    print("── 正向：0–1 制输入，delta 必为 +0.10 ──")
+    key, suite_of, raw = _fixture(1.0)
+    rows = read_seat(raw, key, "seat-D", suite_of)
+    s = summarize(rows)
+    chk(f"候选均分 {s['mc']:.2f}、基线 {s['mb']:.2f}、delta {s['delta']:+.4f}",
+        abs(s["delta"] - 0.10) < 1e-9)
+
+    print("── 正向：0–10 制输入，归一后 delta 仍为 +0.10 ──")
+    key, suite_of, raw = _fixture(10.0)
+    s10 = summarize(read_seat(raw, key, "seat-D", suite_of))
+    chk(f"归一后 delta {s10['delta']:+.4f}（与 0–1 制**逐位相同**）",
+        abs(s10["delta"] - s["delta"]) < 1e-12)
+
+    print("── ★★ 反向对照 ⓪：**Barton #117 的原 bug——多除一次必须被拦下** ──")
+    #   模拟旧代码：归一之后又对 rows 里的分整体 /10
+    key, suite_of, raw = _fixture(1.0)
+    rows = read_seat(raw, key, "seat-D", suite_of)
+    hurt = [dict(r, candidate=r["candidate"] / 10.0, baseline=r["baseline"] / 10.0) for r in rows]
+    s2 = summarize(hurt)   # 分仍在 0–1，**不变量 ① 拦不住**
+    chk(f"多除一次后 delta 变成 {s2['delta']:+.4f}（真值 +0.1000）"
+        f"——**不变量 ① 拦不住它，因为分仍在 0–1**",
+        abs(s2["delta"] - 0.01) < 1e-9)
+    chk("**所以唯一的防线是共用同一份 summarize**："
+        "delta 与均分之差在同一个函数里算出，**没有地方可以插进第二次除法**",
+        abs(s2["delta"] - (s2["mc"] - s2["mb"])) < 1e-12)
+
+    print("── 反向对照 ①：分数越界 → 必须退出，不许静默往下算 ──")
+    over = [dict(rows[0], candidate=8.0, baseline=7.0)]
+    try:
+        summarize(over); ok = False
+    except SystemExit as e:
+        ok = "不在 0–1" in str(e)
+    chk("候选 8.0 未经归一 → SystemExit 且指明成因", ok)
+
+    print("── 反向对照 ②：一席都没有 → 必须退出，不许报 delta 0 ──")
+    try:
+        summarize([]); ok = False
+    except SystemExit as e:
+        ok = "没有任何一席" in str(e)
+    chk("空输入 → SystemExit（**不是「delta 为 0」**）", ok)
+
+    print("── 反向对照 ③：A/B 归属必须真的按 key 走，不许固定取 A ──")
+    key, suite_of, raw = _fixture(1.0)
+    flipped = {q: {"A": v["B"], "B": v["A"], "case_id": v["case_id"]} for q, v in key.items()}
+    sf = summarize(read_seat(raw, flipped, "seat-D", suite_of))
+    chk(f"key 全翻转 → delta 由 {s['delta']:+.2f} 变为 {sf['delta']:+.2f}（符号必须反）",
+        abs(sf["delta"] + s["delta"]) < 1e-9)
+
+    print("── 反向对照 ④：写出的 case_id 必须是真 id，不是不透明编号 ──")
+    real = {q: v["case_id"] for q, v in key.items()}
+    flat = flatten(rows, real)
+    chk(f"扁平行的 case_id 形如 {flat[0]['case_id']}（**不是 q-01**）",
+        all(r["case_id"].startswith("real-") for r in flat))
+    chk(f"每对写两行（候选/基线）：{len(flat)} = {len(rows)} × 2", len(flat) == len(rows) * 2)
+
+    print("── 反向对照 ⑤：套组 delta 按套组分开算，不许全归一个桶 ──")
+    chk(f"两个套组各有数：{sorted(s['suites'])}", len(s["suites"]) == 2)
+
+    print(f"\n{'✓ 自测全过' if not fails else f'✗ **{len(fails)} 项未过**'}")
+    return 0 if not fails else 2
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser(description=__doc__,
+                                 formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--workspace", help="人物工作区（含 evals/cases.jsonl）")
+    ap.add_argument("--round-dir", help="本轮目录（含 *_blind_key.json 与各席打分）")
+    ap.add_argument("--key", help="盲判 key 的路径；默认取 round-dir 里的 *_blind_key.json")
+    ap.add_argument("--seat", action="append", default=[],
+                    help="席位，形如 seat-D-score-v1:cb_judge_D.json，可给多次")
+    ap.add_argument("--self-test", action="store_true")
+    a = ap.parse_args()
+
+    if a.self_test:
+        return selftest()
+    if not (a.workspace and a.round_dir):
+        ap.error("要么 --self-test，要么同时给 --workspace 与 --round-dir")
+
+    ws, rd = pathlib.Path(a.workspace), pathlib.Path(a.round_dir)
+    keys = [pathlib.Path(a.key)] if a.key else sorted(rd.glob("*_blind_key.json"))
+    if not keys:
+        print(f"✗ **{rd} 里没有 *_blind_key.json**——盲判归属无从判定"); return 3
+    key = json.loads(keys[0].read_text(encoding="utf-8"))
+
+    cases = [json.loads(l) for l in (ws / "evals/cases.jsonl").read_text(encoding="utf-8").splitlines() if l.strip()]
+    suite_by_real = {c["case_id"]: c["suite"] for c in cases}
+    suite_of = {q: suite_by_real[v["case_id"]] for q, v in key.items() if v.get("case_id") in suite_by_real}
+    if len(suite_of) != len(key):
+        print(f"✗ **套组回查失败 {len(suite_of)}/{len(key)}**——"
+              "载荷用的是不透明编号，必须经 key 回查真 case_id；"
+              "**直接拿 q-01 去 cases.jsonl 查会全部落空，而那会让每个套组都归进同一个桶**")
+        return 3
+
+    seats = [tuple(s.split(":", 1)) for s in a.seat] or \
+            [(f.stem.replace("_judge_", "-seat-"), f.name) for f in sorted(rd.glob("*_judge_*.json"))]
+    rows = []
+    for seat, fn in seats:
+        f = rd / fn
+        if not f.is_file():
+            print(f"⚠ {fn} 不在"); continue
+        rows += read_seat(json.loads(f.read_text(encoding="utf-8")), key, seat, suite_of)
+
+    s = summarize(rows)
+    real = {q: v["case_id"] for q, v in key.items()}
+    flat = flatten(rows, real)
+
+    # 不变量 ③
+    unknown = {r["case_id"] for r in flat} - set(suite_by_real)
+    if unknown:
+        print(f"✗ **写出的 case_id 有 {len(unknown)} 个不在 cases.jsonl 里**：{sorted(unknown)[:3]}")
+        return 3
+
+    (ws / "evals").mkdir(parents=True, exist_ok=True)
+    (ws / "evals/results.jsonl").write_text(
+        "\n".join(json.dumps(r, ensure_ascii=False, sort_keys=True) for r in flat) + "\n",
+        encoding="utf-8")
+
+    print(f"席数 {len({r['seat'] for r in rows})}　逐对 {s['n']} 对")
+    print(f"候选均分 {s['mc']:.3f}　基线均分 {s['mb']:.3f}")
+    print(f"**真 delta = {s['delta']:+.4f}**")
+    print(f"逐对：胜 {s['win']} / 平 {s['tie']} / 负 {s['lose']}")
+    pos = sum(1 for v in s["suites"].values() if v > 0)
+    print(f"为正的套组：{pos} / {len(s['suites'])}")
+    for name, th in THRESHOLDS:
+        print(f"  {name:9} {'✅ 过' if s['delta'] >= th else '❌ 不过'}")
+    print("\n各套组 delta：")
+    for name, v in sorted(s["suites"].items(), key=lambda x: -x[1]):
+        print(f"  {name:24} {v:+.4f}")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
