@@ -286,6 +286,31 @@ def main():
             if rec and rec["died"] < 1930:
                 no_probe.append(f"{it['name']}（卒 {rec['died']}）")
 
+    # ★★ v0.0.0.96：依据可行性分诊——**把探测的射程先缩一缩**。
+    #   七次探测七次延后、每次 30–70 分钟；而有几次，依据的适用条件在开跑前就排除了大部分路。
+    #   ★ 只用**卒年表里有出处的**生卒年；其余属性一律不知道 → 当作「还可能」，不许替人排除。
+    grounds_note = None
+    if nxt:
+        chk2 = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                             "..", "..", "scripts", "check_pd_grounds.py"))
+        rec = None
+        if os.path.isfile(a.years):
+            try:
+                rec = json.load(open(a.years, encoding="utf-8")).get(nxt["name"].strip().lower())
+            except Exception:
+                rec = None
+        if not os.path.isfile(chk2):
+            grounds_note = "**check_pd_grounds.py 不在——分诊未做（不是通过）**"
+        elif not (rec and rec.get("source")):
+            grounds_note = ("**卒年表里没有他（或没有出处）——分诊做不了**，"
+                            "五条依据一条都不能排除；探测要按全射程跑")
+        else:
+            import importlib.util as _iu
+            _s = _iu.spec_from_file_location("_pdg", chk2); _m = _iu.module_from_spec(_s)
+            _s.loader.exec_module(_m)
+            r = _m.feasible_grounds(born=rec.get("born"), died=rec.get("died"))
+            grounds_note = r["**结论**"] + f"（依据卒年表：{rec.get('born')}–{rec.get('died')}）"
+
     print(json.dumps({
         # ★★ 下面四个 queue_* 数的是**队列这一群**，不是「做了多少人」。
         #   实测：名册 100 人、队列 216 人，**两边都有的只有 7 人**——
@@ -299,6 +324,7 @@ def main():
         "队列中未动的": len(pending),
         "队列中已延后的": deferred_in_q,
         "★ 这个人要不要先跑可得性探测": probe_note or "**未核**",
+        "★ 探测射程（依据可行性分诊）": grounds_note or "**未做**",
         "★ 同族待办里不需要探测的": (no_probe or
             f"**0 人**——同族还有 {len(same_family)} 人待办，但卒年表里没有他们的条目，"
             f"**这不等于他们都需要探测，是卒年未知**（见任务：给队列补生卒年）"),

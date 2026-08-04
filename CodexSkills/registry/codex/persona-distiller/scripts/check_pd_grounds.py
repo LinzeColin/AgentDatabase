@@ -203,6 +203,50 @@ def coverage(claims: list, source_ids) -> dict:
     return out
 
 
+def feasible_grounds(born=None, died=None, us_federal=None, us_published_pre1978=None):
+    """★ **排期前的依据可行性分诊**：这个人身上，五条 PD 依据里哪几条**结构上还可能**？
+
+    起因（2026-08-04）：七次可得性探测七次延后，每次 30–70 分钟。
+    而其中几次，**依据的适用条件在开跑之前就已经排除了大部分路**——
+    例：1930 年出生的人，`pre1929` 不可能；非美国联邦雇员，`sec105` 不可能。
+
+    **这不是猜，是依据本身的适用条件。** 分诊的用处是**把探测的射程缩小**，
+    不是替探测下结论：**只要还剩一条可能，就仍然要探。**
+
+    参数一律可以是 `None`（不知道）——**不知道就当「还可能」，不许替人排除。**
+    """
+    out = {}
+    def mark(k, possible, why):
+        out[k] = {"可能": possible, "理由": why}
+
+    mark("pre1929",
+         born is None or born < 1929,
+         "出生于 1929 年之后，不可能有 1929 年前出版的作品" if (born and born >= 1929)
+         else ("生年未知——当作还可能" if born is None else "生年早于 1929，可能有"))
+    mark("sec105",
+         us_federal is not False,
+         "已知非美国联邦雇员" if us_federal is False
+         else ("是否任过美国联邦职务未知——当作还可能" if us_federal is None else "任过美国联邦职务"))
+    mark("notice1909",
+         us_published_pre1978 is not False,
+         "已知无 1978 年前的美国出版物" if us_published_pre1978 is False
+         else ("1978 年前有无美国出版物未知——当作还可能" if us_published_pre1978 is None
+               else "有 1978 年前的美国出版物"))
+    mark("unpublished_303",
+         died is None or died + 70 < THIS_YEAR,
+         f"卒年 {died}+70 = {died+70}，未到 {THIS_YEAR}，仍在保护期" if (died and died + 70 >= THIS_YEAR)
+         else ("卒年未知——当作还可能" if died is None else "卒年+70 已过"))
+    mark("congressional", True, "**任何人都可能在美国国会作过证——这一条不能靠属性排除，只能查**")
+
+    left = [k for k, v in out.items() if v["可能"]]
+    out["**还可能的依据**"] = left
+    out["**结论**"] = ("★ 五条全部排除——**但 `congressional` 永远不能靠属性排除**，此处必有 bug"
+                     if not left else
+                     f"探测射程可缩到 **{len(left)} 条**：{left}"
+                     + ("　★ **只剩国会记录一条，做一次窄探测即可**" if left == ["congressional"] else ""))
+    return out
+
+
 # ══════════════════ 自测 ══════════════════
 
 def selftest() -> int:
@@ -316,6 +360,21 @@ def selftest() -> int:
                     "evidence": "作者官网公开可读，无付费墙，未绕过访问控制"}]))
     chk("other 无 rights_note → 报出",
         any("rights_note" in x for x in check([{"work": "x", "kind": "other", "evidence": "馆方授权"}])))
+
+    print("── ★★ 反向对照 ⑭：依据可行性分诊（v0.0.0.96）──")
+    y = feasible_grounds(born=1930, died=2021, us_federal=False, us_published_pre1978=False)
+    chk(f"袁隆平那类（1930 生／2021 卒／非美联邦／无 1978 前美国出版）→ 只剩 {y['**还可能的依据**']}",
+        y["**还可能的依据**"] == ["congressional"])
+    b = feasible_grounds(born=1821, died=1910)
+    chk(f"Blackwell 那类（1821–1910，其余未知）→ {len(b['**还可能的依据**'])} 条仍可能",
+        set(b["**还可能的依据**"]) == {"pre1929", "sec105", "notice1909", "unpublished_303", "congressional"})
+    print("── ★★★ 反向对照 ⑮：**不知道就当还可能，不许替人排除** ──")
+    u = feasible_grounds()
+    chk(f"全不知道 → 五条全留（实得 {len(u['**还可能的依据**'])} 条）",
+        len(u["**还可能的依据**"]) == 5)
+    chk("★ `congressional` **永远不能靠属性排除**",
+        feasible_grounds(born=2020, died=2021, us_federal=False,
+                         us_published_pre1978=False)["**还可能的依据**"] == ["congressional"])
 
     print("── ★ 反向对照 ⑪：空表不报错，也不许被读成「通过」──")
     chk("空表返回空问题列表", check([]) == [])
