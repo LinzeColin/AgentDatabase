@@ -170,11 +170,21 @@ IMPORT_TO_DISTRIBUTION = {"jwt": "pyjwt"}
 def _undeclared_third_party_imports(declared: set[str]) -> set[str]:
     import ast
     import importlib.util
+    import sys
     import sysconfig
 
     stdlib = Path(sysconfig.get_paths()["stdlib"]).resolve()
+    # sys.stdlib_module_names is authoritative but 3.10+; the Owner's machine is
+    # 3.9. The path fallback must exclude site-packages explicitly: on CI it
+    # lives *inside* the stdlib directory, so a parent check alone classified
+    # every installed package as stdlib and the checker silently passed there.
+    # Deliberately not called `names`: the loop below rebinds that, and the
+    # closure then read the import list instead of the stdlib set.
+    stdlib_names = getattr(sys, "stdlib_module_names", None)
 
     def is_stdlib(root: str) -> bool:
+        if stdlib_names is not None:
+            return root in stdlib_names
         try:
             spec = importlib.util.find_spec(root)
         except (ImportError, ValueError):
@@ -184,9 +194,12 @@ def _undeclared_third_party_imports(declared: set[str]) -> set[str]:
         if spec.origin in (None, "built-in", "frozen"):
             return True
         try:
-            return stdlib in Path(spec.origin).resolve().parents
+            origin = Path(spec.origin).resolve()
         except OSError:
             return False
+        if any(part in {"site-packages", "dist-packages"} for part in origin.parts):
+            return False
+        return stdlib in origin.parents
 
     package_dir = REPO / "OpenAIDatabase" / "scripts" / "memory_atlas_private"
     local = {path.stem for path in package_dir.glob("*.py")}
