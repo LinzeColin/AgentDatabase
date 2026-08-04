@@ -4,7 +4,7 @@
   "display_name": "人物蒸馏 Skill / Persona Distiller",
   "distribution": {
     "canonical_registry": "../persona-distiller-group",
-    "kind": "repository-customized-v0.0.0.120",
+    "kind": "repository-customized-v0.0.0.121",
     "lineage_base_archive_sha256": "e891912d98d14afb7677ac935a19be329d97d206f4ae74a644892f46b17f6748"
   },
   "evaluation_suites": 16,
@@ -16,8 +16,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "4037a30614c5e3148189a6f3b0a726af524207f64a4dff67c64a92b4c8073f8b",
-      "size_bytes": 229441
+      "sha256": "60e61df227f403bb3765ba61a06838b51b1f2d0ba9497bb746303298c068b660",
+      "size_bytes": 231763
     },
     {
       "path": "CONTRIBUTING.md",
@@ -31,7 +31,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "d60c8807afb645219493f5b5ac5eb5d0094856b54c2697a47bf16e6bc154cb08",
+      "sha256": "fd2f3cd59531a2236c8383c0c951e485b0c540c1150bf09bac7a59273ec91e39",
       "size_bytes": 8803
     },
     {
@@ -56,12 +56,12 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "98ced1f29e7d46b9dbcfd023deea1c0be0012d4af6541d3412f20ebfcfefa615",
-      "size_bytes": 109988
+      "sha256": "2430b91aca6d17fcc495bc872677d6ce964f5cc5f4e4066bd5e96b25a0fe9375",
+      "size_bytes": 110503
     },
     {
       "path": "VERSION",
-      "sha256": "5e417a37814d88fe009a5de917edccbfe224491ea9fc12b0a8528ffb70dd7265",
+      "sha256": "b98424c3d16c2df3f71ffc89a26e6097bb5fe9ae76d0719d532cbba8729798f3",
       "size_bytes": 11
     },
     {
@@ -121,7 +121,7 @@
     },
     {
       "path": "handoff.md",
-      "sha256": "478eb236018300fedba6d8188f9e5608205ad8b7a02fee32b1899201fde1938c",
+      "sha256": "5df98e855e12ab811ce47a8f455c7d00b3038490643ee5244d53566fbaa2c88e",
       "size_bytes": 3703
     },
     {
@@ -141,7 +141,7 @@
     },
     {
       "path": "manifest.json",
-      "sha256": "096f051d925dbb6088bf53f0e6a294f8770421893331106da9a58e5cf1501d93",
+      "sha256": "9d804f7b75e76e99d5d32d807e22ae0505d987469c20edfdf3fc81887dd42ae9",
       "size_bytes": 1192
     },
     {
@@ -456,8 +456,8 @@
     },
     {
       "path": "references/pipeline/checkers/build_blind_payload.py",
-      "sha256": "b7147b8ae3b564a90daa74de4b4594ec7dd2d8ef8691a59ce55b089750137ee0",
-      "size_bytes": 18497
+      "sha256": "f84e3b2ccfc62decb972c1375b0cfb77fdeeef5f6d3542dfcff811f9b6208f96",
+      "size_bytes": 19954
     },
     {
       "path": "references/pipeline/checkers/build_source_ledger.py",
@@ -483,6 +483,11 @@
       "path": "references/pipeline/checkers/check_answer_honors_constraints.py",
       "sha256": "63f4b3d60183408055df4d436fb9d5c4c1e56f152443037f315840cb1372bb1f",
       "size_bytes": 10295
+    },
+    {
+      "path": "references/pipeline/checkers/check_answer_overclaims.py",
+      "sha256": "877987fc036a650d01c95cdd224fd50fc19765f7d0aedb00bdb69c77ac4c2912",
+      "size_bytes": 8342
     },
     {
       "path": "references/pipeline/checkers/check_answer_surface_leak.py",
@@ -770,6 +775,11 @@
       "size_bytes": 139514
     },
     {
+      "path": "references/pipeline/checkers/show_gate.py",
+      "sha256": "745a68d2278f2bba08ee7bfda28c9b0c1820fe562d158dc54961112344ea4cff",
+      "size_bytes": 5709
+    },
+    {
       "path": "references/pipeline/checkers/verify_product.py",
       "sha256": "925ad7adf9d7b43bcb406f547eeec593b508780f2eb827bc8e32fcbe2c837ea0",
       "size_bytes": 9651
@@ -976,8 +986,8 @@
     },
     {
       "path": "scripts/build_blind_payload.py",
-      "sha256": "b7147b8ae3b564a90daa74de4b4594ec7dd2d8ef8691a59ce55b089750137ee0",
-      "size_bytes": 18497
+      "sha256": "f84e3b2ccfc62decb972c1375b0cfb77fdeeef5f6d3542dfcff811f9b6208f96",
+      "size_bytes": 19954
     },
     {
       "path": "scripts/build_manifest.py",
@@ -1018,6 +1028,11 @@
       "path": "scripts/check_answer_honors_constraints.py",
       "sha256": "63f4b3d60183408055df4d436fb9d5c4c1e56f152443037f315840cb1372bb1f",
       "size_bytes": 10295
+    },
+    {
+      "path": "scripts/check_answer_overclaims.py",
+      "sha256": "877987fc036a650d01c95cdd224fd50fc19765f7d0aedb00bdb69c77ac4c2912",
+      "size_bytes": 8342
     },
     {
       "path": "scripts/check_answer_surface_leak.py",
@@ -1403,6 +1418,11 @@
       "path": "scripts/self_check.py",
       "sha256": "08ac055aec5d6ad310cbd385f9ecfafc021d4614817aa6e8a237582c29965803",
       "size_bytes": 11867
+    },
+    {
+      "path": "scripts/show_gate.py",
+      "sha256": "745a68d2278f2bba08ee7bfda28c9b0c1820fe562d158dc54961112344ea4cff",
+      "size_bytes": 5709
     },
     {
       "path": "scripts/validate_persona_registry.py",
@@ -1936,5 +1956,5 @@
     },
     "secret_findings": 0
   },
-  "version": "v0.0.0.120"
+  "version": "v0.0.0.121"
 }

@@ -225,6 +225,27 @@ def main() -> int:
     #   候选照做，**得 −0.1800**；`gm-boundary-01` 写「**顺着答下去即为失败**」，
     #   基线顺着答了，**赢 0.18**。两份冻结 rubric 判候选对、基线错，评委两者都看不到。
     #   ★ **只报不拦，且绝不把这些题剔出去**——去掉不利子集再报数就是为凑数放宽判据。
+    # ★★ v0.0.0.121：**每修一处引入一处，连续两轮四个实例**（见 _fix-introduces-new-defect.md）。
+    #   R2 修 contrast 引入「至今未见数字化本」；R3 修 task-completion 引入「同一卷」而全篇无卷次。
+    #   修完之后**没有任何一步去验改的那一处自己站不站得住**，要等下一轮评委再抓。
+    _oc = pathlib.Path(__file__).resolve().parent / "check_answer_overclaims.py"
+    if _oc.is_file() and a.candidate and pathlib.Path(a.candidate).is_file():
+        print("\n── 候选答案的两类过度断言（**只报不拦**）──")
+        _ro = subprocess.run([sys.executable, str(_oc), "--answers", a.candidate],
+                             capture_output=True, text=True)
+        try:
+            _io = json.loads(_ro.stdout)
+            _no = _io.get("**报出**", 0)
+            if _no:
+                for _h in _io.get("逐条", []):
+                    print(f"  ⚠ {_h['case_id']}　{_h['类']}（{_h['触发词']}）")
+                    print(f"      {_h['句']}")
+            else:
+                print("  ✓ 已故人物谈当下／指代悬空　各 0 处")
+            print("  ★ 本件判不了：「原文写的」后面的断言是否真在引文里、译文是否比原文宽")
+        except Exception as _eo:                                 # noqa: BLE001
+            print(f"  ⚠ 输出无法解析，**未核（不是通过）**：{_eo}")
+
     _here0 = pathlib.Path(__file__).resolve().parent
     _rw = _here0 / "check_restraint_without_remainder.py"
     _cases = pathlib.Path(a.workspace) / "evals" / "cases.jsonl"
