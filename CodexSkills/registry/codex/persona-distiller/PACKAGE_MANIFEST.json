@@ -4,7 +4,7 @@
   "display_name": "人物蒸馏 Skill / Persona Distiller",
   "distribution": {
     "canonical_registry": "../persona-distiller-group",
-    "kind": "repository-customized-v0.0.0.96",
+    "kind": "repository-customized-v0.0.0.97",
     "lineage_base_archive_sha256": "e891912d98d14afb7677ac935a19be329d97d206f4ae74a644892f46b17f6748"
   },
   "evaluation_suites": 16,
@@ -16,8 +16,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "0aae6cf54a26c11421ba2dfe8b27edd95fcd935f4ed5118f9bca9cfcde6c181d",
-      "size_bytes": 191354
+      "sha256": "149da00574983e8088d01abbc4b8b57d8caed2461e6545a931e0baf4de107d4a",
+      "size_bytes": 192357
     },
     {
       "path": "CONTRIBUTING.md",
@@ -31,7 +31,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "3b32bbc6cd5a0c4f74684ba7a2ff88df954ce2360c6fbc85baee6e167eb740b6",
+      "sha256": "fc6f29902434ab6de201df3c6be9257a54b6c1118a48ab2370320dc28965e3a5",
       "size_bytes": 8802
     },
     {
@@ -56,12 +56,12 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "7d90ffcb0d6f6f3713db0107510ab4390a1c3213a8f95ea8e0d5aa5529b43681",
-      "size_bytes": 99286
+      "sha256": "fc71adf332c7f7324902f31b5a2abb302090f9d7bd0a6fcbd5d940ae44556b84",
+      "size_bytes": 99913
     },
     {
       "path": "VERSION",
-      "sha256": "6e46488d93e337fcad525024bac2e33ebf538fe551f2ee83ff6519afb4425a30",
+      "sha256": "4e8749d3ce33c86118adf729567da7568f7a683804f5cd2d65bfcdadc61e01f4",
       "size_bytes": 10
     },
     {
@@ -121,7 +121,7 @@
     },
     {
       "path": "handoff.md",
-      "sha256": "70bfefa88cc0d47bf24cc8819049045d74d3cc01f149dc4e9a18ae031ea886cf",
+      "sha256": "7591ce5bb23d609963ac6e0f344705d3ccf59322c2d36ee56c0b9c82b7584e94",
       "size_bytes": 3702
     },
     {
@@ -141,7 +141,7 @@
     },
     {
       "path": "manifest.json",
-      "sha256": "e26d553f55ba0a65897cef4c94240b48c0b62348c1d0ba8f81eaca926a5cfe5b",
+      "sha256": "1b070a027eee739e97a68402ec64e8b3047a6190b1d45f29d82fbc574b25fbf8",
       "size_bytes": 1191
     },
     {
@@ -376,8 +376,8 @@
     },
     {
       "path": "references/ledgers/_待用户裁定.md",
-      "sha256": "9110a37567fafb1b0da3718dc432f651b668085df4a6bf66e17d838a8e525073",
-      "size_bytes": 40021
+      "sha256": "416beca4b3bd4f29e4b2d3445a11198b1060dc82e4a559d8fee29f2b8b71419f",
+      "size_bytes": 42113
     },
     {
       "path": "references/ledgers/_每次开工必读.md",
@@ -616,8 +616,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_pd_grounds.py",
-      "sha256": "1ba3b155422470b055f97ddf21d238bf3a0907a75bbe76c95f079ec8ed789b8b",
-      "size_bytes": 24286
+      "sha256": "9a7c6699b99fe8d8493e525c578017d885e262bc91b18a221917dc098dc24c84",
+      "size_bytes": 26122
     },
     {
       "path": "references/pipeline/checkers/check_probe_precondition.py",
@@ -1111,8 +1111,8 @@
     },
     {
       "path": "scripts/check_pd_grounds.py",
-      "sha256": "1ba3b155422470b055f97ddf21d238bf3a0907a75bbe76c95f079ec8ed789b8b",
-      "size_bytes": 24286
+      "sha256": "9a7c6699b99fe8d8493e525c578017d885e262bc91b18a221917dc098dc24c84",
+      "size_bytes": 26122
     },
     {
       "path": "scripts/check_probe_precondition.py",
@@ -1856,5 +1856,5 @@
     },
     "secret_findings": 0
   },
-  "version": "v0.0.0.96"
+  "version": "v0.0.0.97"
 }

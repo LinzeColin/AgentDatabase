@@ -32,6 +32,20 @@
 7. **机构署名不许标成个人一手**——`byline=institution` 而 `tier` 是 P1 → 报出，
    归到「归属不成立」，不要混进可得性统计
 
+## ★★ 口径：**五条依据全部是美国法**
+
+`§105` / `§303` 是 17 U.S.C.；`notice1909` 是 1909 年美国版权法的标记要求；
+`pre1929` 是美国版权到期；`congressional` 是美国 GPO 出版物。
+
+**若作品的原属国不是美国，本判据的结论可能与该国法不同。** 两个已实测的差别：
+
+- **保护期**：中国著作权法是作者终身 **+50**（袁隆平卒 2021 → 2071），
+  美国是终身 **+70**（→2091）。**两个数不同，而本判据只认后者。**
+- **不受保护的对象**：中国《著作权法》第五条把**法律法规、国家机关的决议决定命令、时事新闻**
+  排除在保护之外——**本判据的五条里没有对应项**。
+
+**本判据不替非美国人物下结论**，只在输出里把这个口径说出来。属待裁定 ⑩。
+
 ## 它不做什么
 
 - **不判某份东西是不是公有领域。** 那是调用方（和法律）的判断。
@@ -167,7 +181,11 @@ def summarize(claims: list) -> dict:
             sec105_own += 1
             words += int(c.get("words") or 0)
     pd_n = sum(n for k, n in by.items() if k in PD_KINDS)
-    return {"分依据": by,
+    return {"★ 口径": ("**五条依据全部依据美国法**（17 U.S.C. §105/§303、1909 年法、"
+                      "美国版权到期、GPO 国会出版物）。**若作品原属国不是美国，"
+                      "结论可能与该国法不同**——例：中国是终身+50、美国是终身+70；"
+                      "中国《著作权法》第五条排除的对象在本判据里没有对应项。属待裁定 ⑩"),
+            "分依据": by,
             "**真公有领域**": pd_n,
             "**公开可分析（不是 PD）**": by.get("publicly-accessible", 0),
             "其它": by.get("other", 0),
@@ -238,7 +256,8 @@ def feasible_grounds(born=None, died=None, us_federal=None, us_published_pre1978
          else ("卒年未知——当作还可能" if died is None else "卒年+70 已过"))
     mark("congressional", True, "**任何人都可能在美国国会作过证——这一条不能靠属性排除，只能查**")
 
-    left = [k for k, v in out.items() if v["可能"]]
+    out["★ 口径"] = ("**五条依据全部依据美国法**——非美国人物的结论可能与其原属国法不同（待裁定 ⑩）")
+    left = [k for k, v in out.items() if isinstance(v, dict) and v.get("可能")]
     out["**还可能的依据**"] = left
     out["**结论**"] = ("★ 五条全部排除——**但 `congressional` 永远不能靠属性排除**，此处必有 bug"
                      if not left else
@@ -375,6 +394,12 @@ def selftest() -> int:
     chk("★ `congressional` **永远不能靠属性排除**",
         feasible_grounds(born=2020, died=2021, us_federal=False,
                          us_published_pre1978=False)["**还可能的依据**"] == ["congressional"])
+
+    print("── ★★ 反向对照 ⑯：口径必须出现在**每一次**输出里（v0.0.0.97）──")
+    for label, cl in (("有主张时", [{"kind": "pre1929", "year": 1900, "evidence": "x"}]),
+                      ("空表时", [])):
+        s = summarize(cl)
+        chk(f"{label}都带口径说明", "★ 口径" in s and "美国法" in s["★ 口径"])
 
     print("── ★ 反向对照 ⑪：空表不报错，也不许被读成「通过」──")
     chk("空表返回空问题列表", check([]) == [])
