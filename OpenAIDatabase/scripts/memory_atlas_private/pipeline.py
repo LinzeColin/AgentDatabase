@@ -903,7 +903,7 @@ class RemoteReconcilePipeline(LiveSnapshotPublisherMixin):
             # data/processed/codex, whose local writer stopped on 2026-07-17.
             # Regenerating it here is what actually joins the two planes.
             atlas_rebuild = regenerate_atlas_snapshot(
-                _iter_events(temporary),
+                live_events,
                 database_dir=Path(__file__).resolve().parents[2],
                 work_dir=self.config.work_dir,
                 output=self.config.web_data_dir / "memory_atlas.json",

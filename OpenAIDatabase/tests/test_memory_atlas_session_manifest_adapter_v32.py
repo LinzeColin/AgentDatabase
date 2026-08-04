@@ -174,3 +174,15 @@ def test_regeneration_skips_when_a_run_carries_no_sessions(tmp_path) -> None:
     )
     assert result["state"] == "SKIPPED"
     assert not (tmp_path / "out.json").exists()
+
+
+def test_the_adapter_is_fed_dicts_not_dataclasses() -> None:
+    """The end-to-end tests caught this: _iter_events yields NormalizedEvent
+    instances, and the adapter reads events with .get(). It is fed the already
+    materialized rows, which also avoids reading the batch file twice."""
+    source = (
+        __import__("pathlib").Path(__file__).resolve().parents[1]
+        / "scripts" / "memory_atlas_private" / "pipeline.py"
+    ).read_text(encoding="utf-8")
+    assert "regenerate_atlas_snapshot(\n                live_events," in source
+    assert "regenerate_atlas_snapshot(\n                _iter_events(" not in source
