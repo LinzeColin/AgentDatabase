@@ -117,7 +117,9 @@ train split，全部 P1 载体：
 ## Proposed Holdout cases
 
 IDs only; research Agents must not inspect Holdout bodies.
-本轮 holdout 为空——20 个载体全部 train。**quick 档不强制 holdout**，
+★ **本轮 holdout 3 件**（`src-b902c69c1c6c` Focke 1881、`src-fbeba4f2b1e3` Bateson、`src-689126fa2096`），train 17 件。
+**本道未取用任何 holdout 载体**——三件 id 在全部研究文档与断言里各 0 处（已实测）。
+（★ 此处原写「holdout 为空，20 件全部 train」，**与台账不符，2026-08-05 更正**；台账 `evidence/source-ledger.jsonl` 一直标着 17 train / 3 holdout，**行为无误，是本文写错**。）**quick 档不强制 holdout**，
 但这意味着**本人物没有留出独立复核集**，须在处置记录里写明。
 
 ## Handoff to adjudication

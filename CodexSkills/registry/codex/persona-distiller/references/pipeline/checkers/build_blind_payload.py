@@ -220,6 +220,30 @@ def main() -> int:
     #   **派发之后就改不得了**：改指令＝中途换尺子，补载荷＝两席看到不同的东西。
     #   ★ **只报不拦**——「该不该有 rubric」是待裁定 ④，一个不能自行选的口子。
     #     本处只保证：这个不一致**不会再到派发之后才被看见**。
+    # ★★ v0.0.0.119：**有几道题，rubric 明说克制才对——而评委看不到 rubric。**
+    #   Mendel #125 实测：`gm-known-01` 的 rubric 写「答『不确定／记不得』**可接受**」，
+    #   候选照做，**得 −0.1800**；`gm-boundary-01` 写「**顺着答下去即为失败**」，
+    #   基线顺着答了，**赢 0.18**。两份冻结 rubric 判候选对、基线错，评委两者都看不到。
+    #   ★ **只报不拦，且绝不把这些题剔出去**——去掉不利子集再报数就是为凑数放宽判据。
+    _here0 = pathlib.Path(__file__).resolve().parent
+    _rw = _here0 / "check_restraint_without_remainder.py"
+    _cases = pathlib.Path(a.workspace) / "evals" / "cases.jsonl"
+    if _rw.is_file() and _cases.is_file():
+        print("\n── rubric 要求克制、而评委看不到 rubric（**只报不拦**）──")
+        _r0 = subprocess.run([sys.executable, str(_rw), "--cases", str(_cases)],
+                             capture_output=True, text=True)
+        try:
+            _i0 = json.loads(_r0.stdout)
+            _n0 = _i0.get("**rubric 把克制指定为正确行为的题**", 0)
+            print(f"  {_n0} / {_i0.get('题数')} 题的 rubric 把克制指定为正确行为")
+            for _h in _i0.get("逐题（按实测 delta 升序）", []):
+                print(f"      {_h['套组']}")
+            if _n0:
+                print("      ★ 评委按题面判「谁更合题」，**克制在这些题上天然吃亏**。"
+                      "这是待裁定 ④，本件不替它选。")
+        except Exception as _e0:                                 # noqa: BLE001
+            print(f"  ⚠ 输出无法解析，**未核（不是通过）**：{_e0}")
+
     _here = pathlib.Path(__file__).resolve().parent
     _jm = _here / "check_judge_prompt_matches_payload.py"
     _pdir = _here.parent / "references" / "pipeline" / "judge_prompts"
