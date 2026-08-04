@@ -309,7 +309,7 @@ def regenerate_atlas_snapshot(
     """
     import subprocess
 
-    from .session_manifest_adapter import build_daily_rows, build_session_rows
+    from .codex_activity_adapter import build_daily_rows, build_session_rows
 
     sessions = build_session_rows(events)
     daily = build_daily_rows(sessions)

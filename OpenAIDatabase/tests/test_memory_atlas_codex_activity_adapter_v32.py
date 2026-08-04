@@ -10,7 +10,7 @@ from __future__ import annotations
 
 import json
 
-from OpenAIDatabase.scripts.memory_atlas_private.session_manifest_adapter import (
+from OpenAIDatabase.scripts.memory_atlas_private.codex_activity_adapter import (
     ALLOWED_SESSION_FIELDS,
     build_daily_rows,
     build_session_rows,
@@ -189,3 +189,20 @@ def test_the_adapter_is_fed_dicts_not_dataclasses() -> None:
     ).read_text(encoding="utf-8")
     assert "regenerate_atlas_snapshot(\n                live_events," in source
     assert "regenerate_atlas_snapshot(\n                _iter_events(" not in source
+
+
+def test_no_tracked_filename_uses_the_forbidden_session_pattern() -> None:
+    """The repository forbids tracked filenames matching `sessions?`, to stop raw
+    session data being committed. This adapter's first filenames tripped it and
+    CI caught it after the local gate had gone green."""
+    import re
+    import subprocess
+    from pathlib import Path
+
+    repo = Path(__file__).resolve().parents[2]
+    tracked = subprocess.run(
+        ["git", "ls-files", "OpenAIDatabase/scripts/memory_atlas_private", "OpenAIDatabase/tests"],
+        cwd=repo, capture_output=True, text=True, check=True,
+    ).stdout.split()
+    offenders = [name for name in tracked if re.search(r"sessions?", name)]
+    assert offenders == [], offenders
