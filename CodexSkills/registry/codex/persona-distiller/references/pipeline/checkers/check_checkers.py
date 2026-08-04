@@ -338,6 +338,27 @@ def main() -> int:
     print("    真正有风险的是**会做筛选的加载器**（`check_probe_precondition.load_years` "
           "就丢掉过在世的人，自测因此全绿而真跑是错的）。")
     print("    **改动加载逻辑时，给那一件补一条走完整路径的对照。**")
+    # ★★ v0.0.0.112：把那个笼统的数**收窄到真正有风险的子集**——
+    #   `main` 会**遍历目录**（rglob/glob/iterdir）而自测完全不碰文件系统的那几件。
+    #   风险是实证过的：`check_ocr_legibility` 第一版自测只喂字符串，
+    #   main 却按 `<目录>/<目录名>.txt` 取文件，于是 **104 个目录只读了 52 个且一声不响**，
+    #   而自测全绿。**字符串喂不出目录遍历的错。**
+    import re as _re
+    risky = []
+    for _f in sorted(pathlib.Path(d).glob("check_*.py")):
+        _t = _f.read_text(encoding="utf-8", errors="ignore")
+        _i = max(_t.find("def self_test"), _t.find("def selftest"))
+        _st = _t[_i:] if _i >= 0 else ""
+        _st = _st[:_st.find("\ndef main")] if "\ndef main" in _st else _st
+        if _re.search(r"\.(rglob|glob|iterdir)\(", _t) and not _re.search(
+                r"tempfile|TemporaryDirectory|write_text|mkdir", _st):
+            risky.append(_f.name)
+    print(f"  ★★ 其中**真正对得上那个风险形状**的（main 遍历目录、自测不碰盘）：**{len(risky)} 件**")
+    for _n in risky:
+        print(f"       {_n}")
+    print("    ★ 这仍**不是缺陷计数**——实测抽查 `check_ocr_language_death`，"
+          "它对 64 个 `src-*/<原名>.txt` 目录读满 64，**没有这个毛病**。")
+    print("    它是**测试覆盖的缺口**：这几件的自测**测不出目录遍历的错**，不代表现在就错着。")
 
     # ★★ v0.0.0.111：`VERIFICATION.md` 里那些可数的数，和仓库实况对不对得上。
     #   这份文件**自己预言过它会漂**（v0.0.0.76 的警示块），两个版本之后原样复发：
