@@ -344,3 +344,18 @@ def test_reconcile_treats_superseded_and_lost_differently() -> None:
     assert 'self.object_store.exists_with_hash(supersession["canonical_object"], supersession["sha256"])' in source
     assert 'missing.append(key or "<missing-key>")' in source
     assert '"superseded_by_canonical"' in source
+
+
+def test_publisher_refuses_to_publish_zeros_when_the_run_counted_events() -> None:
+    """Production published a snapshot whose analysis was over 0 events while the
+    run had just counted 122,080, because behavior_economics deliberately keeps
+    no raw payloads and the publisher read them from there. A zero presented as
+    the current reading is the one thing the failure contract forbids."""
+    source = (
+        Path(__file__).resolve().parents[1] / "scripts" / "memory_atlas_private" / "pipeline.py"
+    ).read_text(encoding="utf-8")
+    assert "refusing to publish zeros" in source
+    assert "if declared and not rows:" in source
+    # Both callers must hand over the events they actually have.
+    assert "events=live_events," in source
+    assert "events=[asdict(event) for event in all_events]," in source

@@ -316,7 +316,10 @@ class LiveSnapshotPublisherMixin:
     """
 
     def _publish_live_snapshot(
-        self, private_snapshot: dict[str, Any], runtime_evidence: dict[str, Any]
+        self,
+        private_snapshot: dict[str, Any],
+        runtime_evidence: dict[str, Any],
+        events: Iterable[Mapping[str, Any]] | None = None,
     ) -> dict[str, Any] | None:
         if os.environ.get("MEMORY_ATLAS_LIVE_SNAPSHOT", "1") == "0":
             self._live_snapshot_error = "feature flag off"
@@ -331,8 +334,20 @@ class LiveSnapshotPublisherMixin:
             from .live_snapshot_store import LiveSnapshotStore
             from .visual_analytics import build_visual_analytics
 
-            events = list(private_snapshot.get("behavior_economics", {}).get("events") or [])
-            visual = build_visual_analytics(events)
+            # build_behavior_analytics deliberately does not retain raw event
+            # payloads, so behavior_economics carries none. Reading them from
+            # there produced a snapshot whose analysis was over zero events
+            # while the run had just counted 122,080 — a zero presented as the
+            # current reading, which is the one thing the contract forbids.
+            rows = list(events) if events is not None else list(
+                private_snapshot.get("behavior_economics", {}).get("events") or []
+            )
+            declared = int(private_snapshot.get("behavior_economics", {}).get("event_count", 0) or 0)
+            if declared and not rows:
+                raise PipelineError(
+                    f"run reports {declared} events but none were handed to the live snapshot; refusing to publish zeros"
+                )
+            visual = build_visual_analytics(rows)
             registry_path = _repo_file("benchmark", "registry.v1.json")
             benchmark = (
                 compare({}, json.loads(registry_path.read_text(encoding="utf-8")))
@@ -506,6 +521,7 @@ class CapturePipeline(LiveSnapshotPublisherMixin):
                         status_projection=None,
                     ),
                 },
+                events=[asdict(event) for event in all_events],
             )
             result = self._publish_terminal(manifest, events=all_events, message="源端全量对账完成")
             result["live_snapshot"] = live_snapshot or {
@@ -769,6 +785,7 @@ class RemoteReconcilePipeline(LiveSnapshotPublisherMixin):
         if not isinstance(normalized_key, str) or not normalized_key:
             raise PipelineError("源端 manifest 缺少 normalized_batch_key")
         event_source = normalized_key
+        live_events: list[dict[str, Any]] = []
         if normalized_key in superseded:
             # The canonical union is a proven superset of every rollup it
             # replaced (122,080 events against a largest single run of 112,036),
@@ -779,6 +796,7 @@ class RemoteReconcilePipeline(LiveSnapshotPublisherMixin):
         try:
             self.object_store.get_file(event_source, temporary)
             analytics = build_behavior_analytics(_iter_events(temporary), generated_at=self.clock())
+            live_events = [asdict(event) for event in _iter_events(temporary)]
         finally:
             temporary.unlink(missing_ok=True)
         event_count = int(analytics["event_count"])
@@ -872,6 +890,7 @@ class RemoteReconcilePipeline(LiveSnapshotPublisherMixin):
                     ref=f"private-db://{manifest_path}",
                 ),
             },
+            events=live_events,
         )
         return {
             "schema_version": "memory_atlas.remote_reconcile.v1",
