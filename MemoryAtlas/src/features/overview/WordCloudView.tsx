@@ -76,7 +76,7 @@ export function WordCloudView({
 
         <section className="semantic-panel semantic-bubbles" aria-label="主题气泡图">
           <div className="panel-title-row">
-            <h3>Bubble Chart</h3>
+            <h3>气泡图</h3>
             <span>横轴 ROI / 纵轴近期增量</span>
           </div>
           <svg className="semantic-bubble-canvas" viewBox="0 0 520 330" role="img" aria-label="主题 ROI 与近期增量气泡图">
@@ -111,7 +111,7 @@ export function WordCloudView({
 
         <section className="semantic-panel semantic-cloud" aria-label="词云">
           <div className="panel-title-row">
-            <h3>Word Cloud</h3>
+            <h3>词云</h3>
             <span>点击词条跳转代表记忆</span>
           </div>
           <div className="word-cloud-field">

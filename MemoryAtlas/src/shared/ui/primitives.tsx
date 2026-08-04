@@ -54,7 +54,7 @@ export function DeltaStrip({ stats, compact = false }: { stats: DeltaStats; comp
       </div>
       <div>
         <span>热点分类</span>
-        <strong>{stats.topCategory}</strong>
+        <strong>{humanizeMachineText(stats.topCategory)}</strong>
       </div>
     </div>
   );

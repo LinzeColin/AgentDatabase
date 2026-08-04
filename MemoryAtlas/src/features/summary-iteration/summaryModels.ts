@@ -432,7 +432,7 @@ export function reviewIterationBacklog(
   const items: ReviewIterationItem[] = [
     {
       item_id: "iteration_backlog:proposal_triage",
-      title: "Proposal triage",
+      title: "提案分诊",
       why_it_matters: nextActions[0]?.reason || "需要把本期结论转成可审查、可回滚的候选更新。",
       next_step: nextActions[0]?.title || "选择最高价值 review action",
       acceptance_hint: "生成 proposal-only 候选，不直接写长期记忆。",
@@ -440,7 +440,7 @@ export function reviewIterationBacklog(
     },
     {
       item_id: "iteration_backlog:low_value_loop",
-      title: "Low-value loop cleanup",
+      title: "低价值循环清理",
       why_it_matters: lowValueLoops[0]?.summary || "低价值循环会污染长期召回，需要周期性压缩或降权。",
       next_step: lowValueLoops[0]?.title || "复核低价值循环",
       acceptance_hint: "保留证据 refs，人工确认后再修改记忆权重。",
@@ -448,7 +448,7 @@ export function reviewIterationBacklog(
     },
     {
       item_id: "iteration_backlog:opportunity_capture",
-      title: "Opportunity capture",
+      title: "机会捕获",
       why_it_matters: opportunities[0]?.summary || dominantTopics[0]?.summary || "主导主题需要被转成下一步动作，否则只停留在可视化层。",
       next_step: opportunities[0]?.title || dominantTopics[0]?.title || "复核主导主题",
       acceptance_hint: "下一轮 validator 应能看到 evidence_refs 和 decision/proposal 边界。",

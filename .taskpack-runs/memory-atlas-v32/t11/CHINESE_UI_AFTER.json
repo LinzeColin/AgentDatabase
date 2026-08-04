@@ -1,20 +1,19 @@
 {
   "schema_version": "memory_atlas.chinese_ui_audit.v1",
-  "captured_at": "2026-08-04T07:28:26.822Z",
+  "captured_at": "2026-08-04T09:29:11.026Z",
   "page_url": "http://127.0.0.1:4174/",
   "verdict": "FAIL",
-  "finding_count": 132,
+  "finding_count": 117,
   "by_view": {
     "home": 27,
-    "galaxy": 10,
-    "notion": 18,
+    "galaxy": 6,
+    "notion": 17,
     "roi": 1,
     "obsidian": 5,
-    "timeline": 20,
-    "contribution": 1,
-    "wordcloud": 10,
-    "search": 24,
-    "summary": 13,
+    "timeline": 19,
+    "wordcloud": 7,
+    "search": 23,
+    "summary": 9,
     "runtime": 3
   },
   "findings": [
@@ -165,26 +164,6 @@
     },
     {
       "view": "galaxy",
-      "kind": "machine_identifier",
-      "text": "codex_usage_record"
-    },
-    {
-      "view": "galaxy",
-      "kind": "untranslated",
-      "text": "high"
-    },
-    {
-      "view": "galaxy",
-      "kind": "untranslated",
-      "text": "mid"
-    },
-    {
-      "view": "galaxy",
-      "kind": "untranslated",
-      "text": "low"
-    },
-    {
-      "view": "galaxy",
       "kind": "untranslated",
       "text": "Auto"
     },
@@ -202,11 +181,6 @@
       "view": "galaxy",
       "kind": "machine_identifier",
       "text": "answering_rule"
-    },
-    {
-      "view": "notion",
-      "kind": "machine_identifier",
-      "text": "codex_usage_record"
     },
     {
       "view": "notion",
@@ -325,11 +299,6 @@
     },
     {
       "view": "timeline",
-      "kind": "machine_identifier",
-      "text": "codex_usage_record"
-    },
-    {
-      "view": "timeline",
       "kind": "untranslated",
       "text": "ROI gradient · avg 0.41 · 86 high leverage / 86 capability-growth events"
     },
@@ -424,21 +393,6 @@
       "text": "UTC"
     },
     {
-      "view": "contribution",
-      "kind": "machine_identifier",
-      "text": "codex_usage_record"
-    },
-    {
-      "view": "wordcloud",
-      "kind": "machine_identifier",
-      "text": "codex_usage_record"
-    },
-    {
-      "view": "wordcloud",
-      "kind": "untranslated",
-      "text": "Bubble Chart"
-    },
-    {
       "view": "wordcloud",
       "kind": "untranslated",
       "text": "Codex /…"
@@ -447,11 +401,6 @@
       "view": "wordcloud",
       "kind": "untranslated",
       "text": "EVA …"
-    },
-    {
-      "view": "wordcloud",
-      "kind": "untranslated",
-      "text": "Word Cloud"
     },
     {
       "view": "wordcloud",
@@ -477,11 +426,6 @@
       "view": "wordcloud",
       "kind": "untranslated",
       "text": "DS_Store"
-    },
-    {
-      "view": "search",
-      "kind": "machine_identifier",
-      "text": "codex_usage_record"
     },
     {
       "view": "search",
@@ -606,27 +550,7 @@
     {
       "view": "summary",
       "kind": "machine_identifier",
-      "text": "codex_usage_record"
-    },
-    {
-      "view": "summary",
-      "kind": "machine_identifier",
       "text": "memory_update_candidate"
-    },
-    {
-      "view": "summary",
-      "kind": "untranslated",
-      "text": "Proposal triage"
-    },
-    {
-      "view": "summary",
-      "kind": "untranslated",
-      "text": "Low-value loop cleanup"
-    },
-    {
-      "view": "summary",
-      "kind": "untranslated",
-      "text": "Opportunity capture"
     },
     {
       "view": "summary",

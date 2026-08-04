@@ -37,6 +37,10 @@ import { zhCNCopy } from "../i18n/zh-CN";
 import type { StarfieldMappingResult, StarfieldParticleMapping } from "../models/starfieldMapping";
 import type { AtlasEdge, AtlasNode } from "../types";
 
+// Display labels for the quality selector; the ids stay as they are because
+// the renderer keys off them.
+const QUALITY_LABELS: Record<StarfieldQuality, string> = { high: "高", mid: "中", low: "低" };
+
 const uiCopy = zhCNCopy;
 
 interface GalaxySceneProps {
@@ -1380,19 +1384,19 @@ export function GalaxyScene({ nodes, edges, rendererMode, selectedNode, starfiel
       ) : null}
       {!renderError ? (
         <div className="galaxy-controls" aria-label="银河视角控制">
-          <span className="galaxy-renderer-chip">{rendererMode === "memory-starfield" ? "Flow Field" : "Legacy"}</span>
+          <span className="galaxy-renderer-chip">{rendererMode === "memory-starfield" ? "流场" : "旧版"}</span>
           {rendererMode === "memory-starfield" ? (
-            <div className="galaxy-quality-tabs" aria-label="Flow Field quality selector">
+            <div className="galaxy-quality-tabs" aria-label="流场画质选择">
               {(["high", "mid", "low"] as StarfieldQuality[]).map((quality) => (
                 <button
-                  aria-label={`${quality} quality`}
+                  aria-label={`${QUALITY_LABELS[quality]}画质`}
                   aria-pressed={starfieldQuality === quality}
                   key={quality}
-                  title={quality === "low" ? "低质量 fallback 模式" : `${quality} quality`}
+                  title={quality === "low" ? "低画质降级模式" : `${QUALITY_LABELS[quality]}画质`}
                   type="button"
                   onClick={() => updateStarfieldQuality(quality)}
                 >
-                  {quality}
+                  {QUALITY_LABELS[quality]}
                 </button>
               ))}
             </div>
@@ -1410,10 +1414,10 @@ export function GalaxyScene({ nodes, edges, rendererMode, selectedNode, starfiel
             </button>
           ) : null}
           {rendererMode === "memory-starfield" ? (
-            <label className="galaxy-flow-control" title="Flow Field strength">
+            <label className="galaxy-flow-control" title="流场强度">
               <Gauge size={15} />
               <input
-                aria-label="Flow Field strength"
+                aria-label="流场强度"
                 max="1.4"
                 min="0"
                 onChange={(event) => setFlowFieldStrength(Number(event.target.value))}

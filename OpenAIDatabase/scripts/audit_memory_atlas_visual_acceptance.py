@@ -685,9 +685,13 @@ def audit_visual_acceptance(repo_root: Path) -> dict[str, Any]:
         and "semantic-heatmap" in app_source
         and "semantic-bubbles" in app_source
         and "semantic-cloud" in app_source
-        and "Heatmap" in app_source
-        and "Bubble Chart" in app_source
-        and "Word Cloud" in app_source
+        # These pinned the English headings, which collided with
+        # UI_UX_VISUAL_CONTRACT's "页面必须中文". The guarantee is that the three
+        # semantic views exist, so it checks their stable class names instead of
+        # the words on screen.
+        and ("Heatmap" in app_source or "热力图" in app_source)
+        and ("Bubble Chart" in app_source or "气泡图" in app_source)
+        and ("Word Cloud" in app_source or "词云" in app_source)
         and "selectRepresentativeNode" in app_source
         and "jumpToBestNode" in app_source
         and ".semantic-dashboard" in css_source
@@ -1003,8 +1007,11 @@ def audit_visual_acceptance(repo_root: Path) -> dict[str, Any]:
         and '"black-hole"' in galaxy_source
         and '"proto-star"' in galaxy_source
         and "fallbackMode: rendererMode === \"legacy\" ? \"legacy\" : starfieldQuality === \"low\" ? \"low-quality\" : \"webgl\"" in galaxy_source
-        and "Flow Field quality selector" in galaxy_source
-        and "低质量 fallback 模式" in galaxy_source
+        # The English aria-label and the half-English tooltip were pinned here;
+        # both are user-facing and collided with "页面必须中文". The guarantee is
+        # that a quality selector with a low-quality fallback exists.
+        and ("Flow Field quality selector" in galaxy_source or "流场画质选择" in galaxy_source)
+        and ("低质量 fallback 模式" in galaxy_source or "低画质降级模式" in galaxy_source)
         and ".galaxy-renderer-toggle" in css_source
         and ".galaxy-quality-tabs" in css_source
         and ".galaxy-flow-control" in css_source,
