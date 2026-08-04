@@ -4,7 +4,7 @@
   "display_name": "人物蒸馏 Skill / Persona Distiller",
   "distribution": {
     "canonical_registry": "../persona-distiller-group",
-    "kind": "repository-customized-v0.0.0.116",
+    "kind": "repository-customized-v0.0.0.117",
     "lineage_base_archive_sha256": "e891912d98d14afb7677ac935a19be329d97d206f4ae74a644892f46b17f6748"
   },
   "evaluation_suites": 16,
@@ -16,8 +16,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "99a68f901a5820b2064b9cd636060350fb3831c37d1d10cf47b44d5e259c7fa4",
-      "size_bytes": 220202
+      "sha256": "b22a9a6ccbe82c45c79d709e99c456c57dc4cd3c636c2a382e4c479fc42c1486",
+      "size_bytes": 221794
     },
     {
       "path": "CONTRIBUTING.md",
@@ -31,7 +31,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "54eb8b10bd858899bba03d08b5e6208fac29799f1b4de7514aad6c139cb5d1ea",
+      "sha256": "9ecff3a996d5b453a6a448a1bfba75075e01a891874658848bdcd29df00a898c",
       "size_bytes": 8803
     },
     {
@@ -56,12 +56,12 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "11a6a90e3170e576bb859cac2492206ea371ba5390e80796e41c8a604c660904",
-      "size_bytes": 108292
+      "sha256": "595c772332330dfe11e3378f7551334c4e9956bd22284c41412fc537666c4781",
+      "size_bytes": 108694
     },
     {
       "path": "VERSION",
-      "sha256": "e6b223e4572dbef7ed8017e8566f4d3766320876b018f8280ed5fe295ce19f20",
+      "sha256": "bf3d047ef663df84d05745b54aa74b194ca77488a964b002aa52da45503a5d66",
       "size_bytes": 11
     },
     {
@@ -121,7 +121,7 @@
     },
     {
       "path": "handoff.md",
-      "sha256": "deac1b167f6aa694551242cb8c5050cafe1e600ce00835f4da9fb4433a24ad59",
+      "sha256": "63e5dbbb6642e796a92e5a15b8e9e520e2be7ecd616fab4bd347c6e818ac19d8",
       "size_bytes": 3703
     },
     {
@@ -141,7 +141,7 @@
     },
     {
       "path": "manifest.json",
-      "sha256": "72901a939e77ecde281a9cb2143c9a31c64822bdd8b3bc896b090fcee8894453",
+      "sha256": "55fee0e5fcc9ea723449c21b0b25e6bd79fcc99a3f9813051be653a5cdef7533",
       "size_bytes": 1192
     },
     {
@@ -376,8 +376,8 @@
     },
     {
       "path": "references/ledgers/_待用户裁定.md",
-      "sha256": "7137a1c99544e6f5de065d976bc6c14ec841b85f5b1c9821ce745258d7683db0",
-      "size_bytes": 51226
+      "sha256": "ad8e8405aa8d1bb109aaf6509bcf8d2c45d2e5e92ee44bdef100c2bf3e8fa0de",
+      "size_bytes": 52918
     },
     {
       "path": "references/ledgers/_每次开工必读.md",
@@ -456,8 +456,8 @@
     },
     {
       "path": "references/pipeline/checkers/build_blind_payload.py",
-      "sha256": "220bd65b508bfa96e9edb6ebe14c940adef9bff1060d00115d6982a1577b1101",
-      "size_bytes": 14635
+      "sha256": "badc94dad50b5922ed79d20e8bd1857d07d53253040bc1db166eae63679a5f11",
+      "size_bytes": 16750
     },
     {
       "path": "references/pipeline/checkers/build_source_ledger.py",
@@ -598,6 +598,11 @@
       "path": "references/pipeline/checkers/check_holdout_overlap.py",
       "sha256": "f63cd846083ec7a81230ab4c44db64040dbfe9e87f79e59fe4571e4b3950b553",
       "size_bytes": 9537
+    },
+    {
+      "path": "references/pipeline/checkers/check_judge_prompt_matches_payload.py",
+      "sha256": "9365a394800d0cdf60fa0c4b707a52e76117c551ddba312815f283640192926d",
+      "size_bytes": 6881
     },
     {
       "path": "references/pipeline/checkers/check_material_split.py",
@@ -961,8 +966,8 @@
     },
     {
       "path": "scripts/build_blind_payload.py",
-      "sha256": "220bd65b508bfa96e9edb6ebe14c940adef9bff1060d00115d6982a1577b1101",
-      "size_bytes": 14635
+      "sha256": "badc94dad50b5922ed79d20e8bd1857d07d53253040bc1db166eae63679a5f11",
+      "size_bytes": 16750
     },
     {
       "path": "scripts/build_manifest.py",
@@ -1118,6 +1123,11 @@
       "path": "scripts/check_holdout_overlap.py",
       "sha256": "f63cd846083ec7a81230ab4c44db64040dbfe9e87f79e59fe4571e4b3950b553",
       "size_bytes": 9537
+    },
+    {
+      "path": "scripts/check_judge_prompt_matches_payload.py",
+      "sha256": "9365a394800d0cdf60fa0c4b707a52e76117c551ddba312815f283640192926d",
+      "size_bytes": 6881
     },
     {
       "path": "scripts/check_material_split.py",
@@ -1906,5 +1916,5 @@
     },
     "secret_findings": 0
   },
-  "version": "v0.0.0.116"
+  "version": "v0.0.0.117"
 }

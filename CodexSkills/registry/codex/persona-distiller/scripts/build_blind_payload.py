@@ -210,8 +210,40 @@ def main() -> int:
     payload, key = assign(cases, cand, base)
 
     a.round_dir.mkdir(parents=True, exist_ok=True)
-    (a.round_dir / f"{a.prefix}_blind_payload.json").write_text(
+    _payload_path = a.round_dir / f"{a.prefix}_blind_payload.json"
+    _payload_path.write_text(
         json.dumps(payload, ensure_ascii=False, indent=1), encoding="utf-8")
+
+    # ★★ v0.0.0.117：**冻结指令要求按某个字段打分，而载荷里没有那个字段。**
+    #   Mendel #125 第 1 轮**派发之后**才发现：两席都写「给 `candidate` 和 `baseline`
+    #   各打一个分」，而载荷里是 `A`／`B`；席 D 另有五处提到 `rubric`，载荷里根本没有。
+    #   **派发之后就改不得了**：改指令＝中途换尺子，补载荷＝两席看到不同的东西。
+    #   ★ **只报不拦**——「该不该有 rubric」是待裁定 ④，一个不能自行选的口子。
+    #     本处只保证：这个不一致**不会再到派发之后才被看见**。
+    _here = pathlib.Path(__file__).resolve().parent
+    _jm = _here / "check_judge_prompt_matches_payload.py"
+    _pdir = _here.parent / "references" / "pipeline" / "judge_prompts"
+    _prompts = sorted(_pdir.glob("seat_*.md")) if _pdir.is_dir() else []
+    if _jm.is_file() and _prompts:
+        print("\n── 评委指令 vs 载荷字段（**只报不拦**）──")
+        _argv = [sys.executable, str(_jm), "--payload", str(_payload_path)]
+        for _pp in _prompts:
+            _argv += ["--prompt", str(_pp)]
+        _r = subprocess.run(_argv, capture_output=True, text=True)
+        try:
+            _info = json.loads(_r.stdout)
+            _n = _info.get("**对不上的字段数**", 0)
+            if _n:
+                print(f"  ⚠⚠ **指令引到而载荷里没有的字段：{_n} 处**")
+                for _row in _info.get("逐席", []):
+                    if _row.get("**载荷里没有的**"):
+                        print(f"      {_row['指令']}：{_row['**载荷里没有的**']}")
+                print("      ★ 评委拿不到这些字段，只能按题面自拟判据。"
+                      "**派发前知道，比派发后才发现强。**")
+            else:
+                print("  ✓ 指令引到的字段，载荷里都有")
+        except Exception as _exc:                                # noqa: BLE001
+            print(f"  ⚠ 输出无法解析，**未核（不是通过）**：{_exc}")
     (a.round_dir / f"{a.prefix}_blind_key.json").write_text(
         json.dumps(key, ensure_ascii=False, indent=1), encoding="utf-8")
 
