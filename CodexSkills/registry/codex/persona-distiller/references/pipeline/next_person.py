@@ -310,6 +310,11 @@ def main():
             _s.loader.exec_module(_m)
             r = _m.feasible_grounds(born=rec.get("born"), died=rec.get("died"))
             grounds_note = r["**结论**"] + f"（依据卒年表：{rec.get('born')}–{rec.get('died')}）"
+            # ★ 记录级 confidence 不能替字段级判断——用到 low 就说出来
+            if rec.get("confidence") == "low":
+                grounds_note += ("　★★ **该卒年记录标 `confidence: low`**——"
+                                 "看清是哪个字段近似再用："
+                                 + str(rec.get("source"))[:70])
 
     print(json.dumps({
         # ★★ 下面四个 queue_* 数的是**队列这一群**，不是「做了多少人」。

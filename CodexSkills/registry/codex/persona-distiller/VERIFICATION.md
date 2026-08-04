@@ -1,6 +1,6 @@
-# Release verification — Persona Distiller v0.0.0.97
+# Release verification — Persona Distiller v0.0.0.98
 
-Date: 2026-08-04（**v0.0.0.97**）
+Date: 2026-08-04（**v0.0.0.98**）
 
 > **本文件记录「当前发布号的复验结果」，不是历史归档。**
 > 版本号必须等于根目录 `VERSION`，由 `scripts/check_contract_drift.py` 强制。
@@ -22,6 +22,14 @@ Date: 2026-08-04（**v0.0.0.97**）
 > **「本表每一行都来自本次实跑」是一句自述**——
 > 而自述不是证据（见 `self-report-is-not-evidence`）。
 
+> ### v0.0.0.98 这一版重跑了什么
+>
+> **相对 97 只改了两处**：`check_probe_precondition` 加 `low_confidence_used()`（只报不拦）、
+> `next_person` 用到 `low` 记录时打印其 `source`。**不改任何判定。**
+>
+> **本次重跑**：`check_probe_precondition --self-test`、合同漂移 **0 条**、pytest。
+> **其余各行沿用 v0.0.0.96 那一次**——96→98 之间未触及它们所测的东西。
+>
 > ### v0.0.0.97 这一版重跑了什么
 >
 > **v0.0.0.97 相对 96 只改了一处**：`check_pd_grounds` 的输出里加了「五条依据全是美国法」这句口径，

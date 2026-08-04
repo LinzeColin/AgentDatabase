@@ -67,7 +67,17 @@ CUTOFF = 1930
 
 
 def load_years(path: pathlib.Path) -> dict:
-    """`_卒年.json`：**没有 `source` 的条目一律不作数**（判据当它不存在）。"""
+    """`_卒年.json`：**没有 `source` 的条目一律不作数**（判据当它不存在）。
+
+    ★★ v0.0.0.98：`confidence` 是**记录级**的，而它标的常常只是某一个字段。
+    实测（2026-08-04 补卒年后）：13 条 `low` 里有 3 条**卒年是精确的**
+    （Carver 1943-01-05、Pacioli 1517、Socrates -399-02-15），
+    标 low 的原因是**生年**近似。本判据只用卒年，所以这三条实际可用。
+
+    **但记录级的置信度不能替字段级的判断**——所以用到 `low` 记录时要**报出来**，
+    让人自己看那一条的 `source` 里写的是哪个字段近似。
+    （这与查证方自己报的坑 ⑳「近似要按字段判不按人判」是同一件事。）
+    """
     if not path or not path.is_file():
         return {}
     try:
@@ -78,6 +88,17 @@ def load_years(path: pathlib.Path) -> dict:
     for name, rec in (raw or {}).items():
         if isinstance(rec, dict) and rec.get("source") and rec.get("died") is not None:
             out[name.strip().lower()] = rec
+    return out
+
+
+def low_confidence_used(years: dict, names) -> list:
+    """→ 本次用到的记录里，哪几条是 `confidence: low`。**只报，不拦。**"""
+    out = []
+    for n in names:
+        r = years.get(str(n).strip().lower())
+        if r and r.get("confidence") == "low":
+            out.append(f"{r.get('name', n)}（卒 {r.get('died')}）——"
+                       f"该记录标 `low`，**看清是哪个字段近似**：{str(r.get('source'))[:64]}")
     return out
 
 
