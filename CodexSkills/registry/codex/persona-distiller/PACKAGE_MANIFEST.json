@@ -4,7 +4,7 @@
   "display_name": "人物蒸馏 Skill / Persona Distiller",
   "distribution": {
     "canonical_registry": "../persona-distiller-group",
-    "kind": "repository-customized-v0.0.0.82",
+    "kind": "repository-customized-v0.0.0.83",
     "lineage_base_archive_sha256": "e891912d98d14afb7677ac935a19be329d97d206f4ae74a644892f46b17f6748"
   },
   "evaluation_suites": 16,
@@ -16,8 +16,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "eb3bd4f8e7a1fea46c91d94c6c6f059873f46761924deaaf29c9c0e42559252f",
-      "size_bytes": 154193
+      "sha256": "0b628dc1acd3e954c215c7c7620ce8500b3860c3a608f809c8b5d604f6572fa3",
+      "size_bytes": 157459
     },
     {
       "path": "CONTRIBUTING.md",
@@ -31,7 +31,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "6a514bdb5a8bed194792fee80cca54a8d56b05992ce6cf0dcf4514b5012b06ea",
+      "sha256": "d8ca8b3c3aa6e4251c0b9b990a361e98fdf5ff4d89b5a34d0e99d283c8d1fb7f",
       "size_bytes": 8802
     },
     {
@@ -56,12 +56,12 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "e4a7939191a3de241686e607508334083efad717e437d914c2be30dc942e76c4",
-      "size_bytes": 96648
+      "sha256": "475bd5c401a96090e9fca4cb72c20c6ab66d1c8f1eb3b095b4bad10d0aef4a9b",
+      "size_bytes": 97735
     },
     {
       "path": "VERSION",
-      "sha256": "82cf06766975cf98df327f3cf734bed2765d4b1899ee0e9b2b4adc22f812fc8f",
+      "sha256": "b2be28c3a32db0b06855e04810211541494c875d4a27440d79b53c4945296734",
       "size_bytes": 10
     },
     {
@@ -121,7 +121,7 @@
     },
     {
       "path": "handoff.md",
-      "sha256": "655e13887eba94ca1b9002f0346f67dcafcebcad22efe1fcca9695c2666b1bb0",
+      "sha256": "0239d5e9d51a95c593c564483da4c3aece7f861f653225e26454e3c857b34af6",
       "size_bytes": 3702
     },
     {
@@ -141,7 +141,7 @@
     },
     {
       "path": "manifest.json",
-      "sha256": "ad7e5308812428922465a0b2d2bc51cb5db361e30ae55e93f9fb3192cd50477c",
+      "sha256": "0767c77bf8b521d2aa7ce166ab89aa43d00a04c5a269816af5e30e8f13caf0df",
       "size_bytes": 1191
     },
     {
@@ -1811,5 +1811,5 @@
     },
     "secret_findings": 0
   },
-  "version": "v0.0.0.82"
+  "version": "v0.0.0.83"
 }
