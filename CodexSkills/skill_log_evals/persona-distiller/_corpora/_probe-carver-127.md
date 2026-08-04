@@ -199,6 +199,23 @@ p.2070 标题行：`...CARVER, REPRESENTING THE UNITED PEANUT ASSOCIATION OF AME
                  → **能取到的只有 2 道。够不够 3 道，全看 lane 2。**
 ```
 
+### lane 1 也亲自抽验了一份（**不是转述子代理**）
+
+`archive.org/metadata/CAT31355396`（Bulletin No.31，1916，
+*How to grow the peanut, and 105 ways of preparing it for human consumption*）：
+
+```
+**`access-restricted-item` 字段不存在** → 无限制
+`_djvu.txt` **存在，64,830 字节**
+rights：「The contributing institution **believes** that this item is not in copyright」
+27 个衍生文件（EPUB / Text PDF / Abbyy GZ 齐全）
+```
+
+★★ **那个 64,830 与子代理报的数字逐位相同**——**独立对上了**。
+
+★ 但 rights 那句要照实读：**是「馆方相信」，不是法律认定**。
+PD 判据仍然落在**出版年 1916 ≤1930** 这条规则上，不落在馆方的措辞上。
+
 ### lane 4 我另外亲自验了一次（**不是转述子代理**）
 
 浏览器打开 `docsouth.unc.edu/neh/merritt/merritt.html`：**正常加载，无任何挑战**。
@@ -219,3 +236,20 @@ UNC-CH Rare Book Collection 索书号 S417.C3 M4
 若那条找到一件**本机取得到**的，lane 2 就彻底落实，不必依赖 Google Books。
 
 **在那条回来之前，本人物既不入库也不记延后。**
+
+---
+
+# 八、取用性总账（**三道全部亲自验过，不是转述**）
+
+| 道 | 材料 | 本机取得到吗 | 怎么验的 |
+|---|---|---|---|
+| **1 writings** | 35 份 PD bulletin | **✓ 能** | 抽验 `CAT31355396`：无 `access-restricted-item`、`_djvu.txt` 64,830 字节 |
+| **2 conversations** | 1921 听证 Part III，**pp. 2070–2078** | **✗ 不能** | Google 与 HathiTrust **各开一次浏览器，两处都是 bot 墙，当场停手** |
+| **4 external** | Merritt 1929 传记 | **✓ 能** | DocSouth 正常加载，人工转录约 360K |
+
+```
+**能取到的道数 = 2　　quick 门要 3**
+```
+
+★ 所以 Carver 的结论**完全压在 lane 2 上**，而 lane 2 的材料**已经找到、已经定位到页**——
+**只是这台机器拿不到。** 这正是新记的第五类：**通道受限，不是没有。**
