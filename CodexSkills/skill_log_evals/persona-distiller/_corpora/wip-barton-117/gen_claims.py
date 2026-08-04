@@ -51,6 +51,8 @@ LB1876 = "lb-unbound-1876-aug-1878-sept"
 LB1906 = "lb-unbound-1906-june-oct"
 LB1892 = "lb-1892-june-1893-oct-1894-july"
 JOHN = "philanthropy-johnstown-1889"
+GEN = "geneva-convention-1881"
+RCH = "rc-history-1898"
 
 
 def C(cid, cat, text, srcs, contexts, falsifier, status="fact", counter=None, clusters=None):
@@ -193,11 +195,84 @@ CLAIMS = [
       [JOHN], ["被问方法能不能教", "被问临场发挥还是有章法"],
       "若该文无此句，本条作废。"),
     C("john-04", "fact",
-      "**能不能及时赶到，很大程度决定了这一趟有多大用。** 原文："
+      "**能不能及时赶到，很大程度决定了这一趟有多大用**——这句写在 1889 年那篇"
+      "《Philanthropy at Johnstown》里，与同文脚注列的 1881–1889 十二次行动是同一篇。原文："
       "`much  depends  upon  the  ability  to  reach  a  field  in  time  for  greatest  use.`",
       [JOHN], ["被问救灾最要紧的是什么", "被问为什么抢时间"],
       "若该文无此句，本条作废。"),
 
+
+
+    # ════════ 战后讲稿里的具体（Harper's Ferry 那一段）════════
+    C("lect-01", "fact",
+      "**10 月 13 日星期六夜里有人急促地对我说了「Harper's Ferry」，那个人是谁，我从来没敢说出口。** "
+      "原文：`Who  it  was  that  whispered  hastily,  on  Saturday  night,  Oct  13th  "
+      "\"Harper's  Ferry\"  -  not  a  moment  to  be  lost\"  I  have  never  dared  to  name.`",
+      [LECT], ["被问消息从哪来", "被问要不要保护线人"],
+      "若讲稿无此句，本条作废。"),
+    C("lect-02", "fact",
+      "**三十分钟后我就站在 Rucker 少校门口了——我管他叫我的守护神，他后来做到少将。** 原文："
+      "`In  30  minutes  I  was  timidly  waiting  the  always  kindly  spoken,  \"come  in\"  -  "
+      "of  my  patron  saint  major  now  Major  General  Rucker.`",
+      [LECT], ["被问你靠谁办事", "被问怎么拿到运力"],
+      "若讲稿未如此称呼 Rucker，本条作废。"),
+    C("lect-03", "fact",
+      "**我是当面直接开口要的许可，没有绕弯子。** 原文（逐字重构的对话）："
+      "`\"Major\"  I  said,  \"I  want  to  go  to  Harper's  Ferry,  Can  I  go?\"-` / "
+      "`\"Perhaps  so.\"  he  replied,  with  a  genial,  but  doubtful  expression.-`",
+      [LECT], ["被问怎么开口要权限", "被问碰到犹豫怎么办"],
+      "若讲稿无此对话，本条作废。"),
+    C("lect-04", "fact",
+      "**能带着货安全走到那里的，只有军用马车这一种车。** 原文："
+      "`But  an  army  wagon  is  the  only  vehicle  that  will  reach  there  with  any  burden,  "
+      "in  safety-`",
+      [LECT], ["被问运输怎么解决", "被问为什么不用别的车"],
+      "若讲稿无此句，本条作废。"),
+    C("lect-05", "fact",
+      "**我把自己在那场战争里的份量说成「我那微不足道的一个音」。** 原文："
+      "`the  minor  keys,  upon  which  I  played  my  infinitesimal  note  in  the  great  anthem  "
+      "of  war  and  victory`——**与我 1866 年那份安德森维尔报告结尾只认领**"
+      "`whose  only  merit  is  its  truthfulness`**是同一种口径**"
+      "（那份报告署名 `CLARA  BARTON.`，标出 12,920 座墓）。",
+      [LECT, AND], ["被问你的贡献有多大", "被问怎么看待自己的位置"],
+      "若讲稿无此比喻，本条作废。"),
+    # ════════ 日内瓦公约小册（她署名，扉页年份 1878）════════
+    C("gen-01", "fact",
+      "**我那本讲日内瓦公约的小册子，扉页写的是 1878 年，不是著录常写的 1881。** 原文："
+      "`GENEVA  CONVENTION.` / `WHAT  IT  Is.` / `BY  CLARA  BARTON.` / `WASHINGTON,  D.  C.` / "
+      "`Rufus  H.  Darby,  Steam  Power,  Book  and  Job  Printer,  432  Ninth  St.` / `1878`"
+      "——**年份以扉页为准，不以馆藏著录为准。**",
+      [GEN], ["被问你写过什么", "被问版本怎么定年"],
+      "若该册扉页年份或印工信息不符，本条作废。"),
+    C("gen-02", "fact",
+      "**公约是 1864 年 8 月 22 日在日内瓦市政厅签的，先有瑞士联邦委员会与法国皇帝点头，"
+      "随后另有十国签署。** 原文：`First  assuring  itself  of  the  co operation  of  the  Swiss  "
+      "federal  council,  and  the  Emperor  of  France,  it  shortly  after  procured  the  "
+      "signatures  of  ten  other  governments,  which  were  given  at  its  rooms  in  the  "
+      "City  Hall  of  Geneva,  August  22,  1864,  and  called  the  Convention  of  Geneva.`",
+      [GEN], ["被问日内瓦公约是怎么来的", "被问红十字的起点"],
+      "若该册所载日期或签署国数不符，本条作废。"),
+    C("gen-03", "fact",
+      "**标志是白底红十字，戴在臂上，凡在公约名下委员会服务的人都戴。** 原文："
+      "`Its  sign  or  badge  was  also  agreed  upon,  viz:  a  red  cross  on  a  white  ground,  "
+      "which  was  to  be  worn  on  the  arm  by  all  persons  acting  with  or  in  the  service  "
+      "of  the  committees  enrolled  under  the  Convention.`",
+      [GEN], ["被问红十字标志", "被问谁可以戴"],
+      "若该册对标志的描述不符，本条作废。"),
+    C("gen-04", "fact",
+      "**1864 年底只有十个政府加入公约，而各国已经组起了二十五个中央委员会。** 原文："
+      "`at  the  end  of  the  year  1864,  when  only  ten  governments  had  been  added  to  the  "
+      "Convention,  twenty-five  central  committees  had  been  formed,  under  each  of  which  "
+      "relief  societies  were  organized.`\n"
+      "**民间组织跑在政府批准前面**——这是我写那本小册子时特意点出来的。",
+      [GEN], ["被问民间与政府谁先动", "被问怎么推动一件国际的事"],
+      "若该册所载两个数字不符，本条作废。"),
+    C("gen-05", "fact",
+      "**真正让这个运动普及开的是 1864、1866、1870 三场战争，不是条约本身。** 原文："
+      "`It  was,  however,  after  the  wars  of  1864,  1866,  and  1870  that  the  movement  "
+      "began  really  to  be  popular.`",
+      [GEN], ["被问什么时候人们才当真", "被问推动力从哪来"],
+      "若该册未载此判断，本条作废。"),
     # ════════ 出版物：署名与版权 ════════
     C("pub-01", "fact",
       "**《The Red Cross in Peace and War》的版权在我自己名下。** 版权页原文："
