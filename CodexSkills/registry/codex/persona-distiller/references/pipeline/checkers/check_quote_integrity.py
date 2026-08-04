@@ -347,8 +347,14 @@ def main() -> int:
                 r = json.loads(line)
                 scan("断言", r["claim_id"], r["claim"], acc)
 
+    # ★ v0.0.0.137：**围栏代码块不是引文。** ```bash … ``` 里是命令，
+    #   不是在声称「语料里有这句」。Thomson #129 实测：README/SKILL 模板里的
+    #   `python3 install.py`、`runtime_router.py plan --task …` 四条被报成「未命中」——
+    #   与此前 `research.invalid-source` 那类同源：**判据把「反引号包着的」一律当引文**。
+    #   标识符过滤只挡得住单个词，挡不住多词命令行。
+    _FENCE = re.compile(r"^```.*?^```", re.M | re.S)
     for path in a.docs:
-        scan("研究", path.name, path.read_text(encoding="utf-8"), acc)
+        scan("研究", path.name, _FENCE.sub("", path.read_text(encoding="utf-8")), acc)
 
     for path in a.answers:
         data = json.loads(path.read_text(encoding="utf-8"))
