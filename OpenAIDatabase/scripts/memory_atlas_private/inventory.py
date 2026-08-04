@@ -18,10 +18,25 @@ from .sqlite_snapshot import create_consistent_snapshot
 # Standalone credentials are configuration, not product memory. Embedded text inside an
 # in-scope conversation is kept byte-for-byte and is not inspected or altered here.
 DENY_STANDALONE = re.compile(
-    r"(^|/)(\.env($|\.)|[^/]*(token|secret|credential|cookie|password)[^/]*|"
+    # `\.env($|\.)` sat inside a group anchored by the trailing `$`, so it only
+    # ever matched a bare `.env`: `.env.local` and `.env.production` — the exact
+    # standalone credential files this exists to exclude — went straight
+    # through. `\.env(\..*)?` closes that. This tightens the denylist; the
+    # taskpack forbids relaxing it, and excluding more is the safe direction.
+    r"(^|/)(\.env(\..*)?|[^/]*(token|secret|credential|cookie|password)[^/]*|"
     r"id_(rsa|ed25519)|[^/]*\.(pem|key|p12|pfx))$",
     re.IGNORECASE,
 )
+
+
+class CredentialShapeExcluded(Exception):
+    """A file the credential denylist refuses on purpose.
+
+    Distinct from InventoryError because an intentional exclusion is the policy
+    working, not a source that could not be read. The taskpack forbids relaxing
+    the denylist, so nothing here changes which files are excluded — only how
+    the exclusion is reported.
+    """
 
 
 class InventoryError(RuntimeError):
@@ -113,7 +128,9 @@ def _materialize_record(
 ) -> InventoryRecord:
     relative = path.name if root.is_file() else path.relative_to(root).as_posix()
     if DENY_STANDALONE.search(relative):
-        raise InventoryError(f"来源注册表包含独立凭据文件，拒绝采集：{source.spec.source_id}/{relative}")
+        raise CredentialShapeExcluded(
+            f"来源注册表包含独立凭据形态文件，按策略排除：{source.spec.source_id}/{relative}"
+        )
     stat_value = path.stat()
     materialized = path
     snapshot_created = False
@@ -173,6 +190,7 @@ def discover_inventory(
             continue
         visible_root = False
         failures: list[str] = []
+        excluded: list[str] = []
         for root in source.roots:
             if not root.exists():
                 continue
@@ -183,6 +201,14 @@ def discover_inventory(
                     continue
                 try:
                     source_records.append(_materialize_record(source, root, path, snapshot_dir))
+                except CredentialShapeExcluded as exc:
+                    # The denylist doing its job is not a read failure. Treating
+                    # it as one marked whole sources UNREADABLE: one note named
+                    # "…token-policy.md" took out all 1,074 Codex memories, and
+                    # eight `secret_refs` files took out the OpenAIDatabase
+                    # live data. The files stay excluded — the denylist is not
+                    # relaxed — but the source is not reported as broken.
+                    excluded.append(str(exc))
                 except (OSError, InventoryError) as exc:
                     failures.append(str(exc))
         if failures:
@@ -197,6 +223,9 @@ def discover_inventory(
         else:
             state = SourceState.READY
             message = "已发现并计算内容哈希"
+        if excluded:
+            # Counted and said out loud, never silently dropped.
+            message = f"{message}；按凭据形态策略排除 {len(excluded)} 个文件"
         coverages.append(SourceCoverage(
             source_id=source.spec.source_id,
             label_zh=source.spec.label_zh,

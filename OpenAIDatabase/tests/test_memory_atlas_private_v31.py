@@ -306,7 +306,12 @@ def test_inventory_recursive_glob_includes_root_files_and_skips_only_denied_sibl
         load_source_registry(registry, {"SOURCE_PATH": str(root)}),
         tmp_path / "snapshots",
     )
-    assert coverages[0].state == SourceState.UNREADABLE
+    # The denied sibling is still excluded — that part never changes. What
+    # changed is that the denylist doing its job no longer reports the whole
+    # source as unreadable: one note named "…token-policy.md" took out all
+    # 1,074 Codex memories in production this way.
+    assert coverages[0].state == SourceState.READY
+    assert "按凭据形态策略排除 1 个文件" in coverages[0].message_zh
     assert {row.relative_path for row in records} == {"root.json", "nested/child.json"}
     assert all("token.txt" not in row.relative_path for row in records)
 
@@ -322,7 +327,10 @@ def test_inventory_rejects_standalone_credential_but_not_embedded_text(tmp_path:
     }])
     resolved = load_source_registry(registry, {"SOURCE_PATH": str(root)})
     records, coverages = discover_inventory(resolved, tmp_path / "snapshots")
-    assert coverages[0].state == SourceState.UNREADABLE
+    # Rejected, counted, and not confused with a read failure.
+    assert coverages[0].state == SourceState.READY
+    assert "按凭据形态策略排除" in coverages[0].message_zh
+    assert all("token.txt" not in row.relative_path for row in records)
     # Narrowly selecting the conversation proves embedded bytes are preserved.
     registry = write_registry(tmp_path / "registry2.json", [{
         "source_id": "x", "label_zh": "x", "kind": "text", "required": True,

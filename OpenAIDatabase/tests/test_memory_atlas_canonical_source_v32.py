@@ -498,3 +498,66 @@ def test_ci_installs_the_browser_before_the_gate_that_needs_it() -> None:
     auditor = (REPO / "MemoryAtlas" / "scripts" / "audit_chinese_ui_v32.mjs").read_text(encoding="utf-8")
     assert "BROWSER_UNAVAILABLE" in auditor
     assert "process.exit(3)" in auditor
+
+
+# --- The credential denylist doing its job is not a read failure -------------
+
+def test_a_denylisted_file_does_not_mark_the_whole_source_unreadable(tmp_path: Path) -> None:
+    """One note named `…-token-policy.md` marked all 1,074 Codex memories
+    UNREADABLE, and eight `secret_refs` files did the same to the OpenAIDatabase
+    live data. Both sources were healthy; the denylist was working."""
+    from OpenAIDatabase.scripts.memory_atlas_private import inventory
+
+    root = tmp_path / "memories"
+    (root / "notes").mkdir(parents=True)
+    (root / "MEMORY.md").write_text("real content", encoding="utf-8")
+    (root / "notes" / "20260630-worktree-token-policy.md").write_text("a note about policy", encoding="utf-8")
+
+    excluded, kept = [], []
+    for path in sorted(root.rglob("*")):
+        if not path.is_file():
+            continue
+        relative = path.relative_to(root).as_posix()
+        (excluded if inventory.DENY_STANDALONE.search(relative) else kept).append(relative)
+    assert excluded == ["notes/20260630-worktree-token-policy.md"]
+    assert kept == ["MEMORY.md"]
+
+    source = (REPO / "OpenAIDatabase" / "scripts" / "memory_atlas_private" / "inventory.py").read_text(encoding="utf-8")
+    # A policy exclusion is its own exception, so it cannot be confused with a
+    # source that genuinely could not be read.
+    assert "class CredentialShapeExcluded" in source
+    assert "raise CredentialShapeExcluded(" in source
+    assert "except CredentialShapeExcluded as exc:" in source
+    assert "excluded.append(str(exc))" in source
+    # And it is counted out loud rather than dropped silently.
+    assert '按凭据形态策略排除 {len(excluded)} 个文件' in source
+
+
+def test_the_denylist_is_tightened_never_relaxed() -> None:
+    """The taskpack says 独立凭据形态文件继续按既有 denylist 排除，不得放宽.
+
+    Writing this test found a hole rather than confirming the pattern:
+    `\.env($|\.)` sat inside a group anchored by the trailing `$`, so only a
+    bare `.env` matched and `.env.local` went straight through. Closing that
+    excludes more, which is the safe direction; measured against the real source
+    roots it newly excludes nothing, so no captured file is lost."""
+    from OpenAIDatabase.scripts.memory_atlas_private.inventory import DENY_STANDALONE
+
+    for name in (
+        ".env.local", ".env.production", "notes/.env.staging",
+        ".env", ".env.local", "aws_credentials", "session-cookie.txt", "my_token.json",
+        "service-password", "id_rsa", "id_ed25519", "server.pem", "key.p12", "cert.pfx",
+        "run_20260615T003340Z.secret_refs.jsonl",
+    ):
+        assert DENY_STANDALONE.search(name), name
+    # And it still must not swallow ordinary content.
+    for name in ("MEMORY.md", "events.jsonl", "notes/design.md", "report.json",
+                 "environment.md", ".environment"):
+        assert not DENY_STANDALONE.search(name), name
+
+
+def test_a_real_read_failure_still_marks_the_source_unreadable() -> None:
+    source = (REPO / "OpenAIDatabase" / "scripts" / "memory_atlas_private" / "inventory.py").read_text(encoding="utf-8")
+    assert "except (OSError, InventoryError) as exc:" in source
+    assert "failures.append(str(exc))" in source
+    assert "if failures:\n            state = SourceState.UNREADABLE" in source
