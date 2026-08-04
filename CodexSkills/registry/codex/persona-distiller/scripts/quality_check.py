@@ -821,6 +821,29 @@ def run_corpus_text_checks(report, target: Path, cache_dirs: list[str]) -> None:
                         '**从这些文件里取不出任何可核的逐字引文**。')
         review['fraktur_mojibake'] = f'{n_bad} 份' if n_bad else '✓ 没有花体乱码'
 
+    # ★ v0.0.0.135：**语料文件头里引的话，正文里必须真有。**
+    #   头部此前不在任何判据的射程里，而它恰恰是「这份东西是什么」的唯一说明——
+    #   下游的分档、归属、坐标全从它来。**头错了下游全跟着错，而且看起来有据。**
+    #   实测抓出三处「改了 OCR 讹字再当逐字引文用」（Slavyanov #115 两处、
+    #   另一处同类在 Carver #127 由别的判据抓到）。
+    #   ★★ 覆盖面很窄：全库 5,016 份 .txt 里，头部带引文的只有 2 条——
+    #   **报 0 时必须连「头部引文只有几条」一起报**，否则那个 0 会被读成全库体检合格。
+    code, out = run('check_source_header_quotes.py', [str(target / 'raw')])
+    if code == -1:
+        review['source_header_quotes'] = out
+    else:
+        try:
+            _h = json.loads(out)
+            _n, _bad = _h.get('头部里的引文', 0), _h.get('**正文里找不到的**', 0)
+            review['source_header_quotes'] = (
+                f"头部引文 {_n} 条，**正文里找不到 {_bad} 条**"
+                + ("　★ 逐条：" + "｜".join(f"{b['文件']}: {b['头部引的'][:60]}"
+                                            for b in _h.get('逐条', [])[:4]) if _bad else "")
+                + ("　★★ 覆盖面窄：头部不引原文的文件本件看不见，**这个数不是全库体检**"
+                   if not _bad else ""))
+        except (json.JSONDecodeError, TypeError):
+            review['source_header_quotes'] = '**未核（不是通过）**：输出解析不了'
+
     # ★ v0.0.0.130：**研究文档层的逐字引文**——放在本函数而不是 run_content_checks，
     #   因为**后者只在 --phase release 被调用**（本文件 v0.0.0.116 已经为同一件事
     #   更正过一次，而我今天又原样犯了一遍：先写进 run_content_checks，
