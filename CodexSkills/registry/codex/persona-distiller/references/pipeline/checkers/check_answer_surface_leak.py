@@ -84,6 +84,17 @@ CHANNELS = {
 #   而 `check_verbatim_quotes` / `check_quote_locator` 正是靠 `「…」`
 #   认出「这里有一条逐字引文」的。**若为了「更不像 Markdown」把引号也去掉，
 #   等于把三道引文判据一起弄瞎**，它们会因为找不到引文而静默通过。
+#
+# ★★★ 2026-08-05 更正射程（Carver #127）：上面那句「两侧都在用」**在本人物身上不成立**。
+#   实测 **候选 15/16、基线 2/16 → 可利用 81%**，远超门，与此前四人（16/19/31/31%）
+#   完全不同量级。根因不难懂：**候选之所以带引号，是因为它在引语料；
+#   基线没有语料可引。** 这不是格式习惯的差别，是**有没有根据**的差别。
+#
+#   所以本件**照旧不把「」列为拦截通道**（删引号会弄瞎引文判据，那个代价更大），
+#   但**必须把这个数报出来**——沉默会让「✓ 已知通道都堵上了」被读成「盲判是干净的」。
+#   ★ 它是**只报不拦**：改法只能是「让基线也有根据可引」或「接受并记为残余泄题」，
+#     **绝不是把候选的引号删掉**。
+QUOTE_MARK = re.compile(r"「[^」]{4,}」|\u201c[^\u201d]{4,}\u201d")
 #   **逐字引文继续用「」，这是判据之间已经核过的相容点。**
 
 
@@ -109,7 +120,15 @@ def measure(cand: dict, base: dict) -> dict:
             "base_n": sum(1 for k in keys if rx.search(base[k])),
         }
 
-    return {"n": len(keys), "agg": tc / max(tb, 1),
+    qc = sum(1 for k in keys if QUOTE_MARK.search(cand[k]))
+    qb = sum(1 for k in keys if QUOTE_MARK.search(base[k]))
+    q_only_c = sum(1 for k in keys if QUOTE_MARK.search(cand[k]) and not QUOTE_MARK.search(base[k]))
+    q_only_b = sum(1 for k in keys if QUOTE_MARK.search(base[k]) and not QUOTE_MARK.search(cand[k]))
+    quote_mark = {"cand_n": qc, "base_n": qb,
+                  "exploit": max(q_only_c, q_only_b) / len(keys),
+                  "side": "候选" if q_only_c >= q_only_b else "基线"}
+
+    return {"n": len(keys), "agg": tc / max(tb, 1), "quote_mark": quote_mark,
             "shorter": shorter, "shorter_frac": shorter / len(keys),
             "worst": ratios[0], "cand_chars": tc, "base_chars": tb,
             "surface": surface}
@@ -327,6 +346,17 @@ def main() -> int:
         flag = "  ← **可指认**" if s["exploit"] > MAX_EXPLOIT else ""
         print(f"  {name:<12} 候选 {s['cand_n']:>2}/{m['n']}　基线 {s['base_n']:>2}/{m['n']}"
               f"　可利用 {s['exploit']:.0%}{flag}")
+
+    q = m.get("quote_mark")
+    if q:
+        hot = "  ← **超门，但本件不拦**" if q["exploit"] > MAX_EXPLOIT else ""
+        print(f"  {'「」直角引号':<12} 候选 {q['cand_n']:>2}/{m['n']}　基线 {q['base_n']:>2}/{m['n']}"
+              f"　可利用 {q['exploit']:.0%}（**只报不拦**）{hot}")
+        if q["exploit"] > MAX_EXPLOIT:
+            print("    ★ 候选带引号是因为**它在引语料**，基线没有语料可引——"
+                  "这是「有没有根据」的差别，不是格式习惯的差别。")
+            print("    ★★ 改法只有两条：让基线也有据可引，或**接受并记为残余泄题**。"
+                  "**绝不是把候选的引号删掉**——那会同时弄瞎三道引文判据。")
 
     bad = verdict(m)
     if not bad:

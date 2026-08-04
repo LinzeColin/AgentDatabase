@@ -376,8 +376,8 @@
     },
     {
       "path": "references/ledgers/_待用户裁定.md",
-      "sha256": "d79b0b3cbd0ec6e26d479d327363b5e03ac0edfebd5e3ed559e1ae7545a62dc0",
-      "size_bytes": 69038
+      "sha256": "e82beb7db2bf2e2908cde51e7eab04870cd35cf504a6d3f9cc8c252c9f6bfc80",
+      "size_bytes": 72102
     },
     {
       "path": "references/ledgers/_每次开工必读.md",
@@ -491,8 +491,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_answer_surface_leak.py",
-      "sha256": "ad34a1d9a2707091f75f270f33820c323d5ab9e18ea3ca9fc80b2069752cd1a4",
-      "size_bytes": 17681
+      "sha256": "428ac2b5da7dfee11a35de9e8239ccd32bbb645ec22bcf80753c63b014f0d608",
+      "size_bytes": 19911
     },
     {
       "path": "references/pipeline/checkers/check_asked_verbatim_got_pointer.py",
@@ -1046,8 +1046,8 @@
     },
     {
       "path": "scripts/check_answer_surface_leak.py",
-      "sha256": "ad34a1d9a2707091f75f270f33820c323d5ab9e18ea3ca9fc80b2069752cd1a4",
-      "size_bytes": 17681
+      "sha256": "428ac2b5da7dfee11a35de9e8239ccd32bbb645ec22bcf80753c63b014f0d608",
+      "size_bytes": 19911
     },
     {
       "path": "scripts/check_asked_verbatim_got_pointer.py",
