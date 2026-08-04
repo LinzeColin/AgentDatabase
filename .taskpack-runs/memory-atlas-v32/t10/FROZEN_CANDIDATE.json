@@ -1,0 +1,12 @@
+{
+  "schema_version": "memory_atlas.frozen_candidate.v1",
+  "frozen_at": "2026-08-04T11:29:34Z",
+  "release_id": "20260804T111907Z-fa55d808fe90",
+  "agent_release_id": "20260804T111907Z-fa55d808fe90",
+  "snapshot_identity": {"readable": true, "schema_version": "memory_atlas.live_snapshot.v1", "run_id": "marun_5bd5fa6104b034eaf65bdee3", "trace_id": "marun_5bd5fa6104b034eaf65bdee3", "source_completed_at": "2026-08-03T17:31:57+00:00", "release_id": "20260804T111907Z-fa55d808fe90", "deployment_revision": "20260804T111907Z-fa55d808fe90", "artifact_digest": "e9eaaee962b2d88f300e9df5aa5cf0f1d2cffac109766d1effa0b5081992c37d", "event_count": 122080},
+  "store_digests": {
+    "current_sha256": "7064772da5ad4566d4eb5cbadeebe7c9c3922063f1e1aed11fbaae5f8963192c",
+    "previous_sha256": "cc82e7a0ad870947b3969c06fa43d5d3200a222f25f610bf340cf919efcabae5",
+    "history_object_count": 1
+  }
+}

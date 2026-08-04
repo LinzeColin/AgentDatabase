@@ -78,3 +78,49 @@ lands, `UNVERIFIED` is the honest value and the panel shows 未验证.
 
 **T09 is therefore PASS on run/trace/privacy/visual/coverage and BLOCKED on
 release identity until the next promotion.** It is not marked complete here.
+
+## Update 2026-08-04 11:32 — the release identity gap is closed
+
+Read through the Owner's own Access session, `GET /api/v31/live-snapshot` → 200:
+
+| | |
+|---|---|
+| `release.identity_state` | **OBSERVED** |
+| `release.release_id` | `20260804T111907Z-fa55d808fe90` |
+| `release.repository_commit` | `fa55d808fe906a418c239a33183d44fa6c03a3e7` |
+| `release.artifact_digest` | `e9eaaee962b2d88f300e9df5aa5cf0f1d2cffac109766d1effa0b5081992c37d` |
+| `release.deployment_revision` | `20260804T111907Z-fa55d808fe90` |
+
+The panel renders the same four values in its truth ribbon, so
+`api_to_chart_oracle` and `same_run_oracle` now have a release and a deployment
+to bind. **T09 is PASS, no longer BLOCKED.**
+
+Closing it took two more defects beyond the missing unit source recorded above.
+`MEMORY_ATLAS_ARTIFACT_DIGEST` was only ever read from the environment and
+nothing ever set it, so every promotion wrote an empty value; it is now computed
+over the promoted `dist`. And the promotion wrote `release-identity.env` *after*
+restarting the services that read it, so every service a promotion started saw
+the previous release — the snapshot named a release one promotion behind,
+permanently. The identity file is now written before anything restarts.
+
+The authority evidence also changed shape, because the data did:
+
+```
+canonical_source_readback  PASS
+private_database_readback  PASS
+ovh_reconcile              PASS
+status_projection          PASS
+r2_readback                NOT_RUN
+```
+
+R2 was drained on 2026-08-04 and the canonical event stream now lives in the
+GitHub private repository, so `r2_readback` is honestly NOT_RUN and the
+provider-neutral `canonical_source_readback` carries the gate. Tier A reads
+4 ready / 1 failed of 5, the failure being `r2_primary_objects`, which is not
+required for the product — so the page degrades rather than failing, which is
+what it should do.
+
+Event count unchanged at **122,080**, and `/memory_atlas.json` served to the
+browser was regenerated at 2026-08-04T11:37:33Z with **505 sessions, 544 nodes,
+1,691 edges** — the ten original views are reading the join, not the snapshot
+baked into the release.

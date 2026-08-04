@@ -1038,8 +1038,16 @@ def test_memory_atlas_uses_dedicated_non_conflicting_api_port() -> None:
 
     unit = (repo / "ops/memory-atlas/systemd/memory-atlas-api.service").read_text(encoding="utf-8")
     unit_section, service_section = unit.split("[Service]", maxsplit=1)
-    assert "StartLimitIntervalSec=60" in unit_section
-    assert "StartLimitBurst=5" in unit_section
+    # The rate limit lives in [Unit], not [Service] — that placement is the
+    # property this pins. The numbers were 5-per-60s until a T10 drill hit them:
+    # a promotion, the self-heal timer and an operator restart can coincide, and
+    # once systemd refuses the unit it stays down until `reset-failed` is run by
+    # hand. A restart that ends in a dead API is worse than the crash loop the
+    # limit guards against, so the budget is wider and still bounded.
+    interval = int(re.search(r"StartLimitIntervalSec=(\d+)", unit_section).group(1))
+    burst = int(re.search(r"StartLimitBurst=(\d+)", unit_section).group(1))
+    assert interval >= 60 and burst >= 5, (interval, burst)
+    assert burst <= 50, "an unbounded budget would stop catching a real crash loop"
     assert "StartLimitIntervalSec" not in service_section
     assert "StartLimitBurst" not in service_section
 

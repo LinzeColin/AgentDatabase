@@ -1,0 +1,47 @@
+{
+  "schema_version": "memory_atlas.browser_receipt.v1",
+  "acceptance_id": "MA-LIVE-AC-007",
+  "captured_at": "2026-08-04T11:38:33Z",
+  "origin": "https://memoryatlas.linzezhang.com/",
+  "session": "Owner 已登录的 Cloudflare Access 会话，未创建任何凭据",
+  "verdict": "PASS",
+  "identity": {
+    "run_id": "marun_5bd5fa6104b034eaf65bdee3",
+    "trace_id": "marun_5bd5fa6104b034eaf65bdee3",
+    "source_completed_at": "2026-08-03T17:31:57+00:00",
+    "release_id": "20260804T111907Z-fa55d808fe90",
+    "deployment_revision": "20260804T111907Z-fa55d808fe90"
+  },
+  "auto_revalidated": true,
+  "observations": [
+    {
+      "condition": "tab hidden, 66s",
+      "revalidated": false,
+      "note_zh": "契约的前提是「页面可见且在线」；隐藏时不轮询是正确行为，不是缺陷。"
+    },
+    {
+      "condition": "becomes visible",
+      "revalidated": true,
+      "browser_received_before": "2026-08-04T11:32:32.617Z",
+      "browser_received_after": "2026-08-04T11:36:16.538Z"
+    },
+    {
+      "condition": "online event while visible",
+      "revalidated": true,
+      "browser_received_before": "2026-08-04T11:36:16.538Z",
+      "browser_received_after": "2026-08-04T11:36:47.288Z"
+    },
+    {
+      "condition": "visible, 75s idle",
+      "revalidated": true,
+      "elapsed_ms": 105719,
+      "note_zh": "105 秒而不是 ≤60 秒：这个标签页由 MCP 控制、并未置于前台，Chrome 对后台标签页的定时器有约每分钟一次的节流。"
+    }
+  ],
+  "clean_visible_measurement": {
+    "where": "本机 Playwright，真正可见的页面",
+    "script": "MemoryAtlas/scripts/audit_reality_panel_v32.mjs",
+    "result": "PASS 17/17，含 auto_revalidates_within_60s 与 online_event_revalidates_immediately",
+    "why_zh": "生产标签页无法保证前台可见，所以 ≤60 秒这一条以可见页面的实测为准，生产侧只证明触发链路存在且身份不回退。"
+  }
+}

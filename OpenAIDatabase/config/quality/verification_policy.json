@@ -96,6 +96,7 @@
         "tests/test_memory_atlas_data.py",
         "tests/test_memory_atlas_deployment.py",
         "tests/test_memory_atlas_goal_completion.py",
+        "tests/test_memory_atlas_independent_verifier_v32.py",
         "tests/test_memory_atlas_launcher.py",
         "tests/test_memory_atlas_live_snapshot_api_v32.py",
         "tests/test_memory_atlas_live_snapshot_publish_v32.py",

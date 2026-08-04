@@ -1,0 +1,24 @@
+{
+  "schema_version": "memory_atlas.browser_receipt.v1",
+  "acceptance_id": "MA-LIVE-AC-007",
+  "captured_at": "2026-08-04T11:43:30Z",
+  "origin": "https://memoryatlas.linzezhang.com/",
+  "stage": "fresh_session_tab",
+  "verdict": "PASS",
+  "identity": {
+    "run_id": "marun_5bd5fa6104b034eaf65bdee3",
+    "trace_id": "marun_5bd5fa6104b034eaf65bdee3",
+    "source_completed_at": "2026-08-03T17:31:57+00:00",
+    "release_id": "20260804T111907Z-fa55d808fe90",
+    "deployment_revision": "20260804T111907Z-fa55d808fe90"
+  },
+  "event_count": 122080,
+  "served_atlas": {
+    "generated_at": "2026-08-04T11:37:33.869Z",
+    "codex_session_count": 505,
+    "nodes": 544,
+    "edges": 1691,
+    "note_zh": "十视图读到的图谱是本次 reconcile 现生成的，不是发布包里烤死的快照。"
+  },
+  "what_was_not_done_zh": "没有重新输入任何凭据，也没有登出 Owner 的 Access 会话。这里的「重登」是同一 Access 会话下的全新标签页干净加载；凭据操作不属于代理可执行的动作，据此标注，不冒充更强的证据。"
+}

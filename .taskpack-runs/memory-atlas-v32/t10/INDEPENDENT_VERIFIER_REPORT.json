@@ -1,0 +1,105 @@
+{
+  "schema_version": "memory_atlas.independent_verifier.v1",
+  "verdict": "PASS",
+  "subject": {
+    "frozen_candidate": "/srv/linze/work/memory-atlas/t10/FROZEN_CANDIDATE.json",
+    "release_id": "20260804T111907Z-fa55d808fe90",
+    "durability_report": "/srv/linze/work/memory-atlas/t10/DURABILITY_RECOVERY_REPORT.json",
+    "snapshot_store_root": "/srv/linze/apps/memory-atlas/shared/data/live-snapshot",
+    "live_snapshot_schema": "/srv/linze/apps/agentdatabase/current/OpenAIDatabase/schema/memory_atlas.live_snapshot.v1.schema.json"
+  },
+  "independence": {
+    "class": "SEPARATE_PROCESS_FROZEN_RULES_READ_ONLY",
+    "written_by": "the builder",
+    "run_as": "its own process against frozen inputs",
+    "weaker_than_zh": "这不等于第二方独立验收：判据是构建者写的。它买到的是——判定来自按运行前就固定的规则重新读世界，而不是构建者自己宣称结果；证据缺失一律 BLOCKED，不能转 PASS。",
+    "writes_performed": 0
+  },
+  "checks": [
+    {
+      "acceptance_id": "MA-LIVE-AC-007",
+      "title_zh": "自动重验证、刷新与重登读回",
+      "verdict": "PASS",
+      "reason": "3 receipts, one run, no regression",
+      "evidence": {
+        "rows": [
+          {
+            "file": "AC007_AUTO_REVALIDATION_RECEIPT.json",
+            "verdict": "PASS",
+            "run_id": "marun_5bd5fa6104b034eaf65bdee3",
+            "source_completed_at": "2026-08-03T17:31:57+00:00",
+            "auto_revalidated": true
+          },
+          {
+            "file": "AC007_REFRESH_RECEIPT.json",
+            "verdict": "PASS",
+            "run_id": "marun_5bd5fa6104b034eaf65bdee3",
+            "source_completed_at": "2026-08-03T17:31:57+00:00",
+            "auto_revalidated": null
+          },
+          {
+            "file": "AC007_RELOGIN_RECEIPT.json",
+            "verdict": "PASS",
+            "run_id": "marun_5bd5fa6104b034eaf65bdee3",
+            "source_completed_at": "2026-08-03T17:31:57+00:00",
+            "auto_revalidated": null
+          }
+        ]
+      }
+    },
+    {
+      "acceptance_id": "MA-LIVE-AC-008",
+      "title_zh": "失败保留最近成功快照",
+      "verdict": "PASS",
+      "reason": "current only moved forward, last-good preserved, fault injection passed",
+      "evidence": {
+        "frozen_current": "7064772da5ad4566d4eb5cbadeebe7c9c3922063f1e1aed11fbaae5f8963192c",
+        "observed_current": "0df2e4262881e036de8493ff4143845eae8d51aa4b905af85f432170e10a0fb9",
+        "across_drill_steps": [
+          "7064772da5ad4566d4eb5cbadeebe7c9c3922063f1e1aed11fbaae5f8963192c"
+        ],
+        "previous_sha256": "7064772da5ad4566d4eb5cbadeebe7c9c3922063f1e1aed11fbaae5f8963192c",
+        "frozen_source_completed_at": "2026-08-03T17:31:57+00:00",
+        "observed_source_completed_at": "2026-08-03T17:31:57+00:00",
+        "fault_injection": {
+          "case_count": 10,
+          "failed": [],
+          "exit_code": 0
+        }
+      }
+    },
+    {
+      "acceptance_id": "MA-LIVE-AC-011",
+      "title_zh": "原子 current/previous/history",
+      "verdict": "PASS",
+      "reason": "history holds this run, current and previous agree",
+      "evidence": {
+        "run_id": "marun_5bd5fa6104b034eaf65bdee3",
+        "current_sha256": "0df2e4262881e036de8493ff4143845eae8d51aa4b905af85f432170e10a0fb9",
+        "history_sha256": "dd19f87d84017bfba3e6e9cda29c90dd8ead5c0de67ddaf90b80731318535674",
+        "previous_sha256": "7064772da5ad4566d4eb5cbadeebe7c9c3922063f1e1aed11fbaae5f8963192c",
+        "history_object_count": 1
+      }
+    },
+    {
+      "acceptance_id": "MA-LIVE-AC-016",
+      "title_zh": "重启、回滚与隔离恢复",
+      "verdict": "PASS",
+      "reason": "restart, rollback, roll-forward and restore all held the frozen identity",
+      "evidence": {
+        "frozen_identity": {
+          "run_id": "marun_5bd5fa6104b034eaf65bdee3",
+          "trace_id": "marun_5bd5fa6104b034eaf65bdee3",
+          "release_id": "20260804T111907Z-fa55d808fe90",
+          "deployment_revision": "20260804T111907Z-fa55d808fe90"
+        },
+        "rolled_back_to": "20260804T105352Z-2b7a59dc4227",
+        "rolled_forward_to": "20260804T111907Z-fa55d808fe90",
+        "rollback_exit_code": 0,
+        "roll_forward_exit_code": 0,
+        "isolated_restore_state": "PASS",
+        "unhealthy_steps": []
+      }
+    }
+  ]
+}

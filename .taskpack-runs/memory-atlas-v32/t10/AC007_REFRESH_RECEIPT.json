@@ -1,0 +1,18 @@
+{
+  "schema_version": "memory_atlas.browser_receipt.v1",
+  "acceptance_id": "MA-LIVE-AC-007",
+  "captured_at": "2026-08-04T11:42:04Z",
+  "origin": "https://memoryatlas.linzezhang.com/",
+  "stage": "full_page_reload",
+  "verdict": "PASS",
+  "identity": {
+    "run_id": "marun_5bd5fa6104b034eaf65bdee3",
+    "trace_id": "marun_5bd5fa6104b034eaf65bdee3",
+    "source_completed_at": "2026-08-03T17:31:57+00:00",
+    "release_id": "20260804T111907Z-fa55d808fe90",
+    "deployment_revision": "20260804T111907Z-fa55d808fe90"
+  },
+  "panel_present": true,
+  "event_count": 122080,
+  "truth_ribbon": "运行 marun_5bd5fa6104b034eaf65bdee3 · 追踪 marun_5bd5fa6104b034eaf65bdee3 · 数据截止 2026-08-03T17:31:57+00:00 · 年龄 65144s · Tier A 4/5 · Tier B 5/10 · 发布 20260804T111907Z-fa55d808fe90 · 部署 20260804T111907Z-fa55d808fe90 · 浏览器收到 2026-08-04T11:42:04.207Z"
+}
