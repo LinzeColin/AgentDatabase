@@ -208,19 +208,54 @@ def cid(key: str) -> str:
     return "clm-" + hashlib.sha256(("blackwell-" + key).encode()).hexdigest()[:12]
 
 
+
+# ★ 每条非事实断言的置信度与**证伪条件逐条写**，不套模板——
+#   模板化的 falsifier 等于没有 falsifier（「若本条不成立则本条作废」是同义反复）。
+CONF = {
+ "prevention-over-cure": (0.85,
+   ["若在 1852–1902 的著作里找不到「卫生先于治疗」的表述，"
+    "或找到她把治疗置于卫生之前的表述，本条作废。"]),
+ "moral-law-on-acts": (0.85,
+   ["若她在公共卫生议题上曾以纯效用理由压过道德理由，本条应下调为 hypothesis。"]),
+ "vivisection-two-aspects": (0.80,
+   ["若她判活体解剖时只谈道德不谈智识（或反之），「同时看两面」这条作废。"]),
+ "family-physician": (0.80,
+   ["若 1860／1864 两份建制文本主张女医师应走专科而非家庭医生，本条作废。"]),
+ "physical-education-first": (0.80,
+   ["若《Counsel to Parents》里那句自述不指向 1852 年的体育讲义，回指链断，本条下调。"]),
+ "against-regulation": (0.85,
+   ["若她曾支持以国家登记或强制检查来管理卖淫，本条作废。"]),
+ "whole-not-parts": (0.75,
+   ["若《Scientific Method in Biology》主张化约式说明优于整体说明，本条作废。"]),
+ "credential-then-argument": (0.70,
+   ["若她在取得学位之前已发表同类建制主张，「先取资格再发言」这条作废。"]),
+ "municipal-decay": (0.75,
+   ["若 1885／1888 两篇把公共卫生的失败主要归于医学知识不足，本条作废。"]),
+}
+
+# 必填字段的公共部分（schema 见 `ledger.invalid` 那条门）
+BASE = {"author_role": "distiller", "language": "en", "time_scope": "1821-1910",
+        "created_at": "2026-08-04T00:00:00Z",
+        "alternative_explanations": [], "counter_source_ids": []}
+
+
 def main() -> int:
     rows = []
     for key, stem, text in FACTS:
-        rows.append({"claim_id": cid(key), "claim_key": key, "category": "fact",
-                     "status": "fact", "claim": text, "source_ids": [sid(stem)],
-                     "contexts": ["史实"], "evidence_clusters": [stem]})
+        rows.append(dict(BASE, claim_id=cid(key), claim_key=key, category="fact",
+                         status="fact", claim=text, source_ids=[sid(stem)],
+                         contexts=["史实"], evidence_clusters=[stem],
+                         confidence=0.9,
+                         falsifiers=[f"若 `{stem}` 正文中查不到本条引的那句原文，本条作废。"]))
     for key, cat, stems, text, contexts, clusters in PATTERNS:
+        conf, fals = CONF[key]
         ids = [sid(s) for s in stems]
         if len(set(ids)) < 2:
             raise SystemExit(f"✗ **{key} 的两份源是同一个 id**")
-        rows.append({"claim_id": cid(key), "claim_key": key, "category": cat,
-                     "status": "pattern", "claim": text, "source_ids": ids,
-                     "contexts": contexts, "evidence_clusters": clusters})
+        rows.append(dict(BASE, claim_id=cid(key), claim_key=key, category=cat,
+                         status="pattern", claim=text, source_ids=ids,
+                         contexts=contexts, evidence_clusters=clusters,
+                         confidence=conf, falsifiers=fals))
     out = TARGET / "evidence/claims.jsonl"
     out.write_text("\n".join(json.dumps(r, ensure_ascii=False, sort_keys=True) for r in rows) + "\n",
                    encoding="utf-8")
