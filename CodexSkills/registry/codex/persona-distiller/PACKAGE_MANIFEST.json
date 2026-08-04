@@ -386,8 +386,8 @@
     },
     {
       "path": "references/ledgers/_每次开工必读.md",
-      "sha256": "030c54beeb674d670b404529700ff2090adad823b1714761e6cc56b5adc83d10",
-      "size_bytes": 57756
+      "sha256": "cd3f29fb98b8bf74bf99a6029953b24da9ed2b945e1b048f12161e801d67828d",
+      "size_bytes": 58556
     },
     {
       "path": "references/ledgers/_蒸馏名单_v1草稿.md",
@@ -843,6 +843,11 @@
       "path": "references/pipeline/scaffold/stats_template.py",
       "sha256": "41738a57a2106997f2089d898b45bc18ff52d30cbe38f7b7b5c2190fab825bbc",
       "size_bytes": 5220
+    },
+    {
+      "path": "references/pipeline/抓源坑位清单.md",
+      "sha256": "0c232332e8d9f2e710b8c83046d055447af2f101fdffaa3c5d1189c8c3cbe775",
+      "size_bytes": 5859
     },
     {
       "path": "references/research-and-sources.md",
