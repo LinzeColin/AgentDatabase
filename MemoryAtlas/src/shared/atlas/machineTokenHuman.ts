@@ -124,6 +124,7 @@ export const machineTokenLabels: Record<string, string> = {
   automation_failure: "自动化失败",
   rollback_runtime_order: "回滚运行顺序",
   runtime_port_conflict: "运行端口冲突",
+  scheduled_capture_overdue: "按计划的采集逾期",
   // Outcome states and source ids the browser rendered against live production
   // data. `claimed_*` is the event's own assertion before verification, which is
   // the distinction the whole verification-debt metric rests on.

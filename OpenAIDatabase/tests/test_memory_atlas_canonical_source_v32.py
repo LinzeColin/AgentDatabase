@@ -598,3 +598,46 @@ def test_no_test_file_hides_outside_the_gated_directory() -> None:
     on_disk = {f"tests/{p.name}" for p in (REPO / "OpenAIDatabase" / "tests").glob("test_*.py")}
     # Anything on disk and unowned would be a test nothing runs.
     assert not (on_disk - owned), sorted(on_disk - owned)
+
+
+# --- The alert for a capture that never arrived ------------------------------
+
+def test_an_overdue_capture_is_detected_from_the_last_success() -> None:
+    """The capture missed 2026-08-04 and 08-05 and nothing said so — it came out
+    because the Owner asked. Age is measured from the last successful run, so a
+    capture in flight neither suppresses nor triggers the alert."""
+    from OpenAIDatabase.scripts.memory_atlas_private.pipeline import capture_overdue
+
+    target = 97_200
+    on_time = capture_overdue("2026-08-04T03:10:00+00:00", "2026-08-04T12:00:00Z", target)
+    assert on_time is None
+
+    overdue = capture_overdue("2026-08-03T17:31:57+00:00", "2026-08-05T12:00:00Z", target)
+    assert overdue is not None
+    assert overdue["age_seconds"] > target
+    assert overdue["overdue_seconds"] == overdue["age_seconds"] - target
+    assert overdue["last_success_at"] == "2026-08-03T17:31:57+00:00"
+
+
+@pytest.mark.parametrize("bad", ["", None, "not-a-timestamp"])
+def test_an_unreadable_timestamp_does_not_invent_an_alert(bad) -> None:
+    from OpenAIDatabase.scripts.memory_atlas_private.pipeline import capture_overdue
+
+    assert capture_overdue(bad, "2026-08-05T12:00:00Z", 97_200) is None
+
+
+def test_exactly_at_the_target_is_not_overdue() -> None:
+    from OpenAIDatabase.scripts.memory_atlas_private.pipeline import capture_overdue
+
+    assert capture_overdue("2026-08-04T00:00:00+00:00", "2026-08-04T01:00:00Z", 3600) is None
+    assert capture_overdue("2026-08-04T00:00:00+00:00", "2026-08-04T01:00:01Z", 3600) is not None
+
+
+def test_the_alert_goes_through_the_ledger_the_product_already_shows() -> None:
+    source = (REPO / "OpenAIDatabase" / "scripts" / "memory_atlas_private" / "pipeline.py").read_text(encoding="utf-8")
+    assert 'error_code="SOURCE_CAPTURE_OVERDUE"' in source
+    assert 'category="scheduled_capture_overdue"' in source
+    # Deduplicated by signature, so a fifteen-minute timer increments a
+    # recurrence rather than filing a new incident every run.
+    assert "self.failures.record_failure(" in source
+    assert '"capture_alert": capture_alert' in source
