@@ -373,3 +373,56 @@ _djvu.txt **实际下载 4,328,671 字节**，无任何挑战
 而且是**有据的否定**——该会自己的印本页脚写着 `Read by title and published in Proceedings`，
 **即他那篇 1899 年的论文是「以题目宣读」（本人不在场）**。
 **这类「有据的否定」比「没找到」值钱得多，记下来免得后人重找。**
+
+---
+
+# 十二、抓源落盘中途的 QA（**我自己跑的，读盘不干扰抓源**）
+
+**41 份已落盘，正文合计约 1,431,656 字符。**
+
+## 逐份体检
+
+```
+每一份 ≥400 字符、无错误页特征（404／<html／access denied／just a moment）→ **0 份可疑**
+check_unexamined_band  → 扫 41，**语种判据全都看得到，两门之间 0**
+check_ocr_legibility   → 德文 0 份，花体乱码 0
+```
+
+★ 对照 Koch：两门之间 2/120、花体乱码 7 份。**这一批干净得多。**
+
+## ★★ lane 2 那一份，逐条核过边界
+
+`src-tariff1921-carver-testimony/tariff1921-carver-testimony.txt`，**28,665 字符**：
+
+```
+`Mr. Carver.`      **12 处**
+`The Chairman.`      5 处
+`Mr. Carew.`         1 处 ← **委员之一，在场发言，不是污染**
+`STATEMENT OF M`     **1 处** ← 只有他自己那行，**没有串到下一位证人**
+```
+
+**起**（照录，含 OCR 讹字）：
+
+> `Is Mr. Carver in the room ? STATEMENT OF MB. GEOEOE W. CABVER, UlTITED PEANUT`
+> `ASSOCIATIOH OF AMEBIGA, TUSKE6EE, ALA. The Chairman. All right, Mr. Carver.`
+> `We will give you 10 minutes. Mr. Carver. Mr. Chairman, I …`
+
+**止**：
+
+> `. Treadwat. Well, come again and bring the rest. The Chairman. We want to`
+> `compliment you, sir, on the way you have handled your subject. **Mr. Cathcart.**`
+
+★★ **切口正正好**：主席致谢收尾，下一位证人 Cathcart 起头，**一个字都没多切**。
+
+## 三件关键的都在
+
+```
+lane 1  35 份塔斯基吉公报（CAT313554xx／CAT313557xx）
+        ＋ 3 篇爱荷华科学院论文（proceedingsofiow03 ×2、proceedingsofiow07）
+        ＋ 1899 Hampton 宣读稿
+**lane 2  src-tariff1921-carver-testimony**
+lane 4  src-docsouth-merritt-1929
+```
+
+★ **尚未见**：爱荷华农业试验站那 3 份（Best Ferns／Currants & Cherries／Our Window Gardens，
+ISU DSpace REST）。**抓源仍在跑，等它自己报。**
