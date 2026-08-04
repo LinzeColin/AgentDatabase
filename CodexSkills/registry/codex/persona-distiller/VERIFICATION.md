@@ -1,6 +1,6 @@
-# Release verification — Persona Distiller v0.0.0.130
+# Release verification — Persona Distiller v0.0.0.131
 
-Date: 2026-08-05（**v0.0.0.130**）
+Date: 2026-08-05（**v0.0.0.131**）
 
 > **本文件记录「当前发布号的复验结果」，不是历史归档。**
 > 版本号必须等于根目录 `VERSION`，由 `scripts/check_contract_drift.py` 强制。
@@ -21,6 +21,21 @@ Date: 2026-08-05（**v0.0.0.130**）
 > **表格正文不在任何判据的射程里**。
 > **「本表每一行都来自本次实跑」是一句自述**——
 > 而自述不是证据（见 `self-report-is-not-evidence`）。
+
+> ### v0.0.0.131 这一版重跑了什么
+>
+> **`package_target.py` 的 strict 失败理由：errors 与 warnings 一并印出。**
+> **本次重跑**：`package_target` 对 Carver 实跑（**改前印 `[]`，改后印出真实原因**
+> `eval.baseline-not-capability-evidence`）、
+> `quality_check --phase release` 与 `--strict` 各一次（**非 strict passed=True、strict passed=False，
+> 而两者 errors 都是 0**——这正是空默认值能吞掉原因的结构）、
+> **Carver 两轮盲判共 4 席次实测**（第 1 轮 delta +0.6553 判作废、第 2 轮 +0.4906）、
+> **裸模型基线派发**（运行记录与原始指令逐字留档）、
+> `finalize_release.py` 四步。**其余各行沿用 v0.0.0.96 那一次。**
+>
+> ★★★ **本版最该记住的不是修好的那行代码**：被 `[]` 吞掉的那条原因是
+> 「此产物的 delta 不得用于支持『比裸模型强』这类结论」——
+> **打包被拦不是因为产物差，是因为它的 delta 说明不了事情。**
 
 > ### v0.0.0.130 这一版重跑了什么
 >

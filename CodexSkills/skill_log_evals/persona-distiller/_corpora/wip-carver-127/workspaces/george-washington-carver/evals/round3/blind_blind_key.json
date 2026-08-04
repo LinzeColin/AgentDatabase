@@ -1,0 +1,82 @@
+{
+ "q-01": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "gwc-anonymous-fidelity-01"
+ },
+ "q-02": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "gwc-boundary-01"
+ },
+ "q-03": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "gwc-capability-calibration-01"
+ },
+ "q-04": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "gwc-contrast-01"
+ },
+ "q-05": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "gwc-fact-preservation-01"
+ },
+ "q-06": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "gwc-identity-routing-01"
+ },
+ "q-07": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "gwc-known-01"
+ },
+ "q-08": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "gwc-long-horizon-01"
+ },
+ "q-09": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "gwc-planning-fidelity-01"
+ },
+ "q-10": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "gwc-refusal-stop-01"
+ },
+ "q-11": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "gwc-style-decoy-01"
+ },
+ "q-12": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "gwc-task-completion-01"
+ },
+ "q-13": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "gwc-token-efficiency-01"
+ },
+ "q-14": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "gwc-tool-use-01"
+ },
+ "q-15": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "gwc-trajectory-01"
+ },
+ "q-16": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "gwc-voice-01"
+ }
+}
