@@ -35,56 +35,80 @@
 ★ 同一次补跑**顺带证实了两处席 E 明说「无从核对」的**：
 `desshalb`（旧拼）与 `waren die Veranlassung zu den Versuchen`，**两条都逐字属实**。
 
-## 三、★★ 回头扫了所有能扫的人物——**而我的报出里三分之二是误报**
+## 三、★★ 回头全扫十人——**我第一版的扫法把一半人报成了「未核」，那是错的**
+
+### 先说那个错
+
+我第一版报「barton／fleming／nightingale／osler／virchow **语料目录不在本机 → 未核**」。
+**假的。** 语料一直都在，是我的路径写错了：
 
 ```
-可扫的 4 人 + Mendel：
-  koch-107     引文 16 条　未命中 **0**
-  lister-108   引文 15 条　未命中 **0**
-  pasteur-106  引文 22 条　未命中 **2**  ← **两条都是误报，见下**
-  mendel-125   引文  6 条　未命中 **1**  ← 真的
-  另 5 人（barton/fleming/jenner/nightingale/osler/virchow）
-      **语料目录不在本机 → 未核，不是「通过」**
+koch / lister / pasteur / mendel      → workspaces/<人>/references/
+barton / fleming / nightingale /
+osler / virchow                        → workspaces/<人>/**<人>**/references/   ← 多嵌一层
 ```
 
-### Pasteur 的两条为什么是误报
+**十个人里有五个的工作区多嵌一层同名目录**，而我的 glob 只写了一层。
+★ 一度还因此看到「git 索引里有 735 个 .txt、磁盘上 0 个」这种不可能的现象，
+**差点当成数据丢失去查** ——`git status` 一直是干净的，文件一直都在。
 
-**`lp-known-01`：「He took up the trade of a tanner」**
+### 扫全之后的真实结果
 
-语料里 `trade of a tanner` **0 处**，但 `tanner` 22 处、`tanneur`（法文）16 处。
-而**答案自己就写着**：
+| 人物 | 引文 | 未命中 | |
+|---|---:|---:|---|
+| barton-117 | 25 | **0** | |
+| virchow-109 | 22 | **0** | |
+| koch-107 | 16 | **0** | |
+| lister-108 | 15 | **0** | |
+| **mendel-125** | 6 | **1** | ★ **唯一的真缺陷** |
+| fleming-111 | 17 | 2 | 误报 |
+| nightingale-112 | 13 | 2 | 误报 |
+| pasteur-106 | 22 | 2 | 误报 |
+| osler-110 | 28 | 3 | 误报 |
+| jenner-104 | — | — | **无 references 目录，这个才是真的未核** |
 
-> （我手上这条出自一部**英译传记**，作 `He took up the trade of a tanner`——
-> **那是译者的英文，不是我的原话**；法文原本我这里没有。**按我自己的规矩，这里标出来。**）
+```
+九人可扫，引文 164 条，报出 10 条
+  真缺陷 **1 条**（Mendel 的 OCR 校正，且**没有标注**）
+  误报 **9 条** → **精确率 1/10**
+```
 
-★★★ **这正是 Mendel 那一处该做而没做的事。**
-一个更早的产物已经把正确做法演示过了：**引了非原语的字，就在答案里说明它是什么。**
+### ★★★ 九条误报是同一件事，而那件事恰恰是**正确做法**
 
-**`lp-boundary-01`：「Copyright 1922/1924/1933/1930 by Pasteur Vallery-Radot」**
+九条全部是「引了语料之外的东西，**而答案里已经说明了它是什么**」：
 
-那是把四卷的版权行**压成一条列举**（年份用斜杠并列），不是宣称某一卷逐字如此；
-上下文是一张「哪些字不是我的」清单。**写法偏松，但不是伪造。**
+| 人物 | 被报的字符串 | 答案里怎么说的 |
+|---|---|---|
+| Pasteur | `He took up the trade of a tanner` | 「**那是译者的英文，不是我的原话**；法文原本我这里没有」 |
+| Pasteur | `Copyright 1922/…/1930 by Pasteur Vallery-Radot` | 一张「哪些字不是我的」清单里的**压缩列举** |
+| Osler | `EDITED, WITH ADDITIONS, BY WILLIAM OSLER` | 明说是**扉页那一行** |
+| Osler | `Osler, William, Sir, 1849-1919` | 明说是**著录的 creator 字段** |
+| Fleming | `Fleming, Alexander, 1824-1875` | 「archive.org 把 1845 年那本**著录在**…名下」，另一处更直接：**「（不在语料里，出自抓源时的同名排除记录）」** |
+| Nightingale | `David, F. N. (Florence Nightingale), 1909-1993` | 同上，同名排除用的著录条目 |
 
-### 于是本次报出的精确率是 **1/3**
-
-与既有记录一致：**判据自己第一版常错。**
-**误报的成因是同一个**：判据分不出「引了并声明了来路」与「引了并宣称是原话」。
-
-★ 而这**不该靠调判据解决**——它已经是「只报不拦」，文件头也明写
-「未命中不等于伪造，须人工看一眼原文再定」。**人工那一步今天真的做了，三条各有归属。**
+★★ **早先的产物一直在做对的事，而且做得很齐。** 只有 Mendel 那一处没标注。
+**规矩不是新的——是我在 Mendel 上没照做。**
 
 ## 四、做了什么
 
 **接进 `build_blind_payload.py`（v0.0.0.122），在派发之前跑，只报不拦。**
 
 **没有做的**：没有改 Mendel 的答案（本轮已判完，改它就是中途换被测物）；
-没有把 `check_quote_integrity` 改成硬门（**报出里三分之二是误报，做成硬门会拦下正确的产物**）。
+没有把 `check_quote_integrity` 改成硬门（**报出里 9/10 是误报，做成硬门会拦下九个正确的产物**）。
 
 ## 五、留给后面的一条具体规矩
 
 > **引一段非原语／非原样的字，就在答案里说明它是什么**——
-> 是译文、是校正过的 OCR、还是压缩的列举。
-> **Pasteur `lp-known-01` 是范本；Mendel `gm-fact-preservation-01` 是反例。**
+> 是译文、是著录的 creator 字段、是扉页那一行、是校正过的 OCR，还是压缩的列举。
+
+★ **九个范本**（Pasteur、Osler、Fleming、Nightingale 各处），**一个反例**
+（Mendel `gm-fact-preservation-01`）。**这条规矩不是今天新立的，是它一直在被遵守，而我漏了一次。**
+
+## 六、★ 顺带记一条结构上的不一致
+
+十个工作区里，**五个是 `workspaces/<人>/references/`，五个是 `workspaces/<人>/<人>/references/`**。
+**同一条流水线产出的目录结构不一致**，而任何按固定深度写的 glob 都会静默漏掉一半。
+今天就漏了一次，并因此报出「语料不在本机」这个**假结论**。
 
 参见 `_corpora/wip-mendel-125/_round3_verdict.md` 第七节、
 [[judges-cannot-verify-quotes]]、[[verbatim-is-not-understood]]。
