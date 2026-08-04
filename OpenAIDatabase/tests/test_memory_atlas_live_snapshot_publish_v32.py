@@ -359,3 +359,48 @@ def test_publisher_refuses_to_publish_zeros_when_the_run_counted_events() -> Non
     # Both callers must hand over the events they actually have.
     assert "events=live_events," in source
     assert "events=[asdict(event) for event in all_events]," in source
+
+
+def test_normalized_events_are_projected_onto_the_visual_contract() -> None:
+    """The first attempt at real events raised `event[0].activity_type is
+    required`: this repository's event model says `activity`, the v0.0.0.32
+    visual contract says `activity_type`, and `model_tool` does not exist at
+    all. Handing raw records over also carried object_sha256, relative_path and
+    payload toward the browser."""
+    from OpenAIDatabase.scripts.memory_atlas_private.pipeline import visual_event
+    from OpenAIDatabase.scripts.memory_atlas_private.visual_analytics import build_visual_analytics
+
+    raw = {
+        "event_id": "e1",
+        "occurred_at": "2026-08-03T10:00:00Z",
+        "activity": "development_deployment",
+        "outcome_state": "deployed",
+        "source_id": "codex_sessions",
+        "effort_minutes": 30.0,
+        "evidence_ref": "private-db://memory-atlas/runs/x.json",
+        "object_sha256": "a" * 64,
+        "relative_path": "/Users/someone/.codex/sessions/s.jsonl",
+        "payload": {"prompt": "raw text"},
+    }
+    projected = visual_event(raw)
+    assert projected["activity_type"] == "development_deployment"
+    assert projected["model_tool"] == "codex_sessions"
+    assert projected["work_time_minutes"] == 30.0
+    assert projected["outcome_evidence"] is True
+    assert set(projected) == {
+        "event_id", "occurred_at", "activity_type", "outcome_state",
+        "model_tool", "work_time_minutes", "outcome_evidence", "verified_at",
+    }
+    serialized = json.dumps(build_visual_analytics([projected]), ensure_ascii=False)
+    for forbidden in ("a" * 64, "/Users/", "raw text", "prompt"):
+        assert forbidden not in serialized, forbidden
+
+
+def test_an_event_missing_its_activity_still_produces_a_usable_row() -> None:
+    from OpenAIDatabase.scripts.memory_atlas_private.pipeline import visual_event
+
+    projected = visual_event({"event_id": "e", "occurred_at": "2026-08-03T10:00:00Z", "outcome_state": "unknown"})
+    assert projected["activity_type"] == "unknown"
+    assert projected["model_tool"] == "unknown"
+    assert projected["work_time_minutes"] is None
+    assert projected["outcome_evidence"] is False

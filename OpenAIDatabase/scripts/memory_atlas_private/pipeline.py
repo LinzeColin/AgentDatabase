@@ -261,6 +261,31 @@ def load_supersession(object_store, work_dir: Path) -> dict[str, Any]:
     }
 
 
+def visual_event(event: Mapping[str, Any]) -> dict[str, Any]:
+    """Project a NormalizedEvent onto the fields visual analytics contracts on.
+
+    The repository's event model predates the v0.0.0.32 visual contract and uses
+    `activity` where the contract says `activity_type`, and has no `model_tool`
+    at all. Mapping explicitly — rather than handing over the whole record —
+    also keeps `object_sha256`, `relative_path` and `payload` out of anything
+    that can reach a browser.
+    """
+    row = dict(event)
+    effort = row.get("effort_minutes")
+    return {
+        "event_id": str(row.get("event_id", "")),
+        "occurred_at": str(row.get("occurred_at", "")),
+        "activity_type": str(row.get("activity") or row.get("activity_type") or "unknown"),
+        "outcome_state": str(row.get("outcome_state") or "unknown"),
+        # Which agent/tool produced the event is not captured per event today;
+        # the source is the closest honest stand-in and is never invented.
+        "model_tool": str(row.get("model_tool") or row.get("source_id") or "unknown"),
+        "work_time_minutes": float(effort) if isinstance(effort, (int, float)) else None,
+        "outcome_evidence": bool(str(row.get("evidence_ref") or "").strip()),
+        "verified_at": row.get("verified_at") if isinstance(row.get("verified_at"), str) else None,
+    }
+
+
 def _release_identity() -> dict[str, Any]:
     """What the running process can actually observe about its own release.
 
@@ -347,7 +372,7 @@ class LiveSnapshotPublisherMixin:
                 raise PipelineError(
                     f"run reports {declared} events but none were handed to the live snapshot; refusing to publish zeros"
                 )
-            visual = build_visual_analytics(rows)
+            visual = build_visual_analytics(visual_event(row) for row in rows)
             registry_path = _repo_file("benchmark", "registry.v1.json")
             benchmark = (
                 compare({}, json.loads(registry_path.read_text(encoding="utf-8")))
