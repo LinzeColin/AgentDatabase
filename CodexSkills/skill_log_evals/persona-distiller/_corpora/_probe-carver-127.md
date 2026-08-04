@@ -171,6 +171,17 @@ p.2070 标题行：`...CARVER, REPRESENTING THE UNITED PEANUT ASSOCIATION OF AME
 | HathiTrust（3 个 `rights: pd` 副本：Cornell／Harvard／UMN） | 全站 Cloudflare「Just a moment…」**403，未绕过**（★ 但 Bib API 正常，`full view` 是从它确认的） |
 | archive.org | **Google 的 pt.3–7 扫描件未镜像到 IA**（`source:R2osAAAAMAAJ` 返回 0） |
 
+### ★★★ 我用**第二种工具**独立复核了这两个「挡住」——都是真的，且我没有绕
+
+子代理报的是 `curl` 403。**curl 被挡不等于浏览器也被挡**，所以我用应用内浏览器各开了一次：
+
+| 站 | 浏览器里看到的原文 | 我做了什么 |
+|---|---|---|
+| `babel.hathitrust.org/cgi/pt?id=coo.31924098378726` | **"Just a moment... Performing security verification / This website uses a security service to protect against malicious bots."** | **停手**。这是访问控制，不绕 |
+| `books.google.com/books?id=R2osAAAAMAAJ` | **"Our systems have detected unusual traffic from your computer network. This page checks to see if it's really you sending the requests, and not a robot."** | **停手**。同上 |
+
+**两处都不是 `curl` 的毛病，是真的挡着。** 一次都没有尝试通过。
+
 **所以本条的准确表述是：**
 
 > **lane 2 的材料确实存在、确实是公有领域、确实有 OCR 全文，
