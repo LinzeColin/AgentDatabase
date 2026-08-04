@@ -87,7 +87,20 @@ def audit(corpora: pathlib.Path) -> dict:
     for person in sorted(p for p in corpora.iterdir() if p.is_dir()):
         staged, ingested = staged_names(person), ingested_names(person)
         if not staged or not ingested:
-            skipped.append(person.name)          # ★ 没有可比的两侧 —— 说出来，不静默
+            # ★★ 「没比」有三种，**后果完全不同，不许混成一句「未核」**：
+            #   ① 扁平布局：只有一个 `raw/`，抓源与工作区共用同一个目录——
+            #      **本件要问的那个差结构上不存在**，且 `check_corpus_presence`
+            #      已经在比「账本 vs 磁盘」，是**被别的判据覆盖了**，不是漏洞。
+            #   ② 没有外层 `raw/`：这人**没走过抓源台账那一步**，本件无从比。
+            #   ③ 其它：真的说不清，那才是缺口。
+            has_ws = bool(list(person.glob("workspaces/*")) + list(person.glob("ws-*")))
+            if staged and not has_ws:
+                kind = "扁平布局（抓源与工作区共用 raw/）——本件的差结构上不存在，归 check_corpus_presence 管"
+            elif not staged:
+                kind = "没有外层 raw/：**没走过抓源台账那一步**，无从比"
+            else:
+                kind = "**说不清**"
+            skipped.append(f"{person.name}：{kind}")
             continue
         blob = excluded_blob(person)
         gap = sorted(n for n in staged - ingested if n not in blob)
@@ -106,6 +119,7 @@ def audit(corpora: pathlib.Path) -> dict:
             "**其中一手合计**": sum(r["其中一手"] for r in rows),
             "明细": rows,
             "★ 两侧不齐备、没比的": skipped,
+            "★ 其中「说不清」的": [s for s in skipped if "说不清" in s],
             "★ 口径": "只比文件名，不比 sha256——ingest 会归一化，比内容会得到一堆假阳"}
 
 
@@ -153,7 +167,7 @@ def self_test() -> int:
         print("── ★★ 反向对照②：**写在 _EXCLUDED 里的是有意排除，不许报成缺口** ──")
         chk("wip-deliberate 不在明细里", all(x["人物"] != "wip-deliberate" for x in r["明细"]))
         print("── ★★ 反向对照③：两侧不齐备的**说出来**，不静默跳过 ──")
-        chk(f"{r['★ 两侧不齐备、没比的']}", "wip-empty" in r["★ 两侧不齐备、没比的"])
+        chk(f"{r['★ 两侧不齐备、没比的']}", any("wip-empty" in s for s in r["★ 两侧不齐备、没比的"]))
     print("\n" + ("✓ 自测全过" if ok else "✗ 自测未过"))
     return 0 if ok else 2
 

@@ -4,7 +4,7 @@
   "display_name": "人物蒸馏 Skill / Persona Distiller",
   "distribution": {
     "canonical_registry": "../persona-distiller-group",
-    "kind": "repository-customized-v0.0.0.109",
+    "kind": "repository-customized-v0.0.0.110",
     "lineage_base_archive_sha256": "e891912d98d14afb7677ac935a19be329d97d206f4ae74a644892f46b17f6748"
   },
   "evaluation_suites": 16,
@@ -16,8 +16,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "47a39db78b463bfa61f7e45dd53d0c5cc8079ceb61c528964ea5586ed362e6c8",
-      "size_bytes": 209609
+      "sha256": "8a1accf1e91812790d74805ec88cb3d07ddb2b323afaa75e63e4bd29dd7bb247",
+      "size_bytes": 210452
     },
     {
       "path": "CONTRIBUTING.md",
@@ -31,7 +31,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "d1ba4861eb08a7fc23f82dc198a022e30d1a7320b5f4626a3bc5f7ab6d83f1d3",
+      "sha256": "f9514c6762ba2b5e0d1a5295402f9ce5b2a285df12d3a06239e063cc25270094",
       "size_bytes": 8803
     },
     {
@@ -56,12 +56,12 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "48b955d655bfd15fdd7e6a08068935c6ede32a3df835de77c3d2186c2d75813b",
-      "size_bytes": 105318
+      "sha256": "62055507071c1abfcfcb59c32484052c1c3a9cbbdf4c4e8f7acefae4fdd4961d",
+      "size_bytes": 105638
     },
     {
       "path": "VERSION",
-      "sha256": "ee1e445d3a8b628c997620ff82aecb036039c6f84827ec1ab58784d6e4f941f3",
+      "sha256": "818a3ca9e76547e2454dcfbbaa2152fcf768780520b6d82e0d0bc9f6200126b8",
       "size_bytes": 11
     },
     {
@@ -121,7 +121,7 @@
     },
     {
       "path": "handoff.md",
-      "sha256": "5f3f7fab6abc9f8c9445514d664891ad8a0524b5ef0415784ca9507581ec9c31",
+      "sha256": "ba23820d983577f4c0a9176b636b0f16a93b0e9c007466a081efa7b9b37db893",
       "size_bytes": 3703
     },
     {
@@ -141,7 +141,7 @@
     },
     {
       "path": "manifest.json",
-      "sha256": "59dabb5f8a5b2e9cfe7e4931199b043e5f76718dc8120dfabd20fbfdd11ae5c2",
+      "sha256": "2cb9bc80860e0d4537da78a50f70580bc3bd89c55b17071dd2cb0aac97141d85",
       "size_bytes": 1192
     },
     {
@@ -376,8 +376,8 @@
     },
     {
       "path": "references/ledgers/_待用户裁定.md",
-      "sha256": "7b81f5c1e9748f042ed83fadcf629c26377318ab7450f28fb2202ca2c5126c58",
-      "size_bytes": 47394
+      "sha256": "d9b7c297fbfbaa97c969104acf53249a31fad07d14fa6c58c390e1adc5b18688",
+      "size_bytes": 49635
     },
     {
       "path": "references/ledgers/_每次开工必读.md",
@@ -521,8 +521,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_checkers.py",
-      "sha256": "70c500a23270d4985cf10c3efeee05dc3a9bc6c9e10cf9115033778e38dc0ff9",
-      "size_bytes": 20620
+      "sha256": "e47aa7bedcd61273456db4207dce05273e863e2d434ac129d71113f8a054bab9",
+      "size_bytes": 20896
     },
     {
       "path": "references/pipeline/checkers/check_claim_anchors.py",
@@ -706,8 +706,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_staged_but_not_ingested.py",
-      "sha256": "ef8192dd8b2a37f8261ed39a08ed013756e043defeef934abdb08c17a987dd6c",
-      "size_bytes": 7910
+      "sha256": "1b0d2896163bb0c80c52c37346645c72625edd0a0052f35c4f151d0f0aa506ed",
+      "size_bytes": 8985
     },
     {
       "path": "references/pipeline/checkers/check_suite_single_drag.py",
@@ -1031,8 +1031,8 @@
     },
     {
       "path": "scripts/check_checkers.py",
-      "sha256": "70c500a23270d4985cf10c3efeee05dc3a9bc6c9e10cf9115033778e38dc0ff9",
-      "size_bytes": 20620
+      "sha256": "e47aa7bedcd61273456db4207dce05273e863e2d434ac129d71113f8a054bab9",
+      "size_bytes": 20896
     },
     {
       "path": "scripts/check_claim_anchors.py",
@@ -1216,8 +1216,8 @@
     },
     {
       "path": "scripts/check_staged_but_not_ingested.py",
-      "sha256": "ef8192dd8b2a37f8261ed39a08ed013756e043defeef934abdb08c17a987dd6c",
-      "size_bytes": 7910
+      "sha256": "1b0d2896163bb0c80c52c37346645c72625edd0a0052f35c4f151d0f0aa506ed",
+      "size_bytes": 8985
     },
     {
       "path": "scripts/check_suite_single_drag.py",
@@ -1881,5 +1881,5 @@
     },
     "secret_findings": 0
   },
-  "version": "v0.0.0.109"
+  "version": "v0.0.0.110"
 }

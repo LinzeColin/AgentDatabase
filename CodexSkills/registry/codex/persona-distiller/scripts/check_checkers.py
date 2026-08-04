@@ -362,9 +362,13 @@ def main() -> int:
                 if row["其中一手"]:
                     print(f"    ★ {row['人物']}：缺 {row['**没进工作区**']} 份，"
                           f"**一手 {row['其中一手']}** —— {'、'.join(row['清单'][:3])}…")
+            unclear = info.get("★ 其中「说不清」的", [])
             if info["★ 两侧不齐备、没比的"]:
-                print(f"  ★ 两侧不齐备、**没比的** {len(info['★ 两侧不齐备、没比的'])} 个"
-                      f"（不是通过）")
+                print(f"  ★ 两侧不齐备、没比的 {len(info['★ 两侧不齐备、没比的'])} 个"
+                      f"——**其中「说不清」的 {len(unclear)} 个**"
+                      f"（其余是扁平布局／没走过抓源台账，成因已分类，不是未核）")
+            for u in unclear:
+                print(f"    ⚠ {u}")
         except Exception as exc:
             print(f"  ⚠ 输出无法解析，**未核（不是通过）**：{exc}")
 
