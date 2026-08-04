@@ -57,6 +57,22 @@ Mendel 的 27 个作品分布在约 21 个 carrier 里（确切映射待抓源�
 Mendel 这次侥幸没踩到（他的 conversations 两件各自独占 carrier），
 **但那是运气，不是设计。**
 
+### ★ 全库回溯：**没有人踩到过**（已实测，不是推测）
+
+比对每个工作区的「抓源台账里出现过的道」与「工作区账本 `dimensions` 覆盖的道」：
+
+```
+barton／blackwell／fleming／nightingale   台账 6 道，账本 6 道   —
+jenner／koch／lister／pasteur             台账 2–3 道，账本 6 道  —
+semmelweis                               台账 2 道，账本 2 道    —
+**丢道的：0 人**
+```
+
+★ 那几个「台账道数」偏小的，是**老一代台账不以可解析的方式记道**
+（`FINDING_ledger-has-three-generations.md`），**不是丢道**。
+
+**所以这条是「补上一个还没伤到人的洞」，不是「发现了既有损失」。** 两件事要分清。
+
 ## 四、我错在哪
 
 **我在裁定计数单位时，没有先确认那个单位落得了地。**
