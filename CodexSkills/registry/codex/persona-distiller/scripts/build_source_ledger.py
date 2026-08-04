@@ -116,6 +116,43 @@ def near_duplicates(paths: dict, thr: float = 0.50) -> list:
     return sorted(out, reverse=True)
 
 
+def independent_count(paths: dict, thr: float = 0.70) -> dict:
+    """★ **「几份来源」与「几份独立来源」不是同一个数**（v0.0.0.103）。
+
+    门数的是**份数**（deep ≥45）。而 Blackwell #118 实测 95 份里：
+
+    ```
+    阈值 0.50 → 独立 **69**／95　　0.70 → **77**／95　　0.85 → **91**／95
+    最大的一组 11 份：《Essays》第二卷 + 该卷各篇的单行本 + 各篇的手稿 + 该卷的 IA 扫描
+    ```
+
+    **她在任何阈值下都还够 45，所以结论没变**——但**贴着门槛的人身上，这个差会决定过不过**。
+
+    把 containment ≥ thr 的连成连通分量，分量数就是独立来源数。
+    ★ **本件不替你选阈值**：三个都报，**因为哪个才算「同一份」是判断不是计算**。
+    """
+    nd = near_duplicates(paths, thr=thr)
+    par = {k: k for k in paths}
+
+    def find(x):
+        while par[x] != x:
+            par[x] = par[par[x]]
+            x = par[x]
+        return x
+
+    for _, a, b in nd:
+        ra, rb = find(a), find(b)
+        if ra != rb:
+            par[ra] = rb
+    groups = {}
+    for k in paths:
+        groups.setdefault(find(k), []).append(k)
+    multi = {k: v for k, v in groups.items() if len(v) > 1}
+    return {"阈值": thr, "落盘份数": len(paths), "**独立来源**": len(groups),
+            "被合并的份数": sum(len(v) for v in multi.values()) - len(multi),
+            "最大的一组": sorted(max(multi.values(), key=len)) if multi else []}
+
+
 def validate(rows: list) -> list:
     """→ 问题列表；空表示都合法。**任一条不过，调用方就不该写台账。**"""
     bad, seen = [], set()
@@ -199,6 +236,13 @@ def build(rows: list, src_dir: pathlib.Path, raw_dir: pathlib.Path, header: str)
             print(f"      {c:.3f}  {a} ↔ {b}")
         print("      ★ 单篇被收进合集、同一本书的两个扫描源，都是**真实关系**——"
               "由你判要不要并成一条，本件只保证它不静默。")
+        print("  ★★ **「几份来源」与「几份独立来源」不是同一个数**——三个阈值都报，"
+              "因为哪个才算「同一份」是判断不是计算：")
+        for _thr in (0.50, 0.70, 0.85):
+            _ic = independent_count(landed, thr=_thr)
+            print(f"      阈值 {_thr:.2f} → 独立来源 **{_ic['**独立来源**']}** / "
+                  f"{_ic['落盘份数']}（合并掉 {_ic['被合并的份数']} 份）")
+        print("      ★ 门数的是**份数**（deep ≥45）。**贴着门槛的人身上，这个差会决定过不过。**")
     body = lines[1:]
     tiers, lanes = {}, {}
     for l in body:
@@ -269,6 +313,22 @@ def selftest() -> int:
         chk("★★ 而它们的 sha256 **不同**——这正是 sha256 抓不到的那一类",
             _h.sha256((_r/"a.txt").read_bytes()).hexdigest()
             != _h.sha256((_r/"b.txt").read_bytes()).hexdigest())
+
+    print("── ★★ 反向对照 ⑪：独立来源数（v0.0.0.103）──")
+    with _tf.TemporaryDirectory() as _d:
+        _r = pathlib.Path(_d)
+        # ★ 夹具必须是**不重复**的文本：重复短语去重后剩不了几个 8-gram，
+        #   再按 1/6 采样就几乎为空——第一版就栽在这，三条断言全红。
+        _b2 = " ".join(f"w{i:04d}" for i in range(600))
+        (_r / "x.txt").write_text(_b2, encoding="utf-8")
+        (_r / "y.txt").write_text(_b2.replace("w0100", "wO100"), encoding="utf-8")  # OCR 式差异
+        (_r / "z.txt").write_text(" ".join(f"q{i:04d}" for i in range(600)), encoding="utf-8")
+        _ic = independent_count({"x": _r/"x.txt", "y": _r/"y.txt", "z": _r/"z.txt"})
+        chk(f"3 份 → **独立 {_ic['**独立来源**']}**（x/y 同源合成一组）", _ic["**独立来源**"] == 2)
+        chk(f"被合并 {_ic['被合并的份数']} 份", _ic["被合并的份数"] == 1)
+        chk(f"最大的一组 {_ic['最大的一组']}", set(_ic["最大的一组"]) == {"x", "y"})
+    _ic2 = independent_count({})
+    chk("空输入不崩，独立来源 0", _ic2["**独立来源**"] == 0)
 
     print("── ★★ 反向对照 ⑨：权利依据必须具名（v0.0.0.94）──")
     chk("不写 rights_ground → 报出",
