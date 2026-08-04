@@ -945,7 +945,11 @@ class RemoteReconcilePipeline(LiveSnapshotPublisherMixin):
                     live_events,
                     database_dir=Path(__file__).resolve().parents[2],
                     work_dir=self.config.work_dir,
-                    output=self.config.web_data_dir / "memory_atlas.json",
+                    # A directory that holds only this file. shared/data also
+                    # holds the private analytics at 0600, and the deploy resets
+                    # that directory to 0750 on every promotion, so widening it
+                    # was both leaky and undone every deploy.
+                    output=self.config.web_data_dir / "public" / "memory_atlas.json",
                 )
             except Exception as exc:
                 # A cross-device link error took the whole reconcile down and the

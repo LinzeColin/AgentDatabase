@@ -127,7 +127,7 @@ def test_reconcile_regenerates_the_snapshot_the_ten_views_read() -> None:
         / "scripts" / "memory_atlas_private" / "pipeline.py"
     ).read_text(encoding="utf-8")
     assert "regenerate_atlas_snapshot(" in source
-    assert 'output=self.config.web_data_dir / "memory_atlas.json"' in source
+    assert 'web_data_dir / "public" / "memory_atlas.json"' in source
     assert '"atlas_snapshot": atlas_rebuild' in source
 
 
@@ -136,7 +136,7 @@ def test_the_regenerated_snapshot_is_what_nginx_serves() -> None:
 
     repo = Path(__file__).resolve().parents[2]
     compose = (repo / "ops" / "memory-atlas" / "docker-compose.yml").read_text(encoding="utf-8")
-    assert "/srv/linze/apps/memory-atlas/shared/data:/usr/share/nginx/live:ro" in compose
+    assert "/srv/linze/apps/memory-atlas/shared/data/public:/usr/share/nginx/live:ro" in compose
     conf = (repo / "ops" / "memory-atlas" / "nginx" / "default.conf").read_text(encoding="utf-8")
     assert "root /usr/share/nginx/live;" in conf
     # A failed regeneration must fall back to the shipped snapshot, not 404.
@@ -327,3 +327,22 @@ def test_the_served_snapshot_is_readable_by_the_container(tmp_path) -> None:
         assert stat.S_IMODE(directory.stat().st_mode) & 0o001, f"{directory} is not traversable"
     # The staged tree must not survive: it is ~100 MB every fifteen minutes.
     assert not (tmp_path / "work" / "atlas-build").exists()
+
+
+def test_the_snapshot_is_published_into_a_directory_that_holds_nothing_else() -> None:
+    """shared/data also holds the private analytics at 0600, and the deploy
+    resets that directory to 0750 on every promotion — so widening it was both
+    leaky and undone by the next deploy. The container mounts a directory whose
+    only content is the atlas."""
+    from pathlib import Path
+
+    repo = Path(__file__).resolve().parents[2]
+    source = (repo / "OpenAIDatabase/scripts/memory_atlas_private/pipeline.py").read_text(encoding="utf-8")
+    assert 'web_data_dir / "public" / "memory_atlas.json"' in source
+    compose = (repo / "ops/memory-atlas/docker-compose.yml").read_text(encoding="utf-8")
+    assert "shared/data/public:/usr/share/nginx/live:ro" in compose
+    assert "shared/data:/usr/share/nginx/live:ro" not in compose
+    deploy = (repo / "ops/memory-atlas/deploy-blue-green.sh").read_text(encoding="utf-8")
+    assert 'install -d -m 0755 -o "$deploy_user" -g "$deploy_group" "$APP_ROOT/shared/data/public"' in deploy
+    # shared/data itself must stay private.
+    assert 'install -d -m 0750' in deploy

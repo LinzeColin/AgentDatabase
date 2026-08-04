@@ -124,6 +124,11 @@ else
   exit 64
 fi
 release_id="$(date -u +%Y%m%dT%H%M%SZ)-${release_commit:0:12}"
+# nginx runs unprivileged inside the container and reads the regenerated atlas
+# through a read-only mount. shared/data stays 0750 because it also holds the
+# private analytics; only this directory, which holds nothing else, is
+# traversable by the container.
+sudo install -d -m 0755 -o "$deploy_user" -g "$deploy_group" "$APP_ROOT/shared/data/public"
 
 # Each agent release is a ~770 MB copy of the tree and nothing pruned them, so
 # four promotions in one evening filled a 38 GB disk and the fifth died
