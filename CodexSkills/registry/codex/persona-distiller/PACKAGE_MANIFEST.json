@@ -631,8 +631,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_self_reported_counts.py",
-      "sha256": "c23a456e7ee7de2243727840258f90426510ed6e54cfe07d2d5834f0be4c13e6",
-      "size_bytes": 14876
+      "sha256": "df718357b640a12cbf27edb20aebf7a65ca8fd6fc4c1bc25b60f4db11ce0602f",
+      "size_bytes": 17138
     },
     {
       "path": "references/pipeline/checkers/check_semantic_residue.py",
@@ -1081,8 +1081,8 @@
     },
     {
       "path": "scripts/check_self_reported_counts.py",
-      "sha256": "c23a456e7ee7de2243727840258f90426510ed6e54cfe07d2d5834f0be4c13e6",
-      "size_bytes": 14876
+      "sha256": "df718357b640a12cbf27edb20aebf7a65ca8fd6fc4c1bc25b60f4db11ce0602f",
+      "size_bytes": 17138
     },
     {
       "path": "scripts/check_semantic_residue.py",

@@ -134,12 +134,26 @@ def segment_before(text: str, pos: int) -> str:
 IDIOM = re.compile(r"[一半]\s*字\s*(?:未|不|没)\s*(?:动|改|漏|差|提|落)"
                    r"|只字|片字|白纸黑字|一字千金")
 
+# ★★ 2026-08-04：**含「十字」的专名不是字数声明。**
+#   `DECL` 里 `十` 属数词类、其后紧跟 `字`，于是「红十字」被读成「十个字」。
+#   #117 Clara Barton（美国红十字会创建者）实测**假阳 2 处**：
+#     「才有 1881 年美国红十字成立」   → 判成「自称字数十字，实数 20」
+#     「到 1889 年红十字出过十二次场」 → 判成「自称字数十字，实数 9」
+#   **这个人物每提一次红十字就报一次**，而红十字会人物在队列里还有好几位
+#   （Dunant、Moynier、Appia…）。
+#   **假阳比漏报更坏，它会让人开始忽略这件判据**——文件里原本就写着这句话。
+COMPOUND = re.compile(r"红\s*十\s*字|十\s*字\s*(?:架|路|军|花|绣|叉|头|街|绷带)")
+
 
 def check_text(uid: str, text: str, acc):
     for m in DECL.finditer(text):
         # 命中处若落在成语里，跳过
         around = text[max(0, m.start() - 2): m.end() + 6]
         if IDIOM.search(around):
+            continue
+        # ★ 含「十字」的专名（红十字／十字架／十字路…）不是字数声明。
+        #   **前文要多看两个字**——「红」在 `十` 之前，而 m.start() 就落在 `十` 上。
+        if COMPOUND.search(text[max(0, m.start() - 3): m.end() + 2]):
             continue
         n = cn2int(m.group("num"))
         if n is None:
@@ -221,6 +235,24 @@ def self_test() -> int:
     print(f"  {'✓' if not f['bad'] else '✗'} 「一字未动」是成语 → 不报"
           f"（**假阳会让人开始忽略这件判据**）")
     fail += bool(f["bad"])
+
+    # ④' **含「十字」的专名不是字数声明。** Barton #117 的真实假阳，一字未改地做成夹具。
+    #    她是美国红十字会创建者——**每提一次红十字就报一次**，队列里还有 Dunant、Moynier、Appia。
+    for s, why in [
+        ("先有那几年的往来，才有 1881 年美国红十字成立——不是同时。", "红十字（专名）"),
+        ("到 1889 年红十字出过十二次场，没有两次是一样的。", "红十字（专名）"),
+        ("把日内瓦那套东西讲给美国人听，十字架是另一回事。", "十字架"),
+    ]:
+        f = {"seen": 0, "bad": []}
+        check_text("compound", s, f)
+        print(f"  {'✓' if not f['bad'] else '✗'} {why} → 不报：「{s[:22]}」")
+        fail += bool(f["bad"])
+
+    # ④'' 反向：**放宽之后，真的字数声明仍要抓住**。
+    f = {"seen": 0, "bad": []}
+    check_text("still", "这一句我数过（不含标点十六字）：属实二字，别无他求。", f)
+    print(f"  {'✓' if f['seen'] else '✗'} 放宽后真声明仍被数到（seen={f['seen']}）")
+    fail += (f["seen"] == 0)
 
     # ⑤ Lister #108 真实样本（一字未改）：两处声明都对，**必须都数到、且都不报**。
     #    第二版在这里静默漏报——`\n\n` 与 `（` 相邻时段落被切光。
