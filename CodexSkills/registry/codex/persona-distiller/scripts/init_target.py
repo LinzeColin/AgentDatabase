@@ -43,6 +43,31 @@ def load_namesake_gate(path: Path, target_name: str) -> dict[str, object]:
     return gate
 
 
+
+# ── 选档那一刻就把后果说出来（v0.0.0.86）────────────────────────────────
+# 档次是 `--profile` 的默认值（deep），而它的后果要到判分那一步才显形。
+# 2026-08-04 全量实测：deep 的 `min_fact 0.93`，15 个人 60 条打分**零人达标**，
+# 最好的一个 0.9200，差 0.010；而唯二入库的两人跑的是 standard（门 0.88）。
+# ★ 本函数**只报，不改行为**——不自动降档、不自动改阈值。选档仍是调用方的决定。
+PROFILE_NOTE = {
+    'deep': (
+        '★★ 这是 `--profile` 的**默认值**——不写就是它，不是按语料量选的。\n'
+        '    它承诺的 9 道门里，`min_fact_score 0.93` 迄今 **15 人 60 条打分零人达标**\n'
+        '    （最好的 0.9200，差 0.010）；而唯二入库的两人跑的是 standard（门 0.88）。\n'
+        '    ★ 这不是叫你降档——deep 的来源门 45、一手占比 0.65 也是它给的。\n'
+        '      只是：**选 deep 就是选了一道迄今没有人达到过的判分门**，请是有意选的。'),
+    'standard': (
+        '注：standard 的 `min_fact_score` 是 0.88——**唯二入库的两人正是这一档**。\n'
+        '    但它同时把来源门降到 24、一手占比降到 0.50、delta 降到 0.05。'),
+    'quick': '注：quick 是探测档（来源 8 / 道 3 / 一手 4），**不用于发布**。',
+}
+
+
+def profile_note(profile):
+    """→ 选这一档意味着什么。**只报，不改行为。**"""
+    return PROFILE_NOTE.get(profile, '')
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description='Create a target-person executable Agent Skill workspace.')
     parser.add_argument('--name', required=True, help='Target person name.')
@@ -189,7 +214,11 @@ def main() -> int:
             f'python3 scripts/package_target.py {target} --output dist/',
         ],
     }
+    result['profile_note'] = profile_note(args.profile)
     print(json.dumps(result, ensure_ascii=False, indent=2, sort_keys=True))
+    note = profile_note(args.profile)
+    if note:
+        print(f"\n── profile = {args.profile} ──\n{note}", file=sys.stderr)
     if status.startswith('blocked'):
         print('BLOCKED: record consent/authority before private research or packaging.', file=sys.stderr)
     return 0

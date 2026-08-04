@@ -381,8 +381,8 @@
     },
     {
       "path": "references/ledgers/_待用户裁定.md",
-      "sha256": "d71b9866410ae1decc053c36b94da5758d5fceddb7fce846e98e75e89e2cd1dc",
-      "size_bytes": 14620
+      "sha256": "f2ff2bf4c251504dabb6045456b5b40599f0db0c997c7345ebf8a9f329f29a9b",
+      "size_bytes": 16805
     },
     {
       "path": "references/ledgers/_每次开工必读.md",
@@ -1226,8 +1226,8 @@
     },
     {
       "path": "scripts/init_target.py",
-      "sha256": "3e197a6c0a145d0338ea05153f4175ec073913d0103d9ef3ab8f9f4cc69a9267",
-      "size_bytes": 9932
+      "sha256": "017f12ac37fbbee7ddcbcbdc1f60d53cf4498ae2d886aef38639bbd4a0e2b6de",
+      "size_bytes": 11747
     },
     {
       "path": "scripts/install.ps1",
