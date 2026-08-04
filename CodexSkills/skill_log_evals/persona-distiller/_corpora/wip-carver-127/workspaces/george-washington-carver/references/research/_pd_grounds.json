@@ -47,20 +47,20 @@
  {
   "source_id": "src-CAT31355455",
   "work": "Tuskegee Exp. Sta. Bulletin No.6: How to Build Up Worn Out Soils",
-  "tier": "S1",
-  "byline": "institution",
+  "tier": "P1",
+  "byline": "person",
   "kind": "pre1929",
   "year": 1905,
-  "evidence": "扉页署名（印本实读，2026-08-05 探测）；出版者 Tuskegee Normal and Industrial Institute；出版年 1905 < 1931（1905+95 的次年元旦已过），美国版权已过期。archive.org `CAT31355455` 无 `access-restricted-item`。 ★ **本份印本封面无个人署名，只有 Station Staff 名单，卡佛署名系编目所加**——归属弱于其余各份。 ★★ **已从 P1 改为 S1**：印本封面没有他的个人署名，「机构署名却标成个人一手」是 check_pd_grounds 明令报出的一类——**它可能是 PD，但不算他的一手散文。** ★★ **P3 不是本项目的分档**——真词表是 P1/P2/S1/S2/U（`build_source_ledger.TIERS`，台账实测 907 次出现、P3 零次）。RUNBOOK:294 明写「**署名为机构或同事的，记 S1 并注明真实作者**」。"
+  "evidence": "**题名页署名（逐字照录）**：`HOW TO BUILD UP WORN OUT SOILS G. W. Carver, M. S. Agr. Director`。出版者 Tuskegee Normal and Industrial Institute；出版年 <1931，美国版权已过期。★★ **我先前把它降成了 S1，那是错的**：探测台账把 No.6／7／10／20 四份一起写成「封面仅 Station Staff」，**我照抄了没开文件**。实测该件 `Carver` 出现两处——**第一处才是 Station Staff 名单，第二处是题名页署名**。"
  },
  {
   "source_id": "src-CAT31355457",
   "work": "Tuskegee Exp. Sta. Bulletin No.7: Cotton Growing on Sandy Upland Soils",
-  "tier": "S1",
-  "byline": "institution",
+  "tier": "P1",
+  "byline": "person",
   "kind": "pre1929",
   "year": 1905,
-  "evidence": "扉页署名（印本实读，2026-08-05 探测）；出版者 Tuskegee Normal and Industrial Institute；出版年 1905 < 1931（1905+95 的次年元旦已过），美国版权已过期。archive.org `CAT31355457` 无 `access-restricted-item`。 ★ **本份印本封面无个人署名，只有 Station Staff 名单，卡佛署名系编目所加**——归属弱于其余各份。 ★★ **已从 P1 改为 S1**：印本封面没有他的个人署名，「机构署名却标成个人一手」是 check_pd_grounds 明令报出的一类——**它可能是 PD，但不算他的一手散文。** ★★ **P3 不是本项目的分档**——真词表是 P1/P2/S1/S2/U（`build_source_ledger.TIERS`，台账实测 907 次出现、P3 零次）。RUNBOOK:294 明写「**署名为机构或同事的，记 S1 并注明真实作者**」。"
+  "evidence": "**题名页署名（逐字照录）**：`COTTON GROWING ON SANDY UPLAND SOILS G. W. Carver, M. S., Agr. Director`。出版者 Tuskegee Normal and Industrial Institute；出版年 <1931，美国版权已过期。★★ **我先前把它降成了 S1，那是错的**：探测台账把 No.6／7／10／20 四份一起写成「封面仅 Station Staff」，**我照抄了没开文件**。实测该件 `Carver` 出现两处——**第一处才是 Station Staff 名单，第二处是题名页署名**。"
  },
  {
   "source_id": "src-CAT31355459",
@@ -74,11 +74,11 @@
  {
   "source_id": "src-CAT31355467",
   "work": "Tuskegee Exp. Sta. Bulletin No.10: Saving the Sweet Potato Crop",
-  "tier": "S1",
-  "byline": "institution",
+  "tier": "P1",
+  "byline": "person",
   "kind": "pre1929",
   "year": 1906,
-  "evidence": "扉页署名（印本实读，2026-08-05 探测）；出版者 Tuskegee Normal and Industrial Institute；出版年 1906 < 1931（1906+95 的次年元旦已过），美国版权已过期。archive.org `CAT31355467` 无 `access-restricted-item`。 ★ **本份印本封面无个人署名，只有 Station Staff 名单，卡佛署名系编目所加**——归属弱于其余各份。 ★★ **已从 P1 改为 S1**：印本封面没有他的个人署名，「机构署名却标成个人一手」是 check_pd_grounds 明令报出的一类——**它可能是 PD，但不算他的一手散文。** ★★ **P3 不是本项目的分档**——真词表是 P1/P2/S1/S2/U（`build_source_ledger.TIERS`，台账实测 907 次出现、P3 零次）。RUNBOOK:294 明写「**署名为机构或同事的，记 S1 并注明真实作者**」。"
+  "evidence": "**题名页署名（逐字照录）**：`SAVING THE SWEET POTATO CROP G. W. Carver, M. S. Agr., Director`。出版者 Tuskegee Normal and Industrial Institute；出版年 <1931，美国版权已过期。★★ **我先前把它降成了 S1，那是错的**：探测台账把 No.6／7／10／20 四份一起写成「封面仅 Station Staff」，**我照抄了没开文件**。实测该件 `Carver` 出现两处——**第一处才是 Station Staff 名单，第二处是题名页署名**。"
  },
  {
   "source_id": "src-CAT31355474",
@@ -159,7 +159,7 @@
   "byline": "institution",
   "kind": "pre1929",
   "year": 1911,
-  "evidence": "扉页署名（印本实读，2026-08-05 探测）；出版者 Tuskegee Normal and Industrial Institute；出版年 1911 < 1931（1911+95 的次年元旦已过），美国版权已过期。archive.org `CAT31355487` 无 `access-restricted-item`。 ★ **本份印本封面无个人署名，只有 Station Staff 名单，卡佛署名系编目所加**——归属弱于其余各份。 ★★ **已从 P1 改为 S1**：印本封面没有他的个人署名，「机构署名却标成个人一手」是 check_pd_grounds 明令报出的一类——**它可能是 PD，但不算他的一手散文。** ★★ **P3 不是本项目的分档**——真词表是 P1/P2/S1/S2/U（`build_source_ledger.TIERS`，台账实测 907 次出现、P3 零次）。RUNBOOK:294 明写「**署名为机构或同事的，记 S1 并注明真实作者**」。"
+  "evidence": "扉页署名（印本实读，2026-08-05 探测）；出版者 Tuskegee Normal and Industrial Institute；出版年 1911 < 1931（1911+95 的次年元旦已过），美国版权已过期。archive.org `CAT31355487` 无 `access-restricted-item`。 ★ **本份印本封面无个人署名，只有 Station Staff 名单，卡佛署名系编目所加**——归属弱于其余各份。 ★★ **已从 P1 改为 S1**：印本封面没有他的个人署名，「机构署名却标成个人一手」是 check_pd_grounds 明令报出的一类——**它可能是 PD，但不算他的一手散文。** ★★ **P3 不是本项目的分档**——真词表是 P1/P2/S1/S2/U（`build_source_ledger.TIERS`，台账实测 907 次出现、P3 零次）。RUNBOOK:294 明写「**署名为机构或同事的，记 S1 并注明真实作者**」。 ★ **本件是四份里唯一真的没有个人署名的**：全文 `Carver` 三处——Station Staff 名单一处，另两处是棉花品种名 `Carver's Improved`。**S1 成立。**"
  },
  {
   "source_id": "src-CAT31355488",
