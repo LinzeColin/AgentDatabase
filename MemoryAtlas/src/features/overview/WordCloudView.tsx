@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import type { AtlasNode } from "../../types";
 import { DeltaStats } from "../../shared/atlas/contracts";
+import { humanizeMachineText } from "../../shared/atlas/machineTokenHuman";
 import { buildSemanticInsights, selectRepresentativeNode, semanticColor, semanticHeatStyle, wordCloudStyle } from "../../shared/atlas/semanticHuman";
 import { isActivationKey, stableUnit, truncate } from "../../shared/atlas/utils";
 import { DeltaStrip } from "../../shared/ui/primitives";
@@ -102,7 +103,7 @@ export function WordCloudView({
                 >
                   <title>{`${topic.label} · ${topic.count} 条 · ROI ${topic.roiScore.toFixed(2)} · 近期 ${topic.recentCount}`}</title>
                   <circle cx={x} cy={y} r={radius} fill={color} />
-                  <text x={x} y={y + 3} textAnchor="middle">{truncate(topic.label, radius > 28 ? 8 : 5)}</text>
+                  <text data-user-content="true" x={x} y={y + 3} textAnchor="middle">{truncate(topic.label, radius > 28 ? 8 : 5)}</text>
                 </g>
               );
             })}
@@ -118,13 +119,14 @@ export function WordCloudView({
             {semantic.wordCloud.map((item) => (
               <button
                 className="word-cloud-token"
+                data-user-content="true"
                 key={item.label}
                 onClick={() => jumpToBestNode(item.nodes)}
                 style={wordCloudStyle(item, maxWordScore)}
                 title={`${item.label} · ${item.count} 条`}
                 type="button"
               >
-                {item.label}
+                {humanizeMachineText(item.label)}
               </button>
             ))}
           </div>

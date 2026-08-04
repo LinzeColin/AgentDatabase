@@ -1403,14 +1403,14 @@ export function GalaxyScene({ nodes, edges, rendererMode, selectedNode, starfiel
           ) : null}
           {rendererMode === "memory-starfield" ? (
             <button
-              aria-label={adaptiveQualityEnabled ? "Disable Adaptive Quality" : "Enable Adaptive Quality"}
+              aria-label={adaptiveQualityEnabled ? "关闭自适应画质" : "开启自适应画质"}
               aria-pressed={adaptiveQualityEnabled}
               className="galaxy-adaptive-quality-toggle"
-              title={adaptiveQualityEnabled ? "Disable Adaptive Quality" : "Enable Adaptive Quality"}
+              title={adaptiveQualityEnabled ? "关闭自适应画质" : "开启自适应画质"}
               type="button"
               onClick={() => setAdaptiveQualityEnabled((enabled) => !enabled)}
             >
-              Auto
+              自动画质
             </button>
           ) : null}
           {rendererMode === "memory-starfield" ? (
@@ -1429,9 +1429,9 @@ export function GalaxyScene({ nodes, edges, rendererMode, selectedNode, starfiel
           ) : null}
           {rendererMode === "memory-starfield" ? (
             <button
-              aria-label={flowPaused ? "Resume Flow Field" : "Freeze Flow Field"}
+              aria-label={flowPaused ? "继续流场动画" : "冻结流场动画"}
               aria-pressed={flowPaused}
-              title={flowPaused ? "Resume Flow Field" : "Freeze Flow Field"}
+              title={flowPaused ? "继续流场动画" : "冻结流场动画"}
               type="button"
               onClick={() => setFlowPaused((paused) => !paused)}
             >
@@ -1449,7 +1449,7 @@ export function GalaxyScene({ nodes, edges, rendererMode, selectedNode, starfiel
                   type="button"
                   onClick={() => updateStarfieldMode(mode)}
                 >
-                  {mode === "presentation" ? "Present" : "Analysis"}
+                  {mode === "presentation" ? "演示" : "分析"}
                 </button>
               ))}
             </div>
@@ -1535,7 +1535,7 @@ export function GalaxyScene({ nodes, edges, rendererMode, selectedNode, starfiel
               </div>
             ))}
           </div>
-          <div className="terrain-inspector-strip" aria-label="Analysis inspector summary">
+          <div className="terrain-inspector-strip" aria-label="分析检视摘要">
             <b>Inspector</b>
             <span>
               {selectedNode
@@ -1599,7 +1599,7 @@ export function GalaxyScene({ nodes, edges, rendererMode, selectedNode, starfiel
                 title={`${galaxyPreviewTitle(node)} · 关联权重 ${neighbor.weight.toFixed(2)}`}
                 type="button"
               >
-                <b>{galaxyPreviewTitle(node)}</b>
+                <b data-user-content="true">{galaxyPreviewTitle(node)}</b>
                 <span>{normalizeMemoryTier(node.memory_tier)} / {node.category || translateKind(node.kind)}</span>
                 <em>#{neighbor.rank + 1} · {neighbor.weight.toFixed(2)}</em>
               </button>

@@ -233,7 +233,7 @@ export function DataMapRelationPanel({ relation }: { relation: DataGuideEdge | n
         <p className="data-map-relation-reason">默认折叠。点击任意关系线查看为什么连接、来源、强度、证据和时间。</p>
       )}
       <p className="data-map-relation-safe-flags">
-        No Phase 6.2 editing · proposalWrite: false · directActiveMemoryWriteback: false · rawPrivateDataIncluded: false
+        不进入 Stage 6 编辑 · 不写提案 · 不直接改动活跃记忆 · 不包含原始私密内容
       </p>
     </section>
   );
@@ -267,7 +267,7 @@ export function DataMapNodeDetailPanel({
     >
       <div className="panel-title-row">
         <h2>数据导图详情面板</h2>
-        <span>{DATA_MAP_DETAIL_PANEL_VERSION}</span>
+        <span data-machine-fields="true">{DATA_MAP_DETAIL_PANEL_VERSION}</span>
       </div>
       {node ? (
         <>
@@ -292,10 +292,10 @@ export function DataMapNodeDetailPanel({
               ))}
             </ul>
           </section>
-          <div className="data-map-detail-safety-strip" aria-label="Data Map Phase 6.2 safety">
+          <div className="data-map-detail-safety-strip" aria-label="数据导图 Stage 6 安全约束">
             <span>仅生成提案</span>
             <span>不直接写长期记忆</span>
-            <span>不执行 Stage 6 review</span>
+            <span>不执行 Stage 6 复核</span>
           </div>
           <div
             className="data-map-proposal-entry"
@@ -308,7 +308,7 @@ export function DataMapNodeDetailPanel({
           >
             <div className="panel-title-row">
               <h3>数据导图 proposal 入口</h3>
-              <span>{DATA_MAP_PROPOSAL_ENTRY_VERSION}</span>
+              <span data-machine-fields="true">{DATA_MAP_PROPOSAL_ENTRY_VERSION}</span>
             </div>
             <ProposalEditor
               node={node}

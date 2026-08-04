@@ -39,8 +39,9 @@ export function RuntimeView() {
         <article className="ma31-panel"><header><div><p className="ma31-kicker">来源覆盖</p><h2>缺口必须可见</h2></div></header>
           <CoverageList rows={snapshot?.run.source_coverages ?? []} /></article>
         <article className="ma31-panel"><header><div><p className="ma31-kicker">权威边界</p><h2>不会出现第二事实源</h2></div></header>
-          <dl className="ma31-authorities"><div><dt>对象字节</dt><dd>Cloudflare R2 `primary-objects/`</dd></div>
-            <div><dt>长期结构化事实</dt><dd>Private-Database / Private-AgentDatabase</dd></div>
+          <dl className="ma31-authorities"><div><dt>全量事件字节</dt><dd>GitHub 私有仓 Release（2026-08-04 起，R2 因容量上限与收费风险已清空）</dd></div>
+            <div><dt>长期结构化事实</dt><dd>GitHub 私有仓 Private-Database</dd></div>
+            <div><dt>Cloudflare 与 OVH</dt><dd>只做入口、访问控制与计算，不承担数据存量</dd></div>
             <div><dt>运行队列与游标</dt><dd>OVH SQLite，可重建</dd></div>
             <div><dt>状态展示</dt><dd>status.linzezhang.com，只读投影</dd></div></dl>
         </article>

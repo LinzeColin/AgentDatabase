@@ -266,8 +266,8 @@ export function buildMemoryWeatherV2(
     confidenceScore,
     summary: `${dominant} 是主导气候；风险 ${formatScore(riskScore)}，机会 ${formatScore(opportunityScore)}，稳定性 ${formatScore(stabilityScore)}。`,
     signals: [
-      `delta ${formatSigned(deltaStats.deltaCount)} / latest ${deltaStats.latestDate || "unknown"}`,
-      `${protoStarNodes.length.toLocaleString()} proto-star vs ${staleNodes.length.toLocaleString()} black-hole`,
+      `增量 ${formatSigned(deltaStats.deltaCount)} / 最新 ${deltaStats.latestDate || "未知"}`,
+      `${protoStarNodes.length.toLocaleString()} 个上升机会 vs ${staleNodes.length.toLocaleString()} 个风险循环`,
       `cooling: ${cooling}`,
     ],
   };

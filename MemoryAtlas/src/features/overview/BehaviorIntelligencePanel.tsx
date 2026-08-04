@@ -1,3 +1,4 @@
+import { humanizeMachineText } from "../../shared/atlas/machineTokenHuman";
 import type { MemoryAtlas } from "../../types";
 
 export function BehaviorIntelligencePanel({ summary }: { summary: MemoryAtlas["behavior_intelligence"] }) {
@@ -31,7 +32,7 @@ export function BehaviorIntelligencePanel({ summary }: { summary: MemoryAtlas["b
           <span>主题簇</span>
           {clusters.map((cluster) => (
             <div className="home-behavior-item" key={cluster.cluster_id}>
-              <strong>{cluster.label_zh || cluster.cluster_id}</strong>
+              <strong>{humanizeMachineText(cluster.label_zh || cluster.cluster_id)}</strong>
               <p>{cluster.summary_zh}</p>
               <small>{cluster.evidence_refs.length} 条证据引用 · {cluster.event_count.toLocaleString()} 条事件</small>
             </div>
@@ -41,7 +42,7 @@ export function BehaviorIntelligencePanel({ summary }: { summary: MemoryAtlas["b
           <span>低价值循环</span>
           {loops.map((loop) => (
             <div className="home-behavior-item" key={loop.loop_id}>
-              <strong>{loop.label_zh || loop.loop_type}</strong>
+              <strong>{loop.label_zh || humanizeMachineText(loop.loop_type)}</strong>
               <p>{loop.summary_zh}</p>
               <small>{loop.decision_debt?.suggested_closure_question || `${loop.action_half_life_days ?? 0} 天行动半衰期`}</small>
             </div>
@@ -51,7 +52,7 @@ export function BehaviorIntelligencePanel({ summary }: { summary: MemoryAtlas["b
           <span>机会线索</span>
           {opportunities.map((opportunity) => (
             <div className="home-behavior-item" key={opportunity.opportunity_id}>
-              <strong>{opportunity.label_zh || opportunity.opportunity_type}</strong>
+              <strong>{opportunity.label_zh || humanizeMachineText(opportunity.opportunity_type)}</strong>
               <p>{opportunity.summary_zh}</p>
               <small>{opportunity.next_step_zh || opportunity.why_not_now_card?.reason_zh}</small>
             </div>

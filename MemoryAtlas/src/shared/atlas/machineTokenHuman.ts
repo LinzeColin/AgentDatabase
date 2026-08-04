@@ -89,6 +89,13 @@ export const machineTokenLabels: Record<string, string> = {
   TTT: "闭环时长",
   DIRECTION_ONLY: "仅方向可比",
   INSUFFICIENT_DATA: "证据不足",
+  DIRECTLY_COMPARABLE: "可直接比较",
+  NOT_COMPARABLE: "不可比较",
+  // Trend arrows and asset actions rendered raw on the home cards.
+  up: "上升",
+  flat: "持平",
+  archive: "归档",
+  promote: "提升",
   // Added after a second browser scan: the reality panel rendered metric
   // denominators and activity keys straight from the snapshot.
   event_count: "事件数",

@@ -30,6 +30,10 @@ const ALLOWED = new Set([
   "Meta", "Data", "R2", "OVH", "PDB", "Tier A", "Tier B", "PASS", "FAIL",
   "FRESH", "STALE", "DEGRADED", "UNKNOWN", "UNVERIFIED", "OBSERVED", "VERIFIED",
   "GRID", "TREND", "HEATMAP", "Time-to-Truth", "true", "false",
+  // Third-party product names, repository names, and real file/bucket paths.
+  "GPT", "Claude Code", "Claude", "Private-Database", "Private-AgentDatabase",
+  "config.toml", "AGENTS.md", "primary-objects/", "`primary-objects/`",
+  "Playwright", "Vite", "React",
 ]);
 
 // Sections that exist to show machine fields; they are collapsed by default and
@@ -38,6 +42,14 @@ const MACHINE_CONTEXTS = [
   ".machine-field-details", "[data-machine-fields]", ".ma-limitations",
   ".ma-evidence-grid", ".ma-truth-ribbon", "code", "pre",
 ];
+
+// The contract requires the *interface* to be Chinese. It does not require the
+// user's own content to be rewritten: a memory titled "arXiv Daily Push", a
+// project called "KMFA", a word cloud built from their vocabulary. Translating
+// those would falsify the data the page exists to show. Elements that render
+// user-authored strings verbatim mark themselves, so this stays a property of
+// the markup rather than a growing allowlist of the Owner's project names.
+const USER_CONTENT_CONTEXTS = ["[data-user-content]"];
 
 const browser = await chromium.launch({ headless: true });
 const findings = [];
@@ -74,7 +86,7 @@ try {
         nodes.forEach(walk);
         return [...new Set(out)];
       },
-      MACHINE_CONTEXTS,
+      [...MACHINE_CONTEXTS, ...USER_CONTENT_CONTEXTS],
     );
     for (const text of rows) {
       if (ALLOWED.has(text)) continue;
@@ -104,6 +116,7 @@ const report = {
   by_view: Object.fromEntries(
     VIEWS.map((view) => [view, findings.filter((row) => row.view === view).length]).filter(([, n]) => n),
   ),
+  skipped_contexts: { machine_fields: MACHINE_CONTEXTS, user_content: USER_CONTENT_CONTEXTS },
   findings,
 };
 await fs.writeFile(output, JSON.stringify(report, null, 2) + "\n", { encoding: "utf8", mode: 0o600 });

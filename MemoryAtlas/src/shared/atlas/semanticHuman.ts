@@ -1,3 +1,4 @@
+import { humanizeMachineText } from "./machineTokenHuman";
 import type { CSSProperties } from "react";
 import { normalizeMemoryTier } from "../../data/atlas";
 import type { AtlasNode } from "../../types";
@@ -213,7 +214,7 @@ export function buildHumanNodeSummary(node: AtlasNode, edgeCount: number) {
       { label: "首次记录", value: node.date || "未知" },
       { label: "当前状态", value: status },
       { label: "关联数量", value: edgeCount.toLocaleString() },
-      { label: "可信度", value: node.confidence || "未知" },
+      { label: "可信度", value: humanizeMachineText(node.confidence || "未知") },
     ],
     agentMemory: buildAgentMemoryLine(node, title, continuityMemory),
     agentMeta: buildAgentMetaLine(node, theme, status),
@@ -575,7 +576,7 @@ export function humanThemeLabel(node: AtlasNode): string {
 export function themeLabelFromCluster(cluster: string): string {
   const labels: Record<string, string> = {
     "memory-rag-continuity": "长期记忆库 / RAG / Agent 连续性",
-    "codex-agent-workflow": "Codex / Agent 工作流 / Token ROI",
+    "codex-agent-workflow": "Codex / Agent 工作流 / Token 价值比",
     "learning-notion-nitrosend": "学习系统 / Notion / 仪表盘",
     "rotary-kiln-industrial": "回转窑 / 工业服务 / 动态测量调整",
     "finance-trading-probability": "金融 / 交易 / FIFA / 概率决策",

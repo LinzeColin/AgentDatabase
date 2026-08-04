@@ -288,7 +288,8 @@ def audit_visual_acceptance(repo_root: Path) -> dict[str, Any]:
         and "data-timeline-renderer={timelineRendererMode}" in timeline_view
         and 'className="memory-river-canvas timeline-canvas"' in timeline_view
         and 'data-utc-time-scale="true"' in timeline_view
-        and "Macro / Meso / Micro" in timeline_view
+        and ("Macro / Meso / Micro" in timeline_view or "层级 / 主题 / 条目" in timeline_view)
+        and "riverLevelLabel" in timeline_view
         and "function parseTimelineUtcDay" in app_source
         and "function timelineUtcMs" in app_source
         and "function buildMemoryRiverLayout" in app_source
@@ -757,7 +758,7 @@ def audit_visual_acceptance(repo_root: Path) -> dict[str, Any]:
                 and 'data-s10-p3-advanced-details-entry="inspector"' in app_source
             )
         )
-        and "Memory / Personalization" in app_source
+        and ("Memory / Personalization" in app_source or "记忆与个性化" in app_source)
         and "Agents.md / 执行规则" in app_source
         and "降权/不再默认使用" in app_source
         and ".human-overview" in css_source
@@ -773,10 +774,10 @@ def audit_visual_acceptance(repo_root: Path) -> dict[str, Any]:
              and ('summary: "总结与迭代"' in i18n_source or 'summary: "决定下一步"' in i18n_source)))
         and "function SummaryIterationView" in app_source
         and "function ConfigMemoryPanel" in app_source
-        and "Personalization / Agents.md 建议" in app_source
-        and "Memory / Personalization" in app_source
+        and ("Personalization / Agents.md 建议" in app_source or "个性化与 Agents.md 建议" in app_source)
+        and ("Memory / Personalization" in app_source or "记忆与个性化" in app_source)
         and "Agents.md / 执行规则" in app_source
-        and "config.toml / Memory" in app_source
+        and ("config.toml / Memory" in app_source or "config.toml 与记忆建议" in app_source)
         and "更新时间" in app_source
         and "buildIterationHighlights" in app_source
         and "summary-iteration-view" in app_source
@@ -1067,17 +1068,17 @@ def audit_visual_acceptance(repo_root: Path) -> dict[str, Any]:
         and "const [flowPaused, setFlowPaused]" in galaxy_source
         and "flowPausedRef" in galaxy_source
         and "dataset.flowFrozen" in galaxy_source
-        and "Freeze Flow Field" in galaxy_source
-        and "Resume Flow Field" in galaxy_source
+        and ("Freeze Flow Field" in galaxy_source or "冻结流场动画" in galaxy_source)
+        and ("Resume Flow Field" in galaxy_source or "继续流场动画" in galaxy_source)
         and "if (flowPausedRef.current) return;" in galaxy_source
         and "const frozen = rendererMode === \"memory-starfield\" && flowPausedRef.current" in galaxy_source
         and "type StarfieldViewMode = \"presentation\" | \"analysis\"" in galaxy_source
         and "Starfield mode selector" in galaxy_source
-        and "Presentation Mode" in galaxy_source
-        and "Analysis Mode" in galaxy_source
+        and ("Presentation Mode" in galaxy_source or "演示" in galaxy_source)
+        and ("Analysis Mode" in galaxy_source or "分析" in galaxy_source)
         and "starfieldMode === \"analysis\"" in galaxy_source
         and "Starfield formula summary" in galaxy_source
-        and "Analysis inspector summary" in galaxy_source
+        and ("Analysis inspector summary" in galaxy_source or "分析检视摘要" in galaxy_source)
         and "flowPaused:" in galaxy_source
         and "starfieldMode:" in galaxy_source
         and ".galaxy-mode-tabs" in css_source

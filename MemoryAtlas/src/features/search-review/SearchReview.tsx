@@ -226,12 +226,12 @@ export function SearchReview({
             >
               <header>
                 <div>
-                  <strong>{result.title}</strong>
-                  <span>{result.source} / {result.tier} / {result.topic}</span>
+                  <strong data-user-content="true">{result.title}</strong>
+                  <span>{humanizeMachineText(result.source)} / {humanizeMachineText(result.tier)} / <span data-user-content="true">{result.topic}</span></span>
                 </div>
-                <b>{result.importance}</b>
+                <b>{humanizeMachineText(result.importance)}</b>
               </header>
-              <p>{result.summary}</p>
+              <p data-user-content="true">{result.summary}</p>
               <MachineFieldDetails title="高级详情：结果字段" className="search-2-result-schema inline-machine-field-details">
                 <dl>
                   <div><dt>matched_reason / 匹配原因</dt><dd>{result.matched_reason}</dd></div>

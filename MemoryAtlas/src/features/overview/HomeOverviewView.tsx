@@ -9,6 +9,7 @@ import { ThemeDetailPanel } from "../../components/ThemeDetailPanel";
 import { VisualWorkflowWorkbench } from "../../components/VisualWorkflowWorkbench";
 import { RealityCalibrationSection } from "../v31";
 import { BehaviorIntelligencePanel } from "./BehaviorIntelligencePanel";
+import { humanizeMachineText } from "../../shared/atlas/machineTokenHuman";
 import { buildHomeActionStatusChips, buildLevelAssetGroupChips, buildThemeCategoryChips, humanActionStatusLabel, humanEffortLabel, humanPriorityLabel, humanUrgencyLabel } from "./homePresentation";
 import { HOME_ACTION_SECTION_VERSION, HOME_ARRIVAL_BRIEFING_VERSION, HOME_LEVEL_ASSET_SECTION_VERSION, HOME_THEME_CATEGORY_SECTION_VERSION, MEMORY_OVERVIEW_OPERATION_VERSION, MEMORY_OVERVIEW_SECTION_ORDER, MEMORY_OVERVIEW_STRUCTURE_VERSION, uiCopy } from "../../shared/atlas/constants";
 import { DeltaStats, HomeAction, HomeActionDetail, HomeTierAsset, HomeTopicDetail, TierAssetDetail, TimelineTimeRangeSelection, TopicClassificationDetail } from "../../shared/atlas/contracts";
@@ -192,7 +193,7 @@ export function HomeOverviewView({
       <section className="home-shared-focus-strip" aria-label="共享焦点" data-home-section="status_summary">
         <span>当前判断焦点</span>
         <strong>{selectedNode ? humanNodeDisplayTitle(selectedNode) : uiCopy.overview.defaultFocus}</strong>
-        <small>{sharedState.focus.home.clusterId ?? uiCopy.overview.noTopic} · 证据已同步</small>
+        <small><span data-user-content="true">{sharedState.focus.home.clusterId ?? uiCopy.overview.noTopic}</span> · 证据已同步</small>
       </section>
       <section className="home-primary-band" aria-label="当前认知状态">
         <article
@@ -372,7 +373,7 @@ export function HomeOverviewView({
           <h3>层级资产明细</h3>
           <span>仅生成提案</span>
         </div>
-        <div className="home-operation-chip-grid" aria-label="Level Assets Section groups">
+        <div className="home-operation-chip-grid" aria-label="层级资产分组">
           {levelAssetGroupChips.map((group) => (
             <span
               className="home-operation-chip"
@@ -398,21 +399,21 @@ export function HomeOverviewView({
                 onClick={() => openTierAsset(asset)}
                 type="button"
               >
-                <span>{asset.asset_tier}</span>
-                <strong>{asset.title}</strong>
+                <span>{humanizeMachineText(asset.asset_tier)}</span>
+                <strong data-user-content="true">{asset.title}</strong>
                 <div className="tier-asset-meta-grid" aria-label="层级资产排序信号">
-                  <i>{asset.theme}</i>
+                  <i data-user-content="true">{asset.theme}</i>
                   <i>价值 {formatScore(asset.value_score)}</i>
-                  <i>{asset.importance}</i>
-                  <i>{asset.staleness_status}</i>
+                  <i>{humanizeMachineText(asset.importance)}</i>
+                  <i>{humanizeMachineText(asset.staleness_status)}</i>
                 </div>
-                <small>{asset.summary}</small>
-                <em>{asset.evidence_count} 证据 · {asset.recommended_asset_action}</em>
+                <small data-user-content="true">{asset.summary}</small>
+                <em>{asset.evidence_count} 证据 · {humanizeMachineText(asset.recommended_asset_action)}</em>
               </button>
             ))}
           </div>
         ) : (
-          <div className="home-tier-asset-empty">当前筛选下没有足够的层级资产明细；请放宽筛选或等待新的 redacted snapshot。</div>
+          <div className="home-tier-asset-empty">当前筛选下没有足够的层级资产明细；请放宽筛选或等待新的脱敏快照。</div>
         )}
         <div data-asset-detail-host="AssetDetailPanel" data-asset-detail-panel-host="true">
           <AssetDetailPanel asset={selectedTierAsset} onClose={closeTierAsset} onOpenTarget={openTierAssetTarget} />
@@ -430,7 +431,7 @@ export function HomeOverviewView({
           <h3>主题分类明细</h3>
           <span>仅生成提案</span>
         </div>
-        <div className="home-operation-chip-grid" aria-label="Theme Categories Section states">
+        <div className="home-operation-chip-grid" aria-label="主题分类状态">
           {themeCategoryChips.map((state) => (
             <span
               className="home-operation-chip"
@@ -456,12 +457,12 @@ export function HomeOverviewView({
                 onClick={() => openTopicDetail(topic)}
                 type="button"
               >
-                <span>{topic.topic_state}</span>
-                <strong>{topic.topic_label}</strong>
+                <span>{humanizeMachineText(topic.topic_state)}</span>
+                <strong data-user-content="true">{topic.topic_label}</strong>
                 <div className="topic-detail-meta-grid" aria-label="主题分类排序信号">
-                  <i>{topic.category}</i>
+                  <i>{humanizeMachineText(topic.category)}</i>
                   <i>强度 {formatScore(topic.topic_strength)}</i>
-                  <i>{topic.trend}</i>
+                  <i>{humanizeMachineText(topic.trend)}</i>
                   <i>{topic.record_count} 条记录</i>
                 </div>
                 <small>{topic.matched_reason}</small>

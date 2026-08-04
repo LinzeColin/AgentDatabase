@@ -109,6 +109,23 @@ for name in sorted(policy['execution_tiers']['integration']['test_files']):
     run_check frontend_build npm --prefix "$repo/MemoryAtlas" run --silent build
     run_check v31_static npm --prefix "$repo/MemoryAtlas" run --silent validate:v31
     run_check v31_incremental npm --prefix "$repo/MemoryAtlas" run --silent validate:v31:incremental
+    # The Chinese-UI contract regressed silently three times because nothing ran
+    # the browser audit outside a manual check. It needs a served build, so the
+    # gate serves the one it just produced and takes the port down afterwards.
+    if [[ -d "$repo/MemoryAtlas/dist" ]]; then
+      chinese_port=${MEMORY_ATLAS_GATE_PREVIEW_PORT:-4183}
+      npx --prefix "$repo/MemoryAtlas" --yes vite preview --host 127.0.0.1 \
+        --port "$chinese_port" --outDir "$repo/MemoryAtlas/dist" >/dev/null 2>&1 &
+      chinese_pid=$!
+      for _ in $(seq 1 30); do
+        curl -sf -o /dev/null "http://127.0.0.1:$chinese_port/" && break
+        sleep 1
+      done
+      run_check chinese_ui node "$repo/MemoryAtlas/scripts/audit_chinese_ui_v32.mjs" \
+        "http://127.0.0.1:$chinese_port/" "$(mktemp -t memory-atlas-chinese).json"
+      kill "$chinese_pid" 2>/dev/null || true
+      wait "$chinese_pid" 2>/dev/null || true
+    fi
     # validate:whole-project belongs here in principle — a privacy-scan failure
     # inside it reached main while this gate reported green. It is not run
     # locally because four of its tests (acceptance_audit, goal_completion)

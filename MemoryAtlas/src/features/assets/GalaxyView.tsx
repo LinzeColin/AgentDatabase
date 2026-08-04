@@ -73,20 +73,20 @@ export function GalaxyView({
         <div className="galaxy-heading-actions">
           <span>{memoryCount} 条记忆 / {graphNodes.length} 个节点 / {graphEdges.length} 条连接</span>
           {timelineTimeRange ? <span className="timeline-sync-pill">时间河选择 · {timelineTimeRange.label}</span> : null}
-          <div className="galaxy-renderer-toggle" aria-label="Galaxy renderer feature flag">
+          <div className="galaxy-renderer-toggle" aria-label="银河渲染器开关">
             <button
               aria-pressed={galaxyRendererMode === "memory-starfield"}
               onClick={() => updateGalaxyRendererMode("memory-starfield")}
               type="button"
             >
-              Flow Field
+              流场星野
             </button>
             <button
               aria-pressed={galaxyRendererMode === "legacy"}
               onClick={() => updateGalaxyRendererMode("legacy")}
               type="button"
             >
-              Legacy
+              旧版渲染
             </button>
           </div>
         </div>
