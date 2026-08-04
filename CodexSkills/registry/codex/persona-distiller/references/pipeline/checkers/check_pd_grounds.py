@@ -28,14 +28,15 @@
    （这正是 DeBakey 那三卷的实况）
 4. **§105 不许拿「政府出版/GPO」当依据**——那是 1909 年法那条的证据，不是 §105 的
 5. **1909 年法那条必须报核验强度**——扫本 OCR 是强，HTML 转录是弱，未标注 → 报出
-6. **1929 年前出版那条，年份必须真的 < 1929**
+6. **「版权已过期」那条，年份必须真的 < `PD_PUBLISHED_BEFORE`**
+   （= `THIS_YEAR - 95`；2026 年是 **1931**。★ 原先写死 1929，**两年前就该挪了**）
 7. **机构署名不许标成个人一手**——`byline=institution` 而 `tier` 是 P1 → 报出，
    归到「归属不成立」，不要混进可得性统计
 
 ## ★★ 口径：**五条依据全部是美国法**
 
 `§105` / `§303` 是 17 U.S.C.；`notice1909` 是 1909 年美国版权法的标记要求；
-`pre1929` 是美国版权到期；`congressional` 是美国 GPO 出版物。
+`pre1929`（键名）是美国版权到期——**实际分界随年份滚动**；`congressional` 是美国 GPO 出版物。
 
 **若作品的原属国不是美国，本判据的结论可能与该国法不同。** 两个已实测的差别：
 
@@ -62,10 +63,25 @@ import sys
 
 THIS_YEAR = 2026   # ★ 常量，不用 date.today()：判据的结论要可复现，不许随日子变
 
+# ★★★ 2026-08-05 修：**这条线原本写死成 1929，而它每年 1 月 1 日都会往前挪一格。**
+#   美国 1978 年前已出版作品 = 出版年 + 95 年，次年元旦进入公有领域：
+#       1928 年出版 → 2024-01-01 入 PD      1929 → 2025-01-01
+#       **1930 → 2026-01-01（今天已 PD）**  1931 → 2027-01-01（尚未）
+#   所以 THIS_YEAR=2026 时，正确的分界是「**1931 年以前出版**」，不是 1929。
+#   写死 1929 意味着**每过一年就把两年份的合法材料错判成受版权保护**。
+#   ★ 键名 `pre1929` **保留不改**——既有台账（如 Liebig「pre1929 依据 64/64」）用它引着；
+#     改的是**年份判据**，不是标签。
+PD_PUBLISHED_BEFORE = THIS_YEAR - 95      # 2026 → 1931
+
+# ★ 分诊用：一个人不可能在识字之前发表作品。这里取 15 岁作下限——
+#   **它只用于「要不要花时间去探这条依据」，不用于判某份材料是不是 PD。**
+#   （袁隆平 1930 年生、分界 1931：要成立就得在 1 岁时出版，算术上排除，不是替他排除。）
+MIN_PUBLISHING_AGE = 15
+
 KINDS = {
     "sec105": "17 U.S.C. §105 联邦职务作品",
     "notice1909": "1909 年法：1978 年前出版且无版权标记",
-    "pre1929": "1929 年前出版，版权已过期",
+    "pre1929": f"{PD_PUBLISHED_BEFORE} 年前出版，版权已过期（键名沿用 pre1929，年份随 THIS_YEAR 走）",
     "congressional": "国会记录/听证，GPO 印无标记",
     "unpublished_303": "17 U.S.C. §303 未刊作品：卒年 +70，且 2003-01-01 下限已过",
     # ★★ v0.0.0.95：与 build_source_ledger 的词汇表对齐。
@@ -136,8 +152,9 @@ def check(claims: list) -> list:
             y = c.get("year")
             if not isinstance(y, int):
                 bad.append(f"{w}：pre1929 必须给出版年份")
-            elif y >= 1929:
-                bad.append(f"{w}：**year={y} 不早于 1929**")
+            elif y >= PD_PUBLISHED_BEFORE:
+                bad.append(f"{w}：**year={y} 不早于 {PD_PUBLISHED_BEFORE}**"
+                           f"（{THIS_YEAR} 年的分界；出版年 +95 的次年元旦入 PD）")
 
         if kind == "publicly-accessible":
             # ★ 它不是公有领域，所以不核 PD 依据；核的是「取用方式合规」有没有写出来
@@ -227,7 +244,7 @@ def feasible_grounds(born=None, died=None, us_federal=None, us_published_pre1978
 
     起因（2026-08-04）：七次可得性探测七次延后，每次 30–70 分钟。
     而其中几次，**依据的适用条件在开跑之前就已经排除了大部分路**——
-    例：1930 年出生的人，`pre1929` 不可能；非美国联邦雇员，`sec105` 不可能。
+    例：出生晚于 `PD_PUBLISHED_BEFORE` 的人，`pre1929` 不可能；非美国联邦雇员，`sec105` 不可能。
 
     **这不是猜，是依据本身的适用条件。** 分诊的用处是**把探测的射程缩小**，
     不是替探测下结论：**只要还剩一条可能，就仍然要探。**
@@ -239,9 +256,12 @@ def feasible_grounds(born=None, died=None, us_federal=None, us_published_pre1978
         out[k] = {"可能": possible, "理由": why}
 
     mark("pre1929",
-         born is None or born < 1929,
-         "出生于 1929 年之后，不可能有 1929 年前出版的作品" if (born and born >= 1929)
-         else ("生年未知——当作还可能" if born is None else "生年早于 1929，可能有"))
+         born is None or born + MIN_PUBLISHING_AGE < PD_PUBLISHED_BEFORE,
+         (f"生于 {born}，要有 {PD_PUBLISHED_BEFORE} 年前的出版物就得在 "
+          f"{PD_PUBLISHED_BEFORE - born} 岁以下发表——算术上排除")
+         if (born and born + MIN_PUBLISHING_AGE >= PD_PUBLISHED_BEFORE)
+         else ("生年未知——当作还可能" if born is None
+               else f"生年早于 {PD_PUBLISHED_BEFORE - MIN_PUBLISHING_AGE}，可能有"))
     mark("sec105",
          us_federal is not False,
          "已知非美国联邦雇员" if us_federal is False
@@ -323,9 +343,24 @@ def selftest() -> int:
         not check([dict(n09, verify_strength="html-transcript", weak_acknowledged=True)]))
     chk("扫本 OCR → 不报", not check([dict(n09, verify_strength="scan-ocr")]))
 
-    print("── 反向对照 ⑥：pre1929 的年份必须真的早于 1929 ──")
-    chk("year=1931 → 报出",
-        any("不早于 1929" in x for x in check([{"work": "x", "kind": "pre1929",
+    print("── ★★★ 反向对照 ⑥·补：**分界必须随 THIS_YEAR 滚动，不许写死 1929** ──")
+    print(f"   THIS_YEAR={THIS_YEAR} → PD_PUBLISHED_BEFORE={PD_PUBLISHED_BEFORE}")
+    chk(f"1930 年出版**是 PD**（2026-01-01 起）→ 不许报",
+        not any("不早于" in x for x in check([{"work": "x", "kind": "pre1929",
+                                              "year": 1930, "evidence": "扉页"}])))
+    chk("1931 年出版**还不是 PD** → 必须报",
+        any("不早于" in x for x in check([{"work": "x", "kind": "pre1929",
+                                          "year": 1931, "evidence": "扉页"}])))
+    chk(f"分界是算出来的（{THIS_YEAR}−95={PD_PUBLISHED_BEFORE}），不是字面量 1929",
+        PD_PUBLISHED_BEFORE == THIS_YEAR - 95 and PD_PUBLISHED_BEFORE != 1929)
+    chk("★ 分诊：1930 年生的人仍被排除 pre1929（要 1 岁出版）",
+        "pre1929" not in feasible_grounds(born=1930, died=2021)["**还可能的依据**"])
+    chk("★ 而 1900 年生的人不许被排除",
+        "pre1929" in feasible_grounds(born=1900)["**还可能的依据**"])
+
+    print("── 反向对照 ⑥：pre1929 的年份必须真的早于分界 ──")
+    chk(f"year=1931 → 报出（分界 {PD_PUBLISHED_BEFORE}）",
+        any(f"不早于 {PD_PUBLISHED_BEFORE}" in x for x in check([{"work": "x", "kind": "pre1929",
                                                "year": 1931, "evidence": "版权页"}])))
 
     print("── ★★ 反向对照 ⑦：机构署名却标成个人一手 → 报出（归属不成立）──")
