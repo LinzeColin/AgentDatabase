@@ -18,6 +18,7 @@
 
 `usable_train` 204 → `min_facts = max(5, ceil(204/5)) = **41**`。
 """
+import hashlib
 import json
 import pathlib
 
@@ -57,7 +58,12 @@ RCH = "rc-history-1898"
 
 def C(cid, cat, text, srcs, contexts, falsifier, status="fact", counter=None, clusters=None):
     return {
-        "claim_id": f"clm-{cid}",
+        # ★★ 判据认的是 `clm-<12 位十六进制>`（common.markdown_claim_markers 的正则
+        #   `<!--\s*claim:(clm-[a-f0-9]{12})\s*-->`）。**我一度自造了 `clm-and-01`
+        #   这种可读编号，于是 42 条断言的标记一个都没被认到，claim_markers 报 0。**
+        #   现从可读键派生：同一个 cid 永远得到同一个编号，可复现、可回查。
+        "claim_id": "clm-" + hashlib.sha256(("barton-" + cid).encode()).hexdigest()[:12],
+        "claim_key": cid,          # 可读键留着，供人回查；判据不看它
         "category": cat,
         "status": status,
         "claim": text,

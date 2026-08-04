@@ -949,30 +949,35 @@ def run_content_checks(report, target: Path, cache_dirs: list[str]) -> None:
     if not baseline.exists():
         # ★ 这是个真缺口：**基线从来没落进工作区**，所以任何门都看不见它。
         #   与「候选答案没落进工作区时任何门都看不见它」同一类。
-        review['answer_length_leak'] = (
-            'evals/baseline.v1.json 不在——**长度泄题未核（不是通过）**；'
+        review['answer_surface_leak'] = (
+            'evals/baseline.v1.json 不在——**表面特征泄题未核（不是通过）**；'
             '基线只存在于人物工作目录里，没落进工作区，**门看不见它**')
     elif not payload.exists():
-        review['answer_length_leak'] = 'judge_payload 不在——**长度泄题未核（不是通过）**'
+        review['answer_surface_leak'] = 'judge_payload 不在——**表面特征泄题未核（不是通过）**'
     else:
-        code, out = run('check_answer_length_leak.py',
+        code, out = run('check_answer_surface_leak.py',
                         ['--candidate', str(payload), '--baseline', str(baseline)])
         if code == -1:
             review['checker_missing'] = out
         elif code == 3:
-            report.error('eval.length-unresolved',
-                         '长度泄题**未核成**（不是通过）：两侧没有共有的题号')
+            report.error('eval.surface-leak-unresolved',
+                         '表面特征泄题**未核成**（不是通过）：两侧没有共有的题号')
         elif code == 2:
             report.error('content.selftest-failed',
-                         'check_answer_length_leak 负对照未过——其检查结论不作数')
+                         'check_answer_surface_leak 负对照未过——其检查结论不作数')
         elif code != 0:
             hit = [l for l in out.splitlines() if l.startswith('✗')]
-            report.error('eval.length-leak',
-                         '**长度会指出哪一侧是候选**，这一轮的盲判不成立：'
+            report.error('eval.surface-leak',
+                         '**表面特征会指出哪一侧是候选**，这一轮的盲判不成立：'
                          + '；'.join(h.lstrip('✗ ') for h in hit)[:200])
         else:
+            # ★ 2026-08-04：原先只回显长度那一行。**格式通道的数不回显，
+            #   等于让人以为「长度过了＝盲判成立」——Barton #117 正是这么过的。**
             line = next((l for l in out.splitlines() if l.startswith('**总体均长比')), '')
-            review['answer_length_leak'] = '✓ ' + line.replace('**', '')[:120]
+            worst = max((l for l in out.splitlines() if '可利用' in l),
+                        key=lambda l: l.split('可利用')[-1], default='')
+            review['answer_surface_leak'] = ('✓ ' + line.replace('**', '')[:100]
+                                             + '；表面特征最高 ' + worst.strip()[:60])
 
     # ── v0.0.0.49：答案里的人名，回语料查它有没有依据（**只列不判**）────────
     #   Osler #110 第 2 轮我写「第 9 版起是 McCrae 续修，**后来是 Henry A. Christian**」。
