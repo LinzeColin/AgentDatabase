@@ -220,6 +220,24 @@ def self_test(projected=None, folded=None) -> int:
     print(f"  {'✓' if not b else '✗'} 关掉长 s 折叠后，长 s 样本转为未命中")
     missed += bool(b)
 
+    # ④ v0.0.0.130：**标识符过滤**的双向对照。
+    #    接 --docs 之后，研究文档里的判据名/字段名/来源号会被反引号一并扫进来，
+    #    而它们永远不在语料里——不过滤就是每人几条长期误报，
+    #    **而误报的代价是作者学会忽略这道门。**
+    #    过滤太狠同样危险：德文长复合词一旦被当成标识符跳过，伪造就查不出来了。
+    print("\n══ 标识符对照（v0.0.0.130）══")
+    _ID = re.compile(r"^[A-Za-z_][A-Za-z0-9]*(?:[._\-/][A-Za-z0-9_]+)+$")
+    for s in ("research.invalid-source", "check_quote_integrity", "src-20044a8564a5",
+              "evals/cases.jsonl", "quality_check.py", "min_baseline_delta"):
+        k = bool(_ID.match(s))
+        print(f"  {'✓ 跳过' if k else '✗ **没跳**'}  标识符 {s}")
+        missed += not k
+    for s in ("Milzbrandbakterien", "The recent war has taught us that",
+              "proportionate to the length of time", "Read by title and published"):
+        k = bool(_ID.match(s))
+        print(f"  {'✓ 照核' if not k else '✗ **误跳**'}  引文 {s}")
+        missed += bool(k)
+
     # ③ v0.0.0.38：**装载这一步**的对照。
     #    此前全部对照都建立在「语料已经装好」之上，于是「一份都没装到」
     #    这个失败模式在结构上就测不到——而它恰恰会把每条引文都报成未命中，
@@ -262,6 +280,14 @@ def main() -> int:
     # ★ v0.0.0.38：`--cache` 由 required=True 改为按需必填。
     #   自测现在自带夹具语料，**必须能独立跑起来**——
     #   元检查器普查此前把本件记作「负对照不可独立验证」，根因就在这一行。
+    # ★ v0.0.0.130：**研究文档层**。此前本件只认 --claims / --answers，
+    #   于是 `references/research/*.md` 里的逐字引文**从来没有被任何判据核过**——
+    #   而研究文档正是断言的来源。Carver #127 实测：6 份研究文档 78 条引文，
+    #   我手工声称「58/58 逐字核过」，一上工具就查出一条把 OCR 讹字 `iSyy.`
+    #   写成了 `1899.`（**改了 OCR 错字再当逐字引文用**，正是本件文件头点名的那一类）。
+    #   手工核不是核。
+    ap.add_argument("--docs", type=pathlib.Path, nargs="*", default=[],
+                    help="**研究文档层**：references/research/*.md 等 Markdown")
     ap.add_argument("--cache", nargs="+", default=[])
     ap.add_argument("--self-test", action="store_true",
                     help="跑负对照（自带夹具语料，可不带 --cache 独立运行）")
@@ -288,11 +314,23 @@ def main() -> int:
         return 3
 
 
+    # ★ v0.0.0.130：**反引号里不全是引文。** 研究文档用反引号同时包两种东西：
+    #   语料原文，和**代码标识符**（判据名 `research.invalid-source`、字段名
+    #   `check_quote_integrity`、来源号 `src-20044a8564a5`、文件名 `_ids.txt`）。
+    #   后者永远不会出现在语料里，于是每份研究文档都会带着几条**必然未命中**——
+    #   接进门之后就是长期误报，而误报的代价是作者学会忽略这道门。
+    #   口径：**无空白 + 由 . _ - / 连接的字母数字段**判为标识符，跳过。
+    #   ★ 只跳这一种形状——德文长复合词（`Milzbrandbakterien`）没有分隔符，照核不误。
+    IDENT = re.compile(r"^[A-Za-z_][A-Za-z0-9]*(?:[._\-/][A-Za-z0-9_]+)+$")
+
     def scan(label: str, unit_id: str, text: str, acc):
         for m in Q.finditer(text):
             acc["quotes"] += 1
             for seg in SPLIT.split(_q(m)):
                 if len(proj(seg)) < MIN:
+                    continue
+                if IDENT.match(seg.strip()):
+                    acc["idents"] += 1        # 标识符不是引文，**只计数不判**
                     continue
                 acc["segs"] += 1
                 hit = find(seg, texts, folded)
@@ -301,13 +339,16 @@ def main() -> int:
                 elif not hit:
                     acc["bad"].append((f"{label}/{unit_id}", re.sub(r"\s+", " ", seg).strip()[:100]))
 
-    acc = {"quotes": 0, "segs": 0, "bad": [], "longs": []}
+    acc = {"quotes": 0, "segs": 0, "bad": [], "longs": [], "idents": 0}
 
     if a.claims:
         for line in a.claims.read_text(encoding="utf-8").splitlines():
             if line.strip():
                 r = json.loads(line)
                 scan("断言", r["claim_id"], r["claim"], acc)
+
+    for path in a.docs:
+        scan("研究", path.name, path.read_text(encoding="utf-8"), acc)
 
     for path in a.answers:
         data = json.loads(path.read_text(encoding="utf-8"))
@@ -321,11 +362,13 @@ def main() -> int:
                 if isinstance(v, str) and not k.startswith("_"):
                     scan("答案", k, v, acc)
 
-    if not a.claims and not a.answers:
-        print("  ⚠ 既没给 --claims 也没给 --answers，**什么都没核**（不是通过）")
+    if not a.claims and not a.answers and not a.docs:
+        print("  ⚠ --claims / --answers / --docs 一个都没给，**什么都没核**（不是通过）")
 
     print(f"引文 {acc['quotes']} 条，切分后核验片段 {acc['segs']} 个，"
-          f"未命中 {len(acc['bad'])} 个，长 s 还原后才命中 {len(acc['longs'])} 个")
+          f"未命中 {len(acc['bad'])} 个，长 s 还原后才命中 {len(acc['longs'])} 个"
+          + (f"，跳过标识符 {acc['idents']} 个（判据名/字段名/来源号，不是引文）"
+             if acc["idents"] else ""))
     for cid, s in acc["longs"]:
         print(f"  · 长 s 还原后命中 {cid}: 「{s[:70]}」")
     for cid, s in acc["bad"]:

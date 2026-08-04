@@ -1,5 +1,90 @@
 # Changelog
 
+## v0.0.0.130 — **研究文档的引文从来没被任何判据核过；而我说我手工核过了**（2026-08-05）
+
+Carver #127 写完五份模型层，顺手把它们喂给 `check_quote_integrity` 想验一下逐字引文。
+第一次跑我给的是 `--docs`——**它输出了空**。
+我用 `2>&1 | grep` 过滤了输出，于是 argparse 的报错被 grep 吃掉，
+**看起来像「跑过了、没问题」**。实际上 `--docs` 这个参数**当时根本不存在**，
+我是凭想当然写的。★ **这已经是「判据绿了但指错了文件」的第 12 次**，
+这次的表面是：**参数名是我编的，而过滤器把报错藏了起来。**
+
+改用真实入口重跑，查出两件事。
+
+### 一、`iSyy.` 被我写成了 `1899.`
+
+Bulletin No.4 扉页，语料原样是
+`Revised and Reprinted from the Reports of the Iowa Academy of Science iSyy.`
+（`iSyy` 是 `1899` 的 OCR 讹字）。我在 `01-writings.md` 与 `divergence-map.md` 两处
+都写成了 `1899.`——**把 OCR 讹字顺手改正，再当逐字引文用。**
+这正是本判据文件头点名的那一类，也正是 Jenner #104 撞过的那一类（`DoHors→Doctors`）。
+
+★★ 关键不在于错了一条，在于**我此前声称「58 条引文 100% 逐字核过」**。
+那是手工核的。**手工核不是核**——今天第二次撞到同一句话
+（前一次是「我扫了 101,610 字符」那种自述）。
+
+### 二、研究文档的引文，整条流水线从来没核过
+
+`check_quote_integrity` 的接线是 `if claims.exists():`，
+而 `claims.jsonl` 是**合成阶段**才产出的东西。于是：
+
+| 层 | 谁核 | 何时 |
+|---|---|---|
+| 断言层 `claims.jsonl` | ✓ | 合成/发布 |
+| 答案层 `judge_payload` | ✓ | 发布 |
+| **研究文档 `references/research/*.md`** | **从来没有** | —— |
+
+**而断言正是从研究文档里提出来的。** 上游不核，下游核的是已经被抄过一道的东西。
+
+已给 `check_quote_integrity` 加 `--docs`，并接进 `run_corpus_text_checks`。
+Carver 实测：82 条引文，未命中 3 条（全部是 PIAS Vol.7 那一卷的话，
+**该卷整卷不在工作区语料里**，已在研究文档里逐条标明可核性边界）。
+
+### ★★★ 三、接线时我又犯了本文件 v0.0.0.116 更正过的同一个错
+
+第一版我把它写进 `run_content_checks`。跑研究门——**一声不吭**，
+`content_review` 里既没有我的键，也没有报错。
+差点当成「✓ 通过」写进记录。
+
+根因：**`run_content_checks` 只在 `--phase release` 被调用。**
+而本文件 v0.0.0.116 的条目**就是为同一件事写的**，原话是
+「我在 v0.0.0.105 的 CHANGELOG 里写的『已接进 --phase research』**是错的**」。
+★ **同一个陷阱，同一个文件，隔了 14 个版本我原样又踩一次。**
+已移进 `run_corpus_text_checks`（研究门与发布门都跑）。
+
+### 四、一次我自己制造的假警报
+
+中途我判定 `Read by title and published In the Proceedings.` 是**编造的复合句**，
+理由是：全语料 0 命中，且我在 scratchpad 里找到的法例是
+`Read by title. No copy furnished for publioation.`。
+
+**这个判定是错的。** 那句话真实存在，在 `proceedingsofiow07iowa.txt` 里原样作
+`♦Read by title and published In the Proceedings.`（`♦` 是星号的 OCR）。
+我错在两步：**① 只搜了工作区 `raw/`，而那一卷不在里面；
+② 拿 vol.17 的星号法例去套 vol.7——不同卷的法例根本不一样。**
+
+★★ 记下来的是判据的射程：**`check_quote_integrity` 报「未命中」，
+只说明「这句不在本工作区语料里」，不说明它不存在。**
+两者之间隔着「这份来源有没有被 ingest」这个问题，而判据看不见它。
+
+### 五、标识符不是引文
+
+接 `--docs` 之后立刻冒出必然误报：研究文档用反引号同时包**语料原文**和
+**代码标识符**（`research.invalid-source`、`src-20044a8564a5`、`evals/cases.jsonl`）。
+后者永远不在语料里。不过滤就是每人几条长期误报，
+**而误报的代价是作者学会忽略这道门。**
+已加形状过滤（无空白 + `. _ - /` 连接的字母数字段），
+双向反向对照写进自测：6 个标识符必须跳，
+4 条引文（含德文长复合词 `Milzbrandbakterien`）必须照核。
+
+### 附：Carver #127 同时推进的
+
+- 五份模型层写完（`cognitive-os` / `decision-policy` / `strategy` / `work` / `divergence-map`），
+  每份都带 claim 锚点与页码坐标；**缺口逐条写明**
+  （无私人信件、无更新规则证据、无短长期冲突证据）。
+- 断言层补齐引文坐标：**18 条长引文，同段带坐标 18 条**（此前 8 条）。
+- 发布门 **7 errors → 1**（只剩 `eval.no-results`，即判分本身）。
+
 ## v0.0.0.129 — **署名判据认不出「名缩写」，一整批亲笔公报被判无据**（2026-08-05）
 
 Carver #127 ingest 之后研究门报 **63 条 `research.authorship-unproven`**。

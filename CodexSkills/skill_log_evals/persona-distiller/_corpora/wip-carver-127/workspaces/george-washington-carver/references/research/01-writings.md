@@ -84,7 +84,8 @@
 **两种体例都在，且都在他自己的署名之下。**
 
 ★ 该篇后由 Bulletin No.4（`src-30f132430c2a`）**修订重印**，扉页明写：
-`Revised and Reprinted from the Reports of the Iowa Academy of Science 1899.`
+`Revised and Reprinted from the Reports of the Iowa Academy of Science iSyy.`
+（★ `iSyy.` 是 `1899.` 的 OCR 讹字——**照录，不改**。）
 **两件同源，No.4 记 P2，不进去重后的一手计数。**
 
 ### 五、1899 年那篇是**宣读稿**，不是发言记录

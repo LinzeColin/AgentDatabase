@@ -18,6 +18,15 @@
 《The Negro Farmer》85 期全文 grep，29 期提到他但**零条发言记录**；
 Hampton 会刊除 1899 那篇宣读稿外全 0；爱荷华科学院 351 处命中**无一条是发言**
 （该会印本页脚 `Read by title and published In the Proceedings.` ——**以题目宣读、本人不在场**）。
+> ★★ **这一句核不了，须说明**：它出自 PIAS Vol.7 印本自己的会议记事
+> （`proceedingsofiow07iowa.txt`，印本原样作 `♦Read by title and published In the Proceedings.`，
+> `♦` 是星号的 OCR），而**那一卷整卷不在本工作区语料里**——
+> 语料只收了他那篇论文本身。因此 `check_quote_integrity` 对本句报「未命中」，
+> **不是伪造，是核验器够不到。** 该卷记事里他那篇标的是**单星**
+> （`*"Some Cercospora of Macon County, Alabama," by George Carver.`），
+> 对应的正是上面这条单星法例。
+> ★ **别卷的法例不一样**（vol.17 作 `Read by title. No copy furnished for publioation.`），
+> **拿别卷的法例套本卷会得出相反结论**——我今天就这么错过一次。
 
 ## Source-linked observations
 

@@ -821,6 +821,37 @@ def run_corpus_text_checks(report, target: Path, cache_dirs: list[str]) -> None:
                         '**从这些文件里取不出任何可核的逐字引文**。')
         review['fraktur_mojibake'] = f'{n_bad} 份' if n_bad else '✓ 没有花体乱码'
 
+    # ★ v0.0.0.130：**研究文档层的逐字引文**——放在本函数而不是 run_content_checks，
+    #   因为**后者只在 --phase release 被调用**（本文件 v0.0.0.116 已经为同一件事
+    #   更正过一次，而我今天又原样犯了一遍：先写进 run_content_checks，
+    #   跑研究门时它一声不吭，我差点当成「✓ 通过」）。
+    #
+    #   此前 `check_quote_integrity` 只在 `claims.exists()` 时才跑，
+    #   而 claims 是**合成阶段**才有的东西：于是 `references/research/*.md` 里的
+    #   逐字引文**在整条流水线上从未被任何判据核过一次**——而断言正是从这些文档里提出来的。
+    #   Carver #127 实测：78 条研究文档引文，我手工声称「58/58 逐字核过」，
+    #   工具一跑就查出 `iSyy.` 被我写成了 `1899.`（**改 OCR 讹字再当逐字引文**）。
+    #   ★★ **手工核不是核。**
+    research_docs = sorted((target / 'references/research').glob('*.md'))
+    if research_docs:
+        code, out = run('check_quote_integrity.py',
+                        ['--docs', *[str(x) for x in research_docs], '--cache', *cache_arg])
+        n = next((l for l in out.splitlines() if l.startswith('引文 ')), '')
+        if code == -1:
+            review['research_quote'] = out
+        elif code == 3:
+            review['research_quote'] = '研究文档引文**未核成**（不是通过）：语料读不到，或一条引文都没扫到'
+        elif code == 2:
+            report.error('content.selftest-failed',
+                         'check_quote_integrity 负对照未过——其研究文档结论不作数')
+        elif code != 0:
+            bad = [l.strip() for l in out.splitlines() if l.strip().startswith('⚠ 研究/')]
+            review['research_quote'] = (f'**有引文未在语料中找到**——未命中不等于伪造，须人工核对；'
+                                        f'但「改了 OCR 错字再当逐字引文」也落在这里。{n}｜'
+                                        + '｜'.join(bad[:6]))
+        else:
+            review['research_quote'] = f'✓ 研究文档每条逐字引文都在语料中（{n}）'
+
 
 def run_content_checks(report, target: Path, cache_dirs: list[str]) -> None:
     """把内容层检查接进发布门（v0.0.0.8 新增）。
