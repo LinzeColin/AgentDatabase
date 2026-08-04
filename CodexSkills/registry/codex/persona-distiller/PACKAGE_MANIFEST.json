@@ -16,8 +16,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "a6b77bd4a5c9fc421d82c55dd5967d4492c2d1fa53b6d6ceb36aa585470525a2",
-      "size_bytes": 163313
+      "sha256": "e8a411a3bdca43fa4f74aab329701c557b2467851badabf31578d3878c8f061d",
+      "size_bytes": 165303
     },
     {
       "path": "CONTRIBUTING.md",
@@ -381,8 +381,8 @@
     },
     {
       "path": "references/ledgers/_待用户裁定.md",
-      "sha256": "f2ff2bf4c251504dabb6045456b5b40599f0db0c997c7345ebf8a9f329f29a9b",
-      "size_bytes": 16805
+      "sha256": "df0fbd3272a59b7e899be4a7387513883d0289c74f2f3099f80f0e8f361774a8",
+      "size_bytes": 18926
     },
     {
       "path": "references/ledgers/_每次开工必读.md",
@@ -513,6 +513,11 @@
       "path": "references/pipeline/checkers/check_baseline_provenance.py",
       "sha256": "d55e1afab3c7050712b7a98b36443d8d8e3da852001732aba115a6c3f8ec2b2f",
       "size_bytes": 7995
+    },
+    {
+      "path": "references/pipeline/checkers/check_blind_rounds_independent.py",
+      "sha256": "2730f439a3bff92bc80e6f7b047acd265a3fb3c9ef37df20483d11d53002f3c3",
+      "size_bytes": 8895
     },
     {
       "path": "references/pipeline/checkers/check_case_self_sufficiency.py",
@@ -931,8 +936,8 @@
     },
     {
       "path": "scripts/build_blind_payload.py",
-      "sha256": "af9763cac90800a914e7ed08a61e187721a97a67c58cfd13d0860f08266b2ec7",
-      "size_bytes": 10673
+      "sha256": "53fbbcb982e3c454108a9c98e652d824c92cd3fc91f04598e70331491f83af61",
+      "size_bytes": 11287
     },
     {
       "path": "scripts/build_manifest.py",
@@ -998,6 +1003,11 @@
       "path": "scripts/check_baseline_provenance.py",
       "sha256": "d55e1afab3c7050712b7a98b36443d8d8e3da852001732aba115a6c3f8ec2b2f",
       "size_bytes": 7995
+    },
+    {
+      "path": "scripts/check_blind_rounds_independent.py",
+      "sha256": "2730f439a3bff92bc80e6f7b047acd265a3fb3c9ef37df20483d11d53002f3c3",
+      "size_bytes": 8895
     },
     {
       "path": "scripts/check_case_self_sufficiency.py",
