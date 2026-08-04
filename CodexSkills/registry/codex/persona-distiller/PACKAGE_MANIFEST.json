@@ -376,8 +376,8 @@
     },
     {
       "path": "references/ledgers/_待用户裁定.md",
-      "sha256": "d89eb70321fc6c431ab54abcd2d10e3f02ad21fb24bedd31e60a6159c7f0bf1e",
-      "size_bytes": 84879
+      "sha256": "efec114eab97dff7399e6551bc6b463ffb7669e7ba7014d10da0fa4b3022ad74",
+      "size_bytes": 88436
     },
     {
       "path": "references/ledgers/_每次开工必读.md",
@@ -766,8 +766,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_verification_counts.py",
-      "sha256": "95910092bbf08f6fe50698ac8f0a028929d4117e14e8da80393c978f6fe642c6",
-      "size_bytes": 14984
+      "sha256": "d764c7c5680f0e2e3d96050ff36a94a7e6d12402b5d65a4e3cd6cd36e77dd14a",
+      "size_bytes": 15358
     },
     {
       "path": "references/pipeline/checkers/classify_early.py",
@@ -1336,8 +1336,8 @@
     },
     {
       "path": "scripts/check_verification_counts.py",
-      "sha256": "95910092bbf08f6fe50698ac8f0a028929d4117e14e8da80393c978f6fe642c6",
-      "size_bytes": 14984
+      "sha256": "d764c7c5680f0e2e3d96050ff36a94a7e6d12402b5d65a4e3cd6cd36e77dd14a",
+      "size_bytes": 15358
     },
     {
       "path": "scripts/common.py",

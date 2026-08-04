@@ -129,7 +129,11 @@ def audit(root: pathlib.Path) -> dict:
     led = root / "references" / "ledgers" / "_待用户裁定.md"
     if led.is_file():
         lt = led.read_text(encoding="utf-8")
-        n_real = len(re.findall(r"^## [①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮]", lt, re.M))
+        # ★★ 2026-08-05 修：原来是手写枚举 `[①…⑮]`，**台账加到 ⑯ 时它看不见**，
+        #   于是把自己的盲区报成了「文档写错了」——**判据指错了地方，而且指得很有说服力**。
+        #   改用 Unicode 区间 ①–⑳（U+2460–U+2473）；再加到 ㉑ 时仍会漏，
+        #   但那时报的是「实况比文中少」，方向反过来，容易看出是判据老了。
+        n_real = len(re.findall("^## [①-⑳]", lt, re.M))
         CN = "〇一二三四五六七八九十"
         def _cn(x):
             return "十" + CN[x - 10] if 10 < x < 20 else ("十" if x == 10 else CN[x])
@@ -140,7 +144,7 @@ def audit(root: pathlib.Path) -> dict:
         # ★★ 同日再补：**「一眼看完」表里的行数，与正文节数**。
         #   实测 ⑫ 只有正文、**没进表**——自称条数那一项当时是 ✓，因为它只比标题与导语。
         #   **一眼看完漏一行，这张表就不再是一眼看完。**
-        n_tab = len(re.findall(r"^\| \*\*[①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮]\*\* \|", lt, re.M))
+        n_tab = len(re.findall("^\\| \\*\\*[①-⑳]\\*\\* \\|", lt, re.M))
         rows.append({"项": "待裁定台账·表行数 vs 正文节数",
                      "实况": f"正文 {n_real} 节", "文中": f"表 {n_tab} 行",
                      "判定": "✓" if n_tab == n_real
