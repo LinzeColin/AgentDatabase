@@ -1,5 +1,42 @@
 # Changelog
 
+## v0.0.0.122 — **引文真伪判据支持 `--answers`，而全项目没有一处这样调用过**（2026-08-05）
+
+`check_quote_integrity.py` 从一开始就有 `--answers` 参数。
+**全代码库搜一遍：没有任何一处拿它去核候选答案。** 它只被用来核断言层。
+
+**而候选答案正是评委看到的那份东西，评委手里没有语料，核不了引文。**
+（记忆里已有一条：两席三轮六次评审对四处编造 **0 命中**，一行 grep 全抓出。）
+
+### 补跑 Mendel #125 第 3 轮答案，立刻报出一条
+
+```
+语料 17 份　引文 6 条　**未命中 1 条**
+⚠ gm-fact-preservation-01：「Einleitende Bemerkungen」
+```
+
+去看原文——**语料里印的是 OCR 讹字 `Hinleitende Bemerkungen`**（E 被读成 H）：
+
+```
+Versuche über Pflanzen-Hybriden. Von Gregor Mendel.
+(Vorgelest in den Sitzungen vom 8. Februar und $. März 1865.)
+**Hinleitende Bemerkungen.** Künstliche Befruchtungen, welche an Zierpflanzen
+**desshalb** vorgenommen wurden, … waren die Veranlassung zu den Versuchen,
+die her besprochen werden sollen.
+```
+
+★★ **我把 OCR 错字改正后，当逐字引文用了**——正是该判据文件头点名的那一类
+（「『改了 OCR 错字再当逐字引文用』也会落在这里，那一类是真问题」）。
+**两席都没抓到；席 D 反而给了那一题全场最高的 0.93。**
+
+★ 顺带核实了两处席 E 明说「无从核对」的：
+`desshalb`（旧拼）与 `waren die Veranlassung zu den Versuchen`
+——**两条都逐字属实**。评委核不了的，一条 grep 核得了。
+
+**已接进 `build_blind_payload.py`，在派发之前跑，只报不拦**
+（未命中不等于伪造，须人看一眼原文再定）。
+
+
 ## v0.0.0.121 — **我念了四次门，四次念的都是一个不存在的字段**（2026-08-05）
 
 Mendel #125 第 3 轮 delta **+0.0359** 过了 quick 门。我去跑打包，被拦下：

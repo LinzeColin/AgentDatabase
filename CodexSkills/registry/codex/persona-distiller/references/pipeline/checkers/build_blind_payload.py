@@ -225,6 +225,24 @@ def main() -> int:
     #   候选照做，**得 −0.1800**；`gm-boundary-01` 写「**顺着答下去即为失败**」，
     #   基线顺着答了，**赢 0.18**。两份冻结 rubric 判候选对、基线错，评委两者都看不到。
     #   ★ **只报不拦，且绝不把这些题剔出去**——去掉不利子集再报数就是为凑数放宽判据。
+    # ★★★ v0.0.0.122：**引文真伪，必须在派发之前核——因为评委核不了。**
+    #   `check_quote_integrity` 早就支持 `--answers`，**但全项目没有一处这样调用它**。
+    #   Mendel #125 补跑：6 条德文引文，**1 条未命中**——
+    #   `Einleitende Bemerkungen`，而语料里印的是 OCR 讹字 `Hinleitende Bemerkungen`。
+    #   **我把 OCR 错字改正后当逐字引文用了**，正是该件文件头点名的那一类。
+    #   两席都没抓到（席 D 反而给了那一题全场最高的 0.93）——**评委没有语料，核不了。**
+    _qi = pathlib.Path(__file__).resolve().parent / "check_quote_integrity.py"
+    _src = pathlib.Path(a.workspace) / "references" / "sources"
+    if _qi.is_file() and a.candidate and _src.is_dir():
+        print("\n── 引文真伪：拿答案里的原文去语料里逐字找（**只报不拦**）──")
+        _rq = subprocess.run([sys.executable, str(_qi), "--answers", a.candidate,
+                              "--cache", str(_src)], capture_output=True, text=True)
+        for _ln in _rq.stdout.splitlines():
+            if any(k in _ln for k in ("引文", "未命中", "⚠", "语料")):
+                print("  " + _ln.strip())
+        print("  ★ 未命中不等于伪造，但**「改了 OCR 错字再当逐字引文用」也落在这里**——"
+              "那一类是真问题，且评委查不出来。")
+
     # ★★ v0.0.0.121：**每修一处引入一处，连续两轮四个实例**（见 _fix-introduces-new-defect.md）。
     #   R2 修 contrast 引入「至今未见数字化本」；R3 修 task-completion 引入「同一卷」而全篇无卷次。
     #   修完之后**没有任何一步去验改的那一处自己站不站得住**，要等下一轮评委再抓。

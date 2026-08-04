@@ -1,6 +1,6 @@
-# Release verification — Persona Distiller v0.0.0.121
+# Release verification — Persona Distiller v0.0.0.122
 
-Date: 2026-08-05（**v0.0.0.121**）
+Date: 2026-08-05（**v0.0.0.122**）
 
 > **本文件记录「当前发布号的复验结果」，不是历史归档。**
 > 版本号必须等于根目录 `VERSION`，由 `scripts/check_contract_drift.py` 强制。
@@ -21,6 +21,15 @@ Date: 2026-08-05（**v0.0.0.121**）
 > **表格正文不在任何判据的射程里**。
 > **「本表每一行都来自本次实跑」是一句自述**——
 > 而自述不是证据（见 `self-report-is-not-evidence`）。
+
+> ### v0.0.0.122 这一版重跑了什么
+>
+> **把已有的 `check_quote_integrity --answers` 接进 `build_blind_payload`（派发之前）**。
+> **本次重跑**：对 Mendel R3 答案实跑 → **6 条引文报出 1 条未命中**，
+> 并逐字回原文确认成因是 OCR 讹字（`Hinleitende` vs `Einleitende`）、
+> 同时确认 `desshalb` 与 `waren die Veranlassung zu den Versuchen` 属实、
+> `check_checkers scripts`（**59 件 0 未接线**）、`finalize_release.py` 四步。
+> **其余各行沿用 v0.0.0.96 那一次。**
 
 > ### v0.0.0.121 这一版重跑了什么
 >

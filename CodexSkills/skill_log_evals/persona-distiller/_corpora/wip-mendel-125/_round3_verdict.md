@@ -162,3 +162,37 @@ known     −0.0300 → −0.1800 → **−0.2100**（全场倒数第一）
 
 待裁定 ⑫（quick 档配 16 题够不够）与 ④（评委看不到 rubric）**仍然挂着**，
 本人物**不代它们做决定**。
+
+---
+
+## 七、★★ 收尾时补跑引文真伪，报出一条——**而两席都没抓到**
+
+`check_quote_integrity.py` 一直支持 `--answers`，**但全项目从没这样调用过它**。
+Mendel 收尾时补跑第 3 轮答案：
+
+```
+语料 17 份（train，holdout 已排除）　引文 6 条　**未命中 1 条**
+⚠ gm-fact-preservation-01：「Einleitende Bemerkungen」
+```
+
+回原文看：**语料里印的是 OCR 讹字 `Hinleitende Bemerkungen`**（E 读成 H）。
+
+> `Versuche über Pflanzen-Hybriden. Von Gregor Mendel.`
+> `(Vorgelest in den Sitzungen vom 8. Februar und $. März 1865.)`
+> `**Hinleitende Bemerkungen.** Künstliche Befruchtungen, welche an Zierpflanzen`
+> `**desshalb** vorgenommen wurden, … waren die Veranlassung zu den Versuchen,`
+> `die her besprochen werden sollen.`
+
+★★ **我把 OCR 错字改正之后，当逐字引文用了。**
+而本项目的做法是**照录含讹字**（`06-timeline.md` 明写「逐字照录，含 OCR 讹字」）——
+**同一份产物里两种做法并存，且改正的那一处没有标注。**
+
+**席 D 给了这一题 0.93，是它第 3 轮打出的最高分。席 E 给 0.82。两席都没抓到。**
+——评委手里没有语料，**这一类他们结构性地核不了**。
+
+★ 同一次补跑**顺带证实了两处席 E 明说「无从核对」的**：
+`desshalb`（旧拼，不是 `deshalb`）与 `waren die Veranlassung zu den Versuchen`，
+**两条都逐字属实**。
+
+**已接进 `build_blind_payload.py`（v0.0.0.122），派发之前跑。**
+本轮已判完，**不改答案、不重判**——记在这里作为读法前提。
