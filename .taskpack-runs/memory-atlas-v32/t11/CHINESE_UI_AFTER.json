@@ -1,33 +1,23 @@
 {
   "schema_version": "memory_atlas.chinese_ui_audit.v1",
-  "captured_at": "2026-08-04T07:18:17.361Z",
+  "captured_at": "2026-08-04T07:28:26.822Z",
   "page_url": "http://127.0.0.1:4174/",
   "verdict": "FAIL",
-  "finding_count": 150,
+  "finding_count": 132,
   "by_view": {
-    "home": 33,
+    "home": 27,
     "galaxy": 10,
-    "notion": 22,
+    "notion": 18,
     "roi": 1,
     "obsidian": 5,
-    "timeline": 25,
+    "timeline": 20,
     "contribution": 1,
     "wordcloud": 10,
-    "search": 27,
+    "search": 24,
     "summary": 13,
     "runtime": 3
   },
   "findings": [
-    {
-      "view": "home",
-      "kind": "untranslated",
-      "text": "：Time-to-Truth"
-    },
-    {
-      "view": "home",
-      "kind": "untranslated",
-      "text": "TTT"
-    },
     {
       "view": "home",
       "kind": "untranslated",
@@ -37,26 +27,6 @@
       "view": "home",
       "kind": "untranslated",
       "text": "Claude Code"
-    },
-    {
-      "view": "home",
-      "kind": "untranslated",
-      "text": "failed"
-    },
-    {
-      "view": "home",
-      "kind": "machine_identifier",
-      "text": "deployed_verified"
-    },
-    {
-      "view": "home",
-      "kind": "machine_identifier",
-      "text": "draft_only"
-    },
-    {
-      "view": "home",
-      "kind": "machine_identifier",
-      "text": "recovery_verified"
     },
     {
       "view": "home",
@@ -235,26 +205,6 @@
     },
     {
       "view": "notion",
-      "kind": "untranslated",
-      "text": "theme / tier / category"
-    },
-    {
-      "view": "notion",
-      "kind": "machine_identifier",
-      "text": "memory:preference / memory:answering_rule / memory:security_boundary"
-    },
-    {
-      "view": "notion",
-      "kind": "machine_identifier",
-      "text": "project / decision / memory:project_context / memory:workflow"
-    },
-    {
-      "view": "notion",
-      "kind": "machine_identifier",
-      "text": "memory:temporary / memory:recommended_action / memory:roi_opportunity"
-    },
-    {
-      "view": "notion",
       "kind": "machine_identifier",
       "text": "codex_usage_record"
     },
@@ -271,12 +221,12 @@
     {
       "view": "notion",
       "kind": "machine_identifier",
-      "text": "belongs_to_theme:edge:memory:mem_0021f45ff99acd80:theme:formal-engineering-delivery:weight"
+      "text": "has_tier · weight=1.00"
     },
     {
       "view": "notion",
       "kind": "machine_identifier",
-      "text": "has_category:edge:memory:mem_0021f45ff99acd80:category:answering-rule:weight=0.35"
+      "text": "project_membership · weight=0.32"
     },
     {
       "view": "notion",
@@ -377,31 +327,6 @@
       "view": "timeline",
       "kind": "machine_identifier",
       "text": "codex_usage_record"
-    },
-    {
-      "view": "timeline",
-      "kind": "untranslated",
-      "text": "Memory River"
-    },
-    {
-      "view": "timeline",
-      "kind": "untranslated",
-      "text": "Legacy"
-    },
-    {
-      "view": "timeline",
-      "kind": "untranslated",
-      "text": "Pan"
-    },
-    {
-      "view": "timeline",
-      "kind": "untranslated",
-      "text": "Brush"
-    },
-    {
-      "view": "timeline",
-      "kind": "untranslated",
-      "text": "Reduced Motion"
     },
     {
       "view": "timeline",
@@ -557,21 +482,6 @@
       "view": "search",
       "kind": "machine_identifier",
       "text": "codex_usage_record"
-    },
-    {
-      "view": "search",
-      "kind": "machine_identifier",
-      "text": "query_input"
-    },
-    {
-      "view": "search",
-      "kind": "untranslated",
-      "text": "tier"
-    },
-    {
-      "view": "search",
-      "kind": "untranslated",
-      "text": "topic"
     },
     {
       "view": "search",
