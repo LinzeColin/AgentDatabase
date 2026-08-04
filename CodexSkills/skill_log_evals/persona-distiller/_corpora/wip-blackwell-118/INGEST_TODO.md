@@ -62,3 +62,46 @@ python3 scripts/assemble_judge_results.py --workspace <target> --round-dir round
 ```
 
 `build_blind_payload` **生成时就跑表面特征泄题门，未过退出 1、不许派发**。
+
+---
+
+## 已完成（2026-08-04）
+
+- 语料 95 份入库，研究门 **101 → 1 条**（只剩 `lane-completion`，属合成阶段）
+- 归属逐源实测：56 份靠 A-* 署名、18 份逐份点名照录原文、**0 份未认领**
+- holdout 6 份，**硬失败 0 / 待人工核 0**
+- `attribution_basis` 四字段齐全，引的是实测原文
+
+## 下一步：断言层
+
+候选事实已抽好并落盘：
+
+| 文件 | 内容 |
+|---|---|
+| `_facts_raw.txt` | 814 条，全 train 侧 P1 |
+| `_facts_good.txt` | 398 条，滤掉印刷页与广告 |
+| `_facts_subst.txt` | **603 条，只取 49 份实质性一手**（排除日记与家庭通信） |
+
+**日记不适合做事实断言**——逐日流水（天气、家用账、访客名单），
+它们的价值在 `expression` 与 `timeline`，不在 `fact`。
+
+### ★ 又发现一处未标 U 的污染
+
+`sp-1261-wrong-and-right-methods-1-2` 里混进了报纸分类广告
+（`WIDOW and DAUGHTER - Widow as WORKING HOUSEKEEPER, daughter as NURSE or Useful Help.`）。
+**它不在已标 U 的那两卷里。** 说明 LoC 众包转写的剪报污染**不止那两处**，
+写断言前要对每一条候选句再过一遍「这是她的话吗」。
+
+### 已回原文核过的生平锚点（可直接做 fact 断言）
+
+- `Geneva: October 20, 1847.`（Geneva Medical College 录取的时间锚）
+- `Geneva University to acknowledge receipt of yours of 3rd inst.`
+- `La Maternité, a world-famous institution, and remain until I have succeeded in my first object—viz.`
+- `Blockley Almshouse, a large room on the third floor had been appropriated to my use.`
+- `In 1849, with a population of 314,000, and an inert public opinion, there were 211 brothels, with 538 inmates.`（*Wrong and Right Methods*，带三个可核数字）
+- `lecture was prepared by Drs. Elizabeth and Emily Blackwell`（1860 年那篇是姐妹合备）
+
+### 出答案时照 v0.0.0.81 的两条（母版里也有）
+
+1. **散文体裁**，不加粗体/反引号/分条；逐字引文用「」
+2. **写每题前先列题面写死的约束，逐条对着答**
