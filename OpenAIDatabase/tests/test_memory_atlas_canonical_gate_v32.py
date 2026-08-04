@@ -224,3 +224,18 @@ def test_promotion_recreates_the_container_and_proves_what_is_served() -> None:
     probe = POST_PROMOTE.read_text(encoding="utf-8")
     assert "SERVED_ARTIFACT_IS_NOT_THE_PROMOTED_RELEASE" in probe
     assert "exit 7" in probe
+
+
+def test_promotion_prunes_everything_rollback_cannot_reach() -> None:
+    """Four promotions in one evening filled a 38 GB disk and the fifth died
+    mid-rsync: each agent release is a ~770 MB copy and nothing pruned them.
+    Blue-green can only ever roll back to previous, so anything older is dead
+    weight."""
+    deploy = (REPO / "ops" / "memory-atlas" / "deploy-blue-green.sh").read_text(encoding="utf-8")
+    assert "prune_superseded_releases" in deploy
+    assert 'prune_superseded_releases "$AGENT_ROOT"' in deploy
+    assert 'prune_superseded_releases "$APP_ROOT"' in deploy
+    # current and previous are the rollback contract; they must be exempt.
+    assert '[[ "$name" == "$keep_current" || "$name" == "$keep_previous" ]] && continue' in deploy
+    # Pruning must happen before the release is copied, or it frees space too late.
+    assert deploy.index("prune_superseded_releases \"$APP_ROOT\"") < deploy.index('cp -a MemoryAtlas/dist')

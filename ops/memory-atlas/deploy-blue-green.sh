@@ -124,6 +124,27 @@ else
   exit 64
 fi
 release_id="$(date -u +%Y%m%dT%H%M%SZ)-${release_commit:0:12}"
+
+# Each agent release is a ~770 MB copy of the tree and nothing pruned them, so
+# four promotions in one evening filled a 38 GB disk and the fifth died
+# mid-rsync. Blue-green only ever needs current and previous; everything older
+# is unreachable by the rollback contract. Pruned before the copy, so the space
+# is free when it is needed.
+prune_superseded_releases() {
+  local root=${1:?root required}
+  local keep_current keep_previous name
+  keep_current=$(basename "$(readlink -f "$root/current" 2>/dev/null || true)")
+  keep_previous=$(basename "$(readlink -f "$root/previous" 2>/dev/null || true)")
+  [[ -d "$root/releases" ]] || return 0
+  for path in "$root/releases"/*; do
+    [[ -d "$path" ]] || continue
+    name=$(basename "$path")
+    [[ "$name" == "$keep_current" || "$name" == "$keep_previous" ]] && continue
+    rm -rf "$path"
+  done
+}
+prune_superseded_releases "$AGENT_ROOT"
+prune_superseded_releases "$APP_ROOT"
 release="$APP_ROOT/releases/$release_id"
 agent_release="$AGENT_ROOT/releases/$release_id"
 mkdir -p "$release" "$APP_ROOT/shared/data" "$APP_ROOT/shared/public-baseline" "$agent_release"
