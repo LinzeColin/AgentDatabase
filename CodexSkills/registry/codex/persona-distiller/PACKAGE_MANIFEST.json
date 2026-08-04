@@ -381,8 +381,8 @@
     },
     {
       "path": "references/ledgers/_每次开工必读.md",
-      "sha256": "7d3e8a1bc0847314faaf8218eab2e1d4c909ec005df0fc09ed99821f7f8e1c17",
-      "size_bytes": 54920
+      "sha256": "a6c2fddc5063d78951919e178ed70a0f321114c35bc1e6a4b1aa69e19eb27001",
+      "size_bytes": 55774
     },
     {
       "path": "references/ledgers/_蒸馏名单_v1草稿.md",
@@ -458,6 +458,11 @@
       "path": "references/pipeline/checkers/build_blind_payload.py",
       "sha256": "af9763cac90800a914e7ed08a61e187721a97a67c58cfd13d0860f08266b2ec7",
       "size_bytes": 10673
+    },
+    {
+      "path": "references/pipeline/checkers/build_source_ledger.py",
+      "sha256": "bc382b759c3d445825db3d85c821c6c1e47fd6a4952a4ee0c01f5572ae5e59ed",
+      "size_bytes": 10161
     },
     {
       "path": "references/pipeline/checkers/check_absence_claims.py",
@@ -923,6 +928,11 @@
       "path": "scripts/build_release_bundle.py",
       "sha256": "a3ff26e8f55e4f03e06cf534845515df947b3b5336d4f424917b376aa296e2c8",
       "size_bytes": 9522
+    },
+    {
+      "path": "scripts/build_source_ledger.py",
+      "sha256": "bc382b759c3d445825db3d85c821c6c1e47fd6a4952a4ee0c01f5572ae5e59ed",
+      "size_bytes": 10161
     },
     {
       "path": "scripts/bump_version.py",
