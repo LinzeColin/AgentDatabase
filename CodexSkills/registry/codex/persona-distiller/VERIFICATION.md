@@ -1,6 +1,6 @@
-# Release verification — Persona Distiller v0.0.0.106
+# Release verification — Persona Distiller v0.0.0.107
 
-Date: 2026-08-04（**v0.0.0.106**）
+Date: 2026-08-04（**v0.0.0.107**）
 
 > **本文件记录「当前发布号的复验结果」，不是历史归档。**
 > 版本号必须等于根目录 `VERSION`，由 `scripts/check_contract_drift.py` 强制。
@@ -21,6 +21,13 @@ Date: 2026-08-04（**v0.0.0.106**）
 > **表格正文不在任何判据的射程里**。
 > **「本表每一行都来自本次实跑」是一句自述**——
 > 而自述不是证据（见 `self-report-is-not-evidence`）。
+
+> ### v0.0.0.107 这一版重跑了什么
+>
+> **相对 106 只改了 `check_ocr_legibility.scan()` 的取文件方式**。
+> **本次重跑**：该件自测（**6 组对照，新增一条「两种命名混放不许静默漏读」**）、
+> 对 Liebig `raw/` 实跑（**目录 104 / 读到 104**，此前只读到 52）、pytest、`check_contract_drift`。
+> **其余各行沿用 v0.0.0.96 那一次。**
 
 > ### v0.0.0.106 这一版重跑了什么
 >

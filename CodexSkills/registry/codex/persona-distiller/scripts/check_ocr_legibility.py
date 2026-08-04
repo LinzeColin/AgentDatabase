@@ -79,10 +79,23 @@ def legibility(text: str) -> dict:
 
 
 def scan(raw_dir: pathlib.Path) -> dict:
-    out, checked = [], 0
+    """★★ v0.0.0.107：第一版只认 `<目录>/<目录名>.txt`，于是**静默跳过了一半输入**。
+
+    Liebig #124 的 `raw/` 里有两种命名同时存在：
+    `build_source_ledger` 写的 `<short>/<short>.txt`，与 `ingest` 写的
+    `src-XXXX/<原文件名>.txt`。第一版对 52 个 `src-*` 目录**一份都没读**，
+    却报「落盘份数 52」——**看起来扫全了，实际只扫了一半，且一声不响。**
+
+    改法两条：**目录里任取一个 `.txt`**（不强求同名），
+    并且**把跳过的目录数报出来**——静默才是那个缺陷，漏读只是它的后果。
+    """
+    out, checked, skipped = [], 0, []
     for d in sorted(p for p in raw_dir.iterdir() if p.is_dir()):
         f = d / f"{d.name}.txt"
         if not f.is_file():
+            f = next(iter(sorted(d.glob("*.txt"))), None)     # ★ 不强求同名
+        if f is None:
+            skipped.append(d.name)
             continue
         r = legibility(f.read_text(encoding="utf-8", errors="ignore"))
         r["short"] = d.name
@@ -90,9 +103,13 @@ def scan(raw_dir: pathlib.Path) -> dict:
             checked += 1
         out.append(r)
     bad = [r for r in out if r["verdict"] == "mojibake"]
-    return {"落盘份数": len(out), "**测到的德文份数**": checked,
+    info = {"目录数": len(out) + len(skipped), "**读到的份数**": len(out),
+            "**测到的德文份数**": checked,
             "**判为花体乱码**": len(bad), "乱码清单": bad,
             "★ 射程": "只认德文花体这一种坏法；英文长 s／拉丁文／中文的坏法本件看不见"}
+    if skipped:
+        info["★★ 跳过（目录里没有 .txt）"] = {"份数": len(skipped), "前十": skipped[:10]}
+    return info
 
 
 def self_test() -> int:
@@ -133,7 +150,21 @@ def self_test() -> int:
     chk(f"{r}", r["verdict"] != "mojibake")
     chk("★ 而且它被明确标成 too-little-german，不是悄悄算成 ok",
         r["verdict"] in ("too-little-german", "not-german"))
-    print("── ★ 反向对照⑤：空输入不崩 ──")
+    print("── ★★ 反向对照⑤：**两种命名混在一个 raw/ 里，不许静默漏读** ──")
+    import tempfile as _tf
+    with _tf.TemporaryDirectory() as _d:
+        _r = pathlib.Path(_d)
+        (_r / "aaa").mkdir(); (_r / "aaa" / "aaa.txt").write_text(good, encoding="utf-8")
+        (_r / "src-1").mkdir(); (_r / "src-1" / "buch.txt").write_text(moji, encoding="utf-8")
+        (_r / "leer").mkdir()                       # 没有 .txt 的目录
+        s = scan(_r)
+        chk(f"两种命名都读到：目录 {s['目录数']}、读到 {s['**读到的份数**']}",
+            s["目录数"] == 3 and s["**读到的份数**"] == 2)
+        chk(f"**src-* 里的乱码被抓到**（第一版会漏掉它）：{s['**判为花体乱码**']}",
+            s["**判为花体乱码**"] == 1)
+        chk(f"★ 跳过的目录**报出来**而不是静默：{s.get('★★ 跳过（目录里没有 .txt）')}",
+            s.get("★★ 跳过（目录里没有 .txt）", {}).get("份数") == 1)
+    print("── ★ 反向对照⑥：空输入不崩 ──")
     chk(f"{legibility('')}", legibility("")["verdict"] == "not-german")
     print("\n" + ("✓ 自测全过" if ok else "✗ 自测未过"))
     # ★ 退出码按仓内约定：**2 = 负对照未过**（调用方据此判「本件结论不作数」），
