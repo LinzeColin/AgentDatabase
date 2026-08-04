@@ -189,6 +189,41 @@ PATTERNS = [
  #   **删掉，不为凑第二处证据去挑一份实为同物的源。**
  #   那件事已写进 fact 断言 `private-circulation-1880`（单源，fact 不要求多源）。
 
+ ("generalization-needs-accumulation", "mental-model", [EV1, LOL],
+  "她要求普遍结论必须建立在**累积的准确事实**上，而且承认这需要世代之功："
+  "「Function and use are only proved by observation, reflection, and rational experiment "
+  "patiently carried on age after age, with generalization based upon accurate and accumulated facts」。"
+  "**功能与用途只能被证明，不能被推定**——这条同时用在生理学与教育上。",
+  ["1902 年文集论功能与用途如何被证明", "1852 年从生理讲女孩的成长"],
+  ["Essays in Medical Sociology 卷一", "The Laws of Life"]),
+ # ★ 原引 [EV1, CTP]，判据报出同组（Counsel to Parents 的内容也进了文集卷一）。
+ #   改引 CTP + WRM：亲职责任 vs 社会罪恶里的责任，**两部独立作品**。
+ ("responsibility-is-the-unit", "mental-model", [CTP, WRM],
+  "她分析社会问题时的基本单位是**责任落在谁身上**，不是行为本身。"
+  "论卖淫时她的定义就写在责任上——「with no responsibilities ; and no care for offspring」；"
+  "论亲职时同样——「The precious but perilous responsibilities of the parent to the child」。"
+  "**换议题不换单位。**",
+  ["1878 年论父母对子女的责任", "1883 年论社会罪恶中的责任归属"],
+  ["Counsel to Parents", "Wrong and Right Methods"]),
+ ("distrust-the-headline-rate", "heuristic", [EV2, BM],
+  "遇到一个通行的比率，她先问它的分母是什么。伦敦死亡率「通常说是每千人 23 或 24」，"
+  "她判为「really an unknown quantity」——因为人口大进大出，分母根本不稳。"
+  "同一个动作也用在马尔萨斯式的人口算计上。**先拆分母，再谈结论。**",
+  ["1902 年文集论英国死亡率的真实数字", "1888 年论马尔萨斯式的仁慈"],
+  ["Essays in Medical Sociology 卷二", "A Medical Address on the Benevolence of Malthus"]),
+ ("experience-licenses-speech", "heuristic", [CTP, PW],
+  "她开口讲一个题目之前，先说明自己凭什么讲——凭的是行医年数与亲历："
+  "「The experience gained during a generation of active medical work has brought another subject "
+  "before me」、「I know, however, from long medical experience, that such instruction is now needed」。"
+  "自传通篇也是这个结构：先记亲历，再下判断。**不凭立场发言，凭在场发言。**",
+  ["1878 年给父母的忠告的开场自陈", "1895 年自传的叙述结构"],
+  ["Counsel to Parents", "Pioneer Work"]),
+ ("no-exception-to-the-rule", "heuristic", [EV1, WRM],
+  "碰到「这一次可以通融」的主张，她的回法是指出规则不能自相矛盾——"
+  "「Divine law admits of no exception, it cannot contradict itself.」"
+  "《传染病法案》之争里她用的正是这一招：**不争这次的后果，争「开这个例子」本身能不能成立。**",
+  ["1902 年文集论例外", "1883 年论对待社会罪恶的对错方法"],
+  ["Essays in Medical Sociology 卷一", "Wrong and Right Methods"]),
  ("credential-then-argument", "heuristic", [PW, MEW],
   "她的路径是**先取得资格，再用资格说话**：1849 年拿到学位之后，才有 1860、1864 那些"
   "以「Drs. E. and E. Blackwell」署名的建制文本。自传通篇的结构也是如此——"
@@ -227,6 +262,16 @@ CONF = {
    ["若她曾支持以国家登记或强制检查来管理卖淫，本条作废。"]),
  "whole-not-parts": (0.75,
    ["若《Scientific Method in Biology》主张化约式说明优于整体说明，本条作废。"]),
+ "generalization-needs-accumulation": (0.80,
+   ["若她在别处以单例直接下普遍结论而不加限度声明，本条应下调为 hypothesis。"]),
+ "responsibility-is-the-unit": (0.75,
+   ["若她论社会问题时主要以行为本身（而非责任归属）为分析单位，本条作废。"]),
+ "distrust-the-headline-rate": (0.80,
+   ["若她引用通行比率时不追问其分母/口径，本条作废。"]),
+ "experience-licenses-speech": (0.75,
+   ["若她开题时以立场或权威而非亲历自陈资格，本条作废。"]),
+ "no-exception-to-the-rule": (0.75,
+   ["若她在某处接受了「此例特殊故可通融」的论证，本条作废。"]),
  "credential-then-argument": (0.70,
    ["若她在取得学位之前已发表同类建制主张，「先取资格再发言」这条作废。"]),
  "municipal-decay": (0.75,
