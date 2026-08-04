@@ -40,6 +40,21 @@ import shutil
 import sys
 
 TIERS = {"P1", "P2", "S1", "S2", "U"}
+# ★★ v0.0.0.94：权利依据必须**具名**，不许只写「公有领域」或留空。
+#   起因（2026-08-04 全量实测）：102 个交付包 7,629 条来源记录里，
+#   `rights` 明说公有领域的只有 585 条（7.7%）；医疗护理师 13 个工作区里
+#   **8 个一条依据都没记**。★ 但那多半是**记录缺口不是权利问题**
+#   （Jenner 18 世纪、Koch/Virchow 19 世纪印本，按 1929 年前出版显然成立）。
+#   这一条只管**记录口径**——权利口径本身是待裁定 ⑧，本件不替它下结论。
+RIGHTS_GROUNDS = {
+    "sec105":          "17 U.S.C. §105 联邦职务作品（须有在职证据）",
+    "notice1909":      "1909 年法：1978 年前出版且无版权标记（须报核验强度）",
+    "pre1929":         "1929 年前出版，版权已过期",
+    "congressional":   "国会记录/听证，GPO 印无标记",
+    "unpublished_303": "17 U.S.C. §303 未刊作品：卒年+70，下限 2003-01-01",
+    "publicly-accessible": "公开可读、无付费墙、未绕过访问控制——**这不是公有领域**",
+    "other":           "以上都不是，须在 rights_note 里写清",
+}
 LANES = {"writings", "conversations", "expression", "external", "decisions", "timeline"}
 ATTRIB = {"HIS-OWN", "CO-AUTHORED", "THIRD-PARTY", "ATTRIBUTION-UNCLEAR", "OTHER-INVENTOR"}
 EXTRA_MARKS = {"POSTHUMOUS", "TRANSLATION", "DUPLICATE-SCAN", "OCR-POOR", "FULL-PAGE-SCAN"}
@@ -68,13 +83,28 @@ def validate(rows: list) -> list:
             bad.append(f"{w}：认不得的标记 {sorted(marks - ATTRIB - EXTRA_MARKS)}")
         if not str(r.get("why") or "").strip():
             bad.append(f"{w}：**第 9 列的依据为空**——不写依据等于没有依据")
+        # ★ 权利依据必须具名。**「公有领域」是结论不是依据。**
+        g = r.get("rights_ground")
+        if not g:
+            bad.append(f"{w}：**没写权利依据 `rights_ground`**——"
+                       f"只许 {sorted(RIGHTS_GROUNDS)}；"
+                       f"「公有领域」是结论不是依据，写它不算")
+        elif g not in RIGHTS_GROUNDS:
+            bad.append(f"{w}：权利依据 `{g}` 不具名，只许 {sorted(RIGHTS_GROUNDS)}")
+        elif g == "other" and not str(r.get("rights_note") or "").strip():
+            bad.append(f"{w}：`rights_ground=other` 必须在 `rights_note` 里写清是什么")
     return bad
 
 
 def row_line(r: dict) -> str:
     """→ 一行 9 列台账。第 9 列以 `lane=` 开头，权利依据以 ` RIGHTS=` 附在末尾。"""
     note = f"lane={r['lane']}. {r['why']}"
-    if r.get("rights"):
+    g = r.get("rights_ground")
+    if g:
+        note += f" RIGHTS={g}"
+        if r.get("rights_note"):
+            note += f"（{r['rights_note']}）"
+    elif r.get("rights"):                      # 兼容旧调用方的自由文本
         note += f" RIGHTS={r['rights']}"
     return "\t".join([r["short"], r.get("url", ""), r.get("title", ""), str(r.get("year", "")),
                       r.get("locator", ""), r.get("lang", "en"), r["tier"], r["mark"], note])
@@ -110,7 +140,11 @@ def build(rows: list, src_dir: pathlib.Path, raw_dir: pathlib.Path, header: str)
         ln = c[8].split(".")[0].replace("lane=", "")
         lanes[ln] = lanes.get(ln, 0) + 1
     p1, p2 = tiers.get("P1", 0), tiers.get("P2", 0)
-    return {"落盘": copied, "跳过": skipped, "台账行数": len(body),
+    grounds = {}
+    for r in rows:
+        g = r.get("rights_ground") or "（未写）"
+        grounds[g] = grounds.get(g, 0) + 1
+    return {"落盘": copied, "跳过": skipped, "台账行数": len(body), "权利依据": grounds,
             "分档": tiers, "道": lanes,
             "一手（P1+P2）": p1 + p2, "其中 P2 重复见证": p2, "**去重后一手**": p1}
 
@@ -127,7 +161,7 @@ def selftest() -> int:
             fails.append(label)
 
     ok = {"short": "a", "file": "a.txt", "tier": "P1", "mark": "HIS-OWN",
-          "lane": "writings", "why": "扉页署名"}
+          "lane": "writings", "why": "扉页署名", "rights_ground": "pre1929"}
 
     print("── 正向：合法的一条不报 ──")
     chk("一条不报", not validate([ok]))
@@ -150,6 +184,19 @@ def selftest() -> int:
 
     print("── 反向对照 ⑤：短名重复 → 报出 ──")
     chk("两条同短名 → 报出", any("短名重复" in p for p in validate([ok, dict(ok, file="b.txt")])))
+
+    print("── ★★ 反向对照 ⑨：权利依据必须具名（v0.0.0.94）──")
+    chk("不写 rights_ground → 报出",
+        any("没写权利依据" in p for p in
+            validate([{k: v for k, v in ok.items() if k != "rights_ground"}])))
+    chk("**写「公有领域」不算依据** → 报出",
+        any("不具名" in p for p in validate([dict(ok, rights_ground="公有领域")])))
+    chk("rights_ground=other 但没写 rights_note → 报出",
+        any("写清是什么" in p for p in validate([dict(ok, rights_ground="other")])))
+    chk("other + note → 不报",
+        not validate([dict(ok, rights_ground="other", rights_note="馆方书面授权，件号 X")]))
+    chk("**publicly-accessible 是合法取值**（它不是 PD，但记录口径认它）",
+        not validate([dict(ok, rights_ground="publicly-accessible")]))
 
     print("── ★★ 反向对照 ⑥：校验不过时**一行都不写** ──")
     with tempfile.TemporaryDirectory() as d:

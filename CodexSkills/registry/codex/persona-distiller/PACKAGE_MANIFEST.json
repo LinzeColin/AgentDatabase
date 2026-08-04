@@ -381,8 +381,8 @@
     },
     {
       "path": "references/ledgers/_待用户裁定.md",
-      "sha256": "df0fbd3272a59b7e899be4a7387513883d0289c74f2f3099f80f0e8f361774a8",
-      "size_bytes": 18926
+      "sha256": "e661eecb30d819493fe516636da477a368ab0c490d07ce910002efb83e06b5a2",
+      "size_bytes": 24178
     },
     {
       "path": "references/ledgers/_每次开工必读.md",
@@ -466,8 +466,8 @@
     },
     {
       "path": "references/pipeline/checkers/build_source_ledger.py",
-      "sha256": "bc382b759c3d445825db3d85c821c6c1e47fd6a4952a4ee0c01f5572ae5e59ed",
-      "size_bytes": 10161
+      "sha256": "4a4966038239a46283140722109e00b5d47cb4e48ef242bd7532a5843d09b3f1",
+      "size_bytes": 13273
     },
     {
       "path": "references/pipeline/checkers/check_absence_claims.py",
@@ -801,8 +801,8 @@
     },
     {
       "path": "references/pipeline/next_person.py",
-      "sha256": "6063daf3b3396d1922eb0e8d16150e4b40ed909a33a528af71445e19853e8ac5",
-      "size_bytes": 17482
+      "sha256": "33ef7fbfffa81d9e0e7d71554d7f1eef6059c07015bde5cfa31eb6e7e7dac005",
+      "size_bytes": 18932
     },
     {
       "path": "references/pipeline/scaffold/README.md",
@@ -956,8 +956,8 @@
     },
     {
       "path": "scripts/build_source_ledger.py",
-      "sha256": "bc382b759c3d445825db3d85c821c6c1e47fd6a4952a4ee0c01f5572ae5e59ed",
-      "size_bytes": 10161
+      "sha256": "4a4966038239a46283140722109e00b5d47cb4e48ef242bd7532a5843d09b3f1",
+      "size_bytes": 13273
     },
     {
       "path": "scripts/bump_version.py",
