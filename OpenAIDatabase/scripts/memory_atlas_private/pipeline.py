@@ -12,7 +12,12 @@ from pathlib import Path
 from typing import Any, Iterable, Mapping
 
 from .analytics import build_behavior_analytics, build_habit_recommendations
-from .canonical_source import CanonicalResolution, GitHubCanonicalSource, resolve_canonical
+from .canonical_source import (
+    CanonicalResolution,
+    GitHubCanonicalSource,
+    resolve_canonical,
+    verify_backup_coverage,
+)
 from .config import RuntimeConfig
 from .failure_compound import FailureCompoundStore
 from .fact_backup import backup_private_facts
@@ -939,6 +944,20 @@ class RemoteReconcilePipeline(LiveSnapshotPublisherMixin):
                 superseded.append(key)
                 continue
             missing.append(key or "<missing-key>")
+        # The content-addressed source store moved to the encrypted per-run
+        # backup releases with the rest of the tree. Those objects are accounted
+        # for only when this run's own backup record passed, still exists, and
+        # the file count actually covers the manifest.
+        backup_coverage = verify_backup_coverage(
+            self.canonical_source,
+            manifest.get("github_private_release_backup"),
+            run_id=str(latest.get("run_id") or ""),
+            manifest_object_count=len([row for row in objects if isinstance(row, dict)]),
+            canonical_covered=len(superseded) + r2_verified,
+        )
+        migrated: list[str] = []
+        if missing and backup_coverage.covered:
+            migrated, missing = missing, []
         if missing:
             incident = self.failures.record_failure(
                 component="memory-atlas-remote-reconcile",
@@ -949,7 +968,11 @@ class RemoteReconcilePipeline(LiveSnapshotPublisherMixin):
                 occurred_at=self.clock(),
                 evidence_ref=f"private-db://{manifest_path}",
                 environment=socket.gethostname(),
-                details={"missing": missing[:100], "canonical": canonical.to_fact()},
+                details={
+                    "missing": missing[:100],
+                    "canonical": canonical.to_fact(),
+                    "github_backup_coverage": backup_coverage.to_fact(),
+                },
             )
             now = self.clock()
             failure_snapshot = self.failures.export_snapshot(now)
@@ -960,6 +983,7 @@ class RemoteReconcilePipeline(LiveSnapshotPublisherMixin):
                 "run_id": latest.get("run_id"),
                 "missing_or_corrupt_objects": missing,
                 "canonical_source": canonical.to_fact(),
+                "github_backup_coverage": backup_coverage.to_fact(),
                 "incident_id": incident.incident_id,
             }
         normalized_key = manifest.get("normalized_batch_key")
@@ -1042,6 +1066,13 @@ class RemoteReconcilePipeline(LiveSnapshotPublisherMixin):
                 "source_completed_at": latest.get("completed_at"),
                 "source_coverages": manifest.get("source_coverages", []),
                 "objects": objects,
+                "storage_migration": {
+                    "primary": "GITHUB_PRIVATE_REPOSITORY",
+                    "r2_verified_objects": r2_verified,
+                    "canonical_covered_objects": len(superseded),
+                    "migrated_to_github_objects": len(migrated),
+                    "github_backup_coverage": backup_coverage.to_fact(),
+                },
             },
             "behavior_economics": analytics,
             "failure_compound": failure_snapshot,
@@ -1115,7 +1146,9 @@ class RemoteReconcilePipeline(LiveSnapshotPublisherMixin):
             "run_id": latest.get("run_id"),
             "verified_objects": len(objects),
             "r2_verified_objects": r2_verified,
+            "migrated_to_github_objects": len(migrated),
             "canonical_source": {**canonical.to_fact(), "receipt": canonical_receipt},
+            "github_backup_coverage": backup_coverage.to_fact(),
             "events": event_count,
             "snapshot": str(self.config.web_data_dir / "memory_atlas_private_analytics.json"),
             "status_projection": str(status_path),

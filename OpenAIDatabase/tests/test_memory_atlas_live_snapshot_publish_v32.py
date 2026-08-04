@@ -483,3 +483,130 @@ def test_a_failed_canonical_readback_is_not_quietly_treated_as_absent() -> None:
     private["run"] = _run_block()
     with pytest.raises(LiveSnapshotError, match="no object authority readback passed"):
         build_live_snapshot(private, _visual(), evidence, _benchmark(), evaluated_at="2026-08-03T10:20:00Z")
+
+
+def test_the_store_gate_matches_the_adapter_gate() -> None:
+    """The adapter and the store both gate on authority evidence. When only the
+    adapter was made provider-neutral the reconcile passed and then refused to
+    publish with `authority evidence mismatch: r2_readback`, which is the exact
+    shape of a half-migration: green upstream, silently stale downstream."""
+    from OpenAIDatabase.scripts.memory_atlas_private.live_snapshot_store import (
+        LiveSnapshotStore,
+        SnapshotStoreError,
+    )
+
+    snapshot = _snapshot(
+        run=normalize_live_run_block(
+            {"run_id": "marun-20260803T101500Z-a1b2c3", "state": "REFRESHING_ATLAS", "source_coverages": []},
+            run_id="marun-20260803T101500Z-a1b2c3", trace_id="marun-20260803T101500Z-a1b2c3",
+            state="REBUILT_FROM_AUTHORITIES", started_at="2026-08-03T10:00:00Z",
+            completed_at="2026-08-03T10:15:00Z",
+        )
+    )
+    store = LiveSnapshotStore.__new__(LiveSnapshotStore)
+    store.schema = json.loads(SCHEMA.read_text(encoding="utf-8"))
+    import jsonschema
+
+    store.validator = jsonschema.Draft202012Validator(store.schema, format_checker=jsonschema.FormatChecker())
+
+    drained = json.loads(json.dumps(snapshot))
+    drained["truth"]["same_run_evidence"]["r2_readback"] = {
+        "state": "NOT_RUN", "run_id": None, "trace_id": None, "ref": None
+    }
+    store.validate(drained)  # canonical readback carries it
+
+    blind = json.loads(json.dumps(drained))
+    blind["truth"]["same_run_evidence"]["canonical_source_readback"] = {
+        "state": "NOT_RUN", "run_id": None, "trace_id": None, "ref": None
+    }
+    with pytest.raises(SnapshotStoreError, match="canonical_source_readback/r2_readback"):
+        store.validate(blind)
+
+    borrowed = json.loads(json.dumps(drained))
+    borrowed["truth"]["same_run_evidence"]["canonical_source_readback"]["run_id"] = "marun-someone-else"
+    with pytest.raises(SnapshotStoreError, match="canonical_source_readback/r2_readback"):
+        store.validate(borrowed)
+
+
+def _store(tmp_path):
+    from OpenAIDatabase.scripts.memory_atlas_private.live_snapshot_store import LiveSnapshotStore
+
+    return LiveSnapshotStore(tmp_path, SCHEMA)
+
+
+def test_re_reconciling_an_unchanged_run_keeps_the_page_current(tmp_path) -> None:
+    """The defect this pins: history was compared byte-for-byte, so the second
+    reconcile of the same source run raised `immutable history conflict` and
+    `current.json` stopped moving. The reconcile still reported PASS, so the
+    page served a snapshot that aged all day — 27,753 seconds by the time the
+    golden transaction read it — with nothing anywhere reporting a failure."""
+    store = _store(tmp_path)
+    first = _snapshot()
+    store.publish(first)
+    later = json.loads(json.dumps(first))
+    later["freshness"]["age_seconds"] = first["freshness"]["age_seconds"] + 3600
+    later["run"]["reconciled_at"] = "2026-08-03T11:20:00Z"
+    store.publish(later)
+    current = json.loads((tmp_path / "current.json").read_text(encoding="utf-8"))
+    assert current["freshness"]["age_seconds"] == later["freshness"]["age_seconds"]
+    # History still holds what the run first said, untouched.
+    history = json.loads((tmp_path / "history" / f"{first['run']['run_id']}.json").read_text(encoding="utf-8"))
+    assert history["freshness"]["age_seconds"] == first["freshness"]["age_seconds"]
+
+
+def test_the_same_run_may_not_change_what_it_concluded(tmp_path) -> None:
+    # The property the byte comparison was protecting, kept exactly.
+    store = _store(tmp_path)
+    store.publish(_snapshot())
+    rewritten = json.loads(json.dumps(_snapshot()))
+    rewritten["analysis"]["event_count"] = rewritten["analysis"]["event_count"] + 1
+    with pytest.raises(Exception, match="immutable history conflict"):
+        store.publish(rewritten)
+
+
+def test_a_changed_visual_is_also_a_conflict(tmp_path) -> None:
+    store = _store(tmp_path)
+    store.publish(_snapshot())
+    rewritten = json.loads(json.dumps(_snapshot()))
+    rewritten["visuals"][0]["rows"] = []
+    with pytest.raises(Exception, match="immutable history conflict"):
+        store.publish(rewritten)
+
+
+def test_storage_provider_changing_is_not_a_conclusion_change(tmp_path) -> None:
+    """Reading the same events from GitHub instead of R2 does not change what
+    the run concluded, so it must not look like history being rewritten."""
+    store = _store(tmp_path)
+    store.publish(_snapshot())
+    migrated = json.loads(json.dumps(_snapshot()))
+    migrated["truth"]["same_run_evidence"]["r2_readback"] = {
+        "state": "NOT_RUN", "run_id": None, "trace_id": None, "ref": None
+    }
+    store.publish(migrated)
+    current = json.loads((tmp_path / "current.json").read_text(encoding="utf-8"))
+    assert current["truth"]["same_run_evidence"]["r2_readback"]["state"] == "NOT_RUN"
+
+
+def test_a_growing_incident_ledger_is_not_a_rewritten_history(tmp_path) -> None:
+    """`analysis.failure_compound` is the live incident ledger. Recording an
+    incident — which is what a healthy system does when something breaks — made
+    the next reconcile of the same run raise `immutable history conflict`, so
+    the page stopped updating precisely when there was something to report."""
+    store = _store(tmp_path)
+    first = _snapshot()
+    store.publish(first)
+    later = json.loads(json.dumps(first))
+    ledger = later["analysis"]["failure_compound"]
+    ledger["incident_count"] = int(ledger.get("incident_count") or 0) + 1
+    later["freshness"]["age_seconds"] = first["freshness"]["age_seconds"] + 900
+    assert store.publish(later)["state"] == "REFRESHED"
+
+
+def test_a_conflict_names_the_part_that_differs(tmp_path) -> None:
+    # "immutable history conflict" with no subject cost a diagnosis cycle.
+    store = _store(tmp_path)
+    store.publish(_snapshot())
+    rewritten = json.loads(json.dumps(_snapshot()))
+    rewritten["analysis"]["event_count"] = 999
+    with pytest.raises(Exception, match=r"immutable history conflict: analysis\.event_count"):
+        store.publish(rewritten)

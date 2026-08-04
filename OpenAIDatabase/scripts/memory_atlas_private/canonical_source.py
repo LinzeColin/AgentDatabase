@@ -92,6 +92,25 @@ class GitHubCanonicalSource:
         newest = max(candidates, key=lambda row: str(row.get("publishedAt", "")))
         return {"tag": str(newest["tagName"]), "published_at": str(newest.get("publishedAt", ""))}
 
+    def release_assets(self, tag: str) -> list[dict[str, Any]] | None:
+        """Assets on a release right now — None when the release is gone.
+
+        A record saying a backup was made is not evidence the backup still
+        exists. This is what turns the first into the second.
+        """
+        try:
+            raw = self._gh(
+                ["release", "view", tag, "--repo", self.repo, "--json", "assets,tagName"], timeout=120
+            )
+        except CanonicalSourceError:
+            return None
+        try:
+            value = json.loads(raw)
+        except json.JSONDecodeError:
+            return None
+        assets = value.get("assets")
+        return [row for row in assets if isinstance(row, Mapping)] if isinstance(assets, list) else []
+
     def _download(self, tag: str, asset: str, destination: Path, *, timeout: int | None = None) -> None:
         destination.parent.mkdir(parents=True, exist_ok=True)
         self._gh(
@@ -245,6 +264,112 @@ class CanonicalResolution:
             "superseded_count": len(self.superseded),
             "reason": self.reason,
         }
+
+
+@dataclass
+class BackupCoverage:
+    """Are this run's source bytes still archived in the private repository?
+
+    R2 held a content-addressed store of every source file. The migration moved
+    it to the encrypted per-run backup releases, which are 698 MB of ciphertext
+    in eight shards — decrypting them every fifteen minutes to re-prove the
+    bytes is not a real option. What is available, and what this checks, is the
+    evidence written when the backup was made: the capture host restored the
+    archive in isolation and every hash matched. That is a strictly weaker claim
+    than a live byte read, so it is reported under its own state and never
+    counted as a verified read-back.
+    """
+
+    state: str  # COVERED | INSUFFICIENT | ABSENT
+    covered_object_count: int = 0
+    manifest_object_count: int = 0
+    restored_files: int = 0
+    release_tag: str | None = None
+    asset_count: int = 0
+    expected_parts: int = 0
+    reason: str | None = None
+
+    @property
+    def covered(self) -> bool:
+        return self.state == "COVERED"
+
+    def to_fact(self) -> dict[str, Any]:
+        return {
+            "state": self.state,
+            "covered_object_count": self.covered_object_count,
+            "manifest_object_count": self.manifest_object_count,
+            "restored_files": self.restored_files,
+            "release_tag": self.release_tag,
+            "asset_count": self.asset_count,
+            "expected_parts": self.expected_parts,
+            "verification_class": "ARCHIVE_RESTORE_PROOF_AT_BACKUP_TIME_NOT_LIVE_BYTE_READ",
+            "reason": self.reason,
+        }
+
+
+def verify_backup_coverage(
+    github: GitHubCanonicalSource | None,
+    backup_record: Mapping[str, Any] | None,
+    *,
+    run_id: str,
+    manifest_object_count: int,
+    canonical_covered: int,
+) -> BackupCoverage:
+    """Coverage only when the record is this run's, passed, and still exists.
+
+    The count has to add up. "A backup exists" must never excuse an arbitrary
+    number of objects that vanished — that is the failure this whole path is
+    supposed to be able to detect.
+    """
+    if not isinstance(backup_record, Mapping):
+        return BackupCoverage(state="ABSENT", manifest_object_count=manifest_object_count,
+                              reason="no_backup_record_in_manifest")
+    if str(backup_record.get("backup_id") or "") != run_id:
+        return BackupCoverage(state="ABSENT", manifest_object_count=manifest_object_count,
+                              reason="backup_record_belongs_to_another_run")
+    if str(backup_record.get("state") or "") != "PASS":
+        return BackupCoverage(state="ABSENT", manifest_object_count=manifest_object_count,
+                              reason=f"backup_state_{backup_record.get('state')}")
+    restore = backup_record.get("isolated_restore")
+    restore = restore if isinstance(restore, Mapping) else {}
+    if str(restore.get("state") or "") != "PASS" or restore.get("all_hashes_match") is not True:
+        return BackupCoverage(state="ABSENT", manifest_object_count=manifest_object_count,
+                              reason="isolated_restore_did_not_prove_the_hashes")
+    if backup_record.get("remote_readback_verified") is not True:
+        return BackupCoverage(state="ABSENT", manifest_object_count=manifest_object_count,
+                              reason="remote_readback_not_verified")
+
+    restored_files = int(restore.get("restored_files") or 0)
+    expected_parts = int(backup_record.get("ciphertext_part_count") or 0)
+    tag = str(backup_record.get("release_tag") or "")
+    coverage = BackupCoverage(
+        state="INSUFFICIENT", manifest_object_count=manifest_object_count,
+        restored_files=restored_files, release_tag=tag or None, expected_parts=expected_parts,
+    )
+    # The archive holds source files; the normalized event object is covered by
+    # the canonical union instead. Together they must account for the manifest.
+    coverage.covered_object_count = restored_files + canonical_covered
+    if coverage.covered_object_count < manifest_object_count:
+        coverage.reason = "archive_does_not_account_for_every_manifest_object"
+        return coverage
+    if not tag:
+        coverage.reason = "backup_record_names_no_release"
+        return coverage
+    if github is None:
+        coverage.reason = "no_github_client_to_confirm_the_release"
+        return coverage
+
+    assets = github.release_assets(tag)
+    if assets is None:
+        coverage.state = "ABSENT"
+        coverage.reason = "backup_release_no_longer_exists"
+        return coverage
+    coverage.asset_count = len(assets)
+    if expected_parts and coverage.asset_count < expected_parts:
+        coverage.reason = "backup_release_is_missing_shards"
+        return coverage
+    coverage.state = "COVERED"
+    return coverage
 
 
 def resolve_canonical(

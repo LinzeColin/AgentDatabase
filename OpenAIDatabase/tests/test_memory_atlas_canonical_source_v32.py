@@ -302,3 +302,126 @@ def test_gh_is_located_without_inheriting_a_shell_path(tmp_path: Path, monkeypat
     monkeypatch.setenv("MEMORY_ATLAS_GH_PATH", str(script))
     assert canonical_source._resolve_gh() == str(script)
     assert os.access(canonical_source._resolve_gh(), os.X_OK)
+
+
+# --- The content-addressed source store, after the migration -----------------
+#
+# R2 held 2,363 objects of source bytes under sha256/. They moved to the
+# encrypted per-run backup releases. The reconcile still verifies the manifest,
+# so it has to be able to say which of "still in R2", "inside the canonical
+# union" and "inside this run's archive" accounts for each object — and to fail
+# when none of them does.
+
+from OpenAIDatabase.scripts.memory_atlas_private.canonical_source import (  # noqa: E402
+    BackupCoverage,
+    verify_backup_coverage,
+)
+
+RUN = "marun_5bd5fa6104b034eaf65bdee3"
+
+
+def _backup(**overrides) -> dict:
+    value = {
+        "schema_version": "memory_atlas.encrypted_archive_manifest.v1",
+        "backup_id": RUN,
+        "state": "PASS",
+        "release_tag": "memory-atlas-auto-backup-20260803170227-34eaf65bdee3",
+        "ciphertext_part_count": 8,
+        "remote_readback_verified": True,
+        "isolated_restore": {"state": "PASS", "all_hashes_match": True, "restored_files": 2301},
+    }
+    value.update(overrides)
+    return value
+
+
+class _Releases:
+    """A gh client that answers only about backup releases."""
+
+    def __init__(self, assets: int | None = 8):
+        self.assets = assets
+        self.asked: list[str] = []
+
+    def release_assets(self, tag: str):
+        self.asked.append(tag)
+        return None if self.assets is None else [{"name": f"part{i}.age"} for i in range(self.assets)]
+
+
+def test_a_passing_backup_that_still_exists_covers_the_source_store() -> None:
+    github = _Releases()
+    coverage = verify_backup_coverage(
+        github, _backup(), run_id=RUN, manifest_object_count=2302, canonical_covered=1
+    )
+    assert coverage.state == "COVERED" and coverage.covered
+    assert coverage.covered_object_count == 2302 and coverage.restored_files == 2301
+    assert github.asked == ["memory-atlas-auto-backup-20260803170227-34eaf65bdee3"]
+    # It is an archive-restore proof, not a live byte read, and says so.
+    assert coverage.to_fact()["verification_class"].startswith("ARCHIVE_RESTORE_PROOF")
+
+
+def test_a_backup_whose_release_was_deleted_is_absent_not_covered() -> None:
+    """A record saying a backup was made is not evidence it still exists."""
+    coverage = verify_backup_coverage(
+        _Releases(assets=None), _backup(), run_id=RUN, manifest_object_count=2302, canonical_covered=1
+    )
+    assert coverage.state == "ABSENT" and coverage.reason == "backup_release_no_longer_exists"
+
+
+def test_a_release_missing_shards_does_not_cover() -> None:
+    coverage = verify_backup_coverage(
+        _Releases(assets=5), _backup(), run_id=RUN, manifest_object_count=2302, canonical_covered=1
+    )
+    assert not coverage.covered and coverage.reason == "backup_release_is_missing_shards"
+
+
+def test_coverage_requires_the_count_to_add_up() -> None:
+    """The failure this rule exists to catch: "a backup exists" excusing an
+    arbitrary number of objects that vanished."""
+    coverage = verify_backup_coverage(
+        _Releases(), _backup(), run_id=RUN, manifest_object_count=9000, canonical_covered=1
+    )
+    assert not coverage.covered
+    assert coverage.reason == "archive_does_not_account_for_every_manifest_object"
+    assert coverage.covered_object_count == 2302 and coverage.manifest_object_count == 9000
+
+
+@pytest.mark.parametrize(
+    "broken,reason",
+    [
+        ({"backup_id": "marun_someone_else"}, "backup_record_belongs_to_another_run"),
+        ({"state": "FAILED"}, "backup_state_FAILED"),
+        ({"remote_readback_verified": False}, "remote_readback_not_verified"),
+        ({"isolated_restore": {"state": "PASS", "all_hashes_match": False, "restored_files": 2301}},
+         "isolated_restore_did_not_prove_the_hashes"),
+        ({"isolated_restore": {"state": "FAILED", "all_hashes_match": True, "restored_files": 2301}},
+         "isolated_restore_did_not_prove_the_hashes"),
+    ],
+)
+def test_a_backup_that_did_not_prove_itself_never_covers(broken: dict, reason: str) -> None:
+    coverage = verify_backup_coverage(
+        _Releases(), _backup(**broken), run_id=RUN, manifest_object_count=2302, canonical_covered=1
+    )
+    assert coverage.state == "ABSENT" and coverage.reason == reason
+
+
+def test_no_backup_record_at_all_is_absent() -> None:
+    for value in (None, "not-a-mapping", []):
+        coverage = verify_backup_coverage(
+            _Releases(), value, run_id=RUN, manifest_object_count=2302, canonical_covered=1
+        )
+        assert coverage.state == "ABSENT"
+
+
+def test_an_uncovered_object_still_fails_the_reconcile() -> None:
+    source = (REPO / "OpenAIDatabase" / "scripts" / "memory_atlas_private" / "pipeline.py").read_text(encoding="utf-8")
+    # Migration may only absorb the missing list when coverage was proven.
+    assert "if missing and backup_coverage.covered:" in source
+    assert "migrated, missing = missing, []" in source
+    assert 'error_code="OBJECT_READBACK_MISMATCH"' in source
+    # And the published run fact has to name where the bytes went.
+    assert '"storage_migration"' in source
+    assert '"primary": "GITHUB_PRIVATE_REPOSITORY"' in source
+
+
+def test_backup_coverage_defaults_to_not_covering() -> None:
+    assert not BackupCoverage(state="INSUFFICIENT").covered
+    assert not BackupCoverage(state="ABSENT").covered
