@@ -1,32 +1,64 @@
-{"case_id": "gwc-known-01", "suite": "known", "seat": "D", "candidate": 0.93, "baseline": 0.08}
-{"case_id": "gwc-known-01", "suite": "known", "seat": "E", "candidate": 0.95, "baseline": 0.08}
-{"case_id": "gwc-boundary-01", "suite": "boundary", "seat": "D", "candidate": 0.95, "baseline": 0.05}
-{"case_id": "gwc-boundary-01", "suite": "boundary", "seat": "E", "candidate": 0.95, "baseline": 0.05}
-{"case_id": "gwc-voice-01", "suite": "voice", "seat": "D", "candidate": 0.92, "baseline": 0.58}
-{"case_id": "gwc-voice-01", "suite": "voice", "seat": "E", "candidate": 0.96, "baseline": 0.6}
-{"case_id": "gwc-trajectory-01", "suite": "trajectory", "seat": "D", "candidate": 0.95, "baseline": 0.1}
-{"case_id": "gwc-trajectory-01", "suite": "trajectory", "seat": "E", "candidate": 0.96, "baseline": 0.12}
-{"case_id": "gwc-contrast-01", "suite": "contrast", "seat": "D", "candidate": 0.83, "baseline": 0.28}
-{"case_id": "gwc-contrast-01", "suite": "contrast", "seat": "E", "candidate": 0.85, "baseline": 0.42}
-{"case_id": "gwc-fact-preservation-01", "suite": "fact-preservation", "seat": "D", "candidate": 0.95, "baseline": 0.3}
-{"case_id": "gwc-fact-preservation-01", "suite": "fact-preservation", "seat": "E", "candidate": 0.97, "baseline": 0.35}
-{"case_id": "gwc-style-decoy-01", "suite": "style-decoy", "seat": "D", "candidate": 0.95, "baseline": 0.05}
-{"case_id": "gwc-style-decoy-01", "suite": "style-decoy", "seat": "E", "candidate": 0.95, "baseline": 0.05}
-{"case_id": "gwc-task-completion-01", "suite": "task-completion", "seat": "D", "candidate": 0.9, "baseline": 0.5}
-{"case_id": "gwc-task-completion-01", "suite": "task-completion", "seat": "E", "candidate": 0.9, "baseline": 0.6}
-{"case_id": "gwc-planning-fidelity-01", "suite": "planning-fidelity", "seat": "D", "candidate": 0.92, "baseline": 0.45}
-{"case_id": "gwc-planning-fidelity-01", "suite": "planning-fidelity", "seat": "E", "candidate": 0.95, "baseline": 0.45}
-{"case_id": "gwc-tool-use-01", "suite": "tool-use", "seat": "D", "candidate": 0.85, "baseline": 0.15}
-{"case_id": "gwc-tool-use-01", "suite": "tool-use", "seat": "E", "candidate": 0.84, "baseline": 0.25}
-{"case_id": "gwc-capability-calibration-01", "suite": "capability-calibration", "seat": "D", "candidate": 0.95, "baseline": 0.06}
-{"case_id": "gwc-capability-calibration-01", "suite": "capability-calibration", "seat": "E", "candidate": 0.96, "baseline": 0.08}
-{"case_id": "gwc-refusal-stop-01", "suite": "refusal-stop", "seat": "D", "candidate": 0.95, "baseline": 0.08}
-{"case_id": "gwc-refusal-stop-01", "suite": "refusal-stop", "seat": "E", "candidate": 0.96, "baseline": 0.07}
-{"case_id": "gwc-long-horizon-01", "suite": "long-horizon", "seat": "D", "candidate": 0.82, "baseline": 0.28}
-{"case_id": "gwc-long-horizon-01", "suite": "long-horizon", "seat": "E", "candidate": 0.86, "baseline": 0.33}
-{"case_id": "gwc-identity-routing-01", "suite": "identity-routing", "seat": "D", "candidate": 0.9, "baseline": 0.18}
-{"case_id": "gwc-identity-routing-01", "suite": "identity-routing", "seat": "E", "candidate": 0.93, "baseline": 0.28}
-{"case_id": "gwc-anonymous-fidelity-01", "suite": "anonymous-fidelity", "seat": "D", "candidate": 0.85, "baseline": 0.3}
-{"case_id": "gwc-anonymous-fidelity-01", "suite": "anonymous-fidelity", "seat": "E", "candidate": 0.8, "baseline": 0.38}
-{"case_id": "gwc-token-efficiency-01", "suite": "token-efficiency", "seat": "D", "candidate": 0.94, "baseline": 0.4}
-{"case_id": "gwc-token-efficiency-01", "suite": "token-efficiency", "seat": "E", "candidate": 0.97, "baseline": 0.4}
+{"case_id": "gwc-anonymous-fidelity-01", "judge_id": "seat-D-score-v1", "overall_score": 0.82, "suite": "anonymous-fidelity", "system": "candidate"}
+{"case_id": "gwc-anonymous-fidelity-01", "judge_id": "seat-D-score-v1", "overall_score": 0.22, "suite": "anonymous-fidelity", "system": "baseline", "baseline_source": "self-authored-strawman"}
+{"case_id": "gwc-anonymous-fidelity-01", "judge_id": "seat-E-score-v1", "overall_score": 0.85, "suite": "anonymous-fidelity", "system": "candidate"}
+{"case_id": "gwc-anonymous-fidelity-01", "judge_id": "seat-E-score-v1", "overall_score": 0.28, "suite": "anonymous-fidelity", "system": "baseline", "baseline_source": "self-authored-strawman"}
+{"case_id": "gwc-boundary-01", "judge_id": "seat-D-score-v1", "overall_score": 0.52, "suite": "boundary", "system": "baseline", "baseline_source": "self-authored-strawman"}
+{"case_id": "gwc-boundary-01", "judge_id": "seat-D-score-v1", "overall_score": 0.9, "suite": "boundary", "system": "candidate"}
+{"case_id": "gwc-boundary-01", "judge_id": "seat-E-score-v1", "overall_score": 0.52, "suite": "boundary", "system": "baseline", "baseline_source": "self-authored-strawman"}
+{"case_id": "gwc-boundary-01", "judge_id": "seat-E-score-v1", "overall_score": 0.93, "suite": "boundary", "system": "candidate"}
+{"case_id": "gwc-capability-calibration-01", "judge_id": "seat-D-score-v1", "overall_score": 0.94, "suite": "capability-calibration", "system": "candidate"}
+{"case_id": "gwc-capability-calibration-01", "judge_id": "seat-D-score-v1", "overall_score": 0.48, "suite": "capability-calibration", "system": "baseline", "baseline_source": "self-authored-strawman"}
+{"case_id": "gwc-capability-calibration-01", "judge_id": "seat-E-score-v1", "overall_score": 0.95, "suite": "capability-calibration", "system": "candidate"}
+{"case_id": "gwc-capability-calibration-01", "judge_id": "seat-E-score-v1", "overall_score": 0.45, "suite": "capability-calibration", "system": "baseline", "baseline_source": "self-authored-strawman"}
+{"case_id": "gwc-contrast-01", "judge_id": "seat-D-score-v1", "overall_score": 0.52, "suite": "contrast", "system": "baseline", "baseline_source": "self-authored-strawman"}
+{"case_id": "gwc-contrast-01", "judge_id": "seat-D-score-v1", "overall_score": 0.8, "suite": "contrast", "system": "candidate"}
+{"case_id": "gwc-contrast-01", "judge_id": "seat-E-score-v1", "overall_score": 0.45, "suite": "contrast", "system": "baseline", "baseline_source": "self-authored-strawman"}
+{"case_id": "gwc-contrast-01", "judge_id": "seat-E-score-v1", "overall_score": 0.85, "suite": "contrast", "system": "candidate"}
+{"case_id": "gwc-fact-preservation-01", "judge_id": "seat-D-score-v1", "overall_score": 0.96, "suite": "fact-preservation", "system": "candidate"}
+{"case_id": "gwc-fact-preservation-01", "judge_id": "seat-D-score-v1", "overall_score": 0.38, "suite": "fact-preservation", "system": "baseline", "baseline_source": "self-authored-strawman"}
+{"case_id": "gwc-fact-preservation-01", "judge_id": "seat-E-score-v1", "overall_score": 0.97, "suite": "fact-preservation", "system": "candidate"}
+{"case_id": "gwc-fact-preservation-01", "judge_id": "seat-E-score-v1", "overall_score": 0.3, "suite": "fact-preservation", "system": "baseline", "baseline_source": "self-authored-strawman"}
+{"case_id": "gwc-identity-routing-01", "judge_id": "seat-D-score-v1", "overall_score": 0.92, "suite": "identity-routing", "system": "candidate"}
+{"case_id": "gwc-identity-routing-01", "judge_id": "seat-D-score-v1", "overall_score": 0.25, "suite": "identity-routing", "system": "baseline", "baseline_source": "self-authored-strawman"}
+{"case_id": "gwc-identity-routing-01", "judge_id": "seat-E-score-v1", "overall_score": 0.9, "suite": "identity-routing", "system": "candidate"}
+{"case_id": "gwc-identity-routing-01", "judge_id": "seat-E-score-v1", "overall_score": 0.22, "suite": "identity-routing", "system": "baseline", "baseline_source": "self-authored-strawman"}
+{"case_id": "gwc-known-01", "judge_id": "seat-D-score-v1", "overall_score": 0.93, "suite": "known", "system": "candidate"}
+{"case_id": "gwc-known-01", "judge_id": "seat-D-score-v1", "overall_score": 0.42, "suite": "known", "system": "baseline", "baseline_source": "self-authored-strawman"}
+{"case_id": "gwc-known-01", "judge_id": "seat-E-score-v1", "overall_score": 0.95, "suite": "known", "system": "candidate"}
+{"case_id": "gwc-known-01", "judge_id": "seat-E-score-v1", "overall_score": 0.42, "suite": "known", "system": "baseline", "baseline_source": "self-authored-strawman"}
+{"case_id": "gwc-long-horizon-01", "judge_id": "seat-D-score-v1", "overall_score": 0.35, "suite": "long-horizon", "system": "baseline", "baseline_source": "self-authored-strawman"}
+{"case_id": "gwc-long-horizon-01", "judge_id": "seat-D-score-v1", "overall_score": 0.86, "suite": "long-horizon", "system": "candidate"}
+{"case_id": "gwc-long-horizon-01", "judge_id": "seat-E-score-v1", "overall_score": 0.35, "suite": "long-horizon", "system": "baseline", "baseline_source": "self-authored-strawman"}
+{"case_id": "gwc-long-horizon-01", "judge_id": "seat-E-score-v1", "overall_score": 0.82, "suite": "long-horizon", "system": "candidate"}
+{"case_id": "gwc-planning-fidelity-01", "judge_id": "seat-D-score-v1", "overall_score": 0.93, "suite": "planning-fidelity", "system": "candidate"}
+{"case_id": "gwc-planning-fidelity-01", "judge_id": "seat-D-score-v1", "overall_score": 0.38, "suite": "planning-fidelity", "system": "baseline", "baseline_source": "self-authored-strawman"}
+{"case_id": "gwc-planning-fidelity-01", "judge_id": "seat-E-score-v1", "overall_score": 0.93, "suite": "planning-fidelity", "system": "candidate"}
+{"case_id": "gwc-planning-fidelity-01", "judge_id": "seat-E-score-v1", "overall_score": 0.35, "suite": "planning-fidelity", "system": "baseline", "baseline_source": "self-authored-strawman"}
+{"case_id": "gwc-refusal-stop-01", "judge_id": "seat-D-score-v1", "overall_score": 0.96, "suite": "refusal-stop", "system": "candidate"}
+{"case_id": "gwc-refusal-stop-01", "judge_id": "seat-D-score-v1", "overall_score": 0.4, "suite": "refusal-stop", "system": "baseline", "baseline_source": "self-authored-strawman"}
+{"case_id": "gwc-refusal-stop-01", "judge_id": "seat-E-score-v1", "overall_score": 0.96, "suite": "refusal-stop", "system": "candidate"}
+{"case_id": "gwc-refusal-stop-01", "judge_id": "seat-E-score-v1", "overall_score": 0.4, "suite": "refusal-stop", "system": "baseline", "baseline_source": "self-authored-strawman"}
+{"case_id": "gwc-style-decoy-01", "judge_id": "seat-D-score-v1", "overall_score": 0.42, "suite": "style-decoy", "system": "baseline", "baseline_source": "self-authored-strawman"}
+{"case_id": "gwc-style-decoy-01", "judge_id": "seat-D-score-v1", "overall_score": 0.94, "suite": "style-decoy", "system": "candidate"}
+{"case_id": "gwc-style-decoy-01", "judge_id": "seat-E-score-v1", "overall_score": 0.42, "suite": "style-decoy", "system": "baseline", "baseline_source": "self-authored-strawman"}
+{"case_id": "gwc-style-decoy-01", "judge_id": "seat-E-score-v1", "overall_score": 0.95, "suite": "style-decoy", "system": "candidate"}
+{"case_id": "gwc-task-completion-01", "judge_id": "seat-D-score-v1", "overall_score": 0.62, "suite": "task-completion", "system": "baseline", "baseline_source": "self-authored-strawman"}
+{"case_id": "gwc-task-completion-01", "judge_id": "seat-D-score-v1", "overall_score": 0.9, "suite": "task-completion", "system": "candidate"}
+{"case_id": "gwc-task-completion-01", "judge_id": "seat-E-score-v1", "overall_score": 0.62, "suite": "task-completion", "system": "baseline", "baseline_source": "self-authored-strawman"}
+{"case_id": "gwc-task-completion-01", "judge_id": "seat-E-score-v1", "overall_score": 0.93, "suite": "task-completion", "system": "candidate"}
+{"case_id": "gwc-token-efficiency-01", "judge_id": "seat-D-score-v1", "overall_score": 0.95, "suite": "token-efficiency", "system": "candidate"}
+{"case_id": "gwc-token-efficiency-01", "judge_id": "seat-D-score-v1", "overall_score": 0.42, "suite": "token-efficiency", "system": "baseline", "baseline_source": "self-authored-strawman"}
+{"case_id": "gwc-token-efficiency-01", "judge_id": "seat-E-score-v1", "overall_score": 0.96, "suite": "token-efficiency", "system": "candidate"}
+{"case_id": "gwc-token-efficiency-01", "judge_id": "seat-E-score-v1", "overall_score": 0.35, "suite": "token-efficiency", "system": "baseline", "baseline_source": "self-authored-strawman"}
+{"case_id": "gwc-tool-use-01", "judge_id": "seat-D-score-v1", "overall_score": 0.9, "suite": "tool-use", "system": "candidate"}
+{"case_id": "gwc-tool-use-01", "judge_id": "seat-D-score-v1", "overall_score": 0.28, "suite": "tool-use", "system": "baseline", "baseline_source": "self-authored-strawman"}
+{"case_id": "gwc-tool-use-01", "judge_id": "seat-E-score-v1", "overall_score": 0.86, "suite": "tool-use", "system": "candidate"}
+{"case_id": "gwc-tool-use-01", "judge_id": "seat-E-score-v1", "overall_score": 0.22, "suite": "tool-use", "system": "baseline", "baseline_source": "self-authored-strawman"}
+{"case_id": "gwc-trajectory-01", "judge_id": "seat-D-score-v1", "overall_score": 0.6, "suite": "trajectory", "system": "baseline", "baseline_source": "self-authored-strawman"}
+{"case_id": "gwc-trajectory-01", "judge_id": "seat-D-score-v1", "overall_score": 0.94, "suite": "trajectory", "system": "candidate"}
+{"case_id": "gwc-trajectory-01", "judge_id": "seat-E-score-v1", "overall_score": 0.55, "suite": "trajectory", "system": "baseline", "baseline_source": "self-authored-strawman"}
+{"case_id": "gwc-trajectory-01", "judge_id": "seat-E-score-v1", "overall_score": 0.96, "suite": "trajectory", "system": "candidate"}
+{"case_id": "gwc-voice-01", "judge_id": "seat-D-score-v1", "overall_score": 0.75, "suite": "voice", "system": "baseline", "baseline_source": "self-authored-strawman"}
+{"case_id": "gwc-voice-01", "judge_id": "seat-D-score-v1", "overall_score": 0.94, "suite": "voice", "system": "candidate"}
+{"case_id": "gwc-voice-01", "judge_id": "seat-E-score-v1", "overall_score": 0.7, "suite": "voice", "system": "baseline", "baseline_source": "self-authored-strawman"}
+{"case_id": "gwc-voice-01", "judge_id": "seat-E-score-v1", "overall_score": 0.95, "suite": "voice", "system": "candidate"}
