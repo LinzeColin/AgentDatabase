@@ -376,8 +376,8 @@
     },
     {
       "path": "references/ledgers/_待用户裁定.md",
-      "sha256": "5ddbf7b15ef4ac12f6bb45533faf3a8f14008b24180bd2fe68f20300dc399981",
-      "size_bytes": 89703
+      "sha256": "e3f7d8f59c5b5da588743a5be996f0437346f468241aba311ed2932274a45819",
+      "size_bytes": 92286
     },
     {
       "path": "references/ledgers/_每次开工必读.md",
@@ -736,8 +736,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_staged_but_not_ingested.py",
-      "sha256": "6aec98b4a05bd7511682833076f7a3aa16a83fcac2d6608ab2b3943b5009611f",
-      "size_bytes": 12501
+      "sha256": "11a54e9050d63093483fffa3cfb6583509f3fc47884c7fdd61ed11f2d2178828",
+      "size_bytes": 14393
     },
     {
       "path": "references/pipeline/checkers/check_suite_single_drag.py",
@@ -786,8 +786,8 @@
     },
     {
       "path": "references/pipeline/checkers/quality_check.py",
-      "sha256": "d1ecd08f568f935df5d181e6a6b97171c0b71c8521874bef55c2c88d73dcd4a6",
-      "size_bytes": 149058
+      "sha256": "5a4048da17d8dd774dd16a048e34fed380c2967d59bad24d1eb3cf3f567a3f81",
+      "size_bytes": 149754
     },
     {
       "path": "references/pipeline/checkers/show_fetch_distance.py",
@@ -1306,8 +1306,8 @@
     },
     {
       "path": "scripts/check_staged_but_not_ingested.py",
-      "sha256": "6aec98b4a05bd7511682833076f7a3aa16a83fcac2d6608ab2b3943b5009611f",
-      "size_bytes": 12501
+      "sha256": "11a54e9050d63093483fffa3cfb6583509f3fc47884c7fdd61ed11f2d2178828",
+      "size_bytes": 14393
     },
     {
       "path": "scripts/check_suite_single_drag.py",
@@ -1431,8 +1431,8 @@
     },
     {
       "path": "scripts/quality_check.py",
-      "sha256": "d1ecd08f568f935df5d181e6a6b97171c0b71c8521874bef55c2c88d73dcd4a6",
-      "size_bytes": 149058
+      "sha256": "5a4048da17d8dd774dd16a048e34fed380c2967d59bad24d1eb3cf3f567a3f81",
+      "size_bytes": 149754
     },
     {
       "path": "scripts/register_persona.py",

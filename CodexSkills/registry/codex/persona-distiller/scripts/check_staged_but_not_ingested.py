@@ -54,7 +54,24 @@ import pathlib
 import re
 import sys
 
+# ★★★ 2026-08-05 重大更正：**必须把 `references/holdout/` 也算作「进了工作区」。**
+#
+#   本件原来只看 `raw/`，于是把**按设计隔离出来的 holdout 材料**报成「没进工作区」。
+#   2026-08-05 我据此得出「Barton 缺 4 本日记、Blackwell 缺 4 本日记＋2 份手稿、
+#   合计 14.6 万词一手材料被静默丢弃」，写成待裁定 ⑯，**并把它当成重大发现报给了用户**。
+#
+#   **全错。** 那 10 份一份不少地躺在 `references/holdout/` 里：
+#   Barton 的 holdout 目录正好 4 个、对上她那 4 本；Blackwell 8 个里有这 6 个。
+#   **holdout 本来就必须不在 `raw/`——建模的人不许读它，那是判分用的。**
+#   **一份被正确隔离的材料，被我报成了「丢失的证据」。**
+#
+#   ★ 教训不是「多写一个目录」，是：**本件比的是「抓到的」与「建模能看到的」，
+#     而「建模能看到的」≠「工作区全部内容」。** holdout 是工作区的一部分，
+#     只是**故意不给建模的人看**——它不在 raw/ 正是它在正常工作。
 WS_PATTERNS = ("workspaces/*/raw", "workspaces/*/*/raw", "ws-*/*/raw", "eval/raw")
+# holdout：**已落地但按设计隔离**，不算缺口
+HOLDOUT_PATTERNS = ("workspaces/*/references/holdout", "workspaces/*/*/references/holdout",
+                    "references/holdout")
 _TIER_RE = re.compile(r"^(P[123]|S[12]|U)$")   # 与 check_corpus_ceiling 同口径
 META = {"_ids", "_EXCLUDED"}
 
@@ -65,10 +82,20 @@ def staged_names(person: pathlib.Path) -> set:
 
 
 def ingested_names(person: pathlib.Path) -> set:
+    """已落地的短名。**`raw/` 与 `references/holdout/` 都算**。
+
+    ★ holdout 不在 `raw/` 是**它在正常工作**，不是缺口——建模的人不许读它。
+      本件曾因为漏了这一句，把 Barton 4 本、Blackwell 6 份**正确隔离**的日记与手稿
+      报成「静默丢失的一手材料」。
+    """
     out = set()
-    for pat in WS_PATTERNS:
+    for pat in WS_PATTERNS + HOLDOUT_PATTERNS:
         for d in person.glob(pat):
-            out |= {p.stem for p in d.rglob("*.txt")}
+            # `.normalized.txt` 的 stem 是 `xxx.normalized`，要再去一层
+            for f in d.rglob("*.txt"):
+                out.add(f.stem)
+                if f.stem.endswith(".normalized"):
+                    out.add(f.stem[: -len(".normalized")])
     return out
 
 

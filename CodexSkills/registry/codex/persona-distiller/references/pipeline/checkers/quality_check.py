@@ -827,6 +827,14 @@ def run_corpus_text_checks(report, target: Path, cache_dirs: list[str]) -> None:
     #   也就是说：**门在给没有正文的源发学分。**
     #   Barton #117 同类 4 份（4 本日记，57,073 词）。
     #
+    # ★★★ 2026-08-05 当天撤回上面那段：**那 10 份全在 `references/holdout/` 里，
+    #   是按设计隔离的判分材料，不是丢失。** 判据当时不认识 holdout 目录，
+    #   我拿着它的输出没去问「文件到底在哪」就写成了「门在给没有正文的源发学分」。
+    #   **判据已修（`ingested_names` 纳入 holdout），全库一手缺口 10 → 0。**
+    #   ★ 接线保留——**修好之后它反而看见了真的**：
+    #     Galen #101 台账 66 / 工作区 1、Harvey #103 105 / 1、Vesalius #102 46 / 1，
+    #     三人工作区 `raw/` 几乎是空的（任务 #37 与 check_corpus_presence 的老账）。
+    #
     #   ★ 为什么此前没人发现：`check_staged_but_not_ingested` 与 `check_corpus_presence`
     #     **两件都没接进任何一道门**，只在 `check_checkers` 元普查里跑——
     #     而元普查是审计工具，不是门。**判据建好而不接线，等于没有。**
