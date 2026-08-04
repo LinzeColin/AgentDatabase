@@ -60,7 +60,7 @@
 ## 当前登记
 
 <!-- PERSONA-REGISTRY:START -->
-当前唯一登记：**100 个人物**。
+当前唯一登记：**101 个人物**。
 
 | 唯一目录 | 人物数 |
 |---|---:|
@@ -75,11 +75,12 @@
 | `建造采购师/` | 12 |
 | `财务合规师/` | 1 |
 | `医疗护理师/` | 0 |
-| `农林牧渔师/` | 1 |
-| **总计** | **100** |
+| `农林牧渔师/` | 2 |
+| **总计** | **101** |
 
 | 人物 | 唯一身份 | 版本 | 选入原因 | 最值得蒸馏的特点 | 对用户的利益/帮助 | 应用场景 | 关键能力 | 完整 ZIP |
 |---|---|---|---|---|---|---|---|---|
+| George Washington Carver | `农林牧渔师` | `0.0.0.1` | Primary corpus is unusually homogeneous — 39 of 41 sources are works he wrote himself (一手 0.9512)；Three independent lanes are retrievable in the public domain: 32 station bulletins, one verbatim congressional transcript, one contemporaneous biography | Answer first, then the reason, then a consequence the reader can check；Output unit is a numbered list of usable methods, not a discourse | Gives steps a reader can actually run, with the bulletin number and year to check them against；Refuses to supply a percentage or a classification it cannot source, and says so plainly | Writing do-this-next field guidance for readers with little formal schooling；Turning a depleted resource into a staged recovery plan with a farmer-run control strip | Staged soil-recovery guidance grounded in his own bulletins (rest, legume rotation, erosion control, returning organic matter)；Grading and end-use matching for sweet-potato and peanut products | [ZIP](农林牧渔师/george-washington-carver/versions/0.0.0.1/george-washington-carver-persona-distillation-delivery-v0.0.0.1.zip) |
 | Joel Salatin | `农林牧渔师` | `0.0.0.1` | 其一手语料 215 篇跨 2018–2026、每篇本人署名、一手占比 99.1%，四路（能力／工作方法／语体／边界）均有可核证据；本族此前 0 人，由其开族。；★ 本人物携带一个别处少见的价值：**其名气主题与语料主题几乎不重叠**（以草饲轮牧闻名，而语料中轮牧占 1%、监管与自由占 48%）。它因此成为「按名气派活会得到编造答案」这一风险的活样本。 | 把监管成本当固定成本算——因此「加强监管」的实际效果是把小者挤出、把份额送给大者。；面对准入壁垒先算两笔账：满足它要投多少，绕开它要投多少；默认选绕开。 | 面对认证或准入门槛时，把「争取进入 vs 另建渠道」变成一笔可算的账，而不是立场之争。；判断一项新法规或改革究竟利好谁——判据是它拿掉了固定成本还是提高了准入标准。 | food-regulation-response；market-access-pathway-design | 食品监管机制分析（规模歧视性成本）；准入壁垒下的路径选择 | [ZIP](农林牧渔师/joel-salatin/versions/0.0.0.1/joel-salatin-persona-distillation-delivery-v0.0.0.1.zip) |
 | Anne Mulcahy | `创业经营师` | `0.0.0.1` | Her most deeply documented and outcome-linked role is enterprise operator leading Xerox through crisis, recovery, growth, and succession.；Public evidence spans direct retrospectives, authored work, company filings, SEC records, customer systems, operating results, and board governance. | High-frequency crisis truth loops linking cash, customers, ownership, and short review cycles；Selective severity: stop legacy activity while fencing a small set of future capabilities | Turns ambiguous turnaround problems into accountable actions, metrics, review points, and stop conditions；Prevents indiscriminate cost cutting by separating stop and protect portfolios | Enterprise turnaround and cash-constrained operating plans；Customer trust recovery and B2B service-system redesign | Crisis operating cadence and multi-signal scorecards；Selective cost reduction with future-capability fences | [ZIP](创业经营师/anne-mulcahy/versions/0.0.0.1/anne-mulcahy-persona-distillation-delivery-v0.0.0.1.zip) |
 | Ben Horowitz | `创业经营师` | `0.0.0.1` | 公开材料同时覆盖 Loudcloud/Opsware 的经营危机、a16z 的机构设计与资本配置，以及两本管理著作形成的教学体系。；模型在公司战略、组织管理、创始人判断和风险投资之间存在可验证的共享决策内核，同时保留角色差异。 | 先区分和平与战时，再选择授权、速度、目标宽度和规则例外。；把最坏消息、最难对话和最不舒服反证优先上桌。 | 把模糊经营困境压缩成情境诊断、少量真实选项、明确所有者与决定日期。；为裁员、降职、创始人角色、公司政治和危机沟通提供直接但保留尊严的执行协议。 | strategy-decision；leadership-organization | 和平/战时情境诊断与危机优先级收敛；创始人、CEO 与高管岗位匹配判断 | [ZIP](创业经营师/ben-horowitz/versions/0.0.0.1/ben-horowitz-persona-distillation-delivery-v0.0.0.1.zip) |

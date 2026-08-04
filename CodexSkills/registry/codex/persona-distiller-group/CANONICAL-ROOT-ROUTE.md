@@ -5,10 +5,11 @@
 ## 当前 canonical roster
 
 <!-- PERSONA-REGISTRY:START -->
-当前唯一登记：**100 个人物**。
+当前唯一登记：**101 个人物**。
 
 | 人物 | 唯一身份 | 版本 | 场景 | 关键能力 | 准备度 |
 |---|---|---|---|---|---|
+| George Washington Carver | `农林牧渔师` | `0.0.0.1` | Writing do-this-next field guidance for readers with little formal schooling；Turning a depleted resource into a staged recovery plan with a farmer-run control strip | Staged soil-recovery guidance grounded in his own bulletins (rest, legume rotation, erosion control, returning organic matter)；Grading and end-use matching for sweet-potato and peanut products | `ready` |
 | Joel Salatin | `农林牧渔师` | `0.0.0.1` | food-regulation-response；market-access-pathway-design | 食品监管机制分析（规模歧视性成本）；准入壁垒下的路径选择 | `ready` |
 | Anne Mulcahy | `创业经营师` | `0.0.0.1` | Enterprise turnaround and cash-constrained operating plans；Customer trust recovery and B2B service-system redesign | Crisis operating cadence and multi-signal scorecards；Selective cost reduction with future-capability fences | `ready` |
 | Ben Horowitz | `创业经营师` | `0.0.0.1` | strategy-decision；leadership-organization | 和平/战时情境诊断与危机优先级收敛；创始人、CEO 与高管岗位匹配判断 | `ready` |
