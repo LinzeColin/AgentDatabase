@@ -425,3 +425,15 @@ def test_an_uncovered_object_still_fails_the_reconcile() -> None:
 def test_backup_coverage_defaults_to_not_covering() -> None:
     assert not BackupCoverage(state="INSUFFICIENT").covered
     assert not BackupCoverage(state="ABSENT").covered
+
+
+def test_the_deploy_computes_the_artifact_digest_it_publishes() -> None:
+    """`MEMORY_ATLAS_ARTIFACT_DIGEST` was only ever read from the environment and
+    nothing set it, so every promotion wrote an empty value and every published
+    snapshot carried `artifact_digest: null` — the release oracle had nothing to
+    bind the served bundle to."""
+    deploy = (REPO / "ops" / "memory-atlas" / "deploy-blue-green.sh").read_text(encoding="utf-8")
+    assert 'if [[ -z "$artifact_digest" && -d "$release/dist" ]]; then' in deploy
+    # Over the promoted bundle, deterministically, not over the source tree.
+    assert 'cd "$release/dist" && find . -type f -print0 | LC_ALL=C sort -z' in deploy
+    assert 'MEMORY_ATLAS_ARTIFACT_DIGEST=%s' in deploy

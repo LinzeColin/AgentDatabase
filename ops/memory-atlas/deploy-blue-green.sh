@@ -194,8 +194,16 @@ printf '%s
 # The reconcile reads these so the published snapshot can name the release and
 # deployment it was produced under; without them the same-run oracle has nothing
 # to bind and the panel honestly shows 未验证.
+# The artifact digest has to be the bytes a viewer actually receives, so it is
+# computed over the promoted bundle rather than passed in and left empty — which
+# is what it was, leaving `artifact_digest` null in every published snapshot.
+artifact_digest=${MEMORY_ATLAS_ARTIFACT_DIGEST:-}
+if [[ -z "$artifact_digest" && -d "$release/dist" ]]; then
+  artifact_digest=$(cd "$release/dist" && find . -type f -print0 | LC_ALL=C sort -z \
+    | xargs -0 sha256sum | sha256sum | cut -d' ' -f1)
+fi
 printf 'MEMORY_ATLAS_RELEASE_ID=%s\nMEMORY_ATLAS_REPOSITORY_COMMIT=%s\nMEMORY_ATLAS_DEPLOYMENT_REVISION=%s\nMEMORY_ATLAS_ARTIFACT_DIGEST=%s\n' \
-  "$release_id" "$release_commit" "$release_id" "${MEMORY_ATLAS_ARTIFACT_DIGEST:-}" > "$APP_ROOT/shared/release-identity.env"
+  "$release_id" "$release_commit" "$release_id" "$artifact_digest" > "$APP_ROOT/shared/release-identity.env"
 chmod 0644 "$APP_ROOT/shared/release-identity.env"
 
 printf '{"schema_version":"memory_atlas.promotion.v1","release_id":"%s","git_commit":"%s","promoted_at":"%s"}
