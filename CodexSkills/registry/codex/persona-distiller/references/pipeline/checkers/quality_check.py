@@ -821,6 +821,43 @@ def run_corpus_text_checks(report, target: Path, cache_dirs: list[str]) -> None:
                         '**从这些文件里取不出任何可核的逐字引文**。')
         review['fraktur_mojibake'] = f'{n_bad} 份' if n_bad else '✓ 没有花体乱码'
 
+    # ★★★ v0.0.0.136：**台账上有、磁盘上没有的源。**
+    #   Blackwell #118 实测：台账 95 行里有 6 行（4 本日记＋2 份手稿，**88,685 词，全是 P1**）
+    #   **正文根本不在工作区**——而它们照样被计进 `min_sources` 与 `primary_ratio`。
+    #   也就是说：**门在给没有正文的源发学分。**
+    #   Barton #117 同类 4 份（4 本日记，57,073 词）。
+    #
+    #   ★ 为什么此前没人发现：`check_staged_but_not_ingested` 与 `check_corpus_presence`
+    #     **两件都没接进任何一道门**，只在 `check_checkers` 元普查里跑——
+    #     而元普查是审计工具，不是门。**判据建好而不接线，等于没有。**
+    #   ★★ 而且 `check_corpus_presence` 对 Blackwell 报的是 **✓ 95/95 可解析**：
+    #     它按 `src-<hash>` 目录在不在算，**目录在、正文不在时它看不出来**。
+    #     所以接的是 `check_staged_but_not_ingested`，不是它。
+    outer = target.parent.parent if target.parent.name == 'workspaces' else target.parent
+    # ★ 判据按「_corpora 根下每个 wip-* 是一个人物」扫，**给它单个工作区它会扫成空**
+    #   （我第一版就是这么传的，于是它对 Blackwell 报「✓ 一致」——**假绿**）。
+    code, out = run('check_staged_but_not_ingested.py', [str(outer.parent)])
+    if code == -1:
+        review['staged_not_ingested'] = out
+    else:
+        try:
+            _s = json.loads(out[out.find('{'):])
+            _me = [m for m in _s.get('明细', []) if m.get('人物') in (outer.name,)]
+            if _me:
+                m0 = _me[0]
+                n_miss = m0.get('**没进工作区**', 0)
+                n_pri = m0.get('其中一手', 0)
+                review['staged_not_ingested'] = (
+                    f"台账 {m0.get('台账')} / 工作区 {m0.get('工作区')}，"
+                    f"**没进工作区 {n_miss} 份，其中一手 {n_pri} 份**"
+                    + ("　★ 这些源仍被计进 min_sources 与 primary_ratio——**门在给没有正文的源发学分**"
+                       if n_pri else "")
+                    + "　★ 清单：" + "、".join(str(x) for x in m0.get('清单', [])[:6]))
+            else:
+                review['staged_not_ingested'] = '✓ 台账与工作区一致（或本人物没走过抓源台账）'
+        except (json.JSONDecodeError, ValueError, TypeError):
+            review['staged_not_ingested'] = '**未核（不是通过）**：输出解析不了'
+
     # ★ v0.0.0.135：**语料文件头里引的话，正文里必须真有。**
     #   头部此前不在任何判据的射程里，而它恰恰是「这份东西是什么」的唯一说明——
     #   下游的分档、归属、坐标全从它来。**头错了下游全跟着错，而且看起来有据。**
