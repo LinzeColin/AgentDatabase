@@ -89,6 +89,33 @@ export const machineTokenLabels: Record<string, string> = {
   TTT: "闭环时长",
   DIRECTION_ONLY: "仅方向可比",
   INSUFFICIENT_DATA: "证据不足",
+  // Added after a second browser scan: the reality panel rendered metric
+  // denominators and activity keys straight from the snapshot.
+  event_count: "事件数",
+  known_work_time_minutes: "已知工时（分钟）",
+  events_with_known_work_time: "有工时记录的事件",
+  events_with_outcome_evidence: "有结果证据的事件",
+  unverified_events: "未验证事件",
+  verified_events: "已验证事件",
+  development_deployment: "开发与部署",
+  product_planning: "产品与规划",
+  research_diagnosis: "研究与诊断",
+  verification_repair: "验证与修复",
+  management_learning: "管理与学习",
+  unknown: "未分类",
+  codex_sessions: "Codex 会话",
+  codex_archived_sessions: "Codex 归档会话",
+  codex_memories: "Codex 记忆",
+  codex_state: "Codex 状态库",
+  memory_update_candidate: "记忆更新候选",
+  openaidatabase_live_data: "OpenAIDatabase 实时数据",
+  deployed: "已部署",
+  recovery: "已恢复",
+  query_input: "查询输入",
+  tier: "层级",
+  topic: "主题",
+  recency: "新近度",
+  all: "全部",
 };
 
 /**

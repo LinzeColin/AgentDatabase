@@ -1,4 +1,5 @@
 import { useLiveSnapshot, type Metric, type Visual } from "./LiveSnapshotProvider";
+import { humanizeMachineText } from "../../shared/atlas/machineTokenHuman";
 import "./RealityCalibrationPanel.css";
 
 function pct(value: number | null): string { return value === null ? "证据不足" : `${(value * 100).toFixed(1)}%`; }
@@ -6,14 +7,14 @@ function MetricCard({ metric, oracle }: { metric: Metric; oracle: string }) {
   return <article className="ma-metric" data-oracle={oracle} data-oracle-value={metric.value ?? "null"}>
     <p>{metric.label_zh}</p><strong>{pct(metric.value)}</strong>
     <span>{metric.numerator ?? "—"} / {metric.denominator ?? "—"}</span>
-    <small>{metric.denominator_basis}{metric.proxy ? " · 代理指标" : ""}</small>
+    <small>{humanizeMachineText(metric.denominator_basis)}{metric.proxy ? " · 代理指标" : ""}</small>
   </article>;
 }
 function Contribution({ visual }: { visual: Visual }) {
   return <div className="ma-contribution-grid">{visual.rows.map((raw, index) => {
     const row=raw as { activity_type?: string; event_count?: number; verified_count?: number; quality_score?: number | null };
     return <div className="ma-contribution-cell" key={`${row.activity_type}-${index}`} style={{ "--ma-strength": row.quality_score ?? 0 } as Record<string, number>}>
-      <span>{row.activity_type ?? "未分类"}</span><strong>{row.verified_count ?? 0}</strong><small>{row.event_count ?? 0} 个事件 · 结果率 {pct(row.quality_score ?? null)}</small>
+      <span>{humanizeMachineText(row.activity_type ?? "未分类")}</span><strong>{row.verified_count ?? 0}</strong><small>{row.event_count ?? 0} 个事件 · 结果率 {pct(row.quality_score ?? null)}</small>
     </div>;
   })}</div>;
 }
@@ -55,7 +56,7 @@ function Trend({ visual }: { visual: Visual }) {
 function Heatmap({ visual }: { visual: Visual }) {
   return <div className="ma-table-wrap"><table className="ma-heatmap"><thead><tr><th>任务</th><th>模型／工具</th><th>结果</th><th>次数</th></tr></thead><tbody>{visual.rows.map((raw,index) => {
     const row=raw as { activity_type?: string; model_tool?: string; outcome_state?: string; count?: number };
-    return <tr key={`${row.activity_type}-${row.model_tool}-${row.outcome_state}-${index}`}><td>{row.activity_type}</td><td>{row.model_tool}</td><td>{row.outcome_state}</td><td><span className="ma-heat" style={{ "--ma-strength": Math.min(1,(row.count ?? 0)/4) } as Record<string, number>}>{row.count ?? 0}</span></td></tr>;
+    return <tr key={`${row.activity_type}-${row.model_tool}-${row.outcome_state}-${index}`}><td>{humanizeMachineText(String(row.activity_type ?? ""))}</td><td>{humanizeMachineText(String(row.model_tool ?? ""))}</td><td>{humanizeMachineText(String(row.outcome_state ?? ""))}</td><td><span className="ma-heat" style={{ "--ma-strength": Math.min(1,(row.count ?? 0)/4) } as Record<string, number>}>{row.count ?? 0}</span></td></tr>;
   })}</tbody></table></div>;
 }
 

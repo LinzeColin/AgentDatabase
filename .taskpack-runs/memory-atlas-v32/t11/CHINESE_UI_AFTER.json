@@ -1,11 +1,11 @@
 {
   "schema_version": "memory_atlas.chinese_ui_audit.v1",
-  "captured_at": "2026-08-04T06:01:28.743Z",
+  "captured_at": "2026-08-04T07:18:17.361Z",
   "page_url": "http://127.0.0.1:4174/",
   "verdict": "FAIL",
-  "finding_count": 166,
+  "finding_count": 150,
   "by_view": {
-    "home": 48,
+    "home": 33,
     "galaxy": 10,
     "notion": 22,
     "roi": 1,
@@ -13,61 +13,11 @@
     "timeline": 25,
     "contribution": 1,
     "wordcloud": 10,
-    "search": 28,
+    "search": 27,
     "summary": 13,
     "runtime": 3
   },
   "findings": [
-    {
-      "view": "home",
-      "kind": "machine_identifier",
-      "text": "event_count"
-    },
-    {
-      "view": "home",
-      "kind": "machine_identifier",
-      "text": "known_work_time_minutes"
-    },
-    {
-      "view": "home",
-      "kind": "machine_identifier",
-      "text": "events_with_known_work_time/event_count"
-    },
-    {
-      "view": "home",
-      "kind": "machine_identifier",
-      "text": "events_with_outcome_evidence/event_count"
-    },
-    {
-      "view": "home",
-      "kind": "machine_identifier",
-      "text": "unverified_events/event_count"
-    },
-    {
-      "view": "home",
-      "kind": "machine_identifier",
-      "text": "decision_execution"
-    },
-    {
-      "view": "home",
-      "kind": "machine_identifier",
-      "text": "development_deployment"
-    },
-    {
-      "view": "home",
-      "kind": "machine_identifier",
-      "text": "product_planning"
-    },
-    {
-      "view": "home",
-      "kind": "machine_identifier",
-      "text": "research_diagnosis"
-    },
-    {
-      "view": "home",
-      "kind": "machine_identifier",
-      "text": "verification_repair"
-    },
     {
       "view": "home",
       "kind": "untranslated",
@@ -82,11 +32,6 @@
       "view": "home",
       "kind": "untranslated",
       "text": "GPT"
-    },
-    {
-      "view": "home",
-      "kind": "machine_identifier",
-      "text": "decision_impact_verified"
     },
     {
       "view": "home",
@@ -106,27 +51,7 @@
     {
       "view": "home",
       "kind": "machine_identifier",
-      "text": "adopted_verified"
-    },
-    {
-      "view": "home",
-      "kind": "machine_identifier",
       "text": "draft_only"
-    },
-    {
-      "view": "home",
-      "kind": "untranslated",
-      "text": "unknown"
-    },
-    {
-      "view": "home",
-      "kind": "machine_identifier",
-      "text": "accepted_verified"
-    },
-    {
-      "view": "home",
-      "kind": "untranslated",
-      "text": "Verifier"
     },
     {
       "view": "home",
@@ -642,11 +567,6 @@
       "view": "search",
       "kind": "untranslated",
       "text": "tier"
-    },
-    {
-      "view": "search",
-      "kind": "untranslated",
-      "text": "all"
     },
     {
       "view": "search",
