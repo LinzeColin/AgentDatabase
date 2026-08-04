@@ -371,13 +371,18 @@
     },
     {
       "path": "references/ledgers/_决策台账.md",
-      "sha256": "d27935af44b3410bd66e10688abb506f32b6477b83da5761b546390752165c08",
-      "size_bytes": 96057
+      "sha256": "67539105c9a1a6dc4409bb41515e4ca9f11117f6f8c5ccc36ae99e1fb5a97c69",
+      "size_bytes": 98324
+    },
+    {
+      "path": "references/ledgers/_待用户裁定.md",
+      "sha256": "98698372d0c203a78e514a5d78a2e32afb7a553347be5edda3d2851968b78023",
+      "size_bytes": 6457
     },
     {
       "path": "references/ledgers/_每次开工必读.md",
-      "sha256": "b9fbfea27932c09741ef5aa641fb2ea652faba9e4b85d5ba4b8334f0a8d5d807",
-      "size_bytes": 50433
+      "sha256": "c8cc6d466308fdb6cb5fe7ef97cefa63c21b7fa5292cdb6abbac30bb413ab8fa",
+      "size_bytes": 50682
     },
     {
       "path": "references/ledgers/_蒸馏名单_v1草稿.md",
