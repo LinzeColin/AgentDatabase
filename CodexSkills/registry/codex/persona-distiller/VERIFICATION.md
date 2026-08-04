@@ -1,6 +1,6 @@
-# Release verification — Persona Distiller v0.0.0.112
+# Release verification — Persona Distiller v0.0.0.113
 
-Date: 2026-08-04（**v0.0.0.112**）
+Date: 2026-08-04（**v0.0.0.113**）
 
 > **本文件记录「当前发布号的复验结果」，不是历史归档。**
 > 版本号必须等于根目录 `VERSION`，由 `scripts/check_contract_drift.py` 强制。
@@ -21,6 +21,13 @@ Date: 2026-08-04（**v0.0.0.112**）
 > **表格正文不在任何判据的射程里**。
 > **「本表每一行都来自本次实跑」是一句自述**——
 > 而自述不是证据（见 `self-report-is-not-evidence`）。
+
+> ### v0.0.0.113 这一版重跑了什么
+>
+> **相对 112 加了一件工具**：`finalize_release.py`（**只跑顺序，不改内容**）。
+> **本次重跑**：该件自测（3 组，含**任一步失败就停**的反向对照）、
+> **用它本身跑完四步**（清单 371 files → pytest 70/70 → 漂移 0 → 可数项 0）。
+> **其余各行沿用 v0.0.0.96 那一次。**
 
 > ### v0.0.0.112 这一版重跑了什么
 >
@@ -207,7 +214,7 @@ Date: 2026-08-04（**v0.0.0.112**）
 | **★★★ 语料真伪门（v0.0.0.33 新增，`ingest.py` 入口**硬拦**，见下节）** | **passed**（负对照 8 项，含 **4 条真实样本**）；**真实数据实测**：Jenner 抓源 4 份 HTML 错误页全抓出（最大一份 **146 KB**），入口实拦已验；清理后 53 份 0 报 | `check_corpus_integrity.py --self-test` + 对 `ws-jenner` 实跑 + `ingest.py` 实拦 |
 | **★★★ 引文层门（v0.0.0.32 新增，只报不拦，见下节）** | **passed**（负对照 11 项，含 **4 条真实样本 + 2 条真实误报夹具**）；**真实数据实测**：Harvey 第 3 轮定稿 10 处、Vesalius 11 处、Galen 0 处 | `check_quote_layer.py --self-test` + 对三份真实候选答案实跑 |
 | 蒸馏版本新鲜度 | 下限 `v0.0.0.70`（当前版本末位 − 10）；**102 条中 0 达标 / 102 低于下限 / 0 未知**；掉的是尺子，产物一份没变（任务 #29）（v0.0.0.75 记录里写的下限 `v0.0.0.37` 是旧数，**本次实跑纠正**） | `check_distillation_freshness.py` |
-| Release checksum 全量校验 | passed，**370 files**（`v0.0.0.111 实跑`；v0.0.0.96 写的 341、v0.0.0.75 写的 305 都是旧数——**这一行漂过三次，v0.0.0.111 起由 `check_verification_counts.py` 盯着**） | `self_check.py` |
+| Release checksum 全量校验 | passed，**371 files**（`v0.0.0.111 实跑`；v0.0.0.96 写的 341、v0.0.0.75 写的 305 都是旧数——**这一行漂过三次，v0.0.0.111 起由 `check_verification_counts.py` 盯着**） | `self_check.py` |
 | Canonical group validation | **12 categories, 100 products, 102 artifacts**; passed | `validate_persona_registry.py` |
 | 团队侧版本绑定 | **passed**，三处同为 `v0.0.0.13`；负对照 6 类全抓出 | `persona-distiller-group/scripts/check_group_version_binding.py` |
 | Identity family registry | 12 families；加权多身份输入被拒 | `test_identity_routing`、`test_skill_contract` |

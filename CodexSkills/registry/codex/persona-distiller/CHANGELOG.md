@@ -1,5 +1,30 @@
 # Changelog
 
+## v0.0.0.113 — 收尾四步**按固定顺序**跑，因为顺序错了会得到假红（2026-08-04）
+
+一天之内**三次**把 `pytest` 跑在 `build_manifest.py` 之前，每次都得到同一批假红：
+
+```
+FAILED test_release_bundle …… checksum mismatch: VERIFICATION.md
+FAILED test_skill_contract  …… VERIFICATION.md 首行标题 ≠ VERSION
+FAILED test_package_install_migrate（三条）
+```
+
+**产物没问题，是改完文档没重建清单就去跑测试。** 三次里有一次还照着假红去查了别的地方。
+
+新增 `finalize_release.py`，把顺序写死：
+`build_manifest` → `pytest` → `check_contract_drift` → `check_verification_counts`，
+**任一步失败就停**——后面几步在前一步失败时给出的信息是误导性的。
+
+★ `bump_version` **不在这四步里**：它要先跑，且跑完还要人去写 CHANGELOG 与
+VERIFICATION 的正文。本件是**写完正文之后**的那一步。
+★ 本件**不改任何内容、不 git commit**——写什么要人来判断。
+
+★★ 它第一次真跑就在第 4 步停住了：加了这个脚本本身，文件数从 370 变成 371，
+而 VERIFICATION 里写的还是旧数。**判据抓到的第一件事又是它自己造成的。**
+（`check_verification_counts` 上线以来第三次抓到我自己引入的漂移。）
+
+
 ## v0.0.0.112 — 把「自测不碰盘的 30 件」收窄到**真正对得上风险形状的 9 件**（2026-08-04）
 
 既有那行报「main 读文件而自测不碰文件系统的 **30** 件」，并已注明**这不是缺陷计数**。
