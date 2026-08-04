@@ -83,6 +83,31 @@ A. 人物与身份：姓名、身份分类、职业或主要职务。
 
 不要一次加载全部 references、prompts 或研究材料。
 
+### ★ 两件「别再手搓」的读取工具（**手动调用，不进流水线**）
+
+`scripts/check_*.py` 都已接进流水线，**不需要你自己调**。
+但下面两件是**给人／代理用的**，它们存在的唯一理由是：**我反复手搓、反复搓错。**
+
+```bash
+# 门到底过没过 —— 按真实字段名念（passed / errors），退出码与 passed 一致
+python3 scripts/show_gate.py <workspace> --phase release --strict
+```
+
+> **为什么要它**：`quality_check` 的输出里**没有 `blockers` 这个字段**，真名是 `errors`。
+> 我曾一天之内四次手搓 `re.search(r'\{.*\}')` 去读它、四次都念 `blockers`、
+> 四次都打印「0 blockers」，**而真实值是 `passed=False`**，据此写下「发布门 0 blocker」
+> 并去打包——是 `package_target` 拦住的。
+
+```bash
+# 某个工作区的 references/ 到底在第几层 —— 不同人物**不一致**
+python3 scripts/show_workspace_layout.py <_corpora 目录>
+```
+
+> **为什么要它**：实测十个工作区，**五个是 `workspaces/<人>/references/`、
+> 五个是 `workspaces/<人>/<人>/references/`**。任何按固定深度写的 glob 会静默漏掉一半，
+> 而漏掉时看起来像「语料不在本机」——我据此报过一次假结论。
+
+
 ## 构建工作流
 
 ### 0. 同名消歧（第一步）
