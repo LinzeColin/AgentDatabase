@@ -26,13 +26,16 @@ def _state(value: object) -> str:
     # per-object coverage evidence; without it the row stays FAILED, because
     # "we moved it" has to be shown rather than assumed.
     if raw=='MIGRATED': return 'MIGRATED'
-    if raw in {'MISSING','MISSING_REQUIRED','MISSING_OPTIONAL','EMPTY'}: return 'MISSING'
+    # The capture distinguishes "declared optional and absent" from "should be
+    # here and is not". Collapsing both into MISSING threw that away.
+    if raw=='MISSING_OPTIONAL': return 'MISSING_OPTIONAL'
+    if raw in {'MISSING','MISSING_REQUIRED','EMPTY'}: return 'MISSING'
     if raw in {'FAILED','UNREADABLE'}: return 'FAILED'
     if raw=='STALE': return 'STALE'
     return 'UNKNOWN'
 
 def _counts(rows: list[dict[str,Any]]) -> dict[str,int]:
-    out={'ready':0,'total':len(rows),'stale':0,'missing':0,'failed':0,'unknown':0,'migrated':0}
+    out={'ready':0,'total':len(rows),'stale':0,'missing':0,'failed':0,'unknown':0,'migrated':0,'missing_optional':0}
     for row in rows: out[row['state'].lower()]+=1
     return out
 
@@ -102,14 +105,27 @@ def build_live_snapshot(private_snapshot: Mapping[str,Any], visual_analytics: Ma
     ac=_counts(tier_a); bc=_counts(tier_b)
     # Availability is decided by required_for_product, not by which tier a row
     # happens to sit in. Everything else is a coverage gap that degrades.
-    required=[row for row in tier_a+tier_b if row['required_for_product']]
-    optional=[row for row in tier_a+tier_b if not row['required_for_product']]
-    required_failed=[row for row in required if row['state']=='FAILED']
-    # MIGRATED counts as accounted-for on both sides: the bytes are somewhere
-    # else and this run proved it per object.
-    settled={'READY','MIGRATED'}
-    required_bad=[row for row in required if row['state'] not in settled]
-    optional_bad=[row for row in optional if row['state'] not in settled]
+    # MA-LIVE-AC-009 draws the line by tier, not by required_for_product:
+    # "Tier B 本机来源缺失只使相关指标陈旧；Tier A 权威缺失禁止宣称 fresh/pass".
+    # This used to degrade the product for any non-ready row in either tier,
+    # which is stricter than the contract and made DEGRADED permanent — the
+    # Owner has no ChatGPT exports and no Codex tasks, so those rows can never
+    # become READY and the signal stopped meaning anything.
+    #
+    # MIGRATED and MISSING_OPTIONAL are settled: the first is bytes that moved
+    # somewhere else with per-object proof, the second is the capture's own
+    # statement that a source is declared optional and absent.
+    settled={'READY','MIGRATED','MISSING_OPTIONAL'}
+    cloud=[row for row in tier_a if row['tier']=='A_CLOUD_NATIVE']
+    local=[row for row in tier_a+tier_b if row['tier']!='A_CLOUD_NATIVE']
+    required_failed=[row for row in cloud if row['required_for_product'] and row['state']=='FAILED']
+    required_bad=[row for row in cloud if row['required_for_product'] and row['state'] not in settled]
+    cloud_bad=[row for row in cloud if row['state'] not in settled]
+    local_bad=[row for row in local if row['state'] not in settled]
+    # Tier B never blocks the product, but it is never hidden either: the rows
+    # keep their real state and the sentence names them.
+    local_note=('　本机来源未贡献本批：'+'、'.join(sorted(row['label_zh'] for row in local_bad))
+                +'；相关指标按陈旧处理。') if local_bad else ''
     if required_bad:
         product_state='FAILED' if required_failed else 'DEGRADED'; fresh_state='DEGRADED'
         reason='至少一个产品必需的云端权威不可用：'+'、'.join(sorted(row['label_zh'] for row in required_bad))+'；系统不能宣称最新。'
@@ -117,11 +133,12 @@ def build_live_snapshot(private_snapshot: Mapping[str,Any], visual_analytics: Ma
         product_state='DEGRADED'; fresh_state='STALE'
         reason=(f'最近成功源运行已超过 {freshness_target_seconds} 秒新鲜度目标'
                 f'（按声明的采集节奏推导，不是固定值）；这意味着按计划的采集没有按时到达。')
-    elif optional_bad:
+    elif cloud_bad:
         product_state='DEGRADED'; fresh_state='DEGRADED'
-        reason='云端必需权威可用，但以下来源未更新：'+'、'.join(sorted(row['label_zh'] for row in optional_bad))+'；相关指标按陈旧处理。'
+        reason='云端权威中以下来源未就绪：'+'、'.join(sorted(row['label_zh'] for row in cloud_bad))+'；不宣称 fresh。'
     else:
-        product_state='PASS'; fresh_state='FRESH'; reason='云端权威和本批来源均在新鲜度目标内。'
+        product_state='PASS'; fresh_state='FRESH'; reason='云端权威齐备，且在按采集节奏推导的新鲜度目标内。'
+    reason=reason+local_note
 
     metrics=visual_analytics.get('metrics') if isinstance(visual_analytics.get('metrics'),Mapping) else {}
     for key in ('verified_outcome_rate_event','verified_outcome_rate_work_time','work_time_coverage_rate','outcome_evidence_coverage_rate','verification_debt_proxy_event'):

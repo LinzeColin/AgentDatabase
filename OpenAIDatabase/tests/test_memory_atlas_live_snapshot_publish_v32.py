@@ -57,6 +57,17 @@ CANONICAL_READY = {
     "reason": None,
 }
 CANONICAL_LOST = {**CANONICAL_READY, "state": "UNAVAILABLE", "reason": "no_canonical_release_published"}
+# The shape PrivateReleaseBackup actually writes. The old fixture used a `files`
+# key it has never written, which is the defect these tests now pin.
+RELEASE_BACKUP_PASS = {
+    "schema_version": "memory_atlas.encrypted_archive_manifest.v1",
+    "state": "PASS",
+    "ciphertext_part_count": 8,
+    "ciphertext_size_bytes": 698130810,
+    "remote_readback_verified": True,
+    "parts": [{"part_number": n} for n in range(1, 9)],
+    "isolated_restore": {"state": "PASS", "all_hashes_match": True, "restored_files": 2301},
+}
 
 
 def _visual() -> dict:
@@ -82,7 +93,7 @@ def _evidence(**overrides) -> dict:
             objects=[VERIFIED_OBJECT],
             normalized_batch_key=VERIFIED_OBJECT["object_key"],
             private_database_paths=["memory-atlas/runs/latest.json"],
-            github_release={"schema_version": "memory_atlas.encrypted_archive_manifest.v1", "files": [{}]},
+            github_release=RELEASE_BACKUP_PASS,
             observed_at="2026-08-03T10:15:00Z",
             registry_path=REGISTRY,
             canonical=CANONICAL_READY,
@@ -211,7 +222,14 @@ def test_optional_cloud_source_missing_does_not_fail_the_product() -> None:
     assert snapshot["freshness"]["state"] != "FRESH"
 
 
-def test_local_tier_b_gap_degrades_without_claiming_failure() -> None:
+def test_local_tier_b_gap_makes_metrics_stale_without_blocking_the_product() -> None:
+    """MA-LIVE-AC-009: "Tier B 本机来源缺失只使相关指标陈旧；Tier A 权威缺失禁止
+    宣称 fresh/pass". This used to degrade the whole product for any Tier B gap,
+    which is stricter than the contract and made DEGRADED permanent — the Owner
+    has no ChatGPT exports, so that row can never become READY.
+
+    The gap is never hidden: the row keeps its real state and the reason names
+    it. What changed is that it no longer blocks the product."""
     private = _private()
     run = _run_block()
     run["source_coverages"] = [
@@ -223,8 +241,39 @@ def test_local_tier_b_gap_degrades_without_claiming_failure() -> None:
     rows = {row["source_id"]: row for row in snapshot["coverage"]["sources"]}
     assert rows["chatgpt_exports"]["required_for_product"] is False
     assert rows["chatgpt_exports"]["tier"] == "B_LOCAL_OPTIONAL"
+    assert snapshot["coverage"]["product_state"] == "PASS"
+
+
+def test_a_tier_b_source_that_broke_is_named_even_though_it_does_not_block() -> None:
+    private = _private()
+    run = _run_block()
+    run["source_coverages"] = [
+        {"source_id": "codex_memories", "label_zh": "Codex 记忆", "required": False, "state": "UNREADABLE"},
+    ]
+    private["run"] = run
+    snapshot = build_live_snapshot(private, _visual(), _evidence(), _benchmark(), evaluated_at="2026-08-03T10:20:00Z")
+    assert snapshot["coverage"]["product_state"] == "PASS"
+    # Not blocking is not the same as not reporting.
+    assert "Codex 记忆" in snapshot["freshness"]["reason_zh"]
+    assert "相关指标按陈旧处理" in snapshot["freshness"]["reason_zh"]
+    assert next(r for r in snapshot["coverage"]["sources"] if r["source_id"] == "codex_memories")["state"] == "FAILED"
+
+
+def test_a_tier_a_authority_that_is_not_ready_still_blocks_fresh() -> None:
+    """The other half of AC-009, which must not move: a cloud authority that is
+    not ready forbids claiming fresh, whether or not it is required."""
+    evidence = _evidence(
+        cloud_native_sources=cloud_native_authorities(
+            objects=[BROKEN_OBJECT], normalized_batch_key=BROKEN_OBJECT["object_key"],
+            private_database_paths=["memory-atlas/runs/latest.json"], github_release=None,
+            observed_at="2026-08-03T10:15:00Z", registry_path=REGISTRY, canonical=CANONICAL_READY,
+        )
+    )
+    private = _private()
+    private["run"] = _run_block()
+    snapshot = build_live_snapshot(private, _visual(), evidence, _benchmark(), evaluated_at="2026-08-03T10:20:00Z")
     assert snapshot["coverage"]["product_state"] == "DEGRADED"
-    assert snapshot["coverage"]["product_state"] != "FAILED"
+    assert snapshot["freshness"]["state"] != "FRESH"
 
 
 def test_registry_declares_the_tier_of_every_source() -> None:
@@ -660,7 +709,7 @@ def _migrated_authorities(**overrides):
     return cloud_native_authorities(
         objects=[BROKEN_OBJECT], normalized_batch_key=BROKEN_OBJECT["object_key"],
         private_database_paths=["memory-atlas/runs/latest.json"],
-        github_release={"schema_version": "memory_atlas.encrypted_archive_manifest.v1", "files": [{}]},
+        github_release=RELEASE_BACKUP_PASS,
         observed_at="2026-08-03T10:15:00Z", registry_path=REGISTRY, canonical=CANONICAL_READY,
         migration={**MIGRATION_PROVEN, **overrides},
     )
@@ -720,3 +769,91 @@ def test_a_genuinely_failed_source_still_degrades() -> None:
         freshness_target_seconds=97_200,
     )
     assert snapshot["coverage"]["product_state"] == "DEGRADED"
+
+
+def _with_backup(record):
+    return cloud_native_authorities(
+        objects=[VERIFIED_OBJECT], normalized_batch_key=VERIFIED_OBJECT["object_key"],
+        private_database_paths=["memory-atlas/runs/latest.json"], github_release=record,
+        observed_at="2026-08-03T10:15:00Z", registry_path=REGISTRY, canonical=CANONICAL_READY,
+    )
+
+
+def test_the_backup_row_reads_the_fields_its_producer_writes() -> None:
+    """`PrivateReleaseBackup` writes `parts`, `state`, `remote_readback_verified`
+    and `isolated_restore`. The row looked for `files`, which it has never
+    written — so a backup that passed its own contract reported FAILED with 0
+    objects and degraded the product permanently."""
+    row = _row(_with_backup(RELEASE_BACKUP_PASS), "github_private_release")
+    assert row["state"] == "READY"
+    assert row["object_count"] == 8
+    assert row["size_bytes"] == 698130810
+
+
+@pytest.mark.parametrize(
+    "broken",
+    [
+        {"state": "FAILED"},
+        {"remote_readback_verified": False},
+        {"isolated_restore": {"state": "FAILED", "all_hashes_match": True}},
+        {"isolated_restore": {"state": "PASS", "all_hashes_match": False}},
+    ],
+)
+def test_a_backup_that_did_not_pass_still_reports_failed(broken: dict) -> None:
+    row = _row(_with_backup({**RELEASE_BACKUP_PASS, **broken}), "github_private_release")
+    assert row["state"] == "FAILED"
+
+
+def test_no_backup_record_at_all_is_missing() -> None:
+    assert _row(_with_backup(None), "github_private_release")["state"] == "MISSING"
+
+
+def _tier_b(*states):
+    return [
+        {"source_id": f"src_{i}", "label_zh": f"来源{i}", "availability_tier": "B_LOCAL_OPTIONAL",
+         "required": False, "required_for_product": False, "state": state, "object_count": 0}
+        for i, state in enumerate(states)
+    ]
+
+
+def _snapshot_with_tier_b(*states):
+    private = _private()
+    private["run"] = _run_block()
+    private["run"]["source_coverages"] = _tier_b(*states)
+    return build_live_snapshot(
+        private, _visual(), _evidence(), _benchmark(), evaluated_at="2026-08-03T10:20:00Z",
+        freshness_target_seconds=97_200,
+    )
+
+
+def test_an_optional_source_the_capture_calls_missing_optional_is_not_a_gap() -> None:
+    """The capture already distinguishes "declared optional and absent" from
+    "should be here and is not". Collapsing both into MISSING made five sources
+    the Owner simply does not have degrade the product forever."""
+    snapshot = _snapshot_with_tier_b("MISSING_OPTIONAL", "MISSING_OPTIONAL")
+    assert snapshot["coverage"]["product_state"] == "PASS"
+    assert snapshot["coverage"]["tier_b_local_optional"]["missing_optional"] == 2
+    # Still visible, not hidden.
+    assert {row["state"] for row in snapshot["coverage"]["sources"] if row["source_id"].startswith("src_")} == {"MISSING_OPTIONAL"}
+
+
+def test_an_unreadable_tier_b_source_is_named_but_does_not_block() -> None:
+    """UNREADABLE means something was there and could not be read — a real gap,
+    and the reason must name it. Per MA-LIVE-AC-009 a Tier B gap only makes the
+    related metrics stale, so it is reported without blocking the product.
+
+    The state itself is not softened: the row still reads FAILED."""
+    snapshot = _snapshot_with_tier_b("MISSING_OPTIONAL", "UNREADABLE")
+    assert snapshot["coverage"]["product_state"] == "PASS"
+    assert "来源1" in snapshot["freshness"]["reason_zh"]
+    # A source that is optional and absent is not a gap and is not named.
+    assert "来源0" not in snapshot["freshness"]["reason_zh"]
+    states = {row["source_id"]: row["state"] for row in snapshot["coverage"]["sources"]}
+    assert states["src_1"] == "FAILED" and states["src_0"] == "MISSING_OPTIONAL"
+
+
+def test_a_plain_missing_tier_b_source_is_named_but_does_not_block() -> None:
+    snapshot = _snapshot_with_tier_b("MISSING")
+    assert snapshot["coverage"]["product_state"] == "PASS"
+    assert "来源0" in snapshot["freshness"]["reason_zh"]
+    assert snapshot["coverage"]["tier_b_local_optional"]["missing"] == 1

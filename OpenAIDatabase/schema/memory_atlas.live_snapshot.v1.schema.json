@@ -215,6 +215,10 @@
             "migrated": {
               "type": "integer",
               "minimum": 0
+            },
+            "missing_optional": {
+              "type": "integer",
+              "minimum": 0
             }
           }
         },
@@ -255,6 +259,10 @@
               "minimum": 0
             },
             "migrated": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "missing_optional": {
               "type": "integer",
               "minimum": 0
             }
@@ -304,7 +312,8 @@
                   "MISSING",
                   "FAILED",
                   "UNKNOWN",
-                  "MIGRATED"
+                  "MIGRATED",
+                  "MISSING_OPTIONAL"
                 ]
               },
               "object_count": {

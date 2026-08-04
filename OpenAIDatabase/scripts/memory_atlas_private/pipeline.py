@@ -175,6 +175,23 @@ def capture_freshness_target(registry_path: Path | None = None, *, default: int 
         return default
 
 
+def _release_backup_health(record: Mapping[str, Any] | None) -> tuple[bool, bool, int, int]:
+    """Measure the encrypted backup by the fields its producer actually writes."""
+    if not isinstance(record, Mapping):
+        return (False, False, 0, 0)
+    restore = record.get("isolated_restore")
+    restore = restore if isinstance(restore, Mapping) else {}
+    parts = record.get("parts")
+    count = len(parts) if isinstance(parts, list) else int(record.get("ciphertext_part_count") or 0)
+    healthy = (
+        str(record.get("state") or "") == "PASS"
+        and record.get("remote_readback_verified") is True
+        and str(restore.get("state") or "") == "PASS"
+        and restore.get("all_hashes_match") is True
+    )
+    return (True, healthy, count, int(record.get("ciphertext_size_bytes") or 0))
+
+
 def cloud_native_authorities(
     *,
     objects: Iterable[object],
@@ -224,12 +241,7 @@ def cloud_native_authorities(
             int(canonical.get("unique_events") or 0) if canonical_ready else 0,
             int(canonical.get("bytes") or 0) if canonical_ready else 0,
         ),
-        "github_private_release": (
-            github_release is not None,
-            bool(github_release and github_release.get("files")),
-            len((github_release or {}).get("files") or []),
-            0,
-        ),
+        "github_private_release": _release_backup_health(github_release),
     }
 
     out: list[dict[str, Any]] = []
