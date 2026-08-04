@@ -116,3 +116,61 @@ def test_a_session_with_no_metadata_still_produces_a_row() -> None:
     assert len(rows) == 1
     assert rows[0]["session_id"] == "019f1327-e289-73b3-903f-dbdf600fb2fd"
     assert rows[0]["event_count"] == 1
+
+
+def test_reconcile_regenerates_the_snapshot_the_ten_views_read() -> None:
+    source = (
+        __import__("pathlib").Path(__file__).resolve().parents[1]
+        / "scripts" / "memory_atlas_private" / "pipeline.py"
+    ).read_text(encoding="utf-8")
+    assert "regenerate_atlas_snapshot(" in source
+    assert 'output=self.config.web_data_dir / "memory_atlas.json"' in source
+    assert '"atlas_snapshot": atlas_rebuild' in source
+
+
+def test_the_regenerated_snapshot_is_what_nginx_serves() -> None:
+    from pathlib import Path
+
+    repo = Path(__file__).resolve().parents[2]
+    compose = (repo / "ops" / "memory-atlas" / "docker-compose.yml").read_text(encoding="utf-8")
+    assert "/srv/linze/apps/memory-atlas/shared/data:/usr/share/nginx/live:ro" in compose
+    conf = (repo / "ops" / "memory-atlas" / "nginx" / "default.conf").read_text(encoding="utf-8")
+    assert "root /usr/share/nginx/live;" in conf
+    # A failed regeneration must fall back to the shipped snapshot, not 404.
+    assert "@atlas_release_snapshot" in conf
+    assert "try_files /memory_atlas.json =404;" in conf
+
+
+def test_regeneration_refuses_to_publish_a_partial_snapshot(tmp_path) -> None:
+    from OpenAIDatabase.scripts.memory_atlas_private.pipeline import regenerate_atlas_snapshot
+
+    database = tmp_path / "db"
+    (database / "data" / "processed" / "codex").mkdir(parents=True)
+    (database / "data" / "memory").mkdir(parents=True)
+    (database / "scripts").mkdir(parents=True)
+    (database / "scripts" / "build_memory_atlas_data.py").write_text("", encoding="utf-8")
+    served = tmp_path / "web" / "memory_atlas.json"
+    served.parent.mkdir(parents=True)
+    served.write_text('{"kept": "last good"}', encoding="utf-8")
+
+    class _Failed:
+        returncode = 1
+        stdout = ""
+        stderr = "builder exploded"
+
+    result = regenerate_atlas_snapshot(
+        _session(PATH_A), database_dir=database, work_dir=tmp_path / "work",
+        output=served, runner=lambda *a, **k: _Failed(),
+    )
+    assert result["state"] == "FAILED"
+    assert json.loads(served.read_text(encoding="utf-8")) == {"kept": "last good"}
+
+
+def test_regeneration_skips_when_a_run_carries_no_sessions(tmp_path) -> None:
+    from OpenAIDatabase.scripts.memory_atlas_private.pipeline import regenerate_atlas_snapshot
+
+    result = regenerate_atlas_snapshot(
+        [], database_dir=tmp_path, work_dir=tmp_path / "work", output=tmp_path / "out.json",
+    )
+    assert result["state"] == "SKIPPED"
+    assert not (tmp_path / "out.json").exists()

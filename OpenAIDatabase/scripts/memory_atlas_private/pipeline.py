@@ -2,7 +2,9 @@ from __future__ import annotations
 
 import json
 import os
+import shutil
 import socket
+import sys
 import tempfile
 from dataclasses import asdict
 from datetime import datetime, timezone
@@ -283,6 +285,81 @@ def visual_event(event: Mapping[str, Any]) -> dict[str, Any]:
         "work_time_minutes": float(effort) if isinstance(effort, (int, float)) else None,
         "outcome_evidence": bool(str(row.get("evidence_ref") or "").strip()),
         "verified_at": row.get("verified_at") if isinstance(row.get("verified_at"), str) else None,
+    }
+
+
+def regenerate_atlas_snapshot(
+    events: Iterable[Mapping[str, Any]],
+    *,
+    database_dir: Path,
+    work_dir: Path,
+    output: Path,
+    runner=None,
+) -> dict[str, Any]:
+    """Rebuild the ten original views' snapshot from the live event plane.
+
+    `data/processed/codex/*` froze when its local writer stopped on 2026-07-17,
+    so the ten views showed 128 sessions ending in mid-July while the capture
+    plane held 505 through today. The two files are regenerated from the events
+    and the repository's own builder is run over them, unchanged — the graph
+    model is not reimplemented, only its stale input is replaced.
+
+    The rest of the data tree is symlinked, not copied: it is ~576 MB and the
+    host runs this every fifteen minutes.
+    """
+    import subprocess
+
+    from .session_manifest_adapter import build_daily_rows, build_session_rows
+
+    sessions = build_session_rows(events)
+    daily = build_daily_rows(sessions)
+    if not sessions:
+        return {"state": "SKIPPED", "reason": "no session events in this run", "session_count": 0}
+
+    root = Path(work_dir) / "atlas-build"
+    if root.exists():
+        shutil.rmtree(root)
+    (root / "data" / "processed" / "codex").mkdir(parents=True)
+    source_data = Path(database_dir) / "data"
+    for child in source_data.iterdir():
+        if child.name == "processed":
+            continue
+        (root / "data" / child.name).symlink_to(child)
+    for child in (source_data / "processed").iterdir():
+        if child.name != "codex":
+            (root / "data" / "processed" / child.name).symlink_to(child)
+    for child in (source_data / "processed" / "codex").iterdir():
+        if child.name not in {"codex_session_manifest.jsonl", "codex_daily_activity.jsonl"}:
+            (root / "data" / "processed" / "codex" / child.name).symlink_to(child)
+
+    def _write(path: Path, rows: list[dict[str, Any]]) -> None:
+        with path.open("w", encoding="utf-8", newline="\n") as handle:
+            for row in rows:
+                handle.write(json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n")
+
+    codex = root / "data" / "processed" / "codex"
+    _write(codex / "codex_session_manifest.jsonl", sessions)
+    _write(codex / "codex_daily_activity.jsonl", daily)
+
+    builder = Path(database_dir) / "scripts" / "build_memory_atlas_data.py"
+    staged = root / "memory_atlas.json"
+    command = [sys.executable, "-B", str(builder), "--database-dir", str(root), "--output", str(staged)]
+    result = (runner or subprocess.run)(command, capture_output=True, text=True)
+    if result.returncode != 0 or not staged.is_file():
+        return {
+            "state": "FAILED",
+            "session_count": len(sessions),
+            "reason": (result.stderr or result.stdout or "builder produced no output")[-400:],
+        }
+    # Only replace the served snapshot once the builder has produced a whole one.
+    write_json_atomic(Path(output), json.loads(staged.read_text(encoding="utf-8")))
+    shutil.rmtree(root, ignore_errors=True)
+    return {
+        "state": "PUBLISHED",
+        "session_count": len(sessions),
+        "day_count": len(daily),
+        "first_day": daily[0]["date"],
+        "last_day": daily[-1]["date"],
     }
 
 
@@ -822,6 +899,15 @@ class RemoteReconcilePipeline(LiveSnapshotPublisherMixin):
             self.object_store.get_file(event_source, temporary)
             analytics = build_behavior_analytics(_iter_events(temporary), generated_at=self.clock())
             live_events = [asdict(event) for event in _iter_events(temporary)]
+            # The ten original views read a snapshot built from
+            # data/processed/codex, whose local writer stopped on 2026-07-17.
+            # Regenerating it here is what actually joins the two planes.
+            atlas_rebuild = regenerate_atlas_snapshot(
+                _iter_events(temporary),
+                database_dir=Path(__file__).resolve().parents[2],
+                work_dir=self.config.work_dir,
+                output=self.config.web_data_dir / "memory_atlas.json",
+            )
         finally:
             temporary.unlink(missing_ok=True)
         event_count = int(analytics["event_count"])
@@ -930,4 +1016,5 @@ class RemoteReconcilePipeline(LiveSnapshotPublisherMixin):
             "failure_outbox": failure_outbox,
             "live_snapshot": live_snapshot
             or {"state": "NOT_PUBLISHED", "reason": self._live_snapshot_error or "live snapshot disabled"},
+            "atlas_snapshot": atlas_rebuild,
         }
