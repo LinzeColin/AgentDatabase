@@ -223,10 +223,38 @@ def check(root: pathlib.Path) -> tuple[list[str], list[str]]:
     problems: list[str] = []
     skipped: list[str] = []
 
+    # ★★ v0.0.0.94 新增第四条比对：**CHANGELOG 的最高条目必须等于 VERSION**。
+    #   实测背景：2026-08-04 一天写了 v0.0.0.84–94 十一条 CHANGELOG，
+    #   而 VERSION 一直停在 v0.0.0.83——**落后 11 格，三轴比对全绿**，
+    #   因为它只比 VERSION↔manifest（两处都是 83），**比不到 CHANGELOG**。
+    #   「单一真源」若不把记录变更的那份算进去，就管不住这种漂移。
+    def _changelog_top(root):
+        f = root / "CHANGELOG.md"
+        if not f.is_file():
+            return None, "CHANGELOG.md 不在——**未核（不是通过）**"
+        ns = [int(m.group(1)) for m in
+              re.finditer(r"^## v0\.0\.0\.(\d+)", f.read_text(encoding="utf-8"), re.M)]
+        return (max(ns) if ns else None), (None if ns else "CHANGELOG 里一条版本条目都没有——**未核**")
+
     ver_file = root / "VERSION"
     if not ver_file.is_file():
         return [f"缺 VERSION 文件（真源不存在）：{ver_file}"], skipped
     skill_v = ver_file.read_text(encoding="utf-8").strip()
+
+    # --- A0. CHANGELOG 的最高条目 vs VERSION（v0.0.0.94 新增的第四条轴）---
+    top, why = _changelog_top(root)
+    if why:
+        skipped.append(f"CHANGELOG：{why}")
+    else:
+        import re as _re
+        m = _re.match(r"v?0\.0\.0\.(\d+)", skill_v)
+        if not m:
+            skipped.append(f"VERSION 认不出形状：{skill_v!r}")
+        elif int(m.group(1)) != top:
+            problems.append(
+                f"[changelog] VERSION = {skill_v}，而 CHANGELOG 最高条目是 v0.0.0.{top}"
+                f"——**差 {abs(top - int(m.group(1)))} 格**。"
+                f"记录变更的那一份也是版本真源；不比它，就管不住『写了条目忘了升版』。")
 
     # --- A. skill_version 单一真源 ---
     for where, value, kind in collect_skill_version_sites(root):
