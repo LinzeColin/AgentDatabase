@@ -221,7 +221,8 @@ def coverage(claims: list, source_ids) -> dict:
     return out
 
 
-def feasible_grounds(born=None, died=None, us_federal=None, us_published_pre1978=None):
+def feasible_grounds(born=None, died=None, us_federal=None, us_published_pre1978=None,
+                     first_published_country=None):
     """★ **排期前的依据可行性分诊**：这个人身上，五条 PD 依据里哪几条**结构上还可能**？
 
     起因（2026-08-04）：七次可得性探测七次延后，每次 30–70 分钟。
@@ -245,11 +246,25 @@ def feasible_grounds(born=None, died=None, us_federal=None, us_published_pre1978
          us_federal is not False,
          "已知非美国联邦雇员" if us_federal is False
          else ("是否任过美国联邦职务未知——当作还可能" if us_federal is None else "任过美国联邦职务"))
-    mark("notice1909",
-         us_published_pre1978 is not False,
-         "已知无 1978 年前的美国出版物" if us_published_pre1978 is False
-         else ("1978 年前有无美国出版物未知——当作还可能" if us_published_pre1978 is None
-               else "有 1978 年前的美国出版物"))
+    # ★★ URAA §104A：外国作品的「无版权标记」这个缺陷，**1996-01-01 已被自动治愈**。
+    #   条文（袁隆平 #123 探测查实）：§104A(h)(6)(C)(i) 明文把「lack of proper notice」
+    #   列为被恢复的缺陷；(h)(6)(D) 要求首次在 eligible country 出版且**未在 30 日内在美同步出版**；
+    #   (h)(8) 定 source country；Berne/WTO 成员国恢复日 = **1996-01-01**。
+    #   ★ 但**恢复只作用于「1996 年时在源国仍受保护」的作品**——
+    #     Liebig（卒 1873，源国 1943 即过期）这类不受影响。**所以这里只提示，不否决。**
+    _foreign = (first_published_country is not None
+                and str(first_published_country).upper() not in ("US", "USA", "美国"))
+    _why09 = ("已知无 1978 年前的美国出版物" if us_published_pre1978 is False
+              else ("1978 年前有无美国出版物未知——当作还可能" if us_published_pre1978 is None
+                    else "有 1978 年前的美国出版物"))
+    if _foreign:
+        _why09 += ("　★★ **首次出版国是 " + str(first_published_country) +
+                   "，非美国** —— URAA §104A 把「无版权标记」列为**可恢复的缺陷**，"
+                   "伯尔尼/WTO 成员国恢复日 1996-01-01。**若该作品 1996 年时在源国仍受保护，"
+                   "这条缺陷已被自动治愈**，`notice1909` 基本不成立"
+                   "（除非能证明 30 日内在美同步出版）。"
+                   "★ 反之，若 1996 年时在源国**已过期**（如卒于 1873 的作者），恢复不适用，本提示不影响。")
+    mark("notice1909", us_published_pre1978 is not False, _why09)
     mark("unpublished_303",
          died is None or died + 70 < THIS_YEAR,
          f"卒年 {died}+70 = {died+70}，未到 {THIS_YEAR}，仍在保护期" if (died and died + 70 >= THIS_YEAR)
@@ -400,6 +415,18 @@ def selftest() -> int:
                       ("空表时", [])):
         s = summarize(cl)
         chk(f"{label}都带口径说明", "★ 口径" in s and "美国法" in s["★ 口径"])
+
+    print("── ★★ 反向对照 ⑰：URAA 提示（v0.0.0.101）──")
+    cn = feasible_grounds(born=1930, died=2021, first_published_country="CN")
+    chk("外国首次出版 → notice1909 带 URAA 提示",
+        "URAA" in cn["notice1909"]["理由"])
+    chk("★ 但**不否决**（仍标「可能」）——恢复只作用于 1996 年时源国仍受保护的作品",
+        cn["notice1909"]["可能"] is True)
+    us = feasible_grounds(born=1900, died=1980, first_published_country="US")
+    chk("首次出版国是美国 → 不带 URAA 提示", "URAA" not in us["notice1909"]["理由"])
+    un = feasible_grounds(born=1803, died=1873)
+    chk("不知道首次出版国 → 不带提示（**不许替人推断**）",
+        "URAA" not in un["notice1909"]["理由"])
 
     print("── ★ 反向对照 ⑪：空表不报错，也不许被读成「通过」──")
     chk("空表返回空问题列表", check([]) == [])
