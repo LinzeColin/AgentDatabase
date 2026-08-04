@@ -371,8 +371,8 @@
     },
     {
       "path": "references/ledgers/_决策台账.md",
-      "sha256": "6a103fba06500bcca45ba0dc2efd75b269645a81190ebd3bb8eb1896efa05dc5",
-      "size_bytes": 94714
+      "sha256": "d27935af44b3410bd66e10688abb506f32b6477b83da5761b546390752165c08",
+      "size_bytes": 96057
     },
     {
       "path": "references/ledgers/_每次开工必读.md",
@@ -466,8 +466,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_answer_surface_leak.py",
-      "sha256": "6b901440c13d17a2c6267636aaef59e0fccbb9e764ddba07531d4e89ece3be05",
-      "size_bytes": 16770
+      "sha256": "ad34a1d9a2707091f75f270f33820c323d5ab9e18ea3ca9fc80b2069752cd1a4",
+      "size_bytes": 17681
     },
     {
       "path": "references/pipeline/checkers/check_attribution_basis.py",
@@ -766,8 +766,8 @@
     },
     {
       "path": "references/pipeline/scaffold/answers_template.py",
-      "sha256": "e8e67a9c4a282eb2c75647dcb3e92cd9ba3e30c6bec5a030fa3231931e385093",
-      "size_bytes": 7220
+      "sha256": "ada1bc0c42664ea1c5bc70b4b2dc1c82b39446e8d9758ec5ca3e57ca13bb6bca",
+      "size_bytes": 7762
     },
     {
       "path": "references/pipeline/scaffold/blind_payload_template.py",
@@ -921,8 +921,8 @@
     },
     {
       "path": "scripts/check_answer_surface_leak.py",
-      "sha256": "6b901440c13d17a2c6267636aaef59e0fccbb9e764ddba07531d4e89ece3be05",
-      "size_bytes": 16770
+      "sha256": "ad34a1d9a2707091f75f270f33820c323d5ab9e18ea3ca9fc80b2069752cd1a4",
+      "size_bytes": 17681
     },
     {
       "path": "scripts/check_attribution_basis.py",
