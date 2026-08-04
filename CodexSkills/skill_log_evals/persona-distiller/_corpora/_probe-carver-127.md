@@ -1,6 +1,6 @@
 # #127 George Washington Carver 可得性探测：**一手最富的一档，却卡在通道数上**
 
-日期：2026-08-05　状态：**lane 2 已定位（PD、full view）——但本机取不到，见第六节**
+日期：2026-08-05　状态：**★★★ 三道全部可取，quick 档前置满足 → 可开工（见第十节）**
 
 ---
 
@@ -300,3 +300,76 @@ Barton    corr-adee-alvey-a-1888-1903 等 ← **通信卷，全在 lane 2**
 
 对卡佛这一次影响不大（他的信本来就已知，检索的目标是**另找**一件），
 **但那条指令本身的前提是错的，记在这里。**
+
+
+---
+
+# 十、★★★ lane 2 解决了——**而且就在 archive.org 上，本机取得到**
+
+第二条检索（找「他的话当年印在会刊／期刊上」那一类）交回两件，
+**其中第一件把整个局面翻过来了**：
+
+```
+identifier  **tariffinformati01meangoog**（archive.org）
+出处        Tariff Information, 1921: Hearings before the Committee on Ways and Means,
+            House of Representatives, 66th Cong., 3d sess., **Schedule G**
+            （Committee Print—**Unrevised**, No. 14）, GPO, 1921
+```
+
+## 我自己下下来核过了（**不是转述**）
+
+```
+metadata：**possible-copyright-status = NOT_IN_COPYRIGHT**、
+          **无 `access-restricted-item`**、1153 页图、PDF＋_djvu.txt＋_hocr_searchtext
+_djvu.txt **实际下载 4,328,671 字节**，无任何挑战
+```
+
+**证词段约 20,055 字符**，逐字照录（**含 OCR 讹字，一字不改**）：
+
+> `STATEMENT OF MB. GEOEOE W. CABVER, UlTITED PEANUT ASSOCIATIOH OF AMEBIGA, TUSKE6EE, ALA.`
+> `The Chairman. All right, Mr. Carver. We will give you 10 minutes.`
+> `Mr. Carver. Mr. Chairman, I have been asked by the United Peanut Growers' Association`
+> `to tell you something about the possi- bility of the peanut and its possible extension.`
+
+```
+**我数到的 `Mr. Carver.` 干净轮次：10**
+另有 OCR 讹变体 Cabvbb／Cabveb／Cabvek／Cakveb／Carvbb／Cabyeb／Cabbw
+同场委员：Garner（Gabneb）／Hawley／Oldfield（Oldfibld）／Rainey（Rainet）／Carew（Cabew）
+```
+
+★ **子代理报的是「39 个轮次」，我数干净形态只有 10。** 差额是 OCR 讹变体。
+**报数以我实测的为准：10 个干净轮次 + 约 7 个讹变体。**
+
+★ 这一件也顺带解掉了第六节那个「取不到」：
+**这个 IA 件本身就是 Google 的扫描件镜像**（卷首印着 `Google This is a digital copy…`），
+**所以 Google Books 挡住的内容，archive.org 这一路是通的。**
+
+## ★★★ 我自己的核验连错三次，而子代理是对的——这一条必须记下来
+
+| 第几次 | 我搜的 | 为什么落空 |
+|---|---|---|
+| 1 | `STATEMENT OF MR. GEORGE W. CARVER`、`Mr. CARVER.`、`The CHAIRMAN.` | **我照抄了子代理从页图上读到的排印形态**（小型大写字母），而 **OCR 文本里是 `MB. GEOEOE W. CABVER`、`Mr. Carver.`、`The Chairman.`** —— 五条全部 0 命中 |
+| 2 | `t.find("Is Mr. Carver in the room")` | **原文里那句中间有换行**；我先前打印时用了 `" ".join(...split())` 归一，**于是照着归一后的样子去 find 原文** |
+| 3 | 段落终点取「下一个 `STATEMENT OF M`」 | **它先匹配到了他自己那一行**，段长归零 |
+
+**三次都是我的脚本错，不是材料错。**
+**第一次尤其危险：我差点据此宣布「子代理报的东西不存在」。**
+
+★ 规矩：**核 OCR 文本时，先归一空白，并且不要用排印形态去搜——用 OCR 实际吐出来的形态。**
+
+# 十一、quick 档前置：**满足**
+
+```
+≥8 份来源       **满**：35 份 bulletin ＋ 3 篇 Iowa Academy 论文 ＋ 3 份 Iowa 站公报 = **41**
+一手占比 ≥0.40  **满**：几乎全是一手
+**≥3 道**       **满**：lane 1 ✓可取　**lane 2 ✓可取（已亲验）**　lane 4 ✓可取
+```
+
+★ 另有 1899 年 Hampton Negro Conference 宣读稿（`reportofhamptonn00hamp_0`, pp.53–55）——
+**子代理自己诚实降级了**：那是事先写好当场宣读的论文，不是速记逐字稿，
+**严格说在 lane 1／lane 2 之间**。不拿它充 lane 2。
+
+★★ 一条**有价值的负结果**：Iowa Academy 那边**找不到他的发言记录**，
+而且是**有据的否定**——该会自己的印本页脚写着 `Read by title and published in Proceedings`，
+**即他那篇 1899 年的论文是「以题目宣读」（本人不在场）**。
+**这类「有据的否定」比「没找到」值钱得多，记下来免得后人重找。**
