@@ -2182,6 +2182,32 @@ Maeda 这轮我换过一次 holdout（原定的 `design_is_isms` 我在分析阶
 
 字段改对了。**但物料目录没动。**
 
+## ★★ 语料落盘的两步，顺序与分工（v0.0.0.108 定清）
+
+`build_source_ledger.py` 与 `ingest.py` **都会往 `raw/` 写文件**，
+两个都跑就是**每份存两遍**——Liebig #124 实测 `raw/` 里 **104 个目录、52 份语料、42 MB**。
+
+分工是：
+
+| 步 | 命令 | 独有产出 |
+|---|---|---|
+| 1 | `build_source_ledger.py --no-copy` | **九列台账 TSV**（`raw/_ids.txt`）：分档、道、归属标记、权利依据 |
+| 2 | `ingest.py <target> <files> --tier … --dimension … --attribution …` | **落文件** + 归一化文本 + 校验和 + `split` + `evidence/source-ledger.jsonl` |
+
+**`ingest` 才是落文件的那一步**（`init_target` 打印的 `next` 里就是它）。
+台账那一步加 `--no-copy`，只写 TSV。
+
+★ 这个重复**看不出来**：两边的计数各自都对（本件报「落盘 52」、`ingest` 报 52），
+**只有去数 `raw/` 里的目录才会发现是 104。**
+且它会让任何按目录扫 `raw/` 的判据**把每份算两遍**。
+
+★ 落盘时 `--attribution` 要写**能出示的东西**（扉页那一行、规范号、出版年）。
+**但它不满足 `research.source-unclaimed`** —— 那道门只认 `A-*` 署名证据，
+或源的 `original_name` 逐字出现在 `meta.json:attribution_basis.covered_sources` 里。
+**两处都要写。**
+
+---
+
 `ingest.py --holdout` 的行为是「保留材料、不复制正文」，所以：
 
 | 目录 | 应有 | 实有 |

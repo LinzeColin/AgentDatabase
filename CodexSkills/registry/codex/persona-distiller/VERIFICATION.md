@@ -1,6 +1,6 @@
-# Release verification — Persona Distiller v0.0.0.107
+# Release verification — Persona Distiller v0.0.0.108
 
-Date: 2026-08-04（**v0.0.0.107**）
+Date: 2026-08-04（**v0.0.0.108**）
 
 > **本文件记录「当前发布号的复验结果」，不是历史归档。**
 > 版本号必须等于根目录 `VERSION`，由 `scripts/check_contract_drift.py` 强制。
@@ -21,6 +21,13 @@ Date: 2026-08-04（**v0.0.0.107**）
 > **表格正文不在任何判据的射程里**。
 > **「本表每一行都来自本次实跑」是一句自述**——
 > 而自述不是证据（见 `self-report-is-not-evidence`）。
+
+> ### v0.0.0.108 这一版重跑了什么
+>
+> **相对 107 给 `build_source_ledger` 加了 `--no-copy`**，并把两步分工写进 RUNBOOK。
+> **本次重跑**：该件自测、**临时工作区实跑对照（默认建 1 个目录／`--no-copy` 建 0 个，
+> 两者台账都是 2 行）**、pytest、`check_contract_drift`。
+> **其余各行沿用 v0.0.0.96 那一次。**
 
 > ### v0.0.0.107 这一版重跑了什么
 >

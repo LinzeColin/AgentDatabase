@@ -244,8 +244,22 @@ def row_line(r: dict) -> str:
                       r.get("locator", ""), r.get("lang", "en"), r["tier"], r["mark"], note])
 
 
-def build(rows: list, src_dir: pathlib.Path, raw_dir: pathlib.Path, header: str) -> dict:
-    """落盘 + 写台账 → 计量。**校验不过就抛，不写半份。**"""
+def build(rows: list, src_dir: pathlib.Path, raw_dir: pathlib.Path, header: str,
+          copy_files: bool = True) -> dict:
+    """落盘 + 写台账 → 计量。**校验不过就抛，不写半份。**
+
+    ★★ `copy_files=False`（CLI `--no-copy`，v0.0.0.108）：**只写台账，不复制正文**。
+
+    起因：Liebig #124 的 `raw/` 里**每份存了两遍**、42 MB——
+    本件写 `<short>/<short>.txt`，而 `ingest.py` 又写了一份 `src-XXXX/<原名>.txt`。
+    两者都是「把语料落进工作区」，同时跑就是双份。
+
+    **`ingest.py` 才是落文件的那一步**（`init_target` 打印的 `next` 里就是它，
+    它还要算归一化文本、校验和、split）。本件的独有产出是**九列台账 TSV**。
+    所以流水线该是：本件 `--no-copy` 出台账 → `ingest` 落文件。
+
+    ★ 默认仍是 `True`——**已有调用方的行为不变**，要省那一份得显式说。
+    """
     problems = validate(rows)
     if problems:
         raise SystemExit("✗ **台账校验未过，一行都没写**：\n  " + "\n  ".join(problems[:12]))
@@ -261,8 +275,10 @@ def build(rows: list, src_dir: pathlib.Path, raw_dir: pathlib.Path, header: str)
             print(f"  ⚠ **{r['short']} 与 {seen_sha[sha]} 逐位相同，跳过**（同一份下了两次）")
             skipped += 1; continue
         seen_sha[sha] = r["short"]
-        d = raw_dir / r["short"]; d.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(src, d / f"{r['short']}.txt"); copied += 1
+        if copy_files:
+            d = raw_dir / r["short"]; d.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(src, d / f"{r['short']}.txt")
+        copied += 1
         lines.append(row_line(r))
 
     (raw_dir / "_ids.txt").write_text("\n".join(lines) + "\n", encoding="utf-8")
@@ -305,7 +321,7 @@ def build(rows: list, src_dir: pathlib.Path, raw_dir: pathlib.Path, header: str)
     for r in rows:
         g = r.get("rights_ground") or "（未写）"
         grounds[g] = grounds.get(g, 0) + 1
-    return {"落盘": copied, "跳过": skipped, "台账行数": len(body), "权利依据": grounds,
+    return {("落盘" if copy_files else "**登记（未复制正文）**"): copied, "跳过": skipped, "台账行数": len(body), "权利依据": grounds,
             "分档": tiers, "道": lanes,
             "一手（P1+P2）": p1 + p2, "其中 P2 重复见证": p2, "**去重后一手**": p1}
 
@@ -455,6 +471,9 @@ def main() -> int:
     ap.add_argument("--src", help="源文件所在目录")
     ap.add_argument("--raw", help="要写入的 raw/ 目录")
     ap.add_argument("--header", default="corpus ledger", help="台账首行注释")
+    ap.add_argument("--no-copy", action="store_true",
+                    help="**只写台账，不复制正文**——落文件交给 `ingest.py`，"
+                         "否则同一份会在 raw/ 里存两遍（Liebig #124 实测 42 MB）")
     ap.add_argument("--self-test", action="store_true")
     a = ap.parse_args()
 
@@ -464,7 +483,8 @@ def main() -> int:
         ap.error("要么 --self-test，要么给齐 --rows/--src/--raw")
 
     rows = json.loads(pathlib.Path(a.rows).read_text(encoding="utf-8"))
-    info = build(rows, pathlib.Path(a.src), pathlib.Path(a.raw), a.header)
+    info = build(rows, pathlib.Path(a.src), pathlib.Path(a.raw), a.header,
+                 copy_files=not a.no_copy)
     for k, v in info.items():
         print(f"  {k}: {v}")
     return 0
