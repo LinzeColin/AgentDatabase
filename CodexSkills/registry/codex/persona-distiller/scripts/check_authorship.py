@@ -172,7 +172,21 @@ def build_patterns(full_name: str) -> dict:
     if first == last:
         name_rx = first
     else:
-        name_rx = rf"{first}[ \t]+(?:[A-Z][A-Za-z.'\-]{{0,15}}[ \t]+){{0,2}}{last}"
+        # ★★ v0.0.0.129：**名可以是缩写**——`By G. W. Carver` / `By Geo. W. Carver`。
+        #   Carver #127 实测：他 35 份塔斯基吉公报署的全是 `By G. W. Carver`
+        #   或 `G. W. Carver, M. S. Agr. Director`，**名从不写全**。
+        #   旧式只认拼全的 `George`，于是 **63 条 `research.authorship-unproven`**——
+        #   一整批货真价实的亲笔公报被判「无据」。
+        #   ★ 这与本件已经学过的那一课同形（逐字稿用缩写标签 `MS:`，v0.0.0.10），
+        #     **只是那次学在「说话人标签」上，没学到「署名」上。**
+        #   ★★ **首字母必须对得上**，所以射程没有放宽：
+        #     同姓的 **T**homas Nixon Carver 与 **W**. A. Carver 仍然匹配不上——
+        #     而这两个人正是本人物抓源时的已知混淆源。
+        _fw = tokens[0]
+        _init = re.escape(_fw[0])
+        _abbr3 = re.escape(_fw[:3])          # George → Geo.（19 世纪常见缩写）
+        first_alt = rf"(?:{first}|{_abbr3}\.|{_init}\.)"
+        name_rx = rf"{first_alt}[ \t]+(?:[A-Z][A-Za-z.'\-]{{0,15}}[ \t]+){{0,2}}{last}"
     # 姓氏单独出现也算（`By Steinhardt` 式的短署名）——但只用于**标签归属**判定，
     # 不用于署名判定，避免把「谈论他」的句子当成他的署名。
     surname_rx = re.escape(surname)
@@ -921,6 +935,21 @@ def self_test() -> int:
     #   改动前：build_patterns("Galen") 直接抛；
     #           build_patterns("Galen of Pergamon") 把地名 Pergamon 当姓，
     #           于是 own_voice_ratio 静默报 0.0——而真值接近 1.0。
+    # ★★★ v0.0.0.129 回归守卫：**名缩写的署名必须认得，同姓异名的必须认不得。**
+    #   Carver #127 实测：35 份公报署的是 `By G. W. Carver`，旧式只认拼全的 `George`，
+    #   **63 条 authorship-unproven**。而放宽之后**射程不许跟着放宽**——
+    #   同姓的 Thomas Nixon Carver（T）与 W. A. Carver（W）是本人物已知的混淆源。
+    _cv = build_patterns("George Washington Carver")
+    for _line, _should in (("By G. W. Carver As we learn", True),
+                           ("By GEO. W. CARVER, M. S. AGR.", True),
+                           ("By GEORGE W. CARVER, M. S. Agr.", True),
+                           ("By George Washington Carver", True),
+                           ("By T. N. Carver of Harvard", False),
+                           ("By W. A. Carver", False),
+                           ("By John F. Carew", False)):
+        if bool(_cv["BYLINE"].search(_line)) is not _should:
+            bad.append(f"名缩写署名：{_line!r} 的 BYLINE 判定应为 {_should}")
+
     for nm, want, line, should in [
         ("Galen", "Galen", "By Galen", True),
         ("Galen of Pergamon", "Galen", "By Galen", True),
