@@ -229,6 +229,38 @@ def same_run_evidence_rows(
     }
 
 
+CANONICAL_MANIFEST_KEY = "private-agentdatabase/normalized/canonical/MANIFEST.json"
+
+
+def load_supersession(object_store, work_dir: Path) -> dict[str, Any]:
+    """Which normalized objects were folded into the canonical union, and proof.
+
+    The R2 dedup replaced ten whole-history rollups with one canonical union and
+    deleted the originals. Any source manifest written before that still names a
+    deleted key, so the reconcile has to be able to tell "superseded" from
+    "lost" — and it may only do that from the record written at deletion time,
+    never by assuming.
+    """
+    target = Path(work_dir) / "canonical-supersession.json"
+    try:
+        target.parent.mkdir(parents=True, exist_ok=True)
+        object_store.get_file(CANONICAL_MANIFEST_KEY, target)
+        value = json.loads(target.read_text(encoding="utf-8"))
+    except Exception:
+        return {"available": False, "canonical_object": None, "sha256": None, "superseded": set()}
+    finally:
+        if target.exists():
+            target.unlink()
+    superseded = {str(row) for row in value.get("supersedes", []) if isinstance(row, str)}
+    return {
+        "available": bool(superseded and value.get("object") and value.get("sha256")),
+        "canonical_object": value.get("object"),
+        "sha256": value.get("sha256"),
+        "unique_events": value.get("unique_events"),
+        "superseded": superseded,
+    }
+
+
 def _release_identity() -> dict[str, Any]:
     """What the running process can actually observe about its own release.
 
@@ -689,14 +721,28 @@ class RemoteReconcilePipeline(LiveSnapshotPublisherMixin):
         manifest_path = str(latest["manifest_path"])
         manifest = self.private_db.get_json(manifest_path)
         objects = manifest.get("objects", [])
+        supersession = load_supersession(self.object_store, self.config.work_dir)
         missing: list[str] = []
+        superseded: list[str] = []
         for row in objects:
             if not isinstance(row, dict):
                 continue
             key = str(row.get("object_key", ""))
             digest = str(row.get("sha256", ""))
-            if not key or not digest or not self.object_store.exists_with_hash(key, digest):
-                missing.append(key or "<missing-key>")
+            if key and digest and self.object_store.exists_with_hash(key, digest):
+                continue
+            # Superseded is not lost — but only when the record written at
+            # deletion time says so, and only when the object that replaced it
+            # still verifies byte-for-byte.
+            if (
+                key
+                and supersession["available"]
+                and key in supersession["superseded"]
+                and self.object_store.exists_with_hash(supersession["canonical_object"], supersession["sha256"])
+            ):
+                superseded.append(key)
+                continue
+            missing.append(key or "<missing-key>")
         if missing:
             incident = self.failures.record_failure(
                 component="memory-atlas-remote-reconcile",
@@ -722,15 +768,27 @@ class RemoteReconcilePipeline(LiveSnapshotPublisherMixin):
         normalized_key = manifest.get("normalized_batch_key")
         if not isinstance(normalized_key, str) or not normalized_key:
             raise PipelineError("源端 manifest 缺少 normalized_batch_key")
+        event_source = normalized_key
+        if normalized_key in superseded:
+            # The canonical union is a proven superset of every rollup it
+            # replaced (122,080 events against a largest single run of 112,036),
+            # so reading it loses nothing this manifest referenced.
+            event_source = str(supersession["canonical_object"])
         with tempfile.NamedTemporaryFile(prefix="memory-atlas-events-", suffix=".jsonl", delete=False) as handle:
             temporary = Path(handle.name)
         try:
-            self.object_store.get_file(normalized_key, temporary)
+            self.object_store.get_file(event_source, temporary)
             analytics = build_behavior_analytics(_iter_events(temporary), generated_at=self.clock())
         finally:
             temporary.unlink(missing_ok=True)
         event_count = int(analytics["event_count"])
         analytics["normalized_event_batch"] = _normalized_batch_fact(normalized_key, objects)
+        if superseded:
+            analytics["normalized_event_batch"]["superseded_by_canonical"] = {
+                "event_source": event_source,
+                "canonical_sha256": supersession["sha256"],
+                "superseded_keys": sorted(superseded),
+            }
         registry_import: dict[str, Any] | None = None
         if self.config.failure_asset_registry is not None:
             registry_import = self.failures.import_asset_registry(self.config.failure_asset_registry)

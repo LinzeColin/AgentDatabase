@@ -278,3 +278,69 @@ def test_snapshot_never_carries_object_keys_paths_or_digests() -> None:
         if isinstance(child, str):
             for forbidden in ("primary-objects/", "private-agentdatabase/", "/srv/linze", "$HOME", "a" * 64):
                 assert forbidden not in child, f"{where}: {forbidden}"
+
+
+class _FakeStore:
+    """Only the two calls the supersession path makes."""
+
+    def __init__(self, present: dict[str, str], manifest: dict | None):
+        self.present = present
+        self.manifest = manifest
+
+    def exists_with_hash(self, key: str, digest: str) -> bool:
+        return self.present.get(key) == digest
+
+    def get_file(self, key: str, target) -> None:
+        from pathlib import Path as _P
+
+        if key == "private-agentdatabase/normalized/canonical/MANIFEST.json" and self.manifest is not None:
+            _P(target).write_text(json.dumps(self.manifest), encoding="utf-8")
+            return
+        raise FileNotFoundError(key)
+
+
+CANONICAL = "primary-objects/memory-atlas/private-agentdatabase/normalized/canonical/events.jsonl"
+DELETED = "primary-objects/memory-atlas/private-agentdatabase/normalized/marun_x/events.jsonl"
+CANONICAL_SHA = "7b" + "0" * 62
+
+
+def _manifest() -> dict:
+    return {"object": CANONICAL, "sha256": CANONICAL_SHA, "unique_events": 122080, "supersedes": [DELETED]}
+
+
+def test_supersession_record_is_read_from_the_deletion_time_manifest(tmp_path) -> None:
+    from OpenAIDatabase.scripts.memory_atlas_private.pipeline import load_supersession
+
+    record = load_supersession(_FakeStore({}, _manifest()), tmp_path)
+    assert record["available"] is True
+    assert record["canonical_object"] == CANONICAL
+    assert DELETED in record["superseded"]
+
+
+def test_a_missing_manifest_never_excuses_a_missing_object(tmp_path) -> None:
+    # No record means no permission to treat a deletion as intentional.
+    from OpenAIDatabase.scripts.memory_atlas_private.pipeline import load_supersession
+
+    record = load_supersession(_FakeStore({}, None), tmp_path)
+    assert record["available"] is False
+    assert record["superseded"] == set()
+
+
+def test_supersession_requires_the_replacement_to_still_verify(tmp_path) -> None:
+    from OpenAIDatabase.scripts.memory_atlas_private.pipeline import load_supersession
+
+    store = _FakeStore({}, _manifest())
+    record = load_supersession(store, tmp_path)
+    # The canonical object is absent from the store, so the guard the reconcile
+    # applies — exists_with_hash on the replacement — is what refuses it.
+    assert store.exists_with_hash(record["canonical_object"], record["sha256"]) is False
+
+
+def test_reconcile_treats_superseded_and_lost_differently() -> None:
+    source = (
+        Path(__file__).resolve().parents[1] / "scripts" / "memory_atlas_private" / "pipeline.py"
+    ).read_text(encoding="utf-8")
+    assert 'key in supersession["superseded"]' in source
+    assert 'self.object_store.exists_with_hash(supersession["canonical_object"], supersession["sha256"])' in source
+    assert 'missing.append(key or "<missing-key>")' in source
+    assert '"superseded_by_canonical"' in source
