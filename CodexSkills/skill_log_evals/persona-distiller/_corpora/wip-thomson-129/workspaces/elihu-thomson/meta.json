@@ -53,5 +53,18 @@
   "Thoms",
   "Dodd"
  ],
- "known_namesakes_note": "探测实测：1887 年专利索引里挨着他名字的 27 个号，**16 个是别人的**——十二个 Thompson，另加 Nash／Smith／Jones／William Arthur Thoms。最险的是 361,382 A. THOMSON（姓对、拼写对、人不对）。另有 E. P. Thomson／G. A. Thomson／Clarence Thomson／Samuel Thomson Dodd，以及 Sir William Thomson（开尔文）——而他写过开尔文的悼念文。archive.org creator 检索已吐出假阳性《The Collegiate Algebra》（实为 Elihu T. Quimby）。"
+ "known_namesakes_note": "探测实测：1887 年专利索引里挨着他名字的 27 个号，**16 个是别人的**——十二个 Thompson，另加 Nash／Smith／Jones／William Arthur Thoms。最险的是 361,382 A. THOMSON（姓对、拼写对、人不对）。另有 E. P. Thomson／G. A. Thomson／Clarence Thomson／Samuel Thomson Dodd，以及 Sir William Thomson（开尔文）——而他写过开尔文的悼念文。archive.org creator 检索已吐出假阳性《The Collegiate Algebra》（实为 Elihu T. Quimby）。",
+ "attribution_basis": {
+  "authority": "**印本署名逐份实读**，不靠权威档 ID。本人物 52/56 份的归属证据是`check_authorship` 逐源实测取到的 A-* 码：A-byline-ocr 23（名或姓被 OCR 打坏的署名/发言标签）、A-signature-block 16、A-byline 11、A-byline-standalone 2。★ 我**没有**查证 LoC 规范档编号——**不查证的东西不写进来**。",
+  "citation": "Transactions of the American Institute of Electrical Engineers vol. iv (1887) pp.160–173；vol. vi (1889) pp.269–286；vol. xii (1895) pp.288–297（★ 月刊分册作 pp.394–403，两个数都在台账里并注明哪个是从叶上读到的）；vol. xiv (1897) pp.225–226。US Letters Patent 356,903／358,131／360,123／360,124／360,125／363,183／363,185／367,470／367,471／367,866／369,754／370,573——**十二件逐件取原叶读过扉页署名**。Science／PNAS／Proc. APS／Proc. AAAS 各篇署名见各源 `authorship_detail.evidence`。",
+  "disputed_policy": "**同名一律按姓氏拒收，除非扉页/发言标签上的名与姓都对得上。**已声明同名：Thompson／Quimby／Thoms／Dodd（见 `known_namesakes`）。★ `Thomson` 与 `Thompson` 的编辑距离只有 1，故 OCR 容错设了硬护栏：候选姓与任一已声明同名的距离 ≤ 与目标姓的距离时**一律拒绝**。★★ **公司名 `Thomson-Houston` 含他的姓，但公司出的东西不是他写的**——本库不收任何以公司或同事署名的件。",
+  "disputed_works": [
+   "**1887 年专利索引里挨着他名字的 27 个号，实读后 16 个是别人的**——十二个 Thompson，另有 Nash／Smith／Jones／William Arthur Thoms。最险的一件：**361,382 是 A. THOMSON 的平衡滑阀——姓对、拼写对、人不对**，已拒。",
+   "**焊接专利与 Thomson–Rice 弧灯：号码列在扫描件上被裁掉，无从核实，两件都不收。**因此本库**一条 CO-AUTHORED 都没有**——不是他没有合作发明，是能核实的那些没取到。",
+   "《The Collegiate Algebra》——archive.org creator 检索的假阳性，实为 **Elihu T. Quimby**，已拒。",
+   "开尔文悼念文（Proc. AAAS 1916）**收了**：作者是他，**但其主语是另一个 Thomson（Sir William Thomson, Lord Kelvin）**——引用时不得把两人混为一谈。",
+   "`autograph-letters-swampscott`：手写件 OCR 只出 3,322 字符/481 个乱码词，正文不可读，且同一装裱上另有他人手迹。**已由 P1 降为 U——读不出来的东西不算一手证据。**"
+  ],
+  "counting_convention": "一手 = P1+P2。降级后 52/56 = 92.9%。★ 3 份 S2（第三方）与 1 份 U（上条那件）不计入一手。"
+ }
 }
