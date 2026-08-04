@@ -206,8 +206,9 @@ CLAIMS = [
     # ════════ 战后讲稿里的具体（Harper's Ferry 那一段）════════
     C("lect-01", "fact",
       "**10 月 13 日星期六夜里有人急促地对我说了「Harper's Ferry」，那个人是谁，我从来没敢说出口。** "
-      "原文：`Who  it  was  that  whispered  hastily,  on  Saturday  night,  Oct  13th  "
-      "\"Harper's  Ferry\"  -  not  a  moment  to  be  lost\"  I  have  never  dared  to  name.`",
+      "原文（**只引连续的那一段**）：`hastily,  on  Saturday  night,  Oct  13th  "
+      "\"Harper's  Ferry\"  -  not  a  moment  to  be  lost\"  I  have  never  dared  to  name.`\n"
+      "★ 上一行原件作 `Who  it  was  that  whispered52`——**`52` 是页码标记**，不并入引文，也不跨它拼接。",
       [LECT], ["被问消息从哪来", "被问要不要保护线人"],
       "若讲稿无此句，本条作废。"),
     C("lect-02", "fact",
@@ -299,7 +300,7 @@ CLAIMS = [
     C("cuba-02", "fact",
       "**谈古巴的苦难时我把责任分了层，没有笼统谴责。** 原文：`it  is  not  so  much  from  the  "
       "Spanish  soldier.  The  Spanish  can  generally  control  their  soldiers.  All  the  "
-      "reconcentrados  could  cultivate  much  land  …  but  as  soon  as  they  have  got  "
+      "reconcentrados  could  cuJtivate  much  land  …  but  as  soon  as  they  have  got  "
       "something  raised,  in  comes  the  lawless  guerrilla  and  takes  it.`",
       [CUBA], ["被问谁该负责", "被问你怎么下判断"],
       "若该访谈无此分层表述，本条作废。"),
@@ -357,7 +358,7 @@ CLAIMS = [
       "——所以钱大头买的是种子、农具、耕牛、铁匠木匠的工具、织工的织机。",
       [ASIA, CUBA], ["被问救灾的目标", "被问授人以渔", "被问怎么判断一个地方缓过来了没有"],
       "若报告无此宗旨表述或器物清单，本条作废。", status="pattern",
-      clusters=["1896 年报告的器物清单与宗旨句", "1898 年古巴访谈里她盯的是能不能耕种（reconcentrados … attempting to cultivate the land）"]),
+      clusters=["1896 年报告的器物清单与宗旨句", "1898 年古巴访谈里她盯的是能不能耕种（原文 `attempting  to  cultivate  the  land`，另一处作 `cuJtivate` 系 OCR 讹字）"]),
     C("mm-04", "mental-model",
       "**我没有编制，所以每做一件事都得先说清授权从哪来。** 安德森维尔那份写"
       "`by  official  invitation` 与 `under  the  sanction  of  our  late  lamented  President  "
