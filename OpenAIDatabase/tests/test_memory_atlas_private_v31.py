@@ -1111,7 +1111,11 @@ def test_deploy_preflights_candidate_and_rolls_back_blocking_probe() -> None:
     assert 'rollback_promoted_release "$probe_rc" || true' in text
     assert "trap post_promotion_error ERR" in text
     assert text.index("trap post_promotion_error ERR") < text.index("sudo systemctl restart memory-atlas-api.service")
-    assert "sudo systemctl restart memory-atlas-reconcile.service memory-atlas-action-worker.service" in text
+    # Both are restarted after promotion; the reconcile is --no-block because it
+    # is a oneshot that streams 389 MB and rebuilding blocked the deploy for ten
+    # minutes. The intent is "both restart", not one particular line of text.
+    assert "sudo systemctl restart memory-atlas-action-worker.service" in text
+    assert "sudo systemctl restart --no-block memory-atlas-reconcile.service" in text
     assert "sudo systemctl start memory-atlas-reconcile.service memory-atlas-action-worker.service" not in text
     assert text.index("trap - ERR") < text.index('"$agent_release/ops/memory-atlas/post-promote-probe.sh" "$release_id"')
     assert text.index('"$agent_release/ops/memory-atlas/post-promote-probe.sh" "$release_id"') < text.index('case "$probe_rc" in')
