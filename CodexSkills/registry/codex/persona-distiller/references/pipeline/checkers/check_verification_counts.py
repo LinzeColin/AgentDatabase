@@ -122,6 +122,28 @@ def audit(root: pathlib.Path) -> dict:
         bad += not ok
         rows.append({"项": key, "实况": r, "文中": vals,
                      "判定": "✓" if ok else f"**对不上**（文中最新写 {vals[0]}，实况 {r}）"})
+    # ★★ 2026-08-05 加：**待裁定台账自己声明的条数**，与实际的 `## ①…` 条数。
+    #   实测那天它标题写「十条」、导语写「十一条」，而实际有 **12 条**——
+    #   同一份文件里两个数字，两个都错。**和 VERIFICATION.md 那次同一种漂**，
+    #   而此前没有任何门看它一眼。
+    led = root / "references" / "ledgers" / "_待用户裁定.md"
+    if led.is_file():
+        lt = led.read_text(encoding="utf-8")
+        n_real = len(re.findall(r"^## [①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮]", lt, re.M))
+        CN = "〇一二三四五六七八九十"
+        def _cn(x):
+            return "十" + CN[x - 10] if 10 < x < 20 else ("十" if x == 10 else CN[x])
+        want = _cn(n_real)
+        saids = re.findall(r"待用户裁定（\*\*(.+?)条\*\*）|一眼看完：(.+?)条各是什么", lt)
+        flat = [x for pair in saids for x in pair if x]
+        off = [s for s in flat if s != want]
+        rows.append({"项": "待裁定台账条数", "实况": f"{n_real}（{want}条）",
+                     "文中": flat or None,
+                     "判定": "✓" if (flat and not off)
+                             else (f"**对不上**（文中写 {off}，实况 {want}条）" if off
+                                   else "文中没有声明条数——**本件管不到，不算通过**")})
+        bad += bool(off)
+
     return {"**对不上的项数**": bad, "明细": rows,
             "★ 射程": "只管能机械数出来的几类；「真实夹具 5/19」那种要读判据内部结构的本件不碰",
             "★ 口径": "**只报不改**——对不上时不知道该改哪边（文件陈旧 or 仓库真少了东西），那是人的判断"}
@@ -147,6 +169,33 @@ def self_test() -> int:
     chk(f"{s4}", not s4)
     chk("★ 而同一段去掉「真值」注解后**要收上来**（证明不是正则本身失效）",
         stated("checksum **305 files**、Python 脚本 **66**").get("Python脚本数") == [66])
+    print("── ★★★ 反向对照⑤：**待裁定台账自称的条数与实际 `## ①…` 条数对不上 → 必须报** ──")
+    import tempfile
+    with tempfile.TemporaryDirectory() as td:
+        root = pathlib.Path(td)
+        (root / "VERIFICATION.md").write_text("判据 **1** 件", encoding="utf-8")
+        led = root / "references" / "ledgers"
+        led.mkdir(parents=True)
+        # 标题写「十条」、导语写「十一条」，而实际写了 12 条 —— 2026-08-05 的真实状态
+        body = ("# 待用户裁定（**十条**）\n\n## 一眼看完：十一条各是什么\n\n"
+                + "".join(f"## {c} x\n\n" for c in "①②③④⑤⑥⑦⑧⑨⑩⑪⑫"))
+        (led / "_待用户裁定.md").write_text(body, encoding="utf-8")
+        r = audit(root)
+        row = [x for x in r["明细"] if x["项"] == "待裁定台账条数"][0]
+        chk(f"实况 {row['实况']}，文中 {row['文中']} → {row['判定'][:24]}",
+            "对不上" in row["判定"] and r["**对不上的项数**"] >= 1)
+
+        print("── ★★ 反向对照⑥：**改成一致之后就不许再报**（证明不是恒报） ──")
+        (led / "_待用户裁定.md").write_text(
+            body.replace("**十条**", "**十二条**").replace("十一条", "十二条"), encoding="utf-8")
+        row2 = [x for x in audit(root)["明细"] if x["项"] == "待裁定台账条数"][0]
+        chk(f"{row2['判定']}", row2["判定"] == "✓")
+
+        print("── ★ 反向对照⑦：**台账不存在时不报，也不算通过** ──")
+        (led / "_待用户裁定.md").unlink()
+        chk("台账缺失 → 明细里没有这一项",
+            not [x for x in audit(root)["明细"] if x["项"] == "待裁定台账条数"])
+
     print("── ★★ 反向对照②：文中根本没写这个数 → 报「管不到」，**不许算通过** ──")
     s3 = stated("这段里什么数都没有")
     chk(f"{s3}", not s3)
