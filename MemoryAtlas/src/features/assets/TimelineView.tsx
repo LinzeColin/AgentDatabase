@@ -244,14 +244,14 @@ export function TimelineView({
             onClick={() => updateTimelineRendererMode("memory-river")}
             type="button"
           >
-            Memory River
+            记忆河流
           </button>
           <button
             aria-pressed={timelineRendererMode === "legacy"}
             onClick={() => updateTimelineRendererMode("legacy")}
             type="button"
           >
-            Legacy
+            旧版
           </button>
         </div>
         <button aria-label={timelinePlaying ? "暂停时间轴播放" : "播放时间轴"} className="icon-control" onClick={() => setTimelinePlaying((value) => !value)} disabled={feedbackSettings.reducedMotion} type="button">
@@ -288,10 +288,10 @@ export function TimelineView({
       >
         <div className="river-mode-tabs" role="group" aria-label="记忆时间河交互模式">
           <button aria-pressed={interactionMode === "pan"} onClick={() => setInteractionMode("pan")} type="button">
-            Pan
+            平移
           </button>
           <button aria-pressed={interactionMode === "brush"} onClick={() => setInteractionMode("brush")} type="button">
-            Brush
+            框选
           </button>
         </div>
         <span className="timeline-range-readout">
@@ -307,7 +307,7 @@ export function TimelineView({
             onChange={(event) => updateFeedbackSettings({ reducedMotion: event.target.checked })}
             type="checkbox"
           />
-          <span>Reduced Motion</span>
+          <span>降低动效</span>
         </label>
         <label className="feedback-toggle">
           <input

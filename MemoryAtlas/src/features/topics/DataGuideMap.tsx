@@ -8,6 +8,7 @@ import { DATA_MAP_STRUCTURE_LAYERS, DataGuideEdge } from "../../shared/atlas/lay
 import { humanNodeDisplayTitle } from "../../shared/atlas/semanticHuman";
 import { isActivationKey, translateKind } from "../../shared/atlas/utils";
 import { DataGuideSvgNode, DeltaStrip, GraphUsageStrip, LegendItem } from "../../shared/ui/primitives";
+import { humanizeMachineText } from "../../shared/atlas/machineTokenHuman";
 
 
 
@@ -97,7 +98,7 @@ export function DataGuideMap({
         {DATA_MAP_STRUCTURE_LAYERS.map((layer) => (
           <span key={layer.id} data-data-map-layer={layer.id}>
             <b>{layer.label}</b>
-            <em>{layer.nodeTypes.join(" / ")}</em>
+            <em>{layer.nodeTypes.map(humanizeMachineText).join(" / ")}</em>
           </span>
         ))}
       </div>
@@ -287,7 +288,7 @@ export function DataMapNodeDetailPanel({
             <span>证据</span>
             <ul className="data-map-node-evidence-list">
               {detail.evidenceRefs.map((ref) => (
-                <li key={ref}>{ref}</li>
+                <li key={ref} title={ref}>{humanizeMachineText(ref)}</li>
               ))}
             </ul>
           </section>

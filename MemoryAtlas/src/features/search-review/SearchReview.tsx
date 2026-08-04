@@ -92,7 +92,7 @@ export function SearchReview({
       <HumanOverviewPanel nodes={nodes} deltaStats={deltaStats} />
       <section className="search-2-controls" aria-label="Search 2.0 query_input">
         <label className="search-2-query">
-          <span>query_input</span>
+          <span>查询输入</span>
           <div className="search-2-input-frame">
             <Search size={16} />
             <input
@@ -105,7 +105,7 @@ export function SearchReview({
         </label>
         <div className="search-2-filter-grid">
           <label>
-            <span>tier</span>
+            <span>层级</span>
             <select value={searchFilters.tier} onChange={(event) => updateSearchFilter({ tier: event.target.value as Search2TierFilter })}>
               <option value="all">{humanizeMachineText("all")}</option>
               <option value="core_profile">{humanizeMachineText("core_profile")}</option>
@@ -118,7 +118,7 @@ export function SearchReview({
             </select>
           </label>
           <label>
-            <span>topic</span>
+            <span>主题</span>
             <select value={searchFilters.topic} onChange={(event) => updateSearchFilter({ topic: event.target.value })}>
               <option value="all">{humanizeMachineText("all")}</option>
               {topicOptions.map((topic) => (
