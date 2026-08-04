@@ -355,14 +355,14 @@ export function ObsidianGraphScene({ nodes, edges, selectedNode, sharedFocus, de
         <span><b>隐藏</b><em>{dataset.hiddenByLimit} 个超限节点 / {dataset.orphanCount} 个孤立节点</em></span>
       </div>
       <div className="obsidian-local-budget" aria-label="Local Graph Budget">
-        <span><b>Primary</b><em>{dataset.primaryNeighborCount}</em></span>
-        <span><b>Secondary</b><em>{dataset.secondaryNeighborCount}</em></span>
-        <span><b>Local Hidden</b><em>{dataset.hiddenByLocalBudget}</em></span>
-        <span><b>Label Budget</b><em>{dataset.labelBudget}/{dataset.zoomLabelBudget}</em></span>
+        <span><b>主邻域</b><em>{dataset.primaryNeighborCount}</em></span>
+        <span><b>次邻域</b><em>{dataset.secondaryNeighborCount}</em></span>
+        <span><b>局部隐藏</b><em>{dataset.hiddenByLocalBudget}</em></span>
+        <span><b>标签预算</b><em>{dataset.labelBudget}/{dataset.zoomLabelBudget}</em></span>
       </div>
-      <div className="obsidian-focus-connectivity" aria-label="Focus - Connectivity">
+      <div className="obsidian-focus-connectivity" aria-label="焦点连通度">
         <div>
-          <span>Focus - Connectivity</span>
+          <span>焦点连通度</span>
           <strong>{focusStats.title}</strong>
         </div>
         <dl>

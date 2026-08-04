@@ -1178,7 +1178,9 @@ def audit_visual_acceptance(repo_root: Path) -> dict[str, Any]:
         and "useState(false)" in obsidian_source
         and "obsidian-settings-collapsed" in obsidian_source
         and "onClose={() => setSettingsOpen(false)}" in obsidian_source
-        and "Focus - Connectivity" in obsidian_source
+        # The English label was pinned; the guarantee is that the focus
+        # connectivity panel exists, and the page must be Chinese.
+        and ("Focus - Connectivity" in obsidian_source or "焦点连通度" in obsidian_source)
         and "buildFocusConnectivity" in obsidian_source
         and "displayNodeLabel" in obsidian_source
         and "memoryKeyword" in obsidian_source

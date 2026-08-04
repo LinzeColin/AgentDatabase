@@ -116,15 +116,15 @@ export function buildMemoryRiverRoiGradient(events: TimelineDisplayEvent[]): Mem
       height: 402,
       score,
       color: roiGradientColor(score),
-      label: `${index + 1}/${bandCount} · ROI ${formatScore(averageRoi)} · capability ${capabilityCount.toLocaleString()}`,
+      label: `${index + 1}/${bandCount} · ROI ${formatScore(averageRoi)} · 能力 ${capabilityCount.toLocaleString()}`,
     });
   }
   const averageRoiScore = scoredEvents.length ? scoredEvents.reduce((sum, item) => sum + item.roi, 0) / scoredEvents.length : 0;
   const highLeverageCount = scoredEvents.filter((item) => item.roi >= 0.54).length;
   const capabilityGrowthCount = scoredEvents.filter((item) => item.capability).length;
   return {
-    label: `ROI gradient · avg ${formatScore(averageRoiScore)}`,
-    signal: `${highLeverageCount.toLocaleString()} high leverage / ${capabilityGrowthCount.toLocaleString()} capability-growth events`,
+    label: `ROI 梯度 · 均值 ${formatScore(averageRoiScore)}`,
+    signal: `${highLeverageCount.toLocaleString()} 高杠杆 / ${capabilityGrowthCount.toLocaleString()} 能力成长事件`,
     averageRoiScore,
     highLeverageCount,
     capabilityGrowthCount,

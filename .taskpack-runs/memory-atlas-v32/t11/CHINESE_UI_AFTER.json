@@ -1,16 +1,15 @@
 {
   "schema_version": "memory_atlas.chinese_ui_audit.v1",
-  "captured_at": "2026-08-04T09:29:11.026Z",
+  "captured_at": "2026-08-04T09:39:22.839Z",
   "page_url": "http://127.0.0.1:4174/",
   "verdict": "FAIL",
-  "finding_count": 117,
+  "finding_count": 97,
   "by_view": {
     "home": 27,
     "galaxy": 6,
     "notion": 17,
     "roi": 1,
-    "obsidian": 5,
-    "timeline": 19,
+    "timeline": 4,
     "wordcloud": 7,
     "search": 23,
     "summary": 9,
@@ -271,106 +270,6 @@
       "view": "roi",
       "kind": "machine_identifier",
       "text": "codex_usage_record"
-    },
-    {
-      "view": "obsidian",
-      "kind": "untranslated",
-      "text": "Primary"
-    },
-    {
-      "view": "obsidian",
-      "kind": "untranslated",
-      "text": "Secondary"
-    },
-    {
-      "view": "obsidian",
-      "kind": "untranslated",
-      "text": "Local Hidden"
-    },
-    {
-      "view": "obsidian",
-      "kind": "untranslated",
-      "text": "Label Budget"
-    },
-    {
-      "view": "obsidian",
-      "kind": "untranslated",
-      "text": "Focus - Connectivity"
-    },
-    {
-      "view": "timeline",
-      "kind": "untranslated",
-      "text": "ROI gradient · avg 0.41 · 86 high leverage / 86 capability-growth events"
-    },
-    {
-      "view": "timeline",
-      "kind": "untranslated",
-      "text": "1/12 · ROI 0.00 · capability 0"
-    },
-    {
-      "view": "timeline",
-      "kind": "untranslated",
-      "text": "2/12 · ROI 0.00 · capability 0"
-    },
-    {
-      "view": "timeline",
-      "kind": "untranslated",
-      "text": "3/12 · ROI 0.00 · capability 0"
-    },
-    {
-      "view": "timeline",
-      "kind": "untranslated",
-      "text": "4/12 · ROI 0.00 · capability 0"
-    },
-    {
-      "view": "timeline",
-      "kind": "untranslated",
-      "text": "5/12 · ROI 0.00 · capability 0"
-    },
-    {
-      "view": "timeline",
-      "kind": "untranslated",
-      "text": "6/12 · ROI 0.00 · capability 0"
-    },
-    {
-      "view": "timeline",
-      "kind": "untranslated",
-      "text": "7/12 · ROI 0.00 · capability 0"
-    },
-    {
-      "view": "timeline",
-      "kind": "untranslated",
-      "text": "8/12 · ROI 0.00 · capability 0"
-    },
-    {
-      "view": "timeline",
-      "kind": "untranslated",
-      "text": "9/12 · ROI 0.00 · capability 0"
-    },
-    {
-      "view": "timeline",
-      "kind": "untranslated",
-      "text": "10/12 · ROI 0.30 · capability 7"
-    },
-    {
-      "view": "timeline",
-      "kind": "untranslated",
-      "text": "11/12 · ROI 0.53 · capability 24"
-    },
-    {
-      "view": "timeline",
-      "kind": "untranslated",
-      "text": "12/12 · ROI 0.55 · capability 47"
-    },
-    {
-      "view": "timeline",
-      "kind": "untranslated",
-      "text": "ROI gradient · avg 0.41"
-    },
-    {
-      "view": "timeline",
-      "kind": "untranslated",
-      "text": "86 high leverage / 86 capability-growth events"
     },
     {
       "view": "timeline",
