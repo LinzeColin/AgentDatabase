@@ -178,7 +178,12 @@ sudo systemctl enable --now memory-atlas-api-proxy.socket memory-atlas-reconcile
 # was correct at the origin and invisible in the browser for exactly this
 # reason.
 docker compose -f "$AGENT_ROOT/current/ops/memory-atlas/docker-compose.yml" up -d --remove-orphans --force-recreate
-sudo systemctl restart memory-atlas-reconcile.service memory-atlas-action-worker.service
+# --no-block on the reconcile: it is a oneshot that now streams 389 MB,
+# materialises 122k events and rebuilds the atlas, so `restart` blocked the
+# deployment for ten minutes and a promotion looked hung. The promotion does not
+# depend on this run finishing — the timer runs it every fifteen minutes anyway.
+sudo systemctl restart memory-atlas-action-worker.service
+sudo systemctl restart --no-block memory-atlas-reconcile.service
 printf '%s
 ' "$release_id" > "$APP_ROOT/shared/LAST_PROMOTED_RELEASE"
 printf '{"schema_version":"memory_atlas.promotion.v1","release_id":"%s","git_commit":"%s","promoted_at":"%s"}

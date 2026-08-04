@@ -346,3 +346,12 @@ def test_ci_triggers_on_every_suite_the_gate_owns() -> None:
     assert '"OpenAIDatabase/config/quality/verification_policy.json"' in workflow
     # The hand-named single file must be gone, or the glob is decorative.
     assert '- "OpenAIDatabase/tests/test_memory_atlas_private_v31.py"' not in workflow
+
+
+def test_promotion_does_not_block_on_the_reconcile() -> None:
+    """The reconcile is a oneshot that streams 389 MB, materialises 122k events
+    and rebuilds the atlas. `systemctl restart` on it held the deployment for
+    ten minutes and made a healthy promotion look hung."""
+    deploy = (REPO / "ops" / "memory-atlas" / "deploy-blue-green.sh").read_text(encoding="utf-8")
+    assert "restart --no-block memory-atlas-reconcile.service" in deploy
+    assert "restart memory-atlas-reconcile.service memory-atlas-action-worker.service" not in deploy
