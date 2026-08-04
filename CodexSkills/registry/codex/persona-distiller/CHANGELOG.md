@@ -1,6 +1,50 @@
 
 # Changelog
 
+## v0.0.0.80 — **「Mr Roosevelt is President」被当成了他人署名**（2026-08-04）
+
+#117 Clara Barton 入库后跑研究门，`check_authorship` 报出
+**12 条「文中检出他人署名」**——那句话的意思是「卷内混有第三方材料」。
+逐条回原文核，**7 条是假阳**：
+
+```
+the family grounds. Mr Roosevelt is President          ← 日记里的一句话
+of which M. Moynier is President, is the only …        ← 关系从句，句中
+Thus we see that the Emperor of Japan is the President ← 名字那组抓到的是「Japan」
+```
+
+最后一条最能说明问题：`OTHER_ROLE` 抓的是 `is the President` 前**最后一个大写词**，
+于是「Emperor of **Japan**」里的 Japan 成了「另一个署名的人」。
+
+### 根因：它没有锚行首，而它的兄弟规则锚了
+
+    OTHER_BY   = re.compile(r"^[ \t]{0,4}By (…)[ \t]{0,4}$", re.M)   ← 锚了
+    OTHER_ROLE = re.compile(r"\b(…) is (?:the |a |an )?(President|…)")  ← **没锚**
+
+**撰稿人小传是独占一行的**（`Jane Doe is President of the Foo Society.`）；
+`X is President` 出现在**行中间**时是普通句子，不是署名。
+按 `OTHER_BY` 同法锚上行首即可。
+
+### 实测（Barton #117 真语料）
+
+| | 修前 | 修后 |
+|---|---:|---:|
+| 「文中检出他人署名」 | **12** | **7** |
+| `research.authorship-unproven` | 58 | 54 |
+
+**剩下的 5 条 `By X` 是真的**——LOC 卷内确实夹着他人材料
+（`By Miss Dunlap.`／`By John W. Chadruck.`／`By Emmeline B. Wells.`／
+`by F.J. CAMPBELL`／`by MISS ELOISE ANTHONY`）。
+另 2 条 `Landlord is President`／`England is President` 确实起于行首，
+是 OCR 乱码，**照实留着不强行消掉**。
+
+自测新增 **5 条夹具，其中 3 条是真实假阳**（上面那三句原文照录），
+另 2 条正对照守住「真的小传仍要认出来」（含行首缩进）。
+
+**这是「判据自己第一版常错」的又一例**：它一直在做正确的事，
+只是**射程比它以为的宽**——而报出来的话（「卷内混有第三方材料」）
+比它真正查到的东西**重得多**。
+
 ## v0.0.0.79 — **说它是公有领域，依据是什么**（2026-08-04）
 
 #116 Jean Watson 探测撞到一条**已发生、可复现**的误判：

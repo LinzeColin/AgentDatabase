@@ -1,6 +1,6 @@
-# Release verification — Persona Distiller v0.0.0.79
+# Release verification — Persona Distiller v0.0.0.80
 
-Date: 2026-08-04（v0.0.0.79，下表已重跑）
+Date: 2026-08-04（v0.0.0.80，下表已重跑）
 
 > **本文件记录「当前发布号的复验结果」，不是历史归档。**
 > 版本号必须等于根目录 `VERSION`，由 `scripts/check_contract_drift.py` 强制。
@@ -14,7 +14,7 @@ Date: 2026-08-04（v0.0.0.79，下表已重跑）
 >
 > ⚠⚠ **v0.0.0.76 复跑时发现：上面这句话在 v0.0.0.70–75 之间不再成立。**
 > 五行数字停在两到四个版本以前——检查器元普查 **30 件**（真值 43）、
-> 真实夹具 **5/19**（真值 6/43）、新鲜度下限 **v0.0.0.37**（真值 v0.0.0.69）、
+> 真实夹具 **5/19**（真值 6/43）、新鲜度下限 **v0.0.0.37**（真值 v0.0.0.70）、
 > checksum **305 files**（真值 341）、Python 脚本 **66**（真值 84）。
 > 五行全部朝**偏小**的方向错，也就是**每一行都在低报本项目自己的规模**。
 > 没有任何门会说话：`check_contract_drift` 只核首行标题里的版本号，
@@ -46,7 +46,7 @@ Date: 2026-08-04（v0.0.0.79，下表已重跑）
 | **★ 实测声明门（v0.0.0.63 新增，只报不拦，接进 synthesis／release）** | **passed**（**13 项自测，其中 11 条反向对照**，含「诚实弃权不许报」四条）；**真实数据实测**：21 份载荷扫出 **43 处实测声明、17 处光说不给数**，分布在 Koch #107／Lister #108／Virchow #109／Fleming #111 四人；**接线实测**：Fleming 发布门点名 `fl-trajectory-02`「我量过」——**席 E 只在第 3 轮说过它，判据证明它三轮都在** | `check_measurement_claims.py --self-test` + 对 21 份真载荷实跑 |
 | 合同漂移门（版本三轴 + 身份合同 + 检查器镜像） | **0 条** | `scripts/check_contract_drift.py` |
 | 合同漂移门的负对照 | passed（坏样本 5 类全抓出，钉住的 builder 版本未被误伤） | `check_contract_drift.py --self-test` |
-| 归属门的负对照 | passed（**24 正 + 22 反**，另含 1 条只报不判，含 5 例非西方姓名形态）；**v0.0.0.54–57 逐轮补形态**，Fleming #111 真工作区实测 **35 → 0，合成门 passed**（见下节） | `check_authorship.py --self-test` |
+| 归属门的负对照 | passed（**24 正 + 22 反**，v0.0.0.80 再加 **5 条夹具，其中 3 条是真实假阳**：`OTHER_ROLE` 未锚行首，把「Mr Roosevelt is President」「Emperor of **Japan** is the President」当成他人署名；Barton #117 实测「检出他人署名」**12 → 7**，剩下 5 条 `By X` 是真的）（原 24+22 明细：，另含 1 条只报不判，含 5 例非西方姓名形态）；**v0.0.0.54–57 逐轮补形态**，Fleming #111 真工作区实测 **35 → 0，合成门 passed**（见下节） | `check_authorship.py --self-test` |
 | OCR 同形字门的负对照 | passed（干净英文／真俄语／中文 3 条正对照 0 报；词内混文种、全同形字词、引文层 3 类坏样本全抓出） | `check_ocr_homoglyphs.py --self-test` |
 | 基线来源门 `check_baseline_provenance` | passed（坏样本 4 类全抓出，含「缺字段沉默通过」；prior-version 未被误杀） | `check_baseline_provenance.py --self-test` |
 | 拒答溢出门（v0.0.0.22 新增，只报不拦） | passed（3 条正对照未误杀，2 类溢出全抓出，带限定的正常回答未被误判） | `check_refusal_overflow.py --self-test` |
@@ -62,7 +62,7 @@ Date: 2026-08-04（v0.0.0.79，下表已重跑）
 | **★★★ 引文真实性门（v0.0.0.35 射程扩到答案层，见下节）** | **passed**（4 条构造伪造 + **3 条真实夹具** + **2 条反向对照**）；**真实数据实测**：Jenner 断言层 6 条全绿，扩到答案层后共 **26 条**，其中长 s 还原后才命中 **6 条**（原为静默） | `check_quote_integrity.py --claims … --answers … --cache … --self-test` |
 | **★★★ 语料真伪门（v0.0.0.33 新增，`ingest.py` 入口**硬拦**，见下节）** | **passed**（负对照 8 项，含 **4 条真实样本**）；**真实数据实测**：Jenner 抓源 4 份 HTML 错误页全抓出（最大一份 **146 KB**），入口实拦已验；清理后 53 份 0 报 | `check_corpus_integrity.py --self-test` + 对 `ws-jenner` 实跑 + `ingest.py` 实拦 |
 | **★★★ 引文层门（v0.0.0.32 新增，只报不拦，见下节）** | **passed**（负对照 11 项，含 **4 条真实样本 + 2 条真实误报夹具**）；**真实数据实测**：Harvey 第 3 轮定稿 10 处、Vesalius 11 处、Galen 0 处 | `check_quote_layer.py --self-test` + 对三份真实候选答案实跑 |
-| 蒸馏版本新鲜度 | 下限 `v0.0.0.69`（当前版本末位 − 10）；**102 条中 0 达标 / 102 低于下限 / 0 未知**；掉的是尺子，产物一份没变（任务 #29）（v0.0.0.75 记录里写的下限 `v0.0.0.37` 是旧数，**本次实跑纠正**） | `check_distillation_freshness.py` |
+| 蒸馏版本新鲜度 | 下限 `v0.0.0.70`（当前版本末位 − 10）；**102 条中 0 达标 / 102 低于下限 / 0 未知**；掉的是尺子，产物一份没变（任务 #29）（v0.0.0.75 记录里写的下限 `v0.0.0.37` 是旧数，**本次实跑纠正**） | `check_distillation_freshness.py` |
 | Release checksum 全量校验 | passed，**341 files**（v0.0.0.75 记录里写的 305 是旧数，**本次实跑纠正**） | `self_check.py` |
 | Canonical group validation | **12 categories, 100 products, 102 artifacts**; passed | `validate_persona_registry.py` |
 | 团队侧版本绑定 | **passed**，三处同为 `v0.0.0.13`；负对照 6 类全抓出 | `persona-distiller-group/scripts/check_group_version_binding.py` |

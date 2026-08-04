@@ -1,0 +1,141 @@
+{
+  "_note": "行号是 raw/<短名>/<短名>.txt **存盘文件本身**的行号（含开头几行 '# URL:' 头）。每条的 evidence 是从该文件里逐字抄出的原文行。",
+  "rc-in-cuba-1898": {
+    "hers": [
+      [
+        171,
+        838
+      ]
+    ],
+    "not_hers": [
+      [
+        840,
+        922
+      ]
+    ],
+    "evidence_start": "The Red Cross in Cuba sg Oe exkt   /   By Clara Barton   /   As Interviewed by Elbert F. Baldwin?",
+    "evidence_framing": "1 Miss Clara Barton has been good enough to tell the readers of The7Outlook, through a member of its editorial staff, some salient facts concerning actual conditions of distress in Cuba ... At the request of The Outlook, the interesting inter-views described in these questions and answers took place'on Wednesday and Thursday of last week at Miss Barton's residence, Glen Echo, six miles from Washington,",
+    "evidence_end": "too  patriotic.  （她答话的最后一句；紧接第 840 行起是另一篇文章 'A Practical Plan of Relief in Cuba / By William Willard Howard'）",
+    "why": "整期 The Outlook（Vol. 58, No. 15）扫描，同期还有别人的文章。"
+  },
+  "red-cross-1895-doolittle": {
+    "hers": [
+      [
+        1849,
+        2469
+      ]
+    ],
+    "not_hers": [
+      [
+        1,
+        1848
+      ]
+    ],
+    "evidence_start": "ADDRESS  /  BY  /  MISS CLARA BARTON  /  BEFORE THE  /  INTERNATIONAL COUNCIL OF WOMEN, /  Held in Washington, D. C, March ^5 to April i, 1888.",
+    "evidence_other": "THE RED CROSS. / Its Origin, Intei'iiationai Cliaracter, I>evelopmerit and History, / LAURA M. DOOLITTLE,",
+    "why": "整册前半是 Doolittle 的史述，她只占后半一篇演说。"
+  },
+  "womans-work-in-america-1891": {
+    "hers": [
+      [
+        16414,
+        16817
+      ]
+    ],
+    "not_hers": [
+      [
+        1,
+        16413
+      ],
+      [
+        16818,
+        21907
+      ]
+    ],
+    "evidence_start": "XVIII.  /  THE ORIGIN AND APPLICATION OF THE RED CROSS.  /  BY  /  CLARA BARTON.",
+    "evidence_end": "APPENDIX A.（第 16818 行，她那一章之后）",
+    "evidence_toc": "XVIII. WOMAN IN PHILANTHROPY—WORK OF THE RED CROSS SOCIETY,  /  CLARA BARTON,  411",
+    "why": "十八位作者的合集，她署名的是第 XVIII 章。"
+  },
+  "andersonville-1866": {
+    "hers": [
+      [
+        250,
+        729
+      ]
+    ],
+    "not_hers": [
+      [
+        60,
+        249
+      ],
+      [
+        731,
+        26000
+      ]
+    ],
+    "evidence_start": "CUPATION OF  THAT  PLACE  AS  A  PRISON  FOR  UNION  SOLDIERS  IN  REBEL  HANDS.（第 254 行，她那份报告的标题末行）",
+    "evidence_end": "CLARA  BARTON.（第 728 行，她报告的署名）",
+    "evidence_other": "DORENCE  ATWATER.（第 249 行）——其前是 Atwater 的第一人称自述，内含 'On  the  seventh  day  of  July,  1863,  I  was  talien  prisoner  near  Hagerstown,  Md.'——★ 那是 Atwater 不是她，她从未被俘；第 731 行起是死亡名册。",
+    "why": "整卷三分之二是名册，另有 Atwater 的自述；她署名的只有中间那份报告。",
+    "same_text_in": [
+      "andersonville-1866-DUPSCAN",
+      "andersonville-1866-DUPSCAN2",
+      "andersonville-1866-DUPSCAN3",
+      "andersonville-1868",
+      "andersonville-1890"
+    ]
+  },
+  "heroines-of-service-1917": {
+    "hers": [],
+    "about_her": [
+      [
+        1918,
+        2696
+      ]
+    ],
+    "evidence_start": "CLARA  BARTON（第 1918 行）；章名 'OUR  LADY  OF  THE  RED  CROSS'（第 1927 行）",
+    "evidence_end": "E.  WILLARD（第 2697 行，下一章 Frances E. Willard 起）",
+    "evidence_toc": "III  CLARA  BARTON 61",
+    "why": "群传，她只占一章；★ 全章是别人写她，**没有一行是她的话**。",
+    "same_text_in": [
+      "heroines-of-service-1916"
+    ]
+  },
+  "women-in-american-history-1919": {
+    "hers": [],
+    "about_her": [
+      [
+        6147,
+        6739
+      ]
+    ],
+    "evidence_start": "CLARA BARTON（第 6147 行）",
+    "evidence_end": "EPILOGUE（第 6740 行）",
+    "evidence_toc": "XV Clara Barton 189",
+    "why": "群传，她只占一章；★ 全章是别人写她。"
+  },
+  "geneva-convention-1881": {
+    "hers": [
+      [
+        211,
+        1200
+      ]
+    ],
+    "evidence_start": "OF  THE  /  GENEVA CONVENTION.  /  WHAT IT Is.  /  BY CLARA BARTON.  /  WASHINGTON, D. C.  /  Rufus H. Darby, Steam Power, Book and Job Printer, 432 Ninth St.  /  1878, ;",
+    "evidence_other": "同册后段收入他人文件与决议，例如 'MIss CLARA BARTON,'（第 1318 行，写给她的信）、'CONSTITUTION.'（第 1478 行）、各地决议（第 3058 行起）——那些不是她写的。",
+    "why": "NLM 著录整册为 1881，实为合订册；她 1878 年的小册在前段。",
+    "caveat": "★ 后段边界是按可读的标题行（CONSTITUTION. 第 1478 行）划的，属粗划；未能逐页核对。"
+  },
+  "history-red-cross-1883": {
+    "hers": [],
+    "mixed": [
+      [
+        1,
+        999999
+      ]
+    ],
+    "evidence_toc": "目次逐字含 'The Red Cross of the Geneva Convention ...... 7'、'A sketch of the history of the Red CrOss -. ----22---e- 222+ seee 21'、'Address by Miss Clara Barton... ..........ccsesccceceeeeceee ee ee ee eet ry 55'",
+    "why": "这是她主持的美国红十字会 1883 年汇编：既有她自己的文字，也有《日内瓦公约》条约全文与他人函件。★ 未能逐节切出边界——目次 OCR 破碎，页码读不准，所以**不给行号**，只标 FULL-PAGE-SCAN。"
+  }
+}

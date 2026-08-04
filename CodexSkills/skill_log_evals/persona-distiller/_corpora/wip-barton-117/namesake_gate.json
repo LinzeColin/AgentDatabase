@@ -1,0 +1,50 @@
+{
+  "candidate_cards": [
+    "A. 人物与身份：Clara Barton；医疗护理师；美国护士、美国红十字会创建者。\n   专业背景：1821-12-25 – 1912-04-12。南北战争战地救护；1865-1868 主持安德森维尔阵亡将士名录与身份查询局；1881 年创建美国红十字会并任首任会长至 1904 年；1896 年亚美尼亚、1898 年古巴救援。。\n   应用价值：场景：战地与灾害救护的组织；红十字运动与日内瓦公约在美国的引入；没有编制与授权时如何把救援做起来；关键能力：现场救护与物资调度；在没有正式职位时取得授权；面向公众的募捐与叙述。\n   区分依据：生卒 1821-1912；本人署名著作《The Red Cross in Peace and War》(1899) 版权页 Copyright, 1898, by Clara Barton；《A List of the Union Soldiers Buried at Andersonville》(1866) 署名末行 CLARA BARTON.；LOC 藏 Clara Barton Papers 含 58 册日记。抓源实测 208 份、一手 135 份、六条道齐全。。"
+  ],
+  "candidate_count": 1,
+  "candidates": [
+    {
+      "application_scenarios": [
+        "战地与灾害救护的组织",
+        "红十字运动与日内瓦公约在美国的引入",
+        "没有编制与授权时如何把救援做起来"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "Library of Congress, Clara Barton Papers（日记 58 册、通信卷）"
+        },
+        {
+          "locator": "The Red Cross in Peace and War (1899) 版权页：Copyright, 1898, by Clara Barton"
+        },
+        {
+          "locator": "A List of the Union Soldiers Buried at Andersonville (1866)，署名末行 CLARA BARTON."
+        }
+      ],
+      "canonical_name": "Clara Barton",
+      "distinguishing_basis": "生卒 1821-1912；本人署名著作《The Red Cross in Peace and War》(1899) 版权页 Copyright, 1898, by Clara Barton；《A List of the Union Soldiers Buried at Andersonville》(1866) 署名末行 CLARA BARTON.；LOC 藏 Clara Barton Papers 含 58 册日记。抓源实测 208 份、一手 135 份、六条道齐全。",
+      "evidence_level": "high",
+      "identity_category": "医疗护理师",
+      "key_capabilities": [
+        "现场救护与物资调度",
+        "在没有正式职位时取得授权",
+        "面向公众的募捐与叙述"
+      ],
+      "label": "A",
+      "occupation_or_role": "美国护士、美国红十字会创建者",
+      "professional_background": "1821-12-25 – 1912-04-12。南北战争战地救护；1865-1868 主持安德森维尔阵亡将士名录与身份查询局；1881 年创建美国红十字会并任首任会长至 1904 年；1896 年亚美尼亚、1898 年古巴救援。",
+      "subject_uid": "clara-barton-1821"
+    }
+  ],
+  "generated_at": "2026-08-03T23:52:52Z",
+  "normalized_name": "clarabarton",
+  "resolution": "single",
+  "schema_version": "1.0",
+  "search_scope": [
+    "sibling canonical registry",
+    "authoritative public sources supplied by orchestration"
+  ],
+  "selected_subject_uid": "clara-barton-1821",
+  "status": "ready",
+  "target_name": "Clara Barton"
+}

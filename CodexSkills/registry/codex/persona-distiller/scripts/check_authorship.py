@@ -498,10 +498,19 @@ TURN = re.compile(
     r"^[ \t]{0,4}([A-Z][A-Za-z.'\-]{0,20}(?: [A-Za-z.'\-]{1,20}){0,3})"
     r"[:：](?:[ \t]*\n){0,3}[ \t]{0,4}(\S.{0,80})", re.M)
 # 他人身份署名（刊物型 PDF 的作者行就长这样）。同理不用 `\s+`。
+# ★★ v0.0.0.80：**必须锚在行首**（与 `OTHER_BY` 同法）。
+#   撰稿人小传是**独占一行**的（`Jane Doe is President of the Foo Society.`），
+#   而 `X is President` 出现在行中间时是**普通句子，不是署名**。
+#   Barton #117 实测：不锚行首时 12 条「文中他人署名」里 **7 条是假阳**——
+#     「the family grounds. Mr Roosevelt is President」（日记里的一句话）
+#     「M. Moynier is President, is the only International Committee.」（关系从句）
+#     「Thus we see that the Emperor of **Japan** is the President of the」
+#        ——名字那一组抓到的是「Japan」，因为它是 `is the President` 前最后一个大写词
+#   **这些都会被报成「卷内混有第三方材料」，而卷内并没有。**
 OTHER_ROLE = re.compile(
-    r"\b([A-Z][a-z]{1,20}(?: [A-Z][a-z.']{1,20}){0,3}) is (?:the |a |an )?"
+    r"^[ \t]{0,4}([A-Z][a-z]{1,20}(?: [A-Z][a-z.']{1,20}){0,3}) is (?:the |a |an )?"
     r"(Chair|Chairman|President|Managing Director|Executive Director|Director|"
-    r"Rabbi|Professor|founder|co-founder|CEO|Vice President|Senior)\b")
+    r"Rabbi|Professor|founder|co-founder|CEO|Vice President|Senior)\b", re.M)
 OTHER_BY = re.compile(
     r"^[ \t]{0,4}By ([A-Z][a-z]{1,20}(?: [A-Z][a-z.']{1,20}){1,3})[ \t]{0,4}$", re.M)
 # ★ 刊物型排版里署名常是**行内全大写**：`… Why I Live In Israel by ANDREW KATZ 6 CONTACT`。
@@ -932,6 +941,24 @@ def self_test() -> int:
         if not okby:
             bad.append(f"姓名形态：{nm!r} 对 {line!r} 的 BYLINE 判定应为 {should}")
         print(f"  {'✓' if okname and okby else '✗'} 姓名形态 {nm} → {np_['surname']}｜{line!r}={should}")
+
+    # ── ★★ v0.0.0.80 `OTHER_ROLE` 必须锚行首：四条**真实假阳夹具**（Barton #117）──
+    #   不锚行首时，12 条「文中他人署名」里 7 条是假阳，
+    #   而它们会被读成「卷内混有第三方材料」——**卷内并没有**。
+    for s, should, why in [
+        ("the family grounds. Mr Roosevelt is President", False, "日记里的一句话"),
+        ("of which M. Moynier is President, is the only International Committee.",
+         False, "关系从句，句中"),
+        ("Thus we see that the Emperor of Japan is the President of the",
+         False, "名字组抓到的是「Japan」——`is the President` 前最后一个大写词"),
+        ("Jane Doe is President of the Foo Society.", True, "**真的撰稿人小传，独占一行**"),
+        ("  Mary Smith is Director of Nursing at St. Luke's.", True, "行首允许缩进"),
+    ]:
+        got = bool(OTHER_ROLE.search(s))
+        ok = got is should
+        if not ok:
+            bad.append(f"OTHER_ROLE：{s[:48]!r} 应为 {should}，实得 {got}")
+        print(f"  {'✓' if ok else '✗'} OTHER_ROLE {should}｜{why}：{s[:50]!r}")
 
     # ── 疑似他人署名行：**只报不判**，此处只验它确实报得出来 ──
     lines = suspect_signature_lines(
