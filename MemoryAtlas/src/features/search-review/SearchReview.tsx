@@ -8,6 +8,7 @@ import { buildSearch2Results, buildSearch2SessionSummary, search2FilterStateLabe
 import { buildSearchVisualRows, humanThemeLabel } from "../../shared/atlas/semanticHuman";
 import { MachineFieldDetails } from "../../shared/ui/display";
 import { DeltaStrip, HumanOverviewPanel, MiniBarList } from "../../shared/ui/primitives";
+import { humanizeMachineText } from "../../shared/atlas/machineTokenHuman";
 
 
 
@@ -106,20 +107,20 @@ export function SearchReview({
           <label>
             <span>tier</span>
             <select value={searchFilters.tier} onChange={(event) => updateSearchFilter({ tier: event.target.value as Search2TierFilter })}>
-              <option value="all">all</option>
-              <option value="core_profile">core_profile</option>
-              <option value="project">project</option>
-              <option value="decision">decision</option>
-              <option value="workflow">workflow</option>
-              <option value="knowledge">knowledge</option>
-              <option value="opportunity">opportunity</option>
-              <option value="stale">stale</option>
+              <option value="all">{humanizeMachineText("all")}</option>
+              <option value="core_profile">{humanizeMachineText("core_profile")}</option>
+              <option value="project">{humanizeMachineText("project")}</option>
+              <option value="decision">{humanizeMachineText("decision")}</option>
+              <option value="workflow">{humanizeMachineText("workflow")}</option>
+              <option value="knowledge">{humanizeMachineText("knowledge")}</option>
+              <option value="opportunity">{humanizeMachineText("opportunity")}</option>
+              <option value="stale">{humanizeMachineText("stale")}</option>
             </select>
           </label>
           <label>
             <span>topic</span>
             <select value={searchFilters.topic} onChange={(event) => updateSearchFilter({ topic: event.target.value })}>
-              <option value="all">all</option>
+              <option value="all">{humanizeMachineText("all")}</option>
               {topicOptions.map((topic) => (
                 <option key={topic} value={topic}>{topic}</option>
               ))}

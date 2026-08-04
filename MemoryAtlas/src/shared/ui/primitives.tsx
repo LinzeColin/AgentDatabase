@@ -7,6 +7,7 @@ import { dataMapPriorityForNode } from "../atlas/dataGuideModels";
 import { DataGuideNode } from "../atlas/layoutContracts";
 import { buildHumanOverview } from "../atlas/sourceSlice";
 import { formatSigned, isActivationKey } from "../atlas/utils";
+import { humanizeMachineText } from "../atlas/machineTokenHuman";
 
 
 
@@ -18,7 +19,7 @@ export function MiniBarList({ title, rows }: { title: string; rows: Array<{ labe
       {rows.length ? (
         rows.map((row) => (
           <div className="mini-bar-row" key={`${title}-${row.label}`}>
-            <span>{row.label}</span>
+            <span>{humanizeMachineText(row.label)}</span>
             <i style={{ "--bar-width": `${Math.max(4, Math.round((row.count / max) * 100))}%` } as CSSProperties} aria-hidden="true" />
             <b>{row.count.toLocaleString()}</b>
           </div>
@@ -132,7 +133,7 @@ export function HumanBulletList({ title, items }: { title: string; items: string
 export function Metric({ label, value }: { label: string; value: number }) {
   return (
     <div className="metric">
-      <span>{label}</span>
+      <span>{humanizeMachineText(label)}</span>
       <strong>{value.toLocaleString()}</strong>
     </div>
   );
