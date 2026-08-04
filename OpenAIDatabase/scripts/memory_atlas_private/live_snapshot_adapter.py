@@ -42,14 +42,19 @@ def _scan(value: object, path: str='$') -> None:
 def _same_run_evidence(runtime: Mapping[str,Any], run_id: str, trace_id: str) -> dict[str,Any]:
     raw=runtime.get('same_run_evidence') if isinstance(runtime.get('same_run_evidence'),Mapping) else {}
     result={}
-    for name in ('r2_readback','private_database_readback','ovh_reconcile','status_projection'):
+    for name in ('r2_readback','private_database_readback','ovh_reconcile','status_projection','canonical_source_readback'):
         value=raw.get(name) if isinstance(raw.get(name),Mapping) else {}
         state=str(value.get('state','UNKNOWN'))
         evidence_run=value.get('run_id') if isinstance(value.get('run_id'),str) else None
         evidence_trace=value.get('trace_id') if isinstance(value.get('trace_id'),str) else None
         if state=='PASS' and (evidence_run!=run_id or evidence_trace!=trace_id): raise LiveSnapshotError(f"same-run mismatch for {name}")
         result[name]={'state':state if state in {'PASS','FAIL','NOT_RUN','UNKNOWN'} else 'UNKNOWN','run_id':evidence_run,'trace_id':evidence_trace,'ref':value.get('ref') if isinstance(value.get('ref'),str) else None}
-    for required in ('r2_readback','private_database_readback','ovh_reconcile'):
+    # The event bytes must have been hashed against a declared digest by this
+    # run. Which side served them is a fact about storage, not about truth, so
+    # either object authority satisfies it — but at least one must have run.
+    if not any(result[name]['state']=='PASS' for name in ('canonical_source_readback','r2_readback')):
+        raise LiveSnapshotError('no object authority readback passed: canonical_source_readback/r2_readback')
+    for required in ('private_database_readback','ovh_reconcile'):
         if result[required]['state']!='PASS': raise LiveSnapshotError(f"required authority evidence not PASS: {required}")
     return result
 

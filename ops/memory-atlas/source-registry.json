@@ -165,17 +165,17 @@
       "source_id": "r2_primary_objects",
       "label_zh": "R2 主对象字节",
       "availability_tier": "A_CLOUD_NATIVE",
-      "required_for_capture": true,
-      "required_for_product": true,
-      "purpose_zh": "对象字节权威；读回校验失败即不得宣称当前数据可信。"
+      "required_for_capture": false,
+      "required_for_product": false,
+      "purpose_zh": "对象字节镜像。2026-08-04 因桶容量上限与收费风险，memory-atlas 主树整体迁往 GitHub 私有仓；R2 仍有字节时用于就近读取，没有也不判失败。"
     },
     {
       "source_id": "r2_normalized_events",
       "label_zh": "R2 归一化事件流",
       "availability_tier": "A_CLOUD_NATIVE",
-      "required_for_capture": true,
-      "required_for_product": true,
-      "purpose_zh": "本次运行的事件增量；缺失时页面没有可分析的事实。"
+      "required_for_capture": false,
+      "required_for_product": false,
+      "purpose_zh": "本次运行事件增量的 R2 镜像。迁移后不再是必需路径，缺失走 GitHub canonical release。"
     },
     {
       "source_id": "private_database_facts",
@@ -183,7 +183,15 @@
       "availability_tier": "A_CLOUD_NATIVE",
       "required_for_capture": true,
       "required_for_product": true,
-      "purpose_zh": "长期结构化事实权威；缺失时运行身份无法核对。"
+      "purpose_zh": "长期结构化事实权威，落在 GitHub 私有仓；缺失时运行身份无法核对。"
+    },
+    {
+      "source_id": "github_canonical_events",
+      "label_zh": "GitHub 私有仓全量事件流",
+      "availability_tier": "A_CLOUD_NATIVE",
+      "required_for_capture": false,
+      "required_for_product": true,
+      "purpose_zh": "全量全时事件权威（canonical union）。迁移后页面的每一个数字都由它产生；下载后必须与 MANIFEST 的 sha256 逐字节相等才可使用。"
     },
     {
       "source_id": "github_private_release",
@@ -191,7 +199,16 @@
       "availability_tier": "A_CLOUD_NATIVE",
       "required_for_capture": false,
       "required_for_product": false,
-      "purpose_zh": "全量全时冷备；缺失是真实缺口，但今天的事实仍可呈现，只降级不判失败。"
+      "purpose_zh": "每次运行的加密冷备；与 canonical 全量事件流不同，缺失只降级不判失败。"
     }
-  ]
+  ],
+  "primary_data_authority": {
+    "state": "GITHUB_PRIVATE_REPOSITORY",
+    "repository": "LinzeColin/Private-Database",
+    "canonical_release_tag_prefix": "memory-atlas-canonical-",
+    "migrated_at": "2026-08-04",
+    "reason_zh": "R2 接近存储上限并带来收费风险，全量全时与主力数据压力整体转移到 GitHub 私有仓。",
+    "cloudflare_role_zh": "只做入口与访问控制，不承担数据存量。",
+    "ovh_role_zh": "只做计算与呈现，不承担数据存量。"
+  }
 }

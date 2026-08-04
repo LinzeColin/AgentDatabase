@@ -42,6 +42,21 @@ VERIFIED_OBJECT = {
     "provider_version": "r2",
 }
 BROKEN_OBJECT = {**VERIFIED_OBJECT, "readback_sha256": "b" * 64, "readback_verified": False}
+# Since the 2026-08-04 migration the event authority is the canonical union in
+# the private repository's releases, not R2.
+CANONICAL_READY = {
+    "state": "READY",
+    "provider": "github_private_release",
+    "canonical_object": "primary-objects/memory-atlas/x/canonical/events.jsonl",
+    "sha256": "c" * 64,
+    "bytes": 389413637,
+    "unique_events": 122080,
+    "release_tag": "memory-atlas-canonical-20260804",
+    "release_published_at": "2026-08-04T08:02:40Z",
+    "superseded_count": 10,
+    "reason": None,
+}
+CANONICAL_LOST = {**CANONICAL_READY, "state": "UNAVAILABLE", "reason": "no_canonical_release_published"}
 
 
 def _visual() -> dict:
@@ -70,6 +85,7 @@ def _evidence(**overrides) -> dict:
             github_release={"schema_version": "memory_atlas.encrypted_archive_manifest.v1", "files": [{}]},
             observed_at="2026-08-03T10:15:00Z",
             registry_path=REGISTRY,
+            canonical=CANONICAL_READY,
         ),
         "same_run_evidence": same_run_evidence_rows(
             run_id="marun-20260803T101500Z-a1b2c3",
@@ -79,6 +95,7 @@ def _evidence(**overrides) -> dict:
             ovh_reconcile=True,
             status_projection=True,
             ref="private-db://memory-atlas/runs/latest.json",
+            canonical_source_readback=True,
         ),
     }
     base.update(overrides)
@@ -161,8 +178,9 @@ def test_tier_a_failure_never_reports_fresh_or_pass() -> None:
     evidence = _evidence(
         cloud_native_sources=cloud_native_authorities(
             objects=[BROKEN_OBJECT], normalized_batch_key=BROKEN_OBJECT["object_key"],
-            private_database_paths=["memory-atlas/runs/latest.json"], github_release=None,
+            private_database_paths=[], github_release=None,
             observed_at="2026-08-03T10:15:00Z", registry_path=REGISTRY,
+            canonical=CANONICAL_LOST,
         )
     )
     private = _private()
@@ -215,9 +233,17 @@ def test_registry_declares_the_tier_of_every_source() -> None:
         assert row["availability_tier"] == "B_LOCAL_OPTIONAL", row["source_id"]
         assert row["required_for_product"] is False, row["source_id"]
     ids = {row["source_id"] for row in registry["cloud_native_authorities"]}
-    assert ids == {"r2_primary_objects", "r2_normalized_events", "private_database_facts", "github_private_release"}
+    assert ids == {
+        "r2_primary_objects", "r2_normalized_events", "private_database_facts",
+        "github_canonical_events", "github_private_release",
+    }
+    # After the 2026-08-04 migration the data pressure sits on the GitHub
+    # private repository. R2 may be empty without failing the product; the
+    # canonical event stream may not.
     required = {row["source_id"] for row in registry["cloud_native_authorities"] if row["required_for_product"]}
-    assert required == {"r2_primary_objects", "r2_normalized_events", "private_database_facts"}
+    assert required == {"private_database_facts", "github_canonical_events"}
+    assert registry["primary_data_authority"]["state"] == "GITHUB_PRIVATE_REPOSITORY"
+    assert registry["primary_data_authority"]["repository"] == "LinzeColin/Private-Database"
 
 
 def test_a_stale_but_healthy_run_is_stale_not_failed() -> None:
@@ -250,12 +276,13 @@ def test_degraded_reason_names_the_source_instead_of_a_generic_sentence() -> Non
             objects=[VERIFIED_OBJECT], normalized_batch_key=VERIFIED_OBJECT["object_key"],
             private_database_paths=["memory-atlas/runs/latest.json"], github_release=None,
             observed_at="2026-08-03T10:15:00Z", registry_path=REGISTRY,
+            canonical=CANONICAL_LOST,
         )
     )
     private = _private()
     private["run"] = _run_block()
     snapshot = build_live_snapshot(private, _visual(), evidence, _benchmark(), evaluated_at="2026-08-03T10:20:00Z")
-    assert "GitHub 私有仓全量备份" in snapshot["freshness"]["reason_zh"]
+    assert "GitHub 私有仓全量事件流" in snapshot["freshness"]["reason_zh"]
 
 
 def _walk(value, path="$"):
@@ -340,10 +367,14 @@ def test_reconcile_treats_superseded_and_lost_differently() -> None:
     source = (
         Path(__file__).resolve().parents[1] / "scripts" / "memory_atlas_private" / "pipeline.py"
     ).read_text(encoding="utf-8")
-    assert 'key in supersession["superseded"]' in source
-    assert 'self.object_store.exists_with_hash(supersession["canonical_object"], supersession["sha256"])' in source
+    assert "if key and canonical.covers(key):" in source
     assert 'missing.append(key or "<missing-key>")' in source
     assert '"superseded_by_canonical"' in source
+    canonical = (
+        Path(__file__).resolve().parents[1] / "scripts" / "memory_atlas_private" / "canonical_source.py"
+    ).read_text(encoding="utf-8")
+    # `covers` may only answer yes off a resolution that verified its digest.
+    assert "return self.available and (object_key in self.superseded or object_key == self.canonical_object)" in canonical
 
 
 def test_publisher_refuses_to_publish_zeros_when_the_run_counted_events() -> None:
@@ -404,3 +435,51 @@ def test_an_event_missing_its_activity_still_produces_a_usable_row() -> None:
     assert projected["model_tool"] == "unknown"
     assert projected["work_time_minutes"] is None
     assert projected["outcome_evidence"] is False
+
+
+def test_canonical_readback_alone_satisfies_the_object_authority_gate() -> None:
+    """After the migration R2 is drained, so `r2_readback` is honestly NOT_RUN.
+    The gate is about whether the event bytes were hashed against a declared
+    digest, not about which company stored them."""
+    evidence = _evidence(
+        same_run_evidence=same_run_evidence_rows(
+            run_id="marun-20260803T101500Z-a1b2c3", trace_id="marun-20260803T101500Z-a1b2c3",
+            r2_readback=None, private_database_readback=True, ovh_reconcile=True,
+            status_projection=True, canonical_source_readback=True,
+            ref="private-db://memory-atlas/runs/latest.json",
+        )
+    )
+    private = _private()
+    private["run"] = _run_block()
+    snapshot = build_live_snapshot(private, _visual(), evidence, _benchmark(), evaluated_at="2026-08-03T10:20:00Z")
+    assert snapshot["truth"]["same_run_evidence"]["canonical_source_readback"]["state"] == "PASS"
+    assert snapshot["truth"]["same_run_evidence"]["r2_readback"]["state"] == "NOT_RUN"
+
+
+def test_no_object_authority_readback_at_all_is_refused() -> None:
+    # Weakening the gate to "R2 is optional now" must not weaken it to nothing.
+    evidence = _evidence(
+        same_run_evidence=same_run_evidence_rows(
+            run_id="marun-20260803T101500Z-a1b2c3", trace_id="marun-20260803T101500Z-a1b2c3",
+            r2_readback=None, private_database_readback=True, ovh_reconcile=True,
+            status_projection=True, canonical_source_readback=None,
+        )
+    )
+    private = _private()
+    private["run"] = _run_block()
+    with pytest.raises(LiveSnapshotError, match="no object authority readback passed"):
+        build_live_snapshot(private, _visual(), evidence, _benchmark(), evaluated_at="2026-08-03T10:20:00Z")
+
+
+def test_a_failed_canonical_readback_is_not_quietly_treated_as_absent() -> None:
+    evidence = _evidence(
+        same_run_evidence=same_run_evidence_rows(
+            run_id="marun-20260803T101500Z-a1b2c3", trace_id="marun-20260803T101500Z-a1b2c3",
+            r2_readback=None, private_database_readback=True, ovh_reconcile=True,
+            status_projection=True, canonical_source_readback=False,
+        )
+    )
+    private = _private()
+    private["run"] = _run_block()
+    with pytest.raises(LiveSnapshotError, match="no object authority readback passed"):
+        build_live_snapshot(private, _visual(), evidence, _benchmark(), evaluated_at="2026-08-03T10:20:00Z")

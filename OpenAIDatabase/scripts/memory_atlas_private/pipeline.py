@@ -12,6 +12,7 @@ from pathlib import Path
 from typing import Any, Iterable, Mapping
 
 from .analytics import build_behavior_analytics, build_habit_recommendations
+from .canonical_source import CanonicalResolution, GitHubCanonicalSource, resolve_canonical
 from .config import RuntimeConfig
 from .failure_compound import FailureCompoundStore
 from .fact_backup import backup_private_facts
@@ -158,22 +159,32 @@ def cloud_native_authorities(
     github_release: Mapping[str, Any] | None,
     observed_at: str,
     registry_path: Path | None = None,
+    canonical: Mapping[str, Any] | None = None,
 ) -> list[dict[str, Any]]:
     """Tier A rows, every state derived from something this run actually read.
 
-    `required_for_product` comes from the registry: the GitHub private release is
-    a real cloud authority and a real gap when it is missing, but the product can
-    still render today's facts without it, so it degrades instead of failing.
+    `required_for_product` comes from the registry. Since the 2026-08-04
+    migration the required event authority is `github_canonical_events` — the
+    canonical union in the private repository's releases — and the two R2 rows
+    report honestly on a bucket that was drained without failing the product.
     """
     rows = [_as_row(item) for item in objects]
     tiers = _authority_tiers(registry_path)
     paths = list(private_database_paths)
     delta = [row for row in rows if row.get("object_key") == normalized_batch_key] if normalized_batch_key else []
+    canonical = canonical or {}
+    canonical_ready = str(canonical.get("state", "")) == "READY"
 
     measured = {
         "r2_primary_objects": (bool(rows), _object_readback_ok(rows), len(rows), sum(int(row.get("size_bytes", 0) or 0) for row in rows)),
         "r2_normalized_events": (bool(delta), _object_readback_ok(delta), len(delta), sum(int(row.get("size_bytes", 0) or 0) for row in delta)),
         "private_database_facts": (bool(paths), bool(paths), len(paths), 0),
+        "github_canonical_events": (
+            bool(canonical),
+            canonical_ready,
+            int(canonical.get("unique_events") or 0) if canonical_ready else 0,
+            int(canonical.get("bytes") or 0) if canonical_ready else 0,
+        ),
         "github_private_release": (
             github_release is not None,
             bool(github_release and github_release.get("files")),
@@ -210,8 +221,14 @@ def same_run_evidence_rows(
     ovh_reconcile: bool | None,
     status_projection: bool | None,
     ref: str | None = None,
+    canonical_source_readback: bool | None = None,
 ) -> dict[str, dict[str, Any]]:
-    """None means the caller never ran that check — NOT_RUN, never a silent PASS."""
+    """None means the caller never ran that check — NOT_RUN, never a silent PASS.
+
+    `canonical_source_readback` is the provider-neutral proof that this run
+    hashed the event bytes it analysed against a declared digest. `r2_readback`
+    keeps reporting on R2 alone, which after the migration is honestly NOT_RUN.
+    """
 
     def row(value: bool | None) -> dict[str, Any]:
         if value is None:
@@ -228,6 +245,7 @@ def same_run_evidence_rows(
         "private_database_readback": row(private_database_readback),
         "ovh_reconcile": row(ovh_reconcile),
         "status_projection": row(status_projection),
+        "canonical_source_readback": row(canonical_source_readback),
     }
 
 
@@ -842,11 +860,16 @@ class RemoteReconcilePipeline(LiveSnapshotPublisherMixin):
         object_store: ObjectStore | None = None,
         private_db: PrivateDatabase | None = None,
         clock=utc_now,
+        canonical_source: GitHubCanonicalSource | None = None,
     ):
         self.config = config
         self.config.ensure_runtime_dirs()
         self.object_store = object_store or R2ObjectStore(config)
         self.private_db = private_db or GhPrivateDatabase(config.private_db_client)
+        self.canonical_source = canonical_source if canonical_source is not None else GitHubCanonicalSource(
+            repo=config.github_repo,
+            cache_dir=config.work_dir / "canonical-cache",
+        )
         self.clock = clock
         self.failures = FailureCompoundStore(config.runtime_dir / "failure-compound.sqlite3")
         self.outbox = FactOutbox(config.runtime_dir / "remote-fact-outbox.sqlite3")
@@ -864,6 +887,18 @@ class RemoteReconcilePipeline(LiveSnapshotPublisherMixin):
             raise PipelineError("Failure Compound 事实未完整进入 Private-Database")
         return flush
 
+    def _r2_holds(self, key: str, digest: str) -> bool:
+        """Does R2 still hold these exact bytes?
+
+        After the migration the bucket answers 404 for the whole memory-atlas
+        tree, and a drained bucket is a fact about R2, not a reason to abort the
+        run before the canonical source has been consulted.
+        """
+        try:
+            return bool(self.object_store.exists_with_hash(key, digest))
+        except Exception:
+            return False
+
     def run(self) -> dict[str, Any]:
         latest = self.private_db.get_json("memory-atlas/runs/latest.json")
         if latest.get("state") != RunState.SUCCEEDED.value:
@@ -877,25 +912,30 @@ class RemoteReconcilePipeline(LiveSnapshotPublisherMixin):
         manifest_path = str(latest["manifest_path"])
         manifest = self.private_db.get_json(manifest_path)
         objects = manifest.get("objects", [])
-        supersession = load_supersession(self.object_store, self.config.work_dir)
+        # Which side holds the canonical union is measured, not assumed: R2 when
+        # it still verifies, otherwise the private repository's canonical
+        # release, which became the primary when the bucket was drained.
+        canonical = resolve_canonical(
+            object_store=self.object_store,
+            github=self.canonical_source,
+            work_dir=self.config.work_dir,
+            r2_manifest_loader=load_supersession,
+        )
         missing: list[str] = []
         superseded: list[str] = []
+        r2_verified = 0
         for row in objects:
             if not isinstance(row, dict):
                 continue
             key = str(row.get("object_key", ""))
             digest = str(row.get("sha256", ""))
-            if key and digest and self.object_store.exists_with_hash(key, digest):
+            if key and digest and self._r2_holds(key, digest):
+                r2_verified += 1
                 continue
-            # Superseded is not lost — but only when the record written at
-            # deletion time says so, and only when the object that replaced it
-            # still verifies byte-for-byte.
-            if (
-                key
-                and supersession["available"]
-                and key in supersession["superseded"]
-                and self.object_store.exists_with_hash(supersession["canonical_object"], supersession["sha256"])
-            ):
+            # Superseded is not lost — but only when the canonical union that
+            # replaced it verifies, and only when that union provably contains
+            # this object's events.
+            if key and canonical.covers(key):
                 superseded.append(key)
                 continue
             missing.append(key or "<missing-key>")
@@ -905,11 +945,11 @@ class RemoteReconcilePipeline(LiveSnapshotPublisherMixin):
                 category="data_integrity",
                 severity="P0",
                 error_code="OBJECT_READBACK_MISMATCH",
-                title="远端对象清单与 R2 字节不一致",
+                title="对象清单在 R2 与 GitHub 权威源里都找不到",
                 occurred_at=self.clock(),
                 evidence_ref=f"private-db://{manifest_path}",
                 environment=socket.gethostname(),
-                details={"missing": missing[:100]},
+                details={"missing": missing[:100], "canonical": canonical.to_fact()},
             )
             now = self.clock()
             failure_snapshot = self.failures.export_snapshot(now)
@@ -919,6 +959,7 @@ class RemoteReconcilePipeline(LiveSnapshotPublisherMixin):
                 "state": "FAILED",
                 "run_id": latest.get("run_id"),
                 "missing_or_corrupt_objects": missing,
+                "canonical_source": canonical.to_fact(),
                 "incident_id": incident.incident_id,
             }
         normalized_key = manifest.get("normalized_batch_key")
@@ -926,15 +967,27 @@ class RemoteReconcilePipeline(LiveSnapshotPublisherMixin):
             raise PipelineError("源端 manifest 缺少 normalized_batch_key")
         event_source = normalized_key
         live_events: list[dict[str, Any]] = []
-        if normalized_key in superseded:
-            # The canonical union is a proven superset of every rollup it
-            # replaced (122,080 events against a largest single run of 112,036),
-            # so reading it loses nothing this manifest referenced.
-            event_source = str(supersession["canonical_object"])
         with tempfile.NamedTemporaryFile(prefix="memory-atlas-events-", suffix=".jsonl", delete=False) as handle:
             temporary = Path(handle.name)
         try:
-            self.object_store.get_file(event_source, temporary)
+            if normalized_key in superseded:
+                # The canonical union is a proven superset of every rollup it
+                # replaced (122,080 events against a largest single run of
+                # 112,036), so reading it loses nothing this manifest named.
+                canonical_receipt = canonical.fetch(temporary)
+                event_source = str(canonical.canonical_object)
+            else:
+                self.object_store.get_file(event_source, temporary)
+                canonical_receipt = {
+                    "state": "READY", "provider": "r2", "cache": "MISS",
+                    # Proven by exists_with_hash in the accounting loop above.
+                    "sha256": next(
+                        (str(row.get("sha256")) for row in objects
+                         if isinstance(row, dict) and row.get("object_key") == normalized_key),
+                        None,
+                    ),
+                    "bytes": temporary.stat().st_size,
+                }
             analytics = build_behavior_analytics(_iter_events(temporary), generated_at=self.clock())
             live_events = [asdict(event) for event in _iter_events(temporary)]
             # The ten original views read a snapshot built from
@@ -964,7 +1017,8 @@ class RemoteReconcilePipeline(LiveSnapshotPublisherMixin):
         if superseded:
             analytics["normalized_event_batch"]["superseded_by_canonical"] = {
                 "event_source": event_source,
-                "canonical_sha256": supersession["sha256"],
+                "canonical_sha256": canonical.sha256,
+                "canonical_provider": canonical.provider,
                 "superseded_keys": sorted(superseded),
             }
         registry_import: dict[str, Any] | None = None
@@ -1007,10 +1061,11 @@ class RemoteReconcilePipeline(LiveSnapshotPublisherMixin):
                 status_projection,
             )
         # This host is the one the browser reads from, and it is the only host
-        # that can honestly claim all four authority read-backs: it verified
-        # every object against R2 above, read the run facts back out of
+        # that can honestly claim these read-backs: it hashed the canonical event
+        # bytes against their declared digest, read the run facts back out of
         # Private-Database, is itself the OVH reconcile, and just wrote the
-        # status projection. Same adapter as the capture path.
+        # status projection. `r2_readback` reports only on R2, so after the
+        # migration it is PASS only when R2 actually still held an object.
         run_id = str(latest.get("run_id") or "")
         reconciled_at = self.clock()
         live_snapshot = self._publish_live_snapshot(
@@ -1039,15 +1094,17 @@ class RemoteReconcilePipeline(LiveSnapshotPublisherMixin):
                     github_release=manifest.get("github_private_release_backup"),
                     observed_at=str(latest.get("completed_at") or reconciled_at),
                     registry_path=self.config.source_registry,
+                    canonical=canonical.to_fact(),
                 ),
                 "same_run_evidence": same_run_evidence_rows(
                     run_id=run_id,
                     trace_id=run_id,
-                    r2_readback=True,
+                    r2_readback=True if r2_verified else None,
                     private_database_readback=True,
                     ovh_reconcile=True,
                     status_projection=True,
                     ref=f"private-db://{manifest_path}",
+                    canonical_source_readback=str(canonical_receipt.get("state")) == "READY",
                 ),
             },
             events=live_events,
@@ -1057,6 +1114,8 @@ class RemoteReconcilePipeline(LiveSnapshotPublisherMixin):
             "state": "PASS",
             "run_id": latest.get("run_id"),
             "verified_objects": len(objects),
+            "r2_verified_objects": r2_verified,
+            "canonical_source": {**canonical.to_fact(), "receipt": canonical_receipt},
             "events": event_count,
             "snapshot": str(self.config.web_data_dir / "memory_atlas_private_analytics.json"),
             "status_projection": str(status_path),

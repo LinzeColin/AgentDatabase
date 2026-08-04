@@ -1061,6 +1061,44 @@
                   ]
                 }
               }
+            },
+            "canonical_source_readback": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "state",
+                "run_id",
+                "trace_id",
+                "ref"
+              ],
+              "properties": {
+                "state": {
+                  "enum": [
+                    "PASS",
+                    "FAIL",
+                    "NOT_RUN",
+                    "UNKNOWN"
+                  ]
+                },
+                "run_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "trace_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "ref": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              }
             }
           }
         },
