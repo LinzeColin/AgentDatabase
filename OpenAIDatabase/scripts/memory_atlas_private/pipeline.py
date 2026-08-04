@@ -316,28 +316,39 @@ def regenerate_atlas_snapshot(
     if not sessions:
         return {"state": "SKIPPED", "reason": "no session events in this run", "session_count": 0}
 
+    # The builder's own safe_repo_path rejects symlinks outright, so the tree it
+    # is pointed at must be real files. Hardlinks are indistinguishable from
+    # regular files, cost no space and copy instantly. Everything is linked
+    # except data/public_raw, which is 433 MB the builder never opens — it needs
+    # config/ and the derived trees as well as data/, so an allowlist of two or
+    # three directories keeps breaking on the next thing it reads.
     root = Path(work_dir) / "atlas-build"
     if root.exists():
         shutil.rmtree(root)
-    (root / "data" / "processed" / "codex").mkdir(parents=True)
-    source_data = Path(database_dir) / "data"
-    for child in source_data.iterdir():
-        if child.name == "processed":
+    root.mkdir(parents=True)
+    source = Path(database_dir)
+    for child in source.iterdir():
+        if child.name.startswith(".") or not child.is_dir():
             continue
-        (root / "data" / child.name).symlink_to(child)
-    for child in (source_data / "processed").iterdir():
-        if child.name != "codex":
-            (root / "data" / "processed" / child.name).symlink_to(child)
-    for child in (source_data / "processed" / "codex").iterdir():
-        if child.name not in {"codex_session_manifest.jsonl", "codex_daily_activity.jsonl"}:
-            (root / "data" / "processed" / "codex" / child.name).symlink_to(child)
+        if child.name == "data":
+            (root / "data").mkdir()
+            for entry in child.iterdir():
+                if entry.name == "public_raw" or not entry.is_dir():
+                    continue
+                shutil.copytree(entry, root / "data" / entry.name, copy_function=os.link, dirs_exist_ok=True)
+            continue
+        shutil.copytree(child, root / child.name, copy_function=os.link, dirs_exist_ok=True)
 
     def _write(path: Path, rows: list[dict[str, Any]]) -> None:
+        # The destination is a hardlink to the repository's own copy; writing
+        # through it would rewrite the source. Break the link first.
+        path.unlink(missing_ok=True)
         with path.open("w", encoding="utf-8", newline="\n") as handle:
             for row in rows:
                 handle.write(json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n")
 
     codex = root / "data" / "processed" / "codex"
+    codex.mkdir(parents=True, exist_ok=True)
     _write(codex / "codex_session_manifest.jsonl", sessions)
     _write(codex / "codex_daily_activity.jsonl", daily)
 
