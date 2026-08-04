@@ -68,6 +68,21 @@
       "runtime_sha256": "c5a8d71a6086071f2630627a95c4f74d351ddf42cfe38c94a6e5cd746fbbf019",
       "runtime_size_bytes": 67421,
       "size_bytes": 82690
+    },
+    {
+      "artifact": "versions/0.0.0.5/george-washington-carver-persona-distillation-delivery-v0.0.0.5.zip",
+      "artifact_created_at": "2026-08-04T16:31:02Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.135",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "6c1f75564154913f1b3de9296d41996bab8dff6d333df77841af2a85fbbb33df",
+      "product_version": "0.0.0.5",
+      "runtime_artifact": "runtime/george-washington-carver-persona-skill-v0.0.0.5.zip",
+      "runtime_sha256": "7c07aed9103f0b1e5a79181cd9cd4cc6c864e7d93f627dc19a9c881ed664f6d7",
+      "runtime_size_bytes": 67423,
+      "size_bytes": 83259
     }
   ]
 }

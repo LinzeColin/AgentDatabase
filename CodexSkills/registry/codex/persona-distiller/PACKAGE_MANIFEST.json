@@ -781,8 +781,8 @@
     },
     {
       "path": "references/pipeline/checkers/package_target.py",
-      "sha256": "23d9776794ac9f00f9f431d943f4cfdf8b3b060c9b38b2f3988a9525ed679502",
-      "size_bytes": 22150
+      "sha256": "547388888727336965022612ddbb6a18e58f93f00ae651620626dc1dc59e6338",
+      "size_bytes": 24705
     },
     {
       "path": "references/pipeline/checkers/quality_check.py",
@@ -1421,8 +1421,8 @@
     },
     {
       "path": "scripts/package_target.py",
-      "sha256": "23d9776794ac9f00f9f431d943f4cfdf8b3b060c9b38b2f3988a9525ed679502",
-      "size_bytes": 22150
+      "sha256": "547388888727336965022612ddbb6a18e58f93f00ae651620626dc1dc59e6338",
+      "size_bytes": 24705
     },
     {
       "path": "scripts/persona_registry.py",

@@ -253,6 +253,25 @@ def audit_payloads(
         ("evals/judge_payload.v1.json", target / "evals" / "judge_payload.v1.json"),
         ("evals/baseline.v1.json", target / "evals" / "baseline.v1.json"),
     )
+    # 基线来源：**从 results.jsonl 自读**，不另立开关（与 check_baseline_provenance 同口径）
+    baseline_source_summary = "unknown"
+    _res = target / "evals" / "results.jsonl"
+    if _res.is_file():
+        _srcs = set()
+        for _l in _res.read_text(encoding="utf-8").splitlines():
+            if not _l.strip():
+                continue
+            try:
+                _r = json.loads(_l)
+            except json.JSONDecodeError:
+                continue
+            if _r.get("system") == "baseline":
+                _srcs.add(str(_r.get("baseline_source") or "unknown"))
+        if len(_srcs) == 1:
+            baseline_source_summary = _srcs.pop()
+        elif _srcs:
+            baseline_source_summary = "**混杂：" + "/".join(sorted(_srcs)) + "**"
+
     frozen_outputs = {
         relative: (
             {"sha256": sha256_file(path), "size_bytes": path.stat().st_size}
@@ -331,6 +350,28 @@ def audit_payloads(
             "candidate_overall": metrics.get("candidate_overall"),
             "baseline_overall": metrics.get("baseline_overall"),
             "candidate_baseline_delta": metrics.get("candidate_baseline_delta"),
+            # ★★★ v0.0.0.136：**这个数不许裸着走。**
+            #   Carver #127 实测：`+0.3791` 印在这里，**不带任何说明**；
+            #   而同一批答案换掉评委手里的 rubric，同一个数变成 **−0.2019**（摆动 0.5810）。
+            #   人读的更正说明我打进了 `reports/`，**但机器读的是这个文件**——
+            #   **数字会离开它的上下文旅行。** 所以把限定条件写进字段本身。
+            "delta_reading_constraints": {
+                "baseline_source": baseline_source_summary,
+                # ★ 硬编码 True 是**当前流水线的事实**（冻结指令 judge_prompts/ 一律含 rubric），
+                #   不是推断。★★ 若将来出现不给 rubric 的判分，**这里必须改成实测**，
+                #   否则它会变成一句「看起来有据」的假话。
+                "judges_saw_rubric": True,
+                "★ 怎么读": (
+                    "**这个 delta 只在「评委拿到了本人物 rubric」这个条件下成立。**"
+                    "本项目实测：同一批答案、同一 A/B 归属，**不给评委 rubric 时符号会反过来**"
+                    "（Carver #127：+0.3791 → −0.2019，摆动 0.5810；"
+                    "更早的 v0.0.0.21 在另一人物上是 −0.1075）。"
+                    "**不许只引本字段而不引本说明。**"),
+                "★★ 唯一两次实验都为正的": (
+                    "`fact-preservation`（+0.247 / +0.185）——"
+                    "即「答案能不能被核」。其余各项的符号取决于量法。"),
+                "见": "reports/DELTA-READ-ME-FIRST.md（若本包带了 reports/）",
+            },
             "critical_failures": [
                 error
                 for error in quality.get("errors", [])

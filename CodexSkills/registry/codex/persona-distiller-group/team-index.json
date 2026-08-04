@@ -51,11 +51,11 @@
         "Declining a number he never measured, and saying which published wording is his instead",
         "Distinguishing his own authorship from the economist Thomas Nixon Carver"
       ],
-      "latest_artifact": "农林牧渔师/george-washington-carver/versions/0.0.0.4/george-washington-carver-persona-distillation-delivery-v0.0.0.4.zip",
+      "latest_artifact": "农林牧渔师/george-washington-carver/versions/0.0.0.5/george-washington-carver-persona-distillation-delivery-v0.0.0.5.zip",
       "latest_model_snapshot": "0.1.0-draft",
-      "latest_outer_sha256": "fb7760545f6a81523824e07785425f051a15f38d7fbda480181fb8914010c7c4",
-      "latest_product_version": "0.0.0.4",
-      "latest_runtime_sha256": "c5a8d71a6086071f2630627a95c4f74d351ddf42cfe38c94a6e5cd746fbbf019",
+      "latest_outer_sha256": "6c1f75564154913f1b3de9296d41996bab8dff6d333df77841af2a85fbbb33df",
+      "latest_product_version": "0.0.0.5",
+      "latest_runtime_sha256": "7c07aed9103f0b1e5a79181cd9cd4cc6c864e7d93f627dc19a9c881ed664f6d7",
       "readiness": "ready",
       "registration": "农林牧渔师/george-washington-carver/registration.json",
       "registration_category": "农林牧渔师",
@@ -78,7 +78,7 @@
         "Separates what he wrote from what a biographer said he said — only the 1921 transcript is his own words",
         "MEASURED SCOPE — read before routing work here: against a bare-model baseline this persona scores +0.3791 when judges are given its rubric, but −0.2019 on the same answers when they are not (swing 0.5810; it wins 16/16 suites in the first condition and 1/16 in the second). The single suite it wins under both conditions is fact-preservation. Route work here when the value you need is A CHECKABLE ANSWER — quotations that resolve to a source, and an explicit refusal when no source exists. Do NOT route here expecting a generally better answer than a plain model: judged as 'which reply is better', a plain model wins."
       ],
-      "version_count": 4
+      "version_count": 5
     },
     {
       "application_scenarios": [
