@@ -1,0 +1,110 @@
+{
+  "build_depth": {
+    "art-designer": "screening",
+    "entrepreneur-operator": "screening",
+    "investor-capital-allocator": "screening",
+    "software-developer": "screening",
+    "technical-engineer": "deep",
+    "thinker-educator": "screening"
+  },
+  "generated_at": "2026-08-04T20:07:25Z",
+  "identity_selection": {
+    "canonical": "technical-engineer",
+    "display": "材料建工师",
+    "mode": "single",
+    "primary": "technical-engineer",
+    "weights": {
+      "technical-engineer": 1.0
+    }
+  },
+  "product_release_versioning": {
+    "consumed_on": "successful-registration",
+    "format": "0.0.0.N",
+    "maximum": "0.0.0.999",
+    "minimum": "0.0.0.1",
+    "scope": "per-canonical-person"
+  },
+  "provided_scenario": null,
+  "research": {
+    "base_lanes": [
+      "writings",
+      "conversations",
+      "expression",
+      "external",
+      "decisions",
+      "timeline"
+    ],
+    "completeness_method": [
+      "source-universe",
+      "coverage-cube",
+      "origin-clustering",
+      "gap-expansion",
+      "two-round-saturation"
+    ],
+    "primary_identity_focus": [
+      "理论与因果模型",
+      "材料/焊接/冶金与工艺",
+      "代码/专利/设计文档",
+      "故障与失败复盘",
+      "约束下的工程取舍",
+      "质量运营与可靠维护"
+    ],
+    "scenario_priors": [
+      "技术架构",
+      "问题诊断",
+      "实验验证",
+      "工程实现",
+      "质量评审",
+      "可靠维护"
+    ],
+    "source_priorities": [
+      "papers",
+      "experiments",
+      "code",
+      "patents",
+      "design-docs",
+      "incident-reviews",
+      "technical-talks",
+      "craft-artifacts",
+      "maintenance-records"
+    ]
+  },
+  "runtime_identity_routing": {
+    "mode": "automatic",
+    "source": "distilled-identity-selection",
+    "task_reweighting": true,
+    "user_selection_required": false
+  },
+  "runtime_invocation_versioning": {
+    "audit_records": "optional-unnumbered",
+    "enabled": false,
+    "user_visible_version": false,
+    "versioned_output_names": false
+  },
+  "runtime_model_load_order": [
+    "boundaries.md",
+    "corrections/ACTIVE.md",
+    "facts.md",
+    "identity-facets/<selection>.md",
+    "cognitive-os.md",
+    "decision-policy.md",
+    "strategy.md",
+    "capabilities.md",
+    "work.md",
+    "persona.md",
+    "scenario-adapters/<inferred>.md",
+    "divergence-map.md"
+  ],
+  "runtime_readiness": {
+    "art-designer": "provisional-until-evidenced",
+    "entrepreneur-operator": "provisional-until-evidenced",
+    "investor-capital-allocator": "provisional-until-evidenced",
+    "software-developer": "provisional-until-evidenced",
+    "technical-engineer": "building",
+    "thinker-educator": "provisional-until-evidenced"
+  },
+  "scenario_policy": "infer-per-task",
+  "schema_version": "1.0",
+  "subject_origin": "historical",
+  "target_name": "Nikolai Benardos"
+}

@@ -1,0 +1,16 @@
+{
+  "candidate_cards": [],
+  "candidate_count": 0,
+  "candidates": [],
+  "generated_at": "2026-08-04T20:07:25Z",
+  "normalized_name": "nikolaibenardos",
+  "resolution": "none",
+  "schema_version": "1.0",
+  "search_scope": [
+    "sibling canonical registry",
+    "authoritative public sources supplied by orchestration"
+  ],
+  "selected_subject_uid": null,
+  "status": "ready",
+  "target_name": "Nikolai Benardos"
+}
