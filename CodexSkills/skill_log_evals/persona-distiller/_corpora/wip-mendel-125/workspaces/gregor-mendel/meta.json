@@ -92,5 +92,60 @@
   "subject_origin": "historical",
   "target_id": "tgt-52827524a548",
   "time_scope": "all available periods, separated by role and material drift",
-  "updated_at": "2026-08-04T12:28:27Z"
+  "updated_at": "2026-08-04T12:28:27Z",
+  "attribution_basis": {
+    "authority": "**印刷时代人物，署名在原刊目次与文末都可核**。判据三重叠加，缺一不可：① `creator == \"Mendel, Gregor, 1822-1884\"`，或原刊目次署 `Mendel Gregor`／`G. Mendel`；② 规范号 **GND 118580698 ／ VIAF 7455283 ／ LCCN n50036968 ／ Wikidata Q37970**；③ **出版年 1853 ≤ y ≤ 1884**，且刊名在白名单内（Verh. naturf. Ver. Brünn／Verh. zool.-bot. Ver. Wien／Brünner Zeitung／Z. österr. Ges. Meteorol.）。二次权威：Verh. Brünn Bd.10 (1871) 的 Generalregister I–X，本次逐条核实以它为基准。",
+    "citation": "https://d-nb.info/gnd/118580698 ｜ https://viaf.org/viaf/7455283 ｜ https://id.loc.gov/authorities/names/n50036968 ｜ https://www.wikidata.org/wiki/Q37970 ｜ 逐条出处见 raw/_ids.txt 第 2 列",
+    "disputed_policy": "**默认怀疑同姓者与后人编本，三步裁定**：① **只看年份会中招**——`Mendel, Hermann`（1834–1876，音乐辞书编者）与 `Mendel, Emanuel`（1839–1907，神经病学家）都在 1870–1884 用德文发表；② **只看 creator 串也会中招**——Ostwalds Klassiker Nr.121（1901／1911，Tschermak 编）、Bennett 编 *Experiments in Plant Hybridisation*（1965）、Stern & Sherwood *A Mendel Source Book*（1966）在 IA 上 creator 串**一字不差**写 `Gregor Mendel`，实为他人编辑成果，**一律不记 P1/P2**；③ **署名可能只在正文里而不在目次里**——1854 年 Bruchus pisi 那篇**目次署 `V. Kollar`**，只有内嵌的那封信是他的；1879 年 ZÖGM 那篇**无标题**，署名只在正文写 「Herr Abt Mendel schreibt uns aus Brünn:」。**纯书目层抓取会漏掉或错记这两件。**",
+    "disputed_works": [
+      {
+        "title": "Ostwalds Klassiker Nr.121 (1901/1911)",
+        "actual_author": "Tschermak 编",
+        "verdict": "securely-not-subject",
+        "why": "creator 串与本人一字不差，实为后人编本"
+      },
+      {
+        "title": "Experiments in Plant Hybridisation (1965)",
+        "actual_author": "Bennett 编",
+        "verdict": "securely-not-subject",
+        "why": "同上；且 1965 年出版，非 PD"
+      },
+      {
+        "title": "A Mendel Source Book (1966)",
+        "actual_author": "Stern & Sherwood",
+        "verdict": "securely-not-subject",
+        "why": "同上；且 1966 年出版，非 PD"
+      },
+      {
+        "title": "Musikalisches Conversations-Lexikon 等",
+        "actual_author": "Mendel, Hermann (1834–1876)",
+        "verdict": "securely-not-subject",
+        "why": "同姓、同期、同语种——**只看年份会中招**"
+      },
+      {
+        "title": "1854 Ueber Bruchus pisi（目次署 V. Kollar）",
+        "actual_author": "Kollar 代为宣读",
+        "verdict": "partially-subject",
+        "why": "**只有内嵌的那封 Mendel 来信是他的**，卷与目次不是。已按此记档"
+      },
+      {
+        "title": "Nägeli 书信 10 封（Correns 1905 德文原刊）",
+        "actual_author": "Gregor Mendel",
+        "verdict": "not-obtained",
+        "why": "**确是他的**，但 SLUB Dresden／DDB 均在 Anubis PoW 之后，HathiTrust Cloudflare 403，IA 无此卷——**记「访问控制」，未绕过，本轮未入库**"
+      }
+    ],
+    "covered_sources": [
+      "bz_0c6eaf10-cc5e-11e4-a19f-001018b5eb5c.txt ｜ 署名照录：mendel-1857-gewitter-bruenn「Die k. k. Central-Anstalt fuer Meteorologie verdankt dem Herrn StiftScapitular G」",
+      "ia34.txt ｜ 署名照录：mendel-1865-met-beob-1864「aus Maehren und Schlesien fuer das Jahr 1864. Zusammengestellt vn @. Mendel. (Vo」；mendel-1866-versuche-pflanzen-hybriden「Mendel Gregor. Versuche ueber Pflanzen-Hybriden .. 2... 2.2.2.2... 3 // end of t」；mendel-1866-met-beob-1865「_ Mendel Gregor. Meteorologische Beobachtungen aus Maehren und Schlesien」",
+      "verhandlungendes1218natu.txt ｜ 署名照录：mendel-1863-bemerkungen-uebersicht「graphisch-tabellarischen Uebersicht der meteorologischen Verhaeltnisse von Bruen」；mendel-1864-met-beob-1863「Professor G. Mendel. // Bd.10 Generalregister: Mendel G. Meteorologische Beobach」",
+      "verhandlungendes353zool.txt ｜ 署名照录：mendel-1853-gartenrettig「Der hochwuerdige Herr G. Mendel hielt folgenden Vortrag : // TOC: G. Mendtl: Ueb」",
+      "verhandlungendes454zool.txt ｜ 署名照录：mendel-1854-bruchus-pisi「Hr. Direet. V. Kollar theilt nachstehendes, vor einigen Tagen ihm zugekommene Sc」",
+      "verhandlungendes5618natu.txt ｜ 署名照录：mendel-1867-met-beob-1866「aus Maehren und Schlesien fuer das Jahr 1866. Zusammengestellt vn G. Mendel.」",
+      "verhandlungendes7818natu.txt ｜ 署名照录：mendel-1870-hieracium-bastarde「@. Mendel, Ueber einige aus kuenstlicher Befruchtung entnommen Hiere // end of t」；mendel-1870-met-beob-1869「%. Mendel. Meteorologische Beitachkunsen aus Maehren ed Schlesien im Jan JOD // 」",
+      "verhandlungendes91870natu.txt ｜ 署名照录：mendel-1871-windhose「Bd.10 Generalregister: Mendel @. Die Windhose am 13. October 1870. . . . 229」",
+      "zogm14_p315_316.txt ｜ 署名照录：mendel-1879-regenfall-gewitter「(Regenfall und Gewitter zu Bruenn im Juni 1879.) Herr Abt Mendel schreibt uns au」"
+    ],
+    "counting_convention": "**逐份点名 9 个载体**（= 全部 P1 载体），每条附其承载作品的署名原文照录。★★ **计数单位是载体不是作品**：27 件作品分布在 21 个载体里，而流水线按内容去重（`source_id = src-<sha256[:12]>`），**一个载体只能落成一条来源记录**——见 v0.0.0.115／116。作品级的清单在 `_works.tsv`。"
+  }
 }
