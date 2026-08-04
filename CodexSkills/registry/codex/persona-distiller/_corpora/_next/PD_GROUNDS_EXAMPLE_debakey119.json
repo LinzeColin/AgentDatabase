@@ -1,0 +1,23 @@
+[
+ {"work":"Vascular Surgery (Surgery in WWII) ch.III «Acute Battle-Incurred Arterial Injuries»",
+  "kind":"notice1909","year":1955,"tier":"P1","byline":"person","words":41229,
+  "verify_strength":"html-transcript","weak_acknowledged":true,
+  "evidence":"achh.army.mil 转录，正文无版权标记。★ 探测方明说未见页面影像，扉页背面该站可能根本没转录——要坐实需取扫本核对"},
+ {"work":"Cold Injury, Ground Type (Whayne & DeBakey) ch01–09 + 附录 J/K，11 单元",
+  "kind":"notice1909","year":1958,"tier":"P1","byline":"person","words":114453,
+  "verify_strength":"html-transcript","weak_acknowledged":true,
+  "evidence":"扉页实录 by Colonel TOM F. WHAYNE… and MICHAEL E. DEBAKEY, M.D.… Formerly Colonel, MC, AUS；无 ©。同上，未见影像"},
+ {"work":"Thoracic Surgery Vol II ch.IX (Blades, Carter & DeBakey)",
+  "kind":"notice1909","year":1965,"tier":"P1","byline":"person","words":5380,
+  "verify_strength":"html-transcript","weak_acknowledged":true,
+  "evidence":"同 achh 转录，无版权标记；未见页面影像"},
+ {"work":"1965-07-20 众院州际与外贸委员会听证（CHRG-89hhrg51959）本人记名发言 89 轮",
+  "kind":"congressional","year":1965,"tier":"P1","byline":"person","words":7105,
+  "evidence":"govinfo.gov 国会听证记录，GPO 印，无版权标记；全场 426,816 字中属他本人的部分"},
+ {"work":"总统心脏病/癌症/中风委员会《Report to the President》Vol I（DeBakey 任主席）",
+  "kind":"congressional","year":1964,"tier":"P2","byline":"institution","words":46178,
+  "evidence":"NIH Library 扫本 138 页 OCR 全文 grep「copyright/©」0 命中；28 名委员集体署名"},
+ {"work":"胡佛委员会《Federal Medical Services》（DeBakey 为分委会成员）",
+  "kind":"congressional","year":1949,"tier":"P2","byline":"institution","words":43058,
+  "evidence":"NLM 扫本正文实录 For sale by the Superintendent of Documents, U.S. G.P.O.，无版权标记"}
+]

@@ -1661,6 +1661,65 @@ def run_rights_basis(report, target: Path) -> None:
     report.metrics['rights_basis'] = entry
 
 
+def run_pd_grounds(report, target: Path) -> None:
+    """「它是公有领域」凭哪一条？（v0.0.0.85，**只写 metrics**）
+
+    #119 DeBakey 的探测暴露了一处我自己的混淆：三卷 GPO 政府出版物**确实是 PD**，
+    但依据是「1978 年前出版、无版权标记」（1909 年法），**不是 §105 联邦职务作品**
+    ——作者脚注实录 `Formerly Colonel, MC, AUS`，写作时他已是平民教授。
+
+    两者结论相同、**射程完全不同**：§105 可外推到他同期的其他作品；
+    1909 那条只判这一份印本，一份一份地判。
+    把后者当成前者，就会得出「他有 §105 的口子、可按 deep 排期」——**实际口径是 0**。
+
+    真数据回归：把那三卷按天真直觉标成 §105，本判据**三卷全部抓住**，
+    「§105 且本人署名」从 3 条纠正为 **0 条**。
+    同一跑还抓出探测报告自己的分档错误：两份 28 人集体署名的委员会报告标了 P2（一手）。
+
+    **缺依据表时明说「未核」，不写依据不算通过。**
+    """
+    here = Path(__file__).resolve().parent
+    script = here / 'check_pd_grounds.py'
+    if not script.exists():
+        report.metrics['pd_grounds'] = {'状态': '检查器未安装，**未核验**（不是通过）'}
+        return
+    spec = importlib.util.spec_from_file_location('_pd_grounds', script)
+    module = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(module)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['pd_grounds'] = {'状态': f'加载失败，**未核验**：{exc}'}
+        return
+    f = target / 'references/research/_pd_grounds.json'
+    if not f.is_file():
+        report.metrics['pd_grounds'] = {'状态': (
+            '**本人物未提供 `references/research/_pd_grounds.json`——未核，不是通过。**'
+            '「它是公有领域」须写明凭哪一条（§105 ／ 1909 年法无标记 ／ '
+            '1929 年前出版 ／ 国会记录）并附证据')}
+        return
+    try:
+        claims = json.loads(f.read_text(encoding='utf-8'))
+        problems = module.check(claims)
+        info = module.summarize(claims)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['pd_grounds'] = {'状态': f'运行失败，**未核验**：{exc}'}
+        return
+    ids = set()                           # ★ 分母：按标识符比集合，不比份数
+    for sub in ('references/sources', 'references/holdout'):
+        d = target / sub
+        if d.is_dir():
+            for one in d.iterdir():
+                if one.is_dir():
+                    ids |= {f.name.split('.')[0] for f in one.glob('*.normalized.txt')}
+    if ids:
+        info.update(module.coverage(claims, ids))
+    else:
+        info['覆盖率'] = ('**一个来源标识符都数不到，分母未知**——'
+                       '不许把「N 条全合格」读成「每一份来源都有依据」')
+    info['形式不完整的'] = problems[:8] or '无（★ 这只说明主张形式完整，不是法律结论）'
+    report.metrics['pd_grounds'] = info
+
+
 def run_answer_constraints(report, target: Path) -> None:
     """题面写死的约束，答案接住了吗（v0.0.0.83，**只写 metrics**）。
 
@@ -2309,6 +2368,7 @@ def main() -> int:
         report_refusal_overflow(report, target)
         run_corpus_ceiling(report, target, report.profile)
         run_rights_basis(report, target)
+        run_pd_grounds(report, target)
         train_ids = {record.get('source_id') for record in sources if record.get('split') == 'train'}
         evaluate_research(report, target, thresholds, train_ids, args.allow_provisional)
         cases: list[dict[str, Any]] = []
