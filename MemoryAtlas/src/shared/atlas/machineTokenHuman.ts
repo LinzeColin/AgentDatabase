@@ -123,6 +123,20 @@ export const machineTokenLabels: Record<string, string> = {
   automation_failure: "自动化失败",
   rollback_runtime_order: "回滚运行顺序",
   runtime_port_conflict: "运行端口冲突",
+  // Outcome states and source ids the browser rendered against live production
+  // data. `claimed_*` is the event's own assertion before verification, which is
+  // the distinction the whole verification-debt metric rests on.
+  claimed_failure: "自述失败",
+  claimed_deployed: "自述已部署",
+  claimed_restore: "自述已恢复",
+  claimed_adopted: "自述已采纳",
+  claimed_decision_impact: "自述决策影响",
+  claimed_verified: "自述已验证",
+  codex_attachments: "Codex 附件",
+  codex_automations: "Codex 自动化",
+  codex_tasks: "Codex 任务",
+  chatgpt_exports: "ChatGPT 导出",
+  verified_evidence_adapters: "已验证证据适配器",
   // Added after a second browser scan: the reality panel rendered metric
   // denominators and activity keys straight from the snapshot.
   event_count: "事件数",
