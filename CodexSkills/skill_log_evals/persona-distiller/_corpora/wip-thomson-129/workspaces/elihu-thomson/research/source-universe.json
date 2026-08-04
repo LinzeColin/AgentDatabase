@@ -1,0 +1,117 @@
+{
+  "coverage_axes": [
+    "identity",
+    "role",
+    "period",
+    "research-lane",
+    "source-family",
+    "language",
+    "decision-context",
+    "success/failure",
+    "public/private"
+  ],
+  "families": [
+    {
+      "examples": [
+        "books",
+        "papers",
+        "official essays",
+        "courses",
+        "code",
+        "patents",
+        "formal documents"
+      ],
+      "id": "first-party-systematic",
+      "priority": "highest"
+    },
+    {
+      "examples": [
+        "long interviews",
+        "debates",
+        "hearings",
+        "Q&A",
+        "press conferences",
+        "conflict records"
+      ],
+      "id": "dialogue-pressure",
+      "priority": "high"
+    },
+    {
+      "examples": [
+        "investments",
+        "products",
+        "votes",
+        "judgments",
+        "experiments",
+        "matches",
+        "failures",
+        "exits"
+      ],
+      "id": "decisions-actions-outcomes",
+      "priority": "highest"
+    },
+    {
+      "examples": [
+        "colleagues",
+        "partners",
+        "competitors",
+        "biographies",
+        "criticism",
+        "peer review"
+      ],
+      "id": "external-triangulation",
+      "priority": "high"
+    },
+    {
+      "examples": [
+        "information available at the time",
+        "resources",
+        "incentives",
+        "organization",
+        "market",
+        "law"
+      ],
+      "id": "context-constraints",
+      "priority": "high"
+    },
+    {
+      "examples": [
+        "audio",
+        "video",
+        "images",
+        "design drafts",
+        "code",
+        "game data",
+        "manuscripts"
+      ],
+      "id": "multimodal",
+      "priority": "medium"
+    },
+    {
+      "examples": [
+        "local mail exports",
+        "chat exports",
+        "meeting notes",
+        "user corrections"
+      ],
+      "id": "authorized-private",
+      "priority": "conditional"
+    }
+  ],
+  "generated_at": "2026-08-04T21:21:42Z",
+  "identity_priorities": [
+    "papers",
+    "experiments",
+    "code",
+    "patents",
+    "design-docs",
+    "incident-reviews",
+    "technical-talks",
+    "craft-artifacts",
+    "maintenance-records"
+  ],
+  "non_claim": "This protocol targets evidence saturation, not a logically impossible guarantee that every public or private source has been found.",
+  "schema_version": "1.0",
+  "stop_rule": "Stop only after two consecutive gap-driven rounds add no high-impact Claim and all critical coverage cells are either evidenced or explicitly unresolved.",
+  "target_name": "Elihu Thomson"
+}
