@@ -339,6 +339,35 @@ def main() -> int:
           "就丢掉过在世的人，自测因此全绿而真跑是错的）。")
     print("    **改动加载逻辑时，给那一件补一条走完整路径的对照。**")
 
+    # ★★ v0.0.0.109：抓到了、记进台账了、**却没进工作区**——同族的另一道。
+    #   `check_corpus_presence` 比的是工作区自己的账本与磁盘，一份没被 ingest 的来源
+    #   **在那个账本里也没有**，于是它报「齐的」。缺的那一层在上游的九列台账。
+    #   实测：7 人共 16 份没进工作区，**其中 10 份是一手**
+    #   （Barton 4 本日记、Blackwell 4 本日记 + 独一份手稿 + 独一份报刊撰文）。
+    sb = pathlib.Path(d).resolve() / "check_staged_but_not_ingested.py"
+    corp = pathlib.Path(d).resolve().parents[3] / "skill_log_evals" / "persona-distiller" / "_corpora"
+    print("\n── 台账有、工作区没有（check_staged_but_not_ingested）──")
+    if not sb.is_file():
+        print("  ⚠ check_staged_but_not_ingested.py 不在，**未核（不是通过）**")
+    elif not corp.is_dir():
+        print(f"  ⚠ {corp} 不在，**未核（不是通过）**")
+    else:
+        r = subprocess.run([sys.executable, str(sb), str(corp)], capture_output=True, text=True)
+        try:
+            info = json.loads(r.stdout)
+            n, prim = info["**有缺口的人物**"], info["**其中一手合计**"]
+            print(f"  扫了 {info['扫了']} 个目录，**有缺口 {n} 人、共 {info['缺口合计']} 份，"
+                  f"其中一手 {prim} 份**")
+            for row in info["明细"]:
+                if row["其中一手"]:
+                    print(f"    ★ {row['人物']}：缺 {row['**没进工作区**']} 份，"
+                          f"**一手 {row['其中一手']}** —— {'、'.join(row['清单'][:3])}…")
+            if info["★ 两侧不齐备、没比的"]:
+                print(f"  ★ 两侧不齐备、**没比的** {len(info['★ 两侧不齐备、没比的'])} 个"
+                      f"（不是通过）")
+        except Exception as exc:
+            print(f"  ⚠ 输出无法解析，**未核（不是通过）**：{exc}")
+
     # ★ check_scan_reach 是同族元判据（「这道判据这次扫了几个单位？和该扫的一样多吗」），
     #   此前**从没被任何代码调用过**。它归这里管。
     # ★ 先取绝对路径：传进来的可能是相对的 `scripts/`，那样 .parent 会一路塌成 `.`

@@ -1,6 +1,6 @@
-# Release verification — Persona Distiller v0.0.0.108
+# Release verification — Persona Distiller v0.0.0.109
 
-Date: 2026-08-04（**v0.0.0.108**）
+Date: 2026-08-04（**v0.0.0.109**）
 
 > **本文件记录「当前发布号的复验结果」，不是历史归档。**
 > 版本号必须等于根目录 `VERSION`，由 `scripts/check_contract_drift.py` 强制。
@@ -21,6 +21,15 @@ Date: 2026-08-04（**v0.0.0.108**）
 > **表格正文不在任何判据的射程里**。
 > **「本表每一行都来自本次实跑」是一句自述**——
 > 而自述不是证据（见 `self-report-is-not-evidence`）。
+
+> ### v0.0.0.109 这一版重跑了什么
+>
+> **相对 108 加了一件判据**：`check_staged_but_not_ingested.py`，
+> **已接线**（`check_checkers.py` 的跨工作区审计段）。
+> **本次重跑**：该件自测（**4 组对照，含「有意排除的不许报成缺口」**）、
+> **全量实跑 24 个目录 → 7 人 16 份缺口、其中一手 10 份**、
+> `check_checkers scripts`（**53 件 0 未接线**）、pytest、`check_contract_drift`。
+> **其余各行沿用 v0.0.0.96 那一次。**
 
 > ### v0.0.0.108 这一版重跑了什么
 >
