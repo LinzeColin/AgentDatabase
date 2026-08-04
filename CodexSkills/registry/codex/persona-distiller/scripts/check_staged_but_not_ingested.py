@@ -16,6 +16,11 @@
 
 ```
 台账有、工作区没有：合计 **18** 份
+★★ **2026-08-05 补**：本件按制表符切 `_ids.txt` 且要求 >6 列，
+而 26 个工作区里 **5 个用的是竖线分隔的老格式**（koch／lister／pasteur／semmelweis／jenner）——
+**它们一列都切不出来，分档全是 `?`，此前被静默算进「不是一手」。**
+现已单列一项「分档未知」。**「不知道」不是「否」。**
+
 其中带一手分档（P1/P2）的两个人：
   Barton   #117  6 份缺，**4 份是 P1**  ← 她本人的日记 1864／1867／1871／1897（timeline 道）
   Blackwell #118 6 份缺，**6 份全是 P1** ← 日记 1836／1872-74／1900-02／1903-05
@@ -111,12 +116,26 @@ def audit(corpora: pathlib.Path) -> dict:
         rows.append({"人物": person.name, "台账": len(staged), "工作区": len(ingested),
                      "**没进工作区**": len(gap),
                      "其中一手": sum(1 for v in t.values() if v in ("P1", "P2")),
+                     # ★★ 2026-08-05：**分档解析不出来的，不许算成「不是一手」。**
+                     #   `staged_names` 按制表符切、要求 >6 列；而 26 个工作区里有
+                     #   **5 个的 `_ids.txt` 是竖线分隔的老格式**（koch/lister/pasteur/
+                     #   semmelweis/jenner），它们一列都切不出来，分档全是 `?`。
+                     #   于是那 6 条缺口被静默计成「不是一手」——
+                     #   **「不知道」被当成了「否」，而这两件事后果完全不同。**
+                     #   ★ 第一版我写成「t.values() 里不是 P1/P2/S1/P3 的」——**那是错的**：
+                     #     切不出来时 `tiers_of` 返回的是**空 dict**，`values()` 一个都没有，
+                     #     于是「未知」恒为 0，我自己的反向对照当场把它照出来了。
+                     #     正确的数法是「缺口里**压根没进分档表**的那些」。
+                     "★ 分档未知（**不是「不是一手」**）":
+                         sum(1 for name in gap if name not in t),
                      "有意排除（不计）": len(deliberate),
                      "清单": [f"{n}[{t.get(n, '?')}]" for n in gap]})
     return {"扫了": len([p for p in corpora.iterdir() if p.is_dir()]),
             "**有缺口的人物**": len(rows),
             "缺口合计": sum(r["**没进工作区**"] for r in rows),
             "**其中一手合计**": sum(r["其中一手"] for r in rows),
+            "★★ 分档未知合计（**未核，不是「不是一手」**）":
+                sum(r.get("★ 分档未知（**不是「不是一手」**）", 0) for r in rows),
             "明细": rows,
             "★ 两侧不齐备、没比的": skipped,
             "★ 其中「说不清」的": [s for s in skipped if "说不清" in s],
@@ -162,6 +181,19 @@ def self_test() -> int:
         chk(f"缺口合计 {r['缺口合计']} 应为 2（b、c）", r["缺口合计"] == 2)
         chk(f"其中一手 {r['**其中一手合计**']} 应为 1（只有 b 是 P1）",
             r["**其中一手合计**"] == 1)
+        print("── ★★★ 反向对照①·补：**竖线老格式切不出分档 → 记「未知」，不许算成「不是一手」** ──")
+        mk("wip-pipe", ["a", "b"], ["a"],
+           ids="a|writings|1900|t|u|v\nb|writings|1900|t|u|v\n")
+        r2 = audit(root)
+        pipe = [x for x in r2["明细"] if x["人物"] == "wip-pipe"]
+        chk(f"wip-pipe 被报成有缺口（1 条）", len(pipe) == 1 and pipe[0]["**没进工作区**"] == 1)
+        chk(f"它的「其中一手」= {pipe[0]['其中一手'] if pipe else '?'}（切不出分档，不该有一手）",
+            bool(pipe) and pipe[0]["其中一手"] == 0)
+        k = "★ 分档未知（**不是「不是一手」**）"
+        chk(f"而它的「{k}」= {pipe[0].get(k) if pipe else '?'} **必须 >0**"
+            f"——否则「不知道」又被吞成「否」",
+            bool(pipe) and (pipe[0].get(k) or 0) > 0)
+
         print("── ★★ 反向对照①：齐的**不报** ──")
         chk("wip-clean 不在明细里", all(x["人物"] != "wip-clean" for x in r["明细"]))
         print("── ★★ 反向对照②：**写在 _EXCLUDED 里的是有意排除，不许报成缺口** ──")
