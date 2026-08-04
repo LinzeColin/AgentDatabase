@@ -193,11 +193,27 @@ p.2070 标题行：`...CARVER, REPRESENTING THE UNITED PEANUT ASSOCIATION OF AME
 ## 七、于是 quick 档的账现在长这样
 
 ```
-≥8 份来源        **满**（35 份 PD bulletin）
+≥8 份来源        **满**（35 份 PD bulletin，archive.org 无限制，可取）
 一手占比 ≥0.40   **满**（35/36 ≈ 0.97）
-≥3 道            lane 1 ✓　**lane 2 ✓（已定位，取用未解决）**　lane 4 ✓
-                 → **形式上够 3 道，实质取决于 lane 2 能不能取到**
+≥3 道            lane 1 ✓可取　**lane 2 已定位但取不到**　lane 4 ✓可取
+                 → **能取到的只有 2 道。够不够 3 道，全看 lane 2。**
 ```
+
+### lane 4 我另外亲自验了一次（**不是转述子代理**）
+
+浏览器打开 `docsouth.unc.edu/neh/merritt/merritt.html`：**正常加载，无任何挑战**。
+
+```
+Raleigh H. Merritt, *From Captivity to Fame or The Life of George Washington Carver*
+MEADOR PUBLISHING COMPANY, 27 Beach Street, BOSTON, MASSACHUSETTS, **1929**，196 p.
+UNC-CH Rare Book Collection 索书号 S417.C3 M4
+**Text transcribed by Apex Data Services** —— 是**人工转录**，不是 OCR，约 360K
+```
+
+★ **权利要分两层说**（照「开放获取 ≠ 公有领域」那条）：
+**1929 年那本书的正文是 PD**（≤1930）；
+**DocSouth 那个 2000 年电子版是一项服务**（转录、编码、NEH 资助）。
+用的是底下那层 PD 文本；**电子版本身的条款要在真去抓的时候看一眼，不能因为「免费可读」就当成 PD。**
 
 ★ **另一条 lane 2 检索仍在跑**（找「他的话当年印在学会会刊／期刊上」那一类）——
 若那条找到一件**本机取得到**的，lane 2 就彻底落实，不必依赖 Google Books。
