@@ -54,6 +54,7 @@ import sys
 
 HERE = pathlib.Path(__file__).resolve().parent
 LEAK_CHECKER = HERE / "check_answer_surface_leak.py"
+LOC_CHECKER = HERE / "check_quote_locator.py"   # ★ v0.0.0.89：坐标也在生成时把
 
 
 def assign(cases: dict, cand: dict, base: dict) -> tuple:
@@ -130,9 +131,52 @@ def selftest() -> int:
 
     print("── 反向对照 ③：泄题门必须存在，缺了不许当成通过 ──")
     chk(f"{LEAK_CHECKER.name} 在", LEAK_CHECKER.is_file())
+    chk(f"{LOC_CHECKER.name} 在", LOC_CHECKER.is_file())
+    # ★ 反向对照：两道生成时判据必须都在——少一道就等于那一道从没跑过
+    chk("两道生成时判据都在（少一道 = 那道从没跑过）",
+        LEAK_CHECKER.is_file() and LOC_CHECKER.is_file())
 
     print(f"\n{'✓ 自测全过' if not fails else f'✗ **{len(fails)} 项未过**'}")
     return 0 if not fails else 2
+
+
+def locator_gate(cand_path) -> int:
+    """引文坐标在**生成时**把关。→ 0 过 / 1 拦。
+
+    ★★ 它**不受 `--skip-leak-check` 影响**——那个旗标按名字只该跳过表面泄题门。
+    第一版我把这段接在泄题门之后，而 `--skip-leak-check` 是 `return 0` 早退，
+    **实跑才发现这道门永远跑不到**。只看代码不算。
+
+    实测 12 人：长逐字引文 198 条，**缺坐标 66 条（33%）**——
+    判据一直在报 ⚠、席 E 也点名过同一批题（「未在本题标出 CR 卷次」
+    「图注标『出自全集』而无卷页」），**而它从没被当成缺陷修过**：
+    因为它是 ⚠ 不是 error，没有人回头看清单。
+
+    ★ 装在这里而不是把发布门的 ⚠ 改成 error——后者会改动已判过的人的门。
+    **这一道只拦新载荷。**
+
+    ★★ 它**不需要语料**：`check_quote_locator` 只看答案里引文附近有没有坐标，
+    从不读 raw/。我第一版加了个 `--corpus` 前置条件，于是没给语料时它打印
+    「未核（不是通过）」却**返回 0（通过）**——**印的话和做的事相反**。
+    条件已删，这道门无条件跑。
+    """
+    print("\n── 引文坐标门（**派发之前必须过**）──")
+    if not LOC_CHECKER.is_file():
+        print("⚠ check_quote_locator.py 不在，**引文坐标未核（不是通过）**")
+        return 0
+    q = subprocess.run([sys.executable, str(LOC_CHECKER), "--answers", str(cand_path)],
+                       capture_output=True, text=True)
+    print(q.stdout.rstrip())
+    if q.returncode != 0:
+        print("\n✗ **这份载荷不许派发评委：有逐字引文找不到坐标。**")
+        print("  坐标 = 卷/期/页/篇名/图注编号，写在同一段里。")
+        print("  「详见那篇论文」不算坐标；「出自全集」不算坐标。")
+        print("  ★ 补坐标是**有实质**的改动（读者从此能回查），"
+              "与「为过长度门加几个字」性质相反。")
+        print("  ★★ 同一段话可能有手稿版与印本版两个措辞（Blackwell #118 实例）"
+              "——不带坐标，读者无从知道引的是哪一版。")
+        return 1
+    return 0
 
 
 def main() -> int:
@@ -204,6 +248,8 @@ def main() -> int:
     print("★ 题号已改为不透明编号 q-01…（套组归属只在 key 里）")
 
     # ★★ 生成即判：泄题必须拦在派发评委之前
+    if locator_gate(cand_path):                  # ★ 在早退之前——它不该被 skip 掉
+        return 1
     if a.skip_leak_check:
         print("\n⚠ **跳过了表面特征泄题门**——"
               "Barton #117 三轮判分正是因为这道门没在派发前跑而全部作废")
@@ -217,6 +263,7 @@ def main() -> int:
         print("\n✗ **这份载荷不许派发评委。** 判出来的 delta 不能当作盲判结果引用——"
               "重写答案，不要改门。")
         return 1
+
     return 0
 
 

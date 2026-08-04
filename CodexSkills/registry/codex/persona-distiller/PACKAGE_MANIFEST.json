@@ -16,8 +16,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "e8a411a3bdca43fa4f74aab329701c557b2467851badabf31578d3878c8f061d",
-      "size_bytes": 165303
+      "sha256": "db495a19a2964d928d18481541f5102c14c471abb36097bf12923f4e71574339",
+      "size_bytes": 166882
     },
     {
       "path": "CONTRIBUTING.md",
@@ -386,8 +386,8 @@
     },
     {
       "path": "references/ledgers/_每次开工必读.md",
-      "sha256": "a6c2fddc5063d78951919e178ed70a0f321114c35bc1e6a4b1aa69e19eb27001",
-      "size_bytes": 55774
+      "sha256": "39ef1f559c505f2169f0e2a7cb42bb4cf2a67ddd801f078368eddb2950d95b10",
+      "size_bytes": 56753
     },
     {
       "path": "references/ledgers/_蒸馏名单_v1草稿.md",
@@ -461,8 +461,8 @@
     },
     {
       "path": "references/pipeline/checkers/build_blind_payload.py",
-      "sha256": "af9763cac90800a914e7ed08a61e187721a97a67c58cfd13d0860f08266b2ec7",
-      "size_bytes": 10673
+      "sha256": "434b9d75a2f26331756262f73afe13cc0ff1e2db2afd45b61438f7d67df12151",
+      "size_bytes": 14074
     },
     {
       "path": "references/pipeline/checkers/build_source_ledger.py",
@@ -936,8 +936,8 @@
     },
     {
       "path": "scripts/build_blind_payload.py",
-      "sha256": "53fbbcb982e3c454108a9c98e652d824c92cd3fc91f04598e70331491f83af61",
-      "size_bytes": 11287
+      "sha256": "434b9d75a2f26331756262f73afe13cc0ff1e2db2afd45b61438f7d67df12151",
+      "size_bytes": 14074
     },
     {
       "path": "scripts/build_manifest.py",
