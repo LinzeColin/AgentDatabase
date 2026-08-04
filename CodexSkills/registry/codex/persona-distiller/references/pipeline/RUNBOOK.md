@@ -2304,8 +2304,32 @@ Virchow   briefe-an-eltern-1907-de        → `conversations`
 ```
 
 **Virchow 那一对是对的**——「写给他的」归 external，正是「与他有关 ≠ 他写的」该有的样子。
-**Koch 那一对没有可辨的理由**，而 **`min_lanes` 是一道门**：
-同样的材料分到哪一道，直接改变道数。**这一条尚未落成判据。**
+
+#### ★★★ 但我把这叫「真缺陷」也是急了——去全量数之后，**绝大多数是对的**
+
+扫了全部工作区，「同一人物、同类材料、落在多条道」共 **11 处 / 9 人**。
+**逐条看下去，多数是判对了，而且判据就写在文件名的前缀里：**
+
+```
+Virchow 书信   briefe-an-eltern（他写的）→ conversations
+               **s1-**baltzer-briefe-an-virchow（写给他的）→ external      ✓ 对
+Barton  日记   diary-*（她的）→ timeline/conversations
+               **other**diary-atwater-dorence（别人的）→ external          ✓ 对
+Fleming 讲演   campbell-oration-1944（他的）→ expression
+               nobel-ceremony-speech-1945（**颁奖方的**）→ external        ✓ 对
+Semmelweis 书信 offener_brief_saemmtliche（他的公开信）→ writings
+               **zwei_offene_briefe_siebold**（别人的）→ external          ✓ 对
+```
+
+**`s1-` / `other` / `sw-` 这些前缀就是在标「这不是他的」。**
+**所以 11 处里绝大多数不是分错道，是「他写的 vs 写给他的」判对了。**
+
+★ **我从 Koch 那一对就说「是个真缺陷」，那是从一个未核实的例子下的判断。**
+（而且那一对连这次全量扫都没扫到——`robertkochlette00koch` 里是 `lette` 不是 `letter`，
+正则漏了它。**它到底是「一封已刊书信」还是「书信集」，我至今没打开看过。**）
+
+**结论：不落判据。** 真要落，误报会压倒真报——
+**判「他写的还是别人写的」本来就是 `check_authorship` 的活，不是 lane 归属的活。**
 
 lane 2 / lane 3 **最薄**，且薄得有规律：
 
