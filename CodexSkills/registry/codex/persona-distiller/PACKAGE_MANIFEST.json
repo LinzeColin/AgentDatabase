@@ -371,13 +371,13 @@
     },
     {
       "path": "references/ledgers/_决策台账.md",
-      "sha256": "4dded8709b78948b82a6c4513714b9fbc5bc264739baef695ed3075ba2f70dc5",
-      "size_bytes": 91527
+      "sha256": "83e11621ecf488cf181e061f6f3fa6ba52e99f8bc9e2062c56ab52425f875452",
+      "size_bytes": 94714
     },
     {
       "path": "references/ledgers/_每次开工必读.md",
-      "sha256": "1c4a96aa3067a0ddd67705459a5d56d6e53b28873c94a05dd82b6fbc2118b4e7",
-      "size_bytes": 46890
+      "sha256": "ff47580a07b978ca1c35b7d6082456d10e55c11b0963594d4029e9f5ed5724e5",
+      "size_bytes": 48440
     },
     {
       "path": "references/ledgers/_蒸馏名单_v1草稿.md",
@@ -460,9 +460,9 @@
       "size_bytes": 5014
     },
     {
-      "path": "references/pipeline/checkers/check_answer_length_leak.py",
-      "sha256": "bd82096de65fa6545287c7447a8ba5fe3cfc58af977d91d9b294831fd23af044",
-      "size_bytes": 10628
+      "path": "references/pipeline/checkers/check_answer_surface_leak.py",
+      "sha256": "6b901440c13d17a2c6267636aaef59e0fccbb9e764ddba07531d4e89ece3be05",
+      "size_bytes": 16770
     },
     {
       "path": "references/pipeline/checkers/check_attribution_basis.py",
@@ -681,8 +681,8 @@
     },
     {
       "path": "references/pipeline/checkers/quality_check.py",
-      "sha256": "43928daf0a3631dd651f906084fa1191cffa675e8d55cfdb57151ed024c1e56e",
-      "size_bytes": 119433
+      "sha256": "41023abde8a5f214519018919b6c97aa9041b88e7a695df3fdb5d6dd28644d59",
+      "size_bytes": 119921
     },
     {
       "path": "references/pipeline/checkers/verify_product.py",
@@ -761,8 +761,8 @@
     },
     {
       "path": "references/pipeline/scaffold/answers_template.py",
-      "sha256": "05938226b57a93d45d42e30df28358329a6ac3a2fd40a2cca26eab746d516e77",
-      "size_bytes": 5622
+      "sha256": "e8e67a9c4a282eb2c75647dcb3e92cd9ba3e30c6bec5a030fa3231931e385093",
+      "size_bytes": 7220
     },
     {
       "path": "references/pipeline/scaffold/blind_payload_template.py",
@@ -910,9 +910,9 @@
       "size_bytes": 5014
     },
     {
-      "path": "scripts/check_answer_length_leak.py",
-      "sha256": "bd82096de65fa6545287c7447a8ba5fe3cfc58af977d91d9b294831fd23af044",
-      "size_bytes": 10628
+      "path": "scripts/check_answer_surface_leak.py",
+      "sha256": "6b901440c13d17a2c6267636aaef59e0fccbb9e764ddba07531d4e89ece3be05",
+      "size_bytes": 16770
     },
     {
       "path": "scripts/check_attribution_basis.py",
@@ -1211,8 +1211,8 @@
     },
     {
       "path": "scripts/quality_check.py",
-      "sha256": "43928daf0a3631dd651f906084fa1191cffa675e8d55cfdb57151ed024c1e56e",
-      "size_bytes": 119433
+      "sha256": "41023abde8a5f214519018919b6c97aa9041b88e7a695df3fdb5d6dd28644d59",
+      "size_bytes": 119921
     },
     {
       "path": "scripts/register_persona.py",
