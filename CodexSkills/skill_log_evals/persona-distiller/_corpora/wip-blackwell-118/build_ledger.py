@@ -53,8 +53,10 @@ PUBLISHED = [
   "扉页署 `ELIZABETH BLACKWELL, M. D.`"),
  ("medicine-profession-women-1860", "t_MedicineAsAProfessionForWomen.txt",
   IA.format("MedicineAsAProfessionForWomen"),
-  "Medicine as a Profession for Women", "1860", "全本", "P1", "HIS-OWN", "decisions",
-  "正文 New York Infirmary 3 处、Emily、Nightingale 均出现；这是她为女性从医立论的纲领性讲辞"),
+  "Medicine as a Profession for Women", "1860", "全本", "P1", "CO-AUTHORED", "decisions",
+  "★ **正文自陈是姐妹合备**：`lecture was prepared by Drs. Elizabeth and Emily Blackwell`"
+  "——我第一版标 HIS-OWN，逐份核归属时才读到这句，**改 CO-AUTHORED**。"
+  "另有 New York Infirmary 3 处、Nightingale 出现；这是她为女性从医立论的纲领性讲辞。"),
  ("medical-education-women-1864", "t_AddressOnTheMedicalEducationOfWomen.txt",
   IA.format("AddressOnTheMedicalEducationOfWomen"),
   "Address on the Medical Education of Women", "1864", "全本", "P1", "CO-AUTHORED", "decisions",
@@ -196,14 +198,40 @@ SPEECH = [
 ]
 
 # ── E. LoC 家庭通信 11 份 ─────────────────────────────────────
+# ★★ 方向必须逐卷读，不许按 folder 名推。
+#   folder 名是**通信对象**（`Blackwell, Alice Stone`），**不指方向**。
+#   我第一版把「方向已实测确认是她写出去的」从 Hannah 卷与 985 卷**推广到了 11 卷**，
+#   逐卷读开头后实测：**4 卷是寄给她的，1 卷双向混装。**
+#   （972「Dear Aunt Elizabeth」、973「Dear Doctor…send to you」、
+#     976 是 Henry 的《Woman's Journal》信笺、978「Dear Cousin Elizabeth」。）
+#   改完一手从 78 降到 74 —— **降下来的才是真的。**
+# (folder, 通信对象, 方向, 分档, 归属标记)
 FAMILY = [
- ("972", "致 Alice Stone Blackwell"), ("973", "致 Anna Blackwell"),
- ("975", "致 Hannah Blackwell（母）"), ("976", "致 Henry Browne Blackwell"),
- ("978", "致 John Kenyon Blackwell"), ("979", "致 Kitty Barry Blackwell（养女）"),
- ("980", "致 Marian Blackwell"), ("981", "致 Samuel C. Blackwell"),
- ("982", "致 Sarah Ellen Blackwell"), ("983", "致 Lucy Stone"),
- ("985", "其他家庭通信 1849–1872"),
+ ("972", "Alice Stone Blackwell（侄女）", "in", "S1", "THIRD-PARTY"),
+ ("973", "Anna Blackwell", "in", "S1", "THIRD-PARTY"),
+ ("975", "Hannah Blackwell（母）", "out", "P1", "HIS-OWN"),
+ ("976", "Henry Browne Blackwell", "in", "S1", "THIRD-PARTY"),
+ ("978", "John Kenyon Blackwell", "in", "S1", "THIRD-PARTY"),
+ ("979", "Kitty Barry Blackwell（养女）", "both", "P1", "HIS-OWN"),
+ ("980", "Marian Blackwell", "out", "P1", "HIS-OWN"),
+ ("981", "Samuel C. Blackwell", "out", "P1", "HIS-OWN"),
+ ("982", "Sarah Ellen Blackwell", "out", "P1", "HIS-OWN"),
+ ("983", "Lucy Stone", "out", "P1", "HIS-OWN"),
+ ("985", "其他家庭通信 1849–1872", "out", "P1", "HIS-OWN"),
 ]
+DIRECTION = {
+ "out": ("**实测是她写出去的**：卷内出现 `My dear <收信人>` 式抬头（Hannah 卷 13 处）。"
+         "Hannah 卷首封 `Asheville July 27, 1848. My dear Mother`；"
+         "985 卷首封 `Portway May 2nd 1849. My own dear friends all, Thanks be to Heaven, "
+         "I am on land once more`（1849 年 4 月渡英抵岸报平安）。"),
+ "in":  ("★ **实测是寄给她的，不是她写的**——folder 名是通信对象，**不指方向**。"
+         "972 开头 `Dear Aunt Elizabeth`；973 `Dear Doctor—enclosed the letters…send to you`；"
+         "976 是 Henry B. 的《The Woman's Journal》信笺；978 `Dear Cousin Elizabeth`。"
+         "故 S1/THIRD-PARTY，`author` 留空，**不计入一手**。"),
+ "both":("★★ **双向混装**：实测收 5 / 发 4。她自己的信确实在里面，故仍计 P1；"
+         "**但从本卷取任何引文之前必须先认清说话人**——"
+         "引文判据只验「这句话在语料里」，它分不出是谁说的。"),
+}
 
 # ── F. 二手：LoC 一般通信（**寄给她的**）10 份 + 书评剪报 1 份 ──
 GENERAL = ["988", "1025", "1038", "1063", "1088", "1138", "1143", "1163", "1188", "1213"]
@@ -313,17 +341,15 @@ def main() -> int:
                              f"Elizabeth Blackwell Papers: {title}", year,
                              f"folder {mss(n)}，众包人工转写", "en", "P1", "HIS-OWN",
                              lane, why, RIGHTS_MSS))
-    for n, who in FAMILY:
+    for n, who, direction, tier, mark in FAMILY:
         short = f"fam-{n}-" + "".join(c if c.isalnum() else "-" for c in who.lower())[:32].strip("-")
         if put(short, f"fm_{mss(n)}.txt"):
             lines.append(row(short, LOC.format(mss(n)),
                              f"Elizabeth Blackwell Papers: Family Correspondence, {who}",
                              "1844-1906", f"folder {mss(n)}，众包人工转写",
-                             "en", "P1", "HIS-OWN", "conversations",
-                             "**方向已实测确认是她写出去的**：Hannah 卷首封 "
-                             "`Asheville July 27, 1848. My dear Mother…`；其他家庭通信首封 "
-                             "`Portway May 2nd 1849. My own dear friends all, Thanks be to Heaven, "
-                             "I am on land once more`（1849 年 4 月渡英抵岸报平安）", RIGHTS_MSS))
+                             "en", tier, mark,
+                             "conversations" if tier == "P1" else "external",
+                             DIRECTION[direction], RIGHTS_MSS))
     for n in GENERAL:
         short = f"gen-{n}"
         pad = mss(n)
