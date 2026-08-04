@@ -116,6 +116,18 @@ export const machineTokenLabels: Record<string, string> = {
   topic: "主题",
   recency: "新近度",
   all: "全部",
+  // Outcome states rendered raw in the heatmap.
+  deployed_verified: "已部署并验证",
+  draft_only: "仅草稿",
+  recovery_verified: "已恢复并验证",
+  failed: "失败",
+  succeeded: "成功",
+  blocked: "受阻",
+  in_progress: "进行中",
+  decision_verified: "决策已验证",
+  abandoned: "已放弃",
+  superseded: "已被取代",
+  pending: "待处理",
 };
 
 /**

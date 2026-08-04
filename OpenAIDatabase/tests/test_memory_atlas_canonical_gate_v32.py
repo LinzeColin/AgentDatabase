@@ -355,3 +355,18 @@ def test_promotion_does_not_block_on_the_reconcile() -> None:
     deploy = (REPO / "ops" / "memory-atlas" / "deploy-blue-green.sh").read_text(encoding="utf-8")
     assert "restart --no-block memory-atlas-reconcile.service" in deploy
     assert "restart memory-atlas-reconcile.service memory-atlas-action-worker.service" not in deploy
+
+
+def test_the_hook_survives_a_sparse_checkout() -> None:
+    """A rebase silently removed .githooks from the working tree because it sat
+    outside the sparse-checkout cone, so core.hooksPath pointed at nothing and
+    several pushes ran no gate at all. The file is tracked; it must also be
+    materialised."""
+    import subprocess
+
+    assert HOOK.is_file(), ".githooks/pre-push is tracked but not on disk"
+    listed = subprocess.run(
+        ["git", "sparse-checkout", "list"], cwd=REPO, capture_output=True, text=True
+    )
+    if listed.returncode == 0 and listed.stdout.strip():
+        assert ".githooks" in listed.stdout, "the hook directory is outside the sparse cone"

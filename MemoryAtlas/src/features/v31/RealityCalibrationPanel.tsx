@@ -40,17 +40,17 @@ function Trend({ visual }: { visual: Visual }) {
     open = true;
   });
   return <div className="ma-trend">
-    <div className="ma-trend-legend" aria-hidden="true"><span><i className="ma-legend-debt" />验证债务</span><span><i className="ma-legend-truth" />Time-to-Truth</span></div>
-    <svg className="ma-trend-chart" viewBox={`0 0 ${width} ${height}`} role="img" aria-label="验证债务比例与可验证的 Time-to-Truth 趋势">
+    <div className="ma-trend-legend" aria-hidden="true"><span><i className="ma-legend-debt" />验证债务</span><span><i className="ma-legend-truth" />闭环时长</span></div>
+    <svg className="ma-trend-chart" viewBox={`0 0 ${width} ${height}`} role="img" aria-label="验证债务比例与可验证的闭环时长趋势">
       {[0,0.25,0.5,0.75,1].map((value) => <line key={value} x1={padX} x2={width-padX} y1={debtY(value)} y2={debtY(value)} className="ma-chart-gridline" />)}
       <path d={debtPath} className="ma-line-debt" />
       {truthSegments.length > 0 && <path d={truthSegments.join(" ")} className="ma-line-truth" />}
       {rows.map((row,index) => <g key={`${row.date}-${index}`}>
         <circle cx={x(index)} cy={debtY(row.verification_debt_proxy_event)} r="4" className="ma-dot-debt"><title>{row.date}：验证债务 {pct(row.verification_debt_proxy_event ?? null)}</title></circle>
-        {truthY(row.time_to_truth_hours) !== null && <circle cx={x(index)} cy={truthY(row.time_to_truth_hours) ?? 0} r="4" className="ma-dot-truth"><title>{row.date}：Time-to-Truth {row.time_to_truth_hours?.toFixed(1)} 小时</title></circle>}
+        {truthY(row.time_to_truth_hours) !== null && <circle cx={x(index)} cy={truthY(row.time_to_truth_hours) ?? 0} r="4" className="ma-dot-truth"><title>{row.date}：闭环时长 {row.time_to_truth_hours?.toFixed(1)} 小时</title></circle>}
       </g>)}
     </svg>
-    <div className="ma-trend-list">{rows.map((row,index) => <div key={`${row.date}-${index}`}><time>{row.date}</time><span>债务 {pct(row.verification_debt_proxy_event ?? null)}</span><span>TTT {row.time_to_truth_hours === null || row.time_to_truth_hours === undefined ? "证据不足" : `${row.time_to_truth_hours.toFixed(1)}h`}</span><small>{row.time_to_truth_sample_count ?? 0} 个验证时间样本</small></div>)}</div>
+    <div className="ma-trend-list">{rows.map((row,index) => <div key={`${row.date}-${index}`}><time>{row.date}</time><span>债务 {pct(row.verification_debt_proxy_event ?? null)}</span><span>闭环时长 {row.time_to_truth_hours === null || row.time_to_truth_hours === undefined ? "证据不足" : `${row.time_to_truth_hours.toFixed(1)}h`}</span><small>{row.time_to_truth_sample_count ?? 0} 个验证时间样本</small></div>)}</div>
   </div>;
 }
 function Heatmap({ visual }: { visual: Visual }) {
