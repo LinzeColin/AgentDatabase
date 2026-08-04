@@ -376,13 +376,13 @@
     },
     {
       "path": "references/ledgers/_待用户裁定.md",
-      "sha256": "f5267b76ac82383853d3935a87772be909d047046fce8f4ceaa456bea3958039",
-      "size_bytes": 38491
+      "sha256": "9110a37567fafb1b0da3718dc432f651b668085df4a6bf66e17d838a8e525073",
+      "size_bytes": 40021
     },
     {
       "path": "references/ledgers/_每次开工必读.md",
-      "sha256": "0cf9d277e9c5c08fb04cb0211d0f9ac7c9cbd90bcb8c7d8bdcf1e0e814818eab",
-      "size_bytes": 61877
+      "sha256": "def5ee3972e3f698d7a5183321d13e28e8ef075ba811f1e8f74b681a0b3772d9",
+      "size_bytes": 62307
     },
     {
       "path": "references/ledgers/_蒸馏名单_v1草稿.md",
@@ -841,8 +841,8 @@
     },
     {
       "path": "references/pipeline/抓源坑位清单.md",
-      "sha256": "81babab2ad2969cbb078b0a60a02509f0ae8cd57dbd8c2cd717a29657f540f41",
-      "size_bytes": 8966
+      "sha256": "8b897c056c66b18f4cd77a50e4c3248ce5143cdb980ad73263f9414d8743e47b",
+      "size_bytes": 12224
     },
     {
       "path": "references/research-and-sources.md",
