@@ -1,0 +1,121 @@
+{
+ "说明": "**同一作品的多个见证**：LoC 讲稿手稿是后来收进印本的那些文章的底稿。重叠 ≥30% 即判为同一作品。**断言不许把手稿与其印本当作两份独立来源**——那是 Koch #107「46 条断言全引同一对」的同型。",
+ "判法": "8 词片重叠率，手稿侧为分母；阈值 0.30",
+ "组": {
+  "essays-medical-sociology-v2-1902": {
+   "印本": "src-40dc1c83b4fc",
+   "手稿": [
+    {
+     "stem": "sp-1235-address--开办-woman-s-medical-college",
+     "source_id": "src-96dd5ad17923",
+     "重叠": 0.894
+    },
+    {
+     "stem": "sp-1238-christian-socialism",
+     "source_id": "src-5c693fe4a1c5",
+     "重叠": 0.868
+    },
+    {
+     "stem": "sp-1242-erroneous-method-in-medical-education",
+     "source_id": "src-09bcf2f99808",
+     "重叠": 0.852
+    },
+    {
+     "stem": "sp-1248-on-the-decay-of-municipal-representative",
+     "source_id": "src-2e34f3c49ef2",
+     "重叠": 0.897
+    },
+    {
+     "stem": "sp-1250-on-the-humane-prevention-of-rabies",
+     "source_id": "src-ef363b42a58a",
+     "重叠": 0.592
+    },
+    {
+     "stem": "sp-1253-the-religion-of-health",
+     "source_id": "src-a4d9b8f18047",
+     "重叠": 0.82
+    },
+    {
+     "stem": "sp-1257-scientific-method-in-biology",
+     "source_id": "src-3b15f7a39a48",
+     "重叠": 0.843
+    },
+    {
+     "stem": "sp-1258-a-serious-protest-to-the-alumnae-associa",
+     "source_id": "src-abfddcc75888",
+     "重叠": 0.682
+    },
+    {
+     "stem": "sp-1260-why-hygienic-congresses-fail",
+     "source_id": "src-439bd46a6e3b",
+     "重叠": 0.81
+    }
+   ]
+  },
+  "medical-education-women-1864": {
+   "印本": "src-66de1e9e73e6",
+   "手稿": [
+    {
+     "stem": "sp-1236-address-on-the-medical-education-of-wome",
+     "source_id": "src-ffc0974d12b2",
+     "重叠": 0.763
+    }
+   ]
+  },
+  "counsel-to-parents-1878": {
+   "印本": "src-ad8596224862",
+   "手稿": [
+    {
+     "stem": "sp-1240-counsel-to-parents",
+     "source_id": "src-383c23ae7277",
+     "重叠": 0.517
+    }
+   ]
+  },
+  "essays-medical-sociology-v1-1902": {
+   "印本": "src-86dce0a3c6fd",
+   "手稿": [
+    {
+     "stem": "sp-1244-the-human-element-in-sex",
+     "source_id": "src-69757868d2fb",
+     "重叠": 0.732
+    },
+    {
+     "stem": "sp-1252-purchase-of-women",
+     "source_id": "src-7292158a1617",
+     "重叠": 0.703
+    },
+    {
+     "stem": "sp-1254-rescue-work-1-2",
+     "source_id": "src-aaeb65ec0813",
+     "重叠": 0.64
+    },
+    {
+     "stem": "sp-1255-rescue-work-2-2",
+     "source_id": "src-b05c1df42839",
+     "重叠": 0.513
+    },
+    {
+     "stem": "sp-1256-responsibility-of-women-physicians",
+     "source_id": "src-6ae8039ac822",
+     "重叠": 0.641
+    }
+   ]
+  },
+  "wrong-right-methods-1883": {
+   "印本": "src-6582a65fbbba",
+   "手稿": [
+    {
+     "stem": "sp-1261-wrong-and-right-methods-1-2",
+     "source_id": "src-16c4b51ebbd9",
+     "重叠": 0.598
+    },
+    {
+     "stem": "sp-1262-wrong-and-right-methods-2-2",
+     "source_id": "src-a860241b0efd",
+     "重叠": 0.762
+    }
+   ]
+  }
+ }
+}

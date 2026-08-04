@@ -1661,6 +1661,62 @@ def run_rights_basis(report, target: Path) -> None:
     report.metrics['rights_basis'] = entry
 
 
+def run_claim_source_independence(report, target: Path) -> None:
+    """一条断言引的两份源，是不是同一部作品的两个见证（v0.0.0.82，**只写 metrics**）。
+
+    六类断言各要求 ≥2 个 `source_ids`，那条要求想要的是**互相独立的两处证据**。
+    **而此前没有任何判据在问这两份源是不是同一部作品。**
+
+    #118 Blackwell 实测：LoC 33 份讲稿手稿里 **18 份是印本的草稿**（重叠 51–90%）。
+    引手稿＋引它的印本，字面两个 id，实质一处证据。
+
+    落成后九人回扫，**五人有塌缩**：
+    Koch **17/17**（手工发现过的那件，现在机器抓得住）、Lister **17/17**（新发现）、
+    Osler 5/17、Jenner 3/16、Nightingale 2/12；Barton 0/12、Fleming 0/15、Godin 0/20 干净。
+
+    **只写 metrics 不拦**：已入库的人未回扫过，硬拦会把整个名册一起拦下
+    （与 `NO-SELFTEST`、新鲜度门、引文层门同一条纪律）。
+    """
+    here = Path(__file__).resolve().parent
+    script = here / 'check_claim_source_independence.py'
+    if not script.exists():
+        report.metrics['claim_source_independence'] = {'状态': '检查器未安装，**未核验**（不是通过）'}
+        return
+    spec = importlib.util.spec_from_file_location('_pd_claimindep', script)
+    module = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(module)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['claim_source_independence'] = {'状态': f'加载失败，**未核验**：{exc}'}
+        return
+    ev = target / 'evidence'
+    cf, lf = ev / 'claims.jsonl', ev / 'source-ledger.jsonl'
+    if not (cf.is_file() and lf.is_file()):
+        report.metrics['claim_source_independence'] = {
+            '状态': 'claims.jsonl 或 source-ledger.jsonl 不在，**未核验**（不是通过）'}
+        return
+    try:
+        claims = [json.loads(l) for l in cf.read_text(encoding='utf-8').splitlines() if l.strip()]
+        texts = {}
+        for line in lf.read_text(encoding='utf-8').splitlines():
+            if not line.strip():
+                continue
+            r = json.loads(line)
+            p = target / (r.get('local_path') or '')
+            if r.get('source_id') and p.is_file():
+                texts[r['source_id']] = p.read_text(encoding='utf-8', errors='replace')
+        if not claims or not texts:
+            report.metrics['claim_source_independence'] = {
+                '状态': '断言或正文为空，**未核验**（不是通过）'}
+            return
+        problems, info = module.evaluate(claims, module.group_works(texts))
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['claim_source_independence'] = {'状态': f'运行失败，**未核验**：{exc}'}
+        return
+    info['塌缩的断言'] = [p.split('（')[0].strip('`') for p in problems][:12]
+    report.metrics['claim_source_independence'] = info
+
+
 def run_evidence_per_claim(report, target: Path) -> None:
     """证据字段是逐条的还是填一次抄 N 遍（v0.0.0.78，**只写 metrics**）。
 
@@ -2219,6 +2275,7 @@ def main() -> int:
             run_case_self_sufficiency(report, cases)
             run_measurement_claims(report, target)
             run_evidence_per_claim(report, target)
+            run_claim_source_independence(report, target)
             run_unqualified_priority(report, target)
             run_sole_authorship(report, target)
             run_holdout_overlap(report, target, args.cache)
