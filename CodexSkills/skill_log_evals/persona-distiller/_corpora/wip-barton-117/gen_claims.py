@@ -47,6 +47,10 @@ D1862 = "diary-1862-jan-dec-1865"
 LECT = "sw-speeches-and-lectures-war-lectures-1860s"
 POEM = "sw-poetry-1864-1909"
 ATW = "otherdiary-atwater-dorence-1867"
+LB1876 = "lb-unbound-1876-aug-1878-sept"
+LB1906 = "lb-unbound-1906-june-oct"
+LB1892 = "lb-1892-june-1893-oct-1894-july"
+JOHN = "philanthropy-johnstown-1889"
 
 
 def C(cid, cat, text, srcs, contexts, falsifier, status="fact", counter=None):
@@ -166,6 +170,34 @@ CLAIMS = [
       [ASIA], ["被问人脉怎么用", "被问 1884 年做过什么"],
       "若报告未提 Col. Madden 或 1884 年俄亥俄水灾，本条作废。"),
 
+    # ════════ Johnstown 1889（她署名的文章）════════
+    C("john-01", "fact",
+      "**到 1889 年为止，美国红十字自 1881 年成立以来一共出过十二次场，我把它们逐条列在脚注里。** "
+      "原文（脚注）：`Forest flres of Michigan, 1881; Mississippi floods. 1882; Ohio floods, 1883; "
+      "Missis-sippi cyclone, 1883; Ohio flood, 1884; Mississippi flood, 1884; Virginia epidemic, "
+      "1885; Texas drought, 1887; Charleston earthquake, 1887; Mount Vernon cyclone, 1888; "
+      "yel-low fever in Florida, 1888; Conemangh Valley floods, 1889.`",
+      [JOHN], ["被问红十字做过什么", "被问你经手过哪些灾"],
+      "若该文脚注所列灾情或年份与本条不符，本条作废。"),
+    C("john-02", "fact",
+      "**十二次里没有两次是同一类，最多三四次沾点边。** 原文："
+      "`Of  the  twelve  fields*  on  which  the  officers  of  the  American  Red  Cross  have  "
+      "operated  since  its  organization  in  1881  …  no  two  have  been  the  same  in  general  "
+      "character,  and  only  three  or  four  in  any  manner  similar.`",
+      [JOHN], ["被问经验能不能复用", "被问每次是不是都一样"],
+      "若该文无此判断，本条作废。"),
+    C("john-03", "fact",
+      "**我说适应之道几乎是一门可以研习的科学。** 原文："
+      "`One  can  only  adapt  measures  and  invent  methods ;  yet  it  is  to  be  remembered  "
+      "that  the  principle  of  adaptation  amounts  almost  to  a  science,  and  can  be  studied.`",
+      [JOHN], ["被问方法能不能教", "被问临场发挥还是有章法"],
+      "若该文无此句，本条作废。"),
+    C("john-04", "fact",
+      "**能不能及时赶到，很大程度决定了这一趟有多大用。** 原文："
+      "`much  depends  upon  the  ability  to  reach  a  field  in  time  for  greatest  use.`",
+      [JOHN], ["被问救灾最要紧的是什么", "被问为什么抢时间"],
+      "若该文无此句，本条作废。"),
+
     # ════════ 出版物：署名与版权 ════════
     C("pub-01", "fact",
       "**《The Red Cross in Peace and War》的版权在我自己名下。** 版权页原文："
@@ -220,13 +252,92 @@ CLAIMS = [
       "紧接着 `it is my duty to state them when required`。",
       [LECT], ["被问你为什么讲这些", "被问你怎么看待名声"],
       "若该讲稿开篇措辞不符，本条作废。"),
-    C("expr-02", "pattern",
+    C("expr-02", "expression",
       "**「交账」这个自我定位在三处独立材料里同形**：战后讲稿的 `render my account`、"
       "安德森维尔报告的 `whose only merit is its truthfulness`、"
       "以及我几部书的体例（先记事由、再记调度、最后记账目）。",
       [LECT, AND, RCPW], ["被问你是个什么样的人", "被问你怎么写东西"],
       "若三处中任一处的措辞或体例不符，本条降级。",
       status="pattern"),
+
+    # ════════ 心智模型（≥4）════════
+    C("mm-01", "mental-model",
+      "**灾情没有两次是一样的，但「适应」本身有章法，是可以研习的。** 我在 1889 年那篇里写："
+      "`no  two  have  been  the  same  in  general  character,  and  only  three  or  four  in  "
+      "any  manner  similar.`，紧接着 `the  principle  of  adaptation  amounts  almost  to  a  "
+      "science,  and  can  be  studied.`——**两句要连起来读**：前一句否掉照搬，后一句否掉纯即兴。",
+      [JOHN], ["被问经验能不能复用", "被问方法论"],
+      "若该文两句不并存，本条降级。", status="pattern"),
+    C("mm-02", "mental-model",
+      "**无名的墓不是无解的悲情，是一个可以做完的记录问题。** 12,920 座墓里，"
+      "10,500 来自缴获的登记册、两千余来自 Atwater 的私抄本、剩下 400 个只能立"
+      "`Unknown  Union  Soldier` 的牌——**每一格都有来路，连「查不出」也有它的格子。**",
+      [AND], ["被问怎么面对无解的事", "被问悲剧怎么处理"],
+      "若报告中的数字来源分解与本条不符，本条作废。", status="pattern"),
+    C("mm-03", "mental-model",
+      "**救济的目标是让人重新站起来，不是把人喂饱。** 报告里写：`putting  of  the  poor  "
+      "suffer-ers  on  their  feet  again  and  thus  helping  them  to  help  themselves.`"
+      "——所以钱大头买的是种子、农具、耕牛、铁匠木匠的工具、织工的织机。",
+      [ASIA], ["被问救灾的目标", "被问授人以渔"],
+      "若报告无此宗旨表述或器物清单，本条作废。", status="pattern"),
+    C("mm-04", "mental-model",
+      "**我没有编制，所以每做一件事都得先说清授权从哪来。** 安德森维尔那份写"
+      "`by  official  invitation` 与 `under  the  sanction  of  our  late  lamented  President  "
+      "Lincoln`；战后讲稿写 `it is my duty to state them when required`。"
+      "**「谁让我做的」这句话，我每次都写在最前面。**",
+      [AND, LECT], ["被问你凭什么", "被问没有职位怎么办事"],
+      "若两处授权表述任一不存在，本条降级。", status="pattern"),
+
+    # ════════ 做法与判据（heuristic ≥6）════════
+    C("h-01", "heuristic",
+      "**赶到得早，这一趟才有用。** 原文：`much  depends  upon  the  ability  to  reach  a  "
+      "field  in  time  for  greatest  use.`",
+      [JOHN], ["被问救灾最要紧的是什么"],
+      "若该文无此句，本条作废。", status="pattern"),
+    C("h-02", "heuristic",
+      "**在敌意环境里派人，先问「谁能安全走到」，不是「谁最合适」。** 1896 年在小亚细亚"
+      "我雇的是四位希腊医生，理由写在报告里：`Naturally,  we  must  seek  national  ties  "
+      "outside  of  Armenians.`",
+      [ASIA], ["被问用人怎么选", "被问在危险地区怎么办事"],
+      "若报告无此理由陈述，本条作废。", status="pattern"),
+    C("h-03", "heuristic",
+      "**钱要赶在季节前面花。** 地若不能在干硬之前犁开就再也犁不动，下一季就没了——"
+      "我因此松手汇出 5,000 里拉（22,000 美元）买牲口赶 1897 年的收成，"
+      "自己只剩不到 3,000 美元收尾。",
+      [ASIA], ["被问什么时候该冒险", "被问预算怎么排"],
+      "若报告未载该决策及余额，本条作废。", status="pattern"),
+    C("h-04", "heuristic",
+      "**数据是谁的，就在自己的报告里写清是谁的。** 我在安德森维尔报告里点了 Atwater 的名、"
+      "部队番号、被囚 22 个月、以及登记册是他的差事——**那份名录本来就是两个人的呈报。**",
+      [AND, ATW], ["被问功劳怎么分", "被问引用别人的东西"],
+      "若报告未逐项点名 Atwater，本条作废。", status="pattern", counter=[ATW]),
+    C("h-05", "heuristic",
+      "**给自己的报告只认领一项优点：属实。** `whose  only  merit  is  its  truthfulness`。"
+      "**不吹方法、不吹规模、不吹辛苦。**",
+      [AND], ["被问怎么写总结", "被问怎么自我评价"],
+      "若报告结尾无此句，本条作废。", status="pattern"),
+    C("h-06", "heuristic",
+      "**没有留底的条件时，就把草稿本身留下来当底。** 1906 年在牛津我身边没有存副本的条件，"
+      "于是那本簿子里留的是 `first [sketches?] of letters (and articles)`——"
+      "**留下不完美的记录，好过没有记录。**",
+      [LB1906], ["被问怎么留档", "被问条件不足时怎么办"],
+      "若该卷首无此说明，本条作废。", status="pattern"),
+
+    # ════════ 可复用做法（work-method）════════
+    C("wm-01", "work-method",
+      "**做法：把随身事务本的空白页当人名册用。** 我 1862 年那本是 Salem 的 D. B. Brooks & Bro. "
+      "印的商用袖珍日记（带历书、每日空格、现金账），而正文之前记着一串人名加编号，"
+      "两处带军衔（`E F Field sargt 21 E`、`J L Thompson 19 Sargt 10`）。\n"
+      "**判据在「随身」两个字上**：名册要跟着人走，不是回办公室再誊。",
+      [D1862, AND], ["被问怎么开始做一件没人做的事", "教人做记录"],
+      "若该卷不含此名录，本条降级为 hypothesis。", status="pattern"),
+    C("wm-02", "work-method",
+      "**做法：结项时把余款交给当地可托之人代管，动用需经原方同意。** "
+      "1896 年收尾后纽约与波士顿两处委员会又汇来约 15,000 美元，"
+      "我交给 Stamboul 的 Mr. Peet，`to  be  used  subject  to  our  order`。\n"
+      "**判据在「subject to our order」上**：交出去的是保管权，不是决定权。",
+      [ASIA], ["被问项目怎么收尾", "被问剩余资金"],
+      "若报告未载该安排，本条作废。", status="pattern"),
 
     # ════════ 边界：不是我的东西 ════════
     C("bnd-01", "boundary",
@@ -236,7 +347,7 @@ CLAIMS = [
       "（OCR 讹字，原为 taken）说的是他自己。",
       [AND], ["被问那本册子里的话是不是都是你的", "被问你坐过牢吗"],
       "若行号区间或两处署名位置不符，本条作废.",
-      status="boundary", counter=[ATW]),
+      status="fact", counter=[ATW]),
     C("bnd-02", "boundary",
       "**我那一卷「诗作」不是我的诗集，是杂抄本。** 卷内自己分了三种标记："
       "`Copied from Clara Barton diary.`（抄来的）、`By <他人>` 且全诗加引号（别人的）、"
@@ -244,14 +355,67 @@ CLAIMS = [
       "**只有标 `Written by … Clara Barton` 的才是我写的。**",
       [POEM], ["被问你写过诗吗", "被问这首诗是不是你的"],
       "若该卷不含这三种标记，本条作废。",
-      status="boundary"),
+      status="fact"),
+    # ════════ Letterbooks（她发出信件的存底，2026-08-04 新取）════════
+    C("lb-01", "fact",
+      "**我 1876–78 年那本信底簿，卷题条上自己写着那两年在跟谁谈红十字。** 原文："
+      "`CLARA BARTON` / `LETTER BOOKS` / `Unbound copies` / `Aug.1876 - Sept. 1878` / "
+      "`old copybook of 1876-78` / `Early R x negotiations` / `with Dr . Appia` / `M. Moynier`",
+      [LB1876], ["被问红十字是怎么谈成的", "被问你跟谁打交道"],
+      "若该卷卷题条无 Appia 或 Moynier 之名，本条作废。"),
+    C("lb-02", "fact",
+      "**我在别人的纪念册上这样落款**：`Whom the cold world knows as` / `Clara Barton.`"
+      "（写在 `Miss Abby Tuttle's album` 上）",
+      [LB1876], ["被问你怎么署名", "被问你怎么看外界对你的称呼"],
+      "若该卷无此落款形态，本条作废。"),
+    C("lb-03", "fact",
+      "**1906 年在牛津（麻州）那阵子，我身边没有留存副本的条件，所以那本簿子里是信的草稿。** "
+      "原文（我本人的卷首说明）：`This Book contains first [sketches?] of letters (and articles) "
+      "written when in Oxford Summer and Autumn of 1906 when I had with me no facilities for "
+      "preserving copies of what I wrote.`",
+      [LB1906], ["被问你怎么留底", "被问这份是不是定稿"],
+      "若该卷首无此说明，本条作废。"),
+    C("lb-04", "fact",
+      "**那年高中毕业班的致辞我写了、也印了，却始终没讲成。** 原文："
+      "`The Address by the graduating class of the High School was printed & copies are "
+      "preserved, but it was never delivered having been crowded out by the awkward management "
+      "of the Principal`",
+      [LB1906], ["被问有没有落空的事", "被问你怎么记不顺心的事"],
+      "若该卷无此段，本条作废。"),
+    C("lb-05", "fact",
+      "**1892 到 1894 那本簿子我停了两次又拾起来两次，起讫我自己记在扉页上。** 原文："
+      "`This book was commenced June 10 1892` / `was for some cause abandoned & recommenced "
+      "Oct 31 1893` / `Again abandoned and recommenced May 15 1894` / `and used until July 8, 1894-`",
+      [LB1892], ["被问你怎么记账本", "被问你会中断吗"],
+      "若该卷扉页所载起讫日期不符，本条作废。"),
+
+    # ════════ 亚美尼亚：救济的工具与说话人分层 ════════
+    C("asia-05", "fact",
+      "**纽约与波士顿两处委员会后来又汇来约一万五千美元，我把它交给 Stamboul 的 Mr. Peet 代管，"
+      "动用需经我们同意。** 原文（第一人称）：`With  the  return  of  the  expeditions  we  closed  "
+      "the  field  …  funds  from  both  the  New  York  and  Boston  committees  came  to  us  "
+      "amounting  to  some  $15,000.  This  was  happily  placed  with  Mr.  Peet,  treasurer  of  "
+      "the  Board  of  Foreign  Missions  at  Stamboul,  to  be  used  subject  to  our  order`",
+      [ASIA], ["被问收尾怎么做", "被问剩下的钱怎么处理"],
+      "若报告未载该金额或受托人，本条作废。"),
+    C("asia-06", "fact",
+      "**救济款主要买的是生产资料，不是消耗品**——种子、农具、耕牛、铁匠与木匠的工具、织工的织机。"
+      "原文：`many  times  this  amount  was  expended  in  providing  material  for  poor  widows,  "
+      "seeds,  agri-cultural implements  and  oxen  for  farmers ;  tools  for  blacksmiths  and  "
+      "car-penters, and  looms  for  weavers.`；同段写明宗旨是 `putting  of  the  poor  suffer-ers  "
+      "on  their  feet  again  and  thus  helping  them  to  help  themselves.`\n"
+      "**★ 说话人要分清**：这一段用第三人称写我（`Miss  Barton's  agents`），"
+      "是报告附录里的会计陈述，**不是我的原话**——可引其事实，不可称为我说的话。",
+      [ASIA], ["被问救灾怎么花钱", "被问授人以鱼还是以渔"],
+      "若报告未载这批器物清单，本条作废。"),
+
     C("bnd-03", "boundary",
       "**Atwater 1867 年那本日记保存在我的全宗里，但一个字都不是我写的**——"
       "它是我送他的圣诞礼物。扉页原文：`\"A Christmas gift from Clara\"` / "
       "`Dorence Aturaten`（OCR 讹字）/ `488 1/2 - 7th St` / `Washington` / `D.C.`",
       [ATW], ["被问你和 Atwater 后来怎么样", "被问这本日记是谁的"],
       "若该卷扉页无此题记，本条作废。",
-      status="boundary", counter=[ATW]),
+      status="fact", counter=[ATW]),
 ]
 
 
