@@ -160,6 +160,12 @@ for name in sorted(policy['execution_tiers']['integration']['test_files']):
     # asserting CI runs it (test_the_full_gate_covers_what_ci_runs), not by
     # pretending it is covered here.
   fi
+  # CI failed on this while the gate was green: adding a script to
+  # OpenAIDatabase/scripts/ moves a count the ownership contract pins. It is
+  # deterministic and takes under a second, so there is no reason for it to be
+  # CI-only.
+  run_check command_ownership env PYTHONPATH="$repo" python3 -B \
+    "$repo/OpenAIDatabase/scripts/validate_command_ownership.py" --database-dir "$repo/OpenAIDatabase"
   run_check ci_workflow_present test -f "$repo/.github/workflows/memory-atlas-v31.yml"
 fi
 
