@@ -1,6 +1,17 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""产物全量体检 —— 一条命令跑完官方质检门之外的所有自建检查。
+"""产物全量体检 —— 一条命令把几件常漏跑的自建检查跑齐。
+
+★★ **2026-08-04 更正标题**：原标题写的是「跑完官方质检门**之外**的所有自建检查」。
+**实测不成立**：本件调用 7 件判据，其中 **6 件 `quality_check.py` 也在跑**，
+**只有 `check_semantic_residue` 一件是它独有的**；而全仓 54 件判据里，
+本件覆盖 7 件。**原标题会让人以为它补上了官方门的缺口——它没有。**
+
+★ 那个缺口其实并不存在：`check_checkers.py` 的接线审计实测
+**54 件判据 0 件找不到调用方**（`quality_check` 跑 46 件，
+其余由 `build_blind_payload`／`build_release_bundle`／`self_check`／
+`check_contract_drift`／`check_holdout_overlap` 各自调用）。
+**本件的价值是「手工记着跑会漏跑」那一条，不是覆盖面。**
 
 ## 为什么要有这个
 

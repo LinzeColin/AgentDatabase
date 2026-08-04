@@ -436,8 +436,8 @@
     },
     {
       "path": "references/pipeline/RUNBOOK.md",
-      "sha256": "da9d941dd64bff7cdbd1b300a130bb74218d4506a7464e626aaa3a6c63906ffc",
-      "size_bytes": 217883
+      "sha256": "aabe8ac8665a7a687174043c68caf57a1b3ec6ff9e4d22b9445cc88d3f89ad49",
+      "size_bytes": 219214
     },
     {
       "path": "references/pipeline/build_queue.py",
@@ -751,8 +751,8 @@
     },
     {
       "path": "references/pipeline/checkers/verify_product.py",
-      "sha256": "0accb59fb40b9a6a0e9abcb084865e622a2fa37dabe2852d15d90010d155ab16",
-      "size_bytes": 8878
+      "sha256": "925ad7adf9d7b43bcb406f547eeec593b508780f2eb827bc8e32fcbe2c837ea0",
+      "size_bytes": 9651
     },
     {
       "path": "references/pipeline/example-knuth/gen_answers.py",
