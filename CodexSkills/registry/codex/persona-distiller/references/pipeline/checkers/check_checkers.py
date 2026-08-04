@@ -339,6 +339,29 @@ def main() -> int:
           "就丢掉过在世的人，自测因此全绿而真跑是错的）。")
     print("    **改动加载逻辑时，给那一件补一条走完整路径的对照。**")
 
+    # ★★ v0.0.0.111：`VERIFICATION.md` 里那些可数的数，和仓库实况对不对得上。
+    #   这份文件**自己预言过它会漂**（v0.0.0.76 的警示块），两个版本之后原样复发：
+    #   判据写 51（真 54）、checksum 写 341（真 368）。**预言不是判据。**
+    vc = pathlib.Path(d).resolve() / "check_verification_counts.py"
+    proot = pathlib.Path(d).resolve().parent
+    print("\n── VERIFICATION.md 的可数项（check_verification_counts）──")
+    if not vc.is_file():
+        print("  ⚠ check_verification_counts.py 不在，**未核（不是通过）**")
+    else:
+        r = subprocess.run([sys.executable, str(vc), str(proot)], capture_output=True, text=True)
+        try:
+            info = json.loads(r.stdout)
+            n = info["**对不上的项数**"]
+            unver = sum(1 for row in info["明细"] if "管不到" in str(row["判定"]))
+            head = "✓ 比过的项全部一致" if not n else f"**对不上 {n} 项**"
+            # ★ 「一致」与「没比」要写在同一行，否则 ✓ 会被读成「全清」
+            print(f"  {head}；**另有 {unver} 项文中没写、本件管不到（不算通过）**")
+            for row in info["明细"]:
+                if row["判定"] != "✓":
+                    print(f"    · {row['项']}：实况 {row['实况']}，文中 {row['文中']} —— {row['判定']}")
+        except Exception as exc:
+            print(f"  ⚠ 输出无法解析，**未核（不是通过）**：{exc}")
+
     # ★★ v0.0.0.109：抓到了、记进台账了、**却没进工作区**——同族的另一道。
     #   `check_corpus_presence` 比的是工作区自己的账本与磁盘，一份没被 ingest 的来源
     #   **在那个账本里也没有**，于是它报「齐的」。缺的那一层在上游的九列台账。
