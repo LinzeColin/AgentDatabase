@@ -1802,6 +1802,11 @@ def run_unwired_three(report, target: Path) -> None:
     call('check_anchor_coherence.py', ['--workspace', str(target)], 'anchor_coherence')
     call('check_quoted_arithmetic.py', ['--answers', str(pf), '--claims', str(cf)],
          'quoted_arithmetic', (pf, cf))
+    # ★ 第 4 件：交付里带齐分母了吗（v0.0.0.92）。
+    #   实测起因：想从产物侧回算「事实密度债」，而 `usable_train` 从没被写进交付产物，
+    #   source-coverage.json 只有 sources_total —— 于是那一整类债**只能给上界**。
+    cov = target / 'audit/source-coverage.json'
+    call('check_delivery_carries_denominators.py', [str(cov)], 'delivery_denominators', (cov,))
 
 
 def run_answer_constraints(report, target: Path) -> None:

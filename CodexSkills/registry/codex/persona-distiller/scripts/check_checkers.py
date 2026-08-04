@@ -165,6 +165,42 @@ FIXTURES = {
 }
 
 
+
+def wiring_audit(directory: pathlib.Path) -> dict:
+    """★★ **每件判据有没有生产调用方**——v0.0.0.91 新增。
+
+    起因：2026-08-04 自查发现 **51 件判据里 7 件在生产代码里找不到任何调用方**，
+    而三处所谓「被调用」实为**注释里的提及**。
+    这是 v0.0.0.68「判据存在、自测全绿、文档反复引用，而从没被调用过」的复发。
+
+    ★ **上一次是我用一个临时脚本查出来的——临时脚本不进任何门，下次照样长回来。**
+    所以这一项收进元判据，跟着 `check_checkers` 一起跑。
+
+    **只认代码里的调用**：搜 `<名>.py` 与带引号的 `<名>`，
+    **排除判据自己、排除 `tests/`、排除 `references/pipeline/checkers/` 镜像**。
+    注释里的提及仍会被算成调用——**这是本审计的已知宽松处**，宁可漏报不误报，
+    真出现时会像上次那样在人工复核里现形。
+    """
+    root = directory.parent
+    names = sorted(f.stem for f in directory.glob("check_*.py"))
+    sources = {}
+    for f in list(root.rglob("*.py")):
+        s = str(f)
+        if "/tests/" in s or "/checkers/" in s or "/_failed_checkers/" in s:
+            continue
+        try:
+            sources[f] = f.read_text(encoding="utf-8", errors="ignore")
+        except OSError:
+            continue
+    dead = []
+    for n in names:
+        callers = [f for f, txt in sources.items()
+                   if f.stem != n and (f"{n}.py" in txt or f"'{n}'" in txt or f'"{n}"' in txt)]
+        if not callers:
+            dead.append(n)
+    return {"判据件数": len(names), "**无生产调用方的**": len(dead), "名单": dead}
+
+
 def self_test() -> int:
     import tempfile
     bad = []
@@ -246,6 +282,32 @@ def main() -> int:
             for r in rows:
                 if not r["real_fixture"]:
                     print(f"  · {r['checker']}")
+    w = wiring_audit(d)
+    print(f"\n── 接线审计 ──\n  判据 {w['判据件数']} 件，"
+          f"**在生产代码里找不到调用方的 {w['**无生产调用方的**']} 件**")
+    for n in w["名单"]:
+        print(f"    · {n} —— **存在、可能自测全绿，而从没被调用过**")
+    if w["名单"]:
+        print("  ★ 这是 v0.0.0.68「第 9 次」那个坑；接线时必须**实跑一次**，"
+              "看输出里真的出现了那一行。")
+
+    # ★ check_scan_reach 是同族元判据（「这道判据这次扫了几个单位？和该扫的一样多吗」），
+    #   此前**从没被任何代码调用过**。它归这里管。
+    # ★ 先取绝对路径：传进来的可能是相对的 `scripts/`，那样 .parent 会一路塌成 `.`
+    dabs = d.resolve()
+    sr = dabs / "check_scan_reach.py"
+    root = dabs.parents[3] / "skill_log_evals" / "persona-distiller"
+    print("\n── 语料射程审计（check_scan_reach）──")
+    if not sr.is_file():
+        print("  ⚠ check_scan_reach.py 不在，**射程未核（不是通过）**")
+    elif not root.is_dir():
+        print(f"  ⚠ 语料根 {root} 不在，**射程未核（不是通过）**")
+    else:
+        r = subprocess.run([sys.executable, str(sr), "--root", str(root)],
+                           capture_output=True, text=True)
+        for line in ((r.stdout or "") + (r.stderr or "")).splitlines()[-6:]:
+            if line.strip():
+                print("  " + line.strip())
     return 2 if any(r["verdict"] == FAILED for r in rows) else 0
 
 
