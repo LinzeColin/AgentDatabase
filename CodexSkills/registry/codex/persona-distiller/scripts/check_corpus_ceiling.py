@@ -101,6 +101,27 @@ def required_primary(prof):
     return math.ceil(p["min_sources"] * p["min_primary_ratio"] - 1e-9)
 
 
+def forever_out_of_reach(primary_ceiling, prof):
+    """**一生的一手上限**低于这一档的要求 → 这一档**永远**够不着，不是这轮没抓够。
+
+    ★ 本件平时只看手上这批，**判不了一生有多少**。所以这个数**必须由调用方量了给进来**
+    （`--primary-ceiling`），来源是排期前的「一手规模探测」。**不给就不判**，
+    不猜、不从手上这批外推。
+
+    起因（#125 Mendel，2026-08-04）：他一生署名发表 14 件，
+    加上 10 封 Nägeli 信与 1850 年自撰履历，**一手的绝对上限是 25 份**，
+    而 deep 要 30 份。**再抓多少年也到不了**——
+    与「Semmelweis 占比 0.1186」「Liebig 占比 0.6094」不同类：
+    那两个是**分子够而比例不够**，这个是**分子的天花板本身低于门槛**。
+
+    处置也因此不同：**这一档对这个人要从排期里永久划掉**，而不是「以后再补抓」。
+    """
+    if primary_ceiling is None:
+        return None
+    need = required_primary(prof)
+    return primary_ceiling < need
+
+
 def verdict(primary, total, lanes, prof):
     """→ (够得着吗, 要不要缩分母, [说不通的地方])。
 
@@ -198,6 +219,14 @@ def selftest() -> int:
             fails.append(label)
 
     print("── ★ 换算：两条门联立之后要几份一手 ──")
+    print("── ★★ 反向对照：一生上限 < 门槛 → 判「永远够不着」；≥ 则不判 ──")
+    _need_deep = required_primary("deep")
+    chk(f"deep 要 {_need_deep} 份一手；上限 25 → 永远够不着",
+        forever_out_of_reach(25, "deep") is True)
+    chk(f"上限 30 → **不**判永远够不着", forever_out_of_reach(30, "deep") is False)
+    chk("**不给上限就不判**（返回 None，不猜）", forever_out_of_reach(None, "deep") is None)
+    chk("同一个上限 25 对 quick 不成立（quick 只要 4 份）",
+        forever_out_of_reach(25, "quick") is False)
     got = {p: required_primary(p) for p in PROFILES}
     print(f"    {got}")
     chk("quick 4 / standard 12 / **deep 30**",
@@ -302,6 +331,9 @@ def main() -> int:
     ap.add_argument("--primary", type=int, help="一手（P1+P2）份数——不给台账时直接给数")
     ap.add_argument("--total", type=int)
     ap.add_argument("--lanes", type=int, help="有材料的道数（0–6）")
+    ap.add_argument("--primary-ceiling", type=int, default=None,
+                    help="**这个人一生的一手绝对上限**（由排期前的一手规模探测量出来）。"
+                         "给了才判「这一档是不是永远够不着」；**不给就不判，不猜**")
     ap.add_argument("--profile", default="deep", choices=sorted(PROFILES))
     ap.add_argument("--self-test", action="store_true")
     a = ap.parse_args()
@@ -366,6 +398,18 @@ def main() -> int:
         #   #115 Slavyanov 是「传世的就这么多」（1897 年卒，著述本就少）；
         #   #116 Watson 是「著作很多，但她在世、全部在保护期内」。
         #   第一版这里写死了前一种成因——**在 Watson 身上就是一句错话。**
+        _forever = forever_out_of_reach(a.primary_ceiling, a.profile)
+        if _forever:
+            print(f"★★ **目标档 {a.profile} 对这个人永远够不着**——"
+                  f"一生的一手上限 **{a.primary_ceiling}** 份 < 本档要求 "
+                  f"**{required_primary(a.profile)}** 份。\n"
+                  "  这不是「这一轮没抓够」，是**分子的天花板本身低于门槛**。\n"
+                  "  **处置：把这一档从这个人的排期里永久划掉**，不要安排「以后再补抓」。\n"
+                  "  ★ 这个上限是调用方量了给进来的，本件没有猜。")
+        elif _forever is False:
+            print(f"★ 一生的一手上限 {a.primary_ceiling} 份 ≥ 本档要求 "
+                  f"{required_primary(a.profile)} 份——**这一档原则上够得着**，"
+                  "所以下面这些是「这一批」的问题，不是「这个人」的问题。")
         print(f"★ **目标档 {a.profile} 够不着。**\n"
               "  **成因本件判不了**，而成因决定处置：\n"
               "    · 材料本就稀少（传世少）　· 材料很多但取不到（版权／未数字化／访问控制）\n"

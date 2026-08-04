@@ -1,6 +1,6 @@
-# Release verification — Persona Distiller v0.0.0.113
+# Release verification — Persona Distiller v0.0.0.114
 
-Date: 2026-08-04（**v0.0.0.113**）
+Date: 2026-08-04（**v0.0.0.114**）
 
 > **本文件记录「当前发布号的复验结果」，不是历史归档。**
 > 版本号必须等于根目录 `VERSION`，由 `scripts/check_contract_drift.py` 强制。
@@ -21,6 +21,14 @@ Date: 2026-08-04（**v0.0.0.113**）
 > **表格正文不在任何判据的射程里**。
 > **「本表每一行都来自本次实跑」是一句自述**——
 > 而自述不是证据（见 `self-report-is-not-evidence`）。
+
+> ### v0.0.0.114 这一版重跑了什么
+>
+> **相对 113 给 `check_corpus_ceiling` 加了 `--primary-ceiling`**（只报，且**不给就不判**）。
+> **本次重跑**：该件自测（**含 4 条新反向对照**）、
+> **用 Mendel 实测数跑三档**（deep 永远够不着／standard 这批不够／quick 够得着）、
+> `finalize_release.py` 四步（清单 371 files → pytest → 漂移 → 可数项）。
+> **其余各行沿用 v0.0.0.96 那一次。**
 
 > ### v0.0.0.113 这一版重跑了什么
 >
