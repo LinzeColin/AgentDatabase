@@ -735,6 +735,34 @@ def run_corpus_text_checks(report, target: Path, cache_dirs: list[str]) -> None:
                               capture_output=True, text=True)
         return proc.returncode, (proc.stdout or '') + (proc.stderr or '')
 
+    # ── v0.0.0.126：**落在两道门之间、谁都没看过的文件** ──────────────────
+    #   Koch #107 的 lane 2 整条道只靠 `robertkochlette00koch.txt` 撑着——
+    #   **766 字符的手写件 OCR 纯噪声**。而三道门没有一道说过它是好的：
+    #   `non_placeholder` 只看字符数（766 ≥ 500，过）；
+    #   `check_ocr_language_death` 的下限是**词数 ≥500**，它只有 134 词 → **明说「未检查」**；
+    #   `check_ocr_legibility` 的射程是德文花体，**手写噪声不是那一种**。
+    #   ★ **只报不拦**——短不等于坏（Godin 的 153 份博客短文全落在这一段）。
+    #     它报的是**覆盖缺口**：这几份正在被当作来源用，而没有任何判据看过它们的内容。
+    code, out = run('check_unexamined_band.py', cache_arg)
+    if code == -1:
+        review.setdefault('checker_missing', out)
+    else:
+        try:
+            info = json.loads(out)
+        except Exception:                                          # noqa: BLE001
+            info = {}
+        n_band = info.get('**落在两门之间、谁都没看过的**')
+        if n_band:
+            review['unexamined_band'] = {
+                'n': n_band, 'of': info.get('扫到的 .txt'),
+                'files': [b['文件'] for b in (info.get('逐份') or [])[:8]],
+            }
+            report.warn('corpus.unexamined-band',
+                        f'**{n_band}/{info.get("扫到的 .txt")} 份语料落在两道门之间**：'
+                        f'字符数够 `non_placeholder`（≥500）而词数不够语种判据（<500），'
+                        f'**没有任何判据看过它们的内容**。★ 短不等于坏，本条是覆盖缺口不是缺陷；'
+                        f'但若某条道只靠这类文件撑着，请人看一眼。')
+
     # ── v0.0.0.116：**这份文件里真的有那句署名吗** ────────────────────────
     #   #125 Mendel 抓源存盘用 `p[:8]` 截断 UUID 当文件名，同一期两页前 8 位相同，
     #   **后写的音乐会评论页把讣闻页覆盖了**。三道判据全放行：

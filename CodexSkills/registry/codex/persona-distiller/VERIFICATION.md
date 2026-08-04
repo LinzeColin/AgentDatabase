@@ -1,6 +1,6 @@
-# Release verification — Persona Distiller v0.0.0.125
+# Release verification — Persona Distiller v0.0.0.126
 
-Date: 2026-08-05（**v0.0.0.125**）
+Date: 2026-08-05（**v0.0.0.126**）
 
 > **本文件记录「当前发布号的复验结果」，不是历史归档。**
 > 版本号必须等于根目录 `VERSION`，由 `scripts/check_contract_drift.py` 强制。
@@ -22,6 +22,15 @@ Date: 2026-08-05（**v0.0.0.125**）
 > **「本表每一行都来自本次实跑」是一句自述**——
 > 而自述不是证据（见 `self-report-is-not-evidence`）。
 
+> ### v0.0.0.126 这一版重跑了什么
+>
+> **新增 `check_unexamined_band.py` 并接进 `run_corpus_text_checks`**。
+> **本次重跑**：该件自测（**7 条对照**）、**Koch 实跑报出 2/120**、
+> **Jenner 修 `_` 前缀后由 2 归 0**、**全库扫 1815 份 → 276 份落在两门之间**、
+> Mendel 研究门（**errors 0 / warnings 0**，未被本件打扰）、
+> `check_checkers scripts`（**60 件 0 未接线**）、`finalize_release.py` 四步。
+> **其余各行沿用 v0.0.0.96 那一次。**
+
 > ### v0.0.0.125 这一版重跑了什么
 >
 > **给 124 那件判据补第二项：表行数 vs 正文节数**。
@@ -32,7 +41,7 @@ Date: 2026-08-05（**v0.0.0.125**）
 >
 > **把「待裁定台账自称的条数」并进 `check_verification_counts`**。
 > **本次重跑**：该件自测（**新增 3 条对照**）、对本仓实跑（**对不上的项数 0**）、
-> `check_checkers scripts`（**59 件 0 未接线**）、`finalize_release.py` 四步。
+> `check_checkers scripts`（**60 件 0 未接线**）、`finalize_release.py` 四步。
 > **其余各行沿用 v0.0.0.96 那一次。**
 
 > ### v0.0.0.123 这一版重跑了什么
@@ -40,7 +49,7 @@ Date: 2026-08-05（**v0.0.0.125**）
 > **公有领域分界改为随年份滚动（`THIS_YEAR - 95`）**。
 > **本次重跑**：`check_pd_grounds --self-test`（**新增 3 条对照，并修好 2 条因写死 1929 而失效的旧对照**）、
 > **逐条复核既有 32 条延后 → 零误判**、
-> `check_checkers scripts`（**59 件 0 未接线**）、`finalize_release.py` 四步。
+> `check_checkers scripts`（**60 件 0 未接线**）、`finalize_release.py` 四步。
 > **其余各行沿用 v0.0.0.96 那一次。**
 
 > ### v0.0.0.122 这一版重跑了什么
@@ -49,7 +58,7 @@ Date: 2026-08-05（**v0.0.0.125**）
 > **本次重跑**：对 Mendel R3 答案实跑 → **6 条引文报出 1 条未命中**，
 > 并逐字回原文确认成因是 OCR 讹字（`Hinleitende` vs `Einleitende`）、
 > 同时确认 `desshalb` 与 `waren die Veranlassung zu den Versuchen` 属实、
-> `check_checkers scripts`（**59 件 0 未接线**）、`finalize_release.py` 四步。
+> `check_checkers scripts`（**60 件 0 未接线**）、`finalize_release.py` 四步。
 > **其余各行沿用 v0.0.0.96 那一次。**
 
 > ### v0.0.0.121 这一版重跑了什么
@@ -58,7 +67,7 @@ Date: 2026-08-05（**v0.0.0.125**）
 > **本次重跑**：两件自测（5 条 + 8 条对照）、
 > **对 Mendel R2/R3 答案实跑各报出 1 处**、**用 show_gate 重念三道门
 > → 研究 passed=True／合成 passed=True／发布 passed=False**、
-> `check_checkers scripts`（**59 件 0 未接线**）、`finalize_release.py` 四步。
+> `check_checkers scripts`（**60 件 0 未接线**）、`finalize_release.py` 四步。
 > **其余各行沿用 v0.0.0.96 那一次。**
 
 > ### v0.0.0.120 这一版重跑了什么
@@ -66,7 +75,7 @@ Date: 2026-08-05（**v0.0.0.125**）
 > **修 `check_delta_resolution` 的量纲归一，并对 9 个人物 × 2 轮对实跑复核**。
 > **本次重跑**：该件自测（**9 条对照**，新增两条量纲）、
 > **跨人物复核 12 组 n≥10 的估计 → 中位 SE 0.0051**、
-> `check_checkers scripts`（**59 件 0 未接线**）、`finalize_release.py` 四步。
+> `check_checkers scripts`（**60 件 0 未接线**）、`finalize_release.py` 四步。
 > **其余各行沿用 v0.0.0.96 那一次。**
 
 > ### v0.0.0.119 这一版重跑了什么
@@ -74,7 +83,7 @@ Date: 2026-08-05（**v0.0.0.125**）
 > **相对 118 加一件判据并接进 `build_blind_payload`（派发之前）**。
 > **本次重跑**：该件自测（**6 条对照**）、**对 Mendel 实跑 → 6/16 题、
 > 贡献 −0.0250 vs 其余 +0.0528**、holdout 泄漏排查（**研究 0 处、断言 0 处**）、
-> `check_checkers scripts`（**59 件 0 未接线**）、`finalize_release.py` 四步。
+> `check_checkers scripts`（**60 件 0 未接线**）、`finalize_release.py` 四步。
 > **其余各行沿用 v0.0.0.96 那一次。**
 
 > ### v0.0.0.118 这一版重跑了什么
@@ -82,14 +91,14 @@ Date: 2026-08-05（**v0.0.0.125**）
 > **相对 117 加一件判据并接进 `assemble_judge_results`**。
 > **本次重跑**：该件自测（**7 条对照**）、**对 Mendel round1/round2 实跑
 > → SE 0.0164、quick 门 1.83 SE**、汇总件自测、
-> `check_checkers scripts`（**59 件 0 未接线**）、`finalize_release.py` 四步。
+> `check_checkers scripts`（**60 件 0 未接线**）、`finalize_release.py` 四步。
 > **其余各行沿用 v0.0.0.96 那一次。**
 
 > ### v0.0.0.117 这一版重跑了什么
 >
 > **相对 116 加一件判据并接进 `build_blind_payload`（载荷写盘之后、派发之前）**。
 > **本次重跑**：该件自测（**5 条对照**）、**对 Mendel 第 2 轮载荷实跑 → 报出 6 处**、
-> `check_checkers scripts`（**59 件 0 未接线**）、`finalize_release.py` 四步。
+> `check_checkers scripts`（**60 件 0 未接线**）、`finalize_release.py` 四步。
 > **其余各行沿用 v0.0.0.96 那一次。**
 
 > ### v0.0.0.116 这一版重跑了什么
@@ -99,7 +108,7 @@ Date: 2026-08-05（**v0.0.0.125**）
 > **对那份真被覆盖的文件实跑 → 6 词全 0 命中**、
 > **Liebig 工作区实跑 → 37 条核过 0 指错**、
 > **确认研究门真的会跑**（`content_review` 由空变成两条）、
-> `check_checkers scripts`（**59 件 0 未接线**）、`finalize_release.py` 四步。
+> `check_checkers scripts`（**60 件 0 未接线**）、`finalize_release.py` 四步。
 > **其余各行沿用 v0.0.0.96 那一次。**
 
 > ### v0.0.0.115 这一版重跑了什么
@@ -135,7 +144,7 @@ Date: 2026-08-05（**v0.0.0.125**）
 >
 > **相对 110 加了一件判据**：`check_verification_counts.py`，**已接线**（`check_checkers.py`）。
 > **本次重跑**：该件自测（**8 组对照，含「带真值的行不许当当前断言」「按定义属性数不按目录位置」**）、
-> **对本文件实跑 → 修好三处漂移后对不上 0 项**、`check_checkers scripts`（**59 件 0 未接线**）、
+> **对本文件实跑 → 修好三处漂移后对不上 0 项**、`check_checkers scripts`（**60 件 0 未接线**）、
 > pytest、`check_contract_drift`。**其余各行沿用 v0.0.0.96 那一次。**
 
 > ### v0.0.0.110 这一版重跑了什么
@@ -278,7 +287,7 @@ Date: 2026-08-05（**v0.0.0.125**）
 |---|---:|---|
 | **★★★★★★★★★★ 答案母版（v0.0.0.53 新增）** | **passed**；三支用 Osler 真数据实跑：真候选**过并落盘 32 条**；每条 ×3 → **中止且候选文件被删**；占位没删 → **点名 `XX-known-01` 并中止** | `scaffold/answers_template.py` 三支实跑 |
 | Offline unit / integration / concurrency tests | **70 / 70 passed**（`v0.0.0.96 实跑`） | `python3 -m pytest tests/ -q` |
-| **全部检查器自测（v0.0.0.47 起逐件跑）** | **`v0.0.0.111 实跑`：判据 59 件、接线审计**在生产代码里找不到调用方的 0 件**；语料射程审计 该扫 **18** 个工作区、实际扫了 **18** 个；★ 新增「台账有、工作区没有」审计：7 人 16 份，其中一手 10 份 | 逐件 `check_*.py --self-test`、`check_checkers.py scripts` |
+| **全部检查器自测（v0.0.0.47 起逐件跑）** | **`v0.0.0.111 实跑`：判据 60 件、接线审计**在生产代码里找不到调用方的 0 件**；语料射程审计 该扫 **18** 个工作区、实际扫了 **18** 个；★ 新增「台账有、工作区没有」审计：7 人 16 份，其中一手 10 份 | 逐件 `check_*.py --self-test`、`check_checkers.py scripts` |
 | **★ 公有领域的依据（v0.0.0.79 新增，只写 metrics，接进 research）** | **passed**（**9 项自测，其中 8 条反向对照**）；起因是 #116 Watson 探测撞到的**可复现误判**——Unpaywall 对 `10.1111/j.1365-2702.2005.01256.x` 返回 `license=public-domain`，而同 DOI 的 Crossref 写 Wiley 标准条款、**作者在世**。**十一个真账本实跑**：声称公有领域 **872** 条，其中有据可查 **230**、**有结论无依据 642**、**依据取自聚合器 0**（**本件是预防不是补救**）；不声称的 251 条（Godin `public-web` 196、Steinhardt 55）**完全不判，在世作者未被误伤**。**它不说那 642 条判断错了**——八位历史人物结论都站得住，报的是「依据不在产物里」（属 #29）。判据把三种状态分开：有据可查／有结论无依据／依据取自聚合器 | `check_rights_basis.py --self-test` + 对 11 份 `source-ledger.jsonl` 实跑 + Fleming 过 research 门 |
 | **★ 证据字段是不是逐条的（v0.0.0.78 新增，只写 metrics，接进 synthesis／release）** | **passed**（**14 项自测，其中 8 条反向对照**，含**三处真实误报夹具**）；`check_claim_anchors` 核「有没有挂上源」，本件核「**这个字段有没有区分度**」。**十个工作区实测：七个逐条各异，三个不是**——Koch #107 `source_ids` **46 条只有 1 种**、Lister #108 两个字段各 **1 种/35 条**、Jenner #104 `evidence_clusters` **1 种/35 条**。**三种状态分开报**：逐条各异／整批同一个值（报）／**整批都空（单独报，不是同一件事）**——`counter_source_ids` 六人全空是「没用这个字段」而非缺陷。**★ 第一版拿记录总数当分母，真数据一跑误报三处**（Jenner 非空 1/35、Steinhardt 4/39、Pasteur 3/33），改为按**非空数**判并固化为反向对照 ⑦。接线两向已实跑：Lister 报出两处、Fleming 不报；Semmelweis `claims.jsonl` 0 字节 → 报「未核验（不是通过）」 | `check_evidence_is_per_claim.py --self-test` + 对十份 `claims.jsonl` 实跑 + 两个真工作区过合成门 |
 | **★ 语料一手上限（v0.0.0.76 新增／v0.0.0.77 改读入库 attest，只写 metrics，接进 research）** | **passed**（**14 项自测，其中 8 条反向对照**）；把两条门联立成绝对数：**deep 要 30 份一手**（`ceil(45×0.65)`）、standard 12、quick 4。**v0.0.0.77 射程 5/10 → 11/11**：改为优先读 `evidence/source-ledger.jsonl`（schema 统一，**发布门就是按它算的**），口径逐字对齐 `evaluate_sources`（train／非 U 档／非抽取失败）。**★★ 与门交叉核对逐位一致**：Fleming 本件 45/68=0.6618 ／ 门 45/68=0.6618；Jenner 本件 50/52=0.9615 ／ 门 50/52=0.9615。**十一人全量复扫**：九人过各自档；**Koch 55/120=0.4583 < 0.65**、**Semmelweis 7/59=0.1186 且只有 2 道** ——**两人都已在延后名单里，一个都没入库，门做了它该做的事**。`raw/_ids.txt` 保留为入库前退路（格式因人而异，十份里 5 份带分档列，其余报「未核验（不是通过）」而**不是报 0 份一手**） | `check_corpus_ceiling.py --self-test` + 对 11 份 `source-ledger.jsonl` 与 10 份 `raw/_ids.txt` 实跑 + 两个真工作区过 research 门并与门自身指标比对 |
@@ -309,7 +318,7 @@ Date: 2026-08-05（**v0.0.0.125**）
 | **★★★ 语料真伪门（v0.0.0.33 新增，`ingest.py` 入口**硬拦**，见下节）** | **passed**（负对照 8 项，含 **4 条真实样本**）；**真实数据实测**：Jenner 抓源 4 份 HTML 错误页全抓出（最大一份 **146 KB**），入口实拦已验；清理后 53 份 0 报 | `check_corpus_integrity.py --self-test` + 对 `ws-jenner` 实跑 + `ingest.py` 实拦 |
 | **★★★ 引文层门（v0.0.0.32 新增，只报不拦，见下节）** | **passed**（负对照 11 项，含 **4 条真实样本 + 2 条真实误报夹具**）；**真实数据实测**：Harvey 第 3 轮定稿 10 处、Vesalius 11 处、Galen 0 处 | `check_quote_layer.py --self-test` + 对三份真实候选答案实跑 |
 | 蒸馏版本新鲜度 | 下限 `v0.0.0.70`（当前版本末位 − 10）；**102 条中 0 达标 / 102 低于下限 / 0 未知**；掉的是尺子，产物一份没变（任务 #29）（v0.0.0.75 记录里写的下限 `v0.0.0.37` 是旧数，**本次实跑纠正**） | `check_distillation_freshness.py` |
-| Release checksum 全量校验 | passed，**385 files**（`v0.0.0.111 实跑`；v0.0.0.96 写的 341、v0.0.0.75 写的 305 都是旧数——**这一行漂过三次，v0.0.0.111 起由 `check_verification_counts.py` 盯着**） | `self_check.py` |
+| Release checksum 全量校验 | passed，**387 files**（`v0.0.0.111 实跑`；v0.0.0.96 写的 341、v0.0.0.75 写的 305 都是旧数——**这一行漂过三次，v0.0.0.111 起由 `check_verification_counts.py` 盯着**） | `self_check.py` |
 | Canonical group validation | **12 categories, 100 products, 102 artifacts**; passed | `validate_persona_registry.py` |
 | 团队侧版本绑定 | **passed**，三处同为 `v0.0.0.13`；负对照 6 类全抓出 | `persona-distiller-group/scripts/check_group_version_binding.py` |
 | Identity family registry | 12 families；加权多身份输入被拒 | `test_identity_routing`、`test_skill_contract` |
