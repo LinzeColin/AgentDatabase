@@ -81,3 +81,47 @@
 
 参见 [[gate-green-but-pointed-at-wrong-artifact]]、[[style-learned-knowledge-lost]]、
 `FINDING_deep-is-the-default-and-nobody-has-ever-met-it.md`。
+
+---
+
+## 六、★★★ 我差点据此报一条不存在的编造引文——过程留在这里
+
+补坐标要先找出处，于是我用引文前 30 字去语料里二分定位，
+落到 `sp-1244-the-human-element-in-sex`，拿那一份逐字 diff，得到：
+
+```
+答案：…observation, reflection, and **rational experiment** patiently…with **generalization**…
+语料：…observation, reflection, and **experiments** patiently…with **generalisation**…
+相似度 0.945
+```
+
+**多插一个词、单复数改了、拼写改了**——我当场判定这是「用直角引号呈现的非逐字引文」，
+属于零容忍的一类，还去查了「判据为什么放过它」。
+
+**判据没有放过它。判据是对的，我是错的。**
+
+投影串在**另外两份语料里逐字存在**：
+
+```
+essays-medical-sociology-v1-1902/essays-medical-sociology-v1-1902.txt
+essays-v1-1902-ia/essays-v1-1902-ia.txt
+```
+
+`sp-1244` 是 LoC 的**手稿**，1902 年印本《Essays in Medical Sociology》是**改定稿**——
+她自己把 "experiments" 改成 "rational experiment"、"generalisation" 改成 "generalization"。
+**答案引的是印本那一版，一字不差。**
+
+### 我的错在哪一步
+
+**「前 30 字命中第一个文件」就当成了「出处」，没有先问「有没有别的文件完整匹配」。**
+部分匹配定位到的文件，与完整匹配的文件**可以不是同一份**——
+这和「两组数不在同一个空间」是同一个毛病换了个表面。
+
+**正确做法（已照做）**：先拿**完整投影串**去全语料求命中集合；
+只有命中集合为空，才退回前缀二分去找最近的版本，并且**明说那是版本差异不是编造**。
+
+### ★ 而这件事反过来加强了本条的主张
+
+**同一段话有手稿版与印本版两个措辞。** 一条不带坐标的引文，
+读者根本无从知道引的是哪一版——**这正是「坐标不是装饰」的最好例证**，
+而它就出在被判缺坐标的那批里。
