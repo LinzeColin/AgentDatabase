@@ -1221,8 +1221,8 @@
     },
     {
       "path": "scripts/package_target.py",
-      "sha256": "383af1b9dd7e56c93951fc9a62cdcc9543d577b95110c2f085c7513896e5f02f",
-      "size_bytes": 20038
+      "sha256": "434512782a84c5ddbeedb76cf40b97e991640a86fbd185c2d84240e274a0c51c",
+      "size_bytes": 21033
     },
     {
       "path": "scripts/persona_registry.py",

@@ -227,18 +227,28 @@ def audit_payloads(
             coverage_details = {}
     else:
         coverage_details = {}
-    cases_path = target / "evals" / "cases.jsonl"
-    results_path = target / "evals" / "results.jsonl"
+    # ★★ 2026-08-04：此前只 attest 两份、且**文件不在就静默从字典里消失**——
+    #   读 verification.json 的人看不出是「没做这一步」还是「做了没记」。
+    #   而两份答案载荷（候选/基线）**连记都没记**，于是产物声称一个 delta，
+    #   收到的人**无从检验那份盲判到底盲不盲**。
+    #   Barton #117 实测：一条正则 `\*\*|`` ` 能指认候选侧 32/32——
+    #   四人合计 116/128 = 91%。**这正是「你可以不信我，去核」核不了的地方。**
+    #   现在：四份全部 attest，缺的显式记为 missing（**不许静默消失**）。
+    frozen_candidates = (
+        ("evals/cases.jsonl", target / "evals" / "cases.jsonl"),
+        ("evals/results.jsonl", target / "evals" / "results.jsonl"),
+        ("evals/judge_payload.v1.json", target / "evals" / "judge_payload.v1.json"),
+        ("evals/baseline.v1.json", target / "evals" / "baseline.v1.json"),
+    )
     frozen_outputs = {
-        relative: {
-            "sha256": sha256_file(path),
-            "size_bytes": path.stat().st_size,
-        }
-        for relative, path in (
-            ("evals/cases.jsonl", cases_path),
-            ("evals/results.jsonl", results_path),
+        relative: (
+            {"sha256": sha256_file(path), "size_bytes": path.stat().st_size}
+            if path.is_file()
+            else {"status": "missing",
+                  "note": "**未落进工作区——是「没做」还是「做了没记」，本记录分不出，"
+                          "但它不是「通过」**"}
         )
-        if path.is_file()
+        for relative, path in frozen_candidates
     }
     quality_passed = bool(quality.get("passed"))
     review_independence = str(
