@@ -207,6 +207,18 @@ def main():
         "queue_done": done_in_q,
         "queue_pending": len(pending),
         "queue_deferred": deferred_in_q,
+        # ★ 队列条目只有 name/family_zh/family_id/priority/order —— **没有生卒年**。
+        #   于是「卒于 1930 年后的人物排期前先跑可得性探测」这条规矩
+        #   （Henderson #113 的教训）在排期这一步执行不了：
+        #   NEXT 给出来时，没有任何字段能提示要先探版权。
+        #   已因此付出三次代价：Henderson（本人续展到 2034/2050）、
+        #   Watson（在世）、DeBakey（卒于 2008）——三次都是排到了才发现。
+        #   在队列加字段之前（那属用户决定），至少让它每次都提醒。
+        "★排期前必做": (
+            "**本队列不含生卒年。** 动手之前先查 NEXT 这个人的生卒年："
+            "卒于 1930 年后（或在世）的，**必须先跑公有领域可得性探测**，"
+            "不要直接开抓。已因此延后：Henderson #113（本人续展至 2034/2050）、"
+            "Watson #116（在世，无到期日）、DeBakey #119（卒于 2008）。"),
         "NEXT": nxt,
         "why": why,
         "family_counts_ascending": dict(sorted(counts.items(), key=lambda kv: kv[1])),
