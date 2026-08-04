@@ -56,7 +56,7 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "af65ac78a4cb0900ccfebe426ac5cabc01263a51418f051e6bf11cdbcfeb1937",
+      "sha256": "5c1a7335ec39ebf94425f9efa4accc11f1e51b750ce1d2365ef773020d91e2a1",
       "size_bytes": 117946
     },
     {
@@ -785,6 +785,11 @@
       "size_bytes": 144886
     },
     {
+      "path": "references/pipeline/checkers/show_fetch_distance.py",
+      "sha256": "3bde9feac9000575a5140e051f24884ce5a40818817f6bb060f4cbe95102ab9a",
+      "size_bytes": 8845
+    },
+    {
       "path": "references/pipeline/checkers/show_gate.py",
       "sha256": "745a68d2278f2bba08ee7bfda28c9b0c1820fe562d158dc54961112344ea4cff",
       "size_bytes": 5709
@@ -1438,6 +1443,11 @@
       "path": "scripts/self_check.py",
       "sha256": "08ac055aec5d6ad310cbd385f9ecfafc021d4614817aa6e8a237582c29965803",
       "size_bytes": 11867
+    },
+    {
+      "path": "scripts/show_fetch_distance.py",
+      "sha256": "3bde9feac9000575a5140e051f24884ce5a40818817f6bb060f4cbe95102ab9a",
+      "size_bytes": 8845
     },
     {
       "path": "scripts/show_gate.py",
