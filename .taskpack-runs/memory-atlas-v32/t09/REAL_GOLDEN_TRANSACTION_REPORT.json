@@ -1,0 +1,63 @@
+{
+  "schema_version": "memory_atlas.real_golden_transaction.v1",
+  "task": "T09",
+  "verdict": "PASS",
+  "executed_at": "2026-08-04T11:32:00Z",
+  "transcribed_at": "2026-08-05",
+  "note_zh": "内容与同目录 REAL_GOLDEN_TRANSACTION_REPORT.md 一致；这份是任务包声明的 JSON 形式，不是新的主张。所有数值均来自 Owner 已登录 Access 会话下对生产的实读。",
+  "session": {
+    "route": "Owner 自己的 Cloudflare Access 会话",
+    "credential_created": false,
+    "access_policy_changed": false,
+    "secret_seen_by_agent": false
+  },
+  "run": {
+    "run_id": "marun_5bd5fa6104b034eaf65bdee3",
+    "trace_id": "marun_5bd5fa6104b034eaf65bdee3",
+    "source_state": "REBUILT_FROM_AUTHORITIES",
+    "source_completed_at": "2026-08-03T17:31:57+00:00"
+  },
+  "release": {
+    "identity_state": "OBSERVED",
+    "release_id": "20260804T111907Z-fa55d808fe90",
+    "repository_commit": "fa55d808fe906a418c239a33183d44fa6c03a3e7",
+    "artifact_digest": "e9eaaee962b2d88f300e9df5aa5cf0f1d2cffac109766d1effa0b5081992c37d",
+    "deployment_revision": "20260804T111907Z-fa55d808fe90"
+  },
+  "analysis": {
+    "event_count": 122080,
+    "event_window": {
+      "start_at": "2025-11-24T11:38:42Z",
+      "end_at": "2026-08-03T17:02:30.291Z"
+    }
+  },
+  "visuals": [
+    "quality_contribution_grid",
+    "verification_debt_trend",
+    "task_tool_outcome_heatmap"
+  ],
+  "same_run_evidence": {
+    "canonical_source_readback": "PASS",
+    "private_database_readback": "PASS",
+    "ovh_reconcile": "PASS",
+    "status_projection": "PASS",
+    "r2_readback": "NOT_RUN",
+    "r2_readback_reason_zh": "R2 于 2026-08-04 按设计清空，全量事件流已迁至 GitHub 私有仓；这一行如实报 NOT_RUN，由 provider-neutral 的 canonical_source_readback 承担判据。"
+  },
+  "privacy_contract": {
+    "raw_content_included": false,
+    "secret_values_included": false,
+    "private_paths_included": false,
+    "object_keys_included": false
+  },
+  "browser": {
+    "served_atlas_generated_at": "2026-08-04T11:37:33.869Z",
+    "codex_session_count": 505,
+    "nodes": 544,
+    "edges": 1691,
+    "note_zh": "十视图读到的是本次 reconcile 现生成的图谱，不是发布包里烤死的快照。"
+  },
+  "http": {
+    "api_live_snapshot": 200
+  }
+}
