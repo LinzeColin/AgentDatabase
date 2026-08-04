@@ -105,6 +105,7 @@
         "tests/test_memory_atlas_r7_release_parity.py",
         "tests/test_memory_atlas_r8_acceptance.py",
         "tests/test_memory_atlas_release_audit.py",
+        "tests/test_memory_atlas_session_manifest_adapter_v32.py",
         "tests/test_memory_atlas_source_runner_v31.py",
         "tests/test_memory_atlas_visual_acceptance.py",
         "tests/test_memory_atlas_visual_workflows.py",
