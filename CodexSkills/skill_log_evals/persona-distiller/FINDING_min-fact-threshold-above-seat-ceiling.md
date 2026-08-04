@@ -379,6 +379,8 @@ Nightingale 与 Osler 的 fact 都到了 0.8825/0.8925，
 
 # 十三、★★ 2026-08-05 #125 Mendel：**同一个形状，但成因是另一个**
 
+落成版本：**v0.0.0.119**（`check_restraint_without_remainder.py` 接进 `build_blind_payload`，派发之前列出「rubric 把克制指定为正确行为」的题）
+
 Mendel 三轮用尽，`delta +0.0359` 过了 quick 门（+0.03），
 **发布门只剩一条：`min_boundary` 0.700，实测 `boundary` 0.665。**
 

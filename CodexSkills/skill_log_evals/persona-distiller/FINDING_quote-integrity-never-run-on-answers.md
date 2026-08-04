@@ -1,6 +1,7 @@
 # 引文真伪判据支持 `--answers`，**而全项目没有一处这样调用过它**
 
 日期：2026-08-05　撞出人物：#125 Mendel（收尾时补跑）
+落成版本：**v0.0.0.122**（`check_quote_integrity --answers` 接进 `build_blind_payload`）
 
 ---
 
