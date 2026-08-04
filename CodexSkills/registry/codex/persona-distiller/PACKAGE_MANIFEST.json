@@ -731,8 +731,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_source_header_quotes.py",
-      "sha256": "5d40e68802e93142a418a6493ee5ca7070446efb1ba590f177ef024988c66b55",
-      "size_bytes": 10665
+      "sha256": "3584980460367f1e23e8ad975ae8ac90d98702e491bf849e6fa2b50ef6b8a2ed",
+      "size_bytes": 12031
     },
     {
       "path": "references/pipeline/checkers/check_staged_but_not_ingested.py",
@@ -1301,8 +1301,8 @@
     },
     {
       "path": "scripts/check_source_header_quotes.py",
-      "sha256": "5d40e68802e93142a418a6493ee5ca7070446efb1ba590f177ef024988c66b55",
-      "size_bytes": 10665
+      "sha256": "3584980460367f1e23e8ad975ae8ac90d98702e491bf849e6fa2b50ef6b8a2ed",
+      "size_bytes": 12031
     },
     {
       "path": "scripts/check_staged_but_not_ingested.py",
