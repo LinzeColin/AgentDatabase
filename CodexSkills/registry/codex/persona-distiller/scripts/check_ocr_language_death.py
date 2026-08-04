@@ -131,17 +131,50 @@ def _fold(w: str) -> str:
 LEX_FOLDED = {k: {_fold(x) for x in v} for k, v in LEX.items()}
 
 
-def rate(text: str) -> tuple[float, str, int]:
-    """→ (最佳语种的虚词占比, 该语种, 词数)。词数不足则占比返回 -1。"""
-    w = WORD.findall(text.lower())
-    if len(w) < MIN_WORDS:
-        return -1.0, "-", len(w)
-    wf = [_fold(x) for x in w]
+WINDOW = 2000          # ★ 窗口词数：约合一两千词的连续散文
+WINDOW_MIN_WORDS = 4000  # 全份不足这个数就不开窗（小文件整份量即可）
+
+
+def _rate_words(wf: list) -> tuple:
     best, lang = 0.0, "-"
     for k in LEX:
         r = sum(1 for x in wf if x in LEX_FOLDED[k]) / len(wf)
         if r > best:
             best, lang = r, k
+    return best, lang
+
+
+def rate(text: str) -> tuple[float, str, int]:
+    """→ (最佳语种的虚词占比, 该语种, 词数)。词数不足则占比返回 -1。
+
+    ★★ 2026-08-04：**取「最密的那一段窗口」，不取全份平均。**
+
+    整份平均会被**名录／表格／历书**拖死，而那正是本判据自己写着的已知假阳类。
+    #117 Barton 实测两处：
+
+    | 文件 | 整份 | **她的散文段** | 拖累它的东西 |
+    |---|---:|---:|---|
+    | `andersonville-1866` | 0.052 | **0.367**（250–729 行） | 一万三千人的墓葬名录，**占全份 94% 词数** |
+    | `diary-1888-jan-apr` | 0.147 | —— | 日记本印刷的历书：日月食表、天文计算 |
+
+    两份文字都完全可读，**却都被判成「已毁且记作 P1」**，
+    而报文说的是「你正打算从一份读不出字的文件里取逐字引文」——**那句话是错的**。
+
+    **「这份文件有没有一段能读」与「这份文件平均起来像不像散文」是两个问题。**
+    要防的是前者，所以按窗口取最大值。
+    """
+    w = WORD.findall(text.lower())
+    if len(w) < MIN_WORDS:
+        return -1.0, "-", len(w)
+    wf = [_fold(x) for x in w]
+    best, lang = _rate_words(wf)
+    # 大文件再按滑动窗口找最密的一段；窗口步长取半窗，够密就够用
+    if len(wf) >= WINDOW_MIN_WORDS:
+        step = WINDOW // 2
+        for i in range(0, len(wf) - WINDOW + 1, step):
+            r, l = _rate_words(wf[i:i + WINDOW])
+            if r > best:
+                best, lang = r, l
     return best, lang, len(w)
 
 

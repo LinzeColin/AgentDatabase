@@ -571,8 +571,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_ocr_language_death.py",
-      "sha256": "cca8709a4629bd1f3938f3a8f11c983872ff27bd71b795bb9d407a9b7c29cbd6",
-      "size_bytes": 14945
+      "sha256": "c1afe98ee5bd305a30f1a6f4a13b3c0189a65581cc75eaed085b56dc834d5874",
+      "size_bytes": 16464
     },
     {
       "path": "references/pipeline/checkers/check_probe_precondition.py",
@@ -1021,8 +1021,8 @@
     },
     {
       "path": "scripts/check_ocr_language_death.py",
-      "sha256": "cca8709a4629bd1f3938f3a8f11c983872ff27bd71b795bb9d407a9b7c29cbd6",
-      "size_bytes": 14945
+      "sha256": "c1afe98ee5bd305a30f1a6f4a13b3c0189a65581cc75eaed085b56dc834d5874",
+      "size_bytes": 16464
     },
     {
       "path": "scripts/check_probe_precondition.py",
