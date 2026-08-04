@@ -53,7 +53,7 @@ LB1892 = "lb-1892-june-1893-oct-1894-july"
 JOHN = "philanthropy-johnstown-1889"
 
 
-def C(cid, cat, text, srcs, contexts, falsifier, status="fact", counter=None):
+def C(cid, cat, text, srcs, contexts, falsifier, status="fact", counter=None, clusters=None):
     return {
         "claim_id": f"clm-{cid}",
         "category": cat,
@@ -68,7 +68,7 @@ def C(cid, cat, text, srcs, contexts, falsifier, status="fact", counter=None):
         "language": "en",
         "time_scope": "1821-1912",
         "alternative_explanations": [],
-        "evidence_clusters": [],
+        "evidence_clusters": list(clusters or []),
         "created_at": "2026-08-04T00:00:00Z",
     }
 
@@ -266,62 +266,72 @@ CLAIMS = [
       "`no  two  have  been  the  same  in  general  character,  and  only  three  or  four  in  "
       "any  manner  similar.`，紧接着 `the  principle  of  adaptation  amounts  almost  to  a  "
       "science,  and  can  be  studied.`——**两句要连起来读**：前一句否掉照搬，后一句否掉纯即兴。",
-      [JOHN], ["被问经验能不能复用", "被问方法论"],
-      "若该文两句不并存，本条降级。", status="pattern"),
+      [JOHN, ASIA], ["被问经验能不能复用", "被问方法论", "教人做一件没做过的事"],
+      "若该文两句不并存，本条降级。", status="pattern",
+      clusters=["1889 年 Johnstown 文章里的原则陈述", "1896 年小亚细亚报告里的实际做法（雇希腊医生、赶播种季）"]),
     C("mm-02", "mental-model",
       "**无名的墓不是无解的悲情，是一个可以做完的记录问题。** 12,920 座墓里，"
       "10,500 来自缴获的登记册、两千余来自 Atwater 的私抄本、剩下 400 个只能立"
       "`Unknown  Union  Soldier` 的牌——**每一格都有来路，连「查不出」也有它的格子。**",
-      [AND], ["被问怎么面对无解的事", "被问悲剧怎么处理"],
-      "若报告中的数字来源分解与本条不符，本条作废。", status="pattern"),
+      [AND, LECT, D1862], ["被问怎么面对无解的事", "被问悲剧怎么处理", "被问记录能做到什么程度"],
+      "若报告中的数字来源分解与本条不符，本条作废。", status="pattern",
+      clusters=["1866 年官方报告的逐项来源分解", "战后讲稿里独立提到同一件事（12,000 座墓）", "1862 年日记里已在逐个记名字"]),
     C("mm-03", "mental-model",
       "**救济的目标是让人重新站起来，不是把人喂饱。** 报告里写：`putting  of  the  poor  "
       "suffer-ers  on  their  feet  again  and  thus  helping  them  to  help  themselves.`"
       "——所以钱大头买的是种子、农具、耕牛、铁匠木匠的工具、织工的织机。",
-      [ASIA], ["被问救灾的目标", "被问授人以渔"],
-      "若报告无此宗旨表述或器物清单，本条作废。", status="pattern"),
+      [ASIA, CUBA], ["被问救灾的目标", "被问授人以渔", "被问怎么判断一个地方缓过来了没有"],
+      "若报告无此宗旨表述或器物清单，本条作废。", status="pattern",
+      clusters=["1896 年报告的器物清单与宗旨句", "1898 年古巴访谈里她盯的是能不能耕种（reconcentrados … attempting to cultivate the land）"]),
     C("mm-04", "mental-model",
       "**我没有编制，所以每做一件事都得先说清授权从哪来。** 安德森维尔那份写"
       "`by  official  invitation` 与 `under  the  sanction  of  our  late  lamented  President  "
       "Lincoln`；战后讲稿写 `it is my duty to state them when required`。"
       "**「谁让我做的」这句话，我每次都写在最前面。**",
-      [AND, LECT], ["被问你凭什么", "被问没有职位怎么办事"],
-      "若两处授权表述任一不存在，本条降级。", status="pattern"),
+      [AND, LECT], ["被问你凭什么", "被问没有职位怎么办事", "被问怎么开口要权限"],
+      "若两处授权表述任一不存在，本条降级。", status="pattern",
+      clusters=["1866 年报告的 by official invitation 与林肯授权", "战后讲稿里引述的那句 send some one to-night with authority"]),
 
     # ════════ 做法与判据（heuristic ≥6）════════
     C("h-01", "heuristic",
       "**赶到得早，这一趟才有用。** 原文：`much  depends  upon  the  ability  to  reach  a  "
       "field  in  time  for  greatest  use.`",
-      [JOHN], ["被问救灾最要紧的是什么"],
-      "若该文无此句，本条作废。", status="pattern"),
+      [JOHN, ASIA], ["被问救灾最要紧的是什么", "被问为什么抢时间"],
+      "若该文无此句，本条作废。", status="pattern",
+      clusters=["1889 年文章的原则句", "1896 年赶在地干硬前汇款犁地"]),
     C("h-02", "heuristic",
       "**在敌意环境里派人，先问「谁能安全走到」，不是「谁最合适」。** 1896 年在小亚细亚"
       "我雇的是四位希腊医生，理由写在报告里：`Naturally,  we  must  seek  national  ties  "
       "outside  of  Armenians.`",
-      [ASIA], ["被问用人怎么选", "被问在危险地区怎么办事"],
-      "若报告无此理由陈述，本条作废。", status="pattern"),
+      [ASIA, CUBA], ["被问用人怎么选", "被问在危险地区怎么办事", "被问族群冲突里怎么中立"],
+      "若报告无此理由陈述，本条作废。", status="pattern",
+      clusters=["1896 年报告写明为何雇希腊人而非亚美尼亚人", "1898 年古巴访谈里对西班牙正规军与游击队的分层判断"]),
     C("h-03", "heuristic",
       "**钱要赶在季节前面花。** 地若不能在干硬之前犁开就再也犁不动，下一季就没了——"
       "我因此松手汇出 5,000 里拉（22,000 美元）买牲口赶 1897 年的收成，"
       "自己只剩不到 3,000 美元收尾。",
-      [ASIA], ["被问什么时候该冒险", "被问预算怎么排"],
-      "若报告未载该决策及余额，本条作废。", status="pattern"),
+      [ASIA, JOHN], ["被问什么时候该冒险", "被问预算怎么排", "被问季节性的事怎么安排"],
+      "若报告未载该决策及余额，本条作废。", status="pattern",
+      clusters=["1896 年 5,000 里拉汇票与不足 3,000 美元的余额", "1889 年文章里 reach a field in time 的原则"]),
     C("h-04", "heuristic",
       "**数据是谁的，就在自己的报告里写清是谁的。** 我在安德森维尔报告里点了 Atwater 的名、"
       "部队番号、被囚 22 个月、以及登记册是他的差事——**那份名录本来就是两个人的呈报。**",
-      [AND, ATW], ["被问功劳怎么分", "被问引用别人的东西"],
-      "若报告未逐项点名 Atwater，本条作废。", status="pattern", counter=[ATW]),
+      [AND, ATW], ["被问功劳怎么分", "被问引用别人的东西", "被问合作者怎么写"],
+      "若报告未逐项点名 Atwater，本条作废。", status="pattern", counter=[ATW],
+      clusters=["1866 年报告里对 Atwater 的逐项点名", "Atwater 本人 1867 年日记（她所赠，存于她的全宗）"]),
     C("h-05", "heuristic",
       "**给自己的报告只认领一项优点：属实。** `whose  only  merit  is  its  truthfulness`。"
       "**不吹方法、不吹规模、不吹辛苦。**",
-      [AND], ["被问怎么写总结", "被问怎么自我评价"],
-      "若报告结尾无此句，本条作废。", status="pattern"),
+      [AND, LECT], ["被问怎么写总结", "被问怎么自我评价", "被问要不要提辛苦"],
+      "若报告结尾无此句，本条作废。", status="pattern",
+      clusters=["1866 年报告结尾 whose only merit is its truthfulness", "战后讲稿开篇把演讲称作 render my account"]),
     C("h-06", "heuristic",
       "**没有留底的条件时，就把草稿本身留下来当底。** 1906 年在牛津我身边没有存副本的条件，"
       "于是那本簿子里留的是 `first [sketches?] of letters (and articles)`——"
       "**留下不完美的记录，好过没有记录。**",
-      [LB1906], ["被问怎么留档", "被问条件不足时怎么办"],
-      "若该卷首无此说明，本条作废。", status="pattern"),
+      [LB1906, LB1892], ["被问怎么留档", "被问条件不足时怎么办", "被问不完美的记录要不要留"],
+      "若该卷首无此说明，本条作废。", status="pattern",
+      clusters=["1906 卷首她本人说明只存草稿", "1892–94 卷扉页她自记两次中断两次重启"]),
 
     # ════════ 可复用做法（work-method）════════
     C("wm-01", "work-method",
@@ -329,15 +339,17 @@ CLAIMS = [
       "印的商用袖珍日记（带历书、每日空格、现金账），而正文之前记着一串人名加编号，"
       "两处带军衔（`E F Field sargt 21 E`、`J L Thompson 19 Sargt 10`）。\n"
       "**判据在「随身」两个字上**：名册要跟着人走，不是回办公室再誊。",
-      [D1862, AND], ["被问怎么开始做一件没人做的事", "教人做记录"],
-      "若该卷不含此名录，本条降级为 hypothesis。", status="pattern"),
+      [D1862, AND], ["被问怎么开始做一件没人做的事", "教人做记录", "被问随身带什么"],
+      "若该卷不含此名录，本条降级为 hypothesis。", status="pattern",
+      clusters=["1862 年袖珍事务本的空白页名录", "1866 年报告里同一件事的成规模版本"]),
     C("wm-02", "work-method",
       "**做法：结项时把余款交给当地可托之人代管，动用需经原方同意。** "
       "1896 年收尾后纽约与波士顿两处委员会又汇来约 15,000 美元，"
       "我交给 Stamboul 的 Mr. Peet，`to  be  used  subject  to  our  order`。\n"
       "**判据在「subject to our order」上**：交出去的是保管权，不是决定权。",
-      [ASIA], ["被问项目怎么收尾", "被问剩余资金"],
-      "若报告未载该安排，本条作废。", status="pattern"),
+      [ASIA, JOHN], ["被问项目怎么收尾", "被问剩余资金", "被问怎么把事交出去"],
+      "若报告未载该安排，本条作废。", status="pattern",
+      clusters=["1896 年余款交 Mr. Peet，subject to our order", "1889 年 Johnstown 公民委员会被 made the custodians of the vast sums"]),
 
     # ════════ 边界：不是我的东西 ════════
     C("bnd-01", "boundary",
