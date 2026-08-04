@@ -437,3 +437,17 @@ def test_the_deploy_computes_the_artifact_digest_it_publishes() -> None:
     # Over the promoted bundle, deterministically, not over the source tree.
     assert 'cd "$release/dist" && find . -type f -print0 | LC_ALL=C sort -z' in deploy
     assert 'MEMORY_ATLAS_ARTIFACT_DIGEST=%s' in deploy
+
+
+def test_release_identity_is_written_before_anything_reads_it() -> None:
+    """The promotion restarted the reconcile and then wrote the identity file, so
+    the run it triggered read the previous release and the published snapshot
+    named a release one promotion behind — every time, permanently."""
+    deploy = (REPO / "ops" / "memory-atlas" / "deploy-blue-green.sh").read_text(encoding="utf-8")
+    identity = deploy.index('> "$APP_ROOT/shared/release-identity.env"')
+    for consumer in (
+        "sudo systemctl restart memory-atlas-api.service",
+        "sudo systemctl restart --no-block memory-atlas-reconcile.service",
+        "sudo systemctl restart memory-atlas-action-worker.service",
+    ):
+        assert identity < deploy.index(consumer), consumer

@@ -174,6 +174,23 @@ if [[ -L "$AGENT_ROOT/current" ]]; then old_agent=$(readlink -f "$AGENT_ROOT/cur
 ln -sfn "$release" "$APP_ROOT/current"
 ln -sfn "$agent_release" "$AGENT_ROOT/current"
 trap post_promotion_error ERR
+# Written before anything restarts. It used to be written after, so every
+# service the promotion started read the previous release and the published
+# snapshot named a release one promotion behind — permanently.
+# The reconcile reads these so the published snapshot can name the release and
+# deployment it was produced under; without them the same-run oracle has nothing
+# to bind and the panel honestly shows 未验证.
+# The artifact digest has to be the bytes a viewer actually receives, so it is
+# computed over the promoted bundle rather than passed in and left empty — which
+# is what it was, leaving `artifact_digest` null in every published snapshot.
+artifact_digest=${MEMORY_ATLAS_ARTIFACT_DIGEST:-}
+if [[ -z "$artifact_digest" && -d "$release/dist" ]]; then
+  artifact_digest=$(cd "$release/dist" && find . -type f -print0 | LC_ALL=C sort -z \
+    | xargs -0 sha256sum | sha256sum | cut -d' ' -f1)
+fi
+printf 'MEMORY_ATLAS_RELEASE_ID=%s\nMEMORY_ATLAS_REPOSITORY_COMMIT=%s\nMEMORY_ATLAS_DEPLOYMENT_REVISION=%s\nMEMORY_ATLAS_ARTIFACT_DIGEST=%s\n' \
+  "$release_id" "$release_commit" "$release_id" "$artifact_digest" > "$APP_ROOT/shared/release-identity.env"
+chmod 0644 "$APP_ROOT/shared/release-identity.env"
 sudo systemctl restart memory-atlas-api.service
 sudo systemctl enable --now memory-atlas-api-proxy.socket memory-atlas-reconcile.timer memory-atlas-selfheal.timer memory-atlas-action-worker.timer
 # --force-recreate is not optional. The web container bind-mounts
@@ -191,21 +208,6 @@ sudo systemctl restart memory-atlas-action-worker.service
 sudo systemctl restart --no-block memory-atlas-reconcile.service
 printf '%s
 ' "$release_id" > "$APP_ROOT/shared/LAST_PROMOTED_RELEASE"
-# The reconcile reads these so the published snapshot can name the release and
-# deployment it was produced under; without them the same-run oracle has nothing
-# to bind and the panel honestly shows 未验证.
-# The artifact digest has to be the bytes a viewer actually receives, so it is
-# computed over the promoted bundle rather than passed in and left empty — which
-# is what it was, leaving `artifact_digest` null in every published snapshot.
-artifact_digest=${MEMORY_ATLAS_ARTIFACT_DIGEST:-}
-if [[ -z "$artifact_digest" && -d "$release/dist" ]]; then
-  artifact_digest=$(cd "$release/dist" && find . -type f -print0 | LC_ALL=C sort -z \
-    | xargs -0 sha256sum | sha256sum | cut -d' ' -f1)
-fi
-printf 'MEMORY_ATLAS_RELEASE_ID=%s\nMEMORY_ATLAS_REPOSITORY_COMMIT=%s\nMEMORY_ATLAS_DEPLOYMENT_REVISION=%s\nMEMORY_ATLAS_ARTIFACT_DIGEST=%s\n' \
-  "$release_id" "$release_commit" "$release_id" "$artifact_digest" > "$APP_ROOT/shared/release-identity.env"
-chmod 0644 "$APP_ROOT/shared/release-identity.env"
-
 printf '{"schema_version":"memory_atlas.promotion.v1","release_id":"%s","git_commit":"%s","promoted_at":"%s"}
 ' "$release_id" "$release_commit" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > "$APP_ROOT/shared/promotion.json"
 trap - ERR
