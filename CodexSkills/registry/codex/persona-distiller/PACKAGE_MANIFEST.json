@@ -16,8 +16,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "c3b5d619b64463532c0bf4444bbd93456b2888e210f2d85ddc390c5037ef2e7e",
-      "size_bytes": 160944
+      "sha256": "a6b77bd4a5c9fc421d82c55dd5967d4492c2d1fa53b6d6ceb36aa585470525a2",
+      "size_bytes": 163313
     },
     {
       "path": "CONTRIBUTING.md",
@@ -493,6 +493,11 @@
       "path": "references/pipeline/checkers/check_answer_surface_leak.py",
       "sha256": "ad34a1d9a2707091f75f270f33820c323d5ab9e18ea3ca9fc80b2069752cd1a4",
       "size_bytes": 17681
+    },
+    {
+      "path": "references/pipeline/checkers/check_asked_verbatim_got_pointer.py",
+      "sha256": "0349cd5e8a55c2c2134f0ce2b149d58e0dc097d5e3637340451824118a295976",
+      "size_bytes": 9860
     },
     {
       "path": "references/pipeline/checkers/check_attribution_basis.py",
@@ -975,6 +980,11 @@
       "size_bytes": 17681
     },
     {
+      "path": "scripts/check_asked_verbatim_got_pointer.py",
+      "sha256": "0349cd5e8a55c2c2134f0ce2b149d58e0dc097d5e3637340451824118a295976",
+      "size_bytes": 9860
+    },
+    {
       "path": "scripts/check_attribution_basis.py",
       "sha256": "2dfc47d1bec7cbb8ebc4db826688b28c25ea928976a460f957966e518a1813b6",
       "size_bytes": 13808
@@ -1281,8 +1291,8 @@
     },
     {
       "path": "scripts/quality_check.py",
-      "sha256": "4516520cf2758c2780d567e5b0832e7170ae017b7700d52bbd19d7041908bd93",
-      "size_bytes": 128724
+      "sha256": "aab27a233b2a4934b2b8d39781993fe6891f0adc0fbd2702cf8427efe68a47b0",
+      "size_bytes": 130963
     },
     {
       "path": "scripts/register_persona.py",

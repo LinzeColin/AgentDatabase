@@ -1720,6 +1720,46 @@ def run_pd_grounds(report, target: Path) -> None:
     report.metrics['pd_grounds'] = info
 
 
+def run_verbatim_pointer(report, target: Path) -> None:
+    """问原话，答「你自己去查」（v0.0.0.87，**只写 metrics**；这是回归护栏）。
+
+    ★ 立这道判据时我把评语读反了：以为那几条说的是候选，**跑真数据才知道是基线**。
+    同一批题面 5 人配对实测，10 道「问原话/出处」的题——
+    **候选 0/10（0%）、基线 3/10（30%）**。
+    **「让人自己去查」是基线的失败形态，候选恰恰是给引文与卷页的那一侧。**
+
+    所以它守的是产品**已经有**的一项优势：哪天候选开始把原话推给读者，这里会红。
+    """
+    here = Path(__file__).resolve().parent
+    script = here / 'check_asked_verbatim_got_pointer.py'
+    if not script.exists():
+        report.metrics['verbatim_pointer'] = {'状态': '检查器未安装，**未核验**（不是通过）'}
+        return
+    spec = importlib.util.spec_from_file_location('_pd_vptr', script)
+    module = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(module)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['verbatim_pointer'] = {'状态': f'加载失败，**未核验**：{exc}'}
+        return
+    cf, pf = target / 'evals/cases.jsonl', target / 'evals/judge_payload.v1.json'
+    if not (cf.is_file() and pf.is_file()):
+        report.metrics['verbatim_pointer'] = {
+            '状态': 'cases.jsonl 或 judge_payload 不在，**未核验**（不是通过）'}
+        return
+    try:
+        cases = [json.loads(l) for l in cf.read_text(encoding='utf-8').splitlines() if l.strip()]
+        answers = json.loads(pf.read_text(encoding='utf-8'))
+        if isinstance(answers, list):
+            answers = {a.get('case_id'): a for a in answers if isinstance(a, dict)}
+        problems, info = module.evaluate(cases, answers)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['verbatim_pointer'] = {'状态': f'运行失败，**未核验**：{exc}'}
+        return
+    info['只给指路的'] = problems[:6] or '无'
+    report.metrics['verbatim_pointer'] = info
+
+
 def run_answer_constraints(report, target: Path) -> None:
     """题面写死的约束，答案接住了吗（v0.0.0.83，**只写 metrics**）。
 
@@ -2380,6 +2420,7 @@ def main() -> int:
             run_evidence_per_claim(report, target)
             run_claim_source_independence(report, target)
             run_answer_constraints(report, target)
+            run_verbatim_pointer(report, target)
             run_unqualified_priority(report, target)
             run_sole_authorship(report, target)
             run_holdout_overlap(report, target, args.cache)
