@@ -35,13 +35,16 @@ Clara Barton Papers（MSS11973），按其手迹与来源著录。
 `by F.J. CAMPBELL`／`by MISS ELOISE ANTHONY`。
 这些卷**照挂 attribution，但写明卷内有他人段落，取逐字引文前必须切边界**。
 """
+import importlib.util
 import json
 import pathlib
 import re
 
+HERE = pathlib.Path(__file__).resolve().parent
 WS = pathlib.Path("workspaces/clara-barton/clara-barton")
 LED = WS / "evidence/source-ledger.jsonl"
 META = WS / "meta.json"
+SUBJECT = "Clara Barton"
 
 # `check_authorship` 在这几份里抓出他人署名，我回原文核过：确有他人段落。
 MIXED_VOLUMES = {
@@ -153,14 +156,63 @@ def attr(short_id: str) -> str:
     return "\n".join(parts)
 
 
+def authorship_evidence(rows):
+    """★ 逐份**真跑** `check_authorship`，把它查到的 A-* 码记进源记录。
+
+    ## 为什么要这一步
+
+    `check_source_attribution` 判「这一份有没有被逐份认领」时，读的是源记录上的
+    `authorship_evidence` 字段——**而在此之前没有任何东西往那个字段里写**。
+    于是 historical 路上每一份 P1 都被要求在 `attribution_basis` 里点名，
+    **哪怕 `check_authorship` 明明认得出它的署名**。
+
+    实测（Clara Barton，103 份 P1）：
+
+        A-byline             17
+        A-byline-standalone  16
+        A-signature-block    15
+        A-byline-ocr          1
+        ── 认到证据 49 份 ──
+        认不到               54 份（日记 34／讲稿书稿 19／家族文书 1）
+
+    **认到的按实际证据记，认不到的才逐份点名。**
+    绝不是「一句话放行 103 份」——那正是 v0.0.0.24 的错。
+    """
+    spec = importlib.util.spec_from_file_location(
+        "ca", str(HERE.parents[3] / "registry/codex/persona-distiller/scripts/check_authorship.py"))
+    ca = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(ca)
+    pat = ca.build_patterns(SUBJECT)
+    ws = WS
+    found, missing = {}, []
+    for r in rows:
+        if r.get("tier") != "P1" or (r.get("author") or "").strip() != SUBJECT:
+            continue
+        p = ws / str(r.get("local_path") or "")
+        if not p.is_file():
+            continue
+        ok, code, _ev, _c = ca.check_text(p.read_text(encoding="utf-8", errors="replace"), pat)
+        if ok:
+            found[r["source_id"]] = code
+        else:
+            missing.append(r)
+    return found, missing
+
+
 def main() -> int:
     rows = [json.loads(l) for l in LED.read_text(encoding="utf-8").splitlines() if l.strip()]
+
+    found, missing = authorship_evidence(rows)
+    print(f"逐份跑 check_authorship：认到证据 {len(found)} 份，认不到 {len(missing)} 份")
+
     n = 0
     for r in rows:
         sid = (r.get("original_name") or "").replace(".txt", "")
         if not sid:
             continue
         r["attribution"] = attr(sid)
+        if r["source_id"] in found:
+            r["authorship_evidence"] = [found[r["source_id"]]]
         n += 1
     LED.write_text("\n".join(json.dumps(r, ensure_ascii=False) for r in rows) + "\n",
                    encoding="utf-8")
@@ -191,6 +243,21 @@ def main() -> int:
             "③ **随行人员日记不是她的**——LOC 著录 `Diarists other than Barton; Staff diaries`，"
             "已定 S1；它与她本人日记用词重合度可达 17%，那是同场活动不是转载，"
             "但**一个字都不是她写的**（逐字相同句段实测 8/933）。"),
+        # ★ 逐份点名，**只列 `check_authorship` 认不到 A-* 证据的那些**。
+        #   认得到的 49 份不写在这里——它们走证据路，不走点名路。
+        #   这一层区分就是本项目与 v0.0.0.24「一句声明整批免检」的分界线。
+        "covered_sources": sorted(
+            (r.get("original_name") or "") for r in missing),
+        "covered_sources_rationale": (
+            f"**{len(missing)} 份逐份列出，全部是 LOC 未刊手稿**"
+            "（日记、书稿草稿、讲稿笔记、家族文书）。"
+            "`check_authorship` 在这些件上认不到 A-* 证据，**是预期而非缺陷**："
+            "**日记与草稿本来就不署名**。其归属依据在**档案层**——"
+            "美国国会图书馆 Clara Barton Papers（MSS11973），按手迹与来源著录。\n"
+            f"**另有 {len(found)} 份不列在此**：它们由 `check_authorship` 逐份实测到真署名证据"
+            "（A-byline 17／A-byline-standalone 16／A-signature-block 15／A-byline-ocr 1），"
+            "已写进各自源记录的 `authorship_evidence`，**走证据路不走点名路**。\n"
+            "**两条路分开，正是为了不让「点名」退化成整批免检。**"),
         "disputed_works": [
             "andersonville-1866 第 60–249 行：Dorence Atwater 第一人称自述，**非她所作**",
             "diary-1866-jan-dec：卷内检出 `By  Miss  Dunlap.  Phil.`",
