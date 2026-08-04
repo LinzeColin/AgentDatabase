@@ -1,0 +1,28 @@
+{
+  "canonical_key": "historical:georgewashingtoncarver",
+  "canonical_name": "George Washington Carver",
+  "identity_family_id": "agriculture-fishery",
+  "identity_mode": "single",
+  "registration_category": "农林牧渔师",
+  "schema_version": "3.0",
+  "subject_origin": "historical",
+  "subject_slug": "george-washington-carver",
+  "subject_uid": "person-acbe73e3f04002f7",
+  "versions": [
+    {
+      "artifact": "versions/0.0.0.1/george-washington-carver-persona-distillation-delivery-v0.0.0.1.zip",
+      "artifact_created_at": "2026-08-04T16:31:02Z",
+      "builder_version": "v0.0.0.5",
+      "delivery_contract_status": "native-v0.0.0.5",
+      "distilled_with": "v0.0.0.132",
+      "distilled_with_source": "artifact-manifest",
+      "model_version": "0.1.0-draft",
+      "outer_sha256": "cc0738fa4fd662ed52d9bae52d4962d27f48c0c54f8fd599726564762b9f0d8f",
+      "product_version": "0.0.0.1",
+      "runtime_artifact": "runtime/george-washington-carver-persona-skill-v0.0.0.1.zip",
+      "runtime_sha256": "f9bdbec95bd37b2c08ec6835d7df573009d21a9053109ba007a7db0f17c48175",
+      "runtime_size_bytes": 67421,
+      "size_bytes": 73289
+    }
+  ]
+}

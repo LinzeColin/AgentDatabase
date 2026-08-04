@@ -1097,8 +1097,29 @@ def run_content_checks(report, target: Path, cache_dirs: list[str]) -> None:
     elif not payload.exists():
         review['answer_surface_leak'] = 'judge_payload 不在——**表面特征泄题未核（不是通过）**'
     else:
+        # ★★ 2026-08-05 用户裁定（待裁定 ⑭）：长度两条对 `bare-model-run` 基线只报不拦。
+        #   基线来源**从 results.jsonl 自己读**，不另立一个可以随手填的开关——
+        #   否则「声明成 bare-model-run 就免拦」会变成一句谁都能写的话。
+        #   口径与 check_baseline_provenance 同源：全部 baseline 行都标同一个来源才算数，
+        #   混杂或缺标一律按最严的 self-authored 处理。
+        _srcs = set()
+        _res = target / 'evals/results.jsonl'
+        if _res.exists():
+            for _l in _res.read_text(encoding='utf-8').splitlines():
+                if not _l.strip():
+                    continue
+                try:
+                    _r = json.loads(_l)
+                except json.JSONDecodeError:
+                    continue
+                if _r.get('system') == 'baseline':
+                    _srcs.add(str(_r.get('baseline_source') or 'unknown'))
+        _bsrc = _srcs.pop() if len(_srcs) == 1 else 'self-authored-strawman'
+        review['answer_surface_leak_baseline_source'] = (
+            f'{_bsrc}' + ('' if len(_srcs) == 0 else '（**来源混杂，按最严处理**）'))
         code, out = run('check_answer_surface_leak.py',
-                        ['--candidate', str(payload), '--baseline', str(baseline)])
+                        ['--candidate', str(payload), '--baseline', str(baseline),
+                         '--baseline-source', _bsrc])
         if code == -1:
             review['checker_missing'] = out
         elif code == 3:

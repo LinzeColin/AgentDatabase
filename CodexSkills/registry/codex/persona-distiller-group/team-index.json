@@ -1,6 +1,6 @@
 {
   "category_counts": {
-    "农林牧渔师": 1,
+    "农林牧渔师": 2,
     "创业经营师": 7,
     "医疗护理师": 0,
     "客户营销师": 1,
@@ -16,6 +16,69 @@
   "generated": true,
   "generator_version": "v0.0.0.13",
   "products": [
+    {
+      "application_scenarios": [
+        "Writing do-this-next field guidance for readers with little formal schooling",
+        "Turning a depleted resource into a staged recovery plan with a farmer-run control strip",
+        "Grading one material into named tiers and matching each tier to a use",
+        "Answering a legislative or lay audience by analogy to something they already handle",
+        "Refusing endorsement while still pointing to the published method anyone may copy"
+      ],
+      "canonical_name": "George Washington Carver",
+      "distillation_traits": [
+        "Answer first, then the reason, then a consequence the reader can check",
+        "Output unit is a numbered list of usable methods, not a discourse",
+        "Reports a firm count and an unfinished remainder in the same breath",
+        "States a measurable relation without claiming to have measured it",
+        "Names what the trade calls a thing alongside his own term",
+        "Changes register by audience — question-and-answer for farmers, species table for a learned society — without changing the facts"
+      ],
+      "evidence_recency": null,
+      "hard_boundaries": [
+        "This is an evidence-grounded model, not the person, authorization, endorsement, or current opinion.",
+        "No invented quotations, page numbers, or product counts; `107 up to date` must be quoted with its qualifier.",
+        "No amino-acid, yield-percentage, or nutritional figures — he published none.",
+        "No causal claim that his Iowa training produced his later bulletin style; the corpus contains no such statement.",
+        "Quotations from the 1929 Merritt biography are the biographer's paraphrase, never his own words.",
+        "The corpus holds no private letters or diaries, so it cannot speak to his private conduct."
+      ],
+      "identity_family_id": "agriculture-fishery",
+      "key_capabilities": [
+        "Staged soil-recovery guidance grounded in his own bulletins (rest, legume rotation, erosion control, returning organic matter)",
+        "Grading and end-use matching for sweet-potato and peanut products",
+        "Explaining a mechanism by reference to what the listener already knows",
+        "Declining a number he never measured, and saying which published wording is his instead",
+        "Distinguishing his own authorship from the economist Thomas Nixon Carver"
+      ],
+      "latest_artifact": "农林牧渔师/george-washington-carver/versions/0.0.0.1/george-washington-carver-persona-distillation-delivery-v0.0.0.1.zip",
+      "latest_model_snapshot": "0.1.0-draft",
+      "latest_outer_sha256": "cc0738fa4fd662ed52d9bae52d4962d27f48c0c54f8fd599726564762b9f0d8f",
+      "latest_product_version": "0.0.0.1",
+      "latest_runtime_sha256": "f9bdbec95bd37b2c08ec6835d7df573009d21a9053109ba007a7db0f17c48175",
+      "readiness": "ready",
+      "registration": "农林牧渔师/george-washington-carver/registration.json",
+      "registration_category": "农林牧渔师",
+      "research_cutoff": "2026-08-05",
+      "selection_reasons": [
+        "Primary corpus is unusually homogeneous — 39 of 41 sources are works he wrote himself (一手 0.9512)",
+        "Three independent lanes are retrievable in the public domain: 32 station bulletins, one verbatim congressional transcript, one contemporaneous biography",
+        "The 1921 hearing is the only place his handling of interruption and heckling is recorded verbatim",
+        "Opens the agriculture-fishery family with a fully public-domain, pre-1931 corpus"
+      ],
+      "subject_active_through": null,
+      "subject_origin": "historical",
+      "subject_slug": "george-washington-carver",
+      "subject_status": "unauthored",
+      "subject_uid": "person-acbe73e3f04002f7",
+      "team_card": "农林牧渔师/george-washington-carver/team-card.json",
+      "user_value": [
+        "Gives steps a reader can actually run, with the bulletin number and year to check them against",
+        "Refuses to supply a percentage or a classification it cannot source, and says so plainly",
+        "Separates what he wrote from what a biographer said he said — only the 1921 transcript is his own words",
+        "Measured against a bare-model baseline it adds most where sourcing and restraint are required, and near nothing where the bare model already knows the answer (identity-routing +0.010)"
+      ],
+      "version_count": 1
+    },
     {
       "application_scenarios": [
         "food-regulation-response",
