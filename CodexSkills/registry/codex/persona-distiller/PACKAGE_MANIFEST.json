@@ -16,8 +16,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "0fb6284eced717ee185ec6c295538544ed6c04353ea5169d3bb9a13e6d49af2e",
-      "size_bytes": 168302
+      "sha256": "0c7f7767cb9e968ed267d08ec6f73de73172854e4dd107fdb19b14ab1c3d74e8",
+      "size_bytes": 169400
     },
     {
       "path": "CONTRIBUTING.md",
@@ -1246,8 +1246,8 @@
     },
     {
       "path": "scripts/init_target.py",
-      "sha256": "017f12ac37fbbee7ddcbcbdc1f60d53cf4498ae2d886aef38639bbd4a0e2b6de",
-      "size_bytes": 11747
+      "sha256": "99e6b5335ea5dafbbfcdd97bc7782e8c689ecfd5ca77e9395be9dfc0f618a7ff",
+      "size_bytes": 12128
     },
     {
       "path": "scripts/install.ps1",
