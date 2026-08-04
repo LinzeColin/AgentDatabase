@@ -156,6 +156,25 @@ def _authority_tiers(registry_path: Path | None) -> dict[str, dict[str, Any]]:
     }
 
 
+def capture_freshness_target(registry_path: Path | None = None, *, default: int = 1800) -> int:
+    """How long the data may be old before that is worth reporting.
+
+    It used to be a hard-coded 1800 seconds against a pipeline that captures
+    once a day, so STALE was the permanent state and the signal said nothing.
+    The cadence is declared in the registry from the automation that actually
+    runs the capture, and the target is cadence plus grace. Missing or malformed
+    declaration falls back to the old default rather than inventing a wider one.
+    """
+    path = registry_path or DEFAULT_SOURCE_REGISTRY
+    try:
+        payload = json.loads(Path(path).read_text(encoding="utf-8"))
+        cadence = payload.get("source_capture_cadence") or {}
+        target = int(cadence.get("freshness_target_seconds") or 0)
+        return target if target > 0 else default
+    except Exception:
+        return default
+
+
 def cloud_native_authorities(
     *,
     objects: Iterable[object],
@@ -165,6 +184,7 @@ def cloud_native_authorities(
     observed_at: str,
     registry_path: Path | None = None,
     canonical: Mapping[str, Any] | None = None,
+    migration: Mapping[str, Any] | None = None,
 ) -> list[dict[str, Any]]:
     """Tier A rows, every state derived from something this run actually read.
 
@@ -179,6 +199,20 @@ def cloud_native_authorities(
     delta = [row for row in rows if row.get("object_key") == normalized_batch_key] if normalized_batch_key else []
     canonical = canonical or {}
     canonical_ready = str(canonical.get("state", "")) == "READY"
+    # An R2 row may be reported as MIGRATED rather than FAILED only when this
+    # run proved every one of its objects is covered elsewhere: the canonical
+    # union for the event stream, and the encrypted per-run backup for the
+    # source store. Without that proof a drained bucket is still a failure —
+    # otherwise "we moved it" becomes an excuse for data that simply vanished.
+    migration = migration or {}
+    covered = int(migration.get("migrated_to_github_objects") or 0) + int(migration.get("canonical_covered_objects") or 0)
+    declared = int(migration.get("manifest_object_count") or 0)
+    r2_migrated = bool(
+        canonical_ready
+        and declared
+        and covered >= declared
+        and str((migration.get("github_backup_coverage") or {}).get("state")) == "COVERED"
+    )
 
     measured = {
         "r2_primary_objects": (bool(rows), _object_readback_ok(rows), len(rows), sum(int(row.get("size_bytes", 0) or 0) for row in rows)),
@@ -201,6 +235,9 @@ def cloud_native_authorities(
     out: list[dict[str, Any]] = []
     for source_id, (present, healthy, count, size) in measured.items():
         spec = tiers.get(source_id, {})
+        state = "READY" if present and healthy else ("FAILED" if present else "MISSING")
+        if state == "FAILED" and r2_migrated and source_id.startswith("r2_"):
+            state = "MIGRATED"
         out.append(
             {
                 "source_id": source_id,
@@ -208,7 +245,7 @@ def cloud_native_authorities(
                 "tier": "A_CLOUD_NATIVE",
                 "required_for_capture": bool(spec.get("required_for_capture", True)),
                 "required_for_product": bool(spec.get("required_for_product", True)),
-                "state": "READY" if present and healthy else ("FAILED" if present else "MISSING"),
+                "state": state,
                 "object_count": count,
                 "size_bytes": size,
                 "last_observed_at": observed_at,
@@ -518,7 +555,8 @@ class LiveSnapshotPublisherMixin:
                 else {"benchmarks": [], "comparable": False}
             )
             snapshot = build_live_snapshot(
-                private_snapshot, visual, runtime_evidence, benchmark, evaluated_at=self.clock()
+                private_snapshot, visual, runtime_evidence, benchmark, evaluated_at=self.clock(),
+                freshness_target_seconds=capture_freshness_target(self.config.source_registry),
             )
             store = LiveSnapshotStore(self.config.web_data_dir / "live-snapshot", schema)
             published = store.publish(snapshot)
@@ -1126,6 +1164,12 @@ class RemoteReconcilePipeline(LiveSnapshotPublisherMixin):
                     observed_at=str(latest.get("completed_at") or reconciled_at),
                     registry_path=self.config.source_registry,
                     canonical=canonical.to_fact(),
+                    migration={
+                        "manifest_object_count": len([row for row in objects if isinstance(row, dict)]),
+                        "canonical_covered_objects": len(superseded) + r2_verified,
+                        "migrated_to_github_objects": len(migrated),
+                        "github_backup_coverage": backup_coverage.to_fact(),
+                    },
                 ),
                 "same_run_evidence": same_run_evidence_rows(
                     run_id=run_id,

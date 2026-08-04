@@ -211,6 +211,10 @@
             "unknown": {
               "type": "integer",
               "minimum": 0
+            },
+            "migrated": {
+              "type": "integer",
+              "minimum": 0
             }
           }
         },
@@ -247,6 +251,10 @@
               "minimum": 0
             },
             "unknown": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "migrated": {
               "type": "integer",
               "minimum": 0
             }
@@ -295,7 +303,8 @@
                   "STALE",
                   "MISSING",
                   "FAILED",
-                  "UNKNOWN"
+                  "UNKNOWN",
+                  "MIGRATED"
                 ]
               },
               "object_count": {

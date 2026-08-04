@@ -610,3 +610,113 @@ def test_a_conflict_names_the_part_that_differs(tmp_path) -> None:
     rewritten["analysis"]["event_count"] = 999
     with pytest.raises(Exception, match=r"immutable history conflict: analysis\.event_count"):
         store.publish(rewritten)
+
+
+# --- Two labels that made "unusable" a permanent state ------------------------
+
+def test_freshness_target_comes_from_the_declared_capture_cadence() -> None:
+    """1800 seconds against a once-a-day capture meant STALE ~98% of the time,
+    so the freshness signal carried no information at all."""
+    from OpenAIDatabase.scripts.memory_atlas_private.pipeline import capture_freshness_target
+
+    registry = json.loads(REGISTRY.read_text(encoding="utf-8"))
+    cadence = registry["source_capture_cadence"]
+    assert cadence["rrule"] == "FREQ=DAILY;BYHOUR=3;BYMINUTE=0"
+    assert cadence["cadence_seconds"] == 86400
+    assert cadence["freshness_target_seconds"] == cadence["cadence_seconds"] + cadence["grace_seconds"]
+    assert capture_freshness_target(REGISTRY) == cadence["freshness_target_seconds"]
+    # A missing or malformed declaration must not silently widen the window.
+    assert capture_freshness_target(Path("/does/not/exist.json")) == 1800
+
+
+def test_a_capture_that_missed_its_slot_is_still_stale() -> None:
+    """The widened target is not a licence. Two missed daily runs must still
+    read as STALE — that is the whole point of the signal."""
+    private = _private()
+    private["run"] = _run_block()
+    two_days_late = build_live_snapshot(
+        private, _visual(), _evidence(), _benchmark(), evaluated_at="2026-08-05T12:00:00Z",
+        freshness_target_seconds=97_200,
+    )
+    assert two_days_late["freshness"]["state"] == "STALE"
+    assert two_days_late["coverage"]["product_state"] == "DEGRADED"
+    on_time = build_live_snapshot(
+        private, _visual(), _evidence(), _benchmark(), evaluated_at="2026-08-04T02:00:00Z",
+        freshness_target_seconds=97_200,
+    )
+    assert on_time["freshness"]["state"] == "FRESH"
+    assert on_time["coverage"]["product_state"] == "PASS"
+
+
+MIGRATION_PROVEN = {
+    "manifest_object_count": 2302,
+    "canonical_covered_objects": 1,
+    "migrated_to_github_objects": 2301,
+    "github_backup_coverage": {"state": "COVERED"},
+}
+
+
+def _migrated_authorities(**overrides):
+    return cloud_native_authorities(
+        objects=[BROKEN_OBJECT], normalized_batch_key=BROKEN_OBJECT["object_key"],
+        private_database_paths=["memory-atlas/runs/latest.json"],
+        github_release={"schema_version": "memory_atlas.encrypted_archive_manifest.v1", "files": [{}]},
+        observed_at="2026-08-03T10:15:00Z", registry_path=REGISTRY, canonical=CANONICAL_READY,
+        migration={**MIGRATION_PROVEN, **overrides},
+    )
+
+
+def _row(rows, source_id):
+    return next(row for row in rows if row["source_id"] == source_id)
+
+
+def test_a_drained_bucket_with_proof_is_migrated_not_failed() -> None:
+    """R2 was drained on purpose. Reporting it FAILED forever made the product
+    permanently DEGRADED for a state that is exactly as designed."""
+    rows = _migrated_authorities()
+    assert _row(rows, "r2_primary_objects")["state"] == "MIGRATED"
+    assert _row(rows, "r2_normalized_events")["state"] == "MIGRATED"
+    # The authority that actually holds the bytes is unaffected.
+    assert _row(rows, "github_canonical_events")["state"] == "READY"
+
+
+@pytest.mark.parametrize(
+    "broken",
+    [
+        {"migrated_to_github_objects": 0},                      # nothing was covered
+        {"manifest_object_count": 9000},                        # the count does not add up
+        {"github_backup_coverage": {"state": "ABSENT"}},        # the archive is gone
+        {"github_backup_coverage": {"state": "INSUFFICIENT"}},  # the archive is short
+    ],
+)
+def test_without_per_object_proof_a_drained_bucket_is_still_failed(broken: dict) -> None:
+    """"We moved it" has to be shown. Otherwise it becomes an excuse for data
+    that simply vanished — which is the exact failure this path must catch."""
+    rows = _migrated_authorities(**broken)
+    assert _row(rows, "r2_primary_objects")["state"] == "FAILED"
+
+
+def test_migrated_sources_do_not_degrade_the_product() -> None:
+    evidence = _evidence(cloud_native_sources=_migrated_authorities())
+    private = _private()
+    private["run"] = _run_block()
+    snapshot = build_live_snapshot(
+        private, _visual(), evidence, _benchmark(), evaluated_at="2026-08-03T10:20:00Z",
+        freshness_target_seconds=97_200,
+    )
+    assert snapshot["coverage"]["product_state"] == "PASS"
+    assert snapshot["coverage"]["tier_a_cloud_native"]["migrated"] == 2
+    assert snapshot["coverage"]["tier_a_cloud_native"]["failed"] == 0
+    assert {row["state"] for row in snapshot["coverage"]["sources"] if row["source_id"].startswith("r2_")} == {"MIGRATED"}
+
+
+def test_a_genuinely_failed_source_still_degrades() -> None:
+    # The migration path must not become a blanket amnesty.
+    evidence = _evidence(cloud_native_sources=_migrated_authorities(migrated_to_github_objects=0))
+    private = _private()
+    private["run"] = _run_block()
+    snapshot = build_live_snapshot(
+        private, _visual(), evidence, _benchmark(), evaluated_at="2026-08-03T10:20:00Z",
+        freshness_target_seconds=97_200,
+    )
+    assert snapshot["coverage"]["product_state"] == "DEGRADED"

@@ -60,6 +60,13 @@ function Heatmap({ visual }: { visual: Visual }) {
   })}</tbody></table></div>;
 }
 
+/** Ready plus migrated: a source whose bytes moved somewhere else by design,
+ *  proven per object, is accounted for — counting it as a gap made the ribbon
+ *  read 4/5 forever for a state that is exactly as intended. */
+function settled(counts: Record<string, number>): number {
+  return (counts.ready ?? 0) + (counts.migrated ?? 0);
+}
+
 export function RealityCalibrationPanel() {
   const { snapshot, lifecycle, error, clientReceivedAt, refresh } = useLiveSnapshot();
   if (!snapshot) return <section className="ma-reality-panel ma-loading" aria-live="polite"><h2>正在读取现实校准快照</h2><p>{error || "只接受完成态、同次运行且通过隐私校验的数据。"}</p><button type="button" onClick={() => void refresh()}>重新读取</button></section>;
@@ -73,7 +80,7 @@ export function RealityCalibrationPanel() {
       {(["primary_use","verified_results","low_value_loop","top_action"] as const).map((key) => <article className={`ma-answer ${key === "top_action" ? "ma-answer-action" : ""}`} key={key}><p>{({primary_use:"主要用途",verified_results:"现实结果",low_value_loop:"最大缺口",top_action:"今天唯一动作"} as const)[key]}</p><h3>{snapshot.decision[key].title_zh}</h3><span>{snapshot.decision[key].detail_zh}</span></article>)}
     </div>
     <div className="ma-truth-ribbon" aria-label="数据真值带">
-      <span><b>运行</b>{snapshot.run.run_id}</span><span><b>追踪</b>{snapshot.run.trace_id}</span><span><b>数据截止</b>{snapshot.run.source_completed_at}</span><span><b>年龄</b>{snapshot.freshness.age_seconds}s</span><span><b>Tier A</b>{snapshot.coverage.tier_a_cloud_native.ready}/{snapshot.coverage.tier_a_cloud_native.total}</span><span><b>Tier B</b>{snapshot.coverage.tier_b_local_optional.ready}/{snapshot.coverage.tier_b_local_optional.total}</span><span><b>发布</b>{snapshot.release.release_id ?? "未验证"}</span><span><b>部署</b>{snapshot.release.deployment_revision ?? "未验证"}</span><span><b>浏览器收到</b>{clientReceivedAt?.toISOString() ?? "—"}</span>
+      <span><b>运行</b>{snapshot.run.run_id}</span><span><b>追踪</b>{snapshot.run.trace_id}</span><span><b>数据截止</b>{snapshot.run.source_completed_at}</span><span><b>年龄</b>{snapshot.freshness.age_seconds}s</span><span><b>Tier A</b>{settled(snapshot.coverage.tier_a_cloud_native)}/{snapshot.coverage.tier_a_cloud_native.total}</span><span><b>Tier B</b>{settled(snapshot.coverage.tier_b_local_optional)}/{snapshot.coverage.tier_b_local_optional.total}</span><span><b>发布</b>{snapshot.release.release_id ?? "未验证"}</span><span><b>部署</b>{snapshot.release.deployment_revision ?? "未验证"}</span><span><b>浏览器收到</b>{clientReceivedAt?.toISOString() ?? "—"}</span>
     </div>
     <div className="ma-metrics" data-oracle="event_count" data-oracle-value={snapshot.analysis.event_count}>
       <MetricCard metric={snapshot.analysis.verified_outcome_rate_event} oracle="verified_outcome_rate_event" />

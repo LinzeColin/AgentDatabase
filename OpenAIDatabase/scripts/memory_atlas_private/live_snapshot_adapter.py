@@ -21,13 +21,18 @@ def _dt(value: object, field: str) -> datetime:
 def _state(value: object) -> str:
     raw=str(value or 'UNKNOWN')
     if raw=='READY': return 'READY'
+    # A source drained on purpose, whose objects are provably covered by another
+    # authority, is not a gap. The producer may only emit this state with
+    # per-object coverage evidence; without it the row stays FAILED, because
+    # "we moved it" has to be shown rather than assumed.
+    if raw=='MIGRATED': return 'MIGRATED'
     if raw in {'MISSING','MISSING_REQUIRED','MISSING_OPTIONAL','EMPTY'}: return 'MISSING'
     if raw in {'FAILED','UNREADABLE'}: return 'FAILED'
     if raw=='STALE': return 'STALE'
     return 'UNKNOWN'
 
 def _counts(rows: list[dict[str,Any]]) -> dict[str,int]:
-    out={'ready':0,'total':len(rows),'stale':0,'missing':0,'failed':0,'unknown':0}
+    out={'ready':0,'total':len(rows),'stale':0,'missing':0,'failed':0,'unknown':0,'migrated':0}
     for row in rows: out[row['state'].lower()]+=1
     return out
 
@@ -100,13 +105,18 @@ def build_live_snapshot(private_snapshot: Mapping[str,Any], visual_analytics: Ma
     required=[row for row in tier_a+tier_b if row['required_for_product']]
     optional=[row for row in tier_a+tier_b if not row['required_for_product']]
     required_failed=[row for row in required if row['state']=='FAILED']
-    required_bad=[row for row in required if row['state']!='READY']
-    optional_bad=[row for row in optional if row['state']!='READY']
+    # MIGRATED counts as accounted-for on both sides: the bytes are somewhere
+    # else and this run proved it per object.
+    settled={'READY','MIGRATED'}
+    required_bad=[row for row in required if row['state'] not in settled]
+    optional_bad=[row for row in optional if row['state'] not in settled]
     if required_bad:
         product_state='FAILED' if required_failed else 'DEGRADED'; fresh_state='DEGRADED'
         reason='至少一个产品必需的云端权威不可用：'+'、'.join(sorted(row['label_zh'] for row in required_bad))+'；系统不能宣称最新。'
     elif age>freshness_target_seconds:
-        product_state='DEGRADED'; fresh_state='STALE'; reason=f'最近成功源运行已超过 {freshness_target_seconds} 秒新鲜度目标。'
+        product_state='DEGRADED'; fresh_state='STALE'
+        reason=(f'最近成功源运行已超过 {freshness_target_seconds} 秒新鲜度目标'
+                f'（按声明的采集节奏推导，不是固定值）；这意味着按计划的采集没有按时到达。')
     elif optional_bad:
         product_state='DEGRADED'; fresh_state='DEGRADED'
         reason='云端必需权威可用，但以下来源未更新：'+'、'.join(sorted(row['label_zh'] for row in optional_bad))+'；相关指标按陈旧处理。'

@@ -104,6 +104,7 @@ export const machineTokenLabels: Record<string, string> = {
   READY: "就绪",
   MISSING: "缺失",
   MISSING_OPTIONAL: "缺失（非必需）",
+  MIGRATED: "已迁移",
   UNREADABLE: "不可读",
   FAILED: "失败",
   REBUILT_FROM_AUTHORITIES: "已按权威源重建",

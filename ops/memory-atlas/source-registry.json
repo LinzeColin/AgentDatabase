@@ -210,5 +210,15 @@
     "reason_zh": "R2 接近存储上限并带来收费风险，全量全时与主力数据压力整体转移到 GitHub 私有仓。",
     "cloudflare_role_zh": "只做入口与访问控制，不承担数据存量。",
     "ovh_role_zh": "只做计算与呈现，不承担数据存量。"
+  },
+  "source_capture_cadence": {
+    "schema_version": "memory_atlas.capture_cadence.v1",
+    "runner": "Codex automation memory-atlas-daily-source-capture",
+    "rrule": "FREQ=DAILY;BYHOUR=3;BYMINUTE=0",
+    "cadence_seconds": 86400,
+    "grace_seconds": 10800,
+    "freshness_target_seconds": 97200,
+    "reason_zh": "采集由 Codex automation 每天 03:00 跑一次，单批合同上限 90 分钟。以 30 分钟为目标会让页面 98% 的时间都是 STALE，这个信号就没有信息了。目标 = 节奏 24 小时 + 宽限 3 小时；超过它意味着「今天这一跑没来」，那是真的要看。",
+    "not_a_license_zh": "这不是把红改绿：改完当前仍是 STALE，因为 2026-08-04 与 08-05 的 03:00 两次都没跑。"
   }
 }
