@@ -4,7 +4,7 @@
   "display_name": "人物蒸馏 Skill / Persona Distiller",
   "distribution": {
     "canonical_registry": "../persona-distiller-group",
-    "kind": "repository-customized-v0.0.0.80",
+    "kind": "repository-customized-v0.0.0.81",
     "lineage_base_archive_sha256": "e891912d98d14afb7677ac935a19be329d97d206f4ae74a644892f46b17f6748"
   },
   "evaluation_suites": 16,
@@ -16,8 +16,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "63a318c5ee6c34f126b99eb13e49d26fa6498a98c2391cabd8f8172da2f663ae",
-      "size_bytes": 147289
+      "sha256": "aec5a3629cc7f0ca42a48aa96194459c621c3a421ed833b772ff38616c1e09ae",
+      "size_bytes": 151386
     },
     {
       "path": "CONTRIBUTING.md",
@@ -31,7 +31,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "65cd0e5f8994c2530ba4f34f29b942947bdfc81bf2b6755d72947cb7e8f50eb6",
+      "sha256": "e458dc9ee1fc469c1bc3f271dde62c579b21ea2c16c2a870df12778fd231cf7b",
       "size_bytes": 8802
     },
     {
@@ -56,12 +56,12 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "7aa04bb2ddba77cf4dcdfb9985501645b8e4d90d41da01c636d682176a6d56b2",
-      "size_bytes": 93259
+      "sha256": "c4e72fb9fe37e91d66ecfad6328a9a66e4f22e9afd7cf4702b377257a1244335",
+      "size_bytes": 95643
     },
     {
       "path": "VERSION",
-      "sha256": "0087e16b0d299c0ba56369d75996b7a1d4c78267a08ac88c2400d8bb340c4612",
+      "sha256": "80784adc72955befe1d92700593ab2dfbe1b938df53aaf607b827a89b4f9dffe",
       "size_bytes": 10
     },
     {
@@ -121,7 +121,7 @@
     },
     {
       "path": "handoff.md",
-      "sha256": "8446694253862af273fe0c7ed0ba86c62e150ef46f443c1cba43a72cfe112e5e",
+      "sha256": "8a1f60df8582242f4838b3c75d7080cf8d5d131716e1b10f926b1bc838cd13d2",
       "size_bytes": 3702
     },
     {
@@ -141,7 +141,7 @@
     },
     {
       "path": "manifest.json",
-      "sha256": "626cf6a91b2a2995d0c74ca9d9e81dcc762bc448022aef5fbecaa02f7b3be9bf",
+      "sha256": "6d6d59c241f4c64439de0deefd7f3040c42134509a9c502b009195f61dfe2a3c",
       "size_bytes": 1191
     },
     {
@@ -376,8 +376,8 @@
     },
     {
       "path": "references/ledgers/_每次开工必读.md",
-      "sha256": "ff47580a07b978ca1c35b7d6082456d10e55c11b0963594d4029e9f5ed5724e5",
-      "size_bytes": 48440
+      "sha256": "b9fbfea27932c09741ef5aa641fb2ea652faba9e4b85d5ba4b8334f0a8d5d807",
+      "size_bytes": 50433
     },
     {
       "path": "references/ledgers/_蒸馏名单_v1草稿.md",
@@ -1786,5 +1786,5 @@
     },
     "secret_findings": 0
   },
-  "version": "v0.0.0.80"
+  "version": "v0.0.0.81"
 }
