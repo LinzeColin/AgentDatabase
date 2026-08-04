@@ -51,6 +51,7 @@ import json
 import pathlib
 import re
 import sys
+import zlib
 
 SHINGLE = 8
 DUP_THRESHOLD = 0.30
@@ -59,9 +60,31 @@ MULTI_SOURCE_CATEGORIES = {"mental-model", "heuristic", "value", "work-method",
                            "blind-spot", "contradiction"}
 
 
+# ★ 确定性采样：只保留哈希落在 1/SAMPLE 的片。
+#   两两比对是 O(n²)，而本人物 89 份源里最大的一份有 40 万个片——
+#   **第一版接进门之后 release 与 synthesis 双双超时（>2 分钟）。**
+#   一道跑不完的门等于没有门。
+#   采样是无偏的：分子分母同样被抽稀，比值的期望不变；
+#   `SAMPLE=8` 下最小的源仍留下上百个片，够判。
+SAMPLE = 8
+
+
 def shingles(text: str, n: int = SHINGLE) -> set:
+    """→ 采样后的 n 词片集合。
+
+    ★★ **必须用确定性哈希。** 第一版用了内建 `hash()`——
+    Python 对 tuple/str 的 `hash()` **带每进程随机种子**（PYTHONHASHSEED），
+    实测同一个 `('a','b')` 两次进程给出 -112675601284210612 与 -2838368082701080650。
+    那样采样不可复现：**同一份语料两次跑能给出不同结论**。
+    `zlib.crc32` 无种子、跨进程稳定。
+    """
     w = WORD.findall(text.lower())
-    return {tuple(w[i:i + n]) for i in range(len(w) - n + 1)}
+    out = set()
+    for i in range(len(w) - n + 1):
+        s = tuple(w[i:i + n])
+        if zlib.crc32(" ".join(s).encode()) % SAMPLE == 0:
+            out.add(s)
+    return out
 
 
 def overlap(a: set, b: set) -> float:

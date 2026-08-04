@@ -24,8 +24,8 @@
 | `src-4d9a945a3461` | P1 | Elizabeth Blackwell Papers: Diary, 1894-1896 |
 | `src-fa9323450221` | P1 | Elizabeth Blackwell Papers: Diary, 1897-1899 |
 | `src-b257d99583e6` | P1 | Elizabeth Blackwell Papers: Diary, 1906-1908 |
-| `src-3ca4b3b30964` | P1 | Elizabeth Blackwell Papers: Diary, 未系年 |
 | `src-a9a8aec383d8` | P1 | Elizabeth Blackwell Papers: Bibliography |
+| `src-3ca4b3b30964` | U | Elizabeth Blackwell Papers: Diary, 未系年 |
 
 ---
 

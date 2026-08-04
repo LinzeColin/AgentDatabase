@@ -145,8 +145,17 @@ DIARIES = [
  ("962", "1881,1883", 26031), ("963", "1885-1887", 42441), ("964", "1888-1890", 33580),
  ("965", "1891-1893", 28404), ("966", "1894-1896", 24617), ("967", "1897-1899", 34197),
  ("968", "1900-1902", 31528), ("969", "1903-1905", 43428), ("970", "1906-1908", 25681),
- ("971", "未系年", 1200),
+ # ★ 971 单独处理，见 UNDATED_NOTE：**不是损毁，是旅费清单**
 ]
+UNDATED = ("971", "未系年", 1200)
+UNDATED_NOTE = (
+ "★★ **降级为 U，但不是因为损毁。** `check_ocr_language_death` 报它虚词占比 0.092、"
+ "判为「已毁的文件被记作 P1」——**那是该判据自己列明的假阳 ②（索引/表格天然没有虚词）**。"
+ "人工看过：本件是**旅费清单**（`Paris — Hotel de Faueille - 6 Rue Castiglione - 10 frs par jour`、"
+ "`Lucerne. Pension Luter 5.50.8`、`Milano. Hotel Grande Bretagne. 45 Via Torino ... 12 frs per day`），"
+ "文本完好、确是她的手笔。"
+ "**降级的真实理由是：1,031 词全是旅馆与价钱，对六条道没有任何实质贡献，不宜作一手源。**"
+ "照判据给的第二条出路（「降级不作一手源」）处理，**不假称它损毁**。")
 
 # ── D. LoC 讲稿/文章/书稿 33 份（干净者）──────────────────────
 #   道按内容分：手稿散文归 writings；诗、故事翻译、少年习作、演讲笔记归 expression；
@@ -330,13 +339,16 @@ def main() -> int:
     for short, f, url, title, year, loc, tier, mark, lane, why in LETTERS:
         if put(short, f):
             lines.append(row(short, url, title, year, loc, "en", tier, mark, lane, why, RIGHTS_LET))
-    for n, span, words in DIARIES:
+    for n, span, words in DIARIES + [UNDATED]:
         short = f"diary-{span.replace(',', '-')}-mss{n}"
         if put(short, f"diary_{mss(n)}.txt"):
+            _u = (n == "971")
             lines.append(row(short, LOC.format(mss(n)),
                              f"Elizabeth Blackwell Papers: Diary, {span}", span.split("-")[0],
                              f"folder {mss(n)}，众包**人工转写**（非 OCR），{words:,} 词",
-                             "en", "P1", "HIS-OWN", "timeline",
+                             "en", "U" if _u else "P1",
+                             "ATTRIBUTION-UNCLEAR" if _u else "HIS-OWN", "timeline",
+                             UNDATED_NOTE if _u else
                              "归属（全组共用）：`Emily` 通篇出现、`Kitty`（养女 Kitty Barry）高频、"
                              "`N.Y. Infirmary` 见于 967/968/969 册；1836 年册首页自题 "
                              "`Private Journal. Elizabeth`", RIGHTS_MSS))
