@@ -4,7 +4,7 @@
   "display_name": "人物蒸馏 Skill / Persona Distiller",
   "distribution": {
     "canonical_registry": "../persona-distiller-group",
-    "kind": "repository-customized-v0.0.0.131",
+    "kind": "repository-customized-v0.0.0.132",
     "lineage_base_archive_sha256": "e891912d98d14afb7677ac935a19be329d97d206f4ae74a644892f46b17f6748"
   },
   "evaluation_suites": 16,
@@ -16,8 +16,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "0923eb63e8904275107666d8a559b9d9542440472dceb69c5fd8d23dab97efb9",
-      "size_bytes": 253884
+      "sha256": "6a2d366e75118e7b11baa4863113602495a6b040d2898c1be11455d5423088e7",
+      "size_bytes": 257009
     },
     {
       "path": "CONTRIBUTING.md",
@@ -31,7 +31,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "52c39e881db6452767b5f6980045b34fa749fde2ddd35184d2853a02e625c795",
+      "sha256": "5d24047493cff01a3c0f4f1cc56e8baed9fb7dd11309cd34b0aa14ab490e072c",
       "size_bytes": 8803
     },
     {
@@ -56,12 +56,12 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "6bf2581bd212fa985b42e41a66754474b6e5b35f2bf9559b63b6bf9635b642a5",
-      "size_bytes": 115993
+      "sha256": "0454e07e1057ee0537865b505d777b5d27f85ea1f0411c6199aa432c4dcfe264",
+      "size_bytes": 116948
     },
     {
       "path": "VERSION",
-      "sha256": "38b1c89bec2c387c3d88a44fafcf31245a7a6f89c3f11b7099d2142b958b3aa1",
+      "sha256": "641d88859a35228560bf965bd171660a0f4934b3d32bb5d86b7499c351e08b41",
       "size_bytes": 11
     },
     {
@@ -121,7 +121,7 @@
     },
     {
       "path": "handoff.md",
-      "sha256": "ada51ffec6d2d3c1286e67fb3276c273912a67d835a1913be08ad0a17b320d7e",
+      "sha256": "2cea28ba944cb4b97a7704f8ad1d1cd3d4972c3633286eab422223775f3cf80a",
       "size_bytes": 3703
     },
     {
@@ -141,7 +141,7 @@
     },
     {
       "path": "manifest.json",
-      "sha256": "4beb44c792b82776bc24bba874e271883009aaefa0a208e71725d641499c838d",
+      "sha256": "49b2573586ea1a6f2fd90ace87d3bf3549c02c172a30f81ec81466aff20235d2",
       "size_bytes": 1192
     },
     {
@@ -376,8 +376,8 @@
     },
     {
       "path": "references/ledgers/_待用户裁定.md",
-      "sha256": "6e333d84334bc5cb62fbe622595e8a573eaa8d25d496f373284f1a97d36b169d",
-      "size_bytes": 76814
+      "sha256": "1e1aa0e850106644254140cb7faccf546c7df2cb3a85f37e0f3fd6bae1110c6b",
+      "size_bytes": 77763
     },
     {
       "path": "references/ledgers/_每次开工必读.md",
@@ -456,8 +456,8 @@
     },
     {
       "path": "references/pipeline/checkers/build_blind_payload.py",
-      "sha256": "f90b13e64da9d5ea6f65a3192f2c52166e37bc847c9d1f369a33fa8c0ca6ced4",
-      "size_bytes": 21396
+      "sha256": "4b2fd0b7c41315d213ce67cdc8131930d703fb18a657b849a2cb1e69740f4067",
+      "size_bytes": 21730
     },
     {
       "path": "references/pipeline/checkers/build_source_ledger.py",
@@ -491,8 +491,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_answer_surface_leak.py",
-      "sha256": "428ac2b5da7dfee11a35de9e8239ccd32bbb645ec22bcf80753c63b014f0d608",
-      "size_bytes": 19911
+      "sha256": "bc6350d8edb0b66c88bcd3095f10742d0aa6ef146945e9dd67fe102ae9b10ef9",
+      "size_bytes": 24044
     },
     {
       "path": "references/pipeline/checkers/check_asked_verbatim_got_pointer.py",
@@ -1001,8 +1001,8 @@
     },
     {
       "path": "scripts/build_blind_payload.py",
-      "sha256": "f90b13e64da9d5ea6f65a3192f2c52166e37bc847c9d1f369a33fa8c0ca6ced4",
-      "size_bytes": 21396
+      "sha256": "4b2fd0b7c41315d213ce67cdc8131930d703fb18a657b849a2cb1e69740f4067",
+      "size_bytes": 21730
     },
     {
       "path": "scripts/build_manifest.py",
@@ -1051,8 +1051,8 @@
     },
     {
       "path": "scripts/check_answer_surface_leak.py",
-      "sha256": "428ac2b5da7dfee11a35de9e8239ccd32bbb645ec22bcf80753c63b014f0d608",
-      "size_bytes": 19911
+      "sha256": "bc6350d8edb0b66c88bcd3095f10742d0aa6ef146945e9dd67fe102ae9b10ef9",
+      "size_bytes": 24044
     },
     {
       "path": "scripts/check_asked_verbatim_got_pointer.py",
@@ -1981,5 +1981,5 @@
     },
     "secret_findings": 0
   },
-  "version": "v0.0.0.131"
+  "version": "v0.0.0.132"
 }

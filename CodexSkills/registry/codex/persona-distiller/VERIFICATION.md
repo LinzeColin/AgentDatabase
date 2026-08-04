@@ -1,6 +1,6 @@
-# Release verification — Persona Distiller v0.0.0.131
+# Release verification — Persona Distiller v0.0.0.132
 
-Date: 2026-08-05（**v0.0.0.131**）
+Date: 2026-08-05（**v0.0.0.132**）
 
 > **本文件记录「当前发布号的复验结果」，不是历史归档。**
 > 版本号必须等于根目录 `VERSION`，由 `scripts/check_contract_drift.py` 强制。
@@ -21,6 +21,22 @@ Date: 2026-08-05（**v0.0.0.131**）
 > **表格正文不在任何判据的射程里**。
 > **「本表每一行都来自本次实跑」是一句自述**——
 > 而自述不是证据（见 `self-report-is-not-evidence`）。
+
+> ### v0.0.0.132 这一版重跑了什么
+>
+> **长度门对 `bare-model-run` 基线只报不拦（用户裁定 ⑭）。**
+> **本次重跑**：`check_answer_surface_leak` 自测（**新增 5 条射程对照**：
+> `self-authored`/`unknown` 各拦 2 条、`bare-model-run` 拦 0 条、
+> 格式通道对裸模型**仍拦 1 条**、`_soft_length` 仍带 2 条）、
+> `build_blind_payload` 自测、
+> **Carver 第 3 轮载荷实跑**（长度 0.47／14 of 16 **只报不拦**；
+> 空行分段经两侧同做归一后 88% → **0%**；格式四条全 0%）、
+> **两侧空行归一的非空白字符逐题断言**、
+> `finalize_release.py` 四步。**其余各行沿用 v0.0.0.96 那一次。**
+>
+> ★★★ **本版记住的一句**：已入库 100+ 人全是 `self-authored-strawman`，
+> 而那**恰是唯一能同时过 provenance 与 leak 两道门的基线类型**——
+> **盲判门一直是靠「基线也是我写的」才过得去的。**
 
 > ### v0.0.0.131 这一版重跑了什么
 >
