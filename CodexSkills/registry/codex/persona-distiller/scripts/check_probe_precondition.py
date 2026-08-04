@@ -86,7 +86,11 @@ def load_years(path: pathlib.Path) -> dict:
         return {}
     out = {}
     for name, rec in (raw or {}).items():
-        if isinstance(rec, dict) and rec.get("source") and rec.get("died") is not None:
+        # ★★ v0.0.0.99：**在世的人（died 为 null）以前在这里就被丢掉了**，
+        #   于是下游只能报「没有卒年」——把一条已知（在世）讲成了未知。
+        #   现在保留「有 source 且（有卒年 或 明确标了 alive）」的。
+        if isinstance(rec, dict) and rec.get("source") and (
+                rec.get("died") is not None or rec.get("alive") is True):
             out[name.strip().lower()] = rec
     return out
 
@@ -126,6 +130,16 @@ def verdict(entry, probes, years=None):
         return True, "已有可得性探测产物：" + "、".join(probes)
     if isinstance(died, int):
         return False, f"卒于 {died}（≥ {CUTOFF}）而**没有探测产物**——先探再抓"
+    # ★★ v0.0.0.99：**「在世」与「不知道」不是同一件事**，虽然两者都要探。
+    #   在世（有出处）是一条**更强的已知**：著作必然在保护期内，**而且没有到期日**
+    #   ——Watson #116 正是因此被延后（1976 年法终身+70，无须续展、无从漏续展）。
+    #   把它说成「没有卒年」，等于把一条已知讲成未知。
+    if (entry.get("alive") is True or ext.get("alive") is True) and ext.get("source"):
+        return False, ("**在世（卒年表有出处）**——著作必然在保护期内，**而且没有到期日**"
+                       "（不像「版权在保护期内」那一类还等得到）。仍要探，"
+                       "但探之前先想清楚**要的是他哪一个声音**"
+                       "——Gawande #120 的 §105 语料 26,005 字全是公务散文，"
+                       "而值得建模的那个声音一个字都取不到。")
     return False, ("**队列里没有卒年**——按默认方向当作「需要探测」。"
                    "**判据不许替你猜卒年；缺就是缺，缺就要探。**")
 
@@ -157,6 +171,33 @@ def selftest() -> int:
     ok, why = verdict({"name": "Peplau", "died": 1999}, ["wip-peplau-114/VERDICT.md"])
     print(f"    {why}")
     chk("有 VERDICT.md → 放行", ok)
+
+    print("── ★★★ 反向对照 ⑤a：**走完整路径**（load_years → verdict），不许绕过加载器 ──")
+    import tempfile as _tf, json as _j
+    with _tf.TemporaryDirectory() as _d:
+        _f = pathlib.Path(_d) / "y.json"
+        _f.write_text(_j.dumps({
+            "活着的": {"name": "活着的", "alive": True, "died": None, "source": "Wikidata Qx（无 P570）"},
+            "死了的": {"name": "死了的", "died": 1900, "source": "Wikidata Qy"},
+            "没出处的": {"name": "没出处的", "alive": True},
+        }, ensure_ascii=False), encoding="utf-8")
+        _y = load_years(_f)
+        chk(f"加载后留下 {sorted(_y)}——**在世的没有被丢掉**",
+            set(_y) == {"活着的", "死了的"})
+        chk("在世的走完整路径后报「在世」",
+            "在世" in verdict({"name": "活着的"}, [], _y)[1])
+        chk("★ 无出处的仍被丢掉", "没出处的" not in _y)
+
+    print("── ★★ 反向对照 ⑤b：**「在世」与「不知道」要分开报**（v0.0.0.99）──")
+    y = {"某人": {"name": "某人", "alive": True, "died": None, "source": "Wikidata Qx（无 P570）"}}
+    ok1, why1 = verdict({"name": "某人"}, [], y)
+    ok2, why2 = verdict({"name": "查无此人"}, [], y)
+    chk("在世的报「在世（有出处）」而不是「没有卒年」", not ok1 and "在世" in why1)
+    chk("真不知道的仍报「没有卒年」", not ok2 and "没有卒年" in why2)
+    chk("★ 两者都**不放行**（方向没变）", (not ok1) and (not ok2))
+    chk("★ 在世但**无出处**时，不许当成「在世」——退回「没有卒年」",
+        "没有卒年" in verdict({"name": "某人"}, [],
+                            {"某人": {"name": "某人", "alive": True}})[1])
 
     print("── ★★ 反向对照 ④：**在世作者不许因为「没有卒年」而被当成古人** ──")
     ok, _ = verdict({"name": "Jean Watson", "alive": True}, [])

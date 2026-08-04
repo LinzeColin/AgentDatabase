@@ -1,6 +1,6 @@
-# Release verification — Persona Distiller v0.0.0.98
+# Release verification — Persona Distiller v0.0.0.99
 
-Date: 2026-08-04（**v0.0.0.98**）
+Date: 2026-08-04（**v0.0.0.99**）
 
 > **本文件记录「当前发布号的复验结果」，不是历史归档。**
 > 版本号必须等于根目录 `VERSION`，由 `scripts/check_contract_drift.py` 强制。
@@ -22,6 +22,15 @@ Date: 2026-08-04（**v0.0.0.98**）
 > **「本表每一行都来自本次实跑」是一句自述**——
 > 而自述不是证据（见 `self-report-is-not-evidence`）。
 
+> ### v0.0.0.99 这一版重跑了什么
+>
+> **相对 98 只改了一处**：`check_probe_precondition` 把「在世」与「不知道」分开报，
+> 并修了 `load_years()` 把在世的人整批丢掉的问题。**判定方向没变。**
+>
+> **本次重跑**：`check_probe_precondition --self-test`（**含新加的完整路径对照**）、
+> 对真队列实跑（Gawande 现在报「在世（有出处）」）、合同漂移 **0 条**、pytest。
+> **其余各行沿用 v0.0.0.96 那一次。**
+>
 > ### v0.0.0.98 这一版重跑了什么
 >
 > **相对 97 只改了两处**：`check_probe_precondition` 加 `low_confidence_used()`（只报不拦）、
