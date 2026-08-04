@@ -461,8 +461,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_answer_length_leak.py",
-      "sha256": "30c9399f3df8d7bfcb73017291e41c2ca77a0a33dfc96713dff061448af0e3be",
-      "size_bytes": 8269
+      "sha256": "bd82096de65fa6545287c7447a8ba5fe3cfc58af977d91d9b294831fd23af044",
+      "size_bytes": 10628
     },
     {
       "path": "references/pipeline/checkers/check_attribution_basis.py",
@@ -911,8 +911,8 @@
     },
     {
       "path": "scripts/check_answer_length_leak.py",
-      "sha256": "30c9399f3df8d7bfcb73017291e41c2ca77a0a33dfc96713dff061448af0e3be",
-      "size_bytes": 8269
+      "sha256": "bd82096de65fa6545287c7447a8ba5fe3cfc58af977d91d9b294831fd23af044",
+      "size_bytes": 10628
     },
     {
       "path": "scripts/check_attribution_basis.py",

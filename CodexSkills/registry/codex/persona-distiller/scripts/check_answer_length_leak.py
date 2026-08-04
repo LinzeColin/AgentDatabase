@@ -35,7 +35,9 @@ import pathlib
 import sys
 
 MAX_AGG = 1.30
+MIN_AGG = 1 / MAX_AGG          # ★ 对称下界 ≈0.77
 MIN_SHORTER = 0.25
+MAX_SHORTER = 1 - MIN_SHORTER  # ★ 对称上界 0.75
 
 
 def measure(cand: dict, base: dict) -> dict:
@@ -53,14 +55,33 @@ def measure(cand: dict, base: dict) -> dict:
 
 
 def verdict(m: dict) -> list:
-    """→ 未过的条目列表；空表示两条都过。"""
+    """→ 未过的条目列表；空表示都过。
+
+    ★★ 2026-08-04 改为**双向**。此前只防「候选更长」一个方向：
+    `agg` 只有上界、`shorter_frac` 只有下界。
+
+    **而「长度指不指得出哪一侧」本来就是双向的性质。**
+    #117 Barton 实测：均长比 **0.67**、候选更短 **31/32 = 97%**，
+    两条都过、并打印「✓ 长度指不出哪一侧是哪个系统」——**那句话是错的**，
+    97% 一边倒和 97% 倒向另一边一样能指认。
+
+    成因也记下来：我为了躲开旧混杂（Osler 候选长 73→144%）把答案压到 80–260 字，
+    **矫枉过正成了新的混杂**，而判据只认得它出生时见过的那个方向。
+    """
     bad = []
     if m["agg"] > MAX_AGG:
         bad.append(f"**总体均长比 {m['agg']:.2f} > {MAX_AGG}**——整体靠篇幅取胜")
+    elif m["agg"] < MIN_AGG:
+        bad.append(f"**总体均长比 {m['agg']:.2f} < {MIN_AGG:.2f}**"
+                   "——候选整体过短，长度同样会变成指认信号（**反方向的同一个问题**）")
     if m["shorter_frac"] < MIN_SHORTER:
         bad.append(f"**候选更短的题只有 {m['shorter']}/{m['n']} = "
                    f"{m['shorter_frac']:.0%}，要 ≥{MIN_SHORTER:.0%}**"
                    "——长度会变成指认候选的信号")
+    elif m["shorter_frac"] > MAX_SHORTER:
+        bad.append(f"**候选更短的题多达 {m['shorter']}/{m['n']} = "
+                   f"{m['shorter_frac']:.0%}，要 ≤{MAX_SHORTER:.0%}**"
+                   "——一边倒同样能指认，只是倒的方向反了")
     return bad
 
 
@@ -113,6 +134,13 @@ def selftest() -> int:
     chk("均长比 1.20 过、更短 0/32 → 仍报出（**旧规则在这里会放行**）",
         len(bad) == 1 and "更短" in bad[0])
 
+    print("── ★★ 反向对照 ⓪：**Barton #117 的真实形状（0.67，31/32 更短）→ 必须报** ──")
+    #   改前这一组两条都过，还打印「✓ 长度指不出哪一侧」——**那句话是错的**。
+    m = {"n": 32, "agg": 0.67, "shorter": 31, "shorter_frac": 31 / 32,
+         "worst": 1.07, "cand_chars": 6093, "base_chars": 9081}
+    b = verdict(m)
+    chk("候选整体过短 + 一边倒 → **两条都要报**（此前一条都不报）", len(b) == 2)
+
     print("── 反向对照 ①：Osler #110 第 3 轮的形状（1.30，14/32 更短）→ 不许报 ──")
     cand, base = _mk(32, 1.30, 14)
     m = measure(cand, base)
@@ -120,9 +148,17 @@ def selftest() -> int:
         f"{m['shorter_frac']:.0%} ≥ {MIN_SHORTER:.0%} → 一条不报",
         not verdict(m))
 
-    print("── 反向对照 ②：候选整体更短也不许报（判的是泄题，不是长短）──")
-    cand, base = _mk(32, 0.70, 28)
-    chk("均长比 0.70、更短 28/32 → 一条不报", not verdict(measure(cand, base)))
+    print("── 反向对照 ②：候选偏短但**没到一边倒**，不许报（判的是泄题，不是长短）──")
+    #   ★ 本条原为「均长比 0.70、更短 28/32 → 一条不报」。
+    #     **那个前提在 2026-08-04 被 Barton #117 推翻**：0.70 加 28/32 正是一边倒，
+    #     长度照样指得出哪一侧。旧夹具把「候选更短」当成天然无害，
+    #     而判据要防的是**任一方向的一边倒**。
+    #     改为一个真正无害的形状：偏短但两个方向都还有相当数量的题。
+    cand, base = _mk(32, 0.85, 20)
+    m2 = measure(cand, base)
+    chk(f"均长比 {m2['agg']:.2f} ≥ {MIN_AGG:.2f} 且更短 {m2['shorter']}/32 = "
+        f"{m2['shorter_frac']:.0%} ≤ {MAX_SHORTER:.0%} → 一条不报",
+        not verdict(m2))
 
     print("── 反向对照 ③：边界值——恰好等于门槛的一律放行 ──")
     m = {"n": 32, "agg": MAX_AGG, "shorter": 8, "shorter_frac": MIN_SHORTER,

@@ -9,7 +9,7 @@ KEY = json.loads((pathlib.Path("round1") / "cb_blind_key.json").read_text(encodi
 #   直接拿 q-01 去 cases.jsonl 查会全部落空，而那会让每个套组都变成 None——
 #   套组 delta 全归到一个桶里，看上去还「有数」。
 _S = {json.loads(l)["case_id"]: json.loads(l)["suite"]
-      for l in WS / "evals/cases.jsonl".read_text(encoding="utf-8").splitlines() if l.strip()}
+      for l in (WS / "evals/cases.jsonl").read_text(encoding="utf-8").splitlines() if l.strip()}
 SUITE = {q: _S[v["case_id"]] for q, v in KEY.items() if v.get("case_id") in _S}
 assert len(SUITE) == len(KEY), f"套组回查失败：{len(SUITE)}/{len(KEY)}"
 rows, win, tie, lose = [], 0, 0, 0
@@ -50,7 +50,7 @@ delta = (mc - mb)/10.0
 REAL = {q: v["case_id"] for q, v in KEY.items()}
 flat=[{"case_id":REAL[r["case_id"]],"system":s,"overall_score":round(r[s]/10.0,4),
        "judge_id":r["seat"],"suite":r["suite"]} for r in rows for s in ("candidate","baseline")]
-_want = {json.loads(l)["case_id"] for l in WS / "evals/cases.jsonl".read_text(encoding="utf-8").splitlines() if l.strip()}
+_want = {json.loads(l)["case_id"] for l in (WS / "evals/cases.jsonl").read_text(encoding="utf-8").splitlines() if l.strip()}
 _got = {x["case_id"] for x in flat}
 assert _got <= _want, f"**写出的 case_id 有 {len(_got - _want)} 个不在 cases.jsonl 里**：{sorted(_got - _want)[:3]}"
 (WS/"evals/results.jsonl").write_text("\n".join(json.dumps(r,ensure_ascii=False,sort_keys=True) for r in flat)+"\n",encoding="utf-8")
