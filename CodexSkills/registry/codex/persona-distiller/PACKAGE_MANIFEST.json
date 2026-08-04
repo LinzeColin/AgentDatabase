@@ -4,7 +4,7 @@
   "display_name": "人物蒸馏 Skill / Persona Distiller",
   "distribution": {
     "canonical_registry": "../persona-distiller-group",
-    "kind": "repository-customized-v0.0.0.129",
+    "kind": "repository-customized-v0.0.0.130",
     "lineage_base_archive_sha256": "e891912d98d14afb7677ac935a19be329d97d206f4ae74a644892f46b17f6748"
   },
   "evaluation_suites": 16,
@@ -31,7 +31,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "85acf4a19359b6c3dd993232a21d551fd5da77593ddc7d3b4c3d3823b03e53b1",
+      "sha256": "163303281fa9a77e8417ccdfc6879313fc36587a4c5b4962b721906b5f8e8a07",
       "size_bytes": 8803
     },
     {
@@ -56,12 +56,12 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "7d86e4c01eccbbbae3ad0d8625a526a557473954628f0f0df0081392cc1e1cfb",
-      "size_bytes": 114050
+      "sha256": "7f7f5f4fc1801015d8ab5564aed4151c12d9582984c7ab69b5e58e821c466e30",
+      "size_bytes": 114975
     },
     {
       "path": "VERSION",
-      "sha256": "a87e21ebf250c908d24c6baf35a8f289513861bbe24360e6217d9e31b85c6848",
+      "sha256": "64a28134b37e159c0749cc794845310319550b2a1dd021a6debd90cb838f1424",
       "size_bytes": 11
     },
     {
@@ -121,7 +121,7 @@
     },
     {
       "path": "handoff.md",
-      "sha256": "150472343824a376f202c550243f220d2722644f539f164c3168522a27ab31ba",
+      "sha256": "83696953da8c871f5d828e1cce24612782e10eecaec99c512961a7271a36ee2e",
       "size_bytes": 3703
     },
     {
@@ -141,7 +141,7 @@
     },
     {
       "path": "manifest.json",
-      "sha256": "5ca2dd0143577a2fb85795574cf124f97e8f84044885d5cafe8feabae0f9248e",
+      "sha256": "ddffb46b520f8c57b730890eb009b861d0e3425b797f7c61798b918c50a08682",
       "size_bytes": 1192
     },
     {
@@ -1976,5 +1976,5 @@
     },
     "secret_findings": 0
   },
-  "version": "v0.0.0.129"
+  "version": "v0.0.0.130"
 }
