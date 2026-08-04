@@ -4,7 +4,7 @@
   "display_name": "人物蒸馏 Skill / Persona Distiller",
   "distribution": {
     "canonical_registry": "../persona-distiller-group",
-    "kind": "repository-customized-v0.0.0.99",
+    "kind": "repository-customized-v0.0.0.100",
     "lineage_base_archive_sha256": "e891912d98d14afb7677ac935a19be329d97d206f4ae74a644892f46b17f6748"
   },
   "evaluation_suites": 16,
@@ -16,8 +16,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "cf36de8f784cec483aa293cbe64476cccfce5477c949056ca8655ff082b3102e",
-      "size_bytes": 195171
+      "sha256": "6e4ee940687f04831f56f44cb53933b982552dff58d3a9a729a36364ba319faa",
+      "size_bytes": 196445
     },
     {
       "path": "CONTRIBUTING.md",
@@ -31,8 +31,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "826c549674a7d666da1f9f2a40fccb1b95214bae674198df1844496a8394104a",
-      "size_bytes": 8802
+      "sha256": "4e4b3c69aa9b9e4131ae08e1082443868c438d89a6613b150a81a7aa4ae347fb",
+      "size_bytes": 8803
     },
     {
       "path": "ROADMAP.md",
@@ -56,13 +56,13 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "ed7b377ef72e64e1c8550d837abd43df871e1c56451876ce8f37374b40d7827c",
-      "size_bytes": 100855
+      "sha256": "47675d685c939b947e06278c4d29179dd6e87d1c140da79d47b85d2770141e62",
+      "size_bytes": 101324
     },
     {
       "path": "VERSION",
-      "sha256": "1867e747635cc15b2f491e75db72901ef0d8656720dcce76923d10fb33f5286a",
-      "size_bytes": 10
+      "sha256": "c86830a80ed39970e6272c73428b45b4706c0a1f1dbd3db95cffec1414367810",
+      "size_bytes": 11
     },
     {
       "path": "agents/openai.yaml",
@@ -121,8 +121,8 @@
     },
     {
       "path": "handoff.md",
-      "sha256": "47d76b02668e8eec5a1ca66f2a9ac54f739019f0f7787165afdac3271edc782e",
-      "size_bytes": 3702
+      "sha256": "d27f6a9af318538c2a5f85780d593bb794820558b9e36a8a17e9452daf60ac15",
+      "size_bytes": 3703
     },
     {
       "path": "install.ps1",
@@ -141,8 +141,8 @@
     },
     {
       "path": "manifest.json",
-      "sha256": "a49fce6188509c33801a48ad25ff4080455deee04bf1da49acef1600cb6badce",
-      "size_bytes": 1191
+      "sha256": "2ffed5298267a640e8abf3adc06c51bbfeebb36d07d62689cab30399fb30b876",
+      "size_bytes": 1192
     },
     {
       "path": "prompts/blind-judge.md",
@@ -521,8 +521,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_checkers.py",
-      "sha256": "bc75fca3cb548f2a4331b2cbd1451bd9b3d4f087fc35a70a0d014724fa148280",
-      "size_bytes": 15835
+      "sha256": "f751207fa5d71707d873f98e008bf5b8c5eb513e22a048f310a3a9e313191572",
+      "size_bytes": 18612
     },
     {
       "path": "references/pipeline/checkers/check_claim_anchors.py",
@@ -1016,8 +1016,8 @@
     },
     {
       "path": "scripts/check_checkers.py",
-      "sha256": "bc75fca3cb548f2a4331b2cbd1451bd9b3d4f087fc35a70a0d014724fa148280",
-      "size_bytes": 15835
+      "sha256": "f751207fa5d71707d873f98e008bf5b8c5eb513e22a048f310a3a9e313191572",
+      "size_bytes": 18612
     },
     {
       "path": "scripts/check_claim_anchors.py",
@@ -1856,5 +1856,5 @@
     },
     "secret_findings": 0
   },
-  "version": "v0.0.0.99"
+  "version": "v0.0.0.100"
 }

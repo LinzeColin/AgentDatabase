@@ -1,6 +1,6 @@
-# Release verification — Persona Distiller v0.0.0.99
+# Release verification — Persona Distiller v0.0.0.100
 
-Date: 2026-08-04（**v0.0.0.99**）
+Date: 2026-08-04（**v0.0.0.100**）
 
 > **本文件记录「当前发布号的复验结果」，不是历史归档。**
 > 版本号必须等于根目录 `VERSION`，由 `scripts/check_contract_drift.py` 强制。
@@ -22,6 +22,14 @@ Date: 2026-08-04（**v0.0.0.99**）
 > **「本表每一行都来自本次实跑」是一句自述**——
 > 而自述不是证据（见 `self-report-is-not-evidence`）。
 
+> ### v0.0.0.100 这一版重跑了什么
+>
+> **相对 99 只改了一处**：`check_checkers` 加「自测走没走过磁盘加载路径」这一项（**只报数**）。
+>
+> **本次重跑**：`check_checkers scripts/`（元普查 **可用 50**、**接线审计无调用方 0 件**、
+> **射程审计 17/17**、**新增：自测不碰文件系统的 30/51**）、`--self-test`、合同漂移 **0 条**、pytest。
+> **其余各行沿用 v0.0.0.96 那一次。**
+>
 > ### v0.0.0.99 这一版重跑了什么
 >
 > **相对 98 只改了一处**：`check_probe_precondition` 把「在世」与「不知道」分开报，

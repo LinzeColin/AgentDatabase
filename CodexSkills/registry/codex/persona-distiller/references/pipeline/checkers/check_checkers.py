@@ -201,6 +201,45 @@ def wiring_audit(directory: pathlib.Path) -> dict:
     return {"判据件数": len(names), "**无生产调用方的**": len(dead), "名单": dead}
 
 
+def selftest_touches_disk(directory: pathlib.Path) -> dict:
+    """★ **自测有没有走过「从磁盘加载」这条路**——v0.0.0.100 新增。
+
+    起因（2026-08-04，`check_probe_precondition`）：改完 `verdict()` 后**五条自测全过，
+    真跑却是错的**。成因是 `load_years()` 会**筛掉**一类条目（在世的人，`died: null`），
+    而自测**直接把构造好的字典喂给 `verdict()`，绕过了加载器**。
+
+    ★★ **本项只报数，不判缺陷。** 30/51 这个数**不是 30 处缺陷**——
+    多数加载器只是「读进来解析一下」，绕过它不丢什么。
+    **真正有风险的是会做筛选的加载器**，而「有没有筛选」静态判不出来。
+
+    所以这里给的是**一个提示**：`main()` 会读文件、而自测从不碰文件系统的那些，
+    **值得在改动加载逻辑时补一条走完整路径的对照**。
+    """
+    import ast as _ast, re as _re
+    rows = []
+    for f in sorted(directory.glob("check_*.py")):
+        src = f.read_text(encoding="utf-8", errors="ignore")
+        try:
+            tree = _ast.parse(src)
+        except SyntaxError:
+            continue
+        fns = {n.name: n for n in _ast.walk(tree) if isinstance(n, _ast.FunctionDef)}
+        st = fns.get("selftest") or fns.get("self_test")
+        if not st:
+            continue
+        st_src = _ast.get_source_segment(src, st) or ""
+        mn = fns.get("main")
+        mn_src = (_ast.get_source_segment(src, mn) or "") if mn else ""
+        reads = bool(_re.search(r"read_text|open\(|json\.load|is_file\(\)|glob\(|rglob\(", mn_src))
+        touches = bool(_re.search(r"tempfile|TemporaryDirectory|NamedTemporary|write_text|mkdtemp", st_src))
+        rows.append((f.stem, reads, touches))
+    need = [n for n, r, tch in rows if r and not tch]
+    return {"有自测的": len(rows),
+            "main 读文件且自测碰文件系统的": sum(1 for _, r, tch in rows if r and tch),
+            "**main 读文件而自测不碰文件系统的**": len(need),
+            "名单": need}
+
+
 def self_test() -> int:
     import tempfile
     bad = []
@@ -290,6 +329,15 @@ def main() -> int:
     if w["名单"]:
         print("  ★ 这是 v0.0.0.68「第 9 次」那个坑；接线时必须**实跑一次**，"
               "看输出里真的出现了那一行。")
+
+    d2 = selftest_touches_disk(d.resolve())
+    print(f"\n── 自测是否走过磁盘加载路径 ──")
+    print(f"  有自测的 {d2['有自测的']} 件；"
+          f"**main 读文件而自测不碰文件系统的 {d2['**main 读文件而自测不碰文件系统的**']} 件**")
+    print("  ★ **这不是缺陷计数**——多数加载器只是读进来解析一下，绕过它不丢什么。")
+    print("    真正有风险的是**会做筛选的加载器**（`check_probe_precondition.load_years` "
+          "就丢掉过在世的人，自测因此全绿而真跑是错的）。")
+    print("    **改动加载逻辑时，给那一件补一条走完整路径的对照。**")
 
     # ★ check_scan_reach 是同族元判据（「这道判据这次扫了几个单位？和该扫的一样多吗」），
     #   此前**从没被任何代码调用过**。它归这里管。
