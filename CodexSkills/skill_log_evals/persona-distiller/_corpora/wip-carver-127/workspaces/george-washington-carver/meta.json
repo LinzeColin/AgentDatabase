@@ -84,5 +84,17 @@
   "subject_origin": "historical",
   "target_id": "tgt-3295a249c540",
   "time_scope": "all available periods, separated by role and material drift",
-  "updated_at": "2026-08-04T16:31:02Z"
+  "updated_at": "2026-08-04T16:31:02Z",
+  "attribution_basis": {
+    "authority": "**印刷时代人物，归属靠印本自身的扉页署名，逐份实读、不抄编目。** 35 份塔斯基吉农业试验站公报的题名页署 `G. W. Carver, M. S. Agr., Director` 或 `By G. W. Carver`（名一律缩写，从不写全）；出版者逐份印着 Tuskegee Normal and Industrial Institute。1921 年众议院筹款委员会证词是**速记逐字稿**，归属靠说话人标签：段内 10 个干净的 `Mr. Carver.` 轮次、主席点名 `The Chairman. All right, Mr. Carver.`、末尾主席致谢——**不靠标题行**（该行 OCR 讹作 `STATEMENT OF MB. GEOEOE W. CABVER`）。身份锚点：Library of Congress 名称权威档 `n50034776`，`authoritativeLabel = \"Carver, George Washington, 1864?-1943\"`，`deathDate = 1943-01-05`、`birthDate = \"1864?\"`（**EDTF 问号即不确定，生年不写成确定值**）。",
+    "citation": "https://id.loc.gov/authorities/names/n50034776",
+    "disputed_policy": "**三类不算他的一手，逐份点名而不是整批推定：**\n① **同姓异名**——Thomas Nixon Carver（1865–1961，哈佛经济学家，农业经济类会刊里的「Professor Carver」多半指他）、W. A. Carver（玉米遗传，PIAS 第 31 卷 1924 p.129 的唯一 Carver）、John F. Carew（1873–1951，纽约众议员，1921 听证同段内 `Mr. Carew.` 与 `Mr. Carver.` 并存，OCR 讹变体 Cabew／Cabveb 形近）。\n② **同一试验站、他人署名**——Bulletin No.22《Dairying in connection with farming》（Turner, A. A.）、No.28《Smudging an orchard…》（Malone, R. E.）**未收入语料**。\n③ **无个人署名者降 S1**——Bulletin **No.20**《Cotton Growing for Rural Schools》：全文 `Carver` 三处，一处在 Station Staff 名单，另两处是棉花品种名 `Carver's Improved`，**题名页无个人署名**，记 S1。\n★ **反向也逐份核过**：No.6／No.7／No.10 曾被我按探测台账「四份一起说」的表述降档，实测三份的题名页都有个人署名（`HOW TO BUILD UP WORN OUT SOILS G. W. Carver, M. S. Agr. Director` 等），**已改回 P1**——「四份一起说」的表述不作数，逐份开文件看才作数。\n★ **重印不重复计**：No.30 是 No.17 的修订重印、No.34 是 No.12 的修订重印（印本自陈 `This bulletin is a revision of Bulletin No. 12 issued in 1907.`）、No.4 是爱荷华科学院论文的重印（扉页 `Revised and Reprinted from the Reports of the Iowa Academy of Science 1899.`）——三份均记 **P2**，不进去重后的一手计数。\n★ **合著标明**：PIAS 1895 两篇署 `BY L. H. PAMMEL AND GEO. W. CARVER`、`BY F. C. STEWART AND G. W. CARVER`，**是合著不是独著**。\n★ **Bulletin No.9 与 No.11 任何站点都没有数字化本，作者未核**——不在语料里，也不作任何断言。",
+    "disputed_works": [
+      "Tuskegee Exp. Sta. Bulletin No.20 — Cotton Growing for Rural Schools（题名页无个人署名，记 S1）",
+      "Tuskegee Exp. Sta. Bulletin No.22 — Dairying in connection with farming（Turner, A. A.，未收入）",
+      "Tuskegee Exp. Sta. Bulletin No.28 — Smudging an orchard with native material（Malone, R. E.，未收入）",
+      "Tuskegee Exp. Sta. Bulletin No.9 / No.11 — 无数字化本，作者未核，未收入",
+      "helpforhardtimes00carv (1910) — LC 著录作 `[Carver, George Washington]`（**方括号＝推定**），归属存疑，未收入"
+    ]
+  }
 }

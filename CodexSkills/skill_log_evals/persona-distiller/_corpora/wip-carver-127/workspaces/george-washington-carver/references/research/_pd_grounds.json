@@ -155,11 +155,11 @@
  {
   "source_id": "src-CAT31355487",
   "work": "Tuskegee Agricultural Experiment Station Bulletin No.20: Cotton Growing for Rural Schools",
-  "tier": "S1",
-  "byline": "institution",
+  "tier": "P1",
+  "byline": "person",
   "kind": "pre1929",
   "year": 1911,
-  "evidence": "扉页署名（印本实读，2026-08-05 探测）；出版者 Tuskegee Normal and Industrial Institute；出版年 1911 < 1931（1911+95 的次年元旦已过），美国版权已过期。archive.org `CAT31355487` 无 `access-restricted-item`。 ★ **本份印本封面无个人署名，只有 Station Staff 名单，卡佛署名系编目所加**——归属弱于其余各份。 ★★ **已从 P1 改为 S1**：印本封面没有他的个人署名，「机构署名却标成个人一手」是 check_pd_grounds 明令报出的一类——**它可能是 PD，但不算他的一手散文。** ★★ **P3 不是本项目的分档**——真词表是 P1/P2/S1/S2/U（`build_source_ledger.TIERS`，台账实测 907 次出现、P3 零次）。RUNBOOK:294 明写「**署名为机构或同事的，记 S1 并注明真实作者**」。 ★ **本件是四份里唯一真的没有个人署名的**：全文 `Carver` 三处——Station Staff 名单一处，另两处是棉花品种名 `Carver's Improved`。**S1 成立。**"
+  "evidence": "**题名页署名（逐字照录）**：`G. W. CARVER, M. S. Agr., Director` （紧接 `INTRODUCTION`，是题名页署名的常见位置）。★★★ **我此前两次判它「无个人署名」都是错的**：第一次照抄探测台账「四份一起说」的表述；第二次开了文件、但用的正则是 `[Cc]arver`，**匹配不了全大写的 `CARVER`**——而全大写正是本批语料题名页最常见的形态。**那次「核实」给出的是一个自信的错误确认，比不核更糟。**"
  },
  {
   "source_id": "src-CAT31355488",
