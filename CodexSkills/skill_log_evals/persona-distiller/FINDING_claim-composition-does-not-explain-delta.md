@@ -9,21 +9,20 @@
 Barton 第 3 轮逐套组：
 
 ```
-fact-preservation  +0.0225   ← 问「你是什么」，赢
-token-efficiency   +0.0097
-long-horizon       +0.0027
-voice              +0.0010
+fact-preservation  +0.2250   ← 问「你是什么」，赢
+token-efficiency   +0.0975
+long-horizon       +0.0275
+voice              +0.0100
 ─────────────────────────  以上为全部为正的 4 个
 ...
-capability-calibration -0.0087
-anonymous-fidelity     -0.0095
-task-completion        -0.0105   ← 问「教我怎么做」，输
-style-decoy            -0.0215
+capability-calibration -0.0875
+anonymous-fidelity     -0.0950
+task-completion        -0.1050   ← 问「教我怎么做」，输
+style-decoy            -0.2150
 ```
 
-两席独立指出同一件事：候选常答非所问
-（席 D 举 q-10B「要求用称号写自我介绍，改成否认称号＋履历条目」、q-26B「问唯一标准却给三条」；
-席 E 举 q-17A「对『五万美元』这个金额不作任何回应」）。
+两席评语里也各点了几处「答非所问」。
+**（★ 这些点名用的是盲判坐标，哪一侧是候选要过 key——见第四节，我第一版在这里写错过。）**
 
 而 Barton 的断言配比确实偏：**58 条里 42 条是 `fact`（72%），
 `heuristic`+`work-method` 只有 8 条（14%）**。
@@ -42,7 +41,7 @@ style-decoy            -0.0215
 
 | 人物 | 启发+工法占比 | 末轮 delta |
 |---|---:|---:|
-| clara-barton | 14% | −0.0027 |
+| clara-barton | 14% | −0.0273 |
 | florence-nightingale | 17% | +0.1364 |
 | rudolf-virchow | 17% | +0.1033 |
 | robert-koch | 22% | +0.0820 |
@@ -53,13 +52,17 @@ style-decoy            -0.0215
 | louis-pasteur | 30% | +0.0973 |
 
 ```
-★ 真基线组 n=9　相关系数 r = **+0.340**
+★ 真基线组 n=9　相关系数 r = **+0.388**
 ```
 
 ## 三、结论：不立判据
 
-**方向是对的，强度撑不住。** n=9 时 r=+0.34 的 95% 区间大致跨 −0.40 到 +0.82
+**方向是对的，强度撑不住。** n=9 时 r=+0.39 的 95% 区间大致跨 −0.36 到 +0.84
 ——**跟噪声分不开。**
+
+★ 这个 r 本身还被我的一个 bug 改过一次：Barton 的 delta 一开始读成 −0.0273 的十分之一
+（见 `FINDING_assembler-divided-by-ten-twice.md`），当时算出 r=+0.340。
+修正后 +0.388。**方向和结论都没变，但这说明 n=9 的 r 有多经不起一个数据点的扰动。**
 
 反例就在表里：**Nightingale 17%（几乎和 Barton 一样低）拿到 +0.1364，
 是全组最高**；Jenner 23%（高于 Nightingale 6 个百分点）却是 −0.0015。
@@ -103,7 +106,7 @@ style-decoy            -0.0215
 
 ## 五、那「教我怎么做」输在哪，还是没答
 
-**逐套组的负分是真的**（task-completion −0.0105、style-decoy −0.0215），
+**逐套组的负分是真的**（task-completion −0.1050、style-decoy −0.2150），
 **只是原因不是断言配比。**
 
 过完 key 之后，候选那 8 处里有**三处是干净的「没接住题面约束」**：

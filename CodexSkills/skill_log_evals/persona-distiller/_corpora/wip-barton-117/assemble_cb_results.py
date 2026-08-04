@@ -40,7 +40,18 @@ for seat, fn in (("seat-D-score-v1", "cb_judge_D.json"), ("seat-E-strict-v1", "c
         s = by[SUITE.get(cid)]; s[0] += c; s[1] += b; s[2] += 1
 if not rows: raise SystemExit("没有任何一席落盘")
 mc = sum(r["candidate"] for r in rows)/len(rows); mb = sum(r["baseline"] for r in rows)/len(rows)
-delta = (mc - mb)/10.0
+# ★★ 2026-08-04 修：**同一处除以 10 做了两遍。**
+#   第 32–34 行的量纲归一是后加的（把 0–10 制折到 0–1）；
+#   而这里、落盘处、套组处三个 `/10.0` 是给「rows 里存 0–10 原始分」那个年代写的，
+#   加了归一之后**没有一处被删掉**。
+#   后果：两席这轮本就给 0–1，归一不触发，后面那次白除——
+#   **Barton 三轮 delta 报成了 -0.0043 / -0.0009 / -0.0027，真值是 -0.0433 / -0.0089 / -0.0273，
+#   整整差一个数量级**；写进工作区的分也全是真分的 1/10，
+#   于是发布门读到 `candidate overall 0.080`（真值 0.797）。
+#   **判据没错，是喂给它的数错了。**
+assert all(0.0 <= r[k] <= 1.0 for r in rows for k in ("candidate", "baseline")), \
+    "**分数不在 0–1**——量纲归一没生效，不许再往下算"
+delta = mc - mb
 (WS/"evals").mkdir(parents=True, exist_ok=True)
 # ★ 写进工作区的那份**必须用真 case_id**，不是载荷里的不透明编号。
 #   第一版直接把 q-01… 写了进去，发布门拿它去 cases.jsonl 查一条都对不上，
@@ -48,7 +59,7 @@ delta = (mc - mb)/10.0
 #   看上去像产物彻底失败，实际是判据在跟一份对不上号的文件说话。
 #   「判据指错了文件」第六次，也是后果最重的一次。
 REAL = {q: v["case_id"] for q, v in KEY.items()}
-flat=[{"case_id":REAL[r["case_id"]],"system":s,"overall_score":round(r[s]/10.0,4),
+flat=[{"case_id":REAL[r["case_id"]],"system":s,"overall_score":round(r[s],4),
        "judge_id":r["seat"],"suite":r["suite"]} for r in rows for s in ("candidate","baseline")]
 _want = {json.loads(l)["case_id"] for l in (WS / "evals/cases.jsonl").read_text(encoding="utf-8").splitlines() if l.strip()}
 _got = {x["case_id"] for x in flat}
@@ -65,4 +76,4 @@ for name, th in (("deep",0.07),("standard",0.05),("quick",0.03)):
     print(f"  {name:9} {'✅ 过' if delta>=th else '❌ 不过'}")
 print("\n各套组 delta：")
 for s,v in sorted(by.items(), key=lambda x: -(x[1][0]-x[1][1])/max(x[1][2],1)):
-    if v[2]: print(f"  {s:24} {(v[0]-v[1])/v[2]/10:+.4f}  ({v[2]} 对)")
+    if v[2]: print(f"  {s:24} {(v[0]-v[1])/v[2]:+.4f}  ({v[2]} 对)")
