@@ -776,8 +776,8 @@
     },
     {
       "path": "references/pipeline/next_person.py",
-      "sha256": "6b14ee2f01b46d42b899ddabeb7b4f633ef2a1c811de6eefe3b71c7a31d7bac9",
-      "size_bytes": 12822
+      "sha256": "ca1251838348be49a8b40ee998c85447535ad6e500f4d8718956dee5f07a659f",
+      "size_bytes": 13156
     },
     {
       "path": "references/pipeline/scaffold/README.md",
