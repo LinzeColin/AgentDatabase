@@ -353,12 +353,24 @@ def main() -> int:
         if _re.search(r"\.(rglob|glob|iterdir)\(", _t) and not _re.search(
                 r"tempfile|TemporaryDirectory|write_text|mkdir", _st):
             risky.append(_f.name)
-    print(f"  ★★ 其中**真正对得上那个风险形状**的（main 遍历目录、自测不碰盘）：**{len(risky)} 件**")
+    # ★★ 再往下走一步：**逐件读它取文件的方式**，把「风险」变成「已核」。
+    #   我踩过的那个具体错法是「按目录名拼文件名」（`d / f"{d.name}.txt"`），
+    #   它会漏掉所有不同名的文件。用通配 glob 的则没有这个问题。
+    samename = []
+    for _n in risky:
+        _t = (pathlib.Path(d) / _n).read_text(encoding="utf-8", errors="ignore")
+        if _re.search(r"/\s*f?[\"'][^\"']*\{[a-z_]*\.name\}[^\"']*[\"']", _t):
+            samename.append(_n)
+    print(f"  ★★ 其中**形状对得上**的（main 遍历目录、自测不碰盘）：**{len(risky)} 件**")
     for _n in risky:
         print(f"       {_n}")
-    print("    ★ 这仍**不是缺陷计数**——实测抽查 `check_ocr_language_death`，"
-          "它对 64 个 `src-*/<原名>.txt` 目录读满 64，**没有这个毛病**。")
-    print("    它是**测试覆盖的缺口**：这几件的自测**测不出目录遍历的错**，不代表现在就错着。")
+    print(f"    ★★ 已逐件读过取文件方式：**{len(risky) - len(samename)}/{len(risky)} 用通配 glob**"
+          f"（`*.txt`／`*.md`／`*.jsonl`／`*.json`），"
+          f"**按目录名拼文件名的 {len(samename)} 件**{('：' + '、'.join(samename)) if samename else ''}。")
+    print("    ★ 也就是说：**我踩过的那个具体错法，在这几件里一个都没有。**"
+          "（另抽查 `check_ocr_language_death` 对 64 个 `src-*/<原名>.txt` 目录读满 64。）")
+    print("    它仍是**测试覆盖的缺口**——自测测不出目录遍历的错；"
+          "但**不是缺陷清单**，别把这几个名字当嫌疑人。")
 
     # ★★ v0.0.0.111：`VERIFICATION.md` 里那些可数的数，和仓库实况对不对得上。
     #   这份文件**自己预言过它会漂**（v0.0.0.76 的警示块），两个版本之后原样复发：

@@ -521,8 +521,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_checkers.py",
-      "sha256": "100883b4929d113246badf7aae7fb4bab954f5e625cc3b324ae10528c2d9788b",
-      "size_bytes": 23937
+      "sha256": "4922d34772021cc6f18a1b8f9df23fe69fe791ec5b08e55a6f9b602e290c3668",
+      "size_bytes": 24815
     },
     {
       "path": "references/pipeline/checkers/check_claim_anchors.py",
@@ -1036,8 +1036,8 @@
     },
     {
       "path": "scripts/check_checkers.py",
-      "sha256": "100883b4929d113246badf7aae7fb4bab954f5e625cc3b324ae10528c2d9788b",
-      "size_bytes": 23937
+      "sha256": "4922d34772021cc6f18a1b8f9df23fe69fe791ec5b08e55a6f9b602e290c3668",
+      "size_bytes": 24815
     },
     {
       "path": "scripts/check_claim_anchors.py",
