@@ -187,8 +187,11 @@ def test_the_adapter_is_fed_dicts_not_dataclasses() -> None:
         __import__("pathlib").Path(__file__).resolve().parents[1]
         / "scripts" / "memory_atlas_private" / "pipeline.py"
     ).read_text(encoding="utf-8")
-    assert "regenerate_atlas_snapshot(\n                live_events," in source
-    assert "regenerate_atlas_snapshot(\n                _iter_events(" not in source
+    import re
+
+    call = re.search(r"atlas_rebuild = regenerate_atlas_snapshot\(\s*(\w+)", source)
+    assert call and call.group(1) == "live_events", call.group(1) if call else None
+    assert "_iter_events(temporary)," not in source.split("regenerate_atlas_snapshot")[1][:200]
 
 
 def test_this_slice_adds_no_file_the_release_audit_would_reject() -> None:
@@ -275,3 +278,29 @@ def test_the_repositorys_own_data_is_never_rewritten(tmp_path) -> None:
         output=tmp_path / "out.json",
     )
     assert hashlib.sha256(tracked.read_bytes()).hexdigest() == before
+
+
+def test_a_hardlink_that_cannot_cross_devices_falls_back_to_copying() -> None:
+    """Production put the release tree and the work directory on different
+    filesystems, so os.link raised EXDEV and the whole reconcile died."""
+    source = (
+        __import__("pathlib").Path(__file__).resolve().parents[1]
+        / "scripts" / "memory_atlas_private" / "pipeline.py"
+    ).read_text(encoding="utf-8")
+    assert "def _link_or_copy(" in source
+    assert "except OSError:" in source
+    assert "shutil.copy2(src, dst)" in source
+    assert "copy_function=_link_or_copy" in source
+    assert "copy_function=os.link" not in source
+
+
+def test_a_failed_graph_rebuild_cannot_cancel_the_reconcile() -> None:
+    """The reconcile also publishes the live snapshot and the status projection.
+    When the rebuild raised, all of it was lost and the deployment rolled back."""
+    source = (
+        __import__("pathlib").Path(__file__).resolve().parents[1]
+        / "scripts" / "memory_atlas_private" / "pipeline.py"
+    ).read_text(encoding="utf-8")
+    guarded = source[source.index("atlas_rebuild = regenerate_atlas_snapshot") - 400:]
+    assert "try:" in guarded.split("atlas_rebuild = regenerate_atlas_snapshot")[0]
+    assert 'atlas_rebuild = {"state": "FAILED", "reason":' in source

@@ -19,6 +19,15 @@ mode=${2:-full}
 output=${3:-}
 case "$mode" in quick|full) ;; *) echo "mode must be quick or full" >&2; exit 64 ;; esac
 
+# The gate now runs the suite that tests the gate, so a nested invocation would
+# fork forever. A nested call reports itself and exits 0: the outer run is the
+# one whose verdict counts.
+if [[ "${MEMORY_ATLAS_GATE_RUNNING:-0}" == "1" ]]; then
+  printf '{"schema_version":"memory_atlas.canonical_gate.v1","mode":"%s","verdict":"NESTED_SKIPPED","authoritative":false,"checks":[]}\n' "$mode"
+  exit 0
+fi
+export MEMORY_ATLAS_GATE_RUNNING=1
+
 started_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)
 results=()
 failed=0
@@ -64,11 +73,36 @@ fi
 
 # --- full mode only ---------------------------------------------------------
 if [[ "$mode" == "full" ]]; then
+  # Listing the files by hand drifted: two v0.0.0.32 suites existed for hours
+  # without this gate ever running them, so the gate reported green while they
+  # were red. The list comes from the ownership contract now.
+  # `mapfile` is bash 4+; the Owner's machine ships bash 3.2, where it is a
+  # command-not-found that set -e turns into a silent truncated run.
+  owned=()
+  while IFS= read -r line; do owned+=("$line"); done < <(python3 -c "
+import json, sys
+from pathlib import Path
+policy = json.loads(Path(sys.argv[1]).read_text(encoding='utf-8'))
+# This is the Memory Atlas gate, so it owns the Memory Atlas tests in the
+# integration tier. Taking the list from the contract rather than by hand means
+# a new suite is picked up automatically; running the whole tier would only
+# duplicate CI and take ten minutes.
+# Two suites assert against a live deployment and can only pass on CI. They are
+# named here with the reason rather than silently dropped, and a test requires
+# this list to stay exactly these two and CI to keep running them.
+CI_ONLY = {
+    'tests/test_memory_atlas_acceptance_audit.py',   # needs live Cloudflare evidence
+    'tests/test_memory_atlas_goal_completion.py',    # needs live Cloudflare evidence
+}
+for name in sorted(policy['execution_tiers']['integration']['test_files']):
+    if 'memory_atlas' not in name or name in CI_ONLY:
+        continue
+    path = Path(sys.argv[2]) / 'OpenAIDatabase' / name
+    if path.is_file():
+        print(path)
+" "$repo/OpenAIDatabase/config/quality/verification_policy.json" "$repo")
   run_check backend_suite env PYTHONPATH="$repo" python3 -B -m pytest -q \
-    "$repo/OpenAIDatabase/tests/test_memory_atlas_private_v31.py" \
-    "$repo/OpenAIDatabase/tests/test_memory_atlas_source_runner_v31.py" \
-    "$repo/OpenAIDatabase/tests/test_memory_atlas_live_snapshot_api_v32.py" \
-    "$repo/OpenAIDatabase/tests/test_memory_atlas_live_snapshot_publish_v32.py" \
+    "${owned[@]}" \
     "$repo/OpenAIDatabase/tests/test_verification_policy.py" \
     "$repo/OpenAIDatabase/tests/test_directory_lifecycle.py"
   if [[ -d "$repo/MemoryAtlas/node_modules" ]]; then

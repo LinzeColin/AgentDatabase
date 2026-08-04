@@ -47,29 +47,53 @@ def test_the_hook_is_skippable_and_reversible() -> None:
     assert "git config --unset core.hooksPath" in text
 
 
+def _declared_checks(mode: str) -> set[str]:
+    """Read the checks the script declares, rather than executing it.
+
+    The gate runs the suite that tests the gate, so executing `full` from here
+    forked gates until the run had to be killed. The invariant is about what the
+    modes declare, and that is readable without running anything.
+    """
+    import re
+
+    text = GATE.read_text(encoding="utf-8")
+    shared, _, full_only = text.partition('if [[ "$mode" == "full" ]]; then')
+    scope = shared if mode == "quick" else shared + full_only
+    return set(re.findall(r"run_check (\w+)", scope))
+
+
 def test_quick_mode_declares_itself_non_authoritative(tmp_path: Path) -> None:
+    import os
+
     output = tmp_path / "quick.json"
-    subprocess.run([str(GATE), str(REPO), "quick", str(output)], check=True, capture_output=True)
+    # This asserts the standalone contract, so the nested-run guard the outer
+    # gate sets must not be inherited.
+    env = {k: v for k, v in os.environ.items() if k != "MEMORY_ATLAS_GATE_RUNNING"}
+    subprocess.run([str(GATE), str(REPO), "quick", str(output)], check=True, capture_output=True, env=env)
     report = json.loads(output.read_text(encoding="utf-8"))
     assert report["mode"] == "quick"
     assert report["authoritative"] is False
 
 
-def test_full_mode_is_the_authority_and_is_a_strict_superset(tmp_path: Path) -> None:
-    quick = tmp_path / "quick.json"
-    full = tmp_path / "full.json"
-    subprocess.run([str(GATE), str(REPO), "quick", str(quick)], check=True, capture_output=True)
-    subprocess.run([str(GATE), str(REPO), "full", str(full)], check=True, capture_output=True)
-    quick_checks = {row["check"] for row in json.loads(quick.read_text(encoding="utf-8"))["checks"]}
-    full_report = json.loads(full.read_text(encoding="utf-8"))
-    full_checks = {row["check"] for row in full_report["checks"]}
-    assert full_report["authoritative"] is True
-    assert quick_checks < full_checks, "full must run strictly more than quick"
-    assert {"backend_suite", "frontend_build", "ci_workflow_present"} <= full_checks
+def test_full_mode_is_the_authority_and_is_a_strict_superset() -> None:
+    quick, full = _declared_checks("quick"), _declared_checks("full")
+    assert quick < full, (quick, full)
+    assert {"backend_suite", "frontend_build", "ci_workflow_present"} <= full
+    assert '"authoritative":%s' in GATE.read_text(encoding="utf-8")
+
+
+def test_a_nested_gate_cannot_fork_forever() -> None:
+    gate = GATE.read_text(encoding="utf-8")
+    assert "MEMORY_ATLAS_GATE_RUNNING" in gate
+    assert "NESTED_SKIPPED" in gate
+    assert "export MEMORY_ATLAS_GATE_RUNNING=1" in gate
 
 
 def test_an_invalid_mode_is_refused() -> None:
-    result = subprocess.run([str(GATE), str(REPO), "sorta"], capture_output=True)
+    import os
+
+    env = {k: v for k, v in os.environ.items() if k != "MEMORY_ATLAS_GATE_RUNNING"}
+    result = subprocess.run([str(GATE), str(REPO), "sorta"], capture_output=True, env=env)
     assert result.returncode == 64
 
 
@@ -255,3 +279,46 @@ def test_the_full_gate_covers_what_ci_runs() -> None:
     # only. The gate must say so rather than silently omit it.
     assert "validate:whole-project belongs here in principle" in gate
     assert "npm run validate:whole-project" in workflow
+
+
+def test_the_gate_runs_every_test_the_ownership_contract_lists() -> None:
+    """The gate listed backend test files by hand and drifted: two v0.0.0.32
+    suites existed for hours without it ever running them, so it reported green
+    while they were red. The list comes from the ownership contract now."""
+    gate = GATE.read_text(encoding="utf-8")
+    assert "verification_policy.json" in gate
+    assert "execution_tiers" in gate and "integration" in gate and "test_files" in gate
+    # No hand-maintained list of individual v31/v32 suites may remain.
+    assert "tests/test_memory_atlas_live_snapshot_api_v32.py" not in gate
+    # bash 3.2 has no mapfile; using it made the gate exit 127 and run a
+    # truncated suite on the Owner's machine. Check for use, not the word — the
+    # comment explaining this lives in the script.
+    executable = [line for line in gate.splitlines() if not line.lstrip().startswith("#")]
+    assert not [line for line in executable if "mapfile" in line], "mapfile is bash 4+"
+    # Every Memory Atlas suite the contract owns must be reachable by the gate.
+    import json as _json
+
+    policy = _json.loads(
+        (REPO / "OpenAIDatabase" / "config" / "quality" / "verification_policy.json").read_text(encoding="utf-8")
+    )
+    owned = [
+        name for name in policy["execution_tiers"]["integration"]["test_files"]
+        if "memory_atlas" in name and (REPO / "OpenAIDatabase" / name).is_file()
+    ]
+    assert len(owned) >= 5, owned
+    for name in ("tests/test_memory_atlas_codex_activity_adapter_v32.py",
+                 "tests/test_memory_atlas_canonical_gate_v32.py"):
+        assert name in owned, f"{name} is not owned by the integration tier"
+    # Exclusions must be named with a reason, and only these two qualify: they
+    # assert against a live deployment. Everything else the contract owns runs.
+    import re as _re
+
+    block = _re.search(r"CI_ONLY = \{(.*?)\}", gate, _re.S)
+    assert block, "the gate must declare its exclusions explicitly"
+    excluded = set(_re.findall(r"'([^']+)'", block.group(1)))
+    assert excluded == {
+        "tests/test_memory_atlas_acceptance_audit.py",
+        "tests/test_memory_atlas_goal_completion.py",
+    }, excluded
+    workflow = WORKFLOW.read_text(encoding="utf-8")
+    assert "validate:whole-project" in workflow, "CI must still run the excluded suites"

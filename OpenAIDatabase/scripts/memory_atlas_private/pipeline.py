@@ -288,6 +288,18 @@ def visual_event(event: Mapping[str, Any]) -> dict[str, Any]:
     }
 
 
+def _link_or_copy(src: str, dst: str) -> None:
+    """Hardlink when the filesystem allows it, copy when it does not.
+
+    The release tree and the work directory are on different filesystems on the
+    production host, and a hardlink cannot cross devices.
+    """
+    try:
+        os.link(src, dst)
+    except OSError:
+        shutil.copy2(src, dst)
+
+
 def regenerate_atlas_snapshot(
     events: Iterable[Mapping[str, Any]],
     *,
@@ -327,17 +339,17 @@ def regenerate_atlas_snapshot(
         shutil.rmtree(root)
     root.mkdir(parents=True)
     source = Path(database_dir)
-    for child in source.iterdir():
-        if child.name.startswith(".") or not child.is_dir():
+    # Exactly what the builder reads, and nothing else. Linking the whole tree
+    # took minutes per run on tens of thousands of files, and this executes
+    # every fifteen minutes. If the builder ever needs another path it fails
+    # loudly on that path rather than being masked by copying everything.
+    for relative in ("config", "data/memory", "data/processed", "data/derived"):
+        child = source / relative
+        if not child.is_dir():
             continue
-        if child.name == "data":
-            (root / "data").mkdir()
-            for entry in child.iterdir():
-                if entry.name == "public_raw" or not entry.is_dir():
-                    continue
-                shutil.copytree(entry, root / "data" / entry.name, copy_function=os.link, dirs_exist_ok=True)
-            continue
-        shutil.copytree(child, root / child.name, copy_function=os.link, dirs_exist_ok=True)
+        target = root / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copytree(child, target, copy_function=_link_or_copy, dirs_exist_ok=True)
 
     def _write(path: Path, rows: list[dict[str, Any]]) -> None:
         # The destination is a hardlink to the repository's own copy; writing
@@ -913,12 +925,19 @@ class RemoteReconcilePipeline(LiveSnapshotPublisherMixin):
             # The ten original views read a snapshot built from
             # data/processed/codex, whose local writer stopped on 2026-07-17.
             # Regenerating it here is what actually joins the two planes.
-            atlas_rebuild = regenerate_atlas_snapshot(
-                live_events,
-                database_dir=Path(__file__).resolve().parents[2],
-                work_dir=self.config.work_dir,
-                output=self.config.web_data_dir / "memory_atlas.json",
-            )
+            try:
+                atlas_rebuild = regenerate_atlas_snapshot(
+                    live_events,
+                    database_dir=Path(__file__).resolve().parents[2],
+                    work_dir=self.config.work_dir,
+                    output=self.config.web_data_dir / "memory_atlas.json",
+                )
+            except Exception as exc:
+                # A cross-device link error took the whole reconcile down and the
+                # deployment auto-rolled back. This run also publishes the live
+                # snapshot and the status projection; a failed graph rebuild must
+                # degrade to the last good snapshot, never cancel the rest.
+                atlas_rebuild = {"state": "FAILED", "reason": f"{type(exc).__name__}: {exc}"[:400]}
         finally:
             temporary.unlink(missing_ok=True)
         event_count = int(analytics["event_count"])
