@@ -1,5 +1,43 @@
 # Changelog
 
+## v0.0.0.105 — **花体乱码是「替换」不是「缺失」，按缺失判的门漏掉一半**（2026-08-04）
+
+Liebig #124 落盘 62 份、字数 394 万、deep 门四项全过。逐份看正文才发现
+**10 份是 Fraktur OCR 乱码**（`ber`=der、`unb`=und、`ift`=ist、`I)`=h、`©`=G），
+**其中 9 份是 P1**，合计 583 万字符。
+
+份数／分档／字数三样**都是真的**，所以既有的门全部放行：
+`sha256`（字节本就不同）、来源数 45、一手占比 0.65、`near_duplicates`（长 s 打灭 shingle）、
+`check_corpus_integrity`（它判「是不是错误页」）、`check_ocr_homoglyphs`（它查同形字）。
+
+★★ **连专为此事建的 `check_ocr_language_death` 也只抓到 5/10**，成因可指认——
+它取**多语种里最高的**虚词占比，于是乱码德文被别的语种接住：
+
+```
+bub_gb_QlVBAAAAYAAJ       0.109 [pt]
+vollstndigerunt00liebgoog 0.159 [pt]  ← 高过 0.15 的门，逃掉
+b2130886x                 0.189 [fr]  ← 逃掉
+diemodernelandw00liebgoog 0.327 [de]  ← **按德语算就 0.327**
+```
+
+最后一份最说明问题：**短虚词（in/so/an/um）扛过了花体 OCR**，
+而 `der/die/und/ist` 整批被换成 `ber/bie/unb/ift`——**虚词总量没掉，是被替换掉了。**
+
+新增 `check_ocr_legibility.py`：直接比「正确形 vs 乱码形」，那 10 份 **10/10 全中**。
+已接进 `quality_check --phase research`（报 `corpus.fraktur-mojibake` 警告）。
+两件在 Virchow 上 16 vs 16、交集 15，**各自还抓到对方漏的一份**——互补不是替代。
+
+★ 判据第一版误报过一次：Slavyanov 的英文目录页 `good=0.0000 / moji=0.0051`，
+`moji>good` 成立就被判乱码。加一条绝对下限 `MOJI_FLOOR=0.02`
+（真乱码实测 0.0685–0.1126，误报那份 0.0051，**两侧都不贴线**），
+并把**那一份的实测形状**写成自测夹具。
+★ 夹具第一版把触发词放进每一段，算出 `moji=0.1053`——**那不是那份文件的形状**，
+等于换了个案子测。已改成 3/603 词 ≈ 0.005，与实测同量级。
+
+Liebig 剔除后 **52 份仍过 deep 四项**（52/6/35/0.6731），故不构成延后。
+被剔的 10 份没有删，记在 `_corpora/wip-liebig-124/_ocr_rejected.md`。
+
+
 ## v0.0.0.104 — **判重工具自己会归零：Fraktur 长 s 把 shingle 逐窗打灭**（2026-08-04）
 
 Liebig #124 清点时实测：**同一本书**（Liebig–Reuning 书信集）的两份独立扫描件

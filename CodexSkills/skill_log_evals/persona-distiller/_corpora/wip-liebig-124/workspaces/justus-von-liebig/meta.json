@@ -1,0 +1,92 @@
+{
+  "builder_version": "v0.0.0.5",
+  "chosen_subject_uid": "wikidata:Q16571",
+  "consent_authority": null,
+  "created_at": "2026-08-04T10:18:29Z",
+  "current_version": null,
+  "existential_hypotheses_enabled": false,
+  "identity_selection": {
+    "canonical": "agriculture-fishery",
+    "display": "农林牧渔师",
+    "mode": "single",
+    "primary": "agriculture-fishery",
+    "weights": {
+      "agriculture-fishery": 1.0
+    }
+  },
+  "language": "de",
+  "model_version": "0.1.0-draft",
+  "name": "Justus von Liebig",
+  "namesake_gate": {
+    "candidate_count": 1,
+    "chosen_candidate": {
+      "application_scenarios": [
+        "被问矿质营养说的证据链是怎么搭起来的",
+        "被问吉森实验室教学制度的具体安排",
+        "被问「最小因子律」到底是谁的",
+        "被问某本署 Liebig 的书是不是他写的"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://www.wikidata.org/wiki/Q16571",
+          "what": "Wikidata 主条目"
+        },
+        {
+          "locator": "GND 118572741",
+          "what": "德国国家图书馆规范号"
+        },
+        {
+          "locator": "VIAF 51763678",
+          "what": "国际规范档"
+        },
+        {
+          "locator": "LC n80133000",
+          "what": "美国国会图书馆规范号"
+        },
+        {
+          "locator": "archive.org creator:\"Liebig, Justus, Freiherr von, 1803-1873\"",
+          "what": "馆藏著录字段"
+        }
+      ],
+      "canonical_name": "Justus von Liebig",
+      "distinguishing_basis": "GND 118572741／VIAF 51763678／LC n80133000；archive.org creator 串作 `Liebig, Justus, Freiherr von, 1803-1873`；原著年 1825–1873。★ creator 串**单独不足**——须叠年份合理性（见 D 的反例）。已排除同姓者：B=Georg von Liebig（GND 116996889（≠ 118572741）；VIAF 37681912；archive.org creator 串带生年 `Liebig, Georg von, 1827-`）；C=Hermann von Liebig（GND 116996927（≠ 118572741）；VIAF 42603703；archive.org creator 串作 `Liebig, Hermann von`）；D=Hans von Liebig（GND 116996897（≠ 118572741）；VIAF 22907518）",
+      "evidence_level": "high",
+      "identity_category": "农林牧渔师",
+      "key_capabilities": [
+        "把田间争论化成可控实验的设计",
+        "用元素分析给农业下量化判据",
+        "对自己早期结论的公开修正"
+      ],
+      "label": "A",
+      "occupation_or_role": "化学家、农业化学奠基者、实验教学制度创立者",
+      "professional_background": "德国化学家（1803-05-12 – 1873-04-18）。吉森大学 1824 年起任教，把「学生在实验室里动手」立成制度；1840 年《Die organische Chemie in ihrer Anwendung auf Agricultur und Physiologie》提出植物矿质营养说，与腐殖质说对立；创办《Annalen der Chemie》；发明肉汁提取法；与 Wöhler 的书信往来 1829–1873 逾千通。",
+      "subject_uid": "wikidata:Q16571"
+    },
+    "chosen_subject_uid": "wikidata:Q16571",
+    "normalized_name": "justusvonliebig",
+    "resolution": "single",
+    "schema_version": "1.0"
+  },
+  "normalized_name": "justusvonliebig",
+  "origin_review_required": false,
+  "product_version": null,
+  "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+  "profile": "deep",
+  "prohibited_uses": [
+    "identity authentication or deceptive impersonation",
+    "invented endorsement, signature, consent, private memory or current opinion",
+    "unsupported psychological diagnosis",
+    "replacement of accountable high-stakes professional judgment"
+  ],
+  "retention_policy": null,
+  "runtime_invocation_versioning": false,
+  "scenario": null,
+  "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+  "schema_version": "2.0",
+  "slug": "justus-von-liebig",
+  "status": "draft",
+  "subject_origin": "historical",
+  "target_id": "tgt-74560196e775",
+  "time_scope": "all available periods, separated by role and material drift",
+  "updated_at": "2026-08-04T10:18:29Z"
+}

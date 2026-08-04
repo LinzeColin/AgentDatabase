@@ -1069,6 +1069,34 @@ def run_content_checks(report, target: Path, cache_dirs: list[str]) -> None:
         review['ocr_language_death'] = (n.strip()[:150] if n
                                         else '✓ 没有被 OCR 整份毁掉的语料')
 
+    # ── v0.0.0.105：花体乱码是**替换**不是**缺失**，上面那件按「缺失」判，会漏 ────
+    #   Liebig #124 实测，10 份已知的 Fraktur 乱码里 `check_ocr_language_death` 只抓到 **5**。
+    #   漏的成因可指认：它取**多语种里最高的虚词占比**，而乱码德文会被别的语种接住——
+    #     bub_gb_QlVBAAAAYAAJ 0.109 **[pt]**、vollstndigerunt00liebgoog 0.159 **[pt]**、
+    #     b2130886x 0.189 **[fr]**、diemodernelandw00liebgoog **0.327 [de]**
+    #   最后那份尤其说明问题：短虚词（in/so/an/um）扛过了花体 OCR，
+    #   而 `der/die/und/ist` 整批变成 `ber/bie/unb/ift`——**总量没掉，是被换掉了。**
+    #   本件直接比「正确形 vs 乱码形」，那 10 份 **10/10 全中**。
+    #   两件在 Virchow 上 16 vs 16、交集 15，**各自还能抓到对方漏的一份**——是互补不是替代。
+    code, out = run('check_ocr_legibility.py', list(cache_arg))
+    if code == -1:
+        review['checker_missing'] = out
+    elif code == 2:
+        report.error('content.selftest-failed',
+                     'check_ocr_legibility 负对照未过——其检查结论不作数')
+    else:
+        try:
+            n_bad = json.loads(out).get('**判为花体乱码**', 0)
+        except Exception:
+            n_bad = 0
+        if n_bad:
+            report.warn('corpus.fraktur-mojibake',
+                        f'**{n_bad} 份德文语料是花体 OCR 乱码**——'
+                        'der→ber、und→unb、ist→ift，整篇没有一个词能拿去检索或引用。'
+                        '份数／分档／字数三样都是真的，所以既有的门都放行了；'
+                        '**从这些文件里取不出任何可核的逐字引文**。')
+        review['fraktur_mojibake'] = f'{n_bad} 份' if n_bad else '✓ 没有花体乱码'
+
     res = target / 'evals/results.jsonl'
     if not res.exists():
         review['gate_reachability'] = 'evals/results.jsonl 不在——**门槛可达性未检查（不是通过）**'
