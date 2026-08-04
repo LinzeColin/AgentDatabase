@@ -838,9 +838,11 @@ def run_corpus_text_checks(report, target: Path, cache_dirs: list[str]) -> None:
     #   ★ 为什么此前没人发现：`check_staged_but_not_ingested` 与 `check_corpus_presence`
     #     **两件都没接进任何一道门**，只在 `check_checkers` 元普查里跑——
     #     而元普查是审计工具，不是门。**判据建好而不接线，等于没有。**
-    #   ★★ 而且 `check_corpus_presence` 对 Blackwell 报的是 **✓ 95/95 可解析**：
-    #     它按 `src-<hash>` 目录在不在算，**目录在、正文不在时它看不出来**。
-    #     所以接的是 `check_staged_but_not_ingested`，不是它。
+    #   ★★ 我曾在这里写「`check_corpus_presence` 按目录算、看不出正文不在」——**那句也是错的，已撤回**。
+    #     实测：Blackwell 95 行 `local_path` **逐条解析得到真实文件、0 行落空**（含 6 行指向 holdout）。
+    #     **它报 ✓ 是对的。** 两件判据管的是不同的事：
+    #     `check_corpus_presence` 问「台账指的文件在不在」，
+    #     `check_staged_but_not_ingested` 问「抓到的东西有没有进到建模看得见的地方」。
     outer = target.parent.parent if target.parent.name == 'workspaces' else target.parent
     # ★ 判据按「_corpora 根下每个 wip-* 是一个人物」扫，**给它单个工作区它会扫成空**
     #   （我第一版就是这么传的，于是它对 Blackwell 报「✓ 一致」——**假绿**）。
