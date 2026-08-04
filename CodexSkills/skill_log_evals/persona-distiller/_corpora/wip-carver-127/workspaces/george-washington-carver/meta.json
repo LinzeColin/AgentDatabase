@@ -95,6 +95,13 @@
       "Tuskegee Exp. Sta. Bulletin No.28 — Smudging an orchard with native material（Malone, R. E.，未收入）",
       "Tuskegee Exp. Sta. Bulletin No.9 / No.11 — 无数字化本，作者未核，未收入",
       "helpforhardtimes00carv (1910) — LC 著录作 `[Carver, George Washington]`（**方括号＝推定**），归属存疑，未收入"
+    ],
+    "covered_sources": [
+      "**CAT31355440_djvu.txt**（Bulletin No.1, Feeding Acorns, 1898）—— 署名在**文末、不带 `By`**，正则的 `BYLINE`（要 `By` 打头）与 `STANDALONE`（要行首）都够不到。印本原文照录：`…our motto shall be to meet the full require- ments of the act that made this Station possible- **Geo. W. Carver, Director.**`",
+      "**proceedingsofiow03iowa-fungus-diseases-1895.txt**（PIAS Vol.3, 1896, pp.140–148）—— **合著**，`By` 之后先出现的是第一作者，正则要求 `By` 后紧跟本人名。印本原文照录：`FUNGUS DISEASES OP PLANTS AT AMES, IOWA, 1895. **BY L. H. PAMMEL AND GEO. W. CARVER.**`　★ 合著已在台账标明，不作独著用。",
+      "**proceedingsofiow03iowa-inoculation-gymnosporangium.txt**（PIAS Vol.3, 1896, pp.162–169）—— 同上，**合著**：`**BY F. C. STEWART AND G. W. CARVER.**`　★ 合著，不作独著用。",
+      "**tariff1921-carver-testimony.txt**（1921-01-21 众议院筹款委员会，Schedule G）—— **这一份根本不是署名件，是速记逐字稿**，归属靠说话人标签而不是标题行。段内证据：主席点名 `**The Chairman. All right, Mr. Carver. We will give you 10 minutes.**`；**10 个干净的 `Mr. Carver.` 发言轮次**（另有 26 个 OCR 讹变体 Cabveb／Cakveb 等）；末尾主席致谢 `The Chairman. We want to compliment you, sir, on the way you have handled your subject.`。★ 标题行 OCR 讹作 `STATEMENT OF MB. GEOEOE W. CABVER`——**姓都拼坏了，正则必然够不到**，而这不能推翻上面那些轮次证据。",
+      "**reportofhamptonn00hamp_0-carver-paper.txt**（Report of the Hampton Negro Conference III, 1899, pp.53–55）—— `By` 与名字之间隔着一个 **OCR 讹字**：印本原文照录 `A FEW HINTS TO SOUTHERN FARJTERS **BY FROF. G. W. CARVER, OF TUSKEGF.E INSTITUTE**`——`FROF.` 是 `PROF.` 的讹字，不在敬称表里，于是 `BYLINE` 断在那里。★ 另：本篇是**事先写好当场宣读的论文**，不是速记稿，归 writings 不充 conversations；结尾 `ADDITIONAL HINTS` 之后是 Troyer 的发言，抓源时已切除。"
     ]
   }
 }

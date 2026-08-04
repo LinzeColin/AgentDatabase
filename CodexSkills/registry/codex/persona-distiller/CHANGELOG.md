@@ -1,5 +1,43 @@
 # Changelog
 
+## v0.0.0.129 — **署名判据认不出「名缩写」，一整批亲笔公报被判无据**（2026-08-05）
+
+Carver #127 ingest 之后研究门报 **63 条 `research.authorship-unproven`**。
+去开文件看：他 35 份塔斯基吉公报署的是
+
+```
+By G. W. Carver              G.  W.  CARVER,  M.  S.  Agr.,  Director
+Geo. W. Carver, Director.    BY FROF. G. W. CARVER, OF TUSKEGF.E INSTITUTE
+```
+
+**名一律缩写，从不写全。** 而 `BYLINE`／`STANDALONE` 旧式只认拼全的 `George`。
+
+已改：首名可缩写 `(?:George|Geo\.|G\.)`。
+★★ **射程没有跟着放宽——首字母必须对得上**，所以同姓的
+**T**homas Nixon Carver（哈佛经济学家）与 **W**. A. Carver（玉米遗传）
+**仍然匹配不上**，而这两位正是本人物抓源时的已知混淆源。
+**七条回归守卫已写进自测**（四条必须匹配、三条必须不匹配）。
+
+★ 这与本件早已学过的一课同形（v0.0.0.10：逐字稿用缩写标签 `MS:`）——
+**只是那次学在「说话人标签」上，没有学到「署名」上。**
+
+### 研究门 63 → 1
+
+```
+63  改署名正则（认名缩写）                        → 43
+43  写 attribution_basis（historical 必填四字段）  → 37
+37  把 check_authorship 找到的 A-* 证据写回台账    →  6
+ 6  给五份特殊形态在 covered_sources 里逐份点名     →  1
+ 1  research.lane-completion（六道研究文档未写）—— **下一步**
+```
+
+★★ 那 35 份的 `authorship_evidence` **不是我手写断言的，是 `check_authorship` 自己报的**
+（`A-byline` 24 ／ `A-byline-standalone` 6 ／ `A-signature-block` 5）。
+余下五份**确实无法由正则认出**，逐份写明成因并照录印本原文：
+文末无 `By` 的署名、两篇合著（`BY L. H. PAMMEL AND GEO. W. CARVER`）、
+速记逐字稿（靠 10 个 `Mr. Carver.` 轮次而非标题行）、`FROF.` 讹字挡住 `By`。
+
+
 ## v0.0.0.128 — **一个不存在的分档静默通过；一个少了列的台账被按固定列位读错**（2026-08-05）
 
 ### 一、`P3` 不是本项目的分档，而两道判据都没拦

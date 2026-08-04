@@ -1,6 +1,6 @@
-# Release verification — Persona Distiller v0.0.0.128
+# Release verification — Persona Distiller v0.0.0.129
 
-Date: 2026-08-05（**v0.0.0.128**）
+Date: 2026-08-05（**v0.0.0.129**）
 
 > **本文件记录「当前发布号的复验结果」，不是历史归档。**
 > 版本号必须等于根目录 `VERSION`，由 `scripts/check_contract_drift.py` 强制。
@@ -21,6 +21,13 @@ Date: 2026-08-05（**v0.0.0.128**）
 > **表格正文不在任何判据的射程里**。
 > **「本表每一行都来自本次实跑」是一句自述**——
 > 而自述不是证据（见 `self-report-is-not-evidence`）。
+
+> ### v0.0.0.129 这一版重跑了什么
+>
+> **`check_authorship` 的 BYLINE/STANDALONE 允许名缩写**。
+> **本次重跑**：该件自测（**新增 7 条回归守卫，含 3 条同姓异名必须不匹配**）、
+> **Carver 研究门 63 → 43 → 37 → 6 → 1**、41 源逐源跑 `check_authorship` 取 A-* 证据、
+> `finalize_release.py` 四步。**其余各行沿用 v0.0.0.96 那一次。**
 
 > ### v0.0.0.128 这一版重跑了什么
 >
