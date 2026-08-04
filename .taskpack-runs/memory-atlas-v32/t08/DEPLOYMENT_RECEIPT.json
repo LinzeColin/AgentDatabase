@@ -1,0 +1,12 @@
+{
+  "captured_at": "2026-08-04T01:41:31Z",
+  "release_id": "20260804T013334Z-fe2113d81a57",
+  "promotion": {"schema_version":"memory_atlas.promotion.v1","release_id":"20260804T013334Z-fe2113d81a57","git_commit":"fe2113d81a57f8d134658c2197a9809f10ddc6d8","promoted_at":"2026-08-04T01:40:34Z"},
+  "app_current": "/srv/linze/apps/memory-atlas/releases/20260804T013334Z-fe2113d81a57",
+  "app_previous_rollback_target": "/srv/linze/apps/memory-atlas/releases/20260804T010055Z-60d0b611a1f1",
+  "agent_current": "/srv/linze/apps/agentdatabase/releases/20260804T013334Z-fe2113d81a57",
+  "agent_previous_rollback_target": "/srv/linze/apps/agentdatabase/releases/20260804T010055Z-60d0b611a1f1",
+  "served_assets": "GalaxyScene-qEvVb8rl.js ObsidianGraphScene-DRQFu6ku.js index-BH5C_9WB.css index-dYZiJt-h.js ",
+  "released_assets": "GalaxyScene-qEvVb8rl.js ObsidianGraphScene-DRQFu6ku.js index-BH5C_9WB.css index-dYZiJt-h.js ",
+  "post_promote_probe": {"schema_version":"memory_atlas.post_promote_probe.v3","live_snapshot_probe":"NOT_RUN","release_id":"20260804T013334Z-fe2113d81a57","state":"DEPLOYED_INTERNAL_VERIFIED_OWNER_ACCESS_CONFIRMATION_PENDING","internal_api_health":200,"internal_api_private":403,"internal_proxy_api_health":200,"internal_proxy_private":403,"internal_web":200,"internal_static_private":404,"unauthenticated_public_health":302,"unauthenticated_public_private":302,"authenticated_public_health":"NOT_RUN","authenticated_public_private":"NOT_RUN","checked_at":"2026-08-04T01:40:34Z"}
+}
