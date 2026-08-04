@@ -1,6 +1,6 @@
 # #127 George Washington Carver 可得性探测：**一手最富的一档，却卡在通道数上**
 
-日期：2026-08-05　状态：**未定** —— lane 2 的窄检索还在跑（见第五节）
+日期：2026-08-05　状态：**lane 2 已定位（PD、full view）——但本机取不到，见第六节**
 
 ---
 
@@ -131,3 +131,64 @@ NAL 那 120 封的著录写的是「primarily **between**」卡佛与 USDA 三�
 1921 听证 Schedule G 全文、Bulletin No.9／No.11、`notice1909` 的续展记录、
 书信是否曾在 2002-12-31 前正式出版（若有，§303 会顶到 2047）、
 `helpforhardtimes00carv` 的归属（LC 著录用**方括号**＝推定）。
+
+
+---
+
+# 六、★★★ lane 2 找到了：**1921 年听证 Part III，Carver 证词 pp. 2070–2078**
+
+窄检索的结果（**推翻了「Schedule G 分册不存在公开全文」这个前提**）：
+
+```
+Part **III** = Schedule F（烟草）+ **Schedule G（农产品与备用条款）** + Schedule H（酒类）
+  Tariff Information, 1921: Hearings on General Tariff Revision
+  Before the Committee on Ways and Means, House of Representatives
+  [Jan. 20-22, 24, 25, 1921]
+
+Google Books id **R2osAAAAMAAJ**　**full view / public domain**，PDF+EPUB，**有 OCR**
+底本 Library of Congress 藏本，2007-02-28 数字化（与 Part I 同一批）
+```
+
+**Carver 证词位置（出自该卷自己的检索索引，不是推测）**：
+
+```
+卷末索引：`Carver, George W., peanut products .. 2070, 2077`
+p.2070 标题行：`...CARVER, REPRESENTING THE UNITED PEANUT ASSOCIATION OF AMERICA, TUSKEGEE, ALA.`
+命中续至 2072–2077，**p.2078 见签名 `GEO W. CARVER`**
+→ 约 **pp. 2070–2078**
+```
+
+★ 此前那个死路也查清了：`tariffinformati00meangoog` 是 **Part I（Schedule A/B）**；
+而 `tariffinformati02meangoog` **根本不是听证**，是 Tariff Commission 的 Schedule G 报告
+（全文实测：`hearing` 0 次、`Carver` 0 次）。**两个都不是。**
+
+## ★★ 但「找到了」不等于「取到了」——**本机三条通道全被挡**
+
+| 通道 | 实况 |
+|---|---|
+| Google Books 直连 | `books.google.com` curl **一律 403**；连续调用后返回 `google.com/sorry` **验证码挑战** → **已停手，未尝试破解** |
+| Google Books API | **429，`quota_limit_value: 0`** —— 本环境永久不可用，不是临时限流 |
+| HathiTrust（3 个 `rights: pd` 副本：Cornell／Harvard／UMN） | 全站 Cloudflare「Just a moment…」**403，未绕过**（★ 但 Bib API 正常，`full view` 是从它确认的） |
+| archive.org | **Google 的 pt.3–7 扫描件未镜像到 IA**（`source:R2osAAAAMAAJ` 返回 0） |
+
+**所以本条的准确表述是：**
+
+> **lane 2 的材料确实存在、确实是公有领域、确实有 OCR 全文，
+> 且已定位到页码——但从本机取不到它的字节。**
+
+★★ **这不是「未核」，也不是「取到了」。** 两者都不许写。
+**这是「已核实其存在与权利状态，取用通道未解决」。**
+
+## 七、于是 quick 档的账现在长这样
+
+```
+≥8 份来源        **满**（35 份 PD bulletin）
+一手占比 ≥0.40   **满**（35/36 ≈ 0.97）
+≥3 道            lane 1 ✓　**lane 2 ✓（已定位，取用未解决）**　lane 4 ✓
+                 → **形式上够 3 道，实质取决于 lane 2 能不能取到**
+```
+
+★ **另一条 lane 2 检索仍在跑**（找「他的话当年印在学会会刊／期刊上」那一类）——
+若那条找到一件**本机取得到**的，lane 2 就彻底落实，不必依赖 Google Books。
+
+**在那条回来之前，本人物既不入库也不记延后。**
