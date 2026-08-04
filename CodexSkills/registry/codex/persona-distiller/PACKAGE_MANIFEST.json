@@ -16,8 +16,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "0b628dc1acd3e954c215c7c7620ce8500b3860c3a608f809c8b5d604f6572fa3",
-      "size_bytes": 157459
+      "sha256": "c3b5d619b64463532c0bf4444bbd93456b2888e210f2d85ddc390c5037ef2e7e",
+      "size_bytes": 160944
     },
     {
       "path": "CONTRIBUTING.md",
@@ -381,8 +381,8 @@
     },
     {
       "path": "references/ledgers/_待用户裁定.md",
-      "sha256": "927029aeebf8eae3dd9ce201750cbd7a6c2df6d12eb60d73e81d7e085037b45f",
-      "size_bytes": 13377
+      "sha256": "d71b9866410ae1decc053c36b94da5758d5fceddb7fce846e98e75e89e2cd1dc",
+      "size_bytes": 14620
     },
     {
       "path": "references/ledgers/_每次开工必读.md",
@@ -791,8 +791,8 @@
     },
     {
       "path": "references/pipeline/next_person.py",
-      "sha256": "ca1251838348be49a8b40ee998c85447535ad6e500f4d8718956dee5f07a659f",
-      "size_bytes": 13156
+      "sha256": "d6de57b3f8de48b6f3f0956c077f0fd00910514a1ca44f35f28f19951b2aea69",
+      "size_bytes": 15817
     },
     {
       "path": "references/pipeline/scaffold/README.md",

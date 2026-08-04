@@ -45,11 +45,23 @@ def slugify(s):
     return s
 
 
-def pick(pending, category_counts, products_done, round_size=5, counterweight=True):
+def pick(pending, category_counts, products_done, round_size=5, counterweight=True,
+         deferred_counts=None):
     """选出 NEXT，并说明**为什么是它**。
 
     返回 `(item, why)`。`why` 一律写进输出——**看不见理由的排期等于没有排期。**
+
+    `deferred_counts`（可选）是每族的延后人数。**它只进 `why`，不参与排序。**
+
+    ★★ 为什么不参与排序：医疗护理师实测「已入库 0 人、已延后 19 人」，
+    而那 19 人里 **13 人（68%）是语料齐、全流程走完、卡在判分**——
+    判分是**全局**的一步，不是这一族的属性。
+    按延后数给族降权，等于**把全局问题归给一个族**，是误判。
+
+    所以配重照旧只看名册人数（名册确实是 0，指向它没错），
+    但输出里**必须带上延后数**，否则「没排过」和「排了 19 个全被挡」长得一样。
     """
+    deferred_counts = deferred_counts or {}
     if not pending:
         return None, {"mode": "empty", "reason": "队列无待办"}
     slot = products_done % round_size if round_size else 1
@@ -76,9 +88,11 @@ def pick(pending, category_counts, products_done, round_size=5, counterweight=Tr
                             "reason": f"队首族「{pending[0]['family_zh']}」已是最少之一，无需配重"}
     cand = min((i for i in pending if i["family_zh"] == least_f),
                key=lambda i: (i.get("priority", 99), i.get("order", 99)))
-    return cand, {
+    nd = deferred_counts.get(least_f, 0)
+    why = {
         "mode": "counterweight", "slot": 0,
         "least_family": least_f, "least_count": least_n,
+        "least_family_deferred": nd,
         "displaced": pending[0]["name"],
         "displaced_family": pending[0]["family_zh"],
         "displaced_family_count": category_counts.get(pending[0]["family_zh"]),
@@ -86,6 +100,13 @@ def pick(pending, category_counts, products_done, round_size=5, counterweight=Tr
                    f"而队列原本要给「{pending[0]['family_zh']}」（已 "
                    f"{category_counts.get(pending[0]['family_zh'])} 人）再加一个"),
     }
+    if nd and not least_n:
+        why["★★ 这一族入库 0 人，但已延后 %d 人" % nd] = (
+            f"**配重仍指向它是对的**——名册确实 0 人。但「没排过」与「排了 {nd} 个全被挡」"
+            f"在这个数上长得一样。**再排一个人不会自动改变这一点**："
+            f"先看那 {nd} 人卡在抓源还是卡在判分。"
+            f"（医疗护理师实测：19 人里 13 人语料齐、流程走完，卡的是判分。）")
+    return cand, why
 
 
 # ── 负对照 ────────────────────────────────────────────────────────────
@@ -109,6 +130,18 @@ def self_test():
         fails.append(f"反向对照失败：关掉配重后没有复现漂移，选了 {it2['name']}")
     if it["name"] == it2["name"]:
         fails.append("反向对照失败：开与关选出同一个人，**配重是装饰**")
+
+    # ★★ 反向对照：**延后数不许改变选择**——判分是全局的一步，不是某一族的属性
+    it_a, why_a = pick(q, counts, 100)
+    it_b, why_b = pick(q, counts, 100, deferred_counts={f: 99 for f in counts})
+    if it_a["name"] != it_b["name"] or why_a["mode"] != why_b["mode"]:
+        fails.append(f"反向对照失败：**延后数改变了选择**（{it_a['name']} → {it_b['name']}）——"
+                     "按延后数给族降权就是把全局问题归给一个族")
+    # 而它必须**报出来**，否则「没排过」与「排了 19 个全被挡」长得一样
+    if not any("已延后" in k for k in why_b):
+        fails.append("反向对照失败：延后数没有出现在 why 里，等于没报")
+    if any("已延后" in k for k in why_a):
+        fails.append("反向对照失败：没给延后数时**不该**凭空报一条")
 
     # 正对照：非轮首不许配重（它是 1/5，不是每次）
     for slot in (1, 2, 3, 4):
@@ -139,7 +172,7 @@ def self_test():
         return 1
     print("负对照通过：轮首把 0 人族提上来；**关掉配重确实复现漂移**（证明它不是装饰）；"
           "非轮首 4 格均不配重；最少族无待办时退到次少族；队首已是最少族时不重复；"
-          "缺 category_counts 时显式报告而非静默")
+          "缺 category_counts 时显式报告而非静默；\n      **延后数只报不排序**（两次定向变异实测：改成按延后数排序、或只换同族的人，两条断言各自命中）")
     return 0
 
 
@@ -180,10 +213,14 @@ def main():
             done_slug.add(m[0].strip('-'))
 
     # 因证据不足延后的人物：跳过但不出队，补足来源后从 _延后名单.json 删掉即可恢复
-    deferred = set()
+    deferred, deferred_by_family = set(), {}
     if os.path.isfile(a.deferred):
         for item in json.load(open(a.deferred, encoding="utf-8")).get("deferred", []):
             deferred.add(norm(item.get("name", "")))
+            f = item.get("family_zh")
+            if f:
+                # ★ 按**族**数延后人数。只进 why，不参与排序——见 pick() 的说明。
+                deferred_by_family[f] = deferred_by_family.get(f, 0) + 1
 
     q = json.load(open(a.queue, encoding="utf-8"))["queue"]
     pending, done_in_q, deferred_in_q = [], 0, 0
@@ -198,7 +235,8 @@ def main():
     n_products = len(idx.get("products", [])) if os.path.isfile(ti) else 0
     counts = idx.get("category_counts", {}) if os.path.isfile(ti) else {}
     nxt, why = pick(pending, counts, n_products,
-                    round_size=a.round, counterweight=not a.no_counterweight)
+                    round_size=a.round, counterweight=not a.no_counterweight,
+                    deferred_counts=deferred_by_family)
 
     print(json.dumps({
         # ★★ 下面四个 queue_* 数的是**队列这一群**，不是「做了多少人」。
