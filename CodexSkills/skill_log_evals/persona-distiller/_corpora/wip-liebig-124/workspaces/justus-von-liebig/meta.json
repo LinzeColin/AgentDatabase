@@ -88,5 +88,48 @@
   "subject_origin": "historical",
   "target_id": "tgt-74560196e775",
   "time_scope": "all available periods, separated by role and material drift",
-  "updated_at": "2026-08-04T10:18:29Z"
+  "updated_at": "2026-08-04T10:18:29Z",
+  "attribution_basis": {
+    "authority": "**印刷时代人物，署名证据存在且可核**，判据是三重叠加，缺一不可：① 扉页署名（`von Justus Liebig`／`by Justus Liebig`）；② **规范号 GND 118572741 ／ VIAF 51763678 ／ LC n80133000**；③ **出版年落在 1825–1873**（生前）或明确标注为遗著／再版。★ 单靠 ① 不够，也单靠 ② 不够——见 disputed_policy 里的 Judenfrage 反例。二次权威：Bayerische Staatsbibliothek 与 Wellcome Collection 的著录，以及 Volhard《Justus von Liebig》(1909, 2 Bde) 的著作年表（**该书本次未取到数字化本，archive.org `creator:(Volhard)` 返回 30 条 0 命中，对照查询证明语法有效**）。",
+    "citation": "https://d-nb.info/gnd/118572741 ｜ https://viaf.org/viaf/51763678 ｜ https://id.loc.gov/authorities/names/n80133000 ｜ https://www.wikidata.org/wiki/Q16571 ｜ 逐份出处见 raw/_ids.txt 第 2 列",
+    "disputed_policy": "**默认怀疑同姓者，四步裁定**：① 取 IA/BSB 的 creator 串；② **不接受 creator 串作为充分证据**——`Judenfrage4`／`Judenfrage5` 两条在 archive.org 上 creator **一字不差写着 `Liebig, Justus, Freiherr von, 1803-1873`**，实为其孙 **Hans von Liebig（1874–1931，GND 116996897）** 的 1921／1928 政论，出版于目标人物死后 48／55 年；③ 因此**叠加出版年合理性**（1825–1873，遗著另注）；④ 主题重叠的同姓者必须查 GND：**Hermann von Liebig（1831–1894，GND 116996927）是其子、农学家，1867 年出《Die zweckmäßige Anwendung der künstlichen Dünger》——与父亲主题完全重叠，仅靠姓＋主题无法区分**，是本人物最高风险的混淆源。★ 另两类不算「他所著」但**合法在库**：(a) **译本**（Playfair／Gregory／Blyth／Bullock／Gardner／Hofmann）——措辞是译者的，一律 **P2 且标 TRANSLATION**，**不得用于逐字引文的措辞判定**；(b) **书信集**——含双方来信，标 CO-AUTHORED，**只有署 Liebig 的那些信是他的话**；其中 1884 年 Liebig–Reuning 集由**其子 Georg von Liebig（GND 116996889）编**，编者注不是本人文字。★★ 本次已据此**改判两份**：`erklrungveranl00buffuoft` creator 实为 **Buff, Heinrich (1805–1878) 与 Löwig**，是**针对 Liebig 的论战文**；`dashomopathisc00grau` 实为 **Grauvogl, Eduard von** 写给他的**公开信**（Offenes Sendschreiben an Herrn Prof. Dr. Justus Liebig），他只是收信人。两份原被抓源分类记作 P1，由本门查出，已改 S1/external。",
+    "disputed_works": [
+      {
+        "title": "Wege zur politischen Macht (Judenfrage4)",
+        "actual_author": "Hans von Liebig（孙）",
+        "verdict": "securely-not-subject",
+        "why": "archive.org creator 串与目标人物完全一致，但出版年 1921 在其卒年 1873 之后 48 年；GND 116996897"
+      },
+      {
+        "title": "Die Verschweizerung des deutschen Volkes (Judenfrage5)",
+        "actual_author": "Hans von Liebig（孙）",
+        "verdict": "securely-not-subject",
+        "why": "同上，出版年 1928，晚 55 年"
+      },
+      {
+        "title": "Die zweckmäßige Anwendung der künstlichen Dünger (1867)",
+        "actual_author": "Hermann von Liebig（子）",
+        "verdict": "securely-not-subject",
+        "why": "**主题与父亲完全重叠**，仅靠姓＋主题不可分；GND 116996927 ≠ 118572741"
+      },
+      {
+        "title": "Erklärung veranlasst durch die Schrift: Der Chemiker Dr. Justus Liebig…",
+        "actual_author": "Buff, Heinrich; Löwig, Karl Jakob",
+        "verdict": "securely-not-subject",
+        "why": "**针对 Liebig 的论战文**，标题里的人名是被批评者不是作者；本次已从 P1 改为 S1/external"
+      },
+      {
+        "title": "Das homöopathische Aehnlichkeitsgesetz. Offenes Sendschreiben an Herrn Prof. Dr. Justus Liebig",
+        "actual_author": "Grauvogl, Eduard von (d. 1877)",
+        "verdict": "securely-not-subject",
+        "why": "**写给他的公开信**，他是收信人；本次已从 P1 改为 S1/external"
+      },
+      {
+        "title": "Justus von Liebig und Christian Friedrich Schönbein: Briefwechsel 1853-1868（著录本）",
+        "actual_author": "扫描件实为 Wöhler–Liebig 书信 1982 年 Cromm Verlag 新编本",
+        "verdict": "excluded-not-pd",
+        "why": "**著录张冠李戴 + 版权页 © Jürgen Cromm Verlag 1982, ISBN 3-921969-10-7**；既是重复件，`pre1929` 对它也不成立。已剔除，未入库"
+      }
+    ]
+  }
 }
