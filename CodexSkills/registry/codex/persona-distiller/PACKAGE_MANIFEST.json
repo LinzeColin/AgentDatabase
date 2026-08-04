@@ -686,8 +686,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_restraint_without_remainder.py",
-      "sha256": "508138f6ebb3aa980dd775922e47fe607aac8353b3109360e4900c00175338a7",
-      "size_bytes": 11581
+      "sha256": "e093b97d2c6215090b5d73b90cbaa75c52a4d2968c1e517b85084606ed5f4aea",
+      "size_bytes": 12026
     },
     {
       "path": "references/pipeline/checkers/check_rights_basis.py",
@@ -1241,8 +1241,8 @@
     },
     {
       "path": "scripts/check_restraint_without_remainder.py",
-      "sha256": "508138f6ebb3aa980dd775922e47fe607aac8353b3109360e4900c00175338a7",
-      "size_bytes": 11581
+      "sha256": "e093b97d2c6215090b5d73b90cbaa75c52a4d2968c1e517b85084606ed5f4aea",
+      "size_bytes": 12026
     },
     {
       "path": "scripts/check_rights_basis.py",
