@@ -428,3 +428,20 @@ OK	womans-work-in-america-1891	https://www.gutenberg.org/cache/epub/74085/pg7408
 OK	nps-historic-site-1981	https://www.gutenberg.org/cache/epub/52524/pg52524.txt	182397 chars
 OK	story-rc-1918-DUPSCAN	https://archive.org/download/storyofredcrossg0000clar/storyofredcrossg0000clar_djvu.txt	237700 chars
 OK	story-rc-1928	https://archive.org/download/storyofredcross0000clar/storyofredcross0000clar_djvu.txt	239913 chars
+# ── 补一手第二轮（Letterbooks）：tile.loc.gov 探测 + crowd.loc.gov 取回 ──
+BLOCKED	tile-loc-letterbook-013	https://tile.loc.gov/storage-services/service/gdc/gdccrowd/mss/mss11973/013/0000/013_0008_0505.txt	http=429 Cloudflare 'Just a moment...' 质询页 5677 字节；**未绕过**
+BLOCKED	tile-loc-letterbook-051	https://tile.loc.gov/storage-services/service/gdc/gdccrowd/mss/mss11973/051/0000/051_0008_0125.txt	http=429 Cloudflare 质询页；**未绕过**
+BLOCKED	tile-loc-KNOWN-GOOD-retest	https://tile.loc.gov/storage-services/service/gdc/gdccrowd/mss/mss11973/004/0500/004_0544_0639.txt	http=429；★ 同一 URL 本次开工时先返 http=200 / 125073 字节，是我自己的批量探测把整台主机限了流——所以 letterbook 的 tile 判定**不成立，是未完成**，不是「文件不存在」
+BLOCKED	www-loc-collection-json	https://www.loc.gov/collections/clara-barton-papers/?fo=json&c=1	http=403 Cloudflare 质询页 5756 字节；**未绕过**
+BLOCKED	findingaids-loc	https://findingaids.loc.gov/exist_collections/ead3master/mss/2009/ms009164.xml	http=403 Cloudflare 质询页；**未绕过**
+BLOCKED	tile-loc-dirlisting	https://tile.loc.gov/storage-services/service/gdc/gdccrowd/mss/mss11973/	http=403 目录列表关闭；**未绕过**
+OK	lb-unbound-1876-aug-1878-sept	https://crowd.loc.gov/campaigns/clara-barton-angel-of-the-battlefield/letterbooks-american-red-cross-early-years/mss119730177/	297723 chars（118 幅影像，118 幅有转录文本，106 幅状态 completed）
+OK	lb-unbound-1879-apr-1882-apr	https://crowd.loc.gov/campaigns/clara-barton-angel-of-the-battlefield/letterbooks-american-red-cross-early-years/mss119730178/	222090 chars（145 幅影像，145 幅有转录文本，145 幅状态 completed）
+OK	lb-unbound-1882	https://crowd.loc.gov/campaigns/clara-barton-angel-of-the-battlefield/letterbooks-american-red-cross-early-years/mss119730179/	56003 chars（57 幅影像，57 幅有转录文本，42 幅状态 completed）
+OK	lb-unbound-1882-1893	https://crowd.loc.gov/campaigns/clara-barton-angel-of-the-battlefield/letterbooks-american-red-cross-early-years/mss119730180/	30901 chars（46 幅影像，46 幅有转录文本，46 幅状态 completed）
+OK	lb-unbound-1906-june-oct	https://crowd.loc.gov/campaigns/clara-barton-angel-of-the-battlefield/letterbooks-reflection-and-retirement/mss119730181/	27759 chars（34 幅影像，34 幅有转录文本，34 幅状态 completed）
+OK	lb-unbound-1910-july-1911-apr	https://crowd.loc.gov/campaigns/clara-barton-angel-of-the-battlefield/letterbooks-reflection-and-retirement/mss119730182/	43478 chars（48 幅影像，48 幅有转录文本，48 幅状态 completed）
+OK	lb-1890-feb-1898-mar-june	https://crowd.loc.gov/campaigns/clara-barton-angel-of-the-battlefield/letterbooks-american-red-cross-1898-1902/mss119730146/	86475 chars（80 幅影像，68 幅有转录文本，80 幅状态 completed）
+OK	lb-1892-june-1893-oct-1894-july	https://crowd.loc.gov/campaigns/clara-barton-angel-of-the-battlefield/letterbooks-american-red-cross-1891-1898/mss119730151/	89195 chars（92 幅影像，90 幅有转录文本，60 幅状态 completed）
+REJECT	lb-1890-feb-1898-mar-june	取到了但不入库：卷内 1953 年著录条逐字 '11A is actually the letterpress copies of correspondence sent by Dr Julian Hubbell first field agent of the American Red Cross.'——**是 Hubbell 的信底，不是她的**。本人落款 0 处。见 _EXCLUDED.txt
+REJECT	lb-unbound-1882-1893	取到了但不入库：正文是日内瓦国际委员会第 50 号通函，通篇第三人称提到 'Miss Clara Barton'。本人落款 0 处，写给／提到她的抬头 4 处。见 _EXCLUDED.txt
