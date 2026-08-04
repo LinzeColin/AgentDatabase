@@ -461,8 +461,8 @@
     },
     {
       "path": "references/pipeline/checkers/build_blind_payload.py",
-      "sha256": "434b9d75a2f26331756262f73afe13cc0ff1e2db2afd45b61438f7d67df12151",
-      "size_bytes": 14074
+      "sha256": "220bd65b508bfa96e9edb6ebe14c940adef9bff1060d00115d6982a1577b1101",
+      "size_bytes": 14635
     },
     {
       "path": "references/pipeline/checkers/build_source_ledger.py",
@@ -731,8 +731,8 @@
     },
     {
       "path": "references/pipeline/checkers/quality_check.py",
-      "sha256": "2c42e3b41244ca4ecbbfca547877c95a90a6f86e8c5bc2742323d8a947634137",
-      "size_bytes": 125472
+      "sha256": "0e2233ade7e4b2898cab67382fc50ce3a595ce3fe09a391e67da5a498b009884",
+      "size_bytes": 133486
     },
     {
       "path": "references/pipeline/checkers/verify_product.py",
@@ -801,8 +801,8 @@
     },
     {
       "path": "references/pipeline/next_person.py",
-      "sha256": "d6de57b3f8de48b6f3f0956c077f0fd00910514a1ca44f35f28f19951b2aea69",
-      "size_bytes": 15817
+      "sha256": "6063daf3b3396d1922eb0e8d16150e4b40ed909a33a528af71445e19853e8ac5",
+      "size_bytes": 17482
     },
     {
       "path": "references/pipeline/scaffold/README.md",
@@ -936,8 +936,8 @@
     },
     {
       "path": "scripts/build_blind_payload.py",
-      "sha256": "434b9d75a2f26331756262f73afe13cc0ff1e2db2afd45b61438f7d67df12151",
-      "size_bytes": 14074
+      "sha256": "220bd65b508bfa96e9edb6ebe14c940adef9bff1060d00115d6982a1577b1101",
+      "size_bytes": 14635
     },
     {
       "path": "scripts/build_manifest.py",
@@ -1301,8 +1301,8 @@
     },
     {
       "path": "scripts/quality_check.py",
-      "sha256": "aab27a233b2a4934b2b8d39781993fe6891f0adc0fbd2702cf8427efe68a47b0",
-      "size_bytes": 130963
+      "sha256": "0e2233ade7e4b2898cab67382fc50ce3a595ce3fe09a391e67da5a498b009884",
+      "size_bytes": 133486
     },
     {
       "path": "scripts/register_persona.py",

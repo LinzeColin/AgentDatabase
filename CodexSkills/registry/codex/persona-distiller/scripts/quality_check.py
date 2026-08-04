@@ -1760,6 +1760,50 @@ def run_verbatim_pointer(report, target: Path) -> None:
     report.metrics['verbatim_pointer'] = info
 
 
+def run_unwired_three(report, target: Path) -> None:
+    """把三件**从来没有被任何代码调用过**的判据接上（v0.0.0.91，**只写 metrics**）。
+
+    起因：`check_checkers` 之外自查了一遍「谁调用谁」——
+    **51 件判据里 7 件在生产代码里找不到调用方**。
+    三处所谓「被调用」实为**注释里的提及**（`check_contract_drift` 讲历史、
+    `check_scan_reach` 讲射程边界、`check_extreme_result_is_suspect` 讲归属）。
+
+    **这是「第 9 次」那个坑长回来了**：判据存在、自测全绿、文档里反复引用，
+    而它从来没有跑过。本函数接三件（其余四件另有归属，见 CHANGELOG）：
+
+    - `check_activation_yield`   —— 有效激活率（Livermore 真 delta −0.1219 的成因之一）
+    - `check_anchor_coherence`   —— 断言改了，渲染它的段落跟着改了吗
+    - `check_quoted_arithmetic`  —— 摆出一串分项加一个合计，加得平吗
+
+    **全部 metrics-only**：接线不改动任何已判过的人的门。
+    """
+    here = Path(__file__).resolve().parent
+    pf = target / 'evals/judge_payload.v1.json'
+    cf = target / 'evidence/claims.jsonl'
+
+    def call(script, argv, key, need=()):
+        path = here / script
+        if not path.exists():
+            report.metrics[key] = {'状态': f'{script} 未安装，**未核验**（不是通过）'}
+            return
+        missing = [str(x) for x in need if not x.is_file()]
+        if missing:
+            report.metrics[key] = {'状态': f'输入不在（{missing[0]}），**未核验**（不是通过）'}
+            return
+        proc = subprocess.run([sys.executable, str(path), *argv],
+                              capture_output=True, text=True)
+        out = ((proc.stdout or '') + (proc.stderr or '')).strip()
+        report.metrics[key] = {'退出码': proc.returncode,
+                               '输出': out.splitlines()[-6:] or ['（无输出）']}
+
+    # ★ 它收**位置参数**不是 --answers；第一版写成 --answers，接线第一跑退出码 2。
+    #   **这正是「接了线不等于跑通了」——只看代码看不出来。**
+    call('check_activation_yield.py', [str(pf)], 'activation_yield', (pf,))
+    call('check_anchor_coherence.py', ['--workspace', str(target)], 'anchor_coherence')
+    call('check_quoted_arithmetic.py', ['--answers', str(pf), '--claims', str(cf)],
+         'quoted_arithmetic', (pf, cf))
+
+
 def run_answer_constraints(report, target: Path) -> None:
     """题面写死的约束，答案接住了吗（v0.0.0.83，**只写 metrics**）。
 
@@ -2421,6 +2465,7 @@ def main() -> int:
             run_claim_source_independence(report, target)
             run_answer_constraints(report, target)
             run_verbatim_pointer(report, target)
+            run_unwired_three(report, target)
             run_unqualified_priority(report, target)
             run_sole_authorship(report, target)
             run_holdout_overlap(report, target, args.cache)

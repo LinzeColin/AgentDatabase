@@ -231,8 +231,18 @@ def main() -> int:
             print("✗ **A/B 映射与第 1 轮不一致——中止（轮次之间不可比）**"); return 3
         print("A/B 映射与第 1 轮逐条一致 ✅")
         # ★★ 把这个设计的**代价**一起说出来——上面那句注释只写了收益。
-        print("  ★ 代价：**候选侧在三轮里完全固定，从不重新随机**。"
-              "全量实测 8 人 × 32 题翻转率 **0%**。")
+        #   ★ 翻转率**由判据算**，不是我写死的一句话：
+        #     check_blind_rounds_independent 此前从未被任何代码调用过。
+        rk = HERE / "check_blind_rounds_independent.py"
+        if rk.is_file():
+            q = subprocess.run([sys.executable, str(rk), "--keys", str(r1),
+                                str(a.round_dir / f"{a.prefix}_blind_key.json")],
+                               capture_output=True, text=True)
+            for line in (q.stdout or "").splitlines():
+                if line.strip():
+                    print("  " + line.strip())
+        else:
+            print("  ⚠ check_blind_rounds_independent.py 不在，**翻转率未核（不是通过）**")
         print("    两席已实测能靠格式/长度认出候选侧（Barton 100%，四人合计 91%），"
               "**第 1 轮认出的边在后两轮原样有效**——")
         print("    所以「三轮 delta 逐轮向零」这类跨轮趋势"

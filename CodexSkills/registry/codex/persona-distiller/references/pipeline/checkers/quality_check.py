@@ -1661,6 +1661,149 @@ def run_rights_basis(report, target: Path) -> None:
     report.metrics['rights_basis'] = entry
 
 
+def run_pd_grounds(report, target: Path) -> None:
+    """「它是公有领域」凭哪一条？（v0.0.0.85，**只写 metrics**）
+
+    #119 DeBakey 的探测暴露了一处我自己的混淆：三卷 GPO 政府出版物**确实是 PD**，
+    但依据是「1978 年前出版、无版权标记」（1909 年法），**不是 §105 联邦职务作品**
+    ——作者脚注实录 `Formerly Colonel, MC, AUS`，写作时他已是平民教授。
+
+    两者结论相同、**射程完全不同**：§105 可外推到他同期的其他作品；
+    1909 那条只判这一份印本，一份一份地判。
+    把后者当成前者，就会得出「他有 §105 的口子、可按 deep 排期」——**实际口径是 0**。
+
+    真数据回归：把那三卷按天真直觉标成 §105，本判据**三卷全部抓住**，
+    「§105 且本人署名」从 3 条纠正为 **0 条**。
+    同一跑还抓出探测报告自己的分档错误：两份 28 人集体署名的委员会报告标了 P2（一手）。
+
+    **缺依据表时明说「未核」，不写依据不算通过。**
+    """
+    here = Path(__file__).resolve().parent
+    script = here / 'check_pd_grounds.py'
+    if not script.exists():
+        report.metrics['pd_grounds'] = {'状态': '检查器未安装，**未核验**（不是通过）'}
+        return
+    spec = importlib.util.spec_from_file_location('_pd_grounds', script)
+    module = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(module)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['pd_grounds'] = {'状态': f'加载失败，**未核验**：{exc}'}
+        return
+    f = target / 'references/research/_pd_grounds.json'
+    if not f.is_file():
+        report.metrics['pd_grounds'] = {'状态': (
+            '**本人物未提供 `references/research/_pd_grounds.json`——未核，不是通过。**'
+            '「它是公有领域」须写明凭哪一条（§105 ／ 1909 年法无标记 ／ '
+            '1929 年前出版 ／ 国会记录）并附证据')}
+        return
+    try:
+        claims = json.loads(f.read_text(encoding='utf-8'))
+        problems = module.check(claims)
+        info = module.summarize(claims)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['pd_grounds'] = {'状态': f'运行失败，**未核验**：{exc}'}
+        return
+    ids = set()                           # ★ 分母：按标识符比集合，不比份数
+    for sub in ('references/sources', 'references/holdout'):
+        d = target / sub
+        if d.is_dir():
+            for one in d.iterdir():
+                if one.is_dir():
+                    ids |= {f.name.split('.')[0] for f in one.glob('*.normalized.txt')}
+    if ids:
+        info.update(module.coverage(claims, ids))
+    else:
+        info['覆盖率'] = ('**一个来源标识符都数不到，分母未知**——'
+                       '不许把「N 条全合格」读成「每一份来源都有依据」')
+    info['形式不完整的'] = problems[:8] or '无（★ 这只说明主张形式完整，不是法律结论）'
+    report.metrics['pd_grounds'] = info
+
+
+def run_verbatim_pointer(report, target: Path) -> None:
+    """问原话，答「你自己去查」（v0.0.0.87，**只写 metrics**；这是回归护栏）。
+
+    ★ 立这道判据时我把评语读反了：以为那几条说的是候选，**跑真数据才知道是基线**。
+    同一批题面 5 人配对实测，10 道「问原话/出处」的题——
+    **候选 0/10（0%）、基线 3/10（30%）**。
+    **「让人自己去查」是基线的失败形态，候选恰恰是给引文与卷页的那一侧。**
+
+    所以它守的是产品**已经有**的一项优势：哪天候选开始把原话推给读者，这里会红。
+    """
+    here = Path(__file__).resolve().parent
+    script = here / 'check_asked_verbatim_got_pointer.py'
+    if not script.exists():
+        report.metrics['verbatim_pointer'] = {'状态': '检查器未安装，**未核验**（不是通过）'}
+        return
+    spec = importlib.util.spec_from_file_location('_pd_vptr', script)
+    module = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(module)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['verbatim_pointer'] = {'状态': f'加载失败，**未核验**：{exc}'}
+        return
+    cf, pf = target / 'evals/cases.jsonl', target / 'evals/judge_payload.v1.json'
+    if not (cf.is_file() and pf.is_file()):
+        report.metrics['verbatim_pointer'] = {
+            '状态': 'cases.jsonl 或 judge_payload 不在，**未核验**（不是通过）'}
+        return
+    try:
+        cases = [json.loads(l) for l in cf.read_text(encoding='utf-8').splitlines() if l.strip()]
+        answers = json.loads(pf.read_text(encoding='utf-8'))
+        if isinstance(answers, list):
+            answers = {a.get('case_id'): a for a in answers if isinstance(a, dict)}
+        problems, info = module.evaluate(cases, answers)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['verbatim_pointer'] = {'状态': f'运行失败，**未核验**：{exc}'}
+        return
+    info['只给指路的'] = problems[:6] or '无'
+    report.metrics['verbatim_pointer'] = info
+
+
+def run_unwired_three(report, target: Path) -> None:
+    """把三件**从来没有被任何代码调用过**的判据接上（v0.0.0.91，**只写 metrics**）。
+
+    起因：`check_checkers` 之外自查了一遍「谁调用谁」——
+    **51 件判据里 7 件在生产代码里找不到调用方**。
+    三处所谓「被调用」实为**注释里的提及**（`check_contract_drift` 讲历史、
+    `check_scan_reach` 讲射程边界、`check_extreme_result_is_suspect` 讲归属）。
+
+    **这是「第 9 次」那个坑长回来了**：判据存在、自测全绿、文档里反复引用，
+    而它从来没有跑过。本函数接三件（其余四件另有归属，见 CHANGELOG）：
+
+    - `check_activation_yield`   —— 有效激活率（Livermore 真 delta −0.1219 的成因之一）
+    - `check_anchor_coherence`   —— 断言改了，渲染它的段落跟着改了吗
+    - `check_quoted_arithmetic`  —— 摆出一串分项加一个合计，加得平吗
+
+    **全部 metrics-only**：接线不改动任何已判过的人的门。
+    """
+    here = Path(__file__).resolve().parent
+    pf = target / 'evals/judge_payload.v1.json'
+    cf = target / 'evidence/claims.jsonl'
+
+    def call(script, argv, key, need=()):
+        path = here / script
+        if not path.exists():
+            report.metrics[key] = {'状态': f'{script} 未安装，**未核验**（不是通过）'}
+            return
+        missing = [str(x) for x in need if not x.is_file()]
+        if missing:
+            report.metrics[key] = {'状态': f'输入不在（{missing[0]}），**未核验**（不是通过）'}
+            return
+        proc = subprocess.run([sys.executable, str(path), *argv],
+                              capture_output=True, text=True)
+        out = ((proc.stdout or '') + (proc.stderr or '')).strip()
+        report.metrics[key] = {'退出码': proc.returncode,
+                               '输出': out.splitlines()[-6:] or ['（无输出）']}
+
+    # ★ 它收**位置参数**不是 --answers；第一版写成 --answers，接线第一跑退出码 2。
+    #   **这正是「接了线不等于跑通了」——只看代码看不出来。**
+    call('check_activation_yield.py', [str(pf)], 'activation_yield', (pf,))
+    call('check_anchor_coherence.py', ['--workspace', str(target)], 'anchor_coherence')
+    call('check_quoted_arithmetic.py', ['--answers', str(pf), '--claims', str(cf)],
+         'quoted_arithmetic', (pf, cf))
+
+
 def run_answer_constraints(report, target: Path) -> None:
     """题面写死的约束，答案接住了吗（v0.0.0.83，**只写 metrics**）。
 
@@ -2309,6 +2452,7 @@ def main() -> int:
         report_refusal_overflow(report, target)
         run_corpus_ceiling(report, target, report.profile)
         run_rights_basis(report, target)
+        run_pd_grounds(report, target)
         train_ids = {record.get('source_id') for record in sources if record.get('split') == 'train'}
         evaluate_research(report, target, thresholds, train_ids, args.allow_provisional)
         cases: list[dict[str, Any]] = []
@@ -2320,6 +2464,8 @@ def main() -> int:
             run_evidence_per_claim(report, target)
             run_claim_source_independence(report, target)
             run_answer_constraints(report, target)
+            run_verbatim_pointer(report, target)
+            run_unwired_three(report, target)
             run_unqualified_priority(report, target)
             run_sole_authorship(report, target)
             run_holdout_overlap(report, target, args.cache)

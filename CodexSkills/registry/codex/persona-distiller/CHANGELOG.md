@@ -1,5 +1,31 @@
 # Changelog
 
+## v0.0.0.91 — **51 件判据里 7 件从没被任何代码调用过**（2026-08-04）
+
+自查了一遍「谁调用谁」：三处所谓「被调用」实为**注释里的提及**
+（`check_contract_drift` 讲历史、`check_scan_reach` 讲射程边界、
+`check_extreme_result_is_suspect` 讲归属）。**这是 v0.0.0.68「第 9 次」那个坑长回来了。**
+
+**本版接上 5 件，全部 metrics-only / 只报不拦——不改动任何已判过的人的门：**
+
+| 判据 | 接在哪 | 实跑结果 |
+|---|---|---|
+| `check_activation_yield` | `quality_check` synthesis/release | Blackwell：payload_ratio 1.0、bookkeeping 0 |
+| `check_anchor_coherence` | 同上 | Blackwell：**1 处低于 10%，只列不判** |
+| `check_quoted_arithmetic` | 同上 | Blackwell：「一处可验算的数列都没扫到——**未检查，不是通过**」 |
+| `check_probe_precondition` | `next_person`（排期那一刻） | Farmer：「**队列里没有卒年 → 需要探测**」 |
+| `check_blind_rounds_independent` | `build_blind_payload` 的轮次一致性块 | 翻转率**由判据算**，不再是我写死的一句话 |
+
+★ **接线第一跑就抓到两处自己的错**，只看代码一处都看不出来：
+`check_activation_yield` 收**位置参数**不是 `--answers`（退出码 2）；
+`check_probe_precondition` **必须同时给 `--queue` 与 `--corpora`**（我只给了 queue）。
+另修 `next_person` 漏 `import subprocess`。
+
+**其余 2 件（`check_delivery_carries_denominators` / `check_scan_reach`）另有归属，下一版处理。**
+
+★ 同时改掉我今天塞进 `init_target` 的一句无据断言：「quick 不用于发布」——
+代码与文档里都找不到依据。能出示的只有实测：**16 个工作区 14 deep / 2 standard / 0 quick**。
+
 ## v0.0.0.90 — **一条判不了的批评，写完量完退回散文态**（2026-08-04）
 
 席 E 在 Jenner #104 点名的「载荷内部自相矛盾」是真缺陷、批的确实是候选

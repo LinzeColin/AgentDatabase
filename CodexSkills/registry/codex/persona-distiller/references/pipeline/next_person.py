@@ -29,12 +29,13 @@ Usage:
 
 `--no-counterweight` 复现漂移行为，仅供负对照；**日常不要用它。**
 """
-import argparse, json, os, re, glob, sys
+import argparse, json, os, re, glob, subprocess, sys
 
 DEF_REG = "/Users/linzezhang/Documents/Codex/AgentDatabase/character-distillation-skill-reorganize-d57595/CodexSkills/registry/codex/persona-distiller-group"
 DEF_DL = "/Users/linzezhang/Downloads/蒸馏"
 DEF_Q = "/Users/linzezhang/Downloads/蒸馏/_蒸馏队列.json"
 DEF_DEFER = "/Users/linzezhang/Downloads/蒸馏/_延后名单.json"
+DEF_YEARS = "/Users/linzezhang/Downloads/蒸馏/_卒年.json"   # ★ 可以不存在
 
 def norm(s):
     return re.sub(r'[^a-z0-9]', '', s.lower())
@@ -182,6 +183,8 @@ def main():
     ap.add_argument("--downloads", default=DEF_DL)
     ap.add_argument("--queue", default=DEF_Q)
     ap.add_argument("--deferred", default=DEF_DEFER)
+    ap.add_argument("--years", default=DEF_YEARS,
+                    help="_卒年.json（**没有 source 的条目不作数**）")
     ap.add_argument("--show", type=int, default=6)
     ap.add_argument("--round", type=int, default=5, help="每轮人数；轮首那一格留给配重")
     ap.add_argument("--no-counterweight", action="store_true",
@@ -238,6 +241,29 @@ def main():
                     round_size=a.round, counterweight=not a.no_counterweight,
                     deferred_counts=deferred_by_family)
 
+    # ★★ v0.0.0.91：NEXT 这个人要不要先跑可得性探测——**在排期那一刻就说**。
+    #   check_probe_precondition 此前**从未被任何代码调用过**（51 件判据里 7 件如此）。
+    #   它的默认方向是安全那一边：**卒年不知道就要探**，不许替人猜。
+    probe_note = None
+    if nxt:
+        chk = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                           "..", "..", "scripts", "check_probe_precondition.py")
+        chk = os.path.normpath(chk)
+        if os.path.isfile(chk):
+            corpora = os.path.normpath(os.path.join(
+                os.path.dirname(chk), "..", "..", "..", "..",
+                "skill_log_evals", "persona-distiller", "_corpora"))
+            argv = [sys.executable, chk, "--queue", a.queue,
+                    "--corpora", corpora, "--name", nxt["name"]]
+            if os.path.isfile(a.years):
+                argv += ["--years", a.years]
+            r = subprocess.run(argv, capture_output=True, text=True)
+            out = ((r.stdout or "") + (r.stderr or "")).splitlines()
+            probe_note = [l for l in out if l.strip()][-4:] or [
+                "**判据没有输出——未核（不是通过）**"]
+        else:
+            probe_note = ["**check_probe_precondition.py 不在——未核（不是通过）**"]
+
     print(json.dumps({
         # ★★ 下面四个 queue_* 数的是**队列这一群**，不是「做了多少人」。
         #   实测：名册 100 人、队列 216 人，**两边都有的只有 7 人**——
@@ -250,6 +276,7 @@ def main():
         "队列中已入库的": done_in_q,
         "队列中未动的": len(pending),
         "队列中已延后的": deferred_in_q,
+        "★ 这个人要不要先跑可得性探测": probe_note or "**未核**",
         "★这两群不是同一群": (
             f"名册 {n_products} 人 vs 队列 {len(q)} 人，**只有 {done_in_q} 人重合**"
             "（重合数随归一化算法而变，另一种算法给出 7）。"
