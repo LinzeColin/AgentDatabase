@@ -29,15 +29,17 @@ Blackwell 那次「除以 10 做两遍」就是这么活下来的。
 - **不判档**。分档由调用方给，本件只校验取值合法。
   「不许在入库环节把 S1 提成 P1」那条纪律**属于调用方**，本件管不了。
 - **不判道**。同上。
-- **不去重内容**。sha256 相同才算重复；草稿与印本内容高度重合但字节不同，
-  那是 `check_claim_source_independence` 管的事。
+- **不判「该不该合并」**。sha256 相同的直接跳过；**内容高度重合但字节不同的只报不拦**
+  ——单篇文章被收进合集、同一本书的两个扫描源，都是**真实关系**不是错误。
 """
 import argparse
 import hashlib
 import json
 import pathlib
+import re
 import shutil
 import sys
+import zlib
 
 TIERS = {"P1", "P2", "S1", "S2", "U"}
 # ★★ v0.0.0.94：权利依据必须**具名**，不许只写「公有领域」或留空。
@@ -58,6 +60,60 @@ RIGHTS_GROUNDS = {
 LANES = {"writings", "conversations", "expression", "external", "decisions", "timeline"}
 ATTRIB = {"HIS-OWN", "CO-AUTHORED", "THIRD-PARTY", "ATTRIBUTION-UNCLEAR", "OTHER-INVENTOR"}
 EXTRA_MARKS = {"POSTHUMOUS", "TRANSLATION", "DUPLICATE-SCAN", "OCR-POOR", "FULL-PAGE-SCAN"}
+
+
+_WORD = re.compile(r"[a-z0-9\u4e00-\u9fff]+")
+_SHINGLE, _SAMPLE = 8, 6
+
+
+def _shingles(text: str) -> set:
+    """8-gram，crc32 确定性采样 1/6。**不能用内建 `hash()`**——它逐进程随机。"""
+    w = _WORD.findall(text.lower())
+    return {s for i in range(len(w) - _SHINGLE + 1)
+            for s in [" ".join(w[i:i + _SHINGLE])]
+            if zlib.crc32(s.encode()) % _SAMPLE == 0}
+
+
+def near_duplicates(paths: dict, thr: float = 0.50) -> list:
+    """★★ **sha256 抓不到扫描件与再版的塌缩**（v0.0.0.102）。
+
+    起因：袁隆平 #123 实测两份同源 JPRS 扫描件——
+    **精确子串比对完全零命中**，而 8-gram containment 给 **0.773**／**0.676**
+    （两次 OCR 结果不同，归一化长度 154,679 vs 155,771）。
+
+    拿 Blackwell #118 的真语料回验，**sha256 一对都没抓到，而这里抓到 4 对**：
+
+    ```
+    0.837  essays-medical-sociology-v2-1902 ↔ essays-v2-1902-ia   ← 同一本书的两个来源
+    0.808  essays-medical-sociology-v1-1902 ↔ essays-v1-1902-ia
+    0.767  decay-municipal-govt-1885 ↔ essays-…-v2-1902           ← 单篇被收进该卷
+    0.636  counsel-to-parents-1878   ↔ essays-…-v1-1902
+    ```
+
+    **分母取较短一侧**（containment 不是 Jaccard）——一篇短文完全落在一大卷里时，
+    Jaccard 会被卷的长度稀释到看不见。
+
+    ★ **只报不拦**：单篇收进合集、两个扫描源，都是**真实关系**。
+    判「该不该并成一条」是调用方的事，本件只保证它**不会静默**。
+    """
+    sig = {}
+    for short, path in paths.items():
+        try:
+            sig[short] = _shingles(path.read_text(encoding="utf-8", errors="ignore"))
+        except OSError:
+            continue
+    names = sorted(sig)
+    out = []
+    for i, a in enumerate(names):
+        for b in names[i + 1:]:
+            sa, sb = sig[a], sig[b]
+            small = min(len(sa), len(sb))
+            if not small:
+                continue
+            c = len(sa & sb) / small
+            if c >= thr:
+                out.append((round(c, 3), a, b))
+    return sorted(out, reverse=True)
 
 
 def validate(rows: list) -> list:
@@ -132,6 +188,17 @@ def build(rows: list, src_dir: pathlib.Path, raw_dir: pathlib.Path, header: str)
         lines.append(row_line(r))
 
     (raw_dir / "_ids.txt").write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+    # ★★ sha256 之外再看一次内容塌缩——只报不拦
+    landed = {r["short"]: raw_dir / r["short"] / f"{r['short']}.txt" for r in rows
+              if (raw_dir / r["short"] / f"{r['short']}.txt").is_file()}
+    nd = near_duplicates(landed)
+    if nd:
+        print(f"  ⚠ **内容高度重合的 {len(nd)} 对**（sha256 抓不到；**只报不拦**）：")
+        for c, a, b in nd[:8]:
+            print(f"      {c:.3f}  {a} ↔ {b}")
+        print("      ★ 单篇被收进合集、同一本书的两个扫描源，都是**真实关系**——"
+              "由你判要不要并成一条，本件只保证它不静默。")
     body = lines[1:]
     tiers, lanes = {}, {}
     for l in body:
@@ -184,6 +251,24 @@ def selftest() -> int:
 
     print("── 反向对照 ⑤：短名重复 → 报出 ──")
     chk("两条同短名 → 报出", any("短名重复" in p for p in validate([ok, dict(ok, file="b.txt")])))
+
+    print("── ★★ 反向对照 ⑩：sha256 抓不到的塌缩，shingle 要抓到（v0.0.0.102）──")
+    base = "the quick brown fox jumps over the lazy dog and then runs far away again today " * 12
+    import tempfile as _tf
+    with _tf.TemporaryDirectory() as _d:
+        _r = pathlib.Path(_d)
+        (_r / "a.txt").write_text(base, encoding="utf-8")
+        (_r / "b.txt").write_text(base.replace("lazy", "1azy"), encoding="utf-8")   # OCR 式差异
+        (_r / "c.txt").write_text("completely different words here nothing shared at all " * 12,
+                                  encoding="utf-8")
+        nd = near_duplicates({"a": _r / "a.txt", "b": _r / "b.txt", "c": _r / "c.txt"})
+        pairs = {(x[1], x[2]) for x in nd}
+        chk(f"**OCR 式差异（lazy→1azy）被抓到**：{nd[:1]}", ("a", "b") in pairs)
+        chk("★ 不相干的两份**不报**", ("a", "c") not in pairs and ("b", "c") not in pairs)
+        import hashlib as _h
+        chk("★★ 而它们的 sha256 **不同**——这正是 sha256 抓不到的那一类",
+            _h.sha256((_r/"a.txt").read_bytes()).hexdigest()
+            != _h.sha256((_r/"b.txt").read_bytes()).hexdigest())
 
     print("── ★★ 反向对照 ⑨：权利依据必须具名（v0.0.0.94）──")
     chk("不写 rights_ground → 报出",

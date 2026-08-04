@@ -1,6 +1,6 @@
-# Release verification — Persona Distiller v0.0.0.101
+# Release verification — Persona Distiller v0.0.0.102
 
-Date: 2026-08-04（**v0.0.0.101**）
+Date: 2026-08-04（**v0.0.0.102**）
 
 > **本文件记录「当前发布号的复验结果」，不是历史归档。**
 > 版本号必须等于根目录 `VERSION`，由 `scripts/check_contract_drift.py` 强制。
@@ -22,6 +22,13 @@ Date: 2026-08-04（**v0.0.0.101**）
 > **「本表每一行都来自本次实跑」是一句自述**——
 > 而自述不是证据（见 `self-report-is-not-evidence`）。
 
+> ### v0.0.0.102 这一版重跑了什么
+>
+> **相对 101 只改了一处**：`build_source_ledger` 加 `near_duplicates()`（**只报不拦**）。
+> **本次重跑**：`build_source_ledger --self-test`（含 4 条新对照）、
+> **对 Blackwell 全部 95 份真语料实跑（抓到 50 对，sha256 抓到 0 对）**、
+> 合同漂移 **0 条**、pytest。**其余各行沿用 v0.0.0.96 那一次。**
+>
 > ### v0.0.0.101 这一版重跑了什么
 >
 > **相对 100 只改了一处**：`feasible_grounds()` 加 URAA 提示（**提示不否决**）。
