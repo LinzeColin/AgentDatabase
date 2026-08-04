@@ -46,6 +46,7 @@ import argparse
 import collections
 import json
 import pathlib
+import subprocess
 import sys
 
 THRESHOLDS = (("deep", 0.07), ("standard", 0.05), ("quick", 0.03))
@@ -282,6 +283,30 @@ def main() -> int:
     print("\n各套组 delta：")
     for name, v in sorted(s["suites"].items(), key=lambda x: -x[1]):
         print(f"  {name:24} {v:+.4f}")
+
+    # ★★ v0.0.0.118：**上面那个「✅ 过 / ❌ 不过」，先看这台仪器分不分得出。**
+    #   Mendel #125 第 2 轮 delta +0.0278、quick 门 +0.0300，我差一点写成「只差 0.0022」。
+    #   去核之后：那一轮有 7 题**两侧文本逐字未动**，delta 本该不变，实测最大动了 0.1500。
+    #   推出总 delta 的 SE ≈ 0.0164 —— **quick 门只有 1.83 个 SE。**
+    #   ★ **只报不拦，也不改门**：门是多少是待裁定 ⑫，本处只把不确定度摆在结论旁边。
+    _sib = pathlib.Path(__file__).resolve().parent / "check_delta_resolution.py"
+    # ★ 只拿**排在本轮之前**的轮次来比。第一版写成「除本轮外的全部」，
+    #   结果对 round1 求噪声时把 round2 拉了进来——**拿后一轮去估前一轮的噪声**，
+    #   且「只有一轮」那条分支永远走不到。
+    _prev = sorted(p for p in rd.parent.glob("round*")
+                   if p.is_dir() and p.name < rd.name)
+    if _sib.is_file() and _prev:
+        print("\n── 这台仪器分得出这个差吗（**只报不拦**）──")
+        _argv = [sys.executable, str(_sib), "--delta", f"{s['delta']:.4f}"]
+        for _d in _prev[-1:] + [rd]:
+            _argv += ["--round-dir", str(_d)]
+        _r = subprocess.run(_argv, capture_output=True, text=True)
+        _tail = [ln for ln in _r.stdout.splitlines()
+                 if any(k in ln for k in ("SE", "区间", "分不出", "未核"))]
+        print("\n".join("  " + ln.strip() for ln in _tail) or "  （无可比轮次）")
+    elif _sib.is_file():
+        print("\n── 这台仪器分得出这个差吗 ──\n  **未核**：只有一轮，量不出噪声"
+              "（★ 这不表示噪声小，只表示没量）")
     return 0
 
 
