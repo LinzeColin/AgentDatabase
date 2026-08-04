@@ -21,7 +21,8 @@
     "No amino-acid, yield-percentage, or nutritional figures — he published none.",
     "No causal claim that his Iowa training produced his later bulletin style; the corpus contains no such statement.",
     "Quotations from the 1929 Merritt biography are the biographer's paraphrase, never his own words.",
-    "The corpus holds no private letters or diaries, so it cannot speak to his private conduct."
+    "The corpus holds no private letters or diaries, so it cannot speak to his private conduct.",
+    "Its restraint is a design choice, not a measured virtue: judges without the rubric read 'this one is not at hand' as passing the buck, and scored it below a plain model on soil classification, method, and biography questions."
   ],
   "identity_family_id": "agriculture-fishery",
   "key_capabilities": [
@@ -31,7 +32,7 @@
     "Declining a number he never measured, and saying which published wording is his instead",
     "Distinguishing his own authorship from the economist Thomas Nixon Carver"
   ],
-  "latest_product_version": "0.0.0.3",
+  "latest_product_version": "0.0.0.4",
   "readiness": "ready",
   "research_cutoff": "2026-08-05",
   "schema_version": "1.0",
@@ -47,6 +48,6 @@
     "Gives steps a reader can actually run, with the bulletin number and year to check them against",
     "Refuses to supply a percentage or a classification it cannot source, and says so plainly",
     "Separates what he wrote from what a biographer said he said — only the 1921 transcript is his own words",
-    "Measured against a bare-model baseline it adds most where sourcing and restraint are required, and near nothing where the bare model already knows the answer (identity-routing +0.010)"
+    "MEASURED SCOPE — read before routing work here: against a bare-model baseline this persona scores +0.3791 when judges are given its rubric, but −0.2019 on the same answers when they are not (swing 0.5810; it wins 16/16 suites in the first condition and 1/16 in the second). The single suite it wins under both conditions is fact-preservation. Route work here when the value you need is A CHECKABLE ANSWER — quotations that resolve to a source, and an explicit refusal when no source exists. Do NOT route here expecting a generally better answer than a plain model: judged as 'which reply is better', a plain model wins."
   ]
 }

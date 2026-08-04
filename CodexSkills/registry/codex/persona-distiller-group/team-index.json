@@ -40,7 +40,8 @@
         "No amino-acid, yield-percentage, or nutritional figures — he published none.",
         "No causal claim that his Iowa training produced his later bulletin style; the corpus contains no such statement.",
         "Quotations from the 1929 Merritt biography are the biographer's paraphrase, never his own words.",
-        "The corpus holds no private letters or diaries, so it cannot speak to his private conduct."
+        "The corpus holds no private letters or diaries, so it cannot speak to his private conduct.",
+        "Its restraint is a design choice, not a measured virtue: judges without the rubric read 'this one is not at hand' as passing the buck, and scored it below a plain model on soil classification, method, and biography questions."
       ],
       "identity_family_id": "agriculture-fishery",
       "key_capabilities": [
@@ -50,11 +51,11 @@
         "Declining a number he never measured, and saying which published wording is his instead",
         "Distinguishing his own authorship from the economist Thomas Nixon Carver"
       ],
-      "latest_artifact": "农林牧渔师/george-washington-carver/versions/0.0.0.3/george-washington-carver-persona-distillation-delivery-v0.0.0.3.zip",
+      "latest_artifact": "农林牧渔师/george-washington-carver/versions/0.0.0.4/george-washington-carver-persona-distillation-delivery-v0.0.0.4.zip",
       "latest_model_snapshot": "0.1.0-draft",
-      "latest_outer_sha256": "70e5848491a9d4e769571da575167ddf45cbbbc51d581f12ff43d8499f3a6d6c",
-      "latest_product_version": "0.0.0.3",
-      "latest_runtime_sha256": "92b4b395fd0d8dcabd3e681f4f8b1b592816edb6f5a3a338498ad9cde378b51a",
+      "latest_outer_sha256": "fb7760545f6a81523824e07785425f051a15f38d7fbda480181fb8914010c7c4",
+      "latest_product_version": "0.0.0.4",
+      "latest_runtime_sha256": "c5a8d71a6086071f2630627a95c4f74d351ddf42cfe38c94a6e5cd746fbbf019",
       "readiness": "ready",
       "registration": "农林牧渔师/george-washington-carver/registration.json",
       "registration_category": "农林牧渔师",
@@ -75,9 +76,9 @@
         "Gives steps a reader can actually run, with the bulletin number and year to check them against",
         "Refuses to supply a percentage or a classification it cannot source, and says so plainly",
         "Separates what he wrote from what a biographer said he said — only the 1921 transcript is his own words",
-        "Measured against a bare-model baseline it adds most where sourcing and restraint are required, and near nothing where the bare model already knows the answer (identity-routing +0.010)"
+        "MEASURED SCOPE — read before routing work here: against a bare-model baseline this persona scores +0.3791 when judges are given its rubric, but −0.2019 on the same answers when they are not (swing 0.5810; it wins 16/16 suites in the first condition and 1/16 in the second). The single suite it wins under both conditions is fact-preservation. Route work here when the value you need is A CHECKABLE ANSWER — quotations that resolve to a source, and an explicit refusal when no source exists. Do NOT route here expecting a generally better answer than a plain model: judged as 'which reply is better', a plain model wins."
       ],
-      "version_count": 3
+      "version_count": 4
     },
     {
       "application_scenarios": [
