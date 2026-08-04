@@ -57,7 +57,16 @@ const USER_CONTENT_CONTEXTS = ["[data-user-content]"];
 // Chinese and the records themselves are marked and skipped.
 const VERBATIM_RECORD_CONTEXTS = ["[data-record-verbatim]"];
 
-const browser = await chromium.launch({ headless: true });
+let browser;
+try {
+  browser = await chromium.launch({ headless: true });
+} catch (error) {
+  // A missing browser is an environment fact, not a finding about the page.
+  // Reporting it as a Chinese-UI failure cost a CI cycle reading a Playwright
+  // install banner as if it were untranslated interface text.
+  console.error(`BROWSER_UNAVAILABLE: ${String(error).slice(0, 300)}`);
+  process.exit(3);
+}
 const findings = [];
 try {
   const page = await (await browser.newContext({ viewport: { width: 1440, height: 900 } })).newPage();

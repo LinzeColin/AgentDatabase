@@ -100,6 +100,11 @@ jobs:
           npm run validate:v31:typescript
           npm run build
           npm run validate:whole-project
+      # The gate's Chinese-UI audit drives a real browser, so chromium has to be
+      # present before the gate rather than before the later browser job.
+      - name: Install chromium for the gate's browser audit
+        working-directory: MemoryAtlas
+        run: npx playwright install --with-deps chromium
       # The authoritative gate. The git hook may only run `quick`; nothing but
       # this and the deployment path may certify a release.
       - name: Canonical gate (full)

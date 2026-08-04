@@ -484,3 +484,17 @@ def test_verbatim_records_are_skipped_for_a_stated_reason() -> None:
     # The interface around the record still has to be Chinese.
     assert 'humanizeMachineText(String(row.category ?? "未知"))' in view
     assert 'humanizeMachineText(String(row.status ?? "未知"))' in view
+
+
+def test_ci_installs_the_browser_before_the_gate_that_needs_it() -> None:
+    """The gate now drives a real browser. CI installed chromium in a later job,
+    so the gate failed with a Playwright install banner reported as a
+    Chinese-UI finding — an environment fact dressed up as a language defect."""
+    workflow = (REPO / ".github" / "workflows" / "memory-atlas-v31.yml").read_text(encoding="utf-8")
+    install = workflow.index("npx playwright install --with-deps chromium")
+    gate = workflow.index("./ops/memory-atlas/canonical_gate.sh . full")
+    assert install < gate, "chromium must be installed before the canonical gate runs"
+
+    auditor = (REPO / "MemoryAtlas" / "scripts" / "audit_chinese_ui_v32.mjs").read_text(encoding="utf-8")
+    assert "BROWSER_UNAVAILABLE" in auditor
+    assert "process.exit(3)" in auditor
