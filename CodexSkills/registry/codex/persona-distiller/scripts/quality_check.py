@@ -859,6 +859,8 @@ def run_corpus_text_checks(report, target: Path, cache_dirs: list[str]) -> None:
                     f"台账 {m0.get('台账')} / 工作区 {m0.get('工作区')}，"
                     f"**没进工作区 {n_miss} 份，其中一手 {n_pri} 份**"
                     + ("　★ 这些源仍被计进 min_sources 与 primary_ratio——**门在给没有正文的源发学分**"
+                       "（★★ `references/holdout/` 已排除在外，**这不是 holdout 被误报**；"
+                       "若仍存疑，先 `find` 一遍再下结论——⑯ 就是没 find 就升级出来的误报）"
                        if n_pri else "")
                     + "　★ 清单：" + "、".join(str(x) for x in m0.get('清单', [])[:6]))
             else:
