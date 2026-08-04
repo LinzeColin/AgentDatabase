@@ -45,7 +45,7 @@ New York Infirmary 于 1854 年立案：「This lustitution was incorporated iu 
 > **证伪条件**：若 `wrong-right-methods-1883` 正文中查不到本条引的那句原文，本条作废。
 
 <!-- claim:clm-19e73288662f -->
-她指出伦敦死亡率通行的「每千人 23 或 24」其实是未知数，因为人口大进大出：「is really an unknown quantity, on account of the enormous influx of fresh life」。
+**1890 年《The Influence of Women in the Profession of Medicine》**里她指出伦敦死亡率通行的「每千人 23 或 24」其实是未知数，因为人口大进大出：「is really an unknown quantity, on account of the enormous influx of fresh life」。
 > **证伪条件**：若 `influence-of-women-1890` 正文中查不到本条引的那句原文，本条作废。
 
 <!-- claim:clm-438f1ac5a6d6 -->

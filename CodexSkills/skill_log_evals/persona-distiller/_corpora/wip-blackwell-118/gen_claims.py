@@ -93,7 +93,8 @@ FACTS = [
   "（「In 1849, with a population of 314,000, and an inert public opinion, "
   "there were 211 brothels, with 538 inmates.」）。"),
  ("london-death-rate", IOW,
-  "她指出伦敦死亡率通行的「每千人 23 或 24」其实是未知数，因为人口大进大出："
+  "**1890 年《The Influence of Women in the Profession of Medicine》**里她指出伦敦死亡率"
+  "通行的「每千人 23 或 24」其实是未知数，因为人口大进大出："
   "「is really an unknown quantity, on account of the enormous influx of fresh life」。"),
  ("essays-1902-hastings", EV1,
   "《Essays in Medical Sociology》两卷 1902 年出版，序言署「HASTINGS, May 1902」——"
@@ -132,13 +133,16 @@ FACTS = [
 PATTERNS = [
  ("prevention-over-cure", "mental-model", [EV2, LOL],
   "她把卫生（sanitation）放在治疗之前，且认为它不止防病、很大程度上也治病："
-  "「it is to sanitation that we must look, not only for the prevention of disease, "
-  "but largely also for its cure.」这不是把预防当补充，是把因果次序倒过来。",
+  "**1902 年《Essays in Medical Sociology》卷二**：「it is to sanitation that we must look, "
+  "not only for the prevention of disease, but largely also for its cure.」"
+  "这不是把预防当补充，是把因果次序倒过来（同一主张在 **1852 年《The Laws of Life》**里"
+  "已从女孩的体育讲起）。",
   ["1902 年文集里论卫生大会为何失败", "1852 年女子体育讲义"],
   ["Essays in Medical Sociology 卷二", "The Laws of Life"]),
  ("moral-law-on-acts", "value", [EV1, WRM],
   "她坚持医学与公共卫生的判断受道德律约束，不能只按效用算："
-  "「This act, like all human acts, is subjected to the inexorable rule of moral law.」"
+  "**1902 年文集卷一**：「This act, like all human acts, is subjected to the inexorable "
+  "rule of moral law.」"
   "这是她反对以「管理」处理卖淫的根，不是附带的道德感慨。",
   ["1902 年文集里论人的行为", "1883 年论对待社会罪恶的对错方法"],
   ["Essays in Medical Sociology 卷一", "Wrong and Right Methods"]),
@@ -148,8 +152,9 @@ PATTERNS = [
  #   （1903–05 那册命中更多，但它是 holdout，不许用。）
  ("vivisection-two-aspects", "heuristic", [EV2, "diary-1894-1896-mss966"],
   "她判活体解剖时**同时看两面**：智识上的与道德上的——"
-  "「must be considered by us both under its intellectual and its moral aspects」；"
-  "并给出智识面的判断：「vivisection is examination of the beginning of death, not of life」。"
+  "**1902 年文集卷二**：「must be considered by us both under its intellectual and its "
+  "moral aspects」；同卷给出智识面的判断：「vivisection is examination of the beginning "
+  "of death, not of life」。"
   "凡遇到「这么做有用」的辩护，她的做法是把有用性与其代价分开各判一次。",
   ["1902 年文集里论活体解剖", "1894–96 日记里的私下记述"],
   ["Essays in Medical Sociology 卷二", "Diary 1894-96"]),
@@ -191,8 +196,9 @@ PATTERNS = [
 
  ("generalization-needs-accumulation", "mental-model", [EV1, LOL],
   "她要求普遍结论必须建立在**累积的准确事实**上，而且承认这需要世代之功："
-  "「Function and use are only proved by observation, reflection, and rational experiment "
-  "patiently carried on age after age, with generalization based upon accurate and accumulated facts」。"
+  "**1902 年文集卷一**：「Function and use are only proved by observation, reflection, "
+  "and rational experiment patiently carried on age after age, with generalization "
+  "based upon accurate and accumulated facts」。"
   "**功能与用途只能被证明，不能被推定**——这条同时用在生理学与教育上。",
   ["1902 年文集论功能与用途如何被证明", "1852 年从生理讲女孩的成长"],
   ["Essays in Medical Sociology 卷一", "The Laws of Life"]),
@@ -200,19 +206,22 @@ PATTERNS = [
  #   改引 CTP + WRM：亲职责任 vs 社会罪恶里的责任，**两部独立作品**。
  ("responsibility-is-the-unit", "mental-model", [CTP, WRM],
   "她分析社会问题时的基本单位是**责任落在谁身上**，不是行为本身。"
-  "论卖淫时她的定义就写在责任上——「with no responsibilities ; and no care for offspring」；"
-  "论亲职时同样——「The precious but perilous responsibilities of the parent to the child」。"
+  "**1878 年《Counsel to Parents》**里论卖淫，她的定义就写在责任上——"
+  "「with no responsibilities ; and no care for offspring」；同书论亲职同样——"
+  "「The precious but perilous responsibilities of the parent to the child」。"
   "**换议题不换单位。**",
   ["1878 年论父母对子女的责任", "1883 年论社会罪恶中的责任归属"],
   ["Counsel to Parents", "Wrong and Right Methods"]),
  ("distrust-the-headline-rate", "heuristic", [EV2, BM],
-  "遇到一个通行的比率，她先问它的分母是什么。伦敦死亡率「通常说是每千人 23 或 24」，"
-  "她判为「really an unknown quantity」——因为人口大进大出，分母根本不稳。"
+  "遇到一个通行的比率，她先问它的分母是什么。**1902 年《Essays in Medical Sociology》卷二**里，"
+  "伦敦死亡率「通常说是每千人 23 或 24」，她判为「really an unknown quantity」"
+  "——因为人口大进大出，分母根本不稳。"
   "同一个动作也用在马尔萨斯式的人口算计上。**先拆分母，再谈结论。**",
   ["1902 年文集论英国死亡率的真实数字", "1888 年论马尔萨斯式的仁慈"],
   ["Essays in Medical Sociology 卷二", "A Medical Address on the Benevolence of Malthus"]),
  ("experience-licenses-speech", "heuristic", [CTP, PW],
-  "她开口讲一个题目之前，先说明自己凭什么讲——凭的是行医年数与亲历："
+  "她开口讲一个题目之前，先说明自己凭什么讲——凭的是行医年数与亲历。"
+  "**1878 年《Counsel to Parents》**开场两处："
   "「The experience gained during a generation of active medical work has brought another subject "
   "before me」、「I know, however, from long medical experience, that such instruction is now needed」。"
   "自传通篇也是这个结构：先记亲历，再下判断。**不凭立场发言，凭在场发言。**",

@@ -15,7 +15,7 @@
 ## 断言（3 条）
 
 <!-- claim:clm-f962760bcf89 -->
-她坚持医学与公共卫生的判断受道德律约束，不能只按效用算：「This act, like all human acts, is subjected to the inexorable rule of moral law.」这是她反对以「管理」处理卖淫的根，不是附带的道德感慨。
+她坚持医学与公共卫生的判断受道德律约束，不能只按效用算：**1902 年文集卷一**：「This act, like all human acts, is subjected to the inexorable rule of moral law.」这是她反对以「管理」处理卖淫的根，不是附带的道德感慨。
 > **证伪条件**：若她在公共卫生议题上曾以纯效用理由压过道德理由，本条应下调为 hypothesis。
 
 <!-- claim:clm-00bd0d874b37 -->

@@ -11,7 +11,7 @@
 ## 断言（6 条）
 
 <!-- claim:clm-d0c8bd00b789 -->
-她判活体解剖时**同时看两面**：智识上的与道德上的——「must be considered by us both under its intellectual and its moral aspects」；并给出智识面的判断：「vivisection is examination of the beginning of death, not of life」。凡遇到「这么做有用」的辩护，她的做法是把有用性与其代价分开各判一次。
+她判活体解剖时**同时看两面**：智识上的与道德上的——**1902 年文集卷二**：「must be considered by us both under its intellectual and its moral aspects」；同卷给出智识面的判断：「vivisection is examination of the beginning of death, not of life」。凡遇到「这么做有用」的辩护，她的做法是把有用性与其代价分开各判一次。
 > **证伪条件**：若她判活体解剖时只谈道德不谈智识（或反之），「同时看两面」这条作废。
 
 <!-- claim:clm-3e59a3057c04 -->
@@ -19,11 +19,11 @@
 > **证伪条件**：若《Counsel to Parents》里那句自述不指向 1852 年的体育讲义，回指链断，本条下调。
 
 <!-- claim:clm-9cc0c6d34a4a -->
-遇到一个通行的比率，她先问它的分母是什么。伦敦死亡率「通常说是每千人 23 或 24」，她判为「really an unknown quantity」——因为人口大进大出，分母根本不稳。同一个动作也用在马尔萨斯式的人口算计上。**先拆分母，再谈结论。**
+遇到一个通行的比率，她先问它的分母是什么。**1902 年《Essays in Medical Sociology》卷二**里，伦敦死亡率「通常说是每千人 23 或 24」，她判为「really an unknown quantity」——因为人口大进大出，分母根本不稳。同一个动作也用在马尔萨斯式的人口算计上。**先拆分母，再谈结论。**
 > **证伪条件**：若她引用通行比率时不追问其分母/口径，本条作废。
 
 <!-- claim:clm-09682fc5ae75 -->
-她开口讲一个题目之前，先说明自己凭什么讲——凭的是行医年数与亲历：「The experience gained during a generation of active medical work has brought another subject before me」、「I know, however, from long medical experience, that such instruction is now needed」。自传通篇也是这个结构：先记亲历，再下判断。**不凭立场发言，凭在场发言。**
+她开口讲一个题目之前，先说明自己凭什么讲——凭的是行医年数与亲历。**1878 年《Counsel to Parents》**开场两处：「The experience gained during a generation of active medical work has brought another subject before me」、「I know, however, from long medical experience, that such instruction is now needed」。自传通篇也是这个结构：先记亲历，再下判断。**不凭立场发言，凭在场发言。**
 > **证伪条件**：若她开题时以立场或权威而非亲历自陈资格，本条作废。
 
 <!-- claim:clm-57f40a2d1f50 -->
