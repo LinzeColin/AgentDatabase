@@ -239,3 +239,19 @@ def test_promotion_prunes_everything_rollback_cannot_reach() -> None:
     assert '[[ "$name" == "$keep_current" || "$name" == "$keep_previous" ]] && continue' in deploy
     # Pruning must happen before the release is copied, or it frees space too late.
     assert deploy.index("prune_superseded_releases \"$APP_ROOT\"") < deploy.index('cp -a MemoryAtlas/dist')
+
+
+def test_the_full_gate_covers_what_ci_runs() -> None:
+    """A commit reached main with the full gate green and CI red, because the
+    gate did not run validate:whole-project. A gate that is a sample of CI
+    rather than a superset of it is not a gate."""
+    gate = GATE.read_text(encoding="utf-8")
+    workflow = WORKFLOW.read_text(encoding="utf-8")
+    for script in ("lint", "validate:preservation", "validate:v31", "validate:v31:incremental",
+                   "validate:v31:typescript", "build", "validate:whole-project"):
+        assert script in workflow, f"CI no longer runs {script}"
+        assert script in gate, f"the gate does not account for {script}"
+    # validate:whole-project needs live deployment evidence, so it runs on CI
+    # only. The gate must say so rather than silently omit it.
+    assert "validate:whole-project belongs here in principle" in gate
+    assert "npm run validate:whole-project" in workflow

@@ -75,6 +75,13 @@ if [[ "$mode" == "full" ]]; then
     run_check frontend_build npm --prefix "$repo/MemoryAtlas" run --silent build
     run_check v31_static npm --prefix "$repo/MemoryAtlas" run --silent validate:v31
     run_check v31_incremental npm --prefix "$repo/MemoryAtlas" run --silent validate:v31:incremental
+    # validate:whole-project belongs here in principle — a privacy-scan failure
+    # inside it reached main while this gate reported green. It is not run
+    # locally because four of its tests (acceptance_audit, goal_completion)
+    # require live deployment evidence and can only pass on CI, which would make
+    # the local gate permanently red and therefore useless. The gap is closed by
+    # asserting CI runs it (test_the_full_gate_covers_what_ci_runs), not by
+    # pretending it is covered here.
   fi
   run_check ci_workflow_present test -f "$repo/.github/workflows/memory-atlas-v31.yml"
 fi
