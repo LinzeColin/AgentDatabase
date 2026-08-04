@@ -653,3 +653,67 @@ def test_the_alert_is_filed_before_the_ledger_is_exported() -> None:
     exported = source.index("failure_snapshot = self.failures.export_snapshot(failure_generated_at)")
     published = source.index("failure_outbox = self._publish_failure_snapshot(")
     assert filed < exported < published
+
+
+# --- 全量全时 must not be truncated by a fresh run ---------------------------
+
+def _jsonl(path: Path, ids) -> Path:
+    path.write_text("".join(json.dumps({"event_id": i, "activity": "x"}) + "\n" for i in ids), encoding="utf-8")
+    return path
+
+
+def test_a_fresh_run_unions_with_the_canonical_stream(tmp_path: Path) -> None:
+    """Production regression: a new run's batch is not in the canonical
+    MANIFEST's `supersedes`, so the reconcile read only that batch — 114,024
+    events where the all-time union holds 122,080. The manifest's own loss_check
+    says keeping the newest run alone drops 10,044."""
+    from OpenAIDatabase.scripts.memory_atlas_private.pipeline import merge_event_streams
+
+    batch = _jsonl(tmp_path / "batch.jsonl", ["a", "b", "c"])
+    union = _jsonl(tmp_path / "union.jsonl", ["b", "c", "d", "e"])
+    result = merge_event_streams(batch, union)
+
+    assert result["mode"] == "BATCH_UNION_CANONICAL"
+    assert result["batch_events"] == 3
+    assert result["canonical_only_events"] == 2   # d, e
+    assert result["union_events"] == 5            # a b c d e
+    ids = [json.loads(line)["event_id"] for line in batch.read_text(encoding="utf-8").splitlines() if line.strip()]
+    assert sorted(ids) == ["a", "b", "c", "d", "e"]
+    # No duplicates: the batch side wins and the union side only adds.
+    assert len(ids) == len(set(ids))
+
+
+def test_the_merge_counts_add_up_so_a_silent_drop_is_visible(tmp_path: Path) -> None:
+    from OpenAIDatabase.scripts.memory_atlas_private.pipeline import merge_event_streams
+
+    batch = _jsonl(tmp_path / "b.jsonl", [f"e{i}" for i in range(50)])
+    union = _jsonl(tmp_path / "u.jsonl", [f"e{i}" for i in range(30, 90)])
+    result = merge_event_streams(batch, union)
+    assert result["union_events"] == result["batch_events"] + result["canonical_only_events"] == 90
+
+
+def test_a_batch_already_inside_the_union_adds_nothing(tmp_path: Path) -> None:
+    from OpenAIDatabase.scripts.memory_atlas_private.pipeline import merge_event_streams
+
+    batch = _jsonl(tmp_path / "b.jsonl", ["a", "b"])
+    union = _jsonl(tmp_path / "u.jsonl", ["a", "b"])
+    result = merge_event_streams(batch, union)
+    assert result["canonical_only_events"] == 0 and result["union_events"] == 2
+
+
+def test_unparseable_and_idless_lines_are_skipped_not_counted(tmp_path: Path) -> None:
+    from OpenAIDatabase.scripts.memory_atlas_private.pipeline import merge_event_streams
+
+    (tmp_path / "b.jsonl").write_text('{"event_id":"a"}\nnot json\n{"no_id":1}\n\n', encoding="utf-8")
+    union = _jsonl(tmp_path / "u.jsonl", ["a", "z"])
+    result = merge_event_streams(tmp_path / "b.jsonl", union)
+    assert result["union_events"] == 2 and result["canonical_only_events"] == 1
+
+
+def test_the_reconcile_reaches_for_the_union_whenever_it_is_available() -> None:
+    source = (REPO / "OpenAIDatabase" / "scripts" / "memory_atlas_private" / "pipeline.py").read_text(encoding="utf-8")
+    assert "if canonical.available:" in source
+    assert "merge = merge_event_streams(temporary, union_path)" in source
+    assert '"event_merge": merge' in source
+    # Reading only the batch stays possible, but only when there is no union.
+    assert '"mode": "BATCH_ONLY", "reason": "canonical union 不可用"' in source

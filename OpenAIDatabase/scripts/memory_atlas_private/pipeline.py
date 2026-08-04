@@ -156,6 +156,46 @@ def _authority_tiers(registry_path: Path | None) -> dict[str, dict[str, Any]]:
     }
 
 
+def merge_event_streams(batch_path: Path, union_path: Path) -> dict[str, Any]:
+    """Union this run's batch with the all-time canonical stream, by event id.
+
+    `batch_path` is rewritten in place with the merged stream. Both sides are
+    counted and reported, so a merge that silently dropped one side would show
+    as a count that does not add up rather than as a smaller number nobody
+    questions.
+    """
+    seen: set[str] = set()
+    batch_count = 0
+    added = 0
+    merged = batch_path.with_suffix(batch_path.suffix + ".merged")
+    with merged.open("w", encoding="utf-8", newline="\n") as out:
+        for path, is_batch in ((batch_path, True), (union_path, False)):
+            with path.open("r", encoding="utf-8") as handle:
+                for line in handle:
+                    if not line.strip():
+                        continue
+                    try:
+                        event_id = str(json.loads(line).get("event_id") or "")
+                    except json.JSONDecodeError:
+                        continue
+                    if is_batch:
+                        batch_count += 1
+                    if not event_id or event_id in seen:
+                        continue
+                    seen.add(event_id)
+                    if not is_batch:
+                        added += 1
+                    out.write(line if line.endswith("\n") else line + "\n")
+    merged.replace(batch_path)
+    return {
+        "mode": "BATCH_UNION_CANONICAL",
+        "batch_events": batch_count,
+        "canonical_only_events": added,
+        "union_events": len(seen),
+        "reason": "新一跑的批次尚未并入 canonical union；两侧按 event_id 求并，避免只读最新一跑而丢掉历史事件。",
+    }
+
+
 def capture_overdue(source_completed_at: str | None, now: str, target_seconds: int) -> dict[str, Any] | None:
     """Has the scheduled capture failed to arrive?
 
@@ -1081,9 +1121,15 @@ class RemoteReconcilePipeline(LiveSnapshotPublisherMixin):
                 # 112,036), so reading it loses nothing this manifest named.
                 canonical_receipt = canonical.fetch(temporary)
                 event_source = str(canonical.canonical_object)
+                merge = {"mode": "CANONICAL_ONLY", "reason": "本次批次已被 canonical union 收录"}
             else:
+                # A fresh run's batch is not in the union yet. Reading only the
+                # batch is what "全量全时" must never mean: this run carried
+                # 114,024 events while the union carried 122,080, and the
+                # manifest's own loss_check says keeping only the newest run
+                # drops 10,044. Both are read and unioned by event id.
                 self.object_store.get_file(event_source, temporary)
-                canonical_receipt = {
+                batch_receipt = {
                     "state": "READY", "provider": "r2", "cache": "MISS",
                     # Proven by exists_with_hash in the accounting loop above.
                     "sha256": next(
@@ -1093,6 +1139,22 @@ class RemoteReconcilePipeline(LiveSnapshotPublisherMixin):
                     ),
                     "bytes": temporary.stat().st_size,
                 }
+                merge = {"mode": "BATCH_ONLY", "reason": "canonical union 不可用"}
+                canonical_receipt = batch_receipt
+                if canonical.available:
+                    with tempfile.NamedTemporaryFile(
+                        prefix="memory-atlas-union-", suffix=".jsonl", delete=False
+                    ) as union_handle:
+                        union_path = Path(union_handle.name)
+                    try:
+                        union_receipt = canonical.fetch(union_path)
+                        merge = merge_event_streams(temporary, union_path)
+                        merge["batch_receipt"] = batch_receipt
+                        merge["canonical_receipt"] = union_receipt
+                        canonical_receipt = union_receipt
+                        event_source = f"{normalized_key}+{canonical.canonical_object}"
+                    finally:
+                        union_path.unlink(missing_ok=True)
             analytics = build_behavior_analytics(_iter_events(temporary), generated_at=self.clock())
             live_events = [asdict(event) for event in _iter_events(temporary)]
             # The ten original views read a snapshot built from
@@ -1258,6 +1320,7 @@ class RemoteReconcilePipeline(LiveSnapshotPublisherMixin):
             "r2_verified_objects": r2_verified,
             "migrated_to_github_objects": len(migrated),
             "canonical_source": {**canonical.to_fact(), "receipt": canonical_receipt},
+            "event_merge": merge,
             "github_backup_coverage": backup_coverage.to_fact(),
             "capture_alert": capture_alert,
             "events": event_count,
