@@ -7,7 +7,11 @@ on:
       - "MemoryAtlas/**"
       - "OpenAIDatabase/scripts/memory_atlas_private/**"
       - "OpenAIDatabase/scripts/memory_atlas_source_capture_entry.py"
-      - "OpenAIDatabase/tests/test_memory_atlas_private_v31.py"
+      # Naming one test file meant later suites changed without CI ever running:
+      # a commit touching only test_memory_atlas_canonical_gate_v32.py triggered
+      # nothing at all.
+      - "OpenAIDatabase/tests/test_memory_atlas_*.py"
+      - "OpenAIDatabase/config/quality/verification_policy.json"
       - "ops/memory-atlas/**"
       - ".github/workflows/memory-atlas-v31.yml"
   workflow_dispatch:

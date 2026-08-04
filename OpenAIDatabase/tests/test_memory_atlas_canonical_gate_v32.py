@@ -335,3 +335,14 @@ def test_the_gate_runs_every_test_the_ownership_contract_lists() -> None:
     }, excluded
     workflow = WORKFLOW.read_text(encoding="utf-8")
     assert "validate:whole-project" in workflow, "CI must still run the excluded suites"
+
+
+def test_ci_triggers_on_every_suite_the_gate_owns() -> None:
+    """A commit touching only this file triggered no CI run at all: the workflow
+    named a single test file by hand. Changing a gated suite without CI seeing
+    it is the same class of hole as the gate not running it."""
+    workflow = WORKFLOW.read_text(encoding="utf-8")
+    assert '"OpenAIDatabase/tests/test_memory_atlas_*.py"' in workflow
+    assert '"OpenAIDatabase/config/quality/verification_policy.json"' in workflow
+    # The hand-named single file must be gone, or the glob is decorative.
+    assert '- "OpenAIDatabase/tests/test_memory_atlas_private_v31.py"' not in workflow
