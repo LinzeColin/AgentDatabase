@@ -186,6 +186,13 @@ sudo systemctl restart memory-atlas-action-worker.service
 sudo systemctl restart --no-block memory-atlas-reconcile.service
 printf '%s
 ' "$release_id" > "$APP_ROOT/shared/LAST_PROMOTED_RELEASE"
+# The reconcile reads these so the published snapshot can name the release and
+# deployment it was produced under; without them the same-run oracle has nothing
+# to bind and the panel honestly shows 未验证.
+printf 'MEMORY_ATLAS_RELEASE_ID=%s\nMEMORY_ATLAS_REPOSITORY_COMMIT=%s\nMEMORY_ATLAS_DEPLOYMENT_REVISION=%s\nMEMORY_ATLAS_ARTIFACT_DIGEST=%s\n' \
+  "$release_id" "$release_commit" "$release_id" "${MEMORY_ATLAS_ARTIFACT_DIGEST:-}" > "$APP_ROOT/shared/release-identity.env"
+chmod 0644 "$APP_ROOT/shared/release-identity.env"
+
 printf '{"schema_version":"memory_atlas.promotion.v1","release_id":"%s","git_commit":"%s","promoted_at":"%s"}
 ' "$release_id" "$release_commit" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > "$APP_ROOT/shared/promotion.json"
 trap - ERR

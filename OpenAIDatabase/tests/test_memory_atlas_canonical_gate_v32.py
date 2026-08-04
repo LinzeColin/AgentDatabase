@@ -370,3 +370,18 @@ def test_the_hook_survives_a_sparse_checkout() -> None:
     )
     if listed.returncode == 0 and listed.stdout.strip():
         assert ".githooks" in listed.stdout, "the hook directory is outside the sparse cone"
+
+
+def test_the_reconcile_can_name_the_release_it_ran_under() -> None:
+    """The live snapshot reported release identity_state=UNVERIFIED in
+    production: the reconcile unit had no source for the release id, so the
+    same-run oracle had nothing to bind release or deployment to."""
+    unit = (REPO / "ops" / "memory-atlas" / "systemd" / "memory-atlas-reconcile.service").read_text(encoding="utf-8")
+    assert "release-identity.env" in unit
+    # Optional so a host without a promotion still starts.
+    assert "EnvironmentFile=-/srv/linze/apps/memory-atlas/shared/release-identity.env" in unit
+    deploy = (REPO / "ops" / "memory-atlas" / "deploy-blue-green.sh").read_text(encoding="utf-8")
+    for key in ("MEMORY_ATLAS_RELEASE_ID", "MEMORY_ATLAS_REPOSITORY_COMMIT",
+                "MEMORY_ATLAS_DEPLOYMENT_REVISION", "MEMORY_ATLAS_ARTIFACT_DIGEST"):
+        assert key in deploy, key
+    assert 'release-identity.env' in deploy

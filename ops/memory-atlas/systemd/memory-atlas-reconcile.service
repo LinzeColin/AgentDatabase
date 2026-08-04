@@ -8,6 +8,10 @@ Type=oneshot
 User=ubuntu
 Group=ubuntu
 EnvironmentFile=/srv/linze/secrets/memory-atlas.env
+# The snapshot reported release identity_state=UNVERIFIED because this unit had
+# nothing to read it from, so the same-run oracle could not bind the release or
+# the deployment to the run. deploy-blue-green.sh writes these at promotion.
+EnvironmentFile=-/srv/linze/apps/memory-atlas/shared/release-identity.env
 Environment=GH_CONFIG_DIR=/srv/linze/state/memory-atlas/gh-config
 WorkingDirectory=/srv/linze/apps/agentdatabase/current
 ExecStart=/srv/linze/venvs/memory-atlas/bin/python -B -m OpenAIDatabase.scripts.memory_atlas_private reconcile
