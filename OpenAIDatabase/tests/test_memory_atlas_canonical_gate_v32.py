@@ -211,3 +211,16 @@ def test_every_third_party_import_in_the_serving_path_is_declared() -> None:
 def test_the_dependency_checker_catches_the_dependency_that_broke_the_deploy() -> None:
     without = _declared_requirements() - {"jsonschema"}
     assert any("jsonschema" in row for row in _undeclared_third_party_imports(without))
+
+
+def test_promotion_recreates_the_container_and_proves_what_is_served() -> None:
+    """The web container bind-mounts $APP_ROOT/current/dist and Docker resolves
+    that symlink to an inode at start. Without --force-recreate the container
+    keeps serving the release it started on: every promotion between
+    2026-08-03T20:16 and 2026-08-04T01 was correct at the origin and invisible
+    in the browser."""
+    deploy = (REPO / "ops" / "memory-atlas" / "deploy-blue-green.sh").read_text(encoding="utf-8")
+    assert "--force-recreate" in deploy
+    probe = POST_PROMOTE.read_text(encoding="utf-8")
+    assert "SERVED_ARTIFACT_IS_NOT_THE_PROMOTED_RELEASE" in probe
+    assert "exit 7" in probe

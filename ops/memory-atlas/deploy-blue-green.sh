@@ -150,7 +150,13 @@ ln -sfn "$agent_release" "$AGENT_ROOT/current"
 trap post_promotion_error ERR
 sudo systemctl restart memory-atlas-api.service
 sudo systemctl enable --now memory-atlas-api-proxy.socket memory-atlas-reconcile.timer memory-atlas-selfheal.timer memory-atlas-action-worker.timer
-docker compose -f "$AGENT_ROOT/current/ops/memory-atlas/docker-compose.yml" up -d --remove-orphans
+# --force-recreate is not optional. The web container bind-mounts
+# $APP_ROOT/current/dist, and Docker resolves that symlink to an inode when the
+# container starts. Without recreation the container keeps serving the release
+# it was started on: every promotion between 2026-08-03T20:16 and 2026-08-04T01
+# was correct at the origin and invisible in the browser for exactly this
+# reason.
+docker compose -f "$AGENT_ROOT/current/ops/memory-atlas/docker-compose.yml" up -d --remove-orphans --force-recreate
 sudo systemctl restart memory-atlas-reconcile.service memory-atlas-action-worker.service
 printf '%s
 ' "$release_id" > "$APP_ROOT/shared/LAST_PROMOTED_RELEASE"
