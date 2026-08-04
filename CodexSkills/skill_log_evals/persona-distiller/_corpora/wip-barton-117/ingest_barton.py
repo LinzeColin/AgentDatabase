@@ -13,14 +13,20 @@
   `THIRD-PARTY` / `ATTRIBUTION-UNCLEAR` **一律留空**——
   填了就等于把别人的话记在她名下。
 
-## ★★ holdout 按**整部著作**留，不按份留
+## ★★ holdout 按**短名逐条列出**，不按篇名分组
 
 Nightingale #112 栽过一次：**同一本书的不同版次被拆到 train/holdout 两侧**，
 `check_holdout_overlap` 实测覆盖 53.1%。
-本人物这个风险更大——`A Story of the Red Cross` 一部书有 **8 份**扫描、
-`The Red Cross in Peace and War` 有 **7 份**。
 
-所以 holdout 以**篇名**为单位整组留出，**同名的每一份都留**。
+**本脚本第一版明知这条，仍然踩了同一个坑**：
+按**篇名**整组留出，而 `A Story of the Red Cross: Glimpses of Field Work`（留出）
+与 `A Story of the Red Cross`（留在 train，8 份扫描）**是同一本书的两种著录题名**。
+`check_holdout_overlap` 当场报 **硬失败 6 / 覆盖 89.4%**。
+
+**「按篇名分组」不等于「按著作分组」——著录题名会变，书不会变。**
+
+所以改成**逐条列短名**，并且**选没有任何近似兄弟的单副本日记**；
+选完之后**必须实跑 `check_holdout_overlap` 验一遍**，不许凭设计自信。
 
 ## ★ holdout 选的是她自己的东西，而这会**拉低**一手占比
 
@@ -43,10 +49,13 @@ INGEST = (HERE.parents[3] / "registry" / "codex" / "persona-distiller"
 
 SUBJECT = "Clara Barton"
 
-# ★ holdout：按**篇名**整组留出。选的都是她自己的东西，且覆盖两条道。
-HOLDOUT_TITLES = {
-    "The Story of My Childhood",                       # 自传，3 份（P1+P2×2）
-    "A Story of the Red Cross: Glimpses of Field Work",  # 3 份（P1+P2×2）
+# ★ holdout：**逐条列短名**。选的是单副本日记——语料里没有它们的第二份扫描，
+#   也没有同书异名的兄弟。四册横跨 1864–1897，覆盖 timeline 道。
+HOLDOUT_IDS = {
+    "diary-1864-jan-dec",
+    "diary-1867-jan-dec",
+    "diary-1871-feb-dec",
+    "diary-1897-may-17-sept-5",
 }
 
 OWN = {"HIS-OWN", "CO-AUTHORED"}
@@ -76,9 +85,9 @@ def main() -> int:
     if not INGEST.is_file():
         raise SystemExit(f"✗ 找不到 ingest.py：{INGEST}")
     all_rows = list(rows())
-    held = [r for r in all_rows if r["title"] in HOLDOUT_TITLES]
+    held = [r for r in all_rows if r["sid"] in HOLDOUT_IDS]
     print(f"台账 {len(all_rows)} 行　holdout {len(held)} 份"
-          f"（{len(HOLDOUT_TITLES)} 部著作整组留出）\n")
+          f"（逐条列出的 {len(HOLDOUT_IDS)} 册单副本日记）\n")
 
     ok = fail = 0
     for r in all_rows:
@@ -98,7 +107,7 @@ def main() -> int:
             cmd += ["--author", SUBJECT]
         if r["year"].strip().isdigit():
             cmd += ["--published-at", r["year"].strip()]
-        if r["title"] in HOLDOUT_TITLES:
+        if r["sid"] in HOLDOUT_IDS:
             cmd += ["--holdout"]
         p = subprocess.run(cmd, capture_output=True, text=True)
         if p.returncode == 0:
