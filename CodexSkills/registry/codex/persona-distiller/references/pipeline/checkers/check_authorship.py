@@ -355,6 +355,97 @@ def ocr_byline_evidence(text, first, last):
     return None
 
 
+def _blocked(cand, last_l, namesakes):
+    """候选姓与某个**已声明同名**的距离 ≤ 与目标姓的距离 → 拒绝。
+
+    ★ `Thomson` 与 `Thompson` 距离仅 1。不声明就会把十二个 Thompson 收进来——
+      Thomson #129 探测实测：索引里挨着他名字的 27 个号，**16 个是别人的**。
+    """
+    d = next((k for k in range(3) if _edits_within(cand, last_l, k)), 3)
+    return any(ns != last_l and _edits_within(cand, ns, d) for ns in namesakes)
+
+
+def standalone_ocr(text, first_l, last_l, namesakes):
+    """**独占一行的署名，名或姓被 OCR 打坏**——`Elihtt Thomson.`／`Pror. Tuomson :—`。
+
+    ## 为什么要它
+
+    Thomson #129 实测：56 份语料里 24 份被判「无据」，而证据都在文里，
+    只是**名字被 OCR 打坏了**：
+      - 期刊文末署名：`Elihtt Thomson.`（`Elihu` → `Elihtt`）
+      - 学会讨论发言标签：`Pror. Tuomson :—`／`Pror. Taomson`／`Exinv Toomson`
+        （抓源方实测：**几乎每次坏法都不一样，严格匹配找不到一半**）
+
+    既有的编辑距离容错**只作用于 `By …` 与全大写行**；
+    这两类都不是——于是整条路走不通。
+
+    ## ★★★ 同名护栏：容错不许把两个真名连起来
+
+    `Thomson` 与 `Thompson` 的编辑距离是 **1**。容忍 2 就把十二个 Thompson
+    全并进来了——而 Thomson #129 的探测**实测**：1887 年索引里挨着他名字的
+    27 个专利号，**16 个是别人的，其中十二个姓 Thompson**。
+
+    所以本件要求调用方**声明已知同名**（`--namesake`）：
+    候选姓氏若与任一已声明同名的距离 **≤ 与目标姓氏的距离**，一律拒绝。
+    **宁可漏，不可把别人的东西记成他的。**
+    """
+    lines = text.splitlines()
+    n = len(lines) or 1
+    HON = (r"(?:Sir|Dame|Prof(?:essor)?|Pror[a-z]*|Prorf?|Dr|Mr|Mrs|Ms|Rev|Lord|Lady|"
+           r"Pbesident|President|Chairman|Cuareman)")
+    for idx, raw in enumerate(lines):
+        s = raw.strip()
+        if not (4 <= len(s) <= 80) or s.startswith("#"):
+            continue
+
+        # ── 形态 A：发言标签 `Pror. Tuomson :—…`
+        #    ★ **敬称是必需的**——既有设计就是靠它挡住「标题里的冒号」
+        #      （`<某名>: 某标题` 在导航/og:title 里重复出现）。**我第一版丢了它，自测当场抓到。**
+        m = re.match(rf"^(?:{HON}[A-Za-z]{{0,6}}\.?[ \t]+)+([A-Za-z][A-Za-z.'\-]{{2,20}}"
+                     rf"(?:[ \t]+[A-Za-z][A-Za-z.'\-]{{2,20}}){{0,2}})[ \t]*[:：]", s, re.I)
+        if m:
+            toks = [x for x in re.split(r"[^A-Za-z]+", m.group(1)) if x]
+            cand = next((x.lower() for x in reversed(toks) if len(x) >= 4), None)
+            if cand and _edits_within(cand, last_l, 2) and not _blocked(cand, last_l, namesakes):
+                return s
+            continue
+
+        # ── 形态 B：**整行只有名字**（可带句点/逗号），如 `Elihtt Thomson.`
+        #    ★ 位置护栏：只认**文首 10% 或文末 10%**——署名在头或尾。
+        #      正文深处独占一行的名字是索引/参考文献，**自测里就有这条反例**。
+        pos = idx / n
+        if not (pos <= 0.10 or pos >= 0.90):
+            continue
+        if not re.fullmatch(r"[A-Za-z][A-Za-z.'\-]{1,20}(?:[ \t]+[A-Za-z][A-Za-z.'\-]{1,20}){1,3}[.,]?", s):
+            continue
+        toks = [x for x in re.split(r"[^A-Za-z]+", s) if x]
+        cand = next((x.lower() for x in reversed(toks) if len(x) >= 4), None)
+        if not cand or not _edits_within(cand, last_l, 2) or _blocked(cand, last_l, namesakes):
+            continue
+        # 名也必须对得上（≥4 字母、距离 ≤2）——**只有首字母缩写的一律不认**
+        if any(len(x) >= 4 and _edits_within(x.lower(), first_l, 2) for x in toks[:-1]):
+            return s
+
+    # ── 形态 C：**签名被 OCR 并进了最后一行正文**
+    #    `tion of the coil C. Elihu Thomson.` —— 期刊文末签名与末段黏在一起。
+    #    ★ 射程钉死在**最后 3 行**：再放宽就会把正文里「据 Elihu Thomson 说」收进来。
+    for idx in range(max(0, n - 3), n):
+        s = lines[idx].strip()
+        if not s or s.startswith("#"):
+            continue
+        m = re.search(r"(?:^|[.。!?]\s+)([A-Z][A-Za-z.'\-]{1,20}"
+                      r"(?:[ \t]+[A-Z][A-Za-z.'\-]{1,20}){1,3})[ \t]*[.,]?[ \t]*$", s)
+        if not m:
+            continue
+        toks = [x for x in re.split(r"[^A-Za-z]+", m.group(1)) if x]
+        cand = next((x.lower() for x in reversed(toks) if len(x) >= 4), None)
+        if not cand or not _edits_within(cand, last_l, 2) or _blocked(cand, last_l, namesakes):
+            continue
+        if any(len(x) >= 4 and _edits_within(x.lower(), first_l, 2) for x in toks[:-1]):
+            return s
+    return None
+
+
 def join_short_lines(text, max_len=14, run=2):
     """把连续的**极短行**并成一行，供比对用（不写回语料）。
 
@@ -720,6 +811,20 @@ def _check_one(text, pat):
         if hit:
             return True, "A-byline-ocr", hit, counter
 
+    # ★★★ v0.0.0.136：**名字被 OCR 打坏的独占署名／发言标签**——最后一条路。
+    #   Thomson #129 实测：56 份里 24 份走到这里仍判「无据」，而证据都在文里：
+    #     期刊文末 `Elihtt Thomson.`（`Elihu`→`Elihtt`）
+    #     讨论标签 `Pror. Tuomson :—`／`Pror. Taomson`／`Exinv Toomson`
+    #   既有的编辑距离容错**只作用于 `By …` 与全大写行**，这两类都不是。
+    #   ★ 同名护栏见 `standalone_ocr` 文件头：`Thomson` 与 `Thompson` 距离仅 1，
+    #     而该人物的探测**实测**索引里挨着他名字的 27 个号有 16 个是别人的
+    #     （十二个姓 Thompson）——**容错不许把两个真名连起来。**
+    if not counter:
+        ev = standalone_ocr(text, pat.get("first_word", "").lower(),
+                            pat.get("surname", "").lower(),
+                            {n.lower() for n in pat.get("namesakes", ())})
+        if ev:
+            return True, "A-byline-ocr", ev, counter
     return False, "", "", counter
 
 
@@ -1007,7 +1112,35 @@ def self_test() -> int:
     except ValueError:
         print("  ✓ 反例 不含人物名的刊头: 已拒绝声明")
 
+    # ★★★ v0.0.0.136：`A-byline-ocr` 的十条对照（Thomson #129 实测形态）。
+    #   五条必须认出（名或姓被 OCR 打坏），五条必须拒绝——
+    #   **其中三条是同名陷阱**：Thomson↔Thompson 编辑距离只有 1，
+    #   而该人物探测实测「索引里挨着他名字的 27 个号有 16 个是别人的」。
+    #   ★ 另两条是我第一版真踩到的：**标题里的冒号**（丢了敬称要求）
+    #     与**正文深处独占一行的名字**（丢了位置要求）——**自测当场抓住。**
+    print("\n══ A-byline-ocr 十条对照（v0.0.0.136）══")
+    _NS = {"thompson", "quimby", "thoms"}
+    _tail = lambda s: "body line\n" * 30 + s
+    _mid = lambda s: "body line\n" * 30 + s + "\nbody line" * 30
+    for _lbl, _s, _want in (
+            ("Elihtt Thomson.（文末署名）", _tail("Elihtt Thomson."), True),
+            ("ELIHU THOMSON.（全大写文末）", _tail("ELIHU THOMSON."), True),
+            ("Pror. Tuomson :—（发言标签）", "Pror. Tuomson :—On my own account, having had", True),
+            ("Pror. Taomson : —（发言标签）", "Pror. Taomson : —That is, with a small current", True),
+            ("Prof. Thomson:（干净发言标签）", "Prof. Thomson: I am sure we have", True),
+            ("A. Thompson（**同名**）", _tail("A. Thompson."), False),
+            ("Elihu T. Quimby（**同名**）", _tail("Elihu T. Quimby."), False),
+            ("E. P. Thomson（只有缩写）", _tail("E. P. Thomson."), False),
+            ("正文深处独占一行的名字", _mid("Elihu Thomson."), False),
+            ("标题里的冒号", "Elihu Thomson: The Field of Experimental Research", False)):
+        _got = bool(standalone_ocr(_s, "elihu", "thomson", _NS))
+        _ok = _got == _want
+        print(f"  {'✓' if _ok else '✗'} {'应认出' if _want else '应拒绝'}　{_lbl}")
+        if not _ok:
+            bad.append(f"A-byline-ocr：{_lbl}")
+
     if bad:
+
         print("\n负对照未过：")
         for b in bad:
             print(f"  · {b}")
@@ -1029,6 +1162,10 @@ def main() -> int:
     ap.add_argument("--masthead", default=None,
                     help="单作者站点的报头（如 \"Seth's Blog\"）。**必须含人物的名或姓**，"
                          "否则拒绝声明——不含人物名的刊头正是多作者刊物的形态。")
+    ap.add_argument("--namesake", action="append", default=[],
+                    help="**已知同名的姓氏**（可给多次）。OCR 容错不许把两个真名连起来："
+                         "候选姓与任一已声明同名的距离 ≤ 与目标姓的距离时一律拒绝。"
+                         "★ Thomson 与 Thompson 距离仅 1——不声明就会把十二个 Thompson 收进来。")
     ap.add_argument("--self-test", action="store_true",
                     help="只跑内置双向负对照，不读语料")
     a = ap.parse_args()
@@ -1041,6 +1178,8 @@ def main() -> int:
 
     try:
         pat = attach_masthead(build_patterns(a.name), a.masthead)
+        # ★ 已知同名注入：OCR 容错不许把两个真名连起来（见 standalone_ocr 文件头）
+        pat["namesakes"] = tuple(a.namesake or ())
     except ValueError as exc:
         print(f"✗ {exc}", file=sys.stderr)
         return 3

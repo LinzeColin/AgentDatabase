@@ -1,50 +1,57 @@
 {
-  "builder_version": "v0.0.0.5",
+ "builder_version": "v0.0.0.5",
+ "chosen_subject_uid": null,
+ "consent_authority": null,
+ "created_at": "2026-08-04T21:21:42Z",
+ "current_version": null,
+ "existential_hypotheses_enabled": false,
+ "identity_selection": {
+  "canonical": "technical-engineer",
+  "display": "材料建工师",
+  "mode": "single",
+  "primary": "technical-engineer",
+  "weights": {
+   "technical-engineer": 1.0
+  }
+ },
+ "language": "zh-CN",
+ "model_version": "0.1.0-draft",
+ "name": "Elihu Thomson",
+ "namesake_gate": {
+  "candidate_count": 0,
+  "chosen_candidate": null,
   "chosen_subject_uid": null,
-  "consent_authority": null,
-  "created_at": "2026-08-04T21:21:42Z",
-  "current_version": null,
-  "existential_hypotheses_enabled": false,
-  "identity_selection": {
-    "canonical": "technical-engineer",
-    "display": "材料建工师",
-    "mode": "single",
-    "primary": "technical-engineer",
-    "weights": {
-      "technical-engineer": 1.0
-    }
-  },
-  "language": "zh-CN",
-  "model_version": "0.1.0-draft",
-  "name": "Elihu Thomson",
-  "namesake_gate": {
-    "candidate_count": 0,
-    "chosen_candidate": null,
-    "chosen_subject_uid": null,
-    "normalized_name": "elihuthomson",
-    "resolution": "none",
-    "schema_version": "1.0"
-  },
   "normalized_name": "elihuthomson",
-  "origin_review_required": false,
-  "product_version": null,
-  "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
-  "profile": "quick",
-  "prohibited_uses": [
-    "identity authentication or deceptive impersonation",
-    "invented endorsement, signature, consent, private memory or current opinion",
-    "unsupported psychological diagnosis",
-    "replacement of accountable high-stakes professional judgment"
-  ],
-  "retention_policy": null,
-  "runtime_invocation_versioning": false,
-  "scenario": null,
-  "scenario_policy": "optional-build-hint; infer-per-runtime-task",
-  "schema_version": "2.0",
-  "slug": "elihu-thomson",
-  "status": "draft",
-  "subject_origin": "historical",
-  "target_id": "tgt-82bf85f802ad",
-  "time_scope": "all available periods, separated by role and material drift",
-  "updated_at": "2026-08-04T21:21:42Z"
+  "resolution": "none",
+  "schema_version": "1.0"
+ },
+ "normalized_name": "elihuthomson",
+ "origin_review_required": false,
+ "product_version": null,
+ "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+ "profile": "quick",
+ "prohibited_uses": [
+  "identity authentication or deceptive impersonation",
+  "invented endorsement, signature, consent, private memory or current opinion",
+  "unsupported psychological diagnosis",
+  "replacement of accountable high-stakes professional judgment"
+ ],
+ "retention_policy": null,
+ "runtime_invocation_versioning": false,
+ "scenario": null,
+ "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+ "schema_version": "2.0",
+ "slug": "elihu-thomson",
+ "status": "draft",
+ "subject_origin": "historical",
+ "target_id": "tgt-82bf85f802ad",
+ "time_scope": "all available periods, separated by role and material drift",
+ "updated_at": "2026-08-04T21:21:42Z",
+ "known_namesakes": [
+  "Thompson",
+  "Quimby",
+  "Thoms",
+  "Dodd"
+ ],
+ "known_namesakes_note": "探测实测：1887 年专利索引里挨着他名字的 27 个号，**16 个是别人的**——十二个 Thompson，另加 Nash／Smith／Jones／William Arthur Thoms。最险的是 361,382 A. THOMSON（姓对、拼写对、人不对）。另有 E. P. Thomson／G. A. Thomson／Clarence Thomson／Samuel Thomson Dodd，以及 Sir William Thomson（开尔文）——而他写过开尔文的悼念文。archive.org creator 检索已吐出假阳性《The Collegiate Algebra》（实为 Elihu T. Quimby）。"
 }

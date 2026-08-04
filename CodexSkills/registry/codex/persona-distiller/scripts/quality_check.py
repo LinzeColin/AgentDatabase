@@ -1402,6 +1402,12 @@ def run_authorship_gate(report, target: Path, meta: dict[str, Any],
 
     try:
         patterns = module.build_patterns(name)
+        # ★★★ v0.0.0.136：**已知同名注入**。`A-byline-ocr` 用编辑距离容错 OCR 打坏的名字，
+        #   而 `Thomson` 与 `Thompson` 的距离只有 1——不声明同名就会把别人的东西收进来。
+        #   Thomson #129 探测实测：1887 年索引里挨着他名字的 27 个专利号，**16 个是别人的**
+        #   （十二个姓 Thompson，另有 Nash／Smith／Jones／Thoms）。
+        #   ★ 取自 `meta.json` 的 `known_namesakes`（没有就是空，**空不等于安全，只等于没声明**）。
+        patterns["namesakes"] = tuple(meta.get("known_namesakes") or ())
         # ★ 单作者站点报头（如 seths.blog 的 `| Seth's Blog`）作为第四类归属证据。
         #   声明放在 meta.json 的 `single_author_masthead`，**不是命令行开关**——
         #   它必须随工作区走、可审计、且事后能被复核。
