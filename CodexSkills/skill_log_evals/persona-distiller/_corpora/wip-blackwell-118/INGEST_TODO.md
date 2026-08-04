@@ -85,12 +85,24 @@ python3 scripts/assemble_judge_results.py --workspace <target> --round-dir round
 **日记不适合做事实断言**——逐日流水（天气、家用账、访客名单），
 它们的价值在 `expression` 与 `timeline`，不在 `fact`。
 
-### ★ 又发现一处未标 U 的污染
+### 污染的边界已量清（★ 我第一版把它说大了）
 
-`sp-1261-wrong-and-right-methods-1-2` 里混进了报纸分类广告
-（`WIDOW and DAUGHTER - Widow as WORKING HOUSEKEEPER, daughter as NURSE or Useful Help.`）。
-**它不在已标 U 的那两卷里。** 说明 LoC 众包转写的剪报污染**不止那两处**，
-写断言前要对每一条候选句再过一遍「这是她的话吗」。
+第一版我写「污染不止那两处」，**下得太快**。全 95 份按「分类广告 + 货币栏」密度扫过，
+再逐条核实际命中之后：
+
+| 处 | 实况 |
+|---|---|
+| `contaminated-1247` / `contaminated-1265` | 整版报纸剪贴簿，**已标 U** |
+| 16 册日记里的 `£` | **绝大多数是印刷的邮资/汇兑费率表**（`2d. under 10s 5d. under £4.`）——即已量过的那 4.1% 印刷页；而 `20 £100 for Indian work from [Mme de N.?]` 是她自己的条目 |
+| `sp-1268`（英国慈善演讲笔记） | `£3000 from Magdalen`、`£500 a year` 是**演讲内容本身**，干净 |
+| `sp-1261` | **末尾接了一张剪报**：第 1797–1811 行、约 284 词 = **1.7%**，一整栏「SITUATIONS WANTED」求职广告，从她的句子中断处突起（`…would be justified.SITUATIONS WANTED`） |
+
+**`sp-1261` 那一段是她剪贴作论据、还是众包转写了无关剪报，从文本本身判不了**
+——但后果相同：**那 15 行不许当她的话引**。已写进该源的 `attribution`。
+
+★ 同一份里另有 3 处 `apply to` 是她自己的行文
+（`may apply to the police`、`This term should apply to both sexes`）——
+**按密度筛会把它们一起冤枉**。密度是线索，不是判决。
 
 ### 已回原文核过的生平锚点（可直接做 fact 断言）
 

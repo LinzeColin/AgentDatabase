@@ -183,7 +183,13 @@ SPEECH = [
  ("1260", "Why Hygienic Congresses Fail", "未系年", "writings",
   "★ **原判「只此一处」是错的**：`check_holdout_overlap` 实测它与 Essays 卷二覆盖 **80.7%**"
   "——这一篇被收进了文集。**探测报告把它列进「只此一处的一手文本」，我照抄了，判据当场推翻。**"),
- ("1261", "Wrong and Right Methods（1/2）", "1883", "writings", "同名单行本手稿"),
+ ("1261", "Wrong and Right Methods（1/2）", "1883", "writings",
+  "同名单行本手稿。★★ **末尾接了一张剪报**：第 1797–1811 行（约 284 词 = 1.7%）是一整栏"
+  "「SITUATIONS WANTED」求职分类广告，从她的句子中断处突起"
+  "（`…would be justified.SITUATIONS WANTED`）。**是她剪贴作论据、还是众包转写了无关剪报，"
+  "从文本本身判不了**——但后果相同：**那 15 行不许当她的话引**。"
+  "文中另有 3 处 `apply to` 是她自己的行文（`may apply to the police`、"
+  "`This term should apply to both sexes`），**不是广告**——按密度筛会把它们一起冤枉。"),
  ("1262", "Wrong and Right Methods（2/2）", "1883", "writings", "同名单行本手稿"),
  ("1263", "Bibliography", "未系年", "timeline", "著作系年表"),
  ("1266", "Misc. notes 2/3", "未系年", "writings", "杂记"),
