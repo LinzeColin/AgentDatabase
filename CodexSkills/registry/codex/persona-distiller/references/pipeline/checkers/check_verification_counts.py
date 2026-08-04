@@ -137,6 +137,16 @@ def audit(root: pathlib.Path) -> dict:
         saids = re.findall(r"待用户裁定（\*\*(.+?)条\*\*）|一眼看完：(.+?)条各是什么", lt)
         flat = [x for pair in saids for x in pair if x]
         off = [s for s in flat if s != want]
+        # ★★ 同日再补：**「一眼看完」表里的行数，与正文节数**。
+        #   实测 ⑫ 只有正文、**没进表**——自称条数那一项当时是 ✓，因为它只比标题与导语。
+        #   **一眼看完漏一行，这张表就不再是一眼看完。**
+        n_tab = len(re.findall(r"^\| \*\*[①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮]\*\* \|", lt, re.M))
+        rows.append({"项": "待裁定台账·表行数 vs 正文节数",
+                     "实况": f"正文 {n_real} 节", "文中": f"表 {n_tab} 行",
+                     "判定": "✓" if n_tab == n_real
+                             else f"**对不上**（表 {n_tab} 行，正文 {n_real} 节——有条目没进表）"})
+        bad += (n_tab != n_real)
+
         rows.append({"项": "待裁定台账条数", "实况": f"{n_real}（{want}条）",
                      "文中": flat or None,
                      "判定": "✓" if (flat and not off)
@@ -185,13 +195,26 @@ def self_test() -> int:
         chk(f"实况 {row['实况']}，文中 {row['文中']} → {row['判定'][:24]}",
             "对不上" in row["判定"] and r["**对不上的项数**"] >= 1)
 
-        print("── ★★ 反向对照⑥：**改成一致之后就不许再报**（证明不是恒报） ──")
-        (led / "_待用户裁定.md").write_text(
-            body.replace("**十条**", "**十二条**").replace("十一条", "十二条"), encoding="utf-8")
-        row2 = [x for x in audit(root)["明细"] if x["项"] == "待裁定台账条数"][0]
-        chk(f"{row2['判定']}", row2["判定"] == "✓")
+        print("── ★★★ 反向对照⑥：**正文有 ⑫ 而表里没有 → 必须报**（自称条数那项是 ✓ 也不行） ──")
+        tab = ("# 待用户裁定（**十二条**）\n\n## 一眼看完：十二条各是什么\n\n"
+               + "".join(f"| **{c}** | x | y | z |\n" for c in "①②③④⑤⑥⑦⑧⑨⑩⑪")   # 少 ⑫
+               + "\n" + "".join(f"## {c} x\n\n" for c in "①②③④⑤⑥⑦⑧⑨⑩⑪⑫"))
+        (led / "_待用户裁定.md").write_text(tab, encoding="utf-8")
+        rr = audit(root)
+        t_row = [x for x in rr["明细"] if "表行数" in x["项"]][0]
+        c_row = [x for x in rr["明细"] if x["项"] == "待裁定台账条数"][0]
+        chk(f"{t_row['判定'][:40]}", "对不上" in t_row["判定"])
+        chk("★ 而自称条数那一项此时是 ✓——**证明两项各管各的**", c_row["判定"] == "✓")
 
-        print("── ★ 反向对照⑦：**台账不存在时不报，也不算通过** ──")
+        print("── ★★ 反向对照⑦：**改成一致之后就不许再报**（证明不是恒报） ──")
+        good = ("# 待用户裁定（**十二条**）\n\n## 一眼看完：十二条各是什么\n\n"
+                + "".join(f"| **{c}** | x | y | z |\n" for c in "①②③④⑤⑥⑦⑧⑨⑩⑪⑫")
+                + "\n" + "".join(f"## {c} x\n\n" for c in "①②③④⑤⑥⑦⑧⑨⑩⑪⑫"))
+        (led / "_待用户裁定.md").write_text(good, encoding="utf-8")
+        det = audit(root)["明细"]
+        chk("两项都 ✓", all(x["判定"] == "✓" for x in det if "台账" in x["项"]))
+
+        print("── ★ 反向对照⑧：**台账不存在时不报，也不算通过** ──")
         (led / "_待用户裁定.md").unlink()
         chk("台账缺失 → 明细里没有这一项",
             not [x for x in audit(root)["明细"] if x["项"] == "待裁定台账条数"])
