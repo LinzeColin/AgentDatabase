@@ -1,6 +1,6 @@
-# Release verification — Persona Distiller v0.0.0.134
+# Release verification — Persona Distiller v0.0.0.135
 
-Date: 2026-08-05（**v0.0.0.134**）
+Date: 2026-08-05（**v0.0.0.135**）
 
 > **本文件记录「当前发布号的复验结果」，不是历史归档。**
 > 版本号必须等于根目录 `VERSION`，由 `scripts/check_contract_drift.py` 强制。
@@ -21,6 +21,20 @@ Date: 2026-08-05（**v0.0.0.134**）
 > **表格正文不在任何判据的射程里**。
 > **「本表每一行都来自本次实跑」是一句自述**——
 > 而自述不是证据（见 `self-report-is-not-evidence`）。
+
+> ### v0.0.0.135 这一版重跑了什么
+>
+> **`check_staged_but_not_ingested` 纳入 `references/holdout/`；一次误报与一次冤枉的撤回。**
+> **本次重跑**：该件自测；**全库重跑（一手缺口 10 → 0）**；
+> **Barton 与 Blackwell 的 holdout 目录逐份点开核对**（4 个对 4 本、8 个里有那 6 份）；
+> **Blackwell 95 行 `local_path` 逐条解析**（0 行落空，含 6 行指向 holdout）；
+> `check_source_header_quotes` 接线后对 Carver 实跑；`finalize_release.py` 四步。
+> **其余各行沿用 v0.0.0.96 那一次。**
+>
+> ★★★ **本版记住的两句**：
+> **① 判据绿了不等于事实，判据红了也不等于事实**——绿灯让人停止怀疑，红灯让人跳过求证。
+> **② 撤回一个错误的那段文字，本身也要过一遍同样的检验**——
+> 我在撤回 ⑯ 的同一段里，无证据地冤枉了一件正常工作的判据。
 
 > ### v0.0.0.134 这一版重跑了什么
 >
