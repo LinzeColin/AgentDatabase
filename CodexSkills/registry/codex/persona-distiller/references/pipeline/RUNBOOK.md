@@ -2270,14 +2270,42 @@ writings 只占 **47%**，并没有压倒性
 **所以 PD-only 取源并不会结构性地打死通道覆盖——它是能凑齐的。**
 
 ★ 真正的规律要窄得多：**lane 2 常常只靠 1–2 件成立**
-（Koch 1、Pasteur 1、Virchow 1、Osler 2、Lister 2、Mendel 2），
-**而那 1–2 件的形态高度一致：不是访谈、不是通信集，
-是「他的话当年印在期刊／学会会刊上」。**
+（Koch 1、Pasteur 1、Virchow 1、Osler 2、Lister 2、Mendel 2）。
 
-Mendel 那两件正是如此（1854 致 Kollar、1879 致气象学会，**由收信方当年刊出**）。
-**Vavilov 与 Carver 栽的，正是这条窄通道恰好为空。**
+### ★★★ 再更正一次（同日）：**我说那 1–2 件「不是通信集」，那也是错的**
 
-**所以探测 lane 2 时该找的是学会会刊、期刊的通信栏、会议记录——不是找访谈。**
+我先写的是「形态高度一致：不是访谈、不是通信集，是他的话印在学会会刊上」。
+**去逐条打开 `source-ledger.jsonl` 看 lane 2 里到底装着什么：**
+
+```
+Koch      robertkochlette00koch          ← **书信集**
+Virchow   briefe-an-eltern-1907-de       ← **致父母书信，1907 年版**
+Barton    corr-adee-alvey-a-1888-1903 / corr-anthony-susan-b-1869-1903 /
+          corr-appia-louis-...           ← **全是通信卷**
+Pasteur   collectiondartic00past         ← 文章合集
+Osler     biblioth-osl-intro-MS / printed-medical-books-MS  ← 序言与手稿
+Lister    b30629408 / mercifuladvantag00list                ← 讲演
+**Mendel  verhandlungendes454zool / zogm14_p315_316  ← 只有他是「学会会刊＋期刊」**
+```
+
+**lane 2 里装得最多的恰恰是通信集，而 Mendel 是异类、不是原型。**
+**我又一次拿刚做完的那个人去代表全部。**
+
+**所以探测 lane 2 时：书信、讲演、序言、会刊讨论——形态是杂的，
+唯一的共同点只是「他自己的话，以某种形式被印出来过」。**
+
+### ★★ 顺带撞出一个真缺陷：**同一个人物里，两份都叫 letter 的材料被分到了不同的道**
+
+```
+Koch      **letter00koch          → `writings`**
+          robertkochlette00koch  → `conversations`      ← 同一个人物，两份书信两条道
+Virchow   briefe-an-eltern-1907-de        → `conversations`
+          s1-baltzer-briefe-an-virchow-1868 → `external`  ← **这条是对的**（别人写给他的）
+```
+
+**Virchow 那一对是对的**——「写给他的」归 external，正是「与他有关 ≠ 他写的」该有的样子。
+**Koch 那一对没有可辨的理由**，而 **`min_lanes` 是一道门**：
+同样的材料分到哪一道，直接改变道数。**这一条尚未落成判据。**
 
 lane 2 / lane 3 **最薄**，且薄得有规律：
 
