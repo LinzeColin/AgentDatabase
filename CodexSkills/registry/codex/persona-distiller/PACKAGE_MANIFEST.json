@@ -376,13 +376,13 @@
     },
     {
       "path": "references/ledgers/_待用户裁定.md",
-      "sha256": "556d916517b1a948dd4b3bd01d15d937c190e3333773b0ef8200e86696efb180",
-      "size_bytes": 6802
+      "sha256": "ade7035c8d45b37bcdbd7bb17ee9477d70a95e450992bbc55a57c57d04203ee7",
+      "size_bytes": 9213
     },
     {
       "path": "references/ledgers/_每次开工必读.md",
-      "sha256": "c8cc6d466308fdb6cb5fe7ef97cefa63c21b7fa5292cdb6abbac30bb413ab8fa",
-      "size_bytes": 50682
+      "sha256": "567fd7a718589c78061ca38daaf9a6da2ba465280720778bac69d9afb7dd9cbc",
+      "size_bytes": 51016
     },
     {
       "path": "references/ledgers/_蒸馏名单_v1草稿.md",
@@ -786,8 +786,8 @@
     },
     {
       "path": "references/pipeline/scaffold/answers_template.py",
-      "sha256": "ada1bc0c42664ea1c5bc70b4b2dc1c82b39446e8d9758ec5ca3e57ca13bb6bca",
-      "size_bytes": 7762
+      "sha256": "d7164d3f202e31d3ee86735fc8a4c25b748d887ff79dd427e0f36522c0094835",
+      "size_bytes": 8189
     },
     {
       "path": "references/pipeline/scaffold/blind_payload_template.py",
