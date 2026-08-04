@@ -264,6 +264,28 @@ def main():
         else:
             probe_note = ["**check_probe_precondition.py 不在——未核（不是通过）**"]
 
+    # ★★ v0.0.0.93：同族待办里，**有没有不需要探测的人**——排期效率的实话。
+    #   实测：农林牧渔师队列 15 人，order=1 的 Borlaug（卒 2009）要先花一小时探测，
+    #   而同族后面站着 Liebig / Mendel / Burbank / Pinchot 这些无争议的公有领域人物。
+    #   ★ **本项只报，不改选择**——换人是排期策略，属用户裁定，不是我能顺手改的。
+    same_family, no_probe = [], []
+    if nxt:
+        fam = nxt.get("family_zh")
+        yrs = {}
+        if os.path.isfile(a.years):
+            try:
+                yrs = {k: v for k, v in json.load(open(a.years, encoding="utf-8")).items()
+                       if isinstance(v, dict) and v.get("source") and v.get("died")}
+            except Exception:
+                yrs = {}
+        for it in pending:
+            if it.get("family_zh") != fam or it["name"] == nxt["name"]:
+                continue
+            same_family.append(it["name"])
+            rec = yrs.get(it["name"].strip().lower())
+            if rec and rec["died"] < 1930:
+                no_probe.append(f"{it['name']}（卒 {rec['died']}）")
+
     print(json.dumps({
         # ★★ 下面四个 queue_* 数的是**队列这一群**，不是「做了多少人」。
         #   实测：名册 100 人、队列 216 人，**两边都有的只有 7 人**——
@@ -277,6 +299,9 @@ def main():
         "队列中未动的": len(pending),
         "队列中已延后的": deferred_in_q,
         "★ 这个人要不要先跑可得性探测": probe_note or "**未核**",
+        "★ 同族待办里不需要探测的": (no_probe or
+            f"**0 人**——同族还有 {len(same_family)} 人待办，但卒年表里没有他们的条目，"
+            f"**这不等于他们都需要探测，是卒年未知**（见任务：给队列补生卒年）"),
         "★这两群不是同一群": (
             f"名册 {n_products} 人 vs 队列 {len(q)} 人，**只有 {done_in_q} 人重合**"
             "（重合数随归一化算法而变，另一种算法给出 7）。"
