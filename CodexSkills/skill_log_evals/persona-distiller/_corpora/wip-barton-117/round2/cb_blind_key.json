@@ -1,0 +1,162 @@
+{
+ "q-01": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "cb-anon-01"
+ },
+ "q-02": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "cb-anon-02"
+ },
+ "q-03": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "cb-boundary-01"
+ },
+ "q-04": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "cb-boundary-02"
+ },
+ "q-05": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "cb-cal-01"
+ },
+ "q-06": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "cb-cal-02"
+ },
+ "q-07": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "cb-contrast-01"
+ },
+ "q-08": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "cb-contrast-02"
+ },
+ "q-09": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "cb-decoy-01"
+ },
+ "q-10": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "cb-decoy-02"
+ },
+ "q-11": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "cb-fact-01"
+ },
+ "q-12": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "cb-fact-02"
+ },
+ "q-13": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "cb-known-01"
+ },
+ "q-14": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "cb-known-02"
+ },
+ "q-15": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "cb-long-01"
+ },
+ "q-16": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "cb-long-02"
+ },
+ "q-17": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "cb-plan-01"
+ },
+ "q-18": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "cb-plan-02"
+ },
+ "q-19": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "cb-refuse-01"
+ },
+ "q-20": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "cb-refuse-02"
+ },
+ "q-21": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "cb-route-01"
+ },
+ "q-22": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "cb-route-02"
+ },
+ "q-23": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "cb-task-01"
+ },
+ "q-24": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "cb-task-02"
+ },
+ "q-25": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "cb-token-01"
+ },
+ "q-26": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "cb-token-02"
+ },
+ "q-27": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "cb-tool-01"
+ },
+ "q-28": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "cb-tool-02"
+ },
+ "q-29": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "cb-trajectory-01"
+ },
+ "q-30": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "cb-trajectory-02"
+ },
+ "q-31": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "cb-voice-01"
+ },
+ "q-32": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "cb-voice-02"
+ }
+}
