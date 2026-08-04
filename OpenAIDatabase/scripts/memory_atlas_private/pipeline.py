@@ -375,7 +375,22 @@ def regenerate_atlas_snapshot(
             "reason": (result.stderr or result.stdout or "builder produced no output")[-400:],
         }
     # Only replace the served snapshot once the builder has produced a whole one.
-    write_json_atomic(Path(output), json.loads(staged.read_text(encoding="utf-8")))
+    destination = Path(output)
+    write_json_atomic(destination, json.loads(staged.read_text(encoding="utf-8")))
+    # nginx runs unprivileged inside the container and reads this through a
+    # read-only mount. The pipeline's umask writes 0600, so the container got
+    # "Permission denied" and silently fell back to the snapshot baked into the
+    # release — the browser kept seeing July while the join was already correct
+    # on disk. Only this file is widened; the private analytics beside it stays
+    # 0600 and no nginx location serves it.
+    os.chmod(destination, 0o644)
+    for directory in (destination.parent, destination.parent.parent):
+        try:
+            os.chmod(directory, os.stat(directory).st_mode | 0o005)
+        except OSError:
+            pass
+    # The staged tree is ~100 MB and this runs every fifteen minutes; leaving it
+    # for the next run to delete filled a 38 GB disk twice.
     shutil.rmtree(root, ignore_errors=True)
     return {
         "state": "PUBLISHED",

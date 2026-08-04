@@ -304,3 +304,26 @@ def test_a_failed_graph_rebuild_cannot_cancel_the_reconcile() -> None:
     guarded = source[source.index("atlas_rebuild = regenerate_atlas_snapshot") - 400:]
     assert "try:" in guarded.split("atlas_rebuild = regenerate_atlas_snapshot")[0]
     assert 'atlas_rebuild = {"state": "FAILED", "reason":' in source
+
+
+def test_the_served_snapshot_is_readable_by_the_container(tmp_path) -> None:
+    """The join was correct on disk and invisible in the browser: the pipeline
+    writes 0600 and nginx runs unprivileged inside the container, so it fell
+    back to the snapshot baked into the release and kept showing July."""
+    import os
+    import stat
+    from pathlib import Path
+
+    from OpenAIDatabase.scripts.memory_atlas_private.pipeline import regenerate_atlas_snapshot
+
+    database = Path(__file__).resolve().parents[2] / "OpenAIDatabase"
+    output = tmp_path / "web" / "data" / "memory_atlas.json"
+    result = regenerate_atlas_snapshot(
+        _session(PATH_A), database_dir=database, work_dir=tmp_path / "work", output=output
+    )
+    assert result["state"] == "PUBLISHED", result
+    assert stat.S_IMODE(output.stat().st_mode) & 0o004, "the container cannot read it"
+    for directory in (output.parent, output.parent.parent):
+        assert stat.S_IMODE(directory.stat().st_mode) & 0o001, f"{directory} is not traversable"
+    # The staged tree must not survive: it is ~100 MB every fifteen minutes.
+    assert not (tmp_path / "work" / "atlas-build").exists()
