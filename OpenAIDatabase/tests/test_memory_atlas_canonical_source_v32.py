@@ -641,3 +641,15 @@ def test_the_alert_goes_through_the_ledger_the_product_already_shows() -> None:
     # recurrence rather than filing a new incident every run.
     assert "self.failures.record_failure(" in source
     assert '"capture_alert": capture_alert' in source
+
+
+def test_the_alert_is_filed_before_the_ledger_is_exported() -> None:
+    """The first version filed the incident after `export_snapshot`, so it lived
+    in the database and never reached the panel — an alert nobody sees, which is
+    the exact problem it was added to solve. Same ordering mistake as writing
+    release-identity.env after restarting the services that read it."""
+    source = (REPO / "OpenAIDatabase" / "scripts" / "memory_atlas_private" / "pipeline.py").read_text(encoding="utf-8")
+    filed = source.index('error_code="SOURCE_CAPTURE_OVERDUE"')
+    exported = source.index("failure_snapshot = self.failures.export_snapshot(failure_generated_at)")
+    published = source.index("failure_outbox = self._publish_failure_snapshot(")
+    assert filed < exported < published

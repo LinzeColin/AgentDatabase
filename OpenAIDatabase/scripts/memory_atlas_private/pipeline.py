@@ -1127,6 +1127,29 @@ class RemoteReconcilePipeline(LiveSnapshotPublisherMixin):
                 "superseded_keys": sorted(superseded),
             }
         registry_import: dict[str, Any] | None = None
+        # The scheduled capture not arriving is a real incident, not just a
+        # colour on a panel. Recorded through the existing ledger so it shows up
+        # where failures already show up, and deduplicated by signature so a
+        # fifteen-minute timer increments a recurrence instead of spamming.
+        overdue = capture_overdue(
+            str(latest.get("completed_at") or ""),
+            reconciled_at_probe := self.clock(),
+            capture_freshness_target(self.config.source_registry),
+        )
+        capture_alert: dict[str, Any] = {"state": "ON_TIME"}
+        if overdue is not None:
+            incident = self.failures.record_failure(
+                component="memory-atlas-source-capture",
+                category="scheduled_capture_overdue",
+                severity="P2",
+                error_code="SOURCE_CAPTURE_OVERDUE",
+                title="按计划的源端采集没有按时到达",
+                occurred_at=reconciled_at_probe,
+                evidence_ref=f"private-db://{manifest_path}",
+                environment=socket.gethostname(),
+                details=overdue,
+            )
+            capture_alert = {"state": "OVERDUE", "incident_id": incident.incident_id, **overdue}
         if self.config.failure_asset_registry is not None:
             registry_import = self.failures.import_asset_registry(self.config.failure_asset_registry)
         failure_generated_at = self.clock()
@@ -1162,29 +1185,6 @@ class RemoteReconcilePipeline(LiveSnapshotPublisherMixin):
         status_path = self.config.web_data_dir / "memory_atlas_status_projection.json"
         status_projection = build_status_projection(private_snapshot)
         write_json_atomic(status_path, status_projection)
-        # The scheduled capture not arriving is a real incident, not just a
-        # colour on a panel. Recorded through the existing ledger so it shows up
-        # where failures already show up, and deduplicated by signature so a
-        # fifteen-minute timer increments a recurrence instead of spamming.
-        overdue = capture_overdue(
-            str(latest.get("completed_at") or ""),
-            reconciled_at_probe := self.clock(),
-            capture_freshness_target(self.config.source_registry),
-        )
-        capture_alert: dict[str, Any] = {"state": "ON_TIME"}
-        if overdue is not None:
-            incident = self.failures.record_failure(
-                component="memory-atlas-source-capture",
-                category="scheduled_capture_overdue",
-                severity="P2",
-                error_code="SOURCE_CAPTURE_OVERDUE",
-                title="按计划的源端采集没有按时到达",
-                occurred_at=reconciled_at_probe,
-                evidence_ref=f"private-db://{manifest_path}",
-                environment=socket.gethostname(),
-                details=overdue,
-            )
-            capture_alert = {"state": "OVERDUE", "incident_id": incident.incident_id, **overdue}
         status_registration: dict[str, Any] = {
             "schema_version": "memory_atlas.status_registration.v1",
             "state": "NOT_CONFIGURED",
