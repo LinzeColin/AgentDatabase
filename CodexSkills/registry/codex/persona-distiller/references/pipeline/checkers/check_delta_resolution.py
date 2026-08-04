@@ -72,6 +72,20 @@ def load_round(d: pathlib.Path) -> dict:
             "judges": {p.name: json.loads(p.read_text(encoding="utf-8")) for p in judges}}
 
 
+def normalize(a_raw: float, b_raw: float) -> tuple:
+    """量纲归一：任一侧 > 1.0 即判为 0–10 制。**与 assemble_judge_results.normalize 同口径。**
+
+    ★★ 本件第一版**没有这一步**，于是对 0–10 制的人物把 SE 报大了十倍：
+      koch/lister/pasteur/virchow/nightingale/osler 六人都是 0–10 制
+      （实测 rk_judge_D.json 最小 6.00 最大 9.30），只有 Mendel 是 0–1 制。
+      我拿「SE≈0.05」去和 Mendel 的 0.0164 比，**差点得出「Mendel 是低异常」的反结论**。
+      这正是 `eval-artifacts-have-five-schemas` 记过的那个坑，**而我在自己的判据里又踩了一次**。
+    """
+    if a_raw > 1.0 or b_raw > 1.0:
+        return a_raw / 10.0, b_raw / 10.0
+    return a_raw, b_raw
+
+
 def case_delta(rd: dict, q: str):
     """一题在这一轮的 delta（候选 − 基线），跨席取均值。取不到返回 None。"""
     k = rd["key"].get(q)
@@ -82,11 +96,14 @@ def case_delta(rd: dict, q: str):
     vals = []
     for scores in rd["judges"].values():
         row = scores.get(q)
+        if isinstance(row, (list, tuple)) and len(row) >= 2:
+            row = {"A": row[0], "B": row[1]}
         if isinstance(row, dict) and cand in row and base in row:
             try:
-                vals.append(float(row[cand]) - float(row[base]))
+                a, b = normalize(float(row["A"]), float(row["B"]))
             except (TypeError, ValueError):
                 return None
+            vals.append((a - b) if cand == "A" else (b - a))
     return statistics.mean(vals) if vals else None
 
 
@@ -216,7 +233,25 @@ def self_test() -> int:
         print("── ★ 反向对照⑥：轮数 ≥3 时**必须提醒多轮取最好** ──")
         chk("提醒在", "抬高假过率" in str(resolution([r1, r4, r2]).get("★★ 提醒", "")))
 
-        print("── ★ 反向对照⑦：verdict_line 只摆区间，**不下过/不过的结论** ──")
+        print("── ★★★ 反向对照⑦：**0–10 制与 0–1 制必须给出同一个 SE** ──")
+        #   本件第一版漏了量纲归一，对 0–10 制的人把 SE 报大十倍，
+        #   差点据此得出「Mendel 是低异常」的反结论。
+        sc01 = {f"q-{i:02d}": {"A": 0.8 + (0.05 if i % 3 else -0.05), "B": 0.7}
+                for i in range(1, 9)}
+        sc10 = {k: {"A": round(v["A"] * 10, 4), "B": round(v["B"] * 10, 4)}
+                for k, v in sc01.items()}
+        base = mk(root, "n0", items, {"D": sc})
+        a01 = resolution([base, mk(root, "n1", items, {"D": sc01})])["**总 delta 的 SE**"]
+        a10 = resolution([base, mk(root, "n2", items, {"D": sc10})])["**总 delta 的 SE**"]
+        chk(f"0–1 制 SE={a01}　0–10 制 SE={a10}　**必须相等**", abs(a01 - a10) < 1e-9)
+
+        print("── ★ 反向对照⑧：**列表式 [分, 分] 的打分也要读得进来** ──")
+        scl = {f"q-{i:02d}": [sc01[f"q-{i:02d}"]["A"], sc01[f"q-{i:02d}"]["B"]]
+               for i in range(1, 9)}
+        al = resolution([base, mk(root, "n3", items, {"D": scl})])["**总 delta 的 SE**"]
+        chk(f"列表式 SE={al}（与字典式相等）", abs(al - a01) < 1e-9)
+
+        print("── ★ 反向对照⑨：verdict_line 只摆区间，**不下过/不过的结论** ──")
         ln = " ".join(verdict_line(0.0278, 0.0164))
         chk("含『分不出来』", "分不出来" in ln)
         chk("★ 不含『✅ 过』这类判定", "✅" not in ln)

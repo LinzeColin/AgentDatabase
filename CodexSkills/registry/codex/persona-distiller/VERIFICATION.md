@@ -1,6 +1,6 @@
-# Release verification — Persona Distiller v0.0.0.119
+# Release verification — Persona Distiller v0.0.0.120
 
-Date: 2026-08-05（**v0.0.0.119**）
+Date: 2026-08-05（**v0.0.0.120**）
 
 > **本文件记录「当前发布号的复验结果」，不是历史归档。**
 > 版本号必须等于根目录 `VERSION`，由 `scripts/check_contract_drift.py` 强制。
@@ -21,6 +21,14 @@ Date: 2026-08-05（**v0.0.0.119**）
 > **表格正文不在任何判据的射程里**。
 > **「本表每一行都来自本次实跑」是一句自述**——
 > 而自述不是证据（见 `self-report-is-not-evidence`）。
+
+> ### v0.0.0.120 这一版重跑了什么
+>
+> **修 `check_delta_resolution` 的量纲归一，并对 9 个人物 × 2 轮对实跑复核**。
+> **本次重跑**：该件自测（**9 条对照**，新增两条量纲）、
+> **跨人物复核 12 组 n≥10 的估计 → 中位 SE 0.0051**、
+> `check_checkers scripts`（**58 件 0 未接线**）、`finalize_release.py` 四步。
+> **其余各行沿用 v0.0.0.96 那一次。**
 
 > ### v0.0.0.119 这一版重跑了什么
 >
