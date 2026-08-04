@@ -451,3 +451,36 @@ def test_release_identity_is_written_before_anything_reads_it() -> None:
         "sudo systemctl restart memory-atlas-action-worker.service",
     ):
         assert identity < deploy.index(consumer), consumer
+
+
+def test_the_chinese_audit_runs_against_the_data_production_serves() -> None:
+    """The audit reported PASS on the build-time snapshot while production
+    rendered 88 raw tokens across three views: the ten views read an atlas the
+    origin regenerates, and the failure-compound and behaviour-economy views
+    read a live API that does not exist locally at all."""
+    auditor = (REPO / "MemoryAtlas" / "scripts" / "audit_chinese_ui_v32.mjs").read_text(encoding="utf-8")
+    assert "const [url, output, liveAtlas, liveSnapshot, liveStatus]" in auditor
+    for route in ("**/memory_atlas.json", "**/api/v31/live-snapshot", "**/api/v31/status**"):
+        assert route in auditor, route
+    # A narrower pass may not read as a full one.
+    assert "live_data: { atlas: liveAtlas ?? null, snapshot: liveSnapshot ?? null, status: liveStatus ?? null }" in auditor
+
+    gate = (REPO / "ops" / "memory-atlas" / "canonical_gate.sh").read_text(encoding="utf-8")
+    assert 'live_dir=$(mktemp -d' in gate
+    assert '"${live_args[@]}"' in gate
+    # Pulled at run time, never committed: the private analytics snapshot is
+    # exactly what the privacy contract keeps out of the repository.
+    assert not (REPO / "MemoryAtlas" / "fixtures" / "live").exists()
+
+
+def test_verbatim_records_are_skipped_for_a_stated_reason() -> None:
+    """The sealed incident ledger's titles carry a source contract and a digest.
+    Rewriting them to Chinese would falsify an archived record."""
+    auditor = (REPO / "MemoryAtlas" / "scripts" / "audit_chinese_ui_v32.mjs").read_text(encoding="utf-8")
+    assert 'const VERBATIM_RECORD_CONTEXTS = ["[data-record-verbatim]"];' in auditor
+    assert "verbatim_records: VERBATIM_RECORD_CONTEXTS" in auditor
+    view = (REPO / "MemoryAtlas" / "src" / "features" / "v31" / "FailureCompoundView.tsx").read_text(encoding="utf-8")
+    assert 'data-record-verbatim="true"' in view
+    # The interface around the record still has to be Chinese.
+    assert 'humanizeMachineText(String(row.category ?? "未知"))' in view
+    assert 'humanizeMachineText(String(row.status ?? "未知"))' in view

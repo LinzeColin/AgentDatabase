@@ -1,3 +1,4 @@
+import { humanizeMachineText } from "../../shared/atlas/machineTokenHuman";
 import { Database, HardDrive, RefreshCw, ShieldCheck } from "lucide-react";
 import { useMemo, useState } from "react";
 import { usePrivateAnalytics } from "./PrivateAnalyticsProvider";
@@ -17,8 +18,8 @@ export function RuntimeView() {
     } finally { setBusy(null); }
   };
   const chain = useMemo(() => [
-    { label: "本机采集", state: snapshot?.run.state ?? "未知", icon: HardDrive },
-    { label: "R2 对象", state: snapshot?.run.objects?.length ? `${snapshot.run.objects.length} 个已登记` : "未知", icon: Database },
+    { label: "本机采集", state: humanizeMachineText(snapshot?.run.state ?? "未知"), icon: HardDrive },
+    { label: "对象清单", state: snapshot?.run.objects?.length ? `${snapshot.run.objects.length} 个已登记` : "未知", icon: Database },
     { label: "Private-Database", state: snapshot ? "事实投影可读" : "未知", icon: ShieldCheck },
     { label: "OVH 处理", state: snapshot?.run.state === "REBUILT_FROM_AUTHORITIES" ? "已重建" : "等待运行证据", icon: RefreshCw },
   ], [snapshot]);

@@ -114,6 +114,30 @@ for name in sorted(policy['execution_tiers']['integration']['test_files']):
     # gate serves the one it just produced and takes the port down afterwards.
     if [[ -d "$repo/MemoryAtlas/dist" ]]; then
       chinese_port=${MEMORY_ATLAS_GATE_PREVIEW_PORT:-4183}
+      # The audit must see the data production renders, not the snapshot baked
+      # into the build. Auditing the build-time snapshot reported PASS while
+      # production rendered 88 raw tokens across three views — the ten views
+      # read an atlas the origin regenerates, and two v31 views read the live
+      # API, so none of that vocabulary existed locally.
+      #
+      # The data is pulled at run time and never committed: the private
+      # analytics snapshot is exactly what the privacy contract keeps out of the
+      # repository. When the origin is unreachable the audit still runs, and the
+      # report records live_data: null so a narrower pass cannot read as a
+      # full one.
+      live_dir=$(mktemp -d "${TMPDIR:-/tmp}/memory-atlas-live.XXXXXXXX")
+      live_args=()
+      if ssh -o BatchMode=yes -o ConnectTimeout=10 -o ServerAliveInterval=5 -o ServerAliveCountMax=6 "${MEMORY_ATLAS_ORIGIN_SSH:-linze-ovh}" \
+        'sudo cat /srv/linze/apps/memory-atlas/shared/data/public/memory_atlas.json' > "$live_dir/memory_atlas.json" 2>/dev/null \
+        && [[ -s "$live_dir/memory_atlas.json" ]]; then
+        live_args+=("$live_dir/memory_atlas.json")
+        for pair in "live-snapshot/current.json:current.json" "memory_atlas_private_analytics.json:status.json"; do
+          remote=${pair%%:*}; local_name=${pair##*:}
+          ssh -o BatchMode=yes -o ConnectTimeout=10 -o ServerAliveInterval=5 -o ServerAliveCountMax=6 "${MEMORY_ATLAS_ORIGIN_SSH:-linze-ovh}" \
+            "sudo cat /srv/linze/apps/memory-atlas/shared/data/$remote" > "$live_dir/$local_name" 2>/dev/null || true
+          [[ -s "$live_dir/$local_name" ]] && live_args+=("$live_dir/$local_name")
+        done
+      fi
       npx --prefix "$repo/MemoryAtlas" --yes vite preview --host 127.0.0.1 \
         --port "$chinese_port" --outDir "$repo/MemoryAtlas/dist" >/dev/null 2>&1 &
       chinese_pid=$!
@@ -122,9 +146,11 @@ for name in sorted(policy['execution_tiers']['integration']['test_files']):
         sleep 1
       done
       run_check chinese_ui node "$repo/MemoryAtlas/scripts/audit_chinese_ui_v32.mjs" \
-        "http://127.0.0.1:$chinese_port/" "$(mktemp -t memory-atlas-chinese).json"
+        "http://127.0.0.1:$chinese_port/" "$(mktemp "${TMPDIR:-/tmp}/memory-atlas-chinese.XXXXXXXX").json" \
+        "${live_args[@]}"
       kill "$chinese_pid" 2>/dev/null || true
       wait "$chinese_pid" 2>/dev/null || true
+      rm -rf "$live_dir"
     fi
     # validate:whole-project belongs here in principle — a privacy-scan failure
     # inside it reached main while this gate reported green. It is not run

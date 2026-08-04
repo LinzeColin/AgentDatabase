@@ -1,3 +1,4 @@
+import { humanizeMachineText } from "../../shared/atlas/machineTokenHuman";
 import { AlertTriangle, CheckCircle2, CircleHelp } from "lucide-react";
 import { usePrivateAnalytics } from "./PrivateAnalyticsProvider";
 import type { SourceCoverageV31 } from "./contracts";
@@ -41,7 +42,7 @@ export function CoverageList({ rows }: { rows: SourceCoverageV31[] }) {
   return <div className="ma31-coverage-list">{rows.map((row) => {
     const ok = row.state === "READY";
     return <div className="ma31-coverage-row" key={row.source_id}>
-      <span className={ok ? "ma31-state-ok" : "ma31-state-gap"}>{ok ? <CheckCircle2 size={16} /> : <AlertTriangle size={16} />}{row.state}</span>
+      <span className={ok ? "ma31-state-ok" : "ma31-state-gap"}>{ok ? <CheckCircle2 size={16} /> : <AlertTriangle size={16} />}{humanizeMachineText(row.state)}</span>
       <div><b>{row.label_zh}</b><p>{row.message_zh}</p></div><span>{formatNumber(row.object_count)} 个</span>
     </div>;
   })}</div>;

@@ -12,9 +12,9 @@ import fs from "node:fs/promises";
 import process from "node:process";
 import { chromium } from "playwright";
 
-const [url, output] = process.argv.slice(2);
+const [url, output, liveAtlas, liveSnapshot, liveStatus] = process.argv.slice(2);
 if (!url || !output) {
-  console.error("usage: audit_chinese_ui_v32.mjs <url> <output.json>");
+  console.error("usage: audit_chinese_ui_v32.mjs <url> <output.json> [live-atlas.json] [live-snapshot.json] [live-status.json]");
   process.exit(2);
 }
 
@@ -51,10 +51,37 @@ const MACHINE_CONTEXTS = [
 // the markup rather than a growing allowlist of the Owner's project names.
 const USER_CONTENT_CONTEXTS = ["[data-user-content]"];
 
+// Archived records reproduced verbatim under a source contract and a digest —
+// the sealed incident ledger, whose titles other checks verify by hash.
+// Rewriting them would falsify the record, so the interface around them is
+// Chinese and the records themselves are marked and skipped.
+const VERBATIM_RECORD_CONTEXTS = ["[data-record-verbatim]"];
+
 const browser = await chromium.launch({ headless: true });
 const findings = [];
 try {
   const page = await (await browser.newContext({ viewport: { width: 1440, height: 900 } })).newPage();
+  // Two views read the live API and the ten original views read the atlas the
+  // origin regenerates. Without these the audit runs against a build-time
+  // snapshot and reports PASS on vocabulary the browser never renders.
+  if (liveAtlas) {
+    const body = await fs.readFile(liveAtlas, "utf8");
+    await page.route("**/memory_atlas.json", (route) =>
+      route.fulfill({ status: 200, contentType: "application/json", body }));
+  }
+  if (liveSnapshot) {
+    const body = await fs.readFile(liveSnapshot, "utf8");
+    await page.route("**/api/v31/live-snapshot", (route) =>
+      route.fulfill({ status: 200, contentType: "application/json", body }));
+  }
+  // The failure-compound and behaviour-economy views read /api/v31/status.
+  // Without it they render empty locally and the audit reported PASS while
+  // production rendered dozens of raw incident and outcome keys.
+  if (liveStatus) {
+    const body = await fs.readFile(liveStatus, "utf8");
+    await page.route("**/api/v31/status**", (route) =>
+      route.fulfill({ status: 200, contentType: "application/json", body }));
+  }
   await page.goto(url, { waitUntil: "domcontentloaded", timeout: 90_000 });
   await page.locator(".app-shell").waitFor({ state: "visible", timeout: 60_000 });
 
@@ -86,7 +113,7 @@ try {
         nodes.forEach(walk);
         return [...new Set(out)];
       },
-      [...MACHINE_CONTEXTS, ...USER_CONTENT_CONTEXTS],
+      [...MACHINE_CONTEXTS, ...USER_CONTENT_CONTEXTS, ...VERBATIM_RECORD_CONTEXTS],
     );
     for (const text of rows) {
       if (ALLOWED.has(text)) continue;
@@ -111,12 +138,16 @@ const report = {
   schema_version: "memory_atlas.chinese_ui_audit.v1",
   captured_at: new Date().toISOString(),
   page_url: url,
+  live_data: { atlas: liveAtlas ?? null, snapshot: liveSnapshot ?? null, status: liveStatus ?? null },
   verdict: findings.length === 0 ? "PASS" : "FAIL",
   finding_count: findings.length,
   by_view: Object.fromEntries(
     VIEWS.map((view) => [view, findings.filter((row) => row.view === view).length]).filter(([, n]) => n),
   ),
-  skipped_contexts: { machine_fields: MACHINE_CONTEXTS, user_content: USER_CONTENT_CONTEXTS },
+  skipped_contexts: {
+    machine_fields: MACHINE_CONTEXTS, user_content: USER_CONTENT_CONTEXTS,
+    verbatim_records: VERBATIM_RECORD_CONTEXTS,
+  },
   findings,
 };
 await fs.writeFile(output, JSON.stringify(report, null, 2) + "\n", { encoding: "utf8", mode: 0o600 });

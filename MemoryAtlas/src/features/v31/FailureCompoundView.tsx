@@ -1,3 +1,4 @@
+import { humanizeMachineText } from "../../shared/atlas/machineTokenHuman";
 import { StateBanner, MetricCard, formatNumber, formatPercent } from "./shared";
 import { usePrivateAnalytics } from "./PrivateAnalyticsProvider";
 
@@ -27,10 +28,13 @@ export function FailureCompoundView() {
         <header><div><p className="ma31-kicker">长期回归资产账本</p><h2>错误 → 回归资产 台账</h2></div></header>
         <div className="ma31-table-scroll"><table><thead><tr><th>错误模式</th><th>类别</th><th>首次发生</th><th>复发</th><th>回归资产</th><th>状态</th></tr></thead>
           <tbody>{compound?.incidents?.length ? compound.incidents.map((row, index) => <tr key={String(row.incident_id ?? index)}>
-            <td>{String(row.title ?? "未知")}</td><td>{String(row.category ?? "未知")}</td><td>{String(row.first_seen ?? "未知")}</td>
-            <td>{formatNumber(row.recurrence_count)}</td><td>{String(row.regression_asset_id ?? "未形成")}</td><td>{String(row.status ?? "未知")}</td>
+            <td data-record-verbatim="true">{String(row.title ?? "未知")}</td>
+            <td>{humanizeMachineText(String(row.category ?? "未知"))}</td><td>{String(row.first_seen ?? "未知")}</td>
+            <td>{formatNumber(row.recurrence_count)}</td>
+            <td data-machine-fields="true">{String(row.regression_asset_id ?? "未形成")}</td>
+            <td>{humanizeMachineText(String(row.status ?? "未知"))}</td>
           </tr>) : <tr><td colSpan={6}>暂无可验证的错误条目。</td></tr>}</tbody></table></div>
-        <p className="ma31-formula">{compound?.formula ?? "复利分公式尚不可验证"}</p>
+        <p className="ma31-formula" data-machine-fields="true">{compound?.formula ?? "复利分公式尚不可验证"}</p>
       </section>
     </div>
   );
