@@ -201,12 +201,22 @@ def main():
                     round_size=a.round, counterweight=not a.no_counterweight)
 
     print(json.dumps({
-        "registry_products": n_products,
+        # ★★ 下面四个 queue_* 数的是**队列这一群**，不是「做了多少人」。
+        #   实测：名册 100 人、队列 216 人，**两边都有的只有 7 人**——
+        #   名册里 93 人是在队列之外做的。
+        #   所以 `queue_done` 曾被读成「只做了 9 人」，而真实入库是 `registry_products`。
+        #   标签因此改成自带口径，不再让人从名字去猜它数的是什么。
+        "名册已入库人数": n_products,
         "downloads_zips": len(glob.glob(os.path.join(a.downloads, "*.zip"))),
-        "queue_total": len(q),
-        "queue_done": done_in_q,
-        "queue_pending": len(pending),
-        "queue_deferred": deferred_in_q,
+        "队列总数": len(q),
+        "队列中已入库的": done_in_q,
+        "队列中未动的": len(pending),
+        "队列中已延后的": deferred_in_q,
+        "★这两群不是同一群": (
+            f"名册 {n_products} 人 vs 队列 {len(q)} 人，**只有 {done_in_q} 人重合**。"
+            "**配重用的是名册的族人数，挑人用的是队列**——"
+            "所以「名册 0 人的族」被置顶时，队列里未必还有可做的人。"
+            "医疗护理师正是如此：队列 21 人已延后 18，剩下 3 人全部在版权保护期内。"),
         # ★ 队列条目只有 name/family_zh/family_id/priority/order —— **没有生卒年**。
         #   于是「卒于 1930 年后的人物排期前先跑可得性探测」这条规矩
         #   （Henderson #113 的教训）在排期这一步执行不了：

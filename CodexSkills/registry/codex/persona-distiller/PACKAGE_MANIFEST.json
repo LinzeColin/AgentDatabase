@@ -371,8 +371,8 @@
     },
     {
       "path": "references/ledgers/_决策台账.md",
-      "sha256": "67539105c9a1a6dc4409bb41515e4ca9f11117f6f8c5ccc36ae99e1fb5a97c69",
-      "size_bytes": 98324
+      "sha256": "0f7f28214f35bc28d1dc2329dbb22e6390677e56c18c02d48db4067404b3ff54",
+      "size_bytes": 98359
     },
     {
       "path": "references/ledgers/_待用户裁定.md",
@@ -381,8 +381,8 @@
     },
     {
       "path": "references/ledgers/_每次开工必读.md",
-      "sha256": "a6c9e5ac8b3d6fc362fb154364293efd97519ee547c45ffc9a339b7e02990457",
-      "size_bytes": 54354
+      "sha256": "7d3e8a1bc0847314faaf8218eab2e1d4c909ec005df0fc09ed99821f7f8e1c17",
+      "size_bytes": 54920
     },
     {
       "path": "references/ledgers/_蒸馏名单_v1草稿.md",
@@ -776,8 +776,8 @@
     },
     {
       "path": "references/pipeline/next_person.py",
-      "sha256": "2193f3b5885b9d46daa7bb3d8887142a60f51c12a2eae1d99bee237bf773153a",
-      "size_bytes": 11905
+      "sha256": "6b14ee2f01b46d42b899ddabeb7b4f633ef2a1c811de6eefe3b71c7a31d7bac9",
+      "size_bytes": 12822
     },
     {
       "path": "references/pipeline/scaffold/README.md",
