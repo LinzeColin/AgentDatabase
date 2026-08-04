@@ -1,5 +1,39 @@
 # Changelog
 
+## v0.0.0.115 — **同一个 carrier 里第二个作品的「道」被无声吞掉**（2026-08-04）
+
+端到端实跑（#125 Mendel 撞出）：同一文件先 `--dimension writings`
+再 `--dimension conversations`——
+
+```
+第 2 次 status=duplicate-skipped，账本只留 dimensions=['writings']
+```
+
+**第二条道就这么没了，而 `min_lanes` 是硬门**（deep／standard 都要 6 道）。
+**这会让人物无声掉道。** Mendel 侥幸没踩到（他的 conversations 两件各自独占 carrier），
+**那是运气不是设计。**
+
+### 改法：**只把冲突喊出来，记什么不变**
+
+- **不合并 `dimensions`**——那样一个文件 ingest 六次就能 claim 六道
+- **按内容去重仍然保留**——它挡的是同一份材料重复入账灌 `primary_ratio`，那是对的
+- 新增：跳过时若**这次请求的道不在既有记录里**，打印 `⚠⚠` 并在结果里记
+  `lane_dropped`，说明「要么把该作品正文单独截出来存一份，要么明确接受只记一道」
+
+★ 反向对照实跑：**同一个道再来一次不报**（只有道不同才报）。
+
+### 这条揭出的更大一件事
+
+**我裁定了「按作品拆分计数」，而流水线只会数文件**——
+`source_id = f'src-{checksum[:12]}'`，id 由内容决定。
+Mendel 的 27 个作品分布在约 21 个 carrier 里，
+**若强行按作品写 27 行，约 6 行会被静默跳过而 `_ids.txt` 仍写 27**
+——正是 v0.0.0.109 那件 `check_staged_but_not_ingested` 抓的账物不符。
+
+**我错在裁定计数单位时没先确认那个单位落得了地。**
+见 `FINDING_counting-unit-is-works-but-pipeline-counts-files.md`。
+
+
 ## v0.0.0.114 — 分出「**这一档对这个人永远够不着**」这一种成因（2026-08-04）
 
 `check_corpus_ceiling` 一直**拒绝猜成因**（那是对的：Watson 身上写死成因就成了错话）。

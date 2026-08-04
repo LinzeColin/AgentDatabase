@@ -285,7 +285,26 @@ def main() -> int:
                     raise ValueError(
                         f'Cross-split duplicate would leak Holdout: {source} already registered as {prior.get("split")} ({source_id})'
                     )
-                results.append({'file': str(source), 'source_id': source_id, 'status': 'duplicate-skipped'})
+                # ★★ v0.0.0.115：逐位相同的第二次被跳过是**对的**（挡的是同一份材料
+                #   重复入账灌 primary_ratio）。**但它此前是静默的**——
+                #   实跑：同一文件先 `--dimension writings` 再 `--dimension conversations`，
+                #   账本只留 `dimensions=['writings']`，**第二条道就这么没了**。
+                #   而 `min_lanes` 是硬门（deep/standard 都要 6 道），
+                #   **这会让人物无声掉道**（#125 Mendel 侥幸没踩到，那是运气不是设计）。
+                #   ★ 不合并 dimensions：那样一个文件 ingest 六次就能claim 六道。
+                #   **只把冲突喊出来，记什么不变。**
+                lost = [d for d in dimensions if d not in (prior.get('dimensions') or [])]
+                row = {'file': str(source), 'source_id': source_id, 'status': 'duplicate-skipped'}
+                if lost:
+                    row['lane_dropped'] = lost
+                    row['warning'] = (
+                        f'**这次请求的道 {lost} 没有被记下**——该文件已以 '
+                        f'{prior.get("dimensions")} 入账，逐位相同故跳过。'
+                        f'**若这两个道对应的是同一 carrier 里的不同作品，'
+                        f'那么第二个作品的道就丢了，而 min_lanes 是硬门。**'
+                        f'要么把该作品的正文单独截出来存一份，要么明确接受只记一道。')
+                    print(f'  ⚠⚠ {source.name}：{row["warning"]}')
+                results.append(row)
                 continue
 
             filename = safe_filename(source.name)

@@ -1,6 +1,6 @@
-# Release verification — Persona Distiller v0.0.0.114
+# Release verification — Persona Distiller v0.0.0.115
 
-Date: 2026-08-04（**v0.0.0.114**）
+Date: 2026-08-04（**v0.0.0.115**）
 
 > **本文件记录「当前发布号的复验结果」，不是历史归档。**
 > 版本号必须等于根目录 `VERSION`，由 `scripts/check_contract_drift.py` 强制。
@@ -21,6 +21,13 @@ Date: 2026-08-04（**v0.0.0.114**）
 > **表格正文不在任何判据的射程里**。
 > **「本表每一行都来自本次实跑」是一句自述**——
 > 而自述不是证据（见 `self-report-is-not-evidence`）。
+
+> ### v0.0.0.115 这一版重跑了什么
+>
+> **相对 114 只给 `ingest.py` 的去重分支加了一条告警**（**记什么不变**）。
+> **本次重跑**：**临时工作区端到端实跑**（同文件两个道 → 第 2 次报 `⚠⚠ lane_dropped`；
+> **同一个道再来一次不报**）、`finalize_release.py` 四步（清单 371 files → pytest → 漂移 → 可数项）。
+> **其余各行沿用 v0.0.0.96 那一次。**
 
 > ### v0.0.0.114 这一版重跑了什么
 >
