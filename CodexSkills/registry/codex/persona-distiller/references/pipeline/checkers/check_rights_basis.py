@@ -73,9 +73,30 @@ import sys
 # 声称「公有领域」的取值（大小写与标点不敏感）
 PD_VALUES = {"public-domain", "public domain", "publicdomain", "pd", "cc0"}
 
+# ★★ 2026-08-04 适配性修正。**第一版只认得「结论」那一种写法，于是把更好的写法跳过了。**
+#   实测：#117 Barton 的 `rights` 写的是**依据**——`卒年 1912，终身+70 已过`；
+#   而 #111 Fleming 写的是**结论**——`public-domain`。
+#   第一版 `is_pd()` 只匹配裸结论，于是 Barton 208 条全被判成「不声称公有领域，不判」，
+#   **判据反而奖励了信息量更少的那种写法。**
+#   （这正是「为解决新问题打补丁、导致旧的不适配」的反面例子：
+#   　判据只认它出生时见过的形状，形状一变就白装。）
+PD_ASSERTIONS = re.compile(
+    r"公有领域|public\s*[-_]?\s*domain|\bcc0\b|(?<![a-z])pd(?![a-z])"
+    r"|终身\s*\+?\s*70|卒年[^，。;；]{0,20}已过|保护期[^，。;；]{0,10}已过", re.I)
+
 # ★ 聚合器：它们的 `license` 字段是**转述**，不是权利声明
+#
+# ★★ 2026-08-04 去掉三个会撞的 token：`\bcore\b`、`\bbase\b`、`\bs2\b`。
+#   实测 #117 Barton **73 条假阳，全部来自 `\bs2\b`**——
+#   命中的是**本流水线自己的分档名 S2**（我给第三方源写的
+#   「S1 为同时代记述，**S2** 为后世研究与传记」）。
+#   `core` 与 `base` 更糟，是普通英文词。
+#
+#   **宁可漏掉 CORE 与 BASE 这两家，也不能把「S2 分档」报成「照抄了聚合器」**——
+#   一条假的「依据不作数」会让人回去重查一份本来没问题的源，
+#   而判据分不出 `CORE`（聚合器）与 `core`（普通词）。**分不出的就不判。**
 AGGREGATORS = re.compile(
-    r"unpaywall|openalex|\bcore\b|\bbase\b|semantic\s*scholar|\bs2\b|dimensions\.ai"
+    r"unpaywall|openalex|semantic\s*scholar|dimensions\.ai"
     r"|scilit|lens\.org|europe\s*pmc", re.I)
 
 # 能作数的依据
@@ -90,14 +111,32 @@ BASIS_FIELDS = ("rights_basis", "rights_source", "license_source",
 
 
 def is_pd(value):
+    """两种写法都要认：**裸结论**（`public-domain`）与**带依据的断言**（`卒年 1912，终身+70 已过`）。
+
+    **不许把「不声称公有领域」的也认进来**——`public-web`（Godin，在世）、
+    `publicly-accessible-for-analysis; redistribution-not-assumed`（Steinhardt，在世）
+    都含 `public` 但都**没有**声称公有领域，一律不判。
+    """
     if not value:
         return False
-    return str(value).strip().lower().rstrip(".") in PD_VALUES
+    s = str(value).strip()
+    if s.lower().rstrip(".") in PD_VALUES:
+        return True
+    return bool(PD_ASSERTIONS.search(s))
 
 
 def basis_of(record):
-    """→ 依据文本（把可能承载依据的字段拼起来）。"""
+    """→ 依据文本（把可能承载依据的字段拼起来）。
+
+    ★ `rights` **自己也可能就是依据**（`卒年 1912，终身+70 已过`）——
+      第一版只看 `rights_basis`／`attribution` 等旁字段，
+      于是「依据写在 rights 里」这种写法被判成「有结论无依据」。
+    """
     parts = []
+    rights = record.get("rights")
+    if rights and str(rights).strip().lower().rstrip(".") not in PD_VALUES:
+        # 裸结论不算依据；写成句子的才算。
+        parts.append(str(rights))
     for f in BASIS_FIELDS:
         v = record.get(f)
         if v:
@@ -190,6 +229,40 @@ def selftest() -> int:
     agg, nb, ok, npd = audit([{"source_id": "f", "rights": "public-domain",
                                "rights_basis": "应该没问题"}])
     chk("「应该没问题」不算依据", nb == ["f"] and not ok)
+
+    print("── ★★★ 反向对照 ⑨：**两种写法都要认**（适配性——第一版只认得一种）──")
+    # #117 Barton 的真实形状：`rights` 里写的是**依据**，不是裸结论
+    agg, nb, ok, npd = audit([{"source_id": "barton", "rights": "卒年 1912，终身+70 已过"}])
+    print(f"    `卒年 1912，终身+70 已过` → 有据 {len(ok)}／无据 {len(nb)}／不判 {len(npd)}")
+    chk("**依据写在 rights 里**也要算「声称公有领域」且「有据可查」",
+        len(ok) == 1 and not npd and not nb)
+    # #111 Fleming 的真实形状：裸结论
+    agg, nb, ok, npd = audit([{"source_id": "fleming", "rights": "public-domain"}])
+    chk("裸结论仍判「有结论无依据」（不许因为放宽而放过它）", nb == ["fleming"])
+
+    print("── ★★ 反向对照 ⑩：**含 public 但不声称 PD 的，仍然一律不判** ──")
+    agg, nb, ok, npd = audit([
+        {"source_id": "godin", "rights": "public-web"},
+        {"source_id": "stein", "rights": "publicly-accessible-for-analysis; "
+                                        "redistribution-not-assumed"},
+    ])
+    print(f"    → 不判 {len(npd)} 条")
+    chk("`public-web` 与 `publicly-accessible…` 都含 public，**都不许被认成 PD**",
+        len(npd) == 2 and not ok and not nb and not agg)
+
+    print("── ★★★ 反向对照 ⑪：**分档名 S2 不许被当成聚合器**（73 条真实假阳）──")
+    agg, nb, ok, npd = audit([{
+        "source_id": "barton-s2", "rights": "卒年 1912，终身+70 已过",
+        "attribution": "**第三方材料，不计为其所著。** S1 为同时代记述（1860–1915），"
+                       "S2 为后世研究与传记。"}])
+    print(f"    含「S2 为后世研究」→ 聚合器 {len(agg)}／有据 {len(ok)}")
+    chk("`S2` 是本流水线的分档名，**不许命中聚合器**", not agg and len(ok) == 1)
+
+    print("── ★★ 反向对照 ⑫：**真的聚合器仍要抓出来** ──")
+    agg, nb, ok, npd = audit([{
+        "source_id": "x", "rights": "public-domain",
+        "rights_basis": "Unpaywall best_oa_location.license = public-domain"}])
+    chk("Unpaywall 仍报（放宽不许把真的也放过）", len(agg) == 1)
 
     print("── ★★ 反向对照 ⑧：**今天那 872 条的真实形状**（只有结论，没有依据字段）──")
     agg, nb, ok, npd = audit([{"source_id": f"s{i}", "rights": "public-domain"}
