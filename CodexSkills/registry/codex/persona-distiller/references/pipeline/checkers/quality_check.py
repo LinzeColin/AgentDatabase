@@ -711,6 +711,89 @@ def run_baseline_provenance(report, target: Path) -> None:
         report.warn('eval.baseline-not-capability-evidence', message)
 
 
+def run_corpus_text_checks(report, target: Path, cache_dirs: list[str]) -> None:
+    """语料**正文层**的两道检查——**研究门与发布门都跑**。
+
+    ★★ v0.0.0.116 更正：这两件（`check_ocr_legibility` v0.0.0.105、
+    `check_byline_in_carrier` v0.0.0.116）原本写在 `run_content_checks` 里，
+    而**那个函数只在 `--phase release` 被调用**。
+    我在 v0.0.0.105 的 CHANGELOG 里写的「已接进 `--phase research`」**是错的**。
+
+    **它们必须在研究门就跑**：这两件问的是「语料本身能不能用」——
+    等到发布门才发现「有 10 份是乱码」「有 1 份装错了文件」，
+    **中间那一整轮断言、渲染、判分都建在坏语料上了。**
+    """
+    review = report.metrics.setdefault('content_review', {})
+    cache_arg = list(cache_dirs) if cache_dirs else [str(target / 'raw')]
+    here = Path(__file__).resolve().parent
+
+    def run(script: str, argv: list[str]) -> tuple[int, str]:
+        path = here / script
+        if not path.exists():
+            return -1, f'{script} 未安装'
+        proc = subprocess.run([sys.executable, str(path), *argv],
+                              capture_output=True, text=True)
+        return proc.returncode, (proc.stdout or '') + (proc.stderr or '')
+
+    # ── v0.0.0.116：**这份文件里真的有那句署名吗** ────────────────────────
+    #   #125 Mendel 抓源存盘用 `p[:8]` 截断 UUID 当文件名，同一期两页前 8 位相同，
+    #   **后写的音乐会评论页把讣闻页覆盖了**。三道判据全放行：
+    #   花体自查 0.1252 过（那页德文确实干净，只是内容是别的）、
+    #   sha256 过（文件不重复）、抓源方的「Mendel 是否出现」过（命中 Mendelssohn）。
+    #   ★ 抓出它的是**拿该件自己的特征词回查载体**。这是「判据绿了但指错了文件」
+    #   的第 17 起，形态新：**文件名截断造成同名覆盖**。
+    code, out = run('check_byline_in_carrier.py', ['--target', str(target)])
+    if code == -1:
+        review['checker_missing'] = out
+    elif code == 2:
+        report.error('content.selftest-failed',
+                     'check_byline_in_carrier 负对照未过——其检查结论不作数')
+    else:
+        try:
+            info = json.loads(out)
+        except Exception:                                          # noqa: BLE001
+            info = {}
+        n_bad = info.get('**指错文件**') or 0
+        if n_bad:
+            report.error('corpus.byline-not-in-carrier',
+                         f'**{n_bad} 条来源的署名照录，在它自己的载体文件里搜不到**——'
+                         '要么记录指错了文件，要么那段引文不是从这份文件里来的。'
+                         f'　{[x.get("original_name") for x in info.get("对不上的", [])][:5]}')
+        review['byline_in_carrier'] = (
+            f"核过 {info.get('核过', 0)} 条，指错 {n_bad} 条"
+            + (f"，**没核 {len(info.get('★ 没核的') or [])} 条（不是通过）**"
+               if info.get('★ 没核的') else "")
+            if info else '**未核（不是通过）**')
+
+    # ── v0.0.0.105：花体乱码是**替换**不是**缺失**，上面那件按「缺失」判，会漏 ────
+    #   Liebig #124 实测，10 份已知的 Fraktur 乱码里 `check_ocr_language_death` 只抓到 **5**。
+    #   漏的成因可指认：它取**多语种里最高的虚词占比**，而乱码德文会被别的语种接住——
+    #     bub_gb_QlVBAAAAYAAJ 0.109 **[pt]**、vollstndigerunt00liebgoog 0.159 **[pt]**、
+    #     b2130886x 0.189 **[fr]**、diemodernelandw00liebgoog **0.327 [de]**
+    #   最后那份尤其说明问题：短虚词（in/so/an/um）扛过了花体 OCR，
+    #   而 `der/die/und/ist` 整批变成 `ber/bie/unb/ift`——**总量没掉，是被换掉了。**
+    #   本件直接比「正确形 vs 乱码形」，那 10 份 **10/10 全中**。
+    #   两件在 Virchow 上 16 vs 16、交集 15，**各自还能抓到对方漏的一份**——是互补不是替代。
+    code, out = run('check_ocr_legibility.py', list(cache_arg))
+    if code == -1:
+        review['checker_missing'] = out
+    elif code == 2:
+        report.error('content.selftest-failed',
+                     'check_ocr_legibility 负对照未过——其检查结论不作数')
+    else:
+        try:
+            n_bad = json.loads(out).get('**判为花体乱码**', 0)
+        except Exception:
+            n_bad = 0
+        if n_bad:
+            report.warn('corpus.fraktur-mojibake',
+                        f'**{n_bad} 份德文语料是花体 OCR 乱码**——'
+                        'der→ber、und→unb、ist→ift，整篇没有一个词能拿去检索或引用。'
+                        '份数／分档／字数三样都是真的，所以既有的门都放行了；'
+                        '**从这些文件里取不出任何可核的逐字引文**。')
+        review['fraktur_mojibake'] = f'{n_bad} 份' if n_bad else '✓ 没有花体乱码'
+
+
 def run_content_checks(report, target: Path, cache_dirs: list[str]) -> None:
     """把内容层检查接进发布门（v0.0.0.8 新增）。
 
@@ -1068,34 +1151,6 @@ def run_content_checks(report, target: Path, cache_dirs: list[str]) -> None:
         n = next((l for l in out.splitlines() if '低于下限' in l), '')
         review['ocr_language_death'] = (n.strip()[:150] if n
                                         else '✓ 没有被 OCR 整份毁掉的语料')
-
-    # ── v0.0.0.105：花体乱码是**替换**不是**缺失**，上面那件按「缺失」判，会漏 ────
-    #   Liebig #124 实测，10 份已知的 Fraktur 乱码里 `check_ocr_language_death` 只抓到 **5**。
-    #   漏的成因可指认：它取**多语种里最高的虚词占比**，而乱码德文会被别的语种接住——
-    #     bub_gb_QlVBAAAAYAAJ 0.109 **[pt]**、vollstndigerunt00liebgoog 0.159 **[pt]**、
-    #     b2130886x 0.189 **[fr]**、diemodernelandw00liebgoog **0.327 [de]**
-    #   最后那份尤其说明问题：短虚词（in/so/an/um）扛过了花体 OCR，
-    #   而 `der/die/und/ist` 整批变成 `ber/bie/unb/ift`——**总量没掉，是被换掉了。**
-    #   本件直接比「正确形 vs 乱码形」，那 10 份 **10/10 全中**。
-    #   两件在 Virchow 上 16 vs 16、交集 15，**各自还能抓到对方漏的一份**——是互补不是替代。
-    code, out = run('check_ocr_legibility.py', list(cache_arg))
-    if code == -1:
-        review['checker_missing'] = out
-    elif code == 2:
-        report.error('content.selftest-failed',
-                     'check_ocr_legibility 负对照未过——其检查结论不作数')
-    else:
-        try:
-            n_bad = json.loads(out).get('**判为花体乱码**', 0)
-        except Exception:
-            n_bad = 0
-        if n_bad:
-            report.warn('corpus.fraktur-mojibake',
-                        f'**{n_bad} 份德文语料是花体 OCR 乱码**——'
-                        'der→ber、und→unb、ist→ift，整篇没有一个词能拿去检索或引用。'
-                        '份数／分档／字数三样都是真的，所以既有的门都放行了；'
-                        '**从这些文件里取不出任何可核的逐字引文**。')
-        review['fraktur_mojibake'] = f'{n_bad} 份' if n_bad else '✓ 没有花体乱码'
 
     res = target / 'evals/results.jsonl'
     if not res.exists():
@@ -2481,6 +2536,11 @@ def main() -> int:
         run_fact_density(report, target, sources)
         run_quote_layer(report, target)
         run_ocr_gate(report, target, sources)
+        # ★★ 放在**无条件段**：本文件没有 `if args.phase == 'research'` 分支，
+        #   2547 行之前的都是三个 phase 共跑的。这两件问「语料本身能不能用」，
+        #   **必须最早跑**——等到发布门才发现「10 份乱码」「1 份装错文件」，
+        #   中间整轮断言／渲染／判分都建在坏语料上了。
+        run_corpus_text_checks(report, target, args.cache)
         report_own_voice(report, target, meta, sources)
         report_refusal_overflow(report, target)
         run_corpus_ceiling(report, target, report.profile)
