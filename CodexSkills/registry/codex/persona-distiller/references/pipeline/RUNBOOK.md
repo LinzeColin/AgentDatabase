@@ -3832,7 +3832,21 @@ Pasteur #106 的 `lp-known-01`：
   **早先的产物一直在做对的事；只有 Mendel 那一处没标注。**
   **做成硬门会拦下正确的产物。** 判据分不出「引了并声明来路」与「引了并宣称是原话」，
   **这一步只能由人看一眼原文**——文件头本来就是这么写的。
-- ★ **我第一版把五个人报成了「语料不在本机、未核」——那是假的。**
+- ### ★★★ 成因找到了：**`init_target.py --workspace X` 建的是 `X/<slug>`**
+
+2026-08-05 建 Carver 工作区时当场撞到：我传 `--workspace .../workspaces/george-washington-carver`，
+它建出来的是 **`.../workspaces/george-washington-carver/george-washington-carver`**。
+
+```
+正确： --workspace .../workspaces               → .../workspaces/<slug>
+错误： --workspace .../workspaces/<slug>        → .../workspaces/<slug>/<slug>
+```
+
+**那 5 个多嵌一层的工作区，就是这么来的。** 已按正确形式重建 Carver。
+★ **本条只记成因，不去搬既有那 5 个**——它们被台账、延后名单、FINDING 用路径引着，
+搬一次要同步改一堆记录，**是不是该搬由用户定**。
+
+★ **我第一版把五个人报成了「语料不在本机、未核」——那是假的。**
   十个工作区里**五个是 `workspaces/<人>/references/`、五个是 `workspaces/<人>/<人>/references/`**，
   而我的 glob 只写了一层。**同一条流水线产出的目录结构不一致，
   任何按固定深度写的 glob 都会静默漏掉一半。**

@@ -1,0 +1,88 @@
+{
+  "builder_version": "v0.0.0.5",
+  "chosen_subject_uid": "lc:n50034776",
+  "consent_authority": null,
+  "created_at": "2026-08-04T16:31:02Z",
+  "current_version": null,
+  "existential_hypotheses_enabled": false,
+  "identity_selection": {
+    "canonical": "agriculture-fishery",
+    "display": "农林牧渔师",
+    "mode": "single",
+    "primary": "agriculture-fishery",
+    "weights": {
+      "agriculture-fishery": 1.0
+    }
+  },
+  "language": "en",
+  "model_version": "0.1.0-draft",
+  "name": "George Washington Carver",
+  "namesake_gate": {
+    "candidate_count": 1,
+    "chosen_candidate": {
+      "application_scenarios": [
+        "南方小农的土壤改良与轮作",
+        "花生／甘薯的加工与用途扩展",
+        "面向农民的通俗农业公报写作",
+        "1921 年就花生关税在众议院筹款委员会作证"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://id.loc.gov/authorities/names/n50034776",
+          "note": "authoritativeLabel = Carver, George Washington, 1864?-1943；madsrdf:deathDate = 1943-01-05；madsrdf:birthDate = 1864?（EDTF 问号＝不确定，生年不许写成确定值）"
+        },
+        {
+          "locator": "https://archive.org/details/CAT31355396",
+          "note": "Bulletin No.31 (1916) 扉页署 G. W. CARVER, M. S. AGR., DIRECTOR；出版者 Tuskegee Normal and Industrial Institute；无 access-restricted-item，_djvu.txt 64,830 字节（2026-08-05 亲验）"
+        },
+        {
+          "locator": "https://archive.org/details/tariffinformati01meangoog",
+          "note": "1921 听证 Schedule G：STATEMENT OF MB. GEOEOE W. CABVER, UlTITED PEANUT ASSOCIATIOH OF AMEBIGA, TUSKE6EE, ALA.（OCR 讹字照录）；possible-copyright-status = NOT_IN_COPYRIGHT；实下 4,328,671 字节（2026-08-05 亲验）"
+        },
+        {
+          "locator": "https://docsouth.unc.edu/neh/merritt/merritt.html",
+          "note": "Merritt, From Captivity to Fame, Meador, Boston, 1929, 196 p.（人工转录，非 OCR；2026-08-05 亲验加载正常）"
+        }
+      ],
+      "canonical_name": "George Washington Carver",
+      "distinguishing_basis": "**「George Washington Carver」这个全名在权威档里只对应一人**（LC n50034776）。以下三位是**名字形近、易被检索混入的其他人，不是本名的另一读法**，抓源时须逐条排除：①**Thomas Nixon Carver**（1865–1961，哈佛经济学家）——农业经济类会刊里的「Professor Carver」多半指他；②**W. A. Carver**（玉米遗传学）——PIAS 第 31 卷 (1924) p.129 的唯一 Carver 是他；③**John F. Carew**（1873–1951，纽约众议员、66 届筹款委员会委员）——1921 听证同段内 `Mr. Carew.` 与 `Mr. Carver.` 并存，OCR 讹变体 Cabew／Cabveb 形近。★ 另注：**塔斯基吉试验站公报 No.22（Turner）与 No.28（Malone）不是他写的**。",
+      "evidence_level": "high",
+      "identity_category": "历史人物（1864?–1943）",
+      "key_capabilities": [
+        "田间试验设计与逐年公报",
+        "真菌分类与植物病害鉴定",
+        "把实验结论改写成农民读得懂的操作步骤"
+      ],
+      "label": "A",
+      "occupation_or_role": "农学家；塔斯基吉师范与工业学院农业试验站主任",
+      "professional_background": "1891–96 爱荷华农学院（硕士，真菌学与植物病理，师从 L. H. Pammel）；1896 年起主持塔斯基吉试验站直至 1943 年卒",
+      "subject_uid": "lc:n50034776"
+    },
+    "chosen_subject_uid": "lc:n50034776",
+    "normalized_name": "georgewashingtoncarver",
+    "resolution": "single",
+    "schema_version": "1.0"
+  },
+  "normalized_name": "georgewashingtoncarver",
+  "origin_review_required": false,
+  "product_version": null,
+  "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+  "profile": "quick",
+  "prohibited_uses": [
+    "identity authentication or deceptive impersonation",
+    "invented endorsement, signature, consent, private memory or current opinion",
+    "unsupported psychological diagnosis",
+    "replacement of accountable high-stakes professional judgment"
+  ],
+  "retention_policy": null,
+  "runtime_invocation_versioning": false,
+  "scenario": null,
+  "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+  "schema_version": "2.0",
+  "slug": "george-washington-carver",
+  "status": "draft",
+  "subject_origin": "historical",
+  "target_id": "tgt-3295a249c540",
+  "time_scope": "all available periods, separated by role and material drift",
+  "updated_at": "2026-08-04T16:31:02Z"
+}
