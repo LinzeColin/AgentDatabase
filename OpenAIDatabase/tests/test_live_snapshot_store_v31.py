@@ -1,8 +1,8 @@
 from __future__ import annotations
 import copy,json,tempfile,unittest
 from pathlib import Path
-from live_snapshot_store import LiveSnapshotStore,SnapshotStoreError
-ROOT=Path(__file__).resolve().parents[2]
+from OpenAIDatabase.scripts.memory_atlas_private.live_snapshot_store import LiveSnapshotStore,SnapshotStoreError
+ROOT=Path(__file__).resolve().parents[1]
 class StoreTests(unittest.TestCase):
     def setUp(self):
         self.tmp=tempfile.TemporaryDirectory(); self.store=LiveSnapshotStore(Path(self.tmp.name),ROOT/'schema/memory_atlas.live_snapshot.v1.schema.json'); self.snapshot=json.loads((ROOT/'fixtures/live_snapshot.synthetic.json').read_text())

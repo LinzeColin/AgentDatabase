@@ -1,9 +1,9 @@
 from __future__ import annotations
 import json,tempfile,unittest
 from pathlib import Path
-from api_live_snapshot import response
-from live_snapshot_store import LiveSnapshotStore
-ROOT=Path(__file__).resolve().parents[2]
+from OpenAIDatabase.scripts.memory_atlas_private.api_live_snapshot import response
+from OpenAIDatabase.scripts.memory_atlas_private.live_snapshot_store import LiveSnapshotStore
+ROOT=Path(__file__).resolve().parents[1]
 class ApiTests(unittest.TestCase):
     def setUp(self): self.tmp=tempfile.TemporaryDirectory(); self.root=Path(self.tmp.name); self.schema=ROOT/'schema/memory_atlas.live_snapshot.v1.schema.json'
     def tearDown(self): self.tmp.cleanup()

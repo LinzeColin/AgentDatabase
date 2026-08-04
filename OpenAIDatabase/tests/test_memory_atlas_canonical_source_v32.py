@@ -561,3 +561,40 @@ def test_a_real_read_failure_still_marks_the_source_unreadable() -> None:
     assert "except (OSError, InventoryError) as exc:" in source
     assert "failures.append(str(exc))" in source
     assert "if failures:\n            state = SourceState.UNREADABLE" in source
+
+
+def test_no_test_file_hides_outside_the_gated_directory() -> None:
+    """T02's two test files existed, were cited as its evidence, and had never
+    run: they sat in `scripts/memory_atlas_private/` with bare imports that only
+    resolve when that directory happens to be on sys.path, so pytest could not
+    even collect them and no gate, policy or workflow referenced them. Eighteen
+    of the twenty-one assertions across those files failed the first time they
+    were actually executed.
+
+    Every test now lives in the one gated directory. This asserts nothing
+    creeps back."""
+    # The property is "every test file is executed", not "no test lives under
+    # scripts/": the acceptance oracles do live there and the gate discovers
+    # them with unittest. A blunter rule reports those three every run and
+    # teaches me to ignore this assertion.
+    discovered = REPO / "OpenAIDatabase" / "scripts" / "memory_atlas_acceptance"
+    gate = (REPO / "ops" / "memory-atlas" / "canonical_gate.sh").read_text(encoding="utf-8")
+    assert str(discovered.relative_to(REPO)) in gate, "the gate no longer discovers the acceptance oracles"
+    stray = sorted(
+        str(path.relative_to(REPO))
+        for path in (REPO / "OpenAIDatabase" / "scripts").rglob("test_*.py")
+        if discovered not in path.parents
+    )
+    assert stray == [], stray
+
+    policy = json.loads((REPO / "OpenAIDatabase" / "config" / "quality" / "verification_policy.json").read_text(encoding="utf-8"))
+    # Ownership spans every tier, not just integration — checking one tier would
+    # report 56 false positives and teach me to ignore this assertion.
+    owned = {
+        name
+        for tier in policy["execution_tiers"].values()
+        for name in tier.get("test_files", [])
+    }
+    on_disk = {f"tests/{p.name}" for p in (REPO / "OpenAIDatabase" / "tests").glob("test_*.py")}
+    # Anything on disk and unowned would be a test nothing runs.
+    assert not (on_disk - owned), sorted(on_disk - owned)

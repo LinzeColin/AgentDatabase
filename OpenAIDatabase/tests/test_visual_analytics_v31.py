@@ -1,8 +1,8 @@
 from __future__ import annotations
 import copy, json, unittest
 from pathlib import Path
-from visual_analytics import build_visual_analytics
-ROOT = Path(__file__).resolve().parents[2]
+from OpenAIDatabase.scripts.memory_atlas_private.visual_analytics import build_visual_analytics
+ROOT = Path(__file__).resolve().parents[1]
 
 class VisualAnalyticsTests(unittest.TestCase):
     def setUp(self):

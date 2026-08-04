@@ -1,8 +1,8 @@
 from __future__ import annotations
 import copy, json, unittest
 from pathlib import Path
-from benchmark_comparator import compare
-ROOT=Path(__file__).resolve().parents[2]
+from OpenAIDatabase.scripts.memory_atlas_private.benchmark_comparator import compare
+ROOT=Path(__file__).resolve().parents[1]
 class BenchmarkTests(unittest.TestCase):
     def setUp(self):
         self.registry=json.loads((ROOT/'benchmark/registry.v1.json').read_text(encoding='utf-8'))
