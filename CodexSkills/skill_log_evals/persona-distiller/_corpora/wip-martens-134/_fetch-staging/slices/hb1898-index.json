@@ -1,0 +1,170 @@
+[
+ {
+  "file": "hb1898-01.txt",
+  "chars": 141201,
+  "ident": "handbuchdermate00martgoog",
+  "ocr_file": "handbuchdermate00martgoog_djvu.txt",
+  "char_range": [
+   0,
+   141204
+  ],
+  "boilerplate_stripped": 7733,
+  "anchor_head": "/• r/. / '' ^' ff Handbuch der , . Materialienkunde S&T den",
+  "sha256": "94e5420e40131b194e77a5d5eb8f842704da28ce45046a914ab5557260874e74",
+  "fp": 9
+ },
+ {
+  "file": "hb1898-02.txt",
+  "chars": 141121,
+  "ident": "handbuchdermate00martgoog",
+  "ocr_file": "handbuchdermate00martgoog_djvu.txt",
+  "char_range": [
+   141204,
+   282329
+  ],
+  "boilerplate_stripped": 7733,
+  "anchor_head": "Nach dem Versuch Ranmgewichte Quetsch- grenxe nA^i«hi Dichtig- ^JOWlCIlb vo",
+  "sha256": "b9b23966ce52ff77ab8a989ab3211b84274e809d795f2b6fbfaa568db713d806",
+  "fp": 20
+ },
+ {
+  "file": "hb1898-03.txt",
+  "chars": 141192,
+  "ident": "handbuchdermate00martgoog",
+  "ocr_file": "handbuchdermate00martgoog_djvu.txt",
+  "char_range": [
+   282329,
+   423524
+  ],
+  "boilerplate_stripped": 7733,
+  "anchor_head": "Die Darstellung der Fehlerquellen der Spiegelapparate und Mikrometer- schrauben ge",
+  "sha256": "7b0972f891c54d7e6dbd8c48246e051f68cfc414cf82a64edcf9910a63648ced",
+  "fp": 13
+ },
+ {
+  "file": "hb1898-04.txt",
+  "chars": 140399,
+  "ident": "handbuchdermate00martgoog",
+  "ocr_file": "handbuchdermate00martgoog_djvu.txt",
+  "char_range": [
+   423524,
+   563926
+  ],
+  "boilerplate_stripped": 7733,
+  "anchor_head": "Es liegt nahe, die Versuchsergebnisse unmittelbar auf die Erfüllimg der in Absa",
+  "sha256": "aab739eebc39135789d00687e62e665e48751d163887e2fe6c685662d638a81c",
+  "fp": 20
+ },
+ {
+  "file": "hb1898-05.txt",
+  "chars": 141182,
+  "ident": "handbuchdermate00martgoog",
+  "ocr_file": "handbuchdermate00martgoog_djvu.txt",
+  "char_range": [
+   563926,
+   705111
+  ],
+  "boilerplate_stripped": 7733,
+  "anchor_head": "21S. Ist der zu scheerende Körper ein weicher nachgiebiger Körper, z. B. Holz",
+  "sha256": "f995c52651698d317d78c6cf8f2e42c26f92e07104fbcbef33b96113c8c15211",
+  "fp": 24
+ },
+ {
+  "file": "hb1898-06.txt",
+  "chars": 141097,
+  "ident": "handbuchdermate00martgoog",
+  "ocr_file": "handbuchdermate00martgoog_djvu.txt",
+  "char_range": [
+   705111,
+   846211
+  ],
+  "boilerplate_stripped": 7733,
+  "anchor_head": "der Streckgeschwindigkeit auf den doppel- ten Betrag bringen. Für Zinn hat Fisch",
+  "sha256": "9d58be7633dd707c8989370f940bd5aaf886969bd054189881f22bb6a7d5fc86",
+  "fp": 21
+ },
+ {
+  "file": "hb1898-07.txt",
+  "chars": 140613,
+  "ident": "handbuchdermate00martgoog",
+  "ocr_file": "handbuchdermate00martgoog_djvu.txt",
+  "char_range": [
+   846211,
+   986828
+  ],
+  "boilerplate_stripped": 7733,
+  "anchor_head": "{L 203) die Ritzung mit einem .__' <o>_ ~ Diamanten D, Fig. 240",
+  "sha256": "59cd0288ac2f4c35fbd3e634908cbde4b2f99a9575c874743c36aa11b070ac4b",
+  "fp": 33
+ },
+ {
+  "file": "hb1898-08.txt",
+  "chars": 141039,
+  "ident": "handbuchdermate00martgoog",
+  "ocr_file": "handbuchdermate00martgoog_djvu.txt",
+  "char_range": [
+   986828,
+   1127870
+  ],
+  "boilerplate_stripped": 7733,
+  "anchor_head": "441* Innerhalb dieser Gruppen unterscheide ich, ohne Rücksicht darauf, ob die M",
+  "sha256": "eb40bf56ed9ae2c6989f4a9f33fb1dfb8b5e099ac5b418c32a52a29bb5dccfcc",
+  "fp": 64
+ },
+ {
+  "file": "hb1898-09.txt",
+  "chars": 141106,
+  "ident": "handbuchdermate00martgoog",
+  "ocr_file": "handbuchdermate00martgoog_djvu.txt",
+  "char_range": [
+   1127870,
+   1268979
+  ],
+  "boilerplate_stripped": 7733,
+  "anchor_head": "öl8a. L. Paupier-Paris (L 183, S. 12, Taf. I, Fig. 7) baut Maschinen für Cem",
+  "sha256": "32e5c502e184f3e96116c50f0d1c7fd9c1160eacb1d4c258e2c96aa314d68da0",
+  "fp": 67
+ },
+ {
+  "file": "hb1898-10.txt",
+  "chars": 140653,
+  "ident": "handbuchdermate00martgoog",
+  "ocr_file": "handbuchdermate00martgoog_djvu.txt",
+  "char_range": [
+   1268979,
+   1409635
+  ],
+  "boilerplate_stripped": 7733,
+  "anchor_head": "Man darf bei den Quecksilbermanometern nicht ausser Acht lassen, dass die Ables",
+  "sha256": "884f5d1fe93bd8a582b3d8cbc0dd870b24d2625c31656dc6e7c5d2ce281403f8",
+  "fp": 30
+ },
+ {
+  "file": "hb1898-11.txt",
+  "chars": 141942,
+  "ident": "handbuchdermate00martgoog",
+  "ocr_file": "handbuchdermate00martgoog_djvu.txt",
+  "char_range": [
+   1409635,
+   1551580
+  ],
+  "boilerplate_stripped": 7733,
+  "anchor_head": "HUB. Die Zugkraft wird von hier aus durch Qnerhaupt 7 und Gestänge 8 auf den",
+  "sha256": "19f0ef9360520429ffc2de22e9656809d38914dc955bf355eeb3bb1f9989466b",
+  "fp": 73
+ },
+ {
+  "file": "hb1898-12.txt",
+  "chars": 139971,
+  "ident": "handbuchdermate00martgoog",
+  "ocr_file": "handbuchdermate00martgoog_djvu.txt",
+  "char_range": [
+   1551580,
+   1691557
+  ],
+  "boilerplate_stripped": 7733,
+  "anchor_head": "Was die Fehlerquellen anlangt, so sind diese, ausser in den früher besprochenen",
+  "sha256": "fb32e85826641d680e321838a85c72d593c190cc89bdeb2b937df1a5a6eb4935",
+  "fp": 56
+ }
+]

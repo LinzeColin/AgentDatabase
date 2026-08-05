@@ -1,0 +1,58 @@
+[
+ {
+  "file": "dahlem1904-01.txt",
+  "chars": 214985,
+  "ident": "daskniglichemat00guthgoog",
+  "ocr_file": "daskniglichemat00guthgoog_djvu.txt",
+  "char_range": [
+   0,
+   214989
+  ],
+  "boilerplate_stripped": 6780,
+  "anchor_head": "Das Königliche Materialprüfungsa auf --em (.._!Sr.''e der GrolJ-Lii ;> Vi",
+  "sha256": "7596665465d75c93994c24a98af1c070d68dd73919fad8eea2733071a5ed6bbf",
+  "fp": 4
+ },
+ {
+  "file": "dahlem1904-02.txt",
+  "chars": 215159,
+  "ident": "daskniglichemat00guthgoog",
+  "ocr_file": "daskniglichemat00guthgoog_djvu.txt",
+  "char_range": [
+   214989,
+   430151
+  ],
+  "boilerplate_stripped": 6780,
+  "anchor_head": "Untersuchungen über den Einfluß der Wärme auf die Festigkeitseigen- schaften des Eisens.",
+  "sha256": "63e1224cd15a8cbdaedc6d5601be627310959add6554c917c77315a3b9557a75",
+  "fp": 0
+ },
+ {
+  "file": "dahlem1904-03.txt",
+  "chars": 214628,
+  "ident": "daskniglichemat00guthgoog",
+  "ocr_file": "daskniglichemat00guthgoog_djvu.txt",
+  "char_range": [
+   430151,
+   644785
+  ],
+  "boilerplate_stripped": 6780,
+  "anchor_head": "(\\f;1. l'i^'. 111 und l<)2 S Türen In den Die Türen msBiiTen . . , ZwiicheawBnden.",
+  "sha256": "b0a0f3717038c8f5dafc8220490f58cf06ad246b1245c0f06efe6bc099aa7d6f",
+  "fp": 2
+ },
+ {
+  "file": "dahlem1904-04.txt",
+  "chars": 214884,
+  "ident": "daskniglichemat00guthgoog",
+  "ocr_file": "daskniglichemat00guthgoog_djvu.txt",
+  "char_range": [
+   644785,
+   859677
+  ],
+  "boilerplate_stripped": 6780,
+  "anchor_head": "Benutzunff der Wird an einem der achtzig Telephone, z. B. bei No. 20, der Hörer vom Haken",
+  "sha256": "e1b411b0011195626ed993702def22fa4c64c1a5cf7384f46eec50613e20a649",
+  "fp": 8
+ }
+]

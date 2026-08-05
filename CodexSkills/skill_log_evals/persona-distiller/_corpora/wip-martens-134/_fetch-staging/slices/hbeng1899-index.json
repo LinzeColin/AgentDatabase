@@ -1,0 +1,58 @@
+[
+ {
+  "file": "hbeng1899-01.txt",
+  "chars": 395308,
+  "ident": "handbooktesting00henngoog",
+  "ocr_file": "handbooktesting00henngoog_djvu.txt",
+  "char_range": [
+   0,
+   395311
+  ],
+  "boilerplate_stripped": 3470,
+  "anchor_head": "fc .A-JfaJl. \" H — *^ REESE LIBRARY UNIVERSITY OF CALIFORNIA. ' Digitiz",
+  "sha256": "c0cc93d443f8e763f04c298ea1c7b166ff27a3a6c7e57481a934de3839828ade",
+  "fp": 168
+ },
+ {
+  "file": "hbeng1899-02.txt",
+  "chars": 395223,
+  "ident": "handbooktesting00henngoog",
+  "ocr_file": "handbooktesting00henngoog_djvu.txt",
+  "char_range": [
+   395311,
+   790537
+  ],
+  "boilerplate_stripped": 3470,
+  "anchor_head": "determined with ratio lJVa= 2t.S ^^ ^^^ above-mentioned series of tests, with",
+  "sha256": "bdabce8cc410981820573b6d3e1f545251abd3fbde23c53bc3be8aff56b2b41e",
+  "fp": 190
+ },
+ {
+  "file": "hbeng1899-03.txt",
+  "chars": 396388,
+  "ident": "handbooktesting00henngoog",
+  "ocr_file": "handbooktesting00henngoog_djvu.txt",
+  "char_range": [
+   790537,
+   1186929
+  ],
+  "boilerplate_stripped": 3470,
+  "anchor_head": "302 A. Resistance op Materials. (558. 359.) 358. A series of metals sho",
+  "sha256": "6850c8bb8ba2d5d18d425f828456c68721189dfad3882cd7657d7eb833ddf7bc",
+  "fp": 292
+ },
+ {
+  "file": "hbeng1899-04.txt",
+  "chars": 394106,
+  "ident": "handbooktesting00henngoog",
+  "ocr_file": "handbooktesting00henngoog_djvu.txt",
+  "char_range": [
+   1186929,
+   1581041
+  ],
+  "boilerplate_stripped": 3470,
+  "anchor_head": "660. Amagat {L 102, II, p. 109, PI. X) constructed a small machine for deter",
+  "sha256": "a180d1824312a31225cd5d248b078295fd4a4879372332d34538318d1c1c8474",
+  "fp": 207
+ }
+]

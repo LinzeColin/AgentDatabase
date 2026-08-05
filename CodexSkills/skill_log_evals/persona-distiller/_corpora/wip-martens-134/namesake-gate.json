@@ -1,16 +1,84 @@
 {
-  "candidate_cards": [],
-  "candidate_count": 0,
-  "candidates": [],
-  "generated_at": "2026-08-05T21:24:09Z",
-  "normalized_name": "adolfmartens",
-  "resolution": "none",
-  "schema_version": "1.0",
-  "search_scope": [
-    "sibling canonical registry",
-    "authoritative public sources supplied by orchestration"
-  ],
-  "selected_subject_uid": null,
-  "status": "unverified",
-  "target_name": "Adolf Martens"
+ "schema_version": "1.0",
+ "target_name": "Adolf Martens",
+ "normalized_name": "adolfmartens",
+ "generated_at": "2026-08-05T22:07:59Z",
+ "status": "ready",
+ "resolution": "single",
+ "selected_subject_uid": "martens-adolf-karl-gottfried",
+ "candidate_count": 1,
+ "candidates": [
+  {
+   "subject_uid": "martens-adolf-karl-gottfried",
+   "canonical_name": "Adolf Karl Gottfried Martens",
+   "label": "Adolf Martens（1850-1914），德国材料试验学与金相学奠基人",
+   "identity_category": "官办技术机构的科研管理者兼实验研究者（普鲁士国家材料试验机构主任）",
+   "occupation_or_role": "Königliches Materialprüfungsamt 主任；Technische Hochschule Charlottenburg 教授；金相学（Metallographie）与材料试验学（Materialprüfung）的奠基者之一",
+   "professional_background": "1850-03-06 生于 Mecklenburg-Schwerin 的 Bakendorf bei Hagenow，父 Friedrich Martens 为 Gutspächter（租佃庄园主）；1868-71 就读柏林 Königliche Gewerbeakademie；1871-75 任东部铁路（Ostbahn, Bromberg）桥梁设计与验收工程师，参与 Thorn 的 Weichsel 桥与 Tilsit 的 Memel 桥；1875-79/80 转 Berlin-Nordhausen 铁路；1880-84 任柏林工业高校机械零件讲席助教；1884 年起接任 Mechanisch-Technische Versuchsanstalt（Charlottenburg）主任，1904 年该所迁 Dahlem/Groß-Lichterfelde 并改组为 Königliches Materialprüfungsamt，任主任至 1914 年去世；1892 年起任 TH Berlin 教授；1904 年当选普鲁士科学院院士；1905 年获 TH Dresden 荣誉博士（Dr.-Ing. E.h.）；1911 年获 VDI Grashof 纪念章；1895 年起任国际材料试验协会（Internationaler Verband für Materialprüfungen der Technik）副主席，1897 年起任德国材料试验协会主席；1914-07-24 卒于 Berlin-Groß-Lichterfelde。马氏体 Martensit/martensite 由 Floris Osmond 以他命名。",
+   "application_scenarios": [
+    "把「这块材料合格吗」这类验收判断，改造成可复现、可争论的试验规程问题",
+    "为一门尚无标准的测量科学从零建立仪器、试样形状、量测长度与误差口径",
+    "在国家机构里同时承担仲裁性检验、标准制定与方法研究三重角色",
+    "把显微组织观察引入工程验收，让不可见的组织成为可判读的工程证据",
+    "跨国推动统一试验方法（1884 München / 1886 Dresden / 1893 Wien 会议→1895 国际协会）"
+   ],
+   "key_capabilities": [
+    "试验机与量测仪器的设计、校准与误差分析（镜式仪 Spiegelapparat、自记仪、测力计）",
+    "把「这台机器的读数为什么不可信」拆成可逐项检验的误差源清单",
+    "金属显微组织制样与判读，并把制样本身当作可争论的方法论对象",
+    "为验收规程写出既能执行又经得起反驳的条文（钢轨、水泥、纸张、木材、金属）",
+    "第一人称的方法论写作：把「我为什么这样做、我在哪里存疑」写进技术手册正文"
+   ],
+   "distinguishing_basis": "生卒 1850-03-06 / 1914-07-24；印本署名固定为 `A. Martens` 或 `Von A. Martens`，职衔照录 `Geh. Reg.-Rat, Professor, Direktor d. Kgl. mech.-techn. Versuchsanstalt`（Z. VDI 48, 1904）与 `Geheimer Ober-Regierungsrat Professor Dr.-Ing. Adolf Martens, Direktor des Königlichen Materialprüfungsamtes in Berlin-Groß-Lichterfelde`（Z. VDI 58, 1914, S.1369 讣文照录）。★ 与他撞名的至少 12 人见 namesake-candidates.json，其中 Alfred Martens（建筑师 1881-1920）与 Arthur Martens（机械工程师 1897-1937）**署名形态与他完全相同**；Friedrich Franz Martens（物理学家 1873-1939）与他同城同代，且**与他的讣文同卷出现**（Z. VDI 58 索引：`Martens, F. F., Physikalische [Grundlagen] der Elektrotechnik` 与 `Adolf Martens 1369*` 并列）。机器可判的区分字段见 namesake-criteria.json。",
+   "evidence_level": "multiple-independent",
+   "authoritative_sources": [
+    {
+     "kind": "reference-work",
+     "locator": "https://www.deutsche-biographie.de/sfz58572.html",
+     "note": "NDB 16 (1990)，Max Pfender 撰；给全名 Adolf Karl Gottfried Martens、父名、婚配、逐段任职年份"
+    },
+    {
+     "kind": "reference-work",
+     "locator": "https://www.encyclopedia.com/science/dictionaries-thesauruses-pictures-and-press-releases/martens-adolf",
+     "note": "Dictionary of Scientific Biography 条目转载；含其论文书目（Z. VDI 1878/1880、Stahl und Eisen 1882-1900、Mitteilungen 各辑）"
+    },
+    {
+     "kind": "primary-self-authored",
+     "locator": "https://archive.org/details/handbuchdermate00martgoog",
+     "note": "《Handbuch der Materialienkunde für den Maschinenbau》1898 德文原著，扉页署 `A. Martens`；全书 430 处第一人称 `ich`"
+    },
+    {
+     "kind": "primary-self-authored",
+     "locator": "https://archive.org/details/daskniglichemat00guthgoog",
+     "note": "《Das Königliche Materialprüfungsamt … Dahlem》1904，Martens 与 Max Guth 合著"
+    },
+    {
+     "kind": "contemporary-obituary",
+     "locator": "https://archive.org/details/zeitschrift-des-vereines-deutscher-ingenieure-58.1914-teil-2",
+     "note": "Z. VDI 58 (1914) 印本 S.1369-1370 讣文（djvu 341-342 页）；照录职衔与卒日 1914-07-24"
+    },
+    {
+     "kind": "contemporary-notice",
+     "locator": "https://archive.org/details/noticeofdeathofp00inte",
+     "note": "国际材料试验协会 1914-07-26 圣彼得堡讣告，署 E. Reitler（General-Secretary）与 N. Belelubsky（President）"
+    },
+    {
+     "kind": "authority-record",
+     "locator": "https://www.wikidata.org/wiki/Q66166"
+    }
+   ]
+  }
+ ],
+ "candidate_cards": [
+  "A. 人物与身份：Adolf Karl Gottfried Martens；官办技术机构的科研管理者兼实验研究者（普鲁士国家材料试验机构主任）；Königliches Materialprüfungsamt 主任；Technische Hochschule Charlottenburg 教授；金相学（Metallographie）与材料试验学（Materialprüfung）的奠基者之一。\n   专业背景：1850-03-06 生于 Mecklenburg-Schwerin 的 Bakendorf bei Hagenow，父 Friedrich Martens 为 Gutspächter（租佃庄园主）；1868-71 就读柏林 Königliche Gewerbeakademie；1871-75 任东部铁路（Ostbahn, Bromberg）桥梁设计与验收工程师，参与 Thorn 的 Weichsel 桥与 Tilsit 的 Memel 桥；1875-79/80 转 Berlin-Nordhausen 铁路；1880-84 任柏林工业高校机械零件讲席助教；1884 年起接任 Mechanisch-Technische Versuchsanstalt（Charlottenburg）主任，1904 年该所迁 Dahlem/Groß-Lichterfelde 并改组为 Königliches Materialprüfungsamt，任主任至 1914 年去世；1892 年起任 TH Berlin 教授；1904 年当选普鲁士科学院院士；1905 年获 TH Dresden 荣誉博士（Dr.-Ing. E.h.）；1911 年获 VDI Grashof 纪念章；1895 年起任国际材料试验协会（Internationaler Verband für Materialprüfungen der Technik）副主席，1897 年起任德国材料试验协会主席；1914-07-24 卒于 Berlin-Groß-Lichterfelde。马氏体 Martensit/martensite 由 Floris Osmond 以他命名。\n   应用价值：场景：把「这块材料合格吗」这类验收判断，改造成可复现、可争论的试验规程问题；为一门尚无标准的测量科学从零建立仪器、试样形状、量测长度与误差口径；在国家机构里同时承担仲裁性检验、标准制定与方法研究三重角色；把显微组织观察引入工程验收，让不可见的组织成为可判读的工程证据；跨国推动统一试验方法（1884 München / 1886 Dresden / 1893 Wien 会议→1895 国际协会）；关键能力：试验机与量测仪器的设计、校准与误差分析（镜式仪 Spiegelapparat、自记仪、测力计）；把「这台机器的读数为什么不可信」拆成可逐项检验的误差源清单；金属显微组织制样与判读，并把制样本身当作可争论的方法论对象；为验收规程写出既能执行又经得起反驳的条文（钢轨、水泥、纸张、木材、金属）；第一人称的方法论写作：把「我为什么这样做、我在哪里存疑」写进技术手册正文。\n   区分依据：生卒 1850-03-06 / 1914-07-24；印本署名固定为 `A. Martens` 或 `Von A. Martens`，职衔照录 `Geh. Reg.-Rat, Professor, Direktor d. Kgl. mech.-techn. Versuchsanstalt`（Z. VDI 48, 1904）与 `Geheimer Ober-Regierungsrat Professor Dr.-Ing. Adolf Martens, Direktor des Königlichen Materialprüfungsamtes in Berlin-Groß-Lichterfelde`（Z. VDI 58, 1914, S.1369 讣文照录）。★ 与他撞名的至少 12 人见 namesake-candidates.json，其中 Alfred Martens（建筑师 1881-1920）与 Arthur Martens（机械工程师 1897-1937）**署名形态与他完全相同**；Friedrich Franz Martens（物理学家 1873-1939）与他同城同代，且**与他的讣文同卷出现**（Z. VDI 58 索引：`Martens, F. F., Physikalische [Grundlagen] der Elektrotechnik` 与 `Adolf Martens 1369*` 并列）。机器可判的区分字段见 namesake-criteria.json。"
+ ],
+ "search_scope": [
+  "de.wikipedia Martens (Familienname) 姓氏全表（117 条，逐条读过）",
+  "Deutsche Biographie / NDB",
+  "Dictionary of Scientific Biography（Encyclopedia.com 转载）",
+  "archive.org 元数据检索 + inside.php 全文检索（通道已用已知必中/必不中双向自检）",
+  "BAM 官方 Adolf-Martens 页",
+  "Wikidata"
+ ],
+ "namesake_note": "同名者调查见同目录 namesake-candidates.json（12 名真同名者 + 5 名同题同代人）与 namesake-criteria.json（机器可判字段）；实测记录见 NAMESAKE-GUARD-实测.md。"
 }
