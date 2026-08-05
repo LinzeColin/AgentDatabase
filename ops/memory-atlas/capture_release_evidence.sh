@@ -36,11 +36,44 @@ echo "capturing release evidence at $started"
 
 # --- what is actually live -------------------------------------------------
 fetch "$SHARED/live-snapshot/current.json" > "$OUT/live-snapshot.current.json" || true
-fetch "$SHARED/public/memory_atlas.json"   > "$OUT/served-atlas.json"          || true
-fetch "$SHARED/memory_atlas_status_projection.json" > "$OUT/status-projection.json" || true
+# Summarised, never copied whole: the served atlas is ~2 MB and the repository
+# caps a tracked blob at 1 MB. The index needs its facts, not its bytes.
+fetch "$SHARED/public/memory_atlas.json" | python3 -c '
+import hashlib, json, sys
+raw = sys.stdin.buffer.read()
+try:
+    d = json.loads(raw)
+except Exception:
+    print(json.dumps({"readable": False, "bytes": len(raw)})); raise SystemExit(0)
+o = d.get("overview") or {}
+print(json.dumps({
+    "readable": True, "bytes": len(raw), "sha256": hashlib.sha256(raw).hexdigest(),
+    "overview": {"generated_at": o.get("generated_at"),
+                 "codex_session_count": o.get("codex_session_count")},
+    "nodes": len(d.get("nodes") or []), "edges": len(d.get("edges") or []),
+}, ensure_ascii=False, indent=2))
+' > "$OUT/served-atlas.summary.json" || true
+fetch "$SHARED/memory_atlas_status_projection.json" | python3 -c '
+import hashlib, json, sys
+raw = sys.stdin.buffer.read()
+try:
+    d = json.loads(raw)
+except Exception:
+    print(json.dumps({"readable": False, "bytes": len(raw)})); raise SystemExit(0)
+print(json.dumps({"readable": True, "bytes": len(raw),
+                  "sha256": hashlib.sha256(raw).hexdigest(),
+                  "schema_version": d.get("schema_version")}, ensure_ascii=False, indent=2))
+' > "$OUT/status-projection.summary.json" || true
 deployed=$(ssh -o BatchMode=yes -o ConnectTimeout=10 "$ORIGIN" \
   'basename $(readlink -f /srv/linze/apps/agentdatabase/current)' 2>/dev/null || echo unknown)
 head_sha=$(git -C "$REPO" rev-parse HEAD)
+# The question this dimension asks is "is the running system the latest code",
+# not "is HEAD deployed" — committing the evidence necessarily advances HEAD by
+# one, so comparing against HEAD can never settle and would loop forever.
+# Documentation and receipts do not change what runs; the last commit that
+# touched code does.
+code_sha=$(git -C "$REPO" log -1 --format=%H -- \
+  OpenAIDatabase MemoryAtlas ops .github 2>/dev/null || echo "$head_sha")
 
 # --- the gate, on this exact tree ------------------------------------------
 gate_rc=0
@@ -54,11 +87,12 @@ if [[ -f "$OUT/../t10/VERIFIER_SUBJECT.json" ]]; then
 fi
 
 # --- one index, one row per dimension the review scored --------------------
-python3 - "$OUT" "$head_sha" "$deployed" "$started" "$gate_rc" <<'PY'
+python3 - "$OUT" "$head_sha" "$deployed" "$started" "$gate_rc" "$code_sha" <<'PY'
 import json, sys
 from pathlib import Path
 
 out, head, deployed, started, gate_rc = Path(sys.argv[1]), sys.argv[2], sys.argv[3], sys.argv[4], int(sys.argv[5])
+code = sys.argv[6] if len(sys.argv) > 6 else head
 
 
 def load(name):
@@ -69,8 +103,8 @@ def load(name):
 
 
 snapshot = load("live-snapshot.current.json") or {}
-atlas = load("served-atlas.json") or {}
-status = load("status-projection.json") or {}
+atlas = load("served-atlas.summary.json") or {}
+status = load("status-projection.summary.json") or {}
 gate = load("canonical-gate.json") or {}
 
 run = snapshot.get("run") or {}
@@ -133,14 +167,15 @@ rows = [
         (evidence.get("r2_readback") or {}).get("state") == "PASS"
         or (evidence.get("canonical_source_readback") or {}).get("state") == "PASS"),
     row("OVH 运行与部署",
-        {"head": head, "deployed_release": deployed,
-         "same_commit": deployed.endswith(head[:12])},
+        {"head": head, "last_code_commit": code, "deployed_release": deployed,
+         "running_the_latest_code": deployed.endswith(code[:12]),
+         "head_advanced_since": None if head == code else "文档／回执提交，不改变运行内容"},
         "capture-manifest.json",
-        deployed.endswith(head[:12])),
+        deployed.endswith(code[:12])),
     row("Cloudflare Access／路由／缓存",
         {"status_projection": (evidence.get("status_projection") or {}).get("state"),
          "status_schema": status.get("schema_version")},
-        "status-projection.json",
+        "status-projection.summary.json",
         (evidence.get("status_projection") or {}).get("state") == "PASS"),
     row("GitHub／CI／Hook／Code Flow",
         {"gate_verdict": gate.get("verdict"), "gate_exit_code": gate_rc,
@@ -155,8 +190,9 @@ rows = [
     row("数据打通（v0.0.0.31）",
         {"served_atlas_generated_at": overview.get("generated_at"),
          "codex_session_count": overview.get("codex_session_count"),
-         "nodes": len(atlas.get("nodes") or []), "edges": len(atlas.get("edges") or [])},
-        "served-atlas.json",
+         "nodes": atlas.get("nodes"), "edges": atlas.get("edges"),
+         "sha256": atlas.get("sha256")},
+        "served-atlas.summary.json",
         bool(overview.get("generated_at")) and int(overview.get("codex_session_count") or 0) > 0),
 ]
 
@@ -164,8 +200,9 @@ index = {
     "schema_version": "memory_atlas.release_evidence.v1",
     "captured_at": started,
     "head_commit": head,
+    "last_code_commit": code,
     "deployed_release": deployed,
-    "identity_matches": deployed.endswith(head[:12]),
+    "identity_matches": deployed.endswith(code[:12]),
     "gap_count": sum(1 for r in rows if r["state"] != "PASS"),
     "dimensions": rows,
     "how_to_reproduce": "ops/memory-atlas/capture_release_evidence.sh <repo> <out>",
@@ -185,6 +222,7 @@ cat > "$OUT/capture-manifest.json" <<EOF
   "captured_at": "$started",
   "finished_at": "$(now)",
   "head_commit": "$head_sha",
+  "last_code_commit": "$code_sha",
   "deployed_release": "$deployed",
   "gate_exit_code": $gate_rc,
   "read_only": true

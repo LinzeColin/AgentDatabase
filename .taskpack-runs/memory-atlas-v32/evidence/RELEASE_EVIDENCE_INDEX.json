@@ -1,10 +1,10 @@
 {
   "schema_version": "memory_atlas.release_evidence.v1",
-  "captured_at": "2026-08-05T01:52:42Z",
-  "head_commit": "377b8776adfd742a68c6f91e700ff155bda7daa9",
+  "captured_at": "2026-08-05T01:56:31Z",
+  "head_commit": "a45a2eb636dc2c76bebf00300efc23397d5c3994",
   "deployed_release": "20260805T014451Z-377b8776adfd",
-  "identity_matches": true,
-  "gap_count": 0,
+  "identity_matches": false,
+  "gap_count": 1,
   "dimensions": [
     {
       "dimension": "真实用户黄金事务",
@@ -88,12 +88,12 @@
     {
       "dimension": "OVH 运行与部署",
       "measured": {
-        "head": "377b8776adfd742a68c6f91e700ff155bda7daa9",
+        "head": "a45a2eb636dc2c76bebf00300efc23397d5c3994",
         "deployed_release": "20260805T014451Z-377b8776adfd",
-        "same_commit": true
+        "same_commit": false
       },
       "artefact": "capture-manifest.json",
-      "state": "PASS"
+      "state": "GAP"
     },
     {
       "dimension": "Cloudflare Access／路由／缓存",
@@ -101,7 +101,7 @@
         "status_projection": "PASS",
         "status_schema": "memory_atlas.status_projection.v1"
       },
-      "artefact": "status-projection.json",
+      "artefact": "status-projection.summary.json",
       "state": "PASS"
     },
     {
@@ -130,9 +130,10 @@
         "served_atlas_generated_at": "2026-08-05T01:52:07.447Z",
         "codex_session_count": 514,
         "nodes": 552,
-        "edges": 1723
+        "edges": 1723,
+        "sha256": "396b37210981436d1e005aa17c84469167ecd787feb00135cff583cc29deb3f9"
       },
-      "artefact": "served-atlas.json",
+      "artefact": "served-atlas.summary.json",
       "state": "PASS"
     }
   ],
