@@ -1,0 +1,46 @@
+{
+  "seat": "F",
+  "seat_type": "no-rubric",
+  "round": 2,
+  "persona": "henry-clifton-sorby",
+  "persona_id": 133,
+  "payload": "evals/round2/blind_blind_payload.json",
+  "scale": "0-1, 2 decimals, per side per case, independently assigned",
+  "basis": "no rubric read; judged solely on 'does this sound like Henry Clifton Sorby himself speaking'",
+  "corpus_access": false,
+  "quote_verification": "NOT PERFORMED - this seat has no corpus. Quotes were checked only for internal coherence, never for truth.",
+  "scores": [
+    { "case_id": "q-01", "A": 0.72, "B": 0.63 },
+    { "case_id": "q-02", "A": 0.82, "B": 0.78 },
+    { "case_id": "q-03", "A": 0.84, "B": 0.83 },
+    { "case_id": "q-04", "A": 0.90, "B": 0.55 },
+    { "case_id": "q-05", "A": 0.62, "B": 0.58 },
+    { "case_id": "q-06", "A": 0.88, "B": 0.76 },
+    { "case_id": "q-07", "A": 0.42, "B": 0.90 },
+    { "case_id": "q-08", "A": 0.66, "B": 0.92 },
+    { "case_id": "q-09", "A": 0.35, "B": 0.90 },
+    { "case_id": "q-10", "A": 0.90, "B": 0.76 },
+    { "case_id": "q-11", "A": 0.88, "B": 0.80 },
+    { "case_id": "q-12", "A": 0.88, "B": 0.82 },
+    { "case_id": "q-13", "A": 0.72, "B": 0.84 },
+    { "case_id": "q-14", "A": 0.92, "B": 0.72 },
+    { "case_id": "q-15", "A": 0.90, "B": 0.48 },
+    { "case_id": "q-16", "A": 0.90, "B": 0.74 }
+  ],
+  "summary": {
+    "n_cases": 16,
+    "sum_A": 12.31,
+    "sum_B": 12.01,
+    "mean_A": 0.77,
+    "mean_B": 0.75,
+    "delta_A_minus_B": 0.02,
+    "note": "Side means are near-identical because A/B are flipped per case; the per-case spread is what carries signal. Largest per-case gaps: q-09 (0.55), q-07 (0.48), q-15 (0.42), q-04 (0.35)."
+  },
+  "self_check": {
+    "all_16_present": true,
+    "two_decimals": true,
+    "both_sides_read_before_scoring": true,
+    "arithmetic_recomputed": true,
+    "no_side_identity_inferred": true
+  }
+}

@@ -65,9 +65,38 @@ def normalize(a_raw: float, b_raw: float) -> tuple:
     return a_raw, b_raw
 
 
+def unwrap_scores(raw):
+    """把各种外包装剥掉，统一成 {qid: {"A":…, "B":…}}。
+
+    ★★★ Sorby #133 第 2 轮实测：四席里**两席自己加了元数据外壳**——
+
+        {"seat": "F", "seat_type": "no-rubric", …, "scores": {…}}
+        {"seat": "G", …, "scores": [{"case_id": "q-01", "A": .82, "B": .66}, …]}
+
+    而本件原先只认「顶层直接是 qid→分数」。那两席**被整席静默丢掉**，
+    `席数` 印成 2，**delta 变成只由喂了判据的两席算出来的 +0.2484**，
+    而且三档门全绿。**差一点就把它当成「Sorby 过了 deep」报出去。**
+
+    ★ 评委是独立子代理，**它们写什么形状不由我控制**；
+      判据必须认得住常见外壳，认不住就要**响亮地失败**（见下面的 0 行检查）。
+    """
+    if isinstance(raw, dict) and "scores" in raw:
+        raw = raw["scores"]
+    if isinstance(raw, list):                    # [{"case_id": …, "A": …, "B": …}]
+        out = {}
+        for r in raw:
+            if isinstance(r, dict):
+                cid = r.get("case_id") or r.get("qid") or r.get("id")
+                if cid:
+                    out[str(cid)] = r
+        return out
+    return raw if isinstance(raw, dict) else {}
+
+
 def read_seat(raw: dict, key: dict, seat: str, suite_of: dict) -> list:
     """一席的原始打分 → 逐对记录。key 决定哪一侧是候选。"""
     out = []
+    raw = unwrap_scores(raw)
     for qid, v in raw.items():
         if qid.startswith("_") or qid not in key:
             continue
@@ -263,7 +292,17 @@ def main() -> int:
         f = rd / fn
         if not f.is_file():
             print(f"⚠ {fn} 不在"); continue
-        rows += read_seat(json.loads(f.read_text(encoding="utf-8")), key, seat, suite_of)
+        got = read_seat(json.loads(f.read_text(encoding="utf-8")), key, seat, suite_of)
+        if not got:
+            # ★★★ **点了名的席位一行都读不出来 = 硬失败，不许静默跳过。**
+            #   静默跳过的后果不是「少一席」，是**剩下的席位恰好同质**——
+            #   本例剩下的正是两席喂了判据的，delta 从 −0.02 变成 +0.2484，三档门全绿。
+            #   「空默认值吞掉不知道」：0 行被读成「这席没意见」。
+            print(f"✗ **{fn} 一行都没读出来**——点了名的席位不许静默跳过。")
+            print(f"   顶层键：{sorted(json.loads(f.read_text(encoding='utf-8')))[:8]}")
+            print("   要么它的形状本件不认（补 `unwrap_scores`），要么题号对不上揭盲键。")
+            return 4
+        rows += got
 
     s = summarize(rows)
     real = {q: v["case_id"] for q, v in key.items()}
