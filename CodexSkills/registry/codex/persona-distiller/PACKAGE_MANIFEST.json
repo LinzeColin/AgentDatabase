@@ -4,7 +4,7 @@
   "display_name": "人物蒸馏 Skill / Persona Distiller",
   "distribution": {
     "canonical_registry": "../persona-distiller-group",
-    "kind": "repository-customized-v0.0.0.141",
+    "kind": "repository-customized-v0.0.0.142",
     "lineage_base_archive_sha256": "e891912d98d14afb7677ac935a19be329d97d206f4ae74a644892f46b17f6748"
   },
   "evaluation_suites": 16,
@@ -16,8 +16,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "f7e8e60cce1c584509b70686364520073c7428ba7c750064d31282ffd3d5a5c0",
-      "size_bytes": 299696
+      "sha256": "01d84d7231ed3e698af129671be636aa127f329aaf90e9ce39efec376915248b",
+      "size_bytes": 302116
     },
     {
       "path": "CONTRIBUTING.md",
@@ -31,7 +31,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "1de33c5187ad7ba3c205f35d08fd86adcf185c1096806682e000751fe62e70f7",
+      "sha256": "0ba40625d9de6f353db29918bcdaf68f0c9d13a00fa2dfc01341ad04b6ff9b63",
       "size_bytes": 8803
     },
     {
@@ -56,12 +56,12 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "4612bb942163537d638e9ea5a00dd39287c8d34929c8ef0443ca782232a9ba00",
+      "sha256": "89f96f051fffc49a4a8adbe249ee8539d638f4f6708e3072021e81f2701be4df",
       "size_bytes": 124639
     },
     {
       "path": "VERSION",
-      "sha256": "bf84630c658979e25debb30ce13565cf8c4f406288e4407b7cc8ccbc7b604579",
+      "sha256": "3b63cbec11677cc7f6e3849dd77315ffb98d69d4075e98a2e6462bd8ae913e65",
       "size_bytes": 11
     },
     {
@@ -121,7 +121,7 @@
     },
     {
       "path": "handoff.md",
-      "sha256": "e6ec9f9faa1b2227927eb6b7d472acf8f405d4f64fa2c53614dbbabde53665ac",
+      "sha256": "0ecef23bd9cca7889ed2b655cb69d91c7b1691aa990585f68d01a59c1ee61ad9",
       "size_bytes": 3703
     },
     {
@@ -141,7 +141,7 @@
     },
     {
       "path": "manifest.json",
-      "sha256": "9828caf1dd6d42e30f9bc4ea8f3d2e17e07f8c28d9fed73c044e77fd4fde8157",
+      "sha256": "9065e7179ee8afadc4a5872193d8f110adc65b4a3ed5b8b7ece933ba324d28ad",
       "size_bytes": 1192
     },
     {
@@ -376,8 +376,8 @@
     },
     {
       "path": "references/ledgers/_待用户裁定.md",
-      "sha256": "f19fc01127f68ec1aad00fff672083cba05ed5b22861256956efa4dff3697b14",
-      "size_bytes": 111969
+      "sha256": "96751a66f8ef44670f3961488e545f9a4127b489b22273bb5da9c1c9fb0d0a5c",
+      "size_bytes": 115120
     },
     {
       "path": "references/ledgers/_每次开工必读.md",
@@ -1405,6 +1405,11 @@
       "size_bytes": 12737
     },
     {
+      "path": "scripts/diag_rubric_gloss_overlap.py",
+      "sha256": "5b6f650868fe3cd8f29dccfd5722910b9d1ba60029ed1886d72767187edc8ab6",
+      "size_bytes": 8023
+    },
+    {
       "path": "scripts/eval_runner.py",
       "sha256": "0aeb5f1cc83569d53f8a6c475bc93f9f07ee72a2c1b2766c46bfaf81336fa690",
       "size_bytes": 14056
@@ -2056,5 +2061,5 @@
     },
     "secret_findings": 0
   },
-  "version": "v0.0.0.141"
+  "version": "v0.0.0.142"
 }
