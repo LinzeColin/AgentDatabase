@@ -48,6 +48,32 @@ LANG_MIN_WORDS = 500             # 与 check_ocr_language_death 的下限同源
 _WORD = re.compile(r"[A-Za-zÀ-ÿĀ-ſ]{2,}")
 
 
+SEP = "=" * 80          # ingest 写的「来源声明 / 正文」分隔线
+
+
+def body_of(text: str) -> str:
+    """→ 正文（去掉 ingest 写在文件头的来源声明）。
+
+    ## ★★★ v0.0.0.144：**这段声明头是我自己写的样板，不是语料**
+
+    每份语料开头都有一段 `SOURCE:／IN:／URL:／RIGHTS:／IDENTITY EVIDENCE…` 的声明，
+    **中位 277 个英文词**（最小 157、最大 284）。原来的算法拿**整份文件**数词，
+    于是这 277 个词把一批短源顶过了 `LANG_MIN_WORDS = 500`。
+
+    Adams #131 实测，同一套「字符≥500 且 词<500」的条件：
+
+        按整份文件数： **25 份**在带内
+        按正文数：     **42 份**在带内
+
+    **17 份被我自己写的样板藏了起来**——而这道判据的全部意义就是
+    「有多少份语料没有任何判据看过它的内容」。**样板把覆盖缺口报小了四成。**
+
+    ★ 它是怎么被发现的：判据报 27、我手算 31，**两个数不一致就是有一个错了**。
+      追下去发现两边都对自己那套定义是自洽的，**错的是判据的定义**。
+    """
+    return text.split(SEP, 1)[1] if SEP in text else text
+
+
 def scan(paths: list) -> dict:
     files = []
     for p in paths:
@@ -67,7 +93,9 @@ def scan(paths: list) -> dict:
             t = f.read_text(encoding="utf-8", errors="replace")
         except Exception:                                         # noqa: BLE001
             continue
-        n_chars, n_words = len(t), len(_WORD.findall(t))
+        # ★ 只数正文：来源声明头是样板，不是语料（见 body_of 的说明）
+        b = body_of(t)
+        n_chars, n_words = len(b), len(_WORD.findall(b))
         if n_chars < PLACEHOLDER_MIN_CHARS:
             too_short += 1                     # 连 non_placeholder 都过不了，别的门会说话
         elif n_words < LANG_MIN_WORDS:
@@ -96,6 +124,30 @@ def scan(paths: list) -> dict:
 
 
 def self_test() -> int:
+    ok_hdr = True
+
+    def _chk(msg, cond):
+        nonlocal ok_hdr
+        ok_hdr = ok_hdr and bool(cond)
+        print(("  ✓ " if cond else "  ✗ ") + msg)
+
+    print("── ★★★ 来源声明头不算语料（v0.0.0.144）──")
+    head = ("SOURCE: Discussion remarks\nIN: Transactions\nURL: http://x\nRIGHTS: pre1929\n"
+            + "boilerplate word " * 150 + "\n" + "=" * 80 + "\n")
+    short_body = "real corpus content here " * 20          # 约 80 词
+    _chk(f"声明头本身有 {len(_WORD.findall(head))} 词（足以顶过 500）",
+         len(_WORD.findall(head)) > 250)
+    b = body_of(head + short_body)
+    _chk(f"body_of 切掉声明头后只剩 {len(_WORD.findall(b))} 词",
+         len(_WORD.findall(b)) < 200)
+    _chk("★ 反向对照：没有分隔线的文件原样返回",
+         body_of("no separator here") == "no separator here")
+    _chk("★★ 反向对照：分隔线出现两次时只切第一次（正文里也可能有等号线）",
+         body_of("h\n" + "=" * 80 + "\nA\n" + "=" * 80 + "\nB").strip().startswith("A"))
+    if not ok_hdr:
+        print("  ✗ 声明头相关自测未过")
+        return 2
+
     ok = True
 
     def chk(m, c):
