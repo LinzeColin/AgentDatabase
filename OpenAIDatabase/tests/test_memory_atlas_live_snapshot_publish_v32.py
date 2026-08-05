@@ -857,3 +857,46 @@ def test_a_plain_missing_tier_b_source_is_named_but_does_not_block() -> None:
     assert snapshot["coverage"]["product_state"] == "PASS"
     assert "来源0" in snapshot["freshness"]["reason_zh"]
     assert snapshot["coverage"]["tier_b_local_optional"]["missing"] == 1
+
+
+def test_a_code_fix_may_change_what_a_run_concludes(tmp_path) -> None:
+    """The rule is "the same run under the same code may not change its
+    conclusions". Without the commit in the fingerprint it read as "may never
+    change", and it blocked a correction: fixing the truncated event union made
+    run marun_d8019f8 legitimately conclude 127,712 instead of 114,024, and the
+    store refused to publish the fix."""
+    store = _store(tmp_path)
+    before = _snapshot()
+    store.publish(before)
+    after = json.loads(json.dumps(before))
+    after["analysis"]["event_count"] = before["analysis"]["event_count"] + 13_688
+    after["release"]["repository_commit"] = "d0c50b50" + "0" * 32
+    assert store.publish(after)["state"] == "REFRESHED"
+
+
+def test_the_same_run_under_the_same_code_still_may_not_change(tmp_path) -> None:
+    # The guarantee this protects, unchanged.
+    store = _store(tmp_path)
+    store.publish(_snapshot())
+    rewritten = json.loads(json.dumps(_snapshot()))
+    rewritten["analysis"]["event_count"] += 1
+    with pytest.raises(Exception, match="immutable history conflict"):
+        store.publish(rewritten)
+
+
+def test_the_first_derivation_of_a_run_stays_on_the_record(tmp_path) -> None:
+    """A re-derivation must not overwrite what the run first concluded — that is
+    the whole point of immutable history. It gets its own object instead."""
+    store = _store(tmp_path)
+    before = _snapshot()
+    store.publish(before)
+    after = json.loads(json.dumps(before))
+    after["analysis"]["event_count"] = 127_712
+    after["release"]["repository_commit"] = "d0c50b50" + "0" * 32
+    store.publish(after)
+
+    history = sorted(p.name for p in (tmp_path / "history").glob("*.json"))
+    run_id = before["run"]["run_id"]
+    assert history == [f"{run_id}.d0c50b500000.json", f"{run_id}.json"]
+    first = json.loads((tmp_path / "history" / f"{run_id}.json").read_text(encoding="utf-8"))
+    assert first["analysis"]["event_count"] == before["analysis"]["event_count"]

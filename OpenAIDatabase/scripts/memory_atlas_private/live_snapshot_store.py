@@ -50,6 +50,12 @@ _VOLATILE_KEYS = frozenset(
 _LEDGER_KEYS = frozenset({"failure_compound"})
 _CONCLUSION_KEYS = ("analysis", "visuals", "decision", "benchmarks")
 _RUN_IDENTITY_KEYS = ("run_id", "trace_id", "source_state", "source_completed_at")
+# The rule is "the same run under the same code may not change its conclusions".
+# Without the commit it read as "may never change", which blocked a correction:
+# fixing the truncated event union made run marun_d8019f8 legitimately conclude
+# 127,712 instead of 114,024, and the store refused to publish the fix. A silent
+# change under identical code still conflicts, which is what this protects.
+_DERIVATION_KEY = "repository_commit"
 
 
 def _strip_volatile(value: Any) -> Any:
@@ -68,6 +74,7 @@ def _conclusion_parts(snapshot: Mapping[str, Any]) -> dict[str, str]:
     """Per-part digests, so a conflict can name what actually differs."""
     run = snapshot.get("run") or {}
     core: dict[str, Any] = {key: run.get(key) for key in _RUN_IDENTITY_KEYS}
+    core[_DERIVATION_KEY] = (snapshot.get("release") or {}).get(_DERIVATION_KEY)
     for key in _CONCLUSION_KEYS:
         core[key] = snapshot.get(key)
     return {
@@ -154,7 +161,16 @@ class LiveSnapshotStore:
         self.validate(snapshot)
         data = _canonical(snapshot)
         identity = _identity(snapshot)
+        # A run re-derived under different code is a different derivation, not a
+        # rewritten one. The first derivation keeps `<run_id>.json` untouched
+        # and later ones get their own object, so both stay on the record and
+        # the conflict check only fires for the same run under the same code.
+        derivation = str((snapshot.get("release") or {}).get("repository_commit") or "")[:12]
         history = self.history / f"{identity['run_id']}.json"
+        if history.exists() and derivation:
+            first = json.loads(history.read_text(encoding="utf-8"))
+            if str((first.get("release") or {}).get("repository_commit") or "")[:12] != derivation:
+                history = self.history / f"{identity['run_id']}.{derivation}.json"
         if history.exists():
             # The byte comparison this replaced made every re-reconcile of an
             # unchanged source run a conflict, so `current.json` stopped being
@@ -173,7 +189,8 @@ class LiveSnapshotStore:
             _atomic(history, data)
         digest = hashlib.sha256(data).hexdigest()
         if current and current["run"]["run_id"] == identity["run_id"]:
-            if _conclusion_fingerprint(current) != _conclusion_fingerprint(snapshot):
+            same_code = str((current.get("release") or {}).get(_DERIVATION_KEY) or "")[:12] == derivation
+            if same_code and _conclusion_fingerprint(current) != _conclusion_fingerprint(snapshot):
                 raise SnapshotStoreError(
                     f"same run changed after publication: {_conclusion_diff(current, snapshot)}"
                 )
