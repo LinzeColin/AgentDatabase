@@ -2615,7 +2615,12 @@ def run_rubric_health(report, target: Path) -> None:
         return
     info: dict[str, Any] = {}
     for name, mod_name in (('抄答案', 'check_rubric_copies_answer'),
-                           ('要求出戏', 'check_persona_frame_break')):
+                           ('要求出戏', 'check_persona_frame_break'),
+                           # ★ 席 F 与席 G 在 Sorby #133 第 2 轮**各自独立**指出：
+                           #   答案声明「照印本录，一字不改」，随即录出 `immu- nity`、
+                           #   `balf`、`wbat`——印本不可能有这些。**两句话自己打架，
+                           #   不需要语料就能判**（评委正是在没有语料的条件下抓到的）。
+                           ('忠实度自相矛盾', 'check_fidelity_claim_vs_artifacts')):
         script = here / f'{mod_name}.py'
         if not script.exists():
             info[name] = '判据未安装，**未核验**（不是通过）'
@@ -2633,6 +2638,16 @@ def run_rubric_health(report, target: Path) -> None:
                     '占比': z.get('占比'),
                     '★': ('冻结指令写着「中译与压缩也算抄」；上一层只比英文，'
                           '**中文要 12 个字才够**，实测违规在 3–5 字之间'),
+                }
+            elif name == '忠实度自相矛盾':
+                r = mod.check(cand)
+                z = r.get('**声明与痕迹同现**') or {}
+                info[name] = {
+                    '题数': len(z),
+                    '逐题': sorted(z),
+                    '★': ('声称逐字忠实于**印本**，却展示只有影印/OCR 才有的痕迹——'
+                          '要么「照印本录」这句错了，要么引文被动过。**只报不拦**：'
+                          '改法涉及引文，改哪一头由人定。'),
                 }
             else:
                 r = mod.check(cand, rubrics, prompts)

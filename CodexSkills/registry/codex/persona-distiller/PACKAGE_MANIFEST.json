@@ -56,7 +56,7 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "34afe3f3fc4f8665bfbbdfe5c147fc32e0d4fdeb50f4aef0a398fb73dcdee6a8",
+      "sha256": "10a6a9c7160dd00badec94cf47caeaba1fcb7c5a894a4446c91c01b2a2d16859",
       "size_bytes": 133612
     },
     {
@@ -598,6 +598,11 @@
       "path": "references/pipeline/checkers/check_fact_density.py",
       "sha256": "72cb5a7b4fd357016ccf2a2a42733f122818c64719eca87af35412043ce7bdf3",
       "size_bytes": 28136
+    },
+    {
+      "path": "references/pipeline/checkers/check_fidelity_claim_vs_artifacts.py",
+      "sha256": "a9e68c110e7cd924c963d7c20223981247a8943f16515e1637a30ab4326267ee",
+      "size_bytes": 7008
     },
     {
       "path": "references/pipeline/checkers/check_first_person_density.py",
@@ -1225,6 +1230,11 @@
       "size_bytes": 28136
     },
     {
+      "path": "scripts/check_fidelity_claim_vs_artifacts.py",
+      "sha256": "a9e68c110e7cd924c963d7c20223981247a8943f16515e1637a30ab4326267ee",
+      "size_bytes": 7008
+    },
+    {
       "path": "scripts/check_first_person_density.py",
       "sha256": "cada0c9db132fb8ebd3803bf90735a9fdee1fcfd0af5436f27adf99ce6aef450",
       "size_bytes": 15546
@@ -1526,8 +1536,8 @@
     },
     {
       "path": "scripts/quality_check.py",
-      "sha256": "6aa8baebf8726e2e25dc34cbeb5ddcabbb7e75e31bfb20b9998ce9976e538a31",
-      "size_bytes": 173967
+      "sha256": "acd7c5838a2a45d8e2eb9c6041a90d0fb797a8c2675d58d00aafff4c8837ba84",
+      "size_bytes": 175059
     },
     {
       "path": "scripts/register_persona.py",
