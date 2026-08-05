@@ -56,7 +56,7 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "e1d123808b8ff15153583f374c745ecbd04c9308ecde690a40871f3994515881",
+      "sha256": "b39f29f50d4eeadca61ea19d49e854ffc4a2c9f8223c53687f8c7f11a4dc2228",
       "size_bytes": 132099
     },
     {
@@ -376,8 +376,8 @@
     },
     {
       "path": "references/ledgers/_待用户裁定.md",
-      "sha256": "77d84128691c283e81b536054b0505d3c0fc2564f62d64aeb5fc37a922afbf8c",
-      "size_bytes": 139042
+      "sha256": "76cf845079eb7136c3c4d483b40b7c3b9bb0cd3acfaf83b82ab2afee7274b734",
+      "size_bytes": 141828
     },
     {
       "path": "references/ledgers/_每次开工必读.md",
@@ -810,6 +810,11 @@
       "size_bytes": 20407
     },
     {
+      "path": "references/pipeline/checkers/next_person.py",
+      "sha256": "957d8693c97c5a173894c47fc34662ecadac56c6a9c3204d02313096a358cbca",
+      "size_bytes": 22356
+    },
+    {
       "path": "references/pipeline/checkers/package_target.py",
       "sha256": "547388888727336965022612ddbb6a18e58f93f00ae651620626dc1dc59e6338",
       "size_bytes": 24705
@@ -911,8 +916,8 @@
     },
     {
       "path": "references/pipeline/next_person.py",
-      "sha256": "b77ba96af35f865ac529e57f709a2b017c033e81977bc1164dbf88d7ef3e66bc",
-      "size_bytes": 21888
+      "sha256": "957d8693c97c5a173894c47fc34662ecadac56c6a9c3204d02313096a358cbca",
+      "size_bytes": 22356
     },
     {
       "path": "references/pipeline/scaffold/README.md",
