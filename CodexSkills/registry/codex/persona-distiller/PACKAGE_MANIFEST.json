@@ -16,8 +16,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "b2251d548ede38233c4b5b4e94a5a38259cad51f18e1bbc24ae7c187b1927435",
-      "size_bytes": 278408
+      "sha256": "088a03b1d664013ea0d4d58b41364c95d15666b03d4d7060fe11efdc99f86ffd",
+      "size_bytes": 282047
     },
     {
       "path": "CONTRIBUTING.md",
@@ -601,8 +601,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_first_person_density.py",
-      "sha256": "45ed66ac93bc8446283a170ef57fcfc9d4bec973e7cab341f55f7ba90f292ab7",
-      "size_bytes": 9159
+      "sha256": "cada0c9db132fb8ebd3803bf90735a9fdee1fcfd0af5436f27adf99ce6aef450",
+      "size_bytes": 15546
     },
     {
       "path": "references/pipeline/checkers/check_gate_reachability.py",
@@ -796,8 +796,8 @@
     },
     {
       "path": "references/pipeline/checkers/quality_check.py",
-      "sha256": "ba90d12b473a6538ef59ab78e517df242a1e0d4295f9add43dbd73fa8fa4618a",
-      "size_bytes": 150878
+      "sha256": "cac9322de73aabb9d9490d62a3c1c9334f606d4c7046593a2cbf78468c752197",
+      "size_bytes": 154412
     },
     {
       "path": "references/pipeline/checkers/show_fetch_distance.py",
@@ -1191,8 +1191,8 @@
     },
     {
       "path": "scripts/check_first_person_density.py",
-      "sha256": "45ed66ac93bc8446283a170ef57fcfc9d4bec973e7cab341f55f7ba90f292ab7",
-      "size_bytes": 9159
+      "sha256": "cada0c9db132fb8ebd3803bf90735a9fdee1fcfd0af5436f27adf99ce6aef450",
+      "size_bytes": 15546
     },
     {
       "path": "scripts/check_gate_reachability.py",
@@ -1461,8 +1461,8 @@
     },
     {
       "path": "scripts/quality_check.py",
-      "sha256": "37c4cc8f069860dc329fc73d608ecdcc0acb11ca17ce1e24b8b596032ddee952",
-      "size_bytes": 151448
+      "sha256": "cac9322de73aabb9d9490d62a3c1c9334f606d4c7046593a2cbf78468c752197",
+      "size_bytes": 154412
     },
     {
       "path": "scripts/register_persona.py",

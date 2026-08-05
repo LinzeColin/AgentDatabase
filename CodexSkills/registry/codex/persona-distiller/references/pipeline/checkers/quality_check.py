@@ -924,6 +924,42 @@ def run_corpus_text_checks(report, target: Path, cache_dirs: list[str]) -> None:
         else:
             review['research_quote'] = f'✓ 研究文档每条逐字引文都在语料中（{n}）'
 
+    # ── v0.0.0.137：**声口密度**（只报不拦）────────────────────────────────
+    #   Coffin #130 撞出来的：三道门全过（18 源 / 3 道 / 一手 83.3%）、研究门 16 errors → 0，
+    #   **而 172,138 字符里他自己说的实质的话只有 15 句**——18 份里 14 份是专利说明书，
+    #   文体决定了几乎全是第三人称装置描述加权利要求样板。
+    #   ★ `min_sources`/`min_lanes`/`min_primary_ratio` 三个门量的都是**来源的属性**，
+    #     没有一个量「语料里有多少句是他说的」。
+    #     一份 30k 字的专利和一段 300 字的答辩，在门那里**一样是 1 份 P1 writings**。
+    #   ★★ 所以它必须在**研究门**就报：等到判分才发现无话可引，
+    #     中间那一整轮断言与用例都白写了。**只报不拦**——
+    #     分析型/第三人称产物本来就不靠第一人称，够不够取决于要出哪些用例。
+    rc, out = run('check_first_person_density.py', [str(target / 'raw')])
+    if rc == -1:
+        review['first_person_density'] = 'check_first_person_density.py 未安装，**未核验**（不是通过）'
+    else:
+        try:
+            d = json.loads(out)
+            n = d.get('**实质第一人称句**')
+            dens = d.get('**密度（每万字）**')
+            review['first_person_density'] = {
+                '实质第一人称句': n, '密度/万字': dens,
+                '正文字符': d.get('正文字符'),
+                '★ 口径': '**只报不拦**。参照：Coffin #130 = 15 句 / 0.87，三道门全过而声口不够，已记延后。',
+            }
+            if isinstance(n, int) and isinstance(dens, (int, float)) and dens < 1.0:
+                # ★★★ **不许走 `report.warn`。** 我第一版这么写了，同时在注释里写着「只报不拦」——
+                #   **注释与代码不一致**：`package_target` 的 strict 发布门下 **warning 也会拦**，
+                #   于是它拦掉了 3 个合成夹具（正文里本来就 0 句第一人称），全量测试 5 红。
+                #   「只报不拦」的意思是**只进 metrics**，不进 warnings、不进 errors。
+                review['first_person_density']['⚠ 声口薄'] = (
+                    f'**{dens}/万字（实质第一人称 {n} 句）**——门量的是来源不是声口。'
+                    f'`voice`/`trajectory`/`contrast` 这类要他谈自己的题很可能无据；'
+                    f'出题前先看 `references/research/` 里有没有他开口说话的材料。'
+                    f'★ 参照 Coffin #130：15 句 / 0.87，三道门全过而声口不够，已记延后。')
+        except Exception as exc:                                    # noqa: BLE001
+            review['first_person_density'] = f'输出解析失败，**未核验**：{exc}'
+
 
 def run_content_checks(report, target: Path, cache_dirs: list[str]) -> None:
     """把内容层检查接进发布门（v0.0.0.8 新增）。
@@ -1408,6 +1444,12 @@ def run_authorship_gate(report, target: Path, meta: dict[str, Any],
         #   （十二个姓 Thompson，另有 Nash／Smith／Jones／Thoms）。
         #   ★ 取自 `meta.json` 的 `known_namesakes`（没有就是空，**空不等于安全，只等于没声明**）。
         patterns["namesakes"] = tuple(meta.get("known_namesakes") or ())
+        #   ★★ 中名首字母：**同姓的同名者，姓的编辑距离一个也挡不住**。
+        #   Coffin #130 实测（护栏加之前）：`Charles A. Coffin.`（GE 首任总裁）被当成
+        #   `Charles L. Coffin`（电弧焊发明人）的署名**放行**，而他自己惯用的
+        #   `C. L. Coffin.` 反而**拦下**——两个方向同时错。
+        #   取自 `meta.json` 的 `middle_initial`；**没声明就退回 v0.0.0.136 的射程**。
+        patterns["own_mid"] = str(meta.get("middle_initial") or "").strip().lower()[:1]
         # ★ 单作者站点报头（如 seths.blog 的 `| Seth's Blog`）作为第四类归属证据。
         #   声明放在 meta.json 的 `single_author_masthead`，**不是命令行开关**——
         #   它必须随工作区走、可审计、且事后能被复核。
