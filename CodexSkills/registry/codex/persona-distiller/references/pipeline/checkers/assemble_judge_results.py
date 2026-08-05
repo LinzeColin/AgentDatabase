@@ -242,6 +242,29 @@ def selftest() -> int:
     print("── 反向对照 ⑤：套组 delta 按套组分开算，不许全归一个桶 ──")
     chk(f"两个套组各有数：{sorted(s['suites'])}", len(s["suites"]) == 2)
 
+    print("\n── ★★★ 外壳：评委自己加的 metadata 不许把整席吞掉 ──")
+    #   Sorby #133 第 2 轮实测：F/G 两席各自加了外壳，本件**整席静默丢掉**，
+    #   `席数` 印成 2，而剩下的恰好都是喂了判据的那档 → delta 从 −0.16 变 +0.25、三档门全绿。
+    key, suite_of, raw = _fixture(1.0)
+    wrapped_dict = {"seat": "F", "seat_type": "no-rubric", "scores": raw}
+    wrapped_list = {"seat": "G", "n_cases": 4,
+                    "scores": [{"case_id": q, "A": v[0], "B": v[1]} for q, v in raw.items()]}
+    r_plain = summarize(read_seat(raw, key, "s", suite_of))
+    r_dict = summarize(read_seat(wrapped_dict, key, "s", suite_of))
+    r_list = summarize(read_seat(wrapped_list, key, "s", suite_of))
+    chk(f"`scores` 里裹一层 dict：delta {r_dict['delta']:+.4f}（与裸的逐位相同）",
+        abs(r_dict["delta"] - r_plain["delta"]) < 1e-12 and r_dict["n"] == r_plain["n"])
+    chk(f"`scores` 里裹一层 list：delta {r_list['delta']:+.4f}（与裸的逐位相同）",
+        abs(r_list["delta"] - r_plain["delta"]) < 1e-12 and r_list["n"] == r_plain["n"])
+
+    print("\n── ★★ 反向对照：认不出的形状必须**读出 0 行**，让调用方硬失败 ──")
+    #   认不住可以，**静默当成「这席没意见」不可以**。
+    #   main() 见到 0 行会 exit 4 并印出顶层键；这里只验「确实是 0 行」。
+    chk("完全陌生的形状 → 0 行（而不是猜着读出几行）",
+        len(read_seat({"totally": "unknown", "shape": [1, 2]}, key, "s", suite_of)) == 0)
+    chk("题号对不上揭盲键 → 0 行",
+        len(read_seat({"zzz-99": {"A": .8, "B": .7}}, key, "s", suite_of)) == 0)
+
     print(f"\n{'✓ 自测全过' if not fails else f'✗ **{len(fails)} 项未过**'}")
     return 0 if not fails else 2
 
