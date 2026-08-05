@@ -88,3 +88,37 @@ delta             +0.2922   门 ≥0.03  ✅
   它属于「用能引的东西替代被问的东西」，是**同一条批评连提三轮而我只改了别处**。
 - **q-02 的判据自相矛盾**（失败条件禁人名 vs 加分项要说当年做法）——指令已冻结，本人物不改。
 - **ca-long-horizon-01 的必答项两侧无一答出**（席 E 疑它把 tool-use 的判据搬错了）——该题分差不承载信息。
+
+---
+
+## 补：上文那句「13 个人物的门读的都是有 rubric 那两席」——结论对，我的依据错了
+
+写那句话时我的依据是**两条**：① `results.jsonl` 的 `judge_id` 全是
+`seat-D-score-v1`/`seat-E-strict-v1`；② `judge_prompts/v1.md` 里有逐题 rubric。
+
+**第 ② 条站不住**：全仓只有 **3 个**工作区有 `judge_prompts/v1.md`
+（Adams、Carver、Thomson）。其余 11 人**根本没有那个文件**。
+
+回去逐个数 `cases.jsonl` 才把它坐实：
+
+```
+comfort-avery-adams  16 题 / 16 题带 rubric / 16 条非空
+clara-barton         32 / 32 / 32      elizabeth-blackwell  32 / 32 / 32
+alexander-fleming    32 / 32 / 32      seth-godin           32 / 32 / 32
+ws-jenner            34 / 34 / 34      robert-koch          32 / 32 / 32
+joseph-lister        32 / 32 / 32      gregor-mendel        16 / 16 / 16
+florence-nightingale 32 / 32 / 32      william-osler        32 / 32 / 32
+louis-pasteur        32 / 32 / 32      michael-steinhardt   32 / 32 / 32
+elihu-thomson        16 / 16 / 16      rudolf-virchow       32 / 32 / 32
+```
+
+**逐题 rubric 是写在 `cases.jsonl` 里的，每个有用例的人物都有，且条条非空。**
+所以「发布门读的是拿着逐题 rubric 打出来的分」这句**是对的**，
+只是我先前指的那个文件位置**不是它真正待的地方**。
+
+★ 与今天早些时候那条教训同形：**结论碰巧对，不等于我的依据是对的**——
+而「碰巧对」会让人不去查依据。**这一条我自己当天就又犯了一次。**
+
+★★ 另需缩小的一句：**「两把尺子」这个对照只在 3 个人物上做过**
+（Carver、Thomson、Adams），**不是 13 个**。其余 11 人从未跑过无 rubric 协议，
+他们的分**没有第二把尺子可以对照**——那是「未测量」，不是「测过且一致」。
