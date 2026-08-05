@@ -1,9 +1,9 @@
 {
   "schema_version": "memory_atlas.release_evidence.v1",
-  "captured_at": "2026-08-05T02:27:35Z",
-  "head_commit": "0026c28e4228b416a449e0544e6fd519f59ce52e",
-  "last_code_commit": "0026c28e4228b416a449e0544e6fd519f59ce52e",
-  "deployed_release": "20260805T021906Z-0026c28e4228",
+  "captured_at": "2026-08-05T02:41:58Z",
+  "head_commit": "4a24a0feeb9a36ad9e88ce00170546025f67b048",
+  "last_code_commit": "4a24a0feeb9a36ad9e88ce00170546025f67b048",
+  "deployed_release": "20260805T023349Z-4a24a0feeb9a",
   "identity_matches": true,
   "gap_count": 0,
   "dimensions": [
@@ -12,7 +12,7 @@
       "measured": {
         "run_id": "marun_d8019f85ea1cda749470ece6",
         "trace_id": "marun_d8019f85ea1cda749470ece6",
-        "release_id": "20260805T021906Z-0026c28e4228",
+        "release_id": "20260805T023349Z-4a24a0feeb9a",
         "identity_state": "OBSERVED",
         "artifact_digest_present": true
       },
@@ -23,7 +23,7 @@
       "dimension": "增量采集与数据新鲜度",
       "measured": {
         "state": "FRESH",
-        "age_seconds": 13973,
+        "age_seconds": 14826,
         "target_seconds": 97200,
         "source_completed_at": "2026-08-04T22:34:36+00:00"
       },
@@ -89,9 +89,9 @@
     {
       "dimension": "OVH 运行与部署",
       "measured": {
-        "head": "0026c28e4228b416a449e0544e6fd519f59ce52e",
-        "last_code_commit": "0026c28e4228b416a449e0544e6fd519f59ce52e",
-        "deployed_release": "20260805T021906Z-0026c28e4228",
+        "head": "4a24a0feeb9a36ad9e88ce00170546025f67b048",
+        "last_code_commit": "4a24a0feeb9a36ad9e88ce00170546025f67b048",
+        "deployed_release": "20260805T023349Z-4a24a0feeb9a",
         "running_the_latest_code": true,
         "head_advanced_since": null
       },
@@ -130,11 +130,11 @@
     {
       "dimension": "数据打通（v0.0.0.31）",
       "measured": {
-        "served_atlas_generated_at": "2026-08-05T02:27:23.698Z",
+        "served_atlas_generated_at": "2026-08-05T02:41:35.797Z",
         "codex_session_count": 514,
         "nodes": 552,
         "edges": 1723,
-        "sha256": "f634206e3809ea6c70500c7a040b55b0e3fa4b56882e5ff7683ad67386ae7621"
+        "sha256": "690fd7bf77d08909fdf82b5e5823e53c48f55dda027a67297cd59acd810ef15a"
       },
       "artefact": "served-atlas.summary.json",
       "state": "PASS"
