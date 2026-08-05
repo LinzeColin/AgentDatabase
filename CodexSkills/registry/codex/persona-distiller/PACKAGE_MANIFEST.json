@@ -376,8 +376,8 @@
     },
     {
       "path": "references/ledgers/_待用户裁定.md",
-      "sha256": "230c000f4bf3db73b3de4db84f218d9d2d38216f48ec6fd76aae5ba44448ffe4",
-      "size_bytes": 146757
+      "sha256": "9acf6b5907fe86263527d7d68f595e869c048122c6b48647a86d6ea062895f03",
+      "size_bytes": 151799
     },
     {
       "path": "references/ledgers/_每次开工必读.md",
@@ -911,7 +911,7 @@
     },
     {
       "path": "references/pipeline/judge_prompts/RUBRIC-RULES-v2.md",
-      "sha256": "dbe1e23547af1f605154be731e470998f79eef51f6e891b2dc08ba93219011ba",
+      "sha256": "e4fe7c0f1f07f960499de14da4cde5aa695d3fbbce81f094f67f82168b015b0f",
       "size_bytes": 15864
     },
     {

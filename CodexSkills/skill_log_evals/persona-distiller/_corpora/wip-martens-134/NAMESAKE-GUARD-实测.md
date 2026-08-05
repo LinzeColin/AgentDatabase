@@ -187,3 +187,98 @@ $ python3 scripts/check_namesake_criteria.py <workspace>
 
 所以本人物的归属**仍按你的处置办**：逐份人工核印本署名行，
 把**照录的署名**写进台账 `author`；`ocr_byline_evidence` 只作旁证，不作依据。
+
+---
+
+## ★★ 入库之后复跑（2026-08-06，25 份语料落盘后）
+
+上面第六节说过「入库后必须重跑一遍，以那一次的数为准」。**跑了，结果是这样的：**
+
+```
+$ python3 scripts/check_namesake_criteria.py workspaces/adolf-martens
+  目标本人 25　他人 0　**unknown 0**
+✓ unknown 0 条
+```
+
+**但这个「0」是改了两处、修了一个我自己的 bug 之后才得到的**，过程如下。
+
+### ⑴ `marker_window` 从 40 改到 60——被一份真材料打回来的
+
+第一次跑，Z. VDI 48 (1904) 那一份报 `unknown`。去看正文，照录：
+
+> `Vorsitzender: A. Martens, Geh. Regierungsrat, Direktor der preuß. mechanisch-technischen Versuchsanstalt`
+
+**区分符就在那里，只是德语职衔把它推远了**：从 `Martens` 词尾到 `technischen Versuchsanstalt` 词首**正好 53 字**。
+
+放宽窗口是危险动作，所以拿 6 条反例 + 1 条正例跑了四档：
+
+| window | 结果 |
+|---|---|
+| 40 | **漏正例**（VDI 48 真会议记录判 unknown） |
+| **60** | **7/7 全过** ← 取这一档（能容纳德语职衔的最小值） |
+| 80 | 7/7 全过 |
+| 120 | **反例⑥失守**——`Materialprüfungsamt … 而 Martens 未被提及` 被判成目标本人 |
+
+**放宽的同时反例必须仍然红**，这是这次改动的守卫。
+
+### ⑵ ★★★ 我在 `notes` 里写的「为什么**不是**他」，被判据当成「**就是**他」反向命中
+
+给 Metallographist 书目那一份写归属理由时，我在 `notes` 里写了
+「Alfred Martens（建筑师）与 Arthur Martens（1897 年生）不可能在 1898 年发金相学论文」。
+判据在 `notes` 里命中排除名单里的 `Arthur Martens`，**把这一份判成了「他人」**：
+
+```
+· src-27b2d8b925b0  [他人] 命中排除名单：Arthur Martens
+```
+
+**判据分不清「提到某人」与「是某人写的」。**
+这与本文件第三节⑴讲的 `IT. C. Sorby` 页眉是同一个形状——
+**排除名单命中了不该命中的地方**；差别只在那次丢的是材料，这次丢的是归属。
+
+处置：解释性文字一律不写进判据会读的六个字段
+（`original_name` / `locator` / `title` / `author` / `byline` / `notes`），
+改写进 `namesake_basis`（判据不读）。已全表复核：**判据可读字段里残留的排除名单字面 0 条**。
+
+### ⑶ 判据读不到 `attribution`——而那正是 ingest 让你写依据的那一栏
+
+判据取的是 `("original_name","locator","title","author","byline","notes")`，
+**`attribution` 不在其中**；而 `ingest.py --attribution` 的帮助原文是
+「凭什么说这批是目标人物所著——**照录能出示的东西**」。
+最该被看见的一栏，判据看不见。已把**照录的署名/职衔**同时写进 `notes`。
+
+### ⑷ 尺子用错了层：逐**片**判必然报 unknown，该按**著作**判
+
+第一次试着拿每一片的**正文**去判，25 份里报了 18 个 unknown——
+因为一本书的内页**不重复署名**。这不是材料的问题，是尺子用错了层。
+改成**按著作定人、切片继承**（台账里记 `namesake_scope: work-level`），
+每一部著作的归属都用**照录的扉页/职衔**立据，例如：
+
+- Handbuch 1898：扉页照录 `Handbuch der Materialienkunde für den Maschinenbau … A. Martens.`
+- 英译本 1899：扉页照录 `BY Professor ADOLF MARTENS, Director of the Royal Testing Laboratories at Berlin and at Charlottenburg.`
+- Z. VDI 1914 讣文：正文照录 `der Geheime Ober-Regierungsrat Professor Dr.-Ing. Adolf Martens, Direktor des Königlichen Materialprüfungsamtes in Berlin-Groß-Lichterfelde`
+- IATM 1914 讣告：正文照录 `our much honored Vice-President Professor Dr. Adolf Martens Member of the Prussian Academy of Science and Director of the R. Testing Office in Berlin-Lichterfelde`
+
+### ⑸ 负对照：绿不是因为尺子坏了
+
+```
+author=Arthur Martens             → 他人
+author=Friedrich Franz Martens    → 他人
+author=E. von Martens             → 他人
+author=Adolf Martens              → 目标本人
+```
+
+---
+
+## ★★★ 同名风险在真语料里**兑现了一次**（不是理论）
+
+抓 Z. VDI 58 (1914) 的讣文时，全文检索同一卷同时命中：
+
+```
+djvu p22 : Mine s. Kriegswesen. — Adolf Martens 1369*
+djvu p10 : Martens, F. F., Physikalische [Grundlagen] der Elek-trotechnik. 1. Bd.
+djvu p16 : — Physikalische [Grundlagen] der Elektrotechnik. Von F. F. Martens.
+```
+
+**目标的讣文与物理学家 Friedrich Franz Martens (1873-1939) 的新书通告，在同一卷的同一份索引里并排。**
+本文件开头把他列为「本组最危险的一个」时是推断；**现在是实测**。
+按刊名或按裸姓抓这一卷，两个人必然混在一起。
