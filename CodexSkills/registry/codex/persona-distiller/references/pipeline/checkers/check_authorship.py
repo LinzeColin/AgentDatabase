@@ -331,6 +331,17 @@ def ocr_byline_evidence(text, first, last):
         allcaps = s == s.upper() and any(c.isalpha() for c in s)
         if not (starts_by or allcaps):
             continue
+        # ★★★ v0.0.0.146：**「页码 + 全大写人名」是版口，不是署名。**
+        #   Bessemer #132 实测：1905 自传每张偶数页的版口都是那种形状，
+        #   而 pp.327 之后那一章是他**同名的儿子**写的。不设这道防线，本函数会把
+        #   版口当成 A-byline-ocr，**给儿子写的正文盖上父亲的 HIS-OWN 章**——
+        #   一条带「证据」的假归属，比没有证据更难查。
+        #   ★ 本文件此前只挡住了**带冒号**的那一种版口（靠「冒号后全大写」判定）；
+        #     这一种没有冒号，从来没被挡过。
+        #   ★★ 页码在左在右都挡（有些书版口在右）。
+        if re.match(r"^\d{1,4}\s+[A-Z][A-Z .,'-]*$", s) or \
+           re.match(r"^[A-Z][A-Z .,'-]*\s+\d{1,4}$", s):
+            continue
         body = re.sub(r"^(?:by[ \t]+)?", "", s, flags=re.I)
         body = re.sub(r"^(?:(?:Sir|Dame|Prof(?:essor)?|Dr|Mr|Mrs|Ms|Rev|Lord|Lady)\.?[ \t]+)*",
                       "", body, flags=re.I)
@@ -1435,6 +1446,26 @@ def self_test() -> int:
 
     # ★★★ 世代后缀：**父子同名同姓**（Adams #131 —— 比 Coffin 那类更难）
     # ★★★ 形态 F：学会讨论环节的发言标签（Adams #131 —— 61/71 份因它而判无据）
+    # ★★★ 版口不是署名（Bessemer #132，v0.0.0.146）
+    print("\n══ 版口不是署名 五条对照（v0.0.0.146）══")
+    _PB = build_patterns("Henry Bessemer")
+    for _lbl, _s, _want in (
+            ("★ 儿子写的那一章，版口却印着父亲的名（**不挡就会盖错章**）",
+             "328 HENRY BESSEMER\nrr^HE unfortunate destruction of my father's notes.\n", False),
+            ("父亲的正文，同样的版口（**版口对谁都不算署名**）",
+             "156 HENRY BESSEMER\nThe manufacture of iron in this country.\n", False),
+            ("★ 同一种版口，页码在右",
+             "HENRY BESSEMER 328\nsome prose follows here.\n", False),
+            ("★★ 反向：专利说明书必须仍然认出",
+             "Be it known that I, HENRY BESSEMER, of Queen Street Place,\ncivil engineer.\n", True),
+            ("★★ 反向：真署名必须仍然认出",
+             "By HENRY BESSEMER, F.R.S.\nSome remarks follow.\n", True)):
+        _got, _code, _ev, _ = check_text(_s, _PB)
+        _ok = _got == _want
+        print(f"  {'✓' if _ok else '✗'} {'应认出' if _want else '应拒绝'}　{_lbl}")
+        if not _ok:
+            bad.append(f"版口护栏：{_lbl}（got={_got} code={_code}）")
+
     print("\n══ 学会讨论的发言标签（形态 F） 八条对照（v0.0.0.137）══")
     _NSF = ("Conrad A. Adams", "Alton D. Adams", "Edwin Plimpton Adams", "Lee F. Adams")
     for _lbl, _s, _want in (
