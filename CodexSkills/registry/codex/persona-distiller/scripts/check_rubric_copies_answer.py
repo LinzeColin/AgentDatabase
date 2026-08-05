@@ -370,6 +370,21 @@ def self_test() -> int:
     chk("不给出处豁免标记", not r["逐题"]["et-voice-01"]["★"])
 
     print("\n── ★ 反向对照④：答案缺失时不许报（**没有答案就不是抄**） ──")
+    # ── ★ 反向对照⑤：判据里嵌着的题面必须被剥掉 ──
+    #   `_rubrics_for_frame_check.json` 每条都带 `### cid [suite]` + `**题面**：…`，
+    #   不剥就会把「三方都在谈同一个题目」算成「判据抄了答案」。
+    print("\n── ★ 反向对照⑤：判据自带的题面要剥掉 ──")
+    _emb = ("### hs-boundary-01\u3000[boundary]\n\n"
+            "**题面**：今天做岩相分析用的是电子探针和 X 射线衍射。\n\n"
+            "**须首句即表明这是他身后之事**。")
+    _st = strip_question_block(_emb)
+    if "电子探针" in _st or "###" in _st:
+        print(f"  ✗ 没剥干净：{_st[:60]!r}"); fails += 1
+    elif "须首句即表明这是他身后之事" not in _st:
+        print(f"  ✗ 剥过头，把判据正文也删了：{_st[:60]!r}"); fails += 1
+    else:
+        print("  ✓ 题面与标题行已剥，判据正文完好")
+
     r = check({"a-1": "x" * 60}, {})
     chk(f"没报：{r['**rubric 抄了答案原文的题**']}", r["**rubric 抄了答案原文的题**"] == 0)
 
@@ -377,8 +392,38 @@ def self_test() -> int:
     return 0 if ok else 2
 
 
+_TITLE_LINE = re.compile(r"^###\s+\S+.*$", re.M)
+_QUESTION_BLOCK = re.compile(r"\*\*题面\*\*[：:].*?(?=\n\n|\Z)", re.S)
+
+
+def strip_question_block(rubric: str) -> str:
+    """把判据里嵌着的**题面**与标题行剥掉。
+
+    ★ `build_blind_payload` 生成的 `_rubrics_for_frame_check.json` 是从评委指令
+      markdown 里整段切出来的，**每条都带着 `### <case_id>　[suite]` 和
+      `**题面**：…`**。拿它去量「判据抄了答案」，题面会被算成判据。
+
+    Sorby #133 实测：同一批答案，
+      · 用这份带题面的文件 → **10/16**
+      · 剥掉题面（或另给 `--questions` 扣除）→ **6/16**
+      · 直接用 `cases.jsonl` 干净的 `rubric` 字段 → **6/16**（两条路对上了）
+
+    所以默认就剥。剥了还嫌不够的，再给 `--questions`（那一层还能扣掉
+    判据与答案**各自**回声题面的部分，本函数只管判据自己带的那一段）。
+    """
+    s = _QUESTION_BLOCK.sub("", str(rubric))
+    return _TITLE_LINE.sub("", s).strip()
+
+
 def _load(path: str, want_rubric: bool) -> dict:
     d = json.loads(pathlib.Path(path).read_text(encoding="utf-8"))
+    if want_rubric:
+        raw = _load_raw(d, want_rubric)
+        return {k: strip_question_block(v) for k, v in raw.items()}
+    return _load_raw(d, want_rubric)
+
+
+def _load_raw(d, want_rubric: bool) -> dict:
     if isinstance(d, list):
         key = "rubric" if want_rubric else ("candidate" if any("candidate" in x for x in d) else "A")
         return {x.get("case_id", str(i)): (x.get(key) or "") for i, x in enumerate(d)}

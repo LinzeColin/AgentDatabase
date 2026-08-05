@@ -179,7 +179,8 @@ def quoted_echoes(rubric: str, answer: str) -> list:
     return hits
 
 
-def ngram_containment(rubric: str, answer: str, n: int = NGRAM_N) -> float:
+def ngram_containment(rubric: str, answer: str, n: int = NGRAM_N,
+                      exclude: str = "") -> float:
     """→ 判据的中文 n-gram 有多大比例能在答案里找到（包含度，不是 Jaccard）。
 
     ★ 用包含度而不是 Jaccard：判据短、答案长，Jaccard 会被长度差压死。
@@ -191,32 +192,55 @@ def ngram_containment(rubric: str, answer: str, n: int = NGRAM_N) -> float:
         return 0.0
     rg = {r[i:i + n] for i in range(len(r) - n + 1)}
     ag = {a[i:i + n] for i in range(len(a) - n + 1)}
+    if exclude:
+        # ★ 题面 n-gram 从**分子分母都**扣掉：三方共有的词不是抄
+        e = _cjk_only(exclude)
+        qg = {e[i:i + n] for i in range(len(e) - n + 1)}
+        rg -= qg
+        ag -= qg
+    if not rg:
+        return 0.0
     return len(rg & ag) / len(rg)
 
 
 def check(rubrics: dict, answers: dict, min_run: int = MIN_RUN,
-          answers_b: dict = None) -> dict:   # ★ 本机 3.9，不能写 `dict | None`
-    """`answers_b` 是**另一侧**的答案（可选）。
+          answers_b: dict = None, questions: dict = None) -> dict:
+    """`answers_b` 是**另一侧**的答案（可选）；`questions` 是题面（强烈建议给）。
 
     ★★ 冻结指令要求「中译与压缩也算抄」，而抄的对象**可能是任一侧**：
     席 E 在 Bessemer #132 实测 10 条对应一侧、2 条对应另一侧，**泄漏是双向的**。
     只比一侧会漏掉一半，且会让人误以为「判据是照着某个系统写的」。
+
+    ★★★ `questions` 是 Sorby #133 加的，**不给会虚高一大截**：
+    判据当然会重复题面的词，答案也当然会——于是「判据 ∩ 答案」里混进一大批
+    **题面回声**，那不是抄答案，那是三方都在谈同一个题目。
+    实测 Sorby 10 题共 24 个共有串，**16 个（67%）直接出自题面**：
+    `电子探针`／`射线衍射`／`薄片加偏光`（题面原句）、`谢菲尔德`、`植物色素`……
+    扣掉题面之后才是真的重合。
+    ★ 这一条是**评委反过来纠正判据**：席 E 手点 6 条，本件报 10 条，
+      差出来的那些一读就知道是题面词。**判据比评委多报的，先当自己错。**
     """
     per, total_chars = {}, 0
     cjk_per = {}
+    questions = questions or {}
     for cid, ru in sorted(rubrics.items()):
         ans = answers.get(cid)
         if not ans or not ru:
             continue
+        q = str(questions.get(cid) or "")
         # ── 中文压缩层（只报不拦）：两侧都比 ──
         sides = {"候选侧": ans}
         if answers_b and answers_b.get(cid):
             sides["基线侧"] = answers_b[cid]
         cjk_hit = {}
         for side, txt in sides.items():
-            runs_cjk = cjk_runs(ru, txt)
-            quoted = quoted_echoes(ru, txt)
-            cont = ngram_containment(ru, txt)
+            # ★ 扣题面：三方共有的词不算「判据抄了答案」
+            runs_cjk = [x for x in cjk_runs(ru, txt) if x not in q]
+            # ★ quoted_echoes 返回的是 dict（短语/包含度/形态），不是字符串——
+            #   第一版直接 `x not in q` 当场 TypeError，自测抓到的。
+            quoted = [x for x in quoted_echoes(ru, txt)
+                      if str(x.get("短语", "")) not in q]
+            cont = ngram_containment(ru, txt, exclude=q)
             if runs_cjk or quoted or cont >= NGRAM_MIN:
                 cjk_hit[side] = {
                     "中文连续串": runs_cjk[:4],
@@ -346,6 +370,21 @@ def self_test() -> int:
     chk("不给出处豁免标记", not r["逐题"]["et-voice-01"]["★"])
 
     print("\n── ★ 反向对照④：答案缺失时不许报（**没有答案就不是抄**） ──")
+    # ── ★ 反向对照⑤：判据里嵌着的题面必须被剥掉 ──
+    #   `_rubrics_for_frame_check.json` 每条都带 `### cid [suite]` + `**题面**：…`，
+    #   不剥就会把「三方都在谈同一个题目」算成「判据抄了答案」。
+    print("\n── ★ 反向对照⑤：判据自带的题面要剥掉 ──")
+    _emb = ("### hs-boundary-01\u3000[boundary]\n\n"
+            "**题面**：今天做岩相分析用的是电子探针和 X 射线衍射。\n\n"
+            "**须首句即表明这是他身后之事**。")
+    _st = strip_question_block(_emb)
+    if "电子探针" in _st or "###" in _st:
+        print(f"  ✗ 没剥干净：{_st[:60]!r}"); fails += 1
+    elif "须首句即表明这是他身后之事" not in _st:
+        print(f"  ✗ 剥过头，把判据正文也删了：{_st[:60]!r}"); fails += 1
+    else:
+        print("  ✓ 题面与标题行已剥，判据正文完好")
+
     r = check({"a-1": "x" * 60}, {})
     chk(f"没报：{r['**rubric 抄了答案原文的题**']}", r["**rubric 抄了答案原文的题**"] == 0)
 
@@ -353,13 +392,65 @@ def self_test() -> int:
     return 0 if ok else 2
 
 
+_TITLE_LINE = re.compile(r"^###\s+\S+.*$", re.M)
+_QUESTION_BLOCK = re.compile(r"\*\*题面\*\*[：:].*?(?=\n\n|\Z)", re.S)
+
+
+def strip_question_block(rubric: str) -> str:
+    """把判据里嵌着的**题面**与标题行剥掉。
+
+    ★ `build_blind_payload` 生成的 `_rubrics_for_frame_check.json` 是从评委指令
+      markdown 里整段切出来的，**每条都带着 `### <case_id>　[suite]` 和
+      `**题面**：…`**。拿它去量「判据抄了答案」，题面会被算成判据。
+
+    Sorby #133 实测：同一批答案，
+      · 用这份带题面的文件 → **10/16**
+      · 剥掉题面（或另给 `--questions` 扣除）→ **6/16**
+      · 直接用 `cases.jsonl` 干净的 `rubric` 字段 → **6/16**（两条路对上了）
+
+    所以默认就剥。剥了还嫌不够的，再给 `--questions`（那一层还能扣掉
+    判据与答案**各自**回声题面的部分，本函数只管判据自己带的那一段）。
+    """
+    s = _QUESTION_BLOCK.sub("", str(rubric))
+    return _TITLE_LINE.sub("", s).strip()
+
+
 def _load(path: str, want_rubric: bool) -> dict:
     d = json.loads(pathlib.Path(path).read_text(encoding="utf-8"))
+    if want_rubric:
+        raw = _load_raw(d, want_rubric)
+        return {k: strip_question_block(v) for k, v in raw.items()}
+    return _load_raw(d, want_rubric)
+
+
+def _load_raw(d, want_rubric: bool) -> dict:
     if isinstance(d, list):
         key = "rubric" if want_rubric else ("candidate" if any("candidate" in x for x in d) else "A")
         return {x.get("case_id", str(i)): (x.get(key) or "") for i, x in enumerate(d)}
     return {k: (v.get("rubric") if want_rubric and isinstance(v, dict) else
                 v if isinstance(v, str) else (v.get("candidate") or "")) or ""
+            for k, v in d.items()}
+
+
+def _load_questions(path):
+    """`cases.jsonl`（每行一题）或 case_id→题面的 JSON 都吃。"""
+    p = pathlib.Path(path)
+    txt = p.read_text(encoding="utf-8")
+    if p.suffix == ".jsonl" or "\n{" in txt.strip():
+        out = {}
+        for line in txt.splitlines():
+            line = line.strip()
+            if not line:
+                continue
+            d = json.loads(line)
+            cid = d.get("case_id") or d.get("id")
+            q = d.get("question") or d.get("prompt") or d.get("题面")
+            if cid and q:
+                out[cid] = q
+        return out
+    d = json.loads(txt)
+    return {k: (v if isinstance(v, str) else
+                (v.get("question") or v.get("prompt") or ""))
             for k, v in d.items()}
 
 
@@ -371,14 +462,23 @@ def main() -> int:
     ap.add_argument("--answers-b",
                     help="**另一侧**答案的 JSON（可选）。中译/压缩层要两侧都比——\n                         基线那一侧是**趋同下限**：写判据时它还不存在，抄它不可能。")
     ap.add_argument("--min-run", type=int, default=MIN_RUN)
+    ap.add_argument("--questions",
+                    help="题面：`cases.jsonl` 或 case_id→题面的 JSON。\n"
+                         "**强烈建议给**——不给会把「三方都在谈同一个题目」\n"
+                         "误报成「判据抄了答案」。Sorby 实测 24 个共有串里 16 个出自题面。")
     ap.add_argument("--self-test", action="store_true")
     a = ap.parse_args()
     if a.self_test:
         return self_test()
     if not (a.rubrics and a.answers):
         ap.error("要么 --self-test，要么同时给 --rubrics 与 --answers")
+    qs = _load_questions(a.questions) if a.questions else None
+    if qs is None:
+        print("★ 没给 --questions：题面回声会被算成抄答案，下面的数偏高。",
+              file=sys.stderr)
     r = check(_load(a.rubrics, True), _load(a.answers, False), a.min_run,
-              answers_b=_load(a.answers_b, False) if a.answers_b else None)
+              answers_b=_load(a.answers_b, False) if a.answers_b else None,
+              questions=qs)
     print(json.dumps(r, ensure_ascii=False, indent=2))
     return 0                       # **只报不拦**
 
