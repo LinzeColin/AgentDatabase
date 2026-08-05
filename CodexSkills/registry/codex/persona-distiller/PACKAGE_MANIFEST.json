@@ -56,7 +56,7 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "10a6a9c7160dd00badec94cf47caeaba1fcb7c5a894a4446c91c01b2a2d16859",
+      "sha256": "899d3c0070c74a416a62886c96016c391662c02f7e2f242d1419fd82e1e63c13",
       "size_bytes": 133612
     },
     {
@@ -760,6 +760,11 @@
       "size_bytes": 12031
     },
     {
+      "path": "references/pipeline/checkers/check_source_is_catalogue_entry.py",
+      "sha256": "3b2c0f3b01501e4af0b841f99d4443cc9830ca7ea31118733f4acc6984df7a48",
+      "size_bytes": 10516
+    },
+    {
       "path": "references/pipeline/checkers/check_staged_but_not_ingested.py",
       "sha256": "11a54e9050d63093483fffa3cfb6583509f3fc47884c7fdd61ed11f2d2178828",
       "size_bytes": 14393
@@ -1388,6 +1393,11 @@
       "path": "scripts/check_source_header_quotes.py",
       "sha256": "3584980460367f1e23e8ad975ae8ac90d98702e491bf849e6fa2b50ef6b8a2ed",
       "size_bytes": 12031
+    },
+    {
+      "path": "scripts/check_source_is_catalogue_entry.py",
+      "sha256": "3b2c0f3b01501e4af0b841f99d4443cc9830ca7ea31118733f4acc6984df7a48",
+      "size_bytes": 10516
     },
     {
       "path": "scripts/check_staged_but_not_ingested.py",
