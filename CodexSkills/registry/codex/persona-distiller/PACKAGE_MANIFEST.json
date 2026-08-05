@@ -4,7 +4,7 @@
   "display_name": "人物蒸馏 Skill / Persona Distiller",
   "distribution": {
     "canonical_registry": "../persona-distiller-group",
-    "kind": "repository-customized-v0.0.0.147",
+    "kind": "repository-customized-v0.0.0.148",
     "lineage_base_archive_sha256": "e891912d98d14afb7677ac935a19be329d97d206f4ae74a644892f46b17f6748"
   },
   "evaluation_suites": 16,
@@ -16,8 +16,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "ad876bc829ccad31fa28ce195c64ada77b695d5a145f44d04d2f191c8b7bd7c7",
-      "size_bytes": 313372
+      "sha256": "1381bc9633a362678843ad3fa272e1b19b51614362ad470398db7da482141a36",
+      "size_bytes": 316250
     },
     {
       "path": "CONTRIBUTING.md",
@@ -31,7 +31,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "05324443dacc5611bd7dcf0f0d4eeb62e1a0de3473b26118be685c2aa63072a8",
+      "sha256": "9c9da12205d5e03a7724e0da8f0ace0a8e2f1b43a0f5cf3d1bffe7c9baeb8cc0",
       "size_bytes": 8803
     },
     {
@@ -56,12 +56,12 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "fce684a29a32f380e8aa9ad962a2f61b661b4322b720413639255b0916eecd87",
-      "size_bytes": 124755
+      "sha256": "d4e80034893b3b1ad0bbc029a53eb6fd79b512d8465fa2e140d999ffadad0469",
+      "size_bytes": 126889
     },
     {
       "path": "VERSION",
-      "sha256": "2d1a88117286a940559429f3f58af4ece19787719baadd798e5dc9f179271e01",
+      "sha256": "da82a868ce04e4fb621261d3ef8ae3e839697f5d1ef871b2807f310584219a75",
       "size_bytes": 11
     },
     {
@@ -121,7 +121,7 @@
     },
     {
       "path": "handoff.md",
-      "sha256": "9710f5910efc826e482bd893db11c1cf5fde5911d74470ebaa9bb2085fc37c04",
+      "sha256": "a9642eeb78fa295b140fa6cc0a6d83cbf992dc6e1b271d88a1a5ff5cdebbfdfd",
       "size_bytes": 3703
     },
     {
@@ -141,7 +141,7 @@
     },
     {
       "path": "manifest.json",
-      "sha256": "09f52764feef812debad9a934557104b300242399d60664f0d1f892cb072add0",
+      "sha256": "ce3a47218d5a5562daf901f3f8ed0720f54f5cac8c05eaede854d811cf61dcdb",
       "size_bytes": 1192
     },
     {
@@ -376,8 +376,8 @@
     },
     {
       "path": "references/ledgers/_待用户裁定.md",
-      "sha256": "239d282920fb547bee20688d97f155df532c64059b34046f9d4743b9b448fa08",
-      "size_bytes": 120774
+      "sha256": "791af3a66625c9cfbea7d0b376c2259aa2cef3232689a1933c1407494364dbcc",
+      "size_bytes": 125455
     },
     {
       "path": "references/ledgers/_每次开工必读.md",
@@ -783,6 +783,11 @@
       "path": "references/pipeline/checkers/check_verbatim_quotes.py",
       "sha256": "79fc6780328d6af467d889a73cb4d4bbec76758f2196dc38ae0af62755a184f4",
       "size_bytes": 7117
+    },
+    {
+      "path": "references/pipeline/checkers/check_verdict_attribution.py",
+      "sha256": "db07a92dbf239049737a2f8f8456711f24c0267329e31a317534d32f8d22d7b0",
+      "size_bytes": 12606
     },
     {
       "path": "references/pipeline/checkers/check_verification_counts.py",
@@ -1385,6 +1390,11 @@
       "size_bytes": 7117
     },
     {
+      "path": "scripts/check_verdict_attribution.py",
+      "sha256": "db07a92dbf239049737a2f8f8456711f24c0267329e31a317534d32f8d22d7b0",
+      "size_bytes": 12606
+    },
+    {
       "path": "scripts/check_verification_counts.py",
       "sha256": "a2b92692999d644d7e5fdbf84d7df51520300e1866b65bd1e3f2d26a98128c02",
       "size_bytes": 17673
@@ -1406,8 +1416,8 @@
     },
     {
       "path": "scripts/diag_rubric_gloss_overlap.py",
-      "sha256": "5b6f650868fe3cd8f29dccfd5722910b9d1ba60029ed1886d72767187edc8ab6",
-      "size_bytes": 8023
+      "sha256": "0e90dcce83d11fb08bb4219655c4fe930fc112c843010b567817eddd9ae35d8a",
+      "size_bytes": 12872
     },
     {
       "path": "scripts/eval_runner.py",
@@ -1486,8 +1496,8 @@
     },
     {
       "path": "scripts/quality_check.py",
-      "sha256": "5757e3620d42d1fcf20ad62ab49993c12c6a145586bfafe721df30dc00ae009d",
-      "size_bytes": 159691
+      "sha256": "40939a126286b2052c45edbbe0358d2ad4d52e106854bcbf05b1ba2f592b006b",
+      "size_bytes": 162355
     },
     {
       "path": "scripts/register_persona.py",
@@ -2061,5 +2071,5 @@
     },
     "secret_findings": 0
   },
-  "version": "v0.0.0.147"
+  "version": "v0.0.0.148"
 }

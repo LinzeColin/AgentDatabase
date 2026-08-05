@@ -1,6 +1,6 @@
-# Release verification — Persona Distiller v0.0.0.147
+# Release verification — Persona Distiller v0.0.0.148
 
-Date: 2026-08-05（**v0.0.0.147**）
+Date: 2026-08-05（**v0.0.0.148**）
 
 > **本文件记录「当前发布号的复验结果」，不是历史归档。**
 > 版本号必须等于根目录 `VERSION`，由 `scripts/check_contract_drift.py` 强制。
@@ -21,6 +21,30 @@ Date: 2026-08-05（**v0.0.0.147**）
 > **表格正文不在任何判据的射程里**。
 > **「本表每一行都来自本次实跑」是一句自述**——
 > 而自述不是证据（见 `self-report-is-not-evidence`）。
+
+> ### v0.0.0.148 这一版重跑了什么
+>
+> **新判据 `check_verdict_attribution`：判决书里「候选说了 X」，X 是不是真在候选那一侧。**
+> 真值是 `evals/*_answers.json`——**不是启发式，是有据可查的**。
+> 起因：评委是盲的，笔记里每个「A」「B」都是盲坐标，而 A/B **逐题翻面**
+> （Bessemer 16 题里候选 3 次在 A、13 次在 B）。第 1 轮判决书**表按 key 重算了，正文没有**，
+> **四条结论全部把基线的毛病记到了候选头上**——其中一条把候选**赢得最漂亮**的一题
+> （拒绝现编名言，honest delta +0.2400）写成了它最丢人的一题。
+> ★ 我手查只查出三条，**第四条是判据建成后当场补出来的**；
+> 随后它在 **Adams #131** 第 2 轮判决书又查出两处——**那份我原本再也不会回头看。**
+> **接线用植入真红验过**：植入一句基线独有的话 → `归属错 1` + `verdict.attribution-flipped`；
+> 还原 → 0，文件逐字一致。（**上一次接线就是接错了分支才白接的**，所以这次必须植入验证。）
+>
+> **本版实况计数（`check_verification_counts.py` 逐项核过）**：
+> 判据 **66** 件、Python 脚本 **100**、checksum 全量校验 **406 files**、身份族 **12** 族。
+> ★ 这四个数**不是我数的，是判据数的**——上一版这一行少了两项，
+> 判据报「文中没有这个数——**本件管不到，不算通过**」，
+> 而**「管不到」既不是绿也不是红，正是最容易被当成绿的那一格**。
+>
+> ★★★ **本版还撤回了一个我当天下错的推广**：Bessemer 上「剔掉判据抄答案的题、
+> delta 从 +0.2678 掉到 +0.0810」看着像干净的差分对照，**铺到全部 7 轮，6 轮符号是反的**。
+> 查混淆发现「污染题」部分只是「rubric 写得长的题」（rubric 越长越容易凑出 4 字重合）。
+> 见 `diag_rubric_gloss_overlap.py` 与待裁定 ⑳ 三补。
 
 > ### v0.0.0.147 这一版重跑了什么
 >
@@ -456,7 +480,7 @@ Date: 2026-08-05（**v0.0.0.147**）
 |---|---:|---|
 | **★★★★★★★★★★ 答案母版（v0.0.0.53 新增）** | **passed**；三支用 Osler 真数据实跑：真候选**过并落盘 32 条**；每条 ×3 → **中止且候选文件被删**；占位没删 → **点名 `XX-known-01` 并中止** | `scaffold/answers_template.py` 三支实跑 |
 | Offline unit / integration / concurrency tests | **70 / 70 passed**（`v0.0.0.96 实跑`） | `python3 -m pytest tests/ -q` |
-| **全部检查器自测（v0.0.0.47 起逐件跑）** | **`v0.0.0.147 实跑`：判据 **65** 件（本轮新增 `check_material_split` 接线、`check_threshold_doc_drift`；另新增诊断件 `diag_rubric_gloss_overlap`）、接线审计**在生产代码里找不到调用方的 2 件**（`check_semantic_residue`／`check_verbatim_quotes`，**两件都不该直接接上，见待裁定 ㉑**）；语料射程审计 该扫 **24** 个工作区、实际扫了 **24** 个；★ 新增「台账有、工作区没有」审计：7 人 16 份，其中一手 10 份 | 逐件 `check_*.py --self-test`、`check_checkers.py scripts` |
+| **全部检查器自测（v0.0.0.47 起逐件跑）** | **`v0.0.0.148 实跑`：`scripts/` 下 `check_*.py` **66** 件、`references/pipeline/checkers/` 镜像 **66** 件（**逐字一致**）；**逐件自测 67 件全过、0 失败**（66 判据 + 诊断件 `diag_rubric_gloss_overlap`）。本轮新增 `check_verdict_attribution`（判决书归属，已接线，只报警）——★ 合同漂移门当场报出**它只在 `scripts/` 里、`references/` 镜像缺件**，**装出去的包会少这一件**，已补。接线审计仍有 **2 件在生产代码里找不到调用方**（`check_semantic_residue`／`check_verbatim_quotes`，**两件都不该直接接上，见待裁定 ㉑**） | 逐件 `check_*.py --self-test`、`check_checkers.py scripts` |
 | **★ 公有领域的依据（v0.0.0.79 新增，只写 metrics，接进 research）** | **passed**（**9 项自测，其中 8 条反向对照**）；起因是 #116 Watson 探测撞到的**可复现误判**——Unpaywall 对 `10.1111/j.1365-2702.2005.01256.x` 返回 `license=public-domain`，而同 DOI 的 Crossref 写 Wiley 标准条款、**作者在世**。**十一个真账本实跑**：声称公有领域 **872** 条，其中有据可查 **230**、**有结论无依据 642**、**依据取自聚合器 0**（**本件是预防不是补救**）；不声称的 251 条（Godin `public-web` 196、Steinhardt 55）**完全不判，在世作者未被误伤**。**它不说那 642 条判断错了**——八位历史人物结论都站得住，报的是「依据不在产物里」（属 #29）。判据把三种状态分开：有据可查／有结论无依据／依据取自聚合器 | `check_rights_basis.py --self-test` + 对 11 份 `source-ledger.jsonl` 实跑 + Fleming 过 research 门 |
 | **★ 证据字段是不是逐条的（v0.0.0.78 新增，只写 metrics，接进 synthesis／release）** | **passed**（**14 项自测，其中 8 条反向对照**，含**三处真实误报夹具**）；`check_claim_anchors` 核「有没有挂上源」，本件核「**这个字段有没有区分度**」。**十个工作区实测：七个逐条各异，三个不是**——Koch #107 `source_ids` **46 条只有 1 种**、Lister #108 两个字段各 **1 种/35 条**、Jenner #104 `evidence_clusters` **1 种/35 条**。**三种状态分开报**：逐条各异／整批同一个值（报）／**整批都空（单独报，不是同一件事）**——`counter_source_ids` 六人全空是「没用这个字段」而非缺陷。**★ 第一版拿记录总数当分母，真数据一跑误报三处**（Jenner 非空 1/35、Steinhardt 4/39、Pasteur 3/33），改为按**非空数**判并固化为反向对照 ⑦。接线两向已实跑：Lister 报出两处、Fleming 不报；Semmelweis `claims.jsonl` 0 字节 → 报「未核验（不是通过）」 | `check_evidence_is_per_claim.py --self-test` + 对十份 `claims.jsonl` 实跑 + 两个真工作区过合成门 |
 | **★ 语料一手上限（v0.0.0.76 新增／v0.0.0.77 改读入库 attest，只写 metrics，接进 research）** | **passed**（**14 项自测，其中 8 条反向对照**）；把两条门联立成绝对数：**deep 要 30 份一手**（`ceil(45×0.65)`）、standard 12、quick 4。**v0.0.0.77 射程 5/10 → 11/11**：改为优先读 `evidence/source-ledger.jsonl`（schema 统一，**发布门就是按它算的**），口径逐字对齐 `evaluate_sources`（train／非 U 档／非抽取失败）。**★★ 与门交叉核对逐位一致**：Fleming 本件 45/68=0.6618 ／ 门 45/68=0.6618；Jenner 本件 50/52=0.9615 ／ 门 50/52=0.9615。**十一人全量复扫**：九人过各自档；**Koch 55/120=0.4583 < 0.65**、**Semmelweis 7/59=0.1186 且只有 2 道** ——**两人都已在延后名单里，一个都没入库，门做了它该做的事**。`raw/_ids.txt` 保留为入库前退路（格式因人而异，十份里 5 份带分档列，其余报「未核验（不是通过）」而**不是报 0 份一手**） | `check_corpus_ceiling.py --self-test` + 对 11 份 `source-ledger.jsonl` 与 10 份 `raw/_ids.txt` 实跑 + 两个真工作区过 research 门并与门自身指标比对 |

@@ -2450,6 +2450,53 @@ def run_holdout_overlap(report, target: Path, cache_dirs: list[str]) -> None:
     report.metrics['holdout_overlap'] = info
 
 
+def run_verdict_attribution(report, target: Path) -> None:
+    """**判决书里「候选说了 X」，X 是不是真在候选那一侧**（v0.0.0.148 接线，**只报警**）。
+
+    评委是盲的，笔记里每个「A」「B」都是盲坐标，而 A/B **逐题翻面**。
+    从评委笔记往判决书里抄结论时**必须过 key**——Bessemer #132 第 1 轮没过，
+    **四条结论全部把基线的毛病记到了候选头上**，其中一条正是
+    「候选自相矛盾，说完不许现编还是编了两句格言」，
+    而那两句**在基线里**；候选原文是「这个我不给」。
+
+    ★ 我手查只查出三条；**第四条是本件建成后当场补出来的**，
+    随后它又在 **Adams #131** 查出两处——那是一份我原本再也不会回头看的判决书。
+
+    ## 为什么只报警不拦
+
+    它查的是**散文**，不动任何分数。但 [[gates-cover-json-not-the-prose-users-read]]
+    记的正是「判据只盯 JSON，漏了用户真正会读的那份散文」——
+    **判决书恰恰是给人看的那一份。报出来就当场改。**
+    """
+    here = Path(__file__).resolve().parent
+    script = here / 'check_verdict_attribution.py'
+    if not script.exists():
+        report.metrics['verdict_attribution'] = {'状态': '检查器未安装，**未核验**（不是通过）'}
+        return
+    spec = importlib.util.spec_from_file_location('_pd_verdict_attr', script)
+    module = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(module)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['verdict_attribution'] = {'状态': f'加载失败，**未核验**：{exc}'}
+        return
+    buffer = io.StringIO()
+    try:
+        with contextlib.redirect_stdout(buffer):
+            n = module.run(target)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['verdict_attribution'] = {'状态': f'运行失败，**未核验**：{exc}'}
+        return
+    hits = [ln.strip() for ln in buffer.getvalue().splitlines() if ln.strip().startswith('✗')]
+    info: dict[str, Any] = {'**归属错**': n}
+    if n:
+        info['**逐条**'] = hits[:8]
+        info['口径'] = ('引文只在一侧出现，而判决书把它记到了另一侧。'
+                        '**改判决书，不要改判据**——真值是 evals/*_answers.json。')
+        report.warn('verdict.attribution-flipped', f'判决书归属写反 {n} 处（**盲坐标没过 key**）')
+    report.metrics['verdict_attribution'] = info
+
+
 def run_threshold_doc_drift(report, target: Path) -> None:
     """**文档里写的门槛，与代码里在用的那套，是不是同一套**（v0.0.0.141，硬门）。
 
@@ -2839,6 +2886,7 @@ def main() -> int:
         #   等到合成门才报就已经拿泄漏的源出过 known 题了。
         run_material_split(report, target)
         run_threshold_doc_drift(report, target)
+        run_verdict_attribution(report, target)
         report_own_voice(report, target, meta, sources)
         report_refusal_overflow(report, target)
         run_corpus_ceiling(report, target, report.profile)
