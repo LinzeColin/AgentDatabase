@@ -1,0 +1,188 @@
+[
+  {
+    "name": "William Chandler Roberts-Austen",
+    "is_target": true,
+    "lifespan": "1843-03-03 Kennington, Surrey – 1902-11-22 Royal Mint, London（葬于 Canterbury）",
+    "field": "冶金学／合金物理性质／金相（metallurgy, alloys, metallography）",
+    "why_confusable": "★★★ **他一生用过两个姓**。1843 年出生登记名 William Chandler Roberts，1885 年依王室许可（royal licence）加姓 Austen，此后署 Roberts-Austen。所以**同一个人在 1885 年前后的印本署名完全不同**：1884 年《Cantor Lectures on Alloys used for Coinage》扉页照录 `BT W. CHANDLER ROBERTS, RR.S.`（`BT`＝`BY`、`RR.S.`＝`F.R.S.` 的 OCR 讹形），1888 年 Phil. Trans. 照录 `By W. Chandler Koberts- Austen, F.RS`。**姓氏判据只认一个形态就会漏掉他半生的东西。**",
+    "distinguishing_field": "职衔与机构（唯一且可查）：Chemist of the Royal Mint 1870-1882 → Chemist and Assayer of the Royal Mint 1882-1902；Professor of Metallurgy, Royal School of Mines / Royal College of Science 1880-1902（接 John Percy）；Alloys Research Committee of the Institution of Mechanical Engineers 的 reporter（委员会 1889 年设，他出五份报告，第六份在他去世时尚在修订）；FRS 1875-06-03；Bakerian Lecturer 1896（Phil. Trans. vol. 187 A）；C.B. 1890 / K.C.B. 1899 / D.C.L. Durham 1897 / D.Sc. Manchester 1901。",
+    "source_url": "https://en.wikisource.org/wiki/Dictionary_of_National_Biography,_1912_supplement/Roberts-Austen,_William_Chandler",
+    "corroborating_urls": [
+      "https://en.wikipedia.org/wiki/William_Chandler_Roberts-Austen",
+      "https://www.royalmintmuseum.org.uk/journal/people/william-chandler-roberts-austen/",
+      "https://www.gracesguide.co.uk/William_Chandler_Roberts-Austen",
+      "https://archive.org/details/robertsaustenar00smitgoog"
+    ],
+    "notes": "DNB 1912 补编（撰稿人 T. E. James）逐字：`eldest son of George Roberts, of Welsh descent, who was in the service of the Hudson's Bay Company, by his wife Maria Louisa, daughter of William Chandler, M.D., of Canterbury, of an old Kentish family which had intermarried with the Hulses and Austens.` 与 `In 1885 he assumed, by royal licence, at the request of his uncle. Major Nathaniel Lawrence Austen of Haffenden and Camborne, in Kent, the name of Austen.` ★ 同一条目还写明 `He married in 1876 Florence Maude, youngest daughter of Richard William Alldridge, of Old Charlton, Kent; he had no issue.` —— **无子嗣，因此不存在「同姓后代」这一类同名者**，这一类可以整类划掉。"
+  },
+
+  {
+    "name": "Sir William Roberts",
+    "is_target": false,
+    "lifespan": "1830-03-18 – 1899-04-16",
+    "field": "医学（肾脏病学），Owens College Manchester 医学教授 1863-1883",
+    "why_confusable": "★★★ **本人物最高危的同名者**。他署 `William Roberts` / `W. Roberts`，FRS（1877 年当选），1885 年受封爵士；活跃期 1850s-1890s，与目标 1868-1900 的发表期**几乎完全重叠**，而且两人都往 Proc. Roy. Soc. / Phil. Trans. 投稿。目标 1885 年以前正是署裸姓 Roberts 的时期。",
+    "distinguishing_field": "题材（肾脏病、尿液化学、消化酶）＋ 城市（Manchester, Owens College）＋ 头衔（M.D., F.R.C.P.）。**注意：`F.R.S.` 两人都有，不能拿它当区分符。**",
+    "source_url": "https://en.wikipedia.org/wiki/William_Roberts_(physician)"
+  },
+  {
+    "name": "Isaac Roberts",
+    "is_target": false,
+    "lifespan": "1829-01-27 Groes, Denbighshire – 1904-07-17 Crowborough, Sussex",
+    "field": "天文摄影（星云照相），威尔士出身的工程师／营造商转业余天文学家",
+    "why_confusable": "与目标同代、同为 FRS（1890 年当选）、同为威尔士血统、同样在英国学会圈活动；DNB 1912 补编里两人条目相隔不远。裸姓 `Roberts` 在 1890 年代英国学会记录里指他的概率很高。",
+    "distinguishing_field": "题材（nebulae, astrophotography, Royal Astronomical Society Gold Medal 1895）＋ 名字拼全时是 `Isaac`，与目标的 `William`／`W.` 无重叠。",
+    "source_url": "https://en.wikisource.org/wiki/Dictionary_of_National_Biography,_1912_supplement/Roberts,_Isaac"
+  },
+  {
+    "name": "Richard Roberts",
+    "is_target": false,
+    "lifespan": "1789-04-22 – 1864-03-11",
+    "field": "机床与精密制造（自动走锭细纱机、龙门刨），Manchester",
+    "why_confusable": "★★ 他的论文与传记落在 **Proceedings of the Institution of Mechanical Engineers** ——正是目标 Alloys Research Committee 五份报告的发表处。同一份刊物索引里两个 Roberts。",
+    "distinguishing_field": "卒于 1864，**早于目标第一篇论文（1868）**；题材是机床不是合金；名 `Richard`。",
+    "source_url": "https://en.wikipedia.org/wiki/Richard_Roberts_(engineer)"
+  },
+  {
+    "name": "Charles Roberts",
+    "is_target": false,
+    "lifespan": "1836–1901",
+    "field": "人体测量学（anthropometry），F.R.C.S.，与 Francis Galton 共事",
+    "why_confusable": "同代英国科学圈、同姓、同样在学会刊物发表；`C. Roberts` 与目标 1885 年前的 `W. C. Roberts` 在只保留首字母的索引里形态接近。",
+    "distinguishing_field": "题材（人体测量、学童体格调查）＋ 名 `Charles`；无 Mint／School of Mines 关联。",
+    "source_url": "https://en.wikisource.org/wiki/Author:Charles_Roberts"
+  },
+  {
+    "name": "Robert Davies Roberts",
+    "is_target": false,
+    "lifespan": "1851–1911-11-14",
+    "field": "地质学、大学推广教育（University Extension），Aberystwyth／Cambridge／London",
+    "why_confusable": "★★ **他的 DNB 1912 补编条目就紧挨在目标条目前面**——同一版面上两个 Roberts。抓 DNB 全文时若按姓氏切条，极易把他的段落切进目标的材料里（本轮抓源实际发生过：`dnb_p222/223` 原始页面同时含两人条目，已按条目首行 `ROBERTS-AUSTEN, WILLIAM CHANDLER` 裁切）。",
+    "distinguishing_field": "题材（地质学、Gilchrist Educational Trust、Welsh University）＋ 名 `Robert Davies`；卒 1911，晚于目标九年。",
+    "source_url": "https://en.wikisource.org/wiki/Dictionary_of_National_Biography,_1912_supplement/Roberts-Austen,_William_Chandler",
+    "notes": "依据照录自该页 wikitext 头部模板：`|previous= Roberts, Robert Davies`。"
+  },
+  {
+    "name": "Alexander William Roberts",
+    "is_target": false,
+    "lifespan": "1857–1938",
+    "field": "天文学（变星），南非",
+    "why_confusable": "署 `A. W. Roberts`；与目标 1885 年前的 `W. C. Roberts` 同为「首字母 + Roberts」形态，且活跃期重叠。",
+    "distinguishing_field": "题材（variable stars）＋ 地域（South Africa）。",
+    "source_url": "https://en.wikipedia.org/wiki/Alexander_William_Roberts"
+  },
+  {
+    "name": "William C. Roberts",
+    "is_target": false,
+    "lifespan": "1932-09-11 Atlanta – 2023-06-15 Dallas",
+    "field": "心脏病理学；The American Journal of Cardiology 主编 1982-2022",
+    "why_confusable": "★★★ **检索层面的最大污染源**。现代文献数据库里 `William C. Roberts` / `W. C. Roberts` 几乎全部指向他（四十年主编、数千篇署名），搜目标 1885 年前的 `W. C. Roberts` 会被他淹没。",
+    "distinguishing_field": "年代（1932- ，目标 1902 卒）＋ 题材（cardiology）＋ 机构（NIH／Baylor）。**年份是此人唯一必要的判据：≥1950 的任何 `W. C. Roberts` 一律不是目标。**",
+    "source_url": "https://en.wikipedia.org/wiki/William_C._Roberts"
+  },
+
+  {
+    "name": "Robert Alfred Cloyne Godwin-Austen",
+    "is_target": false,
+    "lifespan": "1808-03-17 – 1884-11-25",
+    "field": "地质学，FRS 1849，Wollaston 奖章 1862",
+    "why_confusable": "★★★ **与目标形状完全相同的一例改姓**：他 1854 年依王室许可加姓 Godwin，**1854 年以前署 `Robert A. C. Austen`**——即一个 FRS 地质学家在 1830s-50s 用裸 `Austen` 发表。目标 1885 年后署 `Roberts-Austen`。两人在 Geological Society／Royal Society 的旧索引里都以 `Austen` 立目。",
+    "distinguishing_field": "题材（Devonshire 地质、English Channel 地层）＋ 卒 1884（**早于目标改姓的 1885 年**）＋ 复姓另一半是 `Godwin` 不是 `Roberts`。",
+    "source_url": "https://en.wikipedia.org/wiki/Robert_Alfred_Cloyne_Godwin-Austen"
+  },
+  {
+    "name": "Henry Haversham Godwin-Austen",
+    "is_target": false,
+    "lifespan": "1834-07-06 – 1923-12-02",
+    "field": "测绘、地质、软体动物学（喜马拉雅、K2／Mount Godwin-Austen）",
+    "why_confusable": "上一条之子，**1854 年以前称 `Henry Haversham Austen`**；1834-1923 的活跃期把目标整段包住。`Godwin-Austen` 与 `Roberts-Austen` 是同一构词法的复姓，OCR 里 `-Austen` 那一半完全同形。",
+    "distinguishing_field": "题材（Survey of India、Himalaya、terrestrial molluscs）＋ 军衔 Lieutenant-Colonel ＋ 复姓另一半 `Godwin`。",
+    "source_url": "https://en.wikipedia.org/wiki/Henry_Haversham_Godwin-Austen"
+  },
+  {
+    "name": "Peter Townsend Austen",
+    "is_target": false,
+    "lifespan": "1852-09-10 Staten Island – 1907-12-30",
+    "field": "化学（有机化学、应用化学），Rutgers 教授 1878-1891，后 Brooklyn Polytechnic",
+    "why_confusable": "★★★ **同代、同学科大类（化学）、署 `P. T. Austen` 的裸 Austen 作者**。他在 American Chemical Journal 与柏林化学会会刊发表，正是目标论文被转载／摘录的同一类刊物；两人还都出过教科书（他译 Pinner 的有机化学导论，目标写 Introduction to the Study of Metallurgy）。",
+    "distinguishing_field": "国别与机构（美国 Rutgers／Brooklyn Polytechnic）＋ 名 `Peter Townsend`／`P. T.` ＋ 题材（有机化学，不是合金）。",
+    "source_url": "https://www.anb.org/display/10.1093/anb/9780198606697.001.0001/anb-9780198606697-e-1300051"
+  },
+  {
+    "name": "Ernest Edward Austen",
+    "is_target": false,
+    "lifespan": "1867 London – 1938-01-16",
+    "field": "昆虫学（双翅目），British Museum (Natural History)",
+    "why_confusable": "署 `E. E. Austen`；活跃期与目标晚年重叠，同在伦敦学会圈；裸 `Austen` 在 1900 年前后的英国科学索引里常指他。",
+    "distinguishing_field": "题材（Diptera、blood-sucking flies）＋ 机构（BM(NH)）。",
+    "source_url": "https://en.wikipedia.org/wiki/Ernest_Edward_Austen"
+  },
+  {
+    "name": "Jane Austen",
+    "is_target": false,
+    "lifespan": "1775–1817",
+    "field": "小说",
+    "why_confusable": "★★ 不是学术混淆，是**检索污染**：任何裸 `Austen` 的全文检索都会被她的作品与研究文献压过；archive.org 上 `Austen` 的条目绝大多数是她的。",
+    "distinguishing_field": "年代（1817 卒）＋ 体裁（小说）。**只作为检索式负词使用，不进归属判据。**",
+    "source_url": "https://en.wikipedia.org/wiki/Jane_Austen"
+  },
+  {
+    "name": "Austen Henry Layard",
+    "is_target": false,
+    "lifespan": "1817–1894",
+    "field": "考古（尼尼微）、外交",
+    "why_confusable": "★★★ **`Austen` 在英语里也是教名**。他署 `A. H. Layard`／`Austen Henry Layard`，`Austen` 出现在**名的位置**而不是姓的位置。任何把裸 `Austen` 当姓氏标记的判据都会被这一类打乱。",
+    "distinguishing_field": "`Austen` 后面紧跟的是另一个姓（Layard），不是句读或学位后缀。",
+    "source_url": "https://en.wikipedia.org/wiki/Austen_Henry_Layard"
+  },
+  {
+    "name": "Austen Chamberlain",
+    "is_target": false,
+    "lifespan": "1863–1937",
+    "field": "政治（英国财政大臣、外交大臣，1925 诺贝尔和平奖）",
+    "why_confusable": "同上：`Austen` 作教名。他与目标活跃期重叠，且同在英国官方文书里出现（目标供职皇家造币厂，属财政部系统）。",
+    "distinguishing_field": "`Austen` 后跟 `Chamberlain`；题材是政治不是冶金。",
+    "source_url": "https://en.wikipedia.org/wiki/Austen_Chamberlain"
+  },
+
+  {
+    "name": "George Roberts（目标之父）",
+    "is_target": false,
+    "forbidden_to_exclude": true,
+    "lifespan": "生卒未查得；Hudson's Bay Company 供职，威尔士血统",
+    "field": "非科学人物（无著作）",
+    "why_confusable": "**不是混淆源，是排除名单的禁区。** 每一篇写目标家世的传记都含 `eldest son of George Roberts`（DNB 1912 补编原文）。把 `George Roberts` 写进 excluded_names 会把**所有带家世的传记材料**判成他人，而丢材料的方向不会报错。",
+    "distinguishing_field": "——（本条只用于提示禁区，不用于判定）",
+    "source_url": "https://en.wikisource.org/wiki/Dictionary_of_National_Biography,_1912_supplement/Roberts-Austen,_William_Chandler"
+  },
+  {
+    "name": "William Chandler, M.D., of Canterbury（目标外祖父）",
+    "is_target": false,
+    "forbidden_to_exclude": true,
+    "lifespan": "生卒未查得；Canterbury 的医生，Kentish family",
+    "field": "医学",
+    "why_confusable": "★★★ **禁区里最危险的一条**：目标的教名与中名合起来就是外祖父的全名 `William Chandler`。判据的排除正则只有词首边界、没有词尾边界，`William Chandler` 会命中 `William Chandler Roberts-Austen` 本人——**排除他等于把目标的每一份材料删光**。",
+    "distinguishing_field": "——（本条只用于提示禁区，不用于判定）",
+    "source_url": "https://en.wikisource.org/wiki/Dictionary_of_National_Biography,_1912_supplement/Roberts-Austen,_William_Chandler"
+  },
+  {
+    "name": "Major Nathaniel Lawrence Austen of Haffenden and Camborne（目标之舅父）",
+    "is_target": false,
+    "forbidden_to_exclude": true,
+    "lifespan": "生卒未查得；Kent",
+    "field": "非科学人物",
+    "why_confusable": "**Austen 这个姓的来源本人。** 目标 1885 年应他之请加姓。凡解释改姓由来的传记都写他的名字；排除他会把改姓这件事的全部证据删掉——而改姓正是本人物同名护栏的核心事实。",
+    "distinguishing_field": "——（本条只用于提示禁区，不用于判定）",
+    "source_url": "https://en.wikisource.org/wiki/Dictionary_of_National_Biography,_1912_supplement/Roberts-Austen,_William_Chandler"
+  },
+  {
+    "name": "Charles Frederick Chandler",
+    "is_target": false,
+    "forbidden_to_exclude": true,
+    "lifespan": "1836-12-06 – 1925-08-25",
+    "field": "化学，Columbia School of Mines 创办人之一、院长；American Chemical Society 会长",
+    "why_confusable": "★★★ **看着最像该排除、实际最不能排除的一条。** 他是与目标同代、同在「School of Mines」体系里的著名化学家，裸 `Chandler` 在 1870-1900 年的化学／冶金文献里指他的概率很高。但 `Chandler` 是**目标的中名**，写进 excluded_names 会命中 `W. Chandler Roberts`（他 1885 年前的全部署名）与 `William Chandler Roberts-Austen`（他的全名）。**必须用完整消歧形式 `Charles Frederick Chandler` 或 `C. F. Chandler`，且本轮刻意一条也不放进排除名单。**",
+    "distinguishing_field": "名 `Charles Frederick`／`C. F.` ＋ 机构 Columbia（纽约），不是 Royal School of Mines（伦敦）。",
+    "source_url": "https://en.wikipedia.org/wiki/Charles_Frederick_Chandler"
+  }
+]
