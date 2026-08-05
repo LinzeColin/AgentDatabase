@@ -1,0 +1,78 @@
+{
+  "builder_version": "v0.0.0.5",
+  "chosen_subject_uid": "coffin-charles-l-welding-detroit",
+  "consent_authority": null,
+  "created_at": "2026-08-04T23:46:02Z",
+  "current_version": null,
+  "existential_hypotheses_enabled": false,
+  "identity_selection": {
+    "canonical": "technical-engineer",
+    "display": "材料建工师",
+    "mode": "single",
+    "primary": "technical-engineer",
+    "weights": {
+      "technical-engineer": 1.0
+    }
+  },
+  "language": "en",
+  "model_version": "0.1.0-draft",
+  "name": "Charles L. Coffin",
+  "namesake_gate": {
+    "candidate_count": 1,
+    "chosen_candidate": {
+      "application_scenarios": [
+        "电弧焊工艺",
+        "金属电极与填充金属",
+        "焊接专利"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "US Patent 428,459 (1890)",
+          "note": "一手，专利说明书署名"
+        },
+        {
+          "locator": "https://en.wikipedia.org/wiki/Charles_L._Coffin",
+          "note": "★ 生卒年与 Charles A. Coffin 雷同，存疑"
+        }
+      ],
+      "canonical_name": "Charles L. Coffin",
+      "distinguishing_basis": "以美国专利 428,459 的署名与底特律居所为准；与 Charles A. Coffin 的区别在于此人是工艺发明人、留下的是专利说明书，不是公司经营者。 ★ 选定依据（2026-08-05）：队列把他排在「焊接」一组，与 Slavyanov、Benardos、Elihu Thomson、Comfort Avery Adams 并列，族为材料建工师——所指是焊接工艺发明人，不是 GE 首任总裁。**同名者 Charles Albert Coffin 已单列并显式排除。**",
+      "evidence_level": "low",
+      "identity_category": "发明家／焊接工艺",
+      "key_capabilities": [
+        "电弧焊金属电极法",
+        "焊接接头成形"
+      ],
+      "label": "A",
+      "occupation_or_role": "电弧焊工艺发明人（金属电极熔化填充）",
+      "professional_background": "美国底特律。1890 年获美国专利 428,459——用金属电极做电弧焊，电极熔化后的金属越过电弧沉积在接头里形成焊缝。这是「熔化电极填充金属」这一路的起点，后来的手工电弧焊（SMAW）即由此而来。★ 生卒年待核：英文维基该条目写作 1844–1926，而这两个数与 Charles A. Coffin 完全相同，疑为条目串人，不得直接采信。",
+      "subject_uid": "coffin-charles-l-welding-detroit"
+    },
+    "chosen_subject_uid": "coffin-charles-l-welding-detroit",
+    "normalized_name": "charleslcoffin",
+    "resolution": "single",
+    "schema_version": "1.0"
+  },
+  "normalized_name": "charleslcoffin",
+  "origin_review_required": false,
+  "product_version": null,
+  "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+  "profile": "quick",
+  "prohibited_uses": [
+    "identity authentication or deceptive impersonation",
+    "invented endorsement, signature, consent, private memory or current opinion",
+    "unsupported psychological diagnosis",
+    "replacement of accountable high-stakes professional judgment"
+  ],
+  "retention_policy": null,
+  "runtime_invocation_versioning": false,
+  "scenario": null,
+  "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+  "schema_version": "2.0",
+  "slug": "charles-l-coffin",
+  "status": "draft",
+  "subject_origin": "historical",
+  "target_id": "tgt-bba7bed851e2",
+  "time_scope": "1880s–1900s",
+  "updated_at": "2026-08-04T23:46:02Z"
+}

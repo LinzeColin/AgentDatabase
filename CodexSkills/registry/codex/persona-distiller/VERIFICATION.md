@@ -1,6 +1,6 @@
-# Release verification — Persona Distiller v0.0.0.135
+# Release verification — Persona Distiller v0.0.0.137
 
-Date: 2026-08-05（**v0.0.0.135**）
+Date: 2026-08-05（**v0.0.0.137**）
 
 > **本文件记录「当前发布号的复验结果」，不是历史归档。**
 > 版本号必须等于根目录 `VERSION`，由 `scripts/check_contract_drift.py` 强制。
@@ -21,6 +21,45 @@ Date: 2026-08-05（**v0.0.0.135**）
 > **表格正文不在任何判据的射程里**。
 > **「本表每一行都来自本次实跑」是一句自述**——
 > 而自述不是证据（见 `self-report-is-not-evidence`）。
+
+> ### v0.0.0.137 这一版重跑了什么
+>
+> **`check_persona_frame_break`：人物在用第一人称谈我的资料库；它同时查判据。**
+> ★★★ **上线当天被自己的第一次全量扫打脸**：报 16.4% 出戏，其中 Livermore 53%——
+> **报出去之前先看了命中原文，发现那是个第三人称分析型产物，谈语料正是题目要的**。
+> 已加两道射程（判模式 + 题面问库存逐题豁免），自测 14 → **20 条 / 6 组反向对照**。
+> 修正后实测（只算 persona 型 272 题）：出戏 **33 = 12.1%**（Mendel 0%，Thomson R1 44%）。
+> **本次重跑**：新判据自测（**14 条，含 4 组反向对照**——问出处的套组谈 OCR 不许拦、
+> 人物层的「我不知道」不许拦、**判据要求出戏要单独报出根因**、判据侧同样按套组豁免）；
+> **Thomson #129 实跑**（产物出戏 **7/16 → 5/16 → 0/16**；
+> **判据要求出戏 10/16，三轮不变**——因为判据冻结，改不了）；
+> **三轮六席次判分全跑**（席 D/E 有 rubric、席 F/G 无 rubric，四席互不通气）；
+> 每轮派发前跑表面通道核对（**两次抓出是我改写时带进去的粗体/反引号**，
+> 候选 4/16 而基线 0/16——**自己造的泄题通道**，派发前清掉）；
+> 16 条长引文逐条对 103 万字符语料复核（**归一空白后 16/16 命中**；
+> 未归一时假报 7 条不命中——**那是我的检查写错了，不是引文错了**）。
+> **其余各行沿用 v0.0.0.96 那一次。**
+>
+> ★★★ **本版记住的一句**：我改写了 9 道题让人物更像人物，
+> **诚实的尺子涨 0.1183，我自己写的尺子跌 0.0822**，而没动过的 7 题两边都只动了不到 0.01。
+> **两把尺子对同一次改进指相反方向——这比「两把尺子给的分不同」更硬，
+> 因为它不依赖任何一次绝对分。**
+
+> ### v0.0.0.136 这一版重跑了什么
+>
+> **`A-byline-ocr`：名或姓被 OCR 打坏的署名与发言标签，带同名护栏。**
+> **本次重跑**：`check_authorship` 自测（**新增 10 条 `A-byline-ocr` 对照**：
+> 5 认出／5 拒绝，其中 3 条同名陷阱 Thompson／Quimby／Thoms）；
+> **Thomson #129 逐源跑 `check_authorship` 取 A-* 证据**（52/56：
+> ocr 23／signature-block 16／byline 11／standalone 2）；
+> **研究门 75 → 0 errors、合成门 0 errors**；
+> 断言层 9 条逐条核 2–3 源；**引文逐字核验三轮**（研究文档 62 条、断言 18 条、候选答案 13 条，
+> **未命中全 0**）；`check_quote_integrity` 自测（新增围栏代码块跳过）；
+> `finalize_release.py` 四步。**其余各行沿用 v0.0.0.96 那一次。**
+>
+> ★★★ **本版记住的一句**：`Thomson` 与 `Thompson` 只差一个字母，
+> 而该人物索引里挨着他名字的 27 个专利号**有 16 个是别人的**。
+> **OCR 容错与同名精度是同一根杠杆的两端——放宽一端就一定压到另一端。**
 
 > ### v0.0.0.135 这一版重跑了什么
 >
@@ -400,7 +439,7 @@ Date: 2026-08-05（**v0.0.0.135**）
 |---|---:|---|
 | **★★★★★★★★★★ 答案母版（v0.0.0.53 新增）** | **passed**；三支用 Osler 真数据实跑：真候选**过并落盘 32 条**；每条 ×3 → **中止且候选文件被删**；占位没删 → **点名 `XX-known-01` 并中止** | `scaffold/answers_template.py` 三支实跑 |
 | Offline unit / integration / concurrency tests | **70 / 70 passed**（`v0.0.0.96 实跑`） | `python3 -m pytest tests/ -q` |
-| **全部检查器自测（v0.0.0.47 起逐件跑）** | **`v0.0.0.134 实跑`：判据 61 件、接线审计**在生产代码里找不到调用方的 0 件**；语料射程审计 该扫 **18** 个工作区、实际扫了 **18** 个；★ 新增「台账有、工作区没有」审计：7 人 16 份，其中一手 10 份 | 逐件 `check_*.py --self-test`、`check_checkers.py scripts` |
+| **全部检查器自测（v0.0.0.47 起逐件跑）** | **`v0.0.0.137 实跑`：判据 **62** 件（新增 `check_persona_frame_break`）、接线审计**在生产代码里找不到调用方的 0 件**；语料射程审计 该扫 **18** 个工作区、实际扫了 **18** 个；★ 新增「台账有、工作区没有」审计：7 人 16 份，其中一手 10 份 | 逐件 `check_*.py --self-test`、`check_checkers.py scripts` |
 | **★ 公有领域的依据（v0.0.0.79 新增，只写 metrics，接进 research）** | **passed**（**9 项自测，其中 8 条反向对照**）；起因是 #116 Watson 探测撞到的**可复现误判**——Unpaywall 对 `10.1111/j.1365-2702.2005.01256.x` 返回 `license=public-domain`，而同 DOI 的 Crossref 写 Wiley 标准条款、**作者在世**。**十一个真账本实跑**：声称公有领域 **872** 条，其中有据可查 **230**、**有结论无依据 642**、**依据取自聚合器 0**（**本件是预防不是补救**）；不声称的 251 条（Godin `public-web` 196、Steinhardt 55）**完全不判，在世作者未被误伤**。**它不说那 642 条判断错了**——八位历史人物结论都站得住，报的是「依据不在产物里」（属 #29）。判据把三种状态分开：有据可查／有结论无依据／依据取自聚合器 | `check_rights_basis.py --self-test` + 对 11 份 `source-ledger.jsonl` 实跑 + Fleming 过 research 门 |
 | **★ 证据字段是不是逐条的（v0.0.0.78 新增，只写 metrics，接进 synthesis／release）** | **passed**（**14 项自测，其中 8 条反向对照**，含**三处真实误报夹具**）；`check_claim_anchors` 核「有没有挂上源」，本件核「**这个字段有没有区分度**」。**十个工作区实测：七个逐条各异，三个不是**——Koch #107 `source_ids` **46 条只有 1 种**、Lister #108 两个字段各 **1 种/35 条**、Jenner #104 `evidence_clusters` **1 种/35 条**。**三种状态分开报**：逐条各异／整批同一个值（报）／**整批都空（单独报，不是同一件事）**——`counter_source_ids` 六人全空是「没用这个字段」而非缺陷。**★ 第一版拿记录总数当分母，真数据一跑误报三处**（Jenner 非空 1/35、Steinhardt 4/39、Pasteur 3/33），改为按**非空数**判并固化为反向对照 ⑦。接线两向已实跑：Lister 报出两处、Fleming 不报；Semmelweis `claims.jsonl` 0 字节 → 报「未核验（不是通过）」 | `check_evidence_is_per_claim.py --self-test` + 对十份 `claims.jsonl` 实跑 + 两个真工作区过合成门 |
 | **★ 语料一手上限（v0.0.0.76 新增／v0.0.0.77 改读入库 attest，只写 metrics，接进 research）** | **passed**（**14 项自测，其中 8 条反向对照**）；把两条门联立成绝对数：**deep 要 30 份一手**（`ceil(45×0.65)`）、standard 12、quick 4。**v0.0.0.77 射程 5/10 → 11/11**：改为优先读 `evidence/source-ledger.jsonl`（schema 统一，**发布门就是按它算的**），口径逐字对齐 `evaluate_sources`（train／非 U 档／非抽取失败）。**★★ 与门交叉核对逐位一致**：Fleming 本件 45/68=0.6618 ／ 门 45/68=0.6618；Jenner 本件 50/52=0.9615 ／ 门 50/52=0.9615。**十一人全量复扫**：九人过各自档；**Koch 55/120=0.4583 < 0.65**、**Semmelweis 7/59=0.1186 且只有 2 道** ——**两人都已在延后名单里，一个都没入库，门做了它该做的事**。`raw/_ids.txt` 保留为入库前退路（格式因人而异，十份里 5 份带分档列，其余报「未核验（不是通过）」而**不是报 0 份一手**） | `check_corpus_ceiling.py --self-test` + 对 11 份 `source-ledger.jsonl` 与 10 份 `raw/_ids.txt` 实跑 + 两个真工作区过 research 门并与门自身指标比对 |
@@ -431,7 +470,7 @@ Date: 2026-08-05（**v0.0.0.135**）
 | **★★★ 语料真伪门（v0.0.0.33 新增，`ingest.py` 入口**硬拦**，见下节）** | **passed**（负对照 8 项，含 **4 条真实样本**）；**真实数据实测**：Jenner 抓源 4 份 HTML 错误页全抓出（最大一份 **146 KB**），入口实拦已验；清理后 53 份 0 报 | `check_corpus_integrity.py --self-test` + 对 `ws-jenner` 实跑 + `ingest.py` 实拦 |
 | **★★★ 引文层门（v0.0.0.32 新增，只报不拦，见下节）** | **passed**（负对照 11 项，含 **4 条真实样本 + 2 条真实误报夹具**）；**真实数据实测**：Harvey 第 3 轮定稿 10 处、Vesalius 11 处、Galen 0 处 | `check_quote_layer.py --self-test` + 对三份真实候选答案实跑 |
 | 蒸馏版本新鲜度 | 下限 `v0.0.0.70`（当前版本末位 − 10）；**102 条中 0 达标 / 102 低于下限 / 0 未知**；掉的是尺子，产物一份没变（任务 #29）（v0.0.0.75 记录里写的下限 `v0.0.0.37` 是旧数，**本次实跑纠正**） | `check_distillation_freshness.py` |
-| Release checksum 全量校验 | passed，**392 files**（`v0.0.0.134 实跑`；v0.0.0.96 写的 341、v0.0.0.75 写的 305 都是旧数——**这一行漂过三次，v0.0.0.111 起由 `check_verification_counts.py` 盯着**） | `self_check.py` |
+| Release checksum 全量校验 | passed，**394 files**（`v0.0.0.137 实跑`；v0.0.0.96 写的 341、v0.0.0.75 写的 305 都是旧数——**这一行漂过三次，v0.0.0.111 起由 `check_verification_counts.py` 盯着**） | `self_check.py` |
 | Canonical group validation | **12 categories, 100 products, 102 artifacts**; passed | `validate_persona_registry.py` |
 | 团队侧版本绑定 | **passed**，三处同为 `v0.0.0.13`；负对照 6 类全抓出 | `persona-distiller-group/scripts/check_group_version_binding.py` |
 | Identity family registry | 12 families；加权多身份输入被拒 | `test_identity_routing`、`test_skill_contract` |

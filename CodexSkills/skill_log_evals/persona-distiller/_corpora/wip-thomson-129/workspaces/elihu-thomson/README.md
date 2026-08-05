@@ -1,5 +1,9 @@
 # Elihu Thomson 人物 Skill
 
+> ⚠⚠ **这个人物没有入库（三轮用尽，记拒发）。**
+> **看任何 delta 之前先读 [`DELTA-READ-ME-FIRST.md`](DELTA-READ-ME-FIRST.md)**——
+> 这里有两个数：`+0.4084`（有 rubric）与 `−0.0859`（无 rubric），**只有后者能用**。
+
 - 构建器：Persona Distiller `v0.0.0.5`
 - 目录/Skill 名：`elihu-thomson`
 - 构建主身份：材料建工师
