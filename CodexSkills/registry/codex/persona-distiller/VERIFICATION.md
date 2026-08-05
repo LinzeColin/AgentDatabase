@@ -1,6 +1,6 @@
-# Release verification — Persona Distiller v0.0.0.151
+# Release verification — Persona Distiller v0.0.0.152
 
-Date: 2026-08-05（**v0.0.0.151**）
+Date: 2026-08-05（**v0.0.0.152**）
 
 > **本文件记录「当前发布号的复验结果」，不是历史归档。**
 > 版本号必须等于根目录 `VERSION`，由 `scripts/check_contract_drift.py` 强制。
@@ -21,6 +21,14 @@ Date: 2026-08-05（**v0.0.0.151**）
 > **表格正文不在任何判据的射程里**。
 > **「本表每一行都来自本次实跑」是一句自述**——
 > 而自述不是证据（见 `self-report-is-not-evidence`）。
+
+> ### v0.0.0.152 这一版重跑了什么
+>
+> **同名问题打穿的第二处**：`own_voice_ratio` 只比姓氏，
+> 而 Sorby #133 的**父亲也叫 Henry Sorby**，父亲的日记会被算进儿子的声口。
+> 要害是这个数**正是决定 profile 时要看的那个**——不修则决定建在污染的比值上。
+> 已接同名判据：先剔「他人」，**`unknown` 不计入——宁可低报不可高报**。
+> ★ 向后兼容实测：无 criteria 的人物走原路，Bessemer 与 Adams 的比值都仍是 1.0。
 
 > ### v0.0.0.151 这一版重跑了什么
 >

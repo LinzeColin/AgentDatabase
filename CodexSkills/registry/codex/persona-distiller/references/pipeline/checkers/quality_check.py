@@ -504,8 +504,38 @@ def report_own_voice(report, target: Path, meta: dict[str, Any],
         return
     rx = re.compile(re.escape(surname), re.I)
 
+    # ★★★ v0.0.0.152：**只比姓氏，会把同姓近亲的材料算成「他自己的声口」。**
+    #   Sorby #133 实测：`build_patterns` 取到的姓氏就是 `Sorby`，
+    #   而他**父亲也叫 Henry Sorby**——父亲那本 1845–46 的日记同在 Sheffield 馆藏里，
+    #   账本 author 写成 `Henry Sorby` 一样命中，**父亲的日记会被算进儿子的声口**。
+    #   ★ 这是同一个同名问题打穿的**第二处**：第一处是 `check_authorship` 的署名护栏。
+    #   而 own_voice_ratio 正是决定 profile（quick vs deep）时要看的那个数——
+    #   **决定会建在一个被污染的比值上。**
+    #
+    #   修法：工作区里若有 `namesake-criteria.json`，就用它先把「他人」剔掉；
+    #   **没有那份文件的人物一律走原路，一个数都不变**（向后兼容）。
+    nsc = None
+    crit_path = None
+    for cand in (target / 'namesake-criteria.json',
+                 target.parent.parent / 'namesake-criteria.json',
+                 target.parent.parent.parent / 'namesake-criteria.json'):
+        if cand.is_file():
+            crit_path = cand
+            break
+    if crit_path is not None:
+        try:
+            spec_n = importlib.util.spec_from_file_location(
+                '_pd_nsc_ov', Path(__file__).resolve().parent / 'check_namesake_criteria.py')
+            nsc_mod = importlib.util.module_from_spec(spec_n)
+            spec_n.loader.exec_module(nsc_mod)
+            nsc = (nsc_mod, json.loads(crit_path.read_text(encoding='utf-8')))
+        except Exception:                                       # noqa: BLE001
+            nsc = None
+
     own_bytes = all_bytes = 0
     own_ids: list[str] = []
+    excluded: list[str] = []
+    unknown: list[str] = []
     for record in sources:
         rel = record.get('local_path')
         path = (target / rel) if rel else None
@@ -513,9 +543,22 @@ def report_own_voice(report, target: Path, meta: dict[str, Any],
             continue
         size = path.stat().st_size
         all_bytes += size
-        if rx.search(str(record.get('author') or '')):
-            own_bytes += size
-            own_ids.append(str(record.get('source_id')))
+        if not rx.search(str(record.get('author') or '')):
+            continue
+        if nsc is not None:
+            mod_n, crit = nsc
+            blob = ' '.join(str(record.get(k, '')) for k in
+                            ('author', 'byline', 'original_name', 'locator', 'title', 'notes'))
+            ym = re.search(r'\b(1[6-9]\d{2}|20[0-2]\d)\b', blob)
+            verdict = mod_n.classify(blob, crit, int(ym.group(1)) if ym else None)
+            if verdict['判定'] == '他人':
+                excluded.append(f"{record.get('source_id')}：{verdict['理由'][:60]}")
+                continue
+            if verdict['判定'] == 'unknown':
+                unknown.append(str(record.get('source_id')))
+                continue                      # ★ 说不准的**不计入本人声口**——宁可低报
+        own_bytes += size
+        own_ids.append(str(record.get('source_id')))
     ratio = (own_bytes / all_bytes) if all_bytes else 0.0
     report.metrics['own_voice'] = {
         '本人所著的 train 源数': len(own_ids),
@@ -523,6 +566,12 @@ def report_own_voice(report, target: Path, meta: dict[str, Any],
         '本人所著字节': own_bytes,
         'train 总字节': all_bytes,
         'own_voice_ratio': round(ratio, 4),
+        '★ 同名判据': ('未启用（本人物没有 namesake-criteria.json）' if crit_path is None else {
+            '按判据剔除的（他人）': excluded[:8],
+            '**说不准的（unknown，未计入本人声口）**': unknown[:8],
+            '口径': ('只比姓氏会把同姓近亲算进来。Sorby #133 的父亲也叫 Henry Sorby，'
+                     '父亲的日记同在馆藏里。**unknown 一律不计入——宁可低报，不可高报。**'),
+        }),
         '口径': ('账本 author 命中人物姓氏的 train 源字节占比。'
                  '**与 primary_ratio 量的不是一回事**：后者含「关于他的同期报道」（P2），'
                  '前者只含他本人的表达。改 tier／再多抓报道都不会让这个数变大。'),

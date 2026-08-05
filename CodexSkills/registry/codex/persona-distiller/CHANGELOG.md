@@ -1,5 +1,39 @@
 # Changelog
 
+## v0.0.0.152
+
+### 同一个同名问题打穿的**第二处**：`own_voice_ratio` 只比姓氏
+
+v0.0.0.151 修的是署名护栏。今天顺着往下查，发现 `report_own_voice` 也中招：
+
+    own_voice_ratio = 账本 author **命中姓氏**的 train 源字节 ÷ 全部 train 源字节
+
+`build_patterns("Henry Clifton Sorby")` 取到的姓氏就是 `Sorby`，
+而**父亲也叫 Henry Sorby**，那本 1845–46 的日记同在 Sheffield 馆藏里——
+账本 author 写成 `Henry Sorby` 一样命中，**父亲的日记会被算进儿子的声口**。
+
+★★★ 要害在于 `own_voice_ratio` **正是决定 profile（quick vs deep）时要看的那个数**
+（Coffin #130 就是栽在声口上：三道门全过，17 万字里实质的话只有 8 句）。
+**不修的话，profile 决定会建在一个被污染的比值上。**
+
+已改：工作区（或其上两级）有 `namesake-criteria.json` 时，先用它剔掉「他人」；
+**`unknown` 一律不计入本人声口——宁可低报，不可高报**。
+产物里同时列出被剔除的与说不准的，各带理由。
+
+★ **向后兼容已实测**：没有 criteria 文件的人物走原路，
+Bessemer 与 Adams 复跑 `own_voice_ratio` 都仍是 1.0，标注「未启用」。
+
+Sorby 四例实跑：父亲 1845 日记 → 他人；`Clifton`+`F.R.S.` → 目标本人；
+`T. C. Sorby` → 他人（排除名单）；裸名无年份 → **unknown**（不许当成本人）。
+
+### #133 Sorby：同名门 ready、工作区已建、profile 记为待定
+
+从 10 个候选选定，9 个（含父亲、建筑师、锉刀商、John Sorby 同名簇 5 人）落入 excluded。
+**profile 没有定死**：探测说一手约 34 件（deep 站得住），
+但金相学那一支拿不到、声口密度未量。判据写在 `PROFILE-决定点.md`：
+一手 ≥30（按作品去重）＋ 道 ≥3（字段实测）＋ 第一人称占比能撑起 16 题。
+★★ 明确禁止倒过来选——**先看 delta 门好不好过再挑 profile，是拿判据迁就结论**。
+
 ## v0.0.0.151
 
 ### 新判据 `check_namesake_criteria.py`：**按人物定制的同名判据**（已接线，只写 metrics）
