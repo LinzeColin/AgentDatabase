@@ -234,6 +234,14 @@ def main() -> int:
         ap.error("要么 --self-test，要么同时给 --workspace 与 --round-dir")
 
     ws, rd = pathlib.Path(a.workspace), pathlib.Path(a.round_dir)
+    # ★ 裸名（`round1`）要解析到工作区里，不能对着 cwd 解析。
+    #   `build_blind_payload` 上周就因为这个把**载荷和揭盲键写进了已发布的产物目录**，
+    #   两名评委各自独立报了上来，已在那边修好——**而这个兄弟脚本没跟着改**。
+    #   在这里的后果没那么响：只是找不到 key 直接退出（`✗ round1 里没有`），
+    #   看着像「评委没交卷」，实际是路径错了。
+    if not rd.is_absolute() and len(rd.parts) == 1:
+        rd = ws / "evals" / rd
+        print(f"★ --round-dir 是裸名，已解析到工作区内：{rd}")
     keys = [pathlib.Path(a.key)] if a.key else sorted(rd.glob("*_blind_key.json"))
     if not keys:
         print(f"✗ **{rd} 里没有 *_blind_key.json**——盲判归属无从判定"); return 3
