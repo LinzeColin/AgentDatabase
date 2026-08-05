@@ -310,6 +310,52 @@ def main():
     # ★★ v0.0.0.96：依据可行性分诊——**把探测的射程先缩一缩**。
     #   七次探测七次延后、每次 30–70 分钟；而有几次，依据的适用条件在开跑前就排除了大部分路。
     #   ★ 只用**卒年表里有出处的**生卒年；其余属性一律不知道 → 当作「还可能」，不许替人排除。
+    # ★★★ v0.0.0.156：**「不在名册」被读成「没开工」——差点让我把 Adams 重做一遍。**
+    #   本件判「做没做」看的是**入库**（registry_products）。而 Adams #131
+    #   三轮判分全跑完、诚实 delta 首次转正 +0.0375，**卡在 strict 打包（待裁定 ㉒）**——
+    #   他没入库，于是在这里与「从没碰过的人」长得一模一样，NEXT 又把他排了出来。
+    #   ★ 「受阻待裁」与「没开工」是两种状态，**空默认值不许把它们并成一种**。
+    #   判法：`_corpora/wip-*` 下有没有他的工作区。有就报出来，并说明它到哪一步了。
+    existing_ws = None
+    if nxt:
+        corp = os.path.normpath(os.path.join(
+            os.path.dirname(os.path.abspath(__file__)),
+            # ★ 实测数出来的层数：references/pipeline → 上 5 级才到 CodexSkills。
+            #   第一版写 4 级，路径不存在于是**静默什么都没找到**，报「没有——是新的」——
+            #   又一次「空默认值吞掉不知道」。已加下面的存在性断言。
+            "..", "..", "..", "..", "..",
+            "skill_log_evals", "persona-distiller", "_corpora"))
+        slug = nxt["name"].strip().lower().replace(" ", "-").replace(".", "")
+        if not os.path.isdir(corp):
+            # ★★ 路径找不到时**必须说出来**，不许静默当成「没有工作区」。
+            existing_ws = {"★ 判不了": f"语料区路径不存在：{corp}——"
+                                       "**这不等于「他没有工作区」**"}
+        else:
+            for d in sorted(os.listdir(corp)):
+                if not d.startswith("wip-"):
+                    continue
+                # wip-<姓氏或 slug 片段>-<编号>
+                stem = d[4:].rsplit("-", 1)[0]
+                # ★★★ 按**整段**比，不按子串比。
+                #   子串版实测撞出一个假阳：`William D. Callister` 命中 `wip-lister-108`
+                #   ——`lister` 是 `callister` 的一部分。
+                #   这与同名护栏那次是同一个坑（抹平之后再查词边界，边界就没了）。
+                if stem and stem in slug.split("-"):
+                    ws = os.path.join(corp, d)
+                    rounds = []
+                    for root, dirs, _f in os.walk(ws):
+                        for x in dirs:
+                            if x.startswith("round"):
+                                rounds.append(x)
+                    existing_ws = {
+                        "目录": d,
+                        "已判轮次": sorted(set(rounds)),
+                        "★": ("**这个人已经有工作区了。** 「不在名册」只说明他没入库，"
+                              "**不等于没开工**——受阻待裁与没开工是两种状态。"
+                              "动手之前先去读那个工作区的判决书，别重做一遍。"),
+                    }
+                    break
+
     grounds_note = None
     if nxt:
         chk2 = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)),
@@ -376,6 +422,7 @@ def main():
             "卒于 1930 年后（或在世）的，**必须先跑公有领域可得性探测**，"
             "不要直接开抓。已因此延后：Henderson #113（本人续展至 2034/2050）、"
             "Watson #116（在世，无到期日）、DeBakey #119（卒于 2008）。"),
+        "★★ NEXT 是否已有工作区": existing_ws or "没有——是新的",
         "NEXT": nxt,
         "why": why,
         "family_counts_ascending": dict(sorted(counts.items(), key=lambda kv: kv[1])),
