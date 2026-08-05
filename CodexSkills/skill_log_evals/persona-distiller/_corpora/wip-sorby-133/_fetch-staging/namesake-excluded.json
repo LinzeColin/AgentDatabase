@@ -1,0 +1,193 @@
+{
+ "subject": "Henry Clifton Sorby (1826-1908)",
+ "gate": "NAMESAKE-GUARD-实测.md 3-way test: (1) middle name 'Clifton' present IN THE NAME; (2) F.R.S. or F.G.S. beside the byline; (3) source is an 1850-1908 learned-society serial. Hit ANY ONE = target. Red line: pre-1850 material signed only 'Henry Sorby' is treated as the FATHER.",
+ "fetch_date": "2026-08-05",
+ "how_exclusion_was_decided": "For every excluded person I record which of the three inclusion criteria FAILS. A person is excluded only when ALL THREE fail (or when the red line applies). Criterion 3 is the weakest discriminator because it is a container test, not a person test - it is never used ALONE to exclude, only to confirm.",
+ "excluded": [
+  {
+   "name": "Henry Sorby (of Woodbourne, Attercliffe), c.1791-1846/47",
+   "relation": "the target's FATHER - highest-risk namesake",
+   "failing_criteria": {
+    "1_middle_name_Clifton": "FAILS - he has no middle name; the target's own 1841 census entry is also bare 'Henry Sorby', so the criterion cuts both ways and never rescues him",
+    "2_FRS_or_FGS": "FAILS - he was never a Fellow of either society",
+    "3_1850_1908_society_serial": "FAILS - he died 1846 (Grace's Guide) or 1847 (Wikipedia); he cannot appear as an author in an 1850-1908 society serial"
+   },
+   "excluded_by": "all three fail + the explicit red line",
+   "red_line_applied": true,
+   "unresolved": "Death year is 1846 vs 1847 (two sources disagree). PROBE could not adjudicate and neither could this fetch. Do NOT hard-code either year.",
+   "corpus_test_result": "TEST 1 over all 38 staged texts: 0 occurrences of a bare 'Henry Sorby' byline. No father-form leakage in this corpus.",
+   "sources": [
+    "https://www.gracesguide.co.uk/Henry_Sorby",
+    "https://www.gracesguide.co.uk/J._and_H._Sorby",
+    "https://archives.shef.ac.uk/repositories/3/resources/333"
+   ]
+  },
+  {
+   "name": "Thomas Charles Sorby (1836-1924), architect",
+   "relation": "contemporary British professional; had real work in Sheffield (1866 St Michael and All Angels); emigrated to Canada 1883",
+   "failing_criteria": {
+    "1_middle_name_Clifton": "FAILS - middle name is Charles",
+    "2_FRS_or_FGS": "FAILS - no F.R.S./F.G.S.",
+    "3_1850_1908_society_serial": "AMBIGUOUS - he published in Building News, an 1850-1908 trade serial; this is precisely why criterion 3 must never be used alone"
+   },
+   "excluded_by": "criteria 1 and 2 both fail; criterion 3 is not decisive for him",
+   "demonstrated_collision": "MEASURED IN THIS CORPUS, not theorised: staged file E2 (MMJ v.XIII p.205) carries the running head 'Microscope Spectrum Apparatus. Bij IT. C. Sorby. 205' - the target's own name OCR'd as 'IT. C. Sorby', which CONTAINS the literal substring 'T. C. Sorby'. Any namesake filter written as a substring match on 'T. C. Sorby' fires on the target's own page. Confirms NAMESAKE-GUARD's rule that initials are unusable as a criterion.",
+   "corpus_test_result": "TEST 2 over all 38 staged texts: 0 genuine T. C. Sorby occurrences (the only two regex hits were 'naval architecture' and the 'IT. C. Sorby' misform above).",
+   "sources": [
+    "http://dictionaryofarchitectsincanada.org/node/1317",
+    "archive.org item cihm_83298, creator 'Sorby, Thomas C. (Thomas Charles), 1836-1924'"
+   ]
+  },
+  {
+   "name": "Robert Sorby (1787-1857) and Robert Sorby and Sons",
+   "relation": "Sheffield file/edge-tool maker; brand still sold today, so it dominates keyword space shared with the target (Sorby + Sheffield + steel)",
+   "failing_criteria": {
+    "1_middle_name_Clifton": "FAILS",
+    "2_FRS_or_FGS": "FAILS",
+    "3_1850_1908_society_serial": "FAILS - trade partnership notices, not society serials"
+   },
+   "excluded_by": "all three fail",
+   "corpus_test_result": "TEST 3 over all 38 staged texts: 0 occurrences.",
+   "sources": [
+    "https://www.gracesguide.co.uk/Robert_Sorby"
+   ]
+  },
+  {
+   "name": "John Sorby name-cluster (John Sorby the elder, John Sorby the younger, Alfred Sorby, John Francis Sorby, Thomas Austin Sorby b.1823) - 5 people",
+   "relation": "the target's father's family firm partners, 1820s-1840s Sheffield metal trade",
+   "failing_criteria": {
+    "1_middle_name_Clifton": "FAILS for all five",
+    "2_FRS_or_FGS": "FAILS for all five",
+    "3_1850_1908_society_serial": "FAILS - they appear only in partnership-dissolution notices"
+   },
+   "excluded_by": "all three fail + the pre-1850 red line",
+   "corpus_test_result": "TEST 3: 0 occurrences.",
+   "sources": [
+    "https://www.gracesguide.co.uk/John_Sorby_and_Sons",
+    "https://www.gracesguide.co.uk/J._and_H._Sorby"
+   ]
+  },
+  {
+   "name": "Sheryl Ann Sorby (1959- )",
+   "relation": "largest single source of search noise in creator:('Sorby'); engineering-graphics author, adjacent keyword space",
+   "failing_criteria": {
+    "1_middle_name_Clifton": "FAILS",
+    "2_FRS_or_FGS": "FAILS",
+    "3_1850_1908_society_serial": "FAILS - living author, works in copyright"
+   },
+   "excluded_by": "all three fail; also breaks the public-domain rule",
+   "sources": [
+    "https://www.wikidata.org/wiki/Q124738707",
+    "IA introductionto3d0000sorb"
+   ]
+  },
+  {
+   "name": "Harold Sorby",
+   "relation": "returned directly by creator:('Sorby'); 1895 item on animal vaccination - date inside the target's active period, subject adjacent to his microscopy",
+   "failing_criteria": {
+    "1_middle_name_Clifton": "FAILS",
+    "2_FRS_or_FGS": "FAILS - no post-nominals on the item",
+    "3_1850_1908_society_serial": "FAILS - a monograph, not a society serial"
+   },
+   "excluded_by": "all three fail",
+   "uncertain": "Dates, nationality and profession could not be established. Recorded as unknown, NOT inferred.",
+   "sources": [
+    "IA animalvaccinatio00sorb, creator '[Sorby, Harold] [from old catalog]'"
+   ]
+  },
+  {
+   "name": "Albert Sorby Buxton (1867-1932)",
+   "relation": "signs 'A. Sorby Buxton'; surname is Buxton, so any substring match on 'Sorby' hits him",
+   "failing_criteria": {
+    "1_middle_name_Clifton": "FAILS",
+    "2_FRS_or_FGS": "FAILS",
+    "3_1850_1908_society_serial": "FAILS"
+   },
+   "excluded_by": "all three fail; surname is not even Sorby",
+   "sources": [
+    "https://www.wikidata.org/wiki/Q4711243"
+   ]
+  },
+  {
+   "name": "Angela Sorby (1965- )",
+   "relation": "contemporary poetry scholar whose book titles contain 19th-century year ranges (1865-1917), so a date filter alone retains her",
+   "failing_criteria": {
+    "1_middle_name_Clifton": "FAILS",
+    "2_FRS_or_FGS": "FAILS",
+    "3_1850_1908_society_serial": "FAILS - modern monograph, in copyright"
+   },
+   "excluded_by": "all three fail",
+   "sources": [
+    "https://www.wikidata.org/wiki/Q4762559",
+    "IA schoolroompoetsc0000sorb"
+   ]
+  },
+  {
+   "name": "Thomas Sorby (1856-1930)",
+   "relation": "contemporary Briton, same surname, sport; must be kept distinct from the architect Thomas Charles Sorby - two Thomas Sorbys, 20 years apart",
+   "failing_criteria": {
+    "1_middle_name_Clifton": "FAILS",
+    "2_FRS_or_FGS": "FAILS",
+    "3_1850_1908_society_serial": "FAILS"
+   },
+   "excluded_by": "all three fail",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Thomas_Sorby"
+   ]
+  },
+  {
+   "name": "Modern Sorbys: Sunniva, Warren, Karol, Karol R., Hugh, Kris L, Nicole, Lorraine Sorby-Howlett",
+   "relation": "pure retrieval noise from Wikidata / IA creator fields; no authorship conflict",
+   "failing_criteria": {
+    "1_middle_name_Clifton": "FAILS",
+    "2_FRS_or_FGS": "FAILS",
+    "3_1850_1908_society_serial": "FAILS - all living or modern"
+   },
+   "excluded_by": "all three fail",
+   "uncertain": "Not individually verified; names read from Wikidata/IA creator fields only.",
+   "sources": [
+    "Wikidata Q87416198 / Q18158731 / Q112380601 / Q95179483 / Q98219487 / Q88909961 / Q121337099"
+   ]
+  }
+ ],
+ "non_person_collisions_checked_in_this_corpus": [
+  {
+   "string": "Sorbus / Sorbi (rowan genus and its species epithet)",
+   "risk": "Sorb* prefix matching in natural-history text",
+   "corpus_test_result": "TEST 5 over all 38 staged texts: 0 occurrences. Not a live risk in THIS corpus (PROBE saw it in JRMS v.26, which is not staged here)."
+  },
+  {
+   "string": "Sorby Research Institute (Sheffield, WWII)",
+   "risk": "named AFTER him, not founded by him",
+   "corpus_test_result": "0 occurrences (post-dates 1908)."
+  }
+ ],
+ "false_positive_mechanisms_found_during_this_fetch": [
+  {
+   "mechanism": "criterion 1 read as 'the string Clifton appears in the document' instead of 'Clifton is the subject's middle name'",
+   "evidence": "Staged file A8 (Proc. Roy. Soc. vol. 26, Sorby's own text) reads 'a very similar addition was made to a microscope in Professor Clifton's laboratory at Oxford' - that is Robert Bellamy Clifton, the Oxford physicist. The same surname also appears in G. G. Stokes's companion paper in the same IA item. A document-level 'Clifton' test therefore returns TRUE for reasons that have nothing to do with the subject's identity.",
+   "fix": "Criterion 1 must be evaluated on the byline/name string only, never on the document body."
+  },
+  {
+   "mechanism": "initial-based matching ('T. C.' vs 'H. C.')",
+   "evidence": "Running head 'Bij IT. C. Sorby. 205' in staged file E2 contains the substring 'T. C. Sorby'.",
+   "fix": "Already mandated by NAMESAKE-GUARD; this fetch supplies the measured instance."
+  }
+ ],
+ "new_ocr_misform_found_in_this_fetch": {
+  "surname": "Sokby",
+  "where": "Nature vol. 57 p. 520 (1898), signature of the lantern-slides article; staged file B7",
+  "note": "Not in PROBE's list of misforms. A search for 'Sorby' in that Nature page returns ZERO hits - the piece is only findable via 'H. C.' or the title.",
+  "probe_list_for_reference": [
+   "Soebt",
+   "Sorsy",
+   "Sorpy",
+   "Sorbi)",
+   "H. G.",
+   "U. G.",
+   "IT. C.",
+   "II. C.",
+   "E. 0."
+  ]
+ }
+}

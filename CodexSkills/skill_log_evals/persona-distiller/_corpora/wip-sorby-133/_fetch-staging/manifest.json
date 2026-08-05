@@ -1479,5 +1479,32 @@
    "same_work_other_ia_ids": [],
    "note": "_djvu.txt is 809 bytes of failed handwriting OCR. Recorded for provenance only; NOT usable text and NOT counted in the word totals."
   }
- ]
+ ],
+ "voice_density": {
+  "denominator_A_all_staged_text_excluding_unusable": {
+   "works": 37,
+   "words": 150458,
+   "first_person_words": 135743,
+   "first_person_share": 0.9022,
+   "note": "includes X1 (a journalist's report, not authored by Sorby) and X2 (communicated abstract)."
+  },
+  "denominator_B_works_authored_by_Sorby_only": {
+   "works": 35,
+   "words": 145989,
+   "first_person_works": 30,
+   "first_person_words": 135743,
+   "third_person_works": 5,
+   "third_person_words": 10246,
+   "first_person_share": 0.9298,
+   "note": "THE FIGURE TO USE for voice density. Excludes X1/X2/H1."
+  },
+  "method": "voice was assigned by reading each opening and byline, then cross-checked against a first-person-marker rate (I/my/me/we/our/us per 1000 words) recorded per work in this manifest. Every work labelled first-person has fp/1k >= 4.5; every work labelled third-person has either fp/1k <= 5.0 with third-person self-reference present, or 0 first-person markers. The label is the reading, not the metric.",
+  "communicated_category": {
+   "works": 1,
+   "words": 1087,
+   "which": "X2 - Nature 1879 abstract of the Geological Society anniversary address, footnote reads 'communicated by the author'. He supplied it; the prose is third person; it ends with a long verbatim quotation of his own conclusion. Kept out of first-person per the task spec."
+  }
+ },
+ "primary_works_authored_by_Sorby_with_usable_text": 35,
+ "quick_gate_note": "quick floor is >=8 primary. Staged: 35 Sorby-authored works with usable text (30 of them first-person)."
 }

@@ -1,0 +1,102 @@
+{
+ "fetch_date": "2026-08-05",
+ "still_not_obtained": [
+  {
+   "work": "On the Application of Very High Powers to the Study of the Microscopical Structure of Steel",
+   "citation_source": "JRMS 1886 index (journalofroyalmi262roya leaf 633), original wording: 'Sorby, H. C., Application of Very High Powers to the Study of the Micro-scopical Structure of Steel, 511.'",
+   "target_container": "Journal of the Iron and Steel Institute, 1886",
+   "status": "NOT OBTAINED"
+  },
+  {
+   "work": "(On the) Microscopical Structure of Iron and Steel",
+   "citation_source": "1911 Encyclopaedia Britannica, 'Metallography' (Wikisource, PD): Journ. Iron and Steel Inst. (1887), p. 255",
+   "target_container": "Journal of the Iron and Steel Institute, 1887, p. 255",
+   "status": "NOT OBTAINED"
+  },
+  {
+   "work": "Anniversary Address to the Geological Society 1880: On the Structure and Origin of Non-Calcareous Stratified Rocks",
+   "target_container": "Quarterly Journal of the Geological Society vol. 36",
+   "status": "NOT OBTAINED - QJGS vols 14/35/36 are all absent from archive.org"
+  },
+  {
+   "work": "Eleven diaries 1859-1908 + printed papers with his manuscript amendments",
+   "target_container": "University of Sheffield, Sorby Collection, ref 51",
+   "status": "NOT DIGITISED - reading room by appointment; only the photographs are online. Channel is a physical repository, not a bot wall."
+  }
+ ],
+ "channels_tried_this_fetch": [
+  {
+   "channel": "Google Books API",
+   "endpoint": "https://www.googleapis.com/books/v1/volumes?q=intitle:\"Journal of the Iron and Steel Institute\"",
+   "result": "HTTP 429",
+   "body_verbatim": "Quota exceeded for quota metric 'Queries' and limit 'Queries per day' of service 'books.googleapis.com' for consumer 'project_number:624717413613'",
+   "kind": "anonymous daily quota exhausted on THIS machine; same wall PROBE hit the same day. Retry on another machine or another day.",
+   "permanent": false
+  },
+  {
+   "channel": "HathiTrust full-text reader",
+   "endpoint": "https://babel.hathitrust.org/cgi/pt?id=mdp.39015021231657",
+   "result": "HTTP 403, body is a Cloudflare interstitial whose title is 'Just a moment...'",
+   "kind": "BOT-DETECTION CHALLENGE. NOT bypassed - bypassing bot detection / CAPTCHA is prohibited.",
+   "permanent": false
+  },
+  {
+   "channel": "HathiTrust catalogue search",
+   "endpoint": "https://catalog.hathitrust.org/Search/Home?lookfor=iron+and+steel+institute&type=title",
+   "result": "HTTP 403, same Cloudflare interstitial",
+   "kind": "same bot wall, not bypassed",
+   "permanent": false
+  },
+  {
+   "channel": "HathiTrust Bib API",
+   "endpoint": "https://catalog.hathitrust.org/api/volumes/brief/issn/0368-2617.json",
+   "result": "HTTP 200 but {\"records\": {}, \"items\": []}",
+   "kind": "API reachable; that ISSN yields no record. Whether the ISSN is wrong or the title is genuinely absent is UNDETERMINED.",
+   "permanent": null
+  },
+  {
+   "channel": "archive.org advancedsearch",
+   "query": "title:(\"Journal of the Iron and Steel Institute\") AND date:[1884-01-01 TO 1892-12-31]",
+   "result": "numFound 0",
+   "kind": "confirmed absent",
+   "permanent": true
+  },
+  {
+   "channel": "archive.org advancedsearch",
+   "query": "title:(\"iron and steel institute\") AND mediatype:texts",
+   "result": "numFound 448. Earliest JISI run on IA is journalironands01instgoog (year 1869 / date 1871, vol. 1). Next JISI holdings jump to in.ernet.dli.2015.221457 (vol 55, 1899), .221456 (vol 56), .221455 (vol 57), then 20th-century runs. Volumes 29-32 (1886-1887) are NOT on archive.org.",
+   "kind": "confirmed absent - this is a WIDER search than PROBE ran and reaches the same conclusion",
+   "permanent": true
+  },
+  {
+   "channel": "archive.org advancedsearch",
+   "query": "\"microscopical structure of iron and steel\"",
+   "result": "numFound 0",
+   "kind": "no reprint carrying that title is catalogued on IA",
+   "permanent": true
+  },
+  {
+   "channel": "archive.org: JISI vols 205-207",
+   "identifiers": [
+    "journalofironste0205khea",
+    "journalofironste0206hfcl",
+    "journalofironste0207vari"
+   ],
+   "result": "access-restricted-item = true (1967-1969, in copyright)",
+   "kind": "in-copyright controlled lending; irrelevant to 1886/1887 and not usable anyway",
+   "permanent": true
+  }
+ ],
+ "what_was_deliberately_NOT_used_as_a_substitute": [
+  {
+   "artifact": "staged file X1 (Nature vol.34 p.62, 20 May 1886, 'THE IRON AND STEEL INSTITUTE')",
+   "why": "It is a journalist's meeting report in indirect speech ('Dr. H. C. Sorby drew attention to...'). It reports the SAME 1886 content, but it is not his text. Per the task instruction it is NOT counted as the metallography source and must not be quoted as his words.",
+   "voice": "third-person"
+  },
+  {
+   "artifact": "staged file G2 (BAAS Report 1864, Trans. Sections p.189)",
+   "why": "This IS the citation the 1911 EB gives for the origin of metallography and IS staged - but it too is a third-person abstract of ~139 words, not his voice.",
+   "voice": "third-person"
+  }
+ ]
+}
