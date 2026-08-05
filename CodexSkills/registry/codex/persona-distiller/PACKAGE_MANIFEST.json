@@ -1476,8 +1476,8 @@
     },
     {
       "path": "scripts/ingest.py",
-      "sha256": "55e5b68531c9c7c553e1aebb92c32ada8eb5ff9b810a81655295ecb82b2d2ecd",
-      "size_bytes": 20407
+      "sha256": "2be14bbee89734d8e1f325bb9d2174721a2d7b3f03dafe508058101d81f44546",
+      "size_bytes": 21718
     },
     {
       "path": "scripts/init_target.py",
