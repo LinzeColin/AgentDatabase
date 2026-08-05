@@ -59,6 +59,11 @@ MIN_LETTERS = 18
 LOCATOR = re.compile(
     r"\b(?:1[5-9]\d{2}|20\d{2})\b"            # 1867
     r"|\d{4}\s*年"                             # 1867 年
+    # ★★★ v0.0.0.155：**中文数字纪年**。中文答案里写「一八七六年」是完全正当的坐标，
+    #   而本件此前只认阿拉伯数字——Sorby #133 实测：候选 16 条引文里有 7 条
+    #   同段明明写着「一八七六年那篇随笔里」，判据却报「缺坐标」。
+    #   ★ 这不是产物的毛病，是判据只会读一种写法。**判据看不懂的写法，不等于人没写。**
+    r"|[〇零一二三四五六七八九]{2,4}\s*年"          # 一八七六年 / 二〇〇八年
     r"|\bp{1,2}\.?\s*\d+"                      # p. 645 / pp. 645
     r"|第?\s*\d+\s*页"                          # 第 645 页
     r"|卷\s*[IVXivx0-9]"                       # 卷 II
@@ -71,6 +76,15 @@ LOCATOR = re.compile(
     r"|\bBritish\s+Medical\s+Journal\b|\bBMJ\b"
     r"|\bCollected\s+Papers\b"
     r"|\bProceedings\b"
+    # ★★★ v0.0.0.155：**刊名按形状认，不再靠白名单。**
+    #   本件自己的注释早就写着这个坑（v0.0.0.62：Fleming 的 `Br J Exp Path` 因为
+    #   「清单里没有这本刊」被报缺坐标）。当时的补法是加「卷(期):页」的形状，
+    #   **而刊名本身仍是硬编码清单**——于是 Sorby #133 又撞上一次：
+    #   `Quarterly Journal of the Geological Society` 明明在同段，判据仍报缺。
+    #   ★ 改为认「若干 Title Case 词 + 期刊指示词」这个**形状**，
+    #     指示词必须整词出现，避免把随便一串大写词当成刊名。
+    r"|(?:[A-Z][a-z]+\s+){1,4}(?:Journal|Transactions|Annals|Magazine|Bulletin|Review|Gazette)\b"
+    r"|\b(?:Journal|Transactions|Annals)\s+of\s+(?:the\s+)?[A-Z]"
     # ★ v0.0.0.62：**卷(期):页 是与刊名无关的坐标形式，按形状认，不按刊名认。**
     #   上面那串刊名是 Osler 一批人物留下的硬编码清单（Lancet／BMJ／Phil Trans）。
     #   Fleming #111 第 3 轮实测：`*Br J Exp Path* 10(3):226-236` 明明就在段内，
