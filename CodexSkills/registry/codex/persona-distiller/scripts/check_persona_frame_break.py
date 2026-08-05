@@ -115,15 +115,39 @@ def _suite(case_id: str) -> str:
     return re.sub(r"-\d+$", "", s)
 
 
+# ★★★ **禁止语境**：rubric 里写「**不许**把『本库没收录』当成正确答案」是**在防这件事**，
+#   不是在要求它。判据若不认这一层，就会把**写得最好的 rubric 报成最差的**。
+#   Adams #131 实测：4/16 命中里 **3 条是我自己写的禁令**（`ca-known-01`/`ca-boundary-01`/
+#   `ca-contrast-01`），只有 1 条是真的（`ca-planning-fidelity-01`）。
+#   **判据会喊狼来了，人就不看它了。**
+_NEG = re.compile(r"(不许|不得|禁止|不能|失败条件|而不是|不要|并非|切勿|一律不)")
+
+
+def _negated(before: str) -> bool:
+    """**只看命中之前的 25 字**——禁止语要管得住后面那句，才算禁令。
+
+    ★ 自测反向对照③当场抓到我这个错：
+      `正确答法：说明本库未收录焊接专利，因此不得引用。`
+      ——`不得` 在 `本库` **之后**，管的是「引用」不是「说明本库未收录」，
+      **那仍是一条真要求**。前后都看会把它误当禁令放过。
+    """
+    return bool(_NEG.search(before[-25:]))
+
+
 def scan_text(text: str) -> list:
-    """→ [(种类, 命中的那一段)]"""
+    """→ [(种类, 命中的那一段)]。**禁止语境下的命中不算。**"""
     hits = []
     for w in CORPUS_WORDS:
         for m in re.finditer(re.escape(w), text):
-            a = max(0, m.start() - 18)
-            hits.append(("资料层词", text[a:m.end() + 18].replace("\n", " ")))
+            a = max(0, m.start() - 40)
+            seg = text[a:m.end() + 40].replace("\n", " ")
+            if _negated(text[:m.start()]):
+                continue                    # ★ 禁令不是要求
+            hits.append(("资料层词", seg))
     for pat in STOCK_SCOPE:
         for m in re.finditer(pat, text):
+            if _negated(text[:m.start()]):
+                continue
             hits.append(("库存射程句", m.group(0)))
     return hits
 
@@ -218,6 +242,15 @@ def self_test() -> int:
     chk(f"判据仍被抓出：{sorted(r['判据要求出戏'])}", len(r["判据要求出戏"]) == 1)
     chk("报出根因在判据", "★★★ 根因在判据不在产物" in r)
     chk("整体仍不通过（产物干净也不算过）", not r["通过"])
+
+    print("\n── ★★★ 反向对照⑦：**禁令不是要求**（Adams #131 实测 4 命中里 3 条是我自己写的禁令） ──")
+    r = check({}, {
+        "x-known-01": "★★ **不许**把「本库没收录」这类**资料库状态**当成正确答案——"
+                      "要答的是人物层的「我这会儿说不出」。",
+        "x-contrast-01": "**失败条件**：用「我这里没有焊接材料」这类**资料库状态**作答。",
+        "x-plan-01": "**须承认凡语料未记载的准备步骤都只能是推测**。"})
+    chk(f"三条里只报那条真要求：{sorted(r['判据要求出戏'])}",
+        sorted(r["判据要求出戏"]) == ["x-plan-01"])
 
     print("\n── ★ 反向对照④：判据里问出处的套组同样豁免 ──")
     r = check({}, {"et-fact-preservation-01": "须指出 are 是 arc 的 OCR 讹字并照原样引。"})

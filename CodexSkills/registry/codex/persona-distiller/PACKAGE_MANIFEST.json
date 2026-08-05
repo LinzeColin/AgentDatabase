@@ -16,8 +16,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "75805c08d1ce6f5e5722e85e9265cdb2f79102570a7e6c71a2cb62fbf56aa47e",
-      "size_bytes": 288956
+      "sha256": "5e41142eef5fe30d6035981e4a964e6dd3778f5046e7fbc0bb38e88c33e6c820",
+      "size_bytes": 290395
     },
     {
       "path": "CONTRIBUTING.md",
@@ -651,8 +651,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_persona_frame_break.py",
-      "sha256": "ccc752c0311a237f09a54308479af18bc0d7a83ba0c2113f2312a29182868900",
-      "size_bytes": 15002
+      "sha256": "33cbeac99c3e9dc032ff23f1c5361a10e8f7c813cd437635584c05cba680181f",
+      "size_bytes": 17048
     },
     {
       "path": "references/pipeline/checkers/check_probe_precondition.py",
@@ -1246,8 +1246,8 @@
     },
     {
       "path": "scripts/check_persona_frame_break.py",
-      "sha256": "ccc752c0311a237f09a54308479af18bc0d7a83ba0c2113f2312a29182868900",
-      "size_bytes": 15002
+      "sha256": "33cbeac99c3e9dc032ff23f1c5361a10e8f7c813cd437635584c05cba680181f",
+      "size_bytes": 17048
     },
     {
       "path": "scripts/check_probe_precondition.py",
