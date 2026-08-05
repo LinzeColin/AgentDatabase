@@ -2450,6 +2450,100 @@ def run_holdout_overlap(report, target: Path, cache_dirs: list[str]) -> None:
     report.metrics['holdout_overlap'] = info
 
 
+def run_threshold_doc_drift(report, target: Path) -> None:
+    """**文档里写的门槛，与代码里在用的那套，是不是同一套**（v0.0.0.141，硬门）。
+
+    起因是我自己：`RUNBOOK.md` 那行「阈值：总分≥0.80、delta≥0.07、…」写的是 **deep** 的数
+    而没写「deep」，我据此把 Thomson #129（跑 quick）的门槛记成 0.07，真值 0.03。
+    ★ 那次结论没被改变（−0.0859 对 0.03 也过不了），**但那只是这一次刚好不影响。**
+
+    与工作区无关，是仓级检查；放无条件段，**每次跑门都顺带核一次**。
+    """
+    here = Path(__file__).resolve().parent
+    script = here / 'check_threshold_doc_drift.py'
+    if not script.exists():
+        report.metrics['threshold_doc_drift'] = {'状态': '检查器未安装，**未核验**（不是通过）'}
+        return
+    proc = subprocess.run([sys.executable, str(script)], capture_output=True, text=True)
+    code, out = proc.returncode, (proc.stdout or '') + (proc.stderr or '')
+    bad = [ln.strip() for ln in out.splitlines() if ln.strip().startswith('✗')]
+    info: dict[str, Any] = {'返回码': code, '**不一致处**': len(bad)}
+    if code != 0:
+        info['**逐条**'] = bad[:6]
+        info['口径'] = ('文档门槛表与 PROFILE_THRESHOLDS 不一致——'
+                        '**改文档去迁就代码，不许反过来**。'
+                        '读文档的人会按错的数下判断，而这条流水线里读文档的主要是我自己。')
+        report.errors.append(f'doc.threshold-drift: {len(bad)} 处')
+    report.metrics['threshold_doc_drift'] = info
+
+
+def run_material_split(report, target: Path) -> None:
+    """**holdout 的正文有没有同时躺在 train 目录里**（v0.0.0.137 接线，**硬门**）。
+
+    ## 这道判据一直存在、一直是对的，而**从来没有被任何代码调用过**
+
+    全仓搜 `check_material_split`，命中只有两处注释与一句文档字符串，
+    **没有一处 import 或 spec_from_file_location**。
+    接上之后**第一跑就在 6 个工作区抓到硬失败**：
+
+    | 工作区 | 泄漏份数 | 状态 |
+    |---|---|---|
+    | florence-nightingale | **9** | **已入库** |
+    | comfort-avery-adams | 3 | 本轮正在判 |
+    | elihu-thomson | 3 | 已记拒发 |
+    | alexander-fleming | 1 | 已记拒发 |
+    | william-osler | 1 | —— |
+    | rudolf-virchow | 1 | —— |
+
+    ## 它与 `check_holdout_overlap` 不是一回事
+
+    后者查**内容**相似（不同源之间抄没抄），前者查**成员**（同一个源在不在两边）。
+    ★★ 而后者恰恰**看不见**这一种：它按 source_id 把 holdout 从 train 里剔掉，
+    于是「同一个 id 在两边各有一份」对它是不可见的——
+    它照样报「train 69 份 … ✓ 无内容重合」。**两道判据缺一不可。**
+
+    ## 成因不在 ingest
+
+    `ingest.py` 现在是对的（`split == 'holdout'` 时写进 `references/holdout/`）。
+    出事的是**先按 train 入库、事后在账本里改成 holdout**——**文件没跟着走。**
+
+    ## 硬门
+
+    与 `check_holdout_overlap` 的「只报不拦」不同：内容相似是程度问题，
+    **而「同一份文件同时在 train 和 holdout」是事实问题，没有程度**。
+    判据自己的输出已经写明后果：**「隔离失效，本轮 known 分数不可信」**。
+    """
+    here = Path(__file__).resolve().parent
+    script = here / 'check_material_split.py'
+    if not script.exists():
+        report.metrics['material_split'] = {'状态': '检查器未安装，**未核验**（不是通过）'}
+        return
+    spec = importlib.util.spec_from_file_location('_pd_material_split', script)
+    module = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(module)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['material_split'] = {'状态': f'加载失败，**未核验**：{exc}'}
+        return
+    buffer = io.StringIO()
+    try:
+        with contextlib.redirect_stdout(buffer):
+            rc = module.check(target)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['material_split'] = {'状态': f'运行失败，**未核验**：{exc}'}
+        return
+    out = buffer.getvalue()
+    leaks = [ln.strip() for ln in out.splitlines() if 'holdout 正文出现在此' in ln]
+    info: dict[str, Any] = {'返回码': rc, '**holdout 泄漏处**': len(leaks)}
+    if leaks:
+        info['**逐条**'] = leaks[:8]
+        info['口径'] = ('同一个 source_id 的正文同时在 train 与 holdout 目录里——'
+                        '**隔离失效，本轮 known 分数不可信**。'
+                        '正解是把 holdout 的正文从 train 目录移走，不是调判据。')
+        report.errors.append(f'corpus.holdout-leak: {len(leaks)} 处（隔离失效）')
+    report.metrics['material_split'] = info
+
+
 def run_corpus_integrity(report, target: Path) -> None:
     """语料真伪门（v0.0.0.33 新增，**只报不拦**）——已入库的这些文件，是语料吗？
 
@@ -2741,6 +2835,10 @@ def main() -> int:
         #   **必须最早跑**——等到发布门才发现「10 份乱码」「1 份装错文件」，
         #   中间整轮断言／渲染／判分都建在坏语料上了。
         run_corpus_text_checks(report, target, args.cache)
+        # ★ 同理放无条件段：holdout 泄漏是**语料成员**问题，
+        #   等到合成门才报就已经拿泄漏的源出过 known 题了。
+        run_material_split(report, target)
+        run_threshold_doc_drift(report, target)
         report_own_voice(report, target, meta, sources)
         report_refusal_overflow(report, target)
         run_corpus_ceiling(report, target, report.profile)

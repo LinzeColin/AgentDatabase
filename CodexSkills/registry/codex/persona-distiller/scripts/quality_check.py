@@ -2450,6 +2450,33 @@ def run_holdout_overlap(report, target: Path, cache_dirs: list[str]) -> None:
     report.metrics['holdout_overlap'] = info
 
 
+def run_threshold_doc_drift(report, target: Path) -> None:
+    """**文档里写的门槛，与代码里在用的那套，是不是同一套**（v0.0.0.141，硬门）。
+
+    起因是我自己：`RUNBOOK.md` 那行「阈值：总分≥0.80、delta≥0.07、…」写的是 **deep** 的数
+    而没写「deep」，我据此把 Thomson #129（跑 quick）的门槛记成 0.07，真值 0.03。
+    ★ 那次结论没被改变（−0.0859 对 0.03 也过不了），**但那只是这一次刚好不影响。**
+
+    与工作区无关，是仓级检查；放无条件段，**每次跑门都顺带核一次**。
+    """
+    here = Path(__file__).resolve().parent
+    script = here / 'check_threshold_doc_drift.py'
+    if not script.exists():
+        report.metrics['threshold_doc_drift'] = {'状态': '检查器未安装，**未核验**（不是通过）'}
+        return
+    proc = subprocess.run([sys.executable, str(script)], capture_output=True, text=True)
+    code, out = proc.returncode, (proc.stdout or '') + (proc.stderr or '')
+    bad = [ln.strip() for ln in out.splitlines() if ln.strip().startswith('✗')]
+    info: dict[str, Any] = {'返回码': code, '**不一致处**': len(bad)}
+    if code != 0:
+        info['**逐条**'] = bad[:6]
+        info['口径'] = ('文档门槛表与 PROFILE_THRESHOLDS 不一致——'
+                        '**改文档去迁就代码，不许反过来**。'
+                        '读文档的人会按错的数下判断，而这条流水线里读文档的主要是我自己。')
+        report.errors.append(f'doc.threshold-drift: {len(bad)} 处')
+    report.metrics['threshold_doc_drift'] = info
+
+
 def run_material_split(report, target: Path) -> None:
     """**holdout 的正文有没有同时躺在 train 目录里**（v0.0.0.137 接线，**硬门**）。
 
@@ -2811,6 +2838,7 @@ def main() -> int:
         # ★ 同理放无条件段：holdout 泄漏是**语料成员**问题，
         #   等到合成门才报就已经拿泄漏的源出过 known 题了。
         run_material_split(report, target)
+        run_threshold_doc_drift(report, target)
         report_own_voice(report, target, meta, sources)
         report_refusal_overflow(report, target)
         run_corpus_ceiling(report, target, report.profile)

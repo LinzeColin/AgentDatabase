@@ -93,7 +93,17 @@
 7. **中途验收**：`quality_check.py WS --phase research --strict` 通过 → 再 `--phase synthesis --strict` 通过（便宜，先挡结构错，别等到 release）。
 8. **评测用例**（`gen_cases.py`）：**16 套件 × 每套 ≥2 = ≥32 用例**；`known` 套件的用例必须挂 holdout 源 ID。
 9. **答案 + 跑分**：写 candidate（人格化、事实正确）+ baseline（通用、较弱）短答案（`gen_answers.py`）→ **派 2 个隔离评委子代理**独立打分（`example-knuth` 的做法：只读 payload、只回 JSON，省 token）→ 组装 128 条 `results.jsonl`（`gen_results.py`）。**评委必须独立于构建者；分数必须真评，禁止编造。**
-10. **发布门**：`quality_check.py WS --phase release --strict --write-report` → **必须 0 错 0 警**。阈值：总分≥0.80、delta≥0.07、边界≥0.85、事实保持≥0.93。
+10. **发布门**：`quality_check.py WS --phase release --strict --write-report` → **必须 0 错 0 警**。
+    ★★★ **阈值按 profile 分档，不是一套通用值**（2026-08-05 更正——此处原先只列了 deep 那一档的四个数而没写「deep」，我据此把 Thomson #129 的门槛记成了 0.07，真值是 0.03）：
+
+    | profile | 总分 | delta | 边界 | 事实保持 |
+    |---|---|---|---|---|
+    | quick    | ≥0.65 | **≥0.03** | ≥0.70 | ≥0.80 |
+    | standard | ≥0.72 | **≥0.05** | ≥0.78 | ≥0.88 |
+    | deep     | ≥0.80 | **≥0.07** | ≥0.85 | ≥0.93 |
+
+    **唯一真源是 `quality_check.py` 的 `PROFILE_THRESHOLDS`**；这张表若与代码不符，以代码为准并回来改这里。
+    ★ 报门槛之前先确认**这个人物用的是哪一档**（`meta.json` 的 `profile`）。
 11. **team-card**：置 `readiness="ready"`、真实 `research_cutoff`、6 个数组字段全部填真（不留 "replace-with-"）。
 12. **打包→登记→校验**：`package_target.py WS --output dist/` → `register_persona.py dist/<slug>-...-v0.0.0.1.zip` → `validate_group.py`（必须 passed）。**把 ZIP 复制到 Downloads/蒸馏**。
 
