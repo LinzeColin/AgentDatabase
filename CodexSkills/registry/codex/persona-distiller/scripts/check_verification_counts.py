@@ -102,6 +102,21 @@ def stated(text: str) -> dict:
     return out
 
 
+_CN_DIGITS = "〇一二三四五六七八九"
+_CIRCLED = "^## [①-⑳㉑-㉟]"          # ①–⑳ 在 U+2460–U+2473，㉑–㉟ 在 U+3251–U+325F
+
+
+def _cn(x: int) -> str:
+    """0–99 的中文小写数字。**超出范围返回阿拉伯数字，不抛异常**——
+    判据宁可报一个不好看的数，也不许因为数大了就整件挂掉。"""
+    if x < 0 or x > 99:
+        return str(x)
+    if x < 10:
+        return _CN_DIGITS[x]
+    tens, ones = divmod(x, 10)
+    return ("十" if tens == 1 else _CN_DIGITS[tens] + "十") + (_CN_DIGITS[ones] if ones else "")
+
+
 def audit(root: pathlib.Path) -> dict:
     f = root / "VERIFICATION.md"
     if not f.is_file():
@@ -126,6 +141,21 @@ def audit(root: pathlib.Path) -> dict:
     #   实测那天它标题写「十条」、导语写「十一条」，而实际有 **12 条**——
     #   同一份文件里两个数字，两个都错。**和 VERIFICATION.md 那次同一种漂**，
     #   而此前没有任何门看它一眼。
+    # ★★ v0.0.0.145：同形的第三处——`RUBRIC-RULES-v2.md` 标题写「四条」而正文已有 5 条。
+    #   加规则时改了正文、忘了标题，与台账那次一模一样。
+    #   **凡「标题里写着条数」的文档都要盯**，否则读的人会以为规则只有那么多条。
+    rr = root / "references" / "pipeline" / "judge_prompts" / "RUBRIC-RULES-v2.md"
+    if rr.is_file():
+        rt = rr.read_text(encoding="utf-8")
+        rr_real = len(re.findall(_CIRCLED, rt, re.M))
+        m_t = re.search(r"^# 写逐题 rubric 之前，先过这(.+?)条", rt, re.M)
+        rr_said = m_t.group(1) if m_t else None
+        rows.append({"项": "RUBRIC-RULES-v2 标题条数 vs 正文条数",
+                     "实况": f"正文 {rr_real} 条",
+                     "文中": f"标题「{rr_said}」" if rr_said else "标题里没有这个数",
+                     "判定": "✓" if rr_said == _cn(rr_real)
+                             else f"**对不上**（标题「{rr_said}」，正文 {rr_real} 条）"})
+
     led = root / "references" / "ledgers" / "_待用户裁定.md"
     if led.is_file():
         lt = led.read_text(encoding="utf-8")
@@ -142,16 +172,6 @@ def audit(root: pathlib.Path) -> dict:
         #      今天台账正好加到 20 节，**当场炸了**——是元判据报「输出无法解析」才发现的。
         #   ★ 教训：**判据自己预言过的漏，要当场堵上，不要只写在注释里等它来。**
         n_real = len(re.findall("^## [①-⑳㉑-㉟]", lt, re.M))
-        CN = "〇一二三四五六七八九"
-        def _cn(x: int) -> str:
-            """0–99 的中文小写数字。**超出范围返回阿拉伯数字，不抛异常**——
-            判据宁可报一个不好看的数，也不许因为数大了就整件挂掉。"""
-            if x < 0 or x > 99:
-                return str(x)
-            if x < 10:
-                return CN[x]
-            tens, ones = divmod(x, 10)
-            return ("十" if tens == 1 else CN[tens] + "十") + (CN[ones] if ones else "")
         want = _cn(n_real)
         saids = re.findall(r"待用户裁定（\*\*(.+?)条\*\*）|一眼看完：(.+?)条各是什么", lt)
         flat = [x for pair in saids for x in pair if x]
