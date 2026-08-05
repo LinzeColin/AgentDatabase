@@ -76,6 +76,28 @@ import sys
 CORPUS_WORDS = (
     "OCR", "讹字", "扫描件", "扫描", "语料", "本库", "收录", "未收", "没收",
     "索引", "字符", "条目", "检索", "数据库", "文件里", "目录里", "这一批材料",
+    # ★ Sorby #133 补：上面一行是**硬编码词表**，只认得它出生时见过的说法。
+    #   两名互不知情的无 rubric 评委**各自独立**把同一处点成全套最伤声口的一处，
+    #   而本判据报 0 题——原因就是「照录」「排印」这些字不在表里。
+    #   （同一个坑今天上午刚在 check_quote_locator 的刊名白名单上修过一次。）
+    "照录", "誊录", "排印", "讹形", "校记", "分词", "连字符", "跨行", "影印", "刊本",
+)
+# ★★ 形状规则——不靠词表，换个说法也躲不掉
+#   扫描件行末断字会把一个词打成 `immu- nity`：字母、连字符、**空格**、字母。
+#   人物在第一人称说话时念出这个，等于在念影印件的行末——他无从知道。
+#   实测：五个人物 14 份答案里命中 8 题，其中 **5 题不在出处套组**
+#   （ca-planning-fidelity / ca-capability-calibration / ca-long-horizon /
+#     hs-voice / et-long-horizon）。
+#   ★ 负对照：`well-known` 不中（连字符后无空格）；破折号「——」不中。
+PRINT_ARTIFACT = (
+    (r"[A-Za-z]{2,}-\s+[A-Za-z]{2,}", "跨行断字（扫描件行末）"),
+)
+# ★★★ 「印本」必须看上下文，**不能进词表**
+#   读了全库 19 处才定下来：其中 13 处是 `印本 pp.138–151` 这种**页码坐标**——
+#   那正是本产品立身的引文坐标，把它判成出戏等于罚产品做对的事。
+#   只有落在「照…录 / 断作 / 作 X 即 Y」这类**转录忠实度**的句子里才算资料层。
+PRINTED_COPY_CTX = (
+    r"照印本[录抄]", r"印本[上里]?(?:被|作|把)", r"印本跨行", r"照录", r"原样保留",
 )
 # 第一人称 + 库存射程的句式（比单个词更硬）
 STOCK_SCOPE = (
@@ -149,6 +171,19 @@ def scan_text(text: str) -> list:
             if _negated(text[:m.start()]):
                 continue
             hits.append(("库存射程句", m.group(0)))
+    # ★ 形状规则：扫描件行末断字被念进第一人称口语
+    for pat, kind in PRINT_ARTIFACT:
+        for m in re.finditer(pat, text):
+            a = max(0, m.start() - 40)
+            seg = text[a:m.end() + 40].replace("\n", " ")
+            hits.append((kind, seg))
+    # ★ 「印本」只在转录忠实度语境里算——`印本 pp.138–151` 是坐标，不是出戏
+    for pat in PRINTED_COPY_CTX:
+        for m in re.finditer(pat, text):
+            if _negated(text[:m.start()]):
+                continue
+            a = max(0, m.start() - 40)
+            hits.append(("转录忠实度句", text[a:m.end() + 40].replace("\n", " ")))
     return hits
 
 

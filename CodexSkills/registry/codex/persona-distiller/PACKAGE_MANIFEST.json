@@ -16,8 +16,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "a93f476aac862ef8386a810cef41b3fe326cf9364d6a650bd8ea5f4f2cd24a92",
-      "size_bytes": 330514
+      "sha256": "3f6d089b4e9075f916adf4e3ae27c574cfc824719da8dc355e312976f6a41014",
+      "size_bytes": 333495
     },
     {
       "path": "CONTRIBUTING.md",
@@ -56,7 +56,7 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "23263f95bfab7f1a711c58a9056dc92fb27ece0bb8a9aeef209df1703affa24d",
+      "sha256": "34afe3f3fc4f8665bfbbdfe5c147fc32e0d4fdeb50f4aef0a398fb73dcdee6a8",
       "size_bytes": 133612
     },
     {
@@ -631,8 +631,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_namesake_criteria.py",
-      "sha256": "b693bfec44b2146e807bf7681afff619a6107b91d96bae72b2af48cb03cd03d0",
-      "size_bytes": 12643
+      "sha256": "c240576ffe3c8083604fd2bd875bedaa97494ab6a395d6f25976b34110b5fb25",
+      "size_bytes": 13176
     },
     {
       "path": "references/pipeline/checkers/check_ocr_homoglyphs.py",
@@ -681,8 +681,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_quote_locator.py",
-      "sha256": "fa365775819a9e22f848326ab7f26365ad5614df134bae385101fc212b47864d",
-      "size_bytes": 10932
+      "sha256": "82ef47ae3b4e6405a77c0262840b55f73c17f7c368c28ec473888cccb664e864",
+      "size_bytes": 12281
     },
     {
       "path": "references/pipeline/checkers/check_quoted_arithmetic.py",
@@ -800,6 +800,11 @@
       "size_bytes": 17673
     },
     {
+      "path": "references/pipeline/checkers/check_version_bump_ships_product.py",
+      "sha256": "cf2684bf5d60a05d213d13427a9aba4cadbf8bc849e1657efc0a1173dfa1f20c",
+      "size_bytes": 12132
+    },
+    {
       "path": "references/pipeline/checkers/classify_early.py",
       "sha256": "18db9e8e081d2f9a5ae1662ea3dfb24d69c5c5e00c7fd6f7d6cb1d4f3f8ced32",
       "size_bytes": 5237
@@ -901,8 +906,8 @@
     },
     {
       "path": "references/pipeline/judge_prompts/RUBRIC-RULES-v2.md",
-      "sha256": "b161ed2ade0b27553f2e415f0a5eecc780d3d8dded7d2390bb98655aff6502b8",
-      "size_bytes": 10642
+      "sha256": "abd74e395b245fb9d1ef845bb3adbe43a36f547186e5769e3c7cf75b3a905ac4",
+      "size_bytes": 14717
     },
     {
       "path": "references/pipeline/judge_prompts/seat_D_score.md",
@@ -1251,8 +1256,8 @@
     },
     {
       "path": "scripts/check_namesake_criteria.py",
-      "sha256": "b693bfec44b2146e807bf7681afff619a6107b91d96bae72b2af48cb03cd03d0",
-      "size_bytes": 12643
+      "sha256": "c240576ffe3c8083604fd2bd875bedaa97494ab6a395d6f25976b34110b5fb25",
+      "size_bytes": 13176
     },
     {
       "path": "scripts/check_ocr_homoglyphs.py",
@@ -1301,8 +1306,8 @@
     },
     {
       "path": "scripts/check_quote_locator.py",
-      "sha256": "fa365775819a9e22f848326ab7f26365ad5614df134bae385101fc212b47864d",
-      "size_bytes": 10932
+      "sha256": "82ef47ae3b4e6405a77c0262840b55f73c17f7c368c28ec473888cccb664e864",
+      "size_bytes": 12281
     },
     {
       "path": "scripts/check_quoted_arithmetic.py",
@@ -1420,6 +1425,11 @@
       "size_bytes": 17673
     },
     {
+      "path": "scripts/check_version_bump_ships_product.py",
+      "sha256": "cf2684bf5d60a05d213d13427a9aba4cadbf8bc849e1657efc0a1173dfa1f20c",
+      "size_bytes": 12132
+    },
+    {
       "path": "scripts/common.py",
       "sha256": "101e3fe9d19ac101f58c8ed7209d9956bc900ec0579fb374c5ed83fd410e27b6",
       "size_bytes": 12689
@@ -1446,8 +1456,8 @@
     },
     {
       "path": "scripts/finalize_release.py",
-      "sha256": "ceec4335e09cb23edc16a880e6630ff66b27b662196192aa1c12821a143843ce",
-      "size_bytes": 6208
+      "sha256": "a6e28d87f2866cab585b3c6c33ec4af9bcb54bea2fab0943523f07536c15b985",
+      "size_bytes": 6717
     },
     {
       "path": "scripts/identity.py",
@@ -1516,8 +1526,8 @@
     },
     {
       "path": "scripts/quality_check.py",
-      "sha256": "aaf3574b80ad05e9a11ada46a00a3fd406df9d4f599521e3105ea45657023f7c",
-      "size_bytes": 173538
+      "sha256": "6aa8baebf8726e2e25dc34cbeb5ddcabbb7e75e31bfb20b9998ce9976e538a31",
+      "size_bytes": 173967
     },
     {
       "path": "scripts/register_persona.py",
