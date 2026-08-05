@@ -70,6 +70,70 @@ def verbatim(q: str) -> bool:
     return not CJK.search(q) and bool(LAT.search(q))
 
 
+_PAGENO = re.compile(r"^[\divxlcdm]{1,6}([/\-][\divxlcdm]{1,6})?$")
+
+
+def strip_page_furniture(text: str):
+    """去掉**版口**：反复出现的页眉行与独立页码行。→ (去掉之后的文本, 去掉了哪些)
+
+    ★ 为什么需要它：Sorby #133 的一条引文横跨了两页——
+
+        …identical with the cavities in the crystals in artificial furnace
+        SO R BY- — STRUCTURE OF CRYSTALS*        ← 页眉
+        4/9                                       ← 页码
+        slags, their very nature proves the igneous origin…
+
+    候选把它接了起来、丢掉页眉，**那正是引跨页句子的正确做法**；
+    而判据按连续串比对，当场报「未命中」。**引文是真的，判据看不懂版口。**
+
+    ★★ 判法**不用硬编码刊名**（今天已经在 `check_quote_locator` 上栽过一次）：
+      · 独立页码行：纯数字或罗马数字，可带 `4/9`、`12-13` 这种；
+      · 页眉：**在同一份文件里反复出现 ≥3 次的短行**——
+        一行在一份文档里出现三次以上且不长，它就是版口，与它写了什么无关。
+
+    ★★★ 它**只作为第二次尝试**：第一遍用原样语料比，比不上才用它重试，
+      而且命中要单独报成「跨版口」。**绝不把它掺进第一道**——
+      掺进去就等于永久放宽，那时一条伪造引文只要跨过一个页眉就能蒙混。
+    """
+    lines = text.split("\n")
+    keyed = [(l, re.sub(r"\s+", "", l.strip().lower())) for l in lines]
+    from collections import Counter
+    cnt = Counter(k for _, k in keyed if k)
+
+    def isolated(i):
+        """前后都是空行——版口总是被空白围着。"""
+        prev = keyed[i - 1][1] if i > 0 else ""
+        nxt = keyed[i + 1][1] if i + 1 < len(keyed) else ""
+        return not prev and not nxt
+
+    def shouty(s):
+        """短、且大写字母占多数——页眉的形状。
+
+        ★ 频次规则**挡不住页眉**：同一个页眉被 OCR 打成
+          `SO R BY- — STRUCTURE OF CRYSTALS*`、`SORBY.—STRUCTURE…` 等等，
+          每种拼法各出现一两次，**没有一种够 3 次**。
+          实测就是这一条让第一版没修好 Sorby 那句。
+        """
+        t = s.strip()
+        letters = [c for c in t if c.isalpha()]
+        if not (0 < len(t) <= 60) or len(letters) < 4:
+            return False
+        return sum(c.isupper() for c in letters) / len(letters) >= 0.6
+
+    out, removed = [], []
+    for i, (line, k) in enumerate(keyed):
+        if not k:
+            out.append(line)
+            continue
+        if (_PAGENO.match(k)
+                or (cnt[k] >= 3 and len(k) <= 60)
+                or (shouty(line) and isolated(i))):
+            removed.append(line.strip())
+            continue
+        out.append(line)
+    return "\n".join(out), removed
+
+
 def collect(ws: pathlib.Path, extra: list) -> list:
     out = []
     for f in sorted(list(ws.glob("*.md")) + list(ws.glob("identity-facets/*.md"))
@@ -82,8 +146,23 @@ def collect(ws: pathlib.Path, extra: list) -> list:
             data = json.loads(pathlib.Path(p).read_text(encoding="utf-8"))
         except Exception:  # noqa: BLE001
             continue
+        # ★★ 两种形状都要认。原先只认「每条是 dict、里头有 candidate/rubric/prompt」
+        #   的**派发格式**；而 `evals/candidate_answers.json` 是扁平的
+        #   `{case_id: 答案文本}`——`r.get("candidate")` 取不到，**一条不报，看着像干净**。
+        #   实测 Sorby #133：那份答案里有 **18 条**「」框住的英文引文，本件报 **0**。
+        #   这正是「空默认值吞掉『不知道』」——0 被读成没问题。
+        #   ★ 后果不轻：**评委读的是答案，delta 也是从答案算的**，
+        #     而答案里的引文此前只有候选自己「我逐条比对过」的自述在背书。
+        if isinstance(data, dict) and all(isinstance(v, str) for v in data.values()):
+            for cid, text in data.items():                    # 扁平：case_id → 答案
+                for q in QUOTE.findall(text):
+                    if verbatim(q):
+                        out.append((f"{pathlib.Path(p).name}:{cid}", q))
+            continue
         rows = data if isinstance(data, list) else [data]
         for r in rows:
+            if not isinstance(r, dict):
+                continue
             for key in ("candidate", "rubric", "prompt"):
                 for q in QUOTE.findall(str(r.get(key, ""))):
                     if verbatim(q):
@@ -130,7 +209,31 @@ def self_test() -> int:
         texts = [q for _, q in found]
         missed = [q for q in texts if not _hit(q, corpus)]
 
-        checks = [
+        # ★★★ 版口那一层**必须单独测**：上面这段只走 `corpus`，
+        #   而放宽发生在 `corpus2`。不单独测，等于「改了的那条路从没被负对照走过」。
+        _page_corpus = (
+            "essential characters,\n"
+            "they are identical with the cavities in the crystals in artificial furnace\n"
+            "\n\nSO R BY- — STRUCTURE OF CRYSTALS*\n\n4/9\n\n"
+            "slags, their very nature proves the igneous origin of the minerals\n")
+        _c1 = norm(_page_corpus)
+        _c2 = norm(strip_page_furniture(_page_corpus)[0])
+        _true = ("they are identical with the cavities in the crystals in "
+                 "artificial furnace slags, their very nature proves")
+        _fake = ("they are identical with the cavities in the crystals in "
+                 "artificial furnace slags, which I measured at once")
+        page_checks = [
+            ("跨版口的真引文：第一道比不上", not _hit(_true, _c1)),
+            ("跨版口的真引文：去版口后能比上", _hit(_true, _c2)),
+            # ↓ 这一条是整层的守门人
+            ("**伪造引文去版口后仍然比不上**", not _hit(_fake, _c2)),
+            ("去掉的确实是页眉与页码",
+             any("STRUCTURE OF CRYSTALS" in x
+                 for x in strip_page_furniture(_page_corpus)[1])
+             and "4/9" in strip_page_furniture(_page_corpus)[1]),
+        ]
+
+        checks = page_checks + [
             ("真引文被认出且命中语料",
              any(q.startswith("I have always believed") for q in texts)
              and all(norm(q) in corpus for q in texts if q.startswith("I have always"))),
@@ -155,7 +258,7 @@ def self_test() -> int:
         for b in bad_cases:
             print(f"  · {b}")
         return 2
-    print(f"\n负对照通过（{len(checks)} 项：3 正 + 2 伪造 + 2 误判形态）")
+    print(f"\n负对照通过（{len(checks)} 项：3 正 + 2 伪造 + 2 误判形态 + 4 版口）")
     return 0
 
 
@@ -173,15 +276,32 @@ def main() -> int:
         return self_test()
     if not a.workspace or not a.cache:
         ap.error("需要 --workspace 与 --cache（或只给 --self-test）")
-    corpus = "\n".join(norm(p.read_text(encoding="utf-8", errors="replace"))
-                       for d in a.cache for p in d.rglob("*.txt"))
+    raw_texts = [p.read_text(encoding="utf-8", errors="replace")
+                 for d in a.cache for p in d.rglob("*.txt")]
+    corpus = "\n".join(norm(t) for t in raw_texts)
+    # ★ 第二道语料：把**版口**（页眉／页码）去掉之后再归一化。
+    #   只在第一道未命中时才拿它重试，且**必须报出来是靠它才命中的**。
+    corpus2 = "\n".join(norm(strip_page_furniture(t)[0]) for t in raw_texts)
+
     qs = collect(a.workspace, a.extra)
-    bad = [(w, q) for w, q in qs if not _hit(q, corpus)]
-    print(f"逐字英文引文 {len(qs)} 条（判据：引号内无汉字），未命中 {len(bad)}")
+    bad, crossed = [], []
+    for w, q in qs:
+        if _hit(q, corpus):
+            continue
+        if _hit(q, corpus2):
+            crossed.append((w, q))       # 引文本身是真的，只是横跨了版口
+        else:
+            bad.append((w, q))
+    print(f"逐字英文引文 {len(qs)} 条（判据：引号内无汉字），"
+          f"未命中 {len(bad)}，**跨版口命中 {len(crossed)}**")
     for w, q in bad:
         print(f"   \u2717 {w}: {q[:100]}")
-    if not bad:
+    for w, q in crossed:
+        print(f"   ⚠ 跨版口（引文为真，中间隔着页眉/页码）: {w}: {q[:70]}")
+    if not bad and not crossed:
         print("   \u2713 全部可在语料中找到")
+    elif not bad:
+        print("   \u2713 没有对不上的；上面那些是原文横跨页面，**不是引错**")
     return 1 if bad else 0
 
 
