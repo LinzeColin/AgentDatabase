@@ -360,12 +360,78 @@ def _blocked(cand, last_l, namesakes):
 
     ★ `Thomson` 与 `Thompson` 距离仅 1。不声明就会把十二个 Thompson 收进来——
       Thomson #129 探测实测：索引里挨着他名字的 27 个号，**16 个是别人的**。
+
+    ★★ **它只比姓。同姓的同名者它一个也挡不住**——见 `_initial_blocked`。
     """
+    plain = [_last_token(ns) for ns in namesakes]
     d = next((k for k in range(3) if _edits_within(cand, last_l, k)), 3)
-    return any(ns != last_l and _edits_within(cand, ns, d) for ns in namesakes)
+    return any(ns != last_l and _edits_within(cand, ns, d) for ns in plain)
 
 
-def standalone_ocr(text, first_l, last_l, namesakes):
+def _last_token(name):
+    toks = [x for x in re.split(r"[^A-Za-z]+", str(name)) if x]
+    return toks[-1].lower() if toks else ""
+
+
+def _mid_initial(name):
+    """`Charles A. Coffin` → `a`；`C. A. Coffin` → `a`；没有中名 → `''`。
+
+    取**姓之前的最后一个首字母**（单字母 token）。
+    """
+    toks = [x for x in re.split(r"[^A-Za-z]+", str(name)) if x]
+    if len(toks) < 3:
+        return ""
+    for x in reversed(toks[:-1]):
+        if len(x) == 1:
+            return x.lower()
+    return ""
+
+
+def _initial_blocked(line, last_l, namesakes, own_mid):
+    """**同姓、只差一个中名首字母**——`Charles A. Coffin` 不是 `Charles L. Coffin`。
+
+    ## 撞出它的那一次（Coffin #130，2026-08-05，**在抓源落地之前**）
+
+    `_blocked` 只比姓。而 Coffin 的同名者**姓完全相同**：
+
+    | | 我们要的 | 不要的 |
+    |---|---|---|
+    | | Charles **L.** Coffin，电弧焊工艺发明人 | Charles **A.** Coffin，GE 首任总裁、汤姆森—休斯顿总裁 |
+
+    实测（护栏加之前）：
+      - `Charles A. Coffin.` → **放行**（当成他的署名收进来）
+      - `C. L. Coffin.` → **拦下**（他自己的缩写形态反而不认）
+
+    **两个方向同时错**：把别人的收进来，把他自己的挡在外面。
+    而 Charles A. Coffin 正是 Elihu Thomson（#129）的合伙人——
+    **当年电气刊物里的「Coffin」大量指他**，语料池里到处都是。
+
+    ## 判法
+
+    姓相同（距离 ≤1）时：署名里的中名首字母若与**目标的**不同、
+    且命中任一**已声明同名的**中名首字母 → 拒绝。
+    署名没有中名首字母的，**不拦**（宁可放过，不可拦错）。
+
+    ## ★ 已知射程缺口（实测，不是猜的）
+
+    **形态 C（末行黏连签名）认不出纯缩写署名**：`of the weld C. L. Coffin.` 拦下。
+    因为形态 C 要求名也对得上（≥4 字母），而 `C.`／`L.` 各只有一个字母。
+    形态 B（整行只有名字）已开了「声明中名首字母且相同则放行」的例外，形态 C **没开**——
+    它是句中锚定的，再放宽会把正文里的人名收进来。
+    **代价：Coffin 这类惯用缩写的人，黏连在末行的签名会漏。宁可漏。**
+    """
+    if not own_mid:
+        return False
+    cand_mid = _mid_initial(line)
+    if not cand_mid or cand_mid == own_mid:
+        return False
+    for ns in namesakes:
+        if _edits_within(_last_token(ns), last_l, 1) and _mid_initial(ns) == cand_mid:
+            return True
+    return False
+
+
+def standalone_ocr(text, first_l, last_l, namesakes, own_mid=""):
     """**独占一行的署名，名或姓被 OCR 打坏**——`Elihtt Thomson.`／`Pror. Tuomson :—`。
 
     ## 为什么要它
@@ -406,7 +472,9 @@ def standalone_ocr(text, first_l, last_l, namesakes):
         if m:
             toks = [x for x in re.split(r"[^A-Za-z]+", m.group(1)) if x]
             cand = next((x.lower() for x in reversed(toks) if len(x) >= 4), None)
-            if cand and _edits_within(cand, last_l, 2) and not _blocked(cand, last_l, namesakes):
+            if (cand and _edits_within(cand, last_l, 2)
+                    and not _blocked(cand, last_l, namesakes)
+                    and not _initial_blocked(m.group(1), last_l, namesakes, own_mid)):
                 return s
             continue
 
@@ -416,14 +484,26 @@ def standalone_ocr(text, first_l, last_l, namesakes):
         pos = idx / n
         if not (pos <= 0.10 or pos >= 0.90):
             continue
-        if not re.fullmatch(r"[A-Za-z][A-Za-z.'\-]{1,20}(?:[ \t]+[A-Za-z][A-Za-z.'\-]{1,20}){1,3}[.,]?", s):
+        # ★ `{0,20}` 而非 `{1,20}`：允许 `C. L. Coffin.` 这种首字母缩写。
+        #   原来的 `{1,20}` 要求每段至少两个字母，**把他自己的缩写形态挡在外面**
+        #   （Coffin #130 实测：`C. L. Coffin.` 被拦，而 `Charles A. Coffin.` 被放行）。
+        if not re.fullmatch(r"[A-Za-z][A-Za-z.'\-]{0,20}(?:[ \t]+[A-Za-z][A-Za-z.'\-]{0,20}){1,3}[.,]?", s):
             continue
         toks = [x for x in re.split(r"[^A-Za-z]+", s) if x]
         cand = next((x.lower() for x in reversed(toks) if len(x) >= 4), None)
-        if not cand or not _edits_within(cand, last_l, 2) or _blocked(cand, last_l, namesakes):
+        if (not cand or not _edits_within(cand, last_l, 2)
+                or _blocked(cand, last_l, namesakes)
+                or _initial_blocked(s, last_l, namesakes, own_mid)):
             continue
         # 名也必须对得上（≥4 字母、距离 ≤2）——**只有首字母缩写的一律不认**
         if any(len(x) >= 4 and _edits_within(x.lower(), first_l, 2) for x in toks[:-1]):
+            return s
+        # ★ 例外：**声明了中名首字母且署名的中名首字母与之相同**时，
+        #   `C. L. Coffin.` 这类纯缩写署名可以放行——
+        #   因为此时中名首字母**正面认定了目标、同时排除了已声明的同名**
+        #   （`C. A. Coffin.` 会先被 `_initial_blocked` 挡在上面）。
+        #   没声明 own_mid 就仍旧一律不认，**射程不变**。
+        if own_mid and _mid_initial(s) == own_mid:
             return s
 
     # ── 形态 C：**签名被 OCR 并进了最后一行正文**
@@ -439,7 +519,9 @@ def standalone_ocr(text, first_l, last_l, namesakes):
             continue
         toks = [x for x in re.split(r"[^A-Za-z]+", m.group(1)) if x]
         cand = next((x.lower() for x in reversed(toks) if len(x) >= 4), None)
-        if not cand or not _edits_within(cand, last_l, 2) or _blocked(cand, last_l, namesakes):
+        if (not cand or not _edits_within(cand, last_l, 2)
+                or _blocked(cand, last_l, namesakes)
+                or _initial_blocked(m.group(1), last_l, namesakes, own_mid)):
             continue
         if any(len(x) >= 4 and _edits_within(x.lower(), first_l, 2) for x in toks[:-1]):
             return s
@@ -822,7 +904,8 @@ def _check_one(text, pat):
     if not counter:
         ev = standalone_ocr(text, pat.get("first_word", "").lower(),
                             pat.get("surname", "").lower(),
-                            {n.lower() for n in pat.get("namesakes", ())})
+                            tuple(pat.get("namesakes", ())),
+                            str(pat.get("own_mid", "") or "").lower()[:1])
         if ev:
             return True, "A-byline-ocr", ev, counter
     return False, "", "", counter
@@ -1139,6 +1222,29 @@ def self_test() -> int:
         if not _ok:
             bad.append(f"A-byline-ocr：{_lbl}")
 
+    # ★★★ 同姓同名护栏（Coffin #130）——`_blocked` 只比姓，同姓的它一个也挡不住
+    print("\n══ 同姓不同中名首字母 六条对照（v0.0.0.137）══")
+    _NSC = ("Charles A. Coffin",)            # GE 首任总裁；与目标同姓同时代同行业
+    for _lbl, _s, _want in (
+            ("Charles L. Coffin.（**目标本人**）", _tail("Charles L. Coffin."), True),
+            ("C. L. Coffin.（他惯用的缩写形态）", _tail("C. L. Coffin."), True),
+            ("Charles A. Coffin.（**GE 总裁，不是他**）", _tail("Charles A. Coffin."), False),
+            ("C. A. Coffin.（**同上，缩写**）", _tail("C. A. Coffin."), False),
+            ("CHARLES A. COFFIN, President.（**带职务**）", _tail("CHARLES A. COFFIN, President."), False),
+            ("of the weld Charles A. Coffin.（**末行黏连**）",
+             _tail("of the weld Charles A. Coffin."), False)):
+        _got = bool(standalone_ocr(_s, "charles", "coffin", _NSC, "l"))
+        _ok = _got == _want
+        print(f"  {'✓' if _ok else '✗'} {'应认出' if _want else '应拒绝'}　{_lbl}")
+        if not _ok:
+            bad.append(f"同姓中名护栏：{_lbl}")
+
+    # ★ 没声明中名首字母时，射程必须与 v0.0.0.136 完全一致（缩写一律不认）
+    _got = bool(standalone_ocr(_tail("C. L. Coffin."), "charles", "coffin", _NSC, ""))
+    print(f"  {'✓' if not _got else '✗'} 应拒绝　C. L. Coffin.（**没声明中名时，缩写仍旧不认**）")
+    if _got:
+        bad.append("同姓中名护栏：没声明中名时不该放行缩写")
+
     if bad:
 
         print("\n负对照未过：")
@@ -1165,7 +1271,15 @@ def main() -> int:
     ap.add_argument("--namesake", action="append", default=[],
                     help="**已知同名的姓氏**（可给多次）。OCR 容错不许把两个真名连起来："
                          "候选姓与任一已声明同名的距离 ≤ 与目标姓的距离时一律拒绝。"
-                         "★ Thomson 与 Thompson 距离仅 1——不声明就会把十二个 Thompson 收进来。")
+                         "★ Thomson 与 Thompson 距离仅 1——不声明就会把十二个 Thompson 收进来。"
+                         "★★ 也可以给**全名**（如 \"Charles A. Coffin\"）——同姓的同名者"
+                         "只能靠中名首字母区分，那时必须同时给 --middle-initial。")
+    ap.add_argument("--middle-initial", default="",
+                    help="**目标本人的中名首字母**（如 Charles L. Coffin 给 \"L\"）。"
+                         "只在有**同姓**同名者时需要：`_blocked` 只比姓，同姓的它一个也挡不住。"
+                         "★ 实测（Coffin #130，护栏加之前）：`Charles A. Coffin.`（GE 首任总裁）"
+                         "被当成他的署名放行，而他惯用的 `C. L. Coffin.` 反而被拦——两个方向同时错。"
+                         "**不给就退回不认缩写署名的老射程。**")
     ap.add_argument("--self-test", action="store_true",
                     help="只跑内置双向负对照，不读语料")
     a = ap.parse_args()
@@ -1180,6 +1294,7 @@ def main() -> int:
         pat = attach_masthead(build_patterns(a.name), a.masthead)
         # ★ 已知同名注入：OCR 容错不许把两个真名连起来（见 standalone_ocr 文件头）
         pat["namesakes"] = tuple(a.namesake or ())
+        pat["own_mid"] = str(a.middle_initial or "").strip().lower()[:1]
     except ValueError as exc:
         print(f"✗ {exc}", file=sys.stderr)
         return 3

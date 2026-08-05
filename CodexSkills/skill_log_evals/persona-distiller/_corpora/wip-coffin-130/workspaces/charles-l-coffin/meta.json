@@ -74,5 +74,10 @@
   "subject_origin": "historical",
   "target_id": "tgt-bba7bed851e2",
   "time_scope": "1880s–1900s",
-  "updated_at": "2026-08-04T23:46:02Z"
+  "updated_at": "2026-08-04T23:46:02Z",
+  "known_namesakes": [
+    "Charles A. Coffin"
+  ],
+  "middle_initial": "L",
+  "namesake_note": "Charles Albert Coffin（1844-12-31 – 1926-07-14）：通用电气首任总裁，此前任汤姆森—休斯顿电气公司总裁，即 Elihu Thomson #129 的合伙人。**同姓、同时代、同行业**，当年电气刊物里的「Coffin」大量指他。姓完全相同，编辑距离护栏一个也挡不住，**只能靠中名首字母 L vs A 区分**——故本人物必须同时声明 middle_initial。★ 另记：队列里给本人物的卒年 1926 与 Charles A. Coffin 完全相同，疑为串人，见待裁定 ⑰。"
 }

@@ -1,0 +1,46 @@
+# -- #130 Charles L. Coffin, of Detroit, Michigan -- inventor of the metal-electrode
+#    arc-welding process (US 428,459, 1890). Corpus ledger.
+#
+# columns (TAB separated, 9 of them):
+#   short-id <TAB> URL <TAB> title <TAB> year <TAB> locator <TAB> lang <TAB> tier <TAB> mark <TAB> note
+#   short-id equals the raw/src-<short-id>/ directory name minus the "src-" prefix.
+#   tier is one of P1 / P2 / S1 / S2 / U          (there is no P3)
+#   mark is one of HIS-OWN / CO-AUTHORED / THIRD-PARTY / ATTRIBUTION-UNCLEAR / OTHER-INVENTOR
+#   note always begins "lane=" and ends with a RIGHTS= clause.
+#
+# ==================== THE NAMESAKE RULE APPLIED IN THIS CORPUS ====================
+# There are two Coffins in the 1885-1926 American electrical record and they overlap
+# heavily in period, in trade press, and in subject-adjacent vocabulary:
+#
+#   WANTED   Charles L. Coffin -- Detroit, Michigan. Welding processes, electrodes,
+#            joints, patents. Later assigns to the ELECTRIC METAL WORKING COMPANY.
+#   NOT      Charles A. Coffin -- Lynn/Boston, Massachusetts. President of Thomson-
+#            Houston Electric Co., then first president of General Electric. Company
+#            affairs, mergers, boards, addresses. Born 1844-12-31, died 1926-07-14.
+#
+# EVERY row below was admitted only on evidence printed ON THE PAGE that ties the
+# document to Detroit and/or to welding/metal-working -- never on the bare surname.
+# Material about the other man, and material where the two could not be told apart,
+# was NOT taken; those decisions are logged at the bottom of this file under
+# "NOT TAKEN -- NAMESAKE".
+#
+# ==================== BIRTH AND DEATH YEARS: STILL UNPROVEN ====================
+# The English Wikipedia article "Charles L. Coffin" gives 1844-1926. Those are the
+# same four digits as Charles A. Coffin's, and that article never mentions General
+# Electric. It is treated here as a suspected conflation. NO birth or death year is
+# asserted anywhere in this corpus. Nothing below should be read as confirming them.
+# What the primary record DOES fix is his residence over time, and that is recorded.
+#
+0001-us428459	https://patents.google.com/patent/US428459A/en	Process of Welding Metals Electrically (US Patent No. 428,459)	1890	Letters Patent No. 428,459; application filed 1890-03-07, Serial No. 342,975; patented 1890-05-20; full specification + 2 claims	en	P1	HIS-OWN	lane=writings. THE LOAD-BEARING DOCUMENT. Signed "CHARLES L. COFFIN", "of Detroit, in the county of Wayne and State of Michigan". Claim 2 is the one the histories point at: the ends of the rods "may be slightly separated from the carbon after the current is established, thus forming a voltaic arc". Text is the Google Patents OCR reproduced verbatim; that OCR mangles the surname in the running heads ("OOFFIN"/"OOPFIN"/"OOF'PIN"/"UOFFIN") and nothing was silently corrected. Independently confirmed by src-0003-og-vol51-1890 entry [C]. RIGHTS=pre1929
+0002-us395878	https://patents.google.com/patent/US395878A/en	Process of Electric Welding (US Patent No. 395,878)	1889	Letters Patent No. 395,878; application filed 1888-09-18, Serial No. 285,742; patented 1889-01-08; full specification + 1 claim	en	P1	HIS-OWN	lane=writings. EARLIER THAN 428,459 AND IT IS THE ONE THAT SAYS "FILLER METAL": the claim is welding "by subjecting the articles to the action of a voltaic arc of which one pole is metal conductor, fusing said conductor, depositing the molten metal on the joint". Signed "CHARLES L. COFFIN, of Detroit". Google Patents OCR verbatim; running head OCRs as "COPPIN"/"(OFFIN", uncorrected. RIGHTS=pre1929
+0003-og-vol51-1890	https://archive.org/details/officialgazette51unit	Official Gazette of the United States Patent Office, Vol. 51 (April-June 1890) -- the Charles L. Coffin entries	1890	item officialgazette51unit, file officialgazette51unit_djvu.txt; body entries for patents 425,164 / 427,971 / 428,459 and the volume Index of Patentees (djvu.txt lines 35779-35790, 167528-167537, 190534-190553, 332709-332717)	en	P2	HIS-OWN	lane=timeline. The Patent Office's own record of issuance. HOW 425,164 AND 427,971 WERE IDENTIFIED AS HIS AT ALL: the volume Index of Patentees carries three lines reading "Coffin, Charles L., Detroit, Mich.", and scanning the body of the same volume returns exactly three matching entries -- the count agrees, so the attribution is the Office's, not a secondary list's. OVERLAP: the claims printed under entry 428,459 are the same two claims as src-0001; one piece of evidence, not two. OCR CAUTION: the 428,459 header OCRs as "428.469" (position between the 428,458 and 428,460 entries plus a word-for-word title/claim match is what fixes the number) and its serial OCRs as "848,971" where the patent prints 342,975. Left uncorrected in the file. RIGHTS=pre1929
+#
+# ==================== NOT TAKEN -- NAMESAKE ====================
+# ax-aiee-membership-rolls	Transactions of the American Institute of Electrical Engineers, membership
+#   lists in vols. 6 (1889) and 7 (1891). NOT TAKEN. Searched because the Elihu Thomson
+#   corpus (#129) draws its conversations lane from AIEE discussion sections, so AIEE was
+#   the obvious place to look for Coffin speaking. Every "Coffin" in those volumes is
+#   "Coffin, C. A., 620 Atlantic Ave., Boston, Mass." / "CoFFIN, CHAs. A. Vice-President
+#   and Treasurer, Thomson-Houston Electric Co." -- i.e. the WRONG Coffin. Charles L.
+#   Coffin of Detroit does not appear in those rolls at all. Recorded because it is a
+#   real (negative) finding about where he is NOT, not merely an empty search.

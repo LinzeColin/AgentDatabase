@@ -1408,6 +1408,12 @@ def run_authorship_gate(report, target: Path, meta: dict[str, Any],
         #   （十二个姓 Thompson，另有 Nash／Smith／Jones／Thoms）。
         #   ★ 取自 `meta.json` 的 `known_namesakes`（没有就是空，**空不等于安全，只等于没声明**）。
         patterns["namesakes"] = tuple(meta.get("known_namesakes") or ())
+        #   ★★ 中名首字母：**同姓的同名者，姓的编辑距离一个也挡不住**。
+        #   Coffin #130 实测（护栏加之前）：`Charles A. Coffin.`（GE 首任总裁）被当成
+        #   `Charles L. Coffin`（电弧焊发明人）的署名**放行**，而他自己惯用的
+        #   `C. L. Coffin.` 反而**拦下**——两个方向同时错。
+        #   取自 `meta.json` 的 `middle_initial`；**没声明就退回 v0.0.0.136 的射程**。
+        patterns["own_mid"] = str(meta.get("middle_initial") or "").strip().lower()[:1]
         # ★ 单作者站点报头（如 seths.blog 的 `| Seth's Blog`）作为第四类归属证据。
         #   声明放在 meta.json 的 `single_author_masthead`，**不是命令行开关**——
         #   它必须随工作区走、可审计、且事后能被复核。

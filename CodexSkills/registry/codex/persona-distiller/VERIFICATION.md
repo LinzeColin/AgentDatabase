@@ -40,6 +40,11 @@ Date: 2026-08-05（**v0.0.0.137**）
 > 未归一时假报 7 条不命中——**那是我的检查写错了，不是引文错了**）。
 > **其余各行沿用 v0.0.0.96 那一次。**
 >
+> ★★ **同姓同名护栏**（Coffin #130，抓源落地之前）：`_blocked` 只比姓，
+> 同姓的它一个也挡不住。实测两个方向同时错——`Charles A. Coffin.`（GE 总裁）**放行**、
+> `C. L. Coffin.`（他自己的缩写）**拦下**。已加 `_initial_blocked`，形态 A/B/C 三处全接，
+> 自测 10 → **17 条**（含 1 条「没声明中名时射程不变」的保持对照）。
+>
 > ★★★ **本版记住的一句**：我改写了 9 道题让人物更像人物，
 > **诚实的尺子涨 0.1183，我自己写的尺子跌 0.0822**，而没动过的 7 题两边都只动了不到 0.01。
 > **两把尺子对同一次改进指相反方向——这比「两把尺子给的分不同」更硬，
@@ -470,7 +475,7 @@ Date: 2026-08-05（**v0.0.0.137**）
 | **★★★ 语料真伪门（v0.0.0.33 新增，`ingest.py` 入口**硬拦**，见下节）** | **passed**（负对照 8 项，含 **4 条真实样本**）；**真实数据实测**：Jenner 抓源 4 份 HTML 错误页全抓出（最大一份 **146 KB**），入口实拦已验；清理后 53 份 0 报 | `check_corpus_integrity.py --self-test` + 对 `ws-jenner` 实跑 + `ingest.py` 实拦 |
 | **★★★ 引文层门（v0.0.0.32 新增，只报不拦，见下节）** | **passed**（负对照 11 项，含 **4 条真实样本 + 2 条真实误报夹具**）；**真实数据实测**：Harvey 第 3 轮定稿 10 处、Vesalius 11 处、Galen 0 处 | `check_quote_layer.py --self-test` + 对三份真实候选答案实跑 |
 | 蒸馏版本新鲜度 | 下限 `v0.0.0.70`（当前版本末位 − 10）；**102 条中 0 达标 / 102 低于下限 / 0 未知**；掉的是尺子，产物一份没变（任务 #29）（v0.0.0.75 记录里写的下限 `v0.0.0.37` 是旧数，**本次实跑纠正**） | `check_distillation_freshness.py` |
-| Release checksum 全量校验 | passed，**394 files**（`v0.0.0.137 实跑`；v0.0.0.96 写的 341、v0.0.0.75 写的 305 都是旧数——**这一行漂过三次，v0.0.0.111 起由 `check_verification_counts.py` 盯着**） | `self_check.py` |
+| Release checksum 全量校验 | passed，**395 files**（`v0.0.0.137 实跑`；v0.0.0.96 写的 341、v0.0.0.75 写的 305 都是旧数——**这一行漂过三次，v0.0.0.111 起由 `check_verification_counts.py` 盯着**） | `self_check.py` |
 | Canonical group validation | **12 categories, 100 products, 102 artifacts**; passed | `validate_persona_registry.py` |
 | 团队侧版本绑定 | **passed**，三处同为 `v0.0.0.13`；负对照 6 类全抓出 | `persona-distiller-group/scripts/check_group_version_binding.py` |
 | Identity family registry | 12 families；加权多身份输入被拒 | `test_identity_routing`、`test_skill_contract` |
