@@ -434,11 +434,16 @@ def _initial_blocked(line, last_l, namesakes, own_mid):
     改之前**又是两个方向同时错**：`C. A. ADAMS, JR.`（能认定他的那一种）**被拦**，
     因为整行正则不容尾缀；而 `C. A. ADAMS`（认定不了的那一种）**放行**。
 
-    ★★★ **`Jr.` 只解决一半，另一半判据解决不了，必须承认：**
-    后期卷他**不带 Jr.**，而同刊同代还有 **Conrad A. Adams**——缩写同为 `C. A. Adams`。
-    **不带 Jr. 的 `C. A. Adams` 在署名这一层是分不开的**，
-    只能靠**内容与场合**逐份判（他的话集中在 AIEE 的电机与绝缘讨论）。
-    **本件不假装能分开：它照收，而分不开这件事必须写进 `attribution_basis.disputed_works`。**
+    ★★★ **`Jr.` 解决一部分；另一部分要靠「查这个人是干什么的」，不是靠判据。**
+    我最初写「不带 `Jr.` 的 `C. A. Adams` 与父亲分不开」——**那句是错的，已更正**：
+    抓源方查出**他父亲是克利夫兰的服装商人，根本不在工程刊物上出现**，
+    所以工程刊物里的 `C. A. Adams` 不与父亲混。
+    ★★ 教训：**「我分不开」与「客观上分不开」是两件事。**
+    我把前者写成了后者，而多问一句「他父亲是干什么的」就分开了。
+
+    **真正分不开的只剩 Conrad A. Adams**（缩写相同、同刊同代）——
+    那一条只能靠内容与场合逐份判，**本件不假装能分开**，
+    并要求写进 `attribution_basis.disputed_works`。
 
     ## ★ 已知射程缺口（实测，不是猜的）
 
@@ -539,6 +544,99 @@ def standalone_ocr(text, first_l, last_l, namesakes, own_mid=""):
         #   没声明 own_mid 就仍旧一律不认，**射程不变**。
         if own_mid and _mid_initial(s) == own_mid:
             return s
+
+    # ── 形态 G：**方括号里的编者告示式署名**
+    #    `[COMMUNICATED AFTER ADJOURNMENT BY Comrort A. ADAMS.]`
+    #    ★ Adams #131 的第 71 份（1904 年卷 XXIII 那篇 14 页署名文）就是这个形态：
+    #      不是发言标签（没有冒号），也不是题页署名（在正文中间、且带方括号）。
+    #      `Comrort` 是 `Comfort` 的 OCR 讹字。
+    #    这是学会会刊的常见体例（会后书面补充），**值得认，不是一次性特例**。
+    m = re.search(r"\[[^\]]{0,60}\bBY[ \t]+((?:[A-Za-z][A-Za-z.,'\-]{0,14}[ \t]+){1,3}"
+                  r"[A-Za-z][A-Za-z.'\-]{2,20})\.?[ \t]*\]", text)
+    if m:
+        toks = [x for x in re.split(r"[^A-Za-z]+", _strip_suffix(m.group(1))) if x]
+        cand = next((x.lower() for x in reversed(toks) if len(x) >= 4), None)
+        if (cand and _edits_within(cand, last_l, 2)
+                and not _blocked(cand, last_l, namesakes)
+                and not _initial_blocked(m.group(1), last_l, namesakes, own_mid)
+                and any(len(x) >= 4 and _edits_within(x.lower(), first_l, 2) for x in toks[:-1])):
+            return " ".join(m.group(0).split())[:300]
+
+    # ── 形态 F：**学会讨论环节的发言标签** `Comfort A. Adams: I think that…`
+    #    ★★★ 撞出它的那一次（Adams #131）：61/71 份语料判「无据」，而它们全是讨论发言。
+    #      形态 A 要求敬称（`Pror. Tuomson :—`），而这类**没有敬称**；
+    #      形态 B 要求整行只有名字，而这类**后面直接跟正文**。
+    #    真实形态（抓源方逐卷实测）：**混合大小写、行中、无敬称**，
+    #      且首字母常因分栏折行跑到姓的上一行。
+    #    ★★ 与「页眉」的分界（**这一条是全部要害**）：
+    #      `ADAMS: HEYLAND MACHINE` 是论文页眉，不是发言——
+    #      实测 31 卷共 210 处这种，**无一是发言**；卷 XX 与卷 XXIV 真实发言数为 0 和 0，
+    #      **单这两卷就会制造 82 条幻影发言**。
+    #    判别用三条，缺一不可：
+    #      ① 名字**不是光秃秃的姓**——要有首字母或名（`C. A. Adams` / `Comfort A. Adams`）
+    #      ② 冒号后**不是全大写**（全大写＝页眉的论文标题）
+    #      ③ 冒号后要有**成句的正文**（至少若干个词）
+    for idx_f, raw in enumerate(lines):
+        s = raw.strip()
+        if not (12 <= len(s) <= 400):
+            continue
+        # ★★ 两处实测形态（Adams #131 的 conv 源）：
+        #   ① **首名可能被 OCR 削掉头一个字母**：`omfort A. Adams (by letter):`
+        #      —— 所以第一段允许小写起头；姓仍须完整且与目标对得上。
+        #   ② **冒号前可能有括注**：`(by letter)` / `(communicated after adjournment)`。
+        m = re.match(r"^((?:[A-Za-z][A-Za-z.,'\-]{0,14}[ \t]+){1,3}[A-Z][A-Za-z.'\-]{2,20})"
+                     r"(?:[ \t]*\([^)]{0,44}\))?[ \t]*:[ \t]*(.+)$", s)
+        if not m:
+            continue
+        name, rest = m.group(1), m.group(2).strip()
+        # ★★★ 与**导航菜单**的分界。既有反例：
+        #     `Jane Public: Background & bio` / `Jane Public: Investment philosophy` / …
+        #   我第一版用「冒号后 ≥5 个词」来挡，**那条是错的**——
+        #   实测语料是**分栏折行**的，真发言的首行常常只有三四个词：
+        #     `omfort A. Adams (by letter): Without wishing to subtract`（4 词）
+        #     `C. A. Adams (communicated after adjournment): Not hav-`（2 词）
+        #     `C. A. Adams: How many poles? :`（一句短问，3 词）
+        #   **按词数挡会把这三种真发言全丢掉。**
+        #   真正的分界是**重复**：菜单把同一个标签铺很多行，发言不会。
+        if len(re.findall(r"[A-Za-z']+", rest)) < 2:
+            continue
+        # ★★★ 与菜单的真正分界：**下一非空行是不是又一个标签**。
+        #   我上一版用「同一标签出现 ≥3 次 → 菜单」，**那条是错的**：
+        #   实测 `src-90d7a04c81ea` 一份里有**他本人的 5 段发言**（同一场讨论里发言五次很正常），
+        #   被我整份判成菜单。**重复的是菜单的排版，不是发言的次数。**
+        #   菜单：每一行都是标签，标签之间没有正文。
+        #   发言：标签之后跟的是正文，下一个标签隔着许多行。
+        _LAB = (r"^(?:[A-Za-z][A-Za-z.,'\-]{0,14}[ \t]+){1,3}[A-Z][A-Za-z.'\-]{2,20}"
+                r"(?:[ \t]*\([^)]{0,44}\))?[ \t]*:")
+        _nxt = next((x.strip() for x in lines[idx_f + 1:] if x.strip()), "")
+        _prv = next((x.strip() for x in reversed(lines[:idx_f]) if x.strip()), "")
+        # ★ 前后**任一**边也是标签 → 菜单。
+        #   只看下一行不够：**菜单的最后一项后面没有标签了**，会漏过去
+        #   （自测的既有反例正是这么漏的）。
+        if re.match(_LAB, _nxt) or re.match(_LAB, _prv):
+            continue
+        letters = [c for c in rest if c.isalpha()]
+        if letters and sum(1 for c in letters if c.isupper()) / len(letters) > 0.8:
+            continue                       # ★ 全大写 → 页眉的论文标题，不是发言
+        # ★★★ 标题式大小写也要挡：`Elihu Thomson: The Field of Experimental Research`
+        #   全大写那一条挡不住它（它是 Title Case 不是 ALL CAPS）。
+        #   **自测的既有反例「标题里的冒号」当场抓到我这个漏。**
+        #   判据：实词里首字母大写的占比 > 0.6 → 是标题不是话。
+        words = [w for w in re.findall(r"[A-Za-z']+", rest) if len(w) >= 3]
+        if words and sum(1 for w in words if w[0].isupper()) / len(words) > 0.6:
+            continue
+        toks = [x for x in re.split(r"[^A-Za-z]+", _strip_suffix(name)) if x]
+        if len(toks) < 2:
+            continue                       # ★ 光秃秃的姓不算
+        cand = next((x.lower() for x in reversed(toks) if len(x) >= 4), None)
+        if (not cand or not _edits_within(cand, last_l, 2)
+                or _blocked(cand, last_l, namesakes)
+                or _initial_blocked(name, last_l, namesakes, own_mid)):
+            continue
+        # 名要对得上：全名（≥4 字母且距离 ≤2）或首字母与目标一致
+        if (any(len(x) >= 4 and _edits_within(x.lower(), first_l, 2) for x in toks[:-1])
+                or (first_l and toks[0][:1].lower() == first_l[:1].lower())):
+            return s[:300]
 
     # ── 形态 E：**专利正文开头的自述式署名** `Be it known that I, CHARLES L. COFFIN, of Detroit,`
     #    ★ 撞出它的那一次（Coffin #130 的 us395878）：题页被 OCR 打成
@@ -1336,6 +1434,49 @@ def self_test() -> int:
             bad.append(f"同姓中名护栏：{_lbl}")
 
     # ★★★ 世代后缀：**父子同名同姓**（Adams #131 —— 比 Coffin 那类更难）
+    # ★★★ 形态 F：学会讨论环节的发言标签（Adams #131 —— 61/71 份因它而判无据）
+    print("\n══ 学会讨论的发言标签（形态 F） 八条对照（v0.0.0.137）══")
+    _NSF = ("Conrad A. Adams", "Alton D. Adams", "Edwin Plimpton Adams", "Lee F. Adams")
+    for _lbl, _s, _want in (
+            ("Comfort A. Adams: First, I want tosay…（v38p1 真实样张）",
+             _tail("Comfort A. Adams: First, I want tosay that I fear Mr. Peek has misinterpreted my statement"), True),
+            ("C. A. Adams: I think all of those present…（缩写形态）",
+             _tail("C. A. Adams: I think all of those present who have been concerned with research work"), True),
+            ("**ADAMS: HEYLAND MACHINE**（页眉，31 卷共 210 处无一是发言）",
+             _tail("ADAMS: HEYLAND MACHINE"), False),
+            ("**ADAMS: DESIGN OF INDUCTION MOTORS**（页眉）",
+             _tail("ADAMS: DESIGN OF INDUCTION MOTORS"), False),
+            ("**Alton D. Adams: …**（同名，中名 D）",
+             _tail("Alton D. Adams: I wish to point out that the load factor here"), False),
+            ("Adams: I think that…（**光秃秃的姓，射程内不认，宁可漏**）",
+             _tail("Adams: I think that at least a part of Mr."), False),
+            ("omfort A. Adams (by letter): …（**首名被 OCR 削掉头一字母 + 括注**）",
+             _tail("omfort A. Adams (by letter): Without wishing to subtract in any way "
+                   "from the credit due Professor Brooks"), True),
+            ("Comfort A. Adams (communicated after adjournment): …（另一种括注）",
+             _tail("Comfort A. Adams (communicated after adjournment): I should like to add "
+                   "one further point here"), True)):
+        _got = bool(standalone_ocr(_s, "comfort", "adams", _NSF, "a"))
+        _ok = _got == _want
+        print(f"  {'✓' if _ok else '✗'} {'应认出' if _want else '应拒绝'}　{_lbl}")
+        if not _ok:
+            bad.append(f"形态 F：{_lbl}")
+
+    print("\n══ 方括号编者告示式署名（形态 G） 三条对照（v0.0.0.137）══")
+    for _lbl, _s, _want in (
+            ("[COMMUNICATED AFTER ADJOURNMENT BY Comrort A. ADAMS.]（真实样张，Comrort 是讹字）",
+             _tail("[COMMUNICATED AFTER ADJOURNMENT BY Comrort A. ADAMS.]}"), True),
+            ("**…BY Alton D. Adams.**（同名，中名 D）",
+             _tail("[COMMUNICATED AFTER ADJOURNMENT BY Alton D. Adams.]"), False),
+            ("**…BY Charles P. Steinmetz.**（别人）",
+             _tail("[COMMUNICATED AFTER ADJOURNMENT BY Charles P. Steinmetz.]"), False)):
+        _got = bool(standalone_ocr(_s, "comfort", "adams",
+                                   ("Conrad A. Adams", "Alton D. Adams"), "a"))
+        _ok = _got == _want
+        print(f"  {'✓' if _ok else '✗'} {'应认出' if _want else '应拒绝'}　{_lbl}")
+        if not _ok:
+            bad.append(f"形态 G：{_lbl}")
+
     print("\n══ 父子同名，只有 Jr. 能正面认定 四条对照（v0.0.0.137）══")
     _NSA = ("Comfort Avery Adams",)          # 他父亲的全名与他一字不差
     for _lbl, _s, _want in (

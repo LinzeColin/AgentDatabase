@@ -401,6 +401,32 @@ def main() -> int:
         except Exception:                                        # noqa: BLE001
             print("  ⚠ 出戏门输出解析失败，**未核**（不是通过）")
 
+    # ★★★ rubric 抄答案门（**只报不拦**）——RUNBOOK 第五十四种的判据
+    #   Robertson #97 两席评委独立指出「rubric 规定了答案的措辞」，**记了但没落成判据**，
+    #   于是它又回来两次：Carver #127（已入库）7/16 = 44%、Thomson #129 8/16 = 50%。
+    #   共有长串越多，这道题的分越是在量「字符串对不对得上」而不是能力。
+    copy_checker = HERE / "check_rubric_copies_answer.py"
+    if copy_checker.exists() and rubrics:
+        print("\n── rubric 抄答案门（**只报不拦**）──")
+        cp = subprocess.run([sys.executable, str(copy_checker),
+                             "--rubrics", str(rub_json), "--answers", str(cand_path)],
+                            capture_output=True, text=True)
+        try:
+            cr = json.loads(cp.stdout)
+            n = cr["**rubric 抄了答案原文的题**"]
+            print(f"  {n}/{cr['题数']}（{cr['占比']}）题的 rubric 里有答案的原字符串；"
+                  f"共有 {cr['共有字符合计']} 字")
+            if n:
+                worst = sorted(cr["逐题"].items(),
+                               key=lambda kv: -kv[1]["占答案的比例"])[:3]
+                for cid, d in worst:
+                    print(f"    · {cid}  占该答案 {d['占答案的比例']:.0%}  "
+                          f"{d['最长的三段'][0][:56]}")
+                print("  ★★ 参照：Carver #127 = 7/16、Thomson #129 = 8/16。"
+                      "**这几题的分要按「字符串对齐」读，不是能力。**")
+        except Exception:                                        # noqa: BLE001
+            print("  ⚠ 输出解析失败，**未核**（不是通过）")
+
     # ★★ 生成即判：泄题必须拦在派发评委之前
     if locator_gate(cand_path):                  # ★ 在早退之前——它不该被 skip 掉
         return 1

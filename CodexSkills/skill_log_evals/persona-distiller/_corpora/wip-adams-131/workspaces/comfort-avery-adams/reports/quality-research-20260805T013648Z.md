@@ -1,0 +1,274 @@
+# Persona Distiller quality report
+
+- Target: `/Users/linzezhang/Documents/Codex/AgentDatabase/character-distillation-skill-reorganize-d57595/CodexSkills/skill_log_evals/persona-distiller/_corpora/wip-adams-131/workspaces/comfort-avery-adams`
+- Phase: `research`
+- Profile: `quick`
+- Generated: `2026-08-05T01:36:48Z`
+- Result: **FAIL**
+
+## Metrics
+
+```json
+{
+  "skill_lines": 67,
+  "ledger_counts": {
+    "sources": 72,
+    "claims": 0
+  },
+  "sources_total": 72,
+  "sources_train": 72,
+  "sources_usable_train": 72,
+  "sources_holdout": 0,
+  "primary_sources": 72,
+  "primary_ratio": 1.0,
+  "lane_source_counts": {
+    "writings": 6,
+    "conversations": 63,
+    "expression": 2,
+    "external": 0,
+    "decisions": 0,
+    "timeline": 1
+  },
+  "authorship": {
+    "P1 声称为本人所著": 71,
+    "已证实归属": 10
+  },
+  "corpus_integrity": {
+    "已扫": 72,
+    "不是语料": 0,
+    "可疑": 3,
+    "可疑（只报不拦）": [
+      "raw/src-933ff2bdf389/0036-conv-1916-vxxxv.txt　过短：1909 字节 < 2000——**确认这是不是一份完整的件**",
+      "raw/src-48dc97b884d6/0043-conv-1917-vxxxvi.txt　过短：1861 字节 < 2000——**确认这是不是一份完整的件**",
+      "raw/src-017cca837707/0049-conv-1917-vxxxvi.txt　过短：1854 字节 < 2000——**确认这是不是一份完整的件**"
+    ],
+    "口径": "**只判「这是不是一份文档」，不判「这是不是这个人的文档」**——抓错了书、抓了译本当原本，本门一概看不见。"
+  },
+  "attribution_basis": {
+    "subject_origin": "historical",
+    "P1 声称本人所著": 71,
+    "未挂 attribution": 0
+  },
+  "source_attribution": {
+    "subject_origin": "historical",
+    "声称本人所著的 P1 源": 71,
+    "靠 A-* 署名证据认定": 10,
+    "靠 attribution_basis 逐份点名认定": 0,
+    "**未被逐份认领**": 61,
+    "口径": "**判「有没有被逐份认领」，不判「认领得对不对」**——在 citation 里写个错书名，本门照样放行。它挡的是整批免检。"
+  },
+  "fact_density": {
+    "usable_train": 72,
+    "fact 类条数": 0,
+    "**人物事实**（计入）": 0,
+    "账本事实（不计入）": 0,
+    "无可核内容": 0,
+    "要求": 15,
+    "口径": "每 5 条可用源至少 1 条**人物事实**，下限 5；每条须带专名或数字；**只说语料有多大的不算**",
+    "方法密度": "**未判**（断言层类别 < 3，不像成型的断言层）——不是通过",
+    "**未达**": [
+      "可核 `fact` 断言 0 条 < 要求 15 条（72 条可用源 ÷ 5） —— **语料里可核的具体事实没有进入断言层**；这正是 Galen #101 真 delta −0.1259 的根因"
+    ]
+  },
+  "quote_layer": {
+    "已扫文件": 0,
+    "引文层问题": 0
+  },
+  "ocr_homoglyphs": {
+    "已查语料件": 72,
+    "含同形字的源": 0
+  },
+  "content_review": {
+    "unexamined_band": {
+      "n": 27,
+      "of": 72,
+      "files": [
+        "0049-conv-1917-vxxxvi.txt",
+        "0035-conv-1915-vxxxiv.txt",
+        "0020-conv-1913-vxxxii.txt",
+        "0001-conv-1907-vxxvi.txt",
+        "0055-conv-1919-vxxxviii.txt",
+        "0025-conv-1913-vxxxii.txt",
+        "0033-conv-1915-vxxxiv.txt",
+        "0026-conv-1913-vxxxii.txt"
+      ]
+    },
+    "byline_in_carrier": "核过 0 条，指错 0 条",
+    "fraktur_mojibake": "✓ 没有花体乱码",
+    "staged_not_ingested": "✓ 台账与工作区一致（或本人物没走过抓源台账）",
+    "source_header_quotes": "头部引文 0 条，**正文里找不到 0 条**　★★ 覆盖面窄：头部不引原文的文件本件看不见，**这个数不是全库体检**",
+    "research_quote": "研究文档引文**未核成**（不是通过）：语料读不到，或一条引文都没扫到",
+    "first_person_density": {
+      "实质第一人称句": 81,
+      "密度/万字": 1.68,
+      "正文字符": 481305,
+      "★ 口径": "**只报不拦**。参照：Coffin #130 = 15 句 / 0.87，三道门全过而声口不够，已记延后。"
+    }
+  },
+  "own_voice": {
+    "本人所著的 train 源数": 72,
+    "train 源总数": 72,
+    "本人所著字节": 624376,
+    "train 总字节": 624376,
+    "own_voice_ratio": 1.0,
+    "口径": "账本 author 命中人物姓氏的 train 源字节占比。**与 primary_ratio 量的不是一回事**：后者含「关于他的同期报道」（P2），前者只含他本人的表达。改 tier／再多抓报道都不会让这个数变大。"
+  },
+  "refusal_overflow": {
+    "已扫载荷": 0,
+    "拒答溢出条数": 0
+  },
+  "corpus_ceiling": {
+    "读的是": "入库 attest（口径同发布门）",
+    "台账": "/Users/linzezhang/Documents/Codex/AgentDatabase/character-distillation-skill-reorganize-d57595/CodexSkills/skill_log_evals/persona-distiller/_corpora/wip-adams-131/workspaces/comfort-avery-adams/evidence/source-ledger.jsonl",
+    "一手份数": 72,
+    "台账总份数": 72,
+    "一手占比": 1.0,
+    "有材料的道数": 4,
+    "quick 要的一手份数": 4,
+    "够得着吗": "吃全部材料就够得着"
+  },
+  "rights_basis": {
+    "源条数": 72,
+    "声称公有领域": 0,
+    "不声称（不判）": 72,
+    "有据可查": 0,
+    "有结论无依据": 0,
+    "依据取自聚合器": 0
+  },
+  "pd_grounds": {
+    "状态": "**本人物未提供 `references/research/_pd_grounds.json`——未核，不是通过。**「它是公有领域」须写明凭哪一条（§105 ／ 1909 年法无标记 ／ 1929 年前出版 ／ 国会记录）并附证据"
+  },
+  "research_lanes_complete": []
+}
+```
+
+## Errors
+
+- `research.authorship-unproven`: src-16dfd1adf2b5 0001-conv-1907-vxxvi.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-0d270011ec47 0002-conv-1907-vxxvi.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-0142ac1c24ab 0003-conv-1908-vxxvii.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-d16acc596fc9 0004-conv-1908-vxxvii.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-3509ef9e2024 0005-conv-1909-vxxviii.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-d1259399c812 0006-conv-1909-vxxviii.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-d13cd0b04707 0007-conv-1909-vxxviii.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-2c6d77ea88cb 0008-conv-1910-vxxix.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-88d4d6c07e16 0009-conv-1911-vxxx.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-b75c5b028e96 0010-conv-1911-vxxx.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-621c9f145493 0012-conv-1911-vxxx.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-3ce586010967 0013-conv-1911-vxxx.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-425e6b49ef53 0014-conv-1912-vxxxi.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-b432e83928b5 0015-conv-1912-vxxxi.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-bfc566ffbdbe 0016-conv-1912-vxxxi.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-e9b1aa6667e0 0017-conv-1912-vxxxi.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-2b21beee7975 0018-conv-1913-vxxxii.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-41ad78727b67 0019-conv-1913-vxxxii.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-12a1618391bc 0020-conv-1913-vxxxii.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-93a3083c7bff 0021-conv-1913-vxxxii.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-d48d7ac0b65d 0022-conv-1913-vxxxii.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-90d7a04c81ea 0023-conv-1913-vxxxii.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-a34f18d5e272 0024-conv-1913-vxxxii.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-23eb6ecf03f6 0025-conv-1913-vxxxii.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-3402359b7dfe 0026-conv-1913-vxxxii.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-7f260c40a724 0027-conv-1913-vxxxii.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-5b2c440366f8 0028-conv-1913-vxxxii.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-b854680fcbf3 0029-conv-1915-vxxxiv.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-b074efd69783 0030-conv-1915-vxxxiv.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-f2192b653bbb 0031-conv-1915-vxxxiv.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-4501579f9983 0032-conv-1915-vxxxiv.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-260a0d8214bb 0033-conv-1915-vxxxiv.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-ada46a4f65b9 0034-conv-1915-vxxxiv.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-08bbed50da52 0035-conv-1915-vxxxiv.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-933ff2bdf389 0036-conv-1916-vxxxv.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-eea044634a94 0037-conv-1916-vxxxv.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-66d64408f16d 0038-conv-1916-vxxxv.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-da8616c13459 0039-conv-1916-vxxxv.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-5c8c4e7662fd 0040-conv-1916-vxxxv.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-856b2c0dff6f 0041-conv-1916-vxxxv.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-73dd58f902fe 0042-conv-1916-vxxxv.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-48dc97b884d6 0043-conv-1917-vxxxvi.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-be3e201e2e22 0044-conv-1917-vxxxvi.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-2b99e7494262 0045-conv-1917-vxxxvi.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-cd168ae28291 0046-conv-1917-vxxxvi.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-8dfea33831d2 0047-conv-1917-vxxxvi.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-2b80d7229b65 0048-conv-1917-vxxxvi.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-017cca837707 0049-conv-1917-vxxxvi.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-c8dbd2044688 0050-conv-1917-vxxxvi.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-88db6ad14325 0051-conv-1918-vxxxvii.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-3498ec0a6e56 0052-conv-1918-vxxxvii.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-706b663468f3 0053-conv-1918-vxxxvii.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-464876b933c0 0054-conv-1918-vxxxvii.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-1b72349bda81 0055-conv-1919-vxxxviii.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-6aabe3422cc3 0056-conv-1919-vxxxviii.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-a8a40691724d 0057-conv-1919-vxxxviii.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-4813e647e40c 0058-conv-1919-vxxxviii.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-1a91e1e899d7 0059-conv-1919-vxxxviii.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-c727abaf5bb8 0061-conv-1919-vxxxviii.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-7f0517874d99 0062-conv-1921-vxl.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.authorship-unproven`: src-360436b143b3 0063-conv-1904-repulsion-motor-jr.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）
+- `research.attribution-basis`: historical 人物未声明 attribution_basis —— **必须写明靠什么证明这是他写的**。前印刷时代人物：A-byline 等五种署名证据结构上不存在，须另找权威（如作者自著目录）；印刷时代人物：扉页与印工可用，但**须写明哪些版次／托名件不算**
+- `research.source-unclaimed`: `src-16dfd1adf2b5` 0001-conv-1907-vxxvi.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-0d270011ec47` 0002-conv-1907-vxxvi.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-0142ac1c24ab` 0003-conv-1908-vxxvii.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-d16acc596fc9` 0004-conv-1908-vxxvii.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-3509ef9e2024` 0005-conv-1909-vxxviii.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-d1259399c812` 0006-conv-1909-vxxviii.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-d13cd0b04707` 0007-conv-1909-vxxviii.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-2c6d77ea88cb` 0008-conv-1910-vxxix.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-88d4d6c07e16` 0009-conv-1911-vxxx.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-b75c5b028e96` 0010-conv-1911-vxxx.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-621c9f145493` 0012-conv-1911-vxxx.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-3ce586010967` 0013-conv-1911-vxxx.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-425e6b49ef53` 0014-conv-1912-vxxxi.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-b432e83928b5` 0015-conv-1912-vxxxi.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-bfc566ffbdbe` 0016-conv-1912-vxxxi.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-e9b1aa6667e0` 0017-conv-1912-vxxxi.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-2b21beee7975` 0018-conv-1913-vxxxii.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-41ad78727b67` 0019-conv-1913-vxxxii.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-12a1618391bc` 0020-conv-1913-vxxxii.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-93a3083c7bff` 0021-conv-1913-vxxxii.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-d48d7ac0b65d` 0022-conv-1913-vxxxii.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-90d7a04c81ea` 0023-conv-1913-vxxxii.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-a34f18d5e272` 0024-conv-1913-vxxxii.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-23eb6ecf03f6` 0025-conv-1913-vxxxii.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-3402359b7dfe` 0026-conv-1913-vxxxii.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-7f260c40a724` 0027-conv-1913-vxxxii.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-5b2c440366f8` 0028-conv-1913-vxxxii.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-b854680fcbf3` 0029-conv-1915-vxxxiv.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-b074efd69783` 0030-conv-1915-vxxxiv.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-f2192b653bbb` 0031-conv-1915-vxxxiv.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-4501579f9983` 0032-conv-1915-vxxxiv.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-260a0d8214bb` 0033-conv-1915-vxxxiv.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-ada46a4f65b9` 0034-conv-1915-vxxxiv.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-08bbed50da52` 0035-conv-1915-vxxxiv.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-933ff2bdf389` 0036-conv-1916-vxxxv.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-eea044634a94` 0037-conv-1916-vxxxv.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-66d64408f16d` 0038-conv-1916-vxxxv.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-da8616c13459` 0039-conv-1916-vxxxv.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-5c8c4e7662fd` 0040-conv-1916-vxxxv.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-856b2c0dff6f` 0041-conv-1916-vxxxv.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-73dd58f902fe` 0042-conv-1916-vxxxv.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-48dc97b884d6` 0043-conv-1917-vxxxvi.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-be3e201e2e22` 0044-conv-1917-vxxxvi.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-2b99e7494262` 0045-conv-1917-vxxxvi.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-cd168ae28291` 0046-conv-1917-vxxxvi.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-8dfea33831d2` 0047-conv-1917-vxxxvi.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-2b80d7229b65` 0048-conv-1917-vxxxvi.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-017cca837707` 0049-conv-1917-vxxxvi.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-c8dbd2044688` 0050-conv-1917-vxxxvi.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-88db6ad14325` 0051-conv-1918-vxxxvii.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-3498ec0a6e56` 0052-conv-1918-vxxxvii.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-706b663468f3` 0053-conv-1918-vxxxvii.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-464876b933c0` 0054-conv-1918-vxxxvii.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-1b72349bda81` 0055-conv-1919-vxxxviii.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-6aabe3422cc3` 0056-conv-1919-vxxxviii.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-a8a40691724d` 0057-conv-1919-vxxxviii.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-4813e647e40c` 0058-conv-1919-vxxxviii.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-1a91e1e899d7` 0059-conv-1919-vxxxviii.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-c727abaf5bb8` 0061-conv-1919-vxxxviii.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-7f0517874d99` 0062-conv-1921-vxl.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.source-unclaimed`: `src-360436b143b3` 0063-conv-1904-repulsion-motor-jr.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。
+- `research.lane-completion`: completed source-linked lanes 0 < profile minimum 3: []
+
+## Warnings
+
+- `corpus.unexamined-band`: **27/72 份语料落在两道门之间**：字符数够 `non_placeholder`（≥500）而词数不够语种判据（<500），**没有任何判据看过它们的内容**。★ 短不等于坏，本条是覆盖缺口不是缺陷；但若某条道只靠这类文件撑着，请人看一眼。

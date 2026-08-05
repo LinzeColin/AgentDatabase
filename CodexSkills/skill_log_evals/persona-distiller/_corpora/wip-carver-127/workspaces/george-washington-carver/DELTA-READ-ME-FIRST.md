@@ -1,0 +1,65 @@
+# 先读这一页，再引用本产物的 delta
+
+**本产物已入库，delta 记的是 `+0.3791`（第 3 轮，候选 16/16 全胜）。**
+**那个数不能当能力证据用。** 下面是三件已实测的事。
+
+## 一、同一批答案，只换评委手里有没有 rubric，delta 翻号
+
+| | 候选 / 裸模型 | delta | 候选胜 |
+|---|---|---|---|
+| **有 rubric**（入库记的就是这个） | 0.9263 / 0.5472 | **+0.3791** | 16/16 |
+| **无 rubric**（同一批答案、同一 A/B、同一天） | 0.6825 / 0.8844 | **−0.2019** | 1/16 |
+
+**摆动 0.5810。** 产物侧掉 0.244、裸模型侧涨 0.337——**两边同时朝相反方向动。**
+
+★ 摆动最小的是 `identity-routing`（−0.060）：那题 rubric 只要求指名一个人，
+**是客观事实、不依赖作者的偏好**。摆动最大的全是写了「须克制／须给坐标」的题。
+→ **判据越依赖作者偏好，delta 越是作者造出来的。**
+
+## 二、这份 rubric 有 **44%** 把答案的原字符串写了进去
+
+用 `check_rubric_copies_answer.py` 实测：**16 题里 7 题（44%）**
+的 rubric 与候选答案共有长字符串，合计 **369 字**。最狠的几处：
+
+| 题 | 共有字符占该答案 | 共有的那一段（片段） |
+|---|---|---|
+| `gwc-token-efficiency-01` | **45%** | `have been a curse rather than a blessing` |
+| `gwc-fact-preservation-01` | 35% | `The United Peanut Association of America, sir, asked me to c…` |
+| `gwc-task-completion-01` | 34% | `proportionate to the length of time this land had been reste…` |
+| `gwc-anonymous-fidelity-01` | 30% | `You have seen, gentlemen, just about half of them.` |
+
+**评委拿着这样的 rubric 打分，分不出「真检索到」与「照着 rubric 复述」。**
+（Thomson #129 的同类实测是 8/16 = 50%，且**那两席评委自己写下了这句话**。）
+
+## 三、这份 rubric 有 **38%** 在要求人物出戏
+
+用 `check_persona_frame_break.py` 实测：**16 条里 6 条**把「本库没有收录 X」
+这类**资料层状态**指定为正确答案——
+`gwc-boundary-01`、`gwc-trajectory-01`、`gwc-style-decoy-01`、
+`gwc-task-completion-01`、`gwc-capability-calibration-01`、`gwc-long-horizon-01`。
+
+原文形如「**本库 41 件里没有任何一句涉及**」「**本库没有该比例的数据**」「**它们不在本库**」。
+
+**卒于 1943 年的人不可能知道「本库收了 41 件」。**
+而同一份指令的盲判第 3 条又要求评委**扣掉局部出戏**——
+**判据自相矛盾：它在惩罚守住人物、奖励破框。**
+
+## 两个人物一起看
+
+| | 抄答案原文 | 要求人物出戏 |
+|---|---|---|
+| **Carver #127**（本产物） | 44% | 38% |
+| Thomson #129 | 50% | 62% |
+
+**都不是个例，是这套 rubric 写法的通病。**
+
+## 怎么处理
+
+- **本产物已入库，本次不重判**（会超三轮上限，且要动冻结指令）。
+- rubric v2 的规则已落成常设件 `references/pipeline/judge_prompts/RUBRIC-RULES-v2.md`，
+  从 Coffin #130 起执行；两道判据已接进 `build_blind_payload` 的**派发之前**。
+- 本人物若将来重蒸（任务 #29），**须按 v2 重写 rubric 再判**。
+
+★ **唯一在两把尺子下都站得住的能力主张是 `fact-preservation`**
+（有 rubric +0.247、无 rubric +0.185；Thomson 同项 +0.510 / +0.210）——
+**「答案能不能被核」这一条上，产物确实优于裸模型。其余不要引。**

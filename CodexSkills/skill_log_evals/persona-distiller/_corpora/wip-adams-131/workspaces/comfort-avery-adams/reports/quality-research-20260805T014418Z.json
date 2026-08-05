@@ -1,0 +1,165 @@
+{
+  "checks": [],
+  "errors": [
+    {
+      "code": "research.authorship-unproven",
+      "message": "src-360436b143b3 0063-conv-1904-repulsion-motor-jr.txt｜文中他人署名：无 —— 账本声称本人所著，但文中查无归属证据（署名／编者注／逐字稿轮次三者皆无）"
+    },
+    {
+      "code": "research.attribution-basis",
+      "message": "historical 人物未声明 attribution_basis —— **必须写明靠什么证明这是他写的**。前印刷时代人物：A-byline 等五种署名证据结构上不存在，须另找权威（如作者自著目录）；印刷时代人物：扉页与印工可用，但**须写明哪些版次／托名件不算**"
+    },
+    {
+      "code": "research.source-unclaimed",
+      "message": "`src-360436b143b3` 0063-conv-1904-repulsion-motor-jr.txt —— 声称 `Comfort Avery Adams` 所著，**既无 A-* 署名证据，也未在 attribution_basis 里被逐份点名**。"
+    },
+    {
+      "code": "research.lane-completion",
+      "message": "completed source-linked lanes 0 < profile minimum 3: []"
+    }
+  ],
+  "generated_at": "2026-08-05T01:44:18Z",
+  "metrics": {
+    "attribution_basis": {
+      "P1 声称本人所著": 71,
+      "subject_origin": "historical",
+      "未挂 attribution": 0
+    },
+    "authorship": {
+      "P1 声称为本人所著": 71,
+      "已证实归属": 70
+    },
+    "content_review": {
+      "byline_in_carrier": "核过 0 条，指错 0 条",
+      "first_person_density": {
+        "★ 口径": "**只报不拦**。参照：Coffin #130 = 15 句 / 0.87，三道门全过而声口不够，已记延后。",
+        "实质第一人称句": 81,
+        "密度/万字": 1.68,
+        "正文字符": 481305
+      },
+      "fraktur_mojibake": "✓ 没有花体乱码",
+      "research_quote": "研究文档引文**未核成**（不是通过）：语料读不到，或一条引文都没扫到",
+      "source_header_quotes": "头部引文 0 条，**正文里找不到 0 条**　★★ 覆盖面窄：头部不引原文的文件本件看不见，**这个数不是全库体检**",
+      "staged_not_ingested": "✓ 台账与工作区一致（或本人物没走过抓源台账）",
+      "unexamined_band": {
+        "files": [
+          "0049-conv-1917-vxxxvi.txt",
+          "0035-conv-1915-vxxxiv.txt",
+          "0020-conv-1913-vxxxii.txt",
+          "0001-conv-1907-vxxvi.txt",
+          "0055-conv-1919-vxxxviii.txt",
+          "0025-conv-1913-vxxxii.txt",
+          "0033-conv-1915-vxxxiv.txt",
+          "0026-conv-1913-vxxxii.txt"
+        ],
+        "n": 27,
+        "of": 72
+      }
+    },
+    "corpus_ceiling": {
+      "quick 要的一手份数": 4,
+      "一手份数": 72,
+      "一手占比": 1.0,
+      "台账": "/Users/linzezhang/Documents/Codex/AgentDatabase/character-distillation-skill-reorganize-d57595/CodexSkills/skill_log_evals/persona-distiller/_corpora/wip-adams-131/workspaces/comfort-avery-adams/evidence/source-ledger.jsonl",
+      "台账总份数": 72,
+      "够得着吗": "吃全部材料就够得着",
+      "有材料的道数": 4,
+      "读的是": "入库 attest（口径同发布门）"
+    },
+    "corpus_integrity": {
+      "不是语料": 0,
+      "口径": "**只判「这是不是一份文档」，不判「这是不是这个人的文档」**——抓错了书、抓了译本当原本，本门一概看不见。",
+      "可疑": 3,
+      "可疑（只报不拦）": [
+        "raw/src-933ff2bdf389/0036-conv-1916-vxxxv.txt　过短：1909 字节 < 2000——**确认这是不是一份完整的件**",
+        "raw/src-48dc97b884d6/0043-conv-1917-vxxxvi.txt　过短：1861 字节 < 2000——**确认这是不是一份完整的件**",
+        "raw/src-017cca837707/0049-conv-1917-vxxxvi.txt　过短：1854 字节 < 2000——**确认这是不是一份完整的件**"
+      ],
+      "已扫": 72
+    },
+    "fact_density": {
+      "**人物事实**（计入）": 0,
+      "**未达**": [
+        "可核 `fact` 断言 0 条 < 要求 15 条（72 条可用源 ÷ 5） —— **语料里可核的具体事实没有进入断言层**；这正是 Galen #101 真 delta −0.1259 的根因"
+      ],
+      "fact 类条数": 0,
+      "usable_train": 72,
+      "口径": "每 5 条可用源至少 1 条**人物事实**，下限 5；每条须带专名或数字；**只说语料有多大的不算**",
+      "方法密度": "**未判**（断言层类别 < 3，不像成型的断言层）——不是通过",
+      "无可核内容": 0,
+      "要求": 15,
+      "账本事实（不计入）": 0
+    },
+    "lane_source_counts": {
+      "conversations": 63,
+      "decisions": 0,
+      "expression": 2,
+      "external": 0,
+      "timeline": 1,
+      "writings": 6
+    },
+    "ledger_counts": {
+      "claims": 0,
+      "sources": 72
+    },
+    "ocr_homoglyphs": {
+      "含同形字的源": 0,
+      "已查语料件": 72
+    },
+    "own_voice": {
+      "own_voice_ratio": 1.0,
+      "train 总字节": 624376,
+      "train 源总数": 72,
+      "口径": "账本 author 命中人物姓氏的 train 源字节占比。**与 primary_ratio 量的不是一回事**：后者含「关于他的同期报道」（P2），前者只含他本人的表达。改 tier／再多抓报道都不会让这个数变大。",
+      "本人所著字节": 624376,
+      "本人所著的 train 源数": 72
+    },
+    "pd_grounds": {
+      "状态": "**本人物未提供 `references/research/_pd_grounds.json`——未核，不是通过。**「它是公有领域」须写明凭哪一条（§105 ／ 1909 年法无标记 ／ 1929 年前出版 ／ 国会记录）并附证据"
+    },
+    "primary_ratio": 1.0,
+    "primary_sources": 72,
+    "quote_layer": {
+      "已扫文件": 0,
+      "引文层问题": 0
+    },
+    "refusal_overflow": {
+      "已扫载荷": 0,
+      "拒答溢出条数": 0
+    },
+    "research_lanes_complete": [],
+    "rights_basis": {
+      "不声称（不判）": 72,
+      "依据取自聚合器": 0,
+      "声称公有领域": 0,
+      "有据可查": 0,
+      "有结论无依据": 0,
+      "源条数": 72
+    },
+    "skill_lines": 67,
+    "source_attribution": {
+      "**未被逐份认领**": 1,
+      "subject_origin": "historical",
+      "口径": "**判「有没有被逐份认领」，不判「认领得对不对」**——在 citation 里写个错书名，本门照样放行。它挡的是整批免检。",
+      "声称本人所著的 P1 源": 71,
+      "靠 A-* 署名证据认定": 70,
+      "靠 attribution_basis 逐份点名认定": 0
+    },
+    "sources_holdout": 0,
+    "sources_total": 72,
+    "sources_train": 72,
+    "sources_usable_train": 72
+  },
+  "passed": false,
+  "phase": "research",
+  "profile": "quick",
+  "schema_version": "1.0",
+  "strict": false,
+  "target": "/Users/linzezhang/Documents/Codex/AgentDatabase/character-distillation-skill-reorganize-d57595/CodexSkills/skill_log_evals/persona-distiller/_corpora/wip-adams-131/workspaces/comfort-avery-adams",
+  "warnings": [
+    {
+      "code": "corpus.unexamined-band",
+      "message": "**27/72 份语料落在两道门之间**：字符数够 `non_placeholder`（≥500）而词数不够语种判据（<500），**没有任何判据看过它们的内容**。★ 短不等于坏，本条是覆盖缺口不是缺陷；但若某条道只靠这类文件撑着，请人看一眼。"
+    }
+  ]
+}

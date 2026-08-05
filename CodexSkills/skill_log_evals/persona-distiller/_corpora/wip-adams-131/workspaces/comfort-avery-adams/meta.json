@@ -90,7 +90,7 @@
   ],
   "middle_initial": "A",
   "generational_suffix": "Jr",
-  "namesake_note": "★★★ 本人物的同名比 Coffin #130 更难：**他父亲也叫 Comfort Avery Adams**，姓、名、中名首字母全同——中名首字母护栏在这里完全失效。**唯一能正面认定他的是 Jr.**：1904 年卷 23 印作 C. A. Adams, Jr.，后期卷不带。\n★★ **判据分不开的一半（必须承认）**：不带 Jr. 的 C. A. Adams 与 Conrad A. Adams （缩写相同、同刊同代）在署名这一层分不开，只能靠内容与场合逐份判——他的话集中在 AIEE 的电机与绝缘讨论。\n★ Alton D. Adams / Edward D. Adams 中名首字母为 D，可分。",
+  "namesake_note": "★★★ **已更正（2026-08-05 抓源阶段）**：我先前写「父子同名，不带 Jr. 的 C. A. Adams 分不开」——**那一半其实是分得开的**。抓源方查出：**他父亲 Comfort Avery Adams 是克利夫兰的服装商人，根本不在工程刊物上出现**。因此 AIEE 语料里的 `C. A. Adams` 不与父亲混。\n**真正要防的是 Conrad A. Adams**（缩写相同、同刊同代）与另外六位：Edward D.、Alton D.、P. H.、H. H.、Edwin Plimpton、Lee F. Adams——中名首字母不同的可分，Conrad A. 只能靠内容与场合判。\n★ 发言标签的真实形态是 **`Comfort A. Adams:` / `C. A. Adams:`（混合大小写，后接正文）**，**不是** `MR. ADAMS:`、**不是**全大写 `ADAMS:`——全大写那种是论文页眉，已整类剔除。\n★★ `Jr.` 仍要容（1904 年卷 23 用它），但它不再是**唯一**的认定手段。",
   "fetch_guards": [
     "**署名容 Jr.**——早期卷带、后期卷不带，两头都要收，否则 1904 那批整批漏掉。",
     "**全大写 ADAMS: + 论文标题 = 页眉，整类剔除**——探测实测卷 20/24 两卷共 82 处假阳性，而那两卷真实发言数是 0 和 0。",
@@ -100,5 +100,23 @@
     "**Lamme 奖年份未决**：NAS memoir 说 1944 且称「第 13 次颁发」，而 1928 年首颁 → 第 13 次 = 1940；另有《Electrical Engineering》1941 卷 60 p.369 题为「1940 Lamme medalist」。**两个年份都不许写进断言。**",
     "**卒年 1958-02-21 只有二手**（NAS memoir 1965／维基），未开同时代讣告。",
     "**NAS memoir 的书目页码实测三处对不上**（Proceedings vs Transactions 双编页）；但 38:783-93 三处一致——**不是全错，是必须逐条核**。"
-  ]
+  ],
+  "attribution_basis": {
+    "authority": "**印本署名逐份实读，只读正文、不读抓源方写的表头。** 71/71 份一手全部取到 A-* 证据。证据形态五种，都是这类会刊的固定体例：\n① 讨论环节的发言标签 `Comfort A. Adams:` / `C. A. Adams:`——**混合大小写、行中、无敬称**；\n② 同上带括注：`(by letter)` / `(communicated after adjournment)`；\n③ 首名被 OCR 削掉头一字母：`omfort A. Adams:`；`CLA, Adams:` 亦然；\n④ 方括号编者告示：`[COMMUNICATED AFTER ADJOURNMENT BY Comrort A. ADAMS.]`（`Comrort` 是讹字）；\n⑤ 论文与致辞的常规署名 `BY C. A. ADAMS`。\n★ 我**没有**查证 LoC 规范档编号——**不查证的东西不写进来**。",
+    "identity_anchor": "**全大写 `ADAMS:` 一律不算他的发言**——那是论文页眉。抓源方 31 卷实测共剔除 **210 处**，无一是发言；其中卷 XX 与卷 XXIV 的真实发言数是 **0 和 0**，**单这两卷就会制造 82 条幻影发言**。",
+    "citation": "Transactions A.I.E.E. 卷 XXIII(1904)／XXVI(1907)／XXVII(1908)／XXVIII(1909)／XXIX(1910)／XXXII(1913)／XXXIV(1915)／XXXV(1916)／XXXVII(1918)／XXXVIII(1919)／XLI(1922) 等；会长致辞《Cooperation》卷 XXXVIII pp.783-793（1919-06-24 Lake Placid 年会）。逐份的卷次、页码与 archive.org 字符偏移见各源 `locator`。",
+    "disputed_works": [
+      "**Edwin Plimpton Adams**——卷 XXXII(1913) `RADIOACTIVITY` 讲座系列作者，**该卷全部 72 处页眉都是他的**，一份未取。",
+      "**Lee F. Adams**——1915 年电机专题 `BEARINGS` 一节作者，**而本人在同一卷里也发言**，标签语法完全相同，逐条按内容分开。",
+      "Conrad A. Adams（缩写与本人相同）、Alton D. Adams、Edward D. Adams、P. H. Adams、H. H. Adams——均未取。",
+      "Journal of the A.I.E.E. 1922 三期实测：218 万字符、36 处姓氏命中、**零发言**，全是委员会名册与通讯地址。**一份未取，作为已量的负结果记下。**",
+      "卷 XXIV 目录列有他的一条讨论结语，**正文里按任何拼法都找不到**——记为未取，不猜。"
+    ],
+    "unresolved": [
+      "**卒年只有二手**（NAS memoir 1965／维基），未开同时代讣告——**本产物一律不写那个日期**。",
+      "**Lamme 奖年份未决**：memoir 记 1944 且称第 13 次颁发，而 1928 年首颁 → 第 13 次 = 1940；另有《Electrical Engineering》1941 卷 60 p.369 题为「1940 Lamme medalist」。**两个年份都不许写进断言。**",
+      "生年 1868-11-01 有同代依据（Who's Who in Engineering **第二版 1925**，本人供稿）——★ archive.org 该扫描件 `date` 字段写 1922，那是**第一版**年份，**引用必须写 1925**。"
+    ],
+    "disputed_policy": "**同姓者一律按「印在页上的证据」逐条判，判不了就不收。**\n① 中名首字母不同的（Alton D.／Edward D.／Edwin Plimpton／Lee F.／P. H.／H. H.）——**判据可分，直接排除**。\n② **Conrad A. Adams** 缩写与本人相同、同刊同代——**署名这一层分不开**，只能靠内容与场合逐份判（本人的话集中在电机、绝缘、试验、学会治理）。**判据不假装能分开。**\n③ **他父亲 Comfort Avery Adams 同名同姓**——但**是克利夫兰的服装商人，不在工程刊物上出现**，故工程语料里的 `C. A. Adams` 不与父亲混。★ 我最初把这一条写成「分不开」，**那是错的**：多问一句「他父亲是干什么的」就分开了。**「我分不开」与「客观上分不开」是两件事。**\n④ `Jr.` 要容不要强求：1904 年卷带 `Jr.`，后期卷不带。**拒绝 `Jr.` 丢那一份；强求 `Jr.` 丢另外 70 份。**"
+  }
 }

@@ -1,29 +1,18 @@
-# Expression DNA and micro-behavior
+# 03 表达（expression）—— Comfort Avery Adams
 
-## Scope and assigned sources
+**2 份。** 主力是 **A.I.E.E. 会长致辞《Cooperation》**
+（Transactions 卷 XXXVIII pp.783–793，1919-06-24 Lake Placid 年会）。
 
-Pending. Use train-split source IDs only.
+- 源：`src-84c26905a4ef` `src-83e7c18ba316`
+- 篇幅 **26,033 字符**，**整篇第一人称**。
+- 首行照录：`COOPERATION / PRESIDENT'S ADDRESS / BY C. A. ADAMS`。
+- 出处经**目录、提要索引、页眉三重印证**。
 
-## Source-linked observations
+## 密度
 
-Pending.
+这一道 **50,160 字符、12 句、2.39/万字**；
+**单是《Cooperation》一篇就有 11 句（4.32/万字）**——
+一篇文章的密度抵得上 Elihu Thomson #129 **全语料**的 4.25。
 
-## Candidate Claims
-
-Pending.
-
-## Contradictions and alternative explanations
-
-Pending.
-
-## Unknowns and source gaps
-
-Pending.
-
-## Proposed Holdout cases
-
-IDs only; research Agents must not inspect Holdout bodies.
-
-## Handoff to adjudication
-
-Pending.
+★ 该篇署名是 `BY C. A. ADAMS`，**不带 `Jr.`**。
+它能归到他名下靠的是**场合**（A.I.E.E. 会长致辞，而他正是当年的会长），**不是署名字符串**。

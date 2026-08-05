@@ -16,8 +16,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "33e141a0f4b5b7168902ee89a5c5abd0123556d57cc22b160b726b7ab98bbfdc",
-      "size_bytes": 284262
+      "sha256": "75805c08d1ce6f5e5722e85e9265cdb2f79102570a7e6c71a2cb62fbf56aa47e",
+      "size_bytes": 288956
     },
     {
       "path": "CONTRIBUTING.md",
@@ -56,7 +56,7 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "4167ae16c6a79eb5a1b893c91c71b087c264f1ee073dd5722a49922105a41329",
+      "sha256": "dc74dfa223cb3627b1767d7723aecc050423e4214aeaaa4a63539a826fb18b37",
       "size_bytes": 124639
     },
     {
@@ -436,8 +436,8 @@
     },
     {
       "path": "references/pipeline/RUNBOOK.md",
-      "sha256": "5133d9e0ba2d1e33ec121b4f81e1648fd495c827093f1628676def32cbff76a9",
-      "size_bytes": 239175
+      "sha256": "852a07e27852f9be86da1e0196f28a4d57ae91b1877e80c27f4eb77bfd9f547e",
+      "size_bytes": 240484
     },
     {
       "path": "references/pipeline/build_queue.py",
@@ -506,8 +506,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_authorship.py",
-      "sha256": "e5c2a7c34f1a0c4ed667cd75a829e4ff88fddf39b9181b526e365fbd42f5f1d6",
-      "size_bytes": 89220
+      "sha256": "936df330cd872814f039d16c860dbf6b0747c7978f43dee99f69ecc9fe9bc07d",
+      "size_bytes": 99194
     },
     {
       "path": "references/pipeline/checkers/check_baseline_provenance.py",
@@ -703,6 +703,11 @@
       "path": "references/pipeline/checkers/check_rights_basis.py",
       "sha256": "4fe58a6047dc1746344e53e9151385ccd88bf2ce147b56a513414f6295c39fd1",
       "size_bytes": 16535
+    },
+    {
+      "path": "references/pipeline/checkers/check_rubric_copies_answer.py",
+      "sha256": "8d2b5772edd01f5200a365ce3a8a91c6449c87600dd5c1216db77af0c45f18f3",
+      "size_bytes": 10209
     },
     {
       "path": "references/pipeline/checkers/check_scan_reach.py",
@@ -1031,8 +1036,8 @@
     },
     {
       "path": "scripts/build_blind_payload.py",
-      "sha256": "ea319cbc5aa4292e45fa3bba4b268c1e0ff8f2294685278d5971373fea03afda",
-      "size_bytes": 24649
+      "sha256": "4fe678f53cbd02dc5eb5def7d105dd3e0b64764d02c996a011fc9f0bfebd5d3a",
+      "size_bytes": 26404
     },
     {
       "path": "scripts/build_manifest.py",
@@ -1096,8 +1101,8 @@
     },
     {
       "path": "scripts/check_authorship.py",
-      "sha256": "e5c2a7c34f1a0c4ed667cd75a829e4ff88fddf39b9181b526e365fbd42f5f1d6",
-      "size_bytes": 89220
+      "sha256": "936df330cd872814f039d16c860dbf6b0747c7978f43dee99f69ecc9fe9bc07d",
+      "size_bytes": 99194
     },
     {
       "path": "scripts/check_baseline_provenance.py",
@@ -1293,6 +1298,11 @@
       "path": "scripts/check_rights_basis.py",
       "sha256": "4fe58a6047dc1746344e53e9151385ccd88bf2ce147b56a513414f6295c39fd1",
       "size_bytes": 16535
+    },
+    {
+      "path": "scripts/check_rubric_copies_answer.py",
+      "sha256": "8d2b5772edd01f5200a365ce3a8a91c6449c87600dd5c1216db77af0c45f18f3",
+      "size_bytes": 10209
     },
     {
       "path": "scripts/check_scan_reach.py",

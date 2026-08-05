@@ -1,5 +1,10 @@
 # George Washington Carver 人物 Skill
 
+> ⚠⚠ **引用本产物的 delta 之前，先读 [`DELTA-READ-ME-FIRST.md`](DELTA-READ-ME-FIRST.md)。**
+> 入库记的 `+0.3791` 是**有 rubric** 的数；同一批答案换成无 rubric 是 **−0.2019**（摆动 0.5810）。
+> 且这份 rubric **44% 抄了答案原字符串、38% 在要求人物出戏**（两项都已实测）。
+
+
 - 构建器：Persona Distiller `v0.0.0.5`
 - 目录/Skill 名：`george-washington-carver`
 - 构建主身份：农林牧渔师
