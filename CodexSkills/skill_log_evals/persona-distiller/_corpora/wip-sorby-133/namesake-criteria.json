@@ -45,5 +45,17 @@
       "Soebt（1876 Essays 卷，inside.php 与 grep 双双零命中）"
     ],
     "口径": "这些是**发现问题**不是归属问题：搜不到 ≠ 没有。本判据遇到它们会报 unknown，那是对的——unknown 是「没核」不是「不是他」。"
+  },
+  "★★★ 判据 3 的收紧（2026-08-05，抓源实测后）": {
+    "原措辞": "出处是 1850–1908 学会会刊",
+    "问题": "太宽。建筑师 T. C. Sorby 在 *Building News* 上发表，那也是 1850–1908 的连续出版物；而 PROBE 与 NAMESAKE-GUARD 两份文件对「Nature 算不算」措辞不一致，抓源子代理明确说它没有替我裁。",
+    "收紧为": "出处是 **1850–1908 年的科学类连续出版物**（学会会刊、Nature、MMJ、Linnean、地质学会、BAAS 报告等），**明确排除建筑与营造类行业刊物**（Building News 及同类）。",
+    "为什么这样收是站得住的": "真正做区分的**不是首字母，是刊物性质**。T. C. Sorby 是建筑师，发表在建筑行业刊物；本次 16 件仅靠判据 3 归属的作品，**没有一件出自建筑类刊物**——分别是 Nature 9、Royal Society Proceedings 2、MMJ 2、Linnean 1、Geological Society 1、BAAS 1。",
+    "旁证（但不单独依赖）": "那 16 件里 **14 件的印本署名含 `H. C. Sorby`**（含 OCR 讹形 `H. C, SORBY`／`H. C. Sokby`／`Sorsy`）。★ 仍不把首字母当判据——本文件另一处已写明首字母不可信；这里只作为**与刊物性质同向的旁证**。",
+    "三件要单看的": {
+      "E3b": "署名是「(continuation note by the President)」——他当时是 MMJ 会长，属职务身份，非独立署名。",
+      "E9": "「Mr. Sorby's Observations on M. Delsaulx' Paper」——**只有姓，没有首字母**。靠刊物性质（MMJ）与上下文归属。",
+      "X1": "记者转述的会议报道，**已标为不计入声口**，归属与否不影响声口统计。"
+    }
   }
 }
