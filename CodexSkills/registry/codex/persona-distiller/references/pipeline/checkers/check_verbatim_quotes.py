@@ -29,8 +29,40 @@ LAT = re.compile(r"[A-Za-z]{4}")
 NORM = re.compile(r"[^a-z0-9]+")
 
 
+# ★★★ v0.0.0.150：省略号是**合法的引文形态**，不是编造。
+#   `the Committee ... has had the inestimable advantage` —— 中间那一段是**作者主动略去的**，
+#   拿它去语料里找连续串当然找不到。**按整串比会把正当的节引报成编造引文。**
+ELLIPSIS = re.compile(r"\.\.\.+|…|\[[^\]]{0,12}\]")
+# ★★ markdown 记号不是引文的一部分。实测 Carver `primarily **between**`、
+#   Lister `**his guidance and advice**` 都因此报未命中——**那是我自己加的着重号**。
+MARKUP = re.compile(r"\*+|_{2,}|`|<[^>]{1,12}>")
+# ★ `<sup>r</sup>` 这类 HTML 标签也不是引文的一部分（Pasteur 的 `M. le D<sup>r</sup>`）。
+
+
 def norm(s: str) -> str:
-    return NORM.sub("", s.lower())
+    return NORM.sub("", MARKUP.sub("", s).lower())
+
+
+def norm_parts(s: str) -> list:
+    """→ 按省略号切开后的各段（已归一化，丢掉太短的碎片）。
+
+    ★ 判据变成：**每一段都要能在语料里找到**。
+    这比「整串必须连续出现」宽，但**比不查严**——
+    编造的句子不会恰好每一段都在语料里。
+    """
+    return [x for x in (norm(p) for p in ELLIPSIS.split(s)) if len(x) >= 12]
+
+
+def _hit(q: str, corpus: str) -> bool:
+    """→ 这条引文算不算「能在语料里找到」。
+
+    整串命中最好；命中不了就按省略号切开，**每一段都要在**。
+    切完没有够长的段（例如整条几乎都是省略号），**按未命中处理**——宁可报，不可漏。
+    """
+    if norm(q) in corpus:
+        return True
+    parts = norm_parts(q)
+    return bool(parts) and all(p in corpus for p in parts)
 
 
 def verbatim(q: str) -> bool:
@@ -96,7 +128,7 @@ def self_test() -> int:
         corpus = norm((cache / "corpus.txt").read_text(encoding="utf-8"))
         found = collect(ws, [])
         texts = [q for _, q in found]
-        missed = [q for q in texts if norm(q) not in corpus]
+        missed = [q for q in texts if not _hit(q, corpus)]
 
         checks = [
             ("真引文被认出且命中语料",
@@ -144,7 +176,7 @@ def main() -> int:
     corpus = "\n".join(norm(p.read_text(encoding="utf-8", errors="replace"))
                        for d in a.cache for p in d.rglob("*.txt"))
     qs = collect(a.workspace, a.extra)
-    bad = [(w, q) for w, q in qs if norm(q) not in corpus]
+    bad = [(w, q) for w, q in qs if not _hit(q, corpus)]
     print(f"逐字英文引文 {len(qs)} 条（判据：引号内无汉字），未命中 {len(bad)}")
     for w, q in bad:
         print(f"   \u2717 {w}: {q[:100]}")

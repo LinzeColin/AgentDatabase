@@ -1,0 +1,197 @@
+[
+  {
+    "name": "Henry Clifton Sorby",
+    "canonical_name": "Henry Clifton Sorby",
+    "subject_uid": "sorby-henry-clifton",
+    "is_target": true,
+    "identity_category": "科学研究者（自费独立学者，无受薪职位）",
+    "occupation_or_role": "显微岩相学（microscopic petrology）与金相学（metallography）的奠基者；显微分光镜发明者",
+    "professional_background": "1826-05-10 生于 Sheffield 附近 Woodbourne，1908-03-09 卒于 Sheffield，终身未婚。父 Henry Sorby 为 Sheffield 刃具制造世家成员；父故后他以私产为生，一生不受薪、不任教职，在自宅设实验室。1849 年前后从 W. C. Williamson 学得岩石薄片制法并首次用于岩石，1851 年发表第一篇岩相论文；1863-1864 年把薄片＋酸蚀＋显微照相用于铁与钢。1857 年当选 F.R.S.，1869 年 Wollaston 奖章，1874 年 Royal Medal，1878-1880 年任伦敦地质学会主席，1876-1877 年任皇家显微学会主席，1879 年剑桥荣誉 LL.D.。母亲 1872 年去世后购游艇 Glimpse 用于东岸海域考察。晚年出资推动 Firth College → University of Sheffield，并遗赠藏品与地质学讲席基金",
+    "application_scenarios": [
+      "把不可直接观测的成因问题，改造成可在薄片／蚀刻面上判读的显微证据问题",
+      "为一门尚无标准的观察科学从零建立制样、放大倍率与判读规程",
+      "在没有机构、没有经费、没有学生的条件下独自组织长周期研究",
+      "岩石、限石、钢铁三类异质材料之间迁移同一套显微方法"
+    ],
+    "key_capabilities": [
+      "岩石／金属薄片与蚀刻面的制备，并把制样本身当作可争论的方法论对象",
+      "从显微组织反推热历史与成因（结晶—再结晶—层片析出的推理链）",
+      "显微分光（micro-spectroscope）与吸收带定位，用于血色素、叶绿素、矿物着色物质",
+      "为「显微镜能分辨到什么极限」这类工具边界问题给出定量论证",
+      "自述式方法论写作：把「我如何安排自己的研究时间」当成可公开辩护的命题"
+    ],
+    "distinguishing_basis": "生卒 1826-05-10 / 1908-03-09；印刷署名固定为 `H. C. Sorby` 或 `Henry Clifton Sorby`，学位后缀 F.R.S., F.G.S., F.L.S., F.Z.S.；1862 年 Bakerian Lecture 讲者；1864 年英国科学促进会 Bath 会议 C 组（地质）秘书，同一卷 Report 中有他两篇摘要（一手实测：Trans. Sections p.70 限石、p.189 铁与钢）；1876-02-02 与 1877 年两次以皇家显微学会主席身份宣读年会致辞；1876 年在《Essays on the Endowment of Research》中署名撰写 Essay VI「Unencumbered Research: A Personal Experience」（pp.149-178），是全套候选人里唯一有第一人称自述长文的。★ 与其父同名，父子的区分点是「Clifton」这个中名和 1846/1847 年这条死亡线：1846 年以后署名 `Henry Sorby` 的 Sheffield 文献只可能是他，而 1846 年以前的必须逐条查",
+    "authoritative_sources": [
+      {"locator": "https://en.wikisource.org/wiki/Dictionary_of_National_Biography,_1912_supplement/Sorby,_Henry_Clifton", "kind": "reference-work", "note": "DNB 1912 supplement，公有领域，Wikisource 全文；文末列出 1908-1909 年讣告出处"},
+      {"locator": "https://www.gracesguide.co.uk/Henry_Clifton_Sorby", "kind": "encyclopedia", "note": "HTTP 200 已打开；给出父名、J. & H. Sorby 商号、学会职务年份、讣告清单"},
+      {"locator": "https://archive.org/details/reportofbritisha65brit", "kind": "primary-container", "note": "BAAS Report（1864 Bath 会议）；索引原样 `Sorby (H. C.) on the conclusion to be drawn from the physical structure of some meteorites, 70; on microscopical photographs of various kinds of iron and steel, 189.`"},
+      {"locator": "https://archive.org/details/essaysonendowmen00patt", "kind": "primary-self-authored", "note": "Essay VI 署名页（印本 p.149 / leaf 163）OCR 原样 `By Heitet Oxifton Soebt, F.R.S., President of the Hoyal Microscopical Society.`＝Henry Clifton Sorby"},
+      {"locator": "https://www.wikidata.org/wiki/Q1346007", "kind": "authority-record"}
+    ],
+    "evidence_level": "high"
+  },
+
+  {
+    "name": "Henry Sorby",
+    "canonical_name": "Henry Sorby (of Woodbourne, Attercliffe)",
+    "subject_uid": "sorby-henry-c1791-1846-edgetool",
+    "is_target": false,
+    "identity_category": "实业者（刃具制造合伙人／土地与矿产所有者）",
+    "occupation_or_role": "Sheffield 刃具商号 J. & H. Sorby 与 John Sorby and Sons 的合伙人；1841 年人口普查职业记为 land and mineral owner",
+    "professional_background": "目标人物的父亲。Grace's Guide 原样：`c.1791 Born in Yorkshire, presumably a son of John Sorby`、`1846 Died`、`of Woodbourne, Attercliffe`、`1841 Henry Sorby 50, land and mineral owner, lived in Sheffield`。1819 年在伦敦与 Amelia Lambert(s) 结婚。J. & H. Sorby（Spital-Hill, Sheffield）的合伙人名单为 `John Sorby the elder, John Sorby the younger, and Henry Sorby`，1828 年长者退出；John Sorby and Sons 于 1832 年解散合伙时列 `John Sorby, Henry Sorby, and Alfred Sorby`，此后 Henry 退出",
+    "application_scenarios": ["不适用——无科学著述，不构成专家人格候选"],
+    "key_capabilities": ["不适用"],
+    "distinguishing_basis": "★★★ 本人物同名风险的第一位。**父子同为 `Henry Sorby`、同在 Sheffield、同处金属／矿产语境**，且中名 Clifton 在 1841 年人口普查里并未出现（该条目只写 `Henry Sorby` 15 岁）。硬分界：父卒于 1846 年（Grace's Guide）——**但 Wikipedia 的 H. C. Sorby 条目写「In 1847, when he was 21, his father died」，两处差一年，本次探测未能裁定，见 PROBE.md §五.1**。凡 1846/1847 年以前、Sheffield 出处、署名只有 `Henry Sorby` 而无 `C.`／`Clifton` 的文件（尤其商号文书、人口普查、地产／矿产记录、**以及 University of Sheffield Sorby Collection 里那本 1845-1846 年的父亲日记**），一律不得默认归给目标人物",
+    "authoritative_sources": [
+      {"locator": "https://www.gracesguide.co.uk/Henry_Sorby", "kind": "encyclopedia", "note": "HTTP 200 已打开；专为父亲另开的条目"},
+      {"locator": "https://www.gracesguide.co.uk/J._and_H._Sorby", "kind": "company-record", "note": "HTTP 200 已打开；合伙人 `John Sorby the elder, John Sorby the younger, and Henry Sorby`"},
+      {"locator": "https://www.gracesguide.co.uk/John_Sorby_and_Sons", "kind": "company-record", "note": "HTTP 200 已打开；1832 年解散合伙列 `John Sorby, Henry Sorby, and Alfred Sorby`"},
+      {"locator": "https://archives.shef.ac.uk/repositories/3/resources/333", "kind": "archive-finding-aid", "note": "Sorby Collection (ref 51) 内含 `one diary from his father covering 1845-1846`——同一馆藏里「Sorby 日记」有两个人"}
+    ],
+    "evidence_level": "medium"
+  },
+
+  {
+    "name": "Thomas Charles Sorby",
+    "canonical_name": "Thomas Charles Sorby",
+    "subject_uid": "sorby-thomas-charles-1836-1924-architect",
+    "is_target": false,
+    "identity_category": "建筑师",
+    "occupation_or_role": "英格兰／加拿大建筑师；1867 年起任英格兰与威尔士警署建筑与郡法院测绘官（surveyor of police buildings and county courts）",
+    "professional_background": "1836-02-16 生于 Yorkshire（Wikipedia 记 Chevet，另一来源记 Wakefield，本次未裁定），1924-11-15 卒于 British Columbia 的 Victoria。伦敦从 Charles Reeves 学艺并任其助手，1866 年 12 月 Reeves 去世后接任其官职。1863 年 Holborn 高架桥竞图 105 人中获次奖。**1866 年赢得 Sheffield 的 St Michael and All Angels 教堂设计首奖**。1883 年移居加拿大，先后在 Montreal、Vancouver、Victoria 执业，为加拿大太平洋铁路设计车站与旅馆（Hotel Vancouver、Glacier House、Mount Stephen House）。向《Building News》投稿",
+    "application_scenarios": ["不适用于本流水线——建筑学人物，与显微镜／冶金无关"],
+    "key_capabilities": ["不适用"],
+    "distinguishing_basis": "★★ 第二位高危：**同代、同为英国专业人士、在同一批英国技术期刊上发表、并且在 Sheffield 有实际工程（1866 年 St Michael and All Angels）**。署名形式 `T. C. Sorby` 与目标的 `H. C. Sorby` **只差一个首字母**，19 世纪印本 OCR 把 T 读成 H／把 H 读成 II、U、E 是常态（本次实测同一批扫描中已见 `H. G. Sorby`、`U. G. Sorby`、`IT. C. Sorby`、`E. 0. Sorby`）。硬区分：他是 1836 年生、1883 年后长住加拿大、著作全部为建筑／港务类。archive.org 上确有以他为 creator 的条目 `cihm_83298`（1919, Victoria B.C., T.R. Cusack Press），**`creator:Sorby` 一类的检索会把它捞进来**",
+    "authoritative_sources": [
+      {"locator": "https://en.wikipedia.org/wiki/Thomas_Charles_Sorby", "kind": "encyclopedia"},
+      {"locator": "http://dictionaryofarchitectsincanada.org/node/1317", "kind": "biographical-dictionary", "note": "Biographical Dictionary of Architects in Canada；HTTP 200；条目标注 `(biography in preparation)`"},
+      {"locator": "https://archive.org/details/cihm_83298", "kind": "authored-work", "note": "IA creator 字段原样 `Sorby, Thomas C. (Thomas Charles), 1836-1924`"},
+      {"locator": "https://www.wikidata.org/wiki/Q27177937", "kind": "authority-record"}
+    ],
+    "evidence_level": "high"
+  },
+
+  {
+    "name": "Robert Sorby",
+    "canonical_name": "Robert Sorby (1787-1857)",
+    "subject_uid": "sorby-robert-1787-1857-filemaker",
+    "is_target": false,
+    "identity_category": "实业者（锉刀制造商／商人／治安法官）",
+    "occupation_or_role": "Sheffield 锉刀制造商，后转商人与 magistrate；商号 Robert Sorby and Sons",
+    "professional_background": "1787-1857，Sheffield。1829 年解散与 William Lockwood、John Lockwood 的锉刀制造合伙，原样：`the Partnership formerly existing between us the undersigned, William Lockwood, Robert Sorby, and John Lockwood, as Manufacturers of Files, in Sheffield`。1811 年在 Sheffield 与 Sarah Mycock 结婚，子 Thomas Austin Sorby 生于 1823。1851 年普查记 `age 63 born Sheffield`、`Merchant and Magistrate`",
+    "application_scenarios": ["不适用——无科学著述"],
+    "key_capabilities": ["不适用"],
+    "distinguishing_basis": "★★ 第三位高危，但危险方式与前两位不同：**「Sorby」在 Sheffield 首先是一个刃具品牌，不是一个人名**。Robert Sorby 这个商号名至今仍是在售的木工凿具品牌，因此任何以「Sorby + Sheffield + 钢 / 刃具 / 金属」为关键词的检索，命中的绝大多数是工具而不是人。这条与目标人物尤其容易缠住——目标人物的家族产业正是刃具，而他本人的成名工作正是钢的显微组织。区分依据：本人物的文本永远出现在学会会刊／科学期刊，商号文本出现在商业名录、合伙解散公告、专利与广告",
+    "authoritative_sources": [
+      {"locator": "https://www.gracesguide.co.uk/Robert_Sorby", "kind": "encyclopedia", "note": "HTTP 200 已打开"},
+      {"locator": "https://www.gracesguide.co.uk/Robert_Sorby_and_Sons", "kind": "company-record", "note": "HTTP 200（仅确认存在，未逐页读）"}
+    ],
+    "evidence_level": "medium"
+  },
+
+  {
+    "name": "John Sorby",
+    "canonical_name": "John Sorby (of John Sorby and Sons / J. and H. Sorby)",
+    "subject_uid": "sorby-john-sheffield-edgetool",
+    "is_target": false,
+    "identity_category": "实业者（刃具与锤具制造商）",
+    "occupation_or_role": "Spital-Hill, Sheffield 的 edge-tool 与 sheep shears 制造商",
+    "professional_background": "Grace's Guide 记 John Sorby and Sons 1825-1844 经营，`1825 John Sorby established as hammer maker`；1832 年 `John Sorby, Henry Sorby, and Alfred Sorby` 解散合伙，业务由 John Sorby 与 Alfred Sorby 续办；1844 年 `Alfred Sorby and John Francis Sorby` 解散合伙，转与 Lockwood 家族。J. & H. Sorby 的合伙人名单区分了 `John Sorby the elder` 与 `John Sorby the younger`——即这个名字本身至少对应两个人",
+    "application_scenarios": ["不适用——无科学著述"],
+    "key_capabilities": ["不适用"],
+    "distinguishing_basis": "★ 这条与其说是一个人，不如说是一个**同名簇**：本次探测在 Grace's Guide 上确认了同一家族／同一行业的 `John Sorby the elder`、`John Sorby the younger`、`Alfred Sorby`、`John Francis Sorby`、`Thomas Austin Sorby` 五个名字。它们的共同特征是：出现在 1820s-1840s 的 Sheffield 商业文书里，没有任何一个有科学著述。护栏若只比姓，会把整簇放行；正确做法是**要求「Sorby」旁边必须出现 `H. C.`／`Clifton`／`F.R.S.` 之一，且出处为学会会刊**",
+    "authoritative_sources": [
+      {"locator": "https://www.gracesguide.co.uk/John_Sorby_and_Sons", "kind": "company-record", "note": "HTTP 200 已打开"},
+      {"locator": "https://www.gracesguide.co.uk/J._and_H._Sorby", "kind": "company-record", "note": "HTTP 200 已打开"}
+    ],
+    "evidence_level": "medium"
+  },
+
+  {
+    "name": "Thomas Sorby",
+    "canonical_name": "Thomas Sorby (1856-1930)",
+    "subject_uid": "sorby-thomas-1856-1930-footballer",
+    "is_target": false,
+    "identity_category": "运动员",
+    "occupation_or_role": "英格兰国脚（足球）",
+    "professional_background": "1856-1930，英格兰。除 Wikipedia／Wikidata 的运动员条目外，本次未查到任何著述",
+    "application_scenarios": ["不适用"],
+    "key_capabilities": ["不适用"],
+    "distinguishing_basis": "同代英国人、同姓，但活动领域（体育报道）与目标人物（学会会刊）完全不交叠；1856 年生，目标人物 1826 年生。**与 Thomas Charles Sorby 也须分开**——两个 Thomas Sorby，差 20 岁",
+    "authoritative_sources": [
+      {"locator": "https://en.wikipedia.org/wiki/Thomas_Sorby", "kind": "encyclopedia"},
+      {"locator": "https://www.wikidata.org/wiki/Q7794096", "kind": "authority-record"}
+    ],
+    "evidence_level": "medium"
+  },
+
+  {
+    "name": "Harold Sorby",
+    "canonical_name": "Harold Sorby",
+    "subject_uid": "sorby-harold-fl1895-animal-vaccination",
+    "is_target": false,
+    "identity_category": "身份未确认（署名见于一份 1895 年医学小册）",
+    "occupation_or_role": "未确认",
+    "professional_background": "本次探测只掌握一条硬证据：archive.org 条目 `animalvaccinatio00sorb`，creator 字段原样 `[Sorby, Harold] [from old catalog]`，题名 `Animal vaccination`，1895，publisher `[New York?]`，馆藏 Library of Congress。**生卒、国籍、职业一概未查到，本次不作推断**",
+    "application_scenarios": ["不适用"],
+    "key_capabilities": ["不适用"],
+    "distinguishing_basis": "他之所以必须列进来，是因为**他是 archive.org 上 `creator:(\"Sorby\")` 检索会直接返回的条目之一**，且年代（1895）落在目标人物的活跃期内、主题（医学显微／疫苗）与目标人物的显微生物学工作在关键词上相邻。区分依据只有名字 `Harold` 与 LoC 编目号 5872413；**其余一律标「不确定」**",
+    "authoritative_sources": [
+      {"locator": "https://archive.org/details/animalvaccinatio00sorb", "kind": "authored-work", "note": "HTTP 200；creator 原样 `[Sorby, Harold] [from old catalog]`；call_number 5872413"}
+    ],
+    "evidence_level": "low"
+  },
+
+  {
+    "name": "Albert Sorby Buxton",
+    "canonical_name": "Albert Sorby Buxton",
+    "subject_uid": "buxton-albert-sorby-1867-1932-painter",
+    "is_target": false,
+    "identity_category": "画家／地方史家",
+    "occupation_or_role": "英国画家与历史著作者",
+    "professional_background": "1867-1932，英国。姓氏为 Buxton，Sorby 是中名",
+    "application_scenarios": ["不适用"],
+    "key_capabilities": ["不适用"],
+    "distinguishing_basis": "**中名陷阱**：署名常作 `A. Sorby Buxton`／`Albert Sorby Buxton`，任何按子串 `Sorby` 匹配的护栏都会命中，而他的姓根本不是 Sorby。区分依据：姓氏为 Buxton；1867 年生；著述为绘画与地方史",
+    "authoritative_sources": [
+      {"locator": "https://www.wikidata.org/wiki/Q4711243", "kind": "authority-record"}
+    ],
+    "evidence_level": "medium"
+  },
+
+  {
+    "name": "Sheryl Ann Sorby",
+    "canonical_name": "Sheryl Ann Sorby",
+    "subject_uid": "sorby-sheryl-ann-1959-engineering-educator",
+    "is_target": false,
+    "identity_category": "当代学者（工程教育）",
+    "occupation_or_role": "美国机械工程教授；空间可视化／工程图学教材作者",
+    "professional_background": "1959 年生。著有 `Introduction to 3-D spatial visualization`、`An engineer's guide to technical communication`、`Solid modeling with I-DEAS`、`Microsoft Word for Engineers`、`Visualization, Modeling, and Graphics for Engineering Design`（与 Dennis K. Lieu 合著）等；论文如 `Identifying Gender Differences in the 3-D Visualization Skills of Engineering Students`",
+    "application_scenarios": ["不适用于本流水线——当代在世作者，且其作品在版权期内"],
+    "key_capabilities": ["不适用"],
+    "distinguishing_basis": "★ **检索噪声量最大的一位**：archive.org 上 `creator:(\"Sorby\")` 的前 100 条里，她的条目数量超过目标人物的任何单一年份。危险点有二——(1) 她是**工程学**作者，与目标人物的领域在关键词层面相邻；(2) **她在世、作品在版权期内**，一旦混入语料就同时破坏「一手」与「公有领域」两条判据。硬区分：1959 年生；所有作品出版年 ≥1987；主题为 3-D 可视化与工程沟通",
+    "authoritative_sources": [
+      {"locator": "https://www.wikidata.org/wiki/Q124738707", "kind": "authority-record"},
+      {"locator": "https://archive.org/details/introductionto3d0000sorb", "kind": "authored-work", "note": "IA creator 原样 `Sorby, Sheryl Ann, 1959-`"}
+    ],
+    "evidence_level": "high"
+  },
+
+  {
+    "name": "Angela Sorby",
+    "canonical_name": "Angela Sorby",
+    "subject_uid": "sorby-angela-1965-poet",
+    "is_target": false,
+    "identity_category": "当代学者／诗人",
+    "occupation_or_role": "美国诗人、文学研究者",
+    "professional_background": "1965 年生。著有 `Schoolroom poets: childhood and the place of American poetry, 1865-1917`、`Bird skin coat`、`Distance learning`",
+    "application_scenarios": ["不适用于本流水线——当代在世作者，作品在版权期内"],
+    "key_capabilities": ["不适用"],
+    "distinguishing_basis": "当代人文学者；**其著作题名里含 1865-1917 这类 19 世纪年份**，按「Sorby + 19 世纪」做年代过滤时会被误留。硬区分：1965 年生；出版年 ≥1998；主题为美国诗歌",
+    "authoritative_sources": [
+      {"locator": "https://www.wikidata.org/wiki/Q4762559", "kind": "authority-record"},
+      {"locator": "https://archive.org/details/schoolroompoetsc0000sorb", "kind": "authored-work", "note": "IA creator 原样 `Sorby, Angela`"}
+    ],
+    "evidence_level": "medium"
+  }
+]

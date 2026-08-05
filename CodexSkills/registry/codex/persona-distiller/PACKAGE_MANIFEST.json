@@ -376,8 +376,8 @@
     },
     {
       "path": "references/ledgers/_待用户裁定.md",
-      "sha256": "6f6e1edb406f4b0a4061931a743c6a44f1b8b53e3e2fb3d32c8d50d332ce3707",
-      "size_bytes": 133026
+      "sha256": "14bcea898258e2b5ad9526ba30d768f0c56ea2ac3313b060709cbbb4ad47f6e0",
+      "size_bytes": 136850
     },
     {
       "path": "references/ledgers/_每次开工必读.md",
@@ -781,8 +781,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_verbatim_quotes.py",
-      "sha256": "79fc6780328d6af467d889a73cb4d4bbec76758f2196dc38ae0af62755a184f4",
-      "size_bytes": 7117
+      "sha256": "5f8109c93447fbb941468c073e7d812c5ba99ae6b777be36bef89a3b40d412c7",
+      "size_bytes": 8704
     },
     {
       "path": "references/pipeline/checkers/check_verdict_attribution.py",
@@ -886,8 +886,8 @@
     },
     {
       "path": "references/pipeline/judge_prompts/RUBRIC-RULES-v2.md",
-      "sha256": "3a977f6bbf3d60e4646f0c846f0590bac7be0a24de0930528d1ec6be393ce0cc",
-      "size_bytes": 7228
+      "sha256": "b161ed2ade0b27553f2e415f0a5eecc780d3d8dded7d2390bb98655aff6502b8",
+      "size_bytes": 10642
     },
     {
       "path": "references/pipeline/judge_prompts/seat_D_score.md",
@@ -1386,8 +1386,8 @@
     },
     {
       "path": "scripts/check_verbatim_quotes.py",
-      "sha256": "79fc6780328d6af467d889a73cb4d4bbec76758f2196dc38ae0af62755a184f4",
-      "size_bytes": 7117
+      "sha256": "5f8109c93447fbb941468c073e7d812c5ba99ae6b777be36bef89a3b40d412c7",
+      "size_bytes": 8704
     },
     {
       "path": "scripts/check_verdict_attribution.py",
