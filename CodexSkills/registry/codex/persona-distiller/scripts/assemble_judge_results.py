@@ -129,6 +129,16 @@ def read_seat(raw: dict, key: dict, seat: str, suite_of: dict) -> list:
         if qid.startswith("_") or qid not in key:
             continue
         k = key[qid]
+        # ★★★ 最早那一代（Galen #101／Harvey #103／Vesalius #102）的揭盲键是
+        #   `{case_id: "A"}`——**一个裸字符串**，意思是「候选在 A 侧」，
+        #   而不是 `{"A": "candidate", "B": "baseline", "case_id": …}`。
+        #   不认它的后果不是报错退出，是 `k["A"]` 抛 TypeError 被上层
+        #   `except: continue` 吞掉，**整个人物静默消失**——
+        #   我就是这样在 ㉓ 的历史表里漏掉了这三个人。
+        if isinstance(k, str):
+            k = {"A": "candidate" if k.strip().upper() == "A" else "baseline",
+                 "B": "baseline" if k.strip().upper() == "A" else "candidate",
+                 "case_id": qid}
         if isinstance(v, (list, tuple)):
             a_raw, b_raw, note = float(v[0]), float(v[1]), ""
         else:

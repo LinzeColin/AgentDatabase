@@ -376,8 +376,8 @@
     },
     {
       "path": "references/ledgers/_待用户裁定.md",
-      "sha256": "1af5bf1bc03e8ae8ab5d6490ec15130f0f9848409b4198161ef5156b51758171",
-      "size_bytes": 161097
+      "sha256": "1b03ff2729e668d978574b1805c9bbb5f91b109353d720cc8eab53fc226870ab",
+      "size_bytes": 162200
     },
     {
       "path": "references/ledgers/_每次开工必读.md",
@@ -451,8 +451,8 @@
     },
     {
       "path": "references/pipeline/checkers/assemble_judge_results.py",
-      "sha256": "7b18ae4a339076d6d4f207613b142587f78e14e2ef21b2b03aa13318d79e6de3",
-      "size_bytes": 21086
+      "sha256": "cdd8be96565a956b55ad8ce15a9e89691d34166c1d1ba6a8b5c0c4e77de3bcd4",
+      "size_bytes": 21815
     },
     {
       "path": "references/pipeline/checkers/build_blind_payload.py",
@@ -1066,8 +1066,8 @@
     },
     {
       "path": "scripts/assemble_judge_results.py",
-      "sha256": "7b18ae4a339076d6d4f207613b142587f78e14e2ef21b2b03aa13318d79e6de3",
-      "size_bytes": 21086
+      "sha256": "cdd8be96565a956b55ad8ce15a9e89691d34166c1d1ba6a8b5c0c4e77de3bcd4",
+      "size_bytes": 21815
     },
     {
       "path": "scripts/build_blind_payload.py",
