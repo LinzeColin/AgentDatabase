@@ -1,0 +1,147 @@
+{
+  "subject": "William Chandler Roberts-Austen",
+  "surname": "oberts",
+  "born": 1843,
+  "died": 1902,
+  "marker_window": 45,
+
+  "★★★ surname 为什么写成 `oberts` 而不是 `Roberts-Austen`（抓源实测后定的）": {
+    "判据怎么用这个字段": "`check_namesake_criteria.classify` 拿 `surname` 做**纯子串**贴近检验：区分符命中处前后 `marker_window` 字以内必须出现 `surname`。**没有模糊匹配、没有编辑距离。**",
+    "写 `Roberts-Austen` 会怎样": "本轮 26 份落盘正文里，姓氏的印本 OCR 形态实测有 **14 种**（下面 `★ 实测到的姓氏 OCR 讹形` 一节给了逐形计数）。写死 `Roberts-Austen` 会让 `Koberts- Austen`／`Boberts-Austen`／`Eoberts-Austen`／`Roberts- A listen` 这些**目标本人的署名**一律贴不上，区分符全部失效。",
+    "写 `Roberts` 会怎样": "仍然漏。实测 `philtrans08066202`（Proc. Roy. Soc. 71, rspl.1902.0078）**全篇 0 处 `Roberts`**——它的每一处都被打成 `Eoberts`。",
+    "为什么 `oberts` 是对的": "受损的恰是**首字母**：R→K／B／E 三种（`Koberts` 6 处、`Boberts` 5 处、`Eoberts` 9 处，逐份计数见实测节）。去掉首字母之后的 `oberts` 在 26 份里**一次也没有被打坏**。这不是取巧，是**把锚点挪到没被损坏的那一段**。",
+    "副作用有没有查": "查了。`oberts` 作为英文子串本身没有别的常见词命中；本轮 26 份正文里 `oberts` 的每一次出现都在姓氏内部。"
+  },
+
+  "★★★ marker_window 为什么是 45": {
+    "打回它的那一行": "Phil. Trans. A 187 (1896) Bakerian Lecture 扉页照录：`By W. C. Roberts- Austen, C.B., F.R.S., Professor of Metallurgy, Royal College of Science ; Chemist of the Mint.`",
+    "算过的距离": "从 `oberts` 词尾到区分符 `Royal College of Science` 词首 **41 字**——英式职衔串（C.B., F.R.S., Professor of Metallurgy, ...）把姓氏与机构名撑开。窗口 40 判不到它。",
+    "为什么不取更大": "60／120 两档实测：120 会让反例⑤（`the Royal Mint` 与另一个 Roberts 在同一长句里远距离同现）被误判成目标本人。45 是能容纳英式职衔串的最小整值。",
+    "口径": "放宽的同时反例必须仍然红；下面 `反例` 一节就是这一条的守卫。"
+  },
+
+  "any_of_markers": [
+    "oberts-Austen",
+    "oberts- Austen",
+    "oberts -Austen",
+    "oberts Austen",
+    "oberts- A listen",
+    "oberts-Austin",
+    "oberts-Aicsten",
+    "oberts-AuBten",
+    "oberts-Aiisten",
+    "oberts- Ansten",
+    "Chandler Roberts",
+    "Chandler Koberts",
+    "Royal Mint",
+    "Chemist of the Mint",
+    "Chemist and Assayer",
+    "Royal School of Mines",
+    "Royal College of Science",
+    "Normal School of Science",
+    "Professor of Metallurgy",
+    "Alloys Research",
+    "Assay Master",
+    "K.C.B."
+  ],
+
+  "★ 实测到的姓氏 OCR 讹形（本轮 26 份落盘正文，逐形计数，跑出来的不是记出来的）": {
+    "Roberts-Austen": 108,
+    "Roberts- Austen": 69,
+    "Eoberts-Austen": 6,
+    "Boberts-Austen": 5,
+    "Roberts -Austen": 5,
+    "Koberts- Austen": 4,
+    "Eoberts- Austen": 2,
+    "Koberts-Austen": 2,
+    "Roberts Austen": 1,
+    "Roberts-Aicsten": 1,
+    "Roberts-AuBten": 1,
+    "Eoberts-Aiisten": 1,
+    "Roberts- A listen": 1,
+    "Roberts- Ansten": 1,
+    "口径": "这些是**发现问题**不是归属问题：搜不到 ≠ 不是他。判据遇到没收录的讹形会报 unknown，那是对的——unknown 是「没核」不是「不是他」。"
+  },
+
+  "excluded_names": [
+    "Isaac Roberts",
+    "Roberts, Isaac",
+    "Richard Roberts",
+    "Roberts, Richard",
+    "Charles Roberts",
+    "Roberts, Charles",
+    "Charles Hubert Roberts",
+    "Robert Davies Roberts",
+    "Roberts, Robert Davies",
+    "Alexander William Roberts",
+    "William C. Roberts",
+    "William Roberts, M.D.",
+    "W. Roberts, M.D.",
+    "Stewart Roberts",
+    "Robert A. C. Austen",
+    "Robert Alfred Cloyne Godwin-Austen",
+    "Godwin-Austen",
+    "Godwin Austen",
+    "Henry Haversham Austen",
+    "Henry Haversham Godwin-Austen",
+    "Peter Townsend Austen",
+    "P. T. Austen",
+    "Ernest Edward Austen",
+    "E. E. Austen",
+    "Jane Austen",
+    "Austen Henry Layard",
+    "Austen Chamberlain",
+    "Charles Frederick Chandler",
+    "C. F. Chandler"
+  ],
+
+  "★★★ 排除名单的禁区（放进去会把目标自己的材料删掉）": {
+    "口径": "判据的排除正则是 `(?<![A-Za-z])` + 记号按 `\\s*` 连接——**只有词首边界，没有词尾边界**。因此任何**构成目标姓名前缀**的字面都会命中目标本人。他的姓恰好以英语最常见的姓氏之一 `Roberts` 打头，这个坑对他特别深。下面每一条都给了它为什么会命中目标本人：",
+
+    "William Roberts": "★★★ **最致命的一条。** Sir William Roberts（1830-1899，曼彻斯特肾脏病学家、FRS 1877、1885 受封）是本人物最高危的同名者，第一反应就是把他写进排除名单。但 `(?<![A-Za-z])William\\s*Roberts` 会命中 `William Roberts-Austen`——**没有词尾边界拦得住它**。写进去等于把目标署全名的每一份删掉。实测见 NAMESAKE-GUARD-实测.md 第 ① 组。",
+    "Sir William Roberts": "★★★ 同上，且更隐蔽：目标 1899 年受 K.C.B.，此后印本上正是 `Sir W. Roberts-Austen`／`Professor Sir W. Koberts-Austen`（Proc. Roy. Soc. 67, 1900 照录）。`Sir William Roberts` 命中 `Sir William Roberts-Austen`。",
+    "W. C. Roberts": "★★★ 这是**目标 1885 年前的印本署名本身**（Nature 15 (1876) p.153、20 (1879) p.587、21 (1880) p.272 三处文末签名照录均为 `W. Chandler Roberts`；缩写形 `W. C. Roberts` 同源）。而且它还会命中 1885 年后的 `W. C. Roberts-Austen`。**两个方向同时错。**",
+    "Roberts": "裸姓。既是他 1885 年前的全部署名，也是复姓的前一半。不许排除。",
+    "Austen": "★★★ 复姓的后一半。裸 `Austen` 会命中 `Roberts-Austen` 的每一次出现。**`Austen` 还是英语教名**（Austen Henry Layard、Austen Chamberlain），所以它在语料里既可能是姓也可能是名——但这不构成排除它的理由，只构成**必须写全名再排除**的理由。",
+    "Chandler": "★★★ **这是目标的中名。** Charles Frederick Chandler（1836-1925，哥伦比亚 School of Mines 化学家）是同代同领域的著名人物，裸 `Chandler` 在 1870-1900 的化学／冶金文献里指他的概率不低——正因为如此才危险：写进去会命中 `W. Chandler Roberts`（他 1885 年前的全部署名）与 `William Chandler Roberts-Austen`（他的全名）。已改用完整形式 `Charles Frederick Chandler`／`C. F. Chandler`。",
+    "William Chandler": "★★★ **目标的外祖父叫 William Chandler, M.D., of Canterbury**（DNB 1912 补编原文：`by his wife Maria Louisa, daughter of William Chandler, M.D., of Canterbury`）。外祖父没有著作，排除他毫无收益；而 `William Chandler` 是目标全名的**前两段**，写进去会把目标的每一份材料删光。与 Martens #134 的父名 `Friedrich Martens` 同形。",
+    "George Roberts": "★★ **目标之父。** 字面上它不构成目标姓名的前缀（`George` ≠ `William`），所以不会直接命中目标署名；**但它会命中每一篇写家世的传记**——DNB 1912 补编、1914 年 Smith 编《Roberts-Austen: A Record of His Work》的 `OUTLINE OF ROBERTS-AUSTEN'S CAREER` 一章都写着 `His father, George Roberts, was of Welsh extraction`。排除他 ⇒ 删掉全部带家世的材料，而丢材料的方向不会报错。",
+    "Nathaniel Lawrence Austen": "★★ **目标之舅父，`Austen` 这个姓的来源本人。** 凡解释 1885 年改姓的传记都写他。排除他 ⇒ 把改姓这件事的证据删掉，而改姓正是本人物同名护栏的核心事实。",
+    "Professor Roberts / Dr. Roberts / Sir W. Roberts": "★ **敬称 + 姓的形态全是他自己的。** 实测照录：`Professor Roberts-Austen`（Canada's Metals 1898 扉页）、`Dr. W. C. Roberts-Austen.`（Proc. Roy. Soc. 63, 1898 版口）、`Professor Sir W. Koberts-Austen, K.C.B., P.E.S.`（Proc. Roy. Soc. 67, 1900）。任何以敬称打头、以 `Roberts` 收尾的排除项都会把他删掉。",
+    "William C. Roberts（已放进 excluded_names，但要知道它带一个字面风险）": "★★ 它安全的理由很窄：正则 `William\\s*C\\.\\s*Roberts` 里 `C\\.` 要求 C 后面**紧跟一个句点**，而目标是 `William Chandler`（C 后面是 h），因而匹配不上。**这条侥幸已实测**（见实测第 ⑥ 组）。若日后语料里出现 `William C. Roberts-Austen` 这种写法，本条必须移出排除名单。"
+  },
+
+  "★★ 不许单独使用的判据": {
+    "F.R.S.": "★★★ 与 Sorby #133 用 `F.R.S.` 当区分符的做法**在本人物上必须反过来**：目标是 FRS（1875-06-03），而 Sir William Roberts（1877）、Isaac Roberts（1890）、R. A. C. Godwin-Austen（1849）、H. H. Godwin-Austen 也全是 FRS。**`F.R.S.` 贴着 `oberts` 出现，四个人都可能。** 已刻意不列入 any_of_markers。",
+    "首字母 `W.`": "目标署 `W. C. Roberts-Austen`／`W. Chandler Roberts`；Alexander **W**illiam Roberts 署 `A. W. Roberts`，Sir **W**illiam Roberts 署 `W. Roberts`。**首字母在本人物上是歧义源，不是区分符。**",
+    "题材是 austenite／奥氏体": "★★★ **相变名里就嵌着他的姓。** 凡讲奥氏体来源的文献都会写 `Roberts-Austen`——那是**关于他**，不是**他写的**。题材词只能定 tier（二手），不能定 authorship。而且 `austenite` 本身含 `austen`，任何把裸 `Austen` 当标记的做法都会被它整片命中。",
+    "刊名里有 Phil. Trans. / Proc. Roy. Soc. / J. Iron Steel Inst.": "刊名 ≠ 著者。这些是多作者连续出版物，且本轮实测每一份 archive.org 扫描件都**跨到了相邻文章**（见 FETCH-REPORT「版面溢出」一节）。必须逐篇看**印本署名行**。",
+    "London / South Kensington": "Sir William Roberts 晚年也在伦敦；Royal School of Mines 有大量作者。**地名单独不算区分符**，已刻意不列入 any_of_markers。",
+    "★ `Roberts-Austen` 之外的复姓形态": "`Godwin-Austen` 与 `Roberts-Austen` 是同一构词法。判据里 `Godwin-Austen` 放在 excluded_names、`oberts-Austen` 放在 any_of_markers，**两者不许写成同一个 `-Austen` 通配**。"
+  },
+
+  "bare_name_before_year": {
+    "year": 1868,
+    "bare": "William Roberts",
+    "reason": "目标 1843 年生，1861 年（十八岁）入 Royal School of Mines，1865 年得 associateship 并入造币厂任 Thomas Graham 的私人助手；**Royal Society《Catalogue of Scientific Papers》收录他的论文共 74 篇，起讫 1868-1900**（依据：DNB 1912 补编 Roberts-Austen 条，撰稿人 T. E. James，原文 `The Royal Society's 'Catalogue of Scientific Papers' enumerates seventy-four papers by Roberts-Austen, a few jointly with other authors (1868-1900).`）。1868 年以前科学刊物上任何裸 `William Roberts` 署名都不是他——那个年代的英国 `William Roberts` 是 Sir William Roberts（1830-1899，曼彻斯特，1850s 起发表肾脏病与尿化学论文）。",
+    "★ 为什么这条不会误伤目标本人": "① 判据的比对是**去空白后的子串**：目标的 `William Chandler Roberts` 去空白后是 `williamchandlerroberts`，**不含** `williamroberts`（中名把两段隔开），他 1885 年前的印本署名一次也不会命中；② 即便某处写成 `William Roberts-Austen`（去空白后确实含 `williamroberts`），该分支还要求**全篇没有任何区分符命中**才成立，而 `oberts-Austen` 本身就是区分符——双保险。两条都已实测（见实测第 ③、④ 组）。"
+  },
+
+  "裸 `W. Roberts` / `Roberts` 的人工裁定规则（判据只会报 unknown，须人工定夺）": {
+    "1868-1885 + 冶金／合金／造币／化学类英国刊物": "→ 目标本人（Nature、Journal of the Society of Arts、Proc. Roy. Soc.、Chemical News、Journ. Chem. Soc.、British Association Report）。他这一时期的定式署名是 `W. Chandler Roberts`，**中名拼全**。",
+    "1868-1885 + 医学／肾脏／尿化学类刊物": "→ 先按 Sir William Roberts（1830-1899）处置。",
+    "≥1885 而只署裸 `Roberts`（无 Austen）": "→ **不许默认是他**。1885 年后他自己一律署复姓；此期的裸 `Roberts` 优先查 Isaac Roberts（天文，至 1904）、Robert Davies Roberts（地质／推广教育，至 1911）、Alexander William Roberts（天文，南非）。",
+    "≥1950 的任何 `W. C. Roberts` / `William C. Roberts`": "→ **一律不是目标**（他 1902 卒）。心脏病理学题材归 William C. Roberts（1932-2023）。",
+    "<1868": "→ 判据已自动判为他人（bare_name_before_year）。",
+    "只有 `Austen` 而无 `Roberts`": "→ **不许默认是他**。1854 年前的地质学 `Austen` 是 Robert A. C. Austen；化学的 `P. T. Austen` 是美国 Rutgers 的 Peter Townsend Austen；昆虫学的 `E. E. Austen` 是大英博物馆的 Ernest Edward Austen；`Austen` 出现在**名的位置**（后面还跟着一个姓）时是教名，不是他。"
+  },
+
+  "★ 本人物特有的一件事：**同一个人两个姓，1885 年是分界**": {
+    "事实": "1843 年出生名 William Chandler Roberts；1885 年依王室许可、应舅父 Major Nathaniel Lawrence Austen 之请加姓 Austen（DNB 1912 补编原文：`In 1885 he assumed, by royal licence, at the request of his uncle. Major Nathaniel Lawrence Austen of Haffenden and Camborne, in Kent, the name of Austen.`）。",
+    "对判据的后果": "**不能只认一个姓。** any_of_markers 里必须同时有 `Chandler Roberts`（1885 前）与 `oberts-Austen`（1885 后）两族；surname 锚点取 `oberts` 正好同时覆盖两族。",
+    "对上游判据的后果": "`check_authorship.build_patterns('William Chandler Roberts-Austen')` 生成的 `SURNAME` 是 `Roberts\\-Austen`，**匹配不上他 1885 年前的任何一份**（实测：`'W. CHANDLER ROBERTS' → SURNAME match? False`）。这不是本判据能修的，已写进 FETCH-REPORT 的缺陷节。",
+    "实测的印本证据": "1884 年《Cantor Lectures on Alloys used for Coinage》扉页照录 `CANTOR LECTURES ON ALLOYS USED FOR COINAGE, BT W. CHANDLER ROBERTS, RR.S.`（`BT`＝`BY`、`RR.S.`＝`F.R.S.` 的 OCR 讹形）；1888 年 Phil. Trans. A 179 扉页照录 `By W. Chandler Koberts- Austen, F.RS`。**四年之隔，同一个人，两个姓。**"
+  },
+
+  "本判据回答的问题": "**「这份材料上的 Roberts／Austen 是哪一个人」**，不回答「一手还是二手」。关于他的讣文、传记会因为字面里有 `Roberts-Austen` 而被判成「目标本人」——那是**归属对了**，tier 仍须单独按「谁写的」定。两件事不许混为一谈。"
+}
