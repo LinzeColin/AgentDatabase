@@ -401,8 +401,8 @@
     },
     {
       "path": "references/ledgers/_迭代输入_下一轮.md",
-      "sha256": "6b1e2f73c1985f8446be0467b045fbc10ac965f3d85c4352b74b5045f6e43bbd",
-      "size_bytes": 36488
+      "sha256": "1448da0910f3f9db031ac7e1561908688ed5df1f025796457fc461ea8edf9543",
+      "size_bytes": 38162
     },
     {
       "path": "references/ledgers/_额度台账.md",
@@ -506,8 +506,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_authorship.py",
-      "sha256": "38a9eb2e2c0718985507c00ad798491e0579e7c2f475fe7d032d8daaeb4f4fa1",
-      "size_bytes": 101340
+      "sha256": "e8e4afc625dc4ca56be956c65a3ab694958253376a9da9a22711c9976002be43",
+      "size_bytes": 103746
     },
     {
       "path": "references/pipeline/checkers/check_baseline_provenance.py",
@@ -1136,8 +1136,8 @@
     },
     {
       "path": "scripts/check_authorship.py",
-      "sha256": "38a9eb2e2c0718985507c00ad798491e0579e7c2f475fe7d032d8daaeb4f4fa1",
-      "size_bytes": 101340
+      "sha256": "e8e4afc625dc4ca56be956c65a3ab694958253376a9da9a22711c9976002be43",
+      "size_bytes": 103746
     },
     {
       "path": "scripts/check_baseline_provenance.py",

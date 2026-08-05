@@ -327,7 +327,17 @@ def ocr_byline_evidence(text, first, last):
         # ★ **必须像署名行**：`By …` 打头 / 整行大写 / 不以句读收尾的短行。
         #   散文中间碰巧出现的近似词不算——这一条是自测抓出来的
         #   （不加时「标题里的冒号」与「版权归别人」两条反例都被误放行）。
-        starts_by = bool(re.match(r"^by[ \t]+", s, re.I))
+        # ★★★ v0.0.0.157：署名前缀**不止英文的 `By`**。
+        #   Martens #134 抓源实测（拿他真实的印本署名打的）：
+        #     `Von Adolf Martens.`        ← 目标本人的德文署名 → **旧版不认**
+        #     `Von A. Martens, Berlin.`   ← 目标最常见的印本署名 → **旧版不认**
+        #   本函数只认 `^by\s+` 与整行大写，于是**一个德语人物的自署论文会被整批判成不是他写的**。
+        #   后果不是漏一两份：**一手占比是硬门（standard 0.50 / deep 0.65）**，
+        #   德语／法语／意大利语人物会被系统性压低一手比例，
+        #   而门只做算术、不问「分档对不对」（见 [[related-to-him-is-not-written-by-him]] 的反面）。
+        #   ★ 只加**行首**的前缀，不动别处：`Eduard von Martens` 里的 `von` 是贵族小品词，
+        #     它走的是整行大写那条路，不受影响。
+        starts_by = bool(re.match(r"^(?:by|von|par|di|av|af|door|de|av\.)[ \t]+", s, re.I))
         allcaps = s == s.upper() and any(c.isalpha() for c in s)
         if not (starts_by or allcaps):
             continue
@@ -342,7 +352,7 @@ def ocr_byline_evidence(text, first, last):
         if re.match(r"^\d{1,4}\s+[A-Z][A-Z .,'-]*$", s) or \
            re.match(r"^[A-Z][A-Z .,'-]*\s+\d{1,4}$", s):
             continue
-        body = re.sub(r"^(?:by[ \t]+)?", "", s, flags=re.I)
+        body = re.sub(r"^(?:by|von|par|di|av|af|door|de)[ \t]+", "", s, flags=re.I)
         body = re.sub(r"^(?:(?:Sir|Dame|Prof(?:essor)?|Dr|Mr|Mrs|Ms|Rev|Lord|Lady)\.?[ \t]+)*",
                       "", body, flags=re.I)
         toks = [t for t in re.split(r"[^A-Za-z]+", body) if t][:5]
@@ -1541,6 +1551,26 @@ def self_test() -> int:
         print(f"  {'✓' if _ok else '✗'} {'应认出' if _want else '应拒绝'}　{_lbl}")
         if not _ok:
             bad.append(f"形态 E：{_lbl}")
+
+    # ★★★ v0.0.0.157：**非英文的署名前缀**（Martens #134 抓源实测打回来的）
+    #   本函数原先只认 `^by\s+` 与整行大写。而德语印本的署名是 `Von …`——
+    #   **一个德语人物的自署论文会被整批判成不是他写的**，
+    #   而一手占比是硬门（standard 0.50 / deep 0.65）。
+    print("\n══ 非英文署名前缀（v0.0.0.157）══")
+    for _s, _want in (
+            ("By Adolf Martens.", True),
+            ("Von Adolf Martens.", True),                 # ← 旧版在这里返回 None
+            ("VON ADOLF MARTENS.", True),
+            # ↓ 反向对照：加了 `Von` 之后，这些**仍然必须挡住**
+            ("Von Alfred Martens, Architekt.", False),    # 建筑师，1881-1920
+            ("Von A. Martens, Berlin.", False),           # ★ 首字母式按设计不认（同名陷阱）
+            ("By Arthur Martens.", False),                # 滑翔机工程师
+            ("EDUARD VON MARTENS.", False),               # 动物学家；`von` 是贵族小品词
+            ("By F. F. Martens.", False)):                # 物理学家
+        _got = ocr_byline_evidence(_s, "Adolf", "Martens") is not None
+        print(("  ✓ " if _got == _want else "  ✗ ") + f"{_s:<34} → {_got}")
+        if _got != _want:
+            bad.append(f"非英文署名前缀：{_s}")
 
     # ★★★ 护栏射程：**`ocr_byline_evidence` 那条路也必须被同名护栏管住**
     #   v0.0.0.136 只把护栏加在 `standalone_ocr` 上，而那条路跑在它前面、
