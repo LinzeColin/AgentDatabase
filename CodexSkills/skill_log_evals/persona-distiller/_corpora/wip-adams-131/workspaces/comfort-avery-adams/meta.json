@@ -1,0 +1,104 @@
+{
+  "builder_version": "v0.0.0.5",
+  "chosen_subject_uid": "adams-comfort-avery-aiee-president",
+  "consent_authority": null,
+  "created_at": "2026-08-05T01:07:24Z",
+  "current_version": null,
+  "existential_hypotheses_enabled": false,
+  "identity_selection": {
+    "canonical": "technical-engineer",
+    "display": "材料建工师",
+    "mode": "single",
+    "primary": "technical-engineer",
+    "weights": {
+      "technical-engineer": 1.0
+    }
+  },
+  "language": "en",
+  "model_version": "0.1.0-draft",
+  "name": "Comfort Avery Adams",
+  "namesake_gate": {
+    "candidate_count": 1,
+    "chosen_candidate": {
+      "application_scenarios": [
+        "电机与绝缘的学会讨论",
+        "学会治理与会长致辞",
+        "焊接学会的创立"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "Who's Who in Engineering, 2nd ed. (1925)",
+          "note": "生年 1868-11-01；父名；本人供稿"
+        },
+        {
+          "locator": "Transactions AIEE vol. XXXVIII pp.783-793 (1919)",
+          "note": "会长致辞 Cooperation 全文"
+        },
+        {
+          "locator": "Transactions AIEE vol. 23 (1904)",
+          "note": "★ 印作 C. A. Adams, Jr."
+        }
+      ],
+      "canonical_name": "Comfort Avery Adams",
+      "distinguishing_basis": "★★★ **他父亲也叫 Comfort Avery Adams**（Who's Who 1925 记其父名与他一字不差）——姓、名、中名首字母全同，中名首字母那把尺子在这里完全失效。**唯一能正面认定他的是 Jr.**：1904 年卷 23 把他印作 C. A. Adams, Jr.；后期卷不带 Jr.。★★ 因此存在**判据分不开的一半**：不带 Jr. 的 C. A. Adams 与 Conrad A. Adams（缩写相同、同刊同代）在署名这一层分不开，**只能靠内容与场合逐份判**。",
+      "evidence_level": "low",
+      "identity_category": "电气工程师／学会领袖",
+      "key_capabilities": [
+        "电机试验与绝缘",
+        "把「我知道」与「我认为」分开说并交代凭据",
+        "学会组织"
+      ],
+      "label": "A",
+      "occupation_or_role": "哈佛电气工程教授；美国电气工程师学会（AIEE）会长；美国焊接学会首任会长",
+      "professional_background": "生于 1868-11-01（依据：Who's Who in Engineering **第二版 1925**，本人供稿——★ archive.org 该扫描件的 date 字段写 1922，那是第一版年份，**引用必须写 1925**）。卒于 1958-02-21（**只有二手**：NAS memoir 1965 与维基，未开同时代讣告）。AIEE 会长任内 1919-06-24 于 Lake Placid 年会作会长致辞《Cooperation》（Transactions AIEE 卷 XXXVIII pp.783-793，出处经目录／提要索引／页眉三重印证，约 26,000 字符第一人称）。AIEE 论文讨论环节留有 22 条署名逐字发言（仅开 11 卷即得）。★ 反直觉：**他创办了美国焊接学会，但 Welding Journal 上没有他的声口**——抽测两期共 30 万字符，命中 1 处且是理事会名单。他的话集中在 AIEE。",
+      "subject_uid": "adams-comfort-avery-aiee-president"
+    },
+    "chosen_subject_uid": "adams-comfort-avery-aiee-president",
+    "normalized_name": "comfortaveryadams",
+    "resolution": "single",
+    "schema_version": "1.0"
+  },
+  "normalized_name": "comfortaveryadams",
+  "origin_review_required": false,
+  "product_version": null,
+  "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+  "profile": "quick",
+  "prohibited_uses": [
+    "identity authentication or deceptive impersonation",
+    "invented endorsement, signature, consent, private memory or current opinion",
+    "unsupported psychological diagnosis",
+    "replacement of accountable high-stakes professional judgment"
+  ],
+  "retention_policy": null,
+  "runtime_invocation_versioning": false,
+  "scenario": null,
+  "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+  "schema_version": "2.0",
+  "slug": "comfort-avery-adams",
+  "status": "draft",
+  "subject_origin": "historical",
+  "target_id": "tgt-d02d5d8f6a2a",
+  "time_scope": "1900s-1920s",
+  "updated_at": "2026-08-05T01:07:24Z",
+  "known_namesakes": [
+    "Comfort Avery Adams (father)",
+    "Conrad A. Adams",
+    "Alton D. Adams",
+    "Edward D. Adams",
+    "P. H. Adams",
+    "H. H. Adams"
+  ],
+  "middle_initial": "A",
+  "generational_suffix": "Jr",
+  "namesake_note": "★★★ 本人物的同名比 Coffin #130 更难：**他父亲也叫 Comfort Avery Adams**，姓、名、中名首字母全同——中名首字母护栏在这里完全失效。**唯一能正面认定他的是 Jr.**：1904 年卷 23 印作 C. A. Adams, Jr.，后期卷不带。\n★★ **判据分不开的一半（必须承认）**：不带 Jr. 的 C. A. Adams 与 Conrad A. Adams （缩写相同、同刊同代）在署名这一层分不开，只能靠内容与场合逐份判——他的话集中在 AIEE 的电机与绝缘讨论。\n★ Alton D. Adams / Edward D. Adams 中名首字母为 D，可分。",
+  "fetch_guards": [
+    "**署名容 Jr.**——早期卷带、后期卷不带，两头都要收，否则 1904 那批整批漏掉。",
+    "**全大写 ADAMS: + 论文标题 = 页眉，整类剔除**——探测实测卷 20/24 两卷共 82 处假阳性，而那两卷真实发言数是 0 和 0。",
+    "**Proceedings / Transactions 双页码去重**（按标题+年份）——同一篇论文两套页码，不去重会虚高来源数与一手占比。"
+  ],
+  "unresolved_facts": [
+    "**Lamme 奖年份未决**：NAS memoir 说 1944 且称「第 13 次颁发」，而 1928 年首颁 → 第 13 次 = 1940；另有《Electrical Engineering》1941 卷 60 p.369 题为「1940 Lamme medalist」。**两个年份都不许写进断言。**",
+    "**卒年 1958-02-21 只有二手**（NAS memoir 1965／维基），未开同时代讣告。",
+    "**NAS memoir 的书目页码实测三处对不上**（Proceedings vs Transactions 双编页）；但 38:783-93 三处一致——**不是全错，是必须逐条核**。"
+  ]
+}

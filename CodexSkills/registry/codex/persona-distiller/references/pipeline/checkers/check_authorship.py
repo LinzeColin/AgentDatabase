@@ -387,6 +387,19 @@ def _mid_initial(name):
     return ""
 
 
+_SUFFIX = re.compile(r",?\s*\b(JR|SR|II|III)\b\.?\s*$", re.I)
+
+
+def _suffix_of(name):
+    """`C. A. ADAMS, JR.` → `jr`；没有 → `''`。"""
+    m = _SUFFIX.search(str(name).strip())
+    return m.group(1).lower() if m else ""
+
+
+def _strip_suffix(name):
+    return _SUFFIX.sub("", str(name).strip()).strip(" ,")
+
+
 def _initial_blocked(line, last_l, namesakes, own_mid):
     """**同姓、只差一个中名首字母**——`Charles A. Coffin` 不是 `Charles L. Coffin`。
 
@@ -411,6 +424,21 @@ def _initial_blocked(line, last_l, namesakes, own_mid):
     姓相同（距离 ≤1）时：署名里的中名首字母若与**目标的**不同、
     且命中任一**已声明同名的**中名首字母 → 拒绝。
     署名没有中名首字母的，**不拦**（宁可放过，不可拦错）。
+
+    ## ★★ 世代后缀（`Jr.`）：能认定的和**认定不了的**
+
+    Adams #131：**他父亲也叫 Comfort Avery Adams**——姓、名、中名首字母**全同**，
+    `_initial_blocked` 那把尺子在这里完全失效。唯一能正面认定他的是 `Jr.`：
+    1904 年卷 23 把他印作 `C. A. Adams, Jr.`。
+
+    改之前**又是两个方向同时错**：`C. A. ADAMS, JR.`（能认定他的那一种）**被拦**，
+    因为整行正则不容尾缀；而 `C. A. ADAMS`（认定不了的那一种）**放行**。
+
+    ★★★ **`Jr.` 只解决一半，另一半判据解决不了，必须承认：**
+    后期卷他**不带 Jr.**，而同刊同代还有 **Conrad A. Adams**——缩写同为 `C. A. Adams`。
+    **不带 Jr. 的 `C. A. Adams` 在署名这一层是分不开的**，
+    只能靠**内容与场合**逐份判（他的话集中在 AIEE 的电机与绝缘讨论）。
+    **本件不假装能分开：它照收，而分不开这件事必须写进 `attribution_basis.disputed_works`。**
 
     ## ★ 已知射程缺口（实测，不是猜的）
 
@@ -487,9 +515,15 @@ def standalone_ocr(text, first_l, last_l, namesakes, own_mid=""):
         # ★ `{0,20}` 而非 `{1,20}`：允许 `C. L. Coffin.` 这种首字母缩写。
         #   原来的 `{1,20}` 要求每段至少两个字母，**把他自己的缩写形态挡在外面**
         #   （Coffin #130 实测：`C. L. Coffin.` 被拦，而 `Charles A. Coffin.` 被放行）。
-        if not re.fullmatch(r"[A-Za-z][A-Za-z.'\-]{0,20}(?:[ \t]+[A-Za-z][A-Za-z.'\-]{0,20}){1,3}[.,]?", s):
+        if not re.fullmatch(r"[A-Za-z][A-Za-z.'\-]{0,20}(?:[ \t]+[A-Za-z][A-Za-z.'\-]{0,20}){1,3}[.,]?",
+                            _strip_suffix(s)):
             continue
-        toks = [x for x in re.split(r"[^A-Za-z]+", s) if x]
+        # ★★★ 世代后缀（Coffin 之后的第二类同名：**父子同名同姓**）
+        #   Adams #131 实测：他父亲也叫 Comfort Avery Adams，
+        #   1904 年卷 23 把他印作 `C. A. Adams, Jr.`，后期卷又不带 Jr.。
+        #   **带 Jr. 是正面认定他的最硬证据**，而改之前它反而被拦下（整行正则不容尾缀）。
+        s_core = _strip_suffix(s)
+        toks = [x for x in re.split(r"[^A-Za-z]+", s_core) if x]
         cand = next((x.lower() for x in reversed(toks) if len(x) >= 4), None)
         if (not cand or not _edits_within(cand, last_l, 2)
                 or _blocked(cand, last_l, namesakes)
@@ -1300,6 +1334,21 @@ def self_test() -> int:
         print(f"  {'✓' if _ok else '✗'} {'应认出' if _want else '应拒绝'}　{_lbl}")
         if not _ok:
             bad.append(f"同姓中名护栏：{_lbl}")
+
+    # ★★★ 世代后缀：**父子同名同姓**（Adams #131 —— 比 Coffin 那类更难）
+    print("\n══ 父子同名，只有 Jr. 能正面认定 四条对照（v0.0.0.137）══")
+    _NSA = ("Comfort Avery Adams",)          # 他父亲的全名与他一字不差
+    for _lbl, _s, _want in (
+            ("C. A. ADAMS, JR.（1904 年卷 23 的印法）", _tail("C. A. ADAMS, JR."), True),
+            ("COMFORT AVERY ADAMS, JR.（全名带 Jr.）", _tail("COMFORT AVERY ADAMS, JR."), True),
+            ("Comfort Avery Adams, Jr.（小写）", _tail("Comfort Avery Adams, Jr."), True),
+            ("**ADAMS: THE TESTING OF ELECTRICAL MACHINERY**（页眉，不是发言）",
+             _tail("ADAMS: THE TESTING OF ELECTRICAL MACHINERY"), False)):
+        _got = bool(standalone_ocr(_s, "comfort", "adams", _NSA, "a"))
+        _ok = _got == _want
+        print(f"  {'✓' if _ok else '✗'} {'应认出' if _want else '应拒绝'}　{_lbl}")
+        if not _ok:
+            bad.append(f"世代后缀：{_lbl}")
 
     print("\n══ 专利正文自述式署名（形态 E） 三条对照（v0.0.0.137）══")
     for _lbl, _who, _ns, _mid, _s, _want in (

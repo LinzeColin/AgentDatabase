@@ -16,8 +16,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "088a03b1d664013ea0d4d58b41364c95d15666b03d4d7060fe11efdc99f86ffd",
-      "size_bytes": 282047
+      "sha256": "fe2a7047601a5616807d79f8270f53c1a33daad26b3617ce3b3ca42bdbd4b643",
+      "size_bytes": 283144
     },
     {
       "path": "CONTRIBUTING.md",
@@ -436,8 +436,8 @@
     },
     {
       "path": "references/pipeline/RUNBOOK.md",
-      "sha256": "09785d789a71f1038152959acbdea18d428af03db24a83a65ecf679889168da2",
-      "size_bytes": 233459
+      "sha256": "a152012f34f97d8813a04e9be36164dc3309a24d52a81c6f8d14a1952f7fc328",
+      "size_bytes": 236643
     },
     {
       "path": "references/pipeline/build_queue.py",
@@ -506,8 +506,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_authorship.py",
-      "sha256": "de55a93f78f93f2fb1be6145505063f82d0123ca0067654e5534d9dfbcd20646",
-      "size_bytes": 86376
+      "sha256": "e5c2a7c34f1a0c4ed667cd75a829e4ff88fddf39b9181b526e365fbd42f5f1d6",
+      "size_bytes": 89220
     },
     {
       "path": "references/pipeline/checkers/check_baseline_provenance.py",
@@ -1096,8 +1096,8 @@
     },
     {
       "path": "scripts/check_authorship.py",
-      "sha256": "de55a93f78f93f2fb1be6145505063f82d0123ca0067654e5534d9dfbcd20646",
-      "size_bytes": 86376
+      "sha256": "e5c2a7c34f1a0c4ed667cd75a829e4ff88fddf39b9181b526e365fbd42f5f1d6",
+      "size_bytes": 89220
     },
     {
       "path": "scripts/check_baseline_provenance.py",

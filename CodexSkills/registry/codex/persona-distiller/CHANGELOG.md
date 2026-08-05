@@ -116,6 +116,27 @@ Fleming 19%、Nightingale/Virchow 16%、Lister 12%、其余 3–6%。
 `--middle-initial` 已上 CLI，`quality_check` 从 `meta.middle_initial` 注入。
 Coffin #130 的 `meta.json` 已声明，**在第一份语料落地之前就位**。
 
+### 世代后缀（`Jr.`）——Adams #131 探测当场逼出的第三类同名
+
+Coffin 那类是**同姓不同中名**，靠中名首字母分开。
+Adams 这类更难：**他父亲也叫 Comfort Avery Adams**，姓、名、中名首字母**全同**。
+唯一能正面认定他的是 `Jr.`——1904 年卷 23 印作 `C. A. Adams, Jr.`。
+
+**改之前又是两个方向同时错**（与 Coffin 那次同形）：
+
+| | 改前 | 改后 |
+|---|---|---|
+| `C. A. ADAMS, JR.`（能认定他） | **拦下** | 放行 |
+| `ADAMS: THE TESTING OF…`（页眉） | 拦下 | 拦下 |
+
+整行正则不容尾缀，于是把唯一的正面证据挡在外面。已加 `_suffix_of` / `_strip_suffix`，
+4 条常设对照；Thomson 与 Coffin 全部回归通过。
+
+★★★ **`Jr.` 只解决一半，另一半判据解决不了，已写进 docstring 并要求写进
+`attribution_basis.disputed_works`**：后期卷他不带 `Jr.`，而同刊同代还有
+**Conrad A. Adams**——缩写同为 `C. A. Adams`。**署名这一层分不开**，
+只能靠内容与场合逐份判。**本件不假装能分开。**
+
 ### 全库普查：只有语言与体裁可比时才算数
 
 10 个有语料的工作区扫了一遍。**清楚是英文、构成相近的五个**：

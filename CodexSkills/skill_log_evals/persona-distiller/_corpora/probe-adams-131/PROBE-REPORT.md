@@ -186,9 +186,13 @@ Trans. A.I.E.E. 卷 XXXVIII pp. 783–793。**
 | 41 | 1922 | 0 |
 | **合计** | | **22** |
 
-★ **这张表是逐条看过原文分类出来的，不是正则的原始命中数。**
-宽松正则（`\bAd[ae]ms\b\s*(?:\(…\))?\s*[:;]`）在这 11 卷册报 **24**，
-逐条核后剔掉 **2 条假阳性**，都是同名护栏必须认识的形态：
+★ **这张表是逐条看过原文分类出来的，不是正则的原始命中数。算式：**
+
+> 宽松正则（`\bAd[ae]ms\b\s*(?:\([^)]*\))?\s*[:;]`）在这 11 卷册原始命中 **24**
+> −　假阳性 **3**　=　冒号发言 **21**
+> ＋　1904 年那条**不带冒号**的署名长篇（见下 (j)）**1**　=　**22**
+
+三条假阳性逐条如下，都是同名／版面护栏必须认识的形态：
 
 - 卷 38 pt1：`P. H. Adams: We are using a maximum setting of two seconds on the lines of the Public Service Electric Com[pany]`
   —— **另一个 Adams，格式与他一模一样**，只有首字母不同。
@@ -196,7 +200,8 @@ Trans. A.I.E.E. 卷 XXXVIII pp. 783–793。**
 - 卷 31 pt1 那 1 条也是假阳性：`*See C, A. Adams: Design of Induction Motors, TRANSACTIONS ACT. 1905, XXIV, page 665.`
   —— **脚注引用，冒号后面是他的论文标题不是他的话。**
 
-→ 三种假阳性合计 3 条／24，**误报率 12.5%。抓源不能只跑正则，必须逐条看冒号后面是不是人话。**
+→ 3 条／24，**误报率 12.5%。抓源不能只跑正则，必须逐条看冒号后面是不是人话。**
+（★ 这还不含 §4.4 的全大写页眉——那一类在卷 20／24 两卷就有 82 处。）
 
 **原文样张（逐字，OCR 讹字照录）：**
 
@@ -233,6 +238,36 @@ Trans. A.I.E.E. 卷 XXXVIII pp. 783–793。**
 > `cal importance and constitute the foundation on which the`
 > `practical designing engineer must build if he is to be sure of his`
 > `superstructure.`
+
+**(b') ★ 本轮最有价值的一条 —— 1919，卷 38 pt1，p. 570 前后（高压绝缘）
+先纠正别人对自己的误读，再把「意见」明确标成意见并交代依据**
+
+> `Comfort A. Adams: First, I want tosay that I fear Mr.`
+> `Peek has misinterpreted my statement, which I intended to be`
+> `something like this—that in the case of high-voltage armature`
+> `insulation the actual thickness of mica is such that if it were an`
+> `absolutely solid, homogeneous air-free mass of mica insulation`
+> `it would stand up indefinitely under voltages several times`
+> `those normally impressed.`
+>
+> `Now, just a word in regard to the deterioration of insulation`
+> `under corona attack. It is very difficult to say how much this`
+> `is due to chemical action, how much to some kind of corona`
+> `bombardment and how much to the heat resulting from corona.`
+> `I wish now to express the opinion that the deterioration in mica`
+> `at least, is due more to corona heat and corona bombard-`
+> `ment, than to chemical action, although the latter doubtless`
+> `plays some part in certain types of insulating materials.`
+>
+> `This opinion is based upon both theoretical analysis and`
+> `experimental evidence.`
+
+（`tosay` = `to say`，OCR 粘连。）
+
+★ **他自己给认知状态贴标签**：`It is very difficult to say how much…` →
+`I wish now to express the opinion that…` → `This opinion is based upon…`。
+**这正是 persona-distiller 最难从语料里榨出来的东西——他把「我知道」和「我认为」分开说，
+而且主动交代凭据。** 一条就够立 `boundary` 的判据锚点。
 
 **(c) 被人误读后当场反驳 —— 1909，卷 28 pt2（工程教育之争）**
 
@@ -441,7 +476,7 @@ Who's Who in Engineering 1925 原文：
 | | Coffin #130 | Thomson #129 | **Adams #131** |
 |---|---|---|---|
 | 主体文体 | 专利说明书 ×14 | 专利 + 讨论发言 | **讨论发言 + 整篇致辞 + 署名论文** |
-| 他自己的实质话语 | **8 句** | 讨论 47–56 条 | **21 条（仅 11 卷册）+ 26,000 字符会长致辞** |
+| 他自己的实质话语 | **8 句** | 讨论 47–56 条 | **22 条（仅 11 卷册）+ 26,000 字符会长致辞** |
 | `expression` 道 | 无 | 未见 | **✓ 两篇整篇第一人称致辞** |
 
 ★ **Adams 的独有优势：`Cooperation` 那篇不是技术文，是价值观文。**
@@ -471,12 +506,31 @@ Who's Who in Engineering 1925 原文：
 
 **全程未碰付费墙、未绕访问控制、未遇验证码。并发恒为 1。零支出。**
 
+### 本轮落盘（「只探不抓」的边界说明）
+
+本轮**没有建语料库、没有切单元、没有写 manifest**。
+但为了**当场证明他开口说话**（而不是像 Coffin 那轮到抓源后期才发现无话可引），
+把 11 个卷册的 OCR 全文拉到了本机核对。落盘 **43 MB**，全在 `probe-adams-131/raw/`：
+
+| 文件 | 用途 |
+|---|---|
+| `v20_1903` … `v41_1922`（11 个 `*_djvu.txt`） | AIEE Transactions 全文，§3.2 的 22 条发言就是从这里逐条核出来的 |
+| `address_cooperation_1919.txt` | 会长致辞《Cooperation》已切出（26,033 字符，pp. 783–793） |
+| `whoswho1922_djvu.txt` + `whoswho1925_adams_entry.txt` | Who's Who in Engineering 2nd ed. 1925 全文 + 已切出的 Adams 条 |
+| `nas_memoir_adams.pdf` / `.txt` | NAS memoir（**保护期内，检索辅助用，不得进语料**） |
+| `ieee_edison_recipients.txt` | IEEE 官方 Edison 奖名录，§5.2 的 1956 年依据 |
+| `ia_*.json` | archive.org 检索结果，含全部卷册 identifier，抓源阶段直接可用 |
+
+→ **抓源方接手时不必重下这 11 卷**，直接从 `raw/` 起步；
+其余约 34 个 Transactions 卷册 + 83 期 Journal of the A.I.E.E. + 90 期 Welding Journal
+的 identifier 命名规律已在 §2.1／§2.2 给全。
+
 ---
 
 ## 7. 一句话建议
 
 **开工。**
-声口问题（Coffin 那轮的死因）**在开工前已经用原文解决**：21 条署名逐字发言 + 一篇
+声口问题（Coffin 那轮的死因）**在开工前已经用原文解决**：22 条署名逐字发言 + 一篇
 26,000 字符的第一人称会长致辞，全部 `pre1929` 公有领域、全部已下载在本机。
 开工指令里必须带上三条护栏：**(1) 署名容 `Jr.`（父子同名，1904 年他署 `C. A. Adams, Jr.`）；
 (2) 全大写 `ADAMS:` + 论文标题 = 页眉，整类剔除（两卷就有 82 处假阳性）；
