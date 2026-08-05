@@ -1,12 +1,12 @@
 {
   "schema_version": "memory_atlas.frozen_candidate.v1",
-  "frozen_at": "2026-08-04T11:29:34Z",
-  "release_id": "20260804T111907Z-fa55d808fe90",
-  "agent_release_id": "20260804T111907Z-fa55d808fe90",
-  "snapshot_identity": {"readable": true, "schema_version": "memory_atlas.live_snapshot.v1", "run_id": "marun_5bd5fa6104b034eaf65bdee3", "trace_id": "marun_5bd5fa6104b034eaf65bdee3", "source_completed_at": "2026-08-03T17:31:57+00:00", "release_id": "20260804T111907Z-fa55d808fe90", "deployment_revision": "20260804T111907Z-fa55d808fe90", "artifact_digest": "e9eaaee962b2d88f300e9df5aa5cf0f1d2cffac109766d1effa0b5081992c37d", "event_count": 122080},
+  "frozen_at": "2026-08-05T01:36:17Z",
+  "release_id": "20260805T012031Z-41f16fb68ea6",
+  "agent_release_id": "20260805T012031Z-41f16fb68ea6",
+  "snapshot_identity": {"readable": true, "schema_version": "memory_atlas.live_snapshot.v1", "run_id": "marun_d8019f85ea1cda749470ece6", "trace_id": "marun_d8019f85ea1cda749470ece6", "source_completed_at": "2026-08-04T22:34:36+00:00", "release_id": "20260805T012031Z-41f16fb68ea6", "deployment_revision": "20260805T012031Z-41f16fb68ea6", "artifact_digest": "a9831e04c37a74c9b1acb0e13d8c23c181ff8ed07a202111e83fd02d94803f95", "event_count": 127712},
   "store_digests": {
-    "current_sha256": "7064772da5ad4566d4eb5cbadeebe7c9c3922063f1e1aed11fbaae5f8963192c",
-    "previous_sha256": "cc82e7a0ad870947b3969c06fa43d5d3200a222f25f610bf340cf919efcabae5",
-    "history_object_count": 1
+    "current_sha256": "ea3b639770cdb9e351e60c896580560755e40e3c88a9baf8f9e49a672a761d0f",
+    "previous_sha256": "35f16ddb2362ff6b947e09723a07768765a18947b8a6ba0899cd36cf382f2515",
+    "history_object_count": 5
   }
 }

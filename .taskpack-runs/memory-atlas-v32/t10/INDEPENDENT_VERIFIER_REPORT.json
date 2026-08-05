@@ -2,9 +2,9 @@
   "schema_version": "memory_atlas.independent_verifier.v1",
   "verdict": "PASS",
   "subject": {
-    "frozen_candidate": "/srv/linze/work/memory-atlas/t10/FROZEN_CANDIDATE.json",
-    "release_id": "20260804T111907Z-fa55d808fe90",
-    "durability_report": "/srv/linze/work/memory-atlas/t10/DURABILITY_RECOVERY_REPORT.json",
+    "frozen_candidate": "/srv/linze/work/memory-atlas/t10-current/FROZEN_CANDIDATE.json",
+    "release_id": "20260805T012031Z-41f16fb68ea6",
+    "durability_report": "/srv/linze/work/memory-atlas/t10-current/DURABILITY_RECOVERY_REPORT.json",
     "snapshot_store_root": "/srv/linze/apps/memory-atlas/shared/data/live-snapshot",
     "live_snapshot_schema": "/srv/linze/apps/agentdatabase/current/OpenAIDatabase/schema/memory_atlas.live_snapshot.v1.schema.json"
   },
@@ -26,22 +26,22 @@
           {
             "file": "AC007_AUTO_REVALIDATION_RECEIPT.json",
             "verdict": "PASS",
-            "run_id": "marun_5bd5fa6104b034eaf65bdee3",
-            "source_completed_at": "2026-08-03T17:31:57+00:00",
+            "run_id": "marun_d8019f85ea1cda749470ece6",
+            "source_completed_at": "2026-08-04T22:34:36+00:00",
             "auto_revalidated": true
           },
           {
             "file": "AC007_REFRESH_RECEIPT.json",
             "verdict": "PASS",
-            "run_id": "marun_5bd5fa6104b034eaf65bdee3",
-            "source_completed_at": "2026-08-03T17:31:57+00:00",
+            "run_id": "marun_d8019f85ea1cda749470ece6",
+            "source_completed_at": "2026-08-04T22:34:36+00:00",
             "auto_revalidated": null
           },
           {
             "file": "AC007_RELOGIN_RECEIPT.json",
             "verdict": "PASS",
-            "run_id": "marun_5bd5fa6104b034eaf65bdee3",
-            "source_completed_at": "2026-08-03T17:31:57+00:00",
+            "run_id": "marun_d8019f85ea1cda749470ece6",
+            "source_completed_at": "2026-08-04T22:34:36+00:00",
             "auto_revalidated": null
           }
         ]
@@ -53,16 +53,14 @@
       "verdict": "PASS",
       "reason": "current only moved forward, last-good preserved, fault injection passed",
       "evidence": {
-        "frozen_current": "7064772da5ad4566d4eb5cbadeebe7c9c3922063f1e1aed11fbaae5f8963192c",
-        "observed_current": "0df2e4262881e036de8493ff4143845eae8d51aa4b905af85f432170e10a0fb9",
+        "frozen_current": "ea3b639770cdb9e351e60c896580560755e40e3c88a9baf8f9e49a672a761d0f",
+        "observed_current": "ea3b639770cdb9e351e60c896580560755e40e3c88a9baf8f9e49a672a761d0f",
         "across_drill_steps": [
-          "7064772da5ad4566d4eb5cbadeebe7c9c3922063f1e1aed11fbaae5f8963192c"
+          "ea3b639770cdb9e351e60c896580560755e40e3c88a9baf8f9e49a672a761d0f"
         ],
-        "previous_sha256": "7064772da5ad4566d4eb5cbadeebe7c9c3922063f1e1aed11fbaae5f8963192c",
-        "frozen_source_completed_at": "2026-08-03T17:31:57+00:00",
-        "observed_source_completed_at": "2026-08-03T17:31:57+00:00",
+        "previous_sha256": "35f16ddb2362ff6b947e09723a07768765a18947b8a6ba0899cd36cf382f2515",
         "fault_injection": {
-          "case_count": 10,
+          "case_count": 11,
           "failed": [],
           "exit_code": 0
         }
@@ -74,11 +72,11 @@
       "verdict": "PASS",
       "reason": "history holds this run, current and previous agree",
       "evidence": {
-        "run_id": "marun_5bd5fa6104b034eaf65bdee3",
-        "current_sha256": "0df2e4262881e036de8493ff4143845eae8d51aa4b905af85f432170e10a0fb9",
-        "history_sha256": "dd19f87d84017bfba3e6e9cda29c90dd8ead5c0de67ddaf90b80731318535674",
-        "previous_sha256": "7064772da5ad4566d4eb5cbadeebe7c9c3922063f1e1aed11fbaae5f8963192c",
-        "history_object_count": 1
+        "run_id": "marun_d8019f85ea1cda749470ece6",
+        "current_sha256": "ea3b639770cdb9e351e60c896580560755e40e3c88a9baf8f9e49a672a761d0f",
+        "history_sha256": "95028137a05b85f69b6418da75ae63b4dde3de09e238debb7e704446cc1905f9",
+        "previous_sha256": "35f16ddb2362ff6b947e09723a07768765a18947b8a6ba0899cd36cf382f2515",
+        "history_object_count": 5
       }
     },
     {
@@ -88,13 +86,13 @@
       "reason": "restart, rollback, roll-forward and restore all held the frozen identity",
       "evidence": {
         "frozen_identity": {
-          "run_id": "marun_5bd5fa6104b034eaf65bdee3",
-          "trace_id": "marun_5bd5fa6104b034eaf65bdee3",
-          "release_id": "20260804T111907Z-fa55d808fe90",
-          "deployment_revision": "20260804T111907Z-fa55d808fe90"
+          "run_id": "marun_d8019f85ea1cda749470ece6",
+          "trace_id": "marun_d8019f85ea1cda749470ece6",
+          "release_id": "20260805T012031Z-41f16fb68ea6",
+          "deployment_revision": "20260805T012031Z-41f16fb68ea6"
         },
-        "rolled_back_to": "20260804T105352Z-2b7a59dc4227",
-        "rolled_forward_to": "20260804T111907Z-fa55d808fe90",
+        "rolled_back_to": "20260805T010704Z-3cc3f46eaecf",
+        "rolled_forward_to": "20260805T012031Z-41f16fb68ea6",
         "rollback_exit_code": 0,
         "roll_forward_exit_code": 0,
         "isolated_restore_state": "PASS",

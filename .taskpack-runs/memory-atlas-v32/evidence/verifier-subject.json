@@ -1,14 +1,13 @@
 {
   "schema_version": "memory_atlas.verifier_subject.v1",
-  "frozen_candidate_path": "/srv/linze/work/memory-atlas/t10/FROZEN_CANDIDATE.json",
-  "durability_report_path": "/srv/linze/work/memory-atlas/t10/DURABILITY_RECOVERY_REPORT.json",
+  "frozen_candidate_path": "/srv/linze/work/memory-atlas/t10-current/FROZEN_CANDIDATE.json",
+  "durability_report_path": "/srv/linze/work/memory-atlas/t10-current/DURABILITY_RECOVERY_REPORT.json",
+  "fault_injection_report_path": "/srv/linze/work/memory-atlas/t10-current/FAULT_INJECTION.json",
   "snapshot_store_root": "/srv/linze/apps/memory-atlas/shared/data/live-snapshot",
   "live_snapshot_schema_path": "/srv/linze/apps/agentdatabase/current/OpenAIDatabase/schema/memory_atlas.live_snapshot.v1.schema.json",
   "browser_receipt_paths": [
-    "/srv/linze/work/memory-atlas/t10/AC007_AUTO_REVALIDATION_RECEIPT.json",
-    "/srv/linze/work/memory-atlas/t10/AC007_REFRESH_RECEIPT.json",
-    "/srv/linze/work/memory-atlas/t10/AC007_RELOGIN_RECEIPT.json"
-  ],
-  "note_zh": "验证者只读。快照库和 Schema 在 OVH 上，因此验证者必须在 OVH 执行；浏览器回执由 Owner 已登录的 Chrome 会话采集后放入同一目录。",
-  "fault_injection_report_path": "/srv/linze/work/memory-atlas/t10/FAULT_INJECTION.json"
+    "/srv/linze/work/memory-atlas/t10-current/AC007_AUTO_REVALIDATION_RECEIPT.json",
+    "/srv/linze/work/memory-atlas/t10-current/AC007_REFRESH_RECEIPT.json",
+    "/srv/linze/work/memory-atlas/t10-current/AC007_RELOGIN_RECEIPT.json"
+  ]
 }

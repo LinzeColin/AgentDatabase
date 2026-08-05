@@ -73,3 +73,26 @@ evidence   canonical_source / private_database / ovh_reconcile / status_projecti
 `BEFORE_BROWSER_RECEIPT.json`、`LIVE_BASELINE.json`、`ENVIRONMENT_A0.json`
 ——测量窗口已关闭，见 `ARTEFACT_LEDGER.md`。今天补一份并打上当时的时间戳就是伪造证据。
 这三项不会因为后续工作而变成完成。
+
+
+---
+
+## 六、补记：两条「锚在旧 release」的回执已重跑（2026-08-05T01:40Z）
+
+复审对「真实用户黄金事务」写的是「不是最新 Candidate，也不是独立验收」，
+对「可靠性／回滚／恢复」写的是「有旧回执」。**这两条当时是对的**——
+t09 与 t10 的全部回执都锚在 `20260804T111907Z-fa55d808fe90`。
+
+已针对当前 release `20260805T012031Z-41f16fb68ea6` 全部重跑：
+
+| 回执 | 结果 |
+|---|---|
+| 持久性演练（重启／回滚／前滚／隔离恢复） | 五步身份全不变，快照摘要 `ea3b639770` 全程一致，rc 全 0，隔离恢复校验 5 个历史对象 |
+| 故障注入 | 11 条全过（含「同代码不得改结论」与「换代码可重推导」两向） |
+| AC-007 浏览器回执 | 可见触发与 online 触发均实测重新验证；三个读请求由**页面自身**发出 |
+| 黄金事务 | run／trace／release／deployment 同一次；`api_to_chart` 127,712 = 127,712；五条同次证据全 PASS |
+| 独立验证者 | **PASS 4/4**，subject 为当前 release |
+| 发布证据索引 | **0 gaps / 12** |
+
+判据本地 full `rc=0`。这一轮里唯一一次 GAP 是证据脚本自己抓到的
+「线上不是当前 HEAD」，靠部署关掉，没有靠改判据关掉。

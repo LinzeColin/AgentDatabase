@@ -1,59 +1,53 @@
 {
   "schema_version": "memory_atlas.fault_injection.v1",
-  "generated_at": "2026-08-04T11:50:00Z",
+  "generated_at": "2026-08-05T01:30:00Z",
   "suite": "OpenAIDatabase/tests/test_memory_atlas_live_snapshot_publish_v32.py",
-  "purpose_zh": "AC-008 的「失败时 current 不移动」这一半由故障注入单测证明：非终态运行、结论被改写、对象权威读回缺失或 FAIL、以及发布 0 事件，每一种都必须被拒绝。",
+  "purpose_zh": "AC-008「失败时 current 不移动」由故障注入单测证明；本次针对当前 release 重跑。",
   "exit_code": 0,
   "cases": [
     {
       "name": "test_a_non_terminal_run_is_refused",
-      "outcome": "passed",
-      "tail": "1 passed in 0.10s"
+      "outcome": "passed"
     },
     {
       "name": "test_the_same_run_may_not_change_what_it_concluded",
-      "outcome": "passed",
-      "tail": "1 passed in 0.26s"
+      "outcome": "passed"
+    },
+    {
+      "name": "test_the_same_run_under_the_same_code_still_may_not_change",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_a_code_fix_may_change_what_a_run_concludes",
+      "outcome": "passed"
+    },
+    {
+      "name": "test_the_first_derivation_of_a_run_stays_on_the_record",
+      "outcome": "passed"
     },
     {
       "name": "test_a_changed_visual_is_also_a_conflict",
-      "outcome": "passed",
-      "tail": "1 passed in 0.25s"
-    },
-    {
-      "name": "test_a_conflict_names_the_part_that_differs",
-      "outcome": "passed",
-      "tail": "1 passed in 0.25s"
+      "outcome": "passed"
     },
     {
       "name": "test_no_object_authority_readback_at_all_is_refused",
-      "outcome": "passed",
-      "tail": "1 passed in 0.10s"
+      "outcome": "passed"
     },
     {
       "name": "test_a_failed_canonical_readback_is_not_quietly_treated_as_absent",
-      "outcome": "passed",
-      "tail": "1 passed in 0.11s"
+      "outcome": "passed"
     },
     {
       "name": "test_re_reconciling_an_unchanged_run_keeps_the_page_current",
-      "outcome": "passed",
-      "tail": "1 passed in 0.25s"
+      "outcome": "passed"
     },
     {
       "name": "test_a_growing_incident_ledger_is_not_a_rewritten_history",
-      "outcome": "passed",
-      "tail": "1 passed in 0.24s"
-    },
-    {
-      "name": "test_the_store_gate_matches_the_adapter_gate",
-      "outcome": "passed",
-      "tail": "1 passed in 0.24s"
+      "outcome": "passed"
     },
     {
       "name": "test_publisher_refuses_to_publish_zeros_when_the_run_counted_events",
-      "outcome": "passed",
-      "tail": "1 passed in 0.10s"
+      "outcome": "passed"
     }
   ]
 }

@@ -1,8 +1,8 @@
 {
   "schema_version": "memory_atlas.release_evidence.v1",
-  "captured_at": "2026-08-05T01:14:44Z",
-  "head_commit": "3cc3f46eaecf728fd967cc114f2c7fd2e557f9f6",
-  "deployed_release": "20260805T010704Z-3cc3f46eaecf",
+  "captured_at": "2026-08-05T01:39:11Z",
+  "head_commit": "41f16fb68ea6f6d001cdd7e18cc640312ae4da37",
+  "deployed_release": "20260805T012031Z-41f16fb68ea6",
   "identity_matches": true,
   "gap_count": 0,
   "dimensions": [
@@ -11,7 +11,7 @@
       "measured": {
         "run_id": "marun_d8019f85ea1cda749470ece6",
         "trace_id": "marun_d8019f85ea1cda749470ece6",
-        "release_id": "20260805T010704Z-3cc3f46eaecf",
+        "release_id": "20260805T012031Z-41f16fb68ea6",
         "identity_state": "OBSERVED",
         "artifact_digest_present": true
       },
@@ -22,7 +22,7 @@
       "dimension": "增量采集与数据新鲜度",
       "measured": {
         "state": "FRESH",
-        "age_seconds": 9602,
+        "age_seconds": 10391,
         "target_seconds": 97200,
         "source_completed_at": "2026-08-04T22:34:36+00:00"
       },
@@ -88,8 +88,8 @@
     {
       "dimension": "OVH 运行与部署",
       "measured": {
-        "head": "3cc3f46eaecf728fd967cc114f2c7fd2e557f9f6",
-        "deployed_release": "20260805T010704Z-3cc3f46eaecf",
+        "head": "41f16fb68ea6f6d001cdd7e18cc640312ae4da37",
+        "deployed_release": "20260805T012031Z-41f16fb68ea6",
         "same_commit": true
       },
       "artefact": "capture-manifest.json",
@@ -127,7 +127,7 @@
     {
       "dimension": "数据打通（v0.0.0.31）",
       "measured": {
-        "served_atlas_generated_at": "2026-08-05T01:14:32.589Z",
+        "served_atlas_generated_at": "2026-08-05T01:27:42.471Z",
         "codex_session_count": 514,
         "nodes": 552,
         "edges": 1723
