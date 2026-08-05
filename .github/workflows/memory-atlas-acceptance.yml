@@ -6,11 +6,21 @@ on:
     paths:
       - "MemoryAtlas/**"
       - "OpenAIDatabase/**"
+      # ops/memory-atlas holds source-registry.json, which the acceptance tests
+      # read, plus the gate, deploy and rollback scripts. A change there could
+      # break this workflow without triggering it — the same shape as the paths
+      # filter that once let a commit run no CI at all.
+      - "ops/memory-atlas/**"
       - ".github/workflows/memory-atlas-acceptance.yml"
   pull_request:
     paths:
       - "MemoryAtlas/**"
       - "OpenAIDatabase/**"
+      # ops/memory-atlas holds source-registry.json, which the acceptance tests
+      # read, plus the gate, deploy and rollback scripts. A change there could
+      # break this workflow without triggering it — the same shape as the paths
+      # filter that once let a commit run no CI at all.
+      - "ops/memory-atlas/**"
       - ".github/workflows/memory-atlas-acceptance.yml"
   workflow_dispatch:
 

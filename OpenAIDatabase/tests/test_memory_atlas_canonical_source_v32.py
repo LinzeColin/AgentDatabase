@@ -717,3 +717,22 @@ def test_the_reconcile_reaches_for_the_union_whenever_it_is_available() -> None:
     assert '"event_merge": merge' in source
     # Reading only the batch stays possible, but only when there is no union.
     assert '"mode": "BATCH_ONLY", "reason": "canonical union 不可用"' in source
+
+
+def test_every_workflow_that_reads_ops_is_triggered_by_ops() -> None:
+    """`ops/memory-atlas/source-registry.json` is read by the acceptance tests,
+    and `ops/memory-atlas/` also holds the gate, deploy and rollback scripts.
+    A workflow that runs those tests but is not triggered by that directory can
+    be broken by a change it never sees — the same shape as the paths filter
+    that once let a commit run no CI at all."""
+    import yaml
+
+    for name in ("memory-atlas-acceptance.yml", "memory-atlas-v31.yml"):
+        loaded = yaml.safe_load((REPO / ".github" / "workflows" / name).read_text(encoding="utf-8"))
+        # PyYAML parses the bare `on:` key as the boolean True.
+        triggers = loaded.get("on") or loaded.get(True) or {}
+        for event in ("push", "pull_request"):
+            paths = (triggers.get(event) or {}).get("paths")
+            if paths is None:
+                continue  # no filter means every change triggers it
+            assert "ops/memory-atlas/**" in paths, f"{name}:{event}"
