@@ -3,7 +3,7 @@ identity:
   skill_id: persona-distiller
   display_name: 人物蒸馏 Skill
   source: codex
-  version: 0.0.0.148
+  version: 0.0.0.149
   entry: SKILL.md
 provenance:
   upstream_archive: PersonaDistiller-Final-v0.0.0.3.zip

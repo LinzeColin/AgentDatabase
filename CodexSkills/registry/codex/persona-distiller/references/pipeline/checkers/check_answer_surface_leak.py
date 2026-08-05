@@ -74,7 +74,14 @@ REPORT_ONLY_SURFACE = ("圆括号注", "★ 标记")
 #     空行分段  Barton **81%（超门）**、Nightingale 50%（方向还相反）
 #     破折号    Osler 56% / Fleming 56% / Nightingale 59%，**三人同向偏候选**
 CHANNELS = {
-    "粗体/反引号": re.compile(r"\*\*|`"),
+    # ★★★ v0.0.0.149 拆开：原先这两个合成一条 `粗体/反引号`，**合并本身在制造盲区**。
+    #   Bessemer #132 第 2 轮实测：粗体 候选 **0/16** 基线 **11/16**、
+    #   反引号 候选 **9/16** 基线 **0/16**——**两条各自都是「看见就能定侧」的完美线索**。
+    #   而定向可利用率数的是「只有一侧具备」的题；合并之后，
+    #   候选带反引号、基线带粗体的那些题**两侧都算「具备」**，于是互相抵消 → 31%，轻松过门。
+    #   ★ 席 D 独立发现（它给的机制是「两者从不同时出现」，实测同时出现 6/16，机制错、结论对）。
+    "粗体": re.compile(r"\*\*"),
+    "反引号": re.compile(r"`"),
     "项目符号":   re.compile(r"^\s*(?:[-*+•]|\d+[.)、])\s+", re.M),
     "标题行":     re.compile(r"^\s*#{1,6}\s+", re.M),
     "空行分段":   re.compile(r"\n\s*\n"),
@@ -113,7 +120,16 @@ QUOTE_MARK = re.compile(r"「[^」]{4,}」|\u201c[^\u201d]{4,}\u201d")
 
 
 def measure(cand: dict, base: dict) -> dict:
-    """→ {共有题数, 总体均长比, 候选更短的题数, 更短占比, 逐题最大比, 各通道定向可利用率}。"""
+    """→ {共有题数, 总体均长比, 候选更短的题数, 更短占比, 逐题最大比, 各通道定向可利用率,
+    **并集可定侧率**}。
+
+    ★★★ 并集是 v0.0.0.149 补的，**只报不拦**（待裁定 ㉓）。
+    起因：每条通道单独看都在门下，而**「至少有一条通道能把两侧分开」的题**可以高得多。
+    Bessemer #132 第 2 轮：粗体 69%、反引号 56%、坐标 56%，**并集 94%**。
+    五个人物实测并集 50% / 81% / 81% / 88% / 94%——**四个越 75%**。
+    **不设硬门的原因**：设了会当场判掉 Adams #131（发布门已过、正在打包），
+    那是一条需要人裁的处置，不是判据能自己决定的。
+    """
     keys = [k for k in cand if k in base]
     if not keys:
         return {}
@@ -123,6 +139,11 @@ def measure(cand: dict, base: dict) -> dict:
     ratios = sorted(((len(cand[k]) / max(len(base[k]), 1), k) for k in keys), reverse=True)
 
     surface = {}
+    ids = 0
+    for k in keys:
+        if any(bool(rx.search(str(cand[k]))) != bool(rx.search(str(base[k])))
+               for rx in CHANNELS.values()):
+            ids += 1
     for name, rx in CHANNELS.items():
         c_only = sum(1 for k in keys if rx.search(cand[k]) and not rx.search(base[k]))
         b_only = sum(1 for k in keys if rx.search(base[k]) and not rx.search(cand[k]))
@@ -145,7 +166,9 @@ def measure(cand: dict, base: dict) -> dict:
     return {"n": len(keys), "agg": tc / max(tb, 1), "quote_mark": quote_mark,
             "shorter": shorter, "shorter_frac": shorter / len(keys),
             "worst": ratios[0], "cand_chars": tc, "base_chars": tb,
-            "surface": surface}
+            "surface": surface,
+            # ★ 并集：**至少有一条通道能把两侧分开**的题占比。只报不拦（待裁定 ㉓）。
+            "union_identifiable": {"n": ids, "frac": ids / len(keys)}}
 
 
 def verdict(m: dict, baseline_source: str = "self-authored-strawman") -> list:
@@ -286,14 +309,45 @@ def selftest() -> int:
     m = measure(cand, base)
     bad = verdict(m)
     chk(f"长度两条仍过（{m['agg']:.2f} / {m['shorter_frac']:.0%}）"
-        f"但格式可利用 {m['surface']['粗体/反引号']['exploit']:.0%} → **报出且只报格式那一条**",
-        len(bad) == 1 and "粗体/反引号" in bad[0])
+        f"但格式可利用 {m['surface']['粗体']['exploit']:.0%} → **报出且只报格式那一条**",
+        len(bad) == 1 and "粗体" in bad[0])
+
+    print("── ★★★ 回归：**两条方向相反的完美线索，合并会互相抵消**（v0.0.0.149 修的那个 bug）──")
+    #   Bessemer #132 第 2 轮的真实形状：候选**只用反引号**、基线**只用粗体**，
+    #   两条各自都是「看见就能定侧」，而合并成一条 `粗体/反引号` 之后
+    #   两侧都算「具备」，定向可利用率被抵消到过门。
+    cand5, base5 = _mk(16, 1.00, 8)
+    for i, k in enumerate(sorted(cand5)):
+        if i < 9:
+            cand5[k] = "`" + cand5[k] + "`"          # 候选只用反引号
+        if i < 11:
+            base5[k] = "**" + base5[k] + "**"        # 基线只用粗体
+    m5 = measure(cand5, base5)
+    chk(f"拆开后：反引号 {m5['surface']['反引号']['exploit']:.0%}（指候选）、"
+        f"粗体 {m5['surface']['粗体']['exploit']:.0%}（指基线）——**两条都指得出侧**",
+        m5["surface"]["反引号"]["side"] == "候选"
+        and m5["surface"]["粗体"]["side"] == "基线")
+    merged_only_c = sum(1 for k in cand5
+                        if ("**" in cand5[k] or "`" in cand5[k])
+                        and not ("**" in base5[k] or "`" in base5[k]))
+    merged_only_b = sum(1 for k in cand5
+                        if ("**" in base5[k] or "`" in base5[k])
+                        and not ("**" in cand5[k] or "`" in cand5[k]))
+    merged = max(merged_only_c, merged_only_b) / 16
+    chk(f"★ 若仍合并成一条，可利用率会被抵消成 {merged:.0%}（≤{MAX_EXPLOIT:.0%} → 过门）"
+        f"——**这正是 Bessemer 两轮盲判没被拦住的原因**", merged <= MAX_EXPLOIT)
+    #   ★ 本条断言第一版写成「并集必须 >75%」，**夹具跑出来是 69%，是我的断言错了**：
+    #     这份夹具里两种标记在前 9 题重叠，能定侧的只有 11/16。
+    #     夹具要证的**本来就不是**「并集一定越线」，而是「合并会把它藏起来」。
+    chk(f"★★ 并集可定侧 {m5['union_identifiable']['frac']:.0%}，"
+        f"而合并成一条只报 {merged:.0%}——**合并把它藏起来了**（并集只报不拦，待裁定 ㉓）",
+        m5["union_identifiable"]["frac"] > merged)
 
     print("── ★ 正向：Fleming #111 的形状（候选 32 带、基线 4 带）→ 88% 仍要报 ──")
     cand, base = _mark(_mk(32, 1.00, 16), 32, 4)
     m = measure(cand, base)
     chk("28/32 = 88% > 75% → 报出（**基线也带一点也救不了**）",
-        any("粗体/反引号" in b for b in verdict(m)))
+        any("粗体" in b for b in verdict(m)))
 
     print("── ★★ 反向对照 ⓪：**Barton #117 早先的长度形状（0.67，31/32 更短）→ 必须报** ──")
     #   改前这一组两条都过，还打印「✓ 长度指不出哪一侧」——**那句话是错的**。
@@ -324,21 +378,21 @@ def selftest() -> int:
     cand, base = _mark(_mk(32, 1.00, 16), 32, 32)
     m3 = measure(cand, base)
     chk(f"候选 32/32 带、基线 32/32 带 → 定向可利用 "
-        f"{m3['surface']['粗体/反引号']['exploit']:.0%}，一条不报", not verdict(m3))
+        f"{m3['surface']['粗体']['exploit']:.0%}，一条不报", not verdict(m3))
 
     print("── ★ 反向对照 ④：**格式一边倒但方向相反 → 同样要报**（对称）──")
     cand, base = _mark(_mk(32, 1.00, 16), 0, 32)
     m4 = measure(cand, base)
-    s4 = m4["surface"]["粗体/反引号"]
+    s4 = m4["surface"]["粗体"]
     chk(f"基线 32 带、候选 0 带 → 报出且指明是「{s4['side']}」侧",
-        any("粗体/反引号" in b for b in verdict(m4)) and s4["side"] == "基线")
+        any("粗体" in b for b in verdict(m4)) and s4["side"] == "基线")
 
     print("── ★ 反向对照 ⑤：恰好 75% 可利用 → 放行；78% → 报出 ──")
     cand, base = _mark(_mk(32, 1.00, 16), 24, 0)
     chk("24/32 = 75% 恰在门上 → 不报", not verdict(measure(cand, base)))
     cand, base = _mark(_mk(32, 1.00, 16), 25, 0)
     chk("25/32 = 78% > 75% → 报出",
-        any("粗体/反引号" in b for b in verdict(measure(cand, base))))
+        any("粗体" in b for b in verdict(measure(cand, base))))
 
     print("── 反向对照 ⑥：边界值——恰好等于长度门槛的一律放行 ──")
     m = {"n": 32, "agg": MAX_AGG, "shorter": 8, "shorter_frac": MIN_SHORTER,
@@ -370,7 +424,7 @@ def selftest() -> int:
         if not okk:
             fails.append(f"基线来源豁免射程：{src} 拦 {got} 应 {want}")
     _f = {"agg": 1.0, "shorter": 8, "n": 16, "shorter_frac": 0.5,
-          "surface": {"粗体/反引号": {"exploit": 0.88, "cand_only": 14, "base_only": 0,
+          "surface": {"粗体": {"exploit": 0.88, "cand_only": 14, "base_only": 0,
                                      "side": "候选", "cand_n": 14, "base_n": 0}}}
     got = len(verdict(_f, "bare-model-run"))
     print(f"  {'✓' if got == 1 else '✗'} 格式通道：裸模型基线**照旧硬拦**（拦 {got}，应 1）")
