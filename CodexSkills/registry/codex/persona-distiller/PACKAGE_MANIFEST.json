@@ -811,8 +811,8 @@
     },
     {
       "path": "references/pipeline/checkers/quality_check.py",
-      "sha256": "5757e3620d42d1fcf20ad62ab49993c12c6a145586bfafe721df30dc00ae009d",
-      "size_bytes": 159691
+      "sha256": "c342b899a8819cff9423b3f43f260fc7dbbc48d65c7d7b90a117823f0deaa4ef",
+      "size_bytes": 166231
     },
     {
       "path": "references/pipeline/checkers/show_fetch_distance.py",
@@ -1496,8 +1496,8 @@
     },
     {
       "path": "scripts/quality_check.py",
-      "sha256": "40939a126286b2052c45edbbe0358d2ad4d52e106854bcbf05b1ba2f592b006b",
-      "size_bytes": 162355
+      "sha256": "c342b899a8819cff9423b3f43f260fc7dbbc48d65c7d7b90a117823f0deaa4ef",
+      "size_bytes": 166231
     },
     {
       "path": "scripts/register_persona.py",

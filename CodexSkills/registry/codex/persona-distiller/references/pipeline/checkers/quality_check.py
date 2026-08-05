@@ -2450,6 +2450,122 @@ def run_holdout_overlap(report, target: Path, cache_dirs: list[str]) -> None:
     report.metrics['holdout_overlap'] = info
 
 
+def run_rubric_health(report, target: Path) -> None:
+    """**判据本身的两项体检**：抄没抄答案、要不要求人物出戏（v0.0.0.150 接线，**只写 metrics**）。
+
+    ## 为什么发布门也要看一眼
+
+    这两件此前**只在 `build_blind_payload` 里跑**——那是派发前，位置是对的。
+    但**发布记录里一个数都没有**，而发布记录正是我判「过没过」时读的那一份。
+    今天刚吃过一次亏：[[gates-cover-json-not-the-prose-users-read]]。
+
+    ## 两个数都**只报不拦**
+
+    改判据是要动冻结指令的事（按人物冻结，中途不得增删检查项），
+    所以这里**只把数写进发布记录**，不改任何判定。
+    """
+    here = Path(__file__).resolve().parent
+    cases_f = target / 'evals' / 'cases.jsonl'
+    cand_f = target / 'evals' / 'candidate_answers.json'
+    if not (cases_f.is_file() and cand_f.is_file()):
+        report.metrics['rubric_health'] = {'状态': '没有 cases/答案，**未核验**（不是通过）'}
+        return
+    try:
+        rubrics, prompts = {}, {}
+        for line in cases_f.read_text(encoding='utf-8').splitlines():
+            if line.strip():
+                r = json.loads(line)
+                rubrics[r['case_id']] = str(r.get('rubric') or '')
+                prompts[r['case_id']] = str(r.get('prompt') or '')
+        cand = json.loads(cand_f.read_text(encoding='utf-8'))
+        base_f = target / 'evals' / 'baseline_answers.json'
+        base = json.loads(base_f.read_text(encoding='utf-8')) if base_f.is_file() else None
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['rubric_health'] = {'状态': f'读入失败，**未核验**：{exc}'}
+        return
+    info: dict[str, Any] = {}
+    for name, mod_name in (('抄答案', 'check_rubric_copies_answer'),
+                           ('要求出戏', 'check_persona_frame_break')):
+        script = here / f'{mod_name}.py'
+        if not script.exists():
+            info[name] = '判据未安装，**未核验**（不是通过）'
+            continue
+        spec = importlib.util.spec_from_file_location(f'_pd_{mod_name}', script)
+        mod = importlib.util.module_from_spec(spec)
+        try:
+            spec.loader.exec_module(mod)
+            if name == '抄答案':
+                r = mod.check(rubrics, cand, answers_b=base)
+                z = r.get('★★★ **中译/压缩层（冻结指令要求，原先完全没查）**') or {}
+                info[name] = {
+                    '英文原串层': r.get('**rubric 抄了答案原文的题**'),
+                    '**中译/压缩层**': z.get('越线题数'),
+                    '占比': z.get('占比'),
+                    '★': ('冻结指令写着「中译与压缩也算抄」；上一层只比英文，'
+                          '**中文要 12 个字才够**，实测违规在 3–5 字之间'),
+                }
+            else:
+                r = mod.check(cand, rubrics, prompts)
+                blamed = r.get('★★★ 判据招来的产物出戏（不算产物的账）', {}).get('题', {})
+                info[name] = {
+                    '判据要求出戏': len(r.get('判据要求出戏') or {}),
+                    '产物出戏（已扣除判据招来的）': len(r.get('产物出戏') or {}),
+                    '**判据招来的**': sorted(blamed),
+                }
+        except Exception as exc:                                # noqa: BLE001
+            info[name] = f'运行失败，**未核验**：{exc}'
+    info['★★ 口径'] = ('**只写 metrics，不改判定。** 改判据要动按人物冻结的指令，'
+                       '那是下一个人物的事（见 RUBRIC-RULES-v2 第 ⑥ 条）。')
+    report.metrics['rubric_health'] = info
+
+
+def run_verdict_attribution(report, target: Path) -> None:
+    """**判决书里「候选说了 X」，X 是不是真在候选那一侧**（v0.0.0.148 接线，**只报警**）。
+
+    评委是盲的，笔记里每个「A」「B」都是盲坐标，而 A/B **逐题翻面**。
+    从评委笔记往判决书里抄结论时**必须过 key**——Bessemer #132 第 1 轮没过，
+    **四条结论全部把基线的毛病记到了候选头上**，其中一条正是
+    「候选自相矛盾，说完不许现编还是编了两句格言」，
+    而那两句**在基线里**；候选原文是「这个我不给」。
+
+    ★ 我手查只查出三条；**第四条是本件建成后当场补出来的**，
+    随后它又在 **Adams #131** 查出两处——那是一份我原本再也不会回头看的判决书。
+
+    ## 为什么只报警不拦
+
+    它查的是**散文**，不动任何分数。但 [[gates-cover-json-not-the-prose-users-read]]
+    记的正是「判据只盯 JSON，漏了用户真正会读的那份散文」——
+    **判决书恰恰是给人看的那一份。报出来就当场改。**
+    """
+    here = Path(__file__).resolve().parent
+    script = here / 'check_verdict_attribution.py'
+    if not script.exists():
+        report.metrics['verdict_attribution'] = {'状态': '检查器未安装，**未核验**（不是通过）'}
+        return
+    spec = importlib.util.spec_from_file_location('_pd_verdict_attr', script)
+    module = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(module)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['verdict_attribution'] = {'状态': f'加载失败，**未核验**：{exc}'}
+        return
+    buffer = io.StringIO()
+    try:
+        with contextlib.redirect_stdout(buffer):
+            n = module.run(target)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['verdict_attribution'] = {'状态': f'运行失败，**未核验**：{exc}'}
+        return
+    hits = [ln.strip() for ln in buffer.getvalue().splitlines() if ln.strip().startswith('✗')]
+    info: dict[str, Any] = {'**归属错**': n}
+    if n:
+        info['**逐条**'] = hits[:8]
+        info['口径'] = ('引文只在一侧出现，而判决书把它记到了另一侧。'
+                        '**改判决书，不要改判据**——真值是 evals/*_answers.json。')
+        report.warn('verdict.attribution-flipped', f'判决书归属写反 {n} 处（**盲坐标没过 key**）')
+    report.metrics['verdict_attribution'] = info
+
+
 def run_threshold_doc_drift(report, target: Path) -> None:
     """**文档里写的门槛，与代码里在用的那套，是不是同一套**（v0.0.0.141，硬门）。
 
@@ -2839,6 +2955,8 @@ def main() -> int:
         #   等到合成门才报就已经拿泄漏的源出过 known 题了。
         run_material_split(report, target)
         run_threshold_doc_drift(report, target)
+        run_verdict_attribution(report, target)
+        run_rubric_health(report, target)
         report_own_voice(report, target, meta, sources)
         report_refusal_overflow(report, target)
         run_corpus_ceiling(report, target, report.profile)
