@@ -1,6 +1,6 @@
-# Release verification — Persona Distiller v0.0.0.152
+# Release verification — Persona Distiller v0.0.0.153
 
-Date: 2026-08-05（**v0.0.0.152**）
+Date: 2026-08-05（**v0.0.0.153**）
 
 > **本文件记录「当前发布号的复验结果」，不是历史归档。**
 > 版本号必须等于根目录 `VERSION`，由 `scripts/check_contract_drift.py` 强制。
@@ -21,6 +21,18 @@ Date: 2026-08-05（**v0.0.0.152**）
 > **表格正文不在任何判据的射程里**。
 > **「本表每一行都来自本次实跑」是一句自述**——
 > 而自述不是证据（见 `self-report-is-not-evidence`）。
+
+> ### v0.0.0.153 这一版重跑了什么
+>
+> **台账加 `voice` 字段**：`ingest.py` 是固定字段表、无透传，
+> 抓源阶段标好的声口**在入库那一步就丢了**。而声口正是 Coffin #130 栽的地方。
+> `communicated`（作者自供而第三人称写的）**单列一档**；
+> ★ 默认 `unknown` 不是 `first-person`——没标不等于是他的声口。
+>
+> **订正机制全库从未用过**：13 份 `corrections.jsonl` 全 0 行、
+> 13 份 `ACTIVE.md` 全写 `None.`——而这正是 `check_semantic_residue` 接不上的真原因
+> （它的规则要从订正记录里长出来）。已补记两条真订正，
+> 并实测**记订正不会让发布门新增任何错误**。
 
 > ### v0.0.0.152 这一版重跑了什么
 >

@@ -1,5 +1,41 @@
 # Changelog
 
+## v0.0.0.153
+
+### 台账新增 `voice` 字段——**`author` 认的是「谁署名」，不是「他本人怎么说话」**
+
+`ingest.py` 的记录是**固定字段表**，没有 `voice`、也没有透传。
+于是抓源阶段标好的声口，**在入库那一步就丢了**。
+
+而声口正是 Coffin #130 栽的地方：三道门全过，**17 万字里他本人实质的话只有 8 句**。
+Sorby #133 的探测同样报了：34 件里第三人称占比不低，且有一篇脚注写着
+`communicated by the author`——**作者自供而第三人称写的**。
+
+新增 `--voice {first-person, third-person, communicated, unknown}`：
+
+- `communicated` **单列一档，不并进 first-person**——它既不是他执笔，也不是纯转述；
+- ★ **默认 `unknown`，不是 `first-person`**——没标不等于是他的声口
+  （[[empty-default-swallows-unknown]]）。
+
+实测：`--voice first-person` 落进台账正确；schema 漂移门是「只列不判」，
+存量人物没有这个字段只会被列为部分覆盖，**不判失败**。
+
+★ 这一条是为 Sorby 的 profile 决定铺的路：`PROFILE-决定点.md` 要的
+「第一人称材料字数占比」，此前**没有任何字段能承载它**。
+
+### 订正机制：全库 13 个工作区从来没有写过一条
+
+查 `check_semantic_residue` 为什么接不上，查到底才发现：
+它的 `rules.json` 要从**该人物的订正记录**里长出来，
+而 **13 份 `corrections.jsonl` 全是 0 行、13 份 `ACTIVE.md` 全写着 `None.`**。
+
+`correction_manager.py` 有 `add/status/list/compile` 四个子命令，
+`scope` 里专门有 `evaluation` 一档——判分层的订正本来就该记在这里。
+**而订正确实发生过**：仅今天 Bessemer 就有两条够格的，我一条都没记。
+
+已补记（本库第一份非空的 corrections.jsonl），并实测**记订正不会让发布门新增任何错误**——
+否则没人会去记。
+
 ## v0.0.0.152
 
 ### 同一个同名问题打穿的**第二处**：`own_voice_ratio` 只比姓氏

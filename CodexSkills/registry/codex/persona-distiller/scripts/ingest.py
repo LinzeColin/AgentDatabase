@@ -211,6 +211,13 @@ def main() -> int:
     parser.add_argument('--language')
     parser.add_argument('--dimension', action='append', choices=LANES, default=[])
     parser.add_argument('--holdout', action='store_true', help='Reserve material for evaluation; builders must never read it.')
+    # ★ 默认 unknown，**不是 first-person**——没标不等于是他的声口。
+    parser.add_argument('--voice',
+                        choices=['first-person', 'third-person', 'communicated', 'unknown'],
+                        default='unknown',
+                        help='这份材料是不是他本人在说话。`communicated` 指'
+                             '「作者自供而第三人称写的」（如脚注 communicated by the author），'
+                             '**单列一档，不并进 first-person**。')
     parser.add_argument('--abstract')
     # ★ v0.0.0.106：此前**没有任何办法在落盘时记下「凭什么说这是他写的」**。
     #   Liebig #124 实测：9 份「与他有关的书」（论战文／写给他的公开信／他人主编的文集／
@@ -367,6 +374,15 @@ def main() -> int:
                 'checksum': checksum,
                 'normalized_checksum': normalized_checksum,
                 'dimensions': dimensions,
+                # ★★★ v0.0.0.153：**声口**。`author` 认的是「谁署名」，
+                #   而人物蒸馏要建的是「他本人怎么说话」的模型——两件事。
+                #   Coffin #130 栽在这里：三道门全过，17 万字里他本人实质的话只有 8 句。
+                #   Sorby #133 的探测同样报了：34 件里第三人称占比不低，
+                #   且有一篇脚注写着 `communicated by the author`——**作者自供而第三人称写的**，
+                #   那既不是 first-person 也不是纯 third-person，**单列一档**。
+                #   ★ 不给就是 `unknown`——**不许默认成 first-person**，
+                #     否则「没标」会被读成「是他的声口」（[[empty-default-swallows-unknown]]）。
+                'voice': args.voice,
                 'derived_from': [],
                 'extraction_status': extraction_status,
                 'abstract': args.abstract,
