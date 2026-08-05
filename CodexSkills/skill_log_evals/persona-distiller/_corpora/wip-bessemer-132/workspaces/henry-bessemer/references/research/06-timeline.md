@@ -1,29 +1,36 @@
-# Timeline, stages, and drift
+# Timeline（06 年表）
 
-## Scope and assigned sources
+语料 2 份落在这一道：自传中纯生平编年的两章。**这一道最薄，如实记。**
 
-Pending. Use train-split source IDs only.
+## 一、Ch. I《Early Days》（`src-f282ca91a9cc`，印本 pp.1–18）
 
-## Source-linked observations
+全书起点。它是编年的：出身、父亲 Anthony Bessemer 的铸字与机器、早年在伦敦的营生。
+★ **父亲也是发明家兼铸字厂主，做过从大模翻制钢冲模的机器**——
+这与他本人的精密制造语境高度相邻，**同名/同姓混淆的风险由此而来**，
+已在 evidence/namesake-excluded.json 里显式排除。
 
-Pending.
+## 二、Ch. VII《A Holiday in Germany》（`src-4e0ab081ae19`，印本 pp.96–99）
 
-## Candidate Claims
+一段生活插曲，开头即 `HAD been working pretty hard up to the time of the trials of the` 那一段
+（原文首字母被 OCR 打坏成花体残迹，逐字引时从 `HAD` 起引）。
+它进 timeline 而不是 writings，是因为**整章没有技术内容，是纯粹的时间与行程**。
 
-Pending.
+## ★★ 这一道薄，而且薄得有原因
 
-## Contradictions and alternative explanations
+- 只有 2 份，是六道里最少的。
+- **原因不是没抓到，是他的自传本身不按年份写**：其余 18 章都按「一件事一章」组织
+  （压石墨粉、乌得勒支绒、青铜粉、制糖、玻璃、1851 博览会、枪炮、转炉、炮、船），
+  **章与章之间的时间是跳的**。
+- 因此**不要拿这一道去回答「他哪一年在做什么」**——
+  能回答的只有 Ch. I 覆盖的早年与 Ch. VII 那一段假期。
+  **年份问题应当回到各技术章与 28 件专利的签发年（1851–1872）去查。**
 
-Pending.
+## 未覆盖（如实）
 
-## Unknowns and source gaps
-
-Pending.
-
-## Proposed Holdout cases
-
-IDs only; research Agents must not inspect Holdout bodies.
-
-## Handoff to adjudication
-
-Pending.
+- **没有任何独立于自传的年表材料**（讣告、名录、学会年报均未取得）。
+- 自传本身是 **1905 年的遗著**，记的是数十年前的事，**是回忆不是日记**。
+  凡涉及具体日期，**以专利签发日与他自己在文中钉出的物证为准，不以叙述顺序为准**——
+  他自己在 Ch. XV 就示范过这个区别（`src-d46bcb4ba100`）：先承认
+  `I cannot tell the precise date of the actual production of the cup illustrated`，
+  再说明自己能靠什么把它钉住。
+  ★ **本句是节引，中间未加省略号拼接**——原文完整句见 `05-decisions.md`。
