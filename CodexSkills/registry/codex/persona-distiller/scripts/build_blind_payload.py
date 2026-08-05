@@ -319,6 +319,13 @@ def main() -> int:
     base = json.loads(pathlib.Path(a.baseline).read_text(encoding="utf-8"))
     payload, key = assign(cases, cand, base)
 
+    # ★★★ `--round-dir round2` 这种**裸相对名**必须落在工作区里，不是当前目录。
+    #   实测代价：在技能目录下跑，它把载荷与**盲判 key** 写进了
+    #   `registry/codex/persona-distiller/round2/`——**已发布的产品目录**，并被我提交进 git。
+    #   两位评委各自独立报了这件事（一位在约定位置找不到载荷，自己重新生成了一份）。
+    if not a.round_dir.is_absolute() and len(a.round_dir.parts) == 1:
+        a.round_dir = a.workspace / "evals" / a.round_dir
+        print(f"★ --round-dir 是裸名，已解析到工作区内：{a.round_dir}")
     a.round_dir.mkdir(parents=True, exist_ok=True)
     _payload_path = a.round_dir / f"{a.prefix}_blind_payload.json"
     _payload_path.write_text(
@@ -431,6 +438,15 @@ def main() -> int:
 
     # 轮次之间 A/B 映射必须一致，否则各轮不可比
     r1 = a.round_dir.parent / "round1" / f"{a.prefix}_blind_key.json"
+    # ★★ 找不到第 1 轮的 key 时**不许沉默跳过**——那正是本次的形态：
+    #   round_dir 落错了地方，`r1` 指向一个不存在的路径，`is_file()` 假，
+    #   于是「A/B 映射与第 1 轮逐条一致」这道检查**一句话都没说就没跑**。
+    #   沉默的跳过会被读成通过（见 [[empty-default-swallows-unknown]]）。
+    if a.round_dir.name != "round1" and not r1.is_file():
+        print(f"✗ **找不到第 1 轮的 key：{r1}**")
+        print("  轮次之间 A/B 映射是否一致**未核**——这不是通过。")
+        print("  多半是 --round-dir 落在了工作区之外。**中止。**")
+        return 5
     if a.round_dir.name != "round1" and r1.is_file():
         if json.loads(r1.read_text(encoding="utf-8")) != key:
             print("✗ **A/B 映射与第 1 轮不一致——中止（轮次之间不可比）**"); return 3
