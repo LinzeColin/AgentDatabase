@@ -251,3 +251,37 @@
 - 自传逐字性：把 20 个章文件正文拼起来，应与 `_djvu.txt` 第 611–15070 行的非空行**逐行相同**（11,750 行）。已跑通。
 - 专利署名：每个专利文件头的 `# AUTHORSHIP EVIDENCE:` 行是从该件 PDF 文本层里逐字抄的 `Be it known that I, ...` 子句。
 - 全库唯一一处人工插入的字：`src-paper-1859-ice` 里那一行 `[[ OMITTED HERE: ... ]]`。**除此之外，raw/ 下没有一个字是我写的。**
+
+---
+
+## ★★★ 主循环更正：「道数只有 2」这条**答的是另一个轴**
+
+抓源报告把「道」读成了**取回通道**（`archive.org` 与 `patentimages…`），
+据此写「道数 2，没过 ≥3，实打实的缺口」。
+
+**`min_lanes` 数的不是通道，是内容维度。** 判据实现在
+`quality_check.py`：它读每条来源的 `dimensions` 字段，取并集大小，
+取值范围是 **writings / conversations / expression / external / decisions / timeline** 六种。
+**与材料托管在哪个域名无关。**
+
+全库实测（各人物的 lane 覆盖）：
+
+```
+george-washington-carver  3 条道  {writings 39, conversations 1, external 1}   ← 已入库，quick 门 3
+charles-l-coffin          3 条道  {writings 14, timeline 1, external 3}
+comfort-avery-adams       4 条道  {conversations 63, writings 6, expression 2, timeline 1}
+ignaz-semmelweis          2 条道  {external 53, writings 7}                     ← 真正只有 2 条道长这样
+```
+
+**Bessemer 的材料按内容维度分，≥3 是够得着的**：自传是编年自述
+（`writings` + `timeline` + `decisions` + `expression` 都有实料），
+专利是 `writings`，1856 年会后那几页是 `conversations`。
+**但具体几条道要由 `ingest` 落的 `dimensions` 字段说了算，不由我在这里断言**——
+下一步实跑研究门，以它的输出为准。
+
+★ **这条更正不推翻抓源报告的任何一个数**：29 份独立文献、一手 1.00、
+55 个文件 254,894 词、通道受限清单，全部照旧。
+**错的只是「道」这个词指什么**——而它恰好是决定这一轮能不能继续的那一项。
+
+★★ 报告里那条「有 12 个文件不是我改的」是**主循环在同时做 v0.0.0.141–146**，
+不是并行 session。**它报得对，该报。**
