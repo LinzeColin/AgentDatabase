@@ -58,13 +58,86 @@ LEAK_CHECKER = HERE / "check_answer_surface_leak.py"
 LOC_CHECKER = HERE / "check_quote_locator.py"   # ★ v0.0.0.89：坐标也在生成时把
 
 
-def assign(cases: dict, cand: dict, base: dict) -> tuple:
-    """→ (payload, key)。A/B 由 `sha256(case_id) % 2` 决定，**与内容无关、可复现**。"""
+RUBRIC_MARKERS = ("## 逐题 rubric", "## 逐题评分标准")
+_CID_RE = re.compile(r"^[a-z]{2,4}(?:-[a-z]+)+-\d+$")
+
+
+def extract_rubrics(text: str, cases: list):
+    """从冻结指令里抽出逐题 rubric。**抽不到就返回 None，绝不退回整份文件。**
+
+    ## ★ 这个函数是补一个真实的漏
+
+    原来一行：`text.split("## 逐题 rubric", 1)[-1]`。
+    Adams #131 的小标题写的是 **`## 逐题评分标准`**（写 v2 rubric 时改的名），
+    `split` 没命中 —— 而 **`[-1]` 在没命中时返回的是整份文件**。
+    于是整段前言被当成一条 rubric 喂给了判据，多出一个键 **`'#'`**。
+
+    ★★ **它没有报错，报的是「0/17」。** 17 = 16 题 + 1 个假题。
+    分母多了 1 而没有任何一处说话——**这正是「判据绿了但指错了文件」的第 11 次。**
+
+    三道防线，缺一不可：
+    1. 认多个小标题（两种写法都是真实存在的）；
+    2. **一个都不命中 → 返回 None 让调用方中止**，不许静默用整份文件；
+    3. 键必须长得像 case_id，且**必须真的在本次的题目集合里**——
+       前言那种块连第 3 关都过不了。
+    """
+    body = None
+    for m in RUBRIC_MARKERS:
+        if m in text:
+            body = text.split(m, 1)[1]
+            break
+    if body is None:
+        return None
+    want, out = set(cases), {}
+    for blk in re.split(r"\n### ", body):
+        blk = blk.strip()
+        if not blk:
+            continue
+        cid = blk.split("\u3000")[0].split()[0].strip()
+        if cid in want or _CID_RE.match(cid):
+            out[cid] = "### " + blk
+    return out or None
+
+
+def _balanced_flips(cids: list) -> dict:
+    """→ {case_id: flip}，**恰好一半 0 一半 1**，仍然只依赖 case_id、可复现。
+
+    按 sha256 排序取前一半为 0。与逐题取模的区别只在**边际分布**：
+    取模是 16 次独立抛硬币，本函数是**不放回地发 8 黑 8 白**。
+    """
+    order = sorted(cids, key=lambda c: hashlib.sha256(c.encode()).hexdigest())
+    half = len(order) // 2
+    return {c: (0 if i < half else 1) for i, c in enumerate(order)}
+
+
+def assign(cases: dict, cand: dict, base: dict, balanced: bool = False) -> tuple:
+    """→ (payload, key)。A/B 只由 case_id 决定，**与内容无关、可复现**。
+
+    `balanced=False`（默认，历史行为）：`sha256(case_id) % 2`，**16 次独立抛硬币**。
+    `balanced=True`：强制 8/8。
+
+    ## ★ 为什么会有这个参数——Adams #131 抽到 14/16
+
+    实测：仓里三个前缀 `ca`/`et`/`gwc` 分别是 **14/16**、8/16、9/16。
+    拿 2000 个合成前缀验哈希本身：**均值 8.059**、偏离 ≥4 的占 **7.55%**
+    （16 次公平抛硬币的理论值 7.68%）——**哈希是公平的，Adams 只是手气差。**
+
+    ★★ 但「公平」不等于「够用」：**每 13 个人物就有 1 个会落到 ≥12/16**，
+    600 人算下来约 46 次。那时**位置与系统高度相关**，
+    评委任何一点位置偏好（比如偏爱先读到的那一侧）都会**直接灌进 delta**。
+    这与已记的「长度混杂」是同一类混杂，只是通道从篇幅换成了位次。
+
+    ★★★ **默认没有改成 True**：改了会让已派发轮次的 A/B 变号，
+    与「各轮之间 A/B 必须逐条一致」直接冲突。**Adams #131 用的仍是取模。**
+    是否从下一个人物起改默认——**待用户裁定（⑱）**。
+    """
+    flips = _balanced_flips(sorted(cases)) if balanced else None
     payload, key = [], {}
     for i, cid in enumerate(sorted(cases), 1):
         if cid not in cand or cid not in base:
             raise SystemExit(f"✗ **缺答案：{cid}**——不是「这题跳过」，是载荷不完整")
-        flip = int(hashlib.sha256(cid.encode()).hexdigest(), 16) % 2
+        flip = flips[cid] if flips is not None else \
+            int(hashlib.sha256(cid.encode()).hexdigest(), 16) % 2
         a, b = (cand[cid], base[cid]) if flip == 0 else (base[cid], cand[cid])
         opaque = f"q-{i:02d}"
         key[opaque] = {"A": "candidate" if flip == 0 else "baseline",
@@ -108,6 +181,39 @@ def selftest() -> int:
     print("── 正向：A/B 分配可复现，同一 case_id 每次都落同一侧 ──")
     _, key2 = assign(cases, cand, base)
     chk("两次生成的 key 逐条相同", key == key2)
+
+    print("── ★★ 位次平衡：balanced=True 必须恰好一半一半，且仍然可复现 ──")
+    #   反向对照：先证明**默认那条路真的会一边倒**，否则这个自测什么也没证明。
+    skew = {f"ca-{s}-01": "题面" for s in
+            ("anonymous-fidelity", "boundary", "capability-calibration", "contrast",
+             "fact-preservation", "identity-routing", "known", "long-horizon",
+             "planning-fidelity", "refusal-stop", "style-decoy", "task-completion",
+             "token-efficiency", "tool-use", "trajectory", "voice")}
+    sc = {c: "候选" for c in skew}
+    sb = {c: "基线" for c in skew}
+    _, k_mod = assign(skew, sc, sb)
+    n_mod = sum(1 for v in k_mod.values() if v["A"] == "candidate")
+    chk(f"默认（取模）在 Adams 真实题号上确实一边倒：{n_mod}/16", n_mod == 14)
+    _, k_bal = assign(skew, sc, sb, balanced=True)
+    n_bal = sum(1 for v in k_bal.values() if v["A"] == "candidate")
+    chk(f"balanced=True 变成 {n_bal}/16", n_bal == 8)
+    _, k_bal2 = assign(skew, sc, sb, balanced=True)
+    chk("balanced 也可复现（两次逐条相同）", k_bal == k_bal2)
+    chk("★ 两条路给出的 A/B **确实不同**（所以不许中途改默认）", k_mod != k_bal)
+
+    print("── ★★ 抽 rubric：小标题不认识时**必须返回 None**，不许退回整份文件 ──")
+    real = ["ca-known-01", "ca-voice-01"]
+    doc = ("# 冻结评委指令 v1\n\n前言：不许把「本库没收录」当成正确答案。\n\n"
+           "## 逐题评分标准\n\n### ca-known-01\u3000[known]\n\n须说明拿不出该篇。\n\n"
+           "### ca-voice-01\u3000[voice]\n\n须先认没讲清。\n")
+    r = extract_rubrics(doc, real)
+    chk(f"认得 `## 逐题评分标准`，抽出 {len(r or {})} 条", r is not None and len(r) == 2)
+    chk("**前言没有混进来**（没有 `#` 这种假题）", r is not None and "#" not in r)
+    r2 = extract_rubrics(doc.replace("## 逐题评分标准", "## 逐题 rubric"), real)
+    chk("`## 逐题 rubric` 这种老写法也认得", r2 is not None and len(r2) == 2)
+    chk("★ 两种写法抽出来的内容一样", (r or {}).keys() == (r2 or {}).keys())
+    bad = extract_rubrics(doc.replace("## 逐题评分标准", "## 打分细则"), real)
+    chk("★★ 小标题不认识 → **返回 None**（旧代码这里会把整份文件当 rubric）", bad is None)
 
     print("── 反向对照 ①：缺一条答案 → 必须退出，不许静默少一题 ──")
     short = {k: v for k, v in cand.items() if k != sorted(cases)[0]}
@@ -213,6 +319,13 @@ def main() -> int:
     base = json.loads(pathlib.Path(a.baseline).read_text(encoding="utf-8"))
     payload, key = assign(cases, cand, base)
 
+    # ★★★ `--round-dir round2` 这种**裸相对名**必须落在工作区里，不是当前目录。
+    #   实测代价：在技能目录下跑，它把载荷与**盲判 key** 写进了
+    #   `registry/codex/persona-distiller/round2/`——**已发布的产品目录**，并被我提交进 git。
+    #   两位评委各自独立报了这件事（一位在约定位置找不到载荷，自己重新生成了一份）。
+    if not a.round_dir.is_absolute() and len(a.round_dir.parts) == 1:
+        a.round_dir = a.workspace / "evals" / a.round_dir
+        print(f"★ --round-dir 是裸名，已解析到工作区内：{a.round_dir}")
     a.round_dir.mkdir(parents=True, exist_ok=True)
     _payload_path = a.round_dir / f"{a.prefix}_blind_payload.json"
     _payload_path.write_text(
@@ -325,6 +438,15 @@ def main() -> int:
 
     # 轮次之间 A/B 映射必须一致，否则各轮不可比
     r1 = a.round_dir.parent / "round1" / f"{a.prefix}_blind_key.json"
+    # ★★ 找不到第 1 轮的 key 时**不许沉默跳过**——那正是本次的形态：
+    #   round_dir 落错了地方，`r1` 指向一个不存在的路径，`is_file()` 假，
+    #   于是「A/B 映射与第 1 轮逐条一致」这道检查**一句话都没说就没跑**。
+    #   沉默的跳过会被读成通过（见 [[empty-default-swallows-unknown]]）。
+    if a.round_dir.name != "round1" and not r1.is_file():
+        print(f"✗ **找不到第 1 轮的 key：{r1}**")
+        print("  轮次之间 A/B 映射是否一致**未核**——这不是通过。")
+        print("  多半是 --round-dir 落在了工作区之外。**中止。**")
+        return 5
     if a.round_dir.name != "round1" and r1.is_file():
         if json.loads(r1.read_text(encoding="utf-8")) != key:
             print("✗ **A/B 映射与第 1 轮不一致——中止（轮次之间不可比）**"); return 3
@@ -371,13 +493,12 @@ def main() -> int:
         rubrics = {}
         v1 = a.workspace / "judge_prompts" / "v1.md"
         if v1.is_file():
-            body = v1.read_text(encoding="utf-8").split("## 逐题 rubric", 1)[-1]
-            for blk in re.split(r"\n### ", body):
-                blk = blk.strip()
-                if not blk:
-                    continue
-                cid = blk.split("\u3000")[0].split()[0].strip()
-                rubrics[cid] = "### " + blk
+            rubrics = extract_rubrics(v1.read_text(encoding="utf-8"), sorted(cases))
+            if rubrics is None:
+                print("✗ **抽不出逐题 rubric——中止。**\n"
+                      f"   {v1} 里找不到已知的小标题（{'／'.join(RUBRIC_MARKERS)}），\n"
+                      "   **且不许退回「拿整份文件当 rubric」**——那样判据查的是别的东西。")
+                return 4
         rub_json = a.round_dir / "_rubrics_for_frame_check.json"
         if rubrics:
             rub_json.write_text(json.dumps(rubrics, ensure_ascii=False), encoding="utf-8")
@@ -401,6 +522,45 @@ def main() -> int:
         except Exception:                                        # noqa: BLE001
             print("  ⚠ 出戏门输出解析失败，**未核**（不是通过）")
 
+    # ★★★ rubric 抄答案门（**只报不拦**）——RUNBOOK 第五十四种的判据
+    #   Robertson #97 两席评委独立指出「rubric 规定了答案的措辞」，**记了但没落成判据**，
+    #   于是它又回来两次：Carver #127（已入库）7/16 = 44%、Thomson #129 8/16 = 50%。
+    #   共有长串越多，这道题的分越是在量「字符串对不对得上」而不是能力。
+    copy_checker = HERE / "check_rubric_copies_answer.py"
+    if copy_checker.exists() and rubrics:
+        print("\n── rubric 抄答案门（**只报不拦**）──")
+        # ★★ 两侧都传：中译/压缩层要拿**基线侧**当趋同下限
+        #   （写判据时基线还不存在，抄它在物理上不可能）。
+        cp = subprocess.run([sys.executable, str(copy_checker),
+                             "--rubrics", str(rub_json), "--answers", str(cand_path),
+                             "--answers-b", str(base_path)],
+                            capture_output=True, text=True)
+        try:
+            cr = json.loads(cp.stdout)
+            n = cr["**rubric 抄了答案原文的题**"]
+            print(f"  {n}/{cr['题数']}（{cr['占比']}）题的 rubric 里有答案的**英文原字符串**；"
+                  f"共有 {cr['共有字符合计']} 字")
+            cz = cr.get("★★★ **中译/压缩层（冻结指令要求，原先完全没查）**") or {}
+            if cz:
+                print(f"  ★★★ **中译/压缩层：{cz['越线题数']}/{cr['题数']}（{cz['占比']}）**"
+                      "——冻结指令写着「中译与压缩也算抄」，上面那一层只比英文，对它们全盲")
+                for cid, sides in list(cz.get("逐题", {}).items())[:4]:
+                    for side, d in sides.items():
+                        if d.get("越线"):
+                            q = d.get("**判据引号内被答案照抄的短语**") or []
+                            tag = f"引号回声 {[x['短语'] for x in q]}" if q else f"串 {d['中文连续串'][:2]}"
+                            print(f"    · {cid} [{side}] {tag}")
+            if n:
+                worst = sorted(cr["逐题"].items(),
+                               key=lambda kv: -kv[1]["占答案的比例"])[:3]
+                for cid, d in worst:
+                    print(f"    · {cid}  占该答案 {d['占答案的比例']:.0%}  "
+                          f"{d['最长的三段'][0][:56]}")
+                print("  ★★ 参照：Carver #127 = 7/16、Thomson #129 = 8/16。"
+                      "**这几题的分要按「字符串对齐」读，不是能力。**")
+        except Exception:                                        # noqa: BLE001
+            print("  ⚠ 输出解析失败，**未核**（不是通过）")
+
     # ★★ 生成即判：泄题必须拦在派发评委之前
     if locator_gate(cand_path):                  # ★ 在早退之前——它不该被 skip 掉
         return 1
@@ -408,6 +568,24 @@ def main() -> int:
         print("\n⚠ **跳过了表面特征泄题门**——"
               "Barton #117 三轮判分正是因为这道门没在派发前跑而全部作废")
         return 0
+    # ── 位次混杂（**只报不拦**，同「长度混杂」一类，待裁定 ⑱）──
+    # ★ 此前没有任何一处报过这个数：Adams #131 的 14/16 是我用肉眼看出来的，
+    #   不是门告诉我的。**判据不说话，就等于不存在。**
+    n_a = sum(1 for v in key.values() if v["A"] == "candidate")
+    n = len(key)
+    lead = max(n_a, n - n_a)
+    print(f"\n── 位次混杂（**只报不拦**）──\n"
+          f"A 侧是候选 {n_a}/{n}，一边倒的那侧占 {lead}/{n} = {lead/max(n,1):.0%}")
+    if lead / max(n, 1) >= 0.75:
+        print(f"  ⚠ **位次与系统相关度 {lead/max(n,1):.0%}**——"
+              f"评委若对「先读到的那一侧」有任何偏好，**会直接灌进 delta**。\n"
+              f"    ★ 这不是编造出来的风险：同一类混杂已在长度上实测过（裁定 ⑭）。\n"
+              f"    ★★ 报数时必须带上这句话：**这一轮的 delta 有位次混杂。**\n"
+              f"    修法是 `assign(..., balanced=True)` 强制 8/8；"
+              f"**本轮没有改**——改了会让已派发轮次的 A/B 变号。")
+    else:
+        print("  ✓ 位次没有一边倒（<75%）")
+
     print("\n── 表面特征泄题门（**派发之前必须过**）──")
     p = subprocess.run([sys.executable, str(LEAK_CHECKER),
                         "--candidate", str(cand_path), "--baseline", str(base_path),

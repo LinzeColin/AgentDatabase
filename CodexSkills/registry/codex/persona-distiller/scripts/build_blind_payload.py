@@ -529,14 +529,27 @@ def main() -> int:
     copy_checker = HERE / "check_rubric_copies_answer.py"
     if copy_checker.exists() and rubrics:
         print("\n── rubric 抄答案门（**只报不拦**）──")
+        # ★★ 两侧都传：中译/压缩层要拿**基线侧**当趋同下限
+        #   （写判据时基线还不存在，抄它在物理上不可能）。
         cp = subprocess.run([sys.executable, str(copy_checker),
-                             "--rubrics", str(rub_json), "--answers", str(cand_path)],
+                             "--rubrics", str(rub_json), "--answers", str(cand_path),
+                             "--answers-b", str(base_path)],
                             capture_output=True, text=True)
         try:
             cr = json.loads(cp.stdout)
             n = cr["**rubric 抄了答案原文的题**"]
-            print(f"  {n}/{cr['题数']}（{cr['占比']}）题的 rubric 里有答案的原字符串；"
+            print(f"  {n}/{cr['题数']}（{cr['占比']}）题的 rubric 里有答案的**英文原字符串**；"
                   f"共有 {cr['共有字符合计']} 字")
+            cz = cr.get("★★★ **中译/压缩层（冻结指令要求，原先完全没查）**") or {}
+            if cz:
+                print(f"  ★★★ **中译/压缩层：{cz['越线题数']}/{cr['题数']}（{cz['占比']}）**"
+                      "——冻结指令写着「中译与压缩也算抄」，上面那一层只比英文，对它们全盲")
+                for cid, sides in list(cz.get("逐题", {}).items())[:4]:
+                    for side, d in sides.items():
+                        if d.get("越线"):
+                            q = d.get("**判据引号内被答案照抄的短语**") or []
+                            tag = f"引号回声 {[x['短语'] for x in q]}" if q else f"串 {d['中文连续串'][:2]}"
+                            print(f"    · {cid} [{side}] {tag}")
             if n:
                 worst = sorted(cr["逐题"].items(),
                                key=lambda kv: -kv[1]["占答案的比例"])[:3]

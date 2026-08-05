@@ -4,7 +4,7 @@
   "display_name": "人物蒸馏 Skill / Persona Distiller",
   "distribution": {
     "canonical_registry": "../persona-distiller-group",
-    "kind": "repository-customized-v0.0.0.149",
+    "kind": "repository-customized-v0.0.0.150",
     "lineage_base_archive_sha256": "e891912d98d14afb7677ac935a19be329d97d206f4ae74a644892f46b17f6748"
   },
   "evaluation_suites": 16,
@@ -16,8 +16,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "b5467e3ba8c9636ee989d9ae3bf10ce3b67be335cd62cd7a170b2b4376cbb1a3",
-      "size_bytes": 318362
+      "sha256": "3fc32a88e0fd92ab753dc260a017233bd0206e1dfbf2df13bc67d4309d5a6a02",
+      "size_bytes": 321223
     },
     {
       "path": "CONTRIBUTING.md",
@@ -31,7 +31,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "ed81ef71592077f0f8ec4ebe4d0b349f705556d57d343633f029049dd2a475ed",
+      "sha256": "02d85df0df68a8be244c456d28305d022869f2d6f56bbee40e65a197c2417533",
       "size_bytes": 8803
     },
     {
@@ -56,12 +56,12 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "afe6d0d055b67d7ebfc842d71d64d70a8394d0f79e5e94aa8bde48ff82e5684e",
-      "size_bytes": 128239
+      "sha256": "a1936d0e88c8abfb716680af71dfb28dd8699703988c8548f6282e1b057a0d1d",
+      "size_bytes": 130278
     },
     {
       "path": "VERSION",
-      "sha256": "c316b285289dd38115f681c54ab709226b81d402687946ff8b2b58cea090b935",
+      "sha256": "e50901634cb2d8e69d6e49cea1b0b53d02a932fd21a6cd773dc9bacb0e408c71",
       "size_bytes": 11
     },
     {
@@ -121,7 +121,7 @@
     },
     {
       "path": "handoff.md",
-      "sha256": "b9f7a44896f7c7e0baa06cb990d24715a5df1405b0d9557aa4178b7c5b1252cc",
+      "sha256": "2d26971f315d5b6bfdea64c517649da26972c9ab435c2f4977f6c6bc98eefcf5",
       "size_bytes": 3703
     },
     {
@@ -141,7 +141,7 @@
     },
     {
       "path": "manifest.json",
-      "sha256": "fccbdd04e66edeceb75824b9c2c588a33841ed928d6dc5e56564cc6331fe04b5",
+      "sha256": "a1b3c48b33231bf4306de5cc0261485dc32449725957cbe537383a38e7560925",
       "size_bytes": 1192
     },
     {
@@ -456,8 +456,8 @@
     },
     {
       "path": "references/pipeline/checkers/build_blind_payload.py",
-      "sha256": "ea319cbc5aa4292e45fa3bba4b268c1e0ff8f2294685278d5971373fea03afda",
-      "size_bytes": 24649
+      "sha256": "0b6da10f4098d632502cec4cf2dd4bf26de5c04cb982331bd9afde3e187b3727",
+      "size_bytes": 35984
     },
     {
       "path": "references/pipeline/checkers/build_source_ledger.py",
@@ -651,8 +651,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_persona_frame_break.py",
-      "sha256": "33cbeac99c3e9dc032ff23f1c5361a10e8f7c813cd437635584c05cba680181f",
-      "size_bytes": 17048
+      "sha256": "9de5ba1f99e63876e8c1e985d9e263a1e3a08654948878f9bde3bb0117dbc2cc",
+      "size_bytes": 23703
     },
     {
       "path": "references/pipeline/checkers/check_probe_precondition.py",
@@ -706,8 +706,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_rubric_copies_answer.py",
-      "sha256": "8d2b5772edd01f5200a365ce3a8a91c6449c87600dd5c1216db77af0c45f18f3",
-      "size_bytes": 10209
+      "sha256": "c5e625c80b9ef418c3e88b0e5a464747fb82f033d1419756fc3f58058b5966b9",
+      "size_bytes": 21079
     },
     {
       "path": "references/pipeline/checkers/check_scan_reach.py",
@@ -1046,8 +1046,8 @@
     },
     {
       "path": "scripts/build_blind_payload.py",
-      "sha256": "f606ae35dd0d96092fa52cf5899cb29ffd6dc1d05ebc6a846533342b1a677e7c",
-      "size_bytes": 34931
+      "sha256": "0b6da10f4098d632502cec4cf2dd4bf26de5c04cb982331bd9afde3e187b3727",
+      "size_bytes": 35984
     },
     {
       "path": "scripts/build_manifest.py",
@@ -1256,8 +1256,8 @@
     },
     {
       "path": "scripts/check_persona_frame_break.py",
-      "sha256": "33cbeac99c3e9dc032ff23f1c5361a10e8f7c813cd437635584c05cba680181f",
-      "size_bytes": 17048
+      "sha256": "9de5ba1f99e63876e8c1e985d9e263a1e3a08654948878f9bde3bb0117dbc2cc",
+      "size_bytes": 23703
     },
     {
       "path": "scripts/check_probe_precondition.py",
@@ -1311,8 +1311,8 @@
     },
     {
       "path": "scripts/check_rubric_copies_answer.py",
-      "sha256": "8d2b5772edd01f5200a365ce3a8a91c6449c87600dd5c1216db77af0c45f18f3",
-      "size_bytes": 10209
+      "sha256": "c5e625c80b9ef418c3e88b0e5a464747fb82f033d1419756fc3f58058b5966b9",
+      "size_bytes": 21079
     },
     {
       "path": "scripts/check_scan_reach.py",
@@ -2071,5 +2071,5 @@
     },
     "secret_findings": 0
   },
-  "version": "v0.0.0.149"
+  "version": "v0.0.0.150"
 }

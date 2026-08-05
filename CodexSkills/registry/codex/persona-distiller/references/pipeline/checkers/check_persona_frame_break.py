@@ -180,12 +180,60 @@ def check(answers: dict, rubrics: dict = None, prompts: dict = None) -> dict:
         h = scan_text(ans)
         if h:
             out["产物出戏"][cid] = h
+    # ★★★ v0.0.0.150：**判据侧不再按套组整体豁免。**
+    #   `SOURCING_SUITES` 的豁免对**答案**是对的——问出处的题里谈讹字正是题目要的。
+    #   但把同一条豁免套到**判据**上就错了：判据是**要求**，不是回答。
+    #   Bessemer #132 实测：`hb-fact-preservation-01` 第 ② 条写着
+    #   「照录**扫描件**里的**排印异常**而不改」——
+    #   **要拿这一分，一个 1898 年就不在的人必须开口谈扫描件。**
+    #   而这条要求不止影响那一题：**三份答案（contrast/trajectory/voice）因此长出了
+    #   「扫描件按版面分词，只并空白未改字」这句脚注**，随后被本判据的产物侧记成「出戏」。
+    #   **判据要求的事，不能反过来算产物的账。**
     for cid, ru in sorted((rubrics or {}).items()):
-        if _suite(cid) in SOURCING_SUITES:
-            continue
         h = scan_text(ru)
-        if h:
+        if not h:
+            continue
+        if _suite(cid) in SOURCING_SUITES:
             out["判据要求出戏"][cid] = h
+            out.setdefault("★ 出处套组的判据仍然记", []).append(
+                f"{cid}[{_suite(cid)}]——**答案侧豁免、判据侧不豁免**："
+                "谈出处是答案该做的，但**判据把「照录扫描件」写成得分条件**，"
+                "等于要求人物用资料层的话说话，而那句话会被带到别的题里去。")
+        else:
+            out["判据要求出戏"][cid] = h
+
+    # ★★ 共现归因：产物出戏命中的词，若**同一批判据里也作为要求出现**，
+    #   那这处出戏是**判据招来的**，不该单算产物的账。
+    def _words(hits) -> set:
+        """→ 命中片段里真正出现的资料层词。
+
+        ★ `scan_text` 返回的是 `(种类, 命中的那一段)`——**是上下文片段，不是词**。
+          第一版按 `split("：")[0]` 取词，取到的是整段话，两边永远对不上，
+          归因一条都不触发。**是拿真数据跑了才发现的，不是读代码看出来的。**
+        """
+        got = set()
+        for _kind, seg in hits:
+            for w in CORPUS_WORDS:
+                if w in str(seg):
+                    got.add(w)
+        return got
+
+    demanded = set()
+    for h in out["判据要求出戏"].values():
+        demanded |= _words(h)
+    blamed = {}
+    for cid, h in list(out["产物出戏"].items()):
+        words = _words(h)
+        if words & demanded:
+            blamed[cid] = sorted(words & demanded)
+            del out["产物出戏"][cid]
+    if blamed:
+        out["★★★ 判据招来的产物出戏（不算产物的账）"] = {
+            "题": blamed,
+            "口径": ("这些题的出戏用词，**在判据里是作为得分条件出现的**。"
+                     "改产物没用——**产物是照着判据长的**，下一轮还会长回来。"
+                     "要改的是下一个人物的 rubric 写法。"),
+        }
 
     n_a, n_r = len(out["产物出戏"]), len(out["判据要求出戏"])
     out["计数"] = f"产物 {n_a} 题出戏；判据 {n_r} 题把资料层答案指定为正确"
@@ -204,6 +252,39 @@ def self_test() -> int:
         nonlocal ok
         ok = ok and bool(c)
         print(("  ✓ " if c else "  ✗ ") + m)
+
+    print("\n══ ★★★ 判据侧豁免拆开（v0.0.0.150）══")
+    print("── 真例：出处套组的判据要求「照录扫描件」→ **判据侧必须记** ──")
+    ru = {"hb-fact-preservation-01":
+          "**须做到三件**：① 给出可回查的坐标（章次或印本页码）；"
+          "② 引文逐字，且**照录扫描件里的排印异常而不改**；③ 区分原话与复述。"}
+    an = {"hb-fact-preservation-01": "我当年写下的原话是这样，坐标在第十二章。",
+          "hb-voice-01": "我当年在炉边就是这么答的。（扫描件按版面分词，只并空白未改字。）"}
+    r = check(an, ru, {})
+    chk(f"判据侧记下了：{list(r['判据要求出戏'])}",
+        "hb-fact-preservation-01" in r["判据要求出戏"])
+    chk("并写明「答案侧豁免、判据侧不豁免」", bool(r.get("★ 出处套组的判据仍然记")))
+
+    print("── ★★★ 共现归因：产物那句「扫描件」是判据要来的 → **不算产物的账** ──")
+    blamed = r.get("★★★ 判据招来的产物出戏（不算产物的账）", {}).get("题", {})
+    chk(f"hb-voice-01 归到判据头上：{list(blamed)}", "hb-voice-01" in blamed)
+    chk(f"产物出戏扣除后 = {list(r['产物出戏'])}", not r["产物出戏"])
+
+    print("\n── ★★★ 反向对照①：判据**没**要求，产物自己出戏 → **仍要算产物的账** ──")
+    r2 = check({"hb-voice-01": "我这里连焊接的材料都拿不出来，本库一件都没收。"},
+               {"hb-voice-01": "**须以第一人称回应挑衅**，给出可核的依据。"}, {})
+    chk(f"产物出戏仍在：{list(r2['产物出戏'])}", "hb-voice-01" in r2["产物出戏"])
+    chk("没有被归因洗掉", not r2.get("★★★ 判据招来的产物出戏（不算产物的账）"))
+
+    print("── ★★ 反向对照②：判据里是**禁令**（不许把本库没收录当正确答案）→ 不许记 ──")
+    r3 = check({"hb-voice-01": "我当年在炉边就是这么答的。"},
+               {"hb-voice-01": "★★ **不许**把「本库没收录」这类资料库状态当成正确答案。"}, {})
+    chk(f"判据侧不记：{list(r3['判据要求出戏'])}", not r3["判据要求出戏"])
+
+    print("── ★ 反向对照③：**词不同就不归因**（判据说 OCR，产物说本库，两回事）──")
+    r4 = check({"hb-voice-01": "我这里本库一件都没收。"},
+               {"hb-known-01": "**须照录 OCR 讹字**。"}, {})
+    chk(f"产物出戏仍在：{list(r4['产物出戏'])}", "hb-voice-01" in r4["产物出戏"])
 
     print("── ★★★ 正向：Thomson #129 撞出它的那三句 ──")
     r = check({
@@ -252,9 +333,22 @@ def self_test() -> int:
     chk(f"三条里只报那条真要求：{sorted(r['判据要求出戏'])}",
         sorted(r["判据要求出戏"]) == ["x-plan-01"])
 
-    print("\n── ★ 反向对照④：判据里问出处的套组同样豁免 ──")
+    print("\n── ★★★ 对照④【v0.0.0.150 改判】：出处套组的**判据**不再豁免 ──")
+    #   本条原先断言「判据里问出处的套组同样豁免」，写作 `chk(..., r["通过"])`。
+    #   **那条断言锁的是缺陷**：答案侧豁免是对的（问出处的题里谈讹字正是题目要的），
+    #   但判据是**要求**不是回答。Bessemer #132 实测：
+    #   `hb-fact-preservation-01 ②` 要求「照录扫描件里的排印异常」，
+    #   于是 **contrast / trajectory / voice 三题的答案长出了「扫描件按版面分词」这句脚注**，
+    #   随后被本判据的产物侧记成「出戏」——**判据要求的事，反过来算了产物的账**。
     r = check({}, {"et-fact-preservation-01": "须指出 are 是 arc 的 OCR 讹字并照原样引。"})
-    chk(f"没报：{r['计数']}", r["通过"])
+    chk(f"判据侧记下（不再豁免）：{sorted(r['判据要求出戏'])}",
+        "et-fact-preservation-01" in r["判据要求出戏"])
+    chk("并附「答案侧豁免、判据侧不豁免」的说明", bool(r.get("★ 出处套组的判据仍然记")))
+
+    print("── ★★ 与之配对：**答案**侧的出处套组豁免必须原样保留（不能一起收紧）──")
+    r_ans = check({"et-fact-preservation-01": "那一句的 OCR 把 arc 印成了 are，我照原样引。"},
+                  {}, {})
+    chk(f"答案侧仍豁免：{r_ans['已豁免']}", len(r_ans["已豁免"]) == 1 and not r_ans["产物出戏"])
 
     print("\n── ★★★ 反向对照⑤：**第三人称分析型产物一律不适用**（Livermore #100 的真形状） ──")
     ana = {f"jl-{i:02d}": f"他在这一段里的说理方式是先给判据再给例子。"
