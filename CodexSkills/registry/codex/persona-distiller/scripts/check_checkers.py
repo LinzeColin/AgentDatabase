@@ -37,6 +37,7 @@ RUNBOOK 第十八种：
 缺口计数逐次可见，不会被误当成通过。
 """
 import argparse
+import ast
 import json
 import pathlib
 import subprocess
@@ -166,6 +167,39 @@ FIXTURES = {
 
 
 
+def _code_only(text: str):
+    """→ 只含**真代码**的可搜文本（丢掉注释与 docstring）；解析失败返回 None。
+
+    注释在 AST 里本就不存在；docstring 要显式摘掉（`ast.get_docstring` 认得
+    Module / ClassDef / FunctionDef / AsyncFunctionDef 四种）。
+    **其余字符串常量一律保留**——真调用往往就写成 `run('check_x.py', ...)`。
+    """
+    try:
+        tree = ast.parse(text)
+    except SyntaxError:
+        return None
+    for node in ast.walk(tree):
+        if isinstance(node, (ast.Module, ast.ClassDef, ast.FunctionDef, ast.AsyncFunctionDef)):
+            body = getattr(node, "body", None)
+            if body and isinstance(body[0], ast.Expr) and isinstance(
+                    getattr(body[0], "value", None), ast.Constant) and isinstance(
+                    body[0].value.value, str):
+                node.body = body[1:] or [ast.Pass()]
+    out = []
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Constant) and isinstance(node.value, str):
+            out.append(repr(node.value))
+        elif isinstance(node, ast.Name):
+            out.append(node.id)
+        elif isinstance(node, ast.Attribute):
+            out.append(node.attr)
+        elif isinstance(node, ast.alias):
+            out.append(node.name)
+            if node.asname:
+                out.append(node.asname)
+    return "\n".join(out)
+
+
 def wiring_audit(directory: pathlib.Path) -> dict:
     """★★ **每件判据有没有生产调用方**——v0.0.0.91 新增。
 
@@ -178,8 +212,24 @@ def wiring_audit(directory: pathlib.Path) -> dict:
 
     **只认代码里的调用**：搜 `<名>.py` 与带引号的 `<名>`，
     **排除判据自己、排除 `tests/`、排除 `references/pipeline/checkers/` 镜像**。
-    注释里的提及仍会被算成调用——**这是本审计的已知宽松处**，宁可漏报不误报，
-    真出现时会像上次那样在人工复核里现形。
+
+    ## ★★★ v0.0.0.139：那个「已知宽松处」真的漏了一件，代价是 18 份 holdout
+
+    本函数原来在**整份文件的原文**里搜名字，于是**注释与文档字符串里的提及也算调用**。
+    原注释写着「宁可漏报不误报，真出现时会像上次那样在人工复核里现形」。
+    **它没有现形，是我给下一个人物找语料时随手 `ls` 撞见的。**
+
+    `check_material_split.py` 的两处「调用」实为：
+      · `scripts/check_contract_drift.py` 的一行注释
+      · `scripts/check_holdout_overlap.py` 的文档字符串
+    两处都在 `scripts/` 下，于是本审计报「无调用方 0 件」。
+    真实后果：**45 份 holdout 里 18 份从未被隔离，6 个工作区，其中一人产物已做完。**
+
+    **改法：用 AST 取「真代码」**——丢掉注释（AST 里本就没有）与**文档字符串**，
+    只在剩下的字符串常量与标识符里搜。
+    ★ 只丢 docstring，**不丢别的字符串常量**——`run('check_x.py', ...)` 那种
+      正是靠字符串常量调用的，丢了会把真调用误判成没有。
+    ★★ 解析失败时**退回原文搜索并单独列出**，不许静默当成通过。
     """
     root = directory.parent
     names = sorted(f.stem for f in directory.glob("check_*.py"))
@@ -192,13 +242,22 @@ def wiring_audit(directory: pathlib.Path) -> dict:
             sources[f] = f.read_text(encoding="utf-8", errors="ignore")
         except OSError:
             continue
+    searchable, unparsed = {}, []
+    for f, txt in sources.items():
+        code = _code_only(txt)
+        if code is None:
+            unparsed.append(f.name)
+            searchable[f] = txt              # 退回原文，但下面会单列出来
+        else:
+            searchable[f] = code
     dead = []
     for n in names:
-        callers = [f for f, txt in sources.items()
+        callers = [f for f, txt in searchable.items()
                    if f.stem != n and (f"{n}.py" in txt or f"'{n}'" in txt or f'"{n}"' in txt)]
         if not callers:
             dead.append(n)
-    return {"判据件数": len(names), "**无生产调用方的**": len(dead), "名单": dead}
+    return {"判据件数": len(names), "**无生产调用方的**": len(dead), "名单": dead,
+            "**解析失败退回原文搜索的**": sorted(unparsed)}
 
 
 def selftest_touches_disk(directory: pathlib.Path) -> dict:
