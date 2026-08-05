@@ -23,6 +23,7 @@ FAILED test_package_install_migrate（三条）
 2. pytest                     ← 依赖 1
 3. check_contract_drift.py    ← 版本三轴单一真源
 4. check_verification_counts.py ← VERIFICATION.md 里的可数项 vs 实况
+5. check_verdict_attribution.py --docs ← 技能层文档里判决书归属有没有写反
 ```
 
 ★ **`bump_version.py` 不在这里面**——它要先跑，且跑完还要人去写 CHANGELOG 与
@@ -47,6 +48,11 @@ STEPS = [
     ("全量测试", ["-m", "pytest", "-q"], "依赖上一步；顺序反了会得到一批假红"),
     ("合同漂移", ["check_contract_drift.py"], "版本三轴各自单一真源"),
     ("VERIFICATION 可数项", ["check_verification_counts.py", "."], "文中的数 vs 仓库实况"),
+    # ★ 判决书的归属抄进技能层文档之后，工作区那道判据就看不见它了。
+    #   实测：Bessemer 那条「候选说手上没有那本自传的文本」**爬进了 CHANGELOG**，
+    #   而 `quality_check` 只扫工作区内部，够不着这里。
+    ("判决书归属（技能层文档）", ["check_verdict_attribution.py", "--docs"],
+     "台账/CHANGELOG/VERIFICATION 里「候选说了 X」是否真出自候选"),
 ]
 
 
@@ -64,7 +70,7 @@ def run_all(root: pathlib.Path, verbose: bool = False) -> int:
             print(f"\n✗ **第 {i} 步「{title}」未过（退出码 {r.returncode}），就此停下。**")
             print("  ★ 不继续往下跑——后面几步在这一步失败时给出的信息是误导性的。")
             return r.returncode
-    print("\n✓ 四步全过")
+    print(f"\n✓ {len(STEPS)} 步全过")
     return 0
 
 

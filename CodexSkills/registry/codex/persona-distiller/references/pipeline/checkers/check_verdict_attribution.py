@@ -55,6 +55,7 @@ import pathlib
 import re
 import sys
 
+HERE = pathlib.Path(__file__).resolve().parent
 MIN_CJK = 5          # 引文里至少这么多汉字才拿去比对
 LOOKBACK = 120       # 往前找归属词的窗口
 
@@ -102,6 +103,8 @@ def attribution_before(text: str, idx: int) -> str:
 # 与 `_negated()` 同一个形状的坑：判据若不认「反了」两个字，
 # 就会把改得最认真的那一份报成错得最多的（见 [[rubric-mandates-frame-break]]）。
 FIXED = ("反了", "更正", "实际出自", "原文此处写作", "作废", "已改为", "写的是")
+# ★ 只在**表格行**里当豁免用（见 `_is_correction`）——单独出现在正文里不算。
+TRUTH_CELL = ("在基线", "在候选", "没标的是", "实际", "那句只", "反了")
 
 
 def _is_correction(text: str, idx: int) -> bool:
@@ -117,6 +120,15 @@ def _is_correction(text: str, idx: int) -> bool:
     line = text[lo:hi if hi > 0 else len(text)]
     if any(k in line for k in FIXED):
         return True
+    # ★★ 「错的说法 | 实际」这种两列更正表：左格原样抄错的说法，右格写真相。
+    #   左格里那句话前面自然写着「候选」，而它其实出自基线——**那正是这张表要讲的事**。
+    #   所以：**是表格行**、且**本行另有格子在说真相**，才豁免。
+    #   两个条件都要，只认关键词会把正文里随口提到「基线」的真错也放掉。
+    if line.lstrip().startswith("|"):
+        cells = [c.strip() for c in line.strip().strip("|").split("|")]
+        if len(cells) >= 2 and any(
+                k in c for c in cells for k in TRUTH_CELL):
+            return True
     if not line[:1].isspace():          # 不是续行 → 到此为止
         return False
     before = text[:lo].split("\n")
@@ -176,6 +188,45 @@ def run(ws: pathlib.Path) -> int:
             print(f"  ✗ {rep.relative_to(ws)}:{line}　写的是「{said}」，"
                   f"**这句话实际出自{truth}**：{q}…")
         total += len(bad)
+    return total
+
+
+# ★★★ 技能层文档也会抄同一批结论——判决书改对了，CHANGELOG 里那份可能还是错的。
+#   实测：Bessemer 那条「候选说手上没有那本自传的文本」**确实爬进了 CHANGELOG**。
+#   所以本件必须能跨工作区扫技能层文档，而不是只扫工作区内部。
+DOC_GLOBS = ("references/ledgers/*.md", "CHANGELOG.md", "VERIFICATION.md",
+             "references/pipeline/*.md", "handoff.md", "README.md")
+
+
+def all_answers(corpora: pathlib.Path):
+    """→ (候选侧, 基线侧) 全人物汇总。跨人物取真值：
+    一句话只要在某人的基线里、且不在任何人的候选里，它就是基线说的。"""
+    cand, base = {}, {}
+    for ws in sorted(corpora.glob("*/workspaces/*")):
+        for fn, d in (("candidate_answers.json", cand), ("baseline_answers.json", base)):
+            f = ws / "evals" / fn
+            if f.is_file():
+                try:
+                    d.update({f"{ws.name}:{k}": v
+                              for k, v in json.loads(f.read_text(encoding="utf-8")).items()})
+                except Exception:                                   # noqa: BLE001
+                    pass
+    return cand, base
+
+
+def run_docs(skill_root: pathlib.Path, corpora: pathlib.Path) -> int:
+    cand, base = all_answers(corpora)
+    if not cand or not base:
+        print("  两侧答案取不到——**未核，不是通过**")
+        return 0
+    print(f"  真值：候选侧 {len(cand)} 条、基线侧 {len(base)} 条")
+    total = 0
+    for g in DOC_GLOBS:
+        for d in sorted(skill_root.glob(g)):
+            for line, said, truth, q in check_report(d, cand, base):
+                print(f"  ✗ {d.relative_to(skill_root)}:{line}　写的是「{said}」，"
+                      f"**这句话实际出自{truth}**：{q}…")
+                total += 1
     return total
 
 
@@ -240,6 +291,18 @@ def self_test() -> int:
         "2. 候选还交出了「炉子不听道理，只听条件。」", cand, base)
     chk(f"仍报第二段：{bad}", len(bad) == 1 and "炉子" in bad[0][3])
 
+    print("\n── ★★★ 反向对照⑥：两列更正表（左格抄错的说法、右格写真相）不许报 ──")
+    bad = check_report_text(
+        "| 判决书写的 | 实际 |\n|---|---|\n"
+        "| 候选说「我早已作古」 | 那句只在基线 |", cand, base)
+    chk(f"不报：{bad}", not bad)
+
+    print("\n── ★★★ 但**普通表格**里的真错仍须报（否则一进表格就免检）──")
+    bad = check_report_text(
+        "| 题号 | 讲评 |\n|---|---|\n"
+        "| q-03 | 候选交出了「炉子不听道理，只听条件。」 |", cand, base)
+    chk(f"仍报：{bad}", len(bad) == 1 and "炉子" in bad[0][3])
+
     print("\n── ★★ 坑：反引号必须按对数取，不许跨对匹配 ──")
     spans = [q for q, _ in quoted_spans("前 `短` 中间很长的一段字 `炉子不听道理，只听条件。` 后")]
     chk(f"取到 {spans}", "短" in spans and any("炉子不听道理" in s for s in spans))
@@ -265,9 +328,19 @@ def main() -> int:
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("workspace", nargs="?", type=pathlib.Path)
     ap.add_argument("--self-test", action="store_true")
+    ap.add_argument("--docs", action="store_true",
+                    help="改扫技能层文档（台账/CHANGELOG/VERIFICATION/RUNBOOK），"
+                         "真值取全部工作区两侧答案")
+    ap.add_argument("--corpora", type=pathlib.Path,
+                    default=HERE.parent.parent.parent.parent
+                    / "skill_log_evals/persona-distiller/_corpora")
     a = ap.parse_args()
     if a.self_test:
         return self_test()
+    if a.docs:
+        n = run_docs(HERE.parent, a.corpora)
+        print(f"\n{'✗' if n else '✓'} 技能层文档归属错 {n} 处")
+        return 1 if n else 0
     if not a.workspace or not a.workspace.is_dir():
         print("✗ 需要一个工作区目录——**未核，不是通过**")
         return 3

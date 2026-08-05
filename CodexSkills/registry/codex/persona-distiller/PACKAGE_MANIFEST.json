@@ -56,7 +56,7 @@
     },
     {
       "path": "VERIFICATION.md",
-      "sha256": "d4e80034893b3b1ad0bbc029a53eb6fd79b512d8465fa2e140d999ffadad0469",
+      "sha256": "5b82433c64c0731cf73772dd9b8e935d4f2559b107d70e4ae3a2539b4bc684d0",
       "size_bytes": 126889
     },
     {
@@ -786,8 +786,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_verdict_attribution.py",
-      "sha256": "db07a92dbf239049737a2f8f8456711f24c0267329e31a317534d32f8d22d7b0",
-      "size_bytes": 12606
+      "sha256": "7cf8f0429c5433a0fc4b23d23935f17de9eae3e79b43c400f1376f51e27f75d1",
+      "size_bytes": 16613
     },
     {
       "path": "references/pipeline/checkers/check_verification_counts.py",
@@ -968,6 +968,21 @@
       "path": "registries/runtime-scenarios.json",
       "sha256": "91e81a1198e36eeea6c25f0fd55a9f1cac2844efebe1536dd424fd8b7a09e1de",
       "size_bytes": 2364
+    },
+    {
+      "path": "round2/_rubrics_for_frame_check.json",
+      "sha256": "ff0a22026bd2e3ea4cb86eb92db506f294358e32659901d77fd02bb522d7e2cb",
+      "size_bytes": 8667
+    },
+    {
+      "path": "round2/blind_blind_key.json",
+      "sha256": "003c72419353e1f26711b9f744ee8fabd9e9cd6c4e200ac25bf59404869a664a",
+      "size_bytes": 1418
+    },
+    {
+      "path": "round2/blind_blind_payload.json",
+      "sha256": "241f94476b3ae4e515548be22acaee435310a63f7dc48b8cb7dd53462e1016db",
+      "size_bytes": 39423
     },
     {
       "path": "schemas/capability.schema.json",
@@ -1391,8 +1406,8 @@
     },
     {
       "path": "scripts/check_verdict_attribution.py",
-      "sha256": "db07a92dbf239049737a2f8f8456711f24c0267329e31a317534d32f8d22d7b0",
-      "size_bytes": 12606
+      "sha256": "7cf8f0429c5433a0fc4b23d23935f17de9eae3e79b43c400f1376f51e27f75d1",
+      "size_bytes": 16613
     },
     {
       "path": "scripts/check_verification_counts.py",
@@ -1426,8 +1441,8 @@
     },
     {
       "path": "scripts/finalize_release.py",
-      "sha256": "f52fc848985459b7016d50c0cbe93ed0864b30c4227afeeab1bb665bf3c41b3f",
-      "size_bytes": 4739
+      "sha256": "918351c21d8b04da16dafd997c6327a6e257b59325ffa8f9425fea64f5cea532",
+      "size_bytes": 5294
     },
     {
       "path": "scripts/identity.py",
