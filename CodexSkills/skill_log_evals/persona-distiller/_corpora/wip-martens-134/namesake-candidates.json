@@ -1,0 +1,259 @@
+[
+  {
+    "name": "Adolf Karl Gottfried Martens",
+    "is_target": true,
+    "lifespan": "1850-03-06 Bakendorf bei Hagenow (Mecklenburg-Schwerin) – 1914-07-24 Groß-Lichterfelde (Berlin)",
+    "field": "材料试验学／金相学（Werkstoffkunde, Materialprüfung, Metallographie）",
+    "why_confusable": "本人。署名在印本上几乎总是缩写 `A. Martens` 或 `Von A. Martens` —— **德文技术刊物的署名习惯是缩写名 + 全姓**，这正是与 Alfred / Arthur / 另几个 A-Martens 撞车的形态。",
+    "distinguishing_field": "机构名：Mechanisch-Technische Versuchsanstalt (Charlottenburg, 1884-1903) → Königliches Materialprüfungsamt (Groß-Lichterfelde/Dahlem, 1904-1914)；著作名 Handbuch der Materialienkunde für den Maschinenbau；活动年代 1878-1914（首篇 Z. VDI 22, 1878）。",
+    "source_url": "https://www.deutsche-biographie.de/sfz58572.html",
+    "corroborating_urls": [
+      "https://de.wikipedia.org/wiki/Adolf_Martens",
+      "https://www.amf.bam.de/de/adolf_martens/index.htm",
+      "https://www.encyclopedia.com/science/dictionaries-thesauruses-pictures-and-press-releases/martens-adolf"
+    ],
+    "notes": "NDB（Max Pfender 撰，NDB 16, 1990）给全名 Adolf Karl Gottfried Martens、父 Friedrich（Gutspächter）、1881 娶 Henriette Liepe。★ 父名 Friedrich Martens —— 见下方 `Friedrich Martens (父)` 一条，它是**排除名单的禁区**。"
+  },
+
+  {
+    "name": "Friedrich Franz Martens",
+    "is_target": false,
+    "lifespan": "1873-09-08 Christinenhof – 1939",
+    "field": "德国物理学家（高频技术、光度学；Martens 偏振光度计 / Martens photometer）",
+    "why_confusable": "★★★ 本组最危险的一个。①同为德国人、②同在**柏林**（Handelshochschule Berlin 物理学教授）、③同样搞**测量仪器**、④活动年代与目标末期重叠（1896-1939，目标卒于 1914）、⑤同样出身**梅克伦堡**（Christinenhof 在 Waren 一带，目标出身 Bakendorf bei Hagenow）。署名形态 `F. Martens` / `F. F. Martens`。仪器史文献里 `Martens 光度计` 与 `Martens 硬度`（目标）**都简称 Martens**。",
+    "distinguishing_field": "① 机构 `Handelshochschule Berlin`（≠ Technische Hochschule Charlottenburg / Materialprüfungsamt）；② 出版商 **Vieweg** 的三本书 Physikalische Grundlagen der Elektrotechnik (1913)、Hochfrequenztechnik (1925)、Physikalisch-technische Elektrizitätslehre (1927)；③ 1896 年柏林大学博士论文 Die magnetische Induction horizontaler, im Erdfelde rotierender Scheiben；④ **1915 年及以后的任何 Martens 物理著作一律不是目标**（目标 1914 卒）。",
+    "source_url": "https://de.wikipedia.org/wiki/Friedrich_Franz_Martens"
+  },
+  {
+    "name": "Eduard von Martens（Karl/Carl Eduard von Martens）",
+    "is_target": false,
+    "lifespan": "1831-04-18 Stuttgart – 1904-08-14 Berlin",
+    "field": "德国动物学家（贝类学 Malakologie），柏林大学动物博物馆 (1855-)、Museum für Naturkunde (1859-)",
+    "why_confusable": "★★ 与目标**同城（柏林）、同代（1855-1904 全程重叠）、同为普鲁士官办科研机构在职者**，且是 19 世纪德文科学连续出版物里**产量最大的 Martens**（Archiv für Naturgeschichte、Sitzungsberichte der Gesellschaft naturforschender Freunde zu Berlin 等）。任何按姓氏在 archive.org / BHL 全文检索 `Martens` 的动作，命中里绝大多数是他。署名 `E. von Martens` / `Ed. von Martens` / `E. v. Martens`。",
+    "distinguishing_field": "① 贵族前缀 **von**（目标不是 von）；② 学科词 Mollusca / Conchylien / Fauna / Zoologische；③ 刊物 Archiv für Naturgeschichte、Nachrichtsblatt der Deutschen Malakozoologischen Gesellschaft；④ 名 Eduard。★ **但不许用裸 `von Martens` 做排除**——理由见 namesake-criteria.json 的禁区条。",
+    "source_url": "https://en.wikipedia.org/wiki/Eduard_von_Martens"
+  },
+  {
+    "name": "Georg Matthias von Martens",
+    "is_target": false,
+    "lifespan": "1788–1872",
+    "field": "德国法学家兼植物学家／藻类学家（Stuttgart，司法与内政部翻译官）",
+    "why_confusable": "Eduard von Martens 之父；植物学命名缩写 `G.Mart.`。19 世纪德文自然科学文献里的另一个高频 `von Martens`。",
+    "distinguishing_field": "植物学命名缩写 G.Mart.；著作 Die Preussische Expedition nach Ost-Asien（藻类部分）；卒于 1872，早于目标首篇论文（1878）六年。",
+    "source_url": "https://en.wikipedia.org/wiki/Georg_Matthias_von_Martens"
+  },
+  {
+    "name": "Georg Friedrich von Martens",
+    "is_target": false,
+    "lifespan": "1756–1821",
+    "field": "德国法学家、外交官、国际法著述家（Recueil des traités）",
+    "why_confusable": "★★ **数字化噪声之王**。他的 *Recueil des Traités* 及其续编（由 Charles de Martens、K. von Martens 等续编）在 Google Books / archive.org 上有上百卷 PD 扫描，全部以 `Martens` 为主著者。按裸姓检索 `Martens` + 19 世纪，前若干页几乎全是这套书。",
+    "distinguishing_field": "法语书名 Recueil de(s) Traités / Nouveau Recueil；出版地 Göttingen；署名 `G. F. de Martens` / `G. F. von Martens`；年代 1780s-1820s（远早于目标）。",
+    "source_url": "https://de.wikipedia.org/wiki/Martens_(Familienname)"
+  },
+  {
+    "name": "Friedrich Fromhold Martens（Фёдор Фёдорович Мартенс）",
+    "is_target": false,
+    "lifespan": "1845–1909",
+    "field": "俄国外交官、国际法学家（Martens Clause / 马尔顿斯条款）",
+    "why_confusable": "★ 与目标生卒年高度重叠（1845-1909 vs 1850-1914），德语文献里也写作 `F. Martens` / `F. von Martens`；海牙和会时期德文报刊提到 `Martens` 常指他。",
+    "distinguishing_field": "领域词 Völkerrecht / Haager Konferenz / Schiedsgericht；任职 St. Petersburg 大学；署名 `F. de Martens`。",
+    "source_url": "https://en.wikipedia.org/wiki/Friedrich_Martens"
+  },
+  {
+    "name": "Friderich Martens（Friedrich Martens, Hamburg）",
+    "is_target": false,
+    "lifespan": "1635–1699",
+    "field": "德国外科医生／博物学家；1671 年斯匹次卑尔根航行记述者",
+    "why_confusable": "★ 他的 *Spitzbergische oder Groenlandische Reise Beschreibung*（1675）及其英译在 archive.org / Google Books 上高度数字化且早已 PD，是全文检索 `Martens` 的又一大噪声源。",
+    "distinguishing_field": "17 世纪年代；书名含 Spitzbergische / Greenland / Reise Beschreibung；拼写 `Friderich`。",
+    "source_url": "https://en.wikipedia.org/wiki/Friderich_Martens"
+  },
+  {
+    "name": "Martin Martens",
+    "is_target": false,
+    "lifespan": "1797–1863",
+    "field": "比利时植物学家兼**化学家**（Université catholique de Louvain 化学教授）",
+    "why_confusable": "★ 唯一一个与目标**学科相邻（化学/材料分析）**的早期 Martens。19 世纪化学文献里的 `M. Martens`。",
+    "distinguishing_field": "国别比利时、机构 Louvain；卒于 1863，早于目标首篇论文 15 年；植物命名缩写 `Mart.`（与 Carl von Martius 的 `Mart.` 另有混淆，但与本项目无关）。",
+    "source_url": "https://en.wikipedia.org/wiki/Martin_Martens"
+  },
+  {
+    "name": "Franz Heinrich Martens",
+    "is_target": false,
+    "lifespan": "1778–1805",
+    "field": "德国医学家、大学教师",
+    "why_confusable": "德语医学/自然科学文献里的早期 `F. H. Martens`；年代远早，主要是检索噪声。",
+    "distinguishing_field": "卒年 1805；医学著作；姓名三段式 Franz Heinrich。",
+    "source_url": "https://de.wikipedia.org/wiki/Martens_(Familienname)"
+  },
+
+  {
+    "name": "Arthur Martens",
+    "is_target": false,
+    "lifespan": "1897-03-28 Gilten – 1937-11-16 Steene bei Ostende",
+    "field": "德国**机械工程师**（Diplom-Ingenieur, TH Hannover）、滑翔飞行先驱（Vampyr, 1922 首个滑翔一小时世界纪录）",
+    "why_confusable": "★★★ **署名形态完全相同**：`A. Martens`，且**同为德国机械工程师**、同在德文工程刊物发表。目标卒于 1914，Arthur 的著述在 1919 年以后 —— 这条时间线是唯一干净的切割。若只按 `A. Martens` 抓源而不看年份，会把 1920 年代的滑翔机文献收进来。",
+    "distinguishing_field": "① **年份 ≥1919**（他 1919 年才入学 TH Hannover）；② 关键词 Segelflug / Wasserkuppe / Vampyr / Rhön / Hannoversche Waggonfabrik (HAWA)；③ 机构 TH Hannover（≠ TH Charlottenburg）。",
+    "source_url": "https://de.wikipedia.org/wiki/Arthur_Martens"
+  },
+  {
+    "name": "Alfred Martens",
+    "is_target": false,
+    "lifespan": "1881-07-02 Borken – 1920-08-27 Hooksiel",
+    "field": "德国建筑师",
+    "why_confusable": "★★ 署名 `A. Martens`，**生卒年与目标晚期重叠（1881-1920）**，且建筑师会在建筑与营造类刊物上写**建筑材料**的文章 —— 与目标的建材试验（水泥、砖、木材）主题相邻。这正是 Sorby #133 栽过的形状（建筑师 T. C. Sorby vs 岩相学家 H. C. Sorby）。",
+    "distinguishing_field": "① 刊物性质：建筑与营造类行业刊物（Deutsche Bauzeitung 等）vs 目标的机械/冶金/材料试验刊物；② 关键词 Architekt / Entwurf / Bauten；③ 无 Materialprüfungsamt 关联。",
+    "source_url": "https://de.wikipedia.org/wiki/Alfred_Martens"
+  },
+  {
+    "name": "Henning John Gustav Martens（称 John Martens）",
+    "is_target": false,
+    "lifespan": "1875-05-04 Libau (Kurland) – 1936-06-04 Demmin",
+    "field": "德国建筑师兼**建筑陶瓷家（Baukeramiker）**",
+    "why_confusable": "★★ **建筑陶瓷 = 建筑材料**，与目标 1895 年并入的建材试验站（Prüfstation für Baumaterialien）主题直接相邻；同代（1875-1936）。署名 `J. Martens`。",
+    "distinguishing_field": "关键词 Baukeramik / Terrakotta / Architekt；活动地 Pommern/Demmin；生年 1875（目标 1878 年已发表首篇论文时他 3 岁）。",
+    "source_url": "https://de.wikipedia.org/wiki/John_Martens"
+  },
+  {
+    "name": "Rudolf Martens（Schiffbauer）",
+    "is_target": false,
+    "lifespan": "1868–1911",
+    "field": "德国 Marinebaurat（海军造船官／造船工程师）",
+    "why_confusable": "★★★ **专业上最贴的一个**：同代（1868-1911，与目标 1884-1911 全程重叠）、同为普鲁士/帝国官办技术机构的工程师、且造船官的本业**就包括船用钢材的验收与试验** —— 与目标的钢轨/船板试验题材直接同域。署名 `R. Martens`。",
+    "distinguishing_field": "头衔 **Marinebaurat**；领域词 Schiffbau / Kaiserliche Werft / Marine；刊物 Jahrbuch der Schiffbautechnischen Gesellschaft、Schiffbau。",
+    "source_url": "https://de.wikipedia.org/wiki/Martens_(Familienname)",
+    "evidence_quality": "★ 只有姓氏列表条目为据，**个人条目是红链（de.wikipedia 无该条）**，生卒与头衔未得第二源印证。按「拿不到就说拿不到」处理：本条以**存在风险**入册，不作为已证实事实引用。"
+  },
+  {
+    "name": "Gustav Heinrich Martens",
+    "is_target": false,
+    "lifespan": "1842–1912",
+    "field": "德国鸟类学家（Vogelkundler）",
+    "why_confusable": "同代德国自然科学工作者，署名 `G. Martens`；与 Eduard von Martens 一起构成 19 世纪德文博物学刊物里的 Martens 噪声。",
+    "distinguishing_field": "领域词 Vögel / Ornithologie；无工程/材料关联。",
+    "source_url": "https://de.wikipedia.org/wiki/Martens_(Familienname)",
+    "evidence_quality": "★ 同上，姓氏列表红链条目，未得第二源印证。"
+  },
+  {
+    "name": "Max Martens",
+    "is_target": false,
+    "lifespan": "1869–1932",
+    "field": "德国外科医生（Chirurg）",
+    "why_confusable": "同代德国科学工作者，署名 `M. Martens`。★★ 另有一个**纯字面**风险：德文技术表格里 `Max.` 是「最大值」的缩写，`max. Martens-Zahl` 一类字样在去掉句点后会与人名 `Max Martens` 撞形。",
+    "distinguishing_field": "医学刊物；关键词 Chirurgie / Klinik。",
+    "source_url": "https://de.wikipedia.org/wiki/Martens_(Familienname)",
+    "evidence_quality": "★ 姓氏列表红链条目，未得第二源印证。"
+  },
+  {
+    "name": "Gustav Ludolf Martens",
+    "is_target": false,
+    "lifespan": "1818–1872（en.wikipedia 作 1818–1882，两源不一致，未裁定）",
+    "field": "德国建筑师，基尔市建筑总监（Stadtbaumeister Kiel）",
+    "why_confusable": "又一个建筑类 Martens，署名 `G. L. Martens`；建筑材料题材相邻。",
+    "distinguishing_field": "活动地 Kiel；卒年 1872/1882，早于或仅微重叠于目标的发表期。",
+    "source_url": "https://de.wikipedia.org/wiki/Martens_(Familienname)",
+    "evidence_quality": "★ 卒年两源冲突（de 1872 / en 1882），**未裁定**，两值都不作为事实引用。"
+  },
+  {
+    "name": "Christian Martens / Detlev Martens",
+    "is_target": false,
+    "lifespan": "1845–1917 / 1847–1905",
+    "field": "德国医生（Detlev 兼政治家）",
+    "why_confusable": "与目标生卒年几乎完全重叠的同代德国 `C. Martens` / `D. Martens`；医学与卫生工程刊物里出现。",
+    "distinguishing_field": "医学刊物；Nordschleswig / 政治任职。",
+    "source_url": "https://de.wikipedia.org/wiki/Martens_(Familienname)"
+  },
+  {
+    "name": "Ludwig Christian Karl Alexander Martens（Ludwig Martens）",
+    "is_target": false,
+    "lifespan": "1875–1948",
+    "field": "苏俄革命者、工程师、苏联驻美贸易代表",
+    "why_confusable": "★ 受过工程训练、德语环境出身、署名 `L. Martens`；1920 年代苏联技术文献里出现。年代主要在目标身后。",
+    "distinguishing_field": "年代 ≥1916；政治/贸易语境；俄语材料。",
+    "source_url": "https://de.wikipedia.org/wiki/Martens_(Familienname)"
+  },
+  {
+    "name": "Conrad Martens",
+    "is_target": false,
+    "lifespan": "1801–1878",
+    "field": "英国—澳大利亚风景画家（小猎犬号 HMS Beagle 随船画家）",
+    "why_confusable": "英语世界最有名的 Martens；英文检索 `Martens` 的头部噪声。与目标毫无学科交集，但会挤占检索名额。",
+    "distinguishing_field": "Beagle / Sydney / watercolour；无德文技术著作。",
+    "source_url": "https://en.wikipedia.org/wiki/Conrad_Martens"
+  },
+  {
+    "name": "Frédéric Martens",
+    "is_target": false,
+    "lifespan": "1806–1885",
+    "field": "德裔法国摄影家、版画家、发明家（全景相机）",
+    "why_confusable": "★ 也是「发明家/仪器」标签，且与 F. F. Martens（光学仪器）叠加，构成「Martens + 光学仪器」的三重歧义。",
+    "distinguishing_field": "巴黎；摄影/全景相机专利；法语材料。",
+    "source_url": "https://en.wikipedia.org/wiki/Fr%C3%A9d%C3%A9ric_Martens"
+  },
+  {
+    "name": "Klaus Märtens（Dr. Martens 鞋）",
+    "is_target": false,
+    "lifespan": "1917–2002（本项目未独立核实生卒）",
+    "field": "德国军医，气垫鞋底发明人；商标 Dr. Martens",
+    "why_confusable": "★★★ **检索层面的头号污染源**：任何搜索引擎/全文库里查 `Dr. Martens` 或 `Martens` 都会被鞋类内容淹没。姓氏原拼 **Märtens**（带变音），商标写作 Martens。",
+    "distinguishing_field": "商标语境（boots / footwear / AirWair）；★ **注意**：`Dr. Martens` 这个字面**绝不可放进排除名单**——目标 1905 年获 TH Dresden 荣誉博士，德文文献称他 `Dr. Martens` / `Dr.-Ing. Martens` 是常态。详见 namesake-criteria.json 的禁区条。",
+    "source_url": "https://de.wikipedia.org/wiki/Martens_(Familienname)"
+  },
+  {
+    "name": "Friedrich Martens（目标之父）",
+    "is_target": false,
+    "lifespan": "生卒未查得（NDB 记为 Gutspächter，租佃庄园主）",
+    "field": "梅克伦堡租佃庄园主，非著述者",
+    "why_confusable": "★★★ **排除名单的禁区，不是排除对象**。他没有著作，不会产生错误的一手材料；但**每一篇关于目标的传记都会写「Sohn des Gutspächters Friedrich Martens」**。若把裸字面 `Friedrich Martens` 放进排除名单，凡带家世的传记材料都会被判成「他人」——这正是 Sorby #133 里 `IT. C. Sorby` 页眉把目标本人排掉的同一形状，**而少掉的材料不会报错**。",
+    "distinguishing_field": "不适用——他不是候选作者，只是禁止入排除名单的字面。",
+    "source_url": "https://www.deutsche-biographie.de/sfz58572.html"
+  },
+
+  {
+    "name": "Emil Heyn（Friedrich Emil Heyn）",
+    "is_target": false,
+    "lifespan": "1867-07-05 Annaberg – 1922-03-01 Berlin",
+    "field": "冶金工程师、金相学家；Königliches Materialprüfungsamt 金属部门负责人",
+    "why_confusable": "★★★ **不是同名，是同机构同题材的归属陷阱**（本项目最贵的一类错）。① 他与目标**合著** Handbuch der Materialienkunde 第 2 卷（1912）；② 他为目标写讣文（Stahl und Eisen 34 (1914) 1393-1395）——那是**关于目标的二手件**，署名是 Heyn；③ *Mitteilungen aus dem Königlichen Materialprüfungsamt* 是**机构连续出版物**，作者是全所各人，**不是每篇都是 Martens 写的**。「刊名里有 Materialprüfungsamt」≠「Martens 著」。",
+    "distinguishing_field": "逐篇看**印本署名行**，不看刊名。合著件按合著登记，不记为目标独著（参见 check_sole_authorship_overreach）。",
+    "source_url": "https://de.wikipedia.org/wiki/Emil_Heyn"
+  },
+  {
+    "name": "Johann Bauschinger",
+    "is_target": false,
+    "lifespan": "1834-06-11 Nürnberg – 1893-11-25 München",
+    "field": "德国材料科学家；TH München 机械技术实验室（1870 起，德国最早的材料试验室）主任",
+    "why_confusable": "★★ 同期德国材料试验界的另一位奠基人。两人共同推动统一试验方法的国际会议（1884 München、1886 Dresden、1893 Wien），会议录里**两人的报告并排**，容易整卷归到一人名下。目标与 H. Sollner 合编的 1893 维也纳会议录，正是发表在 Bauschinger 的《Mitteilungen aus dem Mechanisch-technischen Laboratorium der k. Technischen Hochschule in München》第 23 号（1895）——**刊物是慕尼黑的，作者是柏林的**。",
+    "distinguishing_field": "姓氏不同；机构 TH München；刊名 Mitteilungen aus dem Mechanisch-technischen Laboratorium ... München（★ 与目标柏林的 Mitteilungen aus den Königlichen technischen Versuchsanstalten 刊名高度近似，**必须连出版地一起认**）。",
+    "source_url": "https://de.wikipedia.org/wiki/Johann_Bauschinger"
+  },
+  {
+    "name": "Carl von Bach（Julius Carl Bach）",
+    "is_target": false,
+    "lifespan": "1847-03-08 Stollberg – 1931-10-10 Stuttgart",
+    "field": "德国机械工程师，Stuttgart 材料试验机构负责人",
+    "why_confusable": "同期德国三大材料试验中心（柏林-Martens／慕尼黑-Bauschinger／斯图加特-Bach）之一的主持人，三人的报告常同卷出现。",
+    "distinguishing_field": "姓氏不同；机构 TH Stuttgart。",
+    "source_url": "https://de.wikipedia.org/wiki/Carl_von_Bach"
+  },
+  {
+    "name": "Floris Osmond",
+    "is_target": false,
+    "lifespan": "1849-03-10 Paris – 1912-06-18 Saint-Leu",
+    "field": "法国冶金学家、金相学奠基人之一",
+    "why_confusable": "★ **是他把马氏体命名为 martensite 以纪念 A. Martens** —— 因此凡讲马氏体来源的文献里 Osmond 与 Martens 必然并列，容易把 Osmond 的方法学论述记成 Martens 的。目标本人也写过评介 Osmond 方法的文章（Stahl und Eisen 15 (1895) 954-957），**那是 Martens 写 Osmond**，作者是 Martens、题材是 Osmond。",
+    "distinguishing_field": "姓氏不同；法语原文；机构 Le Creusot。",
+    "source_url": "https://de.wikipedia.org/wiki/Floris_Osmond"
+  },
+  {
+    "name": "Moritz Rudeloff",
+    "is_target": false,
+    "lifespan": "未核实（de.wikipedia 无条目）",
+    "field": "Königliches Materialprüfungsamt 研究人员（本项目未独立核实）",
+    "why_confusable": "★ 与 Emil Heyn 同类：MPA 机构刊物的共同作者群之一。**列在此处只为提醒逐篇看署名**，其生平本项目未核实。",
+    "distinguishing_field": "不适用——未核实，按 unknown 处置。",
+    "source_url": "https://de.wikipedia.org/wiki/Martens_(Familienname)",
+    "evidence_quality": "★★ **未核实**。de.wikipedia 查无此条；本条仅为「MPA 机构刊物作者非一人」这一风险的占位提醒，不作为事实引用。"
+  }
+]
