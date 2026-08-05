@@ -7,7 +7,7 @@
 
 ## 一、结论一句话
 
-**26 份来源、一手 25 份（0.9615）、6 条研究道全覆盖，standard 门（≥24 份 / ≥0.50 / 6 道）三项全过；
+**27 份来源、一手 26 份（0.9630）、6 条研究道全覆盖，standard 门（≥24 份 / ≥0.50 / 6 道）三项全过；
 deep（≥45 份 / ≥0.65）未到，不硬凑。
 但研究门自跑有 22 条 `research.authorship-unproven`——这是本轮最该报的数，成因逐份查清了，见第五节。**
 
@@ -17,19 +17,19 @@ deep（≥45 份 / ≥0.65）未到，不硬凑。
 
 | tier | 份数 | 内容 |
 |---|---|---|
-| P1 一手 | 24 | Phil. Trans. A 全文 3 篇、Proc. Roy. Soc. 摘要 8 篇、Nature 署名短文与书评 9 篇、Cantor Lectures 1884、Canada's Metals 1898、Introduction to the Study of Metallurgy 1891、亲笔信著录卡 1898 |
+| P1 一手 | 25 | Phil. Trans. A 全文 3 篇、Proc. Roy. Soc. 摘要 8 篇、Nature 署名短文与书评 9 篇、Cantor Lectures 1884、Canada's Metals 1898、Introduction to the Study of Metallurgy 1891、**J. Iron & Steel Inst. 55 (1899) 会长就任致辞**、亲笔信著录卡 1898 |
 | P2 一手·身后编选 | 1 | Roberts-Austen: A Record of His Work（Sydney W. Smith 编，1914） |
 | S1 二手·同时代传记 | 1 | DNB 第二补编 vol.3 (1912) pp.222-223，撰稿人 T. E. James |
-| **合计** | **26** | 正文合计 **2,872,737** 字节 |
+| **合计** | **27** | 正文合计 **2,953,351** 字节 |
 
-- **一手占比 25/26 = 0.9615**（standard 门 0.50）
-- **研究道**：writings 13／expression 7／conversations 3／decisions 1／timeline 1／external 1 —— **6/6 覆盖**
-- `voice`：first-person 12／unknown 13／third-person 1。**默认 unknown，只在实测第一人称（`I`+动词、`my`+名词）计数 ≥2 时才写 first-person**
-- `tier_reason`：**26/26 都写了**，零空缺
-- `derived_from`：**26 份全空——这是正常的**（见第三节）
-- 回读自验：**原文 sha256 26/26 相符，归一件 sha256 26/26 相符**
+- **一手占比 26/27 = 0.9630**（standard 门 0.50）
+- **研究道**：writings 13／expression 8／conversations 3／decisions 1／timeline 1／external 1 —— **6/6 覆盖**（★ 分布很不均：三条道各只有 1 份，如实记）
+- `voice`：first-person 13／unknown 13／third-person 1。**默认 unknown，只在实测第一人称（`I`+动词、`my`+名词）计数 ≥2 时才写 first-person**
+- `tier_reason`：**27/27 都写了**，零空缺
+- `derived_from`：**27 份全空——这是正常的**（见第三节）
+- 回读自验：**原文 sha256 27/27 相符，归一件 sha256 27/27 相符**
 
-### ★ 必须自己说破：26 份不等于 26 处独立证据
+### ★ 必须自己说破：27 份不等于 27 处独立证据
 
 - `philtrans05512448`（Proc. Roy. Soc. 58 摘要）与 `philtrans09730582`（Phil. Trans. A 187 全文）
   是**同一场 1896 年 Bakerian Lecture 的两种印本**；
@@ -37,7 +37,7 @@ deep（≥45 份 / ≥0.65）未到，不硬凑。
 - `philtrans01205368`（rspl.1900.0004）与 `philtrans09607756`（rspl.1900.0005）
   **页面范围物理重叠**——前者第 10,389 字起已经是后者的署名行。
 
-三对已在各自 `notes` 里写明。**按「独立著作单位」算，26 份约合 23 件。**
+三对已在各自 `notes` 里写明。**按「独立著作单位」算，27 份约合 24 件。**
 
 ★ 刻意**不入库**的重复件：`cu31924004123323`／`b28080592`／`cihm_11195`（Canada's Metals 的另三个扫本）、
 `anintroductiont02robegoog`／`anintroductiont03robegoog`／`cu31924031266418`／`in.ernet.dli.2015.217091`
@@ -56,7 +56,11 @@ archive.org 的 creator 字段里有他的名字，但那是 **Griffin 冶金丛
 （Introduction to Metallurgy 747,625 字、A Record of His Work 1,240,593 字）
 是**整册入库、不切段**的，扉页署名就在同一份文件里。
 
-**没有「同一载体切成多段」的情形，因此 `derived_from` 全空是正确状态，不是漏填。**
+**唯一一份从多作者载体里切出来的**是 J. Iron & Steel Inst. 55 (1899) 的会长就任致辞
+（原卷 1,193,900 字符的学会年刊，只取第 **[44573:124727] 字符区间**；边界起止串写在该份 `locator` 里，可复现）。
+★ 这里差点写错单位：该卷 **1,198,732 字节 / 1,193,900 字符**，**不是纯 ASCII，两个数不等**——
+切片是在解码后的字符串上做的，写成「字节区间」别人按字节切会错位 4,832 字。已在台账 `locator` 里改正并注明两个数。
+**同一载体没有第二片，`derived_from` 无对象可指**——所以 27 份全空是正确状态，不是漏填。
 
 ---
 
@@ -83,18 +87,22 @@ python3 scripts/quality_check.py "$TGT" --phase research   → passed: false, ex
 
 | 项 | 数 |
 |---|---|
-| 来源门 `source.minimum` 24 | **26 ✓** |
-| 一手占比门 0.50 | **0.9615 ✓** |
+| 来源门 `source.minimum` 24 | **27 ✓** |
+| 一手占比门 0.50 | **0.9630 ✓** |
 | 研究道覆盖门 6 | **6 ✓** |
-| `authorship`：P1 声称为本人所著 | 24 |
-| `authorship`：**已证实归属** | **2** |
+| `authorship`：P1 声称为本人所著 | 25 |
+| `authorship`：**已证实归属** | **3** |
 | **`research.authorship-unproven`** | **22** |
-| `research.source-unclaimed` | 16 |
+| `research.source-unclaimed` | 17 |
 | `research.attribution-basis` | 1（historical 人物未声明 `attribution_basis`） |
 | `research.lane-completion` | 1（六条研究道正文尚未写——**那是研究员的活，不是抓源员的**） |
+| warning `corpus.unexamined-band` | 1 —— **就是 `letter00robe` 那 1,215 字的著录卡**：字符数够 `non_placeholder`（≥500）而词数不够语种判据（<500），**没有任何内容判据看过它**。它已在自己的 `notes` 里写明「是著录卡不是信件全文」；`conversations` 道另有 2 份支撑，不是靠它一份撑着。 |
 
-**只有 2 份过了归属门**：`philtrans00429265`（A-signature-block）与
-`paper-doi-10_1038_060173c0`（A-discussion-turn，证据照录 `to the Iron and Steel Institute, Prof. Sir W. Roberts-Austen`）。
+**只有 3 份过了归属门**：`philtrans00429265`（A-signature-block）、
+`paper-doi-10_1038_060173c0`（A-discussion-turn，证据照录 `to the Iron and Steel Institute, Prof. Sir W. Roberts-Austen`）与
+`jisi55-1899-presidential-address`（A-byline-standalone，证据照录 `Sir William Roberts-Austen, K.C.B., who was received with loud applause…`）。
+★ 第三份是我**切片时特意把致辞前那句就任记录一起收进来**才过的——
+若只从 `PRESIDENTIAL ADDRESS.` 那个标题切起，全篇没有一处署名，它也会是第 23 条 unproven。
 
 ### 22 条不是「材料可疑」，是**判据够不到这个人的署名形态**——逐份查清了
 
@@ -133,13 +141,13 @@ python3 scripts/quality_check.py "$TGT" --phase research   → passed: false, ex
 
 ---
 
-## 六、抓源过程里打回来的三个真缺陷
+## 六、抓源过程里打回来的四个真缺陷
 
 ### ⑴ ★ 我用了不存在的字段名做回读自验，得到「0/26 相符」
 
 第一版核算写的是 `r.get('sha256')`——**本 schema 里那个字段叫 `checksum`**，
-`.get` 返回 `None`，26 份逐一比对全部不等，输出 **`回读自验 sha256 相符 0/26`**。
-这个数字看起来严重且可信，差点写进报告。改用正确字段后是 **26/26**。
+`.get` 返回 `None`，当时的 26 份逐一比对全部不等，输出 **`回读自验 sha256 相符 0/26`**。
+这个数字看起来严重且可信，差点写进报告。改用正确字段后是 **26/26**（补入第 27 份后为 27/27）。
 **空默认值把「没这个字段」读成了「校验失败」**——与 `[[empty-default-swallows-unknown]]` 同形，
 只是这次倒向了「看起来有问题」而不是「看起来没问题」，所以我才发现。
 
@@ -147,11 +155,26 @@ python3 scripts/quality_check.py "$TGT" --phase research   → passed: false, ex
 
 `namesake-criteria.json` 第一版给禁区 `William Roberts` 的理由是
 「它会命中 `William Chandler Roberts-Austen`」——**跑出来不会**（中名把两段隔开）。
-真正的理由要去语料里找：全 26 份 `William` 紧挨 `Roberts` 只有 2 处、两处都是他自己、
-其中一处是**他本人著作目录的标题行**。
+真正的理由要去语料里找：全 27 份 `William` 紧挨 `Roberts` 只有 3 处、三处都是他自己，
+其中一处是**他本人著作目录的标题行**、一处是**那份 1899 年会长致辞唯一的归属证据**。
 **结论相同、理由完全不同**，而结论对理由错是最难发现的一种。详见 NAMESAKE-GUARD-实测.md 第五节。
 
-### ⑶ `philtrans*` 与 `paper-doi-10_1098_rspl_*` 是同一篇的两条记录
+### ⑶ 「抓了没入库」那道判据对本工作区报的是「无从比」，不是「通过」
+
+`check_staged_but_not_ingested.py` 存在的理由正是本轮这种风险（抓到了、却没进工作区）。
+跑它，对本人物的输出逐字是：
+
+> `wip-roberts-austen-135：没有外层 raw/：**没走过抓源台账那一步**，无从比`
+
+它找的是 `_corpora/wip-<人>/raw/_ids.txt` 这种布局，而本轮（与 Martens #134 一样）
+用的是 `_fetch-staging/raw/`。**判据没被骗，它压根没被问。**
+同一句话它对 `wip-sorby-133`、`wip-steinhardt-98` 也说了——**不是我一个工作区的事**。
+
+自己按等价口径比过：**暂存 27 份 `.txt` ↔ 台账 27 条 `original_name`，双向零差**。
+另有 4 个非 `.txt` 中间件（`dnb1912.json/.raw`、`dnb_p222/223.raw`，是取 DNB 的中间产物）
+与 `_fetch-staging/probe/` 下 3 卷 JISI 原卷（只用于定位切片边界），**刻意不入库**。
+
+### ⑷ `philtrans*` 与 `paper-doi-10_1098_rspl_*` 是同一篇的两条记录
 
 archive.org 上这两族条目**共用同一个 DOI**（例：`philtrans00429265` 与
 `paper-doi-10_1098_rspl_1890_0102` 都是 `10.1098/rspl.1890.0102`）。
@@ -202,9 +225,9 @@ archive.org 的 `philtrans*` 与 `paper-doi-10_1038_*` 是**按页面范围切�
 
 | 项 | 状况 |
 |---|---|
-| **Alloys Research Committee 五份报告**（Proc. Inst. Mech. Engineers 1891/1893/1895/1897/1899） | **一份也没拿到。** archive.org 上 *Proceedings of the Institution of Mechanical Engineers* 只有 1851/1853/1870 三卷 + 1974 年以后，**1889-1902 整段缺**。这是他最重要的工程文献，本轮语料里只能从他自己论文的脚注里看到（照录：`* " Second Eeport, Alloys Eesearch Committee," 'Meeli. Eng./ 1893, Plate 32.`、`Third Report to the Alloys Research Committee, 'Proc.Inst. Mech. Engineers,' 1895, p. 240.`）。**材料存在、是 PD、坐标已定位到卷次页码，只是本机通道上没有扫本。** |
+| **Alloys Research Committee 五份报告**（Proc. Inst. Mech. Engineers 1891/1893/1895/1897/1899） | **一份也没拿到。** 实测 `title:("Proceedings of the Institution of Mechanical Engineers") AND year:[1880 TO 1910]` 在 archive.org 上 **numFound 0**——他整个活跃期一卷扫本都没有（该刊只有 1851/1853/1870 三卷 + 1974 年以后）。这是他最重要的工程文献，本轮语料里只能从他自己论文的脚注里看到（照录：`* " Second Eeport, Alloys Eesearch Committee," 'Meeli. Eng./ 1893, Plate 32.`、`Third Report to the Alloys Research Committee, 'Proc.Inst. Mech. Engineers,' 1895, p. 240.`）。**材料存在、是 PD、坐标已定位到卷次页码，只是本机通道上没有扫本。** |
 | **Journal of the Society of Arts 的五个 Cantor Lectures 系列**（1884-1890） | 只拿到 1884 年那一系列的抽印合订本。JSA 各卷在 archive.org 上有（`journalofsociety*soci`），但**卷号与年份不对应**（元数据 year 一律写 1852），要逐卷开箱定位，本轮时间未及。**这是没做，不是做了没有。** |
-| **Journal of the Iron and Steel Institute** 他的论文（电沉积铁 1887、金刚石渗碳 1890、Le Chatelier 高温计 1891、自记高温计 1892-93、铁中碳扩散 1896、火炮身管 1898） | 未取。archive.org 的 JISI 只有 1871/1883 与 1899/1900 三卷 + 1911 年以后，**1885-1898 整段缺**。 |
+| **Journal of the Iron and Steel Institute** 他的论文（电沉积铁 1887、金刚石渗碳 1890、Le Chatelier 高温计 1891、自记高温计 1892-93、铁中碳扩散 1896、火炮身管 1898） | **取到一件**：vol. 55 (1899) 的会长就任致辞（已入库，80,151 字）。其余仍缺——实测 `title:("Journal of the Iron and Steel Institute") AND year:[1880 TO 1905]` 在 archive.org 上**只有 4 卷**（1883、vol.55/56 于 1899、vol.57 于 1900），**1885-1898 整段没有扫本**。另已开箱查过 vol.56 与 vol.57：里面的 `Presidential Address` 全是**别人引用他**，不是他的第二篇致辞，故未收。 |
 | **Nature 1902 年 T. E. Thorpe 的讣文**（`paper-doi-10_1038_067105a0`） | 条目在、**只有元数据没有正文**（文件清单里只有 `.torrent`／`files.xml`／`meta.sqlite`／`meta.xml`，无 `_djvu.txt`，直接下载 **HTTP 404**）。二手材料因此只落了 DNB 一份。 |
 | **Proc. Roy. Soc. / ICE / IMechE 的讣文** | 未取（Grace's Guide 列出了出处：1902 IMechE、1902 ISI、*The Engineer* 1902-11-28、1903 ICE），本轮未逐一找扫本。 |
 | **本轮零 bot 墙、零付费墙** | archive.org 与 Wikisource 全程 HTTP 200，没有遇到需要绕过的访问控制，因此**没有「通道受限」条目**。 |
