@@ -77,7 +77,7 @@
   "origin_review_required": false,
   "product_version": null,
   "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
-  "profile": "quick",
+  "profile": "standard",
   "prohibited_uses": [
     "identity authentication or deceptive impersonation",
     "invented endorsement, signature, consent, private memory or current opinion",
@@ -150,5 +150,15 @@
       "X2__the-structure-and-origin-of-limestones-abstract-of-the-anniversary-add.txt"
     ],
     "★ covered_sources 的口径": "逐份点名的是**账本声称由他所著**的那些。点名不等于「我说它是他的」——每一份的依据都写在该源账本记录的 `attribution` 字段里（印本署名 OCR 原文 + 命中的同名判据 + 稳定 URL），**逐份可回查**。合著/第三人称/communicated 的那 9 件另列于 `disputed_works`。"
+  },
+  "★ profile 定档理由（2026-08-05，判分开始前）": {
+    "实况": "sources 37 / lanes 6 / primary_ratio 0.8378 / 第一人称字节占比 0.8972",
+    "deep 够不着": "deep 要 min_sources 45，**实有 37**。lanes 6 与 ratio 0.65 都够，卡在源数。",
+    "standard 够得着": "min_sources 24 / min_lanes 6 / min_primary_ratio 0.50，三项全过。",
+    "★★ 为什么不留 quick": "quick 只要 8 源 3 道，**语料明显超出**。按「够哪一档用哪一档」，留 quick 是低报。",
+    "★★★ 不是按门好不好过选的": "standard 的 delta 门是 +0.05，**比 quick 的 +0.03 更难**。PROFILE-决定点.md 里写死了「不许先看 delta 门好不好过再挑 profile」，这次照办了。",
+    "◆ 我先前那条判据写错了": "PROFILE-决定点.md 原写「一手 ≥30 就够 deep」——那是照 **primary** 的下限写的，**漏了 profile 还有一条 min_sources=45 的总源数下限**。实况 37 总源数够不着 deep。已在此更正。",
+    "从": "quick",
+    "改为": "standard"
   }
 }
