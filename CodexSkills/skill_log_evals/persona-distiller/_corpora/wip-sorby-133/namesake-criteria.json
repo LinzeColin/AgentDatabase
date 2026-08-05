@@ -2,12 +2,28 @@
   "subject": "Henry Clifton Sorby",
   "born": 1826,
   "died": 1908,
-  "any_of_markers": ["Clifton", "F.R.S.", "F.G.S.", "F. R. S.", "F. G. S."],
+  "any_of_markers": [
+    "Clifton",
+    "F.R.S.",
+    "F.G.S.",
+    "F. R. S.",
+    "F. G. S."
+  ],
   "excluded_names": [
-    "T. C. Sorby", "T.C. Sorby", "Thomas Charles Sorby", "Thomas Sorby",
-    "Robert Sorby", "John Sorby", "Alfred Sorby", "John Francis Sorby",
-    "Thomas Austin Sorby", "Harold Sorby", "Albert Sorby Buxton",
-    "Sheryl Ann Sorby", "Sheryl Sorby", "Angela Sorby"
+    "T. C. Sorby",
+    "T.C. Sorby",
+    "Thomas Charles Sorby",
+    "Thomas Sorby",
+    "Robert Sorby",
+    "John Sorby",
+    "Alfred Sorby",
+    "John Francis Sorby",
+    "Thomas Austin Sorby",
+    "Harold Sorby",
+    "Albert Sorby Buxton",
+    "Sheryl Ann Sorby",
+    "Sheryl Sorby",
+    "Angela Sorby"
   ],
   "bare_name_before_year": {
     "year": 1850,
@@ -15,5 +31,19 @@
     "reason": "父亲 Henry Sorby（c.1791–1846/47，Sheffield 刀具商，J. & H. Sorby 合伙人）；目标 1826 年生，1850 年才 24 岁。★ Sheffield 的 Sorby Collection 里有 one diary from his father covering 1845-1846——同一馆藏里「Sorby 的日记」指两个人。★★ 父亲卒年 1846（Grace's Guide）vs 1847（Wikipedia）未裁定，分界线取 1850 以避开这一年的争议。"
   },
   "★ 不许用的判据": "首字母。实测同批扫描的讹形有 H. G. / U. G. / IT. C. / II. C. / E. 0.，且建筑师 T. C. 与目标 H. C. 只差一个首字母。",
-  "★★ unknown 怎么办": "「说不准」是独立一档，不许并进任何一边。入库前逐条定夺，或给这份材料补一条能站住的区分符。"
+  "★★ unknown 怎么办": "「说不准」是独立一档，不许并进任何一边。入库前逐条定夺，或给这份材料补一条能站住的区分符。",
+  "surname": "Sorby",
+  "marker_window": 40,
+  "★★★ 抓源实测打回来的三条": {
+    "① 排除名单要带词首边界": "MMJ v.XIII p.205 的页眉被 OCR 打成 `IT. C. Sorby`——那是**目标本人**的页眉，字面里却含建筑师的 `T. C. Sorby`。不加边界，他自己的文章会被判成他人。**丢材料的方向不会报错，比误收更难发现。**",
+    "② 区分符要贴着姓氏": "A8 是他自己的文，正文写着 `Professor Clifton's laboratory at Oxford`——那是 R. B. Clifton，牛津物理学家。全篇找 `Clifton` 会把任何提到他的文章认成目标。**那一篇碰巧确实是他的，结论对而理由错**——这种最难发现。已改为只认贴着姓氏 40 字以内的。",
+    "③ 判据 3（学会会刊）**绝不可单独使用**": "建筑师 T. C. Sorby 在 *Building News* 上发表，那也是 1850–1908 的连续出版物。判据 3 只能与 1 或 2 合用。"
+  },
+  "★ 姓氏讹形（会让他自己的材料搜不到）": {
+    "已知": [
+      "Sokby（Nature v.57 p.520, 1898——搜 Sorby 该页零命中）",
+      "Soebt（1876 Essays 卷，inside.php 与 grep 双双零命中）"
+    ],
+    "口径": "这些是**发现问题**不是归属问题：搜不到 ≠ 没有。本判据遇到它们会报 unknown，那是对的——unknown 是「没核」不是「不是他」。"
+  }
 }

@@ -64,8 +64,19 @@ def classify(text: str, crit: dict, year: int = None) -> dict:
     """→ {判定, 理由}。判定 ∈ {目标本人, 他人, unknown}。"""
     t = _norm(text)
     for bad in crit.get("excluded_names") or []:
-        # 归一化空白后按「忽略空格」比，`T. C. Sorby` 与 `T.C. Sorby` 算同一个
-        if re.sub(r"\s+", "", bad.lower()) in re.sub(r"\s+", "", t.lower()):
+        # 归一化空白后按「忽略空格」比，`T. C. Sorby` 与 `T.C. Sorby` 算同一个。
+        # ★★★ v0.0.0.154：**必须带词首边界。** Sorby #133 抓源实测：
+        #   MMJ v.XIII p.205 的页眉被 OCR 打成 `IT. C. Sorby`——**那是目标本人的页眉**，
+        #   而它的字面里含 `T. C. Sorby`（建筑师）。不加边界，**他自己的文章会被判成他人**。
+        #   这是「丢掉真材料」的方向，比误收更难发现——**少了的东西不会报错**。
+        # ★ 第一版把空白**抹掉**再比，结果 `By T. C. Sorby` 变成 `byt.c.sorby`，
+        #   词首边界被自己抹没了，真的建筑师反而漏判。**抹空白与查边界不能同时做。**
+        #   改成：把名字编成「记号之间允许任意空白」的正则，边界在**原文**上查。
+        toks = [re.escape(x) for x in re.split(r"\s+", bad.strip()) if x]
+        if not toks:
+            continue
+        pat = r"(?<![A-Za-z])" + r"\s*".join(toks)
+        if re.search(pat, t, re.I):
             return {"判定": "他人", "理由": f"命中排除名单：{bad}"}
     bn = crit.get("bare_name_before_year") or {}
     if bn and year is not None and year < int(bn.get("year", 0)):
@@ -75,9 +86,27 @@ def classify(text: str, crit: dict, year: int = None) -> dict:
                 return {"判定": "他人",
                         "理由": f"{year} < {bn['year']} 且只有「{bare}」这个署名"
                                 f"——{bn.get('reason', '默认归属更早的同名者')}"}
-    hit = [m for m in (crit.get("any_of_markers") or []) if m.lower() in t.lower()]
+    # ★★★ v0.0.0.154：区分符**必须贴着姓氏**，不许全篇找。
+    #   Sorby #133 抓源实测：A8 是他自己的文，正文写着
+    #   `Professor Clifton's laboratory at Oxford`——那是 R. B. Clifton，牛津物理学家。
+    #   全篇找 `Clifton` 会把**任何提到那位物理学家的文章**判成目标本人。
+    #   本次那一篇碰巧确实是他的，**结论对而理由错**——这种最难发现。
+    surname = str(crit.get("surname") or "").strip()
+    if not surname:
+        subj = str(crit.get("subject") or "").split()
+        surname = subj[-1] if subj else ""
+    near = crit.get("marker_window", 40)
+    hit = []
+    for mk in (crit.get("any_of_markers") or []):
+        for mm in re.finditer(re.escape(mk.lower()), t.lower()):
+            if not surname:
+                hit.append(mk); break
+            lo, hi = max(0, mm.start() - near), mm.end() + near
+            if surname.lower() in t[lo:hi].lower():
+                hit.append(mk); break
     if hit:
-        return {"判定": "目标本人", "理由": f"命中区分符：{hit}"}
+        return {"判定": "目标本人",
+                "理由": f"命中区分符（贴着姓氏 {near} 字以内）：{sorted(set(hit))}"}
     return {"判定": "unknown",
             "理由": ("既没命中排除名单，也没命中任何区分符——"
                      "**这不是通过，是没核**。人工定夺或补一条区分符。")}
@@ -169,6 +198,25 @@ def self_test() -> int:
     print("── ★ 反向对照④：年份缺失时**不许**用年份规则（不能假设它早于分界）──")
     v = classify("By Henry Sorby.", CRIT, None)
     chk(f"无年份 → {v['判定']}（不是「他人」）", v["判定"] == "unknown")
+
+    print("\n══ ★★★ 抓源实测打回来的两个真 bug（v0.0.0.154 修）══")
+    print("── ⑥ 排除名单必须带词首边界——否则**他自己的页眉会把他排掉** ──")
+    #   MMJ v.XIII p.205 的页眉被 OCR 打成 `IT. C. Sorby`，那是**目标本人**的页眉，
+    #   字面里却含建筑师的 `T. C. Sorby`。
+    #   ★ 这是「丢掉真材料」的方向——**少了的东西不会报错**，比误收更难发现。
+    v = classify("running head: IT. C. Sorby | MMJ v.XIII p.205", CRIT, 1876)
+    chk(f"`IT. C. Sorby` → {v['判定']}（**不许是「他人」**）", v["判定"] != "他人")
+    chk("而真的 `T. C. Sorby` 仍要排掉",
+        classify("By T. C. Sorby, Architect.", CRIT, 1866)["判定"] == "他人")
+
+    print("── ⑦ 区分符必须贴着姓氏——否则**另一个 Clifton 会把别人认成他** ──")
+    #   A8 是 Sorby 自己的文，正文写着 `Professor Clifton's laboratory at Oxford`,
+    #   那是 R. B. Clifton，牛津物理学家。**那一篇碰巧确实是他的——结论对而理由错**，
+    #   这种最难发现：换一篇不是他的、同样提到那位物理学家的文，就会被认成他。
+    v = classify("Professor Clifton's laboratory at Oxford（正文，作者字段为空）", CRIT, 1870)
+    chk(f"孤立的 `Clifton` → {v['判定']}（**不许是「目标本人」**）", v["判定"] != "目标本人")
+    chk("而贴着姓氏的 `Clifton` 仍算区分符",
+        classify("By Henry Clifton Sorby, F.R.S.", CRIT, 1863)["判定"] == "目标本人")
 
     print("── ★ 反向对照⑤：忽略空格差异，`T.C. Sorby` 与 `T. C. Sorby` 同判 ──")
     chk("→ 他人", classify("By T.C. Sorby", CRIT)["判定"] == "他人")
