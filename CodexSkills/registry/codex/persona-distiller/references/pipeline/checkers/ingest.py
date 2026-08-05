@@ -205,6 +205,23 @@ def main() -> int:
     parser.add_argument('inputs', nargs='+', type=Path)
     parser.add_argument('--source-type', default='local-file')
     parser.add_argument('--tier', choices=['P1', 'P2', 'S1', 'S2', 'U'], default='U')
+    # ★★★ v0.0.0.157：**分档要留理由**。
+    #   Liebig #124 实测：9 份作者写着 `Justus von Liebig` 的材料被降为 P2，
+    #   而台账里**一个字都没说为什么**（`abstract` 只写「分档 P2」）。
+    #   那次降档把一手占比从 0.7419 压到 0.5192，最终 0.6094 < deep 门 0.65，
+    #   **这个人物因此记了延后**——一个改变了人物结论的判断，台账里没有依据。
+    #   复核的人只能把整个判断重做一遍。
+    #   ★ 选填而不是必填：老工作区没有这个字段，设成必填会把它们全判失败。
+    #     但**只要不是默认档 U，没给理由就提醒一句**。
+    parser.add_argument('--tier-reason', default='',
+                        help='为什么是这个分档（改档时尤其要写：从 P1 降为 P2 的理由）')
+    # ★★★ v0.0.0.158：`derived_from` 这个字段**一直存在、一直是 `[]`**——
+    #   没有任何入口能填它。于是「第 7 段出自哪一部书」只能写在 `attribution` 的散文里，
+    #   判据跟不了。Martens #134 实测：25 份 `attribution` 全写了、`derived_from` 全空，
+    #   而研究门逐份报「文中查无归属证据」（书的中间当然没有署名）。
+    #   ★ 加这个入口**不改任何门**，只是让来历可记；怎么用它是待裁定 ㉕ 的事。
+    parser.add_argument('--derived-from', nargs='*', default=[],
+                        help='本份出自哪些 source_id（同一载体被切成多段时填兄弟件的 id）')
     parser.add_argument('--rights', default='user-provided-or-publicly-accessible-for-analysis; redistribution-not-assumed')
     parser.add_argument('--author')
     parser.add_argument('--published-at')
@@ -237,6 +254,11 @@ def main() -> int:
     parser.add_argument('--no-copy-raw', action='store_true')
     parser.add_argument('--include-unsupported', action='store_true', help='Register otherwise unsupported extensions as opaque.')
     args = parser.parse_args()
+    # ★ 非默认档却没写理由 → 提醒（不拦）。见 Liebig #124：
+    #   9 份被降为 P2、无一字说明，而那次降档让该人物落进延后。
+    if args.tier != 'U' and not args.tier_reason.strip():
+        print(f"★ 分档写了 {args.tier} 却没给 --tier-reason——"
+              "改档的理由不留下，复核的人只能把判断重做一遍。", file=sys.stderr)
 
     # ★ P1 的语义是「**他自己的话**」——人工逐字稿、署名信件、印刷问答；
     #   产物里引号内的原话只许来自 P1。所以 P1 必须记下**这是谁的话**。
@@ -368,6 +390,7 @@ def main() -> int:
                 'normalized_path': relpath_inside(normalized_path, target) if normalized_path else None,
                 'source_type': args.source_type,
                 'tier': args.tier,
+                'tier_reason': args.tier_reason,
                 'rights': args.rights,
                 'language': args.language,
                 'split': split,
@@ -383,7 +406,7 @@ def main() -> int:
                 #   ★ 不给就是 `unknown`——**不许默认成 first-person**，
                 #     否则「没标」会被读成「是他的声口」（[[empty-default-swallows-unknown]]）。
                 'voice': args.voice,
-                'derived_from': [],
+                'derived_from': list(args.derived_from),
                 'extraction_status': extraction_status,
                 'abstract': args.abstract,
                 'attribution': args.attribution,

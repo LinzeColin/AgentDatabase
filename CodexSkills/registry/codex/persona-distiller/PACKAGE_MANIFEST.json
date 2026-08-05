@@ -376,8 +376,8 @@
     },
     {
       "path": "references/ledgers/_待用户裁定.md",
-      "sha256": "9575a1118facfb933ec10c36d4bb46183594b6ced229b435997026d0fe449e44",
-      "size_bytes": 156566
+      "sha256": "1259f5e2f6eb085213416881e47de3f3f429ed37be418ee81da7c102e6c773dd",
+      "size_bytes": 157021
     },
     {
       "path": "references/ledgers/_每次开工必读.md",
@@ -821,8 +821,8 @@
     },
     {
       "path": "references/pipeline/checkers/ingest.py",
-      "sha256": "55e5b68531c9c7c553e1aebb92c32ada8eb5ff9b810a81655295ecb82b2d2ecd",
-      "size_bytes": 20407
+      "sha256": "e8c6b6cf38f286c61eeaf2c98607e9a3bbd4a42647ee2a85c3d66c3e9ed78862",
+      "size_bytes": 22452
     },
     {
       "path": "references/pipeline/checkers/next_person.py",
@@ -1476,8 +1476,8 @@
     },
     {
       "path": "scripts/ingest.py",
-      "sha256": "2be14bbee89734d8e1f325bb9d2174721a2d7b3f03dafe508058101d81f44546",
-      "size_bytes": 21718
+      "sha256": "e8c6b6cf38f286c61eeaf2c98607e9a3bbd4a42647ee2a85c3d66c3e9ed78862",
+      "size_bytes": 22452
     },
     {
       "path": "scripts/init_target.py",

@@ -215,6 +215,13 @@ def main() -> int:
     #     但**只要不是默认档 U，没给理由就提醒一句**。
     parser.add_argument('--tier-reason', default='',
                         help='为什么是这个分档（改档时尤其要写：从 P1 降为 P2 的理由）')
+    # ★★★ v0.0.0.158：`derived_from` 这个字段**一直存在、一直是 `[]`**——
+    #   没有任何入口能填它。于是「第 7 段出自哪一部书」只能写在 `attribution` 的散文里，
+    #   判据跟不了。Martens #134 实测：25 份 `attribution` 全写了、`derived_from` 全空，
+    #   而研究门逐份报「文中查无归属证据」（书的中间当然没有署名）。
+    #   ★ 加这个入口**不改任何门**，只是让来历可记；怎么用它是待裁定 ㉕ 的事。
+    parser.add_argument('--derived-from', nargs='*', default=[],
+                        help='本份出自哪些 source_id（同一载体被切成多段时填兄弟件的 id）')
     parser.add_argument('--rights', default='user-provided-or-publicly-accessible-for-analysis; redistribution-not-assumed')
     parser.add_argument('--author')
     parser.add_argument('--published-at')
@@ -399,7 +406,7 @@ def main() -> int:
                 #   ★ 不给就是 `unknown`——**不许默认成 first-person**，
                 #     否则「没标」会被读成「是他的声口」（[[empty-default-swallows-unknown]]）。
                 'voice': args.voice,
-                'derived_from': [],
+                'derived_from': list(args.derived_from),
                 'extraction_status': extraction_status,
                 'abstract': args.abstract,
                 'attribution': args.attribution,
