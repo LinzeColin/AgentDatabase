@@ -157,3 +157,33 @@ $ python3 scripts/check_namesake_criteria.py <workspace>
 ★★★ **那个「unknown 0 条」不是绿灯，是「还没有台账」**——
 同一句话在有台账和没台账时长得一模一样。这正是 [[empty-default-swallows-unknown]]。
 **入库后必须重跑一遍，以那一次的数为准。**
+
+---
+
+## ★ 主循环追记（2026-08-05）：你建议的那个改法**已经落了**
+
+> 原话：「把 `Von` 加进那个正则是对的改法，但那要动 `check_authorship.py`——
+> **不在抓源这一步改判据代码**，先记在这里。」
+
+**分工是对的，记法也是对的。** 主循环复跑确认了你报的三条：
+
+    Von Adolf Martens.        → 旧版 None
+    Von A. Martens, Berlin.   → 旧版 None
+    VON A. MARTENS.           → 旧版 None
+
+已改（提交 `ae065339`）：署名前缀由 `^by\s+` 扩为
+`^(?:by|von|par|di|av|af|door|de)\s+`，并加了 8 条自测（3 正 5 反）。
+
+**两处按你的判断保留原状：**
+
+- `Von A. Martens, Berlin.` **仍然不认**——「首字母 + 同姓」是同名陷阱本身
+  （`A. Grant Fleming` 的旧教训）。裸 `A. Martens` 归你写的
+  `namesake-criteria.json` 按年份与刊物类型人工裁定，**那才是它该待的层**。
+- `EDUARD VON MARTENS.` 仍被挡住——`von` 在那里是贵族小品词，走的是整行大写那条路。
+
+★★ 你另外点出的那句最值钱：**`None` 在下游会被读成「没有署名证据」＝「没问题」**。
+这条已经是本项目的常设教训（空默认值吞掉「不知道」），
+而**你是在它造成损失之前指出来的**——前几次都是事后才发现的。
+
+所以本人物的归属**仍按你的处置办**：逐份人工核印本署名行，
+把**照录的署名**写进台账 `author`；`ocr_byline_evidence` 只作旁证，不作依据。
