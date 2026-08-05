@@ -1,0 +1,98 @@
+{
+  "builder_version": "v0.0.0.5",
+  "chosen_subject_uid": "sorby-henry-clifton",
+  "consent_authority": null,
+  "created_at": "2026-08-05T08:35:18Z",
+  "current_version": null,
+  "existential_hypotheses_enabled": false,
+  "identity_selection": {
+    "canonical": "technical-engineer",
+    "display": "材料建工师",
+    "mode": "single",
+    "primary": "technical-engineer",
+    "weights": {
+      "technical-engineer": 1.0
+    }
+  },
+  "language": "en",
+  "model_version": "0.1.0-draft",
+  "name": "Henry Clifton Sorby",
+  "namesake_gate": {
+    "candidate_count": 1,
+    "chosen_candidate": {
+      "application_scenarios": [
+        "把不可直接观测的成因问题，改造成可在薄片／蚀刻面上判读的显微证据问题",
+        "为一门尚无标准的观察科学从零建立制样、放大倍率与判读规程",
+        "在没有机构、没有经费、没有学生的条件下独自组织长周期研究",
+        "岩石、限石、钢铁三类异质材料之间迁移同一套显微方法"
+      ],
+      "authoritative_sources": [
+        {
+          "kind": "reference-work",
+          "locator": "https://en.wikisource.org/wiki/Dictionary_of_National_Biography,_1912_supplement/Sorby,_Henry_Clifton",
+          "note": "DNB 1912 supplement，公有领域，Wikisource 全文；文末列出 1908-1909 年讣告出处"
+        },
+        {
+          "kind": "encyclopedia",
+          "locator": "https://www.gracesguide.co.uk/Henry_Clifton_Sorby",
+          "note": "HTTP 200 已打开；给出父名、J. & H. Sorby 商号、学会职务年份、讣告清单"
+        },
+        {
+          "kind": "primary-container",
+          "locator": "https://archive.org/details/reportofbritisha65brit",
+          "note": "BAAS Report（1864 Bath 会议）；索引原样 `Sorby (H. C.) on the conclusion to be drawn from the physical structure of some meteorites, 70; on microscopical photographs of various kinds of iron and steel, 189.`"
+        },
+        {
+          "kind": "primary-self-authored",
+          "locator": "https://archive.org/details/essaysonendowmen00patt",
+          "note": "Essay VI 署名页（印本 p.149 / leaf 163）OCR 原样 `By Heitet Oxifton Soebt, F.R.S., President of the Hoyal Microscopical Society.`＝Henry Clifton Sorby"
+        },
+        {
+          "kind": "authority-record",
+          "locator": "https://www.wikidata.org/wiki/Q1346007"
+        }
+      ],
+      "canonical_name": "Henry Clifton Sorby",
+      "distinguishing_basis": "生卒 1826-05-10 / 1908-03-09；印刷署名固定为 `H. C. Sorby` 或 `Henry Clifton Sorby`，学位后缀 F.R.S., F.G.S., F.L.S., F.Z.S.；1862 年 Bakerian Lecture 讲者；1864 年英国科学促进会 Bath 会议 C 组（地质）秘书，同一卷 Report 中有他两篇摘要（一手实测：Trans. Sections p.70 限石、p.189 铁与钢）；1876-02-02 与 1877 年两次以皇家显微学会主席身份宣读年会致辞；1876 年在《Essays on the Endowment of Research》中署名撰写 Essay VI「Unencumbered Research: A Personal Experience」（pp.149-178），是全套候选人里唯一有第一人称自述长文的。★ 与其父同名，父子的区分点是「Clifton」这个中名和 1846/1847 年这条死亡线：1846 年以后署名 `Henry Sorby` 的 Sheffield 文献只可能是他，而 1846 年以前的必须逐条查",
+      "evidence_level": "high",
+      "identity_category": "科学研究者（自费独立学者，无受薪职位）",
+      "key_capabilities": [
+        "岩石／金属薄片与蚀刻面的制备，并把制样本身当作可争论的方法论对象",
+        "从显微组织反推热历史与成因（结晶—再结晶—层片析出的推理链）",
+        "显微分光（micro-spectroscope）与吸收带定位，用于血色素、叶绿素、矿物着色物质",
+        "为「显微镜能分辨到什么极限」这类工具边界问题给出定量论证",
+        "自述式方法论写作：把「我如何安排自己的研究时间」当成可公开辩护的命题"
+      ],
+      "label": "A",
+      "occupation_or_role": "显微岩相学（microscopic petrology）与金相学（metallography）的奠基者；显微分光镜发明者",
+      "professional_background": "1826-05-10 生于 Sheffield 附近 Woodbourne，1908-03-09 卒于 Sheffield，终身未婚。父 Henry Sorby 为 Sheffield 刃具制造世家成员；父故后他以私产为生，一生不受薪、不任教职，在自宅设实验室。1849 年前后从 W. C. Williamson 学得岩石薄片制法并首次用于岩石，1851 年发表第一篇岩相论文；1863-1864 年把薄片＋酸蚀＋显微照相用于铁与钢。1857 年当选 F.R.S.，1869 年 Wollaston 奖章，1874 年 Royal Medal，1878-1880 年任伦敦地质学会主席，1876-1877 年任皇家显微学会主席，1879 年剑桥荣誉 LL.D.。母亲 1872 年去世后购游艇 Glimpse 用于东岸海域考察。晚年出资推动 Firth College → University of Sheffield，并遗赠藏品与地质学讲席基金",
+      "subject_uid": "sorby-henry-clifton"
+    },
+    "chosen_subject_uid": "sorby-henry-clifton",
+    "normalized_name": "henrycliftonsorby",
+    "resolution": "single",
+    "schema_version": "1.0"
+  },
+  "normalized_name": "henrycliftonsorby",
+  "origin_review_required": false,
+  "product_version": null,
+  "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+  "profile": "quick",
+  "prohibited_uses": [
+    "identity authentication or deceptive impersonation",
+    "invented endorsement, signature, consent, private memory or current opinion",
+    "unsupported psychological diagnosis",
+    "replacement of accountable high-stakes professional judgment"
+  ],
+  "retention_policy": null,
+  "runtime_invocation_versioning": false,
+  "scenario": null,
+  "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+  "schema_version": "2.0",
+  "slug": "henry-clifton-sorby",
+  "status": "draft",
+  "subject_origin": "historical",
+  "target_id": "tgt-a365616097c3",
+  "time_scope": "all available periods, separated by role and material drift",
+  "updated_at": "2026-08-05T08:35:18Z"
+}
