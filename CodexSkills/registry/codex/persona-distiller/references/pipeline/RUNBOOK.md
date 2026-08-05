@@ -85,6 +85,24 @@
 
 ## 单人 12 步（严格顺序）
 1. **同名门**：整理候选 JSON（真实权威来源）→ `namesake_gate.py --name .. --candidates-file .. --output gate.json`。单候选→ready 继续；多候选→BLOCKED，停下报用户选。
+   ★★★ **1b. 选完之后，拿这个人物自己的同名者去打一遍护栏——真的喂进去，不是读代码判断。**
+
+   ```
+   ocr_byline_evidence("By <同名者的署名行>", first="<名>", last="<姓>")
+   ```
+
+   Sorby #133 实测：`By Henry Sorby.` → **判为目标本人**，而那是**他父亲**
+   （父子二人「名 + 姓」两样全同）。Coffin #130 是同一形状，
+   但那次是**入库之后**才发现的。
+
+   ★★ **同名不是「署名门」一件事的毛病。** 查完一处要接着问：
+   **这个人物的名字还被用在哪些地方当判据？**
+   Sorby 顺着查出第二处——`own_voice_ratio` 的分子是「账本 author **命中姓氏**的字节」，
+   父亲的日记会被算进儿子的声口，**而那正是决定 profile 时要看的数**。
+
+   护栏不够用时：工作区放一份 `namesake-criteria.json`，
+   由 `check_namesake_criteria.py` 判（先排除后确认，**`unknown` 单列不许并进任何一边**），
+   `own_voice` 会自动读它。**没有这份文件的人物走原路，一个数都不变。**
 2. **初始化**：`init_target.py --name .. --identity <1-12> --namesake-gate gate.json --workspace WS --profile deep`。
 3. **来源账本**（照 `example-knuth/gen_sources.py`+`gen_more.py`）：**≥45 条 usable train，≥65% 一手(P1/P2)，覆盖全 6 lane，≥1 holdout**。每条**必须真实 curl 取内容算 SHA-256**（`checksum_basis="content"`），rights 不含 "unknown"。
 4. **六路研究**（`gen_lanes.py`）：6 个 `references/research/0X-*.md`，每篇 **≥500 字**、引用真实 `src-` ID。
