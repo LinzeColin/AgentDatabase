@@ -1,10 +1,25 @@
 {
-  "candidate_cards": [
-    "A. 人物与身份：William Chandler Roberts-Austen；国家造币机构的化验主管兼学院冶金讲席（官办技术机构里的实验研究者）；Chemist of the Royal Mint 1870-1882 → Chemist and Assayer of the Royal Mint 1882-1902；Professor of Metallurgy, Royal School of Mines / Royal College of Science 1880-1902；Alloys Research Committee of the Institution of Mechanical Engineers 的 reporter。\n   专业背景：1843-03-03 生于 Surrey 的 Kennington，父 George Roberts（威尔士血统，供职 Hudson's Bay Company），母 Maria Louisa 为 Canterbury 的 William Chandler 医生之女；十八岁入 Royal School of Mines，1865 年得 associateship，同年起任造币厂长官 Thomas Graham 的私人助手；1870-1882 任 Chemist of the Mint，1882-1902 任 Chemist and Assayer of the Mint；1880-1902 接 John Percy 任 Royal School of Mines 冶金讲席教授；1885 年依王室许可、应舅父 Major Nathaniel Lawrence Austen 之请加姓 Austen，此前一律署 W. Chandler Roberts；1875-06-03 当选 FRS，1890-92 任理事，1896 年任 Bakerian Lecturer（讲题 the diffusion of metals，Phil. Trans. vol. 187 A）；1889 年 Institution of Mechanical Engineers 设 Alloys Research Committee，他任 reporter 并出五份报告，第六份在他去世时尚在修订；1899-1901 任 Iron and Steel Institute 会长；1897-1902 任 British Association 名誉总干事；1889 年获法国荣誉军团骑士，1890 C.B.，1899 K.C.B.，1897 Durham D.C.L.，1901 Manchester D.Sc.；1902-11-22 卒于 Royal Mint，葬于 Canterbury，无子嗣。奥氏体 austenite 以他命名。。\n   应用价值：场景：把「这批金属为什么不合格」从经验判断改造成可复现的物理测量问题；为一门尚无标准的测量科学从零设计仪器（自记高温计、冷却曲线记录装置）；在国家机构里同时承担法定检验、标准制定与基础研究三重角色；把微量杂质与元素周期律联系起来，用原子体积解释宏观力学性质；为工业界的长期研究委员会（Alloys Research Committee）设计逐年推进的研究纲领；关键能力：高温测温与自记：把「温度在哪一刻变化」变成照相底片上的一条曲线；金属扩散的实验设计（固态与液态、金在铅中的扩散、扩散系数测定）；微量杂质对纯金属力学性质影响的系统测定，并与原子体积／周期律对照；金相制样与判读，与 Floris Osmond 合作把显微组织引入工程验收；把实验室结论写成工业界能执行的报告（Alloys Research Committee 五份报告）；公众演讲与教学：Cantor Lectures 五个系列、Royal Institution 与 British Association 讲演。\n   区分依据：生卒 1843-03-03 / 1902-11-22；**一生用过两个姓**——1885 年前印本署 `W. Chandler Roberts`（1884 Cantor Lectures 扉页照录 `BT W. CHANDLER ROBERTS, RR.S.`），1885 年后署 `Roberts-Austen`（1888 Phil. Trans. A 179 扉页照录 `By W. Chandler Koberts- Austen, F.RS, Professor of Metallurgy in the Normal School of Science and Royal School of Mines, South Kensington, Chemist and Assay er of the Royal Mint.`）。★ 与他撞名的至少 15 人见 namesake-candidates.json，其中 Sir William Roberts（1830-1899 医生 FRS）、Isaac Roberts（1829-1904 天文 FRS）与 Robert A. C. Austen（1854 年前的 Godwin-Austen）**署名形态与他重叠**；`George Roberts`（父）、`William Chandler`（外祖父）、`Nathaniel Lawrence Austen`（舅父）与 `Chandler`（中名）是排除名单的禁区，理由见 namesake-criteria.json。。"
-  ],
-  "candidate_count": 1,
-  "candidates": [
-    {
+  "builder_version": "v0.0.0.5",
+  "chosen_subject_uid": "roberts-austen-william-chandler",
+  "consent_authority": null,
+  "created_at": "2026-08-05T22:59:15Z",
+  "current_version": null,
+  "existential_hypotheses_enabled": false,
+  "identity_selection": {
+    "canonical": "technical-engineer",
+    "display": "材料建工师",
+    "mode": "single",
+    "primary": "technical-engineer",
+    "weights": {
+      "technical-engineer": 1.0
+    }
+  },
+  "language": "en",
+  "model_version": "0.1.0-draft",
+  "name": "William Chandler Roberts-Austen",
+  "namesake_gate": {
+    "candidate_count": 1,
+    "chosen_candidate": {
       "application_scenarios": [
         "把「这批金属为什么不合格」从经验判断改造成可复现的物理测量问题",
         "为一门尚无标准的测量科学从零设计仪器（自记高温计、冷却曲线记录装置）",
@@ -44,17 +59,32 @@
       "occupation_or_role": "Chemist of the Royal Mint 1870-1882 → Chemist and Assayer of the Royal Mint 1882-1902；Professor of Metallurgy, Royal School of Mines / Royal College of Science 1880-1902；Alloys Research Committee of the Institution of Mechanical Engineers 的 reporter",
       "professional_background": "1843-03-03 生于 Surrey 的 Kennington，父 George Roberts（威尔士血统，供职 Hudson's Bay Company），母 Maria Louisa 为 Canterbury 的 William Chandler 医生之女；十八岁入 Royal School of Mines，1865 年得 associateship，同年起任造币厂长官 Thomas Graham 的私人助手；1870-1882 任 Chemist of the Mint，1882-1902 任 Chemist and Assayer of the Mint；1880-1902 接 John Percy 任 Royal School of Mines 冶金讲席教授；1885 年依王室许可、应舅父 Major Nathaniel Lawrence Austen 之请加姓 Austen，此前一律署 W. Chandler Roberts；1875-06-03 当选 FRS，1890-92 任理事，1896 年任 Bakerian Lecturer（讲题 the diffusion of metals，Phil. Trans. vol. 187 A）；1889 年 Institution of Mechanical Engineers 设 Alloys Research Committee，他任 reporter 并出五份报告，第六份在他去世时尚在修订；1899-1901 任 Iron and Steel Institute 会长；1897-1902 任 British Association 名誉总干事；1889 年获法国荣誉军团骑士，1890 C.B.，1899 K.C.B.，1897 Durham D.C.L.，1901 Manchester D.Sc.；1902-11-22 卒于 Royal Mint，葬于 Canterbury，无子嗣。奥氏体 austenite 以他命名。",
       "subject_uid": "roberts-austen-william-chandler"
-    }
-  ],
-  "generated_at": "2026-08-05T22:59:06Z",
+    },
+    "chosen_subject_uid": "roberts-austen-william-chandler",
+    "normalized_name": "williamchandlerrobertsausten",
+    "resolution": "single",
+    "schema_version": "1.0"
+  },
   "normalized_name": "williamchandlerrobertsausten",
-  "resolution": "single",
-  "schema_version": "1.0",
-  "search_scope": [
-    "sibling canonical registry",
-    "authoritative public sources supplied by orchestration"
+  "origin_review_required": false,
+  "product_version": null,
+  "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+  "profile": "standard",
+  "prohibited_uses": [
+    "identity authentication or deceptive impersonation",
+    "invented endorsement, signature, consent, private memory or current opinion",
+    "unsupported psychological diagnosis",
+    "replacement of accountable high-stakes professional judgment"
   ],
-  "selected_subject_uid": "roberts-austen-william-chandler",
-  "status": "ready",
-  "target_name": "William Chandler Roberts-Austen"
+  "retention_policy": null,
+  "runtime_invocation_versioning": false,
+  "scenario": null,
+  "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+  "schema_version": "2.0",
+  "slug": "william-chandler-roberts-austen",
+  "status": "draft",
+  "subject_origin": "historical",
+  "target_id": "tgt-1f79cfb57620",
+  "time_scope": "1843-1902（著述期 1868-1902；1914 年身后文集）",
+  "updated_at": "2026-08-05T22:59:15Z"
 }

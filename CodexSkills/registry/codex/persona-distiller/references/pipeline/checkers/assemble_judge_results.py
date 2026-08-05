@@ -65,6 +65,34 @@ def normalize(a_raw: float, b_raw: float) -> tuple:
     return a_raw, b_raw
 
 
+def find_seat_file(round_dir, seat):
+    """在一个轮次目录里找某一席的打分文件，**认全部已知命名**。
+
+    ★★★ 2026-08-05：这个 helper 是被同一个错误逼出来的——**一天四次**。
+    全库实测，席位打分文件至少有三族命名：
+
+        seat_D.json            32 份
+        seat_D_raw.json        12 份     ← 我的 glob 只写了第一族
+        <前缀>_judge_D.json     60+ 份    ← 每个人物一个前缀（ni_/fl_/wo_/rv_/…）
+
+    漏掉第二族的后果：我拿 8 轮算出「喂判据档 σ=0.0240，几乎不随产物动」，
+    当成待裁定 ㉓ **最硬的一块数据**报了出去；
+    补上 Thomson（他是 `_raw` 那族）之后 σ 变 0.0723，**比无 rubric 档还大**。
+    **那条结论整个撤回了。**
+
+    ★ 所以：**不要再手写 glob。** 要加新命名就加在这里，一处改，全部调用方跟着对。
+    （同一条纪律：[[eval-artifacts-have-five-schemas]]。）
+    """
+    rd = pathlib.Path(round_dir)
+    exact = [rd / f"seat_{seat}.json", rd / f"seat_{seat}_raw.json"]
+    for f in exact:
+        if f.is_file():
+            return f
+    # <前缀>_judge_<席>.json：前缀按人物变，不枚举，按形状找
+    hits = sorted(rd.glob(f"*_judge_{seat}.json"))
+    return hits[0] if hits else None
+
+
 def unwrap_scores(raw):
     """把各种外包装剥掉，统一成 {qid: {"A":…, "B":…}}。
 

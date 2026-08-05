@@ -16,7 +16,7 @@
   "★★★ marker_window 为什么是 45": {
     "打回它的那一行": "Phil. Trans. A 187 (1896) Bakerian Lecture 扉页照录：`By W. C. Roberts- Austen, C.B., F.R.S., Professor of Metallurgy, Royal College of Science ; Chemist of the Mint.`",
     "算过的距离": "从 `oberts` 词尾到区分符 `Royal College of Science` 词首 **41 字**——英式职衔串（C.B., F.R.S., Professor of Metallurgy, ...）把姓氏与机构名撑开。窗口 40 判不到它。",
-    "为什么不取更大": "60／120 两档实测：120 会让反例⑤（`the Royal Mint` 与另一个 Roberts 在同一长句里远距离同现）被误判成目标本人。45 是能容纳英式职衔串的最小整值。",
+    "为什么不取更大": "跑过 45／60／120 三档。反例串 `Mr. Thomas Roberts, of the Sheffield file works, was afterwards shown over the Royal Mint.`——`oberts` 词尾到 `Royal Mint` 词首**实测 61 字**：45 判 unknown（对）、60 判 unknown（对）、**120 判「目标本人」（错）**。而放宽在真语料上**零收益**：26 份落盘正文在 window=45 与 window=120 下都是 26/26 判为目标本人。既然不换来覆盖，就取能容纳职衔串的最小整值。",
     "口径": "放宽的同时反例必须仍然红；下面 `反例` 一节就是这一条的守卫。"
   },
 
@@ -98,9 +98,9 @@
   "★★★ 排除名单的禁区（放进去会把目标自己的材料删掉）": {
     "口径": "判据的排除正则是 `(?<![A-Za-z])` + 记号按 `\\s*` 连接——**只有词首边界，没有词尾边界**。因此任何**构成目标姓名前缀**的字面都会命中目标本人。他的姓恰好以英语最常见的姓氏之一 `Roberts` 打头，这个坑对他特别深。下面每一条都给了它为什么会命中目标本人：",
 
-    "William Roberts": "★★★ **最致命的一条。** Sir William Roberts（1830-1899，曼彻斯特肾脏病学家、FRS 1877、1885 受封）是本人物最高危的同名者，第一反应就是把他写进排除名单。但 `(?<![A-Za-z])William\\s*Roberts` 会命中 `William Roberts-Austen`——**没有词尾边界拦得住它**。写进去等于把目标署全名的每一份删掉。实测见 NAMESAKE-GUARD-实测.md 第 ① 组。",
-    "Sir William Roberts": "★★★ 同上，且更隐蔽：目标 1899 年受 K.C.B.，此后印本上正是 `Sir W. Roberts-Austen`／`Professor Sir W. Koberts-Austen`（Proc. Roy. Soc. 67, 1900 照录）。`Sir William Roberts` 命中 `Sir William Roberts-Austen`。",
-    "W. C. Roberts": "★★★ 这是**目标 1885 年前的印本署名本身**（Nature 15 (1876) p.153、20 (1879) p.587、21 (1880) p.272 三处文末签名照录均为 `W. Chandler Roberts`；缩写形 `W. C. Roberts` 同源）。而且它还会命中 1885 年后的 `W. C. Roberts-Austen`。**两个方向同时错。**",
+    "William Roberts": "★★★ **最致命的一条，而且我第一版把理由写错了、被实测打回。** Sir William Roberts（1830-1899，曼彻斯特肾脏病学家、FRS 1877、1885 受封）是本人物最高危的同名者，第一反应就是写进排除名单。\n错的理由（第一版写的）：「它会命中 `William Chandler Roberts-Austen`」——**跑了才知道不会**：判据把名字编成记号间只许空白的正则 `William\\s*Roberts`，中名 `Chandler` 横在中间，匹配不上。\n对的理由（实测出来的）：**语料里真的有 `William` 紧挨 `Roberts` 的写法，而且都是他自己**。全 26 份扫出 2 处，逐字照录：`Sir Andrew Noble. Sir William Crookes. Sir William Roberts- Austen.`（1914 年 Smith 编《A Record of His Work》委员名单）与 `BIBLIOGRAPHY. PAPERS AND ADDRESSES BY THE LATE SIR WILLIAM ROBERTS- AUSTEN RELATING TO THE METALLURGY OF IRON AND STEEL.`（**同书里他本人著作目录的标题行**）。把 `William Roberts` 写进排除名单，这两处判「他人」——**整部 1.24 MB 的《A Record of His Work》被删掉**。\n★ 教训记在这里：**没跑过的理由不许写进判据。** 第一版那句话读起来完全合理，是错的。",
+    "Sir William Roberts": "★★★ 同上，实测同样 2/2 命中那两处真串。改用带学位后缀的完整消歧形 `William Roberts, M.D.`／`W. Roberts, M.D.` 排除那位医生——已实测对全部 15 条目标真串零命中（医生的 M.D. 目标没有；目标是 D.C.L. 1897、D.Sc. 1901）。",
+    "W. C. Roberts": "★★★ 这是**目标 1885 年前的印本署名本身**（Nature 15 (1876) p.153、20 (1879) p.587、21 (1880) p.272 三处文末签名照录均为 `W. Chandler Roberts`），而且缩写形还会命中 1885 年后的 `W. C. Roberts-Austen`。**实测**：全语料 `W.` 紧接 `C.` 紧接 `[RKBE]oberts` 共 **29 处**；把它放进排除名单，15 条目标真串里 **4 条**被判「他人」。**两个方向同时错。**",
     "Roberts": "裸姓。既是他 1885 年前的全部署名，也是复姓的前一半。不许排除。",
     "Austen": "★★★ 复姓的后一半。裸 `Austen` 会命中 `Roberts-Austen` 的每一次出现。**`Austen` 还是英语教名**（Austen Henry Layard、Austen Chamberlain），所以它在语料里既可能是姓也可能是名——但这不构成排除它的理由，只构成**必须写全名再排除**的理由。",
     "Chandler": "★★★ **这是目标的中名。** Charles Frederick Chandler（1836-1925，哥伦比亚 School of Mines 化学家）是同代同领域的著名人物，裸 `Chandler` 在 1870-1900 的化学／冶金文献里指他的概率不低——正因为如此才危险：写进去会命中 `W. Chandler Roberts`（他 1885 年前的全部署名）与 `William Chandler Roberts-Austen`（他的全名）。已改用完整形式 `Charles Frederick Chandler`／`C. F. Chandler`。",
