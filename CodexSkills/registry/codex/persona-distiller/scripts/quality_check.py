@@ -2548,8 +2548,15 @@ def run_namesake_criteria(report, target: Path) -> None:
     if not script.exists():
         report.metrics['namesake_criteria'] = {'状态': '检查器未安装，**未核验**（不是通过）'}
         return
-    if not (target / 'namesake-criteria.json').is_file() and \
-       not (target.parent.parent / 'namesake-criteria.json').is_file():
+    # ★ 与 `report_own_voice` 用同一套查找层级——**先前这里只查 2 层、那边查 3 层**，
+    #   于是同一个工作区里一个说「已启用」、另一个说「不适用」。
+    #   Sorby 的工作区嵌了三层（wip/workspaces/<slug>/<slug>），正好卡在差的那一层。
+    _crit_paths = [target / 'namesake-criteria.json',
+                   target.parent / 'namesake-criteria.json',
+                   target.parent.parent / 'namesake-criteria.json',
+                   target.parent.parent.parent / 'namesake-criteria.json']
+    _crit = next((c for c in _crit_paths if c.is_file()), None)
+    if _crit is None:
         report.metrics['namesake_criteria'] = {
             '状态': '本人物没有定制判据——**不适用**（不是通过）',
             '★': '「名+姓」够不够，取决于这个人物有没有同名近亲。**每个人物都要单测一次。**'}
@@ -2560,8 +2567,7 @@ def run_namesake_criteria(report, target: Path) -> None:
     try:
         spec.loader.exec_module(mod)
         with contextlib.redirect_stdout(buffer):
-            n = mod.run(target if (target / 'namesake-criteria.json').is_file()
-                        else target.parent.parent)
+            n = mod.run(target, _crit)
     except Exception as exc:                                    # noqa: BLE001
         report.metrics['namesake_criteria'] = {'状态': f'运行失败，**未核验**：{exc}'}
         return

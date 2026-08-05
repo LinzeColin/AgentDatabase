@@ -112,8 +112,15 @@ def classify(text: str, crit: dict, year: int = None) -> dict:
                      "**这不是通过，是没核**。人工定夺或补一条区分符。")}
 
 
-def run(ws: pathlib.Path) -> int:
-    crit_f = ws / "namesake-criteria.json"
+def run(ws: pathlib.Path, crit_file: pathlib.Path = None) -> int:
+    """`ws` 是**放台账的工作区**；`crit_file` 是判据文件（可以在更上层）。
+
+    ★ 这两个常常不在同一层：判据按**人物**放在 `wip-<人>/`，
+      而台账在 `wip-<人>/workspaces/<slug>/<slug>/evidence/`。
+      先前把两者绑在一起找，结果判据找到了、台账却按判据那一层去找，
+      报「还没有 source-ledger.jsonl」——**看着像没抓源，其实是路径错了**。
+    """
+    crit_f = crit_file if crit_file is not None else (ws / "namesake-criteria.json")
     if not crit_f.is_file():
         print(f"  {ws.name}：没有 namesake-criteria.json——**不适用**（不是通过）")
         return 0
