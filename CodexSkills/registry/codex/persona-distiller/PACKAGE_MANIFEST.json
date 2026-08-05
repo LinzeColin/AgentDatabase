@@ -911,8 +911,8 @@
     },
     {
       "path": "references/pipeline/judge_prompts/RUBRIC-RULES-v2.md",
-      "sha256": "abd74e395b245fb9d1ef845bb3adbe43a36f547186e5769e3c7cf75b3a905ac4",
-      "size_bytes": 14717
+      "sha256": "dbe1e23547af1f605154be731e470998f79eef51f6e891b2dc08ba93219011ba",
+      "size_bytes": 15864
     },
     {
       "path": "references/pipeline/judge_prompts/seat_D_score.md",
@@ -1071,8 +1071,8 @@
     },
     {
       "path": "scripts/build_blind_payload.py",
-      "sha256": "0b6da10f4098d632502cec4cf2dd4bf26de5c04cb982331bd9afde3e187b3727",
-      "size_bytes": 35984
+      "sha256": "21909f7148c1c9d3a10034baa5ce416ed7576539c4033a4ac385ad1f32fc0dcd",
+      "size_bytes": 37447
     },
     {
       "path": "scripts/build_manifest.py",

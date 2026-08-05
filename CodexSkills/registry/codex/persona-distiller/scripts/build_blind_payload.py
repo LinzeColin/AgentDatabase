@@ -503,6 +503,23 @@ def main() -> int:
         if rubrics:
             rub_json.write_text(json.dumps(rubrics, ensure_ascii=False), encoding="utf-8")
             argv += ["--rubrics", str(rub_json)]
+            # ★★★ 再写一份**按载荷编号**索引的，给喂判据的席位用。
+            #   起因：席 E 在 Sorby #133 第 3 轮自己报上来——
+            #   「载荷的 case_id 顺序与 v1.md 的逐题标准排列不一致，
+            #     **我先按题面文字把每题对回它那条标准再打分**」。
+            #   载荷用不透明编号 `q-01…` 且**按 case_id 字母序排**，而 v1.md 按套组顺序写；
+            #   评委手上没有揭盲键，只能**照题面文字手工做这个 join**。
+            #   ★ 手工 join 一旦错位，那一席的分就是拿错标准打的，**而且不会报错**。
+            #     席 E 发现了并自己纠正；同轮席 D 一个字没提——**我无从知道它有没有错位。**
+            #   ★★ 写出这份**不泄任何东西**：它只说「q-07 对应哪条标准」，
+            #     而 A/B 哪侧是候选仍然只在 `*_blind_key.json` 里。
+            by_qid = {q: rubrics.get(v.get("case_id"), "")
+                      for q, v in (key or {}).items()}
+            if any(by_qid.values()):
+                (a.round_dir / "rubrics_by_qid.json").write_text(
+                    json.dumps(by_qid, ensure_ascii=False, indent=1), encoding="utf-8")
+                print("  ✓ 已按载荷编号另写一份 `rubrics_by_qid.json`——"
+                      "**喂判据的席位直接用它，不要再手工对题面**")
         else:
             print("  ⚠ 没找到 `judge_prompts/v1.md` 的逐题 rubric——**只查了产物，没查判据**")
         fp = subprocess.run(argv, capture_output=True, text=True)
