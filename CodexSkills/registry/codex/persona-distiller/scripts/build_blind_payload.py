@@ -58,13 +58,45 @@ LEAK_CHECKER = HERE / "check_answer_surface_leak.py"
 LOC_CHECKER = HERE / "check_quote_locator.py"   # ★ v0.0.0.89：坐标也在生成时把
 
 
-def assign(cases: dict, cand: dict, base: dict) -> tuple:
-    """→ (payload, key)。A/B 由 `sha256(case_id) % 2` 决定，**与内容无关、可复现**。"""
+def _balanced_flips(cids: list) -> dict:
+    """→ {case_id: flip}，**恰好一半 0 一半 1**，仍然只依赖 case_id、可复现。
+
+    按 sha256 排序取前一半为 0。与逐题取模的区别只在**边际分布**：
+    取模是 16 次独立抛硬币，本函数是**不放回地发 8 黑 8 白**。
+    """
+    order = sorted(cids, key=lambda c: hashlib.sha256(c.encode()).hexdigest())
+    half = len(order) // 2
+    return {c: (0 if i < half else 1) for i, c in enumerate(order)}
+
+
+def assign(cases: dict, cand: dict, base: dict, balanced: bool = False) -> tuple:
+    """→ (payload, key)。A/B 只由 case_id 决定，**与内容无关、可复现**。
+
+    `balanced=False`（默认，历史行为）：`sha256(case_id) % 2`，**16 次独立抛硬币**。
+    `balanced=True`：强制 8/8。
+
+    ## ★ 为什么会有这个参数——Adams #131 抽到 14/16
+
+    实测：仓里三个前缀 `ca`/`et`/`gwc` 分别是 **14/16**、8/16、9/16。
+    拿 2000 个合成前缀验哈希本身：**均值 8.059**、偏离 ≥4 的占 **7.55%**
+    （16 次公平抛硬币的理论值 7.68%）——**哈希是公平的，Adams 只是手气差。**
+
+    ★★ 但「公平」不等于「够用」：**每 13 个人物就有 1 个会落到 ≥12/16**，
+    600 人算下来约 46 次。那时**位置与系统高度相关**，
+    评委任何一点位置偏好（比如偏爱先读到的那一侧）都会**直接灌进 delta**。
+    这与已记的「长度混杂」是同一类混杂，只是通道从篇幅换成了位次。
+
+    ★★★ **默认没有改成 True**：改了会让已派发轮次的 A/B 变号，
+    与「各轮之间 A/B 必须逐条一致」直接冲突。**Adams #131 用的仍是取模。**
+    是否从下一个人物起改默认——**待用户裁定（⑱）**。
+    """
+    flips = _balanced_flips(sorted(cases)) if balanced else None
     payload, key = [], {}
     for i, cid in enumerate(sorted(cases), 1):
         if cid not in cand or cid not in base:
             raise SystemExit(f"✗ **缺答案：{cid}**——不是「这题跳过」，是载荷不完整")
-        flip = int(hashlib.sha256(cid.encode()).hexdigest(), 16) % 2
+        flip = flips[cid] if flips is not None else \
+            int(hashlib.sha256(cid.encode()).hexdigest(), 16) % 2
         a, b = (cand[cid], base[cid]) if flip == 0 else (base[cid], cand[cid])
         opaque = f"q-{i:02d}"
         key[opaque] = {"A": "candidate" if flip == 0 else "baseline",
@@ -108,6 +140,25 @@ def selftest() -> int:
     print("── 正向：A/B 分配可复现，同一 case_id 每次都落同一侧 ──")
     _, key2 = assign(cases, cand, base)
     chk("两次生成的 key 逐条相同", key == key2)
+
+    print("── ★★ 位次平衡：balanced=True 必须恰好一半一半，且仍然可复现 ──")
+    #   反向对照：先证明**默认那条路真的会一边倒**，否则这个自测什么也没证明。
+    skew = {f"ca-{s}-01": "题面" for s in
+            ("anonymous-fidelity", "boundary", "capability-calibration", "contrast",
+             "fact-preservation", "identity-routing", "known", "long-horizon",
+             "planning-fidelity", "refusal-stop", "style-decoy", "task-completion",
+             "token-efficiency", "tool-use", "trajectory", "voice")}
+    sc = {c: "候选" for c in skew}
+    sb = {c: "基线" for c in skew}
+    _, k_mod = assign(skew, sc, sb)
+    n_mod = sum(1 for v in k_mod.values() if v["A"] == "candidate")
+    chk(f"默认（取模）在 Adams 真实题号上确实一边倒：{n_mod}/16", n_mod == 14)
+    _, k_bal = assign(skew, sc, sb, balanced=True)
+    n_bal = sum(1 for v in k_bal.values() if v["A"] == "candidate")
+    chk(f"balanced=True 变成 {n_bal}/16", n_bal == 8)
+    _, k_bal2 = assign(skew, sc, sb, balanced=True)
+    chk("balanced 也可复现（两次逐条相同）", k_bal == k_bal2)
+    chk("★ 两条路给出的 A/B **确实不同**（所以不许中途改默认）", k_mod != k_bal)
 
     print("── 反向对照 ①：缺一条答案 → 必须退出，不许静默少一题 ──")
     short = {k: v for k, v in cand.items() if k != sorted(cases)[0]}
@@ -434,6 +485,24 @@ def main() -> int:
         print("\n⚠ **跳过了表面特征泄题门**——"
               "Barton #117 三轮判分正是因为这道门没在派发前跑而全部作废")
         return 0
+    # ── 位次混杂（**只报不拦**，同「长度混杂」一类，待裁定 ⑱）──
+    # ★ 此前没有任何一处报过这个数：Adams #131 的 14/16 是我用肉眼看出来的，
+    #   不是门告诉我的。**判据不说话，就等于不存在。**
+    n_a = sum(1 for v in key.values() if v["A"] == "candidate")
+    n = len(key)
+    lead = max(n_a, n - n_a)
+    print(f"\n── 位次混杂（**只报不拦**）──\n"
+          f"A 侧是候选 {n_a}/{n}，一边倒的那侧占 {lead}/{n} = {lead/max(n,1):.0%}")
+    if lead / max(n, 1) >= 0.75:
+        print(f"  ⚠ **位次与系统相关度 {lead/max(n,1):.0%}**——"
+              f"评委若对「先读到的那一侧」有任何偏好，**会直接灌进 delta**。\n"
+              f"    ★ 这不是编造出来的风险：同一类混杂已在长度上实测过（裁定 ⑭）。\n"
+              f"    ★★ 报数时必须带上这句话：**这一轮的 delta 有位次混杂。**\n"
+              f"    修法是 `assign(..., balanced=True)` 强制 8/8；"
+              f"**本轮没有改**——改了会让已派发轮次的 A/B 变号。")
+    else:
+        print("  ✓ 位次没有一边倒（<75%）")
+
     print("\n── 表面特征泄题门（**派发之前必须过**）──")
     p = subprocess.run([sys.executable, str(LEAK_CHECKER),
                         "--candidate", str(cand_path), "--baseline", str(base_path),
