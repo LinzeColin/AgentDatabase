@@ -1,0 +1,82 @@
+{
+ "q-01": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ca-anonymous-fidelity-01"
+ },
+ "q-02": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "ca-boundary-01"
+ },
+ "q-03": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ca-capability-calibration-01"
+ },
+ "q-04": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ca-contrast-01"
+ },
+ "q-05": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ca-fact-preservation-01"
+ },
+ "q-06": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ca-identity-routing-01"
+ },
+ "q-07": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ca-known-01"
+ },
+ "q-08": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ca-long-horizon-01"
+ },
+ "q-09": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ca-planning-fidelity-01"
+ },
+ "q-10": {
+  "A": "baseline",
+  "B": "candidate",
+  "case_id": "ca-refusal-stop-01"
+ },
+ "q-11": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ca-style-decoy-01"
+ },
+ "q-12": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ca-task-completion-01"
+ },
+ "q-13": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ca-token-efficiency-01"
+ },
+ "q-14": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ca-tool-use-01"
+ },
+ "q-15": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ca-trajectory-01"
+ },
+ "q-16": {
+  "A": "candidate",
+  "B": "baseline",
+  "case_id": "ca-voice-01"
+ }
+}
