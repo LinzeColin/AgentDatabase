@@ -1,0 +1,71 @@
+[
+ {
+  "subject_uid": "bessemer-henry-1838-1907-son",
+  "canonical_name": "Henry Bessemer",
+  "identity_category": "同名亲属（必须排除）",
+  "occupation_or_role": "冶金业者／分析化学家（1838–1907）",
+  "professional_background": "长子，同名同业；Bessemer Brothers, East Greenwich",
+  "application_scenarios": [
+   "冶金分析",
+   "钢铁厂经营"
+  ],
+  "key_capabilities": [
+   "分析化学"
+  ],
+  "distinguishing_basis": "★ 自传 Ch.XXI（pp.327-约380，约占全书 14%，含 129 件专利清单）是他写的；1905 原书编者按明写 to complete it with the assistance of his eldest son, Mr. Henry Bessemer；archive.org creator 字段列两位作者；父亲页底部混着 1907 讣告实为他的",
+  "authoritative_sources": [
+   {
+    "locator": "https://www.gracesguide.co.uk/Henry_Bessemer_(1838-1907)",
+    "note": "Grace's Guide 单开页，HTTP 200"
+   },
+   {
+    "locator": "https://archive.org/metadata/sirhenrybessemer00bessuoft",
+    "note": "creator = ['Bessemer, Henry, Sir, 1813-1898', 'Bessemer, Henry']"
+   }
+  ],
+  "evidence_level": "high"
+ },
+ {
+  "subject_uid": "bessemer-anthony-1758-1836-father",
+  "canonical_name": "Anthony Bessemer",
+  "identity_category": "同姓亲属（排除）",
+  "occupation_or_role": "发明家／金匠／铸字厂主（1758–1836）",
+  "professional_background": "父亲；巴黎造币厂任职，做过从大模翻制钢冲模的机器——精密制造语境会与目标撞",
+  "application_scenarios": [
+   "铸字",
+   "冲模制造"
+  ],
+  "key_capabilities": [
+   "精密机械"
+  ],
+  "distinguishing_basis": "生卒年与职业均不同；Grace's Guide 专页",
+  "authoritative_sources": [
+   {
+    "locator": "https://www.gracesguide.co.uk/Anthony_Bessemer",
+    "note": "HTTP 200 已打开"
+   }
+  ],
+  "evidence_level": "medium"
+ },
+ {
+  "subject_uid": "bessemer-alfred-george-1840-1918",
+  "canonical_name": "Alfred George Bessemer",
+  "identity_category": "同姓亲属（排除）",
+  "occupation_or_role": "次子（1840–1918）",
+  "professional_background": "次子",
+  "application_scenarios": [
+   "未考"
+  ],
+  "key_capabilities": [
+   "未考"
+  ],
+  "distinguishing_basis": "名不同（Alfred George）",
+  "authoritative_sources": [
+   {
+    "locator": "https://www.gracesguide.co.uk/Alfred_George_Bessemer",
+    "note": "仅见于搜索结果，未逐页打开"
+   }
+  ],
+  "evidence_level": "low"
+ }
+]

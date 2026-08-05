@@ -1,0 +1,49 @@
+{
+  "candidate_cards": [
+    "A. 人物与身份：Henry Bessemer；历史人物（材料建工师）；冶金工程师／发明家（1813–1898）。\n   专业背景：贝塞麦转炉炼钢法发明人；1879 受封 Sir；印刷体署名形式为 Henry Bessemer。\n   应用价值：场景：炼钢工艺；冶金试验方法；专利与发明实务；关键能力：转炉脱碳工艺；可锻铁与钢的制造；试验装置设计。\n   区分依据：1905 自传 pp.1-326 第一人称正文；美国专利 16,082 说明书以 Be it known that I, HENRY BESSEMER 开头。"
+  ],
+  "candidate_count": 1,
+  "candidates": [
+    {
+      "application_scenarios": [
+        "炼钢工艺",
+        "冶金试验方法",
+        "专利与发明实务"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://archive.org/details/sirhenrybessemer00bessuoft",
+          "note": "1905 自传，NOT_IN_COPYRIGHT，pp.1-326 为本人"
+        },
+        {
+          "locator": "https://patents.google.com/patent/US16082A/en",
+          "note": "美国专利 16,082 第一人称说明书"
+        }
+      ],
+      "canonical_name": "Henry Bessemer",
+      "distinguishing_basis": "1905 自传 pp.1-326 第一人称正文；美国专利 16,082 说明书以 Be it known that I, HENRY BESSEMER 开头",
+      "evidence_level": "high",
+      "identity_category": "历史人物（材料建工师）",
+      "key_capabilities": [
+        "转炉脱碳工艺",
+        "可锻铁与钢的制造",
+        "试验装置设计"
+      ],
+      "label": "A",
+      "occupation_or_role": "冶金工程师／发明家（1813–1898）",
+      "professional_background": "贝塞麦转炉炼钢法发明人；1879 受封 Sir；印刷体署名形式为 Henry Bessemer",
+      "subject_uid": "bessemer-henry-1813-1898-steelmaker"
+    }
+  ],
+  "generated_at": "2026-08-05T04:04:47Z",
+  "normalized_name": "henrybessemer",
+  "resolution": "single",
+  "schema_version": "1.0",
+  "search_scope": [
+    "sibling canonical registry",
+    "authoritative public sources supplied by orchestration"
+  ],
+  "selected_subject_uid": "bessemer-henry-1813-1898-steelmaker",
+  "status": "ready",
+  "target_name": "Henry Bessemer"
+}

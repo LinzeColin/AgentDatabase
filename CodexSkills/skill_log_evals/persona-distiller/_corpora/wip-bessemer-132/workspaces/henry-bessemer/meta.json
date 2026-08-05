@@ -1,0 +1,79 @@
+{
+  "builder_version": "v0.0.0.5",
+  "chosen_subject_uid": "bessemer-henry-1813-1898-steelmaker",
+  "consent_authority": null,
+  "created_at": "2026-08-05T04:05:13Z",
+  "current_version": null,
+  "existential_hypotheses_enabled": false,
+  "identity_selection": {
+    "canonical": "technical-engineer",
+    "display": "材料建工师",
+    "mode": "single",
+    "primary": "technical-engineer",
+    "weights": {
+      "technical-engineer": 1.0
+    }
+  },
+  "language": "en",
+  "model_version": "0.1.0-draft",
+  "name": "Henry Bessemer",
+  "namesake_gate": {
+    "candidate_count": 1,
+    "chosen_candidate": {
+      "application_scenarios": [
+        "炼钢工艺",
+        "冶金试验方法",
+        "专利与发明实务"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://archive.org/details/sirhenrybessemer00bessuoft",
+          "note": "1905 自传，NOT_IN_COPYRIGHT，pp.1-326 为本人"
+        },
+        {
+          "locator": "https://patents.google.com/patent/US16082A/en",
+          "note": "美国专利 16,082 第一人称说明书"
+        }
+      ],
+      "canonical_name": "Henry Bessemer",
+      "distinguishing_basis": "1905 自传 pp.1-326 第一人称正文；美国专利 16,082 说明书以 Be it known that I, HENRY BESSEMER 开头",
+      "evidence_level": "high",
+      "identity_category": "历史人物（材料建工师）",
+      "key_capabilities": [
+        "转炉脱碳工艺",
+        "可锻铁与钢的制造",
+        "试验装置设计"
+      ],
+      "label": "A",
+      "occupation_or_role": "冶金工程师／发明家（1813–1898）",
+      "professional_background": "贝塞麦转炉炼钢法发明人；1879 受封 Sir；印刷体署名形式为 Henry Bessemer",
+      "subject_uid": "bessemer-henry-1813-1898-steelmaker"
+    },
+    "chosen_subject_uid": "bessemer-henry-1813-1898-steelmaker",
+    "normalized_name": "henrybessemer",
+    "resolution": "single",
+    "schema_version": "1.0"
+  },
+  "normalized_name": "henrybessemer",
+  "origin_review_required": false,
+  "product_version": null,
+  "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+  "profile": "quick",
+  "prohibited_uses": [
+    "identity authentication or deceptive impersonation",
+    "invented endorsement, signature, consent, private memory or current opinion",
+    "unsupported psychological diagnosis",
+    "replacement of accountable high-stakes professional judgment"
+  ],
+  "retention_policy": null,
+  "runtime_invocation_versioning": false,
+  "scenario": null,
+  "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+  "schema_version": "2.0",
+  "slug": "henry-bessemer",
+  "status": "draft",
+  "subject_origin": "historical",
+  "target_id": "tgt-7a2041df2c4f",
+  "time_scope": "1838-1898",
+  "updated_at": "2026-08-05T04:05:13Z"
+}
