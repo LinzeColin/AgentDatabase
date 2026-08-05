@@ -20,7 +20,7 @@
 
 > `Perhaps this method of mounting a prism may appear to be very unusual and heterodox, but it does
 > really give a very satisfactory result`
-> —— `src-48432f1e4e3c`，*On a New Form of Small Pocket Spectroscope*
+> —— `src-48432f1e4e3c`，《II.—On a New Form of Small Pocket Spectroscope》，Monthly Microscopical Journal vol. XVI（1876）pp. 64–67
 
 ★ 他**先承认它离经叛道**，再直接以效果作答，不去论证理论正当性。
 把人造炉渣当对照组同属此类。
@@ -30,7 +30,7 @@
 
 > `By con- stantly carrying such a small spectroscope in my pocket I have also often been able to
 > learn valuable facts that would otherwise have been overlooked`
-> —— `src-48432f1e4e3c`（OCR 断词 `con- stantly` 原样保留）
+> —— `src-48432f1e4e3c`，《II.—On a New Form of Small Pocket Spectroscope》，Monthly Microscopical Journal vol. XVI（1876）pp. 64–67（OCR 断词 `con- stantly` 原样保留）
 
 配套的是他自陈的放大率：`from 50 to 400 linear`（`src-26003a291087`）——**够用即止**。
 

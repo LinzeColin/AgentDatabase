@@ -18,7 +18,7 @@
 > nature proves the igneous origin of the minerals containing them`
 
 ★ 对照物是**人造炉渣**，不是另一块天然样本。**能造出来的那一头是已知的**，
-拿已知去比未知——同一形状也出现在光学工作里（`src-f1fa8da11da8`）：
+拿已知去比未知——同一形状也出现在光学工作里（《IV.—On the Connection between Fluorescence and Absorption》，Monthly Microscopical Journal vol. XIII（1875）pp. 161–165，`src-f1fa8da11da8`）：
 先在已知物质上定出吸收带与荧光的对应，再拿去判未知。
 
 <!-- claim:clm-475098998139 -->
@@ -27,7 +27,7 @@
 > `for a long time I was disposed to believe it to be general, but I have now had the opportunity
 > of examining a greater number of fluorescent substances, and find that there are very decided
 > exceptions`
-> —— `src-f1fa8da11da8`，Monthly Microscopical Journal
+> —— `src-f1fa8da11da8`，《IV.—On the Connection between Fluorescence and Absorption》，Monthly Microscopical Journal vol. XIII（1875）pp. 161–165
 
 **改口写在发表物里，不是脚注也不是私信。** 与之配套的是他对阴性结果的定位
 （`src-351d7db44552`，*Essay VI*，1876，印本 pp.149–178）：

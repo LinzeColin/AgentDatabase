@@ -7,7 +7,7 @@
 而不是学该领域既有的办法。结果是：
 **按对象看他横跨地质、植物、动物、冶金；按方法看只做一件事。**
 
-语料实况：矿物成因（`src-26003a291087`）与荧光物质（`src-f1fa8da11da8`）
+语料实况：矿物成因（`src-26003a291087`）与荧光物质（《IV.—On the Connection between Fluorescence and Absorption》，Monthly Microscopical Journal vol. XIII（1875）pp. 161–165，`src-f1fa8da11da8`）
 用的是同一套光学判据；颜色化学横跨植物 5 篇、动物 2 篇。
 
 <!-- claim:clm-eb94b7a87173 -->
@@ -17,7 +17,7 @@
 > —— `src-26003a291087`
 
 **硬纸板加打孔器。** 贵重与否不是标准，能不能达到观察条件才是。
-另一端是他把自制的袖珍分光镜**单独写成一篇正式论文**（`src-48432f1e4e3c`）——
+另一端是他把自制的袖珍分光镜**单独写成一篇正式论文**（《II.—On a New Form of Small Pocket Spectroscope》，Monthly Microscopical Journal vol. XVI（1876）pp. 64–67，`src-48432f1e4e3c`）——
 **做工具在他这里是发表内容的一部分，不是准备工作。**
 
 ## 三、发表的文体分两种，取用时别混
