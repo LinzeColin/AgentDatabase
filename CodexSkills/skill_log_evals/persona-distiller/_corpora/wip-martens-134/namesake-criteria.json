@@ -1,0 +1,136 @@
+{
+  "subject": "Adolf Karl Gottfried Martens",
+  "surname": "Martens",
+  "born": 1850,
+  "died": 1914,
+  "marker_window": 40,
+
+  "any_of_markers": [
+    "Adolf",
+    "Adolph",
+    "Materialprüfungsamt",
+    "Materialprüfungsamts",
+    "Materialprufungsamt",
+    "Materialpruefungsamt",
+    "Material-Prüfungsamt",
+    "technische Versuchsanstalt",
+    "technischen Versuchsanstalt",
+    "technischen Versuchsanstalten",
+    "Materialienkunde",
+    "Materialkunde",
+    "Groß-Lichterfelde",
+    "Gross-Lichterfelde"
+  ],
+
+  "excluded_names": [
+    "Eduard von Martens",
+    "Karl Eduard von Martens",
+    "Carl Eduard von Martens",
+    "Ed. von Martens",
+    "E. von Martens",
+    "E. v. Martens",
+    "Georg Matthias von Martens",
+    "Georg von Martens",
+    "G. M. von Martens",
+    "Georg Friedrich von Martens",
+    "G. F. von Martens",
+    "G. F. de Martens",
+    "Charles de Martens",
+    "Friedrich Fromhold Martens",
+    "Fjodor Martens",
+    "Fyodor Martens",
+    "F. de Martens",
+    "Friedrich Franz Martens",
+    "F. F. Martens",
+    "Friderich Martens",
+    "Friederich Martens",
+    "Frederick Martens",
+    "Frédéric Martens",
+    "Martin Martens",
+    "Franz Heinrich Martens",
+    "F. H. Martens",
+    "Arthur Martens",
+    "Alfred Martens",
+    "John Martens",
+    "Henning John Gustav Martens",
+    "Gustav Ludolf Martens",
+    "Gustav Heinrich Martens",
+    "G. L. Martens",
+    "Rudolf Martens",
+    "Conrad Martens",
+    "Theodor Martens",
+    "Wilhelm Martens",
+    "Heinrich Wilhelm Martens",
+    "Christian Martens",
+    "Christian von Martens",
+    "Detlev Martens",
+    "Luise von Martens",
+    "Valérie von Martens",
+    "Kurt Martens",
+    "Ludwig Martens",
+    "Ludo Martens",
+    "Wilfried Martens",
+    "Klaus Märtens",
+    "Jochen Martens",
+    "Alke Martens",
+    "Bernd Martens",
+    "Sebastian Martens",
+    "Stefan Martens",
+    "Bella Martens",
+    "Otto Martens",
+    "Joachim Friedrich Martens"
+  ],
+
+  "★★★ 合著者与同题人物：**刻意不放进 excluded_names**（第一版放了，实测打回）": {
+    "起因": "第一版把 Emil Heyn / Johann Bauschinger / Floris Osmond 写进了 excluded_names。它们不是同名者，是**合著者与同题同代人**——放进排除名单会按 Sorby #133 的老形状把**目标自己的材料**删掉，而丢材料的方向不会报错。",
+    "Emil Heyn": "**与目标合著 Handbuch der Materialienkunde 第 2 卷（1912）**。排除他 ⇒ 目标最重要的著作之一被判成他人。",
+    "Floris Osmond": "★★★ **目标写过一篇专讲 Osmond 方法的论文**：《F. Osmonds Methode für die mikrographische Analyse des gekohlten Eisens》Stahl und Eisen 15 (1895) 954-957（依据：DSB 条目书目）。若排除名单里写裸 `Osmond`，这一篇会被判成他人。已实测：写全名 `Floris Osmond` 不会命中 `F. Osmonds Methode`，但**这条侥幸不构成理由**——正确做法是根本不放。",
+    "Johann Bauschinger": "目标与 H. Sollner 合编的 1893 维也纳会议录，发表在 **Bauschinger 主编的慕尼黑刊物**第 23 号（1895）。排除他 ⇒ 该件被判成他人。",
+    "改用的办法": "合著/引用关系由台账的 `author` 与 `attribution` 字段承担，并由 check_sole_authorship_overreach 复核。**本判据只管「是哪一个 Martens」，不管「有没有第二作者」。**"
+  },
+
+  "bare_name_before_year": {
+    "year": 1878,
+    "bare": "Martens",
+    "reason": "目标 1850 年生，1868-71 在 Gewerbeakademie 求学，1871-80 在铁路任职，**第一篇署名论文是 Z. d. Ver. deutscher Ingenieure 22 (1878) 11-18「Über die mikroskopische Untersuchung des Eisens」**（依据：Encyclopedia.com 转载的 DSB 条目书目 + NDB 记 1878-1914 为其著述期）。1878 年以前任何 `Martens` 署名都属别人——那个年代的德文 Martens 是 Georg Friedrich von Martens（Recueil，1780s-）、Eduard von Martens（动物学，1855-）、Martin Martens（比利时化学/植物，1830s-60s）、Friderich Martens（1675 斯匹次卑尔根）。"
+  },
+
+  "★★★ 排除名单的禁区（放进去会把目标自己的材料删掉）": {
+    "口径": "Sorby #133 实测过同一形状：页眉 OCR 成 `IT. C. Sorby` 时，**目标本人的材料被排除名单判成他人**——而丢材料的方向不会报错。以下字面**一律不许进 excluded_names**，每条都给了它为什么会命中目标本人：",
+    "Dr. Martens": "★★★ 目标 1905 年获 TH Dresden 荣誉博士，1911 年获 VDI Grashof 纪念章；德文文献称他 `Dr. Martens`／`Dr.-Ing. Martens`／`Geh. Reg.-Rat Prof. Dr. Martens` 是常态。把它当鞋类商标排掉，等于把他晚期几乎所有被引用的场合删掉。鞋类噪声要在**检索式**里处理（加 boots/AirWair 负词），不在归属判据里处理。",
+    "von Martens": "★★★ **德语 `von` 是介词「由……」**。`Die von Martens angegebene Methode`＝「Martens 给出的方法」；`herausgegeben von Martens`＝「Martens 编」。裸 `von Martens` 进排除名单，会把**每一处德文里提到「由 Martens……」的段落**判成动物学家。只许用带名或带首字母的完整形式（`E. von Martens`、`G. F. von Martens`）。",
+    "Friedrich Martens": "★★★ **目标的父亲叫 Friedrich Martens**（NDB：Gutspächter）。每一篇写他家世的传记都有「Sohn des Gutspächters Friedrich Martens」。父亲没有著作，排除他毫无收益，代价却是删掉所有带家世的传记材料。只许用 `Friedrich Fromhold Martens`／`Friedrich Franz Martens`／`Friderich Martens` 这些**完整消歧形式**。",
+    "A. Martens": "★★★ 这恰是**目标最常见的印本署名**。不许排除。",
+    "Martens": "裸姓，不许排除。",
+    "Max Martens": "★★ 已放进 excluded_names，但要知道它带一个字面风险：德文表格里 `Max.` 是「最大值」缩写。判据的正则是 `Max\\s*Martens`，`max. Martens` 中间有句点因而不匹配——**已实测**，见 NAMESAKE-GUARD-实测.md 第 ⑦ 组。若日后出现无句点的 `Max Martens-Zahl` 写法，须把本条移出排除名单。"
+  },
+
+  "★★ 不许单独使用的判据": {
+    "首字母": "目标署 `A. Martens`，而 Alfred Martens（建筑师 1881-1920）与 Arthur Martens（机械工程师 1897-1937）**署名形态完全相同**。首字母**在本人物上是歧义源，不是区分符**。",
+    "刊名里有 Materialprüfungsamt": "★★★ *Mitteilungen aus dem Königlichen Materialprüfungsamt* 是**机构连续出版物**，作者是全所各人（Emil Heyn、以及本项目未核实的其他所员）。刊名 ≠ 著者。必须逐篇看**印本署名行**。",
+    "题材是马氏体/金相": "凡讲马氏体来源的文献都会提 Martens——那是**关于他**，不是**他写的**。题材词只能定 tier（二手），不能定 authorship。",
+    "Charlottenburg / Berlin": "F. F. Martens（物理学家）也在柏林；TH Charlottenburg 有大量作者。**地名单独不算区分符**，已刻意不列入 any_of_markers。",
+    "★★ `Mechanisch-technisch` 这个词根（第一版用过，实测撤掉）": "柏林是 **Mechanisch-Technische Versuchsanstalt**（目标），慕尼黑是 **Mechanisch-technisches Laboratorium**（Bauschinger）——**词根同形，机构不同城**。而目标 1893 年维也纳会议录恰恰发在慕尼黑那份刊物上，两边字面会绞在一起。已把区分符收紧为必须带 `Versuchsanstalt`（慕尼黑那家叫 Laboratorium），并保留 40 字贴姓氏窗口。"
+  },
+
+  "★ 姓氏与刊名的讹形（会让他自己的材料搜不到）": {
+    "姓氏": ["Marteus", "Martons", "Mertens", "Martens' / Martens'sche（属格）", "Märtens"],
+    "刊名": [
+      "Mitteilungen / Mittheilungen（1900 年前后德语正字法改革，同一刊两种拼法）",
+      "Königlichen / Koniglichen / Kgl. / K.（umlaut 与缩写形态不一）",
+      "Prüfungsamt / Prufungsamt / Pruefungsamt"
+    ],
+    "口径": "这些是**发现问题**不是归属问题：搜不到 ≠ 没有。判据遇到它们会报 unknown，那是对的——unknown 是「没核」不是「不是他」。"
+  },
+
+  "裸 `A. Martens` 的人工裁定规则（判据只会报 unknown，须人工定夺）": {
+    "1878-1914 + 机械/冶金/材料试验类德文刊物": "→ 目标本人（Z. VDI、Stahl und Eisen、Mitteilungen aus den Kgl. techn. Versuchsanstalten、Verhandlungen des Vereins zur Beförderung des Gewerbfleisses、Dinglers polytechnisches Journal）",
+    "≥1919": "→ **一律不是目标**（他 1914 卒）。机械/航空题材归 Arthur Martens，建筑题材归 Alfred Martens。",
+    "建筑与营造类行业刊物": "→ 先按 Alfred Martens / John Martens / Gustav Ludolf Martens 处置，除非另有 Materialprüfungsamt 关联。",
+    "造船类刊物（Schiffbau、Jahrbuch der Schiffbautechnischen Gesellschaft）": "→ 先查 Rudolf Martens（Marinebaurat, 1868-1911）再定。",
+    "物理/光学/高频类刊物": "→ 先查 Friedrich Franz Martens（1873-1939）再定。",
+    "<1878": "→ 判据已自动判为他人（bare_name_before_year）。"
+  },
+
+  "本判据回答的问题": "**「这份材料上的 Martens 是哪一个 Martens」**，不回答「一手还是二手」。关于目标的讣文、传记会因为字面里有 `Adolf Martens` 而被判成「目标本人」——那是**归属对了**，tier 仍须单独按「谁写的」定。两件事不许混为一谈。"
+}
