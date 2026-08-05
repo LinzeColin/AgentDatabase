@@ -560,7 +560,43 @@ def report_own_voice(report, target: Path, meta: dict[str, Any],
         own_bytes += size
         own_ids.append(str(record.get('source_id')))
     ratio = (own_bytes / all_bytes) if all_bytes else 0.0
+
+    # ★★★ v0.0.0.153 起台账有 `voice` 字段——**它比按 author 猜准得多**。
+    #   `author` 认的是「谁署名」；`voice` 认的是「这份材料里是不是他在说话」。
+    #   两者会分岔的真实形态：某人物三道门全过、author 也都是他，
+    #   而 17 万字里他本人实质的话只有 8 句（Coffin #130）。
+    #   ★ `communicated`（作者自供而第三人称写的）**单独算，不并进 first-person**。
+    #   ★★ 全库都没标时**不报这一项**，而不是报 0——**没标不是没有**。
+    by_voice: dict[str, int] = {}
+    tagged = 0
+    for record in sources:
+        rel = record.get('local_path')
+        path = (target / rel) if rel else None
+        if not path or not path.is_file():
+            continue
+        v = str(record.get('voice') or 'unknown')
+        by_voice[v] = by_voice.get(v, 0) + path.stat().st_size
+        if v != 'unknown':
+            tagged += 1
+    voice_block: Any
+    if tagged == 0:
+        voice_block = ('本人物的台账**没有一份标了 `voice`**——'
+                       '**不报占比**（没标不是没有）。v0.0.0.153 起 `ingest.py --voice` 可以标。')
+    else:
+        tot = sum(by_voice.values()) or 1
+        voice_block = {
+            '**第一人称字节占比**': round(by_voice.get('first-person', 0) / tot, 4),
+            '第三人称': round(by_voice.get('third-person', 0) / tot, 4),
+            '作者自供但第三人称写的（communicated）': round(by_voice.get('communicated', 0) / tot, 4),
+            '未标（unknown）': round(by_voice.get('unknown', 0) / tot, 4),
+            '已标的份数': tagged,
+            '★': ('**这个数才是排期与 profile 该看的**。`own_voice_ratio` 按 author 算，'
+                  '答的是「谁署名」；本项答的是「他本人说了多少」。'
+                  'Coffin #130 两者分岔到极处：门全过而实质的话只有 8 句。'),
+        }
+
     report.metrics['own_voice'] = {
+        '★★ 按 voice 字段算的声口分布': voice_block,
         '本人所著的 train 源数': len(own_ids),
         'train 源总数': len(sources),
         '本人所著字节': own_bytes,

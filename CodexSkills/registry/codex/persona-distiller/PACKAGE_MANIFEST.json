@@ -16,8 +16,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "a1caa47c0052d5628841b226a8edc0d4986f2d7e6c32f383e96ef6c3b1f5958f",
-      "size_bytes": 327606
+      "sha256": "2a420f76a8628a253edfb43f338f707c0de4d9029f01e6946e21088d5b7c114d",
+      "size_bytes": 328038
     },
     {
       "path": "CONTRIBUTING.md",
@@ -816,8 +816,8 @@
     },
     {
       "path": "references/pipeline/checkers/quality_check.py",
-      "sha256": "da0f6425aa4a378e70ff8a81b2fc99d89325ef2883bb922c3dd6517f87691588",
-      "size_bytes": 171473
+      "sha256": "aaf3574b80ad05e9a11ada46a00a3fd406df9d4f599521e3105ea45657023f7c",
+      "size_bytes": 173538
     },
     {
       "path": "references/pipeline/checkers/show_fetch_distance.py",
@@ -1506,8 +1506,8 @@
     },
     {
       "path": "scripts/quality_check.py",
-      "sha256": "da0f6425aa4a378e70ff8a81b2fc99d89325ef2883bb922c3dd6517f87691588",
-      "size_bytes": 171473
+      "sha256": "aaf3574b80ad05e9a11ada46a00a3fd406df9d4f599521e3105ea45657023f7c",
+      "size_bytes": 173538
     },
     {
       "path": "scripts/register_persona.py",
