@@ -33,5 +33,5 @@
   "runtime_identity_routing": "automatic",
   "runtime_invocation_versioning": false,
   "subagent_review_disclosure": "Independent agents are preferred. When unavailable, serialized sealed contexts must be disclosed and may not be called independent models.",
-  "version": "v0.0.0.150"
+  "version": "v0.0.0.151"
 }

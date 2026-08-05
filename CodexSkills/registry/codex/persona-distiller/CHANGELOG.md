@@ -1,5 +1,46 @@
 # Changelog
 
+## v0.0.0.151
+
+### 新判据 `check_namesake_criteria.py`：**按人物定制的同名判据**（已接线，只写 metrics）
+
+`check_authorship.ocr_byline_evidence` 比的是「名 + 姓」。Sorby #133 实跑：
+
+    ocr_byline_evidence("By Henry Sorby.", first="Henry", last="Sorby") → **判为目标本人**
+
+而那是**他父亲**（c.1791–1846/47，Sheffield 刀具商）。**父子二人「名+姓」两样全同。**
+
+不是理论风险：University of Sheffield 的 Sorby Collection 明写着
+`one diary from his father covering 1845-1846`——**同一馆藏里「Sorby 的日记」指两个人**；
+**1841 年人口普查里目标本人也只登记为「Henry Sorby」**，没有 Clifton。
+
+★ 上一次同形事故是 GE 总裁 Charles A. Coffin 被当成焊接发明人的署名放行。
+**那次是入库之后发现的；这次是抓源之前测出来的。**
+
+工作区放一份 `namesake-criteria.json`，判定顺序**先排除后确认**：
+排除名单 → 早于分界年且只有裸名 → 命中区分符 → 都没命中则 **`unknown`**。
+
+★★ **`unknown` 是独立一档，不许并进任何一边。**
+本项目吃过太多次「空值被读成没问题」的亏（[[empty-default-swallows-unknown]]）。
+反向对照守着这一点：1870 年只署「Henry Sorby」→ `unknown`（父亲已故，不能默认归他）；
+**年份缺失时不许套用年份规则**。
+
+Sorby 的判据已写：区分符 Clifton／F.R.S./F.G.S.，排除 13 个同姓者，分界年 1850。
+★ 明确写进文件的一条：**首字母不可信**——实测讹形 `H. G.`／`U. G.`／`IT. C.`／`II. C.`／`E. 0.`，
+且建筑师 `T. C.` 与目标 `H. C.` 只差一个首字母。
+
+### #133 Sorby 探测完成
+
+同名 9 个＋1 个同名簇；一手 ≈34 件（**按作品去重，不按 IA id**——
+1862 Bakerian Lecture 一篇有 3 个 id，不去重虚高 60%），quick 与 deep 门都够。
+
+★★ **金相学那一支目前是残的**：JISI 1886/1887 三条免费通道全挡
+（archive.org 年份跳档／Google Books 429／HathiTrust 403），
+现有替代全是第三人称转述。**拿到 JISI 之前不要把它宣传成金相学人物。**
+
+版权期内的编纂本冒充一手：1 确凿（`sorbycentennials0000sorb`，`_djvu.txt` HTTP 401）
+＋ 1 重排本（CC0 但不得用于逐字引文）＋ 1 意大利文译本（与原作同一件，计数须合并）。
+
 ## v0.0.0.150
 
 ### 门 1：「rubric 抄答案」只比英文原字符串，对中译/压缩**全盲**

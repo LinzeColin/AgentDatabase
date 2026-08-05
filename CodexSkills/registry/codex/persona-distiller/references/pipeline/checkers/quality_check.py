@@ -2450,6 +2450,45 @@ def run_holdout_overlap(report, target: Path, cache_dirs: list[str]) -> None:
     report.metrics['holdout_overlap'] = info
 
 
+def run_namesake_criteria(report, target: Path) -> None:
+    """**按人物定制的同名判据**（v0.0.0.151 接线，只写 metrics）。
+
+    `check_authorship` 比的是「名 + 姓」，而 Sorby #133 的**父亲也叫 Henry Sorby**——
+    父子二人这两样全同，只差一个中名，**现有护栏实测挡不住**。
+    本件读工作区里的 `namesake-criteria.json`，逐份给出归属结论，
+    并把「说不准」单列成 `unknown`——**不许并进任何一边**。
+    """
+    here = Path(__file__).resolve().parent
+    script = here / 'check_namesake_criteria.py'
+    if not script.exists():
+        report.metrics['namesake_criteria'] = {'状态': '检查器未安装，**未核验**（不是通过）'}
+        return
+    if not (target / 'namesake-criteria.json').is_file() and \
+       not (target.parent.parent / 'namesake-criteria.json').is_file():
+        report.metrics['namesake_criteria'] = {
+            '状态': '本人物没有定制判据——**不适用**（不是通过）',
+            '★': '「名+姓」够不够，取决于这个人物有没有同名近亲。**每个人物都要单测一次。**'}
+        return
+    spec = importlib.util.spec_from_file_location('_pd_nsc', script)
+    mod = importlib.util.module_from_spec(spec)
+    buffer = io.StringIO()
+    try:
+        spec.loader.exec_module(mod)
+        with contextlib.redirect_stdout(buffer):
+            n = mod.run(target if (target / 'namesake-criteria.json').is_file()
+                        else target.parent.parent)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['namesake_criteria'] = {'状态': f'运行失败，**未核验**：{exc}'}
+        return
+    lines = [x.strip() for x in buffer.getvalue().splitlines() if x.strip()]
+    info: dict[str, Any] = {'**unknown 条数**': n, '逐条': lines[:10]}
+    if n:
+        info['口径'] = ('**「说不准」不是通过。** 入库前逐条定夺，'
+                        '或给那份材料补一条能站住的区分符。')
+        report.warn('corpus.namesake-unknown', f'同名归属说不准 {n} 条（**不是通过**）')
+    report.metrics['namesake_criteria'] = info
+
+
 def run_rubric_health(report, target: Path) -> None:
     """**判据本身的两项体检**：抄没抄答案、要不要求人物出戏（v0.0.0.150 接线，**只写 metrics**）。
 
@@ -2957,6 +2996,7 @@ def main() -> int:
         run_threshold_doc_drift(report, target)
         run_verdict_attribution(report, target)
         run_rubric_health(report, target)
+        run_namesake_criteria(report, target)
         report_own_voice(report, target, meta, sources)
         report_refusal_overflow(report, target)
         run_corpus_ceiling(report, target, report.profile)
