@@ -58,6 +58,47 @@ LEAK_CHECKER = HERE / "check_answer_surface_leak.py"
 LOC_CHECKER = HERE / "check_quote_locator.py"   # ★ v0.0.0.89：坐标也在生成时把
 
 
+RUBRIC_MARKERS = ("## 逐题 rubric", "## 逐题评分标准")
+_CID_RE = re.compile(r"^[a-z]{2,4}(?:-[a-z]+)+-\d+$")
+
+
+def extract_rubrics(text: str, cases: list):
+    """从冻结指令里抽出逐题 rubric。**抽不到就返回 None，绝不退回整份文件。**
+
+    ## ★ 这个函数是补一个真实的漏
+
+    原来一行：`text.split("## 逐题 rubric", 1)[-1]`。
+    Adams #131 的小标题写的是 **`## 逐题评分标准`**（写 v2 rubric 时改的名），
+    `split` 没命中 —— 而 **`[-1]` 在没命中时返回的是整份文件**。
+    于是整段前言被当成一条 rubric 喂给了判据，多出一个键 **`'#'`**。
+
+    ★★ **它没有报错，报的是「0/17」。** 17 = 16 题 + 1 个假题。
+    分母多了 1 而没有任何一处说话——**这正是「判据绿了但指错了文件」的第 11 次。**
+
+    三道防线，缺一不可：
+    1. 认多个小标题（两种写法都是真实存在的）；
+    2. **一个都不命中 → 返回 None 让调用方中止**，不许静默用整份文件；
+    3. 键必须长得像 case_id，且**必须真的在本次的题目集合里**——
+       前言那种块连第 3 关都过不了。
+    """
+    body = None
+    for m in RUBRIC_MARKERS:
+        if m in text:
+            body = text.split(m, 1)[1]
+            break
+    if body is None:
+        return None
+    want, out = set(cases), {}
+    for blk in re.split(r"\n### ", body):
+        blk = blk.strip()
+        if not blk:
+            continue
+        cid = blk.split("\u3000")[0].split()[0].strip()
+        if cid in want or _CID_RE.match(cid):
+            out[cid] = "### " + blk
+    return out or None
+
+
 def _balanced_flips(cids: list) -> dict:
     """→ {case_id: flip}，**恰好一半 0 一半 1**，仍然只依赖 case_id、可复现。
 
@@ -159,6 +200,20 @@ def selftest() -> int:
     _, k_bal2 = assign(skew, sc, sb, balanced=True)
     chk("balanced 也可复现（两次逐条相同）", k_bal == k_bal2)
     chk("★ 两条路给出的 A/B **确实不同**（所以不许中途改默认）", k_mod != k_bal)
+
+    print("── ★★ 抽 rubric：小标题不认识时**必须返回 None**，不许退回整份文件 ──")
+    real = ["ca-known-01", "ca-voice-01"]
+    doc = ("# 冻结评委指令 v1\n\n前言：不许把「本库没收录」当成正确答案。\n\n"
+           "## 逐题评分标准\n\n### ca-known-01\u3000[known]\n\n须说明拿不出该篇。\n\n"
+           "### ca-voice-01\u3000[voice]\n\n须先认没讲清。\n")
+    r = extract_rubrics(doc, real)
+    chk(f"认得 `## 逐题评分标准`，抽出 {len(r or {})} 条", r is not None and len(r) == 2)
+    chk("**前言没有混进来**（没有 `#` 这种假题）", r is not None and "#" not in r)
+    r2 = extract_rubrics(doc.replace("## 逐题评分标准", "## 逐题 rubric"), real)
+    chk("`## 逐题 rubric` 这种老写法也认得", r2 is not None and len(r2) == 2)
+    chk("★ 两种写法抽出来的内容一样", (r or {}).keys() == (r2 or {}).keys())
+    bad = extract_rubrics(doc.replace("## 逐题评分标准", "## 打分细则"), real)
+    chk("★★ 小标题不认识 → **返回 None**（旧代码这里会把整份文件当 rubric）", bad is None)
 
     print("── 反向对照 ①：缺一条答案 → 必须退出，不许静默少一题 ──")
     short = {k: v for k, v in cand.items() if k != sorted(cases)[0]}
@@ -422,13 +477,12 @@ def main() -> int:
         rubrics = {}
         v1 = a.workspace / "judge_prompts" / "v1.md"
         if v1.is_file():
-            body = v1.read_text(encoding="utf-8").split("## 逐题 rubric", 1)[-1]
-            for blk in re.split(r"\n### ", body):
-                blk = blk.strip()
-                if not blk:
-                    continue
-                cid = blk.split("\u3000")[0].split()[0].strip()
-                rubrics[cid] = "### " + blk
+            rubrics = extract_rubrics(v1.read_text(encoding="utf-8"), sorted(cases))
+            if rubrics is None:
+                print("✗ **抽不出逐题 rubric——中止。**\n"
+                      f"   {v1} 里找不到已知的小标题（{'／'.join(RUBRIC_MARKERS)}），\n"
+                      "   **且不许退回「拿整份文件当 rubric」**——那样判据查的是别的东西。")
+                return 4
         rub_json = a.round_dir / "_rubrics_for_frame_check.json"
         if rubrics:
             rub_json.write_text(json.dumps(rubrics, ensure_ascii=False), encoding="utf-8")
