@@ -49,6 +49,7 @@ import argparse
 import hashlib
 import json
 import pathlib
+import re
 import subprocess
 import sys
 
@@ -354,6 +355,51 @@ def main() -> int:
     print("  （A/B 两侧的均长差**不是**该看的数：候选被均分到两侧，"
           "两侧接近是分配方式的产物）")
     print("★ 题号已改为不透明编号 q-01…（套组归属只在 key 里）")
+
+    # ★★★ 出戏门（**派发之前只报不拦**）——Thomson #129 的教训
+    #   那一轮判出 +0.4516（16/16 三轮不变），而事后回扫发现
+    #   **10/16 道 rubric 把「本库没收录 X」这类资料层状态指定为正确答案**，
+    #   与同一份指令第 3 条「扣局部出戏」直接冲突——**判据在惩罚守住人物、奖励破框**。
+    #   回扫 Carver #127 同样是 6/16 = 38%：**不是个例，是这套 rubric 写法的通病。**
+    #   ★ 这道门若当时就在，Thomson 那 10 条**在派发第 1 轮之前**就会被看见。
+    #   **只报不拦**：出不出戏要不要改，取决于人物与用例，判据不替人做主。
+    frame_checker = HERE / "check_persona_frame_break.py"
+    if frame_checker.exists():
+        print("\n── 出戏门（**只报不拦**；rubric 与产物一起查）──")
+        argv = [sys.executable, str(frame_checker), str(cand_path)]
+        # 逐题 rubric 在人物自己的冻结指令里（`judge_prompts/v1.md` 的 `### <case_id>` 段）
+        rubrics = {}
+        v1 = a.workspace / "judge_prompts" / "v1.md"
+        if v1.is_file():
+            body = v1.read_text(encoding="utf-8").split("## 逐题 rubric", 1)[-1]
+            for blk in re.split(r"\n### ", body):
+                blk = blk.strip()
+                if not blk:
+                    continue
+                cid = blk.split("\u3000")[0].split()[0].strip()
+                rubrics[cid] = "### " + blk
+        rub_json = a.round_dir / "_rubrics_for_frame_check.json"
+        if rubrics:
+            rub_json.write_text(json.dumps(rubrics, ensure_ascii=False), encoding="utf-8")
+            argv += ["--rubrics", str(rub_json)]
+        else:
+            print("  ⚠ 没找到 `judge_prompts/v1.md` 的逐题 rubric——**只查了产物，没查判据**")
+        fp = subprocess.run(argv, capture_output=True, text=True)
+        try:
+            fr = json.loads(fp.stdout)
+            if fr.get("模式") == "analytic":
+                print("  本判据不适用（第三人称分析型产物）")
+            else:
+                na, nr = len(fr.get("产物出戏", {})), len(fr.get("判据要求出戏", {}))
+                print(f"  产物出戏 {na} 题；**判据把资料层答案指定为正确 {nr} 题**")
+                if nr:
+                    print("  ★★★ **根因在判据不在产物**——只改产物下一轮还会长回来。"
+                          "参照：Thomson #129 = 10/16、Carver #127 = 6/16。")
+                    print(f"  判据出问题的题：{sorted(fr['判据要求出戏'])[:8]}")
+                if na:
+                    print(f"  产物出戏的题：{sorted(fr['产物出戏'])[:8]}")
+        except Exception:                                        # noqa: BLE001
+            print("  ⚠ 出戏门输出解析失败，**未核**（不是通过）")
 
     # ★★ 生成即判：泄题必须拦在派发评委之前
     if locator_gate(cand_path):                  # ★ 在早退之前——它不该被 skip 掉

@@ -16,8 +16,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "fe2a7047601a5616807d79f8270f53c1a33daad26b3617ce3b3ca42bdbd4b643",
-      "size_bytes": 283144
+      "sha256": "33e141a0f4b5b7168902ee89a5c5abd0123556d57cc22b160b726b7ab98bbfdc",
+      "size_bytes": 284262
     },
     {
       "path": "CONTRIBUTING.md",
@@ -456,8 +456,8 @@
     },
     {
       "path": "references/pipeline/checkers/build_blind_payload.py",
-      "sha256": "4b2fd0b7c41315d213ce67cdc8131930d703fb18a657b849a2cb1e69740f4067",
-      "size_bytes": 21730
+      "sha256": "ea319cbc5aa4292e45fa3bba4b268c1e0ff8f2294685278d5971373fea03afda",
+      "size_bytes": 24649
     },
     {
       "path": "references/pipeline/checkers/build_source_ledger.py",
@@ -1031,8 +1031,8 @@
     },
     {
       "path": "scripts/build_blind_payload.py",
-      "sha256": "4b2fd0b7c41315d213ce67cdc8131930d703fb18a657b849a2cb1e69740f4067",
-      "size_bytes": 21730
+      "sha256": "ea319cbc5aa4292e45fa3bba4b268c1e0ff8f2294685278d5971373fea03afda",
+      "size_bytes": 24649
     },
     {
       "path": "scripts/build_manifest.py",

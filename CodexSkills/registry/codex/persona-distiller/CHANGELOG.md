@@ -116,6 +116,27 @@ Fleming 19%、Nightingale/Virchow 16%、Lister 12%、其余 3–6%。
 `--middle-initial` 已上 CLI，`quality_check` 从 `meta.middle_initial` 注入。
 Coffin #130 的 `meta.json` 已声明，**在第一份语料落地之前就位**。
 
+### `check_persona_frame_break` 已接进 `build_blind_payload`（派发之前，只报不拦）
+
+**只做成工具不算完**——它上一版谁也没调用，只在文档里被引用。
+现在接在**派发评委之前**，与引文坐标门、表面特征泄题门同一位置。
+
+逐题 rubric 从人物自己的冻结指令 `judge_prompts/v1.md` 的 `### <case_id>` 段读；
+读不到就明说「**只查了产物，没查判据**」，不装作查过。
+
+**实跑 Thomson #129 第 1 轮载荷**（就是那份判出 +0.4516 的）：
+
+```
+── 出戏门（**只报不拦**；rubric 与产物一起查）──
+  产物出戏 7 题；**判据把资料层答案指定为正确 10 题**
+  ★★★ **根因在判据不在产物**——只改产物下一轮还会长回来。
+  判据出问题的题：et-boundary-01 / et-capability-calibration-01 / et-contrast-01 /
+                  et-planning-fidelity-01 / et-refusal-stop-01 / et-style-decoy-01 / …
+```
+
+**这道门若当时就在，那 10 条会在派发第 1 轮之前被看见**，
+而不是三轮判完、写完裁定台账之后才回头发现。
+
 ### 世代后缀（`Jr.`）——Adams #131 探测当场逼出的第三类同名
 
 Coffin 那类是**同姓不同中名**，靠中名首字母分开。
