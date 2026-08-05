@@ -537,7 +537,7 @@ def test_the_denylist_is_tightened_never_relaxed() -> None:
     """The taskpack says 独立凭据形态文件继续按既有 denylist 排除，不得放宽.
 
     Writing this test found a hole rather than confirming the pattern:
-    `\.env($|\.)` sat inside a group anchored by the trailing `$`, so only a
+    the `.env` alternative sat inside a group anchored by the trailing `$`, so only a
     bare `.env` matched and `.env.local` went straight through. Closing that
     excludes more, which is the safe direction; measured against the real source
     roots it newly excludes nothing, so no captured file is lost."""
@@ -725,14 +725,22 @@ def test_every_workflow_that_reads_ops_is_triggered_by_ops() -> None:
     A workflow that runs those tests but is not triggered by that directory can
     be broken by a change it never sees — the same shape as the paths filter
     that once let a commit run no CI at all."""
-    import yaml
-
+    # No PyYAML: it is absent from the CI image this gate runs in, and a test
+    # that only passes locally is worth nothing. Every `paths:` block is checked
+    # — the first version read only the first of two and would have passed while
+    # the pull_request trigger stayed narrow.
     for name in ("memory-atlas-acceptance.yml", "memory-atlas-v31.yml"):
-        loaded = yaml.safe_load((REPO / ".github" / "workflows" / name).read_text(encoding="utf-8"))
-        # PyYAML parses the bare `on:` key as the boolean True.
-        triggers = loaded.get("on") or loaded.get(True) or {}
-        for event in ("push", "pull_request"):
-            paths = (triggers.get(event) or {}).get("paths")
-            if paths is None:
-                continue  # no filter means every change triggers it
-            assert "ops/memory-atlas/**" in paths, f"{name}:{event}"
+        lines = (REPO / ".github" / "workflows" / name).read_text(encoding="utf-8").splitlines()
+        blocks, current = [], None
+        for line in lines:
+            stripped = line.strip()
+            if stripped == "paths:":
+                current = []
+                blocks.append(current)
+            elif current is not None and stripped.startswith("- "):
+                current.append(stripped[2:].strip().strip('"\''))
+            elif current is not None and stripped and not stripped.startswith("#"):
+                current = None
+        assert blocks, name
+        for index, block in enumerate(blocks):
+            assert "ops/memory-atlas/**" in block, f"{name} paths block {index}: {block}"
