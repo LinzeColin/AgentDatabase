@@ -66,11 +66,11 @@ Jane Austen（检索污染）、Austen Henry Layard 与 Austen Chamberlain（**`
 
 ## 三、★★★ `surname` 锚点从 `Roberts` 改成 `oberts`——实测逼出来的
 
-判据拿 `surname` 做**纯子串**贴近检验，没有模糊匹配。跑全部 26 份落盘正文，
+判据拿 `surname` 做**纯子串**贴近检验，没有模糊匹配。跑全部 27 份落盘正文，
 姓氏的印本 OCR 形态**实测 14 种**（逐形计数，不是记的）：
 
 ```
-108  Roberts-Austen        69  Roberts- Austen        6  Eoberts-Austen
+109  Roberts-Austen        69  Roberts- Austen        6  Eoberts-Austen
   5  Boberts-Austen         5  Roberts -Austen        4  Koberts- Austen
   2  Eoberts- Austen        2  Koberts-Austen         1  Roberts Austen
   1  Roberts-Aicsten        1  Roberts-AuBten         1  Eoberts-Aiisten
@@ -79,7 +79,7 @@ Jane Austen（检索污染）、Austen Henry Layard 与 Austen Chamberlain（**`
 
 - 写 `Roberts-Austen` → `Koberts- Austen`／`Boberts-Austen`／`Roberts- A listen` 这些**目标本人的署名**全部贴不上。
 - 写 `Roberts` → 仍然漏：**`philtrans08066202`（Proc. Roy. Soc. 71, 1902）全篇 0 处 `Roberts`**，每一处都被打成 `Eoberts`。
-- 受损的恰是**首字母**（R→K／B／E）。去掉首字母的 `oberts` 在 26 份里**一次也没被打坏**。
+- 受损的恰是**首字母**（R→K／B／E）。去掉首字母的 `oberts` 在 27 份里**一次也没被打坏**。
 
 **把锚点挪到没被损坏的那一段**——这是实测结论，不是取巧。
 
@@ -95,7 +95,7 @@ Jane Austen（检索污染）、Austen Henry Layard 与 Austen Chamberlain（**`
   | 检验 | W=45 | W=60 | W=120 |
   |---|---|---|---|
   | 反例串 `Mr. Thomas Roberts, of the Sheffield file works, was afterwards shown over the Royal Mint.`（实测距离 **61 字**） | unknown ✓ | unknown ✓ | **目标本人 ✗** |
-  | 真语料 26 份判为「目标本人」 | 26/26 | — | 26/26 |
+  | 真语料 27 份判为「目标本人」 | 27/27 | — | 27/27 |
 
   **放宽零收益，却把反例放进来。** 取能容纳英式职衔串的最小整值。
 
@@ -124,15 +124,18 @@ Jane Austen（检索污染）、Austen Henry Layard 与 Austen Chamberlain（**`
 **跑出来不会**——判据把名字编成记号间只许空白的正则 `William\s*Roberts`，中名 `Chandler` 横在中间，匹配不上。
 初测结果是 **0/15**，看起来这条可以安全排除。
 
-**真正的理由是去语料里找出来的**：全 26 份扫描 `William` 紧挨 `Roberts` 的写法，
-**只有 2 处，两处都是目标本人**，逐字照录：
+**真正的理由是去语料里找出来的**：全 27 份扫描 `William` 紧挨 `Roberts` 的写法，
+**只有 3 处，三处都是目标本人**，逐字照录：
 
 > `Sir Andrew Noble. Sir William Crookes. Sir William Roberts- Austen. The Right Hon. R. B. (now Lord) Haldane.`
 > `BIBLIOGRAPHY. PAPERS AND ADDRESSES BY THE LATE SIR WILLIAM ROBERTS- AUSTEN RELATING TO THE METALLURGY OF IRON AND STEEL.`
+> `Sir William Roberts-Austen, K.C.B., who was received with loud applause…`
 
-两处都在 1914 年 Smith 编《Roberts-Austen: A Record of His Work》里，
-**第二处正是他本人著作目录的标题行**。把 `William Roberts` 或 `Sir William Roberts` 写进排除名单，
-这两处判「他人」——**整部 1.24 MB 的书被删掉**（实测 2/2）。
+前两处在 1914 年 Smith 编《Roberts-Austen: A Record of His Work》里，
+**第二处正是他本人著作目录的标题行**；第三处在 J. Iron & Steel Inst. 55 (1899) 的就任记录里，
+**那一句是他 1899 年会长致辞唯一的归属证据**（也是 check_authorship 唯一认得的那一条）。
+把 `William Roberts` 或 `Sir William Roberts` 写进排除名单，这三处判「他人」——
+**1.24 MB 的书与 8 万字的会长致辞一起被删掉**（实测 3/3）。
 
 > **教训**：没跑过的理由不许写进判据。第一版那句话读起来完全合理，是错的。
 > 而且两版的**结论相同**（这条不许排除）、**理由完全不同**——
@@ -162,7 +165,7 @@ Sir William Roberts（1830-1899）是本人物最高危的同名者，而 `Willi
 | ④ | 反例：另一个 Roberts 与 `Royal Mint` 隔 61 字同现 | W=45 unknown ✓／W=120 误判 ✗ |
 | ⑤ | 判据自带 self-test（Sorby 的七组对照） | **✓ 自测全过** |
 | ⑥ | 排除名单逐条反向体检 435 次 | **目标本人零命中** |
-| ⑦ | 对**真实台账** 26 份 | 目标本人 26　他人 0　**unknown 0** |
+| ⑦ | 对**真实台账** 27 份 | 目标本人 27　他人 0　**unknown 0** |
 
 ★ 第 ① 组里的**家世段**与**改姓段**单看会判 unknown（那两句只提到父／外祖父／舅父，
 不提目标本人的任何区分符）——这是**对的**：unknown 是「没核」不是「不是他」。
@@ -177,7 +180,7 @@ WS=…/_corpora/wip-roberts-austen-135
 TGT=$WS/workspaces/william-chandler-roberts-austen
 
 python3 scripts/check_namesake_criteria.py --self-test     # → ✓ 自测全过
-python3 scripts/check_namesake_criteria.py "$TGT"          # → 目标本人 26　他人 0　unknown 0
+python3 scripts/check_namesake_criteria.py "$TGT"          # → 目标本人 27　他人 0　unknown 0
 ```
 
 姓氏讹形计数、435 次反向体检、窗口三档对照的脚本见 FETCH-REPORT.md 文末。

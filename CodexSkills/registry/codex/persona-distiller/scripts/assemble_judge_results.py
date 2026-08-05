@@ -307,6 +307,46 @@ def selftest() -> int:
     return 0 if not fails else 2
 
 
+def census(corpora_root):
+    """全库普查：每个人物末轮的两档 delta。**这一段被我手搓了三次，三次都有 bug。**
+
+    三次分别栽在：① 文件名只认 `seat_D.json`（漏 `_raw` 那族 → 撤回了 ㉓ 的核心论据）；
+    ② 取值写 `v["A"]`（Barton 的分数是 `[a, b]` 列表 → 整个人物静默消失）；
+    ③ 揭盲键当成 dict（最早三人是裸字符串 `"A"` → TypeError 被吞）。
+    **每一次的错都长成「某几个人物不见了」，而不是「报错」。**
+
+    所以收进模块：**要普查就调这里，不要再在临时脚本里重写读取。**
+    """
+    out = {}
+    for rd in sorted(pathlib.Path(corpora_root).glob("**/round*")):
+        if not rd.is_dir():
+            continue
+        parts = str(rd).split("_corpora/")
+        who = parts[1].split("/")[0] if len(parts) > 1 else rd.parent.name
+        keys = list(rd.glob("*blind_key*.json"))
+        if not keys:
+            continue
+        try:
+            key = json.loads(keys[0].read_text(encoding="utf-8"))
+        except Exception:                                        # noqa: BLE001
+            continue
+        g = {"rub": [], "nor": []}
+        for seat, tag in (("D", "rub"), ("E", "rub"), ("F", "nor"), ("G", "nor")):
+            f = find_seat_file(rd, seat)
+            if not f:
+                continue
+            rows = read_seat(json.loads(f.read_text(encoding="utf-8")),
+                             key, seat, {q: "x" for q in key})
+            g[tag] += [r["candidate"] - r["baseline"] for r in rows]
+        if g["rub"]:
+            out.setdefault(who, []).append({
+                "round": rd.name,
+                "rubric_fed": sum(g["rub"]) / len(g["rub"]),
+                "no_rubric": (sum(g["nor"]) / len(g["nor"])) if g["nor"] else None,
+            })
+    return out
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -316,10 +356,26 @@ def main() -> int:
     ap.add_argument("--seat", action="append", default=[],
                     help="席位，形如 seat-D-score-v1:cb_judge_D.json，可给多次")
     ap.add_argument("--self-test", action="store_true")
+    ap.add_argument("--census", metavar="CORPORA_ROOT",
+                    help="全库普查：每人末轮两档 delta（**别再手搓这段读取**）")
     a = ap.parse_args()
 
     if a.self_test:
         return selftest()
+    if a.census:
+        rows = census(a.census)
+        only = []
+        print(f"{'人物':<22}{'末轮喂判据':>11}{'末轮无rubric':>14}")
+        for who in sorted(rows):
+            last = rows[who][-1]
+            nor = f"{last['no_rubric']:+.4f}" if last["no_rubric"] is not None else "从没量过"
+            print(f"{who:<22}{last['rubric_fed']:>+11.4f}{nor:>14}")
+            if last["no_rubric"] is None:
+                only.append(last["rubric_fed"])
+        if only:
+            print(f"\n只有喂判据档 {len(only)} 人｜均 {sum(only)/len(only):+.4f}"
+                  f"｜≥+0.05 的 {sum(1 for x in only if x >= 0.05)}/{len(only)}")
+        return 0
     if not (a.workspace and a.round_dir):
         ap.error("要么 --self-test，要么同时给 --workspace 与 --round-dir")
 

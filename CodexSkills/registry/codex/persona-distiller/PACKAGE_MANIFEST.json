@@ -451,8 +451,8 @@
     },
     {
       "path": "references/pipeline/checkers/assemble_judge_results.py",
-      "sha256": "cdd8be96565a956b55ad8ce15a9e89691d34166c1d1ba6a8b5c0c4e77de3bcd4",
-      "size_bytes": 21815
+      "sha256": "befbc503ddbbf6f2433df7c6ad1cdadb37daee59a53636ed98b465877ca50dae",
+      "size_bytes": 24508
     },
     {
       "path": "references/pipeline/checkers/build_blind_payload.py",
@@ -1066,8 +1066,8 @@
     },
     {
       "path": "scripts/assemble_judge_results.py",
-      "sha256": "cdd8be96565a956b55ad8ce15a9e89691d34166c1d1ba6a8b5c0c4e77de3bcd4",
-      "size_bytes": 21815
+      "sha256": "befbc503ddbbf6f2433df7c6ad1cdadb37daee59a53636ed98b465877ca50dae",
+      "size_bytes": 24508
     },
     {
       "path": "scripts/build_blind_payload.py",
