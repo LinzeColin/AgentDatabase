@@ -21,9 +21,12 @@ class InitAndIngestTests(unittest.TestCase):
             self.assertEqual(meta['profile'], 'quick')
             self.assertEqual(meta['status'], 'draft')
             self.assertEqual(meta['identity_selection']['primary'], 'thinker-educator')
-            self.assertEqual(meta['namesake_gate']['resolution'], 'none')
+            # ★ v0.0.0.150：夹具不再写空候选数组（空 → `unverified`，那是「没核」不是「干净」），
+            #   所以这里从 'none' 改成 'single'。
+            self.assertEqual(meta['namesake_gate']['resolution'], 'single')
             self.assertEqual(meta['normalized_name'], 'examplethinker')
-            self.assertIsNone(meta['chosen_subject_uid'])
+            # ★ 同上：夹具现在给的是一个已解析的单候选，所以这里绑定了 uid 而不是 None。
+            self.assertEqual(meta['chosen_subject_uid'], 'example-thinker')
             self.assertEqual(meta['builder_version'], 'v0.0.0.5')
             self.assertIsNone(meta['product_version'])
             self.assertFalse(meta['runtime_invocation_versioning'])

@@ -24,13 +24,42 @@ def candidate(name: str, uid: str, evidence_level: str = 'low') -> dict[str, obj
 
 
 class NamesakeGateTests(unittest.TestCase):
-    def test_no_candidate_is_ready_and_does_not_block(self) -> None:
+    def test_no_candidate_is_unverified_not_ready(self) -> None:
+        """**0 个候选不是「没有同名风险」，是「没核」。**
+
+        本条原名 `test_no_candidate_is_ready_and_does_not_block`，断言 0 候选 → `ready`。
+        那条断言**没有写任何理由**，它锁住的是缺陷而不是决定：
+
+        全库回查 32 份同名产物，**9 份是 0 候选却 ready**——
+        Koch #107／Lister #108／Pasteur #106／Semmelweis #105／Fleming #111／
+        Blackwell #118／DeBakey #119／Benardos #128／**Thomson #129**。
+
+        ★ Thomson 正是那次同名事故的人物：GE 总裁 Charles A. Coffin
+        被当成焊接发明人的署名放行。**他的同名门就是在 0 候选下报的 ready。**
+
+        护栏只比姓、本来就挡不住同姓者；再让「没喂候选」也算通过，这道门形同虚设。
+        """
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            empty = root / 'empty-candidates.json'
+            empty.write_text('[]', encoding='utf-8')
+            gate = root / 'gate.json'
+            result = run_script('namesake_gate.py', '--name', 'Unknown Person',
+                                '--candidates-file', empty, '--output', gate,
+                                check=False)
+            self.assertEqual(result.returncode, 4)
+            payload = json.loads(gate.read_text(encoding='utf-8'))
+            self.assertEqual(payload['status'], 'unverified')
+            self.assertEqual(payload['resolution'], 'none')
+            self.assertIsNone(payload['selected_subject_uid'])
+
+    def test_single_candidate_still_ready(self) -> None:
+        """★ 反向对照：**修完之后单一候选必须照旧过**，否则等于把门焊死。"""
         with tempfile.TemporaryDirectory() as tmp:
             gate = make_namesake_gate(Path(tmp), 'Unknown Person')
             payload = json.loads(gate.read_text(encoding='utf-8'))
             self.assertEqual(payload['status'], 'ready')
-            self.assertEqual(payload['resolution'], 'none')
-            self.assertIsNone(payload['selected_subject_uid'])
+            self.assertEqual(payload['resolution'], 'single')
 
     def test_single_low_evidence_candidate_binds_without_confirmation(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

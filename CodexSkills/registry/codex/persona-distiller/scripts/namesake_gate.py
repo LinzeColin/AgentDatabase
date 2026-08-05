@@ -151,7 +151,16 @@ def build_gate(target_name: str, external: list[dict[str, Any]]) -> dict[str, An
         candidate["label"] = label
     count = len(candidates)
     resolution = "none" if count == 0 else "single" if count == 1 else "multiple"
-    status = "blocked" if count > 1 else "ready"
+    # ★★★ v0.0.0.150：**0 个候选不是「没有同名风险」，是「没人给我可比的东西」。**
+    #   原先 count==0 → status "ready"，与「查过了、干净」**在产物里长得一模一样**。
+    #   全库回查：32 份 namesake 产物里 **9 份是 0 候选却 ready**
+    #   （Koch／Lister／Pasteur／Semmelweis／Fleming／Blackwell／DeBakey／Benardos／**Thomson**）。
+    #   ★ Thomson 正是记忆里那次同名事故的人物：GE 总裁 Charles A. Coffin 被当成
+    #     焊接发明人的署名放行——**他的同名门就是在 0 候选下报 ready 的**。
+    #   护栏只比姓，本来就挡不住同姓者；再让「没喂候选」也算通过，等于这道门形同虚设。
+    status = ("blocked" if count > 1
+              else "unverified" if count == 0
+              else "ready")
     selected = candidates[0].get("subject_uid") if count == 1 else None
     return {
         "schema_version": GATE_SCHEMA_VERSION,
@@ -182,6 +191,13 @@ def main() -> int:
         if gate["status"] == "blocked":
             print("BLOCKED_NAMESAKE_SELECTION", file=sys.stderr)
             return 3
+        if gate["status"] == "unverified":
+            print("UNVERIFIED_NAMESAKE_NO_CANDIDATES", file=sys.stderr)
+            print("✗ **一个候选都没有——这不是「没有同名风险」，是「没核」。**",
+                  file=sys.stderr)
+            print("  要么用 --candidates-file 喂进权威检索结果，"
+                  "要么在台账里写明为什么这个人没有可比对象。", file=sys.stderr)
+            return 4
         return 0
     except (OSError, ValueError, json.JSONDecodeError) as exc:
         print(f"ERROR: {exc}", file=sys.stderr)

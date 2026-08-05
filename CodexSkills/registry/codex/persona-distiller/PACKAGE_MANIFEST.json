@@ -376,8 +376,8 @@
     },
     {
       "path": "references/ledgers/_待用户裁定.md",
-      "sha256": "e6b094bd5ffc44e345c5015cdf8ca42c15710382b3c544edf6826bdd408dfc59",
-      "size_bytes": 131720
+      "sha256": "6f6e1edb406f4b0a4061931a743c6a44f1b8b53e3e2fb3d32c8d50d332ce3707",
+      "size_bytes": 133026
     },
     {
       "path": "references/ledgers/_每次开工必读.md",
@@ -1476,8 +1476,8 @@
     },
     {
       "path": "scripts/namesake_gate.py",
-      "sha256": "89498a7ac7c139058c336dcfcc77d0544cc584220545b9969ed185f335978ef1",
-      "size_bytes": 8744
+      "sha256": "e95591e0d6663728a077d8d9f7eeb52ea1fa66d5817a532e58b86c0fe8988eca",
+      "size_bytes": 10018
     },
     {
       "path": "scripts/normalize_delivery.py",
@@ -1966,8 +1966,8 @@
     },
     {
       "path": "tests/helpers.py",
-      "sha256": "c439af88eb7583cb77d8ea2b1e0c626ad62e20e2783ddfe223e878189c917a23",
-      "size_bytes": 13609
+      "sha256": "3f554851c43ff46fcfc834bf111e631b6e243dccea85a274eeee59b9850ec46f",
+      "size_bytes": 14500
     },
     {
       "path": "tests/test_group_contract.py",
@@ -1981,8 +1981,8 @@
     },
     {
       "path": "tests/test_init_and_ingest.py",
-      "sha256": "130b0d4f52dfd373dd4bf391fdddd715df5e9f042861a7b593b47ad4f183ef51",
-      "size_bytes": 3696
+      "sha256": "36ef32d39fa15ead2fd8e4256000ec292306a048b2941f915d852eede2e2fa32",
+      "size_bytes": 4026
     },
     {
       "path": "tests/test_ledger_and_corrections.py",
@@ -1991,8 +1991,8 @@
     },
     {
       "path": "tests/test_namesake_gate.py",
-      "sha256": "cc458b48ec35050ef02304a43d319d9f2b8f48eddf0774757e85b4b3a5107eba",
-      "size_bytes": 3538
+      "sha256": "b13bcea21059304a58ce8272e354e50a0fcc5dbb45fd20f1a139c7ec9f830af9",
+      "size_bytes": 5198
     },
     {
       "path": "tests/test_package_install_migrate.py",

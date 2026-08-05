@@ -43,10 +43,26 @@ def run_target_script(target: Path, name: str, *args: object, check: bool = True
 
 
 def make_namesake_gate(root: Path, name: str, candidates: list[dict[str, Any]] | None = None) -> Path:
-    """Create a deterministic empty/supplied gate for an isolated test workspace."""
+    """Create a deterministic single-candidate gate for an isolated test workspace.
+
+    ★ v0.0.0.150 起**不再默认写空数组**。空数组会让同名门判成 `unverified`——
+      而那正是本次修掉的缺陷：**0 个候选不是「没有同名风险」，是「没核」**。
+      全库回查 32 份同名产物，**9 份是 0 候选却 ready**，其中包括 Thomson #129，
+      也就是记忆里那次「GE 总裁被当成焊接发明人署名放行」的人物。
+      夹具当时正是靠这条空路走的——**判据一改，夹具立刻现形，25 条测试同时红**。
+    """
     candidates_path = root / f'{name.replace(" ", "-").lower()}-candidates.json'
     gate_path = root / f'{name.replace(" ", "-").lower()}-namesake-gate.json'
-    candidates_path.write_text(json.dumps(candidates or [], ensure_ascii=False), encoding='utf-8')
+    if not candidates:
+        candidates = [{
+            'name': name,
+            'subject_uid': name.replace(' ', '-').lower(),
+            'application_scenarios': ['测试夹具场景'],
+            'key_capabilities': ['测试夹具能力'],
+            'authoritative_sources': [{'locator': 'test fixture'}],
+            'evidence_level': 'low',
+        }]
+    candidates_path.write_text(json.dumps(candidates, ensure_ascii=False), encoding='utf-8')
     run_script(
         'namesake_gate.py', '--name', name,
         '--candidates-file', candidates_path, '--output', gate_path,
