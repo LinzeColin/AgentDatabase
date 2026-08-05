@@ -1,29 +1,31 @@
-# Timeline, stages, and drift
+# 06 时间线（timeline）—— Charles L. Coffin
 
-## Scope and assigned sources
+## 唯一一份：专利局公报（`src-7c2c94dd589a`）
 
-Pending. Use train-split source IDs only.
+《Official Gazette of the United States Patent Office》vol. 51（1890 年 4–6 月）。
+**它不是他写的**（P2，`lane=timeline`），但它是**专利局自己的索引**，
+用来给归属做交叉核对，比任何二手名录都硬。
 
-## Source-linked observations
+### 它证实了什么
 
-Pending.
+该卷「Index of Patentees」里有 **3 条** `Coffin, Charles L., Detroit, Mich.`；
+通读卷内正文，**恰好返回 3 条对应条目**——425,164 / 427,971 / 428,459。
+**数目吻合**，因此这两件（425,164、427,971）的归属是由**专利局的索引**认定的，
+不是靠二手清单推的。
 
-## Candidate Claims
+### ★ 保留的两处 OCR 错，未改
 
-Pending.
+- 该卷把 428,459 的号打成 **`428.469`**；
+- 把它的申请序号打成 **`848,971`**，而专利本身印的是 **342,975**。
 
-## Contradictions and alternative explanations
+**两处都按扫描原样留着，用「位置证据」在文件里写明为什么仍判定是同一件**——
+`persona-distiller` 的规矩是照录不改，改了下游就再也看不见 OCR 有多脏。
 
-Pending.
+## 有一手依据的时间下界
 
-## Unknowns and source gaps
+- 最早：1888-09-18 申请（395,878）。
+- 最晚：**1918-04-01 申请**（1,265,613）。
+- 居所随时间迁移，**逐件取自题页**：
+  底特律（1888–1899）→ **佐治亚州 Nacoochee**（1906-04-02）→ **佐治亚州 Parks**（1916、1918）。
 
-Pending.
-
-## Proposed Holdout cases
-
-IDs only; research Agents must not inspect Holdout bodies.
-
-## Handoff to adjudication
-
-Pending.
+★ **生卒年没有一手依据，本工作区一律不写。** 见 `meta.attribution_basis.unresolved`。

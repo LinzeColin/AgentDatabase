@@ -85,6 +85,10 @@
     "identity_anchor": "**居所来自他自己的专利说明书正文**（一手，非转述）：「of Detroit, in the county of Wayne and State of Michigan」「of Detroit, County of Wayne」——即密歇根州韦恩县底特律。这一条把他与 Charles Albert Coffin（缅因州 Fairfield 生、纽约 Locust Valley 卒、在马萨诸塞州 Lynn 与纽约经营公司）在**地理上**分开，且证据强于百科条目。",
     "citation": "US Letters Patent 395,878(1888)／409,015(1889)／425,164(1890)／427,971(1890)／428,459(1890)／442,016(1890)／477,101(1892)／483,427(1892)／495,393(1893)／495,394(1893)／646,619(1900)／845,760(1907)／1,216,947(1917)／1,265,613(1918)；Official Gazette of the USPTO vol.51(1890)。**承重的一件是 428,459（1890）——用金属电极做电弧焊。**",
     "disputed_policy": "**同姓同名者 Charles Albert Coffin（GE 首任总裁、汤姆森—休斯顿总裁）已单列并显式排除。**姓完全相同，编辑距离护栏（`_blocked`）一个也挡不住——**只能靠中名首字母 L vs A 区分**，故 `meta.middle_initial = \"L\"`，`check_authorship` 的 `_initial_blocked` 自 v0.0.0.137 起对三种署名形态全部生效。★ 只有姓的发言标签（`MR. COFFIN:`）**一律按内容判**：讲工艺/电极/焊缝/电流的收，讲公司/合并/董事会经营的不收，判断不了的不收。",
-    "unresolved": "**生卒年未取得一手依据。** 队列与英文维基均作 1844–1926，而这四个数字与 Charles Albert Coffin 完全相同，且该维基条目全文不提 GE——**疑为条目串人，故本工作区不采用该生卒年**。见待裁定 ⑰。★ 对公有领域判定无影响：承重一手是 1890 年专利，按 pre-1929 已出版即公有领域，**与卒年无关**。"
+    "unresolved": "**生卒年未取得一手依据。** 队列与英文维基均作 1844–1926，而这四个数字与 Charles Albert Coffin 完全相同，且该维基条目全文不提 GE——**疑为条目串人，故本工作区不采用该生卒年**。见待裁定 ⑰。★ 对公有领域判定无影响：承重一手是 1890 年专利，按 pre-1929 已出版即公有领域，**与卒年无关**。",
+    "disputed_works": [
+      "AIEE Transactions vols. 4/6/7/8 里的全部「Coffin」——实为 CoFFIN, CHAs. A., Vice-President and Treasurer, Thomson-Houston Electric Co.，**是 Charles Albert Coffin 不是他**，一份未取。",
+      "ASME Transactions vol.10 的「Coffin averaging-instrument」——一种求积仪牌子，**是第三个不相干的 Coffin**，未取。"
+    ]
   }
 }

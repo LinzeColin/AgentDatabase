@@ -506,6 +506,54 @@ def standalone_ocr(text, first_l, last_l, namesakes, own_mid=""):
         if own_mid and _mid_initial(s) == own_mid:
             return s
 
+    # ── 形态 E：**专利正文开头的自述式署名** `Be it known that I, CHARLES L. COFFIN, of Detroit,`
+    #    ★ 撞出它的那一次（Coffin #130 的 us395878）：题页被 OCR 打成
+    #      `CHARLES Ii. (OFFIN, OF DETROIT, MICHIGAN.`——中名 `L.` 成了 `Ii.`、
+    #      `C` 成了左括号，形态 D 的正则一个字都对不上。
+    #      **而正文第一句是干净的**：`Be it known that I, CHARLES L. COFFIN, of t Detroit,`。
+    #    ★★ 这是**最强的一种**：它是第一人称自述（`I, 姓名`），不是第三方给的标签。
+    #      题页会被 OCR 打坏，这一句因为在正文里、字号正常，往往是完好的。
+    m = re.search(r"[Bb]e it known that I,?\s+([A-Z][A-Za-z.'\-]{0,20}"
+                  r"(?:\s+[A-Z][A-Za-z.'\-]{0,20}){1,3})\s*,", text)
+    if m:
+        toks = [x for x in re.split(r"[^A-Za-z]+", m.group(1)) if x]
+        cand = next((x.lower() for x in reversed(toks) if len(x) >= 4), None)
+        if (cand and _edits_within(cand, last_l, 2)
+                and not _blocked(cand, last_l, namesakes)
+                and not _initial_blocked(m.group(1), last_l, namesakes, own_mid)
+                and (any(len(x) >= 4 and _edits_within(x.lower(), first_l, 2) for x in toks[:-1])
+                     or (own_mid and _mid_initial(m.group(1)) == own_mid))):
+            return " ".join(m.group(0).split())
+
+    # ── 形态 D：**专利题页署名** `CHARLES L. COFFIN, OF DETROIT, MICHIGAN.`
+    #    ★ 撞出它的那一次（Coffin #130）：A/B/C 三形态**一个都认不出专利题页**——
+    #      形态 B 要求整行只有名字（≤4 段、行中不许有逗号），题页有「, OF 城市, 州.」；
+    #      形态 C 要求名字在行尾，题页行尾是州名。
+    #      于是 15 份专利全判「无据」，而署名就印在题页第一行。
+    #      **既有三形态是照期刊文章的样子长的，不是照专利的样子长的。**
+    #    射程：`姓名, OF 地名[, ASSIGNOR …]`，且**必须带 `OF 地名`**——
+    #      光有逗号不算，否则正文里「…, Coffin, and others…」就混进来了。
+    for idx, raw in enumerate(lines):
+        s = raw.strip()
+        if not (10 <= len(s) <= 160):
+            continue
+        m = re.match(r"^([A-Z][A-Za-z.'\-]{0,20}(?:[ \t]+[A-Z][A-Za-z.'\-]{0,20}){1,3})[ \t]*,"
+                     r"[ \t]*(?:OF|OE|0F)[ \t]+[A-Z]", s)
+            
+        if not m:
+            continue
+        toks = [x for x in re.split(r"[^A-Za-z]+", m.group(1)) if x]
+        cand = next((x.lower() for x in reversed(toks) if len(x) >= 4), None)
+        if (not cand or not _edits_within(cand, last_l, 2)
+                or _blocked(cand, last_l, namesakes)
+                or _initial_blocked(m.group(1), last_l, namesakes, own_mid)):
+            continue
+        if any(len(x) >= 4 and _edits_within(x.lower(), first_l, 2) for x in toks[:-1]):
+            return s
+        # 纯缩写题页（`C. L. COFFIN, OF DETROIT, MICH.`）同形态 B 的例外
+        if own_mid and _mid_initial(m.group(1)) == own_mid:
+            return s
+
     # ── 形态 C：**签名被 OCR 并进了最后一行正文**
     #    `tion of the coil C. Elihu Thomson.` —— 期刊文末签名与末段黏在一起。
     #    ★ 射程钉死在**最后 3 行**：再放宽就会把正文里「据 Elihu Thomson 说」收进来。
@@ -890,8 +938,22 @@ def _check_one(text, pat):
     #   **最弱的一档，受反证约束**——它靠编辑距离，本来就比逐字命中松。
     if not counter:
         hit = ocr_byline_evidence(text, pat.get("first_word") or "", pat.get("surname") or "")
+        # ★★★ v0.0.0.137：**同名护栏必须也管这条路**。
+        #   v0.0.0.136 把护栏加在了 `standalone_ocr` 上，而本函数**跑在它前面**、
+        #   返回的却是同一个 `A-byline-ocr` 码——于是护栏形同虚设。
+        #   Coffin #130 的自测当场抓到：`CHARLES A. COFFIN, OF BOSTON`（GE 总裁）被盖章。
+        #   复核 Thomson #129 的用例更狠：**`ELIHU THOMPSON.` 也从这条路放行**——
+        #   那正是当初造这道护栏要挡的人。
+        #   （v0.0.0.136 的自测之所以是绿的，是因为它用的串是 `A. Thompson`，
+        #     那个串根本走不到这条路。**自测绿了，挡的却不是这条路。**）
         if hit:
-            return True, "A-byline-ocr", hit, counter
+            _n = tuple(pat.get("namesakes", ()))
+            _last = (pat.get("surname") or "").lower()
+            _toks = [x for x in re.split(r"[^A-Za-z]+", hit) if x]
+            _cand = next((x.lower() for x in reversed(_toks) if len(x) >= 4), "")
+            _mid = str(pat.get("own_mid", "") or "").lower()[:1]
+            if not (_blocked(_cand, _last, _n) or _initial_blocked(hit, _last, _n, _mid)):
+                return True, "A-byline-ocr", hit, counter
 
     # ★★★ v0.0.0.136：**名字被 OCR 打坏的独占署名／发言标签**——最后一条路。
     #   Thomson #129 实测：56 份里 24 份走到这里仍判「无据」，而证据都在文里：
@@ -1238,6 +1300,73 @@ def self_test() -> int:
         print(f"  {'✓' if _ok else '✗'} {'应认出' if _want else '应拒绝'}　{_lbl}")
         if not _ok:
             bad.append(f"同姓中名护栏：{_lbl}")
+
+    print("\n══ 专利正文自述式署名（形态 E） 三条对照（v0.0.0.137）══")
+    for _lbl, _who, _ns, _mid, _s, _want in (
+            ("Be it known that I, CHARLES L. COFFIN, of t Detroit（题页被打坏时的救命稻草）",
+             "Charles L. Coffin", ("Charles A. Coffin",), "l",
+             _tail("Be it known that I, CHARLES L. COFFIN, of t Detroit, in the county of Wayne"), True),
+            ("**Be it known that I, CHARLES A. COFFIN, of Boston**（GE 总裁）",
+             "Charles L. Coffin", ("Charles A. Coffin",), "l",
+             _tail("Be it known that I, CHARLES A. COFFIN, of Boston, in the county of Suffolk"), False),
+            ("**Be it known that I, ELIHU THOMPSON, of Lynn**（同名）",
+             "Elihu Thomson", ("Thompson",), "",
+             _tail("Be it known that I, ELIHU THOMPSON, of Lynn"), False)):
+        _p = build_patterns(_who)
+        _p["namesakes"] = _ns
+        _p["own_mid"] = _mid
+        _got = check_text(_s, _p)[0]
+        _ok = _got == _want
+        print(f"  {'✓' if _ok else '✗'} {'应认出' if _want else '应拒绝'}　{_lbl}")
+        if not _ok:
+            bad.append(f"形态 E：{_lbl}")
+
+    # ★★★ 护栏射程：**`ocr_byline_evidence` 那条路也必须被同名护栏管住**
+    #   v0.0.0.136 只把护栏加在 `standalone_ocr` 上，而那条路跑在它前面、
+    #   返回同一个码——护栏形同虚设。**这四条走的是 `check_text` 全链，不是单个函数。**
+    print("\n══ 同名护栏的射程 四条对照（v0.0.0.137，走全链）══")
+    for _lbl, _who, _ns, _mid, _s, _want in (
+            ("**ELIHU THOMPSON.**（v0.0.0.136 从这条路漏过去了）",
+             "Elihu Thomson", ("Thompson",), "", _tail("ELIHU THOMPSON."), False),
+            ("Elihtt Thomson.（本人，OCR 讹字，不许误伤）",
+             "Elihu Thomson", ("Thompson",), "", _tail("Elihtt Thomson."), True),
+            ("**CHARLES A. COFFIN, OF BOSTON**（GE 总裁）",
+             "Charles L. Coffin", ("Charles A. Coffin",), "l",
+             _tail("CHARLES A. COFFIN, OF BOSTON, MASSACHUSETTS."), False),
+            ("CHARLES L. OOFFIN, OF DETROIT（本人）",
+             "Charles L. Coffin", ("Charles A. Coffin",), "l",
+             _tail("CHARLES L. OOFFIN, OF DETROIT, MICHIGAN."), True)):
+        _p = build_patterns(_who)
+        _p["namesakes"] = _ns
+        _p["own_mid"] = _mid
+        _got = check_text(_s, _p)[0]
+        _ok = _got == _want
+        print(f"  {'✓' if _ok else '✗'} {'应认出' if _want else '应拒绝'}　{_lbl}")
+        if not _ok:
+            bad.append(f"护栏射程：{_lbl}")
+
+    # ★★★ 形态 D：专利题页署名（Coffin #130 —— A/B/C 三形态一个都认不出它）
+    print("\n══ 专利题页署名 七条对照（v0.0.0.137）══")
+    for _lbl, _s, _want in (
+            ("CHARLES L. COFFIN, OF DETROIT, MICHIGAN.（本人）",
+             _tail("CHARLES L. COFFIN, OF DETROIT, MICHIGAN."), True),
+            ("同上但姓被 OCR 打坏（OOFFIN）",
+             _tail("CHARLES L. OOFFIN, OF DETROIT, MICHIGAN."), True),
+            ("OF→OE 讹字 ＋ ASSIGNOR 子句",
+             _tail("CHARLES L. COFFIN, OE DETROIT, MICHIGAN, ASSIGNOR OF ONE-HALF TO GEORGE H. LOTHROP."), True),
+            ("C. L. COFFIN, OF DETROIT, MICH.（纯缩写题页）",
+             _tail("C. L. COFFIN, OF DETROIT, MICH."), True),
+            ("**CHARLES A. COFFIN, OF BOSTON**（GE 总裁，不是他）",
+             _tail("CHARLES A. COFFIN, OF BOSTON, MASSACHUSETTS."), False),
+            ("**C. A. COFFIN, OF LYNN**（同上，缩写）",
+             _tail("C. A. COFFIN, OF LYNN, MASSACHUSETTS."), False),
+            ("正文里的逗号不许混进来",
+             _tail("and the process described by Coffin, and others in the art."), False)):
+        _got = bool(standalone_ocr(_s, "charles", "coffin", ("Charles A. Coffin",), "l"))
+        _ok = _got == _want
+        print(f"  {'✓' if _ok else '✗'} {'应认出' if _want else '应拒绝'}　{_lbl}")
+        if not _ok:
+            bad.append(f"专利题页：{_lbl}")
 
     # ★ 没声明中名首字母时，射程必须与 v0.0.0.136 完全一致（缩写一律不认）
     _got = bool(standalone_ocr(_tail("C. L. Coffin."), "charles", "coffin", _NSC, ""))

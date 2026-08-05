@@ -47,6 +47,8 @@
 0014-us1216947	https://patents.google.com/patent/US1216947A/en	Method of Electric-Arc Welding, Heating, and Metal-Working, and Apparatus Therefor (US Patent No. 1,216,947)	1917	Letters Patent No. 1,216,947; application filed 1916-04-05; patented 1917-02-20; 7 PDF pages	en	P1	HIS-OWN	lane=writings. "CHARLES L. COFFIN, OF PARKS, GEORGIA, ASSIGNOR TO ELECTRIC METAL WORKING COMPANY, OF DETROIT, MICHIGAN." Twenty-seven years after 428,459 and he is still filing on arc welding. Much longer and more discursive than the 1889-93 specifications. RIGHTS=pre1929
 0015-us1265613	https://patents.google.com/patent/US1265613A/en	Art of Arc Welding, Heating, and the Like (US Patent No. 1,265,613)	1918	Letters Patent No. 1,265,613; application filed 1918-04-01, Serial No. 89,130; patented 1918-05-07; 8 PDF pages	en	P1	HIS-OWN	lane=writings. THE LATEST DOCUMENT IN THIS CORPUS and the longest. Header OCRs as "CHARLES L. COFI'IN, 01' PABKS, GEORGIA" (= OF PARKS, GEORGIA), assignor to Electric Metal Working Company of Detroit. Establishes he was alive and working in 1918; says nothing about a death year. RIGHTS=pre1929
 0016-nypl-1913-electric-welding-bibliography	https://archive.org/details/listworksrelati00deptgoog	List of Works in the New York Public Library Relating to Electric Welding, comp. William B. Gamble (New York, 1913) -- the Coffin entries	1913	item listworksrelati00deptgoog, file listworksrelati00deptgoog_djvu.txt; all 17 occurrences of "Coffin", each with surrounding context, at djvu.txt lines given inline	en	S1	THIRD-PARTY	lane=external. THE ONLY NON-PRIMARY ROW HERE, and the only contemporaneous evidence of how his work was RECEIVED. A research library's chronological bibliography of the world literature on electric welding to 1913. It records a named "Coffin process" / "Coffin arc process" being described in English, French and German periodicals from 1890 to 1911 alongside Benardos, Slavianoff, Thomson, Zerener, Lagrange-Hoho and Ries; and it records that the Coffin patent was publicly CONTESTED in 1890 (annotation under A. M. Tanner, "Electric blowpipes", Telegraphic Journal & Electrical Review, London, v. 27, 1890-09-19). NAMESAKE CHECK: all 17 occurrences attach the name to a welding process, never to company affairs; Thomson and "Thomson-Houston" appear in the same bibliography as separate competing processes, which is itself evidence the two Coffins are different men. RIGHTS=pre1929
+0017-electrical-world-1890-09-20	https://archive.org/details/sim_electrical-world_1890-09-20_16_12	"A New Method of Electric Welding" [cut captioned "Coffin's Incandescent Welder"], The Electrical World (New York), v. XVI no. 12, 1890-09-20, p. 196	1890	item sim_electrical-world_1890-09-20_16_12, file ..._djvu.txt lines 653-840	en	S1	THIRD-PARTY	lane=external. Found by following a citation in src-0016, not by guessing. NAMESAKE CHECK: names him as "Chas. L. Coffin, of De-/troit, Mich." and talks only about welding apparatus. IMPORTANT FOR THE PICTURE OF HIM: this is his INCANDESCENT (resistance) welder, a different branch from the arc patents -- he worked both. Carries experimental detail found nowhere in the patents: welding under vacuum saves about 50 per cent of the energy at a vacuum of one-tenth to one-twelfth, and a fractured piece rejoined in vacuum welds "at a low red heat". Unsigned journalism, so S1 even though the detail reads as inventor-supplied -- no byline claim is made. OCR CAUTION: the metal/alloy tables are multi-column and the OCR interleaves and corrupts them; do not quote them as a clean list. RIGHTS=pre1929
+0018-electrical-world-1893-07-01	https://archive.org/details/sim_electrical-world_1893-07-01_22_1	"Electric Arc Welding and Metal Working", The Electrical World (New York), v. XXII no. 1, 1893-07-01, p. 14	1893	item sim_electrical-world_1893-07-01_22_1, file ..._djvu.txt lines 5374-5556	en	S1	THIRD-PARTY	lane=external. Also found via a citation in src-0016. NAMESAKE CHECK: "invented by Charles L. Coffin, of Detroit, who has made a specialty of this branch of electricity". Shows what the processes had become commercially by 1893: rod/bar/axle, strap and bridge-strap, tire, sheet and tube welders. ★ THE ARTICLE'S OWN ARITHMETIC DOES NOT AGREE: it claims welds average "98.6 per cent. of tke original tensile strength" but the only figures it prints -- eight bars at 47,719 lb/sq in welded against 49,264 unwelded -- work out to 96.9 per cent. Both left exactly as scanned; neither adjusted to fit the other. ★★ THE SLICE IS NOT PURE: multi-column OCR jumped into a neighbouring article on an electric-railway conduit contact shoe (roughly source lines 5446-5473); that text is NOT about Coffin and was left in rather than silently deleted so the slice still matches the source line for line. RIGHTS=pre1929
 #
 # ==================== NOT TAKEN -- NAMESAKE ====================
 # ax-aiee-membership-rolls	Transactions of the American Institute of Electrical Engineers, membership
@@ -57,3 +59,122 @@
 #   and Treasurer, Thomson-Houston Electric Co." -- i.e. the WRONG Coffin. Charles L.
 #   Coffin of Detroit does not appear in those rolls at all. Recorded because it is a
 #   real (negative) finding about where he is NOT, not merely an empty search.
+#
+# ==================== ★★★ READ THIS BEFORE BUILDING ANYTHING FROM THIS CORPUS ====================
+# THE THREE quick GATES ALL PASS (18 sources / 3 lanes / 83.3% primary) AND THAT IS MISLEADING.
+# The gates count SOURCES. They do not count SENTENCES IN HIS OWN VOICE, and that is what is
+# missing here.
+#
+# Measured over the 18 source files with our own headers excluded (176,475 chars of actual
+# source text), counting only first person anchored to a verb (I have / I find / I prefer /
+# I am aware / I believe ...) and discarding the "What I claim as my invention" boilerplate:
+#
+#     verb-anchored first-person occurrences ......... 23   (1.30 per 10,000 chars)
+#     claim-formula boilerplate discarded ............  9
+#     of the 23, merely deictic ("I have shown [in Fig. 2]",
+#       "In testimony whereof I have hereunto set my hand") ~10
+#     LEAVING GENUINELY SUBSTANTIVE FIRST-PERSON SENTENCES ... ~13
+#
+# A bare /\bI\b/ regex is USELESS on this corpus and will inflate the count roughly 5x: the
+# patent drawings are labelled with letters, so the OCR is full of "anvil I-I", "extensions I
+# and J", "I serving to force", "the front part 1, I prefer". Any future count must anchor on
+# a following verb, as above.
+#
+# ★ THE SHARPEST FINDING: 6 of the ~13 substantive first-person sentences are in
+#   src-0011-us442016 -- THE ORE-TREATING PATENT, which is not about welding at all. That one
+#   document is where he argues, concedes, and states preferences ("I prefer chloridation
+#   roasting"; "I am aware that such ores have been treated prior to this application (though,
+#   I believe, subsequent to my invention)"; "such attempts have (so far as I know) proved
+#   unprofitable"; "The construction and use of leaching vats or tubs are so well known that I
+#   have not deemed it necessary to illustrate them"). THE WELDING PATENTS -- the reason he is
+#   in this project at all -- are very nearly voiceless. The two longest documents in the
+#   corpus, us1216947 (32k chars) and us1265613 (35k chars), yield ONE first-person sentence
+#   between them, and it is "In testimony whereof I have hereunto set my hand".
+#
+# CONSEQUENCE FOR USE: this corpus can support claims about WHAT HE BUILT and WHEN. It cannot
+# support a voice, a temperament, or a way of reasoning, because the documents that would carry
+# those do not exist in reachable public-domain form (see the search log below). Recommend
+# either deferring him or narrowing the use case to the invention itself.
+# DO NOT close the gap by promoting third-party prose about him into quotations from him:
+# src-0016 / src-0017 / src-0018 are other people writing, and are marked THIRD-PARTY.
+#
+# ==================== `conversations` AND `expression`: SEARCHED HARD, NOT FOUND ====================
+# No document was found anywhere in which Charles L. Coffin SPEAKS or signs prose -- no society
+# discussion, no read paper, no testimony, no signed article, no letter to an editor. Everything
+# in his own voice in this corpus is a patent specification. This is recorded as a FINDING, not
+# as an empty result: he appears to have worked through patents and through his company, not
+# through the professional societies or the trade press.
+#
+# THE DECISIVE EVIDENCE IS THE VOLUME AUTHOR-INDEXES. Rather than sample issues, the bound-volume
+# indexes were swept, which covers every article in every issue of a volume at once:
+#   - The Electrical World, volume indexes 1889-1895 (7 volumes). ONE hit in seven years, and it
+#     is a SUBJECT entry, not an author entry: "*Welding, Coffin's method of electric" (vol. 15,
+#     1890). He is indexed as a topic, never as a byline.
+#   - The Telegraphic Journal and Electrical Review (London), volume indexes 1889-1895 (13
+#     volumes). Every hit is either a British patent filed FOR him by the patent agent W. P.
+#     Thompson ("Communicated from America by C. L. Coffin", vols. 28/29/33/34/35/36/37 -- useful
+#     timeline data: he was patenting in Britain from 1891 into 1895), or "Coffin -- Limited", a
+#     company. The one entry that looked like a byline, "Coffin, Dr., On electric welding
+#     process, 754" (vol. 27, 1890), was chased to the page: it is a three-line third-party news
+#     brief, "Dr. Coffin's Electric Welding Process.-It is reported that the English promoters of
+#     this process are about to establish works in or near London." (issue of 1890-12-19). NOT
+#     his words. NOT TAKEN.
+#   - American Machinist, volume indexes 1889-1912. No C. L. Coffin. The hits are a tool firm
+#     ("Coffin & Leigh" bevel protractor), literal coffins ("Coffins, Ferracute press for"), and
+#     an unrelated "Coffin, John". NOT TAKEN -- textbook namesake noise.
+#   - Journal of the Franklin Institute, volume indexes Jan 1888 - Dec 1896 (18 volumes) PLUS the
+#     cumulative index to vols. 1-120 (1826-1885). No C. L. Coffin. The hits are a burial-casket
+#     patent ("Coffin, Improved"), "Coffin's Patches Lighthouse", and "Coffin, William, Camden,
+#     N. J." NOT TAKEN.
+#   - The Iron Age, volume indexes 1889-1893 (10 volumes). ZERO hits in all ten -- notable because
+#     the 1913 NYPL bibliography cites The Iron Age repeatedly as having covered the Coffin
+#     process, so the process was written about there while the man never signed anything there.
+# SCALE OF THE NEGATIVE, so nobody has to redo it: 82 bound-volume author/subject indexes were
+# swept in total (Electrical World 7, Telegraphic Journal & Electrical Review 13, Journal of the
+# Franklin Institute 19, The Iron Age 10, American Machinist 33), spanning 1889-1912 and covering
+# every article in every issue of those volumes. C. L. Coffin has NO byline anywhere in them.
+# Full-text (not index) sweeps, all negative for our man:
+#   - Transactions of the AIEE vols. 4 (1887), 6 (1889), 7 (1890), 8 (1891). Vol. 8 carries
+#     F. A. C. Perrine's paper "Electric Welding" (p. 246-257) WITH its discussion -- exactly the
+#     document shape that gave the Elihu Thomson corpus (#129) its nine `conversations` rows. The
+#     string "Coffin" does not occur in that volume at all. In vols. 6 and 7 the only "Coffin" is
+#     the membership roll "CoFFIN, CHAs. A. Vice-President and Treasurer, Thomson-Houston Electric
+#     Co., 620 Atlantic Ave., Boston" -- the WRONG Coffin. C. L. Coffin is in no AIEE roll.
+#   - Transactions of the ASME vol. 10 (Oct 1888 - May 1889), which prints C. J. H. Woodbury's
+#     "Electric Welding" with discussion: its single hit is a "Coffin averaging-instrument", a
+#     planimeter brand, i.e. a THIRD unrelated Coffin. NOT TAKEN.
+#   - Hamilton & Oberg, Electric Welding (1918); Ethan Viall, Electric Welding (1921); US Shipping
+#     Board Emergency Fleet Corporation, Report on electric welding (1918): zero hits in all three.
+#   - The 1913 NYPL bibliography (src-0016) indexes the world literature on electric welding to
+#     1913 and contains NO entry authored by Coffin; all 17 of its Coffin occurrences are other
+#     people describing "the Coffin process".
+# Chased and dead: the "Contest: the Coffin patent" lead in the NYPL bibliography is an annotation
+# on A. M. Tanner's "Electric blowpipes" (Telegraphic Journal & Electrical Review, London, v. 27,
+# 1890-09-19, p. 321-322) -- Tanner contesting him, not Coffin answering. The vol. 27 index was
+# swept for a reply from Coffin; there is none.
+# NOT chased, and the one live thread left: US patent-interference testimony. "Decisions of the
+# Commissioner of Patents" exists on archive.org as 19 Google-scanned volumes whose date metadata
+# is unusable (all stamped 1869 or 1909), so the right volume could not be selected without
+# brute-forcing all 19. Left undone deliberately rather than half-done -- this is the single
+# highest-value remaining lead for a `conversations` row, because interference testimony is
+# verbatim first-person Q-and-A.
+#
+# ==================== BIRTH AND DEATH: WHAT THE PRIMARY RECORD DOES AND DOES NOT SAY ====================
+# NOT FOUND: no birth year, no death year, from any primary source, anywhere in this fetch.
+# The Wikipedia figures 1844-1926 were traced to their cited source and it is NOT a primary
+# record: the article footnotes them to Vaclav Smil, Creating the Twentieth Century (Oxford
+# UP, 2004), p. 95 -- a modern secondary book, in copyright, not consulted here. So those
+# four digits rest on one modern citation and on nothing contemporaneous that could be
+# reached. They remain unconfirmed AND still suspect, because they are digit-for-digit the
+# dates of Charles A. Coffin (1844-12-31 - 1926-07-14).
+#
+# WHAT IS FIXED BY PRIMARY DOCUMENTS IN THIS CORPUS (each from the patent's own title page):
+#   1888-09-18 .. 1899-05-13 (filings)  "OF DETROIT, MICHIGAN"        src-0002,0006,0005,
+#                                                                     0004,0007,0001,0011,
+#                                                                     0008,0009,0010,0012
+#   1900-04-03 (issue of 646,619)       "a citizen of the United States"   src-0012
+#   1906-04-02 (filing)                 "OF NACOOCHEE, GEORGIA"            src-0013
+#   1916-04-05 (filing)                 "OF PARKS, GEORGIA"                src-0014
+#   1918-04-01 (filing), issued 1918-05-07  "OF PARKS, GEORGIA"            src-0015
+# The last of these is the hard floor the corpus can prove: he was filing patent
+# applications on 1918-04-01. It says nothing about when he died.
