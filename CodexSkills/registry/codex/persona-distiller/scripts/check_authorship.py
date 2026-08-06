@@ -236,6 +236,25 @@ def build_patterns(full_name: str) -> dict:
         "BYLINE": re.compile(
             rf"\bBy\s+(?:(?:Sir|Dame|Prof(?:essor)?|Dr|Mr|Mrs|Ms|Rev|Lord|Lady)\.?\s+)*"
             rf"{name_rx}\b", re.I),
+        # ★★★★ v0.0.0.168 `A-byline-coauthor`：**他站在第二作者位。**
+        #   Rosenhain #138 实测三份，题头都在、名字有一份一个字母都没错，全被判「无据」：
+        #       `By J. A. EwiNG, F.R.S., …University of Cambridge, and Walter Rosenhain, B.A.`
+        #       `By James A. Ewing, F.E.S., and Walter EoSENHAiN, 1851 Exhibition…`
+        #   `BYLINE` 要求 `By` 后**紧跟**名字（中间只许敬称），于是
+        #   **凡是他不排第一的合著，署名一律取不到**。
+        #   与 Fleming（敬称）／Livermore（分行）／Martens（德文 `Von`）是同一族：
+        #   **判据认得出名字，认不出名字前面那一小截。**
+        #   ★ 护栏三条，缺一不可：
+        #     1. 名字必须由 `and`／`&` 引出——不许是逗号列举里随便一个名字；
+        #     2. `By` 到名字之间不许出现角色词（communicated/edited/reported/cited/
+        #        reviewed/translated/according），否则 `By A. Smith, as reported by X` 会中；
+        #     3. 距离上限 240 字符——学会题头带头衔与任职，确实长，但不能无限。
+        "BYLINE_COAUTHOR": re.compile(
+            rf"\bBy\s+(?![^\n]{{0,240}}?\b(?:communicated|edited|reported|cited|reviewed|"
+            rf"translated|according)\b[^\n]{{0,20}}?{name_rx})"
+            rf"[^\n]{{0,240}}?(?:\band\b|&)\s+"
+            rf"(?:(?:Sir|Dame|Prof(?:essor)?|Dr|Mr|Mrs|Ms|Rev|Lord|Lady)\.?\s+)*"
+            rf"{name_rx}\b", re.I),
         "EDITORIAL": re.compile(
             rf"[\[\(][^\])]{{0,40}}\b(?:remarks|speech|address|excerpt|written|delivered|adapted)"
             rf"[^\])]{{0,40}}\bby\s+{name_rx}", re.I),
@@ -1166,7 +1185,9 @@ def _check_one(text, pat):
                 continue
             counter.append(m.group(0).strip())
 
-    for code, key in (("A-byline", "BYLINE"), ("A-editorial", "EDITORIAL")):
+    for code, key in (("A-byline", "BYLINE"),
+                      ("A-byline-coauthor", "BYLINE_COAUTHOR"),
+                      ("A-editorial", "EDITORIAL")):
         for m in pat[key].finditer(text):
             # ★ 真署名是**结构元素**：行首，或跟在分隔符后面。
             #   句子中间的「by X」是在**谈论**作者身份，不是署名——
@@ -1898,6 +1919,38 @@ def self_test() -> int:
     print(f"  {'✓' if not _got else '✗'} 应拒绝　C. L. Coffin.（**没声明中名时，缩写仍旧不认**）")
     if _got:
         bad.append("同姓中名护栏：没声明中名时不该放行缩写")
+
+    print("\n══ ★★★★ A-byline-coauthor：他站在第二作者位（Rosenhain #138 实测）══")
+    import tempfile as _tf2, os as _os2
+    _pc = build_patterns("Walter Rosenhain"); _pc["namesakes"] = (); _pc["own_mid"] = ""
+    _CO = [
+      ("\nBy J. A. EwiNG, F.R.S., Professor of Mechanism and Applied Mechanics in the "
+       "University of Cambridge, and Walter Rosenhain, B.A., St, John's College.\n",
+       True, "第二作者位、名字拼写正确——**旧版整份判无据**"),
+      ("\nBy Sir Alexander Fleming and Walter Rosenhain.\n", True, "敬称 + and"),
+      ("\nBy A. Smith, as reported by Walter Rosenhain in a later note.\n",
+       False, "★ `reported by`：转述者不是作者"),
+      ("\nBy J. E. Stead, edited by Walter Rosenhain.\n", False, "★ `edited by`：编者不是作者"),
+      ("\nBy Professor Ewing and the present author have described phenomena.\n",
+       False, "★ 没点他的名"),
+      ("\nBy J. E. Stead, and his somewhat slavish adherence to equilibrium curves did not "
+       "appeal to the authors, since as practical men their faith in such curves fell far "
+       "short of that of Dr. Rosenhain, who was not present.\n",
+       False, "★★ 超 240 字符：正文提到他，不是署名"),
+      ("\nBy J. A. Ewing, W. Rosenhain, and C. Smith.\n", False,
+       "★★★ 逗号列举里的名字**不由 and 引出**——故意不认，宁可漏不可冤"),
+      ("\nBy James A. Ewing, F.E.S., and Walter EoSENHAiN, 1851 Exhibition Scholar.\n",
+       False,
+       "★★★★ **已知限制**：OCR 讹形 + 第二作者位两条同时放宽，风险成倍涨；"
+       "本条只认精确名，那一份留给 attribution_basis 逐份声明"),
+    ]
+    for _txt, _should, _why in _CO:
+        with _tf2.NamedTemporaryFile("w", suffix=".txt", delete=False, encoding="utf-8") as _f:
+            _f.write(_txt); _fp = _f.name
+        _ok, _code, _, _ = check(pathlib.Path(_fp), _pc); _os2.unlink(_fp)
+        print(f"  {'✓' if _ok == _should else '✗'} {_why}")
+        if _ok != _should:
+            bad.append(f"A-byline-coauthor：{_why}（得到 ok={_ok} code={_code}）")
 
     if bad:
 
