@@ -322,6 +322,43 @@ def self_test():
         if not ok:
             bad.append(lbl)
 
+    print("── ★★★★ **真实样本**：Rosenhain #138《Metallurgy》1914 四类立场句（逐字）──")
+
+    # 2026-08-06 实测该书：立场句 **28**，四类齐全（指令 11／评价 2／取舍 7／保留判断 8）。
+
+    # 这四句**逐字取自** `_corpora/wip-rosenhain-138/.../raw/`——
+
+    # 它们是「立场句密度 0.32」这个数的实际来源，也是待裁定 ㉙ 的证据之一。
+
+    # ★ 四句**都不含第一人称**，这正是本判据与 `check_first_person_density` 分工的地方：
+
+    #   他通篇 editorial we（第一人称 0.10／万字），**而立场是有的**。
+
+    _REAL_ST = [
+        # ★★ 逐字取自判据**自己输出的例句**（它按 180 字截断，末尾的 `micro`/`own `/`met`
+        #   就是截断处）。**不补全、不修饰**——那正是它实际判过的字符串。
+        ("The great modern growth of interest in the detailed study of metals has, in fact, "
+         "arisen from the remarkable results which have flowed in the first instance from "
+         "the application of the micro", "下评价"),
+        # ★★★ 这一条**改过两次**，两次都是「夹具比原文干净」的变体：
+        #   第一版我截到 150 字**自己补了后半句**；
+        #   第二版我贴的是**判据输出的例句**——而它按 180 字截断显示，
+        #   `classify()` 实际判的是**完整句**。**判据自己的显示串也不是它判过的东西。**
+        ("It is only quite recently that the grouping together and the correlation of all "
+         "these properties has been undertaken and that these things have begun to be "
+         "studied not so much for their own sake as for the light which they could throw "
+         "upon the nature, structure and constitution of metals.", "更正取舍"),
+        ("When those experiments were made, however, the technique of radiology was yet in "
+         "its infancy, and it seems probable that with modern appliances it might be well "
+         "worth while to study this met", "有保留的判断"),
+        ("39) must be borne in mind, since its presence reduces the working aperture, and "
+         "therefore the resolving power to one half in one direction.", "指令读者"),
+    ]
+    for _sent, _cls in _REAL_ST:
+        _got = classify(_sent)
+        chk(f"真实样本判为【{_cls}】（得到 {_got or '—'}）", _cls in (_got or []))
+
+
     print("── ★★★ 正例：Mehl 1936 讲演开篇（第一人称 0，而通篇立场）──")
     mehl = ("IN examining the progress of metallurgical science, the critic must "
             "remember that most of our present knowledge of metals and alloys has "
