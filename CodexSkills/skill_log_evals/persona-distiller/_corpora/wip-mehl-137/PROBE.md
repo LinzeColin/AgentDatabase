@@ -343,6 +343,31 @@ Bain 那边我量了**独著**（1928，44,163 字符）**仍然只有 7 处第�
 
 **→ 待用户裁定：声口密度这把尺要不要改口径**（见 ㉙）。
 
+## 二点九九五、**那本 1948 年史论：四条通道全试过，全堵**（本轮到此为止）
+
+| 通道 | 坐标 | 结果 |
+|---|---|---|
+| ETHW 的 PDF | `ethw.org/w/images/7/73/Brief_History_of_the_Science_of_Metals.pdf` | **HTTP 403** |
+| ETHW 的归档页 | `ethw.org/Archives:A_Brief_History_of_The_Science_of_Metals` | **HTTP 403** |
+| archive.org 全文检索 | `q="brief history of the science of metals"` | **numFound 0** |
+| **Google Books** | `books.google.com/books/about/…?id=1rN8AAAAIAAJ` | **仅 snippet view**，只给章节名不给正文 |
+| HathiTrust | 全文检索 403；书目 API **只吃标识符**（OCLC/LCCN），而本轮查不到它的 OCLC 号 | 走不通 |
+
+**书目（Google Books 页实取）**：American Institute of Mining and Metallurgical Engineers，
+1948 年，**83 页**，该页**未显示版权声明**。
+
+★ **一处分歧要记**：检索摘要说「88 page treatise」，而 Google Books 书目说 **83 页**。
+**记我实际取到的那个（83），并把分歧留着**——下一轮拿到实体或全文时以实物为准。
+
+### 所以本轮的结论是「查不到」不是「没有」
+
+**这是延后第五类（通道受限）的标准形态：材料存在、坐标已定位、而本机通道全堵。**
+坐标在上表，换台机器或换个网络就能续。
+
+★★ **不许**据此把 Mehl 判成「声口不够」——
+四个已量的样本证明的是**他的期刊论文与讲演非人称**，
+**而史论体那一件恰恰是最可能推翻它的，我没读到。**
+
 ## 三、本轮的诚实边界
 
 - **一件作品都没打开过**，NRL 任内的发表清单还没有；
