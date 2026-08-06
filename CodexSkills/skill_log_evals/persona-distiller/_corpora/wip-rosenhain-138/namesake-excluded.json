@@ -1,0 +1,20 @@
+{
+  "★ 口径": "**排除的不是「无关的人」，是「会在同一批检索结果里出现的人」**。",
+  "excluded": [
+    {
+      "canonical_name": "Jakob Rosenhain",
+      "生卒": "历史人物（1813-12-02 – 1894-03-21）",
+      "身份": "德国犹太钢琴家、作曲家（German Jewish pianist and composer）",
+      "为什么会撞上": "★★★ **这一位在本轮的检索里真的撞上过**：archive.org 按 `creator:(\"Rosenhain\")` 检索的 59 个命中里混着 `imslp-historiettes-op97-rosenhain-jacob`（1887）、`fantasiaappassio00rose`（1890，`Fantasia appassionata : grand duo`）、`imslp-de-concours-op39-rosenhain-jacob`（1847）——**全是他的乐谱**。区分依据：载体是乐谱与 IMSLP 收藏，不是学会刊物；名字拼作 `Jacob`／`Jakob`／`Jacques`，而目标是 `Walter`；卒于 1894，**比目标出道还早**。",
+      "出处": [
+        "en.wikipedia.org/wiki/Jacob_Rosenhain 首句逐字：「Jakob Rosenhain (Jacob, Jacques) (2 December 1813 – 21 March 1894) was a German Jewish pianist and composer.」",
+        "archive.org 本轮实测命中：imslp-historiettes-op97-rosenhain-jacob / fantasiaappassio00rose / imslp-de-concours-op39-rosenhain-jacob"
+      ]
+    }
+  ],
+  "★ 抓源实操要求": [
+    "凡命中 Rosenhain 而**名不是 Walter** 的，一律先当作别人。",
+    "**乐谱／IMSLP 载体一律排除**（Jakob Rosenhain，卒 1894，比目标出道还早）。",
+    "★ 目标的合作者署名形态：`Ewing and Rosenhain`（1899）、`Rosenhain and Tucker`（1908）——这两种是他。"
+  ]
+}

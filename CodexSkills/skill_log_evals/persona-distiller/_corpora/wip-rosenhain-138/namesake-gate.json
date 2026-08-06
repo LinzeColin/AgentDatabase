@@ -1,0 +1,50 @@
+{
+  "candidate_cards": [
+    "A. 人物与身份：Walter Rosenhain；历史人物（1875-08-24 – 1934-03-17）；冶金学家；National Physical Laboratory 冶金与冶金化学部**首任**主管（1906–1931）。\n   专业背景：物理冶金。德国出生、五岁随家迁澳大利亚、后在英国工作。与 J. A. Ewing 合作的金属滑移带研究（Phil. Trans. Roy. Soc. 1899, vol. 193a）；著《Metallurgy: an introduction to the study of physical metallurgy》（1914，三版）与《Glass manufacture》（1908, 1919）。\n   应用价值：场景：金属的晶体结构与滑移带；铝合金研究；玻璃制造；关键能力：金相显微观察；把物理冶金组织成一门可教的学科；国家实验室的研究组织。\n   区分依据：署名作 `W. Rosenhain`／`Walter Rosenhain`；载体是 Phil. Trans. Roy. Soc.／Journ. Iron and Steel Inst.／Proc. Physical Soc. 等**科学与冶金学会刊物**，以及他自己的教科书。研究对象是金属与玻璃。。"
+  ],
+  "candidate_count": 1,
+  "candidates": [
+    {
+      "application_scenarios": [
+        "金属的晶体结构与滑移带",
+        "铝合金研究",
+        "玻璃制造"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q10393106（P569 1875-08-24 / P570 1934-03-17）"
+        },
+        {
+          "locator": "en.wikisource.org/wiki/Author:Walter_Rosenhain，PD 声明逐字：「Some or all works by this author are in the public domain in the United States because they were published before January 1, 1931.」"
+        },
+        {
+          "locator": "archive.org cu31924004614859（1914 版全文，开放），书内自引 `Ewing and Rosenhain. Phil. Trans. Roy. Soc, 1899, Vol. 193a` 与 `Rosenhain and Tucker. Phil. Trans. Roy. Soc, 1908, Vol. 209a`"
+        }
+      ],
+      "canonical_name": "Walter Rosenhain",
+      "distinguishing_basis": "署名作 `W. Rosenhain`／`Walter Rosenhain`；载体是 Phil. Trans. Roy. Soc.／Journ. Iron and Steel Inst.／Proc. Physical Soc. 等**科学与冶金学会刊物**，以及他自己的教科书。研究对象是金属与玻璃。",
+      "evidence_level": "high",
+      "identity_category": "历史人物（1875-08-24 – 1934-03-17）",
+      "key_capabilities": [
+        "金相显微观察",
+        "把物理冶金组织成一门可教的学科",
+        "国家实验室的研究组织"
+      ],
+      "label": "A",
+      "occupation_or_role": "冶金学家；National Physical Laboratory 冶金与冶金化学部**首任**主管（1906–1931）",
+      "professional_background": "物理冶金。德国出生、五岁随家迁澳大利亚、后在英国工作。与 J. A. Ewing 合作的金属滑移带研究（Phil. Trans. Roy. Soc. 1899, vol. 193a）；著《Metallurgy: an introduction to the study of physical metallurgy》（1914，三版）与《Glass manufacture》（1908, 1919）",
+      "subject_uid": "wikidata:Q10393106"
+    }
+  ],
+  "generated_at": "2026-08-06T03:44:15Z",
+  "normalized_name": "walterrosenhain",
+  "resolution": "single",
+  "schema_version": "1.0",
+  "search_scope": [
+    "sibling canonical registry",
+    "authoritative public sources supplied by orchestration"
+  ],
+  "selected_subject_uid": "wikidata:Q10393106",
+  "status": "ready",
+  "target_name": "Walter Rosenhain"
+}
