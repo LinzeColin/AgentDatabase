@@ -185,6 +185,22 @@ def analyse(records: list, texts: dict, threshold: float = DEFAULT_THRESHOLD) ->
     boiler = boilerplate(sh)
     net = {sid: (s - boiler) for sid, s in sh.items()}
 
+    # ★★ 「已声明」按**声明的连通分量**算，不是只看直接边（2026-08-07 修）。
+    #   第一版只判 `b in derived_from[a] or a in derived_from[b]`。
+    #   而 `derived_from` 的自然写法是**全组都指向一个基准件**：
+    #     misc00 → misc03、wikisource → misc03
+    #   于是 misc00 × wikisource **没有直接边**，被报成「未声明」——
+    #   而声明者其实已经把话说完了。
+    #   ★ 这不是放宽：只有**声明**连得上的才免报，内容连得上但声明连不上的照报。
+    #   ★ 键用**组内最小 source_id**，不用 `id(grp)`：后者是对象地址，
+    #     列表被回收后地址会被复用，两个不相干的组可能拿到同一个键。
+    _decl_edges = [(sid, d) for sid, ds in declared.items() for d in ds if d in declared]
+    _decl_group = {}
+    for grp in components(list(declared), _decl_edges):
+        key = min(grp)
+        for sid in grp:
+            _decl_group[sid] = key
+
     empty = [name[s] for s in ids if not sh[s]]
     # ★ 扣掉样板之后变空的，与「本来就空」要分开——前者说明**这份文件几乎全是样板**
     all_boiler = [name[s] for s in ids if sh[s] and not net[s]]
@@ -198,7 +214,9 @@ def analyse(records: list, texts: dict, threshold: float = DEFAULT_THRESHOLD) ->
                                 "扣样板前": round(ov_raw, 4), "扣样板后": round(ov, 4)})
         if ov < threshold:
             continue
-        is_declared = (b in declared[a]) or (a in declared[b])
+        #   单件自成一组时键就是它自己，两个单件的键必然不同 → 不会误判成已声明。
+        is_declared = (b in declared[a]) or (a in declared[b]) or (
+            _decl_group.get(a, a) == _decl_group.get(b, b))
         row = {"甲": name[a], "乙": name[b], "重叠": round(ov, 4),
                "扣样板前": round(ov_raw, 4), "已声明 derived_from": is_declared}
         dup_pairs.append((a, b, ov, is_declared))
@@ -345,6 +363,27 @@ def self_test() -> int:
         boilerplate({f"s{i}": {"a b c d e f g h"} for i in range(4)}) == set())
     chk("份数够时才扣",
         boilerplate({f"s{i}": {"a b c d e f g h"} for i in range(6)}) != set())
+
+    print("\n── ★★ 「已声明」按连通分量算，不是只看直接边 ──")
+    #   `derived_from` 的自然写法是全组都指向一个基准件：misc00→misc03、wikisource→misc03。
+    #   于是 misc00 × wikisource **没有直接边**——第一版把它报成「未声明」，
+    #   而声明者其实已经把话说完了。★ 这不是放宽：内容连得上而声明连不上的照报。
+    _t = "the true plane is obtained by mutual grinding of three surfaces in turn " * 40
+    _recs = [{"source_id": "src-aaaaaaaaaaaa", "original_name": "base.txt"},
+             {"source_id": "src-bbbbbbbbbbbb", "original_name": "scanB.txt",
+              "derived_from": ["src-aaaaaaaaaaaa"]},
+             {"source_id": "src-cccccccccccc", "original_name": "scanC.txt",
+              "derived_from": ["src-aaaaaaaaaaaa"]}]
+    _tx = {"src-aaaaaaaaaaaa": _t, "src-bbbbbbbbbbbb": _t, "src-cccccccccccc": _t}
+    _r = analyse(_recs, _tx)
+    chk(f"B 与 C 都只指向 A，B×C 不再报未声明：{len(_r['**未声明的重复对**'])} 对",
+        not _r["**未声明的重复对**"] and _r["distinct_works"] == 1)
+    # ★ 负对照：**只有 B 声明了 A，C 谁也没声明** → C 与 A、C 与 B 都该报
+    _recs2 = [dict(_recs[0]), dict(_recs[1]),
+              {"source_id": "src-cccccccccccc", "original_name": "scanC.txt"}]
+    _r2 = analyse(_recs2, _tx)
+    chk(f"C 没声明时照报：{len(_r2['**未声明的重复对**'])} 对（应为 2）",
+        len(_r2["**未声明的重复对**"]) == 2)
 
     print("\n── 反向对照：两份毫无关系的文本不许报 ──")
     a = shingles("the true plane is obtained by the mutual grinding of three surfaces " * 20)
