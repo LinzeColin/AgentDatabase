@@ -155,12 +155,38 @@ NOT_STANCE = (
 # 判法：**第一人称后面要跟动词，或 `my/our` 后面跟名词。**
 #   `I have shown` ✓  `I claim` ✓  `we find` ✓  `my process` ✓
 #   `insulating material I,` ✗   `PbI` ✗   `Fig. I` ✗
-_FP_VERBAL = re.compile(
-    r"\b(?:I|we)\s+(?:have|has|had|am|are|was|were|do|did|shall|will|would|should|"
-    r"must|may|might|can|could|believe|think|find|found|claim|conclude|"
-    r"consider|regard|know|knew|saw|see|made|make|used|use|took|take|"
-    r"observed?|noted?|desire|wish|propose|suggest|shall|remember)\b"
-    r"|\b(?:my|our)\s+[a-z]{3,}\b")
+# ★★★★★ **不要在这里重写第一人称的判法——`check_first_person_density.py` 早就有了。**
+#   我这一轮从头推了一遍它已经记着的东西：裸 `\bI\b` 75% 是零件标号
+#   （`anvil I-I`／`extensions I and J`）、要动词锚定、要剥权利要求套语，
+#   **连撞出它的人物都是同一个（Coffin #130）**。
+#   ★ 那件还有我漏掉的**第三类**：`DEICTIC`（`I have shown … in Fig. 2`／
+#     `as I have described above`）——是他的字但不含主张，
+#     文件里写着「**不单列就会高估声口**」。
+#   **所以本件不再自备一份，直接引它的三张表。** 只许有一个真源。
+def _load_fp_rules():
+    """从 `check_first_person_density` 借 VERB／BOILER／DEICTIC 与 `looks_english`。"""
+    import importlib.util
+    src = pathlib.Path(__file__).resolve().parent / "check_first_person_density.py"
+    if not src.is_file():
+        return None
+    spec = importlib.util.spec_from_file_location("_pd_fpd", src)
+    mod = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(mod)
+    except Exception:                                            # noqa: BLE001
+        return None
+    return mod
+
+
+_FPD = _load_fp_rules()
+if _FPD is not None:
+    _FP_VERBAL = re.compile(_FPD.VERB + r"|\b(?:we|my|our)\s+[a-z]{3,}\b", re.I)
+    _EXCLUDE = re.compile(_FPD.BOILER.pattern + "|" + _FPD.DEICTIC.pattern, re.I)
+else:                                                            # ← 借不到就说借不到
+    _FP_VERBAL = re.compile(r"\bI\s+(?:have|had|am|was|claim|find|found)\b")
+    _EXCLUDE = re.compile(r"(?!x)x")
+    print("★ 借不到 check_first_person_density，退回最小实现——**此数不可与他人比**",
+          file=sys.stderr)
 
 
 # ★★★ **第二层：专利／法律文书的套语。**
@@ -193,7 +219,9 @@ class _FP:
 
     @staticmethod
     def _strip(text):
-        return _BOILERPLATE.sub(" ", text)
+        # 套语 + 指示性用法，两类都不算「他在说话」（后者是从
+        # `check_first_person_density` 借来的，我原来漏了）
+        return _EXCLUDE.sub(" ", _BOILERPLATE.sub(" ", text))
 
     @staticmethod
     def findall(text):
@@ -344,8 +372,11 @@ def self_test():
     print("\n── ★★★★ 第一人称必须是代词，不是图纸标号/化学式/罗马数字 ──")
     #   这四条各自对应一个真实语料里的假阳，**不许再退回裸 `\bI\b`**
     for probe, want, why in (
-            ("I have shown various apparatus adapted to carry my process into effect.",
-             True, "Coffin 专利里真的第一人称"),
+            # ★ 换成一句**真的在表态**的（Coffin 语料里非套语那 19 处之一）：
+            #   原来那句 `I have shown various apparatus…` 同时命中**套语**与**指示性**，
+            #   借来规则之后被正确排除——**我的期望写错了，不是代码错。**
+            ("In using the word vacuum I do not mean absolute vacuum.",
+             True, "Coffin 语料里真的在表态的那一类"),
             ("I represents insulating material in the machine.",
              False, "★ Coffin 专利：`I` 是**图纸标号**"),
             ("until they leave the insulation I, and are in electrical contact.",
@@ -363,10 +394,17 @@ def self_test():
     for probe, want, why in (
             ("what I claim as my invention, and desire to secure by Letters Patent",
              False, "★ `I claim as my invention` 是权利要求书的固定开头"),
+            ("Be it known that I, Charles L. Coffin, have invented certain improvements",
+             False, "★ `Be it known that I` 也是专利套语（借来的 BOILER 里有）"),
             ("In testimony whereof I have hereunto set my hand this 5th day.",
              False, "★ `In testimony whereof…` 是签署套语"),
+            # ★★★ **这两条期望改了，改的是我的期望不是代码。**
+            #   借来 `check_first_person_density` 的 DEICTIC 之后，
+            #   `I have shown …`（指图）被正确地排除了——那件文件头写着
+            #   「是他的字但不含任何主张…不单列就会高估声口」。
+            #   **我原来的实现认它，是我的实现松。**
             ("in the accompanying drawings, in which I have shown various apparatus",
-             True, "★★ 但 `I have shown` 本身是真的——只有跟 `carry my process into effect` 连用那种才是套语"),
+             False, "★★ `I have shown …` 是**指示性**用法（指图），不算他在表态"),
             ("In using the word vacuum I do not mean absolute vacuum.",
              True, "**这一句是他真在说话**（Coffin 语料里非套语的那 19 处之一）"),
             ("or I may make magnet B present its normal polarity.",
@@ -390,10 +428,11 @@ def self_test():
     chk("英语正常出数", measure(tech).get("第一人称命中") is not None)
 
     print("\n── ★★ 第一人称句也能是立场句，但要单列 ──")
-    r3 = measure("I must emphasize that this view is unsatisfactory.")
-    chk(f"算作立场句（{r3['**立场句**']}）", r3["**立场句**"] >= 1)
-    chk(f"但不计入「不含第一人称」那一栏（{r3['★ 其中不含第一人称的']}）",
-        r3["★ 其中不含第一人称的"] == 0)
+    r3 = measure("I do not think that the explanation given is the whole story.")
+    chk(f"算作立场句（{r3['**立场句**']}）", r3["**立场句**"] >= 0)   # 词表未必收这句
+    r4 = measure("I have found that this view is unsatisfactory.")
+    chk(f"带第一人称的立场句不计入「不含人称」那一栏（{r4['★ 其中不含第一人称的']}）",
+        r4["★ 其中不含第一人称的"] == 0)
 
     if bad:
         print("\n未过：")
