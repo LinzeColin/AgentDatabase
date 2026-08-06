@@ -1,0 +1,35 @@
+[
+  {
+    "file": "1902-misuse-of-coal__paper-doi-10_1038_066029b0.txt",
+    "原始字节": 18647,
+    "截后字节": 5498,
+    "起": 4392,
+    "止": 9890,
+    "起锚": "The Misuse of Coal.",
+    "止锚": "Walter Rosenhain. \n\n443 Gillott Road, Edgbas",
+    "为什么截": "Nature 读者来信版整页 OCR：他的信之后紧跟 J. Perry 的答复与 Experimental Mathematics 等他人文字",
+    "截后 sha256": "409a3f057173fae7c04906b93f5c3ab859b0ceffb8ad3a27e20533bcdf0fa2c2"
+  },
+  {
+    "file": "1909-microscope-in-engineering__paper-doi-10_1038_080250a0.txt",
+    "原始字节": 17882,
+    "截后字节": 12388,
+    "起": 683,
+    "止": 13071,
+    "起锚": "THE MICROSCOPE IN ENGINEERING.",
+    "止锚": "Walter Rosenhain.",
+    "为什么截": "整页 OCR：他的文章之后紧接 THE YIELDING OF THE EARTH TO DISTURBING FORCES",
+    "截后 sha256": "1b6c886bbf9b478a4d98acc647c5b573454e4300289cd0df4a2c944d35f37bcd"
+  },
+  {
+    "file": "1910-light-alloys__paper-doi-10_1038_083461c0.txt",
+    "原始字节": 15494,
+    "截后字节": 12166,
+    "起": 1979,
+    "止": 14145,
+    "起锚": "LIGHT ALLOYS.",
+    "止锚": "Walter Rosenhain.",
+    "为什么截": "整页 OCR：前有 Curve Tracing and Curve Analysis（他人），后接 GREEK ARCHAEOLOGY",
+    "截后 sha256": "11fcaeb29fe8069935956295de4a367b95f9dd8b6e277803644f59bdf70d8758"
+  }
+]

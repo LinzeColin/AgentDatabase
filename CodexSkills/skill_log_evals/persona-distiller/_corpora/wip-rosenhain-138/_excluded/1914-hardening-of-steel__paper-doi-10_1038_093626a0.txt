@@ -1,0 +1,364 @@
+626 
+
+
+NATURE 
+
+
+[August 13, 1914 
+
+
+The entertainment and hospitality meted out to the 
+Association by the Mayor and Corporation of Swansea 
+and the leading citizens were of a most lavish and 
+thoroughly enjoyable character, and the local arrange¬ 
+ments were carried out by Mr. W. Grant Murray 
+with a smoothness and precision which have never 
+been surpassed. 
+
+The Association, at its business meeting, elected a 
+distinguished worker on the art side—Mr. E. Rim- 
+bault Dibdin—to be president for 1914-15. 
+
+
+THE HARDENING OF STEEL. 
+
+T the May meeting' of the Iron and Steel 
+Institute two papers were read and discussed 
+dealing with the theory of the hardening of steel; 
+they gave rise to one of the most interesting dis¬ 
+cussions of the meeting. While it is, of course, 
+obvious that the more “practical” members of the 
+institute take no interest in these discussions, it must 
+be borne in mind that the theories of to-day become 
+the foundations of the practice of to-morrow, and that 
+therefore the “practical” man cannot in the least 
+afford to despise or ignore what he likes to dismiss 
+as “ mere theory.” 
+
+The two papers on hardening presented to the insti¬ 
+tute both put forward fairly definite theories, and at 
+first sight these differ entirely from one another and 
+still more from the older purely “allotropic” theory 
+of hardening. It was interesting to find, however, 
+that during the discussion not a single advocate of the 
+other older theory—that of the so-called “carbonists” 
+—came forward. When the views put forward by 
+Profs. Edwards and Carpenter and by Mr. McCance 
+are carefully compared, however, it will be found that 
+they do not really differ very vitally either from one 
+another or from the older allotropic view'. All three 
+theories agree in supposing that when carbon steel 
+is cooled rapidly an essentially unstable transition 
+product is formed which is itself intrinsically hard. 
+The allotropic theory called this intermediate hard 
+product “beta iron,” and identified it with the beta 
+iron which has a limited range of stable existence in 
+pure iron and in low-carbon steels; Messrs. Edwards 
+and Carpenter and the writer now' identify it with the 
+“hard amorphous phase” of Beilby, while Mr. 
+McCance invents a new word and calls it “ inter- 
+strained ” iron. The real difference of opinion seems 
+to centre on the question how this intermediate sub¬ 
+stance comes into existence. 
+
+Profs. Edwards and Carpenter approach the subject 
+from the point of view of an analogy between the 
+hardening by quenching of steel and of alloys of 
+copper containing from 10 to 13 per cent, of 
+aluminium. These latter are somewhat hardened by 
+quenching, and there is a corresponding similarity, on 
+broad lines, between the respective constitutional dia¬ 
+grams ; by quenching, both kinds of alloys are caused 
+to pass rapidly through a transformation range. The 
+resulting micro-structures also show' a certain simi¬ 
+larity, the aluminium-copper alloys exhibiting an 
+acicular structure having some resemblance to the 
+coarser kinds of martensite seen in hardened steels. 
+The authors then endeavour to show' that the struc¬ 
+tures of both quenched aluminium-copper alloys and 
+of quenched steel arise from an identical cause, viz., 
+highly multiplied twinning, which they believe to 
+occur during quenching as a result of the internal 
+strains caused during rapid cooling. The evidence 
+that the martensite of steel is really equivalent to 
+highly twinned austenite is, how'ever, very weak, and 
+it has yet to be proved or even shown to be likely 
+that quenching can produce multiple twinning. In 
+
+NO. 2337, VOL. 93] 
+
+
+the discussion of this paper, the writer pointed out 
+that to produce notable strain-hardening of a plastic 
+metal by deformation needed the application of really 
+large deformations, while, on the contrary, the 
+amount of deformation (strain in contradistinction to 
+internal stress ) which could be caused in steel by 
+quenching must be very small. It is further a very 
+open question whether strain really ever produces 
+direct twinning in a metal. Finally, it has yet to be 
+showrn that a twinned constituent is really materially 
+harder than in the untwinned condition ; the softness 
+and ductility of such materials as rolled and annealed 
+copper or brass, w'hich are one mass of twinned 
+crystals, points in the opposite direction. The idea 
+put forward by Edwards and Carpenter that 
+amorphous layers are formed on the twin boundaries 
+in the process of twinning was well refuted by Mr. 
+Humfrey in the discussion, as he showed by means of 
+models that twinning could and did occur without dis¬ 
+arrangement of the space-lattice at the boundary. As 
+a result of the whole discussion it appeared that the 
+authors had attached altogether too much weight to 
+the process of twinning, but that the formation of 
+amorphous metal during the quenching process might 
+well be looked upon as the real cause of hardening— 
+a view which the late F. Osmond had put forward 
+quite clearly a year or so before his death. 
+
+Mr. McCance’s paper began a thoughtful considera¬ 
+tion of the whole subject by a review of existing 
+theories. Both in regard to the existence or other¬ 
+wise of beta iron as an independent allotropic modi¬ 
+fication, and in regard to the amorphous theory, how¬ 
+ever, the author made the mistake of considering 
+that the objections which he raised can settle the 
+point and dispose of these theories in half a dozen 
+words. The question as to the extent and nature 
+of the differences between alpha and beta iron is still 
+being closely discussed, and even if Weiss’s magneton 
+theory finds ultimate acceptance, it is still a question 
+whether the magnetic transformations do not really 
+constitute one type of allotropy, nor is it yet certain 
+that they may not be associated with far-reaching 
+changes in other properties. Again, as regards the 
+amorphous theory, Mr. McCance’s objections are 
+based on a simple misunderstanding, coupled with an 
+assumption, based on the magneton theory, which has 
+yet to be justified. This assumption amounts to the 
+view that only crystalline solids can be ferro-magnetic, 
+and that consequently amorphous iron would neces¬ 
+sarily be non-magnetic. Facts are, however, against 
+this view, for colloidal suspensions of iron are strongly 
+ferro-magnetic, and so are a number of oxides and 
+salts of iron, some of the latter even in a state of 
+solution. 
+
+Of much greater value are Mr. McCance’s experi¬ 
+mental studies of hardening in carbon steel, which 
+lead him, finally, to put forward a theory of the 
+hardening of steel by “ interstrain,” which is prac¬ 
+tically a translation of Osmond’s view ascribing the 
+hardness of quenched steel to the presence in it of'“le 
+fer alpha dcroui.’ It is only Mr. McCance’s account 
+of the nature of “ interstrained ” iron which it is diffi¬ 
+cult to accept. Declining to accept the views of 
+Beilby and of Rosenhain as to the hardening of 
+strained metals by the formation of layers of the 
+amorphous phase, the author uses the word “ inter¬ 
+strain ” to denote a condition in which the regular 
+crystalline arrangement is broken up generally, leav¬ 
+ing a mass of irregularly arranged crystal fragments. 
+It may well be asked what it is fhat holds these irre¬ 
+gular and ill-fitting fragments together, and why an 
+aggregate of such fragments should be harder than 
+the aggregate of the larger pieces of crystal which 
+constitute the ordinary soft metal ? But beyond this 
+
+
+© 1914 Nature Publishing Group 
+
+
+
+
+
+
+
+August 13, 1914] 
+
+
+NATURE 
+
+
+627 
+
+
+there is the experimental evidence; both strain- 
+hardened metal and quenched steel on etching exhibit 
+the well-defined, oriented lustre of a crystalline aggre¬ 
+gate, thus clearly showing that the crystals are not 
+disarranged into minute irregular fragments. It 
+would seem, therefore, that Mr. McCance’s conclu¬ 
+sions must be narrowed down to this, that the hard¬ 
+ness of quenched steel is due to the same cause as 
+the hardness of strain-hardened iron, and this—but 
+for a difference as to mode of origin—is also the view 
+of Edwards and Carpenter. In this narrowed con¬ 
+clusion, however, there is a distinct step forward, since 
+we have a definite “explanation ’’of the hardening 
+of steel in the sense that this phenomenon is cor¬ 
+related with the much larger class of phenomena 
+which occur when any soft or ductile metal is hardened 
+by plastic strain. If we accept the possible existence 
+of the amorphous phase, it is easy to express both 
+classes of facts in a single and simple formula, and 
+this in itself constitutes another argument in support 
+of the amorphous theory. Whatever view one may 
+take of these admittedly hypothetical matters, it seems 
+that a definite advance has at last been made in our 
+knowledge of the hardening of metals. 
+
+W. Roskxiiatn. 
+
+
+SCHOOLS AND EMPLOYERS IN THE 
+UNITED STATES . 1 
+
+M ISS WINEFRID JEVONS gives in the report 
+before us an interesting account of the history and 
+present position of the relations between the schools 
+and industrial employment in the United States. 
+
+The most important lesson to be learnt from the 
+report is, perhaps, that in the United States employers 
+and trade unions have realised, to a much greater 
+extent than in this country, the necessity for part-time 
+day classes for persons engaged in industry and com¬ 
+merce. Not only does the American Confederation of 
+Labour take this view, but the National Association of 
+Manufacturers also favours it. Indeed, the latter body 
+went so far in 1912 as to recommend compulsory 
+continuation classes, until the seventeenth or 
+eighteenth year, one half-day a week, without loss of 
+wages. 
+
+In this country there are some firms (comparatively 
+few in number) who have had the wisdom to see that 
+it is not only in the interest of the people they 
+employ but also in their own interest to liberate 
+young persons a certain number of hours a week, in 
+order that they may in the daytime receive proper 
+part-time instruction directed to make them more 
+efficient in their respective industries; but we are still 
+far from so wide and generous a belief in the value 
+of education as the resolutions of the National Asso¬ 
+ciation of Manufacturers show to be prevalent in the 
+United States. 
+
+The existence of such a wholesome state of public 
+opinion accounts for the large amount of voluntary 
+and compulsory part-time instruction which is to be 
+found throughout the States; many instances of this 
+are given in the report.. In Massachusetts, a law has 
+been enacted which enables local authorities to open 
+day continuation classes for the education of children 
+between fourteen and sixteen who are in regular 
+employment, and to compel attendance at these classes 
+in the daytime for not fewer than four hours a week; 
+the time spent in the school is counted as a part of 
+the number of hours that the child is permitted by¬ 
+law to work. The State provides half of the cost of 
+the maintenance of the classes. 
+
+In the States of Ohio and Wisconsin, compulsory 
+
+1 Board of Education. Special Reports on Educational Subjects, vol. 
+xxviii. 
+
+NO. 2337, VOL. 93] 
+
+
+day continuation classes are in existence; in the latter 
+State, apprentices may not be employed for more than 
+55 hours a week, and the employer must liberate the 
+apprentice five of these 55 hours a week in order that 
+he may attend a day continuation school. 
+
+J. W. 
+
+
+SEISMOMETRY AND ENGINEERING . 1 
+
+N the memoir before us we have a gratifying proof 
+that practical engineers realise the importance of 
+the application of the principles of instrumental seis- 
+mometry to building construction. The immediate 
+object in the present investigation is the vibration set 
+up in a large masonry bounding wall of a reservoir in 
+Queistal, Schleswig. This wall stretches between 
+rocks across a narrow valley, and the overflow of 
+water, estimated at too cubic metres a second, falls 
+about 40 metres. Thus an enormous amount of vibra¬ 
+tional energy is set up. 
+
+The destructive action of vibration on a structure 
+is probably determined by the maximum acceleration 
+experienced, and thus short-period vibrations are often 
+more serious than long-period vibrations of larger 
+amplitude. Prof. Grunma'h first describes and dis¬ 
+cusses an apparatus designed to give the maximum 
+acceleration, and then goes on to describe the arrange¬ 
+ments for investigating the period and amplitude. 
+These are really seismographs for measuring the hori¬ 
+zontal and vertical components of motion. They are 
+based on precisely the principle of electromagnetic 
+registration introduced by Prince Galitzin for earth¬ 
+quake recording. The apparatus differs from Galit¬ 
+zin’s in detail considerably', since the periods and 
+amplitudes to be measured are very different from 
+those experienced by the passage of earthquake u'aves. 
+Continuous registration was made, and excellent dia¬ 
+grams of the results are given. It appears that the 
+periods ranged from about 0-03 sec. to 0-003 sec., 
+and the amplitude from o-ooi mm. to 0-00005 mm. 
+
+The theoretical discussion of electromagnetic regis¬ 
+tration given appears somewhat inadequate. The 
+author adopts what may be called an equilibrium 
+theory instead of a dynamical one. It is possible that 
+this may be accurate enough in the case considered, 
+but one would like a demonstration that this is so. 
+
+The memoir will no doubt be appreciated by- 
+engineers and seismologists alike. G. W. W. 
+
+
+RECENT BOTANICAL WORK IN 
+DENMARK. 
+
+the general meeting of the Danish Botanical 
+Society in 1912 it was decided to publish in the 
+future two distinct journals. One of these is the 
+Botanisk Tidsskrift, the society’s old periodical, which 
+has reached its thirty-third volume, and contains 
+chiefly papers on the Danish flora, besides articles 
+on subjects of more general botanical interest. This 
+will continue on its former lines, being written mostly 
+in Danish, though occasionally'—much too rarely, it 
+may be said, for non-Danish readers—with abstracts 
+in English, French, or German. The second journal 
+is a new venture, the Dansk Botanisk Arkiv, pub¬ 
+lished at indefinite periods, and containing mono¬ 
+graphs and other special articles in either of the four 
+languages mentioned. Both journals are sent post 
+free to members of the society, membership being open 
+to ail on payment of 10 kronen {ns.) a year; the 
+subscription for the Botanisk Tidsskrift alone is 
+6 kronen, and the numbers of the Arkiv may be pur- 
+
+1 “ Experimentalunt^rsuchung zur Messung von Erderschiitterungen. 
+By Prof. L. Grunmach. Pp. 102. (Berlin : Leonhard Simion Nf., 1913. 
+
+
+
+© 1914 Nature Publishing Group 
+
+
+
+
+
+
+
+
+
+
