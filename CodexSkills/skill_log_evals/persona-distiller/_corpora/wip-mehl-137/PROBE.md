@@ -130,6 +130,53 @@ Bain #136 我查的是 CCE **Part 1「Books and Pamphlets」**——那对他那
 Mehl 1932 年起在 Carnegie Institute of Technology（私立）——
 **1927–31 与 1932 以后要分两栏。**
 
+## 二点七、★ 声口已量一件：**与 Bain 同形**
+
+`Trans. AIME` vol. 135（1939）有 OCR 文本副本
+（`american-institute-of-mining-and-metallurgical_1939_135`，1,353,091 B，开放）。
+★ 另一副本 `in.ernet.dli.2015.155511` **是纯图像扫描、600 页无文本层**，本机没有 OCR，用不了。
+
+题头逐字（OCR 讹得厉害，照录）：
+
+> `Reaction Kinetics in Processes of Nucleation and Growth`
+> `By Wituram A. Jounson* anp Rosert F. Meut,t Memper A.I.M.E.`
+> `(New York Meeting, February, 1939)`
+> —— `Wituram`=William、`Jounson`=Johnson、`anp`=and、`Rosert`=Robert、
+>    **`Meut`=Mehl**、`Memper`=Member
+
+**实测：正文 40,160 字符，`we`=4、`I`=2、`the author(s)`=1。**
+
+| 人物／件 | 字符 | `we` | `I` |
+|---|---|---|---|
+| Bain 1928 独著 | 44,163 | 3 | 4 |
+| Bain 1929 合著 | 10,413 | 0 | 0 |
+| Bain 1930 合著正文 | 50,438 | 2 | 2 |
+| **Mehl 1939 合著正文** | **40,160** | **4** | **2** |
+
+**同一个量级。这一代冶金学者的期刊论文就是非人称科技文体。**
+
+### ★★ 但 Mehl 有一件 Bain 没有的东西：**一部叙述体的书**
+
+`A Brief History of the Science of Metals`（AIME, 1948）——**史论体，不是实验报告**，
+声口密度大概率完全不同。**本轮拿不到**：ETHW 上那份 PDF 返回 **HTTP 403**，
+archive.org 搜 `"brief history of the science of metals"` **numFound 0**。
+
+**所以「Mehl 也是声口不够」这个结论现在不能下**——
+**最可能推翻它的那一件，恰恰是我没读到的那一件。**
+
+## 二点八、版权标记：**这一卷查不到，但那是扫本的问题不是证据**
+
+vol. 135 全卷 grep 不到任何 `copyright` 字样。**但不能据此说它没标记**：
+这份扫本开头是 OCR 噪声（`Raha` / `way Teyana` / `sbi sitkong`），
+**扫到的是封面衬页，没有干净的扉页**。
+对照 1930 那一卷，版权页是清清楚楚的：
+
+> `Copyright, 1930, by the`
+> `American Institute of Mining and Metallurgical Engineers`
+> `[Incobporatbd]`
+
+**「在坏 OCR 区域找不到」不等于「不存在」。** 这一条留作未决。
+
 ## 三、本轮的诚实边界
 
 - **一件作品都没打开过**，NRL 任内的发表清单还没有；
