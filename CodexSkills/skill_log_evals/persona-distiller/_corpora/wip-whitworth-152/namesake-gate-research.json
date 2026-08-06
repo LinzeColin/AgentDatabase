@@ -1,0 +1,244 @@
+{
+  "candidate_cards": [
+    "A. 人物与身份：Joseph Whitworth；技术工程师；精密机械工程师、机床制造商、企业主。\n   专业背景：1803-12-21 生于 Stockport，1887-01-22 卒于 Monte Carlo。曼彻斯特 Whitworth & Co. 创办人。1840 年向 British Association 提出真平面的三板互研法，1841 年向 Institution of Civil Engineers 提出统一螺纹标准（后为 BSW），1856/1857 年在 Institution of Mechanical Engineers 宣读论文，1854 年受命向议会提交纽约工业展特别报告，1873 年出版《Guns and Steel》，1868 年以私产设立机械科学奖学金。。\n   应用价值：场景：精密测量与公差；标准化与互换性；机床设计；钢与火炮制造；关键能力：把「平」与「准」变成可复现的工序而非手艺；以百万分之一英寸的比长机做量的基准；把螺纹从各家自定推成全国统一标准。\n   区分依据：LC Name Authority n85283138，授权标目 `Whitworth, Joseph, 1803-1887`，变体形 `Whitworth, Joseph, Sir, Bart., 1803-1887`。★ 左锚定检索 `Whitworth, J*` 共 37 条标目，其中 Joseph 恰好一条——**LCNAF 里不存在第二个 Joseph Whitworth**。。",
+    "B. 人物与身份：William Allen Whitworth；思想教育师；数学家、英国国教牧师。\n   专业背景：1840-02-01 – 1905-03-12。剑桥 St John's College。《Choice and Chance》(1867/1870/1886)、《Trilinear Coordinates》(1866)、《Exercises in Algebra》(1875)、《Worship in the Christian Church》(1899)；主编 The Messenger of Mathematics。。\n   应用价值：场景：排列组合教学；三线坐标几何；讲道与教会礼仪；关键能力：把概率与组合写成可自学的教本。\n   区分依据：★★ **本人物在 archive.org 上最大的污染源**：`creator:(\"Whitworth\") AND date:[1840 TO 1900]` 的 95 条命中里约 20 条是他。creator 字面为 `Whitworth, William Allen, 1840-1905` / `William Allen Whitworth` / `rev. william allen whitworth`。**生 1840 卒 1905，年代区间与目标完全重叠，靠日期一条也筛不掉。** 判别只能靠：名字必须含 `William Allen`／`W. A.`；主题是数学或神学，绝不涉机床、螺纹、火炮。。",
+    "C. 人物与身份：Whitworth Porter；政治法律师；英国陆军皇家工兵少将、军事史作家。\n   专业背景：1827 – 1892。《History of the Corps of Royal Engineers》(1889, 2 vols)、《A History of the Knights of Malta》(1858/1883/1884)、《Life in the trenches before Sebastopol》(1856)、《Malta and its Knights》(1871)。。\n   应用价值：场景：军事工程史；马耳他骑士团史；关键能力：以建制史的体例写工兵团。\n   区分依据：★★★ **`Whitworth` 是他的名，姓是 Porter。** archive.org 上四种著录形态：`Porter, Whitworth, 1827-1892`、`WHITWORTH PORTER`、`Porter, Whitworth, author`、`Whitworth Porter`。**任何只比姓氏、或对 `Whitworth` 做子串匹配的护栏都会把他整批放行。** 同类「Whitworth 作名」的还有 Whitworth Wallis（1855-1927，伯明翰美术馆首任馆长）、Whitworth Russell（监狱督察）、Charles Whitworth Wynne（诗人笔名，真名 Cayzer）、James Whitworth Shaw。。",
+    "D. 人物与身份：Robert Whitworth；建造采购师；土地测量师、运河工程师（James Brindley 的助手）。\n   专业背景：1734 – 1799（LC 标目作 active 1773-1797）。《A report and survey of the canal ... from Waltham-Abbey to Moorfields》(1773)、《Report and estimates, relative to the enlarging of the harbour of Leith》(1786)、《Observations by Robert Whitworth, Esq; engineer, on several schemes and plans》(1787)、《Report on the proposed line of navigation from Stella to Hexham》(1797)。。\n   应用价值：场景：运河选线与勘测；港口扩建估算；关键能力：为议会法案写可据以拨款的测量报告。\n   区分依据：★★★ **对「Whitworth ＋ 工程师 ＋ 呈交报告」这类语义筛选最危险的一个**——姓氏、职业、体裁三项全中，**只有年代能分开**（卒 1799，目标生 1803）。archive.org creator 字面 `Whitworth, Robert, Engineer.`，**它比目标的著录字符串更像工程师**。任何按职业关键词放行的护栏必须同时卡 1803 年下界。。",
+    "E. 人物与身份：Robert Percy Whitworth；客户营销师；澳大利亚／新西兰记者、作家、编辑。\n   专业背景：1831 – 1901。Bailliere's Queensland / South Australian / Tasmanian Gazetteer and Road Guide (1866-1877)、《Martin's Bay Settlement, West Coast of Otago》(1870)、《Shimmer of Silk》(1893)、《Hine-Rā》。。\n   应用价值：场景：地名录与旅行指南；殖民地报刊；关键能力：把新开拓地写成可按图索骥的指南。\n   区分依据：creator 字面 `Whitworth, Robert Percy, b. 1831` / `Robert Percy Whitworth`。**生卒完全落在目标活跃期内。** 判别：主题为澳新地名录／游记，出版地 Melbourne／Adelaide／Hobart。。",
+    "F. 人物与身份：Charles Whitworth；政治法律师；英国下议院议员（1747-1778）、贸易与财政统计家。\n   专业背景：约 1721 – 1778-08-21。《State of the trade of Great Britain in its imports and exports》(1776)、《The succession of parliaments》(1764)、《A collection of the supplies, and ways and means》(1764/1765)、《Public accounts of services and grants》(1771)、《A register of the trade of the port of London》(1777)。。\n   应用价值：场景：议会贸易统计；财政拨款汇编；关键能力：把海关流水整理成可比年序。\n   区分依据：★ **生年有分歧且我不采信抓源指令里给的那个**：委托说明写 1714，而 LC 标目逐字为 `Whitworth, Charles, Sir, approximately 1721-1778`、Wikipedia 作 `c. 1721`——**照录权威源取到的值，不填 1714**。creator 字面 `Whitworth, Charles, Sir`。判别：18 世纪、议会与贸易统计。★ 另有两位同名的外交官：Charles Whitworth 第一代 Whitworth 伯爵（1752-1825，驻法大使，其书信集 **1887 年**出版——正是目标的卒年，会与目标一起落进任何 1880s 时间窗）、以及 Charles Whitworth 第一代 Whitworth 男爵（1675-1725，驻俄，《An account of Russia as it was in the year 1710》）。。",
+    "G. 人物与身份：George Frederick Whitworth；思想教育师；美国长老会传教士、Whitworth College 创办人、华盛顿大学第 3／7 任校长。\n   专业背景：1816-03-15 – 1907-10-06。《Retrospect of Half a Century》, The Washington Historical Quarterly, 1907-07-01（archive.org: jstor-40734416，creator 字面 `WHITWORTH, GEORGE F.`）。。\n   应用价值：场景：太平洋西北地区教会史；教会办学；关键能力：以传教网络办起一所学院。\n   区分依据：★ **中名拼写以权威源为准**：LC 与 Wikipedia 都作 `Frederick`，抓源指令里写的 `Frederic` 与两处都不一致，**照录 Frederick**。判别：美国、长老会、太平洋西北地区；creator 全大写形态 `WHITWORTH, GEORGE F.`。卒 1907，与目标同处 19 世纪语料池。★ 另有 George Clifford Whitworth（? – 1917，英属印度文官，《An Anglo-Indian Dictionary》1885），archive.org 上还把姓拼成 `George Cliford`（少一个 f）。。",
+    "H. 人物与身份：Whitworth（作为机构名与地名）；创业经营师；以他命名或与他有关的法人与地名（非自然人）。\n   专业背景：Armstrong Whitworth（1897 年合并，1923-1928 年 archive.org 条目大量，**正落在 PD 窗口内**）、Manchester Whitworth Institute（1887 年他身故后设立，出版 1907/1910 图录）、Whitworth Art Gallery（1988 年百年史）、Whitworth（兰开夏一个镇，Urban District Council 年报 1894-1900 共 6 项）、Whitworth College（Spokane）、Rudge-Whitworth（自行车）、Whitworth Fever Hospital（都柏林 1823/1825）、Whitworth bros.（Cleveland，1893 食谱）。。\n   应用价值：场景：军舰与飞机制造；美术馆与展览；地方行政年报；关键能力：—（非自然人，无声口）。\n   区分依据：★★ **年代筛不掉它们**——Armstrong Whitworth 的条目正好在 1923-1928 这个公有领域窗口内。判别只能靠署名主体是法人而非个人。★ 另一类同族污染是 **Whitworth 螺纹标准／量规／步枪的第三方手册**：它们以他命名而不是他写的。实测最典型的一例是 `whitworthmeasur00whitgoog`（1877）——**archive.org 的 creator 字段把他列为作者是错的**，标题页逐字为 `THE WHITWORTH MEASURING MACHINE ... MADE BY SIR JOSEPH WHITWORTH ... BY T. M. GOODEVE ... AND C. P. B. SHELLEY`：他是仪器的制造者，不是书的作者。若信任 creator 字段自动建库，会凭空多出 547 KB 伪一手。。"
+  ],
+  "candidate_count": 8,
+  "candidates": [
+    {
+      "application_scenarios": [
+        "精密测量与公差",
+        "标准化与互换性",
+        "机床设计",
+        "钢与火炮制造"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://id.loc.gov/authorities/names/n85283138"
+        },
+        {
+          "locator": "https://en.wikipedia.org/wiki/Joseph_Whitworth"
+        }
+      ],
+      "canonical_name": "Joseph Whitworth",
+      "distinguishing_basis": "LC Name Authority n85283138，授权标目 `Whitworth, Joseph, 1803-1887`，变体形 `Whitworth, Joseph, Sir, Bart., 1803-1887`。★ 左锚定检索 `Whitworth, J*` 共 37 条标目，其中 Joseph 恰好一条——**LCNAF 里不存在第二个 Joseph Whitworth**。",
+      "evidence_level": "high",
+      "identity_category": "技术工程师",
+      "key_capabilities": [
+        "把「平」与「准」变成可复现的工序而非手艺",
+        "以百万分之一英寸的比长机做量的基准",
+        "把螺纹从各家自定推成全国统一标准"
+      ],
+      "label": "A",
+      "occupation_or_role": "精密机械工程师、机床制造商、企业主",
+      "professional_background": "1803-12-21 生于 Stockport，1887-01-22 卒于 Monte Carlo。曼彻斯特 Whitworth & Co. 创办人。1840 年向 British Association 提出真平面的三板互研法，1841 年向 Institution of Civil Engineers 提出统一螺纹标准（后为 BSW），1856/1857 年在 Institution of Mechanical Engineers 宣读论文，1854 年受命向议会提交纽约工业展特别报告，1873 年出版《Guns and Steel》，1868 年以私产设立机械科学奖学金。",
+      "subject_uid": "lcnaf-n85283138"
+    },
+    {
+      "application_scenarios": [
+        "排列组合教学",
+        "三线坐标几何",
+        "讲道与教会礼仪"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://id.loc.gov/authorities/names/n87804236"
+        },
+        {
+          "locator": "https://en.wikipedia.org/wiki/William_Allen_Whitworth"
+        }
+      ],
+      "canonical_name": "William Allen Whitworth",
+      "distinguishing_basis": "★★ **本人物在 archive.org 上最大的污染源**：`creator:(\"Whitworth\") AND date:[1840 TO 1900]` 的 95 条命中里约 20 条是他。creator 字面为 `Whitworth, William Allen, 1840-1905` / `William Allen Whitworth` / `rev. william allen whitworth`。**生 1840 卒 1905，年代区间与目标完全重叠，靠日期一条也筛不掉。** 判别只能靠：名字必须含 `William Allen`／`W. A.`；主题是数学或神学，绝不涉机床、螺纹、火炮。",
+      "evidence_level": "high",
+      "identity_category": "思想教育师",
+      "key_capabilities": [
+        "把概率与组合写成可自学的教本"
+      ],
+      "label": "B",
+      "occupation_or_role": "数学家、英国国教牧师",
+      "professional_background": "1840-02-01 – 1905-03-12。剑桥 St John's College。《Choice and Chance》(1867/1870/1886)、《Trilinear Coordinates》(1866)、《Exercises in Algebra》(1875)、《Worship in the Christian Church》(1899)；主编 The Messenger of Mathematics。",
+      "subject_uid": null
+    },
+    {
+      "application_scenarios": [
+        "军事工程史",
+        "马耳他骑士团史"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://id.loc.gov/authorities/names/n93118404"
+        },
+        {
+          "locator": "https://en.wikipedia.org/wiki/Whitworth_Porter"
+        }
+      ],
+      "canonical_name": "Whitworth Porter",
+      "distinguishing_basis": "★★★ **`Whitworth` 是他的名，姓是 Porter。** archive.org 上四种著录形态：`Porter, Whitworth, 1827-1892`、`WHITWORTH PORTER`、`Porter, Whitworth, author`、`Whitworth Porter`。**任何只比姓氏、或对 `Whitworth` 做子串匹配的护栏都会把他整批放行。** 同类「Whitworth 作名」的还有 Whitworth Wallis（1855-1927，伯明翰美术馆首任馆长）、Whitworth Russell（监狱督察）、Charles Whitworth Wynne（诗人笔名，真名 Cayzer）、James Whitworth Shaw。",
+      "evidence_level": "high",
+      "identity_category": "政治法律师",
+      "key_capabilities": [
+        "以建制史的体例写工兵团"
+      ],
+      "label": "C",
+      "occupation_or_role": "英国陆军皇家工兵少将、军事史作家",
+      "professional_background": "1827 – 1892。《History of the Corps of Royal Engineers》(1889, 2 vols)、《A History of the Knights of Malta》(1858/1883/1884)、《Life in the trenches before Sebastopol》(1856)、《Malta and its Knights》(1871)。",
+      "subject_uid": null
+    },
+    {
+      "application_scenarios": [
+        "运河选线与勘测",
+        "港口扩建估算"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://id.loc.gov/authorities/names/n87926869"
+        },
+        {
+          "locator": "https://en.wikipedia.org/wiki/Robert_Whitworth"
+        }
+      ],
+      "canonical_name": "Robert Whitworth",
+      "distinguishing_basis": "★★★ **对「Whitworth ＋ 工程师 ＋ 呈交报告」这类语义筛选最危险的一个**——姓氏、职业、体裁三项全中，**只有年代能分开**（卒 1799，目标生 1803）。archive.org creator 字面 `Whitworth, Robert, Engineer.`，**它比目标的著录字符串更像工程师**。任何按职业关键词放行的护栏必须同时卡 1803 年下界。",
+      "evidence_level": "high",
+      "identity_category": "建造采购师",
+      "key_capabilities": [
+        "为议会法案写可据以拨款的测量报告"
+      ],
+      "label": "D",
+      "occupation_or_role": "土地测量师、运河工程师（James Brindley 的助手）",
+      "professional_background": "1734 – 1799（LC 标目作 active 1773-1797）。《A report and survey of the canal ... from Waltham-Abbey to Moorfields》(1773)、《Report and estimates, relative to the enlarging of the harbour of Leith》(1786)、《Observations by Robert Whitworth, Esq; engineer, on several schemes and plans》(1787)、《Report on the proposed line of navigation from Stella to Hexham》(1797)。",
+      "subject_uid": null
+    },
+    {
+      "application_scenarios": [
+        "地名录与旅行指南",
+        "殖民地报刊"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://id.loc.gov/authorities/names/no2003123763"
+        },
+        {
+          "locator": "https://en.wikipedia.org/wiki/Robert_Whitworth"
+        }
+      ],
+      "canonical_name": "Robert Percy Whitworth",
+      "distinguishing_basis": "creator 字面 `Whitworth, Robert Percy, b. 1831` / `Robert Percy Whitworth`。**生卒完全落在目标活跃期内。** 判别：主题为澳新地名录／游记，出版地 Melbourne／Adelaide／Hobart。",
+      "evidence_level": "high",
+      "identity_category": "客户营销师",
+      "key_capabilities": [
+        "把新开拓地写成可按图索骥的指南"
+      ],
+      "label": "E",
+      "occupation_or_role": "澳大利亚／新西兰记者、作家、编辑",
+      "professional_background": "1831 – 1901。Bailliere's Queensland / South Australian / Tasmanian Gazetteer and Road Guide (1866-1877)、《Martin's Bay Settlement, West Coast of Otago》(1870)、《Shimmer of Silk》(1893)、《Hine-Rā》。",
+      "subject_uid": null
+    },
+    {
+      "application_scenarios": [
+        "议会贸易统计",
+        "财政拨款汇编"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://id.loc.gov/authorities/names/n85199414"
+        },
+        {
+          "locator": "https://en.wikipedia.org/wiki/Charles_Whitworth_(MP)"
+        },
+        {
+          "locator": "https://en.wikipedia.org/wiki/Charles_Whitworth,_1st_Earl_Whitworth"
+        },
+        {
+          "locator": "https://en.wikipedia.org/wiki/Charles_Whitworth,_1st_Baron_Whitworth"
+        }
+      ],
+      "canonical_name": "Charles Whitworth",
+      "distinguishing_basis": "★ **生年有分歧且我不采信抓源指令里给的那个**：委托说明写 1714，而 LC 标目逐字为 `Whitworth, Charles, Sir, approximately 1721-1778`、Wikipedia 作 `c. 1721`——**照录权威源取到的值，不填 1714**。creator 字面 `Whitworth, Charles, Sir`。判别：18 世纪、议会与贸易统计。★ 另有两位同名的外交官：Charles Whitworth 第一代 Whitworth 伯爵（1752-1825，驻法大使，其书信集 **1887 年**出版——正是目标的卒年，会与目标一起落进任何 1880s 时间窗）、以及 Charles Whitworth 第一代 Whitworth 男爵（1675-1725，驻俄，《An account of Russia as it was in the year 1710》）。",
+      "evidence_level": "high",
+      "identity_category": "政治法律师",
+      "key_capabilities": [
+        "把海关流水整理成可比年序"
+      ],
+      "label": "F",
+      "occupation_or_role": "英国下议院议员（1747-1778）、贸易与财政统计家",
+      "professional_background": "约 1721 – 1778-08-21。《State of the trade of Great Britain in its imports and exports》(1776)、《The succession of parliaments》(1764)、《A collection of the supplies, and ways and means》(1764/1765)、《Public accounts of services and grants》(1771)、《A register of the trade of the port of London》(1777)。",
+      "subject_uid": null
+    },
+    {
+      "application_scenarios": [
+        "太平洋西北地区教会史",
+        "教会办学"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://id.loc.gov/authorities/names/no00071378"
+        },
+        {
+          "locator": "https://en.wikipedia.org/wiki/George_F._Whitworth"
+        },
+        {
+          "locator": "https://id.loc.gov/authorities/names/n85057745"
+        }
+      ],
+      "canonical_name": "George Frederick Whitworth",
+      "distinguishing_basis": "★ **中名拼写以权威源为准**：LC 与 Wikipedia 都作 `Frederick`，抓源指令里写的 `Frederic` 与两处都不一致，**照录 Frederick**。判别：美国、长老会、太平洋西北地区；creator 全大写形态 `WHITWORTH, GEORGE F.`。卒 1907，与目标同处 19 世纪语料池。★ 另有 George Clifford Whitworth（? – 1917，英属印度文官，《An Anglo-Indian Dictionary》1885），archive.org 上还把姓拼成 `George Cliford`（少一个 f）。",
+      "evidence_level": "high",
+      "identity_category": "思想教育师",
+      "key_capabilities": [
+        "以传教网络办起一所学院"
+      ],
+      "label": "G",
+      "occupation_or_role": "美国长老会传教士、Whitworth College 创办人、华盛顿大学第 3／7 任校长",
+      "professional_background": "1816-03-15 – 1907-10-06。《Retrospect of Half a Century》, The Washington Historical Quarterly, 1907-07-01（archive.org: jstor-40734416，creator 字面 `WHITWORTH, GEORGE F.`）。",
+      "subject_uid": null
+    },
+    {
+      "application_scenarios": [
+        "军舰与飞机制造",
+        "美术馆与展览",
+        "地方行政年报"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://en.wikipedia.org/wiki/Armstrong_Whitworth"
+        },
+        {
+          "locator": "https://en.wikipedia.org/wiki/Whitworth_Art_Gallery"
+        },
+        {
+          "locator": "https://en.wikipedia.org/wiki/Whitworth,_Lancashire"
+        }
+      ],
+      "canonical_name": "Whitworth（作为机构名与地名）",
+      "distinguishing_basis": "★★ **年代筛不掉它们**——Armstrong Whitworth 的条目正好在 1923-1928 这个公有领域窗口内。判别只能靠署名主体是法人而非个人。★ 另一类同族污染是 **Whitworth 螺纹标准／量规／步枪的第三方手册**：它们以他命名而不是他写的。实测最典型的一例是 `whitworthmeasur00whitgoog`（1877）——**archive.org 的 creator 字段把他列为作者是错的**，标题页逐字为 `THE WHITWORTH MEASURING MACHINE ... MADE BY SIR JOSEPH WHITWORTH ... BY T. M. GOODEVE ... AND C. P. B. SHELLEY`：他是仪器的制造者，不是书的作者。若信任 creator 字段自动建库，会凭空多出 547 KB 伪一手。",
+      "evidence_level": "medium",
+      "identity_category": "创业经营师",
+      "key_capabilities": [
+        "—（非自然人，无声口）"
+      ],
+      "label": "H",
+      "occupation_or_role": "以他命名或与他有关的法人与地名（非自然人）",
+      "professional_background": "Armstrong Whitworth（1897 年合并，1923-1928 年 archive.org 条目大量，**正落在 PD 窗口内**）、Manchester Whitworth Institute（1887 年他身故后设立，出版 1907/1910 图录）、Whitworth Art Gallery（1988 年百年史）、Whitworth（兰开夏一个镇，Urban District Council 年报 1894-1900 共 6 项）、Whitworth College（Spokane）、Rudge-Whitworth（自行车）、Whitworth Fever Hospital（都柏林 1823/1825）、Whitworth bros.（Cleveland，1893 食谱）。",
+      "subject_uid": null
+    }
+  ],
+  "generated_at": "2026-08-06T22:12:15Z",
+  "normalized_name": "josephwhitworth",
+  "resolution": "multiple",
+  "schema_version": "1.0",
+  "search_scope": [
+    "sibling canonical registry",
+    "authoritative public sources supplied by orchestration"
+  ],
+  "selected_subject_uid": null,
+  "status": "blocked",
+  "target_name": "Joseph Whitworth"
+}

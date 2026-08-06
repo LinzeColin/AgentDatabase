@@ -1,0 +1,117 @@
+{
+  "builder_version": "v0.0.0.5",
+  "chosen_subject_uid": "lcnaf-n85283138",
+  "consent_authority": null,
+  "created_at": "2026-08-06T22:13:26Z",
+  "current_version": null,
+  "existential_hypotheses_enabled": false,
+  "identity_selection": {
+    "canonical": "technical-engineer",
+    "display": "材料建工师",
+    "mode": "single",
+    "primary": "technical-engineer",
+    "weights": {
+      "technical-engineer": 1.0
+    }
+  },
+  "language": "zh",
+  "model_version": "0.1.0-draft",
+  "name": "Joseph Whitworth",
+  "namesake_gate": {
+    "candidate_count": 1,
+    "chosen_candidate": {
+      "application_scenarios": [
+        "精密测量与公差",
+        "标准化与互换性",
+        "机床设计",
+        "钢与火炮制造"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://id.loc.gov/authorities/names/n85283138"
+        },
+        {
+          "locator": "https://en.wikipedia.org/wiki/Joseph_Whitworth"
+        }
+      ],
+      "canonical_name": "Joseph Whitworth",
+      "distinguishing_basis": "LC Name Authority n85283138，授权标目 `Whitworth, Joseph, 1803-1887`，变体形 `Whitworth, Joseph, Sir, Bart., 1803-1887`。★ 左锚定检索 `Whitworth, J*` 共 37 条标目，其中 Joseph 恰好一条——**LCNAF 里不存在第二个 Joseph Whitworth**。　★★ **本文件是「已选定」的那一份，只含主体本人。**同一次检索得到的另外 7 类候选（William Allen Whitworth／Whitworth Porter／Robert Whitworth／Robert Percy Whitworth／Charles Whitworth×3／George Frederick Whitworth／以他命名的法人与地名）**完整留在 `namesake-gate-research.json`（status=blocked, count=8）里**，并已逐个喂给 `check_authorship --namesake` 实测过。**不是没查到别人，是查到了 7 类、逐类给了区分依据之后选定了这一个。**",
+      "evidence_level": "high",
+      "identity_category": "技术工程师",
+      "key_capabilities": [
+        "把「平」与「准」变成可复现的工序而非手艺",
+        "以百万分之一英寸的比长机做量的基准",
+        "把螺纹从各家自定推成全国统一标准"
+      ],
+      "label": "A",
+      "occupation_or_role": "精密机械工程师、机床制造商、企业主",
+      "professional_background": "1803-12-21 生于 Stockport，1887-01-22 卒于 Monte Carlo。曼彻斯特 Whitworth & Co. 创办人。1840 年向 British Association 提出真平面的三板互研法，1841 年向 Institution of Civil Engineers 提出统一螺纹标准（后为 BSW），1856/1857 年在 Institution of Mechanical Engineers 宣读论文，1854 年受命向议会提交纽约工业展特别报告，1873 年出版《Guns and Steel》，1868 年以私产设立机械科学奖学金。",
+      "subject_uid": "lcnaf-n85283138"
+    },
+    "chosen_subject_uid": "lcnaf-n85283138",
+    "normalized_name": "josephwhitworth",
+    "resolution": "single",
+    "schema_version": "1.0"
+  },
+  "normalized_name": "josephwhitworth",
+  "origin_review_required": false,
+  "product_version": null,
+  "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+  "profile": "quick",
+  "prohibited_uses": [
+    "identity authentication or deceptive impersonation",
+    "invented endorsement, signature, consent, private memory or current opinion",
+    "unsupported psychological diagnosis",
+    "replacement of accountable high-stakes professional judgment"
+  ],
+  "retention_policy": null,
+  "runtime_invocation_versioning": false,
+  "scenario": null,
+  "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+  "schema_version": "2.0",
+  "slug": "joseph-whitworth",
+  "status": "draft",
+  "subject_origin": "historical",
+  "target_id": "tgt-3f06fd1565b7",
+  "time_scope": "1803-1887",
+  "updated_at": "2026-08-06T22:13:26Z",
+  "attribution_basis": {
+    "authority": "印刷时代人物，署名证据在扉页与落款上直接可读，不需要作者自著目录一类的外部权威。本人物的认定依据是 **Library of Congress Name Authority File n85283138**，授权标目逐字 `Whitworth, Joseph, 1803-1887`，变体形 `Whitworth, Joseph, Sir, Bart., 1803-1887`。★ 左锚定检索 `Whitworth, J*` 共 37 条已建标目，**其中 Joseph 恰好一条**——LCNAF 里不存在第二个 Joseph Whitworth，因此「全名对得上」即可定人。★★ 真正的污染不在同名，在三类旁系：① **`Whitworth` 作名的人**（Whitworth Porter 1827-1892 皇家工兵少将，姓 Porter；Whitworth Wallis；Whitworth Russell；Charles Whitworth Wynne）；② **同姓不同名**（William Allen Whitworth 1840-1905 数学家，年代与他完全重叠；Robert Whitworth 1734-1799 运河工程师，著录字面 `Whitworth, Robert, Engineer.` 比他更像工程师；Robert Percy Whitworth；Charles Whitworth 三位；George Frederick Whitworth；George Clifford Whitworth）；③ **以他命名的法人与地名**（Armstrong Whitworth、Manchester Whitworth Institute、Whitworth Art Gallery、兰开夏 Whitworth 镇、Whitworth College、Rudge-Whitworth）。十一个同名者已逐个喂给 `check_authorship --namesake` 实测，**17 条对照里 13 条同名者全部被拒**（含最危险的 `Whitworth Porter` 与 `Whitworth, Robert, Engineer.`）。",
+    "citation": "https://id.loc.gov/authorities/names/n85283138 （LC Name Authority，授权标目）；同名者权威源：Whitworth Porter https://id.loc.gov/authorities/names/n93118404 ；William Allen Whitworth https://id.loc.gov/authorities/names/n87804236 ；Robert Whitworth https://id.loc.gov/authorities/names/n87926869 ；Robert Percy Whitworth https://id.loc.gov/authorities/names/no2003123763 ；Charles Whitworth (MP) https://id.loc.gov/authorities/names/n85199414 ；George Frederick Whitworth https://id.loc.gov/authorities/names/no00071378 ；George Clifford Whitworth https://id.loc.gov/authorities/names/n85057745 。完整候选卡见同目录 `namesake-gate-research.json`（status=blocked, candidate_count=8）。",
+    "disputed_policy": "★ **本人物的争议不是「哪些作品是伪托」，而是「哪些以他命名的东西不是他写的」。** 三条规矩：① **以他命名 ≠ 他写的**——Whitworth 螺纹标准／量规／步枪的第三方手册一律不计 P1。实测最典型一例：`whitworthmeasur00whitgoog`(1877) 的 archive.org **creator 字段错把他列为作者**，而标题页逐字为 `THE WHITWORTH MEASURING MACHINE ... MADE BY SIR JOSEPH WHITWORTH ... BY T. M. GOODEVE ... AND C. P. B. SHELLEY`——他是仪器的制造者，不是书的作者。若信任 creator 字段自动建库，会凭空多出 547 KB 伪一手。**已排除，未入库。**② **公司署名 ≠ 个人署名**——Whitworth & Co. 的产品目录不计 P1（本次检索 0 命中，见 disputed_works 说明）。③ **『他有一手件』≠『有可用一手语料』**——`letter00whita_djvu.txt`（他 1860-03-10 的亲笔签名信）与 `gb-1855-903-whitworth_djvu.txt`（1855 年英国专利 903）**OCR 里他本人的文字都是 0 字节**，两份**降为 tier U**，不计入一手。P1 的定义是「本人的话」，这两份一句都没有。",
+    "disputed_works": [
+      "whitworthmeasur00whitgoog (1877) —— Goodeve & Shelley 著，他只是仪器制造者；archive.org creator 字段有误",
+      "thewhitworthmeasuringmachine1877 —— 同书另一次扫描，creator 字段甚至把他排第一位",
+      "lecturesinawork00whitgoog (1882) —— Thomas P. Pemberton 著；其附录是 1858 年论文的美国重印，未另计",
+      "americansystemof0000rose (1969) —— Rosenberg 编本，含 1855 年他联署的委员会报告；1969 年出版且借阅受限，非 PD，未取",
+      "bwb_KT-734-791 (1946) —— F. C. Lea 传记；1946 > 1931，非 PD，未取"
+    ],
+    "counting_convention": "★★★ **9 个 source_id ≠ 9 处证据。逐份说明重叠关系：** (1) `miscellaneouspa03whitgoog_djvu.txt`、`miscellaneouspa00whitgoog_djvu.txt`、`wikisource_miscellaneous_papers_1858.txt` **是同一部 1858 年《Miscellaneous Papers on Mechanical Subjects》**（Oxford 扫描／NYPL 扫描／Wikisource 人工转录）——**三个 id、一处证据**，后两份已标 derived_from。 (2) `miscellaneouspa01whitgoog_djvu.txt` 与 `miscellaneouspa02whitgoog_djvu.txt` **是同一部 1873 年《Guns and Steel》**（Oxford／Harvard 扫描）——两个 id、一处证据。 (3) `newyorkindustria00whit_djvu.txt`（1854 年纽约工业展特别报告）**整篇已作附录重印于 1858 年卷**，与 (1) 大面积重叠，故降为 P2。 (4) `jstor-41334745_djvu.txt` 全文 158,877 字符里**只有 char 4,666–13,441（8,800 字节，5.5%）是他的**，其余 94.5% 是 Society of Arts 会刊别人的内容。 (5) `letter00whita_djvu.txt` 与 `gb-1855-903-whitworth_djvu.txt` **他的文字为 0 字节**，已降 tier U。**按作品去重后，含他文字的独立作品是 3 部**：1858 杂稿、1873 Guns and Steel、1868 奖学金信与备忘录。",
+    "covered_sources": [
+      "miscellaneouspa03whitgoog_djvu.txt —— 标题页 OCR 逐字 `BY` / `JOSEPH WHITWORTH, F.R.S.`（两行之间隔空行），已盖 A-byline",
+      "miscellaneouspa00whitgoog_djvu.txt —— 同版另一次扫描；标题页 OCR 把姓拆成 `JOSEPH  WHIT  WORTH,  F.R.S.`，**判据取不到署名**（authorship_evidence 为空数组，如实留空，不补）",
+      "wikisource_miscellaneous_papers_1858.txt —— 同版人工转录；第 1869 行署名逐字 `Special Report of Mr. Joseph Whitworth.`。取不到的原因是独立行署名判据的位置护栏（只认文首/文末 10%，防把索引与参考文献里的人名当署名）——★ **口径是「行号／行数」不是字符位置**：2676 行的第 1869 行 = **69.8%**。（我初稿在这里写的是字符口径的 50.3%，**结论对而引的数是错口径**，已改。）**根因是我把 7 个子页拼成一份，题页位置的语义被我自己的暂存方式破坏了，不是判据的错**",
+      "miscellaneouspa01whitgoog_djvu.txt —— 标题页逐字 `BY SIR JOSEPH WHITWORTH, BART., C.E., F.R.S., LL.D, D.C.L.`，已盖 A-byline",
+      "miscellaneouspa02whitgoog_djvu.txt —— 标题页逐字 `BY SIR JOSEPH WHITWORTH, BART., C.E., F.R.S., LL.D., D.C.L.`，已盖 A-byline",
+      "newyorkindustria00whit_djvu.txt —— ★ **全文检索不到 `Joseph Whitworth` 一次**，只有版口 `Mr. Whitworth's Special Report`（只有姓）。归属靠议会文书题名与 archive.org 元数据，**不是正文自证**，故降 P2",
+      "jstor-41334745_djvu.txt —— 备忘录落款逐字 `(Signed) Jos[ep]h Whitworth / Manchester, 4th May, 1868.`（OCR 把 ph 读成 Er/i），已盖 A-byline-ocr",
+      "letter00whita_djvu.txt —— Smithsonian 描述字段确认是他的 A.L.S.，但 OCR 正文里**他的文字 0 字节**（内容是 1887 讣告剪报＋倒置股市行情＋德文经销商卡），tier U",
+      "gb-1855-903-whitworth_djvu.txt —— 125 字节全是 OCR 噪声，说明书正文不在该 archive.org 项内，tier U"
+    ]
+  },
+  "known_namesakes": [
+    "Whitworth Porter",
+    "William Allen Whitworth",
+    "Robert Whitworth",
+    "Robert Percy Whitworth",
+    "Charles Whitworth",
+    "George Frederick Whitworth",
+    "George Clifford Whitworth",
+    "Richard Whitworth",
+    "Whitworth Wallis",
+    "Whitworth Russell",
+    "Charles Whitworth Wynne"
+  ],
+  "known_namesakes_note": "11 个逐个喂给 check_authorship --namesake 实测过，17 条对照里 13 条同名者全部被拒。★ 最危险的两个：Whitworth Porter（`Whitworth` 是他的**名**，姓 Porter，著录有四种形态）与 Robert Whitworth（运河工程师，著录字面 `Whitworth, Robert, Engineer.` 比目标更像工程师，**只有年代能分开**：卒 1799 vs 目标生 1803）。另有以他命名的法人与地名（Armstrong Whitworth 1923-1928 条目正在 PD 窗口内）。",
+  "middle_initial": ""
+}

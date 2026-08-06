@@ -1,0 +1,48 @@
+{
+  "candidate_cards": [
+    "A. 人物与身份：Joseph Whitworth；技术工程师；精密机械工程师、机床制造商、企业主。\n   专业背景：1803-12-21 生于 Stockport，1887-01-22 卒于 Monte Carlo。曼彻斯特 Whitworth & Co. 创办人。1840 年向 British Association 提出真平面的三板互研法，1841 年向 Institution of Civil Engineers 提出统一螺纹标准（后为 BSW），1856/1857 年在 Institution of Mechanical Engineers 宣读论文，1854 年受命向议会提交纽约工业展特别报告，1873 年出版《Guns and Steel》，1868 年以私产设立机械科学奖学金。。\n   应用价值：场景：精密测量与公差；标准化与互换性；机床设计；钢与火炮制造；关键能力：把「平」与「准」变成可复现的工序而非手艺；以百万分之一英寸的比长机做量的基准；把螺纹从各家自定推成全国统一标准。\n   区分依据：LC Name Authority n85283138，授权标目 `Whitworth, Joseph, 1803-1887`，变体形 `Whitworth, Joseph, Sir, Bart., 1803-1887`。★ 左锚定检索 `Whitworth, J*` 共 37 条标目，其中 Joseph 恰好一条——**LCNAF 里不存在第二个 Joseph Whitworth**。　★★ **本文件是「已选定」的那一份，只含主体本人。**同一次检索得到的另外 7 类候选（William Allen Whitworth／Whitworth Porter／Robert Whitworth／Robert Percy Whitworth／Charles Whitworth×3／George Frederick Whitworth／以他命名的法人与地名）**完整留在 `namesake-gate-research.json`（status=blocked, count=8）里**，并已逐个喂给 `check_authorship --namesake` 实测过。**不是没查到别人，是查到了 7 类、逐类给了区分依据之后选定了这一个。**。"
+  ],
+  "candidate_count": 1,
+  "candidates": [
+    {
+      "application_scenarios": [
+        "精密测量与公差",
+        "标准化与互换性",
+        "机床设计",
+        "钢与火炮制造"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://id.loc.gov/authorities/names/n85283138"
+        },
+        {
+          "locator": "https://en.wikipedia.org/wiki/Joseph_Whitworth"
+        }
+      ],
+      "canonical_name": "Joseph Whitworth",
+      "distinguishing_basis": "LC Name Authority n85283138，授权标目 `Whitworth, Joseph, 1803-1887`，变体形 `Whitworth, Joseph, Sir, Bart., 1803-1887`。★ 左锚定检索 `Whitworth, J*` 共 37 条标目，其中 Joseph 恰好一条——**LCNAF 里不存在第二个 Joseph Whitworth**。　★★ **本文件是「已选定」的那一份，只含主体本人。**同一次检索得到的另外 7 类候选（William Allen Whitworth／Whitworth Porter／Robert Whitworth／Robert Percy Whitworth／Charles Whitworth×3／George Frederick Whitworth／以他命名的法人与地名）**完整留在 `namesake-gate-research.json`（status=blocked, count=8）里**，并已逐个喂给 `check_authorship --namesake` 实测过。**不是没查到别人，是查到了 7 类、逐类给了区分依据之后选定了这一个。**",
+      "evidence_level": "high",
+      "identity_category": "技术工程师",
+      "key_capabilities": [
+        "把「平」与「准」变成可复现的工序而非手艺",
+        "以百万分之一英寸的比长机做量的基准",
+        "把螺纹从各家自定推成全国统一标准"
+      ],
+      "label": "A",
+      "occupation_or_role": "精密机械工程师、机床制造商、企业主",
+      "professional_background": "1803-12-21 生于 Stockport，1887-01-22 卒于 Monte Carlo。曼彻斯特 Whitworth & Co. 创办人。1840 年向 British Association 提出真平面的三板互研法，1841 年向 Institution of Civil Engineers 提出统一螺纹标准（后为 BSW），1856/1857 年在 Institution of Mechanical Engineers 宣读论文，1854 年受命向议会提交纽约工业展特别报告，1873 年出版《Guns and Steel》，1868 年以私产设立机械科学奖学金。",
+      "subject_uid": "lcnaf-n85283138"
+    }
+  ],
+  "generated_at": "2026-08-06T22:13:19Z",
+  "normalized_name": "josephwhitworth",
+  "resolution": "single",
+  "schema_version": "1.0",
+  "search_scope": [
+    "sibling canonical registry",
+    "authoritative public sources supplied by orchestration"
+  ],
+  "selected_subject_uid": "lcnaf-n85283138",
+  "status": "ready",
+  "target_name": "Joseph Whitworth"
+}
