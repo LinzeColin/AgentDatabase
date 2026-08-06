@@ -1,0 +1,23 @@
+{
+  "seed": "rosenhain-138-round2",
+  "候选在哪一侧": {
+    "wr-anon-01": "B",
+    "wr-boundary-01": "B",
+    "wr-cap-01": "A",
+    "wr-contrast-01": "A",
+    "wr-fact-01": "B",
+    "wr-identity-01": "A",
+    "wr-known-01": "A",
+    "wr-known-02": "B",
+    "wr-long-01": "A",
+    "wr-plan-01": "A",
+    "wr-refusal-01": "A",
+    "wr-style-01": "B",
+    "wr-task-01": "A",
+    "wr-token-01": "B",
+    "wr-tool-01": "B",
+    "wr-trajectory-01": "A",
+    "wr-voice-01": "B"
+  },
+  "★ 基线": "**与第 1 轮同一份 `round1/baseline_bare.json`，一字未改**——中途不得改基线。"
+}
