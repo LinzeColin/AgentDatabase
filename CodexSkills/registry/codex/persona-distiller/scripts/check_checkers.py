@@ -282,6 +282,13 @@ def duplicate_audit(directory: pathlib.Path, threshold: float = 0.12) -> dict:
             # 只收**看起来是正则**的常量：含转义类／字符组／非捕获组
             if len(lit) < 6 or not LOOKS_RX.search(lit):
                 continue
+            # ★★★ **用法示例串不是正则。** 首跑三对疑似里有两对全栽在这上面：
+            #     `python3 check_semantic_residue.py --workspace <dir> [--extra a.json …]`
+            #   那个 `[--extra …]` 的方括号被 `LOOKS_RX` 当成了字符组，
+            #   于是 `python`／`workspace`／`runbook`／`dir` 成了「共有的模式词」。
+            #   **判据的假阳源是它自己的取样规则，不是那两件判据。**
+            if re.search(r"python3?\s|--[a-z]{2,}|\.py|RUNBOOK", lit):
+                continue
             toks |= {t.lower() for t in TOK.findall(lit)} - STOP
         if len(toks) >= 8:
             sigs[path.name] = toks
