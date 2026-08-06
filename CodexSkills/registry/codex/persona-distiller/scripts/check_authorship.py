@@ -214,6 +214,9 @@ def build_patterns(full_name: str) -> dict:
     # 姓氏单独出现也算（`By Steinhardt` 式的短署名）——但只用于**标签归属**判定，
     # 不用于署名判定，避免把「谈论他」的句子当成他的署名。
     surname_rx = re.escape(surname)
+    # ★ 「同一段之内」：允许单换行（题头会折行），**禁止空行**（空行＝段落边界）。
+    #   给 BYLINE_COAUTHOR 用；见那一条的注释。
+    _LN = r"(?:[^\n]|\n(?!\s*\n))"
 
     return {
         "name": full_name,
@@ -249,10 +252,14 @@ def build_patterns(full_name: str) -> dict:
         #     2. `By` 到名字之间不许出现角色词（communicated/edited/reported/cited/
         #        reviewed/translated/according），否则 `By A. Smith, as reported by X` 会中；
         #     3. 距离上限 240 字符——学会题头带头衔与任职，确实长，但不能无限。
+        #   ★★★★ 第一版写死 `[^\n]`，**真实的折行题头一份都匹配不到**——
+        #     而我的自测用例把题头写成了一行，于是**自测全绿、实际全漏**。
+        #     判据的用例比原文干净，就等于没测。改成 `_LN`：
+        #     允许单换行，**禁止空行**——空行是段落边界，跨过去就不是同一个署名了。
         "BYLINE_COAUTHOR": re.compile(
-            rf"\bBy\s+(?![^\n]{{0,240}}?\b(?:communicated|edited|reported|cited|reviewed|"
-            rf"translated|according)\b[^\n]{{0,20}}?{name_rx})"
-            rf"[^\n]{{0,240}}?(?:\band\b|&)\s+"
+            rf"\bBy\s+(?!{_LN}{{0,240}}?\b(?:communicated|edited|reported|cited|reviewed|"
+            rf"translated|according)\b{_LN}{{0,20}}?{name_rx})"
+            rf"{_LN}{{0,240}}?(?:\band\b|&)\s+"
             rf"(?:(?:Sir|Dame|Prof(?:essor)?|Dr|Mr|Mrs|Ms|Rev|Lord|Lady)\.?\s+)*"
             rf"{name_rx}\b", re.I),
         "EDITORIAL": re.compile(
@@ -1928,6 +1935,12 @@ def self_test() -> int:
        "University of Cambridge, and Walter Rosenhain, B.A., St, John's College.\n",
        True, "第二作者位、名字拼写正确——**旧版整份判无据**"),
       ("\nBy Sir Alexander Fleming and Walter Rosenhain.\n", True, "敬称 + and"),
+      # ★★★★ 用例必须和原文一样脏：第一版全写成一行，于是自测全绿而实际全漏
+      ("\nBy J. A. EwiNG, F.R.S.,\nProfessor of Mechanism and Applied Mechanics\n"
+       "in the University of Cambridge,\nand Walter Rosenhain, B.A.\n",
+       True, "★★★★ **折行**题头——第一版 `[^\\n]` 匹配不到，而真实印本全是折行的"),
+      ("\nBy A. Smith.\n\nand Walter Rosenhain wrote separately.\n",
+       False, "★★ 跨**空行**不许连——空行是段落边界"),
       ("\nBy A. Smith, as reported by Walter Rosenhain in a later note.\n",
        False, "★ `reported by`：转述者不是作者"),
       ("\nBy J. E. Stead, edited by Walter Rosenhain.\n", False, "★ `edited by`：编者不是作者"),

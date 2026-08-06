@@ -76,5 +76,56 @@
   "subject_origin": "historical",
   "target_id": "tgt-0e18f02c85ed",
   "time_scope": "1899–1934（滑移带研究至 NPL 冶金部任内）",
-  "updated_at": "2026-08-06T04:07:42Z"
+  "updated_at": "2026-08-06T04:07:42Z",
+  "known_namesakes": [
+    "Jacob Rosenhain",
+    "Jakob Rosenhain",
+    "Georg Rosenhain",
+    "Erich Rosenhain",
+    "Felix Ralph Rosenhain",
+    "Chris Rosenhain"
+  ],
+  "middle_initial": "",
+  "attribution_basis": {
+    "authority": "**印本题头逐份实读**，不靠权威档 ID。17 份 P1 里 **13 份**由 `check_authorship` 逐源实测取到 A-* 码：{'A-byline': 5, '**未取到**': 4, 'A-byline-coauthor': 1, 'A-byline-ocr': 7}。★ 我**没有**查证 LoC／VIAF 规范档编号——**不查证的东西不写进来**。",
+    "citation": "Phil. Trans. Roy. Soc. A 193（1899 Bakerian Lecture）／195（1900 Second Paper）；Proc. Roy. Soc. 1899 / 1902 / 1904 / 1908；Phil. Trans. 209a（1908 Eutectic Research No. 1）；Phil. Trans. 1910（Iron at High Temperatures）／1911（Aluminium–Zinc）／1919（Inter-crystalline Fracture）；Proc. Roy. Soc. 1921（Hardness of Solid Solutions，**独著**）；Nature 66:29（1902）／80:250（1909）／83:461（1910）——三件均自整页 OCR 按锚点截取，偏移逐条记在 `_fetch-截取记录.json`；《Metallurgy》1914 初版（archive.org cu31924004614859）；《Glass Manufacture》Project Gutenberg #52724（**校对本，非 OCR**）。",
+    "disputed_policy": "**同姓一律按名字判，不按姓。** 已声明同名六个见 `known_namesakes`，★ 但要说清：`check_authorship._blocked` 里有 `ns != last_l`，**同姓的同名者对它是空操作**——本人物真正起作用的是名字那一关，不是这份名单。名单的作用是留证：这六位**在本轮 archive.org 检索里真的撞上过**。实测九条对照，六条反例（Jacob／Jakob／Georg／Erich／Felix Ralph／`Rosenhain furnace`）全部挡住。",
+    "disputed_works": [
+      "**`useofmodifiedros15317scot`《Use of a modified Rosenhain furnace for thermal analysis》——作者是 Scott & Freeman，是**以他命名的仪器**，不是他的作品。已拒。**同 Roberts-Austen 的 A 类。**",
+      "**`1914-hardening-of-steel`（Nature 93:626）——archive.org 的 creator 字段写着 `W. ROSENHAIN`，而正文是他人评论「Declining to accept the views of Beilby and of Rosenhain」。已移入 `_excluded/`，不入库。**",
+      "Jacob／Jakob Rosenhain 的 IMSLP 乐谱 13 件、Georg Rosenhain 的数学著作 2 件、Wieland《Das Hexameron von Rosenhain》4 件（**Rosenhain 在此是地名**）、Saadi 译本 1 件、Claire Beyer 小说 1 件、Thingiverse 4 件、Erich／Felix Ralph 各 1 件——**67 个检索命中里排除 30 个**，逐件记在 `namesake-excluded.json`。",
+      "**同一部作品的多个 identifier 只算一部**：《Metallurgy》3 版、《Glass Manufacture》8 个 id。37 个 identifier → **18 部作品**（塌缩 51%）。这是「两个 source_id 不等于两处证据」那条。"
+    ],
+    "★ 未取到署名的 4 份（题头都在，逐字附上供复核）": [
+      {
+        "源": "1899-bakerian-crystalline-structure__philtrans06914389.txt　（1899-bakerian-crystalline-structure（philtrans06914389））",
+        "题头逐字": "By J, A. EwiNG, F.ILS., … University of Cambridge, and Walter **Kosenhaik**, St John's College, Ccmv bridge, 1851 Exhibitio7i Research Scholar, University of Melbourne",
+        "为什么判据取不到": "第二作者位 **+** OCR 讹形（R→K、n→k）。`A-byline-coauthor` 只认精确名，两条同时放宽风险成倍涨——**这是有意的限制，不是缺陷**。"
+      },
+      {
+        "源": "1899-micro-metallurgy-strain__philtrans08880154.txt　（1899-micro-metallurgy-strain（philtrans08880154））",
+        "题头逐字": "By James A. Ewing, F.E.S., and Walter **EoSENHAiN**, 1851 Exhibition Eesearch Scholar, Melbourne",
+        "为什么判据取不到": "同上：第二作者位 + OCR 讹形（R→E）。"
+      },
+      {
+        "源": "1902-recrystallisation-platinum__paper-doi-10_1098_rspl_1902_0027.txt　（1902-recrystallisation-platinum（rspl_1902_0027））",
+        "题头逐字": "“A Note on the Eecrystallisation of Platinum/' **P>y** Walter **Eosenhain**, B.A. (Cantab.), B.C.E. (Melbourne). Communicated by Professor Ewing, E.E.S.",
+        "为什么判据取不到": "**连 `By` 本身都被 OCR 打成 `P>y`**，署名前缀识别不到。"
+      },
+      {
+        "源": "1904-slip-bands__philtrans05132848.txt　（1904-slip-bands（philtrans05132848））",
+        "题头逐字": "By Walter **EosENiiAiisr**, B.A., B.C.E. Communicated by Professor Ewing, F.R.S. Received February 9, — Read February 16, 1905.",
+        "为什么判据取不到": "名字被 OCR 打坏 4 处以上，超出编辑距离容错。"
+      }
+    ],
+    "counting_convention": "一手 = P1+P2。**17 P1 + 1 S1 = 18**，其中 S1 那份是 JISI vol.85 的讨论纪要（他的发言，但逐字是记录者的）。usable train 15 份里一手 14 份 = **0.9333**。★ 3 份 holdout（1898 specific-heat／1910 light-alloys／1921 copper-alloys）不计入 train。",
+    "★ 点名口径": "上面四条用的是**精确 `original_name`**，不是我随手写的简称——`check_source_attribution` 比的就是 `locator`／`original_name`／其去扩展名的词干是否出现在本字段里。第一版我写成了 `1904-slip-bands（philtrans05132848）`，**读起来一样，判据一个也认不到**。",
+    "covered_sources": [
+      "1899-bakerian-crystalline-structure__philtrans06914389.txt —— 印本题头逐字：By J, A. EwiNG, F.ILS., … University of Cambridge, and Walter **Kosenhaik**, St John's College, Ccmv bridge, 1851 Exhibitio7i Research Scholar, University of Melbourne —— 判据取不到的原因：第二作者位 **+** OCR 讹形（R→K、n→k）。`A-byline-coauthor` 只认精确名，两条同时放宽风险成倍涨——**这是有意的限制，不是缺陷**。",
+      "1899-micro-metallurgy-strain__philtrans08880154.txt —— 印本题头逐字：By James A. Ewing, F.E.S., and Walter **EoSENHAiN**, 1851 Exhibition Eesearch Scholar, Melbourne —— 判据取不到的原因：同上：第二作者位 + OCR 讹形（R→E）。",
+      "1902-recrystallisation-platinum__paper-doi-10_1098_rspl_1902_0027.txt —— 印本题头逐字：“A Note on the Eecrystallisation of Platinum/' **P>y** Walter **Eosenhain**, B.A. (Cantab.), B.C.E. (Melbourne). Communicated by Professor Ewing, E.E.S. —— 判据取不到的原因：**连 `By` 本身都被 OCR 打成 `P>y`**，署名前缀识别不到。",
+      "1904-slip-bands__philtrans05132848.txt —— 印本题头逐字：By Walter **EosENiiAiisr**, B.A., B.C.E. Communicated by Professor Ewing, F.R.S. Received February 9, — Read February 16, 1905. —— 判据取不到的原因：名字被 OCR 打坏 4 处以上，超出编辑距离容错。"
+    ],
+    "★ covered_sources 的口径": "**这不是免检，是逐份点名并附上可复核的逐字题头。** `check_source_attribution` 只读 citation／authority／covered_sources／counting_convention 四个键——我第一版把证据写在另一个键里，**内容一字不差而判据一个也认不到**。★ 四份里每一份的题头都在印本上，任何人拿 identifier 去 archive.org 都能当场复核。"
+  }
 }
