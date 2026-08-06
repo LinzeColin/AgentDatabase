@@ -446,6 +446,61 @@ def markdown_report(data: dict[str, Any]) -> str:
 
 
 
+def report_verbatim_quotes(report, target: Path, cache) -> None:
+    """**渲染文档／身份分面／评测用例里的引文一样会伪造**（只报不拦）。
+
+    `check_quote_integrity` 只扫 `evidence/claims.jsonl`；本件补的是文档层与用例层。
+    ★ 它此前**在生产代码里没有任何调用方**——`check_checkers` 的接线审计报出来的。
+      「每个人物都在临时写脚本」（Robertson #97 那版还把维度选错了两次），
+      **而常规检查一直没接上。**
+
+    ★★ 它有两道语料：原样，与**去掉版口（页眉／页码）之后**的。
+      第二道只在第一道未命中时重试，**且必须报出来是靠它才命中的**——
+      「引文为真、只是横跨了版口」与「引文是编的」是两回事。
+    """
+    here = Path(__file__).resolve().parent
+    script = here / 'check_verbatim_quotes.py'
+    if not script.exists():
+        report.metrics['verbatim_quotes'] = {'状态': '检查器未安装，**未核验**（不是通过）'}
+        return
+    # ★ `--cache` 是 `nargs="+"`，**传进来是列表**——第一版按单个路径写，
+    #   当场 `TypeError: expected str… not list`。接线必须实跑，不能只看语法过。
+    dirs = [Path(c) for c in (cache if isinstance(cache, (list, tuple)) else [cache])
+            if c is not None and Path(c).is_dir()]
+    if not dirs:
+        report.metrics['verbatim_quotes'] = {
+            '状态': '**未核验**（不是通过）——没有可用的 --cache，取不到语料原文'}
+        return
+    try:
+        spec = importlib.util.spec_from_file_location('_pd_vq', script)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        raw = [p.read_text(encoding='utf-8', errors='replace')
+               for d in dirs for p in d.rglob('*.txt')]
+        corpus = "\n".join(mod.norm(t) for t in raw)
+        corpus2 = "\n".join(mod.norm(mod.strip_page_furniture(t)[0]) for t in raw)
+        qs = mod.collect(target, [])
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['verbatim_quotes'] = {'状态': f'跑不起来，**未核验**：{exc}'}
+        return
+    bad, crossed = [], []
+    for where, q in qs:
+        if mod._hit(q, corpus):
+            continue
+        (crossed if mod._hit(q, corpus2) else bad).append((where, q))
+    report.metrics['verbatim_quotes'] = {
+        '逐字英文引文': len(qs),
+        '**未命中**': len(bad),
+        '跨版口命中（引文为真）': len(crossed),
+        '未命中样例': [f'{w}: {q[:110]}' for w, q in bad[:6]],
+        '跨版口样例': [f'{w}: {q[:80]}' for w, q in crossed[:4]],
+    }
+    if bad:
+        report.warnings.append(
+            f'content.verbatim-quote：{len(bad)} 条逐字引文在语料里找不到原样'
+            '——**引文对不上就是引文对不上**')
+
+
 def report_catalogue_entries(report, target: Path,
                             sources: list[dict[str, Any]]) -> None:
     """**这份 P1 是「著录方描述这份文献」，不是文献本身**（只报不拦）。
@@ -3252,6 +3307,7 @@ def main() -> int:
         report_own_voice(report, target, meta, sources)
         report_stance_density(report, target, sources)
         report_catalogue_entries(report, target, sources)
+        report_verbatim_quotes(report, target, args.cache)
         report_refusal_overflow(report, target)
         run_corpus_ceiling(report, target, report.profile)
         run_rights_basis(report, target)
