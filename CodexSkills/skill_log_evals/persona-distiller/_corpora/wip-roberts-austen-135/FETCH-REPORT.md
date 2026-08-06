@@ -7,6 +7,12 @@
 
 ## 一、结论一句话
 
+> ⚠ **本节及第二、五、九节的数字已被文末「补记（定向补抓）」更新**：
+> Alloys Research Committee 五份报告已于补抓中**全部取得并入库**，
+> 语料由 27 份增至 **32 份**（一手 31/32 = 0.9688），
+> `authorship-unproven` 由 22 条增至 **27 条**。
+> 以下保留本轮原文，**不改写历史数字**——两组数各自成立于各自的时点。
+
 **27 份来源、一手 26 份（0.9630）、6 条研究道全覆盖，standard 门（≥24 份 / ≥0.50 / 6 道）三项全过；
 deep（≥45 份 / ≥0.65）未到，不硬凑。
 但研究门自跑有 22 条 `research.authorship-unproven`——这是本轮最该报的数，成因逐份查清了，见第五节。**
@@ -225,7 +231,7 @@ archive.org 的 `philtrans*` 与 `paper-doi-10_1038_*` 是**按页面范围切�
 
 | 项 | 状况 |
 |---|---|
-| **Alloys Research Committee 五份报告**（Proc. Inst. Mech. Engineers 1891/1893/1895/1897/1899） | **一份也没拿到。** 实测 `title:("Proceedings of the Institution of Mechanical Engineers") AND year:[1880 TO 1910]` 在 archive.org 上 **numFound 0**——他整个活跃期一卷扫本都没有（该刊只有 1851/1853/1870 三卷 + 1974 年以后）。这是他最重要的工程文献，本轮语料里只能从他自己论文的脚注里看到（照录：`* " Second Eeport, Alloys Eesearch Committee," 'Meeli. Eng./ 1893, Plate 32.`、`Third Report to the Alloys Research Committee, 'Proc.Inst. Mech. Engineers,' 1895, p. 240.`）。**材料存在、是 PD、坐标已定位到卷次页码，只是本机通道上没有扫本。** |
+| **Alloys Research Committee 五份报告**（Proc. Inst. Mech. Engineers 1891/1893/1895/1897/1899） | ~~**一份也没拿到。**~~ **★ 本条已作废——见文末「补记（定向补抓）」。五份全部拿到并入库。** 本轮的原始结论是：实测 `title:("Proceedings of the Institution of Mechanical Engineers") AND year:[1880 TO 1910]` 在 archive.org 上 **numFound 0**，据此判定「他整个活跃期一卷扫本都没有」。**这个判定是错的，而错在检索式不在馆藏**：这批卷册的 `title` 字段一律只写 `Proceedings`（不含刊名全称），`year` 字段一律写 `1849`——**按刊名全称查、再按年份过滤，两个字段各挡一次，必然 0 命中**。 |
 | **Journal of the Society of Arts 的五个 Cantor Lectures 系列**（1884-1890） | 只拿到 1884 年那一系列的抽印合订本。JSA 各卷在 archive.org 上有（`journalofsociety*soci`），但**卷号与年份不对应**（元数据 year 一律写 1852），要逐卷开箱定位，本轮时间未及。**这是没做，不是做了没有。** |
 | **Journal of the Iron and Steel Institute** 他的论文（电沉积铁 1887、金刚石渗碳 1890、Le Chatelier 高温计 1891、自记高温计 1892-93、铁中碳扩散 1896、火炮身管 1898） | **取到一件**：vol. 55 (1899) 的会长就任致辞（已入库，80,151 字）。其余仍缺——实测 `title:("Journal of the Iron and Steel Institute") AND year:[1880 TO 1905]` 在 archive.org 上**只有 4 卷**（1883、vol.55/56 于 1899、vol.57 于 1900），**1885-1898 整段没有扫本**。另已开箱查过 vol.56 与 vol.57：里面的 `Presidential Address` 全是**别人引用他**，不是他的第二篇致辞，故未收。 |
 | **Nature 1902 年 T. E. Thorpe 的讣文**（`paper-doi-10_1038_067105a0`） | 条目在、**只有元数据没有正文**（文件清单里只有 `.torrent`／`files.xml`／`meta.sqlite`／`meta.xml`，无 `_djvu.txt`，直接下载 **HTTP 404**）。二手材料因此只落了 DNB 一份。 |
@@ -261,3 +267,198 @@ python3 scripts/check_namesake_criteria.py "$TGT"
 # 研究门（本报告第五节的全部数字出自这一条）
 python3 scripts/quality_check.py "$TGT" --phase research
 ```
+
+---
+
+# 补记（定向补抓）：Alloys Research Committee 五份报告，**五份全部拿到**
+
+本节推翻第九节表格首行的原结论。所有数字都是跑完命令现算的。
+
+## 一句话
+
+**1891/1893/1895/1897/1899 五份报告全部找到、全部入库**，共 384,122 字节，
+占语料总量（3,337,473 字节）的 11.5%。语料由 27 份增至 **32 份**，
+一手 31/32 = **0.9688**，`decisions` 道由 1 份增至 **3 份**。
+**没有遇到付费墙，也没有遇到 bot 墙**——全程 archive.org HTTP 200。
+
+## 上一轮为什么报 numFound 0——不是馆藏没有，是检索式自己把它挡光了
+
+上一轮用的是 `title:("Proceedings of the Institution of Mechanical Engineers") AND year:[1880 TO 1910]`。
+这一条**两个字段各挡一次**，必然 0 命中：
+
+| 字段 | 印本上的样子 | archive.org 上的样子 | 后果 |
+|---|---|---|---|
+| `title` | Proceedings of the Institution of Mechanical Engineers | 一律只写 **`Proceedings`** | 按刊名全称查 → 0 |
+| `year` | 1891 / 1893 / 1895 / 1897 / 1899 | 1891 卷写 1891，**其余四卷一律写 `1849`** | 按年过滤 → 再删掉 4/5 |
+
+**换成按 `creator` 查就一次到手**：`creator:("Institution of Mechanical Engineers")` → **numFound 118**，
+其中 identifier 里嵌着年份的一共 22 条，五个目标年份**一个不缺**。
+真正认卷的字段是 **`volume`**（五卷分别写 1891/1893/1895/1897/1899），**不是 `year`**——
+`year` 在其中 4 卷上是错的，与上一轮 JSA 各卷一律写 1852 是同一个毛病。
+
+★ 教训不是「archive.org 的 year 不可信」（这条上一轮已经写过了），
+而是**上一轮写过这条，却仍然在同一天用 `year` 区间做了过滤**。
+判据写在纸上，检索式里没照做。
+
+## 五份的落点
+
+| 报告 | 卷次页码 | 卷 identifier | source_id | 道 | 字节 |
+|---|---|---|---|---|---|
+| First Report | Proc. IMechE **1891, pp. 543-566** | `proceedings1891inst` | `src-d690d5a293a8` | writings | 63,762 |
+| Second Report | **1893, pp. 102-138** | `proceedings189300inst` | `src-391ca73471aa` | writings | 95,652 |
+| Third Report | **1895, pp. 238-254** | `proceedings189500inst` | `src-dfa437e17e2d` | decisions | 40,711 |
+| Fourth Report | **1897, pp. 31-69** | `proceedings1897inst` | `src-5bf1098b8d50` | decisions | 101,125 |
+| Fifth Report: Steel | **1899, pp. 35-68** | `proceedings189900inst` | `src-269db01c421a` | writings | 82,872 |
+
+起始页码不是我推的，是**第五份报告自己的脚注给的**，照录：
+
+> `* For the First, Second, Third, and Fourth Reports, see Proceedings
+> 1891, page 5i3 ; 1893, page 102 ; 1895, page 238 ; and 1897, page 31.`
+
+（`5i3` 是 `543` 的 OCR 讹字。）这一条同时**证实了上一轮从他自己论文脚注里抄到的坐标**
+（`Third Report … 1895, p. 240` 指的是篇中某页，不是起始页；起始页是 238）。
+
+## 署名情况：五份**全是单人署名**，但第三份带着一个真陷阱
+
+五份扉页署名逐字照录（连续空白折成单空格，字形标点含讹字未改）：
+
+| 年 | 扉页署名 |
+|---|---|
+| 1891 | `By Professor W. C. II < )i:i:i:i--Al"> Ti;\. « l;. li;>`　**整行被 OCR 打毁** |
+| 1893 | `By Professor ^V. C. ROBEKTS-AUSTEN, C.B., F.R.S.` |
+| 1895 | `By Professor W. C. EOBERTS-AUSTEN, C.B., F.R.S.` |
+| 1897 | `By Pbofessob W. C. ROBERTS-AUSTEN, C.B., F.R.S.` |
+| 1899 | `By Sir Williaji C. EOBERTS-AUSTEN, K.C.B., D.C.L., F.R.S., HoxoRARY Life Member.` |
+
+**没有一份是委员会集体具名**——五份都是 “Report **to** the Committee”，
+他一个人写、报给委员会。所以不存在共同著作权人。
+
+### ★★ 但 1895 年那份，题目底下实际有三个作者
+
+第三份报告后面紧跟两份**另有署名**的附录，逐字照录：
+
+- `APPENDIX 1 TO THIRD PtEPOPtT TO THE ALLOYS EESEARCH COMMITTEE … Cv 3Ir. ALLAN GIBB, Associate of tee Royal School of Mines`（`Cv 3Ir.` ＝ `By Mr.`）
+- `APPENDIX 2 TO THIED EEPORT TO THE ALLOYS EESEARCH COMAIITTEE … By Mr. ALFRED STANSFIELD, Associate of the Eoyal School of Mixes`
+
+**这两份不是他写的，一个字都没收。** 他自己在正文里把关系说清楚了，照录：
+
+> `The researches conducted by Mr. Stansfield and by Mr. Allan Gibb were in each case
+> undertaken on my suggestion as a thesis for the " Honours " Associateship in Metallurgy
+> of the Eoyal School of Mines.`
+
+**「出题的人」不等于「写的人」**——这正是 `[[related-to-him-is-not-written-by-him]]` 那一类。
+若按「第三份报告」整体收，语料里会凭空多出两个人的 45,000 余字。
+
+同理刻意未收的还有：1893 年同次会议连读的 William Dean 的论文（第 139 页起，
+`By Mr. WILLIAM DEAN, Member of Council`），以及**五份报告各自后面的讨论段落**——
+讨论里绝大多数字是别的会员说的。
+
+## 版面溢出：**零**
+
+上一轮 `philtrans*` 与 `paper-doi-10_1038_*` 几乎每一份都跨到了相邻文章（第七节）。
+本轮五份**一处都没有**，因为切法不同：上一轮是拿 archive.org 按页面范围切好的条目，
+本轮是**自己按版口切的整卷**。自检口径与结果：
+
+- 五份切片内的**全部 89 处版口刊头**，逐条认过，**全是 `ALLOYS RESEARCH` 的 OCR 变体**，
+  没有一处是别的文章的刊头；
+- 邻文标题词（`TENSILE TESTS`／`WILLIAM DEAN`／`PROPELLERS`／`BARCROFT`／`POWRIE`／
+  `ALLAN GIBB`／`STANSFIELD, Associate`／`MEMOIRS`）在五份里**命中 0 次**；
+- 唯二的疑似命中已逐条看过原文，都是**他自己正文里的交叉引用**
+  （1893 谈机车铜火箱、1895 提到两份附录的页码），不是溢出。
+
+## 切片坐标：**按字符，不是按字节**
+
+★ 差点写反的一处：起草台账时我写了「本卷 djvu.txt 为纯 ASCII，字节数＝字符数」。
+**跑了一遍，五卷没有一卷是纯 ASCII**：
+
+| 卷 | 字符 | 字节 | 差 |
+|---|---|---|---|
+| 1891 | 1,873,108 | 1,879,465 | 6,357 |
+| 1893 | 1,582,852 | 1,585,778 | 2,926 |
+| 1895 | 2,096,020 | 2,102,162 | 6,142 |
+| 1897 | 1,696,404 | 1,699,969 | 3,565 |
+| 1899 | 2,001,368 | 2,004,750 | 3,382 |
+
+照字节切会错位数千字。五卷均可**严格 UTF-8 解码、零替换字符**，
+故字符偏移可精确复现（读的时候别用 `errors='replace'`）。
+起止串与字符区间都写在各自的 `locator` 里。
+
+## 研究门：`authorship-unproven` 由 22 条增至 **27 条**——五份新料一份也没过归属门
+
+**我没有去改判据让它变绿。** 逐份把「到底是哪个 token 挡住的」用**单 token 替换法**隔离出来了：
+
+| 年 | 挡住它的 token（实测隔离） |
+|---|---|
+| 1891 | 署名行整行被打毁。**判据判对了**——这一行本身确实证不了归属 |
+| 1893 | 名 `^V.`（`W.` 讹）+ 姓 `ROBEKTS`（R→K 讹），两处 |
+| 1895 | **只有姓 `EOBERTS`（R→E 讹）**——只把这一处改回 `ROBERTS` 即命中 |
+| 1897 | **姓 `ROBERTS-AUSTEN` 完全正确。挡住它的是被打坏的敬称 `Pbofessob`**——敬称改对或删掉，两种都命中 |
+| 1899 | 名 `Williaji` + 姓 `EOBERTS`，两处（实测：只改名仍不中） |
+
+### 两条结构性缺陷，都是新的，都做了负对照
+
+**⑴ `ocr_byline_evidence`（`A-byline-ocr` 那条 OCR 容错路）对复姓一律不认。**
+
+它的分词是 `re.split(r"[^A-Za-z]+", body)`，把 `ROBERTS-AUSTEN` **拆成 `ROBERTS` 和 `AUSTEN` 两个 token**，
+而两者与 `roberts-austen` 的编辑距离分别是 7 和 8，都过不了 ≤2。
+负对照（**只改「姓里有没有连字号」，其余全同**）：
+
+| 输入 | last 参数 | 结果 |
+|---|---|---|
+| `By William C. ROBERTS-AUSTEN, C.B.` | `Roberts-Austen` | **不中** |
+| `By William C. EOBERTS-AUSTEN, C.B.` | `Roberts-Austen` | **不中** |
+| `By William C. AUSTEN, C.B.` | `Austen` | 命中 |
+| `By William C. AUSTEX, C.B.`（姓也打坏） | `Austen` | **仍命中** |
+
+**拼写完全正确的复姓过不了，而打坏了的单姓过得了。**
+射程不止本人物：**任何复姓人物的 OCR 容错路都是死的**，
+而这条路正是为「名字被 OCR 打坏」而建的——Roberts-Austen 恰好两样都占。
+
+**⑵ 被 OCR 打坏的敬称会把整行废掉。**
+
+敬称剥离用的是字面表 `(?:Sir|Dame|Prof(?:essor)?|Dr|Mr|Mrs|Ms|Rev|Lord|Lady)\.?`，
+**没有 OCR 容错**。`Pbofessob` 剥不掉，就占住了「名」那个位置，于是名字校验失败。
+负对照（**姓统一换成单姓以排除⑴的干扰**）：
+
+| 输入 | 结果 |
+|---|---|
+| `By Professor William C. AUSTEN, C.B.` | 命中 |
+| `By Pbofessob William C. AUSTEN, C.B.` | **不中** |
+| `By William C. AUSTEN, C.B.`（无敬称） | 命中 |
+
+主 `BYLINE` 正则那条路同病：1897 那份**姓拼得完全正确**，
+只因敬称是 `Pbofessob` 而整条不中；把敬称改成 `Professor` 或直接删掉，两种都立刻命中。
+
+★ 上一轮第五节列了 7 种拦截机制，**这两条都不在里面**。
+判据要不要长出「复姓不拆分」与「敬称容错」，是待裁定的事——**我没有动它**。
+
+## 同名护栏：重测过，并发现一个新的同名者
+
+- `check_namesake_criteria.py --self-test` → **全过**；
+- 对本工作区 → `目标本人 32　他人 0　unknown 0`。
+
+★ 但护栏比的是台账 `author` 字段，**不看正文里的人名**。
+1895 那份正文里有一个**上一轮 19 条候选册里没有的真同名者**，照录：
+
+> `Mr. Eeginald Roberts, who was appointed as an assistant early last yeai", has also done good work.`
+
+即 **Reginald Roberts**，皇家矿业学院助手，1894 年初到任。
+按判据自己写的规则「≥1885 而只署裸 `Roberts`（无 Austen）→ **不许默认是他**」，
+这一位该进 `excluded_names`。**今天加不加都不改变任何结果**（他从未作为 `author` 出现），
+所以我没有动 `namesake-criteria.json`，只把他报上来。
+
+## 通道与合规
+
+- **并发恒为 1**，全程顺序请求；
+- **零付费墙、零 bot 墙、零验证码**：archive.org `advancedsearch.php`／`metadata/<id>`／
+  `download/<id>/<id>_djvu.txt` 全程 HTTP 200，没有任何需要绕过的访问控制，
+  因此**本轮没有「通道受限」条目**；
+- HathiTrust／Google Books／BHL／Grace's Guide **没有用上**——第一条路就通了，不必再开；
+- PD 依据两条并列（出版 1891-1899，美国 pre-1931；作者卒 1902-11-22，英/欧 70 年 p.m.a. 1972 已届满），
+  archive.org 的 `licenseurl` 只作记录、不作依据。
+
+## 回读自验
+
+全库 **32/32** 原文 sha256 与台账 `checksum` 相符；新增五份原文与归一件 **5/5、5/5** 相符。
+`tier_reason` 空缺 **0**；`derived_from` 五份全空——**这是正确状态**：
+五份各出自**五个不同的卷**，同一载体里没有第二片，无对象可指。
