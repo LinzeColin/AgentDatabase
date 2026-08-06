@@ -76,6 +76,28 @@ Bain 的主体著作全在这一段：
 
 ---
 
+## 三点五、**续期这条本轮走不通——通道被 bot 墙挡住**（不是「查了没有」）
+
+本轮**试过两条通道，都没拿到记录**：
+
+| 通道 | 坐标 | 结果 |
+|---|---|---|
+| Stanford Copyright Renewals | `exhibits.stanford.edu/copyrightrenewals/catalog?q=Bain,+Edgar` | 页面是 JS 应用，抓回来是空的 |
+| 同上，JSON 端点 | `…/catalog.json?q=Bain+Edgar&per_page=50` | **返回验证码页**（support ID 13624200904701015161） |
+| Online Books Page | `onlinebooks.library.upenn.edu/webbin/booksearch?author=Bain,+Edgar` | HTTP 404（这个检索式不对） |
+
+★★★ **验证码没有绕，也不许绕。** 这是延后第五类（通道受限）的形态：
+**材料存在、路径已定位，而本机这条通道被挡住。**
+按已有规矩，**记时要连坐标一起写，换台机器就能续**——坐标就在上表。
+
+下一轮可以换的通道（都没试过）：
+- Copyright Office 官方 `publicrecords.copyright.gov`（1978 年后的记录；1939/1961 的续期落在 1967/1989，**都在这个库里**）；
+- HathiTrust 全文检索 `Catalog of Copyright Entries` 各年卷（**扫本，可全文搜**）；
+- Google Books 上的 `Catalog of Copyright Entries, Third Series`。
+
+★ **注意查的是「谁续的」不是「他续没续」**：ASM（美国金属学会）与 US Steel 是版权人，
+Bain 本人不是。查名要用 **American Society for Metals** 作 claimant 检索。
+
 ## 四、下一轮怎么做（按顺序）
 
 1. **续期检查**——先查 ASM 那两本与 `Trans. ASM` 各卷。**这一条决定生死，先做。**
