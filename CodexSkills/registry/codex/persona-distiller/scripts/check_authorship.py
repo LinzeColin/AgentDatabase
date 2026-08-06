@@ -1965,6 +1965,56 @@ def self_test() -> int:
         if _ok != _should:
             bad.append(f"A-byline-coauthor：{_why}（得到 ok={_ok} code={_code}）")
 
+    print("\n══ ★★★★ **真实样本**：Rosenhain #138 四份取不到署名的印本题头（逐字）══")
+    # 这四段**逐字取自 `_corpora/wip-rosenhain-138/.../raw/` 下的语料文件**，不是构造的。
+    # 它们把「本判据现在取不到什么」冻在这里：**日后谁放宽 OCR 容错，这四条会立刻变绿**，
+    # 那时必须同时回答「会不会把别人的东西收进来」。
+    # ★ 现在四条**都应判「取不到」**——这不是缺陷，是有意的射程边界：
+    #   位置放宽（第二作者位）+ 拼写放宽（OCR 讹形）两条叠加，冤枉的风险成倍涨。
+    _pr = build_patterns("Walter Rosenhain"); _pr["namesakes"] = (); _pr["own_mid"] = ""
+    _REAL = [
+        (" and Apijlieel Meeha/mcs in tin. University of Cambridge, and Walter Kosenhaik, "
+         "St John's College, Ccmv bridge, 1851 Exhibitio7i Research Scholar",
+         "1899 Bakerian Lecture：第二作者位 + `Rosenhain`→`Kosenhaik`"),
+        ("train. Pre- liminary Notice/' By James A. Ewing, F.E.S., and Walter EoSENHAiN, "
+         "1851 Exhibition Eesearch Scholar, Melbourne.",
+         "1899 Micro-metallurgy：第二作者位 + `Rosenhain`→`EoSENHAiN`"),
+        ("252 Mr. W. Eosenhain. [May 1, The authors hope that these experiments may prove",
+         "1902 Platinum：版口式 + `Rosenhain`→`Eosenhain`"),
+        (" on Slip-Bands in Metallic Fractures. — Preliminary Note.\" By Walter EosENiiAiisr, "
+         "B.A., B.C.E. Communicated by Professor Ewing, F.R.S.",
+         "1904 Slip-Bands：`Rosenhain`→`EosENiiAiisr`，坏了四处以上"),
+    ]
+    import tempfile as _tf3, os as _os3
+    for _txt, _why in _REAL:
+        with _tf3.NamedTemporaryFile("w", suffix=".txt", delete=False, encoding="utf-8") as _f:
+            _f.write(_txt); _fp = _f.name
+        _ok, _code, _, _ = check(pathlib.Path(_fp), _pr); _os3.unlink(_fp)
+        print(f"  {'✓' if not _ok else '✗'} 仍取不到（**有意的射程边界**）：{_why}")
+        if _ok:
+            bad.append(f"真实样本：{_why} **本该取不到，却取到了 {_code}**"
+                       "——放宽了容错就要回答「会不会把别人的东西收进来」")
+
+    # ★★ 与之成对：**同一批语料里取得到的那几种**，也用逐字原文钉住，
+    #   否则上面四条会诱使人「干脆全放宽」。
+    _REAL_OK = [
+        # ★★★ **连换行一起逐字取**。第一版我把它拼成了一行，自测当场变红——
+        #   判据要求署名是**结构元素**（行首或分隔符之后），而真实印本是跨行的。
+        #   **夹具比原文干净，就等于没测**（同日在 `A-byline-coauthor` 的 `_LN` 上刚栽过一次）。
+        ("alline StritcfMre of Metals, (Second Paper.) \n\nBy J. A. EwiNG, F.R.S., Professor "
+         "of Mechanism and Applied Mechanics in the \nUniversity of Cambridge, and Walter "
+         "Rosenhain, B.A., St, John's College, \nCambridge^ 1851 Exhibition Research Scholar, "
+         "University of Melbourne. \n",
+         "1900 Second Paper：第二作者位、**名字一个字母都没错**、**跨三行** → A-byline-coauthor"),
+    ]
+    for _txt, _why in _REAL_OK:
+        with _tf3.NamedTemporaryFile("w", suffix=".txt", delete=False, encoding="utf-8") as _f:
+            _f.write(_txt); _fp = _f.name
+        _ok, _code, _, _ = check(pathlib.Path(_fp), _pr); _os3.unlink(_fp)
+        print(f"  {'✓' if _ok else '✗'} 取得到：{_why}（得到 {_code or '—'}）")
+        if not _ok:
+            bad.append(f"真实样本：{_why} **本该取到，却没取到**")
+
     if bad:
 
         print("\n负对照未过：")
