@@ -1,0 +1,51 @@
+[
+  {
+    "short": "1879-pont-du-douro",
+    "identifier": "gri_33125000583548",
+    "bytes": 32491,
+    "sha256": "01bd215aa6a389dcc667f6e0456ee75bd90291ffef9d18bea412c25b85c073b1",
+    "why_this_id": "唯一一份"
+  },
+  {
+    "short": "1888-grandes-constructions-metalliques",
+    "identifier": "lesgrandesconstr00eiff",
+    "bytes": 54374,
+    "sha256": "5764546dcc775a0f3890a8fa1adcc6ad6a82e66016ba951d88f5c9025655caf2",
+    "why_this_id": "唯一一份"
+  },
+  {
+    "short": "1888-viaduc-de-garabit",
+    "identifier": "noticesurleviadu00eiff",
+    "bytes": 46312,
+    "sha256": "74d717517b32a8d9f6252fb393e454f52283ad16d20198cb850a9d35ec53c248",
+    "why_this_id": "46,312 B > TA624282EIF 的 43,616 B，取大的"
+  },
+  {
+    "short": "1889-memoire-projet-definitif",
+    "identifier": "TA62428EIF",
+    "bytes": 324654,
+    "sha256": "d1045ba732f1db3dbdc5a4c3e4772234af5a1fe5ea1540d4e61c58de965fa561",
+    "why_this_id": "唯一一份"
+  },
+  {
+    "short": "1900-travaux-scientifiques",
+    "identifier": "travauxscientifi00eiff",
+    "bytes": 576454,
+    "sha256": "64c2c4300777a7792a75b60d4a55284c94000f513c16ed03e2c3dd0e3e936ec8",
+    "why_this_id": "576,454 B > goog 版 525,623 B"
+  },
+  {
+    "short": "1900-tour-de-300-metres",
+    "identifier": "n-0106381-pdf-1-400",
+    "bytes": 1593995,
+    "sha256": "e4ef8d8d1f620b9910140528914cde70fef1395c14da406b86108ae20222a64d",
+    "why_this_id": "1,593,995 B，唯一一份"
+  },
+  {
+    "short": "1902-la-tour-eiffel-en-1900",
+    "identifier": "latoureiffelen1900eiff",
+    "bytes": 790986,
+    "sha256": "7dc09014148bdedd1425258678743a1e30d317699088eef2693def2b7e9c4c3b",
+    "why_this_id": "唯一一份"
+  }
+]

@@ -172,3 +172,33 @@ Garabit 与 Travaux 各有两个 id，**同一部作品的多个副本只算一�
 ★★ 与它成对的反面规矩已经写在上面：
 **同一部作品的多个副本（Garabit ×2、Travaux ×2）只算一部。**
 两条是同一条原则的两面——**按作品的实际边界计，不按 identifier 计，也不按需要计。**
+
+---
+
+## ★★★★★ 那个推迟的判断，落盘后看结构：**答案与我的利益相反**
+
+抓源落盘（7 份，3,419,266 B）后逐份看内部结构：
+
+    1900-travaux-scientifiques   554,151 字符   CHAPITRE **9** 处，无「目录」，无「PARTIE」
+      扉页逐字：`G. EIFFEL … Travaux Scientifiques EXÉCUTÉS A LA TOUR DE TROIS CENTS MÈTRES DE 1889 A 1900`
+      → **一部专著，分九章。**不是若干篇各自发表过的报告装订在一起。
+
+    1900-tour-de-300-metres    1,545,675 字符   CHAPITRE **71** 处，PARTIE **6** 处
+      扉页逐字：`IL A ÉTÉ TIRÉ DE CET OUVRAGE 500 Exemplaires sur papier vélin, numérotés`
+      → **一部书**（`OUVRAGE`，限印 500 册），分六部分七十一章。
+
+**章不是独立作品。把它们拆开计是错的。**
+
+★ 所以 **7 就是 7**，quick 的 8 源不成立。
+**这个结论与我的利益相反**——我正好差 1 部，而结构说不行。
+把判断推迟到能看见证据之后，正是为了让它能这样落地。
+
+## 定档结论：**不定档，记延后**（两种缺口叠加）
+
+    ① 一手规模不够：可用 7 部 < quick 门 8（合集不拆、副本不重复计、226 B 的不算）
+    ② 通道受限：补足所缺那 1 部，四条通道全试过——
+       archive.org 无此条目（按书名检索 numFound=0）／Gallica 403／
+       Google Books 429／HathiTrust 要标识符而标识符查不到
+
+★★ 语料 7 份已落盘并留在仓里（`_fetch-staging/`，逐份记了 sha256），
+**换台机器只要补到 1 部就能直接接着做**，不必重抓。
