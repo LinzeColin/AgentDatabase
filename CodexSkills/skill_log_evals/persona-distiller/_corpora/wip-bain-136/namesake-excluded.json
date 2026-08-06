@@ -1,0 +1,16 @@
+{
+  "★ 口径": "**被排除的不是「无关的人」，是「同名且会在同一批文件里出现的人」**——排除依据必须逐条写明，不能只写「不是他」。",
+  "excluded": [
+    {
+      "canonical_name": "Harry Foster Bain",
+      "为什么会撞上": "1925–1931 年任 AIME 学会秘书，与 Edgar Bain 论文所在的 Trans. AIME 是同一学会同一段年份；**1930 年卷里两人同时出现且都带 Secretary 头衔**",
+      "逐字证据": [
+        "第 174 行 `Secretary, H. Foster Bain, New York, N. Y.`（学会秘书，本人）",
+        "第 489 行 `E. C. Bain, Secretary`（Metallography 分会秘书，目标）"
+      ],
+      "证据出处": "archive.org in.ernet.dli.2015.59707（Trans. AIME 1930 Iron and Steel Division）",
+      "排除依据": "他没有任何钢的相变研究，产出是地质调查与矿业行政（Illinois 州地质调查所主任 1905–1909、U.S. Bureau of Mines 局长 1921–1924）；署名带 `Foster` 或 `H. F.` 前缀，与目标惯用的 `E. C. Bain` 不同",
+      "★ 抓源时的实操要求": "**凡命中 `Bain` 而不带 `E. C.`／`Edgar` 的，一律先当作他，逐条核过再收**"
+    }
+  ]
+}

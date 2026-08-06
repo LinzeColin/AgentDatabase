@@ -1,0 +1,50 @@
+{
+  "candidate_cards": [
+    "A. 人物与身份：Edgar Collins Bain；历史人物（1891-09-14 – 1971-11-27）；冶金学家；United States Steel Corporation 研究所（Kearny, N. J.）。\n   专业背景：物理冶金／钢的等温转变。与 E. S. Davenport 合著 1930 年 Trans. AIME vol. 90 那篇，确立 TTT（时间-温度-转变）曲线；bainite 以他命名。\n   应用价值：场景：钢的等温转变与 TTT 曲线；不锈钢组成相的 X 射线研究；合金元素对钢的作用；关键能力：X 射线衍射定相；等温转变实验设计；合金元素-组织-性能的系统归纳。\n   区分依据：署名地作 `Kearny, N. J.`（US Steel 研究所所在）；学会角色是 AIME **Metallography 分会秘书**（1930 年卷前页作 `E. C. Bain, Secretary`，主席 H. M. Boylston）。研究对象始终是钢的相变，不涉及地质调查或矿业行政。。"
+  ],
+  "candidate_count": 1,
+  "candidates": [
+    {
+      "application_scenarios": [
+        "钢的等温转变与 TTT 曲线",
+        "不锈钢组成相的 X 射线研究",
+        "合金元素对钢的作用"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q742183（P569 1891-09-14 / P570 1971-11-27；enwiki「Edgar Bain」）"
+        },
+        {
+          "locator": "archive.org in.ernet.dli.2015.59707（Trans. AIME 1930 Iron and Steel Division），正文题头逐字：`By E. S. Davenport* and E. C. BAiN,t Kearny, N. J.`"
+        },
+        {
+          "locator": "archive.org sim_american-society-for-metals-asm-transactions-quarterly_1928-07_14_1，题头逐字：`X-RAYS AND THE CONSTITUENTS OF STAINLESS STEEL / By Epaar C. BaIn`"
+        }
+      ],
+      "canonical_name": "Edgar Collins Bain",
+      "distinguishing_basis": "署名地作 `Kearny, N. J.`（US Steel 研究所所在）；学会角色是 AIME **Metallography 分会秘书**（1930 年卷前页作 `E. C. Bain, Secretary`，主席 H. M. Boylston）。研究对象始终是钢的相变，不涉及地质调查或矿业行政。",
+      "evidence_level": "high",
+      "identity_category": "历史人物（1891-09-14 – 1971-11-27）",
+      "key_capabilities": [
+        "X 射线衍射定相",
+        "等温转变实验设计",
+        "合金元素-组织-性能的系统归纳"
+      ],
+      "label": "A",
+      "occupation_or_role": "冶金学家；United States Steel Corporation 研究所（Kearny, N. J.）",
+      "professional_background": "物理冶金／钢的等温转变。与 E. S. Davenport 合著 1930 年 Trans. AIME vol. 90 那篇，确立 TTT（时间-温度-转变）曲线；bainite 以他命名",
+      "subject_uid": "wikidata:Q742183"
+    }
+  ],
+  "generated_at": "2026-08-06T02:14:14Z",
+  "normalized_name": "edgarcollinsbain",
+  "resolution": "single",
+  "schema_version": "1.0",
+  "search_scope": [
+    "sibling canonical registry",
+    "authoritative public sources supplied by orchestration"
+  ],
+  "selected_subject_uid": "wikidata:Q742183",
+  "status": "ready",
+  "target_name": "Edgar Collins Bain"
+}

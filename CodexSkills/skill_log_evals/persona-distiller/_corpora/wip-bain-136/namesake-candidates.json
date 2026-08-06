@@ -1,0 +1,49 @@
+[
+  {
+    "canonical_name": "Edgar Collins Bain",
+    "subject_uid": "wikidata:Q742183",
+    "identity_category": "历史人物（1891-09-14 – 1971-11-27）",
+    "occupation_or_role": "冶金学家；United States Steel Corporation 研究所（Kearny, N. J.）",
+    "professional_background": "物理冶金／钢的等温转变。与 E. S. Davenport 合著 1930 年 Trans. AIME vol. 90 那篇，确立 TTT（时间-温度-转变）曲线；bainite 以他命名",
+    "application_scenarios": [
+      "钢的等温转变与 TTT 曲线",
+      "不锈钢组成相的 X 射线研究",
+      "合金元素对钢的作用"
+    ],
+    "key_capabilities": [
+      "X 射线衍射定相",
+      "等温转变实验设计",
+      "合金元素-组织-性能的系统归纳"
+    ],
+    "distinguishing_basis": "署名地作 `Kearny, N. J.`（US Steel 研究所所在）；学会角色是 AIME **Metallography 分会秘书**（1930 年卷前页作 `E. C. Bain, Secretary`，主席 H. M. Boylston）。研究对象始终是钢的相变，不涉及地质调查或矿业行政。",
+    "authoritative_sources": [
+      {"locator": "Wikidata Q742183（P569 1891-09-14 / P570 1971-11-27；enwiki「Edgar Bain」）"},
+      {"locator": "archive.org in.ernet.dli.2015.59707（Trans. AIME 1930 Iron and Steel Division），正文题头逐字：`By E. S. Davenport* and E. C. BAiN,t Kearny, N. J.`"},
+      {"locator": "archive.org sim_american-society-for-metals-asm-transactions-quarterly_1928-07_14_1，题头逐字：`X-RAYS AND THE CONSTITUENTS OF STAINLESS STEEL / By Epaar C. BaIn`"}
+    ],
+    "evidence_level": "high"
+  },
+  {
+    "canonical_name": "Harry Foster Bain",
+    "subject_uid": "enwiki:H._Foster_Bain",
+    "identity_category": "历史人物（1871-11-02 – 1948-03-09）",
+    "occupation_or_role": "地质学家；矿业期刊编辑；U.S. Bureau of Mines 第四任局长；**AIME 学会秘书（1925–1931）**",
+    "professional_background": "地质调查与矿业行政。Illinois State Geological Survey 主任（1905–1909）、U.S. Bureau of Mines 局长（1921–1924）、AIME 秘书（1925–1931）、菲律宾矿务局顾问（1936–1942）；曾主编 Mining and Scientific Press（1909–1915）与伦敦 Mining Magazine（1915–1917）",
+    "application_scenarios": [
+      "区域地质调查与矿产资源评估",
+      "矿业政策与政府矿务行政",
+      "矿业期刊编辑"
+    ],
+    "key_capabilities": [
+      "地质填图与矿床描述",
+      "矿业公共政策",
+      "技术期刊编辑"
+    ],
+    "distinguishing_basis": "★★★ 他 1925–1931 年任 **AIME 秘书**——正是收录 Edgar Bain 论文的那套 Trans. AIME 的同一学会、同一段年份。实测 1930 年卷里**两人同时出现且都带 `Secretary` 头衔**：第 174 行 `Secretary, H. Foster Bain, New York, N. Y.`（学会秘书）与第 489 行 `E. C. Bain, Secretary`（Metallography 分会秘书），相隔约 315 行、同在卷前页。区分依据：**他没有任何钢的相变研究**，产出是地质调查与矿业政策；署名常作 `H. F. Bain`／`H. Foster Bain`，带 Foster 或 H. F. 前缀。",
+    "authoritative_sources": [
+      {"locator": "en.wikipedia.org/wiki/H._Foster_Bain 首句逐字：「Harry Foster Bain (November 2, 1871 – March 9, 1948), better known as H. Foster Bain, was an American geologist who served as the 4th Director of the U.S. Bureau of Mines.」"},
+      {"locator": "archive.org in.ernet.dli.2015.59707 第 174 行逐字：`Secretary, H. Foster Bain, New York, N. Y.`"}
+    ],
+    "evidence_level": "high"
+  }
+]
