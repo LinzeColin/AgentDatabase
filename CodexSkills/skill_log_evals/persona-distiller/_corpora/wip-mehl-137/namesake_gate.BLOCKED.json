@@ -1,0 +1,101 @@
+{
+  "candidate_cards": [
+    "A. 人物与身份：Robert Franklin Mehl；历史人物（1898-03-30 – 1976-01-29）；冶金学家；1927–1931 Naval Research Laboratory 物理冶金部主管；1932 起 Carnegie Institute of Technology。\n   专业背景：物理冶金／相变动力学。与 W. A. Johnson 合著 1939 年 Trans. AIME 135 那篇（KJMA 方程里的 M）；1936 年 Institute of Metals Division 具名讲演人；在 NRL 开发伽马射线探伤。\n   应用价值：场景：钢的相变动力学与形核长大；固体金属中的扩散；伽马射线无损探伤；关键能力：相变动力学建模；扩散系数测定；把实验冶金组织成学科。\n   区分依据：署名作 `R. F. Mehl`／`Robert F. Mehl`（印本 OCR 讹形见过 `Roserr F. Mrnn`／`Rosert F. Meut`）。载体是 Trans. AIME／Trans. ASM 等冶金学会会刊；1936 年那篇题头带 `Institute of Metals Division Lecturer, 1936`。**研究对象是金属的相变与扩散**。。",
+    "B. 人物与身份：B. Max Mehl；历史人物（1884–1957）；美国钱币商（dealer in coins）。\n   专业背景：钱币拍卖与目录编纂，与目标同代（1884–1957 vs 1898–1976）。\n   应用价值：场景：钱币拍卖；钱币目录编纂；关键能力：钱币鉴定与估价；拍卖目录编纂。\n   区分依据：★★★ **这一位已经在本轮的检索里真的撞上过**：在 archive.org 按 `creator:(\"Mehl\")` 检索时，命中里有 `catalogueoffineg1908mehl`（1908）与 `catalogueofrarec1909mehl`（1909）——**那是他的钱币拍卖目录**。**钱币与冶金同属「金属」语域**，按姓＋金属类词检索必然把两人并在一起。区分依据：他的产出是**拍卖目录与价目**，不是实验报告；署名作 `B. Max Mehl`，带 `B.` 前缀；载体是拍卖行印品不是学会会刊。。",
+    "C. 人物与身份：Maurice Mehl；历史人物（1887–1966）；美国古生物学家（American paleontologist）。\n   专业背景：古生物学。生卒 1887–1966，与目标（1898–1976）**几乎完全同代**，同为美国学者，发表年代重叠。\n   应用价值：场景：古生物学研究；地层与化石描述；关键能力：化石鉴定与描述；地层对比。\n   区分依据：领域是**古生物/地质**不是冶金；载体是地质学会与博物馆刊物，不是 AIME／ASM 会刊。★ 与 Roberts-Austen #135 那次的教训同形：**同代 + 同国 + 相邻学科**才是真风险，不是随便的同姓者。。"
+  ],
+  "candidate_count": 3,
+  "candidates": [
+    {
+      "application_scenarios": [
+        "钢的相变动力学与形核长大",
+        "固体金属中的扩散",
+        "伽马射线无损探伤"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "Wikidata Q7344500；en.wikipedia.org/wiki/Mehl 消歧页作「Robert Franklin Mehl (1898–1976) - American metallurgist」"
+        },
+        {
+          "locator": "archive.org american-institute-of-mining-and-metallurgical_1936_122，题头逐字：`Roserr F. Mrnn / Institute of Metals Division Lecturer, 1936` 与 `By Rosert F. Meut,* Mremepnr A.I.M.E.`"
+        },
+        {
+          "locator": "nationalacademies.org/read/9977/chapter/9（Biographical Memoirs），载 1927–1931 任 Naval Research Laboratory 物理冶金部主管"
+        }
+      ],
+      "canonical_name": "Robert Franklin Mehl",
+      "distinguishing_basis": "署名作 `R. F. Mehl`／`Robert F. Mehl`（印本 OCR 讹形见过 `Roserr F. Mrnn`／`Rosert F. Meut`）。载体是 Trans. AIME／Trans. ASM 等冶金学会会刊；1936 年那篇题头带 `Institute of Metals Division Lecturer, 1936`。**研究对象是金属的相变与扩散**。",
+      "evidence_level": "high",
+      "identity_category": "历史人物（1898-03-30 – 1976-01-29）",
+      "key_capabilities": [
+        "相变动力学建模",
+        "扩散系数测定",
+        "把实验冶金组织成学科"
+      ],
+      "label": "A",
+      "occupation_or_role": "冶金学家；1927–1931 Naval Research Laboratory 物理冶金部主管；1932 起 Carnegie Institute of Technology",
+      "professional_background": "物理冶金／相变动力学。与 W. A. Johnson 合著 1939 年 Trans. AIME 135 那篇（KJMA 方程里的 M）；1936 年 Institute of Metals Division 具名讲演人；在 NRL 开发伽马射线探伤",
+      "subject_uid": "wikidata:Q7344500"
+    },
+    {
+      "application_scenarios": [
+        "钱币拍卖",
+        "钱币目录编纂"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "en.wikipedia.org/wiki/Mehl 消歧页逐字：「B. Max Mehl (1884–1957) - American dealer in coins」"
+        },
+        {
+          "locator": "archive.org 检索 `creator:(\"Mehl, Robert\")` 的实际命中里含 `catalogueoffineg1908mehl`／`catalogueofrarec1909mehl`（本轮实测）"
+        }
+      ],
+      "canonical_name": "B. Max Mehl",
+      "distinguishing_basis": "★★★ **这一位已经在本轮的检索里真的撞上过**：在 archive.org 按 `creator:(\"Mehl\")` 检索时，命中里有 `catalogueoffineg1908mehl`（1908）与 `catalogueofrarec1909mehl`（1909）——**那是他的钱币拍卖目录**。**钱币与冶金同属「金属」语域**，按姓＋金属类词检索必然把两人并在一起。区分依据：他的产出是**拍卖目录与价目**，不是实验报告；署名作 `B. Max Mehl`，带 `B.` 前缀；载体是拍卖行印品不是学会会刊。",
+      "evidence_level": "high",
+      "identity_category": "历史人物（1884–1957）",
+      "key_capabilities": [
+        "钱币鉴定与估价",
+        "拍卖目录编纂"
+      ],
+      "label": "B",
+      "occupation_or_role": "美国钱币商（dealer in coins）",
+      "professional_background": "钱币拍卖与目录编纂，与目标同代（1884–1957 vs 1898–1976）",
+      "subject_uid": "enwiki:B._Max_Mehl"
+    },
+    {
+      "application_scenarios": [
+        "古生物学研究",
+        "地层与化石描述"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "en.wikipedia.org/wiki/Mehl 消歧页逐字：「Maurice Mehl (1887–1966) - American paleontologist」"
+        }
+      ],
+      "canonical_name": "Maurice Mehl",
+      "distinguishing_basis": "领域是**古生物/地质**不是冶金；载体是地质学会与博物馆刊物，不是 AIME／ASM 会刊。★ 与 Roberts-Austen #135 那次的教训同形：**同代 + 同国 + 相邻学科**才是真风险，不是随便的同姓者。",
+      "evidence_level": "medium",
+      "identity_category": "历史人物（1887–1966）",
+      "key_capabilities": [
+        "化石鉴定与描述",
+        "地层对比"
+      ],
+      "label": "C",
+      "occupation_or_role": "美国古生物学家（American paleontologist）",
+      "professional_background": "古生物学。生卒 1887–1966，与目标（1898–1976）**几乎完全同代**，同为美国学者，发表年代重叠",
+      "subject_uid": "enwiki:Maurice_Mehl"
+    }
+  ],
+  "generated_at": "2026-08-06T03:36:18Z",
+  "normalized_name": "robertfranklinmehl",
+  "resolution": "multiple",
+  "schema_version": "1.0",
+  "search_scope": [
+    "sibling canonical registry",
+    "authoritative public sources supplied by orchestration"
+  ],
+  "selected_subject_uid": null,
+  "status": "blocked",
+  "target_name": "Robert Franklin Mehl"
+}

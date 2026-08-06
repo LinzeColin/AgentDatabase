@@ -1,0 +1,34 @@
+{
+  "★ 口径": "**排除的不是「无关的人」，是「会在同一批检索结果里出现的人」**。",
+  "★★ 本文件被重写过一次": "第一版是用不带引号的 shell heredoc 写的，**反引号被 shell 当命令执行**（终端报了三行 `command not found: Mehl` / `R.` / `Robert`），于是「抓源实操」那句被写成「凡命中　而**不带 ／** 的」——**关键词全没了，而句子读起来仍然通顺**。这是最难查的一类损坏：它不报错、不留空、只是把内容抽掉。",
+  "excluded": [
+    {
+      "canonical_name": "B. Max Mehl",
+      "生卒": "1884–1957",
+      "身份": "美国钱币商（American dealer in coins）",
+      "为什么会撞上": "★★★ **这一位在本轮检索里真的撞上过**：在 archive.org 按 creator 检索 Mehl 时，命中里有 `catalogueoffineg1908mehl`（1908）与 `catalogueofrarec1909mehl`（1909）——**那是他的钱币拍卖目录**。钱币与冶金同属「金属」语域，按姓 + 金属类词检索必然把两人并在一起。",
+      "区分依据": "产出是**拍卖目录与价目**，不是实验报告；署名带 `B.` 前缀作 `B. Max Mehl`；载体是拍卖行印品不是学会会刊。",
+      "出处": [
+        "en.wikipedia.org/wiki/Mehl 消歧页逐字：「B. Max Mehl (1884–1957) - American dealer in coins」",
+        "archive.org 本轮实测命中：catalogueoffineg1908mehl / catalogueofrarec1909mehl"
+      ]
+    },
+    {
+      "canonical_name": "Maurice Mehl",
+      "生卒": "1887–1966",
+      "身份": "美国古生物学家（American paleontologist）",
+      "为什么会撞上": "与目标（1898–1976）**几乎完全同代**，同为美国学者，发表年代重叠。★ 与 Roberts-Austen #135 那次的教训同形：**同代 + 同国 + 相邻学科**才是真风险，不是随便的同姓者。",
+      "区分依据": "领域是古生物/地质不是冶金；载体是地质学会与博物馆刊物，不是 AIME／ASM 会刊。",
+      "出处": [
+        "en.wikipedia.org/wiki/Mehl 消歧页逐字：「Maurice Mehl (1887–1966) - American paleontologist」"
+      ]
+    }
+  ],
+  "★ 抓源实操要求": [
+    "凡命中 `Mehl` 而**不带 `R. F.` 或 `Robert`** 的，一律先当作别人，逐条核过再收。",
+    "**拍卖目录／价目形态**的一律排除（B. Max Mehl）。",
+    "**地质／古生物载体**的一律排除（Maurice Mehl）。",
+    "★ 已知目标的 OCR 讹形：`Roserr F. Mrnn`／`Rosert F. Meut`／`R. P. Mehl`——这三种是他，不要当成别人。"
+  ],
+  "★★ 一条没查实的": "检索摘要里出现过一位 Duke 大学做材料科学的 `Michael Mehl`（与目标同域，风险更高），**但消歧页上的 Michael Mehl 是 1999 年生的加拿大壁球运动员，是另一个人**。那位材料学者本轮**没有取到权威页**，因此**没有写进护栏**——不是判断他无关，是没核。"
+}

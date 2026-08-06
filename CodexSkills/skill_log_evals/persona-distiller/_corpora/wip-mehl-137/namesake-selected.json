@@ -1,0 +1,32 @@
+[
+  {
+    "canonical_name": "Robert Franklin Mehl",
+    "subject_uid": "wikidata:Q7344500",
+    "identity_category": "历史人物（1898-03-30 – 1976-01-29）",
+    "occupation_or_role": "冶金学家；1927–1931 Naval Research Laboratory 物理冶金部主管；1932 起 Carnegie Institute of Technology",
+    "professional_background": "物理冶金／相变动力学。与 W. A. Johnson 合著 1939 年 Trans. AIME 135 那篇（KJMA 方程里的 M）；1936 年 Institute of Metals Division 具名讲演人；在 NRL 开发伽马射线探伤",
+    "application_scenarios": [
+      "钢的相变动力学与形核长大",
+      "固体金属中的扩散",
+      "伽马射线无损探伤"
+    ],
+    "key_capabilities": [
+      "相变动力学建模",
+      "扩散系数测定",
+      "把实验冶金组织成学科"
+    ],
+    "distinguishing_basis": "署名作 `R. F. Mehl`／`Robert F. Mehl`（印本 OCR 讹形见过 `Roserr F. Mrnn`／`Rosert F. Meut`）。载体是 Trans. AIME／Trans. ASM 等冶金学会会刊；1936 年那篇题头带 `Institute of Metals Division Lecturer, 1936`。**研究对象是金属的相变与扩散**。",
+    "authoritative_sources": [
+      {
+        "locator": "Wikidata Q7344500；en.wikipedia.org/wiki/Mehl 消歧页作「Robert Franklin Mehl (1898–1976) - American metallurgist」"
+      },
+      {
+        "locator": "archive.org american-institute-of-mining-and-metallurgical_1936_122，题头逐字：`Roserr F. Mrnn / Institute of Metals Division Lecturer, 1936` 与 `By Rosert F. Meut,* Mremepnr A.I.M.E.`"
+      },
+      {
+        "locator": "nationalacademies.org/read/9977/chapter/9（Biographical Memoirs），载 1927–1931 任 Naval Research Laboratory 物理冶金部主管"
+      }
+    ],
+    "evidence_level": "high"
+  }
+]
