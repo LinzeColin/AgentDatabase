@@ -479,6 +479,30 @@ def self_test() -> int:
     print("\n── duplicate_audit 负对照（正例取自真实的那一对）──")
     _selftest_duplicate_audit(bad)
 
+    # ★★★★ 2026-08-07：**`--json` 的输出必须是纯 JSON**——真数据上撞出来的。
+    #   此前三段审计在 `--json` 时也照打，stdout = JSON 数组 + 1790 字符散文，
+    #   唯一消费方 `quality_check.py:1343` 的 `json.loads` **必然抛 Extra data**，
+    #   拿到 `rows = []`，于是 **`content.selftest-failed` 一条也发不出来**。
+    #   ★ 这一条必须**真去跑子进程**，不能只调 `census()`——
+    #     出问题的正是 `main()` 的打印，`census()` 本身一直是对的。
+    #     这就是 [[a-checker-nothing-calls-is-not-a-checker]] 第五批那个形状：
+    #     **检查不经过被保证之物**。
+    print("\n── `--json` 输出可解析性（真跑子进程，不是调函数）──")
+    with tempfile.TemporaryDirectory() as tmp2:
+        d2 = pathlib.Path(tmp2) / "scripts"
+        d2.mkdir()
+        for name, (src, _) in FIXTURES.items():
+            (d2 / name).write_text(src, encoding="utf-8")
+        _r = subprocess.run([sys.executable, str(pathlib.Path(__file__).resolve()),
+                             str(d2), "--json"], capture_output=True, text=True)
+        try:
+            _rows = json.loads(_r.stdout)
+            print(f"  ✓ stdout 是单个 JSON（{len(_rows)} 条），"
+                  f"末尾无散文；退出码 {_r.returncode}")
+        except json.JSONDecodeError as _e:
+            print(f"  ✗ **stdout 不是纯 JSON**：{_e}")
+            bad.append(f"--json 输出无法解析：{_e}")
+
     if bad:
         print("\n负对照未过：")
         for b in bad:
@@ -541,6 +565,17 @@ def main() -> int:
     #     只是这次是**造判据的当天就撞上**，不是事后回查。
     #   判法：一件判据若**既不引具体人物编号、也不带实测数字**，
     #   那它很可能是想出来的而不是撞出来的。**只报不拦。**
+    # ★★★★ 2026-08-07：**下面三段审计原先在 `--json` 时也照打**，
+    #   于是 stdout = JSON 数组 + 1790 字符散文，`json.loads` **必然抛 Extra data**。
+    #   唯一的消费方 `quality_check.py:1343` 于是永远走 except 分支拿到 `rows = []`，
+    #   ★ 真实后果：**`content.selftest-failed` 一条也发不出来**——
+    #     哪件判据自测挂了，门都不会说。判据自己是设了防的
+    #     （写「本次未做检查器先验（不是通过）」），**防线在调用点被 `rows=[]` 绕过了**。
+    #   复现：`python3 scripts/check_checkers.py scripts --json | python3 -c "import json,sys;json.load(sys.stdin)"`
+    #   ★ 退出码与人读路径**必须同一个表达式**（见文件末），
+    #     否则 `--json` 会把「有判据自测未过」报成 0。
+    if a.json:
+        return 2 if any(r["verdict"] == FAILED for r in rows) else 0
     print("\n── 事故锚点（判据是撞出来的，还是想出来的）──")
     _NUMPAT = re.compile(r"\d+\.\d{3,4}|\d+/\d+|numFound|\b\d{2,}\s*(?:份|条|个|次)")
     _files = sorted(pathlib.Path(d).glob("check_*.py"))
@@ -549,7 +584,12 @@ def main() -> int:
         _doc = _p.read_text(encoding="utf-8", errors="replace")[:6000]
         if not (re.search(r"#\d{2,3}\b", _doc) or _NUMPAT.search(_doc)):
             _noanchor.append(_p.name)
-    print(f"  判据 {len(_files)} 件，**既无人物编号也无实测数字的 {len(_noanchor)} 件**"
+    # ★ 2026-08-07：**这一节的分母是 {len(_files)}，含本件自己**；
+    #   而上面那张普查表的分母是 {len(rows)}，**把本件排除在外**（`census(exclude=…)`）。
+    #   两个数在同一次输出里差 1，此前谁都没写自己是哪个口径——
+    #   我今天就据此误判过一次「元判据自己没有调用方」（实为 `quality_check.py` 在调）。
+    print(f"  判据 {len(_files)} 件（**本节含本件自己；上表 {len(rows)} 件是排除本件的口径**），"
+          f"**既无人物编号也无实测数字的 {len(_noanchor)} 件**"
           + (f"：{_noanchor}" if _noanchor else "　✓"))
     if _noanchor:
         print("  ★ 请确认它们**在真数据上验过**——自测全过不等于有效，"
