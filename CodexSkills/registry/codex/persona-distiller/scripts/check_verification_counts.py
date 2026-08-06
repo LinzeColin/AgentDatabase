@@ -171,7 +171,8 @@ def audit(root: pathlib.Path) -> dict:
         #      **x=20 时 CN[20] 直接 IndexError，把整件判据炸成「未核」**。
         #      今天台账正好加到 20 节，**当场炸了**——是元判据报「输出无法解析」才发现的。
         #   ★ 教训：**判据自己预言过的漏，要当场堵上，不要只写在注释里等它来。**
-        n_real = len(re.findall("^## [①-⑳㉑-㉟]", lt, re.M))
+        # ★ 同上：只认 `##` 会漏掉写成 `###` 的新条目，改成任意标题层级
+        n_real = len(set(re.findall("^#{2,4} +([①-⑳㉑-㉟])", lt, re.M)))
         want = _cn(n_real)
         saids = re.findall(r"待用户裁定（\*\*(.+?)条\*\*）|一眼看完：(.+?)条各是什么", lt)
         flat = [x for pair in saids for x in pair if x]
@@ -179,12 +180,23 @@ def audit(root: pathlib.Path) -> dict:
         # ★★ 同日再补：**「一眼看完」表里的行数，与正文节数**。
         #   实测 ⑫ 只有正文、**没进表**——自称条数那一项当时是 ✓，因为它只比标题与导语。
         #   **一眼看完漏一行，这张表就不再是一眼看完。**
-        n_tab = len(re.findall("^\\| \\*\\*[①-⑳㉑-㉟]\\*\\* \\|", lt, re.M))
-        rows.append({"项": "待裁定台账·表行数 vs 正文节数",
-                     "实况": f"正文 {n_real} 节", "文中": f"表 {n_tab} 行",
-                     "判定": "✓" if n_tab == n_real
-                             else f"**对不上**（表 {n_tab} 行，正文 {n_real} 节——有条目没进表）"})
-        bad += (n_tab != n_real)
+        # ★★★★★ **比集合，不比计数。** 2026-08-06 实测：新加的 ㉖㉗㉘㉙ 四条
+        #   **既没进表、也用了 `###` 而不是 `##`**——于是「表 25 行」与「正文 25 节」
+        #   **两个数一起漂、互相抵消，本项当场报 ✓**，而真值是 29。
+        #   **计数相等不等于集合相同**：两边都缺同样四个，计数照样对上。
+        #   改法：把**任意标题层级**（`##`／`###`）里出现的圈号收成集合，与表里的比。
+        tab_ids = set(re.findall("^\\| \\*\\*([①-⑳㉑-㉟])\\*\\* \\|", lt, re.M))
+        sec_ids = set(re.findall("^#{2,4} +([①-⑳㉑-㉟])", lt, re.M))
+        only_sec = sorted(sec_ids - tab_ids)
+        only_tab = sorted(tab_ids - sec_ids)
+        n_tab = len(tab_ids)
+        rows.append({"项": "待裁定台账·表 vs 正文（**比集合**）",
+                     "实况": f"正文 {len(sec_ids)} 个圈号", "文中": f"表 {n_tab} 行",
+                     "**有正文没进表的**": only_sec or None,
+                     "**有表没正文的**": only_tab or None,
+                     "判定": "✓" if not (only_sec or only_tab)
+                             else f"**对不上**（正文有而表没有：{only_sec}；表有而正文没有：{only_tab}）"})
+        bad += bool(only_sec or only_tab)
 
         rows.append({"项": "待裁定台账条数", "实况": f"{n_real}（{want}条）",
                      "文中": flat or None,
@@ -216,6 +228,20 @@ def self_test() -> int:
     print("── ★★ 反向对照④：**带「真值」的行是引用旧错值，不许当成当前断言** ──")
     s4 = stated("checksum **305 files**（真值 341）、Python 脚本 **66**（真值 84）")
     chk(f"{s4}", not s4)
+
+    # ★★★★★ **「两边一起漂」的反例**——2026-08-06 实测的那次，固化下来。
+    #   旧写法比的是**计数**：表 3 行 == 正文 3 节 → ✓，**而 ④ 只有正文没进表**。
+    #   新写法比**集合**，当场报「正文有而表没有：['④']」。
+    _lt = ("# 待用户裁定（**三条**）\n\n| # | 一句话 |\n|---|---|\n"
+           "| **①** | 甲 |\n| **②** | 乙 |\n| **③** | 丙 |\n\n"
+           "## ① 甲\n正文\n## ② 乙\n正文\n## ③ 丙\n正文\n"
+           "### ④ 丁——只有正文、没进表，而且用了 ###\n正文\n")
+    _tab = set(re.findall(r"^\| \*\*([①-⑳㉑-㉟])\*\* \|", _lt, re.M))
+    _sec_old = len(re.findall(r"^## [①-⑳㉑-㉟]", _lt, re.M))
+    _sec_new = set(re.findall(r"^#{2,4} +([①-⑳㉑-㉟])", _lt, re.M))
+    chk("旧写法（比计数）确实会放过：表 3 == 正文 3", len(_tab) == _sec_old)
+    chk("★ 新写法（比集合）抓得到只有正文没进表的 ④", (_sec_new - _tab) == {"④"})
+    chk("★ 反向：表有而正文没有的也要抓", (_tab - _sec_new) == set())
     chk("★ 而同一段去掉「真值」注解后**要收上来**（证明不是正则本身失效）",
         stated("checksum **305 files**、Python 脚本 **66**").get("Python脚本数") == [66])
     print("── ★★★ 反向对照⑤：**待裁定台账自称的条数与实际 `## ①…` 条数对不上 → 必须报** ──")
@@ -240,7 +266,9 @@ def self_test() -> int:
                + "\n" + "".join(f"## {c} x\n\n" for c in "①②③④⑤⑥⑦⑧⑨⑩⑪⑫"))
         (led / "_待用户裁定.md").write_text(tab, encoding="utf-8")
         rr = audit(root)
-        t_row = [x for x in rr["明细"] if "表行数" in x["项"]][0]
+        # ★ 项名从「表行数 vs 正文节数」改成「表 vs 正文（**比集合**）」之后，
+        #   这一行按旧名找会 IndexError——**改判据要连它的自测一起改**。
+        t_row = [x for x in rr["明细"] if "台账·表" in x["项"]][0]
         c_row = [x for x in rr["明细"] if x["项"] == "待裁定台账条数"][0]
         chk(f"{t_row['判定'][:40]}", "对不上" in t_row["判定"])
         chk("★ 而自称条数那一项此时是 ✓——**证明两项各管各的**", c_row["判定"] == "✓")
