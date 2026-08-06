@@ -53,6 +53,47 @@ def slugify(s):
     return s
 
 
+def workspace_of(corp, name):
+    """`_corpora/` 里有没有这个人的工作区。返回 (目录名, 已判轮次) 或 None。
+
+    ★★★ 按**整段**比，不按子串比。子串版实测撞出假阳：
+    `William D. Callister` 命中 `wip-lister-108`——`lister` 是 `callister` 的一部分。
+    与同名护栏那次是同一个坑（抹平之后再查词边界，边界就没了）。
+    """
+    if not os.path.isdir(corp):
+        return None
+    slug = name.strip().lower().replace(" ", "-").replace(".", "").split("-")
+    for d in sorted(os.listdir(corp)):
+        if not d.startswith("wip-"):
+            continue
+        stem = d[4:].rsplit("-", 1)[0]
+        # ★★★★ 复合姓：`wip-roberts-austen-135` 的 stem 是 `roberts-austen`，
+        #   而 `William Chandler Roberts-Austen` 切成
+        #   ['william','chandler','roberts','austen'] ——**整段比会漏掉他**。
+        #   补法是允许 stem 命中**连续的若干段**；它仍挡得住 Callister 那个假阳，
+        #   因为 `lister` 既不是 ['william','d','callister'] 的某一段，
+        #   也不是其中任何一段连续的拼接。
+        segs = [stem] if "-" not in stem else stem.split("-")
+        n = len(segs)
+        if stem and any(slug[i:i + n] == segs for i in range(len(slug) - n + 1)):
+            rounds = []
+            for _r, dirs, _f in os.walk(os.path.join(corp, d)):
+                for x in dirs:
+                    if x.startswith("round"):
+                        rounds.append(x)
+            return d, sorted(set(rounds))
+    return None
+
+
+def corpora_dir():
+    # ★ 实测数出来的层数：references/pipeline → 上 5 级才到 CodexSkills。
+    #   第一版写 4 级，路径不存在于是**静默什么都没找到**——「空默认值吞掉不知道」。
+    return os.path.normpath(os.path.join(
+        os.path.dirname(os.path.abspath(__file__)),
+        "..", "..", "..", "..", "..",
+        "skill_log_evals", "persona-distiller", "_corpora"))
+
+
 def pick(pending, category_counts, products_done, round_size=5, counterweight=True,
          deferred_counts=None):
     """选出 NEXT，并说明**为什么是它**。
@@ -173,6 +214,37 @@ def self_test():
     if it6["name"] != "Slavyanov" or "无法配重" not in why6["reason"]:
         fails.append("边界失败：缺 category_counts 时未显式报告")
 
+    # ★★★★ v0.0.0.167：**「已开工」必须把人挡在 NEXT 之外**——正反两侧都要动。
+    #   反例红了可能是红得凑巧，所以同一副骨架跑两遍：只差「有没有工作区」这一件事。
+    import tempfile as _tf
+    with _tf.TemporaryDirectory() as _d:
+        _c = os.path.join(_d, "_corpora"); os.makedirs(_c)
+        # ① 没有任何工作区 → 队首照选（正例必须是绿的）
+        if workspace_of(_c, "Nikolai Slavyanov") is not None:
+            fails.append("正对照失败：空语料区却报出工作区")
+        # ② 建一个 wip-slavyanov-115 → 同一个人必须被认出来
+        os.makedirs(os.path.join(_c, "wip-slavyanov-115", "round1"))
+        got = workspace_of(_c, "Nikolai Slavyanov")
+        if not got or got[0] != "wip-slavyanov-115" or got[1] != ["round1"]:
+            fails.append(f"反向对照失败：建了工作区却没认出来（{got}）")
+        # ③ ★ 复合姓：`wip-roberts-austen-135` vs `William Chandler Roberts-Austen`
+        #    整段比会漏掉他——这是真实漏判，不是假想
+        os.makedirs(os.path.join(_c, "wip-roberts-austen-135"))
+        if not workspace_of(_c, "William Chandler Roberts-Austen"):
+            fails.append("反向对照失败：复合姓 roberts-austen 没认出来")
+        # ④ ★★ 而 Callister 的假阳必须仍然挡住（`lister` ⊂ `callister`）
+        os.makedirs(os.path.join(_c, "wip-lister-108"))
+        if workspace_of(_c, "William D. Callister"):
+            fails.append("★★ 假阳复发：`lister` 又命中了 `callister`——词边界没了")
+        # ⑤ 反向：把工作区目录挪走，同一个人必须变回「没开工」
+        os.rename(os.path.join(_c, "wip-slavyanov-115"),
+                  os.path.join(_c, "gone-slavyanov-115"))
+        if workspace_of(_c, "Nikolai Slavyanov"):
+            fails.append("反向对照失败：目录没了还报有工作区")
+        # ⑥ ★★★ 语料区路径不存在 ≠「他没有工作区」——不许静默当成没有
+        if workspace_of(os.path.join(_d, "根本不存在"), "Nikolai Slavyanov") is not None:
+            fails.append("边界失败：路径不存在时应返回 None 并由调用方报告，而非编造命中")
+
     for f in fails:
         print(f"✗ {f}")
     if fails:
@@ -256,9 +328,33 @@ def main():
         else:
             pending.append(item)
 
+    # ★★★★ v0.0.0.167：**「未动」这个词此前是假的。**
+    #   排除源只有三个：名册 team-index、Downloads ZIP、`_延后名单.json`。
+    #   **「已经有工作区」不在其中**——于是 7 个人反复被排成 NEXT：
+    #     Adams #131（受阻待裁 ㉒）、Martens #134（受阻待裁 ㉕）、
+    #     Bessemer #132 与 Sorby #133（**已记拒发，但漏写进 `_延后名单.json`**）、
+    #     Mehl #137（通道受限）、Steinhardt #98（停在可续检查点）、Rosenhain #138（在做）。
+    #   ★ v0.0.0.156 已经把 Adams 这件事逐字写在 existing_ws 的注释里，
+    #     **但它只查 NEXT 一个人、只报不拦**，于是每跑一次都要人工绕一次。
+    #     旁边那些「只报不改选择」的项都注明了「属用户裁定」，这一项没有——
+    #     说明它不是决定，是没做完。
+    #   ★★ 本件**不替用户排期**。它做的是另一件事：
+    #     **处置没落进任何机器可读的文件时，拒绝给出 NEXT，并指名是谁缺。**
+    #     「有工作区」是事实，不是判断；缺记录是数据缺口，不是排期策略。
+    corp_dir = corpora_dir()
+    started, truly_pending = [], []
+    corp_missing = not os.path.isdir(corp_dir)
+    for it in pending:
+        ws = None if corp_missing else workspace_of(corp_dir, it["name"])
+        if ws:
+            started.append({"name": it["name"], "family_zh": it.get("family_zh"),
+                            "目录": ws[0], "已判轮次": ws[1]})
+        else:
+            truly_pending.append(it)
+
     n_products = len(idx.get("products", [])) if os.path.isfile(ti) else 0
     counts = idx.get("category_counts", {}) if os.path.isfile(ti) else {}
-    nxt, why = pick(pending, counts, n_products,
+    nxt, why = pick(truly_pending, counts, n_products,
                     round_size=a.round, counterweight=not a.no_counterweight,
                     deferred_counts=deferred_by_family)
 
@@ -393,8 +489,20 @@ def main():
         "downloads_zips": len(glob.glob(os.path.join(a.downloads, "*.zip"))),
         "队列总数": len(q),
         "队列中已入库的": done_in_q,
-        "队列中未动的": len(pending),
+        "队列中未动的": len(truly_pending),
         "队列中已延后的": deferred_in_q,
+        # ★★★★ 第四种状态。此前它被并进「未动」，于是这些人反复被排成 NEXT。
+        "队列中已开工但处置没落库的": len(started),
+        **({"★★★ 这几个人有工作区，却既不在名册也不在延后名单": {
+            "口径": ("**「有工作区」是事实，不是判断。** 处置（入库／延后／拒发／受阻待裁）"
+                     "只要没进机器可读的文件，这个人就会被当成「从没碰过」。"
+                     "实测漏的两个是 **Bessemer #132 与 Sorby #133——都已记拒发，"
+                     "却只写在 `_决策台账.md` 的散文里，没进 `_延后名单.json`**。"),
+            "要做的": ("每人补一条处置记录；`_延后名单.json` 目前同时收「延后」与「拒发」"
+                       "（实测 32 + 5），补进去即可。**在那之前他们不参与 NEXT。**"),
+            "名单": started,
+        }} if started else {}),
+        **({"★★ 语料区路径不存在，「已开工」判不了": corp_dir} if corp_missing else {}),
         **({"★★ 延后名单自身有问题": defer_warn} if defer_warn else {}),
         "★ 这个人要不要先跑可得性探测": probe_note or "**未核**",
         "★ 探测射程（依据可行性分诊）": grounds_note or "**未做**",
