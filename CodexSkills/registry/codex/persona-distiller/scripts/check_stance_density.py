@@ -163,16 +163,45 @@ _FP_VERBAL = re.compile(
     r"|\b(?:my|our)\s+[a-z]{3,}\b")
 
 
+# ★★★ **第二层：专利／法律文书的套语。**
+#   Coffin #130 实测：动词式第一人称 70 处，**其中 51 处是套语（73%）**——
+#     `what I claim as my invention, and desire to secure by Letters Patent`
+#     `In testimony whereof I have hereunto set my hand`
+#     `I have shown various apparatus adapted to carry my process into effect`
+#   去套语后 19 处 = 0.95/万字，**与他延后依据里那个「实质 15 句 = 0.87/万字」同量级**。
+#   **不减这一道，专利型语料的第一人称会虚高 3–4 倍，与别人不可比。**
+_BOILERPLATE = re.compile(
+    r"\b(?:what\s+)?I\s+claim\b"
+    r"|\bmy\s+(?:invention|improved|said)\b"
+    # ★★ 套语要**整个从句剥掉**，不能只剥标记词——
+    #   自测抓到：剥了 `in testimony whereof` 与 `hereunto set my hand` 之后，
+    #   中间剩下的 `I have` 仍然命中 `_FP_VERBAL`。
+    r"|\bin\s+testimony\s+whereof\b[^.]{0,60}?\bset\s+my\s+hand\b"
+    r"|\bI\s+have\s+hereunto\s+set\s+my\s+hand\b"
+    r"|\bin\s+testimony\s+whereof\b"
+    r"|\bhereunto\s+set\s+my\s+hand\b"
+    r"|\bdesire\s+to\s+secure\s+by\s+Letters\s+Patent\b"
+    r"|\bcarry\s+(?:my|the)\s+(?:said\s+)?(?:invention|process)\s+into\s+effect\b",
+    re.I)
+
+
 class _FP:
-    """与 `re` 兼容的最小接口，便于原地替换。"""
+    """与 `re` 兼容的最小接口，便于原地替换。
+
+    ★ `findall`／`search` 都**先去掉套语**再匹配。
+    """
+
+    @staticmethod
+    def _strip(text):
+        return _BOILERPLATE.sub(" ", text)
 
     @staticmethod
     def findall(text):
-        return _FP_VERBAL.findall(text)
+        return _FP_VERBAL.findall(_FP._strip(text))
 
     @staticmethod
     def search(text):
-        return _FP_VERBAL.search(text)
+        return _FP_VERBAL.search(_FP._strip(text))
 
 
 FIRST_PERSON = _FP
@@ -291,6 +320,21 @@ def self_test():
              False, "★ Bain：`I` 是**罗马数字章节号**"),
             ("we find in the diagram a clear development of secondary hardening.",
              True, "真的第一人称复数")):
+        got = bool(FIRST_PERSON.search(probe))
+        chk(f"{why}：{'认' if got else '不认'}", got == want)
+
+    print("\n── ★★★ 专利套语不算他在说话（Coffin 实测 73% 是这一类）──")
+    for probe, want, why in (
+            ("what I claim as my invention, and desire to secure by Letters Patent",
+             False, "★ `I claim as my invention` 是权利要求书的固定开头"),
+            ("In testimony whereof I have hereunto set my hand this 5th day.",
+             False, "★ `In testimony whereof…` 是签署套语"),
+            ("in the accompanying drawings, in which I have shown various apparatus",
+             True, "★★ 但 `I have shown` 本身是真的——只有跟 `carry my process into effect` 连用那种才是套语"),
+            ("In using the word vacuum I do not mean absolute vacuum.",
+             True, "**这一句是他真在说话**（Coffin 语料里非套语的那 19 处之一）"),
+            ("or I may make magnet B present its normal polarity.",
+             True, "同上，真的第一人称")):
         got = bool(FIRST_PERSON.search(probe))
         chk(f"{why}：{'认' if got else '不认'}", got == want)
 
