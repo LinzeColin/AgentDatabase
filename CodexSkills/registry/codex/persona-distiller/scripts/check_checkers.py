@@ -36,6 +36,7 @@ RUNBOOK 第十八种：
 当场把整条流水线堵死，违反「不因为过不了门而卡住流程」。
 缺口计数逐次可见，不会被误当成通过。
 """
+import re
 import argparse
 import ast
 import json
@@ -532,6 +533,28 @@ def main() -> int:
             for r in rows:
                 if not r["real_fixture"]:
                     print(f"  · {r['checker']}")
+    # ★★★★ v0.0.0.172：**事故锚点**——今天删掉一个判据换来的一条。
+    #   `check_refusal_without_substance` 自测 7 条全过（含 3 条反例），
+    #   **拿 Rosenhain #138 两轮真答案一验，结果是反的**：
+    #   该报的那一轮报 0 处，已改好的那一轮反而报 1 处。**当天删掉，没上线。**
+    #   ★ 与上面那段「合成负对照只证明判据在我想得到的形态上成立」是同一件事，
+    #     只是这次是**造判据的当天就撞上**，不是事后回查。
+    #   判法：一件判据若**既不引具体人物编号、也不带实测数字**，
+    #   那它很可能是想出来的而不是撞出来的。**只报不拦。**
+    print("\n── 事故锚点（判据是撞出来的，还是想出来的）──")
+    _NUMPAT = re.compile(r"\d+\.\d{3,4}|\d+/\d+|numFound|\b\d{2,}\s*(?:份|条|个|次)")
+    _files = sorted(pathlib.Path(d).glob("check_*.py"))
+    _noanchor = []
+    for _p in _files:
+        _doc = _p.read_text(encoding="utf-8", errors="replace")[:6000]
+        if not (re.search(r"#\d{2,3}\b", _doc) or _NUMPAT.search(_doc)):
+            _noanchor.append(_p.name)
+    print(f"  判据 {len(_files)} 件，**既无人物编号也无实测数字的 {len(_noanchor)} 件**"
+          + (f"：{_noanchor}" if _noanchor else "　✓"))
+    if _noanchor:
+        print("  ★ 请确认它们**在真数据上验过**——自测全过不等于有效，"
+              "自测是造判据的人按自己的理解写的，真数据不是。")
+
     w = wiring_audit(d)
     print(f"\n── 接线审计 ──\n  判据 {w['判据件数']} 件，"
           f"**在生产代码里找不到调用方的 {w['**无生产调用方的**']} 件**")
