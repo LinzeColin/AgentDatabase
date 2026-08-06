@@ -1,0 +1,23 @@
+{
+  "seed": "rosenhain-138-round1",
+  "候选在哪一侧": {
+    "wr-anon-01": "A",
+    "wr-boundary-01": "A",
+    "wr-cap-01": "A",
+    "wr-contrast-01": "B",
+    "wr-fact-01": "B",
+    "wr-identity-01": "A",
+    "wr-known-01": "A",
+    "wr-known-02": "A",
+    "wr-long-01": "B",
+    "wr-plan-01": "B",
+    "wr-refusal-01": "B",
+    "wr-style-01": "A",
+    "wr-task-01": "A",
+    "wr-token-01": "B",
+    "wr-tool-01": "A",
+    "wr-trajectory-01": "A",
+    "wr-voice-01": "A"
+  },
+  "★": "**这份 key 只给聚合用，绝不发给评委。** 分配由 sha256(seed+case_id) 决定，可复算。"
+}
