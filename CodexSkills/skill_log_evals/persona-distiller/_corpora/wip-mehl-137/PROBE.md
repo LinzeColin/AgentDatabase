@@ -299,6 +299,50 @@ Bain 那边我量了**独著**（1928，44,163 字符）**仍然只有 7 处第�
 「**这个人没有声口**」——**未证**，而且备忘录的转引指向相反方向。
 **Bain 与他的分别就在这里**：Bain 连独著都非人称**且没有任何转引显示他另有声口**。
 
+## 二点九九、★★★★★ **那篇「独著综述」其实是一场具名荣誉讲演——而它的声口不在人称里**
+
+回头核题头，逐字：
+
+> `Roserr F. Mrnn`
+> `Institute of Metals Division Lecturer, 1936`
+>
+> `Diffusion in Solid Metals`
+> `By Rosrert F. Meut,* Mremepnr A.I.M.E.`
+> `(Institute of Metals Division Lecturet)`
+> —— `Mrnn`／`Meut` 都是 `Mehl` 的 OCR 讹形，`Mremepnr`=Member，照录
+
+**它不是普通综述，是 1936 年 Institute of Metals Division 的具名荣誉讲演。**
+而开篇第一段是这样的：
+
+> `IN examining the progress of metallurgical science, the critic must remember
+> that most of our present knowledge of metals and alloys has been accumulated
+> through the needs of industry and commerce rather than through the desire and
+> efforts of a large body of scientists interested primarily in developing a
+> science of metals. The progress of metallurgy, scientifically speaking, has
+> been irregular, and little given to the exhaustive exploitation of important
+> scientific fields.`
+
+**一个第一人称都没有，却通篇是判断与立场**：
+`the critic must remember`（命令读者怎么看）、
+`has been irregular, and little given to`（对整个学科下的评价）、
+`rather than through the desire and efforts of…`（把功劳从科学家挪给工业需求）。
+
+### ★★★ 这动摇的是我一直在用的那把尺
+
+我这两轮（Bain #136 与本轮）判「声口」用的都是**第一人称密度**。
+**而这一段证明：一个人可以在完全非人称的语域里有极强的声口**——
+声口是**立场与判断**，不是代词。
+
+**按第一人称密度算，这一段是 0。按「这是不是他在说话」算，这一段满是他。**
+
+★★ 这也回头影响 Bain #136 的结论：
+我给他记的延后依据是「105 K 字符第一人称约 11 处」。
+**那个数没错，但它可能量的不是「声口」。**
+★ 不过 Bain 与 Mehl 仍有实证分别：Bain 那四件里我没读到任何**评价性的句子**，
+而 Mehl 开篇第一段就是。**这个分别要靠读，不靠数。**
+
+**→ 待用户裁定：声口密度这把尺要不要改口径**（见 ㉙）。
+
 ## 三、本轮的诚实边界
 
 - **一件作品都没打开过**，NRL 任内的发表清单还没有；
