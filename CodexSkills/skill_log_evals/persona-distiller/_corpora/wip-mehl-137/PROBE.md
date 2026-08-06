@@ -177,6 +177,39 @@ vol. 135 全卷 grep 不到任何 `copyright` 字样。**但不能据此说它�
 
 **「在坏 OCR 区域找不到」不等于「不存在」。** 这一条留作未决。
 
+## 二点八五、★★★ **权威书目到手，而它把 §105 的位置颠倒了**
+
+美国科学院 Biographical Memoirs 的 Mehl 篇（`nationalacademies.org/read/9977/chapter/9`）
+附了著作目录。**NRL 任内（1927–1931）已发表的只有三件，全是合著、全在学会期刊：**
+
+| 年 | 篇名 | 合著者 | 载体 |
+|---|---|---|---|
+| 1930 | `Radiography by the use of gamma rays` | G. E. Dean, C. S. Barrett | `Trans. Am. Soc. Steel Test` 18:1192–1237 |
+| 1931 | `Studies upon the Widmanstätten structure. I.` | C. S. Barrett | AIME Tech. Pub. No. 353，`Trans. Inst. Met. Div.` 93:78 |
+| 1931 | `Studies upon the Widmanstätten structure. II.` | O. T. Marzke | AIME Tech. Pub. No. 392，`Trans. Inst. Met. Div.` 93:123 |
+
+★ 备忘录提到 NRL 时的原话：
+> `the laboratory soon became well known in metallurgical circles for a series of
+> nine papers on the Widmanstätten structure.`
+**那九篇跨到 1931 年之后**（他 1931 年离开 NRL 去 Carnegie），**不全在联邦任内**。
+
+### 由此，本人物的权利结构与我开局写的**正好相反**
+
+我开局把 §105 当成他的主路（「与 Bain 分道」那一节）。**量完之后：**
+
+| 路 | 覆盖 | 大小 |
+|---|---|---|
+| **§105（联邦职务作品）** | 1927–1931 NRL 任内 | **只有 3 件，且全是合著** ——**远低于 quick 门 8** |
+| **续期失效** | `Trans. AIME` / `Trans. ASM` 各卷，**1931 年后的主体产出** | **Part 1 与 Part 2 都查过，都没找到续期** |
+
+**→ §105 是他的小路不是主路；真正撑得起语料的是「期刊未续期」那条。**
+★ 这与我第 0 项的排序判断一致（「射程比 §105 大，排在第 0 位先查」），
+**但与我开局那节的措辞相反——那节现在读起来会误导，故在此更正。**
+
+★★ 顺带：DeBakey #119 那条硬规矩在这里**仍然成立且更要紧**——
+**联邦职务作品（3 件）与私立机构任内作品（其余全部）必须分开数。**
+若把两类混在一起报「他有很多一手」，就是把两种不同的权利依据糊成一句话。
+
 ## 二点九、本轮到此为止的位置：**卡在同一件事上，且是通道问题不是判断问题**
 
 `A Brief History of the Science of Metals`（AIME, 1948）——三条通道都试过：
