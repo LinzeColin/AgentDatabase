@@ -1,0 +1,40 @@
+{
+  "★ 口径": "**排除的不是「无关的人」，是「会在同一批检索结果里出现的人」。**",
+  "excluded": [
+    {
+      "canonical_name": "Eiffel 65",
+      "身份": "意大利电子舞曲组合（1998– ）",
+      "为什么会撞上": "★★★ **压倒性**：archive.org 按 creator 检索 Eiffel 的 65 个命中里，**超过一半是它**。这不是零星干扰，是把整个检索结果淹掉。",
+      "区分依据": "creator 字面带数字 `65`；载体是音频/视频；年代 1998 年后。",
+      "出处": ["archive.org 本轮实测：blue-da-ba-dee_202411 / cvcmsd / eiffel-65-critical / Eiffel65liveatFestivalbar2002 / eiffel65IDJwiththefire"]
+    },
+    {
+      "canonical_name": "Savin Yeatman-Eiffel",
+      "身份": "法国动画创作者（当代）",
+      "为什么会撞上": "**姓氏含 Eiffel 且同为法国人**——按姓 + 语种（fre）筛会与目标并在一起，比 Eiffel 65 隐蔽得多。",
+      "区分依据": "复姓 `Yeatman-Eiffel`；载体是动画影片。",
+      "出处": ["archive.org 本轮实测：oban-star-racers-s01-e10-12-dansk-da / poxitron-oban-star-racers-24-b-52460 / DemoVoixStephanRopert"]
+    },
+    {
+      "canonical_name": "Waltraud Eiffel",
+      "身份": "当代（英文短文作者）",
+      "为什么会撞上": "同姓，英文。",
+      "区分依据": "载体是当代网文（`Study-Finds-Coffee-Drinkers-Pay-More`）。",
+      "出处": ["archive.org 本轮实测：Study-Finds-Coffee-Drinkers-Pay-More"]
+    },
+    {
+      "canonical_name": "Eiffel（编程语言）／Eiffel tech solutions 等机构名",
+      "身份": "**不是人**",
+      "为什么会撞上": "`tucows_170444_Market_Analysis_System` 的 creator 是 `http://eiffel-mas.sourceforge…`——**软件项目用 Eiffel 语言命名**；另有 `Eiffel tech solutions`、`dip-eiffel-tea` 等。",
+      "区分依据": "creator 是 URL 或公司名，不是人名。★ 与 Roberts-Austen 的仪器名、Rosenhain 的炉子同族：**以他命名的东西不是他的作品**——铁塔相关文献同理。",
+      "出处": ["archive.org 本轮实测：tucows_170444_Market_Analysis_System / whats-app-image-…（Eiffel tech solutions）"]
+    }
+  ],
+  "★ 抓源实操要求": [
+    "凡 creator 含 `65`、或载体是 audio/movies 的，一律先当作 Eiffel 65 排除。",
+    "凡 creator 作 `Yeatman-Eiffel` 的，一律排除。",
+    "**只收 creator 形态为 `Eiffel, Gustave, 1832-1923` 或 `G. Eiffel` 且语种为 fre、年代 1931 年前的。**",
+    "★★ **关于铁塔**：以他命名或写他的东西不是他写的东西。凡题名是 `La Tour Eiffel` 而作者不是他的，一律记 external 或排除，**不得进一手**。",
+    "★★★ **语料是法文**——[[regex-must-clear-the-corpus-language]]：`check_first_person_density` 的语种关必须先跑（德语语料曾被判成「没有声口」，差 25–180 倍）；`check_authorship` 的法文署名前缀 `par` 已在 v0.0.0.157 加过。"
+  ]
+}
