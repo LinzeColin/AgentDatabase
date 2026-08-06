@@ -446,6 +446,53 @@ def markdown_report(data: dict[str, Any]) -> str:
 
 
 
+def report_catalogue_entries(report, target: Path,
+                            sources: list[dict[str, Any]]) -> None:
+    """**这份 P1 是「著录方描述这份文献」，不是文献本身**（只报不拦）。
+
+    三例确凿跨三个人物（见 `check_source_is_catalogue_entry.py` 文件头）：
+    Roberts-Austen 的 `letter00robe.txt`（他的话占 13%）、
+    Koch 的 `letter00koch.txt`（著录说 240 词而文件里几乎没有信文）、
+    Osler 的 `walt-whitman-1919.txt`（**描述一场从没发生过的演讲**）。
+
+    ★ 归属门问「文中有没有他的署名」——著录卡里**有**
+      （`A.L.S: (W. C, ROBERTS-AUSTEN)`），于是它过了归属门，
+      **而他 22 份真论文没过**。**没有一道门问「这份文件里有多少是他的话」。**
+
+    ★★ **只报不拦**：改分档是人的判断（判据文件头写着）。
+    """
+    here = Path(__file__).resolve().parent
+    script = here / 'check_source_is_catalogue_entry.py'
+    if not script.exists():
+        report.metrics['catalogue_entries'] = {'状态': '检查器未安装，**未核验**（不是通过）'}
+        return
+    try:
+        spec = importlib.util.spec_from_file_location('_pd_catent', script)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['catalogue_entries'] = {'状态': f'加载失败，**未核验**：{exc}'}
+        return
+
+    def _read(record):
+        rel = record.get('normalized_path') or record.get('local_path') or ''
+        p = target / str(rel)
+        if not p.is_file():
+            return None
+        try:
+            return p.read_text(encoding='utf-8', errors='replace')
+        except OSError:
+            return None
+
+    rep = mod.check(sources, _read)
+    report.metrics['catalogue_entries'] = rep
+    hits = rep.get('**疑似著录卡**') or {}
+    if hits:
+        report.warnings.append(
+            f'research.catalogue-entry：{len(hits)} 份 P1 像是「著录方描述这份文献」'
+            '而不是文献本身——**改分档是人的判断，本项只报不拦**')
+
+
 def report_stance_density(report, target: Path,
                           sources: list[dict[str, Any]]) -> None:
     """**声口的第二维：立场句密度**（只写 metrics，**不拦、不设阈值**）。
@@ -3204,6 +3251,7 @@ def main() -> int:
         run_lane_quotes_verbatim(report, target)
         report_own_voice(report, target, meta, sources)
         report_stance_density(report, target, sources)
+        report_catalogue_entries(report, target, sources)
         report_refusal_overflow(report, target)
         run_corpus_ceiling(report, target, report.profile)
         run_rights_basis(report, target)
