@@ -116,3 +116,20 @@ Garabit 与 Travaux 各有两个 id，**同一部作品的多个副本只算一�
 
 **「本机取不到」不是「不存在」。** 差 1 部而通道明确、坐标已写清——
 这一条留着，不当作做不成。
+
+### 第三条通道也试了：Google Books API **429**
+
+    GET https://www.googleapis.com/books/v1/volumes?q=inauthor:"Gustave Eiffel"
+        →  **HTTP 429 Quota exceeded for 'Queries per day'**（未鉴权的共享配额已耗尽）
+
+**通道实测汇总（2026-08-06）**
+
+| 通道 | 结果 |
+|---|---|
+| archive.org | ✓ 取到 **7 部**（已是全部；`mediatype:texts` 17 条复查过） |
+| **Gallica (BnF) SRU** | ✗ **403 Access Interdit** |
+| **Google Books API** | ✗ **429 配额耗尽** |
+| HathiTrust | **未试** |
+
+三条试了两条堵。**差 1 部就够 quick 的 8 源**，而那 1 部（1910 空气动力学）
+在本机三条通道里取不到。**仍不记延后**——坐标已全，换台机器或换个网络即可续。
