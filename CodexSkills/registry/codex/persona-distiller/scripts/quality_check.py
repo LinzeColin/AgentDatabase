@@ -446,6 +446,64 @@ def markdown_report(data: dict[str, Any]) -> str:
 
 
 
+def report_stance_density(report, target: Path,
+                          sources: list[dict[str, Any]]) -> None:
+    """**声口的第二维：立场句密度**（只写 metrics，**不拦、不设阈值**）。
+
+    `report_own_voice` 答的是「他说了多少话」，用的是第一人称。
+    Mehl #137 实测撞出：**人可以在完全非人称的语域里有极强的声口**——
+    1936 年具名讲演开篇第一人称 0，而通篇是判断
+    （`the critic must remember` / `has been irregular, and little given to`）。
+
+    ★ 六个样本实测（详见 ㉙）：**两维并用能把三类人分开**——
+      两维都低（Coffin 0.95/0.00、Bain 0.91/0.23）／两维中等（Mehl 讲演 1.57/0.43）／
+      单维极高（Nasmyth 自传 29.67/0.07，叙事体）。
+
+    ★★★ **但差距只有 2 倍量级、绝对数是个位数句子。**
+      本件因此**只排序、只提示，不设阈值、不参与任何处置**——㉙ 的裁定要人做。
+    """
+    here = Path(__file__).resolve().parent
+    script = here / 'check_stance_density.py'
+    if not script.exists():
+        report.metrics['stance_density'] = {'状态': '检查器未安装，**未核验**（不是通过）'}
+        return
+    try:
+        spec = importlib.util.spec_from_file_location('_pd_stance', script)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['stance_density'] = {'状态': f'加载失败，**未核验**：{exc}'}
+        return
+    tot = fp = st = st_nofp = 0
+    unread = []
+    for record in sources:
+        if not str(record.get('tier') or '').startswith('P1'):
+            continue
+        rel = record.get('normalized_path') or record.get('local_path') or ''
+        p = target / str(rel)
+        if not p.is_file():
+            unread.append(record.get('source_id'))
+            continue
+        r = mod.measure(p.read_text(encoding='utf-8', errors='replace'))
+        tot += r['字符']
+        fp += r['第一人称命中']
+        st += r['**立场句**']
+        st_nofp += r['★ 其中不含第一人称的']
+    report.metrics['stance_density'] = {
+        'P1 字符合计': tot,
+        '第一人称（动词式）/万字': round(fp / tot * 10000, 2) if tot else None,
+        '**立场句/万字**': round(st / tot * 10000, 2) if tot else None,
+        '其中不含第一人称的': st_nofp,
+        '读不到正文的': unread,          # ★ 读不到就说读不到
+        '★ 口径': ('**只排序、只提示，不设阈值。** 第一人称已排除图纸标号／化学式／'
+                   '罗马数字（三处真实假阳，见判据文件头），**但未排除专利套语**——'
+                   'Coffin 实测 73% 是 `I claim as my invention` 这一类，'
+                   '**专利型语料要另减一道**。'),
+        '★★ 参照（㉙ 六样本）': ('Coffin 0.95/0.00、Bain 0.91/0.23、'
+                                'Mehl 讲演 1.57/0.43、Nasmyth 自传 29.67/0.07'),
+    }
+
+
 def report_own_voice(report, target: Path, meta: dict[str, Any],
                      sources: list[dict[str, Any]]) -> None:
     """**语料里有多少字真是他自己写／说的**（v0.0.0.19 新增，只报不拦）。
@@ -3145,6 +3203,7 @@ def main() -> int:
         run_namesake_criteria(report, target)
         run_lane_quotes_verbatim(report, target)
         report_own_voice(report, target, meta, sources)
+        report_stance_density(report, target, sources)
         report_refusal_overflow(report, target)
         run_corpus_ceiling(report, target, report.profile)
         run_rights_basis(report, target)
