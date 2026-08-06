@@ -144,8 +144,32 @@ def build_patterns(full_name: str) -> dict:
     #
     #   这不是为了 Galen 一个人开的口子：600 人名册跨 12 族与整部人类史，
     #   古典、中世纪、东亚人物普遍不是「名+姓」形态。
-    EPITHET = {"of", "von", "van", "de", "da", "del", "della", "di", "du", "al", "ibn", "bin", "ben"}
-    if len(tokens) >= 3 and tokens[1].lower() in EPITHET:
+    EPITHET = {"of", "de", "da", "del", "della", "di", "du", "al", "ibn", "bin", "ben"}
+    # ★★★ **`von`／`van` 不是地名式后缀，是世袭姓的小品词。**（Liebig 实测撞出）
+    #
+    #   `build_patterns("Justus von Liebig")` 原来把 **`Justus`（他的名）当姓**，
+    #   因为 `von` 在 EPITHET 里，走的是「帕加马的盖伦」那条。
+    #   **可是「冯·李比希」的姓就是李比希**，不是地名。
+    #
+    #   实测代价（Liebig #124 的 30 份 P1，走 `check_text` 全链）：
+    #       name='Justus von Liebig'  surname='Justus'  → 过归属 **1/30**
+    #       name='Justus Liebig'      surname='Liebig'  → 过归属 **26/30**
+    #   **判据拿着他的名去找他的姓，找了三十份，找到一份。**
+    #
+    #   ★ 分界：`of` 确实是地名式（`Galen of Pergamon`——姓不是帕加马），**原样保留**；
+    #     `von`／`van` 在近代德语／荷兰语人名里是**继承来的姓的一部分**
+    #     （van Gogh、van Leeuwenhoek、von Braun、von Neumann）。
+    #   ★★ **`de`／`da`／`di`／`du` 故意没动。** 它们两种都有
+    #     （`de Gaulle` 是姓，`Leonardo da Vinci` 的 `Vinci` 是地名），
+    #     **本轮没有语料能判**——名册里一个这样的人物都还没做过。
+    #     **没有依据就不改**，留给撞上它的那一轮，别凭想象扩大射程。
+    PARTICLE = {"von", "van"}
+    if len(tokens) >= 3 and tokens[1].lower() in PARTICLE:
+        # 「X von Y」：**Y 才是姓**（名 X + 姓 Y，小品词可有可无）
+        first, last = re.escape(tokens[0]), re.escape(tokens[-1])
+        surname = tokens[-1]
+        tokens = [tokens[0], tokens[-1]]
+    elif len(tokens) >= 3 and tokens[1].lower() in EPITHET:
         # 「X of Y」：识别 X，Y 是地名／族名，**不是姓**
         first = last = re.escape(tokens[0])
         surname = tokens[0]
@@ -297,6 +321,66 @@ def _edits_within(a: str, b: str, k: int) -> bool:
     return prev[lb] <= k
 
 
+def _compound_hit(toks, first_l, parts):
+    """**复姓的署名行**：名可以是缩写，但**复姓每一段都必须在，且按顺序**。
+
+    ## 为什么复姓要另开一条（Roberts-Austen #135 实测）
+
+    30 份 P1 里 `ocr_byline_evidence` 只认出 **1** 份，而印本上他的署名是：
+
+        By W. C. Roberts-Austen, C.B., F.R.S.
+        By Professor W. C. EOBERTS-AUSTEN, C.B., F.R.S.
+        By Pbofessob W. C. ROBERTS-AUSTEN, C.B., F.R.S.
+
+    **署名就在那儿，是判据读不出来。** 两处叠着挡：
+      ① `last_l` 是带连字符的 `roberts-austen`，分词把印本切成 `roberts`+`austen`，
+         **距离 7 和 8**——`_edits_within(…, 2)` 永远不成立；
+      ② 名写成缩写 `W.`，被 `len(a) < 4` 挡在外面。
+
+    ★★★ **② 那道门是对的，不能一般性地拆。** 它是 Fleming #111 装的：
+      同名陷阱恰恰是「首字母 + 别的中名 + 同姓」（该人物有 `A. Grant Fleming`）。
+      **单姓人物一律不走本函数**，那道防线原样保留。
+
+    ## 复姓凭什么可以放宽
+
+    **姓本身补上了名让出的那份识别力。** 单姓 `Fleming` 配一个首字母区分不了人；
+    而复姓要求**两段都命中**，`W. Roberts`／`W. Austen`／`Charles Austen`
+    这些半截的一个都进不来（自测里全是反例）。
+    **首字母仍必须对上**——`A. Grant Roberts-Austen` 照样挡住。
+
+    ★ 这条**没有让 Roberts-Austen 过门**：端到端 3/30 → 12/30，
+      离一手占比门差得远。**改的是「读不出来」，不是「够不够」。**
+    """
+    init = first_l[:1]
+    for i, t0 in enumerate(toks):
+        a = t0.lower()
+        # 名：拼全（距离 ≤2）**或**单个首字母且与目标一致
+        if not ((len(a) >= 4 and _edits_within(a, first_l, 2))
+                or (len(a) == 1 and a == init)):
+            continue
+        tail = [x.lower() for x in toks[i + 1:]]
+        for j, b in enumerate(tail):
+            if len(b) < 3:
+                continue
+            # 第一段：容错，或被前缀污染（`1XFLEMING` 那一类）
+            if not (_edits_within(b, parts[0], 2)
+                    or (b.endswith(parts[0]) and len(b) - len(parts[0]) <= 3)):
+                continue
+            # ★ 其余各段必须**紧随其后**依次出现（中间最多隔一个词，容 OCR 插字）
+            nxt = tail[j + 1:j + 1 + 2 * (len(parts) - 1)]
+            k = 0
+            for p in parts[1:]:
+                while k < len(nxt) and not (_edits_within(nxt[k], p, 2)
+                                            or nxt[k].endswith(p)):
+                    k += 1
+                if k >= len(nxt):
+                    break
+                k += 1
+            else:
+                return True
+    return False
+
+
 def ocr_byline_evidence(text, first, last):
     """**名字被 OCR 打坏的署名行。** 命中返回那一行，否则 None。
 
@@ -357,6 +441,15 @@ def ocr_byline_evidence(text, first, last):
                       "", body, flags=re.I)
         toks = [t for t in re.split(r"[^A-Za-z]+", body) if t][:5]
         if len(toks) < 2:
+            continue
+        # ★★★ 复姓（`Roberts-Austen` 这一类）**必须单独走一条**，见 `_compound_hit`。
+        #   走不通就 `continue`：复姓在这里**永远匹配不上**——
+        #   `last_l` 是带连字符的 `roberts-austen`，而分词把印本上的
+        #   `ROBERTS-AUSTEN` 切成 `roberts` + `austen`，两段与整串的距离是 7 和 8。
+        _parts = [p for p in re.split(r"[^A-Za-z]+", last_l) if p]
+        if len(_parts) >= 2:
+            if _compound_hit(toks, first_l, _parts):
+                return s
             continue
         a = toks[0].lower()
         # ★ **名必须是完整词**——`A. Fleming` 这一整类在这里被挡住。
@@ -1571,6 +1664,76 @@ def self_test() -> int:
         print(("  ✓ " if _got == _want else "  ✗ ") + f"{_s:<34} → {_got}")
         if _got != _want:
             bad.append(f"非英文署名前缀：{_s}")
+
+    # ★★★ **`von`／`van` 是姓的一部分，不是地名式后缀**（Liebig 实测）
+    #   原来 `Justus von Liebig` 的 surname 取成 `Justus`——**拿他的名去找他的姓**，
+    #   30 份 P1 只认出 1 份；改对之后 26 份。
+    print("\n══ 小品词：von/van 取姓，of 取名 ══")
+    for _n, _first, _sur in (
+            ("Justus von Liebig", "Justus", "Liebig"),
+            ("Wernher von Braun", "Wernher", "Braun"),
+            ("Vincent van Gogh", "Vincent", "Gogh"),
+            ("Antonie van Leeuwenhoek", "Antonie", "Leeuwenhoek"),
+            # ↓ ★ 反向对照：`of` 是地名式，**必须原样不动**
+            ("Galen of Pergamon", "Galen", "Galen"),
+            ("Hippocrates of Kos", "Hippocrates", "Hippocrates"),
+            # ↓ ★ 不带小品词的老路径不许受影响
+            ("Adolf Martens", "Adolf", "Martens"),
+            ("Comfort Avery Adams", "Comfort", "Adams")):
+        _p = build_patterns(_n)
+        _ok = (_p.get("first_word") == _first and _p.get("surname") == _sur)
+        print(("  ✓ " if _ok else "  ✗ ")
+              + f"{_n:<26} first={_p.get('first_word')!r:<14} surname={_p.get('surname')!r}")
+        if not _ok:
+            bad.append(f"小品词切分：{_n}")
+
+    # ★★★ **复姓署名**（Roberts-Austen #135 实测）。
+    #   正例全部取自他的印本原文，反例是**半截复姓**与**首字母不对**的人。
+    #   ★ 关键：放宽的是「名可以写成缩写」，而**复姓两段必须都在**——
+    #     姓补上了名让出的识别力。`A. Grant Roberts-Austen` 仍旧挡住。
+    print("\n══ 复姓署名：名可缩写，但两段都要在 ══")
+    for _s, _want in (
+            # ↓ 正例：印本原文（`EOBERTS`/`ROBEKTS` 是 OCR 讹字，`Pbofessob` 是敬称被打坏）
+            ("By W. C. Roberts-Austen, C.B., F.R.S.", True),
+            ("By Professor W. C. EOBERTS-AUSTEN, C.B., F.R.S.", True),
+            ("By Pbofessob W. C. ROBERTS-AUSTEN, C.B., F.R.S.", True),
+            ("By Sir Williaji C. EOBERTS-AUSTEN, K.C.B., D.C.L.", True),
+            ("By W. Chandler Koberts- Austen, F.RS", True),
+            # ★★★ **已知的漏，故意留着**：`^V.` 是 `W.` 被 OCR 打坏。
+            #   名只剩一个字母时**没有容错余地**——单字母容 1 个编辑距离
+            #   就等于「任何字母都算」，那条路一开，复姓这条的全部约束就废了。
+            #   **认不出来就认不出来，不许为了多救一份把判据变成摆设。**
+            #   （实测代价：imeche1893 那一份走不通这条路。）
+            ("By  Professor  ^V.  C.  ROBEKTS-AUSTEN,  C.B.", False),
+            # ↓ ★★★ 反例：**半截复姓一个都不许进**——名让出识别力之后全靠姓补
+            ("By W. Roberts, F.R.S.", False),
+            ("By W. C. Austen, F.R.S.", False),
+            ("By William Roberts, F.R.S.", False),      # 真人：内科医生 F.R.S.，1830-1899
+            ("By Sir William Roberts, M.D.", False),
+            ("By Charles Austen, F.R.S.", False),
+            ("By Reginald Roberts.", False),
+            # ↓ ★ Fleming 那一类的陷阱形态：首字母不对，照样挡住
+            ("By A. Grant Roberts-Austen.", False),
+            # ↓ ★ 顺序反了不算——`Austen-Roberts` 是另一个人
+            ("By W. C. Austen-Roberts, F.R.S.", False)):
+        _got = ocr_byline_evidence(_s, "William", "Roberts-Austen") is not None
+        print(("  ✓ " if _got == _want else "  ✗ ") + f"{_s:<50} → {_got}")
+        if _got != _want:
+            bad.append(f"复姓署名：{_s}")
+
+    # ★★ **单姓人物一律不许受影响**——复姓那条路只对复姓开。
+    #   （Fleming 的 `A. Grant Fleming` 防线是本文件最老的一条，不许被顺手拆掉。）
+    print("\n══ 单姓不受复姓那条路影响 ══")
+    for _who, _first, _last, _s, _want in (
+            ("Fleming", "Alexander", "Fleming", "By A. Fleming, F.R.C.S.", False),
+            ("Fleming", "Alexander", "Fleming", "By A. Grant Fleming.", False),
+            ("Fleming", "Alexander", "Fleming", "By Alexandbb Fleming, F.R.C.S.", True),
+            ("Martens", "Adolf", "Martens", "Von A. Martens, Berlin.", False),
+            ("Martens", "Adolf", "Martens", "Von Adolf Martens.", True)):
+        _got = ocr_byline_evidence(_s, _first, _last) is not None
+        print(("  ✓ " if _got == _want else "  ✗ ") + f"{_who:<9}{_s:<36} → {_got}")
+        if _got != _want:
+            bad.append(f"单姓射程：{_s}")
 
     # ★★★ 护栏射程：**`ocr_byline_evidence` 那条路也必须被同名护栏管住**
     #   v0.0.0.136 只把护栏加在 `standalone_ocr` 上，而那条路跑在它前面、
