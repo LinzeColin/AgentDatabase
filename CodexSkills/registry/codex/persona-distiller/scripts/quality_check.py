@@ -1118,6 +1118,61 @@ def run_corpus_text_checks(report, target: Path, cache_dirs: list[str]) -> None:
                if info.get('★ 没核的') else "")
             if info else '**未核（不是通过）**')
 
+    # ── 2026-08-07：**来源计数里有几份其实是同一部作品**（Whitworth #152 撞出来） ──
+    #   `source.minimum` 判的是 `len(usable)`，**`derived_from` 从头到尾没被读过**。
+    #   Whitworth #152 实测 `usable = 7`，而按内容去重只有 **3 部作品**（虚高 2.333×）：
+    #   quick 门要 8 份，**再抓 1 份门就转绿，而实质仍是 3 部**——靠灌分子过门。
+    #   ★★ 而且**光读声明不够**：同一批 7 对重叠 ≥30% 的关系里，
+    #     我自己只声明了 3 对，**漏的 4 对含我明知道的那一对**
+    #     （1854 报告整篇是 1858 卷的附录，写进了散文没写进字段）。
+    #     所以本件不信声明，直接比 8 词片内容。
+    #   ★ **不改 `source.minimum` 的口径**——中途改测量工具会让在做的人物前后不可比。
+    #     这里发的是「门是靠重份才绿的」这一条独立错，以及去重后的实数。
+    code, out = run('check_source_dedup.py', [str(target), '--json'])
+    if code == -1:
+        review['checker_missing'] = out
+    else:
+        try:
+            dd = json.loads(out)
+        except Exception:                                          # noqa: BLE001
+            dd = {}
+        if dd:
+            n_un = len(dd.get('**未声明的重复对**') or [])
+            report.metrics['source_dedup'] = {
+                '可用来源': dd.get('usable'),
+                '**按内容去重后的作品数**': dd.get('distinct_works'),
+                '虚高': dd.get('inflation'),
+                '未声明的重复对': n_un,
+                '已声明的重复对': dd.get('已声明的重复对数'),
+                '★ 本件看不见的份数（中日韩语料一律看不见，不是已核）':
+                    len(dd.get('★ 本件看不见的（分词后不足 8 词，多为中日韩或纯噪声）') or []),
+            }
+            if n_un:
+                report.error(
+                    'corpus.undeclared-duplicate-sources',
+                    f'**{n_un} 对来源重叠 ≥{dd.get("threshold")} 而两边都没声明 `derived_from`**——'
+                    '台账上看不出它们是同一部作品。要么补 `derived_from`，'
+                    '要么在 `attribution_basis.counting_convention` 里写清为什么该当两处证据。'
+                    f'　{[(p["甲"][:26], p["乙"][:26], p["重叠"]) for p in dd["**未声明的重复对**"][:3]]}')
+            # ★ `thresholds` **不在本函数的作用域里**（`run_corpus_text_checks(report, target,
+            #   cache_dirs)`）。第一版直接写 `thresholds.get(...)`：`py_compile` 绿、
+            #   语法检查绿，**一跑就 NameError，整个 JSON 输出被打断**。
+            #   与 [[a-checker-nothing-calls-is-not-a-checker]] 第五批同形——
+            #   **只有真跑一次才看得见**。就地从 meta 取。
+            try:
+                _profile = json.loads((target / 'meta.json').read_text(encoding='utf-8')
+                                      ).get('profile', 'standard')
+                _min = (PROFILE_THRESHOLDS.get(_profile) or {}).get('min_sources')
+            except (OSError, ValueError):
+                _min = None
+            if (_min and dd.get('usable') is not None and dd.get('distinct_works') is not None
+                    and dd['usable'] >= _min > dd['distinct_works']):
+                report.error(
+                    'corpus.source-count-inflated-by-duplicates',
+                    f'**`source.minimum` 只是被重份撑绿的**：可用来源 {dd["usable"]} ≥ 门 {_min}，'
+                    f'而按内容去重后只有 **{dd["distinct_works"]} 部作品**（虚高 {dd["inflation"]}×）。'
+                    '**这道门量的是「有几个 source_id」，不是「有几处独立证据」。**')
+
     # ── v0.0.0.105：花体乱码是**替换**不是**缺失**，上面那件按「缺失」判，会漏 ────
     #   Liebig #124 实测，10 份已知的 Fraktur 乱码里 `check_ocr_language_death` 只抓到 **5**。
     #   漏的成因可指认：它取**多语种里最高的虚词占比**，而乱码德文会被别的语种接住——
