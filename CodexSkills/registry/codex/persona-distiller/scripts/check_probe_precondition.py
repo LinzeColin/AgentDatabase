@@ -106,11 +106,29 @@ def low_confidence_used(years: dict, names) -> list:
     return out
 
 
+# ★★★★ **探测产物有五种命名，本件原来只认两种。**
+#   2026-08-06 全库实测：
+#       VERDICT.md          10 份   ← 原来认
+#       PROBE.md（顶层）      5 份   ← **不认**（bain / bessemer / mehl / rosenhain / sorby）
+#       raw/_PROBE.md        3 份   ← 原来认
+#       _PROBE.md            1 份   ← **不认**
+#       COPYRIGHT_NOTE.md    1 份   ← **不认**（DeBakey #119 的 §105 分析就写在这里）
+#   **7 个人物的探测产物它看不见**，于是对他们一律报「没有探测产物——先探再抓」，
+#   而那几位**探过了，有的还已经据此记了延后**。
+#
+#   ★ 这与 [[eval-artifacts-have-five-schemas]] 是同一件事的另一处：
+#     「按一种命名去统计，一天错三次」。**判据不该假设命名统一，除非有东西在强制它。**
+#   ★★ 修法是**认全五种并报出认的是哪一种**——不是挑一种去改 7 个人物的文件，
+#     那会动到已关闭的处置。
+PROBE_NAMES = ("VERDICT.md", "PROBE.md", "raw/_PROBE.md", "_PROBE.md",
+               "COPYRIGHT_NOTE.md")
+
+
 def probe_artifacts(corpora: pathlib.Path, slug: str) -> list[str]:
-    """探测产物：`VERDICT.md` 或 `raw/_PROBE.md`（任一即可）。"""
+    """探测产物：`PROBE_NAMES` 里任一份即可。**返回认到的是哪一种。**"""
     found = []
     for d in sorted(corpora.glob(f"wip-{slug}*")):
-        for rel in ("VERDICT.md", "raw/_PROBE.md"):
+        for rel in PROBE_NAMES:
             if (d / rel).is_file():
                 found.append(f"{d.name}/{rel}")
     return found
@@ -224,6 +242,37 @@ def selftest() -> int:
     print("── 反向对照 ⑥：卒年是字符串也要认 ──")
     ok, _ = verdict({"name": "x", "died": "1912"}, [])
     chk("died='1912' → 放行", ok)
+    print("── ★★★★ 五种探测产物命名，一种都不许漏（2026-08-06 实测分布）──")
+
+    import tempfile as _tf
+
+    with _tf.TemporaryDirectory() as _d:
+
+        _root = pathlib.Path(_d)
+
+        for _i, _rel in enumerate(PROBE_NAMES):
+
+            _w = _root / f"wip-probe{_i}-900"
+
+            (_w / _rel).parent.mkdir(parents=True, exist_ok=True)
+
+            (_w / _rel).write_text("x", encoding="utf-8")
+
+            _got = probe_artifacts(_root, f"probe{_i}")
+
+            chk(f"认得 `{_rel}`（{len(_got)} 份）", len(_got) == 1)
+
+        # ★ 反向：没有任何一种时必须报 0，不能因为目录存在就算探过
+
+        _w2 = _root / "wip-none-901"
+
+        (_w2 / "raw").mkdir(parents=True, exist_ok=True)
+
+        (_w2 / "README.md").write_text("x", encoding="utf-8")
+
+        chk("目录在而没有探测产物 → 0 份", not probe_artifacts(_root, "none"))
+
+
 
     print("── ★ 反向对照 ⑦：**边界年份 1930 本身要拦**（界是「< 1930」） ──")
     ok, _ = verdict({"name": "x", "died": 1930}, [])
