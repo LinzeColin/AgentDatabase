@@ -145,7 +145,37 @@ NOT_STANCE = (
     r"\bit\s+(?:has\s+been|was|is)\s+shown\s+that\b",
 )
 
-FIRST_PERSON = re.compile(r"\b(?:I|we|my|our)\b")
+# ★★★★ **裸 `\b(?:I|we|my|our)\b` 是错的**——三个语料各自证明了一次：
+#   · Coffin 的专利里 `I` 是**图纸标号**：`I represents insulating material`／
+#     `until they leave the insulation I`／`C I )1 J1 L I M Fig ,2`
+#   · Mehl 的冶金论文里 `I` 是**化学式与罗马数字**：`PbI₂`／`AgI`／`ALLOYS I.`
+#   · 两处还都混着 OCR 噪声（`LO'I‘I'IROP`）
+#   裸计数把 Coffin 报成 8.42/万字，而他实质的第一人称句只有 15 句——**高了一个量级**。
+#
+# 判法：**第一人称后面要跟动词，或 `my/our` 后面跟名词。**
+#   `I have shown` ✓  `I claim` ✓  `we find` ✓  `my process` ✓
+#   `insulating material I,` ✗   `PbI` ✗   `Fig. I` ✗
+_FP_VERBAL = re.compile(
+    r"\b(?:I|we)\s+(?:have|has|had|am|are|was|were|do|did|shall|will|would|should|"
+    r"must|may|might|can|could|believe|think|find|found|claim|conclude|"
+    r"consider|regard|know|knew|saw|see|made|make|used|use|took|take|"
+    r"observed?|noted?|desire|wish|propose|suggest|shall|remember)\b"
+    r"|\b(?:my|our)\s+[a-z]{3,}\b")
+
+
+class _FP:
+    """与 `re` 兼容的最小接口，便于原地替换。"""
+
+    @staticmethod
+    def findall(text):
+        return _FP_VERBAL.findall(text)
+
+    @staticmethod
+    def search(text):
+        return _FP_VERBAL.search(text)
+
+
+FIRST_PERSON = _FP
 _SENT = re.compile(r"[^.!?]{15,400}[.!?]")
 
 
@@ -245,6 +275,24 @@ def self_test():
     print("\n── ★ 反例：普通比较级不是取舍 ──")
     chk("`higher than` 不算",
         not classify("The value is higher than that reported by Smith."))
+
+    print("\n── ★★★★ 第一人称必须是代词，不是图纸标号/化学式/罗马数字 ──")
+    #   这四条各自对应一个真实语料里的假阳，**不许再退回裸 `\bI\b`**
+    for probe, want, why in (
+            ("I have shown various apparatus adapted to carry my process into effect.",
+             True, "Coffin 专利里真的第一人称"),
+            ("I represents insulating material in the machine.",
+             False, "★ Coffin 专利：`I` 是**图纸标号**"),
+            ("until they leave the insulation I, and are in electrical contact.",
+             False, "★ 同上，句中标号"),
+            ("Self-diffusion coefficients of Pb in PbI, and PbCl were measured.",
+             False, "★ Mehl 冶金：`I` 是**碘**"),
+            ("CLASSIFICATION OF THE RUSTLESS ALLOYS I.",
+             False, "★ Bain：`I` 是**罗马数字章节号**"),
+            ("we find in the diagram a clear development of secondary hardening.",
+             True, "真的第一人称复数")):
+        got = bool(FIRST_PERSON.search(probe))
+        chk(f"{why}：{'认' if got else '不认'}", got == want)
 
     print("\n── ★★ 第一人称句也能是立场句，但要单列 ──")
     r3 = measure("I must emphasize that this view is unsatisfactory.")
