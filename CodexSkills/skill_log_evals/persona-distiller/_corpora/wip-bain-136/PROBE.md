@@ -267,6 +267,30 @@ Bain 这里的形状一样——**能过「有几份来源」的门，过不了�
 ★★ 这条**在排期之前就要看**（已有明训：「排期前先量声口密度」）。
 本轮正是这么做的，**所以没有白抓一整轮。**
 
+### ★★★ 独著那一篇也量了——**不是讨论段的锅，是他的文体**
+
+1930 那件 74% 是讨论段，我原以为独著的会完全不同。**去量了 1928 那篇独著：**
+
+> `X-RAYS AND THE CONSTITUENTS OF STAINLESS STEEL`
+> `By Epaar C. BaIn`
+> —— `sim_american-society-for-metals-asm-transactions-quarterly_1928-07_14_1`
+> （`Epaar` 是 `Edgar` 的 OCR 讹形、`BaIn` 是 `Bain` 的，照录）
+
+| | 字符 | `we` | `I` | `the author` |
+|---|---|---|---|---|
+| 1928 独著（**无讨论段**） | 44,163 | 3 | 4 | 5 |
+
+**独著、没有讨论段、OCR 质量正常（常用词占比 0.294），第一人称仍只有 7 处。**
+而那 4 处 `I` 里还有几处是 OCR 噪声与章节号（`CLASSIFICATION OF THE RUSTLESS ALLOYS I.`）。
+真正成句的只有一处：
+
+> `For the very high quench which produces an exceedingly high chromium austenite
+> we find in the diagram a clear development of definite secondary hard…`
+
+★★★ **所以低声口密度不是 1930 那件的讨论段造成的，是他的文体本身**——
+标准的非人称科技文体。**换一篇独著也救不回来。**
+这一条把结论从「要看别的篇目」收紧成「**这个人物的一手材料就是这个样子**」。
+
 ## 七、下一轮要做的（按顺序，都还没做）
 
 1. **逐卷核 pre-1931 那 6 件的可得性与声口**——本轮只核了 1930 那一件。
