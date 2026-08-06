@@ -22,7 +22,7 @@ Train-split、`dimensions` 含 `conversations` 的 3 份：
 **同一版上他的回信这样收尾**：
 
 > `I may add that I fully share with M, Osmond, with whom I have so long worked,
-> his appreciation of the value of Prof. Barrett's investigation.`
+> his appreciation of the value of Prof. Barrett’s investigation.`
 > —— `src-366fbd20fc5a`
 
 **不是让步，也不是反击：他把「Barrett 那项研究有价值」当成自己也持的判断说出来。**

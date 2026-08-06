@@ -21,9 +21,18 @@ Train-split、`dimensions` 含 `decisions` 的 **3 份**：
 > the time for want of some means of measuring and recording the temperatures
 > employed. The provision of the recording pyrometer, which was the direct outcome
 > of the work of this Committee, enabled the investigation to be resumed ; and the
-> results have recently been communicated to the Royal Society, and formed the
+> results have recently been communicated to the Koyal [版口：Feb. 1897. ALLOTS
+> RESEARCH. 57] Society, and formed the
 > subject of the Bakerian Lecture`
 > —— `src-5bf1098b8d50`（1897 第四报告）
+
+★★★ **这段引文上一轮有两处静默改动，本轮改回照录：**
+1. `Koyal` 上一轮被**悄悄改成 `Royal`**——那是印本的 OCR 讹字，照录不改；
+2. 句子中间横着一道**版口**（`Feb. 1897. ALLOTS RESEARCH. 57`），
+   上一轮**把它抹掉、把断成两半的句子缝成了一句连续的逐字引文**。
+   现在用 `[版口：…]` 标出来。
+**缝合处不留痕迹，是最难查的一种**——引文读起来完全通顺，
+本轮写了「逐条回原文比对」的脚本才抓到（31 条里的 2 条）。
 
 **四件事写在同一句里**：
 1. **放弃**——约 1883 年的实验，**理由写明：没有测温与记录的手段**；
