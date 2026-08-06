@@ -6,51 +6,68 @@ Train-split、`dimensions` 含 `timeline` 的 **1 份**：
 
 | source_id | 年 | 分档 | 载体 | 规模 |
 |---|---|---|---|---|
-| `src-2b601c0c1e58` | 1914 | **P2** | `robertsaustenar00smitgoog`（Griffin 冶金丛书，他生前主编） | **1,242,774 字符** |
+| `src-2b601c0c1e58` | 1914 | **P2** | `robertsaustenar00smitgoog`（Griffin 冶金丛书卷，含纪念性传略） | **1,242,774 字符** |
 
-★★ **本轮没有通读这一份。** 1.24M 字符，我只做了抽样与检索，
-下面写明哪些是核过的、哪些没有。**不把「扫过」说成「读过」。**
+★ **本轮仍未通读**，但已按 04-external 得到的四个节点定点开挖，
+**挖到了这份材料里的编年表**，下面每一条都是逐字核过的。
 
 ## Source-linked observations
 
-### ① 已核：这一份的卷前是**出版社书目**，不是传记
+### ★★★ ① 这份里有一张**按年排的履历表**
 
-> `EDITED BT Sir W. ROBERTS-AUSTEN, K.C.B.. D.C.L., F.R.S.` …
-> `INTK0DUCTI0N to the STUDY of METALLURGY. By Sir Wu. Kobekts. Austen`
-> `GOLD (The Metallurgy of). T. K. Rose.  LEAD (The Metallurgy of). H. F. Collins.`
+> `events in his career arranged in chronological sequence : —`
 
-**这是 Griffin 丛书的广告页**：他是**丛书主编**，而 Gold／Lead／Silver 各卷
-分别是 Rose、Collins 等人写的。
-★ 抓源员已据此把那三部**排除在语料之外**（「他只是主编」），**这个判断是对的**。
+已逐字核过的条目（节选）：
 
-★★ 顺带：`Kobekts. Austen` 又是一处姓氏 OCR 损坏（`R`→`K`、`r`→`k`），
-与 ㉕ 记的形态一致。
+> `1865. Completed the course and obtained the Associateship in Metallurgy, and
+> shortly afterwards became Private Assistant to Thomas Graham at the Royal Mint`
+> `1876. Elected a Fellow of the Royal Society`
+> `1880. Succeeded Dr. Percy in the Chair of Metallurgy at the Royal School of Mines`
+> `1889. Appointed to the Alloys Research Committee of the Institution of Mechanical Engineers`
 
-### ② 已核：年份分布说明这份含编年材料，但**没读到具体事件**
+### ★★ ② 「Graham 的私人助手」由此**有了第二处出处**
 
-全文检索：`1865` 16 处、`1885` 27 处、`1899` 40 处、`1902` 23 处。
-**这些年份正是 04-external 从 DNB 得到的四个关键节点**
-（1865 入 Graham 门下／1885 改姓／1899 会长任内／1902 卒）。
-**但本轮没有逐处打开确认它们说的是什么。**
+04-external 只有 DNB 1912 一处。**本条是 1914 年这份的独立记载**——
+两份都说 1865 年他成为 Graham 在造币厂的私人助手。
+**这是本人物第二条跨来源印证的事实**（第一条是「合作者具名」）。
+
+### ★★★ ③ 缺失的那批报告，**日期在这里**
+
+> `Publication of the First Report of the Alloys Research Committee, subsequent
+> Reports appearing in 1893, 1895, 1897, and 1899.`
+
+配合 `1889. Appointed to the Alloys Research Committee`——
+**合金研究委员会报告共五份：1891、1893、1895、1897、1899。**
+
+★ 这正是抓源员报「`Proc. IMechE 1880–1910` 在 archive.org `numFound 0`」的那批，
+也是 01-writings 观察 ① 里他说「标定方法的细节在那份 IMechE 报告里」所指的东西。
+**现在缺口有了确切的年份清单，下一轮可以按年去找，而不是按刊名盲搜。**
+
+### ④ 1876 这一年同时发生两件事
+
+`1876. Elected a Fellow of the Royal Society`，
+而同年他为 Graham 的文集写了那篇书评（03-expression 观察 ①，`src-4b50569ba761`）。
+**当选皇家学会会士与为亡师文集作评是同一年。** 两处出处相互独立。
 
 ## Candidate Claims
 
-**无。** 本道本轮不提出断言——**没读完的材料不拿来立论。**
-
-编年骨架目前**全部来自 04-external 的 DNB 条目**（1843 生／1865 入 Graham 门下／
-1870 接任 chemist of the mint／1885 改姓／1902 卒于任上），
-**那是二手且单一来源**，本道没有为它提供第二处印证。
+- **师承是职务性的，且有两处出处**：1865 年起任 Graham 私人助手。依据：观察 ②。
+- **合金研究委员会报告为五份，年份确定**：1891/1893/1895/1897/1899。依据：观察 ③。
 
 ## Contradictions and alternative explanations
 
-- 本道唯一来源是 **P2**，且是**他主编而非撰写**的丛书卷。
-  **把它算作 timeline 道的证据，前提是里头确有编年内容——本轮未证实。**
+- 本道来源是 **P2**，且是**他主编的丛书卷里的传略**，撰者非他本人。
+  编年表的可靠性依赖撰者；**与 DNB 一致的那几条可以互证，其余条目只有这一处。**
+- ★ 观察 ④ 的「同一年」是**两份来源各自记的年份对上了**，
+  **不是任何一处说「因为当选所以作评」**。**不要读成因果。**
 
 ## Unknowns and source gaps
 
-- **1.24M 字符未通读**，是本人物最大的一块未开采材料。
-- 编年的第二处印证仍然没有：**DNB 说什么就是什么。**
-- 抓源员报过 Nature 1902 年 Thorpe 讣文**正文 404**——那本该是最自然的第二处。
+- **1.24M 字符仍未通读**，本轮只做了定点开挖（四个年份 + 编年表 + 报告年份）。
+- 编年表之外，这份还列有
+  `Official Work and Researches, 1870-1880, 1881-1890, 1891-1902`、
+  `References to Memoranda in the Annual Mint Reports, 1870-1889 and 1890-1902`、
+  `Additional Bibliography`——**这三块都没读，是明确的下一轮目标。**
 
 ## Proposed Holdout cases
 
@@ -60,7 +77,8 @@ IDs only; research Agents must not inspect Holdout bodies.
 
 ## Handoff to adjudication
 
-**本道与 05-decisions 一样，按 `min_lanes` 算「覆盖了」，按内容算接近空。**
+**本道从「待开采」变成「已开出两条」**：Graham 助手关系的第二处出处，
+以及合金研究委员会五份报告的确切年份。
 
-区别在于：05 是**读完之后确认没有**，本道是**没读完所以不知道有没有**。
-**这两种「空」不该记成同一种**——本道是待开采，05 是已探明为零。
+**但仍不是通读结论**——编年表之外的三大块（官方工作、造币厂年报备忘录索引、补充书目）
+一个字没读。下游引用本道时，**只许引上面逐字列出的那几条**。
