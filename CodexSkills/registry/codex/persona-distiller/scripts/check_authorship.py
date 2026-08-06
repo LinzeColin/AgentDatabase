@@ -321,6 +321,14 @@ def _edits_within(a: str, b: str, k: int) -> bool:
     return prev[lb] <= k
 
 
+# ★ 档案馆／图书馆给「一批文书」起的名字——**它不是署名，是馆藏名**。
+#   形态与题页署名难分（整行大写 + 名 + 姓），靠这些词区分。
+_COLLECTION_RX = re.compile(
+    r"\b(?:PAPERS|CORRESPONDENCE|COLLECTION|ARCHIVES?|MANUSCRIPTS?|MSS|FONDS"
+    r"|RECORDS|CATALOGUE|CATALOG|FINDING\s+AID|INVENTORY|REGISTER"
+    r"|Papers|Correspondence|Collection|Archives?|Manuscripts?)\b")
+
+
 def _compound_hit(toks, first_l, parts):
     """**复姓的署名行**：名可以是缩写，但**复姓每一段都必须在，且按顺序**。
 
@@ -405,6 +413,17 @@ def ocr_byline_evidence(text, first, last):
     """
     first_l, last_l = first.lower(), last.lower()
     for line in text.split("\n"):
+        # ★★★ **`#` 开头的是我们自己写进文件的头，不是语料。**
+        #   `standalone_ocr` 一直挡着（`s.startswith("#")`），本函数原来不用挡——
+        #   它只看 `By …` 与整行大写，而 `# title: …` 两条都不像。
+        #   **复姓那条路一开就不成立了**：它扫全部 token 位置，于是
+        #       `# TITLE: W. C. ROBERTS-AUSTEN PAPERS`
+        #   会被当成他的署名放行。**那是 ingest 写的头，因为档案馆按「他的文书」编目。**
+        #   ★ 实测撞出这一类的过程记在 ㉕：模拟版一度报 Barton 109/109，
+        #     去读命中，11/14 是 `# title: Clara Barton Papers…`——
+        #     **判据把我们自己的元数据读回来当成了他的署名证据。**
+        if line.lstrip().startswith("#"):
+            continue
         s = line.strip()
         if not s or len(s) > 80:
             continue
@@ -448,6 +467,13 @@ def ocr_byline_evidence(text, first, last):
         #   `ROBERTS-AUSTEN` 切成 `roberts` + `austen`，两段与整串的距离是 7 和 8。
         _parts = [p for p in re.split(r"[^A-Za-z]+", last_l) if p]
         if len(_parts) >= 2:
+            # ★★★ **馆藏名不是署名。** `W. C. ROBERTS-AUSTEN PAPERS AND CORRESPONDENCE`
+            #   是档案馆给一批文书起的名字，整行大写、名与复姓俱全——
+            #   **形态与题页署名一模一样**，而它出现在任何一份数字化检索工具书里。
+            #   ★ 只否决**整行大写**那一支：`By …` 打头是明示署名，
+            #     而「By X. Papers read before the Society」这种正文不该被误伤。
+            if not starts_by and _COLLECTION_RX.search(s):
+                continue
             if _compound_hit(toks, first_l, _parts):
                 return s
             continue
@@ -1715,7 +1741,15 @@ def self_test() -> int:
             # ↓ ★ Fleming 那一类的陷阱形态：首字母不对，照样挡住
             ("By A. Grant Roberts-Austen.", False),
             # ↓ ★ 顺序反了不算——`Austen-Roberts` 是另一个人
-            ("By W. C. Austen-Roberts, F.R.S.", False)):
+            ("By W. C. Austen-Roberts, F.R.S.", False),
+            # ↓ ★★★ **我们自己写进文件的头**，不是语料（复姓那条路一开就漏了它）
+            ("# TITLE: W. C. ROBERTS-AUSTEN PAPERS", False),
+            ("# title: W. C. Roberts-Austen Papers, 1876-1902", False),
+            # ↓ ★★★ **馆藏名不是署名**——形态与题页署名一模一样
+            ("W. C. ROBERTS-AUSTEN PAPERS AND CORRESPONDENCE", False),
+            ("W. C. ROBERTS-AUSTEN COLLECTION, ROYAL MINT ARCHIVES", False),
+            # ↓ ★ 反向对照：`By` 打头是明示署名，**不许被馆藏词误伤**
+            ("By W. C. Roberts-Austen. Papers read before the Society.", True)):
         _got = ocr_byline_evidence(_s, "William", "Roberts-Austen") is not None
         print(("  ✓ " if _got == _want else "  ✗ ") + f"{_s:<50} → {_got}")
         if _got != _want:
