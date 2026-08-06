@@ -177,6 +177,24 @@ vol. 135 全卷 grep 不到任何 `copyright` 字样。**但不能据此说它�
 
 **「在坏 OCR 区域找不到」不等于「不存在」。** 这一条留作未决。
 
+## 二点九、本轮到此为止的位置：**卡在同一件事上，且是通道问题不是判断问题**
+
+`A Brief History of the Science of Metals`（AIME, 1948）——三条通道都试过：
+
+| 通道 | 坐标 | 结果 |
+|---|---|---|
+| ETHW（IEEE 工程技术史 wiki） | `ethw.org/w/images/7/73/Brief_History_of_the_Science_of_Metals.pdf` | **HTTP 403** |
+| archive.org 全文检索 | `q="brief history of the science of metals"` | **numFound 0** |
+| archive.org 作者/主题 | `creator:("Mehl") AND "metals"` / `"science of metals" 1947–1950` | 命中的全是别人（钱币目录、arXiv 论文），**numFound 0 相关** |
+
+**与 Bain #136 同形**：那边是 1939 年的书受控借阅拿不到，这边是 1948 年的书三条通道都不通。
+**两次都是「最能回答声口问题的那一件」拿不到。**
+
+★ 记成延后第五类（通道受限）的形态，**坐标已在上表，换台机器能续**。
+★★ 但**不许**据此就把 Mehl 记成「声口不够」——
+**四个期刊论文样本证明的是「他的期刊论文非人称」，不是「他不会用第一人称写东西」。**
+史论体那一件没读到，结论就是没读到。
+
 ## 三、本轮的诚实边界
 
 - **一件作品都没打开过**，NRL 任内的发表清单还没有；
