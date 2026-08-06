@@ -336,6 +336,27 @@ def main() -> int:
     if a.self_test:
         return self_test()
     info = audit(pathlib.Path(a.root or "."))
+    # ★★★★ v0.0.0.171：把 `check_delta_arithmetic` 接进来。
+    #   2026-08-06 周报里写「+0.4084 / −0.0859　摆动 0.6038」——
+    #   **两个数是第 3 轮的，而 0.6038 是第 1 轮的摆动**（显示值算出来是 0.4943）。
+    #   六个 delta 单独看全部复算一致，**是那一行把两个真数配成了一个假组合**。
+    #   逐个核数核不出它；只有把同一行的数**放在一起算**才看得见。
+    #   ★ 本项只报不拦——对不上时该回原始分复算，**不许照着改数**。
+    try:
+        import importlib.util as _iu, pathlib as _pl
+        _s = _iu.spec_from_file_location(
+            "_pd_delta", _pl.Path(__file__).with_name("check_delta_arithmetic.py"))
+        _m = _iu.module_from_spec(_s); _s.loader.exec_module(_m)
+        _bad = []
+        for _f in sorted(_pl.Path(__file__).parents[1].joinpath("references/ledgers").glob("*.md")):
+            for _ln, _a, _b, _z, _w in _m.scan_text(_f.read_text(encoding="utf-8", errors="replace")):
+                _bad.append(f"{_f.name}:{_ln}　写着摆动 {_z:+.4f}，而 {_a:+.4f} − {_b:+.4f} = **{_w:+.4f}**")
+        info["★ 同一行的三个数对不对得上（check_delta_arithmetic）"] = (
+            _bad if _bad else "台账全部对得上 ✓")
+    except Exception as _e:
+        info["★ 同一行的三个数对不对得上（check_delta_arithmetic）"] = (
+            f"**未核（不是通过）**：{_e}")
+
     print(json.dumps(info, ensure_ascii=False, indent=2))
     return 1 if info.get("**对不上的项数**") else 0
 
