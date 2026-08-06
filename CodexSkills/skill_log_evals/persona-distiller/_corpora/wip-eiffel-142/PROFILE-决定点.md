@@ -83,3 +83,36 @@ Garabit 与 Travaux 各有两个 id，**同一部作品的多个副本只算一�
 ★ 这是**合法的公有领域通道**，不是绕过任何访问控制。**下一次动他之前先走这条。**
 
 **在 Gallica 查过之前，不给他定档，也不记延后。**
+
+---
+
+## ★★★★★ Gallica 试过了：**403，本机通道被挡**（2026-08-06）
+
+    GET https://gallica.bnf.fr/SRU?operation=searchRetrieve&version=1.2
+        &query=gallica all "Eiffel Gustave"     →  **Access Denied: 403 Access Interdit**
+    GET 同上，query=dc.creator all "Eiffel"      →  返回 34 字节，无记录
+
+**不绕。** 不绕过任何访问控制、不绕验证码是本项目的硬规矩。
+
+### 于是 Eiffel #142 的状态是**两种缺口叠在一起**
+
+1. **一手规模不够**：archive.org 上可用 **7 部 < quick 门 8**，已复查无更多；
+2. **通道受限**：补足所缺的那一部（1910《La résistance de l'air et l'aviation》，
+   以及他 1907／1911 年的空气动力学报告）**只能走 Gallica，而本机 403**。
+
+★ 这与 Mehl #137、Benardos #128 是同一形态：
+**材料存在、是公有领域、坐标已定位，而本机通道堵住。**
+
+### 解锁待办（坐标写全，换台机器或换个网络就能续）
+
+1. `https://gallica.bnf.fr/SRU?operation=searchRetrieve&version=1.2&query=dc.creator all "Eiffel"`
+   —— 换个出口再试；或直接用 Gallica 网页检索 `Eiffel, Gustave (1832-1923)` 的作者页。
+2. 目标篇目：**1910《La résistance de l'air et l'aviation》**；
+   另查 `Recherches expérimentales sur la résistance de l'air`（1907／1911 两份报告）。
+3. **只要再取到 1 部**，quick 的 8 源即成立——**差的就是 1 部**。
+4. ★ 也可试 HathiTrust 与 Google Books 的公有领域全文；**不要试付费墙与需登录的库**。
+
+### 本轮不给他定档，也不记延后
+
+**「本机取不到」不是「不存在」。** 差 1 部而通道明确、坐标已写清——
+这一条留着，不当作做不成。
