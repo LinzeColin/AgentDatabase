@@ -263,6 +263,33 @@ def self_test() -> int:
         chk(f"给了数：实质 {r.get('**实质第一人称句**')} 句", isinstance(r.get("**实质第一人称句**"), int))
 
     print("\n" + ("✓ 自测全过" if ok else "✗ 自测未过"))
+    print("\n══ ★★★★ **真实样本**：Rosenhain #138 语料逐字（含真实的跨行与断字）══")
+    # 今天最要紧的一处更正全建在本判据上：探测报「第一人称 4.01」，实测 **0.10**——
+    # 那个 4.01 是 `we/our/us` 的密度。**下面三段把这个区分钉死。**
+    # 逐字取自 `_corpora/wip-rosenhain-138/.../raw/`，**连换行与 `try¬ ing` 的断字一起**。
+    import tempfile as _tf4, os as _os4, pathlib as _pl4
+    _REAL_FP = [
+        # ★ editorial we —— **不该算第一人称**。这一句正是探测把 4.01 当成第一人称的来源。
+        ("Perhaps this purely scientific aspect of our subject may with \n"
+         "advantage be dealt with first. While the greatest practical \n"
+         "importance obviously attaches to a deeper knowledge of metals",
+         0, "editorial we（Metallurgy 1914）——**不算第一人称**"),
+        # ★★ 真第一人称 —— 该算。三句都出自 1902 年那封 Nature 来信（全语料唯一密集处）
+        ("desire to see a more efficient use made of our coal-supply, I yet \n"
+         "think that he has drawn far too gloomy a picture of the future, \n"
+         "and I wish to draw attention to a consideration",
+         1, "`I yet think`（1902 Nature 来信）——**跨行**，该算"),
+        ("I should like to add that what I have said in this letter does \n"
+         "not at all lessen the urgency of Prof. Perry's plea",
+         1, "`I should like to add`——该算"),
+    ]
+    for _txt, _min, _why in _REAL_FP:
+        _r4 = scan_text(_txt)
+        _sub = _r4.get("substantive")          # ★ 它是**句子列表**，不是计数
+        _n = len(_sub) if isinstance(_sub, (list, tuple)) else int(_sub or 0)
+        chk(f"{_why}（实质句 {_n}，要 {'≥1' if _min else '=0'}）",
+            (_n >= 1) if _min else (_n == 0))
+
     return 0 if ok else 2
 
 
