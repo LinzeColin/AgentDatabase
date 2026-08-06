@@ -311,6 +311,26 @@ def main():
         _dupes = sorted({n for n in _names if _names.count(n) > 1 and n})
         if _dupes:
             defer_warn = (defer_warn or "") + f"　**延后名单里有重名：{_dupes}**"
+        # ★★★★ v0.0.0.169：**同一个概念在这份文件里有三种键名，还有 8 条一个都没有。**
+        #   2026-08-06 实测 42 条：`class` 23 / `reason_class` 11 / `disposition` 5 /
+        #   **三者皆无 8**；另有 `unblock_todo`(17) 与 `unblock_todos`(12) 两种拼法。
+        #   于是**任何对这份文件的分类计数都不可靠**——我当天就照 `disposition` 数了一次，
+        #   只覆盖 5 条，剩下 37 条靠在 reason 散文里搜「三轮」猜，得到一个看起来完整的错数。
+        #   与 [[eval-artifacts-have-five-schemas]] 同族，**这是第四批**。
+        #   ★ 本项**只报不改**：把 42 条已关闭的处置统一改名是动既有决定，属用户裁定。
+        _CLS = ("disposition", "class", "reason_class")
+        _cov = {k: sum(1 for x in _dl if x.get(k)) for k in _CLS}
+        _none = [x.get("name", "?") for x in _dl
+                 if not any(x.get(k) for k in _CLS)]
+        _alias = {k: sum(1 for x in _dl if x.get(k))
+                  for k in ("unblock_todo", "unblock_todos") }
+        if len(_CLS) - list(_cov.values()).count(0) > 1 or _none:
+            defer_warn = (defer_warn or "") + (
+                f"　**处置类字段有 {len(_CLS) - list(_cov.values()).count(0)} 种键名**："
+                f"{_cov}，**{len(_none)} 条一个都没有**"
+                + (f"（{_none[:4]}…）" if _none else "")
+                + (f"；另有同义键两种拼法 {_alias}" if all(_alias.values()) else "")
+                + "　→ **按任一键名做分类计数都会漏**，且散文里搜关键词会得到「看起来完整」的错数")
         for item in _dl:
             deferred.add(norm(item.get("name", "")))
             f = item.get("family_zh")
