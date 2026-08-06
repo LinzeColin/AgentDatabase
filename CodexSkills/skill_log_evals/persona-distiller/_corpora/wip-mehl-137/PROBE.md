@@ -228,6 +228,38 @@ vol. 135 全卷 grep 不到任何 `copyright` 字样。**但不能据此说它�
 **四个期刊论文样本证明的是「他的期刊论文非人称」，不是「他不会用第一人称写东西」。**
 史论体那一件没读到，结论就是没读到。
 
+## 二点九五、★★★★ **更正：我量错了语域，而他与 Bain 并不同形**
+
+美国科学院备忘录里**直接引了他自己的话**（二手转引，S1 不是 P1，但足以说明「有没有」）：
+
+> `You can't be a scientist on eight hours a day`
+> `It has its own science; and it has its own rationale interrelating engineering and science.`
+> `wonderful place to do graduate work in the 1920s`
+> `Remembering that scene was of immense help in later years at CIT`
+> `constitute the field and in this union lies the metallurgical mystique`
+
+并记他 `widely held in high esteem as an outstanding lecturer`，
+讲授 `smooth, theatrical, and inspiring`。
+
+**而且他有一串独著：**
+
+- `Brief History of the Science of Metals`（1948）——**史论体**
+- **1930 年代初起的年度理论冶金综述**——★ **独著、且很可能就在我能取到的
+  `Trans. AIME` / `Trans. ASM` 各卷里**
+- `A Department and a Research Laboratory in a University`——晚年所写，**机构回顾体**
+
+### 所以前面那四个样本证明不了我原本要下的结论
+
+我量的四件（Bain 三件 + Mehl 1939 那件）**全是合著的技术论文**——
+**那正是任何人都会写成非人称的那个语域。**
+拿它去判「这个人有没有声口」，等于**拿实验报告去判一个人会不会写信**。
+
+★★ 与 Bain #136 的分别现在是实的，不是猜的：
+Bain 那边我量了**独著**（1928，44,163 字符）**仍然只有 7 处第一人称**——
+他连独著都是非人称的。**Mehl 这边独著的那几件我一件都没量。**
+
+**→ Mehl 不能按 Bain 那一类结案。下一轮的第一件事是找那批年度综述。**
+
 ## 三、本轮的诚实边界
 
 - **一件作品都没打开过**，NRL 任内的发表清单还没有；
