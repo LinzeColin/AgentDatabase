@@ -76,7 +76,84 @@ Bain 的主体著作全在这一段：
 
 ---
 
-## 三点五、**续期这条本轮走不通——通道被 bot 墙挡住**（不是「查了没有」）
+## 三点五、★★★ **续期查到了：1939 年那本没有续期 → 1968 年落入公有领域**
+
+换了通道（archive.org 的 `Catalog of Copyright Entries` 扫本全文），**查成了**。
+
+### 覆盖范围：1939 年作品的续期窗口，四个半年卷**一个不缺**
+
+1939 年注册的作品，续期须在第 28 年（1966–67）内提出。四卷全下、全搜：
+
+| 卷 | archive.org identifier | 大小 |
+|---|---|---|
+| 1966 Jan–Jun | `catalogofco1966320112lib` | 11,666,660 B |
+| 1966 Jul–Dec | `catalogofco1966320112libr` | 10,765,381 B |
+| 1967 Jan–Jun | `catalogofco1967321112lib` | 11,444,155 B |
+| 1967 Jul–Dec | `catalogofco1967321112libr` | 11,362,163 B |
+
+★★ **两个 identifier 只差一个字母（`lib` / `libr`）就是另外半年。**
+我第一遍只下了 `1966 Jan–Jun` 与 `1967 Jul–Dec`——
+**恰好把续期窗口最可能落的那两个半年（66 下、67 上）漏在外面**，
+差一点拿「没找到」去下结论。
+
+### ★★★ 正对照（先证明这个搜法找得到东西，再报「没找到」）
+
+第一版正对照**当场红了**：我按 `<原注册日期>; R<号>` 去数，四卷都是 0。
+去读一条真条目才知道格式不是那样：
+
+    ABRAMOVITZ, MOSES.
+    An approach to a price theory for a
+    changing economy. © 3Apr39;
+    A129000. Moses Abramovitz (A);
+    3Apr67; R407683.
+
+**原注册号 `A129000` 夹在中间**，我的正则要求 `R` 紧跟日期，所以一条都不中。
+口径改对之后：
+
+| 卷 | 续期段里「原注册在 1939 年」的条目 |
+|---|---|
+| 1966 Jan–Jun | **1,200** |
+| 1966 Jul–Dec | **2,193** |
+| 1967 Jan–Jun | **2,001** |
+| 1967 Jul–Dec | **685** |
+
+**这个搜法找得到 1939 年书的续期，一共六千多条。**
+
+### 结论：两条路都查了，都没有
+
+| 查法 | 结果 |
+|---|---|
+| 作者标目 `BAIN, <名>`（容 OCR：`B?A[IJ1] ?N`） | 四卷共 **14 个**，逐条列出：Chester A / Chester W / George Charles / Harry / Harry O / James / Joe S / Lawrence J / Othell / Robert A / Robert Addison / Thomas D / Trevor。**没有 Edgar。** |
+| 版权人 `American Society for Metals` | 四卷共 4 处，**全是 `A` 号（原注册）**：A817829 / A908256 / A912953 / A958401。**续期段内 ASM 命中 0。** |
+
+★ 版权人查法是必须的：**Bain 本人不是版权人**，ASM 是。
+（Henderson #113 恰恰是本人亲自续展才卡死的——**续期人不同，结论就不同**，这次印证了。）
+
+**→ `Functions of the Alloying Elements in Steel`（ASM, 1939）未续期，
+1968 年 1 月 1 日起进入公有领域。**
+
+### 这一条的诚实边界
+
+1. 扫本是 OCR 的，`Feb4O`（字母 O 当零）、`R407 346`（号里夹空格）这种讹形确实存在；
+   我用了容 OCR 的标目正则，**但不能排除某一条被 OCR 打坏到搜不到**。
+2. 只查了 **Part 1「Books and Pamphlets」**。若那五讲当年是按期刊文章注册的，
+   会落在 Part 2，**没查**。（它是 ASM 出的单行本，Part 1 是对的那一部。）
+3. **1961 年第二版（与 H. W. Paxton 合著）没查**——它的续期窗口是 1989 年，
+   属于 1978 年后的电子记录，要走 `publicrecords.copyright.gov`，是另一条通道。
+
+## 三点六、原先记的「通道受限」——**已解除**
+
+上一轮记的三条堵死的通道保留在这里，**因为下一个人会先撞上它们**：
+
+| 通道 | 坐标 | 结果 |
+|---|---|---|
+| Stanford Copyright Renewals | `exhibits.stanford.edu/copyrightrenewals/catalog?q=Bain,+Edgar` | JS 应用，抓回来是空的 |
+| 同上 JSON 端点 | `…/catalog.json?q=Bain+Edgar` | **验证码页**（support ID 13624200904701015161）——**没绕，也不许绕** |
+| HathiTrust 全文检索 | `babel.hathitrust.org/cgi/ls?...` | HTTP 403 |
+| Online Books Page | `onlinebooks.library.upenn.edu/webbin/booksearch?author=Bain,+Edgar` | HTTP 404（检索式不对） |
+
+**能走通的是 archive.org 的 `_djvu.txt` 全文**（本项目 Sorby #133 用过同一条）。
+**「通道受限」不是终局，是「这条不通，换一条」**——这次换对了。
 
 本轮**试过两条通道，都没拿到记录**：
 
