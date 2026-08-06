@@ -2535,6 +2535,46 @@ def run_holdout_overlap(report, target: Path, cache_dirs: list[str]) -> None:
     report.metrics['holdout_overlap'] = info
 
 
+def run_lane_quotes_verbatim(report, target: Path) -> None:
+    """**六道研究稿里的每条逐字引文，都要能在语料里原样找到。**
+
+    Roberts-Austen #135 实测：六道逐条标了 `source_id`、看上去无懈可击，
+    回原文比对 **31 条里 2 条对不上**，其中最难查的一条是
+    `Koyal` 被悄悄改回 `Royal`，**且句中一道版口被抹掉、两半缝成一句连续引文**。
+    **缝合处不留痕迹，读起来完全通顺。**
+
+    ★ 判准：**看得见的编辑记号（`**加粗**`／`<sup>`／`«»`／显式省略号）允许，
+      不留痕迹的改动不允许。**
+    ★★ 只写 metrics 不拦——**判据自己校了六轮**，全库还有 19 条未逐条分诊，
+      在那之前不拿它卡流程（见 `check_lane_quotes_verbatim.py` 文件头）。
+    """
+    here = Path(__file__).resolve().parent
+    script = here / 'check_lane_quotes_verbatim.py'
+    if not script.exists():
+        report.metrics['lane_quotes'] = {'状态': '检查器未安装，**未核验**（不是通过）'}
+        return
+    # ★ 与本文件其它件同一套查找层级（工作区可能嵌 1–3 层）
+    _cands = [target, target.parent, target.parent.parent]
+    ws = next((c for c in _cands if (c / 'references' / 'research').is_dir()), None)
+    if ws is None:
+        report.metrics['lane_quotes'] = {'状态': '没有 references/research，**未核验**（不是通过）'}
+        return
+    try:
+        spec = importlib.util.spec_from_file_location('_pd_lane_quotes', script)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        _, rep = mod.check(ws)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['lane_quotes'] = {'状态': f'跑不起来，**未核验**（不是通过）：{exc}'}
+        return
+    report.metrics['lane_quotes'] = rep
+    bad = sum(len(v.get('**对不上**', [])) for v in rep.get('逐道', {}).values())
+    if bad:
+        report.warnings.append(
+            f'research.lane_quotes：{bad} 条逐字引文回原文对不上——'
+            '**引文对不上就是引文对不上**，逐条读过再决定是改引文还是记盲区')
+
+
 def run_namesake_criteria(report, target: Path) -> None:
     """**按人物定制的同名判据**（v0.0.0.151 接线，只写 metrics）。
 
@@ -3103,6 +3143,7 @@ def main() -> int:
         run_verdict_attribution(report, target)
         run_rubric_health(report, target)
         run_namesake_criteria(report, target)
+        run_lane_quotes_verbatim(report, target)
         report_own_voice(report, target, meta, sources)
         report_refusal_overflow(report, target)
         run_corpus_ceiling(report, target, report.profile)
