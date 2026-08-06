@@ -35,7 +35,9 @@
 
 1. **指令读者**：`the critic must remember` / `it must be borne in mind` / `one should note`
 2. **对领域或工作下评价**：`has been irregular` / `unsatisfactory` / `remarkable` / `unfortunate`
-3. **更正与取舍**：`rather than` / `contrary to` / `not … but` / `it is a mistake to`
+3. **更正与取舍**：`contrary to` / `it is a mistake to` / `far from satisfactory` /
+   `not so much … as` / **`preferable to X rather than Y`**（只收带方法论口吻的这一种）
+   ★ **裸 `rather than` 已删**——见下「首跑结果」，它在技术散文里是普通事实对比。
 4. **有保留的判断**：`there can be little doubt` / `it seems clear` / `it is doubtful whether`
 
 ★★★ **不数被动式的「据观察」**——`it has been found that` 是转述不是立场。
