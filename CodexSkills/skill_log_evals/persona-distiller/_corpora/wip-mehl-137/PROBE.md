@@ -56,6 +56,52 @@ Bain #136 我查的是 CCE **Part 1「Books and Pamphlets」**——那对他那
 
 **这是本轮要查的第一件事**，不是 §105。
 
+## 一点七、**期刊续期（Part 2）也查了：没找到 AIME/ASM 1939 年卷的续期**
+
+下了 CCE **Part 2「Periodicals」**两卷（1939 年期刊的续期窗口）：
+
+| 卷 | identifier | 大小 |
+|---|---|---|
+| 1966 Jan–Dec | `catalogofcopy19663202libr` | 3,492,726 B |
+| 1967 Jan–Dec | `catalogofcopy19673212libr` | 3,373,663 B |
+
+**正对照**（先证明搜法找得到 1939 年期刊的续期）：
+
+    cce1966P2   续期段里「原注册在 1939 年」的条目 1,994 条
+    cce1967P2   同上                              1,004 条
+
+**结果**：两卷的续期段里 AIME 与 American Society for Metals 各有命中，
+**逐条打开读，四处全在 `CLAIMANT INDEX`**——列的是**当年（1966/67）注册的刊名**
+（`JOURNAL OF METALS`／`JOURNAL OF PETROLEUM TECHNOLOGY`／`METAL PROGRESS`／
+`METALS ENGINEERING QUARTERLY`），**没有一处是 `Trans. AIME` 或 `Trans. ASM`
+1939 年卷的续期**。
+
+正文里 AIME/ASM 的其余命中也全是 **`B` 号（期刊原注册）**，不是 `R` 号：
+
+    JOURNAL OF PETROLEUM TECHNOLOGY. © American Institute of Mining, … 1, Jan66. © 19Jan; B239518.
+    METALS ENGINEERING QUARTERLY. © American Society for Metals. 1, Feb67. © 8Feb; B324505.
+
+### 与 Bain 那轮合起来看
+
+| 查的部 | 查的是 | 结果 |
+|---|---|---|
+| Part 1（Books & Pamphlets）1966–67 四个半年卷 | Bain 那本 1939 年的书 + 版权人 ASM | **无续期**；续期段内 ASM 命中 0 |
+| **Part 2（Periodicals）1966–67 两卷** | Trans. AIME / Trans. ASM 各卷 | **无续期**；命中全在 CLAIMANT INDEX 与 B 号 |
+
+**两部都查过、两部都没有。**
+
+### ★ 这条结论的边界（三条，都要带下去）
+
+1. **续期可能记在别的权利人名下**——我按 `American Institute of Mining` 与
+   `American Society for Metals` 两个串搜的，**若当年用了别的写法就会漏**。
+2. **年刊的登记归属可能不是 Periodicals**——`Trans. AIME` 是年度合订本，
+   登记成图书还是期刊两可。★ 但 Part 1 也查过了，**两边都没有**，这条caveat因此弱化。
+3. 扫本是 OCR 的。正对照证明搜法有效（合计约 3,000 条 1939 年续期能被搜到），
+   **但不能排除某一条被打坏到搜不出来。**
+
+**→ 暂定：`Trans. AIME` / `Trans. ASM` 1939 年卷未见续期。
+这对 Mehl 1939 年那篇（Johnson & Mehl）是决定性的，但仍需第 3 条的复核。**
+
 ## 二、下一步（按顺序，都还没做）
 
 0. ★★ **先查 `Trans. AIME` / `Trans. ASM` 各卷的期刊续期**（CCE **Part 2 Periodicals**，
