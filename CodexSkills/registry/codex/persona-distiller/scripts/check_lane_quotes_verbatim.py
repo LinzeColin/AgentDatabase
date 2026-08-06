@@ -56,7 +56,24 @@ _PAGE_FURNITURE = re.compile(r"\[版口：([^\]]*)\]")
 #     · 法/俄式引号 `« »`、弯引号——包在引文外面。
 #   ★ 它们与「悄悄改讹字」**不是一类**：加粗是**看得见的**编辑记号，
 #     而 `Koyal`→`Royal` 不留痕迹。**看得见的允许，不留痕迹的不允许。**
-_MARKUP = re.compile(r"\*\*|\*|__|</?[A-Za-z][^>]*>|[«»“”\"]")
+# ★★★★ 2026-08-07：`</?[A-Za-z][^>]*>` 这一支**吃掉了 46% 的语料**。
+#   Whitworth #152 的 `in.ernet.dli.2015.43651`（泰晤士报讣告重印本）实测：
+#
+#       全文 983,190 字符 → `_MARKUP` 之后 531,425 字符
+#       「标签」匹配 **156 处，删掉 450,343 字符（45.8%）**，最长一处一口吃掉 **46,006 字符**
+#       而真正该删的引号类只有 **1,424** 个
+#
+#   起因：OCR 里有孤立的 `<`（`<lied` 是 `plied` 的讹形），`[^>]*` **不禁换行**，
+#   于是从那个 `<` 一路吃到几万字符之外的下一个 `>`，中间全是正常散文。
+#   后果方向是**假阴**——真引文被报成「对不上」，不会造成假过；
+#   但「0 条对不上」是在**残缺语料**上得出的，落在被删区间里的引文一律冤枉。
+#   ★ 抓到它的是 Whitworth 的 Hampson 那句：`Hampson` 在归一副本里明明有 2 处，
+#     而 `load_corpus` 交给比对的文本里是 **0 处**。
+#
+#   修法：真 HTML 标签**既短又不跨行**。加 `\n` 排除 + 长度上限 120。
+#   ★ 上限不是拍的：本文件里最长的**真**标签是 0 个（这批语料根本没有 HTML），
+#     而误吃的 156 处最短的一处也有 74 字符——120 这个界把两侧分开还有余量。
+_MARKUP = re.compile(r"\*\*|\*|__|</?[A-Za-z][^>\n]{0,120}>|[«»“”\"]")
 # 显式省略号 = 作者声明「这里略去了」，与 `[版口：…]` 同类，按分段各自命中验
 _ELISION = re.compile(r"\s*(?:\.\.\.|…)\s*")
 
@@ -187,6 +204,43 @@ def self_test():
         print(("  ✓ " if ok else "  ✗ ") + lbl)
         if not ok:
             bad.append(lbl)
+
+    # ══ ★★★★ 逐字真实样本：`_MARKUP` 的「标签」支吃掉 46% 的语料（2026-08-07）══
+    #   下面这段是 Whitworth #152 的 `in.ernet.dli.2015.43651`（泰晤士报讣告 1893 重印本）
+    #   里的**原文**，连 OCR 讹形（`<lied` 是 `plied`、`ho liad` 是 he had、`j^laced`）一起。
+    #   ★ 要害在开头那个孤立的 `<`：旧正则 `[^>]*` **不禁换行**，
+    #     于是从它一路吃到几万字符之外的下一个 `>`。
+    print("\n══ ★★★★ 逐字真实样本：孤立的 `<` 不许吃掉整段散文 ══")
+    _REAL = ("<lied to satisfy a fastidious\ntaste, but he was generally well worth hearing,\n"
+             "for his knowledge was wide and various.\n"
+             "workroom and j^laced next to his best workman, one Hampson.\n"
+             "After ^the day’s labour was over ho liad always employment at\n"
+             "home, and it was in this way that he completed the true plane,\n"
+             "exhibiting it one night with pride to Hampson, whose sole\n"
+             "comment was You’ve done it.” From Maudslay’s, Whitworth\n"
+             "went to Holtzapfrd’s and then to Clements’, where Hr.\n")
+    _n = _norm(_REAL)
+    chk(f"`Hampson` 还在（{_n.count('Hampson')} 处，旧口径是 0）", _n.count("Hampson") == 2)
+    chk(f"删掉的字符 {len(_REAL) - len(_MARKUP.sub('', _REAL))} 个"
+        f"（只该删两个弯引号）", len(_REAL) - len(_MARKUP.sub("", _REAL)) <= 4)
+    chk("那句真引文能核到", verify(
+        "After ^the day’s labour was over ho liad always employment at\n"
+        "home, and it was in this way that he completed the true plane,\n"
+        "exhibiting it one night with pride to Hampson, whose sole\n"
+        "comment was You’ve done it.", {"src-x": _n}) == "src-x")
+    #   ★ 反向：**真的 HTML 标签仍要剥掉**，否则修过头。
+    chk("真标签仍剥掉：`<b>` / `</span>` / `<span class=\"x\">`",
+        _norm("a <b>bold</b> and <span class=\"x\">tagged</span> line")
+        == "a bold and tagged line")
+    #   ★★ 全库实测（2026-08-07）：旧口径删 **132,987,151** 字符，新口径 **1,076,997**；
+    #     574 份语料文件被误删 >500 字符，跨 21 个工作区（Koch 4000 万、Virchow 2940 万）。
+    #     **而已实现的损害只有 2 条冤枉报错**（归档里 Pasteur 1 条 + Whitworth 1 条）——
+    #     多数引文恰好落在没被删的部分。两件事都要说，不许只说其中一件。
+    #   ★★★ **方向只会假阴**：删除让判据更容易报「对不上」，
+    #     所以过去那些「0 条对不上」不但仍然成立，而且是在**更苛刻**的条件下取得的。
+    print("  ★ 全库实测：旧口径删 132,987,151 字符 / 新 1,076,997；"
+          "574 份文件受影响，**而冤枉报错只有 2 条**——机制严重、已实现损害小，两件都要说。")
+
 
     # ★★★ 自测的语料**必须与生产同口径**——`load_corpus` 会 `_norm`，
     #   而我第一版把生地 dict 直接喂给 `verify`，**测的是另一条路**：
