@@ -1,0 +1,1144 @@
+{
+ "queries_run": [
+  {
+   "query": "title:(\"Minutes of proceedings of the Institution of Civil Engineers\") AND date:[1839-01-01 TO 1876-12-31]",
+   "hits": 27,
+   "url": "https://archive.org/advancedsearch.php?q=title%3A(%22Minutes+of+proceedings+of+the+Institution+of+Civil+Engineers%22)+AND+date%3A%5B1839-01-01+TO+1876-12-31%5D&fl[]=identifier&fl[]=title&fl[]=date&fl[]=volume&fl[]=year&rows=100&page=1&output=json",
+   "note": "Run with raw curl before the query logger existed. 27 ICE volumes; ALL were downloaded and scanned. Confirms the brief: minutesofprocee5911inst_0 carries date=1841 but its TEXT is a cumulative index citing vols xci-xcviii (1880s-90s) - metadata date is unusable."
+  },
+  {
+   "query": "title:(\"Proceedings of the Institution of Mechanical Engineers\") AND date:[1847-01-01 TO 1890-12-31]",
+   "hits": 3,
+   "url": "https://archive.org/advancedsearch.php?q=title%3A(%22Proceedings+of+the+Institution+of+Mechanical+Engineers%22)+AND+date%3A%5B1847-01-01+TO+1890-12-31%5D&rows=100&output=json",
+   "note": "Run with raw curl. Only 3 hits under the exact title - too narrow, superseded by the broader query below."
+  },
+  {
+   "query": "title:(\"institution of mechanical engineers\") AND mediatype:texts AND date:[1847-01-01 TO 1890-12-31]",
+   "hits": 30,
+   "url": "https://archive.org/advancedsearch.php?q=title%3A(%22institution+of+mechanical+engineers%22)+AND+mediatype%3Atexts+AND+date%3A%5B1847-01-01+TO+1890-12-31%5D&rows=100&output=json",
+   "note": "Run with raw curl. 12 were Proceedings volumes (the rest are Nature news items). All 12 attempted; 11 scanned, 1 blocked by HTTP 500. Title-page years read from TEXT: 1847-1849 (x2 scans), 1853, 1863, 1864, 1867, 1870, 1875, 1899, 2 undetermined. NOTE THE GAP: 1856 and 1857 - his IMechE presidency - are NOT on archive.org."
+  },
+  {
+   "query": "title:(\"Report of the British Association for the Advancement of Science\") AND date:[1838-01-01 TO 1845-12-31]",
+   "hits": 0,
+   "url": "https://archive.org/advancedsearch.php?q=title%3A(%22Report+of+the+British+Association+for+the+Advancement+of+Science%22)+AND+date%3A%5B1838-01-01+TO+1845-12-31%5D&rows=100&output=json",
+   "note": "Run with raw curl. 0 hits because these BAAS items carry NO date field at all - not because the volumes are absent. Recovered them later via identifier:(reportofbritisha*), which is how the 1840 Glasgow volume was found."
+  },
+  {
+   "query": "title:(\"british association for the advancement of science\") AND date:[1839-01-01 TO 1843-12-31] AND mediatype:texts",
+   "hits": 10,
+   "url": "https://archive.org/advancedsearch.php?q=title%3A(%22british+association+for+the+advancement+of+science%22)+AND+date%3A%5B1839-01-01+TO+1843-12-31%5D+AND+mediatype%3Atexts&rows=100&output=json",
+   "note": "Run with raw curl. Mostly JSTOR meeting notices, not the annual Reports."
+  },
+  {
+   "query": "title:(\"journal of the society of arts\") AND mediatype:texts AND date:[1852-01-01 TO 1875-12-31]",
+   "hits": 480,
+   "url": "https://archive.org/advancedsearch.php?q=title%3A%28%22journal+of+the+society+of+arts%22%29+AND+mediatype%3Atexts+AND+date%3A%5B1852-01-01+TO+1875-12-31%5D&rows=60&page=1&output=json&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date&fl%5B%5D=creator&fl%5B%5D=volume",
+   "note": "archive.org advancedsearch metadata query"
+  },
+  {
+   "query": "title:(\"report of the .. meeting of the british association\") AND mediatype:texts AND date:[1839-01-01 TO 1846-12-31]",
+   "hits": 0,
+   "url": "https://archive.org/advancedsearch.php?q=title%3A%28%22report+of+the+..+meeting+of+the+british+association%22%29+AND+mediatype%3Atexts+AND+date%3A%5B1839-01-01+TO+1846-12-31%5D&rows=40&page=1&output=json&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date&fl%5B%5D=creator&fl%5B%5D=volume",
+   "note": "archive.org advancedsearch metadata query"
+  },
+  {
+   "query": "collection:(americana OR toronto OR cdl) AND title:(\"british association\") AND title:(report) AND date:[1840-01-01 TO 1843-12-31]",
+   "hits": 0,
+   "url": "https://archive.org/advancedsearch.php?q=collection%3A%28americana+OR+toronto+OR+cdl%29+AND+title%3A%28%22british+association%22%29+AND+title%3A%28report%29+AND+date%3A%5B1840-01-01+TO+1843-12-31%5D&rows=40&page=1&output=json&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date&fl%5B%5D=creator&fl%5B%5D=volume",
+   "note": "archive.org advancedsearch metadata query"
+  },
+  {
+   "query": "identifier:(journalofsociety*soci*) AND mediatype:texts",
+   "hits": 164,
+   "url": "https://archive.org/advancedsearch.php?q=identifier%3A%28journalofsociety%2Asoci%2A%29+AND+mediatype%3Atexts&rows=120&page=1&output=json&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date&fl%5B%5D=creator&fl%5B%5D=volume",
+   "note": "enumerate Journal of Society of Arts bound volumes"
+  },
+  {
+   "query": "(\"ordnance select committee\") AND mediatype:texts",
+   "hits": 1,
+   "url": "https://archive.org/advancedsearch.php?q=%28%22ordnance+select+committee%22%29+AND+mediatype%3Atexts&rows=40&page=1&output=json&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date&fl%5B%5D=creator&fl%5B%5D=volume",
+   "note": "decisions: OSC reports"
+  },
+  {
+   "query": "title:(rifled ordnance OR \"rifled guns\") AND mediatype:texts AND date:[1858-01-01 TO 1875-12-31]",
+   "hits": 20,
+   "url": "https://archive.org/advancedsearch.php?q=title%3A%28rifled+ordnance+OR+%22rifled+guns%22%29+AND+mediatype%3Atexts+AND+date%3A%5B1858-01-01+TO+1875-12-31%5D&rows=40&page=1&output=json&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date&fl%5B%5D=creator&fl%5B%5D=volume",
+   "note": "decisions: rifled ordnance reports"
+  },
+  {
+   "query": "(Whitworth AND Armstrong AND (gun OR ordnance OR artillery)) AND mediatype:texts AND date:[1858-01-01 TO 1880-12-31]",
+   "hits": 0,
+   "url": "https://archive.org/advancedsearch.php?q=%28Whitworth+AND+Armstrong+AND+%28gun+OR+ordnance+OR+artillery%29%29+AND+mediatype%3Atexts+AND+date%3A%5B1858-01-01+TO+1880-12-31%5D&rows=40&page=1&output=json&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date&fl%5B%5D=creator&fl%5B%5D=volume",
+   "note": "Whitworth-Armstrong gun controversy"
+  },
+  {
+   "query": "title:(Whitworth) AND mediatype:texts AND date:[1840-01-01 TO 1931-01-01]",
+   "hits": 18,
+   "url": "https://archive.org/advancedsearch.php?q=title%3A%28Whitworth%29+AND+mediatype%3Atexts+AND+date%3A%5B1840-01-01+TO+1931-01-01%5D&rows=80&page=1&output=json&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date&fl%5B%5D=creator&fl%5B%5D=volume",
+   "note": "any title containing Whitworth, pre-1931"
+  },
+  {
+   "query": "title:(\"select committee\") AND title:(small arms OR ordnance OR artillery) AND mediatype:texts AND date:[1850-01-01 TO 1900-12-31]",
+   "hits": 0,
+   "url": "https://archive.org/advancedsearch.php?q=title%3A%28%22select+committee%22%29+AND+title%3A%28small+arms+OR+ordnance+OR+artillery%29+AND+mediatype%3Atexts+AND+date%3A%5B1850-01-01+TO+1900-12-31%5D&rows=40&page=1&output=json&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date&fl%5B%5D=creator&fl%5B%5D=volume",
+   "note": "decisions: select committee evidence"
+  },
+  {
+   "query": "(\"small arms\") AND (\"select committee\") AND mediatype:texts AND date:[1850-01-01 TO 1870-12-31]",
+   "hits": 0,
+   "url": "https://archive.org/advancedsearch.php?q=%28%22small+arms%22%29+AND+%28%22select+committee%22%29+AND+mediatype%3Atexts+AND+date%3A%5B1850-01-01+TO+1870-12-31%5D&rows=40&page=1&output=json&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date&fl%5B%5D=creator&fl%5B%5D=volume",
+   "note": "decisions: small arms committee"
+  },
+  {
+   "query": "title:(\"the artizan\") AND mediatype:texts",
+   "hits": 27,
+   "url": "https://archive.org/advancedsearch.php?q=title%3A%28%22the+artizan%22%29+AND+mediatype%3Atexts&rows=30&page=1&output=json&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date&fl%5B%5D=creator&fl%5B%5D=volume",
+   "note": "conversations: The Artizan journal"
+  },
+  {
+   "query": "title:(\"practical mechanic's journal\") AND mediatype:texts",
+   "hits": 32,
+   "url": "https://archive.org/advancedsearch.php?q=title%3A%28%22practical+mechanic%27s+journal%22%29+AND+mediatype%3Atexts&rows=30&page=1&output=json&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date&fl%5B%5D=creator&fl%5B%5D=volume",
+   "note": "conversations: Practical Mechanic Journal"
+  },
+  {
+   "query": "title:(\"mechanics magazine\") AND mediatype:texts AND date:[1840-01-01 TO 1875-12-31]",
+   "hits": 29,
+   "url": "https://archive.org/advancedsearch.php?q=title%3A%28%22mechanics+magazine%22%29+AND+mediatype%3Atexts+AND+date%3A%5B1840-01-01+TO+1875-12-31%5D&rows=30&page=1&output=json&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date&fl%5B%5D=creator&fl%5B%5D=volume",
+   "note": "conversations: Mechanics Magazine"
+  },
+  {
+   "query": "title:(\"report of the committee on ordnance\" OR \"experiments with rifled cannon\" OR \"report on rifled cannon\") AND mediatype:texts",
+   "hits": 0,
+   "url": "https://archive.org/advancedsearch.php?q=title%3A%28%22report+of+the+committee+on+ordnance%22+OR+%22experiments+with+rifled+cannon%22+OR+%22report+on+rifled+cannon%22%29+AND+mediatype%3Atexts&rows=30&page=1&output=json&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date&fl%5B%5D=creator&fl%5B%5D=volume",
+   "note": "decisions: ordnance committee reports"
+  },
+  {
+   "query": "identifier:(reportofbritisha*) AND mediatype:texts",
+   "hits": 107,
+   "url": "https://archive.org/advancedsearch.php?q=identifier%3A%28reportofbritisha%2A%29+AND+mediatype%3Atexts&rows=60&page=1&output=json&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date&fl%5B%5D=creator&fl%5B%5D=volume",
+   "note": "BAAS annual reports by identifier pattern"
+  },
+  {
+   "query": "(\"parliamentary papers\" OR \"command paper\" OR \"blue book\") AND Whitworth AND mediatype:texts AND date:[1850-01-01 TO 1900-12-31]",
+   "hits": 0,
+   "url": "https://archive.org/advancedsearch.php?q=%28%22parliamentary+papers%22+OR+%22command+paper%22+OR+%22blue+book%22%29+AND+Whitworth+AND+mediatype%3Atexts+AND+date%3A%5B1850-01-01+TO+1900-12-31%5D&rows=25&page=1&output=json&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date&fl%5B%5D=creator&fl%5B%5D=volume",
+   "note": "decisions: parliamentary papers mentioning Whitworth"
+  },
+  {
+   "query": "description:(Whitworth) AND mediatype:texts AND date:[1840-01-01 TO 1931-01-01]",
+   "hits": 43,
+   "url": "https://archive.org/advancedsearch.php?q=description%3A%28Whitworth%29+AND+mediatype%3Atexts+AND+date%3A%5B1840-01-01+TO+1931-01-01%5D&rows=60&page=1&output=json&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date&fl%5B%5D=creator&fl%5B%5D=volume",
+   "note": "decisions/external: description mentions Whitworth pre-1931"
+  },
+  {
+   "query": "downloaded minutesofproceed23inst_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/minutesofproceed23inst/minutesofproceed23inst_djvu.txt",
+   "note": "1707041 B; 3 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded minutesofproceed24inst_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/minutesofproceed24inst/minutesofproceed24inst_djvu.txt",
+   "note": "1767771 B; 4 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded minutesofproceed25inst_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/minutesofproceed25inst/minutesofproceed25inst_djvu.txt",
+   "note": "1765489 B; 0 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded minutesofproceed26inst_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/minutesofproceed26inst/minutesofproceed26inst_djvu.txt",
+   "note": "1988708 B; 1 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded minutesofproceed27inst_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/minutesofproceed27inst/minutesofproceed27inst_djvu.txt",
+   "note": "2012304 B; 9 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded minutesofproceed28inst_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/minutesofproceed28inst/minutesofproceed28inst_djvu.txt",
+   "note": "2069819 B; 3 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded minutesofproceed29inst_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/minutesofproceed29inst/minutesofproceed29inst_djvu.txt",
+   "note": "1596921 B; 9 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded minutesofproceed30inst_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/minutesofproceed30inst/minutesofproceed30inst_djvu.txt",
+   "note": "1423773 B; 0 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded minutesofproceed32inst_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/minutesofproceed32inst/minutesofproceed32inst_djvu.txt",
+   "note": "1299080 B; 0 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded minutesofproceed33inst_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/minutesofproceed33inst/minutesofproceed33inst_djvu.txt",
+   "note": "1319065 B; 4 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded minutesofproceed34inst_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/minutesofproceed34inst/minutesofproceed34inst_djvu.txt",
+   "note": "1212224 B; 21 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded minutesofproceed35inst_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/minutesofproceed35inst/minutesofproceed35inst_djvu.txt",
+   "note": "1776996 B; 3 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded minutesofproceed36inst_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/minutesofproceed36inst/minutesofproceed36inst_djvu.txt",
+   "note": "1147136 B; 0 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded minutesofproceed37inst_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/minutesofproceed37inst/minutesofproceed37inst_djvu.txt",
+   "note": "1166349 B; 7 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded minutesofproceed38inst_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/minutesofproceed38inst/minutesofproceed38inst_djvu.txt",
+   "note": "1028767 B; 0 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded minutesofproceed39inst_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/minutesofproceed39inst/minutesofproceed39inst_djvu.txt",
+   "note": "1378381 B; 4 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded minutesofproceed3130inst_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/minutesofproceed3130inst/minutesofproceed3130inst_djvu.txt",
+   "note": "1196332 B; 2 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded minutesproceedi00engigoog_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/minutesproceedi00engigoog/minutesproceedi00engigoog_djvu.txt",
+   "note": "1973168 B; 11 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded minutesproceedi01secrgoog_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/minutesproceedi01secrgoog/minutesproceedi01secrgoog_djvu.txt",
+   "note": "1677945 B; 3 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded minutesproceedi11forrgoog_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/minutesproceedi11forrgoog/minutesproceedi11forrgoog_djvu.txt",
+   "note": "894467 B; 0 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded minutesproceedi00mgoog_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/minutesproceedi00mgoog/minutesproceedi00mgoog_djvu.txt",
+   "note": "1564016 B; 5 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded minutesproceedi02forrgoog_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/minutesproceedi02forrgoog/minutesproceedi02forrgoog_djvu.txt",
+   "note": "1268135 B; 2 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded minutesproceedi01manbgoog_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 1,
+   "url": "https://archive.org/download/minutesproceedi01manbgoog/minutesproceedi01manbgoog_djvu.txt",
+   "note": "1333714 B; 3 Whitworth-surname tokens; 1 speaking turns. KEPT."
+  },
+  {
+   "query": "downloaded minutesproceedi06forrgoog_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/minutesproceedi06forrgoog/minutesproceedi06forrgoog_djvu.txt",
+   "note": "1016541 B; 1 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded minutesproceedi04forrgoog_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/minutesproceedi04forrgoog/minutesproceedi04forrgoog_djvu.txt",
+   "note": "1953019 B; 1 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded minutesofprocee5911inst_0_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/minutesofprocee5911inst_0/minutesofprocee5911inst_0_djvu.txt",
+   "note": "1656262 B; 11 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded proceedingsinst01unkngoog_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/proceedingsinst01unkngoog/proceedingsinst01unkngoog_djvu.txt",
+   "note": "399740 B; 2 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded proceedingsinst05jourgoog_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/proceedingsinst05jourgoog/proceedingsinst05jourgoog_djvu.txt",
+   "note": "389350 B; 0 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded proceedingsinst00jourgoog_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/proceedingsinst00jourgoog/proceedingsinst00jourgoog_djvu.txt",
+   "note": "152695 B; 3 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded proceedingsinst02britgoog_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 4,
+   "url": "https://archive.org/download/proceedingsinst02britgoog/proceedingsinst02britgoog_djvu.txt",
+   "note": "1093182 B; 25 Whitworth-surname tokens; 4 speaking turns. KEPT."
+  },
+  {
+   "query": "downloaded proceedingsinst04jourgoog_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/proceedingsinst04jourgoog/proceedingsinst04jourgoog_djvu.txt",
+   "note": "832724 B; 3 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded proceedingsinst01engigoog_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 2,
+   "url": "https://archive.org/download/proceedingsinst01engigoog/proceedingsinst01engigoog_djvu.txt",
+   "note": "636953 B; 6 Whitworth-surname tokens; 2 speaking turns. KEPT."
+  },
+  {
+   "query": "downloaded proceedingsinst01jourgoog_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/proceedingsinst01jourgoog/proceedingsinst01jourgoog_djvu.txt",
+   "note": "460944 B; 6 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded proceedingsinst06jourgoog_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/proceedingsinst06jourgoog/proceedingsinst06jourgoog_djvu.txt",
+   "note": "798688 B; 11 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded proceedings22britgoog_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/proceedings22britgoog/proceedings22britgoog_djvu.txt",
+   "note": "1627579 B; 6 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded proceedings20britgoog_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/proceedings20britgoog/proceedings20britgoog_djvu.txt",
+   "note": "1566699 B; 25 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded proceedings21britgoog_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 2,
+   "url": "https://archive.org/download/proceedings21britgoog/proceedings21britgoog_djvu.txt",
+   "note": "2058646 B; 12 Whitworth-surname tokens; 2 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded heavyrifledordn00offigoog_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/heavyrifledordn00offigoog/heavyrifledordn00offigoog_djvu.txt",
+   "note": "288739 B; 15 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded rifledordnancea00thomgoog_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/rifledordnancea00thomgoog/rifledordnancea00thomgoog_djvu.txt",
+   "note": "329607 B; 18 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded rifledordnancea02thomgoog_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/rifledordnancea02thomgoog/rifledordnancea02thomgoog_djvu.txt",
+   "note": "425868 B; 18 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded b22286184_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/b22286184/b22286184_djvu.txt",
+   "note": "22080 B; 29 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded apopularintrodu00intrgoog_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/apopularintrodu00intrgoog/apopularintrodu00intrgoog_djvu.txt",
+   "note": "168466 B; 0 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded RoyalArtilleryVol2_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/RoyalArtilleryVol2/RoyalArtilleryVol2_djvu.txt",
+   "note": "1194333 B; 0 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded reportofbritisha40brit_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/reportofbritisha40brit/reportofbritisha40brit_djvu.txt",
+   "note": "1935765 B; 2 Whitworth-surname tokens; 0 speaking turns. KEPT."
+  },
+  {
+   "query": "downloaded reportofbritisha61brit_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/reportofbritisha61brit/reportofbritisha61brit_djvu.txt",
+   "note": "2146247 B; 6 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded reportofbritisha63brit_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/reportofbritisha63brit/reportofbritisha63brit_djvu.txt",
+   "note": "2748088 B; 29 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded reportofbritisha64brit_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/reportofbritisha64brit/reportofbritisha64brit_djvu.txt",
+   "note": "3664217 B; 7 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded reportofbritisha65brit_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/reportofbritisha65brit/reportofbritisha65brit_djvu.txt",
+   "note": "2569699 B; 2 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded reportofbritisha66brit_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/reportofbritisha66brit/reportofbritisha66brit_djvu.txt",
+   "note": "2531962 B; 3 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded reportofbritisha68brit_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/reportofbritisha68brit/reportofbritisha68brit_djvu.txt",
+   "note": "2716374 B; 2 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded artizan191861arti_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/artizan191861arti/artizan191861arti_djvu.txt",
+   "note": "3824790 B; 33 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded artizan201862arti_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/artizan201862arti/artizan201862arti_djvu.txt",
+   "note": "3313930 B; 51 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded artizan211863arti_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/artizan211863arti/artizan211863arti_djvu.txt",
+   "note": "3728326 B; 25 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded artizan221864arti_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/artizan221864arti/artizan221864arti_djvu.txt",
+   "note": "3798405 B; 13 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded artizan261868arti_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/artizan261868arti/artizan261868arti_djvu.txt",
+   "note": "3498487 B; 11 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded practicalme2318581859glas_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/practicalme2318581859glas/practicalme2318581859glas_djvu.txt",
+   "note": "3935257 B; 5 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded practicalme2418591860glas_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/practicalme2418591860glas/practicalme2418591860glas_djvu.txt",
+   "note": "3869339 B; 5 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded practicalme2118561857glas_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/practicalme2118561857glas/practicalme2118561857glas_djvu.txt",
+   "note": "3807601 B; 2 Whitworth-surname tokens; 0 speaking turns. 0 turns - not staged; the surname occurrences are member/council lists, library-catalogue entries, index entries or third-person mentions of the guns."
+  },
+  {
+   "query": "downloaded eminentpersons4_djvu.txt and regex-scanned the full text for Whitworth speaking turns",
+   "hits": 0,
+   "url": "https://archive.org/download/eminentpersons4/eminentpersons4_djvu.txt",
+   "note": "1012554 B; 27 Whitworth-surname tokens; 0 speaking turns. KEPT."
+  },
+  {
+   "query": "downloaded RoyalArtilleryVol2_djvu.txt from item royalartilleryvol2",
+   "hits": 0,
+   "url": "https://archive.org/download/royalartilleryvol2/RoyalArtilleryVol2_djvu.txt",
+   "note": "Only archive.org item matching the phrase 'ordnance select committee'. Default royalartilleryvol2_djvu.txt returned HTTP 404; correct filename is RoyalArtilleryVol2_djvu.txt. 1,182,304 B downloaded: ZERO Whitworth surname tokens in the entire volume."
+  },
+  {
+   "query": "downloaded 2015.43651.Eminent-Persons--Vol-4_djvu.txt from item in.ernet.dli.2015.43651",
+   "hits": 27,
+   "url": "https://archive.org/download/in.ernet.dli.2015.43651/2015.43651.Eminent-Persons--Vol-4_djvu.txt",
+   "note": "Digital Library of India item; non-standard filename. 1,012,554 B. 27 Whitworth tokens, 0 speaking turns - it is the reprinted Times obituary. KEPT as external."
+  },
+  {
+   "query": "en.wikisource.org api.php action=parse for 3 biographical articles",
+   "hits": 3,
+   "url": "https://en.wikisource.org/w/api.php?action=parse&page=<title>&prop=text|revid&formatversion=2&format=json",
+   "note": "index.php?action=raw returns only a transclusion wrapper for all three (EB1911 gave 184 B, PSM 772 B, DNB HTTP 404 on the wrong title 'Dictionary of THE National Biography'). action=parse expands the <pages index=...> transclusions. revids 11882430 / 11870782 / 8848376."
+  }
+ ],
+ "conversations": [
+  {
+   "identifier": "proceedingsinst02britgoog",
+   "container_title": "Proceedings of the Institution of Mechanical Engineers",
+   "volume_and_year_from_TEXT": "title page reads 'INSTITUTION or MECHANICAL ENGINEERS. PROCEEDINGS. 1875 PUBLISHED BY THE INSTITUTION, 81 Newhall Stbeet, Birmingham.' -> IMechE Proceedings for 1875 (published 1875). archive.org date field says '1849' and is WRONG (series-level date).",
+   "creator_field_verbatim": "['Institution of Mechanical Engineers (Great Britain)', 'Institution of Mechanical Engineers (Great Britain). Journal']",
+   "whitworth_turn_count": 4,
+   "verbatim_turn_samples": [
+    "Sir  J.  Whitworth  exhibited  the  iron  plate  referred  to  in  the \npaper,  and  the  three  projectiles — flat-headed,  ronnd-headed,  and \npointed — which  had  been  fired  against  it  obliquely  through  80  in.  of \nwater,  the  point  aimed  at  being  10  in.  below  the  surface  of  the \nwater  (see  Plate  48).  It  was  seen  that  the  flat-headed  shot  (Fig.  15) \nhad  struck  at  F  within  about  an  inch  of  the  level  of  the  point \naimed  at  (A,  Fig.  14i),  having  been  scarcely  at  all  deflected  upwards \nby  the  water.  The  round-headed  shot  (Fig.  16),  though  aimed \nat  t",
+    "Sir  J.  Whitworth  remarked  that,  when  the  pressure  of  6  tons \nper  sq.  in.  was  applied  to  the  fluid  metal  in  the  mould,  a  column  of \nflaid  metal  of  8  ft.  height  was  reduced  1  ft.  in  less  than  five  minutes. \nNo  doubt  there  was  a  great  deal  of  gas  expelled  during  the \ncompression,  but  he  believed  nine-tenths  of  it  was  common  air ; \nthere  was  a  portion  of  other  gas  mixed  with  the  air,  because  it \nwas  burning  while  the  pressure  was  on,  but  the  greater  portion \nhe  considered  must  be  common  air. \n\nIt  had  been  pointed  out  that  in  c",
+    "Sir  J.  Whitwobth  said  he  had  not  made  any  trial  of  applying \npressure  to  cast  iron  in  a  fluid  state.  It  should  be  distinctly \nunderstood  that  the  value  of  the  process  of  compressing  fluid  steel \nunder  the  heavy  pressure  employed  was  not  in  proportion  to  the \nductility  alone  of  the  metal  so  produced,  but  consisted  in  obtaining \nhigh  tensile  strength  in  combination  with  ductility.  He  had  himself \nnever  met  with  a  sound  steel  ingot,  cast  in  the  ordinary  way,  that  had \nanything  like  30  per  cent,  of  ductility ;  and  he  should  be  glad  ",
+    "Sir  J.  Whitwobth  mentioned  that  his  first  experiments  on  the \nuse  of  fluid  compressed  steel  for  guns  had  been  made  by  subjecting \nthe  material  to  a  gunpowder  strain,  using  small  tubes  like  the \nspecimens  shown  (see  Figs.  3  to  8,  Plate  47),  and  measuring  the \nstrength  of  the  metal  by  the  number  of  grains  of  gunpowder \nrequired  to  burst  the  tubes ;  as  many  as  3000  of  these  tubes  had \nbeen  burst  experimentally  in  that  way.  Now  however  he  had \nentirely  given  up  that  mode  of  testing,  and  had  adopted  in  preference \nthe  more  definite  t"
+   ],
+   "bytes": 1093182,
+   "sha256_12": "e7403b89a239",
+   "staged_path": "/Users/linzezhang/Documents/Codex/AgentDatabase/character-distillation-skill-reorganize-d57595/CodexSkills/registry/codex/persona-distiller/_corpora/wip-whitworth-152/_fetch-staging-2/proceedingsinst02britgoog_djvu.txt",
+   "归堆依据": "Four discussion turns by Whitworth in the debate on his own paper 'ON FLUID COMPRESSED STEEL AND GUNS' (p.268). Turn count independently confirmed by the volume's OWN index, which reads 'Whitworth, Sir J., 281, 290, 295, 303' - 4 page references, matching the 4 turns the detector found. Society-bylined volume, so creator:Whitworth cannot reach it.",
+   "public_domain_basis": "Published 1875 (from title page in TEXT) < 1931. archive.org possible-copyright-status = 'NOT_IN_COPYRIGHT'."
+  },
+  {
+   "identifier": "proceedingsinst01engigoog",
+   "container_title": "Proceedings - Institution of Mechanical Engineers",
+   "volume_and_year_from_TEXT": "title page reads 'INSTITUTION or MECHANICAL ENGINEERS. PROCEEDINGS. 1847-1849. PUBLISHED BY THE INSTITUTION 184 9.' -> sessions 1847-1849, published 1849. archive.org date field says '1849' (series-level; here it happens to agree).",
+   "creator_field_verbatim": "'Journal,  Institution of Mechanical Engineers'",
+   "whitworth_turn_count": 2,
+   "verbatim_turn_samples": [
+    "Mr. Whitworth seconded the motion, and it was passed. ",
+    "Mr. Whitworth said it was very simple, it was a worm \nworking in two wheels, and counted up as high as 30,000. "
+   ],
+   "bytes": 636953,
+   "sha256_12": "7ddafdc7c7bc",
+   "staged_path": "/Users/linzezhang/Documents/Codex/AgentDatabase/character-distillation-skill-reorganize-d57595/CodexSkills/registry/codex/persona-distiller/_corpora/wip-whitworth-152/_fetch-staging-2/proceedingsinst01engigoog_djvu.txt",
+   "归堆依据": "Two turns at IMechE ordinary/annual meetings in the 1847-1849 sessions: one procedural (seconding a motion) and one substantive answer about his revolution counter. Whitworth was a founding member; this is the earliest IMechE run on archive.org.",
+   "public_domain_basis": "Published 1849 (from title page in TEXT) < 1931. archive.org possible-copyright-status = 'NOT_IN_COPYRIGHT'.",
+   "duplicate_warning": "proceedings21britgoog is a SECOND scan of the same 1847-1849 volume (its title page also reads 'PBOCEEDINGS. 1847-1849. ... 1849.'). It yields the SAME two turns with the same wording. It is NOT staged and must NOT be counted as a second, independent source."
+  },
+  {
+   "identifier": "minutesproceedi01manbgoog",
+   "container_title": "Minutes of Proceedings of the Institution of Civil Engineers; with Abstracts of the Discussions",
+   "volume_and_year_from_TEXT": "title page reads 'MINUTES OF PROCEEDINGS OP THS INSTITUTION OF CIVIL ENGINEERS; WITH ABSTRACTS OF THE DISCUSSIONS. Vol. IX. SESSION 1849^50. EDITED BT CHAELES MANBY ... LONDON ... 1850.' -> Vol. IX, session 1849-50, published 1850.",
+   "creator_field_verbatim": "'CHARLES MANBY'",
+   "whitworth_turn_count": 1,
+   "verbatim_turn_samples": [
+    "Mr.  Whitwobth  said  he  had  much  pleasure  in  bearing  testi- \nmony to  the  great  value  of  Mr.  Chubb's  locks ;  he  used  them \nalmost  invariably  in  his  establishment,  and  never  found  them  get \nout  of  order.  The  workmanship  in  them  was  of  the  best  kind,  and \nhe  thought  it  would  be  impossible  to  pick  them,  by  the  means  that \nhad  been  mentioned,  or  by  any  picklock  keys,  as  long  as  the  detector \nwas  in  good  order ;  that  was  the  main  feature  of  the  lock,  and  dis- \ntinguished it  from  all  other  tumbler  locks. "
+   ],
+   "bytes": 1333714,
+   "sha256_12": "46a906501c67",
+   "staged_path": "/Users/linzezhang/Documents/Codex/AgentDatabase/character-distillation-skill-reorganize-d57595/CodexSkills/registry/codex/persona-distiller/_corpora/wip-whitworth-152/_fetch-staging-2/minutesproceedi01manbgoog_djvu.txt",
+   "归堆依据": "One discussion turn in the ICE debate on Chubb's locks. Turn count independently confirmed by the volume's OWN index: 'Whitworth, J., remarks on Chubb's locks, 339,' - one page reference, one turn. Note the OCR renders the surname 'Whitwobth' in the turn itself.",
+   "public_domain_basis": "Published 1850 (from title page in TEXT) < 1931. archive.org possible-copyright-status = 'NOT_IN_COPYRIGHT'."
+  },
+  {
+   "identifier": "reportofbritisha40brit",
+   "container_title": "Report of the British Association for the Advancement of Science",
+   "volume_and_year_from_TEXT": "title page reads 'REPORT ... TENTH MEETING ... BRITISH ASSOCIATION FOR THE ADVANCEMENT OF SCIENCE; HELD AT GLASGOW IN AUGUST 1840. LONDON: JOHN MURRAY, ALBEMARLE STREET. 1841.' -> Glasgow meeting August 1840, published 1841. archive.org has NO date field for this item at all.",
+   "creator_field_verbatim": "'British Association for the Advancement of Science'",
+   "whitworth_turn_count": 0,
+   "whitworth_communication_count": 1,
+   "verbatim_turn_samples": [
+    "On producing True Planes or Surfaces on Metals. \nBy Mr. JoserpH WuitworTu. \n\n\nSurface plates were exhibited, of which, if one be put upon the \nother, it will float, until by its weight it has excluded some of the air, \nwhen the two will adhere together with considerable force. These \nsurfaces were got up without grinding. The only operations performed \nupon them were those of planing, filing, and scraping. Practically, \nthe excellence of a surface consists in the number and equal distribu- \ntion of the bearing points. But if a ground surface be carefully \nexamined, the bearing points will be generally found lying together in \nirregular masses, with extensive cavities intervening. The cause of \nthis irregularity is in the unmanageable nature of the process. The \naction of the grinding powder is under no control. There are no \nmeans for securing its equal diffusion, or for modifying its application, \nwith reference to the particular condition of different parts of the sur- \nface ; the practical result is, that the mechanic neglects the proper use \nof the file, knowing that grinding will follow, to efface all evidence \neither of care or neglect. In various departments of the arts and \nmanufactures, the want of improvement in this respect is already felt. \nThe valves of ste"
+   ],
+   "bytes": 1935765,
+   "sha256_12": "2ee511e33694",
+   "staged_path": "/Users/linzezhang/Documents/Codex/AgentDatabase/character-distillation-skill-reorganize-d57595/CodexSkills/registry/codex/persona-distiller/_corpora/wip-whitworth-152/_fetch-staging-2/reportofbritisha40brit_djvu.txt",
+   "归堆依据": "This is the 1840 Glasgow BAAS meeting named in the brief (true-plane / three-plate method). CAVEAT, stated honestly: it is NOT a 'Mr. WHITWORTH said' discussion turn - the strict turn detector returns 0 for this volume. It is the printed ABSTRACT of his communication to the Mechanical Science section, headed 'On producing True Planes or Surfaces on Metals. By Mr. JoserpH WuitworTu.' (p.192), reported in the third person ('Surface plates were exhibited...') but carrying his own argument. Located via the volume's contents list and index ('Whitworth (Mr. Joseph) on producing true planes or surfaces on metals, 192.'). Filed under conversations because it is a meeting-floor communication, not a book; a reviewer who wants strict first-person turns should discount it.",
+   "public_domain_basis": "Published 1841 (from title page in TEXT) < 1931. archive.org possible-copyright-status = 'Public domain. The BHL considers that this work is no longer under copyright protection'.",
+   "overlap_check_vs_batch1": "NOT a reprint of the 1858 Miscellaneous Papers essay 'On Plane Metallic Surfaces'. Checked the batch-1 staging files for the abstract's distinctive strings: 'excellence of a surface consists' -> 0 hits, 'without grinding' -> 0 hits. The 1858 essay is a longer, differently-worded treatment."
+  }
+ ],
+ "decisions": [],
+ "decisions_note": "NOTHING OBTAINED. No item in this lane was staged. What was tried and what happened: (1) archive.org has exactly ONE item matching the phrase 'ordnance select committee' - royalartilleryvol2 (Minutes of Proceedings of the Royal Artillery Institution Vol.2, 1861). Downloaded it (1,182,304 B, correct filename RoyalArtilleryVol2_djvu.txt after the default name 404'd): ZERO Whitworth tokens in the whole volume. (2) Searches for Select Committee / parliamentary / Command Paper material returned numFound=0 - the 1863 Ordnance Select Committee report does not appear to be on archive.org at all. (3) The third-party ordnance treatises that DO exist (heavyrifledordn00offigoog 1871, rifledordnancea00thomgoog 1863, rifledordnancea02thomgoog 1859, b22286184 1865) discuss his guns in the third person and contain no statement by him; they are about the technology, not his choices. (4) The Practical Mechanic's Journal volumes for 1856-57, 1858-59 and 1859-60 were downloaded and scanned - 2 to 5 Whitworth mentions each in ~3.9 MB, zero turns, zero signed letters. Deliberately NOT done: re-filing the IMechE 1875 volume into this lane as well. It does contain him stating choices (proposing a wrought-iron/steel definition and a standard, and explaining why he chose the gunpowder-strain test), but it is ONE file and would be one piece of evidence wearing two lane labels.",
+ "external": [
+  {
+   "identifier": "paper-doi-10_1038_035304a0",
+   "container_title": "Nature, vol. 35, 27 January 1887 - obituary 'SIR JOSEPH WHITWORTH'",
+   "volume_and_year_from_TEXT": "TEXT running head reads '304  NA TURE  [Jan. 2 7 , 1887' -> Nature issue of 27 January 1887. archive.org date field '1887-01' agrees.",
+   "creator_field_verbatim": "(no creator field on this item)",
+   "whitworth_turn_count": 0,
+   "verbatim_turn_samples": [],
+   "bytes": 16530,
+   "sha256_12": "7ef2132ccbad",
+   "staged_path": "/Users/linzezhang/Documents/Codex/AgentDatabase/character-distillation-skill-reorganize-d57595/CodexSkills/registry/codex/persona-distiller/_corpora/wip-whitworth-152/_fetch-staging-2/paper-doi-10_1038_035304a0_djvu.txt",
+   "归堆依据": "Obituary published five days after his death (22 Jan 1887). Confirmed the right man from the TEXT: 'He was bom on December 21, 1803, at Stockport, where his father was a schoolmaster.'",
+   "public_domain_basis": "Published Jan 1887 < 1931. archive.org licenseurl = 'https://creativecommons.org/publicdomain/mark/1.0/' and description states verbatim: 'This paper is in the public domain in USA.'"
+  },
+  {
+   "identifier": "creatorsofageofs00jeanrich",
+   "container_title": "William T. Jeans, 'The creators of the age of steel' (New York: Scribner's, 1884), Chapter VIII 'SIR JOSEPH WHITWORTH', pp. 213-268",
+   "volume_and_year_from_TEXT": "archive.org date field '1884'; the TEXT contents page confirms the chapter 'SIR JOSEPH WHITWORTH. CHAPTER VIII.' with page range '213 - 268'.",
+   "creator_field_verbatim": "'Jeans, William T'",
+   "whitworth_turn_count": 0,
+   "verbatim_turn_samples": [],
+   "bytes": 875177,
+   "sha256_12": "1bc47797d405",
+   "staged_path": "/Users/linzezhang/Documents/Codex/AgentDatabase/character-distillation-skill-reorganize-d57595/CodexSkills/registry/codex/persona-distiller/_corpora/wip-whitworth-152/_fetch-staging-2/creatorsofageofs00jeanrich_djvu.txt",
+   "归堆依据": "Full biographical chapter. Right man confirmed from the TEXT: 'Joseph  Whitworth  was  born  at  Stockport,  in  Cheshire, on  the  21st  of  December,  1803.' 129 Whitworth mentions in the volume.",
+   "public_domain_basis": "Published 1884 < 1931. archive.org possible-copyright-status = 'NOT_IN_COPYRIGHT'."
+  },
+  {
+   "identifier": "in.ernet.dli.2015.43651",
+   "container_title": "'EMINENT PERSONS: BIOGRAPHIES REPRINTED FROM THE TIMES', Volume IV (Macmillan, 1893) - 'Sir Joseph Whitworth', pp. 10-17",
+   "volume_and_year_from_TEXT": "TEXT title page reads 'EMINENT PEK'SONS BIOGRAPHIES EEPRINTED FROM THE TIMES ... VOLUME IV ... MACMILLAN AND CO. ... 1893'. archive.org date field '1893' agrees.",
+   "creator_field_verbatim": "'Not Available'",
+   "whitworth_turn_count": 0,
+   "verbatim_turn_samples": [],
+   "bytes": 1012554,
+   "sha256_12": "d5497bdf9396",
+   "staged_path": "/Users/linzezhang/Documents/Codex/AgentDatabase/character-distillation-skill-reorganize-d57595/CodexSkills/registry/codex/persona-distiller/_corpora/wip-whitworth-152/_fetch-staging-2/in.ernet.dli.2015.43651_eminent-persons-vol4_djvu.txt",
+   "归堆依据": "The Times obituary itself, reprinted: the article is headed 'Sm JOSEPH WlHTWOllTH / Obituary Notice, Monday, January 24, 1887'. Contents page lists 'Sir Joskph Whitworth ..... 10'. This is a different text from the Nature obituary above - it carries anecdotes the others do not, e.g. Hampson's comment on the finished true plane, 'You've done it.'",
+   "public_domain_basis": "Published 1893 < 1931."
+  },
+  {
+   "identifier": "wikisource:Dictionary of National Biography, 1885-1900/Whitworth, Joseph",
+   "container_title": "Dictionary of National Biography, 1885-1900, Volume 61 - 'Whitworth, Joseph', by Thomas Seccombe",
+   "volume_and_year_from_TEXT": "TEXT header reads 'Dictionary of National Biography, 1885-1900, Volume 61 - Whitworth, Joseph1900Thomas Seccombe (1866-1923)' -> DNB vol 61, 1900.",
+   "creator_field_verbatim": "Thomas Seccombe (1866-1923), per the page's own header",
+   "whitworth_turn_count": 0,
+   "verbatim_turn_samples": [],
+   "bytes": 19617,
+   "sha256_12": "b3b171c8d30f",
+   "staged_path": "/Users/linzezhang/Documents/Codex/AgentDatabase/character-distillation-skill-reorganize-d57595/CodexSkills/registry/codex/persona-distiller/_corpora/wip-whitworth-152/_fetch-staging-2/wikisource_dnb_whitworth_joseph.txt",
+   "归堆依据": "Standard scholarly biography. Right man confirmed from the TEXT: 'WHITWORTH, Sir JOSEPH (1803-1887) baronet, mechanical engineer'. Fetched via api.php action=parse (revid 11882430) because action=raw returns only a transclusion wrapper.",
+   "public_domain_basis": "DNB vol 61 published 1900 < 1931; author Seccombe d. 1923."
+  },
+  {
+   "identifier": "wikisource:1911 Encyclopaedia Britannica/Whitworth, Sir Joseph",
+   "container_title": "1911 Encyclopaedia Britannica, Volume 28 - 'Whitworth, Sir Joseph' (p. 636)",
+   "volume_and_year_from_TEXT": "TEXT header reads '1911 Encyclopaedia Britannica, Volume 28 - Whitworth, Sir Joseph'; source index is 'EB1911 - Volume 28.djvu' page 636 -> published 1911.",
+   "creator_field_verbatim": "(unsigned article)",
+   "whitworth_turn_count": 0,
+   "verbatim_turn_samples": [],
+   "bytes": 5116,
+   "sha256_12": "5b3004520a82",
+   "staged_path": "/Users/linzezhang/Documents/Codex/AgentDatabase/character-distillation-skill-reorganize-d57595/CodexSkills/registry/codex/persona-distiller/_corpora/wip-whitworth-152/_fetch-staging-2/wikisource_eb1911_whitworth.txt",
+   "归堆依据": "Right man confirmed from the TEXT: 'WHITWORTH, SIR JOSEPH, Bart. (1803-1887), English engineer, was born at Stockport, near Manchester, on the 21st of December 1803.' Fetched via api.php action=parse (revid 11870782).",
+   "public_domain_basis": "Published 1911 < 1931."
+  },
+  {
+   "identifier": "wikisource:Popular Science Monthly/Volume 32/February 1888/Sketch of Sir Joseph Whitworth",
+   "container_title": "Popular Science Monthly, Volume 32, February 1888 - 'Sketch of Sir Joseph Whitworth' (pp. 448, 568-571)",
+   "volume_and_year_from_TEXT": "TEXT header reads 'Popular Science Monthly Volume 32 February 1888 (1888)' -> February 1888.",
+   "creator_field_verbatim": "(unsigned sketch)",
+   "whitworth_turn_count": 0,
+   "verbatim_turn_samples": [],
+   "bytes": 12099,
+   "sha256_12": "7d1244729769",
+   "staged_path": "/Users/linzezhang/Documents/Codex/AgentDatabase/character-distillation-skill-reorganize-d57595/CodexSkills/registry/codex/persona-distiller/_corpora/wip-whitworth-152/_fetch-staging-2/wikisource_psm_1888_sketch_whitworth.txt",
+   "归堆依据": "American third-party sketch written just after his death, so it is an outside-Britain view. Opens: 'THE value of Sir Joseph Whitworth's work, and the extent to which it has entered into common life, are exemplified whenever a screw-tap is fitted to a bolt.' Fetched via api.php action=parse (revid 8848376).",
+   "public_domain_basis": "Published February 1888 < 1931."
+  }
+ ],
+ "rejected_namesake_hits": [
+  {
+   "identifier": "whitworthmeasur00whitgoog",
+   "why_rejected": "Named AFTER him, not written BY him - and the archive.org creator array wrongly lists him as an author, exactly as flagged in the brief. Title page attributes the book to Goodeve and Shelley.",
+   "verbatim_evidence": "creator = ['Goodeve, T. M. (Thomas Minchin), b. 1821', 'Shelley, C. P. B. (Charles Percy Bysshe), 1827-1890', 'Whitworth, Joseph, 1803-1887'] ; title = 'The Whitworth measuring machine : including descriptions of the surface plates, gauges, and other measuring instruments, made by Sir Joseph Whitworth, bart., C.E. F.R.S. D.C.L. LL.D. &c. '"
+  },
+  {
+   "identifier": "thewhitworthmeasuringmachine1877",
+   "why_rejected": "Second copy of the same 1877 Goodeve/Shelley manual, with the same wrong authorship attribution - and it puts his name FIRST.",
+   "verbatim_evidence": "creator = ['Joseph Whitworth', 'Thomas M. Goodeve', 'Charles P. B. Shelley'] ; title = 'The Whitworth Measuring Machine' ; date = '1877'"
+  },
+  {
+   "identifier": "in.ernet.dli.2015.214875",
+   "why_rejected": "William Allen Whitworth (1840-1905), mathematician/clergyman - the fully date-overlapping namesake.",
+   "verbatim_evidence": "creator = 'Whitworth William Allen.' ; title = 'Trilinear Coordinates' ; date = '1866'"
+  },
+  {
+   "identifier": "knights-of-malta-1884-whitworth-porter",
+   "why_rejected": "Whitworth Porter (1827-1892), Major-General RE. 'Whitworth' is his FORENAME; surname Porter.",
+   "verbatim_evidence": "creator = 'Whitworth Porter' ; title = 'Knights Of Malta - Whitworth Porter' ; date = '1884'"
+  },
+  {
+   "identifier": "history-of-the-corps-of-royal-engineers-vol.-1-whitworth-porter / vol.-2 / in.ernet.dli.2015.278855 / in.ernet.dli.2015.278856",
+   "why_rejected": "Four more Whitworth Porter items (History of the Corps of Royal Engineers, 1889), same forename collision.",
+   "verbatim_evidence": "creator = 'Whitworth Porter' ; titles 'History of the Corps of Royal Engineers, vol. 1' / 'vol. 2' / 'History Of The Corps Vol 1' / 'History Of The Corps Vol 2' ; date = '1889'"
+  },
+  {
+   "identifier": "englandnapoleoni00whituoft / englandnapoleoni00whitrich / cu31924024324711 / india.history.resource.89671",
+   "why_rejected": "Charles Whitworth, Earl (1752-1825), diplomat - four separate scans of his Napoleon despatches. Note the 1887 publication date sits right next to Joseph's death year.",
+   "verbatim_evidence": "creator = 'Whitworth Charles Whitworth, Earl, 1752-1825; Browning, ...' ; title = 'England and Napoleon in 1803 : being the despatches of Lord Whitworth and o...' ; date = '1887'"
+  },
+  {
+   "identifier": "in.ernet.dli.2015.45332 / in.ernet.dli.2015.12873",
+   "why_rejected": "George Clifford Whitworth, British-India civil servant.",
+   "verbatim_evidence": "creator = 'Whitworth, George Cliford' title 'An Anglo Indian Dictionary' (1885); creator = 'George Clifford Whitworth' title 'Indian English' (1907)"
+  },
+  {
+   "identifier": "per_scotus_1885_934 / per_scotus_1885_935",
+   "why_rejected": "George K. Whitworth, a US litigant - two Supreme Court records.",
+   "verbatim_evidence": "title = 'The State of Tennessee, Plaintiff in Error, vs. George K. Whitworth, Truste...' ; creator = 'Supreme Court of the United States' ; date = '1885'"
+  },
+  {
+   "identifier": "in.ernet.dli.2015.80611",
+   "why_rejected": "Geoffrey Whitworth (1883-1951), drama critic - a namesake NOT on the brief's list, found during this run.",
+   "verbatim_evidence": "creator = 'Geoffrey Whitworth' ; title = 'The Art Of Nijinsky' ; date = '1913'"
+  },
+  {
+   "identifier": "songslyricsbycha00cayz / catalogueofmoderchri_0",
+   "why_rejected": "'Whitworth' as a middle name: Charles Whitworth Wynne (1900) and James Whitworth Shaw (1900).",
+   "verbatim_evidence": "title = 'Songs and lyrics by Charles Whitworth Wynne' ; title = 'Catalogue of modern pictures and drawings of James Whitworth Shaw, Esq'"
+  },
+  {
+   "identifier": "NASA_NTRS_Archive_19930090875 / NASA_NTRS_Archive_19930089054",
+   "why_rejected": "Armstrong Whitworth the AIRCRAFT COMPANY (1926/1928), inside the PD window and therefore a live trap.",
+   "verbatim_evidence": "title = 'NASA Technical Reports Server (NTRS) 19930090875: The Armstrong Whitworth \"...' (1928); '...19930089054: The Armstrong-Whitworth \"...' (1926)"
+  },
+  {
+   "identifier": "b2234875x",
+   "why_rejected": "The Whitworth Hospital, Dublin - a place name, not a person.",
+   "verbatim_evidence": "title = 'Richmond, Whitworth, & Hardwicke hospitals : introductory lecture (winter s...' ; creator = 'Corrigan, Dominic John, 1802-1880; Royal College of Sur...' ; date = '1858'"
+  },
+  {
+   "identifier": "minutesofproceed24inst (in-text, not an item)",
+   "why_rejected": "A DIFFERENT Whitworth inside a volume I was scanning: 'William Stanley Whitworth', elected an ICE Associate. Would have been miscounted as the target if I had trusted surname hits alone.",
+   "verbatim_evidence": "'William  Stanley  Whitworth,  George  Wythes,  and  George \\nEdward  Wythes,  as  Associates.' and the index line 'Whitworth,  W.  S,,  elected  associate,  184.'"
+  },
+  {
+   "identifier": "minutesofproceed34inst (in-text, not an item)",
+   "why_rejected": "NOT a namesake but a NEAR-MISS SURNAME that my own OCR-tolerant regex initially matched: Thomas Whitwell, ironmaster. My first broadened pattern scored this volume 2 'turns'; both were Whitwell. Fixed by forbidding 'e' in the o-position and making the r-position mandatory.",
+   "verbatim_evidence": "'Mr.  T.  Whitwell  said  there  was  a  remark  in   the  Paper  with \\nregard  to  the  \"  proper  size  \"  of  furnace.'"
+  },
+  {
+   "identifier": "(cross-cutting) journalofsociety* identifier prefix",
+   "why_rejected": "CONTAINER collision rather than a person collision: the same identifier stem covers four unrelated journals - Society of Arts, Society for Psychical Research, Society of Motion Picture Engineers, Society for British Entomology. Volume-number guessing across this prefix would silently fetch the wrong journal.",
+   "verbatim_evidence": "journalofsociety16socirich -> 'Journal of the Society of Motion Picture Engineers' (1931); journalofsociety16sociuoft -> 'Journal of the Society for Psychical Research' (1884); journalofsociety17soci_0 -> 'Journal of the Society of Arts'"
+  },
+  {
+   "identifier": "(cross-cutting) fuzzy-sweep surname near-misses",
+   "why_rejected": "The independent edit-distance sweep surfaced these surnames within distance 3 of 'whitworth' across the scanned volumes; all correctly excluded by the primary regex. Listed so the exclusion is auditable rather than assumed.",
+   "verbatim_evidence": "Wentworth (12 in reportofbritisha66brit, 14 in reportofbritisha68brit, 12 in minutesofprocee5911inst_0), Walworth (7 in artizan191861arti, 7 in artizan201862arti), Wadsworth, Warkworth, Winkworth, Whitmore, Whitford, Woodworth, Whitwoll/WhitwolL, Whitwell"
+  }
+ ],
+ "blocked_channels": [
+  {
+   "channel": "ia-fts.archive.org (archive.org full-text search API)",
+   "http_status": "not retried this run",
+   "what_i_tried": "NOT ATTEMPTED. The brief records it as HTTP 000 (domain unreachable) from a prior run and instructs not to retry. Consequence: every 'does this volume mention him' question had to be answered by downloading the whole _djvu.txt and regexing it locally, which is why 59 volumes were fetched."
+  },
+  {
+   "channel": "Google Books API",
+   "http_status": "not retried this run",
+   "what_i_tried": "NOT ATTEMPTED. Brief records HTTP 429, 'Quota exceeded for quota metric Queries and limit Queries per day' - a DAILY quota, so it would still be exhausted."
+  },
+  {
+   "channel": "catalog.hathitrust.org",
+   "http_status": "not retried this run",
+   "what_i_tried": "NOT ATTEMPTED. Brief records HTTP 403 (Cloudflare challenge). Bypassing it would mean defeating an access control."
+  },
+  {
+   "channel": "archive.org download of proceedingsinst07jourgoog_djvu.txt",
+   "http_status": "500",
+   "what_i_tried": "The item's metadata lists proceedingsinst07jourgoog_djvu.txt at 470,031 B, but GET returned HTTP 500 with a 170-byte body on two separate attempts (08:25 and again after deleting the stub). Server-side error, not an access control. This IMechE volume is therefore UNCHECKED - recorded as a gap, not as a zero."
+  },
+  {
+   "channel": "archive.org download of royalartilleryvol2_djvu.txt (default name)",
+   "http_status": "404",
+   "what_i_tried": "Default <identifier>_djvu.txt 404'd. Read the item metadata, found the real filename RoyalArtilleryVol2_djvu.txt (capitalised), and fetched it successfully. Not a block - recorded because a naive 404 would have looked like 'no text available'."
+  },
+  {
+   "channel": "en.wikisource.org index.php?action=raw",
+   "http_status": "200 (but useless) / 404",
+   "what_i_tried": "action=raw returned transclusion wrappers only (EB1911 184 B, PSM 772 B) and 404 for the DNB page under the wrong title. Switched to api.php?action=parse, which expands the <pages index=...> transclusions. Not blocked, just the wrong endpoint."
+  },
+  {
+   "channel": "archive.org advancedsearch boolean full-text queries",
+   "http_status": "200, numFound=0",
+   "what_i_tried": "Queries such as '(Whitworth AND Armstrong AND (gun OR ordnance OR artillery)) AND mediatype:texts AND date:[...]' and '(\"small arms\") AND (\"select committee\")' return 200 with numFound=0. advancedsearch indexes metadata, not full text, so bare-term conjunctions silently return nothing rather than erroring. Every 0 in the query log below that came from such a query means 'this metadata query matched nothing', NOT 'no such document exists'."
+  }
+ ],
+ "totals": {
+  "conversations_count": 4,
+  "decisions_count": 0,
+  "external_count": 6,
+  "total_bytes": 6940707,
+  "volumes_checked_zero_hits": 54,
+  "volumes_downloaded_and_scanned_total": 60,
+  "bytes_downloaded_and_scanned_but_not_staged": 95910893,
+  "counting_rule": "volumes_checked_zero_hits counts volumes fully downloaded and regex-scanned that yielded 0 Whitworth speaking turns and were therefore NOT staged. It EXCLUDES the 5 kept items and EXCLUDES proceedingsinst07jourgoog, which never downloaded (HTTP 500) and is an unchecked gap rather than a zero."
+ },
+ "volume_scan_table": [
+  {
+   "identifier": "proceedingsinst02britgoog",
+   "bytes": 1093182,
+   "surname_tokens": 25,
+   "speaking_turns": 4
+  },
+  {
+   "identifier": "proceedings21britgoog",
+   "bytes": 2058646,
+   "surname_tokens": 12,
+   "speaking_turns": 2
+  },
+  {
+   "identifier": "proceedingsinst01engigoog",
+   "bytes": 636953,
+   "surname_tokens": 6,
+   "speaking_turns": 2
+  },
+  {
+   "identifier": "minutesproceedi01manbgoog",
+   "bytes": 1333714,
+   "surname_tokens": 3,
+   "speaking_turns": 1
+  },
+  {
+   "identifier": "artizan201862arti",
+   "bytes": 3313930,
+   "surname_tokens": 51,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "artizan191861arti",
+   "bytes": 3824790,
+   "surname_tokens": 33,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "b22286184",
+   "bytes": 22080,
+   "surname_tokens": 29,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "reportofbritisha63brit",
+   "bytes": 2748088,
+   "surname_tokens": 29,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "eminentpersons4",
+   "bytes": 1012554,
+   "surname_tokens": 27,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "proceedings20britgoog",
+   "bytes": 1566699,
+   "surname_tokens": 25,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "artizan211863arti",
+   "bytes": 3728326,
+   "surname_tokens": 25,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "minutesofproceed34inst",
+   "bytes": 1212224,
+   "surname_tokens": 21,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "rifledordnancea00thomgoog",
+   "bytes": 329607,
+   "surname_tokens": 18,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "rifledordnancea02thomgoog",
+   "bytes": 425868,
+   "surname_tokens": 18,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "heavyrifledordn00offigoog",
+   "bytes": 288739,
+   "surname_tokens": 15,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "artizan221864arti",
+   "bytes": 3798405,
+   "surname_tokens": 13,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "minutesproceedi00engigoog",
+   "bytes": 1973168,
+   "surname_tokens": 11,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "minutesofprocee5911inst_0",
+   "bytes": 1656262,
+   "surname_tokens": 11,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "proceedingsinst06jourgoog",
+   "bytes": 798688,
+   "surname_tokens": 11,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "artizan261868arti",
+   "bytes": 3498487,
+   "surname_tokens": 11,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "minutesofproceed27inst",
+   "bytes": 2012304,
+   "surname_tokens": 9,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "minutesofproceed29inst",
+   "bytes": 1596921,
+   "surname_tokens": 9,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "minutesofproceed37inst",
+   "bytes": 1166349,
+   "surname_tokens": 7,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "reportofbritisha64brit",
+   "bytes": 3664217,
+   "surname_tokens": 7,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "proceedingsinst01jourgoog",
+   "bytes": 460944,
+   "surname_tokens": 6,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "proceedings22britgoog",
+   "bytes": 1627579,
+   "surname_tokens": 6,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "reportofbritisha61brit",
+   "bytes": 2146247,
+   "surname_tokens": 6,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "minutesproceedi00mgoog",
+   "bytes": 1564016,
+   "surname_tokens": 5,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "practicalme2318581859glas",
+   "bytes": 3935257,
+   "surname_tokens": 5,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "practicalme2418591860glas",
+   "bytes": 3869339,
+   "surname_tokens": 5,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "minutesofproceed24inst",
+   "bytes": 1767771,
+   "surname_tokens": 4,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "minutesofproceed33inst",
+   "bytes": 1319065,
+   "surname_tokens": 4,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "minutesofproceed39inst",
+   "bytes": 1378381,
+   "surname_tokens": 4,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "minutesofproceed23inst",
+   "bytes": 1707041,
+   "surname_tokens": 3,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "minutesofproceed28inst",
+   "bytes": 2069819,
+   "surname_tokens": 3,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "minutesofproceed35inst",
+   "bytes": 1776996,
+   "surname_tokens": 3,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "minutesproceedi01secrgoog",
+   "bytes": 1677945,
+   "surname_tokens": 3,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "proceedingsinst00jourgoog",
+   "bytes": 152695,
+   "surname_tokens": 3,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "proceedingsinst04jourgoog",
+   "bytes": 832724,
+   "surname_tokens": 3,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "reportofbritisha66brit",
+   "bytes": 2531962,
+   "surname_tokens": 3,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "minutesofproceed3130inst",
+   "bytes": 1196332,
+   "surname_tokens": 2,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "minutesproceedi02forrgoog",
+   "bytes": 1268135,
+   "surname_tokens": 2,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "proceedingsinst01unkngoog",
+   "bytes": 399740,
+   "surname_tokens": 2,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "reportofbritisha40brit",
+   "bytes": 1935765,
+   "surname_tokens": 2,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "reportofbritisha65brit",
+   "bytes": 2569699,
+   "surname_tokens": 2,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "reportofbritisha68brit",
+   "bytes": 2716374,
+   "surname_tokens": 2,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "practicalme2118561857glas",
+   "bytes": 3807601,
+   "surname_tokens": 2,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "minutesofproceed26inst",
+   "bytes": 1988708,
+   "surname_tokens": 1,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "minutesproceedi06forrgoog",
+   "bytes": 1016541,
+   "surname_tokens": 1,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "minutesproceedi04forrgoog",
+   "bytes": 1953019,
+   "surname_tokens": 1,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "minutesofproceed25inst",
+   "bytes": 1765489,
+   "surname_tokens": 0,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "minutesofproceed30inst",
+   "bytes": 1423773,
+   "surname_tokens": 0,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "minutesofproceed32inst",
+   "bytes": 1299080,
+   "surname_tokens": 0,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "minutesofproceed36inst",
+   "bytes": 1147136,
+   "surname_tokens": 0,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "minutesofproceed38inst",
+   "bytes": 1028767,
+   "surname_tokens": 0,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "minutesproceedi11forrgoog",
+   "bytes": 894467,
+   "surname_tokens": 0,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "proceedingsinst05jourgoog",
+   "bytes": 389350,
+   "surname_tokens": 0,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "apopularintrodu00intrgoog",
+   "bytes": 168466,
+   "surname_tokens": 0,
+   "speaking_turns": 0
+  },
+  {
+   "identifier": "RoyalArtilleryVol2",
+   "bytes": 1194333,
+   "surname_tokens": 0,
+   "speaking_turns": 0
+  }
+ ]
+}
