@@ -329,6 +329,56 @@ _COLLECTION_RX = re.compile(
     r"|Papers|Correspondence|Collection|Archives?|Manuscripts?)\b")
 
 
+def _compound_signoff(text, first_l, parts):
+    """**信末／文末署名**：`Royal Mint, June 9. W. C. Roberts-Austen.`
+
+    ## 为什么现有的两条路都够不着
+
+    `ocr_byline_evidence` 要整行是 `By …` 或全大写；
+    `standalone_ocr` 形态 B 要**整行只有名字**（`re.fullmatch`）。
+    而 Nature 读者来信的体例是 **`地点, 日期. 名字.`** ——两条都不满足。
+
+    实测（Roberts-Austen #135，30 份 P1）：这一类 **10 份**，
+    9 份是真签名，1 份是版口（已由页码规则挡掉）。
+    ★ 02-conversations 观察 ③ 引的正是这个形态
+    （`Royal Mint, June 9. W. C. Roberts-Austen.`）——
+    **道稿把它当他的签名用，而归属门认不出来。**
+
+    ## 三条设防
+
+    1. **只对复姓开**（与 `_compound_hit` 同一道闸）——单姓走不到这里，
+       Fleming 那类「首字母 + 别的中名 + 同姓」的防线原样保留。
+    2. **必须在行尾**，且名字前面要有句点（`… . 名字.`）——
+       署名收尾的形态；散文中间提到他的名字不算。
+    3. **页码打头的一律不算**：`148 Mr. F. Osmond and Prof. W. C. Roberts- A listen.`
+       是**版口**，不是签名。实测就是这一份把 10 打成了 9。
+       （`v0.0.0.146` 的版口守卫只挡全大写那种，这种是混合大小写。）
+    """
+    init = first_l[:1]
+    for line in text.split("\n"):
+        s = line.strip()
+        if not s or len(s) > 200 or not s.endswith("."):
+            continue
+        if re.match(r"^\d{1,4}\s", s):          # ← 设防 3：版口
+            continue
+        tail = [x for x in re.split(r"[^A-Za-z]+", s) if x][-5:]   # ← 设防 2：只看行尾
+        low = [x.lower() for x in tail]
+        for i, a in enumerate(low):
+            if not ((len(a) >= 4 and _edits_within(a, first_l, 2))
+                    or (len(a) == 1 and a == init)):
+                continue
+            rest = low[i + 1:]
+            for j, b in enumerate(rest):
+                if len(b) < 3:
+                    continue
+                if not (_edits_within(b, parts[0], 2) or b.endswith(parts[0])):
+                    continue
+                nxt = rest[j + 1:j + 3]
+                if any(_edits_within(c, parts[1], 2) or c.endswith(parts[1]) for c in nxt):
+                    return s
+    return None
+
+
 def _compound_hit(toks, first_l, parts):
     """**复姓的署名行**：名可以是缩写，但**复姓每一段都必须在，且按顺序**。
 
@@ -412,6 +462,12 @@ def ocr_byline_evidence(text, first, last):
        散文中间碰巧出现的近似词不算。
     """
     first_l, last_l = first.lower(), last.lower()
+    # ★ 复姓专用的**行尾署名**（Nature 来信体例 `地点, 日期. 名字.`），见 `_compound_signoff`
+    _p = [p for p in re.split(r"[^A-Za-z]+", last_l) if p]
+    if len(_p) >= 2:
+        _hit = _compound_signoff(text, first_l, _p)
+        if _hit:
+            return _hit
     for line in text.split("\n"):
         # ★★★ **`#` 开头的是我们自己写进文件的头，不是语料。**
         #   `standalone_ocr` 一直挡着（`s.startswith("#")`），本函数原来不用挡——
@@ -1717,6 +1773,27 @@ def self_test() -> int:
     #   正例全部取自他的印本原文，反例是**半截复姓**与**首字母不对**的人。
     #   ★ 关键：放宽的是「名可以写成缩写」，而**复姓两段必须都在**——
     #     姓补上了名让出的识别力。`A. Grant Roberts-Austen` 仍旧挡住。
+    print("\n══ 复姓的**行尾署名**（Nature 来信体例 `地点, 日期. 名字.`）══")
+    for _s, _want in (
+            # ↓ 正例：他印本上的真签名（02-conversations 观察 ③ 引的就是第一条）
+            ("Royal Mint, June 9. W. C. Roberts-Austen.", True),
+            ("for ready reference. W. C. ROBERTS-AUSTEN.", True),
+            ("Illinois Steel Company. W. C. Roberts-Austen.", True),
+            ("imperfectly mounted. W. C. RobErts-Austen.", True),
+            # ↓ ★★★ 版口不是签名——就是这一份把 10 打成了 9
+            ("148 Mr. F. Osmond and Prof. W. C. Roberts- A listen.", False),
+            ("57 W. C. ROBERTS-AUSTEN.", False),
+            # ↓ ★ 别人的签名一个都不许认成他
+            ("and so it was. Reginald Roberts.", False),
+            ("and so it was. W. Roberts.", False),
+            ("and so it was. F. Osmond.", False),
+            ("and so it was. Charles Austen.", False),
+            ("Royal Mint, June 9. A. Grant Roberts-Austen.", False)):
+        _got = ocr_byline_evidence(_s, "William", "Roberts-Austen") is not None
+        print(("  ✓ " if _got == _want else "  ✗ ") + f"{_s:<52} → {_got}")
+        if _got != _want:
+            bad.append(f"复姓行尾署名：{_s}")
+
     print("\n══ 复姓署名：名可缩写，但两段都要在 ══")
     for _s, _want in (
             # ↓ 正例：印本原文（`EOBERTS`/`ROBEKTS` 是 OCR 讹字，`Pbofessob` 是敬称被打坏）
