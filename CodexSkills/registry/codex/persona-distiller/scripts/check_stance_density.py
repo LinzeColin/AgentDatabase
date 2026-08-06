@@ -205,6 +205,32 @@ class _FP:
 
 
 FIRST_PERSON = _FP
+
+# ★★★★★ **语种守卫——本件只认英语，别的语种一律不出数。**
+#
+#   全库首扫（15 人）当场栽了：Martens 0.00／Mendel 0.01／Semmelweis 0.01／
+#   Liebig 0.20／Koch 0.21／Pasteur 1.44 —— 看着像「这些人完全没有声口」。
+#   **去验语种：Koch/Liebig/Martens/Mendel/Semmelweis 是德语，Pasteur 是法语。**
+#   英语的 `I/we/my/our` 在德语语料里当然一个都不中。
+#
+#   ★ 这与 [[regex-must-clear-the-corpus-language]] 记的是同一件事
+#     （`A.L.S` 匹配德语 `als`，误报 132 份跨 13 人）。**那条明训写着
+#     「写正则之前先问语料是什么语种」，而我又是全库跑完才想起来。**
+#
+#   **返回 0 与「语种不符所以没量」必须分开**——前者是结论，后者是未核验。
+_LANG_EN = re.compile(r"\b(?:the|and|of|is|that|with|which|been|were)\b", re.I)
+_LANG_DE = re.compile(r"\b(?:der|die|das|und|ist|nicht|eine|werden|durch|sich)\b", re.I)
+_LANG_FR = re.compile(r"\b(?:les|des|est|une|dans|pour|avec|nous|cette)\b", re.I)
+
+
+def detect_language(text):
+    """→ ('en'|'de'|'fr'|'?', 各自占比)。按功能词占全部字母词的比例判。"""
+    n = len(re.findall(r"[A-Za-zÄÖÜäöüßÀ-ÿ]{2,}", text)) or 1
+    r = {"en": len(_LANG_EN.findall(text)) / n,
+         "de": len(_LANG_DE.findall(text)) / n,
+         "fr": len(_LANG_FR.findall(text)) / n}
+    best = max(r, key=r.get)
+    return (best if r[best] >= 0.02 else "?"), r
 _SENT = re.compile(r"[^.!?]{15,400}[.!?]")
 
 
@@ -222,6 +248,16 @@ def classify(sent):
 
 
 def measure(text):
+    # ★★★★★ 语种不是英语 → **不出数**，报「未核验」。见 `detect_language` 上的说明。
+    lang, ratios = detect_language(text)
+    if lang != "en":
+        return {"字符": len(text), "句数": 0,
+                "★ 未核验": f"语种判为 **{lang}**（en={ratios['en']:.3f} "
+                            f"de={ratios['de']:.3f} fr={ratios['fr']:.3f}）"
+                            "——**本件只认英语，不是「这个人没有声口」**",
+                "第一人称命中": None, "**立场句**": None,
+                "★ 其中不含第一人称的": None, "逐类": {}, "立场句占比": None,
+                "每万字立场句": None, "例句（不含第一人称的）": []}
     ss = sentences(text)
     per_class = {name: 0 for name, _ in CLASSES}
     stance, stance_no_fp, examples = 0, 0, []
@@ -337,6 +373,21 @@ def self_test():
              True, "同上，真的第一人称")):
         got = bool(FIRST_PERSON.search(probe))
         chk(f"{why}：{'认' if got else '不认'}", got == want)
+
+    print("\n── ★★★★★ 语种守卫：德/法语料**不出数**，不是出 0 ──")
+    de = ("Der Versuch wurde bei 900 Grad durchgefuehrt und das Ergebnis ist "
+          "nicht eindeutig. Die Proben werden durch Abschrecken gehaertet, und "
+          "der Einfluss der Legierung ist noch nicht geklaert.")
+    fr = ("Les experiences ont ete faites dans une atmosphere seche, et les "
+          "resultats sont donnes dans le tableau. Nous avons pour cette raison "
+          "repris cette serie avec une autre methode.")
+    for lbl, txt, want in (("德语（Martens/Koch/Mendel 那一类）", de, "de"),
+                           ("法语（Pasteur）", fr, "fr")):
+        r = measure(txt)
+        got = r.get("第一人称命中")
+        chk(f"{lbl}：报未核验而不是 0（{'未核验' if got is None else got}）", got is None)
+        chk(f"  判语种为 {want}", want in str(r.get("★ 未核验", "")))
+    chk("英语正常出数", measure(tech).get("第一人称命中") is not None)
 
     print("\n── ★★ 第一人称句也能是立场句，但要单列 ──")
     r3 = measure("I must emphasize that this view is unsatisfactory.")
