@@ -260,6 +260,45 @@ Bain 那边我量了**独著**（1928，44,163 字符）**仍然只有 7 处第�
 
 **→ Mehl 不能按 Bain 那一类结案。下一轮的第一件事是找那批年度综述。**
 
+## 二点九七、**独著综述量了：有 editorial we，没有「我」**
+
+找到并取到了那批年度综述里的一件——**独著**：
+
+> `Diffusion in Solid Metals. By Robert F. Mehl.`
+> —— `Trans. A.I.M.E.` (1936) **122**, 11–56
+> 载体：`american-institute-of-mining-and-metallurgical_1936_122`（开放，855,740 B）
+
+**有界估计**（行 647–5478，184,630 字符；他那篇 45 页，此窗口是**上界**）：
+
+| | 命中 |
+|---|---|
+| `we` | 43 |
+| `I` | 40 —— **★ 几乎全是化学式与罗马数字**（`PbI₂`／`AgI`／`(I and`），成句的只有一条，那条也是 `Pb in PbI, and PbCl` |
+| `my`／`our` | 5 |
+| `the author` | 1 |
+
+**`we` 的形态是「综述作者引导读者」**，原样：
+
+> `Excluding for the moment all extraneous effects we may profitably consider
+> diffusion within the single crystal or grain.`
+> `From this point we may develop our discussion to the polycrystalline aggregate…`
+> `From the evidence available we must conclude that the rate of diffusion in cubic
+> crystals is independent of the direction measured.`
+
+### 结论收紧了一格，但仍没有下
+
+- **他的已发表技术文字**（合著论文 + 独著综述）：**非人称到 editorial-we，没有「我」**；
+- **而备忘录转引的他的话是有「我」的语气的**（`You can't be a scientist on eight hours a day`），
+  且记他讲课 `smooth, theatrical, and inspiring`。
+
+**两者不矛盾——它们是两个语域。** 未测的仍是那两件：
+1948 年那本史论（三条通道不通）与晚年的 `A Department and a Research Laboratory in a University`。
+
+★★ **所以本轮的正确说法是**：
+「**他已发表的技术文字里没有第一人称**」——**已证**（合著 4 件 + 独著综述 1 件）；
+「**这个人没有声口**」——**未证**，而且备忘录的转引指向相反方向。
+**Bain 与他的分别就在这里**：Bain 连独著都非人称**且没有任何转引显示他另有声口**。
+
 ## 三、本轮的诚实边界
 
 - **一件作品都没打开过**，NRL 任内的发表清单还没有；
