@@ -446,6 +446,86 @@ def markdown_report(data: dict[str, Any]) -> str:
 
 
 
+def report_semantic_residue(report, target: Path) -> None:
+    """**被订正掉的说法，换个措辞又活了**（只报不拦）。
+
+    ## 为什么它此前没有调用方——**不是忘了接，是接不上**
+
+    `check_semantic_residue` 要一份 `--rules`（name→正则）。
+    全库回查（2026-08-06）：**没有任何人物产出过 rules 文件**，
+    而 `corrections.jsonl` 里唯一有内容的是 Bessemer #132 的 2 条，
+    **两条的 `scope` 都是 `evaluation`**（判分方法的错），
+    不是「产物里某个说法被订正掉了」。
+
+    **→ 它找的那种输入，全库从来没有出现过。**
+    「无调用方」这个报警是对的，但根因是**上游没有产出**，不是接线漏了。
+
+    ## 本件的接法：从 `corrections.jsonl` 里 `scope == "content"` 的条目现取规则
+
+    这样它在**第一条内容域订正出现的那一刻**自动生效，不用再记得去接。
+    没有这类订正时报「未启用」——**不是「通过」**。
+    """
+    here = Path(__file__).resolve().parent
+    script = here / 'check_semantic_residue.py'
+    if not script.exists():
+        report.metrics['semantic_residue'] = {'状态': '检查器未安装，**未核验**（不是通过）'}
+        return
+    cor = None
+    for cand in (target / 'corrections' / 'corrections.jsonl',
+                 target.parent / 'corrections' / 'corrections.jsonl'):
+        if cand.is_file():
+            cor = cand
+            break
+    if cor is None:
+        report.metrics['semantic_residue'] = {
+            '状态': '未启用（本人物没有 corrections.jsonl）——**不是通过**'}
+        return
+    rules, skipped = {}, 0
+    for line in cor.read_text(encoding='utf-8').splitlines():
+        if not line.strip():
+            continue
+        try:
+            rec = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        if str(rec.get('scope') or '') != 'content':
+            skipped += 1
+            continue
+        # 订正文本里被引号括起来的旧说法 → 规则
+        for old in re.findall(r'[「"“]([^「」"“”]{4,40})[」"”]',
+                              str(rec.get('text') or '')):
+            rules[f"{rec.get('correction_id', '?')}::{old[:20]}"] = re.escape(old)
+    if not rules:
+        report.metrics['semantic_residue'] = {
+            '状态': f'未启用（{skipped} 条订正全是非 content 域，取不到规则）——**不是通过**',
+            '★': ('全库回查：唯一有内容的订正是 Bessemer #132 的 2 条，'
+                  'scope 都是 `evaluation`。**这判据找的输入从来没出现过。**')}
+        return
+    try:
+        spec = importlib.util.spec_from_file_location('_pd_semres', script)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        files = sorted(set(list(target.rglob('*.md')) + list(target.rglob('*.jsonl'))))
+        hits = {}
+        for name, pat in rules.items():
+            rx = re.compile(pat)
+            for f in files:
+                if 'corrections' in f.parts:      # ★ 订正记录本身当然含旧说法
+                    continue
+                for m in rx.finditer(mod.scannable(f)):
+                    hits.setdefault(name, []).append(f'{f.name}@{m.start()}')
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['semantic_residue'] = {'状态': f'跑不起来，**未核验**：{exc}'}
+        return
+    report.metrics['semantic_residue'] = {
+        '规则条数': len(rules), '非 content 域跳过': skipped,
+        '**残留命中**': {k: v[:4] for k, v in hits.items()},
+    }
+    if hits:
+        report.warnings.append(
+            f'content.semantic-residue：{len(hits)} 条被订正过的说法仍在产物里')
+
+
 def report_verbatim_quotes(report, target: Path, cache) -> None:
     """**渲染文档／身份分面／评测用例里的引文一样会伪造**（只报不拦）。
 
@@ -3308,6 +3388,7 @@ def main() -> int:
         report_stance_density(report, target, sources)
         report_catalogue_entries(report, target, sources)
         report_verbatim_quotes(report, target, args.cache)
+        report_semantic_residue(report, target)
         report_refusal_overflow(report, target)
         run_corpus_ceiling(report, target, report.profile)
         run_rights_basis(report, target)
