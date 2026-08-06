@@ -199,6 +199,39 @@ def self_test():
                        "subject of the Bakerian Lecture for the past year.",
               "src-b": "he was re-stated on' the first page of this paper."})
 
+    print("── ★★★★ **真实样本**：Rosenhain #138 JISI 1912 讨论纪要（逐字，含真实换行与 OCR 讹形）──")
+
+    # 2026-08-06 我在 04-external.md 里引这句时**把 OCR 讹字改对了**（`I)r. llosenhain` → `Dr. Rosenhain`），
+
+    # 本判据当场报「语料里没有」。**它说得对。**
+
+    # 下面两条把这个区分钉死：**照录该过，改对了不该过。**
+
+    _real = _C({"src-jisi": "t a \nlittle practical help was worth a world of advice. I)r. llosenhain and \n"
+
+                            "his somewhat slavish adherence to equilibrium curves did not appeal \n"
+
+                            "to the authors, since as practical men their faith in such curves fell \n"
+
+                            "far short of that of Dr. Rose"})
+
+    chk("★ **照录 OCR 讹形**（`I)r. llosenhain and his somewhat slavish`）→ 命中",
+
+        verify("I)r. llosenhain and his somewhat slavish adherence to equilibrium curves",
+
+               _real) == "src-jisi")
+
+    chk("★★ **把讹字改对了**（`Dr. Rosenhain and his somewhat slavish`）→ **不该命中**",
+
+        verify("Dr. Rosenhain and his somewhat slavish adherence to equilibrium curves",
+
+               _real) is None)
+
+    chk("★★★ 跨行处照样命中（`did not appeal \\n to the authors`）",
+
+        verify("did not appeal to the authors, since as practical men", _real) == "src-jisi")
+
+
     print("── 正例 ──")
     chk("整段命中", verify("communicated to the Koyal", corpus) == "src-a")
     chk("标出版口后，分段都在 → 过",
