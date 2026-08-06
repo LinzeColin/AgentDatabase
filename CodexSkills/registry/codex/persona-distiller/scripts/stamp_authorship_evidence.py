@@ -95,7 +95,15 @@ def stamp(target: pathlib.Path, scripts: pathlib.Path, write: bool = False) -> d
         "本门管的（P1 且署他名）": len(rows) - skipped,
         "**盖到 A-* 的**": got,
         "**判据说没有的**": none_,
-        "改动": changed[:20],
+        # ★★ 2026-08-07：**真数与样例要分开给。** 原先只有 `"改动": changed[:20]`，
+        #   读的人分不清「正好 20 条」与「200 条只显示了 20」。
+        #   我今天就据此把全库读成「多处正好 20 条会变」——
+        #   实为 ≥20，Barton 109 管辖里到底几条会变，那个输出根本回答不了。
+        #   与 [[samples-cannot-support-universal-claims]] 同形（那次样例数也是 20）。
+        "**改动条数**": len(changed),
+        "改动（最多列 20 条）": changed[:20],
+        **({"★ 还有 %d 条没列出" % (len(changed) - 20): "要全部就读 --json 之外的返回值"}
+           if len(changed) > 20 else {}),
         "写盘": "已写" if write else "**dry-run，没写**（要写加 --write）",
         "★ 口径": "**盖章不是放行**——判据说没有就写空数组，该报 source-unclaimed 就让它报。",
     }

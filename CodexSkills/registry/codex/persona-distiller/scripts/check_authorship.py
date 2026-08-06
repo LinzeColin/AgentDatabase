@@ -214,6 +214,40 @@ def build_patterns(full_name: str) -> dict:
     # 姓氏单独出现也算（`By Steinhardt` 式的短署名）——但只用于**标签归属**判定，
     # 不用于署名判定，避免把「谈论他」的句子当成他的署名。
     surname_rx = re.escape(surname)
+
+    # ★★★★ 2026-08-07：**OCR 会把姓拆成两段**——`BY JOSEPH WHIT WORTH, F.R.S.`
+    #   Whitworth #152 实测：1858 年 NYPL 扫描本的标题页就是这样，整卷 335 KB 判成「无据」。
+    #
+    #   ★ 落这个之前先全库量过（**先量后改，今天已救过我两次**）：
+    #     归档 25 个工作区里，「无署名证据的一手件」中姓被空白拆开的共 **14 份 / 6 个人物**。
+    #     **但逐条读命中，大多数不是署名**：
+    #       `Bes semer converting-vessels`（正文断词）、`PROFESSOR ROBERTS -AUSTEN`（版口）、
+    #       `Professor Vir chow's larger works`（第三人称提及）、`Mart ens, elektrische`（索引条目）
+    #     **真的是署名的只有 4 处**：
+    #       Blackwell #118 `BY DRS. E. AND E. BLACK WELL` 与 `By Dr. R BLACK WELL`
+    #       Bessemer #132 `I, the said HENRY BEs SEMER, do hereby declare`
+    #       Whitworth #152 `BY JOSEPH WHIT WORTH, F.R.S.`
+    #
+    #   ★★ 所以**只把容错放进 `name_rx`（署名路径）**，`surname_rx` 一个字不动——
+    #     后者用于「标签归属」，放宽它会把上面那些正文提及全部收进来。
+    #   ★ 只容忍**空格或制表符**、且只在词内部（首末各留 ≥2 个字母），
+    #     不容忍换行（换行的折行由别处的 `_LN` 管，两件事不要混）。
+    #   ★★ 第一版写的是**一个** `[ \t]`，而真串是 `JOSEPH  WHIT  WORTH`——**双空格**，
+    #     于是自测里我编的单空格样本过、**真扫描件一份都匹配不上**。
+    #     这是同一天里第三次「合成假设比真实的干净」（前两次是 `_LN` 的空行、
+    #     以及夹具把多行题页压成一行）。**改成 `{1,3}`，上限压住不让它跨栏。**
+    def _split_tolerant(word: str) -> str:
+        """→ 容忍 OCR 在词内插 1–3 个空白的正则。`Whitworth` → `Whit[ \\t]{1,3}worth` 等 6 种。"""
+        if len(word) < 5:
+            return re.escape(word)          # 太短的姓拆开后噪声压过信号
+        alts = [re.escape(word)]
+        for i in range(2, len(word) - 1):
+            alts.append(re.escape(word[:i]) + r"[ \t]{1,3}" + re.escape(word[i:]))
+        return "(?:" + "|".join(alts) + ")"
+
+    _last_split = _split_tolerant(surname)
+    if first != last:
+        name_rx = name_rx.replace(last, _last_split, 1) if last in name_rx else name_rx
     # ★ 「同一段之内」：允许单换行（题头会折行），**禁止空行**（空行＝段落边界）。
     #   给 BYLINE_COAUTHOR 用；见那一条的注释。
     _LN = r"(?:[^\n]|\n(?!\s*\n))"
@@ -1247,6 +1281,27 @@ def _check_one(text, pat):
             signed = bool(ADDRESS_BLOCK.search(near))
             if not signed and m.start() > len(text) * 0.30:
                 continue                    # 正文深处、又没有地址块的那个不是署名
+            # ★★★★ 2026-08-07：**这条路此前完全不查同名护栏。**
+            #   `_blocked` / `_initial_blocked` 只装在 `standalone_ocr`（OCR 容错那条），
+            #   而 `STANDALONE` 走的是精确正则，于是同姓同名只差中名首字母的人**长驱直入**。
+            #
+            #   定向复现（`Charles L. Coffin` 的护栏，喂了 `Charles A. Coffin` 与 `own_mid='l'`）：
+            #       `CHARLES A. COFFIN, OF BOSTON…` 放在**文首 30%**   → **放行** A-byline-standalone
+            #       同上放在**文末且带地址块**                          → **放行** A-signature-block
+            #       同上放在文末、无地址块                              → 拒（**只是被位置规则挡的**）
+            #
+            #   ★★ 自测里那条反例（`_tail(...)` 版）一直是绿的，**红得凑巧**：
+            #     它恰好落在唯一被位置规则挡住的那种摆法，
+            #     而注释写着它在测「护栏射程」。
+            #     ——[[counter-example-red-can-be-red-by-coincidence]] 的教科书形态。
+            #
+            #   ★ 这个人正是护栏被造出来要挡的那一个：Charles A. Coffin 是 GE 首任总裁，
+            #     而当年电气刊物里的「Coffin」大量指他，语料池里到处都是。
+            _ns = tuple(pat.get("namesakes") or ())
+            _mid = str(pat.get("own_mid") or "")
+            _last_l = str(pat.get("surname") or "").lower()
+            if _ns and _initial_blocked(m.group(0), _last_l, _ns, _mid):
+                continue
             code = "A-signature-block" if signed else "A-byline-standalone"
             a, b = max(0, m.start() - 60), min(len(text), m.end() + 60)
             return True, code, " ".join(text[a:b].split()), counter
@@ -2014,6 +2069,47 @@ def self_test() -> int:
         print(f"  {'✓' if _ok else '✗'} 取得到：{_why}（得到 {_code or '—'}）")
         if not _ok:
             bad.append(f"真实样本：{_why} **本该取到，却没取到**")
+
+    # ══ ★★★★ **真实样本**：Whitworth #152——OCR 把姓拆成两段（2026-08-07）══
+    #   1858 年 NYPL 扫描本的标题页逐字就是 `JOSEPH  WHIT  WORTH,  F.R.S.`（**双空格**），
+    #   整卷 335 KB 因此被判「无据」。Oxford 扫描本同一版是 `JOSEPH WHITWORTH, F.R.S.`。
+    #   ★ 落这条容错前**全库量过**：25 个工作区里「无署名的一手件」中姓被拆开的 14 份，
+    #     而**逐条读命中，真的是署名的只有 4 处**（Blackwell ×2、Bessemer ×1、Whitworth ×1），
+    #     其余是正文断词（`Bes semer converting-vessels`）、版口（`PROFESSOR ROBERTS -AUSTEN`）、
+    #     第三人称提及（`Professor Vir chow's`）、索引条目（`Mart ens, elektrische`）。
+    #     **所以容错只放进 `name_rx`（署名路径），`surname_rx` 一个字没动。**
+    #   ★★ 第一版只容忍**一个**空白，自测里我编的单空格样本过而**真扫描件一份都不中**——
+    #     同日第三次「合成假设比真实的干净」。现在是 `{1,3}`。
+    print("\n══ ★★★★ **真实样本**：Whitworth #152 姓被 OCR 拆开（双空格，逐字）══")
+    _pw = build_patterns("Joseph Whitworth")
+    _pw["namesakes"] = ("Whitworth Porter", "William Allen Whitworth", "Robert Whitworth",
+                        "Charles Whitworth", "Robert Percy Whitworth",
+                        "George Frederick Whitworth")
+    _pw["own_mid"] = ""
+    _WQ = [
+        ('MISCELLANEOUS  PAPERS \n\n\nov \n\n\nMECHANICAL   SUBJECTS \n\n\nBY \n\n\n'
+         'JOSEPH  WHIT  WORTH,  F.R.S. \n\n\nLONDON: \n', True,
+         "1858 NYPL 扫描题页：**姓被拆成 `WHIT  WORTH`、双空格**"),
+        ('MISCELLANEOUS PAPERS \n\n\n\nov \n\n\n\nMECHANICAL SUBJECTS \n\n\n\nBY \n\n\n\n'
+         'JOSEPH WHITWORTH, F.R.S. \n\n\n\nLONDON: \n', True,
+         "1858 Oxford 扫描题页：正常拼写（**回归对照，放宽不许影响它**）"),
+        ("\n\n\nHISTORY OF THE CORPS OF ROYAL ENGINEERS. BY WHITWORTH PORTER.\n\n\n", False,
+         "★★ `Whitworth` 是他的**名**、姓是 Porter"),
+        ("\n\n\nBY WHIT  WORTH PORTER.\n\n\n", False,
+         "★★ 同上且姓被拆开——**放宽后仍必须拒**"),
+        ("\n\n\nCHOICE AND CHANCE. BY WILLIAM ALLEN WHIT  WORTH, M.A.\n\n\n", False,
+         "★ 数学家 W. A. Whitworth，姓被拆开"),
+        ("\n\n\nObservations by Robert Whit  worth, Esq; engineer\n\n\n", False,
+         "★ 运河工程师 Robert Whitworth（卒 1799），姓被拆开"),
+        ("\n\n\nthe Whit worth measuring machine was described by others\n\n\n", False,
+         "★ **正文断词提及**，不是署名"),
+    ]
+    for _s, _want, _why in _WQ:
+        _got = check_text(_s, _pw)[0]
+        _ok = _got == _want
+        print(f"  {'✓' if _ok else '✗'} {'应取到' if _want else '应拒绝'}　{_why}")
+        if not _ok:
+            bad.append(f"Whitworth 拆姓：{_why}")
 
     if bad:
 
