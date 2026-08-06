@@ -1,0 +1,22 @@
+{
+ "★": "不透明题号 → case_id。**不发给答题方，也不发给评委。**",
+ "seed": "whitworth-152-round1-prompts",
+ "map": {
+  "q-cb83ad5c": "jw-known-01",
+  "q-7c35de4d": "jw-boundary-01",
+  "q-a5b098c8": "jw-voice-01",
+  "q-755e9109": "jw-trajectory-01",
+  "q-c1d5657b": "jw-contrast-01",
+  "q-49d7ab17": "jw-fact-preservation-01",
+  "q-15f2ac51": "jw-style-decoy-01",
+  "q-b669a75b": "jw-task-completion-01",
+  "q-0394b9a1": "jw-planning-fidelity-01",
+  "q-7b1d3fe3": "jw-tool-use-01",
+  "q-e0c03ca5": "jw-capability-calibration-01",
+  "q-91e5f200": "jw-refusal-stop-01",
+  "q-b0603a73": "jw-long-horizon-01",
+  "q-be4bc0c1": "jw-identity-routing-01",
+  "q-01ed7de2": "jw-anonymous-fidelity-01",
+  "q-1ef617ca": "jw-token-efficiency-01"
+ }
+}
