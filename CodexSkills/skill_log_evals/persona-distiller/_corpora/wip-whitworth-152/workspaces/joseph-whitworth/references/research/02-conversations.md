@@ -4,14 +4,13 @@
 
 ## ★ 这一道有多少东西（口径在前）
 
-**train 侧 2 份来源、6 条发言**；另有 1 份 1 条**划为 holdout**（见第五节）。 这一道**不是靠 `creator:Whitworth` 找到的**——
+**本道 2 份来源、6 条发言。** 这一道**不是靠 `creator:Whitworth` 找到的**——
 学会会刊署名是学会，第一轮按作者检索**结构上够不着**。
 
 | 来源 | 场合 | 条数 | 交叉验 |
 |---|---|---|---|
 | `src-e7403b89a239` | IMechE **1875** | **4** | 该卷自己的索引 `Whitworth,  Sir  J.,  281,  290, \n295,  303.`（折行，四个页码） |
 | `src-7ddafdc7c7bc` | IMechE 1847–1849 | 2 | 职员名录 `Joseph Whitworth, Esq., Manchester. Council.` |
-| **（1 份已划为 holdout）** | — | — | **本表不列它的 id、场合与题目**——见第五节 |
 
 ★ **两个年份陷阱，都按正文题页取而不按著录**：
 `src-e7403b89a239` 的 archive.org `date` 字段写 **1849**，而正文题页逐字是
@@ -72,17 +71,7 @@
 
 与 1856 年那次把比长机带到会场（见 `01-writings.md` 第二节）是同一个动作。
 
-## 五、【本道另有 1 份已划为 holdout】
-
-★★ **这里不写它的 source_id、不写它的场合、不写它的题目。**
-初稿我在本节写了它的 source_id、场合与题目——
-**那句话本身就是泄漏**：lane 文档正是建模者要读的，写出题目等于把 known 那道题的答案递过去。
-`corpus.holdout-leak` 与 `research.invalid-source` 两道门当场抓到，已整段重写。
-**这是「堵漏的那段话本身成了新的漏」——同一天里第二次。**
-
-本节只保留一个事实：**train 侧不含该份内容**，它的用处是 `known` 那道题。
-
-## 六、1847–49 年 IMechE：最早的两条，一条薄一条实
+## 五、1847–49 年 IMechE：最早的两条，一条薄一条实
 
 `src-7ddafdc7c7bc`：
 
@@ -99,7 +88,7 @@
 
 ## ★ 本道的缺口
 
-1. **train 侧 6 条里 1 条是程序性附议**（`Mr. Whitworth seconded the motion`），实质发言 **5 条**。★ 这个数在划 holdout 之后改过——原先写「7 条里 1 条」，那是含 holdout 的口径。
+1. **6 条里 1 条是程序性附议**（`Mr. Whitworth seconded the motion`），实质发言 **5 条**。
 2. **1856 与 1857 年的 IMechE 会刊不在 archive.org 上**——他任会长的那两年，
    本该是发言最密的时段，**一条也取不到**。
 3. `proceedingsinst07jourgoog` 那一卷 **HTTP 500 下载失败两次**，

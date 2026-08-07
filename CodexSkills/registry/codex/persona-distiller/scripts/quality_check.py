@@ -1118,6 +1118,39 @@ def run_corpus_text_checks(report, target: Path, cache_dirs: list[str]) -> None:
                if info.get('★ 没核的') else "")
             if info else '**未核（不是通过）**')
 
+    # ── 2026-08-07：**建模者读得到的文件里提了 holdout**（Whitworth #152 撞出来） ──
+    #   候选方（隔离子代理）**主动上报**：`hypotheses.md` 写着「证据只有 holdout 里那一条，
+    #   train 侧没有第二处」——**把 holdout 的主题直接说了出来**，而它恰好对应那道 known 题。
+    #   ★ 那句话是我在「说明我已经把 holdout 内容删干净了」的语境里写下的。
+    #   ★★ **同一轮里 `corpus.holdout-leak` 与 `research.invalid-source` 两道门全绿**——
+    #     它们只认「id 与文件」，不认「有这么一份、它考什么」。
+    code, out = run('check_holdout_mention.py', [str(target), '--json'])
+    if code == -1:
+        review['checker_missing'] = out
+    else:
+        try:
+            hm = json.loads(out)
+        except Exception:                                          # noqa: BLE001
+            hm = {}
+        if hm and '状态' not in hm:
+            n_men = len(hm.get('**字面提及**') or [])
+            n_ov = len(hm.get('**与 holdout 正文的 8 词片重叠**') or [])
+            report.metrics['holdout_mention'] = {
+                '字面提及': n_men,
+                '与 holdout 正文重叠': n_ov,
+                '★ 与出厂模板逐字相同、已豁免': len(hm.get('★ 与出厂模板逐字相同、已豁免的') or []),
+                '★★ 射程': '抓不到「不提 holdout 也不抄它、却把题目描述出来」的写法——'
+                           '那一类只能靠人读或答题方主动上报',
+            }
+            if n_men:
+                report.error('corpus.holdout-mentioned-in-artifacts',
+                             f'**建模者读得到的文件里有 {n_men} 处提到 holdout**——'
+                             '知道「存在一份取不到的材料、它关于某某」已足够定位那道题。'
+                             f'　{[(m["文件"], m["命中"]) for m in hm["**字面提及**"][:3]]}')
+            if n_ov:
+                report.error('corpus.holdout-text-in-artifacts',
+                             f'**建模者读得到的文件与 holdout 正文有 {n_ov} 处 8 词片重叠**')
+
     # ── 2026-08-07：**来源计数里有几份其实是同一部作品**（Whitworth #152 撞出来） ──
     #   `source.minimum` 判的是 `len(usable)`，**`derived_from` 从头到尾没被读过**。
     #   Whitworth #152 实测 `usable = 7`，而按内容去重只有 **3 部作品**（虚高 2.333×）：

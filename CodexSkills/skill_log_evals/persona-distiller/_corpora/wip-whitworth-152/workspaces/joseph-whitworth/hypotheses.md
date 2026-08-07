@@ -7,8 +7,9 @@
    **缺的**：没有一处他直接说过这句话。若能取到他任 IMechE 会长两年（1856/1857）的会刊，
    那两年的发言最可能有直接表述——**而那两卷不在 archive.org 上**。
 
-2. **他对「别人的产品」有一套稳定的评价方式。**
-   证据只有 holdout 里那一条，**train 侧没有第二处**，因此只能是假说不能是模式。
+2. **他区分「我的经历」与「可复现的试验」。**
+   证据：1875 年那句 `he believed nine-tenths of it was common air` 与同段的实数并置。
+   **缺的**：只有这一处，一条线画不出模式，故列为假说。
 
 3. **他晚年可能更看重延性而非单纯强度。**
    证据：1875 年那句 `high tensile strength in combination with ductility`<!-- claim:clm-02ad321e3c50 -->。
