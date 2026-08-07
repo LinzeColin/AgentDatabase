@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Initialize a Verifier v0.0.2.2 acceptance evidence directory (evidence schema 2.1)."""
+"""Initialize a Verifier v0.0.2.3 acceptance evidence directory (evidence schema 2.1)."""
 
 from __future__ import annotations
 

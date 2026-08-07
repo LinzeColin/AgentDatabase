@@ -1800,8 +1800,8 @@ def _validate_assurance_v22(
             errors.append("positive verdict requires assurance_v22 object")
         return
     assurance = raw
-    if assurance.get("skill_version") != "0.0.2.2":
-        errors.append("assurance_v22.skill_version must be 0.0.2.2")
+    if assurance.get("skill_version") != "0.0.2.3":
+        errors.append("assurance_v22.skill_version must be 0.0.2.3")
     if assurance.get("enforced") is not True:
         if positive:
             errors.append("positive verdict requires assurance_v22.enforced=true")

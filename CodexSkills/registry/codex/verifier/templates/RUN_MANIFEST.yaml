@@ -208,7 +208,7 @@
     "external_signature_ref": ""
   },
   "assurance_v22": {
-    "skill_version": "0.0.2.2",
+    "skill_version": "0.0.2.3",
     "enforced": true,
     "capability_report": {
       "path": "CAPABILITY_REPORT.json",

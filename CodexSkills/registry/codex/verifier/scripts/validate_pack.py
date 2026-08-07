@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the Verifier v0.0.2.2 skill payload and portability contract (stdlib only)."""
+"""Validate the Verifier v0.0.2.3 skill payload and portability contract (stdlib only)."""
 
 from __future__ import annotations
 
@@ -13,7 +13,7 @@ import sys
 from pathlib import Path
 from typing import Any, Optional
 
-SKILL_VERSION = "0.0.2.2"
+SKILL_VERSION = "0.0.2.3"
 EVIDENCE_SCHEMA_VERSION = "2.1"
 EXPECTED_FILES = {
     "SKILL.md",
@@ -259,7 +259,7 @@ def _strict_templates(payload: Path, errors: list[str]) -> None:
             errors.append("RUN_MANIFEST must default generator_is_sole_judge=false")
         assurance = manifest.get("assurance_v22", {})
         if assurance.get("skill_version") != SKILL_VERSION or assurance.get("enforced") is not True:
-            errors.append("RUN_MANIFEST assurance_v22 must be enabled for skill 0.0.2.2")
+            errors.append("RUN_MANIFEST assurance_v22 must be enabled for skill 0.0.2.3")
         for key in ("capability_report", "acceptance_plan", "command_policy", "evidence_privacy", "review_panel"):
             if not isinstance(assurance.get(key), dict):
                 errors.append(f"RUN_MANIFEST assurance_v22 missing object: {key}")
