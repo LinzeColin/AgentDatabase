@@ -40,7 +40,11 @@ def _put_backup(store: object, config: RuntimeConfig, key: str, source: Path, di
             stream,
             config.r2_bucket,
             full_key,
-            ExtraArgs={"Metadata": {"sha256": digest}, "ContentType": "application/json"},
+            ExtraArgs={
+                "Metadata": {"sha256": digest},
+                "ContentType": "application/json",
+                "StorageClass": "STANDARD",
+            },
             Config=store._transfer_config,
         )
     observed = store._download_and_hash(full_key)

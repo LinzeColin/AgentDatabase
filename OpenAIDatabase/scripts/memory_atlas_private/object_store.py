@@ -19,6 +19,9 @@ class ObjectStoreError(RuntimeError):
     pass
 
 
+R2_STANDARD_STORAGE_CLASS = "STANDARD"
+
+
 class ObjectStore(Protocol):
     def preflight(self) -> dict[str, object]: ...
     def put_file(self, key: str, path: Path, expected_sha256: str) -> ObjectReceipt: ...
@@ -143,6 +146,7 @@ class R2ObjectStore:
                 Body=payload,
                 Metadata={"sha256": __import__("hashlib").sha256(payload).hexdigest()},
                 ContentType="application/json",
+                StorageClass=R2_STANDARD_STORAGE_CLASS,
             )
             observed = self.client.get_object(Bucket=self.config.r2_bucket, Key=key)["Body"].read()
             if observed != payload:
@@ -207,6 +211,7 @@ class R2ObjectStore:
                             ExtraArgs={
                                 "Metadata": {"sha256": expected_sha256},
                                 "ContentType": "application/octet-stream",
+                                "StorageClass": R2_STANDARD_STORAGE_CLASS,
                             },
                             Config=self._transfer_config,
                         )

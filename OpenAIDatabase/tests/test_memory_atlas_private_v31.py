@@ -231,6 +231,17 @@ def test_r2_adapter_source_contains_no_create_bucket() -> None:
     assert forbidden not in source
 
 
+def test_r2_writes_pin_standard_storage_class() -> None:
+    repo = Path(__file__).resolve().parents[2]
+    object_store = (repo / "OpenAIDatabase/scripts/memory_atlas_private/object_store.py").read_text(encoding="utf-8")
+    fact_backup = (repo / "OpenAIDatabase/scripts/memory_atlas_private/fact_backup.py").read_text(encoding="utf-8")
+    bootstrap = (repo / "ops/memory-atlas/bootstrap_protected_env.py").read_text(encoding="utf-8")
+    assert "StorageClass=R2_STANDARD_STORAGE_CLASS" in object_store
+    assert '\"StorageClass\": R2_STANDARD_STORAGE_CLASS' in object_store
+    assert '\"StorageClass\": \"STANDARD\"' in fact_backup
+    assert 'StorageClass=\"STANDARD\"' in bootstrap
+
+
 def test_sqlite_snapshot_is_consistent(tmp_path: Path) -> None:
     source = tmp_path / "source.sqlite3"
     with sqlite3.connect(source) as db:
