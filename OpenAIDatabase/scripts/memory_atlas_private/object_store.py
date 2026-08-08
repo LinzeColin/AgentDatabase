@@ -6,7 +6,7 @@ import random
 import shutil
 import tempfile
 import time
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Protocol
 
@@ -90,6 +90,76 @@ class LocalObjectStore:
     def exists_with_hash(self, key: str, expected_sha256: str) -> bool:
         target = self._target(key)
         return target.is_file() and sha256_file(target) == expected_sha256
+
+
+@dataclass
+class EphemeralVerificationObjectStore:
+    """Verify immutable source snapshots without issuing any cloud request.
+
+    The authoritative, restorable copy for this mode is the GitHub private
+    Release produced later in the same capture.  This adapter only supplies the
+    pipeline's pre-upload integrity gate while the snapshots still live inside
+    the entrypoint-owned temporary directory.  It deliberately keeps only
+    in-memory path references and therefore cannot become a second persistent
+    backup or a hidden cache.
+    """
+
+    provider_version: str = "ephemeral-verification-v1"
+    _objects: dict[str, tuple[Path, str]] = field(default_factory=dict)
+
+    @staticmethod
+    def _safe_key(key: str) -> str:
+        clean = key.strip("/")
+        if not clean or any(part in {"", ".", ".."} for part in clean.split("/")):
+            raise ObjectStoreError("对象 key 不安全")
+        return clean
+
+    def preflight(self) -> dict[str, object]:
+        return {
+            "state": "PASS",
+            "mode": "GITHUB_RELEASE_ONLY",
+            "readback_equal": True,
+            "bucket_creation_attempted": False,
+            "cloud_requests": 0,
+        }
+
+    def put_file(self, key: str, path: Path, expected_sha256: str) -> ObjectReceipt:
+        clean = self._safe_key(key)
+        source = path.resolve(strict=True)
+        observed = sha256_file(source)
+        if observed != expected_sha256:
+            raise ObjectStoreError("临时快照哈希与 inventory 不一致")
+        # Read the immutable snapshot again.  A positive receipt means the same
+        # bytes were readable at the point the encrypted Release was about to be
+        # built; it never claims to be a remote readback.
+        readback = sha256_file(source)
+        if readback != expected_sha256:
+            raise ObjectStoreError("临时快照二次读回不一致")
+        self._objects[clean] = (source, expected_sha256)
+        return ObjectReceipt(
+            sha256=expected_sha256,
+            object_key=clean,
+            size_bytes=source.stat().st_size,
+            operation="verified_local",
+            readback_sha256=readback,
+            readback_verified=True,
+            provider_version=self.provider_version,
+        )
+
+    def get_file(self, key: str, destination: Path) -> None:
+        clean = self._safe_key(key)
+        if clean not in self._objects:
+            raise ObjectStoreError(f"临时对象不存在：{clean}")
+        source, expected = self._objects[clean]
+        if sha256_file(source) != expected:
+            raise ObjectStoreError(f"临时对象已变化：{clean}")
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(source, destination)
+
+    def exists_with_hash(self, key: str, expected_sha256: str) -> bool:
+        clean = self._safe_key(key)
+        stored = self._objects.get(clean)
+        return bool(stored and stored[1] == expected_sha256 and sha256_file(stored[0]) == expected_sha256)
 
 
 class R2ObjectStore:

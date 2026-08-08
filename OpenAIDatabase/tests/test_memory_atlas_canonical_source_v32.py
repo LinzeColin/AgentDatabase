@@ -25,6 +25,7 @@ import pytest
 from OpenAIDatabase.scripts.memory_atlas_private.canonical_source import (
     CanonicalResolution,
     CanonicalSourceError,
+    GitHubCanonicalPublisher,
     GitHubCanonicalSource,
     resolve_canonical,
 )
@@ -162,6 +163,74 @@ def test_only_one_canonical_digest_is_kept_on_disk(tmp_path: Path) -> None:
     assert [path.name for path in sorted((tmp_path / "cache").glob("*.jsonl"))] == [f"{DIGEST}.jsonl"]
 
 
+def test_canonical_publisher_merges_remote_union_and_verifies_release_readback(tmp_path: Path) -> None:
+    class ReleaseClient:
+        def __init__(self) -> None:
+            self.tag = ""
+            self.draft = True
+            self.assets: dict[str, bytes] = {}
+
+        def assert_private_repository(self) -> None:
+            return None
+
+        def create_draft(self, tag: str, title: str) -> None:
+            assert title.startswith("Memory Atlas canonical")
+            self.tag = tag
+
+        def upload(self, tag: str, paths: list[Path]) -> None:
+            assert tag == self.tag and self.draft
+            self.assets = {path.name: path.read_bytes() for path in paths}
+
+        def download(self, tag: str, destination: Path) -> None:
+            assert tag == self.tag
+            for name, payload in self.assets.items():
+                (destination / name).write_bytes(payload)
+
+        def view(self, tag: str) -> dict[str, object]:
+            assert tag == self.tag
+            return {
+                "tagName": tag,
+                "isDraft": self.draft,
+                "url": "https://github.example.test/canonical",
+                "assets": [
+                    {"name": name, "size": len(payload)}
+                    for name, payload in self.assets.items()
+                ],
+            }
+
+        def publish(self, tag: str) -> None:
+            assert tag == self.tag
+            self.draft = False
+
+        def enforce_retention(self, prefix: str, keep: int) -> list[str]:
+            assert prefix == "memory-atlas-canonical-" and keep == 2
+            return []
+
+    delta = tmp_path / "delta.jsonl"
+    delta.write_bytes(
+        b'{"event_id":"evt_2","activity":"current"}\n'
+        b'{"event_id":"evt_3","activity":"new"}\n'
+    )
+    client = ReleaseClient()
+    result = GitHubCanonicalPublisher(
+        source=_source(tmp_path),
+        release_client=client,
+    ).run(
+        delta_path=delta,
+        normalized_object_key="primary-objects/memory-atlas/private-agentdatabase/normalized/current.jsonl",
+        canonical_object_key="primary-objects/memory-atlas/private-agentdatabase/normalized/canonical/events.jsonl",
+        run_id="marun_fixture_1234567890",
+        created_at="2026-08-09T00:00:00Z",
+        work_root=tmp_path / "work",
+    )
+    published = client.assets["events.jsonl"].decode("utf-8")
+    assert result["state"] == "PASS" and result["remote_readback_verified"] is True
+    assert result["unique_events"] == 3
+    assert '"event_id":"evt_2","activity":"current"' in published
+    assert '"event_id":"evt_1"' in published
+    assert not (tmp_path / "work" / "github-canonical-release").exists()
+
+
 class _DrainedR2:
     """R2 after the migration: reachable, and holding none of it."""
 
@@ -276,7 +345,7 @@ def test_a_broken_r2_loader_does_not_take_the_run_down(tmp_path: Path) -> None:
 def test_the_reconcile_never_lets_an_r2_error_escape() -> None:
     source = (REPO / "OpenAIDatabase" / "scripts" / "memory_atlas_private" / "pipeline.py").read_text(encoding="utf-8")
     assert "def _r2_holds(self, key: str, digest: str) -> bool:" in source
-    assert "if key and digest and self._r2_holds(key, digest):" in source
+    assert "if _is_r2_receipt(row) and key and digest and self._r2_holds(key, digest):" in source
     # The fetch must go through the resolution, never straight at the bucket.
     assert "canonical_receipt = canonical.fetch(temporary)" in source
 

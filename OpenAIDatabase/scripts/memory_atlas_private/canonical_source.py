@@ -16,6 +16,8 @@ from __future__ import annotations
 
 import json
 import os
+import re
+import shutil
 import subprocess
 import tempfile
 from dataclasses import dataclass, field
@@ -23,11 +25,13 @@ from pathlib import Path
 from typing import Any, Mapping
 
 from .hashing import sha256_file
+from .private_release import GithubReleaseClient
 
 CANONICAL_TAG_PREFIX = "memory-atlas-canonical-"
 MANIFEST_ASSET = "MANIFEST.json"
 EVENTS_ASSET = "events.jsonl"
 MANIFEST_SCHEMA = "memory_atlas.canonical_events_manifest.v1"
+CANONICAL_RELEASE_RETENTION = 2
 
 
 class CanonicalSourceError(RuntimeError):
@@ -213,6 +217,185 @@ class GitHubCanonicalSource:
             # A cache that cannot be written must not fail the run; the next run
             # pays the download again, which is slow but correct.
             pass
+
+
+def _merge_event_files(current: Path, previous: Path) -> dict[str, int]:
+    """Rewrite ``current`` as the event-id union of current then previous.
+
+    The current batch wins for duplicate ids.  Invalid or id-less rows are not
+    silently counted as recoverable events.
+    """
+
+    merged = current.with_suffix(current.suffix + ".merged")
+    seen: set[str] = set()
+    current_events = 0
+    previous_only = 0
+    with merged.open("w", encoding="utf-8", newline="\n") as output:
+        for path, is_current in ((current, True), (previous, False)):
+            with path.open("r", encoding="utf-8") as source:
+                for line in source:
+                    if not line.strip():
+                        continue
+                    try:
+                        event_id = str(json.loads(line).get("event_id") or "")
+                    except json.JSONDecodeError:
+                        continue
+                    if not event_id or event_id in seen:
+                        continue
+                    seen.add(event_id)
+                    current_events += int(is_current)
+                    previous_only += int(not is_current)
+                    output.write(line if line.endswith("\n") else line + "\n")
+    merged.replace(current)
+    return {
+        "current_events": current_events,
+        "previous_only_events": previous_only,
+        "unique_events": len(seen),
+    }
+
+
+def _count_unique_events(path: Path) -> int:
+    seen: set[str] = set()
+    with path.open("r", encoding="utf-8") as source:
+        for line in source:
+            if not line.strip():
+                continue
+            try:
+                event_id = str(json.loads(line).get("event_id") or "")
+            except json.JSONDecodeError:
+                continue
+            if event_id:
+                seen.add(event_id)
+    return len(seen)
+
+
+@dataclass
+class GitHubCanonicalPublisher:
+    """Publish the current all-time event union without touching R2.
+
+    A published release is accepted only after both assets are downloaded again
+    and the event bytes match the declared digest.  The previous published
+    release remains available until the new one passes and is published.
+    """
+
+    repo: str = "LinzeColin/Private-Database"
+    source: GitHubCanonicalSource | None = None
+    release_client: Any = None
+    retention_count: int = CANONICAL_RELEASE_RETENTION
+
+    def __post_init__(self) -> None:
+        if self.source is None:
+            self.source = GitHubCanonicalSource(repo=self.repo)
+        if self.release_client is None:
+            self.release_client = GithubReleaseClient(self.repo, _resolve_gh())
+
+    def run(
+        self,
+        *,
+        delta_path: Path,
+        normalized_object_key: str,
+        canonical_object_key: str,
+        run_id: str,
+        created_at: str,
+        work_root: Path,
+    ) -> dict[str, Any]:
+        release_root = work_root / "github-canonical-release"
+        release_root.mkdir(parents=True, exist_ok=False)
+        result: dict[str, Any] | None = None
+        try:
+            self.release_client.assert_private_repository()
+            events_path = release_root / EVENTS_ASSET
+            shutil.copyfile(delta_path, events_path)
+            previous_manifest = self.source.manifest() if self.source is not None else None
+            supersedes: set[str] = {normalized_object_key}
+            merge = {
+                "current_events": _count_unique_events(events_path),
+                "previous_only_events": 0,
+                "unique_events": _count_unique_events(events_path),
+            }
+            if previous_manifest is not None:
+                previous_events = release_root / "previous-events.jsonl"
+                assert self.source is not None
+                self.source.fetch_events(previous_manifest, previous_events)
+                merge = _merge_event_files(events_path, previous_events)
+                supersedes.update(
+                    str(item)
+                    for item in previous_manifest.get("supersedes", [])
+                    if isinstance(item, str)
+                )
+                previous_object = str(previous_manifest.get("object") or "")
+                if previous_object:
+                    supersedes.add(previous_object)
+                previous_events.unlink(missing_ok=True)
+
+            digest = sha256_file(events_path)
+            manifest = {
+                "schema_version": MANIFEST_SCHEMA,
+                "object": canonical_object_key,
+                "sha256": digest,
+                "bytes": events_path.stat().st_size,
+                "unique_events": merge["unique_events"],
+                "supersedes": sorted(supersedes),
+                "source_run_id": run_id,
+                "created_at": created_at,
+                "storage_mode": "GITHUB_PRIVATE_RELEASE_ZERO_CHARGE",
+            }
+            manifest_path = release_root / MANIFEST_ASSET
+            manifest_path.write_text(
+                json.dumps(manifest, ensure_ascii=False, sort_keys=True, indent=2) + "\n",
+                encoding="utf-8",
+            )
+            timestamp = re.sub(r"[^0-9]", "", created_at)[:14]
+            tag = f"{CANONICAL_TAG_PREFIX}{timestamp}-{run_id[-12:]}"
+            self.release_client.create_draft(tag, f"Memory Atlas canonical events {timestamp}")
+            self.release_client.upload(tag, [events_path, manifest_path])
+            remote_dir = release_root / "remote-readback"
+            remote_dir.mkdir()
+            self.release_client.download(tag, remote_dir)
+            remote_manifest = json.loads((remote_dir / MANIFEST_ASSET).read_text(encoding="utf-8"))
+            remote_events = remote_dir / EVENTS_ASSET
+            if remote_manifest != manifest or sha256_file(remote_events) != digest:
+                raise CanonicalSourceError("canonical_publish_remote_readback_mismatch")
+            release = self.release_client.view(tag)
+            asset_names = {
+                str(row.get("name") or "")
+                for row in release.get("assets", [])
+                if isinstance(row, Mapping)
+            }
+            if release.get("isDraft") is not True or asset_names != {MANIFEST_ASSET, EVENTS_ASSET}:
+                raise CanonicalSourceError("canonical_publish_draft_assets_invalid")
+            self.release_client.publish(tag)
+            published = self.release_client.view(tag)
+            if published.get("isDraft") is not False:
+                raise CanonicalSourceError("canonical_publish_failed")
+            deleted = self.release_client.enforce_retention(
+                CANONICAL_TAG_PREFIX, self.retention_count
+            )
+            result = {
+                "schema_version": "memory_atlas.github_canonical_backup.v1",
+                "state": "PASS",
+                "provider": "github_private_release",
+                "object": canonical_object_key,
+                "sha256": digest,
+                "bytes": events_path.stat().st_size,
+                "unique_events": merge["unique_events"],
+                "release_tag": tag,
+                "release_url": str(published.get("url") or ""),
+                "remote_readback_verified": True,
+                "supersedes": sorted(supersedes),
+                "merge": merge,
+                "retention_deleted_count": len(deleted),
+                "billable_cloud_storage_requests": 0,
+            }
+        finally:
+            shutil.rmtree(release_root, ignore_errors=False)
+        if result is None:
+            raise CanonicalSourceError("canonical_publish_incomplete")
+        result["local_cleanup"] = {
+            "state": "PASS" if not release_root.exists() else "FAIL",
+            "remaining_paths": 0 if not release_root.exists() else 1,
+        }
+        return result
 
 
 def _link_or_copy(source: Path, destination: Path) -> None:

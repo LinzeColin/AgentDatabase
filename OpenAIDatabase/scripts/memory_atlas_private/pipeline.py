@@ -14,6 +14,7 @@ from typing import Any, Iterable, Mapping
 from .analytics import build_behavior_analytics, build_habit_recommendations
 from .canonical_source import (
     CanonicalResolution,
+    GitHubCanonicalPublisher,
     GitHubCanonicalSource,
     resolve_canonical,
     verify_backup_coverage,
@@ -24,7 +25,7 @@ from .fact_backup import backup_private_facts
 from .hashing import sha256_file, stable_id
 from .inventory import cleanup_snapshots, discover_inventory, load_source_registry
 from .manifest import manifest_digest, run_fact_paths, utc_now, write_json_atomic
-from .models import NormalizedEvent, RunManifest, RunState, SourceState
+from .models import NormalizedEvent, ObjectReceipt, RunManifest, RunState, SourceState
 from .normalization import normalize_record
 from .object_store import ObjectStore, R2ObjectStore
 from .private_db import FactOutbox, GhPrivateDatabase, PrivateDatabase
@@ -141,6 +142,14 @@ def _object_readback_ok(objects: Iterable[object]) -> bool:
         row.get("readback_verified") is True and row.get("readback_sha256") == row.get("sha256")
         for row in rows
     )
+
+
+def _is_r2_receipt(item: object) -> bool:
+    row = _as_row(item)
+    provider = str(row.get("provider_version") or "").lower()
+    if not provider:
+        return True
+    return provider in {"r2", "local-test-v1"} or provider.startswith("cloudflare-r2")
 
 
 def _authority_tiers(registry_path: Path | None) -> dict[str, dict[str, Any]]:
@@ -282,11 +291,14 @@ def cloud_native_authorities(
     report honestly on a bucket that was drained without failing the product.
     """
     rows = [_as_row(item) for item in objects]
+    r2_rows = [row for row in rows if _is_r2_receipt(row)]
     tiers = _authority_tiers(registry_path)
     paths = list(private_database_paths)
-    delta = [row for row in rows if row.get("object_key") == normalized_batch_key] if normalized_batch_key else []
+    delta = [
+        row for row in r2_rows if row.get("object_key") == normalized_batch_key
+    ] if normalized_batch_key else []
     canonical = canonical or {}
-    canonical_ready = str(canonical.get("state", "")) == "READY"
+    canonical_ready = str(canonical.get("state", "")) in {"READY", "PASS"}
     # An R2 row may be reported as MIGRATED rather than FAILED only when this
     # run proved every one of its objects is covered elsewhere: the canonical
     # union for the event stream, and the encrypted per-run backup for the
@@ -303,7 +315,7 @@ def cloud_native_authorities(
     )
 
     measured = {
-        "r2_primary_objects": (bool(rows), _object_readback_ok(rows), len(rows), sum(int(row.get("size_bytes", 0) or 0) for row in rows)),
+        "r2_primary_objects": (bool(r2_rows), _object_readback_ok(r2_rows), len(r2_rows), sum(int(row.get("size_bytes", 0) or 0) for row in r2_rows)),
         "r2_normalized_events": (bool(delta), _object_readback_ok(delta), len(delta), sum(int(row.get("size_bytes", 0) or 0) for row in delta)),
         "private_database_facts": (bool(paths), bool(paths), len(paths), 0),
         "github_canonical_events": (
@@ -664,6 +676,8 @@ class CapturePipeline(LiveSnapshotPublisherMixin):
         private_db: PrivateDatabase | None = None,
         clock=utc_now,
         private_release_backup: PrivateReleaseBackup | None = None,
+        canonical_publisher: GitHubCanonicalPublisher | None = None,
+        r2_fact_backup_required: bool = True,
     ):
         self.config = config
         self.config.ensure_runtime_dirs()
@@ -673,6 +687,8 @@ class CapturePipeline(LiveSnapshotPublisherMixin):
         self.outbox = FactOutbox(config.runtime_dir / "fact-outbox.sqlite3")
         self.failures = FailureCompoundStore(config.runtime_dir / "failure-compound.sqlite3")
         self._live_snapshot_error = ""
+        self.canonical_publisher = canonical_publisher
+        self.r2_fact_backup_required = r2_fact_backup_required
         if private_release_backup is not None:
             self.private_release_backup = private_release_backup
         elif config.private_release_backup_enabled:
@@ -702,7 +718,7 @@ class CapturePipeline(LiveSnapshotPublisherMixin):
         try:
             preflight = self.object_store.preflight()
             if preflight.get("state") != "PASS" or preflight.get("bucket_creation_attempted") is not False:
-                raise PipelineError("R2 精确范围 preflight 未通过")
+                raise PipelineError("对象暂存 preflight 未通过")
             registry = load_source_registry(self.config.source_registry)
             records, coverages = discover_inventory(registry, snapshots)
             manifest.source_coverages = coverages
@@ -737,9 +753,30 @@ class CapturePipeline(LiveSnapshotPublisherMixin):
             published_event_count = _write_jsonl(normalized_path, delta_events)
             event_count = len(all_events)
             normalized_sha = sha256_file(normalized_path)
-            normalized_receipt = self.object_store.put_file(
-                _normalized_delta_key(run_id), normalized_path, normalized_sha
-            )
+            if self.canonical_publisher is not None:
+                conventional_delta_key = self.config.r2_primary_prefix + _normalized_delta_key(run_id)
+                canonical_object_key = self.config.r2_primary_prefix + CANONICAL_BASE_KEY
+                manifest.github_canonical_backup = self.canonical_publisher.run(
+                    delta_path=normalized_path,
+                    normalized_object_key=conventional_delta_key,
+                    canonical_object_key=canonical_object_key,
+                    run_id=run_id,
+                    created_at=started_at,
+                    work_root=work,
+                )
+                normalized_receipt = ObjectReceipt(
+                    sha256=str(manifest.github_canonical_backup["sha256"]),
+                    object_key=str(manifest.github_canonical_backup["object"]),
+                    size_bytes=int(manifest.github_canonical_backup["bytes"]),
+                    operation="verified_remote",
+                    readback_sha256=str(manifest.github_canonical_backup["sha256"]),
+                    readback_verified=True,
+                    provider_version="github-private-release-canonical-v1",
+                )
+            else:
+                normalized_receipt = self.object_store.put_file(
+                    _normalized_delta_key(run_id), normalized_path, normalized_sha
+                )
             manifest.objects.append(normalized_receipt)
             manifest.normalized_batch_key = normalized_receipt.object_key
             _extend_published_ids(self.config.runtime_dir, (event.event_id for event in delta_events))
@@ -795,11 +832,18 @@ class CapturePipeline(LiveSnapshotPublisherMixin):
                         github_release=manifest.github_private_release_backup,
                         observed_at=manifest.completed_at,
                         registry_path=self.config.source_registry,
+                        canonical=manifest.github_canonical_backup,
                     ),
                     "same_run_evidence": same_run_evidence_rows(
                         run_id=manifest.run_id,
                         trace_id=manifest.run_id,
-                        r2_readback=_object_readback_ok(manifest.objects),
+                        r2_readback=(
+                            _object_readback_ok(
+                                item for item in manifest.objects if _is_r2_receipt(item)
+                            )
+                            if any(_is_r2_receipt(item) for item in manifest.objects)
+                            else None
+                        ),
                         private_database_readback=None,
                         ovh_reconcile=None,
                         status_projection=None,
@@ -818,11 +862,22 @@ class CapturePipeline(LiveSnapshotPublisherMixin):
                     self.private_db,
                     self.object_store,
                     generated_at=self.clock(),
+                    r2_required=self.r2_fact_backup_required,
                 )
                 if fact_backup.get("state") != "PASS":
-                    raise PipelineError("事实备份包未完成 R2 与 Private-Database 双读回")
+                    raise PipelineError("事实备份包未完成 Private-Database 远端读回")
                 result["private_fact_backup"] = fact_backup
                 result["github_private_release_backup"] = manifest.github_private_release_backup
+            if manifest.github_canonical_backup is not None:
+                result["github_canonical_backup"] = manifest.github_canonical_backup
+            result["r2"] = {
+                "state": "PASS" if any(_is_r2_receipt(item) for item in manifest.objects) else "SKIPPED_ZERO_CHARGE",
+                "verified_objects": sum(
+                    1 for item in manifest.objects
+                    if _is_r2_receipt(item) and _as_row(item).get("readback_verified") is True
+                ),
+                "billable_requests": 0 if not any(_is_r2_receipt(item) for item in manifest.objects) else None,
+            }
             result["event_count"] = event_count
             result["published_event_count"] = published_event_count
             result["incremental_upload"] = {
@@ -929,6 +984,7 @@ class CapturePipeline(LiveSnapshotPublisherMixin):
             "normalized_batch_key": manifest.normalized_batch_key,
             "event_count": len(events),
         }
+        r2_receipts = [item for item in manifest.objects if _is_r2_receipt(item)]
         runtime = {
             "schema_version": "memory_atlas.runtime_projection.v1",
             "run_id": manifest.run_id,
@@ -936,7 +992,12 @@ class CapturePipeline(LiveSnapshotPublisherMixin):
             "source_host": manifest.source_capture_host,
             "generated_at": self.clock(),
             "facts_authority": "Private-Database",
-            "object_authority": "Cloudflare R2 primary-objects/",
+            "object_authority": (
+                "Cloudflare R2 primary-objects/"
+                if r2_receipts
+                else "GitHub private Releases (encrypted source archive + canonical events)"
+            ),
+            "r2_capture_mode": "STANDARD" if r2_receipts else "SKIPPED_ZERO_CHARGE",
             "runtime_journal": "local SQLite, rebuildable",
         }
         now = self.clock()
@@ -974,6 +1035,10 @@ class CapturePipeline(LiveSnapshotPublisherMixin):
             "readback_verified_objects": sum(1 for item in manifest.objects if item.readback_verified),
             "bytes_discovered": manifest.bytes_discovered,
             "bytes_uploaded": manifest.bytes_uploaded,
+            "r2_verified_objects": sum(
+                1 for item in r2_receipts
+                if item.readback_verified and item.readback_sha256 == item.sha256
+            ),
         }
 
 
@@ -1055,7 +1120,7 @@ class RemoteReconcilePipeline(LiveSnapshotPublisherMixin):
                 continue
             key = str(row.get("object_key", ""))
             digest = str(row.get("sha256", ""))
-            if key and digest and self._r2_holds(key, digest):
+            if _is_r2_receipt(row) and key and digest and self._r2_holds(key, digest):
                 r2_verified += 1
                 continue
             # Superseded is not lost — but only when the canonical union that

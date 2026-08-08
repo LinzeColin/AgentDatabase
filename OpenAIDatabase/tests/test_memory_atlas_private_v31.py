@@ -46,7 +46,10 @@ from OpenAIDatabase.scripts.memory_atlas_private.inventory import (
 )
 from OpenAIDatabase.scripts.memory_atlas_private.models import InventoryRecord, NormalizedEvent, SourceState
 from OpenAIDatabase.scripts.memory_atlas_private.normalization import normalize_record
-from OpenAIDatabase.scripts.memory_atlas_private.object_store import LocalObjectStore
+from OpenAIDatabase.scripts.memory_atlas_private.object_store import (
+    EphemeralVerificationObjectStore,
+    LocalObjectStore,
+)
 from OpenAIDatabase.scripts.memory_atlas_private.pipeline import CapturePipeline, RemoteReconcilePipeline
 from OpenAIDatabase.scripts.memory_atlas_private.private_db import (
     FactOutbox,
@@ -222,6 +225,18 @@ def test_local_object_store_create_unchanged_and_repair(tmp_path: Path) -> None:
 def test_local_object_preflight_never_creates_bucket(tmp_path: Path) -> None:
     result = LocalObjectStore(tmp_path / "objects").preflight()
     assert result == {"state": "PASS", "readback_equal": True, "bucket_creation_attempted": False}
+
+
+def test_ephemeral_verification_store_makes_no_cloud_or_persistent_copy(tmp_path: Path) -> None:
+    source = tmp_path / "source.bin"
+    source.write_bytes(b"daily-backup-source")
+    store = EphemeralVerificationObjectStore()
+    preflight = store.preflight()
+    receipt = store.put_file("private-agentdatabase/sha256/fixture", source, sha256_file(source))
+    assert preflight["cloud_requests"] == 0
+    assert receipt.provider_version == "ephemeral-verification-v1"
+    assert receipt.operation == "verified_local" and receipt.readback_verified is True
+    assert list(tmp_path.iterdir()) == [source]
 
 
 def test_r2_adapter_source_contains_no_create_bucket() -> None:
@@ -1263,6 +1278,86 @@ def test_private_fact_backup_requires_successful_source_and_readback(tmp_path: P
     assert private.get_json("memory-atlas/backups/latest.json")["state"] == "PASS"
 
 
+def test_private_fact_backup_can_use_zero_charge_github_only_mode(tmp_path: Path) -> None:
+    from OpenAIDatabase.scripts.memory_atlas_private.fact_backup import backup_private_facts
+
+    registry = write_registry(tmp_path / "registry.json", [])
+    config = make_config(tmp_path, registry)
+    private = LocalPrivateDatabase(tmp_path / "private")
+    manifest_path = "memory-atlas/runs/20260801/run-free/manifest.json"
+    private.put_json(
+        "memory-atlas/runs/latest.json",
+        {"state": "SUCCEEDED", "run_id": "run-free", "manifest_path": manifest_path},
+        "x",
+    )
+    private.put_json(manifest_path, {"run_id": "run-free", "state": "SUCCEEDED"}, "x")
+    result = backup_private_facts(
+        config,
+        private,
+        EphemeralVerificationObjectStore(),
+        generated_at="2026-08-01T00:00:00+00:00",
+        r2_required=False,
+    )
+    assert result["state"] == "PASS"
+    assert result["receipt"]["state"] == "SKIPPED_ZERO_CHARGE"
+    assert result["receipt"]["billable_requests"] == 0
+    assert result["github_private_database"]["readback_verified"] is True
+
+
+def test_capture_release_only_mode_keeps_r2_at_zero_requests(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    source = tmp_path / "source"
+    source.mkdir()
+    (source / "event.json").write_text(json.dumps(verified_payload()), encoding="utf-8")
+    registry = write_registry(tmp_path / "registry.json", [{
+        "source_id": "source",
+        "label_zh": "来源",
+        "kind": "evidence_adapter",
+        "required": True,
+        "env_var": "SOURCE_PATH",
+        "include_globs": ["*"],
+    }])
+    monkeypatch.setenv("SOURCE_PATH", str(source))
+    config = make_config(tmp_path, registry)
+
+    class Publisher:
+        def run(self, **kwargs: object) -> dict[str, object]:
+            delta = Path(str(kwargs["delta_path"]))
+            return {
+                "state": "PASS",
+                "object": kwargs["canonical_object_key"],
+                "sha256": sha256_file(delta),
+                "bytes": delta.stat().st_size,
+                "unique_events": 1,
+                "remote_readback_verified": True,
+                "release_url": "https://github.example.test/canonical",
+            }
+
+    private = LocalPrivateDatabase(tmp_path / "private")
+    result = CapturePipeline(
+        config,
+        EphemeralVerificationObjectStore(),
+        private,
+        clock=lambda: FIXED_TIME,
+        canonical_publisher=Publisher(),  # type: ignore[arg-type]
+        r2_fact_backup_required=False,
+    ).run()
+    assert result["state"] == "SUCCEEDED"
+    assert result["r2"] == {
+        "state": "SKIPPED_ZERO_CHARGE",
+        "verified_objects": 0,
+        "billable_requests": 0,
+    }
+    latest = private.get_json("memory-atlas/runs/latest.json")
+    manifest = private.get_json(str(latest["manifest_path"]))
+    assert {row["provider_version"] for row in manifest["objects"]} == {
+        "ephemeral-verification-v1",
+        "github-private-release-canonical-v1",
+    }
+
+
 def test_private_release_archive_is_split_and_restores_exact_bytes(tmp_path: Path) -> None:
     from OpenAIDatabase.scripts.memory_atlas_private.private_release import (
         _archive_manifest,
@@ -1555,6 +1650,7 @@ def test_source_capture_entry_forces_ephemeral_local_paths(
     assert Path(observed["TMPDIR"]).parent == ephemeral
     assert not ephemeral.exists()
     assert observed["MEMORY_ATLAS_PRIVATE_RELEASE_BACKUP_ENABLED"] == "1"
+    assert observed["MEMORY_ATLAS_CAPTURE_STORAGE_MODE"] == "GITHUB_RELEASE_ONLY"
 
 
 def test_source_capture_entry_symlink_keeps_evidence_binding_but_uses_ephemeral_runtime(

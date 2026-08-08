@@ -70,6 +70,13 @@ FAILED until directly reverified.
    `每轮操作数 × 每天轮数 × 31 < 免费额度 × 50%`。**算不出来就不上线。**
 4. **存储优先级**：**GitHub Release 资产 > R2 > OVH 本地**。
    Release 资产不计仓库体积、没有操作计费，永远优先。
+5. **新项目与新周期任务默认不得写 R2。** 默认使用 GitHub Release 或既有本地/私有仓通道；
+   只有 Owner 单独授权、机器守卫同一计费周期直接证明全部 Bucket 默认 `Standard`、无非 Standard
+   对象，并且最坏情况月操作量与新增存储都低于免费额度 40% 时，才可提出启用 R2。证据缺失、
+   status 过期或任一指标达到 40% 时必须 fail-closed 跳过 R2，不得把“备份成功”与“R2 必须写入”绑定。
+6. **Memory Atlas 每日完整备份固定为 `GITHUB_RELEASE_ONLY`。** 原始来源进入 age 加密私有
+   Release，canonical 事件进入私有 Release；两者都必须远端读回，原始来源还必须隔离恢复。
+   Schedule 中 R2 必须报告 `SKIPPED_ZERO_CHARGE` 且 `billable_requests=0`。未经 Owner 新授权不得改回。
 
 完整事故记录、账单逐行归因、免费额度速查表 → **`Private-Database` 仓 `OPS/AGENT_ONBOARDING.md` §9.7**。
 机器守卫 → OVH `/usr/local/bin/linze-r2-free-tier-guard.py`（每 6 小时，非 Standard 桶自动熔断改回；
@@ -111,5 +118,5 @@ FAILED until directly reverified.
 ssh ovh 'sudo /usr/local/bin/linze-r2-free-tier-guard.py'
 ```
 
-它会打印本计费周期 Class A / Class B / 存储对免费额度的投影占比，≥70% 报 WARN、≥90% 报 CRIT，
+它会打印本计费周期 Class A / Class B / 存储对免费额度的投影占比，≥40% 报 WARN、≥50% 报 CRIT，
 并把判定写进每日复审清单。完整事故记录见 `Private-Database` 仓 `OPS/AGENT_ONBOARDING.md` §9.7。

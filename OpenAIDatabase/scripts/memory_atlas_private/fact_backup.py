@@ -67,6 +67,7 @@ def backup_private_facts(
     object_store: object,
     *,
     generated_at: str,
+    r2_required: bool = True,
 ) -> dict[str, Any]:
     facts: dict[str, dict[str, object]] = {}
     missing: list[str] = []
@@ -102,7 +103,16 @@ def backup_private_facts(
         day = generated_at[:10].replace("-", "")
         run_id = str(latest.get("run_id", "unknown"))
         key = f"{day}/{run_id}/private-facts-{digest[:16]}.json"
-        receipt = _put_backup(object_store, config, key, path, digest)
+        if r2_required:
+            receipt = _put_backup(object_store, config, key, path, digest)
+        else:
+            receipt = {
+                "state": "SKIPPED_ZERO_CHARGE",
+                "reason": "daily backup authority is the verified GitHub private Release and Private-Database tree",
+                "provider_version": "none",
+                "readback_verified": False,
+                "billable_requests": 0,
+            }
         github_relpath = f"memory-atlas/backups/{key}"
         private_db.put_json(
             github_relpath,
@@ -121,6 +131,7 @@ def backup_private_facts(
         "fact_count": len(facts),
         "missing_optional": missing,
         "receipt": receipt,
+        "r2_required": r2_required,
         "github_private_database": {
             "relpath": github_relpath,
             "sha256": digest,
