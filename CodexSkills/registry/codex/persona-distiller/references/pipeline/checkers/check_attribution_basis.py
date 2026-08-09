@@ -225,6 +225,47 @@ def self_test() -> int:
     if p:
         fails.append("源层边界失败：账本已明说是他人所著，本门不该管")
 
+    # ══ ★★★★ 2026-08-07：**姓要取最后一段，不是第一段** ══
+    #   `main()` 原先写 `str(meta.get("name")).split()[0]`——`Joseph Whitworth` → `Joseph`。
+    #   与 `check_authorship` 文件头记过的那个坑一模一样
+    #   （`Justus von Liebig` → surname='Justus' → 归属 1/30）。**同一个错在另一个文件里又长了一遍。**
+    for _full, _want in (("Joseph Whitworth", "Whitworth"),
+                         ("Justus von Liebig", "Liebig"),
+                         ("Charles L. Coffin", "Coffin"),
+                         ("Galen", "Galen")):
+        _got = [t for t in _full.split() if t][-1]
+        if _got != _want:
+            fails.append(f"姓取错：{_full!r} → {_got!r}，应为 {_want!r}")
+    #   ★ 反向：按**名**匹配会把别人的东西收进来。
+    p, _ = check_sources([{"tier": "P1", "author": "Joseph Priestley", "source_id": "src-x"}],
+                         "Whitworth")
+    if p:
+        fails.append("按姓匹配失败：`Joseph Priestley` 不该被 `Whitworth` 收进来")
+    p, _ = check_sources([{"tier": "P1", "author": "Joseph Priestley", "source_id": "src-x"}],
+                         "Joseph")   # ← 这就是修之前的口径
+    if not p:
+        fails.append("★ 反证不成立：按名 `Joseph` 匹配本该把 Priestley 收进来（用来说明旧口径为何错）")
+
+    # ══ ★★★★ **它读的那个文件此前一直是空脚手架** ══
+    #   `main()` 原先读 `research/source-universe.json`——那是 `init_target` 生成的
+    #   覆盖轴脚手架（只有 `coverage_axes` 之类）。
+    #   **归档 26 个工作区实测：有来源的 0 份、空的 26 份。**
+    #   于是 `rows=[]` → `claimed=0`、`missing=[]` → 永远报「未挂 attribution: 0」。
+    #   **1174 份 P1 声称本人所著，一份都没被这道检查看过。**
+    #   修成读 `evidence/source-ledger.jsonl` 之后，实测 **231 份未挂 attribution**
+    #   （Godin 196、Steinhardt 28、Semmelweis 7；其余 23 个工作区是 0）——
+    #   那三个人物的 `attribution` **键根本不存在**，它们早于该字段被加进 `ingest.py`。
+    print("── ★★★★ 源层：读到 0 行必须说「未核」，不许当成「都挂好了」 ──")
+    _sc = {"coverage_axes": ["identity", "role", "period"]}      # 逐字就是那个脚手架的形状
+    _rows = _sc if isinstance(_sc, list) else _sc.get("sources", [])
+    if _rows:
+        fails.append("脚手架样本不该解析出来源")
+    _p, _i = check_sources(_rows, "Whitworth")
+    if _p or _i.get("P1 声称本人所著") != 0:
+        fails.append("空来源时不该报问题（问题在于**别把这个 0 当成通过**）")
+    print(f"  ✓ 空来源 → 问题 {len(_p)} 条、claimed {_i.get('P1 声称本人所著')}"
+          f"　★ **所以 main() 必须把「读了哪个文件、几行」打出来**，否则这个 0 无法判读")
+
     for f in fails:
         print(f"✗ {f}")
     if fails:
@@ -256,14 +297,46 @@ def main() -> int:
     meta = json.loads(meta_path.read_text(encoding="utf-8"))
     problems, info = check_meta(meta)
 
-    ledger = a.target / "research" / "source-universe.json"
-    if ledger.is_file():
-        data = json.loads(ledger.read_text(encoding="utf-8"))
+    # ★★★★ 2026-08-07：**这一段此前从来没有检查过任何一份来源，对任何人，一次都没有。**
+    #   两个 bug 叠在一起：
+    #
+    #   ① **读错了文件。** 原先读 `research/source-universe.json`——那是 `init_target`
+    #      生成的**覆盖轴脚手架**，里面只有 `coverage_axes` 之类，
+    #      **归档 26 个工作区里「有来源的 0 份、空的 26 份」**。
+    #      真台账在 `evidence/source-ledger.jsonl`。
+    #      于是 `rows=[]` → `claimed=0`、`missing=[]` → **永远报「未挂 attribution: 0」**。
+    #      [[empty-default-swallows-unknown]]：`0` 被读成「都挂好了」。
+    #
+    #   ② **姓取成了名。** `str(meta.get("name")).split()[0]` ——
+    #      `Joseph Whitworth` → `Joseph`。这与 `check_authorship` 文件头记过的那个坑
+    #      **一模一样**（`Justus von Liebig` → surname='Justus' → 归属 1/30），
+    #      **同一个 `split()[0]` 在另一个文件里又长了一遍**。
+    #
+    #   ★ 修完必须把**读了哪个文件、读到几行**打出来——否则下次「0」还是分不清
+    #     「都挂好了」与「一份都没读到」。
+    _led_new = a.target / "evidence" / "source-ledger.jsonl"
+    _led_old = a.target / "research" / "source-universe.json"
+    rows, _src = [], None
+    if _led_new.is_file():
+        rows = [json.loads(l) for l in _led_new.read_text(encoding="utf-8").splitlines()
+                if l.strip()]
+        _src = "evidence/source-ledger.jsonl"
+    elif _led_old.is_file():
+        data = json.loads(_led_old.read_text(encoding="utf-8"))
         rows = data if isinstance(data, list) else data.get("sources", [])
-        surname = str(meta.get("name") or "").split()[0]
+        _src = "research/source-universe.json（旧口径）"
+    if _src is None:
+        info["★ 来源层未核（不是通过）"] = "两个台账路径都不存在"
+    else:
+        # ★ 姓取**最后一段**；`X von Y` 里 Y 才是姓（与 check_authorship 同一口径）。
+        _tok = [t for t in str(meta.get("name") or "").split() if t]
+        surname = _tok[-1] if _tok else ""
         sp, si = check_sources(rows, surname)
         problems += sp
         info.update(si)
+        info["来源层读的是"] = f"{_src}，{len(rows)} 行；按姓 `{surname}` 匹配"
+        if not rows:
+            info["★ 来源层读到 0 行（不是通过）"] = _src
 
     if a.json:
         print(json.dumps({"problems": problems, "metrics": info}, ensure_ascii=False, indent=1))

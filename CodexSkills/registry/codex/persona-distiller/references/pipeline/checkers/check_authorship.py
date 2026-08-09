@@ -144,8 +144,32 @@ def build_patterns(full_name: str) -> dict:
     #
     #   这不是为了 Galen 一个人开的口子：600 人名册跨 12 族与整部人类史，
     #   古典、中世纪、东亚人物普遍不是「名+姓」形态。
-    EPITHET = {"of", "von", "van", "de", "da", "del", "della", "di", "du", "al", "ibn", "bin", "ben"}
-    if len(tokens) >= 3 and tokens[1].lower() in EPITHET:
+    EPITHET = {"of", "de", "da", "del", "della", "di", "du", "al", "ibn", "bin", "ben"}
+    # ★★★ **`von`／`van` 不是地名式后缀，是世袭姓的小品词。**（Liebig 实测撞出）
+    #
+    #   `build_patterns("Justus von Liebig")` 原来把 **`Justus`（他的名）当姓**，
+    #   因为 `von` 在 EPITHET 里，走的是「帕加马的盖伦」那条。
+    #   **可是「冯·李比希」的姓就是李比希**，不是地名。
+    #
+    #   实测代价（Liebig #124 的 30 份 P1，走 `check_text` 全链）：
+    #       name='Justus von Liebig'  surname='Justus'  → 过归属 **1/30**
+    #       name='Justus Liebig'      surname='Liebig'  → 过归属 **26/30**
+    #   **判据拿着他的名去找他的姓，找了三十份，找到一份。**
+    #
+    #   ★ 分界：`of` 确实是地名式（`Galen of Pergamon`——姓不是帕加马），**原样保留**；
+    #     `von`／`van` 在近代德语／荷兰语人名里是**继承来的姓的一部分**
+    #     （van Gogh、van Leeuwenhoek、von Braun、von Neumann）。
+    #   ★★ **`de`／`da`／`di`／`du` 故意没动。** 它们两种都有
+    #     （`de Gaulle` 是姓，`Leonardo da Vinci` 的 `Vinci` 是地名），
+    #     **本轮没有语料能判**——名册里一个这样的人物都还没做过。
+    #     **没有依据就不改**，留给撞上它的那一轮，别凭想象扩大射程。
+    PARTICLE = {"von", "van"}
+    if len(tokens) >= 3 and tokens[1].lower() in PARTICLE:
+        # 「X von Y」：**Y 才是姓**（名 X + 姓 Y，小品词可有可无）
+        first, last = re.escape(tokens[0]), re.escape(tokens[-1])
+        surname = tokens[-1]
+        tokens = [tokens[0], tokens[-1]]
+    elif len(tokens) >= 3 and tokens[1].lower() in EPITHET:
         # 「X of Y」：识别 X，Y 是地名／族名，**不是姓**
         first = last = re.escape(tokens[0])
         surname = tokens[0]
@@ -191,6 +215,43 @@ def build_patterns(full_name: str) -> dict:
     # 不用于署名判定，避免把「谈论他」的句子当成他的署名。
     surname_rx = re.escape(surname)
 
+    # ★★★★ 2026-08-07：**OCR 会把姓拆成两段**——`BY JOSEPH WHIT WORTH, F.R.S.`
+    #   Whitworth #152 实测：1858 年 NYPL 扫描本的标题页就是这样，整卷 335 KB 判成「无据」。
+    #
+    #   ★ 落这个之前先全库量过（**先量后改，今天已救过我两次**）：
+    #     归档 25 个工作区里，「无署名证据的一手件」中姓被空白拆开的共 **14 份 / 6 个人物**。
+    #     **但逐条读命中，大多数不是署名**：
+    #       `Bes semer converting-vessels`（正文断词）、`PROFESSOR ROBERTS -AUSTEN`（版口）、
+    #       `Professor Vir chow's larger works`（第三人称提及）、`Mart ens, elektrische`（索引条目）
+    #     **真的是署名的只有 4 处**：
+    #       Blackwell #118 `BY DRS. E. AND E. BLACK WELL` 与 `By Dr. R BLACK WELL`
+    #       Bessemer #132 `I, the said HENRY BEs SEMER, do hereby declare`
+    #       Whitworth #152 `BY JOSEPH WHIT WORTH, F.R.S.`
+    #
+    #   ★★ 所以**只把容错放进 `name_rx`（署名路径）**，`surname_rx` 一个字不动——
+    #     后者用于「标签归属」，放宽它会把上面那些正文提及全部收进来。
+    #   ★ 只容忍**空格或制表符**、且只在词内部（首末各留 ≥2 个字母），
+    #     不容忍换行（换行的折行由别处的 `_LN` 管，两件事不要混）。
+    #   ★★ 第一版写的是**一个** `[ \t]`，而真串是 `JOSEPH  WHIT  WORTH`——**双空格**，
+    #     于是自测里我编的单空格样本过、**真扫描件一份都匹配不上**。
+    #     这是同一天里第三次「合成假设比真实的干净」（前两次是 `_LN` 的空行、
+    #     以及夹具把多行题页压成一行）。**改成 `{1,3}`，上限压住不让它跨栏。**
+    def _split_tolerant(word: str) -> str:
+        """→ 容忍 OCR 在词内插 1–3 个空白的正则。`Whitworth` → `Whit[ \\t]{1,3}worth` 等 6 种。"""
+        if len(word) < 5:
+            return re.escape(word)          # 太短的姓拆开后噪声压过信号
+        alts = [re.escape(word)]
+        for i in range(2, len(word) - 1):
+            alts.append(re.escape(word[:i]) + r"[ \t]{1,3}" + re.escape(word[i:]))
+        return "(?:" + "|".join(alts) + ")"
+
+    _last_split = _split_tolerant(surname)
+    if first != last:
+        name_rx = name_rx.replace(last, _last_split, 1) if last in name_rx else name_rx
+    # ★ 「同一段之内」：允许单换行（题头会折行），**禁止空行**（空行＝段落边界）。
+    #   给 BYLINE_COAUTHOR 用；见那一条的注释。
+    _LN = r"(?:[^\n]|\n(?!\s*\n))"
+
     return {
         "name": full_name,
         "surname": surname,
@@ -211,6 +272,29 @@ def build_patterns(full_name: str) -> dict:
         #   `By his colleague Alexander Fleming` 会被当成他的署名。
         "BYLINE": re.compile(
             rf"\bBy\s+(?:(?:Sir|Dame|Prof(?:essor)?|Dr|Mr|Mrs|Ms|Rev|Lord|Lady)\.?\s+)*"
+            rf"{name_rx}\b", re.I),
+        # ★★★★ v0.0.0.168 `A-byline-coauthor`：**他站在第二作者位。**
+        #   Rosenhain #138 实测三份，题头都在、名字有一份一个字母都没错，全被判「无据」：
+        #       `By J. A. EwiNG, F.R.S., …University of Cambridge, and Walter Rosenhain, B.A.`
+        #       `By James A. Ewing, F.E.S., and Walter EoSENHAiN, 1851 Exhibition…`
+        #   `BYLINE` 要求 `By` 后**紧跟**名字（中间只许敬称），于是
+        #   **凡是他不排第一的合著，署名一律取不到**。
+        #   与 Fleming（敬称）／Livermore（分行）／Martens（德文 `Von`）是同一族：
+        #   **判据认得出名字，认不出名字前面那一小截。**
+        #   ★ 护栏三条，缺一不可：
+        #     1. 名字必须由 `and`／`&` 引出——不许是逗号列举里随便一个名字；
+        #     2. `By` 到名字之间不许出现角色词（communicated/edited/reported/cited/
+        #        reviewed/translated/according），否则 `By A. Smith, as reported by X` 会中；
+        #     3. 距离上限 240 字符——学会题头带头衔与任职，确实长，但不能无限。
+        #   ★★★★ 第一版写死 `[^\n]`，**真实的折行题头一份都匹配不到**——
+        #     而我的自测用例把题头写成了一行，于是**自测全绿、实际全漏**。
+        #     判据的用例比原文干净，就等于没测。改成 `_LN`：
+        #     允许单换行，**禁止空行**——空行是段落边界，跨过去就不是同一个署名了。
+        "BYLINE_COAUTHOR": re.compile(
+            rf"\bBy\s+(?!{_LN}{{0,240}}?\b(?:communicated|edited|reported|cited|reviewed|"
+            rf"translated|according)\b{_LN}{{0,20}}?{name_rx})"
+            rf"{_LN}{{0,240}}?(?:\band\b|&)\s+"
+            rf"(?:(?:Sir|Dame|Prof(?:essor)?|Dr|Mr|Mrs|Ms|Rev|Lord|Lady)\.?\s+)*"
             rf"{name_rx}\b", re.I),
         "EDITORIAL": re.compile(
             rf"[\[\(][^\])]{{0,40}}\b(?:remarks|speech|address|excerpt|written|delivered|adapted)"
@@ -297,6 +381,124 @@ def _edits_within(a: str, b: str, k: int) -> bool:
     return prev[lb] <= k
 
 
+# ★ 档案馆／图书馆给「一批文书」起的名字——**它不是署名，是馆藏名**。
+#   形态与题页署名难分（整行大写 + 名 + 姓），靠这些词区分。
+_COLLECTION_RX = re.compile(
+    r"\b(?:PAPERS|CORRESPONDENCE|COLLECTION|ARCHIVES?|MANUSCRIPTS?|MSS|FONDS"
+    r"|RECORDS|CATALOGUE|CATALOG|FINDING\s+AID|INVENTORY|REGISTER"
+    r"|Papers|Correspondence|Collection|Archives?|Manuscripts?)\b")
+
+
+def _compound_signoff(text, first_l, parts):
+    """**信末／文末署名**：`Royal Mint, June 9. W. C. Roberts-Austen.`
+
+    ## 为什么现有的两条路都够不着
+
+    `ocr_byline_evidence` 要整行是 `By …` 或全大写；
+    `standalone_ocr` 形态 B 要**整行只有名字**（`re.fullmatch`）。
+    而 Nature 读者来信的体例是 **`地点, 日期. 名字.`** ——两条都不满足。
+
+    实测（Roberts-Austen #135，30 份 P1）：这一类 **10 份**，
+    9 份是真签名，1 份是版口（已由页码规则挡掉）。
+    ★ 02-conversations 观察 ③ 引的正是这个形态
+    （`Royal Mint, June 9. W. C. Roberts-Austen.`）——
+    **道稿把它当他的签名用，而归属门认不出来。**
+
+    ## 三条设防
+
+    1. **只对复姓开**（与 `_compound_hit` 同一道闸）——单姓走不到这里，
+       Fleming 那类「首字母 + 别的中名 + 同姓」的防线原样保留。
+    2. **必须在行尾**，且名字前面要有句点（`… . 名字.`）——
+       署名收尾的形态；散文中间提到他的名字不算。
+    3. **页码打头的一律不算**：`148 Mr. F. Osmond and Prof. W. C. Roberts- A listen.`
+       是**版口**，不是签名。实测就是这一份把 10 打成了 9。
+       （`v0.0.0.146` 的版口守卫只挡全大写那种，这种是混合大小写。）
+    """
+    init = first_l[:1]
+    for line in text.split("\n"):
+        s = line.strip()
+        if not s or len(s) > 200 or not s.endswith("."):
+            continue
+        if re.match(r"^\d{1,4}\s", s):          # ← 设防 3：版口
+            continue
+        tail = [x for x in re.split(r"[^A-Za-z]+", s) if x][-5:]   # ← 设防 2：只看行尾
+        low = [x.lower() for x in tail]
+        for i, a in enumerate(low):
+            if not ((len(a) >= 4 and _edits_within(a, first_l, 2))
+                    or (len(a) == 1 and a == init)):
+                continue
+            rest = low[i + 1:]
+            for j, b in enumerate(rest):
+                if len(b) < 3:
+                    continue
+                if not (_edits_within(b, parts[0], 2) or b.endswith(parts[0])):
+                    continue
+                nxt = rest[j + 1:j + 3]
+                if any(_edits_within(c, parts[1], 2) or c.endswith(parts[1]) for c in nxt):
+                    return s
+    return None
+
+
+def _compound_hit(toks, first_l, parts):
+    """**复姓的署名行**：名可以是缩写，但**复姓每一段都必须在，且按顺序**。
+
+    ## 为什么复姓要另开一条（Roberts-Austen #135 实测）
+
+    30 份 P1 里 `ocr_byline_evidence` 只认出 **1** 份，而印本上他的署名是：
+
+        By W. C. Roberts-Austen, C.B., F.R.S.
+        By Professor W. C. EOBERTS-AUSTEN, C.B., F.R.S.
+        By Pbofessob W. C. ROBERTS-AUSTEN, C.B., F.R.S.
+
+    **署名就在那儿，是判据读不出来。** 两处叠着挡：
+      ① `last_l` 是带连字符的 `roberts-austen`，分词把印本切成 `roberts`+`austen`，
+         **距离 7 和 8**——`_edits_within(…, 2)` 永远不成立；
+      ② 名写成缩写 `W.`，被 `len(a) < 4` 挡在外面。
+
+    ★★★ **② 那道门是对的，不能一般性地拆。** 它是 Fleming #111 装的：
+      同名陷阱恰恰是「首字母 + 别的中名 + 同姓」（该人物有 `A. Grant Fleming`）。
+      **单姓人物一律不走本函数**，那道防线原样保留。
+
+    ## 复姓凭什么可以放宽
+
+    **姓本身补上了名让出的那份识别力。** 单姓 `Fleming` 配一个首字母区分不了人；
+    而复姓要求**两段都命中**，`W. Roberts`／`W. Austen`／`Charles Austen`
+    这些半截的一个都进不来（自测里全是反例）。
+    **首字母仍必须对上**——`A. Grant Roberts-Austen` 照样挡住。
+
+    ★ 这条**没有让 Roberts-Austen 过门**：端到端 3/30 → 12/30，
+      离一手占比门差得远。**改的是「读不出来」，不是「够不够」。**
+    """
+    init = first_l[:1]
+    for i, t0 in enumerate(toks):
+        a = t0.lower()
+        # 名：拼全（距离 ≤2）**或**单个首字母且与目标一致
+        if not ((len(a) >= 4 and _edits_within(a, first_l, 2))
+                or (len(a) == 1 and a == init)):
+            continue
+        tail = [x.lower() for x in toks[i + 1:]]
+        for j, b in enumerate(tail):
+            if len(b) < 3:
+                continue
+            # 第一段：容错，或被前缀污染（`1XFLEMING` 那一类）
+            if not (_edits_within(b, parts[0], 2)
+                    or (b.endswith(parts[0]) and len(b) - len(parts[0]) <= 3)):
+                continue
+            # ★ 其余各段必须**紧随其后**依次出现（中间最多隔一个词，容 OCR 插字）
+            nxt = tail[j + 1:j + 1 + 2 * (len(parts) - 1)]
+            k = 0
+            for p in parts[1:]:
+                while k < len(nxt) and not (_edits_within(nxt[k], p, 2)
+                                            or nxt[k].endswith(p)):
+                    k += 1
+                if k >= len(nxt):
+                    break
+                k += 1
+            else:
+                return True
+    return False
+
+
 def ocr_byline_evidence(text, first, last):
     """**名字被 OCR 打坏的署名行。** 命中返回那一行，否则 None。
 
@@ -320,7 +522,24 @@ def ocr_byline_evidence(text, first, last):
        散文中间碰巧出现的近似词不算。
     """
     first_l, last_l = first.lower(), last.lower()
+    # ★ 复姓专用的**行尾署名**（Nature 来信体例 `地点, 日期. 名字.`），见 `_compound_signoff`
+    _p = [p for p in re.split(r"[^A-Za-z]+", last_l) if p]
+    if len(_p) >= 2:
+        _hit = _compound_signoff(text, first_l, _p)
+        if _hit:
+            return _hit
     for line in text.split("\n"):
+        # ★★★ **`#` 开头的是我们自己写进文件的头，不是语料。**
+        #   `standalone_ocr` 一直挡着（`s.startswith("#")`），本函数原来不用挡——
+        #   它只看 `By …` 与整行大写，而 `# title: …` 两条都不像。
+        #   **复姓那条路一开就不成立了**：它扫全部 token 位置，于是
+        #       `# TITLE: W. C. ROBERTS-AUSTEN PAPERS`
+        #   会被当成他的署名放行。**那是 ingest 写的头，因为档案馆按「他的文书」编目。**
+        #   ★ 实测撞出这一类的过程记在 ㉕：模拟版一度报 Barton 109/109，
+        #     去读命中，11/14 是 `# title: Clara Barton Papers…`——
+        #     **判据把我们自己的元数据读回来当成了他的署名证据。**
+        if line.lstrip().startswith("#"):
+            continue
         s = line.strip()
         if not s or len(s) > 80:
             continue
@@ -357,6 +576,22 @@ def ocr_byline_evidence(text, first, last):
                       "", body, flags=re.I)
         toks = [t for t in re.split(r"[^A-Za-z]+", body) if t][:5]
         if len(toks) < 2:
+            continue
+        # ★★★ 复姓（`Roberts-Austen` 这一类）**必须单独走一条**，见 `_compound_hit`。
+        #   走不通就 `continue`：复姓在这里**永远匹配不上**——
+        #   `last_l` 是带连字符的 `roberts-austen`，而分词把印本上的
+        #   `ROBERTS-AUSTEN` 切成 `roberts` + `austen`，两段与整串的距离是 7 和 8。
+        _parts = [p for p in re.split(r"[^A-Za-z]+", last_l) if p]
+        if len(_parts) >= 2:
+            # ★★★ **馆藏名不是署名。** `W. C. ROBERTS-AUSTEN PAPERS AND CORRESPONDENCE`
+            #   是档案馆给一批文书起的名字，整行大写、名与复姓俱全——
+            #   **形态与题页署名一模一样**，而它出现在任何一份数字化检索工具书里。
+            #   ★ 只否决**整行大写**那一支：`By …` 打头是明示署名，
+            #     而「By X. Papers read before the Society」这种正文不该被误伤。
+            if not starts_by and _COLLECTION_RX.search(s):
+                continue
+            if _compound_hit(toks, first_l, _parts):
+                return s
             continue
         a = toks[0].lower()
         # ★ **名必须是完整词**——`A. Fleming` 这一整类在这里被挡住。
@@ -991,7 +1226,9 @@ def _check_one(text, pat):
                 continue
             counter.append(m.group(0).strip())
 
-    for code, key in (("A-byline", "BYLINE"), ("A-editorial", "EDITORIAL")):
+    for code, key in (("A-byline", "BYLINE"),
+                      ("A-byline-coauthor", "BYLINE_COAUTHOR"),
+                      ("A-editorial", "EDITORIAL")):
         for m in pat[key].finditer(text):
             # ★ 真署名是**结构元素**：行首，或跟在分隔符后面。
             #   句子中间的「by X」是在**谈论**作者身份，不是署名——
@@ -1044,6 +1281,27 @@ def _check_one(text, pat):
             signed = bool(ADDRESS_BLOCK.search(near))
             if not signed and m.start() > len(text) * 0.30:
                 continue                    # 正文深处、又没有地址块的那个不是署名
+            # ★★★★ 2026-08-07：**这条路此前完全不查同名护栏。**
+            #   `_blocked` / `_initial_blocked` 只装在 `standalone_ocr`（OCR 容错那条），
+            #   而 `STANDALONE` 走的是精确正则，于是同姓同名只差中名首字母的人**长驱直入**。
+            #
+            #   定向复现（`Charles L. Coffin` 的护栏，喂了 `Charles A. Coffin` 与 `own_mid='l'`）：
+            #       `CHARLES A. COFFIN, OF BOSTON…` 放在**文首 30%**   → **放行** A-byline-standalone
+            #       同上放在**文末且带地址块**                          → **放行** A-signature-block
+            #       同上放在文末、无地址块                              → 拒（**只是被位置规则挡的**）
+            #
+            #   ★★ 自测里那条反例（`_tail(...)` 版）一直是绿的，**红得凑巧**：
+            #     它恰好落在唯一被位置规则挡住的那种摆法，
+            #     而注释写着它在测「护栏射程」。
+            #     ——[[counter-example-red-can-be-red-by-coincidence]] 的教科书形态。
+            #
+            #   ★ 这个人正是护栏被造出来要挡的那一个：Charles A. Coffin 是 GE 首任总裁，
+            #     而当年电气刊物里的「Coffin」大量指他，语料池里到处都是。
+            _ns = tuple(pat.get("namesakes") or ())
+            _mid = str(pat.get("own_mid") or "")
+            _last_l = str(pat.get("surname") or "").lower()
+            if _ns and _initial_blocked(m.group(0), _last_l, _ns, _mid):
+                continue
             code = "A-signature-block" if signed else "A-byline-standalone"
             a, b = max(0, m.start() - 60), min(len(text), m.end() + 60)
             return True, code, " ".join(text[a:b].split()), counter
@@ -1572,6 +1830,105 @@ def self_test() -> int:
         if _got != _want:
             bad.append(f"非英文署名前缀：{_s}")
 
+    # ★★★ **`von`／`van` 是姓的一部分，不是地名式后缀**（Liebig 实测）
+    #   原来 `Justus von Liebig` 的 surname 取成 `Justus`——**拿他的名去找他的姓**，
+    #   30 份 P1 只认出 1 份；改对之后 26 份。
+    print("\n══ 小品词：von/van 取姓，of 取名 ══")
+    for _n, _first, _sur in (
+            ("Justus von Liebig", "Justus", "Liebig"),
+            ("Wernher von Braun", "Wernher", "Braun"),
+            ("Vincent van Gogh", "Vincent", "Gogh"),
+            ("Antonie van Leeuwenhoek", "Antonie", "Leeuwenhoek"),
+            # ↓ ★ 反向对照：`of` 是地名式，**必须原样不动**
+            ("Galen of Pergamon", "Galen", "Galen"),
+            ("Hippocrates of Kos", "Hippocrates", "Hippocrates"),
+            # ↓ ★ 不带小品词的老路径不许受影响
+            ("Adolf Martens", "Adolf", "Martens"),
+            ("Comfort Avery Adams", "Comfort", "Adams")):
+        _p = build_patterns(_n)
+        _ok = (_p.get("first_word") == _first and _p.get("surname") == _sur)
+        print(("  ✓ " if _ok else "  ✗ ")
+              + f"{_n:<26} first={_p.get('first_word')!r:<14} surname={_p.get('surname')!r}")
+        if not _ok:
+            bad.append(f"小品词切分：{_n}")
+
+    # ★★★ **复姓署名**（Roberts-Austen #135 实测）。
+    #   正例全部取自他的印本原文，反例是**半截复姓**与**首字母不对**的人。
+    #   ★ 关键：放宽的是「名可以写成缩写」，而**复姓两段必须都在**——
+    #     姓补上了名让出的识别力。`A. Grant Roberts-Austen` 仍旧挡住。
+    print("\n══ 复姓的**行尾署名**（Nature 来信体例 `地点, 日期. 名字.`）══")
+    for _s, _want in (
+            # ↓ 正例：他印本上的真签名（02-conversations 观察 ③ 引的就是第一条）
+            ("Royal Mint, June 9. W. C. Roberts-Austen.", True),
+            ("for ready reference. W. C. ROBERTS-AUSTEN.", True),
+            ("Illinois Steel Company. W. C. Roberts-Austen.", True),
+            ("imperfectly mounted. W. C. RobErts-Austen.", True),
+            # ↓ ★★★ 版口不是签名——就是这一份把 10 打成了 9
+            ("148 Mr. F. Osmond and Prof. W. C. Roberts- A listen.", False),
+            ("57 W. C. ROBERTS-AUSTEN.", False),
+            # ↓ ★ 别人的签名一个都不许认成他
+            ("and so it was. Reginald Roberts.", False),
+            ("and so it was. W. Roberts.", False),
+            ("and so it was. F. Osmond.", False),
+            ("and so it was. Charles Austen.", False),
+            ("Royal Mint, June 9. A. Grant Roberts-Austen.", False)):
+        _got = ocr_byline_evidence(_s, "William", "Roberts-Austen") is not None
+        print(("  ✓ " if _got == _want else "  ✗ ") + f"{_s:<52} → {_got}")
+        if _got != _want:
+            bad.append(f"复姓行尾署名：{_s}")
+
+    print("\n══ 复姓署名：名可缩写，但两段都要在 ══")
+    for _s, _want in (
+            # ↓ 正例：印本原文（`EOBERTS`/`ROBEKTS` 是 OCR 讹字，`Pbofessob` 是敬称被打坏）
+            ("By W. C. Roberts-Austen, C.B., F.R.S.", True),
+            ("By Professor W. C. EOBERTS-AUSTEN, C.B., F.R.S.", True),
+            ("By Pbofessob W. C. ROBERTS-AUSTEN, C.B., F.R.S.", True),
+            ("By Sir Williaji C. EOBERTS-AUSTEN, K.C.B., D.C.L.", True),
+            ("By W. Chandler Koberts- Austen, F.RS", True),
+            # ★★★ **已知的漏，故意留着**：`^V.` 是 `W.` 被 OCR 打坏。
+            #   名只剩一个字母时**没有容错余地**——单字母容 1 个编辑距离
+            #   就等于「任何字母都算」，那条路一开，复姓这条的全部约束就废了。
+            #   **认不出来就认不出来，不许为了多救一份把判据变成摆设。**
+            #   （实测代价：imeche1893 那一份走不通这条路。）
+            ("By  Professor  ^V.  C.  ROBEKTS-AUSTEN,  C.B.", False),
+            # ↓ ★★★ 反例：**半截复姓一个都不许进**——名让出识别力之后全靠姓补
+            ("By W. Roberts, F.R.S.", False),
+            ("By W. C. Austen, F.R.S.", False),
+            ("By William Roberts, F.R.S.", False),      # 真人：内科医生 F.R.S.，1830-1899
+            ("By Sir William Roberts, M.D.", False),
+            ("By Charles Austen, F.R.S.", False),
+            ("By Reginald Roberts.", False),
+            # ↓ ★ Fleming 那一类的陷阱形态：首字母不对，照样挡住
+            ("By A. Grant Roberts-Austen.", False),
+            # ↓ ★ 顺序反了不算——`Austen-Roberts` 是另一个人
+            ("By W. C. Austen-Roberts, F.R.S.", False),
+            # ↓ ★★★ **我们自己写进文件的头**，不是语料（复姓那条路一开就漏了它）
+            ("# TITLE: W. C. ROBERTS-AUSTEN PAPERS", False),
+            ("# title: W. C. Roberts-Austen Papers, 1876-1902", False),
+            # ↓ ★★★ **馆藏名不是署名**——形态与题页署名一模一样
+            ("W. C. ROBERTS-AUSTEN PAPERS AND CORRESPONDENCE", False),
+            ("W. C. ROBERTS-AUSTEN COLLECTION, ROYAL MINT ARCHIVES", False),
+            # ↓ ★ 反向对照：`By` 打头是明示署名，**不许被馆藏词误伤**
+            ("By W. C. Roberts-Austen. Papers read before the Society.", True)):
+        _got = ocr_byline_evidence(_s, "William", "Roberts-Austen") is not None
+        print(("  ✓ " if _got == _want else "  ✗ ") + f"{_s:<50} → {_got}")
+        if _got != _want:
+            bad.append(f"复姓署名：{_s}")
+
+    # ★★ **单姓人物一律不许受影响**——复姓那条路只对复姓开。
+    #   （Fleming 的 `A. Grant Fleming` 防线是本文件最老的一条，不许被顺手拆掉。）
+    print("\n══ 单姓不受复姓那条路影响 ══")
+    for _who, _first, _last, _s, _want in (
+            ("Fleming", "Alexander", "Fleming", "By A. Fleming, F.R.C.S.", False),
+            ("Fleming", "Alexander", "Fleming", "By A. Grant Fleming.", False),
+            ("Fleming", "Alexander", "Fleming", "By Alexandbb Fleming, F.R.C.S.", True),
+            ("Martens", "Adolf", "Martens", "Von A. Martens, Berlin.", False),
+            ("Martens", "Adolf", "Martens", "Von Adolf Martens.", True)):
+        _got = ocr_byline_evidence(_s, _first, _last) is not None
+        print(("  ✓ " if _got == _want else "  ✗ ") + f"{_who:<9}{_s:<36} → {_got}")
+        if _got != _want:
+            bad.append(f"单姓射程：{_s}")
+
     # ★★★ 护栏射程：**`ocr_byline_evidence` 那条路也必须被同名护栏管住**
     #   v0.0.0.136 只把护栏加在 `standalone_ocr` 上，而那条路跑在它前面、
     #   返回同一个码——护栏形同虚设。**这四条走的是 `check_text` 全链，不是单个函数。**
@@ -1624,6 +1981,135 @@ def self_test() -> int:
     print(f"  {'✓' if not _got else '✗'} 应拒绝　C. L. Coffin.（**没声明中名时，缩写仍旧不认**）")
     if _got:
         bad.append("同姓中名护栏：没声明中名时不该放行缩写")
+
+    print("\n══ ★★★★ A-byline-coauthor：他站在第二作者位（Rosenhain #138 实测）══")
+    import tempfile as _tf2, os as _os2
+    _pc = build_patterns("Walter Rosenhain"); _pc["namesakes"] = (); _pc["own_mid"] = ""
+    _CO = [
+      ("\nBy J. A. EwiNG, F.R.S., Professor of Mechanism and Applied Mechanics in the "
+       "University of Cambridge, and Walter Rosenhain, B.A., St, John's College.\n",
+       True, "第二作者位、名字拼写正确——**旧版整份判无据**"),
+      ("\nBy Sir Alexander Fleming and Walter Rosenhain.\n", True, "敬称 + and"),
+      # ★★★★ 用例必须和原文一样脏：第一版全写成一行，于是自测全绿而实际全漏
+      ("\nBy J. A. EwiNG, F.R.S.,\nProfessor of Mechanism and Applied Mechanics\n"
+       "in the University of Cambridge,\nand Walter Rosenhain, B.A.\n",
+       True, "★★★★ **折行**题头——第一版 `[^\\n]` 匹配不到，而真实印本全是折行的"),
+      ("\nBy A. Smith.\n\nand Walter Rosenhain wrote separately.\n",
+       False, "★★ 跨**空行**不许连——空行是段落边界"),
+      ("\nBy A. Smith, as reported by Walter Rosenhain in a later note.\n",
+       False, "★ `reported by`：转述者不是作者"),
+      ("\nBy J. E. Stead, edited by Walter Rosenhain.\n", False, "★ `edited by`：编者不是作者"),
+      ("\nBy Professor Ewing and the present author have described phenomena.\n",
+       False, "★ 没点他的名"),
+      ("\nBy J. E. Stead, and his somewhat slavish adherence to equilibrium curves did not "
+       "appeal to the authors, since as practical men their faith in such curves fell far "
+       "short of that of Dr. Rosenhain, who was not present.\n",
+       False, "★★ 超 240 字符：正文提到他，不是署名"),
+      ("\nBy J. A. Ewing, W. Rosenhain, and C. Smith.\n", False,
+       "★★★ 逗号列举里的名字**不由 and 引出**——故意不认，宁可漏不可冤"),
+      ("\nBy James A. Ewing, F.E.S., and Walter EoSENHAiN, 1851 Exhibition Scholar.\n",
+       False,
+       "★★★★ **已知限制**：OCR 讹形 + 第二作者位两条同时放宽，风险成倍涨；"
+       "本条只认精确名，那一份留给 attribution_basis 逐份声明"),
+    ]
+    for _txt, _should, _why in _CO:
+        with _tf2.NamedTemporaryFile("w", suffix=".txt", delete=False, encoding="utf-8") as _f:
+            _f.write(_txt); _fp = _f.name
+        _ok, _code, _, _ = check(pathlib.Path(_fp), _pc); _os2.unlink(_fp)
+        print(f"  {'✓' if _ok == _should else '✗'} {_why}")
+        if _ok != _should:
+            bad.append(f"A-byline-coauthor：{_why}（得到 ok={_ok} code={_code}）")
+
+    print("\n══ ★★★★ **真实样本**：Rosenhain #138 四份取不到署名的印本题头（逐字）══")
+    # 这四段**逐字取自 `_corpora/wip-rosenhain-138/.../raw/` 下的语料文件**，不是构造的。
+    # 它们把「本判据现在取不到什么」冻在这里：**日后谁放宽 OCR 容错，这四条会立刻变绿**，
+    # 那时必须同时回答「会不会把别人的东西收进来」。
+    # ★ 现在四条**都应判「取不到」**——这不是缺陷，是有意的射程边界：
+    #   位置放宽（第二作者位）+ 拼写放宽（OCR 讹形）两条叠加，冤枉的风险成倍涨。
+    _pr = build_patterns("Walter Rosenhain"); _pr["namesakes"] = (); _pr["own_mid"] = ""
+    _REAL = [
+        (" and Apijlieel Meeha/mcs in tin. University of Cambridge, and Walter Kosenhaik, "
+         "St John's College, Ccmv bridge, 1851 Exhibitio7i Research Scholar",
+         "1899 Bakerian Lecture：第二作者位 + `Rosenhain`→`Kosenhaik`"),
+        ("train. Pre- liminary Notice/' By James A. Ewing, F.E.S., and Walter EoSENHAiN, "
+         "1851 Exhibition Eesearch Scholar, Melbourne.",
+         "1899 Micro-metallurgy：第二作者位 + `Rosenhain`→`EoSENHAiN`"),
+        ("252 Mr. W. Eosenhain. [May 1, The authors hope that these experiments may prove",
+         "1902 Platinum：版口式 + `Rosenhain`→`Eosenhain`"),
+        (" on Slip-Bands in Metallic Fractures. — Preliminary Note.\" By Walter EosENiiAiisr, "
+         "B.A., B.C.E. Communicated by Professor Ewing, F.R.S.",
+         "1904 Slip-Bands：`Rosenhain`→`EosENiiAiisr`，坏了四处以上"),
+    ]
+    import tempfile as _tf3, os as _os3
+    for _txt, _why in _REAL:
+        with _tf3.NamedTemporaryFile("w", suffix=".txt", delete=False, encoding="utf-8") as _f:
+            _f.write(_txt); _fp = _f.name
+        _ok, _code, _, _ = check(pathlib.Path(_fp), _pr); _os3.unlink(_fp)
+        print(f"  {'✓' if not _ok else '✗'} 仍取不到（**有意的射程边界**）：{_why}")
+        if _ok:
+            bad.append(f"真实样本：{_why} **本该取不到，却取到了 {_code}**"
+                       "——放宽了容错就要回答「会不会把别人的东西收进来」")
+
+    # ★★ 与之成对：**同一批语料里取得到的那几种**，也用逐字原文钉住，
+    #   否则上面四条会诱使人「干脆全放宽」。
+    _REAL_OK = [
+        # ★★★ **连换行一起逐字取**。第一版我把它拼成了一行，自测当场变红——
+        #   判据要求署名是**结构元素**（行首或分隔符之后），而真实印本是跨行的。
+        #   **夹具比原文干净，就等于没测**（同日在 `A-byline-coauthor` 的 `_LN` 上刚栽过一次）。
+        ("alline StritcfMre of Metals, (Second Paper.) \n\nBy J. A. EwiNG, F.R.S., Professor "
+         "of Mechanism and Applied Mechanics in the \nUniversity of Cambridge, and Walter "
+         "Rosenhain, B.A., St, John's College, \nCambridge^ 1851 Exhibition Research Scholar, "
+         "University of Melbourne. \n",
+         "1900 Second Paper：第二作者位、**名字一个字母都没错**、**跨三行** → A-byline-coauthor"),
+    ]
+    for _txt, _why in _REAL_OK:
+        with _tf3.NamedTemporaryFile("w", suffix=".txt", delete=False, encoding="utf-8") as _f:
+            _f.write(_txt); _fp = _f.name
+        _ok, _code, _, _ = check(pathlib.Path(_fp), _pr); _os3.unlink(_fp)
+        print(f"  {'✓' if _ok else '✗'} 取得到：{_why}（得到 {_code or '—'}）")
+        if not _ok:
+            bad.append(f"真实样本：{_why} **本该取到，却没取到**")
+
+    # ══ ★★★★ **真实样本**：Whitworth #152——OCR 把姓拆成两段（2026-08-07）══
+    #   1858 年 NYPL 扫描本的标题页逐字就是 `JOSEPH  WHIT  WORTH,  F.R.S.`（**双空格**），
+    #   整卷 335 KB 因此被判「无据」。Oxford 扫描本同一版是 `JOSEPH WHITWORTH, F.R.S.`。
+    #   ★ 落这条容错前**全库量过**：25 个工作区里「无署名的一手件」中姓被拆开的 14 份，
+    #     而**逐条读命中，真的是署名的只有 4 处**（Blackwell ×2、Bessemer ×1、Whitworth ×1），
+    #     其余是正文断词（`Bes semer converting-vessels`）、版口（`PROFESSOR ROBERTS -AUSTEN`）、
+    #     第三人称提及（`Professor Vir chow's`）、索引条目（`Mart ens, elektrische`）。
+    #     **所以容错只放进 `name_rx`（署名路径），`surname_rx` 一个字没动。**
+    #   ★★ 第一版只容忍**一个**空白，自测里我编的单空格样本过而**真扫描件一份都不中**——
+    #     同日第三次「合成假设比真实的干净」。现在是 `{1,3}`。
+    print("\n══ ★★★★ **真实样本**：Whitworth #152 姓被 OCR 拆开（双空格，逐字）══")
+    _pw = build_patterns("Joseph Whitworth")
+    _pw["namesakes"] = ("Whitworth Porter", "William Allen Whitworth", "Robert Whitworth",
+                        "Charles Whitworth", "Robert Percy Whitworth",
+                        "George Frederick Whitworth")
+    _pw["own_mid"] = ""
+    _WQ = [
+        ('MISCELLANEOUS  PAPERS \n\n\nov \n\n\nMECHANICAL   SUBJECTS \n\n\nBY \n\n\n'
+         'JOSEPH  WHIT  WORTH,  F.R.S. \n\n\nLONDON: \n', True,
+         "1858 NYPL 扫描题页：**姓被拆成 `WHIT  WORTH`、双空格**"),
+        ('MISCELLANEOUS PAPERS \n\n\n\nov \n\n\n\nMECHANICAL SUBJECTS \n\n\n\nBY \n\n\n\n'
+         'JOSEPH WHITWORTH, F.R.S. \n\n\n\nLONDON: \n', True,
+         "1858 Oxford 扫描题页：正常拼写（**回归对照，放宽不许影响它**）"),
+        ("\n\n\nHISTORY OF THE CORPS OF ROYAL ENGINEERS. BY WHITWORTH PORTER.\n\n\n", False,
+         "★★ `Whitworth` 是他的**名**、姓是 Porter"),
+        ("\n\n\nBY WHIT  WORTH PORTER.\n\n\n", False,
+         "★★ 同上且姓被拆开——**放宽后仍必须拒**"),
+        ("\n\n\nCHOICE AND CHANCE. BY WILLIAM ALLEN WHIT  WORTH, M.A.\n\n\n", False,
+         "★ 数学家 W. A. Whitworth，姓被拆开"),
+        ("\n\n\nObservations by Robert Whit  worth, Esq; engineer\n\n\n", False,
+         "★ 运河工程师 Robert Whitworth（卒 1799），姓被拆开"),
+        ("\n\n\nthe Whit worth measuring machine was described by others\n\n\n", False,
+         "★ **正文断词提及**，不是署名"),
+    ]
+    for _s, _want, _why in _WQ:
+        _got = check_text(_s, _pw)[0]
+        _ok = _got == _want
+        print(f"  {'✓' if _ok else '✗'} {'应取到' if _want else '应拒绝'}　{_why}")
+        if not _ok:
+            bad.append(f"Whitworth 拆姓：{_why}")
 
     if bad:
 

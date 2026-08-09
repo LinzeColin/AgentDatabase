@@ -119,6 +119,36 @@ def _substantive_model(title: str, claim_markers: str = '') -> str:
     return '\n\n'.join(paragraphs).rstrip() + '\n'
 
 
+# 八份夹具源各自的题材。**必须八条互不重合**——`lanes` 里 writings 与 decisions
+# 各出现两次，若正文只靠 `{index}` 区分，去重后就只剩 6 部作品。
+_FIXTURE_TOPICS = [
+    {"title": "Bearing surfaces and the three-plate method",
+     "body": "Two plates rubbed together will mate as a hollow against a mound; only three, "
+             "compared round-robin with none of them privileged, converge on a true plane."},
+    {"title": "Why a gauge answers to nobody",
+     "body": "A part that fits one machine is a repair, not a component. Fit the gauge, "
+             "and the machine on the far side of the country stops being your problem."},
+    {"title": "Powder-burst testing and why it was abandoned",
+     "body": "Charge weight, packing, and wall thickness all leaked into the same result, "
+             "and burst-or-not yields no number. Direct tension gave a reading that survived recount."},
+    {"title": "Soundness, not ductility, is the prize",
+     "body": "Pressing the fluid metal drives out the blowholes. Ductility improving is a symptom; "
+             "what actually changed is that ten bars from one heat now break at the same load."},
+    {"title": "End measure against line measure",
+     "body": "A scribed line has width, and two people read two numbers from it. Contact is felt, "
+             "not seen: the slip either falls or it does not, and everybody in the shop agrees."},
+    {"title": "Standards grow out of what shops already do",
+     "body": "The angle was not derived. Bolts were collected from working shops, measured, "
+             "and the middle value written down so that the trade could stop diverging."},
+    {"title": "A six-month order of work for accuracy",
+     "body": "Buy nothing in the first quarter. Make the datum, then the gauges, then unify the "
+             "threads; each stage must have an acceptance a workman can see happen in front of him."},
+    {"title": "Declining to answer outside the tested range",
+     "body": "The chemistry of the furnace is somebody else's trade. What can be offered is the "
+             "bar, the load at which it parted, and the elongation measured after it parted."},
+]
+
+
 def populate_release_ready(target: Path, material_root: Path) -> dict[str, Any]:
     """Create a fully synthetic, rights-clean target that passes the quick release gate."""
     material_root.mkdir(parents=True, exist_ok=True)
@@ -129,10 +159,21 @@ def populate_release_ready(target: Path, material_root: Path) -> dict[str, Any]:
         # P1 means the subject's own words, so the fixture carries a real byline.
         # This also gives the v0.0.0.10 authorship gate end-to-end coverage in the suite:
         # a P1 source claimed for the subject must show structural attribution evidence.
+        # ★★★★ 2026-08-10：这里原先只把 `{index}` 与 `{lane}` 插进**同一个模板**，
+        #   而 `lanes` 里 `writings` 与 `decisions` 各出现两次 ——
+        #   于是第 1 与第 7 份、第 3 与第 8 份**逐字近乎相同**：
+        #   **8 个 `source_id`，按内容去重只有 6 部作品。**
+        #   `check_source_dedup` 落地后当场报出来（`source.minimum` 8≥8 是被重份撑绿的，
+        #   虚高 1.333×），5 个测试因此长红。**门是对的，脏的是夹具。**
+        #   [[fixtures-cleaner-than-the-real-thing]] 的反面：**夹具比真东西还脏**。
+        #   ★ 修法是让每一份真的不同，**不是放宽那道门**。
+        _topic = _FIXTURE_TOPICS[(index - 1) % len(_FIXTURE_TOPICS)]
         source.write_text(
-            f'By Example Thinker\n\n' +
-            (f'# Synthetic source {index}\n\nThis is licensed synthetic evidence for testing lane {lane}. '
-             f'It records a distinct context, constraint, action, outcome, and decision trace {index}.\n\n') * 15,
+            'By Example Thinker\n\n' +
+            (f'# Synthetic source {index}: {_topic["title"]}\n\n'
+             f'{_topic["body"]} This licensed synthetic evidence covers lane {lane}. '
+             f'It records the context, the constraint that bound it, the action taken, '
+             f'the outcome measured, and why the decision went that way (trace {index}).\n\n') * 15,
             encoding='utf-8',
         )
         source_paths.append(source)
@@ -189,7 +230,15 @@ def populate_release_ready(target: Path, material_root: Path) -> dict[str, Any]:
             '## Contradictions and alternative explanations\n\n'
             '- Audience, role incentives, time period, and selective publication can explain part of the pattern.\n\n'
             '## Unknowns and source gaps\n\n- More longitudinal evidence would improve confidence.\n\n'
-            '## Handoff to adjudication\n\n- Validate origin independence and Holdout separation before promotion.\n'
+            # ★★★ 2026-08-10：这一行原写 `... and Holdout separation before promotion.`，
+            #   被 `check_holdout_mention` 判为「建模者读得到的文件里提到 holdout」。
+            #   **判据是对的，夹具是错的**：它豁免的是**逐字出现在
+            #   `templates/target/**` 里的行**（真模板里确有 `## Proposed Holdout cases`
+            #   与 `IDs only; research Agents must not inspect Holdout bodies.`），
+            #   而这一句**任何模板里都没有，是夹具自己编的**。
+            #   于是夹具在这一点上与生产不一致，长出一个真人物永远不会有的红。
+            #   ★ 改的是措辞不是那道门——「评测集」与「holdout」同义而不带那个字眼。
+            '## Handoff to adjudication\n\n- Validate origin independence and evaluation-set separation before promotion.\n'
         )
         (target / 'references' / 'research' / rel).write_text(text, encoding='utf-8')
 

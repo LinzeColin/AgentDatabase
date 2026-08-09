@@ -37,12 +37,33 @@ Jesse Livermore #100 是本项目第一个**只有扫描件**的人物（1877–
 
 文档以拉丁字母为主时，若出现一个**完全由同形字构成**的西里尔词，判为 OCR 替换。
 
-**为什么加「完全由同形字构成」这个限定**：真正的俄语词几乎必然含有
+**为什么加「完全由同形字构成」这个限定**：长的俄语词多半含有
 至少一个**没有拉丁长相**的字母（б г д ж з и й л п ф ц ч ш щ ъ ы ь э ю я）。
-`привет` 里的 `и` 就不是同形字，因此**真俄语不会被误判**。
+`привет` 里的 `и` 就不是同形字。
 而 `РКЕҒАСЕ` 七个字母全在同形字表里——**那不是俄语词，是被替换掉的英文词**。
 
-判据的方向是「窄到不误伤」，代价是漏掉那些恰好全由同形字构成的真外文词
+### ★★★★ 2026-08-07 更正：这里原先写着「**真俄语不会被误判**」，**是错的**
+
+拿归档里的真语料一验就翻了：Benardos #128 的来源台账 `raw/_ids.txt`
+（拉丁 59.7% / 西里尔 40.3%）被报出 **117 个 `all_homoglyph`，逐个读下来全是真俄语词**——
+`соавтором`／`Текст`／`сварке`／`Реостат`／`оснастка`／`реестру`，以及改革前的 `отъ`、`имъ`。
+
+**原来那句推理只对长词成立**，而俄语文本里占多数的恰恰是
+`на не с о в к у то от а` 这类**整词全由同形字构成的虚词**。
+一个俄语人物的语料（Benardos #128、Slavyanov #115）**必然大面积中招**。
+
+**没有修，只是把射程写对了。** 试过一个判别式并**当场否掉**：
+「文档里非同形字西里尔的占比」——Benardos 真俄语 **35.0%**，
+而 Barton #117 那份**真 OCR 垃圾**（`Кей Cross Headquarters` = Red Cross、
+`Мау` = May、`ШасафБаноп` = 糊掉的 Clara Barton）也有 **26.7%**。
+**两者分不开，该判别式不成立。**
+
+所以本判据在 B 这一路上的真实射程是：
+**「这份文档里有西里尔字符」——它分不清那是 OCR 替换还是真的外文。**
+语料层只报不拦，这个假阳不会挡任何人；但**读报告的人必须知道**，
+否则会把 117 条噪声当成 117 处 OCR 损伤。
+
+判据的方向仍是「窄到不误伤」，代价是漏掉那些恰好全由同形字构成的真外文词
 （如 `ТОРС`）。**宁可漏，不可误杀**——误杀会让人去关掉这个门。
 
 ## 两级严重度（**引文里出现是错，语料里出现只是报**）
@@ -128,6 +149,12 @@ def scan_text(text: str) -> dict:
     # 拉丁不占多数时，B 判据不成立（文档本身可能就是俄文／希腊文）
     if latin <= non_latin:
         all_homo = []
+    # ★ 2026-08-07 新增的这一项**只用于给读报告的人提示，不参与任何判定**：
+    #   「没有拉丁长相」的非拉丁字母有多少。真外文里它必然大量出现。
+    #   ⚠ 它**分不开**真外文与 OCR 垃圾——Benardos 真俄语 35.0%，
+    #     Barton 那份真 OCR 垃圾也有 26.7%。当初想拿它做判别式，实测否掉了。
+    genuine = sum(1 for ch in text
+                  if _script(ch) in ("cyrillic", "greek") and ch not in HOMOGLYPHS)
     return {
         "mixed": mixed,
         "all_homoglyph": all_homo,
@@ -137,8 +164,24 @@ def scan_text(text: str) -> dict:
             "non_latin_chars": non_latin,
             "mixed_words": len(mixed),
             "all_homoglyph_words": len(all_homo),
+            "genuine_nonlatin_chars": genuine,
         },
     }
+
+
+def _has_genuine_nonlatin(rep: dict, floor: float = 0.15) -> bool:
+    """这份语料里「没有拉丁长相」的非拉丁字母够不够多（提示用，**不是判定**）。
+
+    ⚠ **它不能用来判断是真外文还是 OCR 垃圾。** 两个实测值：
+    Benardos #128 真俄语 **35.0%**，Barton #117 真 OCR 垃圾 **26.7%**——
+    重叠，分不开。它只回答「这份东西里有没有成规模的真外文字母」，
+    据此提醒读报告的人：**这一栏得人去读**。
+    """
+    c = rep.get("counts", {})
+    nl = c.get("non_latin_chars", 0)
+    if not nl:
+        return False
+    return c.get("genuine_nonlatin_chars", 0) / nl >= floor
 
 
 def restore(word: str) -> str:
@@ -220,6 +263,43 @@ def check_quotes(paths: list[pathlib.Path]) -> list[str]:
 # --------------------------------------------------------------------------
 def self_test() -> int:
     failures: list[str] = []
+
+    # ══ ★★★★ 逐字真实样本：**同一个判定，两种截然不同的原因**（2026-08-07）══
+    #   两串都是从 `skill_log_evals` 归档里 `repr()` 出来的**原文**，一个字没动。
+    #
+    #   ① Benardos #128 的来源台账 `raw/_ids.txt`——**真俄语**。
+    #      全文 5160 个西里尔字符里 1806 个（35.0%）是**没有拉丁长相**的字母
+    #      （и л д б ж э я ъ…），是货真价实的俄文注释。
+    #      **判据在整份文件上报出 117 个 `all_homoglyph`，逐个读下来全是真词**：
+    #      соавтором／Текст／сварке／Реостат／оснастка／реестру／改革前的 отъ、имъ。
+    #      ★ 这**证伪了本文件文档头原先那句「真俄语不会被误判」**——
+    #        那句推理对 `привет` 这种长词成立，而俄语里占多数的是
+    #        `на не с о в к у то от` 这类**全由同形字构成的虚词**。
+    #
+    #   ② Barton #117 的 `rc-peace-war-1912.txt`——**真 OCR 垃圾**（同一判定，真阳）。
+    #      `Кей Cross Headquarters` 是 Red Cross、`Мау` 是 May、
+    #      `ШасафБаноп` 是糊掉的 Clara Barton。这里报得对。
+    #
+    #   ★★★ **关键在于：本判据分不开这两者。**
+    #     我曾想用「文档里有没有非同形字西里尔」去区分——
+    #     **量了一下就被否掉**：Benardos 35.0%，而 Barton 那份 OCR 垃圾也有 26.7%。
+    #     该判别式不成立，**没有落地**。这条留在这里是为了让下一个人别再走一遍。
+    print("\n── ★★★★ 逐字真实样本：真俄语 vs 真 OCR 垃圾（判据分不开）──")
+    _ru_real = 'us-patent-363320-1887-elektrogefest\thttps://patentimages.storage.googleapis.com/74/6f/2a/17ed495adeac02/US363320.pdf\tN. de Benardos & S. Olszewski, «Process of and Apparatus for Working Metals by the Direct Application of the Electric Current», United States Letters Patent No. 363,320\t1887\tprinted leaf: «Patented May 17, 1887»; «Application filed December 3, 1885. Serial No. 184,847»; 4 sheets of drawings + specification, 7 PDF pages\ten\tP1\tCO-AUTHORED\tlane=writings. ELECTRODE=carbon. Основополагающий документ «Электрогефеста» и единственный из шести с соавтором — Stanisław Olszewski, поэтому CO-AUTHORED, а не HIS-OWN. Текст от первого лица; «The conductor preferably consists of a stick or cylindrical rod of carbon». Все три следующих патента ссылаются именно на него. RIGHTS=pre1929'
+    _ocr_real = 'lara Barton, taken about 1585 allstar ну, етсин r8 De шр opp. 17 \nThe First Red Cross Warehouse, ане DC A si, sais то а DT \nШасафБаноп staken about, 15848 4 55,22 зу чил». ЗЇ. пим МИА аз. 113 \nатир Бет а AGB 630700 6 015 605 оо ооо а бо 143 \nКей Cross Headquarters ........ БОҚТАП К Ма: о он ИЙ \n[ойоебозп, Ра  реғюгене оошот 2222222 2: 155 '
+    _r1 = scan_text(_ru_real)
+    _r2 = scan_text(_ocr_real)
+    print(f"  ① Benardos 真俄语行：all_homoglyph={_r1['all_homoglyph']}")
+    print(f"  ② Barton 真 OCR 垃圾：all_homoglyph={_r2['all_homoglyph'][:8]}")
+    if len(_r1["all_homoglyph"]) != 8:
+        failures.append(f"真俄语样本行为变了：期望 8 个，实得 {len(_r1['all_homoglyph'])}")
+    if "соавтором" not in _r1["all_homoglyph"]:
+        failures.append("真俄语样本：`соавтором` 不再被报——**这是假阳，但行为变了要有人知道**")
+    if len(_r2["all_homoglyph"]) != 13:
+        failures.append(f"真 OCR 垃圾样本行为变了：期望 13 个，实得 {len(_r2['all_homoglyph'])}")
+    if not _r2["all_homoglyph"]:
+        failures.append("★ 真 OCR 垃圾一个都不报了——**真阳丢了**，比假阳严重")
+    print(f"  ✓ 两侧都按现行口径复现（真俄语 8 假阳／真 OCR 13 真阳）")
 
     # 正对照一：干净英文，一条都不许报。
     clean = ("The speculator's chief enemies are always boring from within. "
@@ -345,6 +425,34 @@ def main() -> int:
         if len(corpus_reports) > 10:
             print(f"  …另有 {len(corpus_reports) - 10} 份")
         print("  ↑ 这些是 OCR 件。**取引文时避开这些位置**，并把「本源是扫描件」记进账。")
+        # ★★★★ 2026-08-07：**「全同形字词」这一栏在含真外文的语料上几乎全是假阳。**
+        #   Benardos #128 的 `raw/_ids.txt` 实测 117 条，逐个读下来全是真俄语
+        #   （соавтором／Текст／сварке／Реостат）。判据**分不开**真外文与 OCR 替换：
+        #   试过用「非同形字西里尔占比」区分，Benardos 35.0% 而真 OCR 垃圾也有 26.7%。
+        #   不打这行字，读的人会把 117 条噪声当成 117 处 OCR 损伤。
+        _foreign = [r for r in corpus_reports
+                    if "error" not in r and r["counts"]["all_homoglyph_words"]
+                    and _has_genuine_nonlatin(r)]
+        if _foreign:
+            # ★ 措辞在这里改过一次：初稿写的是「这几份多半是真外文，不是 OCR 损伤」，
+            #   拿 Barton #117 那份**真 OCR 垃圾**一跑，它也被打上同一句话——**说反了**。
+            #   本标记两个方向都不下结论，它只说「这一栏不能当计数读」。
+            print(f"  ★★ **其中 {len(_foreign)} 份含大量「没有拉丁长相」的非拉丁字母**"
+                  f"（и л д б ж э я ъ 之类）——"
+                  f"**这几份的「全同形字词」一栏不能当 OCR 损伤的计数读**：")
+            for r in _foreign[:5]:
+                c = r["counts"]
+                print(f"       {pathlib.Path(r['file']).name}："
+                      f"全同形字词 {c['all_homoglyph_words']} 个，"
+                      f"非同形字非拉丁 {c.get('genuine_nonlatin_chars', '?')} 个"
+                      f"（占非拉丁 {c.get('genuine_nonlatin_chars', 0) / max(c['non_latin_chars'], 1):.1%}）")
+            print("       ★ **判据分不开真外文与 OCR 垃圾**，两个方向都会错：")
+            print("         · Benardos #128 `_ids.txt` 非同形字占 35.0%，"
+                  "117 条**全是真俄语**（соавтором／Текст／Реостат）→ 假阳")
+            print("         · Barton #117 `rc-peace-war-1912.txt` 占 26.7%，"
+                  "2923 条**全是真 OCR 垃圾**（Кей Cross = Red Cross）→ 真阳")
+            print("         两个区间重叠，**曾想拿这个占比做判别式，实测否掉了**。"
+                  "**这一栏要人去读原文。**")
 
     if not quote_problems:
         print("✓ 引文层干净：没有引文含冒充拉丁字母的西里尔／希腊字符")

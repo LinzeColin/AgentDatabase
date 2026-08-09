@@ -658,6 +658,7 @@ def report_stance_density(report, target: Path,
         return
     tot = fp = st = st_nofp = 0
     unread = []
+    unmeasured = []                 # ★ 判据自己说「未核验」的，**单列，不并进分母**
     for record in sources:
         if not str(record.get('tier') or '').startswith('P1'):
             continue
@@ -667,12 +668,28 @@ def report_stance_density(report, target: Path,
             unread.append(record.get('source_id'))
             continue
         r = mod.measure(p.read_text(encoding='utf-8', errors='replace'))
+        # ★★★★ 2026-08-10：`check_stance_density.measure` 在**判不出语种**时
+        #   把三个计数字段返回 `None`（连同一句 `★ 未核验：语种判为 ?
+        #   ——本件只认英语，不是「这个人没有声口」`）。那是它有意的「我不知道」。
+        #   而这里原先写的是 `fp += r['第一人称命中']` ——
+        #   **`int + None` 直接 TypeError，整个质检门崩掉**（全库 6 个测试因此长红）。
+        #
+        #   ★ 修法**不许写 `or 0`**：那会把「判不出语种」静默算成
+        #     「这份材料里第一人称是 0」，即把「不知道」记成一个具体的好数——
+        #     而这一维正是 ㉙ 用来分辨「有没有声口」的。[[empty-default-swallows-unknown]]
+        #   **跳过，并单列出来。**
+        if r.get('第一人称命中') is None:
+            unmeasured.append({'source_id': record.get('source_id'),
+                               '原因': r.get('★ 未核验') or '判据未给计数'})
+            continue
         tot += r['字符']
         fp += r['第一人称命中']
         st += r['**立场句**']
         st_nofp += r['★ 其中不含第一人称的']
     report.metrics['stance_density'] = {
         'P1 字符合计': tot,
+        '**判据说未核验的**': len(unmeasured),
+        '★ 未核验的逐条（不并进分母，也不算 0）': unmeasured[:8],
         '第一人称（动词式）/万字': round(fp / tot * 10000, 2) if tot else None,
         '**立场句/万字**': round(st / tot * 10000, 2) if tot else None,
         '其中不含第一人称的': st_nofp,

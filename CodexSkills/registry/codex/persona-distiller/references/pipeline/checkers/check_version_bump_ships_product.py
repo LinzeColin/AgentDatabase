@@ -161,7 +161,16 @@ def main():
     ap.add_argument("--commit", help="判某一次提交，默认判工作树+暂存区")
     ap.add_argument("--audit", action="store_true", help="回溯审计两条轴")
     ap.add_argument("--since", default="2026-08-04", help="审计起点（规矩生效日）")
+    # ★★★ **负对照写了却跑不到——是元判据抓出来的。**
+    #   `selftest()` 早就写好（造临时仓跑三种情形），但 `main()` 里没有这个参数，
+    #   于是 `check_checkers` 一直报 NO-SELFTEST：
+    #   **「没有负对照的检查器，其『全绿』不构成任何证据」——它自己就是那个样子。**
+    #   这与元判据文件头记的第 6 种（「是硬门、负对照写了却跑不起来」）同形。
+    ap.add_argument("--self-test", action="store_true", help="只跑内置负对照，不读本仓")
     args = ap.parse_args()
+
+    if args.self_test:
+        return selftest()
 
     root = repo_root(os.path.abspath(args.root))
     if not root:

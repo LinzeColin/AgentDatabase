@@ -44,6 +44,18 @@ import pathlib
 import statistics
 import sys
 
+# ★★★★ 2026-08-07：分数键名的读法**收在 assemble_judge_results.score_pair 一处**。
+#   在此之前本件自带一份只认 `A`/`B` 的读法，于是 Whitworth #152 的两轮
+#   （评委按冻结指令输出 `A_score`/`B_score`）**逐题读成 None**，
+#   最后印出「两侧逐字未动的题数 **0**」——而两轮载荷是**逐字节相同**的。
+#   它不报错，只是静默地把 16 道题读成 0 道，再说「量不出噪声」。
+#   **同一个缺陷的第二份拷贝，这次不再各修各的。**
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+try:
+    from assemble_judge_results import score_pair                # noqa: E402
+except Exception:                                                # noqa: BLE001
+    score_pair = None
+
 # 与 common.py 的 PROFILE_THRESHOLDS 对齐；此处只用于**换算成 SE 倍数**，不做判定。
 GATES = {"quick": 0.03, "standard": 0.05, "deep": 0.07}
 # n → 卡方分位推出的 sd 置信区间倍数（0.025 / 0.975），只列常用的小 n。
@@ -96,14 +108,16 @@ def case_delta(rd: dict, q: str):
     vals = []
     for scores in rd["judges"].values():
         row = scores.get(q)
-        if isinstance(row, (list, tuple)) and len(row) >= 2:
-            row = {"A": row[0], "B": row[1]}
-        if isinstance(row, dict) and cand in row and base in row:
-            try:
-                a, b = normalize(float(row["A"]), float(row["B"]))
-            except (TypeError, ValueError):
-                return None
-            vals.append((a - b) if cand == "A" else (b - a))
+        pair = score_pair(row) if score_pair else (
+            (row[0], row[1]) if isinstance(row, (list, tuple)) and len(row) >= 2
+            else ((row.get("A"), row.get("B")) if isinstance(row, dict) else None))
+        if pair is None or pair[0] is None or pair[1] is None:
+            continue                       # ★ 这一席这一题读不出，跳这一席，不是判 None
+        try:
+            a, b = normalize(float(pair[0]), float(pair[1]))
+        except (TypeError, ValueError):
+            continue
+        vals.append((a - b) if cand == "A" else (b - a))
     return statistics.mean(vals) if vals else None
 
 

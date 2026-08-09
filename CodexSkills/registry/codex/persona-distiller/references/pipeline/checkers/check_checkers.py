@@ -36,6 +36,7 @@ RUNBOOK 第十八种：
 当场把整条流水线堵死，违反「不因为过不了门而卡住流程」。
 缺口计数逐次可见，不会被误当成通过。
 """
+import re
 import argparse
 import ast
 import json
@@ -200,6 +201,115 @@ def _code_only(text: str):
     return "\n".join(out)
 
 
+def duplicate_audit(directory: pathlib.Path, threshold: float = 0.12) -> dict:
+    """★★★★ **有没有两件判据在做同一件事**——2026-08-06 新增。
+
+    ## 撞出它的那一次
+
+    我写了 `check_stance_density.py`，其中「第一人称怎么数」那一半
+    **与 `check_first_person_density.py` 完全重复**：
+
+    | | 两边都写着 |
+    |---|---|
+    | 裸 `\\bI\\b` 不可信 | 一个说「零件标号 `anvil I-I`」，一个说「化学式 `PbI₂`」 |
+    | 要动词锚定 | `I have`／`I claim`／`I find` |
+    | 要剥权利要求套语 | `What I claim`／`In testimony whereof` |
+    | **撞出它的人物** | **都是 Coffin #130** |
+
+    **我从头推了一遍它已经记着的东西，还漏掉了它有而我没有的第三类**
+    （`DEICTIC`：`I have shown … in Fig. 2` 是他的字但不含主张）。
+
+    ★ 这是「[[tool-existed-and-i-did-it-by-hand]]」当天的第三次，
+      而前两次是**手工做了脚本能做的事**；**这次是写了一整个重复的判据**。
+
+    ## 判法：比**正则字面量**的重合度，不比文件名也不比散文
+
+    判据的身份在它的模式表里。取每件的正则常量（`re.compile` 的参数与
+    形如 `r"\\b…"` 的字符串），切成 token 集合，两两算 Jaccard。
+
+    ★★ **不比 docstring**：本项目的判据文件头都写得很长，
+      主题词天然重合（「语料」「判据」「实测」），**比散文只会全是假阳**。
+    ★ **不比文件名**：`check_quote_*` 有五件，各做各的。
+
+    ## 阈值 0.12 是**拿立案案例定出来的**，不是拍的
+
+    把 `check_stance_density` **借规则之前那一版**（提交 a8dc11e3）与
+    `check_first_person_density` 放一起跑：
+
+    | 阈值 | 立案案例 | 全库 465 个组合报出 |
+    |---|---|---|
+    | 0.34 | **抓不到** | 0 |
+    | 0.20 | **抓不到** | 0 |
+    | **0.12** | **抓到（0.166）** | **4 对** |
+
+    ★★★ **信号很弱**（0.166 的重合度），4 对里立案案例排第 2。
+    **所以它只报不拦，且必须人去读**——0.12 这个阈值离噪声不远。
+    ★ 修好之后同一对**降到阈值以下**（现在是 import 不是复制），
+      **这正是它该有的行为**。
+    """
+    import itertools
+    import re
+    # ★★★ **必须用 AST 取字符串常量，不能用正则去抠 `"…"`。**
+    #   第一版用 `r'"((?:[^"\\]|\\.){6,})"'`，它**跨引号边界**把整段 docstring
+    #   当成一个字面量抓走了——于是「共有的模式词」全是 `argparse`／`args`／`chk`
+    #   这类 CLI 样板，**而它本该抓的那一对（stance_density × first_person_density）
+    #   一条都没报**。判据在自己的立案案例上失败，就是没做完。
+    TOK = re.compile(r"[A-Za-z]{3,}")
+    LOOKS_RX = re.compile(r"\\[bswdWSD]|\[[^\]]{2,}\]|\(\?:")
+    # CLI／Python 样板词——它们出现在每一件判据里，留着必然把所有对都拉到 0.4 上下
+    STOP = {"self", "test", "true", "false", "none", "args", "argparse", "action",
+            "store", "help", "type", "default", "print", "json", "path", "file",
+            "dumps", "loads", "text", "utf", "errors", "replace", "encoding",
+            "return", "def", "for", "not", "and", "the", "with", "str", "int"}
+    sigs = {}
+    for path in sorted(directory.glob("check_*.py")):
+        # ★★ **本文件自排除。** 首跑它把自己与 `check_first_person_density` 报成
+        #   0.142 重复——共有词是 `anvil`／`coffin`／`claim`／`desire`。
+        #   **原因是我的自测夹具照抄了真实模式**（那是对的：正例要取自真实的那一对）。
+        #   ★ 这个命中**是真的**——判据确实抓到了「有人复制了那些模式」，
+        #     只是复制者是它自己的夹具。**记在这里，因为下一个人会重新纳闷一次。**
+        if path.name == pathlib.Path(__file__).name:
+            continue
+        text = path.read_text(encoding="utf-8", errors="replace")
+        try:
+            tree = ast.parse(text)
+        except SyntaxError:
+            continue
+        toks = set()
+        for node in ast.walk(tree):
+            if not (isinstance(node, ast.Constant) and isinstance(node.value, str)):
+                continue
+            lit = node.value
+            # 只收**看起来是正则**的常量：含转义类／字符组／非捕获组
+            if len(lit) < 6 or not LOOKS_RX.search(lit):
+                continue
+            # ★★★ **用法示例串不是正则。** 首跑三对疑似里有两对全栽在这上面：
+            #     `python3 check_semantic_residue.py --workspace <dir> [--extra a.json …]`
+            #   那个 `[--extra …]` 的方括号被 `LOOKS_RX` 当成了字符组，
+            #   于是 `python`／`workspace`／`runbook`／`dir` 成了「共有的模式词」。
+            #   **判据的假阳源是它自己的取样规则，不是那两件判据。**
+            if re.search(r"python3?\s|--[a-z]{2,}|\.py|RUNBOOK", lit):
+                continue
+            toks |= {t.lower() for t in TOK.findall(lit)} - STOP
+        if len(toks) >= 8:
+            sigs[path.name] = toks
+    pairs = []
+    for a, b in itertools.combinations(sorted(sigs), 2):
+        sa, sb = sigs[a], sigs[b]
+        j = len(sa & sb) / max(1, len(sa | sb))
+        if j >= threshold:
+            pairs.append({"甲": a, "乙": b, "重合度": round(j, 3),
+                          "共有的模式词": sorted(sa & sb)[:14]})
+    pairs.sort(key=lambda x: -x["重合度"])
+    return {
+        "比过的判据数": len(sigs),
+        "**疑似重复**": pairs,
+        "阈值": threshold,
+        "★ 口径": ("**只报不拦。** 重合高不等于重复——`check_quote_*` 那五件"
+                   "天生共用引文词表。**报出来是让人去读，不是自动判重。**"),
+    }
+
+
 def wiring_audit(directory: pathlib.Path) -> dict:
     """★★ **每件判据有没有生产调用方**——v0.0.0.91 新增。
 
@@ -299,6 +409,46 @@ def selftest_touches_disk(directory: pathlib.Path) -> dict:
             "名单": need}
 
 
+def _selftest_duplicate_audit(bad: list) -> None:
+    """★ `duplicate_audit` 的负对照——正例取自**真实的那一对**。"""
+    import tempfile
+    A = ('import re\n'
+         'VERB = re.compile(r"\\bI (?:have|had|claim|find|found|prefer|desire|shown)\\b")\n'
+         'BOILER = re.compile(r"(What I claim|In testimony whereof|Letters Patent)")\n'
+         'NOISE = re.compile(r"\\banvil I-I\\b|\\bextensions I and J\\b")\n')
+    B = ('import re\n'
+         'FP = re.compile(r"\\bI (?:have|had|claim|find|found|prefer|desire|shown)\\b")\n'
+         'BOIL = re.compile(r"(What I claim|In testimony whereof|Letters Patent)")\n'
+         'JUNK = re.compile(r"\\banvil I-I\\b|\\bextensions I and J\\b")\n')
+    C = ('import re\n'
+         'YEARS = re.compile(r"\\b(?:18|19)\\d\\d\\b")\n'
+         'PAGES = re.compile(r"\\bpp?\\.\\s*\\d+[-\u2013]\\d+\\b")\n'
+         'ISBN = re.compile(r"\\bISBN[- ]?(?:10|13)?\\b")\n')
+    def chk(label, ok):
+        print(("  ✓ " if ok else "  ✗ ") + label)
+        if not ok:
+            bad.append("duplicate_audit：" + label)
+
+    with tempfile.TemporaryDirectory() as d:
+        root = pathlib.Path(d)
+        (root / "check_a.py").write_text(A, encoding="utf-8")
+        (root / "check_b.py").write_text(B, encoding="utf-8")
+        (root / "check_c.py").write_text(C, encoding="utf-8")
+        r = duplicate_audit(root, threshold=0.12)
+        pairs = {frozenset((p["甲"], p["乙"])) for p in r["**疑似重复**"]}
+        chk("重复的两件被报出来",
+            frozenset(("check_a.py", "check_b.py")) in pairs)
+        chk("不相干的第三件不被牵连",
+            not any("check_c.py" in p for p in pairs))
+        # ★★ 反向对照：把 B 改成 import A（就像我实际的修法），**必须降到阈值以下**
+        (root / "check_b.py").write_text(
+            'import importlib.util, pathlib\n'
+            '_m = None  # 借 check_a 的表，不再自备一份\n', encoding="utf-8")
+        r2 = duplicate_audit(root, threshold=0.12)
+        chk("改成引用之后不再报（**这正是它该有的行为**）",
+            not r2["**疑似重复**"])
+
+
 def self_test() -> int:
     import tempfile
     bad = []
@@ -326,6 +476,33 @@ def self_test() -> int:
         rows2 = {r["checker"]: r["real_fixture"] for r in census(d, exclude=set())}
         if not rows2.get("check_meta_realfx.py"):
             bad.append("真实夹具探测漏报：源码里有「真实样本」标记却报无")
+    print("\n── duplicate_audit 负对照（正例取自真实的那一对）──")
+    _selftest_duplicate_audit(bad)
+
+    # ★★★★ 2026-08-07：**`--json` 的输出必须是纯 JSON**——真数据上撞出来的。
+    #   此前三段审计在 `--json` 时也照打，stdout = JSON 数组 + 1790 字符散文，
+    #   唯一消费方 `quality_check.py:1343` 的 `json.loads` **必然抛 Extra data**，
+    #   拿到 `rows = []`，于是 **`content.selftest-failed` 一条也发不出来**。
+    #   ★ 这一条必须**真去跑子进程**，不能只调 `census()`——
+    #     出问题的正是 `main()` 的打印，`census()` 本身一直是对的。
+    #     这就是 [[a-checker-nothing-calls-is-not-a-checker]] 第五批那个形状：
+    #     **检查不经过被保证之物**。
+    print("\n── `--json` 输出可解析性（真跑子进程，不是调函数）──")
+    with tempfile.TemporaryDirectory() as tmp2:
+        d2 = pathlib.Path(tmp2) / "scripts"
+        d2.mkdir()
+        for name, (src, _) in FIXTURES.items():
+            (d2 / name).write_text(src, encoding="utf-8")
+        _r = subprocess.run([sys.executable, str(pathlib.Path(__file__).resolve()),
+                             str(d2), "--json"], capture_output=True, text=True)
+        try:
+            _rows = json.loads(_r.stdout)
+            print(f"  ✓ stdout 是单个 JSON（{len(_rows)} 条），"
+                  f"末尾无散文；退出码 {_r.returncode}")
+        except json.JSONDecodeError as _e:
+            print(f"  ✗ **stdout 不是纯 JSON**：{_e}")
+            bad.append(f"--json 输出无法解析：{_e}")
+
     if bad:
         print("\n负对照未过：")
         for b in bad:
@@ -380,6 +557,44 @@ def main() -> int:
             for r in rows:
                 if not r["real_fixture"]:
                     print(f"  · {r['checker']}")
+    # ★★★★ v0.0.0.172：**事故锚点**——今天删掉一个判据换来的一条。
+    #   `check_refusal_without_substance` 自测 7 条全过（含 3 条反例），
+    #   **拿 Rosenhain #138 两轮真答案一验，结果是反的**：
+    #   该报的那一轮报 0 处，已改好的那一轮反而报 1 处。**当天删掉，没上线。**
+    #   ★ 与上面那段「合成负对照只证明判据在我想得到的形态上成立」是同一件事，
+    #     只是这次是**造判据的当天就撞上**，不是事后回查。
+    #   判法：一件判据若**既不引具体人物编号、也不带实测数字**，
+    #   那它很可能是想出来的而不是撞出来的。**只报不拦。**
+    # ★★★★ 2026-08-07：**下面三段审计原先在 `--json` 时也照打**，
+    #   于是 stdout = JSON 数组 + 1790 字符散文，`json.loads` **必然抛 Extra data**。
+    #   唯一的消费方 `quality_check.py:1343` 于是永远走 except 分支拿到 `rows = []`，
+    #   ★ 真实后果：**`content.selftest-failed` 一条也发不出来**——
+    #     哪件判据自测挂了，门都不会说。判据自己是设了防的
+    #     （写「本次未做检查器先验（不是通过）」），**防线在调用点被 `rows=[]` 绕过了**。
+    #   复现：`python3 scripts/check_checkers.py scripts --json | python3 -c "import json,sys;json.load(sys.stdin)"`
+    #   ★ 退出码与人读路径**必须同一个表达式**（见文件末），
+    #     否则 `--json` 会把「有判据自测未过」报成 0。
+    if a.json:
+        return 2 if any(r["verdict"] == FAILED for r in rows) else 0
+    print("\n── 事故锚点（判据是撞出来的，还是想出来的）──")
+    _NUMPAT = re.compile(r"\d+\.\d{3,4}|\d+/\d+|numFound|\b\d{2,}\s*(?:份|条|个|次)")
+    _files = sorted(pathlib.Path(d).glob("check_*.py"))
+    _noanchor = []
+    for _p in _files:
+        _doc = _p.read_text(encoding="utf-8", errors="replace")[:6000]
+        if not (re.search(r"#\d{2,3}\b", _doc) or _NUMPAT.search(_doc)):
+            _noanchor.append(_p.name)
+    # ★ 2026-08-07：**这一节的分母是 {len(_files)}，含本件自己**；
+    #   而上面那张普查表的分母是 {len(rows)}，**把本件排除在外**（`census(exclude=…)`）。
+    #   两个数在同一次输出里差 1，此前谁都没写自己是哪个口径——
+    #   我今天就据此误判过一次「元判据自己没有调用方」（实为 `quality_check.py` 在调）。
+    print(f"  判据 {len(_files)} 件（**本节含本件自己；上表 {len(rows)} 件是排除本件的口径**），"
+          f"**既无人物编号也无实测数字的 {len(_noanchor)} 件**"
+          + (f"：{_noanchor}" if _noanchor else "　✓"))
+    if _noanchor:
+        print("  ★ 请确认它们**在真数据上验过**——自测全过不等于有效，"
+              "自测是造判据的人按自己的理解写的，真数据不是。")
+
     w = wiring_audit(d)
     print(f"\n── 接线审计 ──\n  判据 {w['判据件数']} 件，"
           f"**在生产代码里找不到调用方的 {w['**无生产调用方的**']} 件**")
@@ -388,6 +603,20 @@ def main() -> int:
     if w["名单"]:
         print("  ★ 这是 v0.0.0.68「第 9 次」那个坑；接线时必须**实跑一次**，"
               "看输出里真的出现了那一行。")
+
+    dup = duplicate_audit(d)
+    print(f"\n── 重复审计（有没有两件判据在做同一件事）──")
+    print(f"  比过 {dup['比过的判据数']} 件（阈值 {dup['阈值']}），"
+          f"**疑似重复 {len(dup['**疑似重复**'])} 对**")
+    for pr in dup["**疑似重复**"]:
+        print(f"    · {pr['重合度']:.3f}  {pr['甲']}  ×  {pr['乙']}")
+        print(f"        共有的模式词：{'、'.join(pr['共有的模式词'][:8])}")
+    if dup["**疑似重复**"]:
+        print("  ★ **只报不拦，必须人去读**——阈值 0.12 离噪声不远；"
+              "`check_quote_*` 那几件天生共用引文词表。")
+    else:
+        print("  ★ 0 对不等于「没有重复」——**本项只比正则字面量**，"
+              "逻辑重复而模式不同的它看不见。")
 
     d2 = selftest_touches_disk(d.resolve())
     print(f"\n── 自测是否走过磁盘加载路径 ──")
