@@ -107,6 +107,22 @@ def builder_readable_files(target) -> list:
             - Carver #127 的 3 份写了件数与所在道（「本道有 3 件 holdout」）；
             - Roberts-Austen #135 的 6 份只写「本轮未提名」，**不泄任何东西**。
 
+      ★★★ **2026-08-10 逐条读完命中之后的更正：按处数排的档次是错的。**
+        我先按「处数」排，得出「Mendel 最重」；**读完原文，第一档有三个人**：
+
+        | 泄的信息 | 谁 | 原文 |
+        |---|---|---|
+        | **作品名／主题** | Mendel、**Pasteur**、**Rosenhain** | Pasteur：`其英译本《Louis Pasteur, his life and labours》留作 holdout`；Rosenhain：`1910 年论轻合金（holdout，此处连 source_id 都不写）` |
+        | 只有件数 | Blackwell 6、Carver 3、Koch 1、Lister 1 | 「holdout 的 6 份**不列在此**」 |
+        | 什么也没泄 | Roberts-Austen | 「（本轮未提名。）」 |
+
+        ★ Rosenhain 那条最说明问题：**同一段的下一行写着**
+          「判据说得对：写下 id 本身就是引用，holdout 一旦在研究文档里露面就不再是盲的」——
+          **我在写下这句话的同一处，把作品说了出来。**
+          写「我不写 id」和「不泄漏」是两件事：**id 不是唯一的指针，标题也是。**
+        ★★ **所以本件不能只数处数**。处数多的可能是六份文档同一句样板（Blackwell），
+          处数少的可能一句就点了名（Rosenhain 两行）。**报率之前先读命中。**
+
       ★ 也就是说：本判据一直报 ✓，**而它从来没有看过泄得最狠的那一类文件**。
         这与「判据没有调用方就不算做完」是同一族——
         **清单不含被保证之物，等于这道保证从未存在过。**[[a-checker-nothing-calls-is-not-a-checker]]
