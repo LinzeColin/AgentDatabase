@@ -28,10 +28,9 @@ Foundry，作证身份是「曼彻斯特的制造工程师」，不是后来那�
 
 **① 他把每台机器切成两半，而且明说改进只在其中一半。**（Q.295）
 
-> In every machine there are two distinct parts; the one consisting of the frame-work,
-> which binds together the details of the machine; the other consisting of the details
-> themselves. It is in regard to the frame-work that the improvement in the art of design
-> would be most applicable
+> In every machine there are two dig tinet parts; the one consisting of the frame-work, which
+> binds together the detaily of the machine; the other consisting of the details themselves. It is
+> in regard te the frame-work that the improvement in the art of design would be most applicable
 
 ★ 这不是泛论美学。他紧接着把「改进」量化到材料上：**省三分之一**（Q.298 `About a third.`），
 并给了具体实例（Q.301）：造刨铁机时，在**承受全部作用力的那个部件**上改用曲线，
@@ -44,16 +43,15 @@ knowledge of design?` — 答：**`Yes.`**
 
 **③ 他对工匠的判断是反直觉的，而且他给了依据。**（Q.303–304）
 
-> I have always found, from my own experience, that [mechanics] engaged in these matters
-> considerable portion of geometri : ledge, without any tuition at all:
-> it is a common-sense mathematics
+> I have always found, from my own experience, that engaged in these matters possess a very
+> considerable portion of geometri : ledge, without any tuition at all: it is a common-sense
+> mathematics
 
 ★ 追问「你凭什么这样观察」时（Q.304），他给的依据是**两条同时成立**：
 
-> I have all my life been in companionable contact with the working mechanic, and being
-> moreover the son of an artist of some celebrity, I have, in the union of those two
-> advantages, been enabled to see the intimate connexion that exists between the arts of
-> design and practical mechanics
+> ] have all my life been in _ panionable contact with the working mechanic, and being moreover
+> the son of artist of some celebrity, I have, in the union of those two advantages, been enabled
+> to see the intimate connexion that exists between the arts of design and eractical mechanics
 
 **这是他自己给出的资格说明，不是后人替他总结的。**
 
@@ -71,10 +69,11 @@ daily occupation`。
 
 **⑤ 他指出的病根是「主与工之间的品味落差」，而代价是工时。**（Q.310）
 
-> if there exists, as there does at present, too great a disparity between the taste of the
-> master and that of the man … the forms which he wishes his workmen to adopt are not those
-> produced by the workman, which ledds to a very great loss of time to the master in
-> giving necessary instructions to his men
+> if there exists, as there does t present, too great a disparity between the taste of the master
+> and that of the nan … e forms which he wishes his workmen to adopt are not those produced by the
+> orkman, which ledds to a very serious inconvenience and frequent disappointwent, occasioning, in
+> any attempt at introducing elegance of form, a very great s of time to the master in giving
+> necessary instructions to his men
 
 ## Candidate Claims
 

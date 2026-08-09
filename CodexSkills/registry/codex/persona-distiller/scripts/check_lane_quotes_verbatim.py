@@ -90,6 +90,21 @@ def _norm(s: str) -> str:
     s = _MARKUP.sub("", s)
     s = _HYPHEN_BREAK.sub("", s)                 # `circum- stances` → `circumstances`
     s = _DASHES.sub("-", s)                      # 各种破折号归一
+    # ★★★★ 2026-08-10：**扫描分栏留下的竖线 `|` 按空白处理。**
+    #   Nasmyth #153 实测：报刊与议会卷是双栏扫描，OCR 把栏界打成 `|`，
+    #   于是同一句话里会出现 `he attended | the first session … of the| School of Arts`。
+    #   **12 条「对不上」在只去掉 `|` 与压平空白之后，12/12 全部逐字对上**——
+    #   也就是说那 12 条的差异**纯粹是版面，不是内容**。
+    #
+    #   ★ 为什么这一条可以加，而「把 eycy 改成 eye」不可以：
+    #     去 `|` 是**版面归一**——统一、可声明、可验证，且 `|` 不可能是英文引文的一部分；
+    #     改 `eycy` 是**改内容**——那正是本件要抓的「改了 OCR 错字再当逐字引文用」。
+    #     **两者的分界是「动没动字母」。**
+    #
+    #   ★★ 按上一条注释的纪律，加归一必须同时问「它会不会把本来对得上的打散」：
+    #     `|` 变空白只会让更多东西对上，**不会拆散已经对上的**（空白最后统一压平）。
+    #     自测里配了正例与反例各一。
+    s = s.replace("|", " ")
     # ★ 这里**不要**再把 ` - ` 缩成 `-`：那是我随手加的一条、没配自测，
     #   当场把 Roberts-Austen 从 0 条对不上打成 2 条
     #   （`[April 20, 1891. — In the course…` → `1891.-In`，
@@ -204,6 +219,17 @@ def self_test():
         print(("  ✓ " if ok else "  ✗ ") + lbl)
         if not ok:
             bad.append(lbl)
+
+    # ══ ★★★★ 真实样本：**分栏竖线**（Nasmyth #153，2026-08-10）══
+    #   议会卷与报刊是双栏扫描，OCR 把栏界打成 `|`。
+    _PIPE_REAL = ("Along with Leonard Horner, he attended | the first session in the winter "
+                  "of 1821 of the| School of Arts")
+    _PIPE_MINE = ("Along with Leonard Horner, he attended the first session in the winter "
+                  "of 1821 of the School of Arts")
+    chk("分栏竖线按空白处理后，同一句逐字对上", _norm(_PIPE_MINE) in _norm(_PIPE_REAL))
+    # ★★ 反例：**改了字母就必须仍然对不上**——这是本件存在的理由，不许被上面那条顺手削掉
+    chk("而把 `eycy` 改成 `eye` 仍然对不上（去竖线没有把这道门剥掉）",
+        _norm("the correctness of his eye") not in _norm("the correctness of his eycy"))
 
     # ══ ★★★★ 逐字真实样本：`_MARKUP` 的「标签」支吃掉 46% 的语料（2026-08-07）══
     #   下面这段是 Whitworth #152 的 `in.ernet.dli.2015.43651`（泰晤士报讣告 1893 重印本）

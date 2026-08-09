@@ -39,8 +39,8 @@ Q.310 那一段：先说主人若要工人做出他想要的形（做法），
 
 **③ 他在口述里主动划自己的资格边界，用的是并列句式。**（Q.304）
 
-> I have all my life been in companionable contact with the working mechanic, **and being
-> moreover** the son of an artist of some celebrity, I have, **in the union of those two
+> ] have all my life been in _ panionable contact with the working mechanic, and being
+> moreover the son of » artist of some celebrity, I have, **in the union of those two
 > advantages**, been enabled to see …
 
 ★ `in the union of those two advantages` 是他自己的措辞——**他把自己的资格说成两件事的交集，

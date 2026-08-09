@@ -1,0 +1,1 @@
+无隔离接触。全程只读了工作区根目录的十份产物正文、references/research 下六份研究道文档、evidence/claims.jsonl，以及 references/sources 下的语料；没有打开也没有列出 references 根目录、references/holdout、references/holdout-notes，没有读 evals 下任何文件，没有联网。两点如实附记：六份研究道文档各有一节标题写着 Proposed Holdout cases，节内为空，没有任何编号或文件名；references/sources 的文件编号从 05d 跳到 05f，我没有去查 05e 是什么。

@@ -11,7 +11,7 @@
 
 讣告自己写着：
 
-> The recollections of Nasmyth's boyhood, **as narrated in his "Autobiography,"** are full of
+> The recollections of Nasmyth’s boyhood, as narrated in his ‘‘ Autobiography,’. are full of
 > interest.
 
 之后整段少年经历（爱丁堡街头的军队、法国俘虏、1817 年拆 Old Tolbooth、1824 年大火时
@@ -25,7 +25,7 @@
 
 **① 家中排行：第四子、第十个孩子。**
 
-> the fourth son and tenth child of Alexander Nasmyth, the artist
+> fourth son and tenth child of Alexander Nasmyth, ithe artist
 
 ★ 这条同时是**同名护栏的依据**：父亲是画家 Alexander Nasmyth，
 Wilkie 称他 `the founder of the landscape painting school of Scotland`。
@@ -35,15 +35,15 @@ Wilkie 称他 `the founder of the landscape painting school of Scotland`。
 
 前面说他是 `the fourth son and tenth child`，后文却写：
 
-> It was here that **his youngest kon** acquired the manual dexterity in the use of tools
+> It was here that his youngest kon acquired the manual dexterity in the use of
 
 ★ **第四子 ≠ 幼子。** 同一篇文章里两个说法对不上。
 **这不是我推断的矛盾，是原文摆在那里的**——凡引用他在家中位置，须标明出自哪一句。
 
 **③ ★★★ 一条可核的人际链：Leonard Horner。**
 
-> **Along with Leonard Horner**, he attended the first session in the winter of 1821 of the
-> School of Arts (now the Heriot-Watt College)
+> Along with Leonard Horner, he attended the first session in the winter of 1821 of the
+> School of Arts (now the Herio
 
 ★ 这与 `02-conversations.md` 里那条悬着的线索**对上了**：马克思引用过
 「Nasmyth 1852 年致工厂视察员 Leonard Horner 的信」。
@@ -52,7 +52,7 @@ Wilkie 称他 `the founder of the landscape painting school of Scotland`。
 
 **④ 他在学生缴费簿上把自己写成 `tinsmith`。**
 
-> described himself as **"tinsmith"** in the students' fee-book
+> tinsmith” in the students’ fee-book
 
 ★ 这是**自述**而非他人评价，且是在一个不需要修饰的场合（缴费簿）。
 与 `03-expression.md` 里 E2（第一人称只用于划界与限定，不用于自夸）方向一致，
@@ -60,9 +60,8 @@ Wilkie 称他 `the founder of the landscape painting school of Scotland`。
 
 **⑤ 他靠卖自制模型付大学学费。**
 
-> to enable him to pay the fees for his attendance at the chemistry, mathematical, and
-> natural philosophy classes at the University of Edinburgh from the proceeds of the sale of
-> steam engine and other models
+> pay the fees for his attendlance at the chemistry, mathematical, and natural philosophy classes
+> at the University of Edinburgh from the proceeds of the sale of steam engine and other models
 
 ★ **待核**：这一条极可能也源自自传（措辞是转述体）。**在自传里定位到对应段落之前，
 不得当作独立证据。**

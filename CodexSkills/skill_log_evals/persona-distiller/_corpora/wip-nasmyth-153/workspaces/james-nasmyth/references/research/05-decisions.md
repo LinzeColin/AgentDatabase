@@ -49,18 +49,16 @@
 
 ### D4（S2）：1829 年他用自己手做的模型换来 Maudslay 门下的位置
 
-> by producing some of the model steam-engines and other apparatus he had made **with his own
-> hands**, he obtained a situation, at the modest salary of **10s. per week**, as assistant to
-> Henry Maudsley
+> producing some of the model steam-engines and other apparatus he had made with his own hands, ™
+> he obtained a situation, at the modest salary of 110s. per week, as assistant to Henry Maudsley
 
 ★ **出示实物而不是出示履历。** 与 `02-conversations.md` 里 Q.304
 （他把资格说成「两件事的交集」而非权威）方向一致——**但那是 P1，这是 S2，不能并列成两处证据。**
 
 ### D5（S2）：Maudslay 一去世他就自立，而不是留在名厂
 
-> **shortly after Mr Maudsley's death in 1831**, he resolved to start business on his own
-> account. He returned to Edinburgh, put up a temporary workshop, and set to work to
-> construct machine tools
+> death in 1831, he resolved to start business on his own. account. He returned to Edinburgh, put
+> up a temporary i workshop, and set to work to construct machine tools
 
 ★ 顺序值得注意：**先造机床，两年后才去曼彻斯特开业。**——**先备工具，再开张。**
 
@@ -75,8 +73,7 @@ Schneider → 两年后访 Creusot 发现已建成运转 → `After this he lost
 
 ### D7（S2）：1857 年、49 岁，带着大笔财产退休
 
-> in 1857 he was able to **retire with a large fortune** … devoting himself to astronomical
-> and other researches
+> in 1857 he was able to retire | with a large fortune. He bought a delightful retreat in Kent
 
 ★ 与 P1 侧对得上：MNRAS 论文与 Crayon 文章集中在 **1851–1855**，**退休前就已在做**；
 1874 年《The Moon》在退休后 17 年。**「退休后转向天文」这个通行说法与 P1 的年份不完全吻合**——

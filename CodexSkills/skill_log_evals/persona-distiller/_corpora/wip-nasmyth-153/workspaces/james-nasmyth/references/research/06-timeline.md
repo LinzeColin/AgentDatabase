@@ -45,12 +45,12 @@
 
 德文卡片写 `Erfand 1839 d. Dampfhammer`，而专利是 1842-06-09。讣告给了完整因果：
 
-> The steam-hammer … was **first conceived in 1839**, to meet a special difficulty — that of
-> executing an unusually large forging. But the forging was [abandoned], and Mr Nasmyth …
-> gave the benefit of his [sketch] to M. [Schneider], the proprietor of the great ironworks
-> at Creuzot … Two years later, Mr Nasmyth, happening to visit Creuzot, found, **to his
-> intense astonishment, that his idea had been put into practical shape** … **After this he
-> lost no time in obtaining a patent**
+> The steam-hammer, with which his name is especially identified, was first conceived in 1839, ito
+> meet a special difficulty -that of executing an unusually large forging. But the forging was  …
+> gave the benefit of his Shox to M. Ecinaidae, the proprietor of the great ironworks at Creuzot …
+> Two years later, MrN asmyth, happen ing to visit Creuzot, found, to his intense aston ishment,
+> that his idea had been put into practical shape … After this he lost no time. in obtaining a
+> patent
 
 ★ **1839 是构思年，1842 是专利年，而促成申请专利的是「发现别人已经把它造出来了」。**
 **这不是一个年份错误，是一段被压扁成一个数字的经过。**

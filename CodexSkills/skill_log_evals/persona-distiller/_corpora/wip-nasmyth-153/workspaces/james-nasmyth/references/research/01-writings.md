@@ -25,7 +25,7 @@
 
 **① 他先把「机器」这个东西定义成可穷举的六个形。**（¶482）
 
-> [the details] consist of certain combinations of six primitive or elementary geometrical
+> consist of certain combinations of six primitive or ele- mentary geometrical
 > figures, namely, the liney the pUme^ the circley the cylinder ^ the coney and the sphere
 
 并直接给出推论：
@@ -43,10 +43,9 @@
 
 **③ 他给的解法是「用铁手替换人手」，而关键词是「约束」。**（¶484）
 
-> the substitution of a mechanical contrivance in place of the human hand, for holding,
-> applying, and directing the motions of a cutting tool … by which we are enabled to
-> **constrain** the tool to move along or across the surface of the object with such
-> absolute precision
+> the sub- stitution of a mechanical contrivance in place of the human hand, for holdings applying
+> j and directing the motions of a … by which we are enabled to constrain the tool to move along
+> or across the surface of the object with su4)h absolute precision
 
 **④ 他给出的验收标志是「工人不必再看」。**（¶489）
 
@@ -60,7 +59,7 @@
 
 **⑤ 他的胜利条件是「到手与眼够不着的地方去」。**（¶490）
 
-> in many cases we have … equal facility in carrying on the most perfect workmanship in the
+> we have, through its agency, equal fei^ility in carrying on the most perfect workmanship in the
 > interior parts of certain machines, **where neither the hand nor eye can reach**
 
 **⑥ ★★★ 他专门辟出一段，把功劳明确记在别人名下。**（¶491，另 ¶504 重复一次）
@@ -83,12 +82,11 @@
 
 **⑧ 他对「靠直觉的好工匠」的判断是：在熟路上行，离开熟路即失效。**（¶505）
 
-> There are many excellent workmen, who, by **a species of intuition**, have acquired the art
-> of giving to the tools either the true form … But even with such, when a case occurs in
-> which they have to go a little out of their usual routine, they are then as much **"at sea"**
-> as if they knew nothing about the matter. This arises from no other cause than the want of
-> the knowledge of the **general principle**, which would guide them to the true form,
-> whatever be the case
+> There are many excellent workmen, who, by a species of intuition, have acquired the art of
+> giving to the tools either the true form … But even with such, when a case occurs in which they
+> have to go a little out of their usual routine, they are then as much ^ at sea as if they knew
+> nothing about the matter. This arises from no other cause than the want of the knowledge of the
+> general principle^ which would guide them to the true form^ whatever be the case
 
 ## Candidate Claims
 

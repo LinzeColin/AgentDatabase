@@ -90,14 +90,38 @@ BUILDER_READABLE = _RENDER
 
 
 def builder_readable_files(target) -> list:
-    """十份产物 + **工作区根目录下的一切 `.md`**。
+    """十份产物 + **工作区根目录下的一切 `.md`**
+    + **`references/research/` 下的六份研究道文档** + **`evidence/claims.jsonl`**。
 
     ★ `SKILL.md`／`README.md` 也在内——它们同样是建模者打得开的。
+
+    ★★★★ 2026-08-10：**研究道文档此前不在清单里，而它们恰是建模者读得最多的一类。**
+      发现它的不是本判据，是 Nasmyth #153 候选侧答题子代理**自己在 `__incident__` 里报**
+      「六份研究道文档各有一节标题写着 Proposed Holdout cases」。
+
+      全库现算（18 个有研究道的工作区，65 份带该节）：
+        · **53 份是空节**——与出厂模板逐字相同，走模板豁免，不算问题；
+        · **12 份非空**，其中
+            - **Mendel #125 的 3 份把 holdout 的书名直接写了出来**
+              （`Focke 1881《Die Pflanzen-Mischlinge》、Bateson`）；
+            - Carver #127 的 3 份写了件数与所在道（「本道有 3 件 holdout」）；
+            - Roberts-Austen #135 的 6 份只写「本轮未提名」，**不泄任何东西**。
+
+      ★ 也就是说：本判据一直报 ✓，**而它从来没有看过泄得最狠的那一类文件**。
+        这与「判据没有调用方就不算做完」是同一族——
+        **清单不含被保证之物，等于这道保证从未存在过。**[[a-checker-nothing-calls-is-not-a-checker]]
+
+      ★★ 为什么不顺手把 `references/holdout-notes/` 也扫进来：
+        那个目录**本来就是记 holdout 的地方**，且明令禁止建模者打开。
+        把它算成「建模者可读」会让判据对着自己的档案报红——**红得毫无信息**。
+        清单要跟着「实际发给建模者的是什么」走，不是跟着「目录里有什么」走。
     """
     import pathlib as _p
     root = _p.Path(target)
     out = [root / n for n in _RENDER]
     out += sorted(p for p in root.glob("*.md") if p.name not in _RENDER)
+    out += sorted((root / "references" / "research").glob("*.md"))
+    out.append(root / "evidence" / "claims.jsonl")   # 断言层同样发给建模者
     return [p for p in out if p.is_file()]
 
 
@@ -230,6 +254,36 @@ def self_test() -> int:
                 "本道 2 份来源、6 条发言。",
                 "The method hitherto adopted in getting up plane surfaces has been to grind them together."):
         chk(f"不报：{txt[:26]}…", not list(MENTION.finditer(txt)))
+
+    print("\n══ ★★★★ 扫的是哪些文件（2026-08-10 —— 缺陷不在检测，在清单）══")
+    #   ★ 上面那些用例全在考 `MENTION` 正则，**而正则从来没错过**。
+    #     真实缺陷是 `builder_readable_files()` 不含 `references/research/`：
+    #     检测再准，没送进去的文件一个也查不到。**所以这一条必须考清单本身。**
+    import tempfile as _tf, os as _os
+    with _tf.TemporaryDirectory() as _td:
+        _r = pathlib.Path(_td)
+        (_r / "references" / "research").mkdir(parents=True)
+        (_r / "references" / "holdout-notes").mkdir(parents=True)
+        (_r / "evidence").mkdir()
+        (_r / "facts.md").write_text("# Facts\n", encoding="utf-8")
+        (_r / "references" / "research" / "01-writings.md").write_text(
+            "★ 本轮 holdout 3 件（Focke 1881），train 17 件。\n", encoding="utf-8")
+        (_r / "references" / "holdout-notes" / "00-勘察记录.md").write_text(
+            "holdout 定为 Focke 1881《Die Pflanzen-Mischlinge》。\n", encoding="utf-8")
+        (_r / "evidence" / "claims.jsonl").write_text("{}\n", encoding="utf-8")
+        names = [p.name for p in builder_readable_files(_r)]
+        chk(f"★ 正例：研究道文档在清单里（{'01-writings.md' in names}）",
+            "01-writings.md" in names)
+        chk("★ 断言层也在清单里", "claims.jsonl" in names)
+        # ★★ 反例：**记 holdout 的档案本来就该谈 holdout，扫它只会红得没有信息**
+        chk(f"★ 反例：`references/holdout-notes/` 不在清单里（{'00-勘察记录.md' not in names}）",
+            "00-勘察记录.md" not in names)
+        # ★★★ 再加一层反例：**旧清单必须真的抓不到这条**——
+        #     否则「修好了」这个结论是靠不住的（改坏它，红要真的红）。
+        _old = [_r / n for n in _RENDER] + sorted(
+            p for p in _r.glob("*.md") if p.name not in _RENDER)
+        chk("★★ 反向验证：按**旧清单**扫，研究道那份确实扫不到（说明这道口子真存在过）",
+            "01-writings.md" not in [p.name for p in _old if p.is_file()])
 
     print("\n── ★ 层二：不提 holdout 但抄了它的内容 ──")
     hold_txt = ("Mr. Whitworth said he had much pleasure in bearing testimony to the great value "
