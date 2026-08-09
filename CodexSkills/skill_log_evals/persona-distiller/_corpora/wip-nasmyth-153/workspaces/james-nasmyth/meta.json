@@ -108,48 +108,54 @@
    "years": "1787/88–1867",
    "who": "姐姐，画家",
    "文献里怎么称呼": [
-    "Miss Nasmyth"
-   ]
+    "（名字：Jane / Barbara / Margaret / Elizabeth / Anne / Charlotte）"
+   ],
+   "★ 语料实测更正": "**`Miss Nasmyth` / `Misses Nasmyth` 在本语料里 0 次**——我原先写的那个称呼不成立。她们只作 `my sisters` 与名字出现。**按姓氏统计会漏报她们，而不是误报。**"
   },
   {
    "name": "Barbara Nasmyth",
    "years": "1790–1870",
    "who": "姐姐，画家",
    "文献里怎么称呼": [
-    "Miss Nasmyth"
-   ]
+    "（名字：Jane / Barbara / Margaret / Elizabeth / Anne / Charlotte）"
+   ],
+   "★ 语料实测更正": "**`Miss Nasmyth` / `Misses Nasmyth` 在本语料里 0 次**——我原先写的那个称呼不成立。她们只作 `my sisters` 与名字出现。**按姓氏统计会漏报她们，而不是误报。**"
   },
   {
    "name": "Margaret Nasmyth",
    "years": "1791–1869",
    "who": "姐姐，画家",
    "文献里怎么称呼": [
-    "Miss Nasmyth"
-   ]
+    "（名字：Jane / Barbara / Margaret / Elizabeth / Anne / Charlotte）"
+   ],
+   "★ 语料实测更正": "**`Miss Nasmyth` / `Misses Nasmyth` 在本语料里 0 次**——我原先写的那个称呼不成立。她们只作 `my sisters` 与名字出现。**按姓氏统计会漏报她们，而不是误报。**"
   },
   {
    "name": "Elizabeth Nasmyth",
    "years": "1793–1862",
    "who": "姐姐，设计师/画家",
    "文献里怎么称呼": [
-    "Miss Nasmyth"
-   ]
+    "（名字：Jane / Barbara / Margaret / Elizabeth / Anne / Charlotte）"
+   ],
+   "★ 语料实测更正": "**`Miss Nasmyth` / `Misses Nasmyth` 在本语料里 0 次**——我原先写的那个称呼不成立。她们只作 `my sisters` 与名字出现。**按姓氏统计会漏报她们，而不是误报。**"
   },
   {
    "name": "Anne Nasmyth",
    "years": "1798–1874",
    "who": "姐姐，画家",
    "文献里怎么称呼": [
-    "Miss Nasmyth"
-   ]
+    "（名字：Jane / Barbara / Margaret / Elizabeth / Anne / Charlotte）"
+   ],
+   "★ 语料实测更正": "**`Miss Nasmyth` / `Misses Nasmyth` 在本语料里 0 次**——我原先写的那个称呼不成立。她们只作 `my sisters` 与名字出现。**按姓氏统计会漏报她们，而不是误报。**"
   },
   {
    "name": "Charlotte Nasmyth",
    "years": "1804–1884",
    "who": "姐姐，画家",
    "文献里怎么称呼": [
-    "Miss Nasmyth"
-   ]
+    "（名字：Jane / Barbara / Margaret / Elizabeth / Anne / Charlotte）"
+   ],
+   "★ 语料实测更正": "**`Miss Nasmyth` / `Misses Nasmyth` 在本语料里 0 次**——我原先写的那个称呼不成立。她们只作 `my sisters` 与名字出现。**按姓氏统计会漏报她们，而不是误报。**"
   },
   {
    "name": "Alexander Nasmyth（子）",
@@ -185,7 +191,8 @@
     "Mr. Alexander Nasmyth",
     "the late Alex. Nasmyth"
    ],
-   "★★": "**DNB 只收了画家那位**——按 DNB 查 `Alexander Nasmyth` 会直接落到错的人身上"
+   "★★": "**DNB 只收了画家那位**——按 DNB 查 `Alexander Nasmyth` 会直接落到错的人身上",
+   "★ 语料实测更正": "**本语料里不在场**：`anatom*` 0 次，23 处 `Alexander Nasmyth` 全部指父亲。他仍留在名单里作为**外部混淆源**（DNB 只收画家那位），但不是本语料的风险面。"
   },
   {
    "name": "Robert Nasmyth",
@@ -248,11 +255,101 @@
     "**Naesmyth**"
    ],
    "★★★": "**与目标人物同名同姓**（不只是同姓）"
+  },
+  {
+   "name": "Michael Naesmyth（高祖父）",
+   "years": "生 1652",
+   "who": "建筑匠师；1703 年在 Inversnaid 建堡时殒命",
+   "文献里怎么称呼": [
+    "Michael Naesmyth",
+    "Sir Michael Naesmyth"
+   ],
+   "★★": "**同一部书里 `Michael Naesmyth` 至少指两个人**——另一处「My grandfather, Michael Naesmyth, succeeded to the business in 1751」是**祖父**。直系之内就已经撞名。"
+  },
+  {
+   "name": "Michael Naesmyth（祖父）",
+   "years": "查不到",
+   "who": "承继家族营造业（1751）",
+   "文献里怎么称呼": [
+    "Michael Naesmyth",
+    "My grandfather, Michael Naesmyth"
+   ]
+  },
+  {
+   "name": "James Naesmyth（王室驯鹰人）",
+   "years": "16–17 世纪",
+   "who": "James VI 的 Royal Falconer",
+   "文献里怎么称呼": [
+    "James Naesmyth"
+   ],
+   "★★★": "**与目标人物同名同姓**。语料实测在场（自传第 1 章）。"
+  },
+  {
+   "name": "Elspeth Naesmyth",
+   "years": "查不到",
+   "who": "家族成员",
+   "文献里怎么称呼": [
+    "Elspeth Naesmyth"
+   ]
+  },
+  {
+   "name": "John Naesmyth",
+   "years": "查不到",
+   "who": "家族成员",
+   "文献里怎么称呼": [
+    "John Naesmyth"
+   ]
+  },
+  {
+   "name": "Sir Michael Naesmyth",
+   "years": "16 世纪",
+   "who": "圣安德鲁斯大主教的司库；1544 年取得 Posso 与 Glenarth 地产",
+   "文献里怎么称呼": [
+    "Sir Michael Naesmyth"
+   ]
   }
  ],
  "★★★★ 同名场是本族至今最险恶的": "同姓 `Nasmyth` 者 **19 人**，其中 **2 人与目标人物同名同姓**（两位准男爵），**3 人都叫 `Alexander Nasmyth`**（父亲、父亲的一个儿子、牙医）。而目标人物的**一手主源就是自传**，里面「Nasmyth」大量指的是他父亲与兄长。★ 姓氏另有 **`Naesmyth` / `Naesmith`** 两种实际使用的拼法，护栏要一并覆盖。★★ **更正（实测证伪了我先前那句「只比姓、几乎等于不设防」）**：拿这一整套同名集去打现有护栏，`By Alexander Nasmyth`（父）、`By Patrick Nasmyth`、`By Peter Nasmyth`（兄的别名）**全部正确拒绝**。**真正漏的只有一路：`By Sir James Nasmyth, Baronet` 被当成他本人的署名放行**——那是两位与他同名同姓的准男爵。已落成第三道判别器 `_title_blocked`（证据驱动：署名的头衔不在目标自己的头衔里、且某个已声明同名者持有它 → 拦；**不声明 own_titles 就不启用，并印「未核，不是通过」**）。★ 为什么不能见 `Sir` 就拦：**Whitworth 本人 1869 年受封准男爵**，语料里就有 `Sir Joseph Whitworth, Bart.`。",
  "middle_initial": "",
  "★ 名字形式的分歧": "Wikidata/DNB/Gutenberg 作 `James Nasmyth`（无中名）；NPG/Science Museum/Wikisource 作 `James Hall Nasmyth`。「Hall 得自 Sir James Hall of Dunglass」**查不到出处，不采信**。",
  "own_titles": [],
- "★ own_titles 为空是明确声明": "**他本人不持有任何头衔**（未受封）。这不是默认值——`check_authorship` 里 `None`（没声明，判别器不启用）与 `[]`（声明他没有）分得开。"
+ "★ own_titles 为空是明确声明": "**他本人不持有任何头衔**（未受封）。这不是默认值——`check_authorship` 里 `None`（没声明，判别器不启用）与 `[]`（声明他没有）分得开。",
+ "★★★★ 语料实测（197 处姓氏，抓源时逐处统计）": {
+  "★ 一个方法错误，抓源方自己报的": "第一版正则写成 `N[ae]smyth`——**`[ae]` 只吃一个字符，永远匹配不到 `Naesmyth`**。按它统计得 164 处；改成 `(?:Naesmyth|Nasmyth|Nesmyth|Naesmith|Nasmith)` 之后是 **197 处**。**漏掉的 33 处全是 `Naesmyth`，而那正是祖先与同名准男爵集中出现的拼法**——漏掉的恰好是本节要防的那一类。[[regex-must-clear-the-corpus-language]]",
+  "实际用到的异拼": "**只有 `Naesmyth`（33 次，全在自传第 1 章一带）**。我先前写的 `Naesmith` / `Nasmith` 两种拼法**在本语料里各 0 次**。",
+  "自传里 130 处的分布": "第 1 章 My Ancestry 25 ／第 2 章 Alexander Nasmyth（父）16 ／第 3 章 An Artist's Family 4 —— **前三章 45 处，绝大多数不指本人**。",
+  "★★ 姓氏前紧邻的名（全语料）": "James 25 ／ Alexander 23 ／ **Michael Naesmyth 11** ／ Mr 5 ／**Sir Michael Naesmyth 4** ／ Patrick 3 ／ Elspeth 2 ／ **James Naesmyth 2** ／Michael 1 ／ John 1 ／ Grandmother 1 ／ Young 1",
+  "★★★ 姓名型护栏一定挡不住的": "卒 1779 的那位准男爵在自传里**只以 `his eldest son` 出现，不带姓名**。**任何按姓名匹配的护栏都抓不到他。**",
+  "★★ 反方向的坑（姓氏命中却不指人）": "`Nasmyth, Gaskell & Co.`（公司）17 次、`the Nasmyth classes`（画室）。",
+  "★★★★ 「0 命中」不等于「没有风险」": "05a / 05g / 07 三份姓氏出现 0 次，**不是没提他，是 OCR 把姓氏拆坏了**：签名成 `James NASkiia`、标题成 `To Javes Nasmtth`、页眉成 `NamnytViyfor Forging`；别处还有 `MA8MYTH`、`NASMTTH`、`Nasmy th`（中间带空格）。**姓名匹配型的门在这三份上会静默返回 0。**"
+ },
+ "attribution_basis": {
+  "authority": "印刷时代人物（1808–1890），署名证据结构上存在：扉页、期刊标题行、议会证词的传唤行、文末签名。本人物的权威标识为 VIAF 20443177 / LCCN n84122169 / ISNI 000000008099915X / ODNB 19801 / Wikidata Q240633。",
+  "citation": "每一份 P1 都必须能指到一处**结构性署名**（行首 By、标题行、`… called in; and Examined`、文末签名）或本节 `covered_sources` 里的逐份点名。",
+  "disputed_policy": "**合著与转载一律不进 P1。** 《The Moon》(1874) 与 Carpenter 合著、声口未拆 → P2；MNRAS 1844/1846 是学会记录员的第三人称摘要 → S1；专利只拿到第三人称转载节录 → S1。",
+  "disputed_works": [
+   "《The Moon: Considered as a Planet, a World, and a Satellite》(1874)：与 James Carpenter 合著，序言通篇用 we，**没有任何材料说明哪些章出自谁**。当一手用要先解决这一点。",
+   "GB 9382 蒸汽锤专利：datamp 无正文；1843 年 London Journal 转载是第三人称节录，且盖印日期与 datamp 冲突（January vs June 1842）——**未解决**。",
+   "1867–68 Trades' Union Commission 证词：原卷通道受限（HathiTrust 403、Stanford 走 Gale 订阅）；**且 1867 年 First report 全文里 `Nasmyth` 0 次**——连「该报告有他材料」这个前提都没能证实。只有马克思《资本论》第 15 章的逐字转引，**转引不足以做引文核查的锚点**。"
+  ],
+  "counting_convention": "**自传重印了他的 MNRAS 原刊文**（`check_source_dedup` 实测与 05f 重叠 0.7869、与 05c 0.4377）。已在台账上给自传挂 `derived_from`（指向那两篇期刊原文）。**按内容去重后，13 个 source_id 对应 11 部独立作品。**★ 另有一份**有意不入库**：`03b Practical Essays 全卷`——`03` 是它的抽篇，入库即成重份。",
+  "covered_sources": [
+   "01-autobiography-1883.txt（1897 popular edition 文本）：扉页与正文第一人称叙事；A-byline 已盖",
+   "03-slide-principle-1841.txt：Practical Essays pp.393–418 署名论文；A-byline 已盖",
+   "04-select-committee-1836-testimony.txt：`Mr. James Nasmyth, called in; and Examined`；A-byline-standalone 已盖",
+   "05c-mnras-1851-source-of-light.txt：MNRAS 署名论文；A-byline 已盖",
+   "05e-mnras-1854-lunar-craters.txt：MNRAS 署名论文；A-byline 已盖",
+   "★ 05d-mnras-1852-jupiter-saturn.txt：**正文内无行首署名**（整页扫描修剪所致）。归属依据＝标题行 `… By Mr. Nasmyth.` 与页眉 `Mr. Nasmyth, On the Condition of Jupiter and Saturn`，加 archive.org DOI 项 `paper-doi-10_1093_mnras_13_2_40` 的元数据。",
+   "★ 05f-mnras-1855-rotatory-nebulae.txt：归属依据＝标题行 `… By James Nasmyth, Esq.`。该行原在抓源方的修剪批注里，**批注已从正文剥出**，故正文内不再有行首署名。",
+   "★ 05g-crayon-1855-volcanic-action.txt：**文末签名**，而 OCR 把签名打成 `James NASkiia.`——**姓名匹配型的门在这一份上必然返回 0**。归属依据＝刊物标注 `signed James Nasmyth`（The Crayon 1:409）。"
+  ],
+  "★★ 不算他的（已如实降档，不进 P1）": [
+   "02 The Moon（合著，P2）",
+   "05a/05b MNRAS 1844/1846（记录员第三人称摘要，S1）",
+   "07 专利转载（第三人称节录，S1）",
+   "06b 讣告与剪报（明确不是他写的，S2）",
+   "06a Dibner 七封亲笔信：**OCR 完全不可用**（1508 行只出 965 词块，0 句可读一手文字）——**有意不入库**，图像在，只能人工转录"
+  ],
+  "★ 点名要用全名": "`check_source_attribution` 按**完整文件名或其主干**做子串匹配（`orig` / `stem` / `local_path`）。我第一版写的是 `05d-mnras-1852` 这样的短名，**匹配不上 `05d-mnras-1852-jupiter-saturn`，于是三份仍报 source-unclaimed**。★ 这不是门太严，是「逐份点名」本来就该点得准——短名点得到好几份。"
+ }
 }

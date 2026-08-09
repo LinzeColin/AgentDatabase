@@ -1,0 +1,150 @@
+{
+ "01-autobiography-1883.txt": {
+  "批注行": 0,
+  "正文行": 15078,
+  "出处说明": []
+ },
+ "02-the-moon-1874.txt": {
+  "批注行": 0,
+  "正文行": 7435,
+  "出处说明": []
+ },
+ "03-slide-principle-1841.txt": {
+  "批注行": 3,
+  "正文行": 1029,
+  "出处说明": [
+   "[EXTRACT] Practical Essays on Mill Work and Other Machinery (J. Weale, London, 1841), Appendix B, pp.393-418.",
+   "[EXTRACT] Source: https://archive.org/details/practicalessays00nasmgoog  (full-text: .../practicalessays00nasmgoog_djvu.txt)",
+   "[EXTRACT] Lines 40258-41285 of the archive.org OCR full text. OCR uncorrected (note: 'SLEDE'=SLIDE, 'MA8MYTH'/'NASMTTH'=NASMYTH, 'h'<->'b' confusions are OCR artifacts)."
+  ]
+ },
+ "03b-practical-essays-1841-fullvolume.txt": {
+  "批注行": 0,
+  "正文行": 45768,
+  "出处说明": []
+ },
+ "04-select-committee-1836-testimony.txt": {
+  "批注行": 5,
+  "正文行": 400,
+  "出处说明": [
+   "[EXTRACT] Report from the Select Committee on Arts and their Connexion with Manufactures (House of Commons, 1836), Minutes of Evidence, Part II, Q.290-330.",
+   "[EXTRACT] Witness: Mr. James Nasmyth, examined 8 March 1836. Printed pages of Part II: 28-31.",
+   "[EXTRACT] Source item: https://archive.org/details/1836SelectCommittee   full text file: '97 B 10_djvu.txt'",
+   "[EXTRACT] Lines 17941-18339 of that OCR file. Next witness (T. L. Donaldson) begins at line 18356; boundary is clean.",
+   "[EXTRACT] OCR uncorrected and in places badly degraded (e.g. 'COMMyppp'=COMMITTEE, 'Mr. Pisey'=Mr. Pusey, stray marginal fragments such as the bare '312.' near the page break are scan artifacts, not questions)."
+  ]
+ },
+ "05a-mnras-1844-moon-model.txt": {
+  "批注行": 5,
+  "正文行": 129,
+  "出处说明": [
+   "[EXTRACT] MNRAS vol.6 no.8 (14 June 1844), p.79: 'Some remarks on the Telescopic Appearance of the Moon, accompanying a Model and a Drawing of a Portion of her Surface'.",
+   "[EXTRACT] Item: https://archive.org/details/paper-doi-10_1093_mnras_6_8_79   rights: CC Public Domain Mark 1.0",
+   "[EXTRACT] Trimmed from the page-level OCR scrape (kept at _pagescan_originals/), lines 27-154 of 210.",
+   "[EXTRACT] REMOVED: lines 1-26 = RAS meeting minutes; lines 155-210 = article II by John Caldecott on the 1843 solar eclipse.",
+   "[EXTRACT] VOICE WARNING: this is a THIRD-PERSON abstract written by the Society's reporter ('The model and drawing exhibited to the Society by the Author...', 'The author has, for the last four years...'). It is NOT Nasmyth's own wording. OCR here is badly degraded."
+  ]
+ },
+ "05b-mnras-1846-optical-glass.txt": {
+  "批注行": 5,
+  "正文行": 40,
+  "出处说明": [
+   "[EXTRACT] MNRAS vol.7 no.7 (8 May 1846), p.97: 'Suggestions for Improving the Manufacture of Optical Glass'.",
+   "[EXTRACT] Item: https://archive.org/details/paper-doi-10_1093_mnras_7_7_97   rights: CC Public Domain Mark 1.0",
+   "[EXTRACT] Trimmed from the page-level OCR scrape, lines 7-45 of 143. REMOVED: lines 46-143 = Mr. Sheepshanks on repeating instruments (different item).",
+   "[EXTRACT] VOICE WARNING: THIRD-PERSON abstract by the Society's reporter ('Mr. Nasmyth, after remarking... expresses his conviction...'). NOT his own wording.",
+   "[EXTRACT] FURTHER: the last paragraph kept here (beginning 'Without venturing to give a positive opinion on such a subject') is the RAS reporter's own editorial opinion ABOUT Nasmyth's proposal, not even a summary of him."
+  ]
+ },
+ "05c-mnras-1851-source-of-light.txt": {
+  "批注行": 5,
+  "正文行": 59,
+  "出处说明": [
+   "[EXTRACT] MNRAS vol.11 no.7 (9 May 1851), p.161: 'Some Views respecting the Source of Light, &c. By James Nasmyth, Esq., F.R.A.S.'",
+   "[EXTRACT] Item: https://archive.org/details/paper-doi-10_1093_mnras_11_7_161   rights: CC Public Domain Mark 1.0",
+   "[EXTRACT] Trimmed from the page-level OCR scrape, lines 4-61 of 139. REMOVED: lines 62+ = p.162, Mr. Bond's Description of Apparatus (different author), and a further unrelated first-person item.",
+   "[EXTRACT] VOICE: first person throughout, printed inside quotation marks = his own words, quoted verbatim by MNRAS.",
+   "[EXTRACT] *** INCOMPLETE ***: the scrape captured only p.161. The text breaks off mid-sentence at '...in some portions of his vast'. The remainder of the paper was NOT captured."
+  ]
+ },
+ "05d-mnras-1852-jupiter-saturn.txt": {
+  "批注行": 4,
+  "正文行": 167,
+  "出处说明": [
+   "[EXTRACT] MNRAS vol.13 no.2 (10 December 1852), pp.40-42: 'Some Remarks on the probable present Condition of the Planets Jupiter and Saturn, in reference to Temperature, &c. By Mr. Nasmyth.'",
+   "[EXTRACT] Item: https://archive.org/details/paper-doi-10_1093_mnras_13_2_40   rights: CC Public Domain Mark 1.0",
+   "[EXTRACT] Trimmed from the page-level OCR scrape, lines 30-195 of 205. REMOVED: lines 1-29 = the tail of a preceding item on Saturn's ring signed 'M', dated 'South Villa Observatory, Jan. 13, 1853' -- NOT Nasmyth, despite the running head on p.40 carrying his name.",
+   "[EXTRACT] VOICE: first person, printed inside quotation marks, complete, closing with his own date line 'January 13, 1853.' = his own words."
+  ]
+ },
+ "05e-mnras-1854-lunar-craters.txt": {
+  "批注行": 4,
+  "正文行": 72,
+  "出处说明": [
+   "[EXTRACT] MNRAS vol.14 no.5 (10 March 1854), p.158: 'On some peculiar Features in the Structure of Lunar Volcanic Craters. By James Nasmyth, Esq.'",
+   "[EXTRACT] Item: https://archive.org/details/paper-doi-10_1093_mnras_14_5_158   rights: CC Public Domain Mark 1.0",
+   "[EXTRACT] Trimmed from the page-level OCR scrape, lines 83-153 of 188. REMOVED: lines 1-82 = a preceding item on transit-observation method (tables + quoted text, different author); lines 154+ = Extract of a Letter from M. Otto Struve to the Astronomer Royal.",
+   "[EXTRACT] VOICE: first person, printed as his own communication (no quotation marks), complete. = his own words."
+  ]
+ },
+ "05f-mnras-1855-rotatory-nebulae.txt": {
+  "批注行": 4,
+  "正文行": 110,
+  "出处说明": [
+   "[EXTRACT] MNRAS vol.15 no.8 (8 June 1855), pp.220-221: 'Suggestions respecting the Origin of the Rotatory Movements of the Celestial Bodies and the Spiral Forms of the Nebulae as seen in Lord Rosse's Telescopes. By James Nasmyth, Esq.'",
+   "[EXTRACT] Item: https://archive.org/details/paper-doi-10_1093_mnras_15_8_220   rights: CC Public Domain Mark 1.0",
+   "[EXTRACT] Trimmed from the page-level OCR scrape, lines 20-128 of 135. REMOVED: lines 1-19 = tail of a preceding item about Madras drawings of Saturn distributed by the East India Company.",
+   "[EXTRACT] VOICE: first person, printed inside quotation marks, complete, closing with his own date line 'Bridgewater Foundry, June 7, 1855.' = his own words."
+  ]
+ },
+ "05g-crayon-1855-volcanic-action.txt": {
+  "批注行": 4,
+  "正文行": 93,
+  "出处说明": [
+   "[EXTRACT] The Crayon vol.1 no.26 (27 June 1855): 'VOLCANIC ACTION. (From the Athenaeum)', signed James Nasmyth.",
+   "[EXTRACT] Item: https://archive.org/details/jstor-25527065   JSTOR Early Journal Content (free to anyone in the world).",
+   "[EXTRACT] Trimmed from the page-level OCR scrape, lines 150-241 of 315. REMOVED: lines 1-31 = JSTOR boilerplate; lines 32-147 = letters by William M. Rossetti and John Ruskin; lines 242+ = an unsigned news item on Col. Rawlinson's Assyrian excavations.",
+   "[EXTRACT] VOICE: first person, signed 'James Nasmyth' (OCR renders the signature 'James NASkiia'). Originally his letter to The Athenaeum, reprinted by The Crayon. = his own words."
+  ]
+ },
+ "06a-dibner-letters-1854-OCR-UNUSABLE.txt": {
+  "批注行": 7,
+  "正文行": 1509,
+  "出处说明": [
+   "[EXTRACT] Smithsonian Dibner Library, 'Papers' (Nasmyth, James, 1808-1890, author), dated 1854. Seven A.L.S. + 1 envelope, 23 pages digitised.",
+   "[EXTRACT] Item: https://archive.org/details/papers00nasm   possible-copyright-status: 'Public domain. The Library considers that this work is no longer under copyright protection'",
+   "[EXTRACT] This file = lines 1-1508 of papers00nasm_djvu.txt, i.e. the OCR of the SEVEN HANDWRITTEN LETTERS.",
+   "[EXTRACT] *** UNUSABLE ***  The letters are 1854 cursive. Tesseract 5.3.0 produced no recoverable text.",
+   "[EXTRACT] Measured: 1508 lines yield only 965 alphabetic tokens of >=3 characters (37.4% of which happen to be dictionary words, by chance).",
+   "[EXTRACT] Measured: the LONGEST run of consecutive dictionary words anywhere in this region is 4, and that line reads 'Ciena, fherrrv bes bow GOD 2cel ~ 7'.",
+   "[EXTRACT] Conclusion: ZERO sentences of Nasmyth's own writing are recoverable from this item by OCR. The page images exist; transcription would have to be done by eye."
+  ]
+ },
+ "06b-dibner-obituaries-clippings-NOT-HIS.txt": {
+  "批注行": 4,
+  "正文行": 635,
+  "出处说明": [
+   "[EXTRACT] Same item (https://archive.org/details/papers00nasm), lines 1509-2142 of papers00nasm_djvu.txt.",
+   "[EXTRACT] *** NOT WRITTEN BY JAMES NASMYTH. ***  This is the 'obituaries and biographical clippings' material the Dibner description lists as additional to the letters.",
+   "[EXTRACT] Contents: (a) a German-language dealer/cataloguer note on Nasmyth; (b) an English obituary in the third person ('...passed away in the person of James Nasmyth'); (c) newspaper bleed-through from the reverse of the obituary clipping -- Grangemouth shipping arrivals, tea market prices; (d) bookseller catalogue entries pricing his A.L.S.",
+   "[EXTRACT] Kept ONLY so that it is on the record and cannot be mistaken for primary material. Do not count it as his voice."
+  ]
+ },
+ "07-steam-hammer-patent-1842-journal-reprint.txt": {
+  "批注行": 11,
+  "正文行": 282,
+  "出处说明": [
+   "[EXTRACT] Steam-hammer patent specification, reprinted in: The London Journal of Arts and Sciences (Newton), 1843, 'Recent Patents', pp.183-189.",
+   "[EXTRACT] Heading as printed: 'To James Nasmyth, of Patricroft, near Manchester, in the county of Lancaster, engineer, for certain improvements in machinery or apparatus for forging, stamping, and cutting iron and other substances.'",
+   "[EXTRACT] Source item: https://archive.org/details/londonjournalar04newtgoog   file: londonjournalar04newtgoog_djvu.txt, lines 9323-9601.",
+   "[EXTRACT] Reached because datamp.org (the URL in the brief) carries NO specification text -- only metadata, narrative and three drawing images.",
+   "[EXTRACT] *** DATE CONFLICT, UNRESOLVED. ***",
+   "[EXTRACT] This reprint's own dateline reads '[Sealed 9th January, 1842.]' and it closes '[Inrolled in the Petty Bag Office, December, 1842.]'.",
+   "[EXTRACT] datamp.org gives GB 9382 as 1842-06-09 (9 June 1842).",
+   "[EXTRACT] Enrolment was normally within six months of sealing, and December 1842 fits a JUNE sealing, not a January one -- which points to a misprint (or OCR error) for 'June' in the journal. NOT VERIFIED. Do not cite a sealing date from this file.",
+   "[EXTRACT] *** VOICE WARNING: NOT HIS OWN WORDS. ***",
+   "[EXTRACT] This is the journal's THIRD-PERSON abridgment, not the verbatim enrolled specification: e.g. 'the patentee has constructed a \"direct action steam-hammer\"', 'The patentee does not claim the exclusive use of...'.",
+   "[EXTRACT] Specifications of this period were in any case drafted by patent agents (this journal repeatedly notes 'Specification drawn by Messrs. Newton and Son')."
+  ]
+ }
+}
