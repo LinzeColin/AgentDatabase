@@ -318,19 +318,35 @@ def main():
         #   只覆盖 5 条，剩下 37 条靠在 reason 散文里搜「三轮」猜，得到一个看起来完整的错数。
         #   与 [[eval-artifacts-have-five-schemas]] 同族，**这是第四批**。
         #   ★ 本项**只报不改**：把 42 条已关闭的处置统一改名是动既有决定，属用户裁定。
-        _CLS = ("disposition", "class", "reason_class")
+        #
+        # ★★★★ 2026-08-10 更新：名单侧已加一个**不删原键的规范镜像** `处置类`
+        #   （四种历史键名 `class` 36 / `reason_class` 11 / `defer_class` 1 都镜像进去，
+        #   原键一个没删）。**本件必须跟着读它，否则那个镜像就是没有调用方的修复**——
+        #   实测：镜像加完之后本件仍原样印「8 条一个都没有」，而那时每一条都已经有 `处置类` 了。
+        #   [[a-checker-nothing-calls-is-not-a-checker]]
+        #
+        # ★★ 而 `disposition`（入库/拒发/延后 这个**结论词**）**故意没有被补全**：
+        #   补它要替十几个人重构结论（有 delta 的可能是拒发、缺一手的可能是延后，
+        #   两者在本名单里并存），那是判断不是搬运。**所以这一项要继续响亮地报。**
+        _CANON = "处置类"
+        _CLS = ("disposition", "class", "reason_class", "defer_class")
         _cov = {k: sum(1 for x in _dl if x.get(k)) for k in _CLS}
-        _none = [x.get("name", "?") for x in _dl
-                 if not any(x.get(k) for k in _CLS)]
+        _canon_missing = [x.get("name", "?") for x in _dl if not x.get(_CANON)]
+        _no_verdict = [x.get("name", "?") for x in _dl if not x.get("disposition")]
         _alias = {k: sum(1 for x in _dl if x.get(k))
-                  for k in ("unblock_todo", "unblock_todos") }
-        if len(_CLS) - list(_cov.values()).count(0) > 1 or _none:
-            defer_warn = (defer_warn or "") + (
-                f"　**处置类字段有 {len(_CLS) - list(_cov.values()).count(0)} 种键名**："
-                f"{_cov}，**{len(_none)} 条一个都没有**"
-                + (f"（{_none[:4]}…）" if _none else "")
-                + (f"；另有同义键两种拼法 {_alias}" if all(_alias.values()) else "")
-                + "　→ **按任一键名做分类计数都会漏**，且散文里搜关键词会得到「看起来完整」的错数")
+                  for k in ("unblock_todo", "unblock_todos")}
+        _bits = []
+        if _canon_missing:
+            _bits.append(f"**`{_CANON}` 缺 {len(_canon_missing)} 条**（{_canon_missing[:4]}…）"
+                         f"　→ 按任一原键计数都会漏：{_cov}")
+        if _no_verdict:
+            _bits.append(f"**`disposition`（结论词）缺 {len(_no_verdict)}/{len(_dl)} 条**"
+                         f"（{_no_verdict[:4]}…）——**有意未由 agent 推断填入**，"
+                         f"逐条要人核；在那之前不许按它做分类统计")
+        if all(_alias.values()):
+            _bits.append(f"同义键仍有两种拼法 {_alias}")
+        if _bits:
+            defer_warn = (defer_warn or "") + "　" + "；".join(_bits)
         for item in _dl:
             deferred.add(norm(item.get("name", "")))
             f = item.get("family_zh")
