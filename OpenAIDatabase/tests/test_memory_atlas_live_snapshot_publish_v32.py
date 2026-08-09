@@ -729,6 +729,24 @@ def test_a_drained_bucket_with_proof_is_migrated_not_failed() -> None:
     assert _row(rows, "github_canonical_events")["state"] == "READY"
 
 
+def test_an_empty_drained_bucket_with_proof_is_migrated_not_missing() -> None:
+    """After zero-charge capture stops producing R2 receipts, the intentionally
+    empty bucket is the expected migrated state, provided archive and canonical
+    coverage still add up for every manifest object."""
+    rows = cloud_native_authorities(
+        objects=[],
+        normalized_batch_key="primary-objects/memory-atlas/private-agentdatabase/normalized/canonical/events.jsonl",
+        private_database_paths=["memory-atlas/runs/latest.json"],
+        github_release=RELEASE_BACKUP_PASS,
+        observed_at="2026-08-09T00:15:00Z",
+        registry_path=REGISTRY,
+        canonical=CANONICAL_READY,
+        migration=MIGRATION_PROVEN,
+    )
+    assert _row(rows, "r2_primary_objects")["state"] == "MIGRATED"
+    assert _row(rows, "r2_normalized_events")["state"] == "MIGRATED"
+
+
 @pytest.mark.parametrize(
     "broken",
     [

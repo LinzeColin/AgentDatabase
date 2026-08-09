@@ -331,7 +331,7 @@ def cloud_native_authorities(
     for source_id, (present, healthy, count, size) in measured.items():
         spec = tiers.get(source_id, {})
         state = "READY" if present and healthy else ("FAILED" if present else "MISSING")
-        if state == "FAILED" and r2_migrated and source_id.startswith("r2_"):
+        if state in {"FAILED", "MISSING"} and r2_migrated and source_id.startswith("r2_"):
             state = "MIGRATED"
         out.append(
             {
