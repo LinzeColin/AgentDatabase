@@ -18,7 +18,7 @@
 > which have been conferred on the mechanical world … by the invention and introduction of
 > the slide rest) **were I to suppress the name of that admirable individual** to whom we are
 > indebted for this powerful agent … I allude to the late **Henry Maudslay** … **to him we are
-> certainly indebted for the slide rest**
+> certainly indebted for the slide resU**
 
 ★ 三处细节使它成为「决定」而非客套：
 1. 他用 `blamable`——**不点名是该受责备的**，即他把这当成义务而非礼节；
@@ -30,7 +30,7 @@
 1836 Q.307 他提出在工厂里陈列有品味的作品；主席追问这是不是要取代 Mechanics Institutions
 （Q.308）——他没有顺势扩大，而是**当场缩小射程**：
 
-> **not as a substitute** for similar advantages afforded by Mechanics Institutions, **but as a
+> **not as a substitute** for similar wivantages afforded by Mechanics Institutions, **but as a
 > collateral assistance**
 
 ★ 与 D1 同一族：**在有机会把自己的东西说大的位置上，他选择说小。**

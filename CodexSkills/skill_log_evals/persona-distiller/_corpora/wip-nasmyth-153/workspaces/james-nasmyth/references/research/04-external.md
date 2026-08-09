@@ -35,7 +35,7 @@ Wilkie 称他 `the founder of the landscape painting school of Scotland`。
 
 前面说他是 `the fourth son and tenth child`，后文却写：
 
-> It was here that **his youngest son** acquired the manual dexterity in the use of tools
+> It was here that **his youngest kon** acquired the manual dexterity in the use of tools
 
 ★ **第四子 ≠ 幼子。** 同一篇文章里两个说法对不上。
 **这不是我推断的矛盾，是原文摆在那里的**——凡引用他在家中位置，须标明出自哪一句。

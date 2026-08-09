@@ -83,7 +83,7 @@ Le Creusot 已按他的方案造出实物。**
 
 ## Contradictions and alternative explanations
 
-- **`the fourth son and tenth child` vs `his youngest son`**：同一篇讣告内部矛盾，未解决。
+- **`the fourth son and tenth child` vs `his youngest kon`**：同一篇讣告内部矛盾，未解决。
 - **1834 vs 约 1833**：德文卡片写 1834 建厂，讣告叙述是「两年造机床之后」去曼彻斯特
   （1831 + 2 ≈ 1833）。**差一年，本轮不裁**。
 - **讣告里那句「他自己给机械工程下的定义」**——
@@ -96,7 +96,7 @@ Le Creusot 已按他的方案造出实物。**
 
 - **自传未读**——本道骨架来自 S2，**几乎每一条都该在自传里核一遍**。
 - **Maudslay 那段（1829–1831）只有讣告一处**。★ 而 `01-writings.md` 记着：
-  1841 论文里他两次主动点名 Maudslay 并写 `to him we are certainly indebted for the slide rest`
+  1841 论文里他两次主动点名 Maudslay 并写 `to him we are certainly indebted for the slide resU`
   ——**那是 P1，可以给这一段补一个一手锚点**。
 - **1839–1842 那段 Creusot 经过只有 S2 一处**，且涉及第三方（Schneider）。
   **在自传核到之前，产物里不得把它当成确定事实叙述。**
