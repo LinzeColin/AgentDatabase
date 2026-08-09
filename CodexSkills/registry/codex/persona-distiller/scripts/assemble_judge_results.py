@@ -46,6 +46,7 @@ import argparse
 import collections
 import json
 import pathlib
+import re
 import subprocess
 import sys
 
@@ -75,6 +76,22 @@ def find_seat_file(round_dir, seat):
         seat_D_raw.json        12 份     ← 我的 glob 只写了第一族
         <前缀>_judge_D.json     60+ 份    ← 每个人物一个前缀（ni_/fl_/wo_/rv_/…）
 
+    ★★★★ 2026-08-07 补第 **4** 族：`judge_F.json`（**没有前缀**）。
+      上面那句「至少有三族」写下来之后**没有人再数过**，而现算是 4 族：
+
+        <前缀>_judge_X.json  66 份 ／ seat_X.json  32 份
+        seat_X_raw.json      12 份 ／ **judge_X.json  4 份 ← 一直定位不到**
+
+      那 4 份全是 Rosenhain #138（round1 的 F/G、round2 的 H/J），
+      也就是说**这个人物的每一份打分文件都在本函数的射程之外**。
+      `*_judge_F.json` 这个 glob 要求 `_judge_` 前面还有东西，
+      **`judge_F.json` 一个字都不差，就是因为少一个前缀而落空。**
+
+      ★ 实测影响：Rosenhain 四席**全部 `rubric_fed: false`**，
+        而 `census()` 只在有喂 rubric 档时才出行（`if g["rub"]`），
+        **所以既往那些「有无 rubric 会翻号」的数字没有被这个缺陷改动过。**
+        缺陷是真的，后果这一次是零——两句话都要说。
+
     漏掉第二族的后果：我拿 8 轮算出「喂判据档 σ=0.0240，几乎不随产物动」，
     当成待裁定 ㉓ **最硬的一块数据**报了出去；
     补上 Thomson（他是 `_raw` 那族）之后 σ 变 0.0723，**比无 rubric 档还大**。
@@ -84,7 +101,8 @@ def find_seat_file(round_dir, seat):
     （同一条纪律：[[eval-artifacts-have-five-schemas]]。）
     """
     rd = pathlib.Path(round_dir)
-    exact = [rd / f"seat_{seat}.json", rd / f"seat_{seat}_raw.json"]
+    exact = [rd / f"seat_{seat}.json", rd / f"seat_{seat}_raw.json",
+             rd / f"judge_{seat}.json"]                       # ← 第 4 族，无前缀
     for f in exact:
         if f.is_file():
             return f
@@ -121,10 +139,38 @@ def unwrap_scores(raw):
     return raw if isinstance(raw, dict) else {}
 
 
+def unwrap_key(key: dict, qids) -> dict:
+    """揭盲键也有外壳——**按对不对得上题号来判，不按键名猜。**
+
+    ★★★★ 2026-08-07：Rosenhain #138 的 `blind_key.json` 顶层只有三个键：
+
+        {"seed": "rosenhain-138-round1",
+         "候选在哪一侧": {"wr-anon-01": "A", …},        ← 真正的映射在这一层
+         "★": "**这份 key 只给聚合用，绝不发给评委。**"}
+
+    于是 `read_seat` 里那句 `qid not in key` 对**每一道题**都成立，
+    整席读出 **0 行**——而 0 行在旧代码里就是「这席没意见」，静默。
+
+    ★ 为什么按题号判而不按键名判：`候选在哪一侧` 是这一个人物的写法，
+      下一个人物可能写别的。**认名字要枚举，认数据不用。**
+      判据是「哪一层的键能对上评委真打过分的题号」——这一条不随人物变。
+    """
+    if not isinstance(key, dict):
+        return {}
+    qids = set(qids)
+    if any(q in key for q in qids):
+        return key
+    for v in key.values():
+        if isinstance(v, dict) and any(q in v for q in qids):
+            return v
+    return key
+
+
 def read_seat(raw: dict, key: dict, seat: str, suite_of: dict) -> list:
     """一席的原始打分 → 逐对记录。key 决定哪一侧是候选。"""
     out = []
     raw = unwrap_scores(raw)
+    key = unwrap_key(key, raw.keys() if isinstance(raw, dict) else ())
     for qid, v in raw.items():
         if qid.startswith("_") or qid not in key:
             continue
@@ -142,7 +188,23 @@ def read_seat(raw: dict, key: dict, seat: str, suite_of: dict) -> list:
         if isinstance(v, (list, tuple)):
             a_raw, b_raw, note = float(v[0]), float(v[1]), ""
         else:
-            a_raw, b_raw, note = float(v["A"]), float(v["B"]), v.get("note", "")
+            # ★★★★ 2026-08-07：分数键名有 **3 种**，全库现算 A/B 98 份、
+            #   `[a,b]` 列表 12 份、**`A_score`/`B_score` 4 份**。
+            #   第三种不是野生的——**Whitworth #152 冻结的评委指令白纸黑字要求它**
+            #   （`judge_prompts/no-rubric-extra.md`：值是
+            #   `{"A_score": 0.00, "B_score": 0.00, "note": "…"}`）。
+            #   评委指令按人物冻结、不许中途改，**所以必须是本件来认这个形状**。
+            #
+            #   ★ 认不出时**抛出去，不许 continue**：静默丢一席的后果
+            #     Sorby #133 已经付过一次（两席被吞，delta 变成 +0.2484 且三档门全绿）。
+            ak = "A" if "A" in v else ("A_score" if "A_score" in v else None)
+            bk = "B" if "B" in v else ("B_score" if "B_score" in v else None)
+            if ak is None or bk is None:
+                raise SystemExit(
+                    f"✗ **{seat} 席 {qid} 的分数键名不认识**：{sorted(v)[:6]}——"
+                    f"认得的只有 `A`/`B`、`A_score`/`B_score`、`[a, b]` 三种。"
+                    f"**这一席不许静默丢掉，去 read_seat 里加上这一族。**")
+            a_raw, b_raw, note = float(v[ak]), float(v[bk]), v.get("note", "")
         a, b = normalize(a_raw, b_raw)
         cand = a if k["A"] == "candidate" else b
         base = b if k["A"] == "candidate" else a
@@ -303,8 +365,90 @@ def selftest() -> int:
     chk("题号对不上揭盲键 → 0 行",
         len(read_seat({"zzz-99": {"A": .8, "B": .7}}, key, "s", suite_of)) == 0)
 
+    print("\n── ★★★★ 真夹具：Rosenhain #138 的第 4 族文件名 + 第 3 种分数键名 ──")
+    #   下面这条**逐字取自** `wip-rosenhain-138/.../evals/round1/judge_F.json` 的第一题，
+    #   **不是我编的**。[[fixtures-cleaner-than-the-real-thing]]：
+    #   自己编的夹具会长成自己代码认得的样子，于是「全绿」什么都不证明。
+    real_raw = {"wr-anon-01": {"A_score": 0.86, "B_score": 0.8,
+                               "note": "两侧都正确否掉「压碎」；A 拿浸蚀小坑取向不变作反证"}}
+    real_key = {"wr-anon-01": {"A": "candidate", "B": "baseline", "case_id": "wr-anon-01"}}
+    got = read_seat(real_raw, real_key, "F", {"wr-anon-01": "anonymous-fidelity"})
+    chk(f"`A_score`/`B_score` 读得出（1 行，delta {got[0]['candidate']-got[0]['baseline']:+.4f}）"
+        if got else "`A_score`/`B_score` **读不出——这一席会整个丢掉**",
+        len(got) == 1 and abs((got[0]["candidate"] - got[0]["baseline"]) - 0.06) < 1e-9)
+
+    import tempfile                                          # noqa: PLC0415
+    with tempfile.TemporaryDirectory() as td:
+        p = pathlib.Path(td)
+        for n in ("judge_F.json", "judge_G.json", "judge_H.json", "judge_J.json"):
+            (p / n).write_text("{}", encoding="utf-8")
+        chk("第 4 族 `judge_F.json`（**无前缀**）定位得到",
+            (find_seat_file(p, "F") or pathlib.Path("x")).name == "judge_F.json")
+        chk(f"`seat_letters` 发现得了名册外的 H/J（实得 {seat_letters(p)}）",
+            seat_letters(p) == ["F", "G", "H", "J"])
+        # ★ 正例必须同时是绿的：反例红了可能是红得凑巧
+        (p / "seat_D.json").write_text("{}", encoding="utf-8")
+        chk("旧的三族一个没退化（seat_D.json 仍优先）",
+            (find_seat_file(p, "D") or pathlib.Path("x")).name == "seat_D.json")
+
+    print("── ★★★★ 真夹具：**第 5 种揭盲键**——映射裹在中文键底下 ──")
+    #   同样逐字取自 `wip-rosenhain-138/.../evals/round1/blind_key.json` 的顶层三键。
+    nested_key = {"seed": "rosenhain-138-round1",
+                  "候选在哪一侧": {"wr-anon-01": "A"},
+                  "★": "**这份 key 只给聚合用，绝不发给评委。**"}
+    got2 = read_seat(real_raw, nested_key, "F", {"wr-anon-01": "anonymous-fidelity"})
+    chk(f"裹在 `候选在哪一侧` 底下的映射剥得开（{len(got2)} 行）"
+        + ("" if got2 else "——**0 行就是整席静默消失**"),
+        len(got2) == 1 and abs(got2[0]["candidate"] - 0.86) < 1e-9)
+    # ★ 正例：不带外壳的键一个字都不许被动到
+    chk("不带外壳的揭盲键不受影响（回归）",
+        len(read_seat(real_raw, real_key, "F", {"wr-anon-01": "x"})) == 1)
+    # ★★ 反例：外壳里根本没有对得上的题号 → 不许瞎认一层
+    chk("外壳里没有对得上的题号 → 仍是 0 行，不许硬凑",
+        len(read_seat(real_raw, {"seed": "x", "别的": {"zzz-99": "A"}}, "F",
+                      {"wr-anon-01": "x"})) == 0)
+
+    print("── ★★ 反向对照：**题号对得上而键名不认识 → 必须抛，不许静默丢** ──")
+    try:
+        read_seat({"wr-anon-01": {"scoreA": 1, "scoreB": 2}}, real_key, "F",
+                  {"wr-anon-01": "x"})
+        chk("未知键名被静默吞掉了（**这正是 Sorby #133 丢两席的形状**）", False)
+    except SystemExit as e:
+        chk(f"未知键名响亮失败：{str(e)[:46]}…", True)
+
     print(f"\n{'✓ 自测全过' if not fails else f'✗ **{len(fails)} 项未过**'}")
     return 0 if not fails else 2
+
+
+# 席位字母 → 档。**H/J 的依据是 Rosenhain 自己的 `evals/results.jsonl`**：
+# 那 68 行逐行写着 `"rubric_fed": false`，不是我按字母顺序猜的。
+SEAT_TAG = {"D": "rub", "E": "rub", "F": "nor", "G": "nor", "H": "nor", "J": "nor"}
+_SEAT_PATTERNS = (r"seat_([A-Z])\.json", r"seat_([A-Z])_raw\.json",
+                  r".+_judge_([A-Z])\.json", r"judge_([A-Z])\.json")
+
+
+def seat_letters(round_dir) -> list:
+    """这一轮目录里**实际存在**的席位字母。
+
+    ★★★ 2026-08-07：在此之前 `census()` 把名册写死成 `("D","E","F","G")`。
+      全库现算：字母是 **D:44 E:44 F:12 G:12 H:1 J:1** ——
+      **H 与 J 两席从来不在名册里，于是从来没被读过。**
+      （它们是 Rosenhain #138 第 2 轮的两席。）
+
+      写死名册的坏处不是「少读两份」，是**它和「这一轮只有两席」长得一模一样**：
+      两种情况下 `g` 都少两组数，而输出里都不留痕迹。[[empty-default-swallows-unknown]]
+
+      **要发现的东西就去发现，不要在常量里替未来的自己做决定。**
+    """
+    rd = pathlib.Path(round_dir)
+    found = set()
+    for f in rd.iterdir() if rd.is_dir() else ():
+        for pat in _SEAT_PATTERNS:
+            mo = re.fullmatch(pat, f.name)
+            if mo:
+                found.add(mo.group(1))
+                break
+    return sorted(found)
 
 
 def census(corpora_root):
@@ -331,19 +475,31 @@ def census(corpora_root):
         except Exception:                                        # noqa: BLE001
             continue
         g = {"rub": [], "nor": []}
-        for seat, tag in (("D", "rub"), ("E", "rub"), ("F", "nor"), ("G", "nor")):
+        unclassified = []
+        for seat in seat_letters(rd):                    # ← 发现，不写死
             f = find_seat_file(rd, seat)
             if not f:
                 continue
             rows = read_seat(json.loads(f.read_text(encoding="utf-8")),
                              key, seat, {q: "x" for q in key})
+            tag = SEAT_TAG.get(seat)
+            if tag is None:
+                unclassified.append(f"{seat}({len(rows)}行)")
+                continue
             g[tag] += [r["candidate"] - r["baseline"] for r in rows]
-        if g["rub"]:
-            out.setdefault(who, []).append({
-                "round": rd.name,
-                "rubric_fed": sum(g["rub"]) / len(g["rub"]),
-                "no_rubric": (sum(g["nor"]) / len(g["nor"])) if g["nor"] else None,
-            })
+        if not (g["rub"] or g["nor"] or unclassified):
+            continue
+        # ★★ 2026-08-07：原先是 `if g["rub"]:`——**没有喂判据的席位就整个人物不出行**。
+        #   于是「这个人物没有喂判据档」与「这个人物我读不到」在输出里长得一样，
+        #   都只是**不出现**。Rosenhain #138 四席全是无 rubric，正是前者，
+        #   而我先前把它读成了后者。**两者必须在输出里分得开。**
+        out.setdefault(who, []).append({
+            "round": rd.name,
+            "rubric_fed": (sum(g["rub"]) / len(g["rub"])) if g["rub"] else None,
+            "no_rubric": (sum(g["nor"]) / len(g["nor"])) if g["nor"] else None,
+            "seats_seen": seat_letters(rd),
+            "**名册外的席位**": unclassified,       # 空列表 = 真的没有，不是没查
+        })
     return out
 
 
@@ -364,17 +520,30 @@ def main() -> int:
         return selftest()
     if a.census:
         rows = census(a.census)
-        only = []
-        print(f"{'人物':<22}{'末轮喂判据':>11}{'末轮无rubric':>14}")
+        only, nor_only, extra = [], [], []
+        print(f"{'人物':<22}{'末轮喂判据':>11}{'末轮无rubric':>14}  席位")
         for who in sorted(rows):
             last = rows[who][-1]
-            nor = f"{last['no_rubric']:+.4f}" if last["no_rubric"] is not None else "从没量过"
-            print(f"{who:<22}{last['rubric_fed']:>+11.4f}{nor:>14}")
-            if last["no_rubric"] is None:
+            # ★ 两侧都可能是 None，**而两个 None 的含义不同**，不许都印成同一个词。
+            rub = f"{last['rubric_fed']:+.4f}" if last["rubric_fed"] is not None else "无该档席位"
+            nor = f"{last['no_rubric']:+.4f}" if last["no_rubric"] is not None else "无该档席位"
+            print(f"{who:<22}{rub:>11}{nor:>14}  {''.join(last.get('seats_seen') or [])}")
+            if last["no_rubric"] is None and last["rubric_fed"] is not None:
                 only.append(last["rubric_fed"])
+            if last["rubric_fed"] is None and last["no_rubric"] is not None:
+                nor_only.append((who, last["no_rubric"]))
+            if last.get("**名册外的席位**"):
+                extra.append((who, last["**名册外的席位**"]))
         if only:
             print(f"\n只有喂判据档 {len(only)} 人｜均 {sum(only)/len(only):+.4f}"
                   f"｜≥+0.05 的 {sum(1 for x in only if x >= 0.05)}/{len(only)}")
+        # ★★ 这两段以前根本不打印——不打印就等于「这些人不存在」。
+        if nor_only:
+            print(f"★ 只有无 rubric 档 {len(nor_only)} 人（**不是读不到，是本来就没有喂判据的席位**）："
+                  + "、".join(f"{w} {d:+.4f}" for w, d in nor_only))
+        if extra:
+            print(f"★★ **名册外的席位**（`SEAT_TAG` 没给它们定档，因此没进任何一档均值）："
+                  + "；".join(f"{w}: {','.join(s)}" for w, s in extra))
         return 0
     if not (a.workspace and a.round_dir):
         ap.error("要么 --self-test，要么同时给 --workspace 与 --round-dir")
