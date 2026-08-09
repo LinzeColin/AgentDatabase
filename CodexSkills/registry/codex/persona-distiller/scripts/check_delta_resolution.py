@@ -277,16 +277,39 @@ def self_test() -> int:
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
+    # ★★★★ 2026-08-10：**加位置参数，是为了消掉一整类我反复犯的错。**
+    #   全项目十几件判据都是 `check_xxx.py <工作区>`，**只有这一件不收位置参数**，
+    #   于是同一天我在它身上连错两次（先给位置参数、再只给一个 `--round-dir`），
+    #   而**两次的正确用法都写在它自己的错误信息里**。
+    #   ★ 光靠「下次记得读错误信息」修不了这个——**根因是接口不一致，不是我不读**。
+    ap.add_argument("workspace", nargs="?",
+                    help="工作区目录；给了就自动发现 evals/round*/ 并按轮次序号排序")
     ap.add_argument("--round-dir", action="append", default=[],
-                    help="轮次目录，按时间顺序给两次以上")
+                    help="轮次目录，按时间顺序给两次以上（与位置参数二选一）")
     ap.add_argument("--delta", type=float, help="已算出的真 delta，给了就把它摆进区间里")
     ap.add_argument("--self-test", action="store_true")
     a = ap.parse_args()
     if a.self_test:
         return self_test()
-    if len(a.round_dir) < 2:
-        ap.error("要么 --self-test，要么给至少两个 --round-dir")
-    info = resolution(a.round_dir)
+    rounds = list(a.round_dir)
+    if a.workspace and not rounds:
+        import re as _re
+        base = pathlib.Path(a.workspace)
+        cands = [d for d in (base / "evals").glob("round*") if d.is_dir()] if (base / "evals").is_dir() else []
+        if not cands and base.name.startswith("round"):
+            ap.error(f"{base} 看着像单个轮次目录——**位置参数要给工作区，不是轮次目录**；"
+                     f"或者改用两个 --round-dir")
+        # 按 round 后面的数字排，不按字典序（round10 不该排在 round2 前面）
+        rounds = [str(d) for d in sorted(
+            cands, key=lambda d: int(_re.sub(r"\D", "", d.name) or 0))]
+        if len(rounds) < 2:
+            # ★ **说清楚发现了几个**——「不够」和「一个也没找到」是两件事
+            ap.error(f"在 {base/'evals'} 下只发现 {len(rounds)} 个轮次目录"
+                     f"（{[pathlib.Path(r).name for r in rounds]}），"
+                     f"**至少要两轮才量得出噪声**；这是「量不了」，不是「噪声小」")
+    if len(rounds) < 2:
+        ap.error("要么 --self-test，要么给工作区目录，要么给至少两个 --round-dir")
+    info = resolution(rounds)
     print(json.dumps(info, ensure_ascii=False, indent=2))
     se = info.get("**总 delta 的 SE**")
     if a.delta is not None and se:

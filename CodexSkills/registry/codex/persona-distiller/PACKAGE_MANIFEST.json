@@ -586,8 +586,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_delta_resolution.py",
-      "sha256": "81742d83345ec65453142f2845022b76d29f23133120784bfa656f73f48a604c",
-      "size_bytes": 15397
+      "sha256": "3dbe2fa4bd03a185e914bcf943c1bc1a1ccdd6fdfdc27f42cb308e7332319c14",
+      "size_bytes": 17202
     },
     {
       "path": "references/pipeline/checkers/check_distillation_freshness.py",
@@ -1256,8 +1256,8 @@
     },
     {
       "path": "scripts/check_delta_resolution.py",
-      "sha256": "81742d83345ec65453142f2845022b76d29f23133120784bfa656f73f48a604c",
-      "size_bytes": 15397
+      "sha256": "3dbe2fa4bd03a185e914bcf943c1bc1a1ccdd6fdfdc27f42cb308e7332319c14",
+      "size_bytes": 17202
     },
     {
       "path": "scripts/check_distillation_freshness.py",
