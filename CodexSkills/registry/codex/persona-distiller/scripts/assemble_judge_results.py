@@ -139,6 +139,32 @@ def unwrap_scores(raw):
     return raw if isinstance(raw, dict) else {}
 
 
+def score_pair(v):
+    """一题的原始分 → `(A, B)`；认不出返回 `None`。
+
+    ★★★★ **这是三种键名的唯一读法，别再各写各的。** 全库现算：
+      `A`/`B` 98 份、`[a, b]` 列表 12 份、**`A_score`/`B_score` 4 份**。
+
+    2026-08-07 实测：`check_delta_resolution.case_delta` 里**另有一份**
+    只认 `A`/`B` 的读法，于是 Whitworth #152 的两轮（评委按冻结指令
+    输出 `A_score`）在它那里**逐题返回 None**，最后印成
+    「两侧逐字未动的题数 **0**」——而两轮载荷**逐字节相同**。
+    它不是报错，是**静默地把 16 道题读成 0 道**，
+    再顺理成章地说「量不出噪声」。[[empty-default-swallows-unknown]]
+
+    **所以读法收在这里一处**，别的判据 import 它。
+    """
+    if isinstance(v, (list, tuple)) and len(v) >= 2:
+        return v[0], v[1]
+    if not isinstance(v, dict):
+        return None
+    ak = "A" if "A" in v else ("A_score" if "A_score" in v else None)
+    bk = "B" if "B" in v else ("B_score" if "B_score" in v else None)
+    if ak is None or bk is None:
+        return None
+    return v[ak], v[bk]
+
+
 def unwrap_key(key: dict, qids) -> dict:
     """揭盲键也有外壳——**按对不对得上题号来判，不按键名猜。**
 
@@ -185,8 +211,10 @@ def read_seat(raw: dict, key: dict, seat: str, suite_of: dict) -> list:
             k = {"A": "candidate" if k.strip().upper() == "A" else "baseline",
                  "B": "baseline" if k.strip().upper() == "A" else "candidate",
                  "case_id": qid}
-        if isinstance(v, (list, tuple)):
-            a_raw, b_raw, note = float(v[0]), float(v[1]), ""
+        _pair = score_pair(v)                    # ← 三种键名的唯一读法，见 score_pair
+        if _pair is not None:
+            a_raw, b_raw = float(_pair[0]), float(_pair[1])
+            note = v.get("note", "") if isinstance(v, dict) else ""
         else:
             # ★★★★ 2026-08-07：分数键名有 **3 种**，全库现算 A/B 98 份、
             #   `[a,b]` 列表 12 份、**`A_score`/`B_score` 4 份**。
@@ -197,14 +225,11 @@ def read_seat(raw: dict, key: dict, seat: str, suite_of: dict) -> list:
             #
             #   ★ 认不出时**抛出去，不许 continue**：静默丢一席的后果
             #     Sorby #133 已经付过一次（两席被吞，delta 变成 +0.2484 且三档门全绿）。
-            ak = "A" if "A" in v else ("A_score" if "A_score" in v else None)
-            bk = "B" if "B" in v else ("B_score" if "B_score" in v else None)
-            if ak is None or bk is None:
-                raise SystemExit(
-                    f"✗ **{seat} 席 {qid} 的分数键名不认识**：{sorted(v)[:6]}——"
-                    f"认得的只有 `A`/`B`、`A_score`/`B_score`、`[a, b]` 三种。"
-                    f"**这一席不许静默丢掉，去 read_seat 里加上这一族。**")
-            a_raw, b_raw, note = float(v[ak]), float(v[bk]), v.get("note", "")
+            raise SystemExit(
+                f"✗ **{seat} 席 {qid} 的分数形状不认识**："
+                f"{sorted(v)[:6] if isinstance(v, dict) else type(v).__name__}——"
+                f"认得的只有 `A`/`B`、`A_score`/`B_score`、`[a, b]` 三种。"
+                f"**这一席不许静默丢掉，去 `score_pair` 里加上这一族**（只加那一处）。")
         a, b = normalize(a_raw, b_raw)
         cand = a if k["A"] == "candidate" else b
         base = b if k["A"] == "candidate" else a
