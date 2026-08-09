@@ -1,0 +1,18 @@
+{
+ "q-12316723": "jn-planning-fidelity-01",
+ "q-2f3ac24c": "jn-task-completion-01",
+ "q-47693854": "jn-fact-preservation-01",
+ "q-4b47f8ee": "jn-long-horizon-01",
+ "q-64630855": "jn-known-01",
+ "q-7aff7726": "jn-refusal-stop-01",
+ "q-7b0b9eb5": "jn-style-decoy-01",
+ "q-8b024c18": "jn-voice-01",
+ "q-a1dc5887": "jn-identity-routing-01",
+ "q-a534a759": "jn-token-efficiency-01",
+ "q-aa08347f": "jn-contrast-01",
+ "q-b0b796d5": "jn-tool-use-01",
+ "q-bfba4cc7": "jn-capability-calibration-01",
+ "q-d4386480": "jn-trajectory-01",
+ "q-e67165b1": "jn-boundary-01",
+ "q-ff0b771a": "jn-anonymous-fidelity-01"
+}
