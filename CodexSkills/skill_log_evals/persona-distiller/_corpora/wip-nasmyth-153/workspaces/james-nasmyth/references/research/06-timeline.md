@@ -27,8 +27,8 @@
 | 此后 | 于 Patricroft 建 **Bridgewater Foundry** | S2 两处一致 |
 | **1836-03-08** | 就艺术与制造业向下议院特别委员会作证，身份 `Manufacturing Engineer from Manchester` | **P1 自证** |
 | **1839** | **蒸汽锤「first conceived」**——为一件异常大的锻件而设计 | S2 讣告 |
-| 1839 之后 | **那件锻件被取消**；他把方案的好处给了 Le Creusot 的 Schneider | S2 讣告 |
-| 约 1841 | 访 Creusot，**发现自己的构思已被造出来并在运转**（`though with some shortcomings`） | S2 讣告 |
+| 1839 之后 | **那件锻件（paddle shaft）被取消**；★ **他本人不在场时**，合伙人 Gaskell 出于礼貌把他的 Scheme Book 给来访的 Schneider 与 Bourdon 看，Bourdon 当场抄录 | **P1 自传**（推翻了讣告「主动相赠」的说法） |
+| **1842 年 4 月** | 应法国海军部长 Bouchier 之邀访法，顺道到 Creusot；问一根锻得异常精确的曲柄怎么来的，Bourdon 答 `It was forged by your steam hammer!`；他的记述是 `Great was my surprise and pleasure` | **P1 自传** |
 | **1841** | 发表 "Remarks on the introduction of the slide principle"（Practical Essays, pp.393–418） | **P1 自证** |
 | **1842-06-09** | GB 9382 直动蒸汽锤专利 | DNB 与 datamp 一致；1843 London Journal 转载（S1） |
 | 1844/1846 | MNRAS 两次（**学会记录员第三人称摘要**，S1） | S1 |

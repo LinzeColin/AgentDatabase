@@ -112,6 +112,33 @@ Schneider → 两年后访 Creusot 发现已建成运转 → `After this he lost
   ★ 但他在同一段里紧接着写 `from whom we want no more than careful attention`，
   **措辞是配套的**，不像临时找的理由。
 
+## ★★★★ 2026-08-10 更正：**D6 被自传（P1）推翻，讣告把一次意外写成了一桩慷慨**
+
+`05-decisions.md` 初稿据讣告（S2）写「他先把方案给了对手，专利是发现对方造出来之后才申请的」，
+并已标明「自传核到之前不得当成确定事实」。**核了，不成立。**
+
+- **讣告（S2）**：`Mr Nasmyth … gave the benefit of his [sketch] to M. [Schneider]`——**主动相赠**。
+- **自传（P1，`src-75240b0a8dbb`，他自己写的）**：他当时**不在场**；合伙人 Gaskell
+  `as an act of courtesy he brought them my Scheme Book and allowed them to examine it`；
+  Bourdon `took careful notes and sketches of the constructive details of the hammer`；
+  而他本人 `was, therefore, **in entire ignorance** of the fact that these foreign visitors had
+  taken with them to France a copy of the plan and details of my steam hammer`。
+
+★ **真实经过**：1842 年 4 月他应法国海军部长 Bouchier 之邀访法，顺道到 Creusot；
+Schneider 不在，Bourdon 接待。他注意到一根锻得异常精确的大型船机曲柄，问是怎么锻的——
+
+> His immediate reply was, "**It was forged by your steam hammer!**"
+
+而他自己的记述是：
+
+> **Great was my surprise and pleasure at hearing this statement.**
+
+★★ **不是愤怒，是「惊讶且高兴」。** 这一句是本人物性格上很硬的一处证据，**且是 P1**。
+
+★★★ **本条对产物的意义**：`04-external.md` 那条独立性警告在这里拿到了最强的实例——
+**讣告不只是复述自传，它在这一处改写了事实的性质**（意外 → 慷慨）。
+**这正是 divergence-map 该收的东西。**
+
 ## Unknowns and source gaps
 
 - **自传未读**——D4–D7 全部待核，K2 待成条，K1 的合并判断也等它。
