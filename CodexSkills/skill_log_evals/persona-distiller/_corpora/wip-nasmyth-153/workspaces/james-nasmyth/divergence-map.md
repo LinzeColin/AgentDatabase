@@ -63,7 +63,13 @@ collate[ral assistance]`（`wivantages` 即 advantages）。
 <!-- claim:clm-7d5be46a03d2 -->
 **关于蒸汽锤如何流入法国，两份材料说的不是一回事。**
 
-- 1890 年的讣告说：他 `gave the benefit of his [sketch] to` Le Creusot 的 Schneider——**主动相赠**。
+- 1890 年的讣告**那一句 OCR 残缺**，原文逐字是：
+  `But the forging was | ] phepconed, and Mr mara Bipeber ab the | gave the benefit of his Shox
+  to M. Ecinaidae, the | proprietor of the great ironworks at Creuzot, in | | #rance.`
+  ★ 可读的部分是 `gave the benefit of his [某物] to M. [某人] … at Creuzot`；
+  **而 `Mr mara Bipeber ab the` 整段读不出来——主语与限定语恰好落在这一段里。**
+  ★★ **所以「讣告说是主动相赠」这个读法本身是有条件的**：动词短语在，
+  **谁给的、以什么身份给的，那句话没能读出来。** 本库把这一点写明，不替它补。
 - 而他**自己在自传里写的是**：那天他不在场；合伙人 Gaskell
   `as an act of courtesy he brought them my Scheme Book and allowed them to examine it`；
   来客 Bourdon `took careful notes and sketches of the constructive details of the hammer`；
