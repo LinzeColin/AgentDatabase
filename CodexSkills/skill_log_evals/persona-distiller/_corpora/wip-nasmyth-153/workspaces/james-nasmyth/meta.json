@@ -250,7 +250,9 @@
    "★★★": "**与目标人物同名同姓**（不只是同姓）"
   }
  ],
- "★★★★ 同名场是本族至今最险恶的": "同姓 `Nasmyth` 者 **19 人**，其中 **2 人与目标人物同名同姓**（两位准男爵），**3 人都叫 `Alexander Nasmyth`**（父亲、父亲的一个儿子、牙医）。而目标人物的**一手主源就是自传**，里面「Nasmyth」大量指的是他父亲与兄长。★ 姓氏另有 **`Naesmyth` / `Naesmith`** 两种实际使用的拼法，护栏要一并覆盖。★★ 本项目的署名护栏**只比姓**（见 [[test-the-guard-against-this-persons-namesake]]），**对这个人物它几乎等于不设防**——归属判定必须逐份看首名与上下文，不能靠姓。",
+ "★★★★ 同名场是本族至今最险恶的": "同姓 `Nasmyth` 者 **19 人**，其中 **2 人与目标人物同名同姓**（两位准男爵），**3 人都叫 `Alexander Nasmyth`**（父亲、父亲的一个儿子、牙医）。而目标人物的**一手主源就是自传**，里面「Nasmyth」大量指的是他父亲与兄长。★ 姓氏另有 **`Naesmyth` / `Naesmith`** 两种实际使用的拼法，护栏要一并覆盖。★★ **更正（实测证伪了我先前那句「只比姓、几乎等于不设防」）**：拿这一整套同名集去打现有护栏，`By Alexander Nasmyth`（父）、`By Patrick Nasmyth`、`By Peter Nasmyth`（兄的别名）**全部正确拒绝**。**真正漏的只有一路：`By Sir James Nasmyth, Baronet` 被当成他本人的署名放行**——那是两位与他同名同姓的准男爵。已落成第三道判别器 `_title_blocked`（证据驱动：署名的头衔不在目标自己的头衔里、且某个已声明同名者持有它 → 拦；**不声明 own_titles 就不启用，并印「未核，不是通过」**）。★ 为什么不能见 `Sir` 就拦：**Whitworth 本人 1869 年受封准男爵**，语料里就有 `Sir Joseph Whitworth, Bart.`。",
  "middle_initial": "",
- "★ 名字形式的分歧": "Wikidata/DNB/Gutenberg 作 `James Nasmyth`（无中名）；NPG/Science Museum/Wikisource 作 `James Hall Nasmyth`。「Hall 得自 Sir James Hall of Dunglass」**查不到出处，不采信**。"
+ "★ 名字形式的分歧": "Wikidata/DNB/Gutenberg 作 `James Nasmyth`（无中名）；NPG/Science Museum/Wikisource 作 `James Hall Nasmyth`。「Hall 得自 Sir James Hall of Dunglass」**查不到出处，不采信**。",
+ "own_titles": [],
+ "★ own_titles 为空是明确声明": "**他本人不持有任何头衔**（未受封）。这不是默认值——`check_authorship` 里 `None`（没声明，判别器不启用）与 `[]`（声明他没有）分得开。"
 }

@@ -624,6 +624,58 @@ def _blocked(cand, last_l, namesakes):
     return any(ns != last_l and _edits_within(cand, ns, d) for ns in plain)
 
 
+_TITLES = re.compile(r"\b(Sir|Dame|Lord|Lady|Baronet|Bart|Bt|Rev|Revd)\b\.?", re.I)
+
+
+def _titles_of(name) -> frozenset:
+    """从一个姓名串里取出头衔集合（小写）。`Bart`/`Bt` 归并到 `baronet`。"""
+    out = set()
+    for t in _TITLES.findall(str(name)):
+        t = t.lower()
+        out.add("baronet" if t in ("bart", "bt", "baronet") else t)
+    return frozenset(out)
+
+
+def _title_blocked(cand_line, own_titles, namesakes) -> str:
+    """署名带的头衔**目标没有、而某个已声明同名者有** → 拒绝，返回那个头衔。
+
+    ## 撞出它的那一次（Nasmyth #153，**在抓源落地之前**）
+
+    `_blocked` 只比姓，`_initial_blocked` 只比中名首字母。而 Nasmyth 的同名场是：
+    有**两位与他同名同姓**的准男爵（Sir James Nasmyth 第一代、第二代）。
+    实测（本判别器加之前）：
+
+        By Alexander Nasmyth（父，画家）      → 拒绝 ✓
+        By Patrick / Peter Nasmyth（兄）      → 拒绝 ✓
+        **By Sir James Nasmyth, Baronet      → 放行 ✗**
+
+    ★ 顺带更正我自己写过的一句话：我在 #153 的开工记录里写「护栏只比姓，
+      对这个人物几乎等于不设防」。**实测证伪**——画家家族那一串它全挡住了，
+      真正漏的只有同名同姓的准男爵这一路。**说射程要量，不要从记忆里推。**
+
+    ## 为什么必须是证据驱动，不能见 `Sir` 就拦
+
+    **Whitworth 本人 1869 年受封准男爵**，语料里就有 `Sir Joseph Whitworth, Bart.`。
+    一律拦 `Sir` 会把**他自己的署名**挡在门外——那正是 Coffin 那次
+    「两个方向同时错」的重演。
+
+    所以判法是：**署名的头衔不在目标自己的头衔里，且命中某个已声明同名者的头衔** → 拦。
+    `own_titles` 为 `None`（没声明）时**一律不拦**，并由调用方印「未核，不是通过」。
+    """
+    if own_titles is None:
+        return ""                      # 没声明就不判——**不判不等于通过**
+    cand_t = _titles_of(cand_line)
+    if not cand_t:
+        return ""
+    ns_t = set()
+    for ns in namesakes or ():
+        ns_t |= _titles_of(ns)
+    for t in sorted(cand_t - set(own_titles)):
+        if t in ns_t:
+            return t
+    return ""
+
+
 def _last_token(name):
     toks = [x for x in re.split(r"[^A-Za-z]+", str(name)) if x]
     return toks[-1].lower() if toks else ""
@@ -720,7 +772,7 @@ def _initial_blocked(line, last_l, namesakes, own_mid):
     return False
 
 
-def standalone_ocr(text, first_l, last_l, namesakes, own_mid=""):
+def standalone_ocr(text, first_l, last_l, namesakes, own_mid="", own_titles=None):
     """**独占一行的署名，名或姓被 OCR 打坏**——`Elihtt Thomson.`／`Pror. Tuomson :—`。
 
     ## 为什么要它
@@ -763,7 +815,8 @@ def standalone_ocr(text, first_l, last_l, namesakes, own_mid=""):
             cand = next((x.lower() for x in reversed(toks) if len(x) >= 4), None)
             if (cand and _edits_within(cand, last_l, 2)
                     and not _blocked(cand, last_l, namesakes)
-                    and not _initial_blocked(m.group(1), last_l, namesakes, own_mid)):
+                    and not _initial_blocked(m.group(1), last_l, namesakes, own_mid)
+                    and not _title_blocked(m.group(1), own_titles, namesakes)):
                 return s
             continue
 
@@ -788,7 +841,8 @@ def standalone_ocr(text, first_l, last_l, namesakes, own_mid=""):
         cand = next((x.lower() for x in reversed(toks) if len(x) >= 4), None)
         if (not cand or not _edits_within(cand, last_l, 2)
                 or _blocked(cand, last_l, namesakes)
-                or _initial_blocked(s, last_l, namesakes, own_mid)):
+                or _initial_blocked(s, last_l, namesakes, own_mid)
+                or _title_blocked(s, own_titles, namesakes)):
             continue
         # 名也必须对得上（≥4 字母、距离 ≤2）——**只有首字母缩写的一律不认**
         if any(len(x) >= 4 and _edits_within(x.lower(), first_l, 2) for x in toks[:-1]):
@@ -1240,6 +1294,17 @@ def _check_one(text, pat):
                           or re.search(r"[*|·—–]\s*$", before))
             if not structural or re.match(r"(who|which|that)\b", after, re.I):
                 continue
+            # ★★★★ 2026-08-10：**头衔判别必须接在这一条分支上。**
+            #   我第一次把它接进了 `A-byline-standalone` 与 `standalone_ocr`——
+            #   而 `By Sir James Nasmyth, Baronet` 走的是**这一条 `A-byline`**，
+            #   于是加完判别器实测仍然放行。**接在了没人走的分支上。**
+            #   ★ 同一个文件里上一轮刚撞过同形的事（`A-byline-standalone` 当时整个绕过了同名护栏），
+            #     **两次都是「以为接上了，没沿真实路径验」**。
+            #     [[a-checker-nothing-calls-is-not-a-checker]]
+            _t = _title_blocked(m.group(0), pat.get("own_titles"),
+                                tuple(pat.get("namesakes") or ()))
+            if _t:
+                continue
             a, b = max(0, m.start() - 60), min(len(text), m.end() + 60)
             return True, code, " ".join(text[a:b].split()), counter
 
@@ -1301,6 +1366,11 @@ def _check_one(text, pat):
             _mid = str(pat.get("own_mid") or "")
             _last_l = str(pat.get("surname") or "").lower()
             if _ns and _initial_blocked(m.group(0), _last_l, _ns, _mid):
+                continue
+            # ★★★★ 头衔判别（Nasmyth #153）：`By Sir James Nasmyth, Baronet` 此前**放行**。
+            #   见 `_title_blocked` 文件头——**证据驱动，不是见 Sir 就拦**
+            #   （Whitworth 本人就是准男爵，一律拦会把他自己的署名挡在门外）。
+            if _ns and _title_blocked(m.group(0), pat.get("own_titles"), _ns):
                 continue
             code = "A-signature-block" if signed else "A-byline-standalone"
             a, b = max(0, m.start() - 60), min(len(text), m.end() + 60)
@@ -1378,7 +1448,8 @@ def _check_one(text, pat):
         ev = standalone_ocr(text, pat.get("first_word", "").lower(),
                             pat.get("surname", "").lower(),
                             tuple(pat.get("namesakes", ())),
-                            str(pat.get("own_mid", "") or "").lower()[:1])
+                            str(pat.get("own_mid", "") or "").lower()[:1],
+                            pat.get("own_titles"))
         if ev:
             return True, "A-byline-ocr", ev, counter
     return False, "", "", counter
@@ -2111,6 +2182,46 @@ def self_test() -> int:
         if not _ok:
             bad.append(f"Whitworth 拆姓：{_why}")
 
+    # ── ★★★★ 头衔判别（Nasmyth #153 撞出来，**在抓源落地之前**）──
+    #   `_blocked` 只比姓、`_initial_blocked` 只比中名首字母，两者都不管头衔。
+    #   而 Nasmyth 有**两位与他同名同姓的准男爵**，实测（本判别器加之前）：
+    #       By Alexander Nasmyth（父，画家）  → 拒绝 ✓
+    #       By Patrick / Peter Nasmyth（兄）  → 拒绝 ✓
+    #       **By Sir James Nasmyth, Baronet   → 放行 ✗**
+    #   ★ 因此更正一句我自己写过的话：「护栏只比姓，对这个人物几乎等于不设防」——
+    #     **实测证伪**，画家家族那一串它全挡住了，漏的只有同名同姓那一路。
+    #   ★★ 判别器第一次接在了 `A-byline-standalone` 与 `standalone_ocr` 上，
+    #     而这条署名走的是 `A-byline`，**加完仍然放行**——接在了没人走的分支上。
+    _NSN = ("Alexander Nasmyth", "Patrick Nasmyth",
+            "Sir James Nasmyth, 1st Baronet", "Sir James Nasmyth, 2nd Baronet")
+
+    def _title_case(_name, _text, _ns, _ot, _want, _why):
+        _p = build_patterns(_name)
+        _p["namesakes"] = _ns; _p["own_mid"] = ""; _p["own_titles"] = _ot
+        _g = bool(check_text(_text, _p)[0])
+        print(f"  {'✓' if _g == _want else '✗'} {'应取到' if _want else '应拒绝'}　{_why}")
+        if _g != _want:
+            bad.append(f"头衔判别：{_why}")
+
+    print("\n★★★★ 头衔判别（证据驱动，不是见 Sir 就拦）")
+    _title_case("James Nasmyth", "By Sir James Nasmyth, Baronet\n\nOn botany.",
+                _NSN, (), False, "By Sir James Nasmyth, Baronet —— **同名同姓的准男爵**")
+    _title_case("James Nasmyth", "By James Nasmyth\n\nOn the slide principle.",
+                _NSN, (), True, "By James Nasmyth —— 本人")
+    _title_case("James Nasmyth", "By Sir James Nasmyth, Baronet\n\nOn botany.",
+                _NSN, None, True, "同一条署名而 own_titles=None —— **没声明就不许拦**（不判 ≠ 通过）")
+    # ★★★★ 这一条是全组最要紧的：**Whitworth 本人 1869 年受封准男爵**。
+    #   一律拦 `Sir` 会把他自己的署名挡在门外——Coffin 那次「两个方向同时错」的重演。
+    _title_case("Joseph Whitworth", "By Sir Joseph Whitworth, Bart.\n\nOn the true plane.",
+                ("Charles Whitworth",), ("sir", "baronet"), True,
+                "By Sir Joseph Whitworth, Bart. —— **他自己就是准男爵，不许拦**")
+    _title_case("James Nasmyth", "By Rev. James Nasmyth\n\nA sermon.",
+                _NSN, (), True, "By Rev. James Nasmyth —— 没有已声明同名者持此衔，不拦")
+    _title_case("James Nasmyth", "By Alexander Nasmyth\n\nA view of Edinburgh.",
+                _NSN, (), False, "By Alexander Nasmyth（父）—— 新判别器不许把它改坏")
+    _title_case("James Nasmyth", "By Patrick Nasmyth\n\nA wooded landscape.",
+                _NSN, (), False, "By Patrick Nasmyth（兄）—— 新判别器不许把它改坏")
+
     if bad:
 
         print("\n负对照未过：")
@@ -2140,6 +2251,19 @@ def main() -> int:
                          "★ Thomson 与 Thompson 距离仅 1——不声明就会把十二个 Thompson 收进来。"
                          "★★ 也可以给**全名**（如 \"Charles A. Coffin\"）——同姓的同名者"
                          "只能靠中名首字母区分，那时必须同时给 --middle-initial。")
+    ap.add_argument("--own-title", action="append", default=[],
+                    help="**目标本人持有的头衔**（可给多次，如 Sir / Bart）。"
+                         "★ 与 `--declares-no-title` 二选一：两者都不给时**头衔判别不启用**，"
+                         "并印「未核（不是通过）」——`None`（没声明）与 `()`（声明他没有）必须分得开。")
+    ap.add_argument("--declares-no-title", action="store_true",
+                    help="**明确声明目标本人不持有任何头衔**，从而启用头衔判别。"
+                         "★ 实测（Nasmyth #153，本判别器加之前）："
+                         "`By Sir James Nasmyth, Baronet`（两位同名同姓的准男爵之一）**被放行**；"
+                         "而 `By Alexander Nasmyth`（父，画家）与 `By Patrick/Peter Nasmyth`（兄）"
+                         "本来就挡得住。**漏的只有同名同姓那一路。**"
+                         "★★ 为什么不是见 Sir 就拦：**Whitworth 本人 1869 年受封准男爵**，"
+                         "语料里就有 `Sir Joseph Whitworth, Bart.`——"
+                         "一律拦会把他自己的署名挡在门外（Coffin 那次「两个方向同时错」的重演）。")
     ap.add_argument("--middle-initial", default="",
                     help="**目标本人的中名首字母**（如 Charles L. Coffin 给 \"L\"）。"
                          "只在有**同姓**同名者时需要：`_blocked` 只比姓，同姓的它一个也挡不住。"
@@ -2161,6 +2285,10 @@ def main() -> int:
         # ★ 已知同名注入：OCR 容错不许把两个真名连起来（见 standalone_ocr 文件头）
         pat["namesakes"] = tuple(a.namesake or ())
         pat["own_mid"] = str(a.middle_initial or "").strip().lower()[:1]
+        # ★ `None` = 没声明 → 头衔判别**不启用**；`()` = 明确声明「他没有头衔」。
+        #   两者必须分得开：[[empty-default-swallows-unknown]]
+        pat["own_titles"] = (tuple(t.strip().lower() for t in (a.own_title or ()))
+                             if (a.own_title or a.declares_no_title) else None)
     except ValueError as exc:
         print(f"✗ {exc}", file=sys.stderr)
         return 3
