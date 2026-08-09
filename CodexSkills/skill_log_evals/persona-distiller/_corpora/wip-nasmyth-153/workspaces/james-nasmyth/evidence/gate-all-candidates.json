@@ -1,0 +1,103 @@
+{
+  "candidate_cards": [
+    "A. 人物与身份：James Nasmyth；historical；苏格兰机械工程师、机床与蒸汽锤发明人、天文观测者（1808-08-19 – 1890-05-07）。\n   专业背景：Bridgewater Foundry（Patricroft）创办人；1842-06-09 GB 9382 直动蒸汽锤专利；1841 年论滑动原理在机床中的引入（Practical Essays on Mill Work, pp.393–418）；1874 年与 James Carpenter 合著《The Moon》；1836 年就艺术与制造业向下议院特别委员会作证（Part II Q.290–330）；1883 年《James Nasmyth, Engineer: An Autobiography》（Smiles 编，正文 21 章为其亲笔）。\n   应用价值：场景：机床与工艺次序；以量规替代配研的互换性；把手艺判断改造成可复现工序；关键能力：工艺排序；设备设计取舍；以实测代替论证。\n   区分依据：生卒 1808–1890，与队列条目（材料建工师，卒年表 1808–1890）唯一相符；另两位同名者分别卒于 1720 与 1779，均早于其出生。",
+    "B. 人物与身份：Sir James Nasmyth, 1st Baronet；historical；苏格兰律师（advocate），Dawyck and Posso 第一代准男爵，卒于 1720。\n   专业背景：1684 年取得 advocate 资格，1706 年受封准男爵；DNB 记异拼 Naesmith，绰号 De'il o' Dawick。\n   应用价值：场景：与本项目无关：非工程人物；关键能力：与本项目无关。\n   区分依据：**卒于 1720，早于目标人物出生 88 年**；职业为律师，非工程。",
+    "C. 人物与身份：Sir James Nasmyth, 2nd Baronet；historical；苏格兰植物学家、下议院议员（约 1704 – 1779-02-04）。\n   专业背景：1732–1741 任议员；1767 年当选皇家学会会士；林奈的学生；亦拼 Naesmyth。\n   应用价值：场景：与本项目无关：非工程人物；关键能力：与本项目无关。\n   区分依据：**卒于 1779，早于目标人物出生 29 年**；职业为植物学家与议员，非工程。"
+  ],
+  "candidate_count": 3,
+  "candidates": [
+    {
+      "application_scenarios": [
+        "机床与工艺次序",
+        "以量规替代配研的互换性",
+        "把手艺判断改造成可复现工序"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://www.wikidata.org/wiki/Q240633",
+          "note": "Wikidata Q240633；VIAF 20443177 / LCCN n84122169 / ISNI 000000008099915X / ODNB 19801"
+        },
+        {
+          "locator": "https://en.wikisource.org/wiki/Dictionary_of_National_Biography,_1885-1900/Nasmyth,_James_(1808-1890)",
+          "note": "DNB 条目"
+        },
+        {
+          "locator": "https://archive.org/details/jamesnasmythengi00nasmiala",
+          "note": "1883 自传扫描件（John Murray, London, 1883）"
+        }
+      ],
+      "canonical_name": "James Nasmyth",
+      "distinguishing_basis": "生卒 1808–1890，与队列条目（材料建工师，卒年表 1808–1890）唯一相符；另两位同名者分别卒于 1720 与 1779，均早于其出生",
+      "evidence_level": "high",
+      "identity_category": "historical",
+      "key_capabilities": [
+        "工艺排序",
+        "设备设计取舍",
+        "以实测代替论证"
+      ],
+      "label": "A",
+      "occupation_or_role": "苏格兰机械工程师、机床与蒸汽锤发明人、天文观测者（1808-08-19 – 1890-05-07）",
+      "professional_background": "Bridgewater Foundry（Patricroft）创办人；1842-06-09 GB 9382 直动蒸汽锤专利；1841 年论滑动原理在机床中的引入（Practical Essays on Mill Work, pp.393–418）；1874 年与 James Carpenter 合著《The Moon》；1836 年就艺术与制造业向下议院特别委员会作证（Part II Q.290–330）；1883 年《James Nasmyth, Engineer: An Autobiography》（Smiles 编，正文 21 章为其亲笔）",
+      "subject_uid": "viaf-20443177"
+    },
+    {
+      "application_scenarios": [
+        "与本项目无关：非工程人物"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://www.wikidata.org/wiki/Q18168555"
+        },
+        {
+          "locator": "https://en.wikisource.org/wiki/Dictionary_of_National_Biography,_1885-1900/Nasmyth,_James_(d.1720)"
+        }
+      ],
+      "canonical_name": "Sir James Nasmyth, 1st Baronet",
+      "distinguishing_basis": "**卒于 1720，早于目标人物出生 88 年**；职业为律师，非工程",
+      "evidence_level": "medium",
+      "identity_category": "historical",
+      "key_capabilities": [
+        "与本项目无关"
+      ],
+      "label": "B",
+      "occupation_or_role": "苏格兰律师（advocate），Dawyck and Posso 第一代准男爵，卒于 1720",
+      "professional_background": "1684 年取得 advocate 资格，1706 年受封准男爵；DNB 记异拼 Naesmith，绰号 De'il o' Dawick",
+      "subject_uid": "wikidata-Q18168555"
+    },
+    {
+      "application_scenarios": [
+        "与本项目无关：非工程人物"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://www.wikidata.org/wiki/Q17318806"
+        },
+        {
+          "locator": "https://www.historyofparliamentonline.org/volume/1715-1754/member/nasmyth-sir-james-1704-79"
+        }
+      ],
+      "canonical_name": "Sir James Nasmyth, 2nd Baronet",
+      "distinguishing_basis": "**卒于 1779，早于目标人物出生 29 年**；职业为植物学家与议员，非工程",
+      "evidence_level": "medium",
+      "identity_category": "historical",
+      "key_capabilities": [
+        "与本项目无关"
+      ],
+      "label": "C",
+      "occupation_or_role": "苏格兰植物学家、下议院议员（约 1704 – 1779-02-04）",
+      "professional_background": "1732–1741 任议员；1767 年当选皇家学会会士；林奈的学生；亦拼 Naesmyth",
+      "subject_uid": "wikidata-Q17318806"
+    }
+  ],
+  "generated_at": "2026-08-09T21:37:25Z",
+  "normalized_name": "jamesnasmyth",
+  "resolution": "multiple",
+  "schema_version": "1.0",
+  "search_scope": [
+    "sibling canonical registry",
+    "authoritative public sources supplied by orchestration"
+  ],
+  "selected_subject_uid": null,
+  "status": "blocked",
+  "target_name": "James Nasmyth"
+}

@@ -1,0 +1,256 @@
+{
+ "builder_version": "v0.0.0.5",
+ "chosen_subject_uid": "viaf-20443177",
+ "consent_authority": null,
+ "created_at": "2026-08-09T21:37:56Z",
+ "current_version": null,
+ "existential_hypotheses_enabled": false,
+ "identity_selection": {
+  "canonical": "technical-engineer",
+  "display": "材料建工师",
+  "mode": "single",
+  "primary": "technical-engineer",
+  "weights": {
+   "technical-engineer": 1.0
+  }
+ },
+ "language": "en",
+ "model_version": "0.1.0-draft",
+ "name": "James Nasmyth",
+ "namesake_gate": {
+  "candidate_count": 1,
+  "chosen_candidate": {
+   "application_scenarios": [
+    "机床与工艺次序",
+    "以量规替代配研的互换性",
+    "把手艺判断改造成可复现工序"
+   ],
+   "authoritative_sources": [
+    {
+     "locator": "https://www.wikidata.org/wiki/Q240633",
+     "note": "Wikidata Q240633；VIAF 20443177 / LCCN n84122169 / ISNI 000000008099915X / ODNB 19801"
+    },
+    {
+     "locator": "https://en.wikisource.org/wiki/Dictionary_of_National_Biography,_1885-1900/Nasmyth,_James_(1808-1890)",
+     "note": "DNB 条目"
+    },
+    {
+     "locator": "https://archive.org/details/jamesnasmythengi00nasmiala",
+     "note": "1883 自传扫描件（John Murray, London, 1883）"
+    }
+   ],
+   "canonical_name": "James Nasmyth",
+   "distinguishing_basis": "生卒 1808–1890，与队列条目（材料建工师，卒年表 1808–1890）唯一相符；另两位同名者分别卒于 1720 与 1779，均早于其出生",
+   "evidence_level": "high",
+   "identity_category": "historical",
+   "key_capabilities": [
+    "工艺排序",
+    "设备设计取舍",
+    "以实测代替论证"
+   ],
+   "label": "A",
+   "occupation_or_role": "苏格兰机械工程师、机床与蒸汽锤发明人、天文观测者（1808-08-19 – 1890-05-07）",
+   "professional_background": "Bridgewater Foundry（Patricroft）创办人；1842-06-09 GB 9382 直动蒸汽锤专利；1841 年论滑动原理在机床中的引入（Practical Essays on Mill Work, pp.393–418）；1874 年与 James Carpenter 合著《The Moon》；1836 年就艺术与制造业向下议院特别委员会作证（Part II Q.290–330）；1883 年《James Nasmyth, Engineer: An Autobiography》（Smiles 编，正文 21 章为其亲笔）",
+   "subject_uid": "viaf-20443177"
+  },
+  "chosen_subject_uid": "viaf-20443177",
+  "normalized_name": "jamesnasmyth",
+  "resolution": "single",
+  "schema_version": "1.0"
+ },
+ "normalized_name": "jamesnasmyth",
+ "origin_review_required": false,
+ "product_version": null,
+ "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+ "profile": "quick",
+ "prohibited_uses": [
+  "identity authentication or deceptive impersonation",
+  "invented endorsement, signature, consent, private memory or current opinion",
+  "unsupported psychological diagnosis",
+  "replacement of accountable high-stakes professional judgment"
+ ],
+ "retention_policy": null,
+ "runtime_invocation_versioning": false,
+ "scenario": null,
+ "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+ "schema_version": "2.0",
+ "slug": "james-nasmyth",
+ "status": "draft",
+ "subject_origin": "historical",
+ "target_id": "tgt-66c69840fae1",
+ "time_scope": "1836–1890（按本人材料的出版/宣读年，不外推）",
+ "updated_at": "2026-08-09T21:37:56Z",
+ "known_namesakes": [
+  {
+   "name": "Alexander Nasmyth",
+   "years": "1758–1840",
+   "who": "父亲，苏格兰肖像/风景画家",
+   "文献里怎么称呼": [
+    "Alexander Nasmyth",
+    "Nasmyth, A.",
+    "my father"
+   ],
+   "★": "**与下面(b)的牙医同名同姓**，且他自己有个儿子也叫 Alexander——**三个人共用同一串**"
+  },
+  {
+   "name": "Patrick Nasmyth",
+   "years": "1787–1831",
+   "who": "兄长，风景画家",
+   "文献里怎么称呼": [
+    "Patrick Nasmyth",
+    "**Peter Nasmyth**",
+    "the English Hobbema"
+   ],
+   "★": "部分图录里作 `Peter`——**按名字挡挡不住**"
+  },
+  {
+   "name": "Jane Nasmyth",
+   "years": "1787/88–1867",
+   "who": "姐姐，画家",
+   "文献里怎么称呼": [
+    "Miss Nasmyth"
+   ]
+  },
+  {
+   "name": "Barbara Nasmyth",
+   "years": "1790–1870",
+   "who": "姐姐，画家",
+   "文献里怎么称呼": [
+    "Miss Nasmyth"
+   ]
+  },
+  {
+   "name": "Margaret Nasmyth",
+   "years": "1791–1869",
+   "who": "姐姐，画家",
+   "文献里怎么称呼": [
+    "Miss Nasmyth"
+   ]
+  },
+  {
+   "name": "Elizabeth Nasmyth",
+   "years": "1793–1862",
+   "who": "姐姐，设计师/画家",
+   "文献里怎么称呼": [
+    "Miss Nasmyth"
+   ]
+  },
+  {
+   "name": "Anne Nasmyth",
+   "years": "1798–1874",
+   "who": "姐姐，画家",
+   "文献里怎么称呼": [
+    "Miss Nasmyth"
+   ]
+  },
+  {
+   "name": "Charlotte Nasmyth",
+   "years": "1804–1884",
+   "who": "姐姐，画家",
+   "文献里怎么称呼": [
+    "Miss Nasmyth"
+   ]
+  },
+  {
+   "name": "Alexander Nasmyth（子）",
+   "years": "查不到",
+   "who": "兄弟",
+   "文献里怎么称呼": [
+    "Alexander Nasmyth"
+   ]
+  },
+  {
+   "name": "George Nasmyth",
+   "years": "查不到",
+   "who": "兄弟",
+   "文献里怎么称呼": [
+    "George Nasmyth"
+   ]
+  },
+  {
+   "name": "Mary Nasmyth",
+   "years": "查不到",
+   "who": "姐妹",
+   "文献里怎么称呼": [
+    "Mary Nasmyth"
+   ]
+  },
+  {
+   "name": "Alexander Nasmyth（解剖学家/牙外科医生）",
+   "years": "1789–1848",
+   "who": "`Nasmyth's membrane`（牙釉小皮）命名来源；维多利亚女王的 Surgeon-Dentist",
+   "文献里怎么称呼": [
+    "Alexander Nasmyth, Esq.",
+    "Dr. Alexander Nasmyth",
+    "Mr. Alexander Nasmyth",
+    "the late Alex. Nasmyth"
+   ],
+   "★★": "**DNB 只收了画家那位**——按 DNB 查 `Alexander Nasmyth` 会直接落到错的人身上"
+  },
+  {
+   "name": "Robert Nasmyth",
+   "years": "1791–1870",
+   "who": "上者之弟，爱丁堡牙外科医生，FRCSEd/FRSE",
+   "文献里怎么称呼": [
+    "Robert Nasmyth"
+   ]
+  },
+  {
+   "name": "Charles Nasmyth",
+   "years": "1826–1861",
+   "who": "英军少校，Silistria 守卫者，《泰晤士报》通讯员",
+   "文献里怎么称呼": [
+    "Major Nasmyth",
+    "Nasmyth of Silistria"
+   ]
+  },
+  {
+   "name": "Thomas Goodall Nasmyth",
+   "years": "1855–1937",
+   "who": "苏格兰医生与医学史家",
+   "文献里怎么称呼": [
+    "T. G. Nasmyth"
+   ]
+  },
+  {
+   "name": "Beatrice Nasmyth",
+   "years": "1885–1977",
+   "who": "加拿大女权运动者、战地记者",
+   "文献里怎么称呼": [
+    "Beatrice Nasmyth"
+   ]
+  },
+  {
+   "name": "Kim Nasmyth",
+   "years": "1952– ",
+   "who": "英国生物化学教授（**在世**，作品不在 PD）",
+   "文献里怎么称呼": [
+    "K. Nasmyth"
+   ]
+  },
+  {
+   "name": "Sir James Nasmyth, 1st Baronet",
+   "years": "卒 1720",
+   "who": "苏格兰律师，Dawyck and Posso 第一代准男爵",
+   "文献里怎么称呼": [
+    "James Nasmyth",
+    "**Naesmith**",
+    "De'il o' Dawick"
+   ],
+   "★★★": "**与目标人物同名同姓**（不只是同姓）"
+  },
+  {
+   "name": "Sir James Nasmyth, 2nd Baronet",
+   "years": "约 1704–1779",
+   "who": "苏格兰植物学家、下议院议员",
+   "文献里怎么称呼": [
+    "James Nasmyth",
+    "**Naesmyth**"
+   ],
+   "★★★": "**与目标人物同名同姓**（不只是同姓）"
+  }
+ ],
+ "★★★★ 同名场是本族至今最险恶的": "同姓 `Nasmyth` 者 **19 人**，其中 **2 人与目标人物同名同姓**（两位准男爵），**3 人都叫 `Alexander Nasmyth`**（父亲、父亲的一个儿子、牙医）。而目标人物的**一手主源就是自传**，里面「Nasmyth」大量指的是他父亲与兄长。★ 姓氏另有 **`Naesmyth` / `Naesmith`** 两种实际使用的拼法，护栏要一并覆盖。★★ 本项目的署名护栏**只比姓**（见 [[test-the-guard-against-this-persons-namesake]]），**对这个人物它几乎等于不设防**——归属判定必须逐份看首名与上下文，不能靠姓。",
+ "middle_initial": "",
+ "★ 名字形式的分歧": "Wikidata/DNB/Gutenberg 作 `James Nasmyth`（无中名）；NPG/Science Museum/Wikisource 作 `James Hall Nasmyth`。「Hall 得自 Sir James Hall of Dunglass」**查不到出处，不采信**。"
+}
