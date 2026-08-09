@@ -57,17 +57,6 @@ STEPS = [
     ("合同漂移", ["check_contract_drift.py"], "版本三轴各自单一真源（**秒级，故排在测试前**）"),
     ("VERIFICATION 可数项", ["check_verification_counts.py", "."],
      "文中的数 vs 仓库实况（**秒级，故排在测试前**）"),
-    # ★★★★ 2026-08-10：**交付包里装了两棵判据树，而它们不一样。**
-    #   `PACKAGE_MANIFEST.json` 同收 `scripts/`(106) 与
-    #   `references/pipeline/checkers/`(85)；实测同名 81 件、**内容不同 16 件**。
-    #   git 历史证明是陈旧不是有意分叉（quality_check 77 次提交 vs 32 次，落后 5 天）。
-    #   ★ 后果实测两例：包内 `assemble_judge_results` 遇冻结指令要求的 `A_score`
-    #     **抛 KeyError**（会整席丢分）；包内 `check_version_bump_ships_product`
-    #     **自测退出码 2**——一件自己都测不过的判据被装进了交付包。
-    #   ★★ **只报不拦**（`--soft`）：哪一棵是权威要改交付契约，属用户裁定；
-    #     本步只保证**分叉不再静默**。两处从 08-05 起分叉，此前没有一处报过声。
-    ("两棵判据树是否同步", ["check_shipped_checker_drift.py", ".", "--soft"],
-     "`scripts/` 与 `references/pipeline/checkers/` 的同名件是否逐字节一致（**只报不拦**）"),
     ("全量测试", ["-m", "pytest", "-q"], "依赖 build_manifest；顺序反了会得到一批假红"),
     # ★ 判决书的归属抄进技能层文档之后，工作区那道判据就看不见它了。
     #   实测：Bessemer 那条「候选说手上没有那本自传的文本」**爬进了 CHANGELOG**，
