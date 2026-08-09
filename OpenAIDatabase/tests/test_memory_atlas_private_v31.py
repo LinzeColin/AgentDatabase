@@ -1164,6 +1164,22 @@ def test_deploy_preflights_candidate_and_rolls_back_blocking_probe() -> None:
     assert "POST_PROMOTION_STEP_FAILED_AND_ROLLED_BACK" in text
 
 
+def test_deploy_preflight_is_zero_charge_and_never_calls_r2() -> None:
+    repo = Path(__file__).resolve().parents[2]
+    text = (repo / "ops/memory-atlas/deploy-blue-green.sh").read_text(encoding="utf-8")
+    executable = [
+        line.strip()
+        for line in text.splitlines()
+        if line.strip() and not line.lstrip().startswith("#")
+    ]
+    assert not any(
+        "OpenAIDatabase.scripts.memory_atlas_private preflight" in line
+        for line in executable
+    )
+    assert '"$MEMORY_ATLAS_PRIVATE_DB_CLIENT" verify Private-AgentDatabase' in text
+    assert "MEMORY_ATLAS_R2_PREFLIGHT_SKIPPED_ZERO_CHARGE" in text
+
+
 def test_deploy_first_release_rolls_back_to_absent_state() -> None:
     repo = Path(__file__).resolve().parents[2]
     text = (repo / "ops/memory-atlas/deploy-blue-green.sh").read_text(encoding="utf-8")

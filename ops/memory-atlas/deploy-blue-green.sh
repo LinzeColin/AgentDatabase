@@ -167,7 +167,8 @@ export MEMORY_ATLAS_WEB_DATA_DIR=${MEMORY_ATLAS_WEB_DATA_DIR:-$APP_ROOT/shared/d
 export MEMORY_ATLAS_PUBLIC_SNAPSHOT=${MEMORY_ATLAS_PUBLIC_SNAPSHOT:-$APP_ROOT/shared/public-baseline/memory_atlas.json}
 sudo "$agent_release/ops/memory-atlas/install-systemd.sh" "$agent_release"
 /srv/linze/venvs/memory-atlas/bin/python -B -m OpenAIDatabase.scripts.memory_atlas_private doctor >/dev/null
-/srv/linze/venvs/memory-atlas/bin/python -B -m OpenAIDatabase.scripts.memory_atlas_private preflight >/dev/null
+/srv/linze/venvs/memory-atlas/bin/python -B "$MEMORY_ATLAS_PRIVATE_DB_CLIENT" verify Private-AgentDatabase >/dev/null
+printf '%s\n' 'MEMORY_ATLAS_R2_PREFLIGHT_SKIPPED_ZERO_CHARGE'
 old_app=''; old_agent=''
 if [[ -L "$APP_ROOT/current" ]]; then old_app=$(readlink -f "$APP_ROOT/current"); ln -sfn "$old_app" "$APP_ROOT/previous"; fi
 if [[ -L "$AGENT_ROOT/current" ]]; then old_agent=$(readlink -f "$AGENT_ROOT/current"); ln -sfn "$old_agent" "$AGENT_ROOT/previous"; fi
