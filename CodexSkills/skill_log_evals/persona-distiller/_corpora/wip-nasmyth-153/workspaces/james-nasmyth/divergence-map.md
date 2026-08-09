@@ -66,7 +66,7 @@ collate[ral assistance]`（`wivantages` 即 advantages）。
 - 1890 年的讣告**那一句 OCR 残缺**，原文逐字是：
   `But the forging was | ] phepconed, and Mr mara Bipeber ab the | gave the benefit of his Shox
   to M. Ecinaidae, the | proprietor of the great ironworks at Creuzot, in | | #rance.`
-  ★ 可读的部分是 `gave the benefit of his [某物] to M. [某人] … at Creuzot`；
+  ★ 可读的部分只有动词短语与地名：**gave the benefit of his …（某物）… to M. …（某人）… at Creuzot**——这一行是**我的判读，不是引文**，故不加反引号。
   **而 `Mr mara Bipeber ab the` 整段读不出来——主语与限定语恰好落在这一段里。**
   ★★ **所以「讣告说是主动相赠」这个读法本身是有条件的**：动词短语在，
   **谁给的、以什么身份给的，那句话没能读出来。** 本库把这一点写明，不替它补。
