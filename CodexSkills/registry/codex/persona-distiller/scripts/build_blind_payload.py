@@ -456,15 +456,24 @@ def main() -> int:
     print(f"★ 候选与基线两侧已落进 {ev}/——发布门现在看得见它们")
 
     # 轮次之间 A/B 映射必须一致，否则各轮不可比
-    r1 = a.round_dir.parent / "round1" / f"{a.prefix}_blind_key.json"
-    # ★★ 找不到第 1 轮的 key 时**不许沉默跳过**——那正是本次的形态：
-    #   round_dir 落错了地方，`r1` 指向一个不存在的路径，`is_file()` 假，
-    #   于是「A/B 映射与第 1 轮逐条一致」这道检查**一句话都没说就没跑**。
-    #   沉默的跳过会被读成通过（见 [[empty-default-swallows-unknown]]）。
+    # ★★★★ 2026-08-07 修：原先写 `f"{a.prefix}_blind_key.json"`，**用本轮的前缀去上一轮找**。
+    #   而前缀按轮次变（`--prefix whitworth-152-round2`），第 1 轮的 key 叫
+    #   `whitworth-152-round1_blind_key.json`——**名字永远对不上，这道门永远变不绿**。
+    #   ★ 它给出的诊断还是错的：印「多半是 --round-dir 落在了工作区之外」，
+    #     而 round_dir 明明就在工作区里（上一行刚打印过解析后的绝对路径）。
+    #     **一个永远红、且把人指向错误病因的门，比没有这道门更贵。**
+    #     [[a-red-that-can-never-turn-green-is-not-a-signal]]
+    #   按形状找，不按前缀找——同一条纪律见 `find_seat_file`。
+    _r1_dir = a.round_dir.parent / "round1"
+    _r1_hits = sorted(_r1_dir.glob("*_blind_key.json"))
+    r1 = _r1_hits[0] if _r1_hits else _r1_dir / f"{a.prefix}_blind_key.json"
+    # ★★ 找不到第 1 轮的 key 时**不许沉默跳过**：
+    #   `is_file()` 假就整条检查一句话不说地没跑，
+    #   而沉默的跳过会被读成通过（见 [[empty-default-swallows-unknown]]）。
     if a.round_dir.name != "round1" and not r1.is_file():
-        print(f"✗ **找不到第 1 轮的 key：{r1}**")
+        print(f"✗ **{_r1_dir} 里没有 *_blind_key.json**")
         print("  轮次之间 A/B 映射是否一致**未核**——这不是通过。")
-        print("  多半是 --round-dir 落在了工作区之外。**中止。**")
+        print("  第 1 轮的 key 不在应在的地方；**中止**（不是「跳过这道检查」）。")
         return 5
     if a.round_dir.name != "round1" and r1.is_file():
         if json.loads(r1.read_text(encoding="utf-8")) != key:
@@ -628,7 +637,25 @@ def main() -> int:
                         "--baseline-source", a.baseline_source],
                        capture_output=True, text=True)
     print(p.stdout.rstrip())
+    # ★★★★ 2026-08-07：`capture_output=True` **把 stderr 一起吞了**。
+    #   实测形态：我给 `--baseline-source` 传了散文，而它是四选一的枚举，
+    #   argparse 把「invalid choice」写进 stderr、退出码 2 ——
+    #   于是这道门印出的是**一个空的小节**，紧接着一句
+    #   「✗ 不许派发。**重写答案，不要改门。**」
+    #   **答案一个字都没问题，问题在我的命令行参数。**
+    #   照那句话去做的人会去重写一批好答案，而真因一个字都看不到。
+    #   [[empty-default-swallows-unknown]]：空输出被读成「门跑了且失败了」。
+    if (p.stderr or "").strip():
+        print("  ── 判据的 stderr（**以前这一段是被吞掉的**）──")
+        for _l in p.stderr.rstrip().splitlines():
+            print("  │ " + _l)
     if p.returncode != 0:
+        if not (p.stdout or "").strip():
+            # 门自己一句话没说 ≠ 门判了不合格
+            print("\n✗ **这道门没有产出任何判读就失败了**（退出码 "
+                  f"{p.returncode}）——**先看上面的 stderr，多半是调用方式不对，"
+                  "不是答案有问题。** 在排除这一点之前，不要动答案。")
+            return 1
         print("\n✗ **这份载荷不许派发评委。** 判出来的 delta 不能当作盲判结果引用——"
               "重写答案，不要改门。")
         return 1
