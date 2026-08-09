@@ -18,7 +18,7 @@ def build_status_projection(private_snapshot: dict[str, Any]) -> dict[str, Any]:
     The projection intentionally excludes normalized event payloads, source paths,
     object keys, object hashes, incident titles/details, prompts and raw content.
     It is safe for the existing status collector to consume as a projection only;
-    Private-Database and R2 remain the authorities.
+    Private-Database and the verified GitHub private Releases remain the authorities.
     """
     if private_snapshot.get("schema_version") != "memory_atlas.private_analytics.v1":
         raise StatusProjectionError("私有快照 schema_version 不匹配")
@@ -65,7 +65,7 @@ def build_status_projection(private_snapshot: dict[str, Any]) -> dict[str, Any]:
             "blocked_recurrences": int(failure_metrics.get("blocked_recurrences", 0) or 0),
         },
         "authority": {
-            "object_bytes": "Cloudflare R2 primary-objects/",
+            "object_bytes": "GitHub private Releases (encrypted source archive + canonical events)",
             "long_term_facts": "Private-Database",
             "runtime_journal": "OVH SQLite (rebuildable)",
             "this_document": "read_only_projection_not_authority",

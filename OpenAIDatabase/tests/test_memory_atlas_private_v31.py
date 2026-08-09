@@ -871,6 +871,10 @@ def test_status_projection_excludes_raw_private_content() -> None:
     assert projection["state"] == "PASS"
     assert projection["object_count"] == 1
     assert projection["private_content_included"] is False
+    assert projection["authority"]["object_bytes"] == (
+        "GitHub private Releases (encrypted source archive + canonical events)"
+    )
+    assert "R2" not in projection["authority"]["object_bytes"]
     for forbidden in ("private conversation bytes", "private incident title", "private/secret", "raw_text", "sha256"):
         assert forbidden not in encoded
 
