@@ -1118,6 +1118,36 @@ def run_corpus_text_checks(report, target: Path, cache_dirs: list[str]) -> None:
                if info.get('★ 没核的') else "")
             if info else '**未核（不是通过）**')
 
+    # ── 2026-08-07：**引文逐字在语料里，可它是别人说的**（候选子代理抓出来的） ──
+    #   Whitworth #152 的 `clm-e120a051a8ad` 初稿引 General Lefroy 的话当他本人的推测语气，
+    #   而他转引之后紧接着写自己确知铸铁做不到——**意思正好相反**。
+    #   ★★ `check_quote_integrity` 放行是因为**那句逐字确实在语料里**。
+    #     它问「在不在」，**不问「是谁说的」。逐字 ≠ 他的。**
+    code, out = run('check_quote_speaker.py', [str(target), '--json'])
+    if code == -1:
+        review['checker_missing'] = out
+    else:
+        try:
+            qs = json.loads(out)
+        except Exception:                                          # noqa: BLE001
+            qs = {}
+        if qs and '**引到别人的话**' in qs:
+            n_other = len(qs['**引到别人的话**'])
+            report.metrics['quote_speaker'] = {
+                '长逐字引文': qs.get('引文数'),
+                '**引到别人的话**': n_other,
+                '正文已注明出自他人（不判为误引）':
+                    len(qs.get('★ 正文已注明出自他人的（不判为误引，但列出来）') or []),
+                '★ 定位不到（未判，不是通过）':
+                    len(qs.get('★ 在语料里定位不到的（本件未判，不是通过）') or []),
+                '★★ 射程': '只认英文转引标记、只往回看 260 字符、只比姓、'
+                            '抓不到无标记的间接引语',
+            }
+            if n_other:
+                report.error('content.quote-is-someone-elses',
+                             f'**{n_other} 条引文是别人说的**（逐字在语料里，但转引自他人）：'
+                             f'　{[(x["转引自"], x["引文"][:40]) for x in qs["**引到别人的话**"][:3]]}')
+
     # ── 2026-08-07：**建模者读得到的文件里提了 holdout**（Whitworth #152 撞出来） ──
     #   候选方（隔离子代理）**主动上报**：`hypotheses.md` 写着「证据只有 holdout 里那一条，
     #   train 侧没有第二处」——**把 holdout 的主题直接说了出来**，而它恰好对应那道 known 题。
