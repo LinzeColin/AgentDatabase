@@ -20,22 +20,25 @@
 
 ## Source-linked observations
 
+> ★ **本文件的引用块按语料 OCR 原样照录**（`eycy`／`resU`/`geometri : ledge`／`sup^ posed`／`wivantages`／`liney`／`pUme^` 等皆为原文形变，不是笔误）。**还原读法只在正文里以中文给出，不写进引用块**——`check_lane_quotes_verbatim` 报的 25 条对不上，正是我先前把讹字改正了。
+
+
 **① 他先把「机器」这个东西定义成可穷举的六个形。**（¶482）
 
 > [the details] consist of certain combinations of six primitive or elementary geometrical
-> figures, namely, the line, the plane, the circle, the cylinder, the cone, and the sphere
+> figures, namely, the liney the pUme^ the circley the cylinder ^ the coney and the sphere
 
 并直接给出推论：
 
-> the more near to absolute mathematical truth we can have the forms of those parts, the
-> more perfectly will the machine perform its duties
+> more near to absolute mathema- tical truth we can have the forms of those parts, the
+> more peorfectly wiU the machine perform its duties
 
 ★ 这是**先定义再论证**的写法：把千变万化的机器收敛成六个可校验的形，
 「做得准」于是从审美判断变成**可度量的目标**。
 
 **② 他要解决的问题，被他明确指认为「手与眼」。**（¶483）
 
-> on the dexterity of the hand of the workman, and the correctness of his eye, had we
+> on the dexterity of the hand of the workman, and the correctness of his eycy had we
 > entirely to depend for accuracy and precision
 
 **③ 他给的解法是「用铁手替换人手」，而关键词是「约束」。**（¶484）
@@ -64,7 +67,7 @@
 
 > It would be **blamable** indeed … were I to suppress the name of that admirable individual
 > to whom we are indebted for this powerful agent … I allude to the late **Henry Maudslay**,
-> engineer, of London … to him we are certainly indebted for the slide rest
+> engineer, of London … to him we are certainly indebted for the slide resU
 
 ★ 注意这不是一句客套：他用的是 `blamable`（不点名是**该受责备的**），
 并在文末（¶504）再次写 `as introduced by the late celebrated Henry Maudslay`。
@@ -104,7 +107,7 @@
 **他对工匠能力的评价，在两份材料之间是相反方向的。**
 - 1836（Q.303）：工匠 `possess a very considerable portion of geometrical knowledge,
   without any tuition at all: it is a common-sense mathematics`——**抬高**。
-- 1841（¶505）：写这篇是为了把原理降到 `the supposed inferior capacity of a humbler grade
+- 1841（¶505）：写这篇是为了把原理降到 `the sup^ posed inferior capacity of a humbler grade
   of men, from whom we want no more than careful attention`——**降低**。
 - ★ **这两句都是他自己写的、相隔五年、面向不同听众**（前者是议会委员会，后者是同行技术卷）。
   **不许把其中一句当成他的全部立场。**
@@ -143,5 +146,5 @@ IDs only; research Agents must not inspect Holdout bodies.
 - ★★ **C3 不许被调和成一条**——它是两份一手材料之间的真实反向，
   产物里要写成「他在不同场合对同一件事给过相反的评价」，**不是「他其实一贯认为……」**。
 - ★★★ 顺带一条与待裁定 ㉚ 有关：**本文是关于 Henry Maudslay 的一份一手材料**
-  （¶491／¶504 两处点名，含 `to him we are certainly indebted for the slide rest`）。
+  （¶491／¶504 两处点名，含 `to him we are certainly indebted for the slide resU`）。
   若那个「本流程能不能做不留文本的人」的问题要往前推，**Maudslay 的材料至少有这一处**。

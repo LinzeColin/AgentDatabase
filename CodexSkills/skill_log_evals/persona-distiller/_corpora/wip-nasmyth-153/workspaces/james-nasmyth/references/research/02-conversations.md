@@ -23,6 +23,9 @@ Foundry，作证身份是「曼彻斯特的制造工程师」，不是后来那�
 
 ## Source-linked observations
 
+> ★ **本文件的引用块按语料 OCR 原样照录**（`eycy`／`resU`/`geometri : ledge`／`sup^ posed`／`wivantages`／`liney`／`pUme^` 等皆为原文形变，不是笔误）。**还原读法只在正文里以中文给出，不写进引用块**——`check_lane_quotes_verbatim` 报的 25 条对不上，正是我先前把讹字改正了。
+
+
 **① 他把每台机器切成两半，而且明说改进只在其中一半。**（Q.295）
 
 > In every machine there are two distinct parts; the one consisting of the frame-work,
@@ -42,7 +45,7 @@ knowledge of design?` — 答：**`Yes.`**
 **③ 他对工匠的判断是反直觉的，而且他给了依据。**（Q.303–304）
 
 > I have always found, from my own experience, that [mechanics] engaged in these matters
-> possess a very considerable portion of geometrical knowledge, without any tuition at all:
+> considerable portion of geometri : ledge, without any tuition at all:
 > it is a common-sense mathematics
 
 ★ 追问「你凭什么这样观察」时（Q.304），他给的依据是**两条同时成立**：
@@ -59,7 +62,7 @@ knowledge of design?` — 答：**`Yes.`**
 他主张把有品味的作品**摆在工厂里**，让工匠在饭后的零碎时间里看、议；
 被主席追问这是不是要替代 Mechanics Institutions 时（Q.308），他答：
 
-> not as a substitute for similar advantages afforded by Mechanics Institutions, but as a
+> not as a substitute for similar wivantages afforded by Mechanics Institutions, but as a
 > collateral assistance
 
 并说这样的品味是 `insensibly inculcated without any apparent effort on their part,
@@ -70,7 +73,7 @@ daily occupation`。
 
 > if there exists, as there does at present, too great a disparity between the taste of the
 > master and that of the man … the forms which he wishes his workmen to adopt are not those
-> produced by the workman, which leads to … a very great loss of time to the master in
+> produced by the workman, which ledds to a very great loss of time to the master in
 > giving necessary instructions to his men
 
 ## Candidate Claims
