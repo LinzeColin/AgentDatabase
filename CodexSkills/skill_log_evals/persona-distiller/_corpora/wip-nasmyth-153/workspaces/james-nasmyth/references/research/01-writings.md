@@ -4,14 +4,14 @@
 
 本轮**已整读**的一手：
 
-- `src-41efb6e827f9` — **"Remarks on the introduction of the slide principle in tools and
+- `src-7b92506095cc` — **"Remarks on the introduction of the slide principle in tools and
   machines employed in the production of machinery"**，收于 *Practical Essays on Mill Work
   and Other Machinery*（J. Weale, **1841**）Appendix B, pp.393–418，署名 `BY JAMES NASMYTH.`
   段号 **¶480–¶505 及以后**（原刊连续编号）。★ **本道目前的主干就是它。**
 
 **尚未读的一手（下一轮从这里接）**：
 
-- `src-258ac00e803d` 自传（约 88 万字符）。★ 抓源已给章节分布：**第 1–3 章讲祖先／父亲／兄姐，
+- `src-75240b0a8dbb` 自传（约 88 万字符）。★ 抓源已给章节分布：**第 1–3 章讲祖先／父亲／兄姐，
   45 处 `Nasmyth` 绝大多数不指他**——写本道时**别把那三章当成他的自述材料**。
 - MNRAS 四篇（1851/1852/1854/1855）与 *The Crayon* 1855（天文与地质，与本道机械主题另属一支）。
 
@@ -90,13 +90,13 @@
 ## Candidate Claims
 
 **C1（heuristic，证据充分）**：**先把对象收敛成可穷举、可校验的少数形，再谈做得准不准。**
-- 证据 A：¶482 六个初等几何形 + 「越接近数学真值，机器越好使」（`src-41efb6e827f9`）
+- 证据 A：¶482 六个初等几何形 + 「越接近数学真值，机器越好使」（`src-7b92506095cc`）
 - 证据 B：1836 证词 Q.295 把机器切成骨架／细部两层，并把改进锁定在骨架上（`src-231dfc291417`）
 - 语境：「技术论辩」「答问」　→ **2 个 source_id、2 个 evidence_clusters、2 个语境，达标。**
 
 **C2（mental-model，证据充分）**：**精度问题的实质是「谁在判断」——把判断从手与眼移到约束里。**
 - 证据 A：¶483 手与眼是依赖对象 → ¶484 `constrain` → ¶489 `he needs not to look at it`
-  → ¶490 `where neither the hand nor eye can reach`（`src-41efb6e827f9`，一条完整链）
+  → ¶490 `where neither the hand nor eye can reach`（`src-7b92506095cc`，一条完整链）
 - 证据 B：1836 证词 Q.301 把「凭手艺」换成「按曲线定形」并给省料的量（`src-231dfc291417`）
 - 语境：「技术论辩」「报告实验」　→ **达标。**
 
@@ -111,7 +111,7 @@
 - 语境：「答问」「技术论辩」　→ **2 个 source_id、2 个语境，达标。**
 
 **C4（value，证据只有一处，本轮不成条）**：**不点名让功是「该受责备」的。**（¶491 `blamable`）
-- 只有 `src-41efb6e827f9` 一处。**待自传补第二处**——自传里若有他谈 Maudslay 的段落即可成条。
+- 只有 `src-7b92506095cc` 一处。**待自传补第二处**——自传里若有他谈 Maudslay 的段落即可成条。
 
 ## Contradictions and alternative explanations
 
@@ -134,7 +134,7 @@
 
 ## Proposed Holdout cases
 
-（本轮尚未划定 holdout；划定后此处只写 ID，不写内容。）
+IDs only; research Agents must not inspect Holdout bodies.
 
 ## Handoff to adjudication
 

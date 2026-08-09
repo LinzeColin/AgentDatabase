@@ -112,7 +112,7 @@ daily occupation`。
 
 ## Proposed Holdout cases
 
-（本轮尚未划定 holdout；划定后此处只写 ID，不写内容。）
+IDs only; research Agents must not inspect Holdout bodies.
 
 ## Handoff to adjudication
 
