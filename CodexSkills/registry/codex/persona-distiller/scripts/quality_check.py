@@ -1198,6 +1198,51 @@ def run_corpus_text_checks(report, target: Path, cache_dirs: list[str]) -> None:
                 report.error('corpus.holdout-text-in-artifacts',
                              f'**建模者读得到的文件与 holdout 正文有 {n_ov} 处 8 词片重叠**')
 
+    # ── 2026-08-10：**编号缺口本身泄题**（Nasmyth #153，候选侧子代理主动上报） ──
+    #   它在 `__incident__` 里写：「`references/sources` 的文件编号从 05d 跳到 05f，
+    #   我没有去查 05e 是什么。」——**它没查，但通道是我留的。**
+    #   ★ 上面那道 `check_holdout_mention` 抓的是「有没有**写**出 holdout」，
+    #     本件抓的是「**没写**，但目录结构自己说了出来」——**两道门管的不是同一件事**。
+    #   ★★ 缺口连着两侧邻居的描述性文件名一起看，泄的是**刊物与年代区间**
+    #     （Nasmyth 此例：05d 是 mnras-1852、05f 是 mnras-1855 → 缺的那份是 MNRAS 1852–1855）。
+    code, out = run('check_source_numbering_gap.py', [str(target), '--json'])
+    if code == -1:
+        review['checker_missing'] = out
+    else:
+        try:
+            ng = json.loads(out)
+        except Exception:                                          # noqa: BLE001
+            ng = {}
+        if ng:
+            g = ng.get('**编号缺口**') or []
+            confirmed = [d for d in g if not d.get('★ 这是疑似')]
+            on_holdout = [d for d in g if d.get('★ holdout 的文件名正落在这个缺口上')]
+            report.metrics['source_numbering_gap'] = {
+                '编号缺口': len(g),
+                '其中确认型': len(confirmed),
+                '其中疑似（组内首字母不是 a）': len(g) - len(confirmed),
+                '★ 缺口上正好是 holdout 的': len(on_holdout),
+                '★★ 射程': '只看文件名；**尾部被整份拿走的缺口抓不到**；'
+                           '补齐编号也堵不住「份数本身是信息」那一层',
+            }
+            for k in ('★ 没有 references/sources/', '★ 文件名不带顺序前缀',
+                      '★ holdout 文件名不带前缀'):
+                if k in ng:
+                    # ★ 「看不见」要留痕，**不许被读成通过**
+                    report.metrics['source_numbering_gap'][k] = ng[k]
+            if on_holdout:
+                report.error(
+                    'corpus.holdout-visible-as-numbering-gap',
+                    f'**holdout 的编号缺口暴露在建模者看得见的文件名序列里（{len(on_holdout)} 处）**——'
+                    '建模者不必打开任何禁读目录，数一遍文件名就知道「这里有一份被拿走了」，'
+                    '连着两侧邻居还能读出它的刊物与年代区间。'
+                    f'　{[(d["缺的编号"], d["左邻"], d["右邻"]) for d in on_holdout[:2]]}')
+            elif confirmed:
+                report.warn(
+                    'corpus.source-numbering-gap',
+                    f'**编号缺口 {len(confirmed)} 处**（不在 holdout 上，成因未判）：'
+                    f'　{[d["缺的编号"] for d in confirmed[:5]]}')
+
     # ── 2026-08-07：**来源计数里有几份其实是同一部作品**（Whitworth #152 撞出来） ──
     #   `source.minimum` 判的是 `len(usable)`，**`derived_from` 从头到尾没被读过**。
     #   Whitworth #152 实测 `usable = 7`，而按内容去重只有 **3 部作品**（虚高 2.333×）：
