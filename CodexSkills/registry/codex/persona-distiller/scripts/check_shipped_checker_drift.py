@@ -123,6 +123,10 @@ def main() -> int:
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("root", nargs="?", help="skill 根目录（含 scripts/ 与 references/）")
     ap.add_argument("--json", action="store_true")
+    ap.add_argument("--soft", action="store_true",
+                    help="有漂移也返回 0（只报不拦）。**给 finalize_release 用**——"
+                         "哪一棵是权威属用户裁定，本件不替人拦发布，"
+                         "但**该说的话一个字不少**")
     ap.add_argument("--self-test", action="store_true")
     a = ap.parse_args()
     if a.self_test:
@@ -133,7 +137,7 @@ def main() -> int:
     r = compare(pathlib.Path(a.root))
     if a.json:
         print(json.dumps(r, ensure_ascii=False))
-        return 1 if r.get("**内容不同的**") else 0
+        return 0 if a.soft else (1 if r.get("**内容不同的**") else 0)
     if "★ 未核（不是通过）" in r:
         print("⚠ " + r["★ 未核（不是通过）"])
         return 0
@@ -149,6 +153,12 @@ def main() -> int:
         if r[k]:
             print(f"★ {k}：{len(r[k])} 件（**这不算漂移，但也不是「都有」**）")
     print("\n" + r["★★ 口径"])
+    if n and a.soft:
+        # ★ `--soft` 只改退出码，**不改印出来的话**。
+        #   静默的放行才是问题；「说了但不拦」是有意的取舍，且这句话本身要印出来。
+        print(f"★ `--soft`：**有 {n} 件漂移，但本步不拦发布**——"
+              f"哪一棵是权威属用户裁定（待裁定 ㉜）。**这不是通过。**")
+        return 0
     return 1 if n else 0
 
 
