@@ -55,8 +55,16 @@ def stamp(target: pathlib.Path, scripts: pathlib.Path, write: bool = False) -> d
     name = (meta.get("target_name") or meta.get("name") or "").strip()
     mod = _load_checker(scripts)
     pat = mod.build_patterns(name)
-    pat["namesakes"] = tuple(meta.get("known_namesakes") or ())
+    # ★★★★ 用 `normalize_namesakes`：meta 里 `known_namesakes` 有**两种形态**
+    #   （早期人物是字符串数组；Nasmyth #153 起是对象数组，因为 19 个同姓者只写名字说不清谁是谁）。
+    #   直接 `tuple(...)` 会把对象原样塞进去，`_last_token` 取出 `'years'` 这种垃圾当姓——
+    #   **护栏形同虚设，而且看起来还是绿的**。
+    pat["namesakes"] = mod.normalize_namesakes(meta.get("known_namesakes"))
     pat["own_mid"] = str(meta.get("middle_initial") or "").strip().lower()[:1]
+    # ★ `own_titles`：meta 里**没有这个键** → `None` → 头衔判别不启用（未核，不是通过）；
+    #   有这个键（哪怕是空数组）→ 明确声明，判别器生效。两者必须分得开。
+    pat["own_titles"] = (tuple(str(x).strip().lower() for x in (meta.get("own_titles") or ()))
+                         if "own_titles" in meta else None)
 
     led = target / "evidence" / "source-ledger.jsonl"
     rows = [json.loads(x) for x in led.read_text(encoding="utf-8").splitlines() if x.strip()]

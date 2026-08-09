@@ -624,6 +624,48 @@ def _blocked(cand, last_l, namesakes):
     return any(ns != last_l and _edits_within(cand, ns, d) for ns in plain)
 
 
+def normalize_namesakes(raw) -> tuple:
+    """`known_namesakes` 归一成姓名字符串元组。**两种形态都认。**
+
+    ★★★★ 2026-08-10：既有契约是**字符串数组**（Coffin：`["Charles A. Coffin"]`），
+    而我给 Nasmyth #153 写的是**对象数组**（每条带 `name`/`years`/`who`/常见称呼，
+    因为那个人物有 19 个同姓者，只写名字说不清谁是谁）。
+
+    **喂对象进去不会崩，会静默变成垃圾**：`_last_token({"name": …, "years": …})`
+    取的是 `str(dict)` 的最后一个词 → `'years'`。于是 `_blocked` 拿着
+    `['years', 'who', …]` 当同名者的姓去比对，**整道护栏形同虚设**。
+
+    ★ 实测时它**看起来还是对的**——`By Alexander Nasmyth` 仍被拒绝，
+      但拒它的是名字不匹配，不是护栏。**两个错抵消，绿得毫无意义。**
+      [[two-errors-cancelled-so-the-gate-stayed-green]]
+
+    所以两种形态都认，且**认的是同一个东西**：那个人的姓名串。
+    """
+    out = []
+    for item in (raw or ()):
+        if isinstance(item, str):
+            if item.strip():
+                out.append(item.strip())
+        elif isinstance(item, dict):
+            nm = re.sub(r"[*_`]", "", str(item.get("name")
+                        or item.get("canonical_name") or "")).strip()
+            if nm:
+                out.append(nm)
+            # 别名（如兄长 Patrick 在图录里作 `Peter Nasmyth`）也要进来，
+            # ★ **但只收与本条姓名共享词元的**。实测 Nasmyth #153 的「文献里怎么称呼」
+            #   一栏里混着 `my father`、`the English Hobbema` 这种**不是姓名的称呼**——
+            #   收进去之后 `_last_token` 会把 `father`／`hobbema` 当成同名者的姓，
+            #   于是同名者列表里多出两个根本不存在的姓氏。**噪声不该进护栏。**
+            _toks = {t.lower() for t in re.split(r"[^A-Za-z]+", nm) if len(t) > 2}
+            for alias in (item.get("文献里怎么称呼") or item.get("aliases") or ()):
+                if not (isinstance(alias, str) and alias.strip()):
+                    continue
+                _a = re.sub(r"[*_`]", "", alias).strip()      # 去掉 Markdown 强调
+                if _toks & {t.lower() for t in re.split(r"[^A-Za-z]+", _a) if len(t) > 2}:
+                    out.append(_a)
+    return tuple(dict.fromkeys(out))          # 去重且保序
+
+
 _TITLES = re.compile(r"\b(Sir|Dame|Lord|Lady|Baronet|Bart|Bt|Rev|Revd)\b\.?", re.I)
 
 
@@ -2283,7 +2325,7 @@ def main() -> int:
     try:
         pat = attach_masthead(build_patterns(a.name), a.masthead)
         # ★ 已知同名注入：OCR 容错不许把两个真名连起来（见 standalone_ocr 文件头）
-        pat["namesakes"] = tuple(a.namesake or ())
+        pat["namesakes"] = normalize_namesakes(a.namesake)
         pat["own_mid"] = str(a.middle_initial or "").strip().lower()[:1]
         # ★ `None` = 没声明 → 头衔判别**不启用**；`()` = 明确声明「他没有头衔」。
         #   两者必须分得开：[[empty-default-swallows-unknown]]

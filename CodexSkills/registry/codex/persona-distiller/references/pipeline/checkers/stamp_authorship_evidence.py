@@ -55,8 +55,16 @@ def stamp(target: pathlib.Path, scripts: pathlib.Path, write: bool = False) -> d
     name = (meta.get("target_name") or meta.get("name") or "").strip()
     mod = _load_checker(scripts)
     pat = mod.build_patterns(name)
-    pat["namesakes"] = tuple(meta.get("known_namesakes") or ())
+    # ★★★★ 用 `normalize_namesakes`：meta 里 `known_namesakes` 有**两种形态**
+    #   （早期人物是字符串数组；Nasmyth #153 起是对象数组，因为 19 个同姓者只写名字说不清谁是谁）。
+    #   直接 `tuple(...)` 会把对象原样塞进去，`_last_token` 取出 `'years'` 这种垃圾当姓——
+    #   **护栏形同虚设，而且看起来还是绿的**。
+    pat["namesakes"] = mod.normalize_namesakes(meta.get("known_namesakes"))
     pat["own_mid"] = str(meta.get("middle_initial") or "").strip().lower()[:1]
+    # ★ `own_titles`：meta 里**没有这个键** → `None` → 头衔判别不启用（未核，不是通过）；
+    #   有这个键（哪怕是空数组）→ 明确声明，判别器生效。两者必须分得开。
+    pat["own_titles"] = (tuple(str(x).strip().lower() for x in (meta.get("own_titles") or ()))
+                         if "own_titles" in meta else None)
 
     led = target / "evidence" / "source-ledger.jsonl"
     rows = [json.loads(x) for x in led.read_text(encoding="utf-8").splitlines() if x.strip()]
@@ -95,7 +103,15 @@ def stamp(target: pathlib.Path, scripts: pathlib.Path, write: bool = False) -> d
         "本门管的（P1 且署他名）": len(rows) - skipped,
         "**盖到 A-* 的**": got,
         "**判据说没有的**": none_,
-        "改动": changed[:20],
+        # ★★ 2026-08-07：**真数与样例要分开给。** 原先只有 `"改动": changed[:20]`，
+        #   读的人分不清「正好 20 条」与「200 条只显示了 20」。
+        #   我今天就据此把全库读成「多处正好 20 条会变」——
+        #   实为 ≥20，Barton 109 管辖里到底几条会变，那个输出根本回答不了。
+        #   与 [[samples-cannot-support-universal-claims]] 同形（那次样例数也是 20）。
+        "**改动条数**": len(changed),
+        "改动（最多列 20 条）": changed[:20],
+        **({"★ 还有 %d 条没列出" % (len(changed) - 20): "要全部就读 --json 之外的返回值"}
+           if len(changed) > 20 else {}),
         "写盘": "已写" if write else "**dry-run，没写**（要写加 --write）",
         "★ 口径": "**盖章不是放行**——判据说没有就写空数组，该报 source-unclaimed 就让它报。",
     }

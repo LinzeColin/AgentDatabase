@@ -511,8 +511,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_authorship.py",
-      "sha256": "cddf279630cdc997483107766e9011d3ffb56e1fbd8a59eef1cc30ca587585a0",
-      "size_bytes": 144182
+      "sha256": "57fdaa401ea6f95c99ec42ae5758bfecacb1015f0c4539af39410868a103b42a",
+      "size_bytes": 146656
     },
     {
       "path": "references/pipeline/checkers/check_baseline_provenance.py",
@@ -896,8 +896,8 @@
     },
     {
       "path": "references/pipeline/checkers/stamp_authorship_evidence.py",
-      "sha256": "53c7e877b829972af9193475a95009979ddf7e377ac9b667edd0180faa777c24",
-      "size_bytes": 8711
+      "sha256": "3241d88ed79d00d3a12e198411bffbe1d676009850c0cd9ce1e7a747887527e7",
+      "size_bytes": 10203
     },
     {
       "path": "references/pipeline/checkers/verify_product.py",
@@ -1176,8 +1176,8 @@
     },
     {
       "path": "scripts/check_authorship.py",
-      "sha256": "cddf279630cdc997483107766e9011d3ffb56e1fbd8a59eef1cc30ca587585a0",
-      "size_bytes": 144182
+      "sha256": "57fdaa401ea6f95c99ec42ae5758bfecacb1015f0c4539af39410868a103b42a",
+      "size_bytes": 146656
     },
     {
       "path": "scripts/check_baseline_provenance.py",
@@ -1651,8 +1651,8 @@
     },
     {
       "path": "scripts/stamp_authorship_evidence.py",
-      "sha256": "8875f5cb63c9593677a7283ee7b920f6d9b7fa1cba713bf4f6e8ce4b07da0182",
-      "size_bytes": 9401
+      "sha256": "3241d88ed79d00d3a12e198411bffbe1d676009850c0cd9ce1e7a747887527e7",
+      "size_bytes": 10203
     },
     {
       "path": "scripts/validate_persona_registry.py",
