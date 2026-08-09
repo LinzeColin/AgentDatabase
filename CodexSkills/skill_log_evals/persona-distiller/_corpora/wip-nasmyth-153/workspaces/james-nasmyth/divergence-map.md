@@ -20,7 +20,7 @@ careful attention`——**降低**。
 
 <!-- claim:clm-daebe0c34f0b -->
 常见叙述说他 1857 年退休之后转向天文。而他署名的天文论文
-**1851、1852、1854、1855 年各一篇，外加 1855 年 *The Crayon* 一文——全部早于退休**。
+**1851、1852、1855 年各一篇，外加 1855 年 *The Crayon* 一文——全部早于退休**。
 讣告说他退休后 `devoting himself to astronomical sand other researches`（`sand` 即 and），
 那句话本身不错，**错的是把它读成起点**。
 

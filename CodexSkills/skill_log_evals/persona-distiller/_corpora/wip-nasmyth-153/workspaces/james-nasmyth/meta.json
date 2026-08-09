@@ -338,7 +338,7 @@
    "03-slide-principle-1841.txt：Practical Essays pp.393–418 署名论文；A-byline 已盖",
    "04-select-committee-1836-testimony.txt：`Mr. James Nasmyth, called in; and Examined`；A-byline-standalone 已盖",
    "05c-mnras-1851-source-of-light.txt：MNRAS 署名论文；A-byline 已盖",
-   "05e-mnras-1854-lunar-craters.txt：MNRAS 署名论文；A-byline 已盖",
+   "（本轮评测集，正文与题材均不在本层）：MNRAS 署名论文；A-byline 已盖",
    "★ 05d-mnras-1852-jupiter-saturn.txt：**正文内无行首署名**（整页扫描修剪所致）。归属依据＝标题行 `… By Mr. Nasmyth.` 与页眉 `Mr. Nasmyth, On the Condition of Jupiter and Saturn`，加 archive.org DOI 项 `paper-doi-10_1093_mnras_13_2_40` 的元数据。",
    "★ 05f-mnras-1855-rotatory-nebulae.txt：归属依据＝标题行 `… By James Nasmyth, Esq.`。该行原在抓源方的修剪批注里，**批注已从正文剥出**，故正文内不再有行首署名。",
    "★ 05g-crayon-1855-volcanic-action.txt：**文末签名**，而 OCR 把签名打成 `James NASkiia.`——**姓名匹配型的门在这一份上必然返回 0**。归属依据＝刊物标注 `signed James Nasmyth`（The Crayon 1:409）。"

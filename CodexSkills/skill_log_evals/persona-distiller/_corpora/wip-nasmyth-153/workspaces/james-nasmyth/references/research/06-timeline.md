@@ -6,8 +6,8 @@
   `THE LATE JAMES NASMYTH.`（本道年份的主要来源）
 - `src-231dfc291417`（P1）— 1836-03-08 议会证词（**日期与身份可自证**）
 - `src-7b92506095cc`（P1）— 1841 论文（**出版年可自证**）
-- `src-066bdf28a912`/`src-d833803ff70b`/`src-16c4721410db`/`src-b38d1f70d5f5`/`src-1a0d606b188a`（P1）
-  — MNRAS 1851/1852/1854/1855 与 Crayon 1855（**各自的宣读或刊出年可自证**）
+- `src-066bdf28a912`/`src-d833803ff70b`/`src-b38d1f70d5f5`/`src-1a0d606b188a`（P1）
+  — MNRAS 1851/1852/1855 与 Crayon 1855（**各自的宣读或刊出年可自证**）
 - `src-740e57fe9bac`（S1）— 1843 London Journal 转载的专利节录
 - `src-2f7e81936c13`（P2）— 《The Moon》1874
 
@@ -32,7 +32,7 @@
 | **1841** | 发表 "Remarks on the introduction of the slide principle"（Practical Essays, pp.393–418） | **P1 自证** |
 | **1842-06-09** | GB 9382 直动蒸汽锤专利 | DNB 与 datamp 一致；1843 London Journal 转载（S1） |
 | 1844/1846 | MNRAS 两次（**学会记录员第三人称摘要**，S1） | S1 |
-| 1851/1852/1854/1855 | MNRAS 四篇署名论文；1855 *The Crayon* 一篇 | **P1 自证** |
+| 1851/1852/1855 | MNRAS 三篇署名论文；1855 *The Crayon* 一篇 | **P1 自证** |
 | **1857** | **退休**，携大笔财产迁 Kent（Penshurst） | S2 讣告与德文卡片一致 |
 | 1874 | 《The Moon》与 James Carpenter 合著 | **P2 自证** |
 | **1883** | 自传出版，Samuel Smiles 编 | S2 讣告 |

@@ -72,10 +72,33 @@ SHINGLE_N = 8
 _WORD = re.compile(r"[a-z0-9]+")
 
 # 建模者能读到的文件（与 quality_check.RENDER_FILES 对齐 + 研究道 + 断言）
-BUILDER_READABLE = (
+# ★★★★ 2026-08-10：这张表**只列了十份产物正文，漏掉了工作区根目录里的其它 .md**。
+#   Nasmyth #153 实测：抓源勘察报告被拷进工作区根，叫 `00-勘察记录.md`，
+#   里面有 holdout 那一篇的**完整标题、卷期页码与日期**——
+#   `"On some peculiar Features in the Structure of Lunar Volcanic Craters" | MNRAS 14(5):158–159 | 1854-03-10`。
+#   **本件当时报「✓ 没有字面提及，也没有内容重叠」**，因为那个文件根本不在扫描清单里。
+#   ★ 抓到它的不是判据，是我事后手打的一条 grep。[[checker-blindspot-read-as-defect]] 的反面：
+#     **这一次不是判据的盲区被误当成缺陷，是判据的盲区里真有缺陷。**
+#   ★★ 改法：十份产物**逐个点名**（它们必须存在），**再加上工作区根目录下的所有 .md**
+#     （勘察记录、检查点、抓取清单这类会随手拷进来的东西）。
+#     **建模者能打开的就要扫，不能只扫我记得的那十份。**
+_RENDER = (
     "facts.md", "cognitive-os.md", "decision-policy.md", "strategy.md", "capabilities.md",
     "persona.md", "work.md", "boundaries.md", "hypotheses.md", "divergence-map.md",
 )
+BUILDER_READABLE = _RENDER
+
+
+def builder_readable_files(target) -> list:
+    """十份产物 + **工作区根目录下的一切 `.md`**。
+
+    ★ `SKILL.md`／`README.md` 也在内——它们同样是建模者打得开的。
+    """
+    import pathlib as _p
+    root = _p.Path(target)
+    out = [root / n for n in _RENDER]
+    out += sorted(p for p in root.glob("*.md") if p.name not in _RENDER)
+    return [p for p in out if p.is_file()]
 
 
 def shingles(text: str, n: int = SHINGLE_N) -> set:
@@ -90,7 +113,7 @@ def scan(target: pathlib.Path) -> dict:
     rows = [json.loads(l) for l in led.read_text(encoding="utf-8").splitlines() if l.strip()]
     hold = [r for r in rows if r.get("split") == "holdout"]
 
-    files = [target / f for f in BUILDER_READABLE]
+    files = builder_readable_files(target)
     files += sorted((target / "references/research").glob("*.md"))
     claims = target / "evidence/claims.jsonl"
     if claims.is_file():
