@@ -52,6 +52,18 @@ import pathlib
 import re
 import sys
 
+# ★★★★ 2026-08-10：归一**复用 `check_quote_integrity`，不另写一套**。
+#   本件原先只做逐字 `find`，于是全库报「25 条定位不到」，
+#   而拿 Adams #131 的一条去问既有判据：**投影后与长 s 折叠后都命中**——
+#   **它在语料里，只是我的定位太粗。**
+#   今天已经为「重复造轮子」付过一次代价（我造了一件仓里早有的镜像判据），
+#   **同一天不再犯第二次**：能复用就复用。
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+try:
+    from check_quote_integrity import proj as _qi_proj, fold_s as _qi_fold   # noqa: E402
+except Exception:                                                            # noqa: BLE001
+    _qi_proj = _qi_fold = None
+
 # 显式转引的动词表。**加词要有实例**，不许凭想象扩。
 _VERBS = (r"stated|said|wrote|remarked|observed|reported|replied|"
           r"answered|adds?|writes?|says?|continued|declared")
@@ -110,9 +122,19 @@ def _quoted_texts(blob: str):
                 break
 
 
+# 产物正文里的 Markdown 强调。**剥掉再去语料里找**，否则一条都定位不到。
+# ★★★★ 2026-08-10 实测：本件第一版没有这一步，于是 Koch #107 报「11 条引文里 10 条定位不到」、
+#   Pasteur #106 报 9 条。去读命中才看见，那些引文里嵌着 `**粗体**`：
+#   `mit **Sputum von Phthisikern**, mit Tuberkelmassen …`
+#   ——**产物没问题，是我的判据拿着带标记的串去逐字比对**。
+#   两人的产物都**已入库**，我差一点把这 19 条报成「已交付产物里的引文核不了」。
+#   [[read-the-hits-before-reporting-the-rate]]；`check_lane_quotes_verbatim` 早有这一步。
+_EMPH = re.compile(r"\*\*|__|\*(?=\S)|(?<=\S)\*")
+
+
 def norm(s: str) -> str:
-    """折行断词接回来，空白压平。**定位用这一版，报数用原文。**"""
-    return _WS.sub(" ", _HYPHEN_BREAK.sub("", s)).strip()
+    """折行断词接回来，剥掉 Markdown 强调，空白压平。**定位用这一版，报数用原文。**"""
+    return _WS.sub(" ", _EMPH.sub("", _HYPHEN_BREAK.sub("", s))).strip()
 
 
 def is_cjk_heavy(s: str, ratio: float = 0.15) -> bool:
@@ -210,7 +232,7 @@ def check(quotes, corpus, subject: str) -> dict:
     """→ {引文数, 引到别人的话[], 定位不到[]}"""
     sub_sur = surname_of(subject)
     normed = [(f, norm(t)) for f, t in corpus]
-    wrong, unlocated, declared = [], [], []
+    wrong, unlocated, declared, by_projection = [], [], [], []
     for item in quotes:
         src, q = item[0], item[1]
         around = item[2] if len(item) > 2 else ""     # 引文在产物里所处的那段文字
@@ -222,7 +244,28 @@ def check(quotes, corpus, subject: str) -> dict:
                 where = (f, t, i)
                 break
         if where is None:
-            unlocated.append({"出处": src, "引文": q})
+            # ★ 兜底：既有判据的投影（抹平标点/markdown/引号形态）与长 s 折叠。
+            #   命中就**不算「定位不到」**——但那一层没有位置可用，
+            #   **该位置的说话人本件判不了**，所以单列，不混进「通过」。
+            hit = False
+            # ★★★★ **空投影匹配一切。** `check_quote_integrity.proj` 只保留字母数字，
+            #   非拉丁文本（中文、纯标点串）投影后是**空串**，而 `"" in 任何串` 恒为真——
+            #   于是「语料里根本没有」的句子会被兜底判成「找到了」。
+            #   **这是我自己的反例抓到的**：加兜底之前那条是绿的，加完变红。
+            #   下限 20：低于它的投影不足以证明是同一句。[[empty-default-swallows-unknown]]
+            _MIN_PROJ = 20
+            if _qi_proj is not None and len(_qi_proj(nq)) >= _MIN_PROJ:
+                pq = _qi_proj(nq)
+                fq = _qi_fold(pq) if _qi_fold else pq
+                for _f, t in corpus:
+                    pt = _qi_proj(t)
+                    if pq in pt or (_qi_fold and fq in _qi_fold(pt)):
+                        hit = True
+                        by_projection.append({"出处": src, "引文": q,
+                                              "语料": pathlib.Path(_f).name})
+                        break
+            if not hit:
+                unlocated.append({"出处": src, "引文": q})
             continue
         f, t, i = where
         who = speaker_before(t, i)
@@ -244,6 +287,7 @@ def check(quotes, corpus, subject: str) -> dict:
                 wrong.append(rec)
     return {"引文数": len(quotes),
             "**引到别人的话**": wrong,
+            "★ 只在投影/长s折叠后才定位到的（在语料里，但本件判不了说话人）": by_projection,
             "★ 正文已注明出自他人的（不判为误引，但列出来）": declared,
             "★ 在语料里定位不到的（本件未判，不是通过）": unlocated}
 
@@ -341,6 +385,20 @@ def selftest() -> int:
     print("── ★ 折行断词接得回来 ──")
     chk("`incapa-\\nble` → `incapable`", norm("incapa-\nble of standing") == "incapable of standing")
 
+    print("── ★★★★ 真夹具④：引文里嵌着 `**粗体**`（Koch #107 的形态）──")
+    #   逐字取自 `wip-koch-107/.../facts.md`，语料侧是同一句没有标记的德文。
+    _koch_q = "mit **Sputum von Phthisikern**, mit Tuberkelmassen von"
+    _koch_corpus = "Impfungen mit Sputum von Phthisikern, mit Tuberkelmassen von Rindern"
+    chk("剥掉强调后定位得到（此前 Koch 11 条里 10 条报「定位不到」，全是这个原因）",
+        not check([("facts.md", _koch_q)], [("s.txt", _koch_corpus)],
+                  "Robert Koch")["★ 在语料里定位不到的（本件未判，不是通过）"])
+    chk("★ 而**真的不在语料里**的仍要报定位不到（剥标记没把这道门剥没）",
+        len(check([("facts.md", "**这一句语料里根本没有，四十个字符以上，用于反例**")],
+                  [("s.txt", _koch_corpus)], "Robert Koch")
+            ["★ 在语料里定位不到的（本件未判，不是通过）"]) == 1)
+    chk("★ 乘号/脚注星号不许被当成强调剥掉（`3 * 4` 里的空格星号保留）",
+        norm("the ratio 3 * 4 held") == "the ratio 3 * 4 held")
+
     print("── ★★★★ 真夹具②：**本项目的引文用反引号**（第一版漏掉的正是这一族）──")
     import tempfile                                              # noqa: PLC0415
     real_line = ("这一条的原话：`These surfaces were got up without grinding. "
@@ -406,6 +464,10 @@ def main() -> int:
         print(f"\n★ 正文里已注明出自他人的：{len(dec)} 条（**不判为误引**）")
         for x in dec:
             print(f"  · {x['出处']}　正文自己署了 **{x['已在正文里注明出自']}**")
+    bp = r["★ 只在投影/长s折叠后才定位到的（在语料里，但本件判不了说话人）"]
+    if bp:
+        print(f"\n★ 只在投影/长 s 折叠后才定位到的：{len(bp)} 条"
+              f"（**它们在语料里**，但那一层没有位置，说话人本件判不了）")
     un = r["★ 在语料里定位不到的（本件未判，不是通过）"]
     if un:
         print(f"\n⚠ ★ 在语料里定位不到的（**本件未判，不是通过**）：{len(un)} 条")

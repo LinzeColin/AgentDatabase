@@ -711,8 +711,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_quote_speaker.py",
-      "sha256": "0134d61da434be43dd9659b593009719771808748bf6fdc96fdd1fc2d03be927",
-      "size_bytes": 21943
+      "sha256": "dc176950d55e10f34a565ae13a779457ada0950a80bfd4b7c9f6efbee5f5f4c1",
+      "size_bytes": 26568
     },
     {
       "path": "references/pipeline/checkers/check_quoted_arithmetic.py",
@@ -1376,8 +1376,8 @@
     },
     {
       "path": "scripts/check_quote_speaker.py",
-      "sha256": "0134d61da434be43dd9659b593009719771808748bf6fdc96fdd1fc2d03be927",
-      "size_bytes": 21943
+      "sha256": "dc176950d55e10f34a565ae13a779457ada0950a80bfd4b7c9f6efbee5f5f4c1",
+      "size_bytes": 26568
     },
     {
       "path": "scripts/check_quoted_arithmetic.py",
