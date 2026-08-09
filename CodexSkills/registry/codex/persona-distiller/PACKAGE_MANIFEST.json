@@ -626,8 +626,8 @@
     },
     {
       "path": "references/pipeline/checkers/check_holdout_mention.py",
-      "sha256": "33df4cec6136b4445fe62eb3fab8ad423a44481fd448bc9c9daf5da0754d2e52",
-      "size_bytes": 21342
+      "sha256": "46c53e6cc8ebbc07e5d4010ba3dbd276649c986e3544255df2caeb0cbfbbc9a6",
+      "size_bytes": 22368
     },
     {
       "path": "references/pipeline/checkers/check_holdout_overlap.py",
@@ -1296,8 +1296,8 @@
     },
     {
       "path": "scripts/check_holdout_mention.py",
-      "sha256": "33df4cec6136b4445fe62eb3fab8ad423a44481fd448bc9c9daf5da0754d2e52",
-      "size_bytes": 21342
+      "sha256": "46c53e6cc8ebbc07e5d4010ba3dbd276649c986e3544255df2caeb0cbfbbc9a6",
+      "size_bytes": 22368
     },
     {
       "path": "scripts/check_holdout_overlap.py",
