@@ -17,5 +17,43 @@ if [[ "${MEMORY_ATLAS_SKIP_GATE:-0}" == "1" ]]; then
   exit 0
 fi
 
+# --- 体积闸(2026-08-10 增补) ---
+# 本仓 origin/main 上 CodexSkills/skill_log_evals 只有 7.1 MB,而本地某个分支已经
+# 攒到 2.6 GB / 9266 个文件。一旦推上去合并,这个仓就永久背上它 —— git 历史删不掉,
+# 每个 clone、每个 worktree 都要复制一份。单文件阈值拦不住(9266 个文件个个都不大),
+# 所以按本次推送新增的 blob 总量判。
+#
+# 注意 git rev-list --objects 每行是 "<sha> <path>",cat-file 只吃纯 sha,
+# 不切掉路径的话结果恒为 0 —— 这个闸就成了摆设(第一版正是这么错的)。
+#
+# 放行:LINZE_ALLOW_BULK_PUSH=1 git push
+BULK_LIMIT_MB=${LINZE_BULK_LIMIT_MB:-200}
+if [[ -z "${LINZE_ALLOW_BULK_PUSH:-}" ]]; then
+  _z=0000000000000000000000000000000000000000
+  while read -r _lref _lsha _rref _rsha; do
+    [[ "$_lsha" == "$_z" ]] && continue
+    if [[ "$_rsha" == "$_z" ]]; then _rng="$_lsha --not --remotes"; else _rng="$_rsha..$_lsha"; fi
+    _b=$(git rev-list --objects $_rng 2>/dev/null | awk '{print $1}' \
+         | git cat-file --batch-check='%(objecttype) %(objectsize)' 2>/dev/null \
+         | awk '/^blob/{s+=$2} END{print s+0}')
+    _mb=$(( _b / 1048576 ))
+    if (( _mb > BULK_LIMIT_MB )); then
+      echo "" >&2
+      echo "  ✗ 拒绝推送:本次要推 ${_mb} MB 新增内容（上限 ${BULK_LIMIT_MB} MB）。" >&2
+      echo "" >&2
+      echo "  仓收下就吐不出来了 —— git 历史删不掉,除非 rewrite 全部 commit hash。" >&2
+      echo "  先看看是不是把评估日志/构建产物/数据集带上了:" >&2
+      echo "      git rev-list --objects $_rng | awk '{print \$1\" \"\$2}' | git cat-file --batch-check='%(objecttype) %(objectsize) %(rest)' | sort -k2 -rn | head -20" >&2
+      echo "" >&2
+      echo "  这类产物应 .gitignore 掉,另存 GitHub Release。" >&2
+      echo "  R2 有额度红线(Standard 10GB 免费、IA 一次操作起步 \$9.91),存前先看 r2_free_tier_guard 判定。" >&2
+      echo "" >&2
+      echo "  确认无误强推:LINZE_ALLOW_BULK_PUSH=1 git push ..." >&2
+      echo "" >&2
+      exit 1
+    fi
+  done
+fi
+
 repo=$(git rev-parse --show-toplevel)
 exec "$repo/ops/memory-atlas/canonical_gate.sh" "$repo" quick >/dev/null
