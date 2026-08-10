@@ -33,7 +33,7 @@
   ```bash
   python3 -c "import json;print(len(json.load(open('CodexSkills/registry/codex/persona-distiller-group/team-index.json'))['products']))"
   ```
-- **延后／拒发名单：137 条**（`_ledgers/_延后名单.json` 的 `total`），
+- **延后／拒发名单：137 条**（`_ledgers/_延后名单.json` 的 `total`；★ 要报这个数就当场跑一遍，别抄），
   其中 **75 条**带 `pd_scope_pending`（等待裁定 ㉜）。
 - **刚做完**：
   - **#156 Henry Gantt 记拒发**——真 delta **+0.0078**，quick 门 +0.03，**两席跨零**
@@ -48,7 +48,22 @@
     **而他的记账论述只存在于一部作品**，三份译本只算一处证据，
     于是「方法类断言要 ≥2 处独立证据」诚实地只满足到 **1 个 mental-model ＋ 1 个 heuristic**
     （门要 2 和 3）。判决书 `_corpora/wip-pacioli-161/workspaces/luca-pacioli/references/research/00-处置.md`。
-- **在办：#162 William Andrew Paton**（财务合规师，1889–1991）。
+- **#162 William Andrew Paton 记延后（新类别⑧：盲判装置不成立）**，**评委一次都没派发，没有产生过任何分数**。
+  详见下面那一大段，以及 `_corpora/wip-paton-162/.../evals/00-结案.md`。
+- **#163 A. C. Littleton 记延后（新类别⑨：成名作全部落在 PD 分界之后）**——**开工前量的，一份源都没抓**。
+  ≤1930 已核过出版年的一手材料 **7 份**（1 本入门教材 ＋ 6 篇《The Accounting Review》论文，122–134 页），
+  `min_sources` 门要 8 差 1 份；**而 `min_lanes` 3 是硬卡点——7 份全是 writings，另五道各 0**。
+  ★★★★ 真正的理由：他 7 部著作出版年 **1933–1965，没有一部 ≤1930**
+  （《Accounting Evolution to 1900》是 **1933**，书名里的 1900 是**内容年代**不是出版年）。
+  **与 Nowlan #155 不同：Nowlan 生得太晚，Littleton 是成熟期太晚**——
+  可取得的那部分**不是他之所以是他的那部分**。
+  ★ 同名护栏已备好，重启不必重查：**`Ananias` 是极罕见教名**，比生卒年更可靠；
+  地名里风险最高的是 **Littleton, Illinois**（州名会与 University of Illinois 同时出现）。
+  探测报告 `_corpora/_探测记录/163-littleton-可得性探测.md`。
+- **#164 Herbert Heinrich 探测中**（1886–1962，事故三角形）。
+  ★ 他的代表作《Industrial Accident Prevention》通行说法是 **1931**——
+  **若确是 1931 就差一年**，`2027-01-01` 才进入公有领域（PD 分界每年元旦前移）。
+- **【已作废】在办：#162 Paton**（下面这段保留是因为它记着装置层的实测，判决见上）。
   工作区 `_corpora/wip-paton-162/workspaces/william-andrew-paton`（**单层，不是双层嵌套**）。
   - **研究门 ✓ 合成门 ✓（均 0 错）**；24 份来源 / 22 部作品；三道齐；
     **13 条断言（mental-model 2 / heuristic 3，quick 档最低数达标）**；
