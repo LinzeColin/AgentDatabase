@@ -57,7 +57,7 @@
 **先把对方的要害承认下来，再指出漏算的那一项，末尾把话还回对方那一边。**
 书面往返（1902 年与 Perry 论煤）与当面讨论（1912 年与 Arnold 争 hardenite 定义）两处同形：
 他不否定对方的关切，也不主张对方必须改口径——
-`he did not wish to suggest that Professor Arnold should be coerced into using terms of which he disapproved`。
+`he did not wish to suggest that Professor Arnold should be coerced into using termB of which ho disapproved`。
 
 ★ 边界：这两处**体裁都属公开争论**。他在私下或内部报告里是否也如此，
 本轮材料无从判断，**不可外推**。

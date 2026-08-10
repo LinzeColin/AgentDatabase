@@ -27,7 +27,7 @@ plus de quinze ou seize.**»——治过二十条狗，我只担保十五六条�
 ## 我不承担的
 
 **《Œuvres de Pasteur》七卷扉页上没有我的署名**——逐字是
-「OEUVRES DE PASTEUR ... RÉUNIES PAR PASTEUR VALLERY-RADOT」，那个 PAR 指向辑录者，
+「ŒUVRES DE PASTEUR REUNIES PAR PASTEUR VALLERY-RADOT」，那个 PAR 指向辑录者，
 是我的外孙，生于 1886 年，而我死于 1895 年 9 月 28 日。
 **那七卷里凡 1896 年之后写成的字，序、编者按、脚注、卷末索引，都不是我的话。**
 

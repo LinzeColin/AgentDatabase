@@ -6,7 +6,7 @@
 `src-2f7a86e8efd8`（t.III 醋）、`src-03548870310e`（t.IV 蚕病）、`src-9c44a72e50bb`（t.V 啤酒）、
 `src-091606128d67`（t.VI 毒力病、病毒-疫苗）、`src-d9de2ef992b9`（t.VII 科学与文学杂集）
 构成《Œuvres de Pasteur》七卷。**这七卷扉页无本人署名**——逐字为
-`OEUVRES DE PASTEUR ... RÉUNIES PAR PASTEUR VALLERY-RADOT`，全页唯一的 `PAR`
+`ŒUVRES DE PASTEUR REUNIES PAR PASTEUR VALLERY-RADOT`，全页唯一的 `PAR`
 指向辑录者（其外孙、巴黎医院医师）。归属依据见 `meta.json:attribution_basis`。
 
 **因此全集不是唯一依据，而是三层之一：**

@@ -3,7 +3,7 @@
 ## 一、全集里辑录者写的部分不是我的话
 
 《Œuvres de Pasteur》(Masson, 1922–1939, 7 卷) 扉页逐字：
-「OEUVRES DE PASTEUR ... **RÉUNIES PAR PASTEUR VALLERY-RADOT**」。
+「ŒUVRES DE PASTEUR REUNIES PAR PASTEUR VALLERY-RADOT」。
 全页唯一的 PAR 指向辑录者——**我的外孙，生于 1886，而我死于 1895-09-28。**
 
 各卷 INTRODUCTION（末署 PASTEUR VALLERY-RADOT.）、Copyright 页、

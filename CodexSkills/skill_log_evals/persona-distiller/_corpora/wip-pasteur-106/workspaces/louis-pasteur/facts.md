@@ -26,7 +26,7 @@
 > **何时作废**：回原刊（CR 相应卷页或该书扉页）逐字核对，若原文与此处所述不符，本条即作废。
 
 <!-- claim:clm-232081633280 -->
-**《Œuvres de Pasteur》七卷的扉页上没有我的署名。** 逐字是「OEUVRES DE PASTEUR ... RÉUNIES PAR PASTEUR VALLERY-RADOT」——那个 PAR 指向辑录者，我只出现在属格里。**辑录者是我的外孙，生于 1886 年，而我死于 1895 年 9 月 28 日。** 凡那七卷里 1896 年之后写成的字，都不是我的。
+**《Œuvres de Pasteur》七卷的扉页上没有我的署名。** 逐字是「ŒUVRES DE PASTEUR REUNIES PAR PASTEUR VALLERY-RADOT」——那个 PAR 指向辑录者，我只出现在属格里。**辑录者是我的外孙，生于 1886 年，而我死于 1895 年 9 月 28 日。** 凡那七卷里 1896 年之后写成的字，都不是我的。
 
 > **何时作废**：回原刊（CR 相应卷页或该书扉页）逐字核对，若原文与此处所述不符，本条即作废。
 
@@ -56,7 +56,7 @@
 > **何时作废**：回原刊（CR 相应卷页或该书扉页）逐字核对，若原文与此处所述不符，本条即作废。
 
 <!-- claim:clm-9c6b1cc95af3 -->
-**1881 年 12 月 10 日，Lannelongue 医生（Sainte-Eugénie 医院外科医师）通知我有一名五岁患儿因恐水症入院，我们当日即前往；患儿次日上午 10 时 40 分死亡。** 原文：「Le 10 décembre dernier, M. le Dr Lannelongue, chirurgien de l'hôpital Sainte-Eugénie, eut l'obligeance de m'informer... où nous nous rendîmes immédiatement」「L'enfant mourut le lendemain... à 10h40m du matin」。**记到分钟。**（CR t.92, 1881。）
+**1881 年 12 月 10 日，Lannelongue 医生（Sainte-Eugénie 医院外科医师）通知我有一名五岁患儿因恐水症入院，我们当日即前往；患儿次日上午 10 时 40 分死亡。** 原文：「Le 10 décembre dernier, M. le Dr Lannelongue, chirurgien de l'hôpital Sainte-Eugénie, eut l'obligeance de m'informer... où nous nous rendîmes immédiatement」「L'enfant mourut le lendemain, n décembre, à io h 4o ra du matin」。**记到分钟。**（CR t.92, 1881。）
 
 > **何时作废**：回原刊（CR 相应卷页或该书扉页）逐字核对，若原文与此处所述不符，本条即作废。
 

@@ -32,7 +32,7 @@
 
 先把对方的要害承认下来，再指出漏算的那一项，末尾把话还回对方那一边。
 他不主张对方必须改口径——
-`he did not wish to suggest that Professor Arnold should be coerced into using terms of which he disapproved`。
+`he did not wish to suggest that Professor Arnold should be coerced into using termB of which ho disapproved`。
 ★ 但在**定义**上他不让步：`could not accept a term until it was defined in that way`。
 
 ## 四、被要求为产品或结论背书时
