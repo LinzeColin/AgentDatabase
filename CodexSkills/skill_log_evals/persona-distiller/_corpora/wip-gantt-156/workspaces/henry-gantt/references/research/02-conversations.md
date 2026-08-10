@@ -33,6 +33,8 @@ v40 那篇论文后面还有整段 `In presenting his paper the author pointed o
 
 ### ★★★★ C1（P1）：被问到不能说的事，他划界并**当场给出能说的替代**
 
+来源：src-9525f67c093d
+
 1914 证词第 4 轮与第 7 轮，问询方要他列出客户：
 
 > I have no objection to stating those places which are commonly known, but some of my
@@ -49,6 +51,8 @@ v40 那篇论文后面还有整段 `In presenting his paper the author pointed o
 **不是「无可奉告」，是「这一段不能给，这两个可以」。**
 
 ### ★★★★ C2（P1）：他反复给**自己的意见**打折，而且用的是同一个动作
+
+来源：src-9525f67c093d
 
 同一场证词里至少四处：
 
@@ -70,6 +74,8 @@ v40 那篇论文后面还有整段 `In presenting his paper the author pointed o
 
 ### ★★★ C3（P1）：他把自己的方法定义成「用事实管理」，并当场跟前一位发言人对齐
 
+来源：src-9525f67c093d
+
 > We do not want these people to speed up during that time. We want to get the facts.
 > Mind you, **I want to follow up Mr. Thompson's statement that scientific management is
 > management by means of facts. Most management of every kind is management by means of
@@ -80,6 +86,8 @@ v40 那篇论文后面还有整段 `In presenting his paper the author pointed o
 与 `01-writings` 里他对 Taylor 的处理同型（见 C6）。
 
 ### ★★ C4（P1）：定任务之前先量，量不出就不定
+
+来源：src-9525f67c093d
 
 > We do that before we set the task. We find out how much time it should reasonably take,
 > and **we do not set the task for four hours unless we find that four hours is a reasonable
@@ -104,6 +112,8 @@ v40 那篇论文后面还有整段 `In presenting his paper the author pointed o
 
 ### ★★ C5（P1）：他把控制权交回提问者，反复交
 
+来源：src-9525f67c093d
+
 > If you would like, I can go into that subject and explain, **but that is with you**.
 
 > I might say — **but perhaps I have answered your question**.
@@ -116,6 +126,8 @@ v40 那篇论文后面还有整段 `In presenting his paper the author pointed o
 
 ### ★★★ C6（P1）：最早的一份「他怎么看 Taylor」
 
+来源：src-7f4cb1a48705
+
 ASME v16（1895）他对 Taylor《A Piece-Rate System》的书面讨论：
 
 > **It was my good fortune to work for a year as his assistant in this work**
@@ -125,6 +137,8 @@ ASME v16（1895）他对 Taylor《A Piece-Rate System》的书面讨论：
 （§171–175），抓源方已明确未入库。
 
 ### ★ C7（P1）：一句自我定位
+
+来源：src-9525f67c093d
 
 > No. You know, **I am only one of a great many people. I do not claim any supernatural
 > powers, or anything like that. I am only one. I am a Democrat.**

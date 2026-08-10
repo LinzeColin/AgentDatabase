@@ -21,6 +21,8 @@ v41 讣告逐一点名 12 篇，与它们对得上。
 
 ## ★★★★ 本道的第一条结论：**他的书面语几乎没有声口**
 
+来源：src-d81da8d61a3f src-cfe254308ec6
+
 1902 年那篇论文开头，他称自己为 `the writer`：
 
 > THE system described in this paper been intro-- duced by the writer into the large machine
@@ -41,6 +43,8 @@ v41 讣告逐一点名 12 篇，与它们对得上。
 
 ### ★★★★ W1（P1）：奖金制的机制被写成可核对的三段
 
+来源：src-d81da8d61a3f src-9525f67c093d
+
 1902 v23：
 
 > ll the work laid out for him, as consti- tuting his proper task for the day, he is, paid a
@@ -60,6 +64,8 @@ v41 讣告逐一点名 12 篇，与它们对得上。
 
 ### ★★★★ W2（P1）：他把「习惯」放在「知识与技能」之前
 
+来源：src-cfe254308ec6 src-9525f67c093d
+
 1908 v30：
 
 > Habits of industry are far more valuable than any kind of knowledge or skill, for with such
@@ -76,6 +82,8 @@ v41 讣告逐一点名 12 篇，与它们对得上。
 **而那两处相隔六年、一份是论文一份是宣誓证词**——**跨来源、跨场合，够两处。**
 
 ### ★★★ W3（P1）：**「先把事实查清再下判断」——这是 C3 缺的那第二处证据**
+
+来源：src-fae01b6922d3 src-9525f67c093d
 
 他为 Kent《Investigating an Industry》(1913) 写的导言（998–1000 词，署 `Henry L. Gantt.`）：
 
@@ -97,6 +105,8 @@ up your mind`。**两处不同来源、不同年份（1913 论述 / 1914 口述�
 
 ### ★★★ W4（P1）：**他不替别人下断言——这是 G4 缺的那第二处证据**
 
+来源：src-27ab8a87cfea src-9525f67c093d src-7084d9304465
+
 1918 v40：
 
 > n, who found that the amount of wealth he could get by exploitation was strictly limited. I
@@ -110,6 +120,8 @@ up your mind`。**两处不同来源、不同年份（1913 论述 / 1914 口述�
 have been conscious`）——**收窄了两层，不是一层。**
 
 ### ★★ W5（P1）：1919 年那本书的立场——**系统本身是好的，坏在它反过来要社区服务它**
+
+来源：src-7084d9304465
 
 `organizing-for-work-1919` 序言：
 
@@ -134,6 +146,8 @@ have been conscious`）——**收窄了两层，不是一层。**
 **同一个人在三种题材上做同一个划界动作**：自己的方法（证词）、同行（1918 论文）、别国制度（1919 书）。
 
 ### ★ W6（P1）：两篇冶金论文与其余十篇不同域
+
+来源：src-fd79650347d4 src-36d182c8a4c2
 
 v12(1891)`Steel Castings`、v15(1894)`Recent Progress in the Manufacture of Steel Castings`。
 ★ **本轮未读正文。** 它们比奖金制那篇（1902）早十年以上，**是他做管理学之前的技术期**。

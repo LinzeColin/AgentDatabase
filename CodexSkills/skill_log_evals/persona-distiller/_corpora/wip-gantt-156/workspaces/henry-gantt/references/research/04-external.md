@@ -10,6 +10,8 @@
 
 ## ★★★★ E1（P2）：**读起来完全像他，一个字都不是他的**——这份是陷阱的实物
 
+来源：src-4b6853b4133e
+
 `asme-v40-1918-…-NOT-verbatim` 全篇是**学会秘书的第三人称转述**：
 
 > In presenting his paper the author pointed out that on the battle front war was competition
@@ -38,6 +40,8 @@
 
 ## ★★★ E2（S2）：Clark 1922 —— **书名带他的姓，而全书零处他的署名文字**
 
+来源：src-8acad7656a9d src-fae01b6922d3
+
 丛书广告页逐字：
 
 > THE GANTT CHART. By WALLACE CLARK. Illustrates applications in management. 1922. 157 pages.
@@ -52,6 +56,8 @@
 署名证据只有一种：**页面上印着的署名行**。
 
 ## E3（S2）：讣告
+
+来源：src-b0e8dd9769f3
 
 事实部分全部写在 `06-timeline.md`（T2–T9），**此处不重复**。
 本道只留一条口径：**讣告是学会写的褒扬体裁**，

@@ -14,6 +14,8 @@
 
 ### T1（P1，**唯一的一手时间锚**）
 
+来源：src-9525f67c093d
+
 1914-04-15 宣誓作证时他自报：
 
 > Henry Lawrence Gantt, Montclair, N. J.
@@ -25,6 +27,8 @@
 ★★ `for some years` 是他自己给的模糊量，**不要替他换算成年数**。
 
 ### T2（S2）：生卒与学历
+
+来源：src-b0e8dd9769f3
 
 > Henry Laurence Gantt was born May 20, 1861, in Calvert County, Mary- land. He was graduated
 > from Johns Hopkins as a Bachelor of Arts when only 19 years of age and taught for three years
@@ -40,6 +44,8 @@
 **但两者之间的因果本库判不出来**——**不许写成「因为他当过老师，所以他主张教与带」。**
 
 ### T3（S2）：与 Taylor 的关系与自立
+
+来源：src-b0e8dd9769f3
 
 > He was associated with Frederick W. Taylor in his early work at the Midvale and Bethlehem
 > Steel Companies and with this as a basis, and his personal ability as an organizer, he later
@@ -59,11 +65,15 @@ Sayles Bleacheries、Corticelli Silk Mills。
 
 ### T4（S2）：学会职务
 
+来源：src-b0e8dd9769f3
+
 > Mr. Gantt was active in The American Society of Mechanical Engineers and served on the
 > Council as Manager, 1908-11, and as Vice-President, 1913-15; on the Meetings Committee,
 > 1912-17; and on the Executive Committee of this Council, 1913-14.
 
 ### ★★★ T5（S2）：讣告逐一点名 **12 篇** 论文——与语料对得上
+
+来源：src-b0e8dd9769f3
 
 > Steel Castings; Recent Progress in the Manu- facture of Steel Castings; Bonus System of
 > Rewarding Labor; Graphical Daily Balance in Manufacture; Training of Workmen in Habits of
@@ -78,6 +88,8 @@ Sayles Bleacheries、Corticelli Silk Mills。
 
 ### T6（S2）：1913 年访德
 
+来源：src-b0e8dd9769f3
+
 > During the German trip of the Society in 1913 Mr. Gantt was a frequent speaker at the various
 > functions and at the Leipsic meeting of the Verein deutscher Ingenieure, held jointly with
 > our Society, aroused much interest by his discussion of Scientific Management.
@@ -86,6 +98,8 @@ Sayles Bleacheries、Corticelli Silk Mills。
 **`aroused much interest` 是讣告的评价，不是可核的事实。**
 
 ### T7（S2）：一战期间的职务
+
+来源：src-b0e8dd9769f3
 
 > During the war Mr. Gantt acted in a consulting capacity, first for the Ordnance Department by
 > invitation of General Crozier, who recommended for the entire War Department the use of
@@ -97,6 +111,8 @@ Sayles Bleacheries、Corticelli Silk Mills。
 
 ### T8（S2）：三本书
 
+来源：src-b0e8dd9769f3 src-ce42a35a0c76
+
 > Mr. Gantt was also the author of three books: Work, Wages and Profits: Their Influence on
 > Cost of Living; Industrial Leadership (Yale Lectures) ; and Organizing for Work.
 
@@ -107,6 +123,8 @@ Sayles Bleacheries、Corticelli Silk Mills。
 **引书名以印本为准。**
 
 ### ★ T9（S2）：讣告对他晚期立场的概括
+
+来源：src-b0e8dd9769f3
 
 > In later years he developed a broad conception of industry as a national problem in which he
 > regarded it essential that the man at the top should have the same close scrutiny and careful
