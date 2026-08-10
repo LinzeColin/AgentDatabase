@@ -2699,6 +2699,43 @@ def run_claim_source_independence(report, target: Path) -> None:
     report.metrics['claim_source_independence'] = info
 
 
+def run_filename_year_vs_ledger(report, target: Path) -> None:
+    """文件名里的四位年份 vs 台账 `published_at`——两边对不上，就至少有一处记错了。
+
+    ★★ 为什么它值得进研究门：`published_at` 是 **PD 判定的输入**。
+    2026-08-10 全库实测 1262 行两边都有年份、**56 行不一致（4.4%）**，
+    其中 **5 条跨过 1931 分界**，逐份读题名页后发现**两条是台账错了**
+    （Semmelweis 的 1938→1924、Holmes 的 1934→1892）——
+    两条都把**合规的 PD 源标成了非 PD**，会让审计报出并不存在的违规。
+
+    **只报不拦**：判据不知道是哪一边错（文件名里的年份可能是 IA 编号或年份区间），
+    它给的是「去看一眼题名页」的名单。跨 PD 分界的那一类单独升级为独立警告。
+    """
+    here = Path(__file__).resolve().parent
+    script = here / 'check_filename_year_vs_ledger.py'
+    if not script.exists():
+        report.metrics['filename_year_vs_ledger'] = {'状态': '检查器未安装，**未核验**（不是通过）'}
+        return
+    spec = importlib.util.spec_from_file_location('_pd_fyvl', script)
+    module = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(module)
+        problems, info = module.evaluate(target)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['filename_year_vs_ledger'] = {'状态': f'运行失败，**未核验**：{exc}'}
+        return
+    report.metrics['filename_year_vs_ledger'] = info
+    if info.get('跨PD分界'):
+        report.warn('source.year-straddles-pd-cutoff',
+                    f"**{info['跨PD分界']} 条的文件名年份与 `published_at` 跨过 PD 分界 "
+                    f"{module.PD_CUTOFF}** —— 这一类直接改变「这份源能不能用」，"
+                    f"**必须逐份读题名页定案**，不要凭其中一个数下结论")
+    if info.get('不一致'):
+        report.warn('source.filename-year-mismatch',
+                    f"{info['不一致']} 条文件名年份与 `published_at` 差 ≥2 年"
+                    f" —— **至少有一处记错了**；判据不知道是哪一处")
+
+
 def run_title_is_not_filename(report, target: Path) -> None:
     """台账的 `title` 是真书目题名，还是文件名的副本？（v0.0.0.-新增）
 
@@ -3758,6 +3795,7 @@ def main() -> int:
         evaluate_research(report, target, thresholds, train_ids, args.allow_provisional)
         run_translation_witness(report, target)
         run_title_is_not_filename(report, target)
+        run_filename_year_vs_ledger(report, target)
         cases: list[dict[str, Any]] = []
         if args.phase in {'synthesis', 'release'}:
             evaluate_claims(report, target, thresholds, sources, args.allow_provisional)
