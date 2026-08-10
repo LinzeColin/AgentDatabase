@@ -86,6 +86,15 @@ _HYPHEN_BREAK = re.compile(r"[-¬­]\s+")          # 行末折行连字（含 OC
 _DASHES = re.compile(r"[—–−]")
 # 标点前的空白（OCR 版面产物，尤以德文/法文排印为多）
 _SPACE_BEFORE_PUNCT = re.compile(r"\s+([,.;:!?)\]])")
+# 中日韩标点：出现即说明这是我写的散文，不是英文逐字引文
+# ★★★★ **`—` 与 `…` 有意不在这个集合里。**
+#   第一版把它们放进来了，结果全库引文总数 **390 → 358**，一次静默吃掉 32 条**本来对得上**的引文：
+#     · `—` 是英文 OCR 里极常见的破折号，真引文天天带它；
+#     · `…` **是本判据自己的省略号语法**（`_ELISION` 要按它分段验），
+#       把带 `…` 的引文整条滤掉，等于把省略号那条功能拆了。
+#   ★ 抓到它的是**分母**：我把「引文总数」和「对不上数」一起打印，
+#     才看见「变绿」其实是分母掉了 32。[[ratio-gates-can-be-passed-by-shrinking]]
+_CJK_PUNCT = re.compile(r"[《》「」『』，、。；：？！（）【】]")
 
 
 def _norm(s: str) -> str:
@@ -196,6 +205,15 @@ def extract_quotes(md: str):
             #   改判「CJK 占比」：有汉字的是我们写的散文，没有的是引文。
             if sum('\u4e00' <= c <= '\u9fff' for c in t) / len(t) > 0.05:
                 continue
+            # ★★★★ 2026-08-10：**中日韩标点也算「这是我写的散文」**，与汉字同论。
+            #   上面那条只数**汉字**，于是这几种漏了过去（全库实测 4 条）：
+            #       `《The Times》1878-01「A Billion Dissected」，落款`   ← 我的著录标签
+            #       `P1 Elizabeth Blackwell Papers: Poetry（`            ← 我的引证标签
+            #   它们汉字极少甚至没有，却带着 `《》「」，（`——**一句真的英文逐字引文
+            #   永远不会含这些符号**，所以这一条不会误伤引文，只会滤掉我的散文。
+            #   ★ 反过来说：**中文语料的引文早就被上面那条汉字比例挡住了**，这里不冲突。
+            if _CJK_PUNCT.search(t):
+                continue
             out.append(t)
     return out
 
@@ -252,6 +270,19 @@ def self_test():
         print(("  ✓ " if ok else "  ✗ ") + lbl)
         if not ok:
             bad.append(lbl)
+
+    print("\n══ ★ 带中日韩标点的不是引文（2026-08-10 全库实测 4 条）══")
+    for s_ in ("《The Times》1878-01「A Billion Dissected」，落款",
+               "P1 Elizabeth Blackwell Papers: Poetry（",
+               "1841 论文 ¶491（他自己写的）"):
+        chk(f"不取：{s_[:34]}", not extract_quotes("正文里 `" + s_ + "` 这样写。\n"))
+    chk("★ 而纯英文逐字引文照取",
+        bool(extract_quotes("他写道 `to him we are certainly indebted for the slide rest` 。\n")))
+
+    chk("★★ 而 `—`（英文破折号）不算——真引文天天带它",
+        bool(extract_quotes("他写道 `the tool is held by an iron hand—firmly and truly` 。\n")))
+    chk("★★★ `…` 更不算——**那是本判据自己的省略号语法**",
+        bool(extract_quotes("他写道 `Hitherto, so far as I am aware … has not received that attention` 。\n")))
 
     print("\n══ ★★★★ 标点前的空白（Mendel #125，13 条里 7 条是这一件事）══")
     _DE_REAL = ("Herr Abt Mendel schreibt uns aus Brünn : Gestern am 29. Juni um 7 Uhr Abends "
