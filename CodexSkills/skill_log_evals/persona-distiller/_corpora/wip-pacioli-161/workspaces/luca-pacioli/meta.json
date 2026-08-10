@@ -1,0 +1,82 @@
+{
+  "builder_version": "v0.0.0.5",
+  "chosen_subject_uid": "wikidata:Q87620",
+  "consent_authority": null,
+  "created_at": "2026-08-10T04:39:05Z",
+  "current_version": null,
+  "existential_hypotheses_enabled": false,
+  "identity_selection": {
+    "canonical": "finance-compliance",
+    "display": "财务合规师",
+    "mode": "single",
+    "primary": "finance-compliance",
+    "weights": {
+      "finance-compliance": 1.0
+    }
+  },
+  "language": "拉丁语/15 世纪意大利语（威尼斯商用）",
+  "model_version": "0.1.0-draft",
+  "name": "Luca Pacioli",
+  "namesake_gate": {
+    "candidate_count": 1,
+    "chosen_candidate": {
+      "application_scenarios": [
+        "复式记账的起源与原始表述",
+        "15 世纪商业算术与实务教学",
+        "早期印刷时代的知识整理与编纂"
+      ],
+      "authoritative_sources": [
+        {
+          "locator": "https://www.wikidata.org/wiki/Q87620",
+          "note": "标签 Luca Pacioli，描述 Italian father of accounting (*~1445 – †1517)"
+        },
+        {
+          "locator": "https://en.wikipedia.org/wiki/Luca_Pacioli"
+        },
+        {
+          "locator": "https://archive.org/details/summadearithmeti00paci",
+          "note": "Summa 1494 扫本，archive.org 著录 Pacioli, Luca, approximately 1445-1517"
+        }
+      ],
+      "canonical_name": "Luca Pacioli",
+      "distinguishing_basis": "Wikidata Q87620 是「Pacioli」为姓的唯一著名人物条目；同名检索只返回以他命名的学校、纪念物与他自己的作品，没有第二个同名自然人。",
+      "evidence_level": "high",
+      "identity_category": "历史人物（15–16 世纪意大利）",
+      "key_capabilities": [
+        "把当时威尼斯商人的记账实务整理成可教的程序",
+        "算术、几何与比例的教学性编纂",
+        "以印刷媒介传播实务知识"
+      ],
+      "label": "A",
+      "occupation_or_role": "方济各会修士、数学家；复式记账第一份印行论述的作者",
+      "professional_background": "约 1445 年生于 Sansepolcro，1517 年卒。1494 年在威尼斯出版《Summa de arithmetica, geometria, proportioni et proportionalità》，其中 Particularis de computis et scripturis 一节（约 26 页）是复式记账最早的印行论述。曾与 Leonardo da Vinci 合作《De divina proportione》(1509)。",
+      "subject_uid": "wikidata:Q87620"
+    },
+    "chosen_subject_uid": "wikidata:Q87620",
+    "normalized_name": "lucapacioli",
+    "resolution": "single",
+    "schema_version": "1.0"
+  },
+  "normalized_name": "lucapacioli",
+  "origin_review_required": false,
+  "product_version": null,
+  "product_version_policy": "per-canonical-person; 0.0.0.1..0.0.0.999; consumed-on-successful-registration",
+  "profile": "quick",
+  "prohibited_uses": [
+    "identity authentication or deceptive impersonation",
+    "invented endorsement, signature, consent, private memory or current opinion",
+    "unsupported psychological diagnosis",
+    "replacement of accountable high-stakes professional judgment"
+  ],
+  "retention_policy": null,
+  "runtime_invocation_versioning": false,
+  "scenario": null,
+  "scenario_policy": "optional-build-hint; infer-per-runtime-task",
+  "schema_version": "2.0",
+  "slug": "luca-pacioli",
+  "status": "draft",
+  "subject_origin": "historical",
+  "target_id": "tgt-7a56d685e846",
+  "time_scope": "1494–1509",
+  "updated_at": "2026-08-10T04:39:05Z"
+}
