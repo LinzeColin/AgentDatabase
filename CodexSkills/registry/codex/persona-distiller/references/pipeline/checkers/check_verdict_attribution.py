@@ -202,7 +202,24 @@ def all_answers(corpora: pathlib.Path):
     """→ (候选侧, 基线侧) 全人物汇总。跨人物取真值：
     一句话只要在某人的基线里、且不在任何人的候选里，它就是基线说的。"""
     cand, base = {}, {}
-    for ws in sorted(corpora.glob("*/workspaces/*")):
+    # ★★★★ 2026-08-11：**两层都要扫**。
+    #   6 个工作区的路径重了一层：`wip-X/workspaces/<slug>/<slug>/`
+    #   （Barton #117 / Fleming #111 / Nightingale #112 / Osler #110 /
+    #     Sorby #133 / Virchow #109，外层除内层之外什么都没有）。
+    #   只 glob 一层拿到的是**只含内层的空壳**，于是 Sorby 的
+    #   candidate_answers.json 与 baseline_answers.json **各漏 1 份**。
+    #   本件的判法是「一句话只要在某人的**基线**里、且不在任何人的候选里，
+    #   它就是基线说的」——**真值集缺一个人，归属就可能判反**，
+    #   而它对外表现是安静地少数了两份（`empty-default-swallows-unknown`）。
+    #   ★ 同一个坑 `check_staged_but_not_ingested.py` 早就两层都写了
+    #     （`workspaces/*/raw` 与 `workspaces/*/*/raw`），`quality_check.py:3838`
+    #     也有注释——**只有这一件没跟上**。
+    seen = set()
+    spaces = list(corpora.glob("*/workspaces/*")) + list(corpora.glob("*/workspaces/*/*"))
+    for ws in sorted(spaces):
+        if not ws.is_dir() or ws in seen:
+            continue
+        seen.add(ws)
         for fn, d in (("candidate_answers.json", cand), ("baseline_answers.json", base)):
             f = ws / "evals" / fn
             if f.is_file():
@@ -307,6 +324,36 @@ def self_test() -> int:
     spans = [q for q, _ in quoted_spans("前 `短` 中间很长的一段字 `炉子不听道理，只听条件。` 后")]
     chk(f"取到 {spans}", "短" in spans and any("炉子不听道理" in s for s in spans))
     chk("没有把两对之间的字连起来", not any("中间很长的一段字" in s for s in spans))
+
+    # ── 2026-08-11：**重复层的工作区也要扫得到** ──────────────────────
+    #   夹具造两个人：一个正常布局，一个 `workspaces/<slug>/<slug>/`。
+    #   ★ 正对照（正常那个能扫到）与反对照（只扫一层则漏掉重复层那个）都要有，
+    #     否则「扫到了 2 个」可能是因为根本没按层数区分。
+    import json as _json, tempfile as _tf
+    with _tf.TemporaryDirectory() as _td:
+        _c = pathlib.Path(_td)
+        _flat = _c / "wip-a-1" / "workspaces" / "alice"
+        (_flat / "evals").mkdir(parents=True)
+        (_flat / "evals" / "candidate_answers.json").write_text(
+            _json.dumps({"q1": "alice said this"}), encoding="utf-8")
+        (_flat / "evals" / "baseline_answers.json").write_text(
+            _json.dumps({"q1": "baseline for alice"}), encoding="utf-8")
+        _nest = _c / "wip-b-2" / "workspaces" / "bob" / "bob"
+        (_nest / "evals").mkdir(parents=True)
+        (_nest / "evals" / "candidate_answers.json").write_text(
+            _json.dumps({"q1": "bob said this"}), encoding="utf-8")
+        (_nest / "evals" / "baseline_answers.json").write_text(
+            _json.dumps({"q1": "baseline for bob"}), encoding="utf-8")
+
+        _cand, _base = all_answers(_c)
+        chk("重复层：两个人的候选答案都取到（正常布局 + `<slug>/<slug>/`）",
+            len(_cand) == 2 and any("bob" in k for k in _cand))
+        chk("重复层：两个人的基线答案都取到",
+            len(_base) == 2 and any("bob" in k for k in _base))
+        # 反对照：只扫一层必然漏掉 bob——证明上面两条不是「碰巧都在」
+        _one = {p for p in _c.glob("*/workspaces/*") if (p / "evals").is_dir()}
+        chk("★ 反对照：只扫一层时 bob **确实**扫不到（否则上面的绿不构成证据）",
+            not any("bob" in str(x) for x in _one))
 
     print("\n" + ("✓ 自测全过" if ok else "✗ 自测未过"))
     return 0 if ok else 2
