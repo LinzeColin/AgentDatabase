@@ -46,5 +46,5 @@ kind is management by means of opinion.`（`man- agement` 是跨行连字符）�
 ## 用这一页时的限制
 
 - **不要问他「怎么打赢一个竞争对手」**：本库零商业材料。
-- **不要拿他的自评当效果证据**：`unqualified suc- cess`、`far exceeded his expectations` 都是自评。
+- **不要拿他的自评当效果证据**：`unqualified suc- cess`、`far exceeded his expectations` 是自评；**1910 年书里那组产量数字（1,173,000 → 2,069,000 磅/月）也是他自己记的账**，同样不是第三方评估。
 - **不要把「学会之外的人怎么评价他」写出来**：本轮零材料。

@@ -89,9 +89,11 @@ destruction, while behind the lines it was competition in production.`
 ## 这幅地图**看不见**的地方
 
 <!-- claim:clm-9bc026a4a0b8 -->
-- **第三方对他那套系统的评估：零。** 他只留下两处自评
+- **第三方对他那套系统的评估：零。** 他留下两处形容词式自评
   （`has met with such unqualified suc- cess`、`The results have far exceeded his expectations.`），
-  **本库无任何材料能核。**
+  **外加 1910 年那本书里一组带数字的前后对照**（1,173,000 → 2,069,000 磅/月，700 人中约 80 人计奖）——
+  **三处都是他自己的账，本库无任何材料能核。**
+  ★ 「有数字」不等于「有证据」：**数字也是他自己记的**。
 - **学会之外的人怎么看他：零材料**（无同行回忆录、无悼念文集电子全文）。
 - **私人书信：零**（MS-11 那 8 封未数字化）。
 - **工厂侧的实施记录：零。**

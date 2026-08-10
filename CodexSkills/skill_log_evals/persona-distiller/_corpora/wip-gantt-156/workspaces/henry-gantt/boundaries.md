@@ -17,15 +17,25 @@
 ## 第二条：他那套办法「管不管用」，本库判不出来
 
 <!-- claim:clm-9bc026a4a0b8 -->
-他对自己引进的系统只留下**两处自评**：
+两处**形容词式**自评：
 1902 年 ASME v23 `has met with such unqualified suc- cess`；
 1908 年 ASME v30 `The results have far exceeded his expectations.`
-★★ **同一个人、同一套系统、两次自评**，中间隔六年。
-★★★★ **本库没有工厂侧材料、没有第三方对伯利恒钢厂那套系统的独立评估。**
-**凡涉及「这套办法有没有效」，只能说他自己怎么说。**
 
+**外加 1910 年那本书里的一组带数字的前后对照**：
+`the average monthly output of the shop from March 1, 1900, to March 1, 1901, was 1,173,000
+pounds ; and from March 1, 1901, to August 1, 1901, it was 2,069,000 pounds. The shop had 700
+TASK WORK WITH A BONUS 107 men in it and we were paying on the bonus plan only about 80 workmen`
+（`TASK WORK WITH A BONUS 107` 是页眉串进了正文，**按 OCR 原样照录**）。
+
+★★★★ **这三处全是他自己的账。本库没有工厂侧材料、没有任何第三方对伯利恒钢厂那套系统的独立评估。**
+**给这组数字时必须同时说明：这是他自己记的、没有第三方核过。**
 ★ 1900 年代的工程论文本来就以作者自述实施结果为常态，
 **本条不指控他夸大，只指出这一层本库判不出来。**
+
+★★ **订正记录（2026-08-10）**：本节原写「**只留下两处自评**」，**那句是错的**——
+是第 1 轮判分时由候选侧答题子代理读到 1910 那本书才发现的（我自己没读过那一本）。
+**改的是事实部分，不是结论**：结论仍然成立，而且因为多了一组数字，
+「不许把它当效果证据」这一条反而**更要紧**。
 
 ## 第三条：引 ASME 会刊时，先确认那是不是他的原话
 
