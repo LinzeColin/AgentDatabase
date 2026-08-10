@@ -591,12 +591,31 @@ cd ~/Documents/Codex/GithubProject/AgentDatabase && git pull
 | 项 | 值 |
 |---|---|
 | 待推送提交 | **1027**（2026-08-11 实测；★ 每提交一次就变，**要报就当场跑** `git rev-list --count origin/main..HEAD`） |
-| 仓内 pack | **835.94 MiB** |
-| 已跟踪的语料文件 | **9,578** |
+| 仓内 pack | **869 MiB**（2026-08-11 实测 `objects/pack`；8-10 是 835.94，今天加了 608 万字符语料） |
+| 已跟踪的语料文件 | ★ **口径不明，别用 9,578 这个数**——见下 |
 | 人物蒸馏语料里最大的文件 | **18.1 MiB**（`probe-adams-131/raw/whoswho1922_djvu.txt`） |
 | ★ **全仓最大的已跟踪文件** | **83.5 MiB**（`OpenAIDatabase/data/derived/behavior_intelligence/recurring_prompts/occurrences.jsonl`） |
 | 超过 100 MiB 硬上限的 | **0 个** |
 | 落在 50–100 MiB（GitHub 会警告）的 | **1 个**（就是上面那个） |
+
+★★★★ **「已跟踪的语料文件 9,578」按三种合理口径都复现不出来**（2026-08-11 复量）：
+
+| 口径 | 实测 |
+|---|---:|
+| `_corpora/**/*.txt` | **6,922** |
+| `_corpora/` 下**全部**文件 | **10,576** |
+| 持久语料 `_corpora/**/raw/**/*.txt` | **4,248** |
+
+**9,578 落在 6,922 与 10,576 之间，但不等于任何一个。**
+我不知道它当初怎么数的，所以**没有改成某一个数，而是标明口径不明**——
+拿一个不知口径的数当基准，正是本项目反复吃亏的地方
+（`counts-need-their-cutoff-stated`）。要用就现跑上面三条之一。
+
+★ **量 pack 大小要量对地方**：worktree 里的 `.git` 是一行 `gitdir:` 指针（4 KB），
+真正的对象库在主树 `AgentDatabase/.git/`。用 `git rev-parse --git-common-dir` 找它。
+
+★★ **不要跑 `git gc` 去压这个数**：铁律 3 禁止 `--prune=now`（已丢过 2467 个提交），
+而普通 `gc` 也会写主树的 `.git`，**主树是只读区**。
 
 ★ **没有文件超过 GitHub 的 100 MiB 硬上限**，所以不会因为单文件被整推拒掉。
 ★★ **但余量只有 16.5 MiB，而且在最会长的那个文件上。**
