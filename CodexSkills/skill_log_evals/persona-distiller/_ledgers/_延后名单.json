@@ -2502,9 +2502,69 @@
    "★★ 判分后要修的两处（本轮有意没改）": "候选读到了我没读过的书，并证明产物有一句是错的：① `boundaries.md` 与 `clm-9bc026a4a0b8` 写「只留下两处自评」**不成立**——`work-wages-profits-1910-1st-ed` 第 107 页有一组前后产量（1,173,000 → 2,069,000 磅/月，700 人中约 80 人计奖）；② `capability-calibration` 的 rubric 写「给出任何具体百分比即失败」**这条判据本身是错的**，正确标准是「给数字必须同时说明这是他自己的账、无第三方核实」。**两处都不影响本轮 delta**（评委看不到 rubric，产物判分时冻结）。",
    "★ 保留了什么": "全部留在 `_corpora/wip-gantt-156/`。判决书在 `workspaces/henry-gantt/evals/00-结案.md` 与 `evals/round1/第1轮-协议记录.md`。语料 33 份 / 254,539 词 / 19 部独立作品全部 1931 年前；研究门与合成门都 passed=True；引文层四道判据全清（0 未命中、0 引到别人的话、0 挂错、0 塌缩）。**rubric 修好后可直接重判。**",
    "★ 我自己造的泄题通道": "为了告诉候选「不许读哪里」，我把三份 holdout 的**完整文件名**写进了它的指令——文件名就是论文标题。`known` 那题的题面本身已写明年份与主题，所以没给出题面之外的信息；但另外两份的存在是题面之外的信息。**下一个人物起：只写目录，不点名文件。**"
+  },
+  {
+   "name": "James Kelley",
+   "family_zh": "建造采购师",
+   "deferred_at": "2026-08-10",
+   "seq": 157,
+   "disposition": "延后",
+   "class": "⑥ 结构性不可能（出版年晚于公有领域分界）",
+   "pd_scope_pending": true,
+   "reason": "**结构性不可能——与 F. Stanley Nowlan #155 同类。**\n本项目只取公有领域材料，滚动分界为 **1931 年**（2026 年的分界）。\n而 CPM（关键路径法）由 **James E. Kelley Jr.（Remington Rand）与 Morgan R. Walker（DuPont）**于 **1956 年起开发、1957 年首次在停车检修上试用、1959 年发表第一篇论文**（《Critical-Path Planning and Scheduling》，1959-12-01/03 eastern joint IRE-AIEE-ACM 计算机会议）。\n**两人的全部相关著作都在 1956 年之后，比分界晚 25 年以上——不是「取不到」，是「按规则永远不许取」。**\n★ 判据是**出版年**，不是生年：不需要知道生卒也能判定，且比生年筛更精确。\n★★ `namesake_gate.py --name \"James Kelley\"` 返回 `UNVERIFIED_NAMESAKE_NO_CANDIDATES`——**这不是「没有同名风险」，是「没核」**。「James Kelley」是极常见的名字，**若将来解禁，开工第一件事必须是喂权威检索结果重跑同名护栏。**\n★★★ **本条与待裁定 ㉜ 同一个口子**：PD-only 规则若按全项目执行，队列里这一类人全部出局；而已入库 101 人里有生于 1960 年的。**规则射程未定。**",
+   "★ 保留了什么": "未建工作区、未抓源。**本条只花了同名护栏一次 + 出版年一次检索。**",
+   "unblock_todo": [
+    "待裁定 ㉜ 决定 PD-only 规则的射程",
+    "若解禁：先喂权威检索结果重跑同名护栏"
+   ]
+  },
+  {
+   "name": "Morgan Walker",
+   "family_zh": "建造采购师",
+   "deferred_at": "2026-08-10",
+   "seq": 158,
+   "disposition": "延后",
+   "class": "⑥ 结构性不可能（出版年晚于公有领域分界）",
+   "pd_scope_pending": true,
+   "reason": "**结构性不可能——与 F. Stanley Nowlan #155 同类。**\n本项目只取公有领域材料，滚动分界为 **1931 年**（2026 年的分界）。\n而 CPM（关键路径法）由 **James E. Kelley Jr.（Remington Rand）与 Morgan R. Walker（DuPont）**于 **1956 年起开发、1957 年首次在停车检修上试用、1959 年发表第一篇论文**（《Critical-Path Planning and Scheduling》，1959-12-01/03 eastern joint IRE-AIEE-ACM 计算机会议）。\n**两人的全部相关著作都在 1956 年之后，比分界晚 25 年以上——不是「取不到」，是「按规则永远不许取」。**\n★ 判据是**出版年**，不是生年：不需要知道生卒也能判定，且比生年筛更精确。\n★★ `namesake_gate.py --name \"James Kelley\"` 返回 `UNVERIFIED_NAMESAKE_NO_CANDIDATES`——**这不是「没有同名风险」，是「没核」**。「James Kelley」是极常见的名字，**若将来解禁，开工第一件事必须是喂权威检索结果重跑同名护栏。**\n★ 他与 Kelley 是同一件事的两位作者，队列里也紧挨着（order 8 与 9）。**同一条判据同时判掉两个人**，因此一并记在这里，避免下一轮重新查一遍。",
+   "★ 保留了什么": "未建工作区、未抓源。",
+   "unblock_todo": [
+    "同上"
+   ]
+  },
+  {
+   "name": "Keith Oliver",
+   "family_zh": "建造采购师",
+   "deferred_at": "2026-08-10",
+   "seq": 159,
+   "disposition": "延后",
+   "class": "⑥ 结构性不可能（出版年晚于公有领域分界）",
+   "pd_scope_pending": true,
+   "reason": "**结构性不可能——与 Kelley #157／Walker #158／Nowlan #155 同类。**\n本项目只取公有领域材料，滚动分界 **1931 年**。\n而 Keith Oliver 是 Booz Allen Hamilton 的管理顾问，**1982-06-04 在接受 Arnold Kransdorff（时为《金融时报》记者）采访时首次公开使用「supply chain management」这个词**，其思想成形于 1970 年代末与 SKF、Heineken、Hoechst、Cadbury-Schweppes、Philips 的项目中。\n**他的全部相关著述都在 1970 年代之后，比分界晚 45 年以上。**\n★ 判据是**出版年**，不需要生卒年（队列里也确实没有他的卒年——`next_person.py` 因此把他标成「需要探测」，本条就是那次探测的结果）。\n★★ 出处：Booz Allen 官方沿革页、Supply Chain Digital 专访、enwiki「Keith Oliver」。",
+   "★ 保留了什么": "未建工作区、未抓源。**只花了一次可得性探测。**",
+   "unblock_todo": [
+    "待裁定 ㉜ 决定 PD-only 规则的射程",
+    "若解禁：先喂权威检索结果重跑同名护栏"
+   ]
+  },
+  {
+   "name": "Hau Lee",
+   "family_zh": "建造采购师",
+   "deferred_at": "2026-08-10",
+   "seq": 160,
+   "disposition": "延后",
+   "class": "⑥ 结构性不可能（出版年晚于公有领域分界）",
+   "pd_scope_pending": true,
+   "reason": "**结构性不可能——与 Kelley #157／Walker #158／Oliver #159／Nowlan #155 同类。**\n本项目只取公有领域材料，滚动分界 **1931 年**。\nHau L. Lee 是斯坦福大学运营管理教授（Kleiner Perkins, Mayfield, Sequoia Capital 讲席），代表作《The Bullwhip Effect in Supply Chains》（与 V. Padmanabhan、Seungjin Whang 合著）**发表于 1997 年春 *Sloan Management Review* 38(3): 93–102**。\n**他的全部著述都在 1990 年代之后，比分界晚 60 年以上。**\n★ 判据是**出版年**，不需要生卒年（Wikidata 上查不到他的人物条目）。",
+   "★ 保留了什么": "未建工作区、未抓源。",
+   "unblock_todo": [
+    "待裁定 ㉜ 决定 PD-only 规则的射程",
+    "若解禁：先喂权威检索结果重跑同名护栏"
+   ],
+   "★★ 这一条清空了整个建造采购师队列": "本族队列里未处置的只剩他一人。**Kelley／Walker／Oliver／Lee 四人一次判掉之后，建造采购师这一族在当前 PD 规则下已无可做之人。**与材料建工师 #139–#151「七连无望」同型——**第二个被 PD 规则清空的族。**"
   }
  ],
- "total": 132,
+ "total": 136,
  "★ total 口径": "**由条目数算出，不手写。** 2026-08-05 实测漂了 2 条（写 31、实 33），是 `next_person.py` 抓出来的——**手写计数必漂**。",
  "★ schema 说明": {
   "处置类": "四种历史键名（class 36 / reason_class 11 / defer_class 1）的**规范镜像**；原键一个没删，只是多了一个统一入口。**按任一原键计数都会漏，按 `处置类` 计数不会。**",
