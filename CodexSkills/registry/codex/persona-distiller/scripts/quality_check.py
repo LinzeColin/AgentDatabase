@@ -2696,6 +2696,46 @@ def run_claim_source_independence(report, target: Path) -> None:
     report.metrics['claim_source_independence'] = info
 
 
+def run_quote_attributed_source(report, target: Path) -> None:
+    """引文在不在**它自己引的那份源**里（v0.0.0.79，**只写 metrics**）。
+
+    `check_quote_integrity` 扫的是全语料，所以「挂错源」它一定放行——
+    读者按 `source_ids` 回查会落到另一份文献上，而所有计数都不变。
+
+    落成时全库 27 个工作区回扫（长引文 **410** 条）：
+    **挂错作品 / 版本差合计 35 条**，集中在 Osler 9、Virchow 8、Koch 5、Nightingale 4。
+    **只写 metrics 不拦**：已入库的人未回扫过，硬拦会把整个名册一起拦下
+    （与 `claim_source_independence` 同一条纪律）。
+    """
+    here = Path(__file__).resolve().parent
+    script = here / 'check_quote_attributed_source.py'
+    if not script.exists():
+        report.metrics['quote_attributed_source'] = {'状态': '检查器未安装，**未核验**（不是通过）'}
+        return
+    spec = importlib.util.spec_from_file_location('_pd_quoteattr', script)
+    module = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(module)
+        r = module.scan(target)
+    except Exception as exc:                                    # noqa: BLE001
+        report.metrics['quote_attributed_source'] = {'状态': f'运行失败，**未核验**：{exc}'}
+        return
+    if '状态' in r:
+        report.metrics['quote_attributed_source'] = {'状态': r['状态']}
+        return
+    wrong = [b for b in r['错挂'] if not b.get('同一作品组')]
+    verz = [b for b in r['错挂'] if b.get('同一作品组')]
+    report.metrics['quote_attributed_source'] = {
+        '长引文': r['引文数'],
+        '挂错作品': len(wrong),
+        '版本差（作品对、逐字文本取自另一版）': len(verz),
+        '不唯一（同句见于多份源，挂错也照样绿）': len(r['不唯一']),
+        '取不到正文的源': r['取不到正文的源'],
+        '例': [f"{b['claim_id']}：挂 {b['它引的源']} → 实 {b['真实出处']}"
+               for b in (wrong + verz)[:6]],
+    }
+
+
 def run_evidence_per_claim(report, target: Path) -> None:
     """证据字段是逐条的还是填一次抄 N 遍（v0.0.0.78，**只写 metrics**）。
 
@@ -3583,6 +3623,7 @@ def main() -> int:
             run_measurement_claims(report, target)
             run_evidence_per_claim(report, target)
             run_claim_source_independence(report, target)
+            run_quote_attributed_source(report, target)
             run_answer_constraints(report, target)
             run_verbatim_pointer(report, target)
             run_unwired_three(report, target)
