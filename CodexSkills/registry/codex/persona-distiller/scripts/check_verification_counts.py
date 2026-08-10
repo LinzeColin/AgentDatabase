@@ -115,7 +115,7 @@ _CN_DIGITS = "〇一二三四五六七八九"
 #     台账 = 一条一节，`###` 就是漏写的层级；
 #     RUBRIC = 一条一节 + 子节，`###` 是正当的子结构。
 #   **「同一个毛病」这个判断本身要取证，不能靠形状像。**
-_CIRCLED = "^## [①-⑳㉑-㉟]"          # ①–⑳ 在 U+2460–U+2473，㉑–㉟ 在 U+3251–U+325F
+_CIRCLED = "^## [①-⑳㉑-㉟㊱-㊿]"          # ①–⑳ 在 U+2460–U+2473，㉑–㉟ 在 U+3251–U+325F
 
 
 def _cn(x: int) -> str:
@@ -184,7 +184,7 @@ def audit(root: pathlib.Path) -> dict:
         #      今天台账正好加到 20 节，**当场炸了**——是元判据报「输出无法解析」才发现的。
         #   ★ 教训：**判据自己预言过的漏，要当场堵上，不要只写在注释里等它来。**
         # ★ 同上：只认 `##` 会漏掉写成 `###` 的新条目，改成任意标题层级
-        n_real = len(set(re.findall("^#{2,4} +([①-⑳㉑-㉟])", lt, re.M)))
+        n_real = len(set(re.findall("^#{2,4} +([①-⑳㉑-㉟㊱-㊿])", lt, re.M)))
         want = _cn(n_real)
         saids = re.findall(r"待用户裁定（\*\*(.+?)条\*\*）|一眼看完：(.+?)条各是什么", lt)
         flat = [x for pair in saids for x in pair if x]
@@ -197,8 +197,12 @@ def audit(root: pathlib.Path) -> dict:
         #   **两个数一起漂、互相抵消，本项当场报 ✓**，而真值是 29。
         #   **计数相等不等于集合相同**：两边都缺同样四个，计数照样对上。
         #   改法：把**任意标题层级**（`##`／`###`）里出现的圈号收成集合，与表里的比。
-        tab_ids = set(re.findall("^\\| \\*\\*([①-⑳㉑-㉟])\\*\\* \\|", lt, re.M))
-        sec_ids = set(re.findall("^#{2,4} +([①-⑳㉑-㉟])", lt, re.M))
+        # ★★★★ 2026-08-11：字符类原本只到 `㉟`，**台账再加一条它就看不见**。
+        #   登记 ㊱ 时当场撞上：表 36 行、正文 36 节，而它只数出 35/35——
+        #   两边同时漏掉同一个，**计数照样对上**（`two-errors-cancelled-so-the-gate-stayed-green`）。
+        #   已扩到 `㊿`。★ 再往下还会撞，届时要扩，不要删这道比对。
+        tab_ids = set(re.findall("^\\| \\*\\*([①-⑳㉑-㉟㊱-㊿])\\*\\* \\|", lt, re.M))
+        sec_ids = set(re.findall("^#{2,4} +([①-⑳㉑-㉟㊱-㊿])", lt, re.M))
         only_sec = sorted(sec_ids - tab_ids)
         only_tab = sorted(tab_ids - sec_ids)
         n_tab = len(tab_ids)
@@ -248,9 +252,9 @@ def self_test() -> int:
            "| **①** | 甲 |\n| **②** | 乙 |\n| **③** | 丙 |\n\n"
            "## ① 甲\n正文\n## ② 乙\n正文\n## ③ 丙\n正文\n"
            "### ④ 丁——只有正文、没进表，而且用了 ###\n正文\n")
-    _tab = set(re.findall(r"^\| \*\*([①-⑳㉑-㉟])\*\* \|", _lt, re.M))
-    _sec_old = len(re.findall(r"^## [①-⑳㉑-㉟]", _lt, re.M))
-    _sec_new = set(re.findall(r"^#{2,4} +([①-⑳㉑-㉟])", _lt, re.M))
+    _tab = set(re.findall(r"^\| \*\*([①-⑳㉑-㉟㊱-㊿])\*\* \|", _lt, re.M))
+    _sec_old = len(re.findall(r"^## [①-⑳㉑-㉟㊱-㊿]", _lt, re.M))
+    _sec_new = set(re.findall(r"^#{2,4} +([①-⑳㉑-㉟㊱-㊿])", _lt, re.M))
     chk("旧写法（比计数）确实会放过：表 3 == 正文 3", len(_tab) == _sec_old)
     chk("★ 新写法（比集合）抓得到只有正文没进表的 ④", (_sec_new - _tab) == {"④"})
     chk("★ 反向：表有而正文没有的也要抓", (_tab - _sec_new) == set())
