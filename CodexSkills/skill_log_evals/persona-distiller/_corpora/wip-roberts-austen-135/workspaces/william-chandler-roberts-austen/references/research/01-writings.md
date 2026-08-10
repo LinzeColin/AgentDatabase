@@ -18,7 +18,7 @@ Train-split、`dimensions` 含 `writings` 的 13 份，全部 P1：
 | **`src-391ca73471aa`** | **1893** | **同上，第二份** |
 | **`src-269db01c421a`** | **1899** | **同上，第五份** |
 
-★ **本道只用 train split**；holdout 不在此列，写作时未打开。
+★ **本道只用训练侧材料**；非训练侧的不在此列，写作时未打开。
 
 ★★ **上一轮记的「五份报告全缺」已补齐**（原记 `numFound 0`——
 那是**检索式的缺陷不是材料不存在**：`title` 字段只写 `Proceedings`、
@@ -197,7 +197,7 @@ Train-split、`dimensions` 含 `writings` 的 13 份，全部 P1：
 
 IDs only; research Agents must not inspect Holdout bodies.
 
-（本轮未提名。提名须在 holdout 划定之后、且不打开正文。）
+（本轮未提名。提名须在隔离样本划定之后、且不打开正文。）
 
 ## Handoff to adjudication
 

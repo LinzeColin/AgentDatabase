@@ -1,6 +1,6 @@
 # 决策与建制文本（`decisions`）
 
-**train 侧 5 份，合计 24,008 词**（份数与字数由 `gen_lanes.py` 从台账与正文现算，不手写）。holdout 的 6 份**不列在此**。
+**train 侧 5 份，合计 24,008 词**（份数与字数由 `gen_lanes.py` 从台账与正文现算，不手写）。非训练侧的几份**不列在此**。
 
 1860《Medicine as a Profession for Women》、1864《Address on the Medical Education of Women》、1868 年 Woman's Medical College 开学辞、致校友会的正式抗议书。
 

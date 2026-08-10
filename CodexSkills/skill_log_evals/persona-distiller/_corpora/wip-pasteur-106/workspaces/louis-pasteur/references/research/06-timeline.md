@@ -3,10 +3,10 @@
 ## 三份传记，两位作者，**必须分清**
 
 - `src-2beffb9bd9c2`《La Vie de Pasteur》—— **女婿 René Vallery-Radot（1853–1933）著**
-  （其英译本《Louis Pasteur, his life and labours》**留作 holdout，不入训练、此处不引其 id**）
+  （其一个译本**不入训练**，（★ 2026-08-10 改：此处原先写出了被隔离材料的**作者与书名**。研究道是建模者读得到的，写出书名等于告诉他被隔离的是什么。**件数与书名一并去掉，只留「本道未取用」这一个事实**。））
 - `src-b96e10edd029`《Pasteur : histoire d'un esprit》—— Émile Duclaux 著（其学生、继任所长）
 
-**皆为 S2。另有一份英译传记留作 holdout——按判据，holdout 的 `src-` 不得出现在六路正文里，故此处只述不引。**
+**皆为 S2。另有一份不入训练，此处不述不引。**
 
 ## ★ 同名分辨（本人物的一号风险）
 

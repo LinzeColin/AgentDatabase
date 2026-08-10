@@ -1,6 +1,6 @@
 # 编年（`timeline`）
 
-**train 侧 14 份，合计 425,059 词**（份数与字数由 `gen_lanes.py` 从台账与正文现算，不手写）。holdout 的 6 份**不列在此**。
+**train 侧 14 份，合计 425,059 词**（份数与字数由 `gen_lanes.py` 从台账与正文现算，不手写）。非训练侧的几份**不列在此**。
 
 1895 年自传《Pioneer Work in Opening the Medical Profession to Women》为主干，加 LoC 的 16 册日记（1836–1908）与著作系年表。
 

@@ -98,7 +98,7 @@ Library of Congress `n50034776` 的 `birthDate` 记的是 **`"1864?"`**（EDTF �
 ## Proposed Holdout cases
 
 IDs only; research Agents must not inspect Holdout bodies.
-本道无 holdout —— 3 件 holdout 全在 `writings` 道。
+本道无**不入训练**的材料。
 ★ **此处刻意不写它们的 source_id**（研究文档引用非 train 源会被 `research.invalid-source` 拦下）。
 
 ## Handoff to adjudication

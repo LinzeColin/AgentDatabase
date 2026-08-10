@@ -1,6 +1,6 @@
 # 对谈与书信（`conversations`）
 
-**train 侧 10 份，合计 60,551 词**（份数与字数由 `gen_lanes.py` 从台账与正文现算，不手写）。holdout 的 6 份**不列在此**。
+**train 侧 10 份，合计 60,551 词**（份数与字数由 `gen_lanes.py` 从台账与正文现算，不手写）。非训练侧的几份**不列在此**。
 
 3 封 Middlebury/Abernethy 藏的致 Anna Q. T. Parsons 信（1847–1851），加上 LoC 家庭通信里**实测确认是她写出去的**那几卷。
 

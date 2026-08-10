@@ -1,6 +1,6 @@
 # Writings and systematic works
 
-> ★ 本道 **36 件 train**（另 3 件 holdout），是本人物语料的主体：
+> ★ 本道 **36 件 train**（另有几件不入训练），是本人物语料的主体：
 > 塔斯基吉农业试验站公报 32 件（1898–1927）＋ 爱荷华科学院论文 3 篇（1896／1900）
 > ＋ Hampton 大会宣读稿 1 篇（1899）。
 > **他一生的写作几乎全是同一种东西：给农民看的操作手册。**
@@ -141,7 +141,7 @@
 ## Proposed Holdout cases
 
 IDs only; research Agents must not inspect Holdout bodies.
-本道有 **3 件 holdout**。★ **此处刻意不写它们的 source_id**——
+本道有几件**不入训练**。★ **此处刻意不写它们的 source_id**——
 研究文档引用非 train 源会被 `research.invalid-source` 拦下，**而那正是它该拦的事**。
 
 ## Handoff to adjudication

@@ -138,9 +138,9 @@ Hampton 会刊除 1899 那篇宣读稿外全 0；爱荷华科学院 351 处命�
 ## Proposed Holdout cases
 
 IDs only; research Agents must not inspect Holdout bodies.
-本道无 holdout —— **3 件 holdout 全在 `writings` 道**。
+本道无**不入训练**的材料。
 ★ **此处刻意不写它们的 source_id**：研究文档引用非 train 源会被 `research.invalid-source` 拦下，
-而那正是它该拦的事。（我写第一版时写了一个 holdout id，**当场被拦**——
+而那正是它该拦的事。（我写第一版时写了一个**不入训练**那侧的 id，**当场被拦**——
 与 Mendel #125 那次同形，**同一天里我犯了两遍**。）
 
 ## Handoff to adjudication

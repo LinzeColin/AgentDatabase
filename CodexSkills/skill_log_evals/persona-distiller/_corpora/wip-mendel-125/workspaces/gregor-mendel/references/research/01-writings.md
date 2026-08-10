@@ -117,9 +117,9 @@ train split，全部 P1 载体：
 ## Proposed Holdout cases
 
 IDs only; research Agents must not inspect Holdout bodies.
-★ **本轮 holdout 3 件**（Focke 1881《Die Pflanzen-Mischlinge》、Bateson，及另一件），train 17 件。**此处刻意不写它们的 source_id**——写了会被严格门读成「研究引用了 holdout」，而那正是它该拦的事。
-**本道未取用任何 holdout 载体**——三件 id 在全部研究文档与断言里各 0 处（已实测）。
-（★ 此处原写「holdout 为空，20 件全部 train」，**与台账不符，2026-08-05 更正**；台账 `evidence/source-ledger.jsonl` 一直标着 17 train / 3 holdout，**行为无误，是本文写错**。）**quick 档不强制 holdout**，
+★ **本道未取用任何非训练材料。** （★ 2026-08-10 改：此处原先写出了被隔离材料的**作者与书名**。研究道是建模者读得到的，写出书名等于告诉他被隔离的是什么。**件数与书名一并去掉，只留「本道未取用」这一个事实**。）
+**本道只取用了训练侧材料**——已实测：非训练侧的 id 在全部研究文档与断言里各 0 处。
+（★ 此处的一句统计原先与台账不符，2026-08-05 已更正；**行为无误，是本文写错**。★★ 2026-08-10 再改一次：**原文把件数写了出来**，而研究道是建模者读得到的，件数本身就是信息——**具体数字一律回台账查，不写在这里**。）**quick 档不强制隔离样本**，
 但这意味着**本人物没有留出独立复核集**，须在处置记录里写明。
 
 ## Handoff to adjudication
