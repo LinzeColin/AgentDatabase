@@ -252,17 +252,53 @@
 cd CodexSkills/registry/codex/persona-distiller
 ```
 
-| 要做什么 | 命令 |
-|---|---|
-| **下一个做谁** | `python3 references/pipeline/next_person.py` |
-| 同名护栏 | `python3 scripts/namesake_gate.py <人名>` |
-| 建工作区 | `python3 scripts/init_target.py …` |
-| 灌语料 | `python3 scripts/ingest.py …` |
-| **三道主门** | `python3 scripts/quality_check.py <workspace> --phase research\|synthesis\|release` |
-| 造盲判载荷 | `python3 scripts/build_blind_payload.py --workspace <ws> --round-dir round1 --candidate <c.json> --baseline <b.json>` |
-| 汇总判分 | `python3 scripts/assemble_judge_results.py …` |
-| 打包 / 入库 | `python3 scripts/package_target.py …` / `register_persona.py …` |
-| **声明重复源**（先 dry-run） | `python3 scripts/declare_source_dedup.py <workspace>` |
+★★★★ **下面每一条都能照抄**（只把 `<...>` 换成真值）。
+**尖括号是占位符，其余一个字都别改**——尤其别把 `--name` 去掉写成位置参数。
+
+> 这一节 2026-08-11 之前是错的：写着 `namesake_gate.py <人名>`，
+> 而工具要 `--name <人名>`，**接手方照抄的第一条命令就会报错**。
+> 另有四条用 `…` 带过参数，等于没写。
+> 现在有判据管着，**改完这一节必须跑一遍**：
+> `python3 scripts/check_handoff_commands.py`（在仓根跑，`--all` 扫全部 handoff 文档）。
+
+```bash
+# ① 下一个做谁（★ 先看它 stderr 打印的「实际用的路径」那一节）
+python3 references/pipeline/next_person.py
+
+# ② 同名护栏（★ 是 --name，不是位置参数）
+python3 scripts/namesake_gate.py --name "<人名>" --output <护栏结果.json>
+
+# ③ 建工作区（三个必填：--name / --identity / --namesake-gate）
+python3 scripts/init_target.py --name "<人名>" --identity <identity.json> \
+    --namesake-gate <护栏结果.json> --profile quick --workspace <工作区目录>
+
+# ④ 灌语料（两个位置参数：工作区、一个或多个输入文件）
+python3 scripts/ingest.py <工作区目录> <语料文件> --tier P1 --dimension writings \
+    --author "<人名>" --published-at <年份> --locator "<页码/卷期>"
+#    ★ holdout 那一份加 --holdout；synthesis/release 阶段**强制**要有 holdout，
+#      所以真实来源下限是 min_sources + 1。
+
+# ⑤ 三道主门
+python3 scripts/quality_check.py <工作区目录> --phase research
+python3 scripts/quality_check.py <工作区目录> --phase synthesis
+python3 scripts/quality_check.py <工作区目录> --phase release
+
+# ⑥ 造盲判载荷
+python3 scripts/build_blind_payload.py --workspace <工作区目录> --round-dir round1 \
+    --candidate <候选答案.json> --baseline <基线答案.json> --baseline-source bare-model-run
+
+# ⑦ 汇总判分（★★ baseline-source=bare-model-run 时**必须**给运行记录，否则 exit 3）
+python3 scripts/assemble_judge_results.py --workspace <工作区目录> --round-dir round1 \
+    --key <盲态key.json> --baseline-source bare-model-run \
+    --baseline-run-record <round1/baseline-run-record.md>
+
+# ⑧ 打包 / 入库（都是位置参数）
+python3 scripts/package_target.py <工作区目录> --product-version 0.0.0.1
+python3 scripts/register_persona.py <打包出来的.zip>
+
+# ⑨ 声明重复源（★ 默认 dry-run，看过再 --apply）
+python3 scripts/declare_source_dedup.py <工作区目录>
+```
 
 ★★★★ `declare_source_dedup.py` **默认只写「机械上确定」的那一类**
 （去掉来源后缀后词干相同＝同一件的另一份副本）。
@@ -514,6 +550,14 @@ To github.com:LinzeColin/AgentDatabase.git
 | §2 那条「当场跑一遍」的产物计数命令 | ✓ 101 |
 | `_ledgers/_每次开工必读.md` | ✓ |
 | `references/pipeline/next_person.py` | ✓ **NEXT = William Paton（财务合规师）** |
+
+★★★★ **但那次演练只验了这 4 条，§3 的命令表一条都没跑过**——
+于是 `namesake_gate.py <人名>`（真实签名是 `--name`）活到了 2026-08-11，
+**接手方照抄的第一条命令就会报错**。
+现在 `check_handoff_commands.py` 把这一类管起来了（已接进 `finalize_release.py`）：
+它跑每条命令的 `--help` 取真实签名，比对必填 flag / 位置参数 / 互斥必选组 / 子命令。
+★ 教训是通用的：**「在干净检出里验过」要说清验的是哪几条**，
+没说清就等于把「没验的部分」也算进了「验过」。
 
 ★ `next_person.py` 会在 stderr 上打印台账来源；两处不一致时它**明说用的是仓内那份**
 并给出两边的 sha256 与 mtime。**看到那条警告不是出错，是它在告诉你用了哪一份。**
